@@ -309,7 +309,7 @@ public class ShoppingOrderUtil {
 
 	private static ShoppingOrderUtil _getUtil() {
 		if (_util == null) {
-			_util = (ShoppingOrderUtil)com.liferay.portal.kernel.bean.BeanLocatorUtil.locate(_UTIL);
+			_util = (ShoppingOrderUtil)com.liferay.portal.kernel.bean.PortalBeanLocatorUtil.locate(_UTIL);
 		}
 
 		return _util;

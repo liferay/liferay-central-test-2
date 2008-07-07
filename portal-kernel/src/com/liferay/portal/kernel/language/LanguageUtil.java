@@ -22,7 +22,7 @@
 
 package com.liferay.portal.kernel.language;
 
-import com.liferay.portal.kernel.bean.BeanLocatorUtil;
+import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
 
 import java.util.Locale;
 
@@ -200,7 +200,7 @@ public class LanguageUtil {
 
 	private static LanguageUtil _getUtil() {
 		if (_util == null) {
-			_util = (LanguageUtil)BeanLocatorUtil.locate(_UTIL);
+			_util = (LanguageUtil)PortalBeanLocatorUtil.locate(_UTIL);
 		}
 
 		return _util;

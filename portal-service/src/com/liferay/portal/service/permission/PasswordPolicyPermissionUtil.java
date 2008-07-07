@@ -22,7 +22,7 @@
 
 package com.liferay.portal.service.permission;
 
-import com.liferay.portal.kernel.bean.BeanLocatorUtil;
+import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
 import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.security.permission.PermissionChecker;
 
@@ -64,7 +64,8 @@ public class PasswordPolicyPermissionUtil {
 
 	private static PasswordPolicyPermissionUtil _getUtil() {
 		if (_util == null) {
-			_util = (PasswordPolicyPermissionUtil)BeanLocatorUtil.locate(_UTIL);
+			_util = (PasswordPolicyPermissionUtil)PortalBeanLocatorUtil.locate(
+				_UTIL);
 		}
 
 		return _util;

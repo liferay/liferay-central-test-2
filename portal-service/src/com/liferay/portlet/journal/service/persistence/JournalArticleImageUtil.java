@@ -347,7 +347,7 @@ public class JournalArticleImageUtil {
 
 	private static JournalArticleImageUtil _getUtil() {
 		if (_util == null) {
-			_util = (JournalArticleImageUtil)com.liferay.portal.kernel.bean.BeanLocatorUtil.locate(_UTIL);
+			_util = (JournalArticleImageUtil)com.liferay.portal.kernel.bean.PortalBeanLocatorUtil.locate(_UTIL);
 		}
 
 		return _util;

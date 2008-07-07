@@ -57,7 +57,7 @@ public class WebDAVPropsLocalServiceFactory {
 
 	public static WebDAVPropsLocalService getImpl() {
 		if (_impl == null) {
-			_impl = (WebDAVPropsLocalService)com.liferay.portal.kernel.bean.BeanLocatorUtil.locate(_IMPL);
+			_impl = (WebDAVPropsLocalService)com.liferay.portal.kernel.bean.PortalBeanLocatorUtil.locate(_IMPL);
 		}
 
 		return _impl;
@@ -65,7 +65,7 @@ public class WebDAVPropsLocalServiceFactory {
 
 	public static WebDAVPropsLocalService getTxImpl() {
 		if (_txImpl == null) {
-			_txImpl = (WebDAVPropsLocalService)com.liferay.portal.kernel.bean.BeanLocatorUtil.locate(_TX_IMPL);
+			_txImpl = (WebDAVPropsLocalService)com.liferay.portal.kernel.bean.PortalBeanLocatorUtil.locate(_TX_IMPL);
 		}
 
 		return _txImpl;
@@ -77,7 +77,7 @@ public class WebDAVPropsLocalServiceFactory {
 
 	private static WebDAVPropsLocalServiceFactory _getFactory() {
 		if (_factory == null) {
-			_factory = (WebDAVPropsLocalServiceFactory)com.liferay.portal.kernel.bean.BeanLocatorUtil.locate(_FACTORY);
+			_factory = (WebDAVPropsLocalServiceFactory)com.liferay.portal.kernel.bean.PortalBeanLocatorUtil.locate(_FACTORY);
 		}
 
 		return _factory;

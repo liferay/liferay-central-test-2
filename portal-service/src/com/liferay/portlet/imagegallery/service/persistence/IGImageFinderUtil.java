@@ -78,7 +78,7 @@ public class IGImageFinderUtil {
 
 	private static IGImageFinderUtil _getUtil() {
 		if (_util == null) {
-			_util = (IGImageFinderUtil)com.liferay.portal.kernel.bean.BeanLocatorUtil.locate(_UTIL);
+			_util = (IGImageFinderUtil)com.liferay.portal.kernel.bean.PortalBeanLocatorUtil.locate(_UTIL);
 		}
 
 		return _util;

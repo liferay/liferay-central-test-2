@@ -22,7 +22,7 @@
 
 package com.liferay.portal.kernel.util;
 
-import com.liferay.portal.kernel.bean.BeanLocatorUtil;
+import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
 
 import java.util.Calendar;
 import java.util.Locale;
@@ -80,7 +80,7 @@ public class CalendarFactoryUtil {
 
 	private static CalendarFactoryUtil _getUtil() {
 		if (_util == null) {
-			_util = (CalendarFactoryUtil)BeanLocatorUtil.locate(_UTIL);
+			_util = (CalendarFactoryUtil)PortalBeanLocatorUtil.locate(_UTIL);
 		}
 
 		return _util;

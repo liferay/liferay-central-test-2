@@ -224,7 +224,7 @@ public class ExpandoColumnUtil {
 
 	private static ExpandoColumnUtil _getUtil() {
 		if (_util == null) {
-			_util = (ExpandoColumnUtil)com.liferay.portal.kernel.bean.BeanLocatorUtil.locate(_UTIL);
+			_util = (ExpandoColumnUtil)com.liferay.portal.kernel.bean.PortalBeanLocatorUtil.locate(_UTIL);
 		}
 
 		return _util;

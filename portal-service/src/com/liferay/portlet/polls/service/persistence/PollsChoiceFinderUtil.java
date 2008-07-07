@@ -46,7 +46,7 @@ public class PollsChoiceFinderUtil {
 
 	private static PollsChoiceFinderUtil _getUtil() {
 		if (_util == null) {
-			_util = (PollsChoiceFinderUtil)com.liferay.portal.kernel.bean.BeanLocatorUtil.locate(_UTIL);
+			_util = (PollsChoiceFinderUtil)com.liferay.portal.kernel.bean.PortalBeanLocatorUtil.locate(_UTIL);
 		}
 
 		return _util;

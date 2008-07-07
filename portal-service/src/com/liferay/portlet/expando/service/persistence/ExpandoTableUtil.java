@@ -225,7 +225,7 @@ public class ExpandoTableUtil {
 
 	private static ExpandoTableUtil _getUtil() {
 		if (_util == null) {
-			_util = (ExpandoTableUtil)com.liferay.portal.kernel.bean.BeanLocatorUtil.locate(_UTIL);
+			_util = (ExpandoTableUtil)com.liferay.portal.kernel.bean.PortalBeanLocatorUtil.locate(_UTIL);
 		}
 
 		return _util;

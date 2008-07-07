@@ -201,7 +201,7 @@ public class ShoppingItemFieldUtil {
 
 	private static ShoppingItemFieldUtil _getUtil() {
 		if (_util == null) {
-			_util = (ShoppingItemFieldUtil)com.liferay.portal.kernel.bean.BeanLocatorUtil.locate(_UTIL);
+			_util = (ShoppingItemFieldUtil)com.liferay.portal.kernel.bean.PortalBeanLocatorUtil.locate(_UTIL);
 		}
 
 		return _util;

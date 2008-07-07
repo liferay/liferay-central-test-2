@@ -240,8 +240,6 @@ public class PropsKeys {
 
 	public static final String COUNTER_INCREMENT = "counter.increment";
 
-	public static final String CUSTOM_SQL_CONFIGS = "custom.sql.configs";
-
 	public static final String CUSTOM_SQL_FUNCTION_ISNOTNULL = "custom.sql.function.isnotnull";
 
 	public static final String CUSTOM_SQL_FUNCTION_ISNULL = "custom.sql.function.isnull";

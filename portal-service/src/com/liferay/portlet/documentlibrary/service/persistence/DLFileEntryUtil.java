@@ -382,7 +382,7 @@ public class DLFileEntryUtil {
 
 	private static DLFileEntryUtil _getUtil() {
 		if (_util == null) {
-			_util = (DLFileEntryUtil)com.liferay.portal.kernel.bean.BeanLocatorUtil.locate(_UTIL);
+			_util = (DLFileEntryUtil)com.liferay.portal.kernel.bean.PortalBeanLocatorUtil.locate(_UTIL);
 		}
 
 		return _util;

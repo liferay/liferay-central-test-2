@@ -77,7 +77,7 @@ public class TagsEntryFinderUtil {
 
 	private static TagsEntryFinderUtil _getUtil() {
 		if (_util == null) {
-			_util = (TagsEntryFinderUtil)com.liferay.portal.kernel.bean.BeanLocatorUtil.locate(_UTIL);
+			_util = (TagsEntryFinderUtil)com.liferay.portal.kernel.bean.PortalBeanLocatorUtil.locate(_UTIL);
 		}
 
 		return _util;

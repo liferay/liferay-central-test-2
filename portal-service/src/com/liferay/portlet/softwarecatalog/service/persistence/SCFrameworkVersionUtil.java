@@ -399,7 +399,7 @@ public class SCFrameworkVersionUtil {
 
 	private static SCFrameworkVersionUtil _getUtil() {
 		if (_util == null) {
-			_util = (SCFrameworkVersionUtil)com.liferay.portal.kernel.bean.BeanLocatorUtil.locate(_UTIL);
+			_util = (SCFrameworkVersionUtil)com.liferay.portal.kernel.bean.PortalBeanLocatorUtil.locate(_UTIL);
 		}
 
 		return _util;

@@ -44,7 +44,7 @@ public class PortletPreferencesFinderUtil {
 
 	private static PortletPreferencesFinderUtil _getUtil() {
 		if (_util == null) {
-			_util = (PortletPreferencesFinderUtil)com.liferay.portal.kernel.bean.BeanLocatorUtil.locate(_UTIL);
+			_util = (PortletPreferencesFinderUtil)com.liferay.portal.kernel.bean.PortalBeanLocatorUtil.locate(_UTIL);
 		}
 
 		return _util;

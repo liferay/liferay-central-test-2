@@ -174,7 +174,7 @@ public class RatingsStatsUtil {
 
 	private static RatingsStatsUtil _getUtil() {
 		if (_util == null) {
-			_util = (RatingsStatsUtil)com.liferay.portal.kernel.bean.BeanLocatorUtil.locate(_UTIL);
+			_util = (RatingsStatsUtil)com.liferay.portal.kernel.bean.PortalBeanLocatorUtil.locate(_UTIL);
 		}
 
 		return _util;

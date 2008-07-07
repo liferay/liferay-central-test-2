@@ -57,7 +57,7 @@ public class PortletContextLoaderListener extends ContextLoaderListener {
 
 		try {
 			Class<?> beanLocatorUtilClass = Class.forName(
-				"com.liferay.util.bean.BeanLocatorUtil", true,
+				"com.liferay.util.bean.PortletBeanLocatorUtil", true,
 				PortletClassLoaderUtil.getClassLoader());
 
 			Method setBeanLocatorMethod = beanLocatorUtilClass.getMethod(

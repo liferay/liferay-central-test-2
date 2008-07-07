@@ -57,7 +57,7 @@ public class UserServiceFactory {
 
 	public static UserService getImpl() {
 		if (_impl == null) {
-			_impl = (UserService)com.liferay.portal.kernel.bean.BeanLocatorUtil.locate(_IMPL);
+			_impl = (UserService)com.liferay.portal.kernel.bean.PortalBeanLocatorUtil.locate(_IMPL);
 		}
 
 		return _impl;
@@ -65,7 +65,7 @@ public class UserServiceFactory {
 
 	public static UserService getTxImpl() {
 		if (_txImpl == null) {
-			_txImpl = (UserService)com.liferay.portal.kernel.bean.BeanLocatorUtil.locate(_TX_IMPL);
+			_txImpl = (UserService)com.liferay.portal.kernel.bean.PortalBeanLocatorUtil.locate(_TX_IMPL);
 		}
 
 		return _txImpl;
@@ -77,7 +77,7 @@ public class UserServiceFactory {
 
 	private static UserServiceFactory _getFactory() {
 		if (_factory == null) {
-			_factory = (UserServiceFactory)com.liferay.portal.kernel.bean.BeanLocatorUtil.locate(_FACTORY);
+			_factory = (UserServiceFactory)com.liferay.portal.kernel.bean.PortalBeanLocatorUtil.locate(_FACTORY);
 		}
 
 		return _factory;

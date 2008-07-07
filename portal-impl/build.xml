@@ -470,7 +470,7 @@ ${exception.message}
 			<arg value="src/META-INF/portal-hbm.xml" />
 			<arg value="src/META-INF/portal-model-hints.xml" />
 			<arg value="src/META-INF/portal-spring.xml" />
-			<arg value="com.liferay.portal.kernel.bean.BeanLocatorUtil" />
+			<arg value="com.liferay.portal.kernel.bean.PortalBeanLocatorUtil" />
 			<arg value="${project.dir}/portal-service/src" />
 			<arg value="${project.dir}/portal-web/docroot/html/js/liferay/service_unpacked.js" />-->
 
@@ -488,7 +488,7 @@ ${exception.message}
 			<jvmarg value="-Dservice.sql.indexes.file=indexes.sql" />
 			<jvmarg value="-Dservice.sql.indexes.properties.file=indexes.properties" />
 			<jvmarg value="-Dservice.sql.sequences.file=sequences.sql" />
-			<jvmarg value="-Dservice.bean.locator.util=com.liferay.portal.kernel.bean.BeanLocatorUtil" />
+			<jvmarg value="-Dservice.bean.locator.util=com.liferay.portal.kernel.bean.PortalBeanLocatorUtil" />
 			<jvmarg value="-Dservice.props.util=com.liferay.portal.util.PropsUtil" />
 			<jvmarg value="-Dservice.test.dir=test" />
 		</java>

@@ -57,7 +57,7 @@ public class ClassNameServiceFactory {
 
 	public static ClassNameService getImpl() {
 		if (_impl == null) {
-			_impl = (ClassNameService)com.liferay.portal.kernel.bean.BeanLocatorUtil.locate(_IMPL);
+			_impl = (ClassNameService)com.liferay.portal.kernel.bean.PortalBeanLocatorUtil.locate(_IMPL);
 		}
 
 		return _impl;
@@ -65,7 +65,7 @@ public class ClassNameServiceFactory {
 
 	public static ClassNameService getTxImpl() {
 		if (_txImpl == null) {
-			_txImpl = (ClassNameService)com.liferay.portal.kernel.bean.BeanLocatorUtil.locate(_TX_IMPL);
+			_txImpl = (ClassNameService)com.liferay.portal.kernel.bean.PortalBeanLocatorUtil.locate(_TX_IMPL);
 		}
 
 		return _txImpl;
@@ -77,7 +77,7 @@ public class ClassNameServiceFactory {
 
 	private static ClassNameServiceFactory _getFactory() {
 		if (_factory == null) {
-			_factory = (ClassNameServiceFactory)com.liferay.portal.kernel.bean.BeanLocatorUtil.locate(_FACTORY);
+			_factory = (ClassNameServiceFactory)com.liferay.portal.kernel.bean.PortalBeanLocatorUtil.locate(_FACTORY);
 		}
 
 		return _factory;

@@ -148,7 +148,7 @@ public class ReleaseUtil {
 
 	private static ReleaseUtil _getUtil() {
 		if (_util == null) {
-			_util = (ReleaseUtil)com.liferay.portal.kernel.bean.BeanLocatorUtil.locate(_UTIL);
+			_util = (ReleaseUtil)com.liferay.portal.kernel.bean.PortalBeanLocatorUtil.locate(_UTIL);
 		}
 
 		return _util;

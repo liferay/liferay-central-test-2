@@ -303,7 +303,7 @@ public class RegionUtil {
 
 	private static RegionUtil _getUtil() {
 		if (_util == null) {
-			_util = (RegionUtil)com.liferay.portal.kernel.bean.BeanLocatorUtil.locate(_UTIL);
+			_util = (RegionUtil)com.liferay.portal.kernel.bean.PortalBeanLocatorUtil.locate(_UTIL);
 		}
 
 		return _util;

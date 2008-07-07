@@ -25,7 +25,7 @@ package com.liferay.mail.service.persistence;
 import com.liferay.mail.NoSuchCyrusUserException;
 import com.liferay.mail.model.CyrusUser;
 import com.liferay.portal.SystemException;
-import com.liferay.portal.kernel.bean.BeanLocatorUtil;
+import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
 
 /**
  * <a href="CyrusUserUtil.java.html"><b><i>View Source</i></b></a>
@@ -61,7 +61,7 @@ public class CyrusUserUtil {
 
 	private static CyrusUserUtil _getUtil() {
 		if (_util == null) {
-			_util = (CyrusUserUtil)BeanLocatorUtil.locate(_UTIL);
+			_util = (CyrusUserUtil)PortalBeanLocatorUtil.locate(_UTIL);
 		}
 
 		return _util;

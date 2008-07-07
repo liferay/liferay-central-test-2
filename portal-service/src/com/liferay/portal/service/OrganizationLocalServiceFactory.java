@@ -57,7 +57,7 @@ public class OrganizationLocalServiceFactory {
 
 	public static OrganizationLocalService getImpl() {
 		if (_impl == null) {
-			_impl = (OrganizationLocalService)com.liferay.portal.kernel.bean.BeanLocatorUtil.locate(_IMPL);
+			_impl = (OrganizationLocalService)com.liferay.portal.kernel.bean.PortalBeanLocatorUtil.locate(_IMPL);
 		}
 
 		return _impl;
@@ -65,7 +65,7 @@ public class OrganizationLocalServiceFactory {
 
 	public static OrganizationLocalService getTxImpl() {
 		if (_txImpl == null) {
-			_txImpl = (OrganizationLocalService)com.liferay.portal.kernel.bean.BeanLocatorUtil.locate(_TX_IMPL);
+			_txImpl = (OrganizationLocalService)com.liferay.portal.kernel.bean.PortalBeanLocatorUtil.locate(_TX_IMPL);
 		}
 
 		return _txImpl;
@@ -77,7 +77,7 @@ public class OrganizationLocalServiceFactory {
 
 	private static OrganizationLocalServiceFactory _getFactory() {
 		if (_factory == null) {
-			_factory = (OrganizationLocalServiceFactory)com.liferay.portal.kernel.bean.BeanLocatorUtil.locate(_FACTORY);
+			_factory = (OrganizationLocalServiceFactory)com.liferay.portal.kernel.bean.PortalBeanLocatorUtil.locate(_FACTORY);
 		}
 
 		return _factory;

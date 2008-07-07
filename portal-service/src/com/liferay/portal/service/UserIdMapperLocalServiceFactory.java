@@ -57,7 +57,7 @@ public class UserIdMapperLocalServiceFactory {
 
 	public static UserIdMapperLocalService getImpl() {
 		if (_impl == null) {
-			_impl = (UserIdMapperLocalService)com.liferay.portal.kernel.bean.BeanLocatorUtil.locate(_IMPL);
+			_impl = (UserIdMapperLocalService)com.liferay.portal.kernel.bean.PortalBeanLocatorUtil.locate(_IMPL);
 		}
 
 		return _impl;
@@ -65,7 +65,7 @@ public class UserIdMapperLocalServiceFactory {
 
 	public static UserIdMapperLocalService getTxImpl() {
 		if (_txImpl == null) {
-			_txImpl = (UserIdMapperLocalService)com.liferay.portal.kernel.bean.BeanLocatorUtil.locate(_TX_IMPL);
+			_txImpl = (UserIdMapperLocalService)com.liferay.portal.kernel.bean.PortalBeanLocatorUtil.locate(_TX_IMPL);
 		}
 
 		return _txImpl;
@@ -77,7 +77,7 @@ public class UserIdMapperLocalServiceFactory {
 
 	private static UserIdMapperLocalServiceFactory _getFactory() {
 		if (_factory == null) {
-			_factory = (UserIdMapperLocalServiceFactory)com.liferay.portal.kernel.bean.BeanLocatorUtil.locate(_FACTORY);
+			_factory = (UserIdMapperLocalServiceFactory)com.liferay.portal.kernel.bean.PortalBeanLocatorUtil.locate(_FACTORY);
 		}
 
 		return _factory;

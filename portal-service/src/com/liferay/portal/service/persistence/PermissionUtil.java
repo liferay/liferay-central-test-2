@@ -493,7 +493,7 @@ public class PermissionUtil {
 
 	private static PermissionUtil _getUtil() {
 		if (_util == null) {
-			_util = (PermissionUtil)com.liferay.portal.kernel.bean.BeanLocatorUtil.locate(_UTIL);
+			_util = (PermissionUtil)com.liferay.portal.kernel.bean.PortalBeanLocatorUtil.locate(_UTIL);
 		}
 
 		return _util;

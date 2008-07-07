@@ -57,7 +57,7 @@ public class TasksReviewLocalServiceFactory {
 
 	public static TasksReviewLocalService getImpl() {
 		if (_impl == null) {
-			_impl = (TasksReviewLocalService)com.liferay.portal.kernel.bean.BeanLocatorUtil.locate(_IMPL);
+			_impl = (TasksReviewLocalService)com.liferay.portal.kernel.bean.PortalBeanLocatorUtil.locate(_IMPL);
 		}
 
 		return _impl;
@@ -65,7 +65,7 @@ public class TasksReviewLocalServiceFactory {
 
 	public static TasksReviewLocalService getTxImpl() {
 		if (_txImpl == null) {
-			_txImpl = (TasksReviewLocalService)com.liferay.portal.kernel.bean.BeanLocatorUtil.locate(_TX_IMPL);
+			_txImpl = (TasksReviewLocalService)com.liferay.portal.kernel.bean.PortalBeanLocatorUtil.locate(_TX_IMPL);
 		}
 
 		return _txImpl;
@@ -77,7 +77,7 @@ public class TasksReviewLocalServiceFactory {
 
 	private static TasksReviewLocalServiceFactory _getFactory() {
 		if (_factory == null) {
-			_factory = (TasksReviewLocalServiceFactory)com.liferay.portal.kernel.bean.BeanLocatorUtil.locate(_FACTORY);
+			_factory = (TasksReviewLocalServiceFactory)com.liferay.portal.kernel.bean.PortalBeanLocatorUtil.locate(_FACTORY);
 		}
 
 		return _factory;

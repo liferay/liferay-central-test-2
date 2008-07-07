@@ -57,7 +57,7 @@ public class WorkflowTaskServiceFactory {
 
 	public static WorkflowTaskService getImpl() {
 		if (_impl == null) {
-			_impl = (WorkflowTaskService)com.liferay.portal.kernel.bean.BeanLocatorUtil.locate(_IMPL);
+			_impl = (WorkflowTaskService)com.liferay.portal.kernel.bean.PortalBeanLocatorUtil.locate(_IMPL);
 		}
 
 		return _impl;
@@ -65,7 +65,7 @@ public class WorkflowTaskServiceFactory {
 
 	public static WorkflowTaskService getTxImpl() {
 		if (_txImpl == null) {
-			_txImpl = (WorkflowTaskService)com.liferay.portal.kernel.bean.BeanLocatorUtil.locate(_TX_IMPL);
+			_txImpl = (WorkflowTaskService)com.liferay.portal.kernel.bean.PortalBeanLocatorUtil.locate(_TX_IMPL);
 		}
 
 		return _txImpl;
@@ -77,7 +77,7 @@ public class WorkflowTaskServiceFactory {
 
 	private static WorkflowTaskServiceFactory _getFactory() {
 		if (_factory == null) {
-			_factory = (WorkflowTaskServiceFactory)com.liferay.portal.kernel.bean.BeanLocatorUtil.locate(_FACTORY);
+			_factory = (WorkflowTaskServiceFactory)com.liferay.portal.kernel.bean.PortalBeanLocatorUtil.locate(_FACTORY);
 		}
 
 		return _factory;

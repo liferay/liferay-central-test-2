@@ -57,7 +57,7 @@ public class ExpandoTableLocalServiceFactory {
 
 	public static ExpandoTableLocalService getImpl() {
 		if (_impl == null) {
-			_impl = (ExpandoTableLocalService)com.liferay.portal.kernel.bean.BeanLocatorUtil.locate(_IMPL);
+			_impl = (ExpandoTableLocalService)com.liferay.portal.kernel.bean.PortalBeanLocatorUtil.locate(_IMPL);
 		}
 
 		return _impl;
@@ -65,7 +65,7 @@ public class ExpandoTableLocalServiceFactory {
 
 	public static ExpandoTableLocalService getTxImpl() {
 		if (_txImpl == null) {
-			_txImpl = (ExpandoTableLocalService)com.liferay.portal.kernel.bean.BeanLocatorUtil.locate(_TX_IMPL);
+			_txImpl = (ExpandoTableLocalService)com.liferay.portal.kernel.bean.PortalBeanLocatorUtil.locate(_TX_IMPL);
 		}
 
 		return _txImpl;
@@ -77,7 +77,7 @@ public class ExpandoTableLocalServiceFactory {
 
 	private static ExpandoTableLocalServiceFactory _getFactory() {
 		if (_factory == null) {
-			_factory = (ExpandoTableLocalServiceFactory)com.liferay.portal.kernel.bean.BeanLocatorUtil.locate(_FACTORY);
+			_factory = (ExpandoTableLocalServiceFactory)com.liferay.portal.kernel.bean.PortalBeanLocatorUtil.locate(_FACTORY);
 		}
 
 		return _factory;

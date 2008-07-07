@@ -346,7 +346,7 @@ public class SCLicenseUtil {
 
 	private static SCLicenseUtil _getUtil() {
 		if (_util == null) {
-			_util = (SCLicenseUtil)com.liferay.portal.kernel.bean.BeanLocatorUtil.locate(_UTIL);
+			_util = (SCLicenseUtil)com.liferay.portal.kernel.bean.PortalBeanLocatorUtil.locate(_UTIL);
 		}
 
 		return _util;

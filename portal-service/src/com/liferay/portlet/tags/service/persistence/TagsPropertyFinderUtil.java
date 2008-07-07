@@ -56,7 +56,7 @@ public class TagsPropertyFinderUtil {
 
 	private static TagsPropertyFinderUtil _getUtil() {
 		if (_util == null) {
-			_util = (TagsPropertyFinderUtil)com.liferay.portal.kernel.bean.BeanLocatorUtil.locate(_UTIL);
+			_util = (TagsPropertyFinderUtil)com.liferay.portal.kernel.bean.PortalBeanLocatorUtil.locate(_UTIL);
 		}
 
 		return _util;

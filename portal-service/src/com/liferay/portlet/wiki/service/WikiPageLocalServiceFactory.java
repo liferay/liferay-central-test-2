@@ -57,7 +57,7 @@ public class WikiPageLocalServiceFactory {
 
 	public static WikiPageLocalService getImpl() {
 		if (_impl == null) {
-			_impl = (WikiPageLocalService)com.liferay.portal.kernel.bean.BeanLocatorUtil.locate(_IMPL);
+			_impl = (WikiPageLocalService)com.liferay.portal.kernel.bean.PortalBeanLocatorUtil.locate(_IMPL);
 		}
 
 		return _impl;
@@ -65,7 +65,7 @@ public class WikiPageLocalServiceFactory {
 
 	public static WikiPageLocalService getTxImpl() {
 		if (_txImpl == null) {
-			_txImpl = (WikiPageLocalService)com.liferay.portal.kernel.bean.BeanLocatorUtil.locate(_TX_IMPL);
+			_txImpl = (WikiPageLocalService)com.liferay.portal.kernel.bean.PortalBeanLocatorUtil.locate(_TX_IMPL);
 		}
 
 		return _txImpl;
@@ -77,7 +77,7 @@ public class WikiPageLocalServiceFactory {
 
 	private static WikiPageLocalServiceFactory _getFactory() {
 		if (_factory == null) {
-			_factory = (WikiPageLocalServiceFactory)com.liferay.portal.kernel.bean.BeanLocatorUtil.locate(_FACTORY);
+			_factory = (WikiPageLocalServiceFactory)com.liferay.portal.kernel.bean.PortalBeanLocatorUtil.locate(_FACTORY);
 		}
 
 		return _factory;

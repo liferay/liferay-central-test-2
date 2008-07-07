@@ -57,7 +57,7 @@ public class RatingsEntryServiceFactory {
 
 	public static RatingsEntryService getImpl() {
 		if (_impl == null) {
-			_impl = (RatingsEntryService)com.liferay.portal.kernel.bean.BeanLocatorUtil.locate(_IMPL);
+			_impl = (RatingsEntryService)com.liferay.portal.kernel.bean.PortalBeanLocatorUtil.locate(_IMPL);
 		}
 
 		return _impl;
@@ -65,7 +65,7 @@ public class RatingsEntryServiceFactory {
 
 	public static RatingsEntryService getTxImpl() {
 		if (_txImpl == null) {
-			_txImpl = (RatingsEntryService)com.liferay.portal.kernel.bean.BeanLocatorUtil.locate(_TX_IMPL);
+			_txImpl = (RatingsEntryService)com.liferay.portal.kernel.bean.PortalBeanLocatorUtil.locate(_TX_IMPL);
 		}
 
 		return _txImpl;
@@ -77,7 +77,7 @@ public class RatingsEntryServiceFactory {
 
 	private static RatingsEntryServiceFactory _getFactory() {
 		if (_factory == null) {
-			_factory = (RatingsEntryServiceFactory)com.liferay.portal.kernel.bean.BeanLocatorUtil.locate(_FACTORY);
+			_factory = (RatingsEntryServiceFactory)com.liferay.portal.kernel.bean.PortalBeanLocatorUtil.locate(_FACTORY);
 		}
 
 		return _factory;

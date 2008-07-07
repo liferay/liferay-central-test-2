@@ -83,7 +83,7 @@ public class SocialActivityFinderUtil {
 
 	private static SocialActivityFinderUtil _getUtil() {
 		if (_util == null) {
-			_util = (SocialActivityFinderUtil)com.liferay.portal.kernel.bean.BeanLocatorUtil.locate(_UTIL);
+			_util = (SocialActivityFinderUtil)com.liferay.portal.kernel.bean.PortalBeanLocatorUtil.locate(_UTIL);
 		}
 
 		return _util;

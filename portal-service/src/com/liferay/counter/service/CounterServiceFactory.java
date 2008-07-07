@@ -22,7 +22,7 @@
 
 package com.liferay.counter.service;
 
-import com.liferay.portal.kernel.bean.BeanLocatorUtil;
+import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
 
 /**
  * <a href="CounterServiceFactory.java.html"><b><i>View Source</i></b></a>
@@ -38,7 +38,7 @@ public class CounterServiceFactory {
 
 	public static CounterService getImpl() {
 		if (_impl == null) {
-			_impl = (CounterService)BeanLocatorUtil.locate(_IMPL);
+			_impl = (CounterService)PortalBeanLocatorUtil.locate(_IMPL);
 		}
 
 		return _impl;
@@ -46,7 +46,7 @@ public class CounterServiceFactory {
 
 	public static CounterService getTxImpl() {
 		if (_txImpl == null) {
-			_txImpl = (CounterService)BeanLocatorUtil.locate(_TX_IMPL);
+			_txImpl = (CounterService)PortalBeanLocatorUtil.locate(_TX_IMPL);
 		}
 
 		return _txImpl;
@@ -58,7 +58,8 @@ public class CounterServiceFactory {
 
 	private static CounterServiceFactory _getFactory() {
 		if (_factory == null) {
-			_factory = (CounterServiceFactory)BeanLocatorUtil.locate(_FACTORY);
+			_factory = (CounterServiceFactory)PortalBeanLocatorUtil.locate(
+				_FACTORY);
 		}
 
 		return _factory;

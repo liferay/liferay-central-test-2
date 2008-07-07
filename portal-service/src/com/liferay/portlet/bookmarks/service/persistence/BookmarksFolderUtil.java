@@ -382,7 +382,7 @@ public class BookmarksFolderUtil {
 
 	private static BookmarksFolderUtil _getUtil() {
 		if (_util == null) {
-			_util = (BookmarksFolderUtil)com.liferay.portal.kernel.bean.BeanLocatorUtil.locate(_UTIL);
+			_util = (BookmarksFolderUtil)com.liferay.portal.kernel.bean.PortalBeanLocatorUtil.locate(_UTIL);
 		}
 
 		return _util;

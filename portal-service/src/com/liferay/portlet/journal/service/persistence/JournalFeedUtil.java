@@ -298,7 +298,7 @@ public class JournalFeedUtil {
 
 	private static JournalFeedUtil _getUtil() {
 		if (_util == null) {
-			_util = (JournalFeedUtil)com.liferay.portal.kernel.bean.BeanLocatorUtil.locate(_UTIL);
+			_util = (JournalFeedUtil)com.liferay.portal.kernel.bean.PortalBeanLocatorUtil.locate(_UTIL);
 		}
 
 		return _util;

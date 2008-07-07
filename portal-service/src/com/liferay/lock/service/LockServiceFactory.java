@@ -22,7 +22,7 @@
 
 package com.liferay.lock.service;
 
-import com.liferay.portal.kernel.bean.BeanLocatorUtil;
+import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
 
 /**
  * <a href="LockServiceFactory.java.html"><b><i>View Source</i></b></a>
@@ -38,7 +38,7 @@ public class LockServiceFactory {
 
 	public static LockService getImpl() {
 		if (_impl == null) {
-			_impl = (LockService)BeanLocatorUtil.locate(_IMPL);
+			_impl = (LockService)PortalBeanLocatorUtil.locate(_IMPL);
 		}
 
 		return _impl;
@@ -50,7 +50,8 @@ public class LockServiceFactory {
 
 	private static LockServiceFactory _getFactory() {
 		if (_factory == null) {
-			_factory = (LockServiceFactory)BeanLocatorUtil.locate(_FACTORY);
+			_factory = (LockServiceFactory)PortalBeanLocatorUtil.locate(
+				_FACTORY);
 		}
 
 		return _factory;

@@ -92,7 +92,7 @@ public class JournalStructureFinderUtil {
 
 	private static JournalStructureFinderUtil _getUtil() {
 		if (_util == null) {
-			_util = (JournalStructureFinderUtil)com.liferay.portal.kernel.bean.BeanLocatorUtil.locate(_UTIL);
+			_util = (JournalStructureFinderUtil)com.liferay.portal.kernel.bean.PortalBeanLocatorUtil.locate(_UTIL);
 		}
 
 		return _util;

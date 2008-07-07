@@ -57,7 +57,7 @@ public class RoleLocalServiceFactory {
 
 	public static RoleLocalService getImpl() {
 		if (_impl == null) {
-			_impl = (RoleLocalService)com.liferay.portal.kernel.bean.BeanLocatorUtil.locate(_IMPL);
+			_impl = (RoleLocalService)com.liferay.portal.kernel.bean.PortalBeanLocatorUtil.locate(_IMPL);
 		}
 
 		return _impl;
@@ -65,7 +65,7 @@ public class RoleLocalServiceFactory {
 
 	public static RoleLocalService getTxImpl() {
 		if (_txImpl == null) {
-			_txImpl = (RoleLocalService)com.liferay.portal.kernel.bean.BeanLocatorUtil.locate(_TX_IMPL);
+			_txImpl = (RoleLocalService)com.liferay.portal.kernel.bean.PortalBeanLocatorUtil.locate(_TX_IMPL);
 		}
 
 		return _txImpl;
@@ -77,7 +77,7 @@ public class RoleLocalServiceFactory {
 
 	private static RoleLocalServiceFactory _getFactory() {
 		if (_factory == null) {
-			_factory = (RoleLocalServiceFactory)com.liferay.portal.kernel.bean.BeanLocatorUtil.locate(_FACTORY);
+			_factory = (RoleLocalServiceFactory)com.liferay.portal.kernel.bean.PortalBeanLocatorUtil.locate(_FACTORY);
 		}
 
 		return _factory;

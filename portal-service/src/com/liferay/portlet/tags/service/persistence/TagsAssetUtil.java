@@ -315,7 +315,7 @@ public class TagsAssetUtil {
 
 	private static TagsAssetUtil _getUtil() {
 		if (_util == null) {
-			_util = (TagsAssetUtil)com.liferay.portal.kernel.bean.BeanLocatorUtil.locate(_UTIL);
+			_util = (TagsAssetUtil)com.liferay.portal.kernel.bean.PortalBeanLocatorUtil.locate(_UTIL);
 		}
 
 		return _util;

@@ -43,15 +43,17 @@ public class ArrayApplicationContext extends ClassPathXmlApplicationContext {
 	protected void loadBeanDefinitions(XmlBeanDefinitionReader reader) {
 		String[] configLocations = getConfigLocations();
 
-		if (configLocations != null) {
-			for (int i = 0; i < configLocations.length; i++) {
-				try {
-					reader.loadBeanDefinitions(configLocations[i]);
-				}
-				catch (Exception e) {
-					if (_log.isWarnEnabled()) {
-						_log.warn(e);
-					}
+		if (configLocations == null) {
+			return;
+		}
+
+		for (String configLocation : configLocations) {
+			try {
+				reader.loadBeanDefinitions(configLocation);
+			}
+			catch (Exception e) {
+				if (_log.isWarnEnabled()) {
+					_log.warn(e, e);
 				}
 			}
 		}

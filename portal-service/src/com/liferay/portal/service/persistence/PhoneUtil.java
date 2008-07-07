@@ -430,7 +430,7 @@ public class PhoneUtil {
 
 	private static PhoneUtil _getUtil() {
 		if (_util == null) {
-			_util = (PhoneUtil)com.liferay.portal.kernel.bean.BeanLocatorUtil.locate(_UTIL);
+			_util = (PhoneUtil)com.liferay.portal.kernel.bean.PortalBeanLocatorUtil.locate(_UTIL);
 		}
 
 		return _util;

@@ -22,7 +22,7 @@
 
 package com.liferay.portal.kernel.util;
 
-import com.liferay.portal.kernel.bean.BeanLocatorUtil;
+import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
 
 import java.io.File;
 
@@ -53,7 +53,7 @@ public class MimeTypesUtil {
 
 	private static MimeTypesUtil _getUtil() {
 		if (_util == null) {
-			_util = (MimeTypesUtil)BeanLocatorUtil.locate(_UTIL);
+			_util = (MimeTypesUtil)PortalBeanLocatorUtil.locate(_UTIL);
 		}
 
 		return _util;

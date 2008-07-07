@@ -22,7 +22,7 @@
 
 package com.liferay.documentlibrary.service;
 
-import com.liferay.portal.kernel.bean.BeanLocatorUtil;
+import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
 
 /**
  * <a href="DLServiceFactory.java.html"><b><i>View Source</i></b></a>
@@ -38,7 +38,7 @@ public class DLServiceFactory {
 
 	public static DLService getImpl() {
 		if (_impl == null) {
-			_impl = (DLService)BeanLocatorUtil.locate(_IMPL);
+			_impl = (DLService)PortalBeanLocatorUtil.locate(_IMPL);
 		}
 
 		return _impl;
@@ -50,7 +50,7 @@ public class DLServiceFactory {
 
 	private static DLServiceFactory _getFactory() {
 		if (_factory == null) {
-			_factory = (DLServiceFactory)BeanLocatorUtil.locate(_FACTORY);
+			_factory = (DLServiceFactory)PortalBeanLocatorUtil.locate(_FACTORY);
 		}
 
 		return _factory;

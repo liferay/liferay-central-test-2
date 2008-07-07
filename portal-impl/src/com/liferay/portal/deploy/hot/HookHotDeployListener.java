@@ -23,7 +23,7 @@
 package com.liferay.portal.deploy.hot;
 
 import com.liferay.portal.events.EventsProcessor;
-import com.liferay.portal.kernel.bean.BeanLocatorUtil;
+import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
 import com.liferay.portal.kernel.configuration.Configuration;
 import com.liferay.portal.kernel.configuration.ConfigurationFactoryUtil;
 import com.liferay.portal.kernel.deploy.hot.HotDeployEvent;
@@ -284,7 +284,7 @@ public class HookHotDeployListener extends BaseHotDeployListener {
 
 		String packagePath = modelName.substring(0, pos);
 
-		return (BasePersistenceImpl)BeanLocatorUtil.locate(
+		return (BasePersistenceImpl)PortalBeanLocatorUtil.locate(
 			packagePath + ".service.persistence." + entityName +
 				"Persistence.impl");
 	}

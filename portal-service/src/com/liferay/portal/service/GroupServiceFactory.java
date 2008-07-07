@@ -57,7 +57,7 @@ public class GroupServiceFactory {
 
 	public static GroupService getImpl() {
 		if (_impl == null) {
-			_impl = (GroupService)com.liferay.portal.kernel.bean.BeanLocatorUtil.locate(_IMPL);
+			_impl = (GroupService)com.liferay.portal.kernel.bean.PortalBeanLocatorUtil.locate(_IMPL);
 		}
 
 		return _impl;
@@ -65,7 +65,7 @@ public class GroupServiceFactory {
 
 	public static GroupService getTxImpl() {
 		if (_txImpl == null) {
-			_txImpl = (GroupService)com.liferay.portal.kernel.bean.BeanLocatorUtil.locate(_TX_IMPL);
+			_txImpl = (GroupService)com.liferay.portal.kernel.bean.PortalBeanLocatorUtil.locate(_TX_IMPL);
 		}
 
 		return _txImpl;
@@ -77,7 +77,7 @@ public class GroupServiceFactory {
 
 	private static GroupServiceFactory _getFactory() {
 		if (_factory == null) {
-			_factory = (GroupServiceFactory)com.liferay.portal.kernel.bean.BeanLocatorUtil.locate(_FACTORY);
+			_factory = (GroupServiceFactory)com.liferay.portal.kernel.bean.PortalBeanLocatorUtil.locate(_FACTORY);
 		}
 
 		return _factory;

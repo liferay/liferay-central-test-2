@@ -22,7 +22,7 @@
 
 package com.liferay.portal.kernel.util;
 
-import com.liferay.portal.kernel.bean.BeanLocatorUtil;
+import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -292,7 +292,7 @@ public class FileUtil {
 
 	private static FileUtil _getUtil() {
 		if (_util == null) {
-			_util = (FileUtil)BeanLocatorUtil.locate(_UTIL);
+			_util = (FileUtil)PortalBeanLocatorUtil.locate(_UTIL);
 		}
 
 		return _util;

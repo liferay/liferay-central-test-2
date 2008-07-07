@@ -57,7 +57,7 @@ public class TagsPropertyLocalServiceFactory {
 
 	public static TagsPropertyLocalService getImpl() {
 		if (_impl == null) {
-			_impl = (TagsPropertyLocalService)com.liferay.portal.kernel.bean.BeanLocatorUtil.locate(_IMPL);
+			_impl = (TagsPropertyLocalService)com.liferay.portal.kernel.bean.PortalBeanLocatorUtil.locate(_IMPL);
 		}
 
 		return _impl;
@@ -65,7 +65,7 @@ public class TagsPropertyLocalServiceFactory {
 
 	public static TagsPropertyLocalService getTxImpl() {
 		if (_txImpl == null) {
-			_txImpl = (TagsPropertyLocalService)com.liferay.portal.kernel.bean.BeanLocatorUtil.locate(_TX_IMPL);
+			_txImpl = (TagsPropertyLocalService)com.liferay.portal.kernel.bean.PortalBeanLocatorUtil.locate(_TX_IMPL);
 		}
 
 		return _txImpl;
@@ -77,7 +77,7 @@ public class TagsPropertyLocalServiceFactory {
 
 	private static TagsPropertyLocalServiceFactory _getFactory() {
 		if (_factory == null) {
-			_factory = (TagsPropertyLocalServiceFactory)com.liferay.portal.kernel.bean.BeanLocatorUtil.locate(_FACTORY);
+			_factory = (TagsPropertyLocalServiceFactory)com.liferay.portal.kernel.bean.PortalBeanLocatorUtil.locate(_FACTORY);
 		}
 
 		return _factory;

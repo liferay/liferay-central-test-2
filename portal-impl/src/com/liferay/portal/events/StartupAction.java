@@ -23,7 +23,7 @@
 package com.liferay.portal.events;
 
 import com.liferay.lock.service.LockServiceUtil;
-import com.liferay.portal.kernel.bean.BeanLocatorUtil;
+import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
 import com.liferay.portal.kernel.cache.CacheRegistry;
 import com.liferay.portal.kernel.cache.MultiVMPoolUtil;
 import com.liferay.portal.kernel.events.ActionException;
@@ -238,10 +238,11 @@ public class StartupAction extends SimpleAction {
 
 		// Messaging
 
-		MessageBus messageBus = (MessageBus)BeanLocatorUtil.locate(
+		MessageBus messageBus = (MessageBus)PortalBeanLocatorUtil.locate(
 			MessageBus.class.getName());
-		MessageSender messageSender = (MessageSender)BeanLocatorUtil.locate(
-			MessageSender.class.getName());
+		MessageSender messageSender =
+			(MessageSender)PortalBeanLocatorUtil.locate(
+				MessageSender.class.getName());
 
 		MessageBusUtil.init(messageBus, messageSender);
 

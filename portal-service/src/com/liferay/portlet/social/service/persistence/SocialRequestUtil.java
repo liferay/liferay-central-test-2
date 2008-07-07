@@ -629,7 +629,7 @@ public class SocialRequestUtil {
 
 	private static SocialRequestUtil _getUtil() {
 		if (_util == null) {
-			_util = (SocialRequestUtil)com.liferay.portal.kernel.bean.BeanLocatorUtil.locate(_UTIL);
+			_util = (SocialRequestUtil)com.liferay.portal.kernel.bean.PortalBeanLocatorUtil.locate(_UTIL);
 		}
 
 		return _util;

@@ -976,7 +976,7 @@ public class UserUtil {
 
 	private static UserUtil _getUtil() {
 		if (_util == null) {
-			_util = (UserUtil)com.liferay.portal.kernel.bean.BeanLocatorUtil.locate(_UTIL);
+			_util = (UserUtil)com.liferay.portal.kernel.bean.PortalBeanLocatorUtil.locate(_UTIL);
 		}
 
 		return _util;

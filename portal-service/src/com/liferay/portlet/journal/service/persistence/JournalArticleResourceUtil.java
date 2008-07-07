@@ -225,7 +225,7 @@ public class JournalArticleResourceUtil {
 
 	private static JournalArticleResourceUtil _getUtil() {
 		if (_util == null) {
-			_util = (JournalArticleResourceUtil)com.liferay.portal.kernel.bean.BeanLocatorUtil.locate(_UTIL);
+			_util = (JournalArticleResourceUtil)com.liferay.portal.kernel.bean.PortalBeanLocatorUtil.locate(_UTIL);
 		}
 
 		return _util;

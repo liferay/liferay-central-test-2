@@ -98,7 +98,7 @@ public class MBMessageFinderUtil {
 
 	private static MBMessageFinderUtil _getUtil() {
 		if (_util == null) {
-			_util = (MBMessageFinderUtil)com.liferay.portal.kernel.bean.BeanLocatorUtil.locate(_UTIL);
+			_util = (MBMessageFinderUtil)com.liferay.portal.kernel.bean.PortalBeanLocatorUtil.locate(_UTIL);
 		}
 
 		return _util;

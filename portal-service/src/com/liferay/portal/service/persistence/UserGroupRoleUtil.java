@@ -412,7 +412,7 @@ public class UserGroupRoleUtil {
 
 	private static UserGroupRoleUtil _getUtil() {
 		if (_util == null) {
-			_util = (UserGroupRoleUtil)com.liferay.portal.kernel.bean.BeanLocatorUtil.locate(_UTIL);
+			_util = (UserGroupRoleUtil)com.liferay.portal.kernel.bean.PortalBeanLocatorUtil.locate(_UTIL);
 		}
 
 		return _util;

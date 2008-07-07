@@ -623,7 +623,7 @@ public class JournalArticleUtil {
 
 	private static JournalArticleUtil _getUtil() {
 		if (_util == null) {
-			_util = (JournalArticleUtil)com.liferay.portal.kernel.bean.BeanLocatorUtil.locate(_UTIL);
+			_util = (JournalArticleUtil)com.liferay.portal.kernel.bean.PortalBeanLocatorUtil.locate(_UTIL);
 		}
 
 		return _util;

@@ -22,7 +22,7 @@
 
 package com.liferay.portal.jcr;
 
-import com.liferay.portal.kernel.bean.BeanLocatorUtil;
+import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
 
 import javax.jcr.RepositoryException;
 import javax.jcr.Session;
@@ -37,7 +37,8 @@ public class JCRFactoryUtil {
 
 	public static JCRFactory getJCRFactory() {
 		if (_jcrFactory == null) {
-			_jcrFactory = (JCRFactory)BeanLocatorUtil.locate(_JCR_FACTORY);
+			_jcrFactory = (JCRFactory)PortalBeanLocatorUtil.locate(
+				_JCR_FACTORY);
 		}
 
 		return _jcrFactory;

@@ -223,7 +223,7 @@ public class ShoppingCouponUtil {
 
 	private static ShoppingCouponUtil _getUtil() {
 		if (_util == null) {
-			_util = (ShoppingCouponUtil)com.liferay.portal.kernel.bean.BeanLocatorUtil.locate(_UTIL);
+			_util = (ShoppingCouponUtil)com.liferay.portal.kernel.bean.PortalBeanLocatorUtil.locate(_UTIL);
 		}
 
 		return _util;

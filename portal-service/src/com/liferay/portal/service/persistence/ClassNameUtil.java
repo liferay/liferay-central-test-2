@@ -171,7 +171,7 @@ public class ClassNameUtil {
 
 	private static ClassNameUtil _getUtil() {
 		if (_util == null) {
-			_util = (ClassNameUtil)com.liferay.portal.kernel.bean.BeanLocatorUtil.locate(_UTIL);
+			_util = (ClassNameUtil)com.liferay.portal.kernel.bean.PortalBeanLocatorUtil.locate(_UTIL);
 		}
 
 		return _util;

@@ -70,7 +70,7 @@ public class ShoppingOrderFinderUtil {
 
 	private static ShoppingOrderFinderUtil _getUtil() {
 		if (_util == null) {
-			_util = (ShoppingOrderFinderUtil)com.liferay.portal.kernel.bean.BeanLocatorUtil.locate(_UTIL);
+			_util = (ShoppingOrderFinderUtil)com.liferay.portal.kernel.bean.PortalBeanLocatorUtil.locate(_UTIL);
 		}
 
 		return _util;

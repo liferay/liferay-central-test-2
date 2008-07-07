@@ -22,7 +22,7 @@
 
 package com.liferay.portal.kernel.util;
 
-import com.liferay.portal.kernel.bean.BeanLocatorUtil;
+import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
 
 import java.io.IOException;
 
@@ -314,7 +314,7 @@ public class HttpUtil {
 
 	private static HttpUtil _getUtil() {
 		if (_util == null) {
-			_util = (HttpUtil)BeanLocatorUtil.locate(_UTIL);
+			_util = (HttpUtil)PortalBeanLocatorUtil.locate(_UTIL);
 		}
 
 		return _util;

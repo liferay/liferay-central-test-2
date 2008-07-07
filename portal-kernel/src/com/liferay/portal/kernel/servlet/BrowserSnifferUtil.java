@@ -22,7 +22,7 @@
 
 package com.liferay.portal.kernel.servlet;
 
-import com.liferay.portal.kernel.bean.BeanLocatorUtil;
+import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -122,7 +122,7 @@ public class BrowserSnifferUtil {
 
 	private static BrowserSnifferUtil _getUtil() {
 		if (_util == null) {
-			_util = (BrowserSnifferUtil)BeanLocatorUtil.locate(_UTIL);
+			_util = (BrowserSnifferUtil)PortalBeanLocatorUtil.locate(_UTIL);
 		}
 
 		return _util;

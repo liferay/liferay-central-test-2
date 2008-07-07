@@ -22,7 +22,7 @@
 
 package com.liferay.portal.kernel.spring.hibernate;
 
-import com.liferay.portal.kernel.bean.BeanLocatorUtil;
+import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
 import com.liferay.portal.kernel.dao.hibernate.SessionFactory;
 
 /**
@@ -88,7 +88,7 @@ public class FinderCacheUtil {
 
 	private static FinderCacheUtil _getUtil() {
 		if (_util == null) {
-			_util = (FinderCacheUtil)BeanLocatorUtil.locate(_UTIL);
+			_util = (FinderCacheUtil)PortalBeanLocatorUtil.locate(_UTIL);
 		}
 
 		return _util;

@@ -407,7 +407,7 @@ public class IGFolderUtil {
 
 	private static IGFolderUtil _getUtil() {
 		if (_util == null) {
-			_util = (IGFolderUtil)com.liferay.portal.kernel.bean.BeanLocatorUtil.locate(_UTIL);
+			_util = (IGFolderUtil)com.liferay.portal.kernel.bean.PortalBeanLocatorUtil.locate(_UTIL);
 		}
 
 		return _util;

@@ -22,7 +22,7 @@
 
 package com.liferay.portal.kernel.jndi;
 
-import com.liferay.portal.kernel.bean.BeanLocatorUtil;
+import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
 
 import javax.mail.Session;
 
@@ -56,7 +56,7 @@ public class PortalJNDIUtil {
 
 	private static PortalJNDIUtil _getUtil() {
 		if (_util == null) {
-			_util = (PortalJNDIUtil)BeanLocatorUtil.locate(_UTIL);
+			_util = (PortalJNDIUtil)PortalBeanLocatorUtil.locate(_UTIL);
 		}
 
 		return _util;

@@ -22,7 +22,7 @@
 
 package com.liferay.portal.kernel.util;
 
-import com.liferay.portal.kernel.bean.BeanLocatorUtil;
+import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
 
 /**
  * <a href="HtmlUtil.java.html"><b><i>View Source</i></b></a>
@@ -80,7 +80,7 @@ public class HtmlUtil {
 
 	private static HtmlUtil _getUtil() {
 		if (_util == null) {
-			_util = (HtmlUtil)BeanLocatorUtil.locate(_UTIL);
+			_util = (HtmlUtil)PortalBeanLocatorUtil.locate(_UTIL);
 		}
 
 		return _util;

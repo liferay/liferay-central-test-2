@@ -22,7 +22,7 @@
 
 package com.liferay.portal.kernel.uuid;
 
-import com.liferay.portal.kernel.bean.BeanLocatorUtil;
+import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
 
 /**
  * <a href="PortalUUIDUtil.java.html"><b><i>View Source</i></b></a>
@@ -46,7 +46,7 @@ public class PortalUUIDUtil {
 
 	private static PortalUUIDUtil _getUtil() {
 		if (_util == null) {
-			_util = (PortalUUIDUtil)BeanLocatorUtil.locate(_UTIL);
+			_util = (PortalUUIDUtil)PortalBeanLocatorUtil.locate(_UTIL);
 		}
 
 		return _util;

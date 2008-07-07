@@ -24,7 +24,7 @@ package com.liferay.portal.events;
 
 import com.liferay.portal.bean.BeanLocatorImpl;
 import com.liferay.portal.configuration.ConfigurationFactoryImpl;
-import com.liferay.portal.kernel.bean.BeanLocatorUtil;
+import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
 import com.liferay.portal.kernel.configuration.ConfigurationFactoryUtil;
 import com.liferay.portal.kernel.events.SimpleAction;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
@@ -111,7 +111,7 @@ public class InitAction extends SimpleAction {
 
 		// Bean locator
 
-		BeanLocatorUtil.setBeanLocator(new BeanLocatorImpl());
+		PortalBeanLocatorUtil.setBeanLocator(new BeanLocatorImpl());
 
 		// Java properties
 

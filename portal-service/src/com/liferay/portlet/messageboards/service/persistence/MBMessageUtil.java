@@ -465,7 +465,7 @@ public class MBMessageUtil {
 
 	private static MBMessageUtil _getUtil() {
 		if (_util == null) {
-			_util = (MBMessageUtil)com.liferay.portal.kernel.bean.BeanLocatorUtil.locate(_UTIL);
+			_util = (MBMessageUtil)com.liferay.portal.kernel.bean.PortalBeanLocatorUtil.locate(_UTIL);
 		}
 
 		return _util;

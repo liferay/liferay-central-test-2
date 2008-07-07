@@ -57,7 +57,7 @@ public class PhoneServiceFactory {
 
 	public static PhoneService getImpl() {
 		if (_impl == null) {
-			_impl = (PhoneService)com.liferay.portal.kernel.bean.BeanLocatorUtil.locate(_IMPL);
+			_impl = (PhoneService)com.liferay.portal.kernel.bean.PortalBeanLocatorUtil.locate(_IMPL);
 		}
 
 		return _impl;
@@ -65,7 +65,7 @@ public class PhoneServiceFactory {
 
 	public static PhoneService getTxImpl() {
 		if (_txImpl == null) {
-			_txImpl = (PhoneService)com.liferay.portal.kernel.bean.BeanLocatorUtil.locate(_TX_IMPL);
+			_txImpl = (PhoneService)com.liferay.portal.kernel.bean.PortalBeanLocatorUtil.locate(_TX_IMPL);
 		}
 
 		return _txImpl;
@@ -77,7 +77,7 @@ public class PhoneServiceFactory {
 
 	private static PhoneServiceFactory _getFactory() {
 		if (_factory == null) {
-			_factory = (PhoneServiceFactory)com.liferay.portal.kernel.bean.BeanLocatorUtil.locate(_FACTORY);
+			_factory = (PhoneServiceFactory)com.liferay.portal.kernel.bean.PortalBeanLocatorUtil.locate(_FACTORY);
 		}
 
 		return _factory;

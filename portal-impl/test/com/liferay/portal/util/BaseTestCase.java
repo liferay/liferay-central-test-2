@@ -24,7 +24,7 @@ package com.liferay.portal.util;
 
 import com.liferay.counter.service.CounterLocalServiceUtil;
 import com.liferay.portal.bean.BeanLocatorImpl;
-import com.liferay.portal.kernel.bean.BeanLocatorUtil;
+import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
 import com.liferay.portal.spring.util.SpringUtil;
 import com.liferay.util.PwdGenerator;
 
@@ -72,8 +72,8 @@ public class BaseTestCase extends TestCase {
 	}
 
 	protected void setUp() throws Exception {
-		if (BeanLocatorUtil.getBeanLocator() == null) {
-			BeanLocatorUtil.setBeanLocator(new BeanLocatorImpl());
+		if (PortalBeanLocatorUtil.getBeanLocator() == null) {
+			PortalBeanLocatorUtil.setBeanLocator(new BeanLocatorImpl());
 
 			SpringUtil.initContext(SpringUtil.getContext());
 		}

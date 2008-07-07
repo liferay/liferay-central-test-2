@@ -22,7 +22,7 @@
 
 package com.liferay.portal.model;
 
-import com.liferay.portal.kernel.bean.BeanLocatorUtil;
+import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
 import com.liferay.portal.kernel.xml.Element;
 
 import java.util.List;
@@ -76,7 +76,7 @@ public class ModelHintsUtil {
 
 	private static ModelHintsUtil _getUtil() {
 		if (_util == null) {
-			_util = (ModelHintsUtil)BeanLocatorUtil.locate(_UTIL);
+			_util = (ModelHintsUtil)PortalBeanLocatorUtil.locate(_UTIL);
 		}
 
 		return _util;

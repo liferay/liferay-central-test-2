@@ -73,7 +73,7 @@ public class GroupFinderUtil {
 
 	private static GroupFinderUtil _getUtil() {
 		if (_util == null) {
-			_util = (GroupFinderUtil)com.liferay.portal.kernel.bean.BeanLocatorUtil.locate(_UTIL);
+			_util = (GroupFinderUtil)com.liferay.portal.kernel.bean.PortalBeanLocatorUtil.locate(_UTIL);
 		}
 
 		return _util;

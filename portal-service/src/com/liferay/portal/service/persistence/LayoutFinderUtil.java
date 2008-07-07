@@ -51,7 +51,7 @@ public class LayoutFinderUtil {
 
 	private static LayoutFinderUtil _getUtil() {
 		if (_util == null) {
-			_util = (LayoutFinderUtil)com.liferay.portal.kernel.bean.BeanLocatorUtil.locate(_UTIL);
+			_util = (LayoutFinderUtil)com.liferay.portal.kernel.bean.PortalBeanLocatorUtil.locate(_UTIL);
 		}
 
 		return _util;

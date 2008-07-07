@@ -22,7 +22,7 @@
 
 package com.liferay.portal.kernel.cache;
 
-import com.liferay.portal.kernel.bean.BeanLocatorUtil;
+import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
 
 import java.io.Serializable;
 
@@ -121,7 +121,7 @@ public class MultiVMPoolUtil {
 
 	private static MultiVMPoolUtil _getUtil() {
 		if (_util == null) {
-			_util = (MultiVMPoolUtil)BeanLocatorUtil.locate(_UTIL);
+			_util = (MultiVMPoolUtil)PortalBeanLocatorUtil.locate(_UTIL);
 		}
 
 		return _util;

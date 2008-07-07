@@ -201,7 +201,7 @@ public class ShoppingItemPriceUtil {
 
 	private static ShoppingItemPriceUtil _getUtil() {
 		if (_util == null) {
-			_util = (ShoppingItemPriceUtil)com.liferay.portal.kernel.bean.BeanLocatorUtil.locate(_UTIL);
+			_util = (ShoppingItemPriceUtil)com.liferay.portal.kernel.bean.PortalBeanLocatorUtil.locate(_UTIL);
 		}
 
 		return _util;

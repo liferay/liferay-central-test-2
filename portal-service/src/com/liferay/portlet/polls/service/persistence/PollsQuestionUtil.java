@@ -277,7 +277,7 @@ public class PollsQuestionUtil {
 
 	private static PollsQuestionUtil _getUtil() {
 		if (_util == null) {
-			_util = (PollsQuestionUtil)com.liferay.portal.kernel.bean.BeanLocatorUtil.locate(_UTIL);
+			_util = (PollsQuestionUtil)com.liferay.portal.kernel.bean.PortalBeanLocatorUtil.locate(_UTIL);
 		}
 
 		return _util;

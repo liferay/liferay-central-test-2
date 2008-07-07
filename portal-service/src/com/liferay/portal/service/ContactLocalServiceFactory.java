@@ -57,7 +57,7 @@ public class ContactLocalServiceFactory {
 
 	public static ContactLocalService getImpl() {
 		if (_impl == null) {
-			_impl = (ContactLocalService)com.liferay.portal.kernel.bean.BeanLocatorUtil.locate(_IMPL);
+			_impl = (ContactLocalService)com.liferay.portal.kernel.bean.PortalBeanLocatorUtil.locate(_IMPL);
 		}
 
 		return _impl;
@@ -65,7 +65,7 @@ public class ContactLocalServiceFactory {
 
 	public static ContactLocalService getTxImpl() {
 		if (_txImpl == null) {
-			_txImpl = (ContactLocalService)com.liferay.portal.kernel.bean.BeanLocatorUtil.locate(_TX_IMPL);
+			_txImpl = (ContactLocalService)com.liferay.portal.kernel.bean.PortalBeanLocatorUtil.locate(_TX_IMPL);
 		}
 
 		return _txImpl;
@@ -77,7 +77,7 @@ public class ContactLocalServiceFactory {
 
 	private static ContactLocalServiceFactory _getFactory() {
 		if (_factory == null) {
-			_factory = (ContactLocalServiceFactory)com.liferay.portal.kernel.bean.BeanLocatorUtil.locate(_FACTORY);
+			_factory = (ContactLocalServiceFactory)com.liferay.portal.kernel.bean.PortalBeanLocatorUtil.locate(_FACTORY);
 		}
 
 		return _factory;

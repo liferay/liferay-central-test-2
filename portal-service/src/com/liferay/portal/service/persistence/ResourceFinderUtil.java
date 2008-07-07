@@ -50,7 +50,7 @@ public class ResourceFinderUtil {
 
 	private static ResourceFinderUtil _getUtil() {
 		if (_util == null) {
-			_util = (ResourceFinderUtil)com.liferay.portal.kernel.bean.BeanLocatorUtil.locate(_UTIL);
+			_util = (ResourceFinderUtil)com.liferay.portal.kernel.bean.PortalBeanLocatorUtil.locate(_UTIL);
 		}
 
 		return _util;

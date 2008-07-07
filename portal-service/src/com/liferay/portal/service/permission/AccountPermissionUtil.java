@@ -24,7 +24,7 @@ package com.liferay.portal.service.permission;
 
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
-import com.liferay.portal.kernel.bean.BeanLocatorUtil;
+import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
 import com.liferay.portal.model.Account;
 import com.liferay.portal.security.permission.PermissionChecker;
 
@@ -80,7 +80,7 @@ public class AccountPermissionUtil {
 
 	private static AccountPermissionUtil _getUtil() {
 		if (_util == null) {
-			_util = (AccountPermissionUtil)BeanLocatorUtil.locate(_UTIL);
+			_util = (AccountPermissionUtil)PortalBeanLocatorUtil.locate(_UTIL);
 		}
 
 		return _util;

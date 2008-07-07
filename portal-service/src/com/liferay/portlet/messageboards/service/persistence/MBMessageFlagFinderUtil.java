@@ -44,7 +44,7 @@ public class MBMessageFlagFinderUtil {
 
 	private static MBMessageFlagFinderUtil _getUtil() {
 		if (_util == null) {
-			_util = (MBMessageFlagFinderUtil)com.liferay.portal.kernel.bean.BeanLocatorUtil.locate(_UTIL);
+			_util = (MBMessageFlagFinderUtil)com.liferay.portal.kernel.bean.PortalBeanLocatorUtil.locate(_UTIL);
 		}
 
 		return _util;

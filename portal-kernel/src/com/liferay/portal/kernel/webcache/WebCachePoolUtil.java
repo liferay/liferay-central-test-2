@@ -22,7 +22,7 @@
 
 package com.liferay.portal.kernel.webcache;
 
-import com.liferay.portal.kernel.bean.BeanLocatorUtil;
+import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
 
 /**
  * <a href="WebCachePoolUtil.java.html"><b><i>View Source</i></b></a>
@@ -54,7 +54,7 @@ public class WebCachePoolUtil {
 
 	private static WebCachePoolUtil _getUtil() {
 		if (_util == null) {
-			_util = (WebCachePoolUtil)BeanLocatorUtil.locate(_UTIL);
+			_util = (WebCachePoolUtil)PortalBeanLocatorUtil.locate(_UTIL);
 		}
 
 		return _util;

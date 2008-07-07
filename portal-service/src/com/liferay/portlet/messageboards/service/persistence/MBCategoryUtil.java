@@ -384,7 +384,7 @@ public class MBCategoryUtil {
 
 	private static MBCategoryUtil _getUtil() {
 		if (_util == null) {
-			_util = (MBCategoryUtil)com.liferay.portal.kernel.bean.BeanLocatorUtil.locate(_UTIL);
+			_util = (MBCategoryUtil)com.liferay.portal.kernel.bean.PortalBeanLocatorUtil.locate(_UTIL);
 		}
 
 		return _util;

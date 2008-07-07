@@ -24,7 +24,7 @@ package com.liferay.portal.service;
 
 import com.liferay.portal.bean.BeanLocatorImpl;
 import com.liferay.portal.jcr.JCRFactoryUtil;
-import com.liferay.portal.kernel.bean.BeanLocatorUtil;
+import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
 import com.liferay.portal.kernel.messaging.MessageBus;
 import com.liferay.portal.kernel.messaging.MessageBusUtil;
 import com.liferay.portal.kernel.messaging.MessageSender;
@@ -58,8 +58,8 @@ public class ServiceTestSuite extends TestSuite {
 
 		// Bean locator
 
-		if (BeanLocatorUtil.getBeanLocator() == null) {
-			BeanLocatorUtil.setBeanLocator(new BeanLocatorImpl());
+		if (PortalBeanLocatorUtil.getBeanLocator() == null) {
+			PortalBeanLocatorUtil.setBeanLocator(new BeanLocatorImpl());
 
 			SpringUtil.initContext(SpringUtil.getContext());
 		}
@@ -83,10 +83,11 @@ public class ServiceTestSuite extends TestSuite {
 
 		// Messaging
 
-		MessageBus messageBus = (MessageBus)BeanLocatorUtil.locate(
+		MessageBus messageBus = (MessageBus)PortalBeanLocatorUtil.locate(
 			MessageBus.class.getName());
-		MessageSender messageSender = (MessageSender)BeanLocatorUtil.locate(
-			MessageSender.class.getName());
+		MessageSender messageSender =
+			(MessageSender)PortalBeanLocatorUtil.locate(
+				MessageSender.class.getName());
 
 		MessageBusUtil.init(messageBus, messageSender);
 

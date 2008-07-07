@@ -76,7 +76,7 @@ public class WikiPageFinderUtil {
 
 	private static WikiPageFinderUtil _getUtil() {
 		if (_util == null) {
-			_util = (WikiPageFinderUtil)com.liferay.portal.kernel.bean.BeanLocatorUtil.locate(_UTIL);
+			_util = (WikiPageFinderUtil)com.liferay.portal.kernel.bean.PortalBeanLocatorUtil.locate(_UTIL);
 		}
 
 		return _util;

@@ -305,7 +305,7 @@ public class UserTrackerUtil {
 
 	private static UserTrackerUtil _getUtil() {
 		if (_util == null) {
-			_util = (UserTrackerUtil)com.liferay.portal.kernel.bean.BeanLocatorUtil.locate(_UTIL);
+			_util = (UserTrackerUtil)com.liferay.portal.kernel.bean.PortalBeanLocatorUtil.locate(_UTIL);
 		}
 
 		return _util;

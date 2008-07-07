@@ -57,7 +57,7 @@ public class BlogsEntryServiceFactory {
 
 	public static BlogsEntryService getImpl() {
 		if (_impl == null) {
-			_impl = (BlogsEntryService)com.liferay.portal.kernel.bean.BeanLocatorUtil.locate(_IMPL);
+			_impl = (BlogsEntryService)com.liferay.portal.kernel.bean.PortalBeanLocatorUtil.locate(_IMPL);
 		}
 
 		return _impl;
@@ -65,7 +65,7 @@ public class BlogsEntryServiceFactory {
 
 	public static BlogsEntryService getTxImpl() {
 		if (_txImpl == null) {
-			_txImpl = (BlogsEntryService)com.liferay.portal.kernel.bean.BeanLocatorUtil.locate(_TX_IMPL);
+			_txImpl = (BlogsEntryService)com.liferay.portal.kernel.bean.PortalBeanLocatorUtil.locate(_TX_IMPL);
 		}
 
 		return _txImpl;
@@ -77,7 +77,7 @@ public class BlogsEntryServiceFactory {
 
 	private static BlogsEntryServiceFactory _getFactory() {
 		if (_factory == null) {
-			_factory = (BlogsEntryServiceFactory)com.liferay.portal.kernel.bean.BeanLocatorUtil.locate(_FACTORY);
+			_factory = (BlogsEntryServiceFactory)com.liferay.portal.kernel.bean.PortalBeanLocatorUtil.locate(_FACTORY);
 		}
 
 		return _factory;

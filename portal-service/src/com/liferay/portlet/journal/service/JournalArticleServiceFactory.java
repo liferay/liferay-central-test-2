@@ -57,7 +57,7 @@ public class JournalArticleServiceFactory {
 
 	public static JournalArticleService getImpl() {
 		if (_impl == null) {
-			_impl = (JournalArticleService)com.liferay.portal.kernel.bean.BeanLocatorUtil.locate(_IMPL);
+			_impl = (JournalArticleService)com.liferay.portal.kernel.bean.PortalBeanLocatorUtil.locate(_IMPL);
 		}
 
 		return _impl;
@@ -65,7 +65,7 @@ public class JournalArticleServiceFactory {
 
 	public static JournalArticleService getTxImpl() {
 		if (_txImpl == null) {
-			_txImpl = (JournalArticleService)com.liferay.portal.kernel.bean.BeanLocatorUtil.locate(_TX_IMPL);
+			_txImpl = (JournalArticleService)com.liferay.portal.kernel.bean.PortalBeanLocatorUtil.locate(_TX_IMPL);
 		}
 
 		return _txImpl;
@@ -77,7 +77,7 @@ public class JournalArticleServiceFactory {
 
 	private static JournalArticleServiceFactory _getFactory() {
 		if (_factory == null) {
-			_factory = (JournalArticleServiceFactory)com.liferay.portal.kernel.bean.BeanLocatorUtil.locate(_FACTORY);
+			_factory = (JournalArticleServiceFactory)com.liferay.portal.kernel.bean.PortalBeanLocatorUtil.locate(_FACTORY);
 		}
 
 		return _factory;

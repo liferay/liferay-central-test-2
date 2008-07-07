@@ -20,19 +20,20 @@
  * SOFTWARE.
  */
 
-package com.liferay.portal.kernel.bean;
+package com.liferay.util.bean;
 
+import com.liferay.portal.kernel.bean.BeanLocator;
+import com.liferay.portal.kernel.bean.BeanLocatorException;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
-import com.liferay.portal.kernel.util.PortalClassLoaderUtil;
 
 /**
- * <a href="BeanLocatorUtil.java.html"><b><i>View Source</i></b></a>
+ * <a href="PortletBeanLocatorUtil.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *
  */
-public class BeanLocatorUtil {
+public class PortletBeanLocatorUtil {
 
 	public static BeanLocator getBeanLocator() {
 		return _beanLocator;
@@ -45,19 +46,7 @@ public class BeanLocatorUtil {
 			throw new BeanLocatorException("BeanLocator has not been set");
 		}
 		else {
-			ClassLoader contextClassLoader =
-				Thread.currentThread().getContextClassLoader();
-
-			try {
-				Thread.currentThread().setContextClassLoader(
-					PortalClassLoaderUtil.getClassLoader());
-
-				return _beanLocator.locate(name);
-			}
-			finally {
-				Thread.currentThread().setContextClassLoader(
-					contextClassLoader);
-			}
+			return _beanLocator.locate(name);
 		}
 	}
 
@@ -69,7 +58,8 @@ public class BeanLocatorUtil {
 		_beanLocator = beanLocator;
 	}
 
-	private static Log _log = LogFactoryUtil.getLog(BeanLocatorUtil.class);
+	private static Log _log =
+		LogFactoryUtil.getLog(PortletBeanLocatorUtil.class);
 
 	private static BeanLocator _beanLocator;
 

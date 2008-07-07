@@ -57,7 +57,7 @@ public class SubscriptionLocalServiceFactory {
 
 	public static SubscriptionLocalService getImpl() {
 		if (_impl == null) {
-			_impl = (SubscriptionLocalService)com.liferay.portal.kernel.bean.BeanLocatorUtil.locate(_IMPL);
+			_impl = (SubscriptionLocalService)com.liferay.portal.kernel.bean.PortalBeanLocatorUtil.locate(_IMPL);
 		}
 
 		return _impl;
@@ -65,7 +65,7 @@ public class SubscriptionLocalServiceFactory {
 
 	public static SubscriptionLocalService getTxImpl() {
 		if (_txImpl == null) {
-			_txImpl = (SubscriptionLocalService)com.liferay.portal.kernel.bean.BeanLocatorUtil.locate(_TX_IMPL);
+			_txImpl = (SubscriptionLocalService)com.liferay.portal.kernel.bean.PortalBeanLocatorUtil.locate(_TX_IMPL);
 		}
 
 		return _txImpl;
@@ -77,7 +77,7 @@ public class SubscriptionLocalServiceFactory {
 
 	private static SubscriptionLocalServiceFactory _getFactory() {
 		if (_factory == null) {
-			_factory = (SubscriptionLocalServiceFactory)com.liferay.portal.kernel.bean.BeanLocatorUtil.locate(_FACTORY);
+			_factory = (SubscriptionLocalServiceFactory)com.liferay.portal.kernel.bean.PortalBeanLocatorUtil.locate(_FACTORY);
 		}
 
 		return _factory;

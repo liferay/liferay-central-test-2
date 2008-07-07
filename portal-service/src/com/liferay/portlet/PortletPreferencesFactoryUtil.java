@@ -24,7 +24,7 @@ package com.liferay.portlet;
 
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
-import com.liferay.portal.kernel.bean.BeanLocatorUtil;
+import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
 import com.liferay.portal.model.Layout;
 import com.liferay.portal.model.Portlet;
 import com.liferay.portal.model.PortletPreferencesIds;
@@ -180,7 +180,8 @@ public class PortletPreferencesFactoryUtil {
 	private static PortletPreferencesFactoryUtil _getUtil() {
 		if (_util == null) {
 			_util =
-				(PortletPreferencesFactoryUtil)BeanLocatorUtil.locate(_UTIL);
+				(PortletPreferencesFactoryUtil)PortalBeanLocatorUtil.locate(
+					_UTIL);
 		}
 
 		return _util;

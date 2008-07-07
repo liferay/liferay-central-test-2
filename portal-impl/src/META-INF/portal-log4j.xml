@@ -128,7 +128,7 @@
 		<priority value="ERROR" />
 	</category>
 
-	<category name="com.liferay.portal.kernel.bean.BeanLocatorUtil">
+	<category name="com.liferay.portal.kernel.bean.PortalBeanLocatorUtil">
 		<priority value="ERROR" />
 	</category>
 

@@ -453,7 +453,7 @@ public class TasksReviewUtil {
 
 	private static TasksReviewUtil _getUtil() {
 		if (_util == null) {
-			_util = (TasksReviewUtil)com.liferay.portal.kernel.bean.BeanLocatorUtil.locate(_UTIL);
+			_util = (TasksReviewUtil)com.liferay.portal.kernel.bean.PortalBeanLocatorUtil.locate(_UTIL);
 		}
 
 		return _util;

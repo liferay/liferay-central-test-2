@@ -306,7 +306,7 @@ public class MembershipRequestUtil {
 
 	private static MembershipRequestUtil _getUtil() {
 		if (_util == null) {
-			_util = (MembershipRequestUtil)com.liferay.portal.kernel.bean.BeanLocatorUtil.locate(_UTIL);
+			_util = (MembershipRequestUtil)com.liferay.portal.kernel.bean.PortalBeanLocatorUtil.locate(_UTIL);
 		}
 
 		return _util;

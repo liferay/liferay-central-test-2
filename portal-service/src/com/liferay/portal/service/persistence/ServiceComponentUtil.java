@@ -231,7 +231,7 @@ public class ServiceComponentUtil {
 
 	private static ServiceComponentUtil _getUtil() {
 		if (_util == null) {
-			_util = (ServiceComponentUtil)com.liferay.portal.kernel.bean.BeanLocatorUtil.locate(_UTIL);
+			_util = (ServiceComponentUtil)com.liferay.portal.kernel.bean.PortalBeanLocatorUtil.locate(_UTIL);
 		}
 
 		return _util;

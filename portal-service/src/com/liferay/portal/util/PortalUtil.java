@@ -24,7 +24,7 @@ package com.liferay.portal.util;
 
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
-import com.liferay.portal.kernel.bean.BeanLocatorUtil;
+import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
 import com.liferay.portal.kernel.upload.UploadPortletRequest;
 import com.liferay.portal.kernel.upload.UploadServletRequest;
 import com.liferay.portal.model.Company;
@@ -843,7 +843,7 @@ public class PortalUtil {
 
 	private static PortalUtil _getUtil() {
 		if (_util == null) {
-			_util = (PortalUtil)BeanLocatorUtil.locate(_UTIL);
+			_util = (PortalUtil)PortalBeanLocatorUtil.locate(_UTIL);
 		}
 
 		return _util;

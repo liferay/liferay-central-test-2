@@ -65,7 +65,7 @@ public class BlogsStatsUserFinderUtil {
 
 	private static BlogsStatsUserFinderUtil _getUtil() {
 		if (_util == null) {
-			_util = (BlogsStatsUserFinderUtil)com.liferay.portal.kernel.bean.BeanLocatorUtil.locate(_UTIL);
+			_util = (BlogsStatsUserFinderUtil)com.liferay.portal.kernel.bean.PortalBeanLocatorUtil.locate(_UTIL);
 		}
 
 		return _util;

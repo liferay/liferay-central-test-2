@@ -461,7 +461,7 @@ public class DLFolderUtil {
 
 	private static DLFolderUtil _getUtil() {
 		if (_util == null) {
-			_util = (DLFolderUtil)com.liferay.portal.kernel.bean.BeanLocatorUtil.locate(_UTIL);
+			_util = (DLFolderUtil)com.liferay.portal.kernel.bean.PortalBeanLocatorUtil.locate(_UTIL);
 		}
 
 		return _util;

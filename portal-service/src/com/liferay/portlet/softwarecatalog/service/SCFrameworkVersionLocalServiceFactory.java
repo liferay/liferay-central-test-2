@@ -57,7 +57,7 @@ public class SCFrameworkVersionLocalServiceFactory {
 
 	public static SCFrameworkVersionLocalService getImpl() {
 		if (_impl == null) {
-			_impl = (SCFrameworkVersionLocalService)com.liferay.portal.kernel.bean.BeanLocatorUtil.locate(_IMPL);
+			_impl = (SCFrameworkVersionLocalService)com.liferay.portal.kernel.bean.PortalBeanLocatorUtil.locate(_IMPL);
 		}
 
 		return _impl;
@@ -65,7 +65,7 @@ public class SCFrameworkVersionLocalServiceFactory {
 
 	public static SCFrameworkVersionLocalService getTxImpl() {
 		if (_txImpl == null) {
-			_txImpl = (SCFrameworkVersionLocalService)com.liferay.portal.kernel.bean.BeanLocatorUtil.locate(_TX_IMPL);
+			_txImpl = (SCFrameworkVersionLocalService)com.liferay.portal.kernel.bean.PortalBeanLocatorUtil.locate(_TX_IMPL);
 		}
 
 		return _txImpl;
@@ -77,7 +77,7 @@ public class SCFrameworkVersionLocalServiceFactory {
 
 	private static SCFrameworkVersionLocalServiceFactory _getFactory() {
 		if (_factory == null) {
-			_factory = (SCFrameworkVersionLocalServiceFactory)com.liferay.portal.kernel.bean.BeanLocatorUtil.locate(_FACTORY);
+			_factory = (SCFrameworkVersionLocalServiceFactory)com.liferay.portal.kernel.bean.PortalBeanLocatorUtil.locate(_FACTORY);
 		}
 
 		return _factory;

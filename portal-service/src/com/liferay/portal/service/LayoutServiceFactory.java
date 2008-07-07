@@ -57,7 +57,7 @@ public class LayoutServiceFactory {
 
 	public static LayoutService getImpl() {
 		if (_impl == null) {
-			_impl = (LayoutService)com.liferay.portal.kernel.bean.BeanLocatorUtil.locate(_IMPL);
+			_impl = (LayoutService)com.liferay.portal.kernel.bean.PortalBeanLocatorUtil.locate(_IMPL);
 		}
 
 		return _impl;
@@ -65,7 +65,7 @@ public class LayoutServiceFactory {
 
 	public static LayoutService getTxImpl() {
 		if (_txImpl == null) {
-			_txImpl = (LayoutService)com.liferay.portal.kernel.bean.BeanLocatorUtil.locate(_TX_IMPL);
+			_txImpl = (LayoutService)com.liferay.portal.kernel.bean.PortalBeanLocatorUtil.locate(_TX_IMPL);
 		}
 
 		return _txImpl;
@@ -77,7 +77,7 @@ public class LayoutServiceFactory {
 
 	private static LayoutServiceFactory _getFactory() {
 		if (_factory == null) {
-			_factory = (LayoutServiceFactory)com.liferay.portal.kernel.bean.BeanLocatorUtil.locate(_FACTORY);
+			_factory = (LayoutServiceFactory)com.liferay.portal.kernel.bean.PortalBeanLocatorUtil.locate(_FACTORY);
 		}
 
 		return _factory;

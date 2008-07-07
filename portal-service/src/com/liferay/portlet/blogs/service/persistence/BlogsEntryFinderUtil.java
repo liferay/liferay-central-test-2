@@ -69,7 +69,7 @@ public class BlogsEntryFinderUtil {
 
 	private static BlogsEntryFinderUtil _getUtil() {
 		if (_util == null) {
-			_util = (BlogsEntryFinderUtil)com.liferay.portal.kernel.bean.BeanLocatorUtil.locate(_UTIL);
+			_util = (BlogsEntryFinderUtil)com.liferay.portal.kernel.bean.PortalBeanLocatorUtil.locate(_UTIL);
 		}
 
 		return _util;

@@ -57,7 +57,7 @@ public class TasksProposalLocalServiceFactory {
 
 	public static TasksProposalLocalService getImpl() {
 		if (_impl == null) {
-			_impl = (TasksProposalLocalService)com.liferay.portal.kernel.bean.BeanLocatorUtil.locate(_IMPL);
+			_impl = (TasksProposalLocalService)com.liferay.portal.kernel.bean.PortalBeanLocatorUtil.locate(_IMPL);
 		}
 
 		return _impl;
@@ -65,7 +65,7 @@ public class TasksProposalLocalServiceFactory {
 
 	public static TasksProposalLocalService getTxImpl() {
 		if (_txImpl == null) {
-			_txImpl = (TasksProposalLocalService)com.liferay.portal.kernel.bean.BeanLocatorUtil.locate(_TX_IMPL);
+			_txImpl = (TasksProposalLocalService)com.liferay.portal.kernel.bean.PortalBeanLocatorUtil.locate(_TX_IMPL);
 		}
 
 		return _txImpl;
@@ -77,7 +77,7 @@ public class TasksProposalLocalServiceFactory {
 
 	private static TasksProposalLocalServiceFactory _getFactory() {
 		if (_factory == null) {
-			_factory = (TasksProposalLocalServiceFactory)com.liferay.portal.kernel.bean.BeanLocatorUtil.locate(_FACTORY);
+			_factory = (TasksProposalLocalServiceFactory)com.liferay.portal.kernel.bean.PortalBeanLocatorUtil.locate(_FACTORY);
 		}
 
 		return _factory;

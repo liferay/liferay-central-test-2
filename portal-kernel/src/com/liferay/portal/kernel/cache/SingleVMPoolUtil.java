@@ -22,7 +22,7 @@
 
 package com.liferay.portal.kernel.cache;
 
-import com.liferay.portal.kernel.bean.BeanLocatorUtil;
+import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
 
 import java.io.Serializable;
 
@@ -91,7 +91,7 @@ public class SingleVMPoolUtil {
 
 	private static SingleVMPoolUtil _getUtil() {
 		if (_util == null) {
-			_util = (SingleVMPoolUtil)BeanLocatorUtil.locate(_UTIL);
+			_util = (SingleVMPoolUtil)PortalBeanLocatorUtil.locate(_UTIL);
 		}
 
 		return _util;

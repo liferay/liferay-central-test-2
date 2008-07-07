@@ -202,7 +202,7 @@ public class PasswordPolicyRelUtil {
 
 	private static PasswordPolicyRelUtil _getUtil() {
 		if (_util == null) {
-			_util = (PasswordPolicyRelUtil)com.liferay.portal.kernel.bean.BeanLocatorUtil.locate(_UTIL);
+			_util = (PasswordPolicyRelUtil)com.liferay.portal.kernel.bean.PortalBeanLocatorUtil.locate(_UTIL);
 		}
 
 		return _util;

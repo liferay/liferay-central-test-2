@@ -228,7 +228,7 @@ public class RatingsEntryUtil {
 
 	private static RatingsEntryUtil _getUtil() {
 		if (_util == null) {
-			_util = (RatingsEntryUtil)com.liferay.portal.kernel.bean.BeanLocatorUtil.locate(_UTIL);
+			_util = (RatingsEntryUtil)com.liferay.portal.kernel.bean.PortalBeanLocatorUtil.locate(_UTIL);
 		}
 
 		return _util;

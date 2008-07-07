@@ -201,7 +201,7 @@ public class PasswordTrackerUtil {
 
 	private static PasswordTrackerUtil _getUtil() {
 		if (_util == null) {
-			_util = (PasswordTrackerUtil)com.liferay.portal.kernel.bean.BeanLocatorUtil.locate(_UTIL);
+			_util = (PasswordTrackerUtil)com.liferay.portal.kernel.bean.PortalBeanLocatorUtil.locate(_UTIL);
 		}
 
 		return _util;

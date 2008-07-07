@@ -229,9 +229,6 @@ public class PropsValues {
 		GetterUtil.getBoolean(
 			PropsUtil.get(PropsKeys.COMPANY_SECURITY_STRANGERS_WITH_MX));
 
-	public static final String[] CUSTOM_SQL_CONFIGS =
-		PropsUtil.getArray(PropsKeys.CUSTOM_SQL_CONFIGS);
-
 	public static final String CUSTOM_SQL_FUNCTION_ISNOTNULL =
 		PropsUtil.get(PropsKeys.CUSTOM_SQL_FUNCTION_ISNOTNULL);
 

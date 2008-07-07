@@ -521,7 +521,7 @@ public class LayoutUtil {
 
 	private static LayoutUtil _getUtil() {
 		if (_util == null) {
-			_util = (LayoutUtil)com.liferay.portal.kernel.bean.BeanLocatorUtil.locate(_UTIL);
+			_util = (LayoutUtil)com.liferay.portal.kernel.bean.PortalBeanLocatorUtil.locate(_UTIL);
 		}
 
 		return _util;

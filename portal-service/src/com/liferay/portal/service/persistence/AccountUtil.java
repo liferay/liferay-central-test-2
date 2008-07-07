@@ -148,7 +148,7 @@ public class AccountUtil {
 
 	private static AccountUtil _getUtil() {
 		if (_util == null) {
-			_util = (AccountUtil)com.liferay.portal.kernel.bean.BeanLocatorUtil.locate(_UTIL);
+			_util = (AccountUtil)com.liferay.portal.kernel.bean.PortalBeanLocatorUtil.locate(_UTIL);
 		}
 
 		return _util;

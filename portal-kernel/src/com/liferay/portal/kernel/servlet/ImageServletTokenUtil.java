@@ -22,7 +22,7 @@
 
 package com.liferay.portal.kernel.servlet;
 
-import com.liferay.portal.kernel.bean.BeanLocatorUtil;
+import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
 
 /**
  * <a href="ImageServletTokenUtil.java.html"><b><i>View Source</i></b></a>
@@ -50,7 +50,7 @@ public class ImageServletTokenUtil {
 
 	private static ImageServletTokenUtil _getUtil() {
 		if (_util == null) {
-			_util = (ImageServletTokenUtil)BeanLocatorUtil.locate(_UTIL);
+			_util = (ImageServletTokenUtil)PortalBeanLocatorUtil.locate(_UTIL);
 		}
 
 		return _util;

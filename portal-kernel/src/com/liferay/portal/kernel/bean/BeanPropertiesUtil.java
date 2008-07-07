@@ -100,7 +100,7 @@ public class BeanPropertiesUtil {
 
 	private static BeanPropertiesUtil _getUtil() {
 		if (_util == null) {
-			_util = (BeanPropertiesUtil)BeanLocatorUtil.locate(_UTIL);
+			_util = (BeanPropertiesUtil)PortalBeanLocatorUtil.locate(_UTIL);
 		}
 
 		return _util;

@@ -22,52 +22,41 @@
 
 package com.liferay.portal.spring.context;
 
-import com.liferay.portal.util.PropsKeys;
-import com.liferay.portal.util.PropsUtil;
+import com.liferay.portal.spring.util.SpringUtil;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
-import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.xml.XmlBeanDefinitionReader;
-import org.springframework.core.io.DefaultResourceLoader;
+import org.springframework.context.ApplicationContext;
 import org.springframework.web.context.support.XmlWebApplicationContext;
 
 /**
- * <a href="LazyClassPathApplicationContext.java.html"><b><i>View Source</i></b>
- * </a>
- *
- * <p>
- * This web application context will first load bean definitions in the
- * contextConfigLocation parameter in web.xml. Then, the context will load bean
- * definitions specified by the property "spring.configs" in portal.properties.
- * </p>
+ * <a href="TunnelApplicationContext.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
- * @author Alexander Chow
  *
  */
-public class LazyClassPathApplicationContext extends XmlWebApplicationContext {
+public class TunnelApplicationContext extends XmlWebApplicationContext {
 
-	protected void loadBeanDefinitions(XmlBeanDefinitionReader reader)
-		throws BeansException {
-
-		try {
-			super.loadBeanDefinitions(reader);
-		}
-		catch (Exception e) {
-			if (_log.isWarnEnabled()) {
-				_log.warn(e);
-			}
+	public void setParent(ApplicationContext parent) {
+		if (parent == null) {
+			parent = SpringUtil.getContext();
 		}
 
-		reader.setResourceLoader(new DefaultResourceLoader());
+		super.setParent(parent);
+	}
 
-		String[] configLocations = PropsUtil.getArray(PropsKeys.SPRING_CONFIGS);
+	protected void loadBeanDefinitions(XmlBeanDefinitionReader reader) {
+		String[] configLocations = getConfigLocations();
 
-		for (int i = 0; i < configLocations.length; i++) {
+		if (configLocations == null) {
+			return;
+		}
+
+		for (String configLocation : configLocations) {
 			try {
-				reader.loadBeanDefinitions(configLocations[i]);
+				reader.loadBeanDefinitions(configLocation);
 			}
 			catch (Exception e) {
 				if (_log.isWarnEnabled()) {
@@ -77,7 +66,6 @@ public class LazyClassPathApplicationContext extends XmlWebApplicationContext {
 		}
 	}
 
-	private static Log _log =
-		LogFactory.getLog(LazyClassPathApplicationContext.class);
+	private static Log _log = LogFactory.getLog(TunnelApplicationContext.class);
 
 }

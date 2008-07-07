@@ -51,7 +51,7 @@ public class PasswordPolicyFinderUtil {
 
 	private static PasswordPolicyFinderUtil _getUtil() {
 		if (_util == null) {
-			_util = (PasswordPolicyFinderUtil)com.liferay.portal.kernel.bean.BeanLocatorUtil.locate(_UTIL);
+			_util = (PasswordPolicyFinderUtil)com.liferay.portal.kernel.bean.PortalBeanLocatorUtil.locate(_UTIL);
 		}
 
 		return _util;

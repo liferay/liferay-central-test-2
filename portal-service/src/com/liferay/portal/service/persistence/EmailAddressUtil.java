@@ -435,7 +435,7 @@ public class EmailAddressUtil {
 
 	private static EmailAddressUtil _getUtil() {
 		if (_util == null) {
-			_util = (EmailAddressUtil)com.liferay.portal.kernel.bean.BeanLocatorUtil.locate(_UTIL);
+			_util = (EmailAddressUtil)com.liferay.portal.kernel.bean.PortalBeanLocatorUtil.locate(_UTIL);
 		}
 
 		return _util;

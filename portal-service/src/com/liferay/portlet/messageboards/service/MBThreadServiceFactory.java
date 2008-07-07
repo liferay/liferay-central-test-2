@@ -57,7 +57,7 @@ public class MBThreadServiceFactory {
 
 	public static MBThreadService getImpl() {
 		if (_impl == null) {
-			_impl = (MBThreadService)com.liferay.portal.kernel.bean.BeanLocatorUtil.locate(_IMPL);
+			_impl = (MBThreadService)com.liferay.portal.kernel.bean.PortalBeanLocatorUtil.locate(_IMPL);
 		}
 
 		return _impl;
@@ -65,7 +65,7 @@ public class MBThreadServiceFactory {
 
 	public static MBThreadService getTxImpl() {
 		if (_txImpl == null) {
-			_txImpl = (MBThreadService)com.liferay.portal.kernel.bean.BeanLocatorUtil.locate(_TX_IMPL);
+			_txImpl = (MBThreadService)com.liferay.portal.kernel.bean.PortalBeanLocatorUtil.locate(_TX_IMPL);
 		}
 
 		return _txImpl;
@@ -77,7 +77,7 @@ public class MBThreadServiceFactory {
 
 	private static MBThreadServiceFactory _getFactory() {
 		if (_factory == null) {
-			_factory = (MBThreadServiceFactory)com.liferay.portal.kernel.bean.BeanLocatorUtil.locate(_FACTORY);
+			_factory = (MBThreadServiceFactory)com.liferay.portal.kernel.bean.PortalBeanLocatorUtil.locate(_FACTORY);
 		}
 
 		return _factory;

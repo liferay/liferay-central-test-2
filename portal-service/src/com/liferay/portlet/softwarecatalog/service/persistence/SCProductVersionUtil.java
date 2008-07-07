@@ -324,7 +324,7 @@ public class SCProductVersionUtil {
 
 	private static SCProductVersionUtil _getUtil() {
 		if (_util == null) {
-			_util = (SCProductVersionUtil)com.liferay.portal.kernel.bean.BeanLocatorUtil.locate(_UTIL);
+			_util = (SCProductVersionUtil)com.liferay.portal.kernel.bean.PortalBeanLocatorUtil.locate(_UTIL);
 		}
 
 		return _util;

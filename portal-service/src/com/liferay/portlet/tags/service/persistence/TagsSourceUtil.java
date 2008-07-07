@@ -150,7 +150,7 @@ public class TagsSourceUtil {
 
 	private static TagsSourceUtil _getUtil() {
 		if (_util == null) {
-			_util = (TagsSourceUtil)com.liferay.portal.kernel.bean.BeanLocatorUtil.locate(_UTIL);
+			_util = (TagsSourceUtil)com.liferay.portal.kernel.bean.PortalBeanLocatorUtil.locate(_UTIL);
 		}
 
 		return _util;

@@ -22,7 +22,7 @@
 
 package com.liferay.portal.kernel.util;
 
-import com.liferay.portal.kernel.bean.BeanLocatorUtil;
+import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
 
 /**
  * <a href="DigesterUtil.java.html"><b><i>View Source</i></b></a>
@@ -50,7 +50,7 @@ public class DigesterUtil {
 
 	private static DigesterUtil _getUtil() {
 		if (_util == null) {
-			_util = (DigesterUtil)BeanLocatorUtil.locate(_UTIL);
+			_util = (DigesterUtil)PortalBeanLocatorUtil.locate(_UTIL);
 		}
 
 		return _util;

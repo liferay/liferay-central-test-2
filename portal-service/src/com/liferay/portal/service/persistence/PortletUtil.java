@@ -220,7 +220,7 @@ public class PortletUtil {
 
 	private static PortletUtil _getUtil() {
 		if (_util == null) {
-			_util = (PortletUtil)com.liferay.portal.kernel.bean.BeanLocatorUtil.locate(_UTIL);
+			_util = (PortletUtil)com.liferay.portal.kernel.bean.PortalBeanLocatorUtil.locate(_UTIL);
 		}
 
 		return _util;

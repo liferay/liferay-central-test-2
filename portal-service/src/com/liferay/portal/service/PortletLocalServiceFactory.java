@@ -57,7 +57,7 @@ public class PortletLocalServiceFactory {
 
 	public static PortletLocalService getImpl() {
 		if (_impl == null) {
-			_impl = (PortletLocalService)com.liferay.portal.kernel.bean.BeanLocatorUtil.locate(_IMPL);
+			_impl = (PortletLocalService)com.liferay.portal.kernel.bean.PortalBeanLocatorUtil.locate(_IMPL);
 		}
 
 		return _impl;
@@ -65,7 +65,7 @@ public class PortletLocalServiceFactory {
 
 	public static PortletLocalService getTxImpl() {
 		if (_txImpl == null) {
-			_txImpl = (PortletLocalService)com.liferay.portal.kernel.bean.BeanLocatorUtil.locate(_TX_IMPL);
+			_txImpl = (PortletLocalService)com.liferay.portal.kernel.bean.PortalBeanLocatorUtil.locate(_TX_IMPL);
 		}
 
 		return _txImpl;
@@ -77,7 +77,7 @@ public class PortletLocalServiceFactory {
 
 	private static PortletLocalServiceFactory _getFactory() {
 		if (_factory == null) {
-			_factory = (PortletLocalServiceFactory)com.liferay.portal.kernel.bean.BeanLocatorUtil.locate(_FACTORY);
+			_factory = (PortletLocalServiceFactory)com.liferay.portal.kernel.bean.PortalBeanLocatorUtil.locate(_FACTORY);
 		}
 
 		return _factory;

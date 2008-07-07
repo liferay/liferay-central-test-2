@@ -57,7 +57,7 @@ public class SocialRequestInterpreterLocalServiceFactory {
 
 	public static SocialRequestInterpreterLocalService getImpl() {
 		if (_impl == null) {
-			_impl = (SocialRequestInterpreterLocalService)com.liferay.portal.kernel.bean.BeanLocatorUtil.locate(_IMPL);
+			_impl = (SocialRequestInterpreterLocalService)com.liferay.portal.kernel.bean.PortalBeanLocatorUtil.locate(_IMPL);
 		}
 
 		return _impl;
@@ -65,7 +65,7 @@ public class SocialRequestInterpreterLocalServiceFactory {
 
 	public static SocialRequestInterpreterLocalService getTxImpl() {
 		if (_txImpl == null) {
-			_txImpl = (SocialRequestInterpreterLocalService)com.liferay.portal.kernel.bean.BeanLocatorUtil.locate(_TX_IMPL);
+			_txImpl = (SocialRequestInterpreterLocalService)com.liferay.portal.kernel.bean.PortalBeanLocatorUtil.locate(_TX_IMPL);
 		}
 
 		return _txImpl;
@@ -77,7 +77,7 @@ public class SocialRequestInterpreterLocalServiceFactory {
 
 	private static SocialRequestInterpreterLocalServiceFactory _getFactory() {
 		if (_factory == null) {
-			_factory = (SocialRequestInterpreterLocalServiceFactory)com.liferay.portal.kernel.bean.BeanLocatorUtil.locate(_FACTORY);
+			_factory = (SocialRequestInterpreterLocalServiceFactory)com.liferay.portal.kernel.bean.PortalBeanLocatorUtil.locate(_FACTORY);
 		}
 
 		return _factory;

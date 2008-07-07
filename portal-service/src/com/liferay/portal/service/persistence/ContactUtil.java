@@ -199,7 +199,7 @@ public class ContactUtil {
 
 	private static ContactUtil _getUtil() {
 		if (_util == null) {
-			_util = (ContactUtil)com.liferay.portal.kernel.bean.BeanLocatorUtil.locate(_UTIL);
+			_util = (ContactUtil)com.liferay.portal.kernel.bean.PortalBeanLocatorUtil.locate(_UTIL);
 		}
 
 		return _util;

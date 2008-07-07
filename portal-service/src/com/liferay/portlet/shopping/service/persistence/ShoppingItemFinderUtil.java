@@ -78,7 +78,7 @@ public class ShoppingItemFinderUtil {
 
 	private static ShoppingItemFinderUtil _getUtil() {
 		if (_util == null) {
-			_util = (ShoppingItemFinderUtil)com.liferay.portal.kernel.bean.BeanLocatorUtil.locate(_UTIL);
+			_util = (ShoppingItemFinderUtil)com.liferay.portal.kernel.bean.PortalBeanLocatorUtil.locate(_UTIL);
 		}
 
 		return _util;

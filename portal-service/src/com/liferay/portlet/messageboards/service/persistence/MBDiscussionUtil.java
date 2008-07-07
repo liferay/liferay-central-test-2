@@ -225,7 +225,7 @@ public class MBDiscussionUtil {
 
 	private static MBDiscussionUtil _getUtil() {
 		if (_util == null) {
-			_util = (MBDiscussionUtil)com.liferay.portal.kernel.bean.BeanLocatorUtil.locate(_UTIL);
+			_util = (MBDiscussionUtil)com.liferay.portal.kernel.bean.PortalBeanLocatorUtil.locate(_UTIL);
 		}
 
 		return _util;

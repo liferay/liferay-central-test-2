@@ -201,7 +201,7 @@ public class MBThreadUtil {
 
 	private static MBThreadUtil _getUtil() {
 		if (_util == null) {
-			_util = (MBThreadUtil)com.liferay.portal.kernel.bean.BeanLocatorUtil.locate(_UTIL);
+			_util = (MBThreadUtil)com.liferay.portal.kernel.bean.PortalBeanLocatorUtil.locate(_UTIL);
 		}
 
 		return _util;

@@ -330,7 +330,7 @@ public class TagsPropertyUtil {
 
 	private static TagsPropertyUtil _getUtil() {
 		if (_util == null) {
-			_util = (TagsPropertyUtil)com.liferay.portal.kernel.bean.BeanLocatorUtil.locate(_UTIL);
+			_util = (TagsPropertyUtil)com.liferay.portal.kernel.bean.PortalBeanLocatorUtil.locate(_UTIL);
 		}
 
 		return _util;

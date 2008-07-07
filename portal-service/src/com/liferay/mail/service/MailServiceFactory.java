@@ -22,7 +22,7 @@
 
 package com.liferay.mail.service;
 
-import com.liferay.portal.kernel.bean.BeanLocatorUtil;
+import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
 
 /**
  * <a href="MailServiceFactory.java.html"><b><i>View Source</i></b></a>
@@ -38,7 +38,7 @@ public class MailServiceFactory {
 
 	public static MailService getImpl() {
 		if (_impl == null) {
-			_impl = (MailService)BeanLocatorUtil.locate(_IMPL);
+			_impl = (MailService)PortalBeanLocatorUtil.locate(_IMPL);
 		}
 
 		return _impl;
@@ -46,7 +46,7 @@ public class MailServiceFactory {
 
 	public static MailService getTxImpl() {
 		if (_txImpl == null) {
-			_txImpl = (MailService)BeanLocatorUtil.locate(_TX_IMPL);
+			_txImpl = (MailService)PortalBeanLocatorUtil.locate(_TX_IMPL);
 		}
 
 		return _txImpl;
@@ -58,7 +58,8 @@ public class MailServiceFactory {
 
 	private static MailServiceFactory _getFactory() {
 		if (_factory == null) {
-			_factory = (MailServiceFactory)BeanLocatorUtil.locate(_FACTORY);
+			_factory = (MailServiceFactory)PortalBeanLocatorUtil.locate(
+				_FACTORY);
 		}
 
 		return _factory;

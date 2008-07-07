@@ -196,7 +196,7 @@ public class ImageUtil {
 
 	private static ImageUtil _getUtil() {
 		if (_util == null) {
-			_util = (ImageUtil)com.liferay.portal.kernel.bean.BeanLocatorUtil.locate(_UTIL);
+			_util = (ImageUtil)com.liferay.portal.kernel.bean.PortalBeanLocatorUtil.locate(_UTIL);
 		}
 
 		return _util;

@@ -94,7 +94,7 @@ public class PermissionUserFinderUtil {
 
 	private static PermissionUserFinderUtil _getUtil() {
 		if (_util == null) {
-			_util = (PermissionUserFinderUtil)com.liferay.portal.kernel.bean.BeanLocatorUtil.locate(_UTIL);
+			_util = (PermissionUserFinderUtil)com.liferay.portal.kernel.bean.PortalBeanLocatorUtil.locate(_UTIL);
 		}
 
 		return _util;

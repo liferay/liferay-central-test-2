@@ -22,7 +22,7 @@
 
 package com.liferay.portal.kernel.json;
 
-import com.liferay.portal.kernel.bean.BeanLocatorUtil;
+import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
 
 /**
  * <a href="JSONFactoryUtil.java.html"><b><i>View Source</i></b></a>
@@ -68,7 +68,7 @@ public class JSONFactoryUtil {
 
 	private static JSONFactoryUtil _getUtil() {
 		if (_util == null) {
-			_util = (JSONFactoryUtil)BeanLocatorUtil.locate(_UTIL);
+			_util = (JSONFactoryUtil)PortalBeanLocatorUtil.locate(_UTIL);
 		}
 
 		return _util;

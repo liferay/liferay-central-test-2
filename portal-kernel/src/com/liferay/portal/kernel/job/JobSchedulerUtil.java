@@ -22,7 +22,7 @@
 
 package com.liferay.portal.kernel.job;
 
-import com.liferay.portal.kernel.bean.BeanLocatorUtil;
+import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
 
 /**
  * <a href="JobSchedulerUtil.java.html"><b><i>View Source</i></b></a>
@@ -54,7 +54,7 @@ public class JobSchedulerUtil {
 
 	private static JobSchedulerUtil _getUtil() {
 		if (_util == null) {
-			_util = (JobSchedulerUtil)BeanLocatorUtil.locate(_UTIL);
+			_util = (JobSchedulerUtil)PortalBeanLocatorUtil.locate(_UTIL);
 		}
 
 		return _util;

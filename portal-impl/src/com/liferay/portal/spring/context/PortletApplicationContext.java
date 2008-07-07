@@ -29,13 +29,12 @@ import org.springframework.beans.factory.xml.XmlBeanDefinitionReader;
 import org.springframework.web.context.support.XmlWebApplicationContext;
 
 /**
- * <a href="PortletWebApplicationContext.java.html"><b><i>View Source</i></b>
- * </a>
+ * <a href="PortletApplicationContext.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *
  */
-public class PortletWebApplicationContext extends XmlWebApplicationContext {
+public class PortletApplicationContext extends XmlWebApplicationContext {
 
 	protected void loadBeanDefinitions(XmlBeanDefinitionReader reader) {
 		String[] configLocations = getConfigLocations();
@@ -57,6 +56,6 @@ public class PortletWebApplicationContext extends XmlWebApplicationContext {
 	}
 
 	private static Log _log =
-		LogFactory.getLog(PortletWebApplicationContext.class);
+		LogFactory.getLog(PortletApplicationContext.class);
 
 }

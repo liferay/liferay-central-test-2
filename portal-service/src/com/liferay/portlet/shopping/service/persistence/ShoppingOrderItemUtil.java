@@ -201,7 +201,7 @@ public class ShoppingOrderItemUtil {
 
 	private static ShoppingOrderItemUtil _getUtil() {
 		if (_util == null) {
-			_util = (ShoppingOrderItemUtil)com.liferay.portal.kernel.bean.BeanLocatorUtil.locate(_UTIL);
+			_util = (ShoppingOrderItemUtil)com.liferay.portal.kernel.bean.PortalBeanLocatorUtil.locate(_UTIL);
 		}
 
 		return _util;

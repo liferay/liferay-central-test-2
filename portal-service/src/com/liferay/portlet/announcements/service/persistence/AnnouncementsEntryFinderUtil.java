@@ -104,7 +104,7 @@ public class AnnouncementsEntryFinderUtil {
 
 	private static AnnouncementsEntryFinderUtil _getUtil() {
 		if (_util == null) {
-			_util = (AnnouncementsEntryFinderUtil)com.liferay.portal.kernel.bean.BeanLocatorUtil.locate(_UTIL);
+			_util = (AnnouncementsEntryFinderUtil)com.liferay.portal.kernel.bean.PortalBeanLocatorUtil.locate(_UTIL);
 		}
 
 		return _util;

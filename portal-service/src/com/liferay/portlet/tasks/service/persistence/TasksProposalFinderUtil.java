@@ -50,7 +50,7 @@ public class TasksProposalFinderUtil {
 
 	private static TasksProposalFinderUtil _getUtil() {
 		if (_util == null) {
-			_util = (TasksProposalFinderUtil)com.liferay.portal.kernel.bean.BeanLocatorUtil.locate(_UTIL);
+			_util = (TasksProposalFinderUtil)com.liferay.portal.kernel.bean.PortalBeanLocatorUtil.locate(_UTIL);
 		}
 
 		return _util;

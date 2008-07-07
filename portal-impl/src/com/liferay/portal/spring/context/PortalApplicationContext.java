@@ -22,33 +22,47 @@
 
 package com.liferay.portal.spring.context;
 
-import com.liferay.portal.spring.util.SpringUtil;
+import com.liferay.portal.util.PropsKeys;
+import com.liferay.portal.util.PropsUtil;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
+import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.xml.XmlBeanDefinitionReader;
-import org.springframework.context.ApplicationContext;
+import org.springframework.core.io.DefaultResourceLoader;
 import org.springframework.web.context.support.XmlWebApplicationContext;
 
 /**
- * <a href="PortalWebApplicationContext.java.html"><b><i>View Source</i></b></a>
+ * <a href="PortalApplicationContext.java.html"><b><i>View Source</i></b></a>
+ *
+ * <p>
+ * This web application context will first load bean definitions in the
+ * contextConfigLocation parameter in web.xml. Then, the context will load bean
+ * definitions specified by the property "spring.configs" in portal.properties.
+ * </p>
  *
  * @author Brian Wing Shun Chan
+ * @author Alexander Chow
  *
  */
-public class PortalWebApplicationContext extends XmlWebApplicationContext {
+public class PortalApplicationContext extends XmlWebApplicationContext {
 
-	public void setParent(ApplicationContext parent) {
-		if (parent == null) {
-			parent = SpringUtil.getContext();
+	protected void loadBeanDefinitions(XmlBeanDefinitionReader reader)
+		throws BeansException {
+
+		try {
+			super.loadBeanDefinitions(reader);
+		}
+		catch (Exception e) {
+			if (_log.isWarnEnabled()) {
+				_log.warn(e, e);
+			}
 		}
 
-		super.setParent(parent);
-	}
+		reader.setResourceLoader(new DefaultResourceLoader());
 
-	protected void loadBeanDefinitions(XmlBeanDefinitionReader reader) {
-		String[] configLocations = getConfigLocations();
+		String[] configLocations = PropsUtil.getArray(PropsKeys.SPRING_CONFIGS);
 
 		if (configLocations == null) {
 			return;
@@ -60,13 +74,12 @@ public class PortalWebApplicationContext extends XmlWebApplicationContext {
 			}
 			catch (Exception e) {
 				if (_log.isWarnEnabled()) {
-					_log.warn(e);
+					_log.warn(e, e);
 				}
 			}
 		}
 	}
 
-	private static Log _log =
-		LogFactory.getLog(PortalWebApplicationContext.class);
+	private static Log _log = LogFactory.getLog(PortalApplicationContext.class);
 
 }

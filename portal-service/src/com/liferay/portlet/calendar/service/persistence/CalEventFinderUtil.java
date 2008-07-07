@@ -52,7 +52,7 @@ public class CalEventFinderUtil {
 
 	private static CalEventFinderUtil _getUtil() {
 		if (_util == null) {
-			_util = (CalEventFinderUtil)com.liferay.portal.kernel.bean.BeanLocatorUtil.locate(_UTIL);
+			_util = (CalEventFinderUtil)com.liferay.portal.kernel.bean.PortalBeanLocatorUtil.locate(_UTIL);
 		}
 
 		return _util;
