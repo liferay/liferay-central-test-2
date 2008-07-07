@@ -38,8 +38,11 @@ String columnId = (String)request.getAttribute(WebKeys.RENDER_PORTLET_COLUMN_ID)
 Integer columnPos = (Integer)request.getAttribute(WebKeys.RENDER_PORTLET_COLUMN_POS);
 Integer columnCount = (Integer)request.getAttribute(WebKeys.RENDER_PORTLET_COLUMN_COUNT);
 Boolean renderPortletResource = (Boolean)request.getAttribute(WebKeys.RENDER_PORTLET_RESOURCE);
+Boolean renderPortletDecorate = (Boolean)request.getAttribute(WebKeys.RENDER_PORTLET_DECORATE);
 
 boolean runtimePortlet = (renderPortletResource != null) && renderPortletResource.booleanValue();
+
+boolean decoratePortlet = runtimePortlet && renderPortletDecorate != null ? renderPortletDecorate.booleanValue(): true;
 
 boolean denyAccess = false;
 
@@ -673,7 +676,7 @@ if (portlet.isActive() && access && supportsMimeType) {
 
 <%@ include file="/html/portal/render_portlet-ext.jsp" %>
 
-<c:if test="<%= !themeDisplay.isFacebook() && !themeDisplay.isStateExclusive() && !themeDisplay.isWapTheme() %>">
+<c:if test="<%= !themeDisplay.isFacebook() && !themeDisplay.isStateExclusive() && !themeDisplay.isWapTheme() && decoratePortlet %>">
 
 	<%
 	String freeformStyles = StringPool.BLANK;
@@ -700,6 +703,7 @@ if (portlet.isActive() && access && supportsMimeType) {
 
 	<div id="p_p_id<%= renderResponseImpl.getNamespace() %>" class="portlet-boundary portlet-boundary<%= PortalUtil.getPortletNamespace(portlet.getRootPortletId()) %> <%= (portletDisplay.isStateMin()) ? "portlet-minimized" : "" %> <%= portlet.getCssClassWrapper() %>" <%= freeformStyles %>>
 		<a name="p_<%= portletId %>"></a>
+
 </c:if>
 
 <c:choose>
@@ -829,7 +833,7 @@ else {
 }
 %>
 
-<c:if test="<%= !themeDisplay.isFacebook() && !themeDisplay.isStateExclusive() && !themeDisplay.isWapTheme() %>">
+<c:if test="<%= !themeDisplay.isFacebook() && !themeDisplay.isStateExclusive() && !themeDisplay.isWapTheme() && decoratePortlet %>">
 		<script type="text/javascript">
 			<c:if test="<%= !runtimePortlet %>">
 				Liferay.Portlet.onLoad(
