@@ -29,7 +29,7 @@ import com.liferay.counter.service.CounterServiceFactory;
 
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
-import com.liferay.portal.kernel.dao.search.DynamicQueryInitializer;
+import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 
 import com.liferay.portlet.softwarecatalog.model.SCLicense;
 import com.liferay.portlet.softwarecatalog.service.SCFrameworkVersionLocalService;
@@ -84,16 +84,15 @@ public abstract class SCLicenseLocalServiceBaseImpl
 		scLicensePersistence.remove(scLicense);
 	}
 
-	public List<SCLicense> dynamicQuery(
-		DynamicQueryInitializer queryInitializer) throws SystemException {
-		return scLicensePersistence.findWithDynamicQuery(queryInitializer);
+	public List<SCLicense> dynamicQuery(DynamicQuery dynamicQuery)
+		throws SystemException {
+		return scLicensePersistence.findWithDynamicQuery(dynamicQuery);
 	}
 
-	public List<SCLicense> dynamicQuery(
-		DynamicQueryInitializer queryInitializer, int start, int end)
-		throws SystemException {
-		return scLicensePersistence.findWithDynamicQuery(queryInitializer,
-			start, end);
+	public List<SCLicense> dynamicQuery(DynamicQuery dynamicQuery, int start,
+		int end) throws SystemException {
+		return scLicensePersistence.findWithDynamicQuery(dynamicQuery, start,
+			end);
 	}
 
 	public SCLicense getSCLicense(long licenseId)

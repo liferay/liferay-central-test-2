@@ -20,16 +20,43 @@
  * SOFTWARE.
  */
 
-package com.liferay.portal.kernel.dao.hibernate;
+package com.liferay.portal.dao.orm.hibernate;
+
+import com.liferay.portal.kernel.dao.orm.Type;
 
 /**
- * <a href="Dialect.java.html"><b><i>View Source</i></b></a>
+ * <a href="TypeTranslator.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *
  */
-public interface Dialect {
+public class TypeTranslator {
 
-	public boolean supportsLimit();
+	public static org.hibernate.type.Type translate(Type type) {
+		if (type == Type.BOOLEAN) {
+			return org.hibernate.Hibernate.BOOLEAN;
+		}
+		else if (type == Type.DOUBLE) {
+			return org.hibernate.Hibernate.DOUBLE;
+		}
+		else if (type == Type.FLOAT) {
+			return org.hibernate.Hibernate.FLOAT;
+		}
+		else if (type == Type.INTEGER) {
+			return org.hibernate.Hibernate.INTEGER;
+		}
+		else if (type == Type.LONG) {
+			return org.hibernate.Hibernate.LONG;
+		}
+		else if (type == Type.SHORT) {
+			return org.hibernate.Hibernate.SHORT;
+		}
+		else if (type == Type.STRING) {
+			return org.hibernate.Hibernate.STRING;
+		}
+		else {
+			return null;
+		}
+	}
 
 }

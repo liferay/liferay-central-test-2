@@ -20,12 +20,12 @@
  * SOFTWARE.
  */
 
-package com.liferay.portal.dao.hibernate;
+package com.liferay.portal.dao.orm.hibernate;
 
-import com.liferay.portal.kernel.dao.hibernate.Dialect;
-import com.liferay.portal.kernel.dao.hibernate.HibernateException;
-import com.liferay.portal.kernel.dao.hibernate.Session;
-import com.liferay.portal.kernel.dao.hibernate.SessionFactory;
+import com.liferay.portal.kernel.dao.orm.Dialect;
+import com.liferay.portal.kernel.dao.orm.HibernateException;
+import com.liferay.portal.kernel.dao.orm.Session;
+import com.liferay.portal.kernel.dao.orm.SessionFactory;
 import com.liferay.util.dao.hibernate.LiferayClassicSession;
 
 import org.apache.commons.logging.Log;

@@ -29,7 +29,7 @@ import com.liferay.counter.service.CounterServiceFactory;
 
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
-import com.liferay.portal.kernel.dao.search.DynamicQueryInitializer;
+import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 import com.liferay.portal.service.ResourceLocalService;
 import com.liferay.portal.service.ResourceLocalServiceFactory;
 import com.liferay.portal.service.ResourceService;
@@ -117,16 +117,15 @@ public abstract class JournalFeedLocalServiceBaseImpl
 		journalFeedPersistence.remove(journalFeed);
 	}
 
-	public List<JournalFeed> dynamicQuery(
-		DynamicQueryInitializer queryInitializer) throws SystemException {
-		return journalFeedPersistence.findWithDynamicQuery(queryInitializer);
+	public List<JournalFeed> dynamicQuery(DynamicQuery dynamicQuery)
+		throws SystemException {
+		return journalFeedPersistence.findWithDynamicQuery(dynamicQuery);
 	}
 
-	public List<JournalFeed> dynamicQuery(
-		DynamicQueryInitializer queryInitializer, int start, int end)
-		throws SystemException {
-		return journalFeedPersistence.findWithDynamicQuery(queryInitializer,
-			start, end);
+	public List<JournalFeed> dynamicQuery(DynamicQuery dynamicQuery, int start,
+		int end) throws SystemException {
+		return journalFeedPersistence.findWithDynamicQuery(dynamicQuery, start,
+			end);
 	}
 
 	public JournalFeed getJournalFeed(long id)

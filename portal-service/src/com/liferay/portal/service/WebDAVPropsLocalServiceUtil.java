@@ -76,19 +76,19 @@ public class WebDAVPropsLocalServiceUtil {
 	}
 
 	public static java.util.List<com.liferay.portal.model.WebDAVProps> dynamicQuery(
-		com.liferay.portal.kernel.dao.search.DynamicQueryInitializer queryInitializer)
+		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery)
 		throws com.liferay.portal.SystemException {
 		WebDAVPropsLocalService webDAVPropsLocalService = WebDAVPropsLocalServiceFactory.getService();
 
-		return webDAVPropsLocalService.dynamicQuery(queryInitializer);
+		return webDAVPropsLocalService.dynamicQuery(dynamicQuery);
 	}
 
 	public static java.util.List<com.liferay.portal.model.WebDAVProps> dynamicQuery(
-		com.liferay.portal.kernel.dao.search.DynamicQueryInitializer queryInitializer,
-		int start, int end) throws com.liferay.portal.SystemException {
+		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery, int start,
+		int end) throws com.liferay.portal.SystemException {
 		WebDAVPropsLocalService webDAVPropsLocalService = WebDAVPropsLocalServiceFactory.getService();
 
-		return webDAVPropsLocalService.dynamicQuery(queryInitializer, start, end);
+		return webDAVPropsLocalService.dynamicQuery(dynamicQuery, start, end);
 	}
 
 	public static com.liferay.portal.model.WebDAVProps getWebDAVProps(

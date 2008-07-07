@@ -29,7 +29,7 @@ import com.liferay.counter.service.CounterServiceFactory;
 
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
-import com.liferay.portal.kernel.dao.search.DynamicQueryInitializer;
+import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 
 import com.liferay.portlet.messageboards.model.MBStatsUser;
 import com.liferay.portlet.messageboards.service.MBBanLocalService;
@@ -101,16 +101,15 @@ public abstract class MBStatsUserLocalServiceBaseImpl
 		mbStatsUserPersistence.remove(mbStatsUser);
 	}
 
-	public List<MBStatsUser> dynamicQuery(
-		DynamicQueryInitializer queryInitializer) throws SystemException {
-		return mbStatsUserPersistence.findWithDynamicQuery(queryInitializer);
+	public List<MBStatsUser> dynamicQuery(DynamicQuery dynamicQuery)
+		throws SystemException {
+		return mbStatsUserPersistence.findWithDynamicQuery(dynamicQuery);
 	}
 
-	public List<MBStatsUser> dynamicQuery(
-		DynamicQueryInitializer queryInitializer, int start, int end)
-		throws SystemException {
-		return mbStatsUserPersistence.findWithDynamicQuery(queryInitializer,
-			start, end);
+	public List<MBStatsUser> dynamicQuery(DynamicQuery dynamicQuery, int start,
+		int end) throws SystemException {
+		return mbStatsUserPersistence.findWithDynamicQuery(dynamicQuery, start,
+			end);
 	}
 
 	public MBStatsUser getMBStatsUser(long statsUserId)

@@ -76,20 +76,19 @@ public class PasswordTrackerLocalServiceUtil {
 	}
 
 	public static java.util.List<com.liferay.portal.model.PasswordTracker> dynamicQuery(
-		com.liferay.portal.kernel.dao.search.DynamicQueryInitializer queryInitializer)
+		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery)
 		throws com.liferay.portal.SystemException {
 		PasswordTrackerLocalService passwordTrackerLocalService = PasswordTrackerLocalServiceFactory.getService();
 
-		return passwordTrackerLocalService.dynamicQuery(queryInitializer);
+		return passwordTrackerLocalService.dynamicQuery(dynamicQuery);
 	}
 
 	public static java.util.List<com.liferay.portal.model.PasswordTracker> dynamicQuery(
-		com.liferay.portal.kernel.dao.search.DynamicQueryInitializer queryInitializer,
-		int start, int end) throws com.liferay.portal.SystemException {
+		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery, int start,
+		int end) throws com.liferay.portal.SystemException {
 		PasswordTrackerLocalService passwordTrackerLocalService = PasswordTrackerLocalServiceFactory.getService();
 
-		return passwordTrackerLocalService.dynamicQuery(queryInitializer,
-			start, end);
+		return passwordTrackerLocalService.dynamicQuery(dynamicQuery, start, end);
 	}
 
 	public static com.liferay.portal.model.PasswordTracker getPasswordTracker(

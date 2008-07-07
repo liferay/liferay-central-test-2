@@ -32,7 +32,7 @@ import com.liferay.mail.service.MailServiceFactory;
 
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
-import com.liferay.portal.kernel.dao.search.DynamicQueryInitializer;
+import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 import com.liferay.portal.service.CompanyLocalService;
 import com.liferay.portal.service.CompanyLocalServiceFactory;
 import com.liferay.portal.service.CompanyService;
@@ -96,16 +96,14 @@ public abstract class CalEventLocalServiceBaseImpl
 		calEventPersistence.remove(calEvent);
 	}
 
-	public List<CalEvent> dynamicQuery(DynamicQueryInitializer queryInitializer)
+	public List<CalEvent> dynamicQuery(DynamicQuery dynamicQuery)
 		throws SystemException {
-		return calEventPersistence.findWithDynamicQuery(queryInitializer);
+		return calEventPersistence.findWithDynamicQuery(dynamicQuery);
 	}
 
-	public List<CalEvent> dynamicQuery(
-		DynamicQueryInitializer queryInitializer, int start, int end)
-		throws SystemException {
-		return calEventPersistence.findWithDynamicQuery(queryInitializer,
-			start, end);
+	public List<CalEvent> dynamicQuery(DynamicQuery dynamicQuery, int start,
+		int end) throws SystemException {
+		return calEventPersistence.findWithDynamicQuery(dynamicQuery, start, end);
 	}
 
 	public CalEvent getCalEvent(long eventId)

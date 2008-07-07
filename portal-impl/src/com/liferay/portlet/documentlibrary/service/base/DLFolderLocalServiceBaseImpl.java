@@ -34,7 +34,7 @@ import com.liferay.documentlibrary.service.DLServiceFactory;
 
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
-import com.liferay.portal.kernel.dao.search.DynamicQueryInitializer;
+import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 import com.liferay.portal.service.LayoutLocalService;
 import com.liferay.portal.service.LayoutLocalServiceFactory;
 import com.liferay.portal.service.LayoutService;
@@ -122,16 +122,14 @@ public abstract class DLFolderLocalServiceBaseImpl
 		dlFolderPersistence.remove(dlFolder);
 	}
 
-	public List<DLFolder> dynamicQuery(DynamicQueryInitializer queryInitializer)
+	public List<DLFolder> dynamicQuery(DynamicQuery dynamicQuery)
 		throws SystemException {
-		return dlFolderPersistence.findWithDynamicQuery(queryInitializer);
+		return dlFolderPersistence.findWithDynamicQuery(dynamicQuery);
 	}
 
-	public List<DLFolder> dynamicQuery(
-		DynamicQueryInitializer queryInitializer, int start, int end)
-		throws SystemException {
-		return dlFolderPersistence.findWithDynamicQuery(queryInitializer,
-			start, end);
+	public List<DLFolder> dynamicQuery(DynamicQuery dynamicQuery, int start,
+		int end) throws SystemException {
+		return dlFolderPersistence.findWithDynamicQuery(dynamicQuery, start, end);
 	}
 
 	public DLFolder getDLFolder(long folderId)

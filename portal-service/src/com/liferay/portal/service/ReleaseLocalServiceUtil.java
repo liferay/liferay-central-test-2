@@ -75,19 +75,19 @@ public class ReleaseLocalServiceUtil {
 	}
 
 	public static java.util.List<com.liferay.portal.model.Release> dynamicQuery(
-		com.liferay.portal.kernel.dao.search.DynamicQueryInitializer queryInitializer)
+		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery)
 		throws com.liferay.portal.SystemException {
 		ReleaseLocalService releaseLocalService = ReleaseLocalServiceFactory.getService();
 
-		return releaseLocalService.dynamicQuery(queryInitializer);
+		return releaseLocalService.dynamicQuery(dynamicQuery);
 	}
 
 	public static java.util.List<com.liferay.portal.model.Release> dynamicQuery(
-		com.liferay.portal.kernel.dao.search.DynamicQueryInitializer queryInitializer,
-		int start, int end) throws com.liferay.portal.SystemException {
+		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery, int start,
+		int end) throws com.liferay.portal.SystemException {
 		ReleaseLocalService releaseLocalService = ReleaseLocalServiceFactory.getService();
 
-		return releaseLocalService.dynamicQuery(queryInitializer, start, end);
+		return releaseLocalService.dynamicQuery(dynamicQuery, start, end);
 	}
 
 	public static com.liferay.portal.model.Release getRelease(long releaseId)

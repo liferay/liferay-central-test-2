@@ -76,20 +76,19 @@ public class ResourceCodeLocalServiceUtil {
 	}
 
 	public static java.util.List<com.liferay.portal.model.ResourceCode> dynamicQuery(
-		com.liferay.portal.kernel.dao.search.DynamicQueryInitializer queryInitializer)
+		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery)
 		throws com.liferay.portal.SystemException {
 		ResourceCodeLocalService resourceCodeLocalService = ResourceCodeLocalServiceFactory.getService();
 
-		return resourceCodeLocalService.dynamicQuery(queryInitializer);
+		return resourceCodeLocalService.dynamicQuery(dynamicQuery);
 	}
 
 	public static java.util.List<com.liferay.portal.model.ResourceCode> dynamicQuery(
-		com.liferay.portal.kernel.dao.search.DynamicQueryInitializer queryInitializer,
-		int start, int end) throws com.liferay.portal.SystemException {
+		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery, int start,
+		int end) throws com.liferay.portal.SystemException {
 		ResourceCodeLocalService resourceCodeLocalService = ResourceCodeLocalServiceFactory.getService();
 
-		return resourceCodeLocalService.dynamicQuery(queryInitializer, start,
-			end);
+		return resourceCodeLocalService.dynamicQuery(dynamicQuery, start, end);
 	}
 
 	public static com.liferay.portal.model.ResourceCode getResourceCode(

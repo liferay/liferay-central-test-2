@@ -29,7 +29,7 @@ import com.liferay.counter.service.CounterServiceFactory;
 
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
-import com.liferay.portal.kernel.dao.search.DynamicQueryInitializer;
+import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 import com.liferay.portal.model.WebDAVProps;
 import com.liferay.portal.service.AccountLocalService;
 import com.liferay.portal.service.AccountLocalServiceFactory;
@@ -296,16 +296,15 @@ public abstract class WebDAVPropsLocalServiceBaseImpl
 		webDAVPropsPersistence.remove(webDAVProps);
 	}
 
-	public List<WebDAVProps> dynamicQuery(
-		DynamicQueryInitializer queryInitializer) throws SystemException {
-		return webDAVPropsPersistence.findWithDynamicQuery(queryInitializer);
+	public List<WebDAVProps> dynamicQuery(DynamicQuery dynamicQuery)
+		throws SystemException {
+		return webDAVPropsPersistence.findWithDynamicQuery(dynamicQuery);
 	}
 
-	public List<WebDAVProps> dynamicQuery(
-		DynamicQueryInitializer queryInitializer, int start, int end)
-		throws SystemException {
-		return webDAVPropsPersistence.findWithDynamicQuery(queryInitializer,
-			start, end);
+	public List<WebDAVProps> dynamicQuery(DynamicQuery dynamicQuery, int start,
+		int end) throws SystemException {
+		return webDAVPropsPersistence.findWithDynamicQuery(dynamicQuery, start,
+			end);
 	}
 
 	public WebDAVProps getWebDAVProps(long webDavPropsId)

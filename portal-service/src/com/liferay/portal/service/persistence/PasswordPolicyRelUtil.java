@@ -122,16 +122,15 @@ public class PasswordPolicyRelUtil {
 	}
 
 	public static java.util.List<com.liferay.portal.model.PasswordPolicyRel> findWithDynamicQuery(
-		com.liferay.portal.kernel.dao.search.DynamicQueryInitializer queryInitializer)
+		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery)
 		throws com.liferay.portal.SystemException {
-		return getPersistence().findWithDynamicQuery(queryInitializer);
+		return getPersistence().findWithDynamicQuery(dynamicQuery);
 	}
 
 	public static java.util.List<com.liferay.portal.model.PasswordPolicyRel> findWithDynamicQuery(
-		com.liferay.portal.kernel.dao.search.DynamicQueryInitializer queryInitializer,
-		int start, int end) throws com.liferay.portal.SystemException {
-		return getPersistence()
-				   .findWithDynamicQuery(queryInitializer, start, end);
+		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery, int start,
+		int end) throws com.liferay.portal.SystemException {
+		return getPersistence().findWithDynamicQuery(dynamicQuery, start, end);
 	}
 
 	public static java.util.List<com.liferay.portal.model.PasswordPolicyRel> findAll()

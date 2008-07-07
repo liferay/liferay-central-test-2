@@ -76,19 +76,19 @@ public class ResourceLocalServiceUtil {
 	}
 
 	public static java.util.List<com.liferay.portal.model.Resource> dynamicQuery(
-		com.liferay.portal.kernel.dao.search.DynamicQueryInitializer queryInitializer)
+		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery)
 		throws com.liferay.portal.SystemException {
 		ResourceLocalService resourceLocalService = ResourceLocalServiceFactory.getService();
 
-		return resourceLocalService.dynamicQuery(queryInitializer);
+		return resourceLocalService.dynamicQuery(dynamicQuery);
 	}
 
 	public static java.util.List<com.liferay.portal.model.Resource> dynamicQuery(
-		com.liferay.portal.kernel.dao.search.DynamicQueryInitializer queryInitializer,
-		int start, int end) throws com.liferay.portal.SystemException {
+		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery, int start,
+		int end) throws com.liferay.portal.SystemException {
 		ResourceLocalService resourceLocalService = ResourceLocalServiceFactory.getService();
 
-		return resourceLocalService.dynamicQuery(queryInitializer, start, end);
+		return resourceLocalService.dynamicQuery(dynamicQuery, start, end);
 	}
 
 	public static com.liferay.portal.model.Resource getResource(long resourceId)

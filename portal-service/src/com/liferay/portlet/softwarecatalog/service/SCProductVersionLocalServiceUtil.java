@@ -76,20 +76,20 @@ public class SCProductVersionLocalServiceUtil {
 	}
 
 	public static java.util.List<com.liferay.portlet.softwarecatalog.model.SCProductVersion> dynamicQuery(
-		com.liferay.portal.kernel.dao.search.DynamicQueryInitializer queryInitializer)
+		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery)
 		throws com.liferay.portal.SystemException {
 		SCProductVersionLocalService scProductVersionLocalService = SCProductVersionLocalServiceFactory.getService();
 
-		return scProductVersionLocalService.dynamicQuery(queryInitializer);
+		return scProductVersionLocalService.dynamicQuery(dynamicQuery);
 	}
 
 	public static java.util.List<com.liferay.portlet.softwarecatalog.model.SCProductVersion> dynamicQuery(
-		com.liferay.portal.kernel.dao.search.DynamicQueryInitializer queryInitializer,
-		int start, int end) throws com.liferay.portal.SystemException {
+		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery, int start,
+		int end) throws com.liferay.portal.SystemException {
 		SCProductVersionLocalService scProductVersionLocalService = SCProductVersionLocalServiceFactory.getService();
 
-		return scProductVersionLocalService.dynamicQuery(queryInitializer,
-			start, end);
+		return scProductVersionLocalService.dynamicQuery(dynamicQuery, start,
+			end);
 	}
 
 	public static com.liferay.portlet.softwarecatalog.model.SCProductVersion getSCProductVersion(

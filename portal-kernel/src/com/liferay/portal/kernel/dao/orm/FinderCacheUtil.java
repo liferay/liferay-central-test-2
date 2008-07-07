@@ -20,10 +20,9 @@
  * SOFTWARE.
  */
 
-package com.liferay.portal.kernel.spring.hibernate;
+package com.liferay.portal.kernel.dao.orm;
 
 import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
-import com.liferay.portal.kernel.dao.hibernate.SessionFactory;
 
 /**
  * <a href="FinderCacheUtil.java.html"><b><i>View Source</i></b></a>

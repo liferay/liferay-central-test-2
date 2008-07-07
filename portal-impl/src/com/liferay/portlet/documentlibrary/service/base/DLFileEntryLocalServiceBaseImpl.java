@@ -37,7 +37,7 @@ import com.liferay.lock.service.LockServiceFactory;
 
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
-import com.liferay.portal.kernel.dao.search.DynamicQueryInitializer;
+import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 import com.liferay.portal.service.ResourceLocalService;
 import com.liferay.portal.service.ResourceLocalServiceFactory;
 import com.liferay.portal.service.ResourceService;
@@ -139,16 +139,15 @@ public abstract class DLFileEntryLocalServiceBaseImpl
 		dlFileEntryPersistence.remove(dlFileEntry);
 	}
 
-	public List<DLFileEntry> dynamicQuery(
-		DynamicQueryInitializer queryInitializer) throws SystemException {
-		return dlFileEntryPersistence.findWithDynamicQuery(queryInitializer);
+	public List<DLFileEntry> dynamicQuery(DynamicQuery dynamicQuery)
+		throws SystemException {
+		return dlFileEntryPersistence.findWithDynamicQuery(dynamicQuery);
 	}
 
-	public List<DLFileEntry> dynamicQuery(
-		DynamicQueryInitializer queryInitializer, int start, int end)
-		throws SystemException {
-		return dlFileEntryPersistence.findWithDynamicQuery(queryInitializer,
-			start, end);
+	public List<DLFileEntry> dynamicQuery(DynamicQuery dynamicQuery, int start,
+		int end) throws SystemException {
+		return dlFileEntryPersistence.findWithDynamicQuery(dynamicQuery, start,
+			end);
 	}
 
 	public DLFileEntry getDLFileEntry(long fileEntryId)

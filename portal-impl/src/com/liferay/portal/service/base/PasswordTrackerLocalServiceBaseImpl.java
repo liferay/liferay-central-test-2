@@ -29,7 +29,7 @@ import com.liferay.counter.service.CounterServiceFactory;
 
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
-import com.liferay.portal.kernel.dao.search.DynamicQueryInitializer;
+import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 import com.liferay.portal.model.PasswordTracker;
 import com.liferay.portal.service.AccountLocalService;
 import com.liferay.portal.service.AccountLocalServiceFactory;
@@ -296,15 +296,14 @@ public abstract class PasswordTrackerLocalServiceBaseImpl
 		passwordTrackerPersistence.remove(passwordTracker);
 	}
 
-	public List<PasswordTracker> dynamicQuery(
-		DynamicQueryInitializer queryInitializer) throws SystemException {
-		return passwordTrackerPersistence.findWithDynamicQuery(queryInitializer);
+	public List<PasswordTracker> dynamicQuery(DynamicQuery dynamicQuery)
+		throws SystemException {
+		return passwordTrackerPersistence.findWithDynamicQuery(dynamicQuery);
 	}
 
-	public List<PasswordTracker> dynamicQuery(
-		DynamicQueryInitializer queryInitializer, int start, int end)
-		throws SystemException {
-		return passwordTrackerPersistence.findWithDynamicQuery(queryInitializer,
+	public List<PasswordTracker> dynamicQuery(DynamicQuery dynamicQuery,
+		int start, int end) throws SystemException {
+		return passwordTrackerPersistence.findWithDynamicQuery(dynamicQuery,
 			start, end);
 	}
 

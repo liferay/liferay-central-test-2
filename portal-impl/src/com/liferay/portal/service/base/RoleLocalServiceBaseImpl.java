@@ -29,7 +29,7 @@ import com.liferay.counter.service.CounterServiceFactory;
 
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
-import com.liferay.portal.kernel.dao.search.DynamicQueryInitializer;
+import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 import com.liferay.portal.model.Role;
 import com.liferay.portal.service.AccountLocalService;
 import com.liferay.portal.service.AccountLocalServiceFactory;
@@ -290,14 +290,14 @@ public abstract class RoleLocalServiceBaseImpl implements RoleLocalService {
 		rolePersistence.remove(role);
 	}
 
-	public List<Role> dynamicQuery(DynamicQueryInitializer queryInitializer)
+	public List<Role> dynamicQuery(DynamicQuery dynamicQuery)
 		throws SystemException {
-		return rolePersistence.findWithDynamicQuery(queryInitializer);
+		return rolePersistence.findWithDynamicQuery(dynamicQuery);
 	}
 
-	public List<Role> dynamicQuery(DynamicQueryInitializer queryInitializer,
-		int start, int end) throws SystemException {
-		return rolePersistence.findWithDynamicQuery(queryInitializer, start, end);
+	public List<Role> dynamicQuery(DynamicQuery dynamicQuery, int start, int end)
+		throws SystemException {
+		return rolePersistence.findWithDynamicQuery(dynamicQuery, start, end);
 	}
 
 	public Role getRole(long roleId) throws PortalException, SystemException {

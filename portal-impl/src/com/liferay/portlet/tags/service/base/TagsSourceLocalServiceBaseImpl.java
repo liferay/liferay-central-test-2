@@ -24,7 +24,7 @@ package com.liferay.portlet.tags.service.base;
 
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
-import com.liferay.portal.kernel.dao.search.DynamicQueryInitializer;
+import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 
 import com.liferay.portlet.tags.model.TagsSource;
 import com.liferay.portlet.tags.service.TagsAssetLocalService;
@@ -84,16 +84,15 @@ public abstract class TagsSourceLocalServiceBaseImpl
 		tagsSourcePersistence.remove(tagsSource);
 	}
 
-	public List<TagsSource> dynamicQuery(
-		DynamicQueryInitializer queryInitializer) throws SystemException {
-		return tagsSourcePersistence.findWithDynamicQuery(queryInitializer);
+	public List<TagsSource> dynamicQuery(DynamicQuery dynamicQuery)
+		throws SystemException {
+		return tagsSourcePersistence.findWithDynamicQuery(dynamicQuery);
 	}
 
-	public List<TagsSource> dynamicQuery(
-		DynamicQueryInitializer queryInitializer, int start, int end)
-		throws SystemException {
-		return tagsSourcePersistence.findWithDynamicQuery(queryInitializer,
-			start, end);
+	public List<TagsSource> dynamicQuery(DynamicQuery dynamicQuery, int start,
+		int end) throws SystemException {
+		return tagsSourcePersistence.findWithDynamicQuery(dynamicQuery, start,
+			end);
 	}
 
 	public TagsSource getTagsSource(long sourceId)

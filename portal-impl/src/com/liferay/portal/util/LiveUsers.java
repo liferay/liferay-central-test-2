@@ -23,7 +23,7 @@
 package com.liferay.portal.util;
 
 import com.liferay.portal.SystemException;
-import com.liferay.portal.kernel.dao.hibernate.QueryUtil;
+import com.liferay.portal.kernel.dao.orm.QueryUtil;
 import com.liferay.portal.kernel.servlet.HttpHeaders;
 import com.liferay.portal.kernel.util.ConcurrentHashSet;
 import com.liferay.portal.kernel.util.GetterUtil;

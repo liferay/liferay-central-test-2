@@ -76,19 +76,19 @@ public class AnnouncementsDeliveryLocalServiceUtil {
 	}
 
 	public static java.util.List<com.liferay.portlet.announcements.model.AnnouncementsDelivery> dynamicQuery(
-		com.liferay.portal.kernel.dao.search.DynamicQueryInitializer queryInitializer)
+		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery)
 		throws com.liferay.portal.SystemException {
 		AnnouncementsDeliveryLocalService announcementsDeliveryLocalService = AnnouncementsDeliveryLocalServiceFactory.getService();
 
-		return announcementsDeliveryLocalService.dynamicQuery(queryInitializer);
+		return announcementsDeliveryLocalService.dynamicQuery(dynamicQuery);
 	}
 
 	public static java.util.List<com.liferay.portlet.announcements.model.AnnouncementsDelivery> dynamicQuery(
-		com.liferay.portal.kernel.dao.search.DynamicQueryInitializer queryInitializer,
-		int start, int end) throws com.liferay.portal.SystemException {
+		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery, int start,
+		int end) throws com.liferay.portal.SystemException {
 		AnnouncementsDeliveryLocalService announcementsDeliveryLocalService = AnnouncementsDeliveryLocalServiceFactory.getService();
 
-		return announcementsDeliveryLocalService.dynamicQuery(queryInitializer,
+		return announcementsDeliveryLocalService.dynamicQuery(dynamicQuery,
 			start, end);
 	}
 

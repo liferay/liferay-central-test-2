@@ -29,7 +29,7 @@ import com.liferay.counter.service.CounterServiceFactory;
 
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
-import com.liferay.portal.kernel.dao.search.DynamicQueryInitializer;
+import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 import com.liferay.portal.service.ResourceLocalService;
 import com.liferay.portal.service.ResourceLocalServiceFactory;
 import com.liferay.portal.service.ResourceService;
@@ -127,16 +127,15 @@ public abstract class MBCategoryLocalServiceBaseImpl
 		mbCategoryPersistence.remove(mbCategory);
 	}
 
-	public List<MBCategory> dynamicQuery(
-		DynamicQueryInitializer queryInitializer) throws SystemException {
-		return mbCategoryPersistence.findWithDynamicQuery(queryInitializer);
+	public List<MBCategory> dynamicQuery(DynamicQuery dynamicQuery)
+		throws SystemException {
+		return mbCategoryPersistence.findWithDynamicQuery(dynamicQuery);
 	}
 
-	public List<MBCategory> dynamicQuery(
-		DynamicQueryInitializer queryInitializer, int start, int end)
-		throws SystemException {
-		return mbCategoryPersistence.findWithDynamicQuery(queryInitializer,
-			start, end);
+	public List<MBCategory> dynamicQuery(DynamicQuery dynamicQuery, int start,
+		int end) throws SystemException {
+		return mbCategoryPersistence.findWithDynamicQuery(dynamicQuery, start,
+			end);
 	}
 
 	public MBCategory getMBCategory(long categoryId)

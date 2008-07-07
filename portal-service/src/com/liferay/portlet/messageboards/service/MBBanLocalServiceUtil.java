@@ -76,19 +76,19 @@ public class MBBanLocalServiceUtil {
 	}
 
 	public static java.util.List<com.liferay.portlet.messageboards.model.MBBan> dynamicQuery(
-		com.liferay.portal.kernel.dao.search.DynamicQueryInitializer queryInitializer)
+		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery)
 		throws com.liferay.portal.SystemException {
 		MBBanLocalService mbBanLocalService = MBBanLocalServiceFactory.getService();
 
-		return mbBanLocalService.dynamicQuery(queryInitializer);
+		return mbBanLocalService.dynamicQuery(dynamicQuery);
 	}
 
 	public static java.util.List<com.liferay.portlet.messageboards.model.MBBan> dynamicQuery(
-		com.liferay.portal.kernel.dao.search.DynamicQueryInitializer queryInitializer,
-		int start, int end) throws com.liferay.portal.SystemException {
+		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery, int start,
+		int end) throws com.liferay.portal.SystemException {
 		MBBanLocalService mbBanLocalService = MBBanLocalServiceFactory.getService();
 
-		return mbBanLocalService.dynamicQuery(queryInitializer, start, end);
+		return mbBanLocalService.dynamicQuery(dynamicQuery, start, end);
 	}
 
 	public static com.liferay.portlet.messageboards.model.MBBan getMBBan(

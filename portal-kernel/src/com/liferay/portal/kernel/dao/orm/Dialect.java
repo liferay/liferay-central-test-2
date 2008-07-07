@@ -20,26 +20,16 @@
  * SOFTWARE.
  */
 
-package com.liferay.portal.dao.hibernate;
-
-import com.liferay.portal.kernel.dao.hibernate.HibernateException;
-import com.liferay.portal.kernel.dao.hibernate.ObjectNotFoundException;
+package com.liferay.portal.kernel.dao.orm;
 
 /**
- * <a href="ExceptionTranslator.java.html"><b><i>View Source</i></b></a>
+ * <a href="Dialect.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *
  */
-public class ExceptionTranslator {
+public interface Dialect {
 
-	public static HibernateException translate(Exception e) {
-		if (e instanceof org.hibernate.ObjectNotFoundException) {
-			return new ObjectNotFoundException(e.getMessage());
-		}
-		else {
-			return new HibernateException(e.getMessage());
-		}
-	}
+	public boolean supportsLimit();
 
 }

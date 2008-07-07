@@ -76,19 +76,19 @@ public class PermissionLocalServiceUtil {
 	}
 
 	public static java.util.List<com.liferay.portal.model.Permission> dynamicQuery(
-		com.liferay.portal.kernel.dao.search.DynamicQueryInitializer queryInitializer)
+		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery)
 		throws com.liferay.portal.SystemException {
 		PermissionLocalService permissionLocalService = PermissionLocalServiceFactory.getService();
 
-		return permissionLocalService.dynamicQuery(queryInitializer);
+		return permissionLocalService.dynamicQuery(dynamicQuery);
 	}
 
 	public static java.util.List<com.liferay.portal.model.Permission> dynamicQuery(
-		com.liferay.portal.kernel.dao.search.DynamicQueryInitializer queryInitializer,
-		int start, int end) throws com.liferay.portal.SystemException {
+		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery, int start,
+		int end) throws com.liferay.portal.SystemException {
 		PermissionLocalService permissionLocalService = PermissionLocalServiceFactory.getService();
 
-		return permissionLocalService.dynamicQuery(queryInitializer, start, end);
+		return permissionLocalService.dynamicQuery(dynamicQuery, start, end);
 	}
 
 	public static com.liferay.portal.model.Permission getPermission(

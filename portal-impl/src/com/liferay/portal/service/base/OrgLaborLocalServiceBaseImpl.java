@@ -29,7 +29,7 @@ import com.liferay.counter.service.CounterServiceFactory;
 
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
-import com.liferay.portal.kernel.dao.search.DynamicQueryInitializer;
+import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 import com.liferay.portal.model.OrgLabor;
 import com.liferay.portal.service.AccountLocalService;
 import com.liferay.portal.service.AccountLocalServiceFactory;
@@ -292,16 +292,14 @@ public abstract class OrgLaborLocalServiceBaseImpl
 		orgLaborPersistence.remove(orgLabor);
 	}
 
-	public List<OrgLabor> dynamicQuery(DynamicQueryInitializer queryInitializer)
+	public List<OrgLabor> dynamicQuery(DynamicQuery dynamicQuery)
 		throws SystemException {
-		return orgLaborPersistence.findWithDynamicQuery(queryInitializer);
+		return orgLaborPersistence.findWithDynamicQuery(dynamicQuery);
 	}
 
-	public List<OrgLabor> dynamicQuery(
-		DynamicQueryInitializer queryInitializer, int start, int end)
-		throws SystemException {
-		return orgLaborPersistence.findWithDynamicQuery(queryInitializer,
-			start, end);
+	public List<OrgLabor> dynamicQuery(DynamicQuery dynamicQuery, int start,
+		int end) throws SystemException {
+		return orgLaborPersistence.findWithDynamicQuery(dynamicQuery, start, end);
 	}
 
 	public OrgLabor getOrgLabor(long orgLaborId)

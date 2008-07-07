@@ -24,7 +24,7 @@ package com.liferay.portal.service.base;
 
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
-import com.liferay.portal.kernel.dao.search.DynamicQueryInitializer;
+import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 import com.liferay.portal.model.Release;
 import com.liferay.portal.service.AccountLocalService;
 import com.liferay.portal.service.AccountLocalServiceFactory;
@@ -288,16 +288,14 @@ public abstract class ReleaseLocalServiceBaseImpl implements ReleaseLocalService
 		releasePersistence.remove(release);
 	}
 
-	public List<Release> dynamicQuery(DynamicQueryInitializer queryInitializer)
+	public List<Release> dynamicQuery(DynamicQuery dynamicQuery)
 		throws SystemException {
-		return releasePersistence.findWithDynamicQuery(queryInitializer);
+		return releasePersistence.findWithDynamicQuery(dynamicQuery);
 	}
 
-	public List<Release> dynamicQuery(
-		DynamicQueryInitializer queryInitializer, int start, int end)
-		throws SystemException {
-		return releasePersistence.findWithDynamicQuery(queryInitializer, start,
-			end);
+	public List<Release> dynamicQuery(DynamicQuery dynamicQuery, int start,
+		int end) throws SystemException {
+		return releasePersistence.findWithDynamicQuery(dynamicQuery, start, end);
 	}
 
 	public Release getRelease(long releaseId)

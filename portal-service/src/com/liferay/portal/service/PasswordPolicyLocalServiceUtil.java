@@ -76,20 +76,19 @@ public class PasswordPolicyLocalServiceUtil {
 	}
 
 	public static java.util.List<com.liferay.portal.model.PasswordPolicy> dynamicQuery(
-		com.liferay.portal.kernel.dao.search.DynamicQueryInitializer queryInitializer)
+		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery)
 		throws com.liferay.portal.SystemException {
 		PasswordPolicyLocalService passwordPolicyLocalService = PasswordPolicyLocalServiceFactory.getService();
 
-		return passwordPolicyLocalService.dynamicQuery(queryInitializer);
+		return passwordPolicyLocalService.dynamicQuery(dynamicQuery);
 	}
 
 	public static java.util.List<com.liferay.portal.model.PasswordPolicy> dynamicQuery(
-		com.liferay.portal.kernel.dao.search.DynamicQueryInitializer queryInitializer,
-		int start, int end) throws com.liferay.portal.SystemException {
+		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery, int start,
+		int end) throws com.liferay.portal.SystemException {
 		PasswordPolicyLocalService passwordPolicyLocalService = PasswordPolicyLocalServiceFactory.getService();
 
-		return passwordPolicyLocalService.dynamicQuery(queryInitializer, start,
-			end);
+		return passwordPolicyLocalService.dynamicQuery(dynamicQuery, start, end);
 	}
 
 	public static com.liferay.portal.model.PasswordPolicy getPasswordPolicy(

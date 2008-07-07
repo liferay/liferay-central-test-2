@@ -16,7 +16,7 @@ import ${packagePath}.service.${entity.name}${sessionTypeName}Service;
 
 	import com.liferay.portal.PortalException;
 	import com.liferay.portal.SystemException;
-	import com.liferay.portal.kernel.dao.search.DynamicQueryInitializer;
+	import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 
 	import java.util.List;
 </#if>
@@ -70,12 +70,12 @@ import ${packagePath}.service.${entity.name}${sessionTypeName}Service;
 		${entity.varName}Persistence.remove(${entity.varName});
 	}
 
-	public List<${entity.name}> dynamicQuery(DynamicQueryInitializer queryInitializer) throws SystemException {
-		return ${entity.varName}Persistence.findWithDynamicQuery(queryInitializer);
+	public List<${entity.name}> dynamicQuery(DynamicQuery dynamicQuery) throws SystemException {
+		return ${entity.varName}Persistence.findWithDynamicQuery(dynamicQuery);
 	}
 
-	public List<${entity.name}> dynamicQuery(DynamicQueryInitializer queryInitializer, int start, int end) throws SystemException {
-		return ${entity.varName}Persistence.findWithDynamicQuery(queryInitializer, start, end);
+	public List<${entity.name}> dynamicQuery(DynamicQuery dynamicQuery, int start, int end) throws SystemException {
+		return ${entity.varName}Persistence.findWithDynamicQuery(dynamicQuery, start, end);
 	}
 
 	public ${entity.name} get${entity.name}(${entity.PKClassName} ${entity.PKVarName}) throws PortalException, SystemException {

@@ -29,7 +29,7 @@ import com.liferay.counter.service.CounterServiceFactory;
 
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
-import com.liferay.portal.kernel.dao.search.DynamicQueryInitializer;
+import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 import com.liferay.portal.service.UserLocalService;
 import com.liferay.portal.service.UserLocalServiceFactory;
 import com.liferay.portal.service.UserService;
@@ -103,15 +103,14 @@ public abstract class MBBanLocalServiceBaseImpl implements MBBanLocalService {
 		mbBanPersistence.remove(mbBan);
 	}
 
-	public List<MBBan> dynamicQuery(DynamicQueryInitializer queryInitializer)
+	public List<MBBan> dynamicQuery(DynamicQuery dynamicQuery)
 		throws SystemException {
-		return mbBanPersistence.findWithDynamicQuery(queryInitializer);
+		return mbBanPersistence.findWithDynamicQuery(dynamicQuery);
 	}
 
-	public List<MBBan> dynamicQuery(DynamicQueryInitializer queryInitializer,
-		int start, int end) throws SystemException {
-		return mbBanPersistence.findWithDynamicQuery(queryInitializer, start,
-			end);
+	public List<MBBan> dynamicQuery(DynamicQuery dynamicQuery, int start,
+		int end) throws SystemException {
+		return mbBanPersistence.findWithDynamicQuery(dynamicQuery, start, end);
 	}
 
 	public MBBan getMBBan(long banId) throws PortalException, SystemException {

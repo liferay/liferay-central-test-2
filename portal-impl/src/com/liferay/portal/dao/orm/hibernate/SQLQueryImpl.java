@@ -20,13 +20,13 @@
  * SOFTWARE.
  */
 
-package com.liferay.portal.dao.hibernate;
+package com.liferay.portal.dao.orm.hibernate;
 
-import com.liferay.portal.kernel.dao.hibernate.HibernateException;
-import com.liferay.portal.kernel.dao.hibernate.Query;
-import com.liferay.portal.kernel.dao.hibernate.SQLQuery;
-import com.liferay.portal.kernel.dao.hibernate.ScrollableResults;
-import com.liferay.portal.kernel.dao.hibernate.Type;
+import com.liferay.portal.kernel.dao.orm.HibernateException;
+import com.liferay.portal.kernel.dao.orm.Query;
+import com.liferay.portal.kernel.dao.orm.SQLQuery;
+import com.liferay.portal.kernel.dao.orm.ScrollableResults;
+import com.liferay.portal.kernel.dao.orm.Type;
 
 import java.io.Serializable;
 

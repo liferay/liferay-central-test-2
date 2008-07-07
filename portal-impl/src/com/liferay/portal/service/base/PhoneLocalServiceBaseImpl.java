@@ -29,7 +29,7 @@ import com.liferay.counter.service.CounterServiceFactory;
 
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
-import com.liferay.portal.kernel.dao.search.DynamicQueryInitializer;
+import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 import com.liferay.portal.model.Phone;
 import com.liferay.portal.service.AccountLocalService;
 import com.liferay.portal.service.AccountLocalServiceFactory;
@@ -291,15 +291,14 @@ public abstract class PhoneLocalServiceBaseImpl implements PhoneLocalService {
 		phonePersistence.remove(phone);
 	}
 
-	public List<Phone> dynamicQuery(DynamicQueryInitializer queryInitializer)
+	public List<Phone> dynamicQuery(DynamicQuery dynamicQuery)
 		throws SystemException {
-		return phonePersistence.findWithDynamicQuery(queryInitializer);
+		return phonePersistence.findWithDynamicQuery(dynamicQuery);
 	}
 
-	public List<Phone> dynamicQuery(DynamicQueryInitializer queryInitializer,
-		int start, int end) throws SystemException {
-		return phonePersistence.findWithDynamicQuery(queryInitializer, start,
-			end);
+	public List<Phone> dynamicQuery(DynamicQuery dynamicQuery, int start,
+		int end) throws SystemException {
+		return phonePersistence.findWithDynamicQuery(dynamicQuery, start, end);
 	}
 
 	public Phone getPhone(long phoneId) throws PortalException, SystemException {

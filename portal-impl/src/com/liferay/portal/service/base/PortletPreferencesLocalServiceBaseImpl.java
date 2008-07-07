@@ -29,7 +29,7 @@ import com.liferay.counter.service.CounterServiceFactory;
 
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
-import com.liferay.portal.kernel.dao.search.DynamicQueryInitializer;
+import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 import com.liferay.portal.model.PortletPreferences;
 import com.liferay.portal.service.AccountLocalService;
 import com.liferay.portal.service.AccountLocalServiceFactory;
@@ -294,15 +294,14 @@ public abstract class PortletPreferencesLocalServiceBaseImpl
 		portletPreferencesPersistence.remove(portletPreferences);
 	}
 
-	public List<PortletPreferences> dynamicQuery(
-		DynamicQueryInitializer queryInitializer) throws SystemException {
-		return portletPreferencesPersistence.findWithDynamicQuery(queryInitializer);
+	public List<PortletPreferences> dynamicQuery(DynamicQuery dynamicQuery)
+		throws SystemException {
+		return portletPreferencesPersistence.findWithDynamicQuery(dynamicQuery);
 	}
 
-	public List<PortletPreferences> dynamicQuery(
-		DynamicQueryInitializer queryInitializer, int start, int end)
-		throws SystemException {
-		return portletPreferencesPersistence.findWithDynamicQuery(queryInitializer,
+	public List<PortletPreferences> dynamicQuery(DynamicQuery dynamicQuery,
+		int start, int end) throws SystemException {
+		return portletPreferencesPersistence.findWithDynamicQuery(dynamicQuery,
 			start, end);
 	}
 

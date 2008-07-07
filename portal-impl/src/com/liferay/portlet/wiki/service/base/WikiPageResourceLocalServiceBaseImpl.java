@@ -29,7 +29,7 @@ import com.liferay.counter.service.CounterServiceFactory;
 
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
-import com.liferay.portal.kernel.dao.search.DynamicQueryInitializer;
+import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 
 import com.liferay.portlet.wiki.model.WikiPageResource;
 import com.liferay.portlet.wiki.service.WikiNodeLocalService;
@@ -77,15 +77,14 @@ public abstract class WikiPageResourceLocalServiceBaseImpl
 		wikiPageResourcePersistence.remove(wikiPageResource);
 	}
 
-	public List<WikiPageResource> dynamicQuery(
-		DynamicQueryInitializer queryInitializer) throws SystemException {
-		return wikiPageResourcePersistence.findWithDynamicQuery(queryInitializer);
+	public List<WikiPageResource> dynamicQuery(DynamicQuery dynamicQuery)
+		throws SystemException {
+		return wikiPageResourcePersistence.findWithDynamicQuery(dynamicQuery);
 	}
 
-	public List<WikiPageResource> dynamicQuery(
-		DynamicQueryInitializer queryInitializer, int start, int end)
-		throws SystemException {
-		return wikiPageResourcePersistence.findWithDynamicQuery(queryInitializer,
+	public List<WikiPageResource> dynamicQuery(DynamicQuery dynamicQuery,
+		int start, int end) throws SystemException {
+		return wikiPageResourcePersistence.findWithDynamicQuery(dynamicQuery,
 			start, end);
 	}
 

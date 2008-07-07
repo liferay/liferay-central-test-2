@@ -29,7 +29,7 @@ import com.liferay.counter.service.CounterServiceFactory;
 
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
-import com.liferay.portal.kernel.dao.search.DynamicQueryInitializer;
+import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 import com.liferay.portal.model.ClassName;
 import com.liferay.portal.service.AccountLocalService;
 import com.liferay.portal.service.AccountLocalServiceFactory;
@@ -293,16 +293,15 @@ public abstract class ClassNameLocalServiceBaseImpl
 		classNamePersistence.remove(className);
 	}
 
-	public List<ClassName> dynamicQuery(
-		DynamicQueryInitializer queryInitializer) throws SystemException {
-		return classNamePersistence.findWithDynamicQuery(queryInitializer);
+	public List<ClassName> dynamicQuery(DynamicQuery dynamicQuery)
+		throws SystemException {
+		return classNamePersistence.findWithDynamicQuery(dynamicQuery);
 	}
 
-	public List<ClassName> dynamicQuery(
-		DynamicQueryInitializer queryInitializer, int start, int end)
-		throws SystemException {
-		return classNamePersistence.findWithDynamicQuery(queryInitializer,
-			start, end);
+	public List<ClassName> dynamicQuery(DynamicQuery dynamicQuery, int start,
+		int end) throws SystemException {
+		return classNamePersistence.findWithDynamicQuery(dynamicQuery, start,
+			end);
 	}
 
 	public ClassName getClassName(long classNameId)

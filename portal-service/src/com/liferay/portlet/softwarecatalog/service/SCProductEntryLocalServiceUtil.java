@@ -76,20 +76,19 @@ public class SCProductEntryLocalServiceUtil {
 	}
 
 	public static java.util.List<com.liferay.portlet.softwarecatalog.model.SCProductEntry> dynamicQuery(
-		com.liferay.portal.kernel.dao.search.DynamicQueryInitializer queryInitializer)
+		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery)
 		throws com.liferay.portal.SystemException {
 		SCProductEntryLocalService scProductEntryLocalService = SCProductEntryLocalServiceFactory.getService();
 
-		return scProductEntryLocalService.dynamicQuery(queryInitializer);
+		return scProductEntryLocalService.dynamicQuery(dynamicQuery);
 	}
 
 	public static java.util.List<com.liferay.portlet.softwarecatalog.model.SCProductEntry> dynamicQuery(
-		com.liferay.portal.kernel.dao.search.DynamicQueryInitializer queryInitializer,
-		int start, int end) throws com.liferay.portal.SystemException {
+		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery, int start,
+		int end) throws com.liferay.portal.SystemException {
 		SCProductEntryLocalService scProductEntryLocalService = SCProductEntryLocalServiceFactory.getService();
 
-		return scProductEntryLocalService.dynamicQuery(queryInitializer, start,
-			end);
+		return scProductEntryLocalService.dynamicQuery(dynamicQuery, start, end);
 	}
 
 	public static com.liferay.portlet.softwarecatalog.model.SCProductEntry getSCProductEntry(

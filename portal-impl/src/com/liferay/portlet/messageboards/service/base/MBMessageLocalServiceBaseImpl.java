@@ -37,7 +37,7 @@ import com.liferay.mail.service.MailServiceFactory;
 
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
-import com.liferay.portal.kernel.dao.search.DynamicQueryInitializer;
+import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 import com.liferay.portal.service.CompanyLocalService;
 import com.liferay.portal.service.CompanyLocalServiceFactory;
 import com.liferay.portal.service.CompanyService;
@@ -182,16 +182,15 @@ public abstract class MBMessageLocalServiceBaseImpl
 		mbMessagePersistence.remove(mbMessage);
 	}
 
-	public List<MBMessage> dynamicQuery(
-		DynamicQueryInitializer queryInitializer) throws SystemException {
-		return mbMessagePersistence.findWithDynamicQuery(queryInitializer);
+	public List<MBMessage> dynamicQuery(DynamicQuery dynamicQuery)
+		throws SystemException {
+		return mbMessagePersistence.findWithDynamicQuery(dynamicQuery);
 	}
 
-	public List<MBMessage> dynamicQuery(
-		DynamicQueryInitializer queryInitializer, int start, int end)
-		throws SystemException {
-		return mbMessagePersistence.findWithDynamicQuery(queryInitializer,
-			start, end);
+	public List<MBMessage> dynamicQuery(DynamicQuery dynamicQuery, int start,
+		int end) throws SystemException {
+		return mbMessagePersistence.findWithDynamicQuery(dynamicQuery, start,
+			end);
 	}
 
 	public MBMessage getMBMessage(long messageId)

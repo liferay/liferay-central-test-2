@@ -204,12 +204,12 @@ public interface DLFileEntryPersistence {
 			com.liferay.portlet.documentlibrary.NoSuchFileEntryException;
 
 	public java.util.List<com.liferay.portlet.documentlibrary.model.DLFileEntry> findWithDynamicQuery(
-		com.liferay.portal.kernel.dao.search.DynamicQueryInitializer queryInitializer)
+		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery)
 		throws com.liferay.portal.SystemException;
 
 	public java.util.List<com.liferay.portlet.documentlibrary.model.DLFileEntry> findWithDynamicQuery(
-		com.liferay.portal.kernel.dao.search.DynamicQueryInitializer queryInitializer,
-		int start, int end) throws com.liferay.portal.SystemException;
+		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery, int start,
+		int end) throws com.liferay.portal.SystemException;
 
 	public java.util.List<com.liferay.portlet.documentlibrary.model.DLFileEntry> findAll()
 		throws com.liferay.portal.SystemException;

@@ -20,20 +20,30 @@
  * SOFTWARE.
  */
 
-package com.liferay.portal.kernel.dao.search;
-
-import java.util.List;
+package com.liferay.portal.kernel.dao.orm;
 
 /**
- * <a href="DynamicQuery.java.html"><b><i>View Source</i></b></a>
+ * <a href="HibernateException.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *
  */
-public interface DynamicQuery {
+public class HibernateException extends RuntimeException {
 
-	public List list();
+	public HibernateException() {
+		super();
+	}
 
-	public void setLimit(int start, int end);
+	public HibernateException(String msg) {
+		super(msg);
+	}
+
+	public HibernateException(Throwable cause) {
+		super(cause);
+	}
+
+	public HibernateException(String msg, Throwable cause) {
+		super(msg, cause);
+	}
 
 }

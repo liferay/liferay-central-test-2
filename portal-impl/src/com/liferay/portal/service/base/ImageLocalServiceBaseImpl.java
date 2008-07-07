@@ -24,7 +24,7 @@ package com.liferay.portal.service.base;
 
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
-import com.liferay.portal.kernel.dao.search.DynamicQueryInitializer;
+import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 import com.liferay.portal.model.Image;
 import com.liferay.portal.service.AccountLocalService;
 import com.liferay.portal.service.AccountLocalServiceFactory;
@@ -288,15 +288,14 @@ public abstract class ImageLocalServiceBaseImpl implements ImageLocalService {
 		imagePersistence.remove(image);
 	}
 
-	public List<Image> dynamicQuery(DynamicQueryInitializer queryInitializer)
+	public List<Image> dynamicQuery(DynamicQuery dynamicQuery)
 		throws SystemException {
-		return imagePersistence.findWithDynamicQuery(queryInitializer);
+		return imagePersistence.findWithDynamicQuery(dynamicQuery);
 	}
 
-	public List<Image> dynamicQuery(DynamicQueryInitializer queryInitializer,
-		int start, int end) throws SystemException {
-		return imagePersistence.findWithDynamicQuery(queryInitializer, start,
-			end);
+	public List<Image> dynamicQuery(DynamicQuery dynamicQuery, int start,
+		int end) throws SystemException {
+		return imagePersistence.findWithDynamicQuery(dynamicQuery, start, end);
 	}
 
 	public Image getImage(long imageId) throws PortalException, SystemException {

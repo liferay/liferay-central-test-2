@@ -76,19 +76,19 @@ public class JournalArticleResourceLocalServiceUtil {
 	}
 
 	public static java.util.List<com.liferay.portlet.journal.model.JournalArticleResource> dynamicQuery(
-		com.liferay.portal.kernel.dao.search.DynamicQueryInitializer queryInitializer)
+		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery)
 		throws com.liferay.portal.SystemException {
 		JournalArticleResourceLocalService journalArticleResourceLocalService = JournalArticleResourceLocalServiceFactory.getService();
 
-		return journalArticleResourceLocalService.dynamicQuery(queryInitializer);
+		return journalArticleResourceLocalService.dynamicQuery(dynamicQuery);
 	}
 
 	public static java.util.List<com.liferay.portlet.journal.model.JournalArticleResource> dynamicQuery(
-		com.liferay.portal.kernel.dao.search.DynamicQueryInitializer queryInitializer,
-		int start, int end) throws com.liferay.portal.SystemException {
+		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery, int start,
+		int end) throws com.liferay.portal.SystemException {
 		JournalArticleResourceLocalService journalArticleResourceLocalService = JournalArticleResourceLocalServiceFactory.getService();
 
-		return journalArticleResourceLocalService.dynamicQuery(queryInitializer,
+		return journalArticleResourceLocalService.dynamicQuery(dynamicQuery,
 			start, end);
 	}
 

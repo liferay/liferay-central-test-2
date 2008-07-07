@@ -29,7 +29,7 @@ import com.liferay.counter.service.CounterServiceFactory;
 
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
-import com.liferay.portal.kernel.dao.search.DynamicQueryInitializer;
+import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 import com.liferay.portal.service.UserLocalService;
 import com.liferay.portal.service.UserLocalServiceFactory;
 import com.liferay.portal.service.UserService;
@@ -85,16 +85,15 @@ public abstract class TasksReviewLocalServiceBaseImpl
 		tasksReviewPersistence.remove(tasksReview);
 	}
 
-	public List<TasksReview> dynamicQuery(
-		DynamicQueryInitializer queryInitializer) throws SystemException {
-		return tasksReviewPersistence.findWithDynamicQuery(queryInitializer);
+	public List<TasksReview> dynamicQuery(DynamicQuery dynamicQuery)
+		throws SystemException {
+		return tasksReviewPersistence.findWithDynamicQuery(dynamicQuery);
 	}
 
-	public List<TasksReview> dynamicQuery(
-		DynamicQueryInitializer queryInitializer, int start, int end)
-		throws SystemException {
-		return tasksReviewPersistence.findWithDynamicQuery(queryInitializer,
-			start, end);
+	public List<TasksReview> dynamicQuery(DynamicQuery dynamicQuery, int start,
+		int end) throws SystemException {
+		return tasksReviewPersistence.findWithDynamicQuery(dynamicQuery, start,
+			end);
 	}
 
 	public TasksReview getTasksReview(long reviewId)

@@ -75,19 +75,19 @@ public class ContactLocalServiceUtil {
 	}
 
 	public static java.util.List<com.liferay.portal.model.Contact> dynamicQuery(
-		com.liferay.portal.kernel.dao.search.DynamicQueryInitializer queryInitializer)
+		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery)
 		throws com.liferay.portal.SystemException {
 		ContactLocalService contactLocalService = ContactLocalServiceFactory.getService();
 
-		return contactLocalService.dynamicQuery(queryInitializer);
+		return contactLocalService.dynamicQuery(dynamicQuery);
 	}
 
 	public static java.util.List<com.liferay.portal.model.Contact> dynamicQuery(
-		com.liferay.portal.kernel.dao.search.DynamicQueryInitializer queryInitializer,
-		int start, int end) throws com.liferay.portal.SystemException {
+		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery, int start,
+		int end) throws com.liferay.portal.SystemException {
 		ContactLocalService contactLocalService = ContactLocalServiceFactory.getService();
 
-		return contactLocalService.dynamicQuery(queryInitializer, start, end);
+		return contactLocalService.dynamicQuery(dynamicQuery, start, end);
 	}
 
 	public static com.liferay.portal.model.Contact getContact(long contactId)

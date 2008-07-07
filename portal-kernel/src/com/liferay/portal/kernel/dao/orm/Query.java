@@ -20,24 +20,51 @@
  * SOFTWARE.
  */
 
-package com.liferay.portal.kernel.dao.hibernate;
+package com.liferay.portal.kernel.dao.orm;
+
+import java.io.Serializable;
+
+import java.sql.Timestamp;
+
+import java.util.Iterator;
+import java.util.List;
 
 /**
- * <a href="TypeImpl.java.html"><b><i>View Source</i></b></a>
+ * <a href="Query.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *
  */
-public class TypeImpl implements Type {
+public interface Query {
 
-	public TypeImpl(String name) {
-		_name = name;
-	}
+	public Iterator iterate() throws HibernateException;
 
-	public String getName() {
-		return _name;
-	}
+	public List list() throws HibernateException;
 
-	private String _name;
+	public ScrollableResults scroll() throws HibernateException;
+
+	public Query setBoolean(int pos, boolean value);
+
+	public Query setDouble(int pos, double value);
+
+	public Query setFirstResult(int firstResult);
+
+	public Query setFloat(int pos, float value);
+
+	public Query setInteger(int pos, int value);
+
+	public Query setLong(int pos, long value);
+
+	public Query setMaxResults(int maxResults);
+
+	public Query setShort(int pos, short value);
+
+	public Query setSerializable(int pos, Serializable value);
+
+	public Query setString(int pos, String value);
+
+	public Query setTimestamp(int pos, Timestamp value);
+
+	public Object uniqueResult() throws HibernateException;
 
 }

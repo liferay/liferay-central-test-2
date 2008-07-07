@@ -20,30 +20,26 @@
  * SOFTWARE.
  */
 
-package com.liferay.portal.kernel.dao.hibernate;
+package com.liferay.portal.dao.orm.hibernate;
+
+import com.liferay.portal.kernel.dao.orm.Dialect;
 
 /**
- * <a href="HibernateException.java.html"><b><i>View Source</i></b></a>
+ * <a href="DialectImpl.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *
  */
-public class HibernateException extends RuntimeException {
+public class DialectImpl implements Dialect {
 
-	public HibernateException() {
-		super();
+	public DialectImpl(org.hibernate.dialect.Dialect dialect) {
+		_dialect = dialect;
 	}
 
-	public HibernateException(String msg) {
-		super(msg);
+	public boolean supportsLimit() {
+		return _dialect.supportsLimit();
 	}
 
-	public HibernateException(Throwable cause) {
-		super(cause);
-	}
-
-	public HibernateException(String msg, Throwable cause) {
-		super(msg, cause);
-	}
+	private org.hibernate.dialect.Dialect _dialect;
 
 }

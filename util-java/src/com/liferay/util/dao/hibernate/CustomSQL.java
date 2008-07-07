@@ -478,6 +478,8 @@ public class CustomSQL {
 	}
 
 	protected String transform(String sql) {
+		sql = PortalUtil.transformCustomSQL(sql);
+
 		StringBuilder sb = new StringBuilder();
 
 		try {

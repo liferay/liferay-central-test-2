@@ -29,7 +29,7 @@ import com.liferay.counter.service.CounterServiceFactory;
 
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
-import com.liferay.portal.kernel.dao.search.DynamicQueryInitializer;
+import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 
 import com.liferay.portlet.announcements.model.AnnouncementsFlag;
 import com.liferay.portlet.announcements.service.AnnouncementsDeliveryLocalService;
@@ -77,15 +77,14 @@ public abstract class AnnouncementsFlagLocalServiceBaseImpl
 		announcementsFlagPersistence.remove(announcementsFlag);
 	}
 
-	public List<AnnouncementsFlag> dynamicQuery(
-		DynamicQueryInitializer queryInitializer) throws SystemException {
-		return announcementsFlagPersistence.findWithDynamicQuery(queryInitializer);
+	public List<AnnouncementsFlag> dynamicQuery(DynamicQuery dynamicQuery)
+		throws SystemException {
+		return announcementsFlagPersistence.findWithDynamicQuery(dynamicQuery);
 	}
 
-	public List<AnnouncementsFlag> dynamicQuery(
-		DynamicQueryInitializer queryInitializer, int start, int end)
-		throws SystemException {
-		return announcementsFlagPersistence.findWithDynamicQuery(queryInitializer,
+	public List<AnnouncementsFlag> dynamicQuery(DynamicQuery dynamicQuery,
+		int start, int end) throws SystemException {
+		return announcementsFlagPersistence.findWithDynamicQuery(dynamicQuery,
 			start, end);
 	}
 

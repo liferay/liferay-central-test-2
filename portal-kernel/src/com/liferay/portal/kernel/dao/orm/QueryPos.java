@@ -20,7 +20,7 @@
  * SOFTWARE.
  */
 
-package com.liferay.portal.kernel.dao.hibernate;
+package com.liferay.portal.kernel.dao.orm;
 
 import java.sql.Timestamp;
 

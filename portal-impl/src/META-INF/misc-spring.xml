@@ -34,6 +34,12 @@
 			<ref bean="com.liferay.portal.cache.SingleVMPoolImpl" />
 		</property>
 	</bean>
+	<bean id="com.liferay.portal.dao.orm.hibernate.FinderCacheImpl" class="com.liferay.portal.dao.orm.hibernate.FinderCacheImpl" lazy-init="true" />
+	<bean id="com.liferay.portal.kernel.dao.orm.FinderCacheUtil" class="com.liferay.portal.kernel.dao.orm.FinderCacheUtil" lazy-init="true">
+		<property name="finderCache">
+			<ref bean="com.liferay.portal.dao.orm.hibernate.FinderCacheImpl" />
+		</property>
+	</bean>
 	<bean id="com.liferay.portal.image.ImageProcessorImpl" class="com.liferay.portal.image.ImageProcessorImpl" lazy-init="true" />
 	<bean id="com.liferay.portal.kernel.image.ImageProcessorUtil" class="com.liferay.portal.kernel.image.ImageProcessorUtil" lazy-init="true">
 		<property name="imageProcessor">
@@ -162,12 +168,6 @@
 	<bean id="com.liferay.portal.kernel.servlet.ImageServletTokenUtil" class="com.liferay.portal.kernel.servlet.ImageServletTokenUtil" lazy-init="true">
 		<property name="imageServletToken">
 			<ref bean="com.liferay.portal.servlet.ImageServletTokenImpl" />
-		</property>
-	</bean>
-	<bean id="com.liferay.portal.spring.hibernate.FinderCacheImpl" class="com.liferay.portal.spring.hibernate.FinderCacheImpl" lazy-init="true" />
-	<bean id="com.liferay.portal.kernel.spring.hibernate.FinderCacheUtil" class="com.liferay.portal.kernel.spring.hibernate.FinderCacheUtil" lazy-init="true">
-		<property name="finderCache">
-			<ref bean="com.liferay.portal.spring.hibernate.FinderCacheImpl" />
 		</property>
 	</bean>
 	<bean id="com.liferay.portal.util.CalendarFactoryImpl" class="com.liferay.portal.util.CalendarFactoryImpl" lazy-init="true" />

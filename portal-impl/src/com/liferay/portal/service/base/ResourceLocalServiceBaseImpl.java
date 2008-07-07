@@ -29,7 +29,7 @@ import com.liferay.counter.service.CounterServiceFactory;
 
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
-import com.liferay.portal.kernel.dao.search.DynamicQueryInitializer;
+import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 import com.liferay.portal.model.Resource;
 import com.liferay.portal.service.AccountLocalService;
 import com.liferay.portal.service.AccountLocalServiceFactory;
@@ -292,16 +292,14 @@ public abstract class ResourceLocalServiceBaseImpl
 		resourcePersistence.remove(resource);
 	}
 
-	public List<Resource> dynamicQuery(DynamicQueryInitializer queryInitializer)
+	public List<Resource> dynamicQuery(DynamicQuery dynamicQuery)
 		throws SystemException {
-		return resourcePersistence.findWithDynamicQuery(queryInitializer);
+		return resourcePersistence.findWithDynamicQuery(dynamicQuery);
 	}
 
-	public List<Resource> dynamicQuery(
-		DynamicQueryInitializer queryInitializer, int start, int end)
-		throws SystemException {
-		return resourcePersistence.findWithDynamicQuery(queryInitializer,
-			start, end);
+	public List<Resource> dynamicQuery(DynamicQuery dynamicQuery, int start,
+		int end) throws SystemException {
+		return resourcePersistence.findWithDynamicQuery(dynamicQuery, start, end);
 	}
 
 	public Resource getResource(long resourceId)

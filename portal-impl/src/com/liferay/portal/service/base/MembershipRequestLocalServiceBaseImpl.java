@@ -32,7 +32,7 @@ import com.liferay.mail.service.MailServiceFactory;
 
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
-import com.liferay.portal.kernel.dao.search.DynamicQueryInitializer;
+import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 import com.liferay.portal.model.MembershipRequest;
 import com.liferay.portal.service.AccountLocalService;
 import com.liferay.portal.service.AccountLocalServiceFactory;
@@ -297,15 +297,14 @@ public abstract class MembershipRequestLocalServiceBaseImpl
 		membershipRequestPersistence.remove(membershipRequest);
 	}
 
-	public List<MembershipRequest> dynamicQuery(
-		DynamicQueryInitializer queryInitializer) throws SystemException {
-		return membershipRequestPersistence.findWithDynamicQuery(queryInitializer);
+	public List<MembershipRequest> dynamicQuery(DynamicQuery dynamicQuery)
+		throws SystemException {
+		return membershipRequestPersistence.findWithDynamicQuery(dynamicQuery);
 	}
 
-	public List<MembershipRequest> dynamicQuery(
-		DynamicQueryInitializer queryInitializer, int start, int end)
-		throws SystemException {
-		return membershipRequestPersistence.findWithDynamicQuery(queryInitializer,
+	public List<MembershipRequest> dynamicQuery(DynamicQuery dynamicQuery,
+		int start, int end) throws SystemException {
+		return membershipRequestPersistence.findWithDynamicQuery(dynamicQuery,
 			start, end);
 	}
 

@@ -301,12 +301,12 @@ public interface SocialActivityPersistence {
 		throws com.liferay.portal.SystemException;
 
 	public java.util.List<com.liferay.portlet.social.model.SocialActivity> findWithDynamicQuery(
-		com.liferay.portal.kernel.dao.search.DynamicQueryInitializer queryInitializer)
+		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery)
 		throws com.liferay.portal.SystemException;
 
 	public java.util.List<com.liferay.portlet.social.model.SocialActivity> findWithDynamicQuery(
-		com.liferay.portal.kernel.dao.search.DynamicQueryInitializer queryInitializer,
-		int start, int end) throws com.liferay.portal.SystemException;
+		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery, int start,
+		int end) throws com.liferay.portal.SystemException;
 
 	public java.util.List<com.liferay.portlet.social.model.SocialActivity> findAll()
 		throws com.liferay.portal.SystemException;

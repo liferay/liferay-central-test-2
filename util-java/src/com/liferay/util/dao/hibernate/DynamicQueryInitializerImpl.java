@@ -22,8 +22,8 @@
 
 package com.liferay.util.dao.hibernate;
 
-import com.liferay.portal.kernel.dao.search.DynamicQuery;
-import com.liferay.portal.kernel.dao.search.DynamicQueryInitializer;
+import com.liferay.portal.kernel.dao.orm.DynamicQuery;
+import com.liferay.portal.kernel.dao.orm.DynamicQueryInitializer;
 
 import org.hibernate.Session;
 import org.hibernate.criterion.DetachedCriteria;

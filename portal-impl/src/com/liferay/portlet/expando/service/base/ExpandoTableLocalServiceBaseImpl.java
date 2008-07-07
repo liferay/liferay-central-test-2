@@ -29,7 +29,7 @@ import com.liferay.counter.service.CounterServiceFactory;
 
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
-import com.liferay.portal.kernel.dao.search.DynamicQueryInitializer;
+import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 
 import com.liferay.portlet.expando.model.ExpandoTable;
 import com.liferay.portlet.expando.service.ExpandoColumnLocalService;
@@ -81,15 +81,14 @@ public abstract class ExpandoTableLocalServiceBaseImpl
 		expandoTablePersistence.remove(expandoTable);
 	}
 
-	public List<ExpandoTable> dynamicQuery(
-		DynamicQueryInitializer queryInitializer) throws SystemException {
-		return expandoTablePersistence.findWithDynamicQuery(queryInitializer);
+	public List<ExpandoTable> dynamicQuery(DynamicQuery dynamicQuery)
+		throws SystemException {
+		return expandoTablePersistence.findWithDynamicQuery(dynamicQuery);
 	}
 
-	public List<ExpandoTable> dynamicQuery(
-		DynamicQueryInitializer queryInitializer, int start, int end)
-		throws SystemException {
-		return expandoTablePersistence.findWithDynamicQuery(queryInitializer,
+	public List<ExpandoTable> dynamicQuery(DynamicQuery dynamicQuery,
+		int start, int end) throws SystemException {
+		return expandoTablePersistence.findWithDynamicQuery(dynamicQuery,
 			start, end);
 	}
 

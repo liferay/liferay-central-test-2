@@ -76,20 +76,19 @@ public class ExpandoValueLocalServiceUtil {
 	}
 
 	public static java.util.List<com.liferay.portlet.expando.model.ExpandoValue> dynamicQuery(
-		com.liferay.portal.kernel.dao.search.DynamicQueryInitializer queryInitializer)
+		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery)
 		throws com.liferay.portal.SystemException {
 		ExpandoValueLocalService expandoValueLocalService = ExpandoValueLocalServiceFactory.getService();
 
-		return expandoValueLocalService.dynamicQuery(queryInitializer);
+		return expandoValueLocalService.dynamicQuery(dynamicQuery);
 	}
 
 	public static java.util.List<com.liferay.portlet.expando.model.ExpandoValue> dynamicQuery(
-		com.liferay.portal.kernel.dao.search.DynamicQueryInitializer queryInitializer,
-		int start, int end) throws com.liferay.portal.SystemException {
+		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery, int start,
+		int end) throws com.liferay.portal.SystemException {
 		ExpandoValueLocalService expandoValueLocalService = ExpandoValueLocalServiceFactory.getService();
 
-		return expandoValueLocalService.dynamicQuery(queryInitializer, start,
-			end);
+		return expandoValueLocalService.dynamicQuery(dynamicQuery, start, end);
 	}
 
 	public static com.liferay.portlet.expando.model.ExpandoValue getExpandoValue(

@@ -29,7 +29,7 @@ import com.liferay.counter.service.CounterServiceFactory;
 
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
-import com.liferay.portal.kernel.dao.search.DynamicQueryInitializer;
+import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 import com.liferay.portal.model.PluginSetting;
 import com.liferay.portal.service.AccountLocalService;
 import com.liferay.portal.service.AccountLocalServiceFactory;
@@ -294,15 +294,14 @@ public abstract class PluginSettingLocalServiceBaseImpl
 		pluginSettingPersistence.remove(pluginSetting);
 	}
 
-	public List<PluginSetting> dynamicQuery(
-		DynamicQueryInitializer queryInitializer) throws SystemException {
-		return pluginSettingPersistence.findWithDynamicQuery(queryInitializer);
+	public List<PluginSetting> dynamicQuery(DynamicQuery dynamicQuery)
+		throws SystemException {
+		return pluginSettingPersistence.findWithDynamicQuery(dynamicQuery);
 	}
 
-	public List<PluginSetting> dynamicQuery(
-		DynamicQueryInitializer queryInitializer, int start, int end)
-		throws SystemException {
-		return pluginSettingPersistence.findWithDynamicQuery(queryInitializer,
+	public List<PluginSetting> dynamicQuery(DynamicQuery dynamicQuery,
+		int start, int end) throws SystemException {
+		return pluginSettingPersistence.findWithDynamicQuery(dynamicQuery,
 			start, end);
 	}
 

@@ -20,24 +20,29 @@
  * SOFTWARE.
  */
 
-package com.liferay.portal.kernel.dao.hibernate;
+package com.liferay.portal.kernel.dao.orm;
 
 /**
- * <a href="LockModeImpl.java.html"><b><i>View Source</i></b></a>
+ * <a href="LockMode.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *
  */
-public class LockModeImpl implements LockMode {
+public interface LockMode {
 
-	public LockModeImpl(String name) {
-		_name = name;
-	}
+	public static final LockMode FORCE = new LockModeImpl("FORCE");
 
-	public String getName() {
-		return _name;
-	}
+	public static final LockMode NONE = new LockModeImpl("NONE");
 
-	private String _name;
+	public static final LockMode READ = new LockModeImpl("READ");
+
+	public static final LockMode UPGRADE = new LockModeImpl("UPGRADE");
+
+	public static final LockMode UPGRADE_NOWAIT =
+		new LockModeImpl("UPGRADE_NOWAIT");
+
+	public static final LockMode WRITE = new LockModeImpl("WRITE");
+
+	public String getName();
 
 }

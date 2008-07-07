@@ -24,7 +24,7 @@ package com.liferay.portal.service.base;
 
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
-import com.liferay.portal.kernel.dao.search.DynamicQueryInitializer;
+import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 import com.liferay.portal.model.Contact;
 import com.liferay.portal.service.AccountLocalService;
 import com.liferay.portal.service.AccountLocalServiceFactory;
@@ -286,16 +286,14 @@ public abstract class ContactLocalServiceBaseImpl implements ContactLocalService
 		contactPersistence.remove(contact);
 	}
 
-	public List<Contact> dynamicQuery(DynamicQueryInitializer queryInitializer)
+	public List<Contact> dynamicQuery(DynamicQuery dynamicQuery)
 		throws SystemException {
-		return contactPersistence.findWithDynamicQuery(queryInitializer);
+		return contactPersistence.findWithDynamicQuery(dynamicQuery);
 	}
 
-	public List<Contact> dynamicQuery(
-		DynamicQueryInitializer queryInitializer, int start, int end)
-		throws SystemException {
-		return contactPersistence.findWithDynamicQuery(queryInitializer, start,
-			end);
+	public List<Contact> dynamicQuery(DynamicQuery dynamicQuery, int start,
+		int end) throws SystemException {
+		return contactPersistence.findWithDynamicQuery(dynamicQuery, start, end);
 	}
 
 	public Contact getContact(long contactId)

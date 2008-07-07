@@ -24,7 +24,7 @@ package com.liferay.portal.service.base;
 
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
-import com.liferay.portal.kernel.dao.search.DynamicQueryInitializer;
+import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 import com.liferay.portal.model.Account;
 import com.liferay.portal.service.AccountLocalService;
 import com.liferay.portal.service.AddressLocalService;
@@ -286,16 +286,14 @@ public abstract class AccountLocalServiceBaseImpl implements AccountLocalService
 		accountPersistence.remove(account);
 	}
 
-	public List<Account> dynamicQuery(DynamicQueryInitializer queryInitializer)
+	public List<Account> dynamicQuery(DynamicQuery dynamicQuery)
 		throws SystemException {
-		return accountPersistence.findWithDynamicQuery(queryInitializer);
+		return accountPersistence.findWithDynamicQuery(dynamicQuery);
 	}
 
-	public List<Account> dynamicQuery(
-		DynamicQueryInitializer queryInitializer, int start, int end)
-		throws SystemException {
-		return accountPersistence.findWithDynamicQuery(queryInitializer, start,
-			end);
+	public List<Account> dynamicQuery(DynamicQuery dynamicQuery, int start,
+		int end) throws SystemException {
+		return accountPersistence.findWithDynamicQuery(dynamicQuery, start, end);
 	}
 
 	public Account getAccount(long accountId)

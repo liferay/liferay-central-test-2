@@ -20,30 +20,20 @@
  * SOFTWARE.
  */
 
-package com.liferay.portal.kernel.dao.hibernate;
+package com.liferay.portal.kernel.dao.orm;
+
+import java.util.List;
 
 /**
- * <a href="Type.java.html"><b><i>View Source</i></b></a>
+ * <a href="DynamicQuery.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *
  */
-public interface Type {
+public interface DynamicQuery {
 
-	public static final Type BOOLEAN  = new TypeImpl("BOOLEAN");
+	public List list();
 
-	public static final Type DOUBLE  = new TypeImpl("DOUBLE");
-
-	public static final Type FLOAT  = new TypeImpl("FLOAT");
-
-	public static final Type INTEGER  = new TypeImpl("INTEGER");
-
-	public static final Type LONG = new TypeImpl("LONG");
-
-	public static final Type SHORT  = new TypeImpl("SHORT");
-
-	public static final Type STRING = new TypeImpl("STRING");
-
-	public String getName();
+	public void setLimit(int start, int end);
 
 }

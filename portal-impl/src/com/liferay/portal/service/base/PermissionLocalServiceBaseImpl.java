@@ -29,7 +29,7 @@ import com.liferay.counter.service.CounterServiceFactory;
 
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
-import com.liferay.portal.kernel.dao.search.DynamicQueryInitializer;
+import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 import com.liferay.portal.model.Permission;
 import com.liferay.portal.service.AccountLocalService;
 import com.liferay.portal.service.AccountLocalServiceFactory;
@@ -294,16 +294,15 @@ public abstract class PermissionLocalServiceBaseImpl
 		permissionPersistence.remove(permission);
 	}
 
-	public List<Permission> dynamicQuery(
-		DynamicQueryInitializer queryInitializer) throws SystemException {
-		return permissionPersistence.findWithDynamicQuery(queryInitializer);
+	public List<Permission> dynamicQuery(DynamicQuery dynamicQuery)
+		throws SystemException {
+		return permissionPersistence.findWithDynamicQuery(dynamicQuery);
 	}
 
-	public List<Permission> dynamicQuery(
-		DynamicQueryInitializer queryInitializer, int start, int end)
-		throws SystemException {
-		return permissionPersistence.findWithDynamicQuery(queryInitializer,
-			start, end);
+	public List<Permission> dynamicQuery(DynamicQuery dynamicQuery, int start,
+		int end) throws SystemException {
+		return permissionPersistence.findWithDynamicQuery(dynamicQuery, start,
+			end);
 	}
 
 	public Permission getPermission(long permissionId)

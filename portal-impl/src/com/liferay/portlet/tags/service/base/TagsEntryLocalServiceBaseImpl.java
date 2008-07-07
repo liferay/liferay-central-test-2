@@ -29,7 +29,7 @@ import com.liferay.counter.service.CounterServiceFactory;
 
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
-import com.liferay.portal.kernel.dao.search.DynamicQueryInitializer;
+import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 import com.liferay.portal.service.UserLocalService;
 import com.liferay.portal.service.UserLocalServiceFactory;
 import com.liferay.portal.service.UserService;
@@ -96,16 +96,15 @@ public abstract class TagsEntryLocalServiceBaseImpl
 		tagsEntryPersistence.remove(tagsEntry);
 	}
 
-	public List<TagsEntry> dynamicQuery(
-		DynamicQueryInitializer queryInitializer) throws SystemException {
-		return tagsEntryPersistence.findWithDynamicQuery(queryInitializer);
+	public List<TagsEntry> dynamicQuery(DynamicQuery dynamicQuery)
+		throws SystemException {
+		return tagsEntryPersistence.findWithDynamicQuery(dynamicQuery);
 	}
 
-	public List<TagsEntry> dynamicQuery(
-		DynamicQueryInitializer queryInitializer, int start, int end)
-		throws SystemException {
-		return tagsEntryPersistence.findWithDynamicQuery(queryInitializer,
-			start, end);
+	public List<TagsEntry> dynamicQuery(DynamicQuery dynamicQuery, int start,
+		int end) throws SystemException {
+		return tagsEntryPersistence.findWithDynamicQuery(dynamicQuery, start,
+			end);
 	}
 
 	public TagsEntry getTagsEntry(long entryId)

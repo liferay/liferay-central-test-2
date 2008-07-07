@@ -20,16 +20,16 @@
  * SOFTWARE.
  */
 
-package com.liferay.portal.spring.hibernate;
+package com.liferay.portal.dao.orm.hibernate;
 
 import com.liferay.portal.kernel.cache.CacheKVP;
 import com.liferay.portal.kernel.cache.CacheRegistry;
 import com.liferay.portal.kernel.cache.CacheRegistryItem;
 import com.liferay.portal.kernel.cache.MultiVMPoolUtil;
 import com.liferay.portal.kernel.cache.PortalCache;
-import com.liferay.portal.kernel.dao.hibernate.Session;
-import com.liferay.portal.kernel.dao.hibernate.SessionFactory;
-import com.liferay.portal.kernel.spring.hibernate.FinderCache;
+import com.liferay.portal.kernel.dao.orm.FinderCache;
+import com.liferay.portal.kernel.dao.orm.Session;
+import com.liferay.portal.kernel.dao.orm.SessionFactory;
 import com.liferay.portal.kernel.util.ArrayUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.StringPool;

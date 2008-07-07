@@ -75,19 +75,19 @@ public class CompanyLocalServiceUtil {
 	}
 
 	public static java.util.List<com.liferay.portal.model.Company> dynamicQuery(
-		com.liferay.portal.kernel.dao.search.DynamicQueryInitializer queryInitializer)
+		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery)
 		throws com.liferay.portal.SystemException {
 		CompanyLocalService companyLocalService = CompanyLocalServiceFactory.getService();
 
-		return companyLocalService.dynamicQuery(queryInitializer);
+		return companyLocalService.dynamicQuery(dynamicQuery);
 	}
 
 	public static java.util.List<com.liferay.portal.model.Company> dynamicQuery(
-		com.liferay.portal.kernel.dao.search.DynamicQueryInitializer queryInitializer,
-		int start, int end) throws com.liferay.portal.SystemException {
+		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery, int start,
+		int end) throws com.liferay.portal.SystemException {
 		CompanyLocalService companyLocalService = CompanyLocalServiceFactory.getService();
 
-		return companyLocalService.dynamicQuery(queryInitializer, start, end);
+		return companyLocalService.dynamicQuery(dynamicQuery, start, end);
 	}
 
 	public static com.liferay.portal.model.Company getCompany(long companyId)

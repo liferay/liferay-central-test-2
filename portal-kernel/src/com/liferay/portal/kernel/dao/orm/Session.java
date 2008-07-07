@@ -20,29 +20,40 @@
  * SOFTWARE.
  */
 
-package com.liferay.portal.kernel.dao.hibernate;
+package com.liferay.portal.kernel.dao.orm;
+
+import java.io.Serializable;
+
+import java.sql.Connection;
 
 /**
- * <a href="LockMode.java.html"><b><i>View Source</i></b></a>
+ * <a href="Session.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *
  */
-public interface LockMode {
+public interface Session {
 
-	public static final LockMode FORCE = new LockModeImpl("FORCE");
+	public Connection close() throws HibernateException;
 
-	public static final LockMode NONE = new LockModeImpl("NONE");
+	public Query createQuery(String queryString) throws HibernateException;
 
-	public static final LockMode READ = new LockModeImpl("READ");
+	public SQLQuery createSQLQuery(String queryString)
+		throws HibernateException;
 
-	public static final LockMode UPGRADE = new LockModeImpl("UPGRADE");
+	public void delete(Object object) throws HibernateException;
 
-	public static final LockMode UPGRADE_NOWAIT =
-		new LockModeImpl("UPGRADE_NOWAIT");
+	public void flush() throws HibernateException;
 
-	public static final LockMode WRITE = new LockModeImpl("WRITE");
+	public Object get(Class clazz, Serializable id) throws HibernateException;
 
-	public String getName();
+	public Object get(Class clazz, Serializable id, LockMode lockMode)
+		throws HibernateException;
+
+	public Object load(Class clazz, Serializable id) throws HibernateException;
+
+	public Object merge(Object object) throws HibernateException;
+
+	public Serializable save(Object object) throws HibernateException;
 
 }

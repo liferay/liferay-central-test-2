@@ -29,7 +29,7 @@ import com.liferay.counter.service.CounterServiceFactory;
 
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
-import com.liferay.portal.kernel.dao.search.DynamicQueryInitializer;
+import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 import com.liferay.portal.model.UserTracker;
 import com.liferay.portal.service.AccountLocalService;
 import com.liferay.portal.service.AccountLocalServiceFactory;
@@ -296,16 +296,15 @@ public abstract class UserTrackerLocalServiceBaseImpl
 		userTrackerPersistence.remove(userTracker);
 	}
 
-	public List<UserTracker> dynamicQuery(
-		DynamicQueryInitializer queryInitializer) throws SystemException {
-		return userTrackerPersistence.findWithDynamicQuery(queryInitializer);
+	public List<UserTracker> dynamicQuery(DynamicQuery dynamicQuery)
+		throws SystemException {
+		return userTrackerPersistence.findWithDynamicQuery(dynamicQuery);
 	}
 
-	public List<UserTracker> dynamicQuery(
-		DynamicQueryInitializer queryInitializer, int start, int end)
-		throws SystemException {
-		return userTrackerPersistence.findWithDynamicQuery(queryInitializer,
-			start, end);
+	public List<UserTracker> dynamicQuery(DynamicQuery dynamicQuery, int start,
+		int end) throws SystemException {
+		return userTrackerPersistence.findWithDynamicQuery(dynamicQuery, start,
+			end);
 	}
 
 	public UserTracker getUserTracker(long userTrackerId)

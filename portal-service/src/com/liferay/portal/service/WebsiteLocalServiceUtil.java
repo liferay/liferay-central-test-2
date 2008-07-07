@@ -75,19 +75,19 @@ public class WebsiteLocalServiceUtil {
 	}
 
 	public static java.util.List<com.liferay.portal.model.Website> dynamicQuery(
-		com.liferay.portal.kernel.dao.search.DynamicQueryInitializer queryInitializer)
+		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery)
 		throws com.liferay.portal.SystemException {
 		WebsiteLocalService websiteLocalService = WebsiteLocalServiceFactory.getService();
 
-		return websiteLocalService.dynamicQuery(queryInitializer);
+		return websiteLocalService.dynamicQuery(dynamicQuery);
 	}
 
 	public static java.util.List<com.liferay.portal.model.Website> dynamicQuery(
-		com.liferay.portal.kernel.dao.search.DynamicQueryInitializer queryInitializer,
-		int start, int end) throws com.liferay.portal.SystemException {
+		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery, int start,
+		int end) throws com.liferay.portal.SystemException {
 		WebsiteLocalService websiteLocalService = WebsiteLocalServiceFactory.getService();
 
-		return websiteLocalService.dynamicQuery(queryInitializer, start, end);
+		return websiteLocalService.dynamicQuery(dynamicQuery, start, end);
 	}
 
 	public static com.liferay.portal.model.Website getWebsite(long websiteId)

@@ -76,20 +76,20 @@ public class ShoppingCategoryLocalServiceUtil {
 	}
 
 	public static java.util.List<com.liferay.portlet.shopping.model.ShoppingCategory> dynamicQuery(
-		com.liferay.portal.kernel.dao.search.DynamicQueryInitializer queryInitializer)
+		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery)
 		throws com.liferay.portal.SystemException {
 		ShoppingCategoryLocalService shoppingCategoryLocalService = ShoppingCategoryLocalServiceFactory.getService();
 
-		return shoppingCategoryLocalService.dynamicQuery(queryInitializer);
+		return shoppingCategoryLocalService.dynamicQuery(dynamicQuery);
 	}
 
 	public static java.util.List<com.liferay.portlet.shopping.model.ShoppingCategory> dynamicQuery(
-		com.liferay.portal.kernel.dao.search.DynamicQueryInitializer queryInitializer,
-		int start, int end) throws com.liferay.portal.SystemException {
+		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery, int start,
+		int end) throws com.liferay.portal.SystemException {
 		ShoppingCategoryLocalService shoppingCategoryLocalService = ShoppingCategoryLocalServiceFactory.getService();
 
-		return shoppingCategoryLocalService.dynamicQuery(queryInitializer,
-			start, end);
+		return shoppingCategoryLocalService.dynamicQuery(dynamicQuery, start,
+			end);
 	}
 
 	public static com.liferay.portlet.shopping.model.ShoppingCategory getShoppingCategory(

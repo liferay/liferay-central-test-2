@@ -20,40 +20,24 @@
  * SOFTWARE.
  */
 
-package com.liferay.portal.dao.hibernate;
-
-import com.liferay.portal.kernel.dao.hibernate.LockMode;
+package com.liferay.portal.kernel.dao.orm;
 
 /**
- * <a href="LockModeTranslator.java.html"><b><i>View Source</i></b></a>
+ * <a href="TypeImpl.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *
  */
-public class LockModeTranslator {
+public class TypeImpl implements Type {
 
-	public static org.hibernate.LockMode translate(LockMode lockMode) {
-		if (lockMode == LockMode.FORCE) {
-			return org.hibernate.LockMode.FORCE;
-		}
-		else if (lockMode == LockMode.NONE) {
-			return org.hibernate.LockMode.NONE;
-		}
-		else if (lockMode == LockMode.READ) {
-			return org.hibernate.LockMode.READ;
-		}
-		else if (lockMode == LockMode.UPGRADE) {
-			return org.hibernate.LockMode.UPGRADE;
-		}
-		else if (lockMode == LockMode.UPGRADE_NOWAIT) {
-			return org.hibernate.LockMode.UPGRADE_NOWAIT;
-		}
-		else if (lockMode == LockMode.WRITE) {
-			return org.hibernate.LockMode.WRITE;
-		}
-		else {
-			return org.hibernate.LockMode.parse(lockMode.getName());
-		}
+	public TypeImpl(String name) {
+		_name = name;
 	}
+
+	public String getName() {
+		return _name;
+	}
+
+	private String _name;
 
 }

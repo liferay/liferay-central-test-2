@@ -76,20 +76,19 @@ public class TasksProposalLocalServiceUtil {
 	}
 
 	public static java.util.List<com.liferay.portlet.tasks.model.TasksProposal> dynamicQuery(
-		com.liferay.portal.kernel.dao.search.DynamicQueryInitializer queryInitializer)
+		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery)
 		throws com.liferay.portal.SystemException {
 		TasksProposalLocalService tasksProposalLocalService = TasksProposalLocalServiceFactory.getService();
 
-		return tasksProposalLocalService.dynamicQuery(queryInitializer);
+		return tasksProposalLocalService.dynamicQuery(dynamicQuery);
 	}
 
 	public static java.util.List<com.liferay.portlet.tasks.model.TasksProposal> dynamicQuery(
-		com.liferay.portal.kernel.dao.search.DynamicQueryInitializer queryInitializer,
-		int start, int end) throws com.liferay.portal.SystemException {
+		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery, int start,
+		int end) throws com.liferay.portal.SystemException {
 		TasksProposalLocalService tasksProposalLocalService = TasksProposalLocalServiceFactory.getService();
 
-		return tasksProposalLocalService.dynamicQuery(queryInitializer, start,
-			end);
+		return tasksProposalLocalService.dynamicQuery(dynamicQuery, start, end);
 	}
 
 	public static com.liferay.portlet.tasks.model.TasksProposal getTasksProposal(

@@ -29,7 +29,7 @@ import com.liferay.counter.service.CounterServiceFactory;
 
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
-import com.liferay.portal.kernel.dao.search.DynamicQueryInitializer;
+import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 import com.liferay.portal.model.EmailAddress;
 import com.liferay.portal.service.AccountLocalService;
 import com.liferay.portal.service.AccountLocalServiceFactory;
@@ -294,15 +294,14 @@ public abstract class EmailAddressLocalServiceBaseImpl
 		emailAddressPersistence.remove(emailAddress);
 	}
 
-	public List<EmailAddress> dynamicQuery(
-		DynamicQueryInitializer queryInitializer) throws SystemException {
-		return emailAddressPersistence.findWithDynamicQuery(queryInitializer);
+	public List<EmailAddress> dynamicQuery(DynamicQuery dynamicQuery)
+		throws SystemException {
+		return emailAddressPersistence.findWithDynamicQuery(dynamicQuery);
 	}
 
-	public List<EmailAddress> dynamicQuery(
-		DynamicQueryInitializer queryInitializer, int start, int end)
-		throws SystemException {
-		return emailAddressPersistence.findWithDynamicQuery(queryInitializer,
+	public List<EmailAddress> dynamicQuery(DynamicQuery dynamicQuery,
+		int start, int end) throws SystemException {
+		return emailAddressPersistence.findWithDynamicQuery(dynamicQuery,
 			start, end);
 	}
 

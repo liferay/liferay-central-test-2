@@ -29,7 +29,7 @@ import com.liferay.counter.service.CounterServiceFactory;
 
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
-import com.liferay.portal.kernel.dao.search.DynamicQueryInitializer;
+import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 
 import com.liferay.portlet.ratings.model.RatingsStats;
 import com.liferay.portlet.ratings.service.RatingsEntryLocalService;
@@ -69,15 +69,14 @@ public abstract class RatingsStatsLocalServiceBaseImpl
 		ratingsStatsPersistence.remove(ratingsStats);
 	}
 
-	public List<RatingsStats> dynamicQuery(
-		DynamicQueryInitializer queryInitializer) throws SystemException {
-		return ratingsStatsPersistence.findWithDynamicQuery(queryInitializer);
+	public List<RatingsStats> dynamicQuery(DynamicQuery dynamicQuery)
+		throws SystemException {
+		return ratingsStatsPersistence.findWithDynamicQuery(dynamicQuery);
 	}
 
-	public List<RatingsStats> dynamicQuery(
-		DynamicQueryInitializer queryInitializer, int start, int end)
-		throws SystemException {
-		return ratingsStatsPersistence.findWithDynamicQuery(queryInitializer,
+	public List<RatingsStats> dynamicQuery(DynamicQuery dynamicQuery,
+		int start, int end) throws SystemException {
+		return ratingsStatsPersistence.findWithDynamicQuery(dynamicQuery,
 			start, end);
 	}
 

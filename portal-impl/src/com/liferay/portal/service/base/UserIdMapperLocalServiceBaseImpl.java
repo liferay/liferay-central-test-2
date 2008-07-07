@@ -29,7 +29,7 @@ import com.liferay.counter.service.CounterServiceFactory;
 
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
-import com.liferay.portal.kernel.dao.search.DynamicQueryInitializer;
+import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 import com.liferay.portal.model.UserIdMapper;
 import com.liferay.portal.service.AccountLocalService;
 import com.liferay.portal.service.AccountLocalServiceFactory;
@@ -296,15 +296,14 @@ public abstract class UserIdMapperLocalServiceBaseImpl
 		userIdMapperPersistence.remove(userIdMapper);
 	}
 
-	public List<UserIdMapper> dynamicQuery(
-		DynamicQueryInitializer queryInitializer) throws SystemException {
-		return userIdMapperPersistence.findWithDynamicQuery(queryInitializer);
+	public List<UserIdMapper> dynamicQuery(DynamicQuery dynamicQuery)
+		throws SystemException {
+		return userIdMapperPersistence.findWithDynamicQuery(dynamicQuery);
 	}
 
-	public List<UserIdMapper> dynamicQuery(
-		DynamicQueryInitializer queryInitializer, int start, int end)
-		throws SystemException {
-		return userIdMapperPersistence.findWithDynamicQuery(queryInitializer,
+	public List<UserIdMapper> dynamicQuery(DynamicQuery dynamicQuery,
+		int start, int end) throws SystemException {
+		return userIdMapperPersistence.findWithDynamicQuery(dynamicQuery,
 			start, end);
 	}
 

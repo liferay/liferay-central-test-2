@@ -24,15 +24,14 @@ package com.liferay.portal.service.persistence;
 
 import com.liferay.portal.NoSuchRoleException;
 import com.liferay.portal.SystemException;
-import com.liferay.portal.kernel.dao.hibernate.Query;
-import com.liferay.portal.kernel.dao.hibernate.QueryPos;
-import com.liferay.portal.kernel.dao.hibernate.QueryUtil;
-import com.liferay.portal.kernel.dao.hibernate.SQLQuery;
-import com.liferay.portal.kernel.dao.hibernate.Session;
-import com.liferay.portal.kernel.dao.hibernate.Type;
-import com.liferay.portal.kernel.dao.search.DynamicQuery;
-import com.liferay.portal.kernel.dao.search.DynamicQueryInitializer;
-import com.liferay.portal.kernel.spring.hibernate.FinderCacheUtil;
+import com.liferay.portal.kernel.dao.orm.DynamicQuery;
+import com.liferay.portal.kernel.dao.orm.FinderCacheUtil;
+import com.liferay.portal.kernel.dao.orm.Query;
+import com.liferay.portal.kernel.dao.orm.QueryPos;
+import com.liferay.portal.kernel.dao.orm.QueryUtil;
+import com.liferay.portal.kernel.dao.orm.SQLQuery;
+import com.liferay.portal.kernel.dao.orm.Session;
+import com.liferay.portal.kernel.dao.orm.Type;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.ListUtil;
 import com.liferay.portal.kernel.util.OrderByComparator;
@@ -765,16 +764,14 @@ public class RolePersistenceImpl extends BasePersistenceImpl
 		}
 	}
 
-	public List<Role> findWithDynamicQuery(
-		DynamicQueryInitializer queryInitializer) throws SystemException {
+	public List<Role> findWithDynamicQuery(DynamicQuery dynamicQuery)
+		throws SystemException {
 		Session session = null;
 
 		try {
 			session = openSession();
 
-			DynamicQuery query = queryInitializer.initialize(session);
-
-			return query.list();
+			return dynamicQuery.list();
 		}
 		catch (Exception e) {
 			throw processException(e);
@@ -784,19 +781,16 @@ public class RolePersistenceImpl extends BasePersistenceImpl
 		}
 	}
 
-	public List<Role> findWithDynamicQuery(
-		DynamicQueryInitializer queryInitializer, int start, int end)
-		throws SystemException {
+	public List<Role> findWithDynamicQuery(DynamicQuery dynamicQuery,
+		int start, int end) throws SystemException {
 		Session session = null;
 
 		try {
 			session = openSession();
 
-			DynamicQuery query = queryInitializer.initialize(session);
+			dynamicQuery.setLimit(start, end);
 
-			query.setLimit(start, end);
-
-			return query.list();
+			return dynamicQuery.list();
 		}
 		catch (Exception e) {
 			throw processException(e);

@@ -29,7 +29,7 @@ import com.liferay.counter.service.CounterServiceFactory;
 
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
-import com.liferay.portal.kernel.dao.search.DynamicQueryInitializer;
+import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 import com.liferay.portal.service.UserLocalService;
 import com.liferay.portal.service.UserLocalServiceFactory;
 import com.liferay.portal.service.UserService;
@@ -111,15 +111,14 @@ public abstract class ShoppingCouponLocalServiceBaseImpl
 		shoppingCouponPersistence.remove(shoppingCoupon);
 	}
 
-	public List<ShoppingCoupon> dynamicQuery(
-		DynamicQueryInitializer queryInitializer) throws SystemException {
-		return shoppingCouponPersistence.findWithDynamicQuery(queryInitializer);
+	public List<ShoppingCoupon> dynamicQuery(DynamicQuery dynamicQuery)
+		throws SystemException {
+		return shoppingCouponPersistence.findWithDynamicQuery(dynamicQuery);
 	}
 
-	public List<ShoppingCoupon> dynamicQuery(
-		DynamicQueryInitializer queryInitializer, int start, int end)
-		throws SystemException {
-		return shoppingCouponPersistence.findWithDynamicQuery(queryInitializer,
+	public List<ShoppingCoupon> dynamicQuery(DynamicQuery dynamicQuery,
+		int start, int end) throws SystemException {
+		return shoppingCouponPersistence.findWithDynamicQuery(dynamicQuery,
 			start, end);
 	}
 

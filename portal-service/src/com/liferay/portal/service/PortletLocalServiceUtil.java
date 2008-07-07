@@ -75,19 +75,19 @@ public class PortletLocalServiceUtil {
 	}
 
 	public static java.util.List<com.liferay.portal.model.Portlet> dynamicQuery(
-		com.liferay.portal.kernel.dao.search.DynamicQueryInitializer queryInitializer)
+		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery)
 		throws com.liferay.portal.SystemException {
 		PortletLocalService portletLocalService = PortletLocalServiceFactory.getService();
 
-		return portletLocalService.dynamicQuery(queryInitializer);
+		return portletLocalService.dynamicQuery(dynamicQuery);
 	}
 
 	public static java.util.List<com.liferay.portal.model.Portlet> dynamicQuery(
-		com.liferay.portal.kernel.dao.search.DynamicQueryInitializer queryInitializer,
-		int start, int end) throws com.liferay.portal.SystemException {
+		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery, int start,
+		int end) throws com.liferay.portal.SystemException {
 		PortletLocalService portletLocalService = PortletLocalServiceFactory.getService();
 
-		return portletLocalService.dynamicQuery(queryInitializer, start, end);
+		return portletLocalService.dynamicQuery(dynamicQuery, start, end);
 	}
 
 	public static com.liferay.portal.model.Portlet getPortlet(long id)

@@ -29,7 +29,7 @@ import com.liferay.counter.service.CounterServiceFactory;
 
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
-import com.liferay.portal.kernel.dao.search.DynamicQueryInitializer;
+import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 import com.liferay.portal.model.Address;
 import com.liferay.portal.service.AccountLocalService;
 import com.liferay.portal.service.AccountLocalServiceFactory;
@@ -291,16 +291,14 @@ public abstract class AddressLocalServiceBaseImpl implements AddressLocalService
 		addressPersistence.remove(address);
 	}
 
-	public List<Address> dynamicQuery(DynamicQueryInitializer queryInitializer)
+	public List<Address> dynamicQuery(DynamicQuery dynamicQuery)
 		throws SystemException {
-		return addressPersistence.findWithDynamicQuery(queryInitializer);
+		return addressPersistence.findWithDynamicQuery(dynamicQuery);
 	}
 
-	public List<Address> dynamicQuery(
-		DynamicQueryInitializer queryInitializer, int start, int end)
-		throws SystemException {
-		return addressPersistence.findWithDynamicQuery(queryInitializer, start,
-			end);
+	public List<Address> dynamicQuery(DynamicQuery dynamicQuery, int start,
+		int end) throws SystemException {
+		return addressPersistence.findWithDynamicQuery(dynamicQuery, start, end);
 	}
 
 	public Address getAddress(long addressId)

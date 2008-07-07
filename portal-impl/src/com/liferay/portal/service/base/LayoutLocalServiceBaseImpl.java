@@ -29,7 +29,7 @@ import com.liferay.counter.service.CounterServiceFactory;
 
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
-import com.liferay.portal.kernel.dao.search.DynamicQueryInitializer;
+import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 import com.liferay.portal.model.Layout;
 import com.liferay.portal.service.AccountLocalService;
 import com.liferay.portal.service.AccountLocalServiceFactory;
@@ -321,15 +321,14 @@ public abstract class LayoutLocalServiceBaseImpl implements LayoutLocalService {
 		layoutPersistence.remove(layout);
 	}
 
-	public List<Layout> dynamicQuery(DynamicQueryInitializer queryInitializer)
+	public List<Layout> dynamicQuery(DynamicQuery dynamicQuery)
 		throws SystemException {
-		return layoutPersistence.findWithDynamicQuery(queryInitializer);
+		return layoutPersistence.findWithDynamicQuery(dynamicQuery);
 	}
 
-	public List<Layout> dynamicQuery(DynamicQueryInitializer queryInitializer,
-		int start, int end) throws SystemException {
-		return layoutPersistence.findWithDynamicQuery(queryInitializer, start,
-			end);
+	public List<Layout> dynamicQuery(DynamicQuery dynamicQuery, int start,
+		int end) throws SystemException {
+		return layoutPersistence.findWithDynamicQuery(dynamicQuery, start, end);
 	}
 
 	public Layout getLayout(long plid) throws PortalException, SystemException {

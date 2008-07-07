@@ -29,7 +29,7 @@ import com.liferay.counter.service.CounterServiceFactory;
 
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
-import com.liferay.portal.kernel.dao.search.DynamicQueryInitializer;
+import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 
 import com.liferay.portlet.polls.model.PollsChoice;
 import com.liferay.portlet.polls.service.PollsChoiceLocalService;
@@ -77,16 +77,15 @@ public abstract class PollsChoiceLocalServiceBaseImpl
 		pollsChoicePersistence.remove(pollsChoice);
 	}
 
-	public List<PollsChoice> dynamicQuery(
-		DynamicQueryInitializer queryInitializer) throws SystemException {
-		return pollsChoicePersistence.findWithDynamicQuery(queryInitializer);
+	public List<PollsChoice> dynamicQuery(DynamicQuery dynamicQuery)
+		throws SystemException {
+		return pollsChoicePersistence.findWithDynamicQuery(dynamicQuery);
 	}
 
-	public List<PollsChoice> dynamicQuery(
-		DynamicQueryInitializer queryInitializer, int start, int end)
-		throws SystemException {
-		return pollsChoicePersistence.findWithDynamicQuery(queryInitializer,
-			start, end);
+	public List<PollsChoice> dynamicQuery(DynamicQuery dynamicQuery, int start,
+		int end) throws SystemException {
+		return pollsChoicePersistence.findWithDynamicQuery(dynamicQuery, start,
+			end);
 	}
 
 	public PollsChoice getPollsChoice(long choiceId)

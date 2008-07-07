@@ -20,26 +20,18 @@
  * SOFTWARE.
  */
 
-package com.liferay.portal.kernel.dao.hibernate;
+package com.liferay.portal.kernel.dao.orm;
 
 /**
- * <a href="ScrollableResults.java.html"><b><i>View Source</i></b></a>
+ * <a href="SQLQuery.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *
  */
-public interface ScrollableResults {
+public interface SQLQuery extends Query {
 
-	public boolean first() throws HibernateException;
+	public SQLQuery addEntity(String alias, Class entityClass);
 
-	public Object get(int i) throws HibernateException;
-
-	public boolean last() throws HibernateException;
-
-	public boolean next() throws HibernateException;
-
-	public boolean previous() throws HibernateException;
-
-	public boolean scroll(int i) throws HibernateException;
+	public SQLQuery addScalar(String columnAlias, Type type);
 
 }

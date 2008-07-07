@@ -29,7 +29,7 @@ import com.liferay.counter.service.CounterServiceFactory;
 
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
-import com.liferay.portal.kernel.dao.search.DynamicQueryInitializer;
+import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 import com.liferay.portal.model.UserGroup;
 import com.liferay.portal.service.AccountLocalService;
 import com.liferay.portal.service.AccountLocalServiceFactory;
@@ -293,16 +293,15 @@ public abstract class UserGroupLocalServiceBaseImpl
 		userGroupPersistence.remove(userGroup);
 	}
 
-	public List<UserGroup> dynamicQuery(
-		DynamicQueryInitializer queryInitializer) throws SystemException {
-		return userGroupPersistence.findWithDynamicQuery(queryInitializer);
+	public List<UserGroup> dynamicQuery(DynamicQuery dynamicQuery)
+		throws SystemException {
+		return userGroupPersistence.findWithDynamicQuery(dynamicQuery);
 	}
 
-	public List<UserGroup> dynamicQuery(
-		DynamicQueryInitializer queryInitializer, int start, int end)
-		throws SystemException {
-		return userGroupPersistence.findWithDynamicQuery(queryInitializer,
-			start, end);
+	public List<UserGroup> dynamicQuery(DynamicQuery dynamicQuery, int start,
+		int end) throws SystemException {
+		return userGroupPersistence.findWithDynamicQuery(dynamicQuery, start,
+			end);
 	}
 
 	public UserGroup getUserGroup(long userGroupId)

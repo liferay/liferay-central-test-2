@@ -29,7 +29,7 @@ import com.liferay.counter.service.CounterServiceFactory;
 
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
-import com.liferay.portal.kernel.dao.search.DynamicQueryInitializer;
+import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 import com.liferay.portal.service.ResourceLocalService;
 import com.liferay.portal.service.ResourceLocalServiceFactory;
 import com.liferay.portal.service.ResourceService;
@@ -107,15 +107,14 @@ public abstract class DLFileShortcutLocalServiceBaseImpl
 		dlFileShortcutPersistence.remove(dlFileShortcut);
 	}
 
-	public List<DLFileShortcut> dynamicQuery(
-		DynamicQueryInitializer queryInitializer) throws SystemException {
-		return dlFileShortcutPersistence.findWithDynamicQuery(queryInitializer);
+	public List<DLFileShortcut> dynamicQuery(DynamicQuery dynamicQuery)
+		throws SystemException {
+		return dlFileShortcutPersistence.findWithDynamicQuery(dynamicQuery);
 	}
 
-	public List<DLFileShortcut> dynamicQuery(
-		DynamicQueryInitializer queryInitializer, int start, int end)
-		throws SystemException {
-		return dlFileShortcutPersistence.findWithDynamicQuery(queryInitializer,
+	public List<DLFileShortcut> dynamicQuery(DynamicQuery dynamicQuery,
+		int start, int end) throws SystemException {
+		return dlFileShortcutPersistence.findWithDynamicQuery(dynamicQuery,
 			start, end);
 	}
 

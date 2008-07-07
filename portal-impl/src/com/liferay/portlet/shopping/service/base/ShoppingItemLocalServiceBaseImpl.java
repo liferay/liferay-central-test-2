@@ -29,7 +29,7 @@ import com.liferay.counter.service.CounterServiceFactory;
 
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
-import com.liferay.portal.kernel.dao.search.DynamicQueryInitializer;
+import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 import com.liferay.portal.service.ImageLocalService;
 import com.liferay.portal.service.ImageLocalServiceFactory;
 import com.liferay.portal.service.ResourceLocalService;
@@ -123,15 +123,14 @@ public abstract class ShoppingItemLocalServiceBaseImpl
 		shoppingItemPersistence.remove(shoppingItem);
 	}
 
-	public List<ShoppingItem> dynamicQuery(
-		DynamicQueryInitializer queryInitializer) throws SystemException {
-		return shoppingItemPersistence.findWithDynamicQuery(queryInitializer);
+	public List<ShoppingItem> dynamicQuery(DynamicQuery dynamicQuery)
+		throws SystemException {
+		return shoppingItemPersistence.findWithDynamicQuery(dynamicQuery);
 	}
 
-	public List<ShoppingItem> dynamicQuery(
-		DynamicQueryInitializer queryInitializer, int start, int end)
-		throws SystemException {
-		return shoppingItemPersistence.findWithDynamicQuery(queryInitializer,
+	public List<ShoppingItem> dynamicQuery(DynamicQuery dynamicQuery,
+		int start, int end) throws SystemException {
+		return shoppingItemPersistence.findWithDynamicQuery(dynamicQuery,
 			start, end);
 	}
 

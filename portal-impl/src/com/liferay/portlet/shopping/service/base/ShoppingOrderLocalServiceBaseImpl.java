@@ -32,7 +32,7 @@ import com.liferay.mail.service.MailServiceFactory;
 
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
-import com.liferay.portal.kernel.dao.search.DynamicQueryInitializer;
+import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 import com.liferay.portal.service.CompanyLocalService;
 import com.liferay.portal.service.CompanyLocalServiceFactory;
 import com.liferay.portal.service.CompanyService;
@@ -128,15 +128,14 @@ public abstract class ShoppingOrderLocalServiceBaseImpl
 		shoppingOrderPersistence.remove(shoppingOrder);
 	}
 
-	public List<ShoppingOrder> dynamicQuery(
-		DynamicQueryInitializer queryInitializer) throws SystemException {
-		return shoppingOrderPersistence.findWithDynamicQuery(queryInitializer);
+	public List<ShoppingOrder> dynamicQuery(DynamicQuery dynamicQuery)
+		throws SystemException {
+		return shoppingOrderPersistence.findWithDynamicQuery(dynamicQuery);
 	}
 
-	public List<ShoppingOrder> dynamicQuery(
-		DynamicQueryInitializer queryInitializer, int start, int end)
-		throws SystemException {
-		return shoppingOrderPersistence.findWithDynamicQuery(queryInitializer,
+	public List<ShoppingOrder> dynamicQuery(DynamicQuery dynamicQuery,
+		int start, int end) throws SystemException {
+		return shoppingOrderPersistence.findWithDynamicQuery(dynamicQuery,
 			start, end);
 	}
 

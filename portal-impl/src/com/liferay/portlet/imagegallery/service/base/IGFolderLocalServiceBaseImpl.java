@@ -29,7 +29,7 @@ import com.liferay.counter.service.CounterServiceFactory;
 
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
-import com.liferay.portal.kernel.dao.search.DynamicQueryInitializer;
+import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 import com.liferay.portal.service.ImageLocalService;
 import com.liferay.portal.service.ImageLocalServiceFactory;
 import com.liferay.portal.service.LayoutLocalService;
@@ -105,16 +105,14 @@ public abstract class IGFolderLocalServiceBaseImpl
 		igFolderPersistence.remove(igFolder);
 	}
 
-	public List<IGFolder> dynamicQuery(DynamicQueryInitializer queryInitializer)
+	public List<IGFolder> dynamicQuery(DynamicQuery dynamicQuery)
 		throws SystemException {
-		return igFolderPersistence.findWithDynamicQuery(queryInitializer);
+		return igFolderPersistence.findWithDynamicQuery(dynamicQuery);
 	}
 
-	public List<IGFolder> dynamicQuery(
-		DynamicQueryInitializer queryInitializer, int start, int end)
-		throws SystemException {
-		return igFolderPersistence.findWithDynamicQuery(queryInitializer,
-			start, end);
+	public List<IGFolder> dynamicQuery(DynamicQuery dynamicQuery, int start,
+		int end) throws SystemException {
+		return igFolderPersistence.findWithDynamicQuery(dynamicQuery, start, end);
 	}
 
 	public IGFolder getIGFolder(long folderId)

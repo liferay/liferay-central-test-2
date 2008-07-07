@@ -29,7 +29,7 @@ import com.liferay.counter.service.CounterServiceFactory;
 
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
-import com.liferay.portal.kernel.dao.search.DynamicQueryInitializer;
+import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 import com.liferay.portal.service.ResourceLocalService;
 import com.liferay.portal.service.ResourceLocalServiceFactory;
 import com.liferay.portal.service.ResourceService;
@@ -101,15 +101,14 @@ public abstract class SCFrameworkVersionLocalServiceBaseImpl
 		scFrameworkVersionPersistence.remove(scFrameworkVersion);
 	}
 
-	public List<SCFrameworkVersion> dynamicQuery(
-		DynamicQueryInitializer queryInitializer) throws SystemException {
-		return scFrameworkVersionPersistence.findWithDynamicQuery(queryInitializer);
+	public List<SCFrameworkVersion> dynamicQuery(DynamicQuery dynamicQuery)
+		throws SystemException {
+		return scFrameworkVersionPersistence.findWithDynamicQuery(dynamicQuery);
 	}
 
-	public List<SCFrameworkVersion> dynamicQuery(
-		DynamicQueryInitializer queryInitializer, int start, int end)
-		throws SystemException {
-		return scFrameworkVersionPersistence.findWithDynamicQuery(queryInitializer,
+	public List<SCFrameworkVersion> dynamicQuery(DynamicQuery dynamicQuery,
+		int start, int end) throws SystemException {
+		return scFrameworkVersionPersistence.findWithDynamicQuery(dynamicQuery,
 			start, end);
 	}
 

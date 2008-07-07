@@ -20,26 +20,36 @@
  * SOFTWARE.
  */
 
-package com.liferay.portal.dao.hibernate;
-
-import com.liferay.portal.kernel.dao.hibernate.Dialect;
+package com.liferay.portal.kernel.dao.orm;
 
 /**
- * <a href="DialectImpl.java.html"><b><i>View Source</i></b></a>
+ * <a href="FinderCache.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *
  */
-public class DialectImpl implements Dialect {
+public interface FinderCache {
 
-	public DialectImpl(org.hibernate.dialect.Dialect dialect) {
-		_dialect = dialect;
-	}
+	public void clearCache();
 
-	public boolean supportsLimit() {
-		return _dialect.supportsLimit();
-	}
+	public void clearCache(String className);
 
-	private org.hibernate.dialect.Dialect _dialect;
+	public Object getResult(
+		String className, String methodName, String[] params, Object[] args,
+		SessionFactory sessionFactory);
+
+	public Object getResult(
+		String sql, String[] classNames, String methodName, String[] params,
+		Object[] args, SessionFactory sessionFactory);
+
+	public void putResult(
+		boolean classNameCacheEnabled, String className, String methodName,
+		String[] params, Object[] args, Object result);
+
+	public void putResult(
+		String sql, boolean[] classNamesCacheEnabled, String[] classNames,
+		String methodName, String[] params, Object[] args, Object result);
+
+	public void invalidate();
 
 }

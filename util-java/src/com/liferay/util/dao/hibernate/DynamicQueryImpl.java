@@ -22,7 +22,7 @@
 
 package com.liferay.util.dao.hibernate;
 
-import com.liferay.portal.kernel.dao.search.DynamicQuery;
+import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 
 import java.util.List;
 

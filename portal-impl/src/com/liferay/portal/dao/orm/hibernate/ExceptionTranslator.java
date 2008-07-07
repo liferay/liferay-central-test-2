@@ -20,38 +20,26 @@
  * SOFTWARE.
  */
 
-package com.liferay.portal.kernel.spring.hibernate;
+package com.liferay.portal.dao.orm.hibernate;
 
-import com.liferay.portal.kernel.dao.hibernate.SessionFactory;
+import com.liferay.portal.kernel.dao.orm.HibernateException;
+import com.liferay.portal.kernel.dao.orm.ObjectNotFoundException;
 
 /**
- * <a href="FinderCache.java.html"><b><i>View Source</i></b></a>
+ * <a href="ExceptionTranslator.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *
  */
-public interface FinderCache {
+public class ExceptionTranslator {
 
-	public void clearCache();
-
-	public void clearCache(String className);
-
-	public Object getResult(
-		String className, String methodName, String[] params, Object[] args,
-		SessionFactory sessionFactory);
-
-	public Object getResult(
-		String sql, String[] classNames, String methodName, String[] params,
-		Object[] args, SessionFactory sessionFactory);
-
-	public void putResult(
-		boolean classNameCacheEnabled, String className, String methodName,
-		String[] params, Object[] args, Object result);
-
-	public void putResult(
-		String sql, boolean[] classNamesCacheEnabled, String[] classNames,
-		String methodName, String[] params, Object[] args, Object result);
-
-	public void invalidate();
+	public static HibernateException translate(Exception e) {
+		if (e instanceof org.hibernate.ObjectNotFoundException) {
+			return new ObjectNotFoundException(e.getMessage());
+		}
+		else {
+			return new HibernateException(e.getMessage());
+		}
+	}
 
 }

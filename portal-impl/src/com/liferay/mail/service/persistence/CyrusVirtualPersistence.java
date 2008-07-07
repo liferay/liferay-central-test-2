@@ -25,9 +25,9 @@ package com.liferay.mail.service.persistence;
 import com.liferay.mail.NoSuchCyrusVirtualException;
 import com.liferay.mail.model.CyrusVirtual;
 import com.liferay.portal.SystemException;
-import com.liferay.portal.kernel.dao.hibernate.ObjectNotFoundException;
-import com.liferay.portal.kernel.dao.hibernate.Query;
-import com.liferay.portal.kernel.dao.hibernate.Session;
+import com.liferay.portal.kernel.dao.orm.ObjectNotFoundException;
+import com.liferay.portal.kernel.dao.orm.Query;
+import com.liferay.portal.kernel.dao.orm.Session;
 import com.liferay.portal.service.persistence.impl.BasePersistenceImpl;
 
 import java.util.Iterator;

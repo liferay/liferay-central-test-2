@@ -24,12 +24,12 @@ package com.liferay.portal.service.persistence;
 
 import com.liferay.portal.NoSuchGroupException;
 import com.liferay.portal.SystemException;
-import com.liferay.portal.kernel.dao.hibernate.QueryPos;
-import com.liferay.portal.kernel.dao.hibernate.QueryUtil;
-import com.liferay.portal.kernel.dao.hibernate.SQLQuery;
-import com.liferay.portal.kernel.dao.hibernate.Session;
-import com.liferay.portal.kernel.dao.hibernate.Type;
-import com.liferay.portal.kernel.spring.hibernate.FinderCacheUtil;
+import com.liferay.portal.kernel.dao.orm.FinderCacheUtil;
+import com.liferay.portal.kernel.dao.orm.QueryPos;
+import com.liferay.portal.kernel.dao.orm.QueryUtil;
+import com.liferay.portal.kernel.dao.orm.SQLQuery;
+import com.liferay.portal.kernel.dao.orm.Session;
+import com.liferay.portal.kernel.dao.orm.Type;
 import com.liferay.portal.kernel.util.ArrayUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.OrderByComparator;

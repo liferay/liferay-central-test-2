@@ -63,12 +63,12 @@ public interface UserGroupRoleLocalService {
 		throws com.liferay.portal.SystemException;
 
 	public java.util.List<com.liferay.portal.model.UserGroupRole> dynamicQuery(
-		com.liferay.portal.kernel.dao.search.DynamicQueryInitializer queryInitializer)
+		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery)
 		throws com.liferay.portal.SystemException;
 
 	public java.util.List<com.liferay.portal.model.UserGroupRole> dynamicQuery(
-		com.liferay.portal.kernel.dao.search.DynamicQueryInitializer queryInitializer,
-		int start, int end) throws com.liferay.portal.SystemException;
+		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery, int start,
+		int end) throws com.liferay.portal.SystemException;
 
 	public com.liferay.portal.model.UserGroupRole getUserGroupRole(
 		com.liferay.portal.service.persistence.UserGroupRolePK userGroupRolePK)

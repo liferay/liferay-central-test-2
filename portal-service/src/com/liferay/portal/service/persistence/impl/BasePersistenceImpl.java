@@ -23,10 +23,10 @@
 package com.liferay.portal.service.persistence.impl;
 
 import com.liferay.portal.SystemException;
-import com.liferay.portal.kernel.dao.hibernate.Dialect;
-import com.liferay.portal.kernel.dao.hibernate.Session;
-import com.liferay.portal.kernel.dao.hibernate.SessionFactory;
-import com.liferay.portal.kernel.dao.hibernate.HibernateException;
+import com.liferay.portal.kernel.dao.orm.Dialect;
+import com.liferay.portal.kernel.dao.orm.Session;
+import com.liferay.portal.kernel.dao.orm.SessionFactory;
+import com.liferay.portal.kernel.dao.orm.HibernateException;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.model.ModelListener;

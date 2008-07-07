@@ -29,7 +29,7 @@ import com.liferay.counter.service.CounterServiceFactory;
 
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
-import com.liferay.portal.kernel.dao.search.DynamicQueryInitializer;
+import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 import com.liferay.portal.model.PasswordPolicyRel;
 import com.liferay.portal.service.AccountLocalService;
 import com.liferay.portal.service.AccountLocalServiceFactory;
@@ -296,15 +296,14 @@ public abstract class PasswordPolicyRelLocalServiceBaseImpl
 		passwordPolicyRelPersistence.remove(passwordPolicyRel);
 	}
 
-	public List<PasswordPolicyRel> dynamicQuery(
-		DynamicQueryInitializer queryInitializer) throws SystemException {
-		return passwordPolicyRelPersistence.findWithDynamicQuery(queryInitializer);
+	public List<PasswordPolicyRel> dynamicQuery(DynamicQuery dynamicQuery)
+		throws SystemException {
+		return passwordPolicyRelPersistence.findWithDynamicQuery(dynamicQuery);
 	}
 
-	public List<PasswordPolicyRel> dynamicQuery(
-		DynamicQueryInitializer queryInitializer, int start, int end)
-		throws SystemException {
-		return passwordPolicyRelPersistence.findWithDynamicQuery(queryInitializer,
+	public List<PasswordPolicyRel> dynamicQuery(DynamicQuery dynamicQuery,
+		int start, int end) throws SystemException {
+		return passwordPolicyRelPersistence.findWithDynamicQuery(dynamicQuery,
 			start, end);
 	}
 

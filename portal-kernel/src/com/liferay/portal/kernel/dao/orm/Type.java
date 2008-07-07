@@ -20,43 +20,30 @@
  * SOFTWARE.
  */
 
-package com.liferay.portal.dao.hibernate;
-
-import com.liferay.portal.kernel.dao.hibernate.Type;
+package com.liferay.portal.kernel.dao.orm;
 
 /**
- * <a href="TypeTranslator.java.html"><b><i>View Source</i></b></a>
+ * <a href="Type.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *
  */
-public class TypeTranslator {
+public interface Type {
 
-	public static org.hibernate.type.Type translate(Type type) {
-		if (type == Type.BOOLEAN) {
-			return org.hibernate.Hibernate.BOOLEAN;
-		}
-		else if (type == Type.DOUBLE) {
-			return org.hibernate.Hibernate.DOUBLE;
-		}
-		else if (type == Type.FLOAT) {
-			return org.hibernate.Hibernate.FLOAT;
-		}
-		else if (type == Type.INTEGER) {
-			return org.hibernate.Hibernate.INTEGER;
-		}
-		else if (type == Type.LONG) {
-			return org.hibernate.Hibernate.LONG;
-		}
-		else if (type == Type.SHORT) {
-			return org.hibernate.Hibernate.SHORT;
-		}
-		else if (type == Type.STRING) {
-			return org.hibernate.Hibernate.STRING;
-		}
-		else {
-			return null;
-		}
-	}
+	public static final Type BOOLEAN  = new TypeImpl("BOOLEAN");
+
+	public static final Type DOUBLE  = new TypeImpl("DOUBLE");
+
+	public static final Type FLOAT  = new TypeImpl("FLOAT");
+
+	public static final Type INTEGER  = new TypeImpl("INTEGER");
+
+	public static final Type LONG = new TypeImpl("LONG");
+
+	public static final Type SHORT  = new TypeImpl("SHORT");
+
+	public static final Type STRING = new TypeImpl("STRING");
+
+	public String getName();
 
 }

@@ -32,7 +32,7 @@ import com.liferay.mail.service.MailServiceFactory;
 
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
-import com.liferay.portal.kernel.dao.search.DynamicQueryInitializer;
+import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 import com.liferay.portal.model.User;
 import com.liferay.portal.service.AccountLocalService;
 import com.liferay.portal.service.AccountLocalServiceFactory;
@@ -348,14 +348,14 @@ public abstract class UserLocalServiceBaseImpl implements UserLocalService {
 		userPersistence.remove(user);
 	}
 
-	public List<User> dynamicQuery(DynamicQueryInitializer queryInitializer)
+	public List<User> dynamicQuery(DynamicQuery dynamicQuery)
 		throws SystemException {
-		return userPersistence.findWithDynamicQuery(queryInitializer);
+		return userPersistence.findWithDynamicQuery(dynamicQuery);
 	}
 
-	public List<User> dynamicQuery(DynamicQueryInitializer queryInitializer,
-		int start, int end) throws SystemException {
-		return userPersistence.findWithDynamicQuery(queryInitializer, start, end);
+	public List<User> dynamicQuery(DynamicQuery dynamicQuery, int start, int end)
+		throws SystemException {
+		return userPersistence.findWithDynamicQuery(dynamicQuery, start, end);
 	}
 
 	public User getUser(long userId) throws PortalException, SystemException {

@@ -76,19 +76,19 @@ public class SCLicenseLocalServiceUtil {
 	}
 
 	public static java.util.List<com.liferay.portlet.softwarecatalog.model.SCLicense> dynamicQuery(
-		com.liferay.portal.kernel.dao.search.DynamicQueryInitializer queryInitializer)
+		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery)
 		throws com.liferay.portal.SystemException {
 		SCLicenseLocalService scLicenseLocalService = SCLicenseLocalServiceFactory.getService();
 
-		return scLicenseLocalService.dynamicQuery(queryInitializer);
+		return scLicenseLocalService.dynamicQuery(dynamicQuery);
 	}
 
 	public static java.util.List<com.liferay.portlet.softwarecatalog.model.SCLicense> dynamicQuery(
-		com.liferay.portal.kernel.dao.search.DynamicQueryInitializer queryInitializer,
-		int start, int end) throws com.liferay.portal.SystemException {
+		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery, int start,
+		int end) throws com.liferay.portal.SystemException {
 		SCLicenseLocalService scLicenseLocalService = SCLicenseLocalServiceFactory.getService();
 
-		return scLicenseLocalService.dynamicQuery(queryInitializer, start, end);
+		return scLicenseLocalService.dynamicQuery(dynamicQuery, start, end);
 	}
 
 	public static com.liferay.portlet.softwarecatalog.model.SCLicense getSCLicense(

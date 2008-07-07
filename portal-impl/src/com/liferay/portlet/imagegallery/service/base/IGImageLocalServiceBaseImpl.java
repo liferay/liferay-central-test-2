@@ -29,7 +29,7 @@ import com.liferay.counter.service.CounterServiceFactory;
 
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
-import com.liferay.portal.kernel.dao.search.DynamicQueryInitializer;
+import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 import com.liferay.portal.service.ImageLocalService;
 import com.liferay.portal.service.ImageLocalServiceFactory;
 import com.liferay.portal.service.ResourceLocalService;
@@ -96,16 +96,14 @@ public abstract class IGImageLocalServiceBaseImpl implements IGImageLocalService
 		igImagePersistence.remove(igImage);
 	}
 
-	public List<IGImage> dynamicQuery(DynamicQueryInitializer queryInitializer)
+	public List<IGImage> dynamicQuery(DynamicQuery dynamicQuery)
 		throws SystemException {
-		return igImagePersistence.findWithDynamicQuery(queryInitializer);
+		return igImagePersistence.findWithDynamicQuery(dynamicQuery);
 	}
 
-	public List<IGImage> dynamicQuery(
-		DynamicQueryInitializer queryInitializer, int start, int end)
-		throws SystemException {
-		return igImagePersistence.findWithDynamicQuery(queryInitializer, start,
-			end);
+	public List<IGImage> dynamicQuery(DynamicQuery dynamicQuery, int start,
+		int end) throws SystemException {
+		return igImagePersistence.findWithDynamicQuery(dynamicQuery, start, end);
 	}
 
 	public IGImage getIGImage(long imageId)

@@ -29,7 +29,7 @@ import com.liferay.counter.service.CounterServiceFactory;
 
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
-import com.liferay.portal.kernel.dao.search.DynamicQueryInitializer;
+import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 import com.liferay.portal.service.ResourceLocalService;
 import com.liferay.portal.service.ResourceLocalServiceFactory;
 import com.liferay.portal.service.ResourceService;
@@ -101,16 +101,14 @@ public abstract class WikiNodeLocalServiceBaseImpl
 		wikiNodePersistence.remove(wikiNode);
 	}
 
-	public List<WikiNode> dynamicQuery(DynamicQueryInitializer queryInitializer)
+	public List<WikiNode> dynamicQuery(DynamicQuery dynamicQuery)
 		throws SystemException {
-		return wikiNodePersistence.findWithDynamicQuery(queryInitializer);
+		return wikiNodePersistence.findWithDynamicQuery(dynamicQuery);
 	}
 
-	public List<WikiNode> dynamicQuery(
-		DynamicQueryInitializer queryInitializer, int start, int end)
-		throws SystemException {
-		return wikiNodePersistence.findWithDynamicQuery(queryInitializer,
-			start, end);
+	public List<WikiNode> dynamicQuery(DynamicQuery dynamicQuery, int start,
+		int end) throws SystemException {
+		return wikiNodePersistence.findWithDynamicQuery(dynamicQuery, start, end);
 	}
 
 	public WikiNode getWikiNode(long nodeId)

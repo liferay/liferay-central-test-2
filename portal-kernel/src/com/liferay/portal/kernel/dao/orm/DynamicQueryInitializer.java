@@ -20,51 +20,16 @@
  * SOFTWARE.
  */
 
-package com.liferay.portal.kernel.dao.hibernate;
-
-import java.io.Serializable;
-
-import java.sql.Timestamp;
-
-import java.util.Iterator;
-import java.util.List;
+package com.liferay.portal.kernel.dao.orm;
 
 /**
- * <a href="Query.java.html"><b><i>View Source</i></b></a>
+ * <a href="DynamicQueryInitializer.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *
  */
-public interface Query {
+public interface DynamicQueryInitializer {
 
-	public Iterator iterate() throws HibernateException;
-
-	public List list() throws HibernateException;
-
-	public ScrollableResults scroll() throws HibernateException;
-
-	public Query setBoolean(int pos, boolean value);
-
-	public Query setDouble(int pos, double value);
-
-	public Query setFirstResult(int firstResult);
-
-	public Query setFloat(int pos, float value);
-
-	public Query setInteger(int pos, int value);
-
-	public Query setLong(int pos, long value);
-
-	public Query setMaxResults(int maxResults);
-
-	public Query setShort(int pos, short value);
-
-	public Query setSerializable(int pos, Serializable value);
-
-	public Query setString(int pos, String value);
-
-	public Query setTimestamp(int pos, Timestamp value);
-
-	public Object uniqueResult() throws HibernateException;
+	public DynamicQuery initialize(Object obj);
 
 }

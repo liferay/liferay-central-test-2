@@ -29,7 +29,7 @@ import com.liferay.counter.service.CounterServiceFactory;
 
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
-import com.liferay.portal.kernel.dao.search.DynamicQueryInitializer;
+import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 import com.liferay.portal.model.Company;
 import com.liferay.portal.service.AccountLocalService;
 import com.liferay.portal.service.AccountLocalServiceFactory;
@@ -291,16 +291,14 @@ public abstract class CompanyLocalServiceBaseImpl implements CompanyLocalService
 		companyPersistence.remove(company);
 	}
 
-	public List<Company> dynamicQuery(DynamicQueryInitializer queryInitializer)
+	public List<Company> dynamicQuery(DynamicQuery dynamicQuery)
 		throws SystemException {
-		return companyPersistence.findWithDynamicQuery(queryInitializer);
+		return companyPersistence.findWithDynamicQuery(dynamicQuery);
 	}
 
-	public List<Company> dynamicQuery(
-		DynamicQueryInitializer queryInitializer, int start, int end)
-		throws SystemException {
-		return companyPersistence.findWithDynamicQuery(queryInitializer, start,
-			end);
+	public List<Company> dynamicQuery(DynamicQuery dynamicQuery, int start,
+		int end) throws SystemException {
+		return companyPersistence.findWithDynamicQuery(dynamicQuery, start, end);
 	}
 
 	public Company getCompany(long companyId)

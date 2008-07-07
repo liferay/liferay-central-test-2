@@ -20,16 +20,30 @@
  * SOFTWARE.
  */
 
-package com.liferay.portal.kernel.dao.search;
+package com.liferay.portal.kernel.dao.orm;
 
 /**
- * <a href="DynamicQueryInitializer.java.html"><b><i>View Source</i></b></a>
+ * <a href="ObjectNotFoundException.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *
  */
-public interface DynamicQueryInitializer {
+public class ObjectNotFoundException extends HibernateException {
 
-	public DynamicQuery initialize(Object obj);
+	public ObjectNotFoundException() {
+		super();
+	}
+
+	public ObjectNotFoundException(String msg) {
+		super(msg);
+	}
+
+	public ObjectNotFoundException(Throwable cause) {
+		super(cause);
+	}
+
+	public ObjectNotFoundException(String msg, Throwable cause) {
+		super(msg, cause);
+	}
 
 }

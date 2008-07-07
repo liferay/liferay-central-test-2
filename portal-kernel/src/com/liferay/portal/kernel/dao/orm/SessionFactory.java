@@ -20,40 +20,20 @@
  * SOFTWARE.
  */
 
-package com.liferay.portal.kernel.dao.hibernate;
-
-import java.io.Serializable;
-
-import java.sql.Connection;
+package com.liferay.portal.kernel.dao.orm;
 
 /**
- * <a href="Session.java.html"><b><i>View Source</i></b></a>
+ * <a href="SessionFactory.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *
  */
-public interface Session {
+public interface SessionFactory {
 
-	public Connection close() throws HibernateException;
+	public void closeSession(Session session) throws HibernateException;
 
-	public Query createQuery(String queryString) throws HibernateException;
+	public Dialect getDialect() throws HibernateException;
 
-	public SQLQuery createSQLQuery(String queryString)
-		throws HibernateException;
-
-	public void delete(Object object) throws HibernateException;
-
-	public void flush() throws HibernateException;
-
-	public Object get(Class clazz, Serializable id) throws HibernateException;
-
-	public Object get(Class clazz, Serializable id, LockMode lockMode)
-		throws HibernateException;
-
-	public Object load(Class clazz, Serializable id) throws HibernateException;
-
-	public Object merge(Object object) throws HibernateException;
-
-	public Serializable save(Object object) throws HibernateException;
+	public Session openSession() throws HibernateException;
 
 }

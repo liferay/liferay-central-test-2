@@ -29,7 +29,7 @@ import com.liferay.counter.service.CounterServiceFactory;
 
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
-import com.liferay.portal.kernel.dao.search.DynamicQueryInitializer;
+import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 import com.liferay.portal.service.CompanyLocalService;
 import com.liferay.portal.service.CompanyLocalServiceFactory;
 import com.liferay.portal.service.CompanyService;
@@ -166,16 +166,15 @@ public abstract class TagsAssetLocalServiceBaseImpl
 		tagsAssetPersistence.remove(tagsAsset);
 	}
 
-	public List<TagsAsset> dynamicQuery(
-		DynamicQueryInitializer queryInitializer) throws SystemException {
-		return tagsAssetPersistence.findWithDynamicQuery(queryInitializer);
+	public List<TagsAsset> dynamicQuery(DynamicQuery dynamicQuery)
+		throws SystemException {
+		return tagsAssetPersistence.findWithDynamicQuery(dynamicQuery);
 	}
 
-	public List<TagsAsset> dynamicQuery(
-		DynamicQueryInitializer queryInitializer, int start, int end)
-		throws SystemException {
-		return tagsAssetPersistence.findWithDynamicQuery(queryInitializer,
-			start, end);
+	public List<TagsAsset> dynamicQuery(DynamicQuery dynamicQuery, int start,
+		int end) throws SystemException {
+		return tagsAssetPersistence.findWithDynamicQuery(dynamicQuery, start,
+			end);
 	}
 
 	public TagsAsset getTagsAsset(long assetId)

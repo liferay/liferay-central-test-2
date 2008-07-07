@@ -24,7 +24,7 @@ package com.liferay.portlet.shopping.service.base;
 
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
-import com.liferay.portal.kernel.dao.search.DynamicQueryInitializer;
+import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 
 import com.liferay.portlet.shopping.model.ShoppingItemField;
 import com.liferay.portlet.shopping.service.ShoppingCartLocalService;
@@ -100,15 +100,14 @@ public abstract class ShoppingItemFieldLocalServiceBaseImpl
 		shoppingItemFieldPersistence.remove(shoppingItemField);
 	}
 
-	public List<ShoppingItemField> dynamicQuery(
-		DynamicQueryInitializer queryInitializer) throws SystemException {
-		return shoppingItemFieldPersistence.findWithDynamicQuery(queryInitializer);
+	public List<ShoppingItemField> dynamicQuery(DynamicQuery dynamicQuery)
+		throws SystemException {
+		return shoppingItemFieldPersistence.findWithDynamicQuery(dynamicQuery);
 	}
 
-	public List<ShoppingItemField> dynamicQuery(
-		DynamicQueryInitializer queryInitializer, int start, int end)
-		throws SystemException {
-		return shoppingItemFieldPersistence.findWithDynamicQuery(queryInitializer,
+	public List<ShoppingItemField> dynamicQuery(DynamicQuery dynamicQuery,
+		int start, int end) throws SystemException {
+		return shoppingItemFieldPersistence.findWithDynamicQuery(dynamicQuery,
 			start, end);
 	}
 

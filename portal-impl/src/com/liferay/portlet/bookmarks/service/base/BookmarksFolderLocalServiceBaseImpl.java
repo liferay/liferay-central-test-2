@@ -29,7 +29,7 @@ import com.liferay.counter.service.CounterServiceFactory;
 
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
-import com.liferay.portal.kernel.dao.search.DynamicQueryInitializer;
+import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 import com.liferay.portal.service.ResourceLocalService;
 import com.liferay.portal.service.ResourceLocalServiceFactory;
 import com.liferay.portal.service.ResourceService;
@@ -95,15 +95,14 @@ public abstract class BookmarksFolderLocalServiceBaseImpl
 		bookmarksFolderPersistence.remove(bookmarksFolder);
 	}
 
-	public List<BookmarksFolder> dynamicQuery(
-		DynamicQueryInitializer queryInitializer) throws SystemException {
-		return bookmarksFolderPersistence.findWithDynamicQuery(queryInitializer);
+	public List<BookmarksFolder> dynamicQuery(DynamicQuery dynamicQuery)
+		throws SystemException {
+		return bookmarksFolderPersistence.findWithDynamicQuery(dynamicQuery);
 	}
 
-	public List<BookmarksFolder> dynamicQuery(
-		DynamicQueryInitializer queryInitializer, int start, int end)
-		throws SystemException {
-		return bookmarksFolderPersistence.findWithDynamicQuery(queryInitializer,
+	public List<BookmarksFolder> dynamicQuery(DynamicQuery dynamicQuery,
+		int start, int end) throws SystemException {
+		return bookmarksFolderPersistence.findWithDynamicQuery(dynamicQuery,
 			start, end);
 	}
 

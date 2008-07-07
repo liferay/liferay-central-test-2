@@ -24,7 +24,7 @@ package com.liferay.portlet.documentlibrary.service.base;
 
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
-import com.liferay.portal.kernel.dao.search.DynamicQueryInitializer;
+import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 
 import com.liferay.portlet.documentlibrary.model.DLFileVersion;
 import com.liferay.portlet.documentlibrary.service.DLFileEntryLocalService;
@@ -88,15 +88,14 @@ public abstract class DLFileVersionLocalServiceBaseImpl
 		dlFileVersionPersistence.remove(dlFileVersion);
 	}
 
-	public List<DLFileVersion> dynamicQuery(
-		DynamicQueryInitializer queryInitializer) throws SystemException {
-		return dlFileVersionPersistence.findWithDynamicQuery(queryInitializer);
+	public List<DLFileVersion> dynamicQuery(DynamicQuery dynamicQuery)
+		throws SystemException {
+		return dlFileVersionPersistence.findWithDynamicQuery(dynamicQuery);
 	}
 
-	public List<DLFileVersion> dynamicQuery(
-		DynamicQueryInitializer queryInitializer, int start, int end)
-		throws SystemException {
-		return dlFileVersionPersistence.findWithDynamicQuery(queryInitializer,
+	public List<DLFileVersion> dynamicQuery(DynamicQuery dynamicQuery,
+		int start, int end) throws SystemException {
+		return dlFileVersionPersistence.findWithDynamicQuery(dynamicQuery,
 			start, end);
 	}
 

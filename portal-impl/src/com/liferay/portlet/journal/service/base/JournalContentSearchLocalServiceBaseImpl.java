@@ -29,7 +29,7 @@ import com.liferay.counter.service.CounterServiceFactory;
 
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
-import com.liferay.portal.kernel.dao.search.DynamicQueryInitializer;
+import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 import com.liferay.portal.service.GroupLocalService;
 import com.liferay.portal.service.GroupLocalServiceFactory;
 import com.liferay.portal.service.GroupService;
@@ -128,15 +128,14 @@ public abstract class JournalContentSearchLocalServiceBaseImpl
 		journalContentSearchPersistence.remove(journalContentSearch);
 	}
 
-	public List<JournalContentSearch> dynamicQuery(
-		DynamicQueryInitializer queryInitializer) throws SystemException {
-		return journalContentSearchPersistence.findWithDynamicQuery(queryInitializer);
+	public List<JournalContentSearch> dynamicQuery(DynamicQuery dynamicQuery)
+		throws SystemException {
+		return journalContentSearchPersistence.findWithDynamicQuery(dynamicQuery);
 	}
 
-	public List<JournalContentSearch> dynamicQuery(
-		DynamicQueryInitializer queryInitializer, int start, int end)
-		throws SystemException {
-		return journalContentSearchPersistence.findWithDynamicQuery(queryInitializer,
+	public List<JournalContentSearch> dynamicQuery(DynamicQuery dynamicQuery,
+		int start, int end) throws SystemException {
+		return journalContentSearchPersistence.findWithDynamicQuery(dynamicQuery,
 			start, end);
 	}
 

@@ -76,19 +76,19 @@ public class CalEventLocalServiceUtil {
 	}
 
 	public static java.util.List<com.liferay.portlet.calendar.model.CalEvent> dynamicQuery(
-		com.liferay.portal.kernel.dao.search.DynamicQueryInitializer queryInitializer)
+		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery)
 		throws com.liferay.portal.SystemException {
 		CalEventLocalService calEventLocalService = CalEventLocalServiceFactory.getService();
 
-		return calEventLocalService.dynamicQuery(queryInitializer);
+		return calEventLocalService.dynamicQuery(dynamicQuery);
 	}
 
 	public static java.util.List<com.liferay.portlet.calendar.model.CalEvent> dynamicQuery(
-		com.liferay.portal.kernel.dao.search.DynamicQueryInitializer queryInitializer,
-		int start, int end) throws com.liferay.portal.SystemException {
+		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery, int start,
+		int end) throws com.liferay.portal.SystemException {
 		CalEventLocalService calEventLocalService = CalEventLocalServiceFactory.getService();
 
-		return calEventLocalService.dynamicQuery(queryInitializer, start, end);
+		return calEventLocalService.dynamicQuery(dynamicQuery, start, end);
 	}
 
 	public static com.liferay.portlet.calendar.model.CalEvent getCalEvent(

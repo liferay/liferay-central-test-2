@@ -20,30 +20,40 @@
  * SOFTWARE.
  */
 
-package com.liferay.portal.kernel.dao.hibernate;
+package com.liferay.portal.dao.orm.hibernate;
+
+import com.liferay.portal.kernel.dao.orm.LockMode;
 
 /**
- * <a href="ObjectNotFoundException.java.html"><b><i>View Source</i></b></a>
+ * <a href="LockModeTranslator.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *
  */
-public class ObjectNotFoundException extends HibernateException {
+public class LockModeTranslator {
 
-	public ObjectNotFoundException() {
-		super();
-	}
-
-	public ObjectNotFoundException(String msg) {
-		super(msg);
-	}
-
-	public ObjectNotFoundException(Throwable cause) {
-		super(cause);
-	}
-
-	public ObjectNotFoundException(String msg, Throwable cause) {
-		super(msg, cause);
+	public static org.hibernate.LockMode translate(LockMode lockMode) {
+		if (lockMode == LockMode.FORCE) {
+			return org.hibernate.LockMode.FORCE;
+		}
+		else if (lockMode == LockMode.NONE) {
+			return org.hibernate.LockMode.NONE;
+		}
+		else if (lockMode == LockMode.READ) {
+			return org.hibernate.LockMode.READ;
+		}
+		else if (lockMode == LockMode.UPGRADE) {
+			return org.hibernate.LockMode.UPGRADE;
+		}
+		else if (lockMode == LockMode.UPGRADE_NOWAIT) {
+			return org.hibernate.LockMode.UPGRADE_NOWAIT;
+		}
+		else if (lockMode == LockMode.WRITE) {
+			return org.hibernate.LockMode.WRITE;
+		}
+		else {
+			return org.hibernate.LockMode.parse(lockMode.getName());
+		}
 	}
 
 }

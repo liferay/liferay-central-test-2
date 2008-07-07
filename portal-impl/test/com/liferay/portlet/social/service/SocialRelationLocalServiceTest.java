@@ -22,7 +22,7 @@
 
 package com.liferay.portlet.social.service;
 
-import com.liferay.portal.kernel.dao.hibernate.QueryUtil;
+import com.liferay.portal.kernel.dao.orm.QueryUtil;
 import com.liferay.portal.model.User;
 import com.liferay.portal.service.BaseServiceTestCase;
 import com.liferay.portal.service.UserLocalServiceUtil;

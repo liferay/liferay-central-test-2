@@ -20,20 +20,24 @@
  * SOFTWARE.
  */
 
-package com.liferay.portal.kernel.dao.hibernate;
+package com.liferay.portal.kernel.dao.orm;
 
 /**
- * <a href="SessionFactory.java.html"><b><i>View Source</i></b></a>
+ * <a href="LockModeImpl.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *
  */
-public interface SessionFactory {
+public class LockModeImpl implements LockMode {
 
-	public void closeSession(Session session) throws HibernateException;
+	public LockModeImpl(String name) {
+		_name = name;
+	}
 
-	public Dialect getDialect() throws HibernateException;
+	public String getName() {
+		return _name;
+	}
 
-	public Session openSession() throws HibernateException;
+	private String _name;
 
 }

@@ -29,7 +29,7 @@ import com.liferay.counter.service.CounterServiceFactory;
 
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
-import com.liferay.portal.kernel.dao.search.DynamicQueryInitializer;
+import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 import com.liferay.portal.model.Website;
 import com.liferay.portal.service.AccountLocalService;
 import com.liferay.portal.service.AccountLocalServiceFactory;
@@ -291,16 +291,14 @@ public abstract class WebsiteLocalServiceBaseImpl implements WebsiteLocalService
 		websitePersistence.remove(website);
 	}
 
-	public List<Website> dynamicQuery(DynamicQueryInitializer queryInitializer)
+	public List<Website> dynamicQuery(DynamicQuery dynamicQuery)
 		throws SystemException {
-		return websitePersistence.findWithDynamicQuery(queryInitializer);
+		return websitePersistence.findWithDynamicQuery(dynamicQuery);
 	}
 
-	public List<Website> dynamicQuery(
-		DynamicQueryInitializer queryInitializer, int start, int end)
-		throws SystemException {
-		return websitePersistence.findWithDynamicQuery(queryInitializer, start,
-			end);
+	public List<Website> dynamicQuery(DynamicQuery dynamicQuery, int start,
+		int end) throws SystemException {
+		return websitePersistence.findWithDynamicQuery(dynamicQuery, start, end);
 	}
 
 	public Website getWebsite(long websiteId)

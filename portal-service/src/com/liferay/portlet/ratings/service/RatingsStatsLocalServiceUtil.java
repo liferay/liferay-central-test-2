@@ -76,20 +76,19 @@ public class RatingsStatsLocalServiceUtil {
 	}
 
 	public static java.util.List<com.liferay.portlet.ratings.model.RatingsStats> dynamicQuery(
-		com.liferay.portal.kernel.dao.search.DynamicQueryInitializer queryInitializer)
+		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery)
 		throws com.liferay.portal.SystemException {
 		RatingsStatsLocalService ratingsStatsLocalService = RatingsStatsLocalServiceFactory.getService();
 
-		return ratingsStatsLocalService.dynamicQuery(queryInitializer);
+		return ratingsStatsLocalService.dynamicQuery(dynamicQuery);
 	}
 
 	public static java.util.List<com.liferay.portlet.ratings.model.RatingsStats> dynamicQuery(
-		com.liferay.portal.kernel.dao.search.DynamicQueryInitializer queryInitializer,
-		int start, int end) throws com.liferay.portal.SystemException {
+		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery, int start,
+		int end) throws com.liferay.portal.SystemException {
 		RatingsStatsLocalService ratingsStatsLocalService = RatingsStatsLocalServiceFactory.getService();
 
-		return ratingsStatsLocalService.dynamicQuery(queryInitializer, start,
-			end);
+		return ratingsStatsLocalService.dynamicQuery(dynamicQuery, start, end);
 	}
 
 	public static com.liferay.portlet.ratings.model.RatingsStats getRatingsStats(

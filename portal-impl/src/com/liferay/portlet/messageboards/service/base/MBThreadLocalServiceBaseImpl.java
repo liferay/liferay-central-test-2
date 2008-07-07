@@ -34,7 +34,7 @@ import com.liferay.documentlibrary.service.DLServiceFactory;
 
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
-import com.liferay.portal.kernel.dao.search.DynamicQueryInitializer;
+import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 import com.liferay.portal.service.ResourceLocalService;
 import com.liferay.portal.service.ResourceLocalServiceFactory;
 import com.liferay.portal.service.ResourceService;
@@ -136,16 +136,14 @@ public abstract class MBThreadLocalServiceBaseImpl
 		mbThreadPersistence.remove(mbThread);
 	}
 
-	public List<MBThread> dynamicQuery(DynamicQueryInitializer queryInitializer)
+	public List<MBThread> dynamicQuery(DynamicQuery dynamicQuery)
 		throws SystemException {
-		return mbThreadPersistence.findWithDynamicQuery(queryInitializer);
+		return mbThreadPersistence.findWithDynamicQuery(dynamicQuery);
 	}
 
-	public List<MBThread> dynamicQuery(
-		DynamicQueryInitializer queryInitializer, int start, int end)
-		throws SystemException {
-		return mbThreadPersistence.findWithDynamicQuery(queryInitializer,
-			start, end);
+	public List<MBThread> dynamicQuery(DynamicQuery dynamicQuery, int start,
+		int end) throws SystemException {
+		return mbThreadPersistence.findWithDynamicQuery(dynamicQuery, start, end);
 	}
 
 	public MBThread getMBThread(long threadId)

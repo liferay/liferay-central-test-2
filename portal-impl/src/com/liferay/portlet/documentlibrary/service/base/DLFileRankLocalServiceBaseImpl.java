@@ -29,7 +29,7 @@ import com.liferay.counter.service.CounterServiceFactory;
 
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
-import com.liferay.portal.kernel.dao.search.DynamicQueryInitializer;
+import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 import com.liferay.portal.service.LayoutLocalService;
 import com.liferay.portal.service.LayoutLocalServiceFactory;
 import com.liferay.portal.service.LayoutService;
@@ -101,16 +101,15 @@ public abstract class DLFileRankLocalServiceBaseImpl
 		dlFileRankPersistence.remove(dlFileRank);
 	}
 
-	public List<DLFileRank> dynamicQuery(
-		DynamicQueryInitializer queryInitializer) throws SystemException {
-		return dlFileRankPersistence.findWithDynamicQuery(queryInitializer);
+	public List<DLFileRank> dynamicQuery(DynamicQuery dynamicQuery)
+		throws SystemException {
+		return dlFileRankPersistence.findWithDynamicQuery(dynamicQuery);
 	}
 
-	public List<DLFileRank> dynamicQuery(
-		DynamicQueryInitializer queryInitializer, int start, int end)
-		throws SystemException {
-		return dlFileRankPersistence.findWithDynamicQuery(queryInitializer,
-			start, end);
+	public List<DLFileRank> dynamicQuery(DynamicQuery dynamicQuery, int start,
+		int end) throws SystemException {
+		return dlFileRankPersistence.findWithDynamicQuery(dynamicQuery, start,
+			end);
 	}
 
 	public DLFileRank getDLFileRank(long fileRankId)
