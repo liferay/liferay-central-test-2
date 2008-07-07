@@ -315,43 +315,47 @@ var LayoutConfiguration = {
 
 			sortableInstance.refresh();
 
-			sortColumns.bind('sortreceive.sortable',
-				function(event, ui) {
-					if (ui.item.is('.lfr-portlet-item') && ui.sender.is('.lfr-portlet-item') && !sortableInstance.dragging) {
-						var placeholder = ui.item;
-						var portlet = ui.sender;
+			if (!instance._eventsBound) {
+				sortColumns.bind('sortreceive.sortable',
+					function(event, ui) {
+						if (ui.item.is('.lfr-portlet-item') && ui.sender.is('.lfr-portlet-item') && !sortableInstance.dragging) {
+							var placeholder = ui.item;
+							var portlet = ui.sender;
 
-						var options = {
-							item: placeholder
-						};
+							var options = {
+								item: placeholder
+							};
 
-						instance._addPortlet(portlet, options);
+							instance._addPortlet(portlet, options);
 
-						placeholder.hide();
+							placeholder.hide();
+						}
 					}
-				}
-			);
+				);
 
-			sortColumns.bind('sortactivate.sortable',
-				function(event) {
-					Liferay.Layout.Columns.startDragging();
-					sortableInstance.refreshPositions(true);
-				}
-			);
-
-			sortColumns.bind(
-				'sortstart.sortable',
-				function(event, ui) {
-					if (ui.item.is('.lfr-portlet-item')) {
-						ui.item.css(
-							{
-								height: 200,
-								width: 300
-							}
-						);
+				sortColumns.bind('sortactivate.sortable',
+					function(event) {
+						Liferay.Layout.Columns.startDragging();
+						sortableInstance.refreshPositions(true);
 					}
-				}
-			);
+				);
+
+				sortColumns.bind(
+					'sortstart.sortable',
+					function(event, ui) {
+						if (ui.item.is('.lfr-portlet-item')) {
+							ui.item.css(
+								{
+									height: 200,
+									width: 300
+								}
+							);
+						}
+					}
+				);
+
+				instance._eventsBound = true;
+			}
 		}
 
 		portlets.draggable(instance._dragOptions);
