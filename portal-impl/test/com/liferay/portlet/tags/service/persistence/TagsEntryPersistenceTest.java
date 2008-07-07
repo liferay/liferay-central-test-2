@@ -22,7 +22,6 @@
 
 package com.liferay.portlet.tags.service.persistence;
 
-import com.liferay.portal.kernel.bean.BeanLocatorUtil;
 import com.liferay.portal.service.persistence.BasePersistenceTestCase;
 
 import com.liferay.portlet.tags.NoSuchEntryException;
@@ -38,7 +37,7 @@ public class TagsEntryPersistenceTest extends BasePersistenceTestCase {
 	protected void setUp() throws Exception {
 		super.setUp();
 
-		_persistence = (TagsEntryPersistence)BeanLocatorUtil.locate(_TX_IMPL);
+		_persistence = (TagsEntryPersistence)com.liferay.portal.kernel.bean.BeanLocatorUtil.locate(_TX_IMPL);
 	}
 
 	public void testCreate() throws Exception {

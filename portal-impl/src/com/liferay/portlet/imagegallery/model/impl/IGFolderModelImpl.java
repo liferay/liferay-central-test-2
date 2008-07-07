@@ -26,7 +26,6 @@ import com.liferay.portal.kernel.bean.ReadOnlyBeanHandler;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.HtmlUtil;
 import com.liferay.portal.model.impl.BaseModelImpl;
-import com.liferay.portal.util.PropsUtil;
 
 import com.liferay.portlet.imagegallery.model.IGFolder;
 import com.liferay.portlet.imagegallery.model.IGFolderSoap;
@@ -98,7 +97,7 @@ public class IGFolderModelImpl extends BaseModelImpl {
 	public static final String DATA_SOURCE = "liferayDataSource";
 	public static final String SESSION_FACTORY = "liferaySessionFactory";
 	public static final String TX_MANAGER = "liferayTransactionManager";
-	public static final boolean CACHE_ENABLED = GetterUtil.getBoolean(PropsUtil.get(
+	public static final boolean CACHE_ENABLED = GetterUtil.getBoolean(com.liferay.portal.util.PropsUtil.get(
 				"value.object.finder.cache.enabled.com.liferay.portlet.imagegallery.model.IGFolder"),
 			true);
 
@@ -129,7 +128,7 @@ public class IGFolderModelImpl extends BaseModelImpl {
 		return models;
 	}
 
-	public static final long LOCK_EXPIRATION_TIME = GetterUtil.getLong(PropsUtil.get(
+	public static final long LOCK_EXPIRATION_TIME = GetterUtil.getLong(com.liferay.portal.util.PropsUtil.get(
 				"lock.expiration.time.com.liferay.portlet.imagegallery.model.IGFolder"));
 
 	public IGFolderModelImpl() {

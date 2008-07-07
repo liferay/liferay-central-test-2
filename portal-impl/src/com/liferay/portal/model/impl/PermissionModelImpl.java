@@ -27,7 +27,6 @@ import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.HtmlUtil;
 import com.liferay.portal.model.Permission;
 import com.liferay.portal.model.PermissionSoap;
-import com.liferay.portal.util.PropsUtil;
 
 import java.io.Serializable;
 
@@ -77,7 +76,7 @@ public class PermissionModelImpl extends BaseModelImpl {
 	public static final String DATA_SOURCE = "liferayDataSource";
 	public static final String SESSION_FACTORY = "liferaySessionFactory";
 	public static final String TX_MANAGER = "liferayTransactionManager";
-	public static final boolean CACHE_ENABLED = GetterUtil.getBoolean(PropsUtil.get(
+	public static final boolean CACHE_ENABLED = GetterUtil.getBoolean(com.liferay.portal.util.PropsUtil.get(
 				"value.object.finder.cache.enabled.com.liferay.portal.model.Permission"),
 			true);
 
@@ -105,7 +104,7 @@ public class PermissionModelImpl extends BaseModelImpl {
 	public static final boolean CACHE_ENABLED_GROUPS_PERMISSIONS = com.liferay.portal.model.impl.GroupModelImpl.CACHE_ENABLED_GROUPS_PERMISSIONS;
 	public static final boolean CACHE_ENABLED_ROLES_PERMISSIONS = com.liferay.portal.model.impl.RoleModelImpl.CACHE_ENABLED_ROLES_PERMISSIONS;
 	public static final boolean CACHE_ENABLED_USERS_PERMISSIONS = com.liferay.portal.model.impl.UserModelImpl.CACHE_ENABLED_USERS_PERMISSIONS;
-	public static final long LOCK_EXPIRATION_TIME = GetterUtil.getLong(PropsUtil.get(
+	public static final long LOCK_EXPIRATION_TIME = GetterUtil.getLong(com.liferay.portal.util.PropsUtil.get(
 				"lock.expiration.time.com.liferay.portal.model.Permission"));
 
 	public PermissionModelImpl() {

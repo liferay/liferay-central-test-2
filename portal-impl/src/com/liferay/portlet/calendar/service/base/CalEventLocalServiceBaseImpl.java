@@ -32,7 +32,7 @@ import com.liferay.mail.service.MailServiceFactory;
 
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
-import com.liferay.portal.kernel.dao.DynamicQueryInitializer;
+import com.liferay.portal.kernel.dao.search.DynamicQueryInitializer;
 import com.liferay.portal.service.CompanyLocalService;
 import com.liferay.portal.service.CompanyLocalServiceFactory;
 import com.liferay.portal.service.CompanyService;
@@ -49,8 +49,6 @@ import com.liferay.portal.service.UserLocalService;
 import com.liferay.portal.service.UserLocalServiceFactory;
 import com.liferay.portal.service.UserService;
 import com.liferay.portal.service.UserServiceFactory;
-import com.liferay.portal.service.persistence.CompanyFinder;
-import com.liferay.portal.service.persistence.CompanyFinderUtil;
 import com.liferay.portal.service.persistence.CompanyPersistence;
 import com.liferay.portal.service.persistence.CompanyUtil;
 import com.liferay.portal.service.persistence.PortletPreferencesFinder;
@@ -183,14 +181,6 @@ public abstract class CalEventLocalServiceBaseImpl
 
 	public void setCompanyPersistence(CompanyPersistence companyPersistence) {
 		this.companyPersistence = companyPersistence;
-	}
-
-	public CompanyFinder getCompanyFinder() {
-		return companyFinder;
-	}
-
-	public void setCompanyFinder(CompanyFinder companyFinder) {
-		this.companyFinder = companyFinder;
 	}
 
 	public PortletPreferencesLocalService getPortletPreferencesLocalService() {
@@ -327,10 +317,6 @@ public abstract class CalEventLocalServiceBaseImpl
 			companyPersistence = CompanyUtil.getPersistence();
 		}
 
-		if (companyFinder == null) {
-			companyFinder = CompanyFinderUtil.getFinder();
-		}
-
 		if (portletPreferencesLocalService == null) {
 			portletPreferencesLocalService = PortletPreferencesLocalServiceFactory.getImpl();
 		}
@@ -388,7 +374,6 @@ public abstract class CalEventLocalServiceBaseImpl
 	protected CompanyLocalService companyLocalService;
 	protected CompanyService companyService;
 	protected CompanyPersistence companyPersistence;
-	protected CompanyFinder companyFinder;
 	protected PortletPreferencesLocalService portletPreferencesLocalService;
 	protected PortletPreferencesService portletPreferencesService;
 	protected PortletPreferencesPersistence portletPreferencesPersistence;

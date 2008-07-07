@@ -22,7 +22,6 @@
 
 package com.liferay.portlet.announcements.service;
 
-import com.liferay.portal.kernel.bean.BeanLocatorUtil;
 
 /**
  * <a href="AnnouncementsDeliveryServiceFactory.java.html"><b><i>View Source</i></b></a>
@@ -58,7 +57,7 @@ public class AnnouncementsDeliveryServiceFactory {
 
 	public static AnnouncementsDeliveryService getImpl() {
 		if (_impl == null) {
-			_impl = (AnnouncementsDeliveryService)BeanLocatorUtil.locate(_IMPL);
+			_impl = (AnnouncementsDeliveryService)com.liferay.portal.kernel.bean.BeanLocatorUtil.locate(_IMPL);
 		}
 
 		return _impl;
@@ -66,7 +65,7 @@ public class AnnouncementsDeliveryServiceFactory {
 
 	public static AnnouncementsDeliveryService getTxImpl() {
 		if (_txImpl == null) {
-			_txImpl = (AnnouncementsDeliveryService)BeanLocatorUtil.locate(_TX_IMPL);
+			_txImpl = (AnnouncementsDeliveryService)com.liferay.portal.kernel.bean.BeanLocatorUtil.locate(_TX_IMPL);
 		}
 
 		return _txImpl;
@@ -78,7 +77,7 @@ public class AnnouncementsDeliveryServiceFactory {
 
 	private static AnnouncementsDeliveryServiceFactory _getFactory() {
 		if (_factory == null) {
-			_factory = (AnnouncementsDeliveryServiceFactory)BeanLocatorUtil.locate(_FACTORY);
+			_factory = (AnnouncementsDeliveryServiceFactory)com.liferay.portal.kernel.bean.BeanLocatorUtil.locate(_FACTORY);
 		}
 
 		return _factory;

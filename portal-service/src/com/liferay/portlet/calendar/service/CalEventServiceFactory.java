@@ -22,7 +22,6 @@
 
 package com.liferay.portlet.calendar.service;
 
-import com.liferay.portal.kernel.bean.BeanLocatorUtil;
 
 /**
  * <a href="CalEventServiceFactory.java.html"><b><i>View Source</i></b></a>
@@ -58,7 +57,7 @@ public class CalEventServiceFactory {
 
 	public static CalEventService getImpl() {
 		if (_impl == null) {
-			_impl = (CalEventService)BeanLocatorUtil.locate(_IMPL);
+			_impl = (CalEventService)com.liferay.portal.kernel.bean.BeanLocatorUtil.locate(_IMPL);
 		}
 
 		return _impl;
@@ -66,7 +65,7 @@ public class CalEventServiceFactory {
 
 	public static CalEventService getTxImpl() {
 		if (_txImpl == null) {
-			_txImpl = (CalEventService)BeanLocatorUtil.locate(_TX_IMPL);
+			_txImpl = (CalEventService)com.liferay.portal.kernel.bean.BeanLocatorUtil.locate(_TX_IMPL);
 		}
 
 		return _txImpl;
@@ -78,7 +77,7 @@ public class CalEventServiceFactory {
 
 	private static CalEventServiceFactory _getFactory() {
 		if (_factory == null) {
-			_factory = (CalEventServiceFactory)BeanLocatorUtil.locate(_FACTORY);
+			_factory = (CalEventServiceFactory)com.liferay.portal.kernel.bean.BeanLocatorUtil.locate(_FACTORY);
 		}
 
 		return _factory;

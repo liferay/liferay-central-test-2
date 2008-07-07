@@ -22,7 +22,6 @@
 
 package com.liferay.portlet.announcements.service.persistence;
 
-import com.liferay.portal.kernel.bean.BeanLocatorUtil;
 import com.liferay.portal.service.persistence.BasePersistenceTestCase;
 
 import com.liferay.portlet.announcements.NoSuchDeliveryException;
@@ -39,7 +38,7 @@ public class AnnouncementsDeliveryPersistenceTest
 	protected void setUp() throws Exception {
 		super.setUp();
 
-		_persistence = (AnnouncementsDeliveryPersistence)BeanLocatorUtil.locate(_TX_IMPL);
+		_persistence = (AnnouncementsDeliveryPersistence)com.liferay.portal.kernel.bean.BeanLocatorUtil.locate(_TX_IMPL);
 	}
 
 	public void testCreate() throws Exception {

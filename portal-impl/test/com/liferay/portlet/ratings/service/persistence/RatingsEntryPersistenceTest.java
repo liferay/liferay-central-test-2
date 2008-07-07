@@ -22,7 +22,6 @@
 
 package com.liferay.portlet.ratings.service.persistence;
 
-import com.liferay.portal.kernel.bean.BeanLocatorUtil;
 import com.liferay.portal.service.persistence.BasePersistenceTestCase;
 
 import com.liferay.portlet.ratings.NoSuchEntryException;
@@ -38,7 +37,7 @@ public class RatingsEntryPersistenceTest extends BasePersistenceTestCase {
 	protected void setUp() throws Exception {
 		super.setUp();
 
-		_persistence = (RatingsEntryPersistence)BeanLocatorUtil.locate(_TX_IMPL);
+		_persistence = (RatingsEntryPersistence)com.liferay.portal.kernel.bean.BeanLocatorUtil.locate(_TX_IMPL);
 	}
 
 	public void testCreate() throws Exception {

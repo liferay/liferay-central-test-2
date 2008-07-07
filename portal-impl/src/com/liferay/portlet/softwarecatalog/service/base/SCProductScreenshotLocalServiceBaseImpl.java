@@ -24,7 +24,7 @@ package com.liferay.portlet.softwarecatalog.service.base;
 
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
-import com.liferay.portal.kernel.dao.DynamicQueryInitializer;
+import com.liferay.portal.kernel.dao.search.DynamicQueryInitializer;
 import com.liferay.portal.service.ImageLocalService;
 import com.liferay.portal.service.ImageLocalServiceFactory;
 import com.liferay.portal.service.persistence.ImagePersistence;

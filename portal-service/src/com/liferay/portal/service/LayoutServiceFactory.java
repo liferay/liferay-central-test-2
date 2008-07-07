@@ -22,7 +22,6 @@
 
 package com.liferay.portal.service;
 
-import com.liferay.portal.kernel.bean.BeanLocatorUtil;
 
 /**
  * <a href="LayoutServiceFactory.java.html"><b><i>View Source</i></b></a>
@@ -58,7 +57,7 @@ public class LayoutServiceFactory {
 
 	public static LayoutService getImpl() {
 		if (_impl == null) {
-			_impl = (LayoutService)BeanLocatorUtil.locate(_IMPL);
+			_impl = (LayoutService)com.liferay.portal.kernel.bean.BeanLocatorUtil.locate(_IMPL);
 		}
 
 		return _impl;
@@ -66,7 +65,7 @@ public class LayoutServiceFactory {
 
 	public static LayoutService getTxImpl() {
 		if (_txImpl == null) {
-			_txImpl = (LayoutService)BeanLocatorUtil.locate(_TX_IMPL);
+			_txImpl = (LayoutService)com.liferay.portal.kernel.bean.BeanLocatorUtil.locate(_TX_IMPL);
 		}
 
 		return _txImpl;
@@ -78,7 +77,7 @@ public class LayoutServiceFactory {
 
 	private static LayoutServiceFactory _getFactory() {
 		if (_factory == null) {
-			_factory = (LayoutServiceFactory)BeanLocatorUtil.locate(_FACTORY);
+			_factory = (LayoutServiceFactory)com.liferay.portal.kernel.bean.BeanLocatorUtil.locate(_FACTORY);
 		}
 
 		return _factory;

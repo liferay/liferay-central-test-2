@@ -24,8 +24,13 @@ package com.liferay.portal.service.persistence;
 
 import com.liferay.portal.NoSuchLayoutException;
 import com.liferay.portal.SystemException;
-import com.liferay.portal.kernel.dao.DynamicQuery;
-import com.liferay.portal.kernel.dao.DynamicQueryInitializer;
+import com.liferay.portal.kernel.dao.hibernate.Query;
+import com.liferay.portal.kernel.dao.hibernate.QueryPos;
+import com.liferay.portal.kernel.dao.hibernate.QueryUtil;
+import com.liferay.portal.kernel.dao.hibernate.Session;
+import com.liferay.portal.kernel.dao.search.DynamicQuery;
+import com.liferay.portal.kernel.dao.search.DynamicQueryInitializer;
+import com.liferay.portal.kernel.spring.hibernate.FinderCacheUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.ListUtil;
 import com.liferay.portal.kernel.util.OrderByComparator;
@@ -35,17 +40,10 @@ import com.liferay.portal.model.Layout;
 import com.liferay.portal.model.ModelListener;
 import com.liferay.portal.model.impl.LayoutImpl;
 import com.liferay.portal.model.impl.LayoutModelImpl;
-import com.liferay.portal.spring.hibernate.FinderCache;
-import com.liferay.portal.util.PropsUtil;
-
-import com.liferay.util.dao.hibernate.QueryPos;
-import com.liferay.util.dao.hibernate.QueryUtil;
+import com.liferay.portal.service.persistence.impl.BasePersistenceImpl;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-
-import org.hibernate.Query;
-import org.hibernate.Session;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -58,7 +56,7 @@ import java.util.List;
  * @author Brian Wing Shun Chan
  *
  */
-public class LayoutPersistenceImpl extends BasePersistence
+public class LayoutPersistenceImpl extends BasePersistenceImpl
 	implements LayoutPersistence {
 	public Layout create(long plid) {
 		Layout layout = new LayoutImpl();
@@ -136,7 +134,7 @@ public class LayoutPersistenceImpl extends BasePersistence
 		finally {
 			closeSession(session);
 
-			FinderCache.clearCache(Layout.class.getName());
+			FinderCacheUtil.clearCache(Layout.class.getName());
 		}
 	}
 
@@ -224,7 +222,7 @@ public class LayoutPersistenceImpl extends BasePersistence
 		finally {
 			closeSession(session);
 
-			FinderCache.clearCache(Layout.class.getName());
+			FinderCacheUtil.clearCache(Layout.class.getName());
 		}
 	}
 
@@ -270,8 +268,8 @@ public class LayoutPersistenceImpl extends BasePersistence
 		Object result = null;
 
 		if (finderClassNameCacheEnabled) {
-			result = FinderCache.getResult(finderClassName, finderMethodName,
-					finderParams, finderArgs, getSessionFactory());
+			result = FinderCacheUtil.getResult(finderClassName,
+					finderMethodName, finderParams, finderArgs, this);
 		}
 
 		if (result == null) {
@@ -301,7 +299,7 @@ public class LayoutPersistenceImpl extends BasePersistence
 
 				List<Layout> list = q.list();
 
-				FinderCache.putResult(finderClassNameCacheEnabled,
+				FinderCacheUtil.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
 					finderArgs, list);
 
@@ -344,8 +342,8 @@ public class LayoutPersistenceImpl extends BasePersistence
 		Object result = null;
 
 		if (finderClassNameCacheEnabled) {
-			result = FinderCache.getResult(finderClassName, finderMethodName,
-					finderParams, finderArgs, getSessionFactory());
+			result = FinderCacheUtil.getResult(finderClassName,
+					finderMethodName, finderParams, finderArgs, this);
 		}
 
 		if (result == null) {
@@ -383,7 +381,7 @@ public class LayoutPersistenceImpl extends BasePersistence
 				List<Layout> list = (List<Layout>)QueryUtil.list(q,
 						getDialect(), start, end);
 
-				FinderCache.putResult(finderClassNameCacheEnabled,
+				FinderCacheUtil.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
 					finderArgs, list);
 
@@ -509,8 +507,8 @@ public class LayoutPersistenceImpl extends BasePersistence
 		Object result = null;
 
 		if (finderClassNameCacheEnabled) {
-			result = FinderCache.getResult(finderClassName, finderMethodName,
-					finderParams, finderArgs, getSessionFactory());
+			result = FinderCacheUtil.getResult(finderClassName,
+					finderMethodName, finderParams, finderArgs, this);
 		}
 
 		if (result == null) {
@@ -540,7 +538,7 @@ public class LayoutPersistenceImpl extends BasePersistence
 
 				List<Layout> list = q.list();
 
-				FinderCache.putResult(finderClassNameCacheEnabled,
+				FinderCacheUtil.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
 					finderArgs, list);
 
@@ -583,8 +581,8 @@ public class LayoutPersistenceImpl extends BasePersistence
 		Object result = null;
 
 		if (finderClassNameCacheEnabled) {
-			result = FinderCache.getResult(finderClassName, finderMethodName,
-					finderParams, finderArgs, getSessionFactory());
+			result = FinderCacheUtil.getResult(finderClassName,
+					finderMethodName, finderParams, finderArgs, this);
 		}
 
 		if (result == null) {
@@ -622,7 +620,7 @@ public class LayoutPersistenceImpl extends BasePersistence
 				List<Layout> list = (List<Layout>)QueryUtil.list(q,
 						getDialect(), start, end);
 
-				FinderCache.putResult(finderClassNameCacheEnabled,
+				FinderCacheUtil.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
 					finderArgs, list);
 
@@ -770,8 +768,8 @@ public class LayoutPersistenceImpl extends BasePersistence
 		Object result = null;
 
 		if (finderClassNameCacheEnabled) {
-			result = FinderCache.getResult(finderClassName, finderMethodName,
-					finderParams, finderArgs, getSessionFactory());
+			result = FinderCacheUtil.getResult(finderClassName,
+					finderMethodName, finderParams, finderArgs, this);
 		}
 
 		if (result == null) {
@@ -801,7 +799,7 @@ public class LayoutPersistenceImpl extends BasePersistence
 
 				List<Layout> list = q.list();
 
-				FinderCache.putResult(finderClassNameCacheEnabled,
+				FinderCacheUtil.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
 					finderArgs, list);
 
@@ -865,8 +863,8 @@ public class LayoutPersistenceImpl extends BasePersistence
 		Object result = null;
 
 		if (finderClassNameCacheEnabled) {
-			result = FinderCache.getResult(finderClassName, finderMethodName,
-					finderParams, finderArgs, getSessionFactory());
+			result = FinderCacheUtil.getResult(finderClassName,
+					finderMethodName, finderParams, finderArgs, this);
 		}
 
 		if (result == null) {
@@ -896,7 +894,7 @@ public class LayoutPersistenceImpl extends BasePersistence
 
 				List<Layout> list = q.list();
 
-				FinderCache.putResult(finderClassNameCacheEnabled,
+				FinderCacheUtil.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
 					finderArgs, list);
 
@@ -941,8 +939,8 @@ public class LayoutPersistenceImpl extends BasePersistence
 		Object result = null;
 
 		if (finderClassNameCacheEnabled) {
-			result = FinderCache.getResult(finderClassName, finderMethodName,
-					finderParams, finderArgs, getSessionFactory());
+			result = FinderCacheUtil.getResult(finderClassName,
+					finderMethodName, finderParams, finderArgs, this);
 		}
 
 		if (result == null) {
@@ -978,7 +976,7 @@ public class LayoutPersistenceImpl extends BasePersistence
 
 				List<Layout> list = q.list();
 
-				FinderCache.putResult(finderClassNameCacheEnabled,
+				FinderCacheUtil.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
 					finderArgs, list);
 
@@ -1021,8 +1019,8 @@ public class LayoutPersistenceImpl extends BasePersistence
 		Object result = null;
 
 		if (finderClassNameCacheEnabled) {
-			result = FinderCache.getResult(finderClassName, finderMethodName,
-					finderParams, finderArgs, getSessionFactory());
+			result = FinderCacheUtil.getResult(finderClassName,
+					finderMethodName, finderParams, finderArgs, this);
 		}
 
 		if (result == null) {
@@ -1066,7 +1064,7 @@ public class LayoutPersistenceImpl extends BasePersistence
 				List<Layout> list = (List<Layout>)QueryUtil.list(q,
 						getDialect(), start, end);
 
-				FinderCache.putResult(finderClassNameCacheEnabled,
+				FinderCacheUtil.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
 					finderArgs, list);
 
@@ -1241,8 +1239,8 @@ public class LayoutPersistenceImpl extends BasePersistence
 		Object result = null;
 
 		if (finderClassNameCacheEnabled) {
-			result = FinderCache.getResult(finderClassName, finderMethodName,
-					finderParams, finderArgs, getSessionFactory());
+			result = FinderCacheUtil.getResult(finderClassName,
+					finderMethodName, finderParams, finderArgs, this);
 		}
 
 		if (result == null) {
@@ -1284,7 +1282,7 @@ public class LayoutPersistenceImpl extends BasePersistence
 
 				List<Layout> list = q.list();
 
-				FinderCache.putResult(finderClassNameCacheEnabled,
+				FinderCacheUtil.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
 					finderArgs, list);
 
@@ -1331,8 +1329,8 @@ public class LayoutPersistenceImpl extends BasePersistence
 		Object result = null;
 
 		if (finderClassNameCacheEnabled) {
-			result = FinderCache.getResult(finderClassName, finderMethodName,
-					finderParams, finderArgs, getSessionFactory());
+			result = FinderCacheUtil.getResult(finderClassName,
+					finderMethodName, finderParams, finderArgs, this);
 		}
 
 		if (result == null) {
@@ -1374,7 +1372,7 @@ public class LayoutPersistenceImpl extends BasePersistence
 
 				List<Layout> list = q.list();
 
-				FinderCache.putResult(finderClassNameCacheEnabled,
+				FinderCacheUtil.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
 					finderArgs, list);
 
@@ -1421,8 +1419,8 @@ public class LayoutPersistenceImpl extends BasePersistence
 		Object result = null;
 
 		if (finderClassNameCacheEnabled) {
-			result = FinderCache.getResult(finderClassName, finderMethodName,
-					finderParams, finderArgs, getSessionFactory());
+			result = FinderCacheUtil.getResult(finderClassName,
+					finderMethodName, finderParams, finderArgs, this);
 		}
 
 		if (result == null) {
@@ -1472,7 +1470,7 @@ public class LayoutPersistenceImpl extends BasePersistence
 				List<Layout> list = (List<Layout>)QueryUtil.list(q,
 						getDialect(), start, end);
 
-				FinderCache.putResult(finderClassNameCacheEnabled,
+				FinderCacheUtil.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
 					finderArgs, list);
 
@@ -1663,8 +1661,8 @@ public class LayoutPersistenceImpl extends BasePersistence
 		Object result = null;
 
 		if (finderClassNameCacheEnabled) {
-			result = FinderCache.getResult(finderClassName, finderMethodName,
-					finderParams, finderArgs, getSessionFactory());
+			result = FinderCacheUtil.getResult(finderClassName,
+					finderMethodName, finderParams, finderArgs, this);
 		}
 
 		if (result == null) {
@@ -1713,7 +1711,7 @@ public class LayoutPersistenceImpl extends BasePersistence
 
 				List<Layout> list = q.list();
 
-				FinderCache.putResult(finderClassNameCacheEnabled,
+				FinderCacheUtil.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
 					finderArgs, list);
 
@@ -1761,8 +1759,8 @@ public class LayoutPersistenceImpl extends BasePersistence
 		Object result = null;
 
 		if (finderClassNameCacheEnabled) {
-			result = FinderCache.getResult(finderClassName, finderMethodName,
-					finderParams, finderArgs, getSessionFactory());
+			result = FinderCacheUtil.getResult(finderClassName,
+					finderMethodName, finderParams, finderArgs, this);
 		}
 
 		if (result == null) {
@@ -1811,7 +1809,7 @@ public class LayoutPersistenceImpl extends BasePersistence
 
 				List<Layout> list = q.list();
 
-				FinderCache.putResult(finderClassNameCacheEnabled,
+				FinderCacheUtil.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
 					finderArgs, list);
 
@@ -1858,8 +1856,8 @@ public class LayoutPersistenceImpl extends BasePersistence
 		Object result = null;
 
 		if (finderClassNameCacheEnabled) {
-			result = FinderCache.getResult(finderClassName, finderMethodName,
-					finderParams, finderArgs, getSessionFactory());
+			result = FinderCacheUtil.getResult(finderClassName,
+					finderMethodName, finderParams, finderArgs, this);
 		}
 
 		if (result == null) {
@@ -1916,7 +1914,7 @@ public class LayoutPersistenceImpl extends BasePersistence
 				List<Layout> list = (List<Layout>)QueryUtil.list(q,
 						getDialect(), start, end);
 
-				FinderCache.putResult(finderClassNameCacheEnabled,
+				FinderCacheUtil.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
 					finderArgs, list);
 
@@ -2131,8 +2129,8 @@ public class LayoutPersistenceImpl extends BasePersistence
 		Object result = null;
 
 		if (finderClassNameCacheEnabled) {
-			result = FinderCache.getResult(finderClassName, finderMethodName,
-					finderParams, finderArgs, getSessionFactory());
+			result = FinderCacheUtil.getResult(finderClassName,
+					finderMethodName, finderParams, finderArgs, this);
 		}
 
 		if (result == null) {
@@ -2166,7 +2164,7 @@ public class LayoutPersistenceImpl extends BasePersistence
 					Collections.sort(list);
 				}
 
-				FinderCache.putResult(finderClassNameCacheEnabled,
+				FinderCacheUtil.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
 					finderArgs, list);
 
@@ -2261,8 +2259,8 @@ public class LayoutPersistenceImpl extends BasePersistence
 		Object result = null;
 
 		if (finderClassNameCacheEnabled) {
-			result = FinderCache.getResult(finderClassName, finderMethodName,
-					finderParams, finderArgs, getSessionFactory());
+			result = FinderCacheUtil.getResult(finderClassName,
+					finderMethodName, finderParams, finderArgs, this);
 		}
 
 		if (result == null) {
@@ -2298,7 +2296,7 @@ public class LayoutPersistenceImpl extends BasePersistence
 					count = new Long(0);
 				}
 
-				FinderCache.putResult(finderClassNameCacheEnabled,
+				FinderCacheUtil.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
 					finderArgs, count);
 
@@ -2326,8 +2324,8 @@ public class LayoutPersistenceImpl extends BasePersistence
 		Object result = null;
 
 		if (finderClassNameCacheEnabled) {
-			result = FinderCache.getResult(finderClassName, finderMethodName,
-					finderParams, finderArgs, getSessionFactory());
+			result = FinderCacheUtil.getResult(finderClassName,
+					finderMethodName, finderParams, finderArgs, this);
 		}
 
 		if (result == null) {
@@ -2363,7 +2361,7 @@ public class LayoutPersistenceImpl extends BasePersistence
 					count = new Long(0);
 				}
 
-				FinderCache.putResult(finderClassNameCacheEnabled,
+				FinderCacheUtil.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
 					finderArgs, count);
 
@@ -2391,8 +2389,8 @@ public class LayoutPersistenceImpl extends BasePersistence
 		Object result = null;
 
 		if (finderClassNameCacheEnabled) {
-			result = FinderCache.getResult(finderClassName, finderMethodName,
-					finderParams, finderArgs, getSessionFactory());
+			result = FinderCacheUtil.getResult(finderClassName,
+					finderMethodName, finderParams, finderArgs, this);
 		}
 
 		if (result == null) {
@@ -2428,7 +2426,7 @@ public class LayoutPersistenceImpl extends BasePersistence
 					count = new Long(0);
 				}
 
-				FinderCache.putResult(finderClassNameCacheEnabled,
+				FinderCacheUtil.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
 					finderArgs, count);
 
@@ -2456,8 +2454,8 @@ public class LayoutPersistenceImpl extends BasePersistence
 		Object result = null;
 
 		if (finderClassNameCacheEnabled) {
-			result = FinderCache.getResult(finderClassName, finderMethodName,
-					finderParams, finderArgs, getSessionFactory());
+			result = FinderCacheUtil.getResult(finderClassName,
+					finderMethodName, finderParams, finderArgs, this);
 		}
 
 		if (result == null) {
@@ -2493,7 +2491,7 @@ public class LayoutPersistenceImpl extends BasePersistence
 					count = new Long(0);
 				}
 
-				FinderCache.putResult(finderClassNameCacheEnabled,
+				FinderCacheUtil.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
 					finderArgs, count);
 
@@ -2526,8 +2524,8 @@ public class LayoutPersistenceImpl extends BasePersistence
 		Object result = null;
 
 		if (finderClassNameCacheEnabled) {
-			result = FinderCache.getResult(finderClassName, finderMethodName,
-					finderParams, finderArgs, getSessionFactory());
+			result = FinderCacheUtil.getResult(finderClassName,
+					finderMethodName, finderParams, finderArgs, this);
 		}
 
 		if (result == null) {
@@ -2569,7 +2567,7 @@ public class LayoutPersistenceImpl extends BasePersistence
 					count = new Long(0);
 				}
 
-				FinderCache.putResult(finderClassNameCacheEnabled,
+				FinderCacheUtil.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
 					finderArgs, count);
 
@@ -2604,8 +2602,8 @@ public class LayoutPersistenceImpl extends BasePersistence
 		Object result = null;
 
 		if (finderClassNameCacheEnabled) {
-			result = FinderCache.getResult(finderClassName, finderMethodName,
-					finderParams, finderArgs, getSessionFactory());
+			result = FinderCacheUtil.getResult(finderClassName,
+					finderMethodName, finderParams, finderArgs, this);
 		}
 
 		if (result == null) {
@@ -2653,7 +2651,7 @@ public class LayoutPersistenceImpl extends BasePersistence
 					count = new Long(0);
 				}
 
-				FinderCache.putResult(finderClassNameCacheEnabled,
+				FinderCacheUtil.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
 					finderArgs, count);
 
@@ -2688,8 +2686,8 @@ public class LayoutPersistenceImpl extends BasePersistence
 		Object result = null;
 
 		if (finderClassNameCacheEnabled) {
-			result = FinderCache.getResult(finderClassName, finderMethodName,
-					finderParams, finderArgs, getSessionFactory());
+			result = FinderCacheUtil.getResult(finderClassName,
+					finderMethodName, finderParams, finderArgs, this);
 		}
 
 		if (result == null) {
@@ -2737,7 +2735,7 @@ public class LayoutPersistenceImpl extends BasePersistence
 					count = new Long(0);
 				}
 
-				FinderCache.putResult(finderClassNameCacheEnabled,
+				FinderCacheUtil.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
 					finderArgs, count);
 
@@ -2773,8 +2771,8 @@ public class LayoutPersistenceImpl extends BasePersistence
 		Object result = null;
 
 		if (finderClassNameCacheEnabled) {
-			result = FinderCache.getResult(finderClassName, finderMethodName,
-					finderParams, finderArgs, getSessionFactory());
+			result = FinderCacheUtil.getResult(finderClassName,
+					finderMethodName, finderParams, finderArgs, this);
 		}
 
 		if (result == null) {
@@ -2829,7 +2827,7 @@ public class LayoutPersistenceImpl extends BasePersistence
 					count = new Long(0);
 				}
 
-				FinderCache.putResult(finderClassNameCacheEnabled,
+				FinderCacheUtil.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
 					finderArgs, count);
 
@@ -2865,8 +2863,8 @@ public class LayoutPersistenceImpl extends BasePersistence
 		Object result = null;
 
 		if (finderClassNameCacheEnabled) {
-			result = FinderCache.getResult(finderClassName, finderMethodName,
-					finderParams, finderArgs, getSessionFactory());
+			result = FinderCacheUtil.getResult(finderClassName,
+					finderMethodName, finderParams, finderArgs, this);
 		}
 
 		if (result == null) {
@@ -2921,7 +2919,7 @@ public class LayoutPersistenceImpl extends BasePersistence
 					count = new Long(0);
 				}
 
-				FinderCache.putResult(finderClassNameCacheEnabled,
+				FinderCacheUtil.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
 					finderArgs, count);
 
@@ -2949,8 +2947,8 @@ public class LayoutPersistenceImpl extends BasePersistence
 		Object result = null;
 
 		if (finderClassNameCacheEnabled) {
-			result = FinderCache.getResult(finderClassName, finderMethodName,
-					finderParams, finderArgs, getSessionFactory());
+			result = FinderCacheUtil.getResult(finderClassName,
+					finderMethodName, finderParams, finderArgs, this);
 		}
 
 		if (result == null) {
@@ -2974,7 +2972,7 @@ public class LayoutPersistenceImpl extends BasePersistence
 					count = new Long(0);
 				}
 
-				FinderCache.putResult(finderClassNameCacheEnabled,
+				FinderCacheUtil.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
 					finderArgs, count);
 
@@ -3010,7 +3008,7 @@ public class LayoutPersistenceImpl extends BasePersistence
 
 	protected void init() {
 		String[] listenerClassNames = StringUtil.split(GetterUtil.getString(
-					PropsUtil.get(
+					com.liferay.portal.util.PropsUtil.get(
 						"value.object.listener.com.liferay.portal.model.Layout")));
 
 		if (listenerClassNames.length > 0) {

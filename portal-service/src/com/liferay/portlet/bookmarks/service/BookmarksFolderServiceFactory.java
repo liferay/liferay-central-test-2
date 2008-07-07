@@ -22,7 +22,6 @@
 
 package com.liferay.portlet.bookmarks.service;
 
-import com.liferay.portal.kernel.bean.BeanLocatorUtil;
 
 /**
  * <a href="BookmarksFolderServiceFactory.java.html"><b><i>View Source</i></b></a>
@@ -58,7 +57,7 @@ public class BookmarksFolderServiceFactory {
 
 	public static BookmarksFolderService getImpl() {
 		if (_impl == null) {
-			_impl = (BookmarksFolderService)BeanLocatorUtil.locate(_IMPL);
+			_impl = (BookmarksFolderService)com.liferay.portal.kernel.bean.BeanLocatorUtil.locate(_IMPL);
 		}
 
 		return _impl;
@@ -66,7 +65,7 @@ public class BookmarksFolderServiceFactory {
 
 	public static BookmarksFolderService getTxImpl() {
 		if (_txImpl == null) {
-			_txImpl = (BookmarksFolderService)BeanLocatorUtil.locate(_TX_IMPL);
+			_txImpl = (BookmarksFolderService)com.liferay.portal.kernel.bean.BeanLocatorUtil.locate(_TX_IMPL);
 		}
 
 		return _txImpl;
@@ -78,7 +77,7 @@ public class BookmarksFolderServiceFactory {
 
 	private static BookmarksFolderServiceFactory _getFactory() {
 		if (_factory == null) {
-			_factory = (BookmarksFolderServiceFactory)BeanLocatorUtil.locate(_FACTORY);
+			_factory = (BookmarksFolderServiceFactory)com.liferay.portal.kernel.bean.BeanLocatorUtil.locate(_FACTORY);
 		}
 
 		return _factory;

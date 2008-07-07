@@ -22,7 +22,6 @@
 
 package com.liferay.portlet.ratings.service;
 
-import com.liferay.portal.kernel.bean.BeanLocatorUtil;
 
 /**
  * <a href="RatingsEntryLocalServiceFactory.java.html"><b><i>View Source</i></b></a>
@@ -58,7 +57,7 @@ public class RatingsEntryLocalServiceFactory {
 
 	public static RatingsEntryLocalService getImpl() {
 		if (_impl == null) {
-			_impl = (RatingsEntryLocalService)BeanLocatorUtil.locate(_IMPL);
+			_impl = (RatingsEntryLocalService)com.liferay.portal.kernel.bean.BeanLocatorUtil.locate(_IMPL);
 		}
 
 		return _impl;
@@ -66,7 +65,7 @@ public class RatingsEntryLocalServiceFactory {
 
 	public static RatingsEntryLocalService getTxImpl() {
 		if (_txImpl == null) {
-			_txImpl = (RatingsEntryLocalService)BeanLocatorUtil.locate(_TX_IMPL);
+			_txImpl = (RatingsEntryLocalService)com.liferay.portal.kernel.bean.BeanLocatorUtil.locate(_TX_IMPL);
 		}
 
 		return _txImpl;
@@ -78,7 +77,7 @@ public class RatingsEntryLocalServiceFactory {
 
 	private static RatingsEntryLocalServiceFactory _getFactory() {
 		if (_factory == null) {
-			_factory = (RatingsEntryLocalServiceFactory)BeanLocatorUtil.locate(_FACTORY);
+			_factory = (RatingsEntryLocalServiceFactory)com.liferay.portal.kernel.bean.BeanLocatorUtil.locate(_FACTORY);
 		}
 
 		return _factory;

@@ -22,7 +22,6 @@
 
 package com.liferay.portal.service;
 
-import com.liferay.portal.kernel.bean.BeanLocatorUtil;
 
 /**
  * <a href="ListTypeServiceFactory.java.html"><b><i>View Source</i></b></a>
@@ -58,7 +57,7 @@ public class ListTypeServiceFactory {
 
 	public static ListTypeService getImpl() {
 		if (_impl == null) {
-			_impl = (ListTypeService)BeanLocatorUtil.locate(_IMPL);
+			_impl = (ListTypeService)com.liferay.portal.kernel.bean.BeanLocatorUtil.locate(_IMPL);
 		}
 
 		return _impl;
@@ -66,7 +65,7 @@ public class ListTypeServiceFactory {
 
 	public static ListTypeService getTxImpl() {
 		if (_txImpl == null) {
-			_txImpl = (ListTypeService)BeanLocatorUtil.locate(_TX_IMPL);
+			_txImpl = (ListTypeService)com.liferay.portal.kernel.bean.BeanLocatorUtil.locate(_TX_IMPL);
 		}
 
 		return _txImpl;
@@ -78,7 +77,7 @@ public class ListTypeServiceFactory {
 
 	private static ListTypeServiceFactory _getFactory() {
 		if (_factory == null) {
-			_factory = (ListTypeServiceFactory)BeanLocatorUtil.locate(_FACTORY);
+			_factory = (ListTypeServiceFactory)com.liferay.portal.kernel.bean.BeanLocatorUtil.locate(_FACTORY);
 		}
 
 		return _factory;

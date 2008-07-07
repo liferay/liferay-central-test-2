@@ -22,7 +22,6 @@
 
 package com.liferay.portal.service;
 
-import com.liferay.portal.kernel.bean.BeanLocatorUtil;
 
 /**
  * <a href="EmailAddressServiceFactory.java.html"><b><i>View Source</i></b></a>
@@ -58,7 +57,7 @@ public class EmailAddressServiceFactory {
 
 	public static EmailAddressService getImpl() {
 		if (_impl == null) {
-			_impl = (EmailAddressService)BeanLocatorUtil.locate(_IMPL);
+			_impl = (EmailAddressService)com.liferay.portal.kernel.bean.BeanLocatorUtil.locate(_IMPL);
 		}
 
 		return _impl;
@@ -66,7 +65,7 @@ public class EmailAddressServiceFactory {
 
 	public static EmailAddressService getTxImpl() {
 		if (_txImpl == null) {
-			_txImpl = (EmailAddressService)BeanLocatorUtil.locate(_TX_IMPL);
+			_txImpl = (EmailAddressService)com.liferay.portal.kernel.bean.BeanLocatorUtil.locate(_TX_IMPL);
 		}
 
 		return _txImpl;
@@ -78,7 +77,7 @@ public class EmailAddressServiceFactory {
 
 	private static EmailAddressServiceFactory _getFactory() {
 		if (_factory == null) {
-			_factory = (EmailAddressServiceFactory)BeanLocatorUtil.locate(_FACTORY);
+			_factory = (EmailAddressServiceFactory)com.liferay.portal.kernel.bean.BeanLocatorUtil.locate(_FACTORY);
 		}
 
 		return _factory;

@@ -22,7 +22,6 @@
 
 package com.liferay.portal.service;
 
-import com.liferay.portal.kernel.bean.BeanLocatorUtil;
 
 /**
  * <a href="UserGroupLocalServiceFactory.java.html"><b><i>View Source</i></b></a>
@@ -58,7 +57,7 @@ public class UserGroupLocalServiceFactory {
 
 	public static UserGroupLocalService getImpl() {
 		if (_impl == null) {
-			_impl = (UserGroupLocalService)BeanLocatorUtil.locate(_IMPL);
+			_impl = (UserGroupLocalService)com.liferay.portal.kernel.bean.BeanLocatorUtil.locate(_IMPL);
 		}
 
 		return _impl;
@@ -66,7 +65,7 @@ public class UserGroupLocalServiceFactory {
 
 	public static UserGroupLocalService getTxImpl() {
 		if (_txImpl == null) {
-			_txImpl = (UserGroupLocalService)BeanLocatorUtil.locate(_TX_IMPL);
+			_txImpl = (UserGroupLocalService)com.liferay.portal.kernel.bean.BeanLocatorUtil.locate(_TX_IMPL);
 		}
 
 		return _txImpl;
@@ -78,7 +77,7 @@ public class UserGroupLocalServiceFactory {
 
 	private static UserGroupLocalServiceFactory _getFactory() {
 		if (_factory == null) {
-			_factory = (UserGroupLocalServiceFactory)BeanLocatorUtil.locate(_FACTORY);
+			_factory = (UserGroupLocalServiceFactory)com.liferay.portal.kernel.bean.BeanLocatorUtil.locate(_FACTORY);
 		}
 
 		return _factory;

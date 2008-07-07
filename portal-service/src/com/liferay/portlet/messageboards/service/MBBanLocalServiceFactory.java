@@ -22,7 +22,6 @@
 
 package com.liferay.portlet.messageboards.service;
 
-import com.liferay.portal.kernel.bean.BeanLocatorUtil;
 
 /**
  * <a href="MBBanLocalServiceFactory.java.html"><b><i>View Source</i></b></a>
@@ -58,7 +57,7 @@ public class MBBanLocalServiceFactory {
 
 	public static MBBanLocalService getImpl() {
 		if (_impl == null) {
-			_impl = (MBBanLocalService)BeanLocatorUtil.locate(_IMPL);
+			_impl = (MBBanLocalService)com.liferay.portal.kernel.bean.BeanLocatorUtil.locate(_IMPL);
 		}
 
 		return _impl;
@@ -66,7 +65,7 @@ public class MBBanLocalServiceFactory {
 
 	public static MBBanLocalService getTxImpl() {
 		if (_txImpl == null) {
-			_txImpl = (MBBanLocalService)BeanLocatorUtil.locate(_TX_IMPL);
+			_txImpl = (MBBanLocalService)com.liferay.portal.kernel.bean.BeanLocatorUtil.locate(_TX_IMPL);
 		}
 
 		return _txImpl;
@@ -78,7 +77,7 @@ public class MBBanLocalServiceFactory {
 
 	private static MBBanLocalServiceFactory _getFactory() {
 		if (_factory == null) {
-			_factory = (MBBanLocalServiceFactory)BeanLocatorUtil.locate(_FACTORY);
+			_factory = (MBBanLocalServiceFactory)com.liferay.portal.kernel.bean.BeanLocatorUtil.locate(_FACTORY);
 		}
 
 		return _factory;

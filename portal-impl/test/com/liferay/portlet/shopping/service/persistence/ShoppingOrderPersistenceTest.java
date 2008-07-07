@@ -22,7 +22,6 @@
 
 package com.liferay.portlet.shopping.service.persistence;
 
-import com.liferay.portal.kernel.bean.BeanLocatorUtil;
 import com.liferay.portal.service.persistence.BasePersistenceTestCase;
 
 import com.liferay.portlet.shopping.NoSuchOrderException;
@@ -38,7 +37,7 @@ public class ShoppingOrderPersistenceTest extends BasePersistenceTestCase {
 	protected void setUp() throws Exception {
 		super.setUp();
 
-		_persistence = (ShoppingOrderPersistence)BeanLocatorUtil.locate(_TX_IMPL);
+		_persistence = (ShoppingOrderPersistence)com.liferay.portal.kernel.bean.BeanLocatorUtil.locate(_TX_IMPL);
 	}
 
 	public void testCreate() throws Exception {

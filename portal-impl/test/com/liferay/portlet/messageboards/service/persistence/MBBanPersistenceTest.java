@@ -22,7 +22,6 @@
 
 package com.liferay.portlet.messageboards.service.persistence;
 
-import com.liferay.portal.kernel.bean.BeanLocatorUtil;
 import com.liferay.portal.service.persistence.BasePersistenceTestCase;
 
 import com.liferay.portlet.messageboards.NoSuchBanException;
@@ -38,7 +37,7 @@ public class MBBanPersistenceTest extends BasePersistenceTestCase {
 	protected void setUp() throws Exception {
 		super.setUp();
 
-		_persistence = (MBBanPersistence)BeanLocatorUtil.locate(_TX_IMPL);
+		_persistence = (MBBanPersistence)com.liferay.portal.kernel.bean.BeanLocatorUtil.locate(_TX_IMPL);
 	}
 
 	public void testCreate() throws Exception {

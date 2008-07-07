@@ -22,7 +22,6 @@
 
 package com.liferay.portal.service;
 
-import com.liferay.portal.kernel.bean.BeanLocatorUtil;
 
 /**
  * <a href="PortletItemLocalServiceFactory.java.html"><b><i>View Source</i></b></a>
@@ -58,7 +57,7 @@ public class PortletItemLocalServiceFactory {
 
 	public static PortletItemLocalService getImpl() {
 		if (_impl == null) {
-			_impl = (PortletItemLocalService)BeanLocatorUtil.locate(_IMPL);
+			_impl = (PortletItemLocalService)com.liferay.portal.kernel.bean.BeanLocatorUtil.locate(_IMPL);
 		}
 
 		return _impl;
@@ -66,7 +65,7 @@ public class PortletItemLocalServiceFactory {
 
 	public static PortletItemLocalService getTxImpl() {
 		if (_txImpl == null) {
-			_txImpl = (PortletItemLocalService)BeanLocatorUtil.locate(_TX_IMPL);
+			_txImpl = (PortletItemLocalService)com.liferay.portal.kernel.bean.BeanLocatorUtil.locate(_TX_IMPL);
 		}
 
 		return _txImpl;
@@ -78,7 +77,7 @@ public class PortletItemLocalServiceFactory {
 
 	private static PortletItemLocalServiceFactory _getFactory() {
 		if (_factory == null) {
-			_factory = (PortletItemLocalServiceFactory)BeanLocatorUtil.locate(_FACTORY);
+			_factory = (PortletItemLocalServiceFactory)com.liferay.portal.kernel.bean.BeanLocatorUtil.locate(_FACTORY);
 		}
 
 		return _factory;

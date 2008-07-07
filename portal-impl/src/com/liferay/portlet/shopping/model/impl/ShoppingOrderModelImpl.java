@@ -27,7 +27,6 @@ import com.liferay.portal.kernel.util.DateUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.HtmlUtil;
 import com.liferay.portal.model.impl.BaseModelImpl;
-import com.liferay.portal.util.PropsUtil;
 
 import com.liferay.portlet.shopping.model.ShoppingOrder;
 import com.liferay.portlet.shopping.model.ShoppingOrderSoap;
@@ -222,7 +221,7 @@ public class ShoppingOrderModelImpl extends BaseModelImpl {
 	public static final String DATA_SOURCE = "liferayDataSource";
 	public static final String SESSION_FACTORY = "liferaySessionFactory";
 	public static final String TX_MANAGER = "liferayTransactionManager";
-	public static final boolean CACHE_ENABLED = GetterUtil.getBoolean(PropsUtil.get(
+	public static final boolean CACHE_ENABLED = GetterUtil.getBoolean(com.liferay.portal.util.PropsUtil.get(
 				"value.object.finder.cache.enabled.com.liferay.portlet.shopping.model.ShoppingOrder"),
 			true);
 
@@ -294,7 +293,7 @@ public class ShoppingOrderModelImpl extends BaseModelImpl {
 		return models;
 	}
 
-	public static final long LOCK_EXPIRATION_TIME = GetterUtil.getLong(PropsUtil.get(
+	public static final long LOCK_EXPIRATION_TIME = GetterUtil.getLong(com.liferay.portal.util.PropsUtil.get(
 				"lock.expiration.time.com.liferay.portlet.shopping.model.ShoppingOrder"));
 
 	public ShoppingOrderModelImpl() {

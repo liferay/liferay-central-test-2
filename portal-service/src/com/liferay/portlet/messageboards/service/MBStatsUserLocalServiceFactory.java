@@ -22,7 +22,6 @@
 
 package com.liferay.portlet.messageboards.service;
 
-import com.liferay.portal.kernel.bean.BeanLocatorUtil;
 
 /**
  * <a href="MBStatsUserLocalServiceFactory.java.html"><b><i>View Source</i></b></a>
@@ -58,7 +57,7 @@ public class MBStatsUserLocalServiceFactory {
 
 	public static MBStatsUserLocalService getImpl() {
 		if (_impl == null) {
-			_impl = (MBStatsUserLocalService)BeanLocatorUtil.locate(_IMPL);
+			_impl = (MBStatsUserLocalService)com.liferay.portal.kernel.bean.BeanLocatorUtil.locate(_IMPL);
 		}
 
 		return _impl;
@@ -66,7 +65,7 @@ public class MBStatsUserLocalServiceFactory {
 
 	public static MBStatsUserLocalService getTxImpl() {
 		if (_txImpl == null) {
-			_txImpl = (MBStatsUserLocalService)BeanLocatorUtil.locate(_TX_IMPL);
+			_txImpl = (MBStatsUserLocalService)com.liferay.portal.kernel.bean.BeanLocatorUtil.locate(_TX_IMPL);
 		}
 
 		return _txImpl;
@@ -78,7 +77,7 @@ public class MBStatsUserLocalServiceFactory {
 
 	private static MBStatsUserLocalServiceFactory _getFactory() {
 		if (_factory == null) {
-			_factory = (MBStatsUserLocalServiceFactory)BeanLocatorUtil.locate(_FACTORY);
+			_factory = (MBStatsUserLocalServiceFactory)com.liferay.portal.kernel.bean.BeanLocatorUtil.locate(_FACTORY);
 		}
 
 		return _factory;

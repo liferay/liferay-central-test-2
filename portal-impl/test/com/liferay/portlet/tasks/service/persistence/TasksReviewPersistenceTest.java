@@ -22,7 +22,6 @@
 
 package com.liferay.portlet.tasks.service.persistence;
 
-import com.liferay.portal.kernel.bean.BeanLocatorUtil;
 import com.liferay.portal.service.persistence.BasePersistenceTestCase;
 
 import com.liferay.portlet.tasks.NoSuchReviewException;
@@ -38,7 +37,7 @@ public class TasksReviewPersistenceTest extends BasePersistenceTestCase {
 	protected void setUp() throws Exception {
 		super.setUp();
 
-		_persistence = (TasksReviewPersistence)BeanLocatorUtil.locate(_TX_IMPL);
+		_persistence = (TasksReviewPersistence)com.liferay.portal.kernel.bean.BeanLocatorUtil.locate(_TX_IMPL);
 	}
 
 	public void testCreate() throws Exception {

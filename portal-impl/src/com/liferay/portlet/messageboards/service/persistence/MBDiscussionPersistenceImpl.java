@@ -23,31 +23,28 @@
 package com.liferay.portlet.messageboards.service.persistence;
 
 import com.liferay.portal.SystemException;
-import com.liferay.portal.kernel.dao.DynamicQuery;
-import com.liferay.portal.kernel.dao.DynamicQueryInitializer;
+import com.liferay.portal.kernel.dao.hibernate.Query;
+import com.liferay.portal.kernel.dao.hibernate.QueryPos;
+import com.liferay.portal.kernel.dao.hibernate.QueryUtil;
+import com.liferay.portal.kernel.dao.hibernate.Session;
+import com.liferay.portal.kernel.dao.search.DynamicQuery;
+import com.liferay.portal.kernel.dao.search.DynamicQueryInitializer;
+import com.liferay.portal.kernel.spring.hibernate.FinderCacheUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.ListUtil;
 import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.model.ModelListener;
-import com.liferay.portal.service.persistence.BasePersistence;
-import com.liferay.portal.spring.hibernate.FinderCache;
-import com.liferay.portal.util.PropsUtil;
+import com.liferay.portal.service.persistence.impl.BasePersistenceImpl;
 
 import com.liferay.portlet.messageboards.NoSuchDiscussionException;
 import com.liferay.portlet.messageboards.model.MBDiscussion;
 import com.liferay.portlet.messageboards.model.impl.MBDiscussionImpl;
 import com.liferay.portlet.messageboards.model.impl.MBDiscussionModelImpl;
 
-import com.liferay.util.dao.hibernate.QueryPos;
-import com.liferay.util.dao.hibernate.QueryUtil;
-
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-
-import org.hibernate.Query;
-import org.hibernate.Session;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -60,7 +57,7 @@ import java.util.List;
  * @author Brian Wing Shun Chan
  *
  */
-public class MBDiscussionPersistenceImpl extends BasePersistence
+public class MBDiscussionPersistenceImpl extends BasePersistenceImpl
 	implements MBDiscussionPersistence {
 	public MBDiscussion create(long discussionId) {
 		MBDiscussion mbDiscussion = new MBDiscussionImpl();
@@ -143,7 +140,7 @@ public class MBDiscussionPersistenceImpl extends BasePersistence
 		finally {
 			closeSession(session);
 
-			FinderCache.clearCache(MBDiscussion.class.getName());
+			FinderCacheUtil.clearCache(MBDiscussion.class.getName());
 		}
 	}
 
@@ -233,7 +230,7 @@ public class MBDiscussionPersistenceImpl extends BasePersistence
 		finally {
 			closeSession(session);
 
-			FinderCache.clearCache(MBDiscussion.class.getName());
+			FinderCacheUtil.clearCache(MBDiscussion.class.getName());
 		}
 	}
 
@@ -283,8 +280,8 @@ public class MBDiscussionPersistenceImpl extends BasePersistence
 		Object result = null;
 
 		if (finderClassNameCacheEnabled) {
-			result = FinderCache.getResult(finderClassName, finderMethodName,
-					finderParams, finderArgs, getSessionFactory());
+			result = FinderCacheUtil.getResult(finderClassName,
+					finderMethodName, finderParams, finderArgs, this);
 		}
 
 		if (result == null) {
@@ -310,7 +307,7 @@ public class MBDiscussionPersistenceImpl extends BasePersistence
 
 				List<MBDiscussion> list = q.list();
 
-				FinderCache.putResult(finderClassNameCacheEnabled,
+				FinderCacheUtil.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
 					finderArgs, list);
 
@@ -353,8 +350,8 @@ public class MBDiscussionPersistenceImpl extends BasePersistence
 		Object result = null;
 
 		if (finderClassNameCacheEnabled) {
-			result = FinderCache.getResult(finderClassName, finderMethodName,
-					finderParams, finderArgs, getSessionFactory());
+			result = FinderCacheUtil.getResult(finderClassName,
+					finderMethodName, finderParams, finderArgs, this);
 		}
 
 		if (result == null) {
@@ -386,7 +383,7 @@ public class MBDiscussionPersistenceImpl extends BasePersistence
 				List<MBDiscussion> list = (List<MBDiscussion>)QueryUtil.list(q,
 						getDialect(), start, end);
 
-				FinderCache.putResult(finderClassNameCacheEnabled,
+				FinderCacheUtil.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
 					finderArgs, list);
 
@@ -541,8 +538,8 @@ public class MBDiscussionPersistenceImpl extends BasePersistence
 		Object result = null;
 
 		if (finderClassNameCacheEnabled) {
-			result = FinderCache.getResult(finderClassName, finderMethodName,
-					finderParams, finderArgs, getSessionFactory());
+			result = FinderCacheUtil.getResult(finderClassName,
+					finderMethodName, finderParams, finderArgs, this);
 		}
 
 		if (result == null) {
@@ -574,7 +571,7 @@ public class MBDiscussionPersistenceImpl extends BasePersistence
 
 				List<MBDiscussion> list = q.list();
 
-				FinderCache.putResult(finderClassNameCacheEnabled,
+				FinderCacheUtil.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
 					finderArgs, list);
 
@@ -670,8 +667,8 @@ public class MBDiscussionPersistenceImpl extends BasePersistence
 		Object result = null;
 
 		if (finderClassNameCacheEnabled) {
-			result = FinderCache.getResult(finderClassName, finderMethodName,
-					finderParams, finderArgs, getSessionFactory());
+			result = FinderCacheUtil.getResult(finderClassName,
+					finderMethodName, finderParams, finderArgs, this);
 		}
 
 		if (result == null) {
@@ -699,7 +696,7 @@ public class MBDiscussionPersistenceImpl extends BasePersistence
 					Collections.sort(list);
 				}
 
-				FinderCache.putResult(finderClassNameCacheEnabled,
+				FinderCacheUtil.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
 					finderArgs, list);
 
@@ -746,8 +743,8 @@ public class MBDiscussionPersistenceImpl extends BasePersistence
 		Object result = null;
 
 		if (finderClassNameCacheEnabled) {
-			result = FinderCache.getResult(finderClassName, finderMethodName,
-					finderParams, finderArgs, getSessionFactory());
+			result = FinderCacheUtil.getResult(finderClassName,
+					finderMethodName, finderParams, finderArgs, this);
 		}
 
 		if (result == null) {
@@ -784,7 +781,7 @@ public class MBDiscussionPersistenceImpl extends BasePersistence
 					count = new Long(0);
 				}
 
-				FinderCache.putResult(finderClassNameCacheEnabled,
+				FinderCacheUtil.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
 					finderArgs, count);
 
@@ -817,8 +814,8 @@ public class MBDiscussionPersistenceImpl extends BasePersistence
 		Object result = null;
 
 		if (finderClassNameCacheEnabled) {
-			result = FinderCache.getResult(finderClassName, finderMethodName,
-					finderParams, finderArgs, getSessionFactory());
+			result = FinderCacheUtil.getResult(finderClassName,
+					finderMethodName, finderParams, finderArgs, this);
 		}
 
 		if (result == null) {
@@ -861,7 +858,7 @@ public class MBDiscussionPersistenceImpl extends BasePersistence
 					count = new Long(0);
 				}
 
-				FinderCache.putResult(finderClassNameCacheEnabled,
+				FinderCacheUtil.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
 					finderArgs, count);
 
@@ -889,8 +886,8 @@ public class MBDiscussionPersistenceImpl extends BasePersistence
 		Object result = null;
 
 		if (finderClassNameCacheEnabled) {
-			result = FinderCache.getResult(finderClassName, finderMethodName,
-					finderParams, finderArgs, getSessionFactory());
+			result = FinderCacheUtil.getResult(finderClassName,
+					finderMethodName, finderParams, finderArgs, this);
 		}
 
 		if (result == null) {
@@ -914,7 +911,7 @@ public class MBDiscussionPersistenceImpl extends BasePersistence
 					count = new Long(0);
 				}
 
-				FinderCache.putResult(finderClassNameCacheEnabled,
+				FinderCacheUtil.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
 					finderArgs, count);
 
@@ -950,7 +947,7 @@ public class MBDiscussionPersistenceImpl extends BasePersistence
 
 	protected void init() {
 		String[] listenerClassNames = StringUtil.split(GetterUtil.getString(
-					PropsUtil.get(
+					com.liferay.portal.util.PropsUtil.get(
 						"value.object.listener.com.liferay.portlet.messageboards.model.MBDiscussion")));
 
 		if (listenerClassNames.length > 0) {

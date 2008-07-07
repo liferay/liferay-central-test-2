@@ -24,8 +24,15 @@ package com.liferay.portal.service.persistence;
 
 import com.liferay.portal.NoSuchRoleException;
 import com.liferay.portal.SystemException;
-import com.liferay.portal.kernel.dao.DynamicQuery;
-import com.liferay.portal.kernel.dao.DynamicQueryInitializer;
+import com.liferay.portal.kernel.dao.hibernate.Query;
+import com.liferay.portal.kernel.dao.hibernate.QueryPos;
+import com.liferay.portal.kernel.dao.hibernate.QueryUtil;
+import com.liferay.portal.kernel.dao.hibernate.SQLQuery;
+import com.liferay.portal.kernel.dao.hibernate.Session;
+import com.liferay.portal.kernel.dao.hibernate.Type;
+import com.liferay.portal.kernel.dao.search.DynamicQuery;
+import com.liferay.portal.kernel.dao.search.DynamicQueryInitializer;
+import com.liferay.portal.kernel.spring.hibernate.FinderCacheUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.ListUtil;
 import com.liferay.portal.kernel.util.OrderByComparator;
@@ -35,19 +42,10 @@ import com.liferay.portal.model.ModelListener;
 import com.liferay.portal.model.Role;
 import com.liferay.portal.model.impl.RoleImpl;
 import com.liferay.portal.model.impl.RoleModelImpl;
-import com.liferay.portal.spring.hibernate.FinderCache;
-import com.liferay.portal.util.PropsUtil;
-
-import com.liferay.util.dao.hibernate.QueryPos;
-import com.liferay.util.dao.hibernate.QueryUtil;
+import com.liferay.portal.service.persistence.impl.BasePersistenceImpl;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-
-import org.hibernate.Hibernate;
-import org.hibernate.Query;
-import org.hibernate.SQLQuery;
-import org.hibernate.Session;
 
 import org.springframework.dao.DataAccessException;
 
@@ -70,7 +68,7 @@ import java.util.List;
  * @author Brian Wing Shun Chan
  *
  */
-public class RolePersistenceImpl extends BasePersistence
+public class RolePersistenceImpl extends BasePersistenceImpl
 	implements RolePersistence {
 	public Role create(long roleId) {
 		Role role = new RoleImpl();
@@ -137,7 +135,7 @@ public class RolePersistenceImpl extends BasePersistence
 			throw processException(e);
 		}
 		finally {
-			FinderCache.clearCache("Groups_Roles");
+			FinderCacheUtil.clearCache("Groups_Roles");
 		}
 
 		try {
@@ -147,7 +145,7 @@ public class RolePersistenceImpl extends BasePersistence
 			throw processException(e);
 		}
 		finally {
-			FinderCache.clearCache("Roles_Permissions");
+			FinderCacheUtil.clearCache("Roles_Permissions");
 		}
 
 		try {
@@ -157,7 +155,7 @@ public class RolePersistenceImpl extends BasePersistence
 			throw processException(e);
 		}
 		finally {
-			FinderCache.clearCache("Users_Roles");
+			FinderCacheUtil.clearCache("Users_Roles");
 		}
 
 		Session session = null;
@@ -177,7 +175,7 @@ public class RolePersistenceImpl extends BasePersistence
 		finally {
 			closeSession(session);
 
-			FinderCache.clearCache(Role.class.getName());
+			FinderCacheUtil.clearCache(Role.class.getName());
 		}
 	}
 
@@ -238,9 +236,9 @@ public class RolePersistenceImpl extends BasePersistence
 
 	public Role updateImpl(com.liferay.portal.model.Role role, boolean merge)
 		throws SystemException {
-		FinderCache.clearCache("Groups_Roles");
-		FinderCache.clearCache("Roles_Permissions");
-		FinderCache.clearCache("Users_Roles");
+		FinderCacheUtil.clearCache("Groups_Roles");
+		FinderCacheUtil.clearCache("Roles_Permissions");
+		FinderCacheUtil.clearCache("Users_Roles");
 
 		Session session = null;
 
@@ -268,7 +266,7 @@ public class RolePersistenceImpl extends BasePersistence
 		finally {
 			closeSession(session);
 
-			FinderCache.clearCache(Role.class.getName());
+			FinderCacheUtil.clearCache(Role.class.getName());
 		}
 	}
 
@@ -314,8 +312,8 @@ public class RolePersistenceImpl extends BasePersistence
 		Object result = null;
 
 		if (finderClassNameCacheEnabled) {
-			result = FinderCache.getResult(finderClassName, finderMethodName,
-					finderParams, finderArgs, getSessionFactory());
+			result = FinderCacheUtil.getResult(finderClassName,
+					finderMethodName, finderParams, finderArgs, this);
 		}
 
 		if (result == null) {
@@ -344,7 +342,7 @@ public class RolePersistenceImpl extends BasePersistence
 
 				List<Role> list = q.list();
 
-				FinderCache.putResult(finderClassNameCacheEnabled,
+				FinderCacheUtil.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
 					finderArgs, list);
 
@@ -387,8 +385,8 @@ public class RolePersistenceImpl extends BasePersistence
 		Object result = null;
 
 		if (finderClassNameCacheEnabled) {
-			result = FinderCache.getResult(finderClassName, finderMethodName,
-					finderParams, finderArgs, getSessionFactory());
+			result = FinderCacheUtil.getResult(finderClassName,
+					finderMethodName, finderParams, finderArgs, this);
 		}
 
 		if (result == null) {
@@ -425,7 +423,7 @@ public class RolePersistenceImpl extends BasePersistence
 				List<Role> list = (List<Role>)QueryUtil.list(q, getDialect(),
 						start, end);
 
-				FinderCache.putResult(finderClassNameCacheEnabled,
+				FinderCacheUtil.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
 					finderArgs, list);
 
@@ -578,8 +576,8 @@ public class RolePersistenceImpl extends BasePersistence
 		Object result = null;
 
 		if (finderClassNameCacheEnabled) {
-			result = FinderCache.getResult(finderClassName, finderMethodName,
-					finderParams, finderArgs, getSessionFactory());
+			result = FinderCacheUtil.getResult(finderClassName,
+					finderMethodName, finderParams, finderArgs, this);
 		}
 
 		if (result == null) {
@@ -621,7 +619,7 @@ public class RolePersistenceImpl extends BasePersistence
 
 				List<Role> list = q.list();
 
-				FinderCache.putResult(finderClassNameCacheEnabled,
+				FinderCacheUtil.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
 					finderArgs, list);
 
@@ -695,8 +693,8 @@ public class RolePersistenceImpl extends BasePersistence
 		Object result = null;
 
 		if (finderClassNameCacheEnabled) {
-			result = FinderCache.getResult(finderClassName, finderMethodName,
-					finderParams, finderArgs, getSessionFactory());
+			result = FinderCacheUtil.getResult(finderClassName,
+					finderMethodName, finderParams, finderArgs, this);
 		}
 
 		if (result == null) {
@@ -737,7 +735,7 @@ public class RolePersistenceImpl extends BasePersistence
 
 				List<Role> list = q.list();
 
-				FinderCache.putResult(finderClassNameCacheEnabled,
+				FinderCacheUtil.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
 					finderArgs, list);
 
@@ -832,8 +830,8 @@ public class RolePersistenceImpl extends BasePersistence
 		Object result = null;
 
 		if (finderClassNameCacheEnabled) {
-			result = FinderCache.getResult(finderClassName, finderMethodName,
-					finderParams, finderArgs, getSessionFactory());
+			result = FinderCacheUtil.getResult(finderClassName,
+					finderMethodName, finderParams, finderArgs, this);
 		}
 
 		if (result == null) {
@@ -866,7 +864,7 @@ public class RolePersistenceImpl extends BasePersistence
 					Collections.sort(list);
 				}
 
-				FinderCache.putResult(finderClassNameCacheEnabled,
+				FinderCacheUtil.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
 					finderArgs, list);
 
@@ -920,8 +918,8 @@ public class RolePersistenceImpl extends BasePersistence
 		Object result = null;
 
 		if (finderClassNameCacheEnabled) {
-			result = FinderCache.getResult(finderClassName, finderMethodName,
-					finderParams, finderArgs, getSessionFactory());
+			result = FinderCacheUtil.getResult(finderClassName,
+					finderMethodName, finderParams, finderArgs, this);
 		}
 
 		if (result == null) {
@@ -957,7 +955,7 @@ public class RolePersistenceImpl extends BasePersistence
 					count = new Long(0);
 				}
 
-				FinderCache.putResult(finderClassNameCacheEnabled,
+				FinderCacheUtil.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
 					finderArgs, count);
 
@@ -988,8 +986,8 @@ public class RolePersistenceImpl extends BasePersistence
 		Object result = null;
 
 		if (finderClassNameCacheEnabled) {
-			result = FinderCache.getResult(finderClassName, finderMethodName,
-					finderParams, finderArgs, getSessionFactory());
+			result = FinderCacheUtil.getResult(finderClassName,
+					finderMethodName, finderParams, finderArgs, this);
 		}
 
 		if (result == null) {
@@ -1038,7 +1036,7 @@ public class RolePersistenceImpl extends BasePersistence
 					count = new Long(0);
 				}
 
-				FinderCache.putResult(finderClassNameCacheEnabled,
+				FinderCacheUtil.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
 					finderArgs, count);
 
@@ -1071,8 +1069,8 @@ public class RolePersistenceImpl extends BasePersistence
 		Object result = null;
 
 		if (finderClassNameCacheEnabled) {
-			result = FinderCache.getResult(finderClassName, finderMethodName,
-					finderParams, finderArgs, getSessionFactory());
+			result = FinderCacheUtil.getResult(finderClassName,
+					finderMethodName, finderParams, finderArgs, this);
 		}
 
 		if (result == null) {
@@ -1120,7 +1118,7 @@ public class RolePersistenceImpl extends BasePersistence
 					count = new Long(0);
 				}
 
-				FinderCache.putResult(finderClassNameCacheEnabled,
+				FinderCacheUtil.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
 					finderArgs, count);
 
@@ -1148,8 +1146,8 @@ public class RolePersistenceImpl extends BasePersistence
 		Object result = null;
 
 		if (finderClassNameCacheEnabled) {
-			result = FinderCache.getResult(finderClassName, finderMethodName,
-					finderParams, finderArgs, getSessionFactory());
+			result = FinderCacheUtil.getResult(finderClassName,
+					finderMethodName, finderParams, finderArgs, this);
 		}
 
 		if (result == null) {
@@ -1173,7 +1171,7 @@ public class RolePersistenceImpl extends BasePersistence
 					count = new Long(0);
 				}
 
-				FinderCache.putResult(finderClassNameCacheEnabled,
+				FinderCacheUtil.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
 					finderArgs, count);
 
@@ -1220,8 +1218,8 @@ public class RolePersistenceImpl extends BasePersistence
 		Object result = null;
 
 		if (finderClassNameCacheEnabled) {
-			result = FinderCache.getResult(finderClassName, finderMethodName,
-					finderParams, finderArgs, getSessionFactory());
+			result = FinderCacheUtil.getResult(finderClassName,
+					finderMethodName, finderParams, finderArgs, this);
 		}
 
 		if (result == null) {
@@ -1259,7 +1257,7 @@ public class RolePersistenceImpl extends BasePersistence
 				List<com.liferay.portal.model.Group> list = (List<com.liferay.portal.model.Group>)QueryUtil.list(q,
 						getDialect(), start, end);
 
-				FinderCache.putResult(finderClassNameCacheEnabled,
+				FinderCacheUtil.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
 					finderArgs, list);
 
@@ -1289,8 +1287,8 @@ public class RolePersistenceImpl extends BasePersistence
 		Object result = null;
 
 		if (finderClassNameCacheEnabled) {
-			result = FinderCache.getResult(finderClassName, finderMethodName,
-					finderParams, finderArgs, getSessionFactory());
+			result = FinderCacheUtil.getResult(finderClassName,
+					finderMethodName, finderParams, finderArgs, this);
 		}
 
 		if (result == null) {
@@ -1301,7 +1299,7 @@ public class RolePersistenceImpl extends BasePersistence
 
 				SQLQuery q = session.createSQLQuery(_SQL_GETGROUPSSIZE);
 
-				q.addScalar(COUNT_COLUMN_NAME, Hibernate.LONG);
+				q.addScalar(COUNT_COLUMN_NAME, Type.LONG);
 
 				QueryPos qPos = QueryPos.getInstance(q);
 
@@ -1319,7 +1317,7 @@ public class RolePersistenceImpl extends BasePersistence
 					count = new Long(0);
 				}
 
-				FinderCache.putResult(finderClassNameCacheEnabled,
+				FinderCacheUtil.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
 					finderArgs, count);
 
@@ -1354,8 +1352,8 @@ public class RolePersistenceImpl extends BasePersistence
 		Object result = null;
 
 		if (finderClassNameCacheEnabled) {
-			result = FinderCache.getResult(finderClassName, finderMethodName,
-					finderParams, finderArgs, getSessionFactory());
+			result = FinderCacheUtil.getResult(finderClassName,
+					finderMethodName, finderParams, finderArgs, this);
 		}
 
 		if (result == null) {
@@ -1363,7 +1361,7 @@ public class RolePersistenceImpl extends BasePersistence
 				Boolean value = Boolean.valueOf(containsGroup.contains(pk,
 							groupPK));
 
-				FinderCache.putResult(finderClassNameCacheEnabled,
+				FinderCacheUtil.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
 					finderArgs, value);
 
@@ -1395,7 +1393,7 @@ public class RolePersistenceImpl extends BasePersistence
 			throw new SystemException(dae);
 		}
 		finally {
-			FinderCache.clearCache("Groups_Roles");
+			FinderCacheUtil.clearCache("Groups_Roles");
 		}
 	}
 
@@ -1408,7 +1406,7 @@ public class RolePersistenceImpl extends BasePersistence
 			throw new SystemException(dae);
 		}
 		finally {
-			FinderCache.clearCache("Groups_Roles");
+			FinderCacheUtil.clearCache("Groups_Roles");
 		}
 	}
 
@@ -1422,7 +1420,7 @@ public class RolePersistenceImpl extends BasePersistence
 			throw new SystemException(dae);
 		}
 		finally {
-			FinderCache.clearCache("Groups_Roles");
+			FinderCacheUtil.clearCache("Groups_Roles");
 		}
 	}
 
@@ -1437,7 +1435,7 @@ public class RolePersistenceImpl extends BasePersistence
 			throw new SystemException(dae);
 		}
 		finally {
-			FinderCache.clearCache("Groups_Roles");
+			FinderCacheUtil.clearCache("Groups_Roles");
 		}
 	}
 
@@ -1449,7 +1447,7 @@ public class RolePersistenceImpl extends BasePersistence
 			throw new SystemException(dae);
 		}
 		finally {
-			FinderCache.clearCache("Groups_Roles");
+			FinderCacheUtil.clearCache("Groups_Roles");
 		}
 	}
 
@@ -1461,7 +1459,7 @@ public class RolePersistenceImpl extends BasePersistence
 			throw new SystemException(dae);
 		}
 		finally {
-			FinderCache.clearCache("Groups_Roles");
+			FinderCacheUtil.clearCache("Groups_Roles");
 		}
 	}
 
@@ -1474,7 +1472,7 @@ public class RolePersistenceImpl extends BasePersistence
 			throw new SystemException(dae);
 		}
 		finally {
-			FinderCache.clearCache("Groups_Roles");
+			FinderCacheUtil.clearCache("Groups_Roles");
 		}
 	}
 
@@ -1489,7 +1487,7 @@ public class RolePersistenceImpl extends BasePersistence
 			throw new SystemException(dae);
 		}
 		finally {
-			FinderCache.clearCache("Groups_Roles");
+			FinderCacheUtil.clearCache("Groups_Roles");
 		}
 	}
 
@@ -1504,7 +1502,7 @@ public class RolePersistenceImpl extends BasePersistence
 			throw new SystemException(dae);
 		}
 		finally {
-			FinderCache.clearCache("Groups_Roles");
+			FinderCacheUtil.clearCache("Groups_Roles");
 		}
 	}
 
@@ -1520,7 +1518,7 @@ public class RolePersistenceImpl extends BasePersistence
 			throw new SystemException(dae);
 		}
 		finally {
-			FinderCache.clearCache("Groups_Roles");
+			FinderCacheUtil.clearCache("Groups_Roles");
 		}
 	}
 
@@ -1537,7 +1535,7 @@ public class RolePersistenceImpl extends BasePersistence
 			throw new SystemException(dae);
 		}
 		finally {
-			FinderCache.clearCache("Groups_Roles");
+			FinderCacheUtil.clearCache("Groups_Roles");
 		}
 	}
 
@@ -1570,8 +1568,8 @@ public class RolePersistenceImpl extends BasePersistence
 		Object result = null;
 
 		if (finderClassNameCacheEnabled) {
-			result = FinderCache.getResult(finderClassName, finderMethodName,
-					finderParams, finderArgs, getSessionFactory());
+			result = FinderCacheUtil.getResult(finderClassName,
+					finderMethodName, finderParams, finderArgs, this);
 		}
 
 		if (result == null) {
@@ -1603,7 +1601,7 @@ public class RolePersistenceImpl extends BasePersistence
 				List<com.liferay.portal.model.Permission> list = (List<com.liferay.portal.model.Permission>)QueryUtil.list(q,
 						getDialect(), start, end);
 
-				FinderCache.putResult(finderClassNameCacheEnabled,
+				FinderCacheUtil.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
 					finderArgs, list);
 
@@ -1633,8 +1631,8 @@ public class RolePersistenceImpl extends BasePersistence
 		Object result = null;
 
 		if (finderClassNameCacheEnabled) {
-			result = FinderCache.getResult(finderClassName, finderMethodName,
-					finderParams, finderArgs, getSessionFactory());
+			result = FinderCacheUtil.getResult(finderClassName,
+					finderMethodName, finderParams, finderArgs, this);
 		}
 
 		if (result == null) {
@@ -1645,7 +1643,7 @@ public class RolePersistenceImpl extends BasePersistence
 
 				SQLQuery q = session.createSQLQuery(_SQL_GETPERMISSIONSSIZE);
 
-				q.addScalar(COUNT_COLUMN_NAME, Hibernate.LONG);
+				q.addScalar(COUNT_COLUMN_NAME, Type.LONG);
 
 				QueryPos qPos = QueryPos.getInstance(q);
 
@@ -1663,7 +1661,7 @@ public class RolePersistenceImpl extends BasePersistence
 					count = new Long(0);
 				}
 
-				FinderCache.putResult(finderClassNameCacheEnabled,
+				FinderCacheUtil.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
 					finderArgs, count);
 
@@ -1698,8 +1696,8 @@ public class RolePersistenceImpl extends BasePersistence
 		Object result = null;
 
 		if (finderClassNameCacheEnabled) {
-			result = FinderCache.getResult(finderClassName, finderMethodName,
-					finderParams, finderArgs, getSessionFactory());
+			result = FinderCacheUtil.getResult(finderClassName,
+					finderMethodName, finderParams, finderArgs, this);
 		}
 
 		if (result == null) {
@@ -1707,7 +1705,7 @@ public class RolePersistenceImpl extends BasePersistence
 				Boolean value = Boolean.valueOf(containsPermission.contains(
 							pk, permissionPK));
 
-				FinderCache.putResult(finderClassNameCacheEnabled,
+				FinderCacheUtil.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
 					finderArgs, value);
 
@@ -1740,7 +1738,7 @@ public class RolePersistenceImpl extends BasePersistence
 			throw new SystemException(dae);
 		}
 		finally {
-			FinderCache.clearCache("Roles_Permissions");
+			FinderCacheUtil.clearCache("Roles_Permissions");
 		}
 	}
 
@@ -1754,7 +1752,7 @@ public class RolePersistenceImpl extends BasePersistence
 			throw new SystemException(dae);
 		}
 		finally {
-			FinderCache.clearCache("Roles_Permissions");
+			FinderCacheUtil.clearCache("Roles_Permissions");
 		}
 	}
 
@@ -1769,7 +1767,7 @@ public class RolePersistenceImpl extends BasePersistence
 			throw new SystemException(dae);
 		}
 		finally {
-			FinderCache.clearCache("Roles_Permissions");
+			FinderCacheUtil.clearCache("Roles_Permissions");
 		}
 	}
 
@@ -1785,7 +1783,7 @@ public class RolePersistenceImpl extends BasePersistence
 			throw new SystemException(dae);
 		}
 		finally {
-			FinderCache.clearCache("Roles_Permissions");
+			FinderCacheUtil.clearCache("Roles_Permissions");
 		}
 	}
 
@@ -1797,7 +1795,7 @@ public class RolePersistenceImpl extends BasePersistence
 			throw new SystemException(dae);
 		}
 		finally {
-			FinderCache.clearCache("Roles_Permissions");
+			FinderCacheUtil.clearCache("Roles_Permissions");
 		}
 	}
 
@@ -1810,7 +1808,7 @@ public class RolePersistenceImpl extends BasePersistence
 			throw new SystemException(dae);
 		}
 		finally {
-			FinderCache.clearCache("Roles_Permissions");
+			FinderCacheUtil.clearCache("Roles_Permissions");
 		}
 	}
 
@@ -1824,7 +1822,7 @@ public class RolePersistenceImpl extends BasePersistence
 			throw new SystemException(dae);
 		}
 		finally {
-			FinderCache.clearCache("Roles_Permissions");
+			FinderCacheUtil.clearCache("Roles_Permissions");
 		}
 	}
 
@@ -1839,7 +1837,7 @@ public class RolePersistenceImpl extends BasePersistence
 			throw new SystemException(dae);
 		}
 		finally {
-			FinderCache.clearCache("Roles_Permissions");
+			FinderCacheUtil.clearCache("Roles_Permissions");
 		}
 	}
 
@@ -1855,7 +1853,7 @@ public class RolePersistenceImpl extends BasePersistence
 			throw new SystemException(dae);
 		}
 		finally {
-			FinderCache.clearCache("Roles_Permissions");
+			FinderCacheUtil.clearCache("Roles_Permissions");
 		}
 	}
 
@@ -1872,7 +1870,7 @@ public class RolePersistenceImpl extends BasePersistence
 			throw new SystemException(dae);
 		}
 		finally {
-			FinderCache.clearCache("Roles_Permissions");
+			FinderCacheUtil.clearCache("Roles_Permissions");
 		}
 	}
 
@@ -1890,7 +1888,7 @@ public class RolePersistenceImpl extends BasePersistence
 			throw new SystemException(dae);
 		}
 		finally {
-			FinderCache.clearCache("Roles_Permissions");
+			FinderCacheUtil.clearCache("Roles_Permissions");
 		}
 	}
 
@@ -1923,8 +1921,8 @@ public class RolePersistenceImpl extends BasePersistence
 		Object result = null;
 
 		if (finderClassNameCacheEnabled) {
-			result = FinderCache.getResult(finderClassName, finderMethodName,
-					finderParams, finderArgs, getSessionFactory());
+			result = FinderCacheUtil.getResult(finderClassName,
+					finderMethodName, finderParams, finderArgs, this);
 		}
 
 		if (result == null) {
@@ -1956,7 +1954,7 @@ public class RolePersistenceImpl extends BasePersistence
 				List<com.liferay.portal.model.User> list = (List<com.liferay.portal.model.User>)QueryUtil.list(q,
 						getDialect(), start, end);
 
-				FinderCache.putResult(finderClassNameCacheEnabled,
+				FinderCacheUtil.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
 					finderArgs, list);
 
@@ -1986,8 +1984,8 @@ public class RolePersistenceImpl extends BasePersistence
 		Object result = null;
 
 		if (finderClassNameCacheEnabled) {
-			result = FinderCache.getResult(finderClassName, finderMethodName,
-					finderParams, finderArgs, getSessionFactory());
+			result = FinderCacheUtil.getResult(finderClassName,
+					finderMethodName, finderParams, finderArgs, this);
 		}
 
 		if (result == null) {
@@ -1998,7 +1996,7 @@ public class RolePersistenceImpl extends BasePersistence
 
 				SQLQuery q = session.createSQLQuery(_SQL_GETUSERSSIZE);
 
-				q.addScalar(COUNT_COLUMN_NAME, Hibernate.LONG);
+				q.addScalar(COUNT_COLUMN_NAME, Type.LONG);
 
 				QueryPos qPos = QueryPos.getInstance(q);
 
@@ -2016,7 +2014,7 @@ public class RolePersistenceImpl extends BasePersistence
 					count = new Long(0);
 				}
 
-				FinderCache.putResult(finderClassNameCacheEnabled,
+				FinderCacheUtil.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
 					finderArgs, count);
 
@@ -2050,15 +2048,15 @@ public class RolePersistenceImpl extends BasePersistence
 		Object result = null;
 
 		if (finderClassNameCacheEnabled) {
-			result = FinderCache.getResult(finderClassName, finderMethodName,
-					finderParams, finderArgs, getSessionFactory());
+			result = FinderCacheUtil.getResult(finderClassName,
+					finderMethodName, finderParams, finderArgs, this);
 		}
 
 		if (result == null) {
 			try {
 				Boolean value = Boolean.valueOf(containsUser.contains(pk, userPK));
 
-				FinderCache.putResult(finderClassNameCacheEnabled,
+				FinderCacheUtil.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
 					finderArgs, value);
 
@@ -2090,7 +2088,7 @@ public class RolePersistenceImpl extends BasePersistence
 			throw new SystemException(dae);
 		}
 		finally {
-			FinderCache.clearCache("Users_Roles");
+			FinderCacheUtil.clearCache("Users_Roles");
 		}
 	}
 
@@ -2103,7 +2101,7 @@ public class RolePersistenceImpl extends BasePersistence
 			throw new SystemException(dae);
 		}
 		finally {
-			FinderCache.clearCache("Users_Roles");
+			FinderCacheUtil.clearCache("Users_Roles");
 		}
 	}
 
@@ -2117,7 +2115,7 @@ public class RolePersistenceImpl extends BasePersistence
 			throw new SystemException(dae);
 		}
 		finally {
-			FinderCache.clearCache("Users_Roles");
+			FinderCacheUtil.clearCache("Users_Roles");
 		}
 	}
 
@@ -2132,7 +2130,7 @@ public class RolePersistenceImpl extends BasePersistence
 			throw new SystemException(dae);
 		}
 		finally {
-			FinderCache.clearCache("Users_Roles");
+			FinderCacheUtil.clearCache("Users_Roles");
 		}
 	}
 
@@ -2144,7 +2142,7 @@ public class RolePersistenceImpl extends BasePersistence
 			throw new SystemException(dae);
 		}
 		finally {
-			FinderCache.clearCache("Users_Roles");
+			FinderCacheUtil.clearCache("Users_Roles");
 		}
 	}
 
@@ -2156,7 +2154,7 @@ public class RolePersistenceImpl extends BasePersistence
 			throw new SystemException(dae);
 		}
 		finally {
-			FinderCache.clearCache("Users_Roles");
+			FinderCacheUtil.clearCache("Users_Roles");
 		}
 	}
 
@@ -2169,7 +2167,7 @@ public class RolePersistenceImpl extends BasePersistence
 			throw new SystemException(dae);
 		}
 		finally {
-			FinderCache.clearCache("Users_Roles");
+			FinderCacheUtil.clearCache("Users_Roles");
 		}
 	}
 
@@ -2183,7 +2181,7 @@ public class RolePersistenceImpl extends BasePersistence
 			throw new SystemException(dae);
 		}
 		finally {
-			FinderCache.clearCache("Users_Roles");
+			FinderCacheUtil.clearCache("Users_Roles");
 		}
 	}
 
@@ -2198,7 +2196,7 @@ public class RolePersistenceImpl extends BasePersistence
 			throw new SystemException(dae);
 		}
 		finally {
-			FinderCache.clearCache("Users_Roles");
+			FinderCacheUtil.clearCache("Users_Roles");
 		}
 	}
 
@@ -2214,7 +2212,7 @@ public class RolePersistenceImpl extends BasePersistence
 			throw new SystemException(dae);
 		}
 		finally {
-			FinderCache.clearCache("Users_Roles");
+			FinderCacheUtil.clearCache("Users_Roles");
 		}
 	}
 
@@ -2231,7 +2229,7 @@ public class RolePersistenceImpl extends BasePersistence
 			throw new SystemException(dae);
 		}
 		finally {
-			FinderCache.clearCache("Users_Roles");
+			FinderCacheUtil.clearCache("Users_Roles");
 		}
 	}
 
@@ -2253,7 +2251,7 @@ public class RolePersistenceImpl extends BasePersistence
 
 	protected void init() {
 		String[] listenerClassNames = StringUtil.split(GetterUtil.getString(
-					PropsUtil.get(
+					com.liferay.portal.util.PropsUtil.get(
 						"value.object.listener.com.liferay.portal.model.Role")));
 
 		if (listenerClassNames.length > 0) {

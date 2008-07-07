@@ -27,7 +27,6 @@ import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.model.PasswordPolicyRel;
 import com.liferay.portal.model.PasswordPolicyRelSoap;
 import com.liferay.portal.util.PortalUtil;
-import com.liferay.portal.util.PropsUtil;
 
 import java.io.Serializable;
 
@@ -77,7 +76,7 @@ public class PasswordPolicyRelModelImpl extends BaseModelImpl {
 	public static final String DATA_SOURCE = "liferayDataSource";
 	public static final String SESSION_FACTORY = "liferaySessionFactory";
 	public static final String TX_MANAGER = "liferayTransactionManager";
-	public static final boolean CACHE_ENABLED = GetterUtil.getBoolean(PropsUtil.get(
+	public static final boolean CACHE_ENABLED = GetterUtil.getBoolean(com.liferay.portal.util.PropsUtil.get(
 				"value.object.finder.cache.enabled.com.liferay.portal.model.PasswordPolicyRel"),
 			true);
 
@@ -103,7 +102,7 @@ public class PasswordPolicyRelModelImpl extends BaseModelImpl {
 		return models;
 	}
 
-	public static final long LOCK_EXPIRATION_TIME = GetterUtil.getLong(PropsUtil.get(
+	public static final long LOCK_EXPIRATION_TIME = GetterUtil.getLong(com.liferay.portal.util.PropsUtil.get(
 				"lock.expiration.time.com.liferay.portal.model.PasswordPolicyRel"));
 
 	public PasswordPolicyRelModelImpl() {

@@ -22,7 +22,6 @@
 
 package com.liferay.portlet.polls.service;
 
-import com.liferay.portal.kernel.bean.BeanLocatorUtil;
 
 /**
  * <a href="PollsVoteServiceFactory.java.html"><b><i>View Source</i></b></a>
@@ -58,7 +57,7 @@ public class PollsVoteServiceFactory {
 
 	public static PollsVoteService getImpl() {
 		if (_impl == null) {
-			_impl = (PollsVoteService)BeanLocatorUtil.locate(_IMPL);
+			_impl = (PollsVoteService)com.liferay.portal.kernel.bean.BeanLocatorUtil.locate(_IMPL);
 		}
 
 		return _impl;
@@ -66,7 +65,7 @@ public class PollsVoteServiceFactory {
 
 	public static PollsVoteService getTxImpl() {
 		if (_txImpl == null) {
-			_txImpl = (PollsVoteService)BeanLocatorUtil.locate(_TX_IMPL);
+			_txImpl = (PollsVoteService)com.liferay.portal.kernel.bean.BeanLocatorUtil.locate(_TX_IMPL);
 		}
 
 		return _txImpl;
@@ -78,7 +77,7 @@ public class PollsVoteServiceFactory {
 
 	private static PollsVoteServiceFactory _getFactory() {
 		if (_factory == null) {
-			_factory = (PollsVoteServiceFactory)BeanLocatorUtil.locate(_FACTORY);
+			_factory = (PollsVoteServiceFactory)com.liferay.portal.kernel.bean.BeanLocatorUtil.locate(_FACTORY);
 		}
 
 		return _factory;

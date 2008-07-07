@@ -22,7 +22,6 @@
 
 package com.liferay.portal.service;
 
-import com.liferay.portal.kernel.bean.BeanLocatorUtil;
 
 /**
  * <a href="ServiceComponentLocalServiceFactory.java.html"><b><i>View Source</i></b></a>
@@ -58,7 +57,7 @@ public class ServiceComponentLocalServiceFactory {
 
 	public static ServiceComponentLocalService getImpl() {
 		if (_impl == null) {
-			_impl = (ServiceComponentLocalService)BeanLocatorUtil.locate(_IMPL);
+			_impl = (ServiceComponentLocalService)com.liferay.portal.kernel.bean.BeanLocatorUtil.locate(_IMPL);
 		}
 
 		return _impl;
@@ -66,7 +65,7 @@ public class ServiceComponentLocalServiceFactory {
 
 	public static ServiceComponentLocalService getTxImpl() {
 		if (_txImpl == null) {
-			_txImpl = (ServiceComponentLocalService)BeanLocatorUtil.locate(_TX_IMPL);
+			_txImpl = (ServiceComponentLocalService)com.liferay.portal.kernel.bean.BeanLocatorUtil.locate(_TX_IMPL);
 		}
 
 		return _txImpl;
@@ -78,7 +77,7 @@ public class ServiceComponentLocalServiceFactory {
 
 	private static ServiceComponentLocalServiceFactory _getFactory() {
 		if (_factory == null) {
-			_factory = (ServiceComponentLocalServiceFactory)BeanLocatorUtil.locate(_FACTORY);
+			_factory = (ServiceComponentLocalServiceFactory)com.liferay.portal.kernel.bean.BeanLocatorUtil.locate(_FACTORY);
 		}
 
 		return _factory;

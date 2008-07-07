@@ -28,7 +28,6 @@ import com.liferay.portal.kernel.util.HtmlUtil;
 import com.liferay.portal.model.Group;
 import com.liferay.portal.model.GroupSoap;
 import com.liferay.portal.util.PortalUtil;
-import com.liferay.portal.util.PropsUtil;
 
 import java.io.Serializable;
 
@@ -105,7 +104,7 @@ public class GroupModelImpl extends BaseModelImpl {
 	public static final String DATA_SOURCE = "liferayDataSource";
 	public static final String SESSION_FACTORY = "liferaySessionFactory";
 	public static final String TX_MANAGER = "liferayTransactionManager";
-	public static final boolean CACHE_ENABLED = GetterUtil.getBoolean(PropsUtil.get(
+	public static final boolean CACHE_ENABLED = GetterUtil.getBoolean(com.liferay.portal.util.PropsUtil.get(
 				"value.object.finder.cache.enabled.com.liferay.portal.model.Group"),
 			true);
 
@@ -139,16 +138,16 @@ public class GroupModelImpl extends BaseModelImpl {
 		return models;
 	}
 
-	public static final boolean CACHE_ENABLED_GROUPS_ORGS = GetterUtil.getBoolean(PropsUtil.get(
+	public static final boolean CACHE_ENABLED_GROUPS_ORGS = GetterUtil.getBoolean(com.liferay.portal.util.PropsUtil.get(
 				"value.object.finder.cache.enabled.Groups_Orgs"), true);
-	public static final boolean CACHE_ENABLED_GROUPS_PERMISSIONS = GetterUtil.getBoolean(PropsUtil.get(
+	public static final boolean CACHE_ENABLED_GROUPS_PERMISSIONS = GetterUtil.getBoolean(com.liferay.portal.util.PropsUtil.get(
 				"value.object.finder.cache.enabled.Groups_Permissions"), true);
-	public static final boolean CACHE_ENABLED_GROUPS_ROLES = GetterUtil.getBoolean(PropsUtil.get(
+	public static final boolean CACHE_ENABLED_GROUPS_ROLES = GetterUtil.getBoolean(com.liferay.portal.util.PropsUtil.get(
 				"value.object.finder.cache.enabled.Groups_Roles"), true);
-	public static final boolean CACHE_ENABLED_GROUPS_USERGROUPS = GetterUtil.getBoolean(PropsUtil.get(
+	public static final boolean CACHE_ENABLED_GROUPS_USERGROUPS = GetterUtil.getBoolean(com.liferay.portal.util.PropsUtil.get(
 				"value.object.finder.cache.enabled.Groups_UserGroups"), true);
 	public static final boolean CACHE_ENABLED_USERS_GROUPS = com.liferay.portal.model.impl.UserModelImpl.CACHE_ENABLED_USERS_GROUPS;
-	public static final long LOCK_EXPIRATION_TIME = GetterUtil.getLong(PropsUtil.get(
+	public static final long LOCK_EXPIRATION_TIME = GetterUtil.getLong(com.liferay.portal.util.PropsUtil.get(
 				"lock.expiration.time.com.liferay.portal.model.Group"));
 
 	public GroupModelImpl() {

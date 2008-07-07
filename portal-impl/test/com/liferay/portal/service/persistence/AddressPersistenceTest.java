@@ -23,7 +23,6 @@
 package com.liferay.portal.service.persistence;
 
 import com.liferay.portal.NoSuchAddressException;
-import com.liferay.portal.kernel.bean.BeanLocatorUtil;
 import com.liferay.portal.model.Address;
 import com.liferay.portal.service.persistence.BasePersistenceTestCase;
 
@@ -37,7 +36,7 @@ public class AddressPersistenceTest extends BasePersistenceTestCase {
 	protected void setUp() throws Exception {
 		super.setUp();
 
-		_persistence = (AddressPersistence)BeanLocatorUtil.locate(_TX_IMPL);
+		_persistence = (AddressPersistence)com.liferay.portal.kernel.bean.BeanLocatorUtil.locate(_TX_IMPL);
 	}
 
 	public void testCreate() throws Exception {

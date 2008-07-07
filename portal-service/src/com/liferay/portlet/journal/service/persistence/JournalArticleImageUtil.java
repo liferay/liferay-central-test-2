@@ -244,13 +244,13 @@ public class JournalArticleImageUtil {
 	}
 
 	public static java.util.List<com.liferay.portlet.journal.model.JournalArticleImage> findWithDynamicQuery(
-		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer)
+		com.liferay.portal.kernel.dao.search.DynamicQueryInitializer queryInitializer)
 		throws com.liferay.portal.SystemException {
 		return getPersistence().findWithDynamicQuery(queryInitializer);
 	}
 
 	public static java.util.List<com.liferay.portlet.journal.model.JournalArticleImage> findWithDynamicQuery(
-		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer,
+		com.liferay.portal.kernel.dao.search.DynamicQueryInitializer queryInitializer,
 		int start, int end) throws com.liferay.portal.SystemException {
 		return getPersistence()
 				   .findWithDynamicQuery(queryInitializer, start, end);

@@ -75,7 +75,7 @@ public class AddressLocalServiceUtil {
 	}
 
 	public static java.util.List<com.liferay.portal.model.Address> dynamicQuery(
-		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer)
+		com.liferay.portal.kernel.dao.search.DynamicQueryInitializer queryInitializer)
 		throws com.liferay.portal.SystemException {
 		AddressLocalService addressLocalService = AddressLocalServiceFactory.getService();
 
@@ -83,7 +83,7 @@ public class AddressLocalServiceUtil {
 	}
 
 	public static java.util.List<com.liferay.portal.model.Address> dynamicQuery(
-		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer,
+		com.liferay.portal.kernel.dao.search.DynamicQueryInitializer queryInitializer,
 		int start, int end) throws com.liferay.portal.SystemException {
 		AddressLocalService addressLocalService = AddressLocalServiceFactory.getService();
 

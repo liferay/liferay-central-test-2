@@ -22,7 +22,6 @@
 
 package com.liferay.portlet.imagegallery.service.persistence;
 
-import com.liferay.portal.kernel.bean.BeanLocatorUtil;
 import com.liferay.portal.service.persistence.BasePersistenceTestCase;
 
 import com.liferay.portlet.imagegallery.NoSuchImageException;
@@ -38,7 +37,7 @@ public class IGImagePersistenceTest extends BasePersistenceTestCase {
 	protected void setUp() throws Exception {
 		super.setUp();
 
-		_persistence = (IGImagePersistence)BeanLocatorUtil.locate(_TX_IMPL);
+		_persistence = (IGImagePersistence)com.liferay.portal.kernel.bean.BeanLocatorUtil.locate(_TX_IMPL);
 	}
 
 	public void testCreate() throws Exception {

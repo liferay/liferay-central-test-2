@@ -116,11 +116,11 @@ public interface RatingsEntryPersistence {
 		throws com.liferay.portal.SystemException;
 
 	public java.util.List<com.liferay.portlet.ratings.model.RatingsEntry> findWithDynamicQuery(
-		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer)
+		com.liferay.portal.kernel.dao.search.DynamicQueryInitializer queryInitializer)
 		throws com.liferay.portal.SystemException;
 
 	public java.util.List<com.liferay.portlet.ratings.model.RatingsEntry> findWithDynamicQuery(
-		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer,
+		com.liferay.portal.kernel.dao.search.DynamicQueryInitializer queryInitializer,
 		int start, int end) throws com.liferay.portal.SystemException;
 
 	public java.util.List<com.liferay.portlet.ratings.model.RatingsEntry> findAll()

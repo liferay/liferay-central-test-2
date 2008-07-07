@@ -22,7 +22,6 @@
 
 package com.liferay.portlet.tasks.service;
 
-import com.liferay.portal.kernel.bean.BeanLocatorUtil;
 
 /**
  * <a href="TasksProposalServiceFactory.java.html"><b><i>View Source</i></b></a>
@@ -58,7 +57,7 @@ public class TasksProposalServiceFactory {
 
 	public static TasksProposalService getImpl() {
 		if (_impl == null) {
-			_impl = (TasksProposalService)BeanLocatorUtil.locate(_IMPL);
+			_impl = (TasksProposalService)com.liferay.portal.kernel.bean.BeanLocatorUtil.locate(_IMPL);
 		}
 
 		return _impl;
@@ -66,7 +65,7 @@ public class TasksProposalServiceFactory {
 
 	public static TasksProposalService getTxImpl() {
 		if (_txImpl == null) {
-			_txImpl = (TasksProposalService)BeanLocatorUtil.locate(_TX_IMPL);
+			_txImpl = (TasksProposalService)com.liferay.portal.kernel.bean.BeanLocatorUtil.locate(_TX_IMPL);
 		}
 
 		return _txImpl;
@@ -78,7 +77,7 @@ public class TasksProposalServiceFactory {
 
 	private static TasksProposalServiceFactory _getFactory() {
 		if (_factory == null) {
-			_factory = (TasksProposalServiceFactory)BeanLocatorUtil.locate(_FACTORY);
+			_factory = (TasksProposalServiceFactory)com.liferay.portal.kernel.bean.BeanLocatorUtil.locate(_FACTORY);
 		}
 
 		return _factory;

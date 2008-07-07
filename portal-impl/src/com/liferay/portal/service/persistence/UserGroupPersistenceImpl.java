@@ -24,8 +24,15 @@ package com.liferay.portal.service.persistence;
 
 import com.liferay.portal.NoSuchUserGroupException;
 import com.liferay.portal.SystemException;
-import com.liferay.portal.kernel.dao.DynamicQuery;
-import com.liferay.portal.kernel.dao.DynamicQueryInitializer;
+import com.liferay.portal.kernel.dao.hibernate.Query;
+import com.liferay.portal.kernel.dao.hibernate.QueryPos;
+import com.liferay.portal.kernel.dao.hibernate.QueryUtil;
+import com.liferay.portal.kernel.dao.hibernate.SQLQuery;
+import com.liferay.portal.kernel.dao.hibernate.Session;
+import com.liferay.portal.kernel.dao.hibernate.Type;
+import com.liferay.portal.kernel.dao.search.DynamicQuery;
+import com.liferay.portal.kernel.dao.search.DynamicQueryInitializer;
+import com.liferay.portal.kernel.spring.hibernate.FinderCacheUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.ListUtil;
 import com.liferay.portal.kernel.util.OrderByComparator;
@@ -35,19 +42,10 @@ import com.liferay.portal.model.ModelListener;
 import com.liferay.portal.model.UserGroup;
 import com.liferay.portal.model.impl.UserGroupImpl;
 import com.liferay.portal.model.impl.UserGroupModelImpl;
-import com.liferay.portal.spring.hibernate.FinderCache;
-import com.liferay.portal.util.PropsUtil;
-
-import com.liferay.util.dao.hibernate.QueryPos;
-import com.liferay.util.dao.hibernate.QueryUtil;
+import com.liferay.portal.service.persistence.impl.BasePersistenceImpl;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-
-import org.hibernate.Hibernate;
-import org.hibernate.Query;
-import org.hibernate.SQLQuery;
-import org.hibernate.Session;
 
 import org.springframework.dao.DataAccessException;
 
@@ -70,7 +68,7 @@ import java.util.List;
  * @author Brian Wing Shun Chan
  *
  */
-public class UserGroupPersistenceImpl extends BasePersistence
+public class UserGroupPersistenceImpl extends BasePersistenceImpl
 	implements UserGroupPersistence {
 	public UserGroup create(long userGroupId) {
 		UserGroup userGroup = new UserGroupImpl();
@@ -141,7 +139,7 @@ public class UserGroupPersistenceImpl extends BasePersistence
 			throw processException(e);
 		}
 		finally {
-			FinderCache.clearCache("Users_UserGroups");
+			FinderCacheUtil.clearCache("Users_UserGroups");
 		}
 
 		Session session = null;
@@ -161,7 +159,7 @@ public class UserGroupPersistenceImpl extends BasePersistence
 		finally {
 			closeSession(session);
 
-			FinderCache.clearCache(UserGroup.class.getName());
+			FinderCacheUtil.clearCache(UserGroup.class.getName());
 		}
 	}
 
@@ -223,7 +221,7 @@ public class UserGroupPersistenceImpl extends BasePersistence
 
 	public UserGroup updateImpl(com.liferay.portal.model.UserGroup userGroup,
 		boolean merge) throws SystemException {
-		FinderCache.clearCache("Users_UserGroups");
+		FinderCacheUtil.clearCache("Users_UserGroups");
 
 		Session session = null;
 
@@ -251,7 +249,7 @@ public class UserGroupPersistenceImpl extends BasePersistence
 		finally {
 			closeSession(session);
 
-			FinderCache.clearCache(UserGroup.class.getName());
+			FinderCacheUtil.clearCache(UserGroup.class.getName());
 		}
 	}
 
@@ -301,8 +299,8 @@ public class UserGroupPersistenceImpl extends BasePersistence
 		Object result = null;
 
 		if (finderClassNameCacheEnabled) {
-			result = FinderCache.getResult(finderClassName, finderMethodName,
-					finderParams, finderArgs, getSessionFactory());
+			result = FinderCacheUtil.getResult(finderClassName,
+					finderMethodName, finderParams, finderArgs, this);
 		}
 
 		if (result == null) {
@@ -331,7 +329,7 @@ public class UserGroupPersistenceImpl extends BasePersistence
 
 				List<UserGroup> list = q.list();
 
-				FinderCache.putResult(finderClassNameCacheEnabled,
+				FinderCacheUtil.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
 					finderArgs, list);
 
@@ -374,8 +372,8 @@ public class UserGroupPersistenceImpl extends BasePersistence
 		Object result = null;
 
 		if (finderClassNameCacheEnabled) {
-			result = FinderCache.getResult(finderClassName, finderMethodName,
-					finderParams, finderArgs, getSessionFactory());
+			result = FinderCacheUtil.getResult(finderClassName,
+					finderMethodName, finderParams, finderArgs, this);
 		}
 
 		if (result == null) {
@@ -412,7 +410,7 @@ public class UserGroupPersistenceImpl extends BasePersistence
 				List<UserGroup> list = (List<UserGroup>)QueryUtil.list(q,
 						getDialect(), start, end);
 
-				FinderCache.putResult(finderClassNameCacheEnabled,
+				FinderCacheUtil.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
 					finderArgs, list);
 
@@ -543,8 +541,8 @@ public class UserGroupPersistenceImpl extends BasePersistence
 		Object result = null;
 
 		if (finderClassNameCacheEnabled) {
-			result = FinderCache.getResult(finderClassName, finderMethodName,
-					finderParams, finderArgs, getSessionFactory());
+			result = FinderCacheUtil.getResult(finderClassName,
+					finderMethodName, finderParams, finderArgs, this);
 		}
 
 		if (result == null) {
@@ -579,7 +577,7 @@ public class UserGroupPersistenceImpl extends BasePersistence
 
 				List<UserGroup> list = q.list();
 
-				FinderCache.putResult(finderClassNameCacheEnabled,
+				FinderCacheUtil.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
 					finderArgs, list);
 
@@ -622,8 +620,8 @@ public class UserGroupPersistenceImpl extends BasePersistence
 		Object result = null;
 
 		if (finderClassNameCacheEnabled) {
-			result = FinderCache.getResult(finderClassName, finderMethodName,
-					finderParams, finderArgs, getSessionFactory());
+			result = FinderCacheUtil.getResult(finderClassName,
+					finderMethodName, finderParams, finderArgs, this);
 		}
 
 		if (result == null) {
@@ -666,7 +664,7 @@ public class UserGroupPersistenceImpl extends BasePersistence
 				List<UserGroup> list = (List<UserGroup>)QueryUtil.list(q,
 						getDialect(), start, end);
 
-				FinderCache.putResult(finderClassNameCacheEnabled,
+				FinderCacheUtil.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
 					finderArgs, list);
 
@@ -834,8 +832,8 @@ public class UserGroupPersistenceImpl extends BasePersistence
 		Object result = null;
 
 		if (finderClassNameCacheEnabled) {
-			result = FinderCache.getResult(finderClassName, finderMethodName,
-					finderParams, finderArgs, getSessionFactory());
+			result = FinderCacheUtil.getResult(finderClassName,
+					finderMethodName, finderParams, finderArgs, this);
 		}
 
 		if (result == null) {
@@ -877,7 +875,7 @@ public class UserGroupPersistenceImpl extends BasePersistence
 
 				List<UserGroup> list = q.list();
 
-				FinderCache.putResult(finderClassNameCacheEnabled,
+				FinderCacheUtil.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
 					finderArgs, list);
 
@@ -973,8 +971,8 @@ public class UserGroupPersistenceImpl extends BasePersistence
 		Object result = null;
 
 		if (finderClassNameCacheEnabled) {
-			result = FinderCache.getResult(finderClassName, finderMethodName,
-					finderParams, finderArgs, getSessionFactory());
+			result = FinderCacheUtil.getResult(finderClassName,
+					finderMethodName, finderParams, finderArgs, this);
 		}
 
 		if (result == null) {
@@ -1007,7 +1005,7 @@ public class UserGroupPersistenceImpl extends BasePersistence
 					Collections.sort(list);
 				}
 
-				FinderCache.putResult(finderClassNameCacheEnabled,
+				FinderCacheUtil.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
 					finderArgs, list);
 
@@ -1061,8 +1059,8 @@ public class UserGroupPersistenceImpl extends BasePersistence
 		Object result = null;
 
 		if (finderClassNameCacheEnabled) {
-			result = FinderCache.getResult(finderClassName, finderMethodName,
-					finderParams, finderArgs, getSessionFactory());
+			result = FinderCacheUtil.getResult(finderClassName,
+					finderMethodName, finderParams, finderArgs, this);
 		}
 
 		if (result == null) {
@@ -1098,7 +1096,7 @@ public class UserGroupPersistenceImpl extends BasePersistence
 					count = new Long(0);
 				}
 
-				FinderCache.putResult(finderClassNameCacheEnabled,
+				FinderCacheUtil.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
 					finderArgs, count);
 
@@ -1131,8 +1129,8 @@ public class UserGroupPersistenceImpl extends BasePersistence
 		Object result = null;
 
 		if (finderClassNameCacheEnabled) {
-			result = FinderCache.getResult(finderClassName, finderMethodName,
-					finderParams, finderArgs, getSessionFactory());
+			result = FinderCacheUtil.getResult(finderClassName,
+					finderMethodName, finderParams, finderArgs, this);
 		}
 
 		if (result == null) {
@@ -1174,7 +1172,7 @@ public class UserGroupPersistenceImpl extends BasePersistence
 					count = new Long(0);
 				}
 
-				FinderCache.putResult(finderClassNameCacheEnabled,
+				FinderCacheUtil.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
 					finderArgs, count);
 
@@ -1205,8 +1203,8 @@ public class UserGroupPersistenceImpl extends BasePersistence
 		Object result = null;
 
 		if (finderClassNameCacheEnabled) {
-			result = FinderCache.getResult(finderClassName, finderMethodName,
-					finderParams, finderArgs, getSessionFactory());
+			result = FinderCacheUtil.getResult(finderClassName,
+					finderMethodName, finderParams, finderArgs, this);
 		}
 
 		if (result == null) {
@@ -1255,7 +1253,7 @@ public class UserGroupPersistenceImpl extends BasePersistence
 					count = new Long(0);
 				}
 
-				FinderCache.putResult(finderClassNameCacheEnabled,
+				FinderCacheUtil.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
 					finderArgs, count);
 
@@ -1283,8 +1281,8 @@ public class UserGroupPersistenceImpl extends BasePersistence
 		Object result = null;
 
 		if (finderClassNameCacheEnabled) {
-			result = FinderCache.getResult(finderClassName, finderMethodName,
-					finderParams, finderArgs, getSessionFactory());
+			result = FinderCacheUtil.getResult(finderClassName,
+					finderMethodName, finderParams, finderArgs, this);
 		}
 
 		if (result == null) {
@@ -1308,7 +1306,7 @@ public class UserGroupPersistenceImpl extends BasePersistence
 					count = new Long(0);
 				}
 
-				FinderCache.putResult(finderClassNameCacheEnabled,
+				FinderCacheUtil.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
 					finderArgs, count);
 
@@ -1355,8 +1353,8 @@ public class UserGroupPersistenceImpl extends BasePersistence
 		Object result = null;
 
 		if (finderClassNameCacheEnabled) {
-			result = FinderCache.getResult(finderClassName, finderMethodName,
-					finderParams, finderArgs, getSessionFactory());
+			result = FinderCacheUtil.getResult(finderClassName,
+					finderMethodName, finderParams, finderArgs, this);
 		}
 
 		if (result == null) {
@@ -1388,7 +1386,7 @@ public class UserGroupPersistenceImpl extends BasePersistence
 				List<com.liferay.portal.model.User> list = (List<com.liferay.portal.model.User>)QueryUtil.list(q,
 						getDialect(), start, end);
 
-				FinderCache.putResult(finderClassNameCacheEnabled,
+				FinderCacheUtil.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
 					finderArgs, list);
 
@@ -1418,8 +1416,8 @@ public class UserGroupPersistenceImpl extends BasePersistence
 		Object result = null;
 
 		if (finderClassNameCacheEnabled) {
-			result = FinderCache.getResult(finderClassName, finderMethodName,
-					finderParams, finderArgs, getSessionFactory());
+			result = FinderCacheUtil.getResult(finderClassName,
+					finderMethodName, finderParams, finderArgs, this);
 		}
 
 		if (result == null) {
@@ -1430,7 +1428,7 @@ public class UserGroupPersistenceImpl extends BasePersistence
 
 				SQLQuery q = session.createSQLQuery(_SQL_GETUSERSSIZE);
 
-				q.addScalar(COUNT_COLUMN_NAME, Hibernate.LONG);
+				q.addScalar(COUNT_COLUMN_NAME, Type.LONG);
 
 				QueryPos qPos = QueryPos.getInstance(q);
 
@@ -1448,7 +1446,7 @@ public class UserGroupPersistenceImpl extends BasePersistence
 					count = new Long(0);
 				}
 
-				FinderCache.putResult(finderClassNameCacheEnabled,
+				FinderCacheUtil.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
 					finderArgs, count);
 
@@ -1482,15 +1480,15 @@ public class UserGroupPersistenceImpl extends BasePersistence
 		Object result = null;
 
 		if (finderClassNameCacheEnabled) {
-			result = FinderCache.getResult(finderClassName, finderMethodName,
-					finderParams, finderArgs, getSessionFactory());
+			result = FinderCacheUtil.getResult(finderClassName,
+					finderMethodName, finderParams, finderArgs, this);
 		}
 
 		if (result == null) {
 			try {
 				Boolean value = Boolean.valueOf(containsUser.contains(pk, userPK));
 
-				FinderCache.putResult(finderClassNameCacheEnabled,
+				FinderCacheUtil.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
 					finderArgs, value);
 
@@ -1522,7 +1520,7 @@ public class UserGroupPersistenceImpl extends BasePersistence
 			throw new SystemException(dae);
 		}
 		finally {
-			FinderCache.clearCache("Users_UserGroups");
+			FinderCacheUtil.clearCache("Users_UserGroups");
 		}
 	}
 
@@ -1535,7 +1533,7 @@ public class UserGroupPersistenceImpl extends BasePersistence
 			throw new SystemException(dae);
 		}
 		finally {
-			FinderCache.clearCache("Users_UserGroups");
+			FinderCacheUtil.clearCache("Users_UserGroups");
 		}
 	}
 
@@ -1549,7 +1547,7 @@ public class UserGroupPersistenceImpl extends BasePersistence
 			throw new SystemException(dae);
 		}
 		finally {
-			FinderCache.clearCache("Users_UserGroups");
+			FinderCacheUtil.clearCache("Users_UserGroups");
 		}
 	}
 
@@ -1564,7 +1562,7 @@ public class UserGroupPersistenceImpl extends BasePersistence
 			throw new SystemException(dae);
 		}
 		finally {
-			FinderCache.clearCache("Users_UserGroups");
+			FinderCacheUtil.clearCache("Users_UserGroups");
 		}
 	}
 
@@ -1576,7 +1574,7 @@ public class UserGroupPersistenceImpl extends BasePersistence
 			throw new SystemException(dae);
 		}
 		finally {
-			FinderCache.clearCache("Users_UserGroups");
+			FinderCacheUtil.clearCache("Users_UserGroups");
 		}
 	}
 
@@ -1588,7 +1586,7 @@ public class UserGroupPersistenceImpl extends BasePersistence
 			throw new SystemException(dae);
 		}
 		finally {
-			FinderCache.clearCache("Users_UserGroups");
+			FinderCacheUtil.clearCache("Users_UserGroups");
 		}
 	}
 
@@ -1601,7 +1599,7 @@ public class UserGroupPersistenceImpl extends BasePersistence
 			throw new SystemException(dae);
 		}
 		finally {
-			FinderCache.clearCache("Users_UserGroups");
+			FinderCacheUtil.clearCache("Users_UserGroups");
 		}
 	}
 
@@ -1615,7 +1613,7 @@ public class UserGroupPersistenceImpl extends BasePersistence
 			throw new SystemException(dae);
 		}
 		finally {
-			FinderCache.clearCache("Users_UserGroups");
+			FinderCacheUtil.clearCache("Users_UserGroups");
 		}
 	}
 
@@ -1630,7 +1628,7 @@ public class UserGroupPersistenceImpl extends BasePersistence
 			throw new SystemException(dae);
 		}
 		finally {
-			FinderCache.clearCache("Users_UserGroups");
+			FinderCacheUtil.clearCache("Users_UserGroups");
 		}
 	}
 
@@ -1646,7 +1644,7 @@ public class UserGroupPersistenceImpl extends BasePersistence
 			throw new SystemException(dae);
 		}
 		finally {
-			FinderCache.clearCache("Users_UserGroups");
+			FinderCacheUtil.clearCache("Users_UserGroups");
 		}
 	}
 
@@ -1663,7 +1661,7 @@ public class UserGroupPersistenceImpl extends BasePersistence
 			throw new SystemException(dae);
 		}
 		finally {
-			FinderCache.clearCache("Users_UserGroups");
+			FinderCacheUtil.clearCache("Users_UserGroups");
 		}
 	}
 
@@ -1685,7 +1683,7 @@ public class UserGroupPersistenceImpl extends BasePersistence
 
 	protected void init() {
 		String[] listenerClassNames = StringUtil.split(GetterUtil.getString(
-					PropsUtil.get(
+					com.liferay.portal.util.PropsUtil.get(
 						"value.object.listener.com.liferay.portal.model.UserGroup")));
 
 		if (listenerClassNames.length > 0) {

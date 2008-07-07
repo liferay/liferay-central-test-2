@@ -22,7 +22,6 @@
 
 package com.liferay.portal.service;
 
-import com.liferay.portal.kernel.bean.BeanLocatorUtil;
 
 /**
  * <a href="ThemeLocalServiceFactory.java.html"><b><i>View Source</i></b></a>
@@ -58,7 +57,7 @@ public class ThemeLocalServiceFactory {
 
 	public static ThemeLocalService getImpl() {
 		if (_impl == null) {
-			_impl = (ThemeLocalService)BeanLocatorUtil.locate(_IMPL);
+			_impl = (ThemeLocalService)com.liferay.portal.kernel.bean.BeanLocatorUtil.locate(_IMPL);
 		}
 
 		return _impl;
@@ -66,7 +65,7 @@ public class ThemeLocalServiceFactory {
 
 	public static ThemeLocalService getTxImpl() {
 		if (_txImpl == null) {
-			_txImpl = (ThemeLocalService)BeanLocatorUtil.locate(_TX_IMPL);
+			_txImpl = (ThemeLocalService)com.liferay.portal.kernel.bean.BeanLocatorUtil.locate(_TX_IMPL);
 		}
 
 		return _txImpl;
@@ -78,7 +77,7 @@ public class ThemeLocalServiceFactory {
 
 	private static ThemeLocalServiceFactory _getFactory() {
 		if (_factory == null) {
-			_factory = (ThemeLocalServiceFactory)BeanLocatorUtil.locate(_FACTORY);
+			_factory = (ThemeLocalServiceFactory)com.liferay.portal.kernel.bean.BeanLocatorUtil.locate(_FACTORY);
 		}
 
 		return _factory;

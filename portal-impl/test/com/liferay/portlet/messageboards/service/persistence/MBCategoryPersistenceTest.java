@@ -22,7 +22,6 @@
 
 package com.liferay.portlet.messageboards.service.persistence;
 
-import com.liferay.portal.kernel.bean.BeanLocatorUtil;
 import com.liferay.portal.service.persistence.BasePersistenceTestCase;
 
 import com.liferay.portlet.messageboards.NoSuchCategoryException;
@@ -38,7 +37,7 @@ public class MBCategoryPersistenceTest extends BasePersistenceTestCase {
 	protected void setUp() throws Exception {
 		super.setUp();
 
-		_persistence = (MBCategoryPersistence)BeanLocatorUtil.locate(_TX_IMPL);
+		_persistence = (MBCategoryPersistence)com.liferay.portal.kernel.bean.BeanLocatorUtil.locate(_TX_IMPL);
 	}
 
 	public void testCreate() throws Exception {

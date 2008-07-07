@@ -75,7 +75,7 @@ public class ImageLocalServiceUtil {
 	}
 
 	public static java.util.List<com.liferay.portal.model.Image> dynamicQuery(
-		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer)
+		com.liferay.portal.kernel.dao.search.DynamicQueryInitializer queryInitializer)
 		throws com.liferay.portal.SystemException {
 		ImageLocalService imageLocalService = ImageLocalServiceFactory.getService();
 
@@ -83,7 +83,7 @@ public class ImageLocalServiceUtil {
 	}
 
 	public static java.util.List<com.liferay.portal.model.Image> dynamicQuery(
-		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer,
+		com.liferay.portal.kernel.dao.search.DynamicQueryInitializer queryInitializer,
 		int start, int end) throws com.liferay.portal.SystemException {
 		ImageLocalService imageLocalService = ImageLocalServiceFactory.getService();
 

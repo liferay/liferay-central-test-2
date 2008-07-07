@@ -22,7 +22,6 @@
 
 package com.liferay.portlet.expando.service.persistence;
 
-import com.liferay.portal.kernel.bean.BeanLocatorUtil;
 import com.liferay.portal.service.persistence.BasePersistenceTestCase;
 
 import com.liferay.portlet.expando.NoSuchValueException;
@@ -38,7 +37,7 @@ public class ExpandoValuePersistenceTest extends BasePersistenceTestCase {
 	protected void setUp() throws Exception {
 		super.setUp();
 
-		_persistence = (ExpandoValuePersistence)BeanLocatorUtil.locate(_TX_IMPL);
+		_persistence = (ExpandoValuePersistence)com.liferay.portal.kernel.bean.BeanLocatorUtil.locate(_TX_IMPL);
 	}
 
 	public void testCreate() throws Exception {

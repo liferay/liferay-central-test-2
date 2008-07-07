@@ -22,7 +22,6 @@
 
 package com.liferay.portlet.shopping.service;
 
-import com.liferay.portal.kernel.bean.BeanLocatorUtil;
 
 /**
  * <a href="ShoppingCategoryServiceFactory.java.html"><b><i>View Source</i></b></a>
@@ -58,7 +57,7 @@ public class ShoppingCategoryServiceFactory {
 
 	public static ShoppingCategoryService getImpl() {
 		if (_impl == null) {
-			_impl = (ShoppingCategoryService)BeanLocatorUtil.locate(_IMPL);
+			_impl = (ShoppingCategoryService)com.liferay.portal.kernel.bean.BeanLocatorUtil.locate(_IMPL);
 		}
 
 		return _impl;
@@ -66,7 +65,7 @@ public class ShoppingCategoryServiceFactory {
 
 	public static ShoppingCategoryService getTxImpl() {
 		if (_txImpl == null) {
-			_txImpl = (ShoppingCategoryService)BeanLocatorUtil.locate(_TX_IMPL);
+			_txImpl = (ShoppingCategoryService)com.liferay.portal.kernel.bean.BeanLocatorUtil.locate(_TX_IMPL);
 		}
 
 		return _txImpl;
@@ -78,7 +77,7 @@ public class ShoppingCategoryServiceFactory {
 
 	private static ShoppingCategoryServiceFactory _getFactory() {
 		if (_factory == null) {
-			_factory = (ShoppingCategoryServiceFactory)BeanLocatorUtil.locate(_FACTORY);
+			_factory = (ShoppingCategoryServiceFactory)com.liferay.portal.kernel.bean.BeanLocatorUtil.locate(_FACTORY);
 		}
 
 		return _factory;

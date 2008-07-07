@@ -23,33 +23,30 @@
 package com.liferay.portlet.softwarecatalog.service.persistence;
 
 import com.liferay.portal.SystemException;
-import com.liferay.portal.kernel.dao.DynamicQuery;
-import com.liferay.portal.kernel.dao.DynamicQueryInitializer;
+import com.liferay.portal.kernel.dao.hibernate.Query;
+import com.liferay.portal.kernel.dao.hibernate.QueryPos;
+import com.liferay.portal.kernel.dao.hibernate.QueryUtil;
+import com.liferay.portal.kernel.dao.hibernate.SQLQuery;
+import com.liferay.portal.kernel.dao.hibernate.Session;
+import com.liferay.portal.kernel.dao.hibernate.Type;
+import com.liferay.portal.kernel.dao.search.DynamicQuery;
+import com.liferay.portal.kernel.dao.search.DynamicQueryInitializer;
+import com.liferay.portal.kernel.spring.hibernate.FinderCacheUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.ListUtil;
 import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.model.ModelListener;
-import com.liferay.portal.service.persistence.BasePersistence;
-import com.liferay.portal.spring.hibernate.FinderCache;
-import com.liferay.portal.util.PropsUtil;
+import com.liferay.portal.service.persistence.impl.BasePersistenceImpl;
 
 import com.liferay.portlet.softwarecatalog.NoSuchProductEntryException;
 import com.liferay.portlet.softwarecatalog.model.SCProductEntry;
 import com.liferay.portlet.softwarecatalog.model.impl.SCProductEntryImpl;
 import com.liferay.portlet.softwarecatalog.model.impl.SCProductEntryModelImpl;
 
-import com.liferay.util.dao.hibernate.QueryPos;
-import com.liferay.util.dao.hibernate.QueryUtil;
-
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-
-import org.hibernate.Hibernate;
-import org.hibernate.Query;
-import org.hibernate.SQLQuery;
-import org.hibernate.Session;
 
 import org.springframework.dao.DataAccessException;
 
@@ -72,7 +69,7 @@ import java.util.List;
  * @author Brian Wing Shun Chan
  *
  */
-public class SCProductEntryPersistenceImpl extends BasePersistence
+public class SCProductEntryPersistenceImpl extends BasePersistenceImpl
 	implements SCProductEntryPersistence {
 	public SCProductEntry create(long productEntryId) {
 		SCProductEntry scProductEntry = new SCProductEntryImpl();
@@ -145,7 +142,7 @@ public class SCProductEntryPersistenceImpl extends BasePersistence
 			throw processException(e);
 		}
 		finally {
-			FinderCache.clearCache("SCLicenses_SCProductEntries");
+			FinderCacheUtil.clearCache("SCLicenses_SCProductEntries");
 		}
 
 		Session session = null;
@@ -165,7 +162,7 @@ public class SCProductEntryPersistenceImpl extends BasePersistence
 		finally {
 			closeSession(session);
 
-			FinderCache.clearCache(SCProductEntry.class.getName());
+			FinderCacheUtil.clearCache(SCProductEntry.class.getName());
 		}
 	}
 
@@ -229,7 +226,7 @@ public class SCProductEntryPersistenceImpl extends BasePersistence
 	public SCProductEntry updateImpl(
 		com.liferay.portlet.softwarecatalog.model.SCProductEntry scProductEntry,
 		boolean merge) throws SystemException {
-		FinderCache.clearCache("SCLicenses_SCProductEntries");
+		FinderCacheUtil.clearCache("SCLicenses_SCProductEntries");
 
 		Session session = null;
 
@@ -257,7 +254,7 @@ public class SCProductEntryPersistenceImpl extends BasePersistence
 		finally {
 			closeSession(session);
 
-			FinderCache.clearCache(SCProductEntry.class.getName());
+			FinderCacheUtil.clearCache(SCProductEntry.class.getName());
 		}
 	}
 
@@ -308,8 +305,8 @@ public class SCProductEntryPersistenceImpl extends BasePersistence
 		Object result = null;
 
 		if (finderClassNameCacheEnabled) {
-			result = FinderCache.getResult(finderClassName, finderMethodName,
-					finderParams, finderArgs, getSessionFactory());
+			result = FinderCacheUtil.getResult(finderClassName,
+					finderMethodName, finderParams, finderArgs, this);
 		}
 
 		if (result == null) {
@@ -340,7 +337,7 @@ public class SCProductEntryPersistenceImpl extends BasePersistence
 
 				List<SCProductEntry> list = q.list();
 
-				FinderCache.putResult(finderClassNameCacheEnabled,
+				FinderCacheUtil.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
 					finderArgs, list);
 
@@ -383,8 +380,8 @@ public class SCProductEntryPersistenceImpl extends BasePersistence
 		Object result = null;
 
 		if (finderClassNameCacheEnabled) {
-			result = FinderCache.getResult(finderClassName, finderMethodName,
-					finderParams, finderArgs, getSessionFactory());
+			result = FinderCacheUtil.getResult(finderClassName,
+					finderMethodName, finderParams, finderArgs, this);
 		}
 
 		if (result == null) {
@@ -423,7 +420,7 @@ public class SCProductEntryPersistenceImpl extends BasePersistence
 				List<SCProductEntry> list = (List<SCProductEntry>)QueryUtil.list(q,
 						getDialect(), start, end);
 
-				FinderCache.putResult(finderClassNameCacheEnabled,
+				FinderCacheUtil.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
 					finderArgs, list);
 
@@ -553,8 +550,8 @@ public class SCProductEntryPersistenceImpl extends BasePersistence
 		Object result = null;
 
 		if (finderClassNameCacheEnabled) {
-			result = FinderCache.getResult(finderClassName, finderMethodName,
-					finderParams, finderArgs, getSessionFactory());
+			result = FinderCacheUtil.getResult(finderClassName,
+					finderMethodName, finderParams, finderArgs, this);
 		}
 
 		if (result == null) {
@@ -585,7 +582,7 @@ public class SCProductEntryPersistenceImpl extends BasePersistence
 
 				List<SCProductEntry> list = q.list();
 
-				FinderCache.putResult(finderClassNameCacheEnabled,
+				FinderCacheUtil.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
 					finderArgs, list);
 
@@ -628,8 +625,8 @@ public class SCProductEntryPersistenceImpl extends BasePersistence
 		Object result = null;
 
 		if (finderClassNameCacheEnabled) {
-			result = FinderCache.getResult(finderClassName, finderMethodName,
-					finderParams, finderArgs, getSessionFactory());
+			result = FinderCacheUtil.getResult(finderClassName,
+					finderMethodName, finderParams, finderArgs, this);
 		}
 
 		if (result == null) {
@@ -668,7 +665,7 @@ public class SCProductEntryPersistenceImpl extends BasePersistence
 				List<SCProductEntry> list = (List<SCProductEntry>)QueryUtil.list(q,
 						getDialect(), start, end);
 
-				FinderCache.putResult(finderClassNameCacheEnabled,
+				FinderCacheUtil.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
 					finderArgs, list);
 
@@ -802,8 +799,8 @@ public class SCProductEntryPersistenceImpl extends BasePersistence
 		Object result = null;
 
 		if (finderClassNameCacheEnabled) {
-			result = FinderCache.getResult(finderClassName, finderMethodName,
-					finderParams, finderArgs, getSessionFactory());
+			result = FinderCacheUtil.getResult(finderClassName,
+					finderMethodName, finderParams, finderArgs, this);
 		}
 
 		if (result == null) {
@@ -840,7 +837,7 @@ public class SCProductEntryPersistenceImpl extends BasePersistence
 
 				List<SCProductEntry> list = q.list();
 
-				FinderCache.putResult(finderClassNameCacheEnabled,
+				FinderCacheUtil.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
 					finderArgs, list);
 
@@ -883,8 +880,8 @@ public class SCProductEntryPersistenceImpl extends BasePersistence
 		Object result = null;
 
 		if (finderClassNameCacheEnabled) {
-			result = FinderCache.getResult(finderClassName, finderMethodName,
-					finderParams, finderArgs, getSessionFactory());
+			result = FinderCacheUtil.getResult(finderClassName,
+					finderMethodName, finderParams, finderArgs, this);
 		}
 
 		if (result == null) {
@@ -929,7 +926,7 @@ public class SCProductEntryPersistenceImpl extends BasePersistence
 				List<SCProductEntry> list = (List<SCProductEntry>)QueryUtil.list(q,
 						getDialect(), start, end);
 
-				FinderCache.putResult(finderClassNameCacheEnabled,
+				FinderCacheUtil.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
 					finderArgs, list);
 
@@ -1101,8 +1098,8 @@ public class SCProductEntryPersistenceImpl extends BasePersistence
 		Object result = null;
 
 		if (finderClassNameCacheEnabled) {
-			result = FinderCache.getResult(finderClassName, finderMethodName,
-					finderParams, finderArgs, getSessionFactory());
+			result = FinderCacheUtil.getResult(finderClassName,
+					finderMethodName, finderParams, finderArgs, this);
 		}
 
 		if (result == null) {
@@ -1153,7 +1150,7 @@ public class SCProductEntryPersistenceImpl extends BasePersistence
 
 				List<SCProductEntry> list = q.list();
 
-				FinderCache.putResult(finderClassNameCacheEnabled,
+				FinderCacheUtil.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
 					finderArgs, list);
 
@@ -1249,8 +1246,8 @@ public class SCProductEntryPersistenceImpl extends BasePersistence
 		Object result = null;
 
 		if (finderClassNameCacheEnabled) {
-			result = FinderCache.getResult(finderClassName, finderMethodName,
-					finderParams, finderArgs, getSessionFactory());
+			result = FinderCacheUtil.getResult(finderClassName,
+					finderMethodName, finderParams, finderArgs, this);
 		}
 
 		if (result == null) {
@@ -1285,7 +1282,7 @@ public class SCProductEntryPersistenceImpl extends BasePersistence
 					Collections.sort(list);
 				}
 
-				FinderCache.putResult(finderClassNameCacheEnabled,
+				FinderCacheUtil.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
 					finderArgs, list);
 
@@ -1345,8 +1342,8 @@ public class SCProductEntryPersistenceImpl extends BasePersistence
 		Object result = null;
 
 		if (finderClassNameCacheEnabled) {
-			result = FinderCache.getResult(finderClassName, finderMethodName,
-					finderParams, finderArgs, getSessionFactory());
+			result = FinderCacheUtil.getResult(finderClassName,
+					finderMethodName, finderParams, finderArgs, this);
 		}
 
 		if (result == null) {
@@ -1383,7 +1380,7 @@ public class SCProductEntryPersistenceImpl extends BasePersistence
 					count = new Long(0);
 				}
 
-				FinderCache.putResult(finderClassNameCacheEnabled,
+				FinderCacheUtil.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
 					finderArgs, count);
 
@@ -1411,8 +1408,8 @@ public class SCProductEntryPersistenceImpl extends BasePersistence
 		Object result = null;
 
 		if (finderClassNameCacheEnabled) {
-			result = FinderCache.getResult(finderClassName, finderMethodName,
-					finderParams, finderArgs, getSessionFactory());
+			result = FinderCacheUtil.getResult(finderClassName,
+					finderMethodName, finderParams, finderArgs, this);
 		}
 
 		if (result == null) {
@@ -1449,7 +1446,7 @@ public class SCProductEntryPersistenceImpl extends BasePersistence
 					count = new Long(0);
 				}
 
-				FinderCache.putResult(finderClassNameCacheEnabled,
+				FinderCacheUtil.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
 					finderArgs, count);
 
@@ -1479,8 +1476,8 @@ public class SCProductEntryPersistenceImpl extends BasePersistence
 		Object result = null;
 
 		if (finderClassNameCacheEnabled) {
-			result = FinderCache.getResult(finderClassName, finderMethodName,
-					finderParams, finderArgs, getSessionFactory());
+			result = FinderCacheUtil.getResult(finderClassName,
+					finderMethodName, finderParams, finderArgs, this);
 		}
 
 		if (result == null) {
@@ -1523,7 +1520,7 @@ public class SCProductEntryPersistenceImpl extends BasePersistence
 					count = new Long(0);
 				}
 
-				FinderCache.putResult(finderClassNameCacheEnabled,
+				FinderCacheUtil.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
 					finderArgs, count);
 
@@ -1554,8 +1551,8 @@ public class SCProductEntryPersistenceImpl extends BasePersistence
 		Object result = null;
 
 		if (finderClassNameCacheEnabled) {
-			result = FinderCache.getResult(finderClassName, finderMethodName,
-					finderParams, finderArgs, getSessionFactory());
+			result = FinderCacheUtil.getResult(finderClassName,
+					finderMethodName, finderParams, finderArgs, this);
 		}
 
 		if (result == null) {
@@ -1612,7 +1609,7 @@ public class SCProductEntryPersistenceImpl extends BasePersistence
 					count = new Long(0);
 				}
 
-				FinderCache.putResult(finderClassNameCacheEnabled,
+				FinderCacheUtil.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
 					finderArgs, count);
 
@@ -1640,8 +1637,8 @@ public class SCProductEntryPersistenceImpl extends BasePersistence
 		Object result = null;
 
 		if (finderClassNameCacheEnabled) {
-			result = FinderCache.getResult(finderClassName, finderMethodName,
-					finderParams, finderArgs, getSessionFactory());
+			result = FinderCacheUtil.getResult(finderClassName,
+					finderMethodName, finderParams, finderArgs, this);
 		}
 
 		if (result == null) {
@@ -1665,7 +1662,7 @@ public class SCProductEntryPersistenceImpl extends BasePersistence
 					count = new Long(0);
 				}
 
-				FinderCache.putResult(finderClassNameCacheEnabled,
+				FinderCacheUtil.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
 					finderArgs, count);
 
@@ -1713,8 +1710,8 @@ public class SCProductEntryPersistenceImpl extends BasePersistence
 		Object result = null;
 
 		if (finderClassNameCacheEnabled) {
-			result = FinderCache.getResult(finderClassName, finderMethodName,
-					finderParams, finderArgs, getSessionFactory());
+			result = FinderCacheUtil.getResult(finderClassName,
+					finderMethodName, finderParams, finderArgs, this);
 		}
 
 		if (result == null) {
@@ -1752,7 +1749,7 @@ public class SCProductEntryPersistenceImpl extends BasePersistence
 				List<com.liferay.portlet.softwarecatalog.model.SCLicense> list = (List<com.liferay.portlet.softwarecatalog.model.SCLicense>)QueryUtil.list(q,
 						getDialect(), start, end);
 
-				FinderCache.putResult(finderClassNameCacheEnabled,
+				FinderCacheUtil.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
 					finderArgs, list);
 
@@ -1782,8 +1779,8 @@ public class SCProductEntryPersistenceImpl extends BasePersistence
 		Object result = null;
 
 		if (finderClassNameCacheEnabled) {
-			result = FinderCache.getResult(finderClassName, finderMethodName,
-					finderParams, finderArgs, getSessionFactory());
+			result = FinderCacheUtil.getResult(finderClassName,
+					finderMethodName, finderParams, finderArgs, this);
 		}
 
 		if (result == null) {
@@ -1794,7 +1791,7 @@ public class SCProductEntryPersistenceImpl extends BasePersistence
 
 				SQLQuery q = session.createSQLQuery(_SQL_GETSCLICENSESSIZE);
 
-				q.addScalar(COUNT_COLUMN_NAME, Hibernate.LONG);
+				q.addScalar(COUNT_COLUMN_NAME, Type.LONG);
 
 				QueryPos qPos = QueryPos.getInstance(q);
 
@@ -1812,7 +1809,7 @@ public class SCProductEntryPersistenceImpl extends BasePersistence
 					count = new Long(0);
 				}
 
-				FinderCache.putResult(finderClassNameCacheEnabled,
+				FinderCacheUtil.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
 					finderArgs, count);
 
@@ -1847,8 +1844,8 @@ public class SCProductEntryPersistenceImpl extends BasePersistence
 		Object result = null;
 
 		if (finderClassNameCacheEnabled) {
-			result = FinderCache.getResult(finderClassName, finderMethodName,
-					finderParams, finderArgs, getSessionFactory());
+			result = FinderCacheUtil.getResult(finderClassName,
+					finderMethodName, finderParams, finderArgs, this);
 		}
 
 		if (result == null) {
@@ -1856,7 +1853,7 @@ public class SCProductEntryPersistenceImpl extends BasePersistence
 				Boolean value = Boolean.valueOf(containsSCLicense.contains(pk,
 							scLicensePK));
 
-				FinderCache.putResult(finderClassNameCacheEnabled,
+				FinderCacheUtil.putResult(finderClassNameCacheEnabled,
 					finderClassName, finderMethodName, finderParams,
 					finderArgs, value);
 
@@ -1889,7 +1886,7 @@ public class SCProductEntryPersistenceImpl extends BasePersistence
 			throw new SystemException(dae);
 		}
 		finally {
-			FinderCache.clearCache("SCLicenses_SCProductEntries");
+			FinderCacheUtil.clearCache("SCLicenses_SCProductEntries");
 		}
 	}
 
@@ -1903,7 +1900,7 @@ public class SCProductEntryPersistenceImpl extends BasePersistence
 			throw new SystemException(dae);
 		}
 		finally {
-			FinderCache.clearCache("SCLicenses_SCProductEntries");
+			FinderCacheUtil.clearCache("SCLicenses_SCProductEntries");
 		}
 	}
 
@@ -1918,7 +1915,7 @@ public class SCProductEntryPersistenceImpl extends BasePersistence
 			throw new SystemException(dae);
 		}
 		finally {
-			FinderCache.clearCache("SCLicenses_SCProductEntries");
+			FinderCacheUtil.clearCache("SCLicenses_SCProductEntries");
 		}
 	}
 
@@ -1934,7 +1931,7 @@ public class SCProductEntryPersistenceImpl extends BasePersistence
 			throw new SystemException(dae);
 		}
 		finally {
-			FinderCache.clearCache("SCLicenses_SCProductEntries");
+			FinderCacheUtil.clearCache("SCLicenses_SCProductEntries");
 		}
 	}
 
@@ -1946,7 +1943,7 @@ public class SCProductEntryPersistenceImpl extends BasePersistence
 			throw new SystemException(dae);
 		}
 		finally {
-			FinderCache.clearCache("SCLicenses_SCProductEntries");
+			FinderCacheUtil.clearCache("SCLicenses_SCProductEntries");
 		}
 	}
 
@@ -1959,7 +1956,7 @@ public class SCProductEntryPersistenceImpl extends BasePersistence
 			throw new SystemException(dae);
 		}
 		finally {
-			FinderCache.clearCache("SCLicenses_SCProductEntries");
+			FinderCacheUtil.clearCache("SCLicenses_SCProductEntries");
 		}
 	}
 
@@ -1973,7 +1970,7 @@ public class SCProductEntryPersistenceImpl extends BasePersistence
 			throw new SystemException(dae);
 		}
 		finally {
-			FinderCache.clearCache("SCLicenses_SCProductEntries");
+			FinderCacheUtil.clearCache("SCLicenses_SCProductEntries");
 		}
 	}
 
@@ -1988,7 +1985,7 @@ public class SCProductEntryPersistenceImpl extends BasePersistence
 			throw new SystemException(dae);
 		}
 		finally {
-			FinderCache.clearCache("SCLicenses_SCProductEntries");
+			FinderCacheUtil.clearCache("SCLicenses_SCProductEntries");
 		}
 	}
 
@@ -2004,7 +2001,7 @@ public class SCProductEntryPersistenceImpl extends BasePersistence
 			throw new SystemException(dae);
 		}
 		finally {
-			FinderCache.clearCache("SCLicenses_SCProductEntries");
+			FinderCacheUtil.clearCache("SCLicenses_SCProductEntries");
 		}
 	}
 
@@ -2021,7 +2018,7 @@ public class SCProductEntryPersistenceImpl extends BasePersistence
 			throw new SystemException(dae);
 		}
 		finally {
-			FinderCache.clearCache("SCLicenses_SCProductEntries");
+			FinderCacheUtil.clearCache("SCLicenses_SCProductEntries");
 		}
 	}
 
@@ -2039,7 +2036,7 @@ public class SCProductEntryPersistenceImpl extends BasePersistence
 			throw new SystemException(dae);
 		}
 		finally {
-			FinderCache.clearCache("SCLicenses_SCProductEntries");
+			FinderCacheUtil.clearCache("SCLicenses_SCProductEntries");
 		}
 	}
 
@@ -2061,7 +2058,7 @@ public class SCProductEntryPersistenceImpl extends BasePersistence
 
 	protected void init() {
 		String[] listenerClassNames = StringUtil.split(GetterUtil.getString(
-					PropsUtil.get(
+					com.liferay.portal.util.PropsUtil.get(
 						"value.object.listener.com.liferay.portlet.softwarecatalog.model.SCProductEntry")));
 
 		if (listenerClassNames.length > 0) {

@@ -22,7 +22,6 @@
 
 package com.liferay.portlet.imagegallery.service;
 
-import com.liferay.portal.kernel.bean.BeanLocatorUtil;
 
 /**
  * <a href="IGFolderServiceFactory.java.html"><b><i>View Source</i></b></a>
@@ -58,7 +57,7 @@ public class IGFolderServiceFactory {
 
 	public static IGFolderService getImpl() {
 		if (_impl == null) {
-			_impl = (IGFolderService)BeanLocatorUtil.locate(_IMPL);
+			_impl = (IGFolderService)com.liferay.portal.kernel.bean.BeanLocatorUtil.locate(_IMPL);
 		}
 
 		return _impl;
@@ -66,7 +65,7 @@ public class IGFolderServiceFactory {
 
 	public static IGFolderService getTxImpl() {
 		if (_txImpl == null) {
-			_txImpl = (IGFolderService)BeanLocatorUtil.locate(_TX_IMPL);
+			_txImpl = (IGFolderService)com.liferay.portal.kernel.bean.BeanLocatorUtil.locate(_TX_IMPL);
 		}
 
 		return _txImpl;
@@ -78,7 +77,7 @@ public class IGFolderServiceFactory {
 
 	private static IGFolderServiceFactory _getFactory() {
 		if (_factory == null) {
-			_factory = (IGFolderServiceFactory)BeanLocatorUtil.locate(_FACTORY);
+			_factory = (IGFolderServiceFactory)com.liferay.portal.kernel.bean.BeanLocatorUtil.locate(_FACTORY);
 		}
 
 		return _factory;

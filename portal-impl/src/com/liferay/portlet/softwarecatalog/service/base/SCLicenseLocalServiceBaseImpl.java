@@ -29,7 +29,7 @@ import com.liferay.counter.service.CounterServiceFactory;
 
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
-import com.liferay.portal.kernel.dao.DynamicQueryInitializer;
+import com.liferay.portal.kernel.dao.search.DynamicQueryInitializer;
 
 import com.liferay.portlet.softwarecatalog.model.SCLicense;
 import com.liferay.portlet.softwarecatalog.service.SCFrameworkVersionLocalService;

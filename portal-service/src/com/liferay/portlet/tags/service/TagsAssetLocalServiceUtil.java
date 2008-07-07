@@ -76,7 +76,7 @@ public class TagsAssetLocalServiceUtil {
 	}
 
 	public static java.util.List<com.liferay.portlet.tags.model.TagsAsset> dynamicQuery(
-		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer)
+		com.liferay.portal.kernel.dao.search.DynamicQueryInitializer queryInitializer)
 		throws com.liferay.portal.SystemException {
 		TagsAssetLocalService tagsAssetLocalService = TagsAssetLocalServiceFactory.getService();
 
@@ -84,7 +84,7 @@ public class TagsAssetLocalServiceUtil {
 	}
 
 	public static java.util.List<com.liferay.portlet.tags.model.TagsAsset> dynamicQuery(
-		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer,
+		com.liferay.portal.kernel.dao.search.DynamicQueryInitializer queryInitializer,
 		int start, int end) throws com.liferay.portal.SystemException {
 		TagsAssetLocalService tagsAssetLocalService = TagsAssetLocalServiceFactory.getService();
 

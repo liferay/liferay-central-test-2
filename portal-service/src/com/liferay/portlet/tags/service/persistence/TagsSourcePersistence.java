@@ -76,11 +76,11 @@ public interface TagsSourcePersistence {
 		long sourceId) throws com.liferay.portal.SystemException;
 
 	public java.util.List<com.liferay.portlet.tags.model.TagsSource> findWithDynamicQuery(
-		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer)
+		com.liferay.portal.kernel.dao.search.DynamicQueryInitializer queryInitializer)
 		throws com.liferay.portal.SystemException;
 
 	public java.util.List<com.liferay.portlet.tags.model.TagsSource> findWithDynamicQuery(
-		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer,
+		com.liferay.portal.kernel.dao.search.DynamicQueryInitializer queryInitializer,
 		int start, int end) throws com.liferay.portal.SystemException;
 
 	public java.util.List<com.liferay.portlet.tags.model.TagsSource> findAll()

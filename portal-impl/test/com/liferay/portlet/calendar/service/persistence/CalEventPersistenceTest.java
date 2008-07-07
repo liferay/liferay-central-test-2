@@ -22,7 +22,6 @@
 
 package com.liferay.portlet.calendar.service.persistence;
 
-import com.liferay.portal.kernel.bean.BeanLocatorUtil;
 import com.liferay.portal.service.persistence.BasePersistenceTestCase;
 
 import com.liferay.portlet.calendar.NoSuchEventException;
@@ -38,7 +37,7 @@ public class CalEventPersistenceTest extends BasePersistenceTestCase {
 	protected void setUp() throws Exception {
 		super.setUp();
 
-		_persistence = (CalEventPersistence)BeanLocatorUtil.locate(_TX_IMPL);
+		_persistence = (CalEventPersistence)com.liferay.portal.kernel.bean.BeanLocatorUtil.locate(_TX_IMPL);
 	}
 
 	public void testCreate() throws Exception {

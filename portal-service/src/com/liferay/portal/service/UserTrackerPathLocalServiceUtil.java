@@ -76,7 +76,7 @@ public class UserTrackerPathLocalServiceUtil {
 	}
 
 	public static java.util.List<com.liferay.portal.model.UserTrackerPath> dynamicQuery(
-		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer)
+		com.liferay.portal.kernel.dao.search.DynamicQueryInitializer queryInitializer)
 		throws com.liferay.portal.SystemException {
 		UserTrackerPathLocalService userTrackerPathLocalService = UserTrackerPathLocalServiceFactory.getService();
 
@@ -84,7 +84,7 @@ public class UserTrackerPathLocalServiceUtil {
 	}
 
 	public static java.util.List<com.liferay.portal.model.UserTrackerPath> dynamicQuery(
-		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer,
+		com.liferay.portal.kernel.dao.search.DynamicQueryInitializer queryInitializer,
 		int start, int end) throws com.liferay.portal.SystemException {
 		UserTrackerPathLocalService userTrackerPathLocalService = UserTrackerPathLocalServiceFactory.getService();
 

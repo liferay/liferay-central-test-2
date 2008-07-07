@@ -22,7 +22,6 @@
 
 package com.liferay.portlet.social.service;
 
-import com.liferay.portal.kernel.bean.BeanLocatorUtil;
 
 /**
  * <a href="SocialActivityLocalServiceFactory.java.html"><b><i>View Source</i></b></a>
@@ -58,7 +57,7 @@ public class SocialActivityLocalServiceFactory {
 
 	public static SocialActivityLocalService getImpl() {
 		if (_impl == null) {
-			_impl = (SocialActivityLocalService)BeanLocatorUtil.locate(_IMPL);
+			_impl = (SocialActivityLocalService)com.liferay.portal.kernel.bean.BeanLocatorUtil.locate(_IMPL);
 		}
 
 		return _impl;
@@ -66,7 +65,7 @@ public class SocialActivityLocalServiceFactory {
 
 	public static SocialActivityLocalService getTxImpl() {
 		if (_txImpl == null) {
-			_txImpl = (SocialActivityLocalService)BeanLocatorUtil.locate(_TX_IMPL);
+			_txImpl = (SocialActivityLocalService)com.liferay.portal.kernel.bean.BeanLocatorUtil.locate(_TX_IMPL);
 		}
 
 		return _txImpl;
@@ -78,7 +77,7 @@ public class SocialActivityLocalServiceFactory {
 
 	private static SocialActivityLocalServiceFactory _getFactory() {
 		if (_factory == null) {
-			_factory = (SocialActivityLocalServiceFactory)BeanLocatorUtil.locate(_FACTORY);
+			_factory = (SocialActivityLocalServiceFactory)com.liferay.portal.kernel.bean.BeanLocatorUtil.locate(_FACTORY);
 		}
 
 		return _factory;

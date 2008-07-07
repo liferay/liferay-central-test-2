@@ -22,7 +22,6 @@
 
 package com.liferay.portlet.messageboards.service;
 
-import com.liferay.portal.kernel.bean.BeanLocatorUtil;
 
 /**
  * <a href="MBThreadLocalServiceFactory.java.html"><b><i>View Source</i></b></a>
@@ -58,7 +57,7 @@ public class MBThreadLocalServiceFactory {
 
 	public static MBThreadLocalService getImpl() {
 		if (_impl == null) {
-			_impl = (MBThreadLocalService)BeanLocatorUtil.locate(_IMPL);
+			_impl = (MBThreadLocalService)com.liferay.portal.kernel.bean.BeanLocatorUtil.locate(_IMPL);
 		}
 
 		return _impl;
@@ -66,7 +65,7 @@ public class MBThreadLocalServiceFactory {
 
 	public static MBThreadLocalService getTxImpl() {
 		if (_txImpl == null) {
-			_txImpl = (MBThreadLocalService)BeanLocatorUtil.locate(_TX_IMPL);
+			_txImpl = (MBThreadLocalService)com.liferay.portal.kernel.bean.BeanLocatorUtil.locate(_TX_IMPL);
 		}
 
 		return _txImpl;
@@ -78,7 +77,7 @@ public class MBThreadLocalServiceFactory {
 
 	private static MBThreadLocalServiceFactory _getFactory() {
 		if (_factory == null) {
-			_factory = (MBThreadLocalServiceFactory)BeanLocatorUtil.locate(_FACTORY);
+			_factory = (MBThreadLocalServiceFactory)com.liferay.portal.kernel.bean.BeanLocatorUtil.locate(_FACTORY);
 		}
 
 		return _factory;

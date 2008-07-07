@@ -76,7 +76,7 @@ public class ExpandoTableLocalServiceUtil {
 	}
 
 	public static java.util.List<com.liferay.portlet.expando.model.ExpandoTable> dynamicQuery(
-		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer)
+		com.liferay.portal.kernel.dao.search.DynamicQueryInitializer queryInitializer)
 		throws com.liferay.portal.SystemException {
 		ExpandoTableLocalService expandoTableLocalService = ExpandoTableLocalServiceFactory.getService();
 
@@ -84,7 +84,7 @@ public class ExpandoTableLocalServiceUtil {
 	}
 
 	public static java.util.List<com.liferay.portlet.expando.model.ExpandoTable> dynamicQuery(
-		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer,
+		com.liferay.portal.kernel.dao.search.DynamicQueryInitializer queryInitializer,
 		int start, int end) throws com.liferay.portal.SystemException {
 		ExpandoTableLocalService expandoTableLocalService = ExpandoTableLocalServiceFactory.getService();
 

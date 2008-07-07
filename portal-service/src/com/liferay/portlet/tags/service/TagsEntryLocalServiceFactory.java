@@ -22,7 +22,6 @@
 
 package com.liferay.portlet.tags.service;
 
-import com.liferay.portal.kernel.bean.BeanLocatorUtil;
 
 /**
  * <a href="TagsEntryLocalServiceFactory.java.html"><b><i>View Source</i></b></a>
@@ -58,7 +57,7 @@ public class TagsEntryLocalServiceFactory {
 
 	public static TagsEntryLocalService getImpl() {
 		if (_impl == null) {
-			_impl = (TagsEntryLocalService)BeanLocatorUtil.locate(_IMPL);
+			_impl = (TagsEntryLocalService)com.liferay.portal.kernel.bean.BeanLocatorUtil.locate(_IMPL);
 		}
 
 		return _impl;
@@ -66,7 +65,7 @@ public class TagsEntryLocalServiceFactory {
 
 	public static TagsEntryLocalService getTxImpl() {
 		if (_txImpl == null) {
-			_txImpl = (TagsEntryLocalService)BeanLocatorUtil.locate(_TX_IMPL);
+			_txImpl = (TagsEntryLocalService)com.liferay.portal.kernel.bean.BeanLocatorUtil.locate(_TX_IMPL);
 		}
 
 		return _txImpl;
@@ -78,7 +77,7 @@ public class TagsEntryLocalServiceFactory {
 
 	private static TagsEntryLocalServiceFactory _getFactory() {
 		if (_factory == null) {
-			_factory = (TagsEntryLocalServiceFactory)BeanLocatorUtil.locate(_FACTORY);
+			_factory = (TagsEntryLocalServiceFactory)com.liferay.portal.kernel.bean.BeanLocatorUtil.locate(_FACTORY);
 		}
 
 		return _factory;

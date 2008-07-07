@@ -22,7 +22,6 @@
 
 package com.liferay.portal.service;
 
-import com.liferay.portal.kernel.bean.BeanLocatorUtil;
 
 /**
  * <a href="CountryServiceFactory.java.html"><b><i>View Source</i></b></a>
@@ -58,7 +57,7 @@ public class CountryServiceFactory {
 
 	public static CountryService getImpl() {
 		if (_impl == null) {
-			_impl = (CountryService)BeanLocatorUtil.locate(_IMPL);
+			_impl = (CountryService)com.liferay.portal.kernel.bean.BeanLocatorUtil.locate(_IMPL);
 		}
 
 		return _impl;
@@ -66,7 +65,7 @@ public class CountryServiceFactory {
 
 	public static CountryService getTxImpl() {
 		if (_txImpl == null) {
-			_txImpl = (CountryService)BeanLocatorUtil.locate(_TX_IMPL);
+			_txImpl = (CountryService)com.liferay.portal.kernel.bean.BeanLocatorUtil.locate(_TX_IMPL);
 		}
 
 		return _txImpl;
@@ -78,7 +77,7 @@ public class CountryServiceFactory {
 
 	private static CountryServiceFactory _getFactory() {
 		if (_factory == null) {
-			_factory = (CountryServiceFactory)BeanLocatorUtil.locate(_FACTORY);
+			_factory = (CountryServiceFactory)com.liferay.portal.kernel.bean.BeanLocatorUtil.locate(_FACTORY);
 		}
 
 		return _factory;

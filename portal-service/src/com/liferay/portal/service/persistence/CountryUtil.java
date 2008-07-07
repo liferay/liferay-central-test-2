@@ -132,13 +132,13 @@ public class CountryUtil {
 	}
 
 	public static java.util.List<com.liferay.portal.model.Country> findWithDynamicQuery(
-		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer)
+		com.liferay.portal.kernel.dao.search.DynamicQueryInitializer queryInitializer)
 		throws com.liferay.portal.SystemException {
 		return getPersistence().findWithDynamicQuery(queryInitializer);
 	}
 
 	public static java.util.List<com.liferay.portal.model.Country> findWithDynamicQuery(
-		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer,
+		com.liferay.portal.kernel.dao.search.DynamicQueryInitializer queryInitializer,
 		int start, int end) throws com.liferay.portal.SystemException {
 		return getPersistence()
 				   .findWithDynamicQuery(queryInitializer, start, end);

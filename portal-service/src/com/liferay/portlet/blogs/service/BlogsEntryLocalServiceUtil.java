@@ -76,7 +76,7 @@ public class BlogsEntryLocalServiceUtil {
 	}
 
 	public static java.util.List<com.liferay.portlet.blogs.model.BlogsEntry> dynamicQuery(
-		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer)
+		com.liferay.portal.kernel.dao.search.DynamicQueryInitializer queryInitializer)
 		throws com.liferay.portal.SystemException {
 		BlogsEntryLocalService blogsEntryLocalService = BlogsEntryLocalServiceFactory.getService();
 
@@ -84,7 +84,7 @@ public class BlogsEntryLocalServiceUtil {
 	}
 
 	public static java.util.List<com.liferay.portlet.blogs.model.BlogsEntry> dynamicQuery(
-		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer,
+		com.liferay.portal.kernel.dao.search.DynamicQueryInitializer queryInitializer,
 		int start, int end) throws com.liferay.portal.SystemException {
 		BlogsEntryLocalService blogsEntryLocalService = BlogsEntryLocalServiceFactory.getService();
 

@@ -22,7 +22,6 @@
 
 package com.liferay.portal.service;
 
-import com.liferay.portal.kernel.bean.BeanLocatorUtil;
 
 /**
  * <a href="ReleaseLocalServiceFactory.java.html"><b><i>View Source</i></b></a>
@@ -58,7 +57,7 @@ public class ReleaseLocalServiceFactory {
 
 	public static ReleaseLocalService getImpl() {
 		if (_impl == null) {
-			_impl = (ReleaseLocalService)BeanLocatorUtil.locate(_IMPL);
+			_impl = (ReleaseLocalService)com.liferay.portal.kernel.bean.BeanLocatorUtil.locate(_IMPL);
 		}
 
 		return _impl;
@@ -66,7 +65,7 @@ public class ReleaseLocalServiceFactory {
 
 	public static ReleaseLocalService getTxImpl() {
 		if (_txImpl == null) {
-			_txImpl = (ReleaseLocalService)BeanLocatorUtil.locate(_TX_IMPL);
+			_txImpl = (ReleaseLocalService)com.liferay.portal.kernel.bean.BeanLocatorUtil.locate(_TX_IMPL);
 		}
 
 		return _txImpl;
@@ -78,7 +77,7 @@ public class ReleaseLocalServiceFactory {
 
 	private static ReleaseLocalServiceFactory _getFactory() {
 		if (_factory == null) {
-			_factory = (ReleaseLocalServiceFactory)BeanLocatorUtil.locate(_FACTORY);
+			_factory = (ReleaseLocalServiceFactory)com.liferay.portal.kernel.bean.BeanLocatorUtil.locate(_FACTORY);
 		}
 
 		return _factory;

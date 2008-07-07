@@ -22,7 +22,6 @@
 
 package com.liferay.portlet.softwarecatalog.service;
 
-import com.liferay.portal.kernel.bean.BeanLocatorUtil;
 
 /**
  * <a href="SCProductEntryLocalServiceFactory.java.html"><b><i>View Source</i></b></a>
@@ -58,7 +57,7 @@ public class SCProductEntryLocalServiceFactory {
 
 	public static SCProductEntryLocalService getImpl() {
 		if (_impl == null) {
-			_impl = (SCProductEntryLocalService)BeanLocatorUtil.locate(_IMPL);
+			_impl = (SCProductEntryLocalService)com.liferay.portal.kernel.bean.BeanLocatorUtil.locate(_IMPL);
 		}
 
 		return _impl;
@@ -66,7 +65,7 @@ public class SCProductEntryLocalServiceFactory {
 
 	public static SCProductEntryLocalService getTxImpl() {
 		if (_txImpl == null) {
-			_txImpl = (SCProductEntryLocalService)BeanLocatorUtil.locate(_TX_IMPL);
+			_txImpl = (SCProductEntryLocalService)com.liferay.portal.kernel.bean.BeanLocatorUtil.locate(_TX_IMPL);
 		}
 
 		return _txImpl;
@@ -78,7 +77,7 @@ public class SCProductEntryLocalServiceFactory {
 
 	private static SCProductEntryLocalServiceFactory _getFactory() {
 		if (_factory == null) {
-			_factory = (SCProductEntryLocalServiceFactory)BeanLocatorUtil.locate(_FACTORY);
+			_factory = (SCProductEntryLocalServiceFactory)com.liferay.portal.kernel.bean.BeanLocatorUtil.locate(_FACTORY);
 		}
 
 		return _factory;

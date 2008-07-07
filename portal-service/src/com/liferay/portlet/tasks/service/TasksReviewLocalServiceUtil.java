@@ -76,7 +76,7 @@ public class TasksReviewLocalServiceUtil {
 	}
 
 	public static java.util.List<com.liferay.portlet.tasks.model.TasksReview> dynamicQuery(
-		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer)
+		com.liferay.portal.kernel.dao.search.DynamicQueryInitializer queryInitializer)
 		throws com.liferay.portal.SystemException {
 		TasksReviewLocalService tasksReviewLocalService = TasksReviewLocalServiceFactory.getService();
 
@@ -84,7 +84,7 @@ public class TasksReviewLocalServiceUtil {
 	}
 
 	public static java.util.List<com.liferay.portlet.tasks.model.TasksReview> dynamicQuery(
-		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer,
+		com.liferay.portal.kernel.dao.search.DynamicQueryInitializer queryInitializer,
 		int start, int end) throws com.liferay.portal.SystemException {
 		TasksReviewLocalService tasksReviewLocalService = TasksReviewLocalServiceFactory.getService();
 

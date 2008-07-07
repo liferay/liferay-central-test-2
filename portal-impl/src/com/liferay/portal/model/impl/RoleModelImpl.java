@@ -28,7 +28,6 @@ import com.liferay.portal.kernel.util.HtmlUtil;
 import com.liferay.portal.model.Role;
 import com.liferay.portal.model.RoleSoap;
 import com.liferay.portal.util.PortalUtil;
-import com.liferay.portal.util.PropsUtil;
 
 import java.io.Serializable;
 
@@ -87,7 +86,7 @@ public class RoleModelImpl extends BaseModelImpl {
 	public static final String DATA_SOURCE = "liferayDataSource";
 	public static final String SESSION_FACTORY = "liferaySessionFactory";
 	public static final String TX_MANAGER = "liferayTransactionManager";
-	public static final boolean CACHE_ENABLED = GetterUtil.getBoolean(PropsUtil.get(
+	public static final boolean CACHE_ENABLED = GetterUtil.getBoolean(com.liferay.portal.util.PropsUtil.get(
 				"value.object.finder.cache.enabled.com.liferay.portal.model.Role"),
 			true);
 
@@ -116,10 +115,10 @@ public class RoleModelImpl extends BaseModelImpl {
 	}
 
 	public static final boolean CACHE_ENABLED_GROUPS_ROLES = com.liferay.portal.model.impl.GroupModelImpl.CACHE_ENABLED_GROUPS_ROLES;
-	public static final boolean CACHE_ENABLED_ROLES_PERMISSIONS = GetterUtil.getBoolean(PropsUtil.get(
+	public static final boolean CACHE_ENABLED_ROLES_PERMISSIONS = GetterUtil.getBoolean(com.liferay.portal.util.PropsUtil.get(
 				"value.object.finder.cache.enabled.Roles_Permissions"), true);
 	public static final boolean CACHE_ENABLED_USERS_ROLES = com.liferay.portal.model.impl.UserModelImpl.CACHE_ENABLED_USERS_ROLES;
-	public static final long LOCK_EXPIRATION_TIME = GetterUtil.getLong(PropsUtil.get(
+	public static final long LOCK_EXPIRATION_TIME = GetterUtil.getLong(com.liferay.portal.util.PropsUtil.get(
 				"lock.expiration.time.com.liferay.portal.model.Role"));
 
 	public RoleModelImpl() {

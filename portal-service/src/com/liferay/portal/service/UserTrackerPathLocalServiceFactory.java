@@ -22,7 +22,6 @@
 
 package com.liferay.portal.service;
 
-import com.liferay.portal.kernel.bean.BeanLocatorUtil;
 
 /**
  * <a href="UserTrackerPathLocalServiceFactory.java.html"><b><i>View Source</i></b></a>
@@ -58,7 +57,7 @@ public class UserTrackerPathLocalServiceFactory {
 
 	public static UserTrackerPathLocalService getImpl() {
 		if (_impl == null) {
-			_impl = (UserTrackerPathLocalService)BeanLocatorUtil.locate(_IMPL);
+			_impl = (UserTrackerPathLocalService)com.liferay.portal.kernel.bean.BeanLocatorUtil.locate(_IMPL);
 		}
 
 		return _impl;
@@ -66,7 +65,7 @@ public class UserTrackerPathLocalServiceFactory {
 
 	public static UserTrackerPathLocalService getTxImpl() {
 		if (_txImpl == null) {
-			_txImpl = (UserTrackerPathLocalService)BeanLocatorUtil.locate(_TX_IMPL);
+			_txImpl = (UserTrackerPathLocalService)com.liferay.portal.kernel.bean.BeanLocatorUtil.locate(_TX_IMPL);
 		}
 
 		return _txImpl;
@@ -78,7 +77,7 @@ public class UserTrackerPathLocalServiceFactory {
 
 	private static UserTrackerPathLocalServiceFactory _getFactory() {
 		if (_factory == null) {
-			_factory = (UserTrackerPathLocalServiceFactory)BeanLocatorUtil.locate(_FACTORY);
+			_factory = (UserTrackerPathLocalServiceFactory)com.liferay.portal.kernel.bean.BeanLocatorUtil.locate(_FACTORY);
 		}
 
 		return _factory;

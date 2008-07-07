@@ -22,7 +22,6 @@
 
 package com.liferay.portal.service;
 
-import com.liferay.portal.kernel.bean.BeanLocatorUtil;
 
 /**
  * <a href="PhoneLocalServiceFactory.java.html"><b><i>View Source</i></b></a>
@@ -58,7 +57,7 @@ public class PhoneLocalServiceFactory {
 
 	public static PhoneLocalService getImpl() {
 		if (_impl == null) {
-			_impl = (PhoneLocalService)BeanLocatorUtil.locate(_IMPL);
+			_impl = (PhoneLocalService)com.liferay.portal.kernel.bean.BeanLocatorUtil.locate(_IMPL);
 		}
 
 		return _impl;
@@ -66,7 +65,7 @@ public class PhoneLocalServiceFactory {
 
 	public static PhoneLocalService getTxImpl() {
 		if (_txImpl == null) {
-			_txImpl = (PhoneLocalService)BeanLocatorUtil.locate(_TX_IMPL);
+			_txImpl = (PhoneLocalService)com.liferay.portal.kernel.bean.BeanLocatorUtil.locate(_TX_IMPL);
 		}
 
 		return _txImpl;
@@ -78,7 +77,7 @@ public class PhoneLocalServiceFactory {
 
 	private static PhoneLocalServiceFactory _getFactory() {
 		if (_factory == null) {
-			_factory = (PhoneLocalServiceFactory)BeanLocatorUtil.locate(_FACTORY);
+			_factory = (PhoneLocalServiceFactory)com.liferay.portal.kernel.bean.BeanLocatorUtil.locate(_FACTORY);
 		}
 
 		return _factory;

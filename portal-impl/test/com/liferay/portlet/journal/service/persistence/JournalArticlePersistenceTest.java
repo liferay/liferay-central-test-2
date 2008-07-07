@@ -22,7 +22,6 @@
 
 package com.liferay.portlet.journal.service.persistence;
 
-import com.liferay.portal.kernel.bean.BeanLocatorUtil;
 import com.liferay.portal.service.persistence.BasePersistenceTestCase;
 
 import com.liferay.portlet.journal.NoSuchArticleException;
@@ -38,7 +37,7 @@ public class JournalArticlePersistenceTest extends BasePersistenceTestCase {
 	protected void setUp() throws Exception {
 		super.setUp();
 
-		_persistence = (JournalArticlePersistence)BeanLocatorUtil.locate(_TX_IMPL);
+		_persistence = (JournalArticlePersistence)com.liferay.portal.kernel.bean.BeanLocatorUtil.locate(_TX_IMPL);
 	}
 
 	public void testCreate() throws Exception {

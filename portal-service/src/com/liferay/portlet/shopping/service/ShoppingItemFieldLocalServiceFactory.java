@@ -22,7 +22,6 @@
 
 package com.liferay.portlet.shopping.service;
 
-import com.liferay.portal.kernel.bean.BeanLocatorUtil;
 
 /**
  * <a href="ShoppingItemFieldLocalServiceFactory.java.html"><b><i>View Source</i></b></a>
@@ -58,7 +57,7 @@ public class ShoppingItemFieldLocalServiceFactory {
 
 	public static ShoppingItemFieldLocalService getImpl() {
 		if (_impl == null) {
-			_impl = (ShoppingItemFieldLocalService)BeanLocatorUtil.locate(_IMPL);
+			_impl = (ShoppingItemFieldLocalService)com.liferay.portal.kernel.bean.BeanLocatorUtil.locate(_IMPL);
 		}
 
 		return _impl;
@@ -66,7 +65,7 @@ public class ShoppingItemFieldLocalServiceFactory {
 
 	public static ShoppingItemFieldLocalService getTxImpl() {
 		if (_txImpl == null) {
-			_txImpl = (ShoppingItemFieldLocalService)BeanLocatorUtil.locate(_TX_IMPL);
+			_txImpl = (ShoppingItemFieldLocalService)com.liferay.portal.kernel.bean.BeanLocatorUtil.locate(_TX_IMPL);
 		}
 
 		return _txImpl;
@@ -78,7 +77,7 @@ public class ShoppingItemFieldLocalServiceFactory {
 
 	private static ShoppingItemFieldLocalServiceFactory _getFactory() {
 		if (_factory == null) {
-			_factory = (ShoppingItemFieldLocalServiceFactory)BeanLocatorUtil.locate(_FACTORY);
+			_factory = (ShoppingItemFieldLocalServiceFactory)com.liferay.portal.kernel.bean.BeanLocatorUtil.locate(_FACTORY);
 		}
 
 		return _factory;

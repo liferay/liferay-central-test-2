@@ -22,7 +22,6 @@
 
 package com.liferay.portlet.journal.service;
 
-import com.liferay.portal.kernel.bean.BeanLocatorUtil;
 
 /**
  * <a href="JournalFeedServiceFactory.java.html"><b><i>View Source</i></b></a>
@@ -58,7 +57,7 @@ public class JournalFeedServiceFactory {
 
 	public static JournalFeedService getImpl() {
 		if (_impl == null) {
-			_impl = (JournalFeedService)BeanLocatorUtil.locate(_IMPL);
+			_impl = (JournalFeedService)com.liferay.portal.kernel.bean.BeanLocatorUtil.locate(_IMPL);
 		}
 
 		return _impl;
@@ -66,7 +65,7 @@ public class JournalFeedServiceFactory {
 
 	public static JournalFeedService getTxImpl() {
 		if (_txImpl == null) {
-			_txImpl = (JournalFeedService)BeanLocatorUtil.locate(_TX_IMPL);
+			_txImpl = (JournalFeedService)com.liferay.portal.kernel.bean.BeanLocatorUtil.locate(_TX_IMPL);
 		}
 
 		return _txImpl;
@@ -78,7 +77,7 @@ public class JournalFeedServiceFactory {
 
 	private static JournalFeedServiceFactory _getFactory() {
 		if (_factory == null) {
-			_factory = (JournalFeedServiceFactory)BeanLocatorUtil.locate(_FACTORY);
+			_factory = (JournalFeedServiceFactory)com.liferay.portal.kernel.bean.BeanLocatorUtil.locate(_FACTORY);
 		}
 
 		return _factory;

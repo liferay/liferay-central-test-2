@@ -76,7 +76,7 @@ public class BookmarksFolderLocalServiceUtil {
 	}
 
 	public static java.util.List<com.liferay.portlet.bookmarks.model.BookmarksFolder> dynamicQuery(
-		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer)
+		com.liferay.portal.kernel.dao.search.DynamicQueryInitializer queryInitializer)
 		throws com.liferay.portal.SystemException {
 		BookmarksFolderLocalService bookmarksFolderLocalService = BookmarksFolderLocalServiceFactory.getService();
 
@@ -84,7 +84,7 @@ public class BookmarksFolderLocalServiceUtil {
 	}
 
 	public static java.util.List<com.liferay.portlet.bookmarks.model.BookmarksFolder> dynamicQuery(
-		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer,
+		com.liferay.portal.kernel.dao.search.DynamicQueryInitializer queryInitializer,
 		int start, int end) throws com.liferay.portal.SystemException {
 		BookmarksFolderLocalService bookmarksFolderLocalService = BookmarksFolderLocalServiceFactory.getService();
 

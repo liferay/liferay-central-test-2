@@ -22,7 +22,6 @@
 
 package com.liferay.portlet.expando.service;
 
-import com.liferay.portal.kernel.bean.BeanLocatorUtil;
 
 /**
  * <a href="ExpandoColumnLocalServiceFactory.java.html"><b><i>View Source</i></b></a>
@@ -58,7 +57,7 @@ public class ExpandoColumnLocalServiceFactory {
 
 	public static ExpandoColumnLocalService getImpl() {
 		if (_impl == null) {
-			_impl = (ExpandoColumnLocalService)BeanLocatorUtil.locate(_IMPL);
+			_impl = (ExpandoColumnLocalService)com.liferay.portal.kernel.bean.BeanLocatorUtil.locate(_IMPL);
 		}
 
 		return _impl;
@@ -66,7 +65,7 @@ public class ExpandoColumnLocalServiceFactory {
 
 	public static ExpandoColumnLocalService getTxImpl() {
 		if (_txImpl == null) {
-			_txImpl = (ExpandoColumnLocalService)BeanLocatorUtil.locate(_TX_IMPL);
+			_txImpl = (ExpandoColumnLocalService)com.liferay.portal.kernel.bean.BeanLocatorUtil.locate(_TX_IMPL);
 		}
 
 		return _txImpl;
@@ -78,7 +77,7 @@ public class ExpandoColumnLocalServiceFactory {
 
 	private static ExpandoColumnLocalServiceFactory _getFactory() {
 		if (_factory == null) {
-			_factory = (ExpandoColumnLocalServiceFactory)BeanLocatorUtil.locate(_FACTORY);
+			_factory = (ExpandoColumnLocalServiceFactory)com.liferay.portal.kernel.bean.BeanLocatorUtil.locate(_FACTORY);
 		}
 
 		return _factory;

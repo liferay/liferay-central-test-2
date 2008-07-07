@@ -76,7 +76,7 @@ public class PollsChoiceLocalServiceUtil {
 	}
 
 	public static java.util.List<com.liferay.portlet.polls.model.PollsChoice> dynamicQuery(
-		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer)
+		com.liferay.portal.kernel.dao.search.DynamicQueryInitializer queryInitializer)
 		throws com.liferay.portal.SystemException {
 		PollsChoiceLocalService pollsChoiceLocalService = PollsChoiceLocalServiceFactory.getService();
 
@@ -84,7 +84,7 @@ public class PollsChoiceLocalServiceUtil {
 	}
 
 	public static java.util.List<com.liferay.portlet.polls.model.PollsChoice> dynamicQuery(
-		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer,
+		com.liferay.portal.kernel.dao.search.DynamicQueryInitializer queryInitializer,
 		int start, int end) throws com.liferay.portal.SystemException {
 		PollsChoiceLocalService pollsChoiceLocalService = PollsChoiceLocalServiceFactory.getService();
 
