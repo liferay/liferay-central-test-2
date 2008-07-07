@@ -48,6 +48,10 @@
 		<priority value="DEBUG" />
 	</category>
 
+	<category name="com.liferay.portal.dao.orm.hibernate.DynamicDialect">
+		<priority value="INFO" />
+	</category>
+
 	<category name="com.liferay.portal.deploy">
 		<priority value="INFO" />
 	</category>
@@ -320,18 +324,6 @@
 		<priority value="ERROR" />
 	</category>
 
-	<category name="com.liferay.portal.spring.hibernate.CustomSQLUtil">
-		<priority value="ERROR" />
-	</category>
-
-	<category name="com.liferay.portal.spring.hibernate.DynamicDialect">
-		<priority value="INFO" />
-	</category>
-
-	<category name="com.liferay.portal.spring.hibernate.HibernateUtil">
-		<priority value="ERROR" />
-	</category>
-
 	<category name="com.liferay.portal.struts">
 		<priority value="ERROR" />
 	</category>
@@ -556,12 +548,8 @@
 		<priority value="ERROR" />
 	</category>
 
-	<category name="com.liferay.util.dao.hibernate.CustomSQLUtil">
+	<category name="com.liferay.util.dao.orm.CustomSQLUtil">
 		<priority value="INFO" />
-	</category>
-
-	<category name="com.liferay.util.dao.hibernate.QueryUtil">
-		<priority value="ERROR" />
 	</category>
 
 	<category name="com.liferay.util.mail">
@@ -673,7 +661,7 @@
 	</category>
 
 	<category name="org.hibernate">
-		<priority value="INFO" />
+		<priority value="ERROR" />
 	</category>
 
 	<category name="org.jabsorb">
