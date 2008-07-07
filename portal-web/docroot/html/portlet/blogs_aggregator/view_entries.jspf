@@ -50,7 +50,7 @@
 StringBuilder sb = new StringBuilder();
 
 sb.append(themeDisplay.getPathMain());
-sb.append("/-/blogs/rss?");
+sb.append("/blogs/rss?");
 
 if (organizationId > 0) {
 	sb.append("organizationId=" + organizationId);
