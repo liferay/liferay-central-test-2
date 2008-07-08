@@ -6,7 +6,7 @@ Liferay.Util = {
 		object.rv = {};
 
 		object.before = function(method, f) {
-			var original = eval("this." + method);
+			var original = eval('this.' + method);
 
 			this[method] = function() {
 				f.apply(this, arguments);
@@ -16,7 +16,7 @@ Liferay.Util = {
 		};
 
 		object.after = function(method, f) {
-			var original = eval("this." + method);
+			var original = eval('this.' + method);
 
 			this[method] = function() {
 				this.rv[method] = original.apply(this, arguments);
@@ -26,7 +26,7 @@ Liferay.Util = {
 		};
 
 		object.around = function(method, f) {
-			var original = eval("this." + method);
+			var original = eval('this.' + method);
 
 			this[method] = function() {
 				this.yield = original;
@@ -108,9 +108,9 @@ Liferay.Util = {
 					item = document.body;
 				}
 
-				jQuery("input", item).each(function() {
+				jQuery('input', item).each(function() {
 					var current = jQuery(this);
-					var type = this.type || "text";
+					var type = this.type || 'text';
 
 					current.addClass(type);
 				});
@@ -211,7 +211,7 @@ Liferay.Util = {
 	checkTab: function(box) {
 		if ((document.all) && (event.keyCode == 9)) {
 			box.selection = document.selection.createRange();
-			setTimeout("Liferay.Util.processTab(\"" + box.id + "\")", 0);
+			setTimeout('Liferay.Util.processTab("' + box.id + '")', 0);
 		}
 	},
 
@@ -401,32 +401,34 @@ Liferay.Util = {
 
 		// LEP-4787
 
-		var x = url.indexOf(";");
+		var x = url.indexOf(';');
 
-		if (x != -1) {
+		if (x > -1) {
 			return url;
 		}
 
-		x = url.indexOf("?");
+		var sessionId = ';jsessionid=' + themeDisplay.getSessionId();
 
-		if (x != -1) {
-			return url.substring(0, x) + ";jsessionid=" + themeDisplay.getSessionId() + url.substring(x);
+		x = url.indexOf('?');
+
+		if (x > -1) {
+			return url.substring(0, x) + sessionId + url.substring(x);
 		}
 
 		// In IE6, http://www.abc.com;jsessionid=XYZ does not work, but
 		// http://www.abc.com/;jsessionid=XYZ does work.
 
-		x = url.indexOf("//");
+		x = url.indexOf('//');
 
-		if (x != -1) {
-			var y = url.lastIndexOf("/");
+		if (x > -1) {
+			var y = url.lastIndexOf('/');
 
 			if (x + 1 == y) {
-				return url + "/;jsessionid=" + themeDisplay.getSessionId();
+				return url + '/' + sessionId;
 			}
 		}
 
-		return url + ";jsessionid=" + themeDisplay.getSessionId();
+		return url + sessionId;
 	},
 
 	/**
@@ -549,7 +551,7 @@ Liferay.Util = {
 		delimeter = delimeter || ',';
 
 		if (box == null) {
-			return "";
+			return '';
 		}
 
 		var opts = jQuery(box).find('option[@value!=]');
@@ -688,14 +690,14 @@ Liferay.Util = {
 			sText = box.options[si].text;
 			sValue = box.options[si].value;
 
-			if ((box.options[si].value > "") && (si > 0) && (down == 0)) {
+			if ((box.options[si].value > '') && (si > 0) && (down == 0)) {
 				box.options[si].text = box.options[si - 1].text;
 				box.options[si].value = box.options[si - 1].value;
 				box.options[si - 1].text = sText;
 				box.options[si - 1].value = sValue;
 				box.selectedIndex--;
 			}
-			else if ((si < box.length - 1) && (box.options[si + 1].value > "") && (down == 1)) {
+			else if ((si < box.length - 1) && (box.options[si + 1].value > '') && (down == 1)) {
 				box.options[si].text = box.options[si + 1].text;
 				box.options[si].value = box.options[si + 1].value;
 				box.options[si + 1].text = sText;
@@ -770,7 +772,7 @@ Liferay.Util = {
 
 					el.css(
 						{
-							height: (pageBodyHeight - diff) + "px",
+							height: (pageBodyHeight - diff) + 'px',
 							width: '98%'
 						}
 					);
@@ -794,13 +796,13 @@ Liferay.Util = {
 		if (Liferay.Util.submitCountdown > 0) {
 			Liferay.Util.submitCountdown--;
 
-			setTimeout("Liferay.Util.resubmitCountdown('" + formName + "')", 1000);
+			setTimeout('Liferay.Util.resubmitCountdown("' + formName + '")', 1000);
 		}
 		else {
 			Liferay.Util.submitCountdown = 0;
 
 			if (!Liferay.Browser.is_ns_4) {
-				document.body.style.cursor = "auto";
+				document.body.style.cursor = 'auto';
 			}
 
 			var form = document.forms[formName];
@@ -808,7 +810,7 @@ Liferay.Util = {
 			for (var i = 0; i < form.length; i++) {
 				var e = form.elements[i];
 
-				if (e.type && (e.type.toLowerCase() == "button" || e.type.toLowerCase() == "reset" || e.type.toLowerCase() == "submit")) {
+				if (e.type && (e.type.toLowerCase() == 'button' || e.type.toLowerCase() == 'reset' || e.type.toLowerCase() == 'submit')) {
 					e.disabled = false;
 				}
 			}
@@ -846,7 +848,7 @@ Liferay.Util = {
 		if (document.all) {
 			var textRange = el.createTextRange();
 
-			textRange.execCommand("copy");
+			textRange.execCommand('copy');
 		}
 	},
 
@@ -1146,7 +1148,7 @@ function submitForm(form, action, singleSubmit) {
 	if (Liferay.Util.submitCountdown == 0) {
 		Liferay.Util.submitCountdown = 10;
 
-		setTimeout("Liferay.Util.resubmitCountdown('" + form.name + "')", 1000);
+		setTimeout('Liferay.Util.resubmitCountdown("' + form.name + '")', 1000);
 
 		if (singleSubmit == null || singleSubmit) {
 			Liferay.Util.submitCountdown++;
@@ -1168,7 +1170,7 @@ function submitForm(form, action, singleSubmit) {
 		}
 
 		if (!Liferay.Browser.is_ns_4) {
-			document.body.style.cursor = "wait";
+			document.body.style.cursor = 'wait';
 		}
 
 		form.submit();
