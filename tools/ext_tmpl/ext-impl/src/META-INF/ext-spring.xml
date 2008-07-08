@@ -2,7 +2,7 @@
 <!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN" "http://www.springframework.org/dtd/spring-beans.dtd">
 
 <beans>
-	<bean id="com.ext.portlet.reports.service.ReportsEntryService.impl" class="com.ext.portlet.reports.service.impl.ReportsEntryServiceImpl" lazy-init="true" />
+	<bean id="com.ext.portlet.reports.service.ReportsEntryService.impl" class="com.ext.portlet.reports.service.impl.ReportsEntryServiceImpl" lazy-init="true" init-method="init" />
 	<bean id="com.ext.portlet.reports.service.ReportsEntryService.transaction" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean" lazy-init="true">
 		<property name="transactionManager">
 			<ref bean="liferayTransactionManager" />
@@ -27,28 +27,12 @@
 			<ref bean="com.ext.portlet.reports.service.ReportsEntryService.transaction" />
 		</property>
 	</bean>
-	<bean id="com.ext.portlet.reports.service.persistence.ReportsEntryPersistence.impl" class="com.ext.portlet.reports.service.persistence.ReportsEntryPersistenceImpl" lazy-init="true">
+	<bean id="com.ext.portlet.reports.service.persistence.ReportsEntryPersistence.impl" class="com.ext.portlet.reports.service.persistence.ReportsEntryPersistenceImpl" lazy-init="true" init-method="init">
 		<property name="dataSource">
 			<ref bean="liferayDataSource" />
 		</property>
 		<property name="sessionFactory">
 			<ref bean="liferaySessionFactory" />
-		</property>
-	</bean>
-	<bean id="com.ext.portlet.reports.service.persistence.ReportsEntryPersistence.transaction" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean" lazy-init="true">
-		<property name="transactionManager">
-			<ref bean="liferayTransactionManager" />
-		</property>
-		<property name="target">
-			<ref bean="com.ext.portlet.reports.service.persistence.ReportsEntryPersistence.impl" />
-		</property>
-		<property name="transactionAttributes">
-			<props>
-				<prop key="remove*">PROPAGATION_REQUIRED,-com.liferay.portal.PortalException,-com.liferay.portal.SystemException</prop>
-				<prop key="set*">PROPAGATION_REQUIRED,-com.liferay.portal.PortalException,-com.liferay.portal.SystemException</prop>
-				<prop key="update*">PROPAGATION_REQUIRED,-com.liferay.portal.PortalException,-com.liferay.portal.SystemException</prop>
-				<prop key="*">PROPAGATION_SUPPORTS,readOnly</prop>
-			</props>
 		</property>
 	</bean>
 	<bean id="com.ext.portlet.reports.service.persistence.ReportsEntryUtil" class="com.ext.portlet.reports.service.persistence.ReportsEntryUtil" lazy-init="true">

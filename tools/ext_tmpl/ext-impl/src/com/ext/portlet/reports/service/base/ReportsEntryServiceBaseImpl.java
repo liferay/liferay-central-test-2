@@ -4,13 +4,11 @@ import com.ext.portlet.reports.service.ReportsEntryService;
 import com.ext.portlet.reports.service.persistence.ReportsEntryPersistence;
 import com.ext.portlet.reports.service.persistence.ReportsEntryUtil;
 
-import com.liferay.portal.service.impl.PrincipalBean;
-
-import org.springframework.beans.factory.InitializingBean;
+import com.liferay.portal.service.base.PrincipalBean;
 
 
 public abstract class ReportsEntryServiceBaseImpl extends PrincipalBean
-    implements ReportsEntryService, InitializingBean {
+    implements ReportsEntryService {
     protected ReportsEntryPersistence reportsEntryPersistence;
 
     public ReportsEntryPersistence getReportsEntryPersistence() {
@@ -22,7 +20,7 @@ public abstract class ReportsEntryServiceBaseImpl extends PrincipalBean
         this.reportsEntryPersistence = reportsEntryPersistence;
     }
 
-    public void afterPropertiesSet() {
+    protected void init() {
         if (reportsEntryPersistence == null) {
             reportsEntryPersistence = ReportsEntryUtil.getPersistence();
         }

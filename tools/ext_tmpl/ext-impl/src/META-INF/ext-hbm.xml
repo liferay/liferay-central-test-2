@@ -7,11 +7,11 @@
 		<id name="entryId" type="java.lang.String">
 			<generator class="assigned" />
 		</id>
-		<property name="companyId" type="com.liferay.util.dao.hibernate.StringType" />
-		<property name="userId" type="com.liferay.util.dao.hibernate.StringType" />
-		<property name="userName" type="com.liferay.util.dao.hibernate.StringType" />
+		<property name="companyId" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="userId" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="userName" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="createDate" />
 		<property name="modifiedDate" />
-		<property name="name" type="com.liferay.util.dao.hibernate.StringType" />
+		<property name="name" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 	</class>
 </hibernate-mapping>

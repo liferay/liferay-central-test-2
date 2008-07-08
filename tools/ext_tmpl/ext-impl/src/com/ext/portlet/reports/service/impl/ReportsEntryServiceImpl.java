@@ -1,10 +1,7 @@
 package com.ext.portlet.reports.service.impl;
 
-import com.ext.portlet.reports.service.ReportsEntryService;
-
-import com.liferay.portal.service.impl.PrincipalBean;
+import com.ext.portlet.reports.service.base.ReportsEntryServiceBaseImpl;
 
 
-public class ReportsEntryServiceImpl extends PrincipalBean
-    implements ReportsEntryService {
+public class ReportsEntryServiceImpl extends ReportsEntryServiceBaseImpl {
 }

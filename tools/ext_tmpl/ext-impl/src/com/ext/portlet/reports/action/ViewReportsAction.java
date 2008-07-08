@@ -52,7 +52,7 @@ public class ViewReportsAction extends PortletAction {
 			RenderRequest renderRequest, RenderResponse renderResponse)
 		throws Exception {
 
-		if (req.getWindowState().equals(WindowState.NORMAL)) {
+		if (renderRequest.getWindowState().equals(WindowState.NORMAL)) {
 			return mapping.findForward("portlet.ext.reports.view");
 		}
 		else {
@@ -62,7 +62,7 @@ public class ViewReportsAction extends PortletAction {
 			reports.add("Two");
 			reports.add("Three");
 
-			req.setAttribute("reports", reports);
+			renderRequest.setAttribute("reports", reports);
 
 			return mapping.findForward("portlet.ext.reports.view_reports");
 		}

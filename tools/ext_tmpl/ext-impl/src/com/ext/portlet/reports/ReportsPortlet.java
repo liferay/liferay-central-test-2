@@ -43,7 +43,7 @@ public class ReportsPortlet extends StrutsPortlet {
 			RenderRequest renderRequest, RenderResponse renderResponse)
 		throws IOException, PortletException {
 
-		PortletPreferences prefs = req.getPreferences();
+		PortletPreferences prefs = renderRequest.getPreferences();
 
 		System.out.println(prefs.getValue("test", ""));
 

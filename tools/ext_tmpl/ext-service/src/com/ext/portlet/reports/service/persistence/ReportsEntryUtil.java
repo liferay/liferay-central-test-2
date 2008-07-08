@@ -155,16 +155,15 @@ public class ReportsEntryUtil {
     }
 
     public static java.util.List<com.ext.portlet.reports.model.ReportsEntry> findWithDynamicQuery(
-        com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer)
+        com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery)
         throws com.liferay.portal.SystemException {
-        return getPersistence().findWithDynamicQuery(queryInitializer);
+        return getPersistence().findWithDynamicQuery(dynamicQuery);
     }
 
     public static java.util.List<com.ext.portlet.reports.model.ReportsEntry> findWithDynamicQuery(
-        com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer,
-        int start, int end) throws com.liferay.portal.SystemException {
-        return getPersistence()
-                   .findWithDynamicQuery(queryInitializer, start, end);
+        com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery, int start,
+        int end) throws com.liferay.portal.SystemException {
+        return getPersistence().findWithDynamicQuery(dynamicQuery, start, end);
     }
 
     public static java.util.List<com.ext.portlet.reports.model.ReportsEntry> findAll()
@@ -231,7 +230,7 @@ public class ReportsEntryUtil {
 
     private static ReportsEntryUtil _getUtil() {
         if (_util == null) {
-            _util = (ReportsEntryUtil) com.liferay.portal.kernel.bean.BeanLocatorUtil.locate(_UTIL);
+            _util = (ReportsEntryUtil) com.liferay.portal.kernel.bean.PortalBeanLocatorUtil.locate(_UTIL);
         }
 
         return _util;
