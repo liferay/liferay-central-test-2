@@ -204,6 +204,6 @@ public class VerifySocial extends VerifyProcess {
 		deleteDuplicateRequests();
 	}
 
-	private static Log _log = LogFactory.getLog(VerifyJournal.class);
+	private static Log _log = LogFactory.getLog(VerifySocial.class);
 
 }
