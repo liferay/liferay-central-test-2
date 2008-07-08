@@ -323,25 +323,21 @@ request.setAttribute("edit_pages.jsp-portletURL", portletURL);
 	function <portlet:namespace />updateLookAndFeel(themeId, colorSchemeId, sectionParam, sectionName) {
 		document.<portlet:namespace />fm.<portlet:namespace /><%= Constants.CMD %>.value = "look_and_feel";
 
-		var themeRadio = document.<portlet:namespace />fm.<portlet:namespace />themeId;
+		var themeRadio = jQuery(document.<portlet:namespace />fm.<portlet:namespace />themeId);
 
-		if (themeRadio.length) {
-			themeRadio[Liferay.Util.getSelectedIndex(themeRadio)].value = themeId;
-		}
-		else {
-			themeRadio.value = themeId;
+		if (themeRadio.length > 1) {
+			themeRadio = themeRadio.filter(':checked');
 		}
 
-		var colorSchemeRadio = document.<portlet:namespace />fm.<portlet:namespace />colorSchemeId;
+		themeRadio.val(themeId);
 
-		if (colorSchemeRadio) {
-			if (colorSchemeRadio.length) {
-				colorSchemeRadio[Liferay.Util.getSelectedIndex(colorSchemeRadio)].value = colorSchemeId;
-			}
-			else {
-				colorSchemeRadio.value = colorSchemeId;
-			}
+		var colorSchemeRadio = jQuery(document.<portlet:namespace />fm.<portlet:namespace />colorSchemeId);
+
+		if (colorSchemeRadio.length > 1) {
+			colorSchemeRadio = colorSchemeRadio.filter(':checked');
 		}
+
+		colorSchemeRadio.val(colorSchemeId);
 
 		if ((sectionParam != null) && (sectionName != null)) {
 			document.<portlet:namespace />fm.<portlet:namespace />pagesRedirect.value += "&" + sectionParam + "=" + sectionName;
