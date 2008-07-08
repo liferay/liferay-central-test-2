@@ -36,6 +36,10 @@ public class JSONFactoryUtil {
 		return getJSONFactory().createJSONArray();
 	}
 
+	public static JSONArray createJSONArray(String json) throws JSONException {
+		return getJSONFactory().createJSONArray(json);
+	}
+
 	public static JSONObject createJSONObject() {
 		return getJSONFactory().createJSONObject();
 	}

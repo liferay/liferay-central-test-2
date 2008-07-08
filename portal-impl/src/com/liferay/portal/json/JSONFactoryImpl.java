@@ -57,6 +57,10 @@ public class JSONFactoryImpl implements JSONFactory {
 		return new JSONArrayImpl();
 	}
 
+	public JSONArray createJSONArray(String json) throws JSONException {
+		return new JSONArrayImpl(json);
+	}
+
 	public JSONObject createJSONObject() {
 		return new JSONObjectImpl();
 	}

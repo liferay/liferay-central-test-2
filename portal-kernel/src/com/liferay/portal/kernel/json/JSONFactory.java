@@ -32,6 +32,8 @@ public interface JSONFactory {
 
 	public JSONArray createJSONArray();
 
+	public JSONArray createJSONArray(String json) throws JSONException;
+
 	public JSONObject createJSONObject();
 
 	public JSONObject createJSONObject(String json) throws JSONException;
