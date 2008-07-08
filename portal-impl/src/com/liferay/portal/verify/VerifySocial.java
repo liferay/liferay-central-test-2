@@ -200,8 +200,13 @@ public class VerifySocial extends VerifyProcess {
 	}
 
 	protected void verifySocial() throws Exception {
-		deleteDuplicateActivities();
-		deleteDuplicateRequests();
+
+		// Temporarily comment these out because of performance issues. This
+		// verification is not needed because activities can be added while
+		// ensuring a duplicate does not exist. See LEP-6593.
+
+		//deleteDuplicateActivities();
+		//deleteDuplicateRequests();
 	}
 
 	private static Log _log = LogFactory.getLog(VerifySocial.class);
