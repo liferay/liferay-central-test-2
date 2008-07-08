@@ -40,4 +40,52 @@ public interface Property {
 
 	public Criterion eqProperty(String other);
 
+	public Criterion ge(DynamicQuery subselect);
+
+	public Criterion ge(Object value);
+
+	public Criterion geAll(DynamicQuery subselect);
+
+	public Criterion geProperty(Property other);
+
+	public Criterion geProperty(String other);
+
+	public Criterion geSome(DynamicQuery subselect);
+
+	public Criterion gt(DynamicQuery subselect);
+
+	public Criterion gt(Object value);
+
+	public Criterion gtAll(DynamicQuery subselect);
+
+	public Criterion gtProperty(Property other);
+
+	public Criterion gtProperty(String other);
+
+	public Criterion gtSome(DynamicQuery subselect);
+
+	public Criterion le(DynamicQuery subselect);
+
+	public Criterion le(Object value);
+
+	public Criterion leAll(DynamicQuery subselect);
+
+	public Criterion leProperty(Property other);
+
+	public Criterion leProperty(String other);
+
+	public Criterion leSome(DynamicQuery subselect);
+
+	public Criterion lt(DynamicQuery subselect);
+
+	public Criterion lt(Object value);
+
+	public Criterion ltAll(DynamicQuery subselect);
+
+	public Criterion ltProperty(Property other);
+
+	public Criterion ltProperty(String other);
+
+	public Criterion ltSome(DynamicQuery subselect);
+
 }
