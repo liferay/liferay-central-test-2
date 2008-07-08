@@ -1302,7 +1302,7 @@ public class PortalImpl implements Portal {
 				}
 			}
 			else {
-				if ((PropsValues.WEB_SERVER_HTTP_PORT != serverPort) ||
+				if ((PropsValues.WEB_SERVER_HTTP_PORT != serverPort) &&
 					(PropsValues.WEB_SERVER_HTTP_PORT != Http.HTTP_PORT)) {
 
 					sb.append(StringPool.COLON);
@@ -1321,7 +1321,7 @@ public class PortalImpl implements Portal {
 				}
 			}
 			else {
-				if ((PropsValues.WEB_SERVER_HTTPS_PORT != serverPort) ||
+				if ((PropsValues.WEB_SERVER_HTTPS_PORT != serverPort) &&
 					(PropsValues.WEB_SERVER_HTTPS_PORT != Http.HTTPS_PORT)) {
 
 					sb.append(StringPool.COLON);
