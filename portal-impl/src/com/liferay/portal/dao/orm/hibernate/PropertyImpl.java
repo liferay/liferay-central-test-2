@@ -24,6 +24,8 @@ package com.liferay.portal.dao.orm.hibernate;
 
 import com.liferay.portal.kernel.dao.orm.Criterion;
 import com.liferay.portal.kernel.dao.orm.DynamicQuery;
+import com.liferay.portal.kernel.dao.orm.Order;
+import com.liferay.portal.kernel.dao.orm.Projection;
 import com.liferay.portal.kernel.dao.orm.Property;
 
 import java.util.Collection;
@@ -38,6 +40,26 @@ public class PropertyImpl implements Property {
 
 	public PropertyImpl(org.hibernate.criterion.Property property) {
 		_property = property;
+	}
+
+	public Order asc() {
+		return new OrderImpl(_property.asc());
+	}
+
+	public Projection avg() {
+		return new ProjectionImpl(_property.avg());
+	}
+
+	public Criterion between(Object min, Object max) {
+		return new CriterionImpl(_property.between(min, max));
+	}
+
+	public Projection count() {
+		return new ProjectionImpl(_property.count());
+	}
+
+	public Order desc() {
+		return new OrderImpl(_property.desc());
 	}
 
 	public Criterion eq(DynamicQuery subselect) {
@@ -71,6 +93,14 @@ public class PropertyImpl implements Property {
 
 	public org.hibernate.criterion.Property getProperty() {
 		return _property;
+	}
+
+	public Property getProperty(String propertyName) {
+		return new PropertyImpl(_property.getProperty(propertyName));
+	}
+
+	public Projection group() {
+		return new ProjectionImpl(_property.group());
 	}
 
 	public Criterion ge(DynamicQuery subselect) {
@@ -160,6 +190,22 @@ public class PropertyImpl implements Property {
 		return new CriterionImpl(_property.in(values));
 	}
 
+	public Criterion isEmpty() {
+		return new CriterionImpl(_property.isEmpty());
+	}
+
+	public Criterion isNotEmpty() {
+		return new CriterionImpl(_property.isNotEmpty());
+	}
+
+	public Criterion isNotNull() {
+		return new CriterionImpl(_property.isNotNull());
+	}
+
+	public Criterion isNull() {
+		return new CriterionImpl(_property.isNull());
+	}
+
 	public Criterion le(DynamicQuery subselect) {
 		DynamicQueryImpl dynamicQueryImpl = (DynamicQueryImpl)subselect;
 
@@ -234,6 +280,43 @@ public class PropertyImpl implements Property {
 
 		return new CriterionImpl(
 			_property.ltSome(dynamicQueryImpl.getDetachedCriteria()));
+	}
+
+	public Projection max() {
+		return new ProjectionImpl(_property.max());
+	}
+
+	public Projection min() {
+		return new ProjectionImpl(_property.min());
+	}
+
+	public Criterion ne(DynamicQuery subselect) {
+		DynamicQueryImpl dynamicQueryImpl = (DynamicQueryImpl)subselect;
+
+		return new CriterionImpl(
+			_property.ne(dynamicQueryImpl.getDetachedCriteria()));
+	}
+
+	public Criterion ne(Object value) {
+		return new CriterionImpl(_property.ne(value));
+	}
+
+	public Criterion neProperty(Property other) {
+		PropertyImpl propertyImpl = (PropertyImpl)other;
+
+		return new CriterionImpl(
+			_property.neProperty(propertyImpl.getProperty()));
+	}
+
+	public Criterion neProperty(String other) {
+		return new CriterionImpl(_property.neProperty(other));
+	}
+
+	public Criterion notIn(DynamicQuery subselect) {
+		DynamicQueryImpl dynamicQueryImpl = (DynamicQueryImpl)subselect;
+
+		return new CriterionImpl(
+			_property.notIn(dynamicQueryImpl.getDetachedCriteria()));
 	}
 
 	private org.hibernate.criterion.Property _property;

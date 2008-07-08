@@ -32,6 +32,16 @@ import java.util.Collection;
  */
 public interface Property {
 
+	public Order asc();
+
+	public Projection avg();
+
+	public Criterion between(Object min, Object max);
+
+	public Projection count();
+
+	public Order desc();
+
 	public Criterion eq(DynamicQuery subselect);
 
 	public Criterion eq(Object value);
@@ -54,6 +64,10 @@ public interface Property {
 
 	public Criterion geSome(DynamicQuery subselect);
 
+	public Property getProperty(String propertyName);
+
+	public Projection group();
+
 	public Criterion gt(DynamicQuery subselect);
 
 	public Criterion gt(Object value);
@@ -71,6 +85,14 @@ public interface Property {
 	public Criterion in(DynamicQuery subselect);
 
 	public Criterion in(Object[] values);
+
+	public Criterion isEmpty();
+
+	public Criterion isNotEmpty();
+
+	public Criterion isNotNull();
+
+	public Criterion isNull();
 
 	public Criterion le(DynamicQuery subselect);
 
@@ -97,5 +119,19 @@ public interface Property {
 	public Criterion ltProperty(String other);
 
 	public Criterion ltSome(DynamicQuery subselect);
+
+	public Projection max();
+
+	public Projection min();
+
+	public Criterion ne(DynamicQuery subselect);
+
+	public Criterion ne(Object value);
+
+	public Criterion neProperty(Property other);
+
+	public Criterion neProperty(String other);
+
+	public Criterion notIn(DynamicQuery subselect);
 
 }
