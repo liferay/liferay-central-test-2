@@ -24,10 +24,15 @@ package com.liferay.portal.service.impl;
 
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
+import com.liferay.portal.kernel.json.JSONArray;
+import com.liferay.portal.kernel.json.JSONFactoryUtil;
+import com.liferay.portal.kernel.json.JSONObject;
 import com.liferay.portal.model.Portlet;
+import com.liferay.portal.model.PortletApp;
 import com.liferay.portal.model.impl.RoleImpl;
 import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.service.base.PortletServiceBaseImpl;
+import java.util.List;
 
 /**
  * <a href="PortletServiceImpl.java.html"><b><i>View Source</i></b></a>
@@ -49,6 +54,32 @@ public class PortletServiceImpl extends PortletServiceBaseImpl {
 
 		return portletLocalService.updatePortlet(
 			companyId, portletId, roles, active);
+	}
+
+	public JSONArray getExternalPortlets()
+		throws PortalException, SystemException {
+
+		//Any changes to this method should be notified. Please check
+		//LEP-6480 for more details.
+		List<Portlet> portlets = portletLocalService.getPortlets();
+		JSONArray jsonArray = JSONFactoryUtil.createJSONArray();
+		for(Portlet p:portlets) {
+			PortletApp portletApp = p.getPortletApp();
+			if(portletApp.isWARFile()) {
+
+				JSONObject jsonObject=
+					JSONFactoryUtil.createJSONObject();
+
+				jsonObject.put(
+					"portlet_name", p.getPortletName());
+
+				jsonObject.put(
+					"app_name", portletApp.getServletContextName());
+
+				jsonArray.put(jsonObject);
+			}
+		}
+		return jsonArray;
 	}
 
 }

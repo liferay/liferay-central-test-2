@@ -81,4 +81,12 @@ public class PortletServiceJSON {
 
 		return PortletJSONSerializer.toJSONObject(returnValue);
 	}
+
+	public static com.liferay.portal.kernel.json.JSONArray getExternalPortlets()
+		throws java.rmi.RemoteException, com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
+		com.liferay.portal.kernel.json.JSONArray returnValue = PortletServiceUtil.getExternalPortlets();
+
+		return returnValue;
+	}
 }

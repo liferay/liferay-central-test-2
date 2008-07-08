@@ -715,6 +715,13 @@ Liferay.Service.Portal.Portlet = {
 		params.serviceMethodName = "updatePortlet";
 
 		return Liferay.Service.ajax(params, callback);
+	},
+
+	getExternalPortlets: function(params, callback) {
+		params.serviceClassName = this.serviceClassName;
+		params.serviceMethodName = "getExternalPortlets";
+
+		return Liferay.Service.ajax(params, callback);
 	}
 };
 

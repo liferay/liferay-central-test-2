@@ -53,4 +53,8 @@ public interface PortletService {
 		java.lang.String portletId, java.lang.String roles, boolean active)
 		throws java.rmi.RemoteException, com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;
+
+	public com.liferay.portal.kernel.json.JSONArray getExternalPortlets()
+		throws java.rmi.RemoteException, com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException;
 }

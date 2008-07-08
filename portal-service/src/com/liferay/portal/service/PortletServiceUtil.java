@@ -60,4 +60,12 @@ public class PortletServiceUtil {
 
 		return portletService.updatePortlet(companyId, portletId, roles, active);
 	}
+
+	public static com.liferay.portal.kernel.json.JSONArray getExternalPortlets()
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException, java.rmi.RemoteException {
+		PortletService portletService = PortletServiceFactory.getService();
+
+		return portletService.getExternalPortlets();
+	}
 }

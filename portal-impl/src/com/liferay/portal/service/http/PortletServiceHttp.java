@@ -123,5 +123,39 @@ public class PortletServiceHttp {
 		}
 	}
 
+	public static com.liferay.portal.kernel.json.JSONArray getExternalPortlets(
+		HttpPrincipal httpPrincipal)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
+		try {
+			MethodWrapper methodWrapper = new MethodWrapper(PortletServiceUtil.class.getName(),
+					"getExternalPortlets", new Object[0]);
+
+			Object returnObj = null;
+
+			try {
+				returnObj = TunnelUtil.invoke(httpPrincipal, methodWrapper);
+			}
+			catch (Exception e) {
+				if (e instanceof com.liferay.portal.PortalException) {
+					throw (com.liferay.portal.PortalException)e;
+				}
+
+				if (e instanceof com.liferay.portal.SystemException) {
+					throw (com.liferay.portal.SystemException)e;
+				}
+
+				throw new com.liferay.portal.SystemException(e);
+			}
+
+			return (com.liferay.portal.kernel.json.JSONArray)returnObj;
+		}
+		catch (com.liferay.portal.SystemException se) {
+			_log.error(se, se);
+
+			throw se;
+		}
+	}
+
 	private static Log _log = LogFactoryUtil.getLog(PortletServiceHttp.class);
 }
