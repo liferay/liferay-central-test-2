@@ -162,10 +162,6 @@ Liferay.Portlet = {
 			currentPortlet.remove();
 			jQuery('#' + portletId).remove();
 
-			if (LayoutConfiguration) {
-				LayoutConfiguration.initialized = false;
-			}
-
 			var url = themeDisplay.getPathMain() + '/portal/update_layout';
 
 			jQuery.ajax(
