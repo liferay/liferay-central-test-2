@@ -34,7 +34,7 @@ public class AddPageTest extends BaseTestCase {
 	public void testAddPage() throws Exception {
 		selenium.click("link=Manage Pages");
 		selenium.waitForPageToLoad("30000");
-		selenium.click("Link=Test Test");
+		selenium.click("Link=Joe Bloggs");
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {

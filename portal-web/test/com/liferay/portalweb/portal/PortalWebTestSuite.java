@@ -31,11 +31,15 @@ import com.liferay.portalweb.portlet.blogsaggregator.BlogsAggregatorTests;
 import com.liferay.portalweb.portlet.calendar.CalendarTests;
 import com.liferay.portalweb.portlet.communities.CommunitiesTests;
 import com.liferay.portalweb.portlet.enterpriseadmin.EnterpriseAdminTests;
+import com.liferay.portalweb.portlet.invitation.InvitationTests;
 import com.liferay.portalweb.portlet.journal.JournalTests;
 import com.liferay.portalweb.portlet.journalarticles.JournalArticlesTests;
 import com.liferay.portalweb.portlet.journalcontent.JournalContentTests;
 import com.liferay.portalweb.portlet.journalcontentsearch.JournalContentSearchTests;
 import com.liferay.portalweb.portlet.language.LanguageTests;
+import com.liferay.portalweb.portlet.loancalculator.LoanCalculatorTests;
+import com.liferay.portalweb.portlet.managepages.ManagePagesTests;
+import com.liferay.portalweb.portlet.polls.PollsTests;
 
 /**
  * <a href="PortalWebTestSuite.java.html"><b><i>View Source</i></b></a>
@@ -74,15 +78,15 @@ public class PortalWebTestSuite extends BaseTests {
 		//addTestSuite(HelloWorldTests.class);
 		//addTestSuite(IFrameTests.class);
 		//addTestSuite(ImageGalleryTests.class);
-		//addTestSuite(InvitationTests.class);
+		addTestSuite(InvitationTests.class);
 		addTestSuite(JournalTests.class);
 		addTestSuite(JournalArticlesTests.class);
 		addTestSuite(JournalContentTests.class);
 		addTestSuite(JournalContentSearchTests.class);
 		addTestSuite(LanguageTests.class);
-		//addTestSuite(LoanCalculatorTests.class);
+		addTestSuite(LoanCalculatorTests.class);
 		//addTestSuite(MailTests.class);
-		//addTestSuite(ManagePagesTests.class);
+		addTestSuite(ManagePagesTests.class);
 		//addTestSuite(MessageBoardsTests.class);
 		//addTestSuite(NavigationTests.class);
 		//addTestSuite(NestedPortletsTests.class);
@@ -93,7 +97,7 @@ public class PortalWebTestSuite extends BaseTests {
 		//addTestSuite(PageRatingsTests.class);
 		//addTestSuite(PasswordGeneratorTests.class);
 		//addTestSuite(PluginInstallerTests.class);
-		//addTestSuite(PollsTests.class);
+		addTestSuite(PollsTests.class);
 		//addTestSuite(PollsDisplayTests.class);
 		//addTestSuite(QuickNoteTests.class);
 		//addTestSuite(RandomBibleVerseTests.class);
