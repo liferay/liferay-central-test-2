@@ -373,7 +373,7 @@ public abstract class PortletRequestImpl implements LiferayPortletRequest {
 	}
 
 	public LinkedHashMap<String, String> getUserInfo() {
-		return UserInfoFactory.getUserInfo(_request, _portlet);
+		return UserInfoFactory.getUserInfo(_remoteUserId, _portlet);
 	}
 
 	public Principal getUserPrincipal() {
