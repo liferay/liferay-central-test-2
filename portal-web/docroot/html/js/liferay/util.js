@@ -912,15 +912,18 @@ Liferay.Util = {
 	},
 
 	sortByAscending: function(a, b) {
-		if (a[1].toLowerCase() > b[1].toLowerCase()) {
+		a = a[1].toLowerCase();
+		b = b[1].toLowerCase();
+
+		if (a > b) {
 			return 1;
 		}
-		else if (a[1].toLowerCase() < b[1].toLowerCase()) {
+
+		if (a < b) {
 			return -1;
 		}
-		else {
-			return 0;
-		}
+
+		return 0;
 	},
 
 	startsWith: function(str, x) {
