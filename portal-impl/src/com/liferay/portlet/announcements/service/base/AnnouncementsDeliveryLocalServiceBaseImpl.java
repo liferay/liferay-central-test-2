@@ -86,13 +86,13 @@ public abstract class AnnouncementsDeliveryLocalServiceBaseImpl
 		announcementsDeliveryPersistence.remove(announcementsDelivery);
 	}
 
-	public List<AnnouncementsDelivery> dynamicQuery(DynamicQuery dynamicQuery)
+	public List<Object> dynamicQuery(DynamicQuery dynamicQuery)
 		throws SystemException {
 		return announcementsDeliveryPersistence.findWithDynamicQuery(dynamicQuery);
 	}
 
-	public List<AnnouncementsDelivery> dynamicQuery(DynamicQuery dynamicQuery,
-		int start, int end) throws SystemException {
+	public List<Object> dynamicQuery(DynamicQuery dynamicQuery, int start,
+		int end) throws SystemException {
 		return announcementsDeliveryPersistence.findWithDynamicQuery(dynamicQuery,
 			start, end);
 	}

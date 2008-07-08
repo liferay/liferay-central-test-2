@@ -75,7 +75,7 @@ public class MBMessageFlagLocalServiceUtil {
 		mbMessageFlagLocalService.deleteMBMessageFlag(mbMessageFlag);
 	}
 
-	public static java.util.List<com.liferay.portlet.messageboards.model.MBMessageFlag> dynamicQuery(
+	public static java.util.List<Object> dynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery)
 		throws com.liferay.portal.SystemException {
 		MBMessageFlagLocalService mbMessageFlagLocalService = MBMessageFlagLocalServiceFactory.getService();
@@ -83,7 +83,7 @@ public class MBMessageFlagLocalServiceUtil {
 		return mbMessageFlagLocalService.dynamicQuery(dynamicQuery);
 	}
 
-	public static java.util.List<com.liferay.portlet.messageboards.model.MBMessageFlag> dynamicQuery(
+	public static java.util.List<Object> dynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery, int start,
 		int end) throws com.liferay.portal.SystemException {
 		MBMessageFlagLocalService mbMessageFlagLocalService = MBMessageFlagLocalServiceFactory.getService();

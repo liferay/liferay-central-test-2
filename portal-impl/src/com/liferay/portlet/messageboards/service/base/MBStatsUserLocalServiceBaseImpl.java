@@ -101,12 +101,12 @@ public abstract class MBStatsUserLocalServiceBaseImpl
 		mbStatsUserPersistence.remove(mbStatsUser);
 	}
 
-	public List<MBStatsUser> dynamicQuery(DynamicQuery dynamicQuery)
+	public List<Object> dynamicQuery(DynamicQuery dynamicQuery)
 		throws SystemException {
 		return mbStatsUserPersistence.findWithDynamicQuery(dynamicQuery);
 	}
 
-	public List<MBStatsUser> dynamicQuery(DynamicQuery dynamicQuery, int start,
+	public List<Object> dynamicQuery(DynamicQuery dynamicQuery, int start,
 		int end) throws SystemException {
 		return mbStatsUserPersistence.findWithDynamicQuery(dynamicQuery, start,
 			end);

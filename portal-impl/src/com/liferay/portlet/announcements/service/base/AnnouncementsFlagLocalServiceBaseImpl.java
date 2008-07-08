@@ -77,13 +77,13 @@ public abstract class AnnouncementsFlagLocalServiceBaseImpl
 		announcementsFlagPersistence.remove(announcementsFlag);
 	}
 
-	public List<AnnouncementsFlag> dynamicQuery(DynamicQuery dynamicQuery)
+	public List<Object> dynamicQuery(DynamicQuery dynamicQuery)
 		throws SystemException {
 		return announcementsFlagPersistence.findWithDynamicQuery(dynamicQuery);
 	}
 
-	public List<AnnouncementsFlag> dynamicQuery(DynamicQuery dynamicQuery,
-		int start, int end) throws SystemException {
+	public List<Object> dynamicQuery(DynamicQuery dynamicQuery, int start,
+		int end) throws SystemException {
 		return announcementsFlagPersistence.findWithDynamicQuery(dynamicQuery,
 			start, end);
 	}

@@ -111,13 +111,13 @@ public abstract class ShoppingCouponLocalServiceBaseImpl
 		shoppingCouponPersistence.remove(shoppingCoupon);
 	}
 
-	public List<ShoppingCoupon> dynamicQuery(DynamicQuery dynamicQuery)
+	public List<Object> dynamicQuery(DynamicQuery dynamicQuery)
 		throws SystemException {
 		return shoppingCouponPersistence.findWithDynamicQuery(dynamicQuery);
 	}
 
-	public List<ShoppingCoupon> dynamicQuery(DynamicQuery dynamicQuery,
-		int start, int end) throws SystemException {
+	public List<Object> dynamicQuery(DynamicQuery dynamicQuery, int start,
+		int end) throws SystemException {
 		return shoppingCouponPersistence.findWithDynamicQuery(dynamicQuery,
 			start, end);
 	}

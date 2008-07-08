@@ -75,7 +75,7 @@ public class ClassNameLocalServiceUtil {
 		classNameLocalService.deleteClassName(className);
 	}
 
-	public static java.util.List<com.liferay.portal.model.ClassName> dynamicQuery(
+	public static java.util.List<Object> dynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery)
 		throws com.liferay.portal.SystemException {
 		ClassNameLocalService classNameLocalService = ClassNameLocalServiceFactory.getService();
@@ -83,7 +83,7 @@ public class ClassNameLocalServiceUtil {
 		return classNameLocalService.dynamicQuery(dynamicQuery);
 	}
 
-	public static java.util.List<com.liferay.portal.model.ClassName> dynamicQuery(
+	public static java.util.List<Object> dynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery, int start,
 		int end) throws com.liferay.portal.SystemException {
 		ClassNameLocalService classNameLocalService = ClassNameLocalServiceFactory.getService();

@@ -101,13 +101,13 @@ public abstract class SCFrameworkVersionLocalServiceBaseImpl
 		scFrameworkVersionPersistence.remove(scFrameworkVersion);
 	}
 
-	public List<SCFrameworkVersion> dynamicQuery(DynamicQuery dynamicQuery)
+	public List<Object> dynamicQuery(DynamicQuery dynamicQuery)
 		throws SystemException {
 		return scFrameworkVersionPersistence.findWithDynamicQuery(dynamicQuery);
 	}
 
-	public List<SCFrameworkVersion> dynamicQuery(DynamicQuery dynamicQuery,
-		int start, int end) throws SystemException {
+	public List<Object> dynamicQuery(DynamicQuery dynamicQuery, int start,
+		int end) throws SystemException {
 		return scFrameworkVersionPersistence.findWithDynamicQuery(dynamicQuery,
 			start, end);
 	}

@@ -96,12 +96,12 @@ public abstract class IGImageLocalServiceBaseImpl implements IGImageLocalService
 		igImagePersistence.remove(igImage);
 	}
 
-	public List<IGImage> dynamicQuery(DynamicQuery dynamicQuery)
+	public List<Object> dynamicQuery(DynamicQuery dynamicQuery)
 		throws SystemException {
 		return igImagePersistence.findWithDynamicQuery(dynamicQuery);
 	}
 
-	public List<IGImage> dynamicQuery(DynamicQuery dynamicQuery, int start,
+	public List<Object> dynamicQuery(DynamicQuery dynamicQuery, int start,
 		int end) throws SystemException {
 		return igImagePersistence.findWithDynamicQuery(dynamicQuery, start, end);
 	}

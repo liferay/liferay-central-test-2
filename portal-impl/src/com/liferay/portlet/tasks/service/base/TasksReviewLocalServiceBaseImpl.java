@@ -85,12 +85,12 @@ public abstract class TasksReviewLocalServiceBaseImpl
 		tasksReviewPersistence.remove(tasksReview);
 	}
 
-	public List<TasksReview> dynamicQuery(DynamicQuery dynamicQuery)
+	public List<Object> dynamicQuery(DynamicQuery dynamicQuery)
 		throws SystemException {
 		return tasksReviewPersistence.findWithDynamicQuery(dynamicQuery);
 	}
 
-	public List<TasksReview> dynamicQuery(DynamicQuery dynamicQuery, int start,
+	public List<Object> dynamicQuery(DynamicQuery dynamicQuery, int start,
 		int end) throws SystemException {
 		return tasksReviewPersistence.findWithDynamicQuery(dynamicQuery, start,
 			end);

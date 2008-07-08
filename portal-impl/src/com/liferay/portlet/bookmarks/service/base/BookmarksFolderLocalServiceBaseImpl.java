@@ -95,13 +95,13 @@ public abstract class BookmarksFolderLocalServiceBaseImpl
 		bookmarksFolderPersistence.remove(bookmarksFolder);
 	}
 
-	public List<BookmarksFolder> dynamicQuery(DynamicQuery dynamicQuery)
+	public List<Object> dynamicQuery(DynamicQuery dynamicQuery)
 		throws SystemException {
 		return bookmarksFolderPersistence.findWithDynamicQuery(dynamicQuery);
 	}
 
-	public List<BookmarksFolder> dynamicQuery(DynamicQuery dynamicQuery,
-		int start, int end) throws SystemException {
+	public List<Object> dynamicQuery(DynamicQuery dynamicQuery, int start,
+		int end) throws SystemException {
 		return bookmarksFolderPersistence.findWithDynamicQuery(dynamicQuery,
 			start, end);
 	}

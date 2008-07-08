@@ -297,13 +297,13 @@ public abstract class MembershipRequestLocalServiceBaseImpl
 		membershipRequestPersistence.remove(membershipRequest);
 	}
 
-	public List<MembershipRequest> dynamicQuery(DynamicQuery dynamicQuery)
+	public List<Object> dynamicQuery(DynamicQuery dynamicQuery)
 		throws SystemException {
 		return membershipRequestPersistence.findWithDynamicQuery(dynamicQuery);
 	}
 
-	public List<MembershipRequest> dynamicQuery(DynamicQuery dynamicQuery,
-		int start, int end) throws SystemException {
+	public List<Object> dynamicQuery(DynamicQuery dynamicQuery, int start,
+		int end) throws SystemException {
 		return membershipRequestPersistence.findWithDynamicQuery(dynamicQuery,
 			start, end);
 	}

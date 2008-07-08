@@ -432,12 +432,12 @@ public abstract class GroupLocalServiceBaseImpl implements GroupLocalService {
 		groupPersistence.remove(group);
 	}
 
-	public List<Group> dynamicQuery(DynamicQuery dynamicQuery)
+	public List<Object> dynamicQuery(DynamicQuery dynamicQuery)
 		throws SystemException {
 		return groupPersistence.findWithDynamicQuery(dynamicQuery);
 	}
 
-	public List<Group> dynamicQuery(DynamicQuery dynamicQuery, int start,
+	public List<Object> dynamicQuery(DynamicQuery dynamicQuery, int start,
 		int end) throws SystemException {
 		return groupPersistence.findWithDynamicQuery(dynamicQuery, start, end);
 	}

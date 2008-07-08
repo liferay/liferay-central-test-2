@@ -294,12 +294,12 @@ public abstract class PermissionLocalServiceBaseImpl
 		permissionPersistence.remove(permission);
 	}
 
-	public List<Permission> dynamicQuery(DynamicQuery dynamicQuery)
+	public List<Object> dynamicQuery(DynamicQuery dynamicQuery)
 		throws SystemException {
 		return permissionPersistence.findWithDynamicQuery(dynamicQuery);
 	}
 
-	public List<Permission> dynamicQuery(DynamicQuery dynamicQuery, int start,
+	public List<Object> dynamicQuery(DynamicQuery dynamicQuery, int start,
 		int end) throws SystemException {
 		return permissionPersistence.findWithDynamicQuery(dynamicQuery, start,
 			end);

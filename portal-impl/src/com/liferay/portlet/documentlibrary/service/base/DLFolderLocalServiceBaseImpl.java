@@ -122,12 +122,12 @@ public abstract class DLFolderLocalServiceBaseImpl
 		dlFolderPersistence.remove(dlFolder);
 	}
 
-	public List<DLFolder> dynamicQuery(DynamicQuery dynamicQuery)
+	public List<Object> dynamicQuery(DynamicQuery dynamicQuery)
 		throws SystemException {
 		return dlFolderPersistence.findWithDynamicQuery(dynamicQuery);
 	}
 
-	public List<DLFolder> dynamicQuery(DynamicQuery dynamicQuery, int start,
+	public List<Object> dynamicQuery(DynamicQuery dynamicQuery, int start,
 		int end) throws SystemException {
 		return dlFolderPersistence.findWithDynamicQuery(dynamicQuery, start, end);
 	}

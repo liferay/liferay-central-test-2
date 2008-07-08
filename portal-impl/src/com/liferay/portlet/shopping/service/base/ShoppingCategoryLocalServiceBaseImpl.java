@@ -119,13 +119,13 @@ public abstract class ShoppingCategoryLocalServiceBaseImpl
 		shoppingCategoryPersistence.remove(shoppingCategory);
 	}
 
-	public List<ShoppingCategory> dynamicQuery(DynamicQuery dynamicQuery)
+	public List<Object> dynamicQuery(DynamicQuery dynamicQuery)
 		throws SystemException {
 		return shoppingCategoryPersistence.findWithDynamicQuery(dynamicQuery);
 	}
 
-	public List<ShoppingCategory> dynamicQuery(DynamicQuery dynamicQuery,
-		int start, int end) throws SystemException {
+	public List<Object> dynamicQuery(DynamicQuery dynamicQuery, int start,
+		int end) throws SystemException {
 		return shoppingCategoryPersistence.findWithDynamicQuery(dynamicQuery,
 			start, end);
 	}

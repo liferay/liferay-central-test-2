@@ -136,11 +136,11 @@ public interface ShoppingCategoryPersistence {
 		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.shopping.NoSuchCategoryException;
 
-	public java.util.List<com.liferay.portlet.shopping.model.ShoppingCategory> findWithDynamicQuery(
+	public java.util.List<Object> findWithDynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery)
 		throws com.liferay.portal.SystemException;
 
-	public java.util.List<com.liferay.portlet.shopping.model.ShoppingCategory> findWithDynamicQuery(
+	public java.util.List<Object> findWithDynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery, int start,
 		int end) throws com.liferay.portal.SystemException;
 

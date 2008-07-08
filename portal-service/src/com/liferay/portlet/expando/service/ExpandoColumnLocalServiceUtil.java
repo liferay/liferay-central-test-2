@@ -75,7 +75,7 @@ public class ExpandoColumnLocalServiceUtil {
 		expandoColumnLocalService.deleteExpandoColumn(expandoColumn);
 	}
 
-	public static java.util.List<com.liferay.portlet.expando.model.ExpandoColumn> dynamicQuery(
+	public static java.util.List<Object> dynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery)
 		throws com.liferay.portal.SystemException {
 		ExpandoColumnLocalService expandoColumnLocalService = ExpandoColumnLocalServiceFactory.getService();
@@ -83,7 +83,7 @@ public class ExpandoColumnLocalServiceUtil {
 		return expandoColumnLocalService.dynamicQuery(dynamicQuery);
 	}
 
-	public static java.util.List<com.liferay.portlet.expando.model.ExpandoColumn> dynamicQuery(
+	public static java.util.List<Object> dynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery, int start,
 		int end) throws com.liferay.portal.SystemException {
 		ExpandoColumnLocalService expandoColumnLocalService = ExpandoColumnLocalServiceFactory.getService();

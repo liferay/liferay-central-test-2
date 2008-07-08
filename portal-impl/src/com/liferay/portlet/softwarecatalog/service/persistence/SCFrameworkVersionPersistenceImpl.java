@@ -23,6 +23,11 @@
 package com.liferay.portlet.softwarecatalog.service.persistence;
 
 import com.liferay.portal.SystemException;
+import com.liferay.portal.kernel.dao.jdbc.MappingSqlQuery;
+import com.liferay.portal.kernel.dao.jdbc.MappingSqlQueryFactoryUtil;
+import com.liferay.portal.kernel.dao.jdbc.RowMapper;
+import com.liferay.portal.kernel.dao.jdbc.SqlUpdate;
+import com.liferay.portal.kernel.dao.jdbc.SqlUpdateFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 import com.liferay.portal.kernel.dao.orm.FinderCacheUtil;
 import com.liferay.portal.kernel.dao.orm.Query;
@@ -47,14 +52,6 @@ import com.liferay.portlet.softwarecatalog.model.impl.SCFrameworkVersionModelImp
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
-import org.springframework.dao.DataAccessException;
-
-import org.springframework.jdbc.core.SqlParameter;
-import org.springframework.jdbc.object.MappingSqlQuery;
-import org.springframework.jdbc.object.SqlUpdate;
-
-import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.sql.Types;
 
 import java.util.ArrayList;
@@ -1063,8 +1060,8 @@ public class SCFrameworkVersionPersistenceImpl extends BasePersistenceImpl
 		}
 	}
 
-	public List<SCFrameworkVersion> findWithDynamicQuery(
-		DynamicQuery dynamicQuery) throws SystemException {
+	public List<Object> findWithDynamicQuery(DynamicQuery dynamicQuery)
+		throws SystemException {
 		Session session = null;
 
 		try {
@@ -1082,17 +1079,16 @@ public class SCFrameworkVersionPersistenceImpl extends BasePersistenceImpl
 		}
 	}
 
-	public List<SCFrameworkVersion> findWithDynamicQuery(
-		DynamicQuery dynamicQuery, int start, int end)
-		throws SystemException {
+	public List<Object> findWithDynamicQuery(DynamicQuery dynamicQuery,
+		int start, int end) throws SystemException {
 		Session session = null;
 
 		try {
 			session = openSession();
 
-			dynamicQuery.compile(session);
-
 			dynamicQuery.setLimit(start, end);
+
+			dynamicQuery.compile(session);
 
 			return dynamicQuery.list();
 		}
@@ -1547,7 +1543,7 @@ public class SCFrameworkVersionPersistenceImpl extends BasePersistenceImpl
 				return list;
 			}
 			catch (Exception e) {
-				throw new SystemException(e);
+				throw processException(e);
 			}
 			finally {
 				closeSession(session);
@@ -1618,7 +1614,8 @@ public class SCFrameworkVersionPersistenceImpl extends BasePersistenceImpl
 		}
 	}
 
-	public boolean containsSCProductVersion(long pk, long scProductVersionPK) {
+	public boolean containsSCProductVersion(long pk, long scProductVersionPK)
+		throws SystemException {
 		boolean finderClassNameCacheEnabled = SCFrameworkVersionModelImpl.CACHE_ENABLED_SCFRAMEWORKVERSI_SCPRODUCTVERS;
 
 		String finderClassName = "SCFrameworkVersi_SCProductVers";
@@ -1643,14 +1640,19 @@ public class SCFrameworkVersionPersistenceImpl extends BasePersistenceImpl
 		}
 
 		if (result == null) {
-			Boolean value = Boolean.valueOf(containsSCProductVersion.contains(
-						pk, scProductVersionPK));
+			try {
+				Boolean value = Boolean.valueOf(containsSCProductVersion.contains(
+							pk, scProductVersionPK));
 
-			FinderCacheUtil.putResult(finderClassNameCacheEnabled,
-				finderClassName, finderMethodName, finderParams, finderArgs,
-				value);
+				FinderCacheUtil.putResult(finderClassNameCacheEnabled,
+					finderClassName, finderMethodName, finderParams,
+					finderArgs, value);
 
-			return value.booleanValue();
+				return value.booleanValue();
+			}
+			catch (Exception e) {
+				throw processException(e);
+			}
 		}
 		else {
 			return ((Boolean)result).booleanValue();
@@ -1671,8 +1673,8 @@ public class SCFrameworkVersionPersistenceImpl extends BasePersistenceImpl
 		try {
 			addSCProductVersion.add(pk, scProductVersionPK);
 		}
-		catch (DataAccessException dae) {
-			throw new SystemException(dae);
+		catch (Exception e) {
+			throw processException(e);
 		}
 		finally {
 			FinderCacheUtil.clearCache("SCFrameworkVersi_SCProductVers");
@@ -1685,8 +1687,8 @@ public class SCFrameworkVersionPersistenceImpl extends BasePersistenceImpl
 		try {
 			addSCProductVersion.add(pk, scProductVersion.getPrimaryKey());
 		}
-		catch (DataAccessException dae) {
-			throw new SystemException(dae);
+		catch (Exception e) {
+			throw processException(e);
 		}
 		finally {
 			FinderCacheUtil.clearCache("SCFrameworkVersi_SCProductVers");
@@ -1700,8 +1702,8 @@ public class SCFrameworkVersionPersistenceImpl extends BasePersistenceImpl
 				addSCProductVersion.add(pk, scProductVersionPK);
 			}
 		}
-		catch (DataAccessException dae) {
-			throw new SystemException(dae);
+		catch (Exception e) {
+			throw processException(e);
 		}
 		finally {
 			FinderCacheUtil.clearCache("SCFrameworkVersi_SCProductVers");
@@ -1716,8 +1718,8 @@ public class SCFrameworkVersionPersistenceImpl extends BasePersistenceImpl
 				addSCProductVersion.add(pk, scProductVersion.getPrimaryKey());
 			}
 		}
-		catch (DataAccessException dae) {
-			throw new SystemException(dae);
+		catch (Exception e) {
+			throw processException(e);
 		}
 		finally {
 			FinderCacheUtil.clearCache("SCFrameworkVersi_SCProductVers");
@@ -1728,8 +1730,8 @@ public class SCFrameworkVersionPersistenceImpl extends BasePersistenceImpl
 		try {
 			clearSCProductVersions.clear(pk);
 		}
-		catch (DataAccessException dae) {
-			throw new SystemException(dae);
+		catch (Exception e) {
+			throw processException(e);
 		}
 		finally {
 			FinderCacheUtil.clearCache("SCFrameworkVersi_SCProductVers");
@@ -1741,8 +1743,8 @@ public class SCFrameworkVersionPersistenceImpl extends BasePersistenceImpl
 		try {
 			removeSCProductVersion.remove(pk, scProductVersionPK);
 		}
-		catch (DataAccessException dae) {
-			throw new SystemException(dae);
+		catch (Exception e) {
+			throw processException(e);
 		}
 		finally {
 			FinderCacheUtil.clearCache("SCFrameworkVersi_SCProductVers");
@@ -1755,8 +1757,8 @@ public class SCFrameworkVersionPersistenceImpl extends BasePersistenceImpl
 		try {
 			removeSCProductVersion.remove(pk, scProductVersion.getPrimaryKey());
 		}
-		catch (DataAccessException dae) {
-			throw new SystemException(dae);
+		catch (Exception e) {
+			throw processException(e);
 		}
 		finally {
 			FinderCacheUtil.clearCache("SCFrameworkVersi_SCProductVers");
@@ -1770,8 +1772,8 @@ public class SCFrameworkVersionPersistenceImpl extends BasePersistenceImpl
 				removeSCProductVersion.remove(pk, scProductVersionPK);
 			}
 		}
-		catch (DataAccessException dae) {
-			throw new SystemException(dae);
+		catch (Exception e) {
+			throw processException(e);
 		}
 		finally {
 			FinderCacheUtil.clearCache("SCFrameworkVersi_SCProductVers");
@@ -1787,8 +1789,8 @@ public class SCFrameworkVersionPersistenceImpl extends BasePersistenceImpl
 					scProductVersion.getPrimaryKey());
 			}
 		}
-		catch (DataAccessException dae) {
-			throw new SystemException(dae);
+		catch (Exception e) {
+			throw processException(e);
 		}
 		finally {
 			FinderCacheUtil.clearCache("SCFrameworkVersi_SCProductVers");
@@ -1804,8 +1806,8 @@ public class SCFrameworkVersionPersistenceImpl extends BasePersistenceImpl
 				addSCProductVersion.add(pk, scProductVersionPK);
 			}
 		}
-		catch (DataAccessException dae) {
-			throw new SystemException(dae);
+		catch (Exception e) {
+			throw processException(e);
 		}
 		finally {
 			FinderCacheUtil.clearCache("SCFrameworkVersi_SCProductVers");
@@ -1822,8 +1824,8 @@ public class SCFrameworkVersionPersistenceImpl extends BasePersistenceImpl
 				addSCProductVersion.add(pk, scProductVersion.getPrimaryKey());
 			}
 		}
-		catch (DataAccessException dae) {
-			throw new SystemException(dae);
+		catch (Exception e) {
+			throw processException(e);
 		}
 		finally {
 			FinderCacheUtil.clearCache("SCFrameworkVersi_SCProductVers");
@@ -1879,25 +1881,19 @@ public class SCFrameworkVersionPersistenceImpl extends BasePersistenceImpl
 	protected ClearSCProductVersions clearSCProductVersions;
 	protected RemoveSCProductVersion removeSCProductVersion;
 
-	protected class ContainsSCProductVersion extends MappingSqlQuery {
+	protected class ContainsSCProductVersion {
 		protected ContainsSCProductVersion(
 			SCFrameworkVersionPersistenceImpl persistenceImpl) {
-			super(persistenceImpl.getDataSource(), _SQL_CONTAINSSCPRODUCTVERSION);
+			super();
 
-			declareParameter(new SqlParameter(Types.BIGINT));
-			declareParameter(new SqlParameter(Types.BIGINT));
-
-			compile();
-		}
-
-		protected Object mapRow(ResultSet rs, int rowNumber)
-			throws SQLException {
-			return new Integer(rs.getInt("COUNT_VALUE"));
+			_mappingSqlQuery = MappingSqlQueryFactoryUtil.getMappingSqlQuery(getDataSource(),
+					_SQL_CONTAINSSCPRODUCTVERSION,
+					new int[] { Types.BIGINT, Types.BIGINT }, RowMapper.COUNT);
 		}
 
 		protected boolean contains(long frameworkVersionId,
 			long productVersionId) {
-			List<Integer> results = execute(new Object[] {
+			List<Integer> results = _mappingSqlQuery.execute(new Object[] {
 						new Long(frameworkVersionId), new Long(productVersionId)
 					});
 
@@ -1911,67 +1907,62 @@ public class SCFrameworkVersionPersistenceImpl extends BasePersistenceImpl
 
 			return false;
 		}
+
+		private MappingSqlQuery _mappingSqlQuery;
 	}
 
-	protected class AddSCProductVersion extends SqlUpdate {
+	protected class AddSCProductVersion {
 		protected AddSCProductVersion(
 			SCFrameworkVersionPersistenceImpl persistenceImpl) {
-			super(persistenceImpl.getDataSource(),
-				"INSERT INTO SCFrameworkVersi_SCProductVers (frameworkVersionId, productVersionId) VALUES (?, ?)");
-
+			_sqlUpdate = SqlUpdateFactoryUtil.getSqlUpdate(getDataSource(),
+					"INSERT INTO SCFrameworkVersi_SCProductVers (frameworkVersionId, productVersionId) VALUES (?, ?)",
+					new int[] { Types.BIGINT, Types.BIGINT });
 			_persistenceImpl = persistenceImpl;
-
-			declareParameter(new SqlParameter(Types.BIGINT));
-			declareParameter(new SqlParameter(Types.BIGINT));
-
-			compile();
 		}
 
 		protected void add(long frameworkVersionId, long productVersionId) {
 			if (!_persistenceImpl.containsSCProductVersion.contains(
 						frameworkVersionId, productVersionId)) {
-				update(new Object[] {
+				_sqlUpdate.update(new Object[] {
 						new Long(frameworkVersionId), new Long(productVersionId)
 					});
 			}
 		}
 
+		private SqlUpdate _sqlUpdate;
 		private SCFrameworkVersionPersistenceImpl _persistenceImpl;
 	}
 
-	protected class ClearSCProductVersions extends SqlUpdate {
+	protected class ClearSCProductVersions {
 		protected ClearSCProductVersions(
 			SCFrameworkVersionPersistenceImpl persistenceImpl) {
-			super(persistenceImpl.getDataSource(),
-				"DELETE FROM SCFrameworkVersi_SCProductVers WHERE frameworkVersionId = ?");
-
-			declareParameter(new SqlParameter(Types.BIGINT));
-
-			compile();
+			_sqlUpdate = SqlUpdateFactoryUtil.getSqlUpdate(getDataSource(),
+					"DELETE FROM SCFrameworkVersi_SCProductVers WHERE frameworkVersionId = ?",
+					new int[] { Types.BIGINT });
 		}
 
 		protected void clear(long frameworkVersionId) {
-			update(new Object[] { new Long(frameworkVersionId) });
+			_sqlUpdate.update(new Object[] { new Long(frameworkVersionId) });
 		}
+
+		private SqlUpdate _sqlUpdate;
 	}
 
-	protected class RemoveSCProductVersion extends SqlUpdate {
+	protected class RemoveSCProductVersion {
 		protected RemoveSCProductVersion(
 			SCFrameworkVersionPersistenceImpl persistenceImpl) {
-			super(persistenceImpl.getDataSource(),
-				"DELETE FROM SCFrameworkVersi_SCProductVers WHERE frameworkVersionId = ? AND productVersionId = ?");
-
-			declareParameter(new SqlParameter(Types.BIGINT));
-			declareParameter(new SqlParameter(Types.BIGINT));
-
-			compile();
+			_sqlUpdate = SqlUpdateFactoryUtil.getSqlUpdate(getDataSource(),
+					"DELETE FROM SCFrameworkVersi_SCProductVers WHERE frameworkVersionId = ? AND productVersionId = ?",
+					new int[] { Types.BIGINT, Types.BIGINT });
 		}
 
 		protected void remove(long frameworkVersionId, long productVersionId) {
-			update(new Object[] {
+			_sqlUpdate.update(new Object[] {
 					new Long(frameworkVersionId), new Long(productVersionId)
 				});
 		}
+
+		private SqlUpdate _sqlUpdate;
 	}
 
 	private static final String _SQL_GETSCPRODUCTVERSIONS = "SELECT {SCProductVersion.*} FROM SCProductVersion INNER JOIN SCFrameworkVersi_SCProductVers ON (SCFrameworkVersi_SCProductVers.productVersionId = SCProductVersion.productVersionId) WHERE (SCFrameworkVersi_SCProductVers.frameworkVersionId = ?)";

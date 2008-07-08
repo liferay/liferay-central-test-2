@@ -75,7 +75,7 @@ public class WikiNodeLocalServiceUtil {
 		wikiNodeLocalService.deleteWikiNode(wikiNode);
 	}
 
-	public static java.util.List<com.liferay.portlet.wiki.model.WikiNode> dynamicQuery(
+	public static java.util.List<Object> dynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery)
 		throws com.liferay.portal.SystemException {
 		WikiNodeLocalService wikiNodeLocalService = WikiNodeLocalServiceFactory.getService();
@@ -83,7 +83,7 @@ public class WikiNodeLocalServiceUtil {
 		return wikiNodeLocalService.dynamicQuery(dynamicQuery);
 	}
 
-	public static java.util.List<com.liferay.portlet.wiki.model.WikiNode> dynamicQuery(
+	public static java.util.List<Object> dynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery, int start,
 		int end) throws com.liferay.portal.SystemException {
 		WikiNodeLocalService wikiNodeLocalService = WikiNodeLocalServiceFactory.getService();

@@ -24,6 +24,11 @@ package com.liferay.portal.service.persistence;
 
 import com.liferay.portal.NoSuchPermissionException;
 import com.liferay.portal.SystemException;
+import com.liferay.portal.kernel.dao.jdbc.MappingSqlQuery;
+import com.liferay.portal.kernel.dao.jdbc.MappingSqlQueryFactoryUtil;
+import com.liferay.portal.kernel.dao.jdbc.RowMapper;
+import com.liferay.portal.kernel.dao.jdbc.SqlUpdate;
+import com.liferay.portal.kernel.dao.jdbc.SqlUpdateFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 import com.liferay.portal.kernel.dao.orm.FinderCacheUtil;
 import com.liferay.portal.kernel.dao.orm.Query;
@@ -46,14 +51,6 @@ import com.liferay.portal.service.persistence.impl.BasePersistenceImpl;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
-import org.springframework.dao.DataAccessException;
-
-import org.springframework.jdbc.core.SqlParameter;
-import org.springframework.jdbc.object.MappingSqlQuery;
-import org.springframework.jdbc.object.SqlUpdate;
-
-import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.sql.Types;
 
 import java.util.ArrayList;
@@ -644,7 +641,7 @@ public class PermissionPersistenceImpl extends BasePersistenceImpl
 		}
 	}
 
-	public List<Permission> findWithDynamicQuery(DynamicQuery dynamicQuery)
+	public List<Object> findWithDynamicQuery(DynamicQuery dynamicQuery)
 		throws SystemException {
 		Session session = null;
 
@@ -663,16 +660,16 @@ public class PermissionPersistenceImpl extends BasePersistenceImpl
 		}
 	}
 
-	public List<Permission> findWithDynamicQuery(DynamicQuery dynamicQuery,
+	public List<Object> findWithDynamicQuery(DynamicQuery dynamicQuery,
 		int start, int end) throws SystemException {
 		Session session = null;
 
 		try {
 			session = openSession();
 
-			dynamicQuery.compile(session);
-
 			dynamicQuery.setLimit(start, end);
+
+			dynamicQuery.compile(session);
 
 			return dynamicQuery.list();
 		}
@@ -1048,7 +1045,7 @@ public class PermissionPersistenceImpl extends BasePersistenceImpl
 				return list;
 			}
 			catch (Exception e) {
-				throw new SystemException(e);
+				throw processException(e);
 			}
 			finally {
 				closeSession(session);
@@ -1119,7 +1116,8 @@ public class PermissionPersistenceImpl extends BasePersistenceImpl
 		}
 	}
 
-	public boolean containsGroup(long pk, long groupPK) {
+	public boolean containsGroup(long pk, long groupPK)
+		throws SystemException {
 		boolean finderClassNameCacheEnabled = PermissionModelImpl.CACHE_ENABLED_GROUPS_PERMISSIONS;
 
 		String finderClassName = "Groups_Permissions";
@@ -1140,13 +1138,19 @@ public class PermissionPersistenceImpl extends BasePersistenceImpl
 		}
 
 		if (result == null) {
-			Boolean value = Boolean.valueOf(containsGroup.contains(pk, groupPK));
+			try {
+				Boolean value = Boolean.valueOf(containsGroup.contains(pk,
+							groupPK));
 
-			FinderCacheUtil.putResult(finderClassNameCacheEnabled,
-				finderClassName, finderMethodName, finderParams, finderArgs,
-				value);
+				FinderCacheUtil.putResult(finderClassNameCacheEnabled,
+					finderClassName, finderMethodName, finderParams,
+					finderArgs, value);
 
-			return value.booleanValue();
+				return value.booleanValue();
+			}
+			catch (Exception e) {
+				throw processException(e);
+			}
 		}
 		else {
 			return ((Boolean)result).booleanValue();
@@ -1166,8 +1170,8 @@ public class PermissionPersistenceImpl extends BasePersistenceImpl
 		try {
 			addGroup.add(pk, groupPK);
 		}
-		catch (DataAccessException dae) {
-			throw new SystemException(dae);
+		catch (Exception e) {
+			throw processException(e);
 		}
 		finally {
 			FinderCacheUtil.clearCache("Groups_Permissions");
@@ -1179,8 +1183,8 @@ public class PermissionPersistenceImpl extends BasePersistenceImpl
 		try {
 			addGroup.add(pk, group.getPrimaryKey());
 		}
-		catch (DataAccessException dae) {
-			throw new SystemException(dae);
+		catch (Exception e) {
+			throw processException(e);
 		}
 		finally {
 			FinderCacheUtil.clearCache("Groups_Permissions");
@@ -1193,8 +1197,8 @@ public class PermissionPersistenceImpl extends BasePersistenceImpl
 				addGroup.add(pk, groupPK);
 			}
 		}
-		catch (DataAccessException dae) {
-			throw new SystemException(dae);
+		catch (Exception e) {
+			throw processException(e);
 		}
 		finally {
 			FinderCacheUtil.clearCache("Groups_Permissions");
@@ -1208,8 +1212,8 @@ public class PermissionPersistenceImpl extends BasePersistenceImpl
 				addGroup.add(pk, group.getPrimaryKey());
 			}
 		}
-		catch (DataAccessException dae) {
-			throw new SystemException(dae);
+		catch (Exception e) {
+			throw processException(e);
 		}
 		finally {
 			FinderCacheUtil.clearCache("Groups_Permissions");
@@ -1220,8 +1224,8 @@ public class PermissionPersistenceImpl extends BasePersistenceImpl
 		try {
 			clearGroups.clear(pk);
 		}
-		catch (DataAccessException dae) {
-			throw new SystemException(dae);
+		catch (Exception e) {
+			throw processException(e);
 		}
 		finally {
 			FinderCacheUtil.clearCache("Groups_Permissions");
@@ -1232,8 +1236,8 @@ public class PermissionPersistenceImpl extends BasePersistenceImpl
 		try {
 			removeGroup.remove(pk, groupPK);
 		}
-		catch (DataAccessException dae) {
-			throw new SystemException(dae);
+		catch (Exception e) {
+			throw processException(e);
 		}
 		finally {
 			FinderCacheUtil.clearCache("Groups_Permissions");
@@ -1245,8 +1249,8 @@ public class PermissionPersistenceImpl extends BasePersistenceImpl
 		try {
 			removeGroup.remove(pk, group.getPrimaryKey());
 		}
-		catch (DataAccessException dae) {
-			throw new SystemException(dae);
+		catch (Exception e) {
+			throw processException(e);
 		}
 		finally {
 			FinderCacheUtil.clearCache("Groups_Permissions");
@@ -1260,8 +1264,8 @@ public class PermissionPersistenceImpl extends BasePersistenceImpl
 				removeGroup.remove(pk, groupPK);
 			}
 		}
-		catch (DataAccessException dae) {
-			throw new SystemException(dae);
+		catch (Exception e) {
+			throw processException(e);
 		}
 		finally {
 			FinderCacheUtil.clearCache("Groups_Permissions");
@@ -1275,8 +1279,8 @@ public class PermissionPersistenceImpl extends BasePersistenceImpl
 				removeGroup.remove(pk, group.getPrimaryKey());
 			}
 		}
-		catch (DataAccessException dae) {
-			throw new SystemException(dae);
+		catch (Exception e) {
+			throw processException(e);
 		}
 		finally {
 			FinderCacheUtil.clearCache("Groups_Permissions");
@@ -1291,8 +1295,8 @@ public class PermissionPersistenceImpl extends BasePersistenceImpl
 				addGroup.add(pk, groupPK);
 			}
 		}
-		catch (DataAccessException dae) {
-			throw new SystemException(dae);
+		catch (Exception e) {
+			throw processException(e);
 		}
 		finally {
 			FinderCacheUtil.clearCache("Groups_Permissions");
@@ -1308,8 +1312,8 @@ public class PermissionPersistenceImpl extends BasePersistenceImpl
 				addGroup.add(pk, group.getPrimaryKey());
 			}
 		}
-		catch (DataAccessException dae) {
-			throw new SystemException(dae);
+		catch (Exception e) {
+			throw processException(e);
 		}
 		finally {
 			FinderCacheUtil.clearCache("Groups_Permissions");
@@ -1391,7 +1395,7 @@ public class PermissionPersistenceImpl extends BasePersistenceImpl
 				return list;
 			}
 			catch (Exception e) {
-				throw new SystemException(e);
+				throw processException(e);
 			}
 			finally {
 				closeSession(session);
@@ -1462,7 +1466,7 @@ public class PermissionPersistenceImpl extends BasePersistenceImpl
 		}
 	}
 
-	public boolean containsRole(long pk, long rolePK) {
+	public boolean containsRole(long pk, long rolePK) throws SystemException {
 		boolean finderClassNameCacheEnabled = PermissionModelImpl.CACHE_ENABLED_ROLES_PERMISSIONS;
 
 		String finderClassName = "Roles_Permissions";
@@ -1483,13 +1487,18 @@ public class PermissionPersistenceImpl extends BasePersistenceImpl
 		}
 
 		if (result == null) {
-			Boolean value = Boolean.valueOf(containsRole.contains(pk, rolePK));
+			try {
+				Boolean value = Boolean.valueOf(containsRole.contains(pk, rolePK));
 
-			FinderCacheUtil.putResult(finderClassNameCacheEnabled,
-				finderClassName, finderMethodName, finderParams, finderArgs,
-				value);
+				FinderCacheUtil.putResult(finderClassNameCacheEnabled,
+					finderClassName, finderMethodName, finderParams,
+					finderArgs, value);
 
-			return value.booleanValue();
+				return value.booleanValue();
+			}
+			catch (Exception e) {
+				throw processException(e);
+			}
 		}
 		else {
 			return ((Boolean)result).booleanValue();
@@ -1509,8 +1518,8 @@ public class PermissionPersistenceImpl extends BasePersistenceImpl
 		try {
 			addRole.add(pk, rolePK);
 		}
-		catch (DataAccessException dae) {
-			throw new SystemException(dae);
+		catch (Exception e) {
+			throw processException(e);
 		}
 		finally {
 			FinderCacheUtil.clearCache("Roles_Permissions");
@@ -1522,8 +1531,8 @@ public class PermissionPersistenceImpl extends BasePersistenceImpl
 		try {
 			addRole.add(pk, role.getPrimaryKey());
 		}
-		catch (DataAccessException dae) {
-			throw new SystemException(dae);
+		catch (Exception e) {
+			throw processException(e);
 		}
 		finally {
 			FinderCacheUtil.clearCache("Roles_Permissions");
@@ -1536,8 +1545,8 @@ public class PermissionPersistenceImpl extends BasePersistenceImpl
 				addRole.add(pk, rolePK);
 			}
 		}
-		catch (DataAccessException dae) {
-			throw new SystemException(dae);
+		catch (Exception e) {
+			throw processException(e);
 		}
 		finally {
 			FinderCacheUtil.clearCache("Roles_Permissions");
@@ -1551,8 +1560,8 @@ public class PermissionPersistenceImpl extends BasePersistenceImpl
 				addRole.add(pk, role.getPrimaryKey());
 			}
 		}
-		catch (DataAccessException dae) {
-			throw new SystemException(dae);
+		catch (Exception e) {
+			throw processException(e);
 		}
 		finally {
 			FinderCacheUtil.clearCache("Roles_Permissions");
@@ -1563,8 +1572,8 @@ public class PermissionPersistenceImpl extends BasePersistenceImpl
 		try {
 			clearRoles.clear(pk);
 		}
-		catch (DataAccessException dae) {
-			throw new SystemException(dae);
+		catch (Exception e) {
+			throw processException(e);
 		}
 		finally {
 			FinderCacheUtil.clearCache("Roles_Permissions");
@@ -1575,8 +1584,8 @@ public class PermissionPersistenceImpl extends BasePersistenceImpl
 		try {
 			removeRole.remove(pk, rolePK);
 		}
-		catch (DataAccessException dae) {
-			throw new SystemException(dae);
+		catch (Exception e) {
+			throw processException(e);
 		}
 		finally {
 			FinderCacheUtil.clearCache("Roles_Permissions");
@@ -1588,8 +1597,8 @@ public class PermissionPersistenceImpl extends BasePersistenceImpl
 		try {
 			removeRole.remove(pk, role.getPrimaryKey());
 		}
-		catch (DataAccessException dae) {
-			throw new SystemException(dae);
+		catch (Exception e) {
+			throw processException(e);
 		}
 		finally {
 			FinderCacheUtil.clearCache("Roles_Permissions");
@@ -1602,8 +1611,8 @@ public class PermissionPersistenceImpl extends BasePersistenceImpl
 				removeRole.remove(pk, rolePK);
 			}
 		}
-		catch (DataAccessException dae) {
-			throw new SystemException(dae);
+		catch (Exception e) {
+			throw processException(e);
 		}
 		finally {
 			FinderCacheUtil.clearCache("Roles_Permissions");
@@ -1617,8 +1626,8 @@ public class PermissionPersistenceImpl extends BasePersistenceImpl
 				removeRole.remove(pk, role.getPrimaryKey());
 			}
 		}
-		catch (DataAccessException dae) {
-			throw new SystemException(dae);
+		catch (Exception e) {
+			throw processException(e);
 		}
 		finally {
 			FinderCacheUtil.clearCache("Roles_Permissions");
@@ -1633,8 +1642,8 @@ public class PermissionPersistenceImpl extends BasePersistenceImpl
 				addRole.add(pk, rolePK);
 			}
 		}
-		catch (DataAccessException dae) {
-			throw new SystemException(dae);
+		catch (Exception e) {
+			throw processException(e);
 		}
 		finally {
 			FinderCacheUtil.clearCache("Roles_Permissions");
@@ -1650,8 +1659,8 @@ public class PermissionPersistenceImpl extends BasePersistenceImpl
 				addRole.add(pk, role.getPrimaryKey());
 			}
 		}
-		catch (DataAccessException dae) {
-			throw new SystemException(dae);
+		catch (Exception e) {
+			throw processException(e);
 		}
 		finally {
 			FinderCacheUtil.clearCache("Roles_Permissions");
@@ -1727,7 +1736,7 @@ public class PermissionPersistenceImpl extends BasePersistenceImpl
 				return list;
 			}
 			catch (Exception e) {
-				throw new SystemException(e);
+				throw processException(e);
 			}
 			finally {
 				closeSession(session);
@@ -1798,7 +1807,7 @@ public class PermissionPersistenceImpl extends BasePersistenceImpl
 		}
 	}
 
-	public boolean containsUser(long pk, long userPK) {
+	public boolean containsUser(long pk, long userPK) throws SystemException {
 		boolean finderClassNameCacheEnabled = PermissionModelImpl.CACHE_ENABLED_USERS_PERMISSIONS;
 
 		String finderClassName = "Users_Permissions";
@@ -1819,13 +1828,18 @@ public class PermissionPersistenceImpl extends BasePersistenceImpl
 		}
 
 		if (result == null) {
-			Boolean value = Boolean.valueOf(containsUser.contains(pk, userPK));
+			try {
+				Boolean value = Boolean.valueOf(containsUser.contains(pk, userPK));
 
-			FinderCacheUtil.putResult(finderClassNameCacheEnabled,
-				finderClassName, finderMethodName, finderParams, finderArgs,
-				value);
+				FinderCacheUtil.putResult(finderClassNameCacheEnabled,
+					finderClassName, finderMethodName, finderParams,
+					finderArgs, value);
 
-			return value.booleanValue();
+				return value.booleanValue();
+			}
+			catch (Exception e) {
+				throw processException(e);
+			}
 		}
 		else {
 			return ((Boolean)result).booleanValue();
@@ -1845,8 +1859,8 @@ public class PermissionPersistenceImpl extends BasePersistenceImpl
 		try {
 			addUser.add(pk, userPK);
 		}
-		catch (DataAccessException dae) {
-			throw new SystemException(dae);
+		catch (Exception e) {
+			throw processException(e);
 		}
 		finally {
 			FinderCacheUtil.clearCache("Users_Permissions");
@@ -1858,8 +1872,8 @@ public class PermissionPersistenceImpl extends BasePersistenceImpl
 		try {
 			addUser.add(pk, user.getPrimaryKey());
 		}
-		catch (DataAccessException dae) {
-			throw new SystemException(dae);
+		catch (Exception e) {
+			throw processException(e);
 		}
 		finally {
 			FinderCacheUtil.clearCache("Users_Permissions");
@@ -1872,8 +1886,8 @@ public class PermissionPersistenceImpl extends BasePersistenceImpl
 				addUser.add(pk, userPK);
 			}
 		}
-		catch (DataAccessException dae) {
-			throw new SystemException(dae);
+		catch (Exception e) {
+			throw processException(e);
 		}
 		finally {
 			FinderCacheUtil.clearCache("Users_Permissions");
@@ -1887,8 +1901,8 @@ public class PermissionPersistenceImpl extends BasePersistenceImpl
 				addUser.add(pk, user.getPrimaryKey());
 			}
 		}
-		catch (DataAccessException dae) {
-			throw new SystemException(dae);
+		catch (Exception e) {
+			throw processException(e);
 		}
 		finally {
 			FinderCacheUtil.clearCache("Users_Permissions");
@@ -1899,8 +1913,8 @@ public class PermissionPersistenceImpl extends BasePersistenceImpl
 		try {
 			clearUsers.clear(pk);
 		}
-		catch (DataAccessException dae) {
-			throw new SystemException(dae);
+		catch (Exception e) {
+			throw processException(e);
 		}
 		finally {
 			FinderCacheUtil.clearCache("Users_Permissions");
@@ -1911,8 +1925,8 @@ public class PermissionPersistenceImpl extends BasePersistenceImpl
 		try {
 			removeUser.remove(pk, userPK);
 		}
-		catch (DataAccessException dae) {
-			throw new SystemException(dae);
+		catch (Exception e) {
+			throw processException(e);
 		}
 		finally {
 			FinderCacheUtil.clearCache("Users_Permissions");
@@ -1924,8 +1938,8 @@ public class PermissionPersistenceImpl extends BasePersistenceImpl
 		try {
 			removeUser.remove(pk, user.getPrimaryKey());
 		}
-		catch (DataAccessException dae) {
-			throw new SystemException(dae);
+		catch (Exception e) {
+			throw processException(e);
 		}
 		finally {
 			FinderCacheUtil.clearCache("Users_Permissions");
@@ -1938,8 +1952,8 @@ public class PermissionPersistenceImpl extends BasePersistenceImpl
 				removeUser.remove(pk, userPK);
 			}
 		}
-		catch (DataAccessException dae) {
-			throw new SystemException(dae);
+		catch (Exception e) {
+			throw processException(e);
 		}
 		finally {
 			FinderCacheUtil.clearCache("Users_Permissions");
@@ -1953,8 +1967,8 @@ public class PermissionPersistenceImpl extends BasePersistenceImpl
 				removeUser.remove(pk, user.getPrimaryKey());
 			}
 		}
-		catch (DataAccessException dae) {
-			throw new SystemException(dae);
+		catch (Exception e) {
+			throw processException(e);
 		}
 		finally {
 			FinderCacheUtil.clearCache("Users_Permissions");
@@ -1969,8 +1983,8 @@ public class PermissionPersistenceImpl extends BasePersistenceImpl
 				addUser.add(pk, userPK);
 			}
 		}
-		catch (DataAccessException dae) {
-			throw new SystemException(dae);
+		catch (Exception e) {
+			throw processException(e);
 		}
 		finally {
 			FinderCacheUtil.clearCache("Users_Permissions");
@@ -1986,8 +2000,8 @@ public class PermissionPersistenceImpl extends BasePersistenceImpl
 				addUser.add(pk, user.getPrimaryKey());
 			}
 		}
-		catch (DataAccessException dae) {
-			throw new SystemException(dae);
+		catch (Exception e) {
+			throw processException(e);
 		}
 		finally {
 			FinderCacheUtil.clearCache("Users_Permissions");
@@ -2063,23 +2077,17 @@ public class PermissionPersistenceImpl extends BasePersistenceImpl
 	protected ClearUsers clearUsers;
 	protected RemoveUser removeUser;
 
-	protected class ContainsGroup extends MappingSqlQuery {
+	protected class ContainsGroup {
 		protected ContainsGroup(PermissionPersistenceImpl persistenceImpl) {
-			super(persistenceImpl.getDataSource(), _SQL_CONTAINSGROUP);
+			super();
 
-			declareParameter(new SqlParameter(Types.BIGINT));
-			declareParameter(new SqlParameter(Types.BIGINT));
-
-			compile();
-		}
-
-		protected Object mapRow(ResultSet rs, int rowNumber)
-			throws SQLException {
-			return new Integer(rs.getInt("COUNT_VALUE"));
+			_mappingSqlQuery = MappingSqlQueryFactoryUtil.getMappingSqlQuery(getDataSource(),
+					_SQL_CONTAINSGROUP,
+					new int[] { Types.BIGINT, Types.BIGINT }, RowMapper.COUNT);
 		}
 
 		protected boolean contains(long permissionId, long groupId) {
-			List<Integer> results = execute(new Object[] {
+			List<Integer> results = _mappingSqlQuery.execute(new Object[] {
 						new Long(permissionId), new Long(groupId)
 					});
 
@@ -2093,78 +2101,71 @@ public class PermissionPersistenceImpl extends BasePersistenceImpl
 
 			return false;
 		}
+
+		private MappingSqlQuery _mappingSqlQuery;
 	}
 
-	protected class AddGroup extends SqlUpdate {
+	protected class AddGroup {
 		protected AddGroup(PermissionPersistenceImpl persistenceImpl) {
-			super(persistenceImpl.getDataSource(),
-				"INSERT INTO Groups_Permissions (permissionId, groupId) VALUES (?, ?)");
-
+			_sqlUpdate = SqlUpdateFactoryUtil.getSqlUpdate(getDataSource(),
+					"INSERT INTO Groups_Permissions (permissionId, groupId) VALUES (?, ?)",
+					new int[] { Types.BIGINT, Types.BIGINT });
 			_persistenceImpl = persistenceImpl;
-
-			declareParameter(new SqlParameter(Types.BIGINT));
-			declareParameter(new SqlParameter(Types.BIGINT));
-
-			compile();
 		}
 
 		protected void add(long permissionId, long groupId) {
 			if (!_persistenceImpl.containsGroup.contains(permissionId, groupId)) {
-				update(new Object[] { new Long(permissionId), new Long(groupId) });
+				_sqlUpdate.update(new Object[] {
+						new Long(permissionId), new Long(groupId)
+					});
 			}
 		}
 
+		private SqlUpdate _sqlUpdate;
 		private PermissionPersistenceImpl _persistenceImpl;
 	}
 
-	protected class ClearGroups extends SqlUpdate {
+	protected class ClearGroups {
 		protected ClearGroups(PermissionPersistenceImpl persistenceImpl) {
-			super(persistenceImpl.getDataSource(),
-				"DELETE FROM Groups_Permissions WHERE permissionId = ?");
-
-			declareParameter(new SqlParameter(Types.BIGINT));
-
-			compile();
+			_sqlUpdate = SqlUpdateFactoryUtil.getSqlUpdate(getDataSource(),
+					"DELETE FROM Groups_Permissions WHERE permissionId = ?",
+					new int[] { Types.BIGINT });
 		}
 
 		protected void clear(long permissionId) {
-			update(new Object[] { new Long(permissionId) });
+			_sqlUpdate.update(new Object[] { new Long(permissionId) });
 		}
+
+		private SqlUpdate _sqlUpdate;
 	}
 
-	protected class RemoveGroup extends SqlUpdate {
+	protected class RemoveGroup {
 		protected RemoveGroup(PermissionPersistenceImpl persistenceImpl) {
-			super(persistenceImpl.getDataSource(),
-				"DELETE FROM Groups_Permissions WHERE permissionId = ? AND groupId = ?");
-
-			declareParameter(new SqlParameter(Types.BIGINT));
-			declareParameter(new SqlParameter(Types.BIGINT));
-
-			compile();
+			_sqlUpdate = SqlUpdateFactoryUtil.getSqlUpdate(getDataSource(),
+					"DELETE FROM Groups_Permissions WHERE permissionId = ? AND groupId = ?",
+					new int[] { Types.BIGINT, Types.BIGINT });
 		}
 
 		protected void remove(long permissionId, long groupId) {
-			update(new Object[] { new Long(permissionId), new Long(groupId) });
+			_sqlUpdate.update(new Object[] {
+					new Long(permissionId), new Long(groupId)
+				});
 		}
+
+		private SqlUpdate _sqlUpdate;
 	}
 
-	protected class ContainsRole extends MappingSqlQuery {
+	protected class ContainsRole {
 		protected ContainsRole(PermissionPersistenceImpl persistenceImpl) {
-			super(persistenceImpl.getDataSource(), _SQL_CONTAINSROLE);
+			super();
 
-			declareParameter(new SqlParameter(Types.BIGINT));
-			declareParameter(new SqlParameter(Types.BIGINT));
-
-			compile();
-		}
-
-		protected Object mapRow(ResultSet rs, int rowNumber)
-			throws SQLException {
-			return new Integer(rs.getInt("COUNT_VALUE"));
+			_mappingSqlQuery = MappingSqlQueryFactoryUtil.getMappingSqlQuery(getDataSource(),
+					_SQL_CONTAINSROLE,
+					new int[] { Types.BIGINT, Types.BIGINT }, RowMapper.COUNT);
 		}
 
 		protected boolean contains(long permissionId, long roleId) {
-			List<Integer> results = execute(new Object[] {
+			List<Integer> results = _mappingSqlQuery.execute(new Object[] {
 						new Long(permissionId), new Long(roleId)
 					});
 
@@ -2178,78 +2179,71 @@ public class PermissionPersistenceImpl extends BasePersistenceImpl
 
 			return false;
 		}
+
+		private MappingSqlQuery _mappingSqlQuery;
 	}
 
-	protected class AddRole extends SqlUpdate {
+	protected class AddRole {
 		protected AddRole(PermissionPersistenceImpl persistenceImpl) {
-			super(persistenceImpl.getDataSource(),
-				"INSERT INTO Roles_Permissions (permissionId, roleId) VALUES (?, ?)");
-
+			_sqlUpdate = SqlUpdateFactoryUtil.getSqlUpdate(getDataSource(),
+					"INSERT INTO Roles_Permissions (permissionId, roleId) VALUES (?, ?)",
+					new int[] { Types.BIGINT, Types.BIGINT });
 			_persistenceImpl = persistenceImpl;
-
-			declareParameter(new SqlParameter(Types.BIGINT));
-			declareParameter(new SqlParameter(Types.BIGINT));
-
-			compile();
 		}
 
 		protected void add(long permissionId, long roleId) {
 			if (!_persistenceImpl.containsRole.contains(permissionId, roleId)) {
-				update(new Object[] { new Long(permissionId), new Long(roleId) });
+				_sqlUpdate.update(new Object[] {
+						new Long(permissionId), new Long(roleId)
+					});
 			}
 		}
 
+		private SqlUpdate _sqlUpdate;
 		private PermissionPersistenceImpl _persistenceImpl;
 	}
 
-	protected class ClearRoles extends SqlUpdate {
+	protected class ClearRoles {
 		protected ClearRoles(PermissionPersistenceImpl persistenceImpl) {
-			super(persistenceImpl.getDataSource(),
-				"DELETE FROM Roles_Permissions WHERE permissionId = ?");
-
-			declareParameter(new SqlParameter(Types.BIGINT));
-
-			compile();
+			_sqlUpdate = SqlUpdateFactoryUtil.getSqlUpdate(getDataSource(),
+					"DELETE FROM Roles_Permissions WHERE permissionId = ?",
+					new int[] { Types.BIGINT });
 		}
 
 		protected void clear(long permissionId) {
-			update(new Object[] { new Long(permissionId) });
+			_sqlUpdate.update(new Object[] { new Long(permissionId) });
 		}
+
+		private SqlUpdate _sqlUpdate;
 	}
 
-	protected class RemoveRole extends SqlUpdate {
+	protected class RemoveRole {
 		protected RemoveRole(PermissionPersistenceImpl persistenceImpl) {
-			super(persistenceImpl.getDataSource(),
-				"DELETE FROM Roles_Permissions WHERE permissionId = ? AND roleId = ?");
-
-			declareParameter(new SqlParameter(Types.BIGINT));
-			declareParameter(new SqlParameter(Types.BIGINT));
-
-			compile();
+			_sqlUpdate = SqlUpdateFactoryUtil.getSqlUpdate(getDataSource(),
+					"DELETE FROM Roles_Permissions WHERE permissionId = ? AND roleId = ?",
+					new int[] { Types.BIGINT, Types.BIGINT });
 		}
 
 		protected void remove(long permissionId, long roleId) {
-			update(new Object[] { new Long(permissionId), new Long(roleId) });
+			_sqlUpdate.update(new Object[] {
+					new Long(permissionId), new Long(roleId)
+				});
 		}
+
+		private SqlUpdate _sqlUpdate;
 	}
 
-	protected class ContainsUser extends MappingSqlQuery {
+	protected class ContainsUser {
 		protected ContainsUser(PermissionPersistenceImpl persistenceImpl) {
-			super(persistenceImpl.getDataSource(), _SQL_CONTAINSUSER);
+			super();
 
-			declareParameter(new SqlParameter(Types.BIGINT));
-			declareParameter(new SqlParameter(Types.BIGINT));
-
-			compile();
-		}
-
-		protected Object mapRow(ResultSet rs, int rowNumber)
-			throws SQLException {
-			return new Integer(rs.getInt("COUNT_VALUE"));
+			_mappingSqlQuery = MappingSqlQueryFactoryUtil.getMappingSqlQuery(getDataSource(),
+					_SQL_CONTAINSUSER,
+					new int[] { Types.BIGINT, Types.BIGINT }, RowMapper.COUNT);
 		}
 
 		protected boolean contains(long permissionId, long userId) {
-			List<Integer> results = execute(new Object[] {
+			List<Integer> results = _mappingSqlQuery.execute(new Object[] {
 						new Long(permissionId), new Long(userId)
 					});
 
@@ -2263,59 +2257,58 @@ public class PermissionPersistenceImpl extends BasePersistenceImpl
 
 			return false;
 		}
+
+		private MappingSqlQuery _mappingSqlQuery;
 	}
 
-	protected class AddUser extends SqlUpdate {
+	protected class AddUser {
 		protected AddUser(PermissionPersistenceImpl persistenceImpl) {
-			super(persistenceImpl.getDataSource(),
-				"INSERT INTO Users_Permissions (permissionId, userId) VALUES (?, ?)");
-
+			_sqlUpdate = SqlUpdateFactoryUtil.getSqlUpdate(getDataSource(),
+					"INSERT INTO Users_Permissions (permissionId, userId) VALUES (?, ?)",
+					new int[] { Types.BIGINT, Types.BIGINT });
 			_persistenceImpl = persistenceImpl;
-
-			declareParameter(new SqlParameter(Types.BIGINT));
-			declareParameter(new SqlParameter(Types.BIGINT));
-
-			compile();
 		}
 
 		protected void add(long permissionId, long userId) {
 			if (!_persistenceImpl.containsUser.contains(permissionId, userId)) {
-				update(new Object[] { new Long(permissionId), new Long(userId) });
+				_sqlUpdate.update(new Object[] {
+						new Long(permissionId), new Long(userId)
+					});
 			}
 		}
 
+		private SqlUpdate _sqlUpdate;
 		private PermissionPersistenceImpl _persistenceImpl;
 	}
 
-	protected class ClearUsers extends SqlUpdate {
+	protected class ClearUsers {
 		protected ClearUsers(PermissionPersistenceImpl persistenceImpl) {
-			super(persistenceImpl.getDataSource(),
-				"DELETE FROM Users_Permissions WHERE permissionId = ?");
-
-			declareParameter(new SqlParameter(Types.BIGINT));
-
-			compile();
+			_sqlUpdate = SqlUpdateFactoryUtil.getSqlUpdate(getDataSource(),
+					"DELETE FROM Users_Permissions WHERE permissionId = ?",
+					new int[] { Types.BIGINT });
 		}
 
 		protected void clear(long permissionId) {
-			update(new Object[] { new Long(permissionId) });
+			_sqlUpdate.update(new Object[] { new Long(permissionId) });
 		}
+
+		private SqlUpdate _sqlUpdate;
 	}
 
-	protected class RemoveUser extends SqlUpdate {
+	protected class RemoveUser {
 		protected RemoveUser(PermissionPersistenceImpl persistenceImpl) {
-			super(persistenceImpl.getDataSource(),
-				"DELETE FROM Users_Permissions WHERE permissionId = ? AND userId = ?");
-
-			declareParameter(new SqlParameter(Types.BIGINT));
-			declareParameter(new SqlParameter(Types.BIGINT));
-
-			compile();
+			_sqlUpdate = SqlUpdateFactoryUtil.getSqlUpdate(getDataSource(),
+					"DELETE FROM Users_Permissions WHERE permissionId = ? AND userId = ?",
+					new int[] { Types.BIGINT, Types.BIGINT });
 		}
 
 		protected void remove(long permissionId, long userId) {
-			update(new Object[] { new Long(permissionId), new Long(userId) });
+			_sqlUpdate.update(new Object[] {
+					new Long(permissionId), new Long(userId)
+				});
 		}
+
+		private SqlUpdate _sqlUpdate;
 	}
 
 	private static final String _SQL_GETGROUPS = "SELECT {Group_.*} FROM Group_ INNER JOIN Groups_Permissions ON (Groups_Permissions.groupId = Group_.groupId) WHERE (Groups_Permissions.permissionId = ?)";

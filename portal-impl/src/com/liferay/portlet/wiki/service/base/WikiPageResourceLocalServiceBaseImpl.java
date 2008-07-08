@@ -77,13 +77,13 @@ public abstract class WikiPageResourceLocalServiceBaseImpl
 		wikiPageResourcePersistence.remove(wikiPageResource);
 	}
 
-	public List<WikiPageResource> dynamicQuery(DynamicQuery dynamicQuery)
+	public List<Object> dynamicQuery(DynamicQuery dynamicQuery)
 		throws SystemException {
 		return wikiPageResourcePersistence.findWithDynamicQuery(dynamicQuery);
 	}
 
-	public List<WikiPageResource> dynamicQuery(DynamicQuery dynamicQuery,
-		int start, int end) throws SystemException {
+	public List<Object> dynamicQuery(DynamicQuery dynamicQuery, int start,
+		int end) throws SystemException {
 		return wikiPageResourcePersistence.findWithDynamicQuery(dynamicQuery,
 			start, end);
 	}

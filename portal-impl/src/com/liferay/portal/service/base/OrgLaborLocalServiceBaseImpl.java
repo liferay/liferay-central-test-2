@@ -292,12 +292,12 @@ public abstract class OrgLaborLocalServiceBaseImpl
 		orgLaborPersistence.remove(orgLabor);
 	}
 
-	public List<OrgLabor> dynamicQuery(DynamicQuery dynamicQuery)
+	public List<Object> dynamicQuery(DynamicQuery dynamicQuery)
 		throws SystemException {
 		return orgLaborPersistence.findWithDynamicQuery(dynamicQuery);
 	}
 
-	public List<OrgLabor> dynamicQuery(DynamicQuery dynamicQuery, int start,
+	public List<Object> dynamicQuery(DynamicQuery dynamicQuery, int start,
 		int end) throws SystemException {
 		return orgLaborPersistence.findWithDynamicQuery(dynamicQuery, start, end);
 	}

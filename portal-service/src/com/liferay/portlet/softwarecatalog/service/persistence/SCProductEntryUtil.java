@@ -231,13 +231,13 @@ public class SCProductEntryUtil {
 		return getPersistence().fetchByRG_RA(repoGroupId, repoArtifactId);
 	}
 
-	public static java.util.List<com.liferay.portlet.softwarecatalog.model.SCProductEntry> findWithDynamicQuery(
+	public static java.util.List<Object> findWithDynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery)
 		throws com.liferay.portal.SystemException {
 		return getPersistence().findWithDynamicQuery(dynamicQuery);
 	}
 
-	public static java.util.List<com.liferay.portlet.softwarecatalog.model.SCProductEntry> findWithDynamicQuery(
+	public static java.util.List<Object> findWithDynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery, int start,
 		int end) throws com.liferay.portal.SystemException {
 		return getPersistence().findWithDynamicQuery(dynamicQuery, start, end);
@@ -332,7 +332,8 @@ public class SCProductEntryUtil {
 		return getPersistence().getSCLicensesSize(pk);
 	}
 
-	public static boolean containsSCLicense(long pk, long scLicensePK) {
+	public static boolean containsSCLicense(long pk, long scLicensePK)
+		throws com.liferay.portal.SystemException {
 		return getPersistence().containsSCLicense(pk, scLicensePK);
 	}
 

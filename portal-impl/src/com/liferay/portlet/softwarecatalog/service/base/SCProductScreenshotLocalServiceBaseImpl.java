@@ -86,13 +86,13 @@ public abstract class SCProductScreenshotLocalServiceBaseImpl
 		scProductScreenshotPersistence.remove(scProductScreenshot);
 	}
 
-	public List<SCProductScreenshot> dynamicQuery(DynamicQuery dynamicQuery)
+	public List<Object> dynamicQuery(DynamicQuery dynamicQuery)
 		throws SystemException {
 		return scProductScreenshotPersistence.findWithDynamicQuery(dynamicQuery);
 	}
 
-	public List<SCProductScreenshot> dynamicQuery(DynamicQuery dynamicQuery,
-		int start, int end) throws SystemException {
+	public List<Object> dynamicQuery(DynamicQuery dynamicQuery, int start,
+		int end) throws SystemException {
 		return scProductScreenshotPersistence.findWithDynamicQuery(dynamicQuery,
 			start, end);
 	}

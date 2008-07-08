@@ -127,12 +127,12 @@ public abstract class MBCategoryLocalServiceBaseImpl
 		mbCategoryPersistence.remove(mbCategory);
 	}
 
-	public List<MBCategory> dynamicQuery(DynamicQuery dynamicQuery)
+	public List<Object> dynamicQuery(DynamicQuery dynamicQuery)
 		throws SystemException {
 		return mbCategoryPersistence.findWithDynamicQuery(dynamicQuery);
 	}
 
-	public List<MBCategory> dynamicQuery(DynamicQuery dynamicQuery, int start,
+	public List<Object> dynamicQuery(DynamicQuery dynamicQuery, int start,
 		int end) throws SystemException {
 		return mbCategoryPersistence.findWithDynamicQuery(dynamicQuery, start,
 			end);

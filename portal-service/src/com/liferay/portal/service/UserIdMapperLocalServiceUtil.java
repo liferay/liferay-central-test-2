@@ -75,7 +75,7 @@ public class UserIdMapperLocalServiceUtil {
 		userIdMapperLocalService.deleteUserIdMapper(userIdMapper);
 	}
 
-	public static java.util.List<com.liferay.portal.model.UserIdMapper> dynamicQuery(
+	public static java.util.List<Object> dynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery)
 		throws com.liferay.portal.SystemException {
 		UserIdMapperLocalService userIdMapperLocalService = UserIdMapperLocalServiceFactory.getService();
@@ -83,7 +83,7 @@ public class UserIdMapperLocalServiceUtil {
 		return userIdMapperLocalService.dynamicQuery(dynamicQuery);
 	}
 
-	public static java.util.List<com.liferay.portal.model.UserIdMapper> dynamicQuery(
+	public static java.util.List<Object> dynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery, int start,
 		int end) throws com.liferay.portal.SystemException {
 		UserIdMapperLocalService userIdMapperLocalService = UserIdMapperLocalServiceFactory.getService();

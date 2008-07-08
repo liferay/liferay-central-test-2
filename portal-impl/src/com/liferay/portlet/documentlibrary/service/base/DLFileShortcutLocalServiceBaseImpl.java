@@ -107,13 +107,13 @@ public abstract class DLFileShortcutLocalServiceBaseImpl
 		dlFileShortcutPersistence.remove(dlFileShortcut);
 	}
 
-	public List<DLFileShortcut> dynamicQuery(DynamicQuery dynamicQuery)
+	public List<Object> dynamicQuery(DynamicQuery dynamicQuery)
 		throws SystemException {
 		return dlFileShortcutPersistence.findWithDynamicQuery(dynamicQuery);
 	}
 
-	public List<DLFileShortcut> dynamicQuery(DynamicQuery dynamicQuery,
-		int start, int end) throws SystemException {
+	public List<Object> dynamicQuery(DynamicQuery dynamicQuery, int start,
+		int end) throws SystemException {
 		return dlFileShortcutPersistence.findWithDynamicQuery(dynamicQuery,
 			start, end);
 	}

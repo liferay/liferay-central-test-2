@@ -170,11 +170,11 @@ public interface OrganizationPersistence {
 	public com.liferay.portal.model.Organization fetchByC_N(long companyId,
 		java.lang.String name) throws com.liferay.portal.SystemException;
 
-	public java.util.List<com.liferay.portal.model.Organization> findWithDynamicQuery(
+	public java.util.List<Object> findWithDynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery)
 		throws com.liferay.portal.SystemException;
 
-	public java.util.List<com.liferay.portal.model.Organization> findWithDynamicQuery(
+	public java.util.List<Object> findWithDynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery, int start,
 		int end) throws com.liferay.portal.SystemException;
 
@@ -229,7 +229,8 @@ public interface OrganizationPersistence {
 
 	public int getGroupsSize(long pk) throws com.liferay.portal.SystemException;
 
-	public boolean containsGroup(long pk, long groupPK);
+	public boolean containsGroup(long pk, long groupPK)
+		throws com.liferay.portal.SystemException;
 
 	public boolean containsGroups(long pk)
 		throws com.liferay.portal.SystemException;
@@ -281,7 +282,8 @@ public interface OrganizationPersistence {
 
 	public int getUsersSize(long pk) throws com.liferay.portal.SystemException;
 
-	public boolean containsUser(long pk, long userPK);
+	public boolean containsUser(long pk, long userPK)
+		throws com.liferay.portal.SystemException;
 
 	public boolean containsUsers(long pk)
 		throws com.liferay.portal.SystemException;

@@ -112,11 +112,11 @@ public interface TagsAssetPersistence {
 		long classNameId, long classPK)
 		throws com.liferay.portal.SystemException;
 
-	public java.util.List<com.liferay.portlet.tags.model.TagsAsset> findWithDynamicQuery(
+	public java.util.List<Object> findWithDynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery)
 		throws com.liferay.portal.SystemException;
 
-	public java.util.List<com.liferay.portlet.tags.model.TagsAsset> findWithDynamicQuery(
+	public java.util.List<Object> findWithDynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery, int start,
 		int end) throws com.liferay.portal.SystemException;
 
@@ -161,7 +161,8 @@ public interface TagsAssetPersistence {
 	public int getTagsEntriesSize(long pk)
 		throws com.liferay.portal.SystemException;
 
-	public boolean containsTagsEntry(long pk, long tagsEntryPK);
+	public boolean containsTagsEntry(long pk, long tagsEntryPK)
+		throws com.liferay.portal.SystemException;
 
 	public boolean containsTagsEntries(long pk)
 		throws com.liferay.portal.SystemException;

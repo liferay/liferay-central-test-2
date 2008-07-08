@@ -293,12 +293,12 @@ public abstract class LayoutSetLocalServiceBaseImpl
 		layoutSetPersistence.remove(layoutSet);
 	}
 
-	public List<LayoutSet> dynamicQuery(DynamicQuery dynamicQuery)
+	public List<Object> dynamicQuery(DynamicQuery dynamicQuery)
 		throws SystemException {
 		return layoutSetPersistence.findWithDynamicQuery(dynamicQuery);
 	}
 
-	public List<LayoutSet> dynamicQuery(DynamicQuery dynamicQuery, int start,
+	public List<Object> dynamicQuery(DynamicQuery dynamicQuery, int start,
 		int end) throws SystemException {
 		return layoutSetPersistence.findWithDynamicQuery(dynamicQuery, start,
 			end);

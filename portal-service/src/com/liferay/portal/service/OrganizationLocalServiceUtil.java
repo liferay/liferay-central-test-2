@@ -75,7 +75,7 @@ public class OrganizationLocalServiceUtil {
 		organizationLocalService.deleteOrganization(organization);
 	}
 
-	public static java.util.List<com.liferay.portal.model.Organization> dynamicQuery(
+	public static java.util.List<Object> dynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery)
 		throws com.liferay.portal.SystemException {
 		OrganizationLocalService organizationLocalService = OrganizationLocalServiceFactory.getService();
@@ -83,7 +83,7 @@ public class OrganizationLocalServiceUtil {
 		return organizationLocalService.dynamicQuery(dynamicQuery);
 	}
 
-	public static java.util.List<com.liferay.portal.model.Organization> dynamicQuery(
+	public static java.util.List<Object> dynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery, int start,
 		int end) throws com.liferay.portal.SystemException {
 		OrganizationLocalService organizationLocalService = OrganizationLocalServiceFactory.getService();
@@ -224,14 +224,16 @@ public class OrganizationLocalServiceUtil {
 		return organizationLocalService.getUserOrganizationsCount(userId);
 	}
 
-	public static boolean hasGroupOrganization(long groupId, long organizationId) {
+	public static boolean hasGroupOrganization(long groupId, long organizationId)
+		throws com.liferay.portal.SystemException {
 		OrganizationLocalService organizationLocalService = OrganizationLocalServiceFactory.getService();
 
 		return organizationLocalService.hasGroupOrganization(groupId,
 			organizationId);
 	}
 
-	public static boolean hasUserOrganization(long userId, long organizationId) {
+	public static boolean hasUserOrganization(long userId, long organizationId)
+		throws com.liferay.portal.SystemException {
 		OrganizationLocalService organizationLocalService = OrganizationLocalServiceFactory.getService();
 
 		return organizationLocalService.hasUserOrganization(userId,

@@ -136,11 +136,11 @@ public interface ShoppingItemPersistence {
 		long companyId, java.lang.String sku)
 		throws com.liferay.portal.SystemException;
 
-	public java.util.List<com.liferay.portlet.shopping.model.ShoppingItem> findWithDynamicQuery(
+	public java.util.List<Object> findWithDynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery)
 		throws com.liferay.portal.SystemException;
 
-	public java.util.List<com.liferay.portlet.shopping.model.ShoppingItem> findWithDynamicQuery(
+	public java.util.List<Object> findWithDynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery, int start,
 		int end) throws com.liferay.portal.SystemException;
 
@@ -206,7 +206,8 @@ public interface ShoppingItemPersistence {
 	public int getShoppingItemPricesSize(long pk)
 		throws com.liferay.portal.SystemException;
 
-	public boolean containsShoppingItemPrice(long pk, long shoppingItemPricePK);
+	public boolean containsShoppingItemPrice(long pk, long shoppingItemPricePK)
+		throws com.liferay.portal.SystemException;
 
 	public boolean containsShoppingItemPrices(long pk)
 		throws com.liferay.portal.SystemException;

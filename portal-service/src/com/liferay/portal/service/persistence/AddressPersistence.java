@@ -252,11 +252,11 @@ public interface AddressPersistence {
 		throws com.liferay.portal.NoSuchAddressException,
 			com.liferay.portal.SystemException;
 
-	public java.util.List<com.liferay.portal.model.Address> findWithDynamicQuery(
+	public java.util.List<Object> findWithDynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery)
 		throws com.liferay.portal.SystemException;
 
-	public java.util.List<com.liferay.portal.model.Address> findWithDynamicQuery(
+	public java.util.List<Object> findWithDynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery, int start,
 		int end) throws com.liferay.portal.SystemException;
 

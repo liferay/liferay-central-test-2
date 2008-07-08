@@ -291,12 +291,12 @@ public abstract class AddressLocalServiceBaseImpl implements AddressLocalService
 		addressPersistence.remove(address);
 	}
 
-	public List<Address> dynamicQuery(DynamicQuery dynamicQuery)
+	public List<Object> dynamicQuery(DynamicQuery dynamicQuery)
 		throws SystemException {
 		return addressPersistence.findWithDynamicQuery(dynamicQuery);
 	}
 
-	public List<Address> dynamicQuery(DynamicQuery dynamicQuery, int start,
+	public List<Object> dynamicQuery(DynamicQuery dynamicQuery, int start,
 		int end) throws SystemException {
 		return addressPersistence.findWithDynamicQuery(dynamicQuery, start, end);
 	}

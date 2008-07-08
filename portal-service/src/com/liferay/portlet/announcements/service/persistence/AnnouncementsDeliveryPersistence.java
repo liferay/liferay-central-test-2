@@ -114,11 +114,11 @@ public interface AnnouncementsDeliveryPersistence {
 		long userId, java.lang.String type)
 		throws com.liferay.portal.SystemException;
 
-	public java.util.List<com.liferay.portlet.announcements.model.AnnouncementsDelivery> findWithDynamicQuery(
+	public java.util.List<Object> findWithDynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery)
 		throws com.liferay.portal.SystemException;
 
-	public java.util.List<com.liferay.portlet.announcements.model.AnnouncementsDelivery> findWithDynamicQuery(
+	public java.util.List<Object> findWithDynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery, int start,
 		int end) throws com.liferay.portal.SystemException;
 

@@ -75,7 +75,7 @@ public class BlogsStatsUserLocalServiceUtil {
 		blogsStatsUserLocalService.deleteBlogsStatsUser(blogsStatsUser);
 	}
 
-	public static java.util.List<com.liferay.portlet.blogs.model.BlogsStatsUser> dynamicQuery(
+	public static java.util.List<Object> dynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery)
 		throws com.liferay.portal.SystemException {
 		BlogsStatsUserLocalService blogsStatsUserLocalService = BlogsStatsUserLocalServiceFactory.getService();
@@ -83,7 +83,7 @@ public class BlogsStatsUserLocalServiceUtil {
 		return blogsStatsUserLocalService.dynamicQuery(dynamicQuery);
 	}
 
-	public static java.util.List<com.liferay.portlet.blogs.model.BlogsStatsUser> dynamicQuery(
+	public static java.util.List<Object> dynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery, int start,
 		int end) throws com.liferay.portal.SystemException {
 		BlogsStatsUserLocalService blogsStatsUserLocalService = BlogsStatsUserLocalServiceFactory.getService();

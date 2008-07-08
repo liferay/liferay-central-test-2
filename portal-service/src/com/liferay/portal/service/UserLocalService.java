@@ -60,11 +60,11 @@ public interface UserLocalService {
 	public void deleteUser(com.liferay.portal.model.User user)
 		throws com.liferay.portal.SystemException;
 
-	public java.util.List<com.liferay.portal.model.User> dynamicQuery(
+	public java.util.List<Object> dynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery)
 		throws com.liferay.portal.SystemException;
 
-	public java.util.List<com.liferay.portal.model.User> dynamicQuery(
+	public java.util.List<Object> dynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery, int start,
 		int end) throws com.liferay.portal.SystemException;
 
@@ -326,16 +326,20 @@ public interface UserLocalService {
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;
 
-	public boolean hasGroupUser(long groupId, long userId);
+	public boolean hasGroupUser(long groupId, long userId)
+		throws com.liferay.portal.SystemException;
 
-	public boolean hasOrganizationUser(long organizationId, long userId);
+	public boolean hasOrganizationUser(long organizationId, long userId)
+		throws com.liferay.portal.SystemException;
 
 	public boolean hasPasswordPolicyUser(long passwordPolicyId, long userId)
 		throws com.liferay.portal.SystemException;
 
-	public boolean hasRoleUser(long roleId, long userId);
+	public boolean hasRoleUser(long roleId, long userId)
+		throws com.liferay.portal.SystemException;
 
-	public boolean hasUserGroupUser(long userGroupId, long userId);
+	public boolean hasUserGroupUser(long userGroupId, long userId)
+		throws com.liferay.portal.SystemException;
 
 	public boolean isPasswordExpired(com.liferay.portal.model.User user)
 		throws com.liferay.portal.PortalException,

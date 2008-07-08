@@ -75,7 +75,7 @@ public class PasswordPolicyRelLocalServiceUtil {
 		passwordPolicyRelLocalService.deletePasswordPolicyRel(passwordPolicyRel);
 	}
 
-	public static java.util.List<com.liferay.portal.model.PasswordPolicyRel> dynamicQuery(
+	public static java.util.List<Object> dynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery)
 		throws com.liferay.portal.SystemException {
 		PasswordPolicyRelLocalService passwordPolicyRelLocalService = PasswordPolicyRelLocalServiceFactory.getService();
@@ -83,7 +83,7 @@ public class PasswordPolicyRelLocalServiceUtil {
 		return passwordPolicyRelLocalService.dynamicQuery(dynamicQuery);
 	}
 
-	public static java.util.List<com.liferay.portal.model.PasswordPolicyRel> dynamicQuery(
+	public static java.util.List<Object> dynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery, int start,
 		int end) throws com.liferay.portal.SystemException {
 		PasswordPolicyRelLocalService passwordPolicyRelLocalService = PasswordPolicyRelLocalServiceFactory.getService();

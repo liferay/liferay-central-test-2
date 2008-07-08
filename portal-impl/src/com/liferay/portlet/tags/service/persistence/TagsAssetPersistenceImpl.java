@@ -23,6 +23,11 @@
 package com.liferay.portlet.tags.service.persistence;
 
 import com.liferay.portal.SystemException;
+import com.liferay.portal.kernel.dao.jdbc.MappingSqlQuery;
+import com.liferay.portal.kernel.dao.jdbc.MappingSqlQueryFactoryUtil;
+import com.liferay.portal.kernel.dao.jdbc.RowMapper;
+import com.liferay.portal.kernel.dao.jdbc.SqlUpdate;
+import com.liferay.portal.kernel.dao.jdbc.SqlUpdateFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 import com.liferay.portal.kernel.dao.orm.FinderCacheUtil;
 import com.liferay.portal.kernel.dao.orm.Query;
@@ -47,14 +52,6 @@ import com.liferay.portlet.tags.model.impl.TagsAssetModelImpl;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
-import org.springframework.dao.DataAccessException;
-
-import org.springframework.jdbc.core.SqlParameter;
-import org.springframework.jdbc.object.MappingSqlQuery;
-import org.springframework.jdbc.object.SqlUpdate;
-
-import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.sql.Types;
 
 import java.util.ArrayList;
@@ -615,7 +612,7 @@ public class TagsAssetPersistenceImpl extends BasePersistenceImpl
 		}
 	}
 
-	public List<TagsAsset> findWithDynamicQuery(DynamicQuery dynamicQuery)
+	public List<Object> findWithDynamicQuery(DynamicQuery dynamicQuery)
 		throws SystemException {
 		Session session = null;
 
@@ -634,16 +631,16 @@ public class TagsAssetPersistenceImpl extends BasePersistenceImpl
 		}
 	}
 
-	public List<TagsAsset> findWithDynamicQuery(DynamicQuery dynamicQuery,
+	public List<Object> findWithDynamicQuery(DynamicQuery dynamicQuery,
 		int start, int end) throws SystemException {
 		Session session = null;
 
 		try {
 			session = openSession();
 
-			dynamicQuery.compile(session);
-
 			dynamicQuery.setLimit(start, end);
+
+			dynamicQuery.compile(session);
 
 			return dynamicQuery.list();
 		}
@@ -1017,7 +1014,7 @@ public class TagsAssetPersistenceImpl extends BasePersistenceImpl
 				return list;
 			}
 			catch (Exception e) {
-				throw new SystemException(e);
+				throw processException(e);
 			}
 			finally {
 				closeSession(session);
@@ -1088,7 +1085,8 @@ public class TagsAssetPersistenceImpl extends BasePersistenceImpl
 		}
 	}
 
-	public boolean containsTagsEntry(long pk, long tagsEntryPK) {
+	public boolean containsTagsEntry(long pk, long tagsEntryPK)
+		throws SystemException {
 		boolean finderClassNameCacheEnabled = TagsAssetModelImpl.CACHE_ENABLED_TAGSASSETS_TAGSENTRIES;
 
 		String finderClassName = "TagsAssets_TagsEntries";
@@ -1109,14 +1107,19 @@ public class TagsAssetPersistenceImpl extends BasePersistenceImpl
 		}
 
 		if (result == null) {
-			Boolean value = Boolean.valueOf(containsTagsEntry.contains(pk,
-						tagsEntryPK));
+			try {
+				Boolean value = Boolean.valueOf(containsTagsEntry.contains(pk,
+							tagsEntryPK));
 
-			FinderCacheUtil.putResult(finderClassNameCacheEnabled,
-				finderClassName, finderMethodName, finderParams, finderArgs,
-				value);
+				FinderCacheUtil.putResult(finderClassNameCacheEnabled,
+					finderClassName, finderMethodName, finderParams,
+					finderArgs, value);
 
-			return value.booleanValue();
+				return value.booleanValue();
+			}
+			catch (Exception e) {
+				throw processException(e);
+			}
 		}
 		else {
 			return ((Boolean)result).booleanValue();
@@ -1137,8 +1140,8 @@ public class TagsAssetPersistenceImpl extends BasePersistenceImpl
 		try {
 			addTagsEntry.add(pk, tagsEntryPK);
 		}
-		catch (DataAccessException dae) {
-			throw new SystemException(dae);
+		catch (Exception e) {
+			throw processException(e);
 		}
 		finally {
 			FinderCacheUtil.clearCache("TagsAssets_TagsEntries");
@@ -1151,8 +1154,8 @@ public class TagsAssetPersistenceImpl extends BasePersistenceImpl
 		try {
 			addTagsEntry.add(pk, tagsEntry.getPrimaryKey());
 		}
-		catch (DataAccessException dae) {
-			throw new SystemException(dae);
+		catch (Exception e) {
+			throw processException(e);
 		}
 		finally {
 			FinderCacheUtil.clearCache("TagsAssets_TagsEntries");
@@ -1166,8 +1169,8 @@ public class TagsAssetPersistenceImpl extends BasePersistenceImpl
 				addTagsEntry.add(pk, tagsEntryPK);
 			}
 		}
-		catch (DataAccessException dae) {
-			throw new SystemException(dae);
+		catch (Exception e) {
+			throw processException(e);
 		}
 		finally {
 			FinderCacheUtil.clearCache("TagsAssets_TagsEntries");
@@ -1182,8 +1185,8 @@ public class TagsAssetPersistenceImpl extends BasePersistenceImpl
 				addTagsEntry.add(pk, tagsEntry.getPrimaryKey());
 			}
 		}
-		catch (DataAccessException dae) {
-			throw new SystemException(dae);
+		catch (Exception e) {
+			throw processException(e);
 		}
 		finally {
 			FinderCacheUtil.clearCache("TagsAssets_TagsEntries");
@@ -1194,8 +1197,8 @@ public class TagsAssetPersistenceImpl extends BasePersistenceImpl
 		try {
 			clearTagsEntries.clear(pk);
 		}
-		catch (DataAccessException dae) {
-			throw new SystemException(dae);
+		catch (Exception e) {
+			throw processException(e);
 		}
 		finally {
 			FinderCacheUtil.clearCache("TagsAssets_TagsEntries");
@@ -1207,8 +1210,8 @@ public class TagsAssetPersistenceImpl extends BasePersistenceImpl
 		try {
 			removeTagsEntry.remove(pk, tagsEntryPK);
 		}
-		catch (DataAccessException dae) {
-			throw new SystemException(dae);
+		catch (Exception e) {
+			throw processException(e);
 		}
 		finally {
 			FinderCacheUtil.clearCache("TagsAssets_TagsEntries");
@@ -1221,8 +1224,8 @@ public class TagsAssetPersistenceImpl extends BasePersistenceImpl
 		try {
 			removeTagsEntry.remove(pk, tagsEntry.getPrimaryKey());
 		}
-		catch (DataAccessException dae) {
-			throw new SystemException(dae);
+		catch (Exception e) {
+			throw processException(e);
 		}
 		finally {
 			FinderCacheUtil.clearCache("TagsAssets_TagsEntries");
@@ -1236,8 +1239,8 @@ public class TagsAssetPersistenceImpl extends BasePersistenceImpl
 				removeTagsEntry.remove(pk, tagsEntryPK);
 			}
 		}
-		catch (DataAccessException dae) {
-			throw new SystemException(dae);
+		catch (Exception e) {
+			throw processException(e);
 		}
 		finally {
 			FinderCacheUtil.clearCache("TagsAssets_TagsEntries");
@@ -1252,8 +1255,8 @@ public class TagsAssetPersistenceImpl extends BasePersistenceImpl
 				removeTagsEntry.remove(pk, tagsEntry.getPrimaryKey());
 			}
 		}
-		catch (DataAccessException dae) {
-			throw new SystemException(dae);
+		catch (Exception e) {
+			throw processException(e);
 		}
 		finally {
 			FinderCacheUtil.clearCache("TagsAssets_TagsEntries");
@@ -1269,8 +1272,8 @@ public class TagsAssetPersistenceImpl extends BasePersistenceImpl
 				addTagsEntry.add(pk, tagsEntryPK);
 			}
 		}
-		catch (DataAccessException dae) {
-			throw new SystemException(dae);
+		catch (Exception e) {
+			throw processException(e);
 		}
 		finally {
 			FinderCacheUtil.clearCache("TagsAssets_TagsEntries");
@@ -1287,8 +1290,8 @@ public class TagsAssetPersistenceImpl extends BasePersistenceImpl
 				addTagsEntry.add(pk, tagsEntry.getPrimaryKey());
 			}
 		}
-		catch (DataAccessException dae) {
-			throw new SystemException(dae);
+		catch (Exception e) {
+			throw processException(e);
 		}
 		finally {
 			FinderCacheUtil.clearCache("TagsAssets_TagsEntries");
@@ -1344,23 +1347,17 @@ public class TagsAssetPersistenceImpl extends BasePersistenceImpl
 	protected ClearTagsEntries clearTagsEntries;
 	protected RemoveTagsEntry removeTagsEntry;
 
-	protected class ContainsTagsEntry extends MappingSqlQuery {
+	protected class ContainsTagsEntry {
 		protected ContainsTagsEntry(TagsAssetPersistenceImpl persistenceImpl) {
-			super(persistenceImpl.getDataSource(), _SQL_CONTAINSTAGSENTRY);
+			super();
 
-			declareParameter(new SqlParameter(Types.BIGINT));
-			declareParameter(new SqlParameter(Types.BIGINT));
-
-			compile();
-		}
-
-		protected Object mapRow(ResultSet rs, int rowNumber)
-			throws SQLException {
-			return new Integer(rs.getInt("COUNT_VALUE"));
+			_mappingSqlQuery = MappingSqlQueryFactoryUtil.getMappingSqlQuery(getDataSource(),
+					_SQL_CONTAINSTAGSENTRY,
+					new int[] { Types.BIGINT, Types.BIGINT }, RowMapper.COUNT);
 		}
 
 		protected boolean contains(long assetId, long entryId) {
-			List<Integer> results = execute(new Object[] {
+			List<Integer> results = _mappingSqlQuery.execute(new Object[] {
 						new Long(assetId), new Long(entryId)
 					});
 
@@ -1374,59 +1371,57 @@ public class TagsAssetPersistenceImpl extends BasePersistenceImpl
 
 			return false;
 		}
+
+		private MappingSqlQuery _mappingSqlQuery;
 	}
 
-	protected class AddTagsEntry extends SqlUpdate {
+	protected class AddTagsEntry {
 		protected AddTagsEntry(TagsAssetPersistenceImpl persistenceImpl) {
-			super(persistenceImpl.getDataSource(),
-				"INSERT INTO TagsAssets_TagsEntries (assetId, entryId) VALUES (?, ?)");
-
+			_sqlUpdate = SqlUpdateFactoryUtil.getSqlUpdate(getDataSource(),
+					"INSERT INTO TagsAssets_TagsEntries (assetId, entryId) VALUES (?, ?)",
+					new int[] { Types.BIGINT, Types.BIGINT });
 			_persistenceImpl = persistenceImpl;
-
-			declareParameter(new SqlParameter(Types.BIGINT));
-			declareParameter(new SqlParameter(Types.BIGINT));
-
-			compile();
 		}
 
 		protected void add(long assetId, long entryId) {
 			if (!_persistenceImpl.containsTagsEntry.contains(assetId, entryId)) {
-				update(new Object[] { new Long(assetId), new Long(entryId) });
+				_sqlUpdate.update(new Object[] {
+						new Long(assetId), new Long(entryId)
+					});
 			}
 		}
 
+		private SqlUpdate _sqlUpdate;
 		private TagsAssetPersistenceImpl _persistenceImpl;
 	}
 
-	protected class ClearTagsEntries extends SqlUpdate {
+	protected class ClearTagsEntries {
 		protected ClearTagsEntries(TagsAssetPersistenceImpl persistenceImpl) {
-			super(persistenceImpl.getDataSource(),
-				"DELETE FROM TagsAssets_TagsEntries WHERE assetId = ?");
-
-			declareParameter(new SqlParameter(Types.BIGINT));
-
-			compile();
+			_sqlUpdate = SqlUpdateFactoryUtil.getSqlUpdate(getDataSource(),
+					"DELETE FROM TagsAssets_TagsEntries WHERE assetId = ?",
+					new int[] { Types.BIGINT });
 		}
 
 		protected void clear(long assetId) {
-			update(new Object[] { new Long(assetId) });
+			_sqlUpdate.update(new Object[] { new Long(assetId) });
 		}
+
+		private SqlUpdate _sqlUpdate;
 	}
 
-	protected class RemoveTagsEntry extends SqlUpdate {
+	protected class RemoveTagsEntry {
 		protected RemoveTagsEntry(TagsAssetPersistenceImpl persistenceImpl) {
-			super(persistenceImpl.getDataSource(),
-				"DELETE FROM TagsAssets_TagsEntries WHERE assetId = ? AND entryId = ?");
-
-			declareParameter(new SqlParameter(Types.BIGINT));
-			declareParameter(new SqlParameter(Types.BIGINT));
-
-			compile();
+			_sqlUpdate = SqlUpdateFactoryUtil.getSqlUpdate(getDataSource(),
+					"DELETE FROM TagsAssets_TagsEntries WHERE assetId = ? AND entryId = ?",
+					new int[] { Types.BIGINT, Types.BIGINT });
 		}
 
 		protected void remove(long assetId, long entryId) {
-			update(new Object[] { new Long(assetId), new Long(entryId) });
+			_sqlUpdate.update(new Object[] { new Long(assetId), new Long(
+						entryId) });
 		}
+
+		private SqlUpdate _sqlUpdate;
 	}
 
 	private static final String _SQL_GETTAGSENTRIES = "SELECT {TagsEntry.*} FROM TagsEntry INNER JOIN TagsAssets_TagsEntries ON (TagsAssets_TagsEntries.entryId = TagsEntry.entryId) WHERE (TagsAssets_TagsEntries.assetId = ?)";

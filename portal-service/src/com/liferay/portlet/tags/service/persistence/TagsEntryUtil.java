@@ -104,13 +104,13 @@ public class TagsEntryUtil {
 		return getPersistence().fetchByC_N(companyId, name);
 	}
 
-	public static java.util.List<com.liferay.portlet.tags.model.TagsEntry> findWithDynamicQuery(
+	public static java.util.List<Object> findWithDynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery)
 		throws com.liferay.portal.SystemException {
 		return getPersistence().findWithDynamicQuery(dynamicQuery);
 	}
 
-	public static java.util.List<com.liferay.portlet.tags.model.TagsEntry> findWithDynamicQuery(
+	public static java.util.List<Object> findWithDynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery, int start,
 		int end) throws com.liferay.portal.SystemException {
 		return getPersistence().findWithDynamicQuery(dynamicQuery, start, end);
@@ -173,7 +173,8 @@ public class TagsEntryUtil {
 		return getPersistence().getTagsAssetsSize(pk);
 	}
 
-	public static boolean containsTagsAsset(long pk, long tagsAssetPK) {
+	public static boolean containsTagsAsset(long pk, long tagsAssetPK)
+		throws com.liferay.portal.SystemException {
 		return getPersistence().containsTagsAsset(pk, tagsAssetPK);
 	}
 

@@ -237,13 +237,13 @@ public class OrganizationUtil {
 		return getPersistence().fetchByC_N(companyId, name);
 	}
 
-	public static java.util.List<com.liferay.portal.model.Organization> findWithDynamicQuery(
+	public static java.util.List<Object> findWithDynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery)
 		throws com.liferay.portal.SystemException {
 		return getPersistence().findWithDynamicQuery(dynamicQuery);
 	}
 
-	public static java.util.List<com.liferay.portal.model.Organization> findWithDynamicQuery(
+	public static java.util.List<Object> findWithDynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery, int start,
 		int end) throws com.liferay.portal.SystemException {
 		return getPersistence().findWithDynamicQuery(dynamicQuery, start, end);
@@ -336,7 +336,8 @@ public class OrganizationUtil {
 		return getPersistence().getGroupsSize(pk);
 	}
 
-	public static boolean containsGroup(long pk, long groupPK) {
+	public static boolean containsGroup(long pk, long groupPK)
+		throws com.liferay.portal.SystemException {
 		return getPersistence().containsGroup(pk, groupPK);
 	}
 
@@ -425,7 +426,8 @@ public class OrganizationUtil {
 		return getPersistence().getUsersSize(pk);
 	}
 
-	public static boolean containsUser(long pk, long userPK) {
+	public static boolean containsUser(long pk, long userPK)
+		throws com.liferay.portal.SystemException {
 		return getPersistence().containsUser(pk, userPK);
 	}
 

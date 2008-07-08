@@ -166,12 +166,12 @@ public abstract class TagsAssetLocalServiceBaseImpl
 		tagsAssetPersistence.remove(tagsAsset);
 	}
 
-	public List<TagsAsset> dynamicQuery(DynamicQuery dynamicQuery)
+	public List<Object> dynamicQuery(DynamicQuery dynamicQuery)
 		throws SystemException {
 		return tagsAssetPersistence.findWithDynamicQuery(dynamicQuery);
 	}
 
-	public List<TagsAsset> dynamicQuery(DynamicQuery dynamicQuery, int start,
+	public List<Object> dynamicQuery(DynamicQuery dynamicQuery, int start,
 		int end) throws SystemException {
 		return tagsAssetPersistence.findWithDynamicQuery(dynamicQuery, start,
 			end);

@@ -136,12 +136,12 @@ public abstract class MBThreadLocalServiceBaseImpl
 		mbThreadPersistence.remove(mbThread);
 	}
 
-	public List<MBThread> dynamicQuery(DynamicQuery dynamicQuery)
+	public List<Object> dynamicQuery(DynamicQuery dynamicQuery)
 		throws SystemException {
 		return mbThreadPersistence.findWithDynamicQuery(dynamicQuery);
 	}
 
-	public List<MBThread> dynamicQuery(DynamicQuery dynamicQuery, int start,
+	public List<Object> dynamicQuery(DynamicQuery dynamicQuery, int start,
 		int end) throws SystemException {
 		return mbThreadPersistence.findWithDynamicQuery(dynamicQuery, start, end);
 	}

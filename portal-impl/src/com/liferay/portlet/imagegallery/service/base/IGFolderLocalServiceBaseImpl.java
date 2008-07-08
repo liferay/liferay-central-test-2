@@ -105,12 +105,12 @@ public abstract class IGFolderLocalServiceBaseImpl
 		igFolderPersistence.remove(igFolder);
 	}
 
-	public List<IGFolder> dynamicQuery(DynamicQuery dynamicQuery)
+	public List<Object> dynamicQuery(DynamicQuery dynamicQuery)
 		throws SystemException {
 		return igFolderPersistence.findWithDynamicQuery(dynamicQuery);
 	}
 
-	public List<IGFolder> dynamicQuery(DynamicQuery dynamicQuery, int start,
+	public List<Object> dynamicQuery(DynamicQuery dynamicQuery, int start,
 		int end) throws SystemException {
 		return igFolderPersistence.findWithDynamicQuery(dynamicQuery, start, end);
 	}

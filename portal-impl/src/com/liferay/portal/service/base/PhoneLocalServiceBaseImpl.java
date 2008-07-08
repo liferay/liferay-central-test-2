@@ -291,12 +291,12 @@ public abstract class PhoneLocalServiceBaseImpl implements PhoneLocalService {
 		phonePersistence.remove(phone);
 	}
 
-	public List<Phone> dynamicQuery(DynamicQuery dynamicQuery)
+	public List<Object> dynamicQuery(DynamicQuery dynamicQuery)
 		throws SystemException {
 		return phonePersistence.findWithDynamicQuery(dynamicQuery);
 	}
 
-	public List<Phone> dynamicQuery(DynamicQuery dynamicQuery, int start,
+	public List<Object> dynamicQuery(DynamicQuery dynamicQuery, int start,
 		int end) throws SystemException {
 		return phonePersistence.findWithDynamicQuery(dynamicQuery, start, end);
 	}

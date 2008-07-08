@@ -172,11 +172,11 @@ public interface SCProductEntryPersistence {
 		java.lang.String repoGroupId, java.lang.String repoArtifactId)
 		throws com.liferay.portal.SystemException;
 
-	public java.util.List<com.liferay.portlet.softwarecatalog.model.SCProductEntry> findWithDynamicQuery(
+	public java.util.List<Object> findWithDynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery)
 		throws com.liferay.portal.SystemException;
 
-	public java.util.List<com.liferay.portlet.softwarecatalog.model.SCProductEntry> findWithDynamicQuery(
+	public java.util.List<Object> findWithDynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery, int start,
 		int end) throws com.liferay.portal.SystemException;
 
@@ -235,7 +235,8 @@ public interface SCProductEntryPersistence {
 	public int getSCLicensesSize(long pk)
 		throws com.liferay.portal.SystemException;
 
-	public boolean containsSCLicense(long pk, long scLicensePK);
+	public boolean containsSCLicense(long pk, long scLicensePK)
+		throws com.liferay.portal.SystemException;
 
 	public boolean containsSCLicenses(long pk)
 		throws com.liferay.portal.SystemException;

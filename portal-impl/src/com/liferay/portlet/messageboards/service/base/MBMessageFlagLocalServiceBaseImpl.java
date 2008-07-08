@@ -109,13 +109,13 @@ public abstract class MBMessageFlagLocalServiceBaseImpl
 		mbMessageFlagPersistence.remove(mbMessageFlag);
 	}
 
-	public List<MBMessageFlag> dynamicQuery(DynamicQuery dynamicQuery)
+	public List<Object> dynamicQuery(DynamicQuery dynamicQuery)
 		throws SystemException {
 		return mbMessageFlagPersistence.findWithDynamicQuery(dynamicQuery);
 	}
 
-	public List<MBMessageFlag> dynamicQuery(DynamicQuery dynamicQuery,
-		int start, int end) throws SystemException {
+	public List<Object> dynamicQuery(DynamicQuery dynamicQuery, int start,
+		int end) throws SystemException {
 		return mbMessageFlagPersistence.findWithDynamicQuery(dynamicQuery,
 			start, end);
 	}

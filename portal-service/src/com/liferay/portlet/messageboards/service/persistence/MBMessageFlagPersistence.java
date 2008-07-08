@@ -141,11 +141,11 @@ public interface MBMessageFlagPersistence {
 	public com.liferay.portlet.messageboards.model.MBMessageFlag fetchByU_M(
 		long userId, long messageId) throws com.liferay.portal.SystemException;
 
-	public java.util.List<com.liferay.portlet.messageboards.model.MBMessageFlag> findWithDynamicQuery(
+	public java.util.List<Object> findWithDynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery)
 		throws com.liferay.portal.SystemException;
 
-	public java.util.List<com.liferay.portlet.messageboards.model.MBMessageFlag> findWithDynamicQuery(
+	public java.util.List<Object> findWithDynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery, int start,
 		int end) throws com.liferay.portal.SystemException;
 

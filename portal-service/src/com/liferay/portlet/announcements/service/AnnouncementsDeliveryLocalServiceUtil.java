@@ -75,7 +75,7 @@ public class AnnouncementsDeliveryLocalServiceUtil {
 		announcementsDeliveryLocalService.deleteAnnouncementsDelivery(announcementsDelivery);
 	}
 
-	public static java.util.List<com.liferay.portlet.announcements.model.AnnouncementsDelivery> dynamicQuery(
+	public static java.util.List<Object> dynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery)
 		throws com.liferay.portal.SystemException {
 		AnnouncementsDeliveryLocalService announcementsDeliveryLocalService = AnnouncementsDeliveryLocalServiceFactory.getService();
@@ -83,7 +83,7 @@ public class AnnouncementsDeliveryLocalServiceUtil {
 		return announcementsDeliveryLocalService.dynamicQuery(dynamicQuery);
 	}
 
-	public static java.util.List<com.liferay.portlet.announcements.model.AnnouncementsDelivery> dynamicQuery(
+	public static java.util.List<Object> dynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery, int start,
 		int end) throws com.liferay.portal.SystemException {
 		AnnouncementsDeliveryLocalService announcementsDeliveryLocalService = AnnouncementsDeliveryLocalServiceFactory.getService();

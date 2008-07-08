@@ -296,13 +296,13 @@ public abstract class ServiceComponentLocalServiceBaseImpl
 		serviceComponentPersistence.remove(serviceComponent);
 	}
 
-	public List<ServiceComponent> dynamicQuery(DynamicQuery dynamicQuery)
+	public List<Object> dynamicQuery(DynamicQuery dynamicQuery)
 		throws SystemException {
 		return serviceComponentPersistence.findWithDynamicQuery(dynamicQuery);
 	}
 
-	public List<ServiceComponent> dynamicQuery(DynamicQuery dynamicQuery,
-		int start, int end) throws SystemException {
+	public List<Object> dynamicQuery(DynamicQuery dynamicQuery, int start,
+		int end) throws SystemException {
 		return serviceComponentPersistence.findWithDynamicQuery(dynamicQuery,
 			start, end);
 	}

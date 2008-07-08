@@ -75,7 +75,7 @@ public class WebDAVPropsLocalServiceUtil {
 		webDAVPropsLocalService.deleteWebDAVProps(webDAVProps);
 	}
 
-	public static java.util.List<com.liferay.portal.model.WebDAVProps> dynamicQuery(
+	public static java.util.List<Object> dynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery)
 		throws com.liferay.portal.SystemException {
 		WebDAVPropsLocalService webDAVPropsLocalService = WebDAVPropsLocalServiceFactory.getService();
@@ -83,7 +83,7 @@ public class WebDAVPropsLocalServiceUtil {
 		return webDAVPropsLocalService.dynamicQuery(dynamicQuery);
 	}
 
-	public static java.util.List<com.liferay.portal.model.WebDAVProps> dynamicQuery(
+	public static java.util.List<Object> dynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery, int start,
 		int end) throws com.liferay.portal.SystemException {
 		WebDAVPropsLocalService webDAVPropsLocalService = WebDAVPropsLocalServiceFactory.getService();

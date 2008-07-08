@@ -60,11 +60,11 @@ public interface UserGroupLocalService {
 	public void deleteUserGroup(com.liferay.portal.model.UserGroup userGroup)
 		throws com.liferay.portal.SystemException;
 
-	public java.util.List<com.liferay.portal.model.UserGroup> dynamicQuery(
+	public java.util.List<Object> dynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery)
 		throws com.liferay.portal.SystemException;
 
-	public java.util.List<com.liferay.portal.model.UserGroup> dynamicQuery(
+	public java.util.List<Object> dynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery, int start,
 		int end) throws com.liferay.portal.SystemException;
 
@@ -98,7 +98,8 @@ public interface UserGroupLocalService {
 	public java.util.List<com.liferay.portal.model.UserGroup> getUserUserGroups(
 		long userId) throws com.liferay.portal.SystemException;
 
-	public boolean hasGroupUserGroup(long groupId, long userGroupId);
+	public boolean hasGroupUserGroup(long groupId, long userGroupId)
+		throws com.liferay.portal.SystemException;
 
 	public java.util.List<com.liferay.portal.model.UserGroup> search(
 		long companyId, java.lang.String name, java.lang.String description,

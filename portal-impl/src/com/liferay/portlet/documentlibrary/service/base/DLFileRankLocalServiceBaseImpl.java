@@ -101,12 +101,12 @@ public abstract class DLFileRankLocalServiceBaseImpl
 		dlFileRankPersistence.remove(dlFileRank);
 	}
 
-	public List<DLFileRank> dynamicQuery(DynamicQuery dynamicQuery)
+	public List<Object> dynamicQuery(DynamicQuery dynamicQuery)
 		throws SystemException {
 		return dlFileRankPersistence.findWithDynamicQuery(dynamicQuery);
 	}
 
-	public List<DLFileRank> dynamicQuery(DynamicQuery dynamicQuery, int start,
+	public List<Object> dynamicQuery(DynamicQuery dynamicQuery, int start,
 		int end) throws SystemException {
 		return dlFileRankPersistence.findWithDynamicQuery(dynamicQuery, start,
 			end);

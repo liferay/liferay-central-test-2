@@ -75,7 +75,7 @@ public class SCLicenseLocalServiceUtil {
 		scLicenseLocalService.deleteSCLicense(scLicense);
 	}
 
-	public static java.util.List<com.liferay.portlet.softwarecatalog.model.SCLicense> dynamicQuery(
+	public static java.util.List<Object> dynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery)
 		throws com.liferay.portal.SystemException {
 		SCLicenseLocalService scLicenseLocalService = SCLicenseLocalServiceFactory.getService();
@@ -83,7 +83,7 @@ public class SCLicenseLocalServiceUtil {
 		return scLicenseLocalService.dynamicQuery(dynamicQuery);
 	}
 
-	public static java.util.List<com.liferay.portlet.softwarecatalog.model.SCLicense> dynamicQuery(
+	public static java.util.List<Object> dynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery, int start,
 		int end) throws com.liferay.portal.SystemException {
 		SCLicenseLocalService scLicenseLocalService = SCLicenseLocalServiceFactory.getService();

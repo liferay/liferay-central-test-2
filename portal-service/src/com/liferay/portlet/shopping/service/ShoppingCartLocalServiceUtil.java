@@ -75,7 +75,7 @@ public class ShoppingCartLocalServiceUtil {
 		shoppingCartLocalService.deleteShoppingCart(shoppingCart);
 	}
 
-	public static java.util.List<com.liferay.portlet.shopping.model.ShoppingCart> dynamicQuery(
+	public static java.util.List<Object> dynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery)
 		throws com.liferay.portal.SystemException {
 		ShoppingCartLocalService shoppingCartLocalService = ShoppingCartLocalServiceFactory.getService();
@@ -83,7 +83,7 @@ public class ShoppingCartLocalServiceUtil {
 		return shoppingCartLocalService.dynamicQuery(dynamicQuery);
 	}
 
-	public static java.util.List<com.liferay.portlet.shopping.model.ShoppingCart> dynamicQuery(
+	public static java.util.List<Object> dynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery, int start,
 		int end) throws com.liferay.portal.SystemException {
 		ShoppingCartLocalService shoppingCartLocalService = ShoppingCartLocalServiceFactory.getService();

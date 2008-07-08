@@ -136,11 +136,11 @@ public interface SCLicensePersistence {
 		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.softwarecatalog.NoSuchLicenseException;
 
-	public java.util.List<com.liferay.portlet.softwarecatalog.model.SCLicense> findWithDynamicQuery(
+	public java.util.List<Object> findWithDynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery)
 		throws com.liferay.portal.SystemException;
 
-	public java.util.List<com.liferay.portlet.softwarecatalog.model.SCLicense> findWithDynamicQuery(
+	public java.util.List<Object> findWithDynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery, int start,
 		int end) throws com.liferay.portal.SystemException;
 
@@ -184,7 +184,8 @@ public interface SCLicensePersistence {
 	public int getSCProductEntriesSize(long pk)
 		throws com.liferay.portal.SystemException;
 
-	public boolean containsSCProductEntry(long pk, long scProductEntryPK);
+	public boolean containsSCProductEntry(long pk, long scProductEntryPK)
+		throws com.liferay.portal.SystemException;
 
 	public boolean containsSCProductEntries(long pk)
 		throws com.liferay.portal.SystemException;

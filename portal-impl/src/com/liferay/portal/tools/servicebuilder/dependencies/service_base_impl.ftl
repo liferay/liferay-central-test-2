@@ -70,11 +70,11 @@ import ${packagePath}.service.${entity.name}${sessionTypeName}Service;
 		${entity.varName}Persistence.remove(${entity.varName});
 	}
 
-	public List<${entity.name}> dynamicQuery(DynamicQuery dynamicQuery) throws SystemException {
+	public List<Object> dynamicQuery(DynamicQuery dynamicQuery) throws SystemException {
 		return ${entity.varName}Persistence.findWithDynamicQuery(dynamicQuery);
 	}
 
-	public List<${entity.name}> dynamicQuery(DynamicQuery dynamicQuery, int start, int end) throws SystemException {
+	public List<Object> dynamicQuery(DynamicQuery dynamicQuery, int start, int end) throws SystemException {
 		return ${entity.varName}Persistence.findWithDynamicQuery(dynamicQuery, start, end);
 	}
 

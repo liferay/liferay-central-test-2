@@ -8,6 +8,11 @@ import ${packagePath}.model.impl.${entity.name}Impl;
 import ${packagePath}.model.impl.${entity.name}ModelImpl;
 
 import com.liferay.portal.SystemException;
+import com.liferay.portal.kernel.dao.jdbc.MappingSqlQuery;
+import com.liferay.portal.kernel.dao.jdbc.MappingSqlQueryFactoryUtil;
+import com.liferay.portal.kernel.dao.jdbc.RowMapper;
+import com.liferay.portal.kernel.dao.jdbc.SqlUpdate;
+import com.liferay.portal.kernel.dao.jdbc.SqlUpdateFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 import com.liferay.portal.kernel.dao.orm.FinderCacheUtil;
 import com.liferay.portal.kernel.dao.orm.Query;
@@ -39,11 +44,6 @@ import java.util.List;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-
-import org.springframework.dao.DataAccessException;
-import org.springframework.jdbc.core.SqlParameter;
-import org.springframework.jdbc.object.MappingSqlQuery;
-import org.springframework.jdbc.object.SqlUpdate;
 
 public class ${entity.name}PersistenceImpl extends BasePersistenceImpl implements ${entity.name}Persistence {
 
@@ -1046,7 +1046,7 @@ public class ${entity.name}PersistenceImpl extends BasePersistenceImpl implement
 		</#if>
 	</#list>
 
-	public List<${entity.name}> findWithDynamicQuery(DynamicQuery dynamicQuery) throws SystemException {
+	public List<Object> findWithDynamicQuery(DynamicQuery dynamicQuery) throws SystemException {
 		Session session = null;
 
 		try {
@@ -1064,15 +1064,15 @@ public class ${entity.name}PersistenceImpl extends BasePersistenceImpl implement
 		}
 	}
 
-	public List<${entity.name}> findWithDynamicQuery(DynamicQuery dynamicQuery, int start, int end) throws SystemException {
+	public List<Object> findWithDynamicQuery(DynamicQuery dynamicQuery, int start, int end) throws SystemException {
 		Session session = null;
 
 		try {
 			session = openSession();
 
-			dynamicQuery.compile(session);
-
 			dynamicQuery.setLimit(start, end);
+
+			dynamicQuery.compile(session);
 
 			return dynamicQuery.list();
 		}
@@ -1527,7 +1527,7 @@ public class ${entity.name}PersistenceImpl extends BasePersistenceImpl implement
 						return list;
 					}
 					catch (Exception e) {
-						throw new SystemException(e);
+						throw processException(e);
 					}
 					finally {
 						closeSession(session);
@@ -1629,7 +1629,7 @@ public class ${entity.name}PersistenceImpl extends BasePersistenceImpl implement
 				}
 			}
 
-			public boolean contains${tempEntity.name}(${entity.PKClassName} pk, ${tempEntity.PKClassName} ${tempEntity.varName}PK) {
+			public boolean contains${tempEntity.name}(${entity.PKClassName} pk, ${tempEntity.PKClassName} ${tempEntity.varName}PK) throws SystemException {
 				boolean finderClassNameCacheEnabled =
 					<#if column.mappingTable??>
 						${entity.name}ModelImpl.CACHE_ENABLED_${stringUtil.upperCase(column.mappingTable)}
@@ -1701,11 +1701,16 @@ public class ${entity.name}PersistenceImpl extends BasePersistenceImpl implement
 				}
 
 				if (result == null) {
-					Boolean value = Boolean.valueOf(contains${tempEntity.name}.contains(pk, ${tempEntity.varName}PK));
+					try {
+						Boolean value = Boolean.valueOf(contains${tempEntity.name}.contains(pk, ${tempEntity.varName}PK));
 
-					FinderCacheUtil.putResult(finderClassNameCacheEnabled, finderClassName, finderMethodName, finderParams, finderArgs, value);
+						FinderCacheUtil.putResult(finderClassNameCacheEnabled, finderClassName, finderMethodName, finderParams, finderArgs, value);
 
-					return value.booleanValue();
+						return value.booleanValue();
+					}
+					catch (Exception e) {
+						throw processException(e);
+					}
 				}
 				else {
 					return ((Boolean)result).booleanValue();
@@ -1728,8 +1733,8 @@ public class ${entity.name}PersistenceImpl extends BasePersistenceImpl implement
 					try {
 						add${tempEntity.name}.add(pk, ${tempEntity.varName}PK);
 					}
-					catch (DataAccessException dae) {
-						throw new SystemException(dae);
+					catch (Exception e) {
+						throw processException(e);
 					}
 					finally {
 						FinderCacheUtil.clearCache("${column.mappingTable}");
@@ -1740,8 +1745,8 @@ public class ${entity.name}PersistenceImpl extends BasePersistenceImpl implement
 					try {
 						add${tempEntity.name}.add(pk, ${tempEntity.varName}.getPrimaryKey());
 					}
-					catch (DataAccessException dae) {
-						throw new SystemException(dae);
+					catch (Exception e) {
+						throw processException(e);
 					}
 					finally {
 						FinderCacheUtil.clearCache("${column.mappingTable}");
@@ -1754,8 +1759,8 @@ public class ${entity.name}PersistenceImpl extends BasePersistenceImpl implement
 							add${tempEntity.name}.add(pk, ${tempEntity.varName}PK);
 						}
 					}
-					catch (DataAccessException dae) {
-						throw new SystemException(dae);
+					catch (Exception e) {
+						throw processException(e);
 					}
 					finally {
 						FinderCacheUtil.clearCache("${column.mappingTable}");
@@ -1768,8 +1773,8 @@ public class ${entity.name}PersistenceImpl extends BasePersistenceImpl implement
 							add${tempEntity.name}.add(pk, ${tempEntity.varName}.getPrimaryKey());
 						}
 					}
-					catch (DataAccessException dae) {
-						throw new SystemException(dae);
+					catch (Exception e) {
+						throw processException(e);
 					}
 					finally {
 						FinderCacheUtil.clearCache("${column.mappingTable}");
@@ -1780,8 +1785,8 @@ public class ${entity.name}PersistenceImpl extends BasePersistenceImpl implement
 					try {
 						clear${tempEntity.names}.clear(pk);
 					}
-					catch (DataAccessException dae) {
-						throw new SystemException(dae);
+					catch (Exception e) {
+						throw processException(e);
 					}
 					finally {
 						FinderCacheUtil.clearCache("${column.mappingTable}");
@@ -1792,8 +1797,8 @@ public class ${entity.name}PersistenceImpl extends BasePersistenceImpl implement
 					try {
 						remove${tempEntity.name}.remove(pk, ${tempEntity.varName}PK);
 					}
-					catch (DataAccessException dae) {
-						throw new SystemException(dae);
+					catch (Exception e) {
+						throw processException(e);
 					}
 					finally {
 						FinderCacheUtil.clearCache("${column.mappingTable}");
@@ -1804,8 +1809,8 @@ public class ${entity.name}PersistenceImpl extends BasePersistenceImpl implement
 					try {
 						remove${tempEntity.name}.remove(pk, ${tempEntity.varName}.getPrimaryKey());
 					}
-					catch (DataAccessException dae) {
-						throw new SystemException(dae);
+					catch (Exception e) {
+						throw processException(e);
 					}
 					finally {
 						FinderCacheUtil.clearCache("${column.mappingTable}");
@@ -1818,8 +1823,8 @@ public class ${entity.name}PersistenceImpl extends BasePersistenceImpl implement
 							remove${tempEntity.name}.remove(pk, ${tempEntity.varName}PK);
 						}
 					}
-					catch (DataAccessException dae) {
-						throw new SystemException(dae);
+					catch (Exception e) {
+						throw processException(e);
 					}
 					finally {
 						FinderCacheUtil.clearCache("${column.mappingTable}");
@@ -1832,8 +1837,8 @@ public class ${entity.name}PersistenceImpl extends BasePersistenceImpl implement
 							remove${tempEntity.name}.remove(pk, ${tempEntity.varName}.getPrimaryKey());
 						}
 					}
-					catch (DataAccessException dae) {
-						throw new SystemException(dae);
+					catch (Exception e) {
+						throw processException(e);
 					}
 					finally {
 						FinderCacheUtil.clearCache("${column.mappingTable}");
@@ -1848,8 +1853,8 @@ public class ${entity.name}PersistenceImpl extends BasePersistenceImpl implement
 							add${tempEntity.name}.add(pk, ${tempEntity.varName}PK);
 						}
 					}
-					catch (DataAccessException dae) {
-						throw new SystemException(dae);
+					catch (Exception e) {
+						throw processException(e);
 					}
 					finally {
 						FinderCacheUtil.clearCache("${column.mappingTable}");
@@ -1864,8 +1869,8 @@ public class ${entity.name}PersistenceImpl extends BasePersistenceImpl implement
 							add${tempEntity.name}.add(pk, ${tempEntity.varName}.getPrimaryKey());
 						}
 					}
-					catch (DataAccessException dae) {
-						throw new SystemException(dae);
+					catch (Exception e) {
+						throw processException(e);
 					}
 					finally {
 						FinderCacheUtil.clearCache("${column.mappingTable}");
@@ -1956,23 +1961,16 @@ public class ${entity.name}PersistenceImpl extends BasePersistenceImpl implement
 				<#assign tempEntityPkVarNameWrapper = tempEntity.getPKVarName()>
 			</#if>
 
-			protected class Contains${tempEntity.name} extends MappingSqlQuery {
+			protected class Contains${tempEntity.name} {
 
 				protected Contains${tempEntity.name}(${entity.name}PersistenceImpl persistenceImpl) {
-					super(persistenceImpl.getDataSource(), _SQL_CONTAINS${tempEntity.name?upper_case});
+					super();
 
-					declareParameter(new SqlParameter(Types.${entitySqlType}));
-					declareParameter(new SqlParameter(Types.${tempEntitySqlType}));
-
-					compile();
-				}
-
-				protected Object mapRow(ResultSet rs, int rowNumber) throws SQLException {
-					return new Integer(rs.getInt("COUNT_VALUE"));
+					_mappingSqlQuery = MappingSqlQueryFactoryUtil.getMappingSqlQuery(getDataSource(), _SQL_CONTAINS${tempEntity.name?upper_case}, new int[] {Types.${entitySqlType}, Types.${tempEntitySqlType}}, RowMapper.COUNT);
 				}
 
 				protected boolean contains(${entity.PKClassName} ${entity.PKVarName}, ${tempEntity.PKClassName} ${tempEntity.PKVarName}) {
-					List<Integer> results = execute(new Object[] {${pkVarNameWrapper}, ${tempEntityPkVarNameWrapper}});
+					List<Integer> results = _mappingSqlQuery.execute(new Object[] {${pkVarNameWrapper}, ${tempEntityPkVarNameWrapper}});
 
 					if (results.size()> 0) {
 						Integer count = results.get(0);
@@ -1985,62 +1983,54 @@ public class ${entity.name}PersistenceImpl extends BasePersistenceImpl implement
 					return false;
 				}
 
+				private MappingSqlQuery _mappingSqlQuery;
+
 			}
 
 			<#if column.isMappingManyToMany()>
-				protected class Add${tempEntity.name} extends SqlUpdate {
+				protected class Add${tempEntity.name} {
 
 					protected Add${tempEntity.name}(${entity.name}PersistenceImpl persistenceImpl) {
-						super(persistenceImpl.getDataSource(), "INSERT INTO ${column.mappingTable} (${entity.PKVarName}, ${tempEntity.PKVarName}) VALUES (?, ?)");
-
+						_sqlUpdate = SqlUpdateFactoryUtil.getSqlUpdate(getDataSource(), "INSERT INTO ${column.mappingTable} (${entity.PKVarName}, ${tempEntity.PKVarName}) VALUES (?, ?)", new int[] {Types.${entitySqlType}, Types.${tempEntitySqlType}});
 						_persistenceImpl = persistenceImpl;
-
-						declareParameter(new SqlParameter(Types.${entitySqlType}));
-						declareParameter(new SqlParameter(Types.${tempEntitySqlType}));
-
-						compile();
 					}
 
 					protected void add(${entity.PKClassName} ${entity.PKVarName}, ${tempEntity.PKClassName} ${tempEntity.PKVarName}) {
 						if (!_persistenceImpl.contains${tempEntity.name}.contains(${entity.PKVarName}, ${tempEntity.PKVarName})) {
-							update(new Object[] {${pkVarNameWrapper}, ${tempEntityPkVarNameWrapper}});
+							_sqlUpdate.update(new Object[] {${pkVarNameWrapper}, ${tempEntityPkVarNameWrapper}});
 						}
 					}
 
+					private SqlUpdate _sqlUpdate;
 					private ${entity.name}PersistenceImpl _persistenceImpl;
 
 				}
 
-				protected class Clear${tempEntity.names} extends SqlUpdate {
+				protected class Clear${tempEntity.names} {
 
 					protected Clear${tempEntity.names}(${entity.name}PersistenceImpl persistenceImpl) {
-						super(persistenceImpl.getDataSource(), "DELETE FROM ${column.mappingTable} WHERE ${entity.PKVarName} = ?");
-
-						declareParameter(new SqlParameter(Types.${entitySqlType}));
-
-						compile();
+						_sqlUpdate = SqlUpdateFactoryUtil.getSqlUpdate(getDataSource(), "DELETE FROM ${column.mappingTable} WHERE ${entity.PKVarName} = ?", new int[] {Types.${entitySqlType}});
 					}
 
 					protected void clear(${entity.PKClassName} ${entity.PKVarName}) {
-						update(new Object[] { ${pkVarNameWrapper} });
+						_sqlUpdate.update(new Object[] { ${pkVarNameWrapper} });
 					}
+
+					private SqlUpdate _sqlUpdate;
 
 				}
 
-				protected class Remove${tempEntity.name} extends SqlUpdate {
+				protected class Remove${tempEntity.name} {
 
 					protected Remove${tempEntity.name}(${entity.name}PersistenceImpl persistenceImpl) {
-						super(persistenceImpl.getDataSource(), "DELETE FROM ${column.mappingTable} WHERE ${entity.PKVarName} = ? AND ${tempEntity.PKVarName} = ?");
-
-						declareParameter(new SqlParameter(Types.${entitySqlType}));
-						declareParameter(new SqlParameter(Types.${tempEntitySqlType}));
-
-						compile();
+						_sqlUpdate = SqlUpdateFactoryUtil.getSqlUpdate(getDataSource(), "DELETE FROM ${column.mappingTable} WHERE ${entity.PKVarName} = ? AND ${tempEntity.PKVarName} = ?", new int[] {Types.${entitySqlType}, Types.${tempEntitySqlType}});
 					}
 
 					protected void remove(${entity.PKClassName} ${entity.PKVarName}, ${tempEntity.PKClassName} ${tempEntity.PKVarName}) {
-						update(new Object[] {${pkVarNameWrapper}, ${tempEntityPkVarNameWrapper}});
+						_sqlUpdate.update(new Object[] {${pkVarNameWrapper}, ${tempEntityPkVarNameWrapper}});
 					}
+
+					private SqlUpdate _sqlUpdate;
 
 				}
 			</#if>

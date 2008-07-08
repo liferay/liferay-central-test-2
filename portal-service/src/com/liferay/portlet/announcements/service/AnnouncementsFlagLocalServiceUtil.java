@@ -75,7 +75,7 @@ public class AnnouncementsFlagLocalServiceUtil {
 		announcementsFlagLocalService.deleteAnnouncementsFlag(announcementsFlag);
 	}
 
-	public static java.util.List<com.liferay.portlet.announcements.model.AnnouncementsFlag> dynamicQuery(
+	public static java.util.List<Object> dynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery)
 		throws com.liferay.portal.SystemException {
 		AnnouncementsFlagLocalService announcementsFlagLocalService = AnnouncementsFlagLocalServiceFactory.getService();
@@ -83,7 +83,7 @@ public class AnnouncementsFlagLocalServiceUtil {
 		return announcementsFlagLocalService.dynamicQuery(dynamicQuery);
 	}
 
-	public static java.util.List<com.liferay.portlet.announcements.model.AnnouncementsFlag> dynamicQuery(
+	public static java.util.List<Object> dynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery, int start,
 		int end) throws com.liferay.portal.SystemException {
 		AnnouncementsFlagLocalService announcementsFlagLocalService = AnnouncementsFlagLocalServiceFactory.getService();

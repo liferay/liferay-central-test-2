@@ -85,13 +85,13 @@ public abstract class SocialRelationLocalServiceBaseImpl
 		socialRelationPersistence.remove(socialRelation);
 	}
 
-	public List<SocialRelation> dynamicQuery(DynamicQuery dynamicQuery)
+	public List<Object> dynamicQuery(DynamicQuery dynamicQuery)
 		throws SystemException {
 		return socialRelationPersistence.findWithDynamicQuery(dynamicQuery);
 	}
 
-	public List<SocialRelation> dynamicQuery(DynamicQuery dynamicQuery,
-		int start, int end) throws SystemException {
+	public List<Object> dynamicQuery(DynamicQuery dynamicQuery, int start,
+		int end) throws SystemException {
 		return socialRelationPersistence.findWithDynamicQuery(dynamicQuery,
 			start, end);
 	}

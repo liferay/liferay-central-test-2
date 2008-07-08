@@ -23,6 +23,9 @@
 package com.liferay.portlet.shopping.service.persistence;
 
 import com.liferay.portal.SystemException;
+import com.liferay.portal.kernel.dao.jdbc.MappingSqlQuery;
+import com.liferay.portal.kernel.dao.jdbc.MappingSqlQueryFactoryUtil;
+import com.liferay.portal.kernel.dao.jdbc.RowMapper;
 import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 import com.liferay.portal.kernel.dao.orm.FinderCacheUtil;
 import com.liferay.portal.kernel.dao.orm.Query;
@@ -47,11 +50,6 @@ import com.liferay.portlet.shopping.model.impl.ShoppingItemModelImpl;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
-import org.springframework.jdbc.core.SqlParameter;
-import org.springframework.jdbc.object.MappingSqlQuery;
-
-import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.sql.Types;
 
 import java.util.ArrayList;
@@ -916,7 +914,7 @@ public class ShoppingItemPersistenceImpl extends BasePersistenceImpl
 		}
 	}
 
-	public List<ShoppingItem> findWithDynamicQuery(DynamicQuery dynamicQuery)
+	public List<Object> findWithDynamicQuery(DynamicQuery dynamicQuery)
 		throws SystemException {
 		Session session = null;
 
@@ -935,16 +933,16 @@ public class ShoppingItemPersistenceImpl extends BasePersistenceImpl
 		}
 	}
 
-	public List<ShoppingItem> findWithDynamicQuery(DynamicQuery dynamicQuery,
+	public List<Object> findWithDynamicQuery(DynamicQuery dynamicQuery,
 		int start, int end) throws SystemException {
 		Session session = null;
 
 		try {
 			session = openSession();
 
-			dynamicQuery.compile(session);
-
 			dynamicQuery.setLimit(start, end);
+
+			dynamicQuery.compile(session);
 
 			return dynamicQuery.list();
 		}
@@ -1550,7 +1548,7 @@ public class ShoppingItemPersistenceImpl extends BasePersistenceImpl
 				return list;
 			}
 			catch (Exception e) {
-				throw new SystemException(e);
+				throw processException(e);
 			}
 			finally {
 				closeSession(session);
@@ -1621,7 +1619,8 @@ public class ShoppingItemPersistenceImpl extends BasePersistenceImpl
 		}
 	}
 
-	public boolean containsShoppingItemPrice(long pk, long shoppingItemPricePK) {
+	public boolean containsShoppingItemPrice(long pk, long shoppingItemPricePK)
+		throws SystemException {
 		boolean finderClassNameCacheEnabled = com.liferay.portlet.shopping.model.impl.ShoppingItemPriceModelImpl.CACHE_ENABLED;
 
 		String finderClassName = com.liferay.portlet.shopping.model.ShoppingItemPrice.class.getName();
@@ -1646,14 +1645,19 @@ public class ShoppingItemPersistenceImpl extends BasePersistenceImpl
 		}
 
 		if (result == null) {
-			Boolean value = Boolean.valueOf(containsShoppingItemPrice.contains(
-						pk, shoppingItemPricePK));
+			try {
+				Boolean value = Boolean.valueOf(containsShoppingItemPrice.contains(
+							pk, shoppingItemPricePK));
 
-			FinderCacheUtil.putResult(finderClassNameCacheEnabled,
-				finderClassName, finderMethodName, finderParams, finderArgs,
-				value);
+				FinderCacheUtil.putResult(finderClassNameCacheEnabled,
+					finderClassName, finderMethodName, finderParams,
+					finderArgs, value);
 
-			return value.booleanValue();
+				return value.booleanValue();
+			}
+			catch (Exception e) {
+				throw processException(e);
+			}
 		}
 		else {
 			return ((Boolean)result).booleanValue();
@@ -1712,25 +1716,18 @@ public class ShoppingItemPersistenceImpl extends BasePersistenceImpl
 
 	protected ContainsShoppingItemPrice containsShoppingItemPrice;
 
-	protected class ContainsShoppingItemPrice extends MappingSqlQuery {
+	protected class ContainsShoppingItemPrice {
 		protected ContainsShoppingItemPrice(
 			ShoppingItemPersistenceImpl persistenceImpl) {
-			super(persistenceImpl.getDataSource(),
-				_SQL_CONTAINSSHOPPINGITEMPRICE);
+			super();
 
-			declareParameter(new SqlParameter(Types.BIGINT));
-			declareParameter(new SqlParameter(Types.BIGINT));
-
-			compile();
-		}
-
-		protected Object mapRow(ResultSet rs, int rowNumber)
-			throws SQLException {
-			return new Integer(rs.getInt("COUNT_VALUE"));
+			_mappingSqlQuery = MappingSqlQueryFactoryUtil.getMappingSqlQuery(getDataSource(),
+					_SQL_CONTAINSSHOPPINGITEMPRICE,
+					new int[] { Types.BIGINT, Types.BIGINT }, RowMapper.COUNT);
 		}
 
 		protected boolean contains(long itemId, long itemPriceId) {
-			List<Integer> results = execute(new Object[] {
+			List<Integer> results = _mappingSqlQuery.execute(new Object[] {
 						new Long(itemId), new Long(itemPriceId)
 					});
 
@@ -1744,6 +1741,8 @@ public class ShoppingItemPersistenceImpl extends BasePersistenceImpl
 
 			return false;
 		}
+
+		private MappingSqlQuery _mappingSqlQuery;
 	}
 
 	private static final String _SQL_GETSHOPPINGITEMPRICES = "SELECT {ShoppingItemPrice.*} FROM ShoppingItemPrice INNER JOIN ShoppingItem ON (ShoppingItem.itemId = ShoppingItemPrice.itemId) WHERE (ShoppingItem.itemId = ?)";

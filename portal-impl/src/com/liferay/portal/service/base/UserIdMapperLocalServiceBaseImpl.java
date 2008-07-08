@@ -296,13 +296,13 @@ public abstract class UserIdMapperLocalServiceBaseImpl
 		userIdMapperPersistence.remove(userIdMapper);
 	}
 
-	public List<UserIdMapper> dynamicQuery(DynamicQuery dynamicQuery)
+	public List<Object> dynamicQuery(DynamicQuery dynamicQuery)
 		throws SystemException {
 		return userIdMapperPersistence.findWithDynamicQuery(dynamicQuery);
 	}
 
-	public List<UserIdMapper> dynamicQuery(DynamicQuery dynamicQuery,
-		int start, int end) throws SystemException {
+	public List<Object> dynamicQuery(DynamicQuery dynamicQuery, int start,
+		int end) throws SystemException {
 		return userIdMapperPersistence.findWithDynamicQuery(dynamicQuery,
 			start, end);
 	}

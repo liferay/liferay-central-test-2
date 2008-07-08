@@ -75,7 +75,7 @@ public class DLFileShortcutLocalServiceUtil {
 		dlFileShortcutLocalService.deleteDLFileShortcut(dlFileShortcut);
 	}
 
-	public static java.util.List<com.liferay.portlet.documentlibrary.model.DLFileShortcut> dynamicQuery(
+	public static java.util.List<Object> dynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery)
 		throws com.liferay.portal.SystemException {
 		DLFileShortcutLocalService dlFileShortcutLocalService = DLFileShortcutLocalServiceFactory.getService();
@@ -83,7 +83,7 @@ public class DLFileShortcutLocalServiceUtil {
 		return dlFileShortcutLocalService.dynamicQuery(dynamicQuery);
 	}
 
-	public static java.util.List<com.liferay.portlet.documentlibrary.model.DLFileShortcut> dynamicQuery(
+	public static java.util.List<Object> dynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery, int start,
 		int end) throws com.liferay.portal.SystemException {
 		DLFileShortcutLocalService dlFileShortcutLocalService = DLFileShortcutLocalServiceFactory.getService();

@@ -81,13 +81,13 @@ public abstract class ExpandoColumnLocalServiceBaseImpl
 		expandoColumnPersistence.remove(expandoColumn);
 	}
 
-	public List<ExpandoColumn> dynamicQuery(DynamicQuery dynamicQuery)
+	public List<Object> dynamicQuery(DynamicQuery dynamicQuery)
 		throws SystemException {
 		return expandoColumnPersistence.findWithDynamicQuery(dynamicQuery);
 	}
 
-	public List<ExpandoColumn> dynamicQuery(DynamicQuery dynamicQuery,
-		int start, int end) throws SystemException {
+	public List<Object> dynamicQuery(DynamicQuery dynamicQuery, int start,
+		int end) throws SystemException {
 		return expandoColumnPersistence.findWithDynamicQuery(dynamicQuery,
 			start, end);
 	}

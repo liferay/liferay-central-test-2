@@ -34,6 +34,19 @@
 			<ref bean="com.liferay.portal.cache.SingleVMPoolImpl" />
 		</property>
 	</bean>
+	<bean id="com.liferay.portal.dao.jdbc.spring.SqlUpdateFactoryImpl" class="com.liferay.portal.dao.jdbc.spring.SqlUpdateFactoryImpl" lazy-init="true" />
+	<bean id="com.liferay.portal.kernel.dao.jdbc.SqlUpdateFactoryUtil" class="com.liferay.portal.kernel.dao.jdbc.SqlUpdateFactoryUtil" lazy-init="true">
+		<property name="sqlUpdateFactory">
+			<ref bean="com.liferay.portal.dao.jdbc.spring.SqlUpdateFactoryImpl" />
+		</property>
+	</bean>
+
+	<bean id="com.liferay.portal.dao.jdbc.spring.MappingSqlQueryFactoryImpl" class="com.liferay.portal.dao.jdbc.spring.MappingSqlQueryFactoryImpl" lazy-init="true" />
+	<bean id="com.liferay.portal.kernel.dao.jdbc.MappingSqlQueryFactoryUtil" class="com.liferay.portal.kernel.dao.jdbc.MappingSqlQueryFactoryUtil" lazy-init="true">
+		<property name="mappingSqlQueryFactory">
+			<ref bean="com.liferay.portal.dao.jdbc.spring.MappingSqlQueryFactoryImpl" />
+		</property>
+	</bean>
 	<bean id="com.liferay.portal.dao.orm.hibernate.DynamicQueryFactoryImpl" class="com.liferay.portal.dao.orm.hibernate.DynamicQueryFactoryImpl" lazy-init="true" />
 	<bean id="com.liferay.portal.kernel.dao.orm.DynamicQueryFactoryUtil" class="com.liferay.portal.kernel.dao.orm.DynamicQueryFactoryUtil" lazy-init="true">
 		<property name="dynamicQueryFactory">

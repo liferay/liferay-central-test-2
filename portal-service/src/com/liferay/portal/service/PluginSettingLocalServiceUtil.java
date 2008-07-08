@@ -75,7 +75,7 @@ public class PluginSettingLocalServiceUtil {
 		pluginSettingLocalService.deletePluginSetting(pluginSetting);
 	}
 
-	public static java.util.List<com.liferay.portal.model.PluginSetting> dynamicQuery(
+	public static java.util.List<Object> dynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery)
 		throws com.liferay.portal.SystemException {
 		PluginSettingLocalService pluginSettingLocalService = PluginSettingLocalServiceFactory.getService();
@@ -83,7 +83,7 @@ public class PluginSettingLocalServiceUtil {
 		return pluginSettingLocalService.dynamicQuery(dynamicQuery);
 	}
 
-	public static java.util.List<com.liferay.portal.model.PluginSetting> dynamicQuery(
+	public static java.util.List<Object> dynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery, int start,
 		int end) throws com.liferay.portal.SystemException {
 		PluginSettingLocalService pluginSettingLocalService = PluginSettingLocalServiceFactory.getService();

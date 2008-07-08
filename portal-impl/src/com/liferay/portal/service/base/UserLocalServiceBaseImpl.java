@@ -348,13 +348,13 @@ public abstract class UserLocalServiceBaseImpl implements UserLocalService {
 		userPersistence.remove(user);
 	}
 
-	public List<User> dynamicQuery(DynamicQuery dynamicQuery)
+	public List<Object> dynamicQuery(DynamicQuery dynamicQuery)
 		throws SystemException {
 		return userPersistence.findWithDynamicQuery(dynamicQuery);
 	}
 
-	public List<User> dynamicQuery(DynamicQuery dynamicQuery, int start, int end)
-		throws SystemException {
+	public List<Object> dynamicQuery(DynamicQuery dynamicQuery, int start,
+		int end) throws SystemException {
 		return userPersistence.findWithDynamicQuery(dynamicQuery, start, end);
 	}
 

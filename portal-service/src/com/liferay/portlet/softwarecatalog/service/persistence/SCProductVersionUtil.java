@@ -151,13 +151,13 @@ public class SCProductVersionUtil {
 		return getPersistence().fetchByDirectDownloadURL(directDownloadURL);
 	}
 
-	public static java.util.List<com.liferay.portlet.softwarecatalog.model.SCProductVersion> findWithDynamicQuery(
+	public static java.util.List<Object> findWithDynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery)
 		throws com.liferay.portal.SystemException {
 		return getPersistence().findWithDynamicQuery(dynamicQuery);
 	}
 
-	public static java.util.List<com.liferay.portlet.softwarecatalog.model.SCProductVersion> findWithDynamicQuery(
+	public static java.util.List<Object> findWithDynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery, int start,
 		int end) throws com.liferay.portal.SystemException {
 		return getPersistence().findWithDynamicQuery(dynamicQuery, start, end);
@@ -233,7 +233,7 @@ public class SCProductVersionUtil {
 	}
 
 	public static boolean containsSCFrameworkVersion(long pk,
-		long scFrameworkVersionPK) {
+		long scFrameworkVersionPK) throws com.liferay.portal.SystemException {
 		return getPersistence()
 				   .containsSCFrameworkVersion(pk, scFrameworkVersionPK);
 	}

@@ -145,13 +145,13 @@ public class PermissionUtil {
 		return getPersistence().fetchByA_R(actionId, resourceId);
 	}
 
-	public static java.util.List<com.liferay.portal.model.Permission> findWithDynamicQuery(
+	public static java.util.List<Object> findWithDynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery)
 		throws com.liferay.portal.SystemException {
 		return getPersistence().findWithDynamicQuery(dynamicQuery);
 	}
 
-	public static java.util.List<com.liferay.portal.model.Permission> findWithDynamicQuery(
+	public static java.util.List<Object> findWithDynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery, int start,
 		int end) throws com.liferay.portal.SystemException {
 		return getPersistence().findWithDynamicQuery(dynamicQuery, start, end);
@@ -224,7 +224,8 @@ public class PermissionUtil {
 		return getPersistence().getGroupsSize(pk);
 	}
 
-	public static boolean containsGroup(long pk, long groupPK) {
+	public static boolean containsGroup(long pk, long groupPK)
+		throws com.liferay.portal.SystemException {
 		return getPersistence().containsGroup(pk, groupPK);
 	}
 
@@ -313,7 +314,8 @@ public class PermissionUtil {
 		return getPersistence().getRolesSize(pk);
 	}
 
-	public static boolean containsRole(long pk, long rolePK) {
+	public static boolean containsRole(long pk, long rolePK)
+		throws com.liferay.portal.SystemException {
 		return getPersistence().containsRole(pk, rolePK);
 	}
 
@@ -402,7 +404,8 @@ public class PermissionUtil {
 		return getPersistence().getUsersSize(pk);
 	}
 
-	public static boolean containsUser(long pk, long userPK) {
+	public static boolean containsUser(long pk, long userPK)
+		throws com.liferay.portal.SystemException {
 		return getPersistence().containsUser(pk, userPK);
 	}
 

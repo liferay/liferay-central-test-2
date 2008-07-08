@@ -75,7 +75,7 @@ public class TagsSourceLocalServiceUtil {
 		tagsSourceLocalService.deleteTagsSource(tagsSource);
 	}
 
-	public static java.util.List<com.liferay.portlet.tags.model.TagsSource> dynamicQuery(
+	public static java.util.List<Object> dynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery)
 		throws com.liferay.portal.SystemException {
 		TagsSourceLocalService tagsSourceLocalService = TagsSourceLocalServiceFactory.getService();
@@ -83,7 +83,7 @@ public class TagsSourceLocalServiceUtil {
 		return tagsSourceLocalService.dynamicQuery(dynamicQuery);
 	}
 
-	public static java.util.List<com.liferay.portlet.tags.model.TagsSource> dynamicQuery(
+	public static java.util.List<Object> dynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery, int start,
 		int end) throws com.liferay.portal.SystemException {
 		TagsSourceLocalService tagsSourceLocalService = TagsSourceLocalServiceFactory.getService();

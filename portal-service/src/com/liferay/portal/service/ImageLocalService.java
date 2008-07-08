@@ -60,11 +60,11 @@ public interface ImageLocalService {
 	public void deleteImage(com.liferay.portal.model.Image image)
 		throws com.liferay.portal.SystemException;
 
-	public java.util.List<com.liferay.portal.model.Image> dynamicQuery(
+	public java.util.List<Object> dynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery)
 		throws com.liferay.portal.SystemException;
 
-	public java.util.List<com.liferay.portal.model.Image> dynamicQuery(
+	public java.util.List<Object> dynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery, int start,
 		int end) throws com.liferay.portal.SystemException;
 

@@ -75,7 +75,7 @@ public class JournalStructureLocalServiceUtil {
 		journalStructureLocalService.deleteJournalStructure(journalStructure);
 	}
 
-	public static java.util.List<com.liferay.portlet.journal.model.JournalStructure> dynamicQuery(
+	public static java.util.List<Object> dynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery)
 		throws com.liferay.portal.SystemException {
 		JournalStructureLocalService journalStructureLocalService = JournalStructureLocalServiceFactory.getService();
@@ -83,7 +83,7 @@ public class JournalStructureLocalServiceUtil {
 		return journalStructureLocalService.dynamicQuery(dynamicQuery);
 	}
 
-	public static java.util.List<com.liferay.portlet.journal.model.JournalStructure> dynamicQuery(
+	public static java.util.List<Object> dynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery, int start,
 		int end) throws com.liferay.portal.SystemException {
 		JournalStructureLocalService journalStructureLocalService = JournalStructureLocalServiceFactory.getService();

@@ -294,13 +294,13 @@ public abstract class OrganizationLocalServiceBaseImpl
 		organizationPersistence.remove(organization);
 	}
 
-	public List<Organization> dynamicQuery(DynamicQuery dynamicQuery)
+	public List<Object> dynamicQuery(DynamicQuery dynamicQuery)
 		throws SystemException {
 		return organizationPersistence.findWithDynamicQuery(dynamicQuery);
 	}
 
-	public List<Organization> dynamicQuery(DynamicQuery dynamicQuery,
-		int start, int end) throws SystemException {
+	public List<Object> dynamicQuery(DynamicQuery dynamicQuery, int start,
+		int end) throws SystemException {
 		return organizationPersistence.findWithDynamicQuery(dynamicQuery,
 			start, end);
 	}

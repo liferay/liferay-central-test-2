@@ -75,7 +75,7 @@ public class MBCategoryLocalServiceUtil {
 		mbCategoryLocalService.deleteMBCategory(mbCategory);
 	}
 
-	public static java.util.List<com.liferay.portlet.messageboards.model.MBCategory> dynamicQuery(
+	public static java.util.List<Object> dynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery)
 		throws com.liferay.portal.SystemException {
 		MBCategoryLocalService mbCategoryLocalService = MBCategoryLocalServiceFactory.getService();
@@ -83,7 +83,7 @@ public class MBCategoryLocalServiceUtil {
 		return mbCategoryLocalService.dynamicQuery(dynamicQuery);
 	}
 
-	public static java.util.List<com.liferay.portlet.messageboards.model.MBCategory> dynamicQuery(
+	public static java.util.List<Object> dynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery, int start,
 		int end) throws com.liferay.portal.SystemException {
 		MBCategoryLocalService mbCategoryLocalService = MBCategoryLocalServiceFactory.getService();

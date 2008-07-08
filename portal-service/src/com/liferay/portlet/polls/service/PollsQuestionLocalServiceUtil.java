@@ -75,7 +75,7 @@ public class PollsQuestionLocalServiceUtil {
 		pollsQuestionLocalService.deletePollsQuestion(pollsQuestion);
 	}
 
-	public static java.util.List<com.liferay.portlet.polls.model.PollsQuestion> dynamicQuery(
+	public static java.util.List<Object> dynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery)
 		throws com.liferay.portal.SystemException {
 		PollsQuestionLocalService pollsQuestionLocalService = PollsQuestionLocalServiceFactory.getService();
@@ -83,7 +83,7 @@ public class PollsQuestionLocalServiceUtil {
 		return pollsQuestionLocalService.dynamicQuery(dynamicQuery);
 	}
 
-	public static java.util.List<com.liferay.portlet.polls.model.PollsQuestion> dynamicQuery(
+	public static java.util.List<Object> dynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery, int start,
 		int end) throws com.liferay.portal.SystemException {
 		PollsQuestionLocalService pollsQuestionLocalService = PollsQuestionLocalServiceFactory.getService();

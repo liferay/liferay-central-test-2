@@ -60,11 +60,11 @@ public interface RoleLocalService {
 	public void deleteRole(com.liferay.portal.model.Role role)
 		throws com.liferay.portal.SystemException;
 
-	public java.util.List<com.liferay.portal.model.Role> dynamicQuery(
+	public java.util.List<Object> dynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery)
 		throws com.liferay.portal.SystemException;
 
-	public java.util.List<com.liferay.portal.model.Role> dynamicQuery(
+	public java.util.List<Object> dynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery, int start,
 		int end) throws com.liferay.portal.SystemException;
 
@@ -130,7 +130,8 @@ public interface RoleLocalService {
 	public java.util.List<com.liferay.portal.model.Role> getUserRoles(
 		long userId) throws com.liferay.portal.SystemException;
 
-	public boolean hasUserRole(long userId, long roleId);
+	public boolean hasUserRole(long userId, long roleId)
+		throws com.liferay.portal.SystemException;
 
 	public boolean hasUserRole(long userId, long companyId,
 		java.lang.String name, boolean inherited)

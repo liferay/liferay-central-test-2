@@ -117,12 +117,12 @@ public abstract class JournalFeedLocalServiceBaseImpl
 		journalFeedPersistence.remove(journalFeed);
 	}
 
-	public List<JournalFeed> dynamicQuery(DynamicQuery dynamicQuery)
+	public List<Object> dynamicQuery(DynamicQuery dynamicQuery)
 		throws SystemException {
 		return journalFeedPersistence.findWithDynamicQuery(dynamicQuery);
 	}
 
-	public List<JournalFeed> dynamicQuery(DynamicQuery dynamicQuery, int start,
+	public List<Object> dynamicQuery(DynamicQuery dynamicQuery, int start,
 		int end) throws SystemException {
 		return journalFeedPersistence.findWithDynamicQuery(dynamicQuery, start,
 			end);

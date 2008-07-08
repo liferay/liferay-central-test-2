@@ -899,7 +899,7 @@ public class SubscriptionPersistenceImpl extends BasePersistenceImpl
 		}
 	}
 
-	public List<Subscription> findWithDynamicQuery(DynamicQuery dynamicQuery)
+	public List<Object> findWithDynamicQuery(DynamicQuery dynamicQuery)
 		throws SystemException {
 		Session session = null;
 
@@ -918,16 +918,16 @@ public class SubscriptionPersistenceImpl extends BasePersistenceImpl
 		}
 	}
 
-	public List<Subscription> findWithDynamicQuery(DynamicQuery dynamicQuery,
+	public List<Object> findWithDynamicQuery(DynamicQuery dynamicQuery,
 		int start, int end) throws SystemException {
 		Session session = null;
 
 		try {
 			session = openSession();
 
-			dynamicQuery.compile(session);
-
 			dynamicQuery.setLimit(start, end);
+
+			dynamicQuery.compile(session);
 
 			return dynamicQuery.list();
 		}

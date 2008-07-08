@@ -23,6 +23,11 @@
 package com.liferay.portlet.softwarecatalog.service.persistence;
 
 import com.liferay.portal.SystemException;
+import com.liferay.portal.kernel.dao.jdbc.MappingSqlQuery;
+import com.liferay.portal.kernel.dao.jdbc.MappingSqlQueryFactoryUtil;
+import com.liferay.portal.kernel.dao.jdbc.RowMapper;
+import com.liferay.portal.kernel.dao.jdbc.SqlUpdate;
+import com.liferay.portal.kernel.dao.jdbc.SqlUpdateFactoryUtil;
 import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 import com.liferay.portal.kernel.dao.orm.FinderCacheUtil;
 import com.liferay.portal.kernel.dao.orm.Query;
@@ -47,14 +52,6 @@ import com.liferay.portlet.softwarecatalog.model.impl.SCProductEntryModelImpl;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
-import org.springframework.dao.DataAccessException;
-
-import org.springframework.jdbc.core.SqlParameter;
-import org.springframework.jdbc.object.MappingSqlQuery;
-import org.springframework.jdbc.object.SqlUpdate;
-
-import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.sql.Types;
 
 import java.util.ArrayList;
@@ -1179,7 +1176,7 @@ public class SCProductEntryPersistenceImpl extends BasePersistenceImpl
 		}
 	}
 
-	public List<SCProductEntry> findWithDynamicQuery(DynamicQuery dynamicQuery)
+	public List<Object> findWithDynamicQuery(DynamicQuery dynamicQuery)
 		throws SystemException {
 		Session session = null;
 
@@ -1198,17 +1195,16 @@ public class SCProductEntryPersistenceImpl extends BasePersistenceImpl
 		}
 	}
 
-	public List<SCProductEntry> findWithDynamicQuery(
-		DynamicQuery dynamicQuery, int start, int end)
-		throws SystemException {
+	public List<Object> findWithDynamicQuery(DynamicQuery dynamicQuery,
+		int start, int end) throws SystemException {
 		Session session = null;
 
 		try {
 			session = openSession();
 
-			dynamicQuery.compile(session);
-
 			dynamicQuery.setLimit(start, end);
+
+			dynamicQuery.compile(session);
 
 			return dynamicQuery.list();
 		}
@@ -1755,7 +1751,7 @@ public class SCProductEntryPersistenceImpl extends BasePersistenceImpl
 				return list;
 			}
 			catch (Exception e) {
-				throw new SystemException(e);
+				throw processException(e);
 			}
 			finally {
 				closeSession(session);
@@ -1826,7 +1822,8 @@ public class SCProductEntryPersistenceImpl extends BasePersistenceImpl
 		}
 	}
 
-	public boolean containsSCLicense(long pk, long scLicensePK) {
+	public boolean containsSCLicense(long pk, long scLicensePK)
+		throws SystemException {
 		boolean finderClassNameCacheEnabled = SCProductEntryModelImpl.CACHE_ENABLED_SCLICENSES_SCPRODUCTENTRIES;
 
 		String finderClassName = "SCLicenses_SCProductEntries";
@@ -1847,14 +1844,19 @@ public class SCProductEntryPersistenceImpl extends BasePersistenceImpl
 		}
 
 		if (result == null) {
-			Boolean value = Boolean.valueOf(containsSCLicense.contains(pk,
-						scLicensePK));
+			try {
+				Boolean value = Boolean.valueOf(containsSCLicense.contains(pk,
+							scLicensePK));
 
-			FinderCacheUtil.putResult(finderClassNameCacheEnabled,
-				finderClassName, finderMethodName, finderParams, finderArgs,
-				value);
+				FinderCacheUtil.putResult(finderClassNameCacheEnabled,
+					finderClassName, finderMethodName, finderParams,
+					finderArgs, value);
 
-			return value.booleanValue();
+				return value.booleanValue();
+			}
+			catch (Exception e) {
+				throw processException(e);
+			}
 		}
 		else {
 			return ((Boolean)result).booleanValue();
@@ -1875,8 +1877,8 @@ public class SCProductEntryPersistenceImpl extends BasePersistenceImpl
 		try {
 			addSCLicense.add(pk, scLicensePK);
 		}
-		catch (DataAccessException dae) {
-			throw new SystemException(dae);
+		catch (Exception e) {
+			throw processException(e);
 		}
 		finally {
 			FinderCacheUtil.clearCache("SCLicenses_SCProductEntries");
@@ -1889,8 +1891,8 @@ public class SCProductEntryPersistenceImpl extends BasePersistenceImpl
 		try {
 			addSCLicense.add(pk, scLicense.getPrimaryKey());
 		}
-		catch (DataAccessException dae) {
-			throw new SystemException(dae);
+		catch (Exception e) {
+			throw processException(e);
 		}
 		finally {
 			FinderCacheUtil.clearCache("SCLicenses_SCProductEntries");
@@ -1904,8 +1906,8 @@ public class SCProductEntryPersistenceImpl extends BasePersistenceImpl
 				addSCLicense.add(pk, scLicensePK);
 			}
 		}
-		catch (DataAccessException dae) {
-			throw new SystemException(dae);
+		catch (Exception e) {
+			throw processException(e);
 		}
 		finally {
 			FinderCacheUtil.clearCache("SCLicenses_SCProductEntries");
@@ -1920,8 +1922,8 @@ public class SCProductEntryPersistenceImpl extends BasePersistenceImpl
 				addSCLicense.add(pk, scLicense.getPrimaryKey());
 			}
 		}
-		catch (DataAccessException dae) {
-			throw new SystemException(dae);
+		catch (Exception e) {
+			throw processException(e);
 		}
 		finally {
 			FinderCacheUtil.clearCache("SCLicenses_SCProductEntries");
@@ -1932,8 +1934,8 @@ public class SCProductEntryPersistenceImpl extends BasePersistenceImpl
 		try {
 			clearSCLicenses.clear(pk);
 		}
-		catch (DataAccessException dae) {
-			throw new SystemException(dae);
+		catch (Exception e) {
+			throw processException(e);
 		}
 		finally {
 			FinderCacheUtil.clearCache("SCLicenses_SCProductEntries");
@@ -1945,8 +1947,8 @@ public class SCProductEntryPersistenceImpl extends BasePersistenceImpl
 		try {
 			removeSCLicense.remove(pk, scLicensePK);
 		}
-		catch (DataAccessException dae) {
-			throw new SystemException(dae);
+		catch (Exception e) {
+			throw processException(e);
 		}
 		finally {
 			FinderCacheUtil.clearCache("SCLicenses_SCProductEntries");
@@ -1959,8 +1961,8 @@ public class SCProductEntryPersistenceImpl extends BasePersistenceImpl
 		try {
 			removeSCLicense.remove(pk, scLicense.getPrimaryKey());
 		}
-		catch (DataAccessException dae) {
-			throw new SystemException(dae);
+		catch (Exception e) {
+			throw processException(e);
 		}
 		finally {
 			FinderCacheUtil.clearCache("SCLicenses_SCProductEntries");
@@ -1974,8 +1976,8 @@ public class SCProductEntryPersistenceImpl extends BasePersistenceImpl
 				removeSCLicense.remove(pk, scLicensePK);
 			}
 		}
-		catch (DataAccessException dae) {
-			throw new SystemException(dae);
+		catch (Exception e) {
+			throw processException(e);
 		}
 		finally {
 			FinderCacheUtil.clearCache("SCLicenses_SCProductEntries");
@@ -1990,8 +1992,8 @@ public class SCProductEntryPersistenceImpl extends BasePersistenceImpl
 				removeSCLicense.remove(pk, scLicense.getPrimaryKey());
 			}
 		}
-		catch (DataAccessException dae) {
-			throw new SystemException(dae);
+		catch (Exception e) {
+			throw processException(e);
 		}
 		finally {
 			FinderCacheUtil.clearCache("SCLicenses_SCProductEntries");
@@ -2007,8 +2009,8 @@ public class SCProductEntryPersistenceImpl extends BasePersistenceImpl
 				addSCLicense.add(pk, scLicensePK);
 			}
 		}
-		catch (DataAccessException dae) {
-			throw new SystemException(dae);
+		catch (Exception e) {
+			throw processException(e);
 		}
 		finally {
 			FinderCacheUtil.clearCache("SCLicenses_SCProductEntries");
@@ -2025,8 +2027,8 @@ public class SCProductEntryPersistenceImpl extends BasePersistenceImpl
 				addSCLicense.add(pk, scLicense.getPrimaryKey());
 			}
 		}
-		catch (DataAccessException dae) {
-			throw new SystemException(dae);
+		catch (Exception e) {
+			throw processException(e);
 		}
 		finally {
 			FinderCacheUtil.clearCache("SCLicenses_SCProductEntries");
@@ -2082,24 +2084,18 @@ public class SCProductEntryPersistenceImpl extends BasePersistenceImpl
 	protected ClearSCLicenses clearSCLicenses;
 	protected RemoveSCLicense removeSCLicense;
 
-	protected class ContainsSCLicense extends MappingSqlQuery {
+	protected class ContainsSCLicense {
 		protected ContainsSCLicense(
 			SCProductEntryPersistenceImpl persistenceImpl) {
-			super(persistenceImpl.getDataSource(), _SQL_CONTAINSSCLICENSE);
+			super();
 
-			declareParameter(new SqlParameter(Types.BIGINT));
-			declareParameter(new SqlParameter(Types.BIGINT));
-
-			compile();
-		}
-
-		protected Object mapRow(ResultSet rs, int rowNumber)
-			throws SQLException {
-			return new Integer(rs.getInt("COUNT_VALUE"));
+			_mappingSqlQuery = MappingSqlQueryFactoryUtil.getMappingSqlQuery(getDataSource(),
+					_SQL_CONTAINSSCLICENSE,
+					new int[] { Types.BIGINT, Types.BIGINT }, RowMapper.COUNT);
 		}
 
 		protected boolean contains(long productEntryId, long licenseId) {
-			List<Integer> results = execute(new Object[] {
+			List<Integer> results = _mappingSqlQuery.execute(new Object[] {
 						new Long(productEntryId), new Long(licenseId)
 					});
 
@@ -2113,62 +2109,59 @@ public class SCProductEntryPersistenceImpl extends BasePersistenceImpl
 
 			return false;
 		}
+
+		private MappingSqlQuery _mappingSqlQuery;
 	}
 
-	protected class AddSCLicense extends SqlUpdate {
+	protected class AddSCLicense {
 		protected AddSCLicense(SCProductEntryPersistenceImpl persistenceImpl) {
-			super(persistenceImpl.getDataSource(),
-				"INSERT INTO SCLicenses_SCProductEntries (productEntryId, licenseId) VALUES (?, ?)");
-
+			_sqlUpdate = SqlUpdateFactoryUtil.getSqlUpdate(getDataSource(),
+					"INSERT INTO SCLicenses_SCProductEntries (productEntryId, licenseId) VALUES (?, ?)",
+					new int[] { Types.BIGINT, Types.BIGINT });
 			_persistenceImpl = persistenceImpl;
-
-			declareParameter(new SqlParameter(Types.BIGINT));
-			declareParameter(new SqlParameter(Types.BIGINT));
-
-			compile();
 		}
 
 		protected void add(long productEntryId, long licenseId) {
 			if (!_persistenceImpl.containsSCLicense.contains(productEntryId,
 						licenseId)) {
-				update(new Object[] {
+				_sqlUpdate.update(new Object[] {
 						new Long(productEntryId), new Long(licenseId)
 					});
 			}
 		}
 
+		private SqlUpdate _sqlUpdate;
 		private SCProductEntryPersistenceImpl _persistenceImpl;
 	}
 
-	protected class ClearSCLicenses extends SqlUpdate {
+	protected class ClearSCLicenses {
 		protected ClearSCLicenses(SCProductEntryPersistenceImpl persistenceImpl) {
-			super(persistenceImpl.getDataSource(),
-				"DELETE FROM SCLicenses_SCProductEntries WHERE productEntryId = ?");
-
-			declareParameter(new SqlParameter(Types.BIGINT));
-
-			compile();
+			_sqlUpdate = SqlUpdateFactoryUtil.getSqlUpdate(getDataSource(),
+					"DELETE FROM SCLicenses_SCProductEntries WHERE productEntryId = ?",
+					new int[] { Types.BIGINT });
 		}
 
 		protected void clear(long productEntryId) {
-			update(new Object[] { new Long(productEntryId) });
+			_sqlUpdate.update(new Object[] { new Long(productEntryId) });
 		}
+
+		private SqlUpdate _sqlUpdate;
 	}
 
-	protected class RemoveSCLicense extends SqlUpdate {
+	protected class RemoveSCLicense {
 		protected RemoveSCLicense(SCProductEntryPersistenceImpl persistenceImpl) {
-			super(persistenceImpl.getDataSource(),
-				"DELETE FROM SCLicenses_SCProductEntries WHERE productEntryId = ? AND licenseId = ?");
-
-			declareParameter(new SqlParameter(Types.BIGINT));
-			declareParameter(new SqlParameter(Types.BIGINT));
-
-			compile();
+			_sqlUpdate = SqlUpdateFactoryUtil.getSqlUpdate(getDataSource(),
+					"DELETE FROM SCLicenses_SCProductEntries WHERE productEntryId = ? AND licenseId = ?",
+					new int[] { Types.BIGINT, Types.BIGINT });
 		}
 
 		protected void remove(long productEntryId, long licenseId) {
-			update(new Object[] { new Long(productEntryId), new Long(licenseId) });
+			_sqlUpdate.update(new Object[] {
+					new Long(productEntryId), new Long(licenseId)
+				});
 		}
+
+		private SqlUpdate _sqlUpdate;
 	}
 
 	private static final String _SQL_GETSCLICENSES = "SELECT {SCLicense.*} FROM SCLicense INNER JOIN SCLicenses_SCProductEntries ON (SCLicenses_SCProductEntries.licenseId = SCLicense.licenseId) WHERE (SCLicenses_SCProductEntries.productEntryId = ?)";

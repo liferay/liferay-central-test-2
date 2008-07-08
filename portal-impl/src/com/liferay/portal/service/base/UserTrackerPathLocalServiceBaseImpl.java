@@ -296,13 +296,13 @@ public abstract class UserTrackerPathLocalServiceBaseImpl
 		userTrackerPathPersistence.remove(userTrackerPath);
 	}
 
-	public List<UserTrackerPath> dynamicQuery(DynamicQuery dynamicQuery)
+	public List<Object> dynamicQuery(DynamicQuery dynamicQuery)
 		throws SystemException {
 		return userTrackerPathPersistence.findWithDynamicQuery(dynamicQuery);
 	}
 
-	public List<UserTrackerPath> dynamicQuery(DynamicQuery dynamicQuery,
-		int start, int end) throws SystemException {
+	public List<Object> dynamicQuery(DynamicQuery dynamicQuery, int start,
+		int end) throws SystemException {
 		return userTrackerPathPersistence.findWithDynamicQuery(dynamicQuery,
 			start, end);
 	}

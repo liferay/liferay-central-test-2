@@ -183,13 +183,13 @@ public class ShoppingItemUtil {
 		return getPersistence().fetchByC_S(companyId, sku);
 	}
 
-	public static java.util.List<com.liferay.portlet.shopping.model.ShoppingItem> findWithDynamicQuery(
+	public static java.util.List<Object> findWithDynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery)
 		throws com.liferay.portal.SystemException {
 		return getPersistence().findWithDynamicQuery(dynamicQuery);
 	}
 
-	public static java.util.List<com.liferay.portlet.shopping.model.ShoppingItem> findWithDynamicQuery(
+	public static java.util.List<Object> findWithDynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery, int start,
 		int end) throws com.liferay.portal.SystemException {
 		return getPersistence().findWithDynamicQuery(dynamicQuery, start, end);
@@ -296,7 +296,7 @@ public class ShoppingItemUtil {
 	}
 
 	public static boolean containsShoppingItemPrice(long pk,
-		long shoppingItemPricePK) {
+		long shoppingItemPricePK) throws com.liferay.portal.SystemException {
 		return getPersistence()
 				   .containsShoppingItemPrice(pk, shoppingItemPricePK);
 	}

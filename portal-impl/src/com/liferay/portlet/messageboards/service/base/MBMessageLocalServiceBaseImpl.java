@@ -182,12 +182,12 @@ public abstract class MBMessageLocalServiceBaseImpl
 		mbMessagePersistence.remove(mbMessage);
 	}
 
-	public List<MBMessage> dynamicQuery(DynamicQuery dynamicQuery)
+	public List<Object> dynamicQuery(DynamicQuery dynamicQuery)
 		throws SystemException {
 		return mbMessagePersistence.findWithDynamicQuery(dynamicQuery);
 	}
 
-	public List<MBMessage> dynamicQuery(DynamicQuery dynamicQuery, int start,
+	public List<Object> dynamicQuery(DynamicQuery dynamicQuery, int start,
 		int end) throws SystemException {
 		return mbMessagePersistence.findWithDynamicQuery(dynamicQuery, start,
 			end);

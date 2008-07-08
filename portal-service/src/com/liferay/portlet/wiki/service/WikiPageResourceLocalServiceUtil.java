@@ -75,7 +75,7 @@ public class WikiPageResourceLocalServiceUtil {
 		wikiPageResourceLocalService.deleteWikiPageResource(wikiPageResource);
 	}
 
-	public static java.util.List<com.liferay.portlet.wiki.model.WikiPageResource> dynamicQuery(
+	public static java.util.List<Object> dynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery)
 		throws com.liferay.portal.SystemException {
 		WikiPageResourceLocalService wikiPageResourceLocalService = WikiPageResourceLocalServiceFactory.getService();
@@ -83,7 +83,7 @@ public class WikiPageResourceLocalServiceUtil {
 		return wikiPageResourceLocalService.dynamicQuery(dynamicQuery);
 	}
 
-	public static java.util.List<com.liferay.portlet.wiki.model.WikiPageResource> dynamicQuery(
+	public static java.util.List<Object> dynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery, int start,
 		int end) throws com.liferay.portal.SystemException {
 		WikiPageResourceLocalService wikiPageResourceLocalService = WikiPageResourceLocalServiceFactory.getService();

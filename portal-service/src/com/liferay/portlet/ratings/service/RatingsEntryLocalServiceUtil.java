@@ -75,7 +75,7 @@ public class RatingsEntryLocalServiceUtil {
 		ratingsEntryLocalService.deleteRatingsEntry(ratingsEntry);
 	}
 
-	public static java.util.List<com.liferay.portlet.ratings.model.RatingsEntry> dynamicQuery(
+	public static java.util.List<Object> dynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery)
 		throws com.liferay.portal.SystemException {
 		RatingsEntryLocalService ratingsEntryLocalService = RatingsEntryLocalServiceFactory.getService();
@@ -83,7 +83,7 @@ public class RatingsEntryLocalServiceUtil {
 		return ratingsEntryLocalService.dynamicQuery(dynamicQuery);
 	}
 
-	public static java.util.List<com.liferay.portlet.ratings.model.RatingsEntry> dynamicQuery(
+	public static java.util.List<Object> dynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery, int start,
 		int end) throws com.liferay.portal.SystemException {
 		RatingsEntryLocalService ratingsEntryLocalService = RatingsEntryLocalServiceFactory.getService();

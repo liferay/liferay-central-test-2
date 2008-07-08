@@ -93,13 +93,13 @@ public abstract class SCProductVersionLocalServiceBaseImpl
 		scProductVersionPersistence.remove(scProductVersion);
 	}
 
-	public List<SCProductVersion> dynamicQuery(DynamicQuery dynamicQuery)
+	public List<Object> dynamicQuery(DynamicQuery dynamicQuery)
 		throws SystemException {
 		return scProductVersionPersistence.findWithDynamicQuery(dynamicQuery);
 	}
 
-	public List<SCProductVersion> dynamicQuery(DynamicQuery dynamicQuery,
-		int start, int end) throws SystemException {
+	public List<Object> dynamicQuery(DynamicQuery dynamicQuery, int start,
+		int end) throws SystemException {
 		return scProductVersionPersistence.findWithDynamicQuery(dynamicQuery,
 			start, end);
 	}

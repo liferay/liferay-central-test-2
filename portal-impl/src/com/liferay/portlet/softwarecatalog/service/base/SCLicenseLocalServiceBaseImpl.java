@@ -84,12 +84,12 @@ public abstract class SCLicenseLocalServiceBaseImpl
 		scLicensePersistence.remove(scLicense);
 	}
 
-	public List<SCLicense> dynamicQuery(DynamicQuery dynamicQuery)
+	public List<Object> dynamicQuery(DynamicQuery dynamicQuery)
 		throws SystemException {
 		return scLicensePersistence.findWithDynamicQuery(dynamicQuery);
 	}
 
-	public List<SCLicense> dynamicQuery(DynamicQuery dynamicQuery, int start,
+	public List<Object> dynamicQuery(DynamicQuery dynamicQuery, int start,
 		int end) throws SystemException {
 		return scLicensePersistence.findWithDynamicQuery(dynamicQuery, start,
 			end);

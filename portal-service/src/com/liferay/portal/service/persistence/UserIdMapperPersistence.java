@@ -120,11 +120,11 @@ public interface UserIdMapperPersistence {
 		java.lang.String type, java.lang.String externalUserId)
 		throws com.liferay.portal.SystemException;
 
-	public java.util.List<com.liferay.portal.model.UserIdMapper> findWithDynamicQuery(
+	public java.util.List<Object> findWithDynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery)
 		throws com.liferay.portal.SystemException;
 
-	public java.util.List<com.liferay.portal.model.UserIdMapper> findWithDynamicQuery(
+	public java.util.List<Object> findWithDynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery, int start,
 		int end) throws com.liferay.portal.SystemException;
 

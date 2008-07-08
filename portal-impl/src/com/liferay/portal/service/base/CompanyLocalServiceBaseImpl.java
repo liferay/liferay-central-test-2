@@ -291,12 +291,12 @@ public abstract class CompanyLocalServiceBaseImpl implements CompanyLocalService
 		companyPersistence.remove(company);
 	}
 
-	public List<Company> dynamicQuery(DynamicQuery dynamicQuery)
+	public List<Object> dynamicQuery(DynamicQuery dynamicQuery)
 		throws SystemException {
 		return companyPersistence.findWithDynamicQuery(dynamicQuery);
 	}
 
-	public List<Company> dynamicQuery(DynamicQuery dynamicQuery, int start,
+	public List<Object> dynamicQuery(DynamicQuery dynamicQuery, int start,
 		int end) throws SystemException {
 		return companyPersistence.findWithDynamicQuery(dynamicQuery, start, end);
 	}

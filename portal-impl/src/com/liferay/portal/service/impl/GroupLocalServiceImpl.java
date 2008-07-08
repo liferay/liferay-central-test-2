@@ -463,7 +463,9 @@ public class GroupLocalServiceImpl extends GroupLocalServiceBaseImpl {
 		return userGroupGroups;
 	}
 
-	public boolean hasRoleGroup(long roleId, long groupId) {
+	public boolean hasRoleGroup(long roleId, long groupId)
+		throws SystemException {
+
 		return rolePersistence.containsGroup(roleId, groupId);
 	}
 

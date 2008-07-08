@@ -101,13 +101,13 @@ public abstract class TasksProposalLocalServiceBaseImpl
 		tasksProposalPersistence.remove(tasksProposal);
 	}
 
-	public List<TasksProposal> dynamicQuery(DynamicQuery dynamicQuery)
+	public List<Object> dynamicQuery(DynamicQuery dynamicQuery)
 		throws SystemException {
 		return tasksProposalPersistence.findWithDynamicQuery(dynamicQuery);
 	}
 
-	public List<TasksProposal> dynamicQuery(DynamicQuery dynamicQuery,
-		int start, int end) throws SystemException {
+	public List<Object> dynamicQuery(DynamicQuery dynamicQuery, int start,
+		int end) throws SystemException {
 		return tasksProposalPersistence.findWithDynamicQuery(dynamicQuery,
 			start, end);
 	}

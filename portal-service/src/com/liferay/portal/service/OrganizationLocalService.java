@@ -61,11 +61,11 @@ public interface OrganizationLocalService {
 		com.liferay.portal.model.Organization organization)
 		throws com.liferay.portal.SystemException;
 
-	public java.util.List<com.liferay.portal.model.Organization> dynamicQuery(
+	public java.util.List<Object> dynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery)
 		throws com.liferay.portal.SystemException;
 
-	public java.util.List<com.liferay.portal.model.Organization> dynamicQuery(
+	public java.util.List<Object> dynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery, int start,
 		int end) throws com.liferay.portal.SystemException;
 
@@ -134,9 +134,11 @@ public interface OrganizationLocalService {
 	public int getUserOrganizationsCount(long userId)
 		throws com.liferay.portal.SystemException;
 
-	public boolean hasGroupOrganization(long groupId, long organizationId);
+	public boolean hasGroupOrganization(long groupId, long organizationId)
+		throws com.liferay.portal.SystemException;
 
-	public boolean hasUserOrganization(long userId, long organizationId);
+	public boolean hasUserOrganization(long userId, long organizationId)
+		throws com.liferay.portal.SystemException;
 
 	public boolean hasPasswordPolicyOrganization(long passwordPolicyId,
 		long organizationId) throws com.liferay.portal.SystemException;

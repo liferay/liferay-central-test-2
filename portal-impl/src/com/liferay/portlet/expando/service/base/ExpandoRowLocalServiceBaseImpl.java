@@ -81,12 +81,12 @@ public abstract class ExpandoRowLocalServiceBaseImpl
 		expandoRowPersistence.remove(expandoRow);
 	}
 
-	public List<ExpandoRow> dynamicQuery(DynamicQuery dynamicQuery)
+	public List<Object> dynamicQuery(DynamicQuery dynamicQuery)
 		throws SystemException {
 		return expandoRowPersistence.findWithDynamicQuery(dynamicQuery);
 	}
 
-	public List<ExpandoRow> dynamicQuery(DynamicQuery dynamicQuery, int start,
+	public List<Object> dynamicQuery(DynamicQuery dynamicQuery, int start,
 		int end) throws SystemException {
 		return expandoRowPersistence.findWithDynamicQuery(dynamicQuery, start,
 			end);

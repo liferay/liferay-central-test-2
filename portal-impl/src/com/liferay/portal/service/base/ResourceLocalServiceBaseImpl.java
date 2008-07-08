@@ -292,12 +292,12 @@ public abstract class ResourceLocalServiceBaseImpl
 		resourcePersistence.remove(resource);
 	}
 
-	public List<Resource> dynamicQuery(DynamicQuery dynamicQuery)
+	public List<Object> dynamicQuery(DynamicQuery dynamicQuery)
 		throws SystemException {
 		return resourcePersistence.findWithDynamicQuery(dynamicQuery);
 	}
 
-	public List<Resource> dynamicQuery(DynamicQuery dynamicQuery, int start,
+	public List<Object> dynamicQuery(DynamicQuery dynamicQuery, int start,
 		int end) throws SystemException {
 		return resourcePersistence.findWithDynamicQuery(dynamicQuery, start, end);
 	}

@@ -75,7 +75,7 @@ public class MBStatsUserLocalServiceUtil {
 		mbStatsUserLocalService.deleteMBStatsUser(mbStatsUser);
 	}
 
-	public static java.util.List<com.liferay.portlet.messageboards.model.MBStatsUser> dynamicQuery(
+	public static java.util.List<Object> dynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery)
 		throws com.liferay.portal.SystemException {
 		MBStatsUserLocalService mbStatsUserLocalService = MBStatsUserLocalServiceFactory.getService();
@@ -83,7 +83,7 @@ public class MBStatsUserLocalServiceUtil {
 		return mbStatsUserLocalService.dynamicQuery(dynamicQuery);
 	}
 
-	public static java.util.List<com.liferay.portlet.messageboards.model.MBStatsUser> dynamicQuery(
+	public static java.util.List<Object> dynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery, int start,
 		int end) throws com.liferay.portal.SystemException {
 		MBStatsUserLocalService mbStatsUserLocalService = MBStatsUserLocalServiceFactory.getService();

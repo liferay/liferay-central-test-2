@@ -157,7 +157,9 @@ public class UserGroupLocalServiceImpl extends UserGroupLocalServiceBaseImpl {
 		return userPersistence.getUserGroups(userId);
 	}
 
-	public boolean hasGroupUserGroup(long groupId, long userGroupId) {
+	public boolean hasGroupUserGroup(long groupId, long userGroupId)
+		throws SystemException {
+
 		return groupPersistence.containsUserGroup(groupId, userGroupId);
 	}
 

@@ -274,13 +274,13 @@ public class BookmarksFolderUtil {
 				   .findByG_P_PrevAndNext(folderId, groupId, parentFolderId, obc);
 	}
 
-	public static java.util.List<com.liferay.portlet.bookmarks.model.BookmarksFolder> findWithDynamicQuery(
+	public static java.util.List<Object> findWithDynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery)
 		throws com.liferay.portal.SystemException {
 		return getPersistence().findWithDynamicQuery(dynamicQuery);
 	}
 
-	public static java.util.List<com.liferay.portlet.bookmarks.model.BookmarksFolder> findWithDynamicQuery(
+	public static java.util.List<Object> findWithDynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery, int start,
 		int end) throws com.liferay.portal.SystemException {
 		return getPersistence().findWithDynamicQuery(dynamicQuery, start, end);

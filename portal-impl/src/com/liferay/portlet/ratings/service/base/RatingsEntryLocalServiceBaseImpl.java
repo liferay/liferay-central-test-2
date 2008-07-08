@@ -89,13 +89,13 @@ public abstract class RatingsEntryLocalServiceBaseImpl
 		ratingsEntryPersistence.remove(ratingsEntry);
 	}
 
-	public List<RatingsEntry> dynamicQuery(DynamicQuery dynamicQuery)
+	public List<Object> dynamicQuery(DynamicQuery dynamicQuery)
 		throws SystemException {
 		return ratingsEntryPersistence.findWithDynamicQuery(dynamicQuery);
 	}
 
-	public List<RatingsEntry> dynamicQuery(DynamicQuery dynamicQuery,
-		int start, int end) throws SystemException {
+	public List<Object> dynamicQuery(DynamicQuery dynamicQuery, int start,
+		int end) throws SystemException {
 		return ratingsEntryPersistence.findWithDynamicQuery(dynamicQuery,
 			start, end);
 	}

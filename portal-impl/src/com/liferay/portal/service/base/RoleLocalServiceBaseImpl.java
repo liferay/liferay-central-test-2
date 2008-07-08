@@ -290,13 +290,13 @@ public abstract class RoleLocalServiceBaseImpl implements RoleLocalService {
 		rolePersistence.remove(role);
 	}
 
-	public List<Role> dynamicQuery(DynamicQuery dynamicQuery)
+	public List<Object> dynamicQuery(DynamicQuery dynamicQuery)
 		throws SystemException {
 		return rolePersistence.findWithDynamicQuery(dynamicQuery);
 	}
 
-	public List<Role> dynamicQuery(DynamicQuery dynamicQuery, int start, int end)
-		throws SystemException {
+	public List<Object> dynamicQuery(DynamicQuery dynamicQuery, int start,
+		int end) throws SystemException {
 		return rolePersistence.findWithDynamicQuery(dynamicQuery, start, end);
 	}
 

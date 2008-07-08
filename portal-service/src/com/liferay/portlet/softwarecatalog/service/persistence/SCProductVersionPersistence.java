@@ -116,11 +116,11 @@ public interface SCProductVersionPersistence {
 		java.lang.String directDownloadURL)
 		throws com.liferay.portal.SystemException;
 
-	public java.util.List<com.liferay.portlet.softwarecatalog.model.SCProductVersion> findWithDynamicQuery(
+	public java.util.List<Object> findWithDynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery)
 		throws com.liferay.portal.SystemException;
 
-	public java.util.List<com.liferay.portlet.softwarecatalog.model.SCProductVersion> findWithDynamicQuery(
+	public java.util.List<Object> findWithDynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery, int start,
 		int end) throws com.liferay.portal.SystemException;
 
@@ -165,7 +165,8 @@ public interface SCProductVersionPersistence {
 	public int getSCFrameworkVersionsSize(long pk)
 		throws com.liferay.portal.SystemException;
 
-	public boolean containsSCFrameworkVersion(long pk, long scFrameworkVersionPK);
+	public boolean containsSCFrameworkVersion(long pk, long scFrameworkVersionPK)
+		throws com.liferay.portal.SystemException;
 
 	public boolean containsSCFrameworkVersions(long pk)
 		throws com.liferay.portal.SystemException;

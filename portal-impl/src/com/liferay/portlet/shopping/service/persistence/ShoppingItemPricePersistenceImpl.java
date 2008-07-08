@@ -515,8 +515,8 @@ public class ShoppingItemPricePersistenceImpl extends BasePersistenceImpl
 		}
 	}
 
-	public List<ShoppingItemPrice> findWithDynamicQuery(
-		DynamicQuery dynamicQuery) throws SystemException {
+	public List<Object> findWithDynamicQuery(DynamicQuery dynamicQuery)
+		throws SystemException {
 		Session session = null;
 
 		try {
@@ -534,17 +534,16 @@ public class ShoppingItemPricePersistenceImpl extends BasePersistenceImpl
 		}
 	}
 
-	public List<ShoppingItemPrice> findWithDynamicQuery(
-		DynamicQuery dynamicQuery, int start, int end)
-		throws SystemException {
+	public List<Object> findWithDynamicQuery(DynamicQuery dynamicQuery,
+		int start, int end) throws SystemException {
 		Session session = null;
 
 		try {
 			session = openSession();
 
-			dynamicQuery.compile(session);
-
 			dynamicQuery.setLimit(start, end);
+
+			dynamicQuery.compile(session);
 
 			return dynamicQuery.list();
 		}

@@ -114,11 +114,11 @@ public interface MBDiscussionPersistence {
 		long classNameId, long classPK)
 		throws com.liferay.portal.SystemException;
 
-	public java.util.List<com.liferay.portlet.messageboards.model.MBDiscussion> findWithDynamicQuery(
+	public java.util.List<Object> findWithDynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery)
 		throws com.liferay.portal.SystemException;
 
-	public java.util.List<com.liferay.portlet.messageboards.model.MBDiscussion> findWithDynamicQuery(
+	public java.util.List<Object> findWithDynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery, int start,
 		int end) throws com.liferay.portal.SystemException;
 

@@ -75,7 +75,7 @@ public class CalEventLocalServiceUtil {
 		calEventLocalService.deleteCalEvent(calEvent);
 	}
 
-	public static java.util.List<com.liferay.portlet.calendar.model.CalEvent> dynamicQuery(
+	public static java.util.List<Object> dynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery)
 		throws com.liferay.portal.SystemException {
 		CalEventLocalService calEventLocalService = CalEventLocalServiceFactory.getService();
@@ -83,7 +83,7 @@ public class CalEventLocalServiceUtil {
 		return calEventLocalService.dynamicQuery(dynamicQuery);
 	}
 
-	public static java.util.List<com.liferay.portlet.calendar.model.CalEvent> dynamicQuery(
+	public static java.util.List<Object> dynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery, int start,
 		int end) throws com.liferay.portal.SystemException {
 		CalEventLocalService calEventLocalService = CalEventLocalServiceFactory.getService();

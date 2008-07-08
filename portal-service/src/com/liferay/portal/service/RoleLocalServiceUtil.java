@@ -74,7 +74,7 @@ public class RoleLocalServiceUtil {
 		roleLocalService.deleteRole(role);
 	}
 
-	public static java.util.List<com.liferay.portal.model.Role> dynamicQuery(
+	public static java.util.List<Object> dynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery)
 		throws com.liferay.portal.SystemException {
 		RoleLocalService roleLocalService = RoleLocalServiceFactory.getService();
@@ -82,7 +82,7 @@ public class RoleLocalServiceUtil {
 		return roleLocalService.dynamicQuery(dynamicQuery);
 	}
 
-	public static java.util.List<com.liferay.portal.model.Role> dynamicQuery(
+	public static java.util.List<Object> dynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery, int start,
 		int end) throws com.liferay.portal.SystemException {
 		RoleLocalService roleLocalService = RoleLocalServiceFactory.getService();
@@ -219,7 +219,8 @@ public class RoleLocalServiceUtil {
 		return roleLocalService.getUserRoles(userId);
 	}
 
-	public static boolean hasUserRole(long userId, long roleId) {
+	public static boolean hasUserRole(long userId, long roleId)
+		throws com.liferay.portal.SystemException {
 		RoleLocalService roleLocalService = RoleLocalServiceFactory.getService();
 
 		return roleLocalService.hasUserRole(userId, roleId);

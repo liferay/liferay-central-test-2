@@ -75,7 +75,7 @@ public class IGFolderLocalServiceUtil {
 		igFolderLocalService.deleteIGFolder(igFolder);
 	}
 
-	public static java.util.List<com.liferay.portlet.imagegallery.model.IGFolder> dynamicQuery(
+	public static java.util.List<Object> dynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery)
 		throws com.liferay.portal.SystemException {
 		IGFolderLocalService igFolderLocalService = IGFolderLocalServiceFactory.getService();
@@ -83,7 +83,7 @@ public class IGFolderLocalServiceUtil {
 		return igFolderLocalService.dynamicQuery(dynamicQuery);
 	}
 
-	public static java.util.List<com.liferay.portlet.imagegallery.model.IGFolder> dynamicQuery(
+	public static java.util.List<Object> dynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery, int start,
 		int end) throws com.liferay.portal.SystemException {
 		IGFolderLocalService igFolderLocalService = IGFolderLocalServiceFactory.getService();

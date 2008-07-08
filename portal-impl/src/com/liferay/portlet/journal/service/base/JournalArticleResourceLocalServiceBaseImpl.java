@@ -106,14 +106,13 @@ public abstract class JournalArticleResourceLocalServiceBaseImpl
 		journalArticleResourcePersistence.remove(journalArticleResource);
 	}
 
-	public List<JournalArticleResource> dynamicQuery(DynamicQuery dynamicQuery)
+	public List<Object> dynamicQuery(DynamicQuery dynamicQuery)
 		throws SystemException {
 		return journalArticleResourcePersistence.findWithDynamicQuery(dynamicQuery);
 	}
 
-	public List<JournalArticleResource> dynamicQuery(
-		DynamicQuery dynamicQuery, int start, int end)
-		throws SystemException {
+	public List<Object> dynamicQuery(DynamicQuery dynamicQuery, int start,
+		int end) throws SystemException {
 		return journalArticleResourcePersistence.findWithDynamicQuery(dynamicQuery,
 			start, end);
 	}

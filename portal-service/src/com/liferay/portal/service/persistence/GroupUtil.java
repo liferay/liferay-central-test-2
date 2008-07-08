@@ -139,13 +139,13 @@ public class GroupUtil {
 		return getPersistence().fetchByC_C_C(companyId, classNameId, classPK);
 	}
 
-	public static java.util.List<com.liferay.portal.model.Group> findWithDynamicQuery(
+	public static java.util.List<Object> findWithDynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery)
 		throws com.liferay.portal.SystemException {
 		return getPersistence().findWithDynamicQuery(dynamicQuery);
 	}
 
-	public static java.util.List<com.liferay.portal.model.Group> findWithDynamicQuery(
+	public static java.util.List<Object> findWithDynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery, int start,
 		int end) throws com.liferay.portal.SystemException {
 		return getPersistence().findWithDynamicQuery(dynamicQuery, start, end);
@@ -242,7 +242,8 @@ public class GroupUtil {
 		return getPersistence().getOrganizationsSize(pk);
 	}
 
-	public static boolean containsOrganization(long pk, long organizationPK) {
+	public static boolean containsOrganization(long pk, long organizationPK)
+		throws com.liferay.portal.SystemException {
 		return getPersistence().containsOrganization(pk, organizationPK);
 	}
 
@@ -333,7 +334,8 @@ public class GroupUtil {
 		return getPersistence().getPermissionsSize(pk);
 	}
 
-	public static boolean containsPermission(long pk, long permissionPK) {
+	public static boolean containsPermission(long pk, long permissionPK)
+		throws com.liferay.portal.SystemException {
 		return getPersistence().containsPermission(pk, permissionPK);
 	}
 
@@ -424,7 +426,8 @@ public class GroupUtil {
 		return getPersistence().getRolesSize(pk);
 	}
 
-	public static boolean containsRole(long pk, long rolePK) {
+	public static boolean containsRole(long pk, long rolePK)
+		throws com.liferay.portal.SystemException {
 		return getPersistence().containsRole(pk, rolePK);
 	}
 
@@ -513,7 +516,8 @@ public class GroupUtil {
 		return getPersistence().getUserGroupsSize(pk);
 	}
 
-	public static boolean containsUserGroup(long pk, long userGroupPK) {
+	public static boolean containsUserGroup(long pk, long userGroupPK)
+		throws com.liferay.portal.SystemException {
 		return getPersistence().containsUserGroup(pk, userGroupPK);
 	}
 
@@ -604,7 +608,8 @@ public class GroupUtil {
 		return getPersistence().getUsersSize(pk);
 	}
 
-	public static boolean containsUser(long pk, long userPK) {
+	public static boolean containsUser(long pk, long userPK)
+		throws com.liferay.portal.SystemException {
 		return getPersistence().containsUser(pk, userPK);
 	}
 

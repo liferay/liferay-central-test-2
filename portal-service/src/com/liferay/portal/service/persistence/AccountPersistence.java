@@ -74,11 +74,11 @@ public interface AccountPersistence {
 	public com.liferay.portal.model.Account fetchByPrimaryKey(long accountId)
 		throws com.liferay.portal.SystemException;
 
-	public java.util.List<com.liferay.portal.model.Account> findWithDynamicQuery(
+	public java.util.List<Object> findWithDynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery)
 		throws com.liferay.portal.SystemException;
 
-	public java.util.List<com.liferay.portal.model.Account> findWithDynamicQuery(
+	public java.util.List<Object> findWithDynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery, int start,
 		int end) throws com.liferay.portal.SystemException;
 

@@ -100,13 +100,13 @@ public abstract class ShoppingItemPriceLocalServiceBaseImpl
 		shoppingItemPricePersistence.remove(shoppingItemPrice);
 	}
 
-	public List<ShoppingItemPrice> dynamicQuery(DynamicQuery dynamicQuery)
+	public List<Object> dynamicQuery(DynamicQuery dynamicQuery)
 		throws SystemException {
 		return shoppingItemPricePersistence.findWithDynamicQuery(dynamicQuery);
 	}
 
-	public List<ShoppingItemPrice> dynamicQuery(DynamicQuery dynamicQuery,
-		int start, int end) throws SystemException {
+	public List<Object> dynamicQuery(DynamicQuery dynamicQuery, int start,
+		int end) throws SystemException {
 		return shoppingItemPricePersistence.findWithDynamicQuery(dynamicQuery,
 			start, end);
 	}

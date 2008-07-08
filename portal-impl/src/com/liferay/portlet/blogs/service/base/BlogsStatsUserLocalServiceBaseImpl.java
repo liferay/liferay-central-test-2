@@ -81,13 +81,13 @@ public abstract class BlogsStatsUserLocalServiceBaseImpl
 		blogsStatsUserPersistence.remove(blogsStatsUser);
 	}
 
-	public List<BlogsStatsUser> dynamicQuery(DynamicQuery dynamicQuery)
+	public List<Object> dynamicQuery(DynamicQuery dynamicQuery)
 		throws SystemException {
 		return blogsStatsUserPersistence.findWithDynamicQuery(dynamicQuery);
 	}
 
-	public List<BlogsStatsUser> dynamicQuery(DynamicQuery dynamicQuery,
-		int start, int end) throws SystemException {
+	public List<Object> dynamicQuery(DynamicQuery dynamicQuery, int start,
+		int end) throws SystemException {
 		return blogsStatsUserPersistence.findWithDynamicQuery(dynamicQuery,
 			start, end);
 	}

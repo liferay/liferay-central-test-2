@@ -75,7 +75,7 @@ public class MembershipRequestLocalServiceUtil {
 		membershipRequestLocalService.deleteMembershipRequest(membershipRequest);
 	}
 
-	public static java.util.List<com.liferay.portal.model.MembershipRequest> dynamicQuery(
+	public static java.util.List<Object> dynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery)
 		throws com.liferay.portal.SystemException {
 		MembershipRequestLocalService membershipRequestLocalService = MembershipRequestLocalServiceFactory.getService();
@@ -83,7 +83,7 @@ public class MembershipRequestLocalServiceUtil {
 		return membershipRequestLocalService.dynamicQuery(dynamicQuery);
 	}
 
-	public static java.util.List<com.liferay.portal.model.MembershipRequest> dynamicQuery(
+	public static java.util.List<Object> dynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery, int start,
 		int end) throws com.liferay.portal.SystemException {
 		MembershipRequestLocalService membershipRequestLocalService = MembershipRequestLocalServiceFactory.getService();

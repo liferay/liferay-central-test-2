@@ -74,7 +74,7 @@ public class GroupLocalServiceUtil {
 		groupLocalService.deleteGroup(group);
 	}
 
-	public static java.util.List<com.liferay.portal.model.Group> dynamicQuery(
+	public static java.util.List<Object> dynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery)
 		throws com.liferay.portal.SystemException {
 		GroupLocalService groupLocalService = GroupLocalServiceFactory.getService();
@@ -82,7 +82,7 @@ public class GroupLocalServiceUtil {
 		return groupLocalService.dynamicQuery(dynamicQuery);
 	}
 
-	public static java.util.List<com.liferay.portal.model.Group> dynamicQuery(
+	public static java.util.List<Object> dynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery, int start,
 		int end) throws com.liferay.portal.SystemException {
 		GroupLocalService groupLocalService = GroupLocalServiceFactory.getService();
@@ -242,7 +242,8 @@ public class GroupLocalServiceUtil {
 		return groupLocalService.getUserGroupsGroups(userGroups);
 	}
 
-	public static boolean hasRoleGroup(long roleId, long groupId) {
+	public static boolean hasRoleGroup(long roleId, long groupId)
+		throws com.liferay.portal.SystemException {
 		GroupLocalService groupLocalService = GroupLocalServiceFactory.getService();
 
 		return groupLocalService.hasRoleGroup(roleId, groupId);

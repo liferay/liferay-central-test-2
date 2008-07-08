@@ -112,11 +112,11 @@ public interface PermissionPersistence {
 		java.lang.String actionId, long resourceId)
 		throws com.liferay.portal.SystemException;
 
-	public java.util.List<com.liferay.portal.model.Permission> findWithDynamicQuery(
+	public java.util.List<Object> findWithDynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery)
 		throws com.liferay.portal.SystemException;
 
-	public java.util.List<com.liferay.portal.model.Permission> findWithDynamicQuery(
+	public java.util.List<Object> findWithDynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery, int start,
 		int end) throws com.liferay.portal.SystemException;
 
@@ -159,7 +159,8 @@ public interface PermissionPersistence {
 
 	public int getGroupsSize(long pk) throws com.liferay.portal.SystemException;
 
-	public boolean containsGroup(long pk, long groupPK);
+	public boolean containsGroup(long pk, long groupPK)
+		throws com.liferay.portal.SystemException;
 
 	public boolean containsGroups(long pk)
 		throws com.liferay.portal.SystemException;
@@ -211,7 +212,8 @@ public interface PermissionPersistence {
 
 	public int getRolesSize(long pk) throws com.liferay.portal.SystemException;
 
-	public boolean containsRole(long pk, long rolePK);
+	public boolean containsRole(long pk, long rolePK)
+		throws com.liferay.portal.SystemException;
 
 	public boolean containsRoles(long pk)
 		throws com.liferay.portal.SystemException;
@@ -263,7 +265,8 @@ public interface PermissionPersistence {
 
 	public int getUsersSize(long pk) throws com.liferay.portal.SystemException;
 
-	public boolean containsUser(long pk, long userPK);
+	public boolean containsUser(long pk, long userPK)
+		throws com.liferay.portal.SystemException;
 
 	public boolean containsUsers(long pk)
 		throws com.liferay.portal.SystemException;

@@ -75,7 +75,7 @@ public class IGImageLocalServiceUtil {
 		igImageLocalService.deleteIGImage(igImage);
 	}
 
-	public static java.util.List<com.liferay.portlet.imagegallery.model.IGImage> dynamicQuery(
+	public static java.util.List<Object> dynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery)
 		throws com.liferay.portal.SystemException {
 		IGImageLocalService igImageLocalService = IGImageLocalServiceFactory.getService();
@@ -83,7 +83,7 @@ public class IGImageLocalServiceUtil {
 		return igImageLocalService.dynamicQuery(dynamicQuery);
 	}
 
-	public static java.util.List<com.liferay.portlet.imagegallery.model.IGImage> dynamicQuery(
+	public static java.util.List<Object> dynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery, int start,
 		int end) throws com.liferay.portal.SystemException {
 		IGImageLocalService igImageLocalService = IGImageLocalServiceFactory.getService();

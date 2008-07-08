@@ -139,12 +139,12 @@ public abstract class DLFileEntryLocalServiceBaseImpl
 		dlFileEntryPersistence.remove(dlFileEntry);
 	}
 
-	public List<DLFileEntry> dynamicQuery(DynamicQuery dynamicQuery)
+	public List<Object> dynamicQuery(DynamicQuery dynamicQuery)
 		throws SystemException {
 		return dlFileEntryPersistence.findWithDynamicQuery(dynamicQuery);
 	}
 
-	public List<DLFileEntry> dynamicQuery(DynamicQuery dynamicQuery, int start,
+	public List<Object> dynamicQuery(DynamicQuery dynamicQuery, int start,
 		int end) throws SystemException {
 		return dlFileEntryPersistence.findWithDynamicQuery(dynamicQuery, start,
 			end);

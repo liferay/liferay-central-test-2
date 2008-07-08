@@ -293,12 +293,12 @@ public abstract class ClassNameLocalServiceBaseImpl
 		classNamePersistence.remove(className);
 	}
 
-	public List<ClassName> dynamicQuery(DynamicQuery dynamicQuery)
+	public List<Object> dynamicQuery(DynamicQuery dynamicQuery)
 		throws SystemException {
 		return classNamePersistence.findWithDynamicQuery(dynamicQuery);
 	}
 
-	public List<ClassName> dynamicQuery(DynamicQuery dynamicQuery, int start,
+	public List<Object> dynamicQuery(DynamicQuery dynamicQuery, int start,
 		int end) throws SystemException {
 		return classNamePersistence.findWithDynamicQuery(dynamicQuery, start,
 			end);

@@ -294,13 +294,13 @@ public abstract class EmailAddressLocalServiceBaseImpl
 		emailAddressPersistence.remove(emailAddress);
 	}
 
-	public List<EmailAddress> dynamicQuery(DynamicQuery dynamicQuery)
+	public List<Object> dynamicQuery(DynamicQuery dynamicQuery)
 		throws SystemException {
 		return emailAddressPersistence.findWithDynamicQuery(dynamicQuery);
 	}
 
-	public List<EmailAddress> dynamicQuery(DynamicQuery dynamicQuery,
-		int start, int end) throws SystemException {
+	public List<Object> dynamicQuery(DynamicQuery dynamicQuery, int start,
+		int end) throws SystemException {
 		return emailAddressPersistence.findWithDynamicQuery(dynamicQuery,
 			start, end);
 	}

@@ -75,7 +75,7 @@ public class MBThreadLocalServiceUtil {
 		mbThreadLocalService.deleteMBThread(mbThread);
 	}
 
-	public static java.util.List<com.liferay.portlet.messageboards.model.MBThread> dynamicQuery(
+	public static java.util.List<Object> dynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery)
 		throws com.liferay.portal.SystemException {
 		MBThreadLocalService mbThreadLocalService = MBThreadLocalServiceFactory.getService();
@@ -83,7 +83,7 @@ public class MBThreadLocalServiceUtil {
 		return mbThreadLocalService.dynamicQuery(dynamicQuery);
 	}
 
-	public static java.util.List<com.liferay.portlet.messageboards.model.MBThread> dynamicQuery(
+	public static java.util.List<Object> dynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery, int start,
 		int end) throws com.liferay.portal.SystemException {
 		MBThreadLocalService mbThreadLocalService = MBThreadLocalServiceFactory.getService();

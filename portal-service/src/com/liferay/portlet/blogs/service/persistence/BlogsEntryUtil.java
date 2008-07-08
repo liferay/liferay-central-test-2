@@ -417,13 +417,13 @@ public class BlogsEntryUtil {
 				   .findByG_U_D_PrevAndNext(entryId, groupId, userId, draft, obc);
 	}
 
-	public static java.util.List<com.liferay.portlet.blogs.model.BlogsEntry> findWithDynamicQuery(
+	public static java.util.List<Object> findWithDynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery)
 		throws com.liferay.portal.SystemException {
 		return getPersistence().findWithDynamicQuery(dynamicQuery);
 	}
 
-	public static java.util.List<com.liferay.portlet.blogs.model.BlogsEntry> findWithDynamicQuery(
+	public static java.util.List<Object> findWithDynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery, int start,
 		int end) throws com.liferay.portal.SystemException {
 		return getPersistence().findWithDynamicQuery(dynamicQuery, start, end);

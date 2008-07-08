@@ -75,7 +75,7 @@ public class ServiceComponentLocalServiceUtil {
 		serviceComponentLocalService.deleteServiceComponent(serviceComponent);
 	}
 
-	public static java.util.List<com.liferay.portal.model.ServiceComponent> dynamicQuery(
+	public static java.util.List<Object> dynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery)
 		throws com.liferay.portal.SystemException {
 		ServiceComponentLocalService serviceComponentLocalService = ServiceComponentLocalServiceFactory.getService();
@@ -83,7 +83,7 @@ public class ServiceComponentLocalServiceUtil {
 		return serviceComponentLocalService.dynamicQuery(dynamicQuery);
 	}
 
-	public static java.util.List<com.liferay.portal.model.ServiceComponent> dynamicQuery(
+	public static java.util.List<Object> dynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery, int start,
 		int end) throws com.liferay.portal.SystemException {
 		ServiceComponentLocalService serviceComponentLocalService = ServiceComponentLocalServiceFactory.getService();
