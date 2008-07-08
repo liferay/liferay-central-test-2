@@ -20,24 +20,23 @@
  * SOFTWARE.
  */
 
-package com.liferay.portal.kernel.dao.orm;
+package com.liferay.portal.dao.orm.hibernate;
 
-import java.util.List;
+import com.liferay.portal.kernel.dao.orm.Projection;
+import com.liferay.portal.kernel.dao.orm.ProjectionFactory;
+
+import org.hibernate.criterion.Projections;
 
 /**
- * <a href="DynamicQuery.java.html"><b><i>View Source</i></b></a>
+ * <a href="ProjectionFactoryImpl.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *
  */
-public interface DynamicQuery {
+public class ProjectionFactoryImpl implements ProjectionFactory {
 
-	public DynamicQuery add(Criterion criterion);
-
-	public List list();
-
-	public void setLimit(int start, int end);
-
-	public DynamicQuery setProjection(Projection projection);
+	public Projection property(String propertyName) {
+		return new ProjectionImpl(Projections.property(propertyName));
+	}
 
 }

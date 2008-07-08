@@ -22,22 +22,22 @@
 
 package com.liferay.portal.kernel.dao.orm;
 
-import java.util.List;
-
 /**
- * <a href="DynamicQuery.java.html"><b><i>View Source</i></b></a>
+ * <a href="Property.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *
  */
-public interface DynamicQuery {
+public interface Property {
 
-	public DynamicQuery add(Criterion criterion);
+	public Criterion eq(DynamicQuery subselect);
 
-	public List list();
+	public Criterion eq(Object value);
 
-	public void setLimit(int start, int end);
+	public Criterion eqAll(DynamicQuery subselect);
 
-	public DynamicQuery setProjection(Projection projection);
+	public Criterion eqProperty(Property other);
+
+	public Criterion eqProperty(String other);
 
 }

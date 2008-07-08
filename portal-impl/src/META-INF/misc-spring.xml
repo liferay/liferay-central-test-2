@@ -34,10 +34,28 @@
 			<ref bean="com.liferay.portal.cache.SingleVMPoolImpl" />
 		</property>
 	</bean>
+	<bean id="com.liferay.portal.dao.orm.hibernate.DynamicQueryFactoryImpl" class="com.liferay.portal.dao.orm.hibernate.DynamicQueryFactoryImpl" lazy-init="true" />
+	<bean id="com.liferay.portal.kernel.dao.orm.DynamicQueryFactoryUtil" class="com.liferay.portal.kernel.dao.orm.DynamicQueryFactoryUtil" lazy-init="true">
+		<property name="dynamicQueryFactory">
+			<ref bean="com.liferay.portal.dao.orm.hibernate.DynamicQueryFactoryImpl" />
+		</property>
+	</bean>
 	<bean id="com.liferay.portal.dao.orm.hibernate.FinderCacheImpl" class="com.liferay.portal.dao.orm.hibernate.FinderCacheImpl" lazy-init="true" />
 	<bean id="com.liferay.portal.kernel.dao.orm.FinderCacheUtil" class="com.liferay.portal.kernel.dao.orm.FinderCacheUtil" lazy-init="true">
 		<property name="finderCache">
 			<ref bean="com.liferay.portal.dao.orm.hibernate.FinderCacheImpl" />
+		</property>
+	</bean>
+	<bean id="com.liferay.portal.dao.orm.hibernate.ProjectionFactoryImpl" class="com.liferay.portal.dao.orm.hibernate.ProjectionFactoryImpl" lazy-init="true" />
+	<bean id="com.liferay.portal.kernel.dao.orm.ProjectionFactoryUtil" class="com.liferay.portal.kernel.dao.orm.ProjectionFactoryUtil" lazy-init="true">
+		<property name="projectionFactory">
+			<ref bean="com.liferay.portal.dao.orm.hibernate.ProjectionFactoryImpl" />
+		</property>
+	</bean>
+	<bean id="com.liferay.portal.dao.orm.hibernate.PropertyFactoryImpl" class="com.liferay.portal.dao.orm.hibernate.PropertyFactoryImpl" lazy-init="true" />
+	<bean id="com.liferay.portal.kernel.dao.orm.PropertyFactoryUtil" class="com.liferay.portal.kernel.dao.orm.PropertyFactoryUtil" lazy-init="true">
+		<property name="propertyFactory">
+			<ref bean="com.liferay.portal.dao.orm.hibernate.PropertyFactoryImpl" />
 		</property>
 	</bean>
 	<bean id="com.liferay.portal.image.ImageProcessorImpl" class="com.liferay.portal.image.ImageProcessorImpl" lazy-init="true" />

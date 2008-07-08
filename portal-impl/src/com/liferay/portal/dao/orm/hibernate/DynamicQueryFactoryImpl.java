@@ -20,24 +20,23 @@
  * SOFTWARE.
  */
 
-package com.liferay.portal.kernel.dao.orm;
+package com.liferay.portal.dao.orm.hibernate;
 
-import java.util.List;
+import com.liferay.portal.kernel.dao.orm.DynamicQuery;
+import com.liferay.portal.kernel.dao.orm.DynamicQueryFactory;
+
+import org.hibernate.criterion.DetachedCriteria;
 
 /**
- * <a href="DynamicQuery.java.html"><b><i>View Source</i></b></a>
+ * <a href="DynamicQueryFactoryImpl.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *
  */
-public interface DynamicQuery {
+public class DynamicQueryFactoryImpl implements DynamicQueryFactory {
 
-	public DynamicQuery add(Criterion criterion);
-
-	public List list();
-
-	public void setLimit(int start, int end);
-
-	public DynamicQuery setProjection(Projection projection);
+	public DynamicQuery forClass(Class clazz) {
+		return new DynamicQueryImpl(DetachedCriteria.forClass(clazz));
+	}
 
 }

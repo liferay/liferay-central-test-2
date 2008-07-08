@@ -20,24 +20,26 @@
  * SOFTWARE.
  */
 
-package com.liferay.portal.kernel.dao.orm;
+package com.liferay.portal.dao.orm.hibernate;
 
-import java.util.List;
+import com.liferay.portal.kernel.dao.orm.Criterion;
 
 /**
- * <a href="DynamicQuery.java.html"><b><i>View Source</i></b></a>
+ * <a href="CriterionImpl.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *
  */
-public interface DynamicQuery {
+public class CriterionImpl implements Criterion {
 
-	public DynamicQuery add(Criterion criterion);
+	public CriterionImpl(org.hibernate.criterion.Criterion criterion) {
+		_criterion = criterion;
+	}
 
-	public List list();
+	public org.hibernate.criterion.Criterion getCriterion() {
+		return _criterion;
+	}
 
-	public void setLimit(int start, int end);
-
-	public DynamicQuery setProjection(Projection projection);
+	private org.hibernate.criterion.Criterion _criterion;
 
 }

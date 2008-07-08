@@ -23,13 +23,10 @@
 package com.liferay.portal.kernel.dao.orm;
 
 /**
- * <a href="DynamicQueryInitializer.java.html"><b><i>View Source</i></b></a>
+ * <a href="Projection.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *
  */
-public interface DynamicQueryInitializer {
-
-	public DynamicQuery initialize(Object obj);
-
+public interface Projection {
 }

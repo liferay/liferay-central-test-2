@@ -22,22 +22,40 @@
 
 package com.liferay.portal.kernel.dao.orm;
 
-import java.util.List;
+import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
 
 /**
- * <a href="DynamicQuery.java.html"><b><i>View Source</i></b></a>
+ * <a href="PropertyFactoryUtil.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *
  */
-public interface DynamicQuery {
+public class PropertyFactoryUtil {
 
-	public DynamicQuery add(Criterion criterion);
+	public static Property forName(String propertyName) {
+		return getPropertyFactory().forName(propertyName);
+	}
 
-	public List list();
+	public static PropertyFactory getPropertyFactory() {
+		return _getUtil()._projectionFactory;
+	}
 
-	public void setLimit(int start, int end);
+	public void setPropertyFactory(PropertyFactory projectionFactory) {
+		_projectionFactory = projectionFactory;
+	}
 
-	public DynamicQuery setProjection(Projection projection);
+	private static PropertyFactoryUtil _getUtil() {
+		if (_util == null) {
+			_util = (PropertyFactoryUtil)PortalBeanLocatorUtil.locate(_UTIL);
+		}
+
+		return _util;
+	}
+
+	private static final String _UTIL = PropertyFactoryUtil.class.getName();
+
+	private static PropertyFactoryUtil _util;
+
+	private PropertyFactory _projectionFactory;
 
 }
