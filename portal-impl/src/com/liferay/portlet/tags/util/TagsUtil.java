@@ -64,6 +64,17 @@ public class TagsUtil {
 		PortletKeys.MESSAGE_BOARDS, PortletKeys.WIKI
 	};
 
+	public static char[] INVALID_CHARACTERS = new char[] {
+		CharPool.AMPERSAND, CharPool.APOSTROPHE, CharPool.AT,
+		CharPool.BACK_SLASH, CharPool.CLOSE_BRACKET, CharPool.CLOSE_CURLY_BRACE,
+		CharPool.COLON, CharPool.COMMA, CharPool.EQUAL, CharPool.GREATER_THAN,
+		CharPool.FORWARD_SLASH, CharPool.LESS_THAN, CharPool.MINUS,
+		CharPool.NEW_LINE, CharPool.OPEN_BRACKET, CharPool.OPEN_CURLY_BRACE,
+		CharPool.PERCENT, CharPool.PIPE, CharPool.PLUS, CharPool.POUND,
+		CharPool.QUESTION, CharPool.QUOTE, CharPool.RETURN, CharPool.SEMICOLON,
+		CharPool.SLASH, CharPool.STAR, CharPool.TILDE
+	};
+
 	public static boolean isValidWord(String word) {
 		if (Validator.isNull(word)) {
 			return false;
@@ -71,16 +82,11 @@ public class TagsUtil {
 		else {
 			char[] wordCharArray = word.toCharArray();
 
-			for (int i = 0; i < wordCharArray.length; i++) {
-				char c = wordCharArray[i];
-
-				if (!Validator.isChar(c) && !Validator.isDigit(c) &&
-					(c != CharPool.CLOSE_PARENTHESIS) &&
-					(c != CharPool.DASH) && (c != CharPool.OPEN_PARENTHESIS) &&
-					(c != CharPool.PERIOD) && (c != CharPool.SPACE) &&
-					(c != CharPool.UNDERLINE)) {
-
-					return false;
+			for (char c : wordCharArray) {
+				for (char invalidChar : INVALID_CHARACTERS) {
+					if (c == invalidChar) {
+						return false;
+					}
 				}
 			}
 		}
