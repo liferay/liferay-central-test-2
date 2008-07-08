@@ -1082,40 +1082,6 @@ Liferay.Util = {
 		);
 	},
 
-	toJSONObject: function(s) {
-		return jQuery.parseJSON(s);
-	},
-
-	toJSONString: function(s) {
-		var rt = s;
-
-		var m = {
-			'\b': '\\b',
-			'\t': '\\t',
-			'\n': '\\n',
-			'\f': '\\f',
-			'\r': '\\r',
-			'"' : '\\"',
-			'\\': '\\\\'
-		};
-
-		if (/["\\\x00-\x1f]/.test(s)) {
-			rt = s.replace(/([\x00-\x1f\\"])/g, function(a, b) {
-				var c = m[b];
-
-				if (c) {
-					return c;
-				}
-
-				c = b.charCodeAt();
-
-				return '\\u00' + Math.floor(c / 16).toString(16) + (c % 16).toString(16);
-			});
-		}
-
-		return rt;
-	},
-
 	viewport: {
 		frame: function() {
 			var instance = this;
