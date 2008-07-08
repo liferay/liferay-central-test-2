@@ -15418,31 +15418,8 @@ Liferay.Util = {
 		return portletId;
 	},
 
-	getSelectedIndex: function(col) {
-		for (var i = 0; i < col.length; i++) {
-			if (col[i].checked == true) {
-				return i;
-			}
-		}
-
-		return -1;
-	},
-
 	getSelectedRadioValue: function(col) {
-		var i = Liferay.Util.getSelectedIndex(col);
-
-		if (i == -1) {
-			var radioValue = col.value;
-
-			if (radioValue == null) {
-				radioValue = "";
-			}
-
-			return radioValue;
-		}
-		else {
-			return col[i].value;
-		}
+		return jQuery(col).filter(':checked').val() || '';
 	},
 
 	getURLWithSessionId: function(url) {
@@ -15565,12 +15542,7 @@ Liferay.Util = {
 	},
 
 	isArray: function(object) {
-		if (!window.Array) {
-			return false;
-		}
-		else {
-			return object.constructor == window.Array;
-		}
+		return !!(window.Array && object.constructor == window.Array);
 	},
 
 	listChecked: function(form) {
@@ -17510,10 +17482,6 @@ Liferay.Portlet = {
 
 			currentPortlet.remove();
 			jQuery('#' + portletId).remove();
-
-			if (LayoutConfiguration) {
-				LayoutConfiguration.initialized = false;
-			}
 
 			var url = themeDisplay.getPathMain() + '/portal/update_layout';
 
