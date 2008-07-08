@@ -194,6 +194,20 @@ public class SeleneseToJavaBuilder {
 				sb.append(param2);
 				sb.append("$\"));");
 			}
+			else if (param1.equals("assertElementPresent") ||
+					 param1.equals("assertElementNotPresent")) {
+
+				if (param1.equals("assertElementPresent")) {
+					sb.append("assertTrue");
+				}
+				else if (param1.equals("assertElementNotPresent")) {
+					sb.append("assertFalse");
+				}
+
+				sb.append("(selenium.isElementPresent(\"");
+				sb.append(param2);
+				sb.append("\"));");
+			}
 			else if (param1.equals("click") || param1.equals("mouseDown") ||
 					 param1.equals("mouseUp") || param1.equals("open") ||
 					 param1.equals("selectFrame") ||
@@ -240,6 +254,28 @@ public class SeleneseToJavaBuilder {
 				sb.append(param3);
 				sb.append("\");");
 				sb.append("selenium.waitForPageToLoad(\"30000\");");
+			}
+			else if (param1.equals("storeText")) {
+				sb.append("String ");
+				sb.append(param3);
+				sb.append(" = selenium.getText(\"");
+				sb.append(param2);
+				sb.append("\");");
+			}
+
+			else if (param1.equals("verifyElementPresent") ||
+					 param1.equals("verifyElementNotPresent")) {
+
+				if (param1.equals("verifyElementPresent")) {
+					sb.append("verifyTrue");
+				}
+				else if (param1.equals("verifyElementNotPresent")) {
+					sb.append("verifyFalse");
+				}
+
+				sb.append("(selenium.isElementPresent(\"");
+				sb.append(param2);
+				sb.append("\"));");
 			}
 			else if (param1.equals("verifyTextPresent") ||
 					 param1.equals("verifyTextNotPresent")) {
