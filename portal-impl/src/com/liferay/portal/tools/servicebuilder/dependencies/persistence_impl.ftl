@@ -1052,6 +1052,8 @@ public class ${entity.name}PersistenceImpl extends BasePersistenceImpl implement
 		try {
 			session = openSession();
 
+			dynamicQuery.compile(session);
+
 			return dynamicQuery.list();
 		}
 		catch (Exception e) {
@@ -1067,6 +1069,8 @@ public class ${entity.name}PersistenceImpl extends BasePersistenceImpl implement
 
 		try {
 			session = openSession();
+
+			dynamicQuery.compile(session);
 
 			dynamicQuery.setLimit(start, end);
 
@@ -1625,7 +1629,7 @@ public class ${entity.name}PersistenceImpl extends BasePersistenceImpl implement
 				}
 			}
 
-			public boolean contains${tempEntity.name}(${entity.PKClassName} pk, ${tempEntity.PKClassName} ${tempEntity.varName}PK) throws SystemException {
+			public boolean contains${tempEntity.name}(${entity.PKClassName} pk, ${tempEntity.PKClassName} ${tempEntity.varName}PK) {
 				boolean finderClassNameCacheEnabled =
 					<#if column.mappingTable??>
 						${entity.name}ModelImpl.CACHE_ENABLED_${stringUtil.upperCase(column.mappingTable)}
@@ -1697,16 +1701,11 @@ public class ${entity.name}PersistenceImpl extends BasePersistenceImpl implement
 				}
 
 				if (result == null) {
-					try {
-						Boolean value = Boolean.valueOf(contains${tempEntity.name}.contains(pk, ${tempEntity.varName}PK));
+					Boolean value = Boolean.valueOf(contains${tempEntity.name}.contains(pk, ${tempEntity.varName}PK));
 
-						FinderCacheUtil.putResult(finderClassNameCacheEnabled, finderClassName, finderMethodName, finderParams, finderArgs, value);
+					FinderCacheUtil.putResult(finderClassNameCacheEnabled, finderClassName, finderMethodName, finderParams, finderArgs, value);
 
-						return value.booleanValue();
-					}
-					catch (DataAccessException dae) {
-						throw new SystemException(dae);
-					}
+					return value.booleanValue();
 				}
 				else {
 					return ((Boolean)result).booleanValue();

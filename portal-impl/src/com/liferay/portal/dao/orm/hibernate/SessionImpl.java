@@ -112,6 +112,10 @@ public class SessionImpl implements Session {
 		}
 	}
 
+	public org.hibernate.Session getSession() {
+		return _session;
+	}
+
 	public Object load(Class clazz, Serializable id) throws ORMException {
 		try {
 			return _session.load(clazz, id);

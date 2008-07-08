@@ -22,6 +22,8 @@
 
 package com.liferay.portal.kernel.dao.orm;
 
+import java.util.Collection;
+
 /**
  * <a href="Property.java.html"><b><i>View Source</i></b></a>
  *
@@ -64,6 +66,12 @@ public interface Property {
 
 	public Criterion gtSome(DynamicQuery subselect);
 
+	public Criterion in(Collection values);
+
+	public Criterion in(DynamicQuery subselect);
+
+	public Criterion in(Object[] values);
+
 	public Criterion le(DynamicQuery subselect);
 
 	public Criterion le(Object value);
@@ -75,6 +83,8 @@ public interface Property {
 	public Criterion leProperty(String other);
 
 	public Criterion leSome(DynamicQuery subselect);
+
+	public Criterion like(Object value);
 
 	public Criterion lt(DynamicQuery subselect);
 

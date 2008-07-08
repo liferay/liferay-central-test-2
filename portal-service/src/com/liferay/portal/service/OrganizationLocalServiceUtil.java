@@ -224,16 +224,14 @@ public class OrganizationLocalServiceUtil {
 		return organizationLocalService.getUserOrganizationsCount(userId);
 	}
 
-	public static boolean hasGroupOrganization(long groupId, long organizationId)
-		throws com.liferay.portal.SystemException {
+	public static boolean hasGroupOrganization(long groupId, long organizationId) {
 		OrganizationLocalService organizationLocalService = OrganizationLocalServiceFactory.getService();
 
 		return organizationLocalService.hasGroupOrganization(groupId,
 			organizationId);
 	}
 
-	public static boolean hasUserOrganization(long userId, long organizationId)
-		throws com.liferay.portal.SystemException {
+	public static boolean hasUserOrganization(long userId, long organizationId) {
 		OrganizationLocalService organizationLocalService = OrganizationLocalServiceFactory.getService();
 
 		return organizationLocalService.hasUserOrganization(userId,

@@ -173,8 +173,7 @@ public class TagsEntryUtil {
 		return getPersistence().getTagsAssetsSize(pk);
 	}
 
-	public static boolean containsTagsAsset(long pk, long tagsAssetPK)
-		throws com.liferay.portal.SystemException {
+	public static boolean containsTagsAsset(long pk, long tagsAssetPK) {
 		return getPersistence().containsTagsAsset(pk, tagsAssetPK);
 	}
 

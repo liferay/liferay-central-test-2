@@ -366,15 +366,11 @@ public class OrganizationLocalServiceImpl
 		return userPersistence.getOrganizationsSize(userId);
 	}
 
-	public boolean hasGroupOrganization(long groupId, long organizationId)
-		throws SystemException {
-
+	public boolean hasGroupOrganization(long groupId, long organizationId) {
 		return groupPersistence.containsOrganization(groupId, organizationId);
 	}
 
-	public boolean hasUserOrganization(long userId, long organizationId)
-		throws SystemException {
-
+	public boolean hasUserOrganization(long userId, long organizationId) {
 		return userPersistence.containsOrganization(userId, organizationId);
 	}
 

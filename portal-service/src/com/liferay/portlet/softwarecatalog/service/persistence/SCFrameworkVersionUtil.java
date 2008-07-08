@@ -309,7 +309,7 @@ public class SCFrameworkVersionUtil {
 	}
 
 	public static boolean containsSCProductVersion(long pk,
-		long scProductVersionPK) throws com.liferay.portal.SystemException {
+		long scProductVersionPK) {
 		return getPersistence().containsSCProductVersion(pk, scProductVersionPK);
 	}
 

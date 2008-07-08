@@ -26,6 +26,8 @@ import com.liferay.portal.kernel.dao.orm.Criterion;
 import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 import com.liferay.portal.kernel.dao.orm.Property;
 
+import java.util.Collection;
+
 /**
  * <a href="PropertyImpl.java.html"><b><i>View Source</i></b></a>
  *
@@ -143,6 +145,21 @@ public class PropertyImpl implements Property {
 			_property.gtSome(dynamicQueryImpl.getDetachedCriteria()));
 	}
 
+	public Criterion in(Collection values) {
+		return new CriterionImpl(_property.in(values));
+	}
+
+	public Criterion in(DynamicQuery subselect) {
+		DynamicQueryImpl dynamicQueryImpl = (DynamicQueryImpl)subselect;
+
+		return new CriterionImpl(
+			_property.in(dynamicQueryImpl.getDetachedCriteria()));
+	}
+
+	public Criterion in(Object[] values) {
+		return new CriterionImpl(_property.in(values));
+	}
+
 	public Criterion le(DynamicQuery subselect) {
 		DynamicQueryImpl dynamicQueryImpl = (DynamicQueryImpl)subselect;
 
@@ -177,6 +194,10 @@ public class PropertyImpl implements Property {
 
 		return new CriterionImpl(
 			_property.leSome(dynamicQueryImpl.getDetachedCriteria()));
+	}
+
+	public Criterion like(Object value) {
+		return new CriterionImpl(_property.like(value));
 	}
 
 	public Criterion lt(DynamicQuery subselect) {

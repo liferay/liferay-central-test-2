@@ -911,6 +911,8 @@ public class UserGroupPersistenceImpl extends BasePersistenceImpl
 		try {
 			session = openSession();
 
+			dynamicQuery.compile(session);
+
 			return dynamicQuery.list();
 		}
 		catch (Exception e) {
@@ -927,6 +929,8 @@ public class UserGroupPersistenceImpl extends BasePersistenceImpl
 
 		try {
 			session = openSession();
+
+			dynamicQuery.compile(session);
 
 			dynamicQuery.setLimit(start, end);
 
@@ -1458,7 +1462,7 @@ public class UserGroupPersistenceImpl extends BasePersistenceImpl
 		}
 	}
 
-	public boolean containsUser(long pk, long userPK) throws SystemException {
+	public boolean containsUser(long pk, long userPK) {
 		boolean finderClassNameCacheEnabled = UserGroupModelImpl.CACHE_ENABLED_USERS_USERGROUPS;
 
 		String finderClassName = "Users_UserGroups";
@@ -1479,18 +1483,13 @@ public class UserGroupPersistenceImpl extends BasePersistenceImpl
 		}
 
 		if (result == null) {
-			try {
-				Boolean value = Boolean.valueOf(containsUser.contains(pk, userPK));
+			Boolean value = Boolean.valueOf(containsUser.contains(pk, userPK));
 
-				FinderCacheUtil.putResult(finderClassNameCacheEnabled,
-					finderClassName, finderMethodName, finderParams,
-					finderArgs, value);
+			FinderCacheUtil.putResult(finderClassNameCacheEnabled,
+				finderClassName, finderMethodName, finderParams, finderArgs,
+				value);
 
-				return value.booleanValue();
-			}
-			catch (DataAccessException dae) {
-				throw new SystemException(dae);
-			}
+			return value.booleanValue();
 		}
 		else {
 			return ((Boolean)result).booleanValue();

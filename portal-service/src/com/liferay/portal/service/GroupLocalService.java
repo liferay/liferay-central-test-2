@@ -145,8 +145,7 @@ public interface GroupLocalService {
 	public java.util.List<com.liferay.portal.model.Group> getUserGroupsGroups(
 		java.util.List<com.liferay.portal.model.UserGroup> userGroups);
 
-	public boolean hasRoleGroup(long roleId, long groupId)
-		throws com.liferay.portal.SystemException;
+	public boolean hasRoleGroup(long roleId, long groupId);
 
 	public boolean hasUserGroup(long userId, long groupId)
 		throws com.liferay.portal.SystemException;

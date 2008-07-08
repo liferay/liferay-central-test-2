@@ -648,6 +648,8 @@ public class SCProductVersionPersistenceImpl extends BasePersistenceImpl
 		try {
 			session = openSession();
 
+			dynamicQuery.compile(session);
+
 			return dynamicQuery.list();
 		}
 		catch (Exception e) {
@@ -665,6 +667,8 @@ public class SCProductVersionPersistenceImpl extends BasePersistenceImpl
 
 		try {
 			session = openSession();
+
+			dynamicQuery.compile(session);
 
 			dynamicQuery.setLimit(start, end);
 
@@ -1120,8 +1124,7 @@ public class SCProductVersionPersistenceImpl extends BasePersistenceImpl
 		}
 	}
 
-	public boolean containsSCFrameworkVersion(long pk, long scFrameworkVersionPK)
-		throws SystemException {
+	public boolean containsSCFrameworkVersion(long pk, long scFrameworkVersionPK) {
 		boolean finderClassNameCacheEnabled = SCProductVersionModelImpl.CACHE_ENABLED_SCFRAMEWORKVERSI_SCPRODUCTVERS;
 
 		String finderClassName = "SCFrameworkVersi_SCProductVers";
@@ -1146,19 +1149,14 @@ public class SCProductVersionPersistenceImpl extends BasePersistenceImpl
 		}
 
 		if (result == null) {
-			try {
-				Boolean value = Boolean.valueOf(containsSCFrameworkVersion.contains(
-							pk, scFrameworkVersionPK));
+			Boolean value = Boolean.valueOf(containsSCFrameworkVersion.contains(
+						pk, scFrameworkVersionPK));
 
-				FinderCacheUtil.putResult(finderClassNameCacheEnabled,
-					finderClassName, finderMethodName, finderParams,
-					finderArgs, value);
+			FinderCacheUtil.putResult(finderClassNameCacheEnabled,
+				finderClassName, finderMethodName, finderParams, finderArgs,
+				value);
 
-				return value.booleanValue();
-			}
-			catch (DataAccessException dae) {
-				throw new SystemException(dae);
-			}
+			return value.booleanValue();
 		}
 		else {
 			return ((Boolean)result).booleanValue();

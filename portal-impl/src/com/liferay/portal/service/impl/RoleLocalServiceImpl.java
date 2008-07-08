@@ -278,9 +278,7 @@ public class RoleLocalServiceImpl extends RoleLocalServiceBaseImpl {
 		return userPersistence.getRoles(userId);
 	}
 
-	public boolean hasUserRole(long userId, long roleId)
-		throws SystemException {
-
+	public boolean hasUserRole(long userId, long roleId) {
 		return userPersistence.containsRole(userId, roleId);
 	}
 

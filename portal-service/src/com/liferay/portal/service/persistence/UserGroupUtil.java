@@ -282,8 +282,7 @@ public class UserGroupUtil {
 		return getPersistence().getUsersSize(pk);
 	}
 
-	public static boolean containsUser(long pk, long userPK)
-		throws com.liferay.portal.SystemException {
+	public static boolean containsUser(long pk, long userPK) {
 		return getPersistence().containsUser(pk, userPK);
 	}
 

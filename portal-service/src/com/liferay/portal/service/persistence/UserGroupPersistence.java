@@ -194,8 +194,7 @@ public interface UserGroupPersistence {
 
 	public int getUsersSize(long pk) throws com.liferay.portal.SystemException;
 
-	public boolean containsUser(long pk, long userPK)
-		throws com.liferay.portal.SystemException;
+	public boolean containsUser(long pk, long userPK);
 
 	public boolean containsUsers(long pk)
 		throws com.liferay.portal.SystemException;

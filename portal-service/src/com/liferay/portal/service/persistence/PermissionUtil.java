@@ -224,8 +224,7 @@ public class PermissionUtil {
 		return getPersistence().getGroupsSize(pk);
 	}
 
-	public static boolean containsGroup(long pk, long groupPK)
-		throws com.liferay.portal.SystemException {
+	public static boolean containsGroup(long pk, long groupPK) {
 		return getPersistence().containsGroup(pk, groupPK);
 	}
 
@@ -314,8 +313,7 @@ public class PermissionUtil {
 		return getPersistence().getRolesSize(pk);
 	}
 
-	public static boolean containsRole(long pk, long rolePK)
-		throws com.liferay.portal.SystemException {
+	public static boolean containsRole(long pk, long rolePK) {
 		return getPersistence().containsRole(pk, rolePK);
 	}
 
@@ -404,8 +402,7 @@ public class PermissionUtil {
 		return getPersistence().getUsersSize(pk);
 	}
 
-	public static boolean containsUser(long pk, long userPK)
-		throws com.liferay.portal.SystemException {
+	public static boolean containsUser(long pk, long userPK) {
 		return getPersistence().containsUser(pk, userPK);
 	}
 

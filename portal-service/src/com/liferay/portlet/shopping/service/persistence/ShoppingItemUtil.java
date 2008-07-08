@@ -296,7 +296,7 @@ public class ShoppingItemUtil {
 	}
 
 	public static boolean containsShoppingItemPrice(long pk,
-		long shoppingItemPricePK) throws com.liferay.portal.SystemException {
+		long shoppingItemPricePK) {
 		return getPersistence()
 				   .containsShoppingItemPrice(pk, shoppingItemPricePK);
 	}

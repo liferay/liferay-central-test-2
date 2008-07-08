@@ -2007,6 +2007,8 @@ public class UserPersistenceImpl extends BasePersistenceImpl
 		try {
 			session = openSession();
 
+			dynamicQuery.compile(session);
+
 			return dynamicQuery.list();
 		}
 		catch (Exception e) {
@@ -2023,6 +2025,8 @@ public class UserPersistenceImpl extends BasePersistenceImpl
 
 		try {
 			session = openSession();
+
+			dynamicQuery.compile(session);
 
 			dynamicQuery.setLimit(start, end);
 
@@ -3191,8 +3195,7 @@ public class UserPersistenceImpl extends BasePersistenceImpl
 		}
 	}
 
-	public boolean containsGroup(long pk, long groupPK)
-		throws SystemException {
+	public boolean containsGroup(long pk, long groupPK) {
 		boolean finderClassNameCacheEnabled = UserModelImpl.CACHE_ENABLED_USERS_GROUPS;
 
 		String finderClassName = "Users_Groups";
@@ -3213,19 +3216,13 @@ public class UserPersistenceImpl extends BasePersistenceImpl
 		}
 
 		if (result == null) {
-			try {
-				Boolean value = Boolean.valueOf(containsGroup.contains(pk,
-							groupPK));
+			Boolean value = Boolean.valueOf(containsGroup.contains(pk, groupPK));
 
-				FinderCacheUtil.putResult(finderClassNameCacheEnabled,
-					finderClassName, finderMethodName, finderParams,
-					finderArgs, value);
+			FinderCacheUtil.putResult(finderClassNameCacheEnabled,
+				finderClassName, finderMethodName, finderParams, finderArgs,
+				value);
 
-				return value.booleanValue();
-			}
-			catch (DataAccessException dae) {
-				throw new SystemException(dae);
-			}
+			return value.booleanValue();
 		}
 		else {
 			return ((Boolean)result).booleanValue();
@@ -3542,8 +3539,7 @@ public class UserPersistenceImpl extends BasePersistenceImpl
 		}
 	}
 
-	public boolean containsOrganization(long pk, long organizationPK)
-		throws SystemException {
+	public boolean containsOrganization(long pk, long organizationPK) {
 		boolean finderClassNameCacheEnabled = UserModelImpl.CACHE_ENABLED_USERS_ORGS;
 
 		String finderClassName = "Users_Orgs";
@@ -3568,19 +3564,14 @@ public class UserPersistenceImpl extends BasePersistenceImpl
 		}
 
 		if (result == null) {
-			try {
-				Boolean value = Boolean.valueOf(containsOrganization.contains(
-							pk, organizationPK));
+			Boolean value = Boolean.valueOf(containsOrganization.contains(pk,
+						organizationPK));
 
-				FinderCacheUtil.putResult(finderClassNameCacheEnabled,
-					finderClassName, finderMethodName, finderParams,
-					finderArgs, value);
+			FinderCacheUtil.putResult(finderClassNameCacheEnabled,
+				finderClassName, finderMethodName, finderParams, finderArgs,
+				value);
 
-				return value.booleanValue();
-			}
-			catch (DataAccessException dae) {
-				throw new SystemException(dae);
-			}
+			return value.booleanValue();
 		}
 		else {
 			return ((Boolean)result).booleanValue();
@@ -3899,8 +3890,7 @@ public class UserPersistenceImpl extends BasePersistenceImpl
 		}
 	}
 
-	public boolean containsPermission(long pk, long permissionPK)
-		throws SystemException {
+	public boolean containsPermission(long pk, long permissionPK) {
 		boolean finderClassNameCacheEnabled = UserModelImpl.CACHE_ENABLED_USERS_PERMISSIONS;
 
 		String finderClassName = "Users_Permissions";
@@ -3921,19 +3911,14 @@ public class UserPersistenceImpl extends BasePersistenceImpl
 		}
 
 		if (result == null) {
-			try {
-				Boolean value = Boolean.valueOf(containsPermission.contains(
-							pk, permissionPK));
+			Boolean value = Boolean.valueOf(containsPermission.contains(pk,
+						permissionPK));
 
-				FinderCacheUtil.putResult(finderClassNameCacheEnabled,
-					finderClassName, finderMethodName, finderParams,
-					finderArgs, value);
+			FinderCacheUtil.putResult(finderClassNameCacheEnabled,
+				finderClassName, finderMethodName, finderParams, finderArgs,
+				value);
 
-				return value.booleanValue();
-			}
-			catch (DataAccessException dae) {
-				throw new SystemException(dae);
-			}
+			return value.booleanValue();
 		}
 		else {
 			return ((Boolean)result).booleanValue();
@@ -4258,7 +4243,7 @@ public class UserPersistenceImpl extends BasePersistenceImpl
 		}
 	}
 
-	public boolean containsRole(long pk, long rolePK) throws SystemException {
+	public boolean containsRole(long pk, long rolePK) {
 		boolean finderClassNameCacheEnabled = UserModelImpl.CACHE_ENABLED_USERS_ROLES;
 
 		String finderClassName = "Users_Roles";
@@ -4279,18 +4264,13 @@ public class UserPersistenceImpl extends BasePersistenceImpl
 		}
 
 		if (result == null) {
-			try {
-				Boolean value = Boolean.valueOf(containsRole.contains(pk, rolePK));
+			Boolean value = Boolean.valueOf(containsRole.contains(pk, rolePK));
 
-				FinderCacheUtil.putResult(finderClassNameCacheEnabled,
-					finderClassName, finderMethodName, finderParams,
-					finderArgs, value);
+			FinderCacheUtil.putResult(finderClassNameCacheEnabled,
+				finderClassName, finderMethodName, finderParams, finderArgs,
+				value);
 
-				return value.booleanValue();
-			}
-			catch (DataAccessException dae) {
-				throw new SystemException(dae);
-			}
+			return value.booleanValue();
 		}
 		else {
 			return ((Boolean)result).booleanValue();
@@ -4605,8 +4585,7 @@ public class UserPersistenceImpl extends BasePersistenceImpl
 		}
 	}
 
-	public boolean containsUserGroup(long pk, long userGroupPK)
-		throws SystemException {
+	public boolean containsUserGroup(long pk, long userGroupPK) {
 		boolean finderClassNameCacheEnabled = UserModelImpl.CACHE_ENABLED_USERS_USERGROUPS;
 
 		String finderClassName = "Users_UserGroups";
@@ -4627,19 +4606,14 @@ public class UserPersistenceImpl extends BasePersistenceImpl
 		}
 
 		if (result == null) {
-			try {
-				Boolean value = Boolean.valueOf(containsUserGroup.contains(pk,
-							userGroupPK));
+			Boolean value = Boolean.valueOf(containsUserGroup.contains(pk,
+						userGroupPK));
 
-				FinderCacheUtil.putResult(finderClassNameCacheEnabled,
-					finderClassName, finderMethodName, finderParams,
-					finderArgs, value);
+			FinderCacheUtil.putResult(finderClassNameCacheEnabled,
+				finderClassName, finderMethodName, finderParams, finderArgs,
+				value);
 
-				return value.booleanValue();
-			}
-			catch (DataAccessException dae) {
-				throw new SystemException(dae);
-			}
+			return value.booleanValue();
 		}
 		else {
 			return ((Boolean)result).booleanValue();

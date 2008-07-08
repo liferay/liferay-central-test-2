@@ -126,8 +126,7 @@ public interface TagsEntryPersistence {
 	public int getTagsAssetsSize(long pk)
 		throws com.liferay.portal.SystemException;
 
-	public boolean containsTagsAsset(long pk, long tagsAssetPK)
-		throws com.liferay.portal.SystemException;
+	public boolean containsTagsAsset(long pk, long tagsAssetPK);
 
 	public boolean containsTagsAssets(long pk)
 		throws com.liferay.portal.SystemException;

@@ -235,8 +235,7 @@ public interface SCProductEntryPersistence {
 	public int getSCLicensesSize(long pk)
 		throws com.liferay.portal.SystemException;
 
-	public boolean containsSCLicense(long pk, long scLicensePK)
-		throws com.liferay.portal.SystemException;
+	public boolean containsSCLicense(long pk, long scLicensePK);
 
 	public boolean containsSCLicenses(long pk)
 		throws com.liferay.portal.SystemException;

@@ -622,6 +622,8 @@ public class TagsAssetPersistenceImpl extends BasePersistenceImpl
 		try {
 			session = openSession();
 
+			dynamicQuery.compile(session);
+
 			return dynamicQuery.list();
 		}
 		catch (Exception e) {
@@ -638,6 +640,8 @@ public class TagsAssetPersistenceImpl extends BasePersistenceImpl
 
 		try {
 			session = openSession();
+
+			dynamicQuery.compile(session);
 
 			dynamicQuery.setLimit(start, end);
 
@@ -1084,8 +1088,7 @@ public class TagsAssetPersistenceImpl extends BasePersistenceImpl
 		}
 	}
 
-	public boolean containsTagsEntry(long pk, long tagsEntryPK)
-		throws SystemException {
+	public boolean containsTagsEntry(long pk, long tagsEntryPK) {
 		boolean finderClassNameCacheEnabled = TagsAssetModelImpl.CACHE_ENABLED_TAGSASSETS_TAGSENTRIES;
 
 		String finderClassName = "TagsAssets_TagsEntries";
@@ -1106,19 +1109,14 @@ public class TagsAssetPersistenceImpl extends BasePersistenceImpl
 		}
 
 		if (result == null) {
-			try {
-				Boolean value = Boolean.valueOf(containsTagsEntry.contains(pk,
-							tagsEntryPK));
+			Boolean value = Boolean.valueOf(containsTagsEntry.contains(pk,
+						tagsEntryPK));
 
-				FinderCacheUtil.putResult(finderClassNameCacheEnabled,
-					finderClassName, finderMethodName, finderParams,
-					finderArgs, value);
+			FinderCacheUtil.putResult(finderClassNameCacheEnabled,
+				finderClassName, finderMethodName, finderParams, finderArgs,
+				value);
 
-				return value.booleanValue();
-			}
-			catch (DataAccessException dae) {
-				throw new SystemException(dae);
-			}
+			return value.booleanValue();
 		}
 		else {
 			return ((Boolean)result).booleanValue();

@@ -206,8 +206,7 @@ public interface ShoppingItemPersistence {
 	public int getShoppingItemPricesSize(long pk)
 		throws com.liferay.portal.SystemException;
 
-	public boolean containsShoppingItemPrice(long pk, long shoppingItemPricePK)
-		throws com.liferay.portal.SystemException;
+	public boolean containsShoppingItemPrice(long pk, long shoppingItemPricePK);
 
 	public boolean containsShoppingItemPrices(long pk)
 		throws com.liferay.portal.SystemException;

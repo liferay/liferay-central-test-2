@@ -155,8 +155,7 @@ public class UserGroupLocalServiceUtil {
 		return userGroupLocalService.getUserUserGroups(userId);
 	}
 
-	public static boolean hasGroupUserGroup(long groupId, long userGroupId)
-		throws com.liferay.portal.SystemException {
+	public static boolean hasGroupUserGroup(long groupId, long userGroupId) {
 		UserGroupLocalService userGroupLocalService = UserGroupLocalServiceFactory.getService();
 
 		return userGroupLocalService.hasGroupUserGroup(groupId, userGroupId);

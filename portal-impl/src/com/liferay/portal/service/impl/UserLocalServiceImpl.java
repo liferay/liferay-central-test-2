@@ -1199,15 +1199,11 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 		return user.getUserId();
 	}
 
-	public boolean hasGroupUser(long groupId, long userId)
-		throws SystemException {
-
+	public boolean hasGroupUser(long groupId, long userId) {
 		return groupPersistence.containsUser(groupId, userId);
 	}
 
-	public boolean hasOrganizationUser(long organizationId, long userId)
-		throws SystemException {
-
+	public boolean hasOrganizationUser(long organizationId, long userId) {
 		return organizationPersistence.containsUser(organizationId, userId);
 	}
 
@@ -1218,15 +1214,11 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 			passwordPolicyId, User.class.getName(), userId);
 	}
 
-	public boolean hasRoleUser(long roleId, long userId)
-		throws SystemException {
-
+	public boolean hasRoleUser(long roleId, long userId) {
 		return rolePersistence.containsUser(roleId, userId);
 	}
 
-	public boolean hasUserGroupUser(long userGroupId, long userId)
-		throws SystemException {
-
+	public boolean hasUserGroupUser(long userGroupId, long userId) {
 		return userGroupPersistence.containsUser(userGroupId, userId);
 	}
 

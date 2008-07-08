@@ -1186,6 +1186,8 @@ public class SCProductEntryPersistenceImpl extends BasePersistenceImpl
 		try {
 			session = openSession();
 
+			dynamicQuery.compile(session);
+
 			return dynamicQuery.list();
 		}
 		catch (Exception e) {
@@ -1203,6 +1205,8 @@ public class SCProductEntryPersistenceImpl extends BasePersistenceImpl
 
 		try {
 			session = openSession();
+
+			dynamicQuery.compile(session);
 
 			dynamicQuery.setLimit(start, end);
 
@@ -1822,8 +1826,7 @@ public class SCProductEntryPersistenceImpl extends BasePersistenceImpl
 		}
 	}
 
-	public boolean containsSCLicense(long pk, long scLicensePK)
-		throws SystemException {
+	public boolean containsSCLicense(long pk, long scLicensePK) {
 		boolean finderClassNameCacheEnabled = SCProductEntryModelImpl.CACHE_ENABLED_SCLICENSES_SCPRODUCTENTRIES;
 
 		String finderClassName = "SCLicenses_SCProductEntries";
@@ -1844,19 +1847,14 @@ public class SCProductEntryPersistenceImpl extends BasePersistenceImpl
 		}
 
 		if (result == null) {
-			try {
-				Boolean value = Boolean.valueOf(containsSCLicense.contains(pk,
-							scLicensePK));
+			Boolean value = Boolean.valueOf(containsSCLicense.contains(pk,
+						scLicensePK));
 
-				FinderCacheUtil.putResult(finderClassNameCacheEnabled,
-					finderClassName, finderMethodName, finderParams,
-					finderArgs, value);
+			FinderCacheUtil.putResult(finderClassNameCacheEnabled,
+				finderClassName, finderMethodName, finderParams, finderArgs,
+				value);
 
-				return value.booleanValue();
-			}
-			catch (DataAccessException dae) {
-				throw new SystemException(dae);
-			}
+			return value.booleanValue();
 		}
 		else {
 			return ((Boolean)result).booleanValue();

@@ -336,8 +336,7 @@ public class OrganizationUtil {
 		return getPersistence().getGroupsSize(pk);
 	}
 
-	public static boolean containsGroup(long pk, long groupPK)
-		throws com.liferay.portal.SystemException {
+	public static boolean containsGroup(long pk, long groupPK) {
 		return getPersistence().containsGroup(pk, groupPK);
 	}
 
@@ -426,8 +425,7 @@ public class OrganizationUtil {
 		return getPersistence().getUsersSize(pk);
 	}
 
-	public static boolean containsUser(long pk, long userPK)
-		throws com.liferay.portal.SystemException {
+	public static boolean containsUser(long pk, long userPK) {
 		return getPersistence().containsUser(pk, userPK);
 	}
 

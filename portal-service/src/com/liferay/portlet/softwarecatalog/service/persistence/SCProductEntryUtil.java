@@ -332,8 +332,7 @@ public class SCProductEntryUtil {
 		return getPersistence().getSCLicensesSize(pk);
 	}
 
-	public static boolean containsSCLicense(long pk, long scLicensePK)
-		throws com.liferay.portal.SystemException {
+	public static boolean containsSCLicense(long pk, long scLicensePK) {
 		return getPersistence().containsSCLicense(pk, scLicensePK);
 	}
 

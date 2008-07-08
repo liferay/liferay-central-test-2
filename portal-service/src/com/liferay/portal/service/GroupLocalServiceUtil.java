@@ -242,8 +242,7 @@ public class GroupLocalServiceUtil {
 		return groupLocalService.getUserGroupsGroups(userGroups);
 	}
 
-	public static boolean hasRoleGroup(long roleId, long groupId)
-		throws com.liferay.portal.SystemException {
+	public static boolean hasRoleGroup(long roleId, long groupId) {
 		GroupLocalService groupLocalService = GroupLocalServiceFactory.getService();
 
 		return groupLocalService.hasRoleGroup(roleId, groupId);

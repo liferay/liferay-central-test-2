@@ -134,11 +134,9 @@ public interface OrganizationLocalService {
 	public int getUserOrganizationsCount(long userId)
 		throws com.liferay.portal.SystemException;
 
-	public boolean hasGroupOrganization(long groupId, long organizationId)
-		throws com.liferay.portal.SystemException;
+	public boolean hasGroupOrganization(long groupId, long organizationId);
 
-	public boolean hasUserOrganization(long userId, long organizationId)
-		throws com.liferay.portal.SystemException;
+	public boolean hasUserOrganization(long userId, long organizationId);
 
 	public boolean hasPasswordPolicyOrganization(long passwordPolicyId,
 		long organizationId) throws com.liferay.portal.SystemException;

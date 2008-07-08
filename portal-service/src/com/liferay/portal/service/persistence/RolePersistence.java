@@ -173,8 +173,7 @@ public interface RolePersistence {
 
 	public int getGroupsSize(long pk) throws com.liferay.portal.SystemException;
 
-	public boolean containsGroup(long pk, long groupPK)
-		throws com.liferay.portal.SystemException;
+	public boolean containsGroup(long pk, long groupPK);
 
 	public boolean containsGroups(long pk)
 		throws com.liferay.portal.SystemException;
@@ -228,8 +227,7 @@ public interface RolePersistence {
 	public int getPermissionsSize(long pk)
 		throws com.liferay.portal.SystemException;
 
-	public boolean containsPermission(long pk, long permissionPK)
-		throws com.liferay.portal.SystemException;
+	public boolean containsPermission(long pk, long permissionPK);
 
 	public boolean containsPermissions(long pk)
 		throws com.liferay.portal.SystemException;
@@ -284,8 +282,7 @@ public interface RolePersistence {
 
 	public int getUsersSize(long pk) throws com.liferay.portal.SystemException;
 
-	public boolean containsUser(long pk, long userPK)
-		throws com.liferay.portal.SystemException;
+	public boolean containsUser(long pk, long userPK);
 
 	public boolean containsUsers(long pk)
 		throws com.liferay.portal.SystemException;

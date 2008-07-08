@@ -34,6 +34,8 @@ public interface DynamicQuery {
 
 	public DynamicQuery add(Criterion criterion);
 
+	public void compile(Session session);
+
 	public List list();
 
 	public void setLimit(int start, int end);

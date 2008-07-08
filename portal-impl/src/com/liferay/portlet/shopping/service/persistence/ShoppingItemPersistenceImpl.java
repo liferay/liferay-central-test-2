@@ -47,8 +47,6 @@ import com.liferay.portlet.shopping.model.impl.ShoppingItemModelImpl;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
-import org.springframework.dao.DataAccessException;
-
 import org.springframework.jdbc.core.SqlParameter;
 import org.springframework.jdbc.object.MappingSqlQuery;
 
@@ -925,6 +923,8 @@ public class ShoppingItemPersistenceImpl extends BasePersistenceImpl
 		try {
 			session = openSession();
 
+			dynamicQuery.compile(session);
+
 			return dynamicQuery.list();
 		}
 		catch (Exception e) {
@@ -941,6 +941,8 @@ public class ShoppingItemPersistenceImpl extends BasePersistenceImpl
 
 		try {
 			session = openSession();
+
+			dynamicQuery.compile(session);
 
 			dynamicQuery.setLimit(start, end);
 
@@ -1619,8 +1621,7 @@ public class ShoppingItemPersistenceImpl extends BasePersistenceImpl
 		}
 	}
 
-	public boolean containsShoppingItemPrice(long pk, long shoppingItemPricePK)
-		throws SystemException {
+	public boolean containsShoppingItemPrice(long pk, long shoppingItemPricePK) {
 		boolean finderClassNameCacheEnabled = com.liferay.portlet.shopping.model.impl.ShoppingItemPriceModelImpl.CACHE_ENABLED;
 
 		String finderClassName = com.liferay.portlet.shopping.model.ShoppingItemPrice.class.getName();
@@ -1645,19 +1646,14 @@ public class ShoppingItemPersistenceImpl extends BasePersistenceImpl
 		}
 
 		if (result == null) {
-			try {
-				Boolean value = Boolean.valueOf(containsShoppingItemPrice.contains(
-							pk, shoppingItemPricePK));
+			Boolean value = Boolean.valueOf(containsShoppingItemPrice.contains(
+						pk, shoppingItemPricePK));
 
-				FinderCacheUtil.putResult(finderClassNameCacheEnabled,
-					finderClassName, finderMethodName, finderParams,
-					finderArgs, value);
+			FinderCacheUtil.putResult(finderClassNameCacheEnabled,
+				finderClassName, finderMethodName, finderParams, finderArgs,
+				value);
 
-				return value.booleanValue();
-			}
-			catch (DataAccessException dae) {
-				throw new SystemException(dae);
-			}
+			return value.booleanValue();
 		}
 		else {
 			return ((Boolean)result).booleanValue();

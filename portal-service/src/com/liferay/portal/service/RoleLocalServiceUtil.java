@@ -219,8 +219,7 @@ public class RoleLocalServiceUtil {
 		return roleLocalService.getUserRoles(userId);
 	}
 
-	public static boolean hasUserRole(long userId, long roleId)
-		throws com.liferay.portal.SystemException {
+	public static boolean hasUserRole(long userId, long roleId) {
 		RoleLocalService roleLocalService = RoleLocalServiceFactory.getService();
 
 		return roleLocalService.hasUserRole(userId, roleId);

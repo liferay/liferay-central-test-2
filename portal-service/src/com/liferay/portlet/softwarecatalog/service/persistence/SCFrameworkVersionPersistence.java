@@ -217,8 +217,7 @@ public interface SCFrameworkVersionPersistence {
 	public int getSCProductVersionsSize(long pk)
 		throws com.liferay.portal.SystemException;
 
-	public boolean containsSCProductVersion(long pk, long scProductVersionPK)
-		throws com.liferay.portal.SystemException;
+	public boolean containsSCProductVersion(long pk, long scProductVersionPK);
 
 	public boolean containsSCProductVersions(long pk)
 		throws com.liferay.portal.SystemException;
