@@ -32,6 +32,7 @@ import com.liferay.portal.model.PortletApp;
 import com.liferay.portal.model.impl.RoleImpl;
 import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.service.base.PortletServiceBaseImpl;
+
 import java.util.List;
 
 /**
@@ -41,6 +42,29 @@ import java.util.List;
  *
  */
 public class PortletServiceImpl extends PortletServiceBaseImpl {
+
+	public JSONArray getWARPortlets() {
+		JSONArray jsonArray = JSONFactoryUtil.createJSONArray();
+
+		List<Portlet> portlets = portletLocalService.getPortlets();
+
+		for(Portlet portlet : portlets) {
+			PortletApp portletApp = portlet.getPortletApp();
+
+			if (portletApp.isWARFile()) {
+				JSONObject jsonObject= JSONFactoryUtil.createJSONObject();
+
+				jsonObject.put("portlet_name", portlet.getPortletName());
+				jsonObject.put(
+					"servlet_context_name",
+					portletApp.getServletContextName());
+
+				jsonArray.put(jsonObject);
+			}
+		}
+
+		return jsonArray;
+	}
 
 	public Portlet updatePortlet(
 			long companyId, String portletId, String roles, boolean active)
@@ -54,32 +78,6 @@ public class PortletServiceImpl extends PortletServiceBaseImpl {
 
 		return portletLocalService.updatePortlet(
 			companyId, portletId, roles, active);
-	}
-
-	public JSONArray getExternalPortlets()
-		throws PortalException, SystemException {
-
-		//Any changes to this method should be notified. Please check
-		//LEP-6480 for more details.
-		List<Portlet> portlets = portletLocalService.getPortlets();
-		JSONArray jsonArray = JSONFactoryUtil.createJSONArray();
-		for(Portlet p:portlets) {
-			PortletApp portletApp = p.getPortletApp();
-			if(portletApp.isWARFile()) {
-
-				JSONObject jsonObject=
-					JSONFactoryUtil.createJSONObject();
-
-				jsonObject.put(
-					"portlet_name", p.getPortletName());
-
-				jsonObject.put(
-					"app_name", portletApp.getServletContextName());
-
-				jsonArray.put(jsonObject);
-			}
-		}
-		return jsonArray;
 	}
 
 }

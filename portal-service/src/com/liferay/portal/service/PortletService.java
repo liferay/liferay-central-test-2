@@ -49,12 +49,11 @@ package com.liferay.portal.service;
  *
  */
 public interface PortletService {
+	public com.liferay.portal.kernel.json.JSONArray getWARPortlets()
+		throws java.rmi.RemoteException;
+
 	public com.liferay.portal.model.Portlet updatePortlet(long companyId,
 		java.lang.String portletId, java.lang.String roles, boolean active)
-		throws java.rmi.RemoteException, com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException;
-
-	public com.liferay.portal.kernel.json.JSONArray getExternalPortlets()
 		throws java.rmi.RemoteException, com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;
 }

@@ -710,16 +710,16 @@ Liferay.Service.Portal.PluginSetting = {
 Liferay.Service.Portal.Portlet = {
 	serviceClassName: Liferay.Service.Portal.servicePackage + "Portlet" + Liferay.Service.classNameSuffix,
 
-	updatePortlet: function(params, callback) {
+	getWARPortlets: function(params, callback) {
 		params.serviceClassName = this.serviceClassName;
-		params.serviceMethodName = "updatePortlet";
+		params.serviceMethodName = "getWARPortlets";
 
 		return Liferay.Service.ajax(params, callback);
 	},
 
-	getExternalPortlets: function(params, callback) {
+	updatePortlet: function(params, callback) {
 		params.serviceClassName = this.serviceClassName;
-		params.serviceMethodName = "getExternalPortlets";
+		params.serviceMethodName = "updatePortlet";
 
 		return Liferay.Service.ajax(params, callback);
 	}

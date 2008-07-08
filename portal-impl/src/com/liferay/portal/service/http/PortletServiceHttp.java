@@ -71,6 +71,30 @@ import com.liferay.portal.service.PortletServiceUtil;
  *
  */
 public class PortletServiceHttp {
+	public static com.liferay.portal.kernel.json.JSONArray getWARPortlets(
+		HttpPrincipal httpPrincipal) throws com.liferay.portal.SystemException {
+		try {
+			MethodWrapper methodWrapper = new MethodWrapper(PortletServiceUtil.class.getName(),
+					"getWARPortlets", new Object[0]);
+
+			Object returnObj = null;
+
+			try {
+				returnObj = TunnelUtil.invoke(httpPrincipal, methodWrapper);
+			}
+			catch (Exception e) {
+				throw new com.liferay.portal.SystemException(e);
+			}
+
+			return (com.liferay.portal.kernel.json.JSONArray)returnObj;
+		}
+		catch (com.liferay.portal.SystemException se) {
+			_log.error(se, se);
+
+			throw se;
+		}
+	}
+
 	public static com.liferay.portal.model.Portlet updatePortlet(
 		HttpPrincipal httpPrincipal, long companyId,
 		java.lang.String portletId, java.lang.String roles, boolean active)
@@ -115,40 +139,6 @@ public class PortletServiceHttp {
 			}
 
 			return (com.liferay.portal.model.Portlet)returnObj;
-		}
-		catch (com.liferay.portal.SystemException se) {
-			_log.error(se, se);
-
-			throw se;
-		}
-	}
-
-	public static com.liferay.portal.kernel.json.JSONArray getExternalPortlets(
-		HttpPrincipal httpPrincipal)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
-		try {
-			MethodWrapper methodWrapper = new MethodWrapper(PortletServiceUtil.class.getName(),
-					"getExternalPortlets", new Object[0]);
-
-			Object returnObj = null;
-
-			try {
-				returnObj = TunnelUtil.invoke(httpPrincipal, methodWrapper);
-			}
-			catch (Exception e) {
-				if (e instanceof com.liferay.portal.PortalException) {
-					throw (com.liferay.portal.PortalException)e;
-				}
-
-				if (e instanceof com.liferay.portal.SystemException) {
-					throw (com.liferay.portal.SystemException)e;
-				}
-
-				throw new com.liferay.portal.SystemException(e);
-			}
-
-			return (com.liferay.portal.kernel.json.JSONArray)returnObj;
 		}
 		catch (com.liferay.portal.SystemException se) {
 			_log.error(se, se);

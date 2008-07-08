@@ -889,7 +889,8 @@
 			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="roles" type="tns:string"></parameter>
 			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="active" type="tns:boolean"></parameter>
 		</operation>
-		<parameter name="allowedMethods" value="updatePortlet"/>
+		<operation xmlns:operNS="urn:http.service.portal.liferay.com" xmlns:rtns="http://www.w3.org/2001/XMLSchema" name="getWARPortlets" qname="operNS:getWARPortlets" returnQName="getWARPortletsReturn" returnType="rtns:anyType" soapAction=""> </operation>
+		<parameter name="allowedMethods" value="getWARPortlets updatePortlet"/>
 		<typeMapping xmlns:ns="http://model.portal.liferay.com" qname="ns:PortletSoap" type="java:com.liferay.portal.model.PortletSoap" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"></typeMapping>
 	</service>
 	<service name="Portal_RegionService" provider="java:RPC" style="rpc" use="encoded">

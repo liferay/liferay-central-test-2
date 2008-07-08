@@ -72,6 +72,13 @@ import com.liferay.portal.service.PortletServiceUtil;
  *
  */
 public class PortletServiceJSON {
+	public static com.liferay.portal.kernel.json.JSONArray getWARPortlets()
+		throws java.rmi.RemoteException {
+		com.liferay.portal.kernel.json.JSONArray returnValue = PortletServiceUtil.getWARPortlets();
+
+		return returnValue;
+	}
+
 	public static JSONObject updatePortlet(long companyId,
 		java.lang.String portletId, java.lang.String roles, boolean active)
 		throws java.rmi.RemoteException, com.liferay.portal.PortalException,
@@ -80,13 +87,5 @@ public class PortletServiceJSON {
 				portletId, roles, active);
 
 		return PortletJSONSerializer.toJSONObject(returnValue);
-	}
-
-	public static com.liferay.portal.kernel.json.JSONArray getExternalPortlets()
-		throws java.rmi.RemoteException, com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
-		com.liferay.portal.kernel.json.JSONArray returnValue = PortletServiceUtil.getExternalPortlets();
-
-		return returnValue;
 	}
 }

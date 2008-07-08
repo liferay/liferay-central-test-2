@@ -80,14 +80,12 @@ import java.rmi.RemoteException;
  *
  */
 public class PortletServiceSoap {
-	public static com.liferay.portal.model.PortletSoap updatePortlet(
-		long companyId, java.lang.String portletId, java.lang.String roles,
-		boolean active) throws RemoteException {
+	public static com.liferay.portal.kernel.json.JSONArray getWARPortlets()
+		throws RemoteException {
 		try {
-			com.liferay.portal.model.Portlet returnValue = PortletServiceUtil.updatePortlet(companyId,
-					portletId, roles, active);
+			com.liferay.portal.kernel.json.JSONArray returnValue = PortletServiceUtil.getWARPortlets();
 
-			return com.liferay.portal.model.PortletSoap.toSoapModel(returnValue);
+			return returnValue;
 		}
 		catch (Exception e) {
 			_log.error(e, e);
@@ -96,12 +94,14 @@ public class PortletServiceSoap {
 		}
 	}
 
-	public static com.liferay.portal.kernel.json.JSONArray getExternalPortlets()
-		throws RemoteException {
+	public static com.liferay.portal.model.PortletSoap updatePortlet(
+		long companyId, java.lang.String portletId, java.lang.String roles,
+		boolean active) throws RemoteException {
 		try {
-			com.liferay.portal.kernel.json.JSONArray returnValue = PortletServiceUtil.getExternalPortlets();
+			com.liferay.portal.model.Portlet returnValue = PortletServiceUtil.updatePortlet(companyId,
+					portletId, roles, active);
 
-			return returnValue;
+			return com.liferay.portal.model.PortletSoap.toSoapModel(returnValue);
 		}
 		catch (Exception e) {
 			_log.error(e, e);
