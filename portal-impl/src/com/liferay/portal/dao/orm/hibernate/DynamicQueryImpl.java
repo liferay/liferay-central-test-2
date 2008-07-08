@@ -64,8 +64,11 @@ public class DynamicQueryImpl implements DynamicQuery {
 
 		_criteria = _detachedCriteria.getExecutableCriteria(hibernateSession);
 
-		_criteria = _criteria.setFirstResult(_start);
-		_criteria = _criteria.setMaxResults(_end - _start);
+		if ((_start != null) && (_end != null)) {
+			_criteria = _criteria.setFirstResult(_start.intValue());
+			_criteria = _criteria.setMaxResults(
+				_end.intValue() - _start.intValue());
+		}
 	}
 
 	public DetachedCriteria getDetachedCriteria() {
@@ -77,8 +80,8 @@ public class DynamicQueryImpl implements DynamicQuery {
 	}
 
 	public void setLimit(int start, int end) {
-		_start = start;
-		_end = end;
+		_start = Integer.valueOf(start);
+		_end = Integer.valueOf(end);
 	}
 
 	public DynamicQuery setProjection(Projection projection) {
@@ -91,7 +94,7 @@ public class DynamicQueryImpl implements DynamicQuery {
 
 	private DetachedCriteria _detachedCriteria;
 	private Criteria _criteria;
-	private int _start;
-	private int _end;
+	private Integer _start;
+	private Integer _end;
 
 }
