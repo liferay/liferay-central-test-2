@@ -39,7 +39,12 @@ import com.liferay.portalweb.portlet.journalcontentsearch.JournalContentSearchTe
 import com.liferay.portalweb.portlet.language.LanguageTests;
 import com.liferay.portalweb.portlet.loancalculator.LoanCalculatorTests;
 import com.liferay.portalweb.portlet.managepages.ManagePagesTests;
-import com.liferay.portalweb.portlet.polls.PollsTests;
+import com.liferay.portalweb.portlet.organizationadmin.OrganizationAdminTests;
+import com.liferay.portalweb.portlet.pagecomments.PageCommentsTests;
+import com.liferay.portalweb.portlet.pageratings.PageRatingsTests;
+import com.liferay.portalweb.portlet.shopping.ShoppingTests;
+import com.liferay.portalweb.portlet.wiki.WikiTests;
+import com.liferay.portalweb.portlet.wikidisplay.WikiDisplayTests;
 
 /**
  * <a href="PortalWebTestSuite.java.html"><b><i>View Source</i></b></a>
@@ -92,12 +97,12 @@ public class PortalWebTestSuite extends BaseTests {
 		//addTestSuite(NestedPortletsTests.class);
 		//addTestSuite(NetworkUtilitiesTests.class);
 		//addTestSuite(OpenIDSignInTests.class);
-		//addTestSuite(OrganizationAdminTests.class);
-		//addTestSuite(PageCommentsTests.class);
-		//addTestSuite(PageRatingsTests.class);
+		addTestSuite(OrganizationAdminTests.class);
+		addTestSuite(PageCommentsTests.class);
+		addTestSuite(PageRatingsTests.class);
 		//addTestSuite(PasswordGeneratorTests.class);
 		//addTestSuite(PluginInstallerTests.class);
-		addTestSuite(PollsTests.class);
+		//addTestSuite(PollsTests.class);
 		//addTestSuite(PollsDisplayTests.class);
 		//addTestSuite(QuickNoteTests.class);
 		//addTestSuite(RandomBibleVerseTests.class);
@@ -113,7 +118,7 @@ public class PortalWebTestSuite extends BaseTests {
 		//addTestSuite(SamplePHPTests.class);
 		//addTestSuite(SearchTests.class);
 		//addTestSuite(SessionExpirationTests.class);
-		//addTestSuite(ShoppingTests.class);
+		addTestSuite(ShoppingTests.class);
 		//addTestSuite(SiteMapTests.class);
 		//addTestSuite(SMSTextMessengerTests.class);
 		//addTestSuite(SoftwareCatalogTests.class);
@@ -128,8 +133,8 @@ public class PortalWebTestSuite extends BaseTests {
 		//addTestSuite(WebcamTests.class);
 		//addTestSuite(WebFormTests.class);
 		//addTestSuite(WebProxyTests.class);
-		//addTestSuite(WikiTests.class);
-		//addTestSuite(WikiDisplayTests.class);
+		addTestSuite(WikiTests.class);
+		addTestSuite(WikiDisplayTests.class);
 		//addTestSuite(WordsTests.class);
 		//addTestSuite(XSLContentTests.class);
 

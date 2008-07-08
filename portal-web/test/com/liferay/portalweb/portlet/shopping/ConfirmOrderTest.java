@@ -57,7 +57,7 @@ public class ConfirmOrderTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isTextPresent("Test Test")) {
+				if (selenium.isTextPresent("Joe Bloggs")) {
 					break;
 				}
 			}

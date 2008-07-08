@@ -57,7 +57,7 @@ public class ViewInvoiceTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isTextPresent("Test Test")) {
+				if (selenium.isTextPresent("Joe Bloggs")) {
 					break;
 				}
 			}
@@ -127,7 +127,7 @@ public class ViewInvoiceTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isTextPresent("Invoice ")) {
+				if (selenium.isTextPresent("Invoice")) {
 					break;
 				}
 			}
