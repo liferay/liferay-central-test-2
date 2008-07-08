@@ -67,8 +67,8 @@ public class AddCommunitiesTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.typeKeys("_29_name", "Selenium");
-		selenium.type("_29_name", "Selenium");
+		selenium.typeKeys("_29_name", "Test Community");
+		selenium.type("_29_name", "Test Community");
 		selenium.typeKeys("_29_description", "This is a test community!");
 		selenium.type("_29_description", "This is a test community!");
 		selenium.click("//input[@value='Save']");
@@ -90,8 +90,8 @@ public class AddCommunitiesTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.typeKeys("_29_name", "Selenium");
-		selenium.type("_29_name", "Selenium");
+		selenium.typeKeys("_29_name", "Test Community");
+		selenium.type("_29_name", "Test Community");
 		selenium.click("//input[@value='Search Communities']");
 		selenium.waitForPageToLoad("30000");
 
@@ -162,6 +162,8 @@ public class AddCommunitiesTest extends BaseTestCase {
 		selenium.waitForPageToLoad("30000");
 		selenium.type("toggle_id_enterprise_admin_organization_searchkeywords",
 			"selenium");
+		selenium.click("//input[@value='Search Organizations']");
+		selenium.waitForPageToLoad("30000");
 		selenium.click("_29_rowIds");
 		selenium.click("//input[@value='Update Associations']");
 		selenium.waitForPageToLoad("30000");
