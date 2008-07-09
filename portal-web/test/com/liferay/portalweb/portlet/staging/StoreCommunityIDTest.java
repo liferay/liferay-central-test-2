@@ -74,7 +74,6 @@ public class StoreCommunityIDTest extends BaseTestCase {
 
 		String GroupID = selenium.getText(
 				"//div[@id='portlet-wrapper-29']/div[2]/div/div/form/table/tbody/tr[1]/td[2]");
-		System.out.println("###JR GroupID String " + GroupID);
 		selenium.click("link=Return to Full Page");
 		selenium.waitForPageToLoad("30000");
 	}

@@ -110,8 +110,7 @@ public class RemotePublishStagedPrivatePagesTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click(
-			"//div[@id='portlet-wrapper-29']/div[2]/div/div/form/input[19]");
+		selenium.click("//input[@value='Publish to Remote']");
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -146,8 +145,7 @@ public class RemotePublishStagedPrivatePagesTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click(
-			"//div[@id='portlet-wrapper-29']/div[2]/div/div/form/input[19]");
+		selenium.click("//input[@value='Publish to Remote']");
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
