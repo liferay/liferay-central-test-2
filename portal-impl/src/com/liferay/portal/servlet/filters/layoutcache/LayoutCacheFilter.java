@@ -35,6 +35,7 @@ import com.liferay.portal.kernel.util.PortalInitable;
 import com.liferay.portal.kernel.util.PortalInitableUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
+import com.liferay.portal.kernel.util.UnicodeProperties;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.Group;
 import com.liferay.portal.model.Layout;
@@ -55,8 +56,6 @@ import com.liferay.util.servlet.filters.CacheResponseData;
 import com.liferay.util.servlet.filters.CacheResponseUtil;
 
 import java.io.IOException;
-
-import java.util.Properties;
 
 import javax.servlet.FilterChain;
 import javax.servlet.FilterConfig;
@@ -272,7 +271,7 @@ public class LayoutCacheFilter
 				return false;
 			}
 
-			Properties props = layout.getTypeSettingsProperties();
+			UnicodeProperties props = layout.getTypeSettingsProperties();
 
 			for (int i = 0; i < 10; i++) {
 				String columnId = "column-" + i;

@@ -22,9 +22,9 @@
 
 package com.liferay.portal.model;
 
-import java.io.Serializable;
+import com.liferay.portal.kernel.util.UnicodeProperties;
 
-import java.util.Properties;
+import java.io.Serializable;
 
 /**
  * <a href="LayoutType.java.html"><b><i>View Source</i></b></a>
@@ -38,6 +38,6 @@ public interface LayoutType extends Serializable {
 
 	public void setLayout(Layout layout);
 
-	public Properties getTypeSettingsProperties();
+	public UnicodeProperties getTypeSettingsProperties();
 
 }

@@ -27,13 +27,13 @@ import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
+import com.liferay.portal.kernel.util.UnicodeProperties;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.Layout;
 import com.liferay.portal.service.LayoutLocalServiceUtil;
 import com.liferay.portal.theme.ThemeDisplay;
 
 import java.util.List;
-import java.util.Properties;
 
 import org.dom4j.Document;
 import org.dom4j.DocumentHelper;
@@ -78,7 +78,7 @@ public class SitemapUtil {
 		throws PortalException, SystemException {
 
 		for (Layout layout : layouts) {
-			Properties props = layout.getTypeSettingsProperties();
+			UnicodeProperties props = layout.getTypeSettingsProperties();
 
 			if (PortalUtil.isLayoutSitemapable(layout) && !layout.isHidden() &&
 				GetterUtil.getBoolean(

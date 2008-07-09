@@ -41,8 +41,8 @@ import com.liferay.portal.kernel.util.Constants;
 import com.liferay.portal.kernel.util.FileUtil;
 import com.liferay.portal.kernel.util.LocaleUtil;
 import com.liferay.portal.kernel.util.ParamUtil;
-import com.liferay.portal.kernel.util.SafeProperties;
 import com.liferay.portal.kernel.util.StringUtil;
+import com.liferay.portal.kernel.util.UnicodeProperties;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.ColorScheme;
 import com.liferay.portal.model.Group;
@@ -85,7 +85,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
-import java.util.Properties;
 
 import javax.portlet.ActionRequest;
 import javax.portlet.ActionResponse;
@@ -401,10 +400,10 @@ public class EditPagesAction extends PortletAction {
 		}
 	}
 
-	protected Properties getTypeSettingsProperties(
+	protected UnicodeProperties getTypeSettingsProperties(
 		ActionRequest actionRequest) {
 
-		Properties typeSettingsProperties = new SafeProperties();
+		UnicodeProperties typeSettingsProperties = new UnicodeProperties(true);
 
 		String prefix = "TypeSettingsProperties(";
 
@@ -515,7 +514,7 @@ public class EditPagesAction extends PortletAction {
 				localeNamesMap, localeTitlesMap, description, type, hidden,
 				friendlyURL, Boolean.valueOf(iconImage), iconBytes);
 
-			Properties formTypeSettingsProperties = getTypeSettingsProperties(
+			UnicodeProperties formTypeSettingsProperties = getTypeSettingsProperties(
 				actionRequest);
 
 			if (type.equals(LayoutConstants.TYPE_PORTLET)) {
@@ -540,12 +539,13 @@ public class EditPagesAction extends PortletAction {
 					}
 				}
 				else {
-					Properties layoutTypeSettingsProperties =
+					UnicodeProperties layoutTypeSettingsProperties =
 						layout.getTypeSettingsProperties();
 
-					for (Object property: formTypeSettingsProperties.keySet()) {
-						layoutTypeSettingsProperties.put(
-							property, formTypeSettingsProperties.get(property));
+					for (String property: formTypeSettingsProperties.keySet()) {
+						layoutTypeSettingsProperties.setProperty(
+							property,
+							formTypeSettingsProperties.getProperty(property));
 					}
 
 					LayoutServiceUtil.updateLayout(
@@ -666,7 +666,7 @@ public class EditPagesAction extends PortletAction {
 
 		Group liveGroup = GroupLocalServiceUtil.getGroup(liveGroupId);
 
-		Properties props = liveGroup.getTypeSettingsProperties();
+		UnicodeProperties props = liveGroup.getTypeSettingsProperties();
 
 		props.setProperty(
 			"mergeGuestPublicPages", String.valueOf(mergeGuestPublicPages));
@@ -684,7 +684,7 @@ public class EditPagesAction extends PortletAction {
 
 		Group liveGroup = GroupLocalServiceUtil.getGroup(liveGroupId);
 
-		Properties props = liveGroup.getTypeSettingsProperties();
+		UnicodeProperties props = liveGroup.getTypeSettingsProperties();
 
 		props.setProperty("googleAnalyticsId", googleAnalyticsId);
 

@@ -38,11 +38,11 @@ import com.liferay.portal.kernel.util.FileUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.LocaleUtil;
 import com.liferay.portal.kernel.util.MethodWrapper;
-import com.liferay.portal.kernel.util.PropertiesUtil;
 import com.liferay.portal.kernel.util.ReleaseInfo;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Time;
+import com.liferay.portal.kernel.util.UnicodeProperties;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.kernel.zip.ZipReader;
 import com.liferay.portal.model.Group;
@@ -89,7 +89,6 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
-import java.util.Properties;
 import java.util.Set;
 
 import org.apache.commons.lang.time.StopWatch;
@@ -646,7 +645,7 @@ public class LayoutImporter {
 
 	protected void fixTypeSettings(Layout layout) {
 		if (layout.getType().equals(LayoutConstants.TYPE_URL)) {
-			Properties typeSettings = layout.getTypeSettingsProperties();
+			UnicodeProperties typeSettings = layout.getTypeSettingsProperties();
 
 			String url = GetterUtil.getString(typeSettings.getProperty("url"));
 
@@ -1223,14 +1222,16 @@ public class LayoutImporter {
 		Layout layout, String newTypeSettings, String portletsMergeMode) {
 
 		try {
-			Properties previousProps =
+			UnicodeProperties previousProps =
 				layout.getTypeSettingsProperties();
 			LayoutTypePortlet previousLayoutType =
 				(LayoutTypePortlet)layout.getLayoutType();
 			List<String> previousColumns =
 				previousLayoutType.getLayoutTemplate().getColumns();
 
-			Properties newProps = PropertiesUtil.load(newTypeSettings);
+			UnicodeProperties newProps = new UnicodeProperties(true);
+
+			newProps.load(newTypeSettings);
 
 			String layoutTemplateId = newProps.getProperty(
 					LayoutTypePortletImpl.LAYOUT_TEMPLATE_ID);
@@ -1276,7 +1277,7 @@ public class LayoutImporter {
 			previousProps.setProperty(
 				columnId, StringUtil.merge(portletIds));
 
-			layout.setTypeSettings(PropertiesUtil.toString(previousProps));
+			layout.setTypeSettings(previousProps.toString());
 
 		}
 		catch (IOException e) {

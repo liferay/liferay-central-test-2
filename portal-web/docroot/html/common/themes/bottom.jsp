@@ -183,7 +183,7 @@ if ((layout != null) && layout.getType().equals(LayoutConstants.TYPE_PORTLET)) {
 
 <%
 if (layout != null) {
-	Properties groupTypeSettings = layout.getGroup().getTypeSettingsProperties();
+	UnicodeProperties groupTypeSettings = layout.getGroup().getTypeSettingsProperties();
 
 	String googleAnalyticsId = groupTypeSettings.getProperty("googleAnalyticsId");
 

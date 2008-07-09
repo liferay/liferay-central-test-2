@@ -50,6 +50,7 @@ import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.StringComparator;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
+import com.liferay.portal.kernel.util.UnicodeProperties;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.ClassName;
 import com.liferay.portal.model.Company;
@@ -127,7 +128,6 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
-import java.util.Properties;
 import java.util.ResourceBundle;
 import java.util.Set;
 import java.util.TimeZone;
@@ -871,14 +871,14 @@ public class PortalImpl implements Portal {
 		variables.put("liferay:mainPath", mainPath);
 		variables.put("liferay:plid", String.valueOf(layout.getPlid()));
 
-		Properties typeSettingsProperties =
+		UnicodeProperties typeSettingsProperties =
 			layout.getLayoutType().getTypeSettingsProperties();
 
-		Iterator<Map.Entry<Object, Object>> itr =
+		Iterator<Map.Entry<String, String>> itr =
 			typeSettingsProperties.entrySet().iterator();
 
 		while (itr.hasNext()) {
-			Map.Entry<Object, Object> entry = itr.next();
+			Map.Entry<String, String> entry = itr.next();
 
 			String key = (String)entry.getKey();
 			String value = (String)entry.getValue();
@@ -1040,7 +1040,7 @@ public class PortalImpl implements Portal {
 	}
 
 	public String getLayoutTarget(Layout layout) {
-		Properties typeSettingsProps = layout.getTypeSettingsProperties();
+		UnicodeProperties typeSettingsProps = layout.getTypeSettingsProperties();
 
 		String target = typeSettingsProps.getProperty("target");
 

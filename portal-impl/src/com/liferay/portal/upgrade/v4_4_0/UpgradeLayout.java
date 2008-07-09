@@ -24,8 +24,7 @@ package com.liferay.portal.upgrade.v4_4_0;
 
 import com.liferay.portal.kernel.dao.jdbc.DataAccess;
 import com.liferay.portal.kernel.util.GetterUtil;
-import com.liferay.portal.kernel.util.PropertiesUtil;
-import com.liferay.portal.kernel.util.SafeProperties;
+import com.liferay.portal.kernel.util.UnicodeProperties;
 import com.liferay.portal.model.Layout;
 import com.liferay.portal.service.LayoutLocalServiceUtil;
 import com.liferay.portal.upgrade.UpgradeException;
@@ -34,8 +33,6 @@ import com.liferay.portal.upgrade.UpgradeProcess;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-
-import java.util.Properties;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -96,9 +93,9 @@ public class UpgradeLayout extends UpgradeProcess {
 	}
 
 	protected String upgradeTypeSettings(String typeSettings) throws Exception {
-		Properties props = new SafeProperties();
+		UnicodeProperties props = new UnicodeProperties(true);
 
-		PropertiesUtil.load(props, typeSettings);
+		props.load(typeSettings);
 
 		long linkToPlid = GetterUtil.getLong(props.getProperty("linkToPlid"));
 
@@ -112,7 +109,7 @@ public class UpgradeLayout extends UpgradeProcess {
 			props.put("linkToLayoutId", String.valueOf(layout.getLayoutId()));
 		}
 
-		return PropertiesUtil.toString(props);
+		return props.toString();
 	}
 
 	private static Log _log = LogFactory.getLog(UpgradeLayout.class);

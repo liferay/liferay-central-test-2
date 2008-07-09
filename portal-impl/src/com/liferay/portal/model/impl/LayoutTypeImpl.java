@@ -22,10 +22,9 @@
 
 package com.liferay.portal.model.impl;
 
+import com.liferay.portal.kernel.util.UnicodeProperties;
 import com.liferay.portal.model.Layout;
 import com.liferay.portal.model.LayoutType;
-
-import java.util.Properties;
 
 /**
  * <a href="LayoutTypeImpl.java.html"><b><i>View Source</i></b></a>
@@ -47,7 +46,7 @@ public class LayoutTypeImpl implements LayoutType {
 		_layout = layout;
 	}
 
-	public Properties getTypeSettingsProperties() {
+	public UnicodeProperties getTypeSettingsProperties() {
 		return _layout.getTypeSettingsProperties();
 	}
 

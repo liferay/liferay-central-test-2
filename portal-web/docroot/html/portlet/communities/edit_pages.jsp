@@ -97,16 +97,16 @@ else {
 	}
 }
 
-Properties groupTypeSettings = null;
+UnicodeProperties groupTypeSettings = null;
 
 if (group != null) {
 	groupTypeSettings = group.getTypeSettingsProperties();
 }
 else {
-	groupTypeSettings = new Properties();
+	groupTypeSettings = new UnicodeProperties();
 }
 
-Properties liveGroupTypeSettings = liveGroup.getTypeSettingsProperties();
+UnicodeProperties liveGroupTypeSettings = liveGroup.getTypeSettingsProperties();
 
 Layout selLayout = null;
 

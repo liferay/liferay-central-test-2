@@ -73,10 +73,10 @@ public interface Group extends GroupModel {
 
 	public void setTypeSettings(java.lang.String typeSettings);
 
-	public java.util.Properties getTypeSettingsProperties();
+	public com.liferay.portal.kernel.util.UnicodeProperties getTypeSettingsProperties();
 
 	public void setTypeSettingsProperties(
-		java.util.Properties typeSettingsProperties);
+		com.liferay.portal.kernel.util.UnicodeProperties typeSettingsProperties);
 
 	public java.lang.String getTypeSettingsProperty(java.lang.String key);
 

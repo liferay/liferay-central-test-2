@@ -28,10 +28,9 @@ import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.util.CharPool;
 import com.liferay.portal.kernel.util.HttpUtil;
 import com.liferay.portal.kernel.util.LocaleUtil;
-import com.liferay.portal.kernel.util.PropertiesUtil;
-import com.liferay.portal.kernel.util.SafeProperties;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
+import com.liferay.portal.kernel.util.UnicodeProperties;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.ColorScheme;
 import com.liferay.portal.model.Group;
@@ -66,7 +65,6 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Locale;
-import java.util.Properties;
 
 import javax.portlet.PortletException;
 import javax.portlet.PortletMode;
@@ -419,7 +417,7 @@ public class LayoutImpl extends LayoutModelImpl implements Layout {
 			return super.getTypeSettings();
 		}
 		else {
-			return PropertiesUtil.toString(_typeSettingsProperties);
+			return _typeSettingsProperties.toString();
 		}
 	}
 
@@ -429,13 +427,12 @@ public class LayoutImpl extends LayoutModelImpl implements Layout {
 		super.setTypeSettings(typeSettings);
 	}
 
-	public Properties getTypeSettingsProperties() {
+	public UnicodeProperties getTypeSettingsProperties() {
 		if (_typeSettingsProperties == null) {
-			_typeSettingsProperties = new SafeProperties();
+			_typeSettingsProperties = new UnicodeProperties(true);
 
 			try {
-				PropertiesUtil.load(
-					_typeSettingsProperties, super.getTypeSettings());
+				_typeSettingsProperties.load(super.getTypeSettings());
 			}
 			catch (IOException ioe) {
 				_log.error(ioe);
@@ -445,10 +442,10 @@ public class LayoutImpl extends LayoutModelImpl implements Layout {
 		return _typeSettingsProperties;
 	}
 
-	public void setTypeSettingsProperties(Properties typeSettingsProperties) {
+	public void setTypeSettingsProperties(UnicodeProperties typeSettingsProperties) {
 		_typeSettingsProperties = typeSettingsProperties;
 
-		super.setTypeSettings(PropertiesUtil.toString(_typeSettingsProperties));
+		super.setTypeSettings(_typeSettingsProperties.toString());
 	}
 
 	public LayoutSet getLayoutSet() {
@@ -588,9 +585,9 @@ public class LayoutImpl extends LayoutModelImpl implements Layout {
 			String typeSettings = layoutClone.get(request, getPlid());
 
 			if (typeSettings != null) {
-				Properties props = new SafeProperties();
+				UnicodeProperties props = new UnicodeProperties(true);
 
-				PropertiesUtil.load(props, typeSettings);
+				props.load(typeSettings);
 
 				String stateMax = props.getProperty(
 					LayoutTypePortletImpl.STATE_MAX);
@@ -697,6 +694,6 @@ public class LayoutImpl extends LayoutModelImpl implements Layout {
 
 	private static Log _log = LogFactory.getLog(LayoutImpl.class);
 
-	private Properties _typeSettingsProperties = null;
+	private UnicodeProperties _typeSettingsProperties = null;
 
 }

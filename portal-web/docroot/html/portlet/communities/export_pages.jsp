@@ -122,7 +122,7 @@ else {
 	pagesCount = selGroup.getPublicLayoutsPageCount();
 }
 
-Properties groupTypeSettings = selGroup.getTypeSettingsProperties();
+UnicodeProperties groupTypeSettings = selGroup.getTypeSettingsProperties();
 
 Organization organization = null;
 User user2 = null;

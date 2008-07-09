@@ -30,6 +30,7 @@ import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Time;
+import com.liferay.portal.kernel.util.UnicodeProperties;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.kernel.zip.ZipWriter;
 import com.liferay.portal.model.Image;
@@ -80,7 +81,6 @@ import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
-import java.util.Properties;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -558,7 +558,7 @@ public class ExportAction extends Action {
 		}
 
 		for (Layout layout : layouts) {
-			Properties props = layout.getTypeSettingsProperties();
+			UnicodeProperties props = layout.getTypeSettingsProperties();
 
 			long linkToPlid = GetterUtil.getLong(
 				props.getProperty("linkToPlid"));

@@ -23,8 +23,7 @@
 package com.liferay.portal.model.impl;
 
 import com.liferay.portal.kernel.util.GetterUtil;
-import com.liferay.portal.kernel.util.PropertiesUtil;
-import com.liferay.portal.kernel.util.SafeProperties;
+import com.liferay.portal.kernel.util.UnicodeProperties;
 import com.liferay.portal.model.Group;
 import com.liferay.portal.model.Layout;
 import com.liferay.portal.model.LayoutConstants;
@@ -46,7 +45,6 @@ import com.liferay.portal.util.PropsValues;
 import java.io.IOException;
 
 import java.util.List;
-import java.util.Properties;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -268,7 +266,7 @@ public class GroupImpl extends GroupModelImpl implements Group {
 			return super.getTypeSettings();
 		}
 		else {
-			return PropertiesUtil.toString(_typeSettingsProperties);
+			return _typeSettingsProperties.toString();
 		}
 	}
 
@@ -278,13 +276,12 @@ public class GroupImpl extends GroupModelImpl implements Group {
 		super.setTypeSettings(typeSettings);
 	}
 
-	public Properties getTypeSettingsProperties() {
+	public UnicodeProperties getTypeSettingsProperties() {
 		if (_typeSettingsProperties == null) {
-			_typeSettingsProperties = new SafeProperties();
+			_typeSettingsProperties = new UnicodeProperties(true);
 
 			try {
-				PropertiesUtil.load(
-					_typeSettingsProperties, super.getTypeSettings());
+				_typeSettingsProperties.load(super.getTypeSettings());
 			}
 			catch (IOException ioe) {
 				_log.error(ioe);
@@ -294,14 +291,14 @@ public class GroupImpl extends GroupModelImpl implements Group {
 		return _typeSettingsProperties;
 	}
 
-	public void setTypeSettingsProperties(Properties typeSettingsProperties) {
+	public void setTypeSettingsProperties(UnicodeProperties typeSettingsProperties) {
 		_typeSettingsProperties = typeSettingsProperties;
 
-		super.setTypeSettings(PropertiesUtil.toString(_typeSettingsProperties));
+		super.setTypeSettings(_typeSettingsProperties.toString());
 	}
 
 	public String getTypeSettingsProperty(String key) {
-		Properties typeSettingsProperties = getTypeSettingsProperties();
+		UnicodeProperties typeSettingsProperties = getTypeSettingsProperties();
 
 		return typeSettingsProperties.getProperty(key);
 	}
@@ -418,6 +415,6 @@ public class GroupImpl extends GroupModelImpl implements Group {
 
 	private Group _stagingGroup;
 	private Group _liveGroup;
-	private Properties _typeSettingsProperties = null;
+	private UnicodeProperties _typeSettingsProperties = null;
 
 }

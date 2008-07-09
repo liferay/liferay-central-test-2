@@ -41,10 +41,9 @@ import com.liferay.portal.kernel.util.HttpUtil;
 import com.liferay.portal.kernel.util.ListUtil;
 import com.liferay.portal.kernel.util.LocaleUtil;
 import com.liferay.portal.kernel.util.ParamUtil;
-import com.liferay.portal.kernel.util.PropertiesUtil;
-import com.liferay.portal.kernel.util.SafeProperties;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
+import com.liferay.portal.kernel.util.UnicodeProperties;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.ColorScheme;
 import com.liferay.portal.model.Company;
@@ -99,7 +98,6 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
-import java.util.Properties;
 import java.util.TimeZone;
 
 import javax.portlet.PortletMode;
@@ -723,7 +721,7 @@ public class ServicePreAction extends Action {
 		if (layoutGroupId != guestGroup.getGroupId()) {
 			Group layoutGroup = GroupLocalServiceUtil.getGroup(layoutGroupId);
 
-			Properties props = layoutGroup.getTypeSettingsProperties();
+			UnicodeProperties props = layoutGroup.getTypeSettingsProperties();
 
 			boolean mergeGuestPublicPages = GetterUtil.getBoolean(
 				props.getProperty("mergeGuestPublicPages"));
@@ -766,7 +764,7 @@ public class ServicePreAction extends Action {
 					return layouts;
 				}
 
-				Properties props = previousGroup.getTypeSettingsProperties();
+				UnicodeProperties props = previousGroup.getTypeSettingsProperties();
 
 				boolean mergeGuestPublicPages = GetterUtil.getBoolean(
 					props.getProperty("mergeGuestPublicPages"));
@@ -1134,9 +1132,9 @@ public class ServicePreAction extends Action {
 				String typeSettings = layoutClone.get(request, plid);
 
 				if (typeSettings != null) {
-					Properties props = new SafeProperties();
+					UnicodeProperties props = new UnicodeProperties(true);
 
-					PropertiesUtil.load(props, typeSettings);
+					props.load(typeSettings);
 
 					String stateMax = props.getProperty(
 						LayoutTypePortletImpl.STATE_MAX);

@@ -30,6 +30,7 @@ import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.ListUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
+import com.liferay.portal.kernel.util.UnicodeProperties;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.Group;
 import com.liferay.portal.model.Layout;
@@ -52,7 +53,6 @@ import com.liferay.util.PwdGenerator;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
-import java.util.Properties;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -928,15 +928,11 @@ public class LayoutTypePortletImpl
 	}
 
 	public void removeNestedColumns(String portletId) {
-		Properties props = getTypeSettingsProperties();
+		UnicodeProperties props = getTypeSettingsProperties();
 
-		Iterator<Object> itr = props.keySet().iterator();
+		UnicodeProperties newProps = new UnicodeProperties();
 
-		Properties newProps = new Properties();
-
-		while (itr.hasNext()) {
-			String key = (String)itr.next();
-
+		for (String key : props.keySet()) {
 			if (!key.startsWith(portletId)) {
 				newProps.setProperty(key, props.getProperty(key));
 			}
@@ -1124,13 +1120,9 @@ public class LayoutTypePortletImpl
 		}
 
 		if (portlet.getRootPortletId().equals(PortletKeys.NESTED_PORTLETS)) {
-			Properties props = getTypeSettingsProperties();
+			UnicodeProperties props = getTypeSettingsProperties();
 
-			Iterator<Object> itr = props.keySet().iterator();
-
-			while (itr.hasNext()) {
-				String key = (String)itr.next();
-
+			for (String key : props.keySet()) {
 				if (key.startsWith(portlet.getPortletId())) {
 					String portletIds = props.getProperty(key);
 

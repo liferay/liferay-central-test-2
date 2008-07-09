@@ -114,10 +114,10 @@ public interface Layout extends LayoutModel {
 
 	public void setTypeSettings(java.lang.String typeSettings);
 
-	public java.util.Properties getTypeSettingsProperties();
+	public com.liferay.portal.kernel.util.UnicodeProperties getTypeSettingsProperties();
 
 	public void setTypeSettingsProperties(
-		java.util.Properties typeSettingsProperties);
+		com.liferay.portal.kernel.util.UnicodeProperties typeSettingsProperties);
 
 	public com.liferay.portal.model.LayoutSet getLayoutSet();
 
