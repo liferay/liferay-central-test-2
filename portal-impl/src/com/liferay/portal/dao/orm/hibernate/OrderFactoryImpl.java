@@ -20,28 +20,27 @@
  * SOFTWARE.
  */
 
-package com.liferay.portal.kernel.dao.orm;
+package com.liferay.portal.dao.orm.hibernate;
 
-import java.util.List;
+import com.liferay.portal.kernel.dao.orm.Order;
+import com.liferay.portal.kernel.dao.orm.OrderFactory;
 
 /**
- * <a href="DynamicQuery.java.html"><b><i>View Source</i></b></a>
+ * <a href="ProjectionFactoryImpl.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *
  */
-public interface DynamicQuery {
+public class OrderFactoryImpl implements OrderFactory {
 
-	public DynamicQuery add(Criterion criterion);
+	public Order asc(String propertyName) {
+		return new OrderImpl(
+			org.hibernate.criterion.Order.asc(propertyName));
+	}
 
-	public DynamicQuery addOrder(Order order);
-
-	public void compile(Session session);
-
-	public List list();
-
-	public void setLimit(int start, int end);
-
-	public DynamicQuery setProjection(Projection projection);
+	public Order desc(String propertyName) {
+		return new OrderImpl(
+			org.hibernate.criterion.Order.desc(propertyName));
+	}
 
 }

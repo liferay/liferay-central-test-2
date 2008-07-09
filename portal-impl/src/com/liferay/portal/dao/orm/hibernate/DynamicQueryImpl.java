@@ -24,6 +24,7 @@ package com.liferay.portal.dao.orm.hibernate;
 
 import com.liferay.portal.kernel.dao.orm.Criterion;
 import com.liferay.portal.kernel.dao.orm.DynamicQuery;
+import com.liferay.portal.kernel.dao.orm.Order;
 import com.liferay.portal.kernel.dao.orm.Projection;
 import com.liferay.portal.kernel.dao.orm.Session;
 
@@ -48,6 +49,14 @@ public class DynamicQueryImpl implements DynamicQuery {
 		CriterionImpl criterionImpl = (CriterionImpl)criterion;
 
 		_detachedCriteria.add(criterionImpl.getCriterion());
+
+		return this;
+	}
+
+	public DynamicQuery addOrder(Order order) {
+		OrderImpl orderImpl = (OrderImpl)order;
+
+		_detachedCriteria.addOrder(orderImpl.getOrder());
 
 		return this;
 	}

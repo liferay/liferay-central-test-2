@@ -22,26 +22,44 @@
 
 package com.liferay.portal.kernel.dao.orm;
 
-import java.util.List;
+import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
 
 /**
- * <a href="DynamicQuery.java.html"><b><i>View Source</i></b></a>
+ * <a href="ProjectionFactoryUtil.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *
  */
-public interface DynamicQuery {
+public class OrderFactoryUtil {
 
-	public DynamicQuery add(Criterion criterion);
+	public static Order asc(String propertyName) {
+		return getOrderFactory().asc(propertyName);
+	}
 
-	public DynamicQuery addOrder(Order order);
+	public static Order desc(String propertyName) {
+		return getOrderFactory().desc(propertyName);
+	}
 
-	public void compile(Session session);
+	public static OrderFactory getOrderFactory() {
+		return _getUtil()._orderFactory;
+	}
 
-	public List list();
+	public void setOrderFactory(OrderFactory orderFactory) {
+		_orderFactory = orderFactory;
+	}
 
-	public void setLimit(int start, int end);
+	private static OrderFactoryUtil _getUtil() {
+		if (_util == null) {
+			_util = (OrderFactoryUtil)PortalBeanLocatorUtil.locate(_UTIL);
+		}
 
-	public DynamicQuery setProjection(Projection projection);
+		return _util;
+	}
+
+	private static final String _UTIL = OrderFactoryUtil.class.getName();
+
+	private static OrderFactoryUtil _util;
+
+	private OrderFactory _orderFactory;
 
 }
