@@ -514,8 +514,8 @@ public class EditPagesAction extends PortletAction {
 				localeNamesMap, localeTitlesMap, description, type, hidden,
 				friendlyURL, Boolean.valueOf(iconImage), iconBytes);
 
-			UnicodeProperties formTypeSettingsProperties = getTypeSettingsProperties(
-				actionRequest);
+			UnicodeProperties formTypeSettingsProperties =
+				getTypeSettingsProperties(actionRequest);
 
 			if (type.equals(LayoutConstants.TYPE_PORTLET)) {
 				if ((copyLayoutId > 0) &&

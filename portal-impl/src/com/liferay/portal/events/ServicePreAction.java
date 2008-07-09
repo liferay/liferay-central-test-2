@@ -764,7 +764,8 @@ public class ServicePreAction extends Action {
 					return layouts;
 				}
 
-				UnicodeProperties props = previousGroup.getTypeSettingsProperties();
+				UnicodeProperties props =
+					previousGroup.getTypeSettingsProperties();
 
 				boolean mergeGuestPublicPages = GetterUtil.getBoolean(
 					props.getProperty("mergeGuestPublicPages"));

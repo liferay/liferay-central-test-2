@@ -36,8 +36,8 @@ import java.util.HashMap;
  *
  * <p>
  * This is a rewrite of java.util.Properties that is not synchronized and
- * natively supports non-ASCII encodings.  It can also be configured to be
- * "safe," allowing the values to have new line characters.  When stored to a
+ * natively supports non-ASCII encodings. It can also be configured to be
+ * "safe", allowing the values to have new line characters. When stored to a
  * given BufferedWriter, "safe" properties will replace all new line characters
  * with a _SAFE_NEWLINE_CHARACTER_.
  * </p>
@@ -89,35 +89,35 @@ public class UnicodeProperties extends HashMap<String, String> {
 		try {
 			br = new BufferedReader(new StringReader(props));
 
-	        String line = br.readLine();
+			String line = br.readLine();
 
-	        while (line != null) {
-	        	line = line.trim();
+			while (line != null) {
+				line = line.trim();
 
-	        	if (_isComment(line)) {
-		        	line = br.readLine();
+				if (_isComment(line)) {
+					line = br.readLine();
 
-		        	continue;
-	        	}
+					continue;
+				}
 
-	        	int i = line.indexOf(StringPool.EQUAL);
+				int pos = line.indexOf(StringPool.EQUAL);
 
-	        	if (i != -1) {
-	        		String key = line.substring(0, i).trim();
-	        		String value = line.substring(i + 1).trim();
+				if (pos != -1) {
+					String key = line.substring(0, pos).trim();
+					String value = line.substring(pos + 1).trim();
 
-	        		if (_safe) {
-	        			value = _decode(value);
-	        		}
+					if (_safe) {
+						value = _decode(value);
+					}
 
-	        		setProperty(key, value);
-	        	}
-	        	else {
-	        		_log.error("Invalid line in properties '" + line + "'");
-	        	}
+					setProperty(key, value);
+				}
+				else {
+					_log.error("Invalid property on line " + line);
+				}
 
-	        	line = br.readLine();
-	        }
+				line = br.readLine();
+			}
 		}
 		finally {
 			if (br != null) {
@@ -127,15 +127,6 @@ public class UnicodeProperties extends HashMap<String, String> {
 				catch (Exception e) {
 				}
 			}
-		}
-	}
-
-	public String remove(Object key) {
-		if (key == null) {
-			return null;
-		}
-		else {
-			return super.remove(key);
 		}
 	}
 
@@ -150,6 +141,15 @@ public class UnicodeProperties extends HashMap<String, String> {
 			else {
 				return super.put(key, value);
 			}
+		}
+	}
+
+	public String remove(Object key) {
+		if (key == null) {
+			return null;
+		}
+		else {
+			return super.remove(key);
 		}
 	}
 
@@ -197,11 +197,11 @@ public class UnicodeProperties extends HashMap<String, String> {
 		return line.length() == 0 || line.startsWith(StringPool.POUND);
 	}
 
-	private boolean _safe = false;
-
 	private static final String _SAFE_NEWLINE_CHARACTER =
 		"_SAFE_NEWLINE_CHARACTER_";
 
 	private static Log _log = LogFactoryUtil.getLog(UnicodeProperties.class);
+
+	private boolean _safe = false;
 
 }

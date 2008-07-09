@@ -442,7 +442,9 @@ public class LayoutImpl extends LayoutModelImpl implements Layout {
 		return _typeSettingsProperties;
 	}
 
-	public void setTypeSettingsProperties(UnicodeProperties typeSettingsProperties) {
+	public void setTypeSettingsProperties(
+		UnicodeProperties typeSettingsProperties) {
+
 		_typeSettingsProperties = typeSettingsProperties;
 
 		super.setTypeSettings(_typeSettingsProperties.toString());

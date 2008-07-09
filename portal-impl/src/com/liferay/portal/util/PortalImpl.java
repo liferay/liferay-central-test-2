@@ -880,8 +880,8 @@ public class PortalImpl implements Portal {
 		while (itr.hasNext()) {
 			Map.Entry<String, String> entry = itr.next();
 
-			String key = (String)entry.getKey();
-			String value = (String)entry.getValue();
+			String key = entry.getKey();
+			String value = entry.getValue();
 
 			variables.put(key, value);
 		}
@@ -1040,7 +1040,8 @@ public class PortalImpl implements Portal {
 	}
 
 	public String getLayoutTarget(Layout layout) {
-		UnicodeProperties typeSettingsProps = layout.getTypeSettingsProperties();
+		UnicodeProperties typeSettingsProps =
+			layout.getTypeSettingsProperties();
 
 		String target = typeSettingsProps.getProperty("target");
 
