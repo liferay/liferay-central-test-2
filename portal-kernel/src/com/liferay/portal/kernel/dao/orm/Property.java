@@ -30,7 +30,7 @@ import java.util.Collection;
  * @author Brian Wing Shun Chan
  *
  */
-public interface Property {
+public interface Property extends Projection {
 
 	public Order asc();
 

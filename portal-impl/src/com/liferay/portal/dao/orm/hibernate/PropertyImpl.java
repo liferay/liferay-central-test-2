@@ -36,9 +36,11 @@ import java.util.Collection;
  * @author Brian Wing Shun Chan
  *
  */
-public class PropertyImpl implements Property {
+public class PropertyImpl extends ProjectionImpl implements Property {
 
 	public PropertyImpl(org.hibernate.criterion.Property property) {
+		super(property);
+
 		_property = property;
 	}
 
