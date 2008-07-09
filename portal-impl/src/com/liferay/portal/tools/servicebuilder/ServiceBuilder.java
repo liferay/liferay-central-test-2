@@ -579,6 +579,8 @@ public class ServiceBuilder {
 					"session-factory");
 				String txManager = entityEl.attributeValue(
 					"tx-manager");
+				boolean cacheEnabled = GetterUtil.getBoolean(
+					entityEl.attributeValue("cache-enabled"), true);
 
 				List<EntityColumn> pkList = new ArrayList<EntityColumn>();
 				List<EntityColumn> regularColList =
@@ -839,9 +841,9 @@ public class ServiceBuilder {
 						_packagePath, _portletName, _portletShortName, ejbName,
 						table, uuid, localService, remoteService,
 						persistenceClass, finderClass, dataSource,
-						sessionFactory, txManager, pkList, regularColList,
-						collectionList, columnList, order, finderList,
-						referenceList, txRequiredList));
+						sessionFactory, txManager, cacheEnabled, pkList,
+						regularColList, collectionList, columnList, order,
+						finderList, referenceList, txRequiredList));
 			}
 
 			List<String> exceptionList = new ArrayList<String>();

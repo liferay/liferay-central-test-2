@@ -58,7 +58,7 @@ public class Entity {
 	public Entity(String name) {
 		this(
 			null, null, null, name, null, false, false, true, null, null, null,
-			null, null, null, null, null, null, null, null, null, null);
+			null, null, true, null, null, null, null, null, null, null, null);
 	}
 
 	public Entity(
@@ -66,10 +66,11 @@ public class Entity {
 		String name, String table, boolean uuid, boolean localService,
 		boolean remoteService, String persistenceClass, String finderClass,
 		String dataSource, String sessionFactory, String txManager,
-		List<EntityColumn> pkList, List<EntityColumn> regularColList,
-		List<EntityColumn> collectionList, List<EntityColumn> columnList,
-		EntityOrder order, List<EntityFinder> finderList,
-		List<Entity> referenceList, List<String> txRequiredList) {
+		boolean cacheEnabled, List<EntityColumn> pkList,
+		List<EntityColumn> regularColList, List<EntityColumn> collectionList,
+		List<EntityColumn> columnList, EntityOrder order,
+		List<EntityFinder> finderList, List<Entity> referenceList,
+		List<String> txRequiredList) {
 
 		_packagePath = packagePath;
 		_portletName = portletName;
@@ -85,6 +86,7 @@ public class Entity {
 		_sessionFactory = GetterUtil.getString(
 			sessionFactory, DEFAULT_SESSION_FACTORY);
 		_txManager = GetterUtil.getString(txManager, DEFAULT_TX_MANAGER);
+		_cacheEnabled = cacheEnabled;
 		_pkList = pkList;
 		_regularColList = regularColList;
 		_collectionList = collectionList;
@@ -202,6 +204,10 @@ public class Entity {
 		else {
 			return false;
 		}
+	}
+
+	public boolean isCacheEnabled() {
+		return _cacheEnabled;
 	}
 
 	public String getPKClassName() {
@@ -345,6 +351,7 @@ public class Entity {
 	private String _dataSource;
 	private String _sessionFactory;
 	private String _txManager;
+	private boolean _cacheEnabled;
 	private List<EntityColumn> _pkList;
 	private List<EntityColumn> _regularColList;
 	private List<EntityColumn> _collectionList;

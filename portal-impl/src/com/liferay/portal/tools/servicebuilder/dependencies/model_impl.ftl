@@ -70,7 +70,15 @@ public class ${entity.name}ModelImpl extends BaseModelImpl {
 
 	public static final String TX_MANAGER = "${entity.getTXManager()}";
 
-	public static final boolean CACHE_ENABLED = GetterUtil.getBoolean(${propsUtil}.get("value.object.finder.cache.enabled.${packagePath}.model.${entity.name}"), true);
+	public static final boolean CACHE_ENABLED = GetterUtil.getBoolean(${propsUtil}.get("value.object.finder.cache.enabled.${packagePath}.model.${entity.name}"),
+
+	<#if entity.isCacheEnabled()>
+		true
+	<#else>
+		false
+	</#if>
+
+	);
 
 	public static ${entity.name} toModel(${entity.name}Soap soapModel) {
 		${entity.name} model = new ${entity.name}Impl();

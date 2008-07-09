@@ -1,7 +1,9 @@
 <#list entities as entity>
 	<#if entity.hasColumns()>
 		<class name="${packagePath}.model.impl.${entity.name}Impl" table="${entity.table}">
-			<cache usage="read-write" />
+			<#if entity.isCacheEnabled()>
+				<cache usage="read-write" />
+			</#if>
 
 			<#if entity.hasCompoundPK()>
 				<composite-id name="primaryKey" class="${packagePath}.service.persistence.${entity.name}PK">

@@ -89,6 +89,10 @@ The tx-manager value specifies the transaction manager that Spring uses. The
 default value is the Spring Hibernate transaction manager that wraps the Liferay
 data source and session factory. See data-source-spring.xml. Set this attribute
 to "none" to disable transaction management.
+
+The cache-enabled value specifies whether or not to cache this queries for this
+entity. Set this to false if data in the table will be updated by other
+programs. The default value is true.
 -->
 <!ATTLIST entity
 	name CDATA #REQUIRED
@@ -100,6 +104,7 @@ to "none" to disable transaction management.
 	data-source CDATA #IMPLIED
 	session-factory CDATA #IMPLIED
 	tx-manager CDATA #IMPLIED
+	cache-enabled CDATA #IMPLIED
 >
 
 <!--
