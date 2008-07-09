@@ -155,7 +155,7 @@ public class TagsAssetLocalServiceImpl extends TagsAssetLocalServiceBaseImpl {
 
 		return getAssets(
 			0, new long[0], entryIds, notEntryIds, andOperator,
-			excludeZeroViewCount, null, null, start, end);
+			excludeZeroViewCount, publishDate, expirationDate, start, end);
 	}
 
 	public List<TagsAsset> getAssets(
