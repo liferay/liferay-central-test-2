@@ -448,7 +448,7 @@
 		</java>
 	</target>
 
-	<target name="merge">
+	<target name="merge" depends="compile">
 		<if>
 			<not>
 				<uptodate
