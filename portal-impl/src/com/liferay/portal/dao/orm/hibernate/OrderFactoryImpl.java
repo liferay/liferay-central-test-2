@@ -26,7 +26,7 @@ import com.liferay.portal.kernel.dao.orm.Order;
 import com.liferay.portal.kernel.dao.orm.OrderFactory;
 
 /**
- * <a href="ProjectionFactoryImpl.java.html"><b><i>View Source</i></b></a>
+ * <a href="OrderFactoryImpl.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *

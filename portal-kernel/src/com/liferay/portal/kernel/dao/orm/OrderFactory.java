@@ -23,7 +23,7 @@
 package com.liferay.portal.kernel.dao.orm;
 
 /**
- * <a href="ProjectionFactory.java.html"><b><i>View Source</i></b></a>
+ * <a href="OrderFactory.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *

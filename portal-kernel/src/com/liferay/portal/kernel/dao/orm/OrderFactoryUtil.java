@@ -25,7 +25,7 @@ package com.liferay.portal.kernel.dao.orm;
 import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
 
 /**
- * <a href="ProjectionFactoryUtil.java.html"><b><i>View Source</i></b></a>
+ * <a href="OrderFactoryUtil.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *
