@@ -22,66 +22,52 @@
 
 package com.liferay.portalweb.portal.util;
 
-import com.liferay.portalweb.portal.util.TestPropsValues;
+import com.liferay.util.ContextReplace;
 
-import com.thoughtworks.selenium.DefaultSelenium;
-import com.thoughtworks.selenium.Selenium;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
- * <a href="SeleniumUtil.java.html"><b><i>View Source</i></b></a>
+ * <a href="RuntimeVariables.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *
  */
-public class SeleniumUtil {
+public class RuntimeVariables {
 
-	public static Selenium getSelenium() {
-		return _instance._getSelenium();
+	public static String getValue(String key) {
+		return _instance._getValue(key);
 	}
 
-	public static void startSelenium() {
-		_instance._startSelenium();
+	public static String replace(String text) {
+		return _instance._replace(text);
 	}
 
-	public static void stopSelenium() {
-		_instance._stopSelenium();
+	public static void setValue(String key, String value) {
+		_instance._setValue(key, value);
 	}
 
-	private SeleniumUtil() {
+	private RuntimeVariables() {
 	}
 
-	private Selenium _getSelenium() {
-		if (_selenium == null) {
-			_startSelenium();
-		}
-
-		return _selenium;
+	private String _getValue(String key) {
+		return _runtimeVariables.get(key);
 	}
 
-	private void _startSelenium() {
-		String seleniumHost = TestPropsValues.SELENIUM_HOST;
-		int seleniumPort = TestPropsValues.SELENIUM_PORT;
-		String browserType = TestPropsValues.BROWSER_TYPE;
-		String portalURL = TestPropsValues.PORTAL_URL;
-
-		_selenium = new DefaultSelenium(
-			seleniumHost, seleniumPort, browserType, portalURL);
-
-		_selenium.start();
-
-		_selenium.setContext(this.getClass().getName());
+	private String _replace(String text) {
+		return _contextReplace.replace(text);
 	}
 
-	private void _stopSelenium() {
-		if (_selenium != null) {
-			_selenium.stop();
-		}
+	private void _setValue(String key, String value) {
+		_runtimeVariables.put(key, value);
 
-		_selenium = null;
+		_contextReplace = new ContextReplace(_runtimeVariables);
 	}
 
-	private static SeleniumUtil _instance = new SeleniumUtil();
+	private static RuntimeVariables _instance = new RuntimeVariables();
 
-	private Selenium _selenium;
+	private ContextReplace _contextReplace;
+	private Map<String, String> _runtimeVariables =
+		new HashMap<String, String>();
 
 }

@@ -147,6 +147,8 @@ public class SeleneseToJavaBuilder {
 
 		sb.append("import com.liferay.portal.kernel.util.StringPool;\n");
 		sb.append("import com.liferay.portalweb.portal.BaseTestCase;\n\n");
+		sb.append(
+			"import com.liferay.portalweb.portal.util.RuntimeVariables;\n\n");
 
 		sb.append("public class " + testName + " extends BaseTestCase {");
 
@@ -243,9 +245,9 @@ public class SeleneseToJavaBuilder {
 				sb.append(param1);
 				sb.append("(\"");
 				sb.append(param2);
-				sb.append("\", \"");
+				sb.append("\", RuntimeVariables.replace(\"");
 				sb.append(param3);
-				sb.append("\");");
+				sb.append("\"));");
 			}
 			else if (param1.equals("selectAndWait")) {
 				sb.append("selenium.select(\"");
@@ -261,6 +263,12 @@ public class SeleneseToJavaBuilder {
 				sb.append(" = selenium.getText(\"");
 				sb.append(param2);
 				sb.append("\");");
+
+				sb.append("RuntimeVariables.setValue(\"");
+				sb.append(param3);
+				sb.append("\", ");
+				sb.append(param3);
+				sb.append(");");
 			}
 			else if (param1.equals("verifyElementPresent") ||
 					 param1.equals("verifyElementNotPresent")) {

@@ -38,8 +38,8 @@ import com.liferay.portalweb.portlet.dictionary.DictionaryTests;
 import com.liferay.portalweb.portlet.directory.DirectoryTests;
 import com.liferay.portalweb.portlet.enterpriseadmin.EnterpriseAdminTests;
 import com.liferay.portalweb.portlet.flash.FlashTests;
-import com.liferay.portalweb.portlet.googlesearch.GoogleSearchTests;
 import com.liferay.portalweb.portlet.globalprayerdigest.GlobalPrayerDigestTests;
+import com.liferay.portalweb.portlet.googlesearch.GoogleSearchTests;
 import com.liferay.portalweb.portlet.gospelforasia.GospelForAsiaTests;
 import com.liferay.portalweb.portlet.hellovelocity.HelloVelocityTests;
 import com.liferay.portalweb.portlet.helloworld.HelloWorldTests;
@@ -65,7 +65,7 @@ import com.liferay.portalweb.portlet.randombibleverse.RandomBibleVerseTests;
 import com.liferay.portalweb.portlet.reverendfun.ReverendFunTests;
 import com.liferay.portalweb.portlet.rss.RSSTests;
 import com.liferay.portalweb.portlet.shopping.ShoppingTests;
-import com.liferay.portalweb.portlet.smstextmessenger.SMSTextMessengerTests;	 																		
+import com.liferay.portalweb.portlet.smstextmessenger.SMSTextMessengerTests;
 import com.liferay.portalweb.portlet.softwarecatalog.SoftwareCatalogTests;
 import com.liferay.portalweb.portlet.stocks.StocksTests;
 import com.liferay.portalweb.portlet.tagsadmin.TagsAdminTests;
@@ -73,7 +73,7 @@ import com.liferay.portalweb.portlet.unitconverter.UnitConverterTests;
 import com.liferay.portalweb.portlet.weather.WeatherTests;
 import com.liferay.portalweb.portlet.webform.WebFormTests;
 import com.liferay.portalweb.portlet.webproxy.WebProxyTests;
-import com.liferay.portalweb.portlet.words.WordsTests;													  
+import com.liferay.portalweb.portlet.words.WordsTests;
 import com.liferay.portalweb.portlet.xslcontent.XSLContentTests;
 
 /**
