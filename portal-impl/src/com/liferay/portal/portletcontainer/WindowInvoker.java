@@ -474,7 +474,7 @@ public class WindowInvoker extends InvokerPortlet {
 		containerRequest.setUserPrincipal(_userPrincipal);
 		containerRequest.setLocale(_getLocale(request));
 		containerRequest.setUserInfo(
-			UserInfoFactory.getUserInfo(request, _portletModel));
+			UserInfoFactory.getUserInfo(_remoteUserId, _portletModel));
 
 		containerRequest.setAttribute(
 			PortletRequest.CCPP_PROFILE, _getCCPPProfile(request));
