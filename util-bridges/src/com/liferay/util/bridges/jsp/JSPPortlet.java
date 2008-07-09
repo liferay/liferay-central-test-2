@@ -206,13 +206,7 @@ public class JSPPortlet extends LiferayPortlet {
 
 		if (clearRequestParameters) {
 			if (lifecycle.equals(PortletRequest.RENDER_PHASE)) {
-				LiferayPortletRequest liferayPortletRequest =
-					(LiferayPortletRequest)portletRequest;
-
-				Map<String, String[]> renderParameters =
-					liferayPortletRequest.getRenderParameters();
-
-				renderParameters.clear();
+				portletResponse.setProperty("clear-request-parameters", "true");
 			}
 		}
 	}

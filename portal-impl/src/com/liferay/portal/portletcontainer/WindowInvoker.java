@@ -91,6 +91,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Locale;
+import java.util.Map;
 
 import javax.ccpp.Profile;
 
@@ -274,6 +275,15 @@ public class WindowInvoker extends InvokerPortlet {
 			getMarkupRequest.setAllowableContentTypes(allowableContentTypes);
 
 			_container.getMarkup(getMarkupRequest, getMarkupResponse);
+
+			Map<String, List<String>> properties = 
+				getMarkupResponse.getStringProperties();
+
+			if(properties != null &&
+				properties.containsKey("clear-request-parameters")) {
+
+				getMarkupRequest.getRenderParameters().clear();
+			}
 
 			StringBuffer sb = getMarkupResponse.getMarkup();
 
