@@ -66,6 +66,10 @@
 						type="com.liferay.portal.dao.orm.hibernate.${serviceBuilder.getPrimitiveObj("${column.type}")}Type"
 					</#if>
 
+					<#if column.type == "Date">
+						type="org.hibernate.type.TimestampType"
+					</#if>
+
 					/>
 				</#if>
 			</#list>
