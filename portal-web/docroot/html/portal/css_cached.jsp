@@ -44,7 +44,7 @@ response.setContentType(ContentTypes.TEXT_CSS);
 	list-style: none;
 }
 
-.lfr-component li img {
+.lfr-component li img, img.icon {
 	vertical-align: middle;
 }
 
