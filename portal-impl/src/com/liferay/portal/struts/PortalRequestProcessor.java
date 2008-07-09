@@ -35,6 +35,7 @@ import com.liferay.portal.kernel.util.JavaConstants;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;
+import com.liferay.portal.liveusers.LiveUsers;
 import com.liferay.portal.model.Layout;
 import com.liferay.portal.model.LayoutConstants;
 import com.liferay.portal.model.Portlet;
@@ -51,7 +52,6 @@ import com.liferay.portal.service.PortletPreferencesLocalServiceUtil;
 import com.liferay.portal.service.permission.PortletPermissionUtil;
 import com.liferay.portal.service.persistence.UserTrackerPathUtil;
 import com.liferay.portal.theme.ThemeDisplay;
-import com.liferay.portal.util.LiveUsers;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PropsKeys;
 import com.liferay.portal.util.PropsUtil;
@@ -521,7 +521,8 @@ public class PortalRequestProcessor extends TilesRequestProcessor {
 
 		// Current users
 
-		UserTracker userTracker = LiveUsers.getUserTracker(session.getId());
+		UserTracker userTracker = LiveUsers.getUserTracker(
+			themeDisplay.getCompanyId(), session.getId());
 
 		if ((userTracker != null) && (path != null) &&
 			(!path.equals(_PATH_C)) &&
@@ -659,19 +660,6 @@ public class PortalRequestProcessor extends TilesRequestProcessor {
 			SessionErrors.add(request, UserActiveException.class.getName());
 
 			return _PATH_PORTAL_ERROR;
-		}
-
-		// Authenticated users may not be allowed to have simultaneous logins
-
-		if (!PropsValues.AUTH_SIMULTANEOUS_LOGINS) {
-			Boolean staleSession =
-				(Boolean)session.getAttribute(WebKeys.STALE_SESSION);
-
-			if ((user != null) && (staleSession != null) &&
-				(staleSession.booleanValue())) {
-
-				return _PATH_PORTAL_ERROR;
-			}
 		}
 
 		// Authenticated users must have a current password

@@ -38,6 +38,8 @@ public interface DestinationNames {
 	public static final String LAYOUTS_REMOTE_PUBLISHER =
 		"liferay/layouts_remote_publisher";
 
+	public static final String LIVE_USERS = "liferay/live_users";
+
 	public static final String MAIL = "liferay/mail";
 
 	public static final String MAIL_SYNCHRONIZER = "liferay/mail_synchronizer";

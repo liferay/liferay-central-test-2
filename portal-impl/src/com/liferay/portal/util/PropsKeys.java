@@ -114,8 +114,6 @@ public class PropsKeys {
 
 	public static final String AUTH_PUBLIC_PATHS = "auth.public.paths";
 
-	public static final String AUTH_SIMULTANEOUS_LOGINS = "auth.simultaneous.logins";
-
 	public static final String AUTO_DEPLOY_BLACKLIST_THRESHOLD = "auto.deploy.blacklist.threshold";
 
 	public static final String AUTO_DEPLOY_CUSTOM_PORTLET_XML = "auto.deploy.custom.portlet.xml";

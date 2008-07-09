@@ -24,10 +24,12 @@ package com.liferay.portal.servlet;
 
 import com.liferay.portal.events.EventsProcessor;
 import com.liferay.portal.kernel.events.ActionException;
+import com.liferay.portal.kernel.json.JSONFactoryUtil;
+import com.liferay.portal.kernel.json.JSONObject;
+import com.liferay.portal.kernel.messaging.DestinationNames;
+import com.liferay.portal.kernel.messaging.MessageBusUtil;
 import com.liferay.portal.model.User;
-import com.liferay.portal.security.auth.CompanyThreadLocal;
 import com.liferay.portal.service.UserLocalServiceUtil;
-import com.liferay.portal.util.LiveUsers;
 import com.liferay.portal.util.PortalInstances;
 import com.liferay.portal.util.PropsKeys;
 import com.liferay.portal.util.PropsValues;
@@ -39,6 +41,7 @@ import javax.servlet.http.HttpSessionListener;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.apache.struts.Globals;
 
 /**
  * <a href="PortalSessionListener.java.html"><b><i>View Source</i></b></a>
@@ -90,12 +93,20 @@ public class PortalSessionListener implements HttpSessionListener {
 			}
 
 			long userId = userIdObj.longValue();
+			long companyId = getCompanyId(userId);
+			String sessionId = session.getId();
 
-			if (CompanyThreadLocal.getCompanyId() == 0) {
-				setCompanyId(userId);
-			}
+			JSONObject jsonObj = JSONFactoryUtil.createJSONObject();
 
-			LiveUsers.signOut(session.getId(), userId);
+			jsonObj.put("command", "signOut");
+			jsonObj.put("companyId", companyId);
+			jsonObj.put("userId", userId);
+			jsonObj.put("sessionId", sessionId);
+
+			MessageBusUtil.sendMessage(
+				DestinationNames.LIVE_USERS, jsonObj.toString());
+
+			session.removeAttribute(Globals.LOCALE_KEY);
 		}
 		catch (IllegalStateException ise) {
 			_log.warn("Please upgrade to a servlet 2.4 compliant container");
@@ -118,7 +129,7 @@ public class PortalSessionListener implements HttpSessionListener {
 		}
 	}
 
-	protected void setCompanyId(long userId) throws Exception {
+	protected long getCompanyId(long userId) throws Exception {
 		long[] companyIds = PortalInstances.getCompanyIds();
 
 		long companyId = 0;
@@ -140,9 +151,7 @@ public class PortalSessionListener implements HttpSessionListener {
 			}
 		}
 
-		if (companyId > 0) {
-			CompanyThreadLocal.setCompanyId(companyId);
-		}
+		return companyId;
 	}
 
 	private static Log _log = LogFactory.getLog(PortalSessionListener.class);

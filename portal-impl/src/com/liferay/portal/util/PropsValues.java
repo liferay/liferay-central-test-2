@@ -107,10 +107,6 @@ public class PropsValues {
 		GetterUtil.getBoolean(
 			PropsUtil.get(PropsKeys.AUTH_PIPELINE_ENABLE_LIFERAY_CHECK));
 
-	public static final boolean AUTH_SIMULTANEOUS_LOGINS =
-		GetterUtil.getBoolean(
-			PropsUtil.get(PropsKeys.AUTH_SIMULTANEOUS_LOGINS));
-
 	public static final int AUTO_DEPLOY_BLACKLIST_THRESHOLD =
 		GetterUtil.getInteger(
 			PropsUtil.get(PropsKeys.AUTO_DEPLOY_BLACKLIST_THRESHOLD));

@@ -24,7 +24,12 @@ package com.liferay.portal.events;
 
 import com.liferay.portal.kernel.events.Action;
 import com.liferay.portal.kernel.events.ActionException;
-import com.liferay.portal.util.LiveUsers;
+import com.liferay.portal.kernel.json.JSONFactoryUtil;
+import com.liferay.portal.kernel.json.JSONObject;
+import com.liferay.portal.kernel.messaging.DestinationNames;
+import com.liferay.portal.kernel.messaging.MessageBusUtil;
+import com.liferay.portal.kernel.servlet.HttpHeaders;
+import com.liferay.portal.util.PortalUtil;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -52,10 +57,25 @@ public class LoginPostAction extends Action {
 
 			HttpSession session = request.getSession();
 
-			//long companyId = PortalUtil.getCompanyId(req);
-			//long userId = PortalUtil.getUserId(req);
+			long companyId = PortalUtil.getCompanyId(request);
+			long userId = PortalUtil.getUserId(request);
+			String sessionId = session.getId();
+			String remoteAddr = request.getRemoteAddr();
+			String remoteHost = request.getRemoteHost();
+			String userAgent = request.getHeader(HttpHeaders.USER_AGENT);
 
-			LiveUsers.signIn(request);
+			JSONObject jsonObj = JSONFactoryUtil.createJSONObject();
+
+			jsonObj.put("command", "signIn");
+			jsonObj.put("companyId", companyId);
+			jsonObj.put("userId", userId);
+			jsonObj.put("sessionId", sessionId);
+			jsonObj.put("remoteAddr", remoteAddr);
+			jsonObj.put("remoteHost", remoteHost);
+			jsonObj.put("userAgent", userAgent);
+
+			MessageBusUtil.sendMessage(
+				DestinationNames.LIVE_USERS, jsonObj.toString());
 
 			session.removeAttribute(Globals.LOCALE_KEY);
 		}

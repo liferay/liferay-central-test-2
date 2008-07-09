@@ -29,7 +29,7 @@ String redirect = ParamUtil.getString(request, "redirect");
 
 String sessionId = ParamUtil.getString(request, "sessionId");
 
-Map liveUsers = LiveUsers.getSessionUsers();
+Map liveUsers = LiveUsers.getSessionUsers(company.getCompanyId());
 
 UserTracker userTracker = (UserTracker)liveUsers.get(sessionId);
 

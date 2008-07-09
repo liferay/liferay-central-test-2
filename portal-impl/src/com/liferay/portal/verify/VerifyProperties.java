@@ -202,6 +202,7 @@ public class VerifyProperties extends VerifyProcess {
 	};
 
 	private static final String[] _OBSOLETE_PORTAL_KEYS = new String[] {
+		"auth.simultaneous.logins"
 	};
 
 	private static final String[] _OBSOLETE_SYSTEM_KEYS = new String[] {

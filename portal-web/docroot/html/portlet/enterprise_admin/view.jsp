@@ -506,7 +506,7 @@ request.setAttribute("view.jsp-portletURLString", portletURLString);
 
 				List results = new ArrayList();
 
-				Iterator itr = LiveUsers.getSessionUsers().entrySet().iterator();
+				Iterator itr = LiveUsers.getSessionUsers(company.getCompanyId()).entrySet().iterator();
 
 				while (itr.hasNext()) {
 					Map.Entry entry = (Map.Entry)itr.next();

@@ -30,12 +30,14 @@ import com.liferay.portal.RequiredGroupException;
 import com.liferay.portal.kernel.servlet.SessionErrors;
 import com.liferay.portal.kernel.util.Constants;
 import com.liferay.portal.kernel.util.ParamUtil;
+import com.liferay.portal.liveusers.LiveUsers;
 import com.liferay.portal.model.Group;
 import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.service.GroupServiceUtil;
 import com.liferay.portal.struts.PortletAction;
-import com.liferay.portal.util.LiveUsers;
+import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.PortalUtil;
+import com.liferay.portal.util.WebKeys;
 
 import javax.portlet.ActionRequest;
 import javax.portlet.ActionResponse;
@@ -124,14 +126,20 @@ public class EditGroupAction extends PortletAction {
 	}
 
 	protected void deleteGroup(ActionRequest actionRequest) throws Exception {
+		ThemeDisplay themeDisplay = (ThemeDisplay)actionRequest.getAttribute(
+			WebKeys.THEME_DISPLAY);
+
 		long groupId = ParamUtil.getLong(actionRequest, "groupId");
 
 		GroupServiceUtil.deleteGroup(groupId);
 
-		LiveUsers.deleteGroup(groupId);
+		LiveUsers.deleteGroup(themeDisplay.getCompanyId(), groupId);
 	}
 
 	protected void updateGroup(ActionRequest actionRequest) throws Exception {
+		ThemeDisplay themeDisplay = (ThemeDisplay)actionRequest.getAttribute(
+			WebKeys.THEME_DISPLAY);
+
 		long userId = PortalUtil.getUserId(actionRequest);
 
 		long groupId = ParamUtil.getLong(actionRequest, "groupId");
@@ -149,7 +157,8 @@ public class EditGroupAction extends PortletAction {
 			Group group = GroupServiceUtil.addGroup(
 				name, description, type, friendlyURL, active);
 
-			LiveUsers.joinGroup(userId, group.getGroupId());
+			LiveUsers.joinGroup(
+				themeDisplay.getCompanyId(), group.getGroupId(), userId);
 		}
 		else {
 

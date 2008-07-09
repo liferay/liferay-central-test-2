@@ -37,9 +37,11 @@ import com.liferay.portal.kernel.messaging.Destination;
 import com.liferay.portal.kernel.messaging.DestinationNames;
 import com.liferay.portal.kernel.messaging.MessageBusUtil;
 import com.liferay.portal.kernel.messaging.ParallelDestination;
+import com.liferay.portal.kernel.messaging.SerialDestination;
 import com.liferay.portal.kernel.scheduler.SchedulerEngineUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.ServerDetector;
+import com.liferay.portal.liveusers.messaging.LiveUsersMessageListener;
 import com.liferay.portal.pop.POPServerUtil;
 import com.liferay.portal.scheduler.SchedulerEngineImpl;
 import com.liferay.portal.scheduler.quartz.QuartzSchedulerEngineUtil;
@@ -234,6 +236,16 @@ public class GlobalStartupAction extends SimpleAction {
 	}
 
 	protected void populateMessageBus() {
+
+		// Live users
+
+		Destination liveUsersDestination = new SerialDestination(
+			DestinationNames.LIVE_USERS);
+
+		MessageBusUtil.addDestination(liveUsersDestination);
+
+		MessageBusUtil.registerMessageListener(
+			liveUsersDestination.getName(), new LiveUsersMessageListener());
 
 		// Mail
 

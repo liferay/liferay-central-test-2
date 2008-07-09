@@ -266,7 +266,7 @@ GroupSearch searchContainer = new GroupSearch(renderRequest, portletURL);
 
 		// Online Now
 
-		int onlineCount = LiveUsers.getGroupUsersCount(group.getGroupId());
+		int onlineCount = LiveUsers.getGroupUsersCount(company.getCompanyId(), group.getGroupId());
 
 		row.addText(String.valueOf(onlineCount));
 

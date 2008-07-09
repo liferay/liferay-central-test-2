@@ -48,16 +48,6 @@ public class UserTrackerImpl
 	public UserTrackerImpl() {
 	}
 
-	public HttpSession getHttpSession() {
-		return _session;
-	}
-
-	public void setHttpSession(HttpSession session) {
-		_session = session;
-
-		setSessionId(_session.getId());
-	}
-
 	public String getFullName() {
 		if (_fullName == null) {
 			try {

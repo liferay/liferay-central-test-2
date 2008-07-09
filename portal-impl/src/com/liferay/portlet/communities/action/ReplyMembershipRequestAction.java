@@ -27,12 +27,14 @@ import com.liferay.portal.NoSuchGroupException;
 import com.liferay.portal.kernel.servlet.SessionErrors;
 import com.liferay.portal.kernel.servlet.SessionMessages;
 import com.liferay.portal.kernel.util.ParamUtil;
+import com.liferay.portal.liveusers.LiveUsers;
 import com.liferay.portal.model.MembershipRequest;
 import com.liferay.portal.model.impl.MembershipRequestImpl;
 import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.service.MembershipRequestServiceUtil;
 import com.liferay.portal.struts.PortletAction;
-import com.liferay.portal.util.LiveUsers;
+import com.liferay.portal.theme.ThemeDisplay;
+import com.liferay.portal.util.WebKeys;
 
 import javax.portlet.ActionRequest;
 import javax.portlet.ActionResponse;
@@ -59,6 +61,9 @@ public class ReplyMembershipRequestAction extends PortletAction {
 		throws Exception {
 
 		try {
+			ThemeDisplay themeDisplay =
+				(ThemeDisplay)actionRequest.getAttribute(WebKeys.THEME_DISPLAY);
+
 			long membershipRequestId = ParamUtil.getLong(
 				actionRequest, "membershipRequestId");
 
@@ -75,8 +80,9 @@ public class ReplyMembershipRequestAction extends PortletAction {
 
 			if (statusId == MembershipRequestImpl.STATUS_APPROVED) {
 				LiveUsers.joinGroup(
-					new long[] {membershipRequest.getUserId()},
-					membershipRequest.getGroupId());
+					themeDisplay.getCompanyId(),
+					membershipRequest.getGroupId(),
+					new long[] {membershipRequest.getUserId()});
 			}
 
 			SessionMessages.add(actionRequest, "membership_reply_sent");
