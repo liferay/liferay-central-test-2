@@ -25,6 +25,9 @@ package com.liferay.portal.dao.orm.hibernate;
 import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 import com.liferay.portal.kernel.dao.orm.DynamicQueryFactory;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import org.hibernate.criterion.DetachedCriteria;
 
 /**
@@ -36,7 +39,33 @@ import org.hibernate.criterion.DetachedCriteria;
 public class DynamicQueryFactoryImpl implements DynamicQueryFactory {
 
 	public DynamicQuery forClass(Class clazz) {
+		clazz = getImplClass(clazz);
+
 		return new DynamicQueryImpl(DetachedCriteria.forClass(clazz));
 	}
+
+	protected Class getImplClass(Class clazz) {
+		if (!clazz.getName().endsWith("Impl")) {
+			String implClassName =
+				clazz.getPackage().getName() + ".impl." +
+					clazz.getSimpleName() + "Impl";
+
+			clazz = _classMap.get(implClassName);
+
+			if (clazz == null) {
+				try {
+					clazz = Class.forName(implClassName);
+
+					_classMap.put(implClassName, clazz);
+				}
+				catch (Exception e) {
+				}
+			}
+		}
+
+		return clazz;
+	}
+
+	private Map<String, Class> _classMap = new HashMap<String, Class>();
 
 }
