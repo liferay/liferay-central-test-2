@@ -61,8 +61,16 @@ public class StagingTests extends BaseTests {
 		addTestSuite(AddStagedPrivateCalendarTest.class);
 		addTestSuite(AddSecondPrivateEventTest.class);
 		addTestSuite(ConfirmNoPrivateEventTest.class);
-		addTestSuite(PublishPrivateEventToLiveTest.class);
-		addTestSuite(ConfirmPrivateEventOnLiveTest.class);
+		//addTestSuite(CreateRemoteTestCommunityTest.class);
+		//addTestSuite(StoreCommunityIDTest.class);
+		//addTestSuite(AssertNoSampleDataOnRemoteTest.class);
+		//addTestSuite(RemotePublishStagedPublicPagesTest.class);
+		//addTestSuite(VerifyPublicStagedRemotePublishingTest.class);
+		//addTestSuite(AddNewPrivateSamplePortletDataTest.class);
+		//addTestSuite(PublishNewPrivateSampleDataToLiveTest.class);
+		//addTestSuite(VerifyNewPrivateSampleDataTest.class);
+		//addTestSuite(RemotePublishStagedPrivatePagesTest.class);
+		//addTestSuite(VerifyRemotePublishStagedPrivatePagesTest.class);
 	}
 
 }
