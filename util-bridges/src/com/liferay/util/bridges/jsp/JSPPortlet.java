@@ -23,12 +23,9 @@
 package com.liferay.util.bridges.jsp;
 
 import com.liferay.portal.kernel.portlet.LiferayPortlet;
-import com.liferay.portal.kernel.portlet.LiferayPortletRequest;
 import com.liferay.portal.kernel.util.GetterUtil;
 
 import java.io.IOException;
-
-import java.util.Map;
 
 import javax.portlet.ActionRequest;
 import javax.portlet.ActionResponse;

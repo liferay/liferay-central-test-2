@@ -262,7 +262,6 @@ public class SeleneseToJavaBuilder {
 				sb.append(param2);
 				sb.append("\");");
 			}
-
 			else if (param1.equals("verifyElementPresent") ||
 					 param1.equals("verifyElementNotPresent")) {
 

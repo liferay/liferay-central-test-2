@@ -31,28 +31,29 @@ import com.liferay.portal.kernel.dao.orm.ProjectionList;
  * @author Brian Wing Shun Chan
  *
  */
-public class ProjectionListImpl extends ProjectionImpl
-	implements ProjectionList {
+public class ProjectionListImpl
+	extends ProjectionImpl implements ProjectionList {
 
 	public ProjectionListImpl(
-			org.hibernate.criterion.ProjectionList projectionList) {
+		org.hibernate.criterion.ProjectionList projectionList) {
+
 		super(projectionList);
 
 		_projectionList = projectionList;
 	}
 
 	public ProjectionList add(Projection projection, String alias) {
-		ProjectionImpl impl = (ProjectionImpl)projection;
+		ProjectionImpl projectionImpl = (ProjectionImpl)projection;
 
-		getProjectionList().add(impl.getProjection(), alias);
+		getProjectionList().add(projectionImpl.getProjection(), alias);
 
 		return this;
 	}
 
 	public ProjectionList add(Projection projection) {
-		ProjectionImpl impl = (ProjectionImpl)projection;
+		ProjectionImpl projectionImpl = (ProjectionImpl)projection;
 
-		getProjectionList().add(impl.getProjection());
+		getProjectionList().add(projectionImpl.getProjection());
 
 		return this;
 	}

@@ -276,11 +276,11 @@ public class WindowInvoker extends InvokerPortlet {
 
 			_container.getMarkup(getMarkupRequest, getMarkupResponse);
 
-			Map<String, List<String>> properties = 
+			Map<String, List<String>> properties =
 				getMarkupResponse.getStringProperties();
 
-			if(properties != null &&
-				properties.containsKey("clear-request-parameters")) {
+			if ((properties != null) &&
+				(properties.containsKey("clear-request-parameters"))) {
 
 				getMarkupRequest.getRenderParameters().clear();
 			}

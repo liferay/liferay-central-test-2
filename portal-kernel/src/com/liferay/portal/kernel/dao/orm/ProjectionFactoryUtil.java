@@ -52,6 +52,10 @@ public class ProjectionFactoryUtil {
 		return getProjectionFactory().distinct(projection);
 	}
 
+	public static ProjectionFactory getProjectionFactory() {
+		return _getUtil()._projectionFactory;
+	}
+
 	public static Projection groupProperty(String propertyName) {
 		return getProjectionFactory().groupProperty(propertyName);
 	}
@@ -78,10 +82,6 @@ public class ProjectionFactoryUtil {
 
 	public static Projection sum(String propertyName) {
 		return getProjectionFactory().sum(propertyName);
-	}
-
-	public static ProjectionFactory getProjectionFactory() {
-		return _getUtil()._projectionFactory;
 	}
 
 	public void setProjectionFactory(ProjectionFactory projectionFactory) {

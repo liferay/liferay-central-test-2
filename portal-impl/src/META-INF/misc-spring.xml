@@ -40,7 +40,6 @@
 			<ref bean="com.liferay.portal.dao.jdbc.spring.SqlUpdateFactoryImpl" />
 		</property>
 	</bean>
-
 	<bean id="com.liferay.portal.dao.jdbc.spring.MappingSqlQueryFactoryImpl" class="com.liferay.portal.dao.jdbc.spring.MappingSqlQueryFactoryImpl" lazy-init="true" />
 	<bean id="com.liferay.portal.kernel.dao.jdbc.MappingSqlQueryFactoryUtil" class="com.liferay.portal.kernel.dao.jdbc.MappingSqlQueryFactoryUtil" lazy-init="true">
 		<property name="mappingSqlQueryFactory">

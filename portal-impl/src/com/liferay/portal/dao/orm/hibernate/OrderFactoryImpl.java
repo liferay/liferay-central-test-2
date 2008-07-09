@@ -34,13 +34,11 @@ import com.liferay.portal.kernel.dao.orm.OrderFactory;
 public class OrderFactoryImpl implements OrderFactory {
 
 	public Order asc(String propertyName) {
-		return new OrderImpl(
-			org.hibernate.criterion.Order.asc(propertyName));
+		return new OrderImpl(org.hibernate.criterion.Order.asc(propertyName));
 	}
 
 	public Order desc(String propertyName) {
-		return new OrderImpl(
-			org.hibernate.criterion.Order.desc(propertyName));
+		return new OrderImpl(org.hibernate.criterion.Order.desc(propertyName));
 	}
 
 }
