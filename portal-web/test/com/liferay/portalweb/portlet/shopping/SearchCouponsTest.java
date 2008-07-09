@@ -23,6 +23,7 @@
 package com.liferay.portalweb.portlet.shopping;
 
 import com.liferay.portalweb.portal.BaseTestCase;
+import com.liferay.portalweb.portal.util.RuntimeVariables;
 
 /**
  * <a href="SearchCouponsTest.java.html"><b><i>View Source</i></b></a>
@@ -50,7 +51,8 @@ public class SearchCouponsTest extends BaseTestCase {
 
 		selenium.click("link=Coupons");
 		selenium.waitForPageToLoad("30000");
-		selenium.select("discountType", "label=Free Shipping");
+		selenium.select("discountType",
+			RuntimeVariables.replace("label=Free Shipping"));
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -88,7 +90,8 @@ public class SearchCouponsTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.select("discountType", "label=Percentage");
+		selenium.select("discountType",
+			RuntimeVariables.replace("label=Percentage"));
 		selenium.click("//input[@value='Search Coupons']");
 		selenium.waitForPageToLoad("30000");
 

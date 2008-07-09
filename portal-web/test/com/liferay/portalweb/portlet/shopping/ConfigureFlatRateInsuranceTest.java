@@ -23,6 +23,7 @@
 package com.liferay.portalweb.portlet.shopping;
 
 import com.liferay.portalweb.portal.BaseTestCase;
+import com.liferay.portalweb.portal.util.RuntimeVariables;
 
 /**
  * <a href="ConfigureFlatRateInsuranceTest.java.html"><b><i>View Source</i></b></a>
@@ -86,11 +87,11 @@ public class ConfigureFlatRateInsuranceTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.type("_86_insurance0", "2.00");
-		selenium.type("_86_insurance1", "3.00");
-		selenium.type("_86_insurance2", "5.00");
-		selenium.type("_86_insurance3", "10.00");
-		selenium.type("_86_insurance4", "20.00");
+		selenium.type("_86_insurance0", RuntimeVariables.replace("2.00"));
+		selenium.type("_86_insurance1", RuntimeVariables.replace("3.00"));
+		selenium.type("_86_insurance2", RuntimeVariables.replace("5.00"));
+		selenium.type("_86_insurance3", RuntimeVariables.replace("10.00"));
+		selenium.type("_86_insurance4", RuntimeVariables.replace("20.00"));
 		selenium.click("//input[@value='Save']");
 		selenium.waitForPageToLoad("30000");
 

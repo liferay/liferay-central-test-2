@@ -23,6 +23,7 @@
 package com.liferay.portalweb.portlet.enterpriseadmin;
 
 import com.liferay.portalweb.portal.BaseTestCase;
+import com.liferay.portalweb.portal.util.RuntimeVariables;
 
 /**
  * <a href="AddUserGroupTest.java.html"><b><i>View Source</i></b></a>
@@ -36,8 +37,9 @@ public class AddUserGroupTest extends BaseTestCase {
 		selenium.waitForPageToLoad("30000");
 		selenium.click("//input[@value='Add User Group']");
 		selenium.waitForPageToLoad("30000");
-		selenium.typeKeys("_79_name", "Selenium");
-		selenium.type("_79_description", "This is a selenium user group.");
+		selenium.typeKeys("_79_name", RuntimeVariables.replace("Selenium"));
+		selenium.type("_79_description",
+			RuntimeVariables.replace("This is a selenium user group."));
 		selenium.click("//input[@value='Save']");
 		selenium.waitForPageToLoad("30000");
 	}

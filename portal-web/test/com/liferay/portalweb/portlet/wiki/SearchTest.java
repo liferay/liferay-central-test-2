@@ -23,6 +23,7 @@
 package com.liferay.portalweb.portlet.wiki;
 
 import com.liferay.portalweb.portal.BaseTestCase;
+import com.liferay.portalweb.portal.util.RuntimeVariables;
 
 /**
  * <a href="SearchTest.java.html"><b><i>View Source</i></b></a>
@@ -32,7 +33,7 @@ import com.liferay.portalweb.portal.BaseTestCase;
  */
 public class SearchTest extends BaseTestCase {
 	public void testSearch() throws Exception {
-		selenium.type("_36_keywords", "test");
+		selenium.type("_36_keywords", RuntimeVariables.replace("test"));
 		selenium.click("//input[@value='Search']");
 		selenium.waitForPageToLoad("30000");
 		selenium.click("link=Main");

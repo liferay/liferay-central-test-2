@@ -23,6 +23,7 @@
 package com.liferay.portalweb.portlet.managepages;
 
 import com.liferay.portalweb.portal.BaseTestCase;
+import com.liferay.portalweb.portal.util.RuntimeVariables;
 
 /**
  * <a href="AddJavaScriptTest.java.html"><b><i>View Source</i></b></a>
@@ -34,10 +35,11 @@ public class AddJavaScriptTest extends BaseTestCase {
 	public void testAddJavaScript() throws Exception {
 		selenium.click("link=Manage Pages");
 		selenium.waitForPageToLoad("30000");
-		selenium.type("_88_title_en_US", "Home");
+		selenium.type("_88_title_en_US", RuntimeVariables.replace("Home"));
 		selenium.click("//tr[3]/td[2]/span/a/span[1]");
 		selenium.type("TypeSettingsProperties(javascript-1)",
-			"&lt;script type=\"text/javascript\"&gt; \n$layout.getTypeSettingsProperties().getProperty(\"javascript-1\") \n$layout.getTypeSettingsProperties().getProperty(\"javascript-2\") \n$layout.getTypeSettingsProperties().getProperty(\"javascript-3\") \n&lt;/script&gt;");
+			RuntimeVariables.replace(
+				"&lt;script type=\"text/javascript\"&gt; \n$layout.getTypeSettingsProperties().getProperty(\"javascript-1\") \n$layout.getTypeSettingsProperties().getProperty(\"javascript-2\") \n$layout.getTypeSettingsProperties().getProperty(\"javascript-3\") \n&lt;/script&gt;"));
 		selenium.click("//input[@value='Save']");
 		selenium.waitForPageToLoad("30000");
 

@@ -23,6 +23,7 @@
 package com.liferay.portalweb.portlet.bookmarks;
 
 import com.liferay.portalweb.portal.BaseTestCase;
+import com.liferay.portalweb.portal.util.RuntimeVariables;
 
 /**
  * <a href="SearchEntriesTest.java.html"><b><i>View Source</i></b></a>
@@ -67,8 +68,8 @@ public class SearchEntriesTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.typeKeys("_28_keywords1", "Test");
-		selenium.type("_28_keywords1", "Test");
+		selenium.typeKeys("_28_keywords1", RuntimeVariables.replace("Test"));
+		selenium.type("_28_keywords1", RuntimeVariables.replace("Test"));
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {

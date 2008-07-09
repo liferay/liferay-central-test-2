@@ -23,6 +23,7 @@
 package com.liferay.portalweb.portlet.staging;
 
 import com.liferay.portalweb.portal.BaseTestCase;
+import com.liferay.portalweb.portal.util.RuntimeVariables;
 
 /**
  * <a href="AddSecondPrivateEventTest.java.html"><b><i>View Source</i></b></a>
@@ -85,13 +86,17 @@ public class AddSecondPrivateEventTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.typeKeys("_8_title", "Star Wars Marathon!");
-		selenium.type("_8_title", "Star Wars Marathon!");
+		selenium.typeKeys("_8_title",
+			RuntimeVariables.replace("Star Wars Marathon!"));
+		selenium.type("_8_title",
+			RuntimeVariables.replace("Star Wars Marathon!"));
 		selenium.typeKeys("_8_description",
-			"This Star Wars Marathon event should be listed on the calendar on the LIVE and PRIVATE portion of this community. Next week: A Lord of the Rings Marathon!");
+			RuntimeVariables.replace(
+				"This Star Wars Marathon event should be listed on the calendar on the LIVE and PRIVATE portion of this community. Next week: A Lord of the Rings Marathon!"));
 		selenium.type("_8_description",
-			"This Star Wars Marathon event should be listed on the calendar on the LIVE and PRIVATE portion of this community. Next week: A Lord of the Rings Marathon!");
-		selenium.select("_8_type", "label=Movie");
+			RuntimeVariables.replace(
+				"This Star Wars Marathon event should be listed on the calendar on the LIVE and PRIVATE portion of this community. Next week: A Lord of the Rings Marathon!"));
+		selenium.select("_8_type", RuntimeVariables.replace("label=Movie"));
 		selenium.click("//input[@value='Save']");
 		selenium.waitForPageToLoad("30000");
 

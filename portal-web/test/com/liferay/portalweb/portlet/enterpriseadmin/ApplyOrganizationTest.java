@@ -23,6 +23,7 @@
 package com.liferay.portalweb.portlet.enterpriseadmin;
 
 import com.liferay.portalweb.portal.BaseTestCase;
+import com.liferay.portalweb.portal.util.RuntimeVariables;
 
 /**
  * <a href="ApplyOrganizationTest.java.html"><b><i>View Source</i></b></a>
@@ -33,13 +34,13 @@ import com.liferay.portalweb.portal.BaseTestCase;
 public class ApplyOrganizationTest extends BaseTestCase {
 	public void testApplyOrganization() throws Exception {
 		selenium.typeKeys("toggle_id_enterprise_admin_user_searchkeywords",
-			"selenium");
+			RuntimeVariables.replace("selenium"));
 		selenium.click("//input[@value='Search Users']");
 		selenium.waitForPageToLoad("30000");
 		selenium.click("link=Edit");
 		selenium.waitForPageToLoad("30000");
 		selenium.click("//input[@value='Select']");
-		selenium.waitForPopUp("organization", "30000");
+		selenium.waitForPopUp("organization", RuntimeVariables.replace("30000"));
 		selenium.selectWindow("organization");
 		selenium.click("link=Liferay, Inc.");
 		selenium.selectWindow("null");

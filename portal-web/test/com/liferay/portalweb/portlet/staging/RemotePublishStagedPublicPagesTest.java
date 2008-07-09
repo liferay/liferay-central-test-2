@@ -23,6 +23,7 @@
 package com.liferay.portalweb.portlet.staging;
 
 import com.liferay.portalweb.portal.BaseTestCase;
+import com.liferay.portalweb.portal.util.RuntimeVariables;
 
 /**
  * <a href="RemotePublishStagedPublicPagesTest.java.html"><b><i>View Source</i></b></a>
@@ -50,8 +51,8 @@ public class RemotePublishStagedPublicPagesTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.type("_58_login", "test@liferay.com");
-		selenium.type("_58_password", "test");
+		selenium.type("_58_login", RuntimeVariables.replace("test@liferay.com"));
+		selenium.type("_58_password", RuntimeVariables.replace("test"));
 		selenium.click("//input[@value='Sign In']");
 		selenium.waitForPageToLoad("30000");
 
@@ -202,7 +203,8 @@ public class RemotePublishStagedPublicPagesTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.type("_88_remoteAddress", "192.168.94.175");
+		selenium.type("_88_remoteAddress",
+			RuntimeVariables.replace("192.168.94.175"));
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -220,7 +222,8 @@ public class RemotePublishStagedPublicPagesTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.type("_88_remoteGroupId", "${GroupID}");
+		selenium.type("_88_remoteGroupId",
+			RuntimeVariables.replace("${GroupID}"));
 		selenium.click(
 			"//div[starts-with(@id, 'publish-to-remote')]/form[1]/ul[1]/li[1]/a");
 

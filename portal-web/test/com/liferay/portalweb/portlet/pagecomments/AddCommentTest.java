@@ -23,6 +23,7 @@
 package com.liferay.portalweb.portlet.pagecomments;
 
 import com.liferay.portalweb.portal.BaseTestCase;
+import com.liferay.portalweb.portal.util.RuntimeVariables;
 
 /**
  * <a href="AddCommentTest.java.html"><b><i>View Source</i></b></a>
@@ -66,8 +67,10 @@ public class AddCommentTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.typeKeys("_107_postReplyBody0", "This is a test page comment!");
-		selenium.type("_107_postReplyBody0", "This is a test page comment!");
+		selenium.typeKeys("_107_postReplyBody0",
+			RuntimeVariables.replace("This is a test page comment!"));
+		selenium.type("_107_postReplyBody0",
+			RuntimeVariables.replace("This is a test page comment!"));
 		selenium.click("_107_postReplyButton0");
 		selenium.waitForPageToLoad("30000");
 

@@ -23,6 +23,7 @@
 package com.liferay.portalweb.portlet.staging;
 
 import com.liferay.portalweb.portal.BaseTestCase;
+import com.liferay.portalweb.portal.util.RuntimeVariables;
 
 /**
  * <a href="AddNewPrivateSamplePortletDataTest.java.html"><b><i>View Source</i></b></a>
@@ -68,8 +69,8 @@ public class AddNewPrivateSamplePortletDataTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.type("_58_login", "test@liferay.com");
-		selenium.type("_58_password", "test");
+		selenium.type("_58_login", RuntimeVariables.replace("test@liferay.com"));
+		selenium.type("_58_password", RuntimeVariables.replace("test"));
 		selenium.click("//input[@value='Sign In']");
 		selenium.waitForPageToLoad("30000");
 
@@ -211,11 +212,15 @@ public class AddNewPrivateSamplePortletDataTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.type("_25_title", "Superman or Batman?!");
+		selenium.type("_25_title",
+			RuntimeVariables.replace("Superman or Batman?!"));
 		selenium.type("_25_description",
-			"Who could be the best superhero of them all?");
-		selenium.type("_25_choiceDescriptiona", "Superman");
-		selenium.type("_25_choiceDescriptionb", "Batman");
+			RuntimeVariables.replace(
+				"Who could be the best superhero of them all?"));
+		selenium.type("_25_choiceDescriptiona",
+			RuntimeVariables.replace("Superman"));
+		selenium.type("_25_choiceDescriptionb",
+			RuntimeVariables.replace("Batman"));
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -380,7 +385,7 @@ public class AddNewPrivateSamplePortletDataTest extends BaseTestCase {
 
 		selenium.click("//div[@id='portlet-small-icon-bar_33']/nobr[2]/a/img");
 		selenium.waitForPageToLoad("30000");
-		selenium.select("_86_pageDelta", "label=1");
+		selenium.select("_86_pageDelta", RuntimeVariables.replace("label=1"));
 		selenium.click("//input[@value='Save']");
 		selenium.waitForPageToLoad("30000");
 
@@ -441,8 +446,10 @@ public class AddNewPrivateSamplePortletDataTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.typeKeys("_15_title", "Article to be Published");
-		selenium.type("_15_title", "Article to be Published");
+		selenium.typeKeys("_15_title",
+			RuntimeVariables.replace("Article to be Published"));
+		selenium.type("_15_title",
+			RuntimeVariables.replace("Article to be Published"));
 		Thread.sleep(5000);
 
 		for (int second = 0;; second++) {
@@ -496,11 +503,16 @@ public class AddNewPrivateSamplePortletDataTest extends BaseTestCase {
 		selenium.selectFrame("//iframe[@id=\"_15_editor\"]");
 		selenium.selectFrame("//iframe[@id=\"FCKeditor1___Frame\"]");
 		selenium.selectFrame("//iframe");
-		selenium.typeKeys("//body", "This article needs to be published. Today!");
-		selenium.type("//body", "This article needs to be published. Today!");
+		selenium.typeKeys("//body",
+			RuntimeVariables.replace(
+				"This article needs to be published. Today!"));
+		selenium.type("//body",
+			RuntimeVariables.replace(
+				"This article needs to be published. Today!"));
 		selenium.selectFrame("relative=top");
-		selenium.type("_15_description", "Please publish me!");
-		selenium.select("_15_type", "label=Test");
+		selenium.type("_15_description",
+			RuntimeVariables.replace("Please publish me!"));
+		selenium.select("_15_type", RuntimeVariables.replace("label=Test"));
 		selenium.click("//input[@value='Save and Approve']");
 		selenium.waitForPageToLoad("30000");
 		selenium.click("link=Articles");

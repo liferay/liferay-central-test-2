@@ -23,6 +23,7 @@
 package com.liferay.portalweb.portlet.blogs;
 
 import com.liferay.portalweb.portal.BaseTestCase;
+import com.liferay.portalweb.portal.util.RuntimeVariables;
 
 /**
  * <a href="AddEntryCommentTest.java.html"><b><i>View Source</i></b></a>
@@ -35,8 +36,10 @@ public class AddEntryCommentTest extends BaseTestCase {
 		selenium.click("link=0 Comments");
 		selenium.waitForPageToLoad("30000");
 		selenium.click("link=Post Reply");
-		selenium.typeKeys("_33_postReplyBody0", "This is a test entry comment!");
-		selenium.type("_33_postReplyBody0", "This is a test entry comment!");
+		selenium.typeKeys("_33_postReplyBody0",
+			RuntimeVariables.replace("This is a test entry comment!"));
+		selenium.type("_33_postReplyBody0",
+			RuntimeVariables.replace("This is a test entry comment!"));
 		selenium.click("_33_postReplyButton0");
 		selenium.waitForPageToLoad("30000");
 

@@ -23,6 +23,7 @@
 package com.liferay.portalweb.portlet.rss;
 
 import com.liferay.portalweb.portal.BaseTestCase;
+import com.liferay.portalweb.portal.util.RuntimeVariables;
 
 /**
  * <a href="EditConfigurationTest.java.html"><b><i>View Source</i></b></a>
@@ -53,8 +54,9 @@ public class EditConfigurationTest extends BaseTestCase {
 		}
 
 		selenium.type("document._86_fm._86_url[3]",
-			"http://sitening.com/digg/rss/");
-		selenium.select("_86_entriesPerFeed", "label=4");
+			RuntimeVariables.replace("http://sitening.com/digg/rss/"));
+		selenium.select("_86_entriesPerFeed",
+			RuntimeVariables.replace("label=4"));
 		selenium.click("//input[@value='Save']");
 		selenium.waitForPageToLoad("30000");
 		selenium.click("link=Return to Full Page");

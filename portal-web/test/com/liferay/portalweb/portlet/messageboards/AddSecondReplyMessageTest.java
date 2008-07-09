@@ -23,6 +23,7 @@
 package com.liferay.portalweb.portlet.messageboards;
 
 import com.liferay.portalweb.portal.BaseTestCase;
+import com.liferay.portalweb.portal.util.RuntimeVariables;
 
 /**
  * <a href="AddSecondReplyMessageTest.java.html"><b><i>View Source</i></b></a>
@@ -85,8 +86,10 @@ public class AddSecondReplyMessageTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.typeKeys("_19_textArea", "This is a second reply message.");
-		selenium.type("_19_textArea", "This is a second reply message.");
+		selenium.typeKeys("_19_textArea",
+			RuntimeVariables.replace("This is a second reply message."));
+		selenium.type("_19_textArea",
+			RuntimeVariables.replace("This is a second reply message."));
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {

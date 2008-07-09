@@ -23,6 +23,7 @@
 package com.liferay.portalweb.portlet.loancalculator;
 
 import com.liferay.portalweb.portal.BaseTestCase;
+import com.liferay.portalweb.portal.util.RuntimeVariables;
 
 /**
  * <a href="CalculateLoanTest.java.html"><b><i>View Source</i></b></a>
@@ -32,9 +33,9 @@ import com.liferay.portalweb.portal.BaseTestCase;
  */
 public class CalculateLoanTest extends BaseTestCase {
 	public void testCalculateLoan() throws Exception {
-		selenium.type("_61_loanAmount", "1,000");
-		selenium.type("_61_interest", "4.75");
-		selenium.type("_61_years", "20");
+		selenium.type("_61_loanAmount", RuntimeVariables.replace("1,000"));
+		selenium.type("_61_interest", RuntimeVariables.replace("4.75"));
+		selenium.type("_61_years", RuntimeVariables.replace("20"));
 		selenium.click("//input[@value='Calculate']");
 
 		for (int second = 0;; second++) {

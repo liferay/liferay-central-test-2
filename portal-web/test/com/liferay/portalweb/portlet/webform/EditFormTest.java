@@ -23,6 +23,7 @@
 package com.liferay.portalweb.portlet.webform;
 
 import com.liferay.portalweb.portal.BaseTestCase;
+import com.liferay.portalweb.portal.util.RuntimeVariables;
 
 /**
  * <a href="EditFormTest.java.html"><b><i>View Source</i></b></a>
@@ -34,11 +35,13 @@ public class EditFormTest extends BaseTestCase {
 	public void testEditForm() throws Exception {
 		selenium.click("//img[@title='Configuration']");
 		selenium.waitForPageToLoad("30000");
-		selenium.type("_86_title", "Feed Back");
-		selenium.type("_86_description", "Please let us know what you think!");
-		selenium.type("_86_fieldLabel1", "Your Name");
-		selenium.type("_86_fieldLabel2", "Rate Us!");
-		selenium.type("_86_fieldLabel3", "Additional Comments");
+		selenium.type("_86_title", RuntimeVariables.replace("Feed Back"));
+		selenium.type("_86_description",
+			RuntimeVariables.replace("Please let us know what you think!"));
+		selenium.type("_86_fieldLabel1", RuntimeVariables.replace("Your Name"));
+		selenium.type("_86_fieldLabel2", RuntimeVariables.replace("Rate Us!"));
+		selenium.type("_86_fieldLabel3",
+			RuntimeVariables.replace("Additional Comments"));
 		selenium.click("//input[@value='Save']");
 		selenium.waitForPageToLoad("30000");
 		selenium.click("link=Return to Full Page");

@@ -23,6 +23,7 @@
 package com.liferay.portalweb.portlet.shopping;
 
 import com.liferay.portalweb.portal.BaseTestCase;
+import com.liferay.portalweb.portal.util.RuntimeVariables;
 
 /**
  * <a href="AddTemporaryItemTest.java.html"><b><i>View Source</i></b></a>
@@ -88,11 +89,13 @@ public class AddTemporaryItemTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.type("_34_sku", "2222");
-		selenium.type("_34_name", "The Prodigal Project - J. H.");
+		selenium.type("_34_sku", RuntimeVariables.replace("2222"));
+		selenium.type("_34_name",
+			RuntimeVariables.replace("The Prodigal Project - J. H."));
 		selenium.type("_34_description",
-			"For those on a journey, the end of which is faintly out of sight.");
-		selenium.type("_34_price0", "$2.99");
+			RuntimeVariables.replace(
+				"For those on a journey, the end of which is faintly out of sight."));
+		selenium.type("_34_price0", RuntimeVariables.replace("$2.99"));
 		selenium.click("//input[@value='Save']");
 		selenium.waitForPageToLoad("30000");
 

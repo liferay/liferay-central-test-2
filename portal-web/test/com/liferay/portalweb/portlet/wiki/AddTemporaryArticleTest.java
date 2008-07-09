@@ -23,6 +23,7 @@
 package com.liferay.portalweb.portlet.wiki;
 
 import com.liferay.portalweb.portal.BaseTestCase;
+import com.liferay.portalweb.portal.util.RuntimeVariables;
 
 /**
  * <a href="AddTemporaryArticleTest.java.html"><b><i>View Source</i></b></a>
@@ -67,7 +68,7 @@ public class AddTemporaryArticleTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.type("_36_title", "Delete Me!");
+		selenium.type("_36_title", RuntimeVariables.replace("Delete Me!"));
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -86,7 +87,8 @@ public class AddTemporaryArticleTest extends BaseTestCase {
 		}
 
 		selenium.type("_36_content",
-			"== Delete Me! ==\n\n=== Reasons Why to Delete Me ===\n\n#This is a test.\n#I don't like Star Wars.\n#I put my left sock on before my right sock.");
+			RuntimeVariables.replace(
+				"== Delete Me! ==\n\n=== Reasons Why to Delete Me ===\n\n#This is a test.\n#I don't like Star Wars.\n#I put my left sock on before my right sock."));
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {

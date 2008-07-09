@@ -23,6 +23,7 @@
 package com.liferay.portalweb.portlet.enterpriseadmin;
 
 import com.liferay.portalweb.portal.BaseTestCase;
+import com.liferay.portalweb.portal.util.RuntimeVariables;
 
 /**
  * <a href="AddRolesTest.java.html"><b><i>View Source</i></b></a>
@@ -53,9 +54,11 @@ public class AddRolesTest extends BaseTestCase {
 		selenium.click("//input[@value='Add Role']");
 		selenium.waitForPageToLoad("30000");
 		selenium.type("_79_name",
-			"1 Selenium Message Boards Role and Calendar Role");
+			RuntimeVariables.replace(
+				"1 Selenium Message Boards Role and Calendar Role"));
 		selenium.type("_79_description",
-			"This is the Selenium Message Boards and Calendar Role for Deleting and Updating.");
+			RuntimeVariables.replace(
+				"This is the Selenium Message Boards and Calendar Role for Deleting and Updating."));
 		selenium.click("//input[@value='Save']");
 		selenium.waitForPageToLoad("30000");
 		selenium.click("Link=Define Permissions");
@@ -83,9 +86,9 @@ public class AddRolesTest extends BaseTestCase {
 		selenium.click("link=Calendar");
 		selenium.waitForPageToLoad("30000");
 		selenium.select("_79_scopecom.liferay.portlet.calendar.model.CalEventDELETE",
-			"label=Enterprise");
+			RuntimeVariables.replace("label=Enterprise"));
 		selenium.select("_79_scopecom.liferay.portlet.calendar.model.CalEventUPDATE",
-			"label=Enterprise");
+			RuntimeVariables.replace("label=Enterprise"));
 		selenium.click("//input[@value='Save']");
 		selenium.waitForPageToLoad("30000");
 		selenium.click("link=Return to Full Page");
@@ -99,13 +102,13 @@ public class AddRolesTest extends BaseTestCase {
 		selenium.click("link=Blogs");
 		selenium.waitForPageToLoad("30000");
 		selenium.select("_79_scopecom.liferay.portlet.blogs.model.BlogsEntryUPDATE",
-			"label=Enterprise");
+			RuntimeVariables.replace("label=Enterprise"));
 		selenium.select("_79_scopecom.liferay.portlet.blogs.model.BlogsEntryDELETE",
-			"label=Enterprise");
+			RuntimeVariables.replace("label=Enterprise"));
 		selenium.select("_79_scopecom.liferay.portlet.blogs.model.BlogsEntryADD_DISCUSSION",
-			"label=Enterprise");
+			RuntimeVariables.replace("label=Enterprise"));
 		selenium.select("_79_scopecom.liferay.portlet.blogs.model.BlogsEntryDELETE_DISCUSSION",
-			"label=Enterprise");
+			RuntimeVariables.replace("label=Enterprise"));
 		selenium.click("//input[@value='Save']");
 		selenium.waitForPageToLoad("30000");
 		selenium.click("link=Return to Full Page");

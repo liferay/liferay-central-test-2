@@ -23,6 +23,7 @@
 package com.liferay.portalweb.portlet.bookmarks;
 
 import com.liferay.portalweb.portal.BaseTestCase;
+import com.liferay.portalweb.portal.util.RuntimeVariables;
 
 /**
  * <a href="AddSecondEntryTest.java.html"><b><i>View Source</i></b></a>
@@ -67,10 +68,12 @@ public class AddSecondEntryTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.type("_28_name", "Another Test Bookmark");
-		selenium.type("_28_url", "http://www.digg.com");
+		selenium.type("_28_name",
+			RuntimeVariables.replace("Another Test Bookmark"));
+		selenium.type("_28_url", RuntimeVariables.replace("http://www.digg.com"));
 		selenium.type("_28_comments",
-			"This is a test bookmark that will be deleted!");
+			RuntimeVariables.replace(
+				"This is a test bookmark that will be deleted!"));
 		selenium.click("//input[@value='Save']");
 		selenium.waitForPageToLoad("30000");
 

@@ -23,6 +23,7 @@
 package com.liferay.portalweb.portlet.shopping;
 
 import com.liferay.portalweb.portal.BaseTestCase;
+import com.liferay.portalweb.portal.util.RuntimeVariables;
 
 /**
  * <a href="AddSecondItemTest.java.html"><b><i>View Source</i></b></a>
@@ -91,12 +92,15 @@ public class AddSecondItemTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.type("_34_sku", "1112");
-		selenium.type("_34_name", "M. Saech - How to Play Guitar - for Dummies.");
+		selenium.type("_34_sku", RuntimeVariables.replace("1112"));
+		selenium.type("_34_name",
+			RuntimeVariables.replace(
+				"M. Saech - How to Play Guitar - for Dummies."));
 		selenium.type("_34_description",
-			"Noted guitarist and performer (for one) lays down how to thrash with the might battle axe of music.");
-		selenium.type("_34_price0", "$16.99");
-		selenium.type("_34_stockQuantity", "200");
+			RuntimeVariables.replace(
+				"Noted guitarist and performer (for one) lays down how to thrash with the might battle axe of music."));
+		selenium.type("_34_price0", RuntimeVariables.replace("$16.99"));
+		selenium.type("_34_stockQuantity", RuntimeVariables.replace("200"));
 		selenium.click("//input[@value='Save']");
 		selenium.waitForPageToLoad("30000");
 

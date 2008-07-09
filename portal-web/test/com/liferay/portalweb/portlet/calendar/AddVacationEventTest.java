@@ -23,6 +23,7 @@
 package com.liferay.portalweb.portlet.calendar;
 
 import com.liferay.portalweb.portal.BaseTestCase;
+import com.liferay.portalweb.portal.util.RuntimeVariables;
 
 /**
  * <a href="AddVacationEventTest.java.html"><b><i>View Source</i></b></a>
@@ -52,9 +53,10 @@ public class AddVacationEventTest extends BaseTestCase {
 		}
 
 		selenium.click("_8_timeZoneSensitiveCheckbox");
-		selenium.type("_8_title", "Off to Yosemite!");
-		selenium.type("_8_description", "Looking forward to camping!");
-		selenium.select("_8_type", "label=Vacation");
+		selenium.type("_8_title", RuntimeVariables.replace("Off to Yosemite!"));
+		selenium.type("_8_description",
+			RuntimeVariables.replace("Looking forward to camping!"));
+		selenium.select("_8_type", RuntimeVariables.replace("label=Vacation"));
 		selenium.click("//input[@value='Save']");
 		selenium.waitForPageToLoad("30000");
 

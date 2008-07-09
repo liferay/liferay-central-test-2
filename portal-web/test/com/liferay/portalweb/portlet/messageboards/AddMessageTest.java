@@ -23,6 +23,7 @@
 package com.liferay.portalweb.portlet.messageboards;
 
 import com.liferay.portalweb.portal.BaseTestCase;
+import com.liferay.portalweb.portal.util.RuntimeVariables;
 
 /**
  * <a href="AddMessageTest.java.html"><b><i>View Source</i></b></a>
@@ -37,11 +38,14 @@ public class AddMessageTest extends BaseTestCase {
 		selenium.waitForPageToLoad("30000");
 		selenium.click("//input[@value='Post New Thread']");
 		selenium.waitForPageToLoad("30000");
-		selenium.typeKeys("_19_subject", "T\u00e9st M\u00e9ssag\u00e9");
-		selenium.type("_19_subject", "T\u00e9st M\u00e9ssag\u00e9");
+		selenium.typeKeys("_19_subject",
+			RuntimeVariables.replace("T\u00e9st M\u00e9ssag\u00e9"));
+		selenium.type("_19_subject",
+			RuntimeVariables.replace("T\u00e9st M\u00e9ssag\u00e9"));
 		selenium.typeKeys("_19_textArea",
-			"This is a t\u00e9st m\u00e9ssag\u00e9!");
-		selenium.type("_19_textArea", "This is a t\u00e9st m\u00e9ssag\u00e9!");
+			RuntimeVariables.replace("This is a t\u00e9st m\u00e9ssag\u00e9!"));
+		selenium.type("_19_textArea",
+			RuntimeVariables.replace("This is a t\u00e9st m\u00e9ssag\u00e9!"));
 		selenium.click("//input[@value='Save']");
 		selenium.waitForPageToLoad("30000");
 

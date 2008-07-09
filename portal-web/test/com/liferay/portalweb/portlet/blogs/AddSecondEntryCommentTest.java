@@ -23,6 +23,7 @@
 package com.liferay.portalweb.portlet.blogs;
 
 import com.liferay.portalweb.portal.BaseTestCase;
+import com.liferay.portalweb.portal.util.RuntimeVariables;
 
 /**
  * <a href="AddSecondEntryCommentTest.java.html"><b><i>View Source</i></b></a>
@@ -36,8 +37,9 @@ public class AddSecondEntryCommentTest extends BaseTestCase {
 		selenium.waitForPageToLoad("30000");
 		selenium.click("link=Post Reply");
 		selenium.typeKeys("_33_postReplyBody0",
-			"This is a second entry comment!");
-		selenium.type("_33_postReplyBody0", "This is a second entry comment!");
+			RuntimeVariables.replace("This is a second entry comment!"));
+		selenium.type("_33_postReplyBody0",
+			RuntimeVariables.replace("This is a second entry comment!"));
 		selenium.click("_33_postReplyButton0");
 		selenium.waitForPageToLoad("30000");
 

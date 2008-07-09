@@ -23,6 +23,7 @@
 package com.liferay.portalweb.portlet.wiki;
 
 import com.liferay.portalweb.portal.BaseTestCase;
+import com.liferay.portalweb.portal.util.RuntimeVariables;
 
 /**
  * <a href="AddOrphanedArticlesTest.java.html"><b><i>View Source</i></b></a>
@@ -83,9 +84,10 @@ public class AddOrphanedArticlesTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.type("_36_title", "Link Me 1");
+		selenium.type("_36_title", RuntimeVariables.replace("Link Me 1"));
 		selenium.type("_36_content",
-			"Hi Administrator! Hope you are well! Please link me to another page!\n\n-testing");
+			RuntimeVariables.replace(
+				"Hi Administrator! Hope you are well! Please link me to another page!\n\n-testing"));
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -190,9 +192,10 @@ public class AddOrphanedArticlesTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.type("_36_title", "Link Me 2");
+		selenium.type("_36_title", RuntimeVariables.replace("Link Me 2"));
 		selenium.type("_36_content",
-			"Hi Administrator!\n\nI made another mistake! Oh me. Please link this article to another!\n\n-rj");
+			RuntimeVariables.replace(
+				"Hi Administrator!\n\nI made another mistake! Oh me. Please link this article to another!\n\n-rj"));
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {

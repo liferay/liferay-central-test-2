@@ -23,6 +23,7 @@
 package com.liferay.portalweb.portlet.recentbloggers;
 
 import com.liferay.portalweb.portal.BaseTestCase;
+import com.liferay.portalweb.portal.util.RuntimeVariables;
 
 /**
  * <a href="DisplayStylesTest.java.html"><b><i>View Source</i></b></a>
@@ -34,7 +35,8 @@ public class DisplayStylesTest extends BaseTestCase {
 	public void testDisplayStyles() throws Exception {
 		selenium.click("//img[@title='Configuration']");
 		selenium.waitForPageToLoad("30000");
-		selenium.select("_86_displayStyle", "label=User Name");
+		selenium.select("_86_displayStyle",
+			RuntimeVariables.replace("label=User Name"));
 		selenium.click("//input[@value='Save']");
 		selenium.waitForPageToLoad("30000");
 		selenium.click("link=Return to Full Page");

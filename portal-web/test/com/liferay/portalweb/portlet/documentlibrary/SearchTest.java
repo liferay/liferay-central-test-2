@@ -23,6 +23,7 @@
 package com.liferay.portalweb.portlet.documentlibrary;
 
 import com.liferay.portalweb.portal.BaseTestCase;
+import com.liferay.portalweb.portal.util.RuntimeVariables;
 
 /**
  * <a href="SearchTest.java.html"><b><i>View Source</i></b></a>
@@ -86,8 +87,9 @@ public class SearchTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.typeKeys("_20_keywords1", "Test Document");
-		selenium.type("_20_keywords1", "Test Document");
+		selenium.typeKeys("_20_keywords1",
+			RuntimeVariables.replace("Test Document"));
+		selenium.type("_20_keywords1", RuntimeVariables.replace("Test Document"));
 		selenium.click("//input[@value='Search File Entries']");
 		selenium.waitForPageToLoad("30000");
 

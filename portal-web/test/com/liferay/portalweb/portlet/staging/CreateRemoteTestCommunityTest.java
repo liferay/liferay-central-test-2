@@ -23,6 +23,7 @@
 package com.liferay.portalweb.portlet.staging;
 
 import com.liferay.portalweb.portal.BaseTestCase;
+import com.liferay.portalweb.portal.util.RuntimeVariables;
 
 /**
  * <a href="CreateRemoteTestCommunityTest.java.html"><b><i>View Source</i></b></a>
@@ -85,8 +86,8 @@ public class CreateRemoteTestCommunityTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.type("_58_login", "test@liferay.com");
-		selenium.type("_58_password", "test");
+		selenium.type("_58_login", RuntimeVariables.replace("test@liferay.com"));
+		selenium.type("_58_password", RuntimeVariables.replace("test"));
 		selenium.click("//input[@value='Sign In']");
 		selenium.waitForPageToLoad("30000");
 		selenium.click("//input[@value='I Agree']");
@@ -147,9 +148,11 @@ public class CreateRemoteTestCommunityTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.type("_29_name", "Remote Publishing Communitiy");
+		selenium.type("_29_name",
+			RuntimeVariables.replace("Remote Publishing Communitiy"));
 		selenium.type("_29_description",
-			"This community will be published to remotely.");
+			RuntimeVariables.replace(
+				"This community will be published to remotely."));
 		selenium.click("//input[@value='Save']");
 		selenium.waitForPageToLoad("30000");
 

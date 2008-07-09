@@ -23,6 +23,7 @@
 package com.liferay.portalweb.portlet.staging;
 
 import com.liferay.portalweb.portal.BaseTestCase;
+import com.liferay.portalweb.portal.util.RuntimeVariables;
 
 /**
  * <a href="StoreCommunityIDTest.java.html"><b><i>View Source</i></b></a>
@@ -74,6 +75,7 @@ public class StoreCommunityIDTest extends BaseTestCase {
 
 		String GroupID = selenium.getText(
 				"//div[@id='portlet-wrapper-29']/div[2]/div/div/form/table/tbody/tr[1]/td[2]");
+		RuntimeVariables.setValue("GroupID", GroupID);
 		selenium.click("link=Return to Full Page");
 		selenium.waitForPageToLoad("30000");
 	}

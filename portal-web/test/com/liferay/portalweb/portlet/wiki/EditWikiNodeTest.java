@@ -23,6 +23,7 @@
 package com.liferay.portalweb.portlet.wiki;
 
 import com.liferay.portalweb.portal.BaseTestCase;
+import com.liferay.portalweb.portal.util.RuntimeVariables;
 
 /**
  * <a href="EditWikiNodeTest.java.html"><b><i>View Source</i></b></a>
@@ -85,8 +86,10 @@ public class EditWikiNodeTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.type("_36_name", "Second Edited Wiki Test");
-		selenium.type("_36_description", "This is a second edited test wiki!");
+		selenium.type("_36_name",
+			RuntimeVariables.replace("Second Edited Wiki Test"));
+		selenium.type("_36_description",
+			RuntimeVariables.replace("This is a second edited test wiki!"));
 		selenium.click("//input[@value='Save']");
 		selenium.waitForPageToLoad("30000");
 

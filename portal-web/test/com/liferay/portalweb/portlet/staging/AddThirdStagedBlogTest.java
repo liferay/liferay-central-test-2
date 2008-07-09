@@ -23,6 +23,7 @@
 package com.liferay.portalweb.portlet.staging;
 
 import com.liferay.portalweb.portal.BaseTestCase;
+import com.liferay.portalweb.portal.util.RuntimeVariables;
 
 /**
  * <a href="AddThirdStagedBlogTest.java.html"><b><i>View Source</i></b></a>
@@ -68,8 +69,9 @@ public class AddThirdStagedBlogTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.typeKeys("_33_title", "Third Test Entry");
-		selenium.type("_33_title", "Third Test Entry");
+		selenium.typeKeys("_33_title",
+			RuntimeVariables.replace("Third Test Entry"));
+		selenium.type("_33_title", RuntimeVariables.replace("Third Test Entry"));
 		Thread.sleep(5000);
 
 		for (int second = 0;; second++) {
@@ -124,9 +126,11 @@ public class AddThirdStagedBlogTest extends BaseTestCase {
 		selenium.selectFrame("//iframe[@id=\"FCKeditor1___Frame\"]");
 		selenium.selectFrame("//iframe");
 		selenium.typeKeys("//body",
-			"This is a test shout out to the workers in the field!");
+			RuntimeVariables.replace(
+				"This is a test shout out to the workers in the field!"));
 		selenium.type("//body",
-			"This is a test shout out to the workers in the field!");
+			RuntimeVariables.replace(
+				"This is a test shout out to the workers in the field!"));
 		selenium.selectFrame("relative=top");
 
 		for (int second = 0;; second++) {

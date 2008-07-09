@@ -23,6 +23,7 @@
 package com.liferay.portalweb.portlet.messageboards;
 
 import com.liferay.portalweb.portal.BaseTestCase;
+import com.liferay.portalweb.portal.util.RuntimeVariables;
 
 /**
  * <a href="AddSubcategoryTest.java.html"><b><i>View Source</i></b></a>
@@ -36,11 +37,14 @@ public class AddSubcategoryTest extends BaseTestCase {
 		selenium.waitForPageToLoad("30000");
 		selenium.click("//input[@value='Add Subcategory']");
 		selenium.waitForPageToLoad("30000");
-		selenium.typeKeys("_19_name", "T\u00e9st Subcat\u00e9gory");
-		selenium.type("_19_name", "T\u00e9st Subcat\u00e9gory");
+		selenium.typeKeys("_19_name",
+			RuntimeVariables.replace("T\u00e9st Subcat\u00e9gory"));
+		selenium.type("_19_name",
+			RuntimeVariables.replace("T\u00e9st Subcat\u00e9gory"));
 		selenium.typeKeys("_19_description",
-			"This is a t\u00e9st subcat\u00e9gory!");
-		selenium.type("_19_description", "This is a t\u00e9st subcat\u00e9gory!");
+			RuntimeVariables.replace("This is a t\u00e9st subcat\u00e9gory!"));
+		selenium.type("_19_description",
+			RuntimeVariables.replace("This is a t\u00e9st subcat\u00e9gory!"));
 		selenium.click("//input[@value='Save']");
 		selenium.waitForPageToLoad("30000");
 

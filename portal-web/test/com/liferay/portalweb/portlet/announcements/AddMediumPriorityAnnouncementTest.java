@@ -23,6 +23,7 @@
 package com.liferay.portalweb.portlet.announcements;
 
 import com.liferay.portalweb.portal.BaseTestCase;
+import com.liferay.portalweb.portal.util.RuntimeVariables;
 
 /**
  * <a href="AddMediumPriorityAnnouncementTest.java.html"><b><i>View Source</i></b></a>
@@ -54,9 +55,11 @@ public class AddMediumPriorityAnnouncementTest extends BaseTestCase {
 		selenium.waitForPageToLoad("30000");
 		selenium.click("//input[@value='Add Entry']");
 		selenium.waitForPageToLoad("30000");
-		selenium.type("_84_title", "Medium Priority Announcement");
-		selenium.type("_84_url", "www.Liferay.com");
-		selenium.type("_84_content", "This is a medium priority announcement!");
+		selenium.type("_84_title",
+			RuntimeVariables.replace("Medium Priority Announcement"));
+		selenium.type("_84_url", RuntimeVariables.replace("www.Liferay.com"));
+		selenium.type("_84_content",
+			RuntimeVariables.replace("This is a medium priority announcement!"));
 		selenium.click("//input[@value='Save']");
 		selenium.waitForPageToLoad("30000");
 		selenium.click("link=Entries");

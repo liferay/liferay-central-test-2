@@ -23,6 +23,7 @@
 package com.liferay.portalweb.portlet.enterpriseadmin;
 
 import com.liferay.portalweb.portal.BaseTestCase;
+import com.liferay.portalweb.portal.util.RuntimeVariables;
 
 /**
  * <a href="EditSettingsTest.java.html"><b><i>View Source</i></b></a>
@@ -52,12 +53,13 @@ public class EditSettingsTest extends BaseTestCase {
 		selenium.waitForPageToLoad("30000");
 		selenium.click("link=Settings");
 		selenium.waitForPageToLoad("30000");
-		selenium.typeKeys("_79_tickerSymbol", "LRP");
-		selenium.typeKeys("_79_type", "Open Source");
+		selenium.typeKeys("_79_tickerSymbol", RuntimeVariables.replace("LRP"));
+		selenium.typeKeys("_79_type", RuntimeVariables.replace("Open Source"));
 		selenium.click("//input[@value='Add']");
 		selenium.waitForPageToLoad("30000");
-		selenium.type("_79_address", "admin@liferay.com");
-		selenium.select("_79_typeId", "label=E-mail");
+		selenium.type("_79_address",
+			RuntimeVariables.replace("admin@liferay.com"));
+		selenium.select("_79_typeId", RuntimeVariables.replace("label=E-mail"));
 		selenium.click("_79_primaryCheckbox");
 		selenium.click("//input[@value='Save']");
 		selenium.waitForPageToLoad("30000");

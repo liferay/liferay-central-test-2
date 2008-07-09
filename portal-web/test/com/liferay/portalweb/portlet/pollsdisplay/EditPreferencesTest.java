@@ -23,6 +23,7 @@
 package com.liferay.portalweb.portlet.pollsdisplay;
 
 import com.liferay.portalweb.portal.BaseTestCase;
+import com.liferay.portalweb.portal.util.RuntimeVariables;
 
 /**
  * <a href="EditPreferencesTest.java.html"><b><i>View Source</i></b></a>
@@ -34,7 +35,8 @@ public class EditPreferencesTest extends BaseTestCase {
 	public void testEditPreferences() throws Exception {
 		selenium.click("//img[@title='Configuration']");
 		selenium.waitForPageToLoad("30000");
-		selenium.select("_86_questionId", "label=Test Poll Question");
+		selenium.select("_86_questionId",
+			RuntimeVariables.replace("label=Test Poll Question"));
 		selenium.click("//input[@value='Save']");
 		selenium.waitForPageToLoad("30000");
 		selenium.click("link=Return to Full Page");

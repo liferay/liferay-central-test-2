@@ -23,6 +23,7 @@
 package com.liferay.portalweb.portlet.shopping;
 
 import com.liferay.portalweb.portal.BaseTestCase;
+import com.liferay.portalweb.portal.util.RuntimeVariables;
 
 /**
  * <a href="SaveCurrentSetupTest.java.html"><b><i>View Source</i></b></a>
@@ -86,7 +87,7 @@ public class SaveCurrentSetupTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.type("_86_name", "Test Setup");
+		selenium.type("_86_name", RuntimeVariables.replace("Test Setup"));
 		selenium.click("//input[@value='Save']");
 		selenium.waitForPageToLoad("30000");
 

@@ -23,6 +23,7 @@
 package com.liferay.portalweb.portlet.polls;
 
 import com.liferay.portalweb.portal.BaseTestCase;
+import com.liferay.portalweb.portal.util.RuntimeVariables;
 
 /**
  * <a href="ViewQuestionGraphsTest.java.html"><b><i>View Source</i></b></a>
@@ -35,7 +36,7 @@ public class ViewQuestionGraphsTest extends BaseTestCase {
 		selenium.click("link=Test Poll Question");
 		selenium.waitForPageToLoad("30000");
 		selenium.click("link=Area");
-		selenium.waitForPopUp("viewChart", "30000");
+		selenium.waitForPopUp("viewChart", RuntimeVariables.replace("30000"));
 		selenium.selectWindow("viewChartWindow");
 		selenium.close();
 		selenium.selectWindow("null");
@@ -57,7 +58,7 @@ public class ViewQuestionGraphsTest extends BaseTestCase {
 		}
 
 		selenium.click("link=Horizontal Bar");
-		selenium.waitForPopUp("viewChart", "30000");
+		selenium.waitForPopUp("viewChart", RuntimeVariables.replace("30000"));
 		selenium.selectWindow("viewChartWindow");
 		selenium.close();
 		selenium.selectWindow("null");
@@ -79,7 +80,7 @@ public class ViewQuestionGraphsTest extends BaseTestCase {
 		}
 
 		selenium.click("link=Line");
-		selenium.waitForPopUp("viewChart", "30000");
+		selenium.waitForPopUp("viewChart", RuntimeVariables.replace("30000"));
 		selenium.selectWindow("viewChartWindow");
 		selenium.close();
 		selenium.selectWindow("null");
@@ -101,7 +102,7 @@ public class ViewQuestionGraphsTest extends BaseTestCase {
 		}
 
 		selenium.click("link=Pie");
-		selenium.waitForPopUp("viewChart", "30000");
+		selenium.waitForPopUp("viewChart", RuntimeVariables.replace("30000"));
 		selenium.selectWindow("viewChartWindow");
 		selenium.close();
 		selenium.selectWindow("null");
@@ -123,7 +124,7 @@ public class ViewQuestionGraphsTest extends BaseTestCase {
 		}
 
 		selenium.click("link=Vertical Bar");
-		selenium.waitForPopUp("viewChart", "30000");
+		selenium.waitForPopUp("viewChart", RuntimeVariables.replace("30000"));
 		selenium.selectWindow("viewChartWindow");
 		selenium.close();
 		selenium.selectWindow("null");

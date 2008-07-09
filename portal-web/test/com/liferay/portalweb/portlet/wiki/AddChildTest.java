@@ -23,6 +23,7 @@
 package com.liferay.portalweb.portlet.wiki;
 
 import com.liferay.portalweb.portal.BaseTestCase;
+import com.liferay.portalweb.portal.util.RuntimeVariables;
 
 /**
  * <a href="AddChildTest.java.html"><b><i>View Source</i></b></a>
@@ -34,9 +35,10 @@ public class AddChildTest extends BaseTestCase {
 	public void testAddChild() throws Exception {
 		selenium.click("link=Add Child Page");
 		selenium.waitForPageToLoad("30000");
-		selenium.type("_36_title", "Test");
+		selenium.type("_36_title", RuntimeVariables.replace("Test"));
 		selenium.type("_36_content",
-			"==Test Child Article==\n\n//this is italics//\n\n**bold**\n\n[[http://www.liferay.com|Link to website]]\n\n*this is a list item\n**this is a sub list item");
+			RuntimeVariables.replace(
+				"==Test Child Article==\n\n//this is italics//\n\n**bold**\n\n[[http://www.liferay.com|Link to website]]\n\n*this is a list item\n**this is a sub list item"));
 		selenium.click("//input[@value='Save']");
 		selenium.waitForPageToLoad("30000");
 

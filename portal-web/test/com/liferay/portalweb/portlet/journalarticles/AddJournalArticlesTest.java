@@ -23,6 +23,7 @@
 package com.liferay.portalweb.portlet.journalarticles;
 
 import com.liferay.portalweb.portal.BaseTestCase;
+import com.liferay.portalweb.portal.util.RuntimeVariables;
 
 /**
  * <a href="AddJournalArticlesTest.java.html"><b><i>View Source</i></b></a>
@@ -67,10 +68,10 @@ public class AddJournalArticlesTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.select("_86_groupId", "label=Guest");
-		selenium.select("_86_type", "label=Blogs");
-		selenium.select("_86_pageURL", "label=Normal");
-		selenium.select("_86_pageDelta", "label=10");
+		selenium.select("_86_groupId", RuntimeVariables.replace("label=Guest"));
+		selenium.select("_86_type", RuntimeVariables.replace("label=Blogs"));
+		selenium.select("_86_pageURL", RuntimeVariables.replace("label=Normal"));
+		selenium.select("_86_pageDelta", RuntimeVariables.replace("label=10"));
 		selenium.click("//input[@value='Save']");
 		selenium.waitForPageToLoad("30000");
 		selenium.click("link=Return to Full Page");

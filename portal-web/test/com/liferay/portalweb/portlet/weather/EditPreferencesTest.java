@@ -23,6 +23,7 @@
 package com.liferay.portalweb.portlet.weather;
 
 import com.liferay.portalweb.portal.BaseTestCase;
+import com.liferay.portalweb.portal.util.RuntimeVariables;
 
 /**
  * <a href="EditPreferencesTest.java.html"><b><i>View Source</i></b></a>
@@ -52,7 +53,8 @@ public class EditPreferencesTest extends BaseTestCase {
 		}
 
 		selenium.type("_1_WAR_weatherportlet_zips",
-			"Chicago\nFrankfurt/Main\nRome, Italy\nDiamond Bar, California");
+			RuntimeVariables.replace(
+				"Chicago\nFrankfurt/Main\nRome, Italy\nDiamond Bar, California"));
 		selenium.click("//input[@value='Save']");
 		selenium.waitForPageToLoad("30000");
 		selenium.click("link=Return to Full Page");

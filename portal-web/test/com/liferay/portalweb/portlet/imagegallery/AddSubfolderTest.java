@@ -23,6 +23,7 @@
 package com.liferay.portalweb.portlet.imagegallery;
 
 import com.liferay.portalweb.portal.BaseTestCase;
+import com.liferay.portalweb.portal.util.RuntimeVariables;
 
 /**
  * <a href="AddSubfolderTest.java.html"><b><i>View Source</i></b></a>
@@ -36,9 +37,11 @@ public class AddSubfolderTest extends BaseTestCase {
 		selenium.waitForPageToLoad("30000");
 		selenium.click("//input[@value='Add Subfolder']");
 		selenium.waitForPageToLoad("30000");
-		selenium.type("_31_name", "Test Subfolder");
-		selenium.typeKeys("_31_description", "This is a test subfolder!");
-		selenium.type("_31_description", "This is a test subfolder!");
+		selenium.type("_31_name", RuntimeVariables.replace("Test Subfolder"));
+		selenium.typeKeys("_31_description",
+			RuntimeVariables.replace("This is a test subfolder!"));
+		selenium.type("_31_description",
+			RuntimeVariables.replace("This is a test subfolder!"));
 		selenium.click("//input[@value='Save']");
 		selenium.waitForPageToLoad("30000");
 

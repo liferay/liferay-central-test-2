@@ -23,6 +23,7 @@
 package com.liferay.portalweb.portlet.blogs;
 
 import com.liferay.portalweb.portal.BaseTestCase;
+import com.liferay.portalweb.portal.util.RuntimeVariables;
 
 /**
  * <a href="EditSecondCommentTest.java.html"><b><i>View Source</i></b></a>
@@ -66,7 +67,8 @@ public class EditSecondCommentTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.type("_33_editBody1", "This is an edited second entry comment!");
+		selenium.type("_33_editBody1",
+			RuntimeVariables.replace("This is an edited second entry comment!"));
 		selenium.click("_33_updateReplyButton1");
 		selenium.waitForPageToLoad("30000");
 

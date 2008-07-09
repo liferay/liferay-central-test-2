@@ -23,6 +23,7 @@
 package com.liferay.portalweb.portlet.directory;
 
 import com.liferay.portalweb.portal.BaseTestCase;
+import com.liferay.portalweb.portal.util.RuntimeVariables;
 
 /**
  * <a href="SearchOrganizationsTest.java.html"><b><i>View Source</i></b></a>
@@ -53,7 +54,7 @@ public class SearchOrganizationsTest extends BaseTestCase {
 		}
 
 		selenium.type("toggle_id_enterprise_admin_organization_searchkeywords",
-			"Liferay");
+			RuntimeVariables.replace("Liferay"));
 		selenium.click("//input[@value='Search Organizations']");
 		selenium.waitForPageToLoad("30000");
 

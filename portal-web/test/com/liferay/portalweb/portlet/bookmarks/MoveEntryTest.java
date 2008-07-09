@@ -23,6 +23,7 @@
 package com.liferay.portalweb.portlet.bookmarks;
 
 import com.liferay.portalweb.portal.BaseTestCase;
+import com.liferay.portalweb.portal.util.RuntimeVariables;
 
 /**
  * <a href="MoveEntryTest.java.html"><b><i>View Source</i></b></a>
@@ -52,7 +53,7 @@ public class MoveEntryTest extends BaseTestCase {
 		}
 
 		selenium.click("//input[@value='Select']");
-		selenium.waitForPopUp("folder", "30000");
+		selenium.waitForPopUp("folder", RuntimeVariables.replace("30000"));
 		selenium.selectWindow("folder");
 		selenium.click("//div[@id=\"p_p_id_28_\"]/div/form/div[1]/a[1]");
 		selenium.waitForPageToLoad("30000");

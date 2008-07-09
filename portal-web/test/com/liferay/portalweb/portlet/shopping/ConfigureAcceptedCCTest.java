@@ -23,6 +23,7 @@
 package com.liferay.portalweb.portlet.shopping;
 
 import com.liferay.portalweb.portal.BaseTestCase;
+import com.liferay.portalweb.portal.util.RuntimeVariables;
 
 /**
  * <a href="ConfigureAcceptedCCTest.java.html"><b><i>View Source</i></b></a>
@@ -67,9 +68,11 @@ public class ConfigureAcceptedCCTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.addSelection("_86_current_cc_types", "label=MasterCard");
+		selenium.addSelection("_86_current_cc_types",
+			RuntimeVariables.replace("label=MasterCard"));
 		selenium.click("//img[@onclick='self.focus();']");
-		selenium.addSelection("_86_current_cc_types", "label=American Express");
+		selenium.addSelection("_86_current_cc_types",
+			RuntimeVariables.replace("label=American Express"));
 		selenium.click("//img[@onclick='self.focus();']");
 
 		for (int second = 0;; second++) {

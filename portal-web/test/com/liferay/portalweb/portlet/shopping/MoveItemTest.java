@@ -23,6 +23,7 @@
 package com.liferay.portalweb.portlet.shopping;
 
 import com.liferay.portalweb.portal.BaseTestCase;
+import com.liferay.portalweb.portal.util.RuntimeVariables;
 
 /**
  * <a href="MoveItemTest.java.html"><b><i>View Source</i></b></a>
@@ -72,7 +73,7 @@ public class MoveItemTest extends BaseTestCase {
 		selenium.click("link=Edit");
 		selenium.waitForPageToLoad("30000");
 		selenium.click("//input[@value='Select']");
-		selenium.waitForPopUp("category", "30000");
+		selenium.waitForPopUp("category", RuntimeVariables.replace("30000"));
 		selenium.selectWindow("category");
 		selenium.click("link=Categories");
 		selenium.waitForPageToLoad("30000");
@@ -195,7 +196,7 @@ public class MoveItemTest extends BaseTestCase {
 		}
 
 		selenium.click("//input[@value='Select']");
-		selenium.waitForPopUp("category", "30000");
+		selenium.waitForPopUp("category", RuntimeVariables.replace("30000"));
 		selenium.selectWindow("category");
 		selenium.click("link=Categories");
 		selenium.waitForPageToLoad("30000");

@@ -23,6 +23,7 @@
 package com.liferay.portalweb.portlet.translator;
 
 import com.liferay.portalweb.portal.BaseTestCase;
+import com.liferay.portalweb.portal.util.RuntimeVariables;
 
 /**
  * <a href="TranslateGermanEnglishTest.java.html"><b><i>View Source</i></b></a>
@@ -32,9 +33,11 @@ import com.liferay.portalweb.portal.BaseTestCase;
  */
 public class TranslateGermanEnglishTest extends BaseTestCase {
 	public void testTranslateGermanEnglish() throws Exception {
-		selenium.select("_26_id", "label=German to English");
+		selenium.select("_26_id",
+			RuntimeVariables.replace("label=German to English"));
 		selenium.type("_26_text",
-			"Mein Name ist \u00dcbersetzer von Liferay, flie\u00dfender in mehr als 6 Millionen Kommunikationsformen.");
+			RuntimeVariables.replace(
+				"Mein Name ist \u00dcbersetzer von Liferay, flie\u00dfender in mehr als 6 Millionen Kommunikationsformen."));
 		selenium.click("//input[@value='Translate']");
 		selenium.waitForPageToLoad("30000");
 

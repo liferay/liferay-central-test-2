@@ -23,6 +23,7 @@
 package com.liferay.portalweb.portlet.messageboards;
 
 import com.liferay.portalweb.portal.BaseTestCase;
+import com.liferay.portalweb.portal.util.RuntimeVariables;
 
 /**
  * <a href="AddCategoryTest.java.html"><b><i>View Source</i></b></a>
@@ -51,11 +52,14 @@ public class AddCategoryTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.typeKeys("_19_name", "T\u00e9st Cat\u00e9gory");
-		selenium.type("_19_name", "T\u00e9st Cat\u00e9gory");
+		selenium.typeKeys("_19_name",
+			RuntimeVariables.replace("T\u00e9st Cat\u00e9gory"));
+		selenium.type("_19_name",
+			RuntimeVariables.replace("T\u00e9st Cat\u00e9gory"));
 		selenium.typeKeys("_19_description",
-			"This is a t\u00e9st cat\u00e9gory!");
-		selenium.type("_19_description", "This is a t\u00e9st cat\u00e9gory!");
+			RuntimeVariables.replace("This is a t\u00e9st cat\u00e9gory!"));
+		selenium.type("_19_description",
+			RuntimeVariables.replace("This is a t\u00e9st cat\u00e9gory!"));
 		selenium.click("//input[@value='Save']");
 		selenium.waitForPageToLoad("30000");
 

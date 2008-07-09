@@ -23,6 +23,7 @@
 package com.liferay.portalweb.portlet.unitconverter;
 
 import com.liferay.portalweb.portal.BaseTestCase;
+import com.liferay.portalweb.portal.util.RuntimeVariables;
 
 /**
  * <a href="ConvertUnitTest.java.html"><b><i>View Source</i></b></a>
@@ -32,9 +33,9 @@ import com.liferay.portalweb.portal.BaseTestCase;
  */
 public class ConvertUnitTest extends BaseTestCase {
 	public void testConvertUnit() throws Exception {
-		selenium.type("_27_fromValue", "1.0");
-		selenium.select("_27_fromId", "label=Inch");
-		selenium.select("_27_toId", "label=Centimeter");
+		selenium.type("_27_fromValue", RuntimeVariables.replace("1.0"));
+		selenium.select("_27_fromId", RuntimeVariables.replace("label=Inch"));
+		selenium.select("_27_toId", RuntimeVariables.replace("label=Centimeter"));
 		selenium.click("//input[@value='Convert']");
 
 		for (int second = 0;; second++) {

@@ -23,6 +23,7 @@
 package com.liferay.portalweb.portlet.shopping;
 
 import com.liferay.portalweb.portal.BaseTestCase;
+import com.liferay.portalweb.portal.util.RuntimeVariables;
 
 /**
  * <a href="ConfigureStateTaxTest.java.html"><b><i>View Source</i></b></a>
@@ -67,7 +68,7 @@ public class ConfigureStateTaxTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.type("_86_taxRate", "7.750%");
+		selenium.type("_86_taxRate", RuntimeVariables.replace("7.750%"));
 		selenium.click("//input[@value='Save']");
 		selenium.waitForPageToLoad("30000");
 

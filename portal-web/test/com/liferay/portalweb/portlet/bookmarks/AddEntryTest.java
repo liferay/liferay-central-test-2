@@ -23,6 +23,7 @@
 package com.liferay.portalweb.portlet.bookmarks;
 
 import com.liferay.portalweb.portal.BaseTestCase;
+import com.liferay.portalweb.portal.util.RuntimeVariables;
 
 /**
  * <a href="AddEntryTest.java.html"><b><i>View Source</i></b></a>
@@ -36,10 +37,13 @@ public class AddEntryTest extends BaseTestCase {
 		selenium.waitForPageToLoad("30000");
 		selenium.click("//input[@value='Add Entry']");
 		selenium.waitForPageToLoad("30000");
-		selenium.typeKeys("_28_name", "Test Bookmark");
-		selenium.type("_28_url", "http://www.liferay.com");
-		selenium.typeKeys("_28_comments", "This is a test bookmark!");
-		selenium.type("_28_comments", "This is a test bookmark!");
+		selenium.typeKeys("_28_name", RuntimeVariables.replace("Test Bookmark"));
+		selenium.type("_28_url",
+			RuntimeVariables.replace("http://www.liferay.com"));
+		selenium.typeKeys("_28_comments",
+			RuntimeVariables.replace("This is a test bookmark!"));
+		selenium.type("_28_comments",
+			RuntimeVariables.replace("This is a test bookmark!"));
 		selenium.click("//input[@value='Save']");
 		selenium.waitForPageToLoad("30000");
 

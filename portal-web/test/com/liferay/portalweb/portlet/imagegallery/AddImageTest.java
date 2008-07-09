@@ -23,6 +23,7 @@
 package com.liferay.portalweb.portlet.imagegallery;
 
 import com.liferay.portalweb.portal.BaseTestCase;
+import com.liferay.portalweb.portal.util.RuntimeVariables;
 
 /**
  * <a href="AddImageTest.java.html"><b><i>View Source</i></b></a>
@@ -72,7 +73,8 @@ public class AddImageTest extends BaseTestCase {
 		}
 
 		selenium.type("_31_file",
-			"L:\\portal\\build\\portal-web\\test\\com\\liferay\\portalweb\\portlet\\imagegallery\\test_image.jpg");
+			RuntimeVariables.replace(
+				"L:\\portal\\build\\portal-web\\test\\com\\liferay\\portalweb\\portlet\\imagegallery\\test_image.jpg"));
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -90,8 +92,9 @@ public class AddImageTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.type("_31_name", "test_image");
-		selenium.type("_31_description", "This is the Liferay logo!");
+		selenium.type("_31_name", RuntimeVariables.replace("test_image"));
+		selenium.type("_31_description",
+			RuntimeVariables.replace("This is the Liferay logo!"));
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {

@@ -23,6 +23,7 @@
 package com.liferay.portalweb.portlet.messageboards;
 
 import com.liferay.portalweb.portal.BaseTestCase;
+import com.liferay.portalweb.portal.util.RuntimeVariables;
 
 /**
  * <a href="AddThirdReplyMessageTest.java.html"><b><i>View Source</i></b></a>
@@ -69,8 +70,10 @@ public class AddThirdReplyMessageTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.typeKeys("_19_textArea", "This is a third reply message.");
-		selenium.type("_19_textArea", "This is a third reply message.");
+		selenium.typeKeys("_19_textArea",
+			RuntimeVariables.replace("This is a third reply message."));
+		selenium.type("_19_textArea",
+			RuntimeVariables.replace("This is a third reply message."));
 		selenium.click("//input[@value='Save']");
 		selenium.waitForPageToLoad("30000");
 

@@ -23,6 +23,7 @@
 package com.liferay.portalweb.portlet.managepages;
 
 import com.liferay.portalweb.portal.BaseTestCase;
+import com.liferay.portalweb.portal.util.RuntimeVariables;
 
 /**
  * <a href="AddChildPagesTest.java.html"><b><i>View Source</i></b></a>
@@ -55,7 +56,8 @@ public class AddChildPagesTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.type("_88_name_en_US", "Child Test Page");
+		selenium.type("_88_name_en_US",
+			RuntimeVariables.replace("Child Test Page"));
 		selenium.click("_88_inheritFromParentLayoutIdCheckbox");
 		selenium.click("_88_hiddenCheckbox");
 		selenium.click("//input[@value='Add Page']");
@@ -77,14 +79,16 @@ public class AddChildPagesTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.type("_88_name_en_US", "Child Test Page 2");
+		selenium.type("_88_name_en_US",
+			RuntimeVariables.replace("Child Test Page 2"));
 		selenium.click("_88_hiddenCheckbox");
 		selenium.click("_88_inheritFromParentLayoutIdCheckbox");
 		selenium.click("//input[@value='Add Page']");
 		selenium.waitForPageToLoad("30000");
 		selenium.click("link=Display Order");
 		selenium.waitForPageToLoad("30000");
-		selenium.select("_88_layoutIdsBox", "label=Child Test Page");
+		selenium.select("_88_layoutIdsBox",
+			RuntimeVariables.replace("label=Child Test Page"));
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {

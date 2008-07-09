@@ -23,6 +23,7 @@
 package com.liferay.portalweb.portlet.shopping;
 
 import com.liferay.portalweb.portal.BaseTestCase;
+import com.liferay.portalweb.portal.util.RuntimeVariables;
 
 /**
  * <a href="AddSecondCategoryTest.java.html"><b><i>View Source</i></b></a>
@@ -67,9 +68,10 @@ public class AddSecondCategoryTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.type("_34_name", "Video");
+		selenium.type("_34_name", RuntimeVariables.replace("Video"));
 		selenium.type("_34_description",
-			"VHS, DVD, BETA, LaserDisc, Bluray, HD-DVD. All in stock! All the time!");
+			RuntimeVariables.replace(
+				"VHS, DVD, BETA, LaserDisc, Bluray, HD-DVD. All in stock! All the time!"));
 		selenium.click("//input[@value='Save']");
 		selenium.waitForPageToLoad("30000");
 

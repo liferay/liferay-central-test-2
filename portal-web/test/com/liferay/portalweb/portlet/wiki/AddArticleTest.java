@@ -23,6 +23,7 @@
 package com.liferay.portalweb.portlet.wiki;
 
 import com.liferay.portalweb.portal.BaseTestCase;
+import com.liferay.portalweb.portal.util.RuntimeVariables;
 
 /**
  * <a href="AddArticleTest.java.html"><b><i>View Source</i></b></a>
@@ -52,7 +53,8 @@ public class AddArticleTest extends BaseTestCase {
 		}
 
 		selenium.type("_36_content",
-			"==Test Wiki Article==\n\n//this is italics//\n\n**bold**\n\n[[http://www.liferay.com|Link to website]]\n\n*this is a list item\n**this is a sub list item");
+			RuntimeVariables.replace(
+				"==Test Wiki Article==\n\n//this is italics//\n\n**bold**\n\n[[http://www.liferay.com|Link to website]]\n\n*this is a list item\n**this is a sub list item"));
 		selenium.click("//input[@value='Save']");
 		selenium.waitForPageToLoad("30000");
 

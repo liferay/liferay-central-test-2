@@ -23,6 +23,7 @@
 package com.liferay.portalweb.portlet.bookmarks;
 
 import com.liferay.portalweb.portal.BaseTestCase;
+import com.liferay.portalweb.portal.util.RuntimeVariables;
 
 /**
  * <a href="ImportLARTest.java.html"><b><i>View Source</i></b></a>
@@ -106,7 +107,8 @@ public class ImportLARTest extends BaseTestCase {
 		}
 
 		selenium.type("_86_importFileName",
-			"L:\\portal\\build\\portal-web\\test\\com\\liferay\\portalweb\\portlet\\bookmarks\\Bookmarks-Selenium.portlet.lar");
+			RuntimeVariables.replace(
+				"L:\\portal\\build\\portal-web\\test\\com\\liferay\\portalweb\\portlet\\bookmarks\\Bookmarks-Selenium.portlet.lar"));
 		selenium.click("_86_DELETE_PORTLET_DATA");
 
 		for (int second = 0;; second++) {

@@ -23,6 +23,7 @@
 package com.liferay.portalweb.portlet.announcements;
 
 import com.liferay.portalweb.portal.BaseTestCase;
+import com.liferay.portalweb.portal.util.RuntimeVariables;
 
 /**
  * <a href="AddGeneralAnnouncementTest.java.html"><b><i>View Source</i></b></a>
@@ -71,10 +72,12 @@ public class AddGeneralAnnouncementTest extends BaseTestCase {
 
 		selenium.click("//input[@value='Add Entry']");
 		selenium.waitForPageToLoad("30000");
-		selenium.type("_84_title", "Test General Announcement");
-		selenium.type("_84_url", "www.liferay.com");
+		selenium.type("_84_title",
+			RuntimeVariables.replace("Test General Announcement"));
+		selenium.type("_84_url", RuntimeVariables.replace("www.liferay.com"));
 		selenium.type("_84_content",
-			"Hello Everyone! This is a test general announcement for everyone! Yay.");
+			RuntimeVariables.replace(
+				"Hello Everyone! This is a test general announcement for everyone! Yay."));
 		selenium.click("//input[@value='Save']");
 		selenium.waitForPageToLoad("30000");
 		selenium.click("link=Entries");

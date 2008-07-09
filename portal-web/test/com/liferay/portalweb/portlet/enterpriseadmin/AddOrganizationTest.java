@@ -23,6 +23,7 @@
 package com.liferay.portalweb.portlet.enterpriseadmin;
 
 import com.liferay.portalweb.portal.BaseTestCase;
+import com.liferay.portalweb.portal.util.RuntimeVariables;
 
 /**
  * <a href="AddOrganizationTest.java.html"><b><i>View Source</i></b></a>
@@ -36,8 +37,8 @@ public class AddOrganizationTest extends BaseTestCase {
 		selenium.waitForPageToLoad("30000");
 		selenium.click("//input[@value='Add Organization']");
 		selenium.waitForPageToLoad("30000");
-		selenium.typeKeys("_79_name", "Selenium");
-		selenium.type("_79_name", "Selenium");
+		selenium.typeKeys("_79_name", RuntimeVariables.replace("Selenium"));
+		selenium.type("_79_name", RuntimeVariables.replace("Selenium"));
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -87,20 +88,24 @@ public class AddOrganizationTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.select("_79_type", "label=Regular");
-		selenium.select("_79_countryId", "label=United States");
+		selenium.select("_79_type", RuntimeVariables.replace("label=Regular"));
+		selenium.select("_79_countryId",
+			RuntimeVariables.replace("label=United States"));
 		Thread.sleep(5000);
-		selenium.select("_79_regionId", "label=California");
+		selenium.select("_79_regionId",
+			RuntimeVariables.replace("label=California"));
 		selenium.click("//input[@value='Save']");
 		selenium.waitForPageToLoad("30000");
 		selenium.click("//input[@value='Add']");
 		selenium.waitForPageToLoad("30000");
-		selenium.type("_79_address", "Selenium@selenium.com");
-		selenium.select("_79_typeId", "label=E-mail");
+		selenium.type("_79_address",
+			RuntimeVariables.replace("Selenium@selenium.com"));
+		selenium.select("_79_typeId", RuntimeVariables.replace("label=E-mail"));
 		selenium.click("_79_primaryCheckbox");
 		selenium.click("//input[@value='Save']");
 		selenium.waitForPageToLoad("30000");
-		selenium.type("_79_comments", "This is a test comment!");
+		selenium.type("_79_comments",
+			RuntimeVariables.replace("This is a test comment!"));
 		selenium.click("//input[@value='Save']");
 		selenium.waitForPageToLoad("30000");
 		selenium.click("link=Return to Full Page");

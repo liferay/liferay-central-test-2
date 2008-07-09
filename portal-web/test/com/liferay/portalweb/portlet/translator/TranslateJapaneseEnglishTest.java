@@ -23,6 +23,7 @@
 package com.liferay.portalweb.portlet.translator;
 
 import com.liferay.portalweb.portal.BaseTestCase;
+import com.liferay.portalweb.portal.util.RuntimeVariables;
 
 /**
  * <a href="TranslateJapaneseEnglishTest.java.html"><b><i>View Source</i></b></a>
@@ -32,9 +33,11 @@ import com.liferay.portalweb.portal.BaseTestCase;
  */
 public class TranslateJapaneseEnglishTest extends BaseTestCase {
 	public void testTranslateJapaneseEnglish() throws Exception {
-		selenium.select("_26_id", "label=Japanese to English");
+		selenium.select("_26_id",
+			RuntimeVariables.replace("label=Japanese to English"));
 		selenium.type("_26_text",
-			"\u79c1\u306e\u540d\u524d\u306f\u30b3\u30df\u30e5\u30cb\u30b1\u30fc\u30b7\u30e7\u30f3\u306e6,000,000 \u306e\u5f62\u614b\u306b\u6d41\u66a2\u306aLiferay \u306e\u8a33\u8005\u3067\u3042\u308b\u3002");
+			RuntimeVariables.replace(
+				"\u79c1\u306e\u540d\u524d\u306f\u30b3\u30df\u30e5\u30cb\u30b1\u30fc\u30b7\u30e7\u30f3\u306e6,000,000 \u306e\u5f62\u614b\u306b\u6d41\u66a2\u306aLiferay \u306e\u8a33\u8005\u3067\u3042\u308b\u3002"));
 		selenium.click("//input[@value='Translate']");
 		selenium.waitForPageToLoad("30000");
 

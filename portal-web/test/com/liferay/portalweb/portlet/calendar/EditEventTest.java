@@ -23,6 +23,7 @@
 package com.liferay.portalweb.portlet.calendar;
 
 import com.liferay.portalweb.portal.BaseTestCase;
+import com.liferay.portalweb.portal.util.RuntimeVariables;
 
 /**
  * <a href="EditEventTest.java.html"><b><i>View Source</i></b></a>
@@ -67,10 +68,11 @@ public class EditEventTest extends BaseTestCase {
 		}
 
 		selenium.type("_8_description",
-			"This is a test event! This test event has been edited.");
-		selenium.type("_8_title", "Edited Test Event");
-		selenium.select("_8_startDateHour", "label=5");
-		selenium.select("_8_startDateAmPm", "label=AM");
+			RuntimeVariables.replace(
+				"This is a test event! This test event has been edited."));
+		selenium.type("_8_title", RuntimeVariables.replace("Edited Test Event"));
+		selenium.select("_8_startDateHour", RuntimeVariables.replace("label=5"));
+		selenium.select("_8_startDateAmPm", RuntimeVariables.replace("label=AM"));
 		selenium.click("//input[@value='Save']");
 		selenium.waitForPageToLoad("30000");
 

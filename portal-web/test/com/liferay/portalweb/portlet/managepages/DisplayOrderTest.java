@@ -23,6 +23,7 @@
 package com.liferay.portalweb.portlet.managepages;
 
 import com.liferay.portalweb.portal.BaseTestCase;
+import com.liferay.portalweb.portal.util.RuntimeVariables;
 
 /**
  * <a href="DisplayOrderTest.java.html"><b><i>View Source</i></b></a>
@@ -38,7 +39,8 @@ public class DisplayOrderTest extends BaseTestCase {
 		selenium.waitForPageToLoad("30000");
 		selenium.click("link=Display Order");
 		selenium.waitForPageToLoad("30000");
-		selenium.select("_88_layoutIdsBox", "label=Child Test Page 2");
+		selenium.select("_88_layoutIdsBox",
+			RuntimeVariables.replace("label=Child Test Page 2"));
 		selenium.click("//td[2]/a[1]/img");
 		selenium.click("//a[3]/img");
 		selenium.click("//input[@value='Update Display Order']");

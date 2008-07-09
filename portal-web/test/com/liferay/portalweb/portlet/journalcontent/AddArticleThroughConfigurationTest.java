@@ -23,6 +23,7 @@
 package com.liferay.portalweb.portlet.journalcontent;
 
 import com.liferay.portalweb.portal.BaseTestCase;
+import com.liferay.portalweb.portal.util.RuntimeVariables;
 
 /**
  * <a href="AddArticleThroughConfigurationTest.java.html"><b><i>View Source</i></b></a>
@@ -68,7 +69,8 @@ public class AddArticleThroughConfigurationTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.type("_15_title", "Test Journal Article 3");
+		selenium.type("_15_title",
+			RuntimeVariables.replace("Test Journal Article 3"));
 		Thread.sleep(5000);
 
 		for (int second = 0;; second++) {
@@ -122,8 +124,10 @@ public class AddArticleThroughConfigurationTest extends BaseTestCase {
 		selenium.selectFrame("//iframe[@id=\"_15_editor\"]");
 		selenium.selectFrame("//iframe[@id=\"FCKeditor1___Frame\"]");
 		selenium.selectFrame("//iframe");
-		selenium.typeKeys("//body", "This is a third journal article!");
-		selenium.type("//body", "This is a third journal article!");
+		selenium.typeKeys("//body",
+			RuntimeVariables.replace("This is a third journal article!"));
+		selenium.type("//body",
+			RuntimeVariables.replace("This is a third journal article!"));
 		selenium.selectFrame("relative=top");
 
 		for (int second = 0;; second++) {

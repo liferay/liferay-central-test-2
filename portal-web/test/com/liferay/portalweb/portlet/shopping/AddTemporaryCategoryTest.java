@@ -23,6 +23,7 @@
 package com.liferay.portalweb.portlet.shopping;
 
 import com.liferay.portalweb.portal.BaseTestCase;
+import com.liferay.portalweb.portal.util.RuntimeVariables;
 
 /**
  * <a href="AddTemporaryCategoryTest.java.html"><b><i>View Source</i></b></a>
@@ -67,8 +68,9 @@ public class AddTemporaryCategoryTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.type("_34_name", "Horses");
-		selenium.type("_34_description", "Horses for sale here!");
+		selenium.type("_34_name", RuntimeVariables.replace("Horses"));
+		selenium.type("_34_description",
+			RuntimeVariables.replace("Horses for sale here!"));
 		selenium.click("//input[@value='Save']");
 		selenium.waitForPageToLoad("30000");
 

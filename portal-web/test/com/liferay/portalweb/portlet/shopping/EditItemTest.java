@@ -23,6 +23,7 @@
 package com.liferay.portalweb.portlet.shopping;
 
 import com.liferay.portalweb.portal.BaseTestCase;
+import com.liferay.portalweb.portal.util.RuntimeVariables;
 
 /**
  * <a href="EditItemTest.java.html"><b><i>View Source</i></b></a>
@@ -88,9 +89,9 @@ public class EditItemTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.type("_34_stockQuantity", "250");
-		selenium.type("_34_price0", "$11.99");
-		selenium.type("_34_shipping0", "$2.50");
+		selenium.type("_34_stockQuantity", RuntimeVariables.replace("250"));
+		selenium.type("_34_price0", RuntimeVariables.replace("$11.99"));
+		selenium.type("_34_shipping0", RuntimeVariables.replace("$2.50"));
 		selenium.click("//input[@value='Save']");
 		selenium.waitForPageToLoad("30000");
 

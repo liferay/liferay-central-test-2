@@ -23,6 +23,7 @@
 package com.liferay.portalweb.portlet.iframe;
 
 import com.liferay.portalweb.portal.BaseTestCase;
+import com.liferay.portalweb.portal.util.RuntimeVariables;
 
 /**
  * <a href="AddIFrameSourceTest.java.html"><b><i>View Source</i></b></a>
@@ -34,7 +35,7 @@ public class AddIFrameSourceTest extends BaseTestCase {
 	public void testAddIFrameSource() throws Exception {
 		selenium.click("//img[@title='Configuration']");
 		selenium.waitForPageToLoad("30000");
-		selenium.type("_86_src", "www.liferay.com");
+		selenium.type("_86_src", RuntimeVariables.replace("www.liferay.com"));
 		selenium.click("//input[@value='Save']");
 		selenium.waitForPageToLoad("30000");
 		selenium.click("link=Return to Full Page");

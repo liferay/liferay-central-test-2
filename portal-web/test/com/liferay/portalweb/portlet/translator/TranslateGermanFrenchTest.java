@@ -23,6 +23,7 @@
 package com.liferay.portalweb.portlet.translator;
 
 import com.liferay.portalweb.portal.BaseTestCase;
+import com.liferay.portalweb.portal.util.RuntimeVariables;
 
 /**
  * <a href="TranslateGermanFrenchTest.java.html"><b><i>View Source</i></b></a>
@@ -32,7 +33,8 @@ import com.liferay.portalweb.portal.BaseTestCase;
  */
 public class TranslateGermanFrenchTest extends BaseTestCase {
 	public void testTranslateGermanFrench() throws Exception {
-		selenium.select("_26_id", "label=German to French");
+		selenium.select("_26_id",
+			RuntimeVariables.replace("label=German to French"));
 		selenium.click("//input[@value='Translate']");
 		selenium.waitForPageToLoad("30000");
 

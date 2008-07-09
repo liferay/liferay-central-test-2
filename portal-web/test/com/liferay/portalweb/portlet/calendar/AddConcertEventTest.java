@@ -23,6 +23,7 @@
 package com.liferay.portalweb.portlet.calendar;
 
 import com.liferay.portalweb.portal.BaseTestCase;
+import com.liferay.portalweb.portal.util.RuntimeVariables;
 
 /**
  * <a href="AddConcertEventTest.java.html"><b><i>View Source</i></b></a>
@@ -52,10 +53,12 @@ public class AddConcertEventTest extends BaseTestCase {
 		}
 
 		selenium.click("_8_timeZoneSensitiveCheckbox");
-		selenium.type("_8_title", "Caedmon's Call Concert!");
+		selenium.type("_8_title",
+			RuntimeVariables.replace("Caedmon's Call Concert!"));
 		selenium.type("_8_description",
-			"I love this band guys! Everyone should see them! I've never seen them before. :(");
-		selenium.select("_8_type", "label=Concert");
+			RuntimeVariables.replace(
+				"I love this band guys! Everyone should see them! I've never seen them before. :("));
+		selenium.select("_8_type", RuntimeVariables.replace("label=Concert"));
 		selenium.click("//input[@value='Save']");
 		selenium.waitForPageToLoad("30000");
 

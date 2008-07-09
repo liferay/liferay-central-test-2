@@ -23,6 +23,7 @@
 package com.liferay.portalweb.portlet.translator;
 
 import com.liferay.portalweb.portal.BaseTestCase;
+import com.liferay.portalweb.portal.util.RuntimeVariables;
 
 /**
  * <a href="TranslateChineseTEnglishTest.java.html"><b><i>View Source</i></b></a>
@@ -32,9 +33,11 @@ import com.liferay.portalweb.portal.BaseTestCase;
  */
 public class TranslateChineseTEnglishTest extends BaseTestCase {
 	public void testTranslateChineseTEnglish() throws Exception {
-		selenium.select("_26_id", "label=Chinese (Taiwan) to English");
+		selenium.select("_26_id",
+			RuntimeVariables.replace("label=Chinese (Taiwan) to English"));
 		selenium.type("_26_text",
-			"\u6211\u7684\u540d\u5b57\u662fLiferay \u8b6f\u8005, \u6d41\u5229\u5b8c\u5168\u6210\u529f6 \u901a\u4fe1\u7684\u767e\u842c\u500b\u5f62\u5f0f\u3002");
+			RuntimeVariables.replace(
+				"\u6211\u7684\u540d\u5b57\u662fLiferay \u8b6f\u8005, \u6d41\u5229\u5b8c\u5168\u6210\u529f6 \u901a\u4fe1\u7684\u767e\u842c\u500b\u5f62\u5f0f\u3002"));
 		selenium.click("//input[@value='Translate']");
 		selenium.waitForPageToLoad("30000");
 

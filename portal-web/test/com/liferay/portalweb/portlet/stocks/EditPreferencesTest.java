@@ -23,6 +23,7 @@
 package com.liferay.portalweb.portlet.stocks;
 
 import com.liferay.portalweb.portal.BaseTestCase;
+import com.liferay.portalweb.portal.util.RuntimeVariables;
 
 /**
  * <a href="EditPreferencesTest.java.html"><b><i>View Source</i></b></a>
@@ -34,7 +35,7 @@ public class EditPreferencesTest extends BaseTestCase {
 	public void testEditPreferences() throws Exception {
 		selenium.click("//img[@title='Preferences']");
 		selenium.waitForPageToLoad("30000");
-		selenium.type("_12_symbols", "GOOG");
+		selenium.type("_12_symbols", RuntimeVariables.replace("GOOG"));
 		selenium.click("//input[@value='Save']");
 		selenium.waitForPageToLoad("30000");
 		selenium.click("link=Return to Full Page");

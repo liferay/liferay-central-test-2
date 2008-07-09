@@ -23,6 +23,7 @@
 package com.liferay.portalweb.portlet.shopping;
 
 import com.liferay.portalweb.portal.BaseTestCase;
+import com.liferay.portalweb.portal.util.RuntimeVariables;
 
 /**
  * <a href="AddCategoryTest.java.html"><b><i>View Source</i></b></a>
@@ -67,8 +68,9 @@ public class AddCategoryTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.type("_34_name", "Audio Center");
-		selenium.type("_34_description", "CD's, MP3's, Vinyl Records.");
+		selenium.type("_34_name", RuntimeVariables.replace("Audio Center"));
+		selenium.type("_34_description",
+			RuntimeVariables.replace("CD's, MP3's, Vinyl Records."));
 		selenium.click("//input[@value='Save']");
 		selenium.waitForPageToLoad("30000");
 

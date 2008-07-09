@@ -23,6 +23,7 @@
 package com.liferay.portalweb.portlet.blogs;
 
 import com.liferay.portalweb.portal.BaseTestCase;
+import com.liferay.portalweb.portal.util.RuntimeVariables;
 
 /**
  * <a href="AddDraftEntryTest.java.html"><b><i>View Source</i></b></a>
@@ -67,7 +68,7 @@ public class AddDraftEntryTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.type("_33_title", "Draft Test");
+		selenium.type("_33_title", RuntimeVariables.replace("Draft Test"));
 		Thread.sleep(5000);
 
 		for (int second = 0;; second++) {
@@ -121,7 +122,9 @@ public class AddDraftEntryTest extends BaseTestCase {
 		selenium.selectFrame("//iframe[@id=\"_33_editor\"]");
 		selenium.selectFrame("//iframe[@id=\"FCKeditor1___Frame\"]");
 		selenium.selectFrame("//iframe");
-		selenium.type("//body", "This is a test for the emergency draft system!");
+		selenium.type("//body",
+			RuntimeVariables.replace(
+				"This is a test for the emergency draft system!"));
 		selenium.selectFrame("relative=top");
 
 		for (int second = 0;; second++) {

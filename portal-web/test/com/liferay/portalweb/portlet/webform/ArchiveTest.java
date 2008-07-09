@@ -23,6 +23,7 @@
 package com.liferay.portalweb.portlet.webform;
 
 import com.liferay.portalweb.portal.BaseTestCase;
+import com.liferay.portalweb.portal.util.RuntimeVariables;
 
 /**
  * <a href="ArchiveTest.java.html"><b><i>View Source</i></b></a>
@@ -36,7 +37,7 @@ public class ArchiveTest extends BaseTestCase {
 		selenium.waitForPageToLoad("30000");
 		selenium.click("link=Archived");
 		selenium.waitForPageToLoad("30000");
-		selenium.type("_86_name", "test archive");
+		selenium.type("_86_name", RuntimeVariables.replace("test archive"));
 		selenium.click("//input[@value='Save']");
 		selenium.waitForPageToLoad("30000");
 

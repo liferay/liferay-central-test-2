@@ -23,6 +23,7 @@
 package com.liferay.portalweb.portlet.chat;
 
 import com.liferay.portalweb.portal.BaseTestCase;
+import com.liferay.portalweb.portal.util.RuntimeVariables;
 
 /**
  * <a href="AddPageTest.java.html"><b><i>View Source</i></b></a>
@@ -69,8 +70,8 @@ public class AddPageTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.typeKeys("new_page", "Chat Test Page");
-		selenium.type("new_page", "Chat Test Page");
+		selenium.typeKeys("new_page", RuntimeVariables.replace("Chat Test Page"));
+		selenium.type("new_page", RuntimeVariables.replace("Chat Test Page"));
 		selenium.click("link=Save");
 
 		for (int second = 0;; second++) {

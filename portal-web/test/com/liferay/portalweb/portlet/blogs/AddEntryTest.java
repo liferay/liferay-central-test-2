@@ -23,6 +23,7 @@
 package com.liferay.portalweb.portlet.blogs;
 
 import com.liferay.portalweb.portal.BaseTestCase;
+import com.liferay.portalweb.portal.util.RuntimeVariables;
 
 /**
  * <a href="AddEntryTest.java.html"><b><i>View Source</i></b></a>
@@ -67,7 +68,7 @@ public class AddEntryTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.type("_33_title", "Test Entry");
+		selenium.type("_33_title", RuntimeVariables.replace("Test Entry"));
 		Thread.sleep(5000);
 
 		for (int second = 0;; second++) {
@@ -121,7 +122,8 @@ public class AddEntryTest extends BaseTestCase {
 		selenium.selectFrame("//iframe[@id=\"_33_editor\"]");
 		selenium.selectFrame("//iframe[@id=\"FCKeditor1___Frame\"]");
 		selenium.selectFrame("//iframe");
-		selenium.type("//body", "This is a test entry!");
+		selenium.type("//body",
+			RuntimeVariables.replace("This is a test entry!"));
 		selenium.selectFrame("relative=top");
 		Thread.sleep(5000);
 

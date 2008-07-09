@@ -23,6 +23,7 @@
 package com.liferay.portalweb.portlet.wiki;
 
 import com.liferay.portalweb.portal.BaseTestCase;
+import com.liferay.portalweb.portal.util.RuntimeVariables;
 
 /**
  * <a href="AddLinksTest.java.html"><b><i>View Source</i></b></a>
@@ -68,7 +69,8 @@ public class AddLinksTest extends BaseTestCase {
 		}
 
 		selenium.type("_36_content",
-			"<<TableOfContents>>\n\n== This is a second test article ==\n\n====Yes this is a second test article ====\n\nI love Liferay! This Wiki has been EDITED!\n\n[[Link Me 1]]\n[[Link Me 2]]");
+			RuntimeVariables.replace(
+				"<<TableOfContents>>\n\n== This is a second test article ==\n\n====Yes this is a second test article ====\n\nI love Liferay! This Wiki has been EDITED!\n\n[[Link Me 1]]\n[[Link Me 2]]"));
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -144,7 +146,8 @@ public class AddLinksTest extends BaseTestCase {
 		}
 
 		selenium.type("_36_content",
-			"Hi Administrator! Hope you are well! Please link me to another page!\n\n-testing\n\n[[FrontPage]]\n\n[[Link Me 2]]");
+			RuntimeVariables.replace(
+				"Hi Administrator! Hope you are well! Please link me to another page!\n\n-testing\n\n[[FrontPage]]\n\n[[Link Me 2]]"));
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -237,7 +240,8 @@ public class AddLinksTest extends BaseTestCase {
 		}
 
 		selenium.type("_36_content",
-			"Hi Administrator!\n\nI made another mistake! Oh me. Please link this article to another!\n\n-rj\n\n[[FrontPage]]\n\n[[Link Me 1]]");
+			RuntimeVariables.replace(
+				"Hi Administrator!\n\nI made another mistake! Oh me. Please link this article to another!\n\n-rj\n\n[[FrontPage]]\n\n[[Link Me 1]]"));
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {

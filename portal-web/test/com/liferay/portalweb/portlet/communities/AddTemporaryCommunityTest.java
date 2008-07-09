@@ -23,6 +23,7 @@
 package com.liferay.portalweb.portlet.communities;
 
 import com.liferay.portalweb.portal.BaseTestCase;
+import com.liferay.portalweb.portal.util.RuntimeVariables;
 
 /**
  * <a href="AddTemporaryCommunityTest.java.html"><b><i>View Source</i></b></a>
@@ -50,10 +51,12 @@ public class AddTemporaryCommunityTest extends BaseTestCase {
 
 		selenium.click("//input[@value='Add Community']");
 		selenium.waitForPageToLoad("30000");
-		selenium.typeKeys("_29_name", "Test Community 2");
-		selenium.type("_29_name", "Test Community 2");
+		selenium.typeKeys("_29_name",
+			RuntimeVariables.replace("Test Community 2"));
+		selenium.type("_29_name", RuntimeVariables.replace("Test Community 2"));
 		selenium.type("_29_description",
-			"This is a second temporary Test Community!");
+			RuntimeVariables.replace(
+				"This is a second temporary Test Community!"));
 		selenium.click("//input[@value='Save']");
 		selenium.waitForPageToLoad("30000");
 	}

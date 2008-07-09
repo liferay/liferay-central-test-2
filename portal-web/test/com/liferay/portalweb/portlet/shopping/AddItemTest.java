@@ -23,6 +23,7 @@
 package com.liferay.portalweb.portlet.shopping;
 
 import com.liferay.portalweb.portal.BaseTestCase;
+import com.liferay.portalweb.portal.util.RuntimeVariables;
 
 /**
  * <a href="AddItemTest.java.html"><b><i>View Source</i></b></a>
@@ -87,15 +88,16 @@ public class AddItemTest extends BaseTestCase {
 
 		selenium.click("//input[@value='Add Item']");
 		selenium.waitForPageToLoad("30000");
-		selenium.type("_34_sku", "1111");
-		selenium.type("_34_name", "Jona Lyons - Wheel");
+		selenium.type("_34_sku", RuntimeVariables.replace("1111"));
+		selenium.type("_34_name", RuntimeVariables.replace("Jona Lyons - Wheel"));
 		selenium.type("_34_description",
-			"Sounds like: The middle of a vacation.");
-		selenium.type("_34_stockQuantity", "50");
-		selenium.type("_34_properties", "Limited Time Only");
+			RuntimeVariables.replace("Sounds like: The middle of a vacation."));
+		selenium.type("_34_stockQuantity", RuntimeVariables.replace("50"));
+		selenium.type("_34_properties",
+			RuntimeVariables.replace("Limited Time Only"));
 		selenium.click("_34_requiresShippingCheckbox");
-		selenium.type("_34_price0", "$9.99");
-		selenium.type("_34_minQuantity0", "1");
+		selenium.type("_34_price0", RuntimeVariables.replace("$9.99"));
+		selenium.type("_34_minQuantity0", RuntimeVariables.replace("1"));
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {

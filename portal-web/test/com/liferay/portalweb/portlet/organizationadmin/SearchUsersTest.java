@@ -23,6 +23,7 @@
 package com.liferay.portalweb.portlet.organizationadmin;
 
 import com.liferay.portalweb.portal.BaseTestCase;
+import com.liferay.portalweb.portal.util.RuntimeVariables;
 
 /**
  * <a href="SearchUsersTest.java.html"><b><i>View Source</i></b></a>
@@ -32,7 +33,8 @@ import com.liferay.portalweb.portal.BaseTestCase;
  */
 public class SearchUsersTest extends BaseTestCase {
 	public void testSearchUsers() throws Exception {
-		selenium.type("toggle_id_enterprise_admin_user_searchkeywords", "DLC");
+		selenium.type("toggle_id_enterprise_admin_user_searchkeywords",
+			RuntimeVariables.replace("DLC"));
 		selenium.click("//input[@value='Search Users']");
 		selenium.waitForPageToLoad("30000");
 		verifyTrue(selenium.isTextPresent("DLC 1"));

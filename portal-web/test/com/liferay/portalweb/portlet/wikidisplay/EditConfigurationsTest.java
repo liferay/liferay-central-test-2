@@ -23,6 +23,7 @@
 package com.liferay.portalweb.portlet.wikidisplay;
 
 import com.liferay.portalweb.portal.BaseTestCase;
+import com.liferay.portalweb.portal.util.RuntimeVariables;
 
 /**
  * <a href="EditConfigurationsTest.java.html"><b><i>View Source</i></b></a>
@@ -34,7 +35,7 @@ public class EditConfigurationsTest extends BaseTestCase {
 	public void testEditConfigurations() throws Exception {
 		selenium.click("//img[@title='Configuration']");
 		selenium.waitForPageToLoad("30000");
-		selenium.select("_86_nodeId", "label=Main");
+		selenium.select("_86_nodeId", RuntimeVariables.replace("label=Main"));
 		selenium.click("//input[@value='Save']");
 		selenium.waitForPageToLoad("30000");
 		selenium.click("link=Return to Full Page");

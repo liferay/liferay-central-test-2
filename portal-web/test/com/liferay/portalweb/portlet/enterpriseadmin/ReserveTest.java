@@ -23,6 +23,7 @@
 package com.liferay.portalweb.portlet.enterpriseadmin;
 
 import com.liferay.portalweb.portal.BaseTestCase;
+import com.liferay.portalweb.portal.util.RuntimeVariables;
 
 /**
  * <a href="ReserveTest.java.html"><b><i>View Source</i></b></a>
@@ -38,8 +39,10 @@ public class ReserveTest extends BaseTestCase {
 		selenium.waitForPageToLoad("30000");
 		selenium.click("link=Reserved Screen Names");
 		selenium.waitForPageToLoad("30000");
-		selenium.type("_79_reservedScreenNames", "reserve");
-		selenium.type("_79_reservedEmailAddresses", "reserve@reserved.com");
+		selenium.type("_79_reservedScreenNames",
+			RuntimeVariables.replace("reserve"));
+		selenium.type("_79_reservedEmailAddresses",
+			RuntimeVariables.replace("reserve@reserved.com"));
 		selenium.click("//input[@value='Save']");
 		selenium.waitForPageToLoad("30000");
 		selenium.click("link=Return to Full Page");

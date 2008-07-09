@@ -23,6 +23,7 @@
 package com.liferay.portalweb.portlet.managepages;
 
 import com.liferay.portalweb.portal.BaseTestCase;
+import com.liferay.portalweb.portal.util.RuntimeVariables;
 
 /**
  * <a href="AddPageTest.java.html"><b><i>View Source</i></b></a>
@@ -53,7 +54,8 @@ public class AddPageTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.type("_88_name_en_US", "Manage Pages Test Page");
+		selenium.type("_88_name_en_US",
+			RuntimeVariables.replace("Manage Pages Test Page"));
 		selenium.click("//input[@value='Add Page']");
 		selenium.waitForPageToLoad("30000");
 

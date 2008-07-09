@@ -23,6 +23,7 @@
 package com.liferay.portalweb.portlet.plugininstaller;
 
 import com.liferay.portalweb.portal.BaseTestCase;
+import com.liferay.portalweb.portal.util.RuntimeVariables;
 
 /**
  * <a href="PluginUpdateTest.java.html"><b><i>View Source</i></b></a>
@@ -34,7 +35,7 @@ public class PluginUpdateTest extends BaseTestCase {
 	public void testPluginUpdate() throws Exception {
 		selenium.click("link=Plugin Installer Test Page");
 		selenium.waitForPageToLoad("30000");
-		selenium.type("_111_keywords", "google");
+		selenium.type("_111_keywords", RuntimeVariables.replace("google"));
 		selenium.click("//input[@value='Search Plugins']");
 		selenium.waitForPageToLoad("30000");
 		selenium.click("link=Google Gadget 4.4.0.1");

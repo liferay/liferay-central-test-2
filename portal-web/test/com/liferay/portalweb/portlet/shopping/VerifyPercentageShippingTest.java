@@ -23,6 +23,7 @@
 package com.liferay.portalweb.portlet.shopping;
 
 import com.liferay.portalweb.portal.BaseTestCase;
+import com.liferay.portalweb.portal.util.RuntimeVariables;
 
 /**
  * <a href="VerifyPercentageShippingTest.java.html"><b><i>View Source</i></b></a>
@@ -69,10 +70,11 @@ public class VerifyPercentageShippingTest extends BaseTestCase {
 
 		selenium.click("//input[@value='Checkout']");
 		selenium.waitForPageToLoad("30000");
-		selenium.select("_34_ccType", "label=Visa");
-		selenium.type("_34_ccNumber", "4111111111111111");
-		selenium.select("_34_ccExpYear", "label=2011");
-		selenium.type("_34_ccVerNumber", "526");
+		selenium.select("_34_ccType", RuntimeVariables.replace("label=Visa"));
+		selenium.type("_34_ccNumber",
+			RuntimeVariables.replace("4111111111111111"));
+		selenium.select("_34_ccExpYear", RuntimeVariables.replace("label=2011"));
+		selenium.type("_34_ccVerNumber", RuntimeVariables.replace("526"));
 		selenium.click("//input[@value='Continue']");
 		selenium.waitForPageToLoad("30000");
 

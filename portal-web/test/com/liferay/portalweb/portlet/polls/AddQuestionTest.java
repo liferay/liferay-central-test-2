@@ -23,6 +23,7 @@
 package com.liferay.portalweb.portlet.polls;
 
 import com.liferay.portalweb.portal.BaseTestCase;
+import com.liferay.portalweb.portal.util.RuntimeVariables;
 
 /**
  * <a href="AddQuestionTest.java.html"><b><i>View Source</i></b></a>
@@ -34,10 +35,14 @@ public class AddQuestionTest extends BaseTestCase {
 	public void testAddQuestion() throws Exception {
 		selenium.click("//input[@value='Add Question']");
 		selenium.waitForPageToLoad("30000");
-		selenium.typeKeys("_25_title", "Test Poll Question");
-		selenium.typeKeys("_25_description", "This is a test poll description!");
-		selenium.typeKeys("_25_choiceDescriptiona", "Test Choice A");
-		selenium.typeKeys("_25_choiceDescriptionb", "Test Choice B");
+		selenium.typeKeys("_25_title",
+			RuntimeVariables.replace("Test Poll Question"));
+		selenium.typeKeys("_25_description",
+			RuntimeVariables.replace("This is a test poll description!"));
+		selenium.typeKeys("_25_choiceDescriptiona",
+			RuntimeVariables.replace("Test Choice A"));
+		selenium.typeKeys("_25_choiceDescriptionb",
+			RuntimeVariables.replace("Test Choice B"));
 		selenium.click("//input[@value='Add Choice']");
 		selenium.waitForPageToLoad("30000");
 
@@ -57,7 +62,8 @@ public class AddQuestionTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.typeKeys("_25_choiceDescriptionc", "Test Choice C");
+		selenium.typeKeys("_25_choiceDescriptionc",
+			RuntimeVariables.replace("Test Choice C"));
 		selenium.click("//input[@value='Save']");
 		selenium.waitForPageToLoad("30000");
 

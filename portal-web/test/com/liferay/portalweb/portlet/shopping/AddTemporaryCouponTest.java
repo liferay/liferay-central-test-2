@@ -23,6 +23,7 @@
 package com.liferay.portalweb.portlet.shopping;
 
 import com.liferay.portalweb.portal.BaseTestCase;
+import com.liferay.portalweb.portal.util.RuntimeVariables;
 
 /**
  * <a href="AddTemporaryCouponTest.java.html"><b><i>View Source</i></b></a>
@@ -70,10 +71,11 @@ public class AddTemporaryCouponTest extends BaseTestCase {
 		selenium.click("//input[@value='Add Coupon']");
 		selenium.waitForPageToLoad("30000");
 		selenium.click("_34_autoCodeCheckbox");
-		selenium.type("_34_name", "Temporary Coupon");
+		selenium.type("_34_name", RuntimeVariables.replace("Temporary Coupon"));
 		selenium.type("_34_description",
-			"This is a limited time only coupon - soon to be - Deleted!");
-		selenium.type("_34_discount", "0.99");
+			RuntimeVariables.replace(
+				"This is a limited time only coupon - soon to be - Deleted!"));
+		selenium.type("_34_discount", RuntimeVariables.replace("0.99"));
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {

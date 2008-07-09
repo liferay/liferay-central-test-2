@@ -23,6 +23,7 @@
 package com.liferay.portalweb.portlet.sessionexpiration;
 
 import com.liferay.portalweb.portal.BaseTestCase;
+import com.liferay.portalweb.portal.util.RuntimeVariables;
 
 /**
  * <a href="RememberMeLoginTest.java.html"><b><i>View Source</i></b></a>
@@ -32,8 +33,8 @@ import com.liferay.portalweb.portal.BaseTestCase;
  */
 public class RememberMeLoginTest extends BaseTestCase {
 	public void testRememberMeLogin() throws Exception {
-		selenium.type("login", "test@liferay.com");
-		selenium.type("password", "test");
+		selenium.type("login", RuntimeVariables.replace("test@liferay.com"));
+		selenium.type("password", RuntimeVariables.replace("test"));
 		selenium.click("rememberMeCheckbox");
 
 		for (int second = 0;; second++) {

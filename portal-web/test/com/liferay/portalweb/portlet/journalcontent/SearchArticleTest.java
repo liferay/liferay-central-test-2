@@ -23,6 +23,7 @@
 package com.liferay.portalweb.portlet.journalcontent;
 
 import com.liferay.portalweb.portal.BaseTestCase;
+import com.liferay.portalweb.portal.util.RuntimeVariables;
 
 /**
  * <a href="SearchArticleTest.java.html"><b><i>View Source</i></b></a>
@@ -68,7 +69,8 @@ public class SearchArticleTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.type("toggle_id_journal_article_searchkeywords", "test");
+		selenium.type("toggle_id_journal_article_searchkeywords",
+			RuntimeVariables.replace("test"));
 		selenium.click("//input[@value='Search Articles']");
 		selenium.waitForPageToLoad("30000");
 

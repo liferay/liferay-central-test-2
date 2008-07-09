@@ -23,6 +23,7 @@
 package com.liferay.portalweb.portlet.staging;
 
 import com.liferay.portalweb.portal.BaseTestCase;
+import com.liferay.portalweb.portal.util.RuntimeVariables;
 
 /**
  * <a href="AddStagedEventTest.java.html"><b><i>View Source</i></b></a>
@@ -84,10 +85,12 @@ public class AddStagedEventTest extends BaseTestCase {
 		}
 
 		selenium.click("_8_timeZoneSensitiveCheckbox");
-		selenium.type("_8_title", "Selenium Testing Party");
+		selenium.type("_8_title",
+			RuntimeVariables.replace("Selenium Testing Party"));
 		selenium.type("_8_description",
-			"All Jedi, Liferay Fans, Automated Robots are invited!");
-		selenium.select("_8_type", "label=Party");
+			RuntimeVariables.replace(
+				"All Jedi, Liferay Fans, Automated Robots are invited!"));
+		selenium.select("_8_type", RuntimeVariables.replace("label=Party"));
 		selenium.click("//input[@value='Save']");
 		selenium.waitForPageToLoad("30000");
 

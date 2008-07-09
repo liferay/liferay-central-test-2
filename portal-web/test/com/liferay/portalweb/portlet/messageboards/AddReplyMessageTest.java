@@ -23,6 +23,7 @@
 package com.liferay.portalweb.portlet.messageboards;
 
 import com.liferay.portalweb.portal.BaseTestCase;
+import com.liferay.portalweb.portal.util.RuntimeVariables;
 
 /**
  * <a href="AddReplyMessageTest.java.html"><b><i>View Source</i></b></a>
@@ -52,9 +53,11 @@ public class AddReplyMessageTest extends BaseTestCase {
 		}
 
 		selenium.typeKeys("_19_textArea",
-			"This is a t\u00e9st r\u00e9ply m\u00e9ssag\u00e9!");
+			RuntimeVariables.replace(
+				"This is a t\u00e9st r\u00e9ply m\u00e9ssag\u00e9!"));
 		selenium.type("_19_textArea",
-			"This is a t\u00e9st r\u00e9ply m\u00e9ssag\u00e9!");
+			RuntimeVariables.replace(
+				"This is a t\u00e9st r\u00e9ply m\u00e9ssag\u00e9!"));
 		selenium.click("//input[@value='Save']");
 		selenium.waitForPageToLoad("30000");
 

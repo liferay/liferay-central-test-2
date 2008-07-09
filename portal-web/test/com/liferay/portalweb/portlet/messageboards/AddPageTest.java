@@ -23,6 +23,7 @@
 package com.liferay.portalweb.portlet.messageboards;
 
 import com.liferay.portalweb.portal.BaseTestCase;
+import com.liferay.portalweb.portal.util.RuntimeVariables;
 
 /**
  * <a href="AddPageTest.java.html"><b><i>View Source</i></b></a>
@@ -70,8 +71,11 @@ public class AddPageTest extends BaseTestCase {
 		}
 
 		selenium.typeKeys("new_page",
-			"M\u00e9ssag\u00e9 Boards T\u00e9st Pag\u00e9");
-		selenium.type("new_page", "M\u00e9ssag\u00e9 Boards T\u00e9st Pag\u00e9");
+			RuntimeVariables.replace(
+				"M\u00e9ssag\u00e9 Boards T\u00e9st Pag\u00e9"));
+		selenium.type("new_page",
+			RuntimeVariables.replace(
+				"M\u00e9ssag\u00e9 Boards T\u00e9st Pag\u00e9"));
 		selenium.click("link=Save");
 
 		for (int second = 0;; second++) {

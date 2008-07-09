@@ -23,6 +23,7 @@
 package com.liferay.portalweb.portlet.shopping;
 
 import com.liferay.portalweb.portal.BaseTestCase;
+import com.liferay.portalweb.portal.util.RuntimeVariables;
 
 /**
  * <a href="EditCategoryTest.java.html"><b><i>View Source</i></b></a>
@@ -67,7 +68,7 @@ public class EditCategoryTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.type("_34_name", "Music");
+		selenium.type("_34_name", RuntimeVariables.replace("Music"));
 		selenium.click("//input[@value='Save']");
 		selenium.waitForPageToLoad("30000");
 

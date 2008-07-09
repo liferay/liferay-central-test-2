@@ -23,6 +23,7 @@
 package com.liferay.portalweb.portlet.enterpriseadmin;
 
 import com.liferay.portalweb.portal.BaseTestCase;
+import com.liferay.portalweb.portal.util.RuntimeVariables;
 
 /**
  * <a href="AssignRolesTest.java.html"><b><i>View Source</i></b></a>
@@ -39,7 +40,7 @@ public class AssignRolesTest extends BaseTestCase {
 		selenium.click("link=Available");
 		selenium.waitForPageToLoad("30000");
 		selenium.typeKeys("toggle_id_enterprise_admin_user_searchkeywords",
-			"Selenium");
+			RuntimeVariables.replace("Selenium"));
 		selenium.click("//input[@value='Search Users']");
 		selenium.waitForPageToLoad("30000");
 		selenium.click("_79_allRowIds");

@@ -23,6 +23,7 @@
 package com.liferay.portalweb.portlet.shopping;
 
 import com.liferay.portalweb.portal.BaseTestCase;
+import com.liferay.portalweb.portal.util.RuntimeVariables;
 
 /**
  * <a href="CheckoutTest.java.html"><b><i>View Source</i></b></a>
@@ -86,16 +87,20 @@ public class CheckoutTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.type("_34_billingStreet", "1234 Sesame Street");
-		selenium.type("_34_billingCity", "Gotham City");
-		selenium.select("_34_billingStateSel", "label=California");
-		selenium.type("_34_billingZip", "90028");
-		selenium.type("_34_billingCountry", "USA");
-		selenium.type("_34_billingPhone", "626-589-1453");
+		selenium.type("_34_billingStreet",
+			RuntimeVariables.replace("1234 Sesame Street"));
+		selenium.type("_34_billingCity", RuntimeVariables.replace("Gotham City"));
+		selenium.select("_34_billingStateSel",
+			RuntimeVariables.replace("label=California"));
+		selenium.type("_34_billingZip", RuntimeVariables.replace("90028"));
+		selenium.type("_34_billingCountry", RuntimeVariables.replace("USA"));
+		selenium.type("_34_billingPhone",
+			RuntimeVariables.replace("626-589-1453"));
 		selenium.click("_34_shipToBillingCheckbox");
-		selenium.select("_34_ccType", "label=Visa");
-		selenium.type("_34_ccNumber", "4111111111111111");
-		selenium.select("_34_ccExpYear", "label=2011");
+		selenium.select("_34_ccType", RuntimeVariables.replace("label=Visa"));
+		selenium.type("_34_ccNumber",
+			RuntimeVariables.replace("4111111111111111"));
+		selenium.select("_34_ccExpYear", RuntimeVariables.replace("label=2011"));
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -113,7 +118,8 @@ public class CheckoutTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.type("_34_comments", "Please take care of my order.");
+		selenium.type("_34_comments",
+			RuntimeVariables.replace("Please take care of my order."));
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {

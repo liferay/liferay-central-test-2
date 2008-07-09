@@ -23,6 +23,7 @@
 package com.liferay.portalweb.portlet.calendar;
 
 import com.liferay.portalweb.portal.BaseTestCase;
+import com.liferay.portalweb.portal.util.RuntimeVariables;
 
 /**
  * <a href="SetTimezoneTest.java.html"><b><i>View Source</i></b></a>
@@ -68,7 +69,7 @@ public class SetTimezoneTest extends BaseTestCase {
 		}
 
 		selenium.select("_2_timeZoneId",
-			"label=(UTC -08:00) Pacific Standard Time");
+			RuntimeVariables.replace("label=(UTC -08:00) Pacific Standard Time"));
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {

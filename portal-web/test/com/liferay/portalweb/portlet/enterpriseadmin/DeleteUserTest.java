@@ -23,6 +23,7 @@
 package com.liferay.portalweb.portlet.enterpriseadmin;
 
 import com.liferay.portalweb.portal.BaseTestCase;
+import com.liferay.portalweb.portal.util.RuntimeVariables;
 
 /**
  * <a href="DeleteUserTest.java.html"><b><i>View Source</i></b></a>
@@ -68,8 +69,8 @@ public class DeleteUserTest extends BaseTestCase {
 		}
 
 		selenium.click("link=Advanced \u00bb");
-		selenium.type("_79_firstName", "n03");
-		selenium.select("_79_active", "label=No");
+		selenium.type("_79_firstName", RuntimeVariables.replace("n03"));
+		selenium.select("_79_active", RuntimeVariables.replace("label=No"));
 		selenium.click("//input[@value='Search Users']");
 		selenium.waitForPageToLoad("30000");
 		selenium.click("_79_allRowIds");

@@ -23,6 +23,7 @@
 package com.liferay.portalweb.portlet.wiki;
 
 import com.liferay.portalweb.portal.BaseTestCase;
+import com.liferay.portalweb.portal.util.RuntimeVariables;
 
 /**
  * <a href="EditSecondArticleTest.java.html"><b><i>View Source</i></b></a>
@@ -69,7 +70,8 @@ public class EditSecondArticleTest extends BaseTestCase {
 		}
 
 		selenium.type("_36_content",
-			"<<TableOfContents>>\n\n== This is a second test article ==\n\n====Yes this is a second test article ====\n\nI love Liferay! This Wiki has been EDITED!");
+			RuntimeVariables.replace(
+				"<<TableOfContents>>\n\n== This is a second test article ==\n\n====Yes this is a second test article ====\n\nI love Liferay! This Wiki has been EDITED!"));
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {

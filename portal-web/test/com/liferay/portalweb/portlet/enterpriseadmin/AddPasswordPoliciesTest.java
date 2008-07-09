@@ -23,6 +23,7 @@
 package com.liferay.portalweb.portlet.enterpriseadmin;
 
 import com.liferay.portalweb.portal.BaseTestCase;
+import com.liferay.portalweb.portal.util.RuntimeVariables;
 
 /**
  * <a href="AddPasswordPoliciesTest.java.html"><b><i>View Source</i></b></a>
@@ -54,19 +55,21 @@ public class AddPasswordPoliciesTest extends BaseTestCase {
 		selenium.waitForPageToLoad("30000");
 		selenium.click("//input[@value='Add Password Policy']");
 		selenium.waitForPageToLoad("30000");
-		selenium.typeKeys("_79_name", "Test");
-		selenium.type("_79_name", "Test");
-		selenium.type("_79_description", "This is a test password policy!");
+		selenium.typeKeys("_79_name", RuntimeVariables.replace("Test"));
+		selenium.type("_79_name", RuntimeVariables.replace("Test"));
+		selenium.type("_79_description",
+			RuntimeVariables.replace("This is a test password policy!"));
 		selenium.click("_79_changeableCheckbox");
-		selenium.select("_79_minAge", "label=1 Week");
+		selenium.select("_79_minAge", RuntimeVariables.replace("label=1 Week"));
 		selenium.click("_79_expireableCheckbox");
-		selenium.select("_79_maxAge", "label=4 Weeks");
-		selenium.select("_79_warningTime", "label=2 Days");
-		selenium.type("_79_graceLimit", "7");
+		selenium.select("_79_maxAge", RuntimeVariables.replace("label=4 Weeks"));
+		selenium.select("_79_warningTime",
+			RuntimeVariables.replace("label=2 Days"));
+		selenium.type("_79_graceLimit", RuntimeVariables.replace("7"));
 		selenium.click("//input[@value='Save']");
 		selenium.waitForPageToLoad("30000");
-		selenium.typeKeys("_79_name", "test");
-		selenium.type("_79_name", "test");
+		selenium.typeKeys("_79_name", RuntimeVariables.replace("test"));
+		selenium.type("_79_name", RuntimeVariables.replace("test"));
 		selenium.click("//input[@value='Search Password Policies']");
 		selenium.waitForPageToLoad("30000");
 

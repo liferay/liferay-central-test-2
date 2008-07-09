@@ -23,6 +23,7 @@
 package com.liferay.portalweb.portlet.wiki;
 
 import com.liferay.portalweb.portal.BaseTestCase;
+import com.liferay.portalweb.portal.util.RuntimeVariables;
 
 /**
  * <a href="AddWikiNodeTest.java.html"><b><i>View Source</i></b></a>
@@ -86,8 +87,9 @@ public class AddWikiNodeTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.type("_36_name", "Second Wiki Test");
-		selenium.type("_36_description", "This is a second test wiki!");
+		selenium.type("_36_name", RuntimeVariables.replace("Second Wiki Test"));
+		selenium.type("_36_description",
+			RuntimeVariables.replace("This is a second test wiki!"));
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {

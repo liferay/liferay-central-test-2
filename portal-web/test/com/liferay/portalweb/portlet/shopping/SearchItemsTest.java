@@ -23,6 +23,7 @@
 package com.liferay.portalweb.portlet.shopping;
 
 import com.liferay.portalweb.portal.BaseTestCase;
+import com.liferay.portalweb.portal.util.RuntimeVariables;
 
 /**
  * <a href="SearchItemsTest.java.html"><b><i>View Source</i></b></a>
@@ -48,7 +49,7 @@ public class SearchItemsTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.type("_34_keywords1", "Jona");
+		selenium.type("_34_keywords1", RuntimeVariables.replace("Jona"));
 		selenium.click("//input[@value='Search Items']");
 		selenium.waitForPageToLoad("30000");
 

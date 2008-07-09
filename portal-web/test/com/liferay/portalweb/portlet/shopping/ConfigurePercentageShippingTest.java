@@ -23,6 +23,7 @@
 package com.liferay.portalweb.portlet.shopping;
 
 import com.liferay.portalweb.portal.BaseTestCase;
+import com.liferay.portalweb.portal.util.RuntimeVariables;
 
 /**
  * <a href="ConfigurePercentageShippingTest.java.html"><b><i>View Source</i></b></a>
@@ -68,12 +69,13 @@ public class ConfigurePercentageShippingTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.select("_86_shippingFormula", "label=Percentage");
-		selenium.type("_86_shipping0", ".10");
-		selenium.type("_86_shipping1", ".20");
-		selenium.type("_86_shipping2", ".30");
-		selenium.type("_86_shipping3", ".40");
-		selenium.type("_86_shipping4", ".50");
+		selenium.select("_86_shippingFormula",
+			RuntimeVariables.replace("label=Percentage"));
+		selenium.type("_86_shipping0", RuntimeVariables.replace(".10"));
+		selenium.type("_86_shipping1", RuntimeVariables.replace(".20"));
+		selenium.type("_86_shipping2", RuntimeVariables.replace(".30"));
+		selenium.type("_86_shipping3", RuntimeVariables.replace(".40"));
+		selenium.type("_86_shipping4", RuntimeVariables.replace(".50"));
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {

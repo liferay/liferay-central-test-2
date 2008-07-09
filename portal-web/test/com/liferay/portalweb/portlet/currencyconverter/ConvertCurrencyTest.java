@@ -23,6 +23,7 @@
 package com.liferay.portalweb.portlet.currencyconverter;
 
 import com.liferay.portalweb.portal.BaseTestCase;
+import com.liferay.portalweb.portal.util.RuntimeVariables;
 
 /**
  * <a href="ConvertCurrencyTest.java.html"><b><i>View Source</i></b></a>
@@ -32,7 +33,7 @@ import com.liferay.portalweb.portal.BaseTestCase;
  */
 public class ConvertCurrencyTest extends BaseTestCase {
 	public void testConvertCurrency() throws Exception {
-		selenium.select("_16_to", "label=BHD");
+		selenium.select("_16_to", RuntimeVariables.replace("label=BHD"));
 		selenium.click("//input[@value='Convert']");
 		selenium.waitForPageToLoad("30000");
 

@@ -23,6 +23,7 @@
 package com.liferay.portalweb.portlet.messageboards;
 
 import com.liferay.portalweb.portal.BaseTestCase;
+import com.liferay.portalweb.portal.util.RuntimeVariables;
 
 /**
  * <a href="SearchTest.java.html"><b><i>View Source</i></b></a>
@@ -67,8 +68,8 @@ public class SearchTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.typeKeys("_19_keywords1", "T\u00e9st");
-		selenium.type("_19_keywords1", "T\u00e9st");
+		selenium.typeKeys("_19_keywords1", RuntimeVariables.replace("T\u00e9st"));
+		selenium.type("_19_keywords1", RuntimeVariables.replace("T\u00e9st"));
 		selenium.click("//input[@value='Search Messages']");
 		selenium.waitForPageToLoad("30000");
 

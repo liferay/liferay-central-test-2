@@ -23,6 +23,7 @@
 package com.liferay.portalweb.portlet.journal;
 
 import com.liferay.portalweb.portal.BaseTestCase;
+import com.liferay.portalweb.portal.util.RuntimeVariables;
 
 /**
  * <a href="AddFeedTest.java.html"><b><i>View Source</i></b></a>
@@ -36,12 +37,16 @@ public class AddFeedTest extends BaseTestCase {
 		selenium.waitForPageToLoad("30000");
 		selenium.click("//input[@value='Add Feed']");
 		selenium.waitForPageToLoad("30000");
-		selenium.type("_15_newFeedId", "selenium-test-feed");
-		selenium.type("_15_name", "Test Feed");
-		selenium.type("_15_description", "This is a Test Feed");
-		selenium.type("_15_targetPortletId", "Test-Portal-ID");
-		selenium.type("_15_targetLayoutFriendlyUrl", "Test-URL");
-		selenium.select("_15_type", "label=Test");
+		selenium.type("_15_newFeedId",
+			RuntimeVariables.replace("selenium-test-feed"));
+		selenium.type("_15_name", RuntimeVariables.replace("Test Feed"));
+		selenium.type("_15_description",
+			RuntimeVariables.replace("This is a Test Feed"));
+		selenium.type("_15_targetPortletId",
+			RuntimeVariables.replace("Test-Portal-ID"));
+		selenium.type("_15_targetLayoutFriendlyUrl",
+			RuntimeVariables.replace("Test-URL"));
+		selenium.select("_15_type", RuntimeVariables.replace("label=Test"));
 		selenium.click("//input[@value='Save']");
 		selenium.waitForPageToLoad("30000");
 

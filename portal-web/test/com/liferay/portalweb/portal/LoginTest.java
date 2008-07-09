@@ -23,6 +23,7 @@
 package com.liferay.portalweb.portal;
 
 import com.liferay.portalweb.portal.BaseTestCase;
+import com.liferay.portalweb.portal.util.RuntimeVariables;
 
 /**
  * <a href="LoginTest.java.html"><b><i>View Source</i></b></a>
@@ -35,8 +36,8 @@ public class LoginTest extends BaseTestCase {
 		selenium.open("/web/guest/home");
 		selenium.click("link=Sign In");
 		selenium.waitForPageToLoad("30000");
-		selenium.type("login", "test@liferay.com");
-		selenium.type("password", "test");
+		selenium.type("login", RuntimeVariables.replace("test@liferay.com"));
+		selenium.type("password", RuntimeVariables.replace("test"));
 		selenium.click("rememberMeCheckbox");
 		selenium.click(
 			"document.getElementById('tabs1already-registeredTabsSection').getElementsByTagName('div')[0].getElementsByTagName('form')[0].getElementsByTagName('fieldset')[0].getElementsByTagName('div')[3].getElementsByTagName('input')[0]");

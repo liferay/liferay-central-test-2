@@ -23,6 +23,7 @@
 package com.liferay.portalweb.portlet.announcements;
 
 import com.liferay.portalweb.portal.BaseTestCase;
+import com.liferay.portalweb.portal.util.RuntimeVariables;
 
 /**
  * <a href="AddLowPriorityAnnouncementTest.java.html"><b><i>View Source</i></b></a>
@@ -54,11 +55,13 @@ public class AddLowPriorityAnnouncementTest extends BaseTestCase {
 		selenium.waitForPageToLoad("30000");
 		selenium.click("//input[@value='Add Entry']");
 		selenium.waitForPageToLoad("30000");
-		selenium.type("_84_title", "Low Priority Announcement");
-		selenium.type("_84_url", "www.liferay.com");
+		selenium.type("_84_title",
+			RuntimeVariables.replace("Low Priority Announcement"));
+		selenium.type("_84_url", RuntimeVariables.replace("www.liferay.com"));
 		selenium.type("_84_content",
-			"Hi everyone. This is a low priority announcement.");
-		selenium.select("_84_priority", "label=Low");
+			RuntimeVariables.replace(
+				"Hi everyone. This is a low priority announcement."));
+		selenium.select("_84_priority", RuntimeVariables.replace("label=Low"));
 		selenium.click("//input[@value='Save']");
 		selenium.waitForPageToLoad("30000");
 		selenium.click("link=Entries");

@@ -23,6 +23,7 @@
 package com.liferay.portalweb.portlet.documentlibrary;
 
 import com.liferay.portalweb.portal.BaseTestCase;
+import com.liferay.portalweb.portal.util.RuntimeVariables;
 
 /**
  * <a href="AddFolderTest.java.html"><b><i>View Source</i></b></a>
@@ -34,10 +35,12 @@ public class AddFolderTest extends BaseTestCase {
 	public void testAddFolder() throws Exception {
 		selenium.click("//input[@value='Add Folder']");
 		selenium.waitForPageToLoad("30000");
-		selenium.typeKeys("_20_name", "Test Folder");
-		selenium.type("_20_name", "Test Folder");
-		selenium.typeKeys("_20_description", "This is a test folder!");
-		selenium.type("_20_description", "This is a test folder!");
+		selenium.typeKeys("_20_name", RuntimeVariables.replace("Test Folder"));
+		selenium.type("_20_name", RuntimeVariables.replace("Test Folder"));
+		selenium.typeKeys("_20_description",
+			RuntimeVariables.replace("This is a test folder!"));
+		selenium.type("_20_description",
+			RuntimeVariables.replace("This is a test folder!"));
 		selenium.click("//input[@value='Save']");
 		selenium.waitForPageToLoad("30000");
 

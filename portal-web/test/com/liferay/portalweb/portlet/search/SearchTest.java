@@ -23,6 +23,7 @@
 package com.liferay.portalweb.portlet.search;
 
 import com.liferay.portalweb.portal.BaseTestCase;
+import com.liferay.portalweb.portal.util.RuntimeVariables;
 
 /**
  * <a href="SearchTest.java.html"><b><i>View Source</i></b></a>
@@ -32,7 +33,7 @@ import com.liferay.portalweb.portal.BaseTestCase;
  */
 public class SearchTest extends BaseTestCase {
 	public void testSearch() throws Exception {
-		selenium.type("_3_keywords", "Test");
+		selenium.type("_3_keywords", RuntimeVariables.replace("Test"));
 		selenium.click("//input[@type='image']");
 		selenium.waitForPageToLoad("30000");
 		verifyTrue(selenium.isTextPresent("Test Bookmark"));

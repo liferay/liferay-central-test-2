@@ -23,6 +23,7 @@
 package com.liferay.portalweb.portlet.calendar;
 
 import com.liferay.portalweb.portal.BaseTestCase;
+import com.liferay.portalweb.portal.util.RuntimeVariables;
 
 /**
  * <a href="AddTemporaryEventTest.java.html"><b><i>View Source</i></b></a>
@@ -52,9 +53,10 @@ public class AddTemporaryEventTest extends BaseTestCase {
 		}
 
 		selenium.click("_8_timeZoneSensitiveCheckbox");
-		selenium.type("_8_title", "Test Event 2");
-		selenium.type("_8_description", "This is a test event!");
-		selenium.select("_8_type", "label=Appointment");
+		selenium.type("_8_title", RuntimeVariables.replace("Test Event 2"));
+		selenium.type("_8_description",
+			RuntimeVariables.replace("This is a test event!"));
+		selenium.select("_8_type", RuntimeVariables.replace("label=Appointment"));
 		selenium.click("//input[@value='Save']");
 		selenium.waitForPageToLoad("30000");
 

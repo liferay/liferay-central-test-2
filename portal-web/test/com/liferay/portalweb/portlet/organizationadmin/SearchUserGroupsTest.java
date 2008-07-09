@@ -23,6 +23,7 @@
 package com.liferay.portalweb.portlet.organizationadmin;
 
 import com.liferay.portalweb.portal.BaseTestCase;
+import com.liferay.portalweb.portal.util.RuntimeVariables;
 
 /**
  * <a href="SearchUserGroupsTest.java.html"><b><i>View Source</i></b></a>
@@ -34,7 +35,7 @@ public class SearchUserGroupsTest extends BaseTestCase {
 	public void testSearchUserGroups() throws Exception {
 		selenium.click("link=User Groups");
 		selenium.waitForPageToLoad("30000");
-		selenium.type("_80_name", "selenium");
+		selenium.type("_80_name", RuntimeVariables.replace("selenium"));
 		selenium.click("//input[@value='Search User Groups']");
 		selenium.waitForPageToLoad("30000");
 		verifyTrue(selenium.isTextPresent("Selenium"));

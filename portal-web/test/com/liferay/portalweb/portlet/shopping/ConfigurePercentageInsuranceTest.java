@@ -23,6 +23,7 @@
 package com.liferay.portalweb.portlet.shopping;
 
 import com.liferay.portalweb.portal.BaseTestCase;
+import com.liferay.portalweb.portal.util.RuntimeVariables;
 
 /**
  * <a href="ConfigurePercentageInsuranceTest.java.html"><b><i>View Source</i></b></a>
@@ -86,12 +87,13 @@ public class ConfigurePercentageInsuranceTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.select("_86_insuranceFormula", "label=Percentage");
-		selenium.type("_86_insurance0", ".10");
-		selenium.type("_86_insurance1", ".10");
-		selenium.type("_86_insurance2", ".10");
-		selenium.type("_86_insurance3", ".10");
-		selenium.type("_86_insurance4", ".10");
+		selenium.select("_86_insuranceFormula",
+			RuntimeVariables.replace("label=Percentage"));
+		selenium.type("_86_insurance0", RuntimeVariables.replace(".10"));
+		selenium.type("_86_insurance1", RuntimeVariables.replace(".10"));
+		selenium.type("_86_insurance2", RuntimeVariables.replace(".10"));
+		selenium.type("_86_insurance3", RuntimeVariables.replace(".10"));
+		selenium.type("_86_insurance4", RuntimeVariables.replace(".10"));
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {

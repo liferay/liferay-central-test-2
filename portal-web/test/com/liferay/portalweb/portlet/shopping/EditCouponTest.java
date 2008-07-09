@@ -23,6 +23,7 @@
 package com.liferay.portalweb.portlet.shopping;
 
 import com.liferay.portalweb.portal.BaseTestCase;
+import com.liferay.portalweb.portal.util.RuntimeVariables;
 
 /**
  * <a href="EditCouponTest.java.html"><b><i>View Source</i></b></a>
@@ -50,8 +51,9 @@ public class EditCouponTest extends BaseTestCase {
 
 		selenium.click("link=Edit");
 		selenium.waitForPageToLoad("30000");
-		selenium.type("_34_name", "Family Discount");
-		selenium.type("_34_description", "Discount for family only!");
+		selenium.type("_34_name", RuntimeVariables.replace("Family Discount"));
+		selenium.type("_34_description",
+			RuntimeVariables.replace("Discount for family only!"));
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {

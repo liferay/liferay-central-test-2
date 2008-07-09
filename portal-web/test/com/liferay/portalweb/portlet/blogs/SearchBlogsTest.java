@@ -23,6 +23,7 @@
 package com.liferay.portalweb.portlet.blogs;
 
 import com.liferay.portalweb.portal.BaseTestCase;
+import com.liferay.portalweb.portal.util.RuntimeVariables;
 
 /**
  * <a href="SearchBlogsTest.java.html"><b><i>View Source</i></b></a>
@@ -49,7 +50,7 @@ public class SearchBlogsTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.type("_33_keywords", "Test Entry");
+		selenium.type("_33_keywords", RuntimeVariables.replace("Test Entry"));
 		selenium.click("//input[@value='Search Entries']");
 		selenium.waitForPageToLoad("30000");
 

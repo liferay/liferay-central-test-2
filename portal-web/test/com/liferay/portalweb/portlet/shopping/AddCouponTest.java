@@ -23,6 +23,7 @@
 package com.liferay.portalweb.portlet.shopping;
 
 import com.liferay.portalweb.portal.BaseTestCase;
+import com.liferay.portalweb.portal.util.RuntimeVariables;
 
 /**
  * <a href="AddCouponTest.java.html"><b><i>View Source</i></b></a>
@@ -53,12 +54,16 @@ public class AddCouponTest extends BaseTestCase {
 		selenium.click("//input[@value='Add Coupon']");
 		selenium.waitForPageToLoad("30000");
 		selenium.click("_34_autoCodeCheckbox");
-		selenium.type("_34_name", "Super Best Liferay Friend Discount");
-		selenium.type("_34_name", "Liferay Friends and Family Discount");
-		selenium.type("_34_name", "Friends and Family Discount");
+		selenium.type("_34_name",
+			RuntimeVariables.replace("Super Best Liferay Friend Discount"));
+		selenium.type("_34_name",
+			RuntimeVariables.replace("Liferay Friends and Family Discount"));
+		selenium.type("_34_name",
+			RuntimeVariables.replace("Friends and Family Discount"));
 		selenium.type("_34_description",
-			"This discount is for everyone who is considered a friend or part of the family.");
-		selenium.type("_34_discount", "0.50");
+			RuntimeVariables.replace(
+				"This discount is for everyone who is considered a friend or part of the family."));
+		selenium.type("_34_discount", RuntimeVariables.replace("0.50"));
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {

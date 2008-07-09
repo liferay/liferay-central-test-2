@@ -23,6 +23,7 @@
 package com.liferay.portalweb.portlet.messageboards;
 
 import com.liferay.portalweb.portal.BaseTestCase;
+import com.liferay.portalweb.portal.util.RuntimeVariables;
 
 /**
  * <a href="MoveThreadTest.java.html"><b><i>View Source</i></b></a>
@@ -35,7 +36,7 @@ public class MoveThreadTest extends BaseTestCase {
 		selenium.click("link=Move Thread");
 		selenium.waitForPageToLoad("30000");
 		selenium.click("//input[@value='Select']");
-		selenium.waitForPopUp("category", "30000");
+		selenium.waitForPopUp("category", RuntimeVariables.replace("30000"));
 		selenium.selectWindow("category");
 		selenium.click(
 			"//div[@id=\"p_p_id_19_\"]/div/form/div[3]/table/tbody/tr[3]/td[5]/input");
@@ -59,13 +60,17 @@ public class MoveThreadTest extends BaseTestCase {
 		}
 
 		selenium.typeKeys("_19_subject",
-			"T\u00e9st M\u00e9ssag\u00e9 to b\u00e9 D\u00e9l\u00e9t\u00e9d - MOVED");
+			RuntimeVariables.replace(
+				"T\u00e9st M\u00e9ssag\u00e9 to b\u00e9 D\u00e9l\u00e9t\u00e9d - MOVED"));
 		selenium.type("_19_subject",
-			"T\u00e9st M\u00e9ssag\u00e9 to b\u00e9 D\u00e9l\u00e9t\u00e9d - MOVED");
+			RuntimeVariables.replace(
+				"T\u00e9st M\u00e9ssag\u00e9 to b\u00e9 D\u00e9l\u00e9t\u00e9d - MOVED"));
 		selenium.typeKeys("_19_textArea",
-			"This m\u00e9ssag\u00e9 has b\u00e9\u00e9n mov\u00e9d.");
+			RuntimeVariables.replace(
+				"This m\u00e9ssag\u00e9 has b\u00e9\u00e9n mov\u00e9d."));
 		selenium.type("_19_textArea",
-			"This m\u00e9ssag\u00e9 has b\u00e9\u00e9n mov\u00e9d.");
+			RuntimeVariables.replace(
+				"This m\u00e9ssag\u00e9 has b\u00e9\u00e9n mov\u00e9d."));
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -122,7 +127,7 @@ public class MoveThreadTest extends BaseTestCase {
 		selenium.click("link=Move Thread");
 		selenium.waitForPageToLoad("30000");
 		selenium.click("//input[@value='Select']");
-		selenium.waitForPopUp("category", "30000");
+		selenium.waitForPopUp("category", RuntimeVariables.replace("30000"));
 		selenium.selectWindow("category");
 		selenium.click("//input[@value='Choose']");
 		selenium.selectWindow("null");
@@ -144,12 +149,16 @@ public class MoveThreadTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.typeKeys("_19_subject", "Mov\u00e9 it back!");
-		selenium.type("_19_subject", "Mov\u00e9 it back!");
+		selenium.typeKeys("_19_subject",
+			RuntimeVariables.replace("Mov\u00e9 it back!"));
+		selenium.type("_19_subject",
+			RuntimeVariables.replace("Mov\u00e9 it back!"));
 		selenium.typeKeys("_19_textArea",
-			"This thr\u00e9ad has b\u00e9\u00e9n mov\u00e9d back!");
+			RuntimeVariables.replace(
+				"This thr\u00e9ad has b\u00e9\u00e9n mov\u00e9d back!"));
 		selenium.type("_19_textArea",
-			"This thr\u00e9ad has b\u00e9\u00e9n mov\u00e9d back!");
+			RuntimeVariables.replace(
+				"This thr\u00e9ad has b\u00e9\u00e9n mov\u00e9d back!"));
 		selenium.click("//input[@value='Move Thread']");
 		selenium.waitForPageToLoad("30000");
 

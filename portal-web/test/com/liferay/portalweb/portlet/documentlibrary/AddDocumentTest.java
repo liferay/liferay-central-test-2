@@ -23,6 +23,7 @@
 package com.liferay.portalweb.portlet.documentlibrary;
 
 import com.liferay.portalweb.portal.BaseTestCase;
+import com.liferay.portalweb.portal.util.RuntimeVariables;
 
 /**
  * <a href="AddDocumentTest.java.html"><b><i>View Source</i></b></a>
@@ -105,9 +106,11 @@ public class AddDocumentTest extends BaseTestCase {
 		}
 
 		selenium.type("_20_file",
-			"L:\\portal\\build\\portal-web\\test\\com\\liferay\\portalweb\\portlet\\documentlibrary\\test_document.txt");
-		selenium.type("_20_title", "Test Document");
-		selenium.type("_20_description", "This is a test document!");
+			RuntimeVariables.replace(
+				"L:\\portal\\build\\portal-web\\test\\com\\liferay\\portalweb\\portlet\\documentlibrary\\test_document.txt"));
+		selenium.type("_20_title", RuntimeVariables.replace("Test Document"));
+		selenium.type("_20_description",
+			RuntimeVariables.replace("This is a test document!"));
 		selenium.click("//input[@value='Save']");
 		selenium.waitForPageToLoad("30000");
 

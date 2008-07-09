@@ -23,6 +23,7 @@
 package com.liferay.portalweb.portlet.messageboards;
 
 import com.liferay.portalweb.portal.BaseTestCase;
+import com.liferay.portalweb.portal.util.RuntimeVariables;
 
 /**
  * <a href="AddSecondSubcategoryTest.java.html"><b><i>View Source</i></b></a>
@@ -55,12 +56,16 @@ public class AddSecondSubcategoryTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.typeKeys("_19_name", "S\u00e9cond T\u00e9st Subcat\u00e9gory");
-		selenium.type("_19_name", "S\u00e9cond T\u00e9st Subcat\u00e9gory");
+		selenium.typeKeys("_19_name",
+			RuntimeVariables.replace("S\u00e9cond T\u00e9st Subcat\u00e9gory"));
+		selenium.type("_19_name",
+			RuntimeVariables.replace("S\u00e9cond T\u00e9st Subcat\u00e9gory"));
 		selenium.typeKeys("_19_description",
-			"This is a s\u00e9cond t\u00e9st subcat\u00e9gory!");
+			RuntimeVariables.replace(
+				"This is a s\u00e9cond t\u00e9st subcat\u00e9gory!"));
 		selenium.type("_19_description",
-			"This is a s\u00e9cond t\u00e9st subcat\u00e9gory!");
+			RuntimeVariables.replace(
+				"This is a s\u00e9cond t\u00e9st subcat\u00e9gory!"));
 		selenium.click("//input[@value='Save']");
 		selenium.waitForPageToLoad("30000");
 

@@ -23,6 +23,7 @@
 package com.liferay.portalweb.portlet.enterpriseadmin;
 
 import com.liferay.portalweb.portal.BaseTestCase;
+import com.liferay.portalweb.portal.util.RuntimeVariables;
 
 /**
  * <a href="SearchUserTest.java.html"><b><i>View Source</i></b></a>
@@ -33,7 +34,7 @@ import com.liferay.portalweb.portal.BaseTestCase;
 public class SearchUserTest extends BaseTestCase {
 	public void testSearchUser() throws Exception {
 		selenium.type("toggle_id_enterprise_admin_user_searchkeywords",
-			"selenium");
+			RuntimeVariables.replace("selenium"));
 		selenium.click("//input[@value='Search Users']");
 		selenium.waitForPageToLoad("30000");
 

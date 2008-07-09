@@ -23,6 +23,7 @@
 package com.liferay.portalweb.portlet.shopping;
 
 import com.liferay.portalweb.portal.BaseTestCase;
+import com.liferay.portalweb.portal.util.RuntimeVariables;
 
 /**
  * <a href="ChangeCurrentSetupTest.java.html"><b><i>View Source</i></b></a>
@@ -89,9 +90,10 @@ public class ChangeCurrentSetupTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.select("_86_shippingFormula", "label=Flat Amount");
-		selenium.type("_86_shipping0", "99999");
-		selenium.type("_86_shipping1", "10020");
+		selenium.select("_86_shippingFormula",
+			RuntimeVariables.replace("label=Flat Amount"));
+		selenium.type("_86_shipping0", RuntimeVariables.replace("99999"));
+		selenium.type("_86_shipping1", RuntimeVariables.replace("10020"));
 		selenium.click("//input[@value='Save']");
 		selenium.waitForPageToLoad("30000");
 

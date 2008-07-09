@@ -23,6 +23,7 @@
 package com.liferay.portalweb.portlet.weather;
 
 import com.liferay.portalweb.portal.BaseTestCase;
+import com.liferay.portalweb.portal.util.RuntimeVariables;
 
 /**
  * <a href="AddPageTest.java.html"><b><i>View Source</i></b></a>
@@ -69,8 +70,9 @@ public class AddPageTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.typeKeys("new_page", "Weather Test Page");
-		selenium.type("new_page", "Weather Test Page");
+		selenium.typeKeys("new_page",
+			RuntimeVariables.replace("Weather Test Page"));
+		selenium.type("new_page", RuntimeVariables.replace("Weather Test Page"));
 		selenium.click("link=Save");
 
 		for (int second = 0;; second++) {

@@ -23,6 +23,7 @@
 package com.liferay.portalweb.portlet.webcam;
 
 import com.liferay.portalweb.portal.BaseTestCase;
+import com.liferay.portalweb.portal.util.RuntimeVariables;
 
 /**
  * <a href="DownloadPortletTest.java.html"><b><i>View Source</i></b></a>
@@ -70,7 +71,7 @@ public class DownloadPortletTest extends BaseTestCase {
 
 		selenium.click("link=Plugins");
 		selenium.waitForPageToLoad("30000");
-		selenium.type("_111_keywords", "webcam");
+		selenium.type("_111_keywords", RuntimeVariables.replace("webcam"));
 		selenium.click("//input[@value='Search Plugins']");
 		selenium.waitForPageToLoad("30000");
 

@@ -23,6 +23,7 @@
 package com.liferay.portalweb.portlet.wiki;
 
 import com.liferay.portalweb.portal.BaseTestCase;
+import com.liferay.portalweb.portal.util.RuntimeVariables;
 
 /**
  * <a href="EditCommentTest.java.html"><b><i>View Source</i></b></a>
@@ -101,8 +102,10 @@ public class EditCommentTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.typeKeys("_36_editBody1", "This is a test edited post reply!");
-		selenium.type("_36_editBody1", "This is a test edited post reply!");
+		selenium.typeKeys("_36_editBody1",
+			RuntimeVariables.replace("This is a test edited post reply!"));
+		selenium.type("_36_editBody1",
+			RuntimeVariables.replace("This is a test edited post reply!"));
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {

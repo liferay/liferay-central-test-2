@@ -23,6 +23,7 @@
 package com.liferay.portalweb.portlet.journal;
 
 import com.liferay.portalweb.portal.BaseTestCase;
+import com.liferay.portalweb.portal.util.RuntimeVariables;
 
 /**
  * <a href="AddStructuresTest.java.html"><b><i>View Source</i></b></a>
@@ -52,13 +53,16 @@ public class AddStructuresTest extends BaseTestCase {
 		selenium.waitForPageToLoad("30000");
 		selenium.click("//input[@value='Add Structure']");
 		selenium.waitForPageToLoad("30000");
-		selenium.type("_15_newStructureId", "Test");
-		selenium.type("_15_name", "Test Journal Structure");
-		selenium.type("_15_description", "This is a test Journal Structure!");
+		selenium.type("_15_newStructureId", RuntimeVariables.replace("Test"));
+		selenium.type("_15_name",
+			RuntimeVariables.replace("Test Journal Structure"));
+		selenium.type("_15_description",
+			RuntimeVariables.replace("This is a test Journal Structure!"));
 		selenium.click("//input[@value='Add Row']");
 		selenium.waitForPageToLoad("30000");
-		selenium.type("_15_structure_el0_name", "Test");
-		selenium.select("_15_structure_el0_type", "label=Text");
+		selenium.type("_15_structure_el0_name", RuntimeVariables.replace("Test"));
+		selenium.select("_15_structure_el0_type",
+			RuntimeVariables.replace("label=Text"));
 		selenium.click("//input[@value='Save']");
 		selenium.waitForPageToLoad("30000");
 

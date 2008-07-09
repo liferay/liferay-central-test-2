@@ -23,6 +23,7 @@
 package com.liferay.portalweb.portlet.enterpriseadmin;
 
 import com.liferay.portalweb.portal.BaseTestCase;
+import com.liferay.portalweb.portal.util.RuntimeVariables;
 
 /**
  * <a href="DeactivateUserTest.java.html"><b><i>View Source</i></b></a>
@@ -49,7 +50,8 @@ public class DeactivateUserTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.type("toggle_id_enterprise_admin_user_searchkeywords", "n03");
+		selenium.type("toggle_id_enterprise_admin_user_searchkeywords",
+			RuntimeVariables.replace("n03"));
 		selenium.click("//input[@value='Search Users']");
 		selenium.waitForPageToLoad("30000");
 		selenium.click("link=Deactivate");

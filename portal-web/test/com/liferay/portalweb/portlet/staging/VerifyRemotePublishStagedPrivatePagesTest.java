@@ -23,6 +23,7 @@
 package com.liferay.portalweb.portlet.staging;
 
 import com.liferay.portalweb.portal.BaseTestCase;
+import com.liferay.portalweb.portal.util.RuntimeVariables;
 
 /**
  * <a href="VerifyRemotePublishStagedPrivatePagesTest.java.html"><b><i>View Source</i></b></a>
@@ -88,8 +89,8 @@ public class VerifyRemotePublishStagedPrivatePagesTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.type("_58_login", "test@liferay.com");
-		selenium.type("_58_password", "test");
+		selenium.type("_58_login", RuntimeVariables.replace("test@liferay.com"));
+		selenium.type("_58_password", RuntimeVariables.replace("test"));
 		selenium.click("//input[@value='Sign In']");
 
 		for (int second = 0;; second++) {
@@ -190,8 +191,8 @@ public class VerifyRemotePublishStagedPrivatePagesTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.type("_58_login", "test@liferay.com");
-		selenium.type("_58_password", "test");
+		selenium.type("_58_login", RuntimeVariables.replace("test@liferay.com"));
+		selenium.type("_58_password", RuntimeVariables.replace("test"));
 		selenium.click("//input[@value='Sign In']");
 		selenium.waitForPageToLoad("30000");
 		selenium.click("my-community-private-pages");

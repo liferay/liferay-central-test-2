@@ -23,6 +23,7 @@
 package com.liferay.portalweb.portlet.translator;
 
 import com.liferay.portalweb.portal.BaseTestCase;
+import com.liferay.portalweb.portal.util.RuntimeVariables;
 
 /**
  * <a href="TranslateDutchEnglishTest.java.html"><b><i>View Source</i></b></a>
@@ -32,9 +33,11 @@ import com.liferay.portalweb.portal.BaseTestCase;
  */
 public class TranslateDutchEnglishTest extends BaseTestCase {
 	public void testTranslateDutchEnglish() throws Exception {
-		selenium.select("_26_id", "label=Dutch to English");
+		selenium.select("_26_id",
+			RuntimeVariables.replace("label=Dutch to English"));
 		selenium.type("_26_text",
-			"Mijn naam is Vertaler Liferay, vloeiend in meer dan 6 miljoen vormen van mededeling.");
+			RuntimeVariables.replace(
+				"Mijn naam is Vertaler Liferay, vloeiend in meer dan 6 miljoen vormen van mededeling."));
 		selenium.click("//input[@value='Translate']");
 		selenium.waitForPageToLoad("30000");
 
