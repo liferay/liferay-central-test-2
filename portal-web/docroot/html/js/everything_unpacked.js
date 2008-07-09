@@ -14868,6 +14868,7 @@ Liferay.Layout.Columns = {
 			appendTo: 'body',
 			connectWith: [instance._columns],
 			dropOnEmpty: true,
+			forcePointerForContainers: true,
 			handle: instance._handleSelector,
 			items: instance._boxSelector,
 			helper: instance._createHelper,
@@ -14878,6 +14879,19 @@ Liferay.Layout.Columns = {
 			scroll: true,
 			scrollSensitivity: 50,
 			scrollSpeed: 30,
+			custom: {
+				refreshContainers: function() {
+					for (var i = this.containers.length - 1; i >= 0; i--){
+						var container = this.containers[i].element.parent();
+						var offset = container.offset();
+
+						this.containers[i].containerCache.left = offset.left;
+						this.containers[i].containerCache.top = offset.top;
+						this.containers[i].containerCache.width	= container.outerWidth();
+						this.containers[i].containerCache.height = container.outerHeight();
+					};
+				}
+			},
 
 			// Callbacks
 
@@ -14909,7 +14923,7 @@ Liferay.Layout.Columns = {
 				instance._counter++;
 				jQuery(this).parent(instance._gridColumns).removeClass(instance._activeAreaClass);
 
-				// We need to make sure that the active class and the intersection 
+				// We need to make sure that the active class and the intersection
 				// logic don't fall out of sync
 
 				if (!(instance._counter % 2)) {
@@ -15002,7 +15016,7 @@ Liferay.Layout.Columns = {
 
 		var oCol = ui.element;
 		var foundPortlets = oCol.find('.portlet-boundary');
-		var minPortlets = 2;
+		var minPortlets = 1;
 		if (foundPortlets.length < minPortlets) {
 			oCol.addClass('empty');
 		}

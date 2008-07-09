@@ -120,6 +120,7 @@ Liferay.Layout.Columns = {
 					for (var i = this.containers.length - 1; i >= 0; i--){
 						var container = this.containers[i].element.parent();
 						var offset = container.offset();
+
 						this.containers[i].containerCache.left = offset.left;
 						this.containers[i].containerCache.top = offset.top;
 						this.containers[i].containerCache.width	= container.outerWidth();
@@ -158,7 +159,7 @@ Liferay.Layout.Columns = {
 				instance._counter++;
 				jQuery(this).parent(instance._gridColumns).removeClass(instance._activeAreaClass);
 
-				// We need to make sure that the active class and the intersection 
+				// We need to make sure that the active class and the intersection
 				// logic don't fall out of sync
 
 				if (!(instance._counter % 2)) {
