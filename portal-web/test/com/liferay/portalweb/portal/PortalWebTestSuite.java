@@ -51,7 +51,6 @@ import com.liferay.portalweb.portlet.journalcontent.JournalContentTests;
 import com.liferay.portalweb.portlet.journalcontentsearch.JournalContentSearchTests;
 import com.liferay.portalweb.portlet.language.LanguageTests;
 import com.liferay.portalweb.portlet.loancalculator.LoanCalculatorTests;
-import com.liferay.portalweb.portlet.mail.MailTests;
 import com.liferay.portalweb.portlet.managepages.ManagePagesTests;
 import com.liferay.portalweb.portlet.navigation.NavigationTests;
 import com.liferay.portalweb.portlet.nestedportlets.NestedPortletsTests;
@@ -121,7 +120,7 @@ public class PortalWebTestSuite extends BaseTests {
 		addTestSuite(JournalContentSearchTests.class);
 		addTestSuite(LanguageTests.class);
 		addTestSuite(LoanCalculatorTests.class);
-		addTestSuite(MailTests.class);
+		//addTestSuite(MailTests.class);
 		addTestSuite(ManagePagesTests.class);
 		//addTestSuite(MessageBoardsTests.class);
 		addTestSuite(NavigationTests.class);
