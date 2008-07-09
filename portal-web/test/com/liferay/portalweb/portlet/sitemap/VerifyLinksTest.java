@@ -42,14 +42,14 @@ public class VerifyLinksTest extends BaseTestCase {
 		verifyEquals("Liferay - Calendar Test Page", selenium.getTitle());
 		selenium.click("link=Site Map Test Page");
 		selenium.waitForPageToLoad("30000");
-		selenium.click("//a[contains(text(),'Image Gallery Test Page')]");
+		selenium.click("//a[contains(text(),'Enterprise Admin Test Page')]");
 		selenium.waitForPageToLoad("30000");
-		verifyEquals("Liferay - Image Gallery Test Page", selenium.getTitle());
+		verifyEquals("Liferay - Enterprise Admin Test Page", selenium.getTitle());
 		selenium.click("link=Site Map Test Page");
 		selenium.waitForPageToLoad("30000");
-		selenium.click("//a[contains(text(),'Polls Test Page')]");
+		selenium.click("//a[contains(text(),'Admin Test Page')]");
 		selenium.waitForPageToLoad("30000");
-		verifyEquals("Liferay - Polls Test Page", selenium.getTitle());
+		verifyEquals("Liferay - Admin Test Page", selenium.getTitle());
 		selenium.click("link=Site Map Test Page");
 		selenium.waitForPageToLoad("30000");
 		verifyEquals("Liferay - Site Map Test Page", selenium.getTitle());
