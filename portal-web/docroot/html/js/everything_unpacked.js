@@ -14882,13 +14882,14 @@ Liferay.Layout.Columns = {
 			custom: {
 				refreshContainers: function() {
 					for (var i = this.containers.length - 1; i >= 0; i--){
-						var container = this.containers[i].element.parent();
-						var offset = container.offset();
+						var container = this.containers[i];
+						var cell = container.element.parent();
+						var offset = cell.offset();
 
-						this.containers[i].containerCache.left = offset.left;
-						this.containers[i].containerCache.top = offset.top;
-						this.containers[i].containerCache.width	= container.outerWidth();
-						this.containers[i].containerCache.height = container.outerHeight();
+						container.containerCache.left = offset.left;
+						container.containerCache.top = offset.top;
+						container.containerCache.width	= cell.outerWidth();
+						container.containerCache.height = cell.outerHeight();
 					};
 				}
 			},
