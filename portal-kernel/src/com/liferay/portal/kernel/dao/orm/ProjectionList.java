@@ -23,35 +23,15 @@
 package com.liferay.portal.kernel.dao.orm;
 
 /**
- * <a href="ProjectionFactory.java.html"><b><i>View Source</i></b></a>
+ * <a href="ProjectionList.java.html"><b><i>View Source</i></b></a>
  *
- * @author Brian Wing Shun Chan
+ * @author Raymond Augé
  *
  */
-public interface ProjectionFactory {
+public interface ProjectionList extends Projection {
 
-	public Projection alias(Projection projection, String alias);
+	ProjectionList add(Projection projection);
 
-	public Projection avg(String propertyName);
-
-	public Projection count(String propertyName);
-
-	public Projection countDistinct(String propertyName);
-
-	public Projection distinct(Projection projection);
-
-	public Projection groupProperty(String propertyName);
-
-	public Projection max(String propertyName);
-
-	public Projection min(String propertyName);
-
-	public ProjectionList projectionList();
-
-	public Projection property(String propertyName);
-
-	public Projection rowCount();
-
-	public Projection sum(String propertyName);
+	ProjectionList add(Projection projection, String alias);
 
 }

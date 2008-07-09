@@ -32,8 +32,52 @@ import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
  */
 public class ProjectionFactoryUtil {
 
+	public static Projection alias(Projection projection, String alias) {
+		return getProjectionFactory().alias(projection, alias);
+	}
+
+	public static Projection avg(String propertyName) {
+		return getProjectionFactory().avg(propertyName);
+	}
+
+	public static Projection count(String propertyName) {
+		return getProjectionFactory().count(propertyName);
+	}
+
+	public static Projection countDistinct(String propertyName) {
+		return getProjectionFactory().countDistinct(propertyName);
+	}
+
+	public static Projection distinct(Projection projection) {
+		return getProjectionFactory().distinct(projection);
+	}
+
+	public static Projection groupProperty(String propertyName) {
+		return getProjectionFactory().groupProperty(propertyName);
+	}
+
+	public static Projection max(String propertyName) {
+		return getProjectionFactory().max(propertyName);
+	}
+
+	public static Projection min(String propertyName) {
+		return getProjectionFactory().min(propertyName);
+	}
+
+	public static ProjectionList projectionList() {
+		return getProjectionFactory().projectionList();
+	}
+
 	public static Projection property(String propertyName) {
 		return getProjectionFactory().property(propertyName);
+	}
+
+	public static Projection rowCount() {
+		return getProjectionFactory().rowCount();
+	}
+
+	public static Projection sum(String propertyName) {
+		return getProjectionFactory().sum(propertyName);
 	}
 
 	public static ProjectionFactory getProjectionFactory() {

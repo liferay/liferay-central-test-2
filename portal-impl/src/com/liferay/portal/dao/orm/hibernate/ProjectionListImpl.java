@@ -20,38 +20,47 @@
  * SOFTWARE.
  */
 
-package com.liferay.portal.kernel.dao.orm;
+package com.liferay.portal.dao.orm.hibernate;
+
+import com.liferay.portal.kernel.dao.orm.Projection;
+import com.liferay.portal.kernel.dao.orm.ProjectionList;
 
 /**
- * <a href="ProjectionFactory.java.html"><b><i>View Source</i></b></a>
+ * <a href="ProjectionImpl.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *
  */
-public interface ProjectionFactory {
+public class ProjectionListImpl extends ProjectionImpl
+	implements ProjectionList {
 
-	public Projection alias(Projection projection, String alias);
+	public ProjectionListImpl(
+			org.hibernate.criterion.ProjectionList projectionList) {
+		super(projectionList);
 
-	public Projection avg(String propertyName);
+		_projectionList = projectionList;
+	}
 
-	public Projection count(String propertyName);
+	public ProjectionList add(Projection projection, String alias) {
+		ProjectionImpl impl = (ProjectionImpl)projection;
 
-	public Projection countDistinct(String propertyName);
+		getProjectionList().add(impl.getProjection(), alias);
 
-	public Projection distinct(Projection projection);
+		return this;
+	}
 
-	public Projection groupProperty(String propertyName);
+	public ProjectionList add(Projection projection) {
+		ProjectionImpl impl = (ProjectionImpl)projection;
 
-	public Projection max(String propertyName);
+		getProjectionList().add(impl.getProjection());
 
-	public Projection min(String propertyName);
+		return this;
+	}
 
-	public ProjectionList projectionList();
+	public org.hibernate.criterion.ProjectionList getProjectionList() {
+		return _projectionList;
+	}
 
-	public Projection property(String propertyName);
-
-	public Projection rowCount();
-
-	public Projection sum(String propertyName);
+	private org.hibernate.criterion.ProjectionList _projectionList;
 
 }
