@@ -5877,7 +5877,7 @@ $.ui = {
 
 var _remove = $.fn.remove;
 $.fn.remove = function() {
-	$("*", this).add(this).trigger("remove");
+	$("*", this).add(this).triggerHandler("remove");
 	return _remove.apply(this, arguments );
 };
 
@@ -6008,7 +6008,7 @@ $.ui.mouse = {
 		
 		var self = this,
 			btnIsLeft = (e.which == 1),
-			elIsCancel = (typeof this.options.cancel == "string" ? $(e.target).is(this.options.cancel) : false);
+			elIsCancel = (typeof this.options.cancel == "string" ? $(e.target).parents().add(e.target).filter(this.options.cancel).length : false);
 		if (!btnIsLeft || elIsCancel || !this.mouseCapture(e)) {
 			return true;
 		}
@@ -6101,6 +6101,801 @@ $.ui.mouse.defaults = {
 };
 
 })(jQuery);
+
+/*
+ * jQuery UI Accordion
+ * 
+ * Copyright (c) 2007, 2008 Jörn Zaefferer
+ * Dual licensed under the MIT (MIT-LICENSE.txt)
+ * and GPL (GPL-LICENSE.txt) licenses.
+ *
+ * http://docs.jquery.com/UI/Accordion
+ *
+ * Depends:
+ *	ui.core.js
+ */
+(function($) {
+
+$.widget("ui.accordion", {
+	init: function() {
+		var options = this.options;
+		
+		if ( options.navigation ) {
+			var current = this.element.find("a").filter(options.navigationFilter);
+			if ( current.length ) {
+				if ( current.filter(options.header).length ) {
+					options.active = current;
+				} else {
+					options.active = current.parent().parent().prev();
+					current.addClass("current");
+				}
+			}
+		}
+		
+		// calculate active if not specified, using the first header
+		options.headers = this.element.find(options.header);
+		options.active = findActive(options.headers, options.active);
+		
+		// IE7-/Win - Extra vertical space in Lists fixed
+		if ($.browser.msie) {
+			this.element.find('a').css('zoom', '1');
+		}
+		
+		if (!this.element.hasClass("ui-accordion")) {
+			this.element.addClass("ui-accordion");
+			$("<span class='ui-accordion-left'/>").insertBefore(options.headers);
+			$("<span class='ui-accordion-right'/>").appendTo(options.headers);
+			options.headers.addClass("ui-accordion-header").attr("tabindex", "0");
+		}
+		
+		var maxHeight;
+		if ( options.fillSpace ) {
+			maxHeight = this.element.parent().height();
+			options.headers.each(function() {
+				maxHeight -= $(this).outerHeight();
+			});
+			var maxPadding = 0;
+			options.headers.next().each(function() {
+				maxPadding = Math.max(maxPadding, $(this).innerHeight() - $(this).height());
+			}).height(maxHeight - maxPadding);
+		} else if ( options.autoHeight ) {
+			maxHeight = 0;
+			options.headers.next().each(function() {
+				maxHeight = Math.max(maxHeight, $(this).outerHeight());
+			}).height(maxHeight);
+		}
+	
+		options.headers
+			.not(options.active || "")
+			.next()
+			.hide();
+		options.active.parent().andSelf().addClass(options.selectedClass);
+		
+		if (options.event) {
+			this.element.bind((options.event) + ".accordion", clickHandler);
+		}
+	},
+	activate: function(index) {
+		// call clickHandler with custom event
+		clickHandler.call(this.element[0], {
+			target: findActive( this.options.headers, index )[0]
+		});
+	},
+	destroy: function() {
+		this.options.headers.next().css("display", "");
+		if ( this.options.fillSpace || this.options.autoHeight ) {
+			this.options.headers.next().css("height", "");
+		}
+		$.removeData(this.element[0], "accordion");
+		this.element.removeClass("ui-accordion").unbind(".accordion");
+	}
+});
+
+function scopeCallback(callback, scope) {
+	return function() {
+		return callback.apply(scope, arguments);
+	};
+};
+
+function completed(cancel) {
+	// if removed while animated data can be empty
+	if (!$.data(this, "accordion")) {
+		return;
+	}
+	
+	var instance = $.data(this, "accordion");
+	var options = instance.options;
+	options.running = cancel ? 0 : --options.running;
+	if ( options.running ) {
+		return;
+	}
+	if ( options.clearStyle ) {
+		options.toShow.add(options.toHide).css({
+			height: "",
+			overflow: ""
+		});
+	}
+	$(this).triggerHandler("accordionchange", [$.event.fix({type: 'accordionchange', target: instance.element[0]}), options.data], options.change);
+}
+
+function toggle(toShow, toHide, data, clickedActive, down) {
+	var options = $.data(this, "accordion").options;
+	options.toShow = toShow;
+	options.toHide = toHide;
+	options.data = data;
+	var complete = scopeCallback(completed, this);
+	
+	// count elements to animate
+	options.running = toHide.size() === 0 ? toShow.size() : toHide.size();
+	
+	if ( options.animated ) {
+		if ( !options.alwaysOpen && clickedActive ) {
+			$.ui.accordion.animations[options.animated]({
+				toShow: jQuery([]),
+				toHide: toHide,
+				complete: complete,
+				down: down,
+				autoHeight: options.autoHeight
+			});
+		} else {
+			$.ui.accordion.animations[options.animated]({
+				toShow: toShow,
+				toHide: toHide,
+				complete: complete,
+				down: down,
+				autoHeight: options.autoHeight
+			});
+		}
+	} else {
+		if ( !options.alwaysOpen && clickedActive ) {
+			toShow.toggle();
+		} else {
+			toHide.hide();
+			toShow.show();
+		}
+		complete(true);
+	}
+}
+
+function clickHandler(event) {
+	var options = $.data(this, "accordion").options;
+	if (options.disabled) {
+		return false;
+	}
+	
+	// called only when using activate(false) to close all parts programmatically
+	if ( !event.target && !options.alwaysOpen ) {
+		options.active.parent().andSelf().toggleClass(options.selectedClass);
+		var toHide = options.active.next(),
+			data = {
+				options: options,
+				newHeader: jQuery([]),
+				oldHeader: options.active,
+				newContent: jQuery([]),
+				oldContent: toHide
+			},
+			toShow = (options.active = $([]));
+		toggle.call(this, toShow, toHide, data );
+		return false;
+	}
+	// get the click target
+	var clicked = $(event.target);
+	
+	// due to the event delegation model, we have to check if one
+	// of the parent elements is our actual header, and find that
+	// otherwise stick with the initial target
+	clicked = $( clicked.parents(options.header)[0] || clicked );
+	
+	var clickedActive = clicked[0] == options.active[0];
+	
+	// if animations are still active, or the active header is the target, ignore click
+	if (options.running || (options.alwaysOpen && clickedActive)) {
+		return false;
+	}
+	if (!clicked.is(options.header)) {
+		return;
+	}
+	
+	// switch classes
+	options.active.parent().andSelf().toggleClass(options.selectedClass);
+	if ( !clickedActive ) {
+		clicked.parent().andSelf().addClass(options.selectedClass);
+	}
+	
+	// find elements to show and hide
+	var toShow = clicked.next(),
+		toHide = options.active.next(),
+		//data = [clicked, options.active, toShow, toHide],
+		data = {
+			options: options,
+			newHeader: clicked,
+			oldHeader: options.active,
+			newContent: toShow,
+			oldContent: toHide
+		},
+		down = options.headers.index( options.active[0] ) > options.headers.index( clicked[0] );
+	
+	options.active = clickedActive ? $([]) : clicked;
+	toggle.call(this, toShow, toHide, data, clickedActive, down );
+
+	return false;
+};
+
+function findActive(headers, selector) {
+	return selector != undefined
+		? typeof selector == "number"
+			? headers.filter(":eq(" + selector + ")")
+			: headers.not(headers.not(selector))
+		: selector === false
+			? $([])
+			: headers.filter(":eq(0)");
+}
+
+$.extend($.ui.accordion, {
+	defaults: {
+		selectedClass: "selected",
+		alwaysOpen: true,
+		animated: 'slide',
+		event: "click",
+		header: "a",
+		autoHeight: true,
+		running: 0,
+		navigationFilter: function() {
+			return this.href.toLowerCase() == location.href.toLowerCase();
+		}
+	},
+	animations: {
+		slide: function(options, additions) {
+			options = $.extend({
+				easing: "swing",
+				duration: 300
+			}, options, additions);
+			if ( !options.toHide.size() ) {
+				options.toShow.animate({height: "show"}, options);
+				return;
+			}
+			var hideHeight = options.toHide.height(),
+				showHeight = options.toShow.height(),
+				difference = showHeight / hideHeight;
+			options.toShow.css({ height: 0, overflow: 'hidden' }).show();
+			options.toHide.filter(":hidden").each(options.complete).end().filter(":visible").animate({height:"hide"},{
+				step: function(now) {
+					var current = (hideHeight - now) * difference;
+					if ($.browser.msie || $.browser.opera) {
+						current = Math.ceil(current);
+					}
+					options.toShow.height( current );
+				},
+				duration: options.duration,
+				easing: options.easing,
+				complete: function() {
+					if ( !options.autoHeight ) {
+						options.toShow.css("height", "auto");
+					}
+					options.complete();
+				}
+			});
+		},
+		bounceslide: function(options) {
+			this.slide(options, {
+				easing: options.down ? "bounceout" : "swing",
+				duration: options.down ? 1000 : 200
+			});
+		},
+		easeslide: function(options) {
+			this.slide(options, {
+				easing: "easeinout",
+				duration: 700
+			});
+		}
+	}
+});
+
+// deprecated, use accordion("activate", index) instead
+$.fn.activate = function(index) {
+	return this.accordion("activate", index);
+};
+
+})(jQuery);
+
+/*
+ * jQuery UI Dialog
+ *
+ * Copyright (c) 2008 Richard D. Worth (rdworth.org)
+ * Dual licensed under the MIT (MIT-LICENSE.txt)
+ * and GPL (GPL-LICENSE.txt) licenses.
+ * 
+ * http://docs.jquery.com/UI/Dialog
+ *
+ * Depends:
+ *	ui.core.js
+ *	ui.draggable.js
+ *	ui.resizable.js
+ */
+(function($) {
+
+var setDataSwitch = {
+	dragStart: "start.draggable",
+	drag: "drag.draggable",
+	dragStop: "stop.draggable",
+	maxHeight: "maxHeight.resizable",
+	minHeight: "minHeight.resizable",
+	maxWidth: "maxWidth.resizable",
+	minWidth: "minWidth.resizable",
+	resizeStart: "start.resizable",
+	resize: "drag.resizable",
+	resizeStop: "stop.resizable"
+};
+
+$.widget("ui.dialog", {
+	init: function() {
+		var self = this,
+			options = this.options,
+			resizeHandles = typeof options.resizable == 'string'
+				? options.resizable
+				: 'n,e,s,w,se,sw,ne,nw',
+			
+			uiDialogContent = this.element
+				.addClass('ui-dialog-content')
+				.wrap('<div/>')
+				.wrap('<div/>'),
+			
+			uiDialogContainer = (this.uiDialogContainer = uiDialogContent.parent()
+				.addClass('ui-dialog-container')
+				.css({position: 'relative', width: '100%', height: '100%'})),
+			
+			title = options.title || uiDialogContent.attr('title') || '',
+			uiDialogTitlebar = (this.uiDialogTitlebar =
+				$('<div class="ui-dialog-titlebar"/>'))
+				.append('<span class="ui-dialog-title">' + title + '</span>')
+				.append('<a href="#" class="ui-dialog-titlebar-close"><span>X</span></a>')
+				.prependTo(uiDialogContainer),
+			
+			uiDialog = (this.uiDialog = uiDialogContainer.parent())
+				.appendTo(document.body)
+				.hide()
+				.addClass('ui-dialog')
+				.addClass(options.dialogClass)
+				// add content classes to dialog
+				// to inherit theme at top level of element
+				.addClass(uiDialogContent.attr('className'))
+					.removeClass('ui-dialog-content')
+				.css({
+					position: 'absolute',
+					width: options.width,
+					height: options.height,
+					overflow: 'hidden',
+					zIndex: options.zIndex
+				})
+				// setting tabIndex makes the div focusable
+				// setting outline to 0 prevents a border on focus in Mozilla
+				.attr('tabIndex', -1).css('outline', 0).keydown(function(ev) {
+					if (options.closeOnEscape) {
+						var ESC = 27;
+						(ev.keyCode && ev.keyCode == ESC && self.close());
+					}
+				})
+				.mousedown(function() {
+					self.moveToTop();
+				}),
+			
+			uiDialogButtonPane = (this.uiDialogButtonPane = $('<div/>'))
+				.addClass('ui-dialog-buttonpane').css({ position: 'absolute', bottom: 0 })
+				.appendTo(uiDialog);
+		
+		this.uiDialogTitlebarClose = $('.ui-dialog-titlebar-close', uiDialogTitlebar)
+			.hover(
+				function() {
+					$(this).addClass('ui-dialog-titlebar-close-hover');
+				},
+				function() {
+					$(this).removeClass('ui-dialog-titlebar-close-hover');
+				}
+			)
+			.mousedown(function(ev) {
+				ev.stopPropagation();
+			})
+			.click(function() {
+				self.close();
+				return false;
+			});
+
+		this.uiDialogTitlebar.find("*").add(this.uiDialogTitlebar).each(function() {
+			$.ui.disableSelection(this);
+		});
+
+		if ($.fn.draggable) {
+			uiDialog.draggable({
+				cancel: '.ui-dialog-content',
+				helper: options.dragHelper,
+				handle: '.ui-dialog-titlebar',
+				start: function(e, ui) {
+					self.moveToTop();
+					(options.dragStart && options.dragStart.apply(self.element[0], arguments));
+				},
+				drag: function(e, ui) {
+					(options.drag && options.drag.apply(self.element[0], arguments));
+				},
+				stop: function(e, ui) {
+					(options.dragStop && options.dragStop.apply(self.element[0], arguments));
+					$.ui.dialog.overlay.resize();
+				}
+			});
+			(options.draggable || uiDialog.draggable('disable'));
+		}
+		
+		if ($.fn.resizable) {
+			uiDialog.resizable({
+				cancel: '.ui-dialog-content',
+				helper: options.resizeHelper,
+				maxWidth: options.maxWidth,
+				maxHeight: options.maxHeight,
+				minWidth: options.minWidth,
+				minHeight: options.minHeight,
+				start: function() {
+					(options.resizeStart && options.resizeStart.apply(self.element[0], arguments));
+				},
+				resize: function(e, ui) {
+					(options.autoResize && self.size.apply(self));
+					(options.resize && options.resize.apply(self.element[0], arguments));
+				},
+				handles: resizeHandles,
+				stop: function(e, ui) {
+					(options.autoResize && self.size.apply(self));
+					(options.resizeStop && options.resizeStop.apply(self.element[0], arguments));
+					$.ui.dialog.overlay.resize();
+				}
+			});
+			(options.resizable || uiDialog.resizable('disable'));
+		}
+		
+		this.createButtons(options.buttons);
+		this.isOpen = false;
+		
+		(options.bgiframe && $.fn.bgiframe && uiDialog.bgiframe());
+		(options.autoOpen && this.open());
+	},
+	
+	setData: function(key, value){
+		(setDataSwitch[key] && this.uiDialog.data(setDataSwitch[key], value));
+		switch (key) {
+			case "buttons":
+				this.createButtons(value);
+				break;
+			case "draggable":
+				this.uiDialog.draggable(value ? 'enable' : 'disable');
+				break;
+			case "height":
+				this.uiDialog.height(value);
+				break;
+			case "position":
+				this.position(value);
+				break;
+			case "resizable":
+				(typeof value == 'string' && this.uiDialog.data('handles.resizable', value));
+				this.uiDialog.resizable(value ? 'enable' : 'disable');
+				break;
+			case "title":
+				$(".ui-dialog-title", this.uiDialogTitlebar).text(value);
+				break;
+			case "width":
+				this.uiDialog.width(value);
+				break;
+		}
+		
+		$.widget.prototype.setData.apply(this, arguments);
+	},
+	
+	position: function(pos) {
+		var wnd = $(window), doc = $(document),
+			pTop = doc.scrollTop(), pLeft = doc.scrollLeft(),
+			minTop = pTop;
+		
+		if ($.inArray(pos, ['center','top','right','bottom','left']) >= 0) {
+			pos = [
+				pos == 'right' || pos == 'left' ? pos : 'center',
+				pos == 'top' || pos == 'bottom' ? pos : 'middle'
+			];
+		}
+		if (pos.constructor != Array) {
+			pos = ['center', 'middle'];
+		}
+		if (pos[0].constructor == Number) {
+			pLeft += pos[0];
+		} else {
+			switch (pos[0]) {
+				case 'left':
+					pLeft += 0;
+					break;
+				case 'right':
+					pLeft += wnd.width() - this.uiDialog.width();
+					break;
+				default:
+				case 'center':
+					pLeft += (wnd.width() - this.uiDialog.width()) / 2;
+			}
+		}
+		if (pos[1].constructor == Number) {
+			pTop += pos[1];
+		} else {
+			switch (pos[1]) {
+				case 'top':
+					pTop += 0;
+					break;
+				case 'bottom':
+					pTop += wnd.height() - this.uiDialog.height();
+					break;
+				default:
+				case 'middle':
+					pTop += (wnd.height() - this.uiDialog.height()) / 2;
+			}
+		}
+		
+		// prevent the dialog from being too high (make sure the titlebar
+		// is accessible)
+		pTop = Math.max(pTop, minTop);
+		this.uiDialog.css({top: pTop, left: pLeft});
+	},
+
+	size: function() {
+		var container = this.uiDialogContainer,
+			titlebar = this.uiDialogTitlebar,
+			content = this.element,
+			tbMargin = parseInt(content.css('margin-top'),10) + parseInt(content.css('margin-bottom'),10),
+			lrMargin = parseInt(content.css('margin-left'),10) + parseInt(content.css('margin-right'),10);
+		content.height(container.height() - titlebar.outerHeight() - tbMargin);
+		content.width(container.width() - lrMargin);
+	},
+	
+	open: function() {
+		if (this.isOpen) { return; }
+		
+		this.overlay = this.options.modal ? new $.ui.dialog.overlay(this) : null;
+		(this.uiDialog.next().length > 0) && this.uiDialog.appendTo('body');
+		this.position(this.options.position);
+		this.uiDialog.show(this.options.show);
+		this.options.autoResize && this.size();
+		this.moveToTop(true);
+		
+		// CALLBACK: open
+		var openEV = null;
+		var openUI = {
+			options: this.options
+		};
+		this.uiDialogTitlebarClose.focus();
+		this.element.triggerHandler("dialogopen", [openEV, openUI], this.options.open);
+		
+		this.isOpen = true;
+	},
+	
+	// the force parameter allows us to move modal dialogs to their correct
+	// position on open
+	moveToTop: function(force) {
+		if ((this.options.modal && !force)
+			|| (!this.options.stack && !this.options.modal)) { return this.element.triggerHandler("dialogfocus", [null, { options: this.options }], this.options.focus); }
+		
+		var maxZ = this.options.zIndex, options = this.options;
+		$('.ui-dialog:visible').each(function() {
+			maxZ = Math.max(maxZ, parseInt($(this).css('z-index'), 10) || options.zIndex);
+		});
+		(this.overlay && this.overlay.$el.css('z-index', ++maxZ));
+		this.uiDialog.css('z-index', ++maxZ);
+		
+		this.element.triggerHandler("dialogfocus", [null, { options: this.options }], this.options.focus);
+	},
+	
+	close: function() {
+		(this.overlay && this.overlay.destroy());
+		this.uiDialog.hide(this.options.hide);
+
+		// CALLBACK: close
+		var closeEV = null;
+		var closeUI = {
+			options: this.options
+		};
+		this.element.triggerHandler("dialogclose", [closeEV, closeUI], this.options.close);
+		$.ui.dialog.overlay.resize();
+		
+		this.isOpen = false;
+	},
+	
+	destroy: function() {
+		(this.overlay && this.overlay.destroy());
+		this.uiDialog.hide();
+		this.element
+			.unbind('.dialog')
+			.removeData('dialog')
+			.removeClass('ui-dialog-content')
+			.hide().appendTo('body');
+		this.uiDialog.remove();
+	},
+	
+	createButtons: function(buttons) {
+		var self = this,
+			hasButtons = false,
+			uiDialogButtonPane = this.uiDialogButtonPane;
+		
+		// remove any existing buttons
+		uiDialogButtonPane.empty().hide();
+		
+		$.each(buttons, function() { return !(hasButtons = true); });
+		if (hasButtons) {
+			uiDialogButtonPane.show();
+			$.each(buttons, function(name, fn) {
+				$('<button/>')
+					.text(name)
+					.click(function() { fn.apply(self.element[0], arguments); })
+					.appendTo(uiDialogButtonPane);
+			});
+		}
+	}
+});
+
+$.extend($.ui.dialog, {
+	defaults: {
+		autoOpen: true,
+		autoResize: true,
+		bgiframe: false,
+		buttons: {},
+		closeOnEscape: true,
+		draggable: true,
+		height: 200,
+		minHeight: 100,
+		minWidth: 150,
+		modal: false,
+		overlay: {},
+		position: 'center',
+		resizable: true,
+		stack: true,
+		width: 300,
+		zIndex: 1000
+	},
+	
+	overlay: function(dialog) {
+		this.$el = $.ui.dialog.overlay.create(dialog);
+	}
+});
+
+$.extend($.ui.dialog.overlay, {
+	instances: [],
+	events: $.map('focus,mousedown,mouseup,keydown,keypress,click'.split(','),
+		function(e) { return e + '.dialog-overlay'; }).join(' '),
+	create: function(dialog) {
+		if (this.instances.length === 0) {
+			// prevent use of anchors and inputs
+			// we use a setTimeout in case the overlay is created from an
+			// event that we're going to be cancelling (see #2804)
+			setTimeout(function() {
+				$('a, :input').bind($.ui.dialog.overlay.events, function() {
+					// allow use of the element if inside a dialog and
+					// - there are no modal dialogs
+					// - there are modal dialogs, but we are in front of the topmost modal
+					var allow = false;
+					var $dialog = $(this).parents('.ui-dialog');
+					if ($dialog.length) {
+						var $overlays = $('.ui-dialog-overlay');
+						if ($overlays.length) {
+							var maxZ = parseInt($overlays.css('z-index'), 10);
+							$overlays.each(function() {
+								maxZ = Math.max(maxZ, parseInt($(this).css('z-index'), 10));
+							});
+							allow = parseInt($dialog.css('z-index'), 10) > maxZ;
+						} else {
+							allow = true;
+						}
+					}
+					return allow;
+				});
+			}, 1);
+			
+			// allow closing by pressing the escape key
+			$(document).bind('keydown.dialog-overlay', function(e) {
+				var ESC = 27;
+				(e.keyCode && e.keyCode == ESC && dialog.close()); 
+			});
+			
+			// handle window resize
+			$(window).bind('resize.dialog-overlay', $.ui.dialog.overlay.resize);
+		}
+		
+		var $el = $('<div/>').appendTo(document.body)
+			.addClass('ui-dialog-overlay').css($.extend({
+				borderWidth: 0, margin: 0, padding: 0,
+				position: 'absolute', top: 0, left: 0,
+				width: this.width(),
+				height: this.height()
+			}, dialog.options.overlay));
+		
+		(dialog.options.bgiframe && $.fn.bgiframe && $el.bgiframe());
+		
+		this.instances.push($el);
+		return $el;
+	},
+	
+	destroy: function($el) {
+		this.instances.splice($.inArray(this.instances, $el), 1);
+		
+		if (this.instances.length === 0) {
+			$('a, :input').add([document, window]).unbind('.dialog-overlay');
+		}
+		
+		$el.remove();
+	},
+	
+	height: function() {
+		if ($.browser.msie && $.browser.version < 7) {
+			var scrollHeight = Math.max(
+				document.documentElement.scrollHeight,
+				document.body.scrollHeight
+			);
+			var offsetHeight = Math.max(
+				document.documentElement.offsetHeight,
+				document.body.offsetHeight
+			);
+			
+			if (scrollHeight < offsetHeight) {
+				return $(window).height() + 'px';
+			} else {
+				return scrollHeight + 'px';
+			}
+		} else {
+			return $(document).height() + 'px';
+		}
+	},
+	
+	width: function() {
+		if ($.browser.msie && $.browser.version < 7) {
+			var scrollWidth = Math.max(
+				document.documentElement.scrollWidth,
+				document.body.scrollWidth
+			);
+			var offsetWidth = Math.max(
+				document.documentElement.offsetWidth,
+				document.body.offsetWidth
+			);
+			
+			if (scrollWidth < offsetWidth) {
+				return $(window).width() + 'px';
+			} else {
+				return scrollWidth + 'px';
+			}
+		} else {
+			return $(document).width() + 'px';
+		}
+	},
+	
+	resize: function() {
+		/* If the dialog is draggable and the user drags it past the
+		 * right edge of the window, the document becomes wider so we
+		 * need to stretch the overlay. If the user then drags the
+		 * dialog back to the left, the document will become narrower,
+		 * so we need to shrink the overlay to the appropriate size.
+		 * This is handled by shrinking the overlay before setting it
+		 * to the full document size.
+		 */
+		var $overlays = $([]);
+		$.each($.ui.dialog.overlay.instances, function() {
+			$overlays = $overlays.add(this);
+		});
+		
+		$overlays.css({
+			width: 0,
+			height: 0
+		}).css({
+			width: $.ui.dialog.overlay.width(),
+			height: $.ui.dialog.overlay.height()
+		});
+	}
+});
+
+$.extend($.ui.dialog.overlay.prototype, {
+	destroy: function() {
+		$.ui.dialog.overlay.destroy(this.$el);
+	}
+});
+
+})(jQuery);
+
 /*
  * jQuery UI Draggable
  *
@@ -6115,7 +6910,7 @@ $.ui.mouse.defaults = {
  */
 (function($) {
 
-$.widget("ui.draggable", $.extend($.ui.mouse, {
+$.widget("ui.draggable", $.extend({}, $.ui.mouse, {
 	init: function() {
 		
 		//Initialize needed constants
@@ -6319,10 +7114,11 @@ $.widget("ui.draggable", $.extend($.ui.mouse, {
 	mouseStop: function(e) {
 		
 		//If we are using droppables, inform the manager about the drop
+		var dropped = false;
 		if ($.ui.ddmanager && !this.options.dropBehaviour)
-			$.ui.ddmanager.drop(this, e);
-			
-		if(this.options.revert) {
+			var dropped = $.ui.ddmanager.drop(this, e);		
+		
+		if((this.options.revert == "invalid" && !dropped) || (this.options.revert == "valid" && dropped) || this.options.revert === true) {
 			var self = this;
 			$(this.helper).animate(this.originalPosition, parseInt(this.options.revert, 10) || 500, function() {
 				self.propagate("stop", e);
@@ -6557,10 +7353,10 @@ $.ui.plugin.add("draggable", "connectToSortable", {
 		
 		//If we are still over the sortable, we fake the stop event of the sortable, but also remove helper
 		var inst = $(this).data("draggable");
-		
 		$.each(inst.sortables, function() {
 			if(this.instance.isOver) {
 				this.instance.isOver = 0;
+
 				inst.cancelHelperRemoval = true; //Don't remove the helper in the draggable instance
 				this.instance.cancelHelperRemoval = false; //Remove it in the sortable instance (so sortable plugins like revert still work)
 				if(this.shouldRevert) this.instance.options.revert = true; //revert here
@@ -6662,6 +7458,7 @@ $.ui.plugin.add("draggable", "stack", {
 });
 
 })(jQuery);
+
 /*
  * jQuery UI Droppable
  *
@@ -6840,15 +7637,16 @@ $.ui.ddmanager = {
 		
 		var m = $.ui.ddmanager.droppables;
 		var type = e ? e.type : null; // workaround for #2317
+
 		for (var i = 0; i < m.length; i++) {
 			if(m[i].options.disabled || (t && !m[i].options.accept.call(m[i].element,(t.currentItem || t.element)))) continue;
-			m[i].visible = m[i].element.is(":visible"); if(!m[i].visible) continue; //If the element is not visible, continue
+			m[i].visible = m[i].element.css("display") != "none"; if(!m[i].visible) continue; //If the element is not visible, continue
 			m[i].offset = m[i].element.offset();
 			m[i].proportions = { width: m[i].element[0].offsetWidth, height: m[i].element[0].offsetHeight };
 			
 			if(type == "dragstart" || type == "sortactivate") m[i].activate.call(m[i], e); //Activate the droppable if used directly from draggables
 		}
-		
+
 	},
 	drop: function(draggable, e) {
 		
@@ -6874,6 +7672,7 @@ $.ui.ddmanager = {
 		if(draggable.options.refreshPositions) $.ui.ddmanager.prepareOffsets(draggable, e);
 		
 		//Run through all droppables and check their positions based on specific tolerance options
+
 		$.each($.ui.ddmanager.droppables, function() {
 			
 			if(this.options.disabled || this.greedyChild || !this.visible) return;
@@ -6941,6 +7740,7 @@ $.ui.plugin.add("droppable", "hoverClass", {
 });
 
 })(jQuery);
+
 /*
  * jQuery UI Resizable
  *
@@ -6955,7 +7755,7 @@ $.ui.plugin.add("droppable", "hoverClass", {
  */
 (function($) {
 
-$.widget("ui.resizable", $.extend($.ui.mouse, {
+$.widget("ui.resizable", $.extend({}, $.ui.mouse, {
 	init: function() {
 
 		var self = this, o = this.options;
@@ -7231,6 +8031,11 @@ $.widget("ui.resizable", $.extend($.ui.mouse, {
 		this._renderProxy();
 		
 		var curleft = num(this.helper.css('left')), curtop = num(this.helper.css('top'));
+		
+		if (o.containment) {
+			curleft += $(o.containment).scrollLeft()||0;
+			curtop += $(o.containment).scrollTop()||0;
+		}
 		
 		//Store needed variables
 		this.offset = this.helper.offset();
@@ -7706,6 +8511,7 @@ $.ui.plugin.add("resizable", "alsoResize", {
 });
 
 })(jQuery);
+
 /*
  * jQuery UI Selectable
  *
@@ -7720,7 +8526,7 @@ $.ui.plugin.add("resizable", "alsoResize", {
  */
 (function($) {
 
-$.widget("ui.selectable", $.extend($.ui.mouse, {
+$.widget("ui.selectable", $.extend({}, $.ui.mouse, {
 	init: function() {
 		var self = this;
 		
@@ -7970,6 +8776,448 @@ $.extend($.ui.selectable, {
 });
 
 })(jQuery);
+
+/*
+ * jQuery UI Slider
+ *
+ * Copyright (c) 2008 Paul Bakaus
+ * Dual licensed under the MIT (MIT-LICENSE.txt)
+ * and GPL (GPL-LICENSE.txt) licenses.
+ * 
+ * http://docs.jquery.com/UI/Slider
+ *
+ * Depends:
+ *	ui.core.js
+ */
+(function($) {
+
+$.fn.unwrap = $.fn.unwrap || function(expr) {
+  return this.each(function(){
+     $(this).parents(expr).eq(0).after(this).remove();
+  });
+};
+
+$.widget("ui.slider", {
+	plugins: {},
+	ui: function(e) {
+		return {
+			options: this.options,
+			handle: this.currentHandle,
+			value: this.options.axis != "both" || !this.options.axis ? Math.round(this.value(null,this.options.axis == "vertical" ? "y" : "x")) : {
+				x: Math.round(this.value(null,"x")),
+				y: Math.round(this.value(null,"y"))
+			},
+			range: this.getRange()
+		};
+	},
+	propagate: function(n,e) {
+		$.ui.plugin.call(this, n, [e, this.ui()]);
+		this.element.triggerHandler(n == "slide" ? n : "slide"+n, [e, this.ui()], this.options[n]);
+	},
+	destroy: function() {
+		
+		this.element
+			.removeClass("ui-slider ui-slider-disabled")
+			.removeData("slider")
+			.unbind(".slider");
+		
+		if(this.handle && this.handle.length) {
+			this.handle
+				.unwrap("a");
+			this.handle.each(function() {
+				$(this).data("mouse").mouseDestroy();
+			});
+		}
+		
+		this.generated && this.generated.remove();
+		
+	},
+	setData: function(key, value) {
+		$.widget.prototype.setData.apply(this, arguments);
+		if (/min|max|steps/.test(key)) {
+			this.initBoundaries();
+		}
+		
+		if(key == "range") {
+			value ? this.handle.length == 2 && this.createRange() : this.removeRange();
+		}
+		
+	},
+
+	init: function() {
+		
+		var self = this;
+		this.element.addClass("ui-slider");
+		this.initBoundaries();
+		
+		// Initialize mouse and key events for interaction
+		this.handle = $(this.options.handle, this.element);
+		if (!this.handle.length) {
+			self.handle = self.generated = $(self.options.handles || [0]).map(function() {
+				var handle = $("<div/>").addClass("ui-slider-handle").appendTo(self.element);
+				if (this.id)
+					handle.attr("id", this.id);
+				return handle[0];
+			});
+		}
+		
+		
+		var handleclass = function(el) {
+			this.element = $(el);
+			this.element.data("mouse", this);
+			this.options = self.options;
+			
+			this.element.bind("mousedown", function() {
+				if(self.currentHandle) this.blur(self.currentHandle);
+				self.focus(this,1);
+			});
+			
+			this.mouseInit();
+		};
+		
+		$.extend(handleclass.prototype, $.ui.mouse, {
+			mouseStart: function(e) { return self.start.call(self, e, this.element[0]); },
+			mouseStop: function(e) { return self.stop.call(self, e, this.element[0]); },
+			mouseDrag: function(e) { return self.drag.call(self, e, this.element[0]); },
+			mouseCapture: function() { return true; },
+			trigger: function(e) { this.mouseDown(e); }
+		});
+		
+		
+		$(this.handle)
+			.each(function() {
+				new handleclass(this);
+			})
+			.wrap('<a href="javascript:void(0)" style="outline:none;border:none;"></a>')
+			.parent()
+				.bind('focus', function(e) { self.focus(this.firstChild); })
+				.bind('blur', function(e) { self.blur(this.firstChild); })
+				.bind('keydown', function(e) { if(!self.options.noKeyboard) self.keydown(e.keyCode, this.firstChild); })
+		;
+		
+		// Bind the click to the slider itself
+		this.element.bind('mousedown.slider', function(e) {
+			self.click.apply(self, [e]);
+			self.currentHandle.data("mouse").trigger(e);
+			self.firstValue = self.firstValue + 1; //This is for always triggering the change event
+		});
+		
+		// Move the first handle to the startValue
+		$.each(this.options.handles || [], function(index, handle) {
+			self.moveTo(handle.start, index, true);
+		});
+		if (!isNaN(this.options.startValue))
+			this.moveTo(this.options.startValue, 0, true);
+
+		this.previousHandle = $(this.handle[0]); //set the previous handle to the first to allow clicking before selecting the handle
+		if(this.handle.length == 2 && this.options.range) this.createRange();
+	},
+	initBoundaries: function() {
+		
+		var element = this.element[0], o = this.options;
+		this.actualSize = { width: this.element.outerWidth() , height: this.element.outerHeight() };			
+		
+		$.extend(o, {
+			axis: o.axis || (element.offsetWidth < element.offsetHeight ? 'vertical' : 'horizontal'),
+			max: !isNaN(parseInt(o.max,10)) ? { x: parseInt(o.max, 10), y: parseInt(o.max, 10) } : ({ x: o.max && o.max.x || 100, y: o.max && o.max.y || 100 }),
+			min: !isNaN(parseInt(o.min,10)) ? { x: parseInt(o.min, 10), y: parseInt(o.min, 10) } : ({ x: o.min && o.min.x || 0, y: o.min && o.min.y || 0 })
+		});
+		//Prepare the real maxValue
+		o.realMax = {
+			x: o.max.x - o.min.x,
+			y: o.max.y - o.min.y
+		};
+		//Calculate stepping based on steps
+		o.stepping = {
+			x: o.stepping && o.stepping.x || parseInt(o.stepping, 10) || (o.steps ? o.realMax.x/(o.steps.x || parseInt(o.steps, 10) || o.realMax.x) : 0),
+			y: o.stepping && o.stepping.y || parseInt(o.stepping, 10) || (o.steps ? o.realMax.y/(o.steps.y || parseInt(o.steps, 10) || o.realMax.y) : 0)
+		};
+	},
+
+	
+	keydown: function(keyCode, handle) {
+		if(/(37|38|39|40)/.test(keyCode)) {
+			this.moveTo({
+				x: /(37|39)/.test(keyCode) ? (keyCode == 37 ? '-' : '+') + '=' + this.oneStep("x") : 0,
+				y: /(38|40)/.test(keyCode) ? (keyCode == 38 ? '-' : '+') + '=' + this.oneStep("y") : 0
+			}, handle);
+		}
+	},
+	focus: function(handle,hard) {
+		this.currentHandle = $(handle).addClass('ui-slider-handle-active');
+		if (hard)
+			this.currentHandle.parent()[0].focus();
+	},
+	blur: function(handle) {
+		$(handle).removeClass('ui-slider-handle-active');
+		if(this.currentHandle && this.currentHandle[0] == handle) { this.previousHandle = this.currentHandle; this.currentHandle = null; };
+	},
+	click: function(e) {
+		// This method is only used if:
+		// - The user didn't click a handle
+		// - The Slider is not disabled
+		// - There is a current, or previous selected handle (otherwise we wouldn't know which one to move)
+		
+		var pointer = [e.pageX,e.pageY];
+		
+		var clickedHandle = false;
+		this.handle.each(function() {
+			if(this == e.target)
+				clickedHandle = true;
+		});
+		if (clickedHandle || this.options.disabled || !(this.currentHandle || this.previousHandle))
+			return;
+
+		// If a previous handle was focussed, focus it again
+		if (!this.currentHandle && this.previousHandle)
+			this.focus(this.previousHandle, true);
+		
+		// propagate only for distance > 0, otherwise propagation is done my drag
+		this.offset = this.element.offset();
+
+		this.moveTo({
+			y: this.convertValue(e.pageY - this.offset.top - this.currentHandle[0].offsetHeight/2, "y"),
+			x: this.convertValue(e.pageX - this.offset.left - this.currentHandle[0].offsetWidth/2, "x")
+		}, null, !this.options.distance);
+	},
+	
+
+
+	createRange: function() {
+		if(this.rangeElement) return;
+		this.rangeElement = $('<div></div>')
+			.addClass('ui-slider-range')
+			.css({ position: 'absolute' })
+			.appendTo(this.element);
+		this.updateRange();
+	},
+	removeRange: function() {
+		this.rangeElement.remove();
+		this.rangeElement = null;
+	},
+	updateRange: function() {
+			var prop = this.options.axis == "vertical" ? "top" : "left";
+			var size = this.options.axis == "vertical" ? "height" : "width";
+			this.rangeElement.css(prop, (parseInt($(this.handle[0]).css(prop),10) || 0) + this.handleSize(0, this.options.axis == "vertical" ? "y" : "x")/2);
+			this.rangeElement.css(size, (parseInt($(this.handle[1]).css(prop),10) || 0) - (parseInt($(this.handle[0]).css(prop),10) || 0));
+	},
+	getRange: function() {
+		return this.rangeElement ? this.convertValue(parseInt(this.rangeElement.css(this.options.axis == "vertical" ? "height" : "width"),10), this.options.axis == "vertical" ? "y" : "x") : null;
+	},
+
+	handleIndex: function() {
+		return this.handle.index(this.currentHandle[0]);
+	},
+	value: function(handle, axis) {
+		if(this.handle.length == 1) this.currentHandle = this.handle;
+		if(!axis) axis = this.options.axis == "vertical" ? "y" : "x";
+
+		var curHandle = $(handle != undefined && handle !== null ? this.handle[handle] || handle : this.currentHandle);
+		
+		if(curHandle.data("mouse").sliderValue) {
+			return parseInt(curHandle.data("mouse").sliderValue[axis],10);
+		} else {
+			return parseInt(((parseInt(curHandle.css(axis == "x" ? "left" : "top"),10) / (this.actualSize[axis == "x" ? "width" : "height"] - this.handleSize(handle,axis))) * this.options.realMax[axis]) + this.options.min[axis],10);
+		}
+
+	},
+	convertValue: function(value,axis) {
+		return this.options.min[axis] + (value / (this.actualSize[axis == "x" ? "width" : "height"] - this.handleSize(null,axis))) * this.options.realMax[axis];
+	},
+	
+	translateValue: function(value,axis) {
+		return ((value - this.options.min[axis]) / this.options.realMax[axis]) * (this.actualSize[axis == "x" ? "width" : "height"] - this.handleSize(null,axis));
+	},
+	translateRange: function(value,axis) {
+		if (this.rangeElement) {
+			if (this.currentHandle[0] == this.handle[0] && value >= this.translateValue(this.value(1),axis))
+				value = this.translateValue(this.value(1,axis) - this.oneStep(axis), axis);
+			if (this.currentHandle[0] == this.handle[1] && value <= this.translateValue(this.value(0),axis))
+				value = this.translateValue(this.value(0,axis) + this.oneStep(axis), axis);
+		}
+		if (this.options.handles) {
+			var handle = this.options.handles[this.handleIndex()];
+			if (value < this.translateValue(handle.min,axis)) {
+				value = this.translateValue(handle.min,axis);
+			} else if (value > this.translateValue(handle.max,axis)) {
+				value = this.translateValue(handle.max,axis);
+			}
+		}
+		return value;
+	},
+	translateLimits: function(value,axis) {
+		if (value >= this.actualSize[axis == "x" ? "width" : "height"] - this.handleSize(null,axis))
+			value = this.actualSize[axis == "x" ? "width" : "height"] - this.handleSize(null,axis);
+		if (value <= 0)
+			value = 0;
+		return value;
+	},
+	handleSize: function(handle,axis) {
+		return $(handle != undefined && handle !== null ? this.handle[handle] : this.currentHandle)[0]["offset"+(axis == "x" ? "Width" : "Height")];	
+	},
+	oneStep: function(axis) {
+		return this.options.stepping[axis] || 1;
+	},
+
+
+	start: function(e, handle) {
+	
+		var o = this.options;
+		if(o.disabled) return false;
+
+		// Prepare the outer size
+		this.actualSize = { width: this.element.outerWidth() , height: this.element.outerHeight() };
+	
+		// This is a especially ugly fix for strange blur events happening on mousemove events
+		if (!this.currentHandle)
+			this.focus(this.previousHandle, true); 
+
+		this.offset = this.element.offset();
+		
+		this.handleOffset = this.currentHandle.offset();
+		this.clickOffset = { top: e.pageY - this.handleOffset.top, left: e.pageX - this.handleOffset.left };
+		
+		this.firstValue = this.value();
+		
+		this.propagate('start', e);
+		this.drag(e, handle);
+		return true;
+					
+	},
+	stop: function(e) {
+		this.propagate('stop', e);
+		if (this.firstValue != this.value())
+			this.propagate('change', e);
+		// This is a especially ugly fix for strange blur events happening on mousemove events
+		this.focus(this.currentHandle, true);
+		return false;
+	},
+	drag: function(e, handle) {
+
+		var o = this.options;
+		var position = { top: e.pageY - this.offset.top - this.clickOffset.top, left: e.pageX - this.offset.left - this.clickOffset.left};
+		if(!this.currentHandle) this.focus(this.previousHandle, true); //This is a especially ugly fix for strange blur events happening on mousemove events
+
+		position.left = this.translateLimits(position.left, "x");
+		position.top = this.translateLimits(position.top, "y");
+		
+		if (o.stepping.x) {
+			var value = this.convertValue(position.left, "x");
+			value = Math.round(value / o.stepping.x) * o.stepping.x;
+			position.left = this.translateValue(value, "x");	
+		}
+		if (o.stepping.y) {
+			var value = this.convertValue(position.top, "y");
+			value = Math.round(value / o.stepping.y) * o.stepping.y;
+			position.top = this.translateValue(value, "y");	
+		}
+		
+		position.left = this.translateRange(position.left, "x");
+		position.top = this.translateRange(position.top, "y");
+
+		if(o.axis != "vertical") this.currentHandle.css({ left: position.left });
+		if(o.axis != "horizontal") this.currentHandle.css({ top: position.top });
+		
+		//Store the slider's value
+		this.currentHandle.data("mouse").sliderValue = {
+			x: Math.round(this.convertValue(position.left, "x")) || 0,
+			y: Math.round(this.convertValue(position.top, "y")) || 0
+		};
+		
+		if (this.rangeElement)
+			this.updateRange();
+		this.propagate('slide', e);
+		return false;
+	},
+	
+	moveTo: function(value, handle, noPropagation) {
+
+		var o = this.options;
+
+		// Prepare the outer size
+		this.actualSize = { width: this.element.outerWidth() , height: this.element.outerHeight() };
+
+		//If no handle has been passed, no current handle is available and we have multiple handles, return false
+		if (handle == undefined && !this.currentHandle && this.handle.length != 1)
+			return false; 
+		
+		//If only one handle is available, use it
+		if (handle == undefined && !this.currentHandle)
+			handle = 0;
+		
+		if (handle != undefined)
+			this.currentHandle = this.previousHandle = $(this.handle[handle] || handle);
+
+
+		if(value.x !== undefined && value.y !== undefined) {
+			var x = value.x, y = value.y;
+		} else {
+			var x = value, y = value;
+		}
+
+		if(x !== undefined && x.constructor != Number) {
+			var me = /^\-\=/.test(x), pe = /^\+\=/.test(x);
+			if(me || pe) {
+				x = this.value(null, "x") + parseInt(x.replace(me ? '=' : '+=', ''), 10);
+			} else {
+				x = isNaN(parseInt(x, 10)) ? undefined : parseInt(x, 10);
+			}
+		}
+		
+		if(y !== undefined && y.constructor != Number) {
+			var me = /^\-\=/.test(y), pe = /^\+\=/.test(y);
+			if(me || pe) {
+				y = this.value(null, "y") + parseInt(y.replace(me ? '=' : '+=', ''), 10);
+			} else {
+				y = isNaN(parseInt(y, 10)) ? undefined : parseInt(y, 10);
+			}
+		}
+
+		if(o.axis != "vertical" && x !== undefined) {
+			if(o.stepping.x) x = Math.round(x / o.stepping.x) * o.stepping.x;
+			x = this.translateValue(x, "x");
+			x = this.translateLimits(x, "x");
+			x = this.translateRange(x, "x");
+
+			o.animate ? this.currentHandle.stop().animate({ left: x }, (Math.abs(parseInt(this.currentHandle.css("left")) - x)) * (!isNaN(parseInt(o.animate)) ? o.animate : 5)) : this.currentHandle.css({ left: x });
+		}
+
+		if(o.axis != "horizontal" && y !== undefined) {
+			if(o.stepping.y) y = Math.round(y / o.stepping.y) * o.stepping.y;
+			y = this.translateValue(y, "y");
+			y = this.translateLimits(y, "y");
+			y = this.translateRange(y, "y");
+			o.animate ? this.currentHandle.stop().animate({ top: y }, (Math.abs(parseInt(this.currentHandle.css("top")) - y)) * (!isNaN(parseInt(o.animate)) ? o.animate : 5)) : this.currentHandle.css({ top: y });
+		}
+		
+		if (this.rangeElement)
+			this.updateRange();
+			
+		//Store the slider's value
+		this.currentHandle.data("mouse").sliderValue = {
+			x: Math.round(this.convertValue(x, "x")) || 0,
+			y: Math.round(this.convertValue(y, "y")) || 0
+		};
+	
+		if (!noPropagation) {
+			this.propagate('start', null);
+			this.propagate('stop', null);
+			this.propagate('change', null);
+			this.propagate("slide", null);
+		}
+	}
+});
+
+$.ui.slider.getter = "value";
+
+$.ui.slider.defaults = {
+	handle: ".ui-slider-handle",
+	distance: 1,
+	animate: false
+};
+
+})(jQuery);
+
 /*
  * jQuery UI Sortable
  *
@@ -7996,7 +9244,7 @@ function contains(a, b) {
     return false; 
 };
 
-$.widget("ui.sortable", $.extend($.ui.mouse, {
+$.widget("ui.sortable", $.extend({}, $.ui.mouse, {
 	init: function() {
 
 		var o = this.options;
@@ -8064,7 +9312,7 @@ $.widget("ui.sortable", $.extend($.ui.mouse, {
 		var l = item.left, r = l + item.width, 
 		t = item.top, b = t + item.height;
 
-		if(this.options.tolerance == "pointer" || (this.options.tolerance == "guess" && this.helperProportions[this.floating ? 'width' : 'height'] > item[this.floating ? 'width' : 'height'])) {
+		if(this.options.tolerance == "pointer" || this.options.forcePointerForContainers || (this.options.tolerance == "guess" && this.helperProportions[this.floating ? 'width' : 'height'] > item[this.floating ? 'width' : 'height'])) {
 			return (y1 + this.offset.click.top > t && y1 + this.offset.click.top < b && x1 + this.offset.click.left > l && x1 + this.offset.click.left < r);
 		} else {
 		
@@ -8178,15 +9426,19 @@ $.widget("ui.sortable", $.extend($.ui.mouse, {
 			this.items[i].top = p.top;
 			
 		};
-		
-		for (var i = this.containers.length - 1; i >= 0; i--){
-			var p =this.containers[i].element.offset();
-			this.containers[i].containerCache.left = p.left;
-			this.containers[i].containerCache.top = p.top;
-			this.containers[i].containerCache.width	= this.containers[i].element.outerWidth();
-			this.containers[i].containerCache.height = this.containers[i].element.outerHeight();
-		};
-		
+
+		if(this.options.custom && this.options.custom.refreshContainers) {
+			this.options.custom.refreshContainers.call(this);
+		} else {
+			for (var i = this.containers.length - 1; i >= 0; i--){
+				var p =this.containers[i].element.offset();
+				this.containers[i].containerCache.left = p.left;
+				this.containers[i].containerCache.top = p.top;
+				this.containers[i].containerCache.width	= this.containers[i].element.outerWidth();
+				this.containers[i].containerCache.height = this.containers[i].element.outerHeight();
+			};
+		}
+
 	},
 	destroy: function() {
 		this.element
@@ -8586,7 +9838,7 @@ $.widget("ui.sortable", $.extend($.ui.mouse, {
 		if(this.placeholder) this.placeholder.remove();
 		this.helper.remove(); this.helper = null;
 		this.propagate("stop", e, null, noPropagation);
-		
+
 		return true;
 		
 	}
@@ -8709,6 +9961,607 @@ $.ui.plugin.add("sortable", "axis", {
 });
 
 })(jQuery);
+
+/*
+ * jQuery UI Tabs
+ *
+ * Copyright (c) 2007, 2008 Klaus Hartl (stilbuero.de)
+ * Dual licensed under the MIT (MIT-LICENSE.txt)
+ * and GPL (GPL-LICENSE.txt) licenses.
+ *
+ * http://docs.jquery.com/UI/Tabs
+ *
+ * Depends:
+ *	ui.core.js
+ */
+(function($) {
+
+$.widget("ui.tabs", {
+	init: function() {
+		this.options.event += '.tabs'; // namespace event
+		
+		// create tabs
+		this.tabify(true);
+	},
+	setData: function(key, value) {
+		if ((/^selected/).test(key))
+			this.select(value);
+		else {
+			this.options[key] = value;
+			this.tabify();
+		}
+	},
+	length: function() {
+		return this.$tabs.length;
+	},
+	tabId: function(a) {
+		return a.title && a.title.replace(/\s/g, '_').replace(/[^A-Za-z0-9\-_:\.]/g, '')
+			|| this.options.idPrefix + $.data(a);
+	},
+	ui: function(tab, panel) {
+		return {
+			options: this.options,
+			tab: tab,
+			panel: panel,
+			index: this.$tabs.index(tab)
+		};
+	},
+	tabify: function(init) {
+
+		this.$lis = $('li:has(a[href])', this.element);
+		this.$tabs = this.$lis.map(function() { return $('a', this)[0]; });
+		this.$panels = $([]);
+
+		var self = this, o = this.options;
+
+		this.$tabs.each(function(i, a) {
+			// inline tab
+			if (a.hash && a.hash.replace('#', '')) // Safari 2 reports '#' for an empty hash
+				self.$panels = self.$panels.add(a.hash);
+			// remote tab
+			else if ($(a).attr('href') != '#') { // prevent loading the page itself if href is just "#"
+				$.data(a, 'href.tabs', a.href); // required for restore on destroy
+				$.data(a, 'load.tabs', a.href); // mutable
+				var id = self.tabId(a);
+				a.href = '#' + id;
+				var $panel = $('#' + id);
+				if (!$panel.length) {
+					$panel = $(o.panelTemplate).attr('id', id).addClass(o.panelClass)
+						.insertAfter( self.$panels[i - 1] || self.element );
+					$panel.data('destroy.tabs', true);
+				}
+				self.$panels = self.$panels.add( $panel );
+			}
+			// invalid tab href
+			else
+				o.disabled.push(i + 1);
+		});
+
+		if (init) {
+
+			// attach necessary classes for styling if not present
+			this.element.addClass(o.navClass);
+			this.$panels.each(function() {
+				var $this = $(this);
+				$this.addClass(o.panelClass);
+			});
+
+			// Selected tab
+			// use "selected" option or try to retrieve:
+			// 1. from fragment identifier in url
+			// 2. from cookie
+			// 3. from selected class attribute on <li>
+			if (o.selected === undefined) {
+				if (location.hash) {
+					this.$tabs.each(function(i, a) {
+						if (a.hash == location.hash) {
+							o.selected = i;
+							// prevent page scroll to fragment
+							if ($.browser.msie || $.browser.opera) { // && !o.remote
+								var $toShow = $(location.hash), toShowId = $toShow.attr('id');
+								$toShow.attr('id', '');
+								setTimeout(function() {
+									$toShow.attr('id', toShowId); // restore id
+								}, 500);
+							}
+							scrollTo(0, 0);
+							return false; // break
+						}
+					});
+				}
+				else if (o.cookie) {
+					var index = parseInt($.cookie('ui-tabs' + $.data(self.element)),10);
+					if (index && self.$tabs[index])
+						o.selected = index;
+				}
+				else if (self.$lis.filter('.' + o.selectedClass).length)
+					o.selected = self.$lis.index( self.$lis.filter('.' + o.selectedClass)[0] );
+			}
+			o.selected = o.selected === null || o.selected !== undefined ? o.selected : 0; // first tab selected by default
+
+			// Take disabling tabs via class attribute from HTML
+			// into account and update option properly.
+			// A selected tab cannot become disabled.
+			o.disabled = $.unique(o.disabled.concat(
+				$.map(this.$lis.filter('.' + o.disabledClass),
+					function(n, i) { return self.$lis.index(n); } )
+			)).sort();
+			if ($.inArray(o.selected, o.disabled) != -1)
+				o.disabled.splice($.inArray(o.selected, o.disabled), 1);
+			
+			// highlight selected tab
+			this.$panels.addClass(o.hideClass);
+			this.$lis.removeClass(o.selectedClass);
+			if (o.selected !== null) {
+				this.$panels.eq(o.selected).show().removeClass(o.hideClass); // use show and remove class to show in any case no matter how it has been hidden before
+				this.$lis.eq(o.selected).addClass(o.selectedClass);
+				
+				// seems to be expected behavior that the show callback is fired
+				var onShow = function() {
+					$(self.element).triggerHandler('tabsshow',
+						[self.fakeEvent('tabsshow'), self.ui(self.$tabs[o.selected], self.$panels[o.selected])], o.show);
+				}; 
+
+				// load if remote tab
+				if ($.data(this.$tabs[o.selected], 'load.tabs'))
+					this.load(o.selected, onShow);
+				// just trigger show event
+				else
+					onShow();
+				
+			}
+			
+			// clean up to avoid memory leaks in certain versions of IE 6
+			$(window).bind('unload', function() {
+				self.$tabs.unbind('.tabs');
+				self.$lis = self.$tabs = self.$panels = null;
+			});
+
+		}
+
+		// disable tabs
+		for (var i = 0, li; li = this.$lis[i]; i++)
+			$(li)[$.inArray(i, o.disabled) != -1 && !$(li).hasClass(o.selectedClass) ? 'addClass' : 'removeClass'](o.disabledClass);
+
+		// reset cache if switching from cached to not cached
+		if (o.cache === false)
+			this.$tabs.removeData('cache.tabs');
+		
+		// set up animations
+		var hideFx, showFx, baseFx = { 'min-width': 0, duration: 1 }, baseDuration = 'normal';
+		if (o.fx && o.fx.constructor == Array)
+			hideFx = o.fx[0] || baseFx, showFx = o.fx[1] || baseFx;
+		else
+			hideFx = showFx = o.fx || baseFx;
+
+		// reset some styles to maintain print style sheets etc.
+		var resetCSS = { display: '', overflow: '', height: '' };
+		if (!$.browser.msie) // not in IE to prevent ClearType font issue
+			resetCSS.opacity = '';
+
+		// Hide a tab, animation prevents browser scrolling to fragment,
+		// $show is optional.
+		function hideTab(clicked, $hide, $show) {
+			$hide.animate(hideFx, hideFx.duration || baseDuration, function() { //
+				$hide.addClass(o.hideClass).css(resetCSS); // maintain flexible height and accessibility in print etc.
+				if ($.browser.msie && hideFx.opacity)
+					$hide[0].style.filter = '';
+				if ($show)
+					showTab(clicked, $show, $hide);
+			});
+		}
+
+		// Show a tab, animation prevents browser scrolling to fragment,
+		// $hide is optional.
+		function showTab(clicked, $show, $hide) {
+			if (showFx === baseFx)
+				$show.css('display', 'block'); // prevent occasionally occuring flicker in Firefox cause by gap between showing and hiding the tab panels
+			$show.animate(showFx, showFx.duration || baseDuration, function() {
+				$show.removeClass(o.hideClass).css(resetCSS); // maintain flexible height and accessibility in print etc.
+				if ($.browser.msie && showFx.opacity)
+					$show[0].style.filter = '';
+
+				// callback
+				$(self.element).triggerHandler('tabsshow',
+					[self.fakeEvent('tabsshow'), self.ui(clicked, $show[0])], o.show);
+
+			});
+		}
+
+		// switch a tab
+		function switchTab(clicked, $li, $hide, $show) {
+			/*if (o.bookmarkable && trueClick) { // add to history only if true click occured, not a triggered click
+				$.ajaxHistory.update(clicked.hash);
+			}*/
+			$li.addClass(o.selectedClass)
+				.siblings().removeClass(o.selectedClass);
+			hideTab(clicked, $hide, $show);
+		}
+
+		// attach tab event handler, unbind to avoid duplicates from former tabifying...
+		this.$tabs.unbind('.tabs').bind(o.event, function() {
+
+			//var trueClick = e.clientX; // add to history only if true click occured, not a triggered click
+			var $li = $(this).parents('li:eq(0)'),
+				$hide = self.$panels.filter(':visible'),
+				$show = $(this.hash);
+
+			// If tab is already selected and not unselectable or tab disabled or 
+			// or is already loading or click callback returns false stop here.
+			// Check if click handler returns false last so that it is not executed
+			// for a disabled or loading tab!
+			if (($li.hasClass(o.selectedClass) && !o.unselect)
+				|| $li.hasClass(o.disabledClass) 
+				|| $(this).hasClass(o.loadingClass)
+				|| $(self.element).triggerHandler('tabsselect', [self.fakeEvent('tabsselect'), self.ui(this, $show[0])], o.select) === false
+				) {
+				this.blur();
+				return false;
+			}
+
+			self.options.selected = self.$tabs.index(this);
+
+			// if tab may be closed
+			if (o.unselect) {
+				if ($li.hasClass(o.selectedClass)) {
+					self.options.selected = null;
+					$li.removeClass(o.selectedClass);
+					self.$panels.stop();
+					hideTab(this, $hide);
+					this.blur();
+					return false;
+				} else if (!$hide.length) {
+					self.$panels.stop();
+					var a = this;
+					self.load(self.$tabs.index(this), function() {
+						$li.addClass(o.selectedClass).addClass(o.unselectClass);
+						showTab(a, $show);
+					});
+					this.blur();
+					return false;
+				}
+			}
+
+			if (o.cookie)
+				$.cookie('ui-tabs' + $.data(self.element), self.options.selected, o.cookie);
+
+			// stop possibly running animations
+			self.$panels.stop();
+
+			// show new tab
+			if ($show.length) {
+
+				// prevent scrollbar scrolling to 0 and than back in IE7, happens only if bookmarking/history is enabled
+				/*if ($.browser.msie && o.bookmarkable) {
+					var showId = this.hash.replace('#', '');
+					$show.attr('id', '');
+					setTimeout(function() {
+						$show.attr('id', showId); // restore id
+					}, 0);
+				}*/
+
+				var a = this;
+				self.load(self.$tabs.index(this), $hide.length ? 
+					function() {
+						switchTab(a, $li, $hide, $show);
+					} :
+					function() {
+						$li.addClass(o.selectedClass);
+						showTab(a, $show);
+					}
+				);
+
+				// Set scrollbar to saved position - need to use timeout with 0 to prevent browser scroll to target of hash
+				/*var scrollX = window.pageXOffset || document.documentElement && document.documentElement.scrollLeft || document.body.scrollLeft || 0;
+				var scrollY = window.pageYOffset || document.documentElement && document.documentElement.scrollTop || document.body.scrollTop || 0;
+				setTimeout(function() {
+					scrollTo(scrollX, scrollY);
+				}, 0);*/
+
+			} else
+				throw 'jQuery UI Tabs: Mismatching fragment identifier.';
+
+			// Prevent IE from keeping other link focussed when using the back button
+			// and remove dotted border from clicked link. This is controlled in modern
+			// browsers via CSS, also blur removes focus from address bar in Firefox
+			// which can become a usability and annoying problem with tabsRotate.
+			if ($.browser.msie)
+				this.blur();
+
+			//return o.bookmarkable && !!trueClick; // convert trueClick == undefined to Boolean required in IE
+			return false;
+
+		});
+
+		// disable click if event is configured to something else
+		if (!(/^click/).test(o.event))
+			this.$tabs.bind('click.tabs', function() { return false; });
+
+	},
+	add: function(url, label, index) {
+		if (index == undefined) 
+			index = this.$tabs.length; // append by default
+
+		var o = this.options;
+		var $li = $(o.tabTemplate.replace(/#\{href\}/g, url).replace(/#\{label\}/g, label));
+		$li.data('destroy.tabs', true);
+
+		var id = url.indexOf('#') == 0 ? url.replace('#', '') : this.tabId( $('a:first-child', $li)[0] );
+
+		// try to find an existing element before creating a new one
+		var $panel = $('#' + id);
+		if (!$panel.length) {
+			$panel = $(o.panelTemplate).attr('id', id)
+				.addClass(o.hideClass)
+				.data('destroy.tabs', true);
+		}
+		$panel.addClass(o.panelClass);
+		if (index >= this.$lis.length) {
+			$li.appendTo(this.element);
+			$panel.appendTo(this.element[0].parentNode);
+		} else {
+			$li.insertBefore(this.$lis[index]);
+			$panel.insertBefore(this.$panels[index]);
+		}
+		
+		o.disabled = $.map(o.disabled,
+			function(n, i) { return n >= index ? ++n : n });
+			
+		this.tabify();
+
+		if (this.$tabs.length == 1) {
+			$li.addClass(o.selectedClass);
+			$panel.removeClass(o.hideClass);
+			var href = $.data(this.$tabs[0], 'load.tabs');
+			if (href)
+				this.load(index, href);
+		}
+
+		// callback
+		this.element.triggerHandler('tabsadd',
+			[this.fakeEvent('tabsadd'), this.ui(this.$tabs[index], this.$panels[index])], o.add
+		);
+	},
+	remove: function(index) {
+		var o = this.options, $li = this.$lis.eq(index).remove(),
+			$panel = this.$panels.eq(index).remove();
+
+		// If selected tab was removed focus tab to the right or
+		// in case the last tab was removed the tab to the left.
+		if ($li.hasClass(o.selectedClass) && this.$tabs.length > 1)
+			this.select(index + (index + 1 < this.$tabs.length ? 1 : -1));
+
+		o.disabled = $.map($.grep(o.disabled, function(n, i) { return n != index; }),
+			function(n, i) { return n >= index ? --n : n });
+
+		this.tabify();
+
+		// callback
+		this.element.triggerHandler('tabsremove',
+			[this.fakeEvent('tabsremove'), this.ui($li.find('a')[0], $panel[0])], o.remove
+		);
+	},
+	enable: function(index) {
+		var o = this.options;
+		if ($.inArray(index, o.disabled) == -1)
+			return;
+			
+		var $li = this.$lis.eq(index).removeClass(o.disabledClass);
+		if ($.browser.safari) { // fix disappearing tab (that used opacity indicating disabling) after enabling in Safari 2...
+			$li.css('display', 'inline-block');
+			setTimeout(function() {
+				$li.css('display', 'block');
+			}, 0);
+		}
+
+		o.disabled = $.grep(o.disabled, function(n, i) { return n != index; });
+
+		// callback
+		this.element.triggerHandler('tabsenable',
+			[this.fakeEvent('tabsenable'), this.ui(this.$tabs[index], this.$panels[index])], o.enable
+		);
+
+	},
+	disable: function(index) {
+		var self = this, o = this.options;
+		if (index != o.selected) { // cannot disable already selected tab
+			this.$lis.eq(index).addClass(o.disabledClass);
+
+			o.disabled.push(index);
+			o.disabled.sort();
+
+			// callback
+			this.element.triggerHandler('tabsdisable',
+				[this.fakeEvent('tabsdisable'), this.ui(this.$tabs[index], this.$panels[index])], o.disable
+			);
+		}
+	},
+	select: function(index) {
+		if (typeof index == 'string')
+			index = this.$tabs.index( this.$tabs.filter('[href$=' + index + ']')[0] );
+		this.$tabs.eq(index).trigger(this.options.event);
+	},
+	load: function(index, callback) { // callback is for internal usage only
+		
+		var self = this, o = this.options, $a = this.$tabs.eq(index), a = $a[0],
+				bypassCache = callback == undefined || callback === false, url = $a.data('load.tabs');
+
+		callback = callback || function() {};
+		
+		// no remote or from cache - just finish with callback
+		if (!url || !bypassCache && $.data(a, 'cache.tabs')) {
+			callback();
+			return;
+		}
+
+		// load remote from here on
+		
+		var inner = function(parent) {
+			var $parent = $(parent), $inner = $parent.find('*:last');
+			return $inner.length && $inner.is(':not(img)') && $inner || $parent;
+		};
+		var cleanup = function() {
+			self.$tabs.filter('.' + o.loadingClass).removeClass(o.loadingClass)
+						.each(function() {
+							if (o.spinner)
+								inner(this).parent().html(inner(this).data('label.tabs'));
+						});
+			self.xhr = null;
+		};
+		
+		if (o.spinner) {
+			var label = inner(a).html();
+			inner(a).wrapInner('<em></em>')
+				.find('em').data('label.tabs', label).html(o.spinner);
+		}
+
+		var ajaxOptions = $.extend({}, o.ajaxOptions, {
+			url: url,
+			success: function(r, s) {
+				$(a.hash).html(r);
+				cleanup();
+				
+				if (o.cache)
+					$.data(a, 'cache.tabs', true); // if loaded once do not load them again
+
+				// callbacks
+				$(self.element).triggerHandler('tabsload',
+					[self.fakeEvent('tabsload'), self.ui(self.$tabs[index], self.$panels[index])], o.load
+				);
+				o.ajaxOptions.success && o.ajaxOptions.success(r, s);
+				
+				// This callback is required because the switch has to take
+				// place after loading has completed. Call last in order to 
+				// fire load before show callback...
+				callback();
+			}
+		});
+		if (this.xhr) {
+			// terminate pending requests from other tabs and restore tab label
+			this.xhr.abort();
+			cleanup();
+		}
+		$a.addClass(o.loadingClass);
+		setTimeout(function() { // timeout is again required in IE, "wait" for id being restored
+			self.xhr = $.ajax(ajaxOptions);
+		}, 0);
+
+	},
+	url: function(index, url) {
+		this.$tabs.eq(index).removeData('cache.tabs').data('load.tabs', url);
+	},
+	destroy: function() {
+		var o = this.options;
+		this.element.unbind('.tabs')
+			.removeClass(o.navClass).removeData('tabs');
+		this.$tabs.each(function() {
+			var href = $.data(this, 'href.tabs');
+			if (href)
+				this.href = href;
+			var $this = $(this).unbind('.tabs');
+			$.each(['href', 'load', 'cache'], function(i, prefix) {
+				$this.removeData(prefix + '.tabs');
+			});
+		});
+		this.$lis.add(this.$panels).each(function() {
+			if ($.data(this, 'destroy.tabs'))
+				$(this).remove();
+			else
+				$(this).removeClass([o.selectedClass, o.unselectClass,
+					o.disabledClass, o.panelClass, o.hideClass].join(' '));
+		});
+	},
+	fakeEvent: function(type) {
+		return $.event.fix({
+			type: type,
+			target: this.element[0]
+		});
+	}
+});
+
+$.ui.tabs.defaults = {
+	// basic setup
+	unselect: false,
+	event: 'click',
+	disabled: [],
+	cookie: null, // e.g. { expires: 7, path: '/', domain: 'jquery.com', secure: true }
+	// TODO history: false,
+
+	// Ajax
+	spinner: 'Loading&#8230;',
+	cache: false,
+	idPrefix: 'ui-tabs-',
+	ajaxOptions: {},
+
+	// animations
+	fx: null, // e.g. { height: 'toggle', opacity: 'toggle', duration: 200 }
+
+	// templates
+	tabTemplate: '<li><a href="#{href}"><span>#{label}</span></a></li>',
+	panelTemplate: '<div></div>',
+
+	// CSS classes
+	navClass: 'ui-tabs-nav',
+	selectedClass: 'ui-tabs-selected',
+	unselectClass: 'ui-tabs-unselect',
+	disabledClass: 'ui-tabs-disabled',
+	panelClass: 'ui-tabs-panel',
+	hideClass: 'ui-tabs-hide',
+	loadingClass: 'ui-tabs-loading'
+};
+
+$.ui.tabs.getter = "length";
+
+/*
+ * Tabs Extensions
+ */
+
+/*
+ * Rotate
+ */
+$.extend($.ui.tabs.prototype, {
+	rotation: null,
+	rotate: function(ms, continuing) {
+		
+		continuing = continuing || false;
+		
+		var self = this, t = this.options.selected;
+		
+		function start() {
+			self.rotation = setInterval(function() {
+				t = ++t < self.$tabs.length ? t : 0;
+				self.select(t);
+			}, ms); 
+		}
+		
+		function stop(e) {
+			if (!e || e.clientX) { // only in case of a true click
+				clearInterval(self.rotation);
+			}
+		}
+		
+		// start interval
+		if (ms) {
+			start();
+			if (!continuing)
+				this.$tabs.bind(this.options.event, stop);
+			else
+				this.$tabs.bind(this.options.event, function() {
+					stop();
+					t = self.options.selected;
+					start();
+				});
+		}
+		// stop interval
+		else {
+			stop();
+			this.$tabs.unbind(this.options.event, stop);
+		}
+	}
+});
+
+})(jQuery);
+
 /*
  * jQuery UI Effects @VERSION
  *
@@ -9218,6 +11071,7 @@ jQuery.extend( jQuery.easing,
  */
 
 })(jQuery);
+
 /*
  * jQuery UI Effects Blind
  *
@@ -9267,6 +11121,7 @@ $.effects.blind = function(o) {
 };
 
 })(jQuery);
+
 /*
  * jQuery UI Effects Bounce
  *
@@ -9345,6 +11200,7 @@ $.effects.bounce = function(o) {
 };
 
 })(jQuery);
+
 /*
  * jQuery UI Effects Clip
  *
@@ -9399,6 +11255,7 @@ $.effects.clip = function(o) {
 };
 
 })(jQuery);
+
 /*
  * jQuery UI Effects Drop
  *
@@ -9449,6 +11306,7 @@ $.effects.drop = function(o) {
 };
 
 })(jQuery);
+
 /*
  * jQuery UI Effects Explode
  *
@@ -9528,6 +11386,7 @@ $.effects.explode = function(o) {
 };
 
 })(jQuery);
+
 /*
  * jQuery UI Effects Fold
  *
@@ -9583,6 +11442,7 @@ $.effects.fold = function(o) {
 };
 
 })(jQuery);
+
 /*
  * jQuery UI Effects Highlight
  *
@@ -9631,6 +11491,7 @@ $.effects.highlight = function(o) {
 };
 
 })(jQuery);
+
 /*
  * jQuery UI Effects Pulsate
  *
@@ -9686,6 +11547,7 @@ $.effects.pulsate = function(o) {
 };
 
 })(jQuery);
+
 /*
  * jQuery UI Effects Scale
  *
@@ -9866,6 +11728,7 @@ $.effects.size = function(o) {
 };
 
 })(jQuery);
+
 /*
  * jQuery UI Effects Shake
  *
@@ -9923,6 +11786,7 @@ $.effects.shake = function(o) {
 };
 
 })(jQuery);
+
 /*
  * jQuery UI Effects Slide
  *
@@ -9973,6 +11837,7 @@ $.effects.slide = function(o) {
 };
 
 })(jQuery);
+
 /*
  * jQuery UI Effects Transfer
  *
@@ -10030,3334 +11895,6 @@ $.effects.transfer = function(o) {
 	});
 	
 };
-
-})(jQuery);
-/*
- * jQuery UI Accordion
- * 
- * Copyright (c) 2007, 2008 Jörn Zaefferer
- * Dual licensed under the MIT (MIT-LICENSE.txt)
- * and GPL (GPL-LICENSE.txt) licenses.
- *
- * http://docs.jquery.com/UI/Accordion
- *
- * Depends:
- *	ui.core.js
- */
-(function($) {
-
-$.widget("ui.accordion", {
-	init: function() {
-		var options = this.options;
-		
-		if ( options.navigation ) {
-			var current = this.element.find("a").filter(options.navigationFilter);
-			if ( current.length ) {
-				if ( current.filter(options.header).length ) {
-					options.active = current;
-				} else {
-					options.active = current.parent().parent().prev();
-					current.addClass("current");
-				}
-			}
-		}
-		
-		// calculate active if not specified, using the first header
-		options.headers = this.element.find(options.header);
-		options.active = findActive(options.headers, options.active);
-		
-		// IE7-/Win - Extra vertical space in Lists fixed
-		if ($.browser.msie) {
-			this.element.find('a').css('zoom', '1');
-		}
-		
-		if (!this.element.hasClass("ui-accordion")) {
-			this.element.addClass("ui-accordion");
-			$("<span class='ui-accordion-left'/>").insertBefore(options.headers);
-			$("<span class='ui-accordion-right'/>").appendTo(options.headers);
-			options.headers.addClass("ui-accordion-header").attr("tabindex", "0");
-		}
-		
-		var maxHeight;
-		if ( options.fillSpace ) {
-			maxHeight = this.element.parent().height();
-			options.headers.each(function() {
-				maxHeight -= $(this).outerHeight();
-			});
-			var maxPadding = 0;
-			options.headers.next().each(function() {
-				maxPadding = Math.max(maxPadding, $(this).innerHeight() - $(this).height());
-			}).height(maxHeight - maxPadding);
-		} else if ( options.autoHeight ) {
-			maxHeight = 0;
-			options.headers.next().each(function() {
-				maxHeight = Math.max(maxHeight, $(this).outerHeight());
-			}).height(maxHeight);
-		}
-	
-		options.headers
-			.not(options.active || "")
-			.next()
-			.hide();
-		options.active.parent().andSelf().addClass(options.selectedClass);
-		
-		if (options.event) {
-			this.element.bind((options.event) + ".accordion", clickHandler);
-		}
-	},
-	activate: function(index) {
-		// call clickHandler with custom event
-		clickHandler.call(this.element[0], {
-			target: findActive( this.options.headers, index )[0]
-		});
-	},
-	destroy: function() {
-		this.options.headers.next().css("display", "");
-		if ( this.options.fillSpace || this.options.autoHeight ) {
-			this.options.headers.next().css("height", "");
-		}
-		$.removeData(this.element[0], "accordion");
-		this.element.removeClass("ui-accordion").unbind(".accordion");
-	}
-});
-
-function scopeCallback(callback, scope) {
-	return function() {
-		return callback.apply(scope, arguments);
-	};
-};
-
-function completed(cancel) {
-	// if removed while animated data can be empty
-	if (!$.data(this, "accordion")) {
-		return;
-	}
-	
-	var instance = $.data(this, "accordion");
-	var options = instance.options;
-	options.running = cancel ? 0 : --options.running;
-	if ( options.running ) {
-		return;
-	}
-	if ( options.clearStyle ) {
-		options.toShow.add(options.toHide).css({
-			height: "",
-			overflow: ""
-		});
-	}
-	$(this).triggerHandler("accordionchange", [$.event.fix({type: 'accordionchange', target: instance.element[0]}), options.data], options.change);
-}
-
-function toggle(toShow, toHide, data, clickedActive, down) {
-	var options = $.data(this, "accordion").options;
-	options.toShow = toShow;
-	options.toHide = toHide;
-	options.data = data;
-	var complete = scopeCallback(completed, this);
-	
-	// count elements to animate
-	options.running = toHide.size() === 0 ? toShow.size() : toHide.size();
-	
-	if ( options.animated ) {
-		if ( !options.alwaysOpen && clickedActive ) {
-			$.ui.accordion.animations[options.animated]({
-				toShow: jQuery([]),
-				toHide: toHide,
-				complete: complete,
-				down: down,
-				autoHeight: options.autoHeight
-			});
-		} else {
-			$.ui.accordion.animations[options.animated]({
-				toShow: toShow,
-				toHide: toHide,
-				complete: complete,
-				down: down,
-				autoHeight: options.autoHeight
-			});
-		}
-	} else {
-		if ( !options.alwaysOpen && clickedActive ) {
-			toShow.toggle();
-		} else {
-			toHide.hide();
-			toShow.show();
-		}
-		complete(true);
-	}
-}
-
-function clickHandler(event) {
-	var options = $.data(this, "accordion").options;
-	if (options.disabled) {
-		return false;
-	}
-	
-	// called only when using activate(false) to close all parts programmatically
-	if ( !event.target && !options.alwaysOpen ) {
-		options.active.parent().andSelf().toggleClass(options.selectedClass);
-		var toHide = options.active.next(),
-			data = {
-				options: options,
-				newHeader: jQuery([]),
-				oldHeader: options.active,
-				newContent: jQuery([]),
-				oldContent: toHide
-			},
-			toShow = (options.active = $([]));
-		toggle.call(this, toShow, toHide, data );
-		return false;
-	}
-	// get the click target
-	var clicked = $(event.target);
-	
-	// due to the event delegation model, we have to check if one
-	// of the parent elements is our actual header, and find that
-	// otherwise stick with the initial target
-	clicked = $( clicked.parents(options.header)[0] || clicked );
-	
-	var clickedActive = clicked[0] == options.active[0];
-	
-	// if animations are still active, or the active header is the target, ignore click
-	if (options.running || (options.alwaysOpen && clickedActive)) {
-		return false;
-	}
-	if (!clicked.is(options.header)) {
-		return;
-	}
-	
-	// switch classes
-	options.active.parent().andSelf().toggleClass(options.selectedClass);
-	if ( !clickedActive ) {
-		clicked.parent().andSelf().addClass(options.selectedClass);
-	}
-	
-	// find elements to show and hide
-	var toShow = clicked.next(),
-		toHide = options.active.next(),
-		//data = [clicked, options.active, toShow, toHide],
-		data = {
-			options: options,
-			newHeader: clicked,
-			oldHeader: options.active,
-			newContent: toShow,
-			oldContent: toHide
-		},
-		down = options.headers.index( options.active[0] ) > options.headers.index( clicked[0] );
-	
-	options.active = clickedActive ? $([]) : clicked;
-	toggle.call(this, toShow, toHide, data, clickedActive, down );
-
-	return false;
-};
-
-function findActive(headers, selector) {
-	return selector != undefined
-		? typeof selector == "number"
-			? headers.filter(":eq(" + selector + ")")
-			: headers.not(headers.not(selector))
-		: selector === false
-			? $([])
-			: headers.filter(":eq(0)");
-}
-
-$.extend($.ui.accordion, {
-	defaults: {
-		selectedClass: "selected",
-		alwaysOpen: true,
-		animated: 'slide',
-		event: "click",
-		header: "a",
-		autoHeight: true,
-		running: 0,
-		navigationFilter: function() {
-			return this.href.toLowerCase() == location.href.toLowerCase();
-		}
-	},
-	animations: {
-		slide: function(options, additions) {
-			options = $.extend({
-				easing: "swing",
-				duration: 300
-			}, options, additions);
-			if ( !options.toHide.size() ) {
-				options.toShow.animate({height: "show"}, options);
-				return;
-			}
-			var hideHeight = options.toHide.height(),
-				showHeight = options.toShow.height(),
-				difference = showHeight / hideHeight;
-			options.toShow.css({ height: 0, overflow: 'hidden' }).show();
-			options.toHide.filter(":hidden").each(options.complete).end().filter(":visible").animate({height:"hide"},{
-				step: function(now) {
-					var current = (hideHeight - now) * difference;
-					if ($.browser.msie || $.browser.opera) {
-						current = Math.ceil(current);
-					}
-					options.toShow.height( current );
-				},
-				duration: options.duration,
-				easing: options.easing,
-				complete: function() {
-					if ( !options.autoHeight ) {
-						options.toShow.css("height", "auto");
-					}
-					options.complete();
-				}
-			});
-		},
-		bounceslide: function(options) {
-			this.slide(options, {
-				easing: options.down ? "bounceout" : "swing",
-				duration: options.down ? 1000 : 200
-			});
-		},
-		easeslide: function(options) {
-			this.slide(options, {
-				easing: "easeinout",
-				duration: 700
-			});
-		}
-	}
-});
-
-// deprecated, use accordion("activate", index) instead
-$.fn.activate = function(index) {
-	return this.accordion("activate", index);
-};
-
-})(jQuery);
-/*
- * jQuery UI Datepicker
- *
- * Copyright (c) 2006, 2007, 2008 Marc Grabanski
- * Dual licensed under the MIT (MIT-LICENSE.txt)
- * and GPL (GPL-LICENSE.txt) licenses.
- * 
- * http://docs.jquery.com/UI/Datepicker
- *
- * Depends:
- *	ui.core.js
- *
- * Marc Grabanski (m@marcgrabanski.com) and Keith Wood (kbwood@virginbroadband.com.au).
- */
-   
-(function($) { // hide the namespace
-
-/* Date picker manager.
-   Use the singleton instance of this class, $.datepicker, to interact with the date picker.
-   Settings for (groups of) date pickers are maintained in an instance object
-   (DatepickerInstance), allowing multiple different settings on the same page. */
-
-function Datepicker() {
-	this.debug = false; // Change this to true to start debugging
-	this._nextId = 0; // Next ID for a date picker instance
-	this._inst = []; // List of instances indexed by ID
-	this._curInst = null; // The current instance in use
-	this._disabledInputs = []; // List of date picker inputs that have been disabled
-	this._datepickerShowing = false; // True if the popup picker is showing , false if not
-	this._inDialog = false; // True if showing within a "dialog", false if not
-	this._mainDivId = 'ui-datepicker-div'; // The ID of the main datepicker division
-	this._appendClass = 'ui-datepicker-append'; // The name of the append marker class
-	this._wrapClass = 'ui-datepicker-wrap'; // The name of the wrapper marker class
-	this._triggerClass = 'ui-datepicker-trigger'; // The name of the trigger marker class
-	this._dialogClass = 'ui-datepicker-dialog'; // The name of the dialog marker class
-	this._promptClass = 'ui-datepicker-prompt'; // The name of the dialog prompt marker class
-	this._unselectableClass = 'ui-datepicker-unselectable'; // The name of the unselectable cell marker class
-	this._currentClass = 'ui-datepicker-current-day'; // The name of the current day marker class
-	this.regional = []; // Available regional settings, indexed by language code
-	this.regional[''] = { // Default regional settings
-		clearText: 'Clear', // Display text for clear link
-		clearStatus: 'Erase the current date', // Status text for clear link
-		closeText: 'Close', // Display text for close link
-		closeStatus: 'Close without change', // Status text for close link
-		prevText: '&#x3c;Prev', // Display text for previous month link
-		prevStatus: 'Show the previous month', // Status text for previous month link
-		nextText: 'Next&#x3e;', // Display text for next month link
-		nextStatus: 'Show the next month', // Status text for next month link
-		currentText: 'Today', // Display text for current month link
-		currentStatus: 'Show the current month', // Status text for current month link
-		monthNames: ['January','February','March','April','May','June',
-			'July','August','September','October','November','December'], // Names of months for drop-down and formatting
-		monthNamesShort: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'], // For formatting
-		monthStatus: 'Show a different month', // Status text for selecting a month
-		yearStatus: 'Show a different year', // Status text for selecting a year
-		weekHeader: 'Wk', // Header for the week of the year column
-		weekStatus: 'Week of the year', // Status text for the week of the year column
-		dayNames: ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'], // For formatting
-		dayNamesShort: ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'], // For formatting
-		dayNamesMin: ['Su','Mo','Tu','We','Th','Fr','Sa'], // Column headings for days starting at Sunday
-		dayStatus: 'Set DD as first week day', // Status text for the day of the week selection
-		dateStatus: 'Select DD, M d', // Status text for the date selection
-		dateFormat: 'mm/dd/yy', // See format options on parseDate
-		firstDay: 0, // The first day of the week, Sun = 0, Mon = 1, ...
-		initStatus: 'Select a date', // Initial Status text on opening
-		isRTL: false // True if right-to-left language, false if left-to-right
-	};
-	this._defaults = { // Global defaults for all the date picker instances
-		showOn: 'focus', // 'focus' for popup on focus,
-			// 'button' for trigger button, or 'both' for either
-		showAnim: 'show', // Name of jQuery animation for popup
-		defaultDate: null, // Used when field is blank: actual date,
-			// +/-number for offset from today, null for today
-		appendText: '', // Display text following the input box, e.g. showing the format
-		buttonText: '...', // Text for trigger button
-		buttonImage: '', // URL for trigger button image
-		buttonImageOnly: false, // True if the image appears alone, false if it appears on a button
-		closeAtTop: true, // True to have the clear/close at the top,
-			// false to have them at the bottom
-		mandatory: false, // True to hide the Clear link, false to include it
-		hideIfNoPrevNext: false, // True to hide next/previous month links
-			// if not applicable, false to just disable them
-		navigationAsDateFormat: false, // True if date formatting applied to prev/today/next links
-		changeMonth: true, // True if month can be selected directly, false if only prev/next
-		changeYear: true, // True if year can be selected directly, false if only prev/next
-		yearRange: '-10:+10', // Range of years to display in drop-down,
-			// either relative to current year (-nn:+nn) or absolute (nnnn:nnnn)
-		changeFirstDay: true, // True to click on day name to change, false to remain as set
-		highlightWeek: false, // True to highlight the selected week
-		showOtherMonths: false, // True to show dates in other months, false to leave blank
-		showWeeks: false, // True to show week of the year, false to omit
-		calculateWeek: this.iso8601Week, // How to calculate the week of the year,
-			// takes a Date and returns the number of the week for it
-		shortYearCutoff: '+10', // Short year values < this are in the current century,
-			// > this are in the previous century, 
-			// string value starting with '+' for current year + value
-		showStatus: false, // True to show status bar at bottom, false to not show it
-		statusForDate: this.dateStatus, // Function to provide status text for a date -
-			// takes date and instance as parameters, returns display text
-		minDate: null, // The earliest selectable date, or null for no limit
-		maxDate: null, // The latest selectable date, or null for no limit
-		speed: 'normal', // Speed of display/closure
-		beforeShowDay: null, // Function that takes a date and returns an array with
-			// [0] = true if selectable, false if not, [1] = custom CSS class name(s) or '', 
-			// [2] = cell title (optional), e.g. $.datepicker.noWeekends
-		beforeShow: null, // Function that takes an input field and
-			// returns a set of custom settings for the date picker
-		onSelect: null, // Define a callback function when a date is selected
-		onChangeMonthYear: null, // Define a callback function when the month or year is changed
-		onClose: null, // Define a callback function when the datepicker is closed
-		numberOfMonths: 1, // Number of months to show at a time
-		stepMonths: 1, // Number of months to step back/forward
-		rangeSelect: false, // Allows for selecting a date range on one date picker
-		rangeSeparator: ' - ', // Text between two dates in a range
-		altField: '', // Selector for an alternate field to store selected dates into
-		altFormat: '' // The date format to use for the alternate field
-	};
-	$.extend(this._defaults, this.regional['']);
-	this._datepickerDiv = $('<div id="' + this._mainDivId + '" style="display: none;"></div>');
-}
-
-$.extend(Datepicker.prototype, {
-	/* Class name added to elements to indicate already configured with a date picker. */
-	markerClassName: 'hasDatepicker',
-
-	/* Debug logging (if enabled). */
-	log: function () {
-		if (this.debug)
-			console.log.apply('', arguments);
-	},
-	
-	/* Register a new date picker instance - with custom settings. */
-	_register: function(inst) {
-		var id = this._nextId++;
-		this._inst[id] = inst;
-		return id;
-	},
-
-	/* Retrieve a particular date picker instance based on its ID. */
-	_getInst: function(id) {
-		return this._inst[id] || id;
-	},
-
-	/* Override the default settings for all instances of the date picker. 
-	   @param  settings  object - the new settings to use as defaults (anonymous object)
-	   @return the manager object */
-	setDefaults: function(settings) {
-		extendRemove(this._defaults, settings || {});
-		return this;
-	},
-
-	/* Attach the date picker to a jQuery selection.
-	   @param  target    element - the target input field or division or span
-	   @param  settings  object - the new settings to use for this date picker instance (anonymous) */
-	_attachDatepicker: function(target, settings) {
-		// check for settings on the control itself - in namespace 'date:'
-		var inlineSettings = null;
-		for (attrName in this._defaults) {
-			var attrValue = target.getAttribute('date:' + attrName);
-			if (attrValue) {
-				inlineSettings = inlineSettings || {};
-				try {
-					inlineSettings[attrName] = eval(attrValue);
-				} catch (err) {
-					inlineSettings[attrName] = attrValue;
-				}
-			}
-		}
-		var nodeName = target.nodeName.toLowerCase();
-		var instSettings = (inlineSettings ? 
-			$.extend(settings || {}, inlineSettings) : settings);
-		if (nodeName == 'input') {
-			var inst = (inst && !inlineSettings ? inst :
-				new DatepickerInstance(instSettings, false));
-			this._connectDatepicker(target, inst);
-		} else if (nodeName == 'div' || nodeName == 'span') {
-			var inst = new DatepickerInstance(instSettings, true);
-			this._inlineDatepicker(target, inst);
-		}
-	},
-
-	/* Detach a datepicker from its control.
-	   @param  target    element - the target input field or division or span */
-	_destroyDatepicker: function(target) {
-		var nodeName = target.nodeName.toLowerCase();
-		var calId = target._calId;
-		var $target = $(target);
-		$target.removeAttr('_calId');
-		if (nodeName == 'input') {
-			$target.siblings('.' + this._appendClass).replaceWith('').end()
-				.siblings('.' + this._triggerClass).replaceWith('').end()
-				.removeClass(this.markerClassName)
-				.unbind('focus', this._showDatepicker)
-				.unbind('keydown', this._doKeyDown)
-				.unbind('keypress', this._doKeyPress);
-			var wrapper = $target.parents('.' + this._wrapClass);
-			if (wrapper)
-				wrapper.siblings('.' + this._appendClass).replaceWith('').end()
-					.replaceWith(wrapper.html());
-		} else if (nodeName == 'div' || nodeName == 'span')
-			$target.removeClass(this.markerClassName).empty();
-		if ($('input[_calId=' + calId + ']').length == 0)
-			// clean up if last for this ID
-			this._inst[calId] = null;
-	},
-
-	/* Enable the date picker to a jQuery selection.
-	   @param  target    element - the target input field or division or span */
-	_enableDatepicker: function(target) {
-		target.disabled = false;
-		$(target).siblings('button.' + this._triggerClass).each(function() { this.disabled = false; }).end()
-			.siblings('img.' + this._triggerClass).css({opacity: '1.0', cursor: ''});
-		this._disabledInputs = $.map(this._disabledInputs,
-			function(value) { return (value == target ? null : value); }); // delete entry
-	},
-
-	/* Disable the date picker to a jQuery selection.
-	   @param  target    element - the target input field or division or span */
-	_disableDatepicker: function(target) {
-		target.disabled = true;
-		$(target).siblings('button.' + this._triggerClass).each(function() { this.disabled = true; }).end()
-			.siblings('img.' + this._triggerClass).css({opacity: '0.5', cursor: 'default'});
-		this._disabledInputs = $.map($.datepicker._disabledInputs,
-			function(value) { return (value == target ? null : value); }); // delete entry
-		this._disabledInputs[$.datepicker._disabledInputs.length] = target;
-	},
-
-	/* Is the first field in a jQuery collection disabled as a datepicker?
-	   @param  target    element - the target input field or division or span
-	   @return boolean - true if disabled, false if enabled */
-	_isDisabledDatepicker: function(target) {
-		if (!target)
-			return false;
-		for (var i = 0; i < this._disabledInputs.length; i++) {
-			if (this._disabledInputs[i] == target)
-				return true;
-		}
-		return false;
-	},
-
-	/* Update the settings for a date picker attached to an input field or division.
-	   @param  target  element - the target input field or division or span
-	   @param  name    string - the name of the setting to change or
-	                   object - the new settings to update
-	   @param  value   any - the new value for the setting (omit if above is an object) */
-	_changeDatepicker: function(target, name, value) {
-		var settings = name || {};
-		if (typeof name == 'string') {
-			settings = {};
-			settings[name] = value;
-		}
-		if (inst = this._getInst(target._calId)) {
-			extendRemove(inst._settings, settings);
-			this._updateDatepicker(inst);
-		}
-	},
-
-	/* Set the dates for a jQuery selection.
-	   @param  target   element - the target input field or division or span
-	   @param  date     Date - the new date
-	   @param  endDate  Date - the new end date for a range (optional) */
-	_setDateDatepicker: function(target, date, endDate) {
-		if (inst = this._getInst(target._calId)) {
-			inst._setDate(date, endDate);
-			this._updateDatepicker(inst);
-		}
-	},
-
-	/* Get the date(s) for the first entry in a jQuery selection.
-	   @param  target  element - the target input field or division or span
-	   @return Date - the current date or
-	           Date[2] - the current dates for a range */
-	_getDateDatepicker: function(target) {
-		var inst = this._getInst(target._calId);
-		if (inst)
-			inst._setDateFromField($(target)); 
-		return (inst ? inst._getDate() : null);
-	},
-
-	/* Handle keystrokes. */
-	_doKeyDown: function(e) {
-		var inst = $.datepicker._getInst(this._calId);
-		if ($.datepicker._datepickerShowing)
-			switch (e.keyCode) {
-				case 9:  $.datepicker._hideDatepicker(null, '');
-						break; // hide on tab out
-				case 13: $.datepicker._selectDay(inst, inst._selectedMonth, inst._selectedYear,
-							$('td.ui-datepicker-days-cell-over', inst._datepickerDiv)[0]);
-						return false; // don't submit the form
-						break; // select the value on enter
-				case 27: $.datepicker._hideDatepicker(null, inst._get('speed'));
-						break; // hide on escape
-				case 33: $.datepicker._adjustDate(inst,
-							(e.ctrlKey ? -1 : -inst._get('stepMonths')), (e.ctrlKey ? 'Y' : 'M'));
-						break; // previous month/year on page up/+ ctrl
-				case 34: $.datepicker._adjustDate(inst,
-							(e.ctrlKey ? +1 : +inst._get('stepMonths')), (e.ctrlKey ? 'Y' : 'M'));
-						break; // next month/year on page down/+ ctrl
-				case 35: if (e.ctrlKey) $.datepicker._clearDate(inst);
-						break; // clear on ctrl+end
-				case 36: if (e.ctrlKey) $.datepicker._gotoToday(inst);
-						break; // current on ctrl+home
-				case 37: if (e.ctrlKey) $.datepicker._adjustDate(inst, -1, 'D');
-						break; // -1 day on ctrl+left
-				case 38: if (e.ctrlKey) $.datepicker._adjustDate(inst, -7, 'D');
-						break; // -1 week on ctrl+up
-				case 39: if (e.ctrlKey) $.datepicker._adjustDate(inst, +1, 'D');
-						break; // +1 day on ctrl+right
-				case 40: if (e.ctrlKey) $.datepicker._adjustDate(inst, +7, 'D');
-						break; // +1 week on ctrl+down
-			}
-		else if (e.keyCode == 36 && e.ctrlKey) // display the date picker on ctrl+home
-			$.datepicker._showDatepicker(this);
-	},
-
-	/* Filter entered characters - based on date format. */
-	_doKeyPress: function(e) {
-		var inst = $.datepicker._getInst(this._calId);
-		var chars = $.datepicker._possibleChars(inst._get('dateFormat'));
-		var chr = String.fromCharCode(e.charCode == undefined ? e.keyCode : e.charCode);
-		return e.ctrlKey || (chr < ' ' || !chars || chars.indexOf(chr) > -1);
-	},
-
-	/* Attach the date picker to an input field. */
-	_connectDatepicker: function(target, inst) {
-		var input = $(target);
-		if (input.hasClass(this.markerClassName))
-			return;
-		var appendText = inst._get('appendText');
-		var isRTL = inst._get('isRTL');
-		if (appendText)
-			input[isRTL ? 'before' : 'after']('<span class="' + this._appendClass + '">' + appendText + '</span>');
-		var showOn = inst._get('showOn');
-		if (showOn == 'focus' || showOn == 'both') // pop-up date picker when in the marked field
-			input.focus(this._showDatepicker);
-		if (showOn == 'button' || showOn == 'both') { // pop-up date picker when button clicked
-			input.wrap('<span class="' + this._wrapClass + '"></span>');
-			var buttonText = inst._get('buttonText');
-			var buttonImage = inst._get('buttonImage');
-			var trigger = $(inst._get('buttonImageOnly') ? 
-				$('<img/>').addClass(this._triggerClass).attr({ src: buttonImage, alt: buttonText, title: buttonText }) :
-				$('<button></button>').addClass(this._triggerClass).html(buttonImage != '' ? 
-						$('<img/>').attr({ src:buttonImage, alt:buttonText, title:buttonText }) : buttonText));
-			input[isRTL ? 'before' : 'after'](trigger);
-			trigger.click(function() {
-				if ($.datepicker._datepickerShowing && $.datepicker._lastInput == target)
-					$.datepicker._hideDatepicker();
-				else
-					$.datepicker._showDatepicker(target);
-			});
-        }
-		input.addClass(this.markerClassName).keydown(this._doKeyDown).keypress(this._doKeyPress)
-			.bind("setData.datepicker", function(event, key, value) {
-				inst._settings[key] = value;
-			}).bind("getData.datepicker", function(event, key) {
-				return inst._get(key);
-			});
-		input[0]._calId = inst._id;
-	},
-
-	/* Attach an inline date picker to a div. */
-	_inlineDatepicker: function(target, inst) {
-		var input = $(target);
-		if (input.hasClass(this.markerClassName))
-			return;
-		input.addClass(this.markerClassName).append(inst._datepickerDiv)
-			.bind("setData.datepicker", function(event, key, value){
-				inst._settings[key] = value;
-			}).bind("getData.datepicker", function(event, key){
-				return inst._get(key);
-			});
-		input[0]._calId = inst._id;
-		this._updateDatepicker(inst);
-	},
-
-	/* Tidy up after displaying the date picker. */
-	_inlineShow: function(inst) {
-		var numMonths = inst._getNumberOfMonths(); // fix width for dynamic number of date pickers
-		inst._datepickerDiv.width(numMonths[1] * $('.ui-datepicker', inst._datepickerDiv[0]).width());
-	}, 
-
-	/* Pop-up the date picker in a "dialog" box.
-	   @param  input     element - ignored
-	   @param  dateText  string - the initial date to display (in the current format)
-	   @param  onSelect  function - the function(dateText) to call when a date is selected
-	   @param  settings  object - update the dialog date picker instance's settings (anonymous object)
-	   @param  pos       int[2] - coordinates for the dialog's position within the screen or
-	                     event - with x/y coordinates or
-	                     leave empty for default (screen centre)
-	   @return the manager object */
-	_dialogDatepicker: function(input, dateText, onSelect, settings, pos) {
-		var inst = this._dialogInst; // internal instance
-		if (!inst) {
-			inst = this._dialogInst = new DatepickerInstance({}, false);
-			this._dialogInput = $('<input type="text" size="1" style="position: absolute; top: -100px;"/>');
-			this._dialogInput.keydown(this._doKeyDown);
-			$('body').append(this._dialogInput);
-			this._dialogInput[0]._calId = inst._id;
-		}
-		extendRemove(inst._settings, settings || {});
-		this._dialogInput.val(dateText);
-
-		this._pos = (pos ? (pos.length ? pos : [pos.pageX, pos.pageY]) : null);
-		if (!this._pos) {
-			var browserWidth = window.innerWidth || document.documentElement.clientWidth ||	document.body.clientWidth;
-			var browserHeight = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight;
-			var scrollX = document.documentElement.scrollLeft || document.body.scrollLeft;
-			var scrollY = document.documentElement.scrollTop || document.body.scrollTop;
-			this._pos = // should use actual width/height below
-				[(browserWidth / 2) - 100 + scrollX, (browserHeight / 2) - 150 + scrollY];
-		}
-
-		// move input on screen for focus, but hidden behind dialog
-		this._dialogInput.css('left', this._pos[0] + 'px').css('top', this._pos[1] + 'px');
-		inst._settings.onSelect = onSelect;
-		this._inDialog = true;
-		this._datepickerDiv.addClass(this._dialogClass);
-		this._showDatepicker(this._dialogInput[0]);
-		if ($.blockUI)
-			$.blockUI(this._datepickerDiv);
-		return this;
-	},
-
-	/* Pop-up the date picker for a given input field.
-	   @param  input  element - the input field attached to the date picker or
-	                  event - if triggered by focus */
-	_showDatepicker: function(input) {
-		input = input.target || input;
-		if (input.nodeName.toLowerCase() != 'input') // find from button/image trigger
-			input = $('input', input.parentNode)[0];
-		if ($.datepicker._isDisabledDatepicker(input) || $.datepicker._lastInput == input) // already here
-			return;
-		var inst = $.datepicker._getInst(input._calId);
-		var beforeShow = inst._get('beforeShow');
-		extendRemove(inst._settings, (beforeShow ? beforeShow.apply(input, [input, inst]) : {}));
-		$.datepicker._hideDatepicker(null, '');
-		$.datepicker._lastInput = input;
-		inst._setDateFromField(input);
-		if ($.datepicker._inDialog) // hide cursor
-			input.value = '';
-		if (!$.datepicker._pos) { // position below input
-			$.datepicker._pos = $.datepicker._findPos(input);
-			$.datepicker._pos[1] += input.offsetHeight; // add the height
-		}
-		var isFixed = false;
-		$(input).parents().each(function() {
-			isFixed |= $(this).css('position') == 'fixed';
-			return !isFixed;
-		});
-		if (isFixed && $.browser.opera) { // correction for Opera when fixed and scrolled
-			$.datepicker._pos[0] -= document.documentElement.scrollLeft;
-			$.datepicker._pos[1] -= document.documentElement.scrollTop;
-		}
-		var offset = {left: $.datepicker._pos[0], top: $.datepicker._pos[1]};
-		$.datepicker._pos = null;
-		inst._rangeStart = null;
-		// determine sizing offscreen
-		inst._datepickerDiv.css({position: 'absolute', display: 'block', top: '-1000px'});
-		$.datepicker._updateDatepicker(inst);
-		// fix width for dynamic number of date pickers
-		inst._datepickerDiv.width(inst._getNumberOfMonths()[1] *
-			$('.ui-datepicker', inst._datepickerDiv[0])[0].offsetWidth);
-		// and adjust position before showing
-		offset = $.datepicker._checkOffset(inst, offset, isFixed);
-		inst._datepickerDiv.css({position: ($.datepicker._inDialog && $.blockUI ?
-			'static' : (isFixed ? 'fixed' : 'absolute')), display: 'none',
-			left: offset.left + 'px', top: offset.top + 'px'});
-		if (!inst._inline) {
-			var showAnim = inst._get('showAnim') || 'show';
-			var speed = inst._get('speed');
-			var postProcess = function() {
-				$.datepicker._datepickerShowing = true;
-				if ($.browser.msie && parseInt($.browser.version) < 7) // fix IE < 7 select problems
-					$('iframe.ui-datepicker-cover').css({width: inst._datepickerDiv.width() + 4,
-						height: inst._datepickerDiv.height() + 4});
-			};
-			inst._datepickerDiv[showAnim](speed, postProcess);
-			if (speed == '')
-				postProcess();
-			if (inst._input[0].type != 'hidden')
-				inst._input[0].focus();
-			$.datepicker._curInst = inst;
-		}
-	},
-
-	/* Generate the date picker content. */
-	_updateDatepicker: function(inst) {
-		var dims = {width: inst._datepickerDiv.width() + 4,
-			height: inst._datepickerDiv.height() + 4};
-		inst._datepickerDiv.empty().append(inst._generateDatepicker()).
-			find('iframe.ui-datepicker-cover').
-			css({width: dims.width, height: dims.height});
-		var numMonths = inst._getNumberOfMonths();
-		if (numMonths[0] != 1 || numMonths[1] != 1)
-			inst._datepickerDiv.addClass('ui-datepicker-multi');
-		else
-			inst._datepickerDiv.removeClass('ui-datepicker-multi');
-
-		if (inst._get('isRTL'))
-			inst._datepickerDiv.addClass('ui-datepicker-rtl');
-		else
-			inst._datepickerDiv.removeClass('ui-datepicker-rtl');
-
-		if (inst._input && inst._input[0].type != 'hidden')
-			$(inst._input[0]).focus();
-	},
-
-	/* Check positioning to remain on screen. */
-	_checkOffset: function(inst, offset, isFixed) {
-		var pos = inst._input ? $.datepicker._findPos(inst._input[0]) : null;
-		var browserWidth = window.innerWidth || document.documentElement.clientWidth;
-		var browserHeight = window.innerHeight || document.documentElement.clientHeight;
-		var scrollX = document.documentElement.scrollLeft || document.body.scrollLeft;
-		var scrollY = document.documentElement.scrollTop || document.body.scrollTop;
-		// reposition date picker horizontally if outside the browser window
-		if ((offset.left + inst._datepickerDiv.width() - scrollX) > browserWidth)
-			offset.left = Math.max((isFixed ? 0 : scrollX),
-				pos[0] + (inst._input ? inst._input.width() : 0) - (isFixed ? scrollX : 0) - inst._datepickerDiv.width() -
-				(isFixed && $.browser.opera ? document.documentElement.scrollLeft : 0));
-		else
-			offset.left -= (isFixed ? scrollX : 0);
-		// reposition date picker vertically if outside the browser window
-		if ((offset.top + inst._datepickerDiv.height() - scrollY) > browserHeight)
-			offset.top = Math.max((isFixed ? 0 : scrollY),
-				pos[1] - (isFixed ? scrollY : 0) - (this._inDialog ? 0 : inst._datepickerDiv.height()) -
-				(isFixed && $.browser.opera ? document.documentElement.scrollTop : 0));
-		else
-			offset.top -= (isFixed ? scrollY : 0);
-		return offset;
-	},
-	
-	/* Find an object's position on the screen. */
-	_findPos: function(obj) {
-        while (obj && (obj.type == 'hidden' || obj.nodeType != 1)) {
-            obj = obj.nextSibling;
-        }
-        var position = $(obj).offset();
-	    return [position.left, position.top];
-	},
-
-	/* Hide the date picker from view.
-	   @param  input  element - the input field attached to the date picker
-	   @param  speed  string - the speed at which to close the date picker */
-	_hideDatepicker: function(input, speed) {
-		var inst = this._curInst;
-		if (!inst)
-			return;
-		var rangeSelect = inst._get('rangeSelect');
-		if (rangeSelect && this._stayOpen)
-			this._selectDate(inst, inst._formatDate(
-				inst._currentDay, inst._currentMonth, inst._currentYear));
-		this._stayOpen = false;
-		if (this._datepickerShowing) {
-			speed = (speed != null ? speed : inst._get('speed'));
-			var showAnim = inst._get('showAnim');
-			inst._datepickerDiv[(showAnim == 'slideDown' ? 'slideUp' :
-				(showAnim == 'fadeIn' ? 'fadeOut' : 'hide'))](speed, function() {
-				$.datepicker._tidyDialog(inst);
-			});
-			if (speed == '')
-				this._tidyDialog(inst);
-			var onClose = inst._get('onClose');
-			if (onClose)
-				onClose.apply((inst._input ? inst._input[0] : null),
-					[inst._getDate(), inst]);  // trigger custom callback
-			this._datepickerShowing = false;
-			this._lastInput = null;
-			inst._settings.prompt = null;
-			if (this._inDialog) {
-				this._dialogInput.css({ position: 'absolute', left: '0', top: '-100px' });
-				if ($.blockUI) {
-					$.unblockUI();
-					$('body').append(this._datepickerDiv);
-				}
-			}
-			this._inDialog = false;
-		}
-		this._curInst = null;
-	},
-
-	/* Tidy up after a dialog display. */
-	_tidyDialog: function(inst) {
-		inst._datepickerDiv.removeClass(this._dialogClass).unbind('.ui-datepicker');
-		$('.' + this._promptClass, inst._datepickerDiv).remove();
-	},
-
-	/* Close date picker if clicked elsewhere. */
-	_checkExternalClick: function(event) {
-		if (!$.datepicker._curInst)
-			return;
-		var $target = $(event.target);
-		if (($target.parents('#' + $.datepicker._mainDivId).length == 0) &&
-				!$target.hasClass($.datepicker.markerClassName) &&
-				!$target.hasClass($.datepicker._triggerClass) &&
-				$.datepicker._datepickerShowing && !($.datepicker._inDialog && $.blockUI))
-			$.datepicker._hideDatepicker(null, '');
-	},
-
-	/* Adjust one of the date sub-fields. */
-	_adjustDate: function(id, offset, period) {
-		var inst = this._getInst(id);
-		inst._adjustDate(offset, period);
-		this._updateDatepicker(inst);
-	},
-
-	/* Action for current link. */
-	_gotoToday: function(id) {
-		var date = new Date();
-		var inst = this._getInst(id);
-		inst._selectedDay = date.getDate();
-		inst._drawMonth = inst._selectedMonth = date.getMonth();
-		inst._drawYear = inst._selectedYear = date.getFullYear();
-		this._adjustDate(inst);
-		inst._notifyChange();
-	},
-
-	/* Action for selecting a new month/year. */
-	_selectMonthYear: function(id, select, period) {
-		var inst = this._getInst(id);
-		inst._selectingMonthYear = false;
-		inst[period == 'M' ? '_drawMonth' : '_drawYear'] =
-			select.options[select.selectedIndex].value - 0;
-		this._adjustDate(inst);
-		inst._notifyChange();
-	},
-
-	/* Restore input focus after not changing month/year. */
-	_clickMonthYear: function(id) {
-		var inst = this._getInst(id);
-		if (inst._input && inst._selectingMonthYear && !$.browser.msie)
-			inst._input[0].focus();
-		inst._selectingMonthYear = !inst._selectingMonthYear;
-	},
-
-	/* Action for changing the first week day. */
-	_changeFirstDay: function(id, day) {
-		var inst = this._getInst(id);
-		inst._settings.firstDay = day;
-		this._updateDatepicker(inst);
-	},
-
-	/* Action for selecting a day. */
-	_selectDay: function(id, month, year, td) {
-		if ($(td).hasClass(this._unselectableClass))
-			return;
-		var inst = this._getInst(id);
-		var rangeSelect = inst._get('rangeSelect');
-		if (rangeSelect) {
-			this._stayOpen = !this._stayOpen;
-			if (this._stayOpen) {
-				$('.ui-datepicker td').removeClass(this._currentClass);
-				$(td).addClass(this._currentClass);
-			} 
-		}
-		inst._selectedDay = inst._currentDay = $('a', td).html();
-		inst._selectedMonth = inst._currentMonth = month;
-		inst._selectedYear = inst._currentYear = year;
-		if (this._stayOpen) {
-			inst._endDay = inst._endMonth = inst._endYear = null;
-		}
-		else if (rangeSelect) {
-			inst._endDay = inst._currentDay;
-			inst._endMonth = inst._currentMonth;
-			inst._endYear = inst._currentYear;
-		}
-		this._selectDate(id, inst._formatDate(
-			inst._currentDay, inst._currentMonth, inst._currentYear));
-		if (this._stayOpen) {
-			inst._rangeStart = new Date(inst._currentYear, inst._currentMonth, inst._currentDay);
-			this._updateDatepicker(inst);
-		}
-		else if (rangeSelect) {
-			inst._selectedDay = inst._currentDay = inst._rangeStart.getDate();
-			inst._selectedMonth = inst._currentMonth = inst._rangeStart.getMonth();
-			inst._selectedYear = inst._currentYear = inst._rangeStart.getFullYear();
-			inst._rangeStart = null;
-			if (inst._inline)
-				this._updateDatepicker(inst);
-		}
-	},
-
-	/* Erase the input field and hide the date picker. */
-	_clearDate: function(id) {
-		var inst = this._getInst(id);
-		if (inst._get('mandatory'))
-			return;
-		this._stayOpen = false;
-		inst._endDay = inst._endMonth = inst._endYear = inst._rangeStart = null;
-		this._selectDate(inst, '');
-	},
-
-	/* Update the input field with the selected date. */
-	_selectDate: function(id, dateStr) {
-		var inst = this._getInst(id);
-		dateStr = (dateStr != null ? dateStr : inst._formatDate());
-		if (inst._get('rangeSelect') && dateStr)
-			dateStr = (inst._rangeStart ? inst._formatDate(inst._rangeStart) :
-				dateStr) + inst._get('rangeSeparator') + dateStr;
-		if (inst._input)
-			inst._input.val(dateStr);
-		this._updateAlternate(inst);
-		var onSelect = inst._get('onSelect');
-		if (onSelect)
-			onSelect.apply((inst._input ? inst._input[0] : null), [dateStr, inst]);  // trigger custom callback
-		else if (inst._input)
-			inst._input.trigger('change'); // fire the change event
-		if (inst._inline)
-			this._updateDatepicker(inst);
-		else if (!this._stayOpen) {
-			this._hideDatepicker(null, inst._get('speed'));
-			this._lastInput = inst._input[0];
-			if (typeof(inst._input[0]) != 'object')
-				inst._input[0].focus(); // restore focus
-			this._lastInput = null;
-		}
-	},
-	
-	/* Update any alternate field to synchronise with the main field. */
-	_updateAlternate: function(inst) {
-		var altField = inst._get('altField');
-		if (altField) { // update alternate field too
-			var altFormat = inst._get('altFormat');
-			var date = inst._getDate();
-			dateStr = (isArray(date) ? (!date[0] && !date[1] ? '' :
-				$.datepicker.formatDate(altFormat, date[0], inst._getFormatConfig()) +
-				inst._get('rangeSeparator') + $.datepicker.formatDate(
-				altFormat, date[1] || date[0], inst._getFormatConfig())) :
-				$.datepicker.formatDate(altFormat, date, inst._getFormatConfig()));
-			$(altField).each(function() { $(this).val(dateStr); });
-		}
-	},
-
-	/* Set as beforeShowDay function to prevent selection of weekends.
-	   @param  date  Date - the date to customise
-	   @return [boolean, string] - is this date selectable?, what is its CSS class? */
-	noWeekends: function(date) {
-		var day = date.getDay();
-		return [(day > 0 && day < 6), ''];
-	},
-	
-	/* Set as calculateWeek to determine the week of the year based on the ISO 8601 definition.
-	   @param  date  Date - the date to get the week for
-	   @return  number - the number of the week within the year that contains this date */
-	iso8601Week: function(date) {
-		var checkDate = new Date(date.getFullYear(), date.getMonth(), date.getDate(), (date.getTimezoneOffset() / -60));
-		var firstMon = new Date(checkDate.getFullYear(), 1 - 1, 4); // First week always contains 4 Jan
-		var firstDay = firstMon.getDay() || 7; // Day of week: Mon = 1, ..., Sun = 7
-		firstMon.setDate(firstMon.getDate() + 1 - firstDay); // Preceding Monday
-		if (firstDay < 4 && checkDate < firstMon) { // Adjust first three days in year if necessary
-			checkDate.setDate(checkDate.getDate() - 3); // Generate for previous year
-			return $.datepicker.iso8601Week(checkDate);
-		} else if (checkDate > new Date(checkDate.getFullYear(), 12 - 1, 28)) { // Check last three days in year
-			firstDay = new Date(checkDate.getFullYear() + 1, 1 - 1, 4).getDay() || 7;
-			if (firstDay > 4 && (checkDate.getDay() || 7) < firstDay - 3) { // Adjust if necessary
-				checkDate.setDate(checkDate.getDate() + 3); // Generate for next year
-				return $.datepicker.iso8601Week(checkDate);
-			}
-		}
-		return Math.floor(((checkDate - firstMon) / 86400000) / 7) + 1; // Weeks to given date
-	},
-	
-	/* Provide status text for a particular date.
-	   @param  date  the date to get the status for
-	   @param  inst  the current datepicker instance
-	   @return  the status display text for this date */
-	dateStatus: function(date, inst) {
-		return $.datepicker.formatDate(inst._get('dateStatus'), date, inst._getFormatConfig());
-	},
-
-	/* Parse a string value into a date object.
-	   The format can be combinations of the following:
-	   d  - day of month (no leading zero)
-	   dd - day of month (two digit)
-	   D  - day name short
-	   DD - day name long
-	   m  - month of year (no leading zero)
-	   mm - month of year (two digit)
-	   M  - month name short
-	   MM - month name long
-	   y  - year (two digit)
-	   yy - year (four digit)
-	   '...' - literal text
-	   '' - single quote
-
-	   @param  format           String - the expected format of the date
-	   @param  value            String - the date in the above format
-	   @param  settings  Object - attributes include:
-	                     shortYearCutoff  Number - the cutoff year for determining the century (optional)
-	                     dayNamesShort    String[7] - abbreviated names of the days from Sunday (optional)
-	                     dayNames         String[7] - names of the days from Sunday (optional)
-	                     monthNamesShort  String[12] - abbreviated names of the months (optional)
-	                     monthNames       String[12] - names of the months (optional)
-	   @return  Date - the extracted date value or null if value is blank */
-	parseDate: function (format, value, settings) {
-		if (format == null || value == null)
-			throw 'Invalid arguments';
-		value = (typeof value == 'object' ? value.toString() : value + '');
-		if (value == '')
-			return null;
-		var shortYearCutoff = (settings ? settings.shortYearCutoff : null) || this._defaults.shortYearCutoff;
-		var dayNamesShort = (settings ? settings.dayNamesShort : null) || this._defaults.dayNamesShort;
-		var dayNames = (settings ? settings.dayNames : null) || this._defaults.dayNames;
-		var monthNamesShort = (settings ? settings.monthNamesShort : null) || this._defaults.monthNamesShort;
-		var monthNames = (settings ? settings.monthNames : null) || this._defaults.monthNames;
-		var year = -1;
-		var month = -1;
-		var day = -1;
-		var literal = false;
-		// Check whether a format character is doubled
-		var lookAhead = function(match) {
-			var matches = (iFormat + 1 < format.length && format.charAt(iFormat + 1) == match);
-			if (matches)
-				iFormat++;
-			return matches;	
-		};
-		// Extract a number from the string value
-		var getNumber = function(match) {
-			lookAhead(match);
-			var size = (match == 'y' ? 4 : 2);
-			var num = 0;
-			while (size > 0 && iValue < value.length &&
-					value.charAt(iValue) >= '0' && value.charAt(iValue) <= '9') {
-				num = num * 10 + (value.charAt(iValue++) - 0);
-				size--;
-			}
-			if (size == (match == 'y' ? 4 : 2))
-				throw 'Missing number at position ' + iValue;
-			return num;
-		};
-		// Extract a name from the string value and convert to an index
-		var getName = function(match, shortNames, longNames) {
-			var names = (lookAhead(match) ? longNames : shortNames);
-			var size = 0;
-			for (var j = 0; j < names.length; j++)
-				size = Math.max(size, names[j].length);
-			var name = '';
-			var iInit = iValue;
-			while (size > 0 && iValue < value.length) {
-				name += value.charAt(iValue++);
-				for (var i = 0; i < names.length; i++)
-					if (name == names[i])
-						return i + 1;
-				size--;
-			}
-			throw 'Unknown name at position ' + iInit;
-		};
-		// Confirm that a literal character matches the string value
-		var checkLiteral = function() {
-			if (value.charAt(iValue) != format.charAt(iFormat))
-				throw 'Unexpected literal at position ' + iValue;
-			iValue++;
-		};
-		var iValue = 0;
-		for (var iFormat = 0; iFormat < format.length; iFormat++) {
-			if (literal)
-				if (format.charAt(iFormat) == "'" && !lookAhead("'"))
-					literal = false;
-				else
-					checkLiteral();
-			else
-				switch (format.charAt(iFormat)) {
-					case 'd':
-						day = getNumber('d');
-						break;
-					case 'D': 
-						getName('D', dayNamesShort, dayNames);
-						break;
-					case 'm': 
-						month = getNumber('m');
-						break;
-					case 'M':
-						month = getName('M', monthNamesShort, monthNames); 
-						break;
-					case 'y':
-						year = getNumber('y');
-						break;
-					case "'":
-						if (lookAhead("'"))
-							checkLiteral();
-						else
-							literal = true;
-						break;
-					default:
-						checkLiteral();
-				}
-		}
-		if (year < 100)
-			year += new Date().getFullYear() - new Date().getFullYear() % 100 +
-				(year <= shortYearCutoff ? 0 : -100);
-		var date = new Date(year, month - 1, day);
-		if (date.getFullYear() != year || date.getMonth() + 1 != month || date.getDate() != day)
-			throw 'Invalid date'; // E.g. 31/02/*
-		return date;
-	},
-
-	/* Format a date object into a string value.
-	   The format can be combinations of the following:
-	   d  - day of month (no leading zero)
-	   dd - day of month (two digit)
-	   D  - day name short
-	   DD - day name long
-	   m  - month of year (no leading zero)
-	   mm - month of year (two digit)
-	   M  - month name short
-	   MM - month name long
-	   y  - year (two digit)
-	   yy - year (four digit)
-	   '...' - literal text
-	   '' - single quote
-
-	   @param  format    String - the desired format of the date
-	   @param  date      Date - the date value to format
-	   @param  settings  Object - attributes include:
-	                     dayNamesShort    String[7] - abbreviated names of the days from Sunday (optional)
-	                     dayNames         String[7] - names of the days from Sunday (optional)
-	                     monthNamesShort  String[12] - abbreviated names of the months (optional)
-	                     monthNames       String[12] - names of the months (optional)
-	   @return  String - the date in the above format */
-	formatDate: function (format, date, settings) {
-		if (!date)
-			return '';
-		var dayNamesShort = (settings ? settings.dayNamesShort : null) || this._defaults.dayNamesShort;
-		var dayNames = (settings ? settings.dayNames : null) || this._defaults.dayNames;
-		var monthNamesShort = (settings ? settings.monthNamesShort : null) || this._defaults.monthNamesShort;
-		var monthNames = (settings ? settings.monthNames : null) || this._defaults.monthNames;
-		// Check whether a format character is doubled
-		var lookAhead = function(match) {
-			var matches = (iFormat + 1 < format.length && format.charAt(iFormat + 1) == match);
-			if (matches)
-				iFormat++;
-			return matches;	
-		};
-		// Format a number, with leading zero if necessary
-		var formatNumber = function(match, value) {
-			return (lookAhead(match) && value < 10 ? '0' : '') + value;
-		};
-		// Format a name, short or long as requested
-		var formatName = function(match, value, shortNames, longNames) {
-			return (lookAhead(match) ? longNames[value] : shortNames[value]);
-		};
-		var output = '';
-		var literal = false;
-		if (date)
-			for (var iFormat = 0; iFormat < format.length; iFormat++) {
-				if (literal)
-					if (format.charAt(iFormat) == "'" && !lookAhead("'"))
-						literal = false;
-					else
-						output += format.charAt(iFormat);
-				else
-					switch (format.charAt(iFormat)) {
-						case 'd':
-							output += formatNumber('d', date.getDate()); 
-							break;
-						case 'D': 
-							output += formatName('D', date.getDay(), dayNamesShort, dayNames);
-							break;
-						case 'm': 
-							output += formatNumber('m', date.getMonth() + 1); 
-							break;
-						case 'M':
-							output += formatName('M', date.getMonth(), monthNamesShort, monthNames); 
-							break;
-						case 'y':
-							output += (lookAhead('y') ? date.getFullYear() : 
-								(date.getYear() % 100 < 10 ? '0' : '') + date.getYear() % 100);
-							break;
-						case "'":
-							if (lookAhead("'"))
-								output += "'";
-							else
-								literal = true;
-							break;
-						default:
-							output += format.charAt(iFormat);
-					}
-			}
-		return output;
-	},
-
-	/* Extract all possible characters from the date format. */
-	_possibleChars: function (format) {
-		var chars = '';
-		var literal = false;
-		for (var iFormat = 0; iFormat < format.length; iFormat++)
-			if (literal)
-				if (format.charAt(iFormat) == "'" && !lookAhead("'"))
-					literal = false;
-				else
-					chars += format.charAt(iFormat);
-			else
-				switch (format.charAt(iFormat)) {
-					case 'd': case 'm': case 'y':
-						chars += '0123456789'; 
-						break;
-					case 'D': case 'M':
-						return null; // Accept anything
-					case "'":
-						if (lookAhead("'"))
-							chars += "'";
-						else
-							literal = true;
-						break;
-					default:
-						chars += format.charAt(iFormat);
-				}
-		return chars;
-	}
-});
-
-/* Individualised settings for date picker functionality applied to one or more related inputs.
-   Instances are managed and manipulated through the Datepicker manager. */
-function DatepickerInstance(settings, inline) {
-	this._id = $.datepicker._register(this);
-	this._selectedDay = 0; // Current date for selection
-	this._selectedMonth = 0; // 0-11
-	this._selectedYear = 0; // 4-digit year
-	this._drawMonth = 0; // Current month at start of datepicker
-	this._drawYear = 0;
-	this._input = null; // The attached input field
-	this._inline = inline; // True if showing inline, false if used in a popup
-	this._datepickerDiv = (!inline ? $.datepicker._datepickerDiv :
-		$('<div id="' + $.datepicker._mainDivId + '-' + this._id + '" class="ui-datepicker-inline">'));
-	// customise the date picker object - uses manager defaults if not overridden
-	this._settings = extendRemove(settings || {}); // clone
-	if (inline)
-		this._setDate(this._getDefaultDate());
-}
-
-$.extend(DatepickerInstance.prototype, {
-	/* Get a setting value, defaulting if necessary. */
-	_get: function(name) {
-		return this._settings[name] !== undefined ? this._settings[name] : $.datepicker._defaults[name];
-	},
-
-	/* Parse existing date and initialise date picker. */
-	_setDateFromField: function(input) {
-		this._input = $(input);
-		var dateFormat = this._get('dateFormat');
-		var dates = this._input ? this._input.val().split(this._get('rangeSeparator')) : null; 
-		this._endDay = this._endMonth = this._endYear = null;
-		var date = defaultDate = this._getDefaultDate();
-		if (dates.length > 0) {
-			var settings = this._getFormatConfig();
-			if (dates.length > 1) {
-				date = $.datepicker.parseDate(dateFormat, dates[1], settings) || defaultDate;
-				this._endDay = date.getDate();
-				this._endMonth = date.getMonth();
-				this._endYear = date.getFullYear();
-			}
-			try {
-				date = $.datepicker.parseDate(dateFormat, dates[0], settings) || defaultDate;
-			} catch (e) {
-				$.datepicker.log(e);
-				date = defaultDate;
-			}
-		}
-		this._selectedDay = date.getDate();
-		this._drawMonth = this._selectedMonth = date.getMonth();
-		this._drawYear = this._selectedYear = date.getFullYear();
-		this._currentDay = (dates[0] ? date.getDate() : 0);
-		this._currentMonth = (dates[0] ? date.getMonth() : 0);
-		this._currentYear = (dates[0] ? date.getFullYear() : 0);
-		this._adjustDate();
-	},
-	
-	/* Retrieve the default date shown on opening. */
-	_getDefaultDate: function() {
-		var date = this._determineDate('defaultDate', new Date());
-		var minDate = this._getMinMaxDate('min', true);
-		var maxDate = this._getMinMaxDate('max');
-		date = (minDate && date < minDate ? minDate : date);
-		date = (maxDate && date > maxDate ? maxDate : date);
-		return date;
-	},
-
-	/* A date may be specified as an exact value or a relative one. */
-	_determineDate: function(name, defaultDate) {
-		var offsetNumeric = function(offset) {
-			var date = new Date();
-			date.setDate(date.getDate() + offset);
-			return date;
-		};
-		var offsetString = function(offset, getDaysInMonth) {
-			var date = new Date();
-			var year = date.getFullYear();
-			var month = date.getMonth();
-			var day = date.getDate();
-			var pattern = /([+-]?[0-9]+)\s*(d|D|w|W|m|M|y|Y)?/g;
-			var matches = pattern.exec(offset);
-			while (matches) {
-				switch (matches[2] || 'd') {
-					case 'd' : case 'D' :
-						day += (matches[1] - 0); break;
-					case 'w' : case 'W' :
-						day += (matches[1] * 7); break;
-					case 'm' : case 'M' :
-						month += (matches[1] - 0); 
-						day = Math.min(day, getDaysInMonth(year, month));
-						break;
-					case 'y': case 'Y' :
-						year += (matches[1] - 0);
-						day = Math.min(day, getDaysInMonth(year, month));
-						break;
-				}
-				matches = pattern.exec(offset);
-			}
-			return new Date(year, month, day);
-		};
-		var date = this._get(name);
-		return (date == null ? defaultDate :
-			(typeof date == 'string' ? offsetString(date, this._getDaysInMonth) :
-			(typeof date == 'number' ? offsetNumeric(date) : date)));
-	},
-
-	/* Set the date(s) directly. */
-	_setDate: function(date, endDate) {
-		this._selectedDay = this._currentDay = date.getDate();
-		this._drawMonth = this._selectedMonth = this._currentMonth = date.getMonth();
-		this._drawYear = this._selectedYear = this._currentYear = date.getFullYear();
-		if (this._get('rangeSelect')) {
-			if (endDate) {
-				this._endDay = endDate.getDate();
-				this._endMonth = endDate.getMonth();
-				this._endYear = endDate.getFullYear();
-			} else {
-				this._endDay = this._currentDay;
-				this._endMonth = this._currentMonth;
-				this._endYear = this._currentYear;
-			}
-		}
-		this._adjustDate();
-	},
-
-	/* Retrieve the date(s) directly. */
-	_getDate: function() {
-		var startDate = (!this._currentYear || (this._input && this._input.val() == '') ? null :
-			new Date(this._currentYear, this._currentMonth, this._currentDay));
-		if (this._get('rangeSelect')) {
-			return [this._rangeStart || startDate, (!this._endYear ? null :
-				new Date(this._endYear, this._endMonth, this._endDay))];
-		} else
-			return startDate;
-	},
-
-	/* Generate the HTML for the current state of the date picker. */
-	_generateDatepicker: function() {
-		var today = new Date();
-		today = new Date(today.getFullYear(), today.getMonth(), today.getDate()); // clear time
-		var showStatus = this._get('showStatus');
-		var isRTL = this._get('isRTL');
-		// build the date picker HTML
-		var clear = (this._get('mandatory') ? '' :
-			'<div class="ui-datepicker-clear"><a onclick="jQuery.datepicker._clearDate(' + this._id + ');"' + 
-			(showStatus ? this._addStatus(this._get('clearStatus') || '&#xa0;') : '') + '>' +
-			this._get('clearText') + '</a></div>');
-		var controls = '<div class="ui-datepicker-control">' + (isRTL ? '' : clear) +
-			'<div class="ui-datepicker-close"><a onclick="jQuery.datepicker._hideDatepicker();"' +
-			(showStatus ? this._addStatus(this._get('closeStatus') || '&#xa0;') : '') + '>' +
-			this._get('closeText') + '</a></div>' + (isRTL ? clear : '')  + '</div>';
-		var prompt = this._get('prompt');
-		var closeAtTop = this._get('closeAtTop');
-		var hideIfNoPrevNext = this._get('hideIfNoPrevNext');
-		var navigationAsDateFormat = this._get('navigationAsDateFormat');
-		var numMonths = this._getNumberOfMonths();
-		var stepMonths = this._get('stepMonths');
-		var isMultiMonth = (numMonths[0] != 1 || numMonths[1] != 1);
-		var minDate = this._getMinMaxDate('min', true);
-		var maxDate = this._getMinMaxDate('max');
-		var drawMonth = this._drawMonth;
-		var drawYear = this._drawYear;
-		if (maxDate) {
-			var maxDraw = new Date(maxDate.getFullYear(),
-				maxDate.getMonth() - numMonths[1] + 1, maxDate.getDate());
-			maxDraw = (minDate && maxDraw < minDate ? minDate : maxDraw);
-			while (new Date(drawYear, drawMonth, 1) > maxDraw) {
-				drawMonth--;
-				if (drawMonth < 0) {
-					drawMonth = 11;
-					drawYear--;
-				}
-			}
-		}
-		// controls and links
-		var prevText = this._get('prevText');
-		prevText = (!navigationAsDateFormat ? prevText : $.datepicker.formatDate(
-			prevText, new Date(drawYear, drawMonth - stepMonths, 1), this._getFormatConfig()));
-		var prev = '<div class="ui-datepicker-prev">' + (this._canAdjustMonth(-1, drawYear, drawMonth) ? 
-			'<a onclick="jQuery.datepicker._adjustDate(' + this._id + ', -' + stepMonths + ', \'M\');"' +
-			(showStatus ? this._addStatus(this._get('prevStatus') || '&#xa0;') : '') + '>' + prevText + '</a>' :
-			(hideIfNoPrevNext ? '' : '<label>' + prevText + '</label>')) + '</div>';
-		var nextText = this._get('nextText');
-		nextText = (!navigationAsDateFormat ? nextText : $.datepicker.formatDate(
-			nextText, new Date(drawYear, drawMonth + stepMonths, 1), this._getFormatConfig()));
-		var next = '<div class="ui-datepicker-next">' + (this._canAdjustMonth(+1, drawYear, drawMonth) ?
-			'<a onclick="jQuery.datepicker._adjustDate(' + this._id + ', +' + stepMonths + ', \'M\');"' +
-			(showStatus ? this._addStatus(this._get('nextStatus') || '&#xa0;') : '') + '>' + nextText + '</a>' :
-			(hideIfNoPrevNext ? '' : '<label>' + nextText + '</label>')) + '</div>';
-		var currentText = this._get('currentText');
-		currentText = (!navigationAsDateFormat ? currentText: $.datepicker.formatDate(
-			currentText, today, this._getFormatConfig()));
-		var html = (prompt ? '<div class="' + $.datepicker._promptClass + '">' + prompt + '</div>' : '') +
-			(closeAtTop && !this._inline ? controls : '') +
-			'<div class="ui-datepicker-links">' + (isRTL ? next : prev) +
-			(this._isInRange(today) ? '<div class="ui-datepicker-current">' +
-			'<a onclick="jQuery.datepicker._gotoToday(' + this._id + ');"' +
-			(showStatus ? this._addStatus(this._get('currentStatus') || '&#xa0;') : '') + '>' +
-			currentText + '</a></div>' : '') + (isRTL ? prev : next) + '</div>';
-		var showWeeks = this._get('showWeeks');
-		for (var row = 0; row < numMonths[0]; row++)
-			for (var col = 0; col < numMonths[1]; col++) {
-				var selectedDate = new Date(drawYear, drawMonth, this._selectedDay);
-				html += '<div class="ui-datepicker-one-month' + (col == 0 ? ' ui-datepicker-new-row' : '') + '">' +
-					this._generateMonthYearHeader(drawMonth, drawYear, minDate, maxDate,
-					selectedDate, row > 0 || col > 0) + // draw month headers
-					'<table class="ui-datepicker" cellpadding="0" cellspacing="0"><thead>' + 
-					'<tr class="ui-datepicker-title-row">' +
-					(showWeeks ? '<td>' + this._get('weekHeader') + '</td>' : '');
-				var firstDay = this._get('firstDay');
-				var changeFirstDay = this._get('changeFirstDay');
-				var dayNames = this._get('dayNames');
-				var dayNamesShort = this._get('dayNamesShort');
-				var dayNamesMin = this._get('dayNamesMin');
-				for (var dow = 0; dow < 7; dow++) { // days of the week
-					var day = (dow + firstDay) % 7;
-					var status = this._get('dayStatus') || '&#xa0;';
-					status = (status.indexOf('DD') > -1 ? status.replace(/DD/, dayNames[day]) :
-						status.replace(/D/, dayNamesShort[day]));
-					html += '<td' + ((dow + firstDay + 6) % 7 >= 5 ? ' class="ui-datepicker-week-end-cell"' : '') + '>' +
-						(!changeFirstDay ? '<span' :
-						'<a onclick="jQuery.datepicker._changeFirstDay(' + this._id + ', ' + day + ');"') + 
-						(showStatus ? this._addStatus(status) : '') + ' title="' + dayNames[day] + '">' +
-						dayNamesMin[day] + (changeFirstDay ? '</a>' : '</span>') + '</td>';
-				}
-				html += '</tr></thead><tbody>';
-				var daysInMonth = this._getDaysInMonth(drawYear, drawMonth);
-				if (drawYear == this._selectedYear && drawMonth == this._selectedMonth)
-					this._selectedDay = Math.min(this._selectedDay, daysInMonth);
-				var leadDays = (this._getFirstDayOfMonth(drawYear, drawMonth) - firstDay + 7) % 7;
-				var currentDate = (!this._currentDay ? new Date(9999, 9, 9) :
-					new Date(this._currentYear, this._currentMonth, this._currentDay));
-				var endDate = this._endDay ? new Date(this._endYear, this._endMonth, this._endDay) : currentDate;
-				var printDate = new Date(drawYear, drawMonth, 1 - leadDays);
-				var numRows = (isMultiMonth ? 6 : Math.ceil((leadDays + daysInMonth) / 7)); // calculate the number of rows to generate
-				var beforeShowDay = this._get('beforeShowDay');
-				var highlightWeek = this._get('highlightWeek');
-				var showOtherMonths = this._get('showOtherMonths');
-				var calculateWeek = this._get('calculateWeek') || $.datepicker.iso8601Week;
-				var dateStatus = this._get('statusForDate') || $.datepicker.dateStatus;
-				for (var dRow = 0; dRow < numRows; dRow++) { // create date picker rows
-					html += '<tr class="ui-datepicker-days-row">' +
-						(showWeeks ? '<td class="ui-datepicker-week-col">' + calculateWeek(printDate) + '</td>' : '');
-					for (var dow = 0; dow < 7; dow++) { // create date picker days
-						var daySettings = (beforeShowDay ?
-							beforeShowDay.apply((this._input ? this._input[0] : null), [printDate]) : [true, '']);
-						var otherMonth = (printDate.getMonth() != drawMonth);
-						var unselectable = otherMonth || !daySettings[0] ||
-							(minDate && printDate < minDate) || (maxDate && printDate > maxDate);
-						html += '<td class="ui-datepicker-days-cell' +
-							((dow + firstDay + 6) % 7 >= 5 ? ' ui-datepicker-week-end-cell' : '') + // highlight weekends
-							(otherMonth ? ' ui-datepicker-otherMonth' : '') + // highlight days from other months
-							(printDate.getTime() == selectedDate.getTime() && drawMonth == this._selectedMonth ?
-							' ui-datepicker-days-cell-over' : '') + // highlight selected day
-							(unselectable ? ' ' + $.datepicker._unselectableClass : '') +  // highlight unselectable days
-							(otherMonth && !showOtherMonths ? '' : ' ' + daySettings[1] + // highlight custom dates
-							(printDate.getTime() >= currentDate.getTime() && printDate.getTime() <= endDate.getTime() ?  // in current range
-							' ' + $.datepicker._currentClass : '') + // highlight selected day
-							(printDate.getTime() == today.getTime() ? ' ui-datepicker-today' : '')) + '"' + // highlight today (if different)
-							((!otherMonth || showOtherMonths) && daySettings[2] ? ' title="' + daySettings[2] + '"' : '') + // cell title
-							(unselectable ? (highlightWeek ? ' onmouseover="jQuery(this).parent().addClass(\'ui-datepicker-week-over\');"' + // highlight selection week
-							' onmouseout="jQuery(this).parent().removeClass(\'ui-datepicker-week-over\');"' : '') : // unhighlight selection week
-							' onmouseover="jQuery(this).addClass(\'ui-datepicker-days-cell-over\')' + // highlight selection
-							(highlightWeek ? '.parent().addClass(\'ui-datepicker-week-over\')' : '') + ';' + // highlight selection week
-							(!showStatus || (otherMonth && !showOtherMonths) ? '' : 'jQuery(\'#ui-datepicker-status-' +
-							this._id + '\').html(\'' + (dateStatus.apply((this._input ? this._input[0] : null),
-							[printDate, this]) || '&#xa0;') +'\');') + '"' +
-							' onmouseout="jQuery(this).removeClass(\'ui-datepicker-days-cell-over\')' + // unhighlight selection
-							(highlightWeek ? '.parent().removeClass(\'ui-datepicker-week-over\')' : '') + ';' + // unhighlight selection week
-							(!showStatus || (otherMonth && !showOtherMonths) ? '' : 'jQuery(\'#ui-datepicker-status-' +
-							this._id + '\').html(\'&#xa0;\');') + '" onclick="jQuery.datepicker._selectDay(' +
-							this._id + ',' + drawMonth + ',' + drawYear + ', this);"') + '>' + // actions
-							(otherMonth ? (showOtherMonths ? printDate.getDate() : '&#xa0;') : // display for other months
-							(unselectable ? printDate.getDate() : '<a>' + printDate.getDate() + '</a>')) + '</td>'; // display for this month
-						printDate.setDate(printDate.getDate() + 1);
-					}
-					html += '</tr>';
-				}
-				drawMonth++;
-				if (drawMonth > 11) {
-					drawMonth = 0;
-					drawYear++;
-				}
-				html += '</tbody></table></div>';
-			}
-		html += (showStatus ? '<div style="clear: both;"></div><div id="ui-datepicker-status-' + this._id + 
-			'" class="ui-datepicker-status">' + (this._get('initStatus') || '&#xa0;') + '</div>' : '') +
-			(!closeAtTop && !this._inline ? controls : '') +
-			'<div style="clear: both;"></div>' + 
-			($.browser.msie && parseInt($.browser.version) < 7 && !this._inline ? 
-			'<iframe src="javascript:false;" class="ui-datepicker-cover"></iframe>' : '');
-		return html;
-	},
-	
-	/* Generate the month and year header. */
-	_generateMonthYearHeader: function(drawMonth, drawYear, minDate, maxDate, selectedDate, secondary) {
-		minDate = (this._rangeStart && minDate && selectedDate < minDate ? selectedDate : minDate);
-		var showStatus = this._get('showStatus');
-		var html = '<div class="ui-datepicker-header">';
-		// month selection
-		var monthNames = this._get('monthNames');
-		if (secondary || !this._get('changeMonth'))
-			html += monthNames[drawMonth] + '&#xa0;';
-		else {
-			var inMinYear = (minDate && minDate.getFullYear() == drawYear);
-			var inMaxYear = (maxDate && maxDate.getFullYear() == drawYear);
-			html += '<select class="ui-datepicker-new-month" ' +
-				'onchange="jQuery.datepicker._selectMonthYear(' + this._id + ', this, \'M\');" ' +
-				'onclick="jQuery.datepicker._clickMonthYear(' + this._id + ');"' +
-				(showStatus ? this._addStatus(this._get('monthStatus') || '&#xa0;') : '') + '>';
-			for (var month = 0; month < 12; month++) {
-				if ((!inMinYear || month >= minDate.getMonth()) &&
-						(!inMaxYear || month <= maxDate.getMonth()))
-					html += '<option value="' + month + '"' +
-						(month == drawMonth ? ' selected="selected"' : '') +
-						'>' + monthNames[month] + '</option>';
-			}
-			html += '</select>';
-		}
-		// year selection
-		if (secondary || !this._get('changeYear'))
-			html += drawYear;
-		else {
-			// determine range of years to display
-			var years = this._get('yearRange').split(':');
-			var year = 0;
-			var endYear = 0;
-			if (years.length != 2) {
-				year = drawYear - 10;
-				endYear = drawYear + 10;
-			} else if (years[0].charAt(0) == '+' || years[0].charAt(0) == '-') {
-				year = endYear = new Date().getFullYear();
-				year += parseInt(years[0], 10);
-				endYear += parseInt(years[1], 10);
-			} else {
-				year = parseInt(years[0], 10);
-				endYear = parseInt(years[1], 10);
-			}
-			year = (minDate ? Math.max(year, minDate.getFullYear()) : year);
-			endYear = (maxDate ? Math.min(endYear, maxDate.getFullYear()) : endYear);
-			html += '<select class="ui-datepicker-new-year" ' +
-				'onchange="jQuery.datepicker._selectMonthYear(' + this._id + ', this, \'Y\');" ' +
-				'onclick="jQuery.datepicker._clickMonthYear(' + this._id + ');"' +
-				(showStatus ? this._addStatus(this._get('yearStatus') || '&#xa0;') : '') + '>';
-			for (; year <= endYear; year++) {
-				html += '<option value="' + year + '"' +
-					(year == drawYear ? ' selected="selected"' : '') +
-					'>' + year + '</option>';
-			}
-			html += '</select>';
-		}
-		html += '</div>'; // Close datepicker_header
-		return html;
-	},
-
-	/* Provide code to set and clear the status panel. */
-	_addStatus: function(text) {
-		return ' onmouseover="jQuery(\'#ui-datepicker-status-' + this._id + '\').html(\'' + text + '\');" ' +
-			'onmouseout="jQuery(\'#ui-datepicker-status-' + this._id + '\').html(\'&#xa0;\');"';
-	},
-
-	/* Adjust one of the date sub-fields. */
-	_adjustDate: function(offset, period) {
-		var year = this._drawYear + (period == 'Y' ? offset : 0);
-		var month = this._drawMonth + (period == 'M' ? offset : 0);
-		var day = Math.min(this._selectedDay, this._getDaysInMonth(year, month)) +
-			(period == 'D' ? offset : 0);
-		var date = new Date(year, month, day);
-		// ensure it is within the bounds set
-		var minDate = this._getMinMaxDate('min', true);
-		var maxDate = this._getMinMaxDate('max');
-		date = (minDate && date < minDate ? minDate : date);
-		date = (maxDate && date > maxDate ? maxDate : date);
-		this._selectedDay = date.getDate();
-		this._drawMonth = this._selectedMonth = date.getMonth();
-		this._drawYear = this._selectedYear = date.getFullYear();
-		if (period == 'M' || period == 'Y')
-			this._notifyChange();
-	},
-
-	/* Notify change of month/year. */
-	_notifyChange: function() {
-		var onChange = this._get('onChangeMonthYear');
-		if (onChange)
-			onChange.apply((this._input ? this._input[0] : null),
-				[new Date(this._selectedYear, this._selectedMonth, 1), this]);
-	},
-	
-	/* Determine the number of months to show. */
-	_getNumberOfMonths: function() {
-		var numMonths = this._get('numberOfMonths');
-		return (numMonths == null ? [1, 1] : (typeof numMonths == 'number' ? [1, numMonths] : numMonths));
-	},
-
-	/* Determine the current maximum date - ensure no time components are set - may be overridden for a range. */
-	_getMinMaxDate: function(minMax, checkRange) {
-		var date = this._determineDate(minMax + 'Date', null);
-		if (date) {
-			date.setHours(0);
-			date.setMinutes(0);
-			date.setSeconds(0);
-			date.setMilliseconds(0);
-		}
-		return (!checkRange || !this._rangeStart ? date :
-			(!date || this._rangeStart > date ? this._rangeStart : date));
-	},
-
-	/* Find the number of days in a given month. */
-	_getDaysInMonth: function(year, month) {
-		return 32 - new Date(year, month, 32).getDate();
-	},
-
-	/* Find the day of the week of the first of a month. */
-	_getFirstDayOfMonth: function(year, month) {
-		return new Date(year, month, 1).getDay();
-	},
-
-	/* Determines if we should allow a "next/prev" month display change. */
-	_canAdjustMonth: function(offset, curYear, curMonth) {
-		var numMonths = this._getNumberOfMonths();
-		var date = new Date(curYear, curMonth + (offset < 0 ? offset : numMonths[1]), 1);
-		if (offset < 0)
-			date.setDate(this._getDaysInMonth(date.getFullYear(), date.getMonth()));
-		return this._isInRange(date);
-	},
-
-	/* Is the given date in the accepted range? */
-	_isInRange: function(date) {
-		// during range selection, use minimum of selected date and range start
-		var newMinDate = (!this._rangeStart ? null :
-			new Date(this._selectedYear, this._selectedMonth, this._selectedDay));
-		newMinDate = (newMinDate && this._rangeStart < newMinDate ? this._rangeStart : newMinDate);
-		var minDate = newMinDate || this._getMinMaxDate('min');
-		var maxDate = this._getMinMaxDate('max');
-		return ((!minDate || date >= minDate) && (!maxDate || date <= maxDate));
-	},
-	
-	/* Provide the configuration settings for formatting/parsing. */
-	_getFormatConfig: function() {
-		var shortYearCutoff = this._get('shortYearCutoff');
-		shortYearCutoff = (typeof shortYearCutoff != 'string' ? shortYearCutoff :
-			new Date().getFullYear() % 100 + parseInt(shortYearCutoff, 10));
-		return {shortYearCutoff: shortYearCutoff,
-			dayNamesShort: this._get('dayNamesShort'), dayNames: this._get('dayNames'),
-			monthNamesShort: this._get('monthNamesShort'), monthNames: this._get('monthNames')};
-	},
-
-	/* Format the given date for display. */
-	_formatDate: function(day, month, year) {
-		if (!day) {
-			this._currentDay = this._selectedDay;
-			this._currentMonth = this._selectedMonth;
-			this._currentYear = this._selectedYear;
-		}
-		var date = (day ? (typeof day == 'object' ? day : new Date(year, month, day)) :
-			new Date(this._currentYear, this._currentMonth, this._currentDay));
-		return $.datepicker.formatDate(this._get('dateFormat'), date, this._getFormatConfig());
-	}
-});
-
-/* jQuery extend now ignores nulls! */
-function extendRemove(target, props) {
-	$.extend(target, props);
-	for (var name in props)
-		if (props[name] == null || props[name] == undefined)
-			target[name] = props[name];
-	return target;
-};
-
-/* Determine whether an object is an array. */
-function isArray(a) {
-	return (a && (($.browser.safari && typeof a == 'object' && a.length) ||
-		(a.constructor && a.constructor.toString().match(/\Array\(\)/))));
-};
-
-/* Invoke the datepicker functionality.
-   @param  options  String - a command, optionally followed by additional parameters or
-                    Object - settings for attaching new datepicker functionality
-   @return  jQuery object */
-$.fn.datepicker = function(options){
-	var otherArgs = Array.prototype.slice.call(arguments, 1);
-	if (typeof options == 'string' && (options == 'isDisabled' || options == 'getDate'))
-		return $.datepicker['_' + options + 'Datepicker'].apply($.datepicker, [this[0]].concat(otherArgs));
-	return this.each(function() {
-		typeof options == 'string' ?
-			$.datepicker['_' + options + 'Datepicker'].apply($.datepicker, [this].concat(otherArgs)) :
-			$.datepicker._attachDatepicker(this, options);
-	});
-};
-
-$.datepicker = new Datepicker(); // singleton instance
-	
-/* Initialise the date picker. */
-$(document).ready(function() {
-	$(document.body).append($.datepicker._datepickerDiv).
-		mousedown($.datepicker._checkExternalClick);
-});
-
-})(jQuery);
-/*
- * jQuery UI Dialog
- *
- * Copyright (c) 2008 Richard D. Worth (rdworth.org)
- * Dual licensed under the MIT (MIT-LICENSE.txt)
- * and GPL (GPL-LICENSE.txt) licenses.
- * 
- * http://docs.jquery.com/UI/Dialog
- *
- * Depends:
- *	ui.core.js
- *	ui.draggable.js
- *	ui.resizable.js
- */
-(function($) {
-
-var setDataSwitch = {
-	dragStart: "start.draggable",
-	drag: "drag.draggable",
-	dragStop: "stop.draggable",
-	maxHeight: "maxHeight.resizable",
-	minHeight: "minHeight.resizable",
-	maxWidth: "maxWidth.resizable",
-	minWidth: "minWidth.resizable",
-	resizeStart: "start.resizable",
-	resize: "drag.resizable",
-	resizeStop: "stop.resizable"
-};
-
-$.widget("ui.dialog", {
-	init: function() {
-		var self = this,
-			options = this.options,
-			resizeHandles = typeof options.resizable == 'string'
-				? options.resizable
-				: 'n,e,s,w,se,sw,ne,nw',
-			
-			uiDialogContent = this.element
-				.addClass('ui-dialog-content')
-				.wrap('<div/>')
-				.wrap('<div/>'),
-			
-			uiDialogContainer = (this.uiDialogContainer = uiDialogContent.parent()
-				.addClass('ui-dialog-container')
-				.css({position: 'relative', width: '100%', height: '100%'})),
-			
-			title = options.title || uiDialogContent.attr('title') || '',
-			uiDialogTitlebar = (this.uiDialogTitlebar =
-				$('<div class="ui-dialog-titlebar"/>'))
-				.append('<span class="ui-dialog-title">' + title + '</span>')
-				.append('<a href="#" class="ui-dialog-titlebar-close"><span>X</span></a>')
-				.prependTo(uiDialogContainer),
-			
-			uiDialog = (this.uiDialog = uiDialogContainer.parent())
-				.appendTo(document.body)
-				.hide()
-				.addClass('ui-dialog')
-				.addClass(options.dialogClass)
-				// add content classes to dialog
-				// to inherit theme at top level of element
-				.addClass(uiDialogContent.attr('className'))
-					.removeClass('ui-dialog-content')
-				.css({
-					position: 'absolute',
-					width: options.width,
-					height: options.height,
-					overflow: 'hidden',
-					zIndex: options.zIndex
-				})
-				// setting tabIndex makes the div focusable
-				// setting outline to 0 prevents a border on focus in Mozilla
-				.attr('tabIndex', -1).css('outline', 0).keydown(function(ev) {
-					if (options.closeOnEscape) {
-						var ESC = 27;
-						(ev.keyCode && ev.keyCode == ESC && self.close());
-					}
-				})
-				.mousedown(function() {
-					self.moveToTop();
-				}),
-			
-			uiDialogButtonPane = (this.uiDialogButtonPane = $('<div/>'))
-				.addClass('ui-dialog-buttonpane')
-				.appendTo(uiDialog);
-		
-		this.uiDialogTitlebarClose = $('.ui-dialog-titlebar-close', uiDialogTitlebar)
-			.hover(
-				function() {
-					$(this).addClass('ui-dialog-titlebar-close-hover');
-				},
-				function() {
-					$(this).removeClass('ui-dialog-titlebar-close-hover');
-				}
-			)
-			.mousedown(function(ev) {
-				ev.stopPropagation();
-			})
-			.click(function() {
-				self.close();
-				return false;
-			});
-		
-		if ($.fn.draggable) {
-			uiDialog.draggable({
-				helper: options.dragHelper,
-				handle: '.ui-dialog-titlebar',
-				start: function(e, ui) {
-					self.moveToTop();
-					(options.dragStart && options.dragStart.apply(self.element[0], arguments));
-				},
-				drag: function(e, ui) {
-					(options.drag && options.drag.apply(self.element[0], arguments));
-				},
-				stop: function(e, ui) {
-					(options.dragStop && options.dragStop.apply(self.element[0], arguments));
-					$.ui.dialog.overlay.resize();
-				}
-			});
-			(options.draggable || uiDialog.draggable('disable'));
-		}
-		
-		if ($.fn.resizable) {
-			uiDialog.resizable({
-				helper: options.resizeHelper,
-				maxWidth: options.maxWidth,
-				maxHeight: options.maxHeight,
-				minWidth: options.minWidth,
-				minHeight: options.minHeight,
-				start: function() {
-					(options.resizeStart && options.resizeStart.apply(self.element[0], arguments));
-				},
-				resize: function(e, ui) {
-					(options.autoResize && self.size.apply(self));
-					(options.resize && options.resize.apply(self.element[0], arguments));
-				},
-				handles: resizeHandles,
-				stop: function(e, ui) {
-					(options.autoResize && self.size.apply(self));
-					(options.resizeStop && options.resizeStop.apply(self.element[0], arguments));
-					$.ui.dialog.overlay.resize();
-				}
-			});
-			(options.resizable || uiDialog.resizable('disable'));
-		}
-		
-		this.createButtons(options.buttons);
-		this.isOpen = false;
-		
-		(options.bgiframe && $.fn.bgiframe && uiDialog.bgiframe());
-		(options.autoOpen && this.open());
-	},
-	
-	setData: function(key, value){
-		(setDataSwitch[key] && this.uiDialog.data(setDataSwitch[key], value));
-		switch (key) {
-			case "buttons":
-				this.createButtons(value);
-				break;
-			case "draggable":
-				this.uiDialog.draggable(value ? 'enable' : 'disable');
-				break;
-			case "height":
-				this.uiDialog.height(value);
-				break;
-			case "position":
-				this.position(value);
-				break;
-			case "resizable":
-				(typeof value == 'string' && this.uiDialog.data('handles.resizable', value));
-				this.uiDialog.resizable(value ? 'enable' : 'disable');
-				break;
-			case "title":
-				$(".ui-dialog-title", this.uiDialogTitlebar).text(value);
-				break;
-			case "width":
-				this.uiDialog.width(value);
-				break;
-		}
-		
-		$.widget.prototype.setData.apply(this, arguments);
-	},
-	
-	position: function(pos) {
-		var wnd = $(window), doc = $(document),
-			pTop = doc.scrollTop(), pLeft = doc.scrollLeft(),
-			minTop = pTop;
-		
-		if ($.inArray(pos, ['center','top','right','bottom','left']) >= 0) {
-			pos = [
-				pos == 'right' || pos == 'left' ? pos : 'center',
-				pos == 'top' || pos == 'bottom' ? pos : 'middle'
-			];
-		}
-		if (pos.constructor != Array) {
-			pos = ['center', 'middle'];
-		}
-		if (pos[0].constructor == Number) {
-			pLeft += pos[0];
-		} else {
-			switch (pos[0]) {
-				case 'left':
-					pLeft += 0;
-					break;
-				case 'right':
-					pLeft += wnd.width() - this.uiDialog.width();
-					break;
-				default:
-				case 'center':
-					pLeft += (wnd.width() - this.uiDialog.width()) / 2;
-			}
-		}
-		if (pos[1].constructor == Number) {
-			pTop += pos[1];
-		} else {
-			switch (pos[1]) {
-				case 'top':
-					pTop += 0;
-					break;
-				case 'bottom':
-					pTop += wnd.height() - this.uiDialog.height();
-					break;
-				default:
-				case 'middle':
-					pTop += (wnd.height() - this.uiDialog.height()) / 2;
-			}
-		}
-		
-		// prevent the dialog from being too high (make sure the titlebar
-		// is accessible)
-		pTop = Math.max(pTop, minTop);
-		this.uiDialog.css({top: pTop, left: pLeft});
-	},
-
-	size: function() {
-		var container = this.uiDialogContainer,
-			titlebar = this.uiDialogTitlebar,
-			content = this.element,
-			tbMargin = parseInt(content.css('margin-top')) + parseInt(content.css('margin-bottom')),
-			lrMargin = parseInt(content.css('margin-left')) + parseInt(content.css('margin-right'));
-		content.height(container.height() - titlebar.outerHeight() - tbMargin);
-		content.width(container.width() - lrMargin);
-	},
-	
-	open: function() {
-		if (this.isOpen) { return; }
-		
-		this.overlay = this.options.modal ? new $.ui.dialog.overlay(this) : null;
-		(this.uiDialog.next().length > 0) && this.uiDialog.appendTo('body');
-		this.position(this.options.position);
-		this.uiDialog.show(this.options.show);
-		this.options.autoResize && this.size();
-		this.moveToTop(true);
-		
-		// CALLBACK: open
-		var openEV = null;
-		var openUI = {
-			options: this.options
-		};
-		this.uiDialogTitlebarClose.focus();
-		this.element.triggerHandler("dialogopen", [openEV, openUI], this.options.open);
-		
-		this.isOpen = true;
-	},
-	
-	// the force parameter allows us to move modal dialogs to their correct
-	// position on open
-	moveToTop: function(force) {
-		if ((this.options.modal && !force)
-			|| (!this.options.stack && !this.options.modal)) { return; }
-		
-		var maxZ = this.options.zIndex, options = this.options;
-		$('.ui-dialog:visible').each(function() {
-			maxZ = Math.max(maxZ, parseInt($(this).css('z-index'), 10) || options.zIndex);
-		});
-		(this.overlay && this.overlay.$el.css('z-index', ++maxZ));
-		this.uiDialog.css('z-index', ++maxZ);
-	},
-	
-	close: function() {
-		(this.overlay && this.overlay.destroy());
-		this.uiDialog.hide(this.options.hide);
-
-		// CALLBACK: close
-		var closeEV = null;
-		var closeUI = {
-			options: this.options
-		};
-		this.element.triggerHandler("dialogclose", [closeEV, closeUI], this.options.close);
-		$.ui.dialog.overlay.resize();
-		
-		this.isOpen = false;
-	},
-	
-	destroy: function() {
-		(this.overlay && this.overlay.destroy());
-		this.uiDialog.hide();
-		this.element
-			.unbind('.dialog')
-			.removeData('dialog')
-			.removeClass('ui-dialog-content')
-			.hide().appendTo('body');
-		this.uiDialog.remove();
-	},
-	
-	createButtons: function(buttons) {
-		var self = this,
-			hasButtons = false,
-			uiDialogButtonPane = this.uiDialogButtonPane;
-		
-		// remove any existing buttons
-		uiDialogButtonPane.empty().hide();
-		
-		$.each(buttons, function() { return !(hasButtons = true); });
-		if (hasButtons) {
-			uiDialogButtonPane.show();
-			$.each(buttons, function(name, fn) {
-				$('<button/>')
-					.text(name)
-					.click(function() { fn.apply(self.element[0], arguments); })
-					.appendTo(uiDialogButtonPane);
-			});
-		}
-	}
-});
-
-$.extend($.ui.dialog, {
-	defaults: {
-		autoOpen: true,
-		autoResize: true,
-		bgiframe: false,
-		buttons: {},
-		closeOnEscape: true,
-		draggable: true,
-		height: 200,
-		minHeight: 100,
-		minWidth: 150,
-		modal: false,
-		overlay: {},
-		position: 'center',
-		resizable: true,
-		stack: true,
-		width: 300,
-		zIndex: 1000
-	},
-	
-	overlay: function(dialog) {
-		this.$el = $.ui.dialog.overlay.create(dialog);
-	}
-});
-
-$.extend($.ui.dialog.overlay, {
-	instances: [],
-	events: $.map('focus,mousedown,mouseup,keydown,keypress,click'.split(','),
-		function(e) { return e + '.dialog-overlay'; }).join(' '),
-	create: function(dialog) {
-		if (this.instances.length === 0) {
-			// prevent use of anchors and inputs
-			// we use a setTimeout in case the overlay is created from an
-			// event that we're going to be cancelling (see #2804)
-			setTimeout(function() {
-				$('a, :input').bind($.ui.dialog.overlay.events, function() {
-					// allow use of the element if inside a dialog and
-					// - there are no modal dialogs
-					// - there are modal dialogs, but we are in front of the topmost modal
-					var allow = false;
-					var $dialog = $(this).parents('.ui-dialog');
-					if ($dialog.length) {
-						var $overlays = $('.ui-dialog-overlay');
-						if ($overlays.length) {
-							var maxZ = parseInt($overlays.css('z-index'), 10);
-							$overlays.each(function() {
-								maxZ = Math.max(maxZ, parseInt($(this).css('z-index'), 10));
-							});
-							allow = parseInt($dialog.css('z-index'), 10) > maxZ;
-						} else {
-							allow = true;
-						}
-					}
-					return allow;
-				});
-			}, 1);
-			
-			// allow closing by pressing the escape key
-			$(document).bind('keydown.dialog-overlay', function(e) {
-				var ESC = 27;
-				(e.keyCode && e.keyCode == ESC && dialog.close()); 
-			});
-			
-			// handle window resize
-			$(window).bind('resize.dialog-overlay', $.ui.dialog.overlay.resize);
-		}
-		
-		var $el = $('<div/>').appendTo(document.body)
-			.addClass('ui-dialog-overlay').css($.extend({
-				borderWidth: 0, margin: 0, padding: 0,
-				position: 'absolute', top: 0, left: 0,
-				width: this.width(),
-				height: this.height()
-			}, dialog.options.overlay));
-		
-		(dialog.options.bgiframe && $.fn.bgiframe && $el.bgiframe());
-		
-		this.instances.push($el);
-		return $el;
-	},
-	
-	destroy: function($el) {
-		this.instances.splice($.inArray(this.instances, $el), 1);
-		
-		if (this.instances.length === 0) {
-			$('a, :input').add([document, window]).unbind('.dialog-overlay');
-		}
-		
-		$el.remove();
-	},
-	
-	height: function() {
-		if ($.browser.msie && $.browser.version < 7) {
-			var scrollHeight = Math.max(
-				document.documentElement.scrollHeight,
-				document.body.scrollHeight
-			);
-			var offsetHeight = Math.max(
-				document.documentElement.offsetHeight,
-				document.body.offsetHeight
-			);
-			
-			if (scrollHeight < offsetHeight) {
-				return $(window).height() + 'px';
-			} else {
-				return scrollHeight + 'px';
-			}
-		} else {
-			return $(document).height() + 'px';
-		}
-	},
-	
-	width: function() {
-		if ($.browser.msie && $.browser.version < 7) {
-			var scrollWidth = Math.max(
-				document.documentElement.scrollWidth,
-				document.body.scrollWidth
-			);
-			var offsetWidth = Math.max(
-				document.documentElement.offsetWidth,
-				document.body.offsetWidth
-			);
-			
-			if (scrollWidth < offsetWidth) {
-				return $(window).width() + 'px';
-			} else {
-				return scrollWidth + 'px';
-			}
-		} else {
-			return $(document).width() + 'px';
-		}
-	},
-	
-	resize: function() {
-		/* If the dialog is draggable and the user drags it past the
-		 * right edge of the window, the document becomes wider so we
-		 * need to stretch the overlay. If the user then drags the
-		 * dialog back to the left, the document will become narrower,
-		 * so we need to shrink the overlay to the appropriate size.
-		 * This is handled by shrinking the overlay before setting it
-		 * to the full document size.
-		 */
-		var $overlays = $([]);
-		$.each($.ui.dialog.overlay.instances, function() {
-			$overlays = $overlays.add(this);
-		});
-		
-		$overlays.css({
-			width: 0,
-			height: 0
-		}).css({
-			width: $.ui.dialog.overlay.width(),
-			height: $.ui.dialog.overlay.height()
-		});
-	}
-});
-
-$.extend($.ui.dialog.overlay.prototype, {
-	destroy: function() {
-		$.ui.dialog.overlay.destroy(this.$el);
-	}
-});
-
-})(jQuery);
-/*
- * jQuery UI Slider
- *
- * Copyright (c) 2008 Paul Bakaus
- * Dual licensed under the MIT (MIT-LICENSE.txt)
- * and GPL (GPL-LICENSE.txt) licenses.
- * 
- * http://docs.jquery.com/UI/Slider
- *
- * Depends:
- *	ui.core.js
- */
-(function($) {
-
-$.fn.unwrap = $.fn.unwrap || function(expr) {
-  return this.each(function(){
-     $(this).parents(expr).eq(0).after(this).remove();
-  });
-};
-
-$.widget("ui.slider", {
-	plugins: {},
-	ui: function(e) {
-		return {
-			options: this.options,
-			handle: this.currentHandle,
-			value: this.options.axis != "both" || !this.options.axis ? Math.round(this.value(null,this.options.axis == "vertical" ? "y" : "x")) : {
-				x: Math.round(this.value(null,"x")),
-				y: Math.round(this.value(null,"y"))
-			},
-			range: this.getRange()
-		};
-	},
-	propagate: function(n,e) {
-		$.ui.plugin.call(this, n, [e, this.ui()]);
-		this.element.triggerHandler(n == "slide" ? n : "slide"+n, [e, this.ui()], this.options[n]);
-	},
-	destroy: function() {
-		
-		this.element
-			.removeClass("ui-slider ui-slider-disabled")
-			.removeData("slider")
-			.unbind(".slider");
-		
-		if(this.handle && this.handle.length) {
-			this.handle
-				.unwrap("a");
-			this.handle.each(function() {
-				$(this).data("mouse").mouseDestroy();
-			});
-		}
-		
-		this.generated && this.generated.remove();
-		
-	},
-	setData: function(key, value) {
-		$.widget.prototype.setData.apply(this, arguments);
-		if (/min|max|steps/.test(key)) {
-			this.initBoundaries();
-		}
-		
-		if(key == "range") {
-			value ? this.handle.length == 2 && this.createRange() : this.removeRange();
-		}
-		
-	},
-
-	init: function() {
-		
-		var self = this;
-		this.element.addClass("ui-slider");
-		this.initBoundaries();
-		
-		// Initialize mouse and key events for interaction
-		this.handle = $(this.options.handle, this.element);
-		if (!this.handle.length) {
-			self.handle = self.generated = $(self.options.handles || [0]).map(function() {
-				var handle = $("<div/>").addClass("ui-slider-handle").appendTo(self.element);
-				if (this.id)
-					handle.attr("id", this.id);
-				return handle[0];
-			});
-		}
-		
-		
-		var handleclass = function(el) {
-			this.element = $(el);
-			this.element.data("mouse", this);
-			this.options = self.options;
-			
-			this.element.bind("mousedown", function() {
-				if(self.currentHandle) this.blur(self.currentHandle);
-				self.focus(this,1);
-			});
-			
-			this.mouseInit();
-		};
-		
-		$.extend(handleclass.prototype, $.ui.mouse, {
-			mouseStart: function(e) { return self.start.call(self, e, this.element[0]); },
-			mouseStop: function(e) { return self.stop.call(self, e, this.element[0]); },
-			mouseDrag: function(e) { return self.drag.call(self, e, this.element[0]); },
-			mouseCapture: function() { return true; },
-			trigger: function(e) { this.mouseDown(e); }
-		});
-		
-		
-		$(this.handle)
-			.each(function() {
-				new handleclass(this);
-			})
-			.wrap('<a href="javascript:void(0)" style="cursor:default;"></a>')
-			.parent()
-				.bind('focus', function(e) { self.focus(this.firstChild); })
-				.bind('blur', function(e) { self.blur(this.firstChild); })
-				.bind('keydown', function(e) { if(!self.options.noKeyboard) self.keydown(e.keyCode, this.firstChild); })
-		;
-		
-		// Bind the click to the slider itself
-		this.element.bind('mousedown.slider', function(e) {
-			self.click.apply(self, [e]);
-			self.currentHandle.data("mouse").trigger(e);
-			self.firstValue = self.firstValue + 1; //This is for always triggering the change event
-		});
-		
-		// Move the first handle to the startValue
-		$.each(this.options.handles || [], function(index, handle) {
-			self.moveTo(handle.start, index, true);
-		});
-		if (!isNaN(this.options.startValue))
-			this.moveTo(this.options.startValue, 0, true);
-
-		this.previousHandle = $(this.handle[0]); //set the previous handle to the first to allow clicking before selecting the handle
-		if(this.handle.length == 2 && this.options.range) this.createRange();
-	},
-	initBoundaries: function() {
-		
-		var element = this.element[0], o = this.options;
-		this.actualSize = { width: this.element.outerWidth() , height: this.element.outerHeight() };			
-		
-		$.extend(o, {
-			axis: o.axis || (element.offsetWidth < element.offsetHeight ? 'vertical' : 'horizontal'),
-			max: !isNaN(parseInt(o.max,10)) ? { x: parseInt(o.max, 10), y: parseInt(o.max, 10) } : ({ x: o.max && o.max.x || 100, y: o.max && o.max.y || 100 }),
-			min: !isNaN(parseInt(o.min,10)) ? { x: parseInt(o.min, 10), y: parseInt(o.min, 10) } : ({ x: o.min && o.min.x || 0, y: o.min && o.min.y || 0 })
-		});
-		//Prepare the real maxValue
-		o.realMax = {
-			x: o.max.x - o.min.x,
-			y: o.max.y - o.min.y
-		};
-		//Calculate stepping based on steps
-		o.stepping = {
-			x: o.stepping && o.stepping.x || parseInt(o.stepping, 10) || (o.steps ? o.realMax.x/(o.steps.x || parseInt(o.steps, 10) || o.realMax.x) : 0),
-			y: o.stepping && o.stepping.y || parseInt(o.stepping, 10) || (o.steps ? o.realMax.y/(o.steps.y || parseInt(o.steps, 10) || o.realMax.y) : 0)
-		};
-	},
-
-	
-	keydown: function(keyCode, handle) {
-		if(/(37|38|39|40)/.test(keyCode)) {
-			this.moveTo({
-				x: /(37|39)/.test(keyCode) ? (keyCode == 37 ? '-' : '+') + '=' + this.oneStep("x") : 0,
-				y: /(38|40)/.test(keyCode) ? (keyCode == 38 ? '-' : '+') + '=' + this.oneStep("y") : 0
-			}, handle);
-		}
-	},
-	focus: function(handle,hard) {
-		this.currentHandle = $(handle).addClass('ui-slider-handle-active');
-		if (hard)
-			this.currentHandle.parent()[0].focus();
-	},
-	blur: function(handle) {
-		$(handle).removeClass('ui-slider-handle-active');
-		if(this.currentHandle && this.currentHandle[0] == handle) { this.previousHandle = this.currentHandle; this.currentHandle = null; };
-	},
-	click: function(e) {
-		// This method is only used if:
-		// - The user didn't click a handle
-		// - The Slider is not disabled
-		// - There is a current, or previous selected handle (otherwise we wouldn't know which one to move)
-		
-		var pointer = [e.pageX,e.pageY];
-		
-		var clickedHandle = false;
-		this.handle.each(function() {
-			if(this == e.target)
-				clickedHandle = true;
-		});
-		if (clickedHandle || this.options.disabled || !(this.currentHandle || this.previousHandle))
-			return;
-
-		// If a previous handle was focussed, focus it again
-		if (!this.currentHandle && this.previousHandle)
-			this.focus(this.previousHandle, true);
-		
-		// propagate only for distance > 0, otherwise propagation is done my drag
-		this.offset = this.element.offset();
-
-		this.moveTo({
-			y: this.convertValue(e.pageY - this.offset.top - this.currentHandle[0].offsetHeight/2, "y"),
-			x: this.convertValue(e.pageX - this.offset.left - this.currentHandle[0].offsetWidth/2, "x")
-		}, null, !this.options.distance);
-	},
-	
-
-
-	createRange: function() {
-		if(this.rangeElement) return;
-		this.rangeElement = $('<div></div>')
-			.addClass('ui-slider-range')
-			.css({ position: 'absolute' })
-			.appendTo(this.element);
-		this.updateRange();
-	},
-	removeRange: function() {
-		this.rangeElement.remove();
-		this.rangeElement = null;
-	},
-	updateRange: function() {
-			var prop = this.options.axis == "vertical" ? "top" : "left";
-			var size = this.options.axis == "vertical" ? "height" : "width";
-			this.rangeElement.css(prop, (parseInt($(this.handle[0]).css(prop),10) || 0) + this.handleSize(0, this.options.axis == "vertical" ? "y" : "x")/2);
-			this.rangeElement.css(size, (parseInt($(this.handle[1]).css(prop),10) || 0) - (parseInt($(this.handle[0]).css(prop),10) || 0));
-	},
-	getRange: function() {
-		return this.rangeElement ? this.convertValue(parseInt(this.rangeElement.css(this.options.axis == "vertical" ? "height" : "width"),10), this.options.axis == "vertical" ? "y" : "x") : null;
-	},
-
-	handleIndex: function() {
-		return this.handle.index(this.currentHandle[0]);
-	},
-	value: function(handle, axis) {
-		if(this.handle.length == 1) this.currentHandle = this.handle;
-		if(!axis) axis = this.options.axis == "vertical" ? "y" : "x";
-
-		var curHandle = $(handle != undefined && handle !== null ? this.handle[handle] || handle : this.currentHandle);
-		
-		if(curHandle.data("mouse").sliderValue) {
-			return parseInt(curHandle.data("mouse").sliderValue[axis],10);
-		} else {
-			return parseInt(((parseInt(curHandle.css(axis == "x" ? "left" : "top"),10) / (this.actualSize[axis == "x" ? "width" : "height"] - this.handleSize(handle,axis))) * this.options.realMax[axis]) + this.options.min[axis],10);
-		}
-
-	},
-	convertValue: function(value,axis) {
-		return this.options.min[axis] + (value / (this.actualSize[axis == "x" ? "width" : "height"] - this.handleSize(null,axis))) * this.options.realMax[axis];
-	},
-	
-	translateValue: function(value,axis) {
-		return ((value - this.options.min[axis]) / this.options.realMax[axis]) * (this.actualSize[axis == "x" ? "width" : "height"] - this.handleSize(null,axis));
-	},
-	translateRange: function(value,axis) {
-		if (this.rangeElement) {
-			if (this.currentHandle[0] == this.handle[0] && value >= this.translateValue(this.value(1),axis))
-				value = this.translateValue(this.value(1,axis) - this.oneStep(axis), axis);
-			if (this.currentHandle[0] == this.handle[1] && value <= this.translateValue(this.value(0),axis))
-				value = this.translateValue(this.value(0,axis) + this.oneStep(axis), axis);
-		}
-		if (this.options.handles) {
-			var handle = this.options.handles[this.handleIndex()];
-			if (value < this.translateValue(handle.min,axis)) {
-				value = this.translateValue(handle.min,axis);
-			} else if (value > this.translateValue(handle.max,axis)) {
-				value = this.translateValue(handle.max,axis);
-			}
-		}
-		return value;
-	},
-	translateLimits: function(value,axis) {
-		if (value >= this.actualSize[axis == "x" ? "width" : "height"] - this.handleSize(null,axis))
-			value = this.actualSize[axis == "x" ? "width" : "height"] - this.handleSize(null,axis);
-		if (value <= 0)
-			value = 0;
-		return value;
-	},
-	handleSize: function(handle,axis) {
-		return $(handle != undefined && handle !== null ? this.handle[handle] : this.currentHandle)[0]["offset"+(axis == "x" ? "Width" : "Height")];	
-	},
-	oneStep: function(axis) {
-		return this.options.stepping[axis] || 1;
-	},
-
-
-	start: function(e, handle) {
-	
-		var o = this.options;
-		if(o.disabled) return false;
-
-		// Prepare the outer size
-		this.actualSize = { width: this.element.outerWidth() , height: this.element.outerHeight() };
-	
-		// This is a especially ugly fix for strange blur events happening on mousemove events
-		if (!this.currentHandle)
-			this.focus(this.previousHandle, true); 
-
-		this.offset = this.element.offset();
-		
-		this.handleOffset = this.currentHandle.offset();
-		this.clickOffset = { top: e.pageY - this.handleOffset.top, left: e.pageX - this.handleOffset.left };
-		
-		this.firstValue = this.value();
-		
-		this.propagate('start', e);
-		this.drag(e, handle);
-		return true;
-					
-	},
-	stop: function(e) {
-		this.propagate('stop', e);
-		if (this.firstValue != this.value())
-			this.propagate('change', e);
-		// This is a especially ugly fix for strange blur events happening on mousemove events
-		this.focus(this.currentHandle, true);
-		return false;
-	},
-	drag: function(e, handle) {
-
-		var o = this.options;
-		var position = { top: e.pageY - this.offset.top - this.clickOffset.top, left: e.pageX - this.offset.left - this.clickOffset.left};
-		if(!this.currentHandle) this.focus(this.previousHandle, true); //This is a especially ugly fix for strange blur events happening on mousemove events
-
-		position.left = this.translateLimits(position.left, "x");
-		position.top = this.translateLimits(position.top, "y");
-		
-		if (o.stepping.x) {
-			var value = this.convertValue(position.left, "x");
-			value = Math.round(value / o.stepping.x) * o.stepping.x;
-			position.left = this.translateValue(value, "x");	
-		}
-		if (o.stepping.y) {
-			var value = this.convertValue(position.top, "y");
-			value = Math.round(value / o.stepping.y) * o.stepping.y;
-			position.top = this.translateValue(value, "y");	
-		}
-		
-		position.left = this.translateRange(position.left, "x");
-		position.top = this.translateRange(position.top, "y");
-
-		if(o.axis != "vertical") this.currentHandle.css({ left: position.left });
-		if(o.axis != "horizontal") this.currentHandle.css({ top: position.top });
-		
-		//Store the slider's value
-		this.currentHandle.data("mouse").sliderValue = {
-			x: Math.round(this.convertValue(position.left, "x")) || 0,
-			y: Math.round(this.convertValue(position.top, "y")) || 0
-		};
-		
-		if (this.rangeElement)
-			this.updateRange();
-		this.propagate('slide', e);
-		return false;
-	},
-	
-	moveTo: function(value, handle, noPropagation) {
-
-		var o = this.options;
-
-		// Prepare the outer size
-		this.actualSize = { width: this.element.outerWidth() , height: this.element.outerHeight() };
-
-		//If no handle has been passed, no current handle is available and we have multiple handles, return false
-		if (handle == undefined && !this.currentHandle && this.handle.length != 1)
-			return false; 
-		
-		//If only one handle is available, use it
-		if (handle == undefined && !this.currentHandle)
-			handle = 0;
-		
-		if (handle != undefined)
-			this.currentHandle = this.previousHandle = $(this.handle[handle] || handle);
-
-
-		if(value.x !== undefined && value.y !== undefined) {
-			var x = value.x, y = value.y;
-		} else {
-			var x = value, y = value;
-		}
-
-		if(x !== undefined && x.constructor != Number) {
-			var me = /^\-\=/.test(x), pe = /^\+\=/.test(x);
-			if(me || pe) {
-				x = this.value(null, "x") + parseInt(x.replace(me ? '=' : '+=', ''), 10);
-			} else {
-				x = isNaN(parseInt(x, 10)) ? undefined : parseInt(x, 10);
-			}
-		}
-		
-		if(y !== undefined && y.constructor != Number) {
-			var me = /^\-\=/.test(y), pe = /^\+\=/.test(y);
-			if(me || pe) {
-				y = this.value(null, "y") + parseInt(y.replace(me ? '=' : '+=', ''), 10);
-			} else {
-				y = isNaN(parseInt(y, 10)) ? undefined : parseInt(y, 10);
-			}
-		}
-
-		if(o.axis != "vertical" && x !== undefined) {
-			if(o.stepping.x) x = Math.round(x / o.stepping.x) * o.stepping.x;
-			x = this.translateValue(x, "x");
-			x = this.translateLimits(x, "x");
-			x = this.translateRange(x, "x");
-			this.currentHandle.css({ left: x });
-		}
-
-		if(o.axis != "horizontal" && y !== undefined) {
-			if(o.stepping.y) y = Math.round(y / o.stepping.y) * o.stepping.y;
-			y = this.translateValue(y, "y");
-			y = this.translateLimits(y, "y");
-			y = this.translateRange(y, "y");
-			this.currentHandle.css({ top: y });
-		}
-		
-		if (this.rangeElement)
-			this.updateRange();
-			
-		//Store the slider's value
-		this.currentHandle.data("mouse").sliderValue = {
-			x: Math.round(this.convertValue(x, "x")) || 0,
-			y: Math.round(this.convertValue(y, "y")) || 0
-		};
-	
-		if (!noPropagation) {
-			this.propagate('start', null);
-			this.propagate('stop', null);
-			this.propagate('change', null);
-			this.propagate("slide", null);
-		}
-	}
-});
-
-$.ui.slider.getter = "value";
-
-$.ui.slider.defaults = {
-	handle: ".ui-slider-handle",
-	distance: 1
-};
-
-})(jQuery);
-/*
- * jQuery UI Tabs
- *
- * Copyright (c) 2007, 2008 Klaus Hartl (stilbuero.de)
- * Dual licensed under the MIT (MIT-LICENSE.txt)
- * and GPL (GPL-LICENSE.txt) licenses.
- *
- * http://docs.jquery.com/UI/Tabs
- *
- * Depends:
- *	ui.core.js
- */
-(function($) {
-
-$.widget("ui.tabs", {
-	init: function() {
-		this.options.event += '.tabs'; // namespace event
-		
-		// create tabs
-		this.tabify(true);
-	},
-	setData: function(key, value) {
-		if ((/^selected/).test(key))
-			this.select(value);
-		else {
-			this.options[key] = value;
-			this.tabify();
-		}
-	},
-	length: function() {
-		return this.$tabs.length;
-	},
-	tabId: function(a) {
-		return a.title && a.title.replace(/\s/g, '_').replace(/[^A-Za-z0-9\-_:\.]/g, '')
-			|| this.options.idPrefix + $.data(a);
-	},
-	ui: function(tab, panel) {
-		return {
-			options: this.options,
-			tab: tab,
-			panel: panel
-		};
-	},
-	tabify: function(init) {
-
-		this.$lis = $('li:has(a[href])', this.element);
-		this.$tabs = this.$lis.map(function() { return $('a', this)[0]; });
-		this.$panels = $([]);
-
-		var self = this, o = this.options;
-
-		this.$tabs.each(function(i, a) {
-			// inline tab
-			if (a.hash && a.hash.replace('#', '')) // Safari 2 reports '#' for an empty hash
-				self.$panels = self.$panels.add(a.hash);
-			// remote tab
-			else if ($(a).attr('href') != '#') { // prevent loading the page itself if href is just "#"
-				$.data(a, 'href.tabs', a.href); // required for restore on destroy
-				$.data(a, 'load.tabs', a.href); // mutable
-				var id = self.tabId(a);
-				a.href = '#' + id;
-				var $panel = $('#' + id);
-				if (!$panel.length) {
-					$panel = $(o.panelTemplate).attr('id', id).addClass(o.panelClass)
-						.insertAfter( self.$panels[i - 1] || self.element );
-					$panel.data('destroy.tabs', true);
-				}
-				self.$panels = self.$panels.add( $panel );
-			}
-			// invalid tab href
-			else
-				o.disabled.push(i + 1);
-		});
-
-		if (init) {
-
-			// attach necessary classes for styling if not present
-			this.element.addClass(o.navClass);
-			this.$panels.each(function() {
-				var $this = $(this);
-				$this.addClass(o.panelClass);
-			});
-
-			// Selected tab
-			// use "selected" option or try to retrieve:
-			// 1. from fragment identifier in url
-			// 2. from cookie
-			// 3. from selected class attribute on <li>
-			if (o.selected === undefined) {
-				if (location.hash) {
-					this.$tabs.each(function(i, a) {
-						if (a.hash == location.hash) {
-							o.selected = i;
-							// prevent page scroll to fragment
-							if ($.browser.msie || $.browser.opera) { // && !o.remote
-								var $toShow = $(location.hash), toShowId = $toShow.attr('id');
-								$toShow.attr('id', '');
-								setTimeout(function() {
-									$toShow.attr('id', toShowId); // restore id
-								}, 500);
-							}
-							scrollTo(0, 0);
-							return false; // break
-						}
-					});
-				}
-				else if (o.cookie) {
-					var index = parseInt($.cookie('ui-tabs' + $.data(self.element)),10);
-					if (index && self.$tabs[index])
-						o.selected = index;
-				}
-				else if (self.$lis.filter('.' + o.selectedClass).length)
-					o.selected = self.$lis.index( self.$lis.filter('.' + o.selectedClass)[0] );
-			}
-			o.selected = o.selected === null || o.selected !== undefined ? o.selected : 0; // first tab selected by default
-
-			// Take disabling tabs via class attribute from HTML
-			// into account and update option properly.
-			// A selected tab cannot become disabled.
-			o.disabled = $.unique(o.disabled.concat(
-				$.map(this.$lis.filter('.' + o.disabledClass),
-					function(n, i) { return self.$lis.index(n); } )
-			)).sort();
-			if ($.inArray(o.selected, o.disabled) != -1)
-				o.disabled.splice($.inArray(o.selected, o.disabled), 1);
-			
-			// highlight selected tab
-			this.$panels.addClass(o.hideClass);
-			this.$lis.removeClass(o.selectedClass);
-			if (o.selected !== null) {
-				this.$panels.eq(o.selected).show().removeClass(o.hideClass); // use show and remove class to show in any case no matter how it has been hidden before
-				this.$lis.eq(o.selected).addClass(o.selectedClass);
-				
-				// seems to be expected behavior that the show callback is fired
-				var onShow = function() {
-					$(self.element).triggerHandler('tabsshow',
-						[self.fakeEvent('tabsshow'), self.ui(self.$tabs[o.selected], self.$panels[o.selected])], o.show);
-				}; 
-
-				// load if remote tab
-				if ($.data(this.$tabs[o.selected], 'load.tabs'))
-					this.load(o.selected, onShow);
-				// just trigger show event
-				else
-					onShow();
-				
-			}
-			
-			// clean up to avoid memory leaks in certain versions of IE 6
-			$(window).bind('unload', function() {
-				self.$tabs.unbind('.tabs');
-				self.$lis = self.$tabs = self.$panels = null;
-			});
-
-		}
-
-		// disable tabs
-		for (var i = 0, li; li = this.$lis[i]; i++)
-			$(li)[$.inArray(i, o.disabled) != -1 && !$(li).hasClass(o.selectedClass) ? 'addClass' : 'removeClass'](o.disabledClass);
-
-		// reset cache if switching from cached to not cached
-		if (o.cache === false)
-			this.$tabs.removeData('cache.tabs');
-		
-		// set up animations
-		var hideFx, showFx, baseFx = { 'min-width': 0, duration: 1 }, baseDuration = 'normal';
-		if (o.fx && o.fx.constructor == Array)
-			hideFx = o.fx[0] || baseFx, showFx = o.fx[1] || baseFx;
-		else
-			hideFx = showFx = o.fx || baseFx;
-
-		// reset some styles to maintain print style sheets etc.
-		var resetCSS = { display: '', overflow: '', height: '' };
-		if (!$.browser.msie) // not in IE to prevent ClearType font issue
-			resetCSS.opacity = '';
-
-		// Hide a tab, animation prevents browser scrolling to fragment,
-		// $show is optional.
-		function hideTab(clicked, $hide, $show) {
-			$hide.animate(hideFx, hideFx.duration || baseDuration, function() { //
-				$hide.addClass(o.hideClass).css(resetCSS); // maintain flexible height and accessibility in print etc.
-				if ($.browser.msie && hideFx.opacity)
-					$hide[0].style.filter = '';
-				if ($show)
-					showTab(clicked, $show, $hide);
-			});
-		}
-
-		// Show a tab, animation prevents browser scrolling to fragment,
-		// $hide is optional.
-		function showTab(clicked, $show, $hide) {
-			if (showFx === baseFx)
-				$show.css('display', 'block'); // prevent occasionally occuring flicker in Firefox cause by gap between showing and hiding the tab panels
-			$show.animate(showFx, showFx.duration || baseDuration, function() {
-				$show.removeClass(o.hideClass).css(resetCSS); // maintain flexible height and accessibility in print etc.
-				if ($.browser.msie && showFx.opacity)
-					$show[0].style.filter = '';
-
-				// callback
-				$(self.element).triggerHandler('tabsshow',
-					[self.fakeEvent('tabsshow'), self.ui(clicked, $show[0])], o.show);
-
-			});
-		}
-
-		// switch a tab
-		function switchTab(clicked, $li, $hide, $show) {
-			/*if (o.bookmarkable && trueClick) { // add to history only if true click occured, not a triggered click
-				$.ajaxHistory.update(clicked.hash);
-			}*/
-			$li.addClass(o.selectedClass)
-				.siblings().removeClass(o.selectedClass);
-			hideTab(clicked, $hide, $show);
-		}
-
-		// attach tab event handler, unbind to avoid duplicates from former tabifying...
-		this.$tabs.unbind('.tabs').bind(o.event, function() {
-
-			//var trueClick = e.clientX; // add to history only if true click occured, not a triggered click
-			var $li = $(this).parents('li:eq(0)'),
-				$hide = self.$panels.filter(':visible'),
-				$show = $(this.hash);
-
-			// If tab is already selected and not unselectable or tab disabled or 
-			// or is already loading or click callback returns false stop here.
-			// Check if click handler returns false last so that it is not executed
-			// for a disabled or loading tab!
-			if (($li.hasClass(o.selectedClass) && !o.unselect)
-				|| $li.hasClass(o.disabledClass) 
-				|| $(this).hasClass(o.loadingClass)
-				|| $(self.element).triggerHandler('tabsselect', [self.fakeEvent('tabsselect'), self.ui(this, $show[0])], o.select) === false
-				) {
-				this.blur();
-				return false;
-			}
-
-			self.options.selected = self.$tabs.index(this);
-
-			// if tab may be closed
-			if (o.unselect) {
-				if ($li.hasClass(o.selectedClass)) {
-					self.options.selected = null;
-					$li.removeClass(o.selectedClass);
-					self.$panels.stop();
-					hideTab(this, $hide);
-					this.blur();
-					return false;
-				} else if (!$hide.length) {
-					self.$panels.stop();
-					var a = this;
-					self.load(self.$tabs.index(this), function() {
-						$li.addClass(o.selectedClass).addClass(o.unselectClass);
-						showTab(a, $show);
-					});
-					this.blur();
-					return false;
-				}
-			}
-
-			if (o.cookie)
-				$.cookie('ui-tabs' + $.data(self.element), self.options.selected, o.cookie);
-
-			// stop possibly running animations
-			self.$panels.stop();
-
-			// show new tab
-			if ($show.length) {
-
-				// prevent scrollbar scrolling to 0 and than back in IE7, happens only if bookmarking/history is enabled
-				/*if ($.browser.msie && o.bookmarkable) {
-					var showId = this.hash.replace('#', '');
-					$show.attr('id', '');
-					setTimeout(function() {
-						$show.attr('id', showId); // restore id
-					}, 0);
-				}*/
-
-				var a = this;
-				self.load(self.$tabs.index(this), $hide.length ? 
-					function() {
-						switchTab(a, $li, $hide, $show);
-					} :
-					function() {
-						$li.addClass(o.selectedClass);
-						showTab(a, $show);
-					}
-				);
-
-				// Set scrollbar to saved position - need to use timeout with 0 to prevent browser scroll to target of hash
-				/*var scrollX = window.pageXOffset || document.documentElement && document.documentElement.scrollLeft || document.body.scrollLeft || 0;
-				var scrollY = window.pageYOffset || document.documentElement && document.documentElement.scrollTop || document.body.scrollTop || 0;
-				setTimeout(function() {
-					scrollTo(scrollX, scrollY);
-				}, 0);*/
-
-			} else
-				throw 'jQuery UI Tabs: Mismatching fragment identifier.';
-
-			// Prevent IE from keeping other link focussed when using the back button
-			// and remove dotted border from clicked link. This is controlled in modern
-			// browsers via CSS, also blur removes focus from address bar in Firefox
-			// which can become a usability and annoying problem with tabsRotate.
-			if ($.browser.msie)
-				this.blur();
-
-			//return o.bookmarkable && !!trueClick; // convert trueClick == undefined to Boolean required in IE
-			return false;
-
-		});
-
-		// disable click if event is configured to something else
-		if (!(/^click/).test(o.event))
-			this.$tabs.bind('click.tabs', function() { return false; });
-
-	},
-	add: function(url, label, index) {
-		if (index == undefined) 
-			index = this.$tabs.length; // append by default
-
-		var o = this.options;
-		var $li = $(o.tabTemplate.replace(/#\{href\}/g, url).replace(/#\{label\}/g, label));
-		$li.data('destroy.tabs', true);
-
-		var id = url.indexOf('#') == 0 ? url.replace('#', '') : this.tabId( $('a:first-child', $li)[0] );
-
-		// try to find an existing element before creating a new one
-		var $panel = $('#' + id);
-		if (!$panel.length) {
-			$panel = $(o.panelTemplate).attr('id', id)
-				.addClass(o.hideClass)
-				.data('destroy.tabs', true);
-		}
-		$panel.addClass(o.panelClass);
-		if (index >= this.$lis.length) {
-			$li.appendTo(this.element);
-			$panel.appendTo(this.element[0].parentNode);
-		} else {
-			$li.insertBefore(this.$lis[index]);
-			$panel.insertBefore(this.$panels[index]);
-		}
-		
-		o.disabled = $.map(o.disabled,
-			function(n, i) { return n >= index ? ++n : n });
-			
-		this.tabify();
-
-		if (this.$tabs.length == 1) {
-			$li.addClass(o.selectedClass);
-			$panel.removeClass(o.hideClass);
-			var href = $.data(this.$tabs[0], 'load.tabs');
-			if (href)
-				this.load(index, href);
-		}
-
-		// callback
-		this.element.triggerHandler('tabsadd',
-			[this.fakeEvent('tabsadd'), this.ui(this.$tabs[index], this.$panels[index])], o.add
-		);
-	},
-	remove: function(index) {
-		var o = this.options, $li = this.$lis.eq(index).remove(),
-			$panel = this.$panels.eq(index).remove();
-
-		// If selected tab was removed focus tab to the right or
-		// in case the last tab was removed the tab to the left.
-		if ($li.hasClass(o.selectedClass) && this.$tabs.length > 1)
-			this.select(index + (index + 1 < this.$tabs.length ? 1 : -1));
-
-		o.disabled = $.map($.grep(o.disabled, function(n, i) { return n != index; }),
-			function(n, i) { return n >= index ? --n : n });
-
-		this.tabify();
-
-		// callback
-		this.element.triggerHandler('tabsremove',
-			[this.fakeEvent('tabsremove'), this.ui($li.find('a')[0], $panel[0])], o.remove
-		);
-	},
-	enable: function(index) {
-		var o = this.options;
-		if ($.inArray(index, o.disabled) == -1)
-			return;
-			
-		var $li = this.$lis.eq(index).removeClass(o.disabledClass);
-		if ($.browser.safari) { // fix disappearing tab (that used opacity indicating disabling) after enabling in Safari 2...
-			$li.css('display', 'inline-block');
-			setTimeout(function() {
-				$li.css('display', 'block');
-			}, 0);
-		}
-
-		o.disabled = $.grep(o.disabled, function(n, i) { return n != index; });
-
-		// callback
-		this.element.triggerHandler('tabsenable',
-			[this.fakeEvent('tabsenable'), this.ui(this.$tabs[index], this.$panels[index])], o.enable
-		);
-
-	},
-	disable: function(index) {
-		var self = this, o = this.options;
-		if (index != o.selected) { // cannot disable already selected tab
-			this.$lis.eq(index).addClass(o.disabledClass);
-
-			o.disabled.push(index);
-			o.disabled.sort();
-
-			// callback
-			this.element.triggerHandler('tabsdisable',
-				[this.fakeEvent('tabsdisable'), this.ui(this.$tabs[index], this.$panels[index])], o.disable
-			);
-		}
-	},
-	select: function(index) {
-		if (typeof index == 'string')
-			index = this.$tabs.index( this.$tabs.filter('[href$=' + index + ']')[0] );
-		this.$tabs.eq(index).trigger(this.options.event);
-	},
-	load: function(index, callback) { // callback is for internal usage only
-		
-		var self = this, o = this.options, $a = this.$tabs.eq(index), a = $a[0],
-				bypassCache = callback == undefined || callback === false, url = $a.data('load.tabs');
-
-		callback = callback || function() {};
-		
-		// no remote or from cache - just finish with callback
-		if (!url || !bypassCache && $.data(a, 'cache.tabs')) {
-			callback();
-			return;
-		}
-
-		// load remote from here on
-		
-		var inner = function(parent) {
-			var $parent = $(parent), $inner = $parent.find('*:last');
-			return $inner.length && $inner || $parent;
-		};
-		var cleanup = function() {
-			self.$tabs.filter('.' + o.loadingClass).removeClass(o.loadingClass)
-						.each(function() {
-							if (o.spinner)
-								inner(this).parent().html(inner(this).data('label.tabs'));
-						});
-			self.xhr = null;
-		};
-		
-		if (o.spinner) {
-			var label = inner(a).html();
-			inner(a).wrapInner('<em></em>')
-				.find('em').data('label.tabs', label).html(o.spinner);
-		}
-
-		var ajaxOptions = $.extend({}, o.ajaxOptions, {
-			url: url,
-			success: function(r, s) {
-				$(a.hash).html(r);
-				cleanup();
-				
-				if (o.cache)
-					$.data(a, 'cache.tabs', true); // if loaded once do not load them again
-
-				// callbacks
-				$(self.element).triggerHandler('tabsload',
-					[self.fakeEvent('tabsload'), self.ui(self.$tabs[index], self.$panels[index])], o.load
-				);
-				o.ajaxOptions.success && o.ajaxOptions.success(r, s);
-				
-				// This callback is required because the switch has to take
-				// place after loading has completed. Call last in order to 
-				// fire load before show callback...
-				callback();
-			}
-		});
-		if (this.xhr) {
-			// terminate pending requests from other tabs and restore tab label
-			this.xhr.abort();
-			cleanup();
-		}
-		$a.addClass(o.loadingClass);
-		setTimeout(function() { // timeout is again required in IE, "wait" for id being restored
-			self.xhr = $.ajax(ajaxOptions);
-		}, 0);
-
-	},
-	url: function(index, url) {
-		this.$tabs.eq(index).removeData('cache.tabs').data('load.tabs', url);
-	},
-	destroy: function() {
-		var o = this.options;
-		this.element.unbind('.tabs')
-			.removeClass(o.navClass).removeData('tabs');
-		this.$tabs.each(function() {
-			var href = $.data(this, 'href.tabs');
-			if (href)
-				this.href = href;
-			var $this = $(this).unbind('.tabs');
-			$.each(['href', 'load', 'cache'], function(i, prefix) {
-				$this.removeData(prefix + '.tabs');
-			});
-		});
-		this.$lis.add(this.$panels).each(function() {
-			if ($.data(this, 'destroy.tabs'))
-				$(this).remove();
-			else
-				$(this).removeClass([o.selectedClass, o.unselectClass,
-					o.disabledClass, o.panelClass, o.hideClass].join(' '));
-		});
-	},
-	fakeEvent: function(type) {
-		return $.event.fix({
-			type: type,
-			target: this.element[0]
-		});
-	}
-});
-
-$.ui.tabs.defaults = {
-	// basic setup
-	unselect: false,
-	event: 'click',
-	disabled: [],
-	cookie: null, // e.g. { expires: 7, path: '/', domain: 'jquery.com', secure: true }
-	// TODO history: false,
-
-	// Ajax
-	spinner: 'Loading&#8230;',
-	cache: false,
-	idPrefix: 'ui-tabs-',
-	ajaxOptions: {},
-
-	// animations
-	fx: null, // e.g. { height: 'toggle', opacity: 'toggle', duration: 200 }
-
-	// templates
-	tabTemplate: '<li><a href="#{href}"><span>#{label}</span></a></li>',
-	panelTemplate: '<div></div>',
-
-	// CSS classes
-	navClass: 'ui-tabs-nav',
-	selectedClass: 'ui-tabs-selected',
-	unselectClass: 'ui-tabs-unselect',
-	disabledClass: 'ui-tabs-disabled',
-	panelClass: 'ui-tabs-panel',
-	hideClass: 'ui-tabs-hide',
-	loadingClass: 'ui-tabs-loading'
-};
-
-$.ui.tabs.getter = "length";
-
-/*
- * Tabs Extensions
- */
-
-/*
- * Rotate
- */
-$.extend($.ui.tabs.prototype, {
-	rotation: null,
-	rotate: function(ms, continuing) {
-		
-		continuing = continuing || false;
-		
-		var self = this, t = this.options.selected;
-		
-		function start() {
-			self.rotation = setInterval(function() {
-				t = ++t < self.$tabs.length ? t : 0;
-				self.select(t);
-			}, ms); 
-		}
-		
-		function stop(e) {
-			if (!e || e.clientX) { // only in case of a true click
-				clearInterval(self.rotation);
-			}
-		}
-		
-		// start interval
-		if (ms) {
-			start();
-			if (!continuing)
-				this.$tabs.bind(this.options.event, stop);
-			else
-				this.$tabs.bind(this.options.event, function() {
-					stop();
-					t = self.options.selected;
-					start();
-				});
-		}
-		// stop interval
-		else {
-			stop();
-			this.$tabs.unbind(this.options.event, stop);
-		}
-	}
-});
 
 })(jQuery);
 
