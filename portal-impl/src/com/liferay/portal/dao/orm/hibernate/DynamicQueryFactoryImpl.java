@@ -44,6 +44,12 @@ public class DynamicQueryFactoryImpl implements DynamicQueryFactory {
 		return new DynamicQueryImpl(DetachedCriteria.forClass(clazz));
 	}
 
+	public DynamicQuery forClass(Class clazz, String alias) {
+		clazz = getImplClass(clazz);
+
+		return new DynamicQueryImpl(DetachedCriteria.forClass(clazz, alias));
+	}
+
 	protected Class getImplClass(Class clazz) {
 		if (!clazz.getName().endsWith("Impl")) {
 			String implClassName =

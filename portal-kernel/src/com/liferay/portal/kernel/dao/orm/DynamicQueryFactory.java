@@ -32,4 +32,6 @@ public interface DynamicQueryFactory {
 
 	public DynamicQuery forClass(Class clazz);
 
+	public DynamicQuery forClass(Class clazz, String alias);
+
 }
