@@ -251,7 +251,7 @@ Liferay.Layout.Columns = {
 
 		var oCol = ui.element;
 		var foundPortlets = oCol.find('.portlet-boundary');
-		var minPortlets = 2;
+		var minPortlets = 1;
 		if (foundPortlets.length < minPortlets) {
 			oCol.addClass('empty');
 		}

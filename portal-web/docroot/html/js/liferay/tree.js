@@ -670,7 +670,7 @@ Liferay.Tree = new Class({
 
 		var oldBranches = jQuery('> li', oldParent);
 
-		if (oldBranches.length <= 1) {
+		if (oldBranches.length < 1) {
 			jQuery('img.expand-image', oldParent.parentNode).attr('src', icons.spacer);
 			jQuery(oldParent).remove();
 		}
