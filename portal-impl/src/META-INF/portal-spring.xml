@@ -60,6 +60,22 @@
 			<ref bean="liferaySessionFactory" />
 		</property>
 	</bean>
+	<bean id="com.liferay.portal.service.persistence.AccountPersistence.transaction" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean" lazy-init="true">
+		<property name="transactionManager">
+			<ref bean="liferayTransactionManager" />
+		</property>
+		<property name="target">
+			<ref bean="com.liferay.portal.service.persistence.AccountPersistence.impl" />
+		</property>
+		<property name="transactionAttributes">
+			<props>
+				<prop key="remove*">PROPAGATION_REQUIRED,-com.liferay.portal.PortalException,-com.liferay.portal.SystemException</prop>
+				<prop key="set*">PROPAGATION_REQUIRED,-com.liferay.portal.PortalException,-com.liferay.portal.SystemException</prop>
+				<prop key="update*">PROPAGATION_REQUIRED,-com.liferay.portal.PortalException,-com.liferay.portal.SystemException</prop>
+				<prop key="*">PROPAGATION_SUPPORTS,readOnly</prop>
+			</props>
+		</property>
+	</bean>
 	<bean id="com.liferay.portal.service.persistence.AccountUtil" class="com.liferay.portal.service.persistence.AccountUtil" lazy-init="true">
 		<property name="persistence">
 			<ref bean="com.liferay.portal.service.persistence.AccountPersistence.impl" />
@@ -121,6 +137,22 @@
 		</property>
 		<property name="sessionFactory">
 			<ref bean="liferaySessionFactory" />
+		</property>
+	</bean>
+	<bean id="com.liferay.portal.service.persistence.AddressPersistence.transaction" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean" lazy-init="true">
+		<property name="transactionManager">
+			<ref bean="liferayTransactionManager" />
+		</property>
+		<property name="target">
+			<ref bean="com.liferay.portal.service.persistence.AddressPersistence.impl" />
+		</property>
+		<property name="transactionAttributes">
+			<props>
+				<prop key="remove*">PROPAGATION_REQUIRED,-com.liferay.portal.PortalException,-com.liferay.portal.SystemException</prop>
+				<prop key="set*">PROPAGATION_REQUIRED,-com.liferay.portal.PortalException,-com.liferay.portal.SystemException</prop>
+				<prop key="update*">PROPAGATION_REQUIRED,-com.liferay.portal.PortalException,-com.liferay.portal.SystemException</prop>
+				<prop key="*">PROPAGATION_SUPPORTS,readOnly</prop>
+			</props>
 		</property>
 	</bean>
 	<bean id="com.liferay.portal.service.persistence.AddressUtil" class="com.liferay.portal.service.persistence.AddressUtil" lazy-init="true">
@@ -186,6 +218,22 @@
 			<ref bean="liferaySessionFactory" />
 		</property>
 	</bean>
+	<bean id="com.liferay.portal.service.persistence.ClassNamePersistence.transaction" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean" lazy-init="true">
+		<property name="transactionManager">
+			<ref bean="liferayTransactionManager" />
+		</property>
+		<property name="target">
+			<ref bean="com.liferay.portal.service.persistence.ClassNamePersistence.impl" />
+		</property>
+		<property name="transactionAttributes">
+			<props>
+				<prop key="remove*">PROPAGATION_REQUIRED,-com.liferay.portal.PortalException,-com.liferay.portal.SystemException</prop>
+				<prop key="set*">PROPAGATION_REQUIRED,-com.liferay.portal.PortalException,-com.liferay.portal.SystemException</prop>
+				<prop key="update*">PROPAGATION_REQUIRED,-com.liferay.portal.PortalException,-com.liferay.portal.SystemException</prop>
+				<prop key="*">PROPAGATION_SUPPORTS,readOnly</prop>
+			</props>
+		</property>
+	</bean>
 	<bean id="com.liferay.portal.service.persistence.ClassNameUtil" class="com.liferay.portal.service.persistence.ClassNameUtil" lazy-init="true">
 		<property name="persistence">
 			<ref bean="com.liferay.portal.service.persistence.ClassNamePersistence.impl" />
@@ -247,6 +295,22 @@
 		</property>
 		<property name="sessionFactory">
 			<ref bean="liferaySessionFactory" />
+		</property>
+	</bean>
+	<bean id="com.liferay.portal.service.persistence.CompanyPersistence.transaction" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean" lazy-init="true">
+		<property name="transactionManager">
+			<ref bean="liferayTransactionManager" />
+		</property>
+		<property name="target">
+			<ref bean="com.liferay.portal.service.persistence.CompanyPersistence.impl" />
+		</property>
+		<property name="transactionAttributes">
+			<props>
+				<prop key="remove*">PROPAGATION_REQUIRED,-com.liferay.portal.PortalException,-com.liferay.portal.SystemException</prop>
+				<prop key="set*">PROPAGATION_REQUIRED,-com.liferay.portal.PortalException,-com.liferay.portal.SystemException</prop>
+				<prop key="update*">PROPAGATION_REQUIRED,-com.liferay.portal.PortalException,-com.liferay.portal.SystemException</prop>
+				<prop key="*">PROPAGATION_SUPPORTS,readOnly</prop>
+			</props>
 		</property>
 	</bean>
 	<bean id="com.liferay.portal.service.persistence.CompanyUtil" class="com.liferay.portal.service.persistence.CompanyUtil" lazy-init="true">
@@ -312,6 +376,22 @@
 			<ref bean="liferaySessionFactory" />
 		</property>
 	</bean>
+	<bean id="com.liferay.portal.service.persistence.ContactPersistence.transaction" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean" lazy-init="true">
+		<property name="transactionManager">
+			<ref bean="liferayTransactionManager" />
+		</property>
+		<property name="target">
+			<ref bean="com.liferay.portal.service.persistence.ContactPersistence.impl" />
+		</property>
+		<property name="transactionAttributes">
+			<props>
+				<prop key="remove*">PROPAGATION_REQUIRED,-com.liferay.portal.PortalException,-com.liferay.portal.SystemException</prop>
+				<prop key="set*">PROPAGATION_REQUIRED,-com.liferay.portal.PortalException,-com.liferay.portal.SystemException</prop>
+				<prop key="update*">PROPAGATION_REQUIRED,-com.liferay.portal.PortalException,-com.liferay.portal.SystemException</prop>
+				<prop key="*">PROPAGATION_SUPPORTS,readOnly</prop>
+			</props>
+		</property>
+	</bean>
 	<bean id="com.liferay.portal.service.persistence.ContactUtil" class="com.liferay.portal.service.persistence.ContactUtil" lazy-init="true">
 		<property name="persistence">
 			<ref bean="com.liferay.portal.service.persistence.ContactPersistence.impl" />
@@ -348,6 +428,22 @@
 		</property>
 		<property name="sessionFactory">
 			<ref bean="liferaySessionFactory" />
+		</property>
+	</bean>
+	<bean id="com.liferay.portal.service.persistence.CountryPersistence.transaction" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean" lazy-init="true">
+		<property name="transactionManager">
+			<ref bean="liferayTransactionManager" />
+		</property>
+		<property name="target">
+			<ref bean="com.liferay.portal.service.persistence.CountryPersistence.impl" />
+		</property>
+		<property name="transactionAttributes">
+			<props>
+				<prop key="remove*">PROPAGATION_REQUIRED,-com.liferay.portal.PortalException,-com.liferay.portal.SystemException</prop>
+				<prop key="set*">PROPAGATION_REQUIRED,-com.liferay.portal.PortalException,-com.liferay.portal.SystemException</prop>
+				<prop key="update*">PROPAGATION_REQUIRED,-com.liferay.portal.PortalException,-com.liferay.portal.SystemException</prop>
+				<prop key="*">PROPAGATION_SUPPORTS,readOnly</prop>
+			</props>
 		</property>
 	</bean>
 	<bean id="com.liferay.portal.service.persistence.CountryUtil" class="com.liferay.portal.service.persistence.CountryUtil" lazy-init="true">
@@ -413,6 +509,22 @@
 			<ref bean="liferaySessionFactory" />
 		</property>
 	</bean>
+	<bean id="com.liferay.portal.service.persistence.EmailAddressPersistence.transaction" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean" lazy-init="true">
+		<property name="transactionManager">
+			<ref bean="liferayTransactionManager" />
+		</property>
+		<property name="target">
+			<ref bean="com.liferay.portal.service.persistence.EmailAddressPersistence.impl" />
+		</property>
+		<property name="transactionAttributes">
+			<props>
+				<prop key="remove*">PROPAGATION_REQUIRED,-com.liferay.portal.PortalException,-com.liferay.portal.SystemException</prop>
+				<prop key="set*">PROPAGATION_REQUIRED,-com.liferay.portal.PortalException,-com.liferay.portal.SystemException</prop>
+				<prop key="update*">PROPAGATION_REQUIRED,-com.liferay.portal.PortalException,-com.liferay.portal.SystemException</prop>
+				<prop key="*">PROPAGATION_SUPPORTS,readOnly</prop>
+			</props>
+		</property>
+	</bean>
 	<bean id="com.liferay.portal.service.persistence.EmailAddressUtil" class="com.liferay.portal.service.persistence.EmailAddressUtil" lazy-init="true">
 		<property name="persistence">
 			<ref bean="com.liferay.portal.service.persistence.EmailAddressPersistence.impl" />
@@ -476,6 +588,22 @@
 			<ref bean="liferaySessionFactory" />
 		</property>
 	</bean>
+	<bean id="com.liferay.portal.service.persistence.GroupPersistence.transaction" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean" lazy-init="true">
+		<property name="transactionManager">
+			<ref bean="liferayTransactionManager" />
+		</property>
+		<property name="target">
+			<ref bean="com.liferay.portal.service.persistence.GroupPersistence.impl" />
+		</property>
+		<property name="transactionAttributes">
+			<props>
+				<prop key="remove*">PROPAGATION_REQUIRED,-com.liferay.portal.PortalException,-com.liferay.portal.SystemException</prop>
+				<prop key="set*">PROPAGATION_REQUIRED,-com.liferay.portal.PortalException,-com.liferay.portal.SystemException</prop>
+				<prop key="update*">PROPAGATION_REQUIRED,-com.liferay.portal.PortalException,-com.liferay.portal.SystemException</prop>
+				<prop key="*">PROPAGATION_SUPPORTS,readOnly</prop>
+			</props>
+		</property>
+	</bean>
 	<bean id="com.liferay.portal.service.persistence.GroupUtil" class="com.liferay.portal.service.persistence.GroupUtil" lazy-init="true">
 		<property name="persistence">
 			<ref bean="com.liferay.portal.service.persistence.GroupPersistence.impl" />
@@ -525,6 +653,22 @@
 		</property>
 		<property name="sessionFactory">
 			<ref bean="liferaySessionFactory" />
+		</property>
+	</bean>
+	<bean id="com.liferay.portal.service.persistence.ImagePersistence.transaction" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean" lazy-init="true">
+		<property name="transactionManager">
+			<ref bean="liferayTransactionManager" />
+		</property>
+		<property name="target">
+			<ref bean="com.liferay.portal.service.persistence.ImagePersistence.impl" />
+		</property>
+		<property name="transactionAttributes">
+			<props>
+				<prop key="remove*">PROPAGATION_REQUIRED,-com.liferay.portal.PortalException,-com.liferay.portal.SystemException</prop>
+				<prop key="set*">PROPAGATION_REQUIRED,-com.liferay.portal.PortalException,-com.liferay.portal.SystemException</prop>
+				<prop key="update*">PROPAGATION_REQUIRED,-com.liferay.portal.PortalException,-com.liferay.portal.SystemException</prop>
+				<prop key="*">PROPAGATION_SUPPORTS,readOnly</prop>
+			</props>
 		</property>
 	</bean>
 	<bean id="com.liferay.portal.service.persistence.ImageUtil" class="com.liferay.portal.service.persistence.ImageUtil" lazy-init="true">
@@ -588,6 +732,22 @@
 		</property>
 		<property name="sessionFactory">
 			<ref bean="liferaySessionFactory" />
+		</property>
+	</bean>
+	<bean id="com.liferay.portal.service.persistence.LayoutPersistence.transaction" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean" lazy-init="true">
+		<property name="transactionManager">
+			<ref bean="liferayTransactionManager" />
+		</property>
+		<property name="target">
+			<ref bean="com.liferay.portal.service.persistence.LayoutPersistence.impl" />
+		</property>
+		<property name="transactionAttributes">
+			<props>
+				<prop key="remove*">PROPAGATION_REQUIRED,-com.liferay.portal.PortalException,-com.liferay.portal.SystemException</prop>
+				<prop key="set*">PROPAGATION_REQUIRED,-com.liferay.portal.PortalException,-com.liferay.portal.SystemException</prop>
+				<prop key="update*">PROPAGATION_REQUIRED,-com.liferay.portal.PortalException,-com.liferay.portal.SystemException</prop>
+				<prop key="*">PROPAGATION_SUPPORTS,readOnly</prop>
+			</props>
 		</property>
 	</bean>
 	<bean id="com.liferay.portal.service.persistence.LayoutUtil" class="com.liferay.portal.service.persistence.LayoutUtil" lazy-init="true">
@@ -666,6 +826,22 @@
 			<ref bean="liferaySessionFactory" />
 		</property>
 	</bean>
+	<bean id="com.liferay.portal.service.persistence.LayoutSetPersistence.transaction" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean" lazy-init="true">
+		<property name="transactionManager">
+			<ref bean="liferayTransactionManager" />
+		</property>
+		<property name="target">
+			<ref bean="com.liferay.portal.service.persistence.LayoutSetPersistence.impl" />
+		</property>
+		<property name="transactionAttributes">
+			<props>
+				<prop key="remove*">PROPAGATION_REQUIRED,-com.liferay.portal.PortalException,-com.liferay.portal.SystemException</prop>
+				<prop key="set*">PROPAGATION_REQUIRED,-com.liferay.portal.PortalException,-com.liferay.portal.SystemException</prop>
+				<prop key="update*">PROPAGATION_REQUIRED,-com.liferay.portal.PortalException,-com.liferay.portal.SystemException</prop>
+				<prop key="*">PROPAGATION_SUPPORTS,readOnly</prop>
+			</props>
+		</property>
+	</bean>
 	<bean id="com.liferay.portal.service.persistence.LayoutSetUtil" class="com.liferay.portal.service.persistence.LayoutSetUtil" lazy-init="true">
 		<property name="persistence">
 			<ref bean="com.liferay.portal.service.persistence.LayoutSetPersistence.impl" />
@@ -708,6 +884,22 @@
 		</property>
 		<property name="sessionFactory">
 			<ref bean="liferaySessionFactory" />
+		</property>
+	</bean>
+	<bean id="com.liferay.portal.service.persistence.ListTypePersistence.transaction" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean" lazy-init="true">
+		<property name="transactionManager">
+			<ref bean="liferayTransactionManager" />
+		</property>
+		<property name="target">
+			<ref bean="com.liferay.portal.service.persistence.ListTypePersistence.impl" />
+		</property>
+		<property name="transactionAttributes">
+			<props>
+				<prop key="remove*">PROPAGATION_REQUIRED,-com.liferay.portal.PortalException,-com.liferay.portal.SystemException</prop>
+				<prop key="set*">PROPAGATION_REQUIRED,-com.liferay.portal.PortalException,-com.liferay.portal.SystemException</prop>
+				<prop key="update*">PROPAGATION_REQUIRED,-com.liferay.portal.PortalException,-com.liferay.portal.SystemException</prop>
+				<prop key="*">PROPAGATION_SUPPORTS,readOnly</prop>
+			</props>
 		</property>
 	</bean>
 	<bean id="com.liferay.portal.service.persistence.ListTypeUtil" class="com.liferay.portal.service.persistence.ListTypeUtil" lazy-init="true">
@@ -773,6 +965,22 @@
 			<ref bean="liferaySessionFactory" />
 		</property>
 	</bean>
+	<bean id="com.liferay.portal.service.persistence.MembershipRequestPersistence.transaction" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean" lazy-init="true">
+		<property name="transactionManager">
+			<ref bean="liferayTransactionManager" />
+		</property>
+		<property name="target">
+			<ref bean="com.liferay.portal.service.persistence.MembershipRequestPersistence.impl" />
+		</property>
+		<property name="transactionAttributes">
+			<props>
+				<prop key="remove*">PROPAGATION_REQUIRED,-com.liferay.portal.PortalException,-com.liferay.portal.SystemException</prop>
+				<prop key="set*">PROPAGATION_REQUIRED,-com.liferay.portal.PortalException,-com.liferay.portal.SystemException</prop>
+				<prop key="update*">PROPAGATION_REQUIRED,-com.liferay.portal.PortalException,-com.liferay.portal.SystemException</prop>
+				<prop key="*">PROPAGATION_SUPPORTS,readOnly</prop>
+			</props>
+		</property>
+	</bean>
 	<bean id="com.liferay.portal.service.persistence.MembershipRequestUtil" class="com.liferay.portal.service.persistence.MembershipRequestUtil" lazy-init="true">
 		<property name="persistence">
 			<ref bean="com.liferay.portal.service.persistence.MembershipRequestPersistence.impl" />
@@ -836,6 +1044,22 @@
 			<ref bean="liferaySessionFactory" />
 		</property>
 	</bean>
+	<bean id="com.liferay.portal.service.persistence.OrganizationPersistence.transaction" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean" lazy-init="true">
+		<property name="transactionManager">
+			<ref bean="liferayTransactionManager" />
+		</property>
+		<property name="target">
+			<ref bean="com.liferay.portal.service.persistence.OrganizationPersistence.impl" />
+		</property>
+		<property name="transactionAttributes">
+			<props>
+				<prop key="remove*">PROPAGATION_REQUIRED,-com.liferay.portal.PortalException,-com.liferay.portal.SystemException</prop>
+				<prop key="set*">PROPAGATION_REQUIRED,-com.liferay.portal.PortalException,-com.liferay.portal.SystemException</prop>
+				<prop key="update*">PROPAGATION_REQUIRED,-com.liferay.portal.PortalException,-com.liferay.portal.SystemException</prop>
+				<prop key="*">PROPAGATION_SUPPORTS,readOnly</prop>
+			</props>
+		</property>
+	</bean>
 	<bean id="com.liferay.portal.service.persistence.OrganizationUtil" class="com.liferay.portal.service.persistence.OrganizationUtil" lazy-init="true">
 		<property name="persistence">
 			<ref bean="com.liferay.portal.service.persistence.OrganizationPersistence.impl" />
@@ -862,6 +1086,22 @@
 			<ref bean="liferaySessionFactory" />
 		</property>
 	</bean>
+	<bean id="com.liferay.portal.service.persistence.OrgGroupPermissionPersistence.transaction" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean" lazy-init="true">
+		<property name="transactionManager">
+			<ref bean="liferayTransactionManager" />
+		</property>
+		<property name="target">
+			<ref bean="com.liferay.portal.service.persistence.OrgGroupPermissionPersistence.impl" />
+		</property>
+		<property name="transactionAttributes">
+			<props>
+				<prop key="remove*">PROPAGATION_REQUIRED,-com.liferay.portal.PortalException,-com.liferay.portal.SystemException</prop>
+				<prop key="set*">PROPAGATION_REQUIRED,-com.liferay.portal.PortalException,-com.liferay.portal.SystemException</prop>
+				<prop key="update*">PROPAGATION_REQUIRED,-com.liferay.portal.PortalException,-com.liferay.portal.SystemException</prop>
+				<prop key="*">PROPAGATION_SUPPORTS,readOnly</prop>
+			</props>
+		</property>
+	</bean>
 	<bean id="com.liferay.portal.service.persistence.OrgGroupPermissionUtil" class="com.liferay.portal.service.persistence.OrgGroupPermissionUtil" lazy-init="true">
 		<property name="persistence">
 			<ref bean="com.liferay.portal.service.persistence.OrgGroupPermissionPersistence.impl" />
@@ -886,6 +1126,22 @@
 		</property>
 		<property name="sessionFactory">
 			<ref bean="liferaySessionFactory" />
+		</property>
+	</bean>
+	<bean id="com.liferay.portal.service.persistence.OrgGroupRolePersistence.transaction" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean" lazy-init="true">
+		<property name="transactionManager">
+			<ref bean="liferayTransactionManager" />
+		</property>
+		<property name="target">
+			<ref bean="com.liferay.portal.service.persistence.OrgGroupRolePersistence.impl" />
+		</property>
+		<property name="transactionAttributes">
+			<props>
+				<prop key="remove*">PROPAGATION_REQUIRED,-com.liferay.portal.PortalException,-com.liferay.portal.SystemException</prop>
+				<prop key="set*">PROPAGATION_REQUIRED,-com.liferay.portal.PortalException,-com.liferay.portal.SystemException</prop>
+				<prop key="update*">PROPAGATION_REQUIRED,-com.liferay.portal.PortalException,-com.liferay.portal.SystemException</prop>
+				<prop key="*">PROPAGATION_SUPPORTS,readOnly</prop>
+			</props>
 		</property>
 	</bean>
 	<bean id="com.liferay.portal.service.persistence.OrgGroupRoleUtil" class="com.liferay.portal.service.persistence.OrgGroupRoleUtil" lazy-init="true">
@@ -951,6 +1207,22 @@
 			<ref bean="liferaySessionFactory" />
 		</property>
 	</bean>
+	<bean id="com.liferay.portal.service.persistence.OrgLaborPersistence.transaction" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean" lazy-init="true">
+		<property name="transactionManager">
+			<ref bean="liferayTransactionManager" />
+		</property>
+		<property name="target">
+			<ref bean="com.liferay.portal.service.persistence.OrgLaborPersistence.impl" />
+		</property>
+		<property name="transactionAttributes">
+			<props>
+				<prop key="remove*">PROPAGATION_REQUIRED,-com.liferay.portal.PortalException,-com.liferay.portal.SystemException</prop>
+				<prop key="set*">PROPAGATION_REQUIRED,-com.liferay.portal.PortalException,-com.liferay.portal.SystemException</prop>
+				<prop key="update*">PROPAGATION_REQUIRED,-com.liferay.portal.PortalException,-com.liferay.portal.SystemException</prop>
+				<prop key="*">PROPAGATION_SUPPORTS,readOnly</prop>
+			</props>
+		</property>
+	</bean>
 	<bean id="com.liferay.portal.service.persistence.OrgLaborUtil" class="com.liferay.portal.service.persistence.OrgLaborUtil" lazy-init="true">
 		<property name="persistence">
 			<ref bean="com.liferay.portal.service.persistence.OrgLaborPersistence.impl" />
@@ -1014,6 +1286,22 @@
 			<ref bean="liferaySessionFactory" />
 		</property>
 	</bean>
+	<bean id="com.liferay.portal.service.persistence.PasswordPolicyPersistence.transaction" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean" lazy-init="true">
+		<property name="transactionManager">
+			<ref bean="liferayTransactionManager" />
+		</property>
+		<property name="target">
+			<ref bean="com.liferay.portal.service.persistence.PasswordPolicyPersistence.impl" />
+		</property>
+		<property name="transactionAttributes">
+			<props>
+				<prop key="remove*">PROPAGATION_REQUIRED,-com.liferay.portal.PortalException,-com.liferay.portal.SystemException</prop>
+				<prop key="set*">PROPAGATION_REQUIRED,-com.liferay.portal.PortalException,-com.liferay.portal.SystemException</prop>
+				<prop key="update*">PROPAGATION_REQUIRED,-com.liferay.portal.PortalException,-com.liferay.portal.SystemException</prop>
+				<prop key="*">PROPAGATION_SUPPORTS,readOnly</prop>
+			</props>
+		</property>
+	</bean>
 	<bean id="com.liferay.portal.service.persistence.PasswordPolicyUtil" class="com.liferay.portal.service.persistence.PasswordPolicyUtil" lazy-init="true">
 		<property name="persistence">
 			<ref bean="com.liferay.portal.service.persistence.PasswordPolicyPersistence.impl" />
@@ -1065,6 +1353,22 @@
 			<ref bean="liferaySessionFactory" />
 		</property>
 	</bean>
+	<bean id="com.liferay.portal.service.persistence.PasswordPolicyRelPersistence.transaction" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean" lazy-init="true">
+		<property name="transactionManager">
+			<ref bean="liferayTransactionManager" />
+		</property>
+		<property name="target">
+			<ref bean="com.liferay.portal.service.persistence.PasswordPolicyRelPersistence.impl" />
+		</property>
+		<property name="transactionAttributes">
+			<props>
+				<prop key="remove*">PROPAGATION_REQUIRED,-com.liferay.portal.PortalException,-com.liferay.portal.SystemException</prop>
+				<prop key="set*">PROPAGATION_REQUIRED,-com.liferay.portal.PortalException,-com.liferay.portal.SystemException</prop>
+				<prop key="update*">PROPAGATION_REQUIRED,-com.liferay.portal.PortalException,-com.liferay.portal.SystemException</prop>
+				<prop key="*">PROPAGATION_SUPPORTS,readOnly</prop>
+			</props>
+		</property>
+	</bean>
 	<bean id="com.liferay.portal.service.persistence.PasswordPolicyRelUtil" class="com.liferay.portal.service.persistence.PasswordPolicyRelUtil" lazy-init="true">
 		<property name="persistence">
 			<ref bean="com.liferay.portal.service.persistence.PasswordPolicyRelPersistence.impl" />
@@ -1101,6 +1405,22 @@
 		</property>
 		<property name="sessionFactory">
 			<ref bean="liferaySessionFactory" />
+		</property>
+	</bean>
+	<bean id="com.liferay.portal.service.persistence.PasswordTrackerPersistence.transaction" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean" lazy-init="true">
+		<property name="transactionManager">
+			<ref bean="liferayTransactionManager" />
+		</property>
+		<property name="target">
+			<ref bean="com.liferay.portal.service.persistence.PasswordTrackerPersistence.impl" />
+		</property>
+		<property name="transactionAttributes">
+			<props>
+				<prop key="remove*">PROPAGATION_REQUIRED,-com.liferay.portal.PortalException,-com.liferay.portal.SystemException</prop>
+				<prop key="set*">PROPAGATION_REQUIRED,-com.liferay.portal.PortalException,-com.liferay.portal.SystemException</prop>
+				<prop key="update*">PROPAGATION_REQUIRED,-com.liferay.portal.PortalException,-com.liferay.portal.SystemException</prop>
+				<prop key="*">PROPAGATION_SUPPORTS,readOnly</prop>
+			</props>
 		</property>
 	</bean>
 	<bean id="com.liferay.portal.service.persistence.PasswordTrackerUtil" class="com.liferay.portal.service.persistence.PasswordTrackerUtil" lazy-init="true">
@@ -1164,6 +1484,22 @@
 		</property>
 		<property name="sessionFactory">
 			<ref bean="liferaySessionFactory" />
+		</property>
+	</bean>
+	<bean id="com.liferay.portal.service.persistence.PermissionPersistence.transaction" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean" lazy-init="true">
+		<property name="transactionManager">
+			<ref bean="liferayTransactionManager" />
+		</property>
+		<property name="target">
+			<ref bean="com.liferay.portal.service.persistence.PermissionPersistence.impl" />
+		</property>
+		<property name="transactionAttributes">
+			<props>
+				<prop key="remove*">PROPAGATION_REQUIRED,-com.liferay.portal.PortalException,-com.liferay.portal.SystemException</prop>
+				<prop key="set*">PROPAGATION_REQUIRED,-com.liferay.portal.PortalException,-com.liferay.portal.SystemException</prop>
+				<prop key="update*">PROPAGATION_REQUIRED,-com.liferay.portal.PortalException,-com.liferay.portal.SystemException</prop>
+				<prop key="*">PROPAGATION_SUPPORTS,readOnly</prop>
+			</props>
 		</property>
 	</bean>
 	<bean id="com.liferay.portal.service.persistence.PermissionUtil" class="com.liferay.portal.service.persistence.PermissionUtil" lazy-init="true">
@@ -1255,6 +1591,22 @@
 			<ref bean="liferaySessionFactory" />
 		</property>
 	</bean>
+	<bean id="com.liferay.portal.service.persistence.PhonePersistence.transaction" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean" lazy-init="true">
+		<property name="transactionManager">
+			<ref bean="liferayTransactionManager" />
+		</property>
+		<property name="target">
+			<ref bean="com.liferay.portal.service.persistence.PhonePersistence.impl" />
+		</property>
+		<property name="transactionAttributes">
+			<props>
+				<prop key="remove*">PROPAGATION_REQUIRED,-com.liferay.portal.PortalException,-com.liferay.portal.SystemException</prop>
+				<prop key="set*">PROPAGATION_REQUIRED,-com.liferay.portal.PortalException,-com.liferay.portal.SystemException</prop>
+				<prop key="update*">PROPAGATION_REQUIRED,-com.liferay.portal.PortalException,-com.liferay.portal.SystemException</prop>
+				<prop key="*">PROPAGATION_SUPPORTS,readOnly</prop>
+			</props>
+		</property>
+	</bean>
 	<bean id="com.liferay.portal.service.persistence.PhoneUtil" class="com.liferay.portal.service.persistence.PhoneUtil" lazy-init="true">
 		<property name="persistence">
 			<ref bean="com.liferay.portal.service.persistence.PhonePersistence.impl" />
@@ -1343,6 +1695,22 @@
 			<ref bean="liferaySessionFactory" />
 		</property>
 	</bean>
+	<bean id="com.liferay.portal.service.persistence.PluginSettingPersistence.transaction" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean" lazy-init="true">
+		<property name="transactionManager">
+			<ref bean="liferayTransactionManager" />
+		</property>
+		<property name="target">
+			<ref bean="com.liferay.portal.service.persistence.PluginSettingPersistence.impl" />
+		</property>
+		<property name="transactionAttributes">
+			<props>
+				<prop key="remove*">PROPAGATION_REQUIRED,-com.liferay.portal.PortalException,-com.liferay.portal.SystemException</prop>
+				<prop key="set*">PROPAGATION_REQUIRED,-com.liferay.portal.PortalException,-com.liferay.portal.SystemException</prop>
+				<prop key="update*">PROPAGATION_REQUIRED,-com.liferay.portal.PortalException,-com.liferay.portal.SystemException</prop>
+				<prop key="*">PROPAGATION_SUPPORTS,readOnly</prop>
+			</props>
+		</property>
+	</bean>
 	<bean id="com.liferay.portal.service.persistence.PluginSettingUtil" class="com.liferay.portal.service.persistence.PluginSettingUtil" lazy-init="true">
 		<property name="persistence">
 			<ref bean="com.liferay.portal.service.persistence.PluginSettingPersistence.impl" />
@@ -1404,6 +1772,22 @@
 		</property>
 		<property name="sessionFactory">
 			<ref bean="liferaySessionFactory" />
+		</property>
+	</bean>
+	<bean id="com.liferay.portal.service.persistence.PortletPersistence.transaction" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean" lazy-init="true">
+		<property name="transactionManager">
+			<ref bean="liferayTransactionManager" />
+		</property>
+		<property name="target">
+			<ref bean="com.liferay.portal.service.persistence.PortletPersistence.impl" />
+		</property>
+		<property name="transactionAttributes">
+			<props>
+				<prop key="remove*">PROPAGATION_REQUIRED,-com.liferay.portal.PortalException,-com.liferay.portal.SystemException</prop>
+				<prop key="set*">PROPAGATION_REQUIRED,-com.liferay.portal.PortalException,-com.liferay.portal.SystemException</prop>
+				<prop key="update*">PROPAGATION_REQUIRED,-com.liferay.portal.PortalException,-com.liferay.portal.SystemException</prop>
+				<prop key="*">PROPAGATION_SUPPORTS,readOnly</prop>
+			</props>
 		</property>
 	</bean>
 	<bean id="com.liferay.portal.service.persistence.PortletUtil" class="com.liferay.portal.service.persistence.PortletUtil" lazy-init="true">
@@ -1469,6 +1853,22 @@
 			<ref bean="liferaySessionFactory" />
 		</property>
 	</bean>
+	<bean id="com.liferay.portal.service.persistence.PortletPreferencesPersistence.transaction" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean" lazy-init="true">
+		<property name="transactionManager">
+			<ref bean="liferayTransactionManager" />
+		</property>
+		<property name="target">
+			<ref bean="com.liferay.portal.service.persistence.PortletPreferencesPersistence.impl" />
+		</property>
+		<property name="transactionAttributes">
+			<props>
+				<prop key="remove*">PROPAGATION_REQUIRED,-com.liferay.portal.PortalException,-com.liferay.portal.SystemException</prop>
+				<prop key="set*">PROPAGATION_REQUIRED,-com.liferay.portal.PortalException,-com.liferay.portal.SystemException</prop>
+				<prop key="update*">PROPAGATION_REQUIRED,-com.liferay.portal.PortalException,-com.liferay.portal.SystemException</prop>
+				<prop key="*">PROPAGATION_SUPPORTS,readOnly</prop>
+			</props>
+		</property>
+	</bean>
 	<bean id="com.liferay.portal.service.persistence.PortletPreferencesUtil" class="com.liferay.portal.service.persistence.PortletPreferencesUtil" lazy-init="true">
 		<property name="persistence">
 			<ref bean="com.liferay.portal.service.persistence.PortletPreferencesPersistence.impl" />
@@ -1520,6 +1920,22 @@
 			<ref bean="liferaySessionFactory" />
 		</property>
 	</bean>
+	<bean id="com.liferay.portal.service.persistence.RegionPersistence.transaction" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean" lazy-init="true">
+		<property name="transactionManager">
+			<ref bean="liferayTransactionManager" />
+		</property>
+		<property name="target">
+			<ref bean="com.liferay.portal.service.persistence.RegionPersistence.impl" />
+		</property>
+		<property name="transactionAttributes">
+			<props>
+				<prop key="remove*">PROPAGATION_REQUIRED,-com.liferay.portal.PortalException,-com.liferay.portal.SystemException</prop>
+				<prop key="set*">PROPAGATION_REQUIRED,-com.liferay.portal.PortalException,-com.liferay.portal.SystemException</prop>
+				<prop key="update*">PROPAGATION_REQUIRED,-com.liferay.portal.PortalException,-com.liferay.portal.SystemException</prop>
+				<prop key="*">PROPAGATION_SUPPORTS,readOnly</prop>
+			</props>
+		</property>
+	</bean>
 	<bean id="com.liferay.portal.service.persistence.RegionUtil" class="com.liferay.portal.service.persistence.RegionUtil" lazy-init="true">
 		<property name="persistence">
 			<ref bean="com.liferay.portal.service.persistence.RegionPersistence.impl" />
@@ -1556,6 +1972,22 @@
 		</property>
 		<property name="sessionFactory">
 			<ref bean="liferaySessionFactory" />
+		</property>
+	</bean>
+	<bean id="com.liferay.portal.service.persistence.ReleasePersistence.transaction" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean" lazy-init="true">
+		<property name="transactionManager">
+			<ref bean="liferayTransactionManager" />
+		</property>
+		<property name="target">
+			<ref bean="com.liferay.portal.service.persistence.ReleasePersistence.impl" />
+		</property>
+		<property name="transactionAttributes">
+			<props>
+				<prop key="remove*">PROPAGATION_REQUIRED,-com.liferay.portal.PortalException,-com.liferay.portal.SystemException</prop>
+				<prop key="set*">PROPAGATION_REQUIRED,-com.liferay.portal.PortalException,-com.liferay.portal.SystemException</prop>
+				<prop key="update*">PROPAGATION_REQUIRED,-com.liferay.portal.PortalException,-com.liferay.portal.SystemException</prop>
+				<prop key="*">PROPAGATION_SUPPORTS,readOnly</prop>
+			</props>
 		</property>
 	</bean>
 	<bean id="com.liferay.portal.service.persistence.ReleaseUtil" class="com.liferay.portal.service.persistence.ReleaseUtil" lazy-init="true">
@@ -1621,6 +2053,22 @@
 			<ref bean="liferaySessionFactory" />
 		</property>
 	</bean>
+	<bean id="com.liferay.portal.service.persistence.ResourcePersistence.transaction" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean" lazy-init="true">
+		<property name="transactionManager">
+			<ref bean="liferayTransactionManager" />
+		</property>
+		<property name="target">
+			<ref bean="com.liferay.portal.service.persistence.ResourcePersistence.impl" />
+		</property>
+		<property name="transactionAttributes">
+			<props>
+				<prop key="remove*">PROPAGATION_REQUIRED,-com.liferay.portal.PortalException,-com.liferay.portal.SystemException</prop>
+				<prop key="set*">PROPAGATION_REQUIRED,-com.liferay.portal.PortalException,-com.liferay.portal.SystemException</prop>
+				<prop key="update*">PROPAGATION_REQUIRED,-com.liferay.portal.PortalException,-com.liferay.portal.SystemException</prop>
+				<prop key="*">PROPAGATION_SUPPORTS,readOnly</prop>
+			</props>
+		</property>
+	</bean>
 	<bean id="com.liferay.portal.service.persistence.ResourceUtil" class="com.liferay.portal.service.persistence.ResourceUtil" lazy-init="true">
 		<property name="persistence">
 			<ref bean="com.liferay.portal.service.persistence.ResourcePersistence.impl" />
@@ -1670,6 +2118,22 @@
 		</property>
 		<property name="sessionFactory">
 			<ref bean="liferaySessionFactory" />
+		</property>
+	</bean>
+	<bean id="com.liferay.portal.service.persistence.ResourceCodePersistence.transaction" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean" lazy-init="true">
+		<property name="transactionManager">
+			<ref bean="liferayTransactionManager" />
+		</property>
+		<property name="target">
+			<ref bean="com.liferay.portal.service.persistence.ResourceCodePersistence.impl" />
+		</property>
+		<property name="transactionAttributes">
+			<props>
+				<prop key="remove*">PROPAGATION_REQUIRED,-com.liferay.portal.PortalException,-com.liferay.portal.SystemException</prop>
+				<prop key="set*">PROPAGATION_REQUIRED,-com.liferay.portal.PortalException,-com.liferay.portal.SystemException</prop>
+				<prop key="update*">PROPAGATION_REQUIRED,-com.liferay.portal.PortalException,-com.liferay.portal.SystemException</prop>
+				<prop key="*">PROPAGATION_SUPPORTS,readOnly</prop>
+			</props>
 		</property>
 	</bean>
 	<bean id="com.liferay.portal.service.persistence.ResourceCodeUtil" class="com.liferay.portal.service.persistence.ResourceCodeUtil" lazy-init="true">
@@ -1735,6 +2199,22 @@
 			<ref bean="liferaySessionFactory" />
 		</property>
 	</bean>
+	<bean id="com.liferay.portal.service.persistence.RolePersistence.transaction" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean" lazy-init="true">
+		<property name="transactionManager">
+			<ref bean="liferayTransactionManager" />
+		</property>
+		<property name="target">
+			<ref bean="com.liferay.portal.service.persistence.RolePersistence.impl" />
+		</property>
+		<property name="transactionAttributes">
+			<props>
+				<prop key="remove*">PROPAGATION_REQUIRED,-com.liferay.portal.PortalException,-com.liferay.portal.SystemException</prop>
+				<prop key="set*">PROPAGATION_REQUIRED,-com.liferay.portal.PortalException,-com.liferay.portal.SystemException</prop>
+				<prop key="update*">PROPAGATION_REQUIRED,-com.liferay.portal.PortalException,-com.liferay.portal.SystemException</prop>
+				<prop key="*">PROPAGATION_SUPPORTS,readOnly</prop>
+			</props>
+		</property>
+	</bean>
 	<bean id="com.liferay.portal.service.persistence.RoleUtil" class="com.liferay.portal.service.persistence.RoleUtil" lazy-init="true">
 		<property name="persistence">
 			<ref bean="com.liferay.portal.service.persistence.RolePersistence.impl" />
@@ -1786,6 +2266,22 @@
 			<ref bean="liferaySessionFactory" />
 		</property>
 	</bean>
+	<bean id="com.liferay.portal.service.persistence.ServiceComponentPersistence.transaction" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean" lazy-init="true">
+		<property name="transactionManager">
+			<ref bean="liferayTransactionManager" />
+		</property>
+		<property name="target">
+			<ref bean="com.liferay.portal.service.persistence.ServiceComponentPersistence.impl" />
+		</property>
+		<property name="transactionAttributes">
+			<props>
+				<prop key="remove*">PROPAGATION_REQUIRED,-com.liferay.portal.PortalException,-com.liferay.portal.SystemException</prop>
+				<prop key="set*">PROPAGATION_REQUIRED,-com.liferay.portal.PortalException,-com.liferay.portal.SystemException</prop>
+				<prop key="update*">PROPAGATION_REQUIRED,-com.liferay.portal.PortalException,-com.liferay.portal.SystemException</prop>
+				<prop key="*">PROPAGATION_SUPPORTS,readOnly</prop>
+			</props>
+		</property>
+	</bean>
 	<bean id="com.liferay.portal.service.persistence.ServiceComponentUtil" class="com.liferay.portal.service.persistence.ServiceComponentUtil" lazy-init="true">
 		<property name="persistence">
 			<ref bean="com.liferay.portal.service.persistence.ServiceComponentPersistence.impl" />
@@ -1824,6 +2320,22 @@
 			<ref bean="liferaySessionFactory" />
 		</property>
 	</bean>
+	<bean id="com.liferay.portal.service.persistence.PortletItemPersistence.transaction" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean" lazy-init="true">
+		<property name="transactionManager">
+			<ref bean="liferayTransactionManager" />
+		</property>
+		<property name="target">
+			<ref bean="com.liferay.portal.service.persistence.PortletItemPersistence.impl" />
+		</property>
+		<property name="transactionAttributes">
+			<props>
+				<prop key="remove*">PROPAGATION_REQUIRED,-com.liferay.portal.PortalException,-com.liferay.portal.SystemException</prop>
+				<prop key="set*">PROPAGATION_REQUIRED,-com.liferay.portal.PortalException,-com.liferay.portal.SystemException</prop>
+				<prop key="update*">PROPAGATION_REQUIRED,-com.liferay.portal.PortalException,-com.liferay.portal.SystemException</prop>
+				<prop key="*">PROPAGATION_SUPPORTS,readOnly</prop>
+			</props>
+		</property>
+	</bean>
 	<bean id="com.liferay.portal.service.persistence.PortletItemUtil" class="com.liferay.portal.service.persistence.PortletItemUtil" lazy-init="true">
 		<property name="persistence">
 			<ref bean="com.liferay.portal.service.persistence.PortletItemPersistence.impl" />
@@ -1860,6 +2372,22 @@
 		</property>
 		<property name="sessionFactory">
 			<ref bean="liferaySessionFactory" />
+		</property>
+	</bean>
+	<bean id="com.liferay.portal.service.persistence.SubscriptionPersistence.transaction" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean" lazy-init="true">
+		<property name="transactionManager">
+			<ref bean="liferayTransactionManager" />
+		</property>
+		<property name="target">
+			<ref bean="com.liferay.portal.service.persistence.SubscriptionPersistence.impl" />
+		</property>
+		<property name="transactionAttributes">
+			<props>
+				<prop key="remove*">PROPAGATION_REQUIRED,-com.liferay.portal.PortalException,-com.liferay.portal.SystemException</prop>
+				<prop key="set*">PROPAGATION_REQUIRED,-com.liferay.portal.PortalException,-com.liferay.portal.SystemException</prop>
+				<prop key="update*">PROPAGATION_REQUIRED,-com.liferay.portal.PortalException,-com.liferay.portal.SystemException</prop>
+				<prop key="*">PROPAGATION_SUPPORTS,readOnly</prop>
+			</props>
 		</property>
 	</bean>
 	<bean id="com.liferay.portal.service.persistence.SubscriptionUtil" class="com.liferay.portal.service.persistence.SubscriptionUtil" lazy-init="true">
@@ -1931,6 +2459,22 @@
 		</property>
 		<property name="sessionFactory">
 			<ref bean="liferaySessionFactory" />
+		</property>
+	</bean>
+	<bean id="com.liferay.portal.service.persistence.UserPersistence.transaction" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean" lazy-init="true">
+		<property name="transactionManager">
+			<ref bean="liferayTransactionManager" />
+		</property>
+		<property name="target">
+			<ref bean="com.liferay.portal.service.persistence.UserPersistence.impl" />
+		</property>
+		<property name="transactionAttributes">
+			<props>
+				<prop key="remove*">PROPAGATION_REQUIRED,-com.liferay.portal.PortalException,-com.liferay.portal.SystemException</prop>
+				<prop key="set*">PROPAGATION_REQUIRED,-com.liferay.portal.PortalException,-com.liferay.portal.SystemException</prop>
+				<prop key="update*">PROPAGATION_REQUIRED,-com.liferay.portal.PortalException,-com.liferay.portal.SystemException</prop>
+				<prop key="*">PROPAGATION_SUPPORTS,readOnly</prop>
+			</props>
 		</property>
 	</bean>
 	<bean id="com.liferay.portal.service.persistence.UserUtil" class="com.liferay.portal.service.persistence.UserUtil" lazy-init="true">
@@ -2009,6 +2553,22 @@
 			<ref bean="liferaySessionFactory" />
 		</property>
 	</bean>
+	<bean id="com.liferay.portal.service.persistence.UserGroupPersistence.transaction" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean" lazy-init="true">
+		<property name="transactionManager">
+			<ref bean="liferayTransactionManager" />
+		</property>
+		<property name="target">
+			<ref bean="com.liferay.portal.service.persistence.UserGroupPersistence.impl" />
+		</property>
+		<property name="transactionAttributes">
+			<props>
+				<prop key="remove*">PROPAGATION_REQUIRED,-com.liferay.portal.PortalException,-com.liferay.portal.SystemException</prop>
+				<prop key="set*">PROPAGATION_REQUIRED,-com.liferay.portal.PortalException,-com.liferay.portal.SystemException</prop>
+				<prop key="update*">PROPAGATION_REQUIRED,-com.liferay.portal.PortalException,-com.liferay.portal.SystemException</prop>
+				<prop key="*">PROPAGATION_SUPPORTS,readOnly</prop>
+			</props>
+		</property>
+	</bean>
 	<bean id="com.liferay.portal.service.persistence.UserGroupUtil" class="com.liferay.portal.service.persistence.UserGroupUtil" lazy-init="true">
 		<property name="persistence">
 			<ref bean="com.liferay.portal.service.persistence.UserGroupPersistence.impl" />
@@ -2085,6 +2645,22 @@
 			<ref bean="liferaySessionFactory" />
 		</property>
 	</bean>
+	<bean id="com.liferay.portal.service.persistence.UserGroupRolePersistence.transaction" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean" lazy-init="true">
+		<property name="transactionManager">
+			<ref bean="liferayTransactionManager" />
+		</property>
+		<property name="target">
+			<ref bean="com.liferay.portal.service.persistence.UserGroupRolePersistence.impl" />
+		</property>
+		<property name="transactionAttributes">
+			<props>
+				<prop key="remove*">PROPAGATION_REQUIRED,-com.liferay.portal.PortalException,-com.liferay.portal.SystemException</prop>
+				<prop key="set*">PROPAGATION_REQUIRED,-com.liferay.portal.PortalException,-com.liferay.portal.SystemException</prop>
+				<prop key="update*">PROPAGATION_REQUIRED,-com.liferay.portal.PortalException,-com.liferay.portal.SystemException</prop>
+				<prop key="*">PROPAGATION_SUPPORTS,readOnly</prop>
+			</props>
+		</property>
+	</bean>
 	<bean id="com.liferay.portal.service.persistence.UserGroupRoleUtil" class="com.liferay.portal.service.persistence.UserGroupRoleUtil" lazy-init="true">
 		<property name="persistence">
 			<ref bean="com.liferay.portal.service.persistence.UserGroupRolePersistence.impl" />
@@ -2121,6 +2697,22 @@
 		</property>
 		<property name="sessionFactory">
 			<ref bean="liferaySessionFactory" />
+		</property>
+	</bean>
+	<bean id="com.liferay.portal.service.persistence.UserIdMapperPersistence.transaction" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean" lazy-init="true">
+		<property name="transactionManager">
+			<ref bean="liferayTransactionManager" />
+		</property>
+		<property name="target">
+			<ref bean="com.liferay.portal.service.persistence.UserIdMapperPersistence.impl" />
+		</property>
+		<property name="transactionAttributes">
+			<props>
+				<prop key="remove*">PROPAGATION_REQUIRED,-com.liferay.portal.PortalException,-com.liferay.portal.SystemException</prop>
+				<prop key="set*">PROPAGATION_REQUIRED,-com.liferay.portal.PortalException,-com.liferay.portal.SystemException</prop>
+				<prop key="update*">PROPAGATION_REQUIRED,-com.liferay.portal.PortalException,-com.liferay.portal.SystemException</prop>
+				<prop key="*">PROPAGATION_SUPPORTS,readOnly</prop>
+			</props>
 		</property>
 	</bean>
 	<bean id="com.liferay.portal.service.persistence.UserIdMapperUtil" class="com.liferay.portal.service.persistence.UserIdMapperUtil" lazy-init="true">
@@ -2161,6 +2753,22 @@
 			<ref bean="liferaySessionFactory" />
 		</property>
 	</bean>
+	<bean id="com.liferay.portal.service.persistence.UserTrackerPersistence.transaction" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean" lazy-init="true">
+		<property name="transactionManager">
+			<ref bean="liferayTransactionManager" />
+		</property>
+		<property name="target">
+			<ref bean="com.liferay.portal.service.persistence.UserTrackerPersistence.impl" />
+		</property>
+		<property name="transactionAttributes">
+			<props>
+				<prop key="remove*">PROPAGATION_REQUIRED,-com.liferay.portal.PortalException,-com.liferay.portal.SystemException</prop>
+				<prop key="set*">PROPAGATION_REQUIRED,-com.liferay.portal.PortalException,-com.liferay.portal.SystemException</prop>
+				<prop key="update*">PROPAGATION_REQUIRED,-com.liferay.portal.PortalException,-com.liferay.portal.SystemException</prop>
+				<prop key="*">PROPAGATION_SUPPORTS,readOnly</prop>
+			</props>
+		</property>
+	</bean>
 	<bean id="com.liferay.portal.service.persistence.UserTrackerUtil" class="com.liferay.portal.service.persistence.UserTrackerUtil" lazy-init="true">
 		<property name="persistence">
 			<ref bean="com.liferay.portal.service.persistence.UserTrackerPersistence.impl" />
@@ -2199,6 +2807,22 @@
 			<ref bean="liferaySessionFactory" />
 		</property>
 	</bean>
+	<bean id="com.liferay.portal.service.persistence.UserTrackerPathPersistence.transaction" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean" lazy-init="true">
+		<property name="transactionManager">
+			<ref bean="liferayTransactionManager" />
+		</property>
+		<property name="target">
+			<ref bean="com.liferay.portal.service.persistence.UserTrackerPathPersistence.impl" />
+		</property>
+		<property name="transactionAttributes">
+			<props>
+				<prop key="remove*">PROPAGATION_REQUIRED,-com.liferay.portal.PortalException,-com.liferay.portal.SystemException</prop>
+				<prop key="set*">PROPAGATION_REQUIRED,-com.liferay.portal.PortalException,-com.liferay.portal.SystemException</prop>
+				<prop key="update*">PROPAGATION_REQUIRED,-com.liferay.portal.PortalException,-com.liferay.portal.SystemException</prop>
+				<prop key="*">PROPAGATION_SUPPORTS,readOnly</prop>
+			</props>
+		</property>
+	</bean>
 	<bean id="com.liferay.portal.service.persistence.UserTrackerPathUtil" class="com.liferay.portal.service.persistence.UserTrackerPathUtil" lazy-init="true">
 		<property name="persistence">
 			<ref bean="com.liferay.portal.service.persistence.UserTrackerPathPersistence.impl" />
@@ -2235,6 +2859,22 @@
 		</property>
 		<property name="sessionFactory">
 			<ref bean="liferaySessionFactory" />
+		</property>
+	</bean>
+	<bean id="com.liferay.portal.service.persistence.WebDAVPropsPersistence.transaction" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean" lazy-init="true">
+		<property name="transactionManager">
+			<ref bean="liferayTransactionManager" />
+		</property>
+		<property name="target">
+			<ref bean="com.liferay.portal.service.persistence.WebDAVPropsPersistence.impl" />
+		</property>
+		<property name="transactionAttributes">
+			<props>
+				<prop key="remove*">PROPAGATION_REQUIRED,-com.liferay.portal.PortalException,-com.liferay.portal.SystemException</prop>
+				<prop key="set*">PROPAGATION_REQUIRED,-com.liferay.portal.PortalException,-com.liferay.portal.SystemException</prop>
+				<prop key="update*">PROPAGATION_REQUIRED,-com.liferay.portal.PortalException,-com.liferay.portal.SystemException</prop>
+				<prop key="*">PROPAGATION_SUPPORTS,readOnly</prop>
+			</props>
 		</property>
 	</bean>
 	<bean id="com.liferay.portal.service.persistence.WebDAVPropsUtil" class="com.liferay.portal.service.persistence.WebDAVPropsUtil" lazy-init="true">
@@ -2300,6 +2940,22 @@
 			<ref bean="liferaySessionFactory" />
 		</property>
 	</bean>
+	<bean id="com.liferay.portal.service.persistence.WebsitePersistence.transaction" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean" lazy-init="true">
+		<property name="transactionManager">
+			<ref bean="liferayTransactionManager" />
+		</property>
+		<property name="target">
+			<ref bean="com.liferay.portal.service.persistence.WebsitePersistence.impl" />
+		</property>
+		<property name="transactionAttributes">
+			<props>
+				<prop key="remove*">PROPAGATION_REQUIRED,-com.liferay.portal.PortalException,-com.liferay.portal.SystemException</prop>
+				<prop key="set*">PROPAGATION_REQUIRED,-com.liferay.portal.PortalException,-com.liferay.portal.SystemException</prop>
+				<prop key="update*">PROPAGATION_REQUIRED,-com.liferay.portal.PortalException,-com.liferay.portal.SystemException</prop>
+				<prop key="*">PROPAGATION_SUPPORTS,readOnly</prop>
+			</props>
+		</property>
+	</bean>
 	<bean id="com.liferay.portal.service.persistence.WebsiteUtil" class="com.liferay.portal.service.persistence.WebsiteUtil" lazy-init="true">
 		<property name="persistence">
 			<ref bean="com.liferay.portal.service.persistence.WebsitePersistence.impl" />
@@ -2363,6 +3019,22 @@
 			<ref bean="liferaySessionFactory" />
 		</property>
 	</bean>
+	<bean id="com.liferay.portlet.announcements.service.persistence.AnnouncementsDeliveryPersistence.transaction" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean" lazy-init="true">
+		<property name="transactionManager">
+			<ref bean="liferayTransactionManager" />
+		</property>
+		<property name="target">
+			<ref bean="com.liferay.portlet.announcements.service.persistence.AnnouncementsDeliveryPersistence.impl" />
+		</property>
+		<property name="transactionAttributes">
+			<props>
+				<prop key="remove*">PROPAGATION_REQUIRED,-com.liferay.portal.PortalException,-com.liferay.portal.SystemException</prop>
+				<prop key="set*">PROPAGATION_REQUIRED,-com.liferay.portal.PortalException,-com.liferay.portal.SystemException</prop>
+				<prop key="update*">PROPAGATION_REQUIRED,-com.liferay.portal.PortalException,-com.liferay.portal.SystemException</prop>
+				<prop key="*">PROPAGATION_SUPPORTS,readOnly</prop>
+			</props>
+		</property>
+	</bean>
 	<bean id="com.liferay.portlet.announcements.service.persistence.AnnouncementsDeliveryUtil" class="com.liferay.portlet.announcements.service.persistence.AnnouncementsDeliveryUtil" lazy-init="true">
 		<property name="persistence">
 			<ref bean="com.liferay.portlet.announcements.service.persistence.AnnouncementsDeliveryPersistence.impl" />
@@ -2424,6 +3096,22 @@
 		</property>
 		<property name="sessionFactory">
 			<ref bean="liferaySessionFactory" />
+		</property>
+	</bean>
+	<bean id="com.liferay.portlet.announcements.service.persistence.AnnouncementsEntryPersistence.transaction" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean" lazy-init="true">
+		<property name="transactionManager">
+			<ref bean="liferayTransactionManager" />
+		</property>
+		<property name="target">
+			<ref bean="com.liferay.portlet.announcements.service.persistence.AnnouncementsEntryPersistence.impl" />
+		</property>
+		<property name="transactionAttributes">
+			<props>
+				<prop key="remove*">PROPAGATION_REQUIRED,-com.liferay.portal.PortalException,-com.liferay.portal.SystemException</prop>
+				<prop key="set*">PROPAGATION_REQUIRED,-com.liferay.portal.PortalException,-com.liferay.portal.SystemException</prop>
+				<prop key="update*">PROPAGATION_REQUIRED,-com.liferay.portal.PortalException,-com.liferay.portal.SystemException</prop>
+				<prop key="*">PROPAGATION_SUPPORTS,readOnly</prop>
+			</props>
 		</property>
 	</bean>
 	<bean id="com.liferay.portlet.announcements.service.persistence.AnnouncementsEntryUtil" class="com.liferay.portlet.announcements.service.persistence.AnnouncementsEntryUtil" lazy-init="true">
@@ -2502,6 +3190,22 @@
 			<ref bean="liferaySessionFactory" />
 		</property>
 	</bean>
+	<bean id="com.liferay.portlet.announcements.service.persistence.AnnouncementsFlagPersistence.transaction" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean" lazy-init="true">
+		<property name="transactionManager">
+			<ref bean="liferayTransactionManager" />
+		</property>
+		<property name="target">
+			<ref bean="com.liferay.portlet.announcements.service.persistence.AnnouncementsFlagPersistence.impl" />
+		</property>
+		<property name="transactionAttributes">
+			<props>
+				<prop key="remove*">PROPAGATION_REQUIRED,-com.liferay.portal.PortalException,-com.liferay.portal.SystemException</prop>
+				<prop key="set*">PROPAGATION_REQUIRED,-com.liferay.portal.PortalException,-com.liferay.portal.SystemException</prop>
+				<prop key="update*">PROPAGATION_REQUIRED,-com.liferay.portal.PortalException,-com.liferay.portal.SystemException</prop>
+				<prop key="*">PROPAGATION_SUPPORTS,readOnly</prop>
+			</props>
+		</property>
+	</bean>
 	<bean id="com.liferay.portlet.announcements.service.persistence.AnnouncementsFlagUtil" class="com.liferay.portlet.announcements.service.persistence.AnnouncementsFlagUtil" lazy-init="true">
 		<property name="persistence">
 			<ref bean="com.liferay.portlet.announcements.service.persistence.AnnouncementsFlagPersistence.impl" />
@@ -2565,6 +3269,22 @@
 			<ref bean="liferaySessionFactory" />
 		</property>
 	</bean>
+	<bean id="com.liferay.portlet.blogs.service.persistence.BlogsEntryPersistence.transaction" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean" lazy-init="true">
+		<property name="transactionManager">
+			<ref bean="liferayTransactionManager" />
+		</property>
+		<property name="target">
+			<ref bean="com.liferay.portlet.blogs.service.persistence.BlogsEntryPersistence.impl" />
+		</property>
+		<property name="transactionAttributes">
+			<props>
+				<prop key="remove*">PROPAGATION_REQUIRED,-com.liferay.portal.PortalException,-com.liferay.portal.SystemException</prop>
+				<prop key="set*">PROPAGATION_REQUIRED,-com.liferay.portal.PortalException,-com.liferay.portal.SystemException</prop>
+				<prop key="update*">PROPAGATION_REQUIRED,-com.liferay.portal.PortalException,-com.liferay.portal.SystemException</prop>
+				<prop key="*">PROPAGATION_SUPPORTS,readOnly</prop>
+			</props>
+		</property>
+	</bean>
 	<bean id="com.liferay.portlet.blogs.service.persistence.BlogsEntryUtil" class="com.liferay.portlet.blogs.service.persistence.BlogsEntryUtil" lazy-init="true">
 		<property name="persistence">
 			<ref bean="com.liferay.portlet.blogs.service.persistence.BlogsEntryPersistence.impl" />
@@ -2614,6 +3334,22 @@
 		</property>
 		<property name="sessionFactory">
 			<ref bean="liferaySessionFactory" />
+		</property>
+	</bean>
+	<bean id="com.liferay.portlet.blogs.service.persistence.BlogsStatsUserPersistence.transaction" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean" lazy-init="true">
+		<property name="transactionManager">
+			<ref bean="liferayTransactionManager" />
+		</property>
+		<property name="target">
+			<ref bean="com.liferay.portlet.blogs.service.persistence.BlogsStatsUserPersistence.impl" />
+		</property>
+		<property name="transactionAttributes">
+			<props>
+				<prop key="remove*">PROPAGATION_REQUIRED,-com.liferay.portal.PortalException,-com.liferay.portal.SystemException</prop>
+				<prop key="set*">PROPAGATION_REQUIRED,-com.liferay.portal.PortalException,-com.liferay.portal.SystemException</prop>
+				<prop key="update*">PROPAGATION_REQUIRED,-com.liferay.portal.PortalException,-com.liferay.portal.SystemException</prop>
+				<prop key="*">PROPAGATION_SUPPORTS,readOnly</prop>
+			</props>
 		</property>
 	</bean>
 	<bean id="com.liferay.portlet.blogs.service.persistence.BlogsStatsUserUtil" class="com.liferay.portlet.blogs.service.persistence.BlogsStatsUserUtil" lazy-init="true">
@@ -2692,6 +3428,22 @@
 			<ref bean="liferaySessionFactory" />
 		</property>
 	</bean>
+	<bean id="com.liferay.portlet.bookmarks.service.persistence.BookmarksEntryPersistence.transaction" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean" lazy-init="true">
+		<property name="transactionManager">
+			<ref bean="liferayTransactionManager" />
+		</property>
+		<property name="target">
+			<ref bean="com.liferay.portlet.bookmarks.service.persistence.BookmarksEntryPersistence.impl" />
+		</property>
+		<property name="transactionAttributes">
+			<props>
+				<prop key="remove*">PROPAGATION_REQUIRED,-com.liferay.portal.PortalException,-com.liferay.portal.SystemException</prop>
+				<prop key="set*">PROPAGATION_REQUIRED,-com.liferay.portal.PortalException,-com.liferay.portal.SystemException</prop>
+				<prop key="update*">PROPAGATION_REQUIRED,-com.liferay.portal.PortalException,-com.liferay.portal.SystemException</prop>
+				<prop key="*">PROPAGATION_SUPPORTS,readOnly</prop>
+			</props>
+		</property>
+	</bean>
 	<bean id="com.liferay.portlet.bookmarks.service.persistence.BookmarksEntryUtil" class="com.liferay.portlet.bookmarks.service.persistence.BookmarksEntryUtil" lazy-init="true">
 		<property name="persistence">
 			<ref bean="com.liferay.portlet.bookmarks.service.persistence.BookmarksEntryPersistence.impl" />
@@ -2768,6 +3520,22 @@
 			<ref bean="liferaySessionFactory" />
 		</property>
 	</bean>
+	<bean id="com.liferay.portlet.bookmarks.service.persistence.BookmarksFolderPersistence.transaction" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean" lazy-init="true">
+		<property name="transactionManager">
+			<ref bean="liferayTransactionManager" />
+		</property>
+		<property name="target">
+			<ref bean="com.liferay.portlet.bookmarks.service.persistence.BookmarksFolderPersistence.impl" />
+		</property>
+		<property name="transactionAttributes">
+			<props>
+				<prop key="remove*">PROPAGATION_REQUIRED,-com.liferay.portal.PortalException,-com.liferay.portal.SystemException</prop>
+				<prop key="set*">PROPAGATION_REQUIRED,-com.liferay.portal.PortalException,-com.liferay.portal.SystemException</prop>
+				<prop key="update*">PROPAGATION_REQUIRED,-com.liferay.portal.PortalException,-com.liferay.portal.SystemException</prop>
+				<prop key="*">PROPAGATION_SUPPORTS,readOnly</prop>
+			</props>
+		</property>
+	</bean>
 	<bean id="com.liferay.portlet.bookmarks.service.persistence.BookmarksFolderUtil" class="com.liferay.portlet.bookmarks.service.persistence.BookmarksFolderUtil" lazy-init="true">
 		<property name="persistence">
 			<ref bean="com.liferay.portlet.bookmarks.service.persistence.BookmarksFolderPersistence.impl" />
@@ -2829,6 +3597,22 @@
 		</property>
 		<property name="sessionFactory">
 			<ref bean="liferaySessionFactory" />
+		</property>
+	</bean>
+	<bean id="com.liferay.portlet.calendar.service.persistence.CalEventPersistence.transaction" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean" lazy-init="true">
+		<property name="transactionManager">
+			<ref bean="liferayTransactionManager" />
+		</property>
+		<property name="target">
+			<ref bean="com.liferay.portlet.calendar.service.persistence.CalEventPersistence.impl" />
+		</property>
+		<property name="transactionAttributes">
+			<props>
+				<prop key="remove*">PROPAGATION_REQUIRED,-com.liferay.portal.PortalException,-com.liferay.portal.SystemException</prop>
+				<prop key="set*">PROPAGATION_REQUIRED,-com.liferay.portal.PortalException,-com.liferay.portal.SystemException</prop>
+				<prop key="update*">PROPAGATION_REQUIRED,-com.liferay.portal.PortalException,-com.liferay.portal.SystemException</prop>
+				<prop key="*">PROPAGATION_SUPPORTS,readOnly</prop>
+			</props>
 		</property>
 	</bean>
 	<bean id="com.liferay.portlet.calendar.service.persistence.CalEventUtil" class="com.liferay.portlet.calendar.service.persistence.CalEventUtil" lazy-init="true">
@@ -2907,6 +3691,22 @@
 			<ref bean="liferaySessionFactory" />
 		</property>
 	</bean>
+	<bean id="com.liferay.portlet.documentlibrary.service.persistence.DLFileEntryPersistence.transaction" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean" lazy-init="true">
+		<property name="transactionManager">
+			<ref bean="liferayTransactionManager" />
+		</property>
+		<property name="target">
+			<ref bean="com.liferay.portlet.documentlibrary.service.persistence.DLFileEntryPersistence.impl" />
+		</property>
+		<property name="transactionAttributes">
+			<props>
+				<prop key="remove*">PROPAGATION_REQUIRED,-com.liferay.portal.PortalException,-com.liferay.portal.SystemException</prop>
+				<prop key="set*">PROPAGATION_REQUIRED,-com.liferay.portal.PortalException,-com.liferay.portal.SystemException</prop>
+				<prop key="update*">PROPAGATION_REQUIRED,-com.liferay.portal.PortalException,-com.liferay.portal.SystemException</prop>
+				<prop key="*">PROPAGATION_SUPPORTS,readOnly</prop>
+			</props>
+		</property>
+	</bean>
 	<bean id="com.liferay.portlet.documentlibrary.service.persistence.DLFileEntryUtil" class="com.liferay.portlet.documentlibrary.service.persistence.DLFileEntryUtil" lazy-init="true">
 		<property name="persistence">
 			<ref bean="com.liferay.portlet.documentlibrary.service.persistence.DLFileEntryPersistence.impl" />
@@ -2969,6 +3769,22 @@
 		</property>
 		<property name="sessionFactory">
 			<ref bean="liferaySessionFactory" />
+		</property>
+	</bean>
+	<bean id="com.liferay.portlet.documentlibrary.service.persistence.DLFileRankPersistence.transaction" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean" lazy-init="true">
+		<property name="transactionManager">
+			<ref bean="liferayTransactionManager" />
+		</property>
+		<property name="target">
+			<ref bean="com.liferay.portlet.documentlibrary.service.persistence.DLFileRankPersistence.impl" />
+		</property>
+		<property name="transactionAttributes">
+			<props>
+				<prop key="remove*">PROPAGATION_REQUIRED,-com.liferay.portal.PortalException,-com.liferay.portal.SystemException</prop>
+				<prop key="set*">PROPAGATION_REQUIRED,-com.liferay.portal.PortalException,-com.liferay.portal.SystemException</prop>
+				<prop key="update*">PROPAGATION_REQUIRED,-com.liferay.portal.PortalException,-com.liferay.portal.SystemException</prop>
+				<prop key="*">PROPAGATION_SUPPORTS,readOnly</prop>
+			</props>
 		</property>
 	</bean>
 	<bean id="com.liferay.portlet.documentlibrary.service.persistence.DLFileRankUtil" class="com.liferay.portlet.documentlibrary.service.persistence.DLFileRankUtil" lazy-init="true">
@@ -3047,6 +3863,22 @@
 			<ref bean="liferaySessionFactory" />
 		</property>
 	</bean>
+	<bean id="com.liferay.portlet.documentlibrary.service.persistence.DLFileShortcutPersistence.transaction" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean" lazy-init="true">
+		<property name="transactionManager">
+			<ref bean="liferayTransactionManager" />
+		</property>
+		<property name="target">
+			<ref bean="com.liferay.portlet.documentlibrary.service.persistence.DLFileShortcutPersistence.impl" />
+		</property>
+		<property name="transactionAttributes">
+			<props>
+				<prop key="remove*">PROPAGATION_REQUIRED,-com.liferay.portal.PortalException,-com.liferay.portal.SystemException</prop>
+				<prop key="set*">PROPAGATION_REQUIRED,-com.liferay.portal.PortalException,-com.liferay.portal.SystemException</prop>
+				<prop key="update*">PROPAGATION_REQUIRED,-com.liferay.portal.PortalException,-com.liferay.portal.SystemException</prop>
+				<prop key="*">PROPAGATION_SUPPORTS,readOnly</prop>
+			</props>
+		</property>
+	</bean>
 	<bean id="com.liferay.portlet.documentlibrary.service.persistence.DLFileShortcutUtil" class="com.liferay.portlet.documentlibrary.service.persistence.DLFileShortcutUtil" lazy-init="true">
 		<property name="persistence">
 			<ref bean="com.liferay.portlet.documentlibrary.service.persistence.DLFileShortcutPersistence.impl" />
@@ -3096,6 +3928,22 @@
 		</property>
 		<property name="sessionFactory">
 			<ref bean="liferaySessionFactory" />
+		</property>
+	</bean>
+	<bean id="com.liferay.portlet.documentlibrary.service.persistence.DLFileVersionPersistence.transaction" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean" lazy-init="true">
+		<property name="transactionManager">
+			<ref bean="liferayTransactionManager" />
+		</property>
+		<property name="target">
+			<ref bean="com.liferay.portlet.documentlibrary.service.persistence.DLFileVersionPersistence.impl" />
+		</property>
+		<property name="transactionAttributes">
+			<props>
+				<prop key="remove*">PROPAGATION_REQUIRED,-com.liferay.portal.PortalException,-com.liferay.portal.SystemException</prop>
+				<prop key="set*">PROPAGATION_REQUIRED,-com.liferay.portal.PortalException,-com.liferay.portal.SystemException</prop>
+				<prop key="update*">PROPAGATION_REQUIRED,-com.liferay.portal.PortalException,-com.liferay.portal.SystemException</prop>
+				<prop key="*">PROPAGATION_SUPPORTS,readOnly</prop>
+			</props>
 		</property>
 	</bean>
 	<bean id="com.liferay.portlet.documentlibrary.service.persistence.DLFileVersionUtil" class="com.liferay.portlet.documentlibrary.service.persistence.DLFileVersionUtil" lazy-init="true">
@@ -3161,6 +4009,22 @@
 			<ref bean="liferaySessionFactory" />
 		</property>
 	</bean>
+	<bean id="com.liferay.portlet.documentlibrary.service.persistence.DLFolderPersistence.transaction" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean" lazy-init="true">
+		<property name="transactionManager">
+			<ref bean="liferayTransactionManager" />
+		</property>
+		<property name="target">
+			<ref bean="com.liferay.portlet.documentlibrary.service.persistence.DLFolderPersistence.impl" />
+		</property>
+		<property name="transactionAttributes">
+			<props>
+				<prop key="remove*">PROPAGATION_REQUIRED,-com.liferay.portal.PortalException,-com.liferay.portal.SystemException</prop>
+				<prop key="set*">PROPAGATION_REQUIRED,-com.liferay.portal.PortalException,-com.liferay.portal.SystemException</prop>
+				<prop key="update*">PROPAGATION_REQUIRED,-com.liferay.portal.PortalException,-com.liferay.portal.SystemException</prop>
+				<prop key="*">PROPAGATION_SUPPORTS,readOnly</prop>
+			</props>
+		</property>
+	</bean>
 	<bean id="com.liferay.portlet.documentlibrary.service.persistence.DLFolderUtil" class="com.liferay.portlet.documentlibrary.service.persistence.DLFolderUtil" lazy-init="true">
 		<property name="persistence">
 			<ref bean="com.liferay.portlet.documentlibrary.service.persistence.DLFolderPersistence.impl" />
@@ -3197,6 +4061,22 @@
 		</property>
 		<property name="sessionFactory">
 			<ref bean="liferaySessionFactory" />
+		</property>
+	</bean>
+	<bean id="com.liferay.portlet.expando.service.persistence.ExpandoColumnPersistence.transaction" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean" lazy-init="true">
+		<property name="transactionManager">
+			<ref bean="liferayTransactionManager" />
+		</property>
+		<property name="target">
+			<ref bean="com.liferay.portlet.expando.service.persistence.ExpandoColumnPersistence.impl" />
+		</property>
+		<property name="transactionAttributes">
+			<props>
+				<prop key="remove*">PROPAGATION_REQUIRED,-com.liferay.portal.PortalException,-com.liferay.portal.SystemException</prop>
+				<prop key="set*">PROPAGATION_REQUIRED,-com.liferay.portal.PortalException,-com.liferay.portal.SystemException</prop>
+				<prop key="update*">PROPAGATION_REQUIRED,-com.liferay.portal.PortalException,-com.liferay.portal.SystemException</prop>
+				<prop key="*">PROPAGATION_SUPPORTS,readOnly</prop>
+			</props>
 		</property>
 	</bean>
 	<bean id="com.liferay.portlet.expando.service.persistence.ExpandoColumnUtil" class="com.liferay.portlet.expando.service.persistence.ExpandoColumnUtil" lazy-init="true">
@@ -3250,6 +4130,22 @@
 			<ref bean="liferaySessionFactory" />
 		</property>
 	</bean>
+	<bean id="com.liferay.portlet.expando.service.persistence.ExpandoRowPersistence.transaction" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean" lazy-init="true">
+		<property name="transactionManager">
+			<ref bean="liferayTransactionManager" />
+		</property>
+		<property name="target">
+			<ref bean="com.liferay.portlet.expando.service.persistence.ExpandoRowPersistence.impl" />
+		</property>
+		<property name="transactionAttributes">
+			<props>
+				<prop key="remove*">PROPAGATION_REQUIRED,-com.liferay.portal.PortalException,-com.liferay.portal.SystemException</prop>
+				<prop key="set*">PROPAGATION_REQUIRED,-com.liferay.portal.PortalException,-com.liferay.portal.SystemException</prop>
+				<prop key="update*">PROPAGATION_REQUIRED,-com.liferay.portal.PortalException,-com.liferay.portal.SystemException</prop>
+				<prop key="*">PROPAGATION_SUPPORTS,readOnly</prop>
+			</props>
+		</property>
+	</bean>
 	<bean id="com.liferay.portlet.expando.service.persistence.ExpandoRowUtil" class="com.liferay.portlet.expando.service.persistence.ExpandoRowUtil" lazy-init="true">
 		<property name="persistence">
 			<ref bean="com.liferay.portlet.expando.service.persistence.ExpandoRowPersistence.impl" />
@@ -3301,6 +4197,22 @@
 			<ref bean="liferaySessionFactory" />
 		</property>
 	</bean>
+	<bean id="com.liferay.portlet.expando.service.persistence.ExpandoTablePersistence.transaction" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean" lazy-init="true">
+		<property name="transactionManager">
+			<ref bean="liferayTransactionManager" />
+		</property>
+		<property name="target">
+			<ref bean="com.liferay.portlet.expando.service.persistence.ExpandoTablePersistence.impl" />
+		</property>
+		<property name="transactionAttributes">
+			<props>
+				<prop key="remove*">PROPAGATION_REQUIRED,-com.liferay.portal.PortalException,-com.liferay.portal.SystemException</prop>
+				<prop key="set*">PROPAGATION_REQUIRED,-com.liferay.portal.PortalException,-com.liferay.portal.SystemException</prop>
+				<prop key="update*">PROPAGATION_REQUIRED,-com.liferay.portal.PortalException,-com.liferay.portal.SystemException</prop>
+				<prop key="*">PROPAGATION_SUPPORTS,readOnly</prop>
+			</props>
+		</property>
+	</bean>
 	<bean id="com.liferay.portlet.expando.service.persistence.ExpandoTableUtil" class="com.liferay.portlet.expando.service.persistence.ExpandoTableUtil" lazy-init="true">
 		<property name="persistence">
 			<ref bean="com.liferay.portlet.expando.service.persistence.ExpandoTablePersistence.impl" />
@@ -3337,6 +4249,22 @@
 		</property>
 		<property name="sessionFactory">
 			<ref bean="liferaySessionFactory" />
+		</property>
+	</bean>
+	<bean id="com.liferay.portlet.expando.service.persistence.ExpandoValuePersistence.transaction" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean" lazy-init="true">
+		<property name="transactionManager">
+			<ref bean="liferayTransactionManager" />
+		</property>
+		<property name="target">
+			<ref bean="com.liferay.portlet.expando.service.persistence.ExpandoValuePersistence.impl" />
+		</property>
+		<property name="transactionAttributes">
+			<props>
+				<prop key="remove*">PROPAGATION_REQUIRED,-com.liferay.portal.PortalException,-com.liferay.portal.SystemException</prop>
+				<prop key="set*">PROPAGATION_REQUIRED,-com.liferay.portal.PortalException,-com.liferay.portal.SystemException</prop>
+				<prop key="update*">PROPAGATION_REQUIRED,-com.liferay.portal.PortalException,-com.liferay.portal.SystemException</prop>
+				<prop key="*">PROPAGATION_SUPPORTS,readOnly</prop>
+			</props>
 		</property>
 	</bean>
 	<bean id="com.liferay.portlet.expando.service.persistence.ExpandoValueUtil" class="com.liferay.portlet.expando.service.persistence.ExpandoValueUtil" lazy-init="true">
@@ -3415,6 +4343,22 @@
 			<ref bean="liferaySessionFactory" />
 		</property>
 	</bean>
+	<bean id="com.liferay.portlet.imagegallery.service.persistence.IGFolderPersistence.transaction" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean" lazy-init="true">
+		<property name="transactionManager">
+			<ref bean="liferayTransactionManager" />
+		</property>
+		<property name="target">
+			<ref bean="com.liferay.portlet.imagegallery.service.persistence.IGFolderPersistence.impl" />
+		</property>
+		<property name="transactionAttributes">
+			<props>
+				<prop key="remove*">PROPAGATION_REQUIRED,-com.liferay.portal.PortalException,-com.liferay.portal.SystemException</prop>
+				<prop key="set*">PROPAGATION_REQUIRED,-com.liferay.portal.PortalException,-com.liferay.portal.SystemException</prop>
+				<prop key="update*">PROPAGATION_REQUIRED,-com.liferay.portal.PortalException,-com.liferay.portal.SystemException</prop>
+				<prop key="*">PROPAGATION_SUPPORTS,readOnly</prop>
+			</props>
+		</property>
+	</bean>
 	<bean id="com.liferay.portlet.imagegallery.service.persistence.IGFolderUtil" class="com.liferay.portlet.imagegallery.service.persistence.IGFolderUtil" lazy-init="true">
 		<property name="persistence">
 			<ref bean="com.liferay.portlet.imagegallery.service.persistence.IGFolderPersistence.impl" />
@@ -3476,6 +4420,22 @@
 		</property>
 		<property name="sessionFactory">
 			<ref bean="liferaySessionFactory" />
+		</property>
+	</bean>
+	<bean id="com.liferay.portlet.imagegallery.service.persistence.IGImagePersistence.transaction" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean" lazy-init="true">
+		<property name="transactionManager">
+			<ref bean="liferayTransactionManager" />
+		</property>
+		<property name="target">
+			<ref bean="com.liferay.portlet.imagegallery.service.persistence.IGImagePersistence.impl" />
+		</property>
+		<property name="transactionAttributes">
+			<props>
+				<prop key="remove*">PROPAGATION_REQUIRED,-com.liferay.portal.PortalException,-com.liferay.portal.SystemException</prop>
+				<prop key="set*">PROPAGATION_REQUIRED,-com.liferay.portal.PortalException,-com.liferay.portal.SystemException</prop>
+				<prop key="update*">PROPAGATION_REQUIRED,-com.liferay.portal.PortalException,-com.liferay.portal.SystemException</prop>
+				<prop key="*">PROPAGATION_SUPPORTS,readOnly</prop>
+			</props>
 		</property>
 	</bean>
 	<bean id="com.liferay.portlet.imagegallery.service.persistence.IGImageUtil" class="com.liferay.portlet.imagegallery.service.persistence.IGImageUtil" lazy-init="true">
@@ -3554,6 +4514,22 @@
 			<ref bean="liferaySessionFactory" />
 		</property>
 	</bean>
+	<bean id="com.liferay.portlet.journal.service.persistence.JournalArticlePersistence.transaction" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean" lazy-init="true">
+		<property name="transactionManager">
+			<ref bean="liferayTransactionManager" />
+		</property>
+		<property name="target">
+			<ref bean="com.liferay.portlet.journal.service.persistence.JournalArticlePersistence.impl" />
+		</property>
+		<property name="transactionAttributes">
+			<props>
+				<prop key="remove*">PROPAGATION_REQUIRED,-com.liferay.portal.PortalException,-com.liferay.portal.SystemException</prop>
+				<prop key="set*">PROPAGATION_REQUIRED,-com.liferay.portal.PortalException,-com.liferay.portal.SystemException</prop>
+				<prop key="update*">PROPAGATION_REQUIRED,-com.liferay.portal.PortalException,-com.liferay.portal.SystemException</prop>
+				<prop key="*">PROPAGATION_SUPPORTS,readOnly</prop>
+			</props>
+		</property>
+	</bean>
 	<bean id="com.liferay.portlet.journal.service.persistence.JournalArticleUtil" class="com.liferay.portlet.journal.service.persistence.JournalArticleUtil" lazy-init="true">
 		<property name="persistence">
 			<ref bean="com.liferay.portlet.journal.service.persistence.JournalArticlePersistence.impl" />
@@ -3605,6 +4581,22 @@
 			<ref bean="liferaySessionFactory" />
 		</property>
 	</bean>
+	<bean id="com.liferay.portlet.journal.service.persistence.JournalArticleImagePersistence.transaction" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean" lazy-init="true">
+		<property name="transactionManager">
+			<ref bean="liferayTransactionManager" />
+		</property>
+		<property name="target">
+			<ref bean="com.liferay.portlet.journal.service.persistence.JournalArticleImagePersistence.impl" />
+		</property>
+		<property name="transactionAttributes">
+			<props>
+				<prop key="remove*">PROPAGATION_REQUIRED,-com.liferay.portal.PortalException,-com.liferay.portal.SystemException</prop>
+				<prop key="set*">PROPAGATION_REQUIRED,-com.liferay.portal.PortalException,-com.liferay.portal.SystemException</prop>
+				<prop key="update*">PROPAGATION_REQUIRED,-com.liferay.portal.PortalException,-com.liferay.portal.SystemException</prop>
+				<prop key="*">PROPAGATION_SUPPORTS,readOnly</prop>
+			</props>
+		</property>
+	</bean>
 	<bean id="com.liferay.portlet.journal.service.persistence.JournalArticleImageUtil" class="com.liferay.portlet.journal.service.persistence.JournalArticleImageUtil" lazy-init="true">
 		<property name="persistence">
 			<ref bean="com.liferay.portlet.journal.service.persistence.JournalArticleImagePersistence.impl" />
@@ -3643,6 +4635,22 @@
 			<ref bean="liferaySessionFactory" />
 		</property>
 	</bean>
+	<bean id="com.liferay.portlet.journal.service.persistence.JournalArticleResourcePersistence.transaction" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean" lazy-init="true">
+		<property name="transactionManager">
+			<ref bean="liferayTransactionManager" />
+		</property>
+		<property name="target">
+			<ref bean="com.liferay.portlet.journal.service.persistence.JournalArticleResourcePersistence.impl" />
+		</property>
+		<property name="transactionAttributes">
+			<props>
+				<prop key="remove*">PROPAGATION_REQUIRED,-com.liferay.portal.PortalException,-com.liferay.portal.SystemException</prop>
+				<prop key="set*">PROPAGATION_REQUIRED,-com.liferay.portal.PortalException,-com.liferay.portal.SystemException</prop>
+				<prop key="update*">PROPAGATION_REQUIRED,-com.liferay.portal.PortalException,-com.liferay.portal.SystemException</prop>
+				<prop key="*">PROPAGATION_SUPPORTS,readOnly</prop>
+			</props>
+		</property>
+	</bean>
 	<bean id="com.liferay.portlet.journal.service.persistence.JournalArticleResourceUtil" class="com.liferay.portlet.journal.service.persistence.JournalArticleResourceUtil" lazy-init="true">
 		<property name="persistence">
 			<ref bean="com.liferay.portlet.journal.service.persistence.JournalArticleResourcePersistence.impl" />
@@ -3679,6 +4687,22 @@
 		</property>
 		<property name="sessionFactory">
 			<ref bean="liferaySessionFactory" />
+		</property>
+	</bean>
+	<bean id="com.liferay.portlet.journal.service.persistence.JournalContentSearchPersistence.transaction" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean" lazy-init="true">
+		<property name="transactionManager">
+			<ref bean="liferayTransactionManager" />
+		</property>
+		<property name="target">
+			<ref bean="com.liferay.portlet.journal.service.persistence.JournalContentSearchPersistence.impl" />
+		</property>
+		<property name="transactionAttributes">
+			<props>
+				<prop key="remove*">PROPAGATION_REQUIRED,-com.liferay.portal.PortalException,-com.liferay.portal.SystemException</prop>
+				<prop key="set*">PROPAGATION_REQUIRED,-com.liferay.portal.PortalException,-com.liferay.portal.SystemException</prop>
+				<prop key="update*">PROPAGATION_REQUIRED,-com.liferay.portal.PortalException,-com.liferay.portal.SystemException</prop>
+				<prop key="*">PROPAGATION_SUPPORTS,readOnly</prop>
+			</props>
 		</property>
 	</bean>
 	<bean id="com.liferay.portlet.journal.service.persistence.JournalContentSearchUtil" class="com.liferay.portlet.journal.service.persistence.JournalContentSearchUtil" lazy-init="true">
@@ -3742,6 +4766,22 @@
 		</property>
 		<property name="sessionFactory">
 			<ref bean="liferaySessionFactory" />
+		</property>
+	</bean>
+	<bean id="com.liferay.portlet.journal.service.persistence.JournalFeedPersistence.transaction" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean" lazy-init="true">
+		<property name="transactionManager">
+			<ref bean="liferayTransactionManager" />
+		</property>
+		<property name="target">
+			<ref bean="com.liferay.portlet.journal.service.persistence.JournalFeedPersistence.impl" />
+		</property>
+		<property name="transactionAttributes">
+			<props>
+				<prop key="remove*">PROPAGATION_REQUIRED,-com.liferay.portal.PortalException,-com.liferay.portal.SystemException</prop>
+				<prop key="set*">PROPAGATION_REQUIRED,-com.liferay.portal.PortalException,-com.liferay.portal.SystemException</prop>
+				<prop key="update*">PROPAGATION_REQUIRED,-com.liferay.portal.PortalException,-com.liferay.portal.SystemException</prop>
+				<prop key="*">PROPAGATION_SUPPORTS,readOnly</prop>
+			</props>
 		</property>
 	</bean>
 	<bean id="com.liferay.portlet.journal.service.persistence.JournalFeedUtil" class="com.liferay.portlet.journal.service.persistence.JournalFeedUtil" lazy-init="true">
@@ -3820,6 +4860,22 @@
 			<ref bean="liferaySessionFactory" />
 		</property>
 	</bean>
+	<bean id="com.liferay.portlet.journal.service.persistence.JournalStructurePersistence.transaction" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean" lazy-init="true">
+		<property name="transactionManager">
+			<ref bean="liferayTransactionManager" />
+		</property>
+		<property name="target">
+			<ref bean="com.liferay.portlet.journal.service.persistence.JournalStructurePersistence.impl" />
+		</property>
+		<property name="transactionAttributes">
+			<props>
+				<prop key="remove*">PROPAGATION_REQUIRED,-com.liferay.portal.PortalException,-com.liferay.portal.SystemException</prop>
+				<prop key="set*">PROPAGATION_REQUIRED,-com.liferay.portal.PortalException,-com.liferay.portal.SystemException</prop>
+				<prop key="update*">PROPAGATION_REQUIRED,-com.liferay.portal.PortalException,-com.liferay.portal.SystemException</prop>
+				<prop key="*">PROPAGATION_SUPPORTS,readOnly</prop>
+			</props>
+		</property>
+	</bean>
 	<bean id="com.liferay.portlet.journal.service.persistence.JournalStructureUtil" class="com.liferay.portlet.journal.service.persistence.JournalStructureUtil" lazy-init="true">
 		<property name="persistence">
 			<ref bean="com.liferay.portlet.journal.service.persistence.JournalStructurePersistence.impl" />
@@ -3894,6 +4950,22 @@
 		</property>
 		<property name="sessionFactory">
 			<ref bean="liferaySessionFactory" />
+		</property>
+	</bean>
+	<bean id="com.liferay.portlet.journal.service.persistence.JournalTemplatePersistence.transaction" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean" lazy-init="true">
+		<property name="transactionManager">
+			<ref bean="liferayTransactionManager" />
+		</property>
+		<property name="target">
+			<ref bean="com.liferay.portlet.journal.service.persistence.JournalTemplatePersistence.impl" />
+		</property>
+		<property name="transactionAttributes">
+			<props>
+				<prop key="remove*">PROPAGATION_REQUIRED,-com.liferay.portal.PortalException,-com.liferay.portal.SystemException</prop>
+				<prop key="set*">PROPAGATION_REQUIRED,-com.liferay.portal.PortalException,-com.liferay.portal.SystemException</prop>
+				<prop key="update*">PROPAGATION_REQUIRED,-com.liferay.portal.PortalException,-com.liferay.portal.SystemException</prop>
+				<prop key="*">PROPAGATION_SUPPORTS,readOnly</prop>
+			</props>
 		</property>
 	</bean>
 	<bean id="com.liferay.portlet.journal.service.persistence.JournalTemplateUtil" class="com.liferay.portlet.journal.service.persistence.JournalTemplateUtil" lazy-init="true">
@@ -3972,6 +5044,22 @@
 			<ref bean="liferaySessionFactory" />
 		</property>
 	</bean>
+	<bean id="com.liferay.portlet.messageboards.service.persistence.MBBanPersistence.transaction" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean" lazy-init="true">
+		<property name="transactionManager">
+			<ref bean="liferayTransactionManager" />
+		</property>
+		<property name="target">
+			<ref bean="com.liferay.portlet.messageboards.service.persistence.MBBanPersistence.impl" />
+		</property>
+		<property name="transactionAttributes">
+			<props>
+				<prop key="remove*">PROPAGATION_REQUIRED,-com.liferay.portal.PortalException,-com.liferay.portal.SystemException</prop>
+				<prop key="set*">PROPAGATION_REQUIRED,-com.liferay.portal.PortalException,-com.liferay.portal.SystemException</prop>
+				<prop key="update*">PROPAGATION_REQUIRED,-com.liferay.portal.PortalException,-com.liferay.portal.SystemException</prop>
+				<prop key="*">PROPAGATION_SUPPORTS,readOnly</prop>
+			</props>
+		</property>
+	</bean>
 	<bean id="com.liferay.portlet.messageboards.service.persistence.MBBanUtil" class="com.liferay.portlet.messageboards.service.persistence.MBBanUtil" lazy-init="true">
 		<property name="persistence">
 			<ref bean="com.liferay.portlet.messageboards.service.persistence.MBBanPersistence.impl" />
@@ -4035,6 +5123,22 @@
 			<ref bean="liferaySessionFactory" />
 		</property>
 	</bean>
+	<bean id="com.liferay.portlet.messageboards.service.persistence.MBCategoryPersistence.transaction" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean" lazy-init="true">
+		<property name="transactionManager">
+			<ref bean="liferayTransactionManager" />
+		</property>
+		<property name="target">
+			<ref bean="com.liferay.portlet.messageboards.service.persistence.MBCategoryPersistence.impl" />
+		</property>
+		<property name="transactionAttributes">
+			<props>
+				<prop key="remove*">PROPAGATION_REQUIRED,-com.liferay.portal.PortalException,-com.liferay.portal.SystemException</prop>
+				<prop key="set*">PROPAGATION_REQUIRED,-com.liferay.portal.PortalException,-com.liferay.portal.SystemException</prop>
+				<prop key="update*">PROPAGATION_REQUIRED,-com.liferay.portal.PortalException,-com.liferay.portal.SystemException</prop>
+				<prop key="*">PROPAGATION_SUPPORTS,readOnly</prop>
+			</props>
+		</property>
+	</bean>
 	<bean id="com.liferay.portlet.messageboards.service.persistence.MBCategoryUtil" class="com.liferay.portlet.messageboards.service.persistence.MBCategoryUtil" lazy-init="true">
 		<property name="persistence">
 			<ref bean="com.liferay.portlet.messageboards.service.persistence.MBCategoryPersistence.impl" />
@@ -4059,6 +5163,22 @@
 		</property>
 		<property name="sessionFactory">
 			<ref bean="liferaySessionFactory" />
+		</property>
+	</bean>
+	<bean id="com.liferay.portlet.messageboards.service.persistence.MBDiscussionPersistence.transaction" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean" lazy-init="true">
+		<property name="transactionManager">
+			<ref bean="liferayTransactionManager" />
+		</property>
+		<property name="target">
+			<ref bean="com.liferay.portlet.messageboards.service.persistence.MBDiscussionPersistence.impl" />
+		</property>
+		<property name="transactionAttributes">
+			<props>
+				<prop key="remove*">PROPAGATION_REQUIRED,-com.liferay.portal.PortalException,-com.liferay.portal.SystemException</prop>
+				<prop key="set*">PROPAGATION_REQUIRED,-com.liferay.portal.PortalException,-com.liferay.portal.SystemException</prop>
+				<prop key="update*">PROPAGATION_REQUIRED,-com.liferay.portal.PortalException,-com.liferay.portal.SystemException</prop>
+				<prop key="*">PROPAGATION_SUPPORTS,readOnly</prop>
+			</props>
 		</property>
 	</bean>
 	<bean id="com.liferay.portlet.messageboards.service.persistence.MBDiscussionUtil" class="com.liferay.portlet.messageboards.service.persistence.MBDiscussionUtil" lazy-init="true">
@@ -4124,6 +5244,22 @@
 			<ref bean="liferaySessionFactory" />
 		</property>
 	</bean>
+	<bean id="com.liferay.portlet.messageboards.service.persistence.MBMessagePersistence.transaction" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean" lazy-init="true">
+		<property name="transactionManager">
+			<ref bean="liferayTransactionManager" />
+		</property>
+		<property name="target">
+			<ref bean="com.liferay.portlet.messageboards.service.persistence.MBMessagePersistence.impl" />
+		</property>
+		<property name="transactionAttributes">
+			<props>
+				<prop key="remove*">PROPAGATION_REQUIRED,-com.liferay.portal.PortalException,-com.liferay.portal.SystemException</prop>
+				<prop key="set*">PROPAGATION_REQUIRED,-com.liferay.portal.PortalException,-com.liferay.portal.SystemException</prop>
+				<prop key="update*">PROPAGATION_REQUIRED,-com.liferay.portal.PortalException,-com.liferay.portal.SystemException</prop>
+				<prop key="*">PROPAGATION_SUPPORTS,readOnly</prop>
+			</props>
+		</property>
+	</bean>
 	<bean id="com.liferay.portlet.messageboards.service.persistence.MBMessageUtil" class="com.liferay.portlet.messageboards.service.persistence.MBMessageUtil" lazy-init="true">
 		<property name="persistence">
 			<ref bean="com.liferay.portlet.messageboards.service.persistence.MBMessagePersistence.impl" />
@@ -4175,6 +5311,22 @@
 			<ref bean="liferaySessionFactory" />
 		</property>
 	</bean>
+	<bean id="com.liferay.portlet.messageboards.service.persistence.MBMessageFlagPersistence.transaction" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean" lazy-init="true">
+		<property name="transactionManager">
+			<ref bean="liferayTransactionManager" />
+		</property>
+		<property name="target">
+			<ref bean="com.liferay.portlet.messageboards.service.persistence.MBMessageFlagPersistence.impl" />
+		</property>
+		<property name="transactionAttributes">
+			<props>
+				<prop key="remove*">PROPAGATION_REQUIRED,-com.liferay.portal.PortalException,-com.liferay.portal.SystemException</prop>
+				<prop key="set*">PROPAGATION_REQUIRED,-com.liferay.portal.PortalException,-com.liferay.portal.SystemException</prop>
+				<prop key="update*">PROPAGATION_REQUIRED,-com.liferay.portal.PortalException,-com.liferay.portal.SystemException</prop>
+				<prop key="*">PROPAGATION_SUPPORTS,readOnly</prop>
+			</props>
+		</property>
+	</bean>
 	<bean id="com.liferay.portlet.messageboards.service.persistence.MBMessageFlagUtil" class="com.liferay.portlet.messageboards.service.persistence.MBMessageFlagUtil" lazy-init="true">
 		<property name="persistence">
 			<ref bean="com.liferay.portlet.messageboards.service.persistence.MBMessageFlagPersistence.impl" />
@@ -4224,6 +5376,22 @@
 		</property>
 		<property name="sessionFactory">
 			<ref bean="liferaySessionFactory" />
+		</property>
+	</bean>
+	<bean id="com.liferay.portlet.messageboards.service.persistence.MBStatsUserPersistence.transaction" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean" lazy-init="true">
+		<property name="transactionManager">
+			<ref bean="liferayTransactionManager" />
+		</property>
+		<property name="target">
+			<ref bean="com.liferay.portlet.messageboards.service.persistence.MBStatsUserPersistence.impl" />
+		</property>
+		<property name="transactionAttributes">
+			<props>
+				<prop key="remove*">PROPAGATION_REQUIRED,-com.liferay.portal.PortalException,-com.liferay.portal.SystemException</prop>
+				<prop key="set*">PROPAGATION_REQUIRED,-com.liferay.portal.PortalException,-com.liferay.portal.SystemException</prop>
+				<prop key="update*">PROPAGATION_REQUIRED,-com.liferay.portal.PortalException,-com.liferay.portal.SystemException</prop>
+				<prop key="*">PROPAGATION_SUPPORTS,readOnly</prop>
+			</props>
 		</property>
 	</bean>
 	<bean id="com.liferay.portlet.messageboards.service.persistence.MBStatsUserUtil" class="com.liferay.portlet.messageboards.service.persistence.MBStatsUserUtil" lazy-init="true">
@@ -4289,6 +5457,22 @@
 			<ref bean="liferaySessionFactory" />
 		</property>
 	</bean>
+	<bean id="com.liferay.portlet.messageboards.service.persistence.MBThreadPersistence.transaction" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean" lazy-init="true">
+		<property name="transactionManager">
+			<ref bean="liferayTransactionManager" />
+		</property>
+		<property name="target">
+			<ref bean="com.liferay.portlet.messageboards.service.persistence.MBThreadPersistence.impl" />
+		</property>
+		<property name="transactionAttributes">
+			<props>
+				<prop key="remove*">PROPAGATION_REQUIRED,-com.liferay.portal.PortalException,-com.liferay.portal.SystemException</prop>
+				<prop key="set*">PROPAGATION_REQUIRED,-com.liferay.portal.PortalException,-com.liferay.portal.SystemException</prop>
+				<prop key="update*">PROPAGATION_REQUIRED,-com.liferay.portal.PortalException,-com.liferay.portal.SystemException</prop>
+				<prop key="*">PROPAGATION_SUPPORTS,readOnly</prop>
+			</props>
+		</property>
+	</bean>
 	<bean id="com.liferay.portlet.messageboards.service.persistence.MBThreadUtil" class="com.liferay.portlet.messageboards.service.persistence.MBThreadUtil" lazy-init="true">
 		<property name="persistence">
 			<ref bean="com.liferay.portlet.messageboards.service.persistence.MBThreadPersistence.impl" />
@@ -4338,6 +5522,22 @@
 		</property>
 		<property name="sessionFactory">
 			<ref bean="liferaySessionFactory" />
+		</property>
+	</bean>
+	<bean id="com.liferay.portlet.polls.service.persistence.PollsChoicePersistence.transaction" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean" lazy-init="true">
+		<property name="transactionManager">
+			<ref bean="liferayTransactionManager" />
+		</property>
+		<property name="target">
+			<ref bean="com.liferay.portlet.polls.service.persistence.PollsChoicePersistence.impl" />
+		</property>
+		<property name="transactionAttributes">
+			<props>
+				<prop key="remove*">PROPAGATION_REQUIRED,-com.liferay.portal.PortalException,-com.liferay.portal.SystemException</prop>
+				<prop key="set*">PROPAGATION_REQUIRED,-com.liferay.portal.PortalException,-com.liferay.portal.SystemException</prop>
+				<prop key="update*">PROPAGATION_REQUIRED,-com.liferay.portal.PortalException,-com.liferay.portal.SystemException</prop>
+				<prop key="*">PROPAGATION_SUPPORTS,readOnly</prop>
+			</props>
 		</property>
 	</bean>
 	<bean id="com.liferay.portlet.polls.service.persistence.PollsChoiceUtil" class="com.liferay.portlet.polls.service.persistence.PollsChoiceUtil" lazy-init="true">
@@ -4416,6 +5616,22 @@
 			<ref bean="liferaySessionFactory" />
 		</property>
 	</bean>
+	<bean id="com.liferay.portlet.polls.service.persistence.PollsQuestionPersistence.transaction" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean" lazy-init="true">
+		<property name="transactionManager">
+			<ref bean="liferayTransactionManager" />
+		</property>
+		<property name="target">
+			<ref bean="com.liferay.portlet.polls.service.persistence.PollsQuestionPersistence.impl" />
+		</property>
+		<property name="transactionAttributes">
+			<props>
+				<prop key="remove*">PROPAGATION_REQUIRED,-com.liferay.portal.PortalException,-com.liferay.portal.SystemException</prop>
+				<prop key="set*">PROPAGATION_REQUIRED,-com.liferay.portal.PortalException,-com.liferay.portal.SystemException</prop>
+				<prop key="update*">PROPAGATION_REQUIRED,-com.liferay.portal.PortalException,-com.liferay.portal.SystemException</prop>
+				<prop key="*">PROPAGATION_SUPPORTS,readOnly</prop>
+			</props>
+		</property>
+	</bean>
 	<bean id="com.liferay.portlet.polls.service.persistence.PollsQuestionUtil" class="com.liferay.portlet.polls.service.persistence.PollsQuestionUtil" lazy-init="true">
 		<property name="persistence">
 			<ref bean="com.liferay.portlet.polls.service.persistence.PollsQuestionPersistence.impl" />
@@ -4477,6 +5693,22 @@
 		</property>
 		<property name="sessionFactory">
 			<ref bean="liferaySessionFactory" />
+		</property>
+	</bean>
+	<bean id="com.liferay.portlet.polls.service.persistence.PollsVotePersistence.transaction" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean" lazy-init="true">
+		<property name="transactionManager">
+			<ref bean="liferayTransactionManager" />
+		</property>
+		<property name="target">
+			<ref bean="com.liferay.portlet.polls.service.persistence.PollsVotePersistence.impl" />
+		</property>
+		<property name="transactionAttributes">
+			<props>
+				<prop key="remove*">PROPAGATION_REQUIRED,-com.liferay.portal.PortalException,-com.liferay.portal.SystemException</prop>
+				<prop key="set*">PROPAGATION_REQUIRED,-com.liferay.portal.PortalException,-com.liferay.portal.SystemException</prop>
+				<prop key="update*">PROPAGATION_REQUIRED,-com.liferay.portal.PortalException,-com.liferay.portal.SystemException</prop>
+				<prop key="*">PROPAGATION_SUPPORTS,readOnly</prop>
+			</props>
 		</property>
 	</bean>
 	<bean id="com.liferay.portlet.polls.service.persistence.PollsVoteUtil" class="com.liferay.portlet.polls.service.persistence.PollsVoteUtil" lazy-init="true">
@@ -4542,6 +5774,22 @@
 			<ref bean="liferaySessionFactory" />
 		</property>
 	</bean>
+	<bean id="com.liferay.portlet.ratings.service.persistence.RatingsEntryPersistence.transaction" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean" lazy-init="true">
+		<property name="transactionManager">
+			<ref bean="liferayTransactionManager" />
+		</property>
+		<property name="target">
+			<ref bean="com.liferay.portlet.ratings.service.persistence.RatingsEntryPersistence.impl" />
+		</property>
+		<property name="transactionAttributes">
+			<props>
+				<prop key="remove*">PROPAGATION_REQUIRED,-com.liferay.portal.PortalException,-com.liferay.portal.SystemException</prop>
+				<prop key="set*">PROPAGATION_REQUIRED,-com.liferay.portal.PortalException,-com.liferay.portal.SystemException</prop>
+				<prop key="update*">PROPAGATION_REQUIRED,-com.liferay.portal.PortalException,-com.liferay.portal.SystemException</prop>
+				<prop key="*">PROPAGATION_SUPPORTS,readOnly</prop>
+			</props>
+		</property>
+	</bean>
 	<bean id="com.liferay.portlet.ratings.service.persistence.RatingsEntryUtil" class="com.liferay.portlet.ratings.service.persistence.RatingsEntryUtil" lazy-init="true">
 		<property name="persistence">
 			<ref bean="com.liferay.portlet.ratings.service.persistence.RatingsEntryPersistence.impl" />
@@ -4580,6 +5828,22 @@
 			<ref bean="liferaySessionFactory" />
 		</property>
 	</bean>
+	<bean id="com.liferay.portlet.ratings.service.persistence.RatingsStatsPersistence.transaction" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean" lazy-init="true">
+		<property name="transactionManager">
+			<ref bean="liferayTransactionManager" />
+		</property>
+		<property name="target">
+			<ref bean="com.liferay.portlet.ratings.service.persistence.RatingsStatsPersistence.impl" />
+		</property>
+		<property name="transactionAttributes">
+			<props>
+				<prop key="remove*">PROPAGATION_REQUIRED,-com.liferay.portal.PortalException,-com.liferay.portal.SystemException</prop>
+				<prop key="set*">PROPAGATION_REQUIRED,-com.liferay.portal.PortalException,-com.liferay.portal.SystemException</prop>
+				<prop key="update*">PROPAGATION_REQUIRED,-com.liferay.portal.PortalException,-com.liferay.portal.SystemException</prop>
+				<prop key="*">PROPAGATION_SUPPORTS,readOnly</prop>
+			</props>
+		</property>
+	</bean>
 	<bean id="com.liferay.portlet.ratings.service.persistence.RatingsStatsUtil" class="com.liferay.portlet.ratings.service.persistence.RatingsStatsUtil" lazy-init="true">
 		<property name="persistence">
 			<ref bean="com.liferay.portlet.ratings.service.persistence.RatingsStatsPersistence.impl" />
@@ -4616,6 +5880,22 @@
 		</property>
 		<property name="sessionFactory">
 			<ref bean="liferaySessionFactory" />
+		</property>
+	</bean>
+	<bean id="com.liferay.portlet.shopping.service.persistence.ShoppingCartPersistence.transaction" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean" lazy-init="true">
+		<property name="transactionManager">
+			<ref bean="liferayTransactionManager" />
+		</property>
+		<property name="target">
+			<ref bean="com.liferay.portlet.shopping.service.persistence.ShoppingCartPersistence.impl" />
+		</property>
+		<property name="transactionAttributes">
+			<props>
+				<prop key="remove*">PROPAGATION_REQUIRED,-com.liferay.portal.PortalException,-com.liferay.portal.SystemException</prop>
+				<prop key="set*">PROPAGATION_REQUIRED,-com.liferay.portal.PortalException,-com.liferay.portal.SystemException</prop>
+				<prop key="update*">PROPAGATION_REQUIRED,-com.liferay.portal.PortalException,-com.liferay.portal.SystemException</prop>
+				<prop key="*">PROPAGATION_SUPPORTS,readOnly</prop>
+			</props>
 		</property>
 	</bean>
 	<bean id="com.liferay.portlet.shopping.service.persistence.ShoppingCartUtil" class="com.liferay.portlet.shopping.service.persistence.ShoppingCartUtil" lazy-init="true">
@@ -4681,6 +5961,22 @@
 			<ref bean="liferaySessionFactory" />
 		</property>
 	</bean>
+	<bean id="com.liferay.portlet.shopping.service.persistence.ShoppingCategoryPersistence.transaction" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean" lazy-init="true">
+		<property name="transactionManager">
+			<ref bean="liferayTransactionManager" />
+		</property>
+		<property name="target">
+			<ref bean="com.liferay.portlet.shopping.service.persistence.ShoppingCategoryPersistence.impl" />
+		</property>
+		<property name="transactionAttributes">
+			<props>
+				<prop key="remove*">PROPAGATION_REQUIRED,-com.liferay.portal.PortalException,-com.liferay.portal.SystemException</prop>
+				<prop key="set*">PROPAGATION_REQUIRED,-com.liferay.portal.PortalException,-com.liferay.portal.SystemException</prop>
+				<prop key="update*">PROPAGATION_REQUIRED,-com.liferay.portal.PortalException,-com.liferay.portal.SystemException</prop>
+				<prop key="*">PROPAGATION_SUPPORTS,readOnly</prop>
+			</props>
+		</property>
+	</bean>
 	<bean id="com.liferay.portlet.shopping.service.persistence.ShoppingCategoryUtil" class="com.liferay.portlet.shopping.service.persistence.ShoppingCategoryUtil" lazy-init="true">
 		<property name="persistence">
 			<ref bean="com.liferay.portlet.shopping.service.persistence.ShoppingCategoryPersistence.impl" />
@@ -4742,6 +6038,22 @@
 		</property>
 		<property name="sessionFactory">
 			<ref bean="liferaySessionFactory" />
+		</property>
+	</bean>
+	<bean id="com.liferay.portlet.shopping.service.persistence.ShoppingCouponPersistence.transaction" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean" lazy-init="true">
+		<property name="transactionManager">
+			<ref bean="liferayTransactionManager" />
+		</property>
+		<property name="target">
+			<ref bean="com.liferay.portlet.shopping.service.persistence.ShoppingCouponPersistence.impl" />
+		</property>
+		<property name="transactionAttributes">
+			<props>
+				<prop key="remove*">PROPAGATION_REQUIRED,-com.liferay.portal.PortalException,-com.liferay.portal.SystemException</prop>
+				<prop key="set*">PROPAGATION_REQUIRED,-com.liferay.portal.PortalException,-com.liferay.portal.SystemException</prop>
+				<prop key="update*">PROPAGATION_REQUIRED,-com.liferay.portal.PortalException,-com.liferay.portal.SystemException</prop>
+				<prop key="*">PROPAGATION_SUPPORTS,readOnly</prop>
+			</props>
 		</property>
 	</bean>
 	<bean id="com.liferay.portlet.shopping.service.persistence.ShoppingCouponUtil" class="com.liferay.portlet.shopping.service.persistence.ShoppingCouponUtil" lazy-init="true">
@@ -4820,6 +6132,22 @@
 			<ref bean="liferaySessionFactory" />
 		</property>
 	</bean>
+	<bean id="com.liferay.portlet.shopping.service.persistence.ShoppingItemPersistence.transaction" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean" lazy-init="true">
+		<property name="transactionManager">
+			<ref bean="liferayTransactionManager" />
+		</property>
+		<property name="target">
+			<ref bean="com.liferay.portlet.shopping.service.persistence.ShoppingItemPersistence.impl" />
+		</property>
+		<property name="transactionAttributes">
+			<props>
+				<prop key="remove*">PROPAGATION_REQUIRED,-com.liferay.portal.PortalException,-com.liferay.portal.SystemException</prop>
+				<prop key="set*">PROPAGATION_REQUIRED,-com.liferay.portal.PortalException,-com.liferay.portal.SystemException</prop>
+				<prop key="update*">PROPAGATION_REQUIRED,-com.liferay.portal.PortalException,-com.liferay.portal.SystemException</prop>
+				<prop key="*">PROPAGATION_SUPPORTS,readOnly</prop>
+			</props>
+		</property>
+	</bean>
 	<bean id="com.liferay.portlet.shopping.service.persistence.ShoppingItemUtil" class="com.liferay.portlet.shopping.service.persistence.ShoppingItemUtil" lazy-init="true">
 		<property name="persistence">
 			<ref bean="com.liferay.portlet.shopping.service.persistence.ShoppingItemPersistence.impl" />
@@ -4871,6 +6199,22 @@
 			<ref bean="liferaySessionFactory" />
 		</property>
 	</bean>
+	<bean id="com.liferay.portlet.shopping.service.persistence.ShoppingItemFieldPersistence.transaction" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean" lazy-init="true">
+		<property name="transactionManager">
+			<ref bean="liferayTransactionManager" />
+		</property>
+		<property name="target">
+			<ref bean="com.liferay.portlet.shopping.service.persistence.ShoppingItemFieldPersistence.impl" />
+		</property>
+		<property name="transactionAttributes">
+			<props>
+				<prop key="remove*">PROPAGATION_REQUIRED,-com.liferay.portal.PortalException,-com.liferay.portal.SystemException</prop>
+				<prop key="set*">PROPAGATION_REQUIRED,-com.liferay.portal.PortalException,-com.liferay.portal.SystemException</prop>
+				<prop key="update*">PROPAGATION_REQUIRED,-com.liferay.portal.PortalException,-com.liferay.portal.SystemException</prop>
+				<prop key="*">PROPAGATION_SUPPORTS,readOnly</prop>
+			</props>
+		</property>
+	</bean>
 	<bean id="com.liferay.portlet.shopping.service.persistence.ShoppingItemFieldUtil" class="com.liferay.portlet.shopping.service.persistence.ShoppingItemFieldUtil" lazy-init="true">
 		<property name="persistence">
 			<ref bean="com.liferay.portlet.shopping.service.persistence.ShoppingItemFieldPersistence.impl" />
@@ -4907,6 +6251,22 @@
 		</property>
 		<property name="sessionFactory">
 			<ref bean="liferaySessionFactory" />
+		</property>
+	</bean>
+	<bean id="com.liferay.portlet.shopping.service.persistence.ShoppingItemPricePersistence.transaction" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean" lazy-init="true">
+		<property name="transactionManager">
+			<ref bean="liferayTransactionManager" />
+		</property>
+		<property name="target">
+			<ref bean="com.liferay.portlet.shopping.service.persistence.ShoppingItemPricePersistence.impl" />
+		</property>
+		<property name="transactionAttributes">
+			<props>
+				<prop key="remove*">PROPAGATION_REQUIRED,-com.liferay.portal.PortalException,-com.liferay.portal.SystemException</prop>
+				<prop key="set*">PROPAGATION_REQUIRED,-com.liferay.portal.PortalException,-com.liferay.portal.SystemException</prop>
+				<prop key="update*">PROPAGATION_REQUIRED,-com.liferay.portal.PortalException,-com.liferay.portal.SystemException</prop>
+				<prop key="*">PROPAGATION_SUPPORTS,readOnly</prop>
+			</props>
 		</property>
 	</bean>
 	<bean id="com.liferay.portlet.shopping.service.persistence.ShoppingItemPriceUtil" class="com.liferay.portlet.shopping.service.persistence.ShoppingItemPriceUtil" lazy-init="true">
@@ -4972,6 +6332,22 @@
 			<ref bean="liferaySessionFactory" />
 		</property>
 	</bean>
+	<bean id="com.liferay.portlet.shopping.service.persistence.ShoppingOrderPersistence.transaction" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean" lazy-init="true">
+		<property name="transactionManager">
+			<ref bean="liferayTransactionManager" />
+		</property>
+		<property name="target">
+			<ref bean="com.liferay.portlet.shopping.service.persistence.ShoppingOrderPersistence.impl" />
+		</property>
+		<property name="transactionAttributes">
+			<props>
+				<prop key="remove*">PROPAGATION_REQUIRED,-com.liferay.portal.PortalException,-com.liferay.portal.SystemException</prop>
+				<prop key="set*">PROPAGATION_REQUIRED,-com.liferay.portal.PortalException,-com.liferay.portal.SystemException</prop>
+				<prop key="update*">PROPAGATION_REQUIRED,-com.liferay.portal.PortalException,-com.liferay.portal.SystemException</prop>
+				<prop key="*">PROPAGATION_SUPPORTS,readOnly</prop>
+			</props>
+		</property>
+	</bean>
 	<bean id="com.liferay.portlet.shopping.service.persistence.ShoppingOrderUtil" class="com.liferay.portlet.shopping.service.persistence.ShoppingOrderUtil" lazy-init="true">
 		<property name="persistence">
 			<ref bean="com.liferay.portlet.shopping.service.persistence.ShoppingOrderPersistence.impl" />
@@ -5023,6 +6399,22 @@
 			<ref bean="liferaySessionFactory" />
 		</property>
 	</bean>
+	<bean id="com.liferay.portlet.shopping.service.persistence.ShoppingOrderItemPersistence.transaction" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean" lazy-init="true">
+		<property name="transactionManager">
+			<ref bean="liferayTransactionManager" />
+		</property>
+		<property name="target">
+			<ref bean="com.liferay.portlet.shopping.service.persistence.ShoppingOrderItemPersistence.impl" />
+		</property>
+		<property name="transactionAttributes">
+			<props>
+				<prop key="remove*">PROPAGATION_REQUIRED,-com.liferay.portal.PortalException,-com.liferay.portal.SystemException</prop>
+				<prop key="set*">PROPAGATION_REQUIRED,-com.liferay.portal.PortalException,-com.liferay.portal.SystemException</prop>
+				<prop key="update*">PROPAGATION_REQUIRED,-com.liferay.portal.PortalException,-com.liferay.portal.SystemException</prop>
+				<prop key="*">PROPAGATION_SUPPORTS,readOnly</prop>
+			</props>
+		</property>
+	</bean>
 	<bean id="com.liferay.portlet.shopping.service.persistence.ShoppingOrderItemUtil" class="com.liferay.portlet.shopping.service.persistence.ShoppingOrderItemUtil" lazy-init="true">
 		<property name="persistence">
 			<ref bean="com.liferay.portlet.shopping.service.persistence.ShoppingOrderItemPersistence.impl" />
@@ -5059,6 +6451,22 @@
 		</property>
 		<property name="sessionFactory">
 			<ref bean="liferaySessionFactory" />
+		</property>
+	</bean>
+	<bean id="com.liferay.portlet.social.service.persistence.SocialActivityPersistence.transaction" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean" lazy-init="true">
+		<property name="transactionManager">
+			<ref bean="liferayTransactionManager" />
+		</property>
+		<property name="target">
+			<ref bean="com.liferay.portlet.social.service.persistence.SocialActivityPersistence.impl" />
+		</property>
+		<property name="transactionAttributes">
+			<props>
+				<prop key="remove*">PROPAGATION_REQUIRED,-com.liferay.portal.PortalException,-com.liferay.portal.SystemException</prop>
+				<prop key="set*">PROPAGATION_REQUIRED,-com.liferay.portal.PortalException,-com.liferay.portal.SystemException</prop>
+				<prop key="update*">PROPAGATION_REQUIRED,-com.liferay.portal.PortalException,-com.liferay.portal.SystemException</prop>
+				<prop key="*">PROPAGATION_SUPPORTS,readOnly</prop>
+			</props>
 		</property>
 	</bean>
 	<bean id="com.liferay.portlet.social.service.persistence.SocialActivityUtil" class="com.liferay.portlet.social.service.persistence.SocialActivityUtil" lazy-init="true">
@@ -5118,6 +6526,22 @@
 			<ref bean="liferaySessionFactory" />
 		</property>
 	</bean>
+	<bean id="com.liferay.portlet.social.service.persistence.SocialRelationPersistence.transaction" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean" lazy-init="true">
+		<property name="transactionManager">
+			<ref bean="liferayTransactionManager" />
+		</property>
+		<property name="target">
+			<ref bean="com.liferay.portlet.social.service.persistence.SocialRelationPersistence.impl" />
+		</property>
+		<property name="transactionAttributes">
+			<props>
+				<prop key="remove*">PROPAGATION_REQUIRED,-com.liferay.portal.PortalException,-com.liferay.portal.SystemException</prop>
+				<prop key="set*">PROPAGATION_REQUIRED,-com.liferay.portal.PortalException,-com.liferay.portal.SystemException</prop>
+				<prop key="update*">PROPAGATION_REQUIRED,-com.liferay.portal.PortalException,-com.liferay.portal.SystemException</prop>
+				<prop key="*">PROPAGATION_SUPPORTS,readOnly</prop>
+			</props>
+		</property>
+	</bean>
 	<bean id="com.liferay.portlet.social.service.persistence.SocialRelationUtil" class="com.liferay.portlet.social.service.persistence.SocialRelationUtil" lazy-init="true">
 		<property name="persistence">
 			<ref bean="com.liferay.portlet.social.service.persistence.SocialRelationPersistence.impl" />
@@ -5154,6 +6578,22 @@
 		</property>
 		<property name="sessionFactory">
 			<ref bean="liferaySessionFactory" />
+		</property>
+	</bean>
+	<bean id="com.liferay.portlet.social.service.persistence.SocialRequestPersistence.transaction" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean" lazy-init="true">
+		<property name="transactionManager">
+			<ref bean="liferayTransactionManager" />
+		</property>
+		<property name="target">
+			<ref bean="com.liferay.portlet.social.service.persistence.SocialRequestPersistence.impl" />
+		</property>
+		<property name="transactionAttributes">
+			<props>
+				<prop key="remove*">PROPAGATION_REQUIRED,-com.liferay.portal.PortalException,-com.liferay.portal.SystemException</prop>
+				<prop key="set*">PROPAGATION_REQUIRED,-com.liferay.portal.PortalException,-com.liferay.portal.SystemException</prop>
+				<prop key="update*">PROPAGATION_REQUIRED,-com.liferay.portal.PortalException,-com.liferay.portal.SystemException</prop>
+				<prop key="*">PROPAGATION_SUPPORTS,readOnly</prop>
+			</props>
 		</property>
 	</bean>
 	<bean id="com.liferay.portlet.social.service.persistence.SocialRequestUtil" class="com.liferay.portlet.social.service.persistence.SocialRequestUtil" lazy-init="true">
@@ -5225,6 +6665,22 @@
 			<ref bean="liferaySessionFactory" />
 		</property>
 	</bean>
+	<bean id="com.liferay.portlet.softwarecatalog.service.persistence.SCLicensePersistence.transaction" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean" lazy-init="true">
+		<property name="transactionManager">
+			<ref bean="liferayTransactionManager" />
+		</property>
+		<property name="target">
+			<ref bean="com.liferay.portlet.softwarecatalog.service.persistence.SCLicensePersistence.impl" />
+		</property>
+		<property name="transactionAttributes">
+			<props>
+				<prop key="remove*">PROPAGATION_REQUIRED,-com.liferay.portal.PortalException,-com.liferay.portal.SystemException</prop>
+				<prop key="set*">PROPAGATION_REQUIRED,-com.liferay.portal.PortalException,-com.liferay.portal.SystemException</prop>
+				<prop key="update*">PROPAGATION_REQUIRED,-com.liferay.portal.PortalException,-com.liferay.portal.SystemException</prop>
+				<prop key="*">PROPAGATION_SUPPORTS,readOnly</prop>
+			</props>
+		</property>
+	</bean>
 	<bean id="com.liferay.portlet.softwarecatalog.service.persistence.SCLicenseUtil" class="com.liferay.portlet.softwarecatalog.service.persistence.SCLicenseUtil" lazy-init="true">
 		<property name="persistence">
 			<ref bean="com.liferay.portlet.softwarecatalog.service.persistence.SCLicensePersistence.impl" />
@@ -5286,6 +6742,22 @@
 		</property>
 		<property name="sessionFactory">
 			<ref bean="liferaySessionFactory" />
+		</property>
+	</bean>
+	<bean id="com.liferay.portlet.softwarecatalog.service.persistence.SCFrameworkVersionPersistence.transaction" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean" lazy-init="true">
+		<property name="transactionManager">
+			<ref bean="liferayTransactionManager" />
+		</property>
+		<property name="target">
+			<ref bean="com.liferay.portlet.softwarecatalog.service.persistence.SCFrameworkVersionPersistence.impl" />
+		</property>
+		<property name="transactionAttributes">
+			<props>
+				<prop key="remove*">PROPAGATION_REQUIRED,-com.liferay.portal.PortalException,-com.liferay.portal.SystemException</prop>
+				<prop key="set*">PROPAGATION_REQUIRED,-com.liferay.portal.PortalException,-com.liferay.portal.SystemException</prop>
+				<prop key="update*">PROPAGATION_REQUIRED,-com.liferay.portal.PortalException,-com.liferay.portal.SystemException</prop>
+				<prop key="*">PROPAGATION_SUPPORTS,readOnly</prop>
+			</props>
 		</property>
 	</bean>
 	<bean id="com.liferay.portlet.softwarecatalog.service.persistence.SCFrameworkVersionUtil" class="com.liferay.portlet.softwarecatalog.service.persistence.SCFrameworkVersionUtil" lazy-init="true">
@@ -5351,6 +6823,22 @@
 			<ref bean="liferaySessionFactory" />
 		</property>
 	</bean>
+	<bean id="com.liferay.portlet.softwarecatalog.service.persistence.SCProductEntryPersistence.transaction" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean" lazy-init="true">
+		<property name="transactionManager">
+			<ref bean="liferayTransactionManager" />
+		</property>
+		<property name="target">
+			<ref bean="com.liferay.portlet.softwarecatalog.service.persistence.SCProductEntryPersistence.impl" />
+		</property>
+		<property name="transactionAttributes">
+			<props>
+				<prop key="remove*">PROPAGATION_REQUIRED,-com.liferay.portal.PortalException,-com.liferay.portal.SystemException</prop>
+				<prop key="set*">PROPAGATION_REQUIRED,-com.liferay.portal.PortalException,-com.liferay.portal.SystemException</prop>
+				<prop key="update*">PROPAGATION_REQUIRED,-com.liferay.portal.PortalException,-com.liferay.portal.SystemException</prop>
+				<prop key="*">PROPAGATION_SUPPORTS,readOnly</prop>
+			</props>
+		</property>
+	</bean>
 	<bean id="com.liferay.portlet.softwarecatalog.service.persistence.SCProductEntryUtil" class="com.liferay.portlet.softwarecatalog.service.persistence.SCProductEntryUtil" lazy-init="true">
 		<property name="persistence">
 			<ref bean="com.liferay.portlet.softwarecatalog.service.persistence.SCProductEntryPersistence.impl" />
@@ -5387,6 +6875,22 @@
 		</property>
 		<property name="sessionFactory">
 			<ref bean="liferaySessionFactory" />
+		</property>
+	</bean>
+	<bean id="com.liferay.portlet.softwarecatalog.service.persistence.SCProductScreenshotPersistence.transaction" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean" lazy-init="true">
+		<property name="transactionManager">
+			<ref bean="liferayTransactionManager" />
+		</property>
+		<property name="target">
+			<ref bean="com.liferay.portlet.softwarecatalog.service.persistence.SCProductScreenshotPersistence.impl" />
+		</property>
+		<property name="transactionAttributes">
+			<props>
+				<prop key="remove*">PROPAGATION_REQUIRED,-com.liferay.portal.PortalException,-com.liferay.portal.SystemException</prop>
+				<prop key="set*">PROPAGATION_REQUIRED,-com.liferay.portal.PortalException,-com.liferay.portal.SystemException</prop>
+				<prop key="update*">PROPAGATION_REQUIRED,-com.liferay.portal.PortalException,-com.liferay.portal.SystemException</prop>
+				<prop key="*">PROPAGATION_SUPPORTS,readOnly</prop>
+			</props>
 		</property>
 	</bean>
 	<bean id="com.liferay.portlet.softwarecatalog.service.persistence.SCProductScreenshotUtil" class="com.liferay.portlet.softwarecatalog.service.persistence.SCProductScreenshotUtil" lazy-init="true">
@@ -5452,6 +6956,22 @@
 			<ref bean="liferaySessionFactory" />
 		</property>
 	</bean>
+	<bean id="com.liferay.portlet.softwarecatalog.service.persistence.SCProductVersionPersistence.transaction" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean" lazy-init="true">
+		<property name="transactionManager">
+			<ref bean="liferayTransactionManager" />
+		</property>
+		<property name="target">
+			<ref bean="com.liferay.portlet.softwarecatalog.service.persistence.SCProductVersionPersistence.impl" />
+		</property>
+		<property name="transactionAttributes">
+			<props>
+				<prop key="remove*">PROPAGATION_REQUIRED,-com.liferay.portal.PortalException,-com.liferay.portal.SystemException</prop>
+				<prop key="set*">PROPAGATION_REQUIRED,-com.liferay.portal.PortalException,-com.liferay.portal.SystemException</prop>
+				<prop key="update*">PROPAGATION_REQUIRED,-com.liferay.portal.PortalException,-com.liferay.portal.SystemException</prop>
+				<prop key="*">PROPAGATION_SUPPORTS,readOnly</prop>
+			</props>
+		</property>
+	</bean>
 	<bean id="com.liferay.portlet.softwarecatalog.service.persistence.SCProductVersionUtil" class="com.liferay.portlet.softwarecatalog.service.persistence.SCProductVersionUtil" lazy-init="true">
 		<property name="persistence">
 			<ref bean="com.liferay.portlet.softwarecatalog.service.persistence.SCProductVersionPersistence.impl" />
@@ -5513,6 +7033,22 @@
 		</property>
 		<property name="sessionFactory">
 			<ref bean="liferaySessionFactory" />
+		</property>
+	</bean>
+	<bean id="com.liferay.portlet.tags.service.persistence.TagsAssetPersistence.transaction" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean" lazy-init="true">
+		<property name="transactionManager">
+			<ref bean="liferayTransactionManager" />
+		</property>
+		<property name="target">
+			<ref bean="com.liferay.portlet.tags.service.persistence.TagsAssetPersistence.impl" />
+		</property>
+		<property name="transactionAttributes">
+			<props>
+				<prop key="remove*">PROPAGATION_REQUIRED,-com.liferay.portal.PortalException,-com.liferay.portal.SystemException</prop>
+				<prop key="set*">PROPAGATION_REQUIRED,-com.liferay.portal.PortalException,-com.liferay.portal.SystemException</prop>
+				<prop key="update*">PROPAGATION_REQUIRED,-com.liferay.portal.PortalException,-com.liferay.portal.SystemException</prop>
+				<prop key="*">PROPAGATION_SUPPORTS,readOnly</prop>
+			</props>
 		</property>
 	</bean>
 	<bean id="com.liferay.portlet.tags.service.persistence.TagsAssetUtil" class="com.liferay.portlet.tags.service.persistence.TagsAssetUtil" lazy-init="true">
@@ -5591,6 +7127,22 @@
 			<ref bean="liferaySessionFactory" />
 		</property>
 	</bean>
+	<bean id="com.liferay.portlet.tags.service.persistence.TagsEntryPersistence.transaction" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean" lazy-init="true">
+		<property name="transactionManager">
+			<ref bean="liferayTransactionManager" />
+		</property>
+		<property name="target">
+			<ref bean="com.liferay.portlet.tags.service.persistence.TagsEntryPersistence.impl" />
+		</property>
+		<property name="transactionAttributes">
+			<props>
+				<prop key="remove*">PROPAGATION_REQUIRED,-com.liferay.portal.PortalException,-com.liferay.portal.SystemException</prop>
+				<prop key="set*">PROPAGATION_REQUIRED,-com.liferay.portal.PortalException,-com.liferay.portal.SystemException</prop>
+				<prop key="update*">PROPAGATION_REQUIRED,-com.liferay.portal.PortalException,-com.liferay.portal.SystemException</prop>
+				<prop key="*">PROPAGATION_SUPPORTS,readOnly</prop>
+			</props>
+		</property>
+	</bean>
 	<bean id="com.liferay.portlet.tags.service.persistence.TagsEntryUtil" class="com.liferay.portlet.tags.service.persistence.TagsEntryUtil" lazy-init="true">
 		<property name="persistence">
 			<ref bean="com.liferay.portlet.tags.service.persistence.TagsEntryPersistence.impl" />
@@ -5665,6 +7217,22 @@
 		</property>
 		<property name="sessionFactory">
 			<ref bean="liferaySessionFactory" />
+		</property>
+	</bean>
+	<bean id="com.liferay.portlet.tags.service.persistence.TagsPropertyPersistence.transaction" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean" lazy-init="true">
+		<property name="transactionManager">
+			<ref bean="liferayTransactionManager" />
+		</property>
+		<property name="target">
+			<ref bean="com.liferay.portlet.tags.service.persistence.TagsPropertyPersistence.impl" />
+		</property>
+		<property name="transactionAttributes">
+			<props>
+				<prop key="remove*">PROPAGATION_REQUIRED,-com.liferay.portal.PortalException,-com.liferay.portal.SystemException</prop>
+				<prop key="set*">PROPAGATION_REQUIRED,-com.liferay.portal.PortalException,-com.liferay.portal.SystemException</prop>
+				<prop key="update*">PROPAGATION_REQUIRED,-com.liferay.portal.PortalException,-com.liferay.portal.SystemException</prop>
+				<prop key="*">PROPAGATION_SUPPORTS,readOnly</prop>
+			</props>
 		</property>
 	</bean>
 	<bean id="com.liferay.portlet.tags.service.persistence.TagsPropertyUtil" class="com.liferay.portlet.tags.service.persistence.TagsPropertyUtil" lazy-init="true">
@@ -5756,6 +7324,22 @@
 			<ref bean="liferaySessionFactory" />
 		</property>
 	</bean>
+	<bean id="com.liferay.portlet.tags.service.persistence.TagsSourcePersistence.transaction" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean" lazy-init="true">
+		<property name="transactionManager">
+			<ref bean="liferayTransactionManager" />
+		</property>
+		<property name="target">
+			<ref bean="com.liferay.portlet.tags.service.persistence.TagsSourcePersistence.impl" />
+		</property>
+		<property name="transactionAttributes">
+			<props>
+				<prop key="remove*">PROPAGATION_REQUIRED,-com.liferay.portal.PortalException,-com.liferay.portal.SystemException</prop>
+				<prop key="set*">PROPAGATION_REQUIRED,-com.liferay.portal.PortalException,-com.liferay.portal.SystemException</prop>
+				<prop key="update*">PROPAGATION_REQUIRED,-com.liferay.portal.PortalException,-com.liferay.portal.SystemException</prop>
+				<prop key="*">PROPAGATION_SUPPORTS,readOnly</prop>
+			</props>
+		</property>
+	</bean>
 	<bean id="com.liferay.portlet.tags.service.persistence.TagsSourceUtil" class="com.liferay.portlet.tags.service.persistence.TagsSourceUtil" lazy-init="true">
 		<property name="persistence">
 			<ref bean="com.liferay.portlet.tags.service.persistence.TagsSourcePersistence.impl" />
@@ -5819,6 +7403,22 @@
 			<ref bean="liferaySessionFactory" />
 		</property>
 	</bean>
+	<bean id="com.liferay.portlet.tasks.service.persistence.TasksReviewPersistence.transaction" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean" lazy-init="true">
+		<property name="transactionManager">
+			<ref bean="liferayTransactionManager" />
+		</property>
+		<property name="target">
+			<ref bean="com.liferay.portlet.tasks.service.persistence.TasksReviewPersistence.impl" />
+		</property>
+		<property name="transactionAttributes">
+			<props>
+				<prop key="remove*">PROPAGATION_REQUIRED,-com.liferay.portal.PortalException,-com.liferay.portal.SystemException</prop>
+				<prop key="set*">PROPAGATION_REQUIRED,-com.liferay.portal.PortalException,-com.liferay.portal.SystemException</prop>
+				<prop key="update*">PROPAGATION_REQUIRED,-com.liferay.portal.PortalException,-com.liferay.portal.SystemException</prop>
+				<prop key="*">PROPAGATION_SUPPORTS,readOnly</prop>
+			</props>
+		</property>
+	</bean>
 	<bean id="com.liferay.portlet.tasks.service.persistence.TasksReviewUtil" class="com.liferay.portlet.tasks.service.persistence.TasksReviewUtil" lazy-init="true">
 		<property name="persistence">
 			<ref bean="com.liferay.portlet.tasks.service.persistence.TasksReviewPersistence.impl" />
@@ -5880,6 +7480,22 @@
 		</property>
 		<property name="sessionFactory">
 			<ref bean="liferaySessionFactory" />
+		</property>
+	</bean>
+	<bean id="com.liferay.portlet.tasks.service.persistence.TasksProposalPersistence.transaction" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean" lazy-init="true">
+		<property name="transactionManager">
+			<ref bean="liferayTransactionManager" />
+		</property>
+		<property name="target">
+			<ref bean="com.liferay.portlet.tasks.service.persistence.TasksProposalPersistence.impl" />
+		</property>
+		<property name="transactionAttributes">
+			<props>
+				<prop key="remove*">PROPAGATION_REQUIRED,-com.liferay.portal.PortalException,-com.liferay.portal.SystemException</prop>
+				<prop key="set*">PROPAGATION_REQUIRED,-com.liferay.portal.PortalException,-com.liferay.portal.SystemException</prop>
+				<prop key="update*">PROPAGATION_REQUIRED,-com.liferay.portal.PortalException,-com.liferay.portal.SystemException</prop>
+				<prop key="*">PROPAGATION_SUPPORTS,readOnly</prop>
+			</props>
 		</property>
 	</bean>
 	<bean id="com.liferay.portlet.tasks.service.persistence.TasksProposalUtil" class="com.liferay.portlet.tasks.service.persistence.TasksProposalUtil" lazy-init="true">
@@ -5958,6 +7574,22 @@
 			<ref bean="liferaySessionFactory" />
 		</property>
 	</bean>
+	<bean id="com.liferay.portlet.wiki.service.persistence.WikiNodePersistence.transaction" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean" lazy-init="true">
+		<property name="transactionManager">
+			<ref bean="liferayTransactionManager" />
+		</property>
+		<property name="target">
+			<ref bean="com.liferay.portlet.wiki.service.persistence.WikiNodePersistence.impl" />
+		</property>
+		<property name="transactionAttributes">
+			<props>
+				<prop key="remove*">PROPAGATION_REQUIRED,-com.liferay.portal.PortalException,-com.liferay.portal.SystemException</prop>
+				<prop key="set*">PROPAGATION_REQUIRED,-com.liferay.portal.PortalException,-com.liferay.portal.SystemException</prop>
+				<prop key="update*">PROPAGATION_REQUIRED,-com.liferay.portal.PortalException,-com.liferay.portal.SystemException</prop>
+				<prop key="*">PROPAGATION_SUPPORTS,readOnly</prop>
+			</props>
+		</property>
+	</bean>
 	<bean id="com.liferay.portlet.wiki.service.persistence.WikiNodeUtil" class="com.liferay.portlet.wiki.service.persistence.WikiNodeUtil" lazy-init="true">
 		<property name="persistence">
 			<ref bean="com.liferay.portlet.wiki.service.persistence.WikiNodePersistence.impl" />
@@ -6021,6 +7653,22 @@
 			<ref bean="liferaySessionFactory" />
 		</property>
 	</bean>
+	<bean id="com.liferay.portlet.wiki.service.persistence.WikiPagePersistence.transaction" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean" lazy-init="true">
+		<property name="transactionManager">
+			<ref bean="liferayTransactionManager" />
+		</property>
+		<property name="target">
+			<ref bean="com.liferay.portlet.wiki.service.persistence.WikiPagePersistence.impl" />
+		</property>
+		<property name="transactionAttributes">
+			<props>
+				<prop key="remove*">PROPAGATION_REQUIRED,-com.liferay.portal.PortalException,-com.liferay.portal.SystemException</prop>
+				<prop key="set*">PROPAGATION_REQUIRED,-com.liferay.portal.PortalException,-com.liferay.portal.SystemException</prop>
+				<prop key="update*">PROPAGATION_REQUIRED,-com.liferay.portal.PortalException,-com.liferay.portal.SystemException</prop>
+				<prop key="*">PROPAGATION_SUPPORTS,readOnly</prop>
+			</props>
+		</property>
+	</bean>
 	<bean id="com.liferay.portlet.wiki.service.persistence.WikiPageUtil" class="com.liferay.portlet.wiki.service.persistence.WikiPageUtil" lazy-init="true">
 		<property name="persistence">
 			<ref bean="com.liferay.portlet.wiki.service.persistence.WikiPagePersistence.impl" />
@@ -6070,6 +7718,22 @@
 		</property>
 		<property name="sessionFactory">
 			<ref bean="liferaySessionFactory" />
+		</property>
+	</bean>
+	<bean id="com.liferay.portlet.wiki.service.persistence.WikiPageResourcePersistence.transaction" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean" lazy-init="true">
+		<property name="transactionManager">
+			<ref bean="liferayTransactionManager" />
+		</property>
+		<property name="target">
+			<ref bean="com.liferay.portlet.wiki.service.persistence.WikiPageResourcePersistence.impl" />
+		</property>
+		<property name="transactionAttributes">
+			<props>
+				<prop key="remove*">PROPAGATION_REQUIRED,-com.liferay.portal.PortalException,-com.liferay.portal.SystemException</prop>
+				<prop key="set*">PROPAGATION_REQUIRED,-com.liferay.portal.PortalException,-com.liferay.portal.SystemException</prop>
+				<prop key="update*">PROPAGATION_REQUIRED,-com.liferay.portal.PortalException,-com.liferay.portal.SystemException</prop>
+				<prop key="*">PROPAGATION_SUPPORTS,readOnly</prop>
+			</props>
 		</property>
 	</bean>
 	<bean id="com.liferay.portlet.wiki.service.persistence.WikiPageResourceUtil" class="com.liferay.portlet.wiki.service.persistence.WikiPageResourceUtil" lazy-init="true">
