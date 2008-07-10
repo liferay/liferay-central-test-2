@@ -22,6 +22,15 @@
  */
 %>
 
+<c:if test="<%= portletName.equals(PortletKeys.ADMIN) %>">
+	<script type="text/javascript">
+		function <portlet:namespace />reindexPortlet(portletId) {
+			document.<portlet:namespace />fm.<portlet:namespace />portletId.value = portletId;
+			<portlet:namespace />saveServer('reIndex');
+		}
+	</script>
+</c:if>
+
 <c:if test="<%= installPluginsURL != null %>">
 	<input type="button" onClick="submitForm(document.<portlet:namespace />fm, '<%= installPluginsURL.toString() %>');" value="<liferay-ui:message key="install-more-portlets" />" />
 
@@ -34,6 +43,10 @@ List headerNames = new ArrayList();
 headerNames.add("portlet");
 headerNames.add("active");
 headerNames.add("roles");
+
+if (portletName.equals(PortletKeys.ADMIN)) {
+	headerNames.add("search-index");
+}
 
 SearchContainer searchContainer = new SearchContainer(renderRequest, null, null, SearchContainer.DEFAULT_CUR_PARAM, SearchContainer.DEFAULT_DELTA, portletURL, headerNames, null);
 
@@ -125,6 +138,22 @@ for (int i = 0; i < results.size(); i++) {
 	// Roles
 
 	row.addText(StringUtil.merge(portlet.getRolesArray(), ", "));
+
+	// Search index
+
+	sb = new StringBuilder();
+
+	if (portletName.equals(PortletKeys.ADMIN) && Validator.isNotNull(portlet.getIndexerClass())) {
+		sb.append("<input onclick=\"");
+		sb.append(renderResponse.getNamespace());
+		sb.append("reindexPortlet('");
+		sb.append(portlet.getPortletId());
+		sb.append("');\" type=\"button\" value=\"");
+		sb.append(LanguageUtil.get(pageContext, "reindex"));
+		sb.append("\" />");
+	}
+
+	row.addText(sb.toString());
 
 	// Add result row
 

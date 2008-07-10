@@ -24,17 +24,21 @@ package com.liferay.portlet.admin.action;
 
 import com.liferay.portal.kernel.cache.CacheRegistry;
 import com.liferay.portal.kernel.cache.MultiVMPoolUtil;
+import com.liferay.portal.kernel.search.Indexer;
 import com.liferay.portal.kernel.servlet.SessionErrors;
 import com.liferay.portal.kernel.util.Constants;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Time;
+import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.kernel.webcache.WebCachePoolUtil;
 import com.liferay.portal.lastmodified.LastModifiedCSS;
 import com.liferay.portal.lastmodified.LastModifiedJavaScript;
+import com.liferay.portal.model.Portlet;
 import com.liferay.portal.search.lucene.LuceneIndexer;
 import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.security.permission.PermissionChecker;
+import com.liferay.portal.service.PortletLocalServiceUtil;
 import com.liferay.portal.struts.PortletAction;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.PortalInstances;
@@ -106,7 +110,7 @@ public class EditServerAction extends PortletAction {
 			gc();
 		}
 		else if (cmd.equals("reIndex")) {
-			reIndex();
+			reIndex(actionRequest);
 		}
 		else if (cmd.equals("shutdown")) {
 			shutdown(actionRequest);
@@ -151,19 +155,44 @@ public class EditServerAction extends PortletAction {
 		Runtime.getRuntime().gc();
 	}
 
-	protected void reIndex() throws Exception {
+	protected void reIndex(ActionRequest actionRequest) throws Exception {
+		String portletId = ParamUtil.getString(actionRequest, "portletId");
+
 		long[] companyIds = PortalInstances.getCompanyIds();
 
-		for (int i = 0; i < companyIds.length; i++) {
-			long companyId = companyIds[i];
+		if (Validator.isNull(portletId)) {
+			for (long companyId : companyIds) {
+				try {
+					LuceneIndexer indexer = new LuceneIndexer(companyId);
 
-			try {
-				LuceneIndexer indexer = new LuceneIndexer(companyId);
-
-				indexer.reIndex();
+					indexer.reIndex();
+				}
+				catch (Exception e) {
+					_log.error(e, e);
+				}
 			}
-			catch (Exception e) {
-				_log.error(e, e);
+		}
+		else {
+			Portlet portlet = PortletLocalServiceUtil.getPortletById(
+				companyIds[0], portletId);
+
+			if (portlet == null) {
+				return;
+			}
+
+			Indexer indexer = portlet.getIndexerInstance();
+
+			if (indexer == null) {
+				return;
+			}
+
+			for (long companyId : companyIds) {
+				try {
+					indexer.reIndex(new String[] {String.valueOf(companyId)});
+				}
+				catch (Exception e) {
+					_log.error(e, e);
+				}
 			}
 		}
 	}

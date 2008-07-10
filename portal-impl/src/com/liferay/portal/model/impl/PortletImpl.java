@@ -29,6 +29,7 @@ import com.liferay.portal.kernel.pop.MessageListener;
 import com.liferay.portal.kernel.portlet.ConfigurationAction;
 import com.liferay.portal.kernel.portlet.FriendlyURLMapper;
 import com.liferay.portal.kernel.portlet.PortletLayoutListener;
+import com.liferay.portal.kernel.search.Indexer;
 import com.liferay.portal.kernel.servlet.URLEncoder;
 import com.liferay.portal.kernel.util.ContentTypes;
 import com.liferay.portal.kernel.util.InstancePool;
@@ -487,6 +488,26 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 	 */
 	public void setIndexerClass(String indexerClass) {
 		_indexerClass = indexerClass;
+	}
+
+	/**
+	 * Gets the indexer instance of the portlet.
+	 *
+	 * @return		the indexer instance of the portlet
+	 */
+	public Indexer getIndexerInstance() {
+		if (Validator.isNotNull(getIndexerClass())) {
+			if (_portletApp.isWARFile()) {
+				PortletBag portletBag = PortletBagPool.get(getRootPortletId());
+
+				return portletBag.getIndexerInstance();
+			}
+			else {
+				return (Indexer)InstancePool.get(getIndexerClass());
+			}
+		}
+
+		return null;
 	}
 
 	/**

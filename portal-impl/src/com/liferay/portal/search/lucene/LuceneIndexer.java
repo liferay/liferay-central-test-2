@@ -23,7 +23,6 @@
 package com.liferay.portal.search.lucene;
 
 import com.liferay.portal.kernel.search.Indexer;
-import com.liferay.portal.kernel.util.InstancePool;
 import com.liferay.portal.kernel.util.ServerDetector;
 import com.liferay.portal.kernel.util.Time;
 import com.liferay.portal.model.Portlet;
@@ -112,31 +111,36 @@ public class LuceneIndexer implements Runnable {
 			Collections.sort(portlets, new PortletLuceneComparator());
 
 			for (Portlet portlet : portlets) {
-				String className = portlet.getIndexerClass();
+				if (!portlet.isActive()) {
+					continue;
+				}
 
-				if (portlet.isActive() && className != null) {
-					StopWatch stopWatch2 = null;
+				Indexer indexer = portlet.getIndexerInstance();
 
-					if (_log.isInfoEnabled()) {
-						stopWatch2 = new StopWatch();
+				if (indexer == null) {
+					continue;
+				}
 
-						stopWatch2.start();
-					}
+				String indexerClass = portlet.getIndexerClass();
 
-					if (_log.isInfoEnabled()) {
-						_log.info("Reindexing with " + className + " started");
-					}
+				StopWatch stopWatch2 = null;
 
-					Indexer indexer = (Indexer)InstancePool.get(className);
+				if (_log.isInfoEnabled()) {
+					stopWatch2 = new StopWatch();
 
-					indexer.reIndex(indexIds);
+					stopWatch2.start();
+				}
 
-					if (_log.isInfoEnabled()) {
-						_log.info(
-							"Reindexing with " + className + " completed in " +
-								(stopWatch2.getTime() / Time.SECOND) +
-									" seconds");
-					}
+				if (_log.isInfoEnabled()) {
+					_log.info("Reindexing with " + indexerClass + " started");
+				}
+
+				indexer.reIndex(indexIds);
+
+				if (_log.isInfoEnabled()) {
+					_log.info(
+						"Reindexing with " + indexerClass + " completed in " +
+							(stopWatch2.getTime() / Time.SECOND) + " seconds");
 				}
 			}
 

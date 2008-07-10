@@ -106,6 +106,8 @@ public interface Portlet extends PortletModel {
 
 	public void setIndexerClass(java.lang.String indexerClass);
 
+	public com.liferay.portal.kernel.search.Indexer getIndexerInstance();
+
 	public java.lang.String getOpenSearchClass();
 
 	public void setOpenSearchClass(java.lang.String openSearchClass);
