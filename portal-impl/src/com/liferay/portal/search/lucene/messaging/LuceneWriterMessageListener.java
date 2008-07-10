@@ -22,7 +22,6 @@
 
 package com.liferay.portal.search.lucene.messaging;
 
-import com.liferay.portal.kernel.json.JSONFactoryUtil;
 import com.liferay.portal.kernel.messaging.MessageListener;
 import com.liferay.portal.kernel.search.Document;
 import com.liferay.portal.kernel.search.messaging.SearchRequest;

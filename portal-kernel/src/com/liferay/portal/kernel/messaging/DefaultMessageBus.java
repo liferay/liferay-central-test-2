@@ -94,6 +94,45 @@ public class DefaultMessageBus implements MessageBus {
 		destinationModel.send(message);
 	}
 
+	public Object sendSynchronizedMessage(
+			String destination, Message message, long timeout)
+		throws MessageBusException {
+
+		Destination destinationModel = _destinations.get(destination);
+
+		if (destinationModel == null) {
+			if (_log.isWarnEnabled()) {
+				_log.warn("Destination " + destination + " is not configured");
+			}
+
+			return null;
+		}
+
+		Destination responseDestinationModel = _destinations.get(
+			getResponseDestination(destination));
+
+		if (responseDestinationModel == null) {
+			_log.error(
+				"Response destination " + destination + " is not configured");
+
+			return null;
+		}
+
+		ObjectResponseMessageListener responseMessageListener =
+			new ObjectResponseMessageListener(
+				destinationModel, responseDestinationModel, getNextResponseId(),
+				timeout);
+
+		responseDestinationModel.register(responseMessageListener);
+
+		try {
+			return responseMessageListener.send(message);
+		}
+		finally {
+			responseDestinationModel.unregister(responseMessageListener);
+		}
+	}
+
 	public String sendSynchronizedMessage(
 			String destination, String message, long timeout)
 		throws MessageBusException {
@@ -118,8 +157,8 @@ public class DefaultMessageBus implements MessageBus {
 			return null;
 		}
 
-		ResponseMessageListener responseMessageListener =
-			new ResponseMessageListener(
+		StringResponseMessageListener responseMessageListener =
+			new StringResponseMessageListener(
 				destinationModel, responseDestinationModel, getNextResponseId(),
 				timeout);
 

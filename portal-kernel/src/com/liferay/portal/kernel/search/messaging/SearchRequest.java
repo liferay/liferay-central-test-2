@@ -49,6 +49,10 @@ public class SearchRequest {
 	public SearchRequest() {
 	}
 
+	public SearchRequest(String command) {
+		this(command, 0, (String)null);
+	}
+
 	public SearchRequest(String command, long companyId, String id) {
 		this(command, companyId, id, null);
 	}

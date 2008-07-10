@@ -23,14 +23,15 @@
 package com.liferay.portal.kernel.messaging;
 
 /**
- * <a href="ResponseMessageListener.java.html"><b><i>View Source</i></b></a>
+ * <a href="StringResponseMessageListener.java.html"><b><i>View Source</i></b>
+ * </a>
  *
  * @author Brian Wing Shun Chan
  *
  */
-public class ResponseMessageListener implements MessageListener {
+public class StringResponseMessageListener implements MessageListener {
 
-	public ResponseMessageListener(
+	public StringResponseMessageListener(
 		Destination destination, Destination responseDestination,
 		String responseId, long timeout) {
 

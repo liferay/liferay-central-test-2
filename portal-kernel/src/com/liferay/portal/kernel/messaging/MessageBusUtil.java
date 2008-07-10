@@ -66,6 +66,21 @@ public class MessageBusUtil {
 		_instance._sendMessage(destination, message);
 	}
 
+	public static Object sendSynchronizedMessage(
+			String destination, Message message)
+		throws MessageBusException {
+
+		return _instance._sendSynchronizedMessage(destination, message);
+	}
+
+	public static Object sendSynchronizedMessage(
+			String destination, Message message, long timeout)
+		throws MessageBusException {
+
+		return _instance._sendSynchronizedMessage(
+			destination, message, timeout);
+	}
+
 	public static String sendSynchronizedMessage(
 			String destination, String message)
 		throws MessageBusException {
@@ -115,6 +130,21 @@ public class MessageBusUtil {
 
 	private void _sendMessage(String destination, String message) {
 		_messageBus.sendMessage(destination, message);
+	}
+
+	private Object _sendSynchronizedMessage(String destination, Message message)
+		throws MessageBusException {
+
+		return _messageBus.sendSynchronizedMessage(
+			destination, message, _DEFAULT_TIMEOUT);
+	}
+
+	private Object _sendSynchronizedMessage(
+			String destination, Message message, long timeout)
+		throws MessageBusException {
+
+		return _messageBus.sendSynchronizedMessage(
+			destination, message, timeout);
 	}
 
 	private String _sendSynchronizedMessage(String destination, String message)

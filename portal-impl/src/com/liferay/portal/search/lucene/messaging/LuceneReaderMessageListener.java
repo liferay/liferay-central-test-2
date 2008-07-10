@@ -22,11 +22,9 @@
 
 package com.liferay.portal.search.lucene.messaging;
 
-import com.liferay.portal.kernel.json.JSONFactoryUtil;
-import com.liferay.portal.kernel.json.JSONObject;
+import com.liferay.portal.kernel.messaging.Message;
 import com.liferay.portal.kernel.messaging.MessageBusUtil;
 import com.liferay.portal.kernel.messaging.MessageListener;
-import com.liferay.portal.kernel.search.Document;
 import com.liferay.portal.kernel.search.Hits;
 import com.liferay.portal.kernel.search.messaging.SearchRequest;
 import com.liferay.portal.kernel.util.Validator;
@@ -44,68 +42,51 @@ import org.apache.commons.logging.LogFactory;
 public class LuceneReaderMessageListener implements MessageListener {
 
 	public void receive(Object message) {
-		throw new UnsupportedOperationException();
-	}
-
-	public void receive(String message) {
 		try {
-			doReceive(message);
+			doReceive((Message)message);
 		}
 		catch (Exception e) {
 			_log.error("Unable to process message " + message, e);
 		}
 	}
 
-	public void doReceive(String message) throws Exception {
-		JSONObject jsonObj = JSONFactoryUtil.createJSONObject(message);
+	public void receive(String message) {
+		throw new UnsupportedOperationException();
+	}
 
-		String responseDestination = jsonObj.getString(
-			"lfrResponseDestination");
-		String responseId = jsonObj.getString("lfrResponseId");
+	public void doReceive(Message message) throws Exception {
+		String responseDestination = message.getResponseDestination();
+		String responseId = message.getResponseId();
 
-		jsonObj.remove("lfrResponseDestination");
-		jsonObj.remove("lfrResponseId");
-
-		SearchRequest searchRequest =
-			(SearchRequest)JSONFactoryUtil.deserialize(message);
+		SearchRequest searchRequest = (SearchRequest)message.getRequestValue();
 
 		String command = searchRequest.getCommand();
 
-		long companyId = searchRequest.getCompanyId();
-		String id = searchRequest.getId();
-		Document doc = searchRequest.getDocument();
-
 		if (command.equals(SearchRequest.COMMAND_INDEX_ONLY) &&
-				 Validator.isNotNull(responseDestination) &&
-				 Validator.isNotNull(responseId)) {
+			Validator.isNotNull(responseDestination) &&
+			Validator.isNotNull(responseId)) {
 
-			doCommandIndexOnly(responseDestination, responseId);
+			doCommandIndexOnly(message);
 		}
 		else if (command.equals(SearchRequest.COMMAND_SEARCH) &&
 				 Validator.isNotNull(responseDestination) &&
 				 Validator.isNotNull(responseId)) {
 
-			doCommandSearch(responseDestination, responseId, searchRequest);
+			doCommandSearch(message, searchRequest);
 		}
 	}
 
-	protected void doCommandIndexOnly(
-			String responseDestination, String responseId)
+	protected void doCommandIndexOnly(Message message)
 		throws Exception {
 
 		boolean indexOnly = LuceneSearchEngineUtil.isIndexReadOnly();
 
-		JSONObject jsonObj = JSONFactoryUtil.createJSONObject();
+		message.setResponseValue(Boolean.valueOf(indexOnly));
 
-		jsonObj.put("lfrResponseId", responseId);
-		jsonObj.put("indexOnly", indexOnly);
-
-		MessageBusUtil.sendMessage(responseDestination, jsonObj.toString());
+		MessageBusUtil.sendMessage(message.getResponseDestination(), message);
 	}
 
-	protected void doCommandSearch(
-			String responseDestination, String responseId,
-			SearchRequest searchRequest)
+	protected void doCommandSearch(Message message, SearchRequest searchRequest)
 		throws Exception {
 
 		Hits hits = LuceneSearchEngineUtil.search(
@@ -113,12 +94,9 @@ public class LuceneReaderMessageListener implements MessageListener {
 			searchRequest.getSort(), searchRequest.getStart(),
 			searchRequest.getEnd());
 
-		JSONObject jsonObj = JSONFactoryUtil.createJSONObject();
+		message.setResponseValue(hits);
 
-		jsonObj.put("lfrResponseId", responseId);
-		jsonObj.put("hits", JSONFactoryUtil.serialize(hits));
-
-		MessageBusUtil.sendMessage(responseDestination, jsonObj.toString());
+		MessageBusUtil.sendMessage(message.getResponseDestination(), message);
 	}
 
 	private static Log _log =

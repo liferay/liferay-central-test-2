@@ -25,6 +25,7 @@ package com.liferay.portal.kernel.search;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.messaging.DestinationNames;
+import com.liferay.portal.kernel.messaging.Message;
 import com.liferay.portal.kernel.messaging.MessageBusException;
 import com.liferay.portal.kernel.messaging.MessageBusUtil;
 import com.liferay.portal.kernel.search.messaging.SearchRequest;
@@ -120,25 +121,16 @@ public class SearchEngineUtil {
 			return _indexReadOnly.booleanValue();
 		}
 
-		StringBuilder sb = new StringBuilder();
-
-		sb.append("{\"javaClass\":\"");
-		sb.append(SearchRequest.class.getName());
-		sb.append("\",\"command\":\"");
-		sb.append(SearchRequest.COMMAND_INDEX_ONLY);
-		sb.append("\"}");
-
 		try {
-			String message = MessageBusUtil.sendSynchronizedMessage(
-				DestinationNames.SEARCH_READER, sb.toString());
+			Message message = new Message(
+				new SearchRequest(SearchRequest.COMMAND_INDEX_ONLY));
 
-			if ((message.indexOf("true") != -1)) {
-				_indexReadOnly = Boolean.TRUE;
+			_indexReadOnly = (Boolean)MessageBusUtil.sendSynchronizedMessage(
+				DestinationNames.SEARCH_READER, message);
 
-				return _indexReadOnly.booleanValue();
+			if (_indexReadOnly == null) {
+				_indexReadOnly = Boolean.FALSE;
 			}
-
-			_indexReadOnly = Boolean.FALSE;
 
 			return _indexReadOnly.booleanValue();
 		}

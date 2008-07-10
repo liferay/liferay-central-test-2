@@ -22,9 +22,8 @@
 
 package com.liferay.portal.search;
 
-import com.liferay.portal.kernel.json.JSONFactoryUtil;
-import com.liferay.portal.kernel.json.JSONObject;
 import com.liferay.portal.kernel.messaging.DestinationNames;
+import com.liferay.portal.kernel.messaging.Message;
 import com.liferay.portal.kernel.messaging.MessageBusUtil;
 import com.liferay.portal.kernel.search.Hits;
 import com.liferay.portal.kernel.search.IndexSearcher;
@@ -55,13 +54,10 @@ public class IndexSearcherImpl implements IndexSearcher {
 				SearchRequest.COMMAND_SEARCH, companyId, query, sort,
 				start, end);
 
-			String message = MessageBusUtil.sendSynchronizedMessage(
-				DestinationNames.SEARCH_READER,
-				JSONFactoryUtil.serialize(searchRequest));
+			Hits hits = (Hits)MessageBusUtil.sendSynchronizedMessage(
+				DestinationNames.SEARCH_READER, new Message(searchRequest));
 
-			JSONObject jsonObj = JSONFactoryUtil.createJSONObject(message);
-
-			return (Hits)JSONFactoryUtil.deserialize(jsonObj.getString("hits"));
+			return hits;
 		}
 		catch (Exception e) {
 			throw new SearchException(e);

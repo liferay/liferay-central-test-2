@@ -22,38 +22,51 @@
 
 package com.liferay.portal.kernel.messaging;
 
+import com.liferay.portal.kernel.util.StringPool;
+
 /**
- * <a href="MessageBus.java.html"><b><i>View Source</i></b></a>
+ * <a href="Message.java.html"><b><i>View Source</i></b></a>
  *
- * @author Michael C. Han
+ * @author Brian Wing Shun Chan
  *
  */
-public interface MessageBus {
+public class Message {
 
-	public void addDestination(Destination destination);
+	public Message(Object requestValue) {
+		_requestValue = requestValue;
+	}
 
-	public void registerMessageListener(
-		String destination, MessageListener listener);
+	public String getResponseDestination() {
+		return _responseDestination;
+	}
 
-	public void removeDestination(String destination);
+	public void setResponseDestination(String responseDestination) {
+		_responseDestination = responseDestination;
+	}
 
-	public void sendMessage(String destination, Object message);
+	public String getResponseId() {
+		return _responseId;
+	}
 
-	public void sendMessage(String destination, String message);
+	public void setResponseId(String responseId) {
+		_responseId = responseId;
+	}
 
-	public Object sendSynchronizedMessage(
-			String destination, Message message, long timeout)
-		throws MessageBusException;
+	public Object getRequestValue() {
+		return _requestValue;
+	}
 
-	public String sendSynchronizedMessage(
-			String destination, String message, long timeout)
-		throws MessageBusException;
+	public Object getResponseValue() {
+		return _responseValue;
+	}
 
-	public void shutdown();
+	public void setResponseValue(Object responseValue) {
+		_responseValue = responseValue;
+	}
 
-	public void shutdown(boolean force);
-
-	public boolean unregisterMessageListener(
-		String destination, MessageListener listener);
+	private String _responseDestination = StringPool.BLANK;
+	private String _responseId = StringPool.BLANK;
+	private Object _requestValue;
+	private Object _responseValue;
 
 }
