@@ -43,6 +43,9 @@ import com.liferay.portlet.wiki.model.WikiPage;
 
 import java.util.List;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+
 /**
  * <a href="TagsUtil.java.html"><b><i>View Source</i></b></a>
  *
@@ -85,6 +88,12 @@ public class TagsUtil {
 			for (char c : wordCharArray) {
 				for (char invalidChar : INVALID_CHARACTERS) {
 					if (c == invalidChar) {
+						if (_log.isDebugEnabled()) {
+							_log.debug(
+								"Word " + word + " is not valid because " + c +
+									" is not allowed");
+						}
+
 						return false;
 					}
 				}
@@ -135,18 +144,19 @@ public class TagsUtil {
 			for (int i = 0; i < textCharArray.length; i++) {
 				char c = textCharArray[i];
 
-				if (!Validator.isChar(c) && !Validator.isDigit(c) &&
-					(c != CharPool.CLOSE_PARENTHESIS) &&
-					(c != CharPool.DASH) && (c != CharPool.OPEN_PARENTHESIS) &&
-					(c != CharPool.PERIOD) && (c != CharPool.SPACE) &&
-					(c != CharPool.UNDERLINE)) {
+				for (char invalidChar : INVALID_CHARACTERS) {
+					if (c == invalidChar) {
+						textCharArray[i] = CharPool.SPACE;
 
-					textCharArray[i] = CharPool.SPACE;
+						break;
+					}
 				}
 			}
 
 			return new String(textCharArray);
 		}
 	}
+
+	private static Log _log = LogFactory.getLog(TagsUtil.class);
 
 }

@@ -532,6 +532,10 @@
 		<priority value="DEBUG" />
 	</category>
 
+	<category name="com.liferay.portlet.tags.util.TagsUtil">
+		<priority value="ERROR" />
+	</category>
+
 	<category name="com.liferay.portlet.wsrp">
 		<priority value="ERROR" />
 	</category>
