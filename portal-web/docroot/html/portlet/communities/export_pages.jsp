@@ -224,13 +224,13 @@ response.setHeader("Ajax-ID", request.getHeader("Ajax-ID"));
 </c:if>
 
 <%
-String tabs2Names = "pages,options";
+String exportPagesTabsNames = "pages,options";
 
 if (!localPublishing) {
-	tabs2Names += ",remote-options";
+	exportPagesTabsNames += ",remote-options";
 }
 
-tabs2Names += ",scheduler";
+exportPagesTabsNames += ",scheduler";
 
 String actionKey = "copy";
 
@@ -240,8 +240,8 @@ if (selGroup.isStagingGroup() || popupId.equals("publish-to-remote")) {
 %>
 
 <liferay-ui:tabs
-	names="<%= tabs2Names %>"
-	param="tabs2a"
+	names="<%= exportPagesTabsNames %>"
+	param="exportPagesTabs"
 	refresh="<%= false %>"
 >
 	<liferay-ui:section>

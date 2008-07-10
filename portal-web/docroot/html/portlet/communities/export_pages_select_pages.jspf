@@ -30,15 +30,15 @@
 	}
 
 	function <portlet:namespace />hideTabs() {
-		jQuery('#<portlet:namespace />tabs2optionsTabsId').hide();
-		jQuery('#<portlet:namespace />tabs2schedulerTabsId').hide();
-		jQuery('#<portlet:namespace />tabs2remote-optionsTabsId').hide();
+		jQuery('#<portlet:namespace />exportPagesTabsoptionsTabsId').hide();
+		jQuery('#<portlet:namespace />exportPagesTabsschedulerTabsId').hide();
+		jQuery('#<portlet:namespace />exportPagesTabsremote-optionsTabsId').hide();
 	}
 
 	function <portlet:namespace />showTabs() {
-		jQuery('#<portlet:namespace />tabs2optionsTabsId').show();
-		jQuery('#<portlet:namespace />tabs2schedulerTabsId').show();
-		jQuery('#<portlet:namespace />tabs2remote-optionsTabsId').show();
+		jQuery('#<portlet:namespace />exportPagesTabsoptionsTabsId').show();
+		jQuery('#<portlet:namespace />exportPagesTabsschedulerTabsId').show();
+		jQuery('#<portlet:namespace />exportPagesTabsremote-optionsTabsId').show();
 	}
 </script>
 
