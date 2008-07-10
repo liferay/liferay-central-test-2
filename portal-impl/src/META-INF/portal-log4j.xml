@@ -496,6 +496,10 @@
 		<priority value="WARN" />
 	</category>
 
+	<category name="com.liferay.portlet.journal.util.RegexTransformerUtil">
+		<priority value="INFO" />
+	</category>
+
 	<category name="com.liferay.portlet.journalcontent.JournalContentPortletLayoutListener">
 		<priority value="ERROR" />
 	</category>
