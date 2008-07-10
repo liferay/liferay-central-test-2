@@ -142,14 +142,16 @@ public class MediaWikiToCreoleTranslator extends BaseTranslator {
 			content = runRegexp(content, "^=([^=]+)=", "==$1==");
 		}
 
-		matcher = Pattern.compile(
-			"\\[{2}([^\\]]*)\\]{2}", Pattern.DOTALL).matcher(content);
-
 		// Remove HTML tags
 
 		for (int i = 0; i < _HTML_TAGS.length; i++) {
 			content = content.replaceAll(_HTML_TAGS[i], StringPool.BLANK);
 		}
+
+		// Remove underscores from links
+
+		matcher = Pattern.compile(
+			"\\[{2}([^\\]]*)\\]{2}", Pattern.DOTALL).matcher(content);
 
 		StringBuffer sb = new StringBuffer(content);
 
