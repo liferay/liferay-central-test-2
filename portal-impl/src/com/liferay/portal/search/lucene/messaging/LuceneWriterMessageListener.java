@@ -40,10 +40,6 @@ import org.apache.commons.logging.LogFactory;
 public class LuceneWriterMessageListener implements MessageListener {
 
 	public void receive(Object message) {
-		throw new UnsupportedOperationException();
-	}
-
-	public void receive(String message) {
 		try {
 			doReceive(message);
 		}
@@ -52,9 +48,12 @@ public class LuceneWriterMessageListener implements MessageListener {
 		}
 	}
 
-	public void doReceive(String message) throws Exception {
-		SearchRequest searchRequest =
-			(SearchRequest)JSONFactoryUtil.deserialize(message);
+	public void receive(String message) {
+		throw new UnsupportedOperationException();
+	}
+
+	public void doReceive(Object message) throws Exception {
+		SearchRequest searchRequest = (SearchRequest)message;
 
 		String command = searchRequest.getCommand();
 
