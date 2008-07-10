@@ -76,6 +76,10 @@
 			for (int i = 0; i < results.getDocs().length; i++) {
 				Document doc = results.doc(i);
 
+				if (doc == null) {
+					continue;
+				}
+
 				ResultRow row = new ResultRow(doc, i, i);
 
 				// Position
