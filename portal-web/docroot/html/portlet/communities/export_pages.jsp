@@ -241,7 +241,7 @@ if (selGroup.isStagingGroup() || popupId.equals("publish-to-remote")) {
 
 <liferay-ui:tabs
 	names="<%= tabs2Names %>"
-	param="tabs2"
+	param="tabs2a"
 	refresh="<%= false %>"
 >
 	<liferay-ui:section>
