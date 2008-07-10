@@ -29,6 +29,7 @@ import com.liferay.portal.model.CompanyConstants;
 import com.liferay.portal.service.CompanyLocalServiceUtil;
 import com.liferay.portal.util.PropsKeys;
 import com.liferay.portal.util.PropsUtil;
+import com.liferay.portal.util.PropsValues;
 import com.liferay.util.SystemProperties;
 
 import java.io.File;
@@ -71,7 +72,7 @@ import org.apache.lucene.store.FSDirectory;
 public class IndexWriterFactory {
 
 	public IndexWriterFactory() {
-		if (LuceneUtil.INDEX_READ_ONLY) {
+		if (PropsValues.INDEX_READ_ONLY) {
 			return;
 		}
 
@@ -94,7 +95,7 @@ public class IndexWriterFactory {
 	public void acquireLock(long companyId, boolean needExclusive)
 		throws InterruptedException {
 
-		if (LuceneUtil.INDEX_READ_ONLY) {
+		if (PropsValues.INDEX_READ_ONLY) {
 			return;
 		}
 
@@ -133,7 +134,7 @@ public class IndexWriterFactory {
 	public void deleteDocuments(long companyId, Term term)
 		throws InterruptedException, IOException {
 
-		if (LuceneUtil.INDEX_READ_ONLY) {
+		if (PropsValues.INDEX_READ_ONLY) {
 			return;
 		}
 
@@ -161,7 +162,7 @@ public class IndexWriterFactory {
 	public IndexWriter getWriter(long companyId, boolean create)
 		throws IOException {
 
-		if (LuceneUtil.INDEX_READ_ONLY) {
+		if (PropsValues.INDEX_READ_ONLY) {
 			return getReadOnlyIndexWriter();
 		}
 
@@ -221,7 +222,7 @@ public class IndexWriterFactory {
 	}
 
 	public void releaseLock(long companyId) {
-		if (LuceneUtil.INDEX_READ_ONLY) {
+		if (PropsValues.INDEX_READ_ONLY) {
 			return;
 		}
 
@@ -233,7 +234,7 @@ public class IndexWriterFactory {
 	}
 
 	public void write(long companyId) {
-		if (LuceneUtil.INDEX_READ_ONLY) {
+		if (PropsValues.INDEX_READ_ONLY) {
 			return;
 		}
 
@@ -250,7 +251,7 @@ public class IndexWriterFactory {
 	}
 
 	public void write(IndexWriter writer) throws IOException {
-		if (LuceneUtil.INDEX_READ_ONLY) {
+		if (PropsValues.INDEX_READ_ONLY) {
 			return;
 		}
 

@@ -97,7 +97,7 @@ public class ViewAction extends PortletAction {
 	protected String renameTemplateColumnsAndIds(
 		String content, Portlet portlet) {
 
-		Matcher matcher = _SEARCH_COLUMNS_AND_IDS_PATTERN.matcher(content);
+		Matcher matcher = _pattern.matcher(content);
 
 		Set<String> columnIds = new HashSet<String>();
 
@@ -121,9 +121,8 @@ public class ViewAction extends PortletAction {
 		return content;
 	}
 
-	private static final Pattern _SEARCH_COLUMNS_AND_IDS_PATTERN =
-		Pattern.compile(
-			"processColumn[(]\"(.*?)\"[)]|[<].*?id=[\"']([^ ]*?)[\"'].*?[>]",
-			Pattern.DOTALL);
+	private static Pattern _pattern = Pattern.compile(
+		"processColumn[(]\"(.*?)\"[)]|[<].*?id=[\"']([^ ]*?)[\"'].*?[>]",
+		Pattern.DOTALL);
 
 }

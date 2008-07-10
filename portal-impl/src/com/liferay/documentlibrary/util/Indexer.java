@@ -34,7 +34,7 @@ import com.liferay.portal.kernel.search.SearchException;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;
-import com.liferay.portal.search.lucene.LuceneUtil;
+import com.liferay.portal.util.PropsValues;
 import com.liferay.portlet.documentlibrary.NoSuchFileEntryException;
 import com.liferay.portlet.documentlibrary.model.DLFileEntry;
 import com.liferay.portlet.documentlibrary.service.DLFileEntryLocalServiceUtil;
@@ -273,7 +273,7 @@ public class Indexer implements com.liferay.portal.kernel.search.Indexer {
 	}
 
 	public void reIndex(String[] ids) throws SearchException {
-		if (LuceneUtil.INDEX_READ_ONLY) {
+		if (PropsValues.INDEX_READ_ONLY) {
 			return;
 		}
 

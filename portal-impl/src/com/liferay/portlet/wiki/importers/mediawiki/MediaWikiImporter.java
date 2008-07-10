@@ -233,7 +233,7 @@ public class MediaWikiImporter implements WikiImporter {
 
 	protected String normalizeDescription(String description) {
 		description = description.replaceAll(
-			_CATEGORIES_REGEXP, StringPool.BLANK);
+			_categoriesPattern.pattern(), StringPool.BLANK);
 
 		return normalize(description, 300);
 	}
@@ -486,7 +486,7 @@ public class MediaWikiImporter implements WikiImporter {
 	}
 
 	protected String readRedirectTitle(String content) {
-		Matcher matcher = _REDIRECT_REGEXP_PATTERN.matcher(content);
+		Matcher matcher = _redirectPattern.matcher(content);
 
 		String redirectTitle = StringPool.BLANK;
 
@@ -520,7 +520,7 @@ public class MediaWikiImporter implements WikiImporter {
 			long userId, WikiNode node, String content)
 		throws PortalException, SystemException {
 
-		Matcher matcher = _CATEGORIES_REGEXP_PATTERN.matcher(content);
+		Matcher matcher = _categoriesPattern.matcher(content);
 
 		List<String> tagsEntries = new ArrayList<String>();
 
@@ -581,22 +581,15 @@ public class MediaWikiImporter implements WikiImporter {
 		return usersMap;
 	}
 
-	private static final String _CATEGORIES_REGEXP =
-		"\\[\\[[Cc]ategory:([^\\]]*)\\]\\][\\n]*";
-
-	private static final Pattern _CATEGORIES_REGEXP_PATTERN = Pattern.compile(
-		_CATEGORIES_REGEXP);
-
-	private static final String _REDIRECT_REGEXP =
-		"#REDIRECT \\[\\[([^\\]]*)\\]\\]";
-
-	private static final Pattern _REDIRECT_REGEXP_PATTERN = Pattern.compile(
-		_REDIRECT_REGEXP);
-
 	private static final String[] _SPECIAL_MEDIA_WIKI_DIRS = new String[]{
 		"thumb", "temp", "archive"};
 
 	private static Log _log = LogFactory.getLog(MediaWikiImporter.class);
+
+	private static Pattern _categoriesPattern = Pattern.compile(
+		"\\[\\[[Cc]ategory:([^\\]]*)\\]\\][\\n]*");
+	private static Pattern _redirectPattern = Pattern.compile(
+		"#REDIRECT \\[\\[([^\\]]*)\\]\\]");
 
 	private MediaWikiToCreoleTranslator _translator =
 		new MediaWikiToCreoleTranslator();

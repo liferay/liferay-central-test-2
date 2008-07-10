@@ -209,12 +209,12 @@ public class SourceFormatter {
 	}
 
 	private static void _checkXSS(String fileName, String jspContent) {
-		Matcher stringParamMatcher = _STRING_PARAM_PATTERN.matcher(jspContent);
+		Matcher matcher = _xssPattern.matcher(jspContent);
 
-		while (stringParamMatcher.find()) {
+		while (matcher.find()) {
 			boolean xssVulnerable = false;
 
-			String jspVariable = stringParamMatcher.group(1);
+			String jspVariable = matcher.group(1);
 
 			String inputVulnerability =
 				" type=\"hidden\" value=\"<%= " + jspVariable + " %>";
@@ -743,17 +743,15 @@ public class SourceFormatter {
 		is.close();
 	}
 
-	private static final Pattern _STRING_PARAM_PATTERN = Pattern.compile(
-		"String\\s+([^\\s]+)\\s*=\\s*ParamUtil\\.getString\\(");
-
 	private static final String[] _TAG_LIBRARIES = new String[] {
 		"c", "html", "jsp", "liferay-portlet", "liferay-security",
 		"liferay-theme", "liferay-ui", "liferay-util", "portlet", "struts",
 		"tiles"
 	};
 
-	private static Properties _exclusions;
-
 	private static FileImpl _fileUtil = new FileImpl();
+	private static Properties _exclusions;
+	private static Pattern _xssPattern = Pattern.compile(
+		"String\\s+([^\\s]+)\\s*=\\s*ParamUtil\\.getString\\(");
 
 }

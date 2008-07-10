@@ -98,7 +98,7 @@ public class CodeBlock extends AbstractStringFetcher {
 		return content;
 	}
 
-	private static final Pattern _pattern = Pattern.compile(
+	private static Pattern _pattern = Pattern.compile(
 		"\\[code\\]((.|\\n)*?)\\[/code\\]",
 		Pattern.MULTILINE | Pattern.UNIX_LINES);
 

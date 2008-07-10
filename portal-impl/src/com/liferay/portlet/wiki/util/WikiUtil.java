@@ -328,7 +328,7 @@ public class WikiUtil {
 		editPageURLString = StringUtil.replace(
 			editPageURLString, "__REPLACEMENT__", "$1");
 
-		Matcher matcher = _EDIT_PAGE_URL_PATTERN.matcher(content);
+		Matcher matcher = _editPageURLPattern.matcher(content);
 
 		content = matcher.replaceAll(editPageURLString);
 
@@ -339,7 +339,7 @@ public class WikiUtil {
 		viewPageURLString = StringUtil.replace(
 			viewPageURLString, "__REPLACEMENT__", "$1");
 
-		matcher = _VIEW_PAGE_URL_PATTERN.matcher(content);
+		matcher = _viewPageURLPattern.matcher(content);
 
 		content = matcher.replaceAll(viewPageURLString);
 
@@ -450,13 +450,12 @@ public class WikiUtil {
 		return _getEngine(format).validate(nodeId, content);
 	}
 
-	private static final Pattern _EDIT_PAGE_URL_PATTERN = Pattern.compile(
-		"\\[\\$BEGIN_PAGE_TITLE_EDIT\\$\\](.*?)\\[\\$END_PAGE_TITLE_EDIT\\$\\]");
-
-	private static final Pattern _VIEW_PAGE_URL_PATTERN = Pattern.compile(
-		"\\[\\$BEGIN_PAGE_TITLE\\$\\](.*?)\\[\\$END_PAGE_TITLE\\$\\]");
-
 	private static WikiUtil _instance = new WikiUtil();
+
+	private static Pattern _editPageURLPattern = Pattern.compile(
+		"\\[\\$BEGIN_PAGE_TITLE_EDIT\\$\\](.*?)\\[\\$END_PAGE_TITLE_EDIT\\$\\]");
+	private static Pattern _viewPageURLPattern = Pattern.compile(
+		"\\[\\$BEGIN_PAGE_TITLE\\$\\](.*?)\\[\\$END_PAGE_TITLE\\$\\]");
 
 	private Map<String, WikiEngine> _engines =
 		new HashMap<String, WikiEngine>();

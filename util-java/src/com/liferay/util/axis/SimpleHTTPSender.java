@@ -54,13 +54,6 @@ import org.apache.commons.logging.LogFactory;
  */
 public class SimpleHTTPSender extends HTTPSender {
 
-	public static final String URL_REGEXP_PATTERN = GetterUtil.getString(
-		SystemProperties.get(
-			SimpleHTTPSender.class.getName() + ".regexp.pattern"));
-
-	public static final Pattern URL_PATTERN = Pattern.compile(
-		URL_REGEXP_PATTERN);
-
 	public static String getCurrentCookie() {
 		return _currentCookie.get();
 	}
@@ -68,7 +61,7 @@ public class SimpleHTTPSender extends HTTPSender {
 	public void invoke(MessageContext ctx) throws AxisFault {
 		String url = ctx.getStrProp(MessageContext.TRANS_URL);
 
-		if (URL_PATTERN.matcher(url).matches()) {
+		if (_pattern.matcher(url).matches()) {
 			if (_log.isDebugEnabled()) {
 				_log.debug("A match was found for " + url);
 			}
@@ -178,5 +171,9 @@ public class SimpleHTTPSender extends HTTPSender {
 	};
 
 	private static Log _log = LogFactory.getLog(SimpleHTTPSender.class);
+
+	private static Pattern _pattern = Pattern.compile(
+		SystemProperties.get(
+			SimpleHTTPSender.class.getName() + ".regexp.pattern"));
 
 }

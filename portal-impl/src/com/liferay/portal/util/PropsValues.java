@@ -427,6 +427,9 @@ public class PropsValues {
 		GetterUtil.getInteger(
 			PropsUtil.get(PropsKeys.IG_IMAGE_THUMBNAIL_MAX_DIMENSION));
 
+	public static final boolean INDEX_READ_ONLY = GetterUtil.getBoolean(
+		PropsUtil.get(PropsKeys.INDEX_READ_ONLY));
+
 	public static final boolean JAVASCRIPT_BAREBONE_ENABLED =
 		GetterUtil.getBoolean(
 			PropsUtil.get(PropsKeys.JAVASCRIPT_BAREBONE_ENABLED));

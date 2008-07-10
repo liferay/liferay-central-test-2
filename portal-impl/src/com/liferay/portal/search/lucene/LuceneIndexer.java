@@ -27,6 +27,7 @@ import com.liferay.portal.kernel.util.ServerDetector;
 import com.liferay.portal.kernel.util.Time;
 import com.liferay.portal.model.Portlet;
 import com.liferay.portal.service.PortletLocalServiceUtil;
+import com.liferay.portal.util.PropsValues;
 import com.liferay.portal.util.comparator.PortletLuceneComparator;
 
 import java.io.IOException;
@@ -63,7 +64,7 @@ public class LuceneIndexer implements Runnable {
 	}
 
 	public void reIndex() {
-		if (LuceneUtil.INDEX_READ_ONLY) {
+		if (PropsValues.INDEX_READ_ONLY) {
 			return;
 		}
 

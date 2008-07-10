@@ -25,6 +25,7 @@ package com.liferay.portal.search.lucene;
 import com.liferay.portal.kernel.search.IndexSearcher;
 import com.liferay.portal.kernel.search.IndexWriter;
 import com.liferay.portal.kernel.search.SearchEngine;
+import com.liferay.portal.util.PropsValues;
 
 /**
  * <a href="LuceneSearchEngineImpl.java.html"><b><i>View Source</i></b></a>
@@ -52,7 +53,7 @@ public class LuceneSearchEngineImpl implements SearchEngine {
 	}
 
 	public boolean isIndexReadOnly() {
-		return LuceneUtil.INDEX_READ_ONLY;
+		return PropsValues.INDEX_READ_ONLY;
 	}
 
 	private static final String _NAME = "LUCENE";

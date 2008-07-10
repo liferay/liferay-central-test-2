@@ -274,7 +274,7 @@ public class Validator {
 	}
 
 	public static boolean isIPAddress(String ipAddress){
-		Matcher matcher = _IP_ADDRESS_REGEXP_PATTERN.matcher(ipAddress);
+		Matcher matcher = _ipAddressPattern.matcher(ipAddress);
 
 		return matcher.matches();
 	}
@@ -475,26 +475,23 @@ public class Validator {
 
 	private static final int _DIGIT_END = 57;
 
-	private static char[] _EMAIL_ADDRESS_SPECIAL_CHAR = new char[] {
+	private static final char[] _EMAIL_ADDRESS_SPECIAL_CHAR = new char[] {
 		'.', '!', '#', '$', '%', '&', '\'', '*', '+', '-', '/', '=', '?', '^',
 		'_', '`', '{', '|', '}', '~'
 	};
 
-	private static String _IP_ADDRESS_REGEXP =
+	private static final String _VARIABLE_TERM_BEGIN = "[$";
+
+	private static final String _VARIABLE_TERM_END = "$]";
+
+	private static Log _log = LogFactoryUtil.getLog(Validator.class);
+
+	private static Pattern _ipAddressPattern = Pattern.compile(
 		"\\b" +
 		"((?!\\d\\d\\d)\\d+|1\\d\\d|2[0-4]\\d|25[0-5])\\." +
 		"((?!\\d\\d\\d)\\d+|1\\d\\d|2[0-4]\\d|25[0-5])\\." +
 		"((?!\\d\\d\\d)\\d+|1\\d\\d|2[0-4]\\d|25[0-5])\\." +
 		"((?!\\d\\d\\d)\\d+|1\\d\\d|2[0-4]\\d|25[0-5])" +
-		"\\b";
-
-	private static final Pattern _IP_ADDRESS_REGEXP_PATTERN = Pattern.compile(
-		_IP_ADDRESS_REGEXP);
-
-	private static String _VARIABLE_TERM_BEGIN = "[$";
-
-	private static String _VARIABLE_TERM_END = "$]";
-
-	private static Log _log = LogFactoryUtil.getLog(Validator.class);
+		"\\b");
 
 }

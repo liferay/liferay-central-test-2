@@ -26,7 +26,6 @@ import com.liferay.portal.kernel.dao.jdbc.DataAccess;
 import com.liferay.portal.kernel.jndi.PortalJNDIUtil;
 import com.liferay.portal.kernel.search.Field;
 import com.liferay.portal.kernel.util.FileUtil;
-import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.PortalClassLoaderUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;
@@ -45,7 +44,6 @@ import java.sql.Statement;
 import java.util.Date;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
-import java.util.regex.Pattern;
 
 import javax.naming.NamingException;
 
@@ -83,12 +81,6 @@ import org.apache.lucene.store.jdbc.support.JdbcTemplate;
  *
  */
 public class LuceneUtil {
-
-	public static boolean INDEX_READ_ONLY = GetterUtil.getBoolean(
-		PropsUtil.get(PropsKeys.INDEX_READ_ONLY));
-
-	public static final Pattern TERM_END_PATTERN =
-		Pattern.compile("(\\w{4,}?)\\b");
 
 	public static void acquireLock(long companyId) {
 		try {
@@ -176,23 +168,6 @@ public class LuceneUtil {
 		throws ParseException {
 
 		if (Validator.isNotNull(text)) {
-			//Matcher matcher = TERM_END_PATTERN.matcher(text);
-
-			// Add wildcard to the end of every word 4 chars or longer
-
-			//text = matcher.replaceAll("$1*");
-
-			// Add fuzzy query to the end of every word 4 chars or longer
-
-			//text = text + " " + matcher.replaceAll("$1~");
-
-			// Remove invalid hints
-
-			//text = StringUtil.replace(text, "**", "*");
-			//text = StringUtil.replace(text, "*~", "*");
-			//text = StringUtil.replace(text, "~~", "~");
-			//text = StringUtil.replace(text, "~*", "~");
-
 			QueryParser queryParser = new QueryParser(
 				field, LuceneUtil.getAnalyzer());
 
@@ -228,7 +203,7 @@ public class LuceneUtil {
 	}
 
 	public static void checkLuceneDir(long companyId) {
-		if (INDEX_READ_ONLY) {
+		if (PropsValues.INDEX_READ_ONLY) {
 			return;
 		}
 
@@ -391,7 +366,7 @@ public class LuceneUtil {
 	}
 
 	public void _delete(long companyId) {
-		if (LuceneUtil.INDEX_READ_ONLY) {
+		if (PropsValues.INDEX_READ_ONLY) {
 			return;
 		}
 
