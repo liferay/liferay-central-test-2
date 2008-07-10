@@ -1760,11 +1760,13 @@ public class JournalArticleLocalServiceImpl
 			String articleId = article.getArticleId();
 			double version = article.getVersion();
 
-			_log.error(
-				"Article {groupId=" + groupId + ", articleId=" + articleId +
-					", version=" + version +
-						"} has content that does not match its structure: " +
-							sxsde.getMessage());
+			if (_log.isWarnEnabled()) {
+				_log.warn(
+					"Article {groupId=" + groupId + ", articleId=" +
+						articleId + ", version=" + version +
+							"} has content that does not match its " +
+								"structure: " + sxsde.getMessage());
+			}
 		}
 	}
 
