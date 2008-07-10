@@ -42,7 +42,8 @@ public class IndexWriterImpl implements IndexWriter {
 			SearchRequest.COMMAND_ADD, companyId, doc);
 
 		MessageBusUtil.sendMessage(
-			DestinationNames.SEARCH, JSONFactoryUtil.serialize(searchRequest));
+			DestinationNames.SEARCH_WRITER,
+			JSONFactoryUtil.serialize(searchRequest));
 	}
 
 	public void deleteDocument(long companyId, String uid) {
@@ -50,7 +51,8 @@ public class IndexWriterImpl implements IndexWriter {
 			SearchRequest.COMMAND_DELETE, companyId, uid);
 
 		MessageBusUtil.sendMessage(
-			DestinationNames.SEARCH, JSONFactoryUtil.serialize(searchRequest));
+			DestinationNames.SEARCH_WRITER,
+			JSONFactoryUtil.serialize(searchRequest));
 	}
 
 	public void deletePortletDocuments(long companyId, String portletId) {
@@ -59,7 +61,8 @@ public class IndexWriterImpl implements IndexWriter {
 			portletId);
 
 		MessageBusUtil.sendMessage(
-			DestinationNames.SEARCH, JSONFactoryUtil.serialize(searchRequest));
+			DestinationNames.SEARCH_WRITER,
+			JSONFactoryUtil.serialize(searchRequest));
 	}
 
 	public void updateDocument(long companyId, String uid, Document doc) {
@@ -67,7 +70,8 @@ public class IndexWriterImpl implements IndexWriter {
 			SearchRequest.COMMAND_UPDATE, companyId, uid, doc);
 
 		MessageBusUtil.sendMessage(
-			DestinationNames.SEARCH, JSONFactoryUtil.serialize(searchRequest));
+			DestinationNames.SEARCH_WRITER,
+			JSONFactoryUtil.serialize(searchRequest));
 	}
 
 }

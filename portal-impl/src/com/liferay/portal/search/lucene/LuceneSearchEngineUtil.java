@@ -26,12 +26,14 @@ import com.liferay.portal.kernel.messaging.Destination;
 import com.liferay.portal.kernel.messaging.DestinationNames;
 import com.liferay.portal.kernel.messaging.MessageBusUtil;
 import com.liferay.portal.kernel.messaging.ParallelDestination;
+import com.liferay.portal.kernel.messaging.SerialDestination;
 import com.liferay.portal.kernel.search.Document;
 import com.liferay.portal.kernel.search.Hits;
 import com.liferay.portal.kernel.search.SearchEngine;
 import com.liferay.portal.kernel.search.SearchException;
 import com.liferay.portal.kernel.search.Sort;
-import com.liferay.portal.search.lucene.messaging.LuceneMessageListener;
+import com.liferay.portal.search.lucene.messaging.LuceneReaderMessageListener;
+import com.liferay.portal.search.lucene.messaging.LuceneWriterMessageListener;
 
 /**
  * <a href="LuceneSearchEngineUtil.java.html"><b><i>View Source</i></b></a>
@@ -70,12 +72,19 @@ public class LuceneSearchEngineUtil {
 
 		_engine = new LuceneSearchEngineImpl();
 
-		Destination destination = new ParallelDestination(
-			DestinationNames.SEARCH);
+		Destination searchReadDestination = new ParallelDestination(
+			DestinationNames.SEARCH_READER);
 
-		MessageBusUtil.addDestination(destination);
+		MessageBusUtil.addDestination(searchReadDestination);
 
-		destination.register(new LuceneMessageListener());
+		searchReadDestination.register(new LuceneReaderMessageListener());
+
+		Destination searchWriteDestination = new SerialDestination(
+			DestinationNames.SEARCH_WRITER);
+
+		MessageBusUtil.addDestination(searchWriteDestination);
+
+		searchWriteDestination.register(new LuceneWriterMessageListener());
 	}
 
 	public static boolean isIndexReadOnly() {

@@ -65,17 +65,15 @@ import com.liferay.portalweb.portlet.randombibleverse.RandomBibleVerseTests;
 import com.liferay.portalweb.portlet.recentbloggers.RecentBloggersTests;
 import com.liferay.portalweb.portlet.reverendfun.ReverendFunTests;
 import com.liferay.portalweb.portlet.rss.RSSTests;
-import com.liferay.portalweb.portlet.samplesignin.SampleSignInTests;
 import com.liferay.portalweb.portlet.samplehibernate.SampleHibernateTests;
+import com.liferay.portalweb.portlet.samplejsp.SampleJSPTests;
 import com.liferay.portalweb.portlet.samplelar.SampleLARTests;
 import com.liferay.portalweb.portlet.samplelocalized.SampleLocalizedTests;
-import com.liferay.portalweb.portlet.samplejsp.SampleJSPTests;
 import com.liferay.portalweb.portlet.samplephp.SamplePHPTests;
-import com.liferay.portalweb.portlet.samplejsp.SampleJSPTests;
+import com.liferay.portalweb.portlet.samplesignin.SampleSignInTests;
 import com.liferay.portalweb.portlet.search.SearchTests;
 import com.liferay.portalweb.portlet.shopping.ShoppingTests;
 import com.liferay.portalweb.portlet.sitemap.SiteMapTests;
-import com.liferay.portalweb.portlet.smstextmessenger.SMSTextMessengerTests;
 import com.liferay.portalweb.portlet.smstextmessenger.SMSTextMessengerTests;
 import com.liferay.portalweb.portlet.softwarecatalog.SoftwareCatalogTests;
 import com.liferay.portalweb.portlet.stocks.StocksTests;
@@ -88,8 +86,8 @@ import com.liferay.portalweb.portlet.webform.WebFormTests;
 import com.liferay.portalweb.portlet.webproxy.WebProxyTests;
 import com.liferay.portalweb.portlet.wiki.WikiTests;
 import com.liferay.portalweb.portlet.wikidisplay.WikiDisplayTests;
-import com.liferay.portalweb.portlet.words.WordsTests;													  
-import com.liferay.portalweb.portlet.xslcontent.XSLContentTests;											
+import com.liferay.portalweb.portlet.words.WordsTests;
+import com.liferay.portalweb.portlet.xslcontent.XSLContentTests;
 
 /**
  * <a href="PortalWebTestSuite.java.html"><b><i>View Source</i></b></a>

@@ -56,7 +56,7 @@ public class IndexSearcherImpl implements IndexSearcher {
 				start, end);
 
 			String message = MessageBusUtil.sendSynchronizedMessage(
-				DestinationNames.SEARCH,
+				DestinationNames.SEARCH_READER,
 				JSONFactoryUtil.serialize(searchRequest));
 
 			JSONObject jsonObj = JSONFactoryUtil.createJSONObject(message);

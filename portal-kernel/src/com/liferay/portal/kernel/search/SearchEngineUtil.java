@@ -130,7 +130,7 @@ public class SearchEngineUtil {
 
 		try {
 			String message = MessageBusUtil.sendSynchronizedMessage(
-				DestinationNames.SEARCH, sb.toString());
+				DestinationNames.SEARCH_READER, sb.toString());
 
 			if ((message.indexOf("true") != -1)) {
 				_indexReadOnly = Boolean.TRUE;
