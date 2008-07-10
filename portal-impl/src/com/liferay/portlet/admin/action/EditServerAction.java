@@ -25,6 +25,7 @@ package com.liferay.portlet.admin.action;
 import com.liferay.portal.kernel.cache.CacheRegistry;
 import com.liferay.portal.kernel.cache.MultiVMPoolUtil;
 import com.liferay.portal.kernel.search.Indexer;
+import com.liferay.portal.kernel.search.SearchEngineUtil;
 import com.liferay.portal.kernel.servlet.SessionErrors;
 import com.liferay.portal.kernel.util.Constants;
 import com.liferay.portal.kernel.util.ParamUtil;
@@ -188,6 +189,9 @@ public class EditServerAction extends PortletAction {
 
 			for (long companyId : companyIds) {
 				try {
+					SearchEngineUtil.deletePortletDocuments(
+						companyId, portletId);
+
 					indexer.reIndex(new String[] {String.valueOf(companyId)});
 				}
 				catch (Exception e) {
