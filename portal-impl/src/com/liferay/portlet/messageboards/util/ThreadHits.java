@@ -69,8 +69,8 @@ public class ThreadHits {
 
 		docs = docs.subList(start, end);
 
-		hits.setDocs(docs.toArray(new Document[length]));
-		hits.setScores(scores.toArray(new Float[length]));
+		hits.setDocs(docs.toArray(new Document[docs.size()]));
+		hits.setScores(scores.toArray(new Float[docs.size()]));
 
 		hits.setSearchTime(
 			(float)(System.currentTimeMillis() - hits.getStart()) /
