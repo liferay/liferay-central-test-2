@@ -183,6 +183,8 @@
 	<classpathentry kind="lib" path="lib/portal/rome.jar"/>
 	<classpathentry kind="lib" path="lib/portal/saaj-api.jar"/>
 	<classpathentry kind="lib" path="lib/portal/saaj-impl.jar"/>
+	<classpathentry kind="lib" path="lib/portal/saw-api.jar"/>
+	<classpathentry kind="lib" path="lib/portal/saw-impl-jcaps.jar"/>
 	<classpathentry kind="lib" path="lib/portal/serializer.jar"/>
 	<classpathentry kind="lib" path="lib/portal/simplecaptcha.jar"/>
 	<classpathentry kind="lib" path="lib/portal/slf4j-log4j12.jar"/>
