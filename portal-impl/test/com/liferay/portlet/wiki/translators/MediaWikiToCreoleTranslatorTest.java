@@ -333,6 +333,16 @@ public class MediaWikiToCreoleTranslatorTest extends TestCase {
 		assertEquals(expected, actual);
 	}
 
+	public void testRemoveHTMLTags() throws Exception {
+		String content = "text\n<br>\ntext<br><div align=\"right\">x</div>";
+
+		String expected =
+			MediaWikiToCreoleTranslator.TABLE_OF_CONTENTS + "text\n\ntextx";
+		String actual = _translator.postProcess(_translate(content));
+
+		assertEquals(expected, actual);
+	}
+
 	public void testLinkWithUnderscores() throws Exception {
 		String content = "[[Link_With_Underscores]]";
 

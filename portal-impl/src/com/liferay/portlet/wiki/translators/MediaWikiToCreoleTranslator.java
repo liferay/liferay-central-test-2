@@ -145,6 +145,12 @@ public class MediaWikiToCreoleTranslator extends BaseTranslator {
 		matcher = Pattern.compile(
 			"\\[{2}([^\\]]*)\\]{2}", Pattern.DOTALL).matcher(content);
 
+		// Remove HTML tags
+
+		for (int i = 0; i < _HTML_TAGS.length; i++) {
+			content = content.replaceAll(_HTML_TAGS[i], StringPool.BLANK);
+		}
+
 		StringBuffer sb = new StringBuffer(content);
 
 		while (matcher.find()) {
@@ -156,5 +162,11 @@ public class MediaWikiToCreoleTranslator extends BaseTranslator {
 
 		return TABLE_OF_CONTENTS + super.postProcess(sb.toString());
 	}
+
+	private static final String[] _HTML_TAGS = {
+		"<blockquote>", "</blockquote>", "<br>", "<br/>", "<br />",  "<center>",
+		"</center>", "<cite>", "</cite>","<code>", "</code>", "<div[^>]*>",
+		"</div>", "<font[^>]*>", "</font>", "<hr>", "<hr/>", "<hr />", "<p>",
+		"</p>", "<tt>", "</tt>", "<var>", "</var>"};
 
 }
