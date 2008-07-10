@@ -101,6 +101,23 @@ public class AddNewPrivateSamplePortletDataTest extends BaseTestCase {
 		selenium.click("//img[@alt='Remove']");
 		assertTrue(selenium.getConfirmation()
 						   .matches("^Are you sure you want to remove this component[\\s\\S]$"));
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isElementPresent("link=Add Application")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
 		selenium.click("link=Add Application");
 
 		for (int second = 0;; second++) {
@@ -109,7 +126,7 @@ public class AddNewPrivateSamplePortletDataTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("//div[@id='CMS-Journal']/p/a")) {
+				if (selenium.isElementPresent("//div[@id='CMS-Journal']/p")) {
 					break;
 				}
 			}

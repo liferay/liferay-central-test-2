@@ -52,7 +52,7 @@ public class VerifyPublicStagedRemotePublishingTest extends BaseTestCase {
 
 		selenium.click("link=Sign Out");
 		selenium.waitForPageToLoad("30000");
-		selenium.open("http://192.168.94.175:8080/web/guest/home");
+		selenium.open("http://5.227.126.113:8080/web/guest/home");
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -99,6 +99,5 @@ public class VerifyPublicStagedRemotePublishingTest extends BaseTestCase {
 		assertTrue(selenium.isElementPresent("link=Second Test Entry"));
 		assertTrue(selenium.isElementPresent("link=Third Test Entry"));
 		assertTrue(selenium.isElementPresent("link=Selenium Testing Party"));
-		assertTrue(selenium.isElementPresent("link=Star Wars Marathon!"));
 	}
 }

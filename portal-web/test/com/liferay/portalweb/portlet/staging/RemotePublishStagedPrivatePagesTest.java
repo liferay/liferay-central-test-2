@@ -39,7 +39,7 @@ public class RemotePublishStagedPrivatePagesTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("my-community-private-pages")) {
+				if (selenium.isElementPresent("link=View Staged Page")) {
 					break;
 				}
 			}
@@ -49,7 +49,7 @@ public class RemotePublishStagedPrivatePagesTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click("my-community-private-pages");
+		selenium.click("link=View Staged Page");
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {
@@ -58,7 +58,7 @@ public class RemotePublishStagedPrivatePagesTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("link=All Communities")) {
+				if (selenium.isElementPresent("link=Manage Pages")) {
 					break;
 				}
 			}
@@ -68,66 +68,8 @@ public class RemotePublishStagedPrivatePagesTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click("link=All Communities");
+		selenium.click("link=Manage Pages");
 		selenium.waitForPageToLoad("30000");
-		assertTrue(selenium.isElementPresent(
-				"//div[starts-with(@class, 'results-grid')]/table[1]/tbody[1]/tr[3]/td[6]/ul[1]/li[1]/ul[1]/li[3]/nobr[1]/a"));
-		selenium.click(
-			"//div[starts-with(@class, 'results-grid')]/table[1]/tbody[1]/tr[3]/td[6]/ul[1]/li[1]/ul[1]/li[3]/nobr[1]/a");
-		selenium.waitForPageToLoad("30000");
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isElementPresent("link=Private Pages")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
-		selenium.click("link=Private Pages");
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isElementPresent(
-							"//input[@value='Publish to Remote']")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
-		selenium.click("//input[@value='Publish to Remote']");
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isElementPresent("link=Pages")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -172,7 +114,7 @@ public class RemotePublishStagedPrivatePagesTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("_29_PORTLET_DATA_33")) {
+				if (selenium.isElementPresent("_88_PORTLET_DATA_33")) {
 					break;
 				}
 			}
@@ -182,8 +124,26 @@ public class RemotePublishStagedPrivatePagesTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click("_29_PORTLET_DATA_33");
-		selenium.click("_29_PORTLET_DATA_25");
+		selenium.click("_88_PORTLET_DATA_33");
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isElementPresent("_88_PORTLET_DATA_25")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
+		selenium.click("_88_PORTLET_DATA_25");
+		selenium.click("_88_PORTLET_USER_PREFERENCESCheckbox");
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -209,7 +169,7 @@ public class RemotePublishStagedPrivatePagesTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("_29_remoteAddress")) {
+				if (selenium.isElementPresent("_88_remoteAddress")) {
 					break;
 				}
 			}
@@ -219,8 +179,8 @@ public class RemotePublishStagedPrivatePagesTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.type("_29_remoteAddress",
-			RuntimeVariables.replace("192.168.94.175"));
+		selenium.type("_88_remoteAddress",
+			RuntimeVariables.replace("5.227.126.113"));
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -228,7 +188,7 @@ public class RemotePublishStagedPrivatePagesTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("_29_remoteGroupId")) {
+				if (selenium.isElementPresent("_88_remoteGroupId")) {
 					break;
 				}
 			}
@@ -238,7 +198,7 @@ public class RemotePublishStagedPrivatePagesTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.type("_29_remoteGroupId",
+		selenium.type("_88_remoteGroupId",
 			RuntimeVariables.replace("${GroupID}"));
 		selenium.click(
 			"//div[starts-with(@id, 'publish-to-remote')]/form[1]/ul[1]/li[1]/a");
@@ -271,6 +231,23 @@ public class RemotePublishStagedPrivatePagesTest extends BaseTestCase {
 
 			try {
 				if (selenium.isElementPresent("my-community-private-pages")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isTextPresent(
+							"Your request processed successfully.")) {
 					break;
 				}
 			}

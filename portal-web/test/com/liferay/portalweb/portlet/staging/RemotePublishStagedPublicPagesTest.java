@@ -204,7 +204,7 @@ public class RemotePublishStagedPublicPagesTest extends BaseTestCase {
 		}
 
 		selenium.type("_88_remoteAddress",
-			RuntimeVariables.replace("192.168.94.175"));
+			RuntimeVariables.replace("5.227.126.113"));
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -244,6 +244,7 @@ public class RemotePublishStagedPublicPagesTest extends BaseTestCase {
 		}
 
 		selenium.click("publishBtn");
+		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.getConfirmation()
 						   .matches("^Are you sure you want to publish these pages[\\s\\S]$"));
 

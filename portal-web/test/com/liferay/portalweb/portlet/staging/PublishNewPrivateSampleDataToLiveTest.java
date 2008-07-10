@@ -85,9 +85,6 @@ public class PublishNewPrivateSampleDataToLiveTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click("_88_PORTLET_DATA_25");
-		selenium.click("_88_PORTLET_DATA_33");
-
 		for (int second = 0;; second++) {
 			if (second >= 60) {
 				fail("timeout");
@@ -104,6 +101,9 @@ public class PublishNewPrivateSampleDataToLiveTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
+		selenium.click("_88_PORTLET_DATA_25");
+		selenium.click("_88_PORTLET_DATA_33");
+		selenium.click("_88_PORTLET_USER_PREFERENCESCheckbox");
 		selenium.click("link=Scheduler");
 		selenium.click("link=Pages");
 
@@ -124,6 +124,7 @@ public class PublishNewPrivateSampleDataToLiveTest extends BaseTestCase {
 		}
 
 		selenium.click("publishBtn");
+		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.getConfirmation()
 						   .matches("^Are you sure you want to publish these pages[\\s\\S]$"));
 

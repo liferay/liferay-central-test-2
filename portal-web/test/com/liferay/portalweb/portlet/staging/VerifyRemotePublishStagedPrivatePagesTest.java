@@ -71,7 +71,7 @@ public class VerifyRemotePublishStagedPrivatePagesTest extends BaseTestCase {
 
 		selenium.click("link=Sign Out");
 		selenium.waitForPageToLoad("30000");
-		selenium.open("http://192.168.94.175:8080/web/guest/home");
+		selenium.open("http://5.227.126.113:8080/web/guest/home");
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -153,6 +153,7 @@ public class VerifyRemotePublishStagedPrivatePagesTest extends BaseTestCase {
 		}
 
 		selenium.click("link=Articles");
+		selenium.waitForPageToLoad("30000");
 		verifyTrue(selenium.isElementPresent("link=Article to be Published"));
 
 		for (int second = 0;; second++) {
