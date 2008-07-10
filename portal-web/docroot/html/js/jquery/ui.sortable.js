@@ -86,14 +86,16 @@ $.widget("ui.sortable", $.extend({}, $.ui.mouse, {
 	},
 	/* Be careful with the following core functions */
 	intersectsWith: function(item) {
-		
 		var x1 = this.positionAbs.left, x2 = x1 + this.helperProportions.width,
 		y1 = this.positionAbs.top, y2 = y1 + this.helperProportions.height;
 		var l = item.left, r = l + item.width, 
 		t = item.top, b = t + item.height;
-
+		
+		var dyClick = this.offset.click.top, dxClick = this.offset.click.left;
+		var isOverElement = (y1 + dyClick) > t && (y1 + dyClick) < b && (x1 + dxClick) > l && (x1 + dxClick) < r;
+		
 		if(this.options.tolerance == "pointer" || this.options.forcePointerForContainers || (this.options.tolerance == "guess" && this.helperProportions[this.floating ? 'width' : 'height'] > item[this.floating ? 'width' : 'height'])) {
-			return (y1 + this.offset.click.top > t && y1 + this.offset.click.top < b && x1 + this.offset.click.left > l && x1 + this.offset.click.left < r);
+			return isOverElement;
 		} else {
 		
 			return (l < x1 + (this.helperProportions.width / 2) // Right Half
@@ -102,28 +104,32 @@ $.widget("ui.sortable", $.extend({}, $.ui.mouse, {
 				&& y2 - (this.helperProportions.height / 2) < b ); // Top Half
 		
 		}
-		
 	},
 	intersectsWithEdge: function(item) {	
 		var x1 = this.positionAbs.left, x2 = x1 + this.helperProportions.width,
 			y1 = this.positionAbs.top, y2 = y1 + this.helperProportions.height;
+		
 		var l = item.left, r = l + item.width, 
 			t = item.top, b = t + item.height;
-
+		
+		var dyClick = this.offset.click.top, dxClick = this.offset.click.left;
+		var isOverElement = (y1 + dyClick) > t && (y1 + dyClick) < b && (x1 + dxClick) > l && (x1 + dxClick) < r;
+		
 		if(this.options.tolerance == "pointer" || (this.options.tolerance == "guess" && this.helperProportions[this.floating ? 'width' : 'height'] > item[this.floating ? 'width' : 'height'])) {
+			if(!isOverElement) return false;
 
-			if(!(y1 + this.offset.click.top > t && y1 + this.offset.click.top < b && x1 + this.offset.click.left > l && x1 + this.offset.click.left < r)) return false;
-			
 			if(this.floating) {
-				if(x1 + this.offset.click.left > l && x1 + this.offset.click.left < l + item.width/2) return 2;
-				if(x1 + this.offset.click.left > l+item.width/2 && x1 + this.offset.click.left < r) return 1;
+				if ((x1 + dxClick) > l && (x1 + dxClick) < l + item.width/2) return 2;
+				if ((x1 + dxClick) > l + item.width/2 && (x1 + dxClick) < r) return 1;
 			} else {
-				if(y1 + this.offset.click.top > t && y1 + this.offset.click.top < t + item.height/2) return 2;
-				if(y1 + this.offset.click.top > t+item.height/2 && y1 + this.offset.click.top < b) return 1;
+				var height = item.height, helperHeight = this.helperProportions.height;
+				var direction = y1 - this.updateOriginalPosition.top < 0 ? 2 : 1; // 2 = up
+				
+				if (direction == 1 && (y1 + dyClick) < t + height/2) { return 2; } // up
+				else if (direction == 2 && (y1 + dyClick) > t + height/2) { return 1; } // down
 			}
 
 		} else {
-		
 			if (!(l < x1 + (this.helperProportions.width / 2) // Right Half
 				&& x2 - (this.helperProportions.width / 2) < r // Left Half
 				&& t < y1 + (this.helperProportions.height / 2) // Bottom Half
@@ -136,7 +142,6 @@ $.widget("ui.sortable", $.extend({}, $.ui.mouse, {
 				if(y2 > t && y1 < t) return 1; //Crosses top edge
 				if(y1 < b && y2 > b) return 2; //Crosses bottom edge
 			}
-		
 		}
 		
 		return false;
@@ -283,7 +288,6 @@ $.widget("ui.sortable", $.extend({}, $.ui.mouse, {
 						itemWithLeastDistance ? this.rearrange(e, itemWithLeastDistance, null, true) : this.rearrange(e, null, this.containers[i].element, true);
 						this.propagate("change", e); //Call plugins and callbacks
 						this.containers[i].propagate("change", e, this); //Call plugins and callbacks
-
 					}
 					
 					this.containers[i].propagate("over", e, this);
@@ -372,7 +376,7 @@ $.widget("ui.sortable", $.extend({}, $.ui.mouse, {
 			left: po.left + this.offsetParentBorders.left
 		};
 	
-		this.originalPosition = this.generatePosition(e);												//Generate the original position
+		this.updateOriginalPosition = this.originalPosition = this.generatePosition(e);												//Generate the original position
 		this.domPosition = { prev: this.currentItem.prev()[0], parent: this.currentItem.parent()[0] };  //Cache the former DOM position
 		
 		//If o.placeholder is used, create a new element at the given position with the class
@@ -557,8 +561,10 @@ $.widget("ui.sortable", $.extend({}, $.ui.mouse, {
 			if(counter == self.counter) self.refreshPositions(!hardRefresh); //Precompute after each DOM insertion, NOT on mousemove
 		},0);
 		
-		if(this.options.placeholder)
+		if(this.options.placeholder) {
 			this.options.placeholder.update.call(this.element, this.currentItem, this.placeholder);
+			this.updateOriginalPosition = this.generatePosition(e);
+		}
 	},
 	mouseStop: function(e, noPropagation) {
 
