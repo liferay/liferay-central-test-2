@@ -52,7 +52,7 @@ public class ContentTransformerListener extends TransformerListener {
 			_log.debug("onXml");
 		}
 
-		s = replaceContent(s);
+		s = replace(s);
 
 		return s;
 	}
@@ -80,13 +80,13 @@ public class ContentTransformerListener extends TransformerListener {
 	 * @param		xml the given string
 	 * @return		the processed string
 	 */
-	protected String replaceContent(String xml) {
+	protected String replace(String xml) {
 		try {
 			Document doc = DocumentUtil.readDocumentFromXML(xml);
 
 			Element root = doc.getRootElement();
 
-			replaceContent(root);
+			replace(root);
 
 			xml = JournalUtil.formatXML(doc);
 		}
@@ -97,7 +97,7 @@ public class ContentTransformerListener extends TransformerListener {
 		return xml;
 	}
 
-	protected void replaceContent(Element root) throws Exception {
+	protected void replace(Element root) throws Exception {
 		Map<String, String> tokens = getTokens();
 
 		long groupId = GetterUtil.getLong(tokens.get("group_id"));
@@ -146,7 +146,7 @@ public class ContentTransformerListener extends TransformerListener {
 				}
 			}
 
-			replaceContent(el);
+			replace(el);
 		}
 	}
 

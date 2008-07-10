@@ -34,7 +34,7 @@ import org.apache.commons.logging.LogFactory;
  * <a href="ViewCounterTransformerListener.java.html"><b><i>View Source</i></b>
  * </a>
  *
- * @author Raymond Aug�
+ * @author Raymond Augé
  *
  */
 public class ViewCounterTransformerListener extends TransformerListener {
@@ -60,7 +60,7 @@ public class ViewCounterTransformerListener extends TransformerListener {
 			_log.debug("onOutput");
 		}
 
-		return replaceViewCounterToken(s);
+		return replace(s);
 	}
 
 	/**
@@ -69,7 +69,7 @@ public class ViewCounterTransformerListener extends TransformerListener {
 	 * @param		s the given string
 	 * @return		the processed string
 	 */
-	protected String replaceViewCounterToken(String s) {
+	protected String replace(String s) {
 		Map<String, String> tokens = getTokens();
 
 		String articleResourcePK = tokens.get("article_resource_pk");

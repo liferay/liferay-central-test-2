@@ -58,7 +58,7 @@ public class PropertiesTransformerListener extends TransformerListener {
 			_log.debug("onScript");
 		}
 
-		s = replaceProperties(s);
+		s = replace(s);
 
 		return s;
 	}
@@ -68,7 +68,7 @@ public class PropertiesTransformerListener extends TransformerListener {
 			_log.debug("onOutput");
 		}
 
-		s = replaceProperties(s);
+		s = replace(s);
 
 		return s;
 	}
@@ -80,7 +80,7 @@ public class PropertiesTransformerListener extends TransformerListener {
 	 * @param		s the given string
 	 * @return		the processed string
 	 */
-	protected String replaceProperties(String s) {
+	protected String replace(String s) {
 		Map<String, String> tokens = getTokens();
 
 		String templateId = tokens.get("template_id");
@@ -167,7 +167,7 @@ public class PropertiesTransformerListener extends TransformerListener {
 
 		s = StringUtil.replace(s, tempEscapedKeys, tempEscapedValues);
 
-		return  s;
+		return s;
 	}
 
 	private static final String _GLOBAL_PROPERTIES = "GLOBAL-PROPERTIES";

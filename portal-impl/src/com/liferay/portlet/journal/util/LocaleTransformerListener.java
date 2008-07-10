@@ -41,7 +41,7 @@ import org.dom4j.io.SAXReader;
 /**
  * <a href="LocaleTransformerListener.java.html"><b><i>View Source</i></b></a>
  *
- * @author Raymond Aug�
+ * @author Raymond Augé
  *
  */
 public class LocaleTransformerListener extends TransformerListener {
@@ -51,7 +51,7 @@ public class LocaleTransformerListener extends TransformerListener {
 			_log.debug("onXml");
 		}
 
-		s = localize(s);
+		s = replace(s);
 
 		return s;
 	}
@@ -74,7 +74,7 @@ public class LocaleTransformerListener extends TransformerListener {
 		return s;
 	}
 
-	protected String localize(String xml) {
+	protected String replace(String xml) {
 		if (xml == null) {
 			return xml;
 		}
@@ -115,7 +115,7 @@ public class LocaleTransformerListener extends TransformerListener {
 				setLanguageId(defaultLocale);
 			}
 
-			localize(root);
+			replace(root);
 
 			xml = JournalUtil.formatXML(doc);
 		}
@@ -126,7 +126,7 @@ public class LocaleTransformerListener extends TransformerListener {
 		return xml;
 	}
 
-	protected void localize(Element root) {
+	protected void replace(Element root) {
 		List<Element> children = root.elements();
 
 		int listIndex = children.size() - 1;
@@ -141,7 +141,7 @@ public class LocaleTransformerListener extends TransformerListener {
 				root.remove(child);
 			}
 			else{
-				localize(child);
+				replace(child);
 			}
 
 			listIndex--;

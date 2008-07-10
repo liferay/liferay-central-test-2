@@ -62,7 +62,7 @@ public class TokensTransformerListener extends TransformerListener {
 			_log.debug("onScript");
 		}
 
-		return replaceTokens(s);
+		return replace(s);
 	}
 
 	public String onOutput(String s) {
@@ -70,7 +70,7 @@ public class TokensTransformerListener extends TransformerListener {
 			_log.debug("onOutput");
 		}
 
-		return replaceTokens(s);
+		return replace(s);
 	}
 
 	/**
@@ -79,7 +79,7 @@ public class TokensTransformerListener extends TransformerListener {
 	 * @param		s the given string
 	 * @return		the processed string
 	 */
-	protected String replaceTokens(String s) {
+	protected String replace(String s) {
 		Map<String, String> tokens = getTokens();
 
 		Set<Map.Entry<String, String>> tokensSet = tokens.entrySet();

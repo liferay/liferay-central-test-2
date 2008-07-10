@@ -49,7 +49,7 @@ public class RegExpToolkit extends BasicToolkit {
 	}
 
 	public String generate() {
-		return PwdGenerator.getPassword(_charset,_length);
+		return PwdGenerator.getPassword(_charset, _length);
 	}
 
 	public void validate(
