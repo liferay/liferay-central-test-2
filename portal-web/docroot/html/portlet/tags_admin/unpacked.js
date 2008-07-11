@@ -133,7 +133,7 @@ Liferay.Portlet.TagsAdmin = new Class({
 
 		editEntryNameInput.val(name);
 
-		propertiesTable.find('tr').slice(-1).remove();
+		propertiesTable.find('tr').slice(0).remove();
 
 		Liferay.Service.Tags.TagsProperty.getProperties(
 			{
