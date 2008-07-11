@@ -257,7 +257,7 @@
 
 		<java jar="lib/development/selenium-server.jar" fork="true" spawn="true" />
 
-		<antcall target="test-tomcat-5.5" />
+		<antcall target="test-${app.server.type}" />
 
 		<antelope:post to="http://localhost:4444/selenium-server/driver/?cmd=shutDown" wantresponse="false" />
 	</target>
@@ -1318,9 +1318,13 @@ app.server.tomcat.zip.name=liferay-portal-tomcat-6.0-$${downloads.version}.zip
 		</copy>
 	</target>
 
-	<target name="test-tomcat-5.5">
+	<target name="test-tomcat">
+		<condition property="ext" value="bat" else="sh">
+			<contains string="${os.name}" substring="Windows" casesensitive="false"/>
+		</condition>
+
 		<parallel>
-			<exec dir="${app.server.tomcat.bin.dir}" executable="startup.bat" resolveexecutable="true" spawn="true" />
+			<exec dir="${app.server.tomcat.bin.dir}" executable="startup.${ext}" resolveexecutable="true" spawn="true" />
 
 			<sequential>
 				<waitfor>
@@ -1337,7 +1341,7 @@ app.server.tomcat.zip.name=liferay-portal-tomcat-6.0-$${downloads.version}.zip
 
 				<ant dir="portal-web" target="test" inheritAll="false" />
 
-				<exec dir="${app.server.tomcat.bin.dir}" executable="shutdown.bat" resolveexecutable="true" />
+				<exec dir="${app.server.tomcat.bin.dir}" executable="shutdown.${ext}" resolveexecutable="true" />
 
 				<sleep seconds="10" />
 			</sequential>
