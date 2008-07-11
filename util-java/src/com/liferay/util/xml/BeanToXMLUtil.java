@@ -27,6 +27,8 @@ import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.util.TextFormatter;
 
 import java.lang.reflect.Method;
+import java.util.ArrayList;
+import java.util.List;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -42,10 +44,10 @@ import org.dom4j.Element;
 public class BeanToXMLUtil {
 
 	public static void addBean(Object obj, Element parentEl) {
-		String classNameWitoutPackage = getClassNameWithoutPackage(
+		String classNameWithoutPackage = getClassNameWithoutPackage(
 			obj.getClass().getName());
 
-		Element el = parentEl.addElement(classNameWitoutPackage);
+		Element el = parentEl.addElement(classNameWithoutPackage);
 
 		addFields(obj, el);
 	}
@@ -67,8 +69,16 @@ public class BeanToXMLUtil {
 
 				try {
 					Object returnValue = method.invoke(obj, new Object[] {});
-
-					DocUtil.add(parentEl, memberName, returnValue.toString());
+					
+					if (returnValue instanceof List) {
+						Element listEl = parentEl.addElement(memberName);
+						for (int j = 0; j < ((List) returnValue).size(); j++) {
+							addBean(((List)returnValue).get(j), listEl);
+						}
+					}
+					else {
+						DocUtil.add(parentEl, memberName, returnValue.toString());
+					}
 				}
 				catch (Exception e) {
 					if (_log.isWarnEnabled()) {
