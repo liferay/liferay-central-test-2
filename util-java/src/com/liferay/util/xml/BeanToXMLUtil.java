@@ -27,7 +27,7 @@ import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.util.TextFormatter;
 
 import java.lang.reflect.Method;
-import java.util.ArrayList;
+
 import java.util.List;
 
 import org.apache.commons.logging.Log;
@@ -69,15 +69,19 @@ public class BeanToXMLUtil {
 
 				try {
 					Object returnValue = method.invoke(obj, new Object[] {});
-					
+
 					if (returnValue instanceof List) {
+						List<Object> list = (List<Object>)returnValue;
+
 						Element listEl = parentEl.addElement(memberName);
-						for (int j = 0; j < ((List) returnValue).size(); j++) {
-							addBean(((List)returnValue).get(j), listEl);
+
+						for (int j = 0; j < list.size(); j++) {
+							addBean(list.get(j), listEl);
 						}
 					}
 					else {
-						DocUtil.add(parentEl, memberName, returnValue.toString());
+						DocUtil.add(
+							parentEl, memberName, returnValue.toString());
 					}
 				}
 				catch (Exception e) {
@@ -93,15 +97,15 @@ public class BeanToXMLUtil {
 		String[] classNameArray = StringUtil.split(
 			className, StringPool.PERIOD);
 
-		String classNameWitoutPackage =
+		String classNameWithoutPackage =
 			classNameArray[classNameArray.length - 1];
 
-		classNameWitoutPackage = TextFormatter.format(
-			classNameWitoutPackage, TextFormatter.I);
-		classNameWitoutPackage = TextFormatter.format(
-			classNameWitoutPackage, TextFormatter.K);
+		classNameWithoutPackage = TextFormatter.format(
+			classNameWithoutPackage, TextFormatter.I);
+		classNameWithoutPackage = TextFormatter.format(
+			classNameWithoutPackage, TextFormatter.K);
 
-		return classNameWitoutPackage;
+		return classNameWithoutPackage;
 	}
 
 	private static Log _log = LogFactory.getLog(BeanToXMLUtil.class);
