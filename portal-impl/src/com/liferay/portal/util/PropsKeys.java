@@ -361,7 +361,7 @@ public class PropsKeys {
 
 	public static final String HIBERNATE_CONFIGS = "hibernate.configs";
 
-	public static final String HIBERNATE_DIALECT = "hibernate.dialect.";
+	public static final String HIBERNATE_DIALECT = "hibernate.dialect";
 
 	public static final String HOT_DEPLOY_LISTENERS = "hot.deploy.listeners";
 

@@ -399,6 +399,9 @@ public class PropsValues {
 	public static final String[] GLOBAL_STARTUP_EVENTS =
 		PropsUtil.getArray(PropsKeys.GLOBAL_STARTUP_EVENTS);
 
+	public static final String HIBERNATE_DIALECT =
+		PropsUtil.get(PropsKeys.HIBERNATE_DIALECT);
+
 	public static final boolean HOT_UNDEPLOY_ENABLED = GetterUtil.getBoolean(
 		PropsUtil.get(PropsKeys.HOT_UNDEPLOY_ENABLED));
 

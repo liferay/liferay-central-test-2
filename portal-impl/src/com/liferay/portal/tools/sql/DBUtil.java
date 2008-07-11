@@ -26,6 +26,7 @@ import com.liferay.portal.kernel.dao.jdbc.DataAccess;
 import com.liferay.portal.kernel.util.FileUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
+import com.liferay.portal.util.PropsValues;
 import com.liferay.portal.velocity.VelocityUtil;
 import com.liferay.util.SimpleCounter;
 
@@ -109,6 +110,22 @@ public abstract class DBUtil {
 	};
 
 	public static DBUtil getInstance() {
+		if (_dbUtil == null) {
+			try {
+				if (_log.isInfoEnabled()) {
+					_log.info("Using dialect " + PropsValues.HIBERNATE_DIALECT);
+				}
+
+				Dialect dialect = (Dialect)Class.forName(
+					PropsValues.HIBERNATE_DIALECT).newInstance();
+
+				setInstance(dialect);
+			}
+			catch (Exception e) {
+				_log.error(e, e);
+			}
+		}
+
 		return _dbUtil;
 	}
 
