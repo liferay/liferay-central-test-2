@@ -373,8 +373,8 @@ Liferay.Portlet.TagsAdmin = new Class({
 										var from = draggable.find('a.tag-name');
 										var to = droppable.find('a.tag-name');
 
-										var fromId = draggable.attr('tagId');
-										var toId = droppable.attr('tagId');
+										var fromId = from.attr('tagId');
+										var toId = to.attr('tagId');
 
 										var tagText = {
 											SOURCE: from.text(),
