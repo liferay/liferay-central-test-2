@@ -37,6 +37,7 @@ import java.io.OutputStreamWriter;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 import java.util.Properties;
 
 import org.apache.tools.ant.DirectoryScanner;
@@ -100,8 +101,8 @@ public class PluginsEnvironmentBuilder {
 
 			props.load(new FileInputStream(propsFile));
 
-			String[] dependencyJars =
-				StringUtil.split(props.getProperty("portal.dependency.jars"));
+			String[] dependencyJars = StringUtil.split(
+				props.getProperty("portal.dependency.jars"));
 
 			Arrays.sort(dependencyJars);
 
@@ -110,8 +111,8 @@ public class PluginsEnvironmentBuilder {
 			String libPath = libDir.getAbsolutePath();
 
 			if (_isSourceControlled(libDir)) {
-				String[] oldIgnores =
-					_execSVNCommand(_SVN_GET_IGNORES + libPath);
+				String[] oldIgnores = _execSVNCommand(
+					_SVN_GET_IGNORES + libPath);
 
 				Arrays.sort(oldIgnores);
 
@@ -137,8 +138,8 @@ public class PluginsEnvironmentBuilder {
 					_SVN_SET_IGNORES + tempFile.getAbsolutePath() + " " +
 					libPath);
 
-				String [] newIgnores =
-					_execSVNCommand(_SVN_GET_IGNORES + libPath);
+				String[] newIgnores = _execSVNCommand(
+					_SVN_GET_IGNORES + libPath);
 
 				if (newIgnores.length > 0) {
 					System.out.println("SVN ignores set for " + libPath);
@@ -164,42 +165,11 @@ public class PluginsEnvironmentBuilder {
 		}
 	}
 
-	private boolean _isSourceControlled(File libDir) {
-		boolean controlled = true;
-
-		if (!libDir.exists()) {
-			controlled = false;
-		}
-
-		try {
-			_execSVNCommand(_SVN_INFO + libDir);
-		}
-		catch (Exception e) {
-			controlled = false;
-		}
-
-		return controlled;
-	}
-
-	private void _writeToFile(File tempFile, String string) throws Exception {
-		BufferedWriter bw = null;
-
-		try {
-			bw = new BufferedWriter(new OutputStreamWriter(
-				new FileOutputStream(tempFile, false)));
-
-			bw.write(string);
-		}
-		finally {
-			bw.close();
-		}
-	}
-
 	private String[] _execSVNCommand(String cmd) throws Exception {
-		Process pr = Runtime.getRuntime().exec(cmd);
+		Process process = Runtime.getRuntime().exec(cmd);
 
-		String[] stdout = _getExecOutput(pr.getInputStream());
-		String[] stderr = _getExecOutput(pr.getErrorStream());
+		String[] stdout = _getExecOutput(process.getInputStream());
+		String[] stderr = _getExecOutput(process.getErrorStream());
 
 		if (stderr.length > 0) {
 			StringBuilder sb = new StringBuilder();
@@ -217,7 +187,8 @@ public class PluginsEnvironmentBuilder {
 	}
 
 	private String[] _getExecOutput(InputStream is) throws IOException {
-		ArrayList<String> list = new ArrayList();
+		List<String> list = new ArrayList<String>();
+
 		BufferedReader br = null;
 
 		try {
@@ -248,9 +219,43 @@ public class PluginsEnvironmentBuilder {
 		return list.toArray(new String[] {});
 	}
 
+	private boolean _isSourceControlled(File libDir) {
+		boolean controlled = true;
+
+		if (!libDir.exists()) {
+			controlled = false;
+		}
+
+		try {
+			_execSVNCommand(_SVN_INFO + libDir);
+		}
+		catch (Exception e) {
+			controlled = false;
+		}
+
+		return controlled;
+	}
+
+	private void _writeToFile(File file, String string) throws Exception {
+		BufferedWriter bw = null;
+
+		try {
+			bw = new BufferedWriter(new OutputStreamWriter(
+				new FileOutputStream(file, false)));
+
+			bw.write(string);
+		}
+		finally {
+			bw.close();
+		}
+	}
+
 	private static final String _SVN_GET_IGNORES = "svn propget svn:ignore ";
+
 	private static final String _SVN_DEL_IGNORES = "svn propdel svn:ignore ";
+
 	private static final String _SVN_SET_IGNORES = "svn propset svn:ignore -F ";
+
 	private static final String _SVN_INFO = "svn info ";
 
 }
