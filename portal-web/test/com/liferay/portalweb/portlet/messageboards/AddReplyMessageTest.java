@@ -54,7 +54,7 @@ public class AddReplyMessageTest extends BaseTestCase {
 
 		selenium.typeKeys("_19_textArea",
 			RuntimeVariables.replace(
-				"This is a t\u00e9st r\u00e9ply m\u00e9ssag\u00e9!"));
+				"This is a t\u00e9st r\u00e9pl m\u00e9ssag\u00e9!"));
 		selenium.type("_19_textArea",
 			RuntimeVariables.replace(
 				"This is a t\u00e9st r\u00e9ply m\u00e9ssag\u00e9!"));

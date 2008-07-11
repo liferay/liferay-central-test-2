@@ -52,6 +52,7 @@ import com.liferay.portalweb.portlet.journalcontentsearch.JournalContentSearchTe
 import com.liferay.portalweb.portlet.language.LanguageTests;
 import com.liferay.portalweb.portlet.loancalculator.LoanCalculatorTests;
 import com.liferay.portalweb.portlet.managepages.ManagePagesTests;
+import com.liferay.portalweb.portlet.messageboards.MessageBoardsTests;
 import com.liferay.portalweb.portlet.navigation.NavigationTests;
 import com.liferay.portalweb.portlet.nestedportlets.NestedPortletsTests;
 import com.liferay.portalweb.portlet.networkutilities.NetworkUtilitiesTests;
@@ -72,6 +73,7 @@ import com.liferay.portalweb.portlet.samplelocalized.SampleLocalizedTests;
 import com.liferay.portalweb.portlet.samplephp.SamplePHPTests;
 import com.liferay.portalweb.portlet.samplesignin.SampleSignInTests;
 import com.liferay.portalweb.portlet.search.SearchTests;
+import com.liferay.portalweb.portlet.sessionexpiration.SessionExpirationTests;
 import com.liferay.portalweb.portlet.shopping.ShoppingTests;
 import com.liferay.portalweb.portlet.sitemap.SiteMapTests;
 import com.liferay.portalweb.portlet.smstextmessenger.SMSTextMessengerTests;
@@ -135,7 +137,7 @@ public class PortalWebTestSuite extends BaseTests {
 		addTestSuite(LoanCalculatorTests.class);
 		//addTestSuite(MailTests.class);
 		addTestSuite(ManagePagesTests.class);
-		//addTestSuite(MessageBoardsTests.class);
+		addTestSuite(MessageBoardsTests.class);
 		addTestSuite(NavigationTests.class);
 		addTestSuite(NestedPortletsTests.class);
 		addTestSuite(NetworkUtilitiesTests.class);
@@ -160,7 +162,7 @@ public class PortalWebTestSuite extends BaseTests {
 		addTestSuite(SampleJSPTests.class);
 		addTestSuite(SamplePHPTests.class);
 		addTestSuite(SearchTests.class);
-		//addTestSuite(SessionExpirationTests.class);
+		addTestSuite(SessionExpirationTests.class);
 		addTestSuite(ShoppingTests.class);
 		addTestSuite(SiteMapTests.class);
 		addTestSuite(SMSTextMessengerTests.class);

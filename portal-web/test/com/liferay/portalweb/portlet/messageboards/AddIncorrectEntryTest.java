@@ -33,7 +33,7 @@ import com.liferay.portalweb.portal.BaseTestCase;
 public class AddIncorrectEntryTest extends BaseTestCase {
 	public void testAddIncorrectEntry() throws Exception {
 		selenium.click(
-			"//a[text()='S\u00e9cond T\u00e9st Subcat\u00e9gory\nThis is a s\u00e9cond t\u00e9st subcat\u00e9gory!']");
+			"//div[@id='portlet-wrapper-19']/div[2]/div/div/form[1]/div[4]/table/tbody/tr[2]/td[1]/a/b");
 		selenium.waitForPageToLoad("30000");
 		selenium.click("//input[@value='Post New Thread']");
 		selenium.waitForPageToLoad("30000");

@@ -71,7 +71,7 @@ public class AddThirdReplyMessageTest extends BaseTestCase {
 		}
 
 		selenium.typeKeys("_19_textArea",
-			RuntimeVariables.replace("This is a third reply message."));
+			RuntimeVariables.replace("This is a third repl message."));
 		selenium.type("_19_textArea",
 			RuntimeVariables.replace("This is a third reply message."));
 		selenium.click("//input[@value='Save']");

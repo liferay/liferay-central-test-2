@@ -57,12 +57,12 @@ public class AddSecondSubcategoryTest extends BaseTestCase {
 		}
 
 		selenium.typeKeys("_19_name",
-			RuntimeVariables.replace("S\u00e9cond T\u00e9st Subcat\u00e9gory"));
+			RuntimeVariables.replace("S\u00e9cond T\u00e9st Subcat\u00e9gor"));
 		selenium.type("_19_name",
 			RuntimeVariables.replace("S\u00e9cond T\u00e9st Subcat\u00e9gory"));
 		selenium.typeKeys("_19_description",
 			RuntimeVariables.replace(
-				"This is a s\u00e9cond t\u00e9st subcat\u00e9gory!"));
+				"This is a s\u00e9cond t\u00e9st subcat\u00e9gor!"));
 		selenium.type("_19_description",
 			RuntimeVariables.replace(
 				"This is a s\u00e9cond t\u00e9st subcat\u00e9gory!"));

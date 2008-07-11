@@ -38,8 +38,26 @@ public class MoveThreadTest extends BaseTestCase {
 		selenium.click("//input[@value='Select']");
 		selenium.waitForPopUp("category", RuntimeVariables.replace("30000"));
 		selenium.selectWindow("category");
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isElementPresent(
+							"//div[@id='p_p_id_19_']/div[1]/form[1]/div[3]/table[1]/tbody[1]/tr[3]/td[5]/input")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
 		selenium.click(
-			"//div[@id=\"p_p_id_19_\"]/div/form/div[3]/table/tbody/tr[3]/td[5]/input");
+			"//div[@id='p_p_id_19_']/div[1]/form[1]/div[3]/table[1]/tbody[1]/tr[3]/td[5]/input");
 		selenium.selectWindow("null");
 		selenium.click("_19_addExplanationPost");
 
@@ -129,6 +147,23 @@ public class MoveThreadTest extends BaseTestCase {
 		selenium.click("//input[@value='Select']");
 		selenium.waitForPopUp("category", RuntimeVariables.replace("30000"));
 		selenium.selectWindow("category");
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isElementPresent("//input[@value='Choose']")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
 		selenium.click("//input[@value='Choose']");
 		selenium.selectWindow("null");
 		selenium.click("_19_addExplanationPost");

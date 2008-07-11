@@ -53,11 +53,11 @@ public class AddCategoryTest extends BaseTestCase {
 		}
 
 		selenium.typeKeys("_19_name",
-			RuntimeVariables.replace("T\u00e9st Cat\u00e9gory"));
+			RuntimeVariables.replace("T\u00e9st Cat\u00e9gor"));
 		selenium.type("_19_name",
 			RuntimeVariables.replace("T\u00e9st Cat\u00e9gory"));
 		selenium.typeKeys("_19_description",
-			RuntimeVariables.replace("This is a t\u00e9st cat\u00e9gory!"));
+			RuntimeVariables.replace("This is a t\u00e9st cat\u00e9gor!"));
 		selenium.type("_19_description",
 			RuntimeVariables.replace("This is a t\u00e9st cat\u00e9gory!"));
 		selenium.click("//input[@value='Save']");
