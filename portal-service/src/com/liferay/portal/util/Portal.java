@@ -40,6 +40,7 @@ import java.rmi.RemoteException;
 import java.util.Date;
 import java.util.Locale;
 import java.util.Map;
+import java.util.Properties;
 import java.util.TimeZone;
 
 import javax.portlet.ActionRequest;
@@ -224,6 +225,8 @@ public interface Portal {
 	public String getPortalLibDir();
 
 	public int getPortalPort();
+
+	public Properties getPortalProperties();
 
 	public String getPortalURL(ThemeDisplay themeDisplay);
 

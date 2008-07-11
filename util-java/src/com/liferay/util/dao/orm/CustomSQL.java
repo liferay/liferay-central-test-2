@@ -25,6 +25,7 @@ package com.liferay.util.dao.orm;
 import com.liferay.portal.kernel.dao.jdbc.DataAccess;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.OrderByComparator;
+import com.liferay.portal.kernel.util.PortalClassLoaderUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
@@ -44,6 +45,7 @@ import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
+import java.util.Properties;
 
 import javax.naming.NamingException;
 
@@ -426,7 +428,17 @@ public class CustomSQL {
 	}
 
 	protected String[] getConfigs() {
-		return new String[] {"custom-sql/default.xml"};
+		if (PortalClassLoaderUtil.getClassLoader() ==
+				CustomSQL.class.getClassLoader()) {
+
+			Properties propsUtil = PortalUtil.getPortalProperties();
+
+			return StringUtil.split(
+				propsUtil.getProperty("custom.sql.configs"));
+		}
+		else {
+			return new String[] {"custom-sql/default.xml"};
+		}
 	}
 
 	protected void read(ClassLoader classLoader, String source)

@@ -41,6 +41,7 @@ import java.rmi.RemoteException;
 import java.util.Date;
 import java.util.Locale;
 import java.util.Map;
+import java.util.Properties;
 import java.util.TimeZone;
 
 import javax.portlet.ActionRequest;
@@ -388,6 +389,10 @@ public class PortalUtil {
 
 	public static int getPortalPort() {
 		return getPortal().getPortalPort();
+	}
+
+	public static Properties getPortalProperties() {
+		return getPortal().getPortalProperties();
 	}
 
 	public static Object[] getPortletFriendlyURLMapper(

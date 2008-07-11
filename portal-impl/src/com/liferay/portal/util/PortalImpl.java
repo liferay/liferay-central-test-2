@@ -128,6 +128,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
+import java.util.Properties;
 import java.util.ResourceBundle;
 import java.util.Set;
 import java.util.TimeZone;
@@ -1236,6 +1237,10 @@ public class PortalImpl implements Portal {
 
 	public int getPortalPort() {
 		return _portalPort.intValue();
+	}
+
+	public Properties getPortalProperties() {
+		return PropsUtil.getProperties();
 	}
 
 	public String getPortalURL(ThemeDisplay themeDisplay) {
