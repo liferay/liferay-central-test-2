@@ -247,7 +247,7 @@
 
 		<ant dir="util-java" target="test" inheritAll="false" />
 
-		<ant dir="sql" target="rebuild-mysql" inheritAll="false" />
+		<!--<ant dir="sql" target="rebuild-mysql" inheritAll="false" />
 
 		<taskdef classname="com.liferay.portal.util.PropsUtilTask" classpathref="project.classpath" name="propsutil" />
 
@@ -259,7 +259,7 @@
 
 		<antcall target="test-tomcat-5.5" />
 
-		<antelope:post to="http://localhost:4444/selenium-server/driver/?cmd=shutDown" wantresponse="false" />
+		<antelope:post to="http://localhost:4444/selenium-server/driver/?cmd=shutDown" wantresponse="false" />-->
 	</target>
 
 	<target name="jar">
