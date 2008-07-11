@@ -7841,4 +7841,54 @@
 			<ref bean="com.liferay.portlet.workflow.service.WorkflowTaskService.transaction" />
 		</property>
 	</bean>
+	<bean id="com.liferay.portlet.workflow.service.SAWWorkflowLocalService.impl" class="com.liferay.portlet.workflow.service.impl.SAWWorkflowLocalServiceImpl" lazy-init="true" init-method="init" />
+	<bean id="com.liferay.portlet.workflow.service.SAWWorkflowLocalService.transaction" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean" lazy-init="true">
+		<property name="transactionManager">
+			<ref bean="liferayTransactionManager" />
+		</property>
+		<property name="target">
+			<ref bean="com.liferay.portlet.workflow.service.SAWWorkflowLocalService.impl" />
+		</property>
+		<property name="transactionAttributes">
+			<props>
+				<prop key="add*">PROPAGATION_REQUIRED,-com.liferay.portal.PortalException,-com.liferay.portal.SystemException</prop>
+				<prop key="check*">PROPAGATION_REQUIRED,-com.liferay.portal.PortalException,-com.liferay.portal.SystemException</prop>
+				<prop key="clear*">PROPAGATION_REQUIRED,-com.liferay.portal.PortalException,-com.liferay.portal.SystemException</prop>
+				<prop key="delete*">PROPAGATION_REQUIRED,-com.liferay.portal.PortalException,-com.liferay.portal.SystemException</prop>
+				<prop key="set*">PROPAGATION_REQUIRED,-com.liferay.portal.PortalException,-com.liferay.portal.SystemException</prop>
+				<prop key="update*">PROPAGATION_REQUIRED,-com.liferay.portal.PortalException,-com.liferay.portal.SystemException</prop>
+				<prop key="*">PROPAGATION_SUPPORTS,readOnly</prop>
+			</props>
+		</property>
+	</bean>
+	<bean id="com.liferay.portlet.workflow.service.SAWWorkflowLocalServiceFactory" class="com.liferay.portlet.workflow.service.SAWWorkflowLocalServiceFactory" lazy-init="true">
+		<property name="service">
+			<ref bean="com.liferay.portlet.workflow.service.SAWWorkflowLocalService.transaction" />
+		</property>
+	</bean>
+	<bean id="com.liferay.portlet.workflow.service.SAWWorkflowService.impl" class="com.liferay.portlet.workflow.service.impl.SAWWorkflowServiceImpl" lazy-init="true" init-method="init" />
+	<bean id="com.liferay.portlet.workflow.service.SAWWorkflowService.transaction" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean" lazy-init="true">
+		<property name="transactionManager">
+			<ref bean="liferayTransactionManager" />
+		</property>
+		<property name="target">
+			<ref bean="com.liferay.portlet.workflow.service.SAWWorkflowService.impl" />
+		</property>
+		<property name="transactionAttributes">
+			<props>
+				<prop key="add*">PROPAGATION_REQUIRED,-com.liferay.portal.PortalException,-com.liferay.portal.SystemException</prop>
+				<prop key="check*">PROPAGATION_REQUIRED,-com.liferay.portal.PortalException,-com.liferay.portal.SystemException</prop>
+				<prop key="clear*">PROPAGATION_REQUIRED,-com.liferay.portal.PortalException,-com.liferay.portal.SystemException</prop>
+				<prop key="delete*">PROPAGATION_REQUIRED,-com.liferay.portal.PortalException,-com.liferay.portal.SystemException</prop>
+				<prop key="set*">PROPAGATION_REQUIRED,-com.liferay.portal.PortalException,-com.liferay.portal.SystemException</prop>
+				<prop key="update*">PROPAGATION_REQUIRED,-com.liferay.portal.PortalException,-com.liferay.portal.SystemException</prop>
+				<prop key="*">PROPAGATION_SUPPORTS,readOnly</prop>
+			</props>
+		</property>
+	</bean>
+	<bean id="com.liferay.portlet.workflow.service.SAWWorkflowServiceFactory" class="com.liferay.portlet.workflow.service.SAWWorkflowServiceFactory" lazy-init="true">
+		<property name="service">
+			<ref bean="com.liferay.portlet.workflow.service.SAWWorkflowService.transaction" />
+		</property>
+	</bean>
 </beans>
