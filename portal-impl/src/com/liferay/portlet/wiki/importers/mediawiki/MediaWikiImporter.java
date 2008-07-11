@@ -154,12 +154,9 @@ public class MediaWikiImporter implements WikiImporter {
 
 		try {
 			long authorUserId = getUserId(userId, node, author, usersMap);
-
-			String[] tagsEntries = readTagsEntries(userId, node, content);
-
-			String redirectTitle = readRedirectTitle(content);
-
 			String parentTitle = readParentTitle(content);
+			String redirectTitle = readRedirectTitle(content);
+			String[] tagsEntries = readTagsEntries(userId, node, content);
 
 			if (Validator.isNull(redirectTitle)) {
 				content = _translator.translate(content);
