@@ -73,6 +73,10 @@ public class MediaWikiToCreoleTranslator extends BaseTranslator {
 
 		regexps.put("\\[\\[[Cc]ategory:([^\\]]*)\\]\\][\\n]*", "");
 
+		// Remove disambiguations
+
+		regexps.put("\\{{2}OtherTopics\\|([^\\}]*)\\}{2}", StringPool.BLANK);
+
 		// Bold and italics
 
 		regexps.put(

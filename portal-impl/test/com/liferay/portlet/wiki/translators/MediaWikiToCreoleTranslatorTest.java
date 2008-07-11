@@ -98,6 +98,15 @@ public class MediaWikiToCreoleTranslatorTest extends TestCase {
 		assertEquals(expected, actual);
 	}
 
+	public void testRemoveDisambiguation() throws Exception {
+		String content = "{{OtherTopics|Upgrade Instructions}}\ntest";
+
+		String expected ="\ntest";
+		String actual = _translate(content);
+
+		assertEquals(expected, actual);
+	}
+
 	public void testBoldItalics() throws Exception {
 		String content = "This is ''''bold and italics''''.";
 

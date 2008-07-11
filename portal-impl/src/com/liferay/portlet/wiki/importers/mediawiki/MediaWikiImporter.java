@@ -159,6 +159,8 @@ public class MediaWikiImporter implements WikiImporter {
 
 			String redirectTitle = readRedirectTitle(content);
 
+			String parentTitle = readParentTitle(content);
+
 			if (Validator.isNull(redirectTitle)) {
 				content = _translator.translate(content);
 			}
@@ -182,7 +184,7 @@ public class MediaWikiImporter implements WikiImporter {
 
 			WikiPageLocalServiceUtil.updatePage(
 				authorUserId, node.getNodeId(), title, page.getVersion(),
-				content, summary, true, "creole", StringPool.BLANK,
+				content, summary, true, "creole", parentTitle,
 				redirectTitle, tagsEntries, null, null);
 		}
 		catch (Exception e) {
@@ -485,6 +487,22 @@ public class MediaWikiImporter implements WikiImporter {
 		}
 	}
 
+	protected String readParentTitle(String content) {
+		Matcher matcher = _parentPattern.matcher(content);
+
+		String redirectTitle = StringPool.BLANK;
+
+		if (matcher.find()) {
+			redirectTitle = matcher.group(1);
+
+			redirectTitle = normalizeTitle(redirectTitle);
+
+			redirectTitle += " (disambiguation)";
+		}
+
+		return redirectTitle;
+	}
+
 	protected String readRedirectTitle(String content) {
 		Matcher matcher = _redirectPattern.matcher(content);
 
@@ -588,6 +606,10 @@ public class MediaWikiImporter implements WikiImporter {
 
 	private static Pattern _categoriesPattern = Pattern.compile(
 		"\\[\\[[Cc]ategory:([^\\]]*)\\]\\][\\n]*");
+
+	private static Pattern _parentPattern = Pattern.compile(
+		"\\{{2}OtherTopics\\|([^\\}]*)\\}{2}");
+
 	private static Pattern _redirectPattern = Pattern.compile(
 		"#REDIRECT \\[\\[([^\\]]*)\\]\\]");
 
