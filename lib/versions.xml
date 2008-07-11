@@ -569,7 +569,7 @@
 			</license>
 		</licenses>
 		<comments>
-			See http://support.liferay.com/browse/LEP-4989.
+			See LEP-4989.
 		</comments>
 	</library>
 	<library>
@@ -583,7 +583,7 @@
 			</license>
 		</licenses>
 		<comments>
-			See http://support.liferay.com/browse/LEP-5048.
+			See LEP-5048.
 		</comments>
 	</library>
 	<library>
@@ -1173,7 +1173,7 @@
 			</license>
 		</licenses>
 		<comments>
-			Using a trunk version to fix concurrency issue (LEP-6652)
+			Using a trunk version to fix concurrency issue. See LEP-6652.
 		</comments>
 	</library>
 	<library>
