@@ -7841,58 +7841,10 @@
 			<ref bean="com.liferay.portlet.workflow.service.WorkflowTaskService.transaction" />
 		</property>
 	</bean>
-	<bean id="com.liferay.portlet.workflow.service.SAWWorkflowLocalService.impl" class="com.liferay.portlet.workflow.service.impl.SAWWorkflowLocalServiceImpl" lazy-init="true" init-method="init" />
-	<bean id="com.liferay.portlet.workflow.service.SAWWorkflowLocalService.transaction" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean" lazy-init="true">
-		<property name="transactionManager">
-			<ref bean="liferayTransactionManager" />
-		</property>
-		<property name="target">
-			<ref bean="com.liferay.portlet.workflow.service.SAWWorkflowLocalService.impl" />
-		</property>
-		<property name="transactionAttributes">
-			<props>
-				<prop key="add*">PROPAGATION_REQUIRED,-com.liferay.portal.PortalException,-com.liferay.portal.SystemException</prop>
-				<prop key="check*">PROPAGATION_REQUIRED,-com.liferay.portal.PortalException,-com.liferay.portal.SystemException</prop>
-				<prop key="clear*">PROPAGATION_REQUIRED,-com.liferay.portal.PortalException,-com.liferay.portal.SystemException</prop>
-				<prop key="delete*">PROPAGATION_REQUIRED,-com.liferay.portal.PortalException,-com.liferay.portal.SystemException</prop>
-				<prop key="set*">PROPAGATION_REQUIRED,-com.liferay.portal.PortalException,-com.liferay.portal.SystemException</prop>
-				<prop key="update*">PROPAGATION_REQUIRED,-com.liferay.portal.PortalException,-com.liferay.portal.SystemException</prop>
-				<prop key="*">PROPAGATION_SUPPORTS,readOnly</prop>
-			</props>
-		</property>
-	</bean>
-	<bean id="com.liferay.portlet.workflow.service.SAWWorkflowLocalServiceFactory" class="com.liferay.portlet.workflow.service.SAWWorkflowLocalServiceFactory" lazy-init="true">
-		<property name="service">
-			<ref bean="com.liferay.portlet.workflow.service.SAWWorkflowLocalService.transaction" />
-		</property>
-	</bean>
-	<bean id="com.liferay.portlet.workflow.service.SAWWorkflowService.impl" class="com.liferay.portlet.workflow.service.impl.SAWWorkflowServiceImpl" lazy-init="true" init-method="init" />
-	<bean id="com.liferay.portlet.workflow.service.SAWWorkflowService.transaction" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean" lazy-init="true">
-		<property name="transactionManager">
-			<ref bean="liferayTransactionManager" />
-		</property>
-		<property name="target">
-			<ref bean="com.liferay.portlet.workflow.service.SAWWorkflowService.impl" />
-		</property>
-		<property name="transactionAttributes">
-			<props>
-				<prop key="add*">PROPAGATION_REQUIRED,-com.liferay.portal.PortalException,-com.liferay.portal.SystemException</prop>
-				<prop key="check*">PROPAGATION_REQUIRED,-com.liferay.portal.PortalException,-com.liferay.portal.SystemException</prop>
-				<prop key="clear*">PROPAGATION_REQUIRED,-com.liferay.portal.PortalException,-com.liferay.portal.SystemException</prop>
-				<prop key="delete*">PROPAGATION_REQUIRED,-com.liferay.portal.PortalException,-com.liferay.portal.SystemException</prop>
-				<prop key="set*">PROPAGATION_REQUIRED,-com.liferay.portal.PortalException,-com.liferay.portal.SystemException</prop>
-				<prop key="update*">PROPAGATION_REQUIRED,-com.liferay.portal.PortalException,-com.liferay.portal.SystemException</prop>
-				<prop key="*">PROPAGATION_SUPPORTS,readOnly</prop>
-			</props>
-		</property>
-	</bean>
-	<bean id="com.liferay.portlet.workflow.service.SAWWorkflowServiceFactory" class="com.liferay.portlet.workflow.service.SAWWorkflowServiceFactory" lazy-init="true">
-		<property name="service">
-			<ref bean="com.liferay.portlet.workflow.service.SAWWorkflowService.transaction" />
-		</property>
-	</bean>
-	<bean id="com.liferay.portal.mirage.ContentTypeService.impl" class="com.liferay.portal.mirage.custom.ContentTypeServiceImpl" lazy-init="true" />
-	<bean id="com.liferay.portal.mirage.ContentTypeService.proxy" class="org.springframework.aop.framework.ProxyFactoryBean" lazy-init="true">
+        <bean id="com.liferay.portal.mirage.ContentTypeService.impl" class="com.liferay.portal.mirage.custom.ContentTypeServiceImpl" lazy-init="true" />
+    
+        <bean id="com.liferay.portal.mirage.ContentTypeService.proxy"
+		class="org.springframework.aop.framework.ProxyFactoryBean" lazy-init="true">
 		<property name="proxyInterfaces">
 			<value>com.sun.portal.cms.mirage.service.custom.ContentTypeService</value>
 		</property>
@@ -7905,8 +7857,10 @@
 			<ref bean="com.liferay.portal.mirage.ContentTypeService.impl" />
 		</property>
 	</bean>
-	<bean id="com.liferay.portal.mirage.ArticleBinaryContentService.impl" class="com.liferay.portal.mirage.custom.ArticleResourceServiceImpl" lazy-init="true" />
-	<bean id="com.liferay.portal.mirage.ArticleBinaryContentService.proxy" class="org.springframework.aop.framework.ProxyFactoryBean" lazy-init="true">
+        <bean id="com.liferay.portal.mirage.ArticleBinaryContentService.impl" class="com.liferay.portal.mirage.custom.ArticleResourceServiceImpl" lazy-init="true" />
+    
+        <bean id="com.liferay.portal.mirage.ArticleBinaryContentService.proxy"
+		class="org.springframework.aop.framework.ProxyFactoryBean" lazy-init="true">
 		<property name="proxyInterfaces">
 			<value>com.sun.portal.cms.mirage.service.custom.BinaryContentService</value>
 		</property>
@@ -7918,9 +7872,12 @@
 		<property name="target">
 			<ref bean="com.liferay.portal.mirage.ArticleBinaryContentService.impl" />
 		</property>
-	</bean>
-	<bean id="com.liferay.portal.mirage.ImageBinaryContentService.impl" class="com.liferay.portal.mirage.custom.ImageContentServiceImpl" lazy-init="true" />
-	<bean id="com.liferay.portal.mirage.ImageBinaryContentService.proxy" class="org.springframework.aop.framework.ProxyFactoryBean" lazy-init="true">
+	</bean>        
+
+        <bean id="com.liferay.portal.mirage.ImageBinaryContentService.impl" class="com.liferay.portal.mirage.custom.ImageContentServiceImpl" lazy-init="true" />
+    
+        <bean id="com.liferay.portal.mirage.ImageBinaryContentService.proxy"
+		class="org.springframework.aop.framework.ProxyFactoryBean" lazy-init="true">
 		<property name="proxyInterfaces">
 			<value>com.sun.portal.cms.mirage.service.custom.BinaryContentService</value>
 		</property>
@@ -7932,9 +7889,12 @@
 		<property name="target">
 			<ref bean="com.liferay.portal.mirage.ImageBinaryContentService.impl" />
 		</property>
-	</bean>
-	<bean id="com.liferay.portal.mirage.CategoryService.impl" class="com.liferay.portal.mirage.custom.CategoryServiceImpl" lazy-init="true" />
-	<bean id="com.liferay.portal.mirage.CategoryService.proxy" class="org.springframework.aop.framework.ProxyFactoryBean" lazy-init="true">
+	</bean>        
+        
+        <bean id="com.liferay.portal.mirage.CategoryService.impl" class="com.liferay.portal.mirage.custom.CategoryServiceImpl" lazy-init="true" />
+    
+        <bean id="com.liferay.portal.mirage.CategoryService.proxy"
+		class="org.springframework.aop.framework.ProxyFactoryBean" lazy-init="true">
 		<property name="proxyInterfaces">
 			<value>com.sun.portal.cms.mirage.service.custom.CategoryService</value>
 		</property>
@@ -7946,9 +7906,12 @@
 		<property name="target">
 			<ref bean="com.liferay.portal.mirage.CategoryService.impl" />
 		</property>
-	</bean>
-	<bean id="com.liferay.portal.mirage.ContentFeedService.impl" class="com.liferay.portal.mirage.custom.ContentFeedServiceImpl" lazy-init="true" />
-	<bean id="com.liferay.portal.mirage.ContentFeedService.proxy" class="org.springframework.aop.framework.ProxyFactoryBean" lazy-init="true">
+	</bean>        
+        
+        <bean id="com.liferay.portal.mirage.ContentFeedService.impl" class="com.liferay.portal.mirage.custom.ContentFeedServiceImpl" lazy-init="true" />
+    
+        <bean id="com.liferay.portal.mirage.ContentFeedService.proxy"
+		class="org.springframework.aop.framework.ProxyFactoryBean" lazy-init="true">
 		<property name="proxyInterfaces">
 			<value>com.sun.portal.cms.mirage.service.custom.ContentFeedService</value>
 		</property>
@@ -7960,9 +7923,12 @@
 		<property name="target">
 			<ref bean="com.liferay.portal.mirage.ContentFeedService.impl" />
 		</property>
-	</bean>
-	<bean id="com.liferay.portal.mirage.ContentService.impl" class="com.liferay.portal.mirage.custom.ContentServiceImpl" lazy-init="true" />
-	<bean id="com.liferay.portal.mirage.ContentService.proxy" class="org.springframework.aop.framework.ProxyFactoryBean" lazy-init="true">
+	</bean>        
+        
+        <bean id="com.liferay.portal.mirage.ContentService.impl" class="com.liferay.portal.mirage.custom.ContentServiceImpl" lazy-init="true" />
+    
+        <bean id="com.liferay.portal.mirage.ContentService.proxy"
+		class="org.springframework.aop.framework.ProxyFactoryBean" lazy-init="true">
 		<property name="proxyInterfaces">
 			<value>com.sun.portal.cms.mirage.service.custom.ContentService</value>
 		</property>
@@ -7974,9 +7940,12 @@
 		<property name="target">
 			<ref bean="com.liferay.portal.mirage.ContentService.impl" />
 		</property>
-	</bean>
-	<bean id="com.liferay.portal.mirage.SearchService.impl" class="com.liferay.portal.mirage.custom.SearchServiceImpl" lazy-init="true" />
-	<bean id="com.liferay.portal.mirage.SearchService.proxy" class="org.springframework.aop.framework.ProxyFactoryBean" lazy-init="true">
+	</bean> 
+        
+        <bean id="com.liferay.portal.mirage.SearchService.impl" class="com.liferay.portal.mirage.custom.SearchServiceImpl" lazy-init="true" />
+    
+        <bean id="com.liferay.portal.mirage.SearchService.proxy"
+		class="org.springframework.aop.framework.ProxyFactoryBean" lazy-init="true">
 		<property name="proxyInterfaces">
 			<value>com.sun.portal.cms.mirage.service.custom.SearchService</value>
 		</property>
@@ -7988,9 +7957,12 @@
 		<property name="target">
 			<ref bean="com.liferay.portal.mirage.SearchService.impl" />
 		</property>
-	</bean>
-	<bean id="com.liferay.portal.mirage.WorkflowService.impl" class="com.liferay.portal.mirage.custom.WorkflowServiceImpl" lazy-init="true" />
-	<bean id="com.liferay.portal.mirage.WorkflowService.proxy" class="org.springframework.aop.framework.ProxyFactoryBean" lazy-init="true">
+	</bean>       
+        
+        <bean id="com.liferay.portal.mirage.WorkflowService.impl" class="com.liferay.portal.mirage.custom.WorkflowServiceImpl" lazy-init="true" />
+    
+        <bean id="com.liferay.portal.mirage.WorkflowService.proxy"
+		class="org.springframework.aop.framework.ProxyFactoryBean" lazy-init="true">
 		<property name="proxyInterfaces">
 			<value>com.sun.portal.cms.mirage.service.custom.WorkflowService</value>
 		</property>
@@ -8002,14 +7974,14 @@
 		<property name="target">
 			<ref bean="com.liferay.portal.mirage.WorkflowService.impl" />
 		</property>
-	</bean>
-	<!--bean id="mirageLogger"  class="org.springframework.aop.support.RegexpMethodPointcutAdvisor">
+	</bean>        
+        <!--bean id="mirageLogger"  class="org.springframework.aop.support.RegexpMethodPointcutAdvisor">
                 <property name="advice">
-                    <ref local="mirageLoggingInterceptor" />
+                    <ref local="mirageLoggingInterceptor"/>
                 </property>
                 <property name="patterns">
                     <value>.get.*,.*create.*</value>
                 </property>
        </bean-->
-	<bean id="mirageLoggingInterceptor" class="com.liferay.portal.mirage.util.MirageLoggingInterceptor" lazy-init="true" />
+       <bean id="mirageLoggingInterceptor" class="com.liferay.portal.mirage.util.MirageLoggingInterceptor" lazy-init="true"/>
 </beans>
