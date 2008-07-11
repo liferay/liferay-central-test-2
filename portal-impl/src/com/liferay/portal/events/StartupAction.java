@@ -37,6 +37,8 @@ import com.liferay.portal.kernel.util.InstancePool;
 import com.liferay.portal.kernel.util.ReleaseInfo;
 import com.liferay.portal.model.CompanyConstants;
 import com.liferay.portal.model.Release;
+import com.liferay.portal.ruon.service.PresenceLocalServiceUtil;
+import com.liferay.portal.ruon.service.PresenceStatusesLocalServiceUtil;
 import com.liferay.portal.search.IndexSearcherImpl;
 import com.liferay.portal.search.IndexWriterImpl;
 import com.liferay.portal.search.lucene.LuceneSearchEngineUtil;
@@ -302,7 +304,12 @@ public class StartupAction extends SimpleAction {
 		// Update release
 
 		ReleaseLocalServiceUtil.updateRelease(verified);
-	}
+
+           //Adding RUON code to update users and presence statuses
+        PresenceLocalServiceUtil.makeAllUsersOffline();
+        PresenceStatusesLocalServiceUtil.populateWithDefaultStatuses();
+
+    }
 
 	private static final String _DELETE_TEMP_IMAGES_1 =
 		"DELETE FROM Image WHERE imageId IN (SELECT articleImageId FROM " +
