@@ -90,7 +90,15 @@ public class CSSBuilder {
 				String importContent = _fileUtil.read(
 					cssDir + "/" + importFile);
 
-				importContent = replaceImports(cssDir, importContent);
+				String importFilePath = "";
+
+				if (importFile.lastIndexOf("/") != -1) {
+					importFilePath = "/" + importFile.substring(
+						0, importFile.lastIndexOf("/") + 1);
+				}
+
+				importContent = replaceImports(
+					cssDir + importFilePath, importContent);
 
 				sb.append(importContent);
 
