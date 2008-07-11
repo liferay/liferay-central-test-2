@@ -280,4 +280,14 @@ public class ListUtil {
 		return newList;
 	}
 
+	public static List<String> toList(String[] list) {
+		List<String> newList = new ArrayList<String>(list.length);
+
+		for (String value : list) {
+			newList.add(value);
+		}
+
+		return newList;
+	}
+
 }
