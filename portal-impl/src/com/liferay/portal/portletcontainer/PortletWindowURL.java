@@ -98,7 +98,7 @@ public class PortletWindowURL implements ChannelURL, Serializable {
 	}
 
 	public ChannelMode getChannelMode() {
-		return PortletAppEngineUtils.getPortletMode(
+		return PortletAppEngineUtils.getChannelMode(
 			_portletURLImpl.getPortletMode());
 	}
 
@@ -115,7 +115,7 @@ public class PortletWindowURL implements ChannelURL, Serializable {
 	}
 
 	public ChannelState getWindowState() {
-		return PortletAppEngineUtils.getWindowState(
+		return PortletAppEngineUtils.getChannelState(
 			_portletURLImpl.getWindowState());
 	}
 
