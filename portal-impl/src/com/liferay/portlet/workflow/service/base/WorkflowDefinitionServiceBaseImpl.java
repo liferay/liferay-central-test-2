@@ -37,10 +37,6 @@ import com.liferay.portal.service.persistence.ResourceFinderUtil;
 import com.liferay.portal.service.persistence.ResourcePersistence;
 import com.liferay.portal.service.persistence.ResourceUtil;
 
-import com.liferay.portlet.workflow.service.SAWWorkflowLocalService;
-import com.liferay.portlet.workflow.service.SAWWorkflowLocalServiceFactory;
-import com.liferay.portlet.workflow.service.SAWWorkflowService;
-import com.liferay.portlet.workflow.service.SAWWorkflowServiceFactory;
 import com.liferay.portlet.workflow.service.WorkflowComponentService;
 import com.liferay.portlet.workflow.service.WorkflowComponentServiceFactory;
 import com.liferay.portlet.workflow.service.WorkflowDefinitionService;
@@ -81,23 +77,6 @@ public abstract class WorkflowDefinitionServiceBaseImpl extends PrincipalBean
 
 	public void setWorkflowTaskService(WorkflowTaskService workflowTaskService) {
 		this.workflowTaskService = workflowTaskService;
-	}
-
-	public SAWWorkflowLocalService getSAWWorkflowLocalService() {
-		return sawWorkflowLocalService;
-	}
-
-	public void setSAWWorkflowLocalService(
-		SAWWorkflowLocalService sawWorkflowLocalService) {
-		this.sawWorkflowLocalService = sawWorkflowLocalService;
-	}
-
-	public SAWWorkflowService getSAWWorkflowService() {
-		return sawWorkflowService;
-	}
-
-	public void setSAWWorkflowService(SAWWorkflowService sawWorkflowService) {
-		this.sawWorkflowService = sawWorkflowService;
 	}
 
 	public DLLocalService getDLLocalService() {
@@ -162,14 +141,6 @@ public abstract class WorkflowDefinitionServiceBaseImpl extends PrincipalBean
 			workflowTaskService = WorkflowTaskServiceFactory.getImpl();
 		}
 
-		if (sawWorkflowLocalService == null) {
-			sawWorkflowLocalService = SAWWorkflowLocalServiceFactory.getImpl();
-		}
-
-		if (sawWorkflowService == null) {
-			sawWorkflowService = SAWWorkflowServiceFactory.getImpl();
-		}
-
 		if (dlLocalService == null) {
 			dlLocalService = DLLocalServiceFactory.getImpl();
 		}
@@ -198,8 +169,6 @@ public abstract class WorkflowDefinitionServiceBaseImpl extends PrincipalBean
 	protected WorkflowComponentService workflowComponentService;
 	protected WorkflowInstanceService workflowInstanceService;
 	protected WorkflowTaskService workflowTaskService;
-	protected SAWWorkflowLocalService sawWorkflowLocalService;
-	protected SAWWorkflowService sawWorkflowService;
 	protected DLLocalService dlLocalService;
 	protected DLService dlService;
 	protected ResourceLocalService resourceLocalService;
