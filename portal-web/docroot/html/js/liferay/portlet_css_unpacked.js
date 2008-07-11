@@ -543,7 +543,8 @@ Liferay.PortletCSS = {
 			insertContainer.after(customNote);
 		}
 
-		updateOnType.bind('click.liferay', 
+		updateOnType.bind(
+			'click.liferay',
 			function() {
 				if (this.checked) {
 					customNote.hide();
@@ -557,14 +558,14 @@ Liferay.PortletCSS = {
 		);
 
 		addIdLink.unbind('click.liferay').bind(
-			'click.liferay', 
+			'click.liferay',
 			function() {
 				customCSS[0].value += '\n#' + portletId + '{\n\t\n}\n';
 			}
 		);
 
 		addClassLink.unbind('click.liferay').bind(
-			'click.liferay', 
+			'click.liferay',
 			function() {
 				customCSS[0].value += '\n.' + portletClasses.replace(/\s/g, '') + '{\n\t\n}\n';
 			}
@@ -606,7 +607,7 @@ Liferay.PortletCSS = {
 			option.addClass('focused');
 		}
 	},
-	
+
 	_loadContent: function(instantiated) {
 		var instance = this;
 
@@ -717,7 +718,7 @@ Liferay.PortletCSS = {
 			instance._wapInitialWindowStateSelect = jQuery('#lfr-wap-initial-window-state');
 
 		}
-		
+
 		newPanel.show();
 		newPanel.tabs();
 
@@ -979,7 +980,6 @@ Liferay.PortletCSS = {
 			}
 		);
 	},
-	
 
 	_portletConfig: function() {
 		var instance = this;
@@ -995,7 +995,7 @@ Liferay.PortletCSS = {
 		// Use custom title
 
 		customTitleCheckbox.unbind('click.liferay').bind(
-			'click.liferay', 
+			'click.liferay',
 			function() {
 				var title;
 
@@ -1026,7 +1026,7 @@ Liferay.PortletCSS = {
 		);
 
 		customTitleInput.unbind('keyup.liferay').bind(
-			'keyup.liferay', 
+			'keyup.liferay',
 			function() {
 				if (!portletData.useCustomTitle || instance._portletLanguage.find('option:selected').val() != instance._currentLanguage) {
 					return;
@@ -1041,14 +1041,14 @@ Liferay.PortletCSS = {
 		// Show borders
 
 		showBorders.unbind('click.liferay').bind(
-			'click.liferay', 
+			'click.liferay',
 			function() {
 				borderNote.toggle();
 				portletData.showBorders = this.checked;
 			}
 		);
 
-		language.bind('change.liferay', 
+		language.bind('change.liferay',
 			function() {
 				portletData.language = this.options[this.selectedIndex].value;
 
@@ -1062,7 +1062,7 @@ Liferay.PortletCSS = {
 
 		// Point target links to
 
-		portletLinksTarget.bind('change.liferay', 
+		portletLinksTarget.bind('change.liferay',
 			function() {
 				portletData.portletLinksTarget = instance._getSafeInteger(this.options[this.selectedIndex].value);
 			}
@@ -1447,7 +1447,7 @@ Liferay.PortletCSS = {
 		// Font family
 
 		fontFamily.unbind('change.liferay').bind(
-			'change.liferay', 
+			'change.liferay',
 			function() {
 				var fontFamily = this.options[this.selectedIndex].value;
 
@@ -1460,7 +1460,7 @@ Liferay.PortletCSS = {
 		// Font style
 
 		fontBold.unbind('click.liferay').bind(
-			'click.liferay', 
+			'click.liferay',
 			function() {
 			var style = 'normal';
 				if (this.checked) {
@@ -1474,7 +1474,7 @@ Liferay.PortletCSS = {
 		);
 
 		fontItalic.unbind('click.liferay').bind(
-			'click.liferay', 
+			'click.liferay',
 			function() {
 				var style = 'normal';
 
@@ -1491,7 +1491,7 @@ Liferay.PortletCSS = {
 		// Font size
 
 		fontSize.unbind('change.liferay').bind(
-			'change.liferay', 
+			'change.liferay',
 			function() {
 				var fontSize = this.options[this.selectedIndex].value;
 
@@ -1524,7 +1524,7 @@ Liferay.PortletCSS = {
 		);
 
 		fontColor.unbind('blur.liferay').bind(
-			'blur.liferay', 
+			'blur.liferay',
 			function() {
 				setColor(this);
 			}
@@ -1533,7 +1533,7 @@ Liferay.PortletCSS = {
 		// Text alignment
 
 		textAlign.unbind('change.liferay').bind(
-			'change.liferay', 
+			'change.liferay',
 			function() {
 				var textAlign = this.options[this.selectedIndex].value;
 
@@ -1546,7 +1546,7 @@ Liferay.PortletCSS = {
 		// Text decoration
 
 		textDecoration.unbind('change.liferay').bind(
-			'change.liferay', 
+			'change.liferay',
 			function() {
 				var decoration = this.options[this.selectedIndex].value;
 
@@ -1559,7 +1559,7 @@ Liferay.PortletCSS = {
 		// Word spacing
 
 		wordSpacing.unbind('change.liferay').bind(
-			'change.liferay', 
+			'change.liferay',
 			function() {
 				var spacing = this.options[this.selectedIndex].value;
 
@@ -1572,7 +1572,7 @@ Liferay.PortletCSS = {
 		// Line height
 
 		leading.unbind('change.liferay').bind(
-			'change.liferay', 
+			'change.liferay',
 			function() {
 				var leading = this.options[this.selectedIndex].value;
 
@@ -1585,7 +1585,7 @@ Liferay.PortletCSS = {
 		// Letter spacing
 
 		tracking.unbind('change.liferay').bind(
-			'change.liferay', 
+			'change.liferay',
 			function() {
 				var tracking = this.options[this.selectedIndex].value;
 
