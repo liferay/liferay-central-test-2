@@ -92,7 +92,9 @@ public class QNameUtil {
 		int pos = localPart.indexOf(StringPool.COLON);
 
 		if (pos == -1) {
-			_log.debug("qname " + localPart + " does not have a prefix");
+			if (_log.isDebugEnabled()) {
+				_log.debug("qname " + localPart + " does not have a prefix");
+			}
 
 			return new QName(localPart);
 		}
