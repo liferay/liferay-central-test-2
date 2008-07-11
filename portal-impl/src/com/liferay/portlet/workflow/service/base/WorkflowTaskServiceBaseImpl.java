@@ -24,6 +24,10 @@ package com.liferay.portlet.workflow.service.base;
 
 import com.liferay.portal.service.base.PrincipalBean;
 
+import com.liferay.portlet.workflow.service.SAWWorkflowLocalService;
+import com.liferay.portlet.workflow.service.SAWWorkflowLocalServiceFactory;
+import com.liferay.portlet.workflow.service.SAWWorkflowService;
+import com.liferay.portlet.workflow.service.SAWWorkflowServiceFactory;
 import com.liferay.portlet.workflow.service.WorkflowComponentService;
 import com.liferay.portlet.workflow.service.WorkflowComponentServiceFactory;
 import com.liferay.portlet.workflow.service.WorkflowDefinitionService;
@@ -67,6 +71,23 @@ public abstract class WorkflowTaskServiceBaseImpl extends PrincipalBean
 		this.workflowInstanceService = workflowInstanceService;
 	}
 
+	public SAWWorkflowLocalService getSAWWorkflowLocalService() {
+		return sawWorkflowLocalService;
+	}
+
+	public void setSAWWorkflowLocalService(
+		SAWWorkflowLocalService sawWorkflowLocalService) {
+		this.sawWorkflowLocalService = sawWorkflowLocalService;
+	}
+
+	public SAWWorkflowService getSAWWorkflowService() {
+		return sawWorkflowService;
+	}
+
+	public void setSAWWorkflowService(SAWWorkflowService sawWorkflowService) {
+		this.sawWorkflowService = sawWorkflowService;
+	}
+
 	protected void init() {
 		if (workflowComponentService == null) {
 			workflowComponentService = WorkflowComponentServiceFactory.getImpl();
@@ -79,9 +100,19 @@ public abstract class WorkflowTaskServiceBaseImpl extends PrincipalBean
 		if (workflowInstanceService == null) {
 			workflowInstanceService = WorkflowInstanceServiceFactory.getImpl();
 		}
+
+		if (sawWorkflowLocalService == null) {
+			sawWorkflowLocalService = SAWWorkflowLocalServiceFactory.getImpl();
+		}
+
+		if (sawWorkflowService == null) {
+			sawWorkflowService = SAWWorkflowServiceFactory.getImpl();
+		}
 	}
 
 	protected WorkflowComponentService workflowComponentService;
 	protected WorkflowDefinitionService workflowDefinitionService;
 	protected WorkflowInstanceService workflowInstanceService;
+	protected SAWWorkflowLocalService sawWorkflowLocalService;
+	protected SAWWorkflowService sawWorkflowService;
 }

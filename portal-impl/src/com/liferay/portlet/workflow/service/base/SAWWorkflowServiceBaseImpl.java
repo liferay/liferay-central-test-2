@@ -22,41 +22,28 @@
 
 package com.liferay.portlet.workflow.service.base;
 
-import com.liferay.documentlibrary.service.DLLocalService;
-import com.liferay.documentlibrary.service.DLLocalServiceFactory;
-import com.liferay.documentlibrary.service.DLService;
-import com.liferay.documentlibrary.service.DLServiceFactory;
-
-import com.liferay.portal.service.ResourceLocalService;
-import com.liferay.portal.service.ResourceLocalServiceFactory;
-import com.liferay.portal.service.ResourceService;
-import com.liferay.portal.service.ResourceServiceFactory;
 import com.liferay.portal.service.base.PrincipalBean;
-import com.liferay.portal.service.persistence.ResourceFinder;
-import com.liferay.portal.service.persistence.ResourceFinderUtil;
-import com.liferay.portal.service.persistence.ResourcePersistence;
-import com.liferay.portal.service.persistence.ResourceUtil;
 
 import com.liferay.portlet.workflow.service.SAWWorkflowLocalService;
 import com.liferay.portlet.workflow.service.SAWWorkflowLocalServiceFactory;
 import com.liferay.portlet.workflow.service.SAWWorkflowService;
-import com.liferay.portlet.workflow.service.SAWWorkflowServiceFactory;
 import com.liferay.portlet.workflow.service.WorkflowComponentService;
 import com.liferay.portlet.workflow.service.WorkflowComponentServiceFactory;
 import com.liferay.portlet.workflow.service.WorkflowDefinitionService;
+import com.liferay.portlet.workflow.service.WorkflowDefinitionServiceFactory;
 import com.liferay.portlet.workflow.service.WorkflowInstanceService;
 import com.liferay.portlet.workflow.service.WorkflowInstanceServiceFactory;
 import com.liferay.portlet.workflow.service.WorkflowTaskService;
 import com.liferay.portlet.workflow.service.WorkflowTaskServiceFactory;
 
 /**
- * <a href="WorkflowDefinitionServiceBaseImpl.java.html"><b><i>View Source</i></b></a>
+ * <a href="SAWWorkflowServiceBaseImpl.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *
  */
-public abstract class WorkflowDefinitionServiceBaseImpl extends PrincipalBean
-	implements WorkflowDefinitionService {
+public abstract class SAWWorkflowServiceBaseImpl extends PrincipalBean
+	implements SAWWorkflowService {
 	public WorkflowComponentService getWorkflowComponentService() {
 		return workflowComponentService;
 	}
@@ -64,6 +51,15 @@ public abstract class WorkflowDefinitionServiceBaseImpl extends PrincipalBean
 	public void setWorkflowComponentService(
 		WorkflowComponentService workflowComponentService) {
 		this.workflowComponentService = workflowComponentService;
+	}
+
+	public WorkflowDefinitionService getWorkflowDefinitionService() {
+		return workflowDefinitionService;
+	}
+
+	public void setWorkflowDefinitionService(
+		WorkflowDefinitionService workflowDefinitionService) {
+		this.workflowDefinitionService = workflowDefinitionService;
 	}
 
 	public WorkflowInstanceService getWorkflowInstanceService() {
@@ -92,66 +88,13 @@ public abstract class WorkflowDefinitionServiceBaseImpl extends PrincipalBean
 		this.sawWorkflowLocalService = sawWorkflowLocalService;
 	}
 
-	public SAWWorkflowService getSAWWorkflowService() {
-		return sawWorkflowService;
-	}
-
-	public void setSAWWorkflowService(SAWWorkflowService sawWorkflowService) {
-		this.sawWorkflowService = sawWorkflowService;
-	}
-
-	public DLLocalService getDLLocalService() {
-		return dlLocalService;
-	}
-
-	public void setDLLocalService(DLLocalService dlLocalService) {
-		this.dlLocalService = dlLocalService;
-	}
-
-	public DLService getDLService() {
-		return dlService;
-	}
-
-	public void setDLService(DLService dlService) {
-		this.dlService = dlService;
-	}
-
-	public ResourceLocalService getResourceLocalService() {
-		return resourceLocalService;
-	}
-
-	public void setResourceLocalService(
-		ResourceLocalService resourceLocalService) {
-		this.resourceLocalService = resourceLocalService;
-	}
-
-	public ResourceService getResourceService() {
-		return resourceService;
-	}
-
-	public void setResourceService(ResourceService resourceService) {
-		this.resourceService = resourceService;
-	}
-
-	public ResourcePersistence getResourcePersistence() {
-		return resourcePersistence;
-	}
-
-	public void setResourcePersistence(ResourcePersistence resourcePersistence) {
-		this.resourcePersistence = resourcePersistence;
-	}
-
-	public ResourceFinder getResourceFinder() {
-		return resourceFinder;
-	}
-
-	public void setResourceFinder(ResourceFinder resourceFinder) {
-		this.resourceFinder = resourceFinder;
-	}
-
 	protected void init() {
 		if (workflowComponentService == null) {
 			workflowComponentService = WorkflowComponentServiceFactory.getImpl();
+		}
+
+		if (workflowDefinitionService == null) {
+			workflowDefinitionService = WorkflowDefinitionServiceFactory.getImpl();
 		}
 
 		if (workflowInstanceService == null) {
@@ -165,45 +108,11 @@ public abstract class WorkflowDefinitionServiceBaseImpl extends PrincipalBean
 		if (sawWorkflowLocalService == null) {
 			sawWorkflowLocalService = SAWWorkflowLocalServiceFactory.getImpl();
 		}
-
-		if (sawWorkflowService == null) {
-			sawWorkflowService = SAWWorkflowServiceFactory.getImpl();
-		}
-
-		if (dlLocalService == null) {
-			dlLocalService = DLLocalServiceFactory.getImpl();
-		}
-
-		if (dlService == null) {
-			dlService = DLServiceFactory.getImpl();
-		}
-
-		if (resourceLocalService == null) {
-			resourceLocalService = ResourceLocalServiceFactory.getImpl();
-		}
-
-		if (resourceService == null) {
-			resourceService = ResourceServiceFactory.getImpl();
-		}
-
-		if (resourcePersistence == null) {
-			resourcePersistence = ResourceUtil.getPersistence();
-		}
-
-		if (resourceFinder == null) {
-			resourceFinder = ResourceFinderUtil.getFinder();
-		}
 	}
 
 	protected WorkflowComponentService workflowComponentService;
+	protected WorkflowDefinitionService workflowDefinitionService;
 	protected WorkflowInstanceService workflowInstanceService;
 	protected WorkflowTaskService workflowTaskService;
 	protected SAWWorkflowLocalService sawWorkflowLocalService;
-	protected SAWWorkflowService sawWorkflowService;
-	protected DLLocalService dlLocalService;
-	protected DLService dlService;
-	protected ResourceLocalService resourceLocalService;
-	protected ResourceService resourceService;
-	protected ResourcePersistence resourcePersistence;
-	protected ResourceFinder resourceFinder;
 }
