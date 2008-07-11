@@ -57,10 +57,6 @@ else {
 
 	<%= RuntimePortletUtil.processTemplate(application, request, response, pageContext, content) %>
 
-	<c:if test="<%= themeDisplay.isSignedIn() && PropsValues.PORTLET_CSS_ENABLED %>">
-		<liferay-portlet:runtime portletName="<%= PortletKeys.PORTLET_CSS %>" />
-	</c:if>
-
 <%
 }
 %>

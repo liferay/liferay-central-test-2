@@ -4,7 +4,6 @@ Liferay.PortletCSS = {
 
 		var curPortletBoundaryId = 'p_p_id_' + portletId + '_';
 		var obj = jQuery('#' + curPortletBoundaryId);
-		var tabTrigger = 0;
 
 		instance._portletId = portletId;
 		instance._curPortlet = obj.find('.portlet');
@@ -18,391 +17,53 @@ Liferay.PortletCSS = {
 			instance._curPortletWrapperId = curPortletBoundaryId;
 		}
 
-		var newPanel = instance._newPanel;
-		var newPanelTabs = newPanel.find('> ul.ui-tabs');
-
 		if (instance._curPortlet.length) {
-			if (!instance._newPanel.is('.instantiated')) {
-				instance._newPanel.addClass('instantiated');
+			var content = instance._newPanel;
 
-				instance._portletBoundaryIdVar = jQuery('#portlet-boundary-id');
+			if (!content.length) {
+				content = jQuery('<div class="loading-animation" />')
+			}
 
-				// Portlet config
-
-				instance._customTitleInput = jQuery('#custom-title');
-				instance._defaultPortletTitle = instance._curPortlet.find('.portlet-title').eq(0).text();
-				instance._customTitleCheckbox = jQuery('#use-custom-title-checkbox');
-				instance._showBorders = jQuery('#show-borders');
-				instance._borderNote = jQuery('#border-note');
-				instance._portletLanguage = jQuery('#lfr-portlet-language');
-				instance._portletLinksTarget = jQuery('#lfr-point-links');
-
-				// Text
-
-				instance._fontFamily = jQuery('#lfr-font-family');
-				instance._fontWeight = jQuery('#lfr-font-bold');
-				instance._fontStyle = jQuery('#lfr-font-italic');
-				instance._fontSize = jQuery('#lfr-font-size');
-				instance._fontColor = jQuery('#lfr-font-color');
-				instance._textAlign = jQuery('#lfr-font-align');
-				instance._textDecoration = jQuery('#lfr-font-decoration');
-				instance._wordSpacing = jQuery('#lfr-font-space');
-				instance._leading = jQuery('#lfr-font-leading');
-				instance._tracking = jQuery('#lfr-font-tracking');
-
-				// Background
-
-				instance._backgroundColor = jQuery('#lfr-bg-color');
-
-				instance._useBgImage = jQuery('#lfr-use-bg-image');
-				instance._bgImageProperties = jQuery('.lfr-bg-image-properties');
-
-				instance._bgRepeating = jQuery('#lfr-bg-repeat');
-
-				instance._bgPosTop = jQuery('#lfr-bg-top-int');
-				instance._bgPosTopUnit = jQuery('#lfr-bg-top-unit');
-				instance._bgPosLeft = jQuery('#lfr-bg-left-int');
-				instance._bgPosLeftUnit = jQuery('#lfr-bg-left-unit');
-
-				// Border
-
-				instance._ufaBorderWidth = jQuery('#lfr-use-for-all-width');
-				instance._ufaBorderStyle = jQuery('#lfr-use-for-all-style');
-				instance._ufaBorderColor = jQuery('#lfr-use-for-all-color');
-
-				instance._borderTopInt = jQuery('#lfr-border-width-top');
-				instance._borderTopUnit = jQuery('#lfr-border-width-top-unit');
-				instance._borderRightInt = jQuery('#lfr-border-width-right');
-				instance._borderRightUnit = jQuery('#lfr-border-width-right-unit');
-				instance._borderBottomInt = jQuery('#lfr-border-width-bottom');
-				instance._borderBottomUnit = jQuery('#lfr-border-width-bottom-unit');
-				instance._borderLeftInt = jQuery('#lfr-border-width-left');
-				instance._borderLeftUnit = jQuery('#lfr-border-width-left-unit');
-
-				instance._borderTopStyle = jQuery('#lfr-border-style-top');
-				instance._borderRightStyle = jQuery('#lfr-border-style-right');
-				instance._borderBottomStyle = jQuery('#lfr-border-style-bottom');
-				instance._borderLeftStyle = jQuery('#lfr-border-style-left');
-
-				instance._borderTopColor = jQuery('#lfr-border-color-top');
-				instance._borderRightColor = jQuery('#lfr-border-color-right');
-				instance._borderBottomColor = jQuery('#lfr-border-color-bottom');
-				instance._borderLeftColor = jQuery('#lfr-border-color-left');
-
-				// Spacing
-
-				instance._ufaPadding = jQuery('#lfr-use-for-all-padding');
-				instance._ufaMargin = jQuery('#lfr-use-for-all-margin');
-
-				instance._paddingTopInt = jQuery('#lfr-padding-top');
-				instance._paddingTopUnit = jQuery('#lfr-padding-top-unit');
-				instance._paddingRightInt = jQuery('#lfr-padding-right');
-				instance._paddingRightUnit = jQuery('#lfr-padding-right-unit');
-				instance._paddingBottomInt = jQuery('#lfr-padding-bottom');
-				instance._paddingBottomUnit = jQuery('#lfr-padding-bottom-unit');
-				instance._paddingLeftInt = jQuery('#lfr-padding-left');
-				instance._paddingLeftUnit = jQuery('#lfr-padding-left-unit');
-
-				instance._marginTopInt = jQuery('#lfr-margin-top');
-				instance._marginTopUnit = jQuery('#lfr-margin-top-unit');
-				instance._marginRightInt = jQuery('#lfr-margin-right');
-				instance._marginRightUnit = jQuery('#lfr-margin-right-unit');
-				instance._marginBottomInt = jQuery('#lfr-margin-bottom');
-				instance._marginBottomUnit = jQuery('#lfr-margin-bottom-unit');
-				instance._marginLeftInt = jQuery('#lfr-margin-left');
-				instance._marginLeftUnit = jQuery('#lfr-margin-left-unit');
-
-				// Advanced CSS
-
-				instance._customCSS = jQuery('#lfr-custom-css');
-
-				instance._saveButton = jQuery('#lfr-lookfeel-save');
-				instance._resetButton = jQuery('#lfr-lookfeel-reset');
-
-				// WAP styling
-
-				instance._wapTitleInput = jQuery('#lfr-wap-title');
-				instance._wapInitialWindowStateSelect = jQuery('#lfr-wap-initial-window-state');
-
-				newPanel.show();
-				newPanelTabs.tabs();
-
+			if (!instance._currentPopup) {
 				instance._currentPopup = Liferay.Popup({
 					width: 820,
-					message: newPanel[0],
+					message: content,
 					modal: false,
 					noCenter: true,
+					position: [20, 20],
 					onClose: function() {
 						instance._newPanel.removeClass('instantiated');
-						jQuery(newPanel[0]).hide().appendTo('body');
+						instance._newPanel.hide().appendTo('body');
+						instance._currentPopup = null;
 
 						if (Liferay.Browser.is_ie_6) {
 							window.location.reload(true);
 						}
 					}
 				});
-
 			}
 
-			newPanel.find('.lfr-colorpicker-img').remove();
-
-			instance._portletMsgResponse = jQuery('#lfr-portlet-css-response');
-			instance._portletMsgResponse.hide();
-
-			var defaultData = {
-				advancedData: {
-					customCSS: ''
-				},
-
-				bgData: {
-					backgroundColor: '',
-					backgroundImage: '',
-					useBgImage: false,
-					backgroundRepeat: '',
-					backgroundPosition: {
-						left: {
-							value: '',
-							unit: 'px'
+			if (!instance._newPanel.length) {
+				jQuery.ajax(
+					{
+						url: themeDisplay.getPathMain() + '/portal/render_portlet',
+						data: {
+							p_l_id: themeDisplay.getPlid(),
+							p_p_id: 113,
+							p_p_state: 'exclusive',
+							doAsUserId: themeDisplay.getDoAsUserIdEncoded()
 						},
-						top: {
-							value: '',
-							unit: 'px'
+						success: function(message) {
+							instance._currentPopup.html(message);
+							instance._newPanel = instance._currentPopup.find('#portlet-set-properties');
+							instance._loadContent();
 						}
 					}
-				},
-
-				borderData: {
-					borderWidth: {
-						bottom: {
-							value: '',
-							unit: 'px'
-						},
-						left: {
-							value: '',
-							unit: 'px'
-						},
-						right: {
-							value: '',
-							unit: 'px'
-						},
-						top: {
-							value: '',
-							unit: 'px'
-						},
-						sameForAll: true
-					},
-
-					borderStyle: {
-						bottom: '',
-						left: '',
-						right: '',
-						top: '',
-						sameForAll: true
-					},
-
-					borderColor: {
-						bottom: '',
-						left: '',
-						right: '',
-						top: '',
-						sameForAll: true
-					}
-				},
-
-				portletData: {
-					language: 'en_US',
-					portletLinksTarget: '',
-					showBorders: true,
-					title: '',
-					titles: {},
-					useCustomTitle: false
-				},
-
-				spacingData: {
-					margin: {
-						bottom: {
-							value: '',
-							unit: 'px'
-						},
-						left: {
-							value: '',
-							unit: 'px'
-						},
-						right: {
-							value: '',
-							unit: 'px'
-						},
-						top: {
-							value: '',
-							unit: 'px'
-						},
-						sameForAll: true
-					},
-					padding: {
-						bottom: {
-							value: '',
-							unit: 'px'
-						},
-						left: {
-							value: '',
-							unit: 'px'
-						},
-						right: {
-							value: '',
-							unit: 'px'
-						},
-						top: {
-							value: '',
-							unit: 'px'
-						},
-						sameForAll: true
-					}
-
-				},
-
-				textData: {
-					textAlign: '',
-					color: '',
-					fontFamily: '',
-					fontSize: '',
-					fontStyle: '',
-					fontWeight: '',
-					letterSpacing: '',
-					lineHeight: '',
-					textDecoration: '',
-					wordSpacing: ''
-				},
-
-				wapData: {
-					title: '',
-					initialWindowState: 'NORMAL'
-				}
-			};
-
-			var objectData = jQuery.ajax(
-				{
-					url: themeDisplay.getPathMain() + '/portlet_configuration/get_look_and_feel',
-					data: {
-						p_l_id: themeDisplay.getPlid(),
-						doAsUserId: themeDisplay.getDoAsUserIdEncoded(),
-						portletId: instance._portletId
-					},
-					async: false,
-					dataType: 'json',
-					type: "POST"
-				}
-			);
-
-			if (objectData.responseText.length) {
-				objectData = jQuery.parseJSON(objectData.responseText);
-
-				instance._objData = objectData;
+				);
 			}
 			else {
-				instance._objData = defaultData;
+				instance._loadContent(true);
 			}
-
-			instance._assignColorPickers();
-
-			instance._portletBoundaryIdVar.val(curPortletBoundaryId);
-
-			instance._setDefaults();
-
-			instance._portletConfig();
-			instance._textStyles();
-			instance._backgroundStyles();
-			instance._borderStyles();
-			instance._spacingStyles();
-			instance._cssStyles();
-
-			newPanelTabs.tabs('select', tabTrigger);
-
-			var useForAll = newPanel.find('.lfr-use-for-all');
-
-			var handleForms = function() {
-				var checkBox = jQuery(this);
-				var otherHolders = checkBox.parents('fieldset:first').find('.ctrl-holder:gt(1)');
-				var otherForms = otherHolders.find('input, select');
-				var colorPickerImages = otherHolders.find('.lfr-colorpicker-img');
-
-				if (this.checked) {
-					otherHolders.fadeTo('fast', 0.3);
-					otherForms.attr('disabled', true);
-					colorPickerImages.hide();
-				}
-				else {
-					otherHolders.fadeTo('fast', 1);
-					otherForms.attr('disabled', false);
-					colorPickerImages.show();
-				}
-			};
-
-			useForAll.unbind('click.liferay', handleForms).bind('click.liferay', handleForms);
-			useForAll.each(handleForms);
-
-			var saveHandler = function(xHR, type) {
-				var ajaxResponseMsg = instance._portletMsgResponse;
-				var ajaxResponseHTML = '<div id="lfr-portlet-css-response"></div>';
-				var message = '';
-				var messageClass = '';
-
-				if (type == 'success') {
-					message = Liferay.Language.get('your-request-processed-successfully');
-					messageClass = 'portlet-msg-success';
-				}
-				else {
-					message = Liferay.Language.get('your-settings-could-not-be-saved');
-					messageClass = 'portlet-msg-error';
-				}
-
-				if (!ajaxResponseMsg.length) {
-					ajaxResponse = jQuery(ajaxResponseHTML);
-					instance._newPanel.find('form').prepend(ajaxResponse);
-					instance._portletMsgResponse = ajaxResponse;
-				}
-
-				ajaxResponse.hide();
-				ajaxResponse.attr('class', messageClass);
-				ajaxResponse.empty();
-				ajaxResponse.html(message);
-				ajaxResponse.fadeIn('normal');
-			};
-
-			instance._saveButton.unbind('click.liferay').bind(
-				'click.liferay',
-				function() {
-					instance._objData.advancedData.customCSS = instance._customCSS.val();
-
-					instance._objData.wapData.title = instance._wapTitleInput.val();
-					instance._objData.wapData.initialWindowState = instance._wapInitialWindowStateSelect.val();
-
-					jQuery.ajax(
-						{
-							url: themeDisplay.getPathMain() + '/portlet_configuration/update_look_and_feel',
-							data: {
-								p_l_id: themeDisplay.getPlid(),
-								doAsUserId: themeDisplay.getDoAsUserIdEncoded(),
-								portletId: instance._portletId,
-								css: jQuery.toJSON(instance._objData)
-							},
-							complete: saveHandler,
-							type: "POST"
-						}
-					);
-				}
-			);
-
-			instance._resetButton.unbind('click.liferay').bind(
-				'click.liferay',
-				function() {
-					instance._curPortlet.attr('style', '');
-					jQuery('#lfr-custom-css-block-' + instance._curPortletWrapperId).remove();
-					instance._objData = defaultData;
-					instance._setDefaults();
-				}
-			);
-
-			jQuery(instance._currentPopup).parents('.ui-dialog').css({top: 20, left: 20});
 		}
 	},
 
@@ -945,6 +606,380 @@ Liferay.PortletCSS = {
 			option.addClass('focused');
 		}
 	},
+	
+	_loadContent: function(instantiated) {
+		var instance = this;
+
+		var newPanel = instance._newPanel;
+		var newPanelTabs = newPanel.find('> ul.ui-tabs');
+
+		var tabTrigger = 1;
+
+		if (!instantiated) {
+			newPanel.addClass('instantiated');
+			instance._portletBoundaryIdVar = jQuery('#portlet-boundary-id');
+
+			// Portlet config
+
+			instance._customTitleInput = jQuery('#custom-title');
+			instance._defaultPortletTitle = instance._curPortlet.find('.portlet-title').eq(0).text();
+			instance._customTitleCheckbox = jQuery('#use-custom-title-checkbox');
+			instance._showBorders = jQuery('#show-borders');
+			instance._borderNote = jQuery('#border-note');
+			instance._portletLanguage = jQuery('#lfr-portlet-language');
+			instance._portletLinksTarget = jQuery('#lfr-point-links');
+
+			// Text
+
+			instance._fontFamily = jQuery('#lfr-font-family');
+			instance._fontWeight = jQuery('#lfr-font-bold');
+			instance._fontStyle = jQuery('#lfr-font-italic');
+			instance._fontSize = jQuery('#lfr-font-size');
+			instance._fontColor = jQuery('#lfr-font-color');
+			instance._textAlign = jQuery('#lfr-font-align');
+			instance._textDecoration = jQuery('#lfr-font-decoration');
+			instance._wordSpacing = jQuery('#lfr-font-space');
+			instance._leading = jQuery('#lfr-font-leading');
+			instance._tracking = jQuery('#lfr-font-tracking');
+
+			// Background
+
+			instance._backgroundColor = jQuery('#lfr-bg-color');
+
+			instance._useBgImage = jQuery('#lfr-use-bg-image');
+			instance._bgImageProperties = jQuery('.lfr-bg-image-properties');
+
+			instance._bgRepeating = jQuery('#lfr-bg-repeat');
+
+			instance._bgPosTop = jQuery('#lfr-bg-top-int');
+			instance._bgPosTopUnit = jQuery('#lfr-bg-top-unit');
+			instance._bgPosLeft = jQuery('#lfr-bg-left-int');
+			instance._bgPosLeftUnit = jQuery('#lfr-bg-left-unit');
+
+			// Border
+
+			instance._ufaBorderWidth = jQuery('#lfr-use-for-all-width');
+			instance._ufaBorderStyle = jQuery('#lfr-use-for-all-style');
+			instance._ufaBorderColor = jQuery('#lfr-use-for-all-color');
+
+			instance._borderTopInt = jQuery('#lfr-border-width-top');
+			instance._borderTopUnit = jQuery('#lfr-border-width-top-unit');
+			instance._borderRightInt = jQuery('#lfr-border-width-right');
+			instance._borderRightUnit = jQuery('#lfr-border-width-right-unit');
+			instance._borderBottomInt = jQuery('#lfr-border-width-bottom');
+			instance._borderBottomUnit = jQuery('#lfr-border-width-bottom-unit');
+			instance._borderLeftInt = jQuery('#lfr-border-width-left');
+			instance._borderLeftUnit = jQuery('#lfr-border-width-left-unit');
+
+			instance._borderTopStyle = jQuery('#lfr-border-style-top');
+			instance._borderRightStyle = jQuery('#lfr-border-style-right');
+			instance._borderBottomStyle = jQuery('#lfr-border-style-bottom');
+			instance._borderLeftStyle = jQuery('#lfr-border-style-left');
+
+			instance._borderTopColor = jQuery('#lfr-border-color-top');
+			instance._borderRightColor = jQuery('#lfr-border-color-right');
+			instance._borderBottomColor = jQuery('#lfr-border-color-bottom');
+			instance._borderLeftColor = jQuery('#lfr-border-color-left');
+
+			// Spacing
+
+			instance._ufaPadding = jQuery('#lfr-use-for-all-padding');
+			instance._ufaMargin = jQuery('#lfr-use-for-all-margin');
+
+			instance._paddingTopInt = jQuery('#lfr-padding-top');
+			instance._paddingTopUnit = jQuery('#lfr-padding-top-unit');
+			instance._paddingRightInt = jQuery('#lfr-padding-right');
+			instance._paddingRightUnit = jQuery('#lfr-padding-right-unit');
+			instance._paddingBottomInt = jQuery('#lfr-padding-bottom');
+			instance._paddingBottomUnit = jQuery('#lfr-padding-bottom-unit');
+			instance._paddingLeftInt = jQuery('#lfr-padding-left');
+			instance._paddingLeftUnit = jQuery('#lfr-padding-left-unit');
+
+			instance._marginTopInt = jQuery('#lfr-margin-top');
+			instance._marginTopUnit = jQuery('#lfr-margin-top-unit');
+			instance._marginRightInt = jQuery('#lfr-margin-right');
+			instance._marginRightUnit = jQuery('#lfr-margin-right-unit');
+			instance._marginBottomInt = jQuery('#lfr-margin-bottom');
+			instance._marginBottomUnit = jQuery('#lfr-margin-bottom-unit');
+			instance._marginLeftInt = jQuery('#lfr-margin-left');
+			instance._marginLeftUnit = jQuery('#lfr-margin-left-unit');
+
+			// Advanced CSS
+
+			instance._customCSS = jQuery('#lfr-custom-css');
+
+			instance._saveButton = jQuery('#lfr-lookfeel-save');
+			instance._resetButton = jQuery('#lfr-lookfeel-reset');
+
+			// WAP styling
+
+			instance._wapTitleInput = jQuery('#lfr-wap-title');
+			instance._wapInitialWindowStateSelect = jQuery('#lfr-wap-initial-window-state');
+
+		}
+		
+		newPanel.show();
+		newPanel.tabs();
+
+		newPanel.find('.lfr-colorpicker-img').remove();
+
+		instance._portletMsgResponse = jQuery('#lfr-portlet-css-response');
+		instance._portletMsgResponse.hide();
+
+		var defaultData = {
+			advancedData: {
+				customCSS: ''
+			},
+
+			bgData: {
+				backgroundColor: '',
+				backgroundImage: '',
+				useBgImage: false,
+				backgroundRepeat: '',
+				backgroundPosition: {
+					left: {
+						value: '',
+						unit: 'px'
+					},
+					top: {
+						value: '',
+						unit: 'px'
+					}
+				}
+			},
+
+			borderData: {
+				borderWidth: {
+					bottom: {
+						value: '',
+						unit: 'px'
+					},
+					left: {
+						value: '',
+						unit: 'px'
+					},
+					right: {
+						value: '',
+						unit: 'px'
+					},
+					top: {
+						value: '',
+						unit: 'px'
+					},
+					sameForAll: true
+				},
+
+				borderStyle: {
+					bottom: '',
+					left: '',
+					right: '',
+					top: '',
+					sameForAll: true
+				},
+
+				borderColor: {
+					bottom: '',
+					left: '',
+					right: '',
+					top: '',
+					sameForAll: true
+				}
+			},
+
+			portletData: {
+				language: 'en_US',
+				portletLinksTarget: '',
+				showBorders: true,
+				title: '',
+				titles: {},
+				useCustomTitle: false
+			},
+
+			spacingData: {
+				margin: {
+					bottom: {
+						value: '',
+						unit: 'px'
+					},
+					left: {
+						value: '',
+						unit: 'px'
+					},
+					right: {
+						value: '',
+						unit: 'px'
+					},
+					top: {
+						value: '',
+						unit: 'px'
+					},
+					sameForAll: true
+				},
+				padding: {
+					bottom: {
+						value: '',
+						unit: 'px'
+					},
+					left: {
+						value: '',
+						unit: 'px'
+					},
+					right: {
+						value: '',
+						unit: 'px'
+					},
+					top: {
+						value: '',
+						unit: 'px'
+					},
+					sameForAll: true
+				}
+
+			},
+
+			textData: {
+				textAlign: '',
+				color: '',
+				fontFamily: '',
+				fontSize: '',
+				fontStyle: '',
+				fontWeight: '',
+				letterSpacing: '',
+				lineHeight: '',
+				textDecoration: '',
+				wordSpacing: ''
+			},
+
+			wapData: {
+				title: '',
+				initialWindowState: 'NORMAL'
+			}
+		};
+
+		var objectData = jQuery.ajax(
+			{
+				url: themeDisplay.getPathMain() + '/portlet_configuration/get_look_and_feel',
+				data: {
+					p_l_id: themeDisplay.getPlid(),
+					doAsUserId: themeDisplay.getDoAsUserIdEncoded(),
+					portletId: instance._portletId
+				},
+				async: false,
+				dataType: 'json',
+				type: "POST"
+			}
+		);
+
+		if (objectData.responseText.length) {
+			objectData = jQuery.parseJSON(objectData.responseText);
+
+			instance._objData = objectData;
+		}
+		else {
+			instance._objData = defaultData;
+		}
+
+		instance._assignColorPickers();
+
+		instance._portletBoundaryIdVar.val(instance._curPortletWrapperId);
+
+		instance._setDefaults();
+
+		instance._portletConfig();
+		instance._textStyles();
+		instance._backgroundStyles();
+		instance._borderStyles();
+		instance._spacingStyles();
+		instance._cssStyles();
+
+		newPanelTabs.tabs('select', tabTrigger);
+
+		var useForAll = newPanel.find('.lfr-use-for-all');
+
+		var handleForms = function() {
+			var checkBox = jQuery(this);
+			var otherHolders = checkBox.parents('fieldset:first').find('.ctrl-holder:gt(1)');
+			var otherForms = otherHolders.find('input, select');
+			var colorPickerImages = otherHolders.find('.lfr-colorpicker-img');
+
+			if (this.checked) {
+				otherHolders.fadeTo('fast', 0.3);
+				otherForms.attr('disabled', true);
+				colorPickerImages.hide();
+			}
+			else {
+				otherHolders.fadeTo('fast', 1);
+				otherForms.attr('disabled', false);
+				colorPickerImages.show();
+			}
+		};
+
+		useForAll.unbind('click.liferay', handleForms).bind('click.liferay', handleForms);
+		useForAll.each(handleForms);
+
+		var saveHandler = function(xHR, type) {
+			var ajaxResponseMsg = instance._portletMsgResponse;
+			var ajaxResponseHTML = '<div id="lfr-portlet-css-response"></div>';
+			var message = '';
+			var messageClass = '';
+
+			if (type == 'success') {
+				message = Liferay.Language.get('your-request-processed-successfully');
+				messageClass = 'portlet-msg-success';
+			}
+			else {
+				message = Liferay.Language.get('your-settings-could-not-be-saved');
+				messageClass = 'portlet-msg-error';
+			}
+
+			if (!ajaxResponseMsg.length) {
+				ajaxResponse = jQuery(ajaxResponseHTML);
+				newPanel.find('form').prepend(ajaxResponse);
+				instance._portletMsgResponse = ajaxResponse;
+			}
+
+			ajaxResponse.hide();
+			ajaxResponse.attr('class', messageClass);
+			ajaxResponse.empty();
+			ajaxResponse.html(message);
+			ajaxResponse.fadeIn('normal');
+		};
+
+		instance._saveButton.unbind('click.liferay').bind(
+			'click.liferay',
+			function() {
+				instance._objData.advancedData.customCSS = instance._customCSS.val();
+
+				instance._objData.wapData.title = instance._wapTitleInput.val();
+				instance._objData.wapData.initialWindowState = instance._wapInitialWindowStateSelect.val();
+
+				jQuery.ajax(
+					{
+						url: themeDisplay.getPathMain() + '/portlet_configuration/update_look_and_feel',
+						data: {
+							p_l_id: themeDisplay.getPlid(),
+							doAsUserId: themeDisplay.getDoAsUserIdEncoded(),
+							portletId: instance._portletId,
+							css: jQuery.toJSON(instance._objData)
+						},
+						complete: saveHandler,
+						type: "POST"
+					}
+				);
+			}
+		);
+
+		instance._resetButton.unbind('click.liferay').bind(
+			'click.liferay',
+			function() {
+				instance._curPortlet.attr('style', '');
+				jQuery('#lfr-custom-css-block-' + instance._curPortletWrapperId).remove();
+				instance._objData = defaultData;
+				instance._setDefaults();
+			}
+		);
+	},
+	
 
 	_portletConfig: function() {
 		var instance = this;
