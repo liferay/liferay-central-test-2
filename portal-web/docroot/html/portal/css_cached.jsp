@@ -261,7 +261,7 @@ response.setContentType(ContentTypes.TEXT_CSS);
 .js .interactive-mode {
 	float: right;
 	min-width: 150px;
-	position: relative;
+	position: absolute;
 	right: 10px;
 	top: 10px;
 }
