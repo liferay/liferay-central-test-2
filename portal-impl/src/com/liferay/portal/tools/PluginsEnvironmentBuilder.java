@@ -24,20 +24,16 @@ package com.liferay.portal.tools;
 
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.ListUtil;
-import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
+import com.liferay.portal.util.FileImpl;
 
 import java.io.BufferedReader;
-import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.FilenameFilter;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.io.OutputStreamWriter;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -45,254 +41,223 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Properties;
 
+import org.apache.oro.io.GlobFilenameFilter;
 import org.apache.tools.ant.DirectoryScanner;
 
 /**
  * <a href="PluginsEnvironmentBuilder.java.html"><b><i>View Source</i></b></a>
  *
  * @author Alexander Chow
+ * @author Brian Wing Shun Chan
  *
  */
 public class PluginsEnvironmentBuilder {
 
 	public static void main(String[] args) throws Exception {
-		String dir = null;
-		boolean svn = false;
+		File dir = new File(System.getProperty("plugins.env.dir"));
+		boolean svn = GetterUtil.getBoolean(
+			System.getProperty("plugins.env.svn"));
+		boolean eclipse = GetterUtil.getBoolean(
+			System.getProperty("plugins.env.eclipse"));
 
-		if (args.length > 0) {
-			dir = args[0];
-
-			if (args.length == 2) {
-				svn = GetterUtil.getBoolean(args[1]);
-			}
-		}
-
-		if (Validator.isNull(dir)) {
-			System.err.println("Please enter a valid plugins directory.");
-
-			return;
-		}
-
-		new PluginsEnvironmentBuilder(new File(dir), svn);
+		new PluginsEnvironmentBuilder(dir, svn, eclipse);
 	}
 
-	public PluginsEnvironmentBuilder(File dir, boolean svn) throws Exception {
-		System.out.println("Starting " + getClass().getName() + " for " + dir);
-
-		DirectoryScanner ds = new DirectoryScanner();
-
-		ds.setBasedir(dir);
-		ds.setIncludes(
-			new String[] {
-				"**\\liferay-plugin-package.properties",
-			});
-
-		ds.scan();
-
-		String path = dir.getCanonicalPath();
-
-		String[] fileNames = ds.getIncludedFiles();
-
-		for (String fileName : fileNames) {
-			try {
+	public PluginsEnvironmentBuilder(File dir, boolean svn, boolean eclipse) {
+		try {
+			_svn = svn;
+	
+			DirectoryScanner ds = new DirectoryScanner();
+	
+			ds.setBasedir(dir);
+			ds.setIncludes(
+				new String[] {
+					"**\\liferay-plugin-package.properties",
+				});
+	
+			ds.scan();
+	
+			String path = dir.getCanonicalPath();
+	
+			String[] fileNames = ds.getIncludedFiles();
+	
+			for (String fileName : fileNames) {
 				File propsFile = new File(path + "/" + fileName);
 				File libDir = new File(propsFile.getParent() + "/lib");
-				File projDir = new File(propsFile.getParent() + "/../..");
+				File projectDir = new File(propsFile.getParent() + "/../..");
+
 				Properties props = new Properties();
 
 				props.load(new FileInputStream(propsFile));
 
-				String[] dependencyJars = StringUtil.split(
-					props.getProperty("portal.dependency.jars"));
-
-				Arrays.sort(dependencyJars);
-
-				fixEclipseFiles(libDir, projDir, dependencyJars, svn);
+				List<String> dependencyJars = ListUtil.toList(StringUtil.split(
+					props.getProperty("portal.dependency.jars")));
 
 				if (svn) {
-					fixSVNIgnores(libDir, dependencyJars);
+					List<String> jars = new ArrayList<String>(dependencyJars);
+
+					jars.add("commons-logging.jar");
+					jars.add("log4j.jar");
+					jars.add("util-bridges.jar");
+					jars.add("util-java.jar");
+					jars.add("util-taglib.jar");
+					
+					Collections.sort(jars);
+
+					updateLibIgnores(
+						libDir, jars.toArray(new String[jars.size()]));
+				}
+
+				if (eclipse) {
+					updateEclipseFiles(libDir, projectDir, dependencyJars);
 				}
 			}
-			catch (Exception e) {
-				e.printStackTrace();
-			}
 		}
-
-		System.out.println("Done.");
+		catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 
-	public void fixEclipseFiles(
-			File libDir, File projDir, String[] dependencyJars, boolean svn)
+	public void updateEclipseFiles(
+			File libDir, File projectDir, List<String> dependencyJars)
 		throws Exception {
 
-		String projPath = projDir.getCanonicalPath();
-		String projName = StringUtil.extractLast(projPath, "/");
+		String projectPath = projectDir.getCanonicalPath();
+		String projectName = StringUtil.extractLast(
+			projectPath, File.separator);
 
-		// Generate .project
+		// .project
 
-		StringBuilder project = new StringBuilder();
+		StringBuilder sb = new StringBuilder();
 
-		project.append("<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n");
-		project.append("<projectDescription>\n");
-        project.append("\t<name>" + projName + "</name>\n");
-        project.append("\t<comment></comment>\n");
-        project.append("\t<projects></projects>\n");
-        project.append("\t<buildSpec>\n");
-        project.append("\t\t<buildCommand>\n");
-        project.append("\t\t\t<name>org.eclipse.jdt.core.javabuilder</name>\n");
-        project.append("\t\t\t<arguments></arguments>\n");
-        project.append("\t\t</buildCommand>\n");
-        project.append("\t</buildSpec>\n");
-        project.append("\t<natures>\n");
-        project.append("\t\t<nature>org.eclipse.jdt.core.javanature</nature>\n");
-        project.append("\t</natures>\n");
-		project.append("</projectDescription>");
+		sb.append("<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n\n");
+		sb.append("<projectDescription>\n");
+		sb.append("\t<name>" + projectName + "</name>\n");
+		sb.append("\t<comment></comment>\n");
+		sb.append("\t<projects></projects>\n");
+		sb.append("\t<buildSpec>\n");
+		sb.append("\t\t<buildCommand>\n");
+		sb.append("\t\t\t<name>org.eclipse.jdt.core.javabuilder</name>\n");
+		sb.append("\t\t\t<arguments></arguments>\n");
+		sb.append("\t\t</buildCommand>\n");
+		sb.append("\t</buildSpec>\n");
+		sb.append("\t<natures>\n");
+		sb.append("\t\t<nature>org.eclipse.jdt.core.javanature</nature>\n");
+		sb.append("\t</natures>\n");
+		sb.append("</projectDescription>");
 
-		File dotProject = new File(projPath + "/.project");
+		File projectFile = new File(projectPath + "/.project");
 
-		if(_rewriteToFile(dotProject, project.toString())) {
-			System.out.println("- Created new " + dotProject);
-		}
-		else {
-			System.out.println("- Up-to-date " + dotProject);
-		}
+		System.out.println("Updating " + projectFile);
 
-		// Generate .classpath
+		_fileUtil.write(projectFile, sb.toString());
 
-		FilenameFilter filter = new FilenameFilter() {
-			public boolean accept(File dir, String name) {
-				return name.endsWith(".jar");
-			}
-		};
+		// .classpath
 
-		List<String> portalJars = ListUtil.toList(dependencyJars);
-
-		portalJars.add("commons-logging.jar");
-		portalJars.add("log4j.jar");
-
-		ListUtil.distinct(portalJars);
-		Collections.sort(portalJars);
-
-		List<String> customJars = ListUtil.toList(libDir.list(filter));
-
-		for (String jar : portalJars) {
-			customJars.remove(jar);
-		}
+		List<String> customJars = ListUtil.toList(
+			libDir.list(new GlobFilenameFilter("*.jar")));
 
 		Collections.sort(customJars);
 
-		StringBuilder classpath = new StringBuilder();
-
-		classpath.append("<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n");
-        classpath.append("<classpath>\n");
-        classpath.append("\t<classpathentry excluding=\"**/.svn/**|.svn/\" kind=\"src\" path=\"docroot/WEB-INF/src\"/>\n");
-        classpath.append("\t<classpathentry kind=\"src\" path=\"/portal\"/>\n");
-        classpath.append("\t<classpathentry kind=\"con\" path=\"org.eclipse.jdt.launching.JRE_CONTAINER\"/>\n");
-
-    	classpath.append("\t<classpathentry kind=\"lib\" path=\"/portal/lib/development/mail.jar\"/>\n");
-    	classpath.append("\t<classpathentry kind=\"lib\" path=\"/portal/lib/development/servlet.jar\"/>\n");
-    	classpath.append("\t<classpathentry kind=\"lib\" path=\"/portal/lib/global/container.jar\"/>\n");
-    	classpath.append("\t<classpathentry kind=\"lib\" path=\"/portal/lib/global/portlet-container.jar\"/>\n");
-    	classpath.append("\t<classpathentry kind=\"lib\" path=\"/portal/lib/global/portlet.jar\"/>\n");
-
-        for (String jar : portalJars) {
-        	classpath.append("\t<classpathentry kind=\"lib\" path=\"/portal/lib/portal/" + jar + "\"/>\n");
-        }
-
-        classpath.append("\t<classpathentry kind=\"lib\" path=\"/portal/portal-kernel/portal-kernel.jar\"/>\n");
-        classpath.append("\t<classpathentry kind=\"lib\" path=\"/portal/portal-service/portal-service.jar\"/>\n");
-        classpath.append("\t<classpathentry kind=\"lib\" path=\"/portal/util-bridges/util-bridges.jar\"/>\n");
-        classpath.append("\t<classpathentry kind=\"lib\" path=\"/portal/util-java/util-java.jar\"/>\n");
-        classpath.append("\t<classpathentry kind=\"lib\" path=\"/portal/util-taglib/util-taglib.jar\"/>\n");
-
-        for (String jar : customJars) {
-        	classpath.append("\t<classpathentry kind=\"lib\" path=\"docroot/WEB-INF/lib/" + jar + "\"/>\n");
-        }
-
-        classpath.append("\t<classpathentry kind=\"output\" path=\"bin\"/>\n");
-        classpath.append("</classpath>");
-
-        File dotClasspath = new File(projPath + "/.classpath");
-
-		if(_rewriteToFile(dotClasspath, classpath.toString())) {
-			System.out.println("- Created new " + dotClasspath);
-		}
-		else {
-			System.out.println("- Up-to-date " + dotClasspath);
+		for (String jar : dependencyJars) {
+			customJars.remove(jar);
 		}
 
-		// Add to SVN
+		sb = new StringBuilder();
 
-		if (svn) {
+		sb.append("<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n\n");
+		sb.append("<classpath>\n");
+		sb.append("\t<classpathentry excluding=\"**/.svn/**|.svn/\" ");
+		sb.append("kind=\"src\" path=\"docroot/WEB-INF/src\" />\n");
+		sb.append("\t<classpathentry kind=\"src\" path=\"/portal\" />\n");
+		sb.append("\t<classpathentry kind=\"con\" ");
+		sb.append("path=\"org.eclipse.jdt.launching.JRE_CONTAINER\" />\n");
+
+		_addClasspathEntry(sb, "/portal/lib/development/mail.jar");
+		_addClasspathEntry(sb, "/portal/lib/development/servlet.jar");
+		_addClasspathEntry(sb, "/portal/lib/global/container.jar");
+		_addClasspathEntry(sb, "/portal/lib/global/portlet-container.jar");
+		_addClasspathEntry(sb, "/portal/lib/global/portlet.jar");
+		_addClasspathEntry(sb, "/portal/lib/portal/commons-logging.jar");
+		_addClasspathEntry(sb, "/portal/lib/portal/log4j.jar");
+		_addClasspathEntry(sb, "/portal/portal-kernel/portal-kernel.jar");
+		_addClasspathEntry(sb, "/portal/portal-service/portal-service.jar");
+		_addClasspathEntry(sb, "/portal/util-bridges/util-bridges.jar");
+		_addClasspathEntry(sb, "/portal/util-java/util-java.jar");
+		_addClasspathEntry(sb, "/portal/util-taglib/util-taglib.jar");
+
+		for (String jar : customJars) {
+			_addClasspathEntry(sb, "docroot/WEB-INF/lib/" + jar);
+		}
+
+		sb.append("\t<classpathentry kind=\"output\" path=\"bin\" />\n");
+		sb.append("</classpath>");
+
+		File classpathFile = new File(projectPath + "/.classpath");
+
+		System.out.println("Updating " + classpathFile);
+
+		_fileUtil.write(classpathFile, sb.toString());
+
+		// SVN
+
+		if (_svn) {
 			try {
-				_execSVNCommand(_SVN_INFO + dotProject);
+				_exec(_SVN_INFO + projectFile);
 			}
 			catch (Exception e) {
-				_execSVNCommand(_SVN_ADD + dotProject);
+				_exec(_SVN_ADD + projectFile);
 			}
 
 			try {
-				_execSVNCommand(_SVN_INFO + dotClasspath);
+				_exec(_SVN_INFO + classpathFile);
 			}
 			catch (Exception e) {
-				_execSVNCommand(_SVN_ADD + dotClasspath);
+				_exec(_SVN_ADD + classpathFile);
 			}
 
-			_execSVNCommand(_SVN_SET_IGNORES + "bin " + projPath);
+			_exec(_SVN_SET_IGNORES + "bin " + projectPath);
 		}
 	}
 
-	public void fixSVNIgnores(File libDir, String[] dependencyJars)
-		throws Exception {
+	public void updateLibIgnores(File libDir, String[] jars) throws Exception {
+		if (!_isSVNDir(libDir)) {
+			return;
+		}
 
 		File tempFile = null;
 
 		try {
 			String libPath = libDir.getCanonicalPath();
 
-			if (_isSourceControlled(libDir)) {
-				String[] oldIgnores = _execSVNCommand(
-					_SVN_GET_IGNORES + libPath);
+			String[] oldIgnores = _exec(_SVN_GET_IGNORES + libPath);
 
-				Arrays.sort(oldIgnores);
+			Arrays.sort(oldIgnores);
 
-				if (Arrays.equals(oldIgnores, dependencyJars)) {
-					System.out.println("- SVN ignores are valid for " + libPath);
+			if (Arrays.equals(oldIgnores, jars)) {
+				return;
+			}
 
-					return;
-				}
+			tempFile = File.createTempFile("svn-ignores-", null, null);
 
-				tempFile = File.createTempFile("svn-ignore-", null, null);
+			_exec(_SVN_DEL_IGNORES + libPath);
 
-				_execSVNCommand(_SVN_DEL_IGNORES + libPath);
+			StringBuilder sb = new StringBuilder();
 
-				StringBuilder sb = new StringBuilder();
+			for (String jar : jars) {
+				sb.append(jar + "\n");
+			}
 
-				for (String jar : dependencyJars) {
-					sb.append(jar + "\n");
-				}
+			_fileUtil.write(tempFile, sb.toString());
 
-				_writeToFile(tempFile, sb.toString());
+			_exec(
+				_SVN_SET_IGNORES + "-F \"" + tempFile.getCanonicalPath() +
+					"\" " + libPath);
 
-				_execSVNCommand(
-					_SVN_SET_IGNORES + "-F " + tempFile.getCanonicalPath() + 
-					" " + libPath);
+			String[] newIgnores = _exec(_SVN_GET_IGNORES + libPath);
 
-				String[] newIgnores = _execSVNCommand(
-					_SVN_GET_IGNORES + libPath);
-
-				if (newIgnores.length > 0) {
-					System.out.println("- SVN ignores set for " + libPath);
-
-					Arrays.sort(newIgnores);
-
-					System.out.println(
-						"\tOld ignores: " +StringUtil.merge(oldIgnores));
-					System.out.println(
-						"\tNew ignores: " + StringUtil.merge(newIgnores));
-
-					System.out.println("\tPlease manually commit " + libPath);
-				}
+			if (newIgnores.length > 0) {
+				Arrays.sort(newIgnores);
 			}
 		}
 		finally {
@@ -302,7 +267,15 @@ public class PluginsEnvironmentBuilder {
 		}
 	}
 
-	private String[] _execSVNCommand(String cmd) throws Exception {
+	private void _addClasspathEntry(StringBuilder sb, String jar)
+		throws Exception {
+
+		sb.append("\t<classpathentry kind=\"lib\" path=\"");
+		sb.append(jar);
+		sb.append("\" />\n");
+	}
+
+	private String[] _exec(String cmd) throws Exception {
 		Process process = Runtime.getRuntime().exec(cmd);
 
 		String[] stdout = _getExecOutput(process.getInputStream());
@@ -356,78 +329,33 @@ public class PluginsEnvironmentBuilder {
 		return list.toArray(new String[] {});
 	}
 
-	private boolean _isSourceControlled(File libDir) {
-		boolean controlled = true;
-
+	private boolean _isSVNDir(File libDir) {
 		if (!libDir.exists()) {
-			controlled = false;
+			return false;
 		}
 
 		try {
-			_execSVNCommand(_SVN_INFO + libDir);
+			_exec(_SVN_INFO + libDir);
 		}
 		catch (Exception e) {
-			controlled = false;
+			return false;
 		}
 
-		return controlled;
-	}
-
-	private boolean _rewriteToFile(File file, String content) throws Exception {
-		FileInputStream fis = null;
-		String oldContent = "";
-		boolean write = true;
-
-		if (file.exists()) {
-			try {
-				fis = new FileInputStream(file);
-
-				byte[] bytes = new byte[fis.available()];
-
-				fis.read(bytes);
-
-				oldContent = new String(bytes, StringPool.UTF8);
-			}
-			finally {
-				if (fis != null) {
-					fis.close();
-				}
-			}
-
-			if (content.equals(oldContent)) {
-				write = false;
-			}
-		}
-
-		if (write) {
-			_writeToFile(file, content);
-		}
-
-		return write;
-	}
-
-	private void _writeToFile(File file, String content) throws Exception {
-		BufferedWriter bw = null;
-
-		try {
-			bw = new BufferedWriter(new OutputStreamWriter(
-				new FileOutputStream(file, false)));
-
-			bw.write(content);
-		}
-		finally {
-			bw.close();
-		}
+		return true;
 	}
 
 	private static final String _SVN_ADD = "svn add ";
 
+	private static final String _SVN_DEL_IGNORES = "svn propdel svn:ignore ";
+
 	private static final String _SVN_GET_IGNORES = "svn propget svn:ignore ";
 
-	private static final String _SVN_DEL_IGNORES = "svn propdel svn:ignore ";
+	private static final String _SVN_INFO = "svn info ";
 
 	private static final String _SVN_SET_IGNORES = "svn propset svn:ignore ";
 
-	private static final String _SVN_INFO = "svn info ";
+	private static FileImpl _fileUtil = new FileImpl();
+
+	private boolean _svn;
 
 }
