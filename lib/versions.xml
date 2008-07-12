@@ -1715,7 +1715,7 @@
 	</library>
 	<library>
 		<file-name>portal/jspwiki.jar</file-name>
-		<version>2.6.0</version>
+		<version>2.6.1</version>
 		<project-name>JSPWiki</project-name>
 		<project-url>http://www.jspwiki.org</project-url>
 		<licenses>
