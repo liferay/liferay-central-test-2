@@ -153,7 +153,8 @@ public class UnicodeProperties extends HashMap<String, String> {
 					value = _encode(value);
 				}
 
-				sb.append(key + StringPool.EQUAL + value + StringPool.NEW_LINE);
+				sb.append(key).append(StringPool.EQUAL).
+                        append(value).append(StringPool.NEW_LINE);
 			}
 		}
 
