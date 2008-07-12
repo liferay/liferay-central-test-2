@@ -142,7 +142,7 @@ public class SourceFormatter {
 	}
 
 	public static void _checkPersistenceTestSuite() throws IOException {
-		String basedir = "../portal-impl/test";
+		String basedir = "./portal-impl/test";
 
 		if (!_fileUtil.exists(basedir)) {
 			return;
@@ -181,7 +181,7 @@ public class SourceFormatter {
 	}
 
 	private static void _checkWebXML() throws IOException {
-		String basedir = "../";
+		String basedir = "./";
 
 		if (_fileUtil.exists(basedir + "portal-impl")) {
 			return;
@@ -315,9 +315,9 @@ public class SourceFormatter {
 	}
 
 	private static void _formatJava() throws IOException {
-		String basedir = "../";
+		String basedir = "./";
 
-		String copyright = _fileUtil.read("../copyright.txt");
+		String copyright = _getCopyright();
 
 		String[] files = null;
 
@@ -488,7 +488,7 @@ public class SourceFormatter {
 	}
 
 	private static void _formatJSP() throws IOException {
-		String basedir = "../";
+		String basedir = "./";
 
 		List<File> list = new ArrayList<File>();
 
@@ -502,7 +502,7 @@ public class SourceFormatter {
 
 		list.addAll(ListUtil.fromArray(ds.getIncludedFiles()));
 
-		String copyright = _fileUtil.read("../copyright.txt");
+		String copyright = _getCopyright();
 
 		String[] files = list.toArray(new String[list.size()]);
 
@@ -626,8 +626,22 @@ public class SourceFormatter {
 		return newContent;
 	}
 
+	private static String _getCopyright() throws IOException {
+		try {
+			return _fileUtil.read("copyright.txt");
+		}
+		catch (Exception e1) {
+			try {
+				return _fileUtil.read("../copyright.txt");
+			}
+			catch (Exception e2) {
+				return _fileUtil.read("../../copyright.txt");
+			}
+		}
+	}
+
 	private static String[] _getPluginJavaFiles() {
-		String basedir = "../";
+		String basedir = "./";
 
 		List<File> list = new ArrayList<File>();
 
@@ -662,7 +676,7 @@ public class SourceFormatter {
 	}
 
 	private static String[] _getPortalJavaFiles() {
-		String basedir = "../";
+		String basedir = "./";
 
 		List<File> list = new ArrayList<File>();
 

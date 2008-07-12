@@ -809,13 +809,12 @@ ${exception.message}
 		<java
 			classname="com.liferay.portal.tools.SourceFormatter"
 			classpathref="project.classpath"
+			dir="${project.dir}"
 			fork="true"
 			newenvironment="true"
 		/>
 
 		<delete file="ServiceBuilder.temp" />
-
-		<antcall target="build-releaseinfo" />
 	</target>
 
 	<target name="rebuild-hypersonic">
