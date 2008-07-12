@@ -136,11 +136,11 @@ public class UnicodeProperties extends HashMap<String, String> {
 		}
 		else {
 			if (value == null) {
-				_length -= key.length() - 2;
-
 				return remove(key);
 			}
 			else {
+				_length += key.length() + value.length() + 2;
+
 				return super.put(key, value);
 			}
 		}
@@ -151,15 +151,17 @@ public class UnicodeProperties extends HashMap<String, String> {
 			return null;
 		}
 		else {
-			return super.remove(key);
+			String keyStr = (String)key;
+
+			String value = super.remove(key);
+
+			_length -= keyStr.length() + value.length() + 2;
+
+			return value;
 		}
 	}
 
 	public String setProperty(String key, String value) {
-		if (value != null) {
-			_length += key.length() + value.length() + 2;
-		}
-
 		return put(key, value);
 	}
 
@@ -182,6 +184,10 @@ public class UnicodeProperties extends HashMap<String, String> {
 		}
 
 		return sb.toString();
+	}
+
+	protected int getToStringLength() {
+		return _length;
 	}
 
 	private static String _decode(String value) {
@@ -211,7 +217,8 @@ public class UnicodeProperties extends HashMap<String, String> {
 
 	private static Log _log = LogFactoryUtil.getLog(UnicodeProperties.class);
 
-	private boolean _safe = false;
 	private int _length;
+
+	private boolean _safe = false;
 
 }
