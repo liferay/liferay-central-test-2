@@ -574,21 +574,31 @@ Liferay.Portlet.TagsAdmin = new Class({
 	_searchEntries: function(instance) {
 		var params = instance.params;
 
-		var keywordsInput = jQuery('#' + params.keywordsInput);
-		var keywords = '%' + keywordsInput.val() + '%';
+		if (instance.showTimer) {
+			clearTimeout(instance.showTimer);
+			instance.showTimer = 0;
+		}
 
-		var searchResultsDiv = jQuery('#' + params.searchResultsDiv);
+		instance.showTimer = setTimeout(
+			function() {
+				var keywordsInput = jQuery('#' + params.keywordsInput);
+				var keywords = '%' + keywordsInput.val() + '%';
 
-		searchResultsDiv.html('');
+				var searchResultsDiv = jQuery('#' + params.searchResultsDiv);
 
-		Liferay.Service.Tags.TagsProperty.getPropertyValues(
-			{
-				companyId: themeDisplay.getCompanyId(),
-				key: "category"
+				searchResultsDiv.html('');
+
+				Liferay.Service.Tags.TagsProperty.getPropertyValues(
+					{
+						companyId: themeDisplay.getCompanyId(),
+						key: "category"
+					},
+					function(properties) {
+						instance._displayEntries(instance, properties, keywords);
+					}
+				);
 			},
-			function(properties) {
-				instance._displayEntries(instance, properties, keywords);
-			}
+			250
 		);
 	},
 
