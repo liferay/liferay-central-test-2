@@ -90,12 +90,6 @@ public class MediaWikiToCreoleTranslator extends BaseTranslator {
 
 		regexps.put("''((?s:.)*?)(''|(\n\n|\r\r|\r\n\r\n))", "//$1//$3");
 
-		// Images
-
-		regexps.put(
-			"\\[{2}Image:([^\\]]*)\\]{2}",
-			"{{" + MediaWikiImporter.SHARED_IMAGES_TITLE + "/$1}}");
-
 		// Normalize URLs
 
 		regexps.put("\\[{2}((http|ftp)[^ ]*) ([^\\]]*)\\]{2}", "[$1 $3]");
@@ -152,12 +146,29 @@ public class MediaWikiToCreoleTranslator extends BaseTranslator {
 			content = content.replaceAll(_HTML_TAGS[i], StringPool.BLANK);
 		}
 
+		// Images
+
+		matcher = Pattern.compile(
+			"\\[{2}Image:([^\\]]*)\\]{2}", Pattern.DOTALL).matcher(content);
+
+		StringBuffer sb = new StringBuffer(content);
+
+		while (matcher.find()) {
+			String image =
+				"{{" + MediaWikiImporter.SHARED_IMAGES_TITLE + "/" +
+					matcher.group(1).toLowerCase() + "}}";
+
+			sb.replace(matcher.start(0), matcher.end(0), image);
+		}
+
+		content = sb.toString();
+		
 		// Remove underscores from links
 
 		matcher = Pattern.compile(
 			"\\[{2}([^\\]]*)\\]{2}", Pattern.DOTALL).matcher(content);
 
-		StringBuffer sb = new StringBuffer(content);
+		sb = new StringBuffer(content);
 
 		while (matcher.find()) {
 			String link = matcher.group(1).replace(

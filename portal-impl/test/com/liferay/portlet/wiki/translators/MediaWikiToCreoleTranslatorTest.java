@@ -134,15 +134,6 @@ public class MediaWikiToCreoleTranslatorTest extends TestCase {
 		assertEquals(expected, actual);
 	}
 
-	public void testImage() throws Exception {
-		String content = "[[Image:sample.png]]";
-
-		String expected = "{{SharedImages/sample.png}}";
-		String actual = _translate(content);
-
-		assertEquals(expected, actual);
-	}
-
 	public void testLinkWithLabel() throws Exception {
 		String content = "[[Link|This is the label]]";
 
@@ -347,6 +338,17 @@ public class MediaWikiToCreoleTranslatorTest extends TestCase {
 
 		String expected =
 			MediaWikiToCreoleTranslator.TABLE_OF_CONTENTS + "text\n\ntextx";
+		String actual = _translator.postProcess(_translate(content));
+
+		assertEquals(expected, actual);
+	}
+
+	public void testImage() throws Exception {
+		String content = "[[Image:Sample.png]]";
+
+		String expected =
+			MediaWikiToCreoleTranslator.TABLE_OF_CONTENTS +
+				"{{SharedImages/sample.png}}";
 		String actual = _translator.postProcess(_translate(content));
 
 		assertEquals(expected, actual);

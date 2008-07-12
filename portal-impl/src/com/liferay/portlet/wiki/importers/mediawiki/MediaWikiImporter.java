@@ -355,7 +355,7 @@ public class MediaWikiImporter implements WikiImporter {
 				continue;
 			}
 
-			String fileName = paths[paths.length - 1];
+			String fileName = paths[paths.length - 1].toLowerCase();
 
 			attachments.add(
 				new ObjectValuePair<String, byte[]>(fileName, value));
