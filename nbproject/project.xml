@@ -34,6 +34,12 @@
                     <encoding>UTF-8</encoding>
                 </source-folder>
                 <source-folder>
+                    <label>portal-kernel\test</label>
+                    <type>java</type>
+                    <location>portal-kernel/test</location>
+                    <encoding>UTF-8</encoding>
+                </source-folder>
+                <source-folder>
                     <label>portal-service\src</label>
                     <type>java</type>
                     <location>portal-service/src</location>
@@ -124,6 +130,10 @@
                         <location>portal-kernel/src</location>
                     </source-folder>
                     <source-folder style="packages">
+                        <label>portal-kernel\test</label>
+                        <location>portal-kernel/test</location>
+                    </source-folder>
+                    <source-folder style="packages">
                         <label>portal-service\src</label>
                         <location>portal-service/src</location>
                     </source-folder>
@@ -177,6 +187,7 @@
                 <package-root>portal-impl/src</package-root>
                 <package-root>portal-impl/test</package-root>
                 <package-root>portal-kernel/src</package-root>
+                <package-root>portal-kernel/test</package-root>
                 <package-root>portal-service/src</package-root>
                 <package-root>portal-web/test</package-root>
                 <package-root>support-glassfish/src</package-root>

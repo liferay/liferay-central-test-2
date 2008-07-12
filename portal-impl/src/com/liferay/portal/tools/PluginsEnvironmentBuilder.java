@@ -66,21 +66,21 @@ public class PluginsEnvironmentBuilder {
 	public PluginsEnvironmentBuilder(File dir, boolean svn, boolean eclipse) {
 		try {
 			_svn = svn;
-	
+
 			DirectoryScanner ds = new DirectoryScanner();
-	
+
 			ds.setBasedir(dir);
 			ds.setIncludes(
 				new String[] {
 					"**\\liferay-plugin-package.properties",
 				});
-	
+
 			ds.scan();
-	
+
 			String path = dir.getCanonicalPath();
-	
+
 			String[] fileNames = ds.getIncludedFiles();
-	
+
 			for (String fileName : fileNames) {
 				File propsFile = new File(path + "/" + fileName);
 				File libDir = new File(propsFile.getParent() + "/lib");
@@ -101,7 +101,7 @@ public class PluginsEnvironmentBuilder {
 					jars.add("util-bridges.jar");
 					jars.add("util-java.jar");
 					jars.add("util-taglib.jar");
-					
+
 					Collections.sort(jars);
 
 					updateLibIgnores(

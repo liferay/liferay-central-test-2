@@ -44,7 +44,7 @@ import java.util.HashMap;
  *
  * <p>
  * In its current form, this is not intended to replace java.util.Properties for
- * reading properties flat files.  Additionally, this class is not thread-safe.
+ * reading properties flat files. This class is not thread-safe.
  * </p>
  *
  * @author Alexander Chow
@@ -147,15 +147,15 @@ public class UnicodeProperties extends HashMap<String, String> {
 	}
 
 	public String remove(Object key) {
-		if (key == null || !containsKey(key)) {
+		if ((key == null) || !containsKey(key)) {
 			return null;
 		}
 		else {
-			String keyStr = (String)key;
+			String keyString = (String)key;
 
 			String value = super.remove(key);
 
-			_length -= keyStr.length() + value.length() + 2;
+			_length -= keyString.length() + value.length() + 2;
 
 			return value;
 		}
@@ -217,8 +217,7 @@ public class UnicodeProperties extends HashMap<String, String> {
 
 	private static Log _log = LogFactoryUtil.getLog(UnicodeProperties.class);
 
-	private int _length;
-
 	private boolean _safe = false;
+	private int _length;
 
 }

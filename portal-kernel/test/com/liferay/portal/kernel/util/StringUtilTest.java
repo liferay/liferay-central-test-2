@@ -54,8 +54,8 @@ public class StringUtilTest extends BaseTestCase {
 
 		String actual = StringUtil.replace(
 			original,
-			new String[] { "Hello", "HELLO" },
-			new String[] { "Aloha", "ALOHA" });
+			new String[] {"Hello", "HELLO"},
+			new String[] {"Aloha", "ALOHA"});
 
 		assertEquals(expected, actual);
 	}

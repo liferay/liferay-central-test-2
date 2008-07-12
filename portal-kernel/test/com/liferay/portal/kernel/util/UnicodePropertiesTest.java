@@ -34,32 +34,32 @@ public class UnicodePropertiesTest extends BaseTestCase {
 		String key = "hello";
 		String value = "world";
 
-		UnicodeProperties up = new UnicodeProperties();
+		UnicodeProperties props = new UnicodeProperties();
 
-		up.setProperty(key, value);
-		up.remove(key);
+		props.setProperty(key, value);
+		props.remove(key);
 
-		assertEquals(0, up.getToStringLength());
+		assertEquals(0, props.getToStringLength());
 	}
 
 	public void testSetNullProperty() throws Exception {
-		UnicodeProperties up = new UnicodeProperties();
+		UnicodeProperties props = new UnicodeProperties();
 
-		int hashCode = up.hashCode();
+		int hashCode = props.hashCode();
 
-		up.setProperty(null, "value");
+		props.setProperty(null, "value");
 
 		assertEquals(
 			"setProperty() of null key must not change properties", hashCode,
-			up.hashCode());
+			props.hashCode());
 
-		up.setProperty("key", null);
-		up.setProperty("key", "value");
-		up.setProperty("key", null);
+		props.setProperty("key", null);
+		props.setProperty("key", "value");
+		props.setProperty("key", null);
 
 		assertEquals(
 			"setProperty() of null value must remove entry", hashCode,
-			up.hashCode());
+			props.hashCode());
 	}
 
 }
