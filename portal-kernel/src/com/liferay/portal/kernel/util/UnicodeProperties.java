@@ -44,7 +44,7 @@ import java.util.HashMap;
  *
  * <p>
  * In its current form, this is not intended to replace java.util.Properties for
- * reading properties flat files.
+ * reading properties flat files.  Additionally, this class is not thread-safe.
  * </p>
  *
  * @author Alexander Chow
