@@ -470,7 +470,7 @@ Liferay.Tree = new Class({
 				}
 			);
 
-			jQuery('img.select-state, a', treeEl).click(
+			jQuery('img.select-state, a', treeEl).unbind('click').click(
 				function(event) {
 					instance.select(this);
 					return false;
