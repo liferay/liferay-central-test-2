@@ -414,6 +414,18 @@ public class WikiPageLocalServiceUtil {
 			themeDisplay);
 	}
 
+	public static void movePage(long userId, long nodeId,
+		java.lang.String title, java.lang.String newTitle, boolean strict,
+		javax.portlet.PortletPreferences prefs,
+		com.liferay.portal.theme.ThemeDisplay themeDisplay)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
+		WikiPageLocalService wikiPageLocalService = WikiPageLocalServiceFactory.getService();
+
+		wikiPageLocalService.movePage(userId, nodeId, title, newTitle, strict,
+			prefs, themeDisplay);
+	}
+
 	public static com.liferay.portlet.wiki.model.WikiPage revertPage(
 		long userId, long nodeId, java.lang.String title, double version,
 		javax.portlet.PortletPreferences prefs,

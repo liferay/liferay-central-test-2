@@ -696,11 +696,19 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 			PortletPreferences prefs, ThemeDisplay themeDisplay)
 		throws PortalException, SystemException {
 
+		movePage(userId, nodeId, title, newTitle, true, prefs, themeDisplay);
+	}
+
+	public void movePage(
+			long userId, long nodeId, String title, String newTitle,
+			boolean strict, PortletPreferences prefs, ThemeDisplay themeDisplay)
+		throws PortalException, SystemException {
+
 		validateTitle(newTitle);
 
 		// Check if the new title already exists
 
-		if (isUsedTitle(nodeId, newTitle)) {
+		if (strict && isUsedTitle(nodeId, newTitle)) {
 
 			WikiPage page = getPage(nodeId, newTitle);
 

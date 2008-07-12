@@ -115,6 +115,8 @@ public class MediaWikiImporter implements WikiImporter {
 				userId, node, root, specialNamespaces, usersMap, imagesFile,
 				options);
 			processImages(userId, node, imagesFile);
+
+			moveFrontPage(userId, node, options);
 		}
 		catch (Exception e) {
 			throw new PortalException(e);
@@ -222,6 +224,38 @@ public class MediaWikiImporter implements WikiImporter {
 		}
 
 		return true;
+	}
+
+	protected void moveFrontPage(
+		long userId, WikiNode node, Map<String, String[]> options) {
+
+		String frontPageTitle = MapUtil.getString(
+			options, WikiImporterKeys.OPTIONS_FRONTPAGE);
+
+		if (Validator.isNotNull(frontPageTitle)) {
+
+			frontPageTitle = normalizeTitle(frontPageTitle);
+
+			try {
+				WikiPageLocalServiceUtil.movePage(
+					userId, node.getNodeId(), frontPageTitle,
+					WikiPageImpl.FRONT_PAGE, false, null, null);
+			}
+			catch (Exception e) {
+				if (_log.isWarnEnabled()) {
+					StringBuilder sb = new StringBuilder();
+
+					sb.append("Could not move ");
+					sb.append(WikiPageImpl.FRONT_PAGE);
+					sb.append(" to the title provided: ");
+					sb.append(frontPageTitle);
+
+					_log.warn(sb.toString(), e);
+				}
+			}
+
+		}
+
 	}
 
 	protected String normalize(String categoryName, int length) {

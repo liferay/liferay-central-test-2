@@ -237,6 +237,13 @@ public interface WikiPageLocalService {
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;
 
+	public void movePage(long userId, long nodeId, java.lang.String title,
+		java.lang.String newTitle, boolean strict,
+		javax.portlet.PortletPreferences prefs,
+		com.liferay.portal.theme.ThemeDisplay themeDisplay)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException;
+
 	public com.liferay.portlet.wiki.model.WikiPage revertPage(long userId,
 		long nodeId, java.lang.String title, double version,
 		javax.portlet.PortletPreferences prefs,

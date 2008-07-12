@@ -57,6 +57,14 @@
 		<liferay-ui:icon-help message="import-wiki-images-help" />
 	</td>
 </tr>
+<tr>
+	<td>
+		<%= WikiPageImpl.FRONT_PAGE %> (<liferay-ui:message key="optional" />)
+	</td>
+	<td>
+		<input name="<portlet:namespace /><%= WikiImporterKeys.OPTIONS_FRONTPAGE %>" type="text" size="40" value="Main Page" />
+	</td>
+</tr>
 </table>
 
 <br />
