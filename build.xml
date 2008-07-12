@@ -1320,7 +1320,7 @@ app.server.tomcat.zip.name=liferay-portal-tomcat-6.0-$${downloads.version}.zip
 
 	<target name="test-tomcat">
 		<parallel>
-			<exec dir="${app.server.tomcat.bin.dir}" executable="startup.${executable.suffix}" resolveexecutable="true" spawn="true" />
+			<exec dir="${app.server.tomcat.bin.dir}" executable="startup${file.suffix.bat}" resolveexecutable="true" spawn="true" />
 
 			<sequential>
 				<waitfor>
@@ -1337,7 +1337,7 @@ app.server.tomcat.zip.name=liferay-portal-tomcat-6.0-$${downloads.version}.zip
 
 				<ant dir="portal-web" target="test" inheritAll="false" />
 
-				<exec dir="${app.server.tomcat.bin.dir}" executable="shutdown.${executable.suffix}" resolveexecutable="true" />
+				<exec dir="${app.server.tomcat.bin.dir}" executable="shutdown${file.suffix.bat}" resolveexecutable="true" />
 
 				<sleep seconds="10" />
 			</sequential>

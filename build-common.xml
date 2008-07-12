@@ -73,7 +73,11 @@
 	<propertycopy name="app.server.temp.dir" from="app.server.${app.server.type}.temp.dir" />
 	<propertycopy name="app.server.work.dir" from="app.server.${app.server.type}.work.dir" />
 
-	<condition property="executable.suffix" value="bat" else="sh">
+	<condition property="file.suffix.bat" value=".bat" else=".sh">
+		<contains string="${os.name}" substring="Windows" casesensitive="false"/>
+	</condition>
+
+	<condition property="file.suffix.exe" value=".exe" else="">
 		<contains string="${os.name}" substring="Windows" casesensitive="false"/>
 	</condition>
 
