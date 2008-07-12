@@ -1164,7 +1164,7 @@
 	</library>
 	<library>
 		<file-name>portal/creolefilter.jar</file-name>
-		<version>1.0.4 (trunk 46)</version>
+		<version>1.0.7</version>
 		<project-name>Creole Filter</project-name>
 		<project-url>http://www.i3g.hs-heilbronn.de/Wiki.jsp?page=JSPWikiCreoleFilter</project-url>
 		<licenses>
@@ -1172,9 +1172,6 @@
 				<license-name>LGPL 2.1</license-name>
 			</license>
 		</licenses>
-		<comments>
-			Using a trunk version to fix concurrency issue. See LEP-6652.
-		</comments>
 	</library>
 	<library>
 		<file-name>portal/crypt.jar</file-name>
