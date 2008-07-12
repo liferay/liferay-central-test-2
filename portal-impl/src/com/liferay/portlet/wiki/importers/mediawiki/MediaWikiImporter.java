@@ -616,6 +616,10 @@ public class MediaWikiImporter implements WikiImporter {
 			tagsEntries.add(tagsEntry.getName());
 		}
 
+		if (content.indexOf(_WORK_IN_PROGRESS) != -1) {
+			tagsEntries.add(_WORK_IN_PROGRESS_TAG);
+		}
+
 		return tagsEntries.toArray(new String[tagsEntries.size()]);
 	}
 
@@ -656,6 +660,10 @@ public class MediaWikiImporter implements WikiImporter {
 
 	private static final String[] _SPECIAL_MEDIA_WIKI_DIRS = new String[]{
 		"thumb", "temp", "archive"};
+
+	private static final String _WORK_IN_PROGRESS = "{{Work in progress}}";
+
+	private static final String _WORK_IN_PROGRESS_TAG = "work in progress";
 
 	private static Log _log = LogFactory.getLog(MediaWikiImporter.class);
 

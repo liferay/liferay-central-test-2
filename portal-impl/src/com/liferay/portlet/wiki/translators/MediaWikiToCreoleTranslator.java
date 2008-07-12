@@ -69,13 +69,17 @@ public class MediaWikiToCreoleTranslator extends BaseTranslator {
 		regexps.put("&lt;", "<");
 		regexps.put("&gt;", ">");
 
-		// Category removal
+		// Remove categories
 
 		regexps.put("\\[\\[[Cc]ategory:([^\\]]*)\\]\\][\\n]*", "");
 
 		// Remove disambiguations
 
 		regexps.put("\\{{2}OtherTopics\\|([^\\}]*)\\}{2}", StringPool.BLANK);
+
+		// Remove work in progress
+
+		regexps.put("\\{{2}Work in progress\\}{2}", StringPool.BLANK);
 
 		// Bold and italics
 
@@ -167,7 +171,7 @@ public class MediaWikiToCreoleTranslator extends BaseTranslator {
 		}
 
 		content = sb.toString();
-		
+
 		// Remove underscores from links
 
 		matcher = Pattern.compile(

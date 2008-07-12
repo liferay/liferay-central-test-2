@@ -88,7 +88,7 @@ public class MediaWikiToCreoleTranslatorTest extends TestCase {
 		assertEquals(expected, actual);
 	}
 
-	public void testCategoryRemoval() throws Exception {
+	public void testRemoveCategories() throws Exception {
 		String content =
 			"[[Category:My category]]\n[[category:Other category]]";
 
@@ -102,6 +102,16 @@ public class MediaWikiToCreoleTranslatorTest extends TestCase {
 		String content = "{{OtherTopics|Upgrade Instructions}}\ntest";
 
 		String expected ="\ntest";
+		String actual = _translate(content);
+
+		assertEquals(expected, actual);
+	}
+
+	public void testRemoveWorkInProgress() throws Exception {
+		String content =
+			"{{Work in progress}}\ntest";
+
+		String expected = "\ntest";
 		String actual = _translate(content);
 
 		assertEquals(expected, actual);
