@@ -594,7 +594,11 @@ public class StringUtil {
 	}
 
 	public static String replace(String s, char oldSub, char newSub) {
-		return replace(s, oldSub, new Character(newSub).toString());
+        if ((s == null)) {
+            return null;
+        }
+        return s.replace(oldSub, newSub);
+
 	}
 
 	public static String replace(String s, char oldSub, String newSub) {
