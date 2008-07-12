@@ -154,6 +154,13 @@ public class PluginsEnvironmentBuilder {
 
 		// .classpath
 
+		List<String> portalJars = new ArrayList<String>(dependencyJars);
+
+		portalJars.add("commons-logging.jar");
+		portalJars.add("log4j.jar");
+
+		Collections.sort(portalJars);
+
 		List<String> customJars = ListUtil.toList(
 			libDir.list(new GlobFilenameFilter("*.jar")));
 
@@ -178,8 +185,11 @@ public class PluginsEnvironmentBuilder {
 		_addClasspathEntry(sb, "/portal/lib/global/container.jar");
 		_addClasspathEntry(sb, "/portal/lib/global/portlet-container.jar");
 		_addClasspathEntry(sb, "/portal/lib/global/portlet.jar");
-		_addClasspathEntry(sb, "/portal/lib/portal/commons-logging.jar");
-		_addClasspathEntry(sb, "/portal/lib/portal/log4j.jar");
+
+		for (String jar : portalJars) {
+			_addClasspathEntry(sb, "/portal/lib/portal/" + jar);
+		}
+
 		_addClasspathEntry(sb, "/portal/portal-kernel/portal-kernel.jar");
 		_addClasspathEntry(sb, "/portal/portal-service/portal-service.jar");
 		_addClasspathEntry(sb, "/portal/util-bridges/util-bridges.jar");
