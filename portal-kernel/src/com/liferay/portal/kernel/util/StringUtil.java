@@ -601,12 +601,13 @@ public class StringUtil {
 		if ((s == null) || (newSub == null)) {
 			return null;
 		}
-
-		StringBuilder sb = new StringBuilder();
+        //the number 5 is arbitrary; just for some extra padding to reduce
+        //buffer expansion
+        StringBuilder sb = new StringBuilder(s.length() + 5 * newSub.length());
 
 		char[] c = s.toCharArray();
-
-		for (int i = 0; i < c.length; i++) {
+        int length = c.length;
+		for (int i = 0; i < length; i++) {
 			if (c[i] == oldSub) {
 				sb.append(newSub);
 			}
@@ -626,7 +627,10 @@ public class StringUtil {
 		int y = s.indexOf(oldSub);
 
 		if (y >= 0) {
-			StringBuilder sb = new StringBuilder();
+            //the number 5 is arbitrary; just for some extra padding to reduce
+            //buffer expansion
+            StringBuilder sb =
+                    new StringBuilder(s.length() + 5 * newSub.length());
 
 			int length = oldSub.length();
 			int x = 0;
