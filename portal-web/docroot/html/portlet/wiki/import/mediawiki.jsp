@@ -62,7 +62,7 @@
 		<%= WikiPageImpl.FRONT_PAGE %> (<liferay-ui:message key="optional" />)
 	</td>
 	<td>
-		<input name="<portlet:namespace /><%= WikiImporterKeys.OPTIONS_FRONTPAGE %>" type="text" size="40" value="Main Page" />
+		<input name="<portlet:namespace /><%= WikiImporterKeys.OPTIONS_FRONT_PAGE %>" type="text" size="40" value="Main Page" />
 	</td>
 </tr>
 </table>

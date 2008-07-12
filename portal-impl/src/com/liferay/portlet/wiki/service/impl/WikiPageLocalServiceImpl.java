@@ -709,13 +709,13 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 		// Check if the new title already exists
 
 		if (isUsedTitle(nodeId, newTitle)) {
-
 			WikiPage page = getPage(nodeId, newTitle);
 
 			// Support moving back to a previously moved title
 
 			if (((page.getVersion() == WikiPageImpl.DEFAULT_VERSION) &&
-				(page.getContent().equals(WikiPageImpl.MOVED))) || !strict) {
+				 (page.getContent().equals(WikiPageImpl.MOVED))) ||
+				!strict) {
 
 				deletePage(nodeId, newTitle);
 			}

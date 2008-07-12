@@ -30,8 +30,8 @@ package com.liferay.portlet.wiki.importers;
  */
 public class WikiImporterKeys {
 
-	public static final String OPTIONS_FRONTPAGE =
-		"OPTIONS_FRONTPAGE";
+	public static final String OPTIONS_FRONT_PAGE =
+		"OPTIONS_FRONT_PAGE";
 
 	public static final String OPTIONS_IMPORT_LATEST_VERSION =
 		"OPTIONS_IMPORT_LATEST_VERSION";

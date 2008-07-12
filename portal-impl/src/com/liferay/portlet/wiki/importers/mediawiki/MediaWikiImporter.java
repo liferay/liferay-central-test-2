@@ -241,10 +241,9 @@ public class MediaWikiImporter implements WikiImporter {
 		long userId, WikiNode node, Map<String, String[]> options) {
 
 		String frontPageTitle = MapUtil.getString(
-			options, WikiImporterKeys.OPTIONS_FRONTPAGE);
+			options, WikiImporterKeys.OPTIONS_FRONT_PAGE);
 
 		if (Validator.isNotNull(frontPageTitle)) {
-
 			frontPageTitle = normalizeTitle(frontPageTitle);
 
 			try {
