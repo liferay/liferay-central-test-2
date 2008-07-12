@@ -1335,7 +1335,7 @@ app.server.tomcat.zip.name=liferay-portal-tomcat-6.0-$${downloads.version}.zip
 					<property name="class" value="ServiceSoapTestSuite" />
 				</ant>
 
-				<ant dir="portal-web" target="test" inheritAll="false" />
+				<!--<ant dir="portal-web" target="test" inheritAll="false" />-->
 
 				<exec dir="${app.server.tomcat.bin.dir}" executable="shutdown${file.suffix.bat}" resolveexecutable="true" spawn="true" />
 
