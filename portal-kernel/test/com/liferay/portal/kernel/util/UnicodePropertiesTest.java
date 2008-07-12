@@ -33,29 +33,30 @@ public class UnicodePropertiesTest extends BaseTestCase {
 	public void testLength() throws Exception {
 		String key = "hello";
 		String value = "world";
-		
+
 		UnicodeProperties up = new UnicodeProperties();
-		
+
 		up.setProperty(key, value);
 		up.remove(key);
-		
+
 		assertEquals(0, up.getToStringLength());
 	}
-	
+
 	public void testSetNullProperty() throws Exception {
 		UnicodeProperties up = new UnicodeProperties();
 
 		int hashCode = up.hashCode();
 
 		up.setProperty(null, "value");
-		
+
 		assertEquals(
 			"setProperty() of null key must not change properties", hashCode,
 			up.hashCode());
-		
+
+		up.setProperty("key", null);
 		up.setProperty("key", "value");
 		up.setProperty("key", null);
-		
+
 		assertEquals(
 			"setProperty() of null value must remove entry", hashCode,
 			up.hashCode());

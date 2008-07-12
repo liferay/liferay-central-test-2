@@ -147,7 +147,7 @@ public class UnicodeProperties extends HashMap<String, String> {
 	}
 
 	public String remove(Object key) {
-		if (key == null) {
+		if (key == null || !containsKey(key)) {
 			return null;
 		}
 		else {
