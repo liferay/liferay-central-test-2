@@ -141,6 +141,13 @@
 							</delete>
 						</then>
 					</if>
+
+					<delete includeemptydirs="true" failonerror="false">
+						<fileset
+							dir="${app.server.deploy.dir}"
+							includes="*-hook/**,*-layouttpl/**,*-portlet/**,*-theme/**,*-web/**"
+						/>
+					</delete>
 				</then>
 			</elseif>
 			<else>
@@ -249,17 +256,7 @@
 
 		<ant dir="sql" target="rebuild-mysql" inheritAll="false" />
 
-		<taskdef classname="com.liferay.portal.util.PropsUtilTask" classpathref="project.classpath" name="propsutil" />
-
-		<propsutil key="resource.repositories.root" result="propsutil.resource.repositories.root" />
-
-		<delete dir="${propsutil.resource.repositories.root}" />
-
-		<java jar="lib/development/selenium-server.jar" fork="true" spawn="true" />
-
 		<antcall target="test-${app.server.type}" />
-
-		<antelope:post to="http://localhost:4444/selenium-server/driver/?cmd=shutDown" wantresponse="false" />
 	</target>
 
 	<target name="jar">
@@ -1319,6 +1316,34 @@ app.server.tomcat.zip.name=liferay-portal-tomcat-6.0-$${downloads.version}.zip
 	</target>
 
 	<target name="test-tomcat">
+		<taskdef classname="com.liferay.portal.util.PropsUtilTask" classpathref="project.classpath" name="propsutil" />
+
+		<propsutil key="resource.repositories.root" result="propsutil.resource.repositories.root" />
+
+		<delete dir="${propsutil.resource.repositories.root}" />
+
+		<taskdef classname="com.liferay.portal.util.PropsUtilTask" classpathref="project.classpath" name="propsutil" />
+
+		<propsutil key="resource.repositories.root" result="propsutil.resource.repositories.root" />
+
+		<exec dir="${lp.plugins.dir}" executable="cmd.exe" os="${os.windows}">
+			<arg line="/c svn update" />
+		</exec>
+
+		<echo file="${lp.plugins.dir}/build.${user.name}.properties">app.server.dir=${app.server.dir}
+app.server.portal.dir=${app.server.portal.dir}
+
+auto.deploy.dir=${propsutil.resource.repositories.root}/deploy
+
+plugins.includes=analog-clock-portlet,chat-portlet,flash-portlet,google-search-portlet,sample-hibernate-portlet,sample-jsp-portlet,sample-lar-portlet,sample-localized-portlet,sample-php-portlet,sample-sign-in-portlet,weather-portlet</echo>
+
+		<ant dir="${lp.plugins.dir}/portlets" inheritAll="false">
+			<target name="clean" />
+			<target name="deploy" />
+		</ant>
+
+		<java jar="lib/development/selenium-server.jar" fork="true" spawn="true" />
+
 		<parallel>
 			<exec dir="${app.server.tomcat.bin.dir}" executable="startup${file.suffix.bat}" resolveexecutable="true" spawn="true" />
 
@@ -1326,6 +1351,8 @@ app.server.tomcat.zip.name=liferay-portal-tomcat-6.0-$${downloads.version}.zip
 				<waitfor>
 					<http url="http://localhost:8080" />
 				</waitfor>
+
+				<sleep seconds="60" />
 
 				<ant dir="portal-impl" target="test-class" inheritAll="false">
 					<property name="class" value="ServiceHttpTestSuite" />
@@ -1342,6 +1369,8 @@ app.server.tomcat.zip.name=liferay-portal-tomcat-6.0-$${downloads.version}.zip
 				<sleep seconds="10" />
 			</sequential>
 		</parallel>
+
+		<antelope:post to="http://localhost:4444/selenium-server/driver/?cmd=shutDown" wantresponse="false" />
 	</target>
 
 	<target name="validate-xml">

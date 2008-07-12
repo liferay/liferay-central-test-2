@@ -43,6 +43,17 @@
 					/>
 				</delete>
 			</then>
+			<elseif>
+				<equals arg1="${app.server.type}" arg2="tomcat" />
+				<then>
+					<delete includeemptydirs="true" failonerror="false">
+						<fileset
+							dir="${app.server.deploy.dir}"
+							includes="*-hook/**,*-layouttpl/**,*-portlet/**,*-theme/**,*-web/**"
+						/>
+					</delete>
+				</then>
+			</elseif>
 		</if>
 
 		<delete failonerror="false">
