@@ -396,7 +396,6 @@ public class Validator {
 			return false;
 		}
 	}
-
 	public static boolean isNull(String s) {
 		if (s == null) {
 			return true;
@@ -404,7 +403,8 @@ public class Validator {
 
 		s = s.trim();
 
-		if ((s.equals(StringPool.NULL)) || (s.equals(StringPool.BLANK))) {
+		if ((s.length() == 0) || (s.equals(StringPool.NULL)) ||
+                (s.equals(StringPool.BLANK))) {
 			return true;
 		}
 
