@@ -39,6 +39,7 @@
 <%@ page import="com.liferay.portlet.tags.service.TagsPropertyLocalServiceUtil" %>
 <%@ page import="com.liferay.portlet.wiki.DuplicateNodeNameException" %>
 <%@ page import="com.liferay.portlet.wiki.DuplicatePageException" %>
+<%@ page import="com.liferay.portlet.wiki.ImportFilesException" %>
 <%@ page import="com.liferay.portlet.wiki.NodeNameException" %>
 <%@ page import="com.liferay.portlet.wiki.NoSuchNodeException" %>
 <%@ page import="com.liferay.portlet.wiki.NoSuchPageException" %>

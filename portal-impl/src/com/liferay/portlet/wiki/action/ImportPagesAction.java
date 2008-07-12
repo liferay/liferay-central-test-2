@@ -31,9 +31,8 @@ import com.liferay.portal.kernel.util.ProgressTrackerThreadLocal;
 import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.struts.PortletAction;
 import com.liferay.portal.util.PortalUtil;
-import com.liferay.portlet.wiki.DuplicateNodeNameException;
+import com.liferay.portlet.wiki.ImportFilesException;
 import com.liferay.portlet.wiki.NoSuchNodeException;
-import com.liferay.portlet.wiki.NodeNameException;
 import com.liferay.portlet.wiki.service.WikiNodeServiceUtil;
 import com.liferay.portlet.wiki.util.WikiCacheThreadLocal;
 import com.liferay.portlet.wiki.util.WikiCacheUtil;
@@ -76,8 +75,8 @@ public class ImportPagesAction extends PortletAction {
 
 				setForward(actionRequest, "portlet.wiki.error");
 			}
-			else if (e instanceof DuplicateNodeNameException ||
-					 e instanceof NodeNameException) {
+			else if (e instanceof ImportFilesException ||
+					 e instanceof NoSuchNodeException) {
 
 				SessionErrors.add(actionRequest, e.getClass().getName());
 			}

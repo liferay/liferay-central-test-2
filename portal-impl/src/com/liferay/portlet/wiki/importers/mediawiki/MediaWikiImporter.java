@@ -42,6 +42,7 @@ import com.liferay.portlet.tags.model.TagsEntry;
 import com.liferay.portlet.tags.service.TagsEntryLocalServiceUtil;
 import com.liferay.portlet.tags.service.TagsPropertyLocalServiceUtil;
 import com.liferay.portlet.tags.util.TagsUtil;
+import com.liferay.portlet.wiki.ImportFilesException;
 import com.liferay.portlet.wiki.NoSuchPageException;
 import com.liferay.portlet.wiki.importers.WikiImporter;
 import com.liferay.portlet.wiki.importers.WikiImporterKeys;
@@ -70,6 +71,7 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
 import org.dom4j.Document;
+import org.dom4j.DocumentException;
 import org.dom4j.Element;
 import org.dom4j.io.SAXReader;
 
@@ -117,6 +119,15 @@ public class MediaWikiImporter implements WikiImporter {
 			processImages(userId, node, imagesFile);
 
 			moveFrontPage(userId, node, options);
+		}
+		catch (DocumentException de) {
+			throw new ImportFilesException("Invalid XML file provided");
+		}
+		catch (IOException de) {
+			throw new ImportFilesException("Error reading the files provided");
+		}
+		catch (PortalException e) {
+			throw e;
 		}
 		catch (Exception e) {
 			throw new PortalException(e);
@@ -237,9 +248,14 @@ public class MediaWikiImporter implements WikiImporter {
 			frontPageTitle = normalizeTitle(frontPageTitle);
 
 			try {
-				WikiPageLocalServiceUtil.movePage(
-					userId, node.getNodeId(), frontPageTitle,
-					WikiPageImpl.FRONT_PAGE, false, null, null);
+				if (WikiPageLocalServiceUtil.getPagesCount(
+						node.getNodeId(), frontPageTitle, true) > 0) {
+
+					WikiPageLocalServiceUtil.movePage(
+						userId, node.getNodeId(), frontPageTitle,
+						WikiPageImpl.FRONT_PAGE, false, null, null);
+
+				}
 			}
 			catch (Exception e) {
 				if (_log.isWarnEnabled()) {
@@ -548,10 +564,18 @@ public class MediaWikiImporter implements WikiImporter {
 		return redirectTitle;
 	}
 
-	protected List<String> readSpecialNamespaces(Element root) {
+	protected List<String> readSpecialNamespaces(Element root)
+		throws ImportFilesException {
+
 		List<String> namespaces = new ArrayList<String>();
 
-		Iterator<Element> itr = root.element("siteinfo").element(
+		Element siteinfoEl = root.element("siteinfo");
+
+		if (siteinfoEl == null) {
+			throw new ImportFilesException("Invalid pages XML file");
+		}
+
+		Iterator<Element> itr = siteinfoEl.element(
 			"namespaces").elements("namespace").iterator();
 
 		while (itr.hasNext()) {
