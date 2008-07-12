@@ -344,11 +344,15 @@ public class MediaWikiToCreoleTranslatorTest extends TestCase {
 	}
 
 	public void testImage() throws Exception {
-		String content = "[[Image:Sample.png]]";
+		String content =
+			"test1 [[Image:Sample1.png]] test2 [[Image:Sample2.png]] test3 " +
+				"[[Image:Sample3.png]] test4";
 
 		String expected =
 			MediaWikiToCreoleTranslator.TABLE_OF_CONTENTS +
-				"{{SharedImages/sample.png}}";
+				"test1 {{SharedImages/sample1.png}} test2 " +
+					"{{SharedImages/sample2.png}} test3 " +
+						"{{SharedImages/sample3.png}} test4";
 		String actual = _translator.postProcess(_translate(content));
 
 		assertEquals(expected, actual);

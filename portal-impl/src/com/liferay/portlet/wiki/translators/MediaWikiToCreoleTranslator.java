@@ -153,12 +153,17 @@ public class MediaWikiToCreoleTranslator extends BaseTranslator {
 
 		StringBuffer sb = new StringBuffer(content);
 
+		int offset = 0;
+
 		while (matcher.find()) {
 			String image =
 				"{{" + MediaWikiImporter.SHARED_IMAGES_TITLE + "/" +
 					matcher.group(1).toLowerCase() + "}}";
 
-			sb.replace(matcher.start(0), matcher.end(0), image);
+			sb.replace(
+				matcher.start(0) + offset, matcher.end(0) + offset, image);
+
+			offset += MediaWikiImporter.SHARED_IMAGES_TITLE.length() - 5;
 		}
 
 		content = sb.toString();
