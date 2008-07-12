@@ -137,6 +137,7 @@ public class UnicodeProperties extends HashMap<String, String> {
 		else {
 			if (value == null) {
 				_length -= key.length() - 2;
+
 				return remove(key);
 			}
 			else {
@@ -150,7 +151,6 @@ public class UnicodeProperties extends HashMap<String, String> {
 			return null;
 		}
 		else {
-			//_length -= key.length() - 2;
 			return super.remove(key);
 		}
 	}

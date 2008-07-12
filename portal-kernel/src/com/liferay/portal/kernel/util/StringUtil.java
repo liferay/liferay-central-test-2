@@ -594,29 +594,31 @@ public class StringUtil {
 	}
 
 	public static String replace(String s, char oldSub, char newSub) {
-        if ((s == null)) {
-            return null;
-        }
-        return s.replace(oldSub, newSub);
+		if (s == null) {
+			return null;
+		}
 
+		return s.replace(oldSub, newSub);
 	}
 
 	public static String replace(String s, char oldSub, String newSub) {
 		if ((s == null) || (newSub == null)) {
 			return null;
 		}
-        //the number 5 is arbitrary; just for some extra padding to reduce
-        //buffer expansion
-        StringBuilder sb = new StringBuilder(s.length() + 5 * newSub.length());
 
-		char[] c = s.toCharArray();
-        int length = c.length;
-		for (int i = 0; i < length; i++) {
-			if (c[i] == oldSub) {
+		// The number 5 is arbitrary and is used as extra padding to reduce
+		// buffer expansion
+
+		StringBuilder sb = new StringBuilder(s.length() + 5 * newSub.length());
+
+		char[] charArray = s.toCharArray();
+
+		for (char c : charArray) {
+			if (c == oldSub) {
 				sb.append(newSub);
 			}
 			else {
-				sb.append(c[i]);
+				sb.append(c);
 			}
 		}
 
@@ -631,10 +633,12 @@ public class StringUtil {
 		int y = s.indexOf(oldSub);
 
 		if (y >= 0) {
-            //the number 5 is arbitrary; just for some extra padding to reduce
-            //buffer expansion
-            StringBuilder sb =
-                    new StringBuilder(s.length() + 5 * newSub.length());
+
+			// The number 5 is arbitrary and is used as extra padding to reduce
+			// buffer expansion
+
+			StringBuilder sb = new StringBuilder(
+				s.length() + 5 * newSub.length());
 
 			int length = oldSub.length();
 			int x = 0;
@@ -642,6 +646,7 @@ public class StringUtil {
 			while (x <= y) {
 				sb.append(s.substring(x, y));
 				sb.append(newSub);
+
 				x = y + length;
 				y = s.indexOf(oldSub, x);
 			}
