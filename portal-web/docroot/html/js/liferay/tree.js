@@ -700,7 +700,7 @@ Liferay.Tree = new Class({
 				droppedItem: item,
 				dropTarget: obj
 			}
-		)
+		);
 
 		instance._originalParentNode = null;
 		instance._wasDropped = true;
