@@ -120,17 +120,17 @@
 		<mkdir dir="${tstamp.value}" />
 
 		<unzip
-			src="${app.server.geronimo-tomcat.dir}/repository/org/tranql/tranql-connector-derby-embed-local/1.3/tranql-connector-derby-embed-local-1.3.rar"
+			src="${app.server.geronimo-tomcat.dir}/repository/org/tranql/tranql-connector-derby-embed-local/1.4/tranql-connector-derby-embed-local-1.4.rar"
 			dest="${tstamp.value}"
 		/>
 
 		<copy file="${database.name}.jar" todir="${tstamp.value}" />
 
-		<delete file="geronimo/derby/tranql-connector-derby-embed-local-1.3.rar" />
+		<delete file="geronimo/derby/tranql-connector-derby-embed-local-1.4.rar" />
 
 		<jar
 			basedir="${tstamp.value}"
-			jarfile="geronimo/derby/tranql-connector-derby-embed-local-1.3.rar"
+			jarfile="geronimo/derby/tranql-connector-derby-embed-local-1.4.rar"
 		/>
 
 		<delete dir="${tstamp.value}" />
