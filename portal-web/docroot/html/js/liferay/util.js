@@ -1124,14 +1124,8 @@ function submitForm(form, action, singleSubmit) {
 
 			var inputs = jQuery('input[@type=button], input[@type=reset], input[@type=submit]', form);
 
-			inputs.each(
-				function(i, el) {
-					var input = jQuery(this);
-
-					input.attr('disabled', true);
-					input.fadeTo(50, 0.5);
-				}
-			);
+			inputs.attr('disabled', true);
+			inputs.fadeTo(50, 0.5);
 		}
 
 		if (action != null) {
