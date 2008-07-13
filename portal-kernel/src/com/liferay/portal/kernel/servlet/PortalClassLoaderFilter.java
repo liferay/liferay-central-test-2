@@ -46,31 +46,19 @@ import javax.servlet.ServletResponse;
  */
 public class PortalClassLoaderFilter implements Filter, PortalInitable {
 
-	public void portalInit() {
+	public void destroy() {
+		ClassLoader contextClassLoader =
+			Thread.currentThread().getContextClassLoader();
+
 		try {
-			ClassLoader classLoader = PortalClassLoaderUtil.getClassLoader();
+			Thread.currentThread().setContextClassLoader(
+				PortalClassLoaderUtil.getClassLoader());
 
-			String filterClass = _filterConfig.getInitParameter("filter-class");
-
-			if (filterClass.startsWith("com.liferay.filters.")) {
-				filterClass = StringUtil.replace(
-					filterClass, "com.liferay.filters.",
-					"com.liferay.portal.servlet.filters.");
-			}
-
-			_filter = (Filter)classLoader.loadClass(filterClass).newInstance();
-
-			_filter.init(_filterConfig);
+			_filter.destroy();
 		}
-		catch (Exception e) {
-			_log.error(e, e);
+		finally {
+			Thread.currentThread().setContextClassLoader(contextClassLoader);
 		}
-	}
-
-	public void init(FilterConfig filterConfig) {
-		_filterConfig = filterConfig;
-
-		PortalInitableUtil.init(this);
 	}
 
 	public void doFilter(
@@ -92,18 +80,30 @@ public class PortalClassLoaderFilter implements Filter, PortalInitable {
 		}
 	}
 
-	public void destroy() {
-		ClassLoader contextClassLoader =
-			Thread.currentThread().getContextClassLoader();
+	public void init(FilterConfig filterConfig) {
+		_filterConfig = filterConfig;
 
+		PortalInitableUtil.init(this);
+	}
+
+	public void portalInit() {
 		try {
-			Thread.currentThread().setContextClassLoader(
-				PortalClassLoaderUtil.getClassLoader());
+			ClassLoader classLoader = PortalClassLoaderUtil.getClassLoader();
 
-			_filter.destroy();
+			String filterClass = _filterConfig.getInitParameter("filter-class");
+
+			if (filterClass.startsWith("com.liferay.filters.")) {
+				filterClass = StringUtil.replace(
+					filterClass, "com.liferay.filters.",
+					"com.liferay.portal.servlet.filters.");
+			}
+
+			_filter = (Filter)classLoader.loadClass(filterClass).newInstance();
+
+			_filter.init(_filterConfig);
 		}
-		finally {
-			Thread.currentThread().setContextClassLoader(contextClassLoader);
+		catch (Exception e) {
+			_log.error(e, e);
 		}
 	}
 

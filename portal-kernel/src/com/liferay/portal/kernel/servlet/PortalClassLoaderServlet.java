@@ -45,6 +45,27 @@ import javax.servlet.http.HttpServletResponse;
 public class PortalClassLoaderServlet
 	extends HttpServlet implements PortalInitable {
 
+	public void destroy() {
+		ClassLoader contextClassLoader =
+			Thread.currentThread().getContextClassLoader();
+
+		try {
+			Thread.currentThread().setContextClassLoader(
+				PortalClassLoaderUtil.getClassLoader());
+
+			_servlet.destroy();
+		}
+		finally {
+			Thread.currentThread().setContextClassLoader(contextClassLoader);
+		}
+	}
+
+	public void init(ServletConfig filterConfig) {
+		_filterConfig = filterConfig;
+
+		PortalInitableUtil.init(this);
+	}
+
 	public void portalInit() {
 		ClassLoader contextClassLoader =
 			Thread.currentThread().getContextClassLoader();
@@ -70,12 +91,6 @@ public class PortalClassLoaderServlet
 		}
 	}
 
-	public void init(ServletConfig filterConfig) {
-		_filterConfig = filterConfig;
-
-		PortalInitableUtil.init(this);
-	}
-
 	public void service(
 			HttpServletRequest request, HttpServletResponse response)
 		throws IOException, ServletException {
@@ -88,21 +103,6 @@ public class PortalClassLoaderServlet
 				PortalClassLoaderUtil.getClassLoader());
 
 			_servlet.service(request, response);
-		}
-		finally {
-			Thread.currentThread().setContextClassLoader(contextClassLoader);
-		}
-	}
-
-	public void destroy() {
-		ClassLoader contextClassLoader =
-			Thread.currentThread().getContextClassLoader();
-
-		try {
-			Thread.currentThread().setContextClassLoader(
-				PortalClassLoaderUtil.getClassLoader());
-
-			_servlet.destroy();
 		}
 		finally {
 			Thread.currentThread().setContextClassLoader(contextClassLoader);

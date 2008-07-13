@@ -33,15 +33,6 @@ import java.util.Vector;
  */
 public class PortalInitableUtil {
 
-	public synchronized static void init(PortalInitable initable) {
-		if (_initables == null) {
-			initable.portalInit();
-		}
-		else {
-			_initables.add(initable);
-		}
-	}
-
 	public synchronized static void flushInitables() {
 		if (_initables != null) {
 			for (PortalInitable initable : _initables) {
@@ -49,6 +40,15 @@ public class PortalInitableUtil {
 			}
 
 			_initables = null;
+		}
+	}
+
+	public synchronized static void init(PortalInitable initable) {
+		if (_initables == null) {
+			initable.portalInit();
+		}
+		else {
+			_initables.add(initable);
 		}
 	}
 

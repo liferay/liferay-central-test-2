@@ -49,6 +49,45 @@ import javax.sql.DataSource;
 public class PortletContextListener
 	implements PortalInitable, ServletContextListener {
 
+	public void contextDestroyed(ServletContextEvent event) {
+		HotDeployUtil.fireUndeployEvent(
+			new HotDeployEvent(
+				event.getServletContext(),
+				Thread.currentThread().getContextClassLoader()));
+
+		try {
+			if (!_bindLiferayPool) {
+				return;
+			}
+
+			_bindLiferayPool = false;
+
+			if (_log.isDebugEnabled()) {
+				_log.debug("Dynamically unbinding the Liferay data source");
+			}
+
+			Context ctx = new InitialContext();
+
+			ctx.unbind(_JNDI_JDBC_LIFERAY_POOL);
+
+			ctx.destroySubcontext(_JNDI_JDBC);
+		}
+		catch (Exception e) {
+			if (_log.isWarnEnabled()) {
+				_log.warn(
+					"Unable to dynamically unbind the Liferay data source: "
+						+ e.getMessage());
+			}
+		}
+	}
+
+	public void contextInitialized(ServletContextEvent event) {
+		_classLoader = Thread.currentThread().getContextClassLoader();
+		_servletContext = event.getServletContext();
+
+		PortalInitableUtil.init(this);
+	}
+
 	public void portalInit() {
 		HotDeployUtil.fireDeployEvent(
 			new HotDeployEvent(_servletContext, _classLoader));
@@ -82,45 +121,6 @@ public class PortletContextListener
 			if (_log.isWarnEnabled()) {
 				_log.warn(
 					"Unable to dynamically bind the Liferay data source: "
-						+ e.getMessage());
-			}
-		}
-	}
-
-	public void contextInitialized(ServletContextEvent event) {
-		_classLoader = Thread.currentThread().getContextClassLoader();
-		_servletContext = event.getServletContext();
-
-		PortalInitableUtil.init(this);
-	}
-
-	public void contextDestroyed(ServletContextEvent event) {
-		HotDeployUtil.fireUndeployEvent(
-			new HotDeployEvent(
-				event.getServletContext(),
-				Thread.currentThread().getContextClassLoader()));
-
-		try {
-			if (!_bindLiferayPool) {
-				return;
-			}
-
-			_bindLiferayPool = false;
-
-			if (_log.isDebugEnabled()) {
-				_log.debug("Dynamically unbinding the Liferay data source");
-			}
-
-			Context ctx = new InitialContext();
-
-			ctx.unbind(_JNDI_JDBC_LIFERAY_POOL);
-
-			ctx.destroySubcontext(_JNDI_JDBC);
-		}
-		catch (Exception e) {
-			if (_log.isWarnEnabled()) {
-				_log.warn(
-					"Unable to dynamically unbind the Liferay data source: "
 						+ e.getMessage());
 			}
 		}
