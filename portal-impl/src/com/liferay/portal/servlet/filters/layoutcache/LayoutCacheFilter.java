@@ -31,8 +31,6 @@ import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.HttpUtil;
 import com.liferay.portal.kernel.util.JavaConstants;
 import com.liferay.portal.kernel.util.ParamUtil;
-import com.liferay.portal.kernel.util.PortalInitable;
-import com.liferay.portal.kernel.util.PortalInitableUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.UnicodeProperties;
@@ -72,15 +70,16 @@ import javax.servlet.http.HttpSession;
  * @author Raymond Augé
  *
  */
-public class LayoutCacheFilter
-	extends BasePortalFilter implements PortalInitable {
+public class LayoutCacheFilter extends BasePortalFilter {
 
 	public static final String SKIP_FILTER =
 		LayoutCacheFilter.class + "SKIP_FILTER";
 
-	public void portalInit() {
+	public void init(FilterConfig filterConfig) {
+		super.init(filterConfig);
+
 		_pattern = GetterUtil.getInteger(
-			_filterConfig.getInitParameter("pattern"));
+			filterConfig.getInitParameter("pattern"));
 
 		if ((_pattern != _PATTERN_FRIENDLY) &&
 			(_pattern != _PATTERN_LAYOUT) &&
@@ -88,14 +87,6 @@ public class LayoutCacheFilter
 
 			_log.error("Layout cache pattern is invalid");
 		}
-	}
-
-	public void init(FilterConfig filterConfig) {
-		super.init(filterConfig);
-
-		_filterConfig = filterConfig;
-
-		PortalInitableUtil.init(this);
 	}
 
 	protected String getBrowserType(HttpServletRequest request) {
@@ -447,7 +438,6 @@ public class LayoutCacheFilter
 
 	private static Log _log = LogFactoryUtil.getLog(LayoutCacheFilter.class);
 
-	private FilterConfig _filterConfig;
 	private int _pattern;
 
 }
