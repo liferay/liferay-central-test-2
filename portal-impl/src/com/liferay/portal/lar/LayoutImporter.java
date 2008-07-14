@@ -336,7 +336,7 @@ public class LayoutImporter {
 			}
 
 			long oldPlId = GetterUtil.getInteger(
-					layoutEl.attributeValue("old-plid"));
+				layoutEl.attributeValue("old-plid"));
 
 			String name = layoutEl.elementText("name");
 			String title = layoutEl.elementText("title");
