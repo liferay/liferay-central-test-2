@@ -115,6 +115,8 @@ public interface PortletDataContext extends Serializable {
 
 	public Map getNewPrimaryKeysMap(Class<?> classObj);
 
+	public long getOldPlid();
+
 	public Map<String, String[]> getParameterMap();
 
 	public long getPlid();
@@ -175,6 +177,8 @@ public interface PortletDataContext extends Serializable {
 	public boolean isWithinDateRange(Date modifiedDate);
 
 	public void setImportGroupId(long importGroupId);
+
+	public void setOldPlid(long oldPlid);
 
 	public void setPlid(long plid);
 

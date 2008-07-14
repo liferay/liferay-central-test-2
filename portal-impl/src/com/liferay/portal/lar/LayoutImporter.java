@@ -74,6 +74,7 @@ import com.liferay.portal.theme.ThemeLoader;
 import com.liferay.portal.theme.ThemeLoaderFactory;
 import com.liferay.portal.util.DocumentUtil;
 import com.liferay.portal.util.PortalUtil;
+import com.liferay.portal.util.PortletKeys;
 import com.liferay.portal.util.PropsValues;
 import com.liferay.util.LocalizationUtil;
 import com.liferay.util.MapUtil;
@@ -334,6 +335,9 @@ public class LayoutImporter {
 						" and parent layout id " + parentLayoutId);
 			}
 
+			long oldPlId = GetterUtil.getInteger(
+					layoutEl.attributeValue("old-plid"));
+
 			String name = layoutEl.elementText("name");
 			String title = layoutEl.elementText("title");
 			String description = layoutEl.elementText("description");
@@ -472,6 +476,7 @@ public class LayoutImporter {
 			}
 
 			context.setPlid(layout.getPlid());
+			context.setOldPlid(oldPlId);
 
 			newLayoutIdPlidMap.put(oldLayoutId, layout.getPlid());
 
@@ -486,6 +491,10 @@ public class LayoutImporter {
 					layoutCache, companyId, groupId, guestGroup, layout,
 					permissionsEl, importUserPermissions);
 			}
+
+			_portletImporter.importPortletData(
+				context, PortletKeys.LAYOUT_CONFIGURATION, layout.getPlid(),
+				layoutEl);
 		}
 
 		List<Element> portletEls = root.element("portlets").elements("portlet");

@@ -38,17 +38,20 @@ import com.liferay.portal.model.Layout;
 import com.liferay.portal.model.LayoutConstants;
 import com.liferay.portal.model.LayoutSet;
 import com.liferay.portal.model.LayoutTypePortlet;
+import com.liferay.portal.model.Portlet;
 import com.liferay.portal.model.Theme;
 import com.liferay.portal.model.impl.GroupImpl;
 import com.liferay.portal.service.GroupLocalServiceUtil;
 import com.liferay.portal.service.ImageLocalServiceUtil;
 import com.liferay.portal.service.LayoutLocalServiceUtil;
 import com.liferay.portal.service.LayoutSetLocalServiceUtil;
+import com.liferay.portal.service.PortletLocalServiceUtil;
 import com.liferay.portal.service.UserLocalServiceUtil;
 import com.liferay.portal.service.persistence.LayoutUtil;
 import com.liferay.portal.theme.ThemeLoader;
 import com.liferay.portal.theme.ThemeLoaderFactory;
 import com.liferay.portal.util.ContentUtil;
+import com.liferay.portal.util.PortletKeys;
 import com.liferay.portal.velocity.VelocityContextPool;
 import com.liferay.util.MapUtil;
 import com.liferay.util.xml.XMLFormatter;
@@ -169,6 +172,12 @@ public class LayoutExporter {
 		header.addAttribute("theme-id", layoutSet.getThemeId());
 		header.addAttribute("color-scheme-id", layoutSet.getColorSchemeId());
 
+		// Layout Configuration Portlet
+
+		Portlet layoutConfigurationPortlet =
+			PortletLocalServiceUtil.getPortletById(
+				context.getCompanyId(), PortletKeys.LAYOUT_CONFIGURATION);
+
 		// Layouts
 
 		Map<String, Long> portletIds = new LinkedHashMap<String, Long>();
@@ -192,6 +201,7 @@ public class LayoutExporter {
 
 			Element layoutEl = layoutDoc.addElement("layout");
 
+			layoutEl.addAttribute("old-plid", String.valueOf(layout.getPlid()));
 			layoutEl.addAttribute(
 				"layout-id", String.valueOf(layout.getLayoutId()));
 			layoutEl.addElement("parent-layout-id").addText(
@@ -260,6 +270,9 @@ public class LayoutExporter {
 			Element el = layoutsEl.addElement("layout");
 			el.addAttribute("layout-id", String.valueOf(layout.getLayoutId()));
 			el.addAttribute("path", layoutPath);
+
+			_portletExporter.exportPortletData(
+				context, layoutConfigurationPortlet, null, layoutEl);
 
 			try {
 				context.addZipEntry(

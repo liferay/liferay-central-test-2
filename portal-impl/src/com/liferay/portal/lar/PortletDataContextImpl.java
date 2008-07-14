@@ -348,6 +348,10 @@ public class PortletDataContextImpl implements PortletDataContext {
 		return map;
 	}
 
+	public long getOldPlid() {
+		return _oldPlid;
+	}
+
 	public Map getParameterMap() {
 		return _parameterMap;
 	}
@@ -523,6 +527,10 @@ public class PortletDataContextImpl implements PortletDataContext {
 		_importGroupId = importGroupId;
 	}
 
+	public void setOldPlid(long oldPlid) {
+		_oldPlid = oldPlid;
+	}
+
 	public void setPlid(long plid) {
 		_plid = plid;
 	}
@@ -600,6 +608,7 @@ public class PortletDataContextImpl implements PortletDataContext {
 	private long _companyId;
 	private long _groupId;
 	private long _importGroupId;
+	private long _oldPlid;
 	private long _plid;
 	private Set _primaryKeys;
 	private Map<String, Map> _newPrimaryKeysMaps = new HashMap<String, Map>();
