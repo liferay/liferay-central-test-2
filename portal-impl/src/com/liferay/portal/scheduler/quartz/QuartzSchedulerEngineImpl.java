@@ -27,6 +27,7 @@ import com.liferay.portal.kernel.scheduler.SchedulerException;
 import com.liferay.portal.kernel.scheduler.messaging.SchedulerRequest;
 import com.liferay.portal.kernel.uuid.PortalUUIDUtil;
 import com.liferay.portal.util.PropsUtil;
+import com.liferay.portal.util.PropsValues;
 
 import java.text.ParseException;
 
@@ -57,6 +58,10 @@ public class QuartzSchedulerEngineImpl implements SchedulerEngine {
 
 	public QuartzSchedulerEngineImpl() {
 		try {
+			if (!PropsValues.SCHEDULER_ENABLED) {
+				return;
+			}
+
 			Properties props = new Properties();
 
 			Enumeration<Object> enu = PropsUtil.getProperties().keys();
@@ -82,6 +87,10 @@ public class QuartzSchedulerEngineImpl implements SchedulerEngine {
 
 	public List<SchedulerRequest> getScheduledJobs(String groupName)
 		throws SchedulerException {
+
+		if (!PropsValues.SCHEDULER_ENABLED) {
+			return new ArrayList<SchedulerRequest>();
+		}
 
 		try {
 			String[] jobNames = _scheduler.getJobNames(groupName);
@@ -119,6 +128,10 @@ public class QuartzSchedulerEngineImpl implements SchedulerEngine {
 			String groupName, String cronText, Date startDate, Date endDate,
 			String description, String destination, String messageBody)
 		throws SchedulerException {
+
+		if (!PropsValues.SCHEDULER_ENABLED) {
+			return;
+		}
 
 		try {
 			String jobName = PortalUUIDUtil.generate();
@@ -159,6 +172,10 @@ public class QuartzSchedulerEngineImpl implements SchedulerEngine {
 	}
 
 	public void shutdown() throws SchedulerException {
+		if (!PropsValues.SCHEDULER_ENABLED) {
+			return;
+		}
+
 		try {
 			_scheduler.shutdown(false);
 		}
@@ -168,6 +185,10 @@ public class QuartzSchedulerEngineImpl implements SchedulerEngine {
 	}
 
 	public void start() throws SchedulerException {
+		if (!PropsValues.SCHEDULER_ENABLED) {
+			return;
+		}
+
 		try {
 			_scheduler.start();
 		}
@@ -178,6 +199,10 @@ public class QuartzSchedulerEngineImpl implements SchedulerEngine {
 
 	public void unschedule(String jobName, String groupName)
 		throws SchedulerException {
+
+		if (!PropsValues.SCHEDULER_ENABLED) {
+			return;
+		}
 
 		try {
 			_scheduler.unscheduleJob(jobName, groupName);

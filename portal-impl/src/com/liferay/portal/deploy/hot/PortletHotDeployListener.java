@@ -401,7 +401,9 @@ public class PortletHotDeployListener extends BaseHotDeployListener {
 
 		Scheduler schedulerInstance = null;
 
-		if (Validator.isNotNull(portlet.getSchedulerClass())) {
+		if (PropsValues.SCHEDULER_ENABLED &&
+			Validator.isNotNull(portlet.getSchedulerClass())) {
+
 			schedulerInstance = (Scheduler)portletClassLoader.loadClass(
 				portlet.getSchedulerClass()).newInstance();
 
