@@ -389,9 +389,13 @@ public class PortletImporter {
 			_log.debug("Importing data for " + portletId);
 		}
 
-		PortletPreferencesImpl prefsImpl =
-			(PortletPreferencesImpl)PortletPreferencesSerializer.fromDefaultXML(
-				portletPreferences.getPreferences());
+		PortletPreferencesImpl prefsImpl = null;
+
+		if (portletPreferences != null) {
+			prefsImpl = (PortletPreferencesImpl)
+				PortletPreferencesSerializer.fromDefaultXML(
+					portletPreferences.getPreferences());
+		}
 
 		String portletData = context.getZipEntryAsString(
 			portletDataRefEl.attributeValue("path"));

@@ -493,8 +493,7 @@ public class LayoutImporter {
 			}
 
 			_portletImporter.importPortletData(
-				context, PortletKeys.LAYOUT_CONFIGURATION, layout.getPlid(),
-				layoutEl);
+				context, PortletKeys.LAYOUT_CONFIGURATION, null, layoutEl);
 		}
 
 		List<Element> portletEls = root.element("portlets").elements("portlet");
