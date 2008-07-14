@@ -28,6 +28,7 @@ import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.servlet.HttpHeaders;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.ParamUtil;
+import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.Image;
 import com.liferay.portal.model.impl.ImageImpl;
 import com.liferay.portal.service.ImageLocalServiceUtil;
@@ -127,12 +128,14 @@ public class ImageServlet extends HttpServlet {
 			long groupId = ParamUtil.getLong(request, "groupId");
 
 			try {
-				IGImage igImage =
-					IGImageLocalServiceUtil.getImageByUuidAndGroupId(
-						uuid, groupId);
+				if (Validator.isNotNull(uuid) && (groupId > 0)) {
+					IGImage igImage =
+						IGImageLocalServiceUtil.getImageByUuidAndGroupId(
+							uuid, groupId);
 
-				image = ImageLocalServiceUtil.getImage(
-					igImage.getLargeImageId());
+					image = ImageLocalServiceUtil.getImage(
+						igImage.getLargeImageId());
+				}
 			}
 			catch (Exception e) {
 			}
