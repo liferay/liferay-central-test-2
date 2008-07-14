@@ -71,7 +71,7 @@ public class AddPageTest extends BaseTestCase {
 		}
 
 		selenium.typeKeys("new_page",
-			RuntimeVariables.replace("Directory Test Page"));
+			RuntimeVariables.replace("Director Test Page"));
 		selenium.type("new_page",
 			RuntimeVariables.replace("Directory Test Page"));
 		selenium.click("link=Save");

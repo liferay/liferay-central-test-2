@@ -106,12 +106,12 @@ public class EditCommunityTest extends BaseTestCase {
 		}
 
 		selenium.typeKeys("_29_name",
-			RuntimeVariables.replace("Test Community 2 Edited"));
+			RuntimeVariables.replace("Test Communit 2 Edited"));
 		selenium.type("_29_name",
 			RuntimeVariables.replace("Test Community 2 Edited"));
 		selenium.typeKeys("_29_description",
 			RuntimeVariables.replace(
-				"This is a second temporary Test Community! This community has been edited."));
+				"This is a second temporar Test Communit! This communit has been edited."));
 		selenium.type("_29_description",
 			RuntimeVariables.replace(
 				"This is a second temporary Test Community! This community has been edited."));

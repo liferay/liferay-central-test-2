@@ -92,7 +92,7 @@ public class AddSecondPrivateEventTest extends BaseTestCase {
 			RuntimeVariables.replace("Star Wars Marathon!"));
 		selenium.typeKeys("_8_description",
 			RuntimeVariables.replace(
-				"This Star Wars Marathon event should be listed on the calendar on the LIVE and PRIVATE portion of this community. Next week: A Lord of the Rings Marathon!"));
+				"This Star Wars Marathon event should be listed on the calendar on the LIVE and PRIVATE portion of this communit. Next week: A Lord of the Rings Marathon!"));
 		selenium.type("_8_description",
 			RuntimeVariables.replace(
 				"This Star Wars Marathon event should be listed on the calendar on the LIVE and PRIVATE portion of this community. Next week: A Lord of the Rings Marathon!"));

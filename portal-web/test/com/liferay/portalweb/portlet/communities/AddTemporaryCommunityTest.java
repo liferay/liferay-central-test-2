@@ -52,7 +52,7 @@ public class AddTemporaryCommunityTest extends BaseTestCase {
 		selenium.click("//input[@value='Add Community']");
 		selenium.waitForPageToLoad("30000");
 		selenium.typeKeys("_29_name",
-			RuntimeVariables.replace("Test Community 2"));
+			RuntimeVariables.replace("Test Communit 2"));
 		selenium.type("_29_name", RuntimeVariables.replace("Test Community 2"));
 		selenium.type("_29_description",
 			RuntimeVariables.replace(

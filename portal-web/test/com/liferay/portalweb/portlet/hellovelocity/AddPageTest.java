@@ -71,7 +71,7 @@ public class AddPageTest extends BaseTestCase {
 		}
 
 		selenium.typeKeys("new_page",
-			RuntimeVariables.replace("Hello Velocity Test Page"));
+			RuntimeVariables.replace("Hello Velocit Test Page"));
 		selenium.type("new_page",
 			RuntimeVariables.replace("Hello Velocity Test Page"));
 		selenium.click("link=Save");

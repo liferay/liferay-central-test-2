@@ -35,7 +35,7 @@ public class AddCommentTest extends BaseTestCase {
 	public void testAddComment() throws Exception {
 		selenium.click("link=Post Reply");
 		selenium.typeKeys("_36_postReplyBody0",
-			RuntimeVariables.replace("This is a test Post Reply."));
+			RuntimeVariables.replace("This is a test Post Repl."));
 		selenium.type("_36_postReplyBody0",
 			RuntimeVariables.replace("This is a test Post Reply."));
 		selenium.click("_36_postReplyButton0");

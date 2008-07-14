@@ -71,7 +71,7 @@ public class AddPageTest extends BaseTestCase {
 		}
 
 		selenium.typeKeys("new_page",
-			RuntimeVariables.replace("Web Proxy Test Page"));
+			RuntimeVariables.replace("Web Prox Test Page"));
 		selenium.type("new_page",
 			RuntimeVariables.replace("Web Proxy Test Page"));
 		selenium.click("link=Save");

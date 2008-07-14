@@ -71,7 +71,7 @@ public class AddPageTest extends BaseTestCase {
 		}
 
 		selenium.typeKeys("new_page",
-			RuntimeVariables.replace("Currency Converter Test Page"));
+			RuntimeVariables.replace("Currenc Converter Test Page"));
 		selenium.type("new_page",
 			RuntimeVariables.replace("Currency Converter Test Page"));
 		selenium.click("link=Save");

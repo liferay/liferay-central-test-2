@@ -68,10 +68,10 @@ public class AddCommunitiesTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.typeKeys("_29_name", RuntimeVariables.replace("Test Community"));
+		selenium.typeKeys("_29_name", RuntimeVariables.replace("Test Communit"));
 		selenium.type("_29_name", RuntimeVariables.replace("Test Community"));
 		selenium.typeKeys("_29_description",
-			RuntimeVariables.replace("This is a test community!"));
+			RuntimeVariables.replace("This is a test communit!"));
 		selenium.type("_29_description",
 			RuntimeVariables.replace("This is a test community!"));
 		selenium.click("//input[@value='Save']");
@@ -93,7 +93,7 @@ public class AddCommunitiesTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.typeKeys("_29_name", RuntimeVariables.replace("Test Community"));
+		selenium.typeKeys("_29_name", RuntimeVariables.replace("Test Communit"));
 		selenium.type("_29_name", RuntimeVariables.replace("Test Community"));
 		selenium.click("//input[@value='Search Communities']");
 		selenium.waitForPageToLoad("30000");

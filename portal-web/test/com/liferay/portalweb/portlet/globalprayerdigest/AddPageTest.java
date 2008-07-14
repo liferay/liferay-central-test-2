@@ -71,7 +71,7 @@ public class AddPageTest extends BaseTestCase {
 		}
 
 		selenium.typeKeys("new_page",
-			RuntimeVariables.replace("Global Prayer Digest Test Page"));
+			RuntimeVariables.replace("Global Praer Digest Test Page"));
 		selenium.type("new_page",
 			RuntimeVariables.replace("Global Prayer Digest Test Page"));
 		selenium.click("link=Save");

@@ -71,7 +71,7 @@ public class AddPageTest extends BaseTestCase {
 		}
 
 		selenium.typeKeys("new_page",
-			RuntimeVariables.replace("WSRP Proxy Test Page"));
+			RuntimeVariables.replace("WSRP Prox Test Page"));
 		selenium.type("new_page",
 			RuntimeVariables.replace("WSRP Proxy Test Page"));
 		selenium.click("link=Save");

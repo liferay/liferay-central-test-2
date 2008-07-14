@@ -103,7 +103,7 @@ public class EditCommentTest extends BaseTestCase {
 		}
 
 		selenium.typeKeys("_36_editBody1",
-			RuntimeVariables.replace("This is a test edited post reply!"));
+			RuntimeVariables.replace("This is a test edited post repl!"));
 		selenium.type("_36_editBody1",
 			RuntimeVariables.replace("This is a test edited post reply!"));
 

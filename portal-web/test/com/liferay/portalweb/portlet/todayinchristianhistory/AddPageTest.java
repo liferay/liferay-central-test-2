@@ -71,7 +71,7 @@ public class AddPageTest extends BaseTestCase {
 		}
 
 		selenium.typeKeys("new_page",
-			RuntimeVariables.replace("Today in Christian History Test Page"));
+			RuntimeVariables.replace("Toda in Christian Histor Test Page"));
 		selenium.type("new_page",
 			RuntimeVariables.replace("Today in Christian History Test Page"));
 		selenium.click("link=Save");

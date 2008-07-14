@@ -71,7 +71,7 @@ public class AddPageTest extends BaseTestCase {
 		}
 
 		selenium.typeKeys("new_page",
-			RuntimeVariables.replace("Document Library Test Page"));
+			RuntimeVariables.replace("Document Librar Test Page"));
 		selenium.type("new_page",
 			RuntimeVariables.replace("Document Library Test Page"));
 		selenium.click("link=Save");

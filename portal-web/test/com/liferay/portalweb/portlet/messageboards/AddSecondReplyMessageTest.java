@@ -87,7 +87,7 @@ public class AddSecondReplyMessageTest extends BaseTestCase {
 		}
 
 		selenium.typeKeys("_19_textArea",
-			RuntimeVariables.replace("This is a second reply message."));
+			RuntimeVariables.replace("This is a second repl message."));
 		selenium.type("_19_textArea",
 			RuntimeVariables.replace("This is a second reply message."));
 

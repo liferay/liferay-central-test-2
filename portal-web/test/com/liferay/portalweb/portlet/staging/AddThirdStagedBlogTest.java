@@ -70,7 +70,7 @@ public class AddThirdStagedBlogTest extends BaseTestCase {
 		}
 
 		selenium.typeKeys("_33_title",
-			RuntimeVariables.replace("Third Test Entry"));
+			RuntimeVariables.replace("Third Test Entr"));
 		selenium.type("_33_title", RuntimeVariables.replace("Third Test Entry"));
 		Thread.sleep(5000);
 

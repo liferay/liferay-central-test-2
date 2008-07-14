@@ -88,7 +88,7 @@ public class AddStagedBlogTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.typeKeys("_33_title", RuntimeVariables.replace("Test Entry"));
+		selenium.typeKeys("_33_title", RuntimeVariables.replace("Test Entr"));
 		selenium.type("_33_title", RuntimeVariables.replace("Test Entry"));
 		Thread.sleep(5000);
 
@@ -145,7 +145,7 @@ public class AddStagedBlogTest extends BaseTestCase {
 		selenium.selectFrame("//iframe");
 		selenium.typeKeys("//body",
 			RuntimeVariables.replace(
-				"This is a test entry for the Staging test!"));
+				"This is a test entr for the Staging test!"));
 		selenium.type("//body",
 			RuntimeVariables.replace(
 				"This is a test entry for the Staging test!"));

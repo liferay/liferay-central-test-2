@@ -89,7 +89,7 @@ public class AddSecondLiveBlogTest extends BaseTestCase {
 		}
 
 		selenium.typeKeys("_33_title",
-			RuntimeVariables.replace("Second Test Entry"));
+			RuntimeVariables.replace("Second Test Entr"));
 		selenium.type("_33_title", RuntimeVariables.replace("Second Test Entry"));
 		Thread.sleep(5000);
 
@@ -145,7 +145,7 @@ public class AddSecondLiveBlogTest extends BaseTestCase {
 		selenium.selectFrame("//iframe[@id=\"FCKeditor1___Frame\"]");
 		selenium.selectFrame("//iframe");
 		selenium.typeKeys("//body",
-			RuntimeVariables.replace("This is a second staged entry test!"));
+			RuntimeVariables.replace("This is a second staged entr test!"));
 		selenium.type("//body",
 			RuntimeVariables.replace("This is a second staged entry test!"));
 		selenium.selectFrame("relative=top");

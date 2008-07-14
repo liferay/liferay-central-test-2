@@ -71,7 +71,7 @@ public class AddPageTest extends BaseTestCase {
 		}
 
 		selenium.typeKeys("new_page",
-			RuntimeVariables.replace("Bible Gateway Test Page"));
+			RuntimeVariables.replace("Bible Gatewa Test Page"));
 		selenium.type("new_page",
 			RuntimeVariables.replace("Bible Gateway Test Page"));
 		selenium.click("link=Save");

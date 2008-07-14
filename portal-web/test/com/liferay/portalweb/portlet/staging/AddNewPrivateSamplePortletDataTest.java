@@ -522,7 +522,7 @@ public class AddNewPrivateSamplePortletDataTest extends BaseTestCase {
 		selenium.selectFrame("//iframe");
 		selenium.typeKeys("//body",
 			RuntimeVariables.replace(
-				"This article needs to be published. Today!"));
+				"This article needs to be published. Toda!"));
 		selenium.type("//body",
 			RuntimeVariables.replace(
 				"This article needs to be published. Today!"));
