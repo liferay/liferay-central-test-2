@@ -201,53 +201,103 @@ public class GroupFinderImpl
 			params = new LinkedHashMap<String, Object>();
 		}
 
-		Long userId = (Long)params.get("usersGroups");
+		String finderSQL = Group.class.getName();
+		boolean[] finderClassNamesCacheEnabled = new boolean[] {
+			GroupModelImpl.CACHE_ENABLED, LayoutSetModelImpl.CACHE_ENABLED,
+			PermissionModelImpl.CACHE_ENABLED, ResourceModelImpl.CACHE_ENABLED,
+			ResourceCodeModelImpl.CACHE_ENABLED,
+			UserGroupRoleModelImpl.CACHE_ENABLED,
+			GroupModelImpl.CACHE_ENABLED_GROUPS_ORGS,
+			GroupModelImpl.CACHE_ENABLED_GROUPS_ROLES,
+			GroupModelImpl.CACHE_ENABLED_GROUPS_USERGROUPS,
+			RoleModelImpl.CACHE_ENABLED_ROLES_PERMISSIONS,
+			UserModelImpl.CACHE_ENABLED_USERS_GROUPS,
+			UserModelImpl.CACHE_ENABLED_USERS_ORGS,
+			UserModelImpl.CACHE_ENABLED_USERS_USERGROUPS
+		};
+		String[] finderClassNames = new String[] {
+			Group.class.getName(), LayoutSet.class.getName(),
+			Permission.class.getName(), Resource.class.getName(),
+			ResourceCode.class.getName(), UserGroupRole.class.getName(),
+			"Groups_Orgs", "Groups_Roles", "Groups_UserGroups",
+			"Roles_Permissions", "Users_Groups", "Users_Orgs",
+			"Users_UserGroups"
+		};
+		String finderMethodName = "customCountByC_N_D";
+		String finderParams[] = new String[] {
+			Long.class.getName(), String.class.getName(),
+			String.class.getName(), LinkedHashMap.class.getName(),
+			String.class.getName(), String.class.getName()
+		};
+		Object finderArgs[] = new Object[] {
+			companyId, name, description, params.toString()
+		};
 
-		LinkedHashMap<String, Object> params1 = params;
+		Object result = null;
 
-		LinkedHashMap<String, Object> params2 =
-			new LinkedHashMap<String, Object>();
-
-		params2.putAll(params1);
-
-		if (userId != null) {
-			params2.remove("usersGroups");
-			params2.put("groupsOrgs", userId);
+		if (!ArrayUtil.contains(finderClassNamesCacheEnabled, false)) {
+			result = FinderCacheUtil.getResult(
+				finderSQL, finderClassNames, finderMethodName, finderParams,
+				finderArgs, this);
 		}
 
-		LinkedHashMap<String, Object> params3 =
-			new LinkedHashMap<String, Object>();
+		if (result == null) {
+			Long userId = (Long)params.get("usersGroups");
 
-		params3.putAll(params1);
+			LinkedHashMap<String, Object> params1 = params;
 
-		if (userId != null) {
-			params3.remove("usersGroups");
-			params3.put("groupsUserGroups", userId);
-		}
+			LinkedHashMap<String, Object> params2 =
+				new LinkedHashMap<String, Object>();
 
-		Session session = null;
+			params2.putAll(params1);
 
-		try {
-			session = openSession();
-
-			int count = countByC_N_D(
-				session, companyId, name, description, params1);
-
-			if (Validator.isNotNull(userId)) {
-				count += countByC_N_D(
-					session, companyId, name, description, params2);
-
-				count += countByC_N_D(
-					session, companyId, name, description, params3);
+			if (userId != null) {
+				params2.remove("usersGroups");
+				params2.put("groupsOrgs", userId);
 			}
 
-			return count;
+			LinkedHashMap<String, Object> params3 =
+				new LinkedHashMap<String, Object>();
+
+			params3.putAll(params1);
+
+			if (userId != null) {
+				params3.remove("usersGroups");
+				params3.put("groupsUserGroups", userId);
+			}
+
+			Session session = null;
+
+			try {
+				session = openSession();
+
+				int count = countByC_N_D(
+					session, companyId, name, description, params1);
+
+				if (Validator.isNotNull(userId)) {
+					count += countByC_N_D(
+						session, companyId, name, description, params2);
+
+					count += countByC_N_D(
+						session, companyId, name, description, params3);
+				}
+
+				FinderCacheUtil.putResult(
+					finderSQL, finderClassNamesCacheEnabled, finderClassNames,
+					finderMethodName, finderParams, finderArgs,
+					new Long(count));
+
+				return count;
+			}
+			catch (Exception e) {
+				throw new SystemException(e);
+			}
+			finally {
+				closeSession(session);
+			}
 		}
-		catch (Exception e) {
-			throw new SystemException(e);
-		}
-		finally {
-			closeSession(session);
+		else {
+			return ((Long)result).intValue();
 		}
 	}
 
