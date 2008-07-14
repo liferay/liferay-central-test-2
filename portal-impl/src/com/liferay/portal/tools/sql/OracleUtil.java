@@ -202,7 +202,7 @@ public class OracleUtil extends DBUtil {
 
 	private String _preBuildSQL(String template) throws IOException {
 		template = convertTimestamp(template);
-		template = StringUtil.replace(template, TEMPLATE, getTemplate());
+		template = StringUtil.replace(template, TEMPLATE, getTemplate(),true);
 
 		template = reword(template);
 		template = StringUtil.replace(

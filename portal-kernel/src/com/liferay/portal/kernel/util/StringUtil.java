@@ -660,6 +660,19 @@ public class StringUtil {
 		}
 	}
 
+	public static String replace(
+		String s, String[] oldSubs, String[] newSubs , boolean exactmatch) {
+		if ( !exactmatch) {
+			replace( s, oldSubs,  newSubs);
+		} else {
+			for (int i = 0; i < oldSubs.length; i++) {
+				String regEx = "\\b" + oldSubs[i] + "\\b" ;
+				s = s.replaceAll( regEx , newSubs[i]);		
+			}			
+		}
+		return s;
+	}
+	
 	public static String replace(String s, String[] oldSubs, String[] newSubs) {
 		if ((s == null) || (oldSubs == null) || (newSubs == null)) {
 			return null;
@@ -675,7 +688,7 @@ public class StringUtil {
 
 		return s;
 	}
-
+	
 	/**
 	 * Returns a string with replaced values. This method will replace all text
 	 * in the given string, between the beginning and ending delimiter, with new
