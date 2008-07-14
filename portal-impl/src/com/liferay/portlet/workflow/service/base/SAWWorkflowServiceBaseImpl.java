@@ -27,7 +27,6 @@ import com.liferay.portal.service.base.PrincipalBean;
 import com.liferay.portlet.workflow.service.SAWWorkflowLocalService;
 import com.liferay.portlet.workflow.service.SAWWorkflowLocalServiceFactory;
 import com.liferay.portlet.workflow.service.SAWWorkflowService;
-import com.liferay.portlet.workflow.service.SAWWorkflowServiceFactory;
 import com.liferay.portlet.workflow.service.WorkflowComponentLocalService;
 import com.liferay.portlet.workflow.service.WorkflowComponentLocalServiceFactory;
 import com.liferay.portlet.workflow.service.WorkflowComponentService;
@@ -39,19 +38,20 @@ import com.liferay.portlet.workflow.service.WorkflowDefinitionServiceFactory;
 import com.liferay.portlet.workflow.service.WorkflowInstanceLocalService;
 import com.liferay.portlet.workflow.service.WorkflowInstanceLocalServiceFactory;
 import com.liferay.portlet.workflow.service.WorkflowInstanceService;
+import com.liferay.portlet.workflow.service.WorkflowInstanceServiceFactory;
 import com.liferay.portlet.workflow.service.WorkflowTaskLocalService;
 import com.liferay.portlet.workflow.service.WorkflowTaskLocalServiceFactory;
 import com.liferay.portlet.workflow.service.WorkflowTaskService;
 import com.liferay.portlet.workflow.service.WorkflowTaskServiceFactory;
 
 /**
- * <a href="WorkflowInstanceServiceBaseImpl.java.html"><b><i>View Source</i></b></a>
+ * <a href="SAWWorkflowServiceBaseImpl.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *
  */
-public abstract class WorkflowInstanceServiceBaseImpl extends PrincipalBean
-	implements WorkflowInstanceService {
+public abstract class SAWWorkflowServiceBaseImpl extends PrincipalBean
+	implements SAWWorkflowService {
 	public SAWWorkflowLocalService getSAWWorkflowLocalService() {
 		return sawWorkflowLocalService;
 	}
@@ -59,14 +59,6 @@ public abstract class WorkflowInstanceServiceBaseImpl extends PrincipalBean
 	public void setSAWWorkflowLocalService(
 		SAWWorkflowLocalService sawWorkflowLocalService) {
 		this.sawWorkflowLocalService = sawWorkflowLocalService;
-	}
-
-	public SAWWorkflowService getSAWWorkflowService() {
-		return sawWorkflowService;
-	}
-
-	public void setSAWWorkflowService(SAWWorkflowService sawWorkflowService) {
-		this.sawWorkflowService = sawWorkflowService;
 	}
 
 	public WorkflowComponentLocalService getWorkflowComponentLocalService() {
@@ -114,6 +106,15 @@ public abstract class WorkflowInstanceServiceBaseImpl extends PrincipalBean
 		this.workflowInstanceLocalService = workflowInstanceLocalService;
 	}
 
+	public WorkflowInstanceService getWorkflowInstanceService() {
+		return workflowInstanceService;
+	}
+
+	public void setWorkflowInstanceService(
+		WorkflowInstanceService workflowInstanceService) {
+		this.workflowInstanceService = workflowInstanceService;
+	}
+
 	public WorkflowTaskLocalService getWorkflowTaskLocalService() {
 		return workflowTaskLocalService;
 	}
@@ -136,10 +137,6 @@ public abstract class WorkflowInstanceServiceBaseImpl extends PrincipalBean
 			sawWorkflowLocalService = SAWWorkflowLocalServiceFactory.getImpl();
 		}
 
-		if (sawWorkflowService == null) {
-			sawWorkflowService = SAWWorkflowServiceFactory.getImpl();
-		}
-
 		if (workflowComponentLocalService == null) {
 			workflowComponentLocalService = WorkflowComponentLocalServiceFactory.getImpl();
 		}
@@ -160,6 +157,10 @@ public abstract class WorkflowInstanceServiceBaseImpl extends PrincipalBean
 			workflowInstanceLocalService = WorkflowInstanceLocalServiceFactory.getImpl();
 		}
 
+		if (workflowInstanceService == null) {
+			workflowInstanceService = WorkflowInstanceServiceFactory.getImpl();
+		}
+
 		if (workflowTaskLocalService == null) {
 			workflowTaskLocalService = WorkflowTaskLocalServiceFactory.getImpl();
 		}
@@ -170,12 +171,12 @@ public abstract class WorkflowInstanceServiceBaseImpl extends PrincipalBean
 	}
 
 	protected SAWWorkflowLocalService sawWorkflowLocalService;
-	protected SAWWorkflowService sawWorkflowService;
 	protected WorkflowComponentLocalService workflowComponentLocalService;
 	protected WorkflowComponentService workflowComponentService;
 	protected WorkflowDefinitionLocalService workflowDefinitionLocalService;
 	protected WorkflowDefinitionService workflowDefinitionService;
 	protected WorkflowInstanceLocalService workflowInstanceLocalService;
+	protected WorkflowInstanceService workflowInstanceService;
 	protected WorkflowTaskLocalService workflowTaskLocalService;
 	protected WorkflowTaskService workflowTaskService;
 }

@@ -22,7 +22,19 @@
 
 package com.liferay.portlet.workflow.service.base;
 
-import com.liferay.portal.service.base.PrincipalBean;
+import com.liferay.documentlibrary.service.DLLocalService;
+import com.liferay.documentlibrary.service.DLLocalServiceFactory;
+import com.liferay.documentlibrary.service.DLService;
+import com.liferay.documentlibrary.service.DLServiceFactory;
+
+import com.liferay.portal.service.ResourceLocalService;
+import com.liferay.portal.service.ResourceLocalServiceFactory;
+import com.liferay.portal.service.ResourceService;
+import com.liferay.portal.service.ResourceServiceFactory;
+import com.liferay.portal.service.persistence.ResourceFinder;
+import com.liferay.portal.service.persistence.ResourceFinderUtil;
+import com.liferay.portal.service.persistence.ResourcePersistence;
+import com.liferay.portal.service.persistence.ResourceUtil;
 
 import com.liferay.portlet.workflow.service.SAWWorkflowLocalService;
 import com.liferay.portlet.workflow.service.SAWWorkflowLocalServiceFactory;
@@ -33,25 +45,23 @@ import com.liferay.portlet.workflow.service.WorkflowComponentLocalServiceFactory
 import com.liferay.portlet.workflow.service.WorkflowComponentService;
 import com.liferay.portlet.workflow.service.WorkflowComponentServiceFactory;
 import com.liferay.portlet.workflow.service.WorkflowDefinitionLocalService;
-import com.liferay.portlet.workflow.service.WorkflowDefinitionLocalServiceFactory;
-import com.liferay.portlet.workflow.service.WorkflowDefinitionService;
-import com.liferay.portlet.workflow.service.WorkflowDefinitionServiceFactory;
 import com.liferay.portlet.workflow.service.WorkflowInstanceLocalService;
 import com.liferay.portlet.workflow.service.WorkflowInstanceLocalServiceFactory;
 import com.liferay.portlet.workflow.service.WorkflowInstanceService;
+import com.liferay.portlet.workflow.service.WorkflowInstanceServiceFactory;
 import com.liferay.portlet.workflow.service.WorkflowTaskLocalService;
 import com.liferay.portlet.workflow.service.WorkflowTaskLocalServiceFactory;
 import com.liferay.portlet.workflow.service.WorkflowTaskService;
 import com.liferay.portlet.workflow.service.WorkflowTaskServiceFactory;
 
 /**
- * <a href="WorkflowInstanceServiceBaseImpl.java.html"><b><i>View Source</i></b></a>
+ * <a href="WorkflowDefinitionLocalServiceBaseImpl.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *
  */
-public abstract class WorkflowInstanceServiceBaseImpl extends PrincipalBean
-	implements WorkflowInstanceService {
+public abstract class WorkflowDefinitionLocalServiceBaseImpl
+	implements WorkflowDefinitionLocalService {
 	public SAWWorkflowLocalService getSAWWorkflowLocalService() {
 		return sawWorkflowLocalService;
 	}
@@ -87,24 +97,6 @@ public abstract class WorkflowInstanceServiceBaseImpl extends PrincipalBean
 		this.workflowComponentService = workflowComponentService;
 	}
 
-	public WorkflowDefinitionLocalService getWorkflowDefinitionLocalService() {
-		return workflowDefinitionLocalService;
-	}
-
-	public void setWorkflowDefinitionLocalService(
-		WorkflowDefinitionLocalService workflowDefinitionLocalService) {
-		this.workflowDefinitionLocalService = workflowDefinitionLocalService;
-	}
-
-	public WorkflowDefinitionService getWorkflowDefinitionService() {
-		return workflowDefinitionService;
-	}
-
-	public void setWorkflowDefinitionService(
-		WorkflowDefinitionService workflowDefinitionService) {
-		this.workflowDefinitionService = workflowDefinitionService;
-	}
-
 	public WorkflowInstanceLocalService getWorkflowInstanceLocalService() {
 		return workflowInstanceLocalService;
 	}
@@ -112,6 +104,15 @@ public abstract class WorkflowInstanceServiceBaseImpl extends PrincipalBean
 	public void setWorkflowInstanceLocalService(
 		WorkflowInstanceLocalService workflowInstanceLocalService) {
 		this.workflowInstanceLocalService = workflowInstanceLocalService;
+	}
+
+	public WorkflowInstanceService getWorkflowInstanceService() {
+		return workflowInstanceService;
+	}
+
+	public void setWorkflowInstanceService(
+		WorkflowInstanceService workflowInstanceService) {
+		this.workflowInstanceService = workflowInstanceService;
 	}
 
 	public WorkflowTaskLocalService getWorkflowTaskLocalService() {
@@ -131,6 +132,55 @@ public abstract class WorkflowInstanceServiceBaseImpl extends PrincipalBean
 		this.workflowTaskService = workflowTaskService;
 	}
 
+	public DLLocalService getDLLocalService() {
+		return dlLocalService;
+	}
+
+	public void setDLLocalService(DLLocalService dlLocalService) {
+		this.dlLocalService = dlLocalService;
+	}
+
+	public DLService getDLService() {
+		return dlService;
+	}
+
+	public void setDLService(DLService dlService) {
+		this.dlService = dlService;
+	}
+
+	public ResourceLocalService getResourceLocalService() {
+		return resourceLocalService;
+	}
+
+	public void setResourceLocalService(
+		ResourceLocalService resourceLocalService) {
+		this.resourceLocalService = resourceLocalService;
+	}
+
+	public ResourceService getResourceService() {
+		return resourceService;
+	}
+
+	public void setResourceService(ResourceService resourceService) {
+		this.resourceService = resourceService;
+	}
+
+	public ResourcePersistence getResourcePersistence() {
+		return resourcePersistence;
+	}
+
+	public void setResourcePersistence(ResourcePersistence resourcePersistence) {
+		this.resourcePersistence = resourcePersistence;
+	}
+
+	public ResourceFinder getResourceFinder() {
+		return resourceFinder;
+	}
+
+	public void setResourceFinder(ResourceFinder resourceFinder) {
+		this.resourceFinder = resourceFinder;
+	}
+
 	protected void init() {
 		if (sawWorkflowLocalService == null) {
 			sawWorkflowLocalService = SAWWorkflowLocalServiceFactory.getImpl();
@@ -148,16 +198,12 @@ public abstract class WorkflowInstanceServiceBaseImpl extends PrincipalBean
 			workflowComponentService = WorkflowComponentServiceFactory.getImpl();
 		}
 
-		if (workflowDefinitionLocalService == null) {
-			workflowDefinitionLocalService = WorkflowDefinitionLocalServiceFactory.getImpl();
-		}
-
-		if (workflowDefinitionService == null) {
-			workflowDefinitionService = WorkflowDefinitionServiceFactory.getImpl();
-		}
-
 		if (workflowInstanceLocalService == null) {
 			workflowInstanceLocalService = WorkflowInstanceLocalServiceFactory.getImpl();
+		}
+
+		if (workflowInstanceService == null) {
+			workflowInstanceService = WorkflowInstanceServiceFactory.getImpl();
 		}
 
 		if (workflowTaskLocalService == null) {
@@ -167,15 +213,44 @@ public abstract class WorkflowInstanceServiceBaseImpl extends PrincipalBean
 		if (workflowTaskService == null) {
 			workflowTaskService = WorkflowTaskServiceFactory.getImpl();
 		}
+
+		if (dlLocalService == null) {
+			dlLocalService = DLLocalServiceFactory.getImpl();
+		}
+
+		if (dlService == null) {
+			dlService = DLServiceFactory.getImpl();
+		}
+
+		if (resourceLocalService == null) {
+			resourceLocalService = ResourceLocalServiceFactory.getImpl();
+		}
+
+		if (resourceService == null) {
+			resourceService = ResourceServiceFactory.getImpl();
+		}
+
+		if (resourcePersistence == null) {
+			resourcePersistence = ResourceUtil.getPersistence();
+		}
+
+		if (resourceFinder == null) {
+			resourceFinder = ResourceFinderUtil.getFinder();
+		}
 	}
 
 	protected SAWWorkflowLocalService sawWorkflowLocalService;
 	protected SAWWorkflowService sawWorkflowService;
 	protected WorkflowComponentLocalService workflowComponentLocalService;
 	protected WorkflowComponentService workflowComponentService;
-	protected WorkflowDefinitionLocalService workflowDefinitionLocalService;
-	protected WorkflowDefinitionService workflowDefinitionService;
 	protected WorkflowInstanceLocalService workflowInstanceLocalService;
+	protected WorkflowInstanceService workflowInstanceService;
 	protected WorkflowTaskLocalService workflowTaskLocalService;
 	protected WorkflowTaskService workflowTaskService;
+	protected DLLocalService dlLocalService;
+	protected DLService dlService;
+	protected ResourceLocalService resourceLocalService;
+	protected ResourceService resourceService;
+	protected ResourcePersistence resourcePersistence;
+	protected ResourceFinder resourceFinder;
 }

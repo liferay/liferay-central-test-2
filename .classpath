@@ -86,6 +86,7 @@
 	<classpathentry kind="lib" path="lib/portal/axis-ant.jar"/>
 	<classpathentry kind="lib" path="lib/portal/backport-concurrent.jar"/>
 	<classpathentry kind="lib" path="lib/portal/bsf.jar"/>
+	<classpathentry kind="lib" path="lib/portal/bsh.jar"/>
 	<classpathentry kind="lib" path="lib/portal/burlap.jar"/>
 	<classpathentry kind="lib" path="lib/portal/casclient.jar"/>
 	<classpathentry kind="lib" path="lib/portal/ccpp.jar"/>
@@ -143,6 +144,8 @@
 	<classpathentry kind="lib" path="lib/portal/jaxen.jar"/>
 	<classpathentry kind="lib" path="lib/portal/jaxrpc.jar"/>
 	<classpathentry kind="lib" path="lib/portal/jazzy.jar"/>
+	<classpathentry kind="lib" path="lib/portal/jbpm.jar" sourcepath="E:/work/jboss related/jbpm-jpdl-3.2.GA/jbpm-jpdl-3.2.GA/src/jpdl"/>
+	<classpathentry kind="lib" path="lib/portal/jbpm-identity.jar"/>
 	<classpathentry kind="lib" path="lib/portal/jcifs.jar"/>
 	<classpathentry kind="lib" path="lib/portal/jcommon.jar"/>
 	<classpathentry kind="lib" path="lib/portal/jcr.jar"/>
@@ -193,6 +196,8 @@
 	<classpathentry kind="lib" path="lib/portal/saaj-impl.jar"/>
 	<classpathentry kind="lib" path="lib/portal/saw-api.jar"/>
 	<classpathentry kind="lib" path="lib/portal/saw-impl-jcaps.jar"/>
+	<classpathentry kind="lib" path="lib/portal/saw-impl-jbpm.jar"/>
+	<classpathentry kind="lib" path="lib/portal/saw-liferay-jbpm-ext.jar"/>
 	<classpathentry kind="lib" path="lib/portal/serializer.jar"/>
 	<classpathentry kind="lib" path="lib/portal/simplecaptcha.jar"/>
 	<classpathentry kind="lib" path="lib/portal/slf4j-log4j12.jar"/>
@@ -218,5 +223,6 @@
 	<classpathentry kind="lib" path="lib/portal/xmlsec.jar"/>
 	<classpathentry kind="lib" path="lib/portal/xpp3.jar"/>
 	<classpathentry kind="lib" path="lib/portal/xstream.jar"/>
+	<classpathentry kind="lib" path="test-sql"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
