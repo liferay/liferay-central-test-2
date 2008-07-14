@@ -1027,6 +1027,8 @@ public class PropsKeys {
 
 	public static final String USERS_SCREEN_NAME_VALIDATOR = "users.screen.name.validator";
 
+	public static final String USERS_UPDATE_LAST_LOGIN = "users.update.last.login";
+
 	public static final String VALUE_OBJECT_FINDER_CACHE_ENABLED = "value.object.finder.cache.enabled";
 
 	public static final String VELOCITY_ENGINE_LOGGER = "velocity.engine.logger";
