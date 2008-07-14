@@ -873,17 +873,6 @@
 		</licenses>
 	</library>
 	<library>
-		<file-name>portal/bsh.jar</file-name>
-		<version>1.3.0</version>
-		<project-name>BSH</project-name>
-		<project-url>www.beanshell.org</project-url>
-		<licenses>
-			<license>
-				<license-name>GNU</license-name>
-			</license>
-		</licenses>
-	</library>
-	<library>
 		<file-name>portal/burlap.jar</file-name>
 		<version>2.1.12</version>
 		<project-name>Burlap</project-name>
@@ -1562,28 +1551,6 @@
 		</licenses>
 	</library>
 	<library>
-			<file-name>portal/jbpm.jar</file-name>
-			<version>3.1.2 </version>
-			<project-name>JBPM</project-name>
-			<project-url>http://jbpm.org</project-url>
-			<licenses>
-				<license>
-					<license-name>GNU2.1</license-name>
-				</license>
-			</licenses>
-		</library>
-	<library>
-		<file-name>portal/jbpm-identity.jar</file-name>
-		<version>3.1.2 </version>
-		<project-name>JBPM</project-name>
-		<project-url>http://jbpm.org</project-url>
-		<licenses>
-			<license>
-				<license-name>GNU2.1</license-name>
-			</license>
-		</licenses>
-	</library>
-	<library>
 		<file-name>portal/jcifs.jar</file-name>
 		<version>1.2.13</version>
 		<project-name>jCIFS</project-name>
@@ -2131,7 +2098,7 @@
 			</license>
 		</licenses>
 	</library>
-<library>
+	<library>
 		<file-name>portal/saw-api.jar</file-name>
 		<version>0.7</version>
 		<project-name>SAW</project-name>
@@ -2142,32 +2109,10 @@
 			</license>
 		</licenses>
 	</library>
-	<library>
+		<library>
 		<file-name>portal/saw-impl-jcaps.jar</file-name>
 		<version>0.7</version>
 		<project-name>SAW JCAPS</project-name>
-		<project-url>https://saw.dev.java.net</project-url>
-		<licenses>
-			<license>
-				<license-name>CDDL 1.0</license-name>
-			</license>
-		</licenses>
-	</library>
-	<library>
-		<file-name>portal/saw-impl-jbpm.jar</file-name>
-		<version>0.1 </version>
-		<project-name>SAW</project-name>
-		<project-url>https://saw.dev.java.net</project-url>
-		<licenses>
-			<license>
-				<license-name>CDDL 1.0</license-name>
-			</license>
-		</licenses>
-	</library>
-	<library>
-		<file-name>portal/saw-liferay-jbpm-ext.jar</file-name>
-		<version>0.1</version>
-		<project-name>SAW</project-name>
 		<project-url>https://saw.dev.java.net</project-url>
 		<licenses>
 			<license>

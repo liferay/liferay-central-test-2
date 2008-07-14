@@ -37,23 +37,11 @@ import com.liferay.portal.service.persistence.ResourceFinderUtil;
 import com.liferay.portal.service.persistence.ResourcePersistence;
 import com.liferay.portal.service.persistence.ResourceUtil;
 
-import com.liferay.portlet.workflow.service.SAWWorkflowLocalService;
-import com.liferay.portlet.workflow.service.SAWWorkflowLocalServiceFactory;
-import com.liferay.portlet.workflow.service.SAWWorkflowService;
-import com.liferay.portlet.workflow.service.SAWWorkflowServiceFactory;
-import com.liferay.portlet.workflow.service.WorkflowComponentLocalService;
-import com.liferay.portlet.workflow.service.WorkflowComponentLocalServiceFactory;
 import com.liferay.portlet.workflow.service.WorkflowComponentService;
 import com.liferay.portlet.workflow.service.WorkflowComponentServiceFactory;
-import com.liferay.portlet.workflow.service.WorkflowDefinitionLocalService;
-import com.liferay.portlet.workflow.service.WorkflowDefinitionLocalServiceFactory;
 import com.liferay.portlet.workflow.service.WorkflowDefinitionService;
-import com.liferay.portlet.workflow.service.WorkflowInstanceLocalService;
-import com.liferay.portlet.workflow.service.WorkflowInstanceLocalServiceFactory;
 import com.liferay.portlet.workflow.service.WorkflowInstanceService;
 import com.liferay.portlet.workflow.service.WorkflowInstanceServiceFactory;
-import com.liferay.portlet.workflow.service.WorkflowTaskLocalService;
-import com.liferay.portlet.workflow.service.WorkflowTaskLocalServiceFactory;
 import com.liferay.portlet.workflow.service.WorkflowTaskService;
 import com.liferay.portlet.workflow.service.WorkflowTaskServiceFactory;
 
@@ -65,32 +53,6 @@ import com.liferay.portlet.workflow.service.WorkflowTaskServiceFactory;
  */
 public abstract class WorkflowDefinitionServiceBaseImpl extends PrincipalBean
 	implements WorkflowDefinitionService {
-	public SAWWorkflowLocalService getSAWWorkflowLocalService() {
-		return sawWorkflowLocalService;
-	}
-
-	public void setSAWWorkflowLocalService(
-		SAWWorkflowLocalService sawWorkflowLocalService) {
-		this.sawWorkflowLocalService = sawWorkflowLocalService;
-	}
-
-	public SAWWorkflowService getSAWWorkflowService() {
-		return sawWorkflowService;
-	}
-
-	public void setSAWWorkflowService(SAWWorkflowService sawWorkflowService) {
-		this.sawWorkflowService = sawWorkflowService;
-	}
-
-	public WorkflowComponentLocalService getWorkflowComponentLocalService() {
-		return workflowComponentLocalService;
-	}
-
-	public void setWorkflowComponentLocalService(
-		WorkflowComponentLocalService workflowComponentLocalService) {
-		this.workflowComponentLocalService = workflowComponentLocalService;
-	}
-
 	public WorkflowComponentService getWorkflowComponentService() {
 		return workflowComponentService;
 	}
@@ -100,24 +62,6 @@ public abstract class WorkflowDefinitionServiceBaseImpl extends PrincipalBean
 		this.workflowComponentService = workflowComponentService;
 	}
 
-	public WorkflowDefinitionLocalService getWorkflowDefinitionLocalService() {
-		return workflowDefinitionLocalService;
-	}
-
-	public void setWorkflowDefinitionLocalService(
-		WorkflowDefinitionLocalService workflowDefinitionLocalService) {
-		this.workflowDefinitionLocalService = workflowDefinitionLocalService;
-	}
-
-	public WorkflowInstanceLocalService getWorkflowInstanceLocalService() {
-		return workflowInstanceLocalService;
-	}
-
-	public void setWorkflowInstanceLocalService(
-		WorkflowInstanceLocalService workflowInstanceLocalService) {
-		this.workflowInstanceLocalService = workflowInstanceLocalService;
-	}
-
 	public WorkflowInstanceService getWorkflowInstanceService() {
 		return workflowInstanceService;
 	}
@@ -125,15 +69,6 @@ public abstract class WorkflowDefinitionServiceBaseImpl extends PrincipalBean
 	public void setWorkflowInstanceService(
 		WorkflowInstanceService workflowInstanceService) {
 		this.workflowInstanceService = workflowInstanceService;
-	}
-
-	public WorkflowTaskLocalService getWorkflowTaskLocalService() {
-		return workflowTaskLocalService;
-	}
-
-	public void setWorkflowTaskLocalService(
-		WorkflowTaskLocalService workflowTaskLocalService) {
-		this.workflowTaskLocalService = workflowTaskLocalService;
 	}
 
 	public WorkflowTaskService getWorkflowTaskService() {
@@ -194,36 +129,12 @@ public abstract class WorkflowDefinitionServiceBaseImpl extends PrincipalBean
 	}
 
 	protected void init() {
-		if (sawWorkflowLocalService == null) {
-			sawWorkflowLocalService = SAWWorkflowLocalServiceFactory.getImpl();
-		}
-
-		if (sawWorkflowService == null) {
-			sawWorkflowService = SAWWorkflowServiceFactory.getImpl();
-		}
-
-		if (workflowComponentLocalService == null) {
-			workflowComponentLocalService = WorkflowComponentLocalServiceFactory.getImpl();
-		}
-
 		if (workflowComponentService == null) {
 			workflowComponentService = WorkflowComponentServiceFactory.getImpl();
 		}
 
-		if (workflowDefinitionLocalService == null) {
-			workflowDefinitionLocalService = WorkflowDefinitionLocalServiceFactory.getImpl();
-		}
-
-		if (workflowInstanceLocalService == null) {
-			workflowInstanceLocalService = WorkflowInstanceLocalServiceFactory.getImpl();
-		}
-
 		if (workflowInstanceService == null) {
 			workflowInstanceService = WorkflowInstanceServiceFactory.getImpl();
-		}
-
-		if (workflowTaskLocalService == null) {
-			workflowTaskLocalService = WorkflowTaskLocalServiceFactory.getImpl();
 		}
 
 		if (workflowTaskService == null) {
@@ -255,14 +166,8 @@ public abstract class WorkflowDefinitionServiceBaseImpl extends PrincipalBean
 		}
 	}
 
-	protected SAWWorkflowLocalService sawWorkflowLocalService;
-	protected SAWWorkflowService sawWorkflowService;
-	protected WorkflowComponentLocalService workflowComponentLocalService;
 	protected WorkflowComponentService workflowComponentService;
-	protected WorkflowDefinitionLocalService workflowDefinitionLocalService;
-	protected WorkflowInstanceLocalService workflowInstanceLocalService;
 	protected WorkflowInstanceService workflowInstanceService;
-	protected WorkflowTaskLocalService workflowTaskLocalService;
 	protected WorkflowTaskService workflowTaskService;
 	protected DLLocalService dlLocalService;
 	protected DLService dlService;

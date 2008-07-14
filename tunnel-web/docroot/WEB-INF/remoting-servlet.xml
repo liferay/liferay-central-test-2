@@ -806,18 +806,6 @@
 		<property name="service" ref="com.liferay.portlet.wiki.service.WikiPageService.transaction" />
 		<property name="serviceInterface" value="com.liferay.portlet.wiki.service.WikiPageService" />
 	</bean>
-	<bean name="/com_liferay_portlet_workflow_service_spring_SAWWorkflowService-burlap" class="org.springframework.remoting.caucho.BurlapServiceExporter">
-		<property name="service" ref="com.liferay.portlet.workflow.service.SAWWorkflowService.transaction" />
-		<property name="serviceInterface" value="com.liferay.portlet.workflow.service.SAWWorkflowService" />
-	</bean>
-	<bean name="/com_liferay_portlet_workflow_service_spring_SAWWorkflowService-hessian" class="org.springframework.remoting.caucho.HessianServiceExporter">
-		<property name="service" ref="com.liferay.portlet.workflow.service.SAWWorkflowService.transaction" />
-		<property name="serviceInterface" value="com.liferay.portlet.workflow.service.SAWWorkflowService" />
-	</bean>
-	<bean name="/com_liferay_portlet_workflow_service_spring_SAWWorkflowService-http" class="org.springframework.remoting.httpinvoker.HttpInvokerServiceExporter">
-		<property name="service" ref="com.liferay.portlet.workflow.service.SAWWorkflowService.transaction" />
-		<property name="serviceInterface" value="com.liferay.portlet.workflow.service.SAWWorkflowService" />
-	</bean>
 	<bean name="/com_liferay_portlet_workflow_service_spring_WorkflowComponentService-burlap" class="org.springframework.remoting.caucho.BurlapServiceExporter">
 		<property name="service" ref="com.liferay.portlet.workflow.service.WorkflowComponentService.transaction" />
 		<property name="serviceInterface" value="com.liferay.portlet.workflow.service.WorkflowComponentService" />
