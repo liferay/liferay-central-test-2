@@ -23,7 +23,6 @@
 package com.liferay.portal.security.permission;
 
 import com.liferay.portal.NoSuchResourceException;
-import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.Group;
@@ -44,8 +43,7 @@ import com.liferay.portal.service.RoleLocalServiceUtil;
 import com.liferay.portal.service.UserGroupLocalServiceUtil;
 import com.liferay.portal.service.UserLocalServiceUtil;
 import com.liferay.portal.service.permission.PortletPermissionUtil;
-import com.liferay.portal.util.PropsKeys;
-import com.liferay.portal.util.PropsUtil;
+import com.liferay.portal.util.PropsValues;
 import com.liferay.portlet.admin.util.OmniadminUtil;
 import com.liferay.util.UniqueList;
 
@@ -70,9 +68,6 @@ import org.apache.commons.logging.LogFactory;
  *
  */
 public class PermissionCheckerImpl implements PermissionChecker, Serializable {
-
-	public static final int USER_CHECK_ALGORITHM = GetterUtil.getInteger(
-		PropsUtil.get(PropsKeys.PERMISSIONS_USER_CHECK_ALGORITHM));
 
 	public PermissionCheckerImpl() {
 	}
@@ -235,8 +230,8 @@ public class PermissionCheckerImpl implements PermissionChecker, Serializable {
 
 				List<Role> roles = null;
 
-				if ((USER_CHECK_ALGORITHM == 3) ||
-					(USER_CHECK_ALGORITHM == 4)) {
+				if ((PropsValues.PERMISSIONS_USER_CHECK_ALGORITHM == 3) ||
+					(PropsValues.PERMISSIONS_USER_CHECK_ALGORITHM == 4)) {
 
 					roles = RoleLocalServiceUtil.getUserRelatedRoles(
 						user.getUserId(), groups);

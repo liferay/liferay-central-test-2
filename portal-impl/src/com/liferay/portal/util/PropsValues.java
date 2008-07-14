@@ -772,6 +772,10 @@ public class PropsValues {
 	public static final String PERMISSIONS_CHECKER =
 		PropsUtil.get(PropsKeys.PERMISSIONS_CHECKER);
 
+	public static final int PERMISSIONS_USER_CHECK_ALGORITHM =
+		GetterUtil.getInteger(
+			PropsUtil.get(PropsKeys.PERMISSIONS_USER_CHECK_ALGORITHM));
+
 	public static final boolean PLUGIN_NOTIFICATIONS_ENABLED =
 		GetterUtil.getBoolean(
 			PropsUtil.get(PropsKeys.PLUGIN_NOTIFICATIONS_ENABLED));
