@@ -826,8 +826,8 @@ public class MainServlet extends ActionServlet {
 		Element sessionConfig = root.element("session-config");
 
 		if (sessionConfig != null) {
-			String sessionTimeout =
-				sessionConfig.elementText("session-timeout");
+			String sessionTimeout = sessionConfig.elementText(
+				"session-timeout");
 
 			timeout = GetterUtil.getInteger(sessionTimeout, timeout);
 		}
