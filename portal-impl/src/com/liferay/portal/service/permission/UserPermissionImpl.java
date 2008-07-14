@@ -26,7 +26,6 @@ import com.liferay.portal.model.User;
 import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.security.permission.ActionKeys;
 import com.liferay.portal.security.permission.PermissionChecker;
-import com.liferay.portal.security.permission.PermissionCheckerImpl;
 import com.liferay.portal.service.UserLocalServiceUtil;
 
 import org.apache.commons.logging.Log;
@@ -97,10 +96,7 @@ public class UserPermissionImpl implements UserPermission {
 		PermissionChecker permissionChecker, long userId,
 		long[] organizationIds, String actionId) {
 
-		PermissionCheckerImpl permissionCheckerImpl =
-			(PermissionCheckerImpl)permissionChecker;
-
-		if (permissionCheckerImpl.getUserId() == userId) {
+		if (permissionChecker.getUserId() == userId) {
 			return true;
 		}
 		else if (permissionChecker.hasPermission(

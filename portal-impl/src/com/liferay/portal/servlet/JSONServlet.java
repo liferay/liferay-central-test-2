@@ -27,8 +27,8 @@ import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.InstancePool;
 import com.liferay.portal.model.User;
 import com.liferay.portal.security.auth.PrincipalThreadLocal;
+import com.liferay.portal.security.permission.PermissionChecker;
 import com.liferay.portal.security.permission.PermissionCheckerFactory;
-import com.liferay.portal.security.permission.PermissionCheckerImpl;
 import com.liferay.portal.security.permission.PermissionThreadLocal;
 import com.liferay.portal.service.UserLocalServiceUtil;
 
@@ -51,7 +51,7 @@ public class JSONServlet extends HttpServlet {
 	public void service(
 		HttpServletRequest request, HttpServletResponse response) {
 
-		PermissionCheckerImpl permissionChecker = null;
+		PermissionChecker permissionChecker = null;
 
 		try {
 			String remoteUser = request.getRemoteUser();

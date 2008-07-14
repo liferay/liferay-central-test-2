@@ -23,8 +23,8 @@
 package com.liferay.portal.events;
 
 import com.liferay.portal.kernel.events.Action;
+import com.liferay.portal.security.permission.PermissionChecker;
 import com.liferay.portal.security.permission.PermissionCheckerFactory;
-import com.liferay.portal.security.permission.PermissionCheckerImpl;
 import com.liferay.portal.security.permission.PermissionThreadLocal;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.theme.ThemeDisplayFactory;
@@ -81,7 +81,7 @@ public class ServicePostAction extends Action {
 
 			// Clean up the permission checker
 
-			PermissionCheckerImpl permissionChecker = (PermissionCheckerImpl)
+			PermissionChecker permissionChecker =
 				PermissionThreadLocal.getPermissionChecker();
 
 			PermissionCheckerFactory.recycle(permissionChecker);

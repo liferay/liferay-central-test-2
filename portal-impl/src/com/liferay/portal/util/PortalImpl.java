@@ -69,8 +69,8 @@ import com.liferay.portal.model.impl.RoleImpl;
 import com.liferay.portal.plugin.PluginPackageUtil;
 import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.security.permission.ActionKeys;
+import com.liferay.portal.security.permission.PermissionChecker;
 import com.liferay.portal.security.permission.PermissionCheckerFactory;
-import com.liferay.portal.security.permission.PermissionCheckerImpl;
 import com.liferay.portal.service.ClassNameServiceUtil;
 import com.liferay.portal.service.CompanyLocalServiceUtil;
 import com.liferay.portal.service.GroupLocalServiceUtil;
@@ -2715,7 +2715,7 @@ public class PortalImpl implements Portal {
 			realUserIdObj.longValue());
 		boolean checkGuest = true;
 
-		PermissionCheckerImpl permissionChecker = null;
+		PermissionChecker permissionChecker = null;
 
 		try {
 			permissionChecker = PermissionCheckerFactory.create(

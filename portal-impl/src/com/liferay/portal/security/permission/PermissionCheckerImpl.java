@@ -72,77 +72,8 @@ public class PermissionCheckerImpl implements PermissionChecker, Serializable {
 	public PermissionCheckerImpl() {
 	}
 
-	public void init(User user, boolean checkGuest) {
-		this.user = user;
-
-		if (user.isDefaultUser()) {
-			this.defaultUserId = user.getUserId();
-			this.signedIn = false;
-		}
-		else {
-			try {
-				this.defaultUserId = UserLocalServiceUtil.getDefaultUserId(
-					user.getCompanyId());
-			}
-			catch (Exception e) {
-				_log.error(e, e);
-			}
-
-			this.signedIn = true;
-		}
-
-		this.checkGuest = checkGuest;
-	}
-
-	public void recycle() {
-		user = null;
-		defaultUserId = 0;
-		signedIn = false;
-		checkGuest = false;
-		omniadmin = null;
-		companyAdmins.clear();
-		resetValues();
-	}
-
-	public void setValues(PortletRequest portletRequest) {
-
-		// This method is called in com.liferay.portlet.StrutsPortlet to allow
-		// developers to hook in additiona parameters from the portlet request.
-		// Don't overwrite this method unless you're using Liferay in a 2 tier
-		// environment and don't expect to make remote calls. Remote calls to
-		// service beans will not have any values set from the portlet request.
-
-	}
-
-	public void resetValues() {
-	}
-
-	public User getUser() {
-		return user;
-	}
-
-	public void setUser(User user) {
-		this.user = user;
-	}
-
 	public long getUserId() {
 		return user.getUserId();
-	}
-
-	public boolean isSignedIn() {
-		return signedIn;
-	}
-
-	public void setSignedIn(boolean signedIn) {
-		this.signedIn = signedIn;
-	}
-
-	public boolean isCheckGuest() {
-		return checkGuest;
-	}
-
-	public void setCheckGuest(boolean checkGuest) {
-		this.checkGuest = checkGuest;
 	}
 
 	public boolean hasPermission(
@@ -301,23 +232,26 @@ public class PermissionCheckerImpl implements PermissionChecker, Serializable {
 		}
 	}
 
-	public boolean isOmniadmin() {
-		if (omniadmin == null) {
-			omniadmin = Boolean.valueOf(OmniadminUtil.isOmniadmin(getUserId()));
+	public void init(User user, boolean checkGuest) {
+		this.user = user;
+
+		if (user.isDefaultUser()) {
+			this.defaultUserId = user.getUserId();
+			this.signedIn = false;
+		}
+		else {
+			try {
+				this.defaultUserId = UserLocalServiceUtil.getDefaultUserId(
+					user.getCompanyId());
+			}
+			catch (Exception e) {
+				_log.error(e, e);
+			}
+
+			this.signedIn = true;
 		}
 
-		return omniadmin.booleanValue();
-	}
-
-	public boolean isCompanyAdmin(long companyId) {
-		try {
-			return isCompanyAdminImpl(companyId);
-		}
-		catch (Exception e) {
-			_log.error(e, e);
-
-			return false;
-		}
+		this.checkGuest = checkGuest;
 	}
 
 	public boolean isCommunityAdmin(long groupId) {
@@ -340,6 +274,52 @@ public class PermissionCheckerImpl implements PermissionChecker, Serializable {
 
 			return false;
 		}
+	}
+
+	public boolean isCompanyAdmin(long companyId) {
+		try {
+			return isCompanyAdminImpl(companyId);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			return false;
+		}
+	}
+
+	public boolean isOmniadmin() {
+		if (omniadmin == null) {
+			omniadmin = Boolean.valueOf(OmniadminUtil.isOmniadmin(getUserId()));
+		}
+
+		return omniadmin.booleanValue();
+	}
+
+	public void recycle() {
+		user = null;
+		defaultUserId = 0;
+		signedIn = false;
+		checkGuest = false;
+		omniadmin = null;
+		companyAdmins.clear();
+		resetValues();
+	}
+
+	public void resetValues() {
+	}
+
+	public void setCheckGuest(boolean checkGuest) {
+		this.checkGuest = checkGuest;
+	}
+
+	public void setValues(PortletRequest portletRequest) {
+
+		// This method is called in com.liferay.portlet.StrutsPortlet to allow
+		// developers to hook in additiona parameters from the portlet request.
+		// Don't overwrite this method unless you're using Liferay in a 2 tier
+		// environment and don't expect to make remote calls. Remote calls to
+		// service beans will not have any values set from the portlet request.
+
 	}
 
 	protected long[] getResourceIds(

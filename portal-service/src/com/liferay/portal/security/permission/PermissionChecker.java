@@ -22,6 +22,10 @@
 
 package com.liferay.portal.security.permission;
 
+import com.liferay.portal.model.User;
+
+import javax.portlet.PortletRequest;
+
 /**
  * <a href="PermissionChecker.java.html"><b><i>View Source</i></b></a>
  *
@@ -42,12 +46,22 @@ public interface PermissionChecker {
 		long groupId, String name, String primKey, String actionId,
 		boolean checkAdmin);
 
-	public boolean isOmniadmin();
-
-	public boolean isCompanyAdmin(long companyId);
+	public void init(User user, boolean checkGuest);
 
 	public boolean isCommunityAdmin(long groupId);
 
 	public boolean isCommunityOwner(long groupId);
+
+	public boolean isCompanyAdmin(long companyId);
+
+	public boolean isOmniadmin();
+
+	public void recycle();
+
+	public void resetValues();
+
+	public void setCheckGuest(boolean checkGuest);
+
+	public void setValues(PortletRequest portletRequest);
 
 }

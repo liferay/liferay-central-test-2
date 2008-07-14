@@ -40,7 +40,7 @@ import org.apache.commons.pool.impl.StackObjectPool;
  */
 public class PermissionCheckerFactory {
 
-	public static PermissionCheckerImpl create(User user, boolean checkGuest)
+	public static PermissionChecker create(User user, boolean checkGuest)
 		throws Exception {
 
 		if (PropsValues.COMMONS_POOL_ENABLED) {
@@ -51,11 +51,11 @@ public class PermissionCheckerFactory {
 			}
 		}
 
-		PermissionCheckerImpl permissionChecker = null;
+		PermissionChecker permissionChecker = null;
 
 		if (PropsValues.COMMONS_POOL_ENABLED) {
 			permissionChecker =
-				(PermissionCheckerImpl)_instance._pool.borrowObject();
+				(PermissionChecker)_instance._pool.borrowObject();
 		}
 		else {
 			permissionChecker = (PermissionCheckerImpl)Class.forName(
@@ -67,7 +67,7 @@ public class PermissionCheckerFactory {
 		return permissionChecker;
 	}
 
-	public static void recycle(PermissionCheckerImpl permissionChecker)
+	public static void recycle(PermissionChecker permissionChecker)
 		throws Exception {
 
 		if (PropsValues.COMMONS_POOL_ENABLED) {

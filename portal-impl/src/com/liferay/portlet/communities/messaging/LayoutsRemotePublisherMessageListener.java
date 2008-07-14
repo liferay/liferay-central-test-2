@@ -27,8 +27,8 @@ import com.liferay.portal.kernel.messaging.MessageListener;
 import com.liferay.portal.kernel.util.Time;
 import com.liferay.portal.model.User;
 import com.liferay.portal.security.auth.PrincipalThreadLocal;
+import com.liferay.portal.security.permission.PermissionChecker;
 import com.liferay.portal.security.permission.PermissionCheckerFactory;
-import com.liferay.portal.security.permission.PermissionCheckerImpl;
 import com.liferay.portal.security.permission.PermissionThreadLocal;
 import com.liferay.portal.service.UserLocalServiceUtil;
 import com.liferay.portlet.communities.util.StagingUtil;
@@ -54,7 +54,7 @@ public class LayoutsRemotePublisherMessageListener implements MessageListener {
 	}
 
 	public void receive(String message) {
-		PermissionCheckerImpl permissionChecker = null;
+		PermissionChecker permissionChecker = null;
 
 		try {
 			LayoutsRemotePublisherRequest publisherRequest =

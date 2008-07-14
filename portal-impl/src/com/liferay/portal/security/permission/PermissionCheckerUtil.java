@@ -45,11 +45,11 @@ public class PermissionCheckerUtil {
 		PrincipalThreadLocal.setName(name);
 
 		try {
-			PermissionCheckerImpl permissionChecker = (PermissionCheckerImpl)
+			PermissionChecker permissionChecker =
 				PermissionThreadLocal.getPermissionChecker();
 
 			if (permissionChecker == null) {
-				permissionChecker = (PermissionCheckerImpl)Class.forName(
+				permissionChecker = (PermissionChecker)Class.forName(
 					PropsValues.PERMISSIONS_CHECKER).newInstance();
 			}
 

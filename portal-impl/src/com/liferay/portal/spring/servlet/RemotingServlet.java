@@ -26,8 +26,8 @@ import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.model.User;
 import com.liferay.portal.security.auth.CompanyThreadLocal;
 import com.liferay.portal.security.auth.PrincipalThreadLocal;
+import com.liferay.portal.security.permission.PermissionChecker;
 import com.liferay.portal.security.permission.PermissionCheckerFactory;
-import com.liferay.portal.security.permission.PermissionCheckerImpl;
 import com.liferay.portal.security.permission.PermissionThreadLocal;
 import com.liferay.portal.service.UserLocalServiceUtil;
 import com.liferay.portal.spring.context.TunnelApplicationContext;
@@ -75,7 +75,7 @@ public class RemotingServlet extends DispatcherServlet {
 			HttpServletRequest request, HttpServletResponse response)
 		throws ServletException {
 
-		PermissionCheckerImpl permissionChecker = null;
+		PermissionChecker permissionChecker = null;
 
 		try {
 			String remoteUser = request.getRemoteUser();

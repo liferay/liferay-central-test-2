@@ -27,8 +27,8 @@ import com.liferay.portal.kernel.util.InstancePool;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.User;
 import com.liferay.portal.security.auth.PrincipalThreadLocal;
+import com.liferay.portal.security.permission.PermissionChecker;
 import com.liferay.portal.security.permission.PermissionCheckerFactory;
-import com.liferay.portal.security.permission.PermissionCheckerImpl;
 import com.liferay.portal.security.permission.PermissionThreadLocal;
 import com.liferay.portal.service.UserLocalServiceUtil;
 import com.liferay.portal.util.PropsValues;
@@ -54,7 +54,7 @@ public class WebDAVServlet extends HttpServlet {
  	public void service(
  		HttpServletRequest request, HttpServletResponse response) {
 
- 		PermissionCheckerImpl permissionChecker = null;
+ 		PermissionChecker permissionChecker = null;
 
 		int status = HttpServletResponse.SC_NOT_IMPLEMENTED;
 

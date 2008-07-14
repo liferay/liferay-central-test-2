@@ -46,7 +46,7 @@ public abstract class DoAsUserThread extends Thread {
 	}
 
 	public void run() {
-		PermissionCheckerImpl permissionChecker = null;
+		PermissionChecker permissionChecker = null;
 
 		try {
 			PrincipalThreadLocal.setName(_userId);

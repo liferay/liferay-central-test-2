@@ -24,8 +24,8 @@ package com.liferay.portal.service;
 
 import com.liferay.portal.model.User;
 import com.liferay.portal.security.auth.PrincipalThreadLocal;
+import com.liferay.portal.security.permission.PermissionChecker;
 import com.liferay.portal.security.permission.PermissionCheckerFactory;
-import com.liferay.portal.security.permission.PermissionCheckerImpl;
 import com.liferay.portal.security.permission.PermissionThreadLocal;
 import com.liferay.portal.service.UserLocalServiceUtil;
 import com.liferay.portal.util.BaseTestCase;
@@ -66,6 +66,6 @@ public class BaseServiceTestCase extends BaseTestCase {
 		PermissionCheckerFactory.recycle(_permissionChecker);
 	}
 
-	private PermissionCheckerImpl _permissionChecker = null;
+	private PermissionChecker _permissionChecker = null;
 
 }

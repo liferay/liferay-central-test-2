@@ -29,8 +29,8 @@ import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.model.User;
 import com.liferay.portal.security.auth.CompanyThreadLocal;
 import com.liferay.portal.security.auth.PrincipalThreadLocal;
+import com.liferay.portal.security.permission.PermissionChecker;
 import com.liferay.portal.security.permission.PermissionCheckerFactory;
-import com.liferay.portal.security.permission.PermissionCheckerImpl;
 import com.liferay.portal.security.permission.PermissionThreadLocal;
 import com.liferay.portal.service.UserLocalServiceUtil;
 import com.liferay.portal.servlet.filters.BasePortalFilter;
@@ -100,7 +100,7 @@ public class ServletAuthorizingFilter extends BasePortalFilter {
 
 		request = new ProtectedServletRequest(request, remoteUser);
 
-		PermissionCheckerImpl permissionChecker = null;
+		PermissionChecker permissionChecker = null;
 
 		if ((userId > 0) || (remoteUser != null)) {
 
