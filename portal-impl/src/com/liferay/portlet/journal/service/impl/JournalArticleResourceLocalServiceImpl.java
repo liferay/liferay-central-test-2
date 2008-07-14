@@ -24,18 +24,9 @@ package com.liferay.portlet.journal.service.impl;
 
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
-import com.liferay.portal.mirage.custom.MirageServiceFactory;
-import com.liferay.portal.mirage.model.JournalResourceContent;
-import com.liferay.portal.mirage.model.OptionalJournalResourceCriteria;
 import com.liferay.portlet.journal.model.JournalArticleResource;
-import com.liferay.portlet.journal.model.impl.JournalArticleResourceImpl;
 import com.liferay.portlet.journal.service.base.JournalArticleResourceLocalServiceBaseImpl;
 
-import com.sun.portal.cms.mirage.exception.CMSException;
-import com.sun.portal.cms.mirage.model.custom.BinaryContent;
-import com.sun.portal.cms.mirage.service.custom.BinaryContentService;
-
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -43,7 +34,6 @@ import java.util.List;
  * </i></b></a>
  *
  * @author Brian Wing Shun Chan
- * @author Prakash Reddy
  *
  */
 public class JournalArticleResourceLocalServiceImpl
@@ -52,118 +42,42 @@ public class JournalArticleResourceLocalServiceImpl
 	public void deleteArticleResource(long groupId, String articleId)
 		throws PortalException, SystemException {
 
-		try {
-			JournalArticleResource journalResource =
-				new JournalArticleResourceImpl();
-			journalResource.setGroupId(groupId);
-			journalResource.setArticleId(articleId);
-
-			JournalResourceContent resourceContent =
-				new JournalResourceContent(journalResource);
-			BinaryContentService binaryContentService =
-				MirageServiceFactory.getArticleResourceService();
-
-			binaryContentService.deleteBinaryContent(
-				resourceContent, new OptionalJournalResourceCriteria());
-
-		}
-		catch (CMSException ex) {
-			_throwException(ex);
-		}
+		journalArticleResourcePersistence.removeByG_A(groupId, articleId);
 	}
 
 	public JournalArticleResource getArticleResource(
 			long articleResourcePrimKey)
 		throws PortalException, SystemException {
 
-		JournalArticleResource journalResource =
-			new JournalArticleResourceImpl();
-		journalResource.setResourcePrimKey(articleResourcePrimKey);
-
-		JournalResourceContent resourceContent =
-			new JournalResourceContent(journalResource);
-
-		try {
-			BinaryContentService binaryContentService =
-				MirageServiceFactory.getArticleResourceService();
-
-			resourceContent = (JournalResourceContent)
-				binaryContentService.getBinaryContent(resourceContent);
-		} catch(CMSException ex) {
-			_throwException(ex);
-		}
-
-		return resourceContent.getJournalResource();
+		return journalArticleResourcePersistence.findByPrimaryKey(
+			articleResourcePrimKey);
 	}
 
 	public long getArticleResourcePrimKey(long groupId, String articleId)
 		throws SystemException {
 
-		try {
-			JournalArticleResource journalResource =
-				new JournalArticleResourceImpl();
-			journalResource.setGroupId(groupId);
-			journalResource.setArticleId(articleId);
+		JournalArticleResource articleResource =
+			journalArticleResourcePersistence.fetchByG_A(groupId, articleId);
 
-			JournalResourceContent resourceContent =
-				new JournalResourceContent(journalResource);
-			BinaryContentService binaryContentService =
-				MirageServiceFactory.getArticleResourceService();
+		if (articleResource == null) {
+			long articleResourcePrimKey = counterLocalService.increment();
 
-			return binaryContentService.getBinaryContentId(resourceContent);
+			articleResource = journalArticleResourcePersistence.create(
+				articleResourcePrimKey);
 
-		} catch(CMSException ex) {
-			throw (SystemException) ex.getCause();
+			articleResource.setGroupId(groupId);
+			articleResource.setArticleId(articleId);
+
+			journalArticleResourcePersistence.update(articleResource, false);
 		}
+
+		return articleResource.getResourcePrimKey();
 	}
 
 	public List<JournalArticleResource> getArticleResources(long groupId)
 		throws SystemException {
 
-		try {
-			OptionalJournalResourceCriteria criteria =
-				new OptionalJournalResourceCriteria();
-			criteria.getOptions().put(
-				OptionalJournalResourceCriteria.GROUP_ID,
-					String.valueOf(groupId));
-
-			BinaryContentService binaryContentService =
-				MirageServiceFactory.getArticleResourceService();
-
-			List<BinaryContent> binaryContents =
-				binaryContentService.getBinaryContents(criteria);
-
-			return _getResourcesFromBinaryContents(binaryContents);
-
-		} catch(CMSException ex) {
-			throw (SystemException) ex.getCause();
-		}
-	}
-
-	private List<JournalArticleResource> _getResourcesFromBinaryContents(
-		List<BinaryContent> binaryContents) {
-
-		List<JournalArticleResource> resources =
-			new ArrayList<JournalArticleResource>();
-		for(BinaryContent binaryContent : binaryContents){
-			resources.add(
-				((JournalResourceContent) binaryContent).getJournalResource());
-		}
-
-		return resources;
-	}
-
-	private void _throwException(CMSException ex)
-		throws PortalException, SystemException {
-
-		Throwable cause = ex.getCause();
-		if (cause != null) {
-			if (cause instanceof PortalException) {
-				throw (PortalException) cause;
-			} else if (cause instanceof SystemException) {
-				throw (SystemException) cause;
-			}
-		}
+		return journalArticleResourcePersistence.findByGroupId(groupId);
 	}
 
 }
