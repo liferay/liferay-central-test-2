@@ -40,10 +40,10 @@ import com.liferay.portal.model.User;
 import com.liferay.portal.model.UserGroup;
 import com.liferay.portal.security.permission.PermissionCacheUtil;
 import com.liferay.portal.security.permission.PermissionCheckerBag;
-import com.liferay.portal.security.permission.PermissionCheckerImpl;
 import com.liferay.portal.security.permission.ResourceActionsUtil;
 import com.liferay.portal.service.base.PermissionLocalServiceBaseImpl;
 import com.liferay.portal.service.persistence.OrgGroupPermissionPK;
+import com.liferay.portal.util.PropsValues;
 import com.liferay.portal.util.comparator.PermissionComparator;
 
 import java.util.ArrayList;
@@ -381,22 +381,22 @@ public class PermissionLocalServiceImpl extends PermissionLocalServiceBaseImpl {
 
 		logHasUserPermissions(userId, actionId, resourceId, stopWatch, block++);
 
-		if (PermissionCheckerImpl.USER_CHECK_ALGORITHM == 1) {
+		if (PropsValues.PERMISSIONS_USER_CHECK_ALGORITHM == 1) {
 			return hasUserPermissions_1(
 				userId, actionId, resourceId, permissions, groups, groupId,
 				stopWatch, block);
 		}
-		else if (PermissionCheckerImpl.USER_CHECK_ALGORITHM == 2) {
+		else if (PropsValues.PERMISSIONS_USER_CHECK_ALGORITHM == 2) {
 			return hasUserPermissions_2(
 				userId, actionId, resourceId, permissions, groups, groupId,
 				stopWatch, block);
 		}
-		else if (PermissionCheckerImpl.USER_CHECK_ALGORITHM == 3) {
+		else if (PropsValues.PERMISSIONS_USER_CHECK_ALGORITHM == 3) {
 			return hasUserPermissions_3(
 				userId, actionId, resourceId, permissions, groups, roles,
 				stopWatch, block);
 		}
-		else if (PermissionCheckerImpl.USER_CHECK_ALGORITHM == 4) {
+		else if (PropsValues.PERMISSIONS_USER_CHECK_ALGORITHM == 4) {
 			return hasUserPermissions_4(
 				userId, actionId, resourceId, permissions, groups, roles,
 				stopWatch, block);
