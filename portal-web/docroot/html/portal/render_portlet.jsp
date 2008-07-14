@@ -302,7 +302,7 @@ if (portlet.isStatic()) {
 
 // Deny access to edit mode if you do not have permission
 
-if (portletMode.equals(PortletMode.EDIT) && !PortletPermissionUtil.contains(permissionChecker, plid.longValue(), portletId, ActionKeys.PREFERENCES)) {
+if (!PropsValues.TCK_URL && portletMode.equals(PortletMode.EDIT) && !PortletPermissionUtil.contains(permissionChecker, plid.longValue(), portletId, ActionKeys.PREFERENCES)) {
 	denyAccess = true;
 }
 
