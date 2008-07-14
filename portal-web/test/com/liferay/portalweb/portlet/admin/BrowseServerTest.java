@@ -97,7 +97,7 @@ public class BrowseServerTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("document._9_fm.elements[8]")) {
+				if (selenium.isTextPresent("env.ANT_HOME ")) {
 					break;
 				}
 			}
@@ -107,13 +107,25 @@ public class BrowseServerTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.select("document._9_fm.elements[7]", "label=7");
-		selenium.waitForPageToLoad("30000");
-		verifyTrue(selenium.isTextPresent("user.timezone"));
 		selenium.click("link=Portal Properties");
 		selenium.waitForPageToLoad("30000");
-		selenium.select("document._9_fm.elements[7]", "label=26");
-		selenium.waitForPageToLoad("30000");
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isTextPresent("admin.email.from.address ")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
 		selenium.click("link=Shutdown");
 		selenium.waitForPageToLoad("30000");
 
