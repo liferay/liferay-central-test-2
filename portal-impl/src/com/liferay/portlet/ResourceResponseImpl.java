@@ -104,10 +104,6 @@ public class ResourceResponseImpl
 		return super.createResourceURL();
 	}
 
-	public int getBufferSize() {
-		return 0;
-	}
-
 	public String getLifecycle() {
 		return PortletRequest.RESOURCE_PHASE;
 	}

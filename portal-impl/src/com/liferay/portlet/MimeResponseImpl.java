@@ -118,6 +118,9 @@ public abstract class MimeResponseImpl
 	}
 
 	public void reset() {
+		if (_calledFlushBuffer) {
+			throw new IllegalStateException();
+		}
 	}
 
 	public void resetBuffer() {
