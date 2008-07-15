@@ -164,6 +164,10 @@ public class ResourceLocalServiceImpl extends ResourceLocalServiceBaseImpl {
 						role = RoleLocalServiceUtil.getRole(
 							companyId, RoleNames.ORGANIZATION_MEMBER);
 					}
+					else if (group.isUser()) {
+						role = RoleLocalServiceUtil.getRole(
+							companyId, RoleNames.POWER_USER);
+					}
 
 					rolePersistence.addPermissions(
 						role.getRoleId(), communityPermissionsList);
