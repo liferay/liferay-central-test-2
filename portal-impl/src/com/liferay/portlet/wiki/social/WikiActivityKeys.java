@@ -32,8 +32,6 @@ public class WikiActivityKeys {
 
 	public static final int ADD_PAGE = 1;
 
-	public static final int DELETE_PAGE = 2;
-
-	public static final int EDIT_PAGE = 3;
+	public static final int UPDATE_PAGE = 2;
 
 }

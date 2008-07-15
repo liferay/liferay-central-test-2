@@ -60,7 +60,7 @@ public class WikiActivityInterpreter extends BaseSocialActivityInterpreter {
 
 		String link =
 			themeDisplay.getURLPortal() + themeDisplay.getPathMain() +
-				"/wiki/find_page?resourceKey=" + activity.getClassPK();
+				"/wiki/find_page?pageResourcePrimKey=" + activity.getClassPK();
 
 		// Title
 
@@ -70,7 +70,7 @@ public class WikiActivityInterpreter extends BaseSocialActivityInterpreter {
 			title = themeDisplay.translate(
 				"activity-wiki-add-page", creatorUserName);
 		}
-		else if (activityType == WikiActivityKeys.EDIT_PAGE) {
+		else if (activityType == WikiActivityKeys.UPDATE_PAGE) {
 			title = themeDisplay.translate(
 				"activity-wiki-update-page", creatorUserName);
 		}

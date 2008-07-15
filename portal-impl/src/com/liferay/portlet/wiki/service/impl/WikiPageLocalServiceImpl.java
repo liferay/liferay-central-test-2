@@ -933,7 +933,7 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 
 		socialActivityLocalService.addActivity(
 			userId, node.getGroupId(), WikiPage.class.getName(),
-			page.getResourcePrimKey(), WikiActivityKeys.EDIT_PAGE,
+			page.getResourcePrimKey(), WikiActivityKeys.UPDATE_PAGE,
 			StringPool.BLANK, 0);
 
 		// Subscriptions

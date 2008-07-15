@@ -64,25 +64,25 @@ public class FindPageAction extends Action {
 
 		try {
 			long plid = ParamUtil.getLong(request, "p_l_id");
-			long resourceKey = ParamUtil.getLong(request, "resourceKey");
+			long pageResourcePrimKey = ParamUtil.getLong(
+				request, "pageResourcePrimKey");
 
-			plid = getPlid(plid, resourceKey);
+			plid = getPlid(plid, pageResourcePrimKey);
 
 			WikiPageResource pageResource =
-				WikiPageResourceLocalServiceUtil.getPageResource(resourceKey);
+				WikiPageResourceLocalServiceUtil.getPageResource(
+					pageResourcePrimKey);
 
 			WikiNode node = WikiNodeLocalServiceUtil.getNode(
-					pageResource.getNodeId());
+				pageResource.getNodeId());
 
 			PortletURL portletURL = new PortletURLImpl(
-				request, PortletKeys.WIKI, plid,
-				PortletRequest.RENDER_PHASE);
+				request, PortletKeys.WIKI, plid, PortletRequest.RENDER_PHASE);
 
 			portletURL.setWindowState(WindowState.NORMAL);
 			portletURL.setPortletMode(PortletMode.VIEW);
 
-			portletURL.setParameter(
-				"struts_action", "/wiki/view");
+			portletURL.setParameter("struts_action", "/wiki/view");
 			portletURL.setParameter("nodeName", node.getName());
 			portletURL.setParameter("title", pageResource.getTitle());
 
@@ -97,7 +97,9 @@ public class FindPageAction extends Action {
 		}
 	}
 
-	protected long getPlid(long plid, long resourceKey) throws Exception {
+	protected long getPlid(long plid, long pageResourcePrimKey)
+		throws Exception {
+
 		if (plid != LayoutConstants.DEFAULT_PLID) {
 			try {
 				Layout layout = LayoutLocalServiceUtil.getLayout(plid);
@@ -105,9 +107,7 @@ public class FindPageAction extends Action {
 				LayoutTypePortlet layoutTypePortlet =
 					(LayoutTypePortlet)layout.getLayoutType();
 
-				if (layoutTypePortlet.hasPortletId(
-						PortletKeys.WIKI)) {
-
+				if (layoutTypePortlet.hasPortletId(PortletKeys.WIKI)) {
 					return plid;
 				}
 			}
@@ -116,7 +116,8 @@ public class FindPageAction extends Action {
 		}
 
 		WikiPageResource pageResource =
-			WikiPageResourceLocalServiceUtil.getPageResource(resourceKey);
+			WikiPageResourceLocalServiceUtil.getPageResource(
+				pageResourcePrimKey);
 
 		WikiNode node = WikiNodeLocalServiceUtil.getNode(
 			pageResource.getNodeId());
