@@ -15,18 +15,14 @@
 
 $.widget("ui.droppable", {
 	init: function() {
-
-		this.element.addClass("ui-droppable");
-		this.isover = 0; this.isout = 1;
 		
-		//Prepare the passed options
 		var o = this.options, accept = o.accept;
-		o = $.extend(o, {
-			accept: o.accept && o.accept.constructor == Function ? o.accept : function(d) {
-				return $(d).is(accept);
-			}
-		});
-		
+		this.isover = 0; this.isout = 1;
+
+		this.options.accept = this.options.accept && this.options.accept.constructor == Function ? this.options.accept : function(d) {
+			return d.is(accept);
+		};
+
 		//Store the droppable's proportions
 		this.proportions = { width: this.element[0].offsetWidth, height: this.element[0].offsetHeight };
 		
@@ -52,7 +48,7 @@ $.widget("ui.droppable", {
 				drop.splice(i, 1);
 		
 		this.element
-			.removeClass("ui-droppable ui-droppable-disabled")
+			.removeClass("ui-droppable-disabled")
 			.removeData("droppable")
 			.unbind(".droppable");
 	},
@@ -84,7 +80,7 @@ $.widget("ui.droppable", {
 		if (!draggable || (draggable.currentItem || draggable.element)[0] == this.element[0]) return false; // Bail if draggable and droppable are same element
 		
 		var childrenIntersection = false;
-		this.element.find(".ui-droppable").not(".ui-draggable-dragging").each(function() {
+		this.element.find(":data(droppable)").not(".ui-draggable-dragging").each(function() {
 			var inst = $.data(this, 'droppable');
 			if(inst.options.greedy && $.ui.intersect(draggable, $.extend(inst, { offset: inst.element.offset() }), inst.options.tolerance)) {
 				childrenIntersection = true; return false;
@@ -185,7 +181,7 @@ $.ui.ddmanager = {
 			
 			if(type == "dragstart" || type == "sortactivate") m[i].activate.call(m[i], e); //Activate the droppable if used directly from draggables
 		}
-
+		
 	},
 	drop: function(draggable, e) {
 		
@@ -222,7 +218,7 @@ $.ui.ddmanager = {
 			
 			var parentInstance;
 			if (this.options.greedy) {
-				var parent = this.element.parents('.ui-droppable:eq(0)');
+				var parent = this.element.parents(':data(droppable):eq(0)');
 				if (parent.length) {
 					parentInstance = $.data(parent[0], 'droppable');
 					parentInstance.greedyChild = (c == 'isover' ? 1 : 0);

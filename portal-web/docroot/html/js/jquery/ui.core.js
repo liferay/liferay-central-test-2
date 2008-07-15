@@ -9,6 +9,11 @@
  */
 ;(function($) {
 
+// This adds a selector to check if data exists.
+jQuery.extend(jQuery.expr[':'], { 
+	data: "jQuery.data(a, m[3])"
+});
+
 $.ui = {
 	plugin: {
 		add: function(module, option, set) {
@@ -53,9 +58,17 @@ $.ui = {
 		$(el).attr('unselectable', 'off').css('MozUserSelect', '');
 	},
 	hasScroll: function(e, a) {
-		var scroll = /top/.test(a||"top") ? 'scrollTop' : 'scrollLeft', has = false;
-		if (e[scroll] > 0) return true; e[scroll] = 1;
-		has = e[scroll] > 0 ? true : false; e[scroll] = 0;
+		var scroll = (a && a == 'left') ? 'scrollLeft' : 'scrollTop',
+			has = false;
+		
+		if (e[scroll] > 0) { return true; }
+		
+		// TODO: determine which cases actually cause this to happen
+		// if the element doesn't have the scroll set, see if it's possible to
+		// set the scroll
+		e[scroll] = 1;
+		has = (e[scroll] > 0);
+		e[scroll] = 0;
 		return has;
 	}
 };
@@ -108,6 +121,7 @@ $.widget = function(name, prototype) {
 		var self = this;
 		
 		this.widgetName = name;
+		this.widgetEventPrefix = $[namespace][name].eventPrefix || name;
 		this.widgetBaseClass = namespace + '-' + name;
 		
 		this.options = $.extend({}, $.widget.defaults, $[namespace][name].defaults, options);
@@ -151,6 +165,13 @@ $.widget.prototype = {
 	},
 	disable: function() {
 		this.setData('disabled', true);
+	},
+	
+	trigger: function(type, e, data) {
+		var eventName = (type == this.widgetEventPrefix
+			? type : this.widgetEventPrefix + type);
+		e = e  || $.event.fix({ type: eventName, target: this.element[0] });
+		return this.element.triggerHandler(eventName, [e, data], this.options[type]);
 	}
 };
 

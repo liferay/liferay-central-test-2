@@ -16,13 +16,18 @@ $.widget("ui.draggable", $.extend({}, $.ui.mouse, {
 	init: function() {
 		
 		//Initialize needed constants
-		var o = this.options;
+		var o = this.options, positioned = /^(?:r|a|f)/, element = this.element[0];
+		
+		if (!this.element.length)
+			return false;
 
+		var style = element.style || {}, 
+			position = style.position || "static"; 
+		
 		//Position the node
-		if (o.helper == 'original' && !(/(relative|absolute|fixed)/).test(this.element.css('position')))
-			this.element.css('position', 'relative');
+		if (o.helper == 'original' && !positioned.test(position))
+			style.position = 'relative';
 
-		this.element.addClass('ui-draggable');
 		(o.disabled && this.element.addClass('ui-draggable-disabled'));
 		
 		this.mouseInit();
@@ -258,7 +263,7 @@ $.widget("ui.draggable", $.extend({}, $.ui.mouse, {
 	},
 	destroy: function() {
 		if(!this.element.data('draggable')) return;
-		this.element.removeData("draggable").unbind(".draggable").removeClass('ui-draggable');
+		this.element.removeData("draggable").unbind(".draggable").removeClass('ui-draggable-dragging ui-draggable-disabled');
 		this.mouseDestroy();
 	}
 }));
@@ -382,7 +387,7 @@ $.ui.plugin.add("draggable", "snap", {
 		
 		var inst = $(this).data("draggable");
 		inst.snapElements = [];
-		$(ui.options.snap === true ? '.ui-draggable' : ui.options.snap).each(function() {
+		$(ui.options.snap === true ? ':data(draggable)' : ui.options.snap).each(function() {
 			var $t = $(this); var $o = $t.offset();
 			if(this != inst.element[0]) inst.snapElements.push({
 				item: this,
@@ -455,10 +460,10 @@ $.ui.plugin.add("draggable", "connectToSortable", {
 		
 		//If we are still over the sortable, we fake the stop event of the sortable, but also remove helper
 		var inst = $(this).data("draggable");
+		
 		$.each(inst.sortables, function() {
 			if(this.instance.isOver) {
 				this.instance.isOver = 0;
-
 				inst.cancelHelperRemoval = true; //Don't remove the helper in the draggable instance
 				this.instance.cancelHelperRemoval = false; //Remove it in the sortable instance (so sortable plugins like revert still work)
 				if(this.shouldRevert) this.instance.options.revert = true; //revert here
