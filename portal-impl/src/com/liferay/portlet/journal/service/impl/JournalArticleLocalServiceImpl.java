@@ -30,20 +30,17 @@ import com.liferay.portal.kernel.search.Hits;
 import com.liferay.portal.kernel.search.SearchEngineUtil;
 import com.liferay.portal.kernel.search.SearchException;
 import com.liferay.portal.kernel.search.Sort;
-import com.liferay.portal.kernel.servlet.ImageServletTokenUtil;
 import com.liferay.portal.kernel.util.ContentTypes;
-import com.liferay.portal.kernel.util.FileUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
-import com.liferay.portal.kernel.util.HtmlUtil;
-import com.liferay.portal.kernel.util.HttpUtil;
-import com.liferay.portal.kernel.util.LocaleUtil;
 import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
+import com.liferay.portal.mirage.custom.MirageServiceFactory;
+import com.liferay.portal.mirage.custom.WorkflowServiceImpl;
+import com.liferay.portal.mirage.model.JournalArticleContent;
+import com.liferay.portal.mirage.model.OptionalJournalArticleCriteria;
 import com.liferay.portal.model.Company;
-import com.liferay.portal.model.Image;
-import com.liferay.portal.model.ResourceConstants;
 import com.liferay.portal.model.User;
 import com.liferay.portal.search.lucene.LuceneUtil;
 import com.liferay.portal.servlet.filters.layoutcache.LayoutCacheUtil;
@@ -52,18 +49,7 @@ import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PortletKeys;
 import com.liferay.portal.util.PropsKeys;
 import com.liferay.portal.util.PropsUtil;
-import com.liferay.portlet.journal.ArticleContentException;
-import com.liferay.portlet.journal.ArticleDisplayDateException;
-import com.liferay.portlet.journal.ArticleExpirationDateException;
-import com.liferay.portlet.journal.ArticleIdException;
-import com.liferay.portlet.journal.ArticleReviewDateException;
-import com.liferay.portlet.journal.ArticleSmallImageNameException;
-import com.liferay.portlet.journal.ArticleSmallImageSizeException;
-import com.liferay.portlet.journal.ArticleTitleException;
-import com.liferay.portlet.journal.ArticleTypeException;
-import com.liferay.portlet.journal.DuplicateArticleIdException;
 import com.liferay.portlet.journal.NoSuchArticleException;
-import com.liferay.portlet.journal.NoSuchArticleResourceException;
 import com.liferay.portlet.journal.NoSuchTemplateException;
 import com.liferay.portlet.journal.StructureXsdException;
 import com.liferay.portlet.journal.job.CheckArticleJob;
@@ -78,14 +64,24 @@ import com.liferay.portlet.journal.util.Indexer;
 import com.liferay.portlet.journal.util.JournalUtil;
 import com.liferay.portlet.journalcontent.util.JournalContentUtil;
 import com.liferay.util.LocalizationUtil;
-import com.liferay.util.MathUtil;
+
+import com.sun.portal.cms.mirage.exception.CMSException;
+import com.sun.portal.cms.mirage.model.custom.Content;
+import com.sun.portal.cms.mirage.model.custom.ContentType;
+import com.sun.portal.cms.mirage.model.search.SearchCriteria;
+import com.sun.portal.cms.mirage.model.search.SearchFieldValue;
+import com.sun.portal.cms.mirage.service.custom.ContentService;
+import com.sun.portal.cms.mirage.service.custom.WorkflowService;
 
 import java.io.File;
 import java.io.IOException;
 import java.io.StringReader;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -123,28 +119,28 @@ public class JournalArticleLocalServiceImpl
 			String structureId, String templateId, int displayDateMonth,
 			int displayDateDay, int displayDateYear, int displayDateHour,
 			int displayDateMinute, int expirationDateMonth,
-			int expirationDateDay, int expirationDateYear,
-			int expirationDateHour, int expirationDateMinute,
-			boolean neverExpire, int reviewDateMonth, int reviewDateDay,
-			int reviewDateYear, int reviewDateHour, int reviewDateMinute,
-			boolean neverReview, boolean indexable, boolean smallImage,
-			String smallImageURL, File smallFile, Map<String, byte[]> images,
-			String articleURL, PortletPreferences prefs, String[] tagsEntries,
+			int expirationDateDay,int expirationDateYear,
+			int expirationDateHour,int expirationDateMinute,
+			boolean neverExpire, int reviewDateMonth,int reviewDateDay,
+			int reviewDateYear, int reviewDateHour,int reviewDateMinute,
+			boolean neverReview, boolean indexable,boolean smallImage,
+			String smallImageURL, File smallFile,Map<String, byte[]> images,
+			String articleURL,PortletPreferences prefs, String[] tagsEntries,
 			boolean addCommunityPermissions, boolean addGuestPermissions)
 		throws PortalException, SystemException {
 
 		double version = JournalArticleImpl.DEFAULT_VERSION;
 
 		return addArticle(
-			userId, articleId, autoArticleId, plid, version, title, description,
-			content, type, structureId, templateId, displayDateMonth,
-			displayDateDay, displayDateYear, displayDateHour, displayDateMinute,
-			expirationDateMonth, expirationDateDay, expirationDateYear,
-			expirationDateHour, expirationDateMinute, neverExpire,
-			reviewDateMonth, reviewDateDay, reviewDateYear, reviewDateHour,
-			reviewDateMinute, neverReview, indexable, smallImage, smallImageURL,
-			smallFile, images, articleURL, prefs, tagsEntries,
-			addCommunityPermissions, addGuestPermissions);
+			userId, articleId, autoArticleId, plid, version, title,
+			description, content, type, structureId, templateId,
+			displayDateMonth, displayDateDay, displayDateYear, displayDateHour,
+			displayDateMinute, expirationDateMonth, expirationDateDay,
+			expirationDateYear, expirationDateHour, expirationDateMinute,
+			neverExpire, reviewDateMonth, reviewDateDay, reviewDateYear,
+			reviewDateHour, reviewDateMinute, neverReview, indexable,
+			smallImage, smallImageURL, smallFile, images, articleURL, prefs,
+			tagsEntries, addCommunityPermissions, addGuestPermissions);
 	}
 
 	public JournalArticle addArticle(
@@ -155,11 +151,12 @@ public class JournalArticleLocalServiceImpl
 			int displayDateHour, int displayDateMinute, int expirationDateMonth,
 			int expirationDateDay, int expirationDateYear,
 			int expirationDateHour, int expirationDateMinute,
-			boolean neverExpire, int reviewDateMonth, int reviewDateDay,
-			int reviewDateYear, int reviewDateHour, int reviewDateMinute,
-			boolean neverReview, boolean indexable, boolean smallImage,
-			String smallImageURL, File smallFile, Map<String, byte[]> images,
-			String articleURL, PortletPreferences prefs, String[] tagsEntries,
+			boolean neverExpire, int reviewDateMonth,
+			int reviewDateDay, int reviewDateYear, int reviewDateHour,
+			int reviewDateMinute, boolean neverReview, boolean indexable,
+			boolean smallImage, String smallImageURL, File smallFile,
+			Map<String, byte[]> images, String articleURL,
+			PortletPreferences prefs, String[] tagsEntries,
 			boolean addCommunityPermissions, boolean addGuestPermissions)
 		throws PortalException, SystemException {
 
@@ -181,14 +178,15 @@ public class JournalArticleLocalServiceImpl
 			long plid, double version, String title, String description,
 			String content, String type, String structureId, String templateId,
 			int displayDateMonth, int displayDateDay, int displayDateYear,
-			int displayDateHour, int displayDateMinute, int expirationDateMonth,
-			int expirationDateDay, int expirationDateYear,
-			int expirationDateHour, int expirationDateMinute,
-			boolean neverExpire, int reviewDateMonth, int reviewDateDay,
-			int reviewDateYear, int reviewDateHour, int reviewDateMinute,
-			boolean neverReview, boolean indexable, boolean smallImage,
-			String smallImageURL, File smallFile, Map<String, byte[]> images,
-			String articleURL, PortletPreferences prefs, String[] tagsEntries,
+			int displayDateHour, int displayDateMinute,
+			int expirationDateMonth,int expirationDateDay,
+			int expirationDateYear, int expirationDateHour,
+			int expirationDateMinute, boolean neverExpire, int reviewDateMonth,
+			int reviewDateDay, int reviewDateYear, int reviewDateHour,
+			int reviewDateMinute, boolean neverReview, boolean indexable,
+			boolean smallImage, String smallImageURL, File smallFile,
+			Map<String, byte[]> images, String articleURL,
+			PortletPreferences prefs, String[] tagsEntries,
 			boolean addCommunityPermissions, boolean addGuestPermissions)
 		throws PortalException, SystemException {
 
@@ -213,27 +211,27 @@ public class JournalArticleLocalServiceImpl
 			int displayDateMinute, int expirationDateMonth,
 			int expirationDateDay, int expirationDateYear,
 			int expirationDateHour, int expirationDateMinute,
-			boolean neverExpire, int reviewDateMonth, int reviewDateDay,
-			int reviewDateYear, int reviewDateHour, int reviewDateMinute,
-			boolean neverReview, boolean indexable, boolean smallImage,
-			String smallImageURL, File smallFile, Map<String, byte[]> images,
-			String articleURL, PortletPreferences prefs, String[] tagsEntries,
+			boolean neverExpire, int reviewDateMonth,
+			int reviewDateDay, int reviewDateYear, int reviewDateHour,
+			int reviewDateMinute, boolean neverReview, boolean indexable,
+			boolean smallImage, String smallImageURL, File smallFile,
+			Map<String, byte[]> images, String articleURL,
+			PortletPreferences prefs, String[] tagsEntries,
 			String[] communityPermissions, String[] guestPermissions)
 		throws PortalException, SystemException {
 
 		double version = JournalArticleImpl.DEFAULT_VERSION;
 
 		return addArticle(
-			null, userId, articleId, autoArticleId, plid,
-			version, title, description, content, type, structureId,
-			templateId, displayDateMonth, displayDateDay, displayDateYear,
-			displayDateHour, displayDateMinute, expirationDateMonth,
-			expirationDateDay, expirationDateYear, expirationDateHour,
-			expirationDateMinute, neverExpire, reviewDateMonth, reviewDateDay,
-			reviewDateYear, reviewDateHour, reviewDateMinute, neverReview,
-			indexable, smallImage, smallImageURL, smallFile, images, articleURL,
-			prefs, tagsEntries, null, null, communityPermissions,
-			guestPermissions);
+			null, userId, articleId, autoArticleId, plid, version, title,
+			description, content, type, structureId, templateId,
+			displayDateMonth, displayDateDay, displayDateYear, displayDateHour,
+			displayDateMinute, expirationDateMonth, expirationDateDay,
+			expirationDateYear, expirationDateHour, expirationDateMinute,
+			neverExpire, reviewDateMonth, reviewDateDay, reviewDateYear,
+			reviewDateHour, reviewDateMinute, neverReview, indexable,
+			smallImage, smallImageURL, smallFile, images, articleURL, prefs,
+			tagsEntries, null, null, communityPermissions, guestPermissions);
 	}
 
 	public JournalArticle addArticle(
@@ -243,12 +241,13 @@ public class JournalArticleLocalServiceImpl
 			int displayDateMonth, int displayDateDay, int displayDateYear,
 			int displayDateHour, int displayDateMinute, int expirationDateMonth,
 			int expirationDateDay, int expirationDateYear,
-			int expirationDateHour, int expirationDateMinute,
-			boolean neverExpire, int reviewDateMonth, int reviewDateDay,
-			int reviewDateYear, int reviewDateHour, int reviewDateMinute,
-			boolean neverReview, boolean indexable, boolean smallImage,
-			String smallImageURL, File smallFile, Map<String, byte[]> images,
-			String articleURL, PortletPreferences prefs, String[] tagsEntries,
+			int expirationDateHour,	int expirationDateMinute,
+			boolean neverExpire, int reviewDateMonth,
+			int reviewDateDay, int reviewDateYear, int reviewDateHour,
+			int reviewDateMinute, boolean neverReview, boolean indexable,
+			boolean smallImage, String smallImageURL, File smallFile,
+			Map<String, byte[]> images, String articleURL,
+			PortletPreferences prefs, String[] tagsEntries,
 			Boolean addCommunityPermissions, Boolean addGuestPermissions,
 			String[] communityPermissions, String[] guestPermissions)
 		throws PortalException, SystemException {
@@ -276,81 +275,22 @@ public class JournalArticleLocalServiceImpl
 			int displayDateHour, int displayDateMinute, int expirationDateMonth,
 			int expirationDateDay, int expirationDateYear,
 			int expirationDateHour, int expirationDateMinute,
-			boolean neverExpire, int reviewDateMonth, int reviewDateDay,
-			int reviewDateYear, int reviewDateHour, int reviewDateMinute,
-			boolean neverReview, boolean indexable, boolean smallImage,
-			String smallImageURL, File smallFile, Map<String, byte[]> images,
-			String articleURL, PortletPreferences prefs, String[] tagsEntries,
+			boolean neverExpire, int reviewDateMonth,
+			int reviewDateDay, int reviewDateYear, int reviewDateHour,
+			int reviewDateMinute, boolean neverReview, boolean indexable,
+			boolean smallImage, String smallImageURL, File smallFile,
+			Map<String, byte[]> images, String articleURL,
+			PortletPreferences prefs, String[] tagsEntries,
 			Boolean addCommunityPermissions, Boolean addGuestPermissions,
 			String[] communityPermissions, String[] guestPermissions)
 		throws PortalException, SystemException {
 
 		// Article
 
-		User user = userPersistence.findByPrimaryKey(userId);
-		articleId = articleId.trim().toUpperCase();
-
-		Date displayDate = PortalUtil.getDate(
-			displayDateMonth, displayDateDay, displayDateYear,
-			displayDateHour, displayDateMinute, user.getTimeZone(),
-			new ArticleDisplayDateException());
-
-		Date expirationDate = null;
-
-		if (!neverExpire) {
-			expirationDate = PortalUtil.getDate(
-				expirationDateMonth, expirationDateDay, expirationDateYear,
-				expirationDateHour, expirationDateMinute, user.getTimeZone(),
-				new ArticleExpirationDateException());
-		}
-
-		Date reviewDate = null;
-
-		if (!neverReview) {
-			reviewDate = PortalUtil.getDate(
-				reviewDateMonth, reviewDateDay, reviewDateYear, reviewDateHour,
-				reviewDateMinute, user.getTimeZone(),
-				new ArticleReviewDateException());
-		}
-
-		byte[] smallBytes = null;
-
-		try {
-			smallBytes = FileUtil.getBytes(smallFile);
-		}
-		catch (IOException ioe) {
-		}
-
-		Date now = new Date();
-
-		validate(
-			groupId, articleId, autoArticleId, version, title, content, type,
-			structureId, templateId, smallImage, smallImageURL, smallFile,
-			smallBytes);
-
-		if (autoArticleId) {
-			articleId = String.valueOf(counterLocalService.increment());
-		}
-
-		long id = counterLocalService.increment();
-
-		long resourcePrimKey =
-			journalArticleResourceLocalService.getArticleResourcePrimKey(
-				groupId, articleId);
-
-		JournalArticle article = journalArticlePersistence.create(id);
-
-		content = format(
-			groupId, articleId, version, false, content, structureId, images);
-
+		JournalArticle article = new JournalArticleImpl();
 		article.setUuid(uuid);
-		article.setResourcePrimKey(resourcePrimKey);
+		article.setUserId(userId);
 		article.setGroupId(groupId);
-		article.setCompanyId(user.getCompanyId());
-		article.setUserId(user.getUserId());
-		article.setUserName(user.getFullName());
-		article.setCreateDate(now);
-		article.setModifiedDate(now);
 		article.setArticleId(articleId);
 		article.setVersion(version);
 		article.setTitle(title);
@@ -359,56 +299,59 @@ public class JournalArticleLocalServiceImpl
 		article.setType(type);
 		article.setStructureId(structureId);
 		article.setTemplateId(templateId);
-		article.setDisplayDate(displayDate);
 		article.setApproved(false);
-
-		if ((expirationDate == null) || expirationDate.after(now)) {
-			article.setExpired(false);
-		}
-		else {
-			article.setExpired(true);
-		}
-
-		article.setExpirationDate(expirationDate);
-		article.setReviewDate(reviewDate);
 		article.setIndexable(indexable);
 		article.setSmallImage(smallImage);
 		article.setSmallImageId(counterLocalService.increment());
 		article.setSmallImageURL(smallImageURL);
 
-		journalArticlePersistence.update(article, false);
+		// Create a Mirage Content object using the JournalArticle
 
-		// Small image
-
-		saveImages(
-			smallImage, article.getSmallImageId(), smallFile, smallBytes);
-
-		// Resources
-
-		if ((addCommunityPermissions != null) &&
-			(addGuestPermissions != null)) {
-
-			addArticleResources(
-				article, addCommunityPermissions.booleanValue(),
-				addGuestPermissions.booleanValue());
-		}
-		else {
-			addArticleResources(
+		JournalArticleContent articleContent =
+			new JournalArticleContent(
 				article, communityPermissions, guestPermissions);
-		}
 
-		// Tags
+		JournalArticleContent.CreationAttributes creationAttributes =
+		articleContent.new CreationAttributes();
+		creationAttributes.setAutoArticleId(autoArticleId);
+		creationAttributes.setAddCommunityPermissions(addCommunityPermissions);
+		creationAttributes.setAddGuestPermissions(addGuestPermissions);
+		creationAttributes.setTagsEntries(tagsEntries);
+		creationAttributes.setArticleURL(articleURL);
+		creationAttributes.setPrefs(prefs);
+		creationAttributes.setDisplayDateDay(displayDateDay);
+		creationAttributes.setDisplayDateHour(displayDateHour);
+		creationAttributes.setDisplayDateMinute(displayDateMinute);
+		creationAttributes.setDisplayDateMonth(displayDateMonth);
+		creationAttributes.setDisplayDateYear(displayDateYear);
+		creationAttributes.setExpirationDateDay(expirationDateDay);
+		creationAttributes.setExpirationDateHour(expirationDateHour);
+		creationAttributes.setExpirationDateMinute(expirationDateMinute);
+		creationAttributes.setExpirationDateMonth(expirationDateMonth);
+		creationAttributes.setExpirationDateYear(expirationDateYear);
+		creationAttributes.setNeverExpire(neverExpire);
+		creationAttributes.setReviewDateDay(reviewDateDay);
+		creationAttributes.setReviewDateHour(reviewDateHour);
+		creationAttributes.setReviewDateMinute(reviewDateMinute);
+		creationAttributes.setReviewDateMonth(reviewDateMonth);
+		creationAttributes.setReviewDateYear(reviewDateYear);
+		creationAttributes.setNeverReview(neverReview);
+		creationAttributes.setSmallFile(smallFile);
+		creationAttributes.setImages(images);
 
-		updateTagsAsset(userId, article, tagsEntries);
+		articleContent.setCreationAttributes(creationAttributes);
 
-		// Email
+		// Get the Project Mirage service
 
+		ContentService contentService =
+						MirageServiceFactory.getContentService();
 		try {
-			sendEmail(article, articleURL, prefs, "requested");
+			contentService.createContent(articleContent);
 		}
-		catch (IOException ioe) {
-			throw new SystemException(ioe);
+		catch (CMSException ce) {
+			_throwException(ce);
 		}
+		article = articleContent.getArticle();
 
 		return article;
 	}
@@ -430,10 +373,9 @@ public class JournalArticleLocalServiceImpl
 		throws PortalException, SystemException {
 
 		resourceLocalService.addResources(
-			article.getCompanyId(), article.getGroupId(),
-			article.getUserId(), JournalArticle.class.getName(),
-			article.getResourcePrimKey(), false, addCommunityPermissions,
-			addGuestPermissions);
+			article.getCompanyId(), article.getGroupId(), article.getUserId(),
+			JournalArticle.class.getName(), article.getResourcePrimKey(),
+			false, addCommunityPermissions, addGuestPermissions);
 	}
 
 	public void addArticleResources(
@@ -452,10 +394,9 @@ public class JournalArticleLocalServiceImpl
 		throws PortalException, SystemException {
 
 		resourceLocalService.addModelResources(
-			article.getCompanyId(), article.getGroupId(),
-			article.getUserId(), JournalArticle.class.getName(),
-			article.getResourcePrimKey(), communityPermissions,
-			guestPermissions);
+			article.getCompanyId(), article.getGroupId(), article.getUserId(),
+				JournalArticle.class.getName(), article.getResourcePrimKey(),
+					communityPermissions, guestPermissions);
 	}
 
 	public JournalArticle approveArticle(
@@ -465,65 +406,40 @@ public class JournalArticleLocalServiceImpl
 
 		// Article
 
-		User user = userPersistence.findByPrimaryKey(userId);
-		Date now = new Date();
+		JournalArticle journalArticle = new JournalArticleImpl();
+		journalArticle.setUserId(userId);
+		journalArticle.setGroupId(groupId);
+		journalArticle.setArticleId(articleId);
+		journalArticle.setVersion(version);
 
-		JournalArticle article = journalArticlePersistence.findByG_A_V(
-			groupId, articleId, version);
+		/* Create a Mirage Content object using the JournalArticle */
+		JournalArticleContent articleContent =
+			new JournalArticleContent(journalArticle);
 
-		article.setModifiedDate(now);
-		article.setApproved(true);
-		article.setApprovedByUserId(user.getUserId());
-		article.setApprovedByUserName(user.getFullName());
-		article.setApprovedDate(now);
-		article.setExpired(false);
+		JournalArticleContent.CreationAttributes creationAttributes =
+			articleContent.new CreationAttributes();
 
-		if ((article.getExpirationDate() != null) &&
-			(article.getExpirationDate().before(now))) {
+		creationAttributes.setArticleURL(articleURL);
+		creationAttributes.setPrefs(prefs);
+		articleContent.setCreationAttributes(creationAttributes);
 
-			article.setExpirationDate(null);
-		}
-
-		journalArticlePersistence.update(article, false);
-
-		// Email
-
+		WorkflowService workflowService = new WorkflowServiceImpl();
 		try {
-			sendEmail(article, articleURL, prefs, "granted");
+			workflowService.updateWorkflowComplete(articleContent);
 		}
-		catch (IOException ioe) {
-			throw new SystemException(ioe);
+		catch (CMSException ce) {
+			_throwException(ce);
 		}
+		journalArticle = articleContent.getArticle();
 
-		// Lucene
-
-		try {
-			if (article.isIndexable()) {
-				String[] tagsEntries = tagsEntryLocalService.getEntryNames(
-					JournalArticle.class.getName(),
-					article.getResourcePrimKey());
-
-				Indexer.updateArticle(
-					article.getCompanyId(), article.getGroupId(),
-					article.getArticleId(), article.getVersion(),
-					article.getTitle(), article.getDescription(),
-					article.getContent(), article.getType(),
-					article.getDisplayDate(), tagsEntries);
-			}
-		}
-		catch (SearchException se) {
-			_log.error("Indexing " + article.getId(), se);
-		}
-
-		return article;
+		return journalArticle;
 	}
 
 	public JournalArticle checkArticleResourcePrimKey(
 			long groupId, String articleId, double version)
 		throws PortalException, SystemException {
 
-		JournalArticle article = journalArticlePersistence.findByG_A_V(
-			groupId, articleId, version);
+		JournalArticle article = getArticle(groupId, articleId, version);
 
 		if (article.getResourcePrimKey() > 0) {
 			return article;
@@ -534,109 +450,133 @@ public class JournalArticleLocalServiceImpl
 				groupId, articleId);
 
 		article.setResourcePrimKey(resourcePrimKey);
-
-		journalArticlePersistence.update(article, false);
+		JournalArticleContent articleContent =
+			new JournalArticleContent(article);
+		ContentService contentService =
+							MirageServiceFactory.getContentService();
+		try {
+			contentService.updateContent(articleContent, null);
+		}
+		catch (CMSException ce) {
+			_throwException(ce);
+		}
 
 		return article;
 	}
 
-	public void checkArticles() throws PortalException, SystemException {
-		Date now = new Date();
+	public void checkArticles()
+		throws PortalException, SystemException {
 
-		List<JournalArticle> articles =
-			journalArticleFinder.findByExpirationDate(
-				Boolean.FALSE, now,
-				new Date(now.getTime() - CheckArticleJob.INTERVAL));
+		try {
+			Date now = new Date();
+			Date expirationDateGT =
+				new Date(now.getTime() - CheckArticleJob.INTERVAL);
+			List<JournalArticle> expireArticles =
+				_getArticlesByExpirationDate(now, expirationDateGT);
 
-		if (_log.isDebugEnabled()) {
-			_log.debug("Expiring " + articles.size() + " articles");
-		}
+			if (_log.isDebugEnabled()) {
+				_log.debug("Expiring " + expireArticles.size() + " articles");
+			}
 
-		Set<Long> companyIds = new HashSet<Long>();
+			Set<Long> companyIds = new HashSet<Long>();
+			JournalArticleContent articleContent = new JournalArticleContent();
+			ContentService contentService =
+				MirageServiceFactory.getContentService();
+			for (JournalArticle article : expireArticles) {
+				article.setApproved(false);
+				article.setExpired(true);
 
-		for (JournalArticle article : articles) {
-			article.setApproved(false);
-			article.setExpired(true);
+				articleContent.setArticle(article);
+				contentService.updateContent(articleContent, null);
 
-			journalArticlePersistence.update(article, false);
+				try {
+					if (article.isIndexable()) {
+						Indexer.deleteArticle(
+							article.getCompanyId(), article.getArticleId());
+					}
+				}
+				catch (SearchException se) {
+					_log.error("Removing index " + article.getId(), se);
+				}
 
-			try {
-				if (article.isIndexable()) {
-					Indexer.deleteArticle(
-						article.getCompanyId(), article.getArticleId());
+				JournalContentUtil.clearCache(
+					article.getGroupId(), article.getArticleId(),
+						article.getTemplateId());
+
+				companyIds.add(article.getCompanyId());
+			}
+
+			for (long companyId : companyIds) {
+				LayoutCacheUtil.clearCache(companyId);
+			}
+			Date reviewDateGT =
+				new Date(now.getTime() - CheckArticleJob.INTERVAL);
+			List<JournalArticle> reviewArticles =
+				_getArticleByReviewDate(now, reviewDateGT);
+			if (_log.isDebugEnabled()) {
+				_log.debug("Sending review notifications for " +
+					reviewArticles.size() + " articles");
+			}
+
+			for (JournalArticle article : reviewArticles) {
+				String articleURL = StringPool.BLANK;
+
+				long ownerId = article.getGroupId();
+				int ownerType = PortletKeys.PREFS_OWNER_TYPE_GROUP;
+				long plid = PortletKeys.PREFS_PLID_SHARED;
+				String portletId = PortletKeys.JOURNAL;
+
+				PortletPreferences prefs =
+					portletPreferencesLocalService.getPreferences(
+						article.getCompanyId(), ownerId, ownerType, plid,
+						portletId);
+
+				try {
+					sendEmail(article, articleURL, prefs, "review");
+				}
+				catch (IOException ioe) {
+					throw new SystemException(ioe);
 				}
 			}
-			catch (SearchException se) {
-				_log.error("Removing index " + article.getId(), se);
-			}
-
-			JournalContentUtil.clearCache(
-				article.getGroupId(), article.getArticleId(),
-				article.getTemplateId());
-
-			companyIds.add(article.getCompanyId());
 		}
-
-		for (long companyId : companyIds) {
-			LayoutCacheUtil.clearCache(companyId);
-		}
-
-		articles = journalArticleFinder.findByReviewDate(
-			now, new Date(now.getTime() - CheckArticleJob.INTERVAL));
-
-		if (_log.isDebugEnabled()) {
-			_log.debug(
-				"Sending review notifications for " + articles.size() +
-					" articles");
-		}
-
-		for (JournalArticle article : articles) {
-			String articleURL = StringPool.BLANK;
-
-			long ownerId = article.getGroupId();
-			int ownerType = PortletKeys.PREFS_OWNER_TYPE_GROUP;
-			long plid = PortletKeys.PREFS_PLID_SHARED;
-			String portletId = PortletKeys.JOURNAL;
-
-			PortletPreferences prefs =
-				portletPreferencesLocalService.getPreferences(
-					article.getCompanyId(), ownerId, ownerType, plid,
-					portletId);
-
-			try {
-				sendEmail(article, articleURL, prefs, "review");
-			}
-			catch (IOException ioe) {
-				throw new SystemException(ioe);
-			}
+		catch (CMSException ex) {
+			_throwException(ex);
 		}
 	}
 
 	public void checkNewLine(long groupId, String articleId, double version)
 		throws PortalException, SystemException {
 
-		JournalArticle article = journalArticlePersistence.findByG_A_V(
-			groupId, articleId, version);
+		JournalArticle article = getArticle(groupId, articleId, version);
 
 		String content = GetterUtil.getString(article.getContent());
 
 		if (content.indexOf("\\n") != -1) {
-			content = StringUtil.replace(
-				content,
-				new String[] {"\\n", "\\r"},
-				new String[] {"\n", "\r"});
+			content = StringUtil.replace(content, new String[] {
+				"\\n", "\\r"
+			}, new String[] {
+				"\n", "\r"
+			});
 
 			article.setContent(content);
 
-			journalArticlePersistence.update(article, false);
+			JournalArticleContent articleContent =
+				new JournalArticleContent(article);
+			ContentService contentService =
+				MirageServiceFactory.getContentService();
+			try {
+				contentService.updateContent(articleContent, null);
+			}
+			catch (CMSException ce) {
+				_throwException(ce);
+			}
 		}
 	}
 
 	public void checkStructure(long groupId, String articleId, double version)
 		throws PortalException, SystemException {
 
-		JournalArticle article = journalArticlePersistence.findByG_A_V(
-			groupId, articleId, version);
+		JournalArticle article = getArticle(groupId, articleId, version);
 
 		if (Validator.isNull(article.getStructureId())) {
 			return;
@@ -655,9 +595,28 @@ public class JournalArticleLocalServiceImpl
 			PortletPreferences prefs)
 		throws PortalException, SystemException {
 
-		JournalArticle article = journalArticlePersistence.findByG_A_V(
-			groupId, articleId, version);
+		JournalArticle article = new JournalArticleImpl();
+		article.setGroupId(groupId);
+		article.setArticleId(articleId);
+		article.setVersion(version);
 
+		JournalArticleContent articleContent =
+			new JournalArticleContent(article);
+
+		ContentService contentService =
+			MirageServiceFactory.getContentService();
+		OptionalJournalArticleCriteria criteria =
+			new OptionalJournalArticleCriteria(
+				OptionalJournalArticleCriteria.FIND_BY_G_A_V);
+		try {
+			articleContent =
+				(JournalArticleContent) contentService.getContent(
+					articleContent, criteria);
+		}
+		catch (CMSException ce) {
+			_throwException(ce);
+		}
+		article = articleContent.getArticle();
 		deleteArticle(article, articleURL, prefs);
 	}
 
@@ -665,96 +624,29 @@ public class JournalArticleLocalServiceImpl
 			JournalArticle article, String articleURL, PortletPreferences prefs)
 		throws PortalException, SystemException {
 
-		// Lucene
-
+		JournalArticleContent articleContent =
+			new JournalArticleContent(article);
+		JournalArticleContent.CreationAttributes creationAttributes =
+			articleContent.new CreationAttributes();
+		creationAttributes.setArticleURL(articleURL);
+		creationAttributes.setPrefs(prefs);
+		articleContent.setCreationAttributes(creationAttributes);
+		ContentService contentService =
+			MirageServiceFactory.getContentService();
 		try {
-			if (article.isApproved() && article.isIndexable()) {
-				Indexer.deleteArticle(
-					article.getCompanyId(), article.getArticleId());
-			}
+			contentService.deleteContent(articleContent);
 		}
-		catch (SearchException se) {
-			_log.error("Deleting index " + article.getPrimaryKey(), se);
+		catch (CMSException ce) {
+			_throwException(ce);
 		}
 
-		// Email
-
-		if ((prefs != null) && !article.isApproved() &&
-			isLatestVersion(
-				article.getGroupId(), article.getArticleId(),
-				article.getVersion())) {
-
-			try {
-				sendEmail(article, articleURL, prefs, "denied");
-			}
-			catch (IOException ioe) {
-				throw new SystemException(ioe);
-			}
-		}
-
-		// Tags
-
-		tagsAssetLocalService.deleteAsset(
-			JournalArticle.class.getName(), article.getResourcePrimKey());
-
-		// Ratings
-
-		ratingsStatsLocalService.deleteStats(
-			JournalArticle.class.getName(), article.getResourcePrimKey());
-
-		// Message boards
-
-		mbMessageLocalService.deleteDiscussionMessages(
-			JournalArticle.class.getName(), article.getResourcePrimKey());
-
-		// Content searches
-
-		journalContentSearchLocalService.deleteArticleContentSearches(
-			article.getGroupId(), article.getArticleId());
-
-		// Images
-
-		journalArticleImageLocalService.deleteImages(
-			article.getGroupId(), article.getArticleId(), article.getVersion());
-
-		// Small image
-
-		imageLocalService.deleteImage(article.getSmallImageId());
-
-		// Resources
-
-		if (journalArticlePersistence.countByG_A(
-				article.getGroupId(), article.getArticleId()) == 1) {
-
-			resourceLocalService.deleteResource(
-				article.getCompanyId(), JournalArticle.class.getName(),
-				ResourceConstants.SCOPE_INDIVIDUAL,
-				article.getResourcePrimKey());
-		}
-
-		// Resource
-
-		if (journalArticlePersistence.countByG_A(
-				article.getGroupId(), article.getArticleId()) == 1) {
-
-			try {
-				journalArticleResourceLocalService.deleteArticleResource(
-					article.getGroupId(), article.getArticleId());
-			}
-			catch (NoSuchArticleResourceException nsare) {
-			}
-		}
-
-		// Article
-
-		journalArticlePersistence.remove(article.getPrimaryKey());
 	}
 
 	public void deleteArticles(long groupId)
 		throws PortalException, SystemException {
 
-		for (JournalArticle article :
-				journalArticlePersistence.findByGroupId(groupId)) {
+		List<JournalArticle> articles = getArticles(groupId);
+		for (JournalArticle article : articles) {
 
 			deleteArticle(article, null, null);
 		}
@@ -765,8 +657,7 @@ public class JournalArticleLocalServiceImpl
 			PortletPreferences prefs)
 		throws PortalException, SystemException {
 
-		JournalArticle article = journalArticlePersistence.findByG_A_V(
-			groupId, articleId, version);
+		JournalArticle article = getArticle(groupId, articleId, version);
 
 		expireArticle(article, articleURL, prefs);
 	}
@@ -775,47 +666,49 @@ public class JournalArticleLocalServiceImpl
 			JournalArticle article, String articleURL, PortletPreferences prefs)
 		throws PortalException, SystemException {
 
-		// Email
+		// Create a Mirage Content object using the JournalArticle
 
-		if ((prefs != null) && !article.isApproved() &&
-			isLatestVersion(
-				article.getGroupId(), article.getArticleId(),
-				article.getVersion())) {
+		JournalArticleContent articleContent =
+			new JournalArticleContent(article);
 
-			try {
-				sendEmail(article, articleURL, prefs, "denied");
-			}
-			catch (IOException ioe) {
-				throw new SystemException(ioe);
-			}
-		}
+		JournalArticleContent.CreationAttributes creationAttributes =
+			articleContent.new CreationAttributes();
 
-		// Article
+		creationAttributes.setArticleURL(articleURL);
+		creationAttributes.setPrefs(prefs);
+		articleContent.setCreationAttributes(creationAttributes);
 
-		article.setExpirationDate(new Date());
-
-		article.setApproved(false);
-		article.setExpired(true);
-
-		journalArticlePersistence.update(article, false);
-
-		// Lucene
-
+		WorkflowService workflowService = new WorkflowServiceImpl();
 		try {
-			if (article.isIndexable()) {
-				Indexer.deleteArticle(
-					article.getCompanyId(), article.getArticleId());
-			}
+			workflowService.updateWorkflowContentRejected(articleContent);
 		}
-		catch (SearchException se) {
-			_log.error("Removing index " + article.getId(), se);
+		catch (CMSException ce) {
+			_throwException(ce);
 		}
 	}
 
 	public JournalArticle getArticle(long id)
 		throws PortalException, SystemException {
 
-		return journalArticlePersistence.findByPrimaryKey(id);
+		JournalArticle journalArticle = new JournalArticleImpl();
+		journalArticle.setId(id);
+		JournalArticleContent articleContent =
+			new JournalArticleContent(journalArticle);
+		OptionalJournalArticleCriteria criteria =
+			new OptionalJournalArticleCriteria(
+				OptionalJournalArticleCriteria.FIND_BY_PRIMARY_KEY);
+		ContentService contentService =
+			MirageServiceFactory.getContentService();
+		try {
+			articleContent =
+				(JournalArticleContent) contentService.getContent(
+					articleContent, criteria);
+		}
+		catch (CMSException ex) {
+			_throwException(ex);
+		}
+		return articleContent.getArticle();
+
 	}
 
 	public JournalArticle getArticle(long groupId, String articleId)
@@ -836,8 +729,27 @@ public class JournalArticleLocalServiceImpl
 			long groupId, String articleId, double version)
 		throws PortalException, SystemException {
 
-		return journalArticlePersistence.findByG_A_V(
-			groupId, articleId, version);
+		JournalArticle journalArticle = new JournalArticleImpl();
+		journalArticle.setGroupId(groupId);
+		journalArticle.setArticleId(articleId);
+		journalArticle.setVersion(version);
+		JournalArticleContent articleContent =
+			new JournalArticleContent(journalArticle);
+		OptionalJournalArticleCriteria criteria =
+			new OptionalJournalArticleCriteria(
+				OptionalJournalArticleCriteria.FIND_BY_G_A_V);
+		ContentService contentService =
+			MirageServiceFactory.getContentService();
+		try {
+			articleContent =
+				(JournalArticleContent) contentService.getContent(
+					articleContent, criteria);
+		}
+		catch (CMSException ex) {
+			_throwException(ex);
+		}
+		return articleContent.getArticle();
+
 	}
 
 	public String getArticleContent(
@@ -851,11 +763,12 @@ public class JournalArticleLocalServiceImpl
 
 	public String getArticleContent(
 			long groupId, String articleId, String templateId,
-			String languageId, ThemeDisplay themeDisplay)
+			String languageId,ThemeDisplay themeDisplay)
 		throws PortalException, SystemException {
 
-		JournalArticleDisplay articleDisplay = getArticleDisplay(
-			groupId, articleId, templateId, languageId, themeDisplay);
+		JournalArticleDisplay articleDisplay =
+			getArticleDisplay(
+				groupId, articleId, templateId, languageId, themeDisplay);
 
 		return articleDisplay.getContent();
 	}
@@ -874,8 +787,10 @@ public class JournalArticleLocalServiceImpl
 			String languageId, ThemeDisplay themeDisplay)
 		throws PortalException, SystemException {
 
-		JournalArticleDisplay articleDisplay = getArticleDisplay(
-			groupId, articleId, version, templateId, languageId, themeDisplay);
+		JournalArticleDisplay articleDisplay =
+			getArticleDisplay(
+				groupId, articleId, version, templateId, languageId,
+					themeDisplay);
 
 		if (articleDisplay == null) {
 			return StringPool.BLANK;
@@ -895,13 +810,13 @@ public class JournalArticleLocalServiceImpl
 	}
 
 	public JournalArticleDisplay getArticleDisplay(
-			long groupId, String articleId, String languageId,
-			int page, String xmlRequest, ThemeDisplay themeDisplay)
+			long groupId, String articleId, String languageId, int page,
+			String xmlRequest, ThemeDisplay themeDisplay)
 		throws PortalException, SystemException {
 
 		return getArticleDisplay(
 			groupId, articleId, null, languageId, page, xmlRequest,
-			themeDisplay);
+				themeDisplay);
 	}
 
 	public JournalArticleDisplay getArticleDisplay(
@@ -913,7 +828,7 @@ public class JournalArticleLocalServiceImpl
 
 		return getArticleDisplay(
 			groupId, articleId, article.getVersion(), templateId, languageId,
-			themeDisplay);
+				themeDisplay);
 	}
 
 	public JournalArticleDisplay getArticleDisplay(
@@ -926,7 +841,7 @@ public class JournalArticleLocalServiceImpl
 
 		return getArticleDisplay(
 			groupId, articleId, article.getVersion(), templateId, languageId,
-			page, xmlRequest, themeDisplay);
+				page, xmlRequest, themeDisplay);
 	}
 
 	public JournalArticleDisplay getArticleDisplay(
@@ -936,7 +851,7 @@ public class JournalArticleLocalServiceImpl
 
 		return getArticleDisplay(
 			groupId, articleId, version, templateId, languageId, 1, null,
-			themeDisplay);
+				themeDisplay);
 	}
 
 	public JournalArticleDisplay getArticleDisplay(
@@ -949,8 +864,7 @@ public class JournalArticleLocalServiceImpl
 
 		Date now = new Date();
 
-		JournalArticle article = journalArticlePersistence.findByG_A_V(
-			groupId, articleId, version);
+		JournalArticle article = getArticle(groupId, articleId, version);
 
 		if (article.isExpired()) {
 			Date expirationDate = article.getExpirationDate();
@@ -974,12 +888,12 @@ public class JournalArticleLocalServiceImpl
 
 		boolean cacheable = true;
 
-		Map<String, String> tokens = JournalUtil.getTokens(
-			groupId, themeDisplay);
+		Map<String, String> tokens =
+			JournalUtil.getTokens(groupId, themeDisplay);
 
 		tokens.put(
 			"article_resource_pk",
-			String.valueOf(article.getResourcePrimKey()));
+				String.valueOf(article.getResourcePrimKey()));
 
 		String xml = article.getContent();
 
@@ -1006,17 +920,19 @@ public class JournalArticleLocalServiceImpl
 				if (pages.size() > 0) {
 					pageFlow = true;
 
-					String targetPage = request.valueOf(
-						"/request/parameters/parameter[name='targetPage']/" +
-							"value");
+					String targetPage =
+						request.valueOf(
+							"/request/parameters/parameter[name='targetPage']/"
+								+ "value");
 
 					Element pageEl = null;
 
 					if (Validator.isNotNull(targetPage)) {
-						XPath xpathSelector = DocumentHelper.createXPath(
-							"/root/page[@id = '" + targetPage + "']");
+						XPath xpathSelector =
+							DocumentHelper.createXPath("/root/page[@id = '" +
+								targetPage + "']");
 
-						pageEl = (Element)xpathSelector.selectSingleNode(doc);
+						pageEl = (Element) xpathSelector.selectSingleNode(doc);
 					}
 
 					DocumentFactory docFactory = DocumentFactory.getInstance();
@@ -1062,9 +978,8 @@ public class JournalArticleLocalServiceImpl
 
 		try {
 			if (_log.isDebugEnabled()) {
-				_log.debug(
-					"Transforming " + articleId + " " + version + " " +
-						languageId);
+				_log.debug("Transforming " + articleId + " " + version + " " +
+					languageId);
 			}
 
 			String script = null;
@@ -1086,13 +1001,15 @@ public class JournalArticleLocalServiceImpl
 				JournalTemplate template = null;
 
 				try {
-					template = journalTemplatePersistence.findByG_T(
-						groupId, templateId);
+					template =
+						journalTemplateLocalService.getTemplate(
+							groupId, templateId);
 				}
 				catch (NoSuchTemplateException nste) {
 					if (!defaultTemplateId.equals(templateId)) {
-						template = journalTemplatePersistence.findByG_T(
-							groupId, defaultTemplateId);
+						template =
+							journalTemplateLocalService.getTemplate(
+								groupId, defaultTemplateId);
 					}
 					else {
 						throw nste;
@@ -1104,8 +1021,9 @@ public class JournalArticleLocalServiceImpl
 				cacheable = template.isCacheable();
 			}
 
-			content = JournalUtil.transform(
-				tokens, languageId, xml, script, langType);
+			content =
+				JournalUtil.transform(
+					tokens, languageId, xml, script, langType);
 
 			if (!pageFlow) {
 				String[] pieces = StringUtil.split(content, _TOKEN_PAGE_BREAK);
@@ -1126,60 +1044,267 @@ public class JournalArticleLocalServiceImpl
 		}
 
 		return new JournalArticleDisplayImpl(
-			article.getId(), article.getResourcePrimKey(), article.getGroupId(),
-			article.getUserId(), article.getArticleId(), article.getVersion(),
-			article.getTitle(), article.getDescription(),
+			article.getId(), article.getResourcePrimKey(),
+			article.getGroupId(), article.getUserId(), article.getArticleId(),
+			article.getVersion(), article.getTitle(), article.getDescription(),
 			article.getAvailableLocales(), content, article.getType(),
 			article.getStructureId(), templateId, article.isSmallImage(),
 			article.getSmallImageId(), article.getSmallImageURL(),
 			numberOfPages, page, paginate, cacheable);
 	}
 
-	public List<JournalArticle> getArticles() throws SystemException {
-		return journalArticlePersistence.findAll();
+	public List<JournalArticle> getArticles()
+		throws SystemException {
+
+		SearchCriteria criteria = new SearchCriteria();
+		List<SearchFieldValue> searchFields = new ArrayList<SearchFieldValue>();
+
+		_addSearchField(
+			searchFields, OptionalJournalArticleCriteria.FINDER,
+				OptionalJournalArticleCriteria.FIND_ALL);
+
+		criteria.setSearchFieldValues(searchFields);
+
+		ContentService contentService =
+			MirageServiceFactory.getContentService();
+		try {
+			List<Content> contents = contentService.searchContents(criteria);
+			return _getArticlesFromContents(contents);
+		}
+		catch (CMSException ex) {
+			throw (SystemException) ex.getCause();
+		}
+
 	}
 
 	public List<JournalArticle> getArticles(long groupId)
 		throws SystemException {
 
-		return journalArticlePersistence.findByGroupId(groupId);
+		SearchCriteria criteria = new SearchCriteria();
+		List<SearchFieldValue> searchFields = new ArrayList<SearchFieldValue>();
+
+		_addSearchField(
+			searchFields, OptionalJournalArticleCriteria.FINDER,
+				OptionalJournalArticleCriteria.FIND_BY_GROUP);
+
+		_addSearchField(
+			searchFields, OptionalJournalArticleCriteria.GROUP_ID,
+				String.valueOf(groupId));
+
+		criteria.setSearchFieldValues(searchFields);
+
+		ContentService contentService =
+			MirageServiceFactory.getContentService();
+		try {
+			List<Content> contents = contentService.searchContents(criteria);
+
+			return _getArticlesFromContents(contents);
+		}
+		catch (CMSException ex) {
+			throw (SystemException) ex.getCause();
+		}
+
 	}
 
 	public List<JournalArticle> getArticles(long groupId, int start, int end)
 		throws SystemException {
 
-		return journalArticlePersistence.findByGroupId(groupId, start, end);
+		SearchCriteria criteria = new SearchCriteria();
+		List<SearchFieldValue> searchFields = new ArrayList<SearchFieldValue>();
+
+		_addSearchField(
+			searchFields, OptionalJournalArticleCriteria.FINDER,
+				OptionalJournalArticleCriteria.FIND_BY_GROUP_LIMIT);
+
+		_addSearchField(
+			searchFields, OptionalJournalArticleCriteria.GROUP_ID,
+				String.valueOf(groupId));
+
+		_addSearchField(
+			searchFields, OptionalJournalArticleCriteria.RANGE_START,
+				String.valueOf(start));
+
+		_addSearchField(
+			searchFields, OptionalJournalArticleCriteria.RANGE_END,
+				String.valueOf(end));
+
+		criteria.setSearchFieldValues(searchFields);
+
+		ContentService contentService =
+			MirageServiceFactory.getContentService();
+		try {
+			List<Content> contents = contentService.searchContents(criteria);
+
+			return _getArticlesFromContents(contents);
+		}
+		catch (CMSException ex) {
+			throw (SystemException) ex.getCause();
+		}
+
 	}
 
 	public List<JournalArticle> getArticles(
 			long groupId, int start, int end, OrderByComparator obc)
 		throws SystemException {
 
-		return journalArticlePersistence.findByGroupId(
-			groupId, start, end, obc);
+		SearchCriteria criteria = new SearchCriteria();
+		List<SearchFieldValue> searchFields = new ArrayList<SearchFieldValue>();
+
+		_addSearchField(
+			searchFields, OptionalJournalArticleCriteria.FINDER,
+				OptionalJournalArticleCriteria.FIND_BY_GROUP_AND_ORDER);
+
+		_addSearchField(
+			searchFields, OptionalJournalArticleCriteria.GROUP_ID,
+				String.valueOf(groupId));
+
+		_addSearchField(
+			searchFields, OptionalJournalArticleCriteria.RANGE_START,
+				String.valueOf(start));
+
+		_addSearchField(
+			searchFields, OptionalJournalArticleCriteria.RANGE_END,
+				String.valueOf(end));
+
+		criteria.setSearchFieldValues(searchFields);
+		criteria.setOrderByComparator(obc);
+
+		ContentService contentService =
+			MirageServiceFactory.getContentService();
+		try {
+			List<Content> contents = contentService.searchContents(criteria);
+
+			return _getArticlesFromContents(contents);
+		}
+		catch (CMSException ex) {
+			throw (SystemException) ex.getCause();
+		}
+
 	}
 
 	public List<JournalArticle> getArticles(long groupId, String articleId)
 		throws SystemException {
 
-		return journalArticlePersistence.findByG_A(groupId, articleId);
+		SearchCriteria criteria = new SearchCriteria();
+		List<SearchFieldValue> searchFields = new ArrayList<SearchFieldValue>();
+
+		_addSearchField(
+			searchFields, OptionalJournalArticleCriteria.FINDER,
+				OptionalJournalArticleCriteria.FIND_BY_G_A);
+
+		_addSearchField(
+			searchFields, OptionalJournalArticleCriteria.GROUP_ID,
+				String.valueOf(groupId));
+
+		_addSearchField(
+			searchFields, OptionalJournalArticleCriteria.ARTICLE_ID, articleId);
+		criteria.setSearchFieldValues(searchFields);
+
+		ContentService contentService =
+			MirageServiceFactory.getContentService();
+		try {
+			List<Content> contents = contentService.searchContents(criteria);
+
+			return _getArticlesFromContents(contents);
+		}
+		catch (CMSException ex) {
+			throw (SystemException) ex.getCause();
+		}
+
 	}
 
 	public List<JournalArticle> getArticlesBySmallImageId(long smallImageId)
 		throws SystemException {
 
-		return journalArticlePersistence.findBySmallImageId(smallImageId);
+		SearchCriteria criteria = new SearchCriteria();
+		List<SearchFieldValue> searchFields = new ArrayList<SearchFieldValue>();
+
+		_addSearchField(
+			searchFields, OptionalJournalArticleCriteria.FINDER,
+				OptionalJournalArticleCriteria.FIND_BY_SMALL_IMAGE_ID);
+
+		_addSearchField(
+			searchFields, OptionalJournalArticleCriteria.SMALL_IMAGE_ID,
+				String.valueOf(smallImageId));
+
+		criteria.setSearchFieldValues(searchFields);
+
+		ContentService contentService =
+			MirageServiceFactory.getContentService();
+		try {
+			List<Content> contents = contentService.searchContents(criteria);
+
+			return _getArticlesFromContents(contents);
+		}
+		catch (CMSException ex) {
+			throw (SystemException) ex.getCause();
+		}
+
 	}
 
-	public int getArticlesCount(long groupId) throws SystemException {
-		return journalArticlePersistence.countByGroupId(groupId);
+	public int getArticlesCount(long groupId)
+		throws SystemException {
+
+		SearchCriteria criteria = new SearchCriteria();
+		List<SearchFieldValue> searchFields = new ArrayList<SearchFieldValue>();
+		String typeId = String.valueOf(groupId);
+		ContentType contentType = new ContentType();
+		contentType.setUuid(typeId);
+
+		_addSearchField(
+			searchFields, OptionalJournalArticleCriteria.FINDER,
+				OptionalJournalArticleCriteria.FIND_BY_GROUP);
+
+		_addSearchField(
+			searchFields, OptionalJournalArticleCriteria.GROUP_ID,
+				String.valueOf(groupId));
+
+		criteria.setSearchFieldValues(searchFields);
+
+		ContentService contentService =
+			MirageServiceFactory.getContentService();
+		try {
+
+			return contentService.contentSearchCount(criteria);
+
+		}
+		catch (CMSException ex) {
+			throw (SystemException) ex.getCause();
+		}
+
 	}
 
 	public JournalArticle getDisplayArticle(long groupId, String articleId)
 		throws PortalException, SystemException {
 
-		List<JournalArticle> articles = journalArticlePersistence.findByG_A_A(
-			groupId, articleId, true);
+		SearchCriteria criteria = new SearchCriteria();
+		List<SearchFieldValue> searchFields = new ArrayList<SearchFieldValue>();
+		List<JournalArticle> articles = null;
+
+		_addSearchField(
+			searchFields, OptionalJournalArticleCriteria.FINDER,
+				OptionalJournalArticleCriteria.FIND_BY_G_A_A);
+
+		_addSearchField(
+			searchFields, OptionalJournalArticleCriteria.GROUP_ID,
+				String.valueOf(groupId));
+
+		_addSearchField(
+			searchFields, OptionalJournalArticleCriteria.ARTICLE_ID, articleId);
+		criteria.setSearchFieldValues(searchFields);
+
+		criteria.setSearchFieldValues(searchFields);
+
+		ContentService contentService =
+			MirageServiceFactory.getContentService();
+		try {
+			List<Content> contents = contentService.searchContents(criteria);
+
+			articles = _getArticlesFromContents(contents);
+		}
+		catch (CMSException ex) {
+			throw (SystemException) ex.getCause();
+		}
 
 		if (articles.size() == 0) {
 			throw new NoSuchArticleException();
@@ -1193,7 +1318,7 @@ public class JournalArticleLocalServiceImpl
 			Date expirationDate = article.getExpirationDate();
 
 			if (article.getDisplayDate().before(now) &&
-				((expirationDate == null) || expirationDate.after(now))) {
+					((expirationDate == null) || expirationDate.after(now))) {
 
 				return article;
 			}
@@ -1212,15 +1337,40 @@ public class JournalArticleLocalServiceImpl
 			long groupId, String articleId, Boolean approved)
 		throws PortalException, SystemException {
 
+		SearchCriteria criteria = new SearchCriteria();
+		List<SearchFieldValue> searchFields = new ArrayList<SearchFieldValue>();
 		List<JournalArticle> articles = null;
 
+		_addSearchField(
+			searchFields, OptionalJournalArticleCriteria.FINDER,
+				OptionalJournalArticleCriteria.FIND_LATEST);
+
+		_addSearchField(
+			searchFields, OptionalJournalArticleCriteria.GROUP_ID,
+				String.valueOf(groupId));
+
+		_addSearchField(
+			searchFields, OptionalJournalArticleCriteria.ARTICLE_ID, articleId);
 		if (approved == null) {
-			articles = journalArticlePersistence.findByG_A(
-				groupId, articleId, 0, 1);
+			_addSearchField(
+				searchFields, OptionalJournalArticleCriteria.APPROVED, null);
 		}
 		else {
-			articles = journalArticlePersistence.findByG_A_A(
-				groupId, articleId, approved.booleanValue(), 0, 1);
+			_addSearchField(
+				searchFields, OptionalJournalArticleCriteria.APPROVED,
+					String.valueOf(approved.booleanValue()));
+		}
+		criteria.setSearchFieldValues(searchFields);
+
+		ContentService contentService =
+			MirageServiceFactory.getContentService();
+		try {
+			List<Content> contents = contentService.searchContents(criteria);
+
+			articles = _getArticlesFromContents(contents);
+		}
+		catch (CMSException ex) {
+			throw (SystemException) ex.getCause();
 		}
 
 		if (articles.size() == 0) {
@@ -1251,7 +1401,36 @@ public class JournalArticleLocalServiceImpl
 			long groupId, String structureId)
 		throws SystemException {
 
-		return journalArticlePersistence.findByG_S(groupId, structureId);
+		SearchCriteria criteria = new SearchCriteria();
+		List<SearchFieldValue> searchFields = new ArrayList<SearchFieldValue>();
+		List<JournalArticle> articles = null;
+		ContentType contentType = new ContentType();
+		contentType.setUuid(structureId);
+
+		_addSearchField(
+			searchFields, OptionalJournalArticleCriteria.FINDER,
+				OptionalJournalArticleCriteria.FIND_BY_G_S);
+
+		_addSearchField(
+			searchFields, OptionalJournalArticleCriteria.GROUP_ID,
+				String.valueOf(groupId));
+
+		criteria.setSearchFieldValues(searchFields);
+
+		ContentService contentService =
+			MirageServiceFactory.getContentService();
+		try {
+			List<Content> contents =
+				contentService.searchContentsByType(contentType, criteria);
+
+			articles = _getArticlesFromContents(contents);
+		}
+		catch (CMSException ex) {
+			throw (SystemException) ex.getCause();
+		}
+
+		return articles;
+
 	}
 
 	public List<JournalArticle> getStructureArticles(
@@ -1259,21 +1438,110 @@ public class JournalArticleLocalServiceImpl
 			OrderByComparator obc)
 		throws SystemException {
 
-		return journalArticlePersistence.findByG_S(
-			groupId, structureId, start, end, obc);
+		SearchCriteria criteria = new SearchCriteria();
+		List<SearchFieldValue> searchFields = new ArrayList<SearchFieldValue>();
+		List<JournalArticle> articles = null;
+		ContentType contentType = new ContentType();
+		contentType.setUuid(structureId);
+
+		_addSearchField(
+			searchFields, OptionalJournalArticleCriteria.FINDER,
+				OptionalJournalArticleCriteria.FIND_BY_G_S_ORDER);
+
+		_addSearchField(
+			searchFields, OptionalJournalArticleCriteria.GROUP_ID,
+				String.valueOf(groupId));
+
+		_addSearchField(
+			searchFields, OptionalJournalArticleCriteria.RANGE_START,
+				String.valueOf(start));
+
+		_addSearchField(
+			searchFields, OptionalJournalArticleCriteria.RANGE_END,
+				String.valueOf(end));
+
+		criteria.setSearchFieldValues(searchFields);
+		criteria.setOrderByComparator(obc);
+
+		ContentService contentService =
+			MirageServiceFactory.getContentService();
+		try {
+			List<Content> contents =
+				contentService.searchContentsByType(contentType, criteria);
+
+			articles = _getArticlesFromContents(contents);
+		}
+		catch (CMSException ex) {
+			throw (SystemException) ex.getCause();
+		}
+		return articles;
+
 	}
 
 	public int getStructureArticlesCount(long groupId, String structureId)
 		throws SystemException {
 
-		return journalArticlePersistence.countByG_S(groupId, structureId);
+		SearchCriteria criteria = new SearchCriteria();
+		List<SearchFieldValue> searchFields = new ArrayList<SearchFieldValue>();
+		ContentType contentType = new ContentType();
+		contentType.setUuid(structureId);
+
+		_addSearchField(
+			searchFields, OptionalJournalArticleCriteria.FINDER,
+				OptionalJournalArticleCriteria.COUNT_BY_G_S);
+
+		_addSearchField(
+			searchFields, OptionalJournalArticleCriteria.GROUP_ID,
+				String.valueOf(groupId));
+
+		criteria.setSearchFieldValues(searchFields);
+
+		ContentService contentService =
+			MirageServiceFactory.getContentService();
+		try {
+
+			return contentService.contentSearchCount(contentType, criteria);
+
+		}
+		catch (CMSException ex) {
+			throw (SystemException) ex.getCause();
+		}
+
 	}
 
 	public List<JournalArticle> getTemplateArticles(
 			long groupId, String templateId)
 		throws SystemException {
 
-		return journalArticlePersistence.findByG_T(groupId, templateId);
+		SearchCriteria criteria = new SearchCriteria();
+		List<SearchFieldValue> searchFields = new ArrayList<SearchFieldValue>();
+		List<JournalArticle> articles = null;
+		_addSearchField(
+			searchFields, OptionalJournalArticleCriteria.FINDER,
+				OptionalJournalArticleCriteria.FIND_BY_G_T);
+
+		_addSearchField(
+			searchFields, OptionalJournalArticleCriteria.GROUP_ID,
+				String.valueOf(groupId));
+
+		_addSearchField(
+			searchFields, OptionalJournalArticleCriteria.TEMPLATE_ID,
+				templateId);
+
+		criteria.setSearchFieldValues(searchFields);
+
+		ContentService contentService =
+			MirageServiceFactory.getContentService();
+		try {
+			List<Content> contents = contentService.searchContents(criteria);
+
+			articles = _getArticlesFromContents(contents);
+		}
+		catch (CMSException ex) {
+			throw (SystemException) ex.getCause();
+		}
+		return articles;
+
 	}
 
 	public List<JournalArticle> getTemplateArticles(
@@ -1281,14 +1549,78 @@ public class JournalArticleLocalServiceImpl
 			OrderByComparator obc)
 		throws SystemException {
 
-		return journalArticlePersistence.findByG_T(
-			groupId, templateId, start, end, obc);
+		SearchCriteria criteria = new SearchCriteria();
+		List<SearchFieldValue> searchFields = new ArrayList<SearchFieldValue>();
+		List<JournalArticle> articles = null;
+
+		_addSearchField(
+			searchFields, OptionalJournalArticleCriteria.FINDER,
+				OptionalJournalArticleCriteria.FIND_BY_G_T_ORDER);
+
+		_addSearchField(
+			searchFields, OptionalJournalArticleCriteria.GROUP_ID,
+				String.valueOf(groupId));
+
+		_addSearchField(
+			searchFields, OptionalJournalArticleCriteria.TEMPLATE_ID,
+				templateId);
+
+		_addSearchField(
+			searchFields, OptionalJournalArticleCriteria.RANGE_START,
+				String.valueOf(start));
+
+		_addSearchField(
+			searchFields, OptionalJournalArticleCriteria.RANGE_END,
+				String.valueOf(end));
+
+		criteria.setSearchFieldValues(searchFields);
+		criteria.setOrderByComparator(obc);
+
+		ContentService contentService =
+			MirageServiceFactory.getContentService();
+		try {
+			List<Content> contents = contentService.searchContents(criteria);
+
+			articles = _getArticlesFromContents(contents);
+		}
+		catch (CMSException ex) {
+			throw (SystemException) ex.getCause();
+		}
+		return articles;
+
 	}
 
 	public int getTemplateArticlesCount(long groupId, String templateId)
 		throws SystemException {
 
-		return journalArticlePersistence.countByG_T(groupId, templateId);
+		SearchCriteria criteria = new SearchCriteria();
+		List<SearchFieldValue> searchFields = new ArrayList<SearchFieldValue>();
+
+		_addSearchField(
+			searchFields, OptionalJournalArticleCriteria.FINDER,
+				OptionalJournalArticleCriteria.COUNT_BY_G_S);
+
+		_addSearchField(
+			searchFields, OptionalJournalArticleCriteria.GROUP_ID,
+				String.valueOf(groupId));
+
+		_addSearchField(
+			searchFields, OptionalJournalArticleCriteria.TEMPLATE_ID,
+				templateId);
+
+		criteria.setSearchFieldValues(searchFields);
+
+		ContentService contentService =
+			MirageServiceFactory.getContentService();
+		try {
+
+			return contentService.contentSearchCount(criteria);
+
+		}
+		catch (CMSException ex) {
+			throw (SystemException) ex.getCause();
+		}
+
 	}
 
 	public boolean hasArticle(long groupId, String articleId)
@@ -1328,7 +1660,9 @@ public class JournalArticleLocalServiceImpl
 		}
 	}
 
-	public void reIndex(String[] ids) throws SystemException {
+	public void reIndex(String[] ids)
+		throws SystemException {
+
 		if (SearchEngineUtil.isIndexReadOnly()) {
 			return;
 		}
@@ -1336,8 +1670,7 @@ public class JournalArticleLocalServiceImpl
 		long companyId = GetterUtil.getLong(ids[0]);
 
 		try {
-			for (JournalArticle article :
-					journalArticlePersistence.findByCompanyId(companyId)) {
+			for (JournalArticle article : _getArticlesByCompanyId(companyId)) {
 
 				if (article.isApproved() && article.isIndexable()) {
 					long resourcePrimKey = article.getResourcePrimKey();
@@ -1350,15 +1683,16 @@ public class JournalArticleLocalServiceImpl
 					String type = article.getType();
 					Date displayDate = article.getDisplayDate();
 
-					String[] tagsEntries = tagsEntryLocalService.getEntryNames(
-						JournalArticle.class.getName(), resourcePrimKey);
+					String[] tagsEntries =
+						tagsEntryLocalService.getEntryNames(
+							JournalArticle.class.getName(), resourcePrimKey);
 
 					try {
 						com.liferay.portal.kernel.search.Document doc =
 							Indexer.getArticleDocument(
 								companyId, groupId, articleId, version, title,
-								description, content, type, displayDate,
-								tagsEntries);
+									description, content, type, displayDate,
+										tagsEntries);
 
 						SearchEngineUtil.addDocument(companyId, doc);
 					}
@@ -1380,8 +1714,7 @@ public class JournalArticleLocalServiceImpl
 			long groupId, String articleId, double version, String languageId)
 		throws PortalException, SystemException {
 
-		JournalArticle article = journalArticlePersistence.findByG_A_V(
-			groupId, articleId, version);
+		JournalArticle article = getArticle(groupId, articleId, version);
 
 		String content = article.getContent();
 
@@ -1389,13 +1722,23 @@ public class JournalArticleLocalServiceImpl
 			content = JournalUtil.removeArticleLocale(content, languageId);
 		}
 		else {
-			content = LocalizationUtil.removeLocalization(
-				content, "static-content", languageId, true);
+			content =
+				LocalizationUtil.removeLocalization(
+					content, "static-content", languageId, true);
 		}
 
 		article.setContent(content);
-
-		journalArticlePersistence.update(article, false);
+		JournalArticleContent articleContent =
+			new JournalArticleContent(article);
+		ContentService contentService =
+			MirageServiceFactory.getContentService();
+		try {
+			contentService.updateContent(articleContent, null);
+		}
+		catch (CMSException ce) {
+			_throwException(ce);
+		}
+		article = articleContent.getArticle();
 
 		return article;
 	}
@@ -1453,15 +1796,107 @@ public class JournalArticleLocalServiceImpl
 	public List<JournalArticle> search(
 			long companyId, long groupId, String keywords, Double version,
 			String type, String structureId, String templateId,
-			Date displayDateGT, Date displayDateLT, Boolean approved,
-			Boolean expired, Date reviewDate, int start, int end,
-			OrderByComparator obc)
+			Date displayDateGT,Date displayDateLT, Boolean approved,
+			Boolean expired, Date reviewDate,
+			int start, int end, OrderByComparator obc)
 		throws SystemException {
 
-		return journalArticleFinder.findByKeywords(
-			companyId, groupId, keywords, version, type, structureId,
-			templateId, displayDateGT, displayDateLT, approved, expired,
-			reviewDate, start, end, obc);
+		SearchCriteria criteria = new SearchCriteria();
+		List<SearchFieldValue> searchFields = new ArrayList<SearchFieldValue>();
+
+		Map<String, String> fields = new HashMap<String, String>();
+		fields.put(
+			OptionalJournalArticleCriteria.FINDER,
+			OptionalJournalArticleCriteria.FIND_BY_KEYWORDS);
+		fields.put(
+			OptionalJournalArticleCriteria.GROUP_ID, String.valueOf(groupId));
+		fields.put(
+			OptionalJournalArticleCriteria.COMPANY_ID,
+			String.valueOf(companyId));
+		fields.put(OptionalJournalArticleCriteria.KEYWORDS, keywords);
+		if (version == null) {
+			fields.put(OptionalJournalArticleCriteria.VERSION, null);
+		}
+		else {
+			fields.put(
+				OptionalJournalArticleCriteria.VERSION,
+					String.valueOf(version));
+		}
+		fields.put(OptionalJournalArticleCriteria.TYPE, type);
+		if (structureId == null) {
+			fields.put(OptionalJournalArticleCriteria.STRUCTURE_ID, null);
+		}
+		else {
+			fields.put(
+				OptionalJournalArticleCriteria.STRUCTURE_ID,
+					String.valueOf(structureId));
+		}
+		if (templateId == null) {
+			fields.put(OptionalJournalArticleCriteria.TEMPLATE_ID, null);
+		}
+		else {
+			fields.put(
+				OptionalJournalArticleCriteria.TEMPLATE_ID,
+					String.valueOf(templateId));
+		}
+		if ((displayDateGT == null)) {
+			fields.put(OptionalJournalArticleCriteria.DISPLAY_DATE_GT, null);
+		}
+		else {
+			fields.put(
+				OptionalJournalArticleCriteria.DISPLAY_DATE_GT,
+					String.valueOf(displayDateGT.getTime()));
+		}
+		if ((displayDateLT == null)) {
+			fields.put(OptionalJournalArticleCriteria.DISPLAY_DATE_LT, null);
+		}
+		else {
+			fields.put(
+				OptionalJournalArticleCriteria.DISPLAY_DATE_LT,
+					String.valueOf(displayDateLT.getTime()));
+		}
+		if (approved == null) {
+			fields.put(OptionalJournalArticleCriteria.APPROVED, null);
+		}
+		else {
+			fields.put(
+				OptionalJournalArticleCriteria.APPROVED, approved.toString());
+		}
+		if (expired == null) {
+			fields.put(OptionalJournalArticleCriteria.EXPIRED, null);
+		}
+		else {
+			fields.put(
+				OptionalJournalArticleCriteria.EXPIRED, expired.toString());
+		}
+		if ((reviewDate == null)) {
+			fields.put(OptionalJournalArticleCriteria.REVIEW_DATE, null);
+		}
+		else {
+			fields.put(
+				OptionalJournalArticleCriteria.REVIEW_DATE,
+					String.valueOf(reviewDate.getTime()));
+		}
+		fields.put(
+			OptionalJournalArticleCriteria.RANGE_START, String.valueOf(start));
+		fields.put(
+			OptionalJournalArticleCriteria.RANGE_END, String.valueOf(end));
+
+		_addSearchFields(searchFields, fields);
+		criteria.setSearchFieldValues(searchFields);
+		criteria.setOrderByComparator(obc);
+
+		ContentService contentService =
+			MirageServiceFactory.getContentService();
+		try {
+			List<Content> contents = contentService.searchContents(criteria);
+
+			return _getArticlesFromContents(contents);
+		}
+		catch (CMSException ex) {
+			throw (SystemException) ex.getCause();
+		}
+
 	}
 
 	public List<JournalArticle> search(
@@ -1469,14 +1904,116 @@ public class JournalArticleLocalServiceImpl
 			String title, String description, String content, String type,
 			String structureId, String templateId, Date displayDateGT,
 			Date displayDateLT, Boolean approved, Boolean expired,
-			Date reviewDate, boolean andOperator, int start, int end,
+			Date reviewDate,boolean andOperator, int start, int end,
 			OrderByComparator obc)
 		throws SystemException {
 
-		return journalArticleFinder.findByC_G_A_V_T_D_C_T_S_T_D_A_E_R(
-			companyId, groupId, articleId, version, title, description, content,
-			type, structureId, templateId, displayDateGT, displayDateLT,
-			approved, expired, reviewDate, andOperator, start, end, obc);
+		SearchCriteria criteria = new SearchCriteria();
+		List<SearchFieldValue> searchFields = new ArrayList<SearchFieldValue>();
+		String typeId = String.valueOf(groupId);
+		ContentType contentType = new ContentType();
+		contentType.setUuid(typeId);
+
+		Map<String, String> fields = new HashMap<String, String>();
+		fields.put(
+			OptionalJournalArticleCriteria.FINDER,
+				OptionalJournalArticleCriteria
+					.FIND_BY_C_G_A_V_T_D_C_T_S_T_D_A_E_R);
+		fields.put(
+			OptionalJournalArticleCriteria.GROUP_ID, String.valueOf(groupId));
+		fields.put(
+			OptionalJournalArticleCriteria.COMPANY_ID,
+			String.valueOf(companyId));
+		fields.put(OptionalJournalArticleCriteria.ARTICLE_ID, articleId);
+		if (version == null) {
+			fields.put(OptionalJournalArticleCriteria.VERSION, null);
+		}
+		else {
+			fields.put(
+				OptionalJournalArticleCriteria.VERSION,
+					String.valueOf(version));
+		}
+		fields.put(OptionalJournalArticleCriteria.TITLE, title);
+		fields.put(OptionalJournalArticleCriteria.DESCRIPTION, description);
+		fields.put(OptionalJournalArticleCriteria.CONTENT, content);
+		fields.put(OptionalJournalArticleCriteria.TYPE, type);
+		if (structureId == null) {
+			fields.put(OptionalJournalArticleCriteria.STRUCTURE_ID, null);
+		}
+		else {
+			fields.put(
+				OptionalJournalArticleCriteria.STRUCTURE_ID,
+					String.valueOf(structureId));
+		}
+		if (templateId == null) {
+			fields.put(OptionalJournalArticleCriteria.TEMPLATE_ID, null);
+		}
+		else {
+			fields.put(
+				OptionalJournalArticleCriteria.TEMPLATE_ID,
+					String.valueOf(templateId));
+		}
+		if ((displayDateGT == null)) {
+			fields.put(OptionalJournalArticleCriteria.DISPLAY_DATE_GT, null);
+		}
+		else {
+			fields.put(
+				OptionalJournalArticleCriteria.DISPLAY_DATE_GT,
+					String.valueOf(displayDateGT.getTime()));
+		}
+		if ((displayDateLT == null)) {
+			fields.put(OptionalJournalArticleCriteria.DISPLAY_DATE_LT, null);
+		}
+		else {
+			fields.put(
+				OptionalJournalArticleCriteria.DISPLAY_DATE_LT,
+					String.valueOf(displayDateLT.getTime()));
+		}
+		if (approved == null) {
+			fields.put(OptionalJournalArticleCriteria.APPROVED, null);
+		}
+		else {
+			fields.put(
+				OptionalJournalArticleCriteria.APPROVED, approved.toString());
+		}
+		if (expired == null) {
+			fields.put(OptionalJournalArticleCriteria.EXPIRED, null);
+		}
+		else {
+			fields.put(
+				OptionalJournalArticleCriteria.EXPIRED, expired.toString());
+		}
+		fields.put(
+			OptionalJournalArticleCriteria.AND_OPERATOR,
+				String.valueOf(andOperator));
+		if ((reviewDate == null)) {
+			fields.put(OptionalJournalArticleCriteria.REVIEW_DATE, null);
+		}
+		else {
+			fields.put(
+				OptionalJournalArticleCriteria.REVIEW_DATE,
+					String.valueOf(reviewDate.getTime()));
+		}
+		fields.put(
+			OptionalJournalArticleCriteria.RANGE_START, String.valueOf(start));
+		fields.put(
+			OptionalJournalArticleCriteria.RANGE_END, String.valueOf(end));
+
+		_addSearchFields(searchFields, fields);
+		criteria.setSearchFieldValues(searchFields);
+		criteria.setOrderByComparator(obc);
+
+		ContentService contentService =
+			MirageServiceFactory.getContentService();
+		try {
+			List<Content> contents = contentService.searchContents(criteria);
+
+			return _getArticlesFromContents(contents);
+		}
+		catch (CMSException ex) {
+			throw (SystemException) ex.getCause();
+		}
+
 	}
 
 	public List<JournalArticle> search(
@@ -1484,27 +2021,209 @@ public class JournalArticleLocalServiceImpl
 			String title, String description, String content, String type,
 			String[] structureIds, String[] templateIds, Date displayDateGT,
 			Date displayDateLT, Boolean approved, Boolean expired,
-			Date reviewDate, boolean andOperator, int start, int end,
+			Date reviewDate,boolean andOperator, int start, int end,
 			OrderByComparator obc)
 		throws SystemException {
 
-		return journalArticleFinder.findByC_G_A_V_T_D_C_T_S_T_D_A_E_R(
-			companyId, groupId, articleId, version, title, description, content,
-			type, structureIds, templateIds, displayDateGT, displayDateLT,
-			approved, expired, reviewDate, andOperator, start, end, obc);
+		SearchCriteria criteria = new SearchCriteria();
+		List<SearchFieldValue> searchFields = new ArrayList<SearchFieldValue>();
+		String typeId = String.valueOf(groupId);
+		ContentType contentType = new ContentType();
+		contentType.setUuid(typeId);
+
+		Map<String, String> fields = new HashMap<String, String>();
+		fields.put(
+			OptionalJournalArticleCriteria.FINDER,
+				OptionalJournalArticleCriteria.FIND_BY_STRUCT_AND_TEMPLATE_IDS);
+		fields.put(
+			OptionalJournalArticleCriteria.GROUP_ID, String.valueOf(groupId));
+		fields.put(
+			OptionalJournalArticleCriteria.COMPANY_ID,
+				String.valueOf(companyId));
+		fields.put(OptionalJournalArticleCriteria.ARTICLE_ID, articleId);
+		if (version == null) {
+			fields.put(OptionalJournalArticleCriteria.VERSION, null);
+		}
+		else {
+			fields.put(
+				OptionalJournalArticleCriteria.VERSION,
+					String.valueOf(version));
+		}
+		fields.put(OptionalJournalArticleCriteria.TITLE, title);
+		fields.put(OptionalJournalArticleCriteria.DESCRIPTION, description);
+		fields.put(OptionalJournalArticleCriteria.CONTENT, content);
+		fields.put(OptionalJournalArticleCriteria.TYPE, type);
+		if ((displayDateGT == null)) {
+			fields.put(OptionalJournalArticleCriteria.DISPLAY_DATE_GT, null);
+		}
+		else {
+			fields.put(
+				OptionalJournalArticleCriteria.DISPLAY_DATE_GT,
+					String.valueOf(displayDateGT.getTime()));
+		}
+		if ((displayDateLT == null)) {
+			fields.put(OptionalJournalArticleCriteria.DISPLAY_DATE_LT, null);
+		}
+		else {
+			fields.put(
+				OptionalJournalArticleCriteria.DISPLAY_DATE_LT,
+					String.valueOf(displayDateLT.getTime()));
+		}
+		if (approved == null) {
+			fields.put(OptionalJournalArticleCriteria.APPROVED, null);
+		}
+		else {
+			fields.put(
+				OptionalJournalArticleCriteria.APPROVED, approved.toString());
+		}
+		if (expired == null) {
+			fields.put(OptionalJournalArticleCriteria.EXPIRED, null);
+		}
+		else {
+			fields.put(
+				OptionalJournalArticleCriteria.EXPIRED, expired.toString());
+		}
+		fields.put(
+			OptionalJournalArticleCriteria.AND_OPERATOR,
+			String.valueOf(andOperator));
+		if ((reviewDate == null)) {
+			fields.put(OptionalJournalArticleCriteria.REVIEW_DATE, null);
+		}
+		else {
+			fields.put(
+				OptionalJournalArticleCriteria.REVIEW_DATE,
+					String.valueOf(reviewDate.getTime()));
+		}
+		fields.put(
+			OptionalJournalArticleCriteria.RANGE_START, String.valueOf(start));
+		fields.put(
+			OptionalJournalArticleCriteria.RANGE_END, String.valueOf(end));
+
+		_addSearchFields(searchFields, fields);
+		_addSearchFieldAndValues(
+			searchFields, OptionalJournalArticleCriteria.STRUCTURE_IDS,
+				structureIds);
+		_addSearchFieldAndValues(
+			searchFields, OptionalJournalArticleCriteria.TEMPLATE_IDS,
+				templateIds);
+
+		criteria.setSearchFieldValues(searchFields);
+		criteria.setOrderByComparator(obc);
+
+		ContentService contentService =
+			MirageServiceFactory.getContentService();
+		try {
+			List<Content> contents = contentService.searchContents(criteria);
+
+			return _getArticlesFromContents(contents);
+		}
+		catch (CMSException ex) {
+			throw (SystemException) ex.getCause();
+		}
+
 	}
 
 	public int searchCount(
 			long companyId, long groupId, String keywords, Double version,
 			String type, String structureId, String templateId,
-			Date displayDateGT, Date displayDateLT, Boolean approved,
+			Date displayDateGT,Date displayDateLT, Boolean approved,
 			Boolean expired, Date reviewDate)
 		throws SystemException {
 
-		return journalArticleFinder.countByKeywords(
-			companyId, groupId, keywords, version, type, structureId,
-			templateId, displayDateGT, displayDateLT, approved, expired,
-			reviewDate);
+		SearchCriteria criteria = new SearchCriteria();
+		List<SearchFieldValue> searchFields = new ArrayList<SearchFieldValue>();
+		String typeId = String.valueOf(groupId);
+		ContentType contentType = new ContentType();
+		contentType.setUuid(typeId);
+
+		Map<String, String> fields = new HashMap<String, String>();
+		fields.put(
+			OptionalJournalArticleCriteria.FINDER,
+				OptionalJournalArticleCriteria.COUNT_BY_KEYWORDS);
+		fields.put(
+			OptionalJournalArticleCriteria.GROUP_ID, String.valueOf(groupId));
+		fields.put(
+			OptionalJournalArticleCriteria.COMPANY_ID,
+				String.valueOf(companyId));
+		fields.put(OptionalJournalArticleCriteria.KEYWORDS, keywords);
+		if (version == null) {
+			fields.put(OptionalJournalArticleCriteria.VERSION, null);
+		}
+		else {
+			fields.put(
+				OptionalJournalArticleCriteria.VERSION,
+					String.valueOf(version));
+		}
+		fields.put(OptionalJournalArticleCriteria.TYPE, type);
+		if (structureId == null) {
+			fields.put(OptionalJournalArticleCriteria.STRUCTURE_ID, null);
+		}
+		else {
+			fields.put(
+				OptionalJournalArticleCriteria.STRUCTURE_ID,
+					String.valueOf(structureId));
+		}
+		if (templateId == null) {
+			fields.put(OptionalJournalArticleCriteria.TEMPLATE_ID, null);
+		}
+		else {
+			fields.put(
+				OptionalJournalArticleCriteria.TEMPLATE_ID,
+					String.valueOf(templateId));
+		}
+		if ((displayDateGT == null)) {
+			fields.put(OptionalJournalArticleCriteria.DISPLAY_DATE_GT, null);
+		}
+		else {
+			fields.put(
+				OptionalJournalArticleCriteria.DISPLAY_DATE_GT,
+					String.valueOf(displayDateGT.getTime()));
+		}
+		if ((displayDateLT == null)) {
+			fields.put(OptionalJournalArticleCriteria.DISPLAY_DATE_LT, null);
+		}
+		else {
+			fields.put(
+				OptionalJournalArticleCriteria.DISPLAY_DATE_LT,
+					String.valueOf(displayDateLT.getTime()));
+		}
+		if (approved == null) {
+			fields.put(OptionalJournalArticleCriteria.APPROVED, null);
+		}
+		else {
+			fields.put(
+				OptionalJournalArticleCriteria.APPROVED, approved.toString());
+		}
+		if (expired == null) {
+			fields.put(OptionalJournalArticleCriteria.EXPIRED, null);
+		}
+		else {
+			fields.put(
+				OptionalJournalArticleCriteria.EXPIRED, expired.toString());
+		}
+		if ((reviewDate == null)) {
+			fields.put(OptionalJournalArticleCriteria.REVIEW_DATE, null);
+		}
+		else {
+			fields.put(
+				OptionalJournalArticleCriteria.REVIEW_DATE,
+					String.valueOf(reviewDate.getTime()));
+		}
+
+		_addSearchFields(searchFields, fields);
+		criteria.setSearchFieldValues(searchFields);
+
+		ContentService contentService =
+			MirageServiceFactory.getContentService();
+		try {
+
+			return contentService.contentSearchCount(contentType, criteria);
+
+		}
+		catch (CMSException ex) {
+			throw (SystemException) ex.getCause();
+		}
+
 	}
 
 	public int searchCount(
@@ -1512,13 +2231,110 @@ public class JournalArticleLocalServiceImpl
 			String title, String description, String content, String type,
 			String structureId, String templateId, Date displayDateGT,
 			Date displayDateLT, Boolean approved, Boolean expired,
-			Date reviewDate, boolean andOperator)
+			Date reviewDate,boolean andOperator)
 		throws SystemException {
 
-		return journalArticleFinder.countByC_G_A_V_T_D_C_T_S_T_D_A_E_R(
-			companyId, groupId, articleId, version, title, description, content,
-			type, structureId, templateId, displayDateGT, displayDateLT,
-			approved, expired, reviewDate, andOperator);
+		SearchCriteria criteria = new SearchCriteria();
+		List<SearchFieldValue> searchFields = new ArrayList<SearchFieldValue>();
+		String typeId = String.valueOf(groupId);
+		ContentType contentType = new ContentType();
+		contentType.setUuid(typeId);
+
+		Map<String, String> fields = new HashMap<String, String>();
+		fields.put(
+			OptionalJournalArticleCriteria.FINDER,
+			OptionalJournalArticleCriteria.
+				COUNT_BY_C_G_A_V_T_D_C_T_S_T_D_A_E_R);
+		fields.put(
+			OptionalJournalArticleCriteria.GROUP_ID, String.valueOf(groupId));
+		fields.put(
+			OptionalJournalArticleCriteria.COMPANY_ID,
+				String.valueOf(companyId));
+		fields.put(OptionalJournalArticleCriteria.ARTICLE_ID, articleId);
+		if (version == null) {
+			fields.put(OptionalJournalArticleCriteria.VERSION, null);
+		}
+		else {
+			fields.put(
+				OptionalJournalArticleCriteria.VERSION,
+					String.valueOf(version));
+		}
+		fields.put(OptionalJournalArticleCriteria.TITLE, title);
+		fields.put(OptionalJournalArticleCriteria.DESCRIPTION, description);
+		fields.put(OptionalJournalArticleCriteria.CONTENT, content);
+		fields.put(OptionalJournalArticleCriteria.TYPE, type);
+		if (structureId == null) {
+			fields.put(OptionalJournalArticleCriteria.STRUCTURE_ID, null);
+		}
+		else {
+			fields.put(
+				OptionalJournalArticleCriteria.STRUCTURE_ID,
+					String.valueOf(structureId));
+		}
+		if (templateId == null) {
+			fields.put(OptionalJournalArticleCriteria.TEMPLATE_ID, null);
+		}
+		else {
+			fields.put(
+				OptionalJournalArticleCriteria.TEMPLATE_ID,
+					String.valueOf(templateId));
+		}
+		if ((displayDateGT == null)) {
+			fields.put(OptionalJournalArticleCriteria.DISPLAY_DATE_GT, null);
+		}
+		else {
+			fields.put(
+				OptionalJournalArticleCriteria.DISPLAY_DATE_GT,
+					String.valueOf(displayDateGT.getTime()));
+		}
+		if ((displayDateLT == null)) {
+			fields.put(OptionalJournalArticleCriteria.DISPLAY_DATE_LT, null);
+		}
+		else {
+			fields.put(
+				OptionalJournalArticleCriteria.DISPLAY_DATE_LT,
+					String.valueOf(displayDateLT.getTime()));
+		}
+		if (approved == null) {
+			fields.put(OptionalJournalArticleCriteria.APPROVED, null);
+		}
+		else {
+			fields.put(
+				OptionalJournalArticleCriteria.APPROVED, approved.toString());
+		}
+		if (expired == null) {
+			fields.put(OptionalJournalArticleCriteria.EXPIRED, null);
+		}
+		else {
+			fields.put(
+				OptionalJournalArticleCriteria.EXPIRED, expired.toString());
+		}
+		fields.put(
+			OptionalJournalArticleCriteria.AND_OPERATOR,
+				String.valueOf(andOperator));
+		if ((reviewDate == null)) {
+			fields.put(OptionalJournalArticleCriteria.REVIEW_DATE, null);
+		}
+		else {
+			fields.put(
+				OptionalJournalArticleCriteria.REVIEW_DATE,
+					String.valueOf(reviewDate.getTime()));
+		}
+
+		_addSearchFields(searchFields, fields);
+		criteria.setSearchFieldValues(searchFields);
+
+		ContentService contentService =
+			MirageServiceFactory.getContentService();
+		try {
+
+			return contentService.contentSearchCount(contentType, criteria);
+
+		}
+		catch (CMSException ex) {
+			throw (SystemException) ex.getCause();
+		}
+
 	}
 
 	public int searchCount(
@@ -1526,13 +2342,100 @@ public class JournalArticleLocalServiceImpl
 			String title, String description, String content, String type,
 			String[] structureIds, String[] templateIds, Date displayDateGT,
 			Date displayDateLT, Boolean approved, Boolean expired,
-			Date reviewDate, boolean andOperator)
+			Date reviewDate,boolean andOperator)
 		throws SystemException {
 
-		return journalArticleFinder.countByC_G_A_V_T_D_C_T_S_T_D_A_E_R(
-			companyId, groupId, articleId, version, title, description, content,
-			type, structureIds, templateIds, displayDateGT, displayDateLT,
-			approved, expired, reviewDate, andOperator);
+		SearchCriteria criteria = new SearchCriteria();
+		List<SearchFieldValue> searchFields = new ArrayList<SearchFieldValue>();
+		String typeId = String.valueOf(groupId);
+		ContentType contentType = new ContentType();
+		contentType.setUuid(typeId);
+
+		Map<String, String> fields = new HashMap<String, String>();
+		fields.put(
+			OptionalJournalArticleCriteria.FINDER,
+				OptionalJournalArticleCriteria
+					.COUNT_BY_STRUCT_AND_TEMPLATE_IDS);
+		fields.put(
+			OptionalJournalArticleCriteria.GROUP_ID, String.valueOf(groupId));
+		fields.put(
+			OptionalJournalArticleCriteria.COMPANY_ID,
+				String.valueOf(companyId));
+		fields.put(OptionalJournalArticleCriteria.ARTICLE_ID, articleId);
+		if (version == null) {
+			fields.put(OptionalJournalArticleCriteria.VERSION, null);
+		}
+		else {
+			fields.put(
+				OptionalJournalArticleCriteria.VERSION,
+					String.valueOf(version));
+		}
+		fields.put(OptionalJournalArticleCriteria.TITLE, title);
+		fields.put(OptionalJournalArticleCriteria.DESCRIPTION, description);
+		fields.put(OptionalJournalArticleCriteria.CONTENT, content);
+		fields.put(OptionalJournalArticleCriteria.TYPE, type);
+		if ((displayDateGT == null)) {
+			fields.put(OptionalJournalArticleCriteria.DISPLAY_DATE_GT, null);
+		}
+		else {
+			fields.put(
+				OptionalJournalArticleCriteria.DISPLAY_DATE_GT,
+					String.valueOf(displayDateGT.getTime()));
+		}
+		if ((displayDateLT == null)) {
+			fields.put(OptionalJournalArticleCriteria.DISPLAY_DATE_LT, null);
+		}
+		else {
+			fields.put(
+				OptionalJournalArticleCriteria.DISPLAY_DATE_LT,
+					String.valueOf(displayDateLT.getTime()));
+		}
+		if (approved == null) {
+			fields.put(OptionalJournalArticleCriteria.APPROVED, null);
+		}
+		else {
+			fields.put(
+				OptionalJournalArticleCriteria.APPROVED, approved.toString());
+		}
+		if (expired == null) {
+			fields.put(OptionalJournalArticleCriteria.EXPIRED, null);
+		}
+		else {
+			fields.put(
+				OptionalJournalArticleCriteria.EXPIRED, expired.toString());
+		}
+		fields.put(
+			OptionalJournalArticleCriteria.AND_OPERATOR,
+				String.valueOf(andOperator));
+		if ((reviewDate == null)) {
+			fields.put(OptionalJournalArticleCriteria.REVIEW_DATE, null);
+		}
+		else {
+			fields.put(
+				OptionalJournalArticleCriteria.REVIEW_DATE,
+					String.valueOf(reviewDate.getTime()));
+		}
+
+		_addSearchFields(searchFields, fields);
+		_addSearchFieldAndValues(
+			searchFields, OptionalJournalArticleCriteria.STRUCTURE_IDS,
+				structureIds);
+		_addSearchFieldAndValues(
+			searchFields, OptionalJournalArticleCriteria.TEMPLATE_IDS,
+				templateIds);
+
+		criteria.setSearchFieldValues(searchFields);
+
+		ContentService contentService =
+			MirageServiceFactory.getContentService();
+		try {
+
+			return contentService.contentSearchCount(contentType, criteria);
+		}
+		catch (CMSException ex) {
+			throw (SystemException) ex.getCause();
+		}
+
 	}
 
 	public JournalArticle updateArticle(
@@ -1542,163 +2445,79 @@ public class JournalArticleLocalServiceImpl
 			int displayDateMonth, int displayDateDay, int displayDateYear,
 			int displayDateHour, int displayDateMinute, int expirationDateMonth,
 			int expirationDateDay, int expirationDateYear,
-			int expirationDateHour, int expirationDateMinute,
-			boolean neverExpire, int reviewDateMonth, int reviewDateDay,
-			int reviewDateYear, int reviewDateHour, int reviewDateMinute,
-			boolean neverReview, boolean indexable, boolean smallImage,
-			String smallImageURL, File smallFile, Map<String, byte[]> images,
-			String articleURL, PortletPreferences prefs, String[] tagsEntries)
+			int expirationDateHour,int expirationDateMinute,
+			boolean neverExpire, int reviewDateMonth,int reviewDateDay,
+			int reviewDateYear, int reviewDateHour,int reviewDateMinute,
+			boolean neverReview, boolean indexable,boolean smallImage,
+			String smallImageURL, File smallFile,Map<String, byte[]> images,
+			String articleURL,PortletPreferences prefs, String[] tagsEntries)
 		throws PortalException, SystemException {
 
 		// Article
 
-		User user = userPersistence.findByPrimaryKey(userId);
-		articleId = articleId.trim().toUpperCase();
+		JournalArticle article = new JournalArticleImpl();
 
-		Date displayDate = PortalUtil.getDate(
-			displayDateMonth, displayDateDay, displayDateYear,
-			displayDateHour, displayDateMinute, user.getTimeZone(),
-			new ArticleDisplayDateException());
-
-		Date expirationDate = null;
-
-		if (!neverExpire) {
-			expirationDate = PortalUtil.getDate(
-				expirationDateMonth, expirationDateDay, expirationDateYear,
-				expirationDateHour, expirationDateMinute, user.getTimeZone(),
-				new ArticleExpirationDateException());
-		}
-
-		Date reviewDate = null;
-
-		if (!neverReview) {
-			reviewDate = PortalUtil.getDate(
-				reviewDateMonth, reviewDateDay, reviewDateYear, reviewDateHour,
-				reviewDateMinute, user.getTimeZone(),
-				new ArticleReviewDateException());
-		}
-
-		byte[] smallBytes = null;
-
-		try {
-			smallBytes = FileUtil.getBytes(smallFile);
-		}
-		catch (IOException ioe) {
-		}
-
-		Date now = new Date();
-
-		validate(
-			groupId, title, content, type, structureId, templateId, smallImage,
-			smallImageURL, smallFile, smallBytes);
-
-		JournalArticle oldArticle = journalArticlePersistence.findByG_A_V(
-			groupId, articleId, version);
-
-		JournalArticle article = null;
-
-		if (incrementVersion) {
-			double latestVersion = getLatestVersion(groupId, articleId);
-
-			long id = counterLocalService.increment();
-
-			article = journalArticlePersistence.create(id);
-
-			article.setResourcePrimKey(oldArticle.getResourcePrimKey());
-			article.setGroupId(oldArticle.getGroupId());
-			article.setCompanyId(user.getCompanyId());
-			article.setUserId(user.getUserId());
-			article.setUserName(user.getFullName());
-			article.setCreateDate(now);
-			article.setArticleId(articleId);
-			article.setVersion(MathUtil.format(latestVersion + 0.1, 1, 1));
-			article.setSmallImageId(oldArticle.getSmallImageId());
-		}
-		else {
-			article = oldArticle;
-		}
-
-		content = format(
-			groupId, articleId, article.getVersion(), incrementVersion, content,
-			structureId, images);
-
-		boolean approved = oldArticle.isApproved();
-
-		if (incrementVersion) {
-			approved = false;
-		}
-
-		article.setModifiedDate(now);
+		article.setUserId(userId);
+		article.setGroupId(groupId);
+		article.setArticleId(articleId);
+		article.setVersion(version);
 		article.setTitle(title);
 		article.setDescription(description);
 		article.setContent(content);
 		article.setType(type);
 		article.setStructureId(structureId);
 		article.setTemplateId(templateId);
-		article.setDisplayDate(displayDate);
-		article.setApproved(approved);
-
-		if ((expirationDate == null) || expirationDate.after(now)) {
-			article.setExpired(false);
-		}
-		else {
-			article.setExpired(true);
-		}
-
-		article.setExpirationDate(expirationDate);
-		article.setReviewDate(reviewDate);
+		article.setApproved(false);
 		article.setIndexable(indexable);
 		article.setSmallImage(smallImage);
-
-		if (article.getSmallImageId() == 0) {
-			article.setSmallImageId(counterLocalService.increment());
-		}
-
+		article.setSmallImageId(counterLocalService.increment());
 		article.setSmallImageURL(smallImageURL);
 
-		journalArticlePersistence.update(article, false);
+		// Create a Mirage Content object using the JournalArticle
 
-		// Small image
+		JournalArticleContent articleContent =
+			new JournalArticleContent(article);
 
-		saveImages(
-			smallImage, article.getSmallImageId(), smallFile, smallBytes);
+		JournalArticleContent.CreationAttributes creationAttributes =
+			articleContent.new CreationAttributes();
 
-		// Tags
+		creationAttributes.setArticleURL(articleURL);
+		creationAttributes.setPrefs(prefs);
+		creationAttributes.setTagsEntries(tagsEntries);
+		creationAttributes.setDisplayDateDay(displayDateDay);
+		creationAttributes.setDisplayDateHour(displayDateHour);
+		creationAttributes.setDisplayDateMinute(displayDateMinute);
+		creationAttributes.setDisplayDateMonth(displayDateMonth);
+		creationAttributes.setDisplayDateYear(displayDateYear);
+		creationAttributes.setExpirationDateDay(expirationDateDay);
+		creationAttributes.setExpirationDateHour(expirationDateHour);
+		creationAttributes.setExpirationDateMinute(expirationDateMinute);
+		creationAttributes.setExpirationDateMonth(expirationDateMonth);
+		creationAttributes.setExpirationDateYear(expirationDateYear);
+		creationAttributes.setNeverExpire(neverExpire);
+		creationAttributes.setReviewDateDay(reviewDateDay);
+		creationAttributes.setReviewDateHour(reviewDateHour);
+		creationAttributes.setReviewDateMinute(reviewDateMinute);
+		creationAttributes.setReviewDateMonth(reviewDateMonth);
+		creationAttributes.setReviewDateYear(reviewDateYear);
+		creationAttributes.setNeverReview(neverReview);
+		creationAttributes.setIncrementVersion(incrementVersion);
+		creationAttributes.setSmallFile(smallFile);
+		creationAttributes.setImages(images);
 
-		updateTagsAsset(userId, article, tagsEntries);
+		articleContent.setCreationAttributes(creationAttributes);
 
-		// Email
+		// Get the Project Mirage service
 
-		if (incrementVersion) {
-			try {
-				sendEmail(article, articleURL, prefs, "requested");
-			}
-			catch (IOException ioe) {
-				throw new SystemException(ioe);
-			}
-		}
-
-		// Lucene
-
+		ContentService contentService =
+			MirageServiceFactory.getContentService();
 		try {
-			if (article.isIndexable()) {
-				if (article.isApproved()) {
-					Indexer.updateArticle(
-						article.getCompanyId(), article.getGroupId(),
-						article.getArticleId(), article.getVersion(),
-						article.getTitle(), article.getDescription(),
-						article.getContent(), article.getType(),
-						article.getDisplayDate(), tagsEntries);
-				}
-				else {
-					Indexer.deleteArticle(
-						article.getCompanyId(), article.getArticleId());
-				}
-			}
+			contentService.updateContent(articleContent);
 		}
-		catch (SearchException se) {
-			_log.error("Indexing " + article.getPrimaryKey(), se);
+		catch (CMSException ce) {
+			_throwException(ce);
 		}
+		article = articleContent.getArticle();
 
 		return article;
 	}
@@ -1707,13 +2526,20 @@ public class JournalArticleLocalServiceImpl
 			long groupId, String articleId, double version, String content)
 		throws PortalException, SystemException {
 
-		JournalArticle article = journalArticlePersistence.findByG_A_V(
-			groupId, articleId, version);
+		JournalArticle article = getArticle(groupId, articleId, version);
 
 		article.setContent(content);
-
-		journalArticlePersistence.update(article, false);
-
+		JournalArticleContent articleContent =
+			new JournalArticleContent(article);
+		ContentService contentService =
+			MirageServiceFactory.getContentService();
+		try {
+			contentService.updateContent(articleContent, null);
+		}
+		catch (CMSException ce) {
+			_throwException(ce);
+		}
+		article = articleContent.getArticle();
 		return article;
 	}
 
@@ -1724,26 +2550,28 @@ public class JournalArticleLocalServiceImpl
 		// Get the earliest display date and latest expiration date among
 		// all article versions
 
-		Date[] dateInterval = getDateInterval(
-			article.getGroupId(), article.getArticleId(),
-			article.getDisplayDate(), article.getExpirationDate());
+		Date[] dateInterval =
+			getDateInterval(
+				article.getGroupId(), article.getArticleId(),
+					article.getDisplayDate(), article.getExpirationDate());
 
 		Date displayDate = dateInterval[0];
 		Date expirationDate = dateInterval[1];
 
 		tagsAssetLocalService.updateAsset(
 			userId, article.getGroupId(), JournalArticle.class.getName(),
-			article.getResourcePrimKey(), tagsEntries, null, null,
-			displayDate, expirationDate, ContentTypes.TEXT_HTML,
-			article.getTitle(), article.getDescription(), null, null, 0, 0,
-			null, false);
+				article.getResourcePrimKey(), tagsEntries, null, null,
+					displayDate, expirationDate, ContentTypes.TEXT_HTML,
+						article.getTitle(), article.getDescription(), null,
+							null, 0, 0, null, false);
 	}
 
 	protected void checkStructure(JournalArticle article)
 		throws DocumentException, PortalException, SystemException {
 
-		JournalStructure structure = journalStructurePersistence.findByG_S(
-			article.getGroupId(), article.getStructureId());
+		JournalStructure structure =
+			journalStructureLocalService.getStructure(
+				article.getGroupId(), article.getStructureId());
 
 		String content = GetterUtil.getString(article.getContent());
 
@@ -1760,20 +2588,17 @@ public class JournalArticleLocalServiceImpl
 			String articleId = article.getArticleId();
 			double version = article.getVersion();
 
-			if (_log.isWarnEnabled()) {
-				_log.warn(
-					"Article {groupId=" + groupId + ", articleId=" +
-						articleId + ", version=" + version +
-							"} has content that does not match its " +
-								"structure: " + sxsde.getMessage());
-			}
+			_log.error("Article {groupId=" + groupId + ", articleId=" +
+				articleId + ", version=" + version +
+					"} has content that does not match its structure: " +
+						sxsde.getMessage());
 		}
 	}
 
 	protected void checkStructure(Document contentDoc, Element root)
 		throws PortalException {
 
-		for (Element el : (List<Element>)root.elements()) {
+		for (Element el : (List<Element>) root.elements()) {
 			checkStructureField(el, contentDoc);
 
 			checkStructure(contentDoc, el);
@@ -1790,8 +2615,7 @@ public class JournalArticleLocalServiceImpl
 		Element elParent = el.getParent();
 
 		for (;;) {
-			if ((elParent == null) ||
-				(elParent.getName().equals("root"))) {
+			if ((elParent == null) || (elParent.getName().equals("root"))) {
 
 				break;
 			}
@@ -1809,9 +2633,9 @@ public class JournalArticleLocalServiceImpl
 		for (int i = 0; i < elPathNames.length; i++) {
 			boolean foundEl = false;
 
-			for (Element tempEl : (List<Element>)contentEl.elements()) {
-				if (elPathNames[i].equals(
-						tempEl.attributeValue("name", StringPool.BLANK))) {
+			for (Element tempEl : (List<Element>) contentEl.elements()) {
+				if (elPathNames[i].equals(tempEl.attributeValue(
+					"name", StringPool.BLANK))) {
 
 					contentEl = tempEl;
 					foundEl = true;
@@ -1821,8 +2645,8 @@ public class JournalArticleLocalServiceImpl
 			}
 
 			if (!foundEl) {
-				String elType = contentEl.attributeValue(
-					"type", StringPool.BLANK);
+				String elType =
+					contentEl.attributeValue("type", StringPool.BLANK);
 
 				if (!elType.equals("list") && !elType.equals("multi-list")) {
 					throw new StructureXsdException(elPath.toString());
@@ -1833,234 +2657,14 @@ public class JournalArticleLocalServiceImpl
 		}
 	}
 
-	protected String format(
-			long groupId, String articleId, double version,
-			boolean incrementVersion, String content, String structureId,
-			Map<String, byte[]> images)
-		throws PortalException, SystemException {
-
-		if (Validator.isNotNull(structureId)) {
-			SAXReader reader = new SAXReader();
-
-			Document doc = null;
-
-			try {
-				doc = reader.read(new StringReader(content));
-
-				Element root = doc.getRootElement();
-
-				format(
-					groupId, articleId, version, incrementVersion,
-					root, images);
-
-				content = JournalUtil.formatXML(doc);
-			}
-			catch (DocumentException de) {
-				_log.error(de);
-			}
-			catch (IOException ioe) {
-				_log.error(ioe);
-			}
-		}
-
-		content = HtmlUtil.replaceMsWordCharacters(content);
-
-		return content;
-	}
-
-	protected void format(
-			long groupId, String articleId, double version,
-			boolean incrementVersion, Element root, Map<String, byte[]> images)
-		throws PortalException, SystemException {
-
-		for (Element el : (List<Element>)root.elements()) {
-			String elName = el.attributeValue("name", StringPool.BLANK);
-			String elType = el.attributeValue("type", StringPool.BLANK);
-
-			if (elType.equals("image")) {
-				formatImage(
-					groupId, articleId, version, incrementVersion, el, elName,
-					images);
-			}
-			/*else if (elType.equals("text_area")) {
-				Element dynamicContent = el.element("dynamic-content");
-
-				String text = dynamicContent.getText();
-
-				// LEP-1594
-
-				try {
-					text = ParserUtils.trimTags(
-						text, new String[] {"script"}, false, true);
-				}
-				catch (ParserException pe) {
-					text = pe.getLocalizedMessage();
-				}
-				catch (UnsupportedEncodingException uee) {
-					text = uee.getLocalizedMessage();
-				}
-
-				dynamicContent.setText(text);
-			}*/
-
-			format(
-				groupId, articleId, version, incrementVersion, el, images);
-		}
-	}
-
-	protected void formatImage(
-			long groupId, String articleId, double version,
-			boolean incrementVersion, Element el, String elName,
-			Map<String, byte[]> images)
-		throws PortalException, SystemException {
-
-		List<Element> imageContents = el.elements("dynamic-content");
-
-		for (Element dynamicContent : imageContents) {
-			String elLanguage = dynamicContent.attributeValue(
-				"language-id", StringPool.BLANK);
-
-			if (!elLanguage.equals(StringPool.BLANK)) {
-				elLanguage = "_" + elLanguage;
-			}
-
-			long imageId =
-				journalArticleImageLocalService.getArticleImageId(
-					groupId, articleId, version, elName, elLanguage);
-
-			double oldVersion = MathUtil.format(version - 0.1, 1, 1);
-
-			long oldImageId = 0;
-
-			if ((oldVersion >= 1) && incrementVersion) {
-				oldImageId =
-					journalArticleImageLocalService.getArticleImageId(
-						groupId, articleId, oldVersion, elName, elLanguage);
-			}
-
-			String elContent =
-				"/image/journal/article?img_id=" + imageId + "&t=" +
-					ImageServletTokenUtil.getToken(imageId);
-
-			if (dynamicContent.getText().equals("delete")) {
-				dynamicContent.setText(StringPool.BLANK);
-
-				imageLocalService.deleteImage(imageId);
-
-				String defaultElLanguage = "";
-
-				if (!Validator.isNotNull(elLanguage)) {
-					defaultElLanguage =
-						"_" + LocaleUtil.toLanguageId(LocaleUtil.getDefault());
-				}
-
-				long defaultImageId =
-					journalArticleImageLocalService.getArticleImageId(
-						groupId, articleId, version, elName, defaultElLanguage);
-
-				imageLocalService.deleteImage(defaultImageId);
-
-				continue;
-			}
-
-			byte[] bytes = images.get(elName + elLanguage);
-
-			if (bytes != null && (bytes.length > 0)) {
-				dynamicContent.setText(elContent);
-				dynamicContent.addAttribute("id", String.valueOf(imageId));
-
-				imageLocalService.updateImage(imageId, bytes);
-
-				continue;
-			}
-
-			if ((version > JournalArticleImpl.DEFAULT_VERSION) &&
-				(incrementVersion)) {
-
-				Image oldImage = null;
-
-				if (oldImageId > 0) {
-					oldImage = imageLocalService.getImage(oldImageId);
-				}
-
-				if (oldImage != null) {
-					dynamicContent.setText(elContent);
-					dynamicContent.addAttribute("id", String.valueOf(imageId));
-
-					bytes = oldImage.getTextObj();
-
-					imageLocalService.updateImage(imageId, bytes);
-				}
-
-				continue;
-			}
-
-			Image image = imageLocalService.getImage(imageId);
-
-			if (image != null) {
-				dynamicContent.setText(elContent);
-				dynamicContent.addAttribute("id", String.valueOf(imageId));
-
-				continue;
-			}
-
-			long contentImageId = GetterUtil.getLong(HttpUtil.getParameter(
-				dynamicContent.getText(), "img_id"));
-
-			if (contentImageId <= 0) {
-				contentImageId = GetterUtil.getLong(HttpUtil.getParameter(
-					dynamicContent.getText(), "img_id", false));
-			}
-
-			if (contentImageId > 0) {
-				image = imageLocalService.getImage(contentImageId);
-
-				if (image != null) {
-					dynamicContent.addAttribute(
-						"id", String.valueOf(contentImageId));
-
-					continue;
-				}
-			}
-
-			String defaultElLanguage = "";
-
-			if (!Validator.isNotNull(elLanguage)) {
-				defaultElLanguage =
-					"_" + LocaleUtil.toLanguageId(LocaleUtil.getDefault());
-			}
-
-			long defaultImageId =
-				journalArticleImageLocalService.getArticleImageId(
-					groupId, articleId, version, elName, defaultElLanguage);
-
-			Image defaultImage = imageLocalService.getImage(defaultImageId);
-
-			if (defaultImage != null) {
-				dynamicContent.setText(elContent);
-				dynamicContent.addAttribute(
-					"id", String.valueOf(defaultImageId));
-
-				bytes = defaultImage.getTextObj();
-
-				imageLocalService.updateImage(defaultImageId, bytes);
-
-				continue;
-			}
-
-			dynamicContent.setText(StringPool.BLANK);
-		}
-	}
-
 	protected Date[] getDateInterval(
-			long groupId, String articleId, Date earliestDisplayDate,
-			Date latestExpirationDate)
+		long groupId, String articleId, Date earliestDisplayDate,
+		Date latestExpirationDate)
 		throws SystemException {
 
 		Date[] dateInterval = new Date[2];
 
-		List<JournalArticle> articles = journalArticlePersistence.findByG_A_A(
-			groupId, articleId, true);
+		List<JournalArticle> articles = _getArticlesByG_A_A(groupId, articleId);
 
 		boolean expiringArticle = true;
 
@@ -2070,16 +2674,17 @@ public class JournalArticleLocalServiceImpl
 
 		for (JournalArticle article : articles) {
 			if ((earliestDisplayDate == null) ||
-				((article.getDisplayDate() != null) &&
-				 earliestDisplayDate.after(article.getDisplayDate()))) {
+					((article.getDisplayDate() != null) &&
+						earliestDisplayDate.after(article.getDisplayDate()))) {
 
 				earliestDisplayDate = article.getDisplayDate();
 			}
 
 			if (expiringArticle &&
 				((latestExpirationDate == null) ||
-				 ((article.getExpirationDate() != null) &&
-				  latestExpirationDate.before(article.getExpirationDate())))) {
+					((article.getExpirationDate() != null) &&
+						latestExpirationDate.before(
+							article.getExpirationDate())))) {
 
 				latestExpirationDate = article.getExpirationDate();
 			}
@@ -2096,21 +2701,6 @@ public class JournalArticleLocalServiceImpl
 		return dateInterval;
 	}
 
-	protected void saveImages(
-			boolean smallImage, long smallImageId, File smallFile,
-			byte[] smallBytes)
-		throws PortalException, SystemException {
-
-		if (smallImage) {
-			if ((smallFile != null) && (smallBytes != null)) {
-				imageLocalService.updateImage(smallImageId, smallBytes);
-			}
-		}
-		else {
-			imageLocalService.deleteImage(smallImageId);
-		}
-	}
-
 	protected void sendEmail(
 			JournalArticle article, String articleURL, PortletPreferences prefs,
 			String emailType)
@@ -2123,20 +2713,20 @@ public class JournalArticleLocalServiceImpl
 			JournalUtil.getEmailArticleApprovalDeniedEnabled(prefs)) {
 		}
 		else if (emailType.equals("granted") &&
-				 JournalUtil.getEmailArticleApprovalGrantedEnabled(prefs)) {
+			JournalUtil.getEmailArticleApprovalGrantedEnabled(prefs)) {
 		}
 		else if (emailType.equals("requested") &&
-				 JournalUtil.getEmailArticleApprovalRequestedEnabled(prefs)) {
+			JournalUtil.getEmailArticleApprovalRequestedEnabled(prefs)) {
 		}
 		else if (emailType.equals("review") &&
-				 JournalUtil.getEmailArticleReviewEnabled(prefs)) {
+			JournalUtil.getEmailArticleReviewEnabled(prefs)) {
 		}
 		else {
 			return;
 		}
 
-		Company company = companyPersistence.findByPrimaryKey(
-			article.getCompanyId());
+		Company company =
+			companyPersistence.findByPrimaryKey(article.getCompanyId());
 
 		User user = userPersistence.findByPrimaryKey(article.getUserId());
 
@@ -2144,8 +2734,8 @@ public class JournalArticleLocalServiceImpl
 			"&groupId=" + article.getGroupId() + "&articleId=" +
 				article.getArticleId() + "&version=" + article.getVersion();
 
-		String portletName = PortalUtil.getPortletTitle(
-			PortletKeys.JOURNAL, user);
+		String portletName =
+			PortalUtil.getPortletTitle(PortletKeys.JOURNAL, user);
 
 		String fromName = JournalUtil.getEmailFromName(prefs);
 		String fromAddress = JournalUtil.getEmailFromAddress(prefs);
@@ -2153,8 +2743,7 @@ public class JournalArticleLocalServiceImpl
 		String toName = user.getFullName();
 		String toAddress = user.getEmailAddress();
 
-		if (emailType.equals("requested") ||
-			emailType.equals("review")) {
+		if (emailType.equals("requested") || emailType.equals("review")) {
 
 			String tempToName = fromName;
 			String tempToAddress = fromAddress;
@@ -2170,13 +2759,11 @@ public class JournalArticleLocalServiceImpl
 		String body = null;
 
 		if (emailType.equals("denied")) {
-			subject =
-				JournalUtil.getEmailArticleApprovalDeniedSubject(prefs);
+			subject = JournalUtil.getEmailArticleApprovalDeniedSubject(prefs);
 			body = JournalUtil.getEmailArticleApprovalDeniedBody(prefs);
 		}
 		else if (emailType.equals("granted")) {
-			subject =
-				JournalUtil.getEmailArticleApprovalGrantedSubject(prefs);
+			subject = JournalUtil.getEmailArticleApprovalGrantedSubject(prefs);
 			body = JournalUtil.getEmailArticleApprovalGrantedBody(prefs);
 		}
 		else if (emailType.equals("requested")) {
@@ -2189,58 +2776,33 @@ public class JournalArticleLocalServiceImpl
 			body = JournalUtil.getEmailArticleReviewBody(prefs);
 		}
 
-		subject = StringUtil.replace(
-			subject,
-			new String[] {
-				"[$ARTICLE_ID$]",
-				"[$ARTICLE_TITLE$]",
-				"[$ARTICLE_URL$]",
-				"[$ARTICLE_VERSION$]",
-				"[$FROM_ADDRESS$]",
-				"[$FROM_NAME$]",
-				"[$PORTAL_URL$]",
-				"[$PORTLET_NAME$]",
-				"[$TO_ADDRESS$]",
+		subject =
+			StringUtil.replace(subject, new String[] {
+				"[$ARTICLE_ID$]", "[$ARTICLE_TITLE$]", "[$ARTICLE_URL$]",
+				"[$ARTICLE_VERSION$]", "[$FROM_ADDRESS$]", "[$FROM_NAME$]",
+				"[$PORTAL_URL$]", "[$PORTLET_NAME$]", "[$TO_ADDRESS$]",
 				"[$TO_NAME$]"
-			},
-			new String[] {
-				article.getArticleId(),
-				article.getTitle(),
-				articleURL,
-				String.valueOf(article.getVersion()),
-				fromAddress,
-				fromName,
-				company.getVirtualHost(),
-				portletName,
-				toAddress,
-				toName,
+			}, new String[] {
+				article.getArticleId(), article.getTitle(), articleURL,
+				String.valueOf(article.getVersion()), fromAddress, fromName,
+				company.getVirtualHost(), portletName, toAddress, toName
+
+				,
 			});
 
-		body = StringUtil.replace(
-			body,
-			new String[] {
-				"[$ARTICLE_ID$]",
-				"[$ARTICLE_TITLE$]",
-				"[$ARTICLE_URL$]",
-				"[$ARTICLE_VERSION$]",
-				"[$FROM_ADDRESS$]",
-				"[$FROM_NAME$]",
-				"[$PORTAL_URL$]",
-				"[$PORTLET_NAME$]",
-				"[$TO_ADDRESS$]",
+		body =
+			StringUtil.replace(body, new String[] {
+				"[$ARTICLE_ID$]", "[$ARTICLE_TITLE$]", "[$ARTICLE_URL$]",
+				"[$ARTICLE_VERSION$]", "[$FROM_ADDRESS$]", "[$FROM_NAME$]",
+				"[$PORTAL_URL$]", "[$PORTLET_NAME$]", "[$TO_ADDRESS$]",
 				"[$TO_NAME$]"
-			},
-			new String[] {
-				article.getArticleId(),
-				article.getTitle(),
-				articleURL,
-				String.valueOf(article.getVersion()),
-				fromAddress,
-				fromName,
-				company.getVirtualHost(),
-				portletName,
-				toAddress,
-				toName,
+			}, new String[] {
+				article.getArticleId(), article.getTitle(), articleURL,
+				String.valueOf(article.getVersion()), fromAddress, fromName,
+				company.getVirtualHost(), portletName, toAddress, toName
+
+				,
+
 			});
 
 		InternetAddress from = new InternetAddress(fromAddress, fromName);
@@ -2252,105 +2814,228 @@ public class JournalArticleLocalServiceImpl
 		mailService.sendEmail(message);
 	}
 
-	protected void validate(
-			long groupId, String articleId, boolean autoArticleId,
-			double version, String title, String content, String type,
-			String structureId, String templateId, boolean smallImage,
-			String smallImageURL, File smallFile, byte[] smallBytes)
-		throws PortalException, SystemException {
+	private void _addSearchField(
+		List<SearchFieldValue> fieldList, String fieldName, String fieldValue) {
 
-		if (!autoArticleId) {
-			if ((Validator.isNull(articleId)) ||
-				(articleId.indexOf(StringPool.SPACE) != -1)) {
-
-				throw new ArticleIdException();
-			}
-
-			try {
-				journalArticlePersistence.findByG_A_V(
-					groupId, articleId, version);
-
-				throw new DuplicateArticleIdException();
-			}
-			catch (NoSuchArticleException nste) {
-			}
-		}
-
-		validate(
-			groupId, title, content, type, structureId, templateId,
-			smallImage, smallImageURL, smallFile, smallBytes);
+		SearchFieldValue searchField = new SearchFieldValue();
+		searchField.setFieldName(fieldName);
+		searchField.setFieldValues(new String[] { fieldValue });
+		fieldList.add(searchField);
 	}
 
-	protected void validate(
-			long groupId, String title, String content, String type,
-			String structureId, String templateId, boolean smallImage,
-			String smallImageURL, File smallFile, byte[] smallBytes)
+	private void _addSearchFieldAndValues(
+			List<SearchFieldValue> fieldList, String fieldName,
+			String[] fieldValues) {
+
+		SearchFieldValue searchField = new SearchFieldValue();
+		searchField.setFieldName(fieldName);
+		searchField.setFieldValues(fieldValues);
+		fieldList.add(searchField);
+	}
+
+	private void _addSearchFields(
+			List<SearchFieldValue> fieldList,
+			Map<String, String> nameValues) {
+
+		Iterator<String> iter = nameValues.keySet().iterator();
+		while (iter.hasNext()) {
+			String name = iter.next();
+			String value = nameValues.get(name);
+			_addSearchField(fieldList, name, value);
+		}
+	}
+
+	private List<JournalArticle> _getArticlesByG_A_A(
+			long groupId, String articleId)
+		throws SystemException {
+
+		SearchCriteria criteria = new SearchCriteria();
+		List<SearchFieldValue> searchFields = new ArrayList<SearchFieldValue>();
+		List<JournalArticle> articles = null;
+
+		_addSearchField(
+			searchFields, OptionalJournalArticleCriteria.FINDER,
+				OptionalJournalArticleCriteria.FIND_BY_G_A_A);
+
+		_addSearchField(
+			searchFields, OptionalJournalArticleCriteria.GROUP_ID,
+				String.valueOf(groupId));
+
+		_addSearchField(
+			searchFields, OptionalJournalArticleCriteria.ARTICLE_ID, articleId);
+		criteria.setSearchFieldValues(searchFields);
+
+		criteria.setSearchFieldValues(searchFields);
+
+		ContentService contentService =
+			MirageServiceFactory.getContentService();
+		try {
+			List<Content> contents = contentService.searchContents(criteria);
+
+			articles = _getArticlesFromContents(contents);
+		}
+		catch (CMSException ex) {
+			throw (SystemException) ex.getCause();
+		}
+		return articles;
+
+	}
+
+	private List<JournalArticle> _getArticlesFromContents(
+			List<Content> contents) {
+
+		List<JournalArticle> articles = new ArrayList<JournalArticle>();
+		for (Content content : contents) {
+			articles.add(((JournalArticleContent) content).getArticle());
+		}
+
+		return articles;
+	}
+
+	private void _throwException(CMSException ex)
 		throws PortalException, SystemException {
 
-		if (Validator.isNull(title)) {
-			throw new ArticleTitleException();
-		}
-		else if (Validator.isNull(content)) {
-			throw new ArticleContentException();
-		}
-		else if (Validator.isNull(type)) {
-			throw new ArticleTypeException();
-		}
-
-		if (Validator.isNotNull(structureId)) {
-			journalStructurePersistence.findByG_S(groupId, structureId);
-
-			JournalTemplate template = journalTemplatePersistence.findByG_T(
-				groupId, templateId);
-
-			if (!template.getStructureId().equals(structureId)) {
-				throw new NoSuchTemplateException();
+		Throwable cause = ex.getCause();
+		if (cause != null) {
+			if (cause instanceof PortalException) {
+				throw (PortalException) cause;
 			}
-		}
-
-		String[] imageExtensions =
-			PropsUtil.getArray(PropsKeys.JOURNAL_IMAGE_EXTENSIONS);
-
-		if (smallImage && Validator.isNull(smallImageURL) &&
-			smallFile != null && smallBytes != null) {
-
-			String smallImageName = smallFile.getName();
-
-			if (smallImageName != null) {
-				boolean validSmallImageExtension = false;
-
-				for (int i = 0; i < imageExtensions.length; i++) {
-					if (StringPool.STAR.equals(imageExtensions[i]) ||
-						StringUtil.endsWith(
-							smallImageName, imageExtensions[i])) {
-
-						validSmallImageExtension = true;
-
-						break;
-					}
-				}
-
-				if (!validSmallImageExtension) {
-					throw new ArticleSmallImageNameException(smallImageName);
-				}
-			}
-
-			long smallImageMaxSize = GetterUtil.getLong(
-				PropsUtil.get(PropsKeys.JOURNAL_IMAGE_SMALL_MAX_SIZE));
-
-			if ((smallImageMaxSize > 0) &&
-				((smallBytes == null) ||
-					(smallBytes.length > smallImageMaxSize))) {
-
-				throw new ArticleSmallImageSizeException();
+			else if (cause instanceof SystemException) {
+				throw (SystemException) cause;
 			}
 		}
 	}
 
-	private static final String _TOKEN_PAGE_BREAK = PropsUtil.get(
-		PropsKeys.JOURNAL_ARTICLE_TOKEN_PAGE_BREAK);
+	private List<JournalArticle> _getArticleByReviewDate(
+			Date now, Date reviewDateGT)
+		throws SystemException {
 
-	private static Log _log =
+		try {
+			SearchCriteria reviewCriteria = new SearchCriteria();
+			List<SearchFieldValue> searchFields =
+				new ArrayList<SearchFieldValue>();
+
+			Map<String, String> fields = new HashMap<String, String>();
+			fields.put(
+				OptionalJournalArticleCriteria.FINDER,
+					OptionalJournalArticleCriteria.FIND_BY_REVIEW_DATE);
+			if (now == null) {
+				fields.put(OptionalJournalArticleCriteria.REVIEW_DATE_LT, null);
+			}
+			else {
+				fields.put(
+					OptionalJournalArticleCriteria.REVIEW_DATE_LT,
+						String.valueOf(now.getTime()));
+			}
+			if (reviewDateGT == null) {
+				fields.put(OptionalJournalArticleCriteria.REVIEW_DATE_GT, null);
+			}
+			else {
+				fields.put(
+					OptionalJournalArticleCriteria.REVIEW_DATE_GT,
+						String.valueOf(reviewDateGT.getTime()));
+			}
+
+			_addSearchFields(searchFields, fields);
+			reviewCriteria.setSearchFieldValues(searchFields);
+
+			ContentService contentService =
+				MirageServiceFactory.getContentService();
+			List<Content> contents =
+				contentService.searchContents(reviewCriteria);
+			List<JournalArticle> articles = _getArticlesFromContents(contents);
+			return articles;
+		}
+		catch (CMSException ex) {
+			throw (SystemException) ex.getCause();
+		}
+
+	}
+
+	private List<JournalArticle> _getArticlesByCompanyId(long companyId)
+		throws SystemException {
+
+		try {
+			SearchCriteria criteria = new SearchCriteria();
+			List<SearchFieldValue> searchFields =
+				new ArrayList<SearchFieldValue>();
+
+			Map<String, String> fields = new HashMap<String, String>();
+			fields.put(
+				OptionalJournalArticleCriteria.FINDER,
+					OptionalJournalArticleCriteria.FIND_BY_COMPANY_ID);
+			fields.put(
+				OptionalJournalArticleCriteria.COMPANY_ID,
+					String.valueOf(companyId));
+
+			_addSearchFields(searchFields, fields);
+			criteria.setSearchFieldValues(searchFields);
+
+			ContentService contentService =
+				MirageServiceFactory.getContentService();
+			List<Content> contents = contentService.searchContents(criteria);
+			List<JournalArticle> articles = _getArticlesFromContents(contents);
+			return articles;
+		}
+		catch (CMSException ex) {
+			throw (SystemException) ex.getCause();
+		}
+	}
+
+	private List<JournalArticle> _getArticlesByExpirationDate(
+			Date now, Date expirationDateGT)
+		throws SystemException {
+
+		try {
+
+			SearchCriteria expireCriteria = new SearchCriteria();
+			List<SearchFieldValue> searchFields =
+				new ArrayList<SearchFieldValue>();
+
+			Map<String, String> fields = new HashMap<String, String>();
+			fields.put(
+				OptionalJournalArticleCriteria.FINDER,
+					OptionalJournalArticleCriteria.FIND_BY_EXPIRATION_DATE);
+			if (now == null) {
+				fields.put(
+					OptionalJournalArticleCriteria.EXPIRATION_DATE_LT, null);
+			}
+			else {
+				fields.put(
+					OptionalJournalArticleCriteria.EXPIRATION_DATE_LT,
+						String.valueOf(now.getTime()));
+			}
+			if (expirationDateGT == null) {
+				fields.put(
+					OptionalJournalArticleCriteria.EXPIRATION_DATE_GT, null);
+			}
+			else {
+				fields.put(
+					OptionalJournalArticleCriteria.EXPIRATION_DATE_GT,
+						String.valueOf(expirationDateGT.getTime()));
+			}
+			fields.put(
+				OptionalJournalArticleCriteria.EXPIRED, String.valueOf(false));
+			_addSearchFields(searchFields, fields);
+			expireCriteria.setSearchFieldValues(searchFields);
+
+			ContentService contentService =
+				MirageServiceFactory.getContentService();
+			List<Content> contents =
+				contentService.searchContents(expireCriteria);
+			List<JournalArticle> articles = _getArticlesFromContents(contents);
+			return articles;
+		}
+		catch (CMSException ex) {
+			throw (SystemException) ex.getCause();
+		}
+
+	}
+
+	private static final Log _log =
 		LogFactory.getLog(JournalArticleLocalServiceImpl.class);
+
+	private static final String _TOKEN_PAGE_BREAK =
+		PropsUtil.get(PropsKeys.JOURNAL_ARTICLE_TOKEN_PAGE_BREAK);
 
 }
