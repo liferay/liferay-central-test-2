@@ -174,6 +174,7 @@ model.resource.com.liferay.portlet.workflow.model.WorkflowTask=ワークフロ�
 ##
 
 action.ADD_ARTICLE=記事を加えなさい
+action.ADD_ATTACHMENT=付属品を加えなさい
 action.ADD_CATEGORY=部門を加えなさい
 action.ADD_COMMUNITY=コミュニティを加えなさい
 action.ADD_COUPON=クーポンを加えなさい
