@@ -26,7 +26,10 @@ import com.liferay.portal.events.EventsProcessor;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.struts.ActionConstants;
-import com.liferay.portal.util.*;
+import com.liferay.portal.util.CookieKeys;
+import com.liferay.portal.util.PortalUtil;
+import com.liferay.portal.util.PropsKeys;
+import com.liferay.portal.util.PropsValues;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
@@ -38,96 +41,78 @@ import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
 
-import java.net.URL;
-import java.net.HttpURLConnection;
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
-
 /**
  * <a href="LogoutAction.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
+ *
  */
 public class LogoutAction extends Action {
 
-    public ActionForward execute(
-            ActionMapping mapping, ActionForm form, HttpServletRequest request,
-            HttpServletResponse response)
-            throws Exception {
+	public ActionForward execute(
+			ActionMapping mapping, ActionForm form, HttpServletRequest request,
+			HttpServletResponse response)
+		throws Exception {
 
-        try {
-            HttpSession session = request.getSession();
+		try {
+			HttpSession session = request.getSession();
 
-            EventsProcessor.process(
-                    PropsKeys.LOGOUT_EVENTS_PRE, PropsValues.LOGOUT_EVENTS_PRE,
-                    request, response);
+			EventsProcessor.process(
+				PropsKeys.LOGOUT_EVENTS_PRE, PropsValues.LOGOUT_EVENTS_PRE,
+				request, response);
 
-            //Adding hooks for RUON
+			String domain = CookieKeys.getDomain(request);
 
-            String suserId = (String) session.getAttribute("j_username");
-            Long userId = new Long(suserId);
-            Integer serverPort = request.getServerPort();
-            URL restURL = new URL(
-                            request.getScheme() + "://"
-                                + request.getServerName() + ":"
-                                    + serverPort.toString() +
-                                        "/ruon/resources/presence/status/" +
-                                                userId + "/offline");
-            HttpImpl httpImpl = new HttpImpl();
-            httpImpl.submit(restURL.toString(), true);
+			Cookie companyIdCookie = new Cookie(
+				CookieKeys.COMPANY_ID, StringPool.BLANK);
 
-            String domain = CookieKeys.getDomain(request);
+			if (Validator.isNotNull(domain)) {
+				companyIdCookie.setDomain(domain);
+			}
 
-            Cookie companyIdCookie = new Cookie(
-                    CookieKeys.COMPANY_ID, StringPool.BLANK);
+			companyIdCookie.setMaxAge(0);
+			companyIdCookie.setPath(StringPool.SLASH);
 
-            if (Validator.isNotNull(domain)) {
-                companyIdCookie.setDomain(domain);
-            }
+			Cookie idCookie = new Cookie(CookieKeys.ID, StringPool.BLANK);
 
-            companyIdCookie.setMaxAge(0);
-            companyIdCookie.setPath(StringPool.SLASH);
+			if (Validator.isNotNull(domain)) {
+				idCookie.setDomain(domain);
+			}
 
-            Cookie idCookie = new Cookie(CookieKeys.ID, StringPool.BLANK);
+			idCookie.setMaxAge(0);
+			idCookie.setPath(StringPool.SLASH);
 
-            if (Validator.isNotNull(domain)) {
-                idCookie.setDomain(domain);
-            }
+			Cookie passwordCookie = new Cookie(
+				CookieKeys.PASSWORD, StringPool.BLANK);
 
-            idCookie.setMaxAge(0);
-            idCookie.setPath(StringPool.SLASH);
+			if (Validator.isNotNull(domain)) {
+				passwordCookie.setDomain(domain);
+			}
 
-            Cookie passwordCookie = new Cookie(
-                    CookieKeys.PASSWORD, StringPool.BLANK);
+			passwordCookie.setMaxAge(0);
+			passwordCookie.setPath(StringPool.SLASH);
 
-            if (Validator.isNotNull(domain)) {
-                passwordCookie.setDomain(domain);
-            }
+			CookieKeys.addCookie(response, companyIdCookie);
+			CookieKeys.addCookie(response, idCookie);
+			CookieKeys.addCookie(response, passwordCookie);
 
-            passwordCookie.setMaxAge(0);
-            passwordCookie.setPath(StringPool.SLASH);
+			try {
+				session.invalidate();
+			}
+			catch (Exception e) {
+			}
 
-            CookieKeys.addCookie(response, companyIdCookie);
-            CookieKeys.addCookie(response, idCookie);
-            CookieKeys.addCookie(response, passwordCookie);
+			EventsProcessor.process(
+				PropsKeys.LOGOUT_EVENTS_POST, PropsValues.LOGOUT_EVENTS_POST,
+				request, response);
 
-            try {
-                session.invalidate();
-            }
-            catch (Exception e) {
-            }
+			return mapping.findForward(ActionConstants.COMMON_REFERER);
+		}
+		catch (Exception e) {
+			PortalUtil.sendError(e, request, response);
 
-            EventsProcessor.process(
-                    PropsKeys.LOGOUT_EVENTS_POST, PropsValues.LOGOUT_EVENTS_POST,
-                    request, response);
-
-            return mapping.findForward(ActionConstants.COMMON_REFERER);
-        }
-        catch (Exception e) {
-            PortalUtil.sendError(e, request, response);
-
-            return null;
-        }
-    }
+			return null;
+		}
+	}
 
 }
