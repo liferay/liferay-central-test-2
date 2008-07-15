@@ -22,13 +22,15 @@
 
 package com.liferay.taglib.util;
 
+import com.sun.portal.portletcontainer.taglib.ParamBaseTag;
+
 /**
  * <a href="ParamAncestorTag.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *
  */
-public interface ParamAncestorTag {
+public interface ParamAncestorTag extends ParamBaseTag {
 
 	public void addParam(String name, String value);
 
