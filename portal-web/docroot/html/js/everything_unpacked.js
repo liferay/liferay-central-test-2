@@ -5821,6 +5821,11 @@ function generate(el, opts, player) {
  */
 ;(function($) {
 
+// This adds a selector to check if data exists.
+jQuery.extend(jQuery.expr[':'], { 
+	data: "jQuery.data(a, m[3])"
+});
+
 $.ui = {
 	plugin: {
 		add: function(module, option, set) {
@@ -5865,9 +5870,17 @@ $.ui = {
 		$(el).attr('unselectable', 'off').css('MozUserSelect', '');
 	},
 	hasScroll: function(e, a) {
-		var scroll = /top/.test(a||"top") ? 'scrollTop' : 'scrollLeft', has = false;
-		if (e[scroll] > 0) return true; e[scroll] = 1;
-		has = e[scroll] > 0 ? true : false; e[scroll] = 0;
+		var scroll = (a && a == 'left') ? 'scrollLeft' : 'scrollTop',
+			has = false;
+		
+		if (e[scroll] > 0) { return true; }
+		
+		// TODO: determine which cases actually cause this to happen
+		// if the element doesn't have the scroll set, see if it's possible to
+		// set the scroll
+		e[scroll] = 1;
+		has = (e[scroll] > 0);
+		e[scroll] = 0;
 		return has;
 	}
 };
@@ -5920,6 +5933,7 @@ $.widget = function(name, prototype) {
 		var self = this;
 		
 		this.widgetName = name;
+		this.widgetEventPrefix = $[namespace][name].eventPrefix || name;
 		this.widgetBaseClass = namespace + '-' + name;
 		
 		this.options = $.extend({}, $.widget.defaults, $[namespace][name].defaults, options);
@@ -5963,6 +5977,13 @@ $.widget.prototype = {
 	},
 	disable: function() {
 		this.setData('disabled', true);
+	},
+	
+	trigger: function(type, e, data) {
+		var eventName = (type == this.widgetEventPrefix
+			? type : this.widgetEventPrefix + type);
+		e = e  || $.event.fix({ type: eventName, target: this.element[0] });
+		return this.element.triggerHandler(eventName, [e, data], this.options[type]);
 	}
 };
 
@@ -6914,13 +6935,18 @@ $.widget("ui.draggable", $.extend({}, $.ui.mouse, {
 	init: function() {
 		
 		//Initialize needed constants
-		var o = this.options;
+		var o = this.options, positioned = /^(?:r|a|f)/, element = this.element[0];
+		
+		if (!this.element.length)
+			return false;
 
+		var style = element.style || {}, 
+			position = style.position || "static"; 
+		
 		//Position the node
-		if (o.helper == 'original' && !(/(relative|absolute|fixed)/).test(this.element.css('position')))
-			this.element.css('position', 'relative');
+		if (o.helper == 'original' && !positioned.test(position))
+			style.position = 'relative';
 
-		this.element.addClass('ui-draggable');
 		(o.disabled && this.element.addClass('ui-draggable-disabled'));
 		
 		this.mouseInit();
@@ -7156,7 +7182,7 @@ $.widget("ui.draggable", $.extend({}, $.ui.mouse, {
 	},
 	destroy: function() {
 		if(!this.element.data('draggable')) return;
-		this.element.removeData("draggable").unbind(".draggable").removeClass('ui-draggable');
+		this.element.removeData("draggable").unbind(".draggable").removeClass('ui-draggable-dragging ui-draggable-disabled');
 		this.mouseDestroy();
 	}
 }));
@@ -7280,7 +7306,7 @@ $.ui.plugin.add("draggable", "snap", {
 		
 		var inst = $(this).data("draggable");
 		inst.snapElements = [];
-		$(ui.options.snap === true ? '.ui-draggable' : ui.options.snap).each(function() {
+		$(ui.options.snap === true ? ':data(draggable)' : ui.options.snap).each(function() {
 			var $t = $(this); var $o = $t.offset();
 			if(this != inst.element[0]) inst.snapElements.push({
 				item: this,
@@ -7353,10 +7379,10 @@ $.ui.plugin.add("draggable", "connectToSortable", {
 		
 		//If we are still over the sortable, we fake the stop event of the sortable, but also remove helper
 		var inst = $(this).data("draggable");
+		
 		$.each(inst.sortables, function() {
 			if(this.instance.isOver) {
 				this.instance.isOver = 0;
-
 				inst.cancelHelperRemoval = true; //Don't remove the helper in the draggable instance
 				this.instance.cancelHelperRemoval = false; //Remove it in the sortable instance (so sortable plugins like revert still work)
 				if(this.shouldRevert) this.instance.options.revert = true; //revert here
@@ -7476,18 +7502,14 @@ $.ui.plugin.add("draggable", "stack", {
 
 $.widget("ui.droppable", {
 	init: function() {
-
-		this.element.addClass("ui-droppable");
-		this.isover = 0; this.isout = 1;
 		
-		//Prepare the passed options
 		var o = this.options, accept = o.accept;
-		o = $.extend(o, {
-			accept: o.accept && o.accept.constructor == Function ? o.accept : function(d) {
-				return $(d).is(accept);
-			}
-		});
-		
+		this.isover = 0; this.isout = 1;
+
+		this.options.accept = this.options.accept && this.options.accept.constructor == Function ? this.options.accept : function(d) {
+			return d.is(accept);
+		};
+
 		//Store the droppable's proportions
 		this.proportions = { width: this.element[0].offsetWidth, height: this.element[0].offsetHeight };
 		
@@ -7513,7 +7535,7 @@ $.widget("ui.droppable", {
 				drop.splice(i, 1);
 		
 		this.element
-			.removeClass("ui-droppable ui-droppable-disabled")
+			.removeClass("ui-droppable-disabled")
 			.removeData("droppable")
 			.unbind(".droppable");
 	},
@@ -7545,7 +7567,7 @@ $.widget("ui.droppable", {
 		if (!draggable || (draggable.currentItem || draggable.element)[0] == this.element[0]) return false; // Bail if draggable and droppable are same element
 		
 		var childrenIntersection = false;
-		this.element.find(".ui-droppable").not(".ui-draggable-dragging").each(function() {
+		this.element.find(":data(droppable)").not(".ui-draggable-dragging").each(function() {
 			var inst = $.data(this, 'droppable');
 			if(inst.options.greedy && $.ui.intersect(draggable, $.extend(inst, { offset: inst.element.offset() }), inst.options.tolerance)) {
 				childrenIntersection = true; return false;
@@ -7646,7 +7668,7 @@ $.ui.ddmanager = {
 			
 			if(type == "dragstart" || type == "sortactivate") m[i].activate.call(m[i], e); //Activate the droppable if used directly from draggables
 		}
-
+		
 	},
 	drop: function(draggable, e) {
 		
@@ -7683,7 +7705,7 @@ $.ui.ddmanager = {
 			
 			var parentInstance;
 			if (this.options.greedy) {
-				var parent = this.element.parents('.ui-droppable:eq(0)');
+				var parent = this.element.parents(':data(droppable):eq(0)');
 				if (parent.length) {
 					parentInstance = $.data(parent[0], 'droppable');
 					parentInstance.greedyChild = (c == 'isover' ? 1 : 0);
