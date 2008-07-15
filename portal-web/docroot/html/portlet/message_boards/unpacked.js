@@ -208,7 +208,7 @@ if (!Liferay.Editor.bbCode) {
 					text: 'ordered-list',
 					image: 'message_boards/ordered_list.png',
 					onClick: function(event) {
-						instance._insertList(true);
+						instance._insertList('1');
 					}
 				},
 
@@ -216,7 +216,7 @@ if (!Liferay.Editor.bbCode) {
 					text: 'unordered-list',
 					image: 'message_boards/unordered_list.png',
 					onClick: function(event) {
-						instance._insertList(true);
+						instance._insertList('');
 					}
 				},
 
