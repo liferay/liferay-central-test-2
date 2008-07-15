@@ -26,6 +26,7 @@ import com.liferay.portal.kernel.util.ReleaseInfo;
 import com.liferay.portal.upgrade.v5_1_0.UpgradeBlogs;
 import com.liferay.portal.upgrade.v5_1_0.UpgradeMessageBoards;
 import com.liferay.portal.upgrade.v5_1_0.UpgradeSchema;
+import com.liferay.portal.upgrade.v5_1_0.UpgradeSitemap;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -48,6 +49,7 @@ public class UpgradeProcess_5_1_0 extends UpgradeProcess {
 		upgrade(UpgradeSchema.class);
 		upgrade(UpgradeBlogs.class);
 		upgrade(UpgradeMessageBoards.class);
+		upgrade(UpgradeSitemap.class);
 	}
 
 	private static Log _log = LogFactory.getLog(UpgradeProcess_5_1_0.class);
