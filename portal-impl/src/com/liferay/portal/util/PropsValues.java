@@ -552,6 +552,10 @@ public class PropsValues {
 		GetterUtil.getBoolean(
 			PropsUtil.get(PropsKeys.LAYOUT_USER_PRIVATE_LAYOUTS_MODIFIABLE));
 
+	public static boolean LAYOUT_USER_PRIVATE_LAYOUTS_POWER_USER_REQUIRED =
+		GetterUtil.getBoolean(PropsUtil.get(PropsKeys.
+			LAYOUT_USER_PRIVATE_LAYOUTS_POWER_USER_REQUIRED));
+
 	public static boolean LAYOUT_USER_PUBLIC_LAYOUTS_AUTO_CREATE =
 		GetterUtil.getBoolean(
 			PropsUtil.get(PropsKeys.LAYOUT_USER_PUBLIC_LAYOUTS_AUTO_CREATE));
@@ -563,6 +567,10 @@ public class PropsValues {
 	public static boolean LAYOUT_USER_PUBLIC_LAYOUTS_MODIFIABLE =
 		GetterUtil.getBoolean(
 			PropsUtil.get(PropsKeys.LAYOUT_USER_PUBLIC_LAYOUTS_MODIFIABLE));
+
+	public static boolean LAYOUT_USER_PUBLIC_LAYOUTS_POWER_USER_REQUIRED =
+		GetterUtil.getBoolean(PropsUtil.get(PropsKeys.
+			LAYOUT_USER_PUBLIC_LAYOUTS_POWER_USER_REQUIRED));
 
 	public static final String LDAP_ATTRS_TRANSFORMER_IMPL =
 		PropsUtil.get(PropsKeys.LDAP_ATTRS_TRANSFORMER_IMPL);

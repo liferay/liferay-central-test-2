@@ -53,6 +53,7 @@ import com.liferay.portal.model.Layout;
 import com.liferay.portal.model.LayoutConstants;
 import com.liferay.portal.model.LayoutSet;
 import com.liferay.portal.model.LayoutTypePortlet;
+import com.liferay.portal.model.Role;
 import com.liferay.portal.model.Theme;
 import com.liferay.portal.model.User;
 import com.liferay.portal.model.impl.ColorSchemeImpl;
@@ -69,6 +70,7 @@ import com.liferay.portal.service.ImageLocalServiceUtil;
 import com.liferay.portal.service.LayoutLocalServiceUtil;
 import com.liferay.portal.service.LayoutSetLocalServiceUtil;
 import com.liferay.portal.service.OrganizationLocalServiceUtil;
+import com.liferay.portal.service.RoleLocalServiceUtil;
 import com.liferay.portal.service.ThemeLocalServiceUtil;
 import com.liferay.portal.service.UserLocalServiceUtil;
 import com.liferay.portal.service.permission.GroupPermissionUtil;
@@ -85,6 +87,7 @@ import com.liferay.portal.util.PortletKeys;
 import com.liferay.portal.util.PropsKeys;
 import com.liferay.portal.util.PropsUtil;
 import com.liferay.portal.util.PropsValues;
+import com.liferay.portal.util.RoleNames;
 import com.liferay.portal.util.WebKeys;
 import com.liferay.portlet.PortletURLImpl;
 import com.liferay.util.Normalizer;
@@ -258,22 +261,15 @@ public class ServicePreAction extends Action {
 	protected void addDefaultUserPrivateLayouts(User user)
 		throws PortalException, SystemException {
 
-		if (!PropsValues.LAYOUT_USER_PRIVATE_LAYOUTS_AUTO_CREATE) {
-			return;
+		Group userGroup = user.getGroup();
+
+		if (privateLARFile != null) {
+			addDefaultLayoutsByLAR(
+				user.getUserId(), userGroup.getGroupId(), true, privateLARFile);
 		}
-
-		if (!user.hasPrivateLayouts()) {
-			Group userGroup = user.getGroup();
-
-			if (privateLARFile != null) {
-				addDefaultLayoutsByLAR(
-					user.getUserId(), userGroup.getGroupId(), true,
-					privateLARFile);
-			}
-			else {
-				addDefaultUserPrivateLayoutByProperties(
-					user.getUserId(), userGroup.getGroupId());
-			}
+		else {
+			addDefaultUserPrivateLayoutByProperties(
+				user.getUserId(), userGroup.getGroupId());
 		}
 	}
 
@@ -359,47 +355,32 @@ public class ServicePreAction extends Action {
 	protected void addDefaultUserPublicLayouts(User user)
 		throws PortalException, SystemException {
 
-		if (!PropsValues.LAYOUT_USER_PUBLIC_LAYOUTS_AUTO_CREATE) {
-			return;
+		Group userGroup = user.getGroup();
+
+		if (publicLARFile != null) {
+			addDefaultLayoutsByLAR(
+				user.getUserId(), userGroup.getGroupId(), true, publicLARFile);
 		}
-
-		if (!user.hasPublicLayouts()) {
-			Group userGroup = user.getGroup();
-
-			if (publicLARFile != null) {
-				addDefaultLayoutsByLAR(
-					user.getUserId(), userGroup.getGroupId(), true,
-					publicLARFile);
-			}
-			else {
-				addDefaultUserPublicLayoutByProperties(
-					user.getUserId(), userGroup.getGroupId());
-			}
+		else {
+			addDefaultUserPublicLayoutByProperties(
+				user.getUserId(), userGroup.getGroupId());
 		}
 	}
 
 	protected void deleteDefaultUserPrivateLayouts(User user)
 		throws PortalException, SystemException {
 
-		if (!PropsValues.LAYOUT_USER_PRIVATE_LAYOUTS_ENABLED &&
-			user.hasPrivateLayouts()) {
+		Group userGroup = user.getGroup();
 
-			Group userGroup = user.getGroup();
-
-			LayoutLocalServiceUtil.deleteLayouts(userGroup.getGroupId(), true);
-		}
+		LayoutLocalServiceUtil.deleteLayouts(userGroup.getGroupId(), true);
 	}
 
 	protected void deleteDefaultUserPublicLayouts(User user)
 		throws PortalException, SystemException {
 
-		if (!PropsValues.LAYOUT_USER_PUBLIC_LAYOUTS_ENABLED &&
-			user.hasPublicLayouts()) {
+		Group userGroup = user.getGroup();
 
-			Group userGroup = user.getGroup();
-
-			LayoutLocalServiceUtil.deleteLayouts(userGroup.getGroupId(), false);
-		}
+		LayoutLocalServiceUtil.deleteLayouts(userGroup.getGroupId(), false);
 	}
 
 	protected Object[] getDefaultLayout(
@@ -996,19 +977,7 @@ public class ServicePreAction extends Action {
 		// Layouts
 
 		if (signedIn) {
-			if (PropsValues.LAYOUT_USER_PRIVATE_LAYOUTS_ENABLED) {
-				addDefaultUserPrivateLayouts(user);
-			}
-			else {
-				deleteDefaultUserPrivateLayouts(user);
-			}
-
-			if (PropsValues.LAYOUT_USER_PUBLIC_LAYOUTS_ENABLED) {
-				addDefaultUserPublicLayouts(user);
-			}
-			else {
-				deleteDefaultUserPublicLayouts(user);
-			}
+			updateUserLayouts(user);
 		}
 
 		Layout layout = null;
@@ -1526,6 +1495,99 @@ public class ServicePreAction extends Action {
 
 		request.setAttribute(
 			WebKeys.PORTLET_PARALLEL_RENDER, parallelRenderEnableObj);
+	}
+
+	protected void updateUserLayouts(User user) throws Exception {
+
+		// Private layouts
+
+		boolean addDefaultUserPrivateLayouts = false;
+
+		if (PropsValues.LAYOUT_USER_PRIVATE_LAYOUTS_ENABLED &&
+			PropsValues.LAYOUT_USER_PRIVATE_LAYOUTS_AUTO_CREATE) {
+
+			addDefaultUserPrivateLayouts = true;
+
+			if (PropsValues.LAYOUT_USER_PRIVATE_LAYOUTS_POWER_USER_REQUIRED) {
+				Role powerUserRole = RoleLocalServiceUtil.getRole(
+					user.getCompanyId(), RoleNames.POWER_USER);
+
+				if (!UserLocalServiceUtil.hasRoleUser(
+						powerUserRole.getRoleId(), user.getUserId())) {
+
+					addDefaultUserPrivateLayouts = false;
+				}
+			}
+		}
+
+		if (addDefaultUserPrivateLayouts && !user.hasPrivateLayouts()) {
+			addDefaultUserPrivateLayouts(user);
+		}
+
+		boolean deleteDefaultUserPrivateLayouts = false;
+
+		if (!PropsValues.LAYOUT_USER_PRIVATE_LAYOUTS_ENABLED) {
+			deleteDefaultUserPrivateLayouts = true;
+		}
+		else if (PropsValues.LAYOUT_USER_PRIVATE_LAYOUTS_POWER_USER_REQUIRED) {
+			Role powerUserRole = RoleLocalServiceUtil.getRole(
+				user.getCompanyId(), RoleNames.POWER_USER);
+
+			if (!UserLocalServiceUtil.hasRoleUser(
+					powerUserRole.getRoleId(), user.getUserId())) {
+
+				deleteDefaultUserPrivateLayouts = true;
+			}
+		}
+
+		if (deleteDefaultUserPrivateLayouts && user.hasPrivateLayouts()) {
+			deleteDefaultUserPrivateLayouts(user);
+		}
+
+		// Public pages
+
+		boolean addDefaultUserPublicLayouts = false;
+
+		if (PropsValues.LAYOUT_USER_PUBLIC_LAYOUTS_ENABLED &&
+			PropsValues.LAYOUT_USER_PUBLIC_LAYOUTS_AUTO_CREATE) {
+
+			addDefaultUserPublicLayouts = true;
+
+			if (PropsValues.LAYOUT_USER_PUBLIC_LAYOUTS_POWER_USER_REQUIRED) {
+				Role powerUserRole = RoleLocalServiceUtil.getRole(
+					user.getCompanyId(), RoleNames.POWER_USER);
+
+				if (!UserLocalServiceUtil.hasRoleUser(
+						powerUserRole.getRoleId(), user.getUserId())) {
+
+					addDefaultUserPublicLayouts = false;
+				}
+			}
+		}
+
+		if (addDefaultUserPublicLayouts && !user.hasPublicLayouts()) {
+			addDefaultUserPublicLayouts(user);
+		}
+
+		boolean deleteDefaultUserPublicLayouts = false;
+
+		if (!PropsValues.LAYOUT_USER_PUBLIC_LAYOUTS_ENABLED) {
+			deleteDefaultUserPublicLayouts = true;
+		}
+		else if (PropsValues.LAYOUT_USER_PUBLIC_LAYOUTS_POWER_USER_REQUIRED) {
+			Role powerUserRole = RoleLocalServiceUtil.getRole(
+				user.getCompanyId(), RoleNames.POWER_USER);
+
+			if (!UserLocalServiceUtil.hasRoleUser(
+					powerUserRole.getRoleId(), user.getUserId())) {
+
+				deleteDefaultUserPublicLayouts = true;
+			}
+		}
+
+		if (deleteDefaultUserPublicLayouts && user.hasPublicLayouts()) {
+			deleteDefaultUserPublicLayouts(user);
+		}
 	}
 
 	protected File privateLARFile;
