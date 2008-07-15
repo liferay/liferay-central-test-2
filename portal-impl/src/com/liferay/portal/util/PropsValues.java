@@ -586,6 +586,9 @@ public class PropsValues {
 	public static final String LDAP_USER_IMPL =
 		PropsUtil.get(PropsKeys.LDAP_USER_IMPL);
 
+	public static final boolean LIVE_USERS_ENABLED = GetterUtil.getBoolean(
+		PropsUtil.get(PropsKeys.LIVE_USERS_ENABLED));
+
 	public static final boolean LOCALE_DEFAULT_REQUEST = GetterUtil.getBoolean(
 		PropsUtil.get(PropsKeys.LOCALE_DEFAULT_REQUEST));
 

@@ -92,19 +92,21 @@ public class PortalSessionListener implements HttpSessionListener {
 				return;
 			}
 
-			long userId = userIdObj.longValue();
-			long companyId = getCompanyId(userId);
-			String sessionId = session.getId();
+			if (PropsValues.LIVE_USERS_ENABLED) {
+				long userId = userIdObj.longValue();
+				long companyId = getCompanyId(userId);
+				String sessionId = session.getId();
 
-			JSONObject jsonObj = JSONFactoryUtil.createJSONObject();
+				JSONObject jsonObj = JSONFactoryUtil.createJSONObject();
 
-			jsonObj.put("command", "signOut");
-			jsonObj.put("companyId", companyId);
-			jsonObj.put("userId", userId);
-			jsonObj.put("sessionId", sessionId);
+				jsonObj.put("command", "signOut");
+				jsonObj.put("companyId", companyId);
+				jsonObj.put("userId", userId);
+				jsonObj.put("sessionId", sessionId);
 
-			MessageBusUtil.sendMessage(
-				DestinationNames.LIVE_USERS, jsonObj.toString());
+				MessageBusUtil.sendMessage(
+					DestinationNames.LIVE_USERS, jsonObj.toString());
+			}
 
 			session.removeAttribute(Globals.LOCALE_KEY);
 		}

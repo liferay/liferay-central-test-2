@@ -635,6 +635,8 @@ public class PropsKeys {
 
 	public static final String LIBRARY_DOWNLOAD_URL = "library.download.url.";
 
+	public static final String LIVE_USERS_ENABLED = "live.users.enabled";
+
 	public static final String LOCALE_DEFAULT_REQUEST = "locale.default.request";
 
 	public static final String LOCALES = "locales";

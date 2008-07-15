@@ -30,6 +30,7 @@ import com.liferay.portal.kernel.messaging.DestinationNames;
 import com.liferay.portal.kernel.messaging.MessageBusUtil;
 import com.liferay.portal.kernel.servlet.HttpHeaders;
 import com.liferay.portal.util.PortalUtil;
+import com.liferay.portal.util.PropsValues;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -57,25 +58,27 @@ public class LoginPostAction extends Action {
 
 			HttpSession session = request.getSession();
 
-			long companyId = PortalUtil.getCompanyId(request);
-			long userId = PortalUtil.getUserId(request);
-			String sessionId = session.getId();
-			String remoteAddr = request.getRemoteAddr();
-			String remoteHost = request.getRemoteHost();
-			String userAgent = request.getHeader(HttpHeaders.USER_AGENT);
+			if (PropsValues.LIVE_USERS_ENABLED) {
+				long companyId = PortalUtil.getCompanyId(request);
+				long userId = PortalUtil.getUserId(request);
+				String sessionId = session.getId();
+				String remoteAddr = request.getRemoteAddr();
+				String remoteHost = request.getRemoteHost();
+				String userAgent = request.getHeader(HttpHeaders.USER_AGENT);
 
-			JSONObject jsonObj = JSONFactoryUtil.createJSONObject();
+				JSONObject jsonObj = JSONFactoryUtil.createJSONObject();
 
-			jsonObj.put("command", "signIn");
-			jsonObj.put("companyId", companyId);
-			jsonObj.put("userId", userId);
-			jsonObj.put("sessionId", sessionId);
-			jsonObj.put("remoteAddr", remoteAddr);
-			jsonObj.put("remoteHost", remoteHost);
-			jsonObj.put("userAgent", userAgent);
+				jsonObj.put("command", "signIn");
+				jsonObj.put("companyId", companyId);
+				jsonObj.put("userId", userId);
+				jsonObj.put("sessionId", sessionId);
+				jsonObj.put("remoteAddr", remoteAddr);
+				jsonObj.put("remoteHost", remoteHost);
+				jsonObj.put("userAgent", userAgent);
 
-			MessageBusUtil.sendMessage(
-				DestinationNames.LIVE_USERS, jsonObj.toString());
+				MessageBusUtil.sendMessage(
+					DestinationNames.LIVE_USERS, jsonObj.toString());
+			}
 
 			session.removeAttribute(Globals.LOCALE_KEY);
 		}
