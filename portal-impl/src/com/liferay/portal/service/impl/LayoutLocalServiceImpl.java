@@ -31,7 +31,6 @@ import com.liferay.portal.PortalException;
 import com.liferay.portal.RequiredLayoutException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.language.LanguageUtil;
-import com.liferay.portal.kernel.portlet.FriendlyURLMapper;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.LocaleUtil;
 import com.liferay.portal.kernel.util.StringPool;
@@ -1147,7 +1146,7 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 
 		LayoutImpl.validateFriendlyURLKeyword(friendlyURL);
 
-		List<FriendlyURLMapper> friendlyURLMappers =
+		/*List<FriendlyURLMapper> friendlyURLMappers =
 			portletLocalService.getFriendlyURLMappers();
 
 		for (FriendlyURLMapper friendlyURLMapper : friendlyURLMappers) {
@@ -1160,7 +1159,7 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 
 				throw lfurle;
 			}
-		}
+		}*/
 
 		String layoutIdFriendlyURL = friendlyURL.substring(1);
 

@@ -41,6 +41,45 @@ String type = BeanParamUtil.getString(selLayout, request, "type");
 String friendlyURL = BeanParamUtil.getString(selLayout, request, "friendlyURL");
 %>
 
+<liferay-ui:error exception="<%= LayoutFriendlyURLException.class %>">
+
+	<%
+	LayoutFriendlyURLException lfurle = (LayoutFriendlyURLException)errorException;
+	%>
+
+	<c:if test="<%= lfurle.getType() == LayoutFriendlyURLException.DOES_NOT_START_WITH_SLASH %>">
+		<liferay-ui:message key="please-enter-a-friendly-url-that-begins-with-a-slash" />
+	</c:if>
+
+	<c:if test="<%= lfurle.getType() == LayoutFriendlyURLException.ENDS_WITH_SLASH %>">
+		<liferay-ui:message key="please-enter-a-friendly-url-that-does-not-end-with-a-slash" />
+	</c:if>
+
+	<c:if test="<%= lfurle.getType() == LayoutFriendlyURLException.TOO_SHORT %>">
+		<liferay-ui:message key="please-enter-a-friendly-url-that-is-at-least-two-characters-long" />
+	</c:if>
+
+	<c:if test="<%= lfurle.getType() == LayoutFriendlyURLException.ADJACENT_SLASHES %>">
+		<liferay-ui:message key="please-enter-a-friendly-url-that-does-not-have-adjacent-slashes" />
+	</c:if>
+
+	<c:if test="<%= lfurle.getType() == LayoutFriendlyURLException.INVALID_CHARACTERS %>">
+		<liferay-ui:message key="please-enter-a-friendly-url-with-valid-characters" />
+	</c:if>
+
+	<c:if test="<%= lfurle.getType() == LayoutFriendlyURLException.DUPLICATE %>">
+		<liferay-ui:message key="please-enter-a-unique-friendly-url" />
+	</c:if>
+
+	<c:if test="<%= lfurle.getType() == LayoutFriendlyURLException.KEYWORD_CONFLICT %>">
+		<%= LanguageUtil.format(pageContext, "please-enter-a-friendly-url-that-does-not-conflict-with-the-keyword-x", lfurle.getKeywordConflict()) %>
+	</c:if>
+
+	<c:if test="<%= lfurle.getType() == LayoutFriendlyURLException.POSSIBLE_DUPLICATE %>">
+		<liferay-ui:message key="the-friendly-url-may-conflict-with-another-page" />
+	</c:if>
+</liferay-ui:error>
+
 <table border="0" cellpadding="0" cellspacing="0" width="100%">
 <tr>
 	<td>
