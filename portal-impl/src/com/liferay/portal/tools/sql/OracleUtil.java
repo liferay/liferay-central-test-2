@@ -34,6 +34,8 @@ import java.io.StringReader;
  * <a href="OracleUtil.java.html"><b><i>View Source</i></b></a>
  *
  * @author Alexander Chow
+ * @author Sandeep Soni
+ * @author Ganesh Ram
  *
  */
 public class OracleUtil extends DBUtil {
@@ -202,10 +204,7 @@ public class OracleUtil extends DBUtil {
 
 	private String _preBuildSQL(String template) throws IOException {
 		template = convertTimestamp(template);
-		
-		// Added by Sandeep and Ganesh to fix LEP-6686
-		
-		template = StringUtil.replace(template, TEMPLATE, getTemplate(),true);
+		template = StringUtil.replace(template, TEMPLATE, getTemplate(), true);
 
 		template = reword(template);
 		template = StringUtil.replace(

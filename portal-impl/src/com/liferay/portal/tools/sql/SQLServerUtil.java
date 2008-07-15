@@ -34,6 +34,8 @@ import java.io.StringReader;
  * <a href="SQLServerUtil.java.html"><b><i>View Source</i></b></a>
  *
  * @author Alexander Chow
+ * @author Sandeep Soni
+ * @author Ganesh Ram
  *
  */
 public class SQLServerUtil extends DBUtil {
@@ -44,10 +46,7 @@ public class SQLServerUtil extends DBUtil {
 
 	public String buildSQL(String template) throws IOException {
 		template = convertTimestamp(template);
-		
-		// Added by Sandeep and Ganesh to fix LEP-6686
-		
-		template = StringUtil.replace(template, TEMPLATE, getTemplate(),true);
+		template = StringUtil.replace(template, TEMPLATE, getTemplate(), true);
 
 		template = reword(template);
 		template = StringUtil.replace(template, "\ngo;\n", "\ngo\n");

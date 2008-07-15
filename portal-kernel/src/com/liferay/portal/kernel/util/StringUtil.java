@@ -44,6 +44,8 @@ import java.util.StringTokenizer;
  * <a href="StringUtil.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
+ * @author Sandeep Soni
+ * @author Ganesh Ram
  *
  */
 public class StringUtil {
@@ -676,19 +678,26 @@ public class StringUtil {
 		return s;
 	}
 
-	// Added by Sandeep and Ganesh to fix LEP-6686
-
 	public static String replace(
-		String s, String[] oldSubs, String[] newSubs , boolean exactmatch) {
-		if ( !exactmatch) {
-			replace( s, oldSubs,  newSubs);
-		} 
+		String s, String[] oldSubs, String[] newSubs, boolean exactMatch) {
+
+		if ((s == null) || (oldSubs == null) || (newSubs == null)) {
+			return null;
+		}
+
+		if (oldSubs.length != newSubs.length) {
+			return s;
+		}
+
+		if (!exactMatch) {
+			replace(s, oldSubs, newSubs);
+		}
 		else {
 			for (int i = 0; i < oldSubs.length; i++) {
-				String regEx = "\\b" + oldSubs[i] + "\\b" ;
-				s = s.replaceAll( regEx , newSubs[i]);
+				s = s.replaceAll("\\b" + oldSubs[i] + "\\b" , newSubs[i]);
 			}
 		}
+
 		return s;
 	}
 
@@ -1032,8 +1041,8 @@ public class StringUtil {
 	 * @param		s1 the first string
 	 * @param		s2 the second string
 	 *
-	 * @return		the number of starting letters that s1 and s2 have in
-	 * common before they deviate
+	 * @return		the number of starting letters that s1 and s2 have in common
+	 *				before they deviate
 	 */
 	public static int startsWithWeight(String s1, String s2) {
 		if ((s1 == null) || (s2 == null)) {

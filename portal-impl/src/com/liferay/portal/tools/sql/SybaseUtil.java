@@ -35,6 +35,8 @@ import java.io.StringReader;
  *
  * @author Alexander Chow
  * @author Bruno Farache
+ * @author Sandeep Soni
+ * @author Ganesh Ram
  *
  */
 public class SybaseUtil extends DBUtil {
@@ -45,9 +47,6 @@ public class SybaseUtil extends DBUtil {
 
 	public String buildSQL(String template) throws IOException {
 		template = convertTimestamp(template);
-
-		// Added by Sandeep and Ganesh to fix LEP-6686
-
 		template = StringUtil.replace(template, TEMPLATE, getTemplate(), true);
 
 		template = reword(template);
@@ -133,7 +132,8 @@ public class SybaseUtil extends DBUtil {
 
 				line = StringUtil.replace(
 					"exec sp_rename '@table@.@old-column@', '@new-column@', " +
-						"'column';",REWORD_TEMPLATE, template);
+						"'column';",
+					REWORD_TEMPLATE, template);
 			}
 
 			sb.append(line);
