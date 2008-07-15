@@ -3,7 +3,6 @@
 
 <service-builder package-path="com.liferay.portlet.workflow">
 	<namespace>Workflow</namespace>
-	<entity name="SAWWorkflow" local-service="true" remote-service="false" />
 	<entity name="WorkflowComponent" local-service="false" remote-service="true" />
 	<entity name="WorkflowDefinition" local-service="false" remote-service="true">
 

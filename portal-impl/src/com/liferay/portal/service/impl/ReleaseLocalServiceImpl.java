@@ -144,7 +144,6 @@ public class ReleaseLocalServiceImpl extends ReleaseLocalServiceBaseImpl {
 		try {
 			DBUtil dbUtil = DBUtil.getInstance();
 
-			dbUtil.runSQLTemplate("jbpm-tables.sql", false);
 			dbUtil.runSQLTemplate("portal-tables.sql", false);
 			dbUtil.runSQLTemplate("portal-data-common.sql", false);
 			dbUtil.runSQLTemplate("portal-data-counter.sql", false);
