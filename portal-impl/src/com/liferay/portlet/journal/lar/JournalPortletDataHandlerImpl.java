@@ -1112,7 +1112,8 @@ public class JournalPortletDataHandlerImpl implements PortletDataHandler {
 		StringBuilder sb = new StringBuilder();
 
 		sb.append(context.getPortletPath(PortletKeys.JOURNAL));
-		sb.append("/templates/thumbnail.");
+		sb.append("/templates/thumbnail-");
+		sb.append(template.getTemplateId());
 		sb.append(template.getSmallImageType());
 
 		return sb.toString();
