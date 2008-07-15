@@ -35,6 +35,9 @@ public class TestPropsValues {
 	public static final long COMPANY_ID = GetterUtil.getLong(
 		TestPropsUtil.get("company.id"));
 
+	public static final String COMPANY_WEB_ID =
+		TestPropsUtil.get("company.web.id");
+
 	public static final long LAYOUT_PLID = GetterUtil.getLong(
 		TestPropsUtil.get("layout.plid"));
 

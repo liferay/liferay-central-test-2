@@ -34,6 +34,7 @@ import com.liferay.portal.search.IndexSearcherImpl;
 import com.liferay.portal.search.IndexWriterImpl;
 import com.liferay.portal.search.lucene.LuceneSearchEngineUtil;
 import com.liferay.portal.search.lucene.LuceneUtil;
+import com.liferay.portal.service.CompanyLocalServiceUtil;
 import com.liferay.portal.spring.util.SpringUtil;
 import com.liferay.portal.util.PropsValues;
 import com.liferay.portal.util.TestPropsValues;
@@ -103,6 +104,16 @@ public class ServiceTestSuite extends TestSuite {
 		addTestSuite(IGImageServiceTest.class);
 		addTestSuite(MBMessageServiceTest.class);
 		addTestSuite(SocialRelationLocalServiceTest.class);
+
+		// Company
+
+		try {
+			CompanyLocalServiceUtil.checkCompany(
+				TestPropsValues.COMPANY_WEB_ID);
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 
 	public void test() {
