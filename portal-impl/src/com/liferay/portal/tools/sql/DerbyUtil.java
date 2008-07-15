@@ -44,7 +44,10 @@ public class DerbyUtil extends DBUtil {
 
 	public String buildSQL(String template) throws IOException {
 		template = convertTimestamp(template);
-		template = StringUtil.replace(template, TEMPLATE, getTemplate());
+		
+		// Added by Sandeep and Ganesh to fix LEP-6686
+		
+		template = StringUtil.replace(template, TEMPLATE, getTemplate(),true);
 
 		template = reword(template );
 		//template = _removeLongInserts(derby);

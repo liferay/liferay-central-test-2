@@ -676,6 +676,22 @@ public class StringUtil {
 		return s;
 	}
 
+	// Added by Sandeep and Ganesh to fix LEP-6686
+
+	public static String replace(
+		String s, String[] oldSubs, String[] newSubs , boolean exactmatch) {
+		if ( !exactmatch) {
+			replace( s, oldSubs,  newSubs);
+		} 
+		else {
+			for (int i = 0; i < oldSubs.length; i++) {
+				String regEx = "\\b" + oldSubs[i] + "\\b" ;
+				s = s.replaceAll( regEx , newSubs[i]);
+			}
+		}
+		return s;
+	}
+
 	/**
 	 * Returns a string with replaced values. This method will replace all text
 	 * in the given string, between the beginning and ending delimiter, with new
@@ -1016,8 +1032,8 @@ public class StringUtil {
 	 * @param		s1 the first string
 	 * @param		s2 the second string
 	 *
-	 * @return		the number of starting letters that s1 and s2 have in common
-	 *				before they deviate
+	 * @return		the number of starting letters that s1 and s2 have in
+	 * common before they deviate
 	 */
 	public static int startsWithWeight(String s1, String s2) {
 		if ((s1 == null) || (s2 == null)) {
