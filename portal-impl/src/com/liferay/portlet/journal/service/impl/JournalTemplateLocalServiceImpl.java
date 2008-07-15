@@ -24,45 +24,47 @@ package com.liferay.portlet.journal.service.impl;
 
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
+import com.liferay.portal.kernel.util.FileUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.OrderByComparator;
+import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
-import com.liferay.portal.mirage.custom.MirageServiceFactory;
-import com.liferay.portal.mirage.model.JournalMirageTemplate;
-import com.liferay.portal.mirage.model.OptionalJournalTemplateCriteria;
+import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.ResourceConstants;
+import com.liferay.portal.model.User;
 import com.liferay.portal.util.PortalUtil;
+import com.liferay.portal.util.PropsKeys;
+import com.liferay.portal.util.PropsUtil;
+import com.liferay.portlet.journal.DuplicateTemplateIdException;
 import com.liferay.portlet.journal.NoSuchTemplateException;
 import com.liferay.portlet.journal.RequiredTemplateException;
+import com.liferay.portlet.journal.TemplateDescriptionException;
+import com.liferay.portlet.journal.TemplateIdException;
+import com.liferay.portlet.journal.TemplateNameException;
+import com.liferay.portlet.journal.TemplateSmallImageNameException;
+import com.liferay.portlet.journal.TemplateSmallImageSizeException;
+import com.liferay.portlet.journal.TemplateXslException;
 import com.liferay.portlet.journal.model.JournalTemplate;
 import com.liferay.portlet.journal.model.impl.JournalTemplateImpl;
 import com.liferay.portlet.journal.service.base.JournalTemplateLocalServiceBaseImpl;
-
-import com.sun.portal.cms.mirage.exception.CMSException;
-import com.sun.portal.cms.mirage.exception.TemplateNotFoundException;
-import com.sun.portal.cms.mirage.exception.ValidationException;
-import com.sun.portal.cms.mirage.model.custom.Template;
-import com.sun.portal.cms.mirage.model.search.SearchCriteria;
-import com.sun.portal.cms.mirage.model.search.SearchFieldValue;
-import com.sun.portal.cms.mirage.service.custom.ContentTypeService;
+import com.liferay.portlet.journal.util.JournalUtil;
 
 import java.io.File;
+import java.io.IOException;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Iterator;
+import java.util.Date;
 import java.util.List;
-import java.util.Map;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+
+import org.dom4j.DocumentException;
 
 /**
  * <a href="JournalTemplateLocalServiceImpl.java.html"><b><i>View Source</i></b>
  * </a>
  *
  * @author Brian Wing Shun Chan
- * @author Karthik Sudarshan
  *
  */
 public class JournalTemplateLocalServiceImpl
@@ -78,10 +80,9 @@ public class JournalTemplateLocalServiceImpl
 
 		return addTemplate(
 			null, userId, templateId, autoTemplateId, plid, structureId, name,
-				description, xsl, formatXsl, langType, cacheable, smallImage,
-					smallImageURL, smallFile,
-						Boolean.valueOf(addCommunityPermissions),
-							Boolean.valueOf(addGuestPermissions), null, null);
+			description, xsl, formatXsl, langType, cacheable, smallImage,
+			smallImageURL, smallFile, Boolean.valueOf(addCommunityPermissions),
+			Boolean.valueOf(addGuestPermissions), null, null);
 	}
 
 	public JournalTemplate addTemplate(
@@ -94,10 +95,9 @@ public class JournalTemplateLocalServiceImpl
 
 		return addTemplate(
 			uuid, userId, templateId, autoTemplateId, plid, structureId, name,
-				description, xsl, formatXsl, langType, cacheable, smallImage,
-					smallImageURL, smallFile,
-						Boolean.valueOf(addCommunityPermissions),
-							Boolean.valueOf(addGuestPermissions), null, null);
+			description, xsl, formatXsl, langType, cacheable, smallImage,
+			smallImageURL, smallFile, Boolean.valueOf(addCommunityPermissions),
+			Boolean.valueOf(addGuestPermissions), null, null);
 	}
 
 	public JournalTemplate addTemplate(
@@ -110,9 +110,9 @@ public class JournalTemplateLocalServiceImpl
 
 		return addTemplate(
 			null, userId, templateId, autoTemplateId, plid, structureId, name,
-				description, xsl, formatXsl, langType, cacheable, smallImage,
-					smallImageURL, smallFile, null, null, communityPermissions,
-						guestPermissions);
+			description, xsl, formatXsl, langType, cacheable, smallImage,
+			smallImageURL, smallFile, null, null, communityPermissions,
+			guestPermissions);
 	}
 
 	public JournalTemplate addTemplate(
@@ -128,10 +128,9 @@ public class JournalTemplateLocalServiceImpl
 
 		return addTemplateToGroup(
 			uuid, userId, templateId, autoTemplateId, groupId, structureId,
-				name, description, xsl, formatXsl, langType, cacheable,
-					smallImage, smallImageURL, smallFile,
-						addCommunityPermissions, addGuestPermissions,
-							communityPermissions, guestPermissions);
+			name, description, xsl, formatXsl, langType, cacheable, smallImage,
+			smallImageURL, smallFile, addCommunityPermissions,
+			addGuestPermissions, communityPermissions, guestPermissions);
 	}
 
 	public JournalTemplate addTemplateToGroup(
@@ -143,55 +142,82 @@ public class JournalTemplateLocalServiceImpl
 			String[] communityPermissions, String[] guestPermissions)
 		throws PortalException, SystemException {
 
-		JournalTemplate template = new JournalTemplateImpl();
-		JournalMirageTemplate mirageTemplate =
-			new JournalMirageTemplate(template);
+		// Template
 
-		JournalMirageTemplate.CreationAttributes creationAttributes =
-			mirageTemplate.new CreationAttributes(
-				formatXsl, autoTemplateId, smallFile);
-		mirageTemplate.setCreationAttributes(creationAttributes);
+		User user = userPersistence.findByPrimaryKey(userId);
+		templateId = templateId.trim().toUpperCase();
+		Date now = new Date();
 
-		template.setTemplateId(templateId);
-		template.setUserId(userId);
-		template.setLangType(langType);
-		template.setXsl(xsl);
+		try {
+			if (formatXsl) {
+				if (langType.equals(JournalTemplateImpl.LANG_TYPE_VM)) {
+					xsl = JournalUtil.formatVM(xsl);
+				}
+				else {
+					xsl = JournalUtil.formatXML(xsl);
+				}
+			}
+		}
+		catch (DocumentException de) {
+			throw new TemplateXslException();
+		}
+		catch (IOException ioe) {
+			throw new TemplateXslException();
+		}
+
+		byte[] smallBytes = null;
+
+		try {
+			smallBytes = FileUtil.getBytes(smallFile);
+		}
+		catch (IOException ioe) {
+		}
+
+		validate(
+			groupId, templateId, autoTemplateId, name, description, xsl,
+			smallImage, smallImageURL, smallFile, smallBytes);
+
+		if (autoTemplateId) {
+			templateId = String.valueOf(counterLocalService.increment());
+		}
+
+		long id = counterLocalService.increment();
+
+		JournalTemplate template = journalTemplatePersistence.create(id);
+
+		template.setUuid(uuid);
 		template.setGroupId(groupId);
+		template.setCompanyId(user.getCompanyId());
+		template.setUserId(user.getUserId());
+		template.setUserName(user.getFullName());
+		template.setCreateDate(now);
+		template.setModifiedDate(now);
+		template.setTemplateId(templateId);
+		template.setStructureId(structureId);
 		template.setName(name);
 		template.setDescription(description);
-		template.setSmallImage(smallImage);
-		template.setSmallImageURL(smallImageURL);
-		template.setUuid(uuid);
-		template.setStructureId(structureId);
+		template.setXsl(xsl);
+		template.setLangType(langType);
 		template.setCacheable(cacheable);
+		template.setSmallImage(smallImage);
+		template.setSmallImageId(counterLocalService.increment());
+		template.setSmallImageURL(smallImageURL);
 
-		ContentTypeService contentTypeService =
-			MirageServiceFactory.getContentTypeService();
-		try {
-			contentTypeService.addTemplateToContentType(mirageTemplate, null);
-		}
-		catch (CMSException cmse) {
-			_throwException(cmse);
-		}
-		catch (ValidationException ve) {
+		journalTemplatePersistence.update(template, false);
 
-			// Validation Exception will not be thrown
-			// as no Template checking is added
+		// Small image
 
-		}
-
-		// Get the new Template from the JournalMirageTemplate object
-
-		template = mirageTemplate.getTemplate();
+		saveImages(
+			smallImage, template.getSmallImageId(), smallFile, smallBytes);
 
 		// Resources
 
 		if ((addCommunityPermissions != null) &&
-				(addGuestPermissions != null)) {
+			(addGuestPermissions != null)) {
 
 			addTemplateResources(
 				template, addCommunityPermissions.booleanValue(),
-					addGuestPermissions.booleanValue());
+				addGuestPermissions.booleanValue());
 		}
 		else {
 			addTemplateResources(
@@ -206,8 +232,8 @@ public class JournalTemplateLocalServiceImpl
 			boolean addGuestPermissions)
 		throws PortalException, SystemException {
 
-		JournalTemplate template =
-			journalTemplatePersistence.findByG_T(groupId, templateId);
+		JournalTemplate template = journalTemplatePersistence.findByG_T(
+			groupId, templateId);
 
 		addTemplateResources(
 			template, addCommunityPermissions, addGuestPermissions);
@@ -220,9 +246,9 @@ public class JournalTemplateLocalServiceImpl
 
 		resourceLocalService.addResources(
 			template.getCompanyId(), template.getGroupId(),
-				template.getUserId(), JournalTemplate.class.getName(),
-					template.getId(), false, addCommunityPermissions,
-						addGuestPermissions);
+			template.getUserId(), JournalTemplate.class.getName(),
+			template.getId(), false, addCommunityPermissions,
+			addGuestPermissions);
 	}
 
 	public void addTemplateResources(
@@ -230,8 +256,8 @@ public class JournalTemplateLocalServiceImpl
 			String[] guestPermissions)
 		throws PortalException, SystemException {
 
-		JournalTemplate template =
-			journalTemplatePersistence.findByG_T(groupId, templateId);
+		JournalTemplate template = journalTemplatePersistence.findByG_T(
+			groupId, templateId);
 
 		addTemplateResources(template, communityPermissions, guestPermissions);
 	}
@@ -243,43 +269,27 @@ public class JournalTemplateLocalServiceImpl
 
 		resourceLocalService.addModelResources(
 			template.getCompanyId(), template.getGroupId(),
-				template.getUserId(), JournalTemplate.class.getName(),
-					template.getId(), communityPermissions, guestPermissions);
+			template.getUserId(), JournalTemplate.class.getName(),
+			template.getId(), communityPermissions, guestPermissions);
 	}
 
 	public void checkNewLine(long groupId, String templateId)
 		throws PortalException, SystemException {
 
-		JournalTemplate template = _getTemplate(groupId, templateId);
+		JournalTemplate template = journalTemplatePersistence.findByG_T(
+			groupId, templateId);
 
 		String xsl = template.getXsl();
 
 		if ((xsl != null) && (xsl.indexOf("\\n") != -1)) {
-			xsl = StringUtil.replace(xsl, new String[] {
-				"\\n", "\\r"
-			}, new String[] {
-				"\n", "\r"
-			});
+			xsl = StringUtil.replace(
+				xsl,
+				new String[] {"\\n", "\\r"},
+				new String[] {"\n", "\r"});
 
 			template.setXsl(xsl);
 
-			JournalMirageTemplate journalMirageTemplate =
-				new JournalMirageTemplate(template);
-			ContentTypeService contentTypeService =
-				MirageServiceFactory.getContentTypeService();
-
-			try {
-				contentTypeService.updateTemplateOfContentType(
-					journalMirageTemplate, null, null);
-			}
-			catch (ValidationException ve) {
-
-				// Ignore this as CMSException is thrown
-
-			}
-			catch (CMSException cmse) {
-				_throwException(cmse);
-			}
+			journalTemplatePersistence.update(template, false);
 		}
 	}
 
@@ -288,7 +298,8 @@ public class JournalTemplateLocalServiceImpl
 
 		templateId = templateId.trim().toUpperCase();
 
-		JournalTemplate template = _getTemplate(groupId, templateId);
+		JournalTemplate template = journalTemplatePersistence.findByG_T(
+			groupId, templateId);
 
 		deleteTemplate(template);
 	}
@@ -296,27 +307,9 @@ public class JournalTemplateLocalServiceImpl
 	public void deleteTemplate(JournalTemplate template)
 		throws PortalException, SystemException {
 
-		int articleCount = 0;
+		if (journalArticlePersistence.countByG_T(
+				template.getGroupId(), template.getTemplateId()) > 0) {
 
-		JournalMirageTemplate journalMirageTemplate =
-			new JournalMirageTemplate(template);
-		OptionalJournalTemplateCriteria criteria =
-			new OptionalJournalTemplateCriteria(
-				OptionalJournalTemplateCriteria
-					.ARTICLE_COUNT_BY_GROUP_AND_TEMPLATE);
-
-		ContentTypeService contentTypeService =
-			MirageServiceFactory.getContentTypeService();
-		try {
-			articleCount =
-				contentTypeService.getTemplatesCount(
-					null, journalMirageTemplate, criteria);
-		}
-		catch (CMSException cmse) {
-			_throwSystemException(cmse);
-		}
-
-		if (articleCount > 0) {
 			throw new RequiredTemplateException();
 		}
 
@@ -333,22 +326,19 @@ public class JournalTemplateLocalServiceImpl
 
 		resourceLocalService.deleteResource(
 			template.getCompanyId(), JournalTemplate.class.getName(),
-				ResourceConstants.SCOPE_INDIVIDUAL, template.getId());
+			ResourceConstants.SCOPE_INDIVIDUAL, template.getId());
 
-		try {
-			contentTypeService.deleteTemplateOfContentType(
-				null, journalMirageTemplate);
-		}
-		catch (CMSException cmse) {
-			_throwException(cmse);
-		}
+		// Template
+
+		journalTemplatePersistence.remove(template.getPrimaryKey());
 	}
 
 	public void deleteTemplates(long groupId)
 		throws PortalException, SystemException {
 
-		List<JournalTemplate> templates = getTemplates(groupId);
-		for (JournalTemplate template : templates) {
+		for (JournalTemplate template :
+				journalTemplatePersistence.findByGroupId(groupId)) {
+
 			deleteTemplate(template);
 		}
 	}
@@ -357,130 +347,27 @@ public class JournalTemplateLocalServiceImpl
 			long groupId, String structureId)
 		throws SystemException {
 
-		JournalTemplate journalTemplate = new JournalTemplateImpl();
-		journalTemplate.setGroupId(groupId);
-		journalTemplate.setStructureId(structureId);
-
-		JournalMirageTemplate journalMirageTemplate =
-			new JournalMirageTemplate(journalTemplate);
-		OptionalJournalTemplateCriteria criteria =
-			new OptionalJournalTemplateCriteria(
-				OptionalJournalTemplateCriteria.FIND_BY_GROUP_AND_STRUCTURE);
-
-		ContentTypeService contentTypeService =
-			MirageServiceFactory.getContentTypeService();
-		List<Template> templates = null;
-		try {
-			templates =
-				contentTypeService.getTemplates(
-					null, journalMirageTemplate, criteria);
-		}
-		catch (TemplateNotFoundException tnfe) {
-			_throwSystemException(tnfe);
-		}
-		if (templates == null) {
-			return null;
-		}
-		List<JournalTemplate> journalTemplates =
-			new ArrayList<JournalTemplate>(templates.size());
-		for (Template template : templates) {
-			journalTemplates.add(
-				((JournalMirageTemplate) template).getTemplate());
-		}
-		return journalTemplates;
+		return journalTemplatePersistence.findByG_S(groupId, structureId);
 	}
 
 	public List<JournalTemplate> getStructureTemplates(
 			long groupId, String structureId, int start, int end)
 		throws SystemException {
 
-		JournalTemplate journalTemplate = new JournalTemplateImpl();
-		journalTemplate.setGroupId(groupId);
-		journalTemplate.setStructureId(structureId);
-
-		JournalMirageTemplate journalMirageTemplate =
-			new JournalMirageTemplate(journalTemplate);
-		OptionalJournalTemplateCriteria criteria =
-			new OptionalJournalTemplateCriteria(
-				OptionalJournalTemplateCriteria.
-					FIND_BY_GROUP_AND_STRUCTURE_WITH_LIMIT);
-		criteria.getOptions().put(
-			OptionalJournalTemplateCriteria.RANGE_START,
-			Integer.toString(start));
-		criteria.getOptions().put(
-			OptionalJournalTemplateCriteria.RANGE_END, Integer.toString(end));
-
-		ContentTypeService contentTypeService =
-			MirageServiceFactory.getContentTypeService();
-		List<Template> templates = null;
-		try {
-			templates =
-				contentTypeService.getTemplates(
-					null, journalMirageTemplate, criteria);
-		}
-		catch (TemplateNotFoundException tnfe) {
-			_throwSystemException(tnfe);
-		}
-		if (templates == null) {
-			return null;
-		}
-		List<JournalTemplate> journalTemplates =
-			new ArrayList<JournalTemplate>(templates.size());
-		for (Template template : templates) {
-			journalTemplates.add(
-				((JournalMirageTemplate) template).getTemplate());
-		}
-		return journalTemplates;
+		return journalTemplatePersistence.findByG_S(
+			groupId, structureId, start, end);
 	}
 
 	public int getStructureTemplatesCount(long groupId, String structureId)
 		throws SystemException {
 
-		JournalTemplate journalTemplate = new JournalTemplateImpl();
-		journalTemplate.setGroupId(groupId);
-		journalTemplate.setStructureId(structureId);
-
-		JournalMirageTemplate journalMirageTemplate =
-			new JournalMirageTemplate(journalTemplate);
-		OptionalJournalTemplateCriteria criteria =
-			new OptionalJournalTemplateCriteria(
-				OptionalJournalTemplateCriteria.COUNT_BY_GROUP_AND_STRUCTURE);
-
-		ContentTypeService contentTypeService =
-			MirageServiceFactory.getContentTypeService();
-		int count = -1;
-		try {
-			count =
-				contentTypeService.getTemplatesCount(
-					null, journalMirageTemplate, criteria);
-		}
-		catch (CMSException cmse) {
-			_throwSystemException(cmse);
-		}
-		return count;
+		return journalTemplatePersistence.countByG_S(groupId, structureId);
 	}
 
 	public JournalTemplate getTemplate(long id)
 		throws PortalException, SystemException {
 
-		JournalTemplate template = new JournalTemplateImpl();
-		template.setId(id);
-		JournalMirageTemplate journalMirageTemplate =
-			new JournalMirageTemplate(template);
-		OptionalJournalTemplateCriteria criteria =
-			new OptionalJournalTemplateCriteria(
-				OptionalJournalTemplateCriteria.FIND_BY_PRIMARY_KEY);
-		ContentTypeService contentTypeService =
-			MirageServiceFactory.getContentTypeService();
-		try {
-			journalMirageTemplate =
-				(JournalMirageTemplate) contentTypeService.getTemplate(
-					journalMirageTemplate, criteria);
-		}
-		catch (TemplateNotFoundException tnfe) {
-			_throwException(tnfe);
-		}
-		return journalMirageTemplate.getTemplate();
+		return journalTemplatePersistence.findByPrimaryKey(id);
 	}
 
 	public JournalTemplate getTemplate(long groupId, String templateId)
@@ -489,13 +376,14 @@ public class JournalTemplateLocalServiceImpl
 		templateId = GetterUtil.getString(templateId).toUpperCase();
 
 		if (groupId == 0) {
-			_log.error("No group id was passed for " + templateId +
-				". Group id is " +
+			_log.error(
+				"No group id was passed for " + templateId + ". Group id is " +
 					"required since 4.2.0. Please update all custom code and " +
 						"data that references templates without a group id.");
 
 			List<JournalTemplate> templates =
-				_getTemplatesByTemplateId(templateId);
+				journalTemplatePersistence.findByTemplateId(
+					templateId);
 
 			if (templates.size() == 0) {
 				throw new NoSuchTemplateException(
@@ -507,160 +395,34 @@ public class JournalTemplateLocalServiceImpl
 			}
 		}
 		else {
-			return _getTemplate(groupId, templateId);
+			return journalTemplatePersistence.findByG_T(groupId, templateId);
 		}
 	}
 
 	public JournalTemplate getTemplateBySmallImageId(long smallImageId)
 		throws PortalException, SystemException {
 
-		JournalTemplate template = new JournalTemplateImpl();
-		template.setSmallImageId(smallImageId);
-		JournalMirageTemplate journalMirageTemplate =
-			new JournalMirageTemplate(template);
-		OptionalJournalTemplateCriteria criteria =
-			new OptionalJournalTemplateCriteria(
-				OptionalJournalTemplateCriteria.FIND_BY_SMALL_IMAGE_ID);
-		ContentTypeService contentTypeService =
-			MirageServiceFactory.getContentTypeService();
-		try {
-			journalMirageTemplate =
-				(JournalMirageTemplate) contentTypeService.getTemplate(
-					journalMirageTemplate, criteria);
-		}
-		catch (TemplateNotFoundException tnfe) {
-			_throwException(tnfe);
-		}
-		return journalMirageTemplate.getTemplate();
+		return journalTemplatePersistence.findBySmallImageId(smallImageId);
 	}
 
-	public List<JournalTemplate> getTemplates()
-		throws SystemException {
-
-		OptionalJournalTemplateCriteria criteria =
-			new OptionalJournalTemplateCriteria(
-				OptionalJournalTemplateCriteria.FIND_ALL);
-
-		ContentTypeService contentTypeService =
-			MirageServiceFactory.getContentTypeService();
-		List<Template> templates = null;
-		try {
-			templates = contentTypeService.getTemplates(null, null, criteria);
-		}
-		catch (TemplateNotFoundException tnfe) {
-			_throwSystemException(tnfe);
-		}
-		if (templates == null) {
-			return null;
-		}
-		List<JournalTemplate> journalTemplates =
-			new ArrayList<JournalTemplate>(templates.size());
-		for (Template template : templates) {
-			journalTemplates.add(
-				((JournalMirageTemplate) template).getTemplate());
-		}
-		return journalTemplates;
+	public List<JournalTemplate> getTemplates() throws SystemException {
+		return journalTemplatePersistence.findAll();
 	}
 
 	public List<JournalTemplate> getTemplates(long groupId)
 		throws SystemException {
 
-		JournalTemplate journalTemplate = new JournalTemplateImpl();
-		journalTemplate.setGroupId(groupId);
-
-		JournalMirageTemplate journalMirageTemplate =
-			new JournalMirageTemplate(journalTemplate);
-		OptionalJournalTemplateCriteria criteria =
-			new OptionalJournalTemplateCriteria(
-				OptionalJournalTemplateCriteria.FIND_BY_GROUP_ID);
-
-		ContentTypeService contentTypeService =
-			MirageServiceFactory.getContentTypeService();
-		List<Template> templates = null;
-		try {
-			templates =
-				contentTypeService.getTemplates(
-					null, journalMirageTemplate, criteria);
-		}
-		catch (TemplateNotFoundException tnfe) {
-			_throwSystemException(tnfe);
-		}
-		if (templates == null) {
-			return null;
-		}
-		List<JournalTemplate> journalTemplates =
-			new ArrayList<JournalTemplate>(templates.size());
-		for (Template template : templates) {
-			journalTemplates.add(
-				((JournalMirageTemplate) template).getTemplate());
-		}
-		return journalTemplates;
+		return journalTemplatePersistence.findByGroupId(groupId);
 	}
 
 	public List<JournalTemplate> getTemplates(long groupId, int start, int end)
 		throws SystemException {
 
-		JournalTemplate journalTemplate = new JournalTemplateImpl();
-		journalTemplate.setGroupId(groupId);
-
-		JournalMirageTemplate journalMirageTemplate =
-			new JournalMirageTemplate(journalTemplate);
-		OptionalJournalTemplateCriteria criteria =
-			new OptionalJournalTemplateCriteria(
-				OptionalJournalTemplateCriteria.FIND_BY_GROUP_ID_WITH_LIMIT);
-
-		criteria.getOptions().put(
-			OptionalJournalTemplateCriteria.RANGE_START,
-				Integer.toString(start));
-		criteria.getOptions().put(
-			OptionalJournalTemplateCriteria.RANGE_END, Integer.toString(end));
-		ContentTypeService contentTypeService =
-			MirageServiceFactory.getContentTypeService();
-		List<Template> templates = null;
-		try {
-			templates =
-				contentTypeService.getTemplates(
-					null, journalMirageTemplate, criteria);
-		}
-		catch (TemplateNotFoundException tnfe) {
-			_throwSystemException(tnfe);
-		}
-		if (templates == null) {
-			return null;
-		}
-		List<JournalTemplate> journalTemplates =
-			new ArrayList<JournalTemplate>(templates.size());
-		for (Template template : templates) {
-			journalTemplates.add(
-				((JournalMirageTemplate) template).getTemplate());
-		}
-		return journalTemplates;
+		return journalTemplatePersistence.findByGroupId(groupId, start, end);
 	}
 
-	public int getTemplatesCount(long groupId)
-		throws SystemException {
-
-		JournalTemplate journalTemplate = new JournalTemplateImpl();
-		journalTemplate.setGroupId(groupId);
-
-		JournalMirageTemplate journalMirageTemplate =
-			new JournalMirageTemplate(journalTemplate);
-		OptionalJournalTemplateCriteria criteria =
-			new OptionalJournalTemplateCriteria(
-				OptionalJournalTemplateCriteria.COUNT_BY_GROUP_ID);
-
-		ContentTypeService contentTypeService =
-			MirageServiceFactory.getContentTypeService();
-		int count = -1;
-		try {
-			count =
-				contentTypeService.getTemplatesCount(
-					null, journalMirageTemplate, criteria);
-		}
-		catch (CMSException cmse) {
-			_throwSystemException(cmse);
-		}
-		return count;
+	public int getTemplatesCount(long groupId) throws SystemException {
+		return journalTemplatePersistence.countByGroupId(groupId);
 	}
 
 	public boolean hasTemplate(long groupId, String templateId)
@@ -682,45 +444,9 @@ public class JournalTemplateLocalServiceImpl
 			OrderByComparator obc)
 		throws SystemException {
 
-		SearchCriteria criteria = new SearchCriteria();
-		List<SearchFieldValue> searchFields = new ArrayList<SearchFieldValue>();
-
-		Map<String, String> nameValues = new HashMap<String, String>();
-		nameValues.put(
-			OptionalJournalTemplateCriteria.FINDER,
-				OptionalJournalTemplateCriteria.FIND_BY_KEYWORDS);
-		nameValues.put(
-			OptionalJournalTemplateCriteria.COMPANY_ID,
-				Long.toString(companyId));
-		nameValues.put(
-			OptionalJournalTemplateCriteria.GROUP_ID, Long.toString(groupId));
-		nameValues.put(OptionalJournalTemplateCriteria.KEYWORDS, keywords);
-		nameValues.put(
-			OptionalJournalTemplateCriteria.STRUCTURE_ID, structureId);
-		nameValues.put(
-			OptionalJournalTemplateCriteria.STRUCTURE_ID_COMPARATOR,
-				structureIdComparator);
-		nameValues.put(
-			OptionalJournalTemplateCriteria.RANGE_START,
-				Integer.toString(start));
-		nameValues.put(
-			OptionalJournalTemplateCriteria.RANGE_END, Integer.toString(end));
-
-		_addSearchFields(searchFields, nameValues);
-
-		criteria.setSearchFieldValues(searchFields);
-		criteria.setOrderByComparator(obc);
-
-		ContentTypeService contentTypeService =
-			MirageServiceFactory.getContentTypeService();
-		List<Template> templates = null;
-		try {
-			templates = contentTypeService.searchTemplates(criteria);
-		}
-		catch (CMSException cmse) {
-			_throwSystemException(cmse);
-		}
-		return _getJournalTemplatesFromTemplates(templates);
+		return journalTemplateFinder.findByKeywords(
+			companyId, groupId, keywords, structureId, structureIdComparator,
+			start, end, obc);
 	}
 
 	public List<JournalTemplate> search(
@@ -729,49 +455,9 @@ public class JournalTemplateLocalServiceImpl
 			boolean andOperator, int start, int end, OrderByComparator obc)
 		throws SystemException {
 
-		SearchCriteria criteria = new SearchCriteria();
-		List<SearchFieldValue> searchFields = new ArrayList<SearchFieldValue>();
-
-		Map<String, String> nameValues = new HashMap<String, String>();
-		nameValues.put(
-			OptionalJournalTemplateCriteria.FINDER,
-				OptionalJournalTemplateCriteria.SEARCH);
-		nameValues.put(
-			OptionalJournalTemplateCriteria.COMPANY_ID,
-				Long.toString(companyId));
-		nameValues.put(
-			OptionalJournalTemplateCriteria.GROUP_ID, Long.toString(groupId));
-		nameValues.put(OptionalJournalTemplateCriteria.TEMPLATE_ID, templateId);
-		nameValues.put(
-			OptionalJournalTemplateCriteria.STRUCTURE_ID, structureId);
-		nameValues.put(
-			OptionalJournalTemplateCriteria.STRUCTURE_ID_COMPARATOR,
-			structureIdComparator);
-		nameValues.put(OptionalJournalTemplateCriteria.NAME, name);
-		nameValues.put(
-			OptionalJournalTemplateCriteria.DESCRIPTION,
-				description);
-		nameValues.put(
-			OptionalJournalTemplateCriteria.RANGE_START,
-			Integer.toString(start));
-		nameValues.put(
-			OptionalJournalTemplateCriteria.RANGE_END, Integer.toString(end));
-
-		_addSearchFields(searchFields, nameValues);
-
-		criteria.setSearchFieldValues(searchFields);
-		criteria.setOrderByComparator(obc);
-		criteria.setMatchAnyOneField(andOperator);
-		ContentTypeService contentTypeService =
-			MirageServiceFactory.getContentTypeService();
-		List<Template> templates = null;
-		try {
-			templates = contentTypeService.searchTemplates(criteria);
-		}
-		catch (CMSException cmse) {
-			_throwSystemException(cmse);
-		}
-		return _getJournalTemplatesFromTemplates(templates);
+		return journalTemplateFinder.findByC_G_T_S_N_D(
+			companyId, groupId, templateId, structureId, structureIdComparator,
+			name, description, andOperator, start, end, obc);
 	}
 
 	public int searchCount(
@@ -779,39 +465,8 @@ public class JournalTemplateLocalServiceImpl
 			String structureIdComparator)
 		throws SystemException {
 
-		SearchCriteria criteria = new SearchCriteria();
-		List<SearchFieldValue> searchFields = new ArrayList<SearchFieldValue>();
-
-		Map<String, String> nameValues = new HashMap<String, String>();
-		nameValues.put(
-			OptionalJournalTemplateCriteria.FINDER,
-				OptionalJournalTemplateCriteria.COUNT_BY_KEYWORDS);
-		nameValues.put(
-			OptionalJournalTemplateCriteria.COMPANY_ID,
-				Long.toString(companyId));
-		nameValues.put(
-			OptionalJournalTemplateCriteria.GROUP_ID, Long.toString(groupId));
-		nameValues.put(OptionalJournalTemplateCriteria.KEYWORDS, keywords);
-		nameValues.put(
-			OptionalJournalTemplateCriteria.STRUCTURE_ID, structureId);
-		nameValues.put(
-			OptionalJournalTemplateCriteria.STRUCTURE_ID_COMPARATOR,
-				structureIdComparator);
-
-		_addSearchFields(searchFields, nameValues);
-
-		criteria.setSearchFieldValues(searchFields);
-
-		ContentTypeService contentTypeService =
-			MirageServiceFactory.getContentTypeService();
-		int count = -1;
-		try {
-			count = contentTypeService.searchTemplatesCount(criteria);
-		}
-		catch (CMSException cmse) {
-			_throwSystemException(cmse);
-		}
-		return count;
+		return journalTemplateFinder.countByKeywords(
+			companyId, groupId, keywords, structureId, structureIdComparator);
 	}
 
 	public int searchCount(
@@ -820,43 +475,9 @@ public class JournalTemplateLocalServiceImpl
 			boolean andOperator)
 		throws SystemException {
 
-		SearchCriteria criteria = new SearchCriteria();
-		List<SearchFieldValue> searchFields = new ArrayList<SearchFieldValue>();
-
-		Map<String, String> nameValues = new HashMap<String, String>();
-		nameValues.put(
-			OptionalJournalTemplateCriteria.FINDER,
-				OptionalJournalTemplateCriteria.SEARCH_COUNT);
-		nameValues.put(
-			OptionalJournalTemplateCriteria.COMPANY_ID,
-				Long.toString(companyId));
-		nameValues.put(
-			OptionalJournalTemplateCriteria.GROUP_ID, Long.toString(groupId));
-		nameValues.put(OptionalJournalTemplateCriteria.TEMPLATE_ID, templateId);
-		nameValues.put(
-			OptionalJournalTemplateCriteria.STRUCTURE_ID, structureId);
-		nameValues.put(
-			OptionalJournalTemplateCriteria.STRUCTURE_ID_COMPARATOR,
-				structureIdComparator);
-		nameValues.put(OptionalJournalTemplateCriteria.NAME, name);
-		nameValues.put(
-			OptionalJournalTemplateCriteria.DESCRIPTION,
-				description);
-
-		_addSearchFields(searchFields, nameValues);
-
-		criteria.setSearchFieldValues(searchFields);
-		criteria.setMatchAnyOneField(andOperator);
-		ContentTypeService contentTypeService =
-			MirageServiceFactory.getContentTypeService();
-		int count = -1;
-		try {
-			count = contentTypeService.searchTemplatesCount(criteria);
-		}
-		catch (CMSException cmse) {
-			_throwSystemException(cmse);
-		}
-		return count;
+		return journalTemplateFinder.countByC_G_T_S_N_D(
+			companyId, groupId, templateId, structureId, structureIdComparator,
+			name, description, andOperator);
 	}
 
 	public JournalTemplate updateTemplate(
@@ -866,167 +487,171 @@ public class JournalTemplateLocalServiceImpl
 			File smallFile)
 		throws PortalException, SystemException {
 
-		JournalTemplate template = new JournalTemplateImpl();
+		// Template
 
-		template.setTemplateId(templateId);
-		template.setLangType(langType);
-		template.setXsl(xsl);
+		templateId = templateId.trim().toUpperCase();
+
+		try {
+			if (formatXsl) {
+				if (langType.equals(JournalTemplateImpl.LANG_TYPE_VM)) {
+					xsl = JournalUtil.formatVM(xsl);
+				}
+				else {
+					xsl = JournalUtil.formatXML(xsl);
+				}
+			}
+		}
+		catch (DocumentException de) {
+			throw new TemplateXslException();
+		}
+		catch (IOException ioe) {
+			throw new TemplateXslException();
+		}
+
+		byte[] smallBytes = null;
+
+		try {
+			smallBytes = FileUtil.getBytes(smallFile);
+		}
+		catch (IOException ioe) {
+		}
+
+		validate(
+			name, description, xsl, smallImage, smallImageURL, smallFile,
+			smallBytes);
+
+		JournalTemplate template = journalTemplatePersistence.findByG_T(
+			groupId, templateId);
+
+		template.setModifiedDate(new Date());
+
+		if (Validator.isNull(template.getStructureId()) &&
+			Validator.isNotNull(structureId)) {
+
+			// Allow users to set the structure if and only if it currently
+			// does not have one. Otherwise, you can have bad data because there
+			// may be an existing article that has chosen to use a structure and
+			// template combination that no longer exists.
+
+			template.setStructureId(structureId);
+		}
+
 		template.setName(name);
 		template.setDescription(description);
+		template.setXsl(xsl);
+		template.setLangType(langType);
+		template.setCacheable(cacheable);
 		template.setSmallImage(smallImage);
 		template.setSmallImageURL(smallImageURL);
-		template.setGroupId(groupId);
-		template.setStructureId(structureId);
-		template.setCacheable(cacheable);
 
-		JournalMirageTemplate journalMirageTemplate =
-			new JournalMirageTemplate(template);
-		JournalMirageTemplate.UpdateAttributes updateAttributes =
-			journalMirageTemplate.new UpdateAttributes(formatXsl, smallFile);
+		journalTemplatePersistence.update(template, false);
 
-		journalMirageTemplate.setUpdateAttributes(updateAttributes);
+		// Small image
 
-		ContentTypeService contentTypeService =
-			MirageServiceFactory.getContentTypeService();
-		try {
-			contentTypeService.updateTemplateOfContentType(
-				journalMirageTemplate, null);
-		}
-		catch (ValidationException ex) {
+		saveImages(
+			smallImage, template.getSmallImageId(), smallFile, smallBytes);
 
-			// Ignore this, as the exceptions are wrapped as CMSException
-
-		}
-		catch (CMSException cmse) {
-			_throwException(cmse);
-		}
-
-		template = journalMirageTemplate.getTemplate();
 		return template;
 	}
 
-	private void _addSearchField(
-		List<SearchFieldValue> fieldList, String fieldName, String fieldValue) {
-
-		SearchFieldValue searchField = new SearchFieldValue();
-		searchField.setFieldName(fieldName);
-		searchField.setFieldValues(new String[] {
-			fieldValue
-		});
-		fieldList.add(searchField);
-	}
-
-	private void _addSearchFields(
-		List<SearchFieldValue> fieldList, Map<String, String> nameValues) {
-
-		Iterator<String> iter = nameValues.keySet().iterator();
-		while (iter.hasNext()) {
-			String name = iter.next();
-			String value = nameValues.get(name);
-			_addSearchField(fieldList, name, value);
-		}
-	}
-
-	private List<JournalTemplate> _getJournalTemplatesFromTemplates(
-		List<Template> templates) {
-
-		if (templates == null) {
-			return null;
-		}
-		List<JournalTemplate> journalTemplates =
-			new ArrayList<JournalTemplate>(templates.size());
-		for (Template template : templates) {
-			journalTemplates.add(
-				((JournalMirageTemplate) template).getTemplate());
-		}
-		return journalTemplates;
-	}
-
-	private JournalTemplate _getTemplate(long groupId, String templateId)
+	protected void saveImages(
+			boolean smallImage, long smallImageId, File smallFile,
+			byte[] smallBytes)
 		throws PortalException, SystemException {
 
-		JournalTemplate template = new JournalTemplateImpl();
-		template.setGroupId(groupId);
-		template.setTemplateId(templateId);
-		JournalMirageTemplate journalMirageTemplate =
-			new JournalMirageTemplate(template);
-		OptionalJournalTemplateCriteria criteria =
-			new OptionalJournalTemplateCriteria(
-				OptionalJournalTemplateCriteria.FIND_BY_GROUP_AND_TEMPLATE_ID);
-		ContentTypeService contentTypeService =
-			MirageServiceFactory.getContentTypeService();
-		try {
-			journalMirageTemplate =
-				(JournalMirageTemplate) contentTypeService.getTemplate(
-					journalMirageTemplate, criteria);
+		if (smallImage) {
+			if ((smallFile != null) && (smallBytes != null)) {
+				imageLocalService.updateImage(smallImageId, smallBytes);
+			}
 		}
-		catch (TemplateNotFoundException tnfe) {
-			_throwException(tnfe);
+		else {
+			imageLocalService.deleteImage(smallImageId);
 		}
-		return journalMirageTemplate.getTemplate();
 	}
 
-	private List<JournalTemplate> _getTemplatesByTemplateId(String templateId)
-		throws SystemException {
-
-		JournalTemplate journalTemplate = new JournalTemplateImpl();
-		journalTemplate.setTemplateId(templateId);
-
-		JournalMirageTemplate journalMirageTemplate =
-			new JournalMirageTemplate(journalTemplate);
-		OptionalJournalTemplateCriteria criteria =
-			new OptionalJournalTemplateCriteria(
-				OptionalJournalTemplateCriteria.FIND_BY_TEMPLATE_ID);
-
-		ContentTypeService contentTypeService =
-			MirageServiceFactory.getContentTypeService();
-		List<Template> templates = null;
-		try {
-			templates =
-				contentTypeService.getTemplates(
-					null, journalMirageTemplate, criteria);
-		}
-		catch (TemplateNotFoundException tnfe) {
-			_throwSystemException(tnfe);
-		}
-		if (templates == null) {
-			return null;
-		}
-		List<JournalTemplate> journalTemplates =
-			new ArrayList<JournalTemplate>(templates.size());
-		for (Template template : templates) {
-			journalTemplates.add(
-				((JournalMirageTemplate) template).getTemplate());
-		}
-		return journalTemplates;
-	}
-
-	private void _throwException(CMSException ex)
+	protected void validate(
+			long groupId, String templateId, boolean autoTemplateId,
+			String name, String description, String xsl, boolean smallImage,
+			String smallImageURL, File smallFile, byte[] smallBytes)
 		throws PortalException, SystemException {
 
-		Throwable cause = ex.getCause();
-		if (cause != null) {
-			if (cause instanceof PortalException) {
-				throw (PortalException) cause;
+		if (!autoTemplateId) {
+			if ((Validator.isNull(templateId)) ||
+				(Validator.isNumber(templateId)) ||
+				(templateId.indexOf(StringPool.SPACE) != -1)) {
+
+				throw new TemplateIdException();
 			}
-			else if (cause instanceof SystemException) {
-				throw (SystemException) cause;
+
+			try {
+				journalTemplatePersistence.findByG_T(groupId, templateId);
+
+				throw new DuplicateTemplateIdException();
+			}
+			catch (NoSuchTemplateException nste) {
+			}
+		}
+
+		validate(
+			name, description, xsl, smallImage, smallImageURL, smallFile,
+			smallBytes);
+	}
+
+	protected void validate(
+			String name, String description, String xsl, boolean smallImage,
+			String smallImageURL, File smallFile, byte[] smallBytes)
+		throws PortalException {
+
+		if (Validator.isNull(name)) {
+			throw new TemplateNameException();
+		}
+		else if (Validator.isNull(description)) {
+			throw new TemplateDescriptionException();
+		}
+		else if (Validator.isNull(xsl)) {
+			throw new TemplateXslException();
+		}
+
+		String[] imageExtensions =
+			PropsUtil.getArray(PropsKeys.JOURNAL_IMAGE_EXTENSIONS);
+
+		if (smallImage && Validator.isNull(smallImageURL) &&
+			smallFile != null && smallBytes != null) {
+
+			String smallImageName = smallFile.getName();
+
+			if (smallImageName != null) {
+				boolean validSmallImageExtension = false;
+
+				for (int i = 0; i < imageExtensions.length; i++) {
+					if (StringPool.STAR.equals(imageExtensions[i]) ||
+						StringUtil.endsWith(
+							smallImageName, imageExtensions[i])) {
+
+						validSmallImageExtension = true;
+
+						break;
+					}
+				}
+
+				if (!validSmallImageExtension) {
+					throw new TemplateSmallImageNameException(smallImageName);
+				}
+			}
+
+			long smallImageMaxSize = GetterUtil.getLong(
+				PropsUtil.get(PropsKeys.JOURNAL_IMAGE_SMALL_MAX_SIZE));
+
+			if ((smallImageMaxSize > 0) &&
+				((smallBytes == null) ||
+					(smallBytes.length > smallImageMaxSize))) {
+
+				throw new TemplateSmallImageSizeException();
 			}
 		}
 	}
 
-	private void _throwSystemException(CMSException ex)
-		throws SystemException {
-
-		Throwable cause = ex.getCause();
-		if (cause != null) {
-			if (cause instanceof SystemException) {
-				throw (SystemException) cause;
-			}
-		}
-	}
-
-	private static final Log _log =
+	private static Log _log =
 		LogFactory.getLog(JournalTemplateLocalServiceImpl.class);
 
 }
