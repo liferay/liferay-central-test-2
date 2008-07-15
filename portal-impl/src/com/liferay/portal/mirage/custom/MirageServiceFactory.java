@@ -64,7 +64,7 @@ public class MirageServiceFactory {
 		if (_articleResourceService == null) {
 			_articleResourceService =
 				(BinaryContentService) PortalBeanLocatorUtil.locate(
-					_ARTICLE_RESOURCE_SERVICE);
+											_ARTICLE_RESOURCE_SERVICE);
 		}
 		return _articleResourceService;
 	}
@@ -73,8 +73,7 @@ public class MirageServiceFactory {
 
 		if (_categoryService == null) {
 			_categoryService =
-				(CategoryService) PortalBeanLocatorUtil.locate(
-					_CATEGORY_SERVICE);
+				(CategoryService) PortalBeanLocatorUtil.locate(_CATEGORY_SERVICE);
 		}
 		return _categoryService;
 	}
@@ -84,7 +83,7 @@ public class MirageServiceFactory {
 		if (_contentFeedService == null) {
 			_contentFeedService =
 				(ContentFeedService) PortalBeanLocatorUtil.locate(
-					_CONTENT_FEED_SERVICE);
+										_CONTENT_FEED_SERVICE);
 		}
 		return _contentFeedService;
 	}
@@ -103,7 +102,7 @@ public class MirageServiceFactory {
 		if (_contentTypeService == null) {
 			_contentTypeService =
 				(ContentTypeService) PortalBeanLocatorUtil.locate(
-					_CONTENT_TYPE_SERVICE);
+										_CONTENT_TYPE_SERVICE);
 		}
 		return _contentTypeService;
 	}
@@ -113,7 +112,7 @@ public class MirageServiceFactory {
 		if (_imageContentService == null) {
 			_imageContentService =
 				(BinaryContentService) PortalBeanLocatorUtil.locate(
-					_IMAGE_CONTENT_SERVICE);
+											_IMAGE_CONTENT_SERVICE);
 		}
 		return _imageContentService;
 	}
@@ -131,8 +130,7 @@ public class MirageServiceFactory {
 
 		if (_workflowService == null) {
 			_workflowService =
-				(WorkflowService) PortalBeanLocatorUtil.locate(
-					_WORKFLOW_SERVICE);
+				(WorkflowService) PortalBeanLocatorUtil.locate(_WORKFLOW_SERVICE);
 		}
 		return _workflowService;
 	}
