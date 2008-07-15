@@ -256,11 +256,24 @@ portletURL.setParameter("resourcePrimKey", resourcePrimKey);
 	String tabs2Names = "users,organizations,user-groups,regular-roles,community-roles,community,guest";
 
 	if (ResourceActionsUtil.isPortalModelResource(modelResource)) {
-		tabs2Names = StringUtil.replace(tabs2Names, "community,", StringPool.BLANK);
 		tabs2Names = StringUtil.replace(tabs2Names, "community-roles,", StringPool.BLANK);
-		tabs2Names = StringUtil.replace(tabs2Names, "guest,", StringPool.BLANK);
+		tabs2Names = StringUtil.replace(tabs2Names, "community,", StringPool.BLANK);
+
+		if (PropsValues.PERMISSIONS_USER_CHECK_ALGORITHM == 5) {
+			tabs2Names = StringUtil.replace(tabs2Names, "users,", StringPool.BLANK);
+			tabs2Names = StringUtil.replace(tabs2Names, "organizations,", StringPool.BLANK);
+			tabs2Names = StringUtil.replace(tabs2Names, "user-groups,", StringPool.BLANK);
+		}
+
+		tabs2Names = StringUtil.replace(tabs2Names, ",guest", StringPool.BLANK);
 	}
 	else if (modelResource.equals(Layout.class.getName())) {
+		if (PropsValues.PERMISSIONS_USER_CHECK_ALGORITHM == 5) {
+			tabs2Names = StringUtil.replace(tabs2Names, "users,", StringPool.BLANK);
+			tabs2Names = StringUtil.replace(tabs2Names, "organizations,", StringPool.BLANK);
+			tabs2Names = StringUtil.replace(tabs2Names, "user-groups,", StringPool.BLANK);
+			tabs2Names = StringUtil.replace(tabs2Names, "community,", StringPool.BLANK);
+		}
 
 		// User layouts should not have community assignments
 
@@ -276,7 +289,7 @@ portletURL.setParameter("resourcePrimKey", resourcePrimKey);
 		// Private layouts should not have guest assignments
 
 		if (selLayout.isPrivateLayout()) {
-			tabs2Names = StringUtil.replace(tabs2Names, "guest,", StringPool.BLANK);
+			tabs2Names = StringUtil.replace(tabs2Names, ",guest", StringPool.BLANK);
 		}
 	}
 	else {
@@ -287,6 +300,21 @@ portletURL.setParameter("resourcePrimKey", resourcePrimKey);
 		else if (group.isOrganization()) {
 			tabs2Names = StringUtil.replace(tabs2Names, "community,", "organization,");
 			tabs2Names = StringUtil.replace(tabs2Names, "community-roles,", "organization-roles,");
+		}
+
+		if (PropsValues.PERMISSIONS_USER_CHECK_ALGORITHM == 5) {
+			tabs2Names = StringUtil.replace(tabs2Names, "users,", StringPool.BLANK);
+			tabs2Names = StringUtil.replace(tabs2Names, "organization,", StringPool.BLANK);
+			tabs2Names = StringUtil.replace(tabs2Names, "organizations,", StringPool.BLANK);
+			tabs2Names = StringUtil.replace(tabs2Names, "user-groups,", StringPool.BLANK);
+			tabs2Names = StringUtil.replace(tabs2Names, ",community,guest", StringPool.BLANK);
+			tabs2Names = StringUtil.replace(tabs2Names, ",guest", StringPool.BLANK);
+		}
+	}
+
+	if (PropsValues.PERMISSIONS_USER_CHECK_ALGORITHM == 5) {
+		if (!tabs2.equals("regular-roles") && !tabs2.equals("community-roles") && !tabs2.equals("organization-roles")) {
+			tabs2 = "regular-roles";
 		}
 	}
 	%>

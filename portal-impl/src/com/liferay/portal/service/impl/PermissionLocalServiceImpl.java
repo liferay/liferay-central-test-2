@@ -59,6 +59,7 @@ import org.apache.commons.logging.LogFactory;
  *
  * @author Charles May
  * @author Brian Wing Shun Chan
+ * @author Raymond Augé
  *
  */
 public class PermissionLocalServiceImpl extends PermissionLocalServiceBaseImpl {
@@ -400,6 +401,11 @@ public class PermissionLocalServiceImpl extends PermissionLocalServiceBaseImpl {
 			return hasUserPermissions_4(
 				userId, actionId, resourceId, permissions, groups, roles,
 				stopWatch, block);
+		}
+		else if (PropsValues.PERMISSIONS_USER_CHECK_ALGORITHM == 5) {
+			return hasUserPermissions_5(
+				userId, actionId, resourceId, permissions, roles, stopWatch,
+				block);
 		}
 
 		return false;
@@ -861,6 +867,25 @@ public class PermissionLocalServiceImpl extends PermissionLocalServiceBaseImpl {
 				permissions, userId, groups, roles)) {
 
 			return true;
+		}
+
+		logHasUserPermissions(userId, actionId, resourceId, stopWatch, block++);
+
+		return false;
+	}
+
+	protected boolean hasUserPermissions_5(
+			long userId, String actionId, long resourceId,
+			List<Permission> permissions, List<Role> roles, StopWatch stopWatch,
+			int block)
+		throws SystemException {
+
+		if (roles.size() > 0) {
+			if (permissionFinder.countByRolesPermissions(
+					permissions, roles) > 0) {
+
+				return true;
+			}
 		}
 
 		logHasUserPermissions(userId, actionId, resourceId, stopWatch, block++);

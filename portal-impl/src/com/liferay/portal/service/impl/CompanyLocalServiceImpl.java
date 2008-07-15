@@ -270,6 +270,10 @@ public class CompanyLocalServiceImpl extends CompanyLocalServiceBaseImpl {
 			contactPersistence.update(defaultContact, false);
 		}
 
+		// System roles
+
+		roleLocalService.checkSystemRoles(companyId);
+
 		// System groups
 
 		groupLocalService.checkSystemGroups(companyId);
@@ -277,10 +281,6 @@ public class CompanyLocalServiceImpl extends CompanyLocalServiceBaseImpl {
 		// Default password policy
 
 		passwordPolicyLocalService.checkDefaultPasswordPolicy(companyId);
-
-		// System roles
-
-		roleLocalService.checkSystemRoles(companyId);
 
 		// Default user must have the Guest role
 

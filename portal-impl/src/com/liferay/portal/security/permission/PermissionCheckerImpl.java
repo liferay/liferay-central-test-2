@@ -65,6 +65,7 @@ import org.apache.commons.logging.LogFactory;
  *
  * @author Charles May
  * @author Brian Wing Shun Chan
+ * @author Raymond Augé
  *
  */
 public class PermissionCheckerImpl implements PermissionChecker, Serializable {
@@ -159,13 +160,35 @@ public class PermissionCheckerImpl implements PermissionChecker, Serializable {
 				groups.addAll(userOrgGroups);
 				groups.addAll(userUserGroupGroups);
 
-				List<Role> roles = null;
+				List<Role> roles = new ArrayList<Role>(10);
 
 				if ((PropsValues.PERMISSIONS_USER_CHECK_ALGORITHM == 3) ||
-					(PropsValues.PERMISSIONS_USER_CHECK_ALGORITHM == 4)) {
+					(PropsValues.PERMISSIONS_USER_CHECK_ALGORITHM == 4) ||
+					(PropsValues.PERMISSIONS_USER_CHECK_ALGORITHM == 5)) {
 
-					roles = RoleLocalServiceUtil.getUserRelatedRoles(
-						user.getUserId(), groups);
+					if (groups.size() > 0) {
+						roles = RoleLocalServiceUtil.getUserRelatedRoles(
+							user.getUserId(), groups);
+					}
+					else {
+						roles.addAll(
+							RoleLocalServiceUtil.getUserRoles(
+								user.getUserId()));
+					}
+
+					if (userGroups.size() > 0) {
+						Role role = RoleLocalServiceUtil.getRole(
+							user.getCompanyId(), RoleImpl.COMMUNITY_MEMBER);
+
+						roles.add(role);
+					}
+
+					if (userOrgs.size() > 0) {
+						Role role = RoleLocalServiceUtil.getRole(
+							user.getCompanyId(), RoleImpl.ORGANIZATION_MEMBER);
+
+						roles.add(role);
+					}
 
 					List<Role> userGroupRoles =
 						RoleLocalServiceUtil.getUserGroupRoles(
@@ -472,8 +495,12 @@ public class PermissionCheckerImpl implements PermissionChecker, Serializable {
 			Group guestGroup = GroupLocalServiceUtil.getGroup(
 				companyId, GroupImpl.GUEST);
 
-			List<Role> roles = RoleLocalServiceUtil.getGroupRoles(
-				guestGroup.getGroupId());
+			List<Group> groups = new ArrayList<Group>();
+
+			groups.add(guestGroup);
+
+			List<Role> roles = RoleLocalServiceUtil.getUserRelatedRoles(
+				defaultUserId, groups);
 
 			bag = new PermissionCheckerBagImpl(
 				defaultUserId, new ArrayList<Group>(),
