@@ -978,6 +978,8 @@
 
 		<echo file="app.server.${user.name}.properties">app.server.type=jboss-tomcat</echo>
 
+		<delete dir="${classpath.jsp}" />
+
 		<ant target="deploy" inheritAll="false" />
 
 		<delete file="app.server.${user.name}.properties" />
@@ -994,6 +996,8 @@ app.server.jboss-tomcat.version=4.2
 app.server.jboss-tomcat.dir=${app.server.parent.dir}/jboss-tomcat-4.2.2
 </echo>
 
+		<delete dir="${classpath.jsp}" />
+
 		<ant target="deploy" inheritAll="false" />
 
 		<delete file="app.server.${user.name}.properties" />
@@ -1005,6 +1009,8 @@ app.server.jboss-tomcat.dir=${app.server.parent.dir}/jboss-tomcat-4.2.2
 		<unzip src="${app.server.parent.dir}/jetty-5.1.10.zip" dest="${app.server.parent.dir}" />
 
 		<echo file="app.server.${user.name}.properties">app.server.type=jetty</echo>
+
+		<delete dir="${classpath.jsp}" />
 
 		<ant target="deploy" inheritAll="false" />
 
@@ -1018,6 +1024,8 @@ app.server.jboss-tomcat.dir=${app.server.parent.dir}/jboss-tomcat-4.2.2
 
 		<echo file="app.server.${user.name}.properties">app.server.type=jonas-jetty</echo>
 
+		<delete dir="${classpath.jsp}" />
+
 		<ant target="deploy" inheritAll="false" />
 
 		<delete file="app.server.${user.name}.properties" />
@@ -1029,6 +1037,8 @@ app.server.jboss-tomcat.dir=${app.server.parent.dir}/jboss-tomcat-4.2.2
 		<unzip src="${app.server.parent.dir}/jonas-tomcat-4.8.6.zip" dest="${app.server.parent.dir}" />
 
 		<echo file="app.server.${user.name}.properties">app.server.type=jonas-tomcat</echo>
+
+		<delete dir="${classpath.jsp}" />
 
 		<ant target="deploy" inheritAll="false" />
 
@@ -1141,6 +1151,8 @@ app.server.jboss-tomcat.dir=${app.server.parent.dir}/jboss-tomcat-4.2.2
 
 		<echo file="app.server.${user.name}.properties">app.server.type=resin</echo>
 
+		<delete dir="${classpath.jsp}" />
+
 		<ant target="deploy" inheritAll="false" />
 
 		<delete file="app.server.${user.name}.properties" />
@@ -1172,6 +1184,8 @@ app.server.jboss-tomcat.dir=${app.server.parent.dir}/jboss-tomcat-4.2.2
 
 		<echo file="app.server.${user.name}.properties">app.server.type=tomcat</echo>
 
+		<delete dir="${classpath.jsp}" />
+
 		<ant target="deploy" inheritAll="false" />
 
 		<delete file="app.server.${user.name}.properties" />
@@ -1193,6 +1207,8 @@ app.server.tomcat.lib.support.dir=$${app.server.tomcat.dir}/lib/ext
 app.server.tomcat.support.dir=$${app.server.tomcat.dir}/lib/ext
 app.server.tomcat.zip.name=liferay-portal-tomcat-6.0-$${downloads.version}.zip
 </echo>
+
+		<delete dir="${classpath.jsp}" />
 
 		<ant target="deploy" inheritAll="false" />
 
