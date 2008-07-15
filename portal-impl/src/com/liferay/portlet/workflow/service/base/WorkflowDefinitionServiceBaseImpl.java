@@ -37,6 +37,8 @@ import com.liferay.portal.service.persistence.ResourceFinderUtil;
 import com.liferay.portal.service.persistence.ResourcePersistence;
 import com.liferay.portal.service.persistence.ResourceUtil;
 
+import com.liferay.portlet.workflow.service.SAWWorkflowLocalService;
+import com.liferay.portlet.workflow.service.SAWWorkflowLocalServiceFactory;
 import com.liferay.portlet.workflow.service.WorkflowComponentService;
 import com.liferay.portlet.workflow.service.WorkflowComponentServiceFactory;
 import com.liferay.portlet.workflow.service.WorkflowDefinitionService;
@@ -53,6 +55,15 @@ import com.liferay.portlet.workflow.service.WorkflowTaskServiceFactory;
  */
 public abstract class WorkflowDefinitionServiceBaseImpl extends PrincipalBean
 	implements WorkflowDefinitionService {
+	public SAWWorkflowLocalService getSAWWorkflowLocalService() {
+		return sawWorkflowLocalService;
+	}
+
+	public void setSAWWorkflowLocalService(
+		SAWWorkflowLocalService sawWorkflowLocalService) {
+		this.sawWorkflowLocalService = sawWorkflowLocalService;
+	}
+
 	public WorkflowComponentService getWorkflowComponentService() {
 		return workflowComponentService;
 	}
@@ -129,6 +140,10 @@ public abstract class WorkflowDefinitionServiceBaseImpl extends PrincipalBean
 	}
 
 	protected void init() {
+		if (sawWorkflowLocalService == null) {
+			sawWorkflowLocalService = SAWWorkflowLocalServiceFactory.getImpl();
+		}
+
 		if (workflowComponentService == null) {
 			workflowComponentService = WorkflowComponentServiceFactory.getImpl();
 		}
@@ -166,6 +181,7 @@ public abstract class WorkflowDefinitionServiceBaseImpl extends PrincipalBean
 		}
 	}
 
+	protected SAWWorkflowLocalService sawWorkflowLocalService;
 	protected WorkflowComponentService workflowComponentService;
 	protected WorkflowInstanceService workflowInstanceService;
 	protected WorkflowTaskService workflowTaskService;

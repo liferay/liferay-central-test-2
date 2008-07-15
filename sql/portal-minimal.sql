@@ -1,3 +1,5 @@
+@include jbpm-tables.sql
+
 @include portal-tables.sql
 
 @include portal-data-common.sql
