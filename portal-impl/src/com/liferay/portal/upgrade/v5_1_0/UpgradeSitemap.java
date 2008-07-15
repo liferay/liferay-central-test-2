@@ -110,8 +110,7 @@ public class UpgradeSitemap extends UpgradeProcess {
 		throws Exception {
 
 		PortletPreferencesImpl prefs = PortletPreferencesSerializer.fromXML(
-				companyId, ownerId, ownerType, plid, portletId,
-				preferences);
+			companyId, ownerId, ownerType, plid, portletId, preferences);
 
 		long rootPlid = GetterUtil.getLong(
 			prefs.getValue("root-plid", StringPool.BLANK));
