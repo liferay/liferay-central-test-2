@@ -1326,6 +1326,8 @@
 			<forward name="portlet.message_boards.error" path="portlet.wiki.error" />
 		</action>
 
+		<action path="/wiki/find_page" type="com.liferay.portlet.wiki.action.FindPageAction" />
+
 		<action path="/wiki/get_page_attachment" type="com.liferay.portlet.wiki.action.GetPageAttachmentAction" />
 
 		<action path="/wiki/import_pages" type="com.liferay.portlet.wiki.action.ImportPagesAction">

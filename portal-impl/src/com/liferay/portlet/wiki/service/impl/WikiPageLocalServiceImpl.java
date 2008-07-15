@@ -63,6 +63,7 @@ import com.liferay.portlet.wiki.model.WikiPageResource;
 import com.liferay.portlet.wiki.model.impl.WikiPageDisplayImpl;
 import com.liferay.portlet.wiki.model.impl.WikiPageImpl;
 import com.liferay.portlet.wiki.service.base.WikiPageLocalServiceBaseImpl;
+import com.liferay.portlet.wiki.social.WikiActivityKeys;
 import com.liferay.portlet.wiki.util.Indexer;
 import com.liferay.portlet.wiki.util.WikiCacheThreadLocal;
 import com.liferay.portlet.wiki.util.WikiCacheUtil;
@@ -172,6 +173,13 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 		node.setLastPostDate(now);
 
 		wikiNodePersistence.update(node, false);
+
+		// Social
+
+		socialActivityLocalService.addActivity(
+			userId, node.getGroupId(), WikiPage.class.getName(),
+			page.getResourcePrimKey(), WikiActivityKeys.ADD_PAGE,
+			StringPool.BLANK, 0);
 
 		// Subscriptions
 
@@ -390,6 +398,11 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 
 		subscriptionLocalService.deleteSubscriptions(
 			page.getCompanyId(), WikiPage.class.getName(), page.getPageId());
+
+		// Social
+
+		socialActivityLocalService.deleteActivities(
+			WikiPage.class.getName(), page.getResourcePrimKey());
 
 		// Message boards
 
@@ -915,6 +928,13 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 		node.setLastPostDate(now);
 
 		wikiNodePersistence.update(node, false);
+
+		// Social
+
+		socialActivityLocalService.addActivity(
+			userId, node.getGroupId(), WikiPage.class.getName(),
+			page.getResourcePrimKey(), WikiActivityKeys.EDIT_PAGE,
+			StringPool.BLANK, 0);
 
 		// Subscriptions
 

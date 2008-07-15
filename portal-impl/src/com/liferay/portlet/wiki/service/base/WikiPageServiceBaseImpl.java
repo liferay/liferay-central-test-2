@@ -84,6 +84,12 @@ import com.liferay.portlet.messageboards.service.persistence.MBMessageFinder;
 import com.liferay.portlet.messageboards.service.persistence.MBMessageFinderUtil;
 import com.liferay.portlet.messageboards.service.persistence.MBMessagePersistence;
 import com.liferay.portlet.messageboards.service.persistence.MBMessageUtil;
+import com.liferay.portlet.social.service.SocialActivityLocalService;
+import com.liferay.portlet.social.service.SocialActivityLocalServiceFactory;
+import com.liferay.portlet.social.service.persistence.SocialActivityFinder;
+import com.liferay.portlet.social.service.persistence.SocialActivityFinderUtil;
+import com.liferay.portlet.social.service.persistence.SocialActivityPersistence;
+import com.liferay.portlet.social.service.persistence.SocialActivityUtil;
 import com.liferay.portlet.tags.service.TagsAssetLocalService;
 import com.liferay.portlet.tags.service.TagsAssetLocalServiceFactory;
 import com.liferay.portlet.tags.service.TagsAssetService;
@@ -427,6 +433,33 @@ public abstract class WikiPageServiceBaseImpl extends PrincipalBean
 		this.mbMessageFinder = mbMessageFinder;
 	}
 
+	public SocialActivityLocalService getSocialActivityLocalService() {
+		return socialActivityLocalService;
+	}
+
+	public void setSocialActivityLocalService(
+		SocialActivityLocalService socialActivityLocalService) {
+		this.socialActivityLocalService = socialActivityLocalService;
+	}
+
+	public SocialActivityPersistence getSocialActivityPersistence() {
+		return socialActivityPersistence;
+	}
+
+	public void setSocialActivityPersistence(
+		SocialActivityPersistence socialActivityPersistence) {
+		this.socialActivityPersistence = socialActivityPersistence;
+	}
+
+	public SocialActivityFinder getSocialActivityFinder() {
+		return socialActivityFinder;
+	}
+
+	public void setSocialActivityFinder(
+		SocialActivityFinder socialActivityFinder) {
+		this.socialActivityFinder = socialActivityFinder;
+	}
+
 	public TagsAssetLocalService getTagsAssetLocalService() {
 		return tagsAssetLocalService;
 	}
@@ -610,6 +643,18 @@ public abstract class WikiPageServiceBaseImpl extends PrincipalBean
 			mbMessageFinder = MBMessageFinderUtil.getFinder();
 		}
 
+		if (socialActivityLocalService == null) {
+			socialActivityLocalService = SocialActivityLocalServiceFactory.getImpl();
+		}
+
+		if (socialActivityPersistence == null) {
+			socialActivityPersistence = SocialActivityUtil.getPersistence();
+		}
+
+		if (socialActivityFinder == null) {
+			socialActivityFinder = SocialActivityFinderUtil.getFinder();
+		}
+
 		if (tagsAssetLocalService == null) {
 			tagsAssetLocalService = TagsAssetLocalServiceFactory.getImpl();
 		}
@@ -664,6 +709,9 @@ public abstract class WikiPageServiceBaseImpl extends PrincipalBean
 	protected MBMessageService mbMessageService;
 	protected MBMessagePersistence mbMessagePersistence;
 	protected MBMessageFinder mbMessageFinder;
+	protected SocialActivityLocalService socialActivityLocalService;
+	protected SocialActivityPersistence socialActivityPersistence;
+	protected SocialActivityFinder socialActivityFinder;
 	protected TagsAssetLocalService tagsAssetLocalService;
 	protected TagsAssetService tagsAssetService;
 	protected TagsAssetPersistence tagsAssetPersistence;
