@@ -68,8 +68,8 @@ public class ActionURLTagUtil {
 				portletName = TagUtil.getPortletName(request);
 			}
 
-			LiferayPortletURL portletURL =
-				TagUtil.getLiferayPortletURL(request, portletName, lifecycle);
+			LiferayPortletURL portletURL = TagUtil.getLiferayPortletURL(
+				request, portletName, lifecycle);
 
 			if (portletURL == null) {
 				_log.error(

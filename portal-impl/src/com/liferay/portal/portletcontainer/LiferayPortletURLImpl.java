@@ -76,31 +76,33 @@ public class LiferayPortletURLImpl extends PortletURLImpl {
 		try {
 			setWindowState(windowState);
 		}
-		catch (WindowStateException ex) {
+		catch (WindowStateException wse1) {
 			if (_log.isWarnEnabled()) {
 				_log.warn(
 					"Exception while setting window state for " + portletId,
-						ex);
+						wse1);
 			}
 			try {
 				setWindowState(WindowState.NORMAL);
 			}
-			catch (WindowStateException ignored) {}
+			catch (WindowStateException wse2) {
+			}
 		}
 
 		try {
 			setPortletMode(portletMode);
 		}
-		catch (PortletModeException ex) {
+		catch (PortletModeException pme1) {
 			if (_log.isWarnEnabled()) {
 				_log.warn(
 					"Exception while setting portlet mode for " + portletId,
-						ex);
+						pme1);
 			}
 			try {
 				setPortletMode(PortletMode.VIEW);
 			}
-			catch (PortletModeException ignored) {}
+			catch (PortletModeException pme2) {
+			}
 		}
 	}
 
@@ -126,6 +128,7 @@ public class LiferayPortletURLImpl extends PortletURLImpl {
 
 			return PortletRequest.ACTION_PHASE;
 		}
+
 		return lifecycle;
 	}
 

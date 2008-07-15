@@ -45,8 +45,8 @@ import com.liferay.portal.kernel.portlet.LiferayPortletURL;
 import com.liferay.portal.kernel.util.JavaConstants;
 import com.liferay.portal.portletcontainer.LiferayPortletURLImpl;
 import com.liferay.portal.theme.ThemeDisplay;
+import com.liferay.portal.util.PropsValues;
 import com.liferay.portal.util.WebKeys;
-
 import com.liferay.portlet.PortletConfigImpl;
 import com.liferay.portlet.PortletResponseImpl;
 
@@ -62,37 +62,11 @@ import javax.servlet.http.HttpServletRequest;
  */
 public class TagUtil {
 
-	public static String getPortletName(HttpServletRequest request) {
-
-		PortletRequest portletRequest =
-			(PortletRequest)request.getAttribute(
-				JavaConstants.JAVAX_PORTLET_REQUEST);
-
-		String portletName = null;
-
-		if (_isWARFileUsingSunImpl(portletRequest)) {
-			if(portletRequest != null) {
-				portletName = (String)portletRequest.getAttribute(
-					_PORTLET_CONTAINER_WINDOW_NAME);
-			}
-
-		} else {
-			PortletConfigImpl portletConfig =
-				(PortletConfigImpl)request.getAttribute(
-					JavaConstants.JAVAX_PORTLET_CONFIG);
-
-			portletName = portletConfig.getPortletId();
-		}
-
-		return portletName;
-	}
-
 	public static LiferayPortletURL getLiferayPortletURL(
 		HttpServletRequest request, String portletName, String lifecycle) {
 
-		PortletRequest portletRequest =
-			(PortletRequest)request.getAttribute(
-				JavaConstants.JAVAX_PORTLET_REQUEST);
+		PortletRequest portletRequest = (PortletRequest)request.getAttribute(
+			JavaConstants.JAVAX_PORTLET_REQUEST);
 
 		if (portletRequest == null) {
 			return null;
@@ -100,13 +74,12 @@ public class TagUtil {
 
 		LiferayPortletURL portletURL = null;
 
-		if (_isWARFileUsingSunImpl(portletRequest)) {
+		if (PropsValues.PORTLET_CONTAINER_IMPL_SUN) {
 			portletURL = new LiferayPortletURLImpl(
 				request, portletName, portletRequest.getWindowState(),
-					portletRequest.getPortletMode(), _getPlid(request),
-						lifecycle);
-
-		} else {
+				portletRequest.getPortletMode(), _getPlid(request), lifecycle);
+		}
+		else {
 			PortletResponseImpl portletResponse =
 				(PortletResponseImpl)request.getAttribute(
 					JavaConstants.JAVAX_PORTLET_RESPONSE);
@@ -118,20 +91,36 @@ public class TagUtil {
 		return portletURL;
 	}
 
+	public static String getPortletName(HttpServletRequest request) {
+		PortletRequest portletRequest = (PortletRequest)request.getAttribute(
+			JavaConstants.JAVAX_PORTLET_REQUEST);
+
+		if (portletRequest == null) {
+			return null;
+		}
+
+		String portletName = null;
+
+		if (PropsValues.PORTLET_CONTAINER_IMPL_SUN) {
+			portletName = (String)portletRequest.getAttribute(
+				_PORTLET_CONTAINER_WINDOW_NAME);
+		}
+		else {
+			PortletConfigImpl portletConfig =
+				(PortletConfigImpl)request.getAttribute(
+					JavaConstants.JAVAX_PORTLET_CONFIG);
+
+			portletName = portletConfig.getPortletId();
+		}
+
+		return portletName;
+	}
+
 	private static long _getPlid(HttpServletRequest request) {
 		ThemeDisplay themeDisplay = (ThemeDisplay)request.getAttribute(
 			WebKeys.THEME_DISPLAY);
 
 		return themeDisplay.getPlid();
-	}
-
-	private static boolean _isWARFileUsingSunImpl(
-		PortletRequest portletRequest) {
-
-		Object name = portletRequest.getAttribute(
-			_PORTLET_CONTAINER_WINDOW_NAME);
-
-		return (name == null ? false : true);
 	}
 
 	private static final String _PORTLET_CONTAINER_WINDOW_NAME =
