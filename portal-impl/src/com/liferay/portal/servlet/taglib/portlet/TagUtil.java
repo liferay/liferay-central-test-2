@@ -74,7 +74,9 @@ public class TagUtil {
 
 		LiferayPortletURL portletURL = null;
 
-		if (PropsValues.PORTLET_CONTAINER_IMPL_SUN) {
+		if (PropsValues.PORTLET_CONTAINER_IMPL_SUN &&
+				_isWARFile(portletRequest)) {
+
 			portletURL = new LiferayPortletURLImpl(
 				request, portletName, portletRequest.getWindowState(),
 				portletRequest.getPortletMode(), _getPlid(request), lifecycle);
@@ -101,7 +103,8 @@ public class TagUtil {
 
 		String portletName = null;
 
-		if (PropsValues.PORTLET_CONTAINER_IMPL_SUN) {
+		if (PropsValues.PORTLET_CONTAINER_IMPL_SUN &&
+				_isWARFile(portletRequest)) {
 			portletName = (String)portletRequest.getAttribute(
 				_PORTLET_CONTAINER_WINDOW_NAME);
 		}
@@ -121,6 +124,13 @@ public class TagUtil {
 			WebKeys.THEME_DISPLAY);
 
 		return themeDisplay.getPlid();
+	}
+
+	private static boolean _isWARFile(PortletRequest portletRequest) {
+		Object name = portletRequest.getAttribute(
+			_PORTLET_CONTAINER_WINDOW_NAME);
+
+		return (name == null ? false : true);
 	}
 
 	private static final String _PORTLET_CONTAINER_WINDOW_NAME =
