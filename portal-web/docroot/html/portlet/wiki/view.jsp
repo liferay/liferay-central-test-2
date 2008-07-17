@@ -51,6 +51,8 @@ if (wikiPage != null) {
 boolean preview = false;
 boolean print = ParamUtil.getBoolean(request, Constants.PRINT);
 
+TagsAssetLocalServiceUtil.incrementViewCounter(WikiPage.class.getName(), wikiPage.getResourcePrimKey());
+
 PortletURL viewPageURL = renderResponse.createRenderURL();
 
 viewPageURL.setParameter("struts_action", "/wiki/view");
@@ -197,6 +199,19 @@ viewAttachmentsURL.setParameter("struts_action", "/wiki/view_page_attachments");
 
 <c:if test="<%= (wikiPage != null) && Validator.isNotNull(formattedContent) && (followRedirect || (redirectPage == null)) %>">
 	<div class="page-actions">
+		<%
+		TagsAsset asset = TagsAssetLocalServiceUtil.getAsset(WikiPage.class.getName(), wikiPage.getResourcePrimKey());
+		%>
+
+		<c:choose>
+			<c:when test="<%= asset.getViewCount() == 1 %>">
+				<%= asset.getViewCount() %> <liferay-ui:message key="view" />,
+			</c:when>
+			<c:when test="<%= asset.getViewCount() > 1 %>">
+				<%= asset.getViewCount() %> <liferay-ui:message key="views" />,
+			</c:when>
+		</c:choose>
+
 		<liferay-ui:icon image="clip" message='<%= attachments.length + " " + LanguageUtil.get(pageContext, "attachments") %>' url="<%= viewAttachmentsURL.toString() %>" method="get" label="<%= true %>" />
 	</div>
 
