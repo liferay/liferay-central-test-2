@@ -51,8 +51,6 @@ if (wikiPage != null) {
 boolean preview = false;
 boolean print = ParamUtil.getBoolean(request, Constants.PRINT);
 
-TagsAssetLocalServiceUtil.incrementViewCounter(WikiPage.class.getName(), wikiPage.getResourcePrimKey());
-
 PortletURL viewPageURL = renderResponse.createRenderURL();
 
 viewPageURL.setParameter("struts_action", "/wiki/view");
@@ -91,6 +89,8 @@ taggedPagesURL.setParameter("nodeId", String.valueOf(node.getNodeId()));
 PortletURL viewAttachmentsURL = PortletURLUtil.clone(viewPageURL, renderResponse);
 
 viewAttachmentsURL.setParameter("struts_action", "/wiki/view_page_attachments");
+
+TagsAssetLocalServiceUtil.incrementViewCounter(WikiPage.class.getName(), wikiPage.getResourcePrimKey());
 %>
 
 <c:choose>
@@ -199,6 +199,7 @@ viewAttachmentsURL.setParameter("struts_action", "/wiki/view_page_attachments");
 
 <c:if test="<%= (wikiPage != null) && Validator.isNotNull(formattedContent) && (followRedirect || (redirectPage == null)) %>">
 	<div class="page-actions">
+
 		<%
 		TagsAsset asset = TagsAssetLocalServiceUtil.getAsset(WikiPage.class.getName(), wikiPage.getResourcePrimKey());
 		%>
