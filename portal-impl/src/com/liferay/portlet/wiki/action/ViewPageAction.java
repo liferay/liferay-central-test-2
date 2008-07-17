@@ -23,23 +23,12 @@
 package com.liferay.portlet.wiki.action;
 
 import com.liferay.portal.kernel.servlet.SessionErrors;
-import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.security.auth.PrincipalException;
-import com.liferay.portal.security.permission.ActionKeys;
-import com.liferay.portal.security.permission.PermissionChecker;
 import com.liferay.portal.struts.PortletAction;
-import com.liferay.portal.theme.ThemeDisplay;
-import com.liferay.portal.util.PropsKeys;
-import com.liferay.portal.util.PropsUtil;
 import com.liferay.portal.util.WebKeys;
 import com.liferay.portlet.wiki.NoSuchNodeException;
 import com.liferay.portlet.wiki.NoSuchPageException;
 import com.liferay.portlet.wiki.model.WikiNode;
-import com.liferay.portlet.wiki.service.WikiNodeLocalServiceUtil;
-import com.liferay.portlet.wiki.service.permission.WikiNodePermission;
-import com.liferay.portlet.wiki.util.WikiUtil;
-
-import java.util.List;
 
 import javax.portlet.PortletConfig;
 import javax.portlet.RenderRequest;
@@ -94,39 +83,7 @@ public class ViewPageAction extends PortletAction {
 			return;
 		}
 
-		ThemeDisplay themeDisplay = (ThemeDisplay)renderRequest.getAttribute(
-			WebKeys.THEME_DISPLAY);
-
-		List<WikiNode> nodes = WikiUtil.getNodes(renderRequest);
-
-		if (nodes.size() == 0) {
-			String nodeName = PropsUtil.get(PropsKeys.WIKI_INITIAL_NODE_NAME);
-
-			node = WikiNodeLocalServiceUtil.addNode(
-				themeDisplay.getUserId(), themeDisplay.getPlid(), nodeName,
-				StringPool.BLANK, true, true);
-		}
-		else {
-			PermissionChecker permissionChecker =
-				themeDisplay.getPermissionChecker();
-
-			for (WikiNode curNode : nodes) {
-				if (WikiNodePermission.contains(
-						permissionChecker, curNode.getNodeId(),
-						ActionKeys.VIEW)) {
-
-					node = curNode;
-
-					break;
-				}
-			}
-
-			if (node == null) {
-				throw new PrincipalException();
-			}
-		}
-
-		renderRequest.setAttribute(WebKeys.WIKI_NODE, node);
+		ActionUtil.getFirstVisibleNode(renderRequest);
 	}
 
 	protected boolean isCheckMethodOnProcessAction() {

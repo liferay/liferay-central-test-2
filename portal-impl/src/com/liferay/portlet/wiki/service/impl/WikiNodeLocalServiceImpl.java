@@ -450,6 +450,10 @@ public class WikiNodeLocalServiceImpl extends WikiNodeLocalServiceBaseImpl {
 	protected void validate(long nodeId, long groupId, String name)
 		throws PortalException, SystemException {
 
+		if (name.equalsIgnoreCase("tag")) {
+			throw new NodeNameException("Tag is a reservled name");
+		}
+
 		if (!Validator.isName(name)) {
 			throw new NodeNameException();
 		}

@@ -90,6 +90,27 @@ public class WikiFriendlyURLMapper extends BaseFriendlyURLMapper {
 				friendlyURLPath = sb.toString();
 			}
 		}
+		else if (strutsAction.equals("/wiki/view_tagged_pages")) {
+			String tag = portletURL.getParameter("tag");
+
+			StringBuilder sb = new StringBuilder();
+
+			if (Validator.isNotNull(tag)) {
+				sb.append(StringPool.SLASH);
+				sb.append(_MAPPING);
+				sb.append(StringPool.SLASH);
+				sb.append("tag");
+				sb.append(StringPool.SLASH);
+
+				sb.append(HttpUtil.encodeURL(tag));
+
+				portletURL.addParameterIncludedInPath("tag");
+				portletURL.addParameterIncludedInPath("nodeId");
+				portletURL.addParameterIncludedInPath("nodeName");
+			}
+
+			friendlyURLPath = sb.toString();
+		}
 
 		if (Validator.isNotNull(friendlyURLPath)) {
 			portletURL.addParameterIncludedInPath("p_p_id");
@@ -123,24 +144,36 @@ public class WikiFriendlyURLMapper extends BaseFriendlyURLMapper {
 			friendlyURLPath.substring(x + 1), StringPool.SLASH);
 
 		if (urlFragments.length >= 1) {
-			String nodeId = urlFragments[0];
+			String urlFragment0 = urlFragments[0];
 
-			if (Validator.isNumber(nodeId)) {
-				addParam(params, "nodeId", nodeId);
+			if (urlFragment0.equals("tag")) {
+				if (urlFragments.length >= 2) {
+					addParam(
+						params, "struts_action", "/wiki/view_tagged_pages");
+
+					String tag = HttpUtil.decodeURL(urlFragments[1]);
+
+					addParam(params, "tag", tag);
+				}
 			}
 			else {
-				addParam(params, "nodeName", nodeId);
-			}
+				if (Validator.isNumber(urlFragment0)) {
+					addParam(params, "urlFragment0", urlFragment0);
+				}
+				else {
+					addParam(params, "nodeName", urlFragment0);
+				}
 
-			if (urlFragments.length >= 2) {
-				String title = HttpUtil.decodeURL(urlFragments[1]);
+				if (urlFragments.length >= 2) {
+					String title = HttpUtil.decodeURL(urlFragments[1]);
 
-				addParam(params, "title", title);
+					addParam(params, "title", title);
 
-				if (urlFragments.length >= 3) {
-					String windowState = urlFragments[2];
+					if (urlFragments.length >= 3) {
+						String windowState = urlFragments[2];
 
-					addParam(params, "p_p_state", windowState);
+						addParam(params, "p_p_state", windowState);
+					}
 				}
 			}
 		}

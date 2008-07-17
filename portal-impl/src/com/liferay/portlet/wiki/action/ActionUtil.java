@@ -22,17 +22,30 @@
 
 package com.liferay.portlet.wiki.action;
 
+import com.liferay.portal.PortalException;
+import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.util.ParamUtil;
+import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;
+import com.liferay.portal.security.auth.PrincipalException;
+import com.liferay.portal.security.permission.ActionKeys;
+import com.liferay.portal.security.permission.PermissionChecker;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.PortalUtil;
+import com.liferay.portal.util.PropsKeys;
+import com.liferay.portal.util.PropsUtil;
 import com.liferay.portal.util.WebKeys;
 import com.liferay.portlet.wiki.NoSuchPageException;
 import com.liferay.portlet.wiki.model.WikiNode;
 import com.liferay.portlet.wiki.model.WikiPage;
 import com.liferay.portlet.wiki.model.impl.WikiPageImpl;
+import com.liferay.portlet.wiki.service.WikiNodeLocalServiceUtil;
 import com.liferay.portlet.wiki.service.WikiNodeServiceUtil;
 import com.liferay.portlet.wiki.service.WikiPageServiceUtil;
+import com.liferay.portlet.wiki.service.permission.WikiNodePermission;
+import com.liferay.portlet.wiki.util.WikiUtil;
+
+import java.util.List;
 
 import javax.portlet.ActionRequest;
 import javax.portlet.RenderRequest;
@@ -48,21 +61,77 @@ import javax.servlet.http.HttpServletRequest;
  */
 public class ActionUtil {
 
-	public static void getNode(ActionRequest actionRequest) throws Exception {
+	public static WikiNode getFirstVisibleNode(RenderRequest renderRequest)
+			throws PortalException, SystemException {
+
+		ThemeDisplay themeDisplay = (ThemeDisplay)renderRequest.getAttribute(
+			WebKeys.THEME_DISPLAY);
+
+		WikiNode node = null;
+
+		List<WikiNode> nodes = WikiUtil.getNodes(renderRequest);
+
+		if (nodes.size() == 0) {
+			String nodeName = PropsUtil.get(PropsKeys.WIKI_INITIAL_NODE_NAME);
+
+			node = WikiNodeLocalServiceUtil.addNode(
+				themeDisplay.getUserId(), themeDisplay.getPlid(), nodeName,
+				StringPool.BLANK, true, true);
+		}
+		else {
+			PermissionChecker permissionChecker =
+				themeDisplay.getPermissionChecker();
+
+			for (WikiNode curNode : nodes) {
+				if (WikiNodePermission.contains(
+					permissionChecker, curNode.getNodeId(),
+					ActionKeys.VIEW)) {
+
+					node = curNode;
+
+					break;
+				}
+			}
+
+			if (node == null) {
+				throw new PrincipalException();
+			}
+		}
+
+		renderRequest.setAttribute(WebKeys.WIKI_NODE, node);
+
+		return node;
+	}
+
+	public static WikiNode getNode(ActionRequest actionRequest)
+		throws Exception {
+
 		HttpServletRequest request = PortalUtil.getHttpServletRequest(
 			actionRequest);
 
-		getNode(request);
+		return getNode(request);
 	}
 
-	public static void getNode(RenderRequest renderRequest) throws Exception {
+	public static WikiNode getNode(RenderRequest renderRequest)
+		throws Exception {
+
 		HttpServletRequest request = PortalUtil.getHttpServletRequest(
 			renderRequest);
 
-		getNode(request);
+		WikiNode node = getNode(request);
+
+		if (node == null) {
+			node = getFirstVisibleNode(renderRequest);
+
+			request.setAttribute(WebKeys.WIKI_NODE, node);
+		}
+
+		return node;
 	}
 
-	public static void getNode(HttpServletRequest request) throws Exception {
+	public static WikiNode getNode(HttpServletRequest request)
+		throws Exception {
+
 		ThemeDisplay themeDisplay = (ThemeDisplay)request.getAttribute(
 			WebKeys.THEME_DISPLAY);
 
@@ -80,6 +149,8 @@ public class ActionUtil {
 		}
 
 		request.setAttribute(WebKeys.WIKI_NODE, node);
+
+		return node;
 	}
 
 	public static void getPage(ActionRequest actionRequest) throws Exception {
