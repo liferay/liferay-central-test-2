@@ -26,7 +26,6 @@ import com.liferay.portal.kernel.portlet.LiferayPortlet;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.security.permission.PermissionChecker;
-import com.liferay.portal.security.permission.PermissionCheckerImpl;
 import com.liferay.portal.security.permission.PermissionThreadLocal;
 import com.liferay.portal.struts.PortletRequestProcessor;
 import com.liferay.portal.struts.StrutsUtil;
@@ -186,7 +185,7 @@ public class StrutsPortlet extends LiferayPortlet {
 
 			// Call processAction of com.liferay.portal.struts.PortletAction
 
-			PermissionCheckerImpl permissionChecker = (PermissionCheckerImpl)
+			PermissionChecker permissionChecker =
 				PermissionThreadLocal.getPermissionChecker();
 
 			try {
@@ -216,8 +215,8 @@ public class StrutsPortlet extends LiferayPortlet {
 
 		// Call serveResource of com.liferay.portal.struts.PortletAction
 
-		PermissionCheckerImpl permissionChecker =
-			(PermissionCheckerImpl)PermissionThreadLocal.getPermissionChecker();
+		PermissionChecker permissionChecker =
+			PermissionThreadLocal.getPermissionChecker();
 
 		try {
 			permissionChecker.setValues(resourceRequest);

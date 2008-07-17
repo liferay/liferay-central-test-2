@@ -58,7 +58,7 @@ public class PermissionCheckerFactory {
 				(PermissionChecker)_instance._pool.borrowObject();
 		}
 		else {
-			permissionChecker = (PermissionCheckerImpl)Class.forName(
+			permissionChecker = (PermissionChecker)Class.forName(
 				PropsValues.PERMISSIONS_CHECKER).newInstance();
 		}
 

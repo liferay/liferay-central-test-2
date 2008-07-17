@@ -31,7 +31,6 @@ import com.liferay.portal.model.PortletConstants;
 import com.liferay.portal.model.Resource;
 import com.liferay.portal.model.ResourceConstants;
 import com.liferay.portal.model.Role;
-import com.liferay.portal.model.User;
 import com.liferay.portal.model.UserGroup;
 import com.liferay.portal.model.impl.GroupImpl;
 import com.liferay.portal.model.impl.RoleImpl;
@@ -41,47 +40,28 @@ import com.liferay.portal.service.PermissionLocalServiceUtil;
 import com.liferay.portal.service.ResourceLocalServiceUtil;
 import com.liferay.portal.service.RoleLocalServiceUtil;
 import com.liferay.portal.service.UserGroupLocalServiceUtil;
-import com.liferay.portal.service.UserLocalServiceUtil;
 import com.liferay.portal.service.permission.PortletPermissionUtil;
 import com.liferay.portal.util.PropsValues;
-import com.liferay.portlet.admin.util.OmniadminUtil;
 import com.liferay.util.UniqueList;
-
-import java.io.Serializable;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import javax.portlet.PortletRequest;
-
 import org.apache.commons.lang.time.StopWatch;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
 /**
- * <a href="PermissionCheckerImpl.java.html"><b><i>View Source</i></b></a>
+ * <a href="AdvancedPermissionChecker.java.html"><b><i>View Source</i></b></a>
  *
  * @author Charles May
  * @author Brian Wing Shun Chan
  * @author Raymond Augé
  *
  */
-public class PermissionCheckerImpl implements PermissionChecker, Serializable {
-
-	public PermissionCheckerImpl() {
-	}
-
-	public long getUserId() {
-		return user.getUserId();
-	}
-
-	public boolean hasPermission(
-		long groupId, String name, long primKey, String actionId) {
-
-		return hasPermission(groupId, name, String.valueOf(primKey), actionId);
-	}
+public class AdvancedPermissionChecker extends BasePermissionChecker {
 
 	public boolean hasPermission(
 		long groupId, String name, String primKey, String actionId) {
@@ -255,28 +235,6 @@ public class PermissionCheckerImpl implements PermissionChecker, Serializable {
 		}
 	}
 
-	public void init(User user, boolean checkGuest) {
-		this.user = user;
-
-		if (user.isDefaultUser()) {
-			this.defaultUserId = user.getUserId();
-			this.signedIn = false;
-		}
-		else {
-			try {
-				this.defaultUserId = UserLocalServiceUtil.getDefaultUserId(
-					user.getCompanyId());
-			}
-			catch (Exception e) {
-				_log.error(e, e);
-			}
-
-			this.signedIn = true;
-		}
-
-		this.checkGuest = checkGuest;
-	}
-
 	public boolean isCommunityAdmin(long groupId) {
 		try {
 			return isCommunityAdminImpl(groupId);
@@ -310,39 +268,10 @@ public class PermissionCheckerImpl implements PermissionChecker, Serializable {
 		}
 	}
 
-	public boolean isOmniadmin() {
-		if (omniadmin == null) {
-			omniadmin = Boolean.valueOf(OmniadminUtil.isOmniadmin(getUserId()));
-		}
-
-		return omniadmin.booleanValue();
-	}
-
 	public void recycle() {
-		user = null;
-		defaultUserId = 0;
-		signedIn = false;
-		checkGuest = false;
-		omniadmin = null;
+		super.recycle();
+
 		companyAdmins.clear();
-		resetValues();
-	}
-
-	public void resetValues() {
-	}
-
-	public void setCheckGuest(boolean checkGuest) {
-		this.checkGuest = checkGuest;
-	}
-
-	public void setValues(PortletRequest portletRequest) {
-
-		// This method is called in com.liferay.portlet.StrutsPortlet to allow
-		// developers to hook in additiona parameters from the portlet request.
-		// Don't overwrite this method unless you're using Liferay in a 2 tier
-		// environment and don't expect to make remote calls. Remote calls to
-		// service beans will not have any values set from the portlet request.
-
 	}
 
 	protected long[] getResourceIds(
@@ -716,13 +645,9 @@ public class PermissionCheckerImpl implements PermissionChecker, Serializable {
 
 	protected static final String RESULTS_SEPARATOR = "_RESULTS_SEPARATOR_";
 
-	protected User user;
-	protected long defaultUserId;
-	protected boolean signedIn;
-	protected boolean checkGuest;
-	protected Boolean omniadmin;
 	protected Map<Long, Boolean> companyAdmins = new HashMap<Long, Boolean>();
 
-	private static Log _log = LogFactory.getLog(PermissionCheckerImpl.class);
+	private static Log _log =
+		LogFactory.getLog(AdvancedPermissionChecker.class);
 
 }

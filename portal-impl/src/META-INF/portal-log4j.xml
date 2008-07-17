@@ -192,8 +192,12 @@
 		<priority value="ERROR" />
 	</category>
 
-	<category name="com.liferay.portal.security.permission.PermissionCheckerImpl">
+	<category name="com.liferay.portal.security.permission.AdvancedPermissionChecker">
 		<priority value="ERROR" />
+	</category>
+
+	<category name="com.liferay.portal.security.permission.BasicPermissionChecker">
+		<priority value="INFO" />
 	</category>
 
 	<category name="com.liferay.portal.security.permission.ResourceActionsUtil">
