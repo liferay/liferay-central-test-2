@@ -476,8 +476,7 @@ public abstract class DBUtil {
 					}
 
 					include = convertTimestamp(include);
-					include = StringUtil.replace(
-						include, TEMPLATE, getTemplate(),true);
+					include = replaceTemplate(include, getTemplate());
 
 					sb.append(include);
 					sb.append("\n\n");
@@ -690,6 +689,30 @@ public abstract class DBUtil {
 		content = StringUtil.replace(content, " not_null", " not null");
 
 		return content;
+	}
+
+	protected String replaceTemplate(String template, String[] actual) {
+		if ((template == null) || (TEMPLATE == null) || (actual == null)) {
+			return null;
+		}
+
+		if (TEMPLATE.length != actual.length) {
+			return template;
+		}
+
+		for (int i = 0; i < TEMPLATE.length; i++) {
+			if (TEMPLATE[i].equals("##") ||
+				TEMPLATE[i].equals("'01/01/1970'")){
+
+				template = template.replaceAll(TEMPLATE[i], actual[i]);
+			}
+			else {
+				template = template.replaceAll(
+					"\\b" + TEMPLATE[i] + "\\b", actual[i]);
+			}
+		}
+
+		return template;
 	}
 
 	protected abstract String reword(String data) throws IOException;

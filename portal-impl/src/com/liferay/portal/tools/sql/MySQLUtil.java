@@ -46,7 +46,7 @@ public class MySQLUtil extends DBUtil {
 
 	public String buildSQL(String template) throws IOException {
 		template = convertTimestamp(template);
-		template = StringUtil.replace(template, TEMPLATE, getTemplate(), true);
+		template = replaceTemplate(template, getTemplate());
 
 		template = reword(template);
 		template = StringUtil.replace(template, "\\'", "''");
