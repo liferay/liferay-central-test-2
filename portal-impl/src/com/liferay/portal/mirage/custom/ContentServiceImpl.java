@@ -41,8 +41,14 @@
 
 package com.liferay.portal.mirage.custom;
 
+import com.sun.portal.cms.mirage.exception.CMSException;
+import com.sun.portal.cms.mirage.exception.SearchNotSupportedForFieldException;
+import com.sun.portal.cms.mirage.exception.TemplateNotFoundException;
 import com.sun.portal.cms.mirage.model.custom.Content;
+import com.sun.portal.cms.mirage.model.custom.ContentType;
+import com.sun.portal.cms.mirage.model.custom.OptionalCriteria;
 import com.sun.portal.cms.mirage.model.custom.VersionableContent;
+import com.sun.portal.cms.mirage.model.search.SearchCriteria;
 import com.sun.portal.cms.mirage.service.custom.ContentService;
 
 import java.io.InputStream;
@@ -54,6 +60,7 @@ import java.util.List;
  *
  * @author Jorge Ferrer
  * @author Prakash Reddy
+ * @author Karthik Sudarshan
  *
  */
 public class ContentServiceImpl implements ContentService {
@@ -68,12 +75,35 @@ public class ContentServiceImpl implements ContentService {
 		throw new UnsupportedOperationException();
 	}
 
+	public int contentSearchCount(
+			ContentType contentType, SearchCriteria searchCriteria)
+		throws CMSException {
+
+		throw new UnsupportedOperationException("Not supported yet.");
+	}
+
+	public int contentSearchCount(SearchCriteria searchCriteria)
+		throws CMSException {
+
+		throw new UnsupportedOperationException("Not supported yet.");
+	}
+
 	public void createContent(Content content) {
 		throw new UnsupportedOperationException();
 	}
 
+	public void deleteContent(Content content) throws CMSException {
+		throw new UnsupportedOperationException("Not supported yet.");
+	}
+
 	public void deleteContent(String contentName, String contentTypeUUID) {
 		throw new UnsupportedOperationException();
+	}
+
+	public Content getContent(Content content, OptionalCriteria criteria)
+		throws CMSException {
+
+		throw new UnsupportedOperationException("Not supported yet.");
 	}
 
 	public Content getContentByNameAndType(
@@ -122,12 +152,31 @@ public class ContentServiceImpl implements ContentService {
 		throw new UnsupportedOperationException();
 	}
 
+	public List<Content> searchContents(SearchCriteria searchCriteria)
+		throws CMSException {
+
+		throw new UnsupportedOperationException("Not supported yet.");
+	}
+
+	public List<Content> searchContentsByType(
+			ContentType contentType, SearchCriteria searchCriteria)
+		throws CMSException, SearchNotSupportedForFieldException {
+
+		throw new UnsupportedOperationException("Not supported yet.");
+	}
+
 	public void unCheckoutContent(String contentName, String contentTypeUUID) {
 		throw new UnsupportedOperationException();
 	}
 
 	public void updateContent(Content content) {
 		throw new UnsupportedOperationException();
+	}
+
+	public void updateContent(Content arg0, OptionalCriteria arg1)
+		throws CMSException, TemplateNotFoundException {
+
+		throw new UnsupportedOperationException("Not supported yet.");
 	}
 
 	public void updateFileField(

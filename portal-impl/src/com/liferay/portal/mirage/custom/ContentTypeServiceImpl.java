@@ -41,9 +41,15 @@
 
 package com.liferay.portal.mirage.custom;
 
+import com.sun.portal.cms.mirage.exception.CMSException;
+import com.sun.portal.cms.mirage.exception.TemplateNotFoundException;
+import com.sun.portal.cms.mirage.exception.ValidationException;
 import com.sun.portal.cms.mirage.model.custom.Category;
 import com.sun.portal.cms.mirage.model.custom.ContentType;
+import com.sun.portal.cms.mirage.model.custom.OptionalCriteria;
 import com.sun.portal.cms.mirage.model.custom.Template;
+import com.sun.portal.cms.mirage.model.custom.UpdateCriteria;
+import com.sun.portal.cms.mirage.model.search.SearchCriteria;
 import com.sun.portal.cms.mirage.service.custom.ContentTypeService;
 
 import java.util.List;
@@ -53,6 +59,7 @@ import java.util.List;
  *
  * @author Jorge Ferrer
  * @author Prakash Reddy
+ * @author Karthik Sudarshan
  *
  */
 public class ContentTypeServiceImpl implements ContentTypeService {
@@ -75,6 +82,13 @@ public class ContentTypeServiceImpl implements ContentTypeService {
 
 	public void checkOutTemplate(Template template, ContentType contentType) {
 		throw new UnsupportedOperationException();
+	}
+
+	public int contentTypeSearchCount(
+			Category category, SearchCriteria searchCriteria)
+		throws CMSException {
+
+		throw new UnsupportedOperationException("Not supported yet.");
 	}
 
 	public void createContentType(ContentType contentType) {
@@ -111,6 +125,19 @@ public class ContentTypeServiceImpl implements ContentTypeService {
 		throw new UnsupportedOperationException();
 	}
 
+	public ContentType getContentType(ContentType contentType)
+		throws CMSException {
+
+		throw new UnsupportedOperationException("Not supported yet.");
+	}
+
+	public ContentType getContentType(
+			ContentType contentType, OptionalCriteria optionalCriteria)
+		throws CMSException {
+
+		throw new UnsupportedOperationException("Not supported yet.");
+	}
+
 	public ContentType getContentTypeByNameAndCategory(
 		String contentTypeName, Category category) {
 
@@ -125,6 +152,28 @@ public class ContentTypeServiceImpl implements ContentTypeService {
 		Template template, ContentType contentType) {
 
 		throw new UnsupportedOperationException();
+	}
+
+	public Template getTemplate(Template template, OptionalCriteria criteria)
+		throws TemplateNotFoundException {
+
+		throw new UnsupportedOperationException("Not supported yet.");
+	}
+
+	public List<Template> getTemplates(
+			ContentType contentType, Template template,
+			OptionalCriteria criteria)
+		throws TemplateNotFoundException {
+
+		throw new UnsupportedOperationException("Not supported yet.");
+	}
+
+	public int getTemplatesCount(
+			ContentType contentType, Template template,
+			OptionalCriteria criteria)
+		throws CMSException {
+
+		throw new UnsupportedOperationException("Not supported yet.");
 	}
 
 	public Template getTemplateWithUUID(String templateUUID) {
@@ -147,6 +196,38 @@ public class ContentTypeServiceImpl implements ContentTypeService {
 		throw new UnsupportedOperationException();
 	}
 
+	public List<ContentType> searchContentTypes(SearchCriteria searchCriteria)
+		throws CMSException {
+
+		throw new UnsupportedOperationException("Not supported yet.");
+	}
+
+	public List<ContentType> searchContentTypesByCategory(
+			Category category, SearchCriteria searchCriteria)
+		throws CMSException {
+
+		throw new UnsupportedOperationException("Not supported yet.");
+	}
+
+	public List<Template> searchTemplates(SearchCriteria searchCriteria)
+		throws CMSException {
+
+		throw new UnsupportedOperationException("Not supported yet.");
+	}
+
+	public int searchTemplatesCount(SearchCriteria searchCriteria)
+		throws CMSException {
+
+		throw new UnsupportedOperationException("Not supported yet.");
+	}
+
+	public List<Template> searchTemplatesOfContentType(
+			ContentType contentType, SearchCriteria criteria)
+		throws CMSException {
+
+		throw new UnsupportedOperationException("Not supported yet.");
+	}
+
 	public void unassignDefaultTemplate(ContentType contentType) {
 		throw new UnsupportedOperationException();
 	}
@@ -159,10 +240,24 @@ public class ContentTypeServiceImpl implements ContentTypeService {
 		throw new UnsupportedOperationException();
 	}
 
+	public void updateContentType(
+			ContentType contentType, UpdateCriteria updateCriteria)
+		throws CMSException {
+
+		throw new UnsupportedOperationException("Not supported yet.");
+	}
+
 	public void updateTemplateOfContentType(
 		Template template, ContentType contentType) {
 
 		throw new UnsupportedOperationException();
+	}
+
+	public void updateTemplateOfContentType(
+			Template template, ContentType contentType, UpdateCriteria criteria)
+		throws CMSException, ValidationException {
+
+		throw new UnsupportedOperationException("Not supported yet.");
 	}
 
 	public boolean validateTemplate(
