@@ -477,7 +477,7 @@ public abstract class DBUtil {
 
 					include = convertTimestamp(include);
 					include = StringUtil.replace(
-						include, TEMPLATE, getTemplate());
+						include, TEMPLATE, getTemplate(),true);
 
 					sb.append(include);
 					sb.append("\n\n");

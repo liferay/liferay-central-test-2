@@ -694,7 +694,14 @@ public class StringUtil {
 		}
 		else {
 			for (int i = 0; i < oldSubs.length; i++) {
-				s = s.replaceAll("\\b" + oldSubs[i] + "\\b" , newSubs[i]);
+				if ( oldSubs[i].equals("##") ||
+								oldSubs[i].equals("'01/01/1970'") ){
+					s = s.replaceAll( oldSubs[i] , newSubs[i]);
+				} 
+				else {
+					String regEx = "\\b" + oldSubs[i] + "\\b" ;
+					s = s.replaceAll( regEx , newSubs[i]);
+				}
 			}
 		}
 
@@ -1041,9 +1048,10 @@ public class StringUtil {
 	 * @param		s1 the first string
 	 * @param		s2 the second string
 	 *
-	 * @return		the number of starting letters that s1 and s2 have in common
-	 *				before they deviate
+	 * @return		the number of starting letters that s1 and s2 have in
+	 * 				common before they deviate
 	 */
+
 	public static int startsWithWeight(String s1, String s2) {
 		if ((s1 == null) || (s2 == null)) {
 			return 0;
