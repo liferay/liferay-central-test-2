@@ -255,7 +255,14 @@ public abstract class BaseBSFPortlet extends GenericPortlet {
 		}
 	}
 
-	protected abstract void logBSFException(BSFException bsfe, String path);
+	protected void logBSFException(BSFException bsfe, String path) {
+		String message =
+			"The script at " + path + " or one of the global files has errors.";
+
+		Throwable t = bsfe.getTargetException();
+
+		_log.error(message, t);
+	}
 
 	protected String editFile;
 	protected String helpFile;

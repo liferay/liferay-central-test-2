@@ -24,10 +24,6 @@ package com.liferay.util.bridges.python;
 
 import com.liferay.util.bridges.bsf.BaseBSFPortlet;
 
-import org.apache.bsf.BSFException;
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
-
 /**
  * <a href="PythonPortlet.java.html"><b><i>View Source</i></b></a>
  *
@@ -52,15 +48,6 @@ public class PythonPortlet extends BaseBSFPortlet {
 		return _SCRIPTING_ENGINE_LANGUAGE;
 	}
 
-	protected void logBSFException(BSFException bsfe, String path) {
-		String message =
-			"The script at " + path + " or one of the global files has errors.";
-
-		Throwable t = bsfe.getTargetException();
-
-		_log.error(message, t);
-	}
-
 	private static final String _FILE_PARAM = "pythonFile";
 
 	private static final String _SCRIPTING_ENGINE_CLASS_NAME =
@@ -69,7 +56,5 @@ public class PythonPortlet extends BaseBSFPortlet {
 	private static final String _SCRIPTING_ENGINE_EXTENSION = "py";
 
 	private static final String _SCRIPTING_ENGINE_LANGUAGE = "python";
-
-	private static Log _log = LogFactory.getLog(PythonPortlet.class);
 
 }
