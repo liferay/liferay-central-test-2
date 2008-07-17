@@ -41,7 +41,6 @@
 
 package com.liferay.portal.mirage.custom;
 
-import com.sun.portal.cms.mirage.exception.CMSException;
 import com.sun.portal.cms.mirage.model.custom.Content;
 import com.sun.portal.cms.mirage.service.custom.WorkflowService;
 
@@ -62,20 +61,16 @@ public class WorkflowServiceImpl implements WorkflowService {
 		throw new UnsupportedOperationException();
 	}
 
-	public void updateWorkflowComplete(Content content)
-		throws CMSException {
-
-		throw new UnsupportedOperationException("Not supported yet.");
+	public void updateWorkflowComplete(Content content) {
+		throw new UnsupportedOperationException();
 	}
 
 	public void updateWorkflowComplete(String contentUUID) {
 		throw new UnsupportedOperationException();
 	}
 
-	public void updateWorkflowContentRejected(Content content)
-		throws CMSException {
-
-		throw new UnsupportedOperationException("Not supported yet.");
+	public void updateWorkflowContentRejected(Content content) {
+		throw new UnsupportedOperationException();
 	}
 
 	public void updateWorkflowContentRejected(
