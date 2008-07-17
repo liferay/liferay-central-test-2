@@ -97,4 +97,6 @@ COMMIT_TRANSACTION;
 
 update WikiPage set modifiedDate = createDate;
 
+@include jbpm.jpdl.DB_NAME.sql
+
 @include quartz-tables.sql
