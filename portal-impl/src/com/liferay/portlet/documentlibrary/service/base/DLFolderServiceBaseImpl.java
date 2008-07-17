@@ -32,6 +32,7 @@ import com.liferay.documentlibrary.service.DLLocalServiceFactory;
 import com.liferay.documentlibrary.service.DLService;
 import com.liferay.documentlibrary.service.DLServiceFactory;
 
+import com.liferay.portal.kernel.bean.InitializingBean;
 import com.liferay.portal.service.LayoutLocalService;
 import com.liferay.portal.service.LayoutLocalServiceFactory;
 import com.liferay.portal.service.LayoutService;
@@ -103,7 +104,7 @@ import com.liferay.portlet.documentlibrary.service.persistence.DLFolderUtil;
  *
  */
 public abstract class DLFolderServiceBaseImpl extends PrincipalBean
-	implements DLFolderService {
+	implements DLFolderService, InitializingBean {
 	public DLFileEntryLocalService getDLFileEntryLocalService() {
 		return dlFileEntryLocalService;
 	}
@@ -391,7 +392,7 @@ public abstract class DLFolderServiceBaseImpl extends PrincipalBean
 		this.webDAVPropsPersistence = webDAVPropsPersistence;
 	}
 
-	protected void init() {
+	public void afterPropertiesSet() {
 		if (dlFileEntryLocalService == null) {
 			dlFileEntryLocalService = DLFileEntryLocalServiceFactory.getImpl();
 		}

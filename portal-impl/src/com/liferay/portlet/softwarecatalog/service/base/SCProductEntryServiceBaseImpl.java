@@ -27,6 +27,7 @@ import com.liferay.counter.service.CounterLocalServiceFactory;
 import com.liferay.counter.service.CounterService;
 import com.liferay.counter.service.CounterServiceFactory;
 
+import com.liferay.portal.kernel.bean.InitializingBean;
 import com.liferay.portal.service.ImageLocalService;
 import com.liferay.portal.service.ImageLocalServiceFactory;
 import com.liferay.portal.service.ResourceLocalService;
@@ -96,7 +97,7 @@ import com.liferay.portlet.softwarecatalog.service.persistence.SCProductVersionU
  *
  */
 public abstract class SCProductEntryServiceBaseImpl extends PrincipalBean
-	implements SCProductEntryService {
+	implements SCProductEntryService, InitializingBean {
 	public SCLicenseLocalService getSCLicenseLocalService() {
 		return scLicenseLocalService;
 	}
@@ -362,7 +363,7 @@ public abstract class SCProductEntryServiceBaseImpl extends PrincipalBean
 		this.ratingsStatsPersistence = ratingsStatsPersistence;
 	}
 
-	protected void init() {
+	public void afterPropertiesSet() {
 		if (scLicenseLocalService == null) {
 			scLicenseLocalService = SCLicenseLocalServiceFactory.getImpl();
 		}

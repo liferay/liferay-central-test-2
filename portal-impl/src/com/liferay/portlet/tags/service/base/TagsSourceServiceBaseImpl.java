@@ -22,6 +22,7 @@
 
 package com.liferay.portlet.tags.service.base;
 
+import com.liferay.portal.kernel.bean.InitializingBean;
 import com.liferay.portal.service.base.PrincipalBean;
 
 import com.liferay.portlet.tags.service.TagsAssetLocalService;
@@ -63,7 +64,7 @@ import com.liferay.portlet.tags.service.persistence.TagsSourceUtil;
  *
  */
 public abstract class TagsSourceServiceBaseImpl extends PrincipalBean
-	implements TagsSourceService {
+	implements TagsSourceService, InitializingBean {
 	public TagsAssetLocalService getTagsAssetLocalService() {
 		return tagsAssetLocalService;
 	}
@@ -193,7 +194,7 @@ public abstract class TagsSourceServiceBaseImpl extends PrincipalBean
 		this.tagsSourcePersistence = tagsSourcePersistence;
 	}
 
-	protected void init() {
+	public void afterPropertiesSet() {
 		if (tagsAssetLocalService == null) {
 			tagsAssetLocalService = TagsAssetLocalServiceFactory.getImpl();
 		}

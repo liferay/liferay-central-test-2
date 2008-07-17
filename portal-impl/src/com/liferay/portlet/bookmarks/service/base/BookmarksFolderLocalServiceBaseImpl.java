@@ -29,6 +29,7 @@ import com.liferay.counter.service.CounterServiceFactory;
 
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
+import com.liferay.portal.kernel.bean.InitializingBean;
 import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 import com.liferay.portal.service.ResourceLocalService;
 import com.liferay.portal.service.ResourceLocalServiceFactory;
@@ -77,7 +78,7 @@ import java.util.List;
  *
  */
 public abstract class BookmarksFolderLocalServiceBaseImpl
-	implements BookmarksFolderLocalService {
+	implements BookmarksFolderLocalService, InitializingBean {
 	public BookmarksFolder addBookmarksFolder(BookmarksFolder bookmarksFolder)
 		throws SystemException {
 		bookmarksFolder.setNew(true);
@@ -278,7 +279,7 @@ public abstract class BookmarksFolderLocalServiceBaseImpl
 		this.tagsEntryFinder = tagsEntryFinder;
 	}
 
-	protected void init() {
+	public void afterPropertiesSet() {
 		if (bookmarksEntryLocalService == null) {
 			bookmarksEntryLocalService = BookmarksEntryLocalServiceFactory.getImpl();
 		}

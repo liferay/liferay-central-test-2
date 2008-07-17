@@ -29,6 +29,7 @@ import com.liferay.counter.service.CounterServiceFactory;
 
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
+import com.liferay.portal.kernel.bean.InitializingBean;
 import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 
 import com.liferay.portlet.journal.model.JournalArticleResource;
@@ -85,7 +86,7 @@ import java.util.List;
  *
  */
 public abstract class JournalArticleResourceLocalServiceBaseImpl
-	implements JournalArticleResourceLocalService {
+	implements JournalArticleResourceLocalService, InitializingBean {
 	public JournalArticleResource addJournalArticleResource(
 		JournalArticleResource journalArticleResource)
 		throws SystemException {
@@ -334,7 +335,7 @@ public abstract class JournalArticleResourceLocalServiceBaseImpl
 		this.counterService = counterService;
 	}
 
-	protected void init() {
+	public void afterPropertiesSet() {
 		if (journalArticleLocalService == null) {
 			journalArticleLocalService = JournalArticleLocalServiceFactory.getImpl();
 		}

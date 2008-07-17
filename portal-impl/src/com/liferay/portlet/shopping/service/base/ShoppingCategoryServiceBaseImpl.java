@@ -27,6 +27,7 @@ import com.liferay.counter.service.CounterLocalServiceFactory;
 import com.liferay.counter.service.CounterService;
 import com.liferay.counter.service.CounterServiceFactory;
 
+import com.liferay.portal.kernel.bean.InitializingBean;
 import com.liferay.portal.service.ResourceLocalService;
 import com.liferay.portal.service.ResourceLocalServiceFactory;
 import com.liferay.portal.service.ResourceService;
@@ -98,7 +99,7 @@ import com.liferay.portlet.shopping.service.persistence.ShoppingOrderUtil;
  *
  */
 public abstract class ShoppingCategoryServiceBaseImpl extends PrincipalBean
-	implements ShoppingCategoryService {
+	implements ShoppingCategoryService, InitializingBean {
 	public ShoppingCartLocalService getShoppingCartLocalService() {
 		return shoppingCartLocalService;
 	}
@@ -375,7 +376,7 @@ public abstract class ShoppingCategoryServiceBaseImpl extends PrincipalBean
 		this.userFinder = userFinder;
 	}
 
-	protected void init() {
+	public void afterPropertiesSet() {
 		if (shoppingCartLocalService == null) {
 			shoppingCartLocalService = ShoppingCartLocalServiceFactory.getImpl();
 		}

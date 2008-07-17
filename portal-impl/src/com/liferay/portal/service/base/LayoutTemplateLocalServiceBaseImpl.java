@@ -22,6 +22,7 @@
 
 package com.liferay.portal.service.base;
 
+import com.liferay.portal.kernel.bean.InitializingBean;
 import com.liferay.portal.service.LayoutTemplateLocalService;
 
 /**
@@ -31,7 +32,7 @@ import com.liferay.portal.service.LayoutTemplateLocalService;
  *
  */
 public abstract class LayoutTemplateLocalServiceBaseImpl
-	implements LayoutTemplateLocalService {
-	protected void init() {
+	implements LayoutTemplateLocalService, InitializingBean {
+	public void afterPropertiesSet() {
 	}
 }

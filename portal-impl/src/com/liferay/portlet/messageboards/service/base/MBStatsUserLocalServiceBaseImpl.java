@@ -29,6 +29,7 @@ import com.liferay.counter.service.CounterServiceFactory;
 
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
+import com.liferay.portal.kernel.bean.InitializingBean;
 import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 
 import com.liferay.portlet.messageboards.model.MBStatsUser;
@@ -83,7 +84,7 @@ import java.util.List;
  *
  */
 public abstract class MBStatsUserLocalServiceBaseImpl
-	implements MBStatsUserLocalService {
+	implements MBStatsUserLocalService, InitializingBean {
 	public MBStatsUser addMBStatsUser(MBStatsUser mbStatsUser)
 		throws SystemException {
 		mbStatsUser.setNew(true);
@@ -309,7 +310,7 @@ public abstract class MBStatsUserLocalServiceBaseImpl
 		this.counterService = counterService;
 	}
 
-	protected void init() {
+	public void afterPropertiesSet() {
 		if (mbBanLocalService == null) {
 			mbBanLocalService = MBBanLocalServiceFactory.getImpl();
 		}

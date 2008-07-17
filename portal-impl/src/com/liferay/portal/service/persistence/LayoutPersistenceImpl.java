@@ -24,6 +24,7 @@ package com.liferay.portal.service.persistence;
 
 import com.liferay.portal.NoSuchLayoutException;
 import com.liferay.portal.SystemException;
+import com.liferay.portal.kernel.bean.InitializingBean;
 import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 import com.liferay.portal.kernel.dao.orm.FinderCacheUtil;
 import com.liferay.portal.kernel.dao.orm.Query;
@@ -56,7 +57,7 @@ import java.util.List;
  *
  */
 public class LayoutPersistenceImpl extends BasePersistenceImpl
-	implements LayoutPersistence {
+	implements LayoutPersistence, InitializingBean {
 	public Layout create(long plid) {
 		Layout layout = new LayoutImpl();
 
@@ -3004,7 +3005,7 @@ public class LayoutPersistenceImpl extends BasePersistenceImpl
 		_listeners = listeners.toArray(new ModelListener[listeners.size()]);
 	}
 
-	protected void init() {
+	public void afterPropertiesSet() {
 		String[] listenerClassNames = StringUtil.split(GetterUtil.getString(
 					com.liferay.portal.util.PropsUtil.get(
 						"value.object.listener.com.liferay.portal.model.Layout")));

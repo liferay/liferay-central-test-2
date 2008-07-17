@@ -27,6 +27,7 @@ import com.liferay.counter.service.CounterLocalServiceFactory;
 import com.liferay.counter.service.CounterService;
 import com.liferay.counter.service.CounterServiceFactory;
 
+import com.liferay.portal.kernel.bean.InitializingBean;
 import com.liferay.portal.service.AccountLocalService;
 import com.liferay.portal.service.AccountLocalServiceFactory;
 import com.liferay.portal.service.AccountService;
@@ -413,7 +414,7 @@ import com.liferay.portlet.wiki.service.persistence.WikiNodeUtil;
  *
  */
 public abstract class GroupServiceBaseImpl extends PrincipalBean
-	implements GroupService {
+	implements GroupService, InitializingBean {
 	public AccountLocalService getAccountLocalService() {
 		return accountLocalService;
 	}
@@ -2042,7 +2043,7 @@ public abstract class GroupServiceBaseImpl extends PrincipalBean
 		this.wikiNodePersistence = wikiNodePersistence;
 	}
 
-	protected void init() {
+	public void afterPropertiesSet() {
 		if (accountLocalService == null) {
 			accountLocalService = AccountLocalServiceFactory.getImpl();
 		}

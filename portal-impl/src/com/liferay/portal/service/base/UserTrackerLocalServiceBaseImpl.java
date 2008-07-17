@@ -29,6 +29,7 @@ import com.liferay.counter.service.CounterServiceFactory;
 
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
+import com.liferay.portal.kernel.bean.InitializingBean;
 import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 import com.liferay.portal.model.UserTracker;
 import com.liferay.portal.service.AccountLocalService;
@@ -278,7 +279,7 @@ import java.util.List;
  *
  */
 public abstract class UserTrackerLocalServiceBaseImpl
-	implements UserTrackerLocalService {
+	implements UserTrackerLocalService, InitializingBean {
 	public UserTracker addUserTracker(UserTracker userTracker)
 		throws SystemException {
 		userTracker.setNew(true);
@@ -1334,7 +1335,7 @@ public abstract class UserTrackerLocalServiceBaseImpl
 		this.counterService = counterService;
 	}
 
-	protected void init() {
+	public void afterPropertiesSet() {
 		if (accountLocalService == null) {
 			accountLocalService = AccountLocalServiceFactory.getImpl();
 		}

@@ -32,6 +32,7 @@ import com.liferay.mail.service.MailServiceFactory;
 
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
+import com.liferay.portal.kernel.bean.InitializingBean;
 import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 import com.liferay.portal.service.CompanyLocalService;
 import com.liferay.portal.service.CompanyLocalServiceFactory;
@@ -80,7 +81,7 @@ import java.util.List;
  *
  */
 public abstract class CalEventLocalServiceBaseImpl
-	implements CalEventLocalService {
+	implements CalEventLocalService, InitializingBean {
 	public CalEvent addCalEvent(CalEvent calEvent) throws SystemException {
 		calEvent.setNew(true);
 
@@ -282,7 +283,7 @@ public abstract class CalEventLocalServiceBaseImpl
 		this.userFinder = userFinder;
 	}
 
-	protected void init() {
+	public void afterPropertiesSet() {
 		if (calEventPersistence == null) {
 			calEventPersistence = CalEventUtil.getPersistence();
 		}

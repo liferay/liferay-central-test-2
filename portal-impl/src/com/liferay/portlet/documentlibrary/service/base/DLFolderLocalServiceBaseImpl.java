@@ -34,6 +34,7 @@ import com.liferay.documentlibrary.service.DLServiceFactory;
 
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
+import com.liferay.portal.kernel.bean.InitializingBean;
 import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 import com.liferay.portal.service.LayoutLocalService;
 import com.liferay.portal.service.LayoutLocalServiceFactory;
@@ -106,7 +107,7 @@ import java.util.List;
  *
  */
 public abstract class DLFolderLocalServiceBaseImpl
-	implements DLFolderLocalService {
+	implements DLFolderLocalService, InitializingBean {
 	public DLFolder addDLFolder(DLFolder dlFolder) throws SystemException {
 		dlFolder.setNew(true);
 
@@ -421,7 +422,7 @@ public abstract class DLFolderLocalServiceBaseImpl
 		this.webDAVPropsPersistence = webDAVPropsPersistence;
 	}
 
-	protected void init() {
+	public void afterPropertiesSet() {
 		if (dlFileEntryLocalService == null) {
 			dlFileEntryLocalService = DLFileEntryLocalServiceFactory.getImpl();
 		}

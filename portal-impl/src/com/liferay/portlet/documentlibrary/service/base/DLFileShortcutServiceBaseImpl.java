@@ -27,6 +27,7 @@ import com.liferay.counter.service.CounterLocalServiceFactory;
 import com.liferay.counter.service.CounterService;
 import com.liferay.counter.service.CounterServiceFactory;
 
+import com.liferay.portal.kernel.bean.InitializingBean;
 import com.liferay.portal.service.ResourceLocalService;
 import com.liferay.portal.service.ResourceLocalServiceFactory;
 import com.liferay.portal.service.ResourceService;
@@ -86,7 +87,7 @@ import com.liferay.portlet.documentlibrary.service.persistence.DLFolderUtil;
  *
  */
 public abstract class DLFileShortcutServiceBaseImpl extends PrincipalBean
-	implements DLFileShortcutService {
+	implements DLFileShortcutService, InitializingBean {
 	public DLFileEntryLocalService getDLFileEntryLocalService() {
 		return dlFileEntryLocalService;
 	}
@@ -307,7 +308,7 @@ public abstract class DLFileShortcutServiceBaseImpl extends PrincipalBean
 		this.userFinder = userFinder;
 	}
 
-	protected void init() {
+	public void afterPropertiesSet() {
 		if (dlFileEntryLocalService == null) {
 			dlFileEntryLocalService = DLFileEntryLocalServiceFactory.getImpl();
 		}

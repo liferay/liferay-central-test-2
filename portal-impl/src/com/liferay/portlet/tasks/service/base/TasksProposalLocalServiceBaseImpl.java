@@ -29,6 +29,7 @@ import com.liferay.counter.service.CounterServiceFactory;
 
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
+import com.liferay.portal.kernel.bean.InitializingBean;
 import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 import com.liferay.portal.service.ResourceLocalService;
 import com.liferay.portal.service.ResourceLocalServiceFactory;
@@ -83,7 +84,7 @@ import java.util.List;
  *
  */
 public abstract class TasksProposalLocalServiceBaseImpl
-	implements TasksProposalLocalService {
+	implements TasksProposalLocalService, InitializingBean {
 	public TasksProposal addTasksProposal(TasksProposal tasksProposal)
 		throws SystemException {
 		tasksProposal.setNew(true);
@@ -309,7 +310,7 @@ public abstract class TasksProposalLocalServiceBaseImpl
 		this.socialActivityFinder = socialActivityFinder;
 	}
 
-	protected void init() {
+	public void afterPropertiesSet() {
 		if (tasksReviewLocalService == null) {
 			tasksReviewLocalService = TasksReviewLocalServiceFactory.getImpl();
 		}

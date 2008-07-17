@@ -32,6 +32,7 @@ import com.liferay.documentlibrary.service.DLLocalServiceFactory;
 import com.liferay.documentlibrary.service.DLService;
 import com.liferay.documentlibrary.service.DLServiceFactory;
 
+import com.liferay.portal.kernel.bean.InitializingBean;
 import com.liferay.portal.service.CompanyLocalService;
 import com.liferay.portal.service.CompanyLocalServiceFactory;
 import com.liferay.portal.service.CompanyService;
@@ -123,7 +124,7 @@ import com.liferay.portlet.wiki.service.persistence.WikiPageUtil;
  *
  */
 public abstract class WikiPageServiceBaseImpl extends PrincipalBean
-	implements WikiPageService {
+	implements WikiPageService, InitializingBean {
 	public WikiNodeLocalService getWikiNodeLocalService() {
 		return wikiNodeLocalService;
 	}
@@ -494,7 +495,7 @@ public abstract class WikiPageServiceBaseImpl extends PrincipalBean
 		this.tagsAssetFinder = tagsAssetFinder;
 	}
 
-	protected void init() {
+	public void afterPropertiesSet() {
 		if (wikiNodeLocalService == null) {
 			wikiNodeLocalService = WikiNodeLocalServiceFactory.getImpl();
 		}

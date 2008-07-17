@@ -27,6 +27,7 @@ import com.liferay.counter.service.CounterLocalServiceFactory;
 import com.liferay.counter.service.CounterService;
 import com.liferay.counter.service.CounterServiceFactory;
 
+import com.liferay.portal.kernel.bean.InitializingBean;
 import com.liferay.portal.service.ImageLocalService;
 import com.liferay.portal.service.ImageLocalServiceFactory;
 import com.liferay.portal.service.ResourceLocalService;
@@ -104,7 +105,7 @@ import com.liferay.portlet.journal.service.persistence.JournalTemplateUtil;
  *
  */
 public abstract class JournalTemplateServiceBaseImpl extends PrincipalBean
-	implements JournalTemplateService {
+	implements JournalTemplateService, InitializingBean {
 	public JournalArticleLocalService getJournalArticleLocalService() {
 		return journalArticleLocalService;
 	}
@@ -407,7 +408,7 @@ public abstract class JournalTemplateServiceBaseImpl extends PrincipalBean
 		this.webDAVPropsPersistence = webDAVPropsPersistence;
 	}
 
-	protected void init() {
+	public void afterPropertiesSet() {
 		if (journalArticleLocalService == null) {
 			journalArticleLocalService = JournalArticleLocalServiceFactory.getImpl();
 		}

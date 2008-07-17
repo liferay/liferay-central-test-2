@@ -23,6 +23,7 @@
 package com.liferay.portlet.documentlibrary.service.persistence;
 
 import com.liferay.portal.SystemException;
+import com.liferay.portal.kernel.bean.InitializingBean;
 import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 import com.liferay.portal.kernel.dao.orm.FinderCacheUtil;
 import com.liferay.portal.kernel.dao.orm.Query;
@@ -57,7 +58,7 @@ import java.util.List;
  *
  */
 public class DLFileRankPersistenceImpl extends BasePersistenceImpl
-	implements DLFileRankPersistence {
+	implements DLFileRankPersistence, InitializingBean {
 	public DLFileRank create(long fileRankId) {
 		DLFileRank dlFileRank = new DLFileRankImpl();
 
@@ -1389,7 +1390,7 @@ public class DLFileRankPersistenceImpl extends BasePersistenceImpl
 		_listeners = listeners.toArray(new ModelListener[listeners.size()]);
 	}
 
-	protected void init() {
+	public void afterPropertiesSet() {
 		String[] listenerClassNames = StringUtil.split(GetterUtil.getString(
 					com.liferay.portal.util.PropsUtil.get(
 						"value.object.listener.com.liferay.portlet.documentlibrary.model.DLFileRank")));

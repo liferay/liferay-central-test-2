@@ -27,6 +27,7 @@ import com.liferay.documentlibrary.service.DLLocalServiceFactory;
 import com.liferay.documentlibrary.service.DLService;
 import com.liferay.documentlibrary.service.DLServiceFactory;
 
+import com.liferay.portal.kernel.bean.InitializingBean;
 import com.liferay.portal.service.ResourceLocalService;
 import com.liferay.portal.service.ResourceLocalServiceFactory;
 import com.liferay.portal.service.ResourceService;
@@ -52,7 +53,7 @@ import com.liferay.portlet.workflow.service.WorkflowTaskServiceFactory;
  *
  */
 public abstract class WorkflowDefinitionServiceBaseImpl extends PrincipalBean
-	implements WorkflowDefinitionService {
+	implements WorkflowDefinitionService, InitializingBean {
 	public WorkflowComponentService getWorkflowComponentService() {
 		return workflowComponentService;
 	}
@@ -128,7 +129,7 @@ public abstract class WorkflowDefinitionServiceBaseImpl extends PrincipalBean
 		this.resourceFinder = resourceFinder;
 	}
 
-	protected void init() {
+	public void afterPropertiesSet() {
 		if (workflowComponentService == null) {
 			workflowComponentService = WorkflowComponentServiceFactory.getImpl();
 		}

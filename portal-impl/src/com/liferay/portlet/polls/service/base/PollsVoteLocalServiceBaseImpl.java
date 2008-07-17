@@ -29,6 +29,7 @@ import com.liferay.counter.service.CounterServiceFactory;
 
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
+import com.liferay.portal.kernel.bean.InitializingBean;
 import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 
 import com.liferay.portlet.polls.model.PollsVote;
@@ -57,7 +58,7 @@ import java.util.List;
  *
  */
 public abstract class PollsVoteLocalServiceBaseImpl
-	implements PollsVoteLocalService {
+	implements PollsVoteLocalService, InitializingBean {
 	public PollsVote addPollsVote(PollsVote pollsVote)
 		throws SystemException {
 		pollsVote.setNew(true);
@@ -175,7 +176,7 @@ public abstract class PollsVoteLocalServiceBaseImpl
 		this.counterService = counterService;
 	}
 
-	protected void init() {
+	public void afterPropertiesSet() {
 		if (pollsChoiceLocalService == null) {
 			pollsChoiceLocalService = PollsChoiceLocalServiceFactory.getImpl();
 		}

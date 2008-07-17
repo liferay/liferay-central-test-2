@@ -22,6 +22,7 @@
 
 package com.liferay.portal.service.base;
 
+import com.liferay.portal.kernel.bean.InitializingBean;
 import com.liferay.portal.service.ThemeLocalService;
 
 /**
@@ -30,7 +31,8 @@ import com.liferay.portal.service.ThemeLocalService;
  * @author Brian Wing Shun Chan
  *
  */
-public abstract class ThemeLocalServiceBaseImpl implements ThemeLocalService {
-	protected void init() {
+public abstract class ThemeLocalServiceBaseImpl implements ThemeLocalService,
+	InitializingBean {
+	public void afterPropertiesSet() {
 	}
 }

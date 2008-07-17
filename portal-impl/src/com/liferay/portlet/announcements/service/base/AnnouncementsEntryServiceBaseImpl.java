@@ -30,6 +30,7 @@ import com.liferay.counter.service.CounterServiceFactory;
 import com.liferay.mail.service.MailService;
 import com.liferay.mail.service.MailServiceFactory;
 
+import com.liferay.portal.kernel.bean.InitializingBean;
 import com.liferay.portal.service.CompanyLocalService;
 import com.liferay.portal.service.CompanyLocalServiceFactory;
 import com.liferay.portal.service.CompanyService;
@@ -113,7 +114,7 @@ import com.liferay.portlet.announcements.service.persistence.AnnouncementsFlagUt
  *
  */
 public abstract class AnnouncementsEntryServiceBaseImpl extends PrincipalBean
-	implements AnnouncementsEntryService {
+	implements AnnouncementsEntryService, InitializingBean {
 	public AnnouncementsDeliveryLocalService getAnnouncementsDeliveryLocalService() {
 		return announcementsDeliveryLocalService;
 	}
@@ -440,7 +441,7 @@ public abstract class AnnouncementsEntryServiceBaseImpl extends PrincipalBean
 		this.userGroupFinder = userGroupFinder;
 	}
 
-	protected void init() {
+	public void afterPropertiesSet() {
 		if (announcementsDeliveryLocalService == null) {
 			announcementsDeliveryLocalService = AnnouncementsDeliveryLocalServiceFactory.getImpl();
 		}

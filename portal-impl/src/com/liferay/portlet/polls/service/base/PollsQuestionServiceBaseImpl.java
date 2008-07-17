@@ -27,6 +27,7 @@ import com.liferay.counter.service.CounterLocalServiceFactory;
 import com.liferay.counter.service.CounterService;
 import com.liferay.counter.service.CounterServiceFactory;
 
+import com.liferay.portal.kernel.bean.InitializingBean;
 import com.liferay.portal.service.ResourceLocalService;
 import com.liferay.portal.service.ResourceLocalServiceFactory;
 import com.liferay.portal.service.ResourceService;
@@ -70,7 +71,7 @@ import com.liferay.portlet.polls.service.persistence.PollsVoteUtil;
  *
  */
 public abstract class PollsQuestionServiceBaseImpl extends PrincipalBean
-	implements PollsQuestionService {
+	implements PollsQuestionService, InitializingBean {
 	public PollsChoiceLocalService getPollsChoiceLocalService() {
 		return pollsChoiceLocalService;
 	}
@@ -222,7 +223,7 @@ public abstract class PollsQuestionServiceBaseImpl extends PrincipalBean
 		this.userFinder = userFinder;
 	}
 
-	protected void init() {
+	public void afterPropertiesSet() {
 		if (pollsChoiceLocalService == null) {
 			pollsChoiceLocalService = PollsChoiceLocalServiceFactory.getImpl();
 		}

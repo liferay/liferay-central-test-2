@@ -22,6 +22,7 @@
 
 package com.liferay.portlet.workflow.service.base;
 
+import com.liferay.portal.kernel.bean.InitializingBean;
 import com.liferay.portal.service.base.PrincipalBean;
 
 import com.liferay.portlet.workflow.service.WorkflowComponentService;
@@ -39,7 +40,7 @@ import com.liferay.portlet.workflow.service.WorkflowTaskService;
  *
  */
 public abstract class WorkflowTaskServiceBaseImpl extends PrincipalBean
-	implements WorkflowTaskService {
+	implements WorkflowTaskService, InitializingBean {
 	public WorkflowComponentService getWorkflowComponentService() {
 		return workflowComponentService;
 	}
@@ -67,7 +68,7 @@ public abstract class WorkflowTaskServiceBaseImpl extends PrincipalBean
 		this.workflowInstanceService = workflowInstanceService;
 	}
 
-	protected void init() {
+	public void afterPropertiesSet() {
 		if (workflowComponentService == null) {
 			workflowComponentService = WorkflowComponentServiceFactory.getImpl();
 		}

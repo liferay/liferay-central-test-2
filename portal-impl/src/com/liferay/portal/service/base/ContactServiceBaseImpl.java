@@ -22,6 +22,7 @@
 
 package com.liferay.portal.service.base;
 
+import com.liferay.portal.kernel.bean.InitializingBean;
 import com.liferay.portal.service.AccountLocalService;
 import com.liferay.portal.service.AccountLocalServiceFactory;
 import com.liferay.portal.service.AccountService;
@@ -267,7 +268,7 @@ import com.liferay.portal.service.persistence.WebsiteUtil;
  *
  */
 public abstract class ContactServiceBaseImpl extends PrincipalBean
-	implements ContactService {
+	implements ContactService, InitializingBean {
 	public AccountLocalService getAccountLocalService() {
 		return accountLocalService;
 	}
@@ -1268,7 +1269,7 @@ public abstract class ContactServiceBaseImpl extends PrincipalBean
 		this.websitePersistence = websitePersistence;
 	}
 
-	protected void init() {
+	public void afterPropertiesSet() {
 		if (accountLocalService == null) {
 			accountLocalService = AccountLocalServiceFactory.getImpl();
 		}

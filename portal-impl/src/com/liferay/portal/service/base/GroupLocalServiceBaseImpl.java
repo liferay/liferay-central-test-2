@@ -29,6 +29,7 @@ import com.liferay.counter.service.CounterServiceFactory;
 
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
+import com.liferay.portal.kernel.bean.InitializingBean;
 import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 import com.liferay.portal.model.Group;
 import com.liferay.portal.service.AccountLocalService;
@@ -416,7 +417,8 @@ import java.util.List;
  * @author Brian Wing Shun Chan
  *
  */
-public abstract class GroupLocalServiceBaseImpl implements GroupLocalService {
+public abstract class GroupLocalServiceBaseImpl implements GroupLocalService,
+	InitializingBean {
 	public Group addGroup(Group group) throws SystemException {
 		group.setNew(true);
 
@@ -2072,7 +2074,7 @@ public abstract class GroupLocalServiceBaseImpl implements GroupLocalService {
 		this.wikiNodePersistence = wikiNodePersistence;
 	}
 
-	protected void init() {
+	public void afterPropertiesSet() {
 		if (accountLocalService == null) {
 			accountLocalService = AccountLocalServiceFactory.getImpl();
 		}

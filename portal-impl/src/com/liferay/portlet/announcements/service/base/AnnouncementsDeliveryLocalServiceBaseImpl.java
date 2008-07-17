@@ -29,6 +29,7 @@ import com.liferay.counter.service.CounterServiceFactory;
 
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
+import com.liferay.portal.kernel.bean.InitializingBean;
 import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 import com.liferay.portal.service.UserLocalService;
 import com.liferay.portal.service.UserLocalServiceFactory;
@@ -67,7 +68,7 @@ import java.util.List;
  *
  */
 public abstract class AnnouncementsDeliveryLocalServiceBaseImpl
-	implements AnnouncementsDeliveryLocalService {
+	implements AnnouncementsDeliveryLocalService, InitializingBean {
 	public AnnouncementsDelivery addAnnouncementsDelivery(
 		AnnouncementsDelivery announcementsDelivery) throws SystemException {
 		announcementsDelivery.setNew(true);
@@ -230,7 +231,7 @@ public abstract class AnnouncementsDeliveryLocalServiceBaseImpl
 		this.userFinder = userFinder;
 	}
 
-	protected void init() {
+	public void afterPropertiesSet() {
 		if (announcementsDeliveryPersistence == null) {
 			announcementsDeliveryPersistence = AnnouncementsDeliveryUtil.getPersistence();
 		}

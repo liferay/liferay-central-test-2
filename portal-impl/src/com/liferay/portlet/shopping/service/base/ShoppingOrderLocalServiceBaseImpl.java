@@ -32,6 +32,7 @@ import com.liferay.mail.service.MailServiceFactory;
 
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
+import com.liferay.portal.kernel.bean.InitializingBean;
 import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 import com.liferay.portal.service.CompanyLocalService;
 import com.liferay.portal.service.CompanyLocalServiceFactory;
@@ -110,7 +111,7 @@ import java.util.List;
  *
  */
 public abstract class ShoppingOrderLocalServiceBaseImpl
-	implements ShoppingOrderLocalService {
+	implements ShoppingOrderLocalService, InitializingBean {
 	public ShoppingOrder addShoppingOrder(ShoppingOrder shoppingOrder)
 		throws SystemException {
 		shoppingOrder.setNew(true);
@@ -451,7 +452,7 @@ public abstract class ShoppingOrderLocalServiceBaseImpl
 		this.mbMessageFinder = mbMessageFinder;
 	}
 
-	protected void init() {
+	public void afterPropertiesSet() {
 		if (shoppingCartLocalService == null) {
 			shoppingCartLocalService = ShoppingCartLocalServiceFactory.getImpl();
 		}

@@ -32,6 +32,7 @@ import com.liferay.mail.service.MailServiceFactory;
 
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
+import com.liferay.portal.kernel.bean.InitializingBean;
 import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 import com.liferay.portal.model.MembershipRequest;
 import com.liferay.portal.service.AccountLocalService;
@@ -279,7 +280,7 @@ import java.util.List;
  *
  */
 public abstract class MembershipRequestLocalServiceBaseImpl
-	implements MembershipRequestLocalService {
+	implements MembershipRequestLocalService, InitializingBean {
 	public MembershipRequest addMembershipRequest(
 		MembershipRequest membershipRequest) throws SystemException {
 		membershipRequest.setNew(true);
@@ -1334,7 +1335,7 @@ public abstract class MembershipRequestLocalServiceBaseImpl
 		this.mailService = mailService;
 	}
 
-	protected void init() {
+	public void afterPropertiesSet() {
 		if (accountLocalService == null) {
 			accountLocalService = AccountLocalServiceFactory.getImpl();
 		}

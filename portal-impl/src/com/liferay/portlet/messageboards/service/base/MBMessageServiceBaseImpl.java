@@ -35,6 +35,7 @@ import com.liferay.documentlibrary.service.DLServiceFactory;
 import com.liferay.mail.service.MailService;
 import com.liferay.mail.service.MailServiceFactory;
 
+import com.liferay.portal.kernel.bean.InitializingBean;
 import com.liferay.portal.service.CompanyLocalService;
 import com.liferay.portal.service.CompanyLocalServiceFactory;
 import com.liferay.portal.service.CompanyService;
@@ -162,7 +163,7 @@ import com.liferay.portlet.tags.service.persistence.TagsEntryUtil;
  *
  */
 public abstract class MBMessageServiceBaseImpl extends PrincipalBean
-	implements MBMessageService {
+	implements MBMessageService, InitializingBean {
 	public MBBanLocalService getMBBanLocalService() {
 		return mbBanLocalService;
 	}
@@ -695,7 +696,7 @@ public abstract class MBMessageServiceBaseImpl extends PrincipalBean
 		this.tagsEntryFinder = tagsEntryFinder;
 	}
 
-	protected void init() {
+	public void afterPropertiesSet() {
 		if (mbBanLocalService == null) {
 			mbBanLocalService = MBBanLocalServiceFactory.getImpl();
 		}

@@ -29,6 +29,7 @@ import com.liferay.counter.service.CounterServiceFactory;
 
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
+import com.liferay.portal.kernel.bean.InitializingBean;
 import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 import com.liferay.portal.service.UserLocalService;
 import com.liferay.portal.service.UserLocalServiceFactory;
@@ -91,7 +92,7 @@ import java.util.List;
  *
  */
 public abstract class MBMessageFlagLocalServiceBaseImpl
-	implements MBMessageFlagLocalService {
+	implements MBMessageFlagLocalService, InitializingBean {
 	public MBMessageFlag addMBMessageFlag(MBMessageFlag mbMessageFlag)
 		throws SystemException {
 		mbMessageFlag.setNew(true);
@@ -349,7 +350,7 @@ public abstract class MBMessageFlagLocalServiceBaseImpl
 		this.userFinder = userFinder;
 	}
 
-	protected void init() {
+	public void afterPropertiesSet() {
 		if (mbBanLocalService == null) {
 			mbBanLocalService = MBBanLocalServiceFactory.getImpl();
 		}

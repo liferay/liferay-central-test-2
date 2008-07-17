@@ -32,6 +32,7 @@ import com.liferay.mail.service.MailServiceFactory;
 
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
+import com.liferay.portal.kernel.bean.InitializingBean;
 import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 import com.liferay.portal.service.CompanyLocalService;
 import com.liferay.portal.service.CompanyLocalServiceFactory;
@@ -148,7 +149,7 @@ import java.util.List;
  *
  */
 public abstract class JournalArticleLocalServiceBaseImpl
-	implements JournalArticleLocalService {
+	implements JournalArticleLocalService, InitializingBean {
 	public JournalArticle addJournalArticle(JournalArticle journalArticle)
 		throws SystemException {
 		journalArticle.setNew(true);
@@ -652,7 +653,7 @@ public abstract class JournalArticleLocalServiceBaseImpl
 		this.tagsEntryFinder = tagsEntryFinder;
 	}
 
-	protected void init() {
+	public void afterPropertiesSet() {
 		if (journalArticlePersistence == null) {
 			journalArticlePersistence = JournalArticleUtil.getPersistence();
 		}

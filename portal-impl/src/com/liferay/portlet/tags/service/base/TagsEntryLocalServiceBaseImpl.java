@@ -29,6 +29,7 @@ import com.liferay.counter.service.CounterServiceFactory;
 
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
+import com.liferay.portal.kernel.bean.InitializingBean;
 import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 import com.liferay.portal.service.UserLocalService;
 import com.liferay.portal.service.UserLocalServiceFactory;
@@ -79,7 +80,7 @@ import java.util.List;
  *
  */
 public abstract class TagsEntryLocalServiceBaseImpl
-	implements TagsEntryLocalService {
+	implements TagsEntryLocalService, InitializingBean {
 	public TagsEntry addTagsEntry(TagsEntry tagsEntry)
 		throws SystemException {
 		tagsEntry.setNew(true);
@@ -287,7 +288,7 @@ public abstract class TagsEntryLocalServiceBaseImpl
 		this.userFinder = userFinder;
 	}
 
-	protected void init() {
+	public void afterPropertiesSet() {
 		if (tagsAssetLocalService == null) {
 			tagsAssetLocalService = TagsAssetLocalServiceFactory.getImpl();
 		}

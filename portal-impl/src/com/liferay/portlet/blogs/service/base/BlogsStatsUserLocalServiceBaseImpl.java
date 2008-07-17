@@ -29,6 +29,7 @@ import com.liferay.counter.service.CounterServiceFactory;
 
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
+import com.liferay.portal.kernel.bean.InitializingBean;
 import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 import com.liferay.portal.service.GroupLocalService;
 import com.liferay.portal.service.GroupLocalServiceFactory;
@@ -63,7 +64,7 @@ import java.util.List;
  *
  */
 public abstract class BlogsStatsUserLocalServiceBaseImpl
-	implements BlogsStatsUserLocalService {
+	implements BlogsStatsUserLocalService, InitializingBean {
 	public BlogsStatsUser addBlogsStatsUser(BlogsStatsUser blogsStatsUser)
 		throws SystemException {
 		blogsStatsUser.setNew(true);
@@ -204,7 +205,7 @@ public abstract class BlogsStatsUserLocalServiceBaseImpl
 		this.groupFinder = groupFinder;
 	}
 
-	protected void init() {
+	public void afterPropertiesSet() {
 		if (blogsEntryLocalService == null) {
 			blogsEntryLocalService = BlogsEntryLocalServiceFactory.getImpl();
 		}

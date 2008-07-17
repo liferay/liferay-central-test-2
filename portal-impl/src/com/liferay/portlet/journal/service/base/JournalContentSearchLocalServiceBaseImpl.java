@@ -29,6 +29,7 @@ import com.liferay.counter.service.CounterServiceFactory;
 
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
+import com.liferay.portal.kernel.bean.InitializingBean;
 import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 import com.liferay.portal.service.GroupLocalService;
 import com.liferay.portal.service.GroupLocalServiceFactory;
@@ -109,7 +110,7 @@ import java.util.List;
  *
  */
 public abstract class JournalContentSearchLocalServiceBaseImpl
-	implements JournalContentSearchLocalService {
+	implements JournalContentSearchLocalService, InitializingBean {
 	public JournalContentSearch addJournalContentSearch(
 		JournalContentSearch journalContentSearch) throws SystemException {
 		journalContentSearch.setNew(true);
@@ -454,7 +455,7 @@ public abstract class JournalContentSearchLocalServiceBaseImpl
 		this.portletPreferencesFinder = portletPreferencesFinder;
 	}
 
-	protected void init() {
+	public void afterPropertiesSet() {
 		if (journalArticleLocalService == null) {
 			journalArticleLocalService = JournalArticleLocalServiceFactory.getImpl();
 		}

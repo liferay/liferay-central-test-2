@@ -27,6 +27,7 @@ import com.liferay.counter.service.CounterLocalServiceFactory;
 import com.liferay.counter.service.CounterService;
 import com.liferay.counter.service.CounterServiceFactory;
 
+import com.liferay.portal.kernel.bean.InitializingBean;
 import com.liferay.portal.service.UserLocalService;
 import com.liferay.portal.service.UserLocalServiceFactory;
 import com.liferay.portal.service.UserService;
@@ -86,7 +87,7 @@ import com.liferay.portlet.messageboards.service.persistence.MBThreadUtil;
  *
  */
 public abstract class MBBanServiceBaseImpl extends PrincipalBean
-	implements MBBanService {
+	implements MBBanService, InitializingBean {
 	public MBBanLocalService getMBBanLocalService() {
 		return mbBanLocalService;
 	}
@@ -305,7 +306,7 @@ public abstract class MBBanServiceBaseImpl extends PrincipalBean
 		this.userFinder = userFinder;
 	}
 
-	protected void init() {
+	public void afterPropertiesSet() {
 		if (mbBanLocalService == null) {
 			mbBanLocalService = MBBanLocalServiceFactory.getImpl();
 		}

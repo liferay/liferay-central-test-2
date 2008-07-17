@@ -32,6 +32,7 @@ import com.liferay.mail.service.MailServiceFactory;
 
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
+import com.liferay.portal.kernel.bean.InitializingBean;
 import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 import com.liferay.portal.service.CompanyLocalService;
 import com.liferay.portal.service.CompanyLocalServiceFactory;
@@ -116,7 +117,7 @@ import java.util.List;
  *
  */
 public abstract class AnnouncementsEntryLocalServiceBaseImpl
-	implements AnnouncementsEntryLocalService {
+	implements AnnouncementsEntryLocalService, InitializingBean {
 	public AnnouncementsEntry addAnnouncementsEntry(
 		AnnouncementsEntry announcementsEntry) throws SystemException {
 		announcementsEntry.setNew(true);
@@ -474,7 +475,7 @@ public abstract class AnnouncementsEntryLocalServiceBaseImpl
 		this.userGroupFinder = userGroupFinder;
 	}
 
-	protected void init() {
+	public void afterPropertiesSet() {
 		if (announcementsDeliveryLocalService == null) {
 			announcementsDeliveryLocalService = AnnouncementsDeliveryLocalServiceFactory.getImpl();
 		}

@@ -22,6 +22,8 @@
 
 package com.liferay.portlet.social.service.base;
 
+import com.liferay.portal.kernel.bean.InitializingBean;
+
 import com.liferay.portlet.social.service.SocialRequestInterpreterLocalService;
 
 /**
@@ -31,7 +33,7 @@ import com.liferay.portlet.social.service.SocialRequestInterpreterLocalService;
  *
  */
 public abstract class SocialRequestInterpreterLocalServiceBaseImpl
-	implements SocialRequestInterpreterLocalService {
-	protected void init() {
+	implements SocialRequestInterpreterLocalService, InitializingBean {
+	public void afterPropertiesSet() {
 	}
 }

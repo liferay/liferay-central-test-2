@@ -24,6 +24,7 @@ package com.liferay.portal.service.base;
 
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
+import com.liferay.portal.kernel.bean.InitializingBean;
 import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 import com.liferay.portal.model.UserGroupRole;
 import com.liferay.portal.service.AccountLocalService;
@@ -272,7 +273,7 @@ import java.util.List;
  *
  */
 public abstract class UserGroupRoleLocalServiceBaseImpl
-	implements UserGroupRoleLocalService {
+	implements UserGroupRoleLocalService, InitializingBean {
 	public UserGroupRole addUserGroupRole(UserGroupRole userGroupRole)
 		throws SystemException {
 		userGroupRole.setNew(true);
@@ -1303,7 +1304,7 @@ public abstract class UserGroupRoleLocalServiceBaseImpl
 		this.websitePersistence = websitePersistence;
 	}
 
-	protected void init() {
+	public void afterPropertiesSet() {
 		if (accountLocalService == null) {
 			accountLocalService = AccountLocalServiceFactory.getImpl();
 		}

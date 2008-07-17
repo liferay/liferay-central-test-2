@@ -27,6 +27,7 @@ import com.liferay.counter.service.CounterLocalServiceFactory;
 import com.liferay.counter.service.CounterService;
 import com.liferay.counter.service.CounterServiceFactory;
 
+import com.liferay.portal.kernel.bean.InitializingBean;
 import com.liferay.portal.service.UserLocalService;
 import com.liferay.portal.service.UserLocalServiceFactory;
 import com.liferay.portal.service.UserService;
@@ -64,7 +65,7 @@ import com.liferay.portlet.announcements.service.persistence.AnnouncementsFlagUt
  *
  */
 public abstract class AnnouncementsDeliveryServiceBaseImpl extends PrincipalBean
-	implements AnnouncementsDeliveryService {
+	implements AnnouncementsDeliveryService, InitializingBean {
 	public AnnouncementsDeliveryLocalService getAnnouncementsDeliveryLocalService() {
 		return announcementsDeliveryLocalService;
 	}
@@ -194,7 +195,7 @@ public abstract class AnnouncementsDeliveryServiceBaseImpl extends PrincipalBean
 		this.userFinder = userFinder;
 	}
 
-	protected void init() {
+	public void afterPropertiesSet() {
 		if (announcementsDeliveryLocalService == null) {
 			announcementsDeliveryLocalService = AnnouncementsDeliveryLocalServiceFactory.getImpl();
 		}

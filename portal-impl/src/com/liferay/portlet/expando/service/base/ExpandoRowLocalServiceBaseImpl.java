@@ -29,6 +29,7 @@ import com.liferay.counter.service.CounterServiceFactory;
 
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
+import com.liferay.portal.kernel.bean.InitializingBean;
 import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 
 import com.liferay.portlet.expando.model.ExpandoRow;
@@ -63,7 +64,7 @@ import java.util.List;
  *
  */
 public abstract class ExpandoRowLocalServiceBaseImpl
-	implements ExpandoRowLocalService {
+	implements ExpandoRowLocalService, InitializingBean {
 	public ExpandoRow addExpandoRow(ExpandoRow expandoRow)
 		throws SystemException {
 		expandoRow.setNew(true);
@@ -207,7 +208,7 @@ public abstract class ExpandoRowLocalServiceBaseImpl
 		this.counterService = counterService;
 	}
 
-	protected void init() {
+	public void afterPropertiesSet() {
 		if (expandoColumnLocalService == null) {
 			expandoColumnLocalService = ExpandoColumnLocalServiceFactory.getImpl();
 		}

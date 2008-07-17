@@ -27,6 +27,7 @@ import com.liferay.counter.service.CounterLocalServiceFactory;
 import com.liferay.counter.service.CounterService;
 import com.liferay.counter.service.CounterServiceFactory;
 
+import com.liferay.portal.kernel.bean.InitializingBean;
 import com.liferay.portal.service.CompanyLocalService;
 import com.liferay.portal.service.CompanyLocalServiceFactory;
 import com.liferay.portal.service.CompanyService;
@@ -146,7 +147,7 @@ import com.liferay.portlet.wiki.service.persistence.WikiPageUtil;
  *
  */
 public abstract class TagsAssetServiceBaseImpl extends PrincipalBean
-	implements TagsAssetService {
+	implements TagsAssetService, InitializingBean {
 	public TagsAssetLocalService getTagsAssetLocalService() {
 		return tagsAssetLocalService;
 	}
@@ -623,7 +624,7 @@ public abstract class TagsAssetServiceBaseImpl extends PrincipalBean
 		this.wikiPageResourcePersistence = wikiPageResourcePersistence;
 	}
 
-	protected void init() {
+	public void afterPropertiesSet() {
 		if (tagsAssetLocalService == null) {
 			tagsAssetLocalService = TagsAssetLocalServiceFactory.getImpl();
 		}

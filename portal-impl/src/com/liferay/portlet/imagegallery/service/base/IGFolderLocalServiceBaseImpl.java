@@ -29,6 +29,7 @@ import com.liferay.counter.service.CounterServiceFactory;
 
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
+import com.liferay.portal.kernel.bean.InitializingBean;
 import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 import com.liferay.portal.service.ImageLocalService;
 import com.liferay.portal.service.ImageLocalServiceFactory;
@@ -89,7 +90,7 @@ import java.util.List;
  *
  */
 public abstract class IGFolderLocalServiceBaseImpl
-	implements IGFolderLocalService {
+	implements IGFolderLocalService, InitializingBean {
 	public IGFolder addIGFolder(IGFolder igFolder) throws SystemException {
 		igFolder.setNew(true);
 
@@ -329,7 +330,7 @@ public abstract class IGFolderLocalServiceBaseImpl
 		this.tagsEntryFinder = tagsEntryFinder;
 	}
 
-	protected void init() {
+	public void afterPropertiesSet() {
 		if (igFolderPersistence == null) {
 			igFolderPersistence = IGFolderUtil.getPersistence();
 		}

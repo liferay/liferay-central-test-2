@@ -24,6 +24,7 @@ package com.liferay.portal.service.base;
 
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
+import com.liferay.portal.kernel.bean.InitializingBean;
 import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 import com.liferay.portal.model.Image;
 import com.liferay.portal.service.AccountLocalService;
@@ -272,7 +273,8 @@ import java.util.List;
  * @author Brian Wing Shun Chan
  *
  */
-public abstract class ImageLocalServiceBaseImpl implements ImageLocalService {
+public abstract class ImageLocalServiceBaseImpl implements ImageLocalService,
+	InitializingBean {
 	public Image addImage(Image image) throws SystemException {
 		image.setNew(true);
 
@@ -1308,7 +1310,7 @@ public abstract class ImageLocalServiceBaseImpl implements ImageLocalService {
 		this.websitePersistence = websitePersistence;
 	}
 
-	protected void init() {
+	public void afterPropertiesSet() {
 		if (accountLocalService == null) {
 			accountLocalService = AccountLocalServiceFactory.getImpl();
 		}

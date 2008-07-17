@@ -27,6 +27,7 @@ import com.liferay.counter.service.CounterLocalServiceFactory;
 import com.liferay.counter.service.CounterService;
 import com.liferay.counter.service.CounterServiceFactory;
 
+import com.liferay.portal.kernel.bean.InitializingBean;
 import com.liferay.portal.service.AccountLocalService;
 import com.liferay.portal.service.AccountLocalServiceFactory;
 import com.liferay.portal.service.AccountService;
@@ -303,7 +304,7 @@ import com.liferay.portlet.tasks.service.persistence.TasksProposalUtil;
  *
  */
 public abstract class LayoutServiceBaseImpl extends PrincipalBean
-	implements LayoutService {
+	implements LayoutService, InitializingBean {
 	public AccountLocalService getAccountLocalService() {
 		return accountLocalService;
 	}
@@ -1450,7 +1451,7 @@ public abstract class LayoutServiceBaseImpl extends PrincipalBean
 		this.tasksProposalFinder = tasksProposalFinder;
 	}
 
-	protected void init() {
+	public void afterPropertiesSet() {
 		if (accountLocalService == null) {
 			accountLocalService = AccountLocalServiceFactory.getImpl();
 		}

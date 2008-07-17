@@ -32,6 +32,7 @@ import com.liferay.documentlibrary.service.DLLocalServiceFactory;
 import com.liferay.documentlibrary.service.DLService;
 import com.liferay.documentlibrary.service.DLServiceFactory;
 
+import com.liferay.portal.kernel.bean.InitializingBean;
 import com.liferay.portal.service.ResourceLocalService;
 import com.liferay.portal.service.ResourceLocalServiceFactory;
 import com.liferay.portal.service.ResourceService;
@@ -117,7 +118,7 @@ import com.liferay.portlet.tags.service.persistence.TagsAssetUtil;
  *
  */
 public abstract class MBThreadServiceBaseImpl extends PrincipalBean
-	implements MBThreadService {
+	implements MBThreadService, InitializingBean {
 	public MBBanLocalService getMBBanLocalService() {
 		return mbBanLocalService;
 	}
@@ -464,7 +465,7 @@ public abstract class MBThreadServiceBaseImpl extends PrincipalBean
 		this.tagsAssetFinder = tagsAssetFinder;
 	}
 
-	protected void init() {
+	public void afterPropertiesSet() {
 		if (mbBanLocalService == null) {
 			mbBanLocalService = MBBanLocalServiceFactory.getImpl();
 		}

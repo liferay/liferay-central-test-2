@@ -29,6 +29,7 @@ import com.liferay.counter.service.CounterServiceFactory;
 
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
+import com.liferay.portal.kernel.bean.InitializingBean;
 import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 import com.liferay.portal.service.ResourceLocalService;
 import com.liferay.portal.service.ResourceLocalServiceFactory;
@@ -73,7 +74,7 @@ import java.util.List;
  *
  */
 public abstract class PollsQuestionLocalServiceBaseImpl
-	implements PollsQuestionLocalService {
+	implements PollsQuestionLocalService, InitializingBean {
 	public PollsQuestion addPollsQuestion(PollsQuestion pollsQuestion)
 		throws SystemException {
 		pollsQuestion.setNew(true);
@@ -256,7 +257,7 @@ public abstract class PollsQuestionLocalServiceBaseImpl
 		this.userFinder = userFinder;
 	}
 
-	protected void init() {
+	public void afterPropertiesSet() {
 		if (pollsChoiceLocalService == null) {
 			pollsChoiceLocalService = PollsChoiceLocalServiceFactory.getImpl();
 		}

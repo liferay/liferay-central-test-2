@@ -24,6 +24,7 @@ package com.liferay.portlet.shopping.service.base;
 
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
+import com.liferay.portal.kernel.bean.InitializingBean;
 import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 
 import com.liferay.portlet.shopping.model.ShoppingItemPrice;
@@ -82,7 +83,7 @@ import java.util.List;
  *
  */
 public abstract class ShoppingItemPriceLocalServiceBaseImpl
-	implements ShoppingItemPriceLocalService {
+	implements ShoppingItemPriceLocalService, InitializingBean {
 	public ShoppingItemPrice addShoppingItemPrice(
 		ShoppingItemPrice shoppingItemPrice) throws SystemException {
 		shoppingItemPrice.setNew(true);
@@ -318,7 +319,7 @@ public abstract class ShoppingItemPriceLocalServiceBaseImpl
 		this.shoppingOrderItemPersistence = shoppingOrderItemPersistence;
 	}
 
-	protected void init() {
+	public void afterPropertiesSet() {
 		if (shoppingCartLocalService == null) {
 			shoppingCartLocalService = ShoppingCartLocalServiceFactory.getImpl();
 		}

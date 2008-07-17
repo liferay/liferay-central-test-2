@@ -24,6 +24,7 @@ package com.liferay.portlet.softwarecatalog.service.base;
 
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
+import com.liferay.portal.kernel.bean.InitializingBean;
 import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 import com.liferay.portal.service.ImageLocalService;
 import com.liferay.portal.service.ImageLocalServiceFactory;
@@ -68,7 +69,7 @@ import java.util.List;
  *
  */
 public abstract class SCProductScreenshotLocalServiceBaseImpl
-	implements SCProductScreenshotLocalService {
+	implements SCProductScreenshotLocalService, InitializingBean {
 	public SCProductScreenshot addSCProductScreenshot(
 		SCProductScreenshot scProductScreenshot) throws SystemException {
 		scProductScreenshot.setNew(true);
@@ -241,7 +242,7 @@ public abstract class SCProductScreenshotLocalServiceBaseImpl
 		this.imagePersistence = imagePersistence;
 	}
 
-	protected void init() {
+	public void afterPropertiesSet() {
 		if (scLicenseLocalService == null) {
 			scLicenseLocalService = SCLicenseLocalServiceFactory.getImpl();
 		}

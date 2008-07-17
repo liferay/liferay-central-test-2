@@ -23,6 +23,7 @@
 package com.liferay.portlet.social.service.persistence;
 
 import com.liferay.portal.SystemException;
+import com.liferay.portal.kernel.bean.InitializingBean;
 import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 import com.liferay.portal.kernel.dao.orm.FinderCacheUtil;
 import com.liferay.portal.kernel.dao.orm.Query;
@@ -59,7 +60,7 @@ import java.util.List;
  *
  */
 public class SocialRelationPersistenceImpl extends BasePersistenceImpl
-	implements SocialRelationPersistence {
+	implements SocialRelationPersistence, InitializingBean {
 	public SocialRelation create(long relationId) {
 		SocialRelation socialRelation = new SocialRelationImpl();
 
@@ -3184,7 +3185,7 @@ public class SocialRelationPersistenceImpl extends BasePersistenceImpl
 		_listeners = listeners.toArray(new ModelListener[listeners.size()]);
 	}
 
-	protected void init() {
+	public void afterPropertiesSet() {
 		String[] listenerClassNames = StringUtil.split(GetterUtil.getString(
 					com.liferay.portal.util.PropsUtil.get(
 						"value.object.listener.com.liferay.portlet.social.model.SocialRelation")));

@@ -29,6 +29,7 @@ import com.liferay.counter.service.CounterServiceFactory;
 
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
+import com.liferay.portal.kernel.bean.InitializingBean;
 import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 import com.liferay.portal.service.ImageLocalService;
 import com.liferay.portal.service.ImageLocalServiceFactory;
@@ -105,7 +106,7 @@ import java.util.List;
  *
  */
 public abstract class ShoppingItemLocalServiceBaseImpl
-	implements ShoppingItemLocalService {
+	implements ShoppingItemLocalService, InitializingBean {
 	public ShoppingItem addShoppingItem(ShoppingItem shoppingItem)
 		throws SystemException {
 		shoppingItem.setNew(true);
@@ -430,7 +431,7 @@ public abstract class ShoppingItemLocalServiceBaseImpl
 		this.userFinder = userFinder;
 	}
 
-	protected void init() {
+	public void afterPropertiesSet() {
 		if (shoppingCartLocalService == null) {
 			shoppingCartLocalService = ShoppingCartLocalServiceFactory.getImpl();
 		}

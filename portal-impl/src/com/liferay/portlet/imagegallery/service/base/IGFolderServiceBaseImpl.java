@@ -27,6 +27,7 @@ import com.liferay.counter.service.CounterLocalServiceFactory;
 import com.liferay.counter.service.CounterService;
 import com.liferay.counter.service.CounterServiceFactory;
 
+import com.liferay.portal.kernel.bean.InitializingBean;
 import com.liferay.portal.service.ImageLocalService;
 import com.liferay.portal.service.ImageLocalServiceFactory;
 import com.liferay.portal.service.LayoutLocalService;
@@ -86,7 +87,7 @@ import com.liferay.portlet.tags.service.persistence.TagsEntryUtil;
  *
  */
 public abstract class IGFolderServiceBaseImpl extends PrincipalBean
-	implements IGFolderService {
+	implements IGFolderService, InitializingBean {
 	public IGFolderLocalService getIGFolderLocalService() {
 		return igFolderLocalService;
 	}
@@ -299,7 +300,7 @@ public abstract class IGFolderServiceBaseImpl extends PrincipalBean
 		this.tagsEntryFinder = tagsEntryFinder;
 	}
 
-	protected void init() {
+	public void afterPropertiesSet() {
 		if (igFolderLocalService == null) {
 			igFolderLocalService = IGFolderLocalServiceFactory.getImpl();
 		}

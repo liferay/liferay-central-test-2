@@ -29,6 +29,7 @@ import com.liferay.counter.service.CounterServiceFactory;
 
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
+import com.liferay.portal.kernel.bean.InitializingBean;
 import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 import com.liferay.portal.service.ResourceLocalService;
 import com.liferay.portal.service.ResourceLocalServiceFactory;
@@ -99,7 +100,7 @@ import java.util.List;
  *
  */
 public abstract class JournalFeedLocalServiceBaseImpl
-	implements JournalFeedLocalService {
+	implements JournalFeedLocalService, InitializingBean {
 	public JournalFeed addJournalFeed(JournalFeed journalFeed)
 		throws SystemException {
 		journalFeed.setNew(true);
@@ -400,7 +401,7 @@ public abstract class JournalFeedLocalServiceBaseImpl
 		this.userFinder = userFinder;
 	}
 
-	protected void init() {
+	public void afterPropertiesSet() {
 		if (journalArticleLocalService == null) {
 			journalArticleLocalService = JournalArticleLocalServiceFactory.getImpl();
 		}

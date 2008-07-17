@@ -29,6 +29,7 @@ import com.liferay.counter.service.CounterServiceFactory;
 
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
+import com.liferay.portal.kernel.bean.InitializingBean;
 import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 import com.liferay.portal.service.ImageLocalService;
 import com.liferay.portal.service.ImageLocalServiceFactory;
@@ -89,7 +90,7 @@ import java.util.List;
  *
  */
 public abstract class JournalArticleImageLocalServiceBaseImpl
-	implements JournalArticleImageLocalService {
+	implements JournalArticleImageLocalService, InitializingBean {
 	public JournalArticleImage addJournalArticleImage(
 		JournalArticleImage journalArticleImage) throws SystemException {
 		journalArticleImage.setNew(true);
@@ -349,7 +350,7 @@ public abstract class JournalArticleImageLocalServiceBaseImpl
 		this.imagePersistence = imagePersistence;
 	}
 
-	protected void init() {
+	public void afterPropertiesSet() {
 		if (journalArticleLocalService == null) {
 			journalArticleLocalService = JournalArticleLocalServiceFactory.getImpl();
 		}

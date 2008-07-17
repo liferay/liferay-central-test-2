@@ -35,6 +35,7 @@ import com.liferay.documentlibrary.service.DLServiceFactory;
 import com.liferay.lock.service.LockService;
 import com.liferay.lock.service.LockServiceFactory;
 
+import com.liferay.portal.kernel.bean.InitializingBean;
 import com.liferay.portal.service.ResourceLocalService;
 import com.liferay.portal.service.ResourceLocalServiceFactory;
 import com.liferay.portal.service.ResourceService;
@@ -118,7 +119,7 @@ import com.liferay.portlet.tags.service.persistence.TagsAssetUtil;
  *
  */
 public abstract class DLFileEntryServiceBaseImpl extends PrincipalBean
-	implements DLFileEntryService {
+	implements DLFileEntryService, InitializingBean {
 	public DLFileEntryLocalService getDLFileEntryLocalService() {
 		return dlFileEntryLocalService;
 	}
@@ -468,7 +469,7 @@ public abstract class DLFileEntryServiceBaseImpl extends PrincipalBean
 		this.tagsAssetFinder = tagsAssetFinder;
 	}
 
-	protected void init() {
+	public void afterPropertiesSet() {
 		if (dlFileEntryLocalService == null) {
 			dlFileEntryLocalService = DLFileEntryLocalServiceFactory.getImpl();
 		}

@@ -34,6 +34,7 @@ import com.liferay.documentlibrary.service.DLServiceFactory;
 
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
+import com.liferay.portal.kernel.bean.InitializingBean;
 import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 import com.liferay.portal.service.ResourceLocalService;
 import com.liferay.portal.service.ResourceLocalServiceFactory;
@@ -120,7 +121,7 @@ import java.util.List;
  *
  */
 public abstract class MBThreadLocalServiceBaseImpl
-	implements MBThreadLocalService {
+	implements MBThreadLocalService, InitializingBean {
 	public MBThread addMBThread(MBThread mbThread) throws SystemException {
 		mbThread.setNew(true);
 
@@ -494,7 +495,7 @@ public abstract class MBThreadLocalServiceBaseImpl
 		this.tagsAssetFinder = tagsAssetFinder;
 	}
 
-	protected void init() {
+	public void afterPropertiesSet() {
 		if (mbBanLocalService == null) {
 			mbBanLocalService = MBBanLocalServiceFactory.getImpl();
 		}

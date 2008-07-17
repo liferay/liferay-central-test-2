@@ -27,6 +27,7 @@ import com.liferay.counter.service.CounterLocalServiceFactory;
 import com.liferay.counter.service.CounterService;
 import com.liferay.counter.service.CounterServiceFactory;
 
+import com.liferay.portal.kernel.bean.InitializingBean;
 import com.liferay.portal.service.UserLocalService;
 import com.liferay.portal.service.UserLocalServiceFactory;
 import com.liferay.portal.service.UserService;
@@ -68,7 +69,7 @@ import com.liferay.portlet.ratings.service.persistence.RatingsStatsUtil;
  *
  */
 public abstract class RatingsEntryServiceBaseImpl extends PrincipalBean
-	implements RatingsEntryService {
+	implements RatingsEntryService, InitializingBean {
 	public RatingsEntryLocalService getRatingsEntryLocalService() {
 		return ratingsEntryLocalService;
 	}
@@ -214,7 +215,7 @@ public abstract class RatingsEntryServiceBaseImpl extends PrincipalBean
 		this.blogsStatsUserFinder = blogsStatsUserFinder;
 	}
 
-	protected void init() {
+	public void afterPropertiesSet() {
 		if (ratingsEntryLocalService == null) {
 			ratingsEntryLocalService = RatingsEntryLocalServiceFactory.getImpl();
 		}

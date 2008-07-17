@@ -29,6 +29,7 @@ import com.liferay.counter.service.CounterServiceFactory;
 
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
+import com.liferay.portal.kernel.bean.InitializingBean;
 import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 import com.liferay.portal.service.ImageLocalService;
 import com.liferay.portal.service.ImageLocalServiceFactory;
@@ -80,7 +81,8 @@ import java.util.List;
  * @author Brian Wing Shun Chan
  *
  */
-public abstract class IGImageLocalServiceBaseImpl implements IGImageLocalService {
+public abstract class IGImageLocalServiceBaseImpl implements IGImageLocalService,
+	InitializingBean {
 	public IGImage addIGImage(IGImage igImage) throws SystemException {
 		igImage.setNew(true);
 
@@ -289,7 +291,7 @@ public abstract class IGImageLocalServiceBaseImpl implements IGImageLocalService
 		this.tagsAssetFinder = tagsAssetFinder;
 	}
 
-	protected void init() {
+	public void afterPropertiesSet() {
 		if (igFolderLocalService == null) {
 			igFolderLocalService = IGFolderLocalServiceFactory.getImpl();
 		}

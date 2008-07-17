@@ -27,6 +27,7 @@ import com.liferay.counter.service.CounterLocalServiceFactory;
 import com.liferay.counter.service.CounterService;
 import com.liferay.counter.service.CounterServiceFactory;
 
+import com.liferay.portal.kernel.bean.InitializingBean;
 import com.liferay.portal.service.ResourceLocalService;
 import com.liferay.portal.service.ResourceLocalServiceFactory;
 import com.liferay.portal.service.ResourceService;
@@ -80,7 +81,7 @@ import com.liferay.portlet.tasks.service.persistence.TasksReviewUtil;
  *
  */
 public abstract class TasksProposalServiceBaseImpl extends PrincipalBean
-	implements TasksProposalService {
+	implements TasksProposalService, InitializingBean {
 	public TasksReviewLocalService getTasksReviewLocalService() {
 		return tasksReviewLocalService;
 	}
@@ -275,7 +276,7 @@ public abstract class TasksProposalServiceBaseImpl extends PrincipalBean
 		this.socialActivityFinder = socialActivityFinder;
 	}
 
-	protected void init() {
+	public void afterPropertiesSet() {
 		if (tasksReviewLocalService == null) {
 			tasksReviewLocalService = TasksReviewLocalServiceFactory.getImpl();
 		}

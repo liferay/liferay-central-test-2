@@ -30,6 +30,7 @@ import com.liferay.counter.service.CounterServiceFactory;
 import com.liferay.mail.service.MailService;
 import com.liferay.mail.service.MailServiceFactory;
 
+import com.liferay.portal.kernel.bean.InitializingBean;
 import com.liferay.portal.service.AccountLocalService;
 import com.liferay.portal.service.AccountLocalServiceFactory;
 import com.liferay.portal.service.AccountService;
@@ -330,7 +331,7 @@ import com.liferay.portlet.social.service.persistence.SocialRequestUtil;
  *
  */
 public abstract class UserServiceBaseImpl extends PrincipalBean
-	implements UserService {
+	implements UserService, InitializingBean {
 	public AccountLocalService getAccountLocalService() {
 		return accountLocalService;
 	}
@@ -1592,7 +1593,7 @@ public abstract class UserServiceBaseImpl extends PrincipalBean
 		this.socialRequestPersistence = socialRequestPersistence;
 	}
 
-	protected void init() {
+	public void afterPropertiesSet() {
 		if (accountLocalService == null) {
 			accountLocalService = AccountLocalServiceFactory.getImpl();
 		}

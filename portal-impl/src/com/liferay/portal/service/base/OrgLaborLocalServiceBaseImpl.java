@@ -29,6 +29,7 @@ import com.liferay.counter.service.CounterServiceFactory;
 
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
+import com.liferay.portal.kernel.bean.InitializingBean;
 import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 import com.liferay.portal.model.OrgLabor;
 import com.liferay.portal.service.AccountLocalService;
@@ -276,7 +277,7 @@ import java.util.List;
  *
  */
 public abstract class OrgLaborLocalServiceBaseImpl
-	implements OrgLaborLocalService {
+	implements OrgLaborLocalService, InitializingBean {
 	public OrgLabor addOrgLabor(OrgLabor orgLabor) throws SystemException {
 		orgLabor.setNew(true);
 
@@ -1320,7 +1321,7 @@ public abstract class OrgLaborLocalServiceBaseImpl
 		this.counterService = counterService;
 	}
 
-	protected void init() {
+	public void afterPropertiesSet() {
 		if (accountLocalService == null) {
 			accountLocalService = AccountLocalServiceFactory.getImpl();
 		}

@@ -29,6 +29,7 @@ import com.liferay.counter.service.CounterServiceFactory;
 
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
+import com.liferay.portal.kernel.bean.InitializingBean;
 import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 
 import com.liferay.portlet.ratings.model.RatingsStats;
@@ -51,7 +52,7 @@ import java.util.List;
  *
  */
 public abstract class RatingsStatsLocalServiceBaseImpl
-	implements RatingsStatsLocalService {
+	implements RatingsStatsLocalService, InitializingBean {
 	public RatingsStats addRatingsStats(RatingsStats ratingsStats)
 		throws SystemException {
 		ratingsStats.setNew(true);
@@ -143,7 +144,7 @@ public abstract class RatingsStatsLocalServiceBaseImpl
 		this.counterService = counterService;
 	}
 
-	protected void init() {
+	public void afterPropertiesSet() {
 		if (ratingsEntryLocalService == null) {
 			ratingsEntryLocalService = RatingsEntryLocalServiceFactory.getImpl();
 		}

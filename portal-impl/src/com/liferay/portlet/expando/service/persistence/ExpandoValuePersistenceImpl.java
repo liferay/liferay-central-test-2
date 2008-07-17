@@ -23,6 +23,7 @@
 package com.liferay.portlet.expando.service.persistence;
 
 import com.liferay.portal.SystemException;
+import com.liferay.portal.kernel.bean.InitializingBean;
 import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 import com.liferay.portal.kernel.dao.orm.FinderCacheUtil;
 import com.liferay.portal.kernel.dao.orm.Query;
@@ -57,7 +58,7 @@ import java.util.List;
  *
  */
 public class ExpandoValuePersistenceImpl extends BasePersistenceImpl
-	implements ExpandoValuePersistence {
+	implements ExpandoValuePersistence, InitializingBean {
 	public ExpandoValue create(long valueId) {
 		ExpandoValue expandoValue = new ExpandoValueImpl();
 
@@ -2961,7 +2962,7 @@ public class ExpandoValuePersistenceImpl extends BasePersistenceImpl
 		_listeners = listeners.toArray(new ModelListener[listeners.size()]);
 	}
 
-	protected void init() {
+	public void afterPropertiesSet() {
 		String[] listenerClassNames = StringUtil.split(GetterUtil.getString(
 					com.liferay.portal.util.PropsUtil.get(
 						"value.object.listener.com.liferay.portlet.expando.model.ExpandoValue")));

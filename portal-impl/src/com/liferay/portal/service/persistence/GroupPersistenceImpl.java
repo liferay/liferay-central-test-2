@@ -24,6 +24,7 @@ package com.liferay.portal.service.persistence;
 
 import com.liferay.portal.NoSuchGroupException;
 import com.liferay.portal.SystemException;
+import com.liferay.portal.kernel.bean.InitializingBean;
 import com.liferay.portal.kernel.dao.jdbc.MappingSqlQuery;
 import com.liferay.portal.kernel.dao.jdbc.MappingSqlQueryFactoryUtil;
 import com.liferay.portal.kernel.dao.jdbc.RowMapper;
@@ -65,7 +66,7 @@ import java.util.List;
  *
  */
 public class GroupPersistenceImpl extends BasePersistenceImpl
-	implements GroupPersistence {
+	implements GroupPersistence, InitializingBean {
 	public Group create(long groupId) {
 		Group group = new GroupImpl();
 
@@ -3045,7 +3046,7 @@ public class GroupPersistenceImpl extends BasePersistenceImpl
 		_listeners = listeners.toArray(new ModelListener[listeners.size()]);
 	}
 
-	protected void init() {
+	public void afterPropertiesSet() {
 		String[] listenerClassNames = StringUtil.split(GetterUtil.getString(
 					com.liferay.portal.util.PropsUtil.get(
 						"value.object.listener.com.liferay.portal.model.Group")));

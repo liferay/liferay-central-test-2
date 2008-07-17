@@ -29,6 +29,7 @@ import com.liferay.counter.service.CounterServiceFactory;
 
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
+import com.liferay.portal.kernel.bean.InitializingBean;
 import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 
 import com.liferay.portlet.softwarecatalog.model.SCLicense;
@@ -67,7 +68,7 @@ import java.util.List;
  *
  */
 public abstract class SCLicenseLocalServiceBaseImpl
-	implements SCLicenseLocalService {
+	implements SCLicenseLocalService, InitializingBean {
 	public SCLicense addSCLicense(SCLicense scLicense)
 		throws SystemException {
 		scLicense.setNew(true);
@@ -231,7 +232,7 @@ public abstract class SCLicenseLocalServiceBaseImpl
 		this.counterService = counterService;
 	}
 
-	protected void init() {
+	public void afterPropertiesSet() {
 		if (scLicensePersistence == null) {
 			scLicensePersistence = SCLicenseUtil.getPersistence();
 		}

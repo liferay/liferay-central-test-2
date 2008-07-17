@@ -27,6 +27,7 @@ import com.liferay.counter.service.CounterLocalServiceFactory;
 import com.liferay.counter.service.CounterService;
 import com.liferay.counter.service.CounterServiceFactory;
 
+import com.liferay.portal.kernel.bean.InitializingBean;
 import com.liferay.portal.service.CompanyLocalService;
 import com.liferay.portal.service.CompanyLocalServiceFactory;
 import com.liferay.portal.service.CompanyService;
@@ -122,7 +123,7 @@ import com.liferay.portlet.tags.service.persistence.TagsEntryUtil;
  *
  */
 public abstract class BlogsEntryServiceBaseImpl extends PrincipalBean
-	implements BlogsEntryService {
+	implements BlogsEntryService, InitializingBean {
 	public BlogsEntryLocalService getBlogsEntryLocalService() {
 		return blogsEntryLocalService;
 	}
@@ -494,7 +495,7 @@ public abstract class BlogsEntryServiceBaseImpl extends PrincipalBean
 		this.tagsEntryFinder = tagsEntryFinder;
 	}
 
-	protected void init() {
+	public void afterPropertiesSet() {
 		if (blogsEntryLocalService == null) {
 			blogsEntryLocalService = BlogsEntryLocalServiceFactory.getImpl();
 		}

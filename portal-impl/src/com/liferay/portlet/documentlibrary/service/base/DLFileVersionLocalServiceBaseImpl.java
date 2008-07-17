@@ -24,6 +24,7 @@ package com.liferay.portlet.documentlibrary.service.base;
 
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
+import com.liferay.portal.kernel.bean.InitializingBean;
 import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 
 import com.liferay.portlet.documentlibrary.model.DLFileVersion;
@@ -70,7 +71,7 @@ import java.util.List;
  *
  */
 public abstract class DLFileVersionLocalServiceBaseImpl
-	implements DLFileVersionLocalService {
+	implements DLFileVersionLocalService, InitializingBean {
 	public DLFileVersion addDLFileVersion(DLFileVersion dlFileVersion)
 		throws SystemException {
 		dlFileVersion.setNew(true);
@@ -250,7 +251,7 @@ public abstract class DLFileVersionLocalServiceBaseImpl
 		this.dlFolderPersistence = dlFolderPersistence;
 	}
 
-	protected void init() {
+	public void afterPropertiesSet() {
 		if (dlFileEntryLocalService == null) {
 			dlFileEntryLocalService = DLFileEntryLocalServiceFactory.getImpl();
 		}

@@ -24,6 +24,7 @@ package com.liferay.portal.service.persistence;
 
 import com.liferay.portal.NoSuchOrgGroupPermissionException;
 import com.liferay.portal.SystemException;
+import com.liferay.portal.kernel.bean.InitializingBean;
 import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 import com.liferay.portal.kernel.dao.orm.FinderCacheUtil;
 import com.liferay.portal.kernel.dao.orm.Query;
@@ -56,7 +57,7 @@ import java.util.List;
  *
  */
 public class OrgGroupPermissionPersistenceImpl extends BasePersistenceImpl
-	implements OrgGroupPermissionPersistence {
+	implements OrgGroupPermissionPersistence, InitializingBean {
 	public OrgGroupPermission create(OrgGroupPermissionPK orgGroupPermissionPK) {
 		OrgGroupPermission orgGroupPermission = new OrgGroupPermissionImpl();
 
@@ -1062,7 +1063,7 @@ public class OrgGroupPermissionPersistenceImpl extends BasePersistenceImpl
 		_listeners = listeners.toArray(new ModelListener[listeners.size()]);
 	}
 
-	protected void init() {
+	public void afterPropertiesSet() {
 		String[] listenerClassNames = StringUtil.split(GetterUtil.getString(
 					com.liferay.portal.util.PropsUtil.get(
 						"value.object.listener.com.liferay.portal.model.OrgGroupPermission")));

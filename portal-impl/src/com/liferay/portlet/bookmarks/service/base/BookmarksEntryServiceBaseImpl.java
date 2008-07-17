@@ -27,6 +27,7 @@ import com.liferay.counter.service.CounterLocalServiceFactory;
 import com.liferay.counter.service.CounterService;
 import com.liferay.counter.service.CounterServiceFactory;
 
+import com.liferay.portal.kernel.bean.InitializingBean;
 import com.liferay.portal.service.ResourceLocalService;
 import com.liferay.portal.service.ResourceLocalServiceFactory;
 import com.liferay.portal.service.ResourceService;
@@ -74,7 +75,7 @@ import com.liferay.portlet.tags.service.persistence.TagsAssetUtil;
  *
  */
 public abstract class BookmarksEntryServiceBaseImpl extends PrincipalBean
-	implements BookmarksEntryService {
+	implements BookmarksEntryService, InitializingBean {
 	public BookmarksEntryLocalService getBookmarksEntryLocalService() {
 		return bookmarksEntryLocalService;
 	}
@@ -244,7 +245,7 @@ public abstract class BookmarksEntryServiceBaseImpl extends PrincipalBean
 		this.tagsAssetFinder = tagsAssetFinder;
 	}
 
-	protected void init() {
+	public void afterPropertiesSet() {
 		if (bookmarksEntryLocalService == null) {
 			bookmarksEntryLocalService = BookmarksEntryLocalServiceFactory.getImpl();
 		}

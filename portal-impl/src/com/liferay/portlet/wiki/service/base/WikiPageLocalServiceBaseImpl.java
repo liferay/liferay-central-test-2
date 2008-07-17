@@ -34,6 +34,7 @@ import com.liferay.documentlibrary.service.DLServiceFactory;
 
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
+import com.liferay.portal.kernel.bean.InitializingBean;
 import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 import com.liferay.portal.service.CompanyLocalService;
 import com.liferay.portal.service.CompanyLocalServiceFactory;
@@ -126,7 +127,7 @@ import java.util.List;
  *
  */
 public abstract class WikiPageLocalServiceBaseImpl
-	implements WikiPageLocalService {
+	implements WikiPageLocalService, InitializingBean {
 	public WikiPage addWikiPage(WikiPage wikiPage) throws SystemException {
 		wikiPage.setNew(true);
 
@@ -524,7 +525,7 @@ public abstract class WikiPageLocalServiceBaseImpl
 		this.tagsAssetFinder = tagsAssetFinder;
 	}
 
-	protected void init() {
+	public void afterPropertiesSet() {
 		if (wikiNodeLocalService == null) {
 			wikiNodeLocalService = WikiNodeLocalServiceFactory.getImpl();
 		}

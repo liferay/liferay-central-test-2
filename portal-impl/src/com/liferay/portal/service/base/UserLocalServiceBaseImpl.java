@@ -32,6 +32,7 @@ import com.liferay.mail.service.MailServiceFactory;
 
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
+import com.liferay.portal.kernel.bean.InitializingBean;
 import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 import com.liferay.portal.model.User;
 import com.liferay.portal.service.AccountLocalService;
@@ -333,7 +334,8 @@ import java.util.List;
  * @author Brian Wing Shun Chan
  *
  */
-public abstract class UserLocalServiceBaseImpl implements UserLocalService {
+public abstract class UserLocalServiceBaseImpl implements UserLocalService,
+	InitializingBean {
 	public User addUser(User user) throws SystemException {
 		user.setNew(true);
 
@@ -1621,7 +1623,7 @@ public abstract class UserLocalServiceBaseImpl implements UserLocalService {
 		this.socialRequestPersistence = socialRequestPersistence;
 	}
 
-	protected void init() {
+	public void afterPropertiesSet() {
 		if (accountLocalService == null) {
 			accountLocalService = AccountLocalServiceFactory.getImpl();
 		}

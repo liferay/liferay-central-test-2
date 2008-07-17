@@ -29,6 +29,7 @@ import com.liferay.counter.service.CounterServiceFactory;
 
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
+import com.liferay.portal.kernel.bean.InitializingBean;
 import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 import com.liferay.portal.service.CompanyLocalService;
 import com.liferay.portal.service.CompanyLocalServiceFactory;
@@ -149,7 +150,7 @@ import java.util.List;
  *
  */
 public abstract class TagsAssetLocalServiceBaseImpl
-	implements TagsAssetLocalService {
+	implements TagsAssetLocalService, InitializingBean {
 	public TagsAsset addTagsAsset(TagsAsset tagsAsset)
 		throws SystemException {
 		tagsAsset.setNew(true);
@@ -656,7 +657,7 @@ public abstract class TagsAssetLocalServiceBaseImpl
 		this.wikiPageResourcePersistence = wikiPageResourcePersistence;
 	}
 
-	protected void init() {
+	public void afterPropertiesSet() {
 		if (tagsAssetPersistence == null) {
 			tagsAssetPersistence = TagsAssetUtil.getPersistence();
 		}

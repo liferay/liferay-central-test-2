@@ -29,6 +29,7 @@ import com.liferay.counter.service.CounterServiceFactory;
 
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
+import com.liferay.portal.kernel.bean.InitializingBean;
 import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 import com.liferay.portal.service.ResourceLocalService;
 import com.liferay.portal.service.ResourceLocalServiceFactory;
@@ -77,7 +78,7 @@ import java.util.List;
  *
  */
 public abstract class BookmarksEntryLocalServiceBaseImpl
-	implements BookmarksEntryLocalService {
+	implements BookmarksEntryLocalService, InitializingBean {
 	public BookmarksEntry addBookmarksEntry(BookmarksEntry bookmarksEntry)
 		throws SystemException {
 		bookmarksEntry.setNew(true);
@@ -278,7 +279,7 @@ public abstract class BookmarksEntryLocalServiceBaseImpl
 		this.tagsAssetFinder = tagsAssetFinder;
 	}
 
-	protected void init() {
+	public void afterPropertiesSet() {
 		if (bookmarksEntryPersistence == null) {
 			bookmarksEntryPersistence = BookmarksEntryUtil.getPersistence();
 		}

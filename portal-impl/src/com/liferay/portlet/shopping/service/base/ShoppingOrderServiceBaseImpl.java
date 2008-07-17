@@ -30,6 +30,7 @@ import com.liferay.counter.service.CounterServiceFactory;
 import com.liferay.mail.service.MailService;
 import com.liferay.mail.service.MailServiceFactory;
 
+import com.liferay.portal.kernel.bean.InitializingBean;
 import com.liferay.portal.service.CompanyLocalService;
 import com.liferay.portal.service.CompanyLocalServiceFactory;
 import com.liferay.portal.service.CompanyService;
@@ -107,7 +108,7 @@ import com.liferay.portlet.shopping.service.persistence.ShoppingOrderUtil;
  *
  */
 public abstract class ShoppingOrderServiceBaseImpl extends PrincipalBean
-	implements ShoppingOrderService {
+	implements ShoppingOrderService, InitializingBean {
 	public ShoppingCartLocalService getShoppingCartLocalService() {
 		return shoppingCartLocalService;
 	}
@@ -417,7 +418,7 @@ public abstract class ShoppingOrderServiceBaseImpl extends PrincipalBean
 		this.mbMessageFinder = mbMessageFinder;
 	}
 
-	protected void init() {
+	public void afterPropertiesSet() {
 		if (shoppingCartLocalService == null) {
 			shoppingCartLocalService = ShoppingCartLocalServiceFactory.getImpl();
 		}

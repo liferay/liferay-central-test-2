@@ -30,6 +30,7 @@ import com.liferay.counter.service.CounterServiceFactory;
 import com.liferay.mail.service.MailService;
 import com.liferay.mail.service.MailServiceFactory;
 
+import com.liferay.portal.kernel.bean.InitializingBean;
 import com.liferay.portal.service.CompanyLocalService;
 import com.liferay.portal.service.CompanyLocalServiceFactory;
 import com.liferay.portal.service.CompanyService;
@@ -77,7 +78,7 @@ import com.liferay.portlet.calendar.service.persistence.CalEventUtil;
  *
  */
 public abstract class CalEventServiceBaseImpl extends PrincipalBean
-	implements CalEventService {
+	implements CalEventService, InitializingBean {
 	public CalEventLocalService getCalEventLocalService() {
 		return calEventLocalService;
 	}
@@ -252,7 +253,7 @@ public abstract class CalEventServiceBaseImpl extends PrincipalBean
 		this.userFinder = userFinder;
 	}
 
-	protected void init() {
+	public void afterPropertiesSet() {
 		if (calEventLocalService == null) {
 			calEventLocalService = CalEventLocalServiceFactory.getImpl();
 		}

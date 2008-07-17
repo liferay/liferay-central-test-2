@@ -29,6 +29,7 @@ import com.liferay.counter.service.CounterServiceFactory;
 
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
+import com.liferay.portal.kernel.bean.InitializingBean;
 import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 import com.liferay.portal.model.Layout;
 import com.liferay.portal.service.AccountLocalService;
@@ -306,7 +307,8 @@ import java.util.List;
  * @author Brian Wing Shun Chan
  *
  */
-public abstract class LayoutLocalServiceBaseImpl implements LayoutLocalService {
+public abstract class LayoutLocalServiceBaseImpl implements LayoutLocalService,
+	InitializingBean {
 	public Layout addLayout(Layout layout) throws SystemException {
 		layout.setNew(true);
 
@@ -1479,7 +1481,7 @@ public abstract class LayoutLocalServiceBaseImpl implements LayoutLocalService {
 		this.tasksProposalFinder = tasksProposalFinder;
 	}
 
-	protected void init() {
+	public void afterPropertiesSet() {
 		if (accountLocalService == null) {
 			accountLocalService = AccountLocalServiceFactory.getImpl();
 		}

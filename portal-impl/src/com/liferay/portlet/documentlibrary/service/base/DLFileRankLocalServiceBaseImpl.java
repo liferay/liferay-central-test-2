@@ -29,6 +29,7 @@ import com.liferay.counter.service.CounterServiceFactory;
 
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
+import com.liferay.portal.kernel.bean.InitializingBean;
 import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 import com.liferay.portal.service.LayoutLocalService;
 import com.liferay.portal.service.LayoutLocalServiceFactory;
@@ -83,7 +84,7 @@ import java.util.List;
  *
  */
 public abstract class DLFileRankLocalServiceBaseImpl
-	implements DLFileRankLocalService {
+	implements DLFileRankLocalService, InitializingBean {
 	public DLFileRank addDLFileRank(DLFileRank dlFileRank)
 		throws SystemException {
 		dlFileRank.setNew(true);
@@ -311,7 +312,7 @@ public abstract class DLFileRankLocalServiceBaseImpl
 		this.layoutFinder = layoutFinder;
 	}
 
-	protected void init() {
+	public void afterPropertiesSet() {
 		if (dlFileEntryLocalService == null) {
 			dlFileEntryLocalService = DLFileEntryLocalServiceFactory.getImpl();
 		}

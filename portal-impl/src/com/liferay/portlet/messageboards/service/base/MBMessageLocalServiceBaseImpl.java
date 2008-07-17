@@ -37,6 +37,7 @@ import com.liferay.mail.service.MailServiceFactory;
 
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
+import com.liferay.portal.kernel.bean.InitializingBean;
 import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 import com.liferay.portal.service.CompanyLocalService;
 import com.liferay.portal.service.CompanyLocalServiceFactory;
@@ -165,7 +166,7 @@ import java.util.List;
  *
  */
 public abstract class MBMessageLocalServiceBaseImpl
-	implements MBMessageLocalService {
+	implements MBMessageLocalService, InitializingBean {
 	public MBMessage addMBMessage(MBMessage mbMessage)
 		throws SystemException {
 		mbMessage.setNew(true);
@@ -728,7 +729,7 @@ public abstract class MBMessageLocalServiceBaseImpl
 		this.tagsEntryFinder = tagsEntryFinder;
 	}
 
-	protected void init() {
+	public void afterPropertiesSet() {
 		if (mbBanLocalService == null) {
 			mbBanLocalService = MBBanLocalServiceFactory.getImpl();
 		}

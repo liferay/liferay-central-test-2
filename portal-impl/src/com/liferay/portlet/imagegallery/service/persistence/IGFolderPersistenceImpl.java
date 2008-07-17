@@ -23,6 +23,7 @@
 package com.liferay.portlet.imagegallery.service.persistence;
 
 import com.liferay.portal.SystemException;
+import com.liferay.portal.kernel.bean.InitializingBean;
 import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 import com.liferay.portal.kernel.dao.orm.FinderCacheUtil;
 import com.liferay.portal.kernel.dao.orm.Query;
@@ -59,7 +60,7 @@ import java.util.List;
  *
  */
 public class IGFolderPersistenceImpl extends BasePersistenceImpl
-	implements IGFolderPersistence {
+	implements IGFolderPersistence, InitializingBean {
 	public IGFolder create(long folderId) {
 		IGFolder igFolder = new IGFolderImpl();
 
@@ -2223,7 +2224,7 @@ public class IGFolderPersistenceImpl extends BasePersistenceImpl
 		_listeners = listeners.toArray(new ModelListener[listeners.size()]);
 	}
 
-	protected void init() {
+	public void afterPropertiesSet() {
 		String[] listenerClassNames = StringUtil.split(GetterUtil.getString(
 					com.liferay.portal.util.PropsUtil.get(
 						"value.object.listener.com.liferay.portlet.imagegallery.model.IGFolder")));

@@ -37,6 +37,7 @@ import com.liferay.lock.service.LockServiceFactory;
 
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
+import com.liferay.portal.kernel.bean.InitializingBean;
 import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 import com.liferay.portal.service.ResourceLocalService;
 import com.liferay.portal.service.ResourceLocalServiceFactory;
@@ -121,7 +122,7 @@ import java.util.List;
  *
  */
 public abstract class DLFileEntryLocalServiceBaseImpl
-	implements DLFileEntryLocalService {
+	implements DLFileEntryLocalService, InitializingBean {
 	public DLFileEntry addDLFileEntry(DLFileEntry dlFileEntry)
 		throws SystemException {
 		dlFileEntry.setNew(true);
@@ -502,7 +503,7 @@ public abstract class DLFileEntryLocalServiceBaseImpl
 		this.tagsAssetFinder = tagsAssetFinder;
 	}
 
-	protected void init() {
+	public void afterPropertiesSet() {
 		if (dlFileEntryPersistence == null) {
 			dlFileEntryPersistence = DLFileEntryUtil.getPersistence();
 		}

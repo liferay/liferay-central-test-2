@@ -30,6 +30,7 @@ import com.liferay.counter.service.CounterServiceFactory;
 import com.liferay.mail.service.MailService;
 import com.liferay.mail.service.MailServiceFactory;
 
+import com.liferay.portal.kernel.bean.InitializingBean;
 import com.liferay.portal.service.AccountLocalService;
 import com.liferay.portal.service.AccountLocalServiceFactory;
 import com.liferay.portal.service.AccountService;
@@ -275,7 +276,7 @@ import com.liferay.portal.service.persistence.WebsiteUtil;
  *
  */
 public abstract class MembershipRequestServiceBaseImpl extends PrincipalBean
-	implements MembershipRequestService {
+	implements MembershipRequestService, InitializingBean {
 	public AccountLocalService getAccountLocalService() {
 		return accountLocalService;
 	}
@@ -1299,7 +1300,7 @@ public abstract class MembershipRequestServiceBaseImpl extends PrincipalBean
 		this.mailService = mailService;
 	}
 
-	protected void init() {
+	public void afterPropertiesSet() {
 		if (accountLocalService == null) {
 			accountLocalService = AccountLocalServiceFactory.getImpl();
 		}

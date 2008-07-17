@@ -23,6 +23,7 @@
 package com.liferay.portlet.calendar.service.persistence;
 
 import com.liferay.portal.SystemException;
+import com.liferay.portal.kernel.bean.InitializingBean;
 import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 import com.liferay.portal.kernel.dao.orm.FinderCacheUtil;
 import com.liferay.portal.kernel.dao.orm.Query;
@@ -59,7 +60,7 @@ import java.util.List;
  *
  */
 public class CalEventPersistenceImpl extends BasePersistenceImpl
-	implements CalEventPersistence {
+	implements CalEventPersistence, InitializingBean {
 	public CalEvent create(long eventId) {
 		CalEvent calEvent = new CalEventImpl();
 
@@ -2059,7 +2060,7 @@ public class CalEventPersistenceImpl extends BasePersistenceImpl
 		_listeners = listeners.toArray(new ModelListener[listeners.size()]);
 	}
 
-	protected void init() {
+	public void afterPropertiesSet() {
 		String[] listenerClassNames = StringUtil.split(GetterUtil.getString(
 					com.liferay.portal.util.PropsUtil.get(
 						"value.object.listener.com.liferay.portlet.calendar.model.CalEvent")));

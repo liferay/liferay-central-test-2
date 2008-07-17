@@ -24,6 +24,7 @@ package com.liferay.portlet.tags.service.base;
 
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
+import com.liferay.portal.kernel.bean.InitializingBean;
 import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 
 import com.liferay.portlet.tags.model.TagsSource;
@@ -66,7 +67,7 @@ import java.util.List;
  *
  */
 public abstract class TagsSourceLocalServiceBaseImpl
-	implements TagsSourceLocalService {
+	implements TagsSourceLocalService, InitializingBean {
 	public TagsSource addTagsSource(TagsSource tagsSource)
 		throws SystemException {
 		tagsSource.setNew(true);
@@ -227,7 +228,7 @@ public abstract class TagsSourceLocalServiceBaseImpl
 		this.tagsSourcePersistence = tagsSourcePersistence;
 	}
 
-	protected void init() {
+	public void afterPropertiesSet() {
 		if (tagsAssetLocalService == null) {
 			tagsAssetLocalService = TagsAssetLocalServiceFactory.getImpl();
 		}

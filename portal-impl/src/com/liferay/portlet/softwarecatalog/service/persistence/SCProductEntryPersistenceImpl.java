@@ -23,6 +23,7 @@
 package com.liferay.portlet.softwarecatalog.service.persistence;
 
 import com.liferay.portal.SystemException;
+import com.liferay.portal.kernel.bean.InitializingBean;
 import com.liferay.portal.kernel.dao.jdbc.MappingSqlQuery;
 import com.liferay.portal.kernel.dao.jdbc.MappingSqlQueryFactoryUtil;
 import com.liferay.portal.kernel.dao.jdbc.RowMapper;
@@ -66,7 +67,7 @@ import java.util.List;
  *
  */
 public class SCProductEntryPersistenceImpl extends BasePersistenceImpl
-	implements SCProductEntryPersistence {
+	implements SCProductEntryPersistence, InitializingBean {
 	public SCProductEntry create(long productEntryId) {
 		SCProductEntry scProductEntry = new SCProductEntryImpl();
 
@@ -2051,7 +2052,7 @@ public class SCProductEntryPersistenceImpl extends BasePersistenceImpl
 		_listeners = listeners.toArray(new ModelListener[listeners.size()]);
 	}
 
-	protected void init() {
+	public void afterPropertiesSet() {
 		String[] listenerClassNames = StringUtil.split(GetterUtil.getString(
 					com.liferay.portal.util.PropsUtil.get(
 						"value.object.listener.com.liferay.portlet.softwarecatalog.model.SCProductEntry")));

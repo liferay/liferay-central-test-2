@@ -24,6 +24,7 @@ package com.liferay.portal.service.persistence;
 
 import com.liferay.portal.NoSuchUserGroupException;
 import com.liferay.portal.SystemException;
+import com.liferay.portal.kernel.bean.InitializingBean;
 import com.liferay.portal.kernel.dao.jdbc.MappingSqlQuery;
 import com.liferay.portal.kernel.dao.jdbc.MappingSqlQueryFactoryUtil;
 import com.liferay.portal.kernel.dao.jdbc.RowMapper;
@@ -65,7 +66,7 @@ import java.util.List;
  *
  */
 public class UserGroupPersistenceImpl extends BasePersistenceImpl
-	implements UserGroupPersistence {
+	implements UserGroupPersistence, InitializingBean {
 	public UserGroup create(long userGroupId) {
 		UserGroup userGroup = new UserGroupImpl();
 
@@ -1676,7 +1677,7 @@ public class UserGroupPersistenceImpl extends BasePersistenceImpl
 		_listeners = listeners.toArray(new ModelListener[listeners.size()]);
 	}
 
-	protected void init() {
+	public void afterPropertiesSet() {
 		String[] listenerClassNames = StringUtil.split(GetterUtil.getString(
 					com.liferay.portal.util.PropsUtil.get(
 						"value.object.listener.com.liferay.portal.model.UserGroup")));

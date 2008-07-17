@@ -29,6 +29,7 @@ import com.liferay.counter.service.CounterServiceFactory;
 
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
+import com.liferay.portal.kernel.bean.InitializingBean;
 import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 import com.liferay.portal.model.Address;
 import com.liferay.portal.service.AccountLocalService;
@@ -275,7 +276,8 @@ import java.util.List;
  * @author Brian Wing Shun Chan
  *
  */
-public abstract class AddressLocalServiceBaseImpl implements AddressLocalService {
+public abstract class AddressLocalServiceBaseImpl implements AddressLocalService,
+	InitializingBean {
 	public Address addAddress(Address address) throws SystemException {
 		address.setNew(true);
 
@@ -1320,7 +1322,7 @@ public abstract class AddressLocalServiceBaseImpl implements AddressLocalService
 		this.counterService = counterService;
 	}
 
-	protected void init() {
+	public void afterPropertiesSet() {
 		if (accountLocalService == null) {
 			accountLocalService = AccountLocalServiceFactory.getImpl();
 		}
