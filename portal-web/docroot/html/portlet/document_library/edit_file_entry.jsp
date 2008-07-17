@@ -290,7 +290,7 @@ portletURL.setParameter("name", name);
 		</td>
 	</tr>
 
-	<c:if test="<%= WebDAVUtil.isEnabled(DLWebDAVStorageImpl.class.getName()) %>">
+	<c:if test="<%= WebDAVUtil.isEditEnabled(DLWebDAVStorageImpl.class.getName()) %>">
 		<tr>
 			<td>
 				<liferay-ui:message key="webdav-url" />

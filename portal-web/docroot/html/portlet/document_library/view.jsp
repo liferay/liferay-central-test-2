@@ -406,7 +406,7 @@ portletURL.setParameter("folderId", String.valueOf(folderId));
 			</c:if>
 		</script>
 
-		<c:if test="<%= WebDAVUtil.isEnabled(DLWebDAVStorageImpl.class.getName()) %>">
+		<c:if test="<%= WebDAVUtil.isViewEnabled(DLWebDAVStorageImpl.class.getName()) %>">
 			<table class="lfr-table">
 			<tr>
 				<td>

@@ -309,7 +309,7 @@ int tabIndex = 1;
 		</td>
 	</tr>
 
-	<c:if test="<%= WebDAVUtil.isEnabled(JournalWebDAVStorageImpl.class.getName()) %>">
+	<c:if test="<%= WebDAVUtil.isEditEnabled(JournalWebDAVStorageImpl.class.getName()) %>">
 		<tr>
 			<td>
 				<liferay-ui:message key="webdav-url" />

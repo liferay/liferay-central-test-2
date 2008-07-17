@@ -1081,6 +1081,10 @@ public class PropsKeys {
 
 	public static final String WEBDAV_STORAGE_TOKENS = "webdav.storage.tokens";
 
+	public static final String WEBDAV_STORAGE_SHOW_EDIT_URL = "webdav.storage.show.edit.url";
+
+	public static final String WEBDAV_STORAGE_SHOW_VIEW_URL = "webdav.storage.show.view.url";
+
 	public static final String WIKI_EMAIL_FROM_ADDRESS = "wiki.email.from.address";
 
 	public static final String WIKI_EMAIL_FROM_NAME = "wiki.email.from.name";

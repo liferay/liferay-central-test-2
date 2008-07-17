@@ -39,7 +39,9 @@ import com.liferay.portal.util.PropsUtil;
 
 import java.util.Collection;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Map;
+import java.util.Set;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -217,8 +219,16 @@ public class WebDAVUtil {
 		}
 	}
 
-	public static boolean isEnabled(String storageClassName) {
-		return _instance._isEnabled(storageClassName);
+	public static boolean isEnabled(String className) {
+		return _instance._isEnabled(className);
+	}
+
+	public static boolean isEditEnabled(String className) {
+		return _instance._isEditEnabled(className);
+	}
+
+	public static boolean isViewEnabled(String className) {
+		return _instance._isViewEnabled(className);
 	}
 
 	public static boolean isOverwrite(HttpServletRequest request) {
@@ -234,15 +244,32 @@ public class WebDAVUtil {
 
 	private WebDAVUtil() {
 		_storageMap = new HashMap<String, String>();
+		_storageEditUrls = new HashSet<String>();
+		_storageViewUrls = new HashSet<String>();
 
 		String[] tokens = PropsUtil.getArray(PropsKeys.WEBDAV_STORAGE_TOKENS);
 
 		for (String token: tokens) {
+			Filter filter = new Filter(token);
+
 			String className = PropsUtil.get(
-				PropsKeys.WEBDAV_STORAGE_CLASS, new Filter(token));
+				PropsKeys.WEBDAV_STORAGE_CLASS, filter);
 
 			if (Validator.isNotNull(className)) {
 				_storageMap.put(className, token);
+
+				boolean editUrl = GetterUtil.getBoolean(PropsUtil.get(
+					PropsKeys.WEBDAV_STORAGE_SHOW_EDIT_URL, filter));
+				boolean viewUrl = GetterUtil.getBoolean(PropsUtil.get(
+					PropsKeys.WEBDAV_STORAGE_SHOW_VIEW_URL, filter));
+
+				if (editUrl) {
+					_storageEditUrls.add(className);
+				}
+
+				if (viewUrl) {
+					_storageViewUrls.add(className);
+				}
 			}
 		}
 	}
@@ -267,13 +294,25 @@ public class WebDAVUtil {
 		return _storageMap.values();
 	}
 
-	private boolean _isEnabled(String storageClassName) {
-		return _storageMap.containsKey(storageClassName);
+	private boolean _isEnabled(String className) {
+		return _storageMap.containsKey(className);
+	}
+
+	private boolean _isEditEnabled(String className) {
+		return _isEnabled(className) && _storageEditUrls.contains(className);
+	}
+
+	private boolean _isViewEnabled(String className) {
+		return _isEnabled(className) && _storageViewUrls.contains(className);
 	}
 
 	private static Log _log = LogFactory.getLog(WebDAVUtil.class);
 
 	private static WebDAVUtil _instance = new WebDAVUtil();
+
+	private final Set<String> _storageEditUrls;
+
+	private final Set<String> _storageViewUrls;
 
 	private final Map<String, String> _storageMap;
 

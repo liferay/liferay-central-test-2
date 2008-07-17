@@ -231,7 +231,7 @@ List scores = null;
 			</c:if>
 		</script>
 
-		<c:if test="<%= WebDAVUtil.isEnabled(IGWebDAVStorageImpl.class.getName()) %>">
+		<c:if test="<%= WebDAVUtil.isViewEnabled(IGWebDAVStorageImpl.class.getName()) %>">
 			<table class="lfr-table">
 			<tr>
 				<td>

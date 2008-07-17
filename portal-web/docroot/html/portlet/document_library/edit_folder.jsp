@@ -133,7 +133,7 @@ long parentFolderId = BeanParamUtil.getLong(folder, request, "parentFolderId", D
 	</td>
 </tr>
 
-<c:if test="<%= (folder != null) && WebDAVUtil.isEnabled(DLWebDAVStorageImpl.class.getName()) %>">
+<c:if test="<%= (folder != null) && WebDAVUtil.isEditEnabled(DLWebDAVStorageImpl.class.getName()) %>">
 	<tr>
 		<td colspan="2">
 			<br />
