@@ -862,7 +862,7 @@
 			/>
 			<zipfileset
 				dir="lib/global"
-				includes="portlet.jar"
+				includes="container.jar,portlet.jar,portlet-container.jar"
 			/>
 			<zipfileset
 				dir="lib/portal"
@@ -1571,7 +1571,7 @@ plugins.includes=analog-clock-portlet,chat-portlet,flash-portlet,google-search-p
 		<zip destfile="dist/liferay-portal-dependencies-${lp.version}.zip">
 			<zipfileset
 				dir="lib/global"
-				includes="portlet.jar"
+				includes="container.jar,portlet.jar,portlet-container.jar"
 				prefix="liferay-portal-dependencies-${lp.version}"
 			/>
 			<zipfileset
@@ -1635,7 +1635,7 @@ plugins.includes=analog-clock-portlet,chat-portlet,flash-portlet,google-search-p
 		<copy todir="${tstamp.value}/WEB-INF/lib">
 			<fileset
 				dir="${app.server.lib.global.dir}"
-				includes="portal-kernel.jar,portal-service.jar,portlet.jar"
+				includes="container.jar,portal-kernel.jar,portal-service.jar,portlet.jar,portlet-container.jar"
 			/>
 		</copy>
 
