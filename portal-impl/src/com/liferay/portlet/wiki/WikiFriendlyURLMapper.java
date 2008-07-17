@@ -50,10 +50,13 @@ public class WikiFriendlyURLMapper extends BaseFriendlyURLMapper {
 		String strutsAction = GetterUtil.getString(
 			portletURL.getParameter("struts_action"));
 
-		if (strutsAction.equals("/wiki/view")) {
+		if (strutsAction.equals("/wiki/view") ||
+				strutsAction.equals("/wiki/view_all_pages") ||
+					strutsAction.equals("/wiki/view_orphan_pages") ||
+						strutsAction.equals("/wiki/view_recent_changes")) {
+
 			String nodeId = portletURL.getParameter("nodeId");
 			String nodeName = portletURL.getParameter("nodeName");
-			String title = portletURL.getParameter("title");
 
 			if (Validator.isNotNull(nodeId) || Validator.isNotNull(nodeName)) {
 				StringBuilder sb = new StringBuilder();
@@ -73,18 +76,26 @@ public class WikiFriendlyURLMapper extends BaseFriendlyURLMapper {
 					portletURL.addParameterIncludedInPath("nodeName");
 				}
 
-				if (Validator.isNotNull(title)) {
-					sb.append(StringPool.SLASH);
-					sb.append(HttpUtil.encodeURL(title));
+				if (strutsAction.equals("/wiki/view")) {
+					String title = portletURL.getParameter("title");
 
-					portletURL.addParameterIncludedInPath("title");
-
-					WindowState windowState = portletURL.getWindowState();
-
-					if (!windowState.equals(WindowState.NORMAL)) {
+					if (Validator.isNotNull(title)) {
 						sb.append(StringPool.SLASH);
-						sb.append(windowState);
+						sb.append(HttpUtil.encodeURL(title));
+
+						portletURL.addParameterIncludedInPath("title");
+
+						WindowState windowState = portletURL.getWindowState();
+
+						if (!windowState.equals(WindowState.NORMAL)) {
+							sb.append(StringPool.SLASH);
+							sb.append(windowState);
+						}
 					}
+				}
+				else {
+					sb.append(StringPool.SLASH);
+					sb.append(strutsAction.substring(11));
 				}
 
 				friendlyURLPath = sb.toString();
@@ -165,14 +176,23 @@ public class WikiFriendlyURLMapper extends BaseFriendlyURLMapper {
 				}
 
 				if (urlFragments.length >= 2) {
-					String title = HttpUtil.decodeURL(urlFragments[1]);
+					String urlFragments1 = HttpUtil.decodeURL(urlFragments[1]);
 
-					addParam(params, "title", title);
+					if (urlFragments1.equals("all_pages") ||
+							urlFragments1.equals("orphan_pages") ||
+								urlFragments1.equals("recent_changes")) {
+						addParam(
+							params, "struts_action",
+							"/wiki/view_" + urlFragments1);
+					}
+					else {
+						addParam(params, "title", urlFragments1);
 
-					if (urlFragments.length >= 3) {
-						String windowState = urlFragments[2];
+						if (urlFragments.length >= 3) {
+							String windowState = urlFragments[2];
 
-						addParam(params, "p_p_state", windowState);
+							addParam(params, "p_p_state", windowState);
+						}
 					}
 				}
 			}
