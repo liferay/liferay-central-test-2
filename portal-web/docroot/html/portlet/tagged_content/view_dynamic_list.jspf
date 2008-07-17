@@ -38,38 +38,6 @@ searchContainer.setResults(results);
 
 request.setAttribute("view.jsp-results", results);
 
-if (results.size() <= 0) {
-	if (!themeDisplay.isSignedIn()) {
-%>
-	<style type="text/css">
-		#p_p_id_<%=portletDisplay.getId() %>_ { display: none; }
-	</style>
-<%
-	}
-	else {
-%>
-	This portlet has no results.
-	<style type="text/css">
-		div#p_p_id_<%=portletDisplay.getId() %>_ div, 
-		div#p_p_id_<%=portletDisplay.getId() %>_ span { 
-			color: #ccc; 
-			background-color:white;
-		}
-		div#p_p_id_<%=portletDisplay.getId() %>_ select {
-			color: #ccc; 
-			border:1px dotted #ccc;
-		}
-		div#p_p_id_<%=portletDisplay.getId() %>_ a {
-			color: #cadcf1;
-		}
-		div#p_p_id_<%=portletDisplay.getId() %>_ img {
-			opacity:0.4;
-			filter:alpha(opacity=40);
-		}
-	</style>
-<%	
-	}
-}
 for (int assetIndex = 0; assetIndex < results.size(); assetIndex++) {
 	TagsAsset asset = (TagsAsset)results.get(assetIndex);
 
