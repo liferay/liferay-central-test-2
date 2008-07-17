@@ -2,6 +2,8 @@ package ${packagePath}.service.base;
 
 import ${packagePath}.service.${entity.name}${sessionTypeName}Service;
 
+import com.liferay.portal.kernel.bean.InitializingBean;
+
 <#if sessionTypeName == "">
 	import com.liferay.portal.service.base.PrincipalBean;
 </#if>
@@ -50,9 +52,9 @@ import ${packagePath}.service.${entity.name}${sessionTypeName}Service;
 </#list>
 
 <#if sessionTypeName == "Local">
-	public abstract class ${entity.name}LocalServiceBaseImpl implements ${entity.name}LocalService {
+	public abstract class ${entity.name}LocalServiceBaseImpl implements ${entity.name}LocalService, InitializingBean {
 <#else>
-	public abstract class ${entity.name}ServiceBaseImpl extends PrincipalBean implements ${entity.name}Service {
+	public abstract class ${entity.name}ServiceBaseImpl extends PrincipalBean implements ${entity.name}Service, InitializingBean {
 </#if>
 
 <#if sessionTypeName == "Local" && entity.hasColumns()>
@@ -144,7 +146,7 @@ import ${packagePath}.service.${entity.name}${sessionTypeName}Service;
 		</#if>
 	</#list>
 
-	protected void init() {
+	public void afterPropertiesSet() {
 		<#list referenceList as tempEntity>
 			<#if entity.equals(tempEntity)>
 				<#if sessionTypeName == "" && tempEntity.hasLocalService()>
@@ -204,7 +206,7 @@ import ${packagePath}.service.${entity.name}${sessionTypeName}Service;
 		</#if>
 	</#list>
 <#else>
-	protected void init() {
+	public void afterPropertiesSet() {
 	}
 </#if>
 

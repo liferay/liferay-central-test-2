@@ -11,7 +11,7 @@
 	</#if>
 
 	<#if entity.hasColumns()>
-		<bean id="${packagePath}.service.persistence.${entity.name}Persistence.impl" class="${entity.getPersistenceClass()}" lazy-init="true" init-method="init">
+		<bean id="${packagePath}.service.persistence.${entity.name}Persistence.impl" class="${entity.getPersistenceClass()}" lazy-init="true">
 			<property name="dataSource">
 				<ref bean="${entity.getDataSource()}" />
 			</property>

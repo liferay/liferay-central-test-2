@@ -22,7 +22,7 @@
 
 package com.liferay.portal.spring.util;
 
-import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
+import com.liferay.portal.kernel.bean.InitializingBean;
 import com.liferay.portal.spring.context.ArrayApplicationContext;
 import com.liferay.portal.util.PropsKeys;
 import com.liferay.portal.util.PropsUtil;
@@ -62,7 +62,17 @@ public class SpringUtil {
 			applicationContext.getBeanDefinitionNames();
 
 		for (String beanDefinitionName : beanDefinitionNames) {
-			PortalBeanLocatorUtil.locate(beanDefinitionName);
+			applicationContext.getBean(beanDefinitionName);
+		}
+
+		for (String beanDefinitionName : beanDefinitionNames) {
+			Object obj = applicationContext.getBean(beanDefinitionName);
+
+			if (obj instanceof InitializingBean) {
+				InitializingBean initializingBean = (InitializingBean)obj;
+
+				initializingBean.afterPropertiesSet();
+			}
 		}
 	}
 

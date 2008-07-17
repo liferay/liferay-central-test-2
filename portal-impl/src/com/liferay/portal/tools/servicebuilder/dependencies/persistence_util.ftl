@@ -5,7 +5,7 @@ import java.util.Date;
 public class ${entity.name}Util {
 
 	<#list methods as method>
-		<#if !method.isConstructor() && method.isPublic()>
+		<#if !method.isConstructor() && method.isPublic() && serviceBuilder.isCustomMethod(method)>
 			<#if method.name == "update">
 				<#if arrayUtil.getLength(method.parameters) == 1>
 	/**

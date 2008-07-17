@@ -461,7 +461,7 @@ public class PortalImpl implements Portal {
 		}
 		catch (Exception e) {
 			throw new RuntimeException(
-				"Unable to get class name from value " + value);
+				"Unable to get class name from value " + value, e);
 		}
 	}
 
