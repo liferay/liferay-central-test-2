@@ -567,8 +567,8 @@ public class LayoutTypePortletImpl
 			String oldColumnId = itr.next();
 
 			if (!newColumns.contains(oldColumnId)) {
-				String oldColumnValue =
-					(String)getTypeSettingsProperties().remove(oldColumnId);
+				String oldColumnValue = getTypeSettingsProperties().remove(
+					oldColumnId);
 
 				String[] portletIds = StringUtil.split(oldColumnValue);
 
