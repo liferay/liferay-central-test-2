@@ -25,6 +25,7 @@ package com.liferay.portal.action;
 import com.liferay.portal.events.EventsProcessor;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;
+import com.liferay.portal.kernel.util.HttpUtil;
 import com.liferay.portal.struts.ActionConstants;
 import com.liferay.portal.util.CookieKeys;
 import com.liferay.portal.util.PortalUtil;
@@ -40,6 +41,8 @@ import org.apache.struts.action.Action;
 import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
+
+import java.net.URL;
 
 /**
  * <a href="LogoutAction.java.html"><b><i>View Source</i></b></a>
@@ -62,6 +65,20 @@ public class LogoutAction extends Action {
 				request, response);
 
 			String domain = CookieKeys.getDomain(request);
+
+			//Adding RUON hooks
+
+			String userId = (String) session.getAttribute("j_username");
+			String scheme = request.getScheme();
+			String serverName = request.getServerName();
+			Integer serverPort = request.getServerPort();
+			String presenceResource = "/ruon-web/resources/presence/status/";
+
+			URL restURL = new URL(scheme + "://" + serverName + ":"+
+									serverPort.toString() + presenceResource +
+										userId + "/offline");
+
+			HttpUtil.submit(restURL.toString(), true);
 
 			Cookie companyIdCookie = new Cookie(
 				CookieKeys.COMPANY_ID, StringPool.BLANK);
