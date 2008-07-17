@@ -114,8 +114,7 @@ public class PermissionCheckerFactory {
 		}
 
 		public void passivateObject(Object obj) {
-			PermissionCheckerImpl permissionChecker =
-				(PermissionCheckerImpl)obj;
+			PermissionChecker permissionChecker = (PermissionChecker)obj;
 
 			permissionChecker.recycle();
 		}
