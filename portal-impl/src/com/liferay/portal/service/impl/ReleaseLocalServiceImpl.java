@@ -32,13 +32,6 @@ import com.liferay.portal.model.Release;
 import com.liferay.portal.model.impl.ReleaseImpl;
 import com.liferay.portal.service.base.ReleaseLocalServiceBaseImpl;
 import com.liferay.portal.tools.sql.DBUtil;
-import com.liferay.portal.tools.sql.DerbyUtil;
-import com.liferay.portal.tools.sql.FirebirdUtil;
-import com.liferay.portal.tools.sql.HypersonicUtil;
-import com.liferay.portal.tools.sql.MySQLUtil;
-import com.liferay.portal.tools.sql.OracleUtil;
-import com.liferay.portal.tools.sql.PostgreSQLUtil;
-import com.liferay.portal.tools.sql.SybaseUtil;
 import com.liferay.portal.util.PropsKeys;
 import com.liferay.portal.util.PropsUtil;
 
@@ -151,27 +144,6 @@ public class ReleaseLocalServiceImpl extends ReleaseLocalServiceBaseImpl {
 		try {
 			DBUtil dbUtil = DBUtil.getInstance();
 
-			if (dbUtil instanceof HypersonicUtil){
-				dbUtil.runSQLTemplate("jbpm.jpdl.hsqldb.sql", false);
-			}
-			else if (dbUtil instanceof MySQLUtil){
-				dbUtil.runSQLTemplate("jbpm.jpdl.mysql.sql", false);
-			}
-			else if (dbUtil instanceof DerbyUtil){
-				dbUtil.runSQLTemplate("jbpm.jpdl.derby.sql", false);
-			}
-			else if (dbUtil instanceof FirebirdUtil){
-				dbUtil.runSQLTemplate("jbpm.jpdl.firebird.sql", false);
-			}
-			else if (dbUtil instanceof OracleUtil){
-				dbUtil.runSQLTemplate("jbpm.jpdl.oracle.sql", false);
-			}
-			else if (dbUtil instanceof PostgreSQLUtil){
-				dbUtil.runSQLTemplate("jbpm.jpdl.postgresql.sql", false);
-			}
-			else if (dbUtil instanceof SybaseUtil){
-				dbUtil.runSQLTemplate("jbpm.jpdl.sybase.sql", false);
-			}
 			dbUtil.runSQLTemplate("portal-tables.sql", false);
 			dbUtil.runSQLTemplate("portal-data-common.sql", false);
 			dbUtil.runSQLTemplate("portal-data-counter.sql", false);

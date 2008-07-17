@@ -458,14 +458,6 @@ public abstract class DBUtil {
 					String includeFileName =
 						line.substring(pos + 1, line.length());
 
-					if (includeFileName.contentEquals("jbpm.jpdl.DB_NAME.sql")){
-						if (!_notSupportedByJPDL()){
-							includeFileName = includeFileName.replace(
-								"DB_NAME", _getDbStringByDialect());
-
-						}
-					}
-
 					File includeFile = new File("../sql/" + includeFileName);
 
 					if (!includeFile.exists()) {
@@ -698,6 +690,7 @@ public abstract class DBUtil {
 
 		return content;
 	}
+
 	protected String replaceTemplate(String template, String[] actual) {
 		if ((template == null) || (TEMPLATE == null) || (actual == null)) {
 			return null;
@@ -720,52 +713,6 @@ public abstract class DBUtil {
 		}
 
 		return template;
-	}
-	
-	private String _getDbStringByDialect() {
-		String dbString = null ;
-		if (this instanceof DerbyUtil){
-			dbString = "derby" ;
-		}
-		else if (this instanceof FirebirdUtil){
-			dbString = "firebird";
-		}
-		else if (this instanceof HypersonicUtil){
-			dbString = "hsqldb";
-		}
-		else if (this instanceof MySQLUtil){
-			dbString = "mysql";
-		}
-		else if (this instanceof OracleUtil){
-			dbString = "oracle";
-		}
-		else if (this instanceof PostgreSQLUtil){
-			dbString = "postgresql";
-		}
-		else if (this instanceof SybaseUtil){
-			dbString = "sybase";
-		}
-		return dbString;
-	}
-
-	private boolean _notSupportedByJPDL(){
-
-		if (this instanceof DB2Util ||
-				this instanceof InformixUtil ||
-					this instanceof InterBaseUtil ||
-						this instanceof JDataStoreUtil ||
-							this instanceof SAPUtil ||
-								this instanceof SQLServerUtil){
-			if (_log.isDebugEnabled()) {
-				_log.debug("JPDL is not supported on DB2,Informix," +
-						"InterBase,JDataStore,SAP,SQLServer Databases");
-			}
-			return true;
-		}
-		else {
-			return false;
-		}
-
 	}
 
 	protected abstract String reword(String data) throws IOException;

@@ -27,6 +27,7 @@ import com.liferay.documentlibrary.service.DLLocalServiceFactory;
 import com.liferay.documentlibrary.service.DLService;
 import com.liferay.documentlibrary.service.DLServiceFactory;
 
+import com.liferay.portal.kernel.bean.InitializingBean;
 import com.liferay.portal.service.ResourceLocalService;
 import com.liferay.portal.service.ResourceLocalServiceFactory;
 import com.liferay.portal.service.ResourceService;
@@ -37,8 +38,6 @@ import com.liferay.portal.service.persistence.ResourceFinderUtil;
 import com.liferay.portal.service.persistence.ResourcePersistence;
 import com.liferay.portal.service.persistence.ResourceUtil;
 
-import com.liferay.portlet.workflow.service.SAWWorkflowLocalService;
-import com.liferay.portlet.workflow.service.SAWWorkflowLocalServiceFactory;
 import com.liferay.portlet.workflow.service.WorkflowComponentService;
 import com.liferay.portlet.workflow.service.WorkflowComponentServiceFactory;
 import com.liferay.portlet.workflow.service.WorkflowDefinitionService;
@@ -54,16 +53,7 @@ import com.liferay.portlet.workflow.service.WorkflowTaskServiceFactory;
  *
  */
 public abstract class WorkflowDefinitionServiceBaseImpl extends PrincipalBean
-	implements WorkflowDefinitionService {
-	public SAWWorkflowLocalService getSAWWorkflowLocalService() {
-		return sawWorkflowLocalService;
-	}
-
-	public void setSAWWorkflowLocalService(
-		SAWWorkflowLocalService sawWorkflowLocalService) {
-		this.sawWorkflowLocalService = sawWorkflowLocalService;
-	}
-
+	implements WorkflowDefinitionService, InitializingBean {
 	public WorkflowComponentService getWorkflowComponentService() {
 		return workflowComponentService;
 	}
@@ -139,11 +129,7 @@ public abstract class WorkflowDefinitionServiceBaseImpl extends PrincipalBean
 		this.resourceFinder = resourceFinder;
 	}
 
-	protected void init() {
-		if (sawWorkflowLocalService == null) {
-			sawWorkflowLocalService = SAWWorkflowLocalServiceFactory.getImpl();
-		}
-
+	public void afterPropertiesSet() {
 		if (workflowComponentService == null) {
 			workflowComponentService = WorkflowComponentServiceFactory.getImpl();
 		}
@@ -181,7 +167,6 @@ public abstract class WorkflowDefinitionServiceBaseImpl extends PrincipalBean
 		}
 	}
 
-	protected SAWWorkflowLocalService sawWorkflowLocalService;
 	protected WorkflowComponentService workflowComponentService;
 	protected WorkflowInstanceService workflowInstanceService;
 	protected WorkflowTaskService workflowTaskService;
