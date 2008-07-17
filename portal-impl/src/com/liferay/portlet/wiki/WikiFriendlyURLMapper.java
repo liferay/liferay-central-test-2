@@ -51,9 +51,9 @@ public class WikiFriendlyURLMapper extends BaseFriendlyURLMapper {
 			portletURL.getParameter("struts_action"));
 
 		if (strutsAction.equals("/wiki/view") ||
-				strutsAction.equals("/wiki/view_all_pages") ||
-					strutsAction.equals("/wiki/view_orphan_pages") ||
-						strutsAction.equals("/wiki/view_recent_changes")) {
+			strutsAction.equals("/wiki/view_all_pages") ||
+			strutsAction.equals("/wiki/view_orphan_pages") ||
+			strutsAction.equals("/wiki/view_recent_changes")) {
 
 			String nodeId = portletURL.getParameter("nodeId");
 			String nodeName = portletURL.getParameter("nodeName");
@@ -115,9 +115,9 @@ public class WikiFriendlyURLMapper extends BaseFriendlyURLMapper {
 
 				sb.append(HttpUtil.encodeURL(tag));
 
-				portletURL.addParameterIncludedInPath("tag");
 				portletURL.addParameterIncludedInPath("nodeId");
 				portletURL.addParameterIncludedInPath("nodeName");
+				portletURL.addParameterIncludedInPath("tag");
 			}
 
 			friendlyURLPath = sb.toString();
@@ -179,8 +179,9 @@ public class WikiFriendlyURLMapper extends BaseFriendlyURLMapper {
 					String urlFragments1 = HttpUtil.decodeURL(urlFragments[1]);
 
 					if (urlFragments1.equals("all_pages") ||
-							urlFragments1.equals("orphan_pages") ||
-								urlFragments1.equals("recent_changes")) {
+						urlFragments1.equals("orphan_pages") ||
+						urlFragments1.equals("recent_changes")) {
+
 						addParam(
 							params, "struts_action",
 							"/wiki/view_" + urlFragments1);

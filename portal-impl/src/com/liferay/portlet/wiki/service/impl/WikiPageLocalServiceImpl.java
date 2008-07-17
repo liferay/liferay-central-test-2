@@ -977,8 +977,9 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 
 	public void validateTitle(String title) throws PortalException {
 		if (title.equals("all_pages") || title.equals("orphan_pages") ||
-				title.equals("recent_changes")) {
-			throw new PageTitleException(title + " is a reserved word");
+			title.equals("recent_changes")) {
+
+			throw new PageTitleException(title + " is reserved");
 		}
 
 		if (Validator.isNotNull(PropsValues.WIKI_PAGE_TITLES_REGEXP)) {

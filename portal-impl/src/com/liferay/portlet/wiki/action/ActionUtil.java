@@ -62,7 +62,7 @@ import javax.servlet.http.HttpServletRequest;
 public class ActionUtil {
 
 	public static WikiNode getFirstVisibleNode(RenderRequest renderRequest)
-			throws PortalException, SystemException {
+		throws PortalException, SystemException {
 
 		ThemeDisplay themeDisplay = (ThemeDisplay)renderRequest.getAttribute(
 			WebKeys.THEME_DISPLAY);
@@ -84,8 +84,8 @@ public class ActionUtil {
 
 			for (WikiNode curNode : nodes) {
 				if (WikiNodePermission.contains(
-					permissionChecker, curNode.getNodeId(),
-					ActionKeys.VIEW)) {
+						permissionChecker, curNode.getNodeId(),
+						ActionKeys.VIEW)) {
 
 					node = curNode;
 
