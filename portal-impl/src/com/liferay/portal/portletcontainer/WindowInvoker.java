@@ -341,7 +341,7 @@ public class WindowInvoker extends InvokerPortlet {
 			_container.getResources(
 				getResourceRequest, getResourceResponse);
 
-			String contentType = response.getContentType();
+			String contentType = getResourceResponse.getContentType();
 
 			if (contentType != null) {
 				resourceResponseImpl.setContentType(contentType);
