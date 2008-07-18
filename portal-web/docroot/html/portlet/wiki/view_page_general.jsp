@@ -49,19 +49,6 @@ editPageURL.setParameter("struts_action", "/wiki/edit_page");
 editPageURL.setParameter("redirect", currentURL);
 editPageURL.setParameter("nodeId", String.valueOf(node.getNodeId()));
 editPageURL.setParameter("title", wikiPage.getTitle());
-
-boolean convert = PrefsPropsUtil.getBoolean(PropsKeys.OPENOFFICE_SERVER_ENABLED, PropsValues.OPENOFFICE_SERVER_ENABLED) && WikiPagePermission.contains(permissionChecker, wikiPage, ActionKeys.VIEW);
-
-String[] conversions = (String[])DocumentConversionUtil.getConversions("html");
-
-PortletURL exportPageURL = renderResponse.createActionURL();
-
-exportPageURL.setWindowState(LiferayWindowState.EXCLUSIVE);
-exportPageURL.setParameter("struts_action", "/wiki/export_page");
-exportPageURL.setParameter("nodeId", String.valueOf(node.getNodeId()));
-exportPageURL.setParameter("nodeName", node.getName());
-exportPageURL.setParameter("title", wikiPage.getTitle());
-exportPageURL.setParameter("version", String.valueOf(wikiPage.getVersion()));
 %>
 
 <liferay-util:include page="/html/portlet/wiki/top_links.jsp" />
@@ -124,7 +111,22 @@ int count = 0;
 	</td>
 </tr>
 
-<c:if test="<%= convert %>">
+<c:if test="<%= PrefsPropsUtil.getBoolean(PropsKeys.OPENOFFICE_SERVER_ENABLED, PropsValues.OPENOFFICE_SERVER_ENABLED) && WikiPagePermission.contains(permissionChecker, wikiPage, ActionKeys.VIEW) %>">
+
+	<%
+	String[] conversions = DocumentConversionUtil.getConversions("html");
+
+	PortletURL exportPageURL = renderResponse.createActionURL();
+
+	exportPageURL.setWindowState(LiferayWindowState.EXCLUSIVE);
+
+	exportPageURL.setParameter("struts_action", "/wiki/export_page");
+	exportPageURL.setParameter("nodeId", String.valueOf(node.getNodeId()));
+	exportPageURL.setParameter("nodeName", node.getName());
+	exportPageURL.setParameter("title", wikiPage.getTitle());
+	exportPageURL.setParameter("version", String.valueOf(wikiPage.getVersion()));
+	%>
+
 	<tr class="portlet-section-body<%= MathUtil.isOdd(count++) ? "-alternate" : "" %> results-row <%= MathUtil.isOdd(count) ? "alt" : "" %>">
 		<th>
 			<liferay-ui:message key="convert-to" />
@@ -133,18 +135,16 @@ int count = 0;
 			<liferay-ui:icon-list>
 
 			<%
-			for (int i = 0; i < conversions.length; i++) {
-				String conversion = conversions[i];
+			for (String conversion : conversions) {
 				exportPageURL.setParameter("targetExtension", conversion);
-
 			%>
 
-					<liferay-ui:icon
-						image='<%= "../document_library/" + conversion %>'
-						message="<%= conversion.toUpperCase() %>"
-						url='<%= exportPageURL.toString() %>'
-						label="<%= true %>"
-					/>
+				<liferay-ui:icon
+					image='<%= "../document_library/" + conversion %>'
+					message="<%= conversion.toUpperCase() %>"
+					url="<%= exportPageURL.toString() %>"
+					label="<%= true %>"
+				/>
 
 			<%
 			}

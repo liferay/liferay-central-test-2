@@ -109,12 +109,6 @@ public class DocumentConversionUtil {
 		_conversionsMap.put("wpd", _TEXT_CONVERSIONS);
 	}
 
-	private void _disconnect() {
-		if (_connection != null) {
-			_connection.disconnect();
-		}
-	}
-
 	private InputStream _convert(
 			String id, InputStream is, String sourceExtension,
 			String targetExtension)
@@ -163,6 +157,12 @@ public class DocumentConversionUtil {
 		}
 
 		return new FileInputStream(file);
+	}
+
+	private void _disconnect() {
+		if (_connection != null) {
+			_connection.disconnect();
+		}
 	}
 
 	private String[] _getConversions(String extension) {
