@@ -169,7 +169,7 @@ public class WikiFriendlyURLMapper extends BaseFriendlyURLMapper {
 			}
 			else {
 				if (Validator.isNumber(urlFragment0)) {
-					addParam(params, "urlFragment0", urlFragment0);
+					addParam(params, "nodeId", urlFragment0);
 				}
 				else {
 					addParam(params, "nodeName", urlFragment0);

@@ -25,9 +25,7 @@ package com.liferay.portlet.wiki.action;
 import com.liferay.portal.kernel.servlet.SessionErrors;
 import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.struts.PortletAction;
-import com.liferay.portal.util.WebKeys;
 import com.liferay.portlet.wiki.NoSuchNodeException;
-import com.liferay.portlet.wiki.NoSuchPageException;
 import com.liferay.portlet.wiki.model.WikiNode;
 
 import javax.portlet.PortletConfig;
@@ -39,13 +37,12 @@ import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
 
 /**
- * <a href="ViewPageAction.java.html"><b><i>View Source</i></b></a>
+ * <a href="ViewNodeAction.java.html"><b><i>View Source</i></b></a>
  *
- * @author Brian Wing Shun Chan
  * @author Jorge Ferrer
  *
  */
-public class ViewPageAction extends PortletAction {
+public class ViewNodeAction extends PortletAction {
 
 	public ActionForward render(
 			ActionMapping mapping, ActionForm form, PortletConfig portletConfig,
@@ -58,12 +55,9 @@ public class ViewPageAction extends PortletAction {
 			if (node == null) {
 				ActionUtil.getFirstVisibleNode(renderRequest);
 			}
-
-			ActionUtil.getPage(renderRequest);
 		}
 		catch (Exception e) {
 			if (e instanceof NoSuchNodeException ||
-				e instanceof NoSuchPageException ||
 				e instanceof PrincipalException) {
 
 				SessionErrors.add(renderRequest, e.getClass().getName());
@@ -76,23 +70,7 @@ public class ViewPageAction extends PortletAction {
 		}
 
 		return mapping.findForward(
-			getForward(renderRequest, "portlet.wiki.view_page"));
-	}
-
-	protected void getNode(RenderRequest renderRequest) throws Exception {
-		ActionUtil.getNode(renderRequest);
-
-		WikiNode node = (WikiNode)renderRequest.getAttribute(WebKeys.WIKI_NODE);
-
-		if (node != null) {
-			return;
-		}
-
-		ActionUtil.getFirstVisibleNode(renderRequest);
-	}
-
-	protected boolean isCheckMethodOnProcessAction() {
-		return false;
+			getForward(renderRequest, "portlet.wiki.edit_node"));
 	}
 
 }

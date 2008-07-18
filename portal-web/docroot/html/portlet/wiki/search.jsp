@@ -107,7 +107,7 @@ try {
 		PortletURL rowURL = renderResponse.createRenderURL();
 
 		rowURL.setParameter("struts_action", "/wiki/view");
-		rowURL.setParameter("nodeId", String.valueOf(curNodeId));
+		rowURL.setParameter("nodeName", node.getName());
 		rowURL.setParameter("title", title);
 
 		row.addText(curNode.getName(), rowURL);

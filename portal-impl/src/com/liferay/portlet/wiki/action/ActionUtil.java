@@ -118,15 +118,7 @@ public class ActionUtil {
 		HttpServletRequest request = PortalUtil.getHttpServletRequest(
 			renderRequest);
 
-		WikiNode node = getNode(request);
-
-		if (node == null) {
-			node = getFirstVisibleNode(renderRequest);
-
-			request.setAttribute(WebKeys.WIKI_NODE, node);
-		}
-
-		return node;
+		return getNode(request);
 	}
 
 	public static WikiNode getNode(HttpServletRequest request)
