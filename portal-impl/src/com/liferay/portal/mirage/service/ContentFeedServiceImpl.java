@@ -137,41 +137,41 @@ public class ContentFeedServiceImpl implements ContentFeedService {
 
 			long id = CounterLocalServiceUtil.increment();
 
-			JournalFeed returnFeed = JournalFeedUtil.create(id);
+			feed = JournalFeedUtil.create(id);
 
-			returnFeed.setUuid(uuid);
-			returnFeed.setGroupId(groupId);
-			returnFeed.setCompanyId(user.getCompanyId());
-			returnFeed.setUserId(user.getUserId());
-			returnFeed.setUserName(user.getFullName());
-			returnFeed.setCreateDate(now);
-			returnFeed.setModifiedDate(now);
-			returnFeed.setFeedId(feedId);
-			returnFeed.setName(name);
-			returnFeed.setDescription(description);
-			returnFeed.setType(type);
-			returnFeed.setStructureId(structureId);
-			returnFeed.setTemplateId(templateId);
-			returnFeed.setRendererTemplateId(rendererTemplateId);
-			returnFeed.setDelta(delta);
-			returnFeed.setOrderByCol(orderByCol);
-			returnFeed.setOrderByType(orderByType);
-			returnFeed.setTargetLayoutFriendlyUrl(targetLayoutFriendlyUrl);
-			returnFeed.setTargetPortletId(targetPortletId);
-			returnFeed.setContentField(contentField);
+			feed.setUuid(uuid);
+			feed.setGroupId(groupId);
+			feed.setCompanyId(user.getCompanyId());
+			feed.setUserId(user.getUserId());
+			feed.setUserName(user.getFullName());
+			feed.setCreateDate(now);
+			feed.setModifiedDate(now);
+			feed.setFeedId(feedId);
+			feed.setName(name);
+			feed.setDescription(description);
+			feed.setType(type);
+			feed.setStructureId(structureId);
+			feed.setTemplateId(templateId);
+			feed.setRendererTemplateId(rendererTemplateId);
+			feed.setDelta(delta);
+			feed.setOrderByCol(orderByCol);
+			feed.setOrderByType(orderByType);
+			feed.setTargetLayoutFriendlyUrl(targetLayoutFriendlyUrl);
+			feed.setTargetPortletId(targetPortletId);
+			feed.setContentField(contentField);
 
 			if (Validator.isNull(feedType)) {
-				returnFeed.setFeedType(RSSUtil.DEFAULT_TYPE);
-				returnFeed.setFeedVersion(RSSUtil.DEFAULT_VERSION);
+				feed.setFeedType(RSSUtil.DEFAULT_TYPE);
+				feed.setFeedVersion(RSSUtil.DEFAULT_VERSION);
 			}
 			else {
-				returnFeed.setFeedType(feedType);
-				returnFeed.setFeedVersion(feedVersion);
+				feed.setFeedType(feedType);
+				feed.setFeedVersion(feedVersion);
 			}
 
-			JournalFeedUtil.update(returnFeed, false);
+			JournalFeedUtil.update(feed, false);
 
-			mirageFeed.setFeed(returnFeed);
+			mirageFeed.setFeed(feed);
 		}
 		catch (PortalException pe) {
 			throw new CMSException(pe.getMessage(), pe);
@@ -383,38 +383,38 @@ public class ContentFeedServiceImpl implements ContentFeedService {
 
 			// Feed
 
-			JournalFeed returnFeed = JournalFeedUtil.findByG_F(groupId, feedId);
+			feed = JournalFeedUtil.findByG_F(groupId, feedId);
 
 			validate(
-				returnFeed.getCompanyId(), groupId, name, description,
-				structureId, targetLayoutFriendlyUrl, contentField);
+				feed.getCompanyId(), groupId, name, description, structureId,
+				targetLayoutFriendlyUrl, contentField);
 
-			returnFeed.setModifiedDate(new Date());
-			returnFeed.setName(name);
-			returnFeed.setDescription(description);
-			returnFeed.setType(type);
-			returnFeed.setStructureId(structureId);
-			returnFeed.setTemplateId(templateId);
-			returnFeed.setRendererTemplateId(rendererTemplateId);
-			returnFeed.setDelta(delta);
-			returnFeed.setOrderByCol(orderByCol);
-			returnFeed.setOrderByType(orderByType);
-			returnFeed.setTargetLayoutFriendlyUrl(targetLayoutFriendlyUrl);
-			returnFeed.setTargetPortletId(targetPortletId);
-			returnFeed.setContentField(contentField);
+			feed.setModifiedDate(new Date());
+			feed.setName(name);
+			feed.setDescription(description);
+			feed.setType(type);
+			feed.setStructureId(structureId);
+			feed.setTemplateId(templateId);
+			feed.setRendererTemplateId(rendererTemplateId);
+			feed.setDelta(delta);
+			feed.setOrderByCol(orderByCol);
+			feed.setOrderByType(orderByType);
+			feed.setTargetLayoutFriendlyUrl(targetLayoutFriendlyUrl);
+			feed.setTargetPortletId(targetPortletId);
+			feed.setContentField(contentField);
 
 			if (Validator.isNull(feedType)) {
-				returnFeed.setFeedType(RSSUtil.DEFAULT_TYPE);
-				returnFeed.setFeedVersion(RSSUtil.DEFAULT_VERSION);
+				feed.setFeedType(RSSUtil.DEFAULT_TYPE);
+				feed.setFeedVersion(RSSUtil.DEFAULT_VERSION);
 			}
 			else {
-				returnFeed.setFeedType(feedType);
-				returnFeed.setFeedVersion(feedVersion);
+				feed.setFeedType(feedType);
+				feed.setFeedVersion(feedVersion);
 			}
 
-			JournalFeedUtil.update(returnFeed, false);
+			JournalFeedUtil.update(feed, false);
 
-			mirageFeed.setFeed(returnFeed);
+			mirageFeed.setFeed(feed);
 		}
 		catch (PortalException pe) {
 			throw new CMSException(pe.getMessage(), pe);
