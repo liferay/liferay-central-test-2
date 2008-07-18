@@ -4,51 +4,56 @@
 <head profile="http://selenium-ide.openqa.org/profiles/test-case">
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <link rel="selenium.base" href="" />
-<title>AddSecondEntryCommentTest</title>
+<title>AddSecondSubfolderTest</title>
 </head>
 <body>
 <table cellpadding="1" cellspacing="1" border="1">
 <thead>
-<tr><td rowspan="1" colspan="3">AddSecondEntryCommentTest</td></tr>
+<tr><td rowspan="1" colspan="3">AddSecondSubfolderTest</td></tr>
 </thead><tbody>
 <tr>
+	<td>waitForElementPresent</td>
+	<td>link=Another</td>
+	<td></td>
+</tr>
+<tr>
 	<td>clickAndWait</td>
-	<td>link=0 Comments</td>
+	<td>link=Another</td>
 	<td></td>
 </tr>
 <tr>
-	<td>waitForElementPresent</td>
-	<td>link=Post Reply</td>
+	<td>clickAndWait</td>
+	<td>//input[@value='Add Subfolder']</td>
 	<td></td>
-</tr>
-<tr>
-	<td>click</td>
-	<td>link=Post Reply</td>
-	<td></td>
-</tr>
-<tr>
-	<td>waitForElementPresent</td>
-	<td>_33_postReplyBody0</td>
-	<td></td>
-</tr>
-<tr>
-	<td>typeKeys</td>
-	<td>_33_postReplyBody0</td>
-	<td>This is a second entr comment!</td>
 </tr>
 <tr>
 	<td>type</td>
-	<td>_33_postReplyBody0</td>
-	<td>This is a second entry comment!</td>
+	<td>_20_name</td>
+	<td>Another1</td>
 </tr>
 <tr>
-	<td>clickAndWait</td>
-	<td>_33_postReplyButton0</td>
+	<td>type</td>
+	<td>_20_description</td>
+	<td>Test1</td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//input[@value='Save']</td>
 	<td></td>
 </tr>
 <tr>
-	<td>waitForTextPresent</td>
-	<td>This is a second entry comment!</td>
+	<td>clickAndWait</td>
+	<td>//input[@value='Save']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Your request processed successfully. </td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//div[@id='portlet-wrapper-20']/div[2]/div/div/form[1]/div[1]/a[1]</td>
 	<td></td>
 </tr>
 

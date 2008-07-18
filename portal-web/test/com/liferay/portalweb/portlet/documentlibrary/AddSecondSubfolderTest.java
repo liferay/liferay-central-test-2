@@ -20,62 +20,41 @@
  * SOFTWARE.
  */
 
-package com.liferay.portalweb.portlet.blogs;
+package com.liferay.portalweb.portlet.documentlibrary;
 
 import com.liferay.portalweb.portal.BaseTestCase;
 import com.liferay.portalweb.portal.util.RuntimeVariables;
 
 /**
- * <a href="AddEntryCommentTest.java.html"><b><i>View Source</i></b></a>
+ * <a href="AddSecondSubfolderTest.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *
  */
-public class AddEntryCommentTest extends BaseTestCase {
-	public void testAddEntryComment() throws Exception {
-		selenium.click("link=0 Comments");
+public class AddSecondSubfolderTest extends BaseTestCase {
+	public void testAddSecondSubfolder() throws Exception {
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isElementPresent("link=Another")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
+		selenium.click("link=Another");
 		selenium.waitForPageToLoad("30000");
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isElementPresent("link=Post Reply")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
-		selenium.click("link=Post Reply");
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isElementPresent("_33_postReplyBody0")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
-		selenium.typeKeys("_33_postReplyBody0",
-			RuntimeVariables.replace("This is a test entr comment!"));
-		selenium.type("_33_postReplyBody0",
-			RuntimeVariables.replace("This is a test entry comment!"));
-		selenium.click("_33_postReplyButton0");
+		selenium.click("//input[@value='Add Subfolder']");
 		selenium.waitForPageToLoad("30000");
+		selenium.type("_20_name", RuntimeVariables.replace("Another1"));
+		selenium.type("_20_description", RuntimeVariables.replace("Test1"));
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -83,8 +62,7 @@ public class AddEntryCommentTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent(
-							"link=This is a test entry comment!")) {
+				if (selenium.isElementPresent("//input[@value='Save']")) {
 					break;
 				}
 			}
@@ -93,5 +71,13 @@ public class AddEntryCommentTest extends BaseTestCase {
 
 			Thread.sleep(1000);
 		}
+
+		selenium.click("//input[@value='Save']");
+		selenium.waitForPageToLoad("30000");
+		verifyTrue(selenium.isTextPresent(
+				"Your request processed successfully. "));
+		selenium.click(
+			"//div[@id='portlet-wrapper-20']/div[2]/div/div/form[1]/div[1]/a[1]");
+		selenium.waitForPageToLoad("30000");
 	}
 }

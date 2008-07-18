@@ -52,7 +52,8 @@ public class BrowsePluginsTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.select("document._9_fm.elements[9]", "label=4");
+		selenium.select("//div[@id='portlet-wrapper-9']/div[2]/div/div/form/div[1]/div/div[2]/div[1]/select",
+			"label=4");
 		selenium.waitForPageToLoad("30000");
 		verifyTrue(selenium.isTextPresent("Workflow"));
 		selenium.click("link=Theme Plugins");

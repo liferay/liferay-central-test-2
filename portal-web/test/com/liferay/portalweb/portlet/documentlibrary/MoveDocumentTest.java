@@ -26,16 +26,68 @@ import com.liferay.portalweb.portal.BaseTestCase;
 import com.liferay.portalweb.portal.util.RuntimeVariables;
 
 /**
- * <a href="AddDocumentTest.java.html"><b><i>View Source</i></b></a>
+ * <a href="MoveDocumentTest.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *
  */
-public class AddDocumentTest extends BaseTestCase {
-	public void testAddDocument() throws Exception {
+public class MoveDocumentTest extends BaseTestCase {
+	public void testMoveDocument() throws Exception {
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isElementPresent("link=Test Folder")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
+		selenium.click("link=Test Folder");
+		selenium.waitForPageToLoad("30000");
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isElementPresent("link=Test Subfolder")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
 		selenium.click("link=Test Subfolder");
 		selenium.waitForPageToLoad("30000");
-		selenium.click("//input[@value='Add Document']");
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isElementPresent("link=Edit")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
+		selenium.click("link=Edit");
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {
@@ -44,7 +96,7 @@ public class AddDocumentTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("link=Use the classic uploader.")) {
+				if (selenium.isElementPresent("//input[@value='Select']")) {
 					break;
 				}
 			}
@@ -54,8 +106,9 @@ public class AddDocumentTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click("link=Use the classic uploader.");
-		Thread.sleep(3000);
+		selenium.click("//input[@value='Select']");
+		selenium.waitForPopUp("folder", RuntimeVariables.replace("30000"));
+		selenium.selectWindow("name=folder");
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -63,7 +116,44 @@ public class AddDocumentTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("_20_file")) {
+				if (selenium.isElementPresent("link=Folders")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
+		selenium.click("link=Folders");
+		selenium.waitForPageToLoad("30000");
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isElementPresent("link=Another")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
+		selenium.click("link=Another");
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isElementPresent("link=Another1")) {
 					break;
 				}
 			}
@@ -79,7 +169,7 @@ public class AddDocumentTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("_20_title")) {
+				if (selenium.isElementPresent("//input[@value='Choose']")) {
 					break;
 				}
 			}
@@ -88,6 +178,9 @@ public class AddDocumentTest extends BaseTestCase {
 
 			Thread.sleep(1000);
 		}
+
+		selenium.click("//input[@value='Choose']");
+		selenium.selectWindow("null");
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -95,7 +188,7 @@ public class AddDocumentTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("_20_description")) {
+				if (selenium.isElementPresent("_20_folderName")) {
 					break;
 				}
 			}
@@ -105,30 +198,7 @@ public class AddDocumentTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.type("_20_file",
-			RuntimeVariables.replace(
-				"D:\\trunk\\portal\\build\\portal-web\\test\\com\\liferay\\portalweb\\portlet\\documentlibrary\\test_document.txt"));
-		selenium.type("_20_title", RuntimeVariables.replace("Test Document"));
-		selenium.type("_20_description",
-			RuntimeVariables.replace("This is a test document!"));
 		selenium.click("//input[@value='Save']");
 		selenium.waitForPageToLoad("30000");
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isTextPresent(
-							"Test Document.txt\nThis is a test document!")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
 	}
 }

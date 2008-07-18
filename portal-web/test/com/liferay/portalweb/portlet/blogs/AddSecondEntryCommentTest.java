@@ -35,7 +35,41 @@ public class AddSecondEntryCommentTest extends BaseTestCase {
 	public void testAddSecondEntryComment() throws Exception {
 		selenium.click("link=0 Comments");
 		selenium.waitForPageToLoad("30000");
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isElementPresent("link=Post Reply")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
 		selenium.click("link=Post Reply");
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isElementPresent("_33_postReplyBody0")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
 		selenium.typeKeys("_33_postReplyBody0",
 			RuntimeVariables.replace("This is a second entr comment!"));
 		selenium.type("_33_postReplyBody0",
