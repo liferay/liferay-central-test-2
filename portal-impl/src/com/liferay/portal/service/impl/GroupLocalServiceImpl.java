@@ -32,6 +32,9 @@ import com.liferay.portal.PortalException;
 import com.liferay.portal.RequiredGroupException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.lar.PortletDataHandlerKeys;
+import com.liferay.portal.kernel.messaging.DestinationNames;
+import com.liferay.portal.kernel.scheduler.SchedulerEngineUtil;
+import com.liferay.portal.kernel.scheduler.messaging.SchedulerRequest;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.kernel.util.StringPool;
@@ -61,6 +64,7 @@ import com.liferay.portal.util.PropsKeys;
 import com.liferay.portal.util.PropsUtil;
 import com.liferay.portal.util.PropsValues;
 import com.liferay.portal.util.comparator.GroupNameComparator;
+import com.liferay.portlet.communities.util.StagingUtil;
 import com.liferay.util.Normalizer;
 
 import java.io.File;
@@ -80,6 +84,7 @@ import org.apache.commons.logging.LogFactory;
  *
  * @author Brian Wing Shun Chan
  * @author Alexander Chow
+ * @author Bruno Farache
  *
  */
 public class GroupLocalServiceImpl extends GroupLocalServiceBaseImpl {
@@ -283,6 +288,10 @@ public class GroupLocalServiceImpl extends GroupLocalServiceBaseImpl {
 
 		membershipRequestLocalService.deleteMembershipRequests(
 			group.getGroupId());
+
+		// Scheduled staging
+
+		unscheduleStaging(group);
 
 		// Blogs
 
@@ -811,6 +820,69 @@ public class GroupLocalServiceImpl extends GroupLocalServiceBaseImpl {
 					_log.debug("Using public LAR file " + publicLARFileName);
 				}
 			}
+		}
+	}
+
+	protected void unscheduleStaging(Group group) {
+		try {
+			// Remote publishing
+
+			String groupName = StagingUtil.getSchedulerGroupName(
+				DestinationNames.LAYOUTS_REMOTE_PUBLISHER, group.getGroupId());
+
+			List<SchedulerRequest> schedulerRequests =
+				SchedulerEngineUtil.getScheduledJobs(groupName);
+
+			for (SchedulerRequest schedulerRequest : schedulerRequests) {
+				SchedulerEngineUtil.unschedule(
+					schedulerRequest.getJobName(), groupName);
+			}
+
+			long liveGroupId = 0;
+			long stagingGroupId = 0;
+
+			if (group.isStagingGroup()) {
+				liveGroupId = group.getLiveGroupId();
+
+				stagingGroupId = group.getGroupId();
+			}
+			else if (group.hasStagingGroup()) {
+				liveGroupId = group.getGroupId();
+
+				stagingGroupId = group.getStagingGroup().getGroupId();
+			}
+
+			if (liveGroupId != 0 && stagingGroupId != 0) {
+				// Publish to live
+
+				groupName = StagingUtil.getSchedulerGroupName(
+					DestinationNames.LAYOUTS_LOCAL_PUBLISHER, liveGroupId);
+
+				schedulerRequests = SchedulerEngineUtil.getScheduledJobs(
+					groupName);
+
+				for (SchedulerRequest schedulerRequest : schedulerRequests) {
+					SchedulerEngineUtil.unschedule(
+						schedulerRequest.getJobName(), groupName);
+				}
+
+				// Copy from live
+
+				groupName = StagingUtil.getSchedulerGroupName(
+					DestinationNames.LAYOUTS_LOCAL_PUBLISHER, stagingGroupId);
+
+				schedulerRequests = SchedulerEngineUtil.getScheduledJobs(
+					groupName);
+
+				for (SchedulerRequest schedulerRequest : schedulerRequests) {
+					SchedulerEngineUtil.unschedule(
+						schedulerRequest.getJobName(), groupName);
+				}
+			}
+		}
+		catch (Exception e) {
+			_log.error(
+				"Unable to unschedule events for group:" + group.getName());
 		}
 	}
 
