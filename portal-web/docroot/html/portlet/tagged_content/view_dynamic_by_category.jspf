@@ -80,14 +80,30 @@ for (TagsAsset asset : assets) {
 
 Iterator<Map.Entry<String, List<TagsAsset>>> itr = assetsByCategory.entrySet().iterator();
 
-if (!themeDisplay.isSignedIn() && !itr.hasNext()) {
+if (!itr.hasNext()) {
+	if (!themeDisplay.isSignedIn()) {
 %>
-
 	<style type="text/css">
-		#portlet-id-<%=portletDisplay.getId() %> { display: none; }
+		#p_p_id_<%=portletDisplay.getId() %>_ {
+			display: none; 
+		}
 	</style>
-
 <%
+	}
+	else {
+%>
+	<style type="text/css">
+		#p_p_id_<%=portletDisplay.getId() %>_ {
+			opacity: 0.4;
+		}
+
+		.ie #p_p_id_<%=portletDisplay.getId() %>_ {
+			filter: alpha(opacity=40);
+			zoom: 1;
+		}
+	</style>
+<%	
+	}
 }
 
 while (itr.hasNext()) {

@@ -3282,6 +3282,7 @@ this-page-has-no-links=このページにリンクがない。
 this-page-is-currently-redirected-to-x=This page is currently redirected to {0}.
 this-page-is-empty-edit-it-to-add-some-text=このページは空である。テキストを加えるためにそれを編集しなさい。
 this-page-is-part-of-an-inactive-portlet=このページは不活性portlet の部分である。
+this-portlet-has-no-results=このportletに結果がない。
 this-portlet-has-not-been-added-to-the-live-page-publish-the-page-first=このportlet は生きているページに加えられなかった。ページ第1 出版しなさい。
 this-portlet-is-inactive=このportlet は不活性である。
 this-portlet-is-placed-in-a-page-that-does-not-exist-in-the-live-site-publish-the-page-first=このportlet は生きている場所にないページに置かれる。ページ第1 出版しなさい。

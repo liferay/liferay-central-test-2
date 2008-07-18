@@ -3282,6 +3282,7 @@ this-page-has-no-links=這頁沒有鏈接。
 this-page-is-currently-redirected-to-x=This page is currently redirected to {0}.
 this-page-is-empty-edit-it-to-add-some-text=這頁是空的。編輯它增加一些文本。
 this-page-is-part-of-an-inactive-portlet=這頁是一不活動中portlet 的一部分。
+this-portlet-has-no-results=這portlet沒有結果。
 this-portlet-has-not-been-added-to-the-live-page-publish-the-page-first=這portlet 未增加來活頁。出版頁第一。
 this-portlet-is-inactive=這portlet 是不活動中。
 this-portlet-is-placed-in-a-page-that-does-not-exist-in-the-live-site-publish-the-page-first=這portlet 被安置在不存在在活站點的頁。出版頁第一。

@@ -38,6 +38,35 @@ searchContainer.setResults(results);
 
 request.setAttribute("view.jsp-results", results);
 
+if (results.size() <= 0) {
+	if (!themeDisplay.isSignedIn()) {
+%>
+	<style type="text/css">
+		#p_p_id_<%=portletDisplay.getId() %>_ {
+			display: none;
+		}
+	</style>
+<%
+	}
+	else {
+%>
+	<liferay-ui:message key="this-portlet-has-no-results" />
+
+	<style type="text/css">
+		#p_p_id_<%=portletDisplay.getId() %>_ {
+			opacity: 0.4;
+
+		}
+
+		.ie #p_p_id_<%=portletDisplay.getId() %>_ {
+			filter: alpha(opacity=40);
+			zoom: 1;
+		}
+	</style>
+<%	
+	}
+}
+
 for (int assetIndex = 0; assetIndex < results.size(); assetIndex++) {
 	TagsAsset asset = (TagsAsset)results.get(assetIndex);
 

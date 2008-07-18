@@ -3282,6 +3282,7 @@ this-page-has-no-links=Diese Seite hat keine Links.
 this-page-is-currently-redirected-to-x=Diese Seite wird weitergeleitet nach {0}.
 this-page-is-empty-edit-it-to-add-some-text=Dies Seite ist leer. Bearbeiten Sie die Seite um Text einzufügen.
 this-page-is-part-of-an-inactive-portlet=Diese Seite ist Teil eines inaktiven Portlets.
+this-portlet-has-no-results=Dieses portlet hat keine Resultate.
 this-portlet-has-not-been-added-to-the-live-page-publish-the-page-first=Dieses Portlet wurde nicht zur Live-Site hinzugefügt. Veröffentlichen Sie diese Seite zuerst.
 this-portlet-is-inactive=Dieses Portlet ist inaktiv.
 this-portlet-is-placed-in-a-page-that-does-not-exist-in-the-live-site-publish-the-page-first=Dieses Portlet wurde in eine Seite eingefügt, die nicht in der Live-Site existiert. Veröffentlichen Sie die Seite zuerst.
