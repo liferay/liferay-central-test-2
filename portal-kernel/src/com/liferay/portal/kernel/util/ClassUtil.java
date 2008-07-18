@@ -36,6 +36,7 @@ import java.util.Set;
  * <a href="ClassUtil.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
+ * @author Sandeep Soni
  *
  */
 public class ClassUtil {
@@ -58,15 +59,18 @@ public class ClassUtil {
 		StreamTokenizer st = new StreamTokenizer(new BufferedReader(reader));
 
 		_setupParseTable(st);
+
 		st.wordChars('@', '@');
 
 		while (st.nextToken() != StreamTokenizer.TT_EOF) {
 			if (st.ttype == StreamTokenizer.TT_WORD) {
 				if (st.sval.equals("class") || st.sval.equals("interface")) {
 					break;
-				} else if (st.sval.startsWith("@")) {
-						String token = StringUtil.replace(st.sval, '@', "");
-						classes.add(token);
+				}
+				else if (st.sval.startsWith("@")) {
+					String token = StringUtil.replace(st.sval, '@', "");
+
+					classes.add(token);
 				}
 			}
 		}
