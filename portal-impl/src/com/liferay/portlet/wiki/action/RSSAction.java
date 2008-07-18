@@ -32,7 +32,9 @@ import com.liferay.portal.struts.ActionConstants;
 import com.liferay.portal.struts.PortletAction;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.PortalUtil;
+import com.liferay.portal.util.PortletKeys;
 import com.liferay.portal.util.WebKeys;
+import com.liferay.portlet.PortletURLFactory;
 import com.liferay.portlet.wiki.service.WikiPageServiceUtil;
 import com.liferay.util.RSSUtil;
 import com.liferay.util.servlet.ServletResponseUtil;
@@ -42,6 +44,9 @@ import java.util.Locale;
 import javax.portlet.ActionRequest;
 import javax.portlet.ActionResponse;
 import javax.portlet.PortletConfig;
+import javax.portlet.PortletRequest;
+import javax.portlet.PortletResponse;
+import javax.portlet.PortletURL;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -115,12 +120,17 @@ public class RSSAction extends PortletAction {
 		String displayStyle = ParamUtil.getString(
 			request, "displayStyle", RSSUtil.DISPLAY_STYLE_FULL_CONTENT);
 
-		String feedURL =
-			themeDisplay.getURLPortal() +
-				PortalUtil.getLayoutURL(layout, themeDisplay) + "/wiki/" +
-					nodeId;
+		PortletURL feedURL = PortletURLFactory.getInstance().create(
+			request, PortletKeys.WIKI, layout.getPlid(),
+			PortletRequest.RENDER_PHASE);
 
-		String entryURL = feedURL + StringPool.SLASH + title;
+		feedURL.setParameter("nodeId", String.valueOf(nodeId));
+
+		String feedUrlStr = feedURL.toString();
+
+		feedURL.setParameter("title", title);
+
+		String entryURL = feedURL.toString();
 
 		Locale locale = themeDisplay.getLocale();
 
@@ -129,11 +139,12 @@ public class RSSAction extends PortletAction {
 		if ((nodeId > 0) && (Validator.isNotNull(title))) {
 			rss = WikiPageServiceUtil.getPagesRSS(
 				companyId, nodeId, title, max, type, version, displayStyle,
-				feedURL, entryURL, locale);
+				feedUrlStr, entryURL, locale);
 		}
 		else if (nodeId > 0) {
 			rss = WikiPageServiceUtil.getNodePagesRSS(
-				nodeId, max, type, version, displayStyle, feedURL, entryURL);
+				nodeId, max, type, version, displayStyle, feedUrlStr,
+				entryURL);
 		}
 
 		return rss.getBytes(StringPool.UTF8);
