@@ -41,7 +41,7 @@ public class AddPortletTest extends BaseTestCase {
 
 			try {
 				if (selenium.isElementPresent(
-							"//div[@id=&quot;Religion-Christianity-GlobalPrayerDigest&quot;]")) {
+							"//div[@id=\"Religion-Christianity-GlobalPrayerDigest\"]")) {
 					break;
 				}
 			}
@@ -52,7 +52,7 @@ public class AddPortletTest extends BaseTestCase {
 		}
 
 		selenium.click(
-			"//div[@id=&quot;Religion-Christianity-GlobalPrayerDigest&quot;]/p/a");
+			"//div[@id=\"Religion-Christianity-GlobalPrayerDigest\"]/p/a");
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
