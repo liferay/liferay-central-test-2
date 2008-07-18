@@ -287,12 +287,10 @@ public class EditServerAction extends PortletAction {
 		throws Exception {
 
 		boolean enabled = ParamUtil.getBoolean(actionRequest, "enabled");
-		String host = ParamUtil.getString(actionRequest, "host");
 		int port = ParamUtil.getInteger(actionRequest, "port");
 
 		prefs.setValue(
 			PropsKeys.OPENOFFICE_SERVER_ENABLED, String.valueOf(enabled));
-		prefs.setValue(PropsKeys.OPENOFFICE_SERVER_HOST, host);
 		prefs.setValue(PropsKeys.OPENOFFICE_SERVER_PORT, String.valueOf(port));
 
 		prefs.store();

@@ -1328,6 +1328,8 @@
 			<forward name="portlet.message_boards.error" path="portlet.wiki.error" />
 		</action>
 
+		<action path="/wiki/export_page" type="com.liferay.portlet.wiki.action.ExportPageAction" />
+
 		<action path="/wiki/find_page" type="com.liferay.portlet.wiki.action.FindPageAction" />
 
 		<action path="/wiki/get_page_attachment" type="com.liferay.portlet.wiki.action.GetPageAttachmentAction" />
@@ -1423,6 +1425,8 @@
 		<action path="/wiki_display/edit_page_discussion" type="com.liferay.portlet.messageboards.action.EditDiscussionAction">
 			<forward name="portlet.message_boards.error" path="portlet.wiki.error" />
 		</action>
+
+		<action path="/wiki_display/export_page" type="com.liferay.portlet.wiki.action.ExportPageAction" />
 
 		<action path="/wiki_display/get_page_attachment" type="com.liferay.portlet.wiki.action.GetPageAttachmentAction" />
 

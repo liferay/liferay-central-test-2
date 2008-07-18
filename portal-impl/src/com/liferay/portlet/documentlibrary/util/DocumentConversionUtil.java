@@ -28,7 +28,7 @@ import com.artofsolving.jodconverter.DocumentFormat;
 import com.artofsolving.jodconverter.DocumentFormatRegistry;
 import com.artofsolving.jodconverter.openoffice.connection.OpenOfficeConnection;
 import com.artofsolving.jodconverter.openoffice.connection.SocketOpenOfficeConnection;
-import com.artofsolving.jodconverter.openoffice.converter.StreamOpenOfficeDocumentConverter;
+import com.artofsolving.jodconverter.openoffice.converter.OpenOfficeDocumentConverter;
 
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
@@ -67,6 +67,10 @@ public class DocumentConversionUtil {
 		return _instance._convert(id, is, sourceExtension, targetExtension);
 	}
 
+	public static void disconnect() {
+		_instance._disconnect();
+	}
+
 	public static String[] getConversions(String extension) {
 		return _instance._getConversions(extension);
 	}
@@ -96,11 +100,19 @@ public class DocumentConversionUtil {
 		_conversionsMap.put("xls", _SPREADSHEET_CONVERSIONS);
 
 		_conversionsMap.put("doc", _TEXT_CONVERSIONS);
+		_conversionsMap.put("htm", _TEXT_CONVERSIONS);
+		_conversionsMap.put("html", _TEXT_CONVERSIONS);
 		_conversionsMap.put("odt", _TEXT_CONVERSIONS);
 		_conversionsMap.put("rtf", _TEXT_CONVERSIONS);
 		_conversionsMap.put("sxw", _TEXT_CONVERSIONS);
 		_conversionsMap.put("txt", _TEXT_CONVERSIONS);
 		_conversionsMap.put("wpd", _TEXT_CONVERSIONS);
+	}
+
+	private void _disconnect() {
+		if (_connection != null) {
+			_connection.disconnect();
+		}
 	}
 
 	private InputStream _convert(
@@ -132,6 +144,10 @@ public class DocumentConversionUtil {
 				new DefaultDocumentFormatRegistry();
 
 			DocumentConverter converter = _getConverter(registry);
+
+			if (sourceExtension.equals("htm")) {
+				sourceExtension = "html";
+			}
 
 			DocumentFormat inputFormat = registry.getFormatByFileExtension(
 				sourceExtension);
@@ -178,15 +194,12 @@ public class DocumentConversionUtil {
 		throws PortalException, SystemException {
 
 		if ((_connection == null) || (_converter == null)) {
-			String host = PrefsPropsUtil.getString(
-				PropsKeys.OPENOFFICE_SERVER_HOST,
-				PropsValues.OPENOFFICE_SERVER_HOST);
 			int port = PrefsPropsUtil.getInteger(
 				PropsKeys.OPENOFFICE_SERVER_PORT,
 				PropsValues.OPENOFFICE_SERVER_PORT);
 
-			_connection = new SocketOpenOfficeConnection(host, port);
-			_converter = new StreamOpenOfficeDocumentConverter(_connection);
+			_connection = new SocketOpenOfficeConnection(port);
+			_converter = new OpenOfficeDocumentConverter(_connection);
 		}
 
 		return _converter;

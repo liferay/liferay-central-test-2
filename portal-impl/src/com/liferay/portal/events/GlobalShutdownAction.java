@@ -38,6 +38,7 @@ import com.liferay.portal.pop.POPServerUtil;
 import com.liferay.portal.util.PropsKeys;
 import com.liferay.portal.util.PropsUtil;
 import com.liferay.portal.util.PropsValues;
+import com.liferay.portlet.documentlibrary.util.DocumentConversionUtil;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -105,6 +106,10 @@ public class GlobalShutdownAction extends SimpleAction {
 		}
 		catch (Exception e) {
 		}
+
+		// OpenOffice
+
+		DocumentConversionUtil.disconnect();
 
 		// POP server
 

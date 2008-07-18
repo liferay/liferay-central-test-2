@@ -795,8 +795,6 @@ public class PropsKeys {
 
 	public static final String OPENOFFICE_SERVER_ENABLED = "openoffice.server.enabled";
 
-	public static final String OPENOFFICE_SERVER_HOST = "openoffice.server.host";
-
 	public static final String OPENOFFICE_SERVER_PORT = "openoffice.server.port";
 
 	public static final String ORGANIZATIONS_COUNTRY_REQUIRED = "organizations.country.required";
