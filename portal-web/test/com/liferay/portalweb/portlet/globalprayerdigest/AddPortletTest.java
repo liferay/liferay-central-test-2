@@ -41,7 +41,7 @@ public class AddPortletTest extends BaseTestCase {
 
 			try {
 				if (selenium.isElementPresent(
-							"//div[@id=\"Religion-Christianity-GlobalPrayerDigest\"]")) {
+							"//div[@id=&quot;Religion-Christianity-GlobalPrayerDigest&quot;]")) {
 					break;
 				}
 			}
@@ -52,7 +52,38 @@ public class AddPortletTest extends BaseTestCase {
 		}
 
 		selenium.click(
-			"//div[@id=\"Religion-Christianity-GlobalPrayerDigest\"]/p/a");
-		verifyTrue(selenium.isTextPresent("Global Prayer Digest"));
+			"//div[@id=&quot;Religion-Christianity-GlobalPrayerDigest&quot;]/p/a");
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isTextPresent("Global Prayer Digest")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isElementPresent("//img[@alt='Configuration']")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
 	}
 }
