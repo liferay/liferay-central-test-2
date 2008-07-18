@@ -22,7 +22,10 @@
 
 package com.liferay.portalweb.portal.util;
 
+import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.util.ContextReplace;
+
+import java.io.File;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -48,6 +51,15 @@ public class RuntimeVariables {
 	}
 
 	private RuntimeVariables() {
+		File file = new File(StringPool.PERIOD);
+
+		String absolutePath = file.getAbsolutePath();
+
+		if (absolutePath.endsWith(StringPool.PERIOD)) {
+			absolutePath = absolutePath.substring(0, absolutePath.length() - 1);
+
+			_sourceDir = absolutePath;
+		}
 	}
 
 	private String _getValue(String key) {
@@ -55,6 +67,8 @@ public class RuntimeVariables {
 	}
 
 	private String _replace(String text) {
+		text = StringUtil.replace(text, "L:\\portal\\build\\", _sourceDir);
+
 		if (_contextReplace == null) {
 			return text;
 		}
@@ -71,6 +85,7 @@ public class RuntimeVariables {
 
 	private static RuntimeVariables _instance = new RuntimeVariables();
 
+	private String _sourceDir;
 	private ContextReplace _contextReplace;
 	private Map<String, String> _runtimeVariables =
 		new HashMap<String, String>();
