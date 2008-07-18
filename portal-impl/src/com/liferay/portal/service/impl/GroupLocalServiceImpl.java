@@ -825,6 +825,7 @@ public class GroupLocalServiceImpl extends GroupLocalServiceBaseImpl {
 
 	protected void unscheduleStaging(Group group) {
 		try {
+
 			// Remote publishing
 
 			String groupName = StagingUtil.getSchedulerGroupName(
@@ -852,7 +853,8 @@ public class GroupLocalServiceImpl extends GroupLocalServiceBaseImpl {
 				stagingGroupId = group.getStagingGroup().getGroupId();
 			}
 
-			if (liveGroupId != 0 && stagingGroupId != 0) {
+			if ((liveGroupId != 0) && (stagingGroupId != 0)) {
+
 				// Publish to live
 
 				groupName = StagingUtil.getSchedulerGroupName(
@@ -882,7 +884,7 @@ public class GroupLocalServiceImpl extends GroupLocalServiceBaseImpl {
 		}
 		catch (Exception e) {
 			_log.error(
-				"Unable to unschedule events for group:" + group.getName());
+				"Unable to unschedule events for group: " + group.getGroupId());
 		}
 	}
 
