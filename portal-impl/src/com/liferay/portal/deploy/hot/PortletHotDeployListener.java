@@ -275,12 +275,6 @@ public class PortletHotDeployListener extends BaseHotDeployListener {
 
 		processPortletProperties(servletContextName, portletClassLoader);
 
-		// Service builder properties
-
-		_processServiceBuilderProperties = false;
-
-		processServiceBuilderProperties(servletContext, portletClassLoader);
-
 		// Variables
 
 		_vars.put(
@@ -344,10 +338,6 @@ public class PortletHotDeployListener extends BaseHotDeployListener {
 		}
 
 		PortletResourceBundles.remove(servletContextName);
-
-		if (_processServiceBuilderProperties) {
-			CacheRegistry.clear();
-		}
 
 		if (_log.isInfoEnabled()) {
 			_log.info(
@@ -681,60 +671,11 @@ public class PortletHotDeployListener extends BaseHotDeployListener {
 		}
 	}
 
-	protected void processServiceBuilderProperties(
-			ServletContext servletContext, ClassLoader portletClassLoader)
-		throws Exception {
-
-		Configuration serviceBuilderPropertiesConfiguration = null;
-
-		try {
-			serviceBuilderPropertiesConfiguration =
-				ConfigurationFactoryUtil.getConfiguration(
-					portletClassLoader, "service");
-		}
-		catch (Exception e) {
-			if (_log.isDebugEnabled()) {
-				_log.debug("Unable to read service.properties");
-			}
-		}
-
-		if (serviceBuilderPropertiesConfiguration == null) {
-			return;
-		}
-
-		Properties serviceBuilderProperties =
-			serviceBuilderPropertiesConfiguration.getProperties();
-
-		if (serviceBuilderProperties.size() == 0) {
-			return;
-		}
-
-		String buildNamespace = GetterUtil.getString(
-			serviceBuilderProperties.getProperty("build.namespace"));
-		long buildNumber = GetterUtil.getLong(
-			serviceBuilderProperties.getProperty("build.number"));
-		long buildDate = GetterUtil.getLong(
-			serviceBuilderProperties.getProperty("build.date"));
-
-		if (_log.isDebugEnabled()) {
-			_log.debug("Build namespace " + buildNamespace);
-			_log.debug("Build number " + buildNumber);
-			_log.debug("Build date " + buildDate);
-		}
-
-		ServiceComponentLocalServiceUtil.updateServiceComponent(
-			servletContext, portletClassLoader, buildNamespace, buildNumber,
-			buildDate);
-
-		_processServiceBuilderProperties = true;
-	}
-
 	private static Log _log = LogFactory.getLog(PortletHotDeployListener.class);
 
 	private static Map<String, ObjectValuePair<long[], List<Portlet>>> _vars =
 		new HashMap<String, ObjectValuePair<long[], List<Portlet>>>();
 
 	private boolean _strutsBridges;
-	private boolean _processServiceBuilderProperties;
 
 }

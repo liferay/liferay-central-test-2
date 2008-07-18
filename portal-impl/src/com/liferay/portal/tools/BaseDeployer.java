@@ -868,6 +868,9 @@ public class BaseDeployer {
 			sb.append("</jsp-config>");
 		}
 
+		sb.append("<listener><listener-class>" +
+				"com.liferay.portal.kernel.servlet.PortletContextListener"+
+					"</listener-class></listener>");
 		return sb.toString();
 	}
 

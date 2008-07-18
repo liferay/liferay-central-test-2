@@ -121,13 +121,6 @@ public class PortletDeployer extends BaseDeployer {
 		String extraContent = super.getExtraContent(
 			webXmlVersion, srcFile, displayName);
 
-		extraContent +=
-			"<listener>" +
-			"<listener-class>" +
-			"com.liferay.portal.kernel.servlet.PortletContextListener" +
-			"</listener-class>" +
-			"</listener>";
-
 		File facesXML = new File(srcFile + "/WEB-INF/faces-config.xml");
 		File portletXML = new File(
 			srcFile + "/WEB-INF/" + Portal.PORTLET_XML_FILE_NAME_STANDARD);

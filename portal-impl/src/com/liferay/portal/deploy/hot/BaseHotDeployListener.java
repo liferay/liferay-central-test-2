@@ -25,8 +25,17 @@ package com.liferay.portal.deploy.hot;
 import com.liferay.portal.kernel.deploy.hot.HotDeployEvent;
 import com.liferay.portal.kernel.deploy.hot.HotDeployException;
 import com.liferay.portal.kernel.deploy.hot.HotDeployListener;
+import com.liferay.portal.kernel.configuration.Configuration;
+import com.liferay.portal.kernel.configuration.ConfigurationFactoryUtil;
+import com.liferay.portal.kernel.util.GetterUtil;
+import com.liferay.portal.service.ServiceComponentLocalServiceUtil;
 
 import javax.servlet.ServletContext;
+
+import java.util.Properties;
+
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 
 /**
  * <a href="BaseHotDeployListener.java.html"><b><i>View Source</i></b></a>
@@ -46,5 +55,57 @@ public abstract class BaseHotDeployListener implements HotDeployListener {
 
 		throw new HotDeployException(msg + servletContextName, e);
 	}
+
+	protected void processServiceBuilderProperties(
+			ServletContext servletContext, ClassLoader portletClassLoader)
+		throws Exception {
+
+		Configuration serviceBuilderPropertiesConfiguration = null;
+
+		try {
+			serviceBuilderPropertiesConfiguration =
+				ConfigurationFactoryUtil.getConfiguration(
+					portletClassLoader, "service");
+		}
+		catch (Exception e) {
+			if (_log.isDebugEnabled()) {
+				_log.debug("Unable to read service.properties");
+			}
+		}
+
+		if (serviceBuilderPropertiesConfiguration == null) {
+			return;
+		}
+
+		Properties serviceBuilderProperties =
+			serviceBuilderPropertiesConfiguration.getProperties();
+
+		if (serviceBuilderProperties.size() == 0) {
+			return;
+		}
+
+		String buildNamespace = GetterUtil.getString(
+			serviceBuilderProperties.getProperty("build.namespace"));
+		long buildNumber = GetterUtil.getLong(
+			serviceBuilderProperties.getProperty("build.number"));
+		long buildDate = GetterUtil.getLong(
+			serviceBuilderProperties.getProperty("build.date"));
+
+		if (_log.isDebugEnabled()) {
+			_log.debug("Build namespace " + buildNamespace);
+			_log.debug("Build number " + buildNumber);
+			_log.debug("Build date " + buildDate);
+		}
+
+		ServiceComponentLocalServiceUtil.updateServiceComponent(
+			servletContext, portletClassLoader, buildNamespace, buildNumber,
+			buildDate);
+
+		_processServiceBuilderProperties = true;
+	}
+
+	private static Log _log =
+		LogFactory.getLog(PluginPackageHotDeployListener.class);
+	protected boolean _processServiceBuilderProperties;
 
 }

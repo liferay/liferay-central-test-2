@@ -22,6 +22,7 @@
 
 package com.liferay.portal.deploy.hot;
 
+import com.liferay.portal.kernel.cache.CacheRegistry;
 import com.liferay.portal.kernel.deploy.hot.HotDeployEvent;
 import com.liferay.portal.kernel.deploy.hot.HotDeployException;
 import com.liferay.portal.kernel.plugin.PluginPackage;
@@ -31,6 +32,8 @@ import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.plugin.PluginPackageImpl;
 import com.liferay.portal.plugin.PluginPackageUtil;
+import com.liferay.portal.util.Portal;
+
 import com.liferay.util.Version;
 
 import java.io.IOException;
@@ -184,6 +187,8 @@ public class PluginPackageHotDeployListener extends BaseHotDeployListener {
 
 		String servletContextName = servletContext.getServletContextName();
 
+		ClassLoader pluginClassLoader = event.getContextClassLoader();
+
 		if (_log.isDebugEnabled()) {
 			_log.debug("Invoking deploy for " + servletContextName);
 		}
@@ -211,6 +216,17 @@ public class PluginPackageHotDeployListener extends BaseHotDeployListener {
 				"Plugin package " + pluginPackage.getModuleId() +
 					" registered successfully");
 		}
+
+		// Service builder properties
+
+		_processServiceBuilderProperties = false;
+
+		String serviceXml = HttpUtil.URLtoString(servletContext.getResource(
+				"/WEB-INF/" + Portal.SERVICE_XML_FILE_NAME_STANDARD));
+		if(serviceXml != null){
+		processServiceBuilderProperties(servletContext, pluginClassLoader);
+		}
+
 	}
 
 	protected void doInvokeUndeploy(HotDeployEvent event) throws Exception {
@@ -236,6 +252,10 @@ public class PluginPackageHotDeployListener extends BaseHotDeployListener {
 			_log.info(
 				"Plugin package " + pluginPackage.getModuleId() +
 					" unregistered successfully");
+		}
+
+		if (_processServiceBuilderProperties) {
+			CacheRegistry.clear();
 		}
 	}
 
