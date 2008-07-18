@@ -789,6 +789,12 @@ public class BaseDeployer {
 		sb.append(displayName);
 		sb.append("</display-name>");
 
+		sb.append("<listener>");
+		sb.append("<listener-class>");
+		sb.append("com.liferay.portal.kernel.servlet.PortletContextListener");
+		sb.append("</listener-class>");
+		sb.append("</listener>");
+
 		boolean hasTaglib = false;
 
 		if (Validator.isNotNull(portletTaglibDTD) ||
@@ -868,9 +874,6 @@ public class BaseDeployer {
 			sb.append("</jsp-config>");
 		}
 
-		sb.append("<listener><listener-class>" +
-				"com.liferay.portal.kernel.servlet.PortletContextListener"+
-					"</listener-class></listener>");
 		return sb.toString();
 	}
 

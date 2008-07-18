@@ -23,7 +23,6 @@
 package com.liferay.portal.deploy.hot;
 
 import com.liferay.portal.apache.bridges.struts.LiferayServletContextProvider;
-import com.liferay.portal.kernel.cache.CacheRegistry;
 import com.liferay.portal.kernel.configuration.Configuration;
 import com.liferay.portal.kernel.configuration.ConfigurationFactoryUtil;
 import com.liferay.portal.kernel.deploy.hot.HotDeployEvent;
@@ -54,7 +53,6 @@ import com.liferay.portal.model.PortletURLListener;
 import com.liferay.portal.pop.POPServerUtil;
 import com.liferay.portal.security.permission.ResourceActionsUtil;
 import com.liferay.portal.service.PortletLocalServiceUtil;
-import com.liferay.portal.service.ServiceComponentLocalServiceUtil;
 import com.liferay.portal.util.Portal;
 import com.liferay.portal.util.PortalInstances;
 import com.liferay.portal.util.PropsValues;

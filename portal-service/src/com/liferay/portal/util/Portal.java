@@ -76,8 +76,6 @@ public interface Portal {
 
 	public static final String PORTLET_XML_FILE_NAME_STANDARD = "portlet.xml";
 
-	public static final String SERVICE_XML_FILE_NAME_STANDARD = "service.xml";
-
 	public static final String PORTLET_XML_FILE_NAME_CUSTOM =
 		"portlet-custom.xml";
 

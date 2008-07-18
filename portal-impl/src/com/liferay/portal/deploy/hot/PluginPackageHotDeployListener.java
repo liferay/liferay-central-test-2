@@ -23,6 +23,8 @@
 package com.liferay.portal.deploy.hot;
 
 import com.liferay.portal.kernel.cache.CacheRegistry;
+import com.liferay.portal.kernel.configuration.Configuration;
+import com.liferay.portal.kernel.configuration.ConfigurationFactoryUtil;
 import com.liferay.portal.kernel.deploy.hot.HotDeployEvent;
 import com.liferay.portal.kernel.deploy.hot.HotDeployException;
 import com.liferay.portal.kernel.plugin.PluginPackage;
@@ -32,13 +34,13 @@ import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.plugin.PluginPackageImpl;
 import com.liferay.portal.plugin.PluginPackageUtil;
-import com.liferay.portal.util.Portal;
-
+import com.liferay.portal.service.ServiceComponentLocalServiceUtil;
 import com.liferay.util.Version;
 
 import java.io.IOException;
 import java.io.InputStream;
 
+import java.util.Properties;
 import java.util.jar.Attributes;
 import java.util.jar.Manifest;
 
@@ -187,8 +189,6 @@ public class PluginPackageHotDeployListener extends BaseHotDeployListener {
 
 		String servletContextName = servletContext.getServletContextName();
 
-		ClassLoader pluginClassLoader = event.getContextClassLoader();
-
 		if (_log.isDebugEnabled()) {
 			_log.debug("Invoking deploy for " + servletContextName);
 		}
@@ -211,22 +211,16 @@ public class PluginPackageHotDeployListener extends BaseHotDeployListener {
 
 		PluginPackageUtil.registerInstalledPluginPackage(pluginPackage);
 
+		_processServiceBuilderProperties = false;
+
+		processServiceBuilderProperties(
+			servletContext, event.getContextClassLoader());
+
 		if (_log.isInfoEnabled()) {
 			_log.info(
 				"Plugin package " + pluginPackage.getModuleId() +
 					" registered successfully");
 		}
-
-		// Service builder properties
-
-		_processServiceBuilderProperties = false;
-
-		String serviceXml = HttpUtil.URLtoString(servletContext.getResource(
-				"/WEB-INF/" + Portal.SERVICE_XML_FILE_NAME_STANDARD));
-		if(serviceXml != null){
-		processServiceBuilderProperties(servletContext, pluginClassLoader);
-		}
-
 	}
 
 	protected void doInvokeUndeploy(HotDeployEvent event) throws Exception {
@@ -248,18 +242,68 @@ public class PluginPackageHotDeployListener extends BaseHotDeployListener {
 
 		PluginPackageUtil.unregisterInstalledPluginPackage(pluginPackage);
 
+		if (_processServiceBuilderProperties) {
+			CacheRegistry.clear();
+		}
+
 		if (_log.isInfoEnabled()) {
 			_log.info(
 				"Plugin package " + pluginPackage.getModuleId() +
 					" unregistered successfully");
 		}
+	}
 
-		if (_processServiceBuilderProperties) {
-			CacheRegistry.clear();
+	protected void processServiceBuilderProperties(
+			ServletContext servletContext, ClassLoader classLoader)
+		throws Exception {
+
+		Configuration serviceBuilderPropertiesConfiguration = null;
+
+		try {
+			serviceBuilderPropertiesConfiguration =
+				ConfigurationFactoryUtil.getConfiguration(
+					classLoader, "service");
 		}
+		catch (Exception e) {
+			if (_log.isDebugEnabled()) {
+				_log.debug("Unable to read service.properties");
+			}
+		}
+
+		if (serviceBuilderPropertiesConfiguration == null) {
+			return;
+		}
+
+		Properties serviceBuilderProperties =
+			serviceBuilderPropertiesConfiguration.getProperties();
+
+		if (serviceBuilderProperties.size() == 0) {
+			return;
+		}
+
+		String buildNamespace = GetterUtil.getString(
+			serviceBuilderProperties.getProperty("build.namespace"));
+		long buildNumber = GetterUtil.getLong(
+			serviceBuilderProperties.getProperty("build.number"));
+		long buildDate = GetterUtil.getLong(
+			serviceBuilderProperties.getProperty("build.date"));
+
+		if (_log.isDebugEnabled()) {
+			_log.debug("Build namespace " + buildNamespace);
+			_log.debug("Build number " + buildNumber);
+			_log.debug("Build date " + buildDate);
+		}
+
+		ServiceComponentLocalServiceUtil.updateServiceComponent(
+			servletContext, classLoader, buildNamespace, buildNumber,
+			buildDate);
+
+		_processServiceBuilderProperties = true;
 	}
 
 	private static Log _log =
 		LogFactory.getLog(PluginPackageHotDeployListener.class);
+
+	private boolean _processServiceBuilderProperties;
 
 }
