@@ -136,10 +136,10 @@ public class ExportPageAction extends PortletAction {
 
 			String content = page.getContent();
 
-			String attachmentURLPrefix = themeDisplay.getPathMain() +
-				"/wiki/get_page_attachment?p_l_id=" + themeDisplay.getPlid() +
-					"&nodeId=" + nodeId + "&title=" +
-						HttpUtil.encodeURL(title) + "&fileName=";
+			String attachmentURLPrefix =
+				themeDisplay.getPathMain() + "/wiki/get_page_attachment?" +
+					"p_l_id=" + themeDisplay.getPlid() + "&nodeId=" + nodeId +
+						"&title=" + HttpUtil.encodeURL(title) + "&fileName=";
 
 			try {
 				content = WikiUtil.convert(
@@ -152,6 +152,7 @@ public class ExportPageAction extends PortletAction {
 			}
 
 			StringBuilder sb = new StringBuilder();
+
 			sb.append("<h1>");
 			sb.append(title);
 			sb.append("</h1>");
