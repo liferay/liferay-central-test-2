@@ -39,7 +39,7 @@
  * Copyright 2008 Sun Microsystems Inc. All rights reserved.
  */
 
-package com.liferay.portal.mirage.custom;
+package com.liferay.portal.mirage.service;
 
 import com.sun.portal.cms.mirage.service.custom.FeedService;
 import com.sun.syndication.feed.synd.SyndFeed;

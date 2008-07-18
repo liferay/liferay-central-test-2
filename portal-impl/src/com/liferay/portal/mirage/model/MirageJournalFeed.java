@@ -39,38 +39,42 @@
  * Copyright 2008 Sun Microsystems Inc. All rights reserved.
  */
 
-package com.liferay.portal.mirage.util;
+package com.liferay.portal.mirage.model;
 
-import java.lang.reflect.Method;
+import com.liferay.portlet.journal.model.JournalFeed;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
-
-import org.springframework.aop.AfterReturningAdvice;
-import org.springframework.aop.MethodBeforeAdvice;
+import com.sun.portal.cms.mirage.model.custom.ContentFeed;
 
 /**
- * <a href="MirageLoggingInterceptor.java.html"><b><i>View Source</i></b></a>
+ * <a href="MirageJournalFeed.java.html"><b><i>View Source</i></b></a>
  *
  * @author Karthik Sudarshan
+ * @author Brian Wing Shun Chan
+ *
  */
-public class MirageLoggingInterceptor
-		implements AfterReturningAdvice, MethodBeforeAdvice {
+public class MirageJournalFeed extends ContentFeed {
 
-	public void afterReturning(
-			Object returnValue, Method method, Object[] args, Object target)
-		throws Throwable {
-		_log.info("Exiting method : " + method.getName() +
-				" of class : " + method.getDeclaringClass().getName());
+	public MirageJournalFeed(JournalFeed feed) {
+		_feed = feed;
 	}
 
-	public void before(Method method, Object[] args, Object target)
-		throws Throwable {
-		_log.info("Entering method : " + method.getName() +
-				" of class : " + method.getDeclaringClass().getName());
+	public JournalFeed getFeed() {
+		return _feed;
 	}
 
-	private static final Log _log =
-		LogFactory.getLog(MirageLoggingInterceptor.class);
+	public void setFeed(JournalFeed feed) {
+		_feed = feed;
+	}
+
+	public boolean isAutoFeedId() {
+		return _autoFeedId;
+	}
+
+	public void setAutoFeedId(boolean autoFeedId) {
+		_autoFeedId = autoFeedId;
+	}
+
+	private JournalFeed _feed;
+	private boolean _autoFeedId;
 
 }

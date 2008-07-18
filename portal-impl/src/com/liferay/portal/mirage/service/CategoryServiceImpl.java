@@ -39,28 +39,50 @@
  * Copyright 2008 Sun Microsystems Inc. All rights reserved.
  */
 
-package com.liferay.portal.mirage.custom;
+package com.liferay.portal.mirage.service;
 
-import com.sun.portal.cms.mirage.model.custom.Content;
-import com.sun.portal.cms.mirage.service.custom.ContentViewService;
+import com.sun.portal.cms.mirage.model.custom.Category;
+import com.sun.portal.cms.mirage.model.custom.ContentType;
+import com.sun.portal.cms.mirage.service.custom.CategoryService;
 
 /**
- * <a href="ContentViewServiceImpl.java.html"><b><i>View Source</i></b></a>
+ * <a href="CategoryServiceImpl.java.html"><b><i>View Source</i></b></a>
  *
  * @author Jorge Ferrer
  * @author Prakash Reddy
  *
  */
-public class ContentViewServiceImpl implements ContentViewService {
+public class CategoryServiceImpl implements CategoryService {
 
-	public String getContentView(Content content, String appContextName) {
+	public void assignContentTypeToCategory(
+		ContentType contentType, Category category) {
+
 		throw new UnsupportedOperationException();
 	}
 
-	public String getContentView(
-		Content content, String version, String username,
-		String appContextName) {
+	public void assignSubCategoryToCategory(
+		Category subCategory, Category newParent) {
 
+		throw new UnsupportedOperationException();
+	}
+
+	public void createCategory(Category category) {
+		throw new UnsupportedOperationException();
+	}
+
+	public void deleteCategory(Category category) {
+		throw new UnsupportedOperationException();
+	}
+
+	public Category getCategory(Category category) {
+		throw new UnsupportedOperationException();
+	}
+
+	public Category getCategory(String selectedCategoryUUID) {
+		throw new UnsupportedOperationException();
+	}
+
+	public void updateCategory(Category category) {
 		throw new UnsupportedOperationException();
 	}
 

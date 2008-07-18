@@ -41,61 +41,64 @@
 
 package com.liferay.portal.mirage.model;
 
-import com.liferay.portlet.journal.model.JournalFeed;
+import com.sun.portal.cms.mirage.model.custom.OptionalCriteria;
 
-import com.sun.portal.cms.mirage.model.custom.ContentFeed;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
- * <a href="JournalContentFeed.java.html"><b><i>View Source</i></b></a>
+ * <a href="JournalFeedCriteria.java.html"><b><i>View Source</i></b></a>
  *
  * @author Karthik Sudarshan
+ * @author Brian Wing Shun Chan
  *
  */
-public class JournalContentFeed extends ContentFeed {
+public class JournalFeedCriteria implements OptionalCriteria {
 
-	public class CreationAttributes {
+	public static final String COMPANY_ID = "companyId";
 
-		public CreationAttributes(boolean autoCreateId) {
+	public static final String COUNT_BY_C_G_F_N_D = "countByC_G_F_N_D";
 
-			_autoCreateId = autoCreateId;
-		}
+	public static final String COUNT_BY_GROUP_ID = "countByGroupId";
 
-		public boolean isAutoCreateId() {
+	public static final String COUNT_BY_KEYWORDS = "countByKeywords";
 
-			return _autoCreateId;
-		}
+	public static final String DESCRIPTION = "description";
 
-		private boolean _autoCreateId;
+	public static final String END = "end";
 
+	public static final String FEED_ID = "feedId";
+
+	public static final String FIND_ALL = "findAll";
+
+	public static final String FIND_BY_C_G_F_N_D = "findByC_G_F_N_D";
+
+	public static final String FIND_BY_G_F = "findByG_F";
+
+	public static final String FIND_BY_GROUP_ID = "findByGroupId";
+
+	public static final String FIND_BY_KEYWORDS = "findByKeywords";
+
+	public static final String FIND_BY_PRIMARY_KEY = "findByPrimaryKey";
+
+	public static final String GROUP_ID = "groupId";
+
+	public static final String KEYWORDS = "keywords";
+
+	public static final String NAME = "name";
+
+	public static final String QUERY = "query";
+
+	public static final String START = "start";
+
+	public JournalFeedCriteria(String finder) {
+		_options.put(QUERY, finder);
 	}
 
-	public JournalContentFeed(JournalFeed feed) {
-
-		_feed = feed;
+	public Map<String, String> getOptions() {
+		return _options;
 	}
 
-	public JournalFeed getFeed() {
-
-		return _feed;
-	}
-
-	public void setFeed(JournalFeed feed) {
-
-		_feed = feed;
-	}
-
-	public JournalContentFeed.CreationAttributes getCreationAttributes() {
-
-		return _creationAttributes;
-	}
-
-	public void setCreationAttributes(
-		JournalContentFeed.CreationAttributes creationAttributes) {
-
-		_creationAttributes = creationAttributes;
-	}
-
-	private JournalFeed _feed;
-	private CreationAttributes _creationAttributes;
+	private Map<String, String> _options = new HashMap<String, String>();
 
 }

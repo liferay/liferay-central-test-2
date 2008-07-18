@@ -39,7 +39,7 @@
  * Copyright 2008 Sun Microsystems Inc. All rights reserved.
  */
 
-package com.liferay.portal.mirage.custom;
+package com.liferay.portal.mirage.service;
 
 import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
 
@@ -60,9 +60,8 @@ public class MirageServiceFactory {
 
 	public static CategoryService getCategoryService() {
 		if (_categoryService == null) {
-			_categoryService =
-				(CategoryService) PortalBeanLocatorUtil.locate(
-					_CATEGORY_SERVICE);
+			_categoryService = (CategoryService)PortalBeanLocatorUtil.locate(
+				_CATEGORY_SERVICE);
 		}
 
 		return _categoryService;
@@ -71,7 +70,7 @@ public class MirageServiceFactory {
 	public static ContentFeedService getContentFeedService() {
 		if (_contentFeedService == null) {
 			_contentFeedService =
-				(ContentFeedService) PortalBeanLocatorUtil.locate(
+				(ContentFeedService)PortalBeanLocatorUtil.locate(
 					_CONTENT_FEED_SERVICE);
 		}
 
@@ -80,8 +79,8 @@ public class MirageServiceFactory {
 
 	public static ContentService getContentService() {
 		if (_contentService == null) {
-			_contentService =
-				(ContentService) PortalBeanLocatorUtil.locate(_CONTENT_SERVICE);
+			_contentService = (ContentService)PortalBeanLocatorUtil.locate(
+				_CONTENT_SERVICE);
 		}
 
 		return _contentService;
@@ -90,7 +89,7 @@ public class MirageServiceFactory {
 	public static ContentTypeService getContentTypeService() {
 		if (_contentTypeService == null) {
 			_contentTypeService =
-				(ContentTypeService) PortalBeanLocatorUtil.locate(
+				(ContentTypeService)PortalBeanLocatorUtil.locate(
 					_CONTENT_TYPE_SERVICE);
 		}
 
@@ -99,8 +98,8 @@ public class MirageServiceFactory {
 
 	public static SearchService getSearchService() {
 		if (_searchService == null) {
-			_searchService =
-				(SearchService) PortalBeanLocatorUtil.locate(_SEARCH_SERVICE);
+			_searchService = (SearchService)PortalBeanLocatorUtil.locate(
+				_SEARCH_SERVICE);
 		}
 
 		return _searchService;
@@ -108,32 +107,41 @@ public class MirageServiceFactory {
 
 	public static WorkflowService getWorkflowService() {
 		if (_workflowService == null) {
-			_workflowService =
-				(WorkflowService) PortalBeanLocatorUtil.locate(
-					_WORKFLOW_SERVICE);
+			_workflowService = (WorkflowService)PortalBeanLocatorUtil.locate(
+				_WORKFLOW_SERVICE);
 		}
 
 		return _workflowService;
 	}
 
-	private static final String _CONTENT_TYPE_SERVICE =
-		"com.liferay.portal.mirage.ContentTypeService.proxy";
 	private static final String _CATEGORY_SERVICE =
-		"com.liferay.portal.mirage.CategoryService.proxy";
+		CategoryService.class.getName();
+
 	private static final String _CONTENT_FEED_SERVICE =
-		"com.liferay.portal.mirage.ContentFeedService.proxy";
+		ContentFeedService.class.getName();
+
 	private static final String _CONTENT_SERVICE =
-		"com.liferay.portal.mirage.ContentService.proxy";
+		ContentService.class.getName();
+
+	private static final String _CONTENT_TYPE_SERVICE =
+		ContentTypeService.class.getName();
+
 	private static final String _SEARCH_SERVICE =
-		"com.liferay.portal.mirage.SearchService.proxy";
+		SearchService.class.getName();
+
 	private static final String _WORKFLOW_SERVICE =
-		"com.liferay.portal.mirage.WorkflowService.proxy";
+		WorkflowService.class.getName();
+
+	private static CategoryService _categoryService;
+
+	private static ContentFeedService _contentFeedService;
+
+	private static ContentService _contentService;
 
 	private static ContentTypeService _contentTypeService;
-	private static CategoryService _categoryService;
-	private static ContentFeedService _contentFeedService;
-	private static ContentService _contentService;
+
 	private static SearchService _searchService;
+
 	private static WorkflowService _workflowService;
 
 }

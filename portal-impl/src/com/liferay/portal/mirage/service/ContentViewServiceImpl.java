@@ -39,54 +39,29 @@
  * Copyright 2008 Sun Microsystems Inc. All rights reserved.
  */
 
-package com.liferay.portal.mirage.model;
+package com.liferay.portal.mirage.service;
 
-import com.sun.portal.cms.mirage.model.custom.OptionalCriteria;
-
-import java.util.HashMap;
-import java.util.Map;
+import com.sun.portal.cms.mirage.model.custom.Content;
+import com.sun.portal.cms.mirage.service.custom.ContentViewService;
 
 /**
- * <a href="OptionalJournalFeedCriteria.java.html"><b><i>View Source</i></b></a>
+ * <a href="ContentViewServiceImpl.java.html"><b><i>View Source</i></b></a>
  *
- * @author Karthik Sudarshan
+ * @author Jorge Ferrer
+ * @author Prakash Reddy
  *
  */
-public class OptionalJournalFeedCriteria implements OptionalCriteria {
+public class ContentViewServiceImpl implements ContentViewService {
 
-	public OptionalJournalFeedCriteria(String finder) {
-
-		_options.put(FINDER, finder);
+	public String getContentView(Content content, String appContextName) {
+		throw new UnsupportedOperationException();
 	}
 
-	public Map<String, String> getOptions() {
+	public String getContentView(
+		Content content, String version, String username,
+		String appContextName) {
 
-		return _options;
+		throw new UnsupportedOperationException();
 	}
-
-	public static final String FIND_BY_PRIMARY_KEY = "findByPrimaryKey";
-	public static final String FIND_BY_G_F = "findByGF";
-	public static final String FIND_BY_GROUP = "findByGroup";
-	public static final String FIND_BY_GROUP_WITH_LIMIT =
-											"findByGroupWithLimit";
-	public static final String FIND_BY_GROUP_AND_KEYWORDS =
-											"findByGroupAndKeywords";
-	public static final String FIND_BY_GROUP_AND_FEED = "findByGroupAndFeed";
-	public static final String FIND_ALL = "findAll";
-	public static final String FINDER = "finder";
-	public static final String GROUP_ID = "groupId";
-	public static final String COMPANY_ID = "companyId";
-	public static final String FEED_ID = "feedId";
-	public static final String KEYWORDS = "keywords";
-	public static final String NAME = "name";
-	public static final String DESCRIPTION = "description";
-	public static final String RANGE_START = "rangeStart";
-	public static final String RANGE_END = "rangeEnd";
-	public static final String SEARCH_BY_GROUP_WITH_LIMIT =
-											"searchByGroupWithLimit";
-	public static final String SEARCH_BY_GROUP_AND_FEED_WITH_LIMIT =
-										"searchByGroupAndFeedWithLimit";
-
-	private Map<String, String> _options = new HashMap<String, String>();
 
 }

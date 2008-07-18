@@ -39,30 +39,45 @@
  * Copyright 2008 Sun Microsystems Inc. All rights reserved.
  */
 
-package com.liferay.portal.mirage.custom;
+package com.liferay.portal.mirage.service;
 
-import com.sun.portal.cms.mirage.model.custom.Content;
-import com.sun.portal.cms.mirage.model.custom.ContentType;
-import com.sun.portal.cms.mirage.model.search.SearchCriteria;
-import com.sun.portal.cms.mirage.service.custom.SearchService;
+import com.sun.portal.cms.mirage.model.core.User;
+import com.sun.portal.cms.mirage.service.custom.VersioningService;
 
-import java.util.List;
+import java.util.Collection;
+
+import javax.jcr.Node;
 
 /**
- * <a href="SearchServiceImpl.java.html"><b><i>View Source</i></b></a>
+ * <a href="VersioningServiceImpl.java.html"><b><i>View Source</i></b></a>
  *
+ * @author Jorge Ferrer
  * @author Prakash Reddy
- *
  */
-public class SearchServiceImpl implements SearchService {
+public class VersioningServiceImpl<VersionableContent>
+	implements VersioningService<VersionableContent> {
 
-	public List<Content> searchContents(
-		ContentType contentType, SearchCriteria searchCriteria) {
+	public void checkinNode(
+		Node node, User user, VersionableContent versionableContent) {
 
 		throw new UnsupportedOperationException();
 	}
 
-	public List<Content> searchContents(ContentType contentType, String name) {
+	public void checkoutNode(Node node, User user) {
+		throw new UnsupportedOperationException();
+	}
+
+	public Collection<VersionableContent> getAllVersions(Node node) {
+		throw new UnsupportedOperationException();
+	}
+
+	public void uncheckoutNode(Node node, User user) {
+		throw new UnsupportedOperationException();
+	}
+
+	public void updateNode(
+		Node node, User user, VersionableContent versionableContent) {
+
 		throw new UnsupportedOperationException();
 	}
 
