@@ -47,13 +47,13 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * <a href="JournalFeedCriteria.java.html"><b><i>View Source</i></b></a>
+ * <a href="MirageFeedCriteria.java.html"><b><i>View Source</i></b></a>
  *
  * @author Karthik Sudarshan
  * @author Brian Wing Shun Chan
  *
  */
-public class JournalFeedCriteria implements OptionalCriteria {
+public class MirageFeedCriteria implements OptionalCriteria {
 
 	public static final String COMPANY_ID = "companyId";
 
@@ -91,7 +91,7 @@ public class JournalFeedCriteria implements OptionalCriteria {
 
 	public static final String START = "start";
 
-	public JournalFeedCriteria(String finder) {
+	public MirageFeedCriteria(String finder) {
 		_options.put(QUERY, finder);
 	}
 

@@ -46,15 +46,15 @@ import com.liferay.portlet.journal.model.JournalFeed;
 import com.sun.portal.cms.mirage.model.custom.ContentFeed;
 
 /**
- * <a href="MirageJournalFeed.java.html"><b><i>View Source</i></b></a>
+ * <a href="MirageFeed.java.html"><b><i>View Source</i></b></a>
  *
  * @author Karthik Sudarshan
  * @author Brian Wing Shun Chan
  *
  */
-public class MirageJournalFeed extends ContentFeed {
+public class MirageFeed extends ContentFeed {
 
-	public MirageJournalFeed(JournalFeed feed) {
+	public MirageFeed(JournalFeed feed) {
 		_feed = feed;
 	}
 
