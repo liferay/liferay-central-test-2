@@ -349,7 +349,7 @@ public class ContentFeedServiceImpl implements ContentFeedService {
 			}
 
 			if (feeds == null) {
-				new ArrayList<ContentFeed>();
+				return new ArrayList<ContentFeed>();
 			}
 
 			List<ContentFeed> contentFeeds = new ArrayList<ContentFeed>(

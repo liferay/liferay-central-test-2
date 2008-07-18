@@ -115,22 +115,22 @@ public class MirageServiceFactory {
 	}
 
 	private static final String _CATEGORY_SERVICE =
-		CategoryService.class.getName();
+		"com.liferay.portal.mirage.CategoryService";
 
 	private static final String _CONTENT_FEED_SERVICE =
-		ContentFeedService.class.getName();
+		"com.liferay.portal.mirage.ContentFeedService";
 
 	private static final String _CONTENT_SERVICE =
-		ContentService.class.getName();
+		"com.liferay.portal.mirage.ContentService";
 
 	private static final String _CONTENT_TYPE_SERVICE =
-		ContentTypeService.class.getName();
+		"com.liferay.portal.mirage.ContentTypeService";
 
 	private static final String _SEARCH_SERVICE =
-		SearchService.class.getName();
+		"com.liferay.portal.mirage.SearchService";
 
 	private static final String _WORKFLOW_SERVICE =
-		WorkflowService.class.getName();
+		"com.liferay.portal.mirage.WorkflowService";
 
 	private static CategoryService _categoryService;
 
