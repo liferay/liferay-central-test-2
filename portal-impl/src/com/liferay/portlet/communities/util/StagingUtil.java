@@ -673,19 +673,14 @@ public class StagingUtil {
 	public static void unschedulePublishToRemote(ActionRequest actionRequest)
 		throws Exception {
 
-		long stagingGroupId = ParamUtil.getLong(
-			actionRequest, "stagingGroupId");
-
-		Group stagingGroup = GroupLocalServiceUtil.getGroup(stagingGroupId);
-
-		long liveGroupId = stagingGroup.getLiveGroupId();
+		long groupId = ParamUtil.getLong(actionRequest, "groupId");
 
 		String jobName = ParamUtil.getString(actionRequest, "jobName");
 		String groupName = getSchedulerGroupName(
-			DestinationNames.LAYOUTS_REMOTE_PUBLISHER, liveGroupId);
+			DestinationNames.LAYOUTS_REMOTE_PUBLISHER, groupId);
 
 		LayoutServiceUtil.unschedulePublishToRemote(
-			liveGroupId, jobName, groupName);
+			groupId, jobName, groupName);
 	}
 
 	public static void updateStaging(ActionRequest actionRequest)
