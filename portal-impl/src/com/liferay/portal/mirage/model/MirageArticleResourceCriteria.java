@@ -47,14 +47,16 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * <a href="JournalArticleResourceCriteria.java.html"><b><i>View Source
- * </i></b></a>
+ * <a href="MirageArticleResourceCriteria.java.html"><b><i>View Source</i></b>
+ * </a>
  *
  * @author Prakash Reddy
  * @author Karthik Sudarshan
  *
  */
-public class JournalArticleResourceCriteria implements OptionalCriteria {
+public class MirageArticleResourceCriteria implements OptionalCriteria {
+
+	public static final String GROUP_ID = "groupId";
 
 	public void add(String key, long value) {
 		_options.put(key, value);
@@ -67,8 +69,6 @@ public class JournalArticleResourceCriteria implements OptionalCriteria {
 	public Map<String, Long> getOptions() {
 		return _options;
 	}
-
-	public static final String GROUP_ID = "groupId";
 
 	private Map<String, Long> _options = new HashMap<String, Long>();
 

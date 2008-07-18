@@ -46,29 +46,27 @@ import com.liferay.portlet.journal.model.JournalArticleResource;
 import com.sun.portal.cms.mirage.model.custom.BinaryContent;
 
 /**
- * <a href="MirageJournalArticleResource.java.html"><b><i>View Source</i></b>
- * </a>
+ * <a href="MirageArticleResource.java.html"><b><i>View Source</i></b></a>
  *
  * @author Prakash Reddy
  * @author Karthik Sudarshan
+ * @author Brian Wing Shun Chan
  *
  */
-public class MirageJournalArticleResource extends BinaryContent {
+public class MirageArticleResource extends BinaryContent {
 
-	public MirageJournalArticleResource(
-		JournalArticleResource journalResource) {
-
-		_journalResource = journalResource;
+	public MirageArticleResource(JournalArticleResource articleResource) {
+		_articleResource = articleResource;
 	}
 
-	public JournalArticleResource getJournalResource() {
-		return _journalResource;
+	public JournalArticleResource getArticleResource() {
+		return _articleResource;
 	}
 
-	public void setJournalResource(JournalArticleResource journalResource) {
-		_journalResource = journalResource;
+	public void setArticleResource(JournalArticleResource articleResource) {
+		_articleResource = articleResource;
 	}
 
-	private JournalArticleResource _journalResource;
+	private JournalArticleResource _articleResource;
 
 }

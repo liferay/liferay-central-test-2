@@ -44,8 +44,8 @@ package com.liferay.portal.mirage.service;
 import com.liferay.counter.service.CounterLocalServiceUtil;
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
-import com.liferay.portal.mirage.model.JournalArticleResourceCriteria;
-import com.liferay.portal.mirage.model.MirageJournalArticleResource;
+import com.liferay.portal.mirage.model.MirageArticleResource;
+import com.liferay.portal.mirage.model.MirageArticleResourceCriteria;
 import com.liferay.portlet.journal.model.JournalArticleResource;
 import com.liferay.portlet.journal.service.persistence.JournalArticleResourceUtil;
 
@@ -62,6 +62,7 @@ import java.util.List;
  *
  * @author Prakash Reddy
  * @author Karthik Sudarshan
+ * @author Brian Wing Shun Chan
  *
  */
 public class ArticleResourceServiceImpl implements BinaryContentService {
@@ -71,18 +72,18 @@ public class ArticleResourceServiceImpl implements BinaryContentService {
 	}
 
 	public void deleteBinaryContent(
-			BinaryContent binaryContent, OptionalCriteria criteria)
+			BinaryContent binaryContent, OptionalCriteria optionalCriteria)
 		throws CMSException {
 
 		try {
-			MirageJournalArticleResource journalResourceContent =
-				(MirageJournalArticleResource) binaryContent;
+			MirageArticleResource mirageArticleResource =
+				(MirageArticleResource)binaryContent;
 
-			JournalArticleResource journalResource =
-				journalResourceContent.getJournalResource();
+			JournalArticleResource articleResource =
+				mirageArticleResource.getArticleResource();
 
 			JournalArticleResourceUtil.removeByG_A(
-				journalResource.getGroupId(), journalResource.getArticleId());
+				articleResource.getGroupId(), articleResource.getArticleId());
 		}
 		catch (PortalException pe) {
 			throw new CMSException(pe.getMessage(), pe);
@@ -92,7 +93,7 @@ public class ArticleResourceServiceImpl implements BinaryContentService {
 		}
 	}
 
-	public void deleteBinaryContents(OptionalCriteria criteria) {
+	public void deleteBinaryContents(OptionalCriteria optionalCriteria) {
 		throw new UnsupportedOperationException();
 	}
 
@@ -100,18 +101,18 @@ public class ArticleResourceServiceImpl implements BinaryContentService {
 		throws CMSException {
 
 		try {
-			MirageJournalArticleResource journalResourceContent =
-				(MirageJournalArticleResource) binaryContent;
+			MirageArticleResource mirageArticleResource =
+				(MirageArticleResource)binaryContent;
 
-			JournalArticleResource journalResource =
-				journalResourceContent.getJournalResource();
+			JournalArticleResource articleResource =
+				mirageArticleResource.getArticleResource();
 
-			journalResource = JournalArticleResourceUtil.findByPrimaryKey(
-				journalResource.getResourcePrimKey());
+			articleResource = JournalArticleResourceUtil.findByPrimaryKey(
+				articleResource.getResourcePrimKey());
 
-			journalResourceContent.setJournalResource(journalResource);
+			mirageArticleResource.setArticleResource(articleResource);
 
-			return journalResourceContent;
+			return mirageArticleResource;
 		}
 		catch (PortalException pe) {
 			throw new CMSException(pe.getMessage(), pe);
@@ -125,17 +126,17 @@ public class ArticleResourceServiceImpl implements BinaryContentService {
 		throws CMSException {
 
 		try {
-			MirageJournalArticleResource journalResourceContent =
-				(MirageJournalArticleResource) binaryContent;
-
-			JournalArticleResource journalResource =
-				journalResourceContent.getJournalResource();
-
-			long groupId = journalResource.getGroupId();
-			String articleId = journalResource.getArticleId();
+			MirageArticleResource mirageArticleResource =
+				(MirageArticleResource)binaryContent;
 
 			JournalArticleResource articleResource =
-				JournalArticleResourceUtil.fetchByG_A(groupId, articleId);
+				mirageArticleResource.getArticleResource();
+
+			long groupId = articleResource.getGroupId();
+			String articleId = articleResource.getArticleId();
+
+			articleResource = JournalArticleResourceUtil.fetchByG_A(
+				groupId, articleId);
 
 			if (articleResource == null) {
 				long articleResourcePrimKey =
@@ -157,31 +158,28 @@ public class ArticleResourceServiceImpl implements BinaryContentService {
 		}
 	}
 
-	public List<BinaryContent> getBinaryContents(OptionalCriteria criteria)
+	public List<BinaryContent> getBinaryContents(
+			OptionalCriteria optionalCriteria)
 		throws CMSException {
 
 		try {
-			List<BinaryContent> binaryContents = null;
+			MirageArticleResourceCriteria criteria =
+				(MirageArticleResourceCriteria)optionalCriteria;
 
-			JournalArticleResourceCriteria journalCriteria =
-				(JournalArticleResourceCriteria)criteria;
+			long groupId = criteria.get(MirageArticleResourceCriteria.GROUP_ID);
 
-			long groupId = journalCriteria.get(
-				JournalArticleResourceCriteria.GROUP_ID);
-
-			List<JournalArticleResource> journalResources =
+			List<JournalArticleResource> articleResources =
 				JournalArticleResourceUtil.findByGroupId(groupId);
 
-			if (journalResources == null) {
+			if (articleResources == null) {
 				return new ArrayList<BinaryContent>();
 			}
 
-			binaryContents = new ArrayList<BinaryContent>(
-				journalResources.size());
+			List<BinaryContent> binaryContents = new ArrayList<BinaryContent>(
+				articleResources.size());
 
-			for(JournalArticleResource journalResource : journalResources){
-				binaryContents.add(
-					new MirageJournalArticleResource(journalResource));
+			for (JournalArticleResource articleResource : articleResources) {
+				binaryContents.add(new MirageArticleResource(articleResource));
 			}
 
 			return binaryContents;

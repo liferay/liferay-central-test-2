@@ -62,7 +62,7 @@ public class MirageServiceFactory {
 	public static BinaryContentService getArticleResourceService() {
 		if (_articleResourceService == null) {
 			_articleResourceService =
-				(BinaryContentService) PortalBeanLocatorUtil.locate(
+				(BinaryContentService)PortalBeanLocatorUtil.locate(
 					_ARTICLE_RESOURCE_SERVICE);
 		}
 
@@ -147,17 +147,11 @@ public class MirageServiceFactory {
 		"com.liferay.portal.mirage.WorkflowService";
 
 	private static BinaryContentService _articleResourceService;
-
 	private static CategoryService _categoryService;
-
 	private static ContentFeedService _contentFeedService;
-
 	private static ContentService _contentService;
-
 	private static ContentTypeService _contentTypeService;
-
 	private static SearchService _searchService;
-
 	private static WorkflowService _workflowService;
 
 }
