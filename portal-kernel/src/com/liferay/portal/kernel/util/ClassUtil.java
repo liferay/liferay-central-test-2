@@ -57,27 +57,21 @@ public class ClassUtil {
 
 		StreamTokenizer st = new StreamTokenizer(new BufferedReader(reader));
 
-		st.resetSyntax();
-		st.slashSlashComments(true);
-		st.slashStarComments(true);
-		st.wordChars('a', 'z');
-		st.wordChars('A', 'Z');
-		st.wordChars('.', '.');
-		st.wordChars('0', '9');
-		st.wordChars('_', '_');
-		st.lowerCaseMode(false);
-		st.eolIsSignificant(false);
-		st.quoteChar('"');
-		st.quoteChar('\'');
-		st.parseNumbers();
+		_setupParseTable(st);
+		st.wordChars('@', '@');
 
 		while (st.nextToken() != StreamTokenizer.TT_EOF) {
 			if (st.ttype == StreamTokenizer.TT_WORD) {
 				if (st.sval.equals("class") || st.sval.equals("interface")) {
 					break;
+				} else if (st.sval.startsWith("@")) {
+						String token = StringUtil.replace(st.sval, '@', "");
+						classes.add(token);
 				}
 			}
 		}
+
+		_setupParseTable(st);
 
 		while (st.nextToken() != StreamTokenizer.TT_EOF) {
 			if (st.ttype == StreamTokenizer.TT_WORD) {
@@ -154,6 +148,22 @@ public class ClassUtil {
 		}
 
 		return false;
+	}
+
+	private static void _setupParseTable(StreamTokenizer st) {
+		st.resetSyntax();
+		st.slashSlashComments(true);
+		st.slashStarComments(true);
+		st.wordChars('a', 'z');
+		st.wordChars('A', 'Z');
+		st.wordChars('.', '.');
+		st.wordChars('0', '9');
+		st.wordChars('_', '_');
+		st.lowerCaseMode(false);
+		st.eolIsSignificant(false);
+		st.quoteChar('"');
+		st.quoteChar('\'');
+		st.parseNumbers();
 	}
 
 }
