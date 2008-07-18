@@ -71,6 +71,12 @@ import com.liferay.portlet.calendar.service.persistence.CalEventFinder;
 import com.liferay.portlet.calendar.service.persistence.CalEventFinderUtil;
 import com.liferay.portlet.calendar.service.persistence.CalEventPersistence;
 import com.liferay.portlet.calendar.service.persistence.CalEventUtil;
+import com.liferay.portlet.social.service.SocialActivityLocalService;
+import com.liferay.portlet.social.service.SocialActivityLocalServiceFactory;
+import com.liferay.portlet.social.service.persistence.SocialActivityFinder;
+import com.liferay.portlet.social.service.persistence.SocialActivityFinderUtil;
+import com.liferay.portlet.social.service.persistence.SocialActivityPersistence;
+import com.liferay.portlet.social.service.persistence.SocialActivityUtil;
 
 import java.util.List;
 
@@ -251,6 +257,33 @@ public abstract class CalEventLocalServiceBaseImpl
 		this.resourceFinder = resourceFinder;
 	}
 
+	public SocialActivityLocalService getSocialActivityLocalService() {
+		return socialActivityLocalService;
+	}
+
+	public void setSocialActivityLocalService(
+		SocialActivityLocalService socialActivityLocalService) {
+		this.socialActivityLocalService = socialActivityLocalService;
+	}
+
+	public SocialActivityPersistence getSocialActivityPersistence() {
+		return socialActivityPersistence;
+	}
+
+	public void setSocialActivityPersistence(
+		SocialActivityPersistence socialActivityPersistence) {
+		this.socialActivityPersistence = socialActivityPersistence;
+	}
+
+	public SocialActivityFinder getSocialActivityFinder() {
+		return socialActivityFinder;
+	}
+
+	public void setSocialActivityFinder(
+		SocialActivityFinder socialActivityFinder) {
+		this.socialActivityFinder = socialActivityFinder;
+	}
+
 	public UserLocalService getUserLocalService() {
 		return userLocalService;
 	}
@@ -348,6 +381,18 @@ public abstract class CalEventLocalServiceBaseImpl
 			resourceFinder = ResourceFinderUtil.getFinder();
 		}
 
+		if (socialActivityLocalService == null) {
+			socialActivityLocalService = SocialActivityLocalServiceFactory.getImpl();
+		}
+
+		if (socialActivityPersistence == null) {
+			socialActivityPersistence = SocialActivityUtil.getPersistence();
+		}
+
+		if (socialActivityFinder == null) {
+			socialActivityFinder = SocialActivityFinderUtil.getFinder();
+		}
+
 		if (userLocalService == null) {
 			userLocalService = UserLocalServiceFactory.getImpl();
 		}
@@ -381,6 +426,9 @@ public abstract class CalEventLocalServiceBaseImpl
 	protected ResourceService resourceService;
 	protected ResourcePersistence resourcePersistence;
 	protected ResourceFinder resourceFinder;
+	protected SocialActivityLocalService socialActivityLocalService;
+	protected SocialActivityPersistence socialActivityPersistence;
+	protected SocialActivityFinder socialActivityFinder;
 	protected UserLocalService userLocalService;
 	protected UserService userService;
 	protected UserPersistence userPersistence;

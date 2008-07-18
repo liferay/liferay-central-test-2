@@ -58,6 +58,7 @@ import com.liferay.portlet.calendar.job.CheckEventJob;
 import com.liferay.portlet.calendar.model.CalEvent;
 import com.liferay.portlet.calendar.model.impl.CalEventImpl;
 import com.liferay.portlet.calendar.service.base.CalEventLocalServiceBaseImpl;
+import com.liferay.portlet.calendar.social.CalendarActivityKeys;
 import com.liferay.portlet.calendar.util.CalUtil;
 import com.liferay.util.TimeZoneSensitive;
 import com.liferay.util.servlet.ServletResponseUtil;
@@ -287,6 +288,12 @@ public class CalEventLocalServiceImpl extends CalEventLocalServiceBaseImpl {
 			addEventResources(event, communityPermissions, guestPermissions);
 		}
 
+		// Social
+
+		socialActivityLocalService.addActivity(
+			userId, groupId, CalEvent.class.getName(), eventId,
+			CalendarActivityKeys.ADD_EVENT, StringPool.BLANK, 0);
+
 		// Pool
 
 		CalEventLocalUtil.clearEventsPool(event.getGroupId());
@@ -401,6 +408,11 @@ public class CalEventLocalServiceImpl extends CalEventLocalServiceBaseImpl {
 		// Pool
 
 		CalEventLocalUtil.clearEventsPool(event.getGroupId());
+
+		// Social
+
+		socialActivityLocalService.deleteActivities(
+			CalEvent.class.getName(), event.getEventId());
 
 		// Resources
 
@@ -653,6 +665,8 @@ public class CalEventLocalServiceImpl extends CalEventLocalServiceBaseImpl {
 			String remindBy, int firstReminder, int secondReminder)
 		throws PortalException, SystemException {
 
+		// Event
+
 		User user = userPersistence.findByPrimaryKey(userId);
 
 		Locale locale = null;
@@ -718,6 +732,14 @@ public class CalEventLocalServiceImpl extends CalEventLocalServiceBaseImpl {
 		event.setSecondReminder(secondReminder);
 
 		calEventPersistence.update(event, false);
+
+		// Social
+
+		socialActivityLocalService.addActivity(
+			userId, event.getGroupId(), CalEvent.class.getName(), eventId,
+			CalendarActivityKeys.UPDATE_EVENT, StringPool.BLANK, 0);
+
+		// Pool
 
 		CalEventLocalUtil.clearEventsPool(event.getGroupId());
 

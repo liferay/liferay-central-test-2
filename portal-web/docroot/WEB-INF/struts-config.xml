@@ -227,6 +227,8 @@
 
 		<action path="/calendar/export_events" type="com.liferay.portlet.calendar.action.ExportEventsAction" />
 
+		<action path="/calendar/find_event" type="com.liferay.portlet.calendar.action.FindEventAction" />
+
 		<action path="/calendar/import_events" type="com.liferay.portlet.calendar.action.ImportEventsAction">
 			<forward name="portlet.calendar.error" path="portlet.calendar.error" />
 		</action>

@@ -68,6 +68,7 @@
 		<configuration-action-class>com.liferay.portlet.calendar.action.ConfigurationActionImpl</configuration-action-class>
 		<scheduler-class>com.liferay.portlet.calendar.job.CalendarScheduler</scheduler-class>
 		<portlet-data-handler-class>com.liferay.portlet.calendar.lar.CalendarPortletDataHandlerImpl</portlet-data-handler-class>
+		<social-activity-interpreter-class>com.liferay.portlet.calendar.social.CalendarActivityInterpreter</social-activity-interpreter-class>
 		<preferences-unique-per-layout>false</preferences-unique-per-layout>
 		<use-default-template>false</use-default-template>
 		<show-portlet-access-denied>true</show-portlet-access-denied>
