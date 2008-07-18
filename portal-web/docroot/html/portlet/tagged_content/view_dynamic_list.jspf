@@ -41,29 +41,32 @@ request.setAttribute("view.jsp-results", results);
 if (results.size() <= 0) {
 	if (!themeDisplay.isSignedIn()) {
 %>
-	<style type="text/css">
-		#p_p_id_<%=portletDisplay.getId() %>_ {
-			display: none;
-		}
-	</style>
+
+		<style type="text/css">
+			#p_p_id_<%=portletDisplay.getId() %>_ {
+				display: none;
+			}
+		</style>
+
 <%
 	}
 	else {
 %>
-	<liferay-ui:message key="this-portlet-has-no-results" />
 
-	<style type="text/css">
-		#p_p_id_<%=portletDisplay.getId() %>_ {
-			opacity: 0.4;
+		<liferay-ui:message key="there-are-no-results" />
 
-		}
+		<style type="text/css">
+			#p_p_id_<%=portletDisplay.getId() %>_ {
+				opacity: 0.4;
+			}
 
-		.ie #p_p_id_<%=portletDisplay.getId() %>_ {
-			filter: alpha(opacity=40);
-			zoom: 1;
-		}
-	</style>
-<%	
+			.ie #p_p_id_<%=portletDisplay.getId() %>_ {
+				filter: alpha(opacity=40);
+				zoom: 1;
+			}
+		</style>
+
+<%
 	}
 }
 

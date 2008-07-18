@@ -83,26 +83,32 @@ Iterator<Map.Entry<String, List<TagsAsset>>> itr = assetsByCategory.entrySet().i
 if (!itr.hasNext()) {
 	if (!themeDisplay.isSignedIn()) {
 %>
-	<style type="text/css">
-		#p_p_id_<%=portletDisplay.getId() %>_ {
-			display: none; 
-		}
-	</style>
+
+		<style type="text/css">
+			#p_p_id_<%=portletDisplay.getId() %>_ {
+				display: none;
+			}
+		</style>
+
 <%
 	}
 	else {
 %>
-	<style type="text/css">
-		#p_p_id_<%=portletDisplay.getId() %>_ {
-			opacity: 0.4;
-		}
 
-		.ie #p_p_id_<%=portletDisplay.getId() %>_ {
-			filter: alpha(opacity=40);
-			zoom: 1;
-		}
-	</style>
-<%	
+		<liferay-ui:message key="there-are-no-results" />
+
+		<style type="text/css">
+			#p_p_id_<%=portletDisplay.getId() %>_ {
+				opacity: 0.4;
+			}
+
+			.ie #p_p_id_<%=portletDisplay.getId() %>_ {
+				filter: alpha(opacity=40);
+				zoom: 1;
+			}
+		</style>
+
+<%
 	}
 }
 
