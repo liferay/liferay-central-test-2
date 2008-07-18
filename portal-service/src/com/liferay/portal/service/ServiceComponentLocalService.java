@@ -80,8 +80,8 @@ public interface ServiceComponentLocalService {
 
 	public com.liferay.portal.model.ServiceComponent updateServiceComponent(
 		javax.servlet.ServletContext servletContext,
-		java.lang.ClassLoader portletClassLoader,
-		java.lang.String buildNamespace, long buildNumber, long buildDate)
+		java.lang.ClassLoader classLoader, java.lang.String buildNamespace,
+		long buildNumber, long buildDate)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;
 }

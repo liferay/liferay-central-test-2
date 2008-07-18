@@ -111,13 +111,13 @@ public class ServiceComponentLocalServiceUtil {
 
 	public static com.liferay.portal.model.ServiceComponent updateServiceComponent(
 		javax.servlet.ServletContext servletContext,
-		java.lang.ClassLoader portletClassLoader,
-		java.lang.String buildNamespace, long buildNumber, long buildDate)
+		java.lang.ClassLoader classLoader, java.lang.String buildNamespace,
+		long buildNumber, long buildDate)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		ServiceComponentLocalService serviceComponentLocalService = ServiceComponentLocalServiceFactory.getService();
 
 		return serviceComponentLocalService.updateServiceComponent(servletContext,
-			portletClassLoader, buildNamespace, buildNumber, buildDate);
+			classLoader, buildNamespace, buildNumber, buildDate);
 	}
 }

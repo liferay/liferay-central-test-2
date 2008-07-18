@@ -68,13 +68,13 @@ public class ServiceComponentLocalServiceImpl
 	extends ServiceComponentLocalServiceBaseImpl {
 
 	public ServiceComponent updateServiceComponent(
-			ServletContext servletContext, ClassLoader portletClassLoader,
+			ServletContext servletContext, ClassLoader classLoader,
 			String buildNamespace, long buildNumber, long buildDate)
 		throws PortalException, SystemException {
 
 		try {
 			ModelHintsUtil.read(
-				portletClassLoader, "META-INF/portlet-model-hints.xml");
+				classLoader, "META-INF/portlet-model-hints.xml");
 		}
 		catch (Exception e) {
 			throw new SystemException(e);
@@ -152,7 +152,7 @@ public class ServiceComponentLocalServiceImpl
 			serviceComponentPersistence.update(serviceComponent, false);
 
 			upgradeDB(
-				portletClassLoader, buildNamespace, buildNumber,
+				classLoader, buildNamespace, buildNumber,
 				previousServiceComponent, tablesSQL, sequencesSQL, indexesSQL);
 
 			removeOldServiceComponents(buildNamespace);
@@ -164,13 +164,13 @@ public class ServiceComponentLocalServiceImpl
 		}
 	}
 
-	protected String[] getModels(ClassLoader portletClassLoader)
+	protected String[] getModels(ClassLoader classLoader)
 		throws DocumentException, IOException {
 
 		List<String> models = new ArrayList<String>();
 
 		String xml = StringUtil.read(
-			portletClassLoader, "META-INF/portlet-model-hints.xml");
+			classLoader, "META-INF/portlet-model-hints.xml");
 
 		SAXReader reader = new SAXReader();
 
@@ -192,9 +192,9 @@ public class ServiceComponentLocalServiceImpl
 	}
 
 	protected void upgradeDB(
-			ClassLoader portletClassLoader, String buildNamespace,
-			long buildNumber, ServiceComponent previousServiceComponent,
-			String tablesSQL, String sequencesSQL, String indexesSQL)
+			ClassLoader classLoader, String buildNamespace, long buildNumber,
+			ServiceComponent previousServiceComponent, String tablesSQL,
+			String sequencesSQL, String indexesSQL)
 		throws Exception {
 
 		DBUtil dbUtil = DBUtil.getInstance();
@@ -226,7 +226,7 @@ public class ServiceComponentLocalServiceImpl
 
 				dbUtil.runSQLTemplateString(tablesSQL, true, false);
 
-				upgradeModels(portletClassLoader);
+				upgradeModels(classLoader);
 			}
 
 			if (!sequencesSQL.equals(
@@ -251,10 +251,8 @@ public class ServiceComponentLocalServiceImpl
 		}
 	}
 
-	protected void upgradeModels(ClassLoader portletClassLoader)
-		throws Exception {
-
-		String[] models = getModels(portletClassLoader);
+	protected void upgradeModels(ClassLoader classLoader) throws Exception {
+		String[] models = getModels(classLoader);
 
 		for (int i = 0; i < models.length; i++) {
 			String name = models[i];
@@ -265,7 +263,7 @@ public class ServiceComponentLocalServiceImpl
 				name.substring(0, pos) + ".model.impl." +
 					name.substring(pos + 7) + "ModelImpl";
 
-			Class<?> modelClass = Class.forName(name, true, portletClassLoader);
+			Class<?> modelClass = Class.forName(name, true, classLoader);
 
 			Field tableNameField = modelClass.getField("TABLE_NAME");
 			Field tableColumnsField = modelClass.getField("TABLE_COLUMNS");
