@@ -851,6 +851,8 @@ public class PropsKeys {
 
 	public static final String PORTAL_JAAS_STRICT_PASSWORD = "portal.jaas.strict.password";
 
+	public static final String PORTLET_CONTAINER_IMPL = "portlet.container.impl";
+
 	public static final String PORTLET_CSS_ENABLED = "portlet.css.enabled";
 
 	public static final String PORTLET_URL_ANCHOR_ENABLE = "portlet.url.anchor.enable";
@@ -858,8 +860,6 @@ public class PropsKeys {
 	public static final String PORTLET_URL_APPEND_PARAMETERS = "portlet.url.append.parameters";
 
 	public static final String PORTLET_URL_ESCAPE_XML = "portlet.url.escape.xml";
-
-	public static final String PORTLET_CONTAINER_IMPL = "portlet.container.impl";
 
 	public static final String PORTLET_VIRTUAL_PATH = "portlet.virtual.path";
 
@@ -1079,11 +1079,11 @@ public class PropsKeys {
 
 	public static final String WEBDAV_STORAGE_CLASS = "webdav.storage.class";
 
-	public static final String WEBDAV_STORAGE_TOKENS = "webdav.storage.tokens";
-
 	public static final String WEBDAV_STORAGE_SHOW_EDIT_URL = "webdav.storage.show.edit.url";
 
 	public static final String WEBDAV_STORAGE_SHOW_VIEW_URL = "webdav.storage.show.view.url";
+
+	public static final String WEBDAV_STORAGE_TOKENS = "webdav.storage.tokens";
 
 	public static final String WIKI_EMAIL_FROM_ADDRESS = "wiki.email.from.address";
 

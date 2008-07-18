@@ -219,27 +219,20 @@ public class WebDAVUtil {
 		}
 	}
 
-	public static boolean isEnabled(String className) {
-		return _instance._isEnabled(className);
-	}
-
 	public static boolean isEditEnabled(String className) {
 		return _instance._isEditEnabled(className);
 	}
 
-	public static boolean isViewEnabled(String className) {
-		return _instance._isViewEnabled(className);
+	public static boolean isEnabled(String className) {
+		return _instance._isEnabled(className);
 	}
 
 	public static boolean isOverwrite(HttpServletRequest request) {
-		String value = GetterUtil.getString(request.getHeader("Overwrite"));
+		return _instance._isOverwrite(request);
+	}
 
-		if (value.equalsIgnoreCase("F") || !GetterUtil.getBoolean(value)) {
-			return false;
-		}
-		else {
-			return true;
-		}
+	public static boolean isViewEnabled(String className) {
+		return _instance._isViewEnabled(className);
 	}
 
 	private WebDAVUtil() {
@@ -294,12 +287,23 @@ public class WebDAVUtil {
 		return _storageMap.values();
 	}
 
+	private boolean _isEditEnabled(String className) {
+		return _isEnabled(className) && _storageEditUrls.contains(className);
+	}
+
 	private boolean _isEnabled(String className) {
 		return _storageMap.containsKey(className);
 	}
 
-	private boolean _isEditEnabled(String className) {
-		return _isEnabled(className) && _storageEditUrls.contains(className);
+	private boolean _isOverwrite(HttpServletRequest request) {
+		String value = GetterUtil.getString(request.getHeader("Overwrite"));
+
+		if (value.equalsIgnoreCase("F") || !GetterUtil.getBoolean(value)) {
+			return false;
+		}
+		else {
+			return true;
+		}
 	}
 
 	private boolean _isViewEnabled(String className) {

@@ -62,11 +62,17 @@ public class PropsValues {
 		PropsUtil.get(PropsKeys.ADMIN_RESERVED_SCREEN_NAMES),
 		StringPool.NEW_LINE);
 
+	public static final String ANNOUNCEMENTS_EMAIL_BODY =
+		PropsUtil.get(PropsKeys.ANNOUNCEMENTS_EMAIL_BODY);
+
 	public static final String ANNOUNCEMENTS_EMAIL_FROM_ADDRESS =
 		PropsUtil.get(PropsKeys.ANNOUNCEMENTS_EMAIL_FROM_ADDRESS);
 
 	public static final String ANNOUNCEMENTS_EMAIL_FROM_NAME =
 		PropsUtil.get(PropsKeys.ANNOUNCEMENTS_EMAIL_FROM_NAME);
+
+	public static final String ANNOUNCEMENTS_EMAIL_SUBJECT =
+		PropsUtil.get(PropsKeys.ANNOUNCEMENTS_EMAIL_SUBJECT);
 
 	public static final String ANNOUNCEMENTS_EMAIL_TO_ADDRESS =
 		PropsUtil.get(PropsKeys.ANNOUNCEMENTS_EMAIL_TO_ADDRESS);
@@ -74,17 +80,11 @@ public class PropsValues {
 	public static final String ANNOUNCEMENTS_EMAIL_TO_NAME =
 		PropsUtil.get(PropsKeys.ANNOUNCEMENTS_EMAIL_TO_NAME);
 
-	public static final String ANNOUNCEMENTS_EMAIL_SUBJECT =
-		PropsUtil.get(PropsKeys.ANNOUNCEMENTS_EMAIL_SUBJECT);
-
-	public static final String ANNOUNCEMENTS_EMAIL_BODY =
-		PropsUtil.get(PropsKeys.ANNOUNCEMENTS_EMAIL_BODY);
+	public static final String[] APPLICATION_SHUTDOWN_EVENTS =
+		PropsUtil.getArray(PropsKeys.APPLICATION_SHUTDOWN_EVENTS);
 
 	public static final String[] APPLICATION_STARTUP_EVENTS =
 		PropsUtil.getArray(PropsKeys.APPLICATION_STARTUP_EVENTS);
-
-	public static final String[] APPLICATION_SHUTDOWN_EVENTS =
-		PropsUtil.getArray(PropsKeys.APPLICATION_SHUTDOWN_EVENTS);
 
 	public static final boolean AUTH_FORWARD_BY_LAST_PATH =
 		GetterUtil.getBoolean(
@@ -94,11 +94,11 @@ public class PropsValues {
 		GetterUtil.getBoolean(
 			PropsUtil.get(PropsKeys.AUTH_FORWARD_BY_REDIRECT));
 
-	public static final String AUTH_LOGIN_PORTLET_NAME =
-		PropsUtil.get(PropsKeys.AUTH_LOGIN_PORTLET_NAME);
-
 	public static final String AUTH_LOGIN_COMMUNITY_URL =
 		PropsUtil.get(PropsKeys.AUTH_LOGIN_COMMUNITY_URL);
+
+	public static final String AUTH_LOGIN_PORTLET_NAME =
+		PropsUtil.get(PropsKeys.AUTH_LOGIN_PORTLET_NAME);
 
 	public static final String AUTH_LOGIN_URL =
 		PropsUtil.get(PropsKeys.AUTH_LOGIN_URL);
@@ -830,6 +830,12 @@ public class PropsValues {
 		GetterUtil.getBoolean(
 			PropsUtil.get(PropsKeys.PORTAL_JAAS_STRICT_PASSWORD));
 
+	public static final String PORTLET_CONTAINER_IMPL =
+		PropsUtil.get(PropsKeys.PORTLET_CONTAINER_IMPL);
+
+	public static final boolean PORTLET_CONTAINER_IMPL_SUN =
+		PORTLET_CONTAINER_IMPL.equals("sun");
+
 	public static final boolean PORTLET_CSS_ENABLED = GetterUtil.getBoolean(
 		PropsUtil.get(PropsKeys.PORTLET_CSS_ENABLED));
 
@@ -843,12 +849,6 @@ public class PropsValues {
 
 	public static final boolean PORTLET_URL_ESCAPE_XML = GetterUtil.getBoolean(
 		PropsUtil.get(PropsKeys.PORTLET_URL_ESCAPE_XML));
-
-	public static final String PORTLET_CONTAINER_IMPL =
-		PropsUtil.get(PropsKeys.PORTLET_CONTAINER_IMPL);
-
-	public static final boolean PORTLET_CONTAINER_IMPL_SUN =
-		PORTLET_CONTAINER_IMPL.equals("sun");
 
 	public static final String PORTLET_VIRTUAL_PATH =
 		PropsUtil.get(PropsKeys.PORTLET_VIRTUAL_PATH);
