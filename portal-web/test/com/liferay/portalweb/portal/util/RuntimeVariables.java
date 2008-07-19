@@ -23,6 +23,7 @@
 package com.liferay.portalweb.portal.util;
 
 import com.liferay.portal.kernel.util.StringPool;
+import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.util.ContextReplace;
 
 import java.io.File;
