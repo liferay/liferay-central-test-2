@@ -903,9 +903,8 @@ public class DLFileEntryLocalServiceImpl
 
 			dlLocalService.updateFile(
 				user.getCompanyId(), PortletKeys.DOCUMENT_LIBRARY,
-				folder.getGroupId(), folderId, name, newVersion,
-				sourceFileName, fileEntry.getLuceneProperties(), tagsEntries,
-				is);
+				folder.getGroupId(), folderId, name, newVersion, name,
+				fileEntry.getLuceneProperties(), tagsEntries, is);
 
 			return fileEntry;
 		}
