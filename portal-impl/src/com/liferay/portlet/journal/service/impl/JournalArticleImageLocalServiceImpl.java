@@ -24,11 +24,19 @@ package com.liferay.portlet.journal.service.impl;
 
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
-import com.liferay.portlet.journal.DuplicateArticleImageIdException;
-import com.liferay.portlet.journal.NoSuchArticleImageException;
+import com.liferay.portal.mirage.model.MirageArticleImage;
+import com.liferay.portal.mirage.model.MirageArticleImageCriteria;
+import com.liferay.portal.mirage.service.MirageServiceFactory;
+import com.liferay.portal.mirage.util.ExceptionTranslator;
 import com.liferay.portlet.journal.model.JournalArticleImage;
+import com.liferay.portlet.journal.model.impl.JournalArticleImageImpl;
 import com.liferay.portlet.journal.service.base.JournalArticleImageLocalServiceBaseImpl;
 
+import com.sun.portal.cms.mirage.exception.CMSException;
+import com.sun.portal.cms.mirage.model.custom.BinaryContent;
+import com.sun.portal.cms.mirage.service.custom.BinaryContentService;
+
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -36,6 +44,8 @@ import java.util.List;
  * </b></a>
  *
  * @author Brian Wing Shun Chan
+ * @author Prakash Reddy
+ * @author Karthik Sudarshan
  *
  */
 public class JournalArticleImageLocalServiceImpl
@@ -46,39 +56,52 @@ public class JournalArticleImageLocalServiceImpl
 			String elName, String languageId)
 		throws PortalException, SystemException {
 
-		if (articleImageId <= 0) {
-			return;
+		JournalArticleImage articleImage = new JournalArticleImageImpl();
+
+		articleImage.setArticleImageId(articleImageId);
+		articleImage.setGroupId(groupId);
+		articleImage.setArticleId(articleId);
+		articleImage.setVersion(version);
+		articleImage.setElName(elName);
+		articleImage.setLanguageId(languageId);
+
+		MirageArticleImage mirageArticleImage =
+			new MirageArticleImage(articleImage);
+
+		BinaryContentService binaryContentService =
+			MirageServiceFactory.getArticleImageService();
+
+		try {
+			binaryContentService.createBinaryContent(mirageArticleImage);
 		}
-
-		JournalArticleImage articleImage =
-			journalArticleImagePersistence.fetchByG_A_V_E_L(
-				groupId, articleId, version, elName, languageId);
-
-		if (articleImage == null) {
-			articleImage = journalArticleImagePersistence.create(
-				articleImageId);
-
-			articleImage.setGroupId(groupId);
-			articleImage.setArticleId(articleId);
-			articleImage.setVersion(version);
-			articleImage.setElName(elName);
-			articleImage.setLanguageId(languageId);
-			articleImage.setTempImage(false);
-
-			journalArticleImagePersistence.update(articleImage, false);
-		}
-		else if (articleImage.getArticleImageId() == articleImageId) {
-		}
-		else {
-			throw new DuplicateArticleImageIdException();
+		catch(CMSException cmse) {
+			ExceptionTranslator.translate(cmse);
 		}
 	}
 
 	public void deleteArticleImage(long articleImageId) throws SystemException {
+		JournalArticleImage articleImage = new JournalArticleImageImpl();
+
+		articleImage.setArticleImageId(articleImageId);
+
+		MirageArticleImage mirageArticleImage =
+			new MirageArticleImage(articleImage);
+
+		MirageArticleImageCriteria criteria = new MirageArticleImageCriteria();
+
+		criteria.setValue(
+			MirageArticleImageCriteria.ACTION,
+			MirageArticleImageCriteria.REMOVE_BY_ID);
+
+		BinaryContentService binaryContentService =
+			MirageServiceFactory.getArticleImageService();
+
 		try {
-			journalArticleImagePersistence.remove(articleImageId);
+			binaryContentService.deleteBinaryContent(
+				mirageArticleImage, criteria);
 		}
-		catch (NoSuchArticleImageException nsaie) {
+		catch (CMSException cmse) {
+			throw (SystemException)cmse.getCause();
 		}
 	}
 
@@ -87,31 +110,77 @@ public class JournalArticleImageLocalServiceImpl
 			String languageId)
 		throws SystemException {
 
+		JournalArticleImage articleImage = new JournalArticleImageImpl();
+
+		articleImage.setGroupId(groupId);
+		articleImage.setArticleId(articleId);
+		articleImage.setVersion(version);
+		articleImage.setElName(elName);
+		articleImage.setLanguageId(languageId);
+
+		MirageArticleImage mirageArticleImage =
+			new MirageArticleImage(articleImage);
+
+		MirageArticleImageCriteria criteria = new MirageArticleImageCriteria();
+
+		criteria.setValue(
+			MirageArticleImageCriteria.ACTION,
+			MirageArticleImageCriteria.REMOVE_BY_G_A_V_E_L);
+
+		BinaryContentService binaryContentService =
+			MirageServiceFactory.getArticleImageService();
+
 		try {
-			journalArticleImagePersistence.removeByG_A_V_E_L(
-				groupId, articleId, version, elName, languageId);
+			binaryContentService.deleteBinaryContent(
+				mirageArticleImage, criteria);
 		}
-		catch (NoSuchArticleImageException nsaie) {
+		catch (CMSException cmse) {
+			throw (SystemException)cmse.getCause();
 		}
 	}
 
 	public void deleteImages(long groupId, String articleId, double version)
 		throws PortalException, SystemException {
 
-		for (JournalArticleImage articleImage :
-				journalArticleImagePersistence.findByG_A_V(
-					groupId, articleId, version)) {
+		MirageArticleImageCriteria criteria = new MirageArticleImageCriteria();
 
-			imageLocalService.deleteImage(articleImage.getArticleImageId());
+		criteria.setValue(MirageArticleImageCriteria.GROUP_ID, groupId);
+		criteria.setValue(MirageArticleImageCriteria.ARTICLE_ID, articleId);
+		criteria.setValue(MirageArticleImageCriteria.VERSION, version);
 
-			journalArticleImagePersistence.remove(articleImage);
+		BinaryContentService binaryContentService =
+			MirageServiceFactory.getArticleImageService();
+
+		try {
+			binaryContentService.deleteBinaryContents(criteria);
+		}
+		catch(CMSException cmse) {
+			ExceptionTranslator.translate(cmse);
 		}
 	}
 
 	public JournalArticleImage getArticleImage(long articleImageId)
 		throws PortalException, SystemException {
 
-		return journalArticleImagePersistence.findByPrimaryKey(articleImageId);
+		JournalArticleImage articleImage = new JournalArticleImageImpl();
+
+		articleImage.setArticleImageId(articleImageId);
+
+		MirageArticleImage mirageArticleImage =
+			new MirageArticleImage(articleImage);
+
+		BinaryContentService binaryContentService =
+			MirageServiceFactory.getArticleImageService();
+
+		try {
+			mirageArticleImage = (MirageArticleImage)
+				binaryContentService.getBinaryContent(mirageArticleImage);
+		}
+		catch(CMSException cmse) {
+			ExceptionTranslator.translate(cmse);
+		}
+
+		return mirageArticleImage.getJournalImage();
 	}
 
 	public long getArticleImageId(
@@ -128,33 +197,63 @@ public class JournalArticleImageLocalServiceImpl
 			String languageId, boolean tempImage)
 		throws SystemException {
 
-		JournalArticleImage articleImage =
-			journalArticleImagePersistence.fetchByG_A_V_E_L(
-				groupId, articleId, version, elName, languageId);
+		JournalArticleImage articleImage = new JournalArticleImageImpl();
 
-		if (articleImage == null) {
-			long articleImageId = counterLocalService.increment();
+		articleImage.setGroupId(groupId);
+		articleImage.setArticleId(articleId);
+		articleImage.setVersion(version);
+		articleImage.setElName(elName);
+		articleImage.setLanguageId(languageId);
+		articleImage.setTempImage(tempImage);
 
-			articleImage = journalArticleImagePersistence.create(
-				articleImageId);
+		MirageArticleImage mirageArticleImage =
+			new MirageArticleImage(articleImage);
 
-			articleImage.setGroupId(groupId);
-			articleImage.setArticleId(articleId);
-			articleImage.setVersion(version);
-			articleImage.setElName(elName);
-			articleImage.setLanguageId(languageId);
-			articleImage.setTempImage(tempImage);
+		BinaryContentService binaryContentService =
+			MirageServiceFactory.getArticleImageService();
 
-			journalArticleImagePersistence.update(articleImage, false);
+		try {
+			return binaryContentService.getBinaryContentId(mirageArticleImage);
 		}
-
-		return articleImage.getArticleImageId();
+		catch(CMSException cmse) {
+			throw (SystemException)cmse.getCause();
+		}
 	}
 
 	public List<JournalArticleImage> getArticleImages(long groupId)
 		throws SystemException {
 
-		return journalArticleImagePersistence.findByGroupId(groupId);
+		MirageArticleImageCriteria criteria = new MirageArticleImageCriteria();
+
+		criteria.setValue(MirageArticleImageCriteria.GROUP_ID, groupId);
+
+		BinaryContentService binaryContentService =
+			MirageServiceFactory.getArticleImageService();
+
+		try {
+			List<BinaryContent> binaryContents =
+				binaryContentService.getBinaryContents(criteria);
+
+			return getImages(binaryContents);
+		}
+		catch(CMSException cmse) {
+			throw (SystemException)cmse.getCause();
+		}
+	}
+
+	protected List<JournalArticleImage> getImages(
+		List<BinaryContent> binaryContents) {
+
+		List<JournalArticleImage> images = new ArrayList<JournalArticleImage>();
+
+		for(BinaryContent binaryContent : binaryContents){
+			MirageArticleImage mirageArticleImage =
+				(MirageArticleImage)binaryContent;
+
+			images.add(mirageArticleImage.getJournalImage());
+		}
+
+		return images;
 	}
 
 }

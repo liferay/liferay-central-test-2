@@ -2,6 +2,7 @@
 <!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN" "http://www.springframework.org/dtd/spring-beans.dtd">
 
 <beans>
+	<bean id="com.liferay.portal.mirage.ArticleImageService" class="com.liferay.portal.mirage.service.ArticleImageServiceImpl" lazy-init="true" />
 	<bean id="com.liferay.portal.mirage.ArticleResourceService" class="com.liferay.portal.mirage.service.ArticleResourceServiceImpl" lazy-init="true" />
 	<bean id="com.liferay.portal.mirage.CategoryService" class="com.liferay.portal.mirage.service.CategoryServiceImpl" lazy-init="true" />
 	<bean id="com.liferay.portal.mirage.ContentFeedService" class="com.liferay.portal.mirage.service.ContentFeedServiceImpl" lazy-init="true" />
