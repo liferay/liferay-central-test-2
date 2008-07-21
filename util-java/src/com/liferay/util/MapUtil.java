@@ -136,7 +136,7 @@ public class MapUtil {
 	}
 
 	public static LinkedHashMap toLinkedHashMap(
-			String[] params, String delimiter) {
+		String[] params, String delimiter) {
 
 		LinkedHashMap map = new LinkedHashMap();
 
