@@ -41,25 +41,32 @@
 
 package com.liferay.portal.mirage.service;
 
-import com.sun.portal.cms.mirage.service.custom.FeedService;
-import com.sun.syndication.feed.synd.SyndFeed;
+import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
 
-import java.io.Writer;
+import com.sun.portal.cms.mirage.service.custom.ContentFeedService;
 
 /**
- * <a href="FeedServiceImpl.java.html"><b><i>View Source</i></b></a>
+ * <a href="MirageServiceFactory.java.html"><b><i>View Source</i></b></a>
  *
- * @author Prakash Reddy
+ * @author Karthik Sudarshan
+ * @author Brian Wing Shun Chan
  *
  */
-public class FeedServiceImpl implements FeedService {
+public class MirageServiceFactory {
 
-	public SyndFeed getFeedForAllContentsOfContentType(String contentTypeUUID) {
-		throw new UnsupportedOperationException();
+	public static ContentFeedService getContentFeedService() {
+		if (_contentFeedService == null) {
+			_contentFeedService =
+				(ContentFeedService)PortalBeanLocatorUtil.locate(
+					_CONTENT_FEED_SERVICE);
+		}
+
+		return _contentFeedService;
 	}
 
-	public boolean writeFeadToWriter(Writer out, SyndFeed feed) {
-		throw new UnsupportedOperationException();
-	}
+	private static final String _CONTENT_FEED_SERVICE =
+		"com.liferay.portal.mirage.ContentFeedService";
+
+	private static ContentFeedService _contentFeedService;
 
 }

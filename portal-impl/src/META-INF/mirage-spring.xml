@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN" "http://www.springframework.org/dtd/spring-beans.dtd">
+
+<beans>
+	<bean id="com.liferay.portal.mirage.ContentFeedService" class="com.liferay.portal.mirage.service.ContentFeedServiceImpl" lazy-init="true" />
+	<bean id="com.liferay.portal.mirage.aop.JournalFeedLocalServiceInterceptor" class="com.liferay.portal.mirage.aop.JournalFeedLocalServiceInterceptor" lazy-init="true" />
+	<bean id="com.liferay.portlet.journal.service.impl.JournalFeedLocalServiceImpl" class="com.liferay.portlet.journal.service.impl.JournalFeedLocalServiceImpl" lazy-init="true" />
+	<bean id="com.liferay.portlet.journal.service.JournalFeedLocalService.impl" class="org.springframework.aop.framework.ProxyFactoryBean" lazy-init="true">
+		<property name="proxyInterfaces">
+			<value>com.liferay.portlet.journal.service.JournalFeedLocalService</value>
+		</property>
+		<property name="interceptorNames">
+			<list>
+				<value>com.liferay.portal.mirage.aop.JournalFeedLocalServiceInterceptor</value>
+			</list>
+		</property>
+		<property name="target">
+			<ref bean="com.liferay.portlet.journal.service.impl.JournalFeedLocalServiceImpl" />
+		</property>
+	</bean>
+</beans>

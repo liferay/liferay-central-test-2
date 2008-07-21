@@ -39,27 +39,33 @@
  * Copyright 2008 Sun Microsystems Inc. All rights reserved.
  */
 
-package com.liferay.portal.mirage.service;
+package com.liferay.portal.mirage.model;
 
-import com.sun.portal.cms.mirage.service.custom.FeedService;
-import com.sun.syndication.feed.synd.SyndFeed;
+import com.liferay.portlet.journal.model.JournalFeed;
 
-import java.io.Writer;
+import com.sun.portal.cms.mirage.model.custom.ContentFeed;
 
 /**
- * <a href="FeedServiceImpl.java.html"><b><i>View Source</i></b></a>
+ * <a href="MirageJournalFeed.java.html"><b><i>View Source</i></b></a>
  *
- * @author Prakash Reddy
+ * @author Karthik Sudarshan
+ * @author Brian Wing Shun Chan
  *
  */
-public class FeedServiceImpl implements FeedService {
+public class MirageJournalFeed extends ContentFeed {
 
-	public SyndFeed getFeedForAllContentsOfContentType(String contentTypeUUID) {
-		throw new UnsupportedOperationException();
+	public MirageJournalFeed(JournalFeed feed) {
+		_feed = feed;
 	}
 
-	public boolean writeFeadToWriter(Writer out, SyndFeed feed) {
-		throw new UnsupportedOperationException();
+	public JournalFeed getFeed() {
+		return _feed;
 	}
+
+	public void setFeed(JournalFeed feed) {
+		_feed = feed;
+	}
+
+	private JournalFeed _feed;
 
 }
