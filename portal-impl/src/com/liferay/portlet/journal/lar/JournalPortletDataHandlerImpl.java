@@ -1127,6 +1127,7 @@ public class JournalPortletDataHandlerImpl implements PortletDataHandler {
 		sb.append(context.getPortletPath(PortletKeys.JOURNAL));
 		sb.append("/structures/");
 		sb.append(structure.getStructureId());
+		sb.append(".xml");
 
 		return sb.toString();
 	}
