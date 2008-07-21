@@ -40,7 +40,6 @@ import com.liferay.portal.kernel.servlet.SessionErrors;
 import com.liferay.portal.kernel.servlet.SessionMessages;
 import com.liferay.portal.kernel.util.Constants;
 import com.liferay.portal.kernel.util.GetterUtil;
-import com.liferay.portal.kernel.util.HttpUtil;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;
@@ -64,8 +63,6 @@ import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.net.HttpURLConnection;
-import java.net.URL;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
@@ -199,22 +196,6 @@ public class LoginAction extends Action {
 				if (lastPath != null) {
 					session.setAttribute(WebKeys.LAST_PATH, lastPath);
 				}
-			}
-
-			//Adding RUON hooks
-
-			String scheme = request.getScheme();
-			String serverName = request.getServerName();
-			Integer serverPort = request.getServerPort();
-			String presenceResource = "/ruon-web/resources/presence/status/";
-
-			URL restURL = new URL(scheme + "://" + serverName + ":"+
-									serverPort.toString() + presenceResource +
-										userId + "/online");
-
-			if (((HttpURLConnection) restURL.openConnection())
-						.getResponseCode() == HttpURLConnection.HTTP_OK) {
-				HttpUtil.submit(restURL.toString(), true);
 			}
 
 			// Set cookies
