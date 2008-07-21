@@ -86,7 +86,14 @@
 				ResourceBundle resourceBundle = selPortletConfig.getResourceBundle(locale);
 
 				try {
-					PortletDataHandlerControl[] controls = portletDataHandler.getExportControls();
+					PortletDataHandlerControl[] controls = null;
+
+					if (tabs2.equals("import")) {
+						controls = portletDataHandler.getImportControls();
+					}
+					else {
+						controls = portletDataHandler.getExportControls();
+					}
 
 					if (controls != null) {
 				%>

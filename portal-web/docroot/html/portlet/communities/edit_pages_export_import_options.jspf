@@ -315,7 +315,14 @@
 										ResourceBundle resourceBundle = curPortletConfig.getResourceBundle(locale);
 
 										try {
-											PortletDataHandlerControl[] controls = portletDataHandler.getImportControls();
+											PortletDataHandlerControl[] controls = null;
+
+											if (tabs4.equals("import")) {
+												controls = portletDataHandler.getImportControls();
+											}
+											else {
+												controls = portletDataHandler.getExportControls();
+											}
 
 											if (controls != null) {
 												String rootPortletId = curPortlet.getRootPortletId();
