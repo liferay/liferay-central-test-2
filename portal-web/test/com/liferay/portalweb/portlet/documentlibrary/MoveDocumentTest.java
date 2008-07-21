@@ -108,7 +108,7 @@ public class MoveDocumentTest extends BaseTestCase {
 
 		selenium.click("//input[@value='Select']");
 		selenium.waitForPopUp("folder", RuntimeVariables.replace("30000"));
-		selenium.selectWindow("name=folder");
+		selenium.selectWindow("title=Document Library Test Page");
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -127,7 +127,6 @@ public class MoveDocumentTest extends BaseTestCase {
 		}
 
 		selenium.click("link=Folders");
-		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -199,6 +198,70 @@ public class MoveDocumentTest extends BaseTestCase {
 		}
 
 		selenium.click("//input[@value='Save']");
+		selenium.waitForPageToLoad("30000");
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isElementPresent("link=Folders")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
+		selenium.click("link=Folders");
+		selenium.waitForPageToLoad("30000");
+		selenium.click("link=Return to Full Page");
+		selenium.waitForPageToLoad("30000");
+		selenium.click("link=Another");
+		selenium.waitForPageToLoad("30000");
+		selenium.click("link=Another1");
+		selenium.waitForPageToLoad("30000");
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isTextPresent(
+							"Test Document.txt\nThis is a test document!")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
+		selenium.click("link=Edit");
+		selenium.waitForPageToLoad("30000");
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isElementPresent("link=Test Document.txt")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
+		selenium.click("link=Return to Full Page");
 		selenium.waitForPageToLoad("30000");
 	}
 }
