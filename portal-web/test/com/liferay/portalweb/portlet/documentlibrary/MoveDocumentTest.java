@@ -127,6 +127,7 @@ public class MoveDocumentTest extends BaseTestCase {
 		}
 
 		selenium.click("link=Folders");
+		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {

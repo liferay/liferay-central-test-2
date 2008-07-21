@@ -57,7 +57,7 @@ public class AddPortletTest extends BaseTestCase {
 
 			try {
 				if (selenium.isElementPresent(
-							"//div[@id=&quot;CMS-DocumentLibraryDisplay&quot;]")) {
+							"//div[@id=\"CMS-DocumentLibraryDisplay\"]")) {
 					break;
 				}
 			}
@@ -67,7 +67,7 @@ public class AddPortletTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click("//div[@id=&quot;CMS-DocumentLibraryDisplay&quot;]/p/a");
+		selenium.click("//div[@id=\"CMS-DocumentLibraryDisplay\"]/p/a");
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {

@@ -52,6 +52,21 @@ public class AddPortletTest extends BaseTestCase {
 		}
 
 		selenium.click("//div[@id=\"Sample-HelloVelocity\"]/p/a");
-		verifyTrue(selenium.isTextPresent("Hello Velocity"));
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isTextPresent("Hello Velocity")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
 	}
 }

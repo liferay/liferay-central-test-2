@@ -35,6 +35,8 @@ public class DocumentLibraryDisplayTests extends BaseTests {
 	public DocumentLibraryDisplayTests() {
 		addTestSuite(AddPageTest.class);
 		addTestSuite(AddPortletTest.class);
+		addTestSuite(ConfigurePortletTest.class);
+		addTestSuite(SearchPortletTest.class);
 	}
 
 }

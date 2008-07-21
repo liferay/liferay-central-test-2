@@ -71,6 +71,8 @@ public class AddPageTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
+		selenium.typeKeys("new_page",
+			RuntimeVariables.replace("Calendar Test Page"));
 		selenium.type("new_page", RuntimeVariables.replace("Calendar Test Page"));
 		selenium.click("link=Save");
 

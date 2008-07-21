@@ -71,6 +71,8 @@ public class AddPageTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
+		selenium.typeKeys("new_page",
+			RuntimeVariables.replace("Announcements Test Page"));
 		selenium.type("new_page",
 			RuntimeVariables.replace("Announcements Test Page"));
 		selenium.click("link=Save");

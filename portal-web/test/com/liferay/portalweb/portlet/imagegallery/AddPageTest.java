@@ -70,6 +70,8 @@ public class AddPageTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
+		selenium.typeKeys("new_page",
+			RuntimeVariables.replace("Image Galler Test Page"));
 		selenium.type("new_page",
 			RuntimeVariables.replace("Image Gallery Test Page"));
 		selenium.click("link=Save");
