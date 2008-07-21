@@ -131,6 +131,10 @@ public class MapUtil {
 		}
 	}
 
+	public static LinkedHashMap toLinkedHashMap(String[] params) {
+		return toLinkedHashMap(params, StringPool.COLON);
+	}
+
 	public static LinkedHashMap toLinkedHashMap(
 			String[] params, String delimiter) {
 
@@ -145,7 +149,4 @@ public class MapUtil {
 		return map;
 	}
 
-	public static LinkedHashMap toLinkedHashMap(String[] params) {
-		return toLinkedHashMap(params, StringPool.COLON);
-	}
 }
