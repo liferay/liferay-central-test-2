@@ -59,16 +59,6 @@ import com.sun.portal.cms.mirage.service.custom.WorkflowService;
  */
 public class MirageServiceFactory {
 
-	public static BinaryContentService getArticleImageService() {
-		if (_articleImageService == null) {
-			_articleImageService =
-				(BinaryContentService)PortalBeanLocatorUtil.locate(
-					_ARTICLE_IMAGE_SERVICE);
-		}
-
-		return _articleImageService;
-	}
-
 	public static BinaryContentService getArticleResourceService() {
 		if (_articleResourceService == null) {
 			_articleResourceService =
@@ -135,9 +125,6 @@ public class MirageServiceFactory {
 		return _workflowService;
 	}
 
-	private static final String _ARTICLE_IMAGE_SERVICE =
-		"com.liferay.portal.mirage.ArticleImageService";
-
 	private static final String _ARTICLE_RESOURCE_SERVICE =
 		"com.liferay.portal.mirage.ArticleResourceService";
 
@@ -159,7 +146,6 @@ public class MirageServiceFactory {
 	private static final String _WORKFLOW_SERVICE =
 		"com.liferay.portal.mirage.WorkflowService";
 
-	private static BinaryContentService _articleImageService;
 	private static BinaryContentService _articleResourceService;
 	private static CategoryService _categoryService;
 	private static ContentFeedService _contentFeedService;

@@ -41,41 +41,6 @@
 
 package com.liferay.portal.mirage.service;
 
-import com.liferay.counter.service.CounterLocalServiceUtil;
-import com.liferay.portal.PortalException;
-import com.liferay.portal.SystemException;
-import com.liferay.portal.kernel.util.FileUtil;
-import com.liferay.portal.kernel.util.GetterUtil;
-import com.liferay.portal.kernel.util.OrderByComparator;
-import com.liferay.portal.kernel.util.StringPool;
-import com.liferay.portal.kernel.util.StringUtil;
-import com.liferay.portal.kernel.util.Validator;
-import com.liferay.portal.mirage.model.MirageTemplate;
-import com.liferay.portal.mirage.model.MirageTemplateCriteria;
-import com.liferay.portal.mirage.util.SmartFields;
-import com.liferay.portal.model.User;
-import com.liferay.portal.service.ImageLocalServiceUtil;
-import com.liferay.portal.service.persistence.UserUtil;
-import com.liferay.portal.util.PropsKeys;
-import com.liferay.portal.util.PropsUtil;
-import com.liferay.portlet.journal.DuplicateTemplateIdException;
-import com.liferay.portlet.journal.NoSuchTemplateException;
-import com.liferay.portlet.journal.TemplateDescriptionException;
-import com.liferay.portlet.journal.TemplateIdException;
-import com.liferay.portlet.journal.TemplateNameException;
-import com.liferay.portlet.journal.TemplateSmallImageNameException;
-import com.liferay.portlet.journal.TemplateSmallImageSizeException;
-import com.liferay.portlet.journal.TemplateXslException;
-import com.liferay.portlet.journal.model.JournalTemplate;
-import com.liferay.portlet.journal.model.impl.JournalTemplateImpl;
-import com.liferay.portlet.journal.service.persistence.JournalArticleUtil;
-import com.liferay.portlet.journal.service.persistence.JournalTemplateFinderUtil;
-import com.liferay.portlet.journal.service.persistence.JournalTemplateUtil;
-import com.liferay.portlet.journal.util.JournalUtil;
-
-import com.sun.portal.cms.mirage.exception.CMSException;
-import com.sun.portal.cms.mirage.exception.TemplateNotFoundException;
-import com.sun.portal.cms.mirage.exception.ValidationException;
 import com.sun.portal.cms.mirage.model.custom.Category;
 import com.sun.portal.cms.mirage.model.custom.ContentType;
 import com.sun.portal.cms.mirage.model.custom.OptionalCriteria;
@@ -84,14 +49,7 @@ import com.sun.portal.cms.mirage.model.custom.UpdateCriteria;
 import com.sun.portal.cms.mirage.model.search.SearchCriteria;
 import com.sun.portal.cms.mirage.service.custom.ContentTypeService;
 
-import java.io.File;
-import java.io.IOException;
-
-import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
-
-import org.dom4j.DocumentException;
 
 /**
  * <a href="ContentTypeServiceImpl.java.html"><b><i>View Source</i></b></a>
@@ -104,109 +62,9 @@ import org.dom4j.DocumentException;
 public class ContentTypeServiceImpl implements ContentTypeService {
 
 	public void addTemplateToContentType(
-			Template mirageJournalTemplate, ContentType contentType)
-		throws CMSException, ValidationException {
+		Template template, ContentType contentType) {
 
-		MirageTemplate mirageTemplate = (MirageTemplate)mirageJournalTemplate;
-
-		JournalTemplate template = mirageTemplate.getTemplate();
-
-		String uuid = template.getUuid();
-		long userId = template.getUserId();
-		String templateId = template.getTemplateId();
-		boolean autoTemplateId = mirageTemplate.isAutoTemplateId();
-		long groupId = template.getGroupId();
-		String structureId = template.getStructureId();
-		String name = template.getName();
-		String description = template.getDescription();
-		String xsl = template.getXsl();
-		boolean formatXsl = mirageTemplate.isFormatXsl();
-		String langType = template.getLangType();
-		boolean cacheable = template.isCacheable();
-		boolean smallImage = template.getSmallImage();
-		String smallImageURL = template.getSmallImageURL();
-		File smallFile = mirageTemplate.getSmallFile();
-
-		// Template
-
-		try {
-			User user = UserUtil.findByPrimaryKey(userId);
-
-			templateId = templateId.trim().toUpperCase();
-
-			Date now = new Date();
-
-			try {
-				if (formatXsl) {
-					if (langType.equals(JournalTemplateImpl.LANG_TYPE_VM)) {
-						xsl = JournalUtil.formatVM(xsl);
-					}
-					else {
-						xsl = JournalUtil.formatXML(xsl);
-					}
-				}
-			}
-			catch (DocumentException de) {
-				throw new TemplateXslException();
-			}
-			catch (IOException ioe) {
-				throw new TemplateXslException();
-			}
-
-			byte[] smallBytes = null;
-
-			try {
-				smallBytes = FileUtil.getBytes(smallFile);
-			}
-			catch (IOException ioe) {
-			}
-
-			validate(
-				groupId, templateId, autoTemplateId, name, description, xsl,
-				smallImage, smallImageURL, smallFile, smallBytes);
-
-			if (autoTemplateId) {
-				templateId = String.valueOf(
-					CounterLocalServiceUtil.increment());
-			}
-
-			long id = CounterLocalServiceUtil.increment();
-
-			template = JournalTemplateUtil.create(id);
-
-			template.setUuid(uuid);
-			template.setGroupId(groupId);
-			template.setCompanyId(user.getCompanyId());
-			template.setUserId(user.getUserId());
-			template.setUserName(user.getFullName());
-			template.setCreateDate(now);
-			template.setModifiedDate(now);
-			template.setTemplateId(templateId);
-			template.setStructureId(structureId);
-			template.setName(name);
-			template.setDescription(description);
-			template.setXsl(xsl);
-			template.setLangType(langType);
-			template.setCacheable(cacheable);
-			template.setSmallImage(smallImage);
-			template.setSmallImageId(CounterLocalServiceUtil.increment());
-			template.setSmallImageURL(smallImageURL);
-
-			JournalTemplateUtil.update(template, false);
-
-			// Small image
-
-			saveImages(
-				smallImage, template.getSmallImageId(), smallFile, smallBytes);
-
-			mirageTemplate.setTemplate(template);
-		}
-		catch (PortalException pe) {
-			throw new CMSException(pe.getMessage(), pe);
-		}
-		catch (SystemException se) {
-			throw new CMSException(se.getMessage(), se);
-		}
+		throw new UnsupportedOperationException();
 	}
 
 	public void assignDefaultTemplate(
@@ -238,22 +96,9 @@ public class ContentTypeServiceImpl implements ContentTypeService {
 	}
 
 	public void deleteTemplateOfContentType(
-			ContentType contentType, Template mirageJournalTemplate)
-		throws CMSException {
+		ContentType contentType, Template template) {
 
-		MirageTemplate mirageTemplate = (MirageTemplate)mirageJournalTemplate;
-
-		JournalTemplate template = mirageTemplate.getTemplate();
-
-		try {
-			JournalTemplateUtil.remove(template.getPrimaryKey());
-		}
-		catch (PortalException pe) {
-			throw new CMSException(pe.getMessage(), pe);
-		}
-		catch (SystemException se) {
-			throw new CMSException(se.getMessage(), se);
-		}
+		throw new UnsupportedOperationException();
 	}
 
 	public void deleteTemplatesOfContentType(
@@ -302,183 +147,20 @@ public class ContentTypeServiceImpl implements ContentTypeService {
 		throw new UnsupportedOperationException();
 	}
 
-	public Template getTemplate(
-			Template mirageJournalTemplate, OptionalCriteria optionalCriteria)
-		throws TemplateNotFoundException {
-
-		MirageTemplate mirageTemplate = (MirageTemplate)mirageJournalTemplate;
-
-		JournalTemplate template = mirageTemplate.getTemplate();
-
-		MirageTemplateCriteria criteria =
-			(MirageTemplateCriteria)optionalCriteria;
-
-		String query = criteria.getString(MirageTemplateCriteria.QUERY);
-
-		if (query == null) {
-			return null;
-		}
-
-		try {
-			if (query.equals(MirageTemplateCriteria.FIND_BY_PRIMARY_KEY)) {
-				mirageTemplate.setTemplate(
-					JournalTemplateUtil.findByPrimaryKey(template.getId()));
-			}
-			else if (query.equals(
-				MirageTemplateCriteria.FIND_BY_SMALL_IMAGE_ID)) {
-				mirageTemplate.setTemplate(
-					JournalTemplateUtil.findBySmallImageId(
-						template.getSmallImageId()));
-			}
-			else if (query.equals(MirageTemplateCriteria.FIND_BY_G_T)) {
-				mirageTemplate.setTemplate(JournalTemplateUtil.findByG_T(
-					template.getGroupId(), template.getTemplateId()));
-			}
-		}
-		catch (PortalException pe) {
-			throw new TemplateNotFoundException(
-				pe.getMessage(), pe.getMessage(), pe);
-		}
-		catch (SystemException se) {
-			throw new TemplateNotFoundException(
-				se.getMessage(), se.getMessage(), se);
-		}
-
-		return mirageTemplate;
+	public Template getTemplate(Template template, OptionalCriteria criteria) {
+		throw new UnsupportedOperationException();
 	}
 
 	public List<Template> getTemplates(
-			ContentType contentType, Template mirageJournalTemplate,
-			OptionalCriteria optionalCriteria)
-		throws TemplateNotFoundException {
+		ContentType contentType, Template template, OptionalCriteria criteria) {
 
-		List<Template> templates = new ArrayList<Template>();
-
-		MirageTemplateCriteria criteria =
-			(MirageTemplateCriteria)optionalCriteria;
-
-		String query = criteria.getString(MirageTemplateCriteria.QUERY);
-
-		if (query == null) {
-			return null;
-		}
-
-		try {
-			if (query.equals(MirageTemplateCriteria.FIND_BY_G_S)) {
-				MirageTemplate mirageTemplate =
-					(MirageTemplate)mirageJournalTemplate;
-
-				JournalTemplate template = mirageTemplate.getTemplate();
-
-				templates = getTemplates(
-					template.getGroupId(), template.getStructureId());
-			}
-			else if (query.equals(
-				MirageTemplateCriteria.FIND_BY_G_S_WITH_LIMIT)) {
-				MirageTemplate mirageTemplate =
-					(MirageTemplate)mirageJournalTemplate;
-
-				JournalTemplate template = mirageTemplate.getTemplate();
-
-				int start = criteria.getInt(MirageTemplateCriteria.RANGE_START);
-				int end = criteria.getInt(MirageTemplateCriteria.RANGE_END);
-
-				templates = getTemplates(
-					template.getGroupId(), template.getStructureId(), start,
-					end);
-			}
-			else if (query.equals(MirageTemplateCriteria.FIND_ALL)){
-				templates = getAllTemplates();
-			}
-			else if (query.equals(MirageTemplateCriteria.FIND_BY_GROUP_ID)) {
-				MirageTemplate mirageTemplate =
-					(MirageTemplate)mirageJournalTemplate;
-
-				JournalTemplate template = mirageTemplate.getTemplate();
-
-				templates = getTemplates(template.getGroupId());
-			}
-			else if (query.equals(
-				MirageTemplateCriteria.FIND_BY_GROUP_ID_WITH_LIMIT)) {
-				MirageTemplate mirageTemplate =
-					(MirageTemplate)mirageJournalTemplate;
-
-				JournalTemplate template = mirageTemplate.getTemplate();
-
-				int start = criteria.getInt(MirageTemplateCriteria.RANGE_START);
-				int end = criteria.getInt(MirageTemplateCriteria.RANGE_END);
-
-				templates = getTemplates(
-					template.getGroupId(), start, end);
-			}
-			else if (query.equals(MirageTemplateCriteria.FIND_BY_TEMPLATE_ID)) {
-				MirageTemplate mirageTemplate =
-					(MirageTemplate)mirageJournalTemplate;
-
-				JournalTemplate template = mirageTemplate.getTemplate();
-
-				templates = getTemplates(template.getTemplateId());
-			}
-		}
-		catch (SystemException se) {
-			throw new TemplateNotFoundException(
-				se.getMessage(), se.getMessage(), se);
-		}
-
-		return templates;
+		throw new UnsupportedOperationException();
 	}
 
 	public int getTemplatesCount(
-			ContentType contentType, Template mirageJournalTemplate,
-			OptionalCriteria optionalCriteria)
-		throws CMSException {
+		ContentType contentType, Template template, OptionalCriteria criteria) {
 
-		int count = -1;
-
-		MirageTemplateCriteria criteria =
-			(MirageTemplateCriteria)optionalCriteria;
-
-		String query = criteria.getString(MirageTemplateCriteria.QUERY);
-
-		if (query == null) {
-			return count;
-		}
-
-		try {
-			if (query.equals(MirageTemplateCriteria.COUNT_BY_G_S)) {
-				MirageTemplate mirageTemplate =
-					(MirageTemplate)mirageJournalTemplate;
-
-				JournalTemplate template = mirageTemplate.getTemplate();
-
-				count = JournalTemplateUtil.countByG_S(
-					template.getGroupId(), template.getStructureId());
-			}
-			else if (query.equals(MirageTemplateCriteria.COUNT_BY_GROUP_ID)) {
-				MirageTemplate mirageTemplate =
-					(MirageTemplate)mirageJournalTemplate;
-
-				JournalTemplate template = mirageTemplate.getTemplate();
-
-				count = JournalTemplateUtil.countByGroupId(
-					template.getGroupId());
-			}
-			else if (query.equals(
-				MirageTemplateCriteria.ARTICLE_COUNT_BY_G_T)) {
-				MirageTemplate mirageTemplate =
-					(MirageTemplate)mirageJournalTemplate;
-
-				JournalTemplate template = mirageTemplate.getTemplate();
-
-				count = JournalArticleUtil.countByG_T(
-					template.getGroupId(), template.getTemplateId());
-			}
-		}
-		catch (SystemException se) {
-			throw new CMSException(se.getMessage(), se.getMessage(), se);
-		}
-
-		return count;
+		throw new UnsupportedOperationException();
 	}
 
 	public Template getTemplateWithUUID(String templateUUID) {
@@ -511,114 +193,18 @@ public class ContentTypeServiceImpl implements ContentTypeService {
 		throw new UnsupportedOperationException();
 	}
 
-	public List<Template> searchTemplates(SearchCriteria searchCriteria)
-		throws CMSException {
-
-		try {
-			List<JournalTemplate> journalTemplates = null;
-
-			SmartFields smartFields = new SmartFields(
-				searchCriteria.getSearchFieldValues());
-
-			String query = smartFields.getString(MirageTemplateCriteria.QUERY);
-			long companyId = smartFields.getLong(
-				MirageTemplateCriteria.COMPANY_ID);
-			long groupId = smartFields.getLong(MirageTemplateCriteria.GROUP_ID);
-			String structureId = smartFields.getString(
-				MirageTemplateCriteria.STRUCTURE_ID);
-			String structureIdComparator = smartFields.getString(
-				MirageTemplateCriteria.STRUCTURE_ID_COMPARATOR);
-			int start = smartFields.getInteger(
-				MirageTemplateCriteria.RANGE_START);
-			int end = smartFields.getInteger(MirageTemplateCriteria.RANGE_END);
-			OrderByComparator obc =
-				(OrderByComparator)searchCriteria.getOrderByComparator();
-
-			if (query.equals(MirageTemplateCriteria.FIND_BY_KEYWORDS)) {
-				String keywords = smartFields.getString(
-					MirageTemplateCriteria.KEYWORDS);
-
-				journalTemplates = JournalTemplateFinderUtil.findByKeywords(
-					companyId, groupId, keywords, structureId,
-					structureIdComparator, start, end, obc);
-			}
-			else if (query.equals(MirageTemplateCriteria.FIND_BY_C_G_T_S_N_D)) {
-				String templateId = smartFields.getString(
-					MirageTemplateCriteria.TEMPLATE_ID);
-				String name = smartFields.getString(
-					MirageTemplateCriteria.NAME);
-				String description = smartFields.getString(
-					MirageTemplateCriteria.DESCRIPTION);
-				boolean andOperator = searchCriteria.isMatchAnyOneField();
-
-				journalTemplates = JournalTemplateFinderUtil.findByC_G_T_S_N_D(
-					companyId, groupId, templateId, structureId,
-					structureIdComparator, name, description, andOperator,
-					start, end, obc);
-			}
-
-			return getTemplatesFromJournalTemplates(journalTemplates);
-		}
-		catch (SystemException se) {
-			throw new TemplateNotFoundException(
-				se.getMessage(), se.getMessage(), se);
-		}
+	public List<Template> searchTemplates(SearchCriteria searchCriteria) {
+		throw new UnsupportedOperationException();
 	}
 
-	public int searchTemplatesCount(SearchCriteria searchCriteria)
-		throws CMSException {
-
-		try {
-			int count = -1;
-
-			SmartFields smartFields = new SmartFields(
-				searchCriteria.getSearchFieldValues());
-
-			String query = smartFields.getString(MirageTemplateCriteria.QUERY);
-			long companyId = smartFields.getLong(
-				MirageTemplateCriteria.COMPANY_ID);
-			long groupId = smartFields.getLong(MirageTemplateCriteria.GROUP_ID);
-			String structureId = smartFields.getString(
-				MirageTemplateCriteria.STRUCTURE_ID);
-			String structureIdComparator = smartFields.getString(
-				MirageTemplateCriteria.STRUCTURE_ID_COMPARATOR);
-
-			if (query.equals(MirageTemplateCriteria.COUNT_BY_KEYWORDS)) {
-				String keywords = smartFields.getString(
-					MirageTemplateCriteria.KEYWORDS);
-
-				count = JournalTemplateFinderUtil.countByKeywords(
-					companyId, groupId, keywords, structureId,
-					structureIdComparator);
-			}
-			else if (query.equals(
-				MirageTemplateCriteria.COUNT_BY_C_G_T_S_N_D)) {
-				String templateId = smartFields.getString(
-					MirageTemplateCriteria.TEMPLATE_ID);
-				String name = smartFields.getString(
-					MirageTemplateCriteria.NAME);
-				String description = smartFields.getString(
-					MirageTemplateCriteria.DESCRIPTION);
-				boolean andOperator = searchCriteria.isMatchAnyOneField();
-
-				count = JournalTemplateFinderUtil.countByC_G_T_S_N_D(
-					companyId, groupId, templateId, structureId,
-					structureIdComparator, name, description, andOperator);
-			}
-
-			return count;
-		}
-		catch (SystemException se) {
-			throw new TemplateNotFoundException(
-				se.getMessage(), se.getMessage(), se);
-		}
+	public int searchTemplatesCount(SearchCriteria searchCriteria) {
+		throw new UnsupportedOperationException();
 	}
 
 	public List<Template> searchTemplatesOfContentType(
-			ContentType contentType, SearchCriteria criteria)
-		throws CMSException {
+		ContentType contentType, SearchCriteria criteria) {
 
-		return null;
+		throw new UnsupportedOperationException();
 	}
 
 	public void unassignDefaultTemplate(ContentType contentType) {
@@ -640,288 +226,21 @@ public class ContentTypeServiceImpl implements ContentTypeService {
 	}
 
 	public void updateTemplateOfContentType(
-			Template mirageJournalTemplate, ContentType contentType)
-		throws CMSException {
+		Template template, ContentType contentType) {
 
-		MirageTemplate mirageTemplate = (MirageTemplate)mirageJournalTemplate;
-
-		JournalTemplate template = mirageTemplate.getTemplate();
-
-		long groupId = template.getGroupId();
-		String templateId = template.getTemplateId();
-		String structureId = template.getStructureId();
-		String name = template.getName();
-		String description = template.getDescription();
-		String xsl = template.getXsl();
-		boolean formatXsl = mirageTemplate.isFormatXsl();
-		String langType = template.getLangType();
-		boolean cacheable = template.isCacheable();
-		boolean smallImage = template.getSmallImage();
-		String smallImageURL = template.getSmallImageURL();
-		File smallFile = mirageTemplate.getSmallFile();
-
-		// Template
-
-		try {
-			templateId = templateId.trim().toUpperCase();
-
-			try {
-				if (formatXsl) {
-					if (langType.equals(JournalTemplateImpl.LANG_TYPE_VM)) {
-						xsl = JournalUtil.formatVM(xsl);
-					}
-					else {
-						xsl = JournalUtil.formatXML(xsl);
-					}
-				}
-			}
-			catch (DocumentException de) {
-				throw new TemplateXslException();
-			}
-			catch (IOException ioe) {
-				throw new TemplateXslException();
-			}
-
-			byte[] smallBytes = null;
-
-			try {
-				smallBytes = FileUtil.getBytes(smallFile);
-			}
-			catch (IOException ioe) {
-			}
-
-			validate(
-				name, description, xsl, smallImage, smallImageURL, smallFile,
-				smallBytes);
-
-			template = JournalTemplateUtil.findByG_T(groupId, templateId);
-
-			template.setModifiedDate(new Date());
-
-			if (Validator.isNull(template.getStructureId()) &&
-				Validator.isNotNull(structureId)) {
-
-				// Allow users to set the structure if and only if it currently
-				// does not have one. Otherwise, you can have bad data because
-				// there may be an existing article that has chosen to use a
-				// structure and template combination that no longer exists.
-
-				template.setStructureId(structureId);
-			}
-
-			template.setName(name);
-			template.setDescription(description);
-			template.setXsl(xsl);
-			template.setLangType(langType);
-			template.setCacheable(cacheable);
-			template.setSmallImage(smallImage);
-			template.setSmallImageURL(smallImageURL);
-
-			JournalTemplateUtil.update(template, false);
-
-			// Small image
-
-			saveImages(
-				smallImage, template.getSmallImageId(), smallFile,
-				smallBytes);
-
-			mirageTemplate.setTemplate(template);
-		}
-		catch (PortalException pe) {
-			throw new CMSException(pe.getMessage(), pe);
-		}
-		catch (SystemException se) {
-			throw new CMSException(se.getMessage(), se);
-		}
+		throw new UnsupportedOperationException();
 	}
 
 	public void updateTemplateOfContentType(
-			Template mirageJournalTemplate, ContentType contentType,
-			UpdateCriteria criteria)
-		throws CMSException {
+		Template template, ContentType contentType, UpdateCriteria criteria) {
 
-		try {
-			MirageTemplate mirageTemplate =
-				(MirageTemplate)mirageJournalTemplate;
-
-			JournalTemplate template = mirageTemplate.getTemplate();
-
-			JournalTemplateUtil.update(template, false);
-		}
-		catch (SystemException se) {
-			throw new CMSException(se.getMessage(), se);
-		}
+		throw new UnsupportedOperationException();
 	}
 
 	public boolean validateTemplate(
 		Template template, ContentType contentType) {
 
 		throw new UnsupportedOperationException();
-	}
-
-	protected List<Template> getAllTemplates() throws SystemException {
-		List<JournalTemplate> templates = JournalTemplateUtil.findAll();
-
-		return getTemplatesFromJournalTemplates(templates);
-	}
-
-	protected List<Template> getTemplates(long groupId) throws SystemException {
-		List<JournalTemplate> templates =
-			JournalTemplateUtil.findByGroupId(groupId);
-
-		return getTemplatesFromJournalTemplates(templates);
-	}
-
-	protected List<Template> getTemplates(long groupId, int start, int end)
-		throws SystemException {
-
-		List<JournalTemplate> templates =
-			JournalTemplateUtil.findByGroupId(groupId, start, end);
-
-		return getTemplatesFromJournalTemplates(templates);
-	}
-
-	protected List<Template> getTemplates(long groupId, String structureId)
-		throws SystemException {
-
-		List<JournalTemplate> templates =
-			JournalTemplateUtil.findByG_S(groupId, structureId);
-
-		return getTemplatesFromJournalTemplates(templates);
-	}
-
-	protected List<Template> getTemplates(
-			long groupId, String structureId, int start, int end)
-		throws SystemException {
-
-		List<JournalTemplate> templates =
-			JournalTemplateUtil.findByG_S(groupId, structureId, start, end);
-
-		return getTemplatesFromJournalTemplates(templates);
-	}
-
-	protected List<Template> getTemplates(String templateId)
-		throws SystemException {
-
-		List<JournalTemplate> templates =
-			JournalTemplateUtil.findByTemplateId(templateId);
-
-		return getTemplatesFromJournalTemplates(templates);
-	}
-
-	protected List<Template> getTemplatesFromJournalTemplates(
-		List<JournalTemplate> journalTemplates) {
-
-		if (journalTemplates == null) {
-			return null;
-		}
-
-		List<Template> templates =
-			new ArrayList<Template>(journalTemplates.size());
-
-		for (JournalTemplate template : journalTemplates) {
-			templates.add(new MirageTemplate(template));
-		}
-
-		return templates;
-	}
-
-	protected void saveImages(
-			boolean smallImage, long smallImageId, File smallFile,
-			byte[] smallBytes)
-		throws PortalException, SystemException {
-
-		if (smallImage) {
-			if ((smallFile != null) && (smallBytes != null)) {
-				ImageLocalServiceUtil.updateImage(smallImageId, smallBytes);
-			}
-		}
-		else {
-			ImageLocalServiceUtil.deleteImage(smallImageId);
-		}
-	}
-
-	protected void validate(
-			long groupId, String templateId, boolean autoTemplateId,
-			String name, String description, String xsl, boolean smallImage,
-			String smallImageURL, File smallFile, byte[] smallBytes)
-		throws PortalException, SystemException {
-
-		if (!autoTemplateId) {
-			if ((Validator.isNull(templateId)) ||
-					(Validator.isNumber(templateId)) ||
-						(templateId.indexOf(StringPool.SPACE) != -1)) {
-
-				throw new TemplateIdException();
-			}
-
-			try {
-				JournalTemplateUtil.findByG_T(groupId, templateId);
-
-				throw new DuplicateTemplateIdException();
-			}
-			catch (NoSuchTemplateException nste) {
-			}
-		}
-
-		validate(
-			name, description, xsl, smallImage, smallImageURL, smallFile,
-			smallBytes);
-	}
-
-	protected void validate(
-			String name, String description, String xsl, boolean smallImage,
-			String smallImageURL, File smallFile, byte[] smallBytes)
-		throws PortalException {
-
-		if (Validator.isNull(name)) {
-			throw new TemplateNameException();
-		}
-		else if (Validator.isNull(description)) {
-			throw new TemplateDescriptionException();
-		}
-		else if (Validator.isNull(xsl)) {
-			throw new TemplateXslException();
-		}
-
-		String[] imageExtensions =
-			PropsUtil.getArray(PropsKeys.JOURNAL_IMAGE_EXTENSIONS);
-
-		if (smallImage && Validator.isNull(smallImageURL) &&
-				smallFile != null && smallBytes != null) {
-
-			String smallImageName = smallFile.getName();
-
-			if (smallImageName != null) {
-				boolean validSmallImageExtension = false;
-
-				for (int i = 0; i < imageExtensions.length; i++) {
-					if (StringPool.STAR.equals(imageExtensions[i]) ||
-							StringUtil.endsWith(
-								smallImageName, imageExtensions[i])) {
-
-						validSmallImageExtension = true;
-
-						break;
-					}
-				}
-
-				if (!validSmallImageExtension) {
-					throw new TemplateSmallImageNameException(smallImageName);
-				}
-			}
-
-			long smallImageMaxSize =
-				GetterUtil.getLong(
-						PropsUtil.get(PropsKeys.JOURNAL_IMAGE_SMALL_MAX_SIZE));
-
-			if ((smallImageMaxSize > 0) &&
-					((smallBytes == null) ||
-						(smallBytes.length > smallImageMaxSize))) {
-
-				throw new TemplateSmallImageSizeException();
-			}
-		}
 	}
 
 }
