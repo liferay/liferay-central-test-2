@@ -131,11 +131,13 @@ public class MapUtil {
 		}
 	}
 
-	public static LinkedHashMap toLinkedHashMap(String[] params) {
+	public static LinkedHashMap toLinkedHashMap(
+			String[] params, String delimiter) {
+
 		LinkedHashMap map = new LinkedHashMap();
 
 		for (int i = 0; i < params.length; i++) {
-			String[] kvp = StringUtil.split(params[i], StringPool.COLON);
+			String[] kvp = StringUtil.split(params[i], delimiter);
 
 			map.put(kvp[0], kvp[1]);
 		}
@@ -143,4 +145,7 @@ public class MapUtil {
 		return map;
 	}
 
+	public static LinkedHashMap toLinkedHashMap(String[] params) {
+		return toLinkedHashMap(params, StringPool.COLON);
+	}
 }
