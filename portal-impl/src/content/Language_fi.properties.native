@@ -829,6 +829,7 @@ chat=Chatti
 check-all=Valitse kaikki
 check-every=Tarkista joka
 check-mail=Tarkista sähköpostit
+check-your-email-or-configure-email-accounts=<a href="{0}">Check your email</a> or <a href="{1}">configure email accounts.</a>
 checkout-latest=Checkouttaa tuoreimmat
 checkout=Kassalle
 children=Alisivut
@@ -3612,6 +3613,7 @@ x-is-expired,-is-not-approved,-does-not-have-any-content,-or-no-longer-exists={0
 x-is-not-a-display-type={0} ei ole näyttötyyppi
 x-needs-to-approve-you-as-her-friend={0} täytyy hyväksyä sinut ystäväkseen.
 x-needs-to-approve-you-as-his-friend={0} täytyy hyväksyä sinut ystäväkseen.
+x-of-the-emails-in-this-folder-have-been-downloaded={0}% of the emails in this folder have been downloaded. This may take a while to finish.
 x-people-are-planning-to-attend-this-meetup=<b>{0}</b> ihmistä suunnittelee osallistuvan tapaamiseen.
 x-users-were-successfully-notified={0} käyttäjää tiedotettiin onnistuneesti.
 xml-feeds=XML lähteet

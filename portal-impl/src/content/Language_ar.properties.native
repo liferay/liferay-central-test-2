@@ -618,6 +618,7 @@ chat=دردشة
 check-all=إختر الجميع
 check-every=إختر كل
 check-mail=تفقد البريد الإلكتروني
+check-your-email-or-configure-email-accounts=<a href="{0}">Check your email</a> or <a href="{1}">configure email accounts.</a>
 checkout-latest=إجلب أحدث نسخة
 checkout=إجلب
 children=فروع
@@ -2579,6 +2580,7 @@ x-is-expired,-is-not-approved,-does-not-have-any-content,-or-no-longer-exists={0
 x-is-not-a-display-type={0} is not a display type.
 x-needs-to-approve-you-as-her-friend={0} needs to approve you as her friend.
 x-needs-to-approve-you-as-his-friend={0} needs to approve you as his friend.
+x-of-the-emails-in-this-folder-have-been-downloaded={0}% of the emails in this folder have been downloaded. This may take a while to finish.
 x-people-are-planning-to-attend-this-meetup=<b>{0}</b> people are planning to attend this meetup.
 x-users-were-successfully-notified={0} من المستخدمين تم إعلامهم بنجاح
 xml-feeds=تغذية XML

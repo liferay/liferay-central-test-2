@@ -71,6 +71,7 @@ be-sure-to-browse-our-guestbook-for-the-latest-entries=Be sure to {0}browse{1} o
 cannot-be-found={0} cannot be found.
 cell-phones-with-sms-text-messaging-capabilities-map-phone-numbers-to-email-addresses=Cell phones with SMS text messaging capabilities map phone numbers to email addresses. For example, a cell phone number of (626) 123-4567 with Sprint PCS as the carrier has an email address (SMS ID) of <i>6261234567@messaging.sprintpcs.com</i>.
 changed-parent-from-x=Changed parent from "{0}."
+check-your-email-or-configure-email-accounts=<a href="{0}">Check your email</a> or <a href="{1}">configure email accounts.</a>
 choose-a-color-for-each-layer-type=Choose a color for each layer type. Be sure to click {0} when you are done.
 choose-a-color-theme-or-create-your-own-custom-theme=Choose a color theme or create your own {0}custom theme{1}.
 city-or-zip-code=City <b>or</b> Zip Code
@@ -238,6 +239,7 @@ x-is-expired,-is-not-approved,-does-not-have-any-content,-or-no-longer-exists={0
 x-is-not-a-display-type={0} is not a display type.
 x-needs-to-approve-you-as-her-friend={0} needs to approve you as her friend.
 x-needs-to-approve-you-as-his-friend={0} needs to approve you as his friend.
+x-of-the-emails-in-this-folder-have-been-downloaded={0}% of the emails in this folder have been downloaded. This may take a while to finish.
 x-people-are-planning-to-attend-this-meetup=<b>{0}</b> people are planning to attend this meetup.
 x-users-were-successfully-notified={0} users were successfully notified.
 you-are-signed-in-as-x=You are signed in as {0}.

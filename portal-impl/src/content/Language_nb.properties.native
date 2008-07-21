@@ -726,6 +726,7 @@ chat=Chatte
 check-all=Sjekk alle
 check-every=Sjekk hver
 check-mail=Sjekk e-post
+check-your-email-or-configure-email-accounts=<a href="{0}">Check your email</a> or <a href="{1}">configure email accounts.</a>
 checkout-latest=Sjekk siste
 checkout=Sjekk
 children=Undersider
@@ -3110,6 +3111,7 @@ x-is-expired,-is-not-approved,-does-not-have-any-content,-or-no-longer-exists={0
 x-is-not-a-display-type={0} er ikke en display type
 x-needs-to-approve-you-as-her-friend={0} needs to approve you as her friend.
 x-needs-to-approve-you-as-his-friend={0} needs to approve you as his friend.
+x-of-the-emails-in-this-folder-have-been-downloaded={0}% of the emails in this folder have been downloaded. This may take a while to finish.
 x-people-are-planning-to-attend-this-meetup=<b>{0}</b> people are planning to attend this meetup.
 x-users-were-successfully-notified={0} Du har lykkes med å gitt brukerne beskjed
 xml-feeds=XML leveranse
