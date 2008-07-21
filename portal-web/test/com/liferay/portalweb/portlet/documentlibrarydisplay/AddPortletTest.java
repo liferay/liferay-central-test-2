@@ -32,16 +32,13 @@ import com.liferay.portalweb.portal.BaseTestCase;
  */
 public class AddPortletTest extends BaseTestCase {
 	public void testAddPortlet() throws Exception {
-		selenium.click("link=Add Application");
-
 		for (int second = 0;; second++) {
 			if (second >= 60) {
 				fail("timeout");
 			}
 
 			try {
-				if (selenium.isElementPresent(
-							"//div[@id=\"CMS-DocumentLibraryDisplay\"]")) {
+				if (selenium.isElementPresent("link=Add Application")) {
 					break;
 				}
 			}
@@ -51,7 +48,26 @@ public class AddPortletTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click("//div[@id=\"CMS-DocumentLibraryDisplay\"]/p/a");
+		selenium.click("link=Add Application");
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isElementPresent(
+							"//div[@id=&quot;CMS-DocumentLibraryDisplay&quot;]")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
+		selenium.click("//div[@id=&quot;CMS-DocumentLibraryDisplay&quot;]/p/a");
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {

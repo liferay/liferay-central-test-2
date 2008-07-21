@@ -40,7 +40,7 @@ public class AddPageTest extends BaseTestCase {
 
 			try {
 				if (selenium.isElementPresent(
-							"//a[@id=\"my-community-private-pages\"]")) {
+							"//a[@id=&quot;my-community-private-pages&quot;]")) {
 					break;
 				}
 			}
@@ -50,8 +50,25 @@ public class AddPageTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click("//a[@id=\"my-community-private-pages\"]");
+		selenium.click("//a[@id=&quot;my-community-private-pages&quot;]");
 		selenium.waitForPageToLoad("30000");
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isElementPresent("//div/a/span")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
 		selenium.click("//div/a/span");
 
 		for (int second = 0;; second++) {
@@ -74,6 +91,23 @@ public class AddPageTest extends BaseTestCase {
 			RuntimeVariables.replace("Document Librar Displa Test Page"));
 		selenium.type("new_page",
 			RuntimeVariables.replace("Document Library Display Test Page"));
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isElementPresent("link=Save")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
 		selenium.click("link=Save");
 
 		for (int second = 0;; second++) {
