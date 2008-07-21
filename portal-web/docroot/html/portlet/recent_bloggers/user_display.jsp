@@ -31,52 +31,10 @@ Object[] objArray = (Object[])row.getObject();
 
 BlogsStatsUser statsUser = (BlogsStatsUser)objArray[0];
 String rowHREF = (String)objArray[1];
-
-String suserId = (String) session.getAttribute("j_username");
-
-Long statsUserId = new Long(0);
-if (statsUser != null) {
-	statsUserId = statsUser.getUserId();
-}
-
-Long loggedInUserId = new Long(0);
-if (suserId != null) {
-	loggedInUserId = new Long(suserId);
-}
-
-String serverName = request.getServerName();
-String scheme = request.getScheme();
-Integer serverPort = request.getServerPort();
-
-String resourceString = scheme + "://" + serverName + ":" +
-							serverPort.toString() + "/ruon-web/resources";
-
-URL presenceRestURL = new URL(resourceString + "/presence/status/" +
-							statsUserId.toString() + "/0");
-
-URL communicationRestURL = new URL(resourceString + "/communication/ways/" +
-					statsUserId.toString() + "/" + loggedInUserId.toString());
-
-boolean isPresenceDeployed = false;
-
-if (((HttpURLConnection) presenceRestURL.openConnection())
-		.getResponseCode() == HttpURLConnection.HTTP_OK) {
-	isPresenceDeployed = true;
-}
-
-HttpUtil httpUtil = new HttpUtil();
-String presenceStatus = httpUtil.URLtoString(presenceRestURL.toString());
-
-String communicationWays = httpUtil.URLtoString(communicationRestURL.toString());
 %>
 
 <liferay-ui:user-display userId="<%= statsUser.getUserId() %>" url="<%= rowHREF %>">
 	<liferay-ui:message key="posts" />: <%= statsUser.getEntryCount() %><br />
 	<liferay-ui:message key="stars" />: <%= statsUser.getRatingsTotalEntries() %><br />
-	<liferay-ui:message key="date" />: <%= dateFormatDate.format(statsUser.getLastPostDate()) %><br/>
-
-	<% if(isPresenceDeployed){%>
-	<liferay-ui:message key="presence" />: <%= presenceStatus %><br />
-	<liferay-ui:message key="communicate" />: <%= communicationWays %>
-	<%} %>
+	<liferay-ui:message key="date" />: <%= dateFormatDate.format(statsUser.getLastPostDate()) %>
 </liferay-ui:user-display>

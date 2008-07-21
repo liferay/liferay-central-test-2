@@ -30,11 +30,6 @@
 <%@ page import="com.liferay.portlet.blogs.service.BlogsStatsUserLocalServiceUtil" %>
 <%@ page import="com.liferay.portlet.blogs.util.comparator.StatsUserLastPostDateComparator" %>
 
-<%@ page import="com.liferay.portal.kernel.util.HttpUtil"%>
-
-<%@ page import="java.net.URL"%>
-<%@ page import="java.net.HttpURLConnection"%>
-
 <%
 PortletPreferences prefs = renderRequest.getPreferences();
 
