@@ -31,6 +31,13 @@ import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.util.DocumentUtil;
+import com.liferay.portlet.documentlibrary.lar.DLPortletDataHandlerImpl;
+import com.liferay.portlet.documentlibrary.model.DLFileEntry;
+import com.liferay.portlet.documentlibrary.model.DLFileRank;
+import com.liferay.portlet.documentlibrary.model.DLFolder;
+import com.liferay.portlet.imagegallery.lar.IGPortletDataHandlerImpl;
+import com.liferay.portlet.imagegallery.model.IGFolder;
+import com.liferay.portlet.imagegallery.model.IGImage;
 import com.liferay.portlet.journal.NoSuchArticleException;
 import com.liferay.portlet.journal.model.JournalArticle;
 import com.liferay.portlet.journal.model.JournalStructure;
@@ -41,6 +48,7 @@ import com.liferay.portlet.journal.service.persistence.JournalTemplateUtil;
 import com.liferay.util.MapUtil;
 import com.liferay.util.xml.XMLFormatter;
 
+import java.util.List;
 import java.util.Map;
 
 import javax.portlet.PortletPreferences;
@@ -152,8 +160,15 @@ public class JournalContentPortletDataHandlerImpl
 			Document doc = DocumentHelper.createDocument();
 
 			Element root = doc.addElement("journal-content-data");
+			Element igFoldersEl = root.addElement("ig-folders");
+			Element igImagesEl = root.addElement("ig-images");
+			Element dlFoldersEl = root.addElement("dl-folders");
+			Element dlFilesEl = root.addElement("dl-file-entries");
+			Element dlFileRanksEl = root.addElement("dl-file-ranks");
 
-			JournalPortletDataHandlerImpl.exportArticle(context, root, article);
+			JournalPortletDataHandlerImpl.exportArticle(
+				context, root, igFoldersEl, igImagesEl, dlFoldersEl, dlFilesEl,
+				dlFileRanksEl, article);
 
 			String structureId = article.getStructureId();
 
@@ -184,7 +199,8 @@ public class JournalContentPortletDataHandlerImpl
 
 	public PortletDataHandlerControl[] getExportControls() {
 		return new PortletDataHandlerControl[] {
-			_selectedArticles, _images, _comments, _ratings, _tags
+			_selectedArticles, _images, _comments, _ratings, _tags,
+			_embeddedAssets
 		};
 	}
 
@@ -248,6 +264,91 @@ public class JournalContentPortletDataHandlerImpl
 				prefs.setValue("article-id", articleId);
 			}
 
+			List<Element> folderEls = root.element("ig-folders").elements(
+				"folder");
+
+			Map<Long, Long> folderPKs = context.getNewPrimaryKeysMap(
+				IGFolder.class);
+
+			for (Element folderEl : folderEls) {
+				String path = folderEl.attributeValue("path");
+
+				if (context.isPathNotProcessed(path)) {
+					IGFolder folder = (IGFolder)context.getZipEntryAsObject(
+						path);
+
+					IGPortletDataHandlerImpl.importFolder(
+						context, folderPKs, folder);
+				}
+			}
+
+			List<Element> imageEls = root.element("ig-images").elements("image");
+
+			for (Element imageEl : imageEls) {
+				String path = imageEl.attributeValue("path");
+				String binPath = imageEl.attributeValue("bin-path");
+
+				if (context.isPathNotProcessed(path)) {
+					IGImage image = (IGImage)context.getZipEntryAsObject(path);
+
+					IGPortletDataHandlerImpl.importImage(
+						context, folderPKs, image, binPath);
+				}
+			}
+
+			List<Element> dlFolderEls = root.element("dl-folders").elements(
+				"folder");
+
+			Map<Long, Long> dlFolderPKs = context.getNewPrimaryKeysMap(
+				DLFolder.class);
+
+			for (Element folderEl : dlFolderEls) {
+				String path = folderEl.attributeValue("path");
+
+				if (context.isPathNotProcessed(path)) {
+					DLFolder folder = (DLFolder)context.getZipEntryAsObject(
+						path);
+
+					DLPortletDataHandlerImpl.importFolder(
+						context, dlFolderPKs, folder);
+				}
+			}
+
+			List<Element> fileEntryEls = root.element("dl-file-entries").elements(
+				"file-entry");
+
+			Map<String, String> fileEntryNames = context.getNewPrimaryKeysMap(
+				DLFileEntry.class);
+
+			for (Element fileEntryEl : fileEntryEls) {
+				String path = fileEntryEl.attributeValue("path");
+				String binPath = fileEntryEl.attributeValue("bin-path");
+
+				if (context.isPathNotProcessed(path)) {
+					DLFileEntry fileEntry =
+						(DLFileEntry)context.getZipEntryAsObject(path);
+
+					DLPortletDataHandlerImpl.importFileEntry(
+						context, dlFolderPKs, fileEntryNames, fileEntry,
+						binPath);
+				}
+			}
+
+			List<Element> fileRankEls = root.element("dl-file-ranks").elements(
+				"file-rank");
+
+			for (Element fileRankEl : fileRankEls) {
+				String path = fileRankEl.attributeValue("path");
+
+				if (context.isPathNotProcessed(path)) {
+					DLFileRank fileRank =
+						(DLFileRank)context.getZipEntryAsObject(path);
+
+					DLPortletDataHandlerImpl.importFileRank(
+						context, dlFolderPKs, fileEntryNames, fileRank);
+				}
+			}
+
 			return prefs;
 		}
 		catch (Exception e) {
@@ -264,6 +365,10 @@ public class JournalContentPortletDataHandlerImpl
 	private static final PortletDataHandlerBoolean _selectedArticles =
 		new PortletDataHandlerBoolean(
 			_NAMESPACE, "selected-articles", true, true);
+
+	private static final PortletDataHandlerBoolean _embeddedAssets =
+		new PortletDataHandlerBoolean(
+			_NAMESPACE, "embedded-assets");
 
 	private static final PortletDataHandlerBoolean _images =
 		new PortletDataHandlerBoolean(_NAMESPACE, "images");

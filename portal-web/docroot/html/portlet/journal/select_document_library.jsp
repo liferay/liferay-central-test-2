@@ -146,6 +146,7 @@ for (int i = 0; i < results.size(); i++) {
 
 	for (int i = 0; i < results.size(); i++) {
 		DLFileEntry fileEntry = (DLFileEntry)results.get(i);
+		DLFolder curFolder = DLFolderLocalServiceUtil.getDLFolder(fileEntry.getFolderId());
 
 		ResultRow row = new ResultRow(fileEntry, fileEntry.getFileEntryId(), i);
 
@@ -192,11 +193,12 @@ for (int i = 0; i < results.size(); i++) {
 		sb.append("opener.");
 		sb.append(renderResponse.getNamespace());
 		sb.append("selectDocumentLibrary('");
-		sb.append("@main_path@/document_library/get_file?p_l_id=");
-		sb.append(themeDisplay.getPlid());
-		sb.append("&uuid=");
+		sb.append(themeDisplay.getPathMain());
+		sb.append("/document_library/get_file?uuid=");
 		sb.append(fileEntry.getUuid());
-		sb.append("&groupId=@group_id@'); window.close();");
+		sb.append("&groupId=");
+		sb.append(curFolder.getGroupId());
+		sb.append("'); window.close();");
 
 		row.addButton("right", SearchEntry.DEFAULT_VALIGN, LanguageUtil.get(pageContext, "choose"), sb.toString());
 

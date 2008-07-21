@@ -166,9 +166,11 @@ public class ImageCommandReceiver extends BaseCommandReceiver {
 
 			ThemeDisplay themeDisplay = arg.getThemeDisplay();
 
-			url.append(themeDisplay.getPathContext());
-			url.append("/image/image_gallery?img_id=");
-			url.append(largeImageId);
+			url.append(themeDisplay.getPathImage());
+			url.append("/image_gallery?uuid=");
+			url.append(image.getUuid());
+			url.append("&groupId=");
+			url.append(folder.getGroupId());
 			url.append("&t=");
 			url.append(ImageServletTokenUtil.getToken(largeImageId));
 

@@ -161,10 +161,10 @@ public class DocumentCommandReceiver extends BaseCommandReceiver {
 			ThemeDisplay themeDisplay = arg.getThemeDisplay();
 
 			url.append(themeDisplay.getPathMain());
-			url.append("/document_library/get_file?folderId=");
-			url.append(fileEntry.getFolderId());
-			url.append("&name=");
-			url.append(HttpUtil.encodeURL(fileEntry.getName()));
+			url.append("/document_library/get_file?uuid=");
+			url.append(fileEntry.getUuid());
+			url.append("&groupId=");
+			url.append(folder.getGroupId());
 
 			fileEl.setAttribute("url", url.toString());
 		}

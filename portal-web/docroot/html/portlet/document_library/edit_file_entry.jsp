@@ -34,6 +34,7 @@ String redirect = ParamUtil.getString(request, "redirect");
 String referringPortletResource = ParamUtil.getString(request, "referringPortletResource");
 
 DLFileEntry fileEntry = (DLFileEntry)request.getAttribute(WebKeys.DOCUMENT_LIBRARY_FILE_ENTRY);
+DLFolder folder = null;
 
 long folderId = BeanParamUtil.getLong(fileEntry, request, "folderId");
 String name = BeanParamUtil.getString(fileEntry, request, "name");
@@ -63,6 +64,12 @@ if (fileEntry != null) {
 		if (lock.getUserId() == user.getUserId()) {
 			hasLock = Boolean.TRUE;
 		}
+	}
+	catch (Exception e) {
+	}
+
+	try {
+		folder = DLFolderLocalServiceUtil.getDLFolder(fileEntry.getFolderId());
 	}
 	catch (Exception e) {
 	}
@@ -285,7 +292,7 @@ portletURL.setParameter("name", name);
 		</td>
 		<td>
 			<liferay-ui:input-resource
-				url='<%= themeDisplay.getPortalURL() + themeDisplay.getPathMain() + "/document_library/get_file?p_l_id=" + themeDisplay.getPlid() + "&folderId=" + folderId + "&name=" + HttpUtil.encodeURL(name) %>'
+				url='<%= themeDisplay.getPortalURL() + themeDisplay.getPathMain() + "/document_library/get_file?uuid=" + fileEntry.getUuid() + "&groupId=" + folder.getGroupId() %>'
 			/>
 		</td>
 	</tr>

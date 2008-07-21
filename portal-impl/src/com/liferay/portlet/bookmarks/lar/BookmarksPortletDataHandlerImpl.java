@@ -238,9 +238,7 @@ public class BookmarksPortletDataHandlerImpl implements PortletDataHandler {
 			PortletDataContext context, Element foldersEl, long folderId)
 		throws PortalException, SystemException {
 
-		if ((!context.hasDateRange()) ||
-			(folderId == BookmarksFolderImpl.DEFAULT_PARENT_FOLDER_ID)) {
-
+		if (folderId == BookmarksFolderImpl.DEFAULT_PARENT_FOLDER_ID) {
 			return;
 		}
 

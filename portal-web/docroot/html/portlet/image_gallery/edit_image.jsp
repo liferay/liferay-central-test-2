@@ -31,6 +31,8 @@ String referringPortletResource = ParamUtil.getString(request, "referringPortlet
 
 IGImage image = (IGImage)request.getAttribute(WebKeys.IMAGE_GALLERY_IMAGE);
 
+IGFolder folder = null;
+
 long imageId = BeanParamUtil.getLong(image, request, "imageId");
 
 long folderId = BeanParamUtil.getLong(image, request, "folderId");
@@ -41,6 +43,8 @@ Image largeImage = null;
 
 if (image != null) {
 	largeImage = ImageLocalServiceUtil.getImage(image.getLargeImageId());
+
+	folder = IGFolderLocalServiceUtil.getFolder(folderId);
 }
 %>
 
@@ -105,7 +109,7 @@ if (image != null) {
 		</td>
 		<td>
 			<liferay-ui:input-resource
-				url='<%= themeDisplay.getPortalURL() + themeDisplay.getPathImage() + "/image_gallery?img_id=" + image.getLargeImageId() +"&t=" + ImageServletTokenUtil.getToken(image.getLargeImageId()) %>'
+				url='<%= (Validator.isNull(PortalUtil.getCDNHost()) ? themeDisplay.getPortalURL() : "") + themeDisplay.getPathImage() + "/image_gallery?uuid=" + image.getUuid() +"&groupId=" + folder.getGroupId() + "&t=" + ImageServletTokenUtil.getToken(image.getLargeImageId()) %>'
 			/>
 		</td>
 	</tr>
@@ -120,17 +124,15 @@ if (image != null) {
 				<%
 				StringBuffer sb = new StringBuffer();
 
-				IGFolder curFolder = IGFolderLocalServiceUtil.getFolder(folderId);
-
 				while (true) {
-					sb.insert(0, HttpUtil.encodeURL(curFolder.getName(), true));
+					sb.insert(0, HttpUtil.encodeURL(folder.getName(), true));
 					sb.insert(0, StringPool.SLASH);
 
-					if (curFolder.getParentFolderId() == IGFolderImpl.DEFAULT_PARENT_FOLDER_ID) {
+					if (folder.getParentFolderId() == IGFolderImpl.DEFAULT_PARENT_FOLDER_ID) {
 						break;
 					}
 					else {
-						curFolder = IGFolderLocalServiceUtil.getFolder(curFolder.getParentFolderId());
+						folder = IGFolderLocalServiceUtil.getFolder(folder.getParentFolderId());
 					}
 				}
 

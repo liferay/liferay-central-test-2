@@ -208,7 +208,7 @@ public class IGPortletDataHandlerImpl implements PortletDataHandler {
 		}
 	}
 
-	protected void exportImage(
+	public static void exportImage(
 			PortletDataContext context, Element foldersEl, Element imagesEl,
 			IGImage image)
 		throws PortalException, SystemException {
@@ -245,13 +245,11 @@ public class IGPortletDataHandlerImpl implements PortletDataHandler {
 		exportParentFolder(context, foldersEl, image.getFolderId());
 	}
 
-	protected void exportParentFolder(
+	protected static void exportParentFolder(
 			PortletDataContext context, Element foldersEl, long folderId)
 		throws PortalException, SystemException {
 
-		if ((!context.hasDateRange()) ||
-			(folderId == IGFolderImpl.DEFAULT_PARENT_FOLDER_ID)) {
-
+		if (folderId == IGFolderImpl.DEFAULT_PARENT_FOLDER_ID) {
 			return;
 		}
 
@@ -272,7 +270,7 @@ public class IGPortletDataHandlerImpl implements PortletDataHandler {
 		exportParentFolder(context, foldersEl, folder.getParentFolderId());
 	}
 
-	protected void importFolder(
+	public static void importFolder(
 			PortletDataContext context, Map<Long, Long> folderPKs,
 			IGFolder folder)
 		throws Exception {
@@ -335,7 +333,7 @@ public class IGPortletDataHandlerImpl implements PortletDataHandler {
 		}
 	}
 
-	protected void importImage(
+	public static void importImage(
 			PortletDataContext context, Map<Long, Long> folderPKs,
 			IGImage image, String binPath)
 		throws Exception {
@@ -411,7 +409,7 @@ public class IGPortletDataHandlerImpl implements PortletDataHandler {
 		}
 	}
 
-	protected String getFolderName(
+	protected static String getFolderName(
 			long companyId, long groupId, long parentFolderId, String name,
 			int count)
 		throws SystemException {
@@ -442,7 +440,7 @@ public class IGPortletDataHandlerImpl implements PortletDataHandler {
 		return getFolderName(companyId, groupId, parentFolderId, name, ++count);
 	}
 
-	protected String getFolderPath(
+	protected static String getFolderPath(
 		PortletDataContext context, IGFolder folder) {
 
 		StringBuilder sb = new StringBuilder();
@@ -455,7 +453,7 @@ public class IGPortletDataHandlerImpl implements PortletDataHandler {
 		return sb.toString();
 	}
 
-	protected String getImageBinPath(
+	protected static String getImageBinPath(
 		PortletDataContext context, IGImage image) {
 
 		StringBuilder sb = new StringBuilder();
@@ -469,7 +467,7 @@ public class IGPortletDataHandlerImpl implements PortletDataHandler {
 		return sb.toString();
 	}
 
-	protected String getImagePath(
+	protected static String getImagePath(
 		PortletDataContext context, IGImage image) {
 
 		StringBuilder sb = new StringBuilder();

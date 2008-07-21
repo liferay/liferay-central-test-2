@@ -235,7 +235,7 @@ public class DLPortletDataHandlerImpl implements PortletDataHandler {
 		return false;
 	}
 
-	protected void exportFileEntry(
+	public static void exportFileEntry(
 			PortletDataContext context, Element foldersEl,
 			Element fileEntriesEl, Element fileRanksEl, DLFileEntry fileEntry)
 		throws PortalException, SystemException {
@@ -298,7 +298,7 @@ public class DLPortletDataHandlerImpl implements PortletDataHandler {
 		exportParentFolder(context, foldersEl, fileEntry.getFolderId());
 	}
 
-	protected void exportFileRank(
+	protected static void exportFileRank(
 			PortletDataContext context, Element fileRanksEl,
 			DLFileRank fileRank)
 		throws SystemException {
@@ -316,7 +316,7 @@ public class DLPortletDataHandlerImpl implements PortletDataHandler {
 		}
 	}
 
-	protected void exportFileShortcut(
+	protected static void exportFileShortcut(
 			PortletDataContext context, Element foldersEl,
 			Element fileShortcutsEl, DLFileShortcut fileShortcut)
 		throws PortalException, SystemException {
@@ -336,7 +336,7 @@ public class DLPortletDataHandlerImpl implements PortletDataHandler {
 		exportParentFolder(context, foldersEl, fileShortcut.getFolderId());
 	}
 
-	protected void exportFolder(
+	public static void exportFolder(
 			PortletDataContext context, Element foldersEl,
 			Element fileEntriesEl, Element fileShortcutsEl, Element fileRanksEl,
 			DLFolder folder)
@@ -377,13 +377,11 @@ public class DLPortletDataHandlerImpl implements PortletDataHandler {
 		}
 	}
 
-	protected void exportParentFolder(
+	protected static void exportParentFolder(
 			PortletDataContext context, Element foldersEl, long folderId)
 		throws PortalException, SystemException {
 
-		if ((!context.hasDateRange()) ||
-			(folderId == DLFolderImpl.DEFAULT_PARENT_FOLDER_ID)) {
-
+		if (folderId == DLFolderImpl.DEFAULT_PARENT_FOLDER_ID) {
 			return;
 		}
 
@@ -404,7 +402,7 @@ public class DLPortletDataHandlerImpl implements PortletDataHandler {
 		exportParentFolder(context, foldersEl, folder.getParentFolderId());
 	}
 
-	protected String getFileEntryBinPath(
+	protected static String getFileEntryBinPath(
 		PortletDataContext context, DLFileEntry fileEntry) {
 
 		StringBuilder sb = new StringBuilder();
@@ -420,7 +418,7 @@ public class DLPortletDataHandlerImpl implements PortletDataHandler {
 		return sb.toString();
 	}
 
-	protected String getFileEntryPath(
+	protected static String getFileEntryPath(
 		PortletDataContext context, DLFileEntry fileEntry) {
 
 		StringBuilder sb = new StringBuilder();
@@ -435,7 +433,7 @@ public class DLPortletDataHandlerImpl implements PortletDataHandler {
 		return sb.toString();
 	}
 
-	protected String getFolderName(
+	protected static String getFolderName(
 			long companyId, long groupId, long parentFolderId, String name,
 			int count)
 		throws SystemException {
@@ -466,28 +464,28 @@ public class DLPortletDataHandlerImpl implements PortletDataHandler {
 		return getFolderName(companyId, groupId, parentFolderId, name, ++count);
 	}
 
-	protected String getFolderPath(
+	protected static String getFolderPath(
 		PortletDataContext context, DLFolder folder) {
 
 		return context.getPortletPath(PortletKeys.DOCUMENT_LIBRARY) +
 			"/folders/" + folder.getFolderId() + ".xml";
 	}
 
-	protected String getFileRankPath(
+	protected static String getFileRankPath(
 		PortletDataContext context, DLFileRank fileRank) {
 
 		return context.getPortletPath(PortletKeys.DOCUMENT_LIBRARY) +
 			"/ranks/" + fileRank.getFileRankId() + ".xml";
 	}
 
-	protected String getFileShortcutPath(
+	protected static String getFileShortcutPath(
 		PortletDataContext context, DLFileShortcut fileShortcut) {
 
 		return context.getPortletPath(PortletKeys.DOCUMENT_LIBRARY) +
 			"/shortcut/" + fileShortcut.getFileShortcutId() + ".xml";
 	}
 
-	protected void importFileEntry(
+	public static void importFileEntry(
 			PortletDataContext context, Map<Long, Long> folderPKs,
 			Map<String, String> fileEntryNames, DLFileEntry fileEntry,
 			String binPath)
@@ -568,7 +566,7 @@ public class DLPortletDataHandlerImpl implements PortletDataHandler {
 		}
 	}
 
-	protected void importFileRank(
+	public static void importFileRank(
 			PortletDataContext context, Map<Long, Long> folderPKs,
 			Map<String, String> fileEntryNames, DLFileRank rank)
 		throws Exception {
@@ -648,7 +646,7 @@ public class DLPortletDataHandlerImpl implements PortletDataHandler {
 		}
 	}
 
-	protected void importFolder(
+	public static void importFolder(
 			PortletDataContext context, Map<Long, Long> folderPKs,
 			DLFolder folder)
 		throws Exception {

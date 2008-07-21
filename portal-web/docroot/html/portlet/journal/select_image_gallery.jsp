@@ -137,6 +137,7 @@ for (int i = 0; i < results.size(); i++) {
 
 	for (int i = 0; i < results.size(); i++) {
 		IGImage image = (IGImage)results.get(i);
+		IGFolder curFolder = IGFolderLocalServiceUtil.getFolder(image.getFolderId());
 
 		Image largeImage = ImageLocalServiceUtil.getImage(image.getLargeImageId());
 
@@ -159,9 +160,12 @@ for (int i = 0; i < results.size(); i++) {
 		sb.append("opener.");
 		sb.append(renderResponse.getNamespace());
 		sb.append("selectImageGallery('");
-		sb.append("@image_path@/image_gallery?uuid=");
+		sb.append(themeDisplay.getPathImage());
+		sb.append("/image_gallery?uuid=");
 		sb.append(image.getUuid());
-		sb.append("&groupId=@group_id@&t=");
+		sb.append("&groupId=");
+		sb.append(curFolder.getGroupId());
+		sb.append("&t=");
 		sb.append(ImageServletTokenUtil.getToken(image.getLargeImageId()));
 		sb.append("'); window.close();");
 
