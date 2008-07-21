@@ -88,27 +88,19 @@ public class GetArticleAction extends Action {
 
 			String xml = article.getContentByLocale(languageId);
 
-			String contentType = ContentTypes.TEXT_HTML_UTF8;
+			SAXReader reader = new SAXReader();
 
-			Document doc = null;
+			Document doc = reader.read(new StringReader(xml));
 
-			Element root = null;
+			Element root = doc.getRootElement();
 
-			if (article.isTemplateDriven()) {
-				SAXReader reader = new SAXReader();
+			addProcessingInstructions(doc, themeDisplay, article);
 
-				doc = reader.read(new StringReader(xml));
+			JournalUtil.addAllReservedEls(root, tokens, article);
 
-				root = doc.getRootElement();
+			xml = JournalUtil.formatXML(doc);
 
-				addProcessingInstructions(doc, themeDisplay, article);
-
-				JournalUtil.addAllReservedEls(root, tokens, article);
-
-				xml = JournalUtil.formatXML(doc);
-
-				contentType = ContentTypes.TEXT_XML_UTF8;
-			}
+			String contentType = ContentTypes.TEXT_XML_UTF8;
 
 			String fileName = null;
 			byte[] bytes = xml.getBytes();

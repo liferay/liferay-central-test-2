@@ -55,6 +55,7 @@ import com.liferay.portlet.journal.util.comparator.ArticleModifiedDateComparator
 import com.liferay.portlet.journal.util.comparator.ArticleReviewDateComparator;
 import com.liferay.portlet.journal.util.comparator.ArticleTitleComparator;
 import com.liferay.util.FiniteUniqueStack;
+import com.liferay.util.LocalizationUtil;
 import com.liferay.util.xml.XMLFormatter;
 
 import java.io.IOException;
@@ -938,7 +939,7 @@ public class JournalUtil {
 		String output = null;
 
 		if (Validator.isNull(langType)) {
-			output = xml;
+			output = LocalizationUtil.getLocalization(xml, languageId);
 		}
 		else if (langType.equals(JournalTemplateImpl.LANG_TYPE_VM)) {
 			output = JournalVmUtil.transform(tokens, languageId, xml, script);

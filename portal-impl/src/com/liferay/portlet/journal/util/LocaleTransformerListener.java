@@ -81,10 +81,6 @@ public class LocaleTransformerListener extends TransformerListener {
 
 		_requestedLocale = getLanguageId();
 
-		if (!isTemplateDriven()) {
-			return LocalizationUtil.getLocalization(xml, _requestedLocale);
-		}
-
 		try {
 			SAXReader reader = new SAXReader();
 
