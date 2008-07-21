@@ -39,28 +39,47 @@
  * Copyright 2008 Sun Microsystems Inc. All rights reserved.
  */
 
-package com.liferay.portal.mirage.custom;
+package com.liferay.portal.mirage.service;
 
 import com.sun.portal.cms.mirage.model.custom.Content;
-import com.sun.portal.cms.mirage.service.custom.ContentViewService;
+import com.sun.portal.cms.mirage.service.custom.WorkflowService;
 
 /**
- * <a href="ContentViewServiceImpl.java.html"><b><i>View Source</i></b></a>
+ * <a href="WorkflowServiceImpl.java.html"><b><i>View Source</i></b></a>
  *
- * @author Jorge Ferrer
  * @author Prakash Reddy
+ * @author Karthik Sudarshan
  *
  */
-public class ContentViewServiceImpl implements ContentViewService {
+public class WorkflowServiceImpl implements WorkflowService {
 
-	public String getContentView(Content content, String appContextName) {
+	public void submitContentToWorkflow(String contentUUID) {
 		throw new UnsupportedOperationException();
 	}
 
-	public String getContentView(
-		Content content, String version, String username,
-		String appContextName) {
+	public void updateWorkflowCommentsAccepted(String contentUUID) {
+		throw new UnsupportedOperationException();
+	}
 
+	public void updateWorkflowComplete(Content content) {
+		throw new UnsupportedOperationException();
+	}
+
+	public void updateWorkflowComplete(String contentUUID) {
+		throw new UnsupportedOperationException();
+	}
+
+	public void updateWorkflowContentRejected(Content content) {
+		throw new UnsupportedOperationException();
+	}
+
+	public void updateWorkflowContentRejected(
+		String contentUUID, String comments) {
+
+		throw new UnsupportedOperationException();
+	}
+
+	public void updateWorkflowStatus(String contentUUID, String status) {
 		throw new UnsupportedOperationException();
 	}
 

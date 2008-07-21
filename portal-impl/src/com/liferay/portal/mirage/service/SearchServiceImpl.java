@@ -39,27 +39,30 @@
  * Copyright 2008 Sun Microsystems Inc. All rights reserved.
  */
 
-package com.liferay.portal.mirage.custom;
+package com.liferay.portal.mirage.service;
 
-import com.sun.portal.cms.mirage.service.custom.FeedService;
-import com.sun.syndication.feed.synd.SyndFeed;
+import com.sun.portal.cms.mirage.model.custom.Content;
+import com.sun.portal.cms.mirage.model.custom.ContentType;
+import com.sun.portal.cms.mirage.model.search.SearchCriteria;
+import com.sun.portal.cms.mirage.service.custom.SearchService;
 
-import java.io.Writer;
+import java.util.List;
 
 /**
- * <a href="FeedServiceImpl.java.html"><b><i>View Source</i></b></a>
+ * <a href="SearchServiceImpl.java.html"><b><i>View Source</i></b></a>
  *
  * @author Prakash Reddy
  *
  */
-public class FeedServiceImpl implements FeedService {
+public class SearchServiceImpl implements SearchService {
 
-	public SyndFeed getFeedForAllContentsOfContentType(String contentTypeUUID) {
+	public List<Content> searchContents(
+		ContentType contentType, SearchCriteria searchCriteria) {
+
 		throw new UnsupportedOperationException();
 	}
 
-	public boolean writeFeadToWriter(Writer out, SyndFeed feed) {
-
+	public List<Content> searchContents(ContentType contentType, String name) {
 		throw new UnsupportedOperationException();
 	}
 

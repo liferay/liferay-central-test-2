@@ -39,47 +39,45 @@
  * Copyright 2008 Sun Microsystems Inc. All rights reserved.
  */
 
-package com.liferay.portal.mirage.custom;
+package com.liferay.portal.mirage.service;
 
-import com.sun.portal.cms.mirage.model.custom.Content;
-import com.sun.portal.cms.mirage.service.custom.WorkflowService;
+import com.sun.portal.cms.mirage.model.core.User;
+import com.sun.portal.cms.mirage.service.custom.VersioningService;
+
+import java.util.Collection;
+
+import javax.jcr.Node;
 
 /**
- * <a href="WorkflowServiceImpl.java.html"><b><i>View Source</i></b></a>
+ * <a href="VersioningServiceImpl.java.html"><b><i>View Source</i></b></a>
  *
+ * @author Jorge Ferrer
  * @author Prakash Reddy
- * @author Karthik Sudarshan
- *
  */
-public class WorkflowServiceImpl implements WorkflowService {
+public class VersioningServiceImpl<VersionableContent>
+	implements VersioningService<VersionableContent> {
 
-	public void submitContentToWorkflow(String contentUUID) {
-		throw new UnsupportedOperationException();
-	}
-
-	public void updateWorkflowCommentsAccepted(String contentUUID) {
-		throw new UnsupportedOperationException();
-	}
-
-	public void updateWorkflowComplete(Content content) {
-		throw new UnsupportedOperationException();
-	}
-
-	public void updateWorkflowComplete(String contentUUID) {
-		throw new UnsupportedOperationException();
-	}
-
-	public void updateWorkflowContentRejected(Content content) {
-		throw new UnsupportedOperationException();
-	}
-
-	public void updateWorkflowContentRejected(
-		String contentUUID, String comments) {
+	public void checkinNode(
+		Node node, User user, VersionableContent versionableContent) {
 
 		throw new UnsupportedOperationException();
 	}
 
-	public void updateWorkflowStatus(String contentUUID, String status) {
+	public void checkoutNode(Node node, User user) {
+		throw new UnsupportedOperationException();
+	}
+
+	public Collection<VersionableContent> getAllVersions(Node node) {
+		throw new UnsupportedOperationException();
+	}
+
+	public void uncheckoutNode(Node node, User user) {
+		throw new UnsupportedOperationException();
+	}
+
+	public void updateNode(
+		Node node, User user, VersionableContent versionableContent) {
+
 		throw new UnsupportedOperationException();
 	}
 

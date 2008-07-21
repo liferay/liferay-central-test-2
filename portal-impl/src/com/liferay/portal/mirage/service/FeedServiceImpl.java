@@ -39,44 +39,26 @@
  * Copyright 2008 Sun Microsystems Inc. All rights reserved.
  */
 
-package com.liferay.portal.mirage.custom;
+package com.liferay.portal.mirage.service;
 
-import com.sun.portal.cms.mirage.model.core.User;
-import com.sun.portal.cms.mirage.service.custom.VersioningService;
+import com.sun.portal.cms.mirage.service.custom.FeedService;
+import com.sun.syndication.feed.synd.SyndFeed;
 
-import java.util.Collection;
-
-import javax.jcr.Node;
+import java.io.Writer;
 
 /**
- * <a href="VersioningServiceImpl.java.html"><b><i>View Source</i></b></a>
+ * <a href="FeedServiceImpl.java.html"><b><i>View Source</i></b></a>
  *
- * @author Jorge Ferrer
  * @author Prakash Reddy
+ *
  */
-public class VersioningServiceImpl<VersionableContent>
-	implements VersioningService<VersionableContent> {
+public class FeedServiceImpl implements FeedService {
 
-	public void checkinNode(
-		Node node, User user, VersionableContent versionableContent) {
-
+	public SyndFeed getFeedForAllContentsOfContentType(String contentTypeUUID) {
 		throw new UnsupportedOperationException();
 	}
 
-	public void checkoutNode(Node node, User user) {
-		throw new UnsupportedOperationException();
-	}
-
-	public Collection<VersionableContent> getAllVersions(Node node) {
-		throw new UnsupportedOperationException();
-	}
-
-	public void uncheckoutNode(Node node, User user) {
-		throw new UnsupportedOperationException();
-	}
-
-	public void updateNode(
-		Node node, User user, VersionableContent versionableContent) {
+	public boolean writeFeadToWriter(Writer out, SyndFeed feed) {
 
 		throw new UnsupportedOperationException();
 	}
