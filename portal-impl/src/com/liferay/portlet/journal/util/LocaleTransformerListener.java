@@ -25,7 +25,6 @@ package com.liferay.portlet.journal.util;
 import com.liferay.portal.kernel.util.LocaleUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
-import com.liferay.util.LocalizationUtil;
 
 import java.io.StringReader;
 
