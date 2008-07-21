@@ -47,8 +47,8 @@ import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;
-import com.liferay.portal.mirage.model.MirageFeed;
-import com.liferay.portal.mirage.model.MirageFeedCriteria;
+import com.liferay.portal.mirage.model.JournalFeedCriteria;
+import com.liferay.portal.mirage.model.MirageJournalFeed;
 import com.liferay.portal.mirage.util.SmartFields;
 import com.liferay.portal.model.User;
 import com.liferay.portal.service.persistence.UserUtil;
@@ -96,15 +96,16 @@ public class ContentFeedServiceImpl implements ContentFeedService {
 
 	public void createContentFeed(ContentFeed contentFeed) throws CMSException {
 		try {
-			MirageFeed mirageFeed = (MirageFeed)contentFeed;
+			MirageJournalFeed mirageJournalFeed =
+				(MirageJournalFeed)contentFeed;
 
-			JournalFeed feed = mirageFeed.getFeed();
+			JournalFeed feed = mirageJournalFeed.getFeed();
 
 			String uuid = feed.getUuid();
 			long userId = feed.getUserId();
 			long groupId = feed.getGroupId();
 			String feedId = feed.getFeedId();
-			boolean autoFeedId = mirageFeed.isAutoFeedId();
+			boolean autoFeedId = mirageJournalFeed.isAutoFeedId();
 			String name = feed.getName();
 			String description = feed.getDescription();
 			String type = feed.getType();
@@ -137,41 +138,41 @@ public class ContentFeedServiceImpl implements ContentFeedService {
 
 			long id = CounterLocalServiceUtil.increment();
 
-			feed = JournalFeedUtil.create(id);
+			JournalFeed returnFeed = JournalFeedUtil.create(id);
 
-			feed.setUuid(uuid);
-			feed.setGroupId(groupId);
-			feed.setCompanyId(user.getCompanyId());
-			feed.setUserId(user.getUserId());
-			feed.setUserName(user.getFullName());
-			feed.setCreateDate(now);
-			feed.setModifiedDate(now);
-			feed.setFeedId(feedId);
-			feed.setName(name);
-			feed.setDescription(description);
-			feed.setType(type);
-			feed.setStructureId(structureId);
-			feed.setTemplateId(templateId);
-			feed.setRendererTemplateId(rendererTemplateId);
-			feed.setDelta(delta);
-			feed.setOrderByCol(orderByCol);
-			feed.setOrderByType(orderByType);
-			feed.setTargetLayoutFriendlyUrl(targetLayoutFriendlyUrl);
-			feed.setTargetPortletId(targetPortletId);
-			feed.setContentField(contentField);
+			returnFeed.setUuid(uuid);
+			returnFeed.setGroupId(groupId);
+			returnFeed.setCompanyId(user.getCompanyId());
+			returnFeed.setUserId(user.getUserId());
+			returnFeed.setUserName(user.getFullName());
+			returnFeed.setCreateDate(now);
+			returnFeed.setModifiedDate(now);
+			returnFeed.setFeedId(feedId);
+			returnFeed.setName(name);
+			returnFeed.setDescription(description);
+			returnFeed.setType(type);
+			returnFeed.setStructureId(structureId);
+			returnFeed.setTemplateId(templateId);
+			returnFeed.setRendererTemplateId(rendererTemplateId);
+			returnFeed.setDelta(delta);
+			returnFeed.setOrderByCol(orderByCol);
+			returnFeed.setOrderByType(orderByType);
+			returnFeed.setTargetLayoutFriendlyUrl(targetLayoutFriendlyUrl);
+			returnFeed.setTargetPortletId(targetPortletId);
+			returnFeed.setContentField(contentField);
 
 			if (Validator.isNull(feedType)) {
-				feed.setFeedType(RSSUtil.DEFAULT_TYPE);
-				feed.setFeedVersion(RSSUtil.DEFAULT_VERSION);
+				returnFeed.setFeedType(RSSUtil.DEFAULT_TYPE);
+				returnFeed.setFeedVersion(RSSUtil.DEFAULT_VERSION);
 			}
 			else {
-				feed.setFeedType(feedType);
-				feed.setFeedVersion(feedVersion);
+				returnFeed.setFeedType(feedType);
+				returnFeed.setFeedVersion(feedVersion);
 			}
 
-			JournalFeedUtil.update(feed, false);
+			JournalFeedUtil.update(returnFeed, false);
 
-			mirageFeed.setFeed(feed);
+			mirageJournalFeed.setFeed(returnFeed);
 		}
 		catch (PortalException pe) {
 			throw new CMSException(pe.getMessage(), pe);
@@ -183,9 +184,10 @@ public class ContentFeedServiceImpl implements ContentFeedService {
 
 	public void deleteContentFeed(ContentFeed contentFeed) throws CMSException {
 		try {
-			MirageFeed mirageFeed = (MirageFeed)contentFeed;
+			MirageJournalFeed mirageJournalFeed =
+				(MirageJournalFeed)contentFeed;
 
-			JournalFeed feed = mirageFeed.getFeed();
+			JournalFeed feed = mirageJournalFeed.getFeed();
 
 			JournalFeedUtil.remove(feed.getPrimaryKey());
 		}
@@ -202,29 +204,32 @@ public class ContentFeedServiceImpl implements ContentFeedService {
 		throws CMSException {
 
 		try {
-			MirageFeed mirageFeed = (MirageFeed)contentFeed;
+			MirageJournalFeed mirageJournalFeed =
+				(MirageJournalFeed)contentFeed;
 
-			JournalFeed feed = mirageFeed.getFeed();
+			JournalFeed feed = mirageJournalFeed.getFeed();
 
-			MirageFeedCriteria criteria = (MirageFeedCriteria)optionalCriteria;
+			JournalFeedCriteria criteria =
+				(JournalFeedCriteria)optionalCriteria;
 
-			String query = criteria.getOptions().get(MirageFeedCriteria.QUERY);
+			String query = criteria.getOptions().get(
+				JournalFeedCriteria.QUERY);
 
-			if (query.equals(MirageFeedCriteria.FIND_BY_PRIMARY_KEY)) {
+			if (query.equals(JournalFeedCriteria.FIND_BY_PRIMARY_KEY)) {
 				long feedId = feed.getId();
 
 				feed = JournalFeedUtil.findByPrimaryKey(feedId);
 			}
-			else if (query.equals(MirageFeedCriteria.FIND_BY_G_F)) {
+			else if (query.equals(JournalFeedCriteria.FIND_BY_G_F)) {
 				long groupId = feed.getGroupId();
 				String feedId = feed.getFeedId();
 
 				feed = JournalFeedUtil.findByG_F(groupId, feedId);
 			}
 
-			mirageFeed.setFeed(feed);
+			mirageJournalFeed.setFeed(feed);
 
-			return mirageFeed;
+			return mirageJournalFeed;
 		}
 		catch (PortalException pe) {
 			throw new CMSException(pe.getMessage(), pe);
@@ -243,32 +248,35 @@ public class ContentFeedServiceImpl implements ContentFeedService {
 			SmartFields smartFields = new SmartFields(
 				searchCriteria.getSearchFieldValues());
 
-			String query =	smartFields.getString(MirageFeedCriteria.QUERY);
+			String query =	smartFields.getString(JournalFeedCriteria.QUERY);
 
-			if (query.equals(MirageFeedCriteria.COUNT_BY_GROUP_ID)) {
-				long groupId = smartFields.getLong(MirageFeedCriteria.GROUP_ID);
+			if (query.equals(JournalFeedCriteria.COUNT_BY_GROUP_ID)) {
+				long groupId = smartFields.getLong(
+					JournalFeedCriteria.GROUP_ID);
 
 				result = JournalFeedUtil.countByGroupId(groupId);
 			}
-			else if (query.equals(MirageFeedCriteria.COUNT_BY_KEYWORDS)) {
+			else if (query.equals(JournalFeedCriteria.COUNT_BY_KEYWORDS)) {
 				long companyId = smartFields.getLong(
-					MirageFeedCriteria.COMPANY_ID);
-				long groupId = smartFields.getLong(MirageFeedCriteria.GROUP_ID);
+					JournalFeedCriteria.COMPANY_ID);
+				long groupId = smartFields.getLong(
+					JournalFeedCriteria.GROUP_ID);
 				String keywords = smartFields.getString(
-					MirageFeedCriteria.KEYWORDS);
+					JournalFeedCriteria.KEYWORDS);
 
 				result = JournalFeedFinderUtil.countByKeywords(
 					companyId, groupId, keywords);
 			}
-			else if (query.equals(MirageFeedCriteria.COUNT_BY_C_G_F_N_D)) {
+			else if (query.equals(JournalFeedCriteria.COUNT_BY_C_G_F_N_D)) {
 				long companyId = smartFields.getLong(
-					MirageFeedCriteria.COMPANY_ID);
-				long groupId = smartFields.getLong(MirageFeedCriteria.GROUP_ID);
+					JournalFeedCriteria.COMPANY_ID);
+				long groupId = smartFields.getLong(
+					JournalFeedCriteria.GROUP_ID);
 				String feedId = smartFields.getString(
-					MirageFeedCriteria.FEED_ID);
-				String name = smartFields.getString(MirageFeedCriteria.NAME);
+					JournalFeedCriteria.FEED_ID);
+				String name = smartFields.getString(JournalFeedCriteria.NAME);
 				String description = smartFields.getString(
-					MirageFeedCriteria.DESCRIPTION);
+					JournalFeedCriteria.DESCRIPTION);
 				boolean andOperator = searchCriteria.isMatchAnyOneField();
 
 				result = JournalFeedFinderUtil.countByC_G_F_N_D(
@@ -291,43 +299,46 @@ public class ContentFeedServiceImpl implements ContentFeedService {
 			SmartFields smartFields = new SmartFields(
 				searchCriteria.getSearchFieldValues());
 
-			String query =	smartFields.getString(MirageFeedCriteria.QUERY);
+			String query =	smartFields.getString(JournalFeedCriteria.QUERY);
 
-			if (query.equals(MirageFeedCriteria.FIND_ALL)) {
+			if (query.equals(JournalFeedCriteria.FIND_ALL)) {
 				feeds = JournalFeedUtil.findAll();
 			}
-			else if (query.equals(MirageFeedCriteria.FIND_BY_GROUP_ID)) {
-				long groupId = smartFields.getLong(MirageFeedCriteria.GROUP_ID);
-				int start = smartFields.getInteger(MirageFeedCriteria.START);
-				int end = smartFields.getInteger(MirageFeedCriteria.END);
+			else if (query.equals(JournalFeedCriteria.FIND_BY_GROUP_ID)) {
+				long groupId = smartFields.getLong(
+					JournalFeedCriteria.GROUP_ID);
+				int start = smartFields.getInteger(JournalFeedCriteria.START);
+				int end = smartFields.getInteger(JournalFeedCriteria.END);
 
 				feeds = JournalFeedUtil.findByGroupId(groupId, start, end);
 			}
-			else if (query.equals(MirageFeedCriteria.FIND_BY_KEYWORDS)) {
+			else if (query.equals(JournalFeedCriteria.FIND_BY_KEYWORDS)) {
 				long companyId = smartFields.getLong(
-					MirageFeedCriteria.COMPANY_ID);
-				long groupId = smartFields.getLong(MirageFeedCriteria.GROUP_ID);
+					JournalFeedCriteria.COMPANY_ID);
+				long groupId = smartFields.getLong(
+					JournalFeedCriteria.GROUP_ID);
 				String keywords = smartFields.getString(
-					MirageFeedCriteria.KEYWORDS);
-				int start = smartFields.getInteger(MirageFeedCriteria.START);
-				int end = smartFields.getInteger(MirageFeedCriteria.END);
+					JournalFeedCriteria.KEYWORDS);
+				int start = smartFields.getInteger(JournalFeedCriteria.START);
+				int end = smartFields.getInteger(JournalFeedCriteria.END);
 				OrderByComparator obc =
 					(OrderByComparator)searchCriteria.getOrderByComparator();
 
 				feeds = JournalFeedFinderUtil.findByKeywords(
 					companyId, groupId, keywords, start, end, obc);
 			}
-			else if (query.equals(MirageFeedCriteria.FIND_BY_C_G_F_N_D)) {
+			else if (query.equals(JournalFeedCriteria.FIND_BY_C_G_F_N_D)) {
 				long companyId = smartFields.getLong(
-					MirageFeedCriteria.COMPANY_ID);
-				long groupId = smartFields.getLong(MirageFeedCriteria.GROUP_ID);
+					JournalFeedCriteria.COMPANY_ID);
+				long groupId = smartFields.getLong(
+					JournalFeedCriteria.GROUP_ID);
 				String feedId = smartFields.getString(
-					MirageFeedCriteria.FEED_ID);
-				String name = smartFields.getString(MirageFeedCriteria.NAME);
+					JournalFeedCriteria.FEED_ID);
+				String name = smartFields.getString(JournalFeedCriteria.NAME);
 				String description = smartFields.getString(
-					MirageFeedCriteria.DESCRIPTION);
-				int start = smartFields.getInteger(MirageFeedCriteria.START);
-				int end = smartFields.getInteger(MirageFeedCriteria.END);
+					JournalFeedCriteria.DESCRIPTION);
+				int start = smartFields.getInteger(JournalFeedCriteria.START);
+				int end = smartFields.getInteger(JournalFeedCriteria.END);
 				boolean andOperator = searchCriteria.isMatchAnyOneField();
 				OrderByComparator obc =
 					(OrderByComparator)searchCriteria.getOrderByComparator();
@@ -345,7 +356,7 @@ public class ContentFeedServiceImpl implements ContentFeedService {
 				feeds.size());
 
 			for (JournalFeed feed : feeds) {
-				contentFeeds.add(new MirageFeed(feed));
+				contentFeeds.add(new MirageJournalFeed(feed));
 			}
 
 			return contentFeeds;
@@ -360,9 +371,10 @@ public class ContentFeedServiceImpl implements ContentFeedService {
 		throws CMSException {
 
 		try {
-			MirageFeed mirageFeed = (MirageFeed)contentFeed;
+			MirageJournalFeed mirageJournalFeed =
+				(MirageJournalFeed)contentFeed;
 
-			JournalFeed feed = mirageFeed.getFeed();
+			JournalFeed feed = mirageJournalFeed.getFeed();
 
 			long groupId = feed.getGroupId();
 			String feedId = feed.getFeedId();
@@ -383,38 +395,38 @@ public class ContentFeedServiceImpl implements ContentFeedService {
 
 			// Feed
 
-			feed = JournalFeedUtil.findByG_F(groupId, feedId);
+			JournalFeed returnFeed = JournalFeedUtil.findByG_F(groupId, feedId);
 
 			validate(
-				feed.getCompanyId(), groupId, name, description, structureId,
-				targetLayoutFriendlyUrl, contentField);
+				returnFeed.getCompanyId(), groupId, name, description,
+				structureId, targetLayoutFriendlyUrl, contentField);
 
-			feed.setModifiedDate(new Date());
-			feed.setName(name);
-			feed.setDescription(description);
-			feed.setType(type);
-			feed.setStructureId(structureId);
-			feed.setTemplateId(templateId);
-			feed.setRendererTemplateId(rendererTemplateId);
-			feed.setDelta(delta);
-			feed.setOrderByCol(orderByCol);
-			feed.setOrderByType(orderByType);
-			feed.setTargetLayoutFriendlyUrl(targetLayoutFriendlyUrl);
-			feed.setTargetPortletId(targetPortletId);
-			feed.setContentField(contentField);
+			returnFeed.setModifiedDate(new Date());
+			returnFeed.setName(name);
+			returnFeed.setDescription(description);
+			returnFeed.setType(type);
+			returnFeed.setStructureId(structureId);
+			returnFeed.setTemplateId(templateId);
+			returnFeed.setRendererTemplateId(rendererTemplateId);
+			returnFeed.setDelta(delta);
+			returnFeed.setOrderByCol(orderByCol);
+			returnFeed.setOrderByType(orderByType);
+			returnFeed.setTargetLayoutFriendlyUrl(targetLayoutFriendlyUrl);
+			returnFeed.setTargetPortletId(targetPortletId);
+			returnFeed.setContentField(contentField);
 
 			if (Validator.isNull(feedType)) {
-				feed.setFeedType(RSSUtil.DEFAULT_TYPE);
-				feed.setFeedVersion(RSSUtil.DEFAULT_VERSION);
+				returnFeed.setFeedType(RSSUtil.DEFAULT_TYPE);
+				returnFeed.setFeedVersion(RSSUtil.DEFAULT_VERSION);
 			}
 			else {
-				feed.setFeedType(feedType);
-				feed.setFeedVersion(feedVersion);
+				returnFeed.setFeedType(feedType);
+				returnFeed.setFeedVersion(feedVersion);
 			}
 
-			JournalFeedUtil.update(feed, false);
+			JournalFeedUtil.update(returnFeed, false);
 
-			mirageFeed.setFeed(feed);
+			mirageJournalFeed.setFeed(returnFeed);
 		}
 		catch (PortalException pe) {
 			throw new CMSException(pe.getMessage(), pe);

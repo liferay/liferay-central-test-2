@@ -24,13 +24,10 @@ package com.liferay.portlet.journal.service.impl;
 
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
-import com.liferay.portal.kernel.dao.orm.QueryUtil;
 import com.liferay.portal.kernel.util.OrderByComparator;
-import com.liferay.portal.mirage.model.MirageFeed;
-import com.liferay.portal.mirage.model.MirageFeedCriteria;
-import com.liferay.portal.mirage.service.MirageServiceFactory;
-import com.liferay.portal.mirage.util.ExceptionTranslator;
-import com.liferay.portal.mirage.util.SmartCriteria;
+import com.liferay.portal.mirage.custom.MirageServiceFactory;
+import com.liferay.portal.mirage.model.JournalContentFeed;
+import com.liferay.portal.mirage.model.OptionalJournalFeedCriteria;
 import com.liferay.portal.model.ResourceConstants;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portlet.journal.model.JournalFeed;
@@ -39,10 +36,15 @@ import com.liferay.portlet.journal.service.base.JournalFeedLocalServiceBaseImpl;
 
 import com.sun.portal.cms.mirage.exception.CMSException;
 import com.sun.portal.cms.mirage.model.custom.ContentFeed;
+import com.sun.portal.cms.mirage.model.search.SearchCriteria;
+import com.sun.portal.cms.mirage.model.search.SearchFieldValue;
 import com.sun.portal.cms.mirage.service.custom.ContentFeedService;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 
 /**
  * <a href="JournalFeedLocalServiceImpl.java.html"><b><i>View Source</i></b></a>
@@ -158,44 +160,51 @@ public class JournalFeedLocalServiceImpl
 			String[] communityPermissions, String[] guestPermissions)
 		throws PortalException, SystemException {
 
-		// Feed
+		// Create and populate the JournalFeed object
 
 		JournalFeed feed = new JournalFeedImpl();
 
-		feed.setUuid(uuid);
 		feed.setUserId(userId);
-		feed.setGroupId(groupId);
 		feed.setFeedId(feedId);
+		feed.setGroupId(groupId);
 		feed.setName(name);
 		feed.setDescription(description);
-		feed.setType(type);
 		feed.setStructureId(structureId);
+		feed.setTargetLayoutFriendlyUrl(targetLayoutFriendlyUrl);
+		feed.setContentField(contentField);
+		feed.setUuid(uuid);
+		feed.setType(type);
 		feed.setTemplateId(templateId);
 		feed.setRendererTemplateId(rendererTemplateId);
 		feed.setDelta(delta);
 		feed.setOrderByCol(orderByCol);
 		feed.setOrderByType(orderByType);
-		feed.setTargetLayoutFriendlyUrl(targetLayoutFriendlyUrl);
 		feed.setTargetPortletId(targetPortletId);
-		feed.setContentField(contentField);
 		feed.setFeedType(feedType);
 		feed.setFeedVersion(feedVersion);
 
-		MirageFeed mirageFeed = new MirageFeed(feed);
+		// Create the JournalContentFeed object
 
-		mirageFeed.setAutoFeedId(autoFeedId);
+		JournalContentFeed journalContentFeed = new JournalContentFeed(feed);
+
+		// Set the CreationAttributes
+
+		JournalContentFeed.CreationAttributes creationAttributes =
+			journalContentFeed.new CreationAttributes(autoFeedId);
+
+		journalContentFeed.setCreationAttributes(creationAttributes);
 
 		ContentFeedService contentFeedService =
 			MirageServiceFactory.getContentFeedService();
 
 		try {
-			contentFeedService.createContentFeed(mirageFeed);
+			contentFeedService.createContentFeed(journalContentFeed);
 		}
 		catch (CMSException cmse) {
-			ExceptionTranslator.translate(cmse);
+			_throwException(cmse);
 		}
 
-		feed = mirageFeed.getFeed();
+		feed = journalContentFeed.getFeed();
 
 		// Resources
 
@@ -282,43 +291,45 @@ public class JournalFeedLocalServiceImpl
 
 		// Feed
 
-		MirageFeed mirageFeed = new MirageFeed(feed);
+		JournalContentFeed journalContentFeed = new JournalContentFeed(feed);
 
 		ContentFeedService contentFeedService =
 			MirageServiceFactory.getContentFeedService();
 
 		try {
-			contentFeedService.deleteContentFeed(mirageFeed);
+			contentFeedService.deleteContentFeed(journalContentFeed);
 		}
 		catch (CMSException cmse) {
-			ExceptionTranslator.translate(cmse);
+			_throwException(cmse);
 		}
+
 	}
 
-	public JournalFeed getFeed(long id)
+	public JournalFeed getFeed(long feedId)
 		throws PortalException, SystemException {
 
 		JournalFeed feed = new JournalFeedImpl();
 
-		feed.setId(id);
+		feed.setId(feedId);
 
-		MirageFeed mirageFeed = new MirageFeed(feed);
+		JournalContentFeed journalContentFeed = new JournalContentFeed(feed);
 
-		MirageFeedCriteria criteria = new MirageFeedCriteria(
-			MirageFeedCriteria.FIND_BY_PRIMARY_KEY);
+		OptionalJournalFeedCriteria criteria =
+			new OptionalJournalFeedCriteria(
+				OptionalJournalFeedCriteria.FIND_BY_PRIMARY_KEY);
 
 		ContentFeedService contentFeedService =
 			MirageServiceFactory.getContentFeedService();
 
 		try {
-			mirageFeed = (MirageFeed)contentFeedService.getContentFeed(
-				mirageFeed, criteria);
+			journalContentFeed =
+				(JournalContentFeed) contentFeedService.getContentFeed(
+					journalContentFeed, criteria);
 		}
-		catch (CMSException cmse) {
-			ExceptionTranslator.translate(cmse);
+		catch (CMSException ex) {
+			_throwException(ex);
 		}
-
-		return mirageFeed.getFeed();
+		return journalContentFeed.getFeed();
 	}
 
 	public JournalFeed getFeed(long groupId, String feedId)
@@ -329,89 +340,144 @@ public class JournalFeedLocalServiceImpl
 		feed.setGroupId(groupId);
 		feed.setFeedId(feedId);
 
-		MirageFeed mirageFeed = new MirageFeed(feed);
+		JournalContentFeed journalContentFeed = new JournalContentFeed(feed);
 
-		MirageFeedCriteria criteria = new MirageFeedCriteria(
-			MirageFeedCriteria.FIND_BY_G_F);
+		OptionalJournalFeedCriteria criteria =
+			new OptionalJournalFeedCriteria(
+				OptionalJournalFeedCriteria.FIND_BY_G_F);
 
 		ContentFeedService contentFeedService =
 			MirageServiceFactory.getContentFeedService();
 
 		try {
-			mirageFeed = (MirageFeed)contentFeedService.getContentFeed(
-				mirageFeed, criteria);
+			journalContentFeed =
+				(JournalContentFeed) contentFeedService.getContentFeed(
+					journalContentFeed, criteria);
 		}
-		catch (CMSException cmse) {
-			ExceptionTranslator.translate(cmse);
+		catch (CMSException ex) {
+			_throwException(ex);
 		}
-
-		return mirageFeed.getFeed();
+		return journalContentFeed.getFeed();
 	}
 
 	public List<JournalFeed> getFeeds() throws SystemException {
-		SmartCriteria criteria = new SmartCriteria();
+		SearchCriteria criteria = new SearchCriteria();
 
-		criteria.add(MirageFeedCriteria.QUERY, MirageFeedCriteria.FIND_ALL);
+		List<SearchFieldValue> searchFields = new ArrayList<SearchFieldValue>();
+
+		_addSearchField(
+			searchFields, OptionalJournalFeedCriteria.FINDER,
+				OptionalJournalFeedCriteria.FIND_ALL);
+
+		criteria.setSearchFieldValues(searchFields);
 
 		ContentFeedService contentFeedService =
 			MirageServiceFactory.getContentFeedService();
 
 		try {
 			List<ContentFeed> contentFeeds =
-				contentFeedService.searchContentFeeds(criteria.getCriteria());
+				contentFeedService.searchContentFeeds(criteria);
 
-			return getFeeds(contentFeeds);
+			return _getFeedsFromContentFeeds(contentFeeds);
 		}
-		catch (CMSException cmse) {
-			throw (SystemException)cmse.getCause();
+		catch (CMSException ex) {
+			throw (SystemException) ex.getCause();
 		}
 	}
 
 	public List<JournalFeed> getFeeds(long groupId) throws SystemException {
-		return getFeeds(groupId, QueryUtil.ALL_POS, QueryUtil.ALL_POS);
+		SearchCriteria criteria = new SearchCriteria();
+
+		List<SearchFieldValue> searchFields = new ArrayList<SearchFieldValue>();
+
+		Map<String, String> nameValues = new HashMap<String, String>();
+
+		nameValues.put(
+			OptionalJournalFeedCriteria.FINDER,
+				OptionalJournalFeedCriteria.FIND_BY_GROUP);
+		nameValues.put(
+			OptionalJournalFeedCriteria.GROUP_ID, Long.toString(groupId));
+
+		_addSearchFields(searchFields, nameValues);
+
+		criteria.setSearchFieldValues(searchFields);
+
+		ContentFeedService contentFeedService =
+			MirageServiceFactory.getContentFeedService();
+
+		try {
+			List<ContentFeed> contentFeeds =
+				contentFeedService.searchContentFeeds(criteria);
+
+			return _getFeedsFromContentFeeds(contentFeeds);
+		}
+		catch (CMSException ex) {
+			throw (SystemException) ex.getCause();
+		}
 	}
 
 	public List<JournalFeed> getFeeds(long groupId, int start, int end)
 		throws SystemException {
 
-		SmartCriteria criteria = new SmartCriteria();
+		SearchCriteria criteria = new SearchCriteria();
 
-		criteria.add(
-			MirageFeedCriteria.QUERY, MirageFeedCriteria.FIND_BY_GROUP_ID);
-		criteria.add(MirageFeedCriteria.GROUP_ID, groupId);
-		criteria.add(MirageFeedCriteria.START, start);
-		criteria.add(MirageFeedCriteria.END, end);
+		List<SearchFieldValue> searchFields = new ArrayList<SearchFieldValue>();
+
+		Map<String, String> nameValues = new HashMap<String, String>();
+
+		nameValues.put(
+			OptionalJournalFeedCriteria.FINDER,
+				OptionalJournalFeedCriteria.FIND_BY_GROUP_WITH_LIMIT);
+		nameValues.put(
+			OptionalJournalFeedCriteria.GROUP_ID, Long.toString(groupId));
+		nameValues.put(
+			OptionalJournalFeedCriteria.RANGE_START, Long.toString(start));
+		nameValues.put(
+			OptionalJournalFeedCriteria.RANGE_END, Long.toString(end));
+
+		_addSearchFields(searchFields, nameValues);
+
+		criteria.setSearchFieldValues(searchFields);
 
 		ContentFeedService contentFeedService =
 			MirageServiceFactory.getContentFeedService();
 
 		try {
 			List<ContentFeed> contentFeeds =
-				contentFeedService.searchContentFeeds(criteria.getCriteria());
+				contentFeedService.searchContentFeeds(criteria);
 
-			return getFeeds(contentFeeds);
+			return _getFeedsFromContentFeeds(contentFeeds);
 		}
-		catch (CMSException cmse) {
-			throw (SystemException)cmse.getCause();
+		catch (CMSException ex) {
+			throw (SystemException) ex.getCause();
 		}
 	}
 
 	public int getFeedsCount(long groupId) throws SystemException {
-		SmartCriteria criteria = new SmartCriteria();
+		SearchCriteria criteria = new SearchCriteria();
 
-		criteria.add(
-			MirageFeedCriteria.QUERY, MirageFeedCriteria.COUNT_BY_GROUP_ID);
-		criteria.add(MirageFeedCriteria.GROUP_ID, groupId);
+		List<SearchFieldValue> searchFields = new ArrayList<SearchFieldValue>();
+
+		Map<String, String> nameValues = new HashMap<String, String>();
+
+		nameValues.put(
+			OptionalJournalFeedCriteria.FINDER,
+				OptionalJournalFeedCriteria.FIND_BY_GROUP);
+		nameValues.put(
+			OptionalJournalFeedCriteria.GROUP_ID, Long.toString(groupId));
+
+		_addSearchFields(searchFields, nameValues);
+
+		criteria.setSearchFieldValues(searchFields);
 
 		ContentFeedService contentFeedService =
 			MirageServiceFactory.getContentFeedService();
 
 		try {
-			return contentFeedService.getContentFeedSearchCount(
-				criteria.getCriteria());
+			return contentFeedService.getContentFeedSearchCount(criteria);
 		}
-		catch (CMSException cmse) {
-			throw (SystemException)cmse.getCause();
+		catch (CMSException ex) {
+			throw (SystemException) ex.getCause();
 		}
 	}
 
@@ -420,16 +486,28 @@ public class JournalFeedLocalServiceImpl
 			OrderByComparator obc)
 		throws SystemException {
 
-		SmartCriteria criteria = new SmartCriteria();
+		SearchCriteria criteria = new SearchCriteria();
 
-		criteria.add(
-			MirageFeedCriteria.QUERY, MirageFeedCriteria.FIND_BY_KEYWORDS);
-		criteria.add(MirageFeedCriteria.COMPANY_ID, companyId);
-		criteria.add(MirageFeedCriteria.GROUP_ID, groupId);
-		criteria.add(MirageFeedCriteria.KEYWORDS, keywords);
-		criteria.add(MirageFeedCriteria.START, start);
-		criteria.add(MirageFeedCriteria.END, end);
+		List<SearchFieldValue> searchFields = new ArrayList<SearchFieldValue>();
 
+		Map<String, String> nameValues = new HashMap<String, String>();
+
+		nameValues.put(
+			OptionalJournalFeedCriteria.FINDER,
+				OptionalJournalFeedCriteria.SEARCH_BY_GROUP_WITH_LIMIT);
+		nameValues.put(
+			OptionalJournalFeedCriteria.COMPANY_ID, Long.toString(companyId));
+		nameValues.put(
+			OptionalJournalFeedCriteria.GROUP_ID, Long.toString(groupId));
+		nameValues.put(OptionalJournalFeedCriteria.KEYWORDS, keywords);
+		nameValues.put(
+			OptionalJournalFeedCriteria.RANGE_START, Long.toString(start));
+		nameValues.put(
+			OptionalJournalFeedCriteria.RANGE_END, Long.toString(end));
+
+		_addSearchFields(searchFields, nameValues);
+
+		criteria.setSearchFieldValues(searchFields);
 		criteria.setOrderByComparator(obc);
 
 		ContentFeedService contentFeedService =
@@ -437,12 +515,12 @@ public class JournalFeedLocalServiceImpl
 
 		try {
 			List<ContentFeed> contentFeeds =
-				contentFeedService.searchContentFeeds(criteria.getCriteria());
+				contentFeedService.searchContentFeeds(criteria);
 
-			return getFeeds(contentFeeds);
+			return _getFeedsFromContentFeeds(contentFeeds);
 		}
-		catch (CMSException cmse) {
-			throw (SystemException)cmse.getCause();
+		catch (CMSException ex) {
+			throw (SystemException) ex.getCause();
 		}
 	}
 
@@ -452,55 +530,77 @@ public class JournalFeedLocalServiceImpl
 			OrderByComparator obc)
 		throws SystemException {
 
-		SmartCriteria criteria = new SmartCriteria();
+		SearchCriteria criteria = new SearchCriteria();
 
-		criteria.add(
-			MirageFeedCriteria.QUERY, MirageFeedCriteria.FIND_BY_C_G_F_N_D);
-		criteria.add(MirageFeedCriteria.COMPANY_ID, companyId);
-		criteria.add(MirageFeedCriteria.GROUP_ID, groupId);
-		criteria.add(MirageFeedCriteria.FEED_ID, feedId);
-		criteria.add(MirageFeedCriteria.NAME, name);
-		criteria.add(MirageFeedCriteria.DESCRIPTION, description);
-		criteria.add(MirageFeedCriteria.START, start);
-		criteria.add(MirageFeedCriteria.END, end);
+		List<SearchFieldValue> searchFields = new ArrayList<SearchFieldValue>();
 
-		criteria.setAndOperator(andOperator);
+		Map<String, String> nameValues = new HashMap<String, String>();
+
+		nameValues.put(
+			OptionalJournalFeedCriteria.FINDER,
+				OptionalJournalFeedCriteria
+					.SEARCH_BY_GROUP_AND_FEED_WITH_LIMIT);
+		nameValues.put(
+			OptionalJournalFeedCriteria.COMPANY_ID, Long.toString(companyId));
+		nameValues.put(
+			OptionalJournalFeedCriteria.GROUP_ID, Long.toString(groupId));
+		nameValues.put(OptionalJournalFeedCriteria.FEED_ID, feedId);
+		nameValues.put(OptionalJournalFeedCriteria.NAME, name);
+		nameValues.put(OptionalJournalFeedCriteria.DESCRIPTION, description);
+		nameValues.put(
+			OptionalJournalFeedCriteria.RANGE_START, Long.toString(start));
+		nameValues.put(
+			OptionalJournalFeedCriteria.RANGE_END, Long.toString(end));
+
+		_addSearchFields(searchFields, nameValues);
+
+		criteria.setSearchFieldValues(searchFields);
 		criteria.setOrderByComparator(obc);
+		criteria.setMatchAnyOneField(andOperator);
 
 		ContentFeedService contentFeedService =
 			MirageServiceFactory.getContentFeedService();
 
 		try {
 			List<ContentFeed> contentFeeds =
-				contentFeedService.searchContentFeeds(criteria.getCriteria());
-
-			return getFeeds(contentFeeds);
+				contentFeedService.searchContentFeeds(criteria);
+			return _getFeedsFromContentFeeds(contentFeeds);
 		}
-		catch (CMSException cmse) {
-			throw (SystemException)cmse.getCause();
+		catch (CMSException ex) {
+			throw (SystemException) ex.getCause();
 		}
 	}
 
 	public int searchCount(long companyId, long groupId, String keywords)
 		throws SystemException {
 
-		SmartCriteria criteria = new SmartCriteria();
+		SearchCriteria criteria = new SearchCriteria();
 
-		criteria.add(
-			MirageFeedCriteria.QUERY, MirageFeedCriteria.COUNT_BY_KEYWORDS);
-		criteria.add(MirageFeedCriteria.COMPANY_ID, companyId);
-		criteria.add(MirageFeedCriteria.GROUP_ID, groupId);
-		criteria.add(MirageFeedCriteria.KEYWORDS, keywords);
+		List<SearchFieldValue> searchFields = new ArrayList<SearchFieldValue>();
+
+		Map<String, String> nameValues = new HashMap<String, String>();
+
+		nameValues.put(
+			OptionalJournalFeedCriteria.FINDER,
+				OptionalJournalFeedCriteria.FIND_BY_GROUP_AND_KEYWORDS);
+		nameValues.put(
+			OptionalJournalFeedCriteria.GROUP_ID, Long.toString(groupId));
+		nameValues.put(
+			OptionalJournalFeedCriteria.COMPANY_ID, Long.toString(companyId));
+		nameValues.put(OptionalJournalFeedCriteria.KEYWORDS, keywords);
+
+		_addSearchFields(searchFields, nameValues);
+
+		criteria.setSearchFieldValues(searchFields);
 
 		ContentFeedService contentFeedService =
 			MirageServiceFactory.getContentFeedService();
 
 		try {
-			return contentFeedService.getContentFeedSearchCount(
-				criteria.getCriteria());
+			return contentFeedService.getContentFeedSearchCount(criteria);
 		}
-		catch (CMSException cmse) {
-			throw (SystemException)cmse.getCause();
+		catch (CMSException ex) {
+			throw (SystemException) ex.getCause();
 		}
 	}
 
@@ -509,27 +609,36 @@ public class JournalFeedLocalServiceImpl
 			String description, boolean andOperator)
 		throws SystemException {
 
-		SmartCriteria criteria = new SmartCriteria();
+		SearchCriteria criteria = new SearchCriteria();
 
-		criteria.add(
-			MirageFeedCriteria.QUERY, MirageFeedCriteria.COUNT_BY_C_G_F_N_D);
-		criteria.add(MirageFeedCriteria.COMPANY_ID, companyId);
-		criteria.add(MirageFeedCriteria.GROUP_ID, groupId);
-		criteria.add(MirageFeedCriteria.FEED_ID, feedId);
-		criteria.add(MirageFeedCriteria.NAME, name);
-		criteria.add(MirageFeedCriteria.DESCRIPTION, description);
+		List<SearchFieldValue> searchFields = new ArrayList<SearchFieldValue>();
 
-		criteria.setAndOperator(andOperator);
+		Map<String, String> nameValues = new HashMap<String, String>();
+
+		nameValues.put(
+			OptionalJournalFeedCriteria.FINDER,
+				OptionalJournalFeedCriteria.FIND_BY_GROUP_AND_FEED);
+		nameValues.put(
+			OptionalJournalFeedCriteria.GROUP_ID, Long.toString(groupId));
+		nameValues.put(
+			OptionalJournalFeedCriteria.COMPANY_ID, Long.toString(companyId));
+		nameValues.put(OptionalJournalFeedCriteria.FEED_ID, feedId);
+		nameValues.put(OptionalJournalFeedCriteria.NAME, name);
+		nameValues.put(OptionalJournalFeedCriteria.DESCRIPTION, description);
+
+		_addSearchFields(searchFields, nameValues);
+
+		criteria.setSearchFieldValues(searchFields);
+		criteria.setMatchAnyOneField(andOperator);
 
 		ContentFeedService contentFeedService =
 			MirageServiceFactory.getContentFeedService();
 
 		try {
-			return contentFeedService.getContentFeedSearchCount(
-				criteria.getCriteria());
+			return contentFeedService.getContentFeedSearchCount(criteria);
 		}
-		catch (CMSException cmse) {
-			throw (SystemException)cmse.getCause();
+		catch (CMSException ex) {
+			throw (SystemException) ex.getCause();
 		}
 	}
 
@@ -563,34 +672,69 @@ public class JournalFeedLocalServiceImpl
 		feed.setFeedType(feedType);
 		feed.setFeedVersion(feedVersion);
 
-		MirageFeed mirageFeed = new MirageFeed(feed);
+		JournalContentFeed journalContentFeed = new JournalContentFeed(feed);
 
 		ContentFeedService contentFeedService =
 			MirageServiceFactory.getContentFeedService();
 
 		try {
-			contentFeedService.updateContentFeed(mirageFeed, null);
+			contentFeedService.updateContentFeed(journalContentFeed, null);
 		}
 		catch (CMSException cmse) {
-			ExceptionTranslator.translate(cmse);
+			_throwException(cmse);
 		}
 
-		feed = mirageFeed.getFeed();
-
+		feed = journalContentFeed.getFeed();
 		return feed;
 	}
 
-	protected List<JournalFeed> getFeeds(List<ContentFeed> contentFeeds) {
-		List<JournalFeed> feeds = new ArrayList<JournalFeed>(
-			contentFeeds.size());
+	private void _addSearchField(
+		List<SearchFieldValue> fieldList, String fieldName, String fieldValue) {
+
+		SearchFieldValue searchField = new SearchFieldValue();
+		searchField.setFieldName(fieldName);
+		searchField.setFieldValues(new String[] {fieldValue});
+
+		fieldList.add(searchField);
+	}
+
+	private void _addSearchFields(
+		List<SearchFieldValue> fieldList, Map<String, String> nameValues) {
+
+		Iterator<String> iter = nameValues.keySet().iterator();
+		while (iter.hasNext()) {
+			String name = iter.next();
+			String value = nameValues.get(name);
+
+			_addSearchField(fieldList, name, value);
+		}
+	}
+
+	private List<JournalFeed> _getFeedsFromContentFeeds(
+		List<ContentFeed> contentFeeds) {
+
+		List<JournalFeed> feeds =
+			new ArrayList<JournalFeed>(contentFeeds.size());
 
 		for (ContentFeed contentFeed : contentFeeds) {
-			MirageFeed mirageFeed = (MirageFeed)contentFeed;
-
-			feeds.add(mirageFeed.getFeed());
+			feeds.add(((JournalContentFeed) contentFeed).getFeed());
 		}
-
 		return feeds;
+	}
+
+	private void _throwException(CMSException ex)
+		throws PortalException, SystemException {
+
+		Throwable cause = ex.getCause();
+
+		if (cause != null) {
+			if (cause instanceof PortalException) {
+				throw (PortalException) cause;
+			}
+			else if (cause instanceof SystemException) {
+				throw (SystemException) cause;
+			}
+		}
 	}
 
 }

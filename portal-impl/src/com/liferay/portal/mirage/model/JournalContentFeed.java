@@ -46,35 +46,56 @@ import com.liferay.portlet.journal.model.JournalFeed;
 import com.sun.portal.cms.mirage.model.custom.ContentFeed;
 
 /**
- * <a href="MirageFeed.java.html"><b><i>View Source</i></b></a>
+ * <a href="JournalContentFeed.java.html"><b><i>View Source</i></b></a>
  *
  * @author Karthik Sudarshan
- * @author Brian Wing Shun Chan
  *
  */
-public class MirageFeed extends ContentFeed {
+public class JournalContentFeed extends ContentFeed {
 
-	public MirageFeed(JournalFeed feed) {
+	public class CreationAttributes {
+
+		public CreationAttributes(boolean autoCreateId) {
+
+			_autoCreateId = autoCreateId;
+		}
+
+		public boolean isAutoCreateId() {
+
+			return _autoCreateId;
+		}
+
+		private boolean _autoCreateId;
+
+	}
+
+	public JournalContentFeed(JournalFeed feed) {
+
 		_feed = feed;
 	}
 
 	public JournalFeed getFeed() {
+
 		return _feed;
 	}
 
 	public void setFeed(JournalFeed feed) {
+
 		_feed = feed;
 	}
 
-	public boolean isAutoFeedId() {
-		return _autoFeedId;
+	public JournalContentFeed.CreationAttributes getCreationAttributes() {
+
+		return _creationAttributes;
 	}
 
-	public void setAutoFeedId(boolean autoFeedId) {
-		_autoFeedId = autoFeedId;
+	public void setCreationAttributes(
+		JournalContentFeed.CreationAttributes creationAttributes) {
+
+		_creationAttributes = creationAttributes;
 	}
 
 	private JournalFeed _feed;
-	private boolean _autoFeedId;
+	private CreationAttributes _creationAttributes;
 
 }
