@@ -246,7 +246,7 @@ Collections.sort(portletsList, new PortletTitleComparator(application, locale));
 								ResourceBundle resourceBundle = curPortletConfig.getResourceBundle(locale);
 
 								try {
-									PortletDataHandlerControl[] controls = portletDataHandler.getImportControls();
+									PortletDataHandlerControl[] controls = portletDataHandler.getExportControls();
 
 									if (controls != null) {
 										String rootPortletId = curPortlet.getRootPortletId();
