@@ -1,9 +1,8 @@
 <Context>
-	<!-- JAAS Realm for Tomcat -->
-	<!-- <Realm
+	<!--<Realm
 		className="org.apache.catalina.realm.JAASRealm"
 		appName="PortalRealm"
 		userClassNames="com.liferay.portal.kernel.security.jaas.PortalPrincipal"
 		roleClassNames="com.liferay.portal.kernel.security.jaas.PortalRole"
-	/> -->
+	/>-->
 </Context>
