@@ -66,7 +66,7 @@ public class SmartFields {
 	}
 
 	public String getString(String name) {
-		return GetterUtil.getString(_searchFields.get(name));
+		return _searchFields.get(name);
 	}
 
 	private Map<String, String> _searchFields = new HashMap<String, String>();
