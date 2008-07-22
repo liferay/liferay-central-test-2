@@ -575,7 +575,7 @@ public class LayoutImporter {
 
 			Element permissionsEl = portletEl.element("permissions");
 
-			if (importPermissions) {
+			if (importPermissions && permissionsEl != null) {
 				importPortletPermissions(
 					layoutCache, companyId, groupId, guestGroup, layout,
 					permissionsEl, importUserPermissions);
@@ -592,7 +592,7 @@ public class LayoutImporter {
 
 			Element rolesEl = portletEl.element("roles");
 
-			if (importPermissions) {
+			if (importPermissions && rolesEl != null) {
 				importPortletRoles(layoutCache, companyId, groupId, portletEl);
 				importPortletRoles(
 					layoutCache, companyId, groupId, portletId, rolesEl);
