@@ -442,7 +442,7 @@ if (message != null) {
 <script type="text/javascript">
 	jQuery(document).ready(
 		function() {
-			<c:if test="<%= windowState.equals(WindowState.MAXIMIZED)  && !themeDisplay.isFacebook() %>">
+			<c:if test="<%= windowState.equals(WindowState.MAXIMIZED) && !themeDisplay.isFacebook() %>">
 				Liferay.Util.focusFormField(document.<portlet:namespace />fm.<portlet:namespace />subject);
 			</c:if>
 

@@ -44,7 +44,7 @@ if (treeWalker.isOdd()) {
 %>
 
 <tr class="<%= className %>" onMouseEnter="this.className = '<%= classHoverName %>';" onMouseLeave="this.className = '<%= className %>';">
-	<td style="padding-left: <%= depth > 0 ? depth * 10 : 5  %>px; width: 90%;" valign="middle">
+	<td style="padding-left: <%= depth > 0 ? depth * 10 : 5 %>px; width: 90%;" valign="middle">
 		<c:if test="<%= !message.isRoot() %>">
 			<c:choose>
 				<c:when test="<%= !lastNode %>">

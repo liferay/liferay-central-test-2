@@ -407,7 +407,7 @@ portletURL.setParameter("categoryId", String.valueOf(categoryId));
 					submitForm(document.hrefFm, url);
 				}
 
-				<c:if test="<%= windowState.equals(WindowState.MAXIMIZED)  && !themeDisplay.isFacebook() %>">
+				<c:if test="<%= windowState.equals(WindowState.MAXIMIZED) && !themeDisplay.isFacebook() %>">
 					Liferay.Util.focusFormField(document.<portlet:namespace />fm2.<portlet:namespace />keywords);
 					Liferay.Util.focusFormField(document.<portlet:namespace />fm1.<portlet:namespace />keywords);
 				</c:if>
