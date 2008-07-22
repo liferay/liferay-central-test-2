@@ -133,7 +133,7 @@ public class PostgreSQLUtil extends DBUtil {
 	private static String[] _POSTGRESQL = {
 		"--", "true", "false",
 		"'01/01/1970'", "current_timestamp",
-		" bytea", "bool", " timestamp",
+		" bytea", " bool", " timestamp",
 		" double precision", " integer", " bigint",
 		" text", " text", " varchar",
 		"", "commit"
