@@ -22,34 +22,53 @@
 
 package com.liferay.portalweb.portlet.blogs;
 
-import com.liferay.portalweb.portal.BaseTests;
+import com.liferay.portalweb.portal.BaseTestCase;
 
 /**
- * <a href="BlogsTests.java.html"><b><i>View Source</i></b></a>
+ * <a href="DeleteEntryTest.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *
  */
-public class BlogsTests extends BaseTests {
+public class DeleteEntryTest extends BaseTestCase {
+	public void testDeleteEntry() throws Exception {
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
 
-	public BlogsTests() {
-		addTestSuite(AddPageTest.class);
-		addTestSuite(AddPortletTest.class);
-		addTestSuite(AddEntryTest.class);
-		addTestSuite(AddEntryCommentTest.class);
-		addTestSuite(AddSecondEntryTest.class);
-		addTestSuite(AddSecondEntryCommentTest.class);
-		addTestSuite(EditSecondCommentTest.class);
-		addTestSuite(EditSecondEntryTest.class);
-		addTestSuite(SearchBlogsTest.class);
-		addTestSuite(DeleteSecondCommentTest.class);
-		addTestSuite(DeleteSecondEntryTest.class);
-		addTestSuite(AddIncorrectEntryTest.class);
-		addTestSuite(AddDraftEntryTest.class);
-		addTestSuite(PublishDraftEntryTest.class);
-		addTestSuite(ConfigureDisplaySettingsTest.class);
-		addTestSuite(DeleteEntryTest.class);
-		addTestSuite(UploadLARFileTest.class);
+			try {
+				if (selenium.isElementPresent("link=Delete")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
+		selenium.click("link=Delete");
+		assertTrue(selenium.getConfirmation()
+						   .matches("^Are you sure you want to delete this[\\s\\S]$"));
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isTextPresent(
+							"Your request processed successfully.")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
+		assertFalse(selenium.isElementPresent("link=Test Entry"));
 	}
-
 }
