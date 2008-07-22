@@ -26,11 +26,11 @@ jQuery.ajaxSetup(
 );
 
 Liferay.Service = {
-	actionUrl: themeDisplay.getPathMain() + "/portal/json_service",
+	actionUrl: themeDisplay.getPathMain() + '/portal/json_service',
 
-	tunnelUrl: themeDisplay.getPathContext() + "/tunnel-web/secure/json",
+	tunnelUrl: themeDisplay.getPathContext() + '/tunnel-web/secure/json',
 
-	classNameSuffix: "ServiceJSON",
+	classNameSuffix: 'ServiceJSON',
 
 	ajax: function(options, callback) {
 		var instance = this;
@@ -70,20 +70,20 @@ Liferay.Service = {
 				}
 			);
 
-			return eval("(" + xHR.responseText + ")");
+			return eval('(' + xHR.responseText + ')');
 		}
 	},
 
 	getParameters: function(options) {
-		var serviceParameters = "";
+		var serviceParameters = '';
 
 		for (var key in options) {
-			if ((key != "serviceClassName") && (key != "serviceMethodName") && (key != "serviceParameterTypes")) {
-				serviceParameters += key + ",";
+			if ((key != 'serviceClassName') && (key != 'serviceMethodName') && (key != 'serviceParameterTypes')) {
+				serviceParameters += key + ',';
 			}
 		}
 
-		if (Liferay.Util.endsWith(serviceParameters, ",")) {
+		if (Liferay.Util.endsWith(serviceParameters, ',')) {
 			serviceParameters = serviceParameters.substring(0, serviceParameters.length - 1);
 		}
 
