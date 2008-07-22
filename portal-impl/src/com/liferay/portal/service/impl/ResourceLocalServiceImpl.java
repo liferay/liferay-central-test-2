@@ -156,7 +156,7 @@ public class ResourceLocalServiceImpl extends ResourceLocalServiceBaseImpl {
 				if (PropsValues.PERMISSIONS_USER_CHECK_ALGORITHM == 5) {
 					Role role = null;
 
-					if (group.isCommunity() || group.isUserGroup()) {
+					if (group.isCommunity()) {
 						role = RoleLocalServiceUtil.getRole(
 							companyId, RoleNames.COMMUNITY_MEMBER);
 					}
@@ -164,7 +164,7 @@ public class ResourceLocalServiceImpl extends ResourceLocalServiceBaseImpl {
 						role = RoleLocalServiceUtil.getRole(
 							companyId, RoleNames.ORGANIZATION_MEMBER);
 					}
-					else if (group.isUser()) {
+					else if (group.isUser() || group.isUserGroup()) {
 						role = RoleLocalServiceUtil.getRole(
 							companyId, RoleNames.POWER_USER);
 					}
@@ -499,7 +499,7 @@ public class ResourceLocalServiceImpl extends ResourceLocalServiceBaseImpl {
 		if (PropsValues.PERMISSIONS_USER_CHECK_ALGORITHM == 5) {
 			Role role = null;
 
-			if (group.isCommunity() || group.isUserGroup()) {
+			if (group.isCommunity()) {
 				role = RoleLocalServiceUtil.getRole(
 					companyId, RoleNames.COMMUNITY_MEMBER);
 			}
@@ -507,7 +507,7 @@ public class ResourceLocalServiceImpl extends ResourceLocalServiceBaseImpl {
 				role = RoleLocalServiceUtil.getRole(
 					companyId, RoleNames.ORGANIZATION_MEMBER);
 			}
-			else if (group.isUser()) {
+			else if (group.isUser() || group.isUserGroup()) {
 				role = RoleLocalServiceUtil.getRole(
 					companyId, RoleNames.POWER_USER);
 			}
