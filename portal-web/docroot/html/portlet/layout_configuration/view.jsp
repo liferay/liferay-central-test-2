@@ -49,16 +49,16 @@
 			StringBuilder portletList = new StringBuilder();
 
 			for (int i = 0; i < nonAjaxPortletIds.size(); i++) {
+				portletList.append("'");
 				portletList.append("_");
 				portletList.append(nonAjaxPortletIds.get(i));
+				portletList.append("'");
 				portletList.append(":true");
 				portletList.append((i < nonAjaxPortletIds.size() - 1) ? "," : "");
 			}
 			%>
 
-			var refreshPortletList = {<%= portletList.toString() %>};
-
-			return refreshPortletList;
+			return {<%= portletList.toString() %>};
 		}
 	</script>
 
