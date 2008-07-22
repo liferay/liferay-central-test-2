@@ -146,7 +146,6 @@ for (int i = 0; i < results.size(); i++) {
 
 	for (int i = 0; i < results.size(); i++) {
 		DLFileEntry fileEntry = (DLFileEntry)results.get(i);
-		DLFolder curFolder = DLFolderLocalServiceUtil.getDLFolder(fileEntry.getFolderId());
 
 		ResultRow row = new ResultRow(fileEntry, fileEntry.getFileEntryId(), i);
 
@@ -197,7 +196,7 @@ for (int i = 0; i < results.size(); i++) {
 		sb.append("/document_library/get_file?uuid=");
 		sb.append(fileEntry.getUuid());
 		sb.append("&groupId=");
-		sb.append(curFolder.getGroupId());
+		sb.append(folder.getGroupId());
 		sb.append("'); window.close();");
 
 		row.addButton("right", SearchEntry.DEFAULT_VALIGN, LanguageUtil.get(pageContext, "choose"), sb.toString());

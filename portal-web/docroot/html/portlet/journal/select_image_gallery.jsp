@@ -137,7 +137,6 @@ for (int i = 0; i < results.size(); i++) {
 
 	for (int i = 0; i < results.size(); i++) {
 		IGImage image = (IGImage)results.get(i);
-		IGFolder curFolder = IGFolderLocalServiceUtil.getFolder(image.getFolderId());
 
 		Image largeImage = ImageLocalServiceUtil.getImage(image.getLargeImageId());
 
@@ -164,7 +163,7 @@ for (int i = 0; i < results.size(); i++) {
 		sb.append("/image_gallery?uuid=");
 		sb.append(image.getUuid());
 		sb.append("&groupId=");
-		sb.append(curFolder.getGroupId());
+		sb.append(folder.getGroupId());
 		sb.append("&t=");
 		sb.append(ImageServletTokenUtil.getToken(image.getLargeImageId()));
 		sb.append("'); window.close();");

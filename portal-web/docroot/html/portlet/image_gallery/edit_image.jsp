@@ -31,20 +31,18 @@ String referringPortletResource = ParamUtil.getString(request, "referringPortlet
 
 IGImage image = (IGImage)request.getAttribute(WebKeys.IMAGE_GALLERY_IMAGE);
 
-IGFolder folder = null;
-
 long imageId = BeanParamUtil.getLong(image, request, "imageId");
 
 long folderId = BeanParamUtil.getLong(image, request, "folderId");
 
 String tagsEntries = ParamUtil.getString(renderRequest, "tagsEntries");
 
+IGFolder folder = null;
 Image largeImage = null;
 
 if (image != null) {
+	folder = image.getFolder();
 	largeImage = ImageLocalServiceUtil.getImage(image.getLargeImageId());
-
-	folder = IGFolderLocalServiceUtil.getFolder(folderId);
 }
 %>
 

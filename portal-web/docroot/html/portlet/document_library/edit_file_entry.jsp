@@ -34,7 +34,6 @@ String redirect = ParamUtil.getString(request, "redirect");
 String referringPortletResource = ParamUtil.getString(request, "referringPortletResource");
 
 DLFileEntry fileEntry = (DLFileEntry)request.getAttribute(WebKeys.DOCUMENT_LIBRARY_FILE_ENTRY);
-DLFolder folder = null;
 
 long folderId = BeanParamUtil.getLong(fileEntry, request, "folderId");
 String name = BeanParamUtil.getString(fileEntry, request, "name");
@@ -51,11 +50,15 @@ if (PrefsPropsUtil.getBoolean(PropsKeys.OPENOFFICE_SERVER_ENABLED, PropsValues.O
 	conversions = (String[])DocumentConversionUtil.getConversions(extension);
 }
 
+DLFolder folder = null;
+
 Lock lock = null;
 Boolean isLocked = Boolean.FALSE;
 Boolean hasLock = Boolean.FALSE;
 
 if (fileEntry != null) {
+	folder = fileEntry.getFolder();
+
 	try {
 		lock = LockServiceUtil.getLock(DLFileEntry.class.getName(), DLUtil.getLockId(fileEntry.getFolderId(), fileEntry.getName()));
 
@@ -64,12 +67,6 @@ if (fileEntry != null) {
 		if (lock.getUserId() == user.getUserId()) {
 			hasLock = Boolean.TRUE;
 		}
-	}
-	catch (Exception e) {
-	}
-
-	try {
-		folder = DLFolderLocalServiceUtil.getDLFolder(fileEntry.getFolderId());
 	}
 	catch (Exception e) {
 	}

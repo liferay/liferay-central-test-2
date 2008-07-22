@@ -160,15 +160,16 @@ public class JournalContentPortletDataHandlerImpl
 			Document doc = DocumentHelper.createDocument();
 
 			Element root = doc.addElement("journal-content-data");
-			Element igFoldersEl = root.addElement("ig-folders");
-			Element igImagesEl = root.addElement("ig-images");
+
 			Element dlFoldersEl = root.addElement("dl-folders");
 			Element dlFilesEl = root.addElement("dl-file-entries");
 			Element dlFileRanksEl = root.addElement("dl-file-ranks");
+			Element igFoldersEl = root.addElement("ig-folders");
+			Element igImagesEl = root.addElement("ig-images");
 
 			JournalPortletDataHandlerImpl.exportArticle(
-				context, root, igFoldersEl, igImagesEl, dlFoldersEl, dlFilesEl,
-				dlFileRanksEl, article);
+				context, root, dlFoldersEl, dlFilesEl, dlFileRanksEl,
+				igFoldersEl, igImagesEl, article);
 
 			String structureId = article.getStructureId();
 
@@ -199,8 +200,8 @@ public class JournalContentPortletDataHandlerImpl
 
 	public PortletDataHandlerControl[] getExportControls() {
 		return new PortletDataHandlerControl[] {
-			_selectedArticles, _images, _comments, _ratings, _tags,
-			_embeddedAssets
+			_selectedArticles, _embeddedAssets, _images, _comments, _ratings,
+			_tags
 		};
 	}
 
@@ -264,38 +265,6 @@ public class JournalContentPortletDataHandlerImpl
 				prefs.setValue("article-id", articleId);
 			}
 
-			List<Element> folderEls = root.element("ig-folders").elements(
-				"folder");
-
-			Map<Long, Long> folderPKs = context.getNewPrimaryKeysMap(
-				IGFolder.class);
-
-			for (Element folderEl : folderEls) {
-				String path = folderEl.attributeValue("path");
-
-				if (context.isPathNotProcessed(path)) {
-					IGFolder folder = (IGFolder)context.getZipEntryAsObject(
-						path);
-
-					IGPortletDataHandlerImpl.importFolder(
-						context, folderPKs, folder);
-				}
-			}
-
-			List<Element> imageEls = root.element("ig-images").elements("image");
-
-			for (Element imageEl : imageEls) {
-				String path = imageEl.attributeValue("path");
-				String binPath = imageEl.attributeValue("bin-path");
-
-				if (context.isPathNotProcessed(path)) {
-					IGImage image = (IGImage)context.getZipEntryAsObject(path);
-
-					IGPortletDataHandlerImpl.importImage(
-						context, folderPKs, image, binPath);
-				}
-			}
-
 			List<Element> dlFolderEls = root.element("dl-folders").elements(
 				"folder");
 
@@ -314,8 +283,8 @@ public class JournalContentPortletDataHandlerImpl
 				}
 			}
 
-			List<Element> fileEntryEls = root.element("dl-file-entries").elements(
-				"file-entry");
+			List<Element> fileEntryEls = root.element(
+				"dl-file-entries").elements("file-entry");
 
 			Map<String, String> fileEntryNames = context.getNewPrimaryKeysMap(
 				DLFileEntry.class);
@@ -349,6 +318,39 @@ public class JournalContentPortletDataHandlerImpl
 				}
 			}
 
+			List<Element> folderEls = root.element("ig-folders").elements(
+				"folder");
+
+			Map<Long, Long> folderPKs = context.getNewPrimaryKeysMap(
+				IGFolder.class);
+
+			for (Element folderEl : folderEls) {
+				String path = folderEl.attributeValue("path");
+
+				if (context.isPathNotProcessed(path)) {
+					IGFolder folder = (IGFolder)context.getZipEntryAsObject(
+						path);
+
+					IGPortletDataHandlerImpl.importFolder(
+						context, folderPKs, folder);
+				}
+			}
+
+			List<Element> imageEls = root.element("ig-images").elements(
+				"image");
+
+			for (Element imageEl : imageEls) {
+				String path = imageEl.attributeValue("path");
+				String binPath = imageEl.attributeValue("bin-path");
+
+				if (context.isPathNotProcessed(path)) {
+					IGImage image = (IGImage)context.getZipEntryAsObject(path);
+
+					IGPortletDataHandlerImpl.importImage(
+						context, folderPKs, image, binPath);
+				}
+			}
+
 			return prefs;
 		}
 		catch (Exception e) {
@@ -367,8 +369,7 @@ public class JournalContentPortletDataHandlerImpl
 			_NAMESPACE, "selected-articles", true, true);
 
 	private static final PortletDataHandlerBoolean _embeddedAssets =
-		new PortletDataHandlerBoolean(
-			_NAMESPACE, "embedded-assets");
+		new PortletDataHandlerBoolean(_NAMESPACE, "embedded-assets");
 
 	private static final PortletDataHandlerBoolean _images =
 		new PortletDataHandlerBoolean(_NAMESPACE, "images");
