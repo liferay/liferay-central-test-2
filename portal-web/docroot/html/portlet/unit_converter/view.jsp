@@ -34,68 +34,68 @@ Conversion conversion = ConverterUtil.getConversion(type, fromId, toId, fromValu
 %>
 
 <script type="text/javascript">
-	var lengthArray = new Array();
+	var lengthArray = [
+		new Option(0, '<liferay-ui:message key='meter' />'),
+		new Option(1, '<liferay-ui:message key='millimeter' />'),
+		new Option(2, '<liferay-ui:message key='centimeter' />'),
+		new Option(3, '<liferay-ui:message key='kilometer' />'),
+		new Option(4, '<liferay-ui:message key='foot' />'),
+		new Option(5, '<liferay-ui:message key='inch' />'),
+		new Option(6, '<liferay-ui:message key='yard' />'),
+		new Option(7, '<liferay-ui:message key='mile' />'),
+		new Option(8, '<liferay-ui:message key='cubit' />'),
+		new Option(9, '<liferay-ui:message key='talent' />'),
+		new Option(10, '<liferay-ui:message key='handbreath' />')
+	];
 
-	lengthArray[0] = new Option("0", "<liferay-ui:message key="meter" />");
-	lengthArray[1] = new Option("1", "<liferay-ui:message key="millimeter" />");
-	lengthArray[2] = new Option("2", "<liferay-ui:message key="centimeter" />");
-	lengthArray[3] = new Option("3", "<liferay-ui:message key="kilometer" />");
-	lengthArray[4] = new Option("4", "<liferay-ui:message key="foot" />");
-	lengthArray[5] = new Option("5", "<liferay-ui:message key="inch" />");
-	lengthArray[6] = new Option("6", "<liferay-ui:message key="yard" />");
-	lengthArray[7] = new Option("7", "<liferay-ui:message key="mile" />");
-	lengthArray[8] = new Option("8", "<liferay-ui:message key="cubit" />");
-	lengthArray[9] = new Option("9", "<liferay-ui:message key="talent" />");
-	lengthArray[10] = new Option("10", "<liferay-ui:message key="handbreath" />");
+	var areaArray = [
+		new Option(0, '<liferay-ui:message key='square-kilometer' />'),
+		new Option(1, '<liferay-ui:message key='square-meter' />'),
+		new Option(2, '<liferay-ui:message key='square-centimeter' />'),
+		new Option(3, '<liferay-ui:message key='square-millimeter' />'),
+		new Option(4, '<liferay-ui:message key='square-foot' />'),
+		new Option(5, '<liferay-ui:message key='square-inch' />'),
+		new Option(6, '<liferay-ui:message key='square-yard' />'),
+		new Option(7, '<liferay-ui:message key='square-mile' />'),
+		new Option(8, '<liferay-ui:message key='hectare' />'),
+		new Option(9, '<liferay-ui:message key='acre' />')
+	];
 
-	var areaArray = new Array();
+	var volumeArray = [
+		new Option(0, 'Liter'),
+		new Option(1, 'Cubic Centimeter'),
+		new Option(2, 'Cubic Inch (Liquid Measure)'),
+		new Option(3, 'Pint (Dry Measure)'),
+		new Option(4, 'Cor (Homer)'),
+		new Option(5, 'Lethek'),
+		new Option(6, 'Ephah'),
+		new Option(7, 'Seah'),
+		new Option(8, 'Omer'),
+		new Option(9, 'Cab'),
+		new Option(10, 'Bath'),
+		new Option(11, 'Hin'),
+		new Option(12, 'Log')
+	];
 
-	areaArray[0] = new Option("0", "<liferay-ui:message key="square-kilometer" />");
-	areaArray[1] = new Option("1", "<liferay-ui:message key="square-meter" />");
-	areaArray[2] = new Option("2", "<liferay-ui:message key="square-centimeter" />");
-	areaArray[3] = new Option("3", "<liferay-ui:message key="square-millimeter" />");
-	areaArray[4] = new Option("4", "<liferay-ui:message key="square-foot" />");
-	areaArray[5] = new Option("5", "<liferay-ui:message key="square-inch" />");
-	areaArray[6] = new Option("6", "<liferay-ui:message key="square-yard" />");
-	areaArray[7] = new Option("7", "<liferay-ui:message key="square-mile" />");
-	areaArray[8] = new Option("8", "<liferay-ui:message key="hectare" />");
-	areaArray[9] = new Option("9", "<liferay-ui:message key="acre" />");
+	var massArray = [
+		new Option(0, '<liferay-ui:message key='kilogram' />'),
+		new Option(1, '<liferay-ui:message key='pound' />'),
+		new Option(2, '<liferay-ui:message key='ton' />'),
+		new Option(3, '<liferay-ui:message key='talent' />'),
+		new Option(4, '<liferay-ui:message key='mina' />'),
+		new Option(5, '<liferay-ui:message key='shekel' />'),
+		new Option(6, '<liferay-ui:message key='pim' />'),
+		new Option(7, '<liferay-ui:message key='beka' />'),
+		new Option(8, '<liferay-ui:message key='gerah' />')
+	];
 
-	var volumeArray = new Array();
-
-	volumeArray[0] = new Option("0", "Liter");
-	volumeArray[1] = new Option("1", "Cubic Centimeter");
-	volumeArray[2] = new Option("2", "Cubic Inch (Liquid Measure)");
-	volumeArray[3] = new Option("3", "Pint (Dry Measure)");
-	volumeArray[4] = new Option("4", "Cor (Homer)");
-	volumeArray[5] = new Option("5", "Lethek");
-	volumeArray[6] = new Option("6", "Ephah");
-	volumeArray[7] = new Option("7", "Seah");
-	volumeArray[8] = new Option("8", "Omer");
-	volumeArray[9] = new Option("9", "Cab");
-	volumeArray[10] = new Option("10", "Bath");
-	volumeArray[11] = new Option("11", "Hin");
-	volumeArray[12] = new Option("12", "Log");
-
-	var massArray = new Array();
-
-	massArray[0] = new Option("0", "<liferay-ui:message key="kilogram" />");
-	massArray[1] = new Option("1", "<liferay-ui:message key="pound" />");
-	massArray[2] = new Option("2", "<liferay-ui:message key="ton" />");
-	massArray[3] = new Option("3", "<liferay-ui:message key="talent" />");
-	massArray[4] = new Option("4", "<liferay-ui:message key="mina" />");
-	massArray[5] = new Option("5", "<liferay-ui:message key="shekel" />");
-	massArray[6] = new Option("6", "<liferay-ui:message key="pim" />");
-	massArray[7] = new Option("7", "<liferay-ui:message key="beka" />");
-	massArray[8] = new Option("8", "<liferay-ui:message key="gerah" />");
-
-	var temperatureArray = new Array();
-
-	temperatureArray[0] = new Option("0", "Kelvin");
-	temperatureArray[1] = new Option("1", "Celcius");
-	temperatureArray[2] = new Option("2", "Fahrenheit");
-	temperatureArray[3] = new Option("3", "Rankine");
-	temperatureArray[4] = new Option("4", "Réaumure");
+	var temperatureArray = [
+		new Option(0, 'Kelvin'),
+		new Option(1, 'Celcius'),
+		new Option(2, 'Fahrenheit'),
+		new Option(3, 'Rankine'),
+		new Option(4, 'Réaumure')
+	];
 
 	jQuery(
 		function() {
