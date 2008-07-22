@@ -29,12 +29,78 @@ ResultRow row = (ResultRow)request.getAttribute(WebKeys.SEARCH_CONTAINER_RESULT_
 
 Object[] objArray = (Object[])row.getObject();
 
-BlogsStatsUser statsUser = (BlogsStatsUser)objArray[0];
 String rowHREF = (String)objArray[1];
+
+BlogsStatsUser statsUser = (BlogsStatsUser)objArray[0];
+String suserId = (String) session.getAttribute("j_username");
+
+Long statsUserId = new Long(0);
+Long loggedInUserId = new Long(0);
+
+if (statsUser != null) {
+	statsUserId = statsUser.getUserId();
+}
+
+if (suserId != null) {
+	loggedInUserId = new Long(suserId);
+}
+
+String serverName = request.getServerName();
+String scheme = request.getScheme();
+Integer serverPort = request.getServerPort();
+
+String resourceString = scheme + "://" + serverName + ":" +
+							serverPort.toString() + "/ruon-web/resources";
+
+URL presenceRestURL = new URL(resourceString + "/presence/status/" +
+							statsUserId.toString() + "/0");
+
+URL communicationRestURL = new URL(resourceString + "/communication/ways/" +
+					statsUserId.toString() + "/" + loggedInUserId.toString());
+
+boolean isPresenceDeployed = false;
+String presenceStatus = "";
+String communicationWays = "";
+
+JSONObject ruonJSON = JSONFactoryUtil.createJSONObject();
+
+ruonJSON.put("isRUONDeployedRequest","false");
+
+String ruonResponse =
+		MessageBusUtil.sendSynchronizedMessage(
+				DestinationNames.RUON_WEB, ruonJSON.toString());
+
+if (ruonResponse != null) {
+
+	JSONObject ruonResponseJSON =
+			JSONFactoryUtil.createJSONObject(ruonResponse);
+
+	JSONObject ruonDeployedJSON =
+			ruonResponseJSON.getJSONObject("isRUONDeployedResponse");
+
+	if (ruonDeployedJSON != null &&
+		ruonDeployedJSON.getBoolean("isDeployed")) {
+
+		isPresenceDeployed = true;
+		HttpUtil httpUtil = new HttpUtil();
+
+		presenceStatus = httpUtil.URLtoString(presenceRestURL.toString());
+
+		communicationWays =
+				httpUtil.URLtoString(communicationRestURL.toString());
+	}
+}
+
 %>
 
 <liferay-ui:user-display userId="<%= statsUser.getUserId() %>" url="<%= rowHREF %>">
 	<liferay-ui:message key="posts" />: <%= statsUser.getEntryCount() %><br />
 	<liferay-ui:message key="stars" />: <%= statsUser.getRatingsTotalEntries() %><br />
-	<liferay-ui:message key="date" />: <%= dateFormatDate.format(statsUser.getLastPostDate()) %>
+	<liferay-ui:message key="date" />: <%= dateFormatDate.format(statsUser.getLastPostDate()) %><br/>
+<%
+if(isPresenceDeployed){
+%>
+	<liferay-ui:message key="presence" />: <%= presenceStatus %><br />
+	<liferay-ui:message key="communicate" />: <%= communicationWays %>
+<%} %>
 </liferay-ui:user-display>
