@@ -25,6 +25,11 @@ package com.liferay.portal.action;
 import com.liferay.portal.events.EventsProcessor;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;
+import com.liferay.portal.kernel.util.HttpUtil;
+import com.liferay.portal.kernel.json.JSONObject;
+import com.liferay.portal.kernel.json.JSONFactoryUtil;
+import com.liferay.portal.kernel.messaging.MessageBusUtil;
+import com.liferay.portal.kernel.messaging.DestinationNames;
 import com.liferay.portal.struts.ActionConstants;
 import com.liferay.portal.util.CookieKeys;
 import com.liferay.portal.util.PortalUtil;
@@ -40,6 +45,8 @@ import org.apache.struts.action.Action;
 import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
+
+import java.net.URL;
 
 /**
  * <a href="LogoutAction.java.html"><b><i>View Source</i></b></a>
@@ -95,6 +102,41 @@ public class LogoutAction extends Action {
 			CookieKeys.addCookie(response, companyIdCookie);
 			CookieKeys.addCookie(response, idCookie);
 			CookieKeys.addCookie(response, passwordCookie);
+
+			//Adding RUON hooks
+
+			String userId = (String) session.getAttribute("j_username");
+			String scheme = request.getScheme();
+			String serverName = request.getServerName();
+			Integer serverPort = request.getServerPort();
+			String presenceResource = "/ruon-web/resources/presence/status/";
+
+			URL restURL = new URL(scheme + "://" + serverName + ":"+
+								serverPort.toString() + presenceResource +
+									userId + "/offline");
+
+			JSONObject ruonJSON = JSONFactoryUtil.createJSONObject();
+
+			ruonJSON.put("isRUONDeployedRequest","false");
+
+			String ruonResponse =
+					MessageBusUtil.sendSynchronizedMessage(
+							DestinationNames.RUON_WEB, ruonJSON.toString());
+
+			if (ruonResponse != null) {
+
+				JSONObject ruonResponseJSON =
+					JSONFactoryUtil.createJSONObject(ruonResponse);
+
+				JSONObject ruonDeployedJSON =
+					ruonResponseJSON.getJSONObject("isRUONDeployedResponse");
+
+				if (ruonDeployedJSON != null &&
+					ruonDeployedJSON.getBoolean("isDeployed")) {
+
+					HttpUtil.submit(restURL.toString(), true);
+				}
+			}
 
 			try {
 				session.invalidate();
