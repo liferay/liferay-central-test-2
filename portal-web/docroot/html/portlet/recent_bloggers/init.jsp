@@ -24,18 +24,11 @@
 
 <%@ include file="/html/portlet/init.jsp" %>
 
-<%@ page import="com.liferay.portal.kernel.json.JSONObject"%>
-<%@ page import="com.liferay.portal.kernel.json.JSONFactoryUtil"%>
-<%@ page import="com.liferay.portal.kernel.messaging.MessageBusUtil"%>
-<%@ page import="com.liferay.portal.kernel.messaging.DestinationNames"%>
-<%@ page import="com.liferay.portal.kernel.util.HttpUtil"%>
 <%@ page import="com.liferay.portlet.blogs.model.BlogsEntry" %>
 <%@ page import="com.liferay.portlet.blogs.model.BlogsStatsUser" %>
 <%@ page import="com.liferay.portlet.blogs.service.BlogsEntryLocalServiceUtil" %>
 <%@ page import="com.liferay.portlet.blogs.service.BlogsStatsUserLocalServiceUtil" %>
 <%@ page import="com.liferay.portlet.blogs.util.comparator.StatsUserLastPostDateComparator" %>
-
-<%@ page import="java.net.URL"%>
 
 <%
 PortletPreferences prefs = renderRequest.getPreferences();
