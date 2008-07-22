@@ -89,7 +89,7 @@ if (pluginType.equals(Plugin.TYPE_PORTLET)) {
 		<liferay-ui:message key="active" />
 	</td>
 	<td>
-		<liferay-ui:input-checkbox param="active" defaultValue="<%= active %>" disabled="<%= pluginId.equals("79") %>" />
+		<liferay-ui:input-checkbox param="active" defaultValue="<%= active %>" disabled="<%= pluginId.equals(PortletKeys.ENTERPRISE_ADMIN) %>" />
 	</td>
 </tr>
 </table>
