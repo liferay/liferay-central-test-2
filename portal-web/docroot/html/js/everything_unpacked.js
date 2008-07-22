@@ -18242,6 +18242,10 @@ Liferay.Dock = {
 
 				var top = parseInt(obj.css('top'));
 
+				if (Liferay.Browser.is_safari && isNaN(top)) {
+					top = -1;
+				}
+
 				if (!isNaN(top) && top != 0) {
 					position = '';
 					zIndex = '';
