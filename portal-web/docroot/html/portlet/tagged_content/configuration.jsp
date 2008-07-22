@@ -141,7 +141,7 @@ configurationActionURL.setParameter("portletResource", portletResource);
 						<br /><br />
 
 						<%
-						List headerNames = new ArrayList();
+						List<String> headerNames = new ArrayList<String>();
 
 						headerNames.add("type");
 						headerNames.add("title");

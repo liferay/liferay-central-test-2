@@ -44,7 +44,7 @@ portletURL.setParameter("title", wikiPage.getTitle());
 </liferay-util:include>
 
 <%
-List headerNames = new ArrayList();
+List<String> headerNames = new ArrayList<String>();
 
 headerNames.add("file-name");
 headerNames.add("size");

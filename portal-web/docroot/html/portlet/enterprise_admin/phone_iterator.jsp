@@ -37,7 +37,7 @@ long[] organizationIdsArray = StringUtil.split(ParamUtil.getString(request, "org
 
 SearchContainer searchContainer = new SearchContainer();
 
-List headerNames = new ArrayList();
+List<String> headerNames = new ArrayList<String>();
 
 headerNames.add("number");
 headerNames.add("extension");

@@ -135,7 +135,7 @@ try {
 		orderByType = portalPrefs.getValue(PortletKeys.PLUGIN_INSTALLER, "plugin-packages-order-by-type", "desc");
 	}
 
-	List headerNames = new ArrayList();
+	List<String> headerNames = new ArrayList<String>();
 
 	headerNames.add(pluginType + "-plugin");
 	headerNames.add("trusted");

@@ -219,7 +219,7 @@ request.setAttribute("edit_role_permissions.jsp-portletResource", portletResourc
 		<liferay-ui:success key="permissionsUpdated" message="the-role-permissions-were-updated" />
 
 		<%
-		List headerNames = new ArrayList();
+		List<String> headerNames = new ArrayList<String>();
 
 		headerNames.add("portlet");
 		headerNames.add("resource");
@@ -420,7 +420,7 @@ request.setAttribute("edit_role_permissions.jsp-portletResource", portletResourc
 			<%
 			SearchContainer searchContainer = new SearchContainer();
 
-			List headerNames = new ArrayList();
+			List<String> headerNames = new ArrayList<String>();
 
 			headerNames.add("name");
 
@@ -539,7 +539,7 @@ request.setAttribute("edit_role_permissions.jsp-portletResource", portletResourc
 	<c:otherwise>
 
 		<%
-		List headerNames = new ArrayList();
+		List<String> headerNames = new ArrayList<String>();
 
 		headerNames.add("portlet");
 

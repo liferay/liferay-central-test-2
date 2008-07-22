@@ -81,7 +81,7 @@ portletURL.setParameter("tabs1", tabs1);
 			orderByType = portalPrefs.getValue(PortletKeys.SOFTWARE_CATALOG, "product-entries-order-by-type", "desc");
 		}
 
-		List headerNames = new ArrayList();
+		List<String> headerNames = new ArrayList<String>();
 
 		headerNames.add("name");
 		headerNames.add("version");
@@ -291,7 +291,7 @@ portletURL.setParameter("tabs1", tabs1);
 
 		OrderByComparator orderByComparator = SCUtil.getProductEntryOrderByComparator(orderByCol, orderByType);
 
-		List headerNames = new ArrayList();
+		List<String> headerNames = new ArrayList<String>();
 
 		headerNames.add("name");
 		headerNames.add("version");
@@ -443,7 +443,7 @@ portletURL.setParameter("tabs1", tabs1);
 	<c:when test='<%= tabs1.equals("framework_versions") %>'>
 
 		<%
-		List headerNames = new ArrayList();
+		List<String> headerNames = new ArrayList<String>();
 
 		headerNames.add("name");
 		headerNames.add("url");
@@ -518,7 +518,7 @@ portletURL.setParameter("tabs1", tabs1);
 	<c:when test='<%= tabs1.equals("licenses") %>'>
 
 		<%
-		List headerNames = new ArrayList();
+		List<String> headerNames = new ArrayList<String>();
 
 		headerNames.add("name");
 		headerNames.add("url");

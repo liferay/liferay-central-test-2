@@ -49,7 +49,7 @@ portletURL.setParameter("struts_action", "/document_library/select_file_entry");
 portletURL.setParameter("groupId", String.valueOf(groupId));
 portletURL.setParameter("folderId", String.valueOf(folderId));
 
-List headerNames = new ArrayList();
+List<String> headerNames = new ArrayList<String>();
 
 headerNames.add("folder");
 headerNames.add("num-of-folders");

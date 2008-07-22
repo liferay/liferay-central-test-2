@@ -46,7 +46,7 @@ PortletURL portletURL = renderResponse.createRenderURL();
 portletURL.setParameter("struts_action", "/shopping/select_category");
 portletURL.setParameter("categoryId", String.valueOf(categoryId));
 
-List headerNames = new ArrayList();
+List<String> headerNames = new ArrayList<String>();
 
 headerNames.add("category");
 headerNames.add("num-of-categories");

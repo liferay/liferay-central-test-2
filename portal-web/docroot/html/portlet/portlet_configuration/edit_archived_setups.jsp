@@ -53,7 +53,7 @@ PortletURL portletURL = renderResponse.createActionURL();
 <input name="<portlet:namespace />portletResource" type="hidden" value="<%= HtmlUtil.escape(portletResource) %>">
 
 <%
-List headerNames = new ArrayList();
+List<String> headerNames = new ArrayList<String>();
 
 headerNames.add("name");
 headerNames.add("user");

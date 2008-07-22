@@ -50,7 +50,7 @@ portletURL.setParameter("struts_action", "/blogs/search");
 portletURL.setParameter("redirect", redirect);
 portletURL.setParameter("keywords", keywords);
 
-List headerNames = new ArrayList();
+List<String> headerNames = new ArrayList<String>();
 
 headerNames.add("#");
 headerNames.add("entry");

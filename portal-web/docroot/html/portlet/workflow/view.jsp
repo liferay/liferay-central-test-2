@@ -148,7 +148,7 @@ if (viewType.equals("user")) {
 
 		InstanceSearch searchContainer = new InstanceSearch(renderRequest, portletURL);
 
-		List headerNames = new ArrayList();
+		List<String> headerNames = new ArrayList<String>();
 
 		if (viewType.equals("user")) {
 			headerNames.add("instance-id");
@@ -306,7 +306,7 @@ if (viewType.equals("user")) {
 		<%
 		TaskSearch searchContainer = new TaskSearch(renderRequest, portletURL);
 
-		List headerNames = new ArrayList();
+		List<String> headerNames = new ArrayList<String>();
 
 		if (viewType.equals("user")) {
 			headerNames.add("task-id");

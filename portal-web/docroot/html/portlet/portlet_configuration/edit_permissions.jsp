@@ -397,7 +397,7 @@ portletURL.setParameter("resourcePrimKey", resourcePrimKey);
 					<br /><br />
 
 					<%
-					List headerNames = new ArrayList();
+					List<String> headerNames = new ArrayList<String>();
 
 					headerNames.add("name");
 					headerNames.add("screen-name");
@@ -562,7 +562,7 @@ portletURL.setParameter("resourcePrimKey", resourcePrimKey);
 					<br /><br />
 
 					<%
-					List headerNames = new ArrayList();
+					List<String> headerNames = new ArrayList<String>();
 
 					headerNames.add("name");
 					headerNames.add("parent-organization");
@@ -792,7 +792,7 @@ portletURL.setParameter("resourcePrimKey", resourcePrimKey);
 					<br /><br />
 
 					<%
-					List headerNames = new ArrayList();
+					List<String> headerNames = new ArrayList<String>();
 
 					headerNames.add("name");
 					headerNames.add("description");
@@ -965,7 +965,7 @@ portletURL.setParameter("resourcePrimKey", resourcePrimKey);
 					<br /><br />
 
 					<%
-					List headerNames = new ArrayList();
+					List<String> headerNames = new ArrayList<String>();
 
 					headerNames.add("name");
 					headerNames.add("type");
@@ -1254,7 +1254,7 @@ portletURL.setParameter("resourcePrimKey", resourcePrimKey);
 			<div class="separator"><!-- --></div>
 
 			<%
-			List headerNames = new ArrayList();
+			List<String> headerNames = new ArrayList<String>();
 
 			headerNames.add("name");
 			headerNames.add("screen-name");

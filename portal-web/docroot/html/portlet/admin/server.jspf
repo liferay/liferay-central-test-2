@@ -95,7 +95,7 @@ numberFormat.setMinimumIntegerDigits(2);
 					<c:otherwise>
 
 						<%
-						List headerNames = new ArrayList();
+						List<String> headerNames = new ArrayList<String>();
 
 						headerNames.add("category");
 						headerNames.add("level");
@@ -196,7 +196,7 @@ numberFormat.setMinimumIntegerDigits(2);
 			<c:when test='<%= tabs2.equals("system-properties") %>'>
 
 				<%
-				List headerNames = new ArrayList();
+				List<String> headerNames = new ArrayList<String>();
 
 				headerNames.add("property");
 				headerNames.add("value");
@@ -244,7 +244,7 @@ numberFormat.setMinimumIntegerDigits(2);
 			<c:when test='<%= tabs2.equals("portal-properties") %>'>
 
 				<%
-				List headerNames = new ArrayList();
+				List<String> headerNames = new ArrayList<String>();
 
 				headerNames.add("property");
 				headerNames.add("value");

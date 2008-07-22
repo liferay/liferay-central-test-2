@@ -64,7 +64,7 @@ portletURL.setParameter("redirect", redirect);
 portletURL.setParameter("tabs1", tabs1);
 portletURL.setParameter("groupId", String.valueOf(group.getGroupId()));
 
-List headerNames = new ArrayList();
+List<String> headerNames = new ArrayList<String>();
 
 headerNames.add("date");
 headerNames.add("user");

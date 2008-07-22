@@ -33,7 +33,7 @@ List groups = GroupLocalServiceUtil.getUserGroups(user2.getUserId());
 
 SearchContainer searchContainer = new SearchContainer();
 
-List headerNames = new ArrayList();
+List<String> headerNames = new ArrayList<String>();
 
 headerNames.add("name");
 headerNames.add("community");

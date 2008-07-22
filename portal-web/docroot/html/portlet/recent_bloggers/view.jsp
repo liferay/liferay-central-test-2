@@ -44,7 +44,7 @@ else {
 		<%
 		SearchContainer searchContainer = new SearchContainer();
 
-		List headerNames = new ArrayList();
+		List<String> headerNames = new ArrayList<String>();
 
 		headerNames.add("user");
 		//headerNames.add("place");

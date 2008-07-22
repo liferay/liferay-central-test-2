@@ -124,7 +124,7 @@ portletURL.setParameter("passwordPolicyId", String.valueOf(passwordPolicy.getPas
 		<br /><br />
 
 		<%
-		List headerNames = new ArrayList();
+		List<String> headerNames = new ArrayList<String>();
 
 		headerNames.add("name");
 		headerNames.add("screen-name");

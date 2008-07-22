@@ -38,7 +38,7 @@
 </c:if>
 
 <%
-List headerNames = new ArrayList();
+List<String> headerNames = new ArrayList<String>();
 
 headerNames.add("portlet");
 headerNames.add("active");

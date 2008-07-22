@@ -390,7 +390,7 @@ else if (className.equals(Portlet.class.getName())) {
 <liferay-ui:tabs names="reviewers" />
 
 <%
-List headerNames = new ArrayList();
+List<String> headerNames = new ArrayList<String>();
 
 headerNames.add("user");
 headerNames.add("stage");

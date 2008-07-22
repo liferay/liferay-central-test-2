@@ -105,7 +105,7 @@ for (int i = 0; i < portlets.size(); i++) {
 	portletURL.setParameter("struts_action", "/search/search");
 	portletURL.setParameter("keywords", keywords);
 
-	List headerNames = new ArrayList();
+	List<String> headerNames = new ArrayList<String>();
 
 	headerNames.add("#");
 	headerNames.add("summary");

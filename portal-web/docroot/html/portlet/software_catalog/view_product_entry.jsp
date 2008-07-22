@@ -277,7 +277,7 @@ List productScreenshots = SCProductScreenshotLocalServiceUtil.getProductScreensh
 		viewProductVersionURL.setParameter("struts_action", "/software_catalog/view_product_entry");
 		viewProductVersionURL.setParameter("productEntryId", String.valueOf(productEntryId));
 
-		List headerNames = new ArrayList();
+		List<String> headerNames = new ArrayList<String>();
 
 		headerNames.add("version");
 		headerNames.add("supported-framework-versions");

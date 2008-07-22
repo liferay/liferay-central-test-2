@@ -56,7 +56,7 @@ portletURL.setParameter("groupId", String.valueOf(groupId));
 </c:if>
 
 <%
-List headerNames = new ArrayList();
+List<String> headerNames = new ArrayList<String>();
 
 headerNames.add("folder");
 headerNames.add("num-of-folders");

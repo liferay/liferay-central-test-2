@@ -35,7 +35,7 @@ long classPK = ParamUtil.getLong(request, "classPK");
 
 SearchContainer searchContainer = new SearchContainer();
 
-List headerNames = new ArrayList();
+List<String> headerNames = new ArrayList<String>();
 
 headerNames.add("address");
 headerNames.add("type");

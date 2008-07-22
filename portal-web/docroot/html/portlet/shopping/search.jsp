@@ -76,7 +76,7 @@ portletURL.setParameter("searchCategoryId", String.valueOf(searchCategoryId));
 portletURL.setParameter("searchCategoryIds", String.valueOf(searchCategoryIds));
 portletURL.setParameter("keywords", keywords);
 
-List headerNames = new ArrayList();
+List<String> headerNames = new ArrayList<String>();
 
 headerNames.add("sku");
 headerNames.add("description");

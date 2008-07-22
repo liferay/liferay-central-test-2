@@ -55,7 +55,7 @@ portletURL.setParameter("struts_action", "/enterprise_admin/select_community");
 
 GroupSearch searchContainer = new GroupSearch(renderRequest, portletURL);
 
-List headerNames = new ArrayList();
+List<String> headerNames = new ArrayList<String>();
 
 headerNames.add("name");
 headerNames.add("type");

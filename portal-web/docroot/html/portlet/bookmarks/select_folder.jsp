@@ -46,7 +46,7 @@ PortletURL portletURL = renderResponse.createRenderURL();
 portletURL.setParameter("struts_action", "/bookmarks/select_folder");
 portletURL.setParameter("folderId", String.valueOf(folderId));
 
-List headerNames = new ArrayList();
+List<String> headerNames = new ArrayList<String>();
 
 headerNames.add("folder");
 headerNames.add("num-of-folders");

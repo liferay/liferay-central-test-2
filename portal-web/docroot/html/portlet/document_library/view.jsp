@@ -84,7 +84,7 @@ portletURL.setParameter("folderId", String.valueOf(folderId));
 				<c:if test="<%= showSubfolders %>">
 
 					<%
-					List headerNames = new ArrayList();
+					List<String> headerNames = new ArrayList<String>();
 
 					for (int i = 0; i < folderColumns.length; i++) {
 						String folderColumn = folderColumns[i];
@@ -458,7 +458,7 @@ portletURL.setParameter("folderId", String.valueOf(folderId));
 			</c:if>
 
 			<%
-			List headerNames = new ArrayList();
+			List<String> headerNames = new ArrayList<String>();
 
 			for (int i = 0; i < fileEntryColumns.length; i++) {
 				String fileEntryColumn = fileEntryColumns[i];
@@ -586,7 +586,7 @@ portletURL.setParameter("folderId", String.valueOf(folderId));
 			groupFileEntriesUserId = user.getUserId();
 		}
 
-		List headerNames = new ArrayList();
+		List<String> headerNames = new ArrayList<String>();
 
 		for (int i = 0; i < fileEntryColumns.length; i++) {
 			String fileEntryColumn = fileEntryColumns[i];

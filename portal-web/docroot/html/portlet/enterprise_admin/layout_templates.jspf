@@ -29,7 +29,7 @@
 </c:if>
 
 <%
-List headerNames = new ArrayList();
+List<String> headerNames = new ArrayList<String>();
 
 headerNames.add("layout-template");
 headerNames.add("active");

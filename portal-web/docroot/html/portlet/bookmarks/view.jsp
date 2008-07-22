@@ -61,7 +61,7 @@ portletURL.setParameter("folderId", String.valueOf(folderId));
 		</c:if>
 
 		<%
-		List headerNames = new ArrayList();
+		List<String> headerNames = new ArrayList<String>();
 
 		headerNames.add("folder");
 		headerNames.add("num-of-folders");
@@ -403,7 +403,7 @@ portletURL.setParameter("folderId", String.valueOf(folderId));
 			groupEntriesUserId = user.getUserId();
 		}
 
-		List headerNames = new ArrayList();
+		List<String> headerNames = new ArrayList<String>();
 
 		headerNames.add("entry");
 		headerNames.add("url");

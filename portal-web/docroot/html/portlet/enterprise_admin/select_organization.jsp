@@ -45,7 +45,7 @@ portletURL.setParameter("struts_action", "/enterprise_admin/select_organization"
 
 OrganizationSearch searchContainer = new OrganizationSearch(renderRequest, portletURL);
 
-List headerNames = new ArrayList();
+List<String> headerNames = new ArrayList<String>();
 
 headerNames.add("name");
 

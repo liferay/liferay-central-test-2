@@ -76,7 +76,7 @@ portletURL.setParameter("searchFolderId", String.valueOf(searchFolderId));
 portletURL.setParameter("searchFolderIds", String.valueOf(searchFolderIds));
 portletURL.setParameter("keywords", keywords);
 
-List headerNames = new ArrayList();
+List<String> headerNames = new ArrayList<String>();
 
 headerNames.add("#");
 headerNames.add("folder");

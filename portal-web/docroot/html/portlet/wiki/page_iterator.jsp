@@ -135,7 +135,7 @@ if (wikiPage != null) {
 </c:if>
 
 <%
-List headerNames = new ArrayList();
+List<String> headerNames = new ArrayList<String>();
 
 headerNames.add("page");
 headerNames.add("revision");

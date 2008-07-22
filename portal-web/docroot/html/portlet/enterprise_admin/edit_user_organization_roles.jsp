@@ -33,7 +33,7 @@ List userOrganizations = user2.getOrganizations();
 
 SearchContainer searchContainer = new SearchContainer();
 
-List headerNames = new ArrayList();
+List<String> headerNames = new ArrayList<String>();
 
 headerNames.add("name");
 headerNames.add("organization");

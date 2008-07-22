@@ -27,7 +27,7 @@
 <br /><br />
 
 <%
-List headerNames = new ArrayList();
+List<String> headerNames = new ArrayList<String>();
 
 headerNames.add("instance-id");
 headerNames.add("web-id");

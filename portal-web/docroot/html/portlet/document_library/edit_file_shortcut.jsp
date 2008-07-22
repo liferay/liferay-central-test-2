@@ -313,7 +313,7 @@ portletURL.setParameter("fileShortcutId", String.valueOf(fileShortcutId));
 			<%
 			SearchContainer searchContainer = new SearchContainer();
 
-			List headerNames = new ArrayList();
+			List<String> headerNames = new ArrayList<String>();
 
 			headerNames.add("version");
 			headerNames.add("date");

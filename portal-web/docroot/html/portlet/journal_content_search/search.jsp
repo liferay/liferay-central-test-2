@@ -44,7 +44,7 @@
 		portletURL.setParameter("struts_action", "/journal_content_search/search");
 		portletURL.setParameter("keywords", keywords);
 
-		List headerNames = new ArrayList();
+		List<String> headerNames = new ArrayList<String>();
 
 		headerNames.add("#");
 		headerNames.add("name");

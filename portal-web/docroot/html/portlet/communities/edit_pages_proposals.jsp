@@ -27,7 +27,7 @@ long liveGroupId = ((Long)request.getAttribute("edit_pages.jsp-liveGroupId")).lo
 
 PortletURL portletURL = (PortletURL)request.getAttribute("edit_pages.jsp-portletURL");
 
-List headerNames = new ArrayList();
+List<String> headerNames = new ArrayList<String>();
 
 headerNames.add("name");
 headerNames.add("type");

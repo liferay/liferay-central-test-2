@@ -443,7 +443,7 @@ portletURL.setParameter("name", name);
 
 			SearchContainer searchContainer = new SearchContainer();
 
-			List headerNames = new ArrayList();
+			List<String> headerNames = new ArrayList<String>();
 
 			headerNames.add("version");
 			headerNames.add("date");

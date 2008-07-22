@@ -84,7 +84,7 @@
 			<%
 			int total = results.size();
 
-			List headerNames = new ArrayList();
+			List<String> headerNames = new ArrayList<String>();
 
 			headerNames.add("pages");
 			headerNames.add("type");

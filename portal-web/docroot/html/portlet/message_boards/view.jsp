@@ -63,7 +63,7 @@ portletURL.setParameter("categoryId", String.valueOf(categoryId));
 		</c:if>
 
 		<%
-		List headerNames = new ArrayList();
+		List<String> headerNames = new ArrayList<String>();
 
 		headerNames.add("category");
 		headerNames.add("categories");
@@ -441,7 +441,7 @@ portletURL.setParameter("categoryId", String.valueOf(categoryId));
 		<c:if test='<%= tabs1.equals("my_subscriptions") %>'>
 
 			<%
-			List headerNames = new ArrayList();
+			List<String> headerNames = new ArrayList<String>();
 
 			headerNames.add("category");
 			headerNames.add("categories");
@@ -537,7 +537,7 @@ portletURL.setParameter("categoryId", String.valueOf(categoryId));
 		</c:if>
 
 		<%
-		List headerNames = new ArrayList();
+		List<String> headerNames = new ArrayList<String>();
 
 		headerNames.add("thread");
 		headerNames.add("started-by");
@@ -760,7 +760,7 @@ portletURL.setParameter("categoryId", String.valueOf(categoryId));
 	<c:when test='<%= tabs1.equals("banned_users") %>'>
 
 		<%
-		List headerNames = new ArrayList();
+		List<String> headerNames = new ArrayList<String>();
 
 		headerNames.add("banned-user");
 		headerNames.add("banned-by");

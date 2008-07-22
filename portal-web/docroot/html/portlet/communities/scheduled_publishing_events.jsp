@@ -31,7 +31,7 @@ String destinationName = ParamUtil.getString(request, "destinationName");
 
 SearchContainer searchContainer = new SearchContainer();
 
-List headerNames = new ArrayList();
+List<String> headerNames = new ArrayList<String>();
 
 headerNames.add("description");
 headerNames.add("start-date");

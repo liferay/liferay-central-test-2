@@ -117,7 +117,7 @@ GroupSearch searchContainer = new GroupSearch(renderRequest, portletURL);
 	<liferay-ui:error exception="<%= RequiredGroupException.class %>" message="the-group-cannot-be-deleted-because-it-is-a-required-system-group" />
 
 	<%
-	List headerNames = new ArrayList();
+	List<String> headerNames = new ArrayList<String>();
 
 	headerNames.add("name");
 	headerNames.add("type");

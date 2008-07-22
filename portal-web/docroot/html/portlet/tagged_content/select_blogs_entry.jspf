@@ -60,7 +60,7 @@ portletURL.setParameter("typeSelection", BlogsEntry.class.getName());
 	<c:when test="<%= Validator.isNotNull(keywords) %>">
 
 		<%
-		List headerNames = new ArrayList();
+		List<String> headerNames = new ArrayList<String>();
 
 		headerNames.add("entry");
 		headerNames.add("user-name");
@@ -134,7 +134,7 @@ portletURL.setParameter("typeSelection", BlogsEntry.class.getName());
 	<c:otherwise>
 
 		<%
-		List headerNames = new ArrayList();
+		List<String> headerNames = new ArrayList<String>();
 
 		headerNames.add("entry");
 		headerNames.add("user-name");

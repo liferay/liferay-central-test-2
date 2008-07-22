@@ -141,7 +141,7 @@ NumberFormat percentFormat = NumberFormat.getPercentInstance(locale);
 		portletURL.setParameter("redirect", redirect);
 		portletURL.setParameter("questionId", String.valueOf(question.getQuestionId()));
 
-		List headerNames = new ArrayList();
+		List<String> headerNames = new ArrayList<String>();
 
 		headerNames.add("user");
 		headerNames.add("choice");

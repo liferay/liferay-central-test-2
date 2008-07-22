@@ -33,7 +33,7 @@ Organization organization = (Organization)request.getAttribute(WebKeys.ORGANIZAT
 
 SearchContainer searchContainer = new SearchContainer();
 
-List headerNames = new ArrayList();
+List<String> headerNames = new ArrayList<String>();
 
 headerNames.add("type");
 

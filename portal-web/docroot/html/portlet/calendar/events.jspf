@@ -25,7 +25,7 @@
 <%
 PortletURL iteratorURL = PortletURLUtil.clone(portletURL, renderResponse);
 
-List headerNames = new ArrayList();
+List<String> headerNames = new ArrayList<String>();
 
 headerNames.add("date");
 headerNames.add("time");

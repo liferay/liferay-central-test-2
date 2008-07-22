@@ -59,7 +59,7 @@ portletURL.setParameter("redirect", redirect);
 portletURL.setParameter("nodeId", String.valueOf(nodeId));
 portletURL.setParameter("keywords", keywords);
 
-List headerNames = new ArrayList();
+List<String> headerNames = new ArrayList<String>();
 
 headerNames.add("#");
 headerNames.add("wiki");

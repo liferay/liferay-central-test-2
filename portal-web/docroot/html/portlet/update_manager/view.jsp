@@ -72,7 +72,7 @@ List updatablePackageIds = new ArrayList();
 
 				<%
 				try {
-					List headerNames = new ArrayList();
+					List<String> headerNames = new ArrayList<String>();
 
 					headerNames.add("plugin");
 					headerNames.add("trusted");

@@ -25,7 +25,7 @@
 <%
 SearchContainer searchContainer = new SearchContainer();
 
-List headerNames = new ArrayList();
+List<String> headerNames = new ArrayList<String>();
 
 headerNames.add("time");
 headerNames.add("title");

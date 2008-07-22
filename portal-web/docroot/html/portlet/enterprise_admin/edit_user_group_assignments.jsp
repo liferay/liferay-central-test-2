@@ -113,7 +113,7 @@ if (tabs2.equals("current")) {
 <br /><br />
 
 <%
-List headerNames = new ArrayList();
+List<String> headerNames = new ArrayList<String>();
 
 headerNames.add("name");
 headerNames.add("screen-name");

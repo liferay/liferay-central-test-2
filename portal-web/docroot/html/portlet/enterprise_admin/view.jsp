@@ -491,7 +491,7 @@ request.setAttribute("view.jsp-portletURLString", portletURLString);
 				<%
 				SearchContainer searchContainer = new SearchContainer();
 
-				List headerNames = new ArrayList();
+				List<String> headerNames = new ArrayList<String>();
 
 				headerNames.add("session-id");
 				headerNames.add("user-id");
