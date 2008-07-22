@@ -22,7 +22,8 @@ Liferay.DynamicSelect = new Class({
 		jQuery.each(
 			array,
 			function(i, options) {
-				var select = jQuery('#' + options.select);
+				var id = options.select;
+				var select = jQuery('#' + id);
 				var selectData = options.selectData;
 
 				var prevSelectVal = null;
@@ -33,24 +34,26 @@ Liferay.DynamicSelect = new Class({
 
 				selectData(
 					function(list) {
-						instance._updateSelect(instance, i, list);
+						instance._updateSelect(i, list);
 					},
 					prevSelectVal
 				);
 
-				select.attr('name', select.attr('id'));
+				select.attr('name', id);
 
 				select.bind(
 					'change',
 					function() {
-						instance._callSelectData(instance, i);
+						instance._callSelectData(i);
 					}
 				);
 			}
 		);
 	},
 
-	_callSelectData: function(instance, i) {
+	_callSelectData: function(i) {
+		var instance = this;
+
 		var array = instance.array;
 
 		if ((i + 1) < array.length) {
@@ -59,14 +62,16 @@ Liferay.DynamicSelect = new Class({
 
 			nextSelectData(
 				function(list) {
-					instance._updateSelect(instance, i + 1, list);
+					instance._updateSelect(i + 1, list);
 				},
 				curSelect.val()
 			);
 		}
 	},
 
-	_updateSelect: function(instance, i, list) {
+	_updateSelect: function(i, list) {
+		var instance = this;
+
 		var options = instance.array[i];
 
 		var select = jQuery('#' + options.select);
@@ -75,23 +80,25 @@ Liferay.DynamicSelect = new Class({
 		var selectVal = options.selectVal;
 		var selectNullable = options.selectNullable || true;
 
-		var options = '';
+		var selectOptions = [];
 
 		if (selectNullable) {
-			options += '<option value="0"></option>';
+			selectOptions.push('<option value="0"></option>');
 		}
 
 		jQuery.each(
 			list,
 			function(i, obj) {
-				eval('var key = obj.' + selectId + ';');
-				eval('var value = obj.' + selectDesc + ';');
+				var key = obj[selectId];
+				var value = obj[selectDesc];
 
-				options += '<option value="' + key + '">' + value + '</option>';
+				selectOptions.push('<option value="' + key + '">' + value + '</option>');
 			}
 		);
 
-		select.html(options);
+		selectOptions = selectOptions.join('');
+
+		select.html(selectOptions);
 		select.find('option[@value=' + selectVal + ']').attr('selected', 'selected');
 
 		if (Liferay.Browser.is_ie) {
