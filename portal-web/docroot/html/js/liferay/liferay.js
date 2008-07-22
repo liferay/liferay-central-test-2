@@ -36,8 +36,9 @@ Liferay.Service = {
 		var instance = this;
 
 		var serviceUrl = instance.actionUrl;
+		var isUsingTunnel = (Liferay.ServiceAuth && Liferay.ServiceAuth.header);
 
-		if (Liferay.ServiceAuth.header) {
+		if (isUsingTunnel) {
 			serviceUrl = instance.tunnelUrl;
 		}
 
@@ -51,7 +52,7 @@ Liferay.Service = {
 					data: options,
 					dataType: 'json',
 					beforeSend: function(xHR) {
-						if (Liferay.ServiceAuth.header) {
+						if (isUsingTunnel) {
 							xHR.setRequestHeader('Authorization', Liferay.ServiceAuth.header);
 						}
 					},
@@ -90,6 +91,10 @@ Liferay.Service = {
 	}
 };
 
+/*
+
+LEP-6815
+
 Liferay.ServiceAuth = {
 	header: null,
 
@@ -100,9 +105,6 @@ Liferay.ServiceAuth = {
 	}
 };
 
-/*
-http://www.webtoolkit.info/
-*/
 Liferay.Base64 = {
 	encode: function(input) {
 		var instance = this;
@@ -228,6 +230,8 @@ Liferay.Base64 = {
 
 	_keyStr: "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/="
 };
+
+*/
 
 Liferay.Template = {
 	PORTLET: '<div class="portlet"><div class="portlet-topper"><div class="portlet-title"></div></div><div class="portlet-content"></div><div class="forbidden-action"></div></div>'
