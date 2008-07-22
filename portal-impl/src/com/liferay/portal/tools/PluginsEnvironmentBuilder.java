@@ -166,9 +166,13 @@ public class PluginsEnvironmentBuilder {
 
 		Collections.sort(customJars);
 
-		for (String jar : dependencyJars) {
+		for (String jar : portalJars) {
 			customJars.remove(jar);
 		}
+
+		customJars.remove("util-bridges.jar");
+		customJars.remove("util-java.jar");
+		customJars.remove("util-taglib.jar");
 
 		sb = new StringBuilder();
 
