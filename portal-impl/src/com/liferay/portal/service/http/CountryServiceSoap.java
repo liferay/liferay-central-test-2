@@ -139,5 +139,47 @@ public class CountryServiceSoap {
 		}
 	}
 
+	public static com.liferay.portal.model.CountrySoap getCountryByA2(
+		java.lang.String a2) throws RemoteException {
+		try {
+			com.liferay.portal.model.Country returnValue = CountryServiceUtil.getCountryByA2(a2);
+
+			return com.liferay.portal.model.CountrySoap.toSoapModel(returnValue);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
+	public static com.liferay.portal.model.CountrySoap getCountryByA3(
+		java.lang.String a3) throws RemoteException {
+		try {
+			com.liferay.portal.model.Country returnValue = CountryServiceUtil.getCountryByA3(a3);
+
+			return com.liferay.portal.model.CountrySoap.toSoapModel(returnValue);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
+	public static com.liferay.portal.model.CountrySoap getCountryByName(
+		java.lang.String name) throws RemoteException {
+		try {
+			com.liferay.portal.model.Country returnValue = CountryServiceUtil.getCountryByName(name);
+
+			return com.liferay.portal.model.CountrySoap.toSoapModel(returnValue);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
 	private static Log _log = LogFactoryUtil.getLog(CountryServiceSoap.class);
 }

@@ -91,6 +91,40 @@ public class CountryUtil {
 		return getPersistence().fetchByPrimaryKey(countryId);
 	}
 
+	public static com.liferay.portal.model.Country findByName(
+		java.lang.String name)
+		throws com.liferay.portal.NoSuchCountryException,
+			com.liferay.portal.SystemException {
+		return getPersistence().findByName(name);
+	}
+
+	public static com.liferay.portal.model.Country fetchByName(
+		java.lang.String name) throws com.liferay.portal.SystemException {
+		return getPersistence().fetchByName(name);
+	}
+
+	public static com.liferay.portal.model.Country findByA2(java.lang.String a2)
+		throws com.liferay.portal.NoSuchCountryException,
+			com.liferay.portal.SystemException {
+		return getPersistence().findByA2(a2);
+	}
+
+	public static com.liferay.portal.model.Country fetchByA2(
+		java.lang.String a2) throws com.liferay.portal.SystemException {
+		return getPersistence().fetchByA2(a2);
+	}
+
+	public static com.liferay.portal.model.Country findByA3(java.lang.String a3)
+		throws com.liferay.portal.NoSuchCountryException,
+			com.liferay.portal.SystemException {
+		return getPersistence().findByA3(a3);
+	}
+
+	public static com.liferay.portal.model.Country fetchByA3(
+		java.lang.String a3) throws com.liferay.portal.SystemException {
+		return getPersistence().fetchByA3(a3);
+	}
+
 	public static java.util.List<com.liferay.portal.model.Country> findByActive(
 		boolean active) throws com.liferay.portal.SystemException {
 		return getPersistence().findByActive(active);
@@ -159,6 +193,24 @@ public class CountryUtil {
 		return getPersistence().findAll(start, end, obc);
 	}
 
+	public static void removeByName(java.lang.String name)
+		throws com.liferay.portal.NoSuchCountryException,
+			com.liferay.portal.SystemException {
+		getPersistence().removeByName(name);
+	}
+
+	public static void removeByA2(java.lang.String a2)
+		throws com.liferay.portal.NoSuchCountryException,
+			com.liferay.portal.SystemException {
+		getPersistence().removeByA2(a2);
+	}
+
+	public static void removeByA3(java.lang.String a3)
+		throws com.liferay.portal.NoSuchCountryException,
+			com.liferay.portal.SystemException {
+		getPersistence().removeByA3(a3);
+	}
+
 	public static void removeByActive(boolean active)
 		throws com.liferay.portal.SystemException {
 		getPersistence().removeByActive(active);
@@ -166,6 +218,21 @@ public class CountryUtil {
 
 	public static void removeAll() throws com.liferay.portal.SystemException {
 		getPersistence().removeAll();
+	}
+
+	public static int countByName(java.lang.String name)
+		throws com.liferay.portal.SystemException {
+		return getPersistence().countByName(name);
+	}
+
+	public static int countByA2(java.lang.String a2)
+		throws com.liferay.portal.SystemException {
+		return getPersistence().countByA2(a2);
+	}
+
+	public static int countByA3(java.lang.String a3)
+		throws com.liferay.portal.SystemException {
+		return getPersistence().countByA3(a3);
 	}
 
 	public static int countByActive(boolean active)

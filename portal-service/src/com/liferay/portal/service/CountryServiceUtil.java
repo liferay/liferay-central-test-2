@@ -83,4 +83,31 @@ public class CountryServiceUtil {
 
 		return countryService.getCountry(countryId);
 	}
+
+	public static com.liferay.portal.model.Country getCountryByA2(
+		java.lang.String a2)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException, java.rmi.RemoteException {
+		CountryService countryService = CountryServiceFactory.getService();
+
+		return countryService.getCountryByA2(a2);
+	}
+
+	public static com.liferay.portal.model.Country getCountryByA3(
+		java.lang.String a3)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException, java.rmi.RemoteException {
+		CountryService countryService = CountryServiceFactory.getService();
+
+		return countryService.getCountryByA3(a3);
+	}
+
+	public static com.liferay.portal.model.Country getCountryByName(
+		java.lang.String name)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException, java.rmi.RemoteException {
+		CountryService countryService = CountryServiceFactory.getService();
+
+		return countryService.getCountryByName(name);
+	}
 }

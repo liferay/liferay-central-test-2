@@ -105,4 +105,28 @@ public class CountryServiceJSON {
 
 		return CountryJSONSerializer.toJSONObject(returnValue);
 	}
+
+	public static JSONObject getCountryByA2(java.lang.String a2)
+		throws java.rmi.RemoteException, com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
+		com.liferay.portal.model.Country returnValue = CountryServiceUtil.getCountryByA2(a2);
+
+		return CountryJSONSerializer.toJSONObject(returnValue);
+	}
+
+	public static JSONObject getCountryByA3(java.lang.String a3)
+		throws java.rmi.RemoteException, com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
+		com.liferay.portal.model.Country returnValue = CountryServiceUtil.getCountryByA3(a3);
+
+		return CountryJSONSerializer.toJSONObject(returnValue);
+	}
+
+	public static JSONObject getCountryByName(java.lang.String name)
+		throws java.rmi.RemoteException, com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
+		com.liferay.portal.model.Country returnValue = CountryServiceUtil.getCountryByName(name);
+
+		return CountryJSONSerializer.toJSONObject(returnValue);
+	}
 }

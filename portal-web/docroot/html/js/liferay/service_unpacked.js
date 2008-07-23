@@ -106,6 +106,27 @@ Liferay.Service.Portal.Country = {
 		params.serviceMethodName = "getCountry";
 
 		return Liferay.Service.ajax(params, callback);
+	},
+
+	getCountryByA2: function(params, callback) {
+		params.serviceClassName = this.serviceClassName;
+		params.serviceMethodName = "getCountryByA2";
+
+		return Liferay.Service.ajax(params, callback);
+	},
+
+	getCountryByA3: function(params, callback) {
+		params.serviceClassName = this.serviceClassName;
+		params.serviceMethodName = "getCountryByA3";
+
+		return Liferay.Service.ajax(params, callback);
+	},
+
+	getCountryByName: function(params, callback) {
+		params.serviceClassName = this.serviceClassName;
+		params.serviceMethodName = "getCountryByName";
+
+		return Liferay.Service.ajax(params, callback);
 	}
 };
 

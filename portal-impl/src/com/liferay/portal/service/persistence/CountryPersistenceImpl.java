@@ -261,6 +261,306 @@ public class CountryPersistenceImpl extends BasePersistenceImpl
 		}
 	}
 
+	public Country findByName(String name)
+		throws NoSuchCountryException, SystemException {
+		Country country = fetchByName(name);
+
+		if (country == null) {
+			StringBuilder msg = new StringBuilder();
+
+			msg.append("No Country exists with the key {");
+
+			msg.append("name=" + name);
+
+			msg.append(StringPool.CLOSE_CURLY_BRACE);
+
+			if (_log.isWarnEnabled()) {
+				_log.warn(msg.toString());
+			}
+
+			throw new NoSuchCountryException(msg.toString());
+		}
+
+		return country;
+	}
+
+	public Country fetchByName(String name) throws SystemException {
+		boolean finderClassNameCacheEnabled = CountryModelImpl.CACHE_ENABLED;
+		String finderClassName = Country.class.getName();
+		String finderMethodName = "fetchByName";
+		String[] finderParams = new String[] { String.class.getName() };
+		Object[] finderArgs = new Object[] { name };
+
+		Object result = null;
+
+		if (finderClassNameCacheEnabled) {
+			result = FinderCacheUtil.getResult(finderClassName,
+					finderMethodName, finderParams, finderArgs, this);
+		}
+
+		if (result == null) {
+			Session session = null;
+
+			try {
+				session = openSession();
+
+				StringBuilder query = new StringBuilder();
+
+				query.append("FROM com.liferay.portal.model.Country WHERE ");
+
+				if (name == null) {
+					query.append("name IS NULL");
+				}
+				else {
+					query.append("name = ?");
+				}
+
+				query.append(" ");
+
+				query.append("ORDER BY ");
+
+				query.append("name ASC");
+
+				Query q = session.createQuery(query.toString());
+
+				QueryPos qPos = QueryPos.getInstance(q);
+
+				if (name != null) {
+					qPos.add(name);
+				}
+
+				List<Country> list = q.list();
+
+				FinderCacheUtil.putResult(finderClassNameCacheEnabled,
+					finderClassName, finderMethodName, finderParams,
+					finderArgs, list);
+
+				if (list.size() == 0) {
+					return null;
+				}
+				else {
+					return list.get(0);
+				}
+			}
+			catch (Exception e) {
+				throw processException(e);
+			}
+			finally {
+				closeSession(session);
+			}
+		}
+		else {
+			List<Country> list = (List<Country>)result;
+
+			if (list.size() == 0) {
+				return null;
+			}
+			else {
+				return list.get(0);
+			}
+		}
+	}
+
+	public Country findByA2(String a2)
+		throws NoSuchCountryException, SystemException {
+		Country country = fetchByA2(a2);
+
+		if (country == null) {
+			StringBuilder msg = new StringBuilder();
+
+			msg.append("No Country exists with the key {");
+
+			msg.append("a2=" + a2);
+
+			msg.append(StringPool.CLOSE_CURLY_BRACE);
+
+			if (_log.isWarnEnabled()) {
+				_log.warn(msg.toString());
+			}
+
+			throw new NoSuchCountryException(msg.toString());
+		}
+
+		return country;
+	}
+
+	public Country fetchByA2(String a2) throws SystemException {
+		boolean finderClassNameCacheEnabled = CountryModelImpl.CACHE_ENABLED;
+		String finderClassName = Country.class.getName();
+		String finderMethodName = "fetchByA2";
+		String[] finderParams = new String[] { String.class.getName() };
+		Object[] finderArgs = new Object[] { a2 };
+
+		Object result = null;
+
+		if (finderClassNameCacheEnabled) {
+			result = FinderCacheUtil.getResult(finderClassName,
+					finderMethodName, finderParams, finderArgs, this);
+		}
+
+		if (result == null) {
+			Session session = null;
+
+			try {
+				session = openSession();
+
+				StringBuilder query = new StringBuilder();
+
+				query.append("FROM com.liferay.portal.model.Country WHERE ");
+
+				if (a2 == null) {
+					query.append("a2 IS NULL");
+				}
+				else {
+					query.append("a2 = ?");
+				}
+
+				query.append(" ");
+
+				query.append("ORDER BY ");
+
+				query.append("name ASC");
+
+				Query q = session.createQuery(query.toString());
+
+				QueryPos qPos = QueryPos.getInstance(q);
+
+				if (a2 != null) {
+					qPos.add(a2);
+				}
+
+				List<Country> list = q.list();
+
+				FinderCacheUtil.putResult(finderClassNameCacheEnabled,
+					finderClassName, finderMethodName, finderParams,
+					finderArgs, list);
+
+				if (list.size() == 0) {
+					return null;
+				}
+				else {
+					return list.get(0);
+				}
+			}
+			catch (Exception e) {
+				throw processException(e);
+			}
+			finally {
+				closeSession(session);
+			}
+		}
+		else {
+			List<Country> list = (List<Country>)result;
+
+			if (list.size() == 0) {
+				return null;
+			}
+			else {
+				return list.get(0);
+			}
+		}
+	}
+
+	public Country findByA3(String a3)
+		throws NoSuchCountryException, SystemException {
+		Country country = fetchByA3(a3);
+
+		if (country == null) {
+			StringBuilder msg = new StringBuilder();
+
+			msg.append("No Country exists with the key {");
+
+			msg.append("a3=" + a3);
+
+			msg.append(StringPool.CLOSE_CURLY_BRACE);
+
+			if (_log.isWarnEnabled()) {
+				_log.warn(msg.toString());
+			}
+
+			throw new NoSuchCountryException(msg.toString());
+		}
+
+		return country;
+	}
+
+	public Country fetchByA3(String a3) throws SystemException {
+		boolean finderClassNameCacheEnabled = CountryModelImpl.CACHE_ENABLED;
+		String finderClassName = Country.class.getName();
+		String finderMethodName = "fetchByA3";
+		String[] finderParams = new String[] { String.class.getName() };
+		Object[] finderArgs = new Object[] { a3 };
+
+		Object result = null;
+
+		if (finderClassNameCacheEnabled) {
+			result = FinderCacheUtil.getResult(finderClassName,
+					finderMethodName, finderParams, finderArgs, this);
+		}
+
+		if (result == null) {
+			Session session = null;
+
+			try {
+				session = openSession();
+
+				StringBuilder query = new StringBuilder();
+
+				query.append("FROM com.liferay.portal.model.Country WHERE ");
+
+				if (a3 == null) {
+					query.append("a3 IS NULL");
+				}
+				else {
+					query.append("a3 = ?");
+				}
+
+				query.append(" ");
+
+				query.append("ORDER BY ");
+
+				query.append("name ASC");
+
+				Query q = session.createQuery(query.toString());
+
+				QueryPos qPos = QueryPos.getInstance(q);
+
+				if (a3 != null) {
+					qPos.add(a3);
+				}
+
+				List<Country> list = q.list();
+
+				FinderCacheUtil.putResult(finderClassNameCacheEnabled,
+					finderClassName, finderMethodName, finderParams,
+					finderArgs, list);
+
+				if (list.size() == 0) {
+					return null;
+				}
+				else {
+					return list.get(0);
+				}
+			}
+			catch (Exception e) {
+				throw processException(e);
+			}
+			finally {
+				closeSession(session);
+			}
+		}
+		else {
+			List<Country> list = (List<Country>)result;
+
+			if (list.size() == 0) {
+				return null;
+			}
+			else {
+				return list.get(0);
+			}
+		}
+	}
+
 	public List<Country> findByActive(boolean active) throws SystemException {
 		boolean finderClassNameCacheEnabled = CountryModelImpl.CACHE_ENABLED;
 		String finderClassName = Country.class.getName();
@@ -612,6 +912,27 @@ public class CountryPersistenceImpl extends BasePersistenceImpl
 		}
 	}
 
+	public void removeByName(String name)
+		throws NoSuchCountryException, SystemException {
+		Country country = findByName(name);
+
+		remove(country);
+	}
+
+	public void removeByA2(String a2)
+		throws NoSuchCountryException, SystemException {
+		Country country = findByA2(a2);
+
+		remove(country);
+	}
+
+	public void removeByA3(String a3)
+		throws NoSuchCountryException, SystemException {
+		Country country = findByA3(a3);
+
+		remove(country);
+	}
+
 	public void removeByActive(boolean active) throws SystemException {
 		for (Country country : findByActive(active)) {
 			remove(country);
@@ -621,6 +942,222 @@ public class CountryPersistenceImpl extends BasePersistenceImpl
 	public void removeAll() throws SystemException {
 		for (Country country : findAll()) {
 			remove(country);
+		}
+	}
+
+	public int countByName(String name) throws SystemException {
+		boolean finderClassNameCacheEnabled = CountryModelImpl.CACHE_ENABLED;
+		String finderClassName = Country.class.getName();
+		String finderMethodName = "countByName";
+		String[] finderParams = new String[] { String.class.getName() };
+		Object[] finderArgs = new Object[] { name };
+
+		Object result = null;
+
+		if (finderClassNameCacheEnabled) {
+			result = FinderCacheUtil.getResult(finderClassName,
+					finderMethodName, finderParams, finderArgs, this);
+		}
+
+		if (result == null) {
+			Session session = null;
+
+			try {
+				session = openSession();
+
+				StringBuilder query = new StringBuilder();
+
+				query.append("SELECT COUNT(*) ");
+				query.append("FROM com.liferay.portal.model.Country WHERE ");
+
+				if (name == null) {
+					query.append("name IS NULL");
+				}
+				else {
+					query.append("name = ?");
+				}
+
+				query.append(" ");
+
+				Query q = session.createQuery(query.toString());
+
+				QueryPos qPos = QueryPos.getInstance(q);
+
+				if (name != null) {
+					qPos.add(name);
+				}
+
+				Long count = null;
+
+				Iterator<Long> itr = q.list().iterator();
+
+				if (itr.hasNext()) {
+					count = itr.next();
+				}
+
+				if (count == null) {
+					count = new Long(0);
+				}
+
+				FinderCacheUtil.putResult(finderClassNameCacheEnabled,
+					finderClassName, finderMethodName, finderParams,
+					finderArgs, count);
+
+				return count.intValue();
+			}
+			catch (Exception e) {
+				throw processException(e);
+			}
+			finally {
+				closeSession(session);
+			}
+		}
+		else {
+			return ((Long)result).intValue();
+		}
+	}
+
+	public int countByA2(String a2) throws SystemException {
+		boolean finderClassNameCacheEnabled = CountryModelImpl.CACHE_ENABLED;
+		String finderClassName = Country.class.getName();
+		String finderMethodName = "countByA2";
+		String[] finderParams = new String[] { String.class.getName() };
+		Object[] finderArgs = new Object[] { a2 };
+
+		Object result = null;
+
+		if (finderClassNameCacheEnabled) {
+			result = FinderCacheUtil.getResult(finderClassName,
+					finderMethodName, finderParams, finderArgs, this);
+		}
+
+		if (result == null) {
+			Session session = null;
+
+			try {
+				session = openSession();
+
+				StringBuilder query = new StringBuilder();
+
+				query.append("SELECT COUNT(*) ");
+				query.append("FROM com.liferay.portal.model.Country WHERE ");
+
+				if (a2 == null) {
+					query.append("a2 IS NULL");
+				}
+				else {
+					query.append("a2 = ?");
+				}
+
+				query.append(" ");
+
+				Query q = session.createQuery(query.toString());
+
+				QueryPos qPos = QueryPos.getInstance(q);
+
+				if (a2 != null) {
+					qPos.add(a2);
+				}
+
+				Long count = null;
+
+				Iterator<Long> itr = q.list().iterator();
+
+				if (itr.hasNext()) {
+					count = itr.next();
+				}
+
+				if (count == null) {
+					count = new Long(0);
+				}
+
+				FinderCacheUtil.putResult(finderClassNameCacheEnabled,
+					finderClassName, finderMethodName, finderParams,
+					finderArgs, count);
+
+				return count.intValue();
+			}
+			catch (Exception e) {
+				throw processException(e);
+			}
+			finally {
+				closeSession(session);
+			}
+		}
+		else {
+			return ((Long)result).intValue();
+		}
+	}
+
+	public int countByA3(String a3) throws SystemException {
+		boolean finderClassNameCacheEnabled = CountryModelImpl.CACHE_ENABLED;
+		String finderClassName = Country.class.getName();
+		String finderMethodName = "countByA3";
+		String[] finderParams = new String[] { String.class.getName() };
+		Object[] finderArgs = new Object[] { a3 };
+
+		Object result = null;
+
+		if (finderClassNameCacheEnabled) {
+			result = FinderCacheUtil.getResult(finderClassName,
+					finderMethodName, finderParams, finderArgs, this);
+		}
+
+		if (result == null) {
+			Session session = null;
+
+			try {
+				session = openSession();
+
+				StringBuilder query = new StringBuilder();
+
+				query.append("SELECT COUNT(*) ");
+				query.append("FROM com.liferay.portal.model.Country WHERE ");
+
+				if (a3 == null) {
+					query.append("a3 IS NULL");
+				}
+				else {
+					query.append("a3 = ?");
+				}
+
+				query.append(" ");
+
+				Query q = session.createQuery(query.toString());
+
+				QueryPos qPos = QueryPos.getInstance(q);
+
+				if (a3 != null) {
+					qPos.add(a3);
+				}
+
+				Long count = null;
+
+				Iterator<Long> itr = q.list().iterator();
+
+				if (itr.hasNext()) {
+					count = itr.next();
+				}
+
+				if (count == null) {
+					count = new Long(0);
+				}
+
+				FinderCacheUtil.putResult(finderClassNameCacheEnabled,
+					finderClassName, finderMethodName, finderParams,
+					finderArgs, count);
+
+				return count.intValue();
+			}
+			catch (Exception e) {
+				throw processException(e);
+			}
+			finally {
+				closeSession(session);
+			}
+		}
+		else {
+			return ((Long)result).intValue();
 		}
 	}
 

@@ -56,7 +56,10 @@ create index IX_EC00543C on Company (webId);
 
 create index IX_66D496A3 on Contact_ (companyId);
 
+create index IX_717B97E1 on Country (a2);
+create index IX_717B9BA2 on Country (a3);
 create index IX_25D734CD on Country (active_);
+create index IX_19DA007B on Country (name);
 
 create index IX_4CB1B2B4 on DLFileEntry (companyId);
 create index IX_24A846D1 on DLFileEntry (folderId);
