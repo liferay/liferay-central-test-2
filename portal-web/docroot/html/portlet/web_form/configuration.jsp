@@ -49,7 +49,7 @@ if (WebFormUtil.getTableRowsCount(databaseTableName) > 0) {
 }
 %>
 
-<form action="<liferay-portlet:actionURL portletConfiguration="true" />" class="uni-form" method="post" name="<portlet:namespace />fm">
+<form action="<liferay-portlet:actionURL portletConfiguration="true" />" class="uni-form" method="post" id="<portlet:namespace />fm" name="<portlet:namespace />fm">
 <input name="<portlet:namespace /><%= Constants.CMD %>" type="hidden" value="<%= Constants.UPDATE %>" />
 <input name="<portlet:namespace />redirect" type="hidden" value="<%= HtmlUtil.escape(redirect) %>" />
 
@@ -166,8 +166,10 @@ if (WebFormUtil.getTableRowsCount(databaseTableName) > 0) {
 	String fieldType = PrefsParamUtil.getString(prefs, request, "fieldType" + i);
 	boolean fieldOptional = PrefsParamUtil.getBoolean(prefs, request, "fieldOptional" + i);
 	String fieldOptions = PrefsParamUtil.getString(prefs, request, "fieldOptions" + i);
+    String fieldValidationScript = PrefsParamUtil.getString(prefs, request, "fieldValidationScript" + i);
+    String fieldValidationErrorMessage = PrefsParamUtil.getString(prefs, request, "fieldValidationErrorMessage" + i);
 
-	while ((i == 1) || (fieldLabel.trim().length() > 0)) {
+    while ((i == 1) || (fieldLabel.trim().length() > 0)) {
 	%>
 
 		<fieldset>
@@ -235,7 +237,35 @@ if (WebFormUtil.getTableRowsCount(databaseTableName) > 0) {
 					</c:otherwise>
 				</c:choose>
 			</div>
-		</fieldset>
+            <div class="validation ctrl-holder">
+                <liferay-ui:error key='<%= "invalidValidationDefinition" + i %>' message="either-both-or-none-fields-must-be-filled" />
+                <div align="right">
+                    <liferay-ui:toggle
+                        id='<%= "toggle_id_wiki_edit_wiki_syntax_help" + i %>'
+                        showMessage='<%= "&laquo; " + LanguageUtil.get(pageContext, "show-syntax-help") %>'
+                        hideMessage='<%= LanguageUtil.get(pageContext, "hide-syntax-help") + " &raquo;" %>'
+                    />
+                </div>
+                <table class="lfr-table" width="100%">
+                <tr>
+                    <td width="70%" valign="top">
+                        <label for="<portlet:namespace/>fieldValidation<%= i %>"><liferay-ui:message key="field-validation-script-optional" /></label>
+                        <textarea class="lfr-textarea codepress javascript" id="<portlet:namespace />fieldValidationScript<%= i %>" name="<portlet:namespace />fieldValidationScript<%= i %>"
+			  style="height: 300px; width: 98%;" wrap="off"><%= fieldValidationScript %></textarea>
+                    </td>
+                    <td class="syntax-help" id='<%= "toggle_id_wiki_edit_wiki_syntax_help" + i %>' style="display: <liferay-ui:toggle-value id='<%= "toggle_id_wiki_edit_wiki_syntax_help" + i %>' />" valign="top">
+                        <h3>
+                            <liferay-ui:message key="help" />
+                        </h3>
+                        <liferay-util:include page="<%= WebFormUtil.getHelpPage() %>" />
+                    </td>
+                </tr>
+                </table>
+
+                <label for="<portlet:namespace/>fieldValidationErrorMessage<%= i %>"><liferay-ui:message key="field-validation-error-message" /></label>
+                <input class="lfr-input-text" id="<portlet:namespace />fieldValidationErrorMessage" name="<portlet:namespace />fieldValidationErrorMessage<%= i %>" type="text" value="<%= fieldValidationErrorMessage %>" />
+            </div>
+        </fieldset>
 
 	<%
 		i++;
@@ -244,6 +274,9 @@ if (WebFormUtil.getTableRowsCount(databaseTableName) > 0) {
 		fieldType = PrefsParamUtil.getString(prefs, request, "fieldType" + i);
 		fieldOptional = PrefsParamUtil.getBoolean(prefs, request, "fieldOptional" + i, false);
 		fieldOptions = PrefsParamUtil.getString(prefs, request, "fieldOptions" + i);
+		fieldValidationScript = PrefsParamUtil.getString(prefs, request, "fieldValidationScript" + i);
+	    fieldValidationErrorMessage = PrefsParamUtil.getString(prefs, request, "fieldValidationErrorMessage" + i);
+
 	}
 	%>
 
@@ -259,8 +292,16 @@ if (WebFormUtil.getTableRowsCount(databaseTableName) > 0) {
 
 </form>
 
+<script src="<%= themeDisplay.getPathContext() %>/html/js/editor/codepress/codepress.js" type="text/javascript"></script>
 <script type="text/javascript">
-	jQuery(
+	jQuery("#<portlet:namespace/>fm").submit(function() {
+		jQuery(".codepress").each(function(index) {
+			var cIndex = index + 1;
+			this.value = eval("<portlet:namespace />fieldValidationScript" + cIndex).getCode();
+			eval("<portlet:namespace />fieldValidationScript" + cIndex).toggleEditor();
+		});
+	});
+    jQuery(
 		function() {
 			var selects = jQuery('#<portlet:namespace/>webFields select');
 

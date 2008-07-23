@@ -22,20 +22,10 @@
  */
 %>
 
-<%@ include file="/html/portlet/init.jsp" %>
+<%@ include file="/html/portlet/css_init.jsp" %>
 
-<%@ page import="com.liferay.portlet.expando.service.ExpandoRowLocalServiceUtil" %>
-<%@ page import="com.liferay.portlet.webform.util.WebFormUtil" %>
-<%@ page import="com.liferay.portal.security.permission.ActionKeys" %>
-<%@ page import="java.util.regex.Pattern" %>
-<%@ page import="java.util.regex.Matcher" %>
-
-<%
-PortletPreferences prefs = renderRequest.getPreferences();
-
-String portletResource = ParamUtil.getString(request, "portletResource");
-
-if (Validator.isNotNull(portletResource)) {
-	prefs = PortletPreferencesFactoryUtil.getPortletSetup(request, portletResource);
+.portlet-web-form .syntax-help {
+	border: 1px dotted gray;
+	padding-left: 10px;
 }
-%>
+

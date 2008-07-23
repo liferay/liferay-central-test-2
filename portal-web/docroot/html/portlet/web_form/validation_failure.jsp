@@ -22,20 +22,24 @@
  */
 %>
 
-<%@ include file="/html/portlet/init.jsp" %>
-
-<%@ page import="com.liferay.portlet.expando.service.ExpandoRowLocalServiceUtil" %>
-<%@ page import="com.liferay.portlet.webform.util.WebFormUtil" %>
-<%@ page import="com.liferay.portal.security.permission.ActionKeys" %>
-<%@ page import="java.util.regex.Pattern" %>
-<%@ page import="java.util.regex.Matcher" %>
+<%@ include file="/html/portlet/web_form/init.jsp" %>
 
 <%
-PortletPreferences prefs = renderRequest.getPreferences();
-
-String portletResource = ParamUtil.getString(request, "portletResource");
-
-if (Validator.isNotNull(portletResource)) {
-	prefs = PortletPreferencesFactoryUtil.getPortletSetup(request, portletResource);
-}
+long groupId = themeDisplay.getPortletGroupId();
+String name = portletDisplay.getRootPortletId();
+String primKey = portletDisplay.getResourcePK();
 %>
+
+<div id="<portlet:namespace/>validationFailure">
+	<span class="portlet-msg-error">
+		<liferay-ui:message key="a-validation-failure-has-occurred" />
+		<c:choose>
+			<c:when test="<%= permissionChecker.hasPermission(groupId, name, primKey, ActionKeys.CONFIGURATION) %>">
+				<liferay-ui:message key="please-review-the-configuration" />	
+			</c:when>
+			<c:otherwise>
+				<liferay-ui:message key="please-contact-the-administrator" />
+			</c:otherwise>			
+		</c:choose>
+	</span>
+</div>
