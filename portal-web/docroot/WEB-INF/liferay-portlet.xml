@@ -1032,6 +1032,8 @@
 	<portlet>
 		<portlet-name>121</portlet-name>
 		<struts-path>requests</struts-path>
+		<social-activity-interpreter-class>com.liferay.portlet.social.util.ShareActivityInterpreter</social-activity-interpreter-class>
+		<social-request-interpreter-class>com.liferay.portlet.social.util.ShareRequestInterpreter</social-request-interpreter-class>
 		<use-default-template>false</use-default-template>
 		<restore-current-view>false</restore-current-view>
 		<private-request-attributes>false</private-request-attributes>
