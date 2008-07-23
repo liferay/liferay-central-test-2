@@ -84,6 +84,14 @@ import com.liferay.portal.kernel.bean.InitializingBean;
 		return ${entity.varName}Persistence.findByPrimaryKey(${entity.PKVarName});
 	}
 
+	public List<${entity.name}> get${entity.names}(int start, int end) throws SystemException {
+		return ${entity.varName}Persistence.findAll(start, end);
+	}
+
+	public int get${entity.names}Count() throws SystemException {
+		return ${entity.varName}Persistence.countAll();
+	}
+
 	public ${entity.name} update${entity.name}(${entity.name} ${entity.varName}) throws SystemException {
 		${entity.varName}.setNew(false);
 
