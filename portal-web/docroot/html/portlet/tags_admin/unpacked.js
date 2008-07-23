@@ -294,13 +294,20 @@ Liferay.Portlet.TagsAdmin = new Class({
 
 		var instanceVar = params.instanceVar;
 		var searchResultsDiv = jQuery('#' + params.searchResultsDiv);
-		var mergeConfirmation = Liferay.Language.get('are-you-sure-you-want-to-merge-x-into-x', ['{SOURCE}', '{DESTINATION}']);
 
-		var html = '<br />';
+		var html = ['<br />'];
 
 		instance._categoriesCount = properties.length;
 
-		searchResultsDiv.html('');
+		if (!instance._placeHolder) {
+			instance._placeHolder = jQuery('<div />');
+		}
+
+		var placeHolder = instance._placeHolder;
+
+		searchResultsDiv.before(placeHolder);
+
+		searchResultsDiv.remove();
 
 		jQuery.each(
 			properties,
@@ -317,32 +324,34 @@ Liferay.Portlet.TagsAdmin = new Class({
 						},
 						function(entries) {
 							if (category.value != '') {
-								html += '<div class="tags-category"><b>' + category.value + '</b></div>';
+								html.push('<div class="tags-category"><b>');
+								html.push(category.value);
+								html.push('</b></div>');
 							}
 
-							html += '<div class="tags-container">';
+							html.push('<div class="tags-container">');
 
 							jQuery.each(
 								entries,
 								function(i, entry) {
-									var hrefJS = instanceVar + '.editEntry(' + instanceVar + ', ' + entry.entryId + ', \'' + encodeURIComponent(entry.name) + '\');';
+									var tagAnchor = [' ', '<a class="tag-name" href="javascript: ', instanceVar, '.editEntry(', instanceVar, ', ', entry.entryId, ', \'', encodeURIComponent(entry.name), '\');', '" tagId="', entry.entryId, '">', entry.name, '</a>'];
 
-									var numEntries = entries.length;
+									var tagDelete = [' ', '<a class="ui-tag-delete" href="javascript: ', instanceVar, '.deleteEntry(', instanceVar, ', ', entry.entryId, ')"><span>x</span></a>'];
 
-									html += '<span class="ui-tag">';
-									html += ' <a class="tag-name" href="javascript: ' + hrefJS + '" tagId="' + entry.entryId + '">' + entry.name + '</a>';
-									html += ' <a class="ui-tag-delete" href="javascript: ' + instanceVar + '.deleteEntry(' + instanceVar + ', ' + entry.entryId + ')"><span>x</span></a>';
-									html += '</span>';
+									html.push('<span class="ui-tag">');
+									html.push(tagAnchor.join(''));
+									html.push(tagDelete.join(''));
+									html.push('</span>');
 								}
 							);
 
-							html += '</div>';
+							html.push('</div>');
 
 							if (entries.length == 0) {
-								html += Liferay.Language.get('no-tags-found');
+								html.push(Liferay.Language.get('no-tags-found'));
 							}
 
-							searchResultsDiv.html(html);
+							searchResultsDiv.html(html.join(''));
 
 							var tags = searchResultsDiv.find('.ui-tag');
 
@@ -381,7 +390,7 @@ Liferay.Portlet.TagsAdmin = new Class({
 											DESTINATION: to.text()
 										};
 
-										var mergeText = mergeConfirmation.replace(
+										var mergeText = Liferay.Language.get('are-you-sure-you-want-to-merge-x-into-x', ['{SOURCE}', '{DESTINATION}']).replace(
 											/\{(SOURCE|DESTINATION)\}/gm,
 											function(completeMatch, match, index, str) {
 												return tagText[match];
@@ -405,6 +414,9 @@ Liferay.Portlet.TagsAdmin = new Class({
 									}
 								}
 							);
+
+							placeHolder.after(searchResultsDiv);
+							placeHolder.remove();
 						}
 					);
 				}
