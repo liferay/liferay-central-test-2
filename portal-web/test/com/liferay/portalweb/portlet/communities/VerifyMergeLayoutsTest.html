@@ -35,107 +35,97 @@
 </tr>
 <tr>
 	<td>waitForElementPresent</td>
-	<td>link=Stories</td>
-	<td></td>
-</tr>
-<tr>
-	<td>waitForElementPresent</td>
-	<td>//div[@id="banner"]/div/div/ul/li[8]/ul/li[4]/ul/li[1]/a[2]</td>
+	<td>link=Welcome</td>
 	<td></td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>//div[@id="banner"]/div/div/ul/li[8]/ul/li[4]/ul/li[1]/a[2]</td>
+	<td>//div[@id='_88_layoutsTreeOutput']/ul/li[2]/a/span</td>
 	<td></td>
 </tr>
 <tr>
 	<td>waitForElementPresent</td>
-	<td>link=Pages</td>
+	<td>_88_name_en_US</td>
 	<td></td>
 </tr>
 <tr>
-	<td>waitForElementPresent</td>
-	<td>document.getElementById('_branchId_2018').getElementsByTagName('a')[0].getElementsByTagName('span')[0]</td>
-	<td></td>
+	<td>type</td>
+	<td>_88_name_en_US</td>
+	<td>Hidden Page</td>
 </tr>
 <tr>
 	<td>click</td>
-	<td>document.getElementById('_branchId_2018').getElementsByTagName('a')[0].getElementsByTagName('span')[0]</td>
+	<td>//input[@value='Add Page']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Your request processed successfully. </td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//div[@id='banner']/div/div/ul/li[6]/ul/li[6]/ul/li[1]/a[2]</td>
+	<td></td>
+</tr>
+<tr>
+	<td>assertElementPresent</td>
+	<td>link=Hidden Page</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//div[@id='banner']/div/div/ul/li[6]/ul/li[5]/ul/li[1]/a[2]</td>
 	<td></td>
 </tr>
 <tr>
 	<td>waitForElementPresent</td>
+	<td>link=Hidden Page</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//div[@id='_88_layoutsTreeOutput']/ul/li[2]/ul/li[2]/a/span</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
 	<td>link=Page</td>
 	<td></td>
 </tr>
 <tr>
 	<td>click</td>
-	<td>link=Page</td>
-	<td></td>
-</tr>
-<tr>
-	<td>pause</td>
-	<td>5000</td>
-	<td></td>
-</tr>
-<tr>
-	<td>waitForElementPresent</td>
 	<td>_88_hiddenCheckbox</td>
 	<td></td>
 </tr>
 <tr>
-	<td>waitForElementPresent</td>
-	<td>document.getElementById('_branchId_2018').getElementsByTagName('a')[0].getElementsByTagName('span')[0]</td>
-	<td></td>
-</tr>
-<tr>
-	<td>click</td>
-	<td>_88_hiddenCheckbox</td>
-	<td></td>
-</tr>
-<tr>
-	<td>pause</td>
-	<td>5000</td>
-	<td></td>
-</tr>
-<tr>
-	<td>click</td>
+	<td>clickAndWait</td>
 	<td>//input[@value='Save']</td>
 	<td></td>
 </tr>
 <tr>
 	<td>waitForTextPresent</td>
-	<td>Your request processed successfully.</td>
-	<td></td>
-</tr>
-<tr>
-	<td>waitForElementPresent</td>
-	<td>//div[@id="banner"]/div[1]/div[2]/ul/li[6]/ul/li[5]/ul/li[1]/a[1]</td>
+	<td>Your request processed successfully. </td>
 	<td></td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>//div[@id="banner"]/div[1]/div[2]/ul/li[6]/ul/li[5]/ul/li[1]/a[1]</td>
+	<td>//div[@id='banner']/div/div/ul/li[6]/ul/li[6]/ul/li[1]/a[2]</td>
 	<td></td>
 </tr>
 <tr>
-	<td>waitForElementPresent</td>
-	<td>link=Home</td>
-	<td></td>
-</tr>
-<tr>
-	<td>waitForElementNotPresent</td>
-	<td>link=Stories</td>
-	<td></td>
-</tr>
-<tr>
-	<td>waitForElementPresent</td>
-	<td>document.getElementById('my-community-private-pages')</td>
+	<td>assertElementNotPresent</td>
+	<td>link=Hidden Page</td>
 	<td></td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>document.getElementById('my-community-private-pages')</td>
+	<td>my-community-private-pages</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//div[@id='navigation']/ul/li[4]/a/span</td>
 	<td></td>
 </tr>
 

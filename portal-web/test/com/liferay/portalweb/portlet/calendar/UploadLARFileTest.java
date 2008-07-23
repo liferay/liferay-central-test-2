@@ -74,7 +74,7 @@ public class UploadLARFileTest extends BaseTestCase {
 
 		selenium.type("_86_importFileName",
 			RuntimeVariables.replace(
-				"D:\\trunk\\portal\\build\\portal-web\\test\\com\\liferay\\portalweb\\portlet\\calendar\\Calendar-Selenium.portlet.lar"));
+				"L:\\portal\\build\\portal-web\\test\\com\\liferay\\portalweb\\portlet\\calendar\\Calendar-Selenium.portlet.lar"));
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {

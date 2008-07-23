@@ -23,6 +23,7 @@
 package com.liferay.portalweb.portlet.communities;
 
 import com.liferay.portalweb.portal.BaseTestCase;
+import com.liferay.portalweb.portal.util.RuntimeVariables;
 
 /**
  * <a href="VerifyMergeLayoutsTest.java.html"><b><i>View Source</i></b></a>
@@ -93,7 +94,7 @@ public class VerifyMergeLayoutsTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("link=Stories")) {
+				if (selenium.isElementPresent("link=Welcome")) {
 					break;
 				}
 			}
@@ -103,25 +104,7 @@ public class VerifyMergeLayoutsTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isElementPresent(
-							"//div[@id=\"banner\"]/div/div/ul/li[8]/ul/li[4]/ul/li[1]/a[2]")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
-		selenium.click(
-			"//div[@id=\"banner\"]/div/div/ul/li[8]/ul/li[4]/ul/li[1]/a[2]");
+		selenium.click("//div[@id='_88_layoutsTreeOutput']/ul/li[2]/a/span");
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {
@@ -130,7 +113,7 @@ public class VerifyMergeLayoutsTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("link=Pages")) {
+				if (selenium.isElementPresent("_88_name_en_US")) {
 					break;
 				}
 			}
@@ -140,81 +123,8 @@ public class VerifyMergeLayoutsTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isElementPresent(
-							"document.getElementById('_branchId_2018').getElementsByTagName('a')[0].getElementsByTagName('span')[0]")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
-		selenium.click(
-			"document.getElementById('_branchId_2018').getElementsByTagName('a')[0].getElementsByTagName('span')[0]");
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isElementPresent("link=Page")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
-		selenium.click("link=Page");
-		Thread.sleep(5000);
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isElementPresent("_88_hiddenCheckbox")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isElementPresent(
-							"document.getElementById('_branchId_2018').getElementsByTagName('a')[0].getElementsByTagName('span')[0]")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
-		selenium.click("_88_hiddenCheckbox");
-		Thread.sleep(5000);
-		selenium.click("//input[@value='Save']");
+		selenium.type("_88_name_en_US", RuntimeVariables.replace("Hidden Page"));
+		selenium.click("//input[@value='Add Page']");
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -223,24 +133,7 @@ public class VerifyMergeLayoutsTest extends BaseTestCase {
 
 			try {
 				if (selenium.isTextPresent(
-							"Your request processed successfully.")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isElementPresent(
-							"//div[@id=\"banner\"]/div[1]/div[2]/ul/li[6]/ul/li[5]/ul/li[1]/a[1]")) {
+							"Your request processed successfully. ")) {
 					break;
 				}
 			}
@@ -251,7 +144,11 @@ public class VerifyMergeLayoutsTest extends BaseTestCase {
 		}
 
 		selenium.click(
-			"//div[@id=\"banner\"]/div[1]/div[2]/ul/li[6]/ul/li[5]/ul/li[1]/a[1]");
+			"//div[@id='banner']/div/div/ul/li[6]/ul/li[6]/ul/li[1]/a[2]");
+		selenium.waitForPageToLoad("30000");
+		assertTrue(selenium.isElementPresent("link=Hidden Page"));
+		selenium.click(
+			"//div[@id='banner']/div/div/ul/li[6]/ul/li[5]/ul/li[1]/a[2]");
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {
@@ -260,7 +157,7 @@ public class VerifyMergeLayoutsTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("link=Home")) {
+				if (selenium.isElementPresent("link=Hidden Page")) {
 					break;
 				}
 			}
@@ -269,6 +166,15 @@ public class VerifyMergeLayoutsTest extends BaseTestCase {
 
 			Thread.sleep(1000);
 		}
+
+		selenium.click(
+			"//div[@id='_88_layoutsTreeOutput']/ul/li[2]/ul/li[2]/a/span");
+		selenium.waitForPageToLoad("30000");
+		selenium.click("link=Page");
+		selenium.waitForPageToLoad("30000");
+		selenium.click("_88_hiddenCheckbox");
+		selenium.click("//input[@value='Save']");
+		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -276,7 +182,8 @@ public class VerifyMergeLayoutsTest extends BaseTestCase {
 			}
 
 			try {
-				if (!selenium.isElementPresent("link=Stories")) {
+				if (selenium.isTextPresent(
+							"Your request processed successfully. ")) {
 					break;
 				}
 			}
@@ -286,24 +193,13 @@ public class VerifyMergeLayoutsTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isElementPresent(
-							"document.getElementById('my-community-private-pages')")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
-		selenium.click("document.getElementById('my-community-private-pages')");
+		selenium.click(
+			"//div[@id='banner']/div/div/ul/li[6]/ul/li[6]/ul/li[1]/a[2]");
+		selenium.waitForPageToLoad("30000");
+		assertFalse(selenium.isElementPresent("link=Hidden Page"));
+		selenium.click("my-community-private-pages");
+		selenium.waitForPageToLoad("30000");
+		selenium.click("//div[@id='navigation']/ul/li[4]/a/span");
 		selenium.waitForPageToLoad("30000");
 	}
 }
