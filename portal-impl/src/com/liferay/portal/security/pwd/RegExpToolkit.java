@@ -61,7 +61,7 @@ public class RegExpToolkit extends BasicToolkit {
 
 		if (!value) {
 			if (_log.isWarnEnabled()) {
-				_log.warn("Password " + password1 + " is not valid");
+				_log.warn("User " + userId + " attempted an invalid password.");
 			}
 
 			throw new UserPasswordException(
