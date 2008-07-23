@@ -26,9 +26,6 @@
 
 <%@ page import="com.liferay.portlet.expando.service.ExpandoRowLocalServiceUtil" %>
 <%@ page import="com.liferay.portlet.webform.util.WebFormUtil" %>
-<%@ page import="com.liferay.portal.security.permission.ActionKeys" %>
-<%@ page import="java.util.regex.Pattern" %>
-<%@ page import="java.util.regex.Matcher" %>
 
 <%
 PortletPreferences prefs = renderRequest.getPreferences();

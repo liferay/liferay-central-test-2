@@ -30,7 +30,7 @@ String description = prefs.getValue("description", StringPool.BLANK);
 boolean requireCaptcha = GetterUtil.getBoolean(prefs.getValue("requireCaptcha", StringPool.BLANK));
 %>
 
-<form action="<portlet:actionURL><portlet:param name="struts_action" value="/web_form/view" /></portlet:actionURL>" class="uni-form" method="post" name="<portlet:namespace />fm" id="<portlet:namespace />fm">
+<form action="<portlet:actionURL><portlet:param name="struts_action" value="/web_form/view" /></portlet:actionURL>" class="uni-form" method="post">
 <input type="hidden" name="<portlet:namespace/>redirect" value="<%= currentURL %>" />
 
 <fieldset class="block-labels">
@@ -41,6 +41,7 @@ boolean requireCaptcha = GetterUtil.getBoolean(prefs.getValue("requireCaptcha", 
 	<liferay-ui:success key="success" message="the-form-information-was-sent-successfully" />
 
 	<liferay-ui:error exception="<%= CaptchaTextException.class %>" message="text-verification-failed" />
+	<liferay-ui:error key="requiredFieldMissing" message="please-complete-all-fields" />
 	<liferay-ui:error key="error" message="an-error-occurred-while-sending-the-form-information" />
 
 	<%
@@ -54,27 +55,11 @@ boolean requireCaptcha = GetterUtil.getBoolean(prefs.getValue("requireCaptcha", 
 	while ((i == 1) || Validator.isNotNull(fieldLabel)) {
 		String fieldType = prefs.getValue("fieldType" + i, "text");
 		String fieldOptions = prefs.getValue("fieldOptions" + i, "unknown");
-		String fieldValidationScript = prefs.getValue("fieldValidationScript" + i, StringPool.BLANK);
-		String fieldValidationErrorMessage = prefs.getValue("fieldValidationErrorMessage" + i, "please-complete-field");
-
 	%>
-    
-        <liferay-ui:error key='<%= "error" + fieldLabel %>' message="<%= fieldValidationErrorMessage %>" />
-        
-        <c:if test='<%= Validator.isNotNull(fieldValidationScript) %>'>
-            <div id="<portlet:namespace/>validationError<%= fieldLabel %>" style="display: none">
-                <span class="portlet-msg-error"><%= fieldValidationErrorMessage %></span>
-            </div>
-        </c:if>
-        <c:if test="<%= !fieldOptional %>">
-            <div id="<portlet:namespace/>fieldOptionalError<%= fieldLabel %>" style="display: none">
-                <span class="portlet-msg-error"><liferay-ui:message key="please-complete-field" /></span>
-            </div>
-        </c:if>
-        
-        <c:choose>
+
+		<c:choose>
 			<c:when test='<%= fieldType.equals("paragraph") %>'>
-				<p class="lfr-webform" id="<portlet:namespace /><%= fieldName %>" ><%= fieldOptions %></p>
+				<p class="lfr-webform"><%= fieldOptions %></p>
 			</c:when>
 			<c:when test='<%= fieldType.equals("text") %>'>
 				<div class="ctrl-holder">
@@ -116,13 +101,13 @@ boolean requireCaptcha = GetterUtil.getBoolean(prefs.getValue("requireCaptcha", 
 			</c:when>
 			<c:when test='<%= fieldType.equals("options") %>'>
 				<div class="ctrl-holder <%= fieldOptional ? "optional" : "" %>">
-					<label class='<%= fieldOptional ? "optional" : "" %>' for="<portlet:namespace /><%= fieldName %>"><%= HtmlUtil.escape(fieldLabel) %></label>
+					<label class='<%= fieldOptional ? "optional" : "" %>' for="<portlet:namespace /><%= fieldName %>"><%= fieldLabel %></label>
 
 					<%
 					String[] options = WebFormUtil.split(fieldOptions);
 					%>
 
-					<select name="<portlet:namespace /><%= fieldName %>" id="<portlet:namespace /><%= fieldName %>">
+					<select name="<portlet:namespace /><%= fieldName %>">
 
 						<%
 						for (int j = 0; j < options.length; j++) {
@@ -140,14 +125,14 @@ boolean requireCaptcha = GetterUtil.getBoolean(prefs.getValue("requireCaptcha", 
 			</c:when>
 		</c:choose>
 
-    <%
+	<%
 		i++;
 
 		fieldName = "field" + i;
 		fieldLabel = prefs.getValue("fieldLabel" + i, "");
 		fieldOptional = PrefsParamUtil.getBoolean(prefs, request, "fieldOptional" + i, false);
 		fieldValue = ParamUtil.getString(request, fieldName);
-    }
+	}
 	%>
 
 	<c:if test="<%= requireCaptcha %>">
@@ -164,70 +149,3 @@ boolean requireCaptcha = GetterUtil.getBoolean(prefs.getValue("requireCaptcha", 
 </fieldset>
 
 </form>
-
-<script type="text/javascript">
-    jQuery(document).ready(function() {
-        jQuery('#<portlet:namespace />fm').submit(function() {
-
-            var fieldValidationFunctions = new Array();
-            var fieldLabels = new Array();
-            var fieldValidationErrorMessages = new Array();
-            var fieldValues = new Array();
-            var fieldOptional = new Array();
-
-           <%
-            int fieldIndex = 1;
-            fieldLabel = prefs.getValue("fieldLabel" + fieldIndex, StringPool.BLANK);
-
-            while ((fieldIndex == 1) || Validator.isNotNull(fieldLabel)) {
-                String fieldValidationScript = prefs.getValue("fieldValidationScript" + fieldIndex, StringPool.BLANK);
-                String fieldValidationErrorMessage = prefs.getValue("fieldValidationErrorMessage" + fieldIndex, "please-complete-field");
-                fieldOptional = PrefsParamUtil.getBoolean(prefs, request, "fieldOptional" + fieldIndex, false);
-                
-            %>
-                fieldLabels[<%= fieldIndex %>] = "<%= HtmlUtil.escape(fieldLabel) %>";
-                fieldValidationErrorMessages[<%= fieldIndex %>] = "<%= fieldValidationErrorMessage %>";
-                function fieldValidationFunction<%= fieldIndex %>(thisFieldValue, fieldValues) {
-                    <c:choose>
-                        <c:when test='<%= Validator.isNotNull(fieldValidationScript) %>'>
-                        	<%= fieldValidationScript %>
-                        </c:when>
-                        <c:otherwise>
-                            return true;
-                        </c:otherwise>
-                    </c:choose>
-                };
-                fieldValues[<%= fieldIndex %>] = jQuery("#<portlet:namespace />" + "field<%= fieldIndex %>")[0].value;
-                fieldValidationFunctions[<%= fieldIndex %>] = fieldValidationFunction<%= fieldIndex %>;
-                fieldOptional[<%= fieldIndex %>] = <%= fieldOptional %>;
-            <%
-                fieldIndex++;
-                fieldLabel = prefs.getValue("fieldLabel" + fieldIndex, "");
-            }
-            %>
-
-            var validationErrors = false;
-
-            for (var i = 1; i < fieldValidationFunctions.length; i++) {
-                var thisFieldValue = fieldValues[i];
-                if (!fieldOptional[i] && thisFieldValue.match(/^\s*$/)) {
-                    validationErrors = true;
-                    jQuery(".portlet-msg-success").slideUp();
-                    jQuery("#<portlet:namespace />fieldOptionalError" + fieldLabels[i]).slideDown();
-               } else if (!fieldValidationFunctions[i](thisFieldValue, fieldValues)) {
-                    validationErrors = true;
-                    jQuery(".portlet-msg-success").slideUp();
-                    jQuery("#<portlet:namespace />validationError" + fieldLabels[i]).slideDown();
-                    jQuery("#<portlet:namespace />fieldOptionalError" + fieldLabels[i]).slideUp();
-                } else {
-                    jQuery("#<portlet:namespace />validationError" + fieldLabels[i]).slideUp();
-                    jQuery("#<portlet:namespace />fieldOptionalError" + fieldLabels[i]).slideUp();
-                }
-            }
-
-            if (validationErrors) {
-                return false;
-            }
-        });
-    });
-</script>
