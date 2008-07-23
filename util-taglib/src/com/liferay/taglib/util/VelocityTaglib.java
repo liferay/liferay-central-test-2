@@ -39,7 +39,6 @@ import com.liferay.taglib.portletext.IconPortletCssTag;
 import com.liferay.taglib.portletext.IconPortletTag;
 import com.liferay.taglib.portletext.IconPrintTag;
 import com.liferay.taglib.portletext.IconRefreshTag;
-import com.liferay.taglib.portletext.IconShareTag;
 import com.liferay.taglib.portletext.RuntimeTag;
 import com.liferay.taglib.portletext.TitleTag;
 import com.liferay.taglib.security.DoAsURLTag;
@@ -350,22 +349,6 @@ public class VelocityTaglib {
 		_stringResponse.recycle();
 
 		IconRefreshTag.doTag(page, _servletContext, _request, _stringResponse);
-
-		return _stringResponse.getString();
-	}
-
-	public String iconShare() throws Exception {
-		_stringResponse.recycle();
-
-		IconShareTag.doTag(_servletContext, _request, _stringResponse);
-
-		return _stringResponse.getString();
-	}
-
-	public String iconShare(String page) throws Exception {
-		_stringResponse.recycle();
-
-		IconShareTag.doTag(page, _servletContext, _request, _stringResponse);
 
 		return _stringResponse.getString();
 	}
