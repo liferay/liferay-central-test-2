@@ -310,7 +310,9 @@ public class HookHotDeployListener extends BaseHotDeployListener {
 		if (eventType.equals(PropsKeys.LOGIN_EVENTS_POST) ||
 			eventType.equals(PropsKeys.LOGIN_EVENTS_PRE) ||
 			eventType.equals(PropsKeys.LOGOUT_EVENTS_POST) ||
-			eventType.equals(PropsKeys.LOGOUT_EVENTS_PRE)) {
+			eventType.equals(PropsKeys.LOGOUT_EVENTS_PRE) ||
+			eventType.equals(PropsKeys.SERVLET_SERVICE_EVENTS_POST) ||
+			eventType.equals(PropsKeys.SERVLET_SERVICE_EVENTS_PRE)) {
 
 			Action action = (Action)portletClassLoader.loadClass(
 				eventClass).newInstance();
