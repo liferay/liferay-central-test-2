@@ -22,6 +22,8 @@
 
 package com.liferay.portalweb.portal;
 
+import com.liferay.portalweb.portal.login.LoginTests;
+import com.liferay.portalweb.portal.session.SessionExpirationTests;
 import com.liferay.portalweb.portlet.admin.AdminTests;
 import com.liferay.portalweb.portlet.amazonrankings.AmazonRankingsTests;
 import com.liferay.portalweb.portlet.analogclock.AnalogClockTests;
@@ -77,7 +79,6 @@ import com.liferay.portalweb.portlet.samplelocalized.SampleLocalizedTests;
 import com.liferay.portalweb.portlet.samplephp.SamplePHPTests;
 import com.liferay.portalweb.portlet.samplesignin.SampleSignInTests;
 import com.liferay.portalweb.portlet.search.SearchTests;
-import com.liferay.portalweb.portlet.sessionexpiration.SessionExpirationTests;
 import com.liferay.portalweb.portlet.shopping.ShoppingTests;
 import com.liferay.portalweb.portlet.sitemap.SiteMapTests;
 import com.liferay.portalweb.portlet.smstextmessenger.SMSTextMessengerTests;
@@ -105,7 +106,7 @@ import com.liferay.portalweb.portlet.xslcontent.XSLContentTests;
 public class PortalWebTestSuite extends BaseTests {
 
 	public PortalWebTestSuite() {
-		addTestSuite(LoginTest.class);
+		addTestSuite(LoginTests.class);
 		addTestSuite(EnterpriseAdminTests.class);
 		addTestSuite(AdminTests.class);
 		addTestSuite(AmazonRankingsTests.class);
