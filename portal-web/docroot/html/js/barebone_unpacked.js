@@ -2251,7 +2251,7 @@ jQuery.fn.extend({
 		});
 	},
 
-	triggerHandler: function( type, data, fn ) {//if (type == 'sortstop') console.log(type, data, this, this[0], fn);
+	triggerHandler: function( type, data, fn ) {
 		return this[0] && jQuery.event.trigger( type, data, this[0], false, fn );
 	},
 

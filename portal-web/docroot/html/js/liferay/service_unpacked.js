@@ -2498,6 +2498,20 @@ Liferay.Service.Tags.TagsEntry = {
 		return Liferay.Service.ajax(params, callback);
 	},
 
+	getEntry: function(params, callback) {
+		params.serviceClassName = this.serviceClassName;
+		params.serviceMethodName = "getEntry";
+
+		return Liferay.Service.ajax(params, callback);
+	},
+
+	getVocabularyEntries: function(params, callback) {
+		params.serviceClassName = this.serviceClassName;
+		params.serviceMethodName = "getVocabularyEntries";
+
+		return Liferay.Service.ajax(params, callback);
+	},
+
 	mergeEntries: function(params, callback) {
 		params.serviceClassName = this.serviceClassName;
 		params.serviceMethodName = "mergeEntries";
@@ -2568,6 +2582,45 @@ Liferay.Service.Tags.TagsProperty = {
 	updateProperty: function(params, callback) {
 		params.serviceClassName = this.serviceClassName;
 		params.serviceMethodName = "updateProperty";
+
+		return Liferay.Service.ajax(params, callback);
+	}
+};
+
+Liferay.Service.Tags.TagsVocabulary = {
+	serviceClassName: Liferay.Service.Tags.servicePackage + "TagsVocabulary" + Liferay.Service.classNameSuffix,
+
+	addVocabulary: function(params, callback) {
+		params.serviceClassName = this.serviceClassName;
+		params.serviceMethodName = "addVocabulary";
+
+		return Liferay.Service.ajax(params, callback);
+	},
+
+	deleteVocabulary: function(params, callback) {
+		params.serviceClassName = this.serviceClassName;
+		params.serviceMethodName = "deleteVocabulary";
+
+		return Liferay.Service.ajax(params, callback);
+	},
+
+	getTagsVocabulary: function(params, callback) {
+		params.serviceClassName = this.serviceClassName;
+		params.serviceMethodName = "getTagsVocabulary";
+
+		return Liferay.Service.ajax(params, callback);
+	},
+
+	getVocabularies: function(params, callback) {
+		params.serviceClassName = this.serviceClassName;
+		params.serviceMethodName = "getVocabularies";
+
+		return Liferay.Service.ajax(params, callback);
+	},
+
+	updateVocabulary: function(params, callback) {
+		params.serviceClassName = this.serviceClassName;
+		params.serviceMethodName = "updateVocabulary";
 
 		return Liferay.Service.ajax(params, callback);
 	}

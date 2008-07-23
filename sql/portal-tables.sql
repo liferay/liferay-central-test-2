@@ -1284,11 +1284,14 @@ create table TagsAssets_TagsEntries (
 
 create table TagsEntry (
 	entryId LONG not null primary key,
+	groupId LONG,
 	companyId LONG,
 	userId LONG,
 	userName VARCHAR(75) null,
 	createDate DATE null,
 	modifiedDate DATE null,
+	vocabularyId LONG,
+	parentEntryId LONG,
 	name VARCHAR(75) null
 );
 
@@ -1309,6 +1312,19 @@ create table TagsSource (
 	parentSourceId LONG,
 	name VARCHAR(75) null,
 	acronym VARCHAR(75) null
+);
+
+create table TagsVocabulary (
+	vocabularyId LONG not null primary key,
+	groupId LONG,
+	companyId LONG,
+	userId LONG,
+	userName VARCHAR(75) null,
+	createDate DATE null,
+	modifiedDate DATE null,
+	name VARCHAR(75) null,
+	description VARCHAR(75) null,
+	folksonomy BOOLEAN
 );
 
 create table TasksProposal (
@@ -1445,6 +1461,19 @@ create table UserTrackerPath (
 	userTrackerId LONG,
 	path_ STRING null,
 	pathDate DATE null
+);
+
+create table Vocabulary (
+	vocabularyId LONG not null primary key,
+	groupId LONG,
+	companyId LONG,
+	userId LONG,
+	userName VARCHAR(75) null,
+	createDate DATE null,
+	modifiedDate DATE null,
+	name VARCHAR(75) null,
+	description VARCHAR(75) null,
+	folksonomy BOOLEAN
 );
 
 create table WebDAVProps (

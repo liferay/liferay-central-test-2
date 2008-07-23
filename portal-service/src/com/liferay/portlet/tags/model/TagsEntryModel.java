@@ -55,6 +55,10 @@ public interface TagsEntryModel extends BaseModel {
 
 	public void setEntryId(long entryId);
 
+	public long getGroupId();
+
+	public void setGroupId(long groupId);
+
 	public long getCompanyId();
 
 	public void setCompanyId(long companyId);
@@ -74,6 +78,14 @@ public interface TagsEntryModel extends BaseModel {
 	public Date getModifiedDate();
 
 	public void setModifiedDate(Date modifiedDate);
+
+	public long getVocabularyId();
+
+	public void setVocabularyId(long vocabularyId);
+
+	public long getParentEntryId();
+
+	public void setParentEntryId(long parentEntryId);
 
 	public String getName();
 

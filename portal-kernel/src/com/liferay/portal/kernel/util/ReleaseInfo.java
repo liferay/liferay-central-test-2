@@ -78,6 +78,8 @@ public class ReleaseInfo {
 
 	public static int RELEASE_5_1_0_BUILD_NUMBER = 5100;
 
+	public static int RELEASE_5_2_0_BUILD_NUMBER = 5200;
+
 	public static final String getVersion() {
 		return version;
 	}

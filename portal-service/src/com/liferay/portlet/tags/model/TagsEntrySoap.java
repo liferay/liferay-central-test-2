@@ -51,11 +51,14 @@ public class TagsEntrySoap implements Serializable {
 		TagsEntrySoap soapModel = new TagsEntrySoap();
 
 		soapModel.setEntryId(model.getEntryId());
+		soapModel.setGroupId(model.getGroupId());
 		soapModel.setCompanyId(model.getCompanyId());
 		soapModel.setUserId(model.getUserId());
 		soapModel.setUserName(model.getUserName());
 		soapModel.setCreateDate(model.getCreateDate());
 		soapModel.setModifiedDate(model.getModifiedDate());
+		soapModel.setVocabularyId(model.getVocabularyId());
+		soapModel.setParentEntryId(model.getParentEntryId());
 		soapModel.setName(model.getName());
 
 		return soapModel;
@@ -88,6 +91,14 @@ public class TagsEntrySoap implements Serializable {
 
 	public void setEntryId(long entryId) {
 		_entryId = entryId;
+	}
+
+	public long getGroupId() {
+		return _groupId;
+	}
+
+	public void setGroupId(long groupId) {
+		_groupId = groupId;
 	}
 
 	public long getCompanyId() {
@@ -130,6 +141,22 @@ public class TagsEntrySoap implements Serializable {
 		_modifiedDate = modifiedDate;
 	}
 
+	public long getVocabularyId() {
+		return _vocabularyId;
+	}
+
+	public void setVocabularyId(long vocabularyId) {
+		_vocabularyId = vocabularyId;
+	}
+
+	public long getParentEntryId() {
+		return _parentEntryId;
+	}
+
+	public void setParentEntryId(long parentEntryId) {
+		_parentEntryId = parentEntryId;
+	}
+
 	public String getName() {
 		return _name;
 	}
@@ -139,10 +166,13 @@ public class TagsEntrySoap implements Serializable {
 	}
 
 	private long _entryId;
+	private long _groupId;
 	private long _companyId;
 	private long _userId;
 	private String _userName;
 	private Date _createDate;
 	private Date _modifiedDate;
+	private long _vocabularyId;
+	private long _parentEntryId;
 	private String _name;
 }

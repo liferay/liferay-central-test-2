@@ -69,11 +69,14 @@ public class TagsEntryPersistenceTest extends BasePersistenceTestCase {
 
 		TagsEntry newTagsEntry = _persistence.create(pk);
 
+		newTagsEntry.setGroupId(nextLong());
 		newTagsEntry.setCompanyId(nextLong());
 		newTagsEntry.setUserId(nextLong());
 		newTagsEntry.setUserName(randomString());
 		newTagsEntry.setCreateDate(nextDate());
 		newTagsEntry.setModifiedDate(nextDate());
+		newTagsEntry.setVocabularyId(nextLong());
+		newTagsEntry.setParentEntryId(nextLong());
 		newTagsEntry.setName(randomString());
 
 		_persistence.update(newTagsEntry, false);
@@ -81,6 +84,7 @@ public class TagsEntryPersistenceTest extends BasePersistenceTestCase {
 		TagsEntry existingTagsEntry = _persistence.findByPrimaryKey(newTagsEntry.getPrimaryKey());
 
 		assertEquals(existingTagsEntry.getEntryId(), newTagsEntry.getEntryId());
+		assertEquals(existingTagsEntry.getGroupId(), newTagsEntry.getGroupId());
 		assertEquals(existingTagsEntry.getCompanyId(),
 			newTagsEntry.getCompanyId());
 		assertEquals(existingTagsEntry.getUserId(), newTagsEntry.getUserId());
@@ -89,6 +93,10 @@ public class TagsEntryPersistenceTest extends BasePersistenceTestCase {
 			newTagsEntry.getCreateDate());
 		assertEquals(existingTagsEntry.getModifiedDate(),
 			newTagsEntry.getModifiedDate());
+		assertEquals(existingTagsEntry.getVocabularyId(),
+			newTagsEntry.getVocabularyId());
+		assertEquals(existingTagsEntry.getParentEntryId(),
+			newTagsEntry.getParentEntryId());
 		assertEquals(existingTagsEntry.getName(), newTagsEntry.getName());
 	}
 
@@ -133,11 +141,14 @@ public class TagsEntryPersistenceTest extends BasePersistenceTestCase {
 
 		TagsEntry tagsEntry = _persistence.create(pk);
 
+		tagsEntry.setGroupId(nextLong());
 		tagsEntry.setCompanyId(nextLong());
 		tagsEntry.setUserId(nextLong());
 		tagsEntry.setUserName(randomString());
 		tagsEntry.setCreateDate(nextDate());
 		tagsEntry.setModifiedDate(nextDate());
+		tagsEntry.setVocabularyId(nextLong());
+		tagsEntry.setParentEntryId(nextLong());
 		tagsEntry.setName(randomString());
 
 		_persistence.update(tagsEntry, false);

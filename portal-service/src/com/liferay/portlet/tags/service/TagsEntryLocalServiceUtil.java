@@ -132,12 +132,32 @@ public class TagsEntryLocalServiceUtil {
 	}
 
 	public static com.liferay.portlet.tags.model.TagsEntry addEntry(
+		long userId, java.lang.String name, java.lang.String vocabularyName)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
+		TagsEntryLocalService tagsEntryLocalService = TagsEntryLocalServiceFactory.getService();
+
+		return tagsEntryLocalService.addEntry(userId, name, vocabularyName);
+	}
+
+	public static com.liferay.portlet.tags.model.TagsEntry addEntry(
 		long userId, java.lang.String name, java.lang.String[] properties)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		TagsEntryLocalService tagsEntryLocalService = TagsEntryLocalServiceFactory.getService();
 
 		return tagsEntryLocalService.addEntry(userId, name, properties);
+	}
+
+	public static com.liferay.portlet.tags.model.TagsEntry addEntry(
+		long userId, java.lang.String name, java.lang.String vocabularyName,
+		java.lang.String[] properties, java.lang.String parentEntryName)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
+		TagsEntryLocalService tagsEntryLocalService = TagsEntryLocalServiceFactory.getService();
+
+		return tagsEntryLocalService.addEntry(userId, name, vocabularyName,
+			properties, parentEntryName);
 	}
 
 	public static void checkEntries(long userId, java.lang.String[] names)
@@ -163,6 +183,14 @@ public class TagsEntryLocalServiceUtil {
 		TagsEntryLocalService tagsEntryLocalService = TagsEntryLocalServiceFactory.getService();
 
 		tagsEntryLocalService.deleteEntry(entry);
+	}
+
+	public static void deleteEntries(long companyId, long vocabularyId)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
+		TagsEntryLocalService tagsEntryLocalService = TagsEntryLocalServiceFactory.getService();
+
+		tagsEntryLocalService.deleteEntries(companyId, vocabularyId);
 	}
 
 	public static boolean hasEntry(long companyId, java.lang.String name)
@@ -275,6 +303,16 @@ public class TagsEntryLocalServiceUtil {
 		return tagsEntryLocalService.getEntryNames(classNameId, classPK);
 	}
 
+	public static java.util.List<com.liferay.portlet.tags.model.TagsEntry> getVocabularyEntries(
+		long companyId, java.lang.String vocabularyName)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
+		TagsEntryLocalService tagsEntryLocalService = TagsEntryLocalServiceFactory.getService();
+
+		return tagsEntryLocalService.getVocabularyEntries(companyId,
+			vocabularyName);
+	}
+
 	public static void mergeEntries(long fromEntryId, long toEntryId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
@@ -327,6 +365,17 @@ public class TagsEntryLocalServiceUtil {
 	}
 
 	public static com.liferay.portlet.tags.model.TagsEntry updateEntry(
+		long entryId, java.lang.String name, java.lang.String parentEntryName,
+		java.lang.String vocabularyName)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
+		TagsEntryLocalService tagsEntryLocalService = TagsEntryLocalServiceFactory.getService();
+
+		return tagsEntryLocalService.updateEntry(entryId, name,
+			parentEntryName, vocabularyName);
+	}
+
+	public static com.liferay.portlet.tags.model.TagsEntry updateEntry(
 		long userId, long entryId, java.lang.String name,
 		java.lang.String[] properties)
 		throws com.liferay.portal.PortalException,
@@ -335,5 +384,17 @@ public class TagsEntryLocalServiceUtil {
 
 		return tagsEntryLocalService.updateEntry(userId, entryId, name,
 			properties);
+	}
+
+	public static com.liferay.portlet.tags.model.TagsEntry updateEntry(
+		long userId, long entryId, java.lang.String name,
+		java.lang.String parentEntryName, java.lang.String[] properties,
+		java.lang.String vocabularyName)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
+		TagsEntryLocalService tagsEntryLocalService = TagsEntryLocalServiceFactory.getService();
+
+		return tagsEntryLocalService.updateEntry(userId, entryId, name,
+			parentEntryName, properties, vocabularyName);
 	}
 }

@@ -54,6 +54,10 @@ import com.liferay.portlet.tags.service.TagsSourceLocalService;
 import com.liferay.portlet.tags.service.TagsSourceLocalServiceFactory;
 import com.liferay.portlet.tags.service.TagsSourceService;
 import com.liferay.portlet.tags.service.TagsSourceServiceFactory;
+import com.liferay.portlet.tags.service.TagsVocabularyLocalService;
+import com.liferay.portlet.tags.service.TagsVocabularyLocalServiceFactory;
+import com.liferay.portlet.tags.service.TagsVocabularyService;
+import com.liferay.portlet.tags.service.TagsVocabularyServiceFactory;
 import com.liferay.portlet.tags.service.persistence.TagsAssetFinder;
 import com.liferay.portlet.tags.service.persistence.TagsAssetFinderUtil;
 import com.liferay.portlet.tags.service.persistence.TagsAssetPersistence;
@@ -70,6 +74,8 @@ import com.liferay.portlet.tags.service.persistence.TagsPropertyPersistence;
 import com.liferay.portlet.tags.service.persistence.TagsPropertyUtil;
 import com.liferay.portlet.tags.service.persistence.TagsSourcePersistence;
 import com.liferay.portlet.tags.service.persistence.TagsSourceUtil;
+import com.liferay.portlet.tags.service.persistence.TagsVocabularyPersistence;
+import com.liferay.portlet.tags.service.persistence.TagsVocabularyUtil;
 
 import java.util.List;
 
@@ -249,6 +255,33 @@ public abstract class TagsEntryLocalServiceBaseImpl
 		this.tagsSourcePersistence = tagsSourcePersistence;
 	}
 
+	public TagsVocabularyLocalService getTagsVocabularyLocalService() {
+		return tagsVocabularyLocalService;
+	}
+
+	public void setTagsVocabularyLocalService(
+		TagsVocabularyLocalService tagsVocabularyLocalService) {
+		this.tagsVocabularyLocalService = tagsVocabularyLocalService;
+	}
+
+	public TagsVocabularyService getTagsVocabularyService() {
+		return tagsVocabularyService;
+	}
+
+	public void setTagsVocabularyService(
+		TagsVocabularyService tagsVocabularyService) {
+		this.tagsVocabularyService = tagsVocabularyService;
+	}
+
+	public TagsVocabularyPersistence getTagsVocabularyPersistence() {
+		return tagsVocabularyPersistence;
+	}
+
+	public void setTagsVocabularyPersistence(
+		TagsVocabularyPersistence tagsVocabularyPersistence) {
+		this.tagsVocabularyPersistence = tagsVocabularyPersistence;
+	}
+
 	public CounterLocalService getCounterLocalService() {
 		return counterLocalService;
 	}
@@ -354,6 +387,18 @@ public abstract class TagsEntryLocalServiceBaseImpl
 			tagsSourcePersistence = TagsSourceUtil.getPersistence();
 		}
 
+		if (tagsVocabularyLocalService == null) {
+			tagsVocabularyLocalService = TagsVocabularyLocalServiceFactory.getImpl();
+		}
+
+		if (tagsVocabularyService == null) {
+			tagsVocabularyService = TagsVocabularyServiceFactory.getImpl();
+		}
+
+		if (tagsVocabularyPersistence == null) {
+			tagsVocabularyPersistence = TagsVocabularyUtil.getPersistence();
+		}
+
 		if (counterLocalService == null) {
 			counterLocalService = CounterLocalServiceFactory.getImpl();
 		}
@@ -393,6 +438,9 @@ public abstract class TagsEntryLocalServiceBaseImpl
 	protected TagsSourceLocalService tagsSourceLocalService;
 	protected TagsSourceService tagsSourceService;
 	protected TagsSourcePersistence tagsSourcePersistence;
+	protected TagsVocabularyLocalService tagsVocabularyLocalService;
+	protected TagsVocabularyService tagsVocabularyService;
+	protected TagsVocabularyPersistence tagsVocabularyPersistence;
 	protected CounterLocalService counterLocalService;
 	protected CounterService counterService;
 	protected UserLocalService userLocalService;
