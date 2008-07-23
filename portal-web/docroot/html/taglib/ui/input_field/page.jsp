@@ -200,10 +200,10 @@ Map hints = ModelHintsUtil.getHints(model, field);
 				fieldParam = namespace + field;
 
 				if (type.equals("double")) {
-					value = String.valueOf(BeanParamUtil.getDouble(bean, request, field, GetterUtil.DEFAULT_DOUBLE));
+					value = String.valueOf(BeanParamUtil.getDouble(bean, request, field, GetterUtil.getDouble(defaultString)));
 				}
 				else if (type.equals("int")) {
-					value = String.valueOf(BeanParamUtil.getInteger(bean, request, field, GetterUtil.DEFAULT_INTEGER));
+					value = String.valueOf(BeanParamUtil.getInteger(bean, request, field, GetterUtil.getInteger(defaultString)));
 				}
 				else {
 					value = BeanParamUtil.getString(bean, request, field, defaultString);
