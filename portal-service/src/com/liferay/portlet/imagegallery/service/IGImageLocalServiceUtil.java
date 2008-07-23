@@ -100,6 +100,20 @@ public class IGImageLocalServiceUtil {
 		return igImageLocalService.getIGImage(imageId);
 	}
 
+	public static java.util.List<com.liferay.portlet.imagegallery.model.IGImage> getIGImages(
+		int start, int end) throws com.liferay.portal.SystemException {
+		IGImageLocalService igImageLocalService = IGImageLocalServiceFactory.getService();
+
+		return igImageLocalService.getIGImages(start, end);
+	}
+
+	public static int getIGImagesCount()
+		throws com.liferay.portal.SystemException {
+		IGImageLocalService igImageLocalService = IGImageLocalServiceFactory.getService();
+
+		return igImageLocalService.getIGImagesCount();
+	}
+
 	public static com.liferay.portlet.imagegallery.model.IGImage updateIGImage(
 		com.liferay.portlet.imagegallery.model.IGImage igImage)
 		throws com.liferay.portal.SystemException {

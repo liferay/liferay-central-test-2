@@ -72,6 +72,11 @@ public interface GroupLocalService {
 		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
+	public java.util.List<com.liferay.portal.model.Group> getGroups(int start,
+		int end) throws com.liferay.portal.SystemException;
+
+	public int getGroupsCount() throws com.liferay.portal.SystemException;
+
 	public com.liferay.portal.model.Group updateGroup(
 		com.liferay.portal.model.Group group)
 		throws com.liferay.portal.SystemException;

@@ -117,6 +117,15 @@ public abstract class ShoppingItemPriceLocalServiceBaseImpl
 		return shoppingItemPricePersistence.findByPrimaryKey(itemPriceId);
 	}
 
+	public List<ShoppingItemPrice> getShoppingItemPrices(int start, int end)
+		throws SystemException {
+		return shoppingItemPricePersistence.findAll(start, end);
+	}
+
+	public int getShoppingItemPricesCount() throws SystemException {
+		return shoppingItemPricePersistence.countAll();
+	}
+
 	public ShoppingItemPrice updateShoppingItemPrice(
 		ShoppingItemPrice shoppingItemPrice) throws SystemException {
 		shoppingItemPrice.setNew(false);

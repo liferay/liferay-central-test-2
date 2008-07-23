@@ -101,6 +101,21 @@ public class JournalArticleImageLocalServiceUtil {
 		return journalArticleImageLocalService.getJournalArticleImage(articleImageId);
 	}
 
+	public static java.util.List<com.liferay.portlet.journal.model.JournalArticleImage> getJournalArticleImages(
+		int start, int end) throws com.liferay.portal.SystemException {
+		JournalArticleImageLocalService journalArticleImageLocalService = JournalArticleImageLocalServiceFactory.getService();
+
+		return journalArticleImageLocalService.getJournalArticleImages(start,
+			end);
+	}
+
+	public static int getJournalArticleImagesCount()
+		throws com.liferay.portal.SystemException {
+		JournalArticleImageLocalService journalArticleImageLocalService = JournalArticleImageLocalServiceFactory.getService();
+
+		return journalArticleImageLocalService.getJournalArticleImagesCount();
+	}
+
 	public static com.liferay.portlet.journal.model.JournalArticleImage updateJournalArticleImage(
 		com.liferay.portlet.journal.model.JournalArticleImage journalArticleImage)
 		throws com.liferay.portal.SystemException {

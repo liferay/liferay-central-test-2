@@ -303,6 +303,15 @@ public abstract class AccountLocalServiceBaseImpl implements AccountLocalService
 		return accountPersistence.findByPrimaryKey(accountId);
 	}
 
+	public List<Account> getAccounts(int start, int end)
+		throws SystemException {
+		return accountPersistence.findAll(start, end);
+	}
+
+	public int getAccountsCount() throws SystemException {
+		return accountPersistence.countAll();
+	}
+
 	public Account updateAccount(Account account) throws SystemException {
 		account.setNew(false);
 

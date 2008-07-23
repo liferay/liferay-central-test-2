@@ -73,6 +73,11 @@ public interface CalEventLocalService {
 		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
+	public java.util.List<com.liferay.portlet.calendar.model.CalEvent> getCalEvents(
+		int start, int end) throws com.liferay.portal.SystemException;
+
+	public int getCalEventsCount() throws com.liferay.portal.SystemException;
+
 	public com.liferay.portlet.calendar.model.CalEvent updateCalEvent(
 		com.liferay.portlet.calendar.model.CalEvent calEvent)
 		throws com.liferay.portal.SystemException;

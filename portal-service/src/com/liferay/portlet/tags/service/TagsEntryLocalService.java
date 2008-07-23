@@ -73,6 +73,11 @@ public interface TagsEntryLocalService {
 		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
+	public java.util.List<com.liferay.portlet.tags.model.TagsEntry> getTagsEntries(
+		int start, int end) throws com.liferay.portal.SystemException;
+
+	public int getTagsEntriesCount() throws com.liferay.portal.SystemException;
+
 	public com.liferay.portlet.tags.model.TagsEntry updateTagsEntry(
 		com.liferay.portlet.tags.model.TagsEntry tagsEntry)
 		throws com.liferay.portal.SystemException;

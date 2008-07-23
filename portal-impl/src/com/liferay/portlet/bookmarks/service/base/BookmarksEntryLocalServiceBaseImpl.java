@@ -112,6 +112,15 @@ public abstract class BookmarksEntryLocalServiceBaseImpl
 		return bookmarksEntryPersistence.findByPrimaryKey(entryId);
 	}
 
+	public List<BookmarksEntry> getBookmarksEntries(int start, int end)
+		throws SystemException {
+		return bookmarksEntryPersistence.findAll(start, end);
+	}
+
+	public int getBookmarksEntriesCount() throws SystemException {
+		return bookmarksEntryPersistence.countAll();
+	}
+
 	public BookmarksEntry updateBookmarksEntry(BookmarksEntry bookmarksEntry)
 		throws SystemException {
 		bookmarksEntry.setNew(false);

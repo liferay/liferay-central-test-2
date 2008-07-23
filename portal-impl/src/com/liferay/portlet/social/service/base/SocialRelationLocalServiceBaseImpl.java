@@ -102,6 +102,15 @@ public abstract class SocialRelationLocalServiceBaseImpl
 		return socialRelationPersistence.findByPrimaryKey(relationId);
 	}
 
+	public List<SocialRelation> getSocialRelations(int start, int end)
+		throws SystemException {
+		return socialRelationPersistence.findAll(start, end);
+	}
+
+	public int getSocialRelationsCount() throws SystemException {
+		return socialRelationPersistence.countAll();
+	}
+
 	public SocialRelation updateSocialRelation(SocialRelation socialRelation)
 		throws SystemException {
 		socialRelation.setNew(false);

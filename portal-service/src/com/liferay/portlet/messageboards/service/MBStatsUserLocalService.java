@@ -74,6 +74,11 @@ public interface MBStatsUserLocalService {
 		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
+	public java.util.List<com.liferay.portlet.messageboards.model.MBStatsUser> getMBStatsUsers(
+		int start, int end) throws com.liferay.portal.SystemException;
+
+	public int getMBStatsUsersCount() throws com.liferay.portal.SystemException;
+
 	public com.liferay.portlet.messageboards.model.MBStatsUser updateMBStatsUser(
 		com.liferay.portlet.messageboards.model.MBStatsUser mbStatsUser)
 		throws com.liferay.portal.SystemException;

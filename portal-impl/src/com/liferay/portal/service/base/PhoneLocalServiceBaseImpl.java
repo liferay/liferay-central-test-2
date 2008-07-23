@@ -307,6 +307,14 @@ public abstract class PhoneLocalServiceBaseImpl implements PhoneLocalService,
 		return phonePersistence.findByPrimaryKey(phoneId);
 	}
 
+	public List<Phone> getPhones(int start, int end) throws SystemException {
+		return phonePersistence.findAll(start, end);
+	}
+
+	public int getPhonesCount() throws SystemException {
+		return phonePersistence.countAll();
+	}
+
 	public Phone updatePhone(Phone phone) throws SystemException {
 		phone.setNew(false);
 

@@ -100,6 +100,20 @@ public class MBMessageFlagLocalServiceUtil {
 		return mbMessageFlagLocalService.getMBMessageFlag(messageFlagId);
 	}
 
+	public static java.util.List<com.liferay.portlet.messageboards.model.MBMessageFlag> getMBMessageFlags(
+		int start, int end) throws com.liferay.portal.SystemException {
+		MBMessageFlagLocalService mbMessageFlagLocalService = MBMessageFlagLocalServiceFactory.getService();
+
+		return mbMessageFlagLocalService.getMBMessageFlags(start, end);
+	}
+
+	public static int getMBMessageFlagsCount()
+		throws com.liferay.portal.SystemException {
+		MBMessageFlagLocalService mbMessageFlagLocalService = MBMessageFlagLocalServiceFactory.getService();
+
+		return mbMessageFlagLocalService.getMBMessageFlagsCount();
+	}
+
 	public static com.liferay.portlet.messageboards.model.MBMessageFlag updateMBMessageFlag(
 		com.liferay.portlet.messageboards.model.MBMessageFlag mbMessageFlag)
 		throws com.liferay.portal.SystemException {

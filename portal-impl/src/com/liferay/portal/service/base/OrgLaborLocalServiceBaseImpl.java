@@ -308,6 +308,15 @@ public abstract class OrgLaborLocalServiceBaseImpl
 		return orgLaborPersistence.findByPrimaryKey(orgLaborId);
 	}
 
+	public List<OrgLabor> getOrgLabors(int start, int end)
+		throws SystemException {
+		return orgLaborPersistence.findAll(start, end);
+	}
+
+	public int getOrgLaborsCount() throws SystemException {
+		return orgLaborPersistence.countAll();
+	}
+
 	public OrgLabor updateOrgLabor(OrgLabor orgLabor) throws SystemException {
 		orgLabor.setNew(false);
 

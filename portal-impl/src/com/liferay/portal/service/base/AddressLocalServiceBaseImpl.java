@@ -308,6 +308,15 @@ public abstract class AddressLocalServiceBaseImpl implements AddressLocalService
 		return addressPersistence.findByPrimaryKey(addressId);
 	}
 
+	public List<Address> getAddresss(int start, int end)
+		throws SystemException {
+		return addressPersistence.findAll(start, end);
+	}
+
+	public int getAddresssCount() throws SystemException {
+		return addressPersistence.countAll();
+	}
+
 	public Address updateAddress(Address address) throws SystemException {
 		address.setNew(false);
 

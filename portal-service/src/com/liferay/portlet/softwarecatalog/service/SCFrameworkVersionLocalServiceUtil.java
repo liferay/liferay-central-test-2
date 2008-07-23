@@ -101,6 +101,20 @@ public class SCFrameworkVersionLocalServiceUtil {
 		return scFrameworkVersionLocalService.getSCFrameworkVersion(frameworkVersionId);
 	}
 
+	public static java.util.List<com.liferay.portlet.softwarecatalog.model.SCFrameworkVersion> getSCFrameworkVersions(
+		int start, int end) throws com.liferay.portal.SystemException {
+		SCFrameworkVersionLocalService scFrameworkVersionLocalService = SCFrameworkVersionLocalServiceFactory.getService();
+
+		return scFrameworkVersionLocalService.getSCFrameworkVersions(start, end);
+	}
+
+	public static int getSCFrameworkVersionsCount()
+		throws com.liferay.portal.SystemException {
+		SCFrameworkVersionLocalService scFrameworkVersionLocalService = SCFrameworkVersionLocalServiceFactory.getService();
+
+		return scFrameworkVersionLocalService.getSCFrameworkVersionsCount();
+	}
+
 	public static com.liferay.portlet.softwarecatalog.model.SCFrameworkVersion updateSCFrameworkVersion(
 		com.liferay.portlet.softwarecatalog.model.SCFrameworkVersion scFrameworkVersion)
 		throws com.liferay.portal.SystemException {

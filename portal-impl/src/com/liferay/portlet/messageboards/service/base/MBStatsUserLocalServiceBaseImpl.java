@@ -118,6 +118,15 @@ public abstract class MBStatsUserLocalServiceBaseImpl
 		return mbStatsUserPersistence.findByPrimaryKey(statsUserId);
 	}
 
+	public List<MBStatsUser> getMBStatsUsers(int start, int end)
+		throws SystemException {
+		return mbStatsUserPersistence.findAll(start, end);
+	}
+
+	public int getMBStatsUsersCount() throws SystemException {
+		return mbStatsUserPersistence.countAll();
+	}
+
 	public MBStatsUser updateMBStatsUser(MBStatsUser mbStatsUser)
 		throws SystemException {
 		mbStatsUser.setNew(false);

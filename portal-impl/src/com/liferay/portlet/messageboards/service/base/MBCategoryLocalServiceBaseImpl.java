@@ -144,6 +144,15 @@ public abstract class MBCategoryLocalServiceBaseImpl
 		return mbCategoryPersistence.findByPrimaryKey(categoryId);
 	}
 
+	public List<MBCategory> getMBCategories(int start, int end)
+		throws SystemException {
+		return mbCategoryPersistence.findAll(start, end);
+	}
+
+	public int getMBCategoriesCount() throws SystemException {
+		return mbCategoryPersistence.countAll();
+	}
+
 	public MBCategory updateMBCategory(MBCategory mbCategory)
 		throws SystemException {
 		mbCategory.setNew(false);

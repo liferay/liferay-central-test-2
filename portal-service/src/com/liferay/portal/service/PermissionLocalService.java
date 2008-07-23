@@ -72,6 +72,11 @@ public interface PermissionLocalService {
 		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
+	public java.util.List<com.liferay.portal.model.Permission> getPermissions(
+		int start, int end) throws com.liferay.portal.SystemException;
+
+	public int getPermissionsCount() throws com.liferay.portal.SystemException;
+
 	public com.liferay.portal.model.Permission updatePermission(
 		com.liferay.portal.model.Permission permission)
 		throws com.liferay.portal.SystemException;

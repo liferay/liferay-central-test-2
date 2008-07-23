@@ -306,6 +306,15 @@ public abstract class PortletLocalServiceBaseImpl implements PortletLocalService
 		return portletPersistence.findByPrimaryKey(id);
 	}
 
+	public List<Portlet> getPortlets(int start, int end)
+		throws SystemException {
+		return portletPersistence.findAll(start, end);
+	}
+
+	public int getPortletsCount() throws SystemException {
+		return portletPersistence.countAll();
+	}
+
 	public Portlet updatePortlet(Portlet portlet) throws SystemException {
 		portlet.setNew(false);
 

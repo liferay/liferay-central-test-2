@@ -72,6 +72,11 @@ public interface AccountLocalService {
 		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
+	public java.util.List<com.liferay.portal.model.Account> getAccounts(
+		int start, int end) throws com.liferay.portal.SystemException;
+
+	public int getAccountsCount() throws com.liferay.portal.SystemException;
+
 	public com.liferay.portal.model.Account updateAccount(
 		com.liferay.portal.model.Account account)
 		throws com.liferay.portal.SystemException;

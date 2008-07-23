@@ -74,6 +74,12 @@ public interface MembershipRequestLocalService {
 		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
+	public java.util.List<com.liferay.portal.model.MembershipRequest> getMembershipRequests(
+		int start, int end) throws com.liferay.portal.SystemException;
+
+	public int getMembershipRequestsCount()
+		throws com.liferay.portal.SystemException;
+
 	public com.liferay.portal.model.MembershipRequest updateMembershipRequest(
 		com.liferay.portal.model.MembershipRequest membershipRequest)
 		throws com.liferay.portal.SystemException;

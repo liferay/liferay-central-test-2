@@ -74,6 +74,11 @@ public interface SCLicenseLocalService {
 		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
+	public java.util.List<com.liferay.portlet.softwarecatalog.model.SCLicense> getSCLicenses(
+		int start, int end) throws com.liferay.portal.SystemException;
+
+	public int getSCLicensesCount() throws com.liferay.portal.SystemException;
+
 	public com.liferay.portlet.softwarecatalog.model.SCLicense updateSCLicense(
 		com.liferay.portlet.softwarecatalog.model.SCLicense scLicense)
 		throws com.liferay.portal.SystemException;

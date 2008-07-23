@@ -105,6 +105,15 @@ public abstract class DLFileVersionLocalServiceBaseImpl
 		return dlFileVersionPersistence.findByPrimaryKey(fileVersionId);
 	}
 
+	public List<DLFileVersion> getDLFileVersions(int start, int end)
+		throws SystemException {
+		return dlFileVersionPersistence.findAll(start, end);
+	}
+
+	public int getDLFileVersionsCount() throws SystemException {
+		return dlFileVersionPersistence.countAll();
+	}
+
 	public DLFileVersion updateDLFileVersion(DLFileVersion dlFileVersion)
 		throws SystemException {
 		dlFileVersion.setNew(false);

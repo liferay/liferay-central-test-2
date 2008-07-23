@@ -72,6 +72,11 @@ public interface ClassNameLocalService {
 		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
+	public java.util.List<com.liferay.portal.model.ClassName> getClassNames(
+		int start, int end) throws com.liferay.portal.SystemException;
+
+	public int getClassNamesCount() throws com.liferay.portal.SystemException;
+
 	public com.liferay.portal.model.ClassName updateClassName(
 		com.liferay.portal.model.ClassName className)
 		throws com.liferay.portal.SystemException;

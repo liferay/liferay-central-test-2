@@ -118,6 +118,15 @@ public abstract class CalEventLocalServiceBaseImpl
 		return calEventPersistence.findByPrimaryKey(eventId);
 	}
 
+	public List<CalEvent> getCalEvents(int start, int end)
+		throws SystemException {
+		return calEventPersistence.findAll(start, end);
+	}
+
+	public int getCalEventsCount() throws SystemException {
+		return calEventPersistence.countAll();
+	}
+
 	public CalEvent updateCalEvent(CalEvent calEvent) throws SystemException {
 		calEvent.setNew(false);
 

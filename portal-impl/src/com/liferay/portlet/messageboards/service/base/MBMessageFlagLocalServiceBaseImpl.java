@@ -126,6 +126,15 @@ public abstract class MBMessageFlagLocalServiceBaseImpl
 		return mbMessageFlagPersistence.findByPrimaryKey(messageFlagId);
 	}
 
+	public List<MBMessageFlag> getMBMessageFlags(int start, int end)
+		throws SystemException {
+		return mbMessageFlagPersistence.findAll(start, end);
+	}
+
+	public int getMBMessageFlagsCount() throws SystemException {
+		return mbMessageFlagPersistence.countAll();
+	}
+
 	public MBMessageFlag updateMBMessageFlag(MBMessageFlag mbMessageFlag)
 		throws SystemException {
 		mbMessageFlag.setNew(false);

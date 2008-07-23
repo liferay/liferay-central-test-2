@@ -313,6 +313,15 @@ public abstract class UserTrackerLocalServiceBaseImpl
 		return userTrackerPersistence.findByPrimaryKey(userTrackerId);
 	}
 
+	public List<UserTracker> getUserTrackers(int start, int end)
+		throws SystemException {
+		return userTrackerPersistence.findAll(start, end);
+	}
+
+	public int getUserTrackersCount() throws SystemException {
+		return userTrackerPersistence.countAll();
+	}
+
 	public UserTracker updateUserTracker(UserTracker userTracker)
 		throws SystemException {
 		userTracker.setNew(false);

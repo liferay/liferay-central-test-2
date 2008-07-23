@@ -74,6 +74,12 @@ public interface AnnouncementsEntryLocalService {
 		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
+	public java.util.List<com.liferay.portlet.announcements.model.AnnouncementsEntry> getAnnouncementsEntries(
+		int start, int end) throws com.liferay.portal.SystemException;
+
+	public int getAnnouncementsEntriesCount()
+		throws com.liferay.portal.SystemException;
+
 	public com.liferay.portlet.announcements.model.AnnouncementsEntry updateAnnouncementsEntry(
 		com.liferay.portlet.announcements.model.AnnouncementsEntry announcementsEntry)
 		throws com.liferay.portal.SystemException;

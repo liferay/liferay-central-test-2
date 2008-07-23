@@ -101,6 +101,20 @@ public class AnnouncementsFlagLocalServiceUtil {
 		return announcementsFlagLocalService.getAnnouncementsFlag(flagId);
 	}
 
+	public static java.util.List<com.liferay.portlet.announcements.model.AnnouncementsFlag> getAnnouncementsFlags(
+		int start, int end) throws com.liferay.portal.SystemException {
+		AnnouncementsFlagLocalService announcementsFlagLocalService = AnnouncementsFlagLocalServiceFactory.getService();
+
+		return announcementsFlagLocalService.getAnnouncementsFlags(start, end);
+	}
+
+	public static int getAnnouncementsFlagsCount()
+		throws com.liferay.portal.SystemException {
+		AnnouncementsFlagLocalService announcementsFlagLocalService = AnnouncementsFlagLocalServiceFactory.getService();
+
+		return announcementsFlagLocalService.getAnnouncementsFlagsCount();
+	}
+
 	public static com.liferay.portlet.announcements.model.AnnouncementsFlag updateAnnouncementsFlag(
 		com.liferay.portlet.announcements.model.AnnouncementsFlag announcementsFlag)
 		throws com.liferay.portal.SystemException {

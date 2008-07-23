@@ -74,6 +74,12 @@ public interface EmailAddressLocalService {
 		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
+	public java.util.List<com.liferay.portal.model.EmailAddress> getEmailAddresss(
+		int start, int end) throws com.liferay.portal.SystemException;
+
+	public int getEmailAddresssCount()
+		throws com.liferay.portal.SystemException;
+
 	public com.liferay.portal.model.EmailAddress updateEmailAddress(
 		com.liferay.portal.model.EmailAddress emailAddress)
 		throws com.liferay.portal.SystemException;

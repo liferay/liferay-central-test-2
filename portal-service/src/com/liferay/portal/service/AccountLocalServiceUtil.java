@@ -98,6 +98,20 @@ public class AccountLocalServiceUtil {
 		return accountLocalService.getAccount(accountId);
 	}
 
+	public static java.util.List<com.liferay.portal.model.Account> getAccounts(
+		int start, int end) throws com.liferay.portal.SystemException {
+		AccountLocalService accountLocalService = AccountLocalServiceFactory.getService();
+
+		return accountLocalService.getAccounts(start, end);
+	}
+
+	public static int getAccountsCount()
+		throws com.liferay.portal.SystemException {
+		AccountLocalService accountLocalService = AccountLocalServiceFactory.getService();
+
+		return accountLocalService.getAccountsCount();
+	}
+
 	public static com.liferay.portal.model.Account updateAccount(
 		com.liferay.portal.model.Account account)
 		throws com.liferay.portal.SystemException {

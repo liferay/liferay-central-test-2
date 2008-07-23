@@ -101,6 +101,20 @@ public class PortletPreferencesLocalServiceUtil {
 		return portletPreferencesLocalService.getPortletPreferences(portletPreferencesId);
 	}
 
+	public static java.util.List<com.liferay.portal.model.PortletPreferences> getPortletPreferencess(
+		int start, int end) throws com.liferay.portal.SystemException {
+		PortletPreferencesLocalService portletPreferencesLocalService = PortletPreferencesLocalServiceFactory.getService();
+
+		return portletPreferencesLocalService.getPortletPreferencess(start, end);
+	}
+
+	public static int getPortletPreferencessCount()
+		throws com.liferay.portal.SystemException {
+		PortletPreferencesLocalService portletPreferencesLocalService = PortletPreferencesLocalServiceFactory.getService();
+
+		return portletPreferencesLocalService.getPortletPreferencessCount();
+	}
+
 	public static com.liferay.portal.model.PortletPreferences updatePortletPreferences(
 		com.liferay.portal.model.PortletPreferences portletPreferences)
 		throws com.liferay.portal.SystemException {

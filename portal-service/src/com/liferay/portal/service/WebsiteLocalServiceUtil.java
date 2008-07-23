@@ -98,6 +98,20 @@ public class WebsiteLocalServiceUtil {
 		return websiteLocalService.getWebsite(websiteId);
 	}
 
+	public static java.util.List<com.liferay.portal.model.Website> getWebsites(
+		int start, int end) throws com.liferay.portal.SystemException {
+		WebsiteLocalService websiteLocalService = WebsiteLocalServiceFactory.getService();
+
+		return websiteLocalService.getWebsites(start, end);
+	}
+
+	public static int getWebsitesCount()
+		throws com.liferay.portal.SystemException {
+		WebsiteLocalService websiteLocalService = WebsiteLocalServiceFactory.getService();
+
+		return websiteLocalService.getWebsitesCount();
+	}
+
 	public static com.liferay.portal.model.Website updateWebsite(
 		com.liferay.portal.model.Website website)
 		throws com.liferay.portal.SystemException {

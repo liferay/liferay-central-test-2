@@ -99,6 +99,20 @@ public class OrgLaborLocalServiceUtil {
 		return orgLaborLocalService.getOrgLabor(orgLaborId);
 	}
 
+	public static java.util.List<com.liferay.portal.model.OrgLabor> getOrgLabors(
+		int start, int end) throws com.liferay.portal.SystemException {
+		OrgLaborLocalService orgLaborLocalService = OrgLaborLocalServiceFactory.getService();
+
+		return orgLaborLocalService.getOrgLabors(start, end);
+	}
+
+	public static int getOrgLaborsCount()
+		throws com.liferay.portal.SystemException {
+		OrgLaborLocalService orgLaborLocalService = OrgLaborLocalServiceFactory.getService();
+
+		return orgLaborLocalService.getOrgLaborsCount();
+	}
+
 	public static com.liferay.portal.model.OrgLabor updateOrgLabor(
 		com.liferay.portal.model.OrgLabor orgLabor)
 		throws com.liferay.portal.SystemException {

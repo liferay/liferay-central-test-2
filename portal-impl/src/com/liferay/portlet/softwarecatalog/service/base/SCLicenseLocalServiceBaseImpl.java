@@ -101,6 +101,15 @@ public abstract class SCLicenseLocalServiceBaseImpl
 		return scLicensePersistence.findByPrimaryKey(licenseId);
 	}
 
+	public List<SCLicense> getSCLicenses(int start, int end)
+		throws SystemException {
+		return scLicensePersistence.findAll(start, end);
+	}
+
+	public int getSCLicensesCount() throws SystemException {
+		return scLicensePersistence.countAll();
+	}
+
 	public SCLicense updateSCLicense(SCLicense scLicense)
 		throws SystemException {
 		scLicense.setNew(false);

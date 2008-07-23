@@ -101,6 +101,20 @@ public class MembershipRequestLocalServiceUtil {
 		return membershipRequestLocalService.getMembershipRequest(membershipRequestId);
 	}
 
+	public static java.util.List<com.liferay.portal.model.MembershipRequest> getMembershipRequests(
+		int start, int end) throws com.liferay.portal.SystemException {
+		MembershipRequestLocalService membershipRequestLocalService = MembershipRequestLocalServiceFactory.getService();
+
+		return membershipRequestLocalService.getMembershipRequests(start, end);
+	}
+
+	public static int getMembershipRequestsCount()
+		throws com.liferay.portal.SystemException {
+		MembershipRequestLocalService membershipRequestLocalService = MembershipRequestLocalServiceFactory.getService();
+
+		return membershipRequestLocalService.getMembershipRequestsCount();
+	}
+
 	public static com.liferay.portal.model.MembershipRequest updateMembershipRequest(
 		com.liferay.portal.model.MembershipRequest membershipRequest)
 		throws com.liferay.portal.SystemException {

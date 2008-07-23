@@ -313,6 +313,15 @@ public abstract class UserTrackerPathLocalServiceBaseImpl
 		return userTrackerPathPersistence.findByPrimaryKey(userTrackerPathId);
 	}
 
+	public List<UserTrackerPath> getUserTrackerPaths(int start, int end)
+		throws SystemException {
+		return userTrackerPathPersistence.findAll(start, end);
+	}
+
+	public int getUserTrackerPathsCount() throws SystemException {
+		return userTrackerPathPersistence.countAll();
+	}
+
 	public UserTrackerPath updateUserTrackerPath(
 		UserTrackerPath userTrackerPath) throws SystemException {
 		userTrackerPath.setNew(false);

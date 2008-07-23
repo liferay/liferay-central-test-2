@@ -100,6 +100,20 @@ public class MBBanLocalServiceUtil {
 		return mbBanLocalService.getMBBan(banId);
 	}
 
+	public static java.util.List<com.liferay.portlet.messageboards.model.MBBan> getMBBans(
+		int start, int end) throws com.liferay.portal.SystemException {
+		MBBanLocalService mbBanLocalService = MBBanLocalServiceFactory.getService();
+
+		return mbBanLocalService.getMBBans(start, end);
+	}
+
+	public static int getMBBansCount()
+		throws com.liferay.portal.SystemException {
+		MBBanLocalService mbBanLocalService = MBBanLocalServiceFactory.getService();
+
+		return mbBanLocalService.getMBBansCount();
+	}
+
 	public static com.liferay.portlet.messageboards.model.MBBan updateMBBan(
 		com.liferay.portlet.messageboards.model.MBBan mbBan)
 		throws com.liferay.portal.SystemException {

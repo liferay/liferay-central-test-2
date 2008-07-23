@@ -138,6 +138,15 @@ public abstract class JournalStructureLocalServiceBaseImpl
 		return journalStructurePersistence.findByPrimaryKey(id);
 	}
 
+	public List<JournalStructure> getJournalStructures(int start, int end)
+		throws SystemException {
+		return journalStructurePersistence.findAll(start, end);
+	}
+
+	public int getJournalStructuresCount() throws SystemException {
+		return journalStructurePersistence.countAll();
+	}
+
 	public JournalStructure updateJournalStructure(
 		JournalStructure journalStructure) throws SystemException {
 		journalStructure.setNew(false);

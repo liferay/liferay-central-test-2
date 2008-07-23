@@ -72,6 +72,11 @@ public interface WebsiteLocalService {
 		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
+	public java.util.List<com.liferay.portal.model.Website> getWebsites(
+		int start, int end) throws com.liferay.portal.SystemException;
+
+	public int getWebsitesCount() throws com.liferay.portal.SystemException;
+
 	public com.liferay.portal.model.Website updateWebsite(
 		com.liferay.portal.model.Website website)
 		throws com.liferay.portal.SystemException;

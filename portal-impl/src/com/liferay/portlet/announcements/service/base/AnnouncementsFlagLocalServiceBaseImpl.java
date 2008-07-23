@@ -94,6 +94,15 @@ public abstract class AnnouncementsFlagLocalServiceBaseImpl
 		return announcementsFlagPersistence.findByPrimaryKey(flagId);
 	}
 
+	public List<AnnouncementsFlag> getAnnouncementsFlags(int start, int end)
+		throws SystemException {
+		return announcementsFlagPersistence.findAll(start, end);
+	}
+
+	public int getAnnouncementsFlagsCount() throws SystemException {
+		return announcementsFlagPersistence.countAll();
+	}
+
 	public AnnouncementsFlag updateAnnouncementsFlag(
 		AnnouncementsFlag announcementsFlag) throws SystemException {
 		announcementsFlag.setNew(false);

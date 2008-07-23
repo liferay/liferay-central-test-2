@@ -98,6 +98,15 @@ public abstract class ExpandoColumnLocalServiceBaseImpl
 		return expandoColumnPersistence.findByPrimaryKey(columnId);
 	}
 
+	public List<ExpandoColumn> getExpandoColumns(int start, int end)
+		throws SystemException {
+		return expandoColumnPersistence.findAll(start, end);
+	}
+
+	public int getExpandoColumnsCount() throws SystemException {
+		return expandoColumnPersistence.countAll();
+	}
+
 	public ExpandoColumn updateExpandoColumn(ExpandoColumn expandoColumn)
 		throws SystemException {
 		expandoColumn.setNew(false);

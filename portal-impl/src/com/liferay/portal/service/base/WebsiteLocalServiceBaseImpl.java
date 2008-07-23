@@ -308,6 +308,15 @@ public abstract class WebsiteLocalServiceBaseImpl implements WebsiteLocalService
 		return websitePersistence.findByPrimaryKey(websiteId);
 	}
 
+	public List<Website> getWebsites(int start, int end)
+		throws SystemException {
+		return websitePersistence.findAll(start, end);
+	}
+
+	public int getWebsitesCount() throws SystemException {
+		return websitePersistence.countAll();
+	}
+
 	public Website updateWebsite(Website website) throws SystemException {
 		website.setNew(false);
 

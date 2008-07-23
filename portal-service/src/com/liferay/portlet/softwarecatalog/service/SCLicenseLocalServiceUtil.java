@@ -100,6 +100,20 @@ public class SCLicenseLocalServiceUtil {
 		return scLicenseLocalService.getSCLicense(licenseId);
 	}
 
+	public static java.util.List<com.liferay.portlet.softwarecatalog.model.SCLicense> getSCLicenses(
+		int start, int end) throws com.liferay.portal.SystemException {
+		SCLicenseLocalService scLicenseLocalService = SCLicenseLocalServiceFactory.getService();
+
+		return scLicenseLocalService.getSCLicenses(start, end);
+	}
+
+	public static int getSCLicensesCount()
+		throws com.liferay.portal.SystemException {
+		SCLicenseLocalService scLicenseLocalService = SCLicenseLocalServiceFactory.getService();
+
+		return scLicenseLocalService.getSCLicensesCount();
+	}
+
 	public static com.liferay.portlet.softwarecatalog.model.SCLicense updateSCLicense(
 		com.liferay.portlet.softwarecatalog.model.SCLicense scLicense)
 		throws com.liferay.portal.SystemException {

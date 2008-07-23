@@ -74,6 +74,11 @@ public interface MBCategoryLocalService {
 		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
+	public java.util.List<com.liferay.portlet.messageboards.model.MBCategory> getMBCategories(
+		int start, int end) throws com.liferay.portal.SystemException;
+
+	public int getMBCategoriesCount() throws com.liferay.portal.SystemException;
+
 	public com.liferay.portlet.messageboards.model.MBCategory updateMBCategory(
 		com.liferay.portlet.messageboards.model.MBCategory mbCategory)
 		throws com.liferay.portal.SystemException;

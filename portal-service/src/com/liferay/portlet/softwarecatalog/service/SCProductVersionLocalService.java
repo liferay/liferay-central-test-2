@@ -74,6 +74,12 @@ public interface SCProductVersionLocalService {
 		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
+	public java.util.List<com.liferay.portlet.softwarecatalog.model.SCProductVersion> getSCProductVersions(
+		int start, int end) throws com.liferay.portal.SystemException;
+
+	public int getSCProductVersionsCount()
+		throws com.liferay.portal.SystemException;
+
 	public com.liferay.portlet.softwarecatalog.model.SCProductVersion updateSCProductVersion(
 		com.liferay.portlet.softwarecatalog.model.SCProductVersion scProductVersion)
 		throws com.liferay.portal.SystemException;

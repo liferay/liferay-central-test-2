@@ -72,6 +72,11 @@ public interface PhoneLocalService {
 		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
+	public java.util.List<com.liferay.portal.model.Phone> getPhones(int start,
+		int end) throws com.liferay.portal.SystemException;
+
+	public int getPhonesCount() throws com.liferay.portal.SystemException;
+
 	public com.liferay.portal.model.Phone updatePhone(
 		com.liferay.portal.model.Phone phone)
 		throws com.liferay.portal.SystemException;

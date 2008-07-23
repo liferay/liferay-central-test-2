@@ -74,6 +74,12 @@ public interface BlogsStatsUserLocalService {
 		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
+	public java.util.List<com.liferay.portlet.blogs.model.BlogsStatsUser> getBlogsStatsUsers(
+		int start, int end) throws com.liferay.portal.SystemException;
+
+	public int getBlogsStatsUsersCount()
+		throws com.liferay.portal.SystemException;
+
 	public com.liferay.portlet.blogs.model.BlogsStatsUser updateBlogsStatsUser(
 		com.liferay.portlet.blogs.model.BlogsStatsUser blogsStatsUser)
 		throws com.liferay.portal.SystemException;

@@ -100,6 +100,20 @@ public class ExpandoTableLocalServiceUtil {
 		return expandoTableLocalService.getExpandoTable(tableId);
 	}
 
+	public static java.util.List<com.liferay.portlet.expando.model.ExpandoTable> getExpandoTables(
+		int start, int end) throws com.liferay.portal.SystemException {
+		ExpandoTableLocalService expandoTableLocalService = ExpandoTableLocalServiceFactory.getService();
+
+		return expandoTableLocalService.getExpandoTables(start, end);
+	}
+
+	public static int getExpandoTablesCount()
+		throws com.liferay.portal.SystemException {
+		ExpandoTableLocalService expandoTableLocalService = ExpandoTableLocalServiceFactory.getService();
+
+		return expandoTableLocalService.getExpandoTablesCount();
+	}
+
 	public static com.liferay.portlet.expando.model.ExpandoTable updateExpandoTable(
 		com.liferay.portlet.expando.model.ExpandoTable expandoTable)
 		throws com.liferay.portal.SystemException {

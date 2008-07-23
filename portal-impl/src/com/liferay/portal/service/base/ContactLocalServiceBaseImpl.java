@@ -303,6 +303,15 @@ public abstract class ContactLocalServiceBaseImpl implements ContactLocalService
 		return contactPersistence.findByPrimaryKey(contactId);
 	}
 
+	public List<Contact> getContacts(int start, int end)
+		throws SystemException {
+		return contactPersistence.findAll(start, end);
+	}
+
+	public int getContactsCount() throws SystemException {
+		return contactPersistence.countAll();
+	}
+
 	public Contact updateContact(Contact contact) throws SystemException {
 		contact.setNew(false);
 

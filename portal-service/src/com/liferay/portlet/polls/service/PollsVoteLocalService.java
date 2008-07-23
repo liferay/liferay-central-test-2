@@ -73,6 +73,11 @@ public interface PollsVoteLocalService {
 		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
+	public java.util.List<com.liferay.portlet.polls.model.PollsVote> getPollsVotes(
+		int start, int end) throws com.liferay.portal.SystemException;
+
+	public int getPollsVotesCount() throws com.liferay.portal.SystemException;
+
 	public com.liferay.portlet.polls.model.PollsVote updatePollsVote(
 		com.liferay.portlet.polls.model.PollsVote pollsVote)
 		throws com.liferay.portal.SystemException;

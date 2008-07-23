@@ -98,6 +98,20 @@ public class GroupLocalServiceUtil {
 		return groupLocalService.getGroup(groupId);
 	}
 
+	public static java.util.List<com.liferay.portal.model.Group> getGroups(
+		int start, int end) throws com.liferay.portal.SystemException {
+		GroupLocalService groupLocalService = GroupLocalServiceFactory.getService();
+
+		return groupLocalService.getGroups(start, end);
+	}
+
+	public static int getGroupsCount()
+		throws com.liferay.portal.SystemException {
+		GroupLocalService groupLocalService = GroupLocalServiceFactory.getService();
+
+		return groupLocalService.getGroupsCount();
+	}
+
 	public static com.liferay.portal.model.Group updateGroup(
 		com.liferay.portal.model.Group group)
 		throws com.liferay.portal.SystemException {

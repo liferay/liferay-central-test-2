@@ -74,6 +74,12 @@ public interface TasksProposalLocalService {
 		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
+	public java.util.List<com.liferay.portlet.tasks.model.TasksProposal> getTasksProposals(
+		int start, int end) throws com.liferay.portal.SystemException;
+
+	public int getTasksProposalsCount()
+		throws com.liferay.portal.SystemException;
+
 	public com.liferay.portlet.tasks.model.TasksProposal updateTasksProposal(
 		com.liferay.portlet.tasks.model.TasksProposal tasksProposal)
 		throws com.liferay.portal.SystemException;

@@ -100,6 +100,20 @@ public class DLFolderLocalServiceUtil {
 		return dlFolderLocalService.getDLFolder(folderId);
 	}
 
+	public static java.util.List<com.liferay.portlet.documentlibrary.model.DLFolder> getDLFolders(
+		int start, int end) throws com.liferay.portal.SystemException {
+		DLFolderLocalService dlFolderLocalService = DLFolderLocalServiceFactory.getService();
+
+		return dlFolderLocalService.getDLFolders(start, end);
+	}
+
+	public static int getDLFoldersCount()
+		throws com.liferay.portal.SystemException {
+		DLFolderLocalService dlFolderLocalService = DLFolderLocalServiceFactory.getService();
+
+		return dlFolderLocalService.getDLFoldersCount();
+	}
+
 	public static com.liferay.portlet.documentlibrary.model.DLFolder updateDLFolder(
 		com.liferay.portlet.documentlibrary.model.DLFolder dlFolder)
 		throws com.liferay.portal.SystemException {

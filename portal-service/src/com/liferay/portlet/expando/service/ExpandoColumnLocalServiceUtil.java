@@ -100,6 +100,20 @@ public class ExpandoColumnLocalServiceUtil {
 		return expandoColumnLocalService.getExpandoColumn(columnId);
 	}
 
+	public static java.util.List<com.liferay.portlet.expando.model.ExpandoColumn> getExpandoColumns(
+		int start, int end) throws com.liferay.portal.SystemException {
+		ExpandoColumnLocalService expandoColumnLocalService = ExpandoColumnLocalServiceFactory.getService();
+
+		return expandoColumnLocalService.getExpandoColumns(start, end);
+	}
+
+	public static int getExpandoColumnsCount()
+		throws com.liferay.portal.SystemException {
+		ExpandoColumnLocalService expandoColumnLocalService = ExpandoColumnLocalServiceFactory.getService();
+
+		return expandoColumnLocalService.getExpandoColumnsCount();
+	}
+
 	public static com.liferay.portlet.expando.model.ExpandoColumn updateExpandoColumn(
 		com.liferay.portlet.expando.model.ExpandoColumn expandoColumn)
 		throws com.liferay.portal.SystemException {

@@ -86,6 +86,15 @@ public abstract class RatingsStatsLocalServiceBaseImpl
 		return ratingsStatsPersistence.findByPrimaryKey(statsId);
 	}
 
+	public List<RatingsStats> getRatingsStatss(int start, int end)
+		throws SystemException {
+		return ratingsStatsPersistence.findAll(start, end);
+	}
+
+	public int getRatingsStatssCount() throws SystemException {
+		return ratingsStatsPersistence.countAll();
+	}
+
 	public RatingsStats updateRatingsStats(RatingsStats ratingsStats)
 		throws SystemException {
 		ratingsStats.setNew(false);

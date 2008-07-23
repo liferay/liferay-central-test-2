@@ -100,6 +100,20 @@ public class PasswordTrackerLocalServiceUtil {
 		return passwordTrackerLocalService.getPasswordTracker(passwordTrackerId);
 	}
 
+	public static java.util.List<com.liferay.portal.model.PasswordTracker> getPasswordTrackers(
+		int start, int end) throws com.liferay.portal.SystemException {
+		PasswordTrackerLocalService passwordTrackerLocalService = PasswordTrackerLocalServiceFactory.getService();
+
+		return passwordTrackerLocalService.getPasswordTrackers(start, end);
+	}
+
+	public static int getPasswordTrackersCount()
+		throws com.liferay.portal.SystemException {
+		PasswordTrackerLocalService passwordTrackerLocalService = PasswordTrackerLocalServiceFactory.getService();
+
+		return passwordTrackerLocalService.getPasswordTrackersCount();
+	}
+
 	public static com.liferay.portal.model.PasswordTracker updatePasswordTracker(
 		com.liferay.portal.model.PasswordTracker passwordTracker)
 		throws com.liferay.portal.SystemException {

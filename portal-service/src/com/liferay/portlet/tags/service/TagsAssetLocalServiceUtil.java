@@ -100,6 +100,20 @@ public class TagsAssetLocalServiceUtil {
 		return tagsAssetLocalService.getTagsAsset(assetId);
 	}
 
+	public static java.util.List<com.liferay.portlet.tags.model.TagsAsset> getTagsAssets(
+		int start, int end) throws com.liferay.portal.SystemException {
+		TagsAssetLocalService tagsAssetLocalService = TagsAssetLocalServiceFactory.getService();
+
+		return tagsAssetLocalService.getTagsAssets(start, end);
+	}
+
+	public static int getTagsAssetsCount()
+		throws com.liferay.portal.SystemException {
+		TagsAssetLocalService tagsAssetLocalService = TagsAssetLocalServiceFactory.getService();
+
+		return tagsAssetLocalService.getTagsAssetsCount();
+	}
+
 	public static com.liferay.portlet.tags.model.TagsAsset updateTagsAsset(
 		com.liferay.portlet.tags.model.TagsAsset tagsAsset)
 		throws com.liferay.portal.SystemException {

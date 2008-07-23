@@ -101,6 +101,20 @@ public class SCProductVersionLocalServiceUtil {
 		return scProductVersionLocalService.getSCProductVersion(productVersionId);
 	}
 
+	public static java.util.List<com.liferay.portlet.softwarecatalog.model.SCProductVersion> getSCProductVersions(
+		int start, int end) throws com.liferay.portal.SystemException {
+		SCProductVersionLocalService scProductVersionLocalService = SCProductVersionLocalServiceFactory.getService();
+
+		return scProductVersionLocalService.getSCProductVersions(start, end);
+	}
+
+	public static int getSCProductVersionsCount()
+		throws com.liferay.portal.SystemException {
+		SCProductVersionLocalService scProductVersionLocalService = SCProductVersionLocalServiceFactory.getService();
+
+		return scProductVersionLocalService.getSCProductVersionsCount();
+	}
+
 	public static com.liferay.portlet.softwarecatalog.model.SCProductVersion updateSCProductVersion(
 		com.liferay.portlet.softwarecatalog.model.SCProductVersion scProductVersion)
 		throws com.liferay.portal.SystemException {

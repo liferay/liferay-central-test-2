@@ -152,6 +152,15 @@ public abstract class MBThreadLocalServiceBaseImpl
 		return mbThreadPersistence.findByPrimaryKey(threadId);
 	}
 
+	public List<MBThread> getMBThreads(int start, int end)
+		throws SystemException {
+		return mbThreadPersistence.findAll(start, end);
+	}
+
+	public int getMBThreadsCount() throws SystemException {
+		return mbThreadPersistence.countAll();
+	}
+
 	public MBThread updateMBThread(MBThread mbThread) throws SystemException {
 		mbThread.setNew(false);
 

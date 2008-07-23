@@ -74,6 +74,11 @@ public interface IGImageLocalService {
 		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
+	public java.util.List<com.liferay.portlet.imagegallery.model.IGImage> getIGImages(
+		int start, int end) throws com.liferay.portal.SystemException;
+
+	public int getIGImagesCount() throws com.liferay.portal.SystemException;
+
 	public com.liferay.portlet.imagegallery.model.IGImage updateIGImage(
 		com.liferay.portlet.imagegallery.model.IGImage igImage)
 		throws com.liferay.portal.SystemException;

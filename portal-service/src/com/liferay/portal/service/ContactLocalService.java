@@ -72,6 +72,11 @@ public interface ContactLocalService {
 		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
+	public java.util.List<com.liferay.portal.model.Contact> getContacts(
+		int start, int end) throws com.liferay.portal.SystemException;
+
+	public int getContactsCount() throws com.liferay.portal.SystemException;
+
 	public com.liferay.portal.model.Contact updateContact(
 		com.liferay.portal.model.Contact contact)
 		throws com.liferay.portal.SystemException;

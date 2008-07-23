@@ -183,6 +183,15 @@ public abstract class JournalArticleLocalServiceBaseImpl
 		return journalArticlePersistence.findByPrimaryKey(id);
 	}
 
+	public List<JournalArticle> getJournalArticles(int start, int end)
+		throws SystemException {
+		return journalArticlePersistence.findAll(start, end);
+	}
+
+	public int getJournalArticlesCount() throws SystemException {
+		return journalArticlePersistence.countAll();
+	}
+
 	public JournalArticle updateJournalArticle(JournalArticle journalArticle)
 		throws SystemException {
 		journalArticle.setNew(false);

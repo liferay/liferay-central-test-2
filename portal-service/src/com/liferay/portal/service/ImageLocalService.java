@@ -72,6 +72,11 @@ public interface ImageLocalService {
 		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
+	public java.util.List<com.liferay.portal.model.Image> getImages(int start,
+		int end) throws com.liferay.portal.SystemException;
+
+	public int getImagesCount() throws com.liferay.portal.SystemException;
+
 	public com.liferay.portal.model.Image updateImage(
 		com.liferay.portal.model.Image image)
 		throws com.liferay.portal.SystemException;
@@ -99,9 +104,6 @@ public interface ImageLocalService {
 
 	public java.util.List<com.liferay.portal.model.Image> getImages()
 		throws com.liferay.portal.SystemException;
-
-	public java.util.List<com.liferay.portal.model.Image> getImages(int start,
-		int end) throws com.liferay.portal.SystemException;
 
 	public java.util.List<com.liferay.portal.model.Image> getImagesBySize(
 		int size) throws com.liferay.portal.SystemException;

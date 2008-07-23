@@ -94,6 +94,15 @@ public abstract class PollsChoiceLocalServiceBaseImpl
 		return pollsChoicePersistence.findByPrimaryKey(choiceId);
 	}
 
+	public List<PollsChoice> getPollsChoices(int start, int end)
+		throws SystemException {
+		return pollsChoicePersistence.findAll(start, end);
+	}
+
+	public int getPollsChoicesCount() throws SystemException {
+		return pollsChoicePersistence.countAll();
+	}
+
 	public PollsChoice updatePollsChoice(PollsChoice pollsChoice)
 		throws SystemException {
 		pollsChoice.setNew(false);

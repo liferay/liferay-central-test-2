@@ -74,6 +74,12 @@ public interface PluginSettingLocalService {
 		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
+	public java.util.List<com.liferay.portal.model.PluginSetting> getPluginSettings(
+		int start, int end) throws com.liferay.portal.SystemException;
+
+	public int getPluginSettingsCount()
+		throws com.liferay.portal.SystemException;
+
 	public com.liferay.portal.model.PluginSetting updatePluginSetting(
 		com.liferay.portal.model.PluginSetting pluginSetting)
 		throws com.liferay.portal.SystemException;

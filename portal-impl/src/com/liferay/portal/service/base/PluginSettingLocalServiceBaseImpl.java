@@ -311,6 +311,15 @@ public abstract class PluginSettingLocalServiceBaseImpl
 		return pluginSettingPersistence.findByPrimaryKey(pluginSettingId);
 	}
 
+	public List<PluginSetting> getPluginSettings(int start, int end)
+		throws SystemException {
+		return pluginSettingPersistence.findAll(start, end);
+	}
+
+	public int getPluginSettingsCount() throws SystemException {
+		return pluginSettingPersistence.countAll();
+	}
+
 	public PluginSetting updatePluginSetting(PluginSetting pluginSetting)
 		throws SystemException {
 		pluginSetting.setNew(false);

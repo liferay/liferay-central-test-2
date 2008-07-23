@@ -101,6 +101,20 @@ public class UserGroupRoleLocalServiceUtil {
 		return userGroupRoleLocalService.getUserGroupRole(userGroupRolePK);
 	}
 
+	public static java.util.List<com.liferay.portal.model.UserGroupRole> getUserGroupRoles(
+		int start, int end) throws com.liferay.portal.SystemException {
+		UserGroupRoleLocalService userGroupRoleLocalService = UserGroupRoleLocalServiceFactory.getService();
+
+		return userGroupRoleLocalService.getUserGroupRoles(start, end);
+	}
+
+	public static int getUserGroupRolesCount()
+		throws com.liferay.portal.SystemException {
+		UserGroupRoleLocalService userGroupRoleLocalService = UserGroupRoleLocalServiceFactory.getService();
+
+		return userGroupRoleLocalService.getUserGroupRolesCount();
+	}
+
 	public static com.liferay.portal.model.UserGroupRole updateUserGroupRole(
 		com.liferay.portal.model.UserGroupRole userGroupRole)
 		throws com.liferay.portal.SystemException {

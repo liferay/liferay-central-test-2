@@ -100,6 +100,20 @@ public class TagsPropertyLocalServiceUtil {
 		return tagsPropertyLocalService.getTagsProperty(propertyId);
 	}
 
+	public static java.util.List<com.liferay.portlet.tags.model.TagsProperty> getTagsProperties(
+		int start, int end) throws com.liferay.portal.SystemException {
+		TagsPropertyLocalService tagsPropertyLocalService = TagsPropertyLocalServiceFactory.getService();
+
+		return tagsPropertyLocalService.getTagsProperties(start, end);
+	}
+
+	public static int getTagsPropertiesCount()
+		throws com.liferay.portal.SystemException {
+		TagsPropertyLocalService tagsPropertyLocalService = TagsPropertyLocalServiceFactory.getService();
+
+		return tagsPropertyLocalService.getTagsPropertiesCount();
+	}
+
 	public static com.liferay.portlet.tags.model.TagsProperty updateTagsProperty(
 		com.liferay.portlet.tags.model.TagsProperty tagsProperty)
 		throws com.liferay.portal.SystemException {

@@ -106,6 +106,15 @@ public abstract class RatingsEntryLocalServiceBaseImpl
 		return ratingsEntryPersistence.findByPrimaryKey(entryId);
 	}
 
+	public List<RatingsEntry> getRatingsEntries(int start, int end)
+		throws SystemException {
+		return ratingsEntryPersistence.findAll(start, end);
+	}
+
+	public int getRatingsEntriesCount() throws SystemException {
+		return ratingsEntryPersistence.countAll();
+	}
+
 	public RatingsEntry updateRatingsEntry(RatingsEntry ratingsEntry)
 		throws SystemException {
 		ratingsEntry.setNew(false);

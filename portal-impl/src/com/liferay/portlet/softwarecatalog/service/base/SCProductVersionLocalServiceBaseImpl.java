@@ -110,6 +110,15 @@ public abstract class SCProductVersionLocalServiceBaseImpl
 		return scProductVersionPersistence.findByPrimaryKey(productVersionId);
 	}
 
+	public List<SCProductVersion> getSCProductVersions(int start, int end)
+		throws SystemException {
+		return scProductVersionPersistence.findAll(start, end);
+	}
+
+	public int getSCProductVersionsCount() throws SystemException {
+		return scProductVersionPersistence.countAll();
+	}
+
 	public SCProductVersion updateSCProductVersion(
 		SCProductVersion scProductVersion) throws SystemException {
 		scProductVersion.setNew(false);

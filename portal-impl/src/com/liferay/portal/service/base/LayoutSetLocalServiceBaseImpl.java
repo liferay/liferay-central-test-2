@@ -310,6 +310,15 @@ public abstract class LayoutSetLocalServiceBaseImpl
 		return layoutSetPersistence.findByPrimaryKey(layoutSetId);
 	}
 
+	public List<LayoutSet> getLayoutSets(int start, int end)
+		throws SystemException {
+		return layoutSetPersistence.findAll(start, end);
+	}
+
+	public int getLayoutSetsCount() throws SystemException {
+		return layoutSetPersistence.countAll();
+	}
+
 	public LayoutSet updateLayoutSet(LayoutSet layoutSet)
 		throws SystemException {
 		layoutSet.setNew(false);

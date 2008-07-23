@@ -101,6 +101,21 @@ public class JournalContentSearchLocalServiceUtil {
 		return journalContentSearchLocalService.getJournalContentSearch(contentSearchId);
 	}
 
+	public static java.util.List<com.liferay.portlet.journal.model.JournalContentSearch> getJournalContentSearchs(
+		int start, int end) throws com.liferay.portal.SystemException {
+		JournalContentSearchLocalService journalContentSearchLocalService = JournalContentSearchLocalServiceFactory.getService();
+
+		return journalContentSearchLocalService.getJournalContentSearchs(start,
+			end);
+	}
+
+	public static int getJournalContentSearchsCount()
+		throws com.liferay.portal.SystemException {
+		JournalContentSearchLocalService journalContentSearchLocalService = JournalContentSearchLocalServiceFactory.getService();
+
+		return journalContentSearchLocalService.getJournalContentSearchsCount();
+	}
+
 	public static com.liferay.portlet.journal.model.JournalContentSearch updateJournalContentSearch(
 		com.liferay.portlet.journal.model.JournalContentSearch journalContentSearch)
 		throws com.liferay.portal.SystemException {

@@ -100,6 +100,20 @@ public class PermissionLocalServiceUtil {
 		return permissionLocalService.getPermission(permissionId);
 	}
 
+	public static java.util.List<com.liferay.portal.model.Permission> getPermissions(
+		int start, int end) throws com.liferay.portal.SystemException {
+		PermissionLocalService permissionLocalService = PermissionLocalServiceFactory.getService();
+
+		return permissionLocalService.getPermissions(start, end);
+	}
+
+	public static int getPermissionsCount()
+		throws com.liferay.portal.SystemException {
+		PermissionLocalService permissionLocalService = PermissionLocalServiceFactory.getService();
+
+		return permissionLocalService.getPermissionsCount();
+	}
+
 	public static com.liferay.portal.model.Permission updatePermission(
 		com.liferay.portal.model.Permission permission)
 		throws com.liferay.portal.SystemException {

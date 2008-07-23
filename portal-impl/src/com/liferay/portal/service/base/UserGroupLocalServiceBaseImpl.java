@@ -310,6 +310,15 @@ public abstract class UserGroupLocalServiceBaseImpl
 		return userGroupPersistence.findByPrimaryKey(userGroupId);
 	}
 
+	public List<UserGroup> getUserGroups(int start, int end)
+		throws SystemException {
+		return userGroupPersistence.findAll(start, end);
+	}
+
+	public int getUserGroupsCount() throws SystemException {
+		return userGroupPersistence.countAll();
+	}
+
 	public UserGroup updateUserGroup(UserGroup userGroup)
 		throws SystemException {
 		userGroup.setNew(false);

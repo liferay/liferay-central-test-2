@@ -101,6 +101,21 @@ public class SCProductScreenshotLocalServiceUtil {
 		return scProductScreenshotLocalService.getSCProductScreenshot(productScreenshotId);
 	}
 
+	public static java.util.List<com.liferay.portlet.softwarecatalog.model.SCProductScreenshot> getSCProductScreenshots(
+		int start, int end) throws com.liferay.portal.SystemException {
+		SCProductScreenshotLocalService scProductScreenshotLocalService = SCProductScreenshotLocalServiceFactory.getService();
+
+		return scProductScreenshotLocalService.getSCProductScreenshots(start,
+			end);
+	}
+
+	public static int getSCProductScreenshotsCount()
+		throws com.liferay.portal.SystemException {
+		SCProductScreenshotLocalService scProductScreenshotLocalService = SCProductScreenshotLocalServiceFactory.getService();
+
+		return scProductScreenshotLocalService.getSCProductScreenshotsCount();
+	}
+
 	public static com.liferay.portlet.softwarecatalog.model.SCProductScreenshot updateSCProductScreenshot(
 		com.liferay.portlet.softwarecatalog.model.SCProductScreenshot scProductScreenshot)
 		throws com.liferay.portal.SystemException {

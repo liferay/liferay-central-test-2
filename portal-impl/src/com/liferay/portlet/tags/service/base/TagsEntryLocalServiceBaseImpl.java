@@ -113,6 +113,15 @@ public abstract class TagsEntryLocalServiceBaseImpl
 		return tagsEntryPersistence.findByPrimaryKey(entryId);
 	}
 
+	public List<TagsEntry> getTagsEntries(int start, int end)
+		throws SystemException {
+		return tagsEntryPersistence.findAll(start, end);
+	}
+
+	public int getTagsEntriesCount() throws SystemException {
+		return tagsEntryPersistence.countAll();
+	}
+
 	public TagsEntry updateTagsEntry(TagsEntry tagsEntry)
 		throws SystemException {
 		tagsEntry.setNew(false);

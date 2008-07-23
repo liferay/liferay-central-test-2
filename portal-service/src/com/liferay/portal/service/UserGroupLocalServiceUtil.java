@@ -100,6 +100,20 @@ public class UserGroupLocalServiceUtil {
 		return userGroupLocalService.getUserGroup(userGroupId);
 	}
 
+	public static java.util.List<com.liferay.portal.model.UserGroup> getUserGroups(
+		int start, int end) throws com.liferay.portal.SystemException {
+		UserGroupLocalService userGroupLocalService = UserGroupLocalServiceFactory.getService();
+
+		return userGroupLocalService.getUserGroups(start, end);
+	}
+
+	public static int getUserGroupsCount()
+		throws com.liferay.portal.SystemException {
+		UserGroupLocalService userGroupLocalService = UserGroupLocalServiceFactory.getService();
+
+		return userGroupLocalService.getUserGroupsCount();
+	}
+
 	public static com.liferay.portal.model.UserGroup updateUserGroup(
 		com.liferay.portal.model.UserGroup userGroup)
 		throws com.liferay.portal.SystemException {

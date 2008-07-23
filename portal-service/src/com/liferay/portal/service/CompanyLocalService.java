@@ -72,6 +72,11 @@ public interface CompanyLocalService {
 		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
+	public java.util.List<com.liferay.portal.model.Company> getCompanies(
+		int start, int end) throws com.liferay.portal.SystemException;
+
+	public int getCompaniesCount() throws com.liferay.portal.SystemException;
+
 	public com.liferay.portal.model.Company updateCompany(
 		com.liferay.portal.model.Company company)
 		throws com.liferay.portal.SystemException;

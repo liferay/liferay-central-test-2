@@ -74,6 +74,12 @@ public interface SCFrameworkVersionLocalService {
 		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
+	public java.util.List<com.liferay.portlet.softwarecatalog.model.SCFrameworkVersion> getSCFrameworkVersions(
+		int start, int end) throws com.liferay.portal.SystemException;
+
+	public int getSCFrameworkVersionsCount()
+		throws com.liferay.portal.SystemException;
+
 	public com.liferay.portlet.softwarecatalog.model.SCFrameworkVersion updateSCFrameworkVersion(
 		com.liferay.portlet.softwarecatalog.model.SCFrameworkVersion scFrameworkVersion)
 		throws com.liferay.portal.SystemException;

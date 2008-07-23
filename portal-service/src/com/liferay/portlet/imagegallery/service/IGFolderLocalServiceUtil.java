@@ -100,6 +100,20 @@ public class IGFolderLocalServiceUtil {
 		return igFolderLocalService.getIGFolder(folderId);
 	}
 
+	public static java.util.List<com.liferay.portlet.imagegallery.model.IGFolder> getIGFolders(
+		int start, int end) throws com.liferay.portal.SystemException {
+		IGFolderLocalService igFolderLocalService = IGFolderLocalServiceFactory.getService();
+
+		return igFolderLocalService.getIGFolders(start, end);
+	}
+
+	public static int getIGFoldersCount()
+		throws com.liferay.portal.SystemException {
+		IGFolderLocalService igFolderLocalService = IGFolderLocalServiceFactory.getService();
+
+		return igFolderLocalService.getIGFoldersCount();
+	}
+
 	public static com.liferay.portlet.imagegallery.model.IGFolder updateIGFolder(
 		com.liferay.portlet.imagegallery.model.IGFolder igFolder)
 		throws com.liferay.portal.SystemException {

@@ -103,6 +103,15 @@ public abstract class AnnouncementsDeliveryLocalServiceBaseImpl
 		return announcementsDeliveryPersistence.findByPrimaryKey(deliveryId);
 	}
 
+	public List<AnnouncementsDelivery> getAnnouncementsDeliveries(int start,
+		int end) throws SystemException {
+		return announcementsDeliveryPersistence.findAll(start, end);
+	}
+
+	public int getAnnouncementsDeliveriesCount() throws SystemException {
+		return announcementsDeliveryPersistence.countAll();
+	}
+
 	public AnnouncementsDelivery updateAnnouncementsDelivery(
 		AnnouncementsDelivery announcementsDelivery) throws SystemException {
 		announcementsDelivery.setNew(false);

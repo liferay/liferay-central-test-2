@@ -112,6 +112,15 @@ public abstract class BookmarksFolderLocalServiceBaseImpl
 		return bookmarksFolderPersistence.findByPrimaryKey(folderId);
 	}
 
+	public List<BookmarksFolder> getBookmarksFolders(int start, int end)
+		throws SystemException {
+		return bookmarksFolderPersistence.findAll(start, end);
+	}
+
+	public int getBookmarksFoldersCount() throws SystemException {
+		return bookmarksFolderPersistence.countAll();
+	}
+
 	public BookmarksFolder updateBookmarksFolder(
 		BookmarksFolder bookmarksFolder) throws SystemException {
 		bookmarksFolder.setNew(false);

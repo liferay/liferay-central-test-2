@@ -117,6 +117,15 @@ public abstract class WikiNodeLocalServiceBaseImpl
 		return wikiNodePersistence.findByPrimaryKey(nodeId);
 	}
 
+	public List<WikiNode> getWikiNodes(int start, int end)
+		throws SystemException {
+		return wikiNodePersistence.findAll(start, end);
+	}
+
+	public int getWikiNodesCount() throws SystemException {
+		return wikiNodePersistence.countAll();
+	}
+
 	public WikiNode updateWikiNode(WikiNode wikiNode) throws SystemException {
 		wikiNode.setNew(false);
 

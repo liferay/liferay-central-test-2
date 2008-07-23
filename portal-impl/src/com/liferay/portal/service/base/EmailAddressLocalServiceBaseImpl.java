@@ -311,6 +311,15 @@ public abstract class EmailAddressLocalServiceBaseImpl
 		return emailAddressPersistence.findByPrimaryKey(emailAddressId);
 	}
 
+	public List<EmailAddress> getEmailAddresss(int start, int end)
+		throws SystemException {
+		return emailAddressPersistence.findAll(start, end);
+	}
+
+	public int getEmailAddresssCount() throws SystemException {
+		return emailAddressPersistence.countAll();
+	}
+
 	public EmailAddress updateEmailAddress(EmailAddress emailAddress)
 		throws SystemException {
 		emailAddress.setNew(false);

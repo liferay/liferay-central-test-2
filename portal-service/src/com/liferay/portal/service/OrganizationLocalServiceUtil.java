@@ -100,6 +100,20 @@ public class OrganizationLocalServiceUtil {
 		return organizationLocalService.getOrganization(organizationId);
 	}
 
+	public static java.util.List<com.liferay.portal.model.Organization> getOrganizations(
+		int start, int end) throws com.liferay.portal.SystemException {
+		OrganizationLocalService organizationLocalService = OrganizationLocalServiceFactory.getService();
+
+		return organizationLocalService.getOrganizations(start, end);
+	}
+
+	public static int getOrganizationsCount()
+		throws com.liferay.portal.SystemException {
+		OrganizationLocalService organizationLocalService = OrganizationLocalServiceFactory.getService();
+
+		return organizationLocalService.getOrganizationsCount();
+	}
+
 	public static com.liferay.portal.model.Organization updateOrganization(
 		com.liferay.portal.model.Organization organization)
 		throws com.liferay.portal.SystemException {

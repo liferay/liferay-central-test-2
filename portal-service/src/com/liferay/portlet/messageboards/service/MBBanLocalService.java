@@ -72,6 +72,11 @@ public interface MBBanLocalService {
 		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
+	public java.util.List<com.liferay.portlet.messageboards.model.MBBan> getMBBans(
+		int start, int end) throws com.liferay.portal.SystemException;
+
+	public int getMBBansCount() throws com.liferay.portal.SystemException;
+
 	public com.liferay.portlet.messageboards.model.MBBan updateMBBan(
 		com.liferay.portlet.messageboards.model.MBBan mbBan)
 		throws com.liferay.portal.SystemException;

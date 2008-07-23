@@ -72,6 +72,11 @@ public interface UserLocalService {
 		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
+	public java.util.List<com.liferay.portal.model.User> getUsers(int start,
+		int end) throws com.liferay.portal.SystemException;
+
+	public int getUsersCount() throws com.liferay.portal.SystemException;
+
 	public com.liferay.portal.model.User updateUser(
 		com.liferay.portal.model.User user)
 		throws com.liferay.portal.SystemException;

@@ -74,6 +74,12 @@ public interface SocialActivityLocalService {
 		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
+	public java.util.List<com.liferay.portlet.social.model.SocialActivity> getSocialActivities(
+		int start, int end) throws com.liferay.portal.SystemException;
+
+	public int getSocialActivitiesCount()
+		throws com.liferay.portal.SystemException;
+
 	public com.liferay.portlet.social.model.SocialActivity updateSocialActivity(
 		com.liferay.portlet.social.model.SocialActivity socialActivity)
 		throws com.liferay.portal.SystemException;

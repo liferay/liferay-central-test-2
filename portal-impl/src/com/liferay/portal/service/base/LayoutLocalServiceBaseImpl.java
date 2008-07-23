@@ -337,6 +337,15 @@ public abstract class LayoutLocalServiceBaseImpl implements LayoutLocalService,
 		return layoutPersistence.findByPrimaryKey(plid);
 	}
 
+	public List<Layout> getLayouts(int start, int end)
+		throws SystemException {
+		return layoutPersistence.findAll(start, end);
+	}
+
+	public int getLayoutsCount() throws SystemException {
+		return layoutPersistence.countAll();
+	}
+
 	public Layout updateLayout(Layout layout) throws SystemException {
 		layout.setNew(false);
 

@@ -448,6 +448,14 @@ public abstract class GroupLocalServiceBaseImpl implements GroupLocalService,
 		return groupPersistence.findByPrimaryKey(groupId);
 	}
 
+	public List<Group> getGroups(int start, int end) throws SystemException {
+		return groupPersistence.findAll(start, end);
+	}
+
+	public int getGroupsCount() throws SystemException {
+		return groupPersistence.countAll();
+	}
+
 	public Group updateGroup(Group group) throws SystemException {
 		group.setNew(false);
 

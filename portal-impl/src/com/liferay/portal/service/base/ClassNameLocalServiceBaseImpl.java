@@ -310,6 +310,15 @@ public abstract class ClassNameLocalServiceBaseImpl
 		return classNamePersistence.findByPrimaryKey(classNameId);
 	}
 
+	public List<ClassName> getClassNames(int start, int end)
+		throws SystemException {
+		return classNamePersistence.findAll(start, end);
+	}
+
+	public int getClassNamesCount() throws SystemException {
+		return classNamePersistence.countAll();
+	}
+
 	public ClassName updateClassName(ClassName className)
 		throws SystemException {
 		className.setNew(false);

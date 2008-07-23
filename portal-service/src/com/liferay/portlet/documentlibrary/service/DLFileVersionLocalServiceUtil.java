@@ -100,6 +100,20 @@ public class DLFileVersionLocalServiceUtil {
 		return dlFileVersionLocalService.getDLFileVersion(fileVersionId);
 	}
 
+	public static java.util.List<com.liferay.portlet.documentlibrary.model.DLFileVersion> getDLFileVersions(
+		int start, int end) throws com.liferay.portal.SystemException {
+		DLFileVersionLocalService dlFileVersionLocalService = DLFileVersionLocalServiceFactory.getService();
+
+		return dlFileVersionLocalService.getDLFileVersions(start, end);
+	}
+
+	public static int getDLFileVersionsCount()
+		throws com.liferay.portal.SystemException {
+		DLFileVersionLocalService dlFileVersionLocalService = DLFileVersionLocalServiceFactory.getService();
+
+		return dlFileVersionLocalService.getDLFileVersionsCount();
+	}
+
 	public static com.liferay.portlet.documentlibrary.model.DLFileVersion updateDLFileVersion(
 		com.liferay.portlet.documentlibrary.model.DLFileVersion dlFileVersion)
 		throws com.liferay.portal.SystemException {

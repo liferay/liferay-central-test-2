@@ -101,6 +101,21 @@ public class AnnouncementsDeliveryLocalServiceUtil {
 		return announcementsDeliveryLocalService.getAnnouncementsDelivery(deliveryId);
 	}
 
+	public static java.util.List<com.liferay.portlet.announcements.model.AnnouncementsDelivery> getAnnouncementsDeliveries(
+		int start, int end) throws com.liferay.portal.SystemException {
+		AnnouncementsDeliveryLocalService announcementsDeliveryLocalService = AnnouncementsDeliveryLocalServiceFactory.getService();
+
+		return announcementsDeliveryLocalService.getAnnouncementsDeliveries(start,
+			end);
+	}
+
+	public static int getAnnouncementsDeliveriesCount()
+		throws com.liferay.portal.SystemException {
+		AnnouncementsDeliveryLocalService announcementsDeliveryLocalService = AnnouncementsDeliveryLocalServiceFactory.getService();
+
+		return announcementsDeliveryLocalService.getAnnouncementsDeliveriesCount();
+	}
+
 	public static com.liferay.portlet.announcements.model.AnnouncementsDelivery updateAnnouncementsDelivery(
 		com.liferay.portlet.announcements.model.AnnouncementsDelivery announcementsDelivery)
 		throws com.liferay.portal.SystemException {

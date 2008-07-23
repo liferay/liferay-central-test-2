@@ -101,6 +101,21 @@ public class JournalArticleResourceLocalServiceUtil {
 		return journalArticleResourceLocalService.getJournalArticleResource(resourcePrimKey);
 	}
 
+	public static java.util.List<com.liferay.portlet.journal.model.JournalArticleResource> getJournalArticleResources(
+		int start, int end) throws com.liferay.portal.SystemException {
+		JournalArticleResourceLocalService journalArticleResourceLocalService = JournalArticleResourceLocalServiceFactory.getService();
+
+		return journalArticleResourceLocalService.getJournalArticleResources(start,
+			end);
+	}
+
+	public static int getJournalArticleResourcesCount()
+		throws com.liferay.portal.SystemException {
+		JournalArticleResourceLocalService journalArticleResourceLocalService = JournalArticleResourceLocalServiceFactory.getService();
+
+		return journalArticleResourceLocalService.getJournalArticleResourcesCount();
+	}
+
 	public static com.liferay.portlet.journal.model.JournalArticleResource updateJournalArticleResource(
 		com.liferay.portlet.journal.model.JournalArticleResource journalArticleResource)
 		throws com.liferay.portal.SystemException {

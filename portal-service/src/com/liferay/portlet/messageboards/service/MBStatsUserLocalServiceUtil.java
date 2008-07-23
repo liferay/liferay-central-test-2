@@ -100,6 +100,20 @@ public class MBStatsUserLocalServiceUtil {
 		return mbStatsUserLocalService.getMBStatsUser(statsUserId);
 	}
 
+	public static java.util.List<com.liferay.portlet.messageboards.model.MBStatsUser> getMBStatsUsers(
+		int start, int end) throws com.liferay.portal.SystemException {
+		MBStatsUserLocalService mbStatsUserLocalService = MBStatsUserLocalServiceFactory.getService();
+
+		return mbStatsUserLocalService.getMBStatsUsers(start, end);
+	}
+
+	public static int getMBStatsUsersCount()
+		throws com.liferay.portal.SystemException {
+		MBStatsUserLocalService mbStatsUserLocalService = MBStatsUserLocalServiceFactory.getService();
+
+		return mbStatsUserLocalService.getMBStatsUsersCount();
+	}
+
 	public static com.liferay.portlet.messageboards.model.MBStatsUser updateMBStatsUser(
 		com.liferay.portlet.messageboards.model.MBStatsUser mbStatsUser)
 		throws com.liferay.portal.SystemException {

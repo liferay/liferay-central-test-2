@@ -305,6 +305,15 @@ public abstract class ReleaseLocalServiceBaseImpl implements ReleaseLocalService
 		return releasePersistence.findByPrimaryKey(releaseId);
 	}
 
+	public List<Release> getReleases(int start, int end)
+		throws SystemException {
+		return releasePersistence.findAll(start, end);
+	}
+
+	public int getReleasesCount() throws SystemException {
+		return releasePersistence.countAll();
+	}
+
 	public Release updateRelease(Release release) throws SystemException {
 		release.setNew(false);
 

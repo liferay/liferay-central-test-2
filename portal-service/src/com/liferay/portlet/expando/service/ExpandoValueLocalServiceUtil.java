@@ -100,6 +100,20 @@ public class ExpandoValueLocalServiceUtil {
 		return expandoValueLocalService.getExpandoValue(valueId);
 	}
 
+	public static java.util.List<com.liferay.portlet.expando.model.ExpandoValue> getExpandoValues(
+		int start, int end) throws com.liferay.portal.SystemException {
+		ExpandoValueLocalService expandoValueLocalService = ExpandoValueLocalServiceFactory.getService();
+
+		return expandoValueLocalService.getExpandoValues(start, end);
+	}
+
+	public static int getExpandoValuesCount()
+		throws com.liferay.portal.SystemException {
+		ExpandoValueLocalService expandoValueLocalService = ExpandoValueLocalServiceFactory.getService();
+
+		return expandoValueLocalService.getExpandoValuesCount();
+	}
+
 	public static com.liferay.portlet.expando.model.ExpandoValue updateExpandoValue(
 		com.liferay.portlet.expando.model.ExpandoValue expandoValue)
 		throws com.liferay.portal.SystemException {

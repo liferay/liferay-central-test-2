@@ -101,6 +101,20 @@ public class WikiPageResourceLocalServiceUtil {
 		return wikiPageResourceLocalService.getWikiPageResource(resourcePrimKey);
 	}
 
+	public static java.util.List<com.liferay.portlet.wiki.model.WikiPageResource> getWikiPageResources(
+		int start, int end) throws com.liferay.portal.SystemException {
+		WikiPageResourceLocalService wikiPageResourceLocalService = WikiPageResourceLocalServiceFactory.getService();
+
+		return wikiPageResourceLocalService.getWikiPageResources(start, end);
+	}
+
+	public static int getWikiPageResourcesCount()
+		throws com.liferay.portal.SystemException {
+		WikiPageResourceLocalService wikiPageResourceLocalService = WikiPageResourceLocalServiceFactory.getService();
+
+		return wikiPageResourceLocalService.getWikiPageResourcesCount();
+	}
+
 	public static com.liferay.portlet.wiki.model.WikiPageResource updateWikiPageResource(
 		com.liferay.portlet.wiki.model.WikiPageResource wikiPageResource)
 		throws com.liferay.portal.SystemException {

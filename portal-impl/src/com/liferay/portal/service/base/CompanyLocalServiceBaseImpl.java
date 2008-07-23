@@ -308,6 +308,15 @@ public abstract class CompanyLocalServiceBaseImpl implements CompanyLocalService
 		return companyPersistence.findByPrimaryKey(companyId);
 	}
 
+	public List<Company> getCompanies(int start, int end)
+		throws SystemException {
+		return companyPersistence.findAll(start, end);
+	}
+
+	public int getCompaniesCount() throws SystemException {
+		return companyPersistence.countAll();
+	}
+
 	public Company updateCompany(Company company) throws SystemException {
 		company.setNew(false);
 

@@ -313,6 +313,15 @@ public abstract class PasswordTrackerLocalServiceBaseImpl
 		return passwordTrackerPersistence.findByPrimaryKey(passwordTrackerId);
 	}
 
+	public List<PasswordTracker> getPasswordTrackers(int start, int end)
+		throws SystemException {
+		return passwordTrackerPersistence.findAll(start, end);
+	}
+
+	public int getPasswordTrackersCount() throws SystemException {
+		return passwordTrackerPersistence.countAll();
+	}
+
 	public PasswordTracker updatePasswordTracker(
 		PasswordTracker passwordTracker) throws SystemException {
 		passwordTracker.setNew(false);

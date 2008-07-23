@@ -199,6 +199,15 @@ public abstract class MBMessageLocalServiceBaseImpl
 		return mbMessagePersistence.findByPrimaryKey(messageId);
 	}
 
+	public List<MBMessage> getMBMessages(int start, int end)
+		throws SystemException {
+		return mbMessagePersistence.findAll(start, end);
+	}
+
+	public int getMBMessagesCount() throws SystemException {
+		return mbMessagePersistence.countAll();
+	}
+
 	public MBMessage updateMBMessage(MBMessage mbMessage)
 		throws SystemException {
 		mbMessage.setNew(false);

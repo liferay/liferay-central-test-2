@@ -100,6 +100,20 @@ public class TasksProposalLocalServiceUtil {
 		return tasksProposalLocalService.getTasksProposal(proposalId);
 	}
 
+	public static java.util.List<com.liferay.portlet.tasks.model.TasksProposal> getTasksProposals(
+		int start, int end) throws com.liferay.portal.SystemException {
+		TasksProposalLocalService tasksProposalLocalService = TasksProposalLocalServiceFactory.getService();
+
+		return tasksProposalLocalService.getTasksProposals(start, end);
+	}
+
+	public static int getTasksProposalsCount()
+		throws com.liferay.portal.SystemException {
+		TasksProposalLocalService tasksProposalLocalService = TasksProposalLocalServiceFactory.getService();
+
+		return tasksProposalLocalService.getTasksProposalsCount();
+	}
+
 	public static com.liferay.portlet.tasks.model.TasksProposal updateTasksProposal(
 		com.liferay.portlet.tasks.model.TasksProposal tasksProposal)
 		throws com.liferay.portal.SystemException {

@@ -134,6 +134,15 @@ public abstract class SCProductEntryLocalServiceBaseImpl
 		return scProductEntryPersistence.findByPrimaryKey(productEntryId);
 	}
 
+	public List<SCProductEntry> getSCProductEntries(int start, int end)
+		throws SystemException {
+		return scProductEntryPersistence.findAll(start, end);
+	}
+
+	public int getSCProductEntriesCount() throws SystemException {
+		return scProductEntryPersistence.countAll();
+	}
+
 	public SCProductEntry updateSCProductEntry(SCProductEntry scProductEntry)
 		throws SystemException {
 		scProductEntry.setNew(false);

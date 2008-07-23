@@ -74,6 +74,12 @@ public interface ExpandoColumnLocalService {
 		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
+	public java.util.List<com.liferay.portlet.expando.model.ExpandoColumn> getExpandoColumns(
+		int start, int end) throws com.liferay.portal.SystemException;
+
+	public int getExpandoColumnsCount()
+		throws com.liferay.portal.SystemException;
+
 	public com.liferay.portlet.expando.model.ExpandoColumn updateExpandoColumn(
 		com.liferay.portlet.expando.model.ExpandoColumn expandoColumn)
 		throws com.liferay.portal.SystemException;

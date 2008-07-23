@@ -98,6 +98,20 @@ public class CompanyLocalServiceUtil {
 		return companyLocalService.getCompany(companyId);
 	}
 
+	public static java.util.List<com.liferay.portal.model.Company> getCompanies(
+		int start, int end) throws com.liferay.portal.SystemException {
+		CompanyLocalService companyLocalService = CompanyLocalServiceFactory.getService();
+
+		return companyLocalService.getCompanies(start, end);
+	}
+
+	public static int getCompaniesCount()
+		throws com.liferay.portal.SystemException {
+		CompanyLocalService companyLocalService = CompanyLocalServiceFactory.getService();
+
+		return companyLocalService.getCompaniesCount();
+	}
+
 	public static com.liferay.portal.model.Company updateCompany(
 		com.liferay.portal.model.Company company)
 		throws com.liferay.portal.SystemException {

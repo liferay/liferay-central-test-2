@@ -119,6 +119,14 @@ public abstract class MBBanLocalServiceBaseImpl implements MBBanLocalService,
 		return mbBanPersistence.findByPrimaryKey(banId);
 	}
 
+	public List<MBBan> getMBBans(int start, int end) throws SystemException {
+		return mbBanPersistence.findAll(start, end);
+	}
+
+	public int getMBBansCount() throws SystemException {
+		return mbBanPersistence.countAll();
+	}
+
 	public MBBan updateMBBan(MBBan mbBan) throws SystemException {
 		mbBan.setNew(false);
 

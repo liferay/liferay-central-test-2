@@ -100,6 +100,20 @@ public class SubscriptionLocalServiceUtil {
 		return subscriptionLocalService.getSubscription(subscriptionId);
 	}
 
+	public static java.util.List<com.liferay.portal.model.Subscription> getSubscriptions(
+		int start, int end) throws com.liferay.portal.SystemException {
+		SubscriptionLocalService subscriptionLocalService = SubscriptionLocalServiceFactory.getService();
+
+		return subscriptionLocalService.getSubscriptions(start, end);
+	}
+
+	public static int getSubscriptionsCount()
+		throws com.liferay.portal.SystemException {
+		SubscriptionLocalService subscriptionLocalService = SubscriptionLocalServiceFactory.getService();
+
+		return subscriptionLocalService.getSubscriptionsCount();
+	}
+
 	public static com.liferay.portal.model.Subscription updateSubscription(
 		com.liferay.portal.model.Subscription subscription)
 		throws com.liferay.portal.SystemException {

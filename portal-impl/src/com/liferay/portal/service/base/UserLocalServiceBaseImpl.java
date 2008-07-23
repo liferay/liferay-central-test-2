@@ -364,6 +364,14 @@ public abstract class UserLocalServiceBaseImpl implements UserLocalService,
 		return userPersistence.findByPrimaryKey(userId);
 	}
 
+	public List<User> getUsers(int start, int end) throws SystemException {
+		return userPersistence.findAll(start, end);
+	}
+
+	public int getUsersCount() throws SystemException {
+		return userPersistence.countAll();
+	}
+
 	public User updateUser(User user) throws SystemException {
 		user.setNew(false);
 

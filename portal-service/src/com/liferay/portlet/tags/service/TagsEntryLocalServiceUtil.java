@@ -100,6 +100,20 @@ public class TagsEntryLocalServiceUtil {
 		return tagsEntryLocalService.getTagsEntry(entryId);
 	}
 
+	public static java.util.List<com.liferay.portlet.tags.model.TagsEntry> getTagsEntries(
+		int start, int end) throws com.liferay.portal.SystemException {
+		TagsEntryLocalService tagsEntryLocalService = TagsEntryLocalServiceFactory.getService();
+
+		return tagsEntryLocalService.getTagsEntries(start, end);
+	}
+
+	public static int getTagsEntriesCount()
+		throws com.liferay.portal.SystemException {
+		TagsEntryLocalService tagsEntryLocalService = TagsEntryLocalServiceFactory.getService();
+
+		return tagsEntryLocalService.getTagsEntriesCount();
+	}
+
 	public static com.liferay.portlet.tags.model.TagsEntry updateTagsEntry(
 		com.liferay.portlet.tags.model.TagsEntry tagsEntry)
 		throws com.liferay.portal.SystemException {

@@ -74,6 +74,12 @@ public interface JournalArticleResourceLocalService {
 		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
+	public java.util.List<com.liferay.portlet.journal.model.JournalArticleResource> getJournalArticleResources(
+		int start, int end) throws com.liferay.portal.SystemException;
+
+	public int getJournalArticleResourcesCount()
+		throws com.liferay.portal.SystemException;
+
 	public com.liferay.portlet.journal.model.JournalArticleResource updateJournalArticleResource(
 		com.liferay.portlet.journal.model.JournalArticleResource journalArticleResource)
 		throws com.liferay.portal.SystemException;

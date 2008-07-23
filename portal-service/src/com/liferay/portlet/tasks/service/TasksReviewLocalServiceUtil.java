@@ -100,6 +100,20 @@ public class TasksReviewLocalServiceUtil {
 		return tasksReviewLocalService.getTasksReview(reviewId);
 	}
 
+	public static java.util.List<com.liferay.portlet.tasks.model.TasksReview> getTasksReviews(
+		int start, int end) throws com.liferay.portal.SystemException {
+		TasksReviewLocalService tasksReviewLocalService = TasksReviewLocalServiceFactory.getService();
+
+		return tasksReviewLocalService.getTasksReviews(start, end);
+	}
+
+	public static int getTasksReviewsCount()
+		throws com.liferay.portal.SystemException {
+		TasksReviewLocalService tasksReviewLocalService = TasksReviewLocalServiceFactory.getService();
+
+		return tasksReviewLocalService.getTasksReviewsCount();
+	}
+
 	public static com.liferay.portlet.tasks.model.TasksReview updateTasksReview(
 		com.liferay.portlet.tasks.model.TasksReview tasksReview)
 		throws com.liferay.portal.SystemException {

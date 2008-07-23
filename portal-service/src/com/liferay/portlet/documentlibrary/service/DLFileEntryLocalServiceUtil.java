@@ -100,6 +100,20 @@ public class DLFileEntryLocalServiceUtil {
 		return dlFileEntryLocalService.getDLFileEntry(fileEntryId);
 	}
 
+	public static java.util.List<com.liferay.portlet.documentlibrary.model.DLFileEntry> getDLFileEntries(
+		int start, int end) throws com.liferay.portal.SystemException {
+		DLFileEntryLocalService dlFileEntryLocalService = DLFileEntryLocalServiceFactory.getService();
+
+		return dlFileEntryLocalService.getDLFileEntries(start, end);
+	}
+
+	public static int getDLFileEntriesCount()
+		throws com.liferay.portal.SystemException {
+		DLFileEntryLocalService dlFileEntryLocalService = DLFileEntryLocalServiceFactory.getService();
+
+		return dlFileEntryLocalService.getDLFileEntriesCount();
+	}
+
 	public static com.liferay.portlet.documentlibrary.model.DLFileEntry updateDLFileEntry(
 		com.liferay.portlet.documentlibrary.model.DLFileEntry dlFileEntry)
 		throws com.liferay.portal.SystemException {

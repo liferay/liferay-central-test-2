@@ -74,6 +74,12 @@ public interface DLFileEntryLocalService {
 		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
+	public java.util.List<com.liferay.portlet.documentlibrary.model.DLFileEntry> getDLFileEntries(
+		int start, int end) throws com.liferay.portal.SystemException;
+
+	public int getDLFileEntriesCount()
+		throws com.liferay.portal.SystemException;
+
 	public com.liferay.portlet.documentlibrary.model.DLFileEntry updateDLFileEntry(
 		com.liferay.portlet.documentlibrary.model.DLFileEntry dlFileEntry)
 		throws com.liferay.portal.SystemException;

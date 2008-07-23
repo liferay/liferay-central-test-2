@@ -74,6 +74,12 @@ public interface ShoppingCategoryLocalService {
 		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
+	public java.util.List<com.liferay.portlet.shopping.model.ShoppingCategory> getShoppingCategories(
+		int start, int end) throws com.liferay.portal.SystemException;
+
+	public int getShoppingCategoriesCount()
+		throws com.liferay.portal.SystemException;
+
 	public com.liferay.portlet.shopping.model.ShoppingCategory updateShoppingCategory(
 		com.liferay.portlet.shopping.model.ShoppingCategory shoppingCategory)
 		throws com.liferay.portal.SystemException;

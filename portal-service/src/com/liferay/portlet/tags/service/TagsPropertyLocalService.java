@@ -74,6 +74,12 @@ public interface TagsPropertyLocalService {
 		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
+	public java.util.List<com.liferay.portlet.tags.model.TagsProperty> getTagsProperties(
+		int start, int end) throws com.liferay.portal.SystemException;
+
+	public int getTagsPropertiesCount()
+		throws com.liferay.portal.SystemException;
+
 	public com.liferay.portlet.tags.model.TagsProperty updateTagsProperty(
 		com.liferay.portlet.tags.model.TagsProperty tagsProperty)
 		throws com.liferay.portal.SystemException;

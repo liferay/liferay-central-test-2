@@ -72,6 +72,11 @@ public interface WikiNodeLocalService {
 		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
+	public java.util.List<com.liferay.portlet.wiki.model.WikiNode> getWikiNodes(
+		int start, int end) throws com.liferay.portal.SystemException;
+
+	public int getWikiNodesCount() throws com.liferay.portal.SystemException;
+
 	public com.liferay.portlet.wiki.model.WikiNode updateWikiNode(
 		com.liferay.portlet.wiki.model.WikiNode wikiNode)
 		throws com.liferay.portal.SystemException;

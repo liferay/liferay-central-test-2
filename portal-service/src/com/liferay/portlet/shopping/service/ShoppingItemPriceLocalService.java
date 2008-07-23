@@ -74,6 +74,12 @@ public interface ShoppingItemPriceLocalService {
 		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
+	public java.util.List<com.liferay.portlet.shopping.model.ShoppingItemPrice> getShoppingItemPrices(
+		int start, int end) throws com.liferay.portal.SystemException;
+
+	public int getShoppingItemPricesCount()
+		throws com.liferay.portal.SystemException;
+
 	public com.liferay.portlet.shopping.model.ShoppingItemPrice updateShoppingItemPrice(
 		com.liferay.portlet.shopping.model.ShoppingItemPrice shoppingItemPrice)
 		throws com.liferay.portal.SystemException;

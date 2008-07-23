@@ -183,6 +183,15 @@ public abstract class TagsAssetLocalServiceBaseImpl
 		return tagsAssetPersistence.findByPrimaryKey(assetId);
 	}
 
+	public List<TagsAsset> getTagsAssets(int start, int end)
+		throws SystemException {
+		return tagsAssetPersistence.findAll(start, end);
+	}
+
+	public int getTagsAssetsCount() throws SystemException {
+		return tagsAssetPersistence.countAll();
+	}
+
 	public TagsAsset updateTagsAsset(TagsAsset tagsAsset)
 		throws SystemException {
 		tagsAsset.setNew(false);

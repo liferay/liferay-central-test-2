@@ -74,6 +74,12 @@ public interface JournalContentSearchLocalService {
 		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
+	public java.util.List<com.liferay.portlet.journal.model.JournalContentSearch> getJournalContentSearchs(
+		int start, int end) throws com.liferay.portal.SystemException;
+
+	public int getJournalContentSearchsCount()
+		throws com.liferay.portal.SystemException;
+
 	public com.liferay.portlet.journal.model.JournalContentSearch updateJournalContentSearch(
 		com.liferay.portlet.journal.model.JournalContentSearch journalContentSearch)
 		throws com.liferay.portal.SystemException;

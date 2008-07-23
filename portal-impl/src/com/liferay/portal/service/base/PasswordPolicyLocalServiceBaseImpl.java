@@ -311,6 +311,15 @@ public abstract class PasswordPolicyLocalServiceBaseImpl
 		return passwordPolicyPersistence.findByPrimaryKey(passwordPolicyId);
 	}
 
+	public List<PasswordPolicy> getPasswordPolicies(int start, int end)
+		throws SystemException {
+		return passwordPolicyPersistence.findAll(start, end);
+	}
+
+	public int getPasswordPoliciesCount() throws SystemException {
+		return passwordPolicyPersistence.countAll();
+	}
+
 	public PasswordPolicy updatePasswordPolicy(PasswordPolicy passwordPolicy)
 		throws SystemException {
 		passwordPolicy.setNew(false);

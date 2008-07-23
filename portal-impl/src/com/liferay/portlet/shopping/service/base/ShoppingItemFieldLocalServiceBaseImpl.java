@@ -117,6 +117,15 @@ public abstract class ShoppingItemFieldLocalServiceBaseImpl
 		return shoppingItemFieldPersistence.findByPrimaryKey(itemFieldId);
 	}
 
+	public List<ShoppingItemField> getShoppingItemFields(int start, int end)
+		throws SystemException {
+		return shoppingItemFieldPersistence.findAll(start, end);
+	}
+
+	public int getShoppingItemFieldsCount() throws SystemException {
+		return shoppingItemFieldPersistence.countAll();
+	}
+
 	public ShoppingItemField updateShoppingItemField(
 		ShoppingItemField shoppingItemField) throws SystemException {
 		shoppingItemField.setNew(false);

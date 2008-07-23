@@ -74,6 +74,11 @@ public interface PortletItemLocalService {
 		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
+	public java.util.List<com.liferay.portal.model.PortletItem> getPortletItems(
+		int start, int end) throws com.liferay.portal.SystemException;
+
+	public int getPortletItemsCount() throws com.liferay.portal.SystemException;
+
 	public com.liferay.portal.model.PortletItem updatePortletItem(
 		com.liferay.portal.model.PortletItem portletItem)
 		throws com.liferay.portal.SystemException;

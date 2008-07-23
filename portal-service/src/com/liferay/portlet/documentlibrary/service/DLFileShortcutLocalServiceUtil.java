@@ -100,6 +100,20 @@ public class DLFileShortcutLocalServiceUtil {
 		return dlFileShortcutLocalService.getDLFileShortcut(fileShortcutId);
 	}
 
+	public static java.util.List<com.liferay.portlet.documentlibrary.model.DLFileShortcut> getDLFileShortcuts(
+		int start, int end) throws com.liferay.portal.SystemException {
+		DLFileShortcutLocalService dlFileShortcutLocalService = DLFileShortcutLocalServiceFactory.getService();
+
+		return dlFileShortcutLocalService.getDLFileShortcuts(start, end);
+	}
+
+	public static int getDLFileShortcutsCount()
+		throws com.liferay.portal.SystemException {
+		DLFileShortcutLocalService dlFileShortcutLocalService = DLFileShortcutLocalServiceFactory.getService();
+
+		return dlFileShortcutLocalService.getDLFileShortcutsCount();
+	}
+
 	public static com.liferay.portlet.documentlibrary.model.DLFileShortcut updateDLFileShortcut(
 		com.liferay.portlet.documentlibrary.model.DLFileShortcut dlFileShortcut)
 		throws com.liferay.portal.SystemException {

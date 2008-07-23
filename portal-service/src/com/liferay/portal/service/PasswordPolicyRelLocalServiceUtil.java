@@ -101,6 +101,20 @@ public class PasswordPolicyRelLocalServiceUtil {
 		return passwordPolicyRelLocalService.getPasswordPolicyRel(passwordPolicyRelId);
 	}
 
+	public static java.util.List<com.liferay.portal.model.PasswordPolicyRel> getPasswordPolicyRels(
+		int start, int end) throws com.liferay.portal.SystemException {
+		PasswordPolicyRelLocalService passwordPolicyRelLocalService = PasswordPolicyRelLocalServiceFactory.getService();
+
+		return passwordPolicyRelLocalService.getPasswordPolicyRels(start, end);
+	}
+
+	public static int getPasswordPolicyRelsCount()
+		throws com.liferay.portal.SystemException {
+		PasswordPolicyRelLocalService passwordPolicyRelLocalService = PasswordPolicyRelLocalServiceFactory.getService();
+
+		return passwordPolicyRelLocalService.getPasswordPolicyRelsCount();
+	}
+
 	public static com.liferay.portal.model.PasswordPolicyRel updatePasswordPolicyRel(
 		com.liferay.portal.model.PasswordPolicyRel passwordPolicyRel)
 		throws com.liferay.portal.SystemException {

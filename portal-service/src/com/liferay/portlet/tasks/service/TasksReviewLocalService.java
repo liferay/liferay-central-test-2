@@ -74,6 +74,11 @@ public interface TasksReviewLocalService {
 		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
+	public java.util.List<com.liferay.portlet.tasks.model.TasksReview> getTasksReviews(
+		int start, int end) throws com.liferay.portal.SystemException;
+
+	public int getTasksReviewsCount() throws com.liferay.portal.SystemException;
+
 	public com.liferay.portlet.tasks.model.TasksReview updateTasksReview(
 		com.liferay.portlet.tasks.model.TasksReview tasksReview)
 		throws com.liferay.portal.SystemException;

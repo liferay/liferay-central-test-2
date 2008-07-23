@@ -98,6 +98,19 @@ public class UserLocalServiceUtil {
 		return userLocalService.getUser(userId);
 	}
 
+	public static java.util.List<com.liferay.portal.model.User> getUsers(
+		int start, int end) throws com.liferay.portal.SystemException {
+		UserLocalService userLocalService = UserLocalServiceFactory.getService();
+
+		return userLocalService.getUsers(start, end);
+	}
+
+	public static int getUsersCount() throws com.liferay.portal.SystemException {
+		UserLocalService userLocalService = UserLocalServiceFactory.getService();
+
+		return userLocalService.getUsersCount();
+	}
+
 	public static com.liferay.portal.model.User updateUser(
 		com.liferay.portal.model.User user)
 		throws com.liferay.portal.SystemException {

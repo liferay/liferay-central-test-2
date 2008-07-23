@@ -98,6 +98,20 @@ public class PhoneLocalServiceUtil {
 		return phoneLocalService.getPhone(phoneId);
 	}
 
+	public static java.util.List<com.liferay.portal.model.Phone> getPhones(
+		int start, int end) throws com.liferay.portal.SystemException {
+		PhoneLocalService phoneLocalService = PhoneLocalServiceFactory.getService();
+
+		return phoneLocalService.getPhones(start, end);
+	}
+
+	public static int getPhonesCount()
+		throws com.liferay.portal.SystemException {
+		PhoneLocalService phoneLocalService = PhoneLocalServiceFactory.getService();
+
+		return phoneLocalService.getPhonesCount();
+	}
+
 	public static com.liferay.portal.model.Phone updatePhone(
 		com.liferay.portal.model.Phone phone)
 		throws com.liferay.portal.SystemException {

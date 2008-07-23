@@ -100,6 +100,20 @@ public class MBMessageLocalServiceUtil {
 		return mbMessageLocalService.getMBMessage(messageId);
 	}
 
+	public static java.util.List<com.liferay.portlet.messageboards.model.MBMessage> getMBMessages(
+		int start, int end) throws com.liferay.portal.SystemException {
+		MBMessageLocalService mbMessageLocalService = MBMessageLocalServiceFactory.getService();
+
+		return mbMessageLocalService.getMBMessages(start, end);
+	}
+
+	public static int getMBMessagesCount()
+		throws com.liferay.portal.SystemException {
+		MBMessageLocalService mbMessageLocalService = MBMessageLocalServiceFactory.getService();
+
+		return mbMessageLocalService.getMBMessagesCount();
+	}
+
 	public static com.liferay.portlet.messageboards.model.MBMessage updateMBMessage(
 		com.liferay.portlet.messageboards.model.MBMessage mbMessage)
 		throws com.liferay.portal.SystemException {

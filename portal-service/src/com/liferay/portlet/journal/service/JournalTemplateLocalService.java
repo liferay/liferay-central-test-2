@@ -74,6 +74,12 @@ public interface JournalTemplateLocalService {
 		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
+	public java.util.List<com.liferay.portlet.journal.model.JournalTemplate> getJournalTemplates(
+		int start, int end) throws com.liferay.portal.SystemException;
+
+	public int getJournalTemplatesCount()
+		throws com.liferay.portal.SystemException;
+
 	public com.liferay.portlet.journal.model.JournalTemplate updateJournalTemplate(
 		com.liferay.portlet.journal.model.JournalTemplate journalTemplate)
 		throws com.liferay.portal.SystemException;

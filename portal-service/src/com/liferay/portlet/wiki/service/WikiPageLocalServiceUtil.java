@@ -100,6 +100,20 @@ public class WikiPageLocalServiceUtil {
 		return wikiPageLocalService.getWikiPage(pageId);
 	}
 
+	public static java.util.List<com.liferay.portlet.wiki.model.WikiPage> getWikiPages(
+		int start, int end) throws com.liferay.portal.SystemException {
+		WikiPageLocalService wikiPageLocalService = WikiPageLocalServiceFactory.getService();
+
+		return wikiPageLocalService.getWikiPages(start, end);
+	}
+
+	public static int getWikiPagesCount()
+		throws com.liferay.portal.SystemException {
+		WikiPageLocalService wikiPageLocalService = WikiPageLocalServiceFactory.getService();
+
+		return wikiPageLocalService.getWikiPagesCount();
+	}
+
 	public static com.liferay.portlet.wiki.model.WikiPage updateWikiPage(
 		com.liferay.portlet.wiki.model.WikiPage wikiPage)
 		throws com.liferay.portal.SystemException {

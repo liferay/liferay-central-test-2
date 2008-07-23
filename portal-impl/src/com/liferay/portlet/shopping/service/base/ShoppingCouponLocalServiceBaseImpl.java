@@ -128,6 +128,15 @@ public abstract class ShoppingCouponLocalServiceBaseImpl
 		return shoppingCouponPersistence.findByPrimaryKey(couponId);
 	}
 
+	public List<ShoppingCoupon> getShoppingCoupons(int start, int end)
+		throws SystemException {
+		return shoppingCouponPersistence.findAll(start, end);
+	}
+
+	public int getShoppingCouponsCount() throws SystemException {
+		return shoppingCouponPersistence.countAll();
+	}
+
 	public ShoppingCoupon updateShoppingCoupon(ShoppingCoupon shoppingCoupon)
 		throws SystemException {
 		shoppingCoupon.setNew(false);

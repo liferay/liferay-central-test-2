@@ -308,6 +308,15 @@ public abstract class ResourceLocalServiceBaseImpl
 		return resourcePersistence.findByPrimaryKey(resourceId);
 	}
 
+	public List<Resource> getResources(int start, int end)
+		throws SystemException {
+		return resourcePersistence.findAll(start, end);
+	}
+
+	public int getResourcesCount() throws SystemException {
+		return resourcePersistence.countAll();
+	}
+
 	public Resource updateResource(Resource resource) throws SystemException {
 		resource.setNew(false);
 

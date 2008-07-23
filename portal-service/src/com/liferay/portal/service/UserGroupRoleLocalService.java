@@ -75,6 +75,12 @@ public interface UserGroupRoleLocalService {
 		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
+	public java.util.List<com.liferay.portal.model.UserGroupRole> getUserGroupRoles(
+		int start, int end) throws com.liferay.portal.SystemException;
+
+	public int getUserGroupRolesCount()
+		throws com.liferay.portal.SystemException;
+
 	public com.liferay.portal.model.UserGroupRole updateUserGroupRole(
 		com.liferay.portal.model.UserGroupRole userGroupRole)
 		throws com.liferay.portal.SystemException;

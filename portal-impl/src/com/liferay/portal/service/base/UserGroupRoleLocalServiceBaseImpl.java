@@ -307,6 +307,15 @@ public abstract class UserGroupRoleLocalServiceBaseImpl
 		return userGroupRolePersistence.findByPrimaryKey(userGroupRolePK);
 	}
 
+	public List<UserGroupRole> getUserGroupRoles(int start, int end)
+		throws SystemException {
+		return userGroupRolePersistence.findAll(start, end);
+	}
+
+	public int getUserGroupRolesCount() throws SystemException {
+		return userGroupRolePersistence.countAll();
+	}
+
 	public UserGroupRole updateUserGroupRole(UserGroupRole userGroupRole)
 		throws SystemException {
 		userGroupRole.setNew(false);

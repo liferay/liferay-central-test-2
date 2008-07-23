@@ -118,6 +118,15 @@ public abstract class TasksProposalLocalServiceBaseImpl
 		return tasksProposalPersistence.findByPrimaryKey(proposalId);
 	}
 
+	public List<TasksProposal> getTasksProposals(int start, int end)
+		throws SystemException {
+		return tasksProposalPersistence.findAll(start, end);
+	}
+
+	public int getTasksProposalsCount() throws SystemException {
+		return tasksProposalPersistence.countAll();
+	}
+
 	public TasksProposal updateTasksProposal(TasksProposal tasksProposal)
 		throws SystemException {
 		tasksProposal.setNew(false);

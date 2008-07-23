@@ -100,6 +100,20 @@ public class CalEventLocalServiceUtil {
 		return calEventLocalService.getCalEvent(eventId);
 	}
 
+	public static java.util.List<com.liferay.portlet.calendar.model.CalEvent> getCalEvents(
+		int start, int end) throws com.liferay.portal.SystemException {
+		CalEventLocalService calEventLocalService = CalEventLocalServiceFactory.getService();
+
+		return calEventLocalService.getCalEvents(start, end);
+	}
+
+	public static int getCalEventsCount()
+		throws com.liferay.portal.SystemException {
+		CalEventLocalService calEventLocalService = CalEventLocalServiceFactory.getService();
+
+		return calEventLocalService.getCalEventsCount();
+	}
+
 	public static com.liferay.portlet.calendar.model.CalEvent updateCalEvent(
 		com.liferay.portlet.calendar.model.CalEvent calEvent)
 		throws com.liferay.portal.SystemException {

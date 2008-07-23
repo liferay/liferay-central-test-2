@@ -100,6 +100,20 @@ public class SocialActivityLocalServiceUtil {
 		return socialActivityLocalService.getSocialActivity(activityId);
 	}
 
+	public static java.util.List<com.liferay.portlet.social.model.SocialActivity> getSocialActivities(
+		int start, int end) throws com.liferay.portal.SystemException {
+		SocialActivityLocalService socialActivityLocalService = SocialActivityLocalServiceFactory.getService();
+
+		return socialActivityLocalService.getSocialActivities(start, end);
+	}
+
+	public static int getSocialActivitiesCount()
+		throws com.liferay.portal.SystemException {
+		SocialActivityLocalService socialActivityLocalService = SocialActivityLocalServiceFactory.getService();
+
+		return socialActivityLocalService.getSocialActivitiesCount();
+	}
+
 	public static com.liferay.portlet.social.model.SocialActivity updateSocialActivity(
 		com.liferay.portlet.social.model.SocialActivity socialActivity)
 		throws com.liferay.portal.SystemException {

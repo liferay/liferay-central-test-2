@@ -101,6 +101,20 @@ public class ShoppingItemPriceLocalServiceUtil {
 		return shoppingItemPriceLocalService.getShoppingItemPrice(itemPriceId);
 	}
 
+	public static java.util.List<com.liferay.portlet.shopping.model.ShoppingItemPrice> getShoppingItemPrices(
+		int start, int end) throws com.liferay.portal.SystemException {
+		ShoppingItemPriceLocalService shoppingItemPriceLocalService = ShoppingItemPriceLocalServiceFactory.getService();
+
+		return shoppingItemPriceLocalService.getShoppingItemPrices(start, end);
+	}
+
+	public static int getShoppingItemPricesCount()
+		throws com.liferay.portal.SystemException {
+		ShoppingItemPriceLocalService shoppingItemPriceLocalService = ShoppingItemPriceLocalServiceFactory.getService();
+
+		return shoppingItemPriceLocalService.getShoppingItemPricesCount();
+	}
+
 	public static com.liferay.portlet.shopping.model.ShoppingItemPrice updateShoppingItemPrice(
 		com.liferay.portlet.shopping.model.ShoppingItemPrice shoppingItemPrice)
 		throws com.liferay.portal.SystemException {

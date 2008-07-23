@@ -74,6 +74,11 @@ public interface MBMessageLocalService {
 		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
+	public java.util.List<com.liferay.portlet.messageboards.model.MBMessage> getMBMessages(
+		int start, int end) throws com.liferay.portal.SystemException;
+
+	public int getMBMessagesCount() throws com.liferay.portal.SystemException;
+
 	public com.liferay.portlet.messageboards.model.MBMessage updateMBMessage(
 		com.liferay.portlet.messageboards.model.MBMessage mbMessage)
 		throws com.liferay.portal.SystemException;

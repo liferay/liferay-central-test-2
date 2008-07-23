@@ -100,6 +100,20 @@ public class WikiNodeLocalServiceUtil {
 		return wikiNodeLocalService.getWikiNode(nodeId);
 	}
 
+	public static java.util.List<com.liferay.portlet.wiki.model.WikiNode> getWikiNodes(
+		int start, int end) throws com.liferay.portal.SystemException {
+		WikiNodeLocalService wikiNodeLocalService = WikiNodeLocalServiceFactory.getService();
+
+		return wikiNodeLocalService.getWikiNodes(start, end);
+	}
+
+	public static int getWikiNodesCount()
+		throws com.liferay.portal.SystemException {
+		WikiNodeLocalService wikiNodeLocalService = WikiNodeLocalServiceFactory.getService();
+
+		return wikiNodeLocalService.getWikiNodesCount();
+	}
+
 	public static com.liferay.portlet.wiki.model.WikiNode updateWikiNode(
 		com.liferay.portlet.wiki.model.WikiNode wikiNode)
 		throws com.liferay.portal.SystemException {

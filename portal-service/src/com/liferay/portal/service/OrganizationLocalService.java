@@ -74,6 +74,12 @@ public interface OrganizationLocalService {
 		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
+	public java.util.List<com.liferay.portal.model.Organization> getOrganizations(
+		int start, int end) throws com.liferay.portal.SystemException;
+
+	public int getOrganizationsCount()
+		throws com.liferay.portal.SystemException;
+
 	public com.liferay.portal.model.Organization updateOrganization(
 		com.liferay.portal.model.Organization organization)
 		throws com.liferay.portal.SystemException;

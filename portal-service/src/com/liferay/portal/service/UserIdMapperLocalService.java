@@ -74,6 +74,12 @@ public interface UserIdMapperLocalService {
 		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
+	public java.util.List<com.liferay.portal.model.UserIdMapper> getUserIdMappers(
+		int start, int end) throws com.liferay.portal.SystemException;
+
+	public int getUserIdMappersCount()
+		throws com.liferay.portal.SystemException;
+
 	public com.liferay.portal.model.UserIdMapper updateUserIdMapper(
 		com.liferay.portal.model.UserIdMapper userIdMapper)
 		throws com.liferay.portal.SystemException;

@@ -100,6 +100,20 @@ public class UserIdMapperLocalServiceUtil {
 		return userIdMapperLocalService.getUserIdMapper(userIdMapperId);
 	}
 
+	public static java.util.List<com.liferay.portal.model.UserIdMapper> getUserIdMappers(
+		int start, int end) throws com.liferay.portal.SystemException {
+		UserIdMapperLocalService userIdMapperLocalService = UserIdMapperLocalServiceFactory.getService();
+
+		return userIdMapperLocalService.getUserIdMappers(start, end);
+	}
+
+	public static int getUserIdMappersCount()
+		throws com.liferay.portal.SystemException {
+		UserIdMapperLocalService userIdMapperLocalService = UserIdMapperLocalServiceFactory.getService();
+
+		return userIdMapperLocalService.getUserIdMappersCount();
+	}
+
 	public static com.liferay.portal.model.UserIdMapper updateUserIdMapper(
 		com.liferay.portal.model.UserIdMapper userIdMapper)
 		throws com.liferay.portal.SystemException {

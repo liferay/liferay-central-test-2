@@ -311,6 +311,15 @@ public abstract class OrganizationLocalServiceBaseImpl
 		return organizationPersistence.findByPrimaryKey(organizationId);
 	}
 
+	public List<Organization> getOrganizations(int start, int end)
+		throws SystemException {
+		return organizationPersistence.findAll(start, end);
+	}
+
+	public int getOrganizationsCount() throws SystemException {
+		return organizationPersistence.countAll();
+	}
+
 	public Organization updateOrganization(Organization organization)
 		throws SystemException {
 		organization.setNew(false);

@@ -100,6 +100,20 @@ public class UserTrackerPathLocalServiceUtil {
 		return userTrackerPathLocalService.getUserTrackerPath(userTrackerPathId);
 	}
 
+	public static java.util.List<com.liferay.portal.model.UserTrackerPath> getUserTrackerPaths(
+		int start, int end) throws com.liferay.portal.SystemException {
+		UserTrackerPathLocalService userTrackerPathLocalService = UserTrackerPathLocalServiceFactory.getService();
+
+		return userTrackerPathLocalService.getUserTrackerPaths(start, end);
+	}
+
+	public static int getUserTrackerPathsCount()
+		throws com.liferay.portal.SystemException {
+		UserTrackerPathLocalService userTrackerPathLocalService = UserTrackerPathLocalServiceFactory.getService();
+
+		return userTrackerPathLocalService.getUserTrackerPathsCount();
+	}
+
 	public static com.liferay.portal.model.UserTrackerPath updateUserTrackerPath(
 		com.liferay.portal.model.UserTrackerPath userTrackerPath)
 		throws com.liferay.portal.SystemException {

@@ -98,6 +98,20 @@ public class ContactLocalServiceUtil {
 		return contactLocalService.getContact(contactId);
 	}
 
+	public static java.util.List<com.liferay.portal.model.Contact> getContacts(
+		int start, int end) throws com.liferay.portal.SystemException {
+		ContactLocalService contactLocalService = ContactLocalServiceFactory.getService();
+
+		return contactLocalService.getContacts(start, end);
+	}
+
+	public static int getContactsCount()
+		throws com.liferay.portal.SystemException {
+		ContactLocalService contactLocalService = ContactLocalServiceFactory.getService();
+
+		return contactLocalService.getContactsCount();
+	}
+
 	public static com.liferay.portal.model.Contact updateContact(
 		com.liferay.portal.model.Contact contact)
 		throws com.liferay.portal.SystemException {

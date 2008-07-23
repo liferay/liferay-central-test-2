@@ -100,6 +100,20 @@ public class BlogsEntryLocalServiceUtil {
 		return blogsEntryLocalService.getBlogsEntry(entryId);
 	}
 
+	public static java.util.List<com.liferay.portlet.blogs.model.BlogsEntry> getBlogsEntries(
+		int start, int end) throws com.liferay.portal.SystemException {
+		BlogsEntryLocalService blogsEntryLocalService = BlogsEntryLocalServiceFactory.getService();
+
+		return blogsEntryLocalService.getBlogsEntries(start, end);
+	}
+
+	public static int getBlogsEntriesCount()
+		throws com.liferay.portal.SystemException {
+		BlogsEntryLocalService blogsEntryLocalService = BlogsEntryLocalServiceFactory.getService();
+
+		return blogsEntryLocalService.getBlogsEntriesCount();
+	}
+
 	public static com.liferay.portlet.blogs.model.BlogsEntry updateBlogsEntry(
 		com.liferay.portlet.blogs.model.BlogsEntry blogsEntry)
 		throws com.liferay.portal.SystemException {

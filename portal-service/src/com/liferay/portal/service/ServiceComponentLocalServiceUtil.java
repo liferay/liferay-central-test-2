@@ -101,6 +101,20 @@ public class ServiceComponentLocalServiceUtil {
 		return serviceComponentLocalService.getServiceComponent(serviceComponentId);
 	}
 
+	public static java.util.List<com.liferay.portal.model.ServiceComponent> getServiceComponents(
+		int start, int end) throws com.liferay.portal.SystemException {
+		ServiceComponentLocalService serviceComponentLocalService = ServiceComponentLocalServiceFactory.getService();
+
+		return serviceComponentLocalService.getServiceComponents(start, end);
+	}
+
+	public static int getServiceComponentsCount()
+		throws com.liferay.portal.SystemException {
+		ServiceComponentLocalService serviceComponentLocalService = ServiceComponentLocalServiceFactory.getService();
+
+		return serviceComponentLocalService.getServiceComponentsCount();
+	}
+
 	public static com.liferay.portal.model.ServiceComponent updateServiceComponent(
 		com.liferay.portal.model.ServiceComponent serviceComponent)
 		throws com.liferay.portal.SystemException {

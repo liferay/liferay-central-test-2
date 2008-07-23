@@ -136,6 +136,15 @@ public abstract class ShoppingCategoryLocalServiceBaseImpl
 		return shoppingCategoryPersistence.findByPrimaryKey(categoryId);
 	}
 
+	public List<ShoppingCategory> getShoppingCategories(int start, int end)
+		throws SystemException {
+		return shoppingCategoryPersistence.findAll(start, end);
+	}
+
+	public int getShoppingCategoriesCount() throws SystemException {
+		return shoppingCategoryPersistence.countAll();
+	}
+
 	public ShoppingCategory updateShoppingCategory(
 		ShoppingCategory shoppingCategory) throws SystemException {
 		shoppingCategory.setNew(false);

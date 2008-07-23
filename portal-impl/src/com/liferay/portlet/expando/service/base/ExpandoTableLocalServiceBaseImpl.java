@@ -98,6 +98,15 @@ public abstract class ExpandoTableLocalServiceBaseImpl
 		return expandoTablePersistence.findByPrimaryKey(tableId);
 	}
 
+	public List<ExpandoTable> getExpandoTables(int start, int end)
+		throws SystemException {
+		return expandoTablePersistence.findAll(start, end);
+	}
+
+	public int getExpandoTablesCount() throws SystemException {
+		return expandoTablePersistence.countAll();
+	}
+
 	public ExpandoTable updateExpandoTable(ExpandoTable expandoTable)
 		throws SystemException {
 		expandoTable.setNew(false);

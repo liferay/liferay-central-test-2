@@ -74,6 +74,11 @@ public interface BlogsEntryLocalService {
 		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
+	public java.util.List<com.liferay.portlet.blogs.model.BlogsEntry> getBlogsEntries(
+		int start, int end) throws com.liferay.portal.SystemException;
+
+	public int getBlogsEntriesCount() throws com.liferay.portal.SystemException;
+
 	public com.liferay.portlet.blogs.model.BlogsEntry updateBlogsEntry(
 		com.liferay.portlet.blogs.model.BlogsEntry blogsEntry)
 		throws com.liferay.portal.SystemException;

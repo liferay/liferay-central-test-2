@@ -108,6 +108,15 @@ public abstract class PollsQuestionLocalServiceBaseImpl
 		return pollsQuestionPersistence.findByPrimaryKey(questionId);
 	}
 
+	public List<PollsQuestion> getPollsQuestions(int start, int end)
+		throws SystemException {
+		return pollsQuestionPersistence.findAll(start, end);
+	}
+
+	public int getPollsQuestionsCount() throws SystemException {
+		return pollsQuestionPersistence.countAll();
+	}
+
 	public PollsQuestion updatePollsQuestion(PollsQuestion pollsQuestion)
 		throws SystemException {
 		pollsQuestion.setNew(false);

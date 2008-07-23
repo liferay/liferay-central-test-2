@@ -313,6 +313,15 @@ public abstract class PortletItemLocalServiceBaseImpl
 		return portletItemPersistence.findByPrimaryKey(portletItemId);
 	}
 
+	public List<PortletItem> getPortletItems(int start, int end)
+		throws SystemException {
+		return portletItemPersistence.findAll(start, end);
+	}
+
+	public int getPortletItemsCount() throws SystemException {
+		return portletItemPersistence.countAll();
+	}
+
 	public PortletItem updatePortletItem(PortletItem portletItem)
 		throws SystemException {
 		portletItem.setNew(false);

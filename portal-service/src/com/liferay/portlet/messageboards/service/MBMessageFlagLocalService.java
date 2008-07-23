@@ -74,6 +74,12 @@ public interface MBMessageFlagLocalService {
 		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
+	public java.util.List<com.liferay.portlet.messageboards.model.MBMessageFlag> getMBMessageFlags(
+		int start, int end) throws com.liferay.portal.SystemException;
+
+	public int getMBMessageFlagsCount()
+		throws com.liferay.portal.SystemException;
+
 	public com.liferay.portlet.messageboards.model.MBMessageFlag updateMBMessageFlag(
 		com.liferay.portlet.messageboards.model.MBMessageFlag mbMessageFlag)
 		throws com.liferay.portal.SystemException;

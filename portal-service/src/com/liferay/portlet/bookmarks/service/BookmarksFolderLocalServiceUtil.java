@@ -100,6 +100,20 @@ public class BookmarksFolderLocalServiceUtil {
 		return bookmarksFolderLocalService.getBookmarksFolder(folderId);
 	}
 
+	public static java.util.List<com.liferay.portlet.bookmarks.model.BookmarksFolder> getBookmarksFolders(
+		int start, int end) throws com.liferay.portal.SystemException {
+		BookmarksFolderLocalService bookmarksFolderLocalService = BookmarksFolderLocalServiceFactory.getService();
+
+		return bookmarksFolderLocalService.getBookmarksFolders(start, end);
+	}
+
+	public static int getBookmarksFoldersCount()
+		throws com.liferay.portal.SystemException {
+		BookmarksFolderLocalService bookmarksFolderLocalService = BookmarksFolderLocalServiceFactory.getService();
+
+		return bookmarksFolderLocalService.getBookmarksFoldersCount();
+	}
+
 	public static com.liferay.portlet.bookmarks.model.BookmarksFolder updateBookmarksFolder(
 		com.liferay.portlet.bookmarks.model.BookmarksFolder bookmarksFolder)
 		throws com.liferay.portal.SystemException {

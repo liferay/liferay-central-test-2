@@ -100,6 +100,20 @@ public class BlogsStatsUserLocalServiceUtil {
 		return blogsStatsUserLocalService.getBlogsStatsUser(statsUserId);
 	}
 
+	public static java.util.List<com.liferay.portlet.blogs.model.BlogsStatsUser> getBlogsStatsUsers(
+		int start, int end) throws com.liferay.portal.SystemException {
+		BlogsStatsUserLocalService blogsStatsUserLocalService = BlogsStatsUserLocalServiceFactory.getService();
+
+		return blogsStatsUserLocalService.getBlogsStatsUsers(start, end);
+	}
+
+	public static int getBlogsStatsUsersCount()
+		throws com.liferay.portal.SystemException {
+		BlogsStatsUserLocalService blogsStatsUserLocalService = BlogsStatsUserLocalServiceFactory.getService();
+
+		return blogsStatsUserLocalService.getBlogsStatsUsersCount();
+	}
+
 	public static com.liferay.portlet.blogs.model.BlogsStatsUser updateBlogsStatsUser(
 		com.liferay.portlet.blogs.model.BlogsStatsUser blogsStatsUser)
 		throws com.liferay.portal.SystemException {

@@ -100,6 +100,20 @@ public class RatingsStatsLocalServiceUtil {
 		return ratingsStatsLocalService.getRatingsStats(statsId);
 	}
 
+	public static java.util.List<com.liferay.portlet.ratings.model.RatingsStats> getRatingsStatss(
+		int start, int end) throws com.liferay.portal.SystemException {
+		RatingsStatsLocalService ratingsStatsLocalService = RatingsStatsLocalServiceFactory.getService();
+
+		return ratingsStatsLocalService.getRatingsStatss(start, end);
+	}
+
+	public static int getRatingsStatssCount()
+		throws com.liferay.portal.SystemException {
+		RatingsStatsLocalService ratingsStatsLocalService = RatingsStatsLocalServiceFactory.getService();
+
+		return ratingsStatsLocalService.getRatingsStatssCount();
+	}
+
 	public static com.liferay.portlet.ratings.model.RatingsStats updateRatingsStats(
 		com.liferay.portlet.ratings.model.RatingsStats ratingsStats)
 		throws com.liferay.portal.SystemException {

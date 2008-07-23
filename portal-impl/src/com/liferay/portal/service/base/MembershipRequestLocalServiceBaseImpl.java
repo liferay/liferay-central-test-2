@@ -314,6 +314,15 @@ public abstract class MembershipRequestLocalServiceBaseImpl
 		return membershipRequestPersistence.findByPrimaryKey(membershipRequestId);
 	}
 
+	public List<MembershipRequest> getMembershipRequests(int start, int end)
+		throws SystemException {
+		return membershipRequestPersistence.findAll(start, end);
+	}
+
+	public int getMembershipRequestsCount() throws SystemException {
+		return membershipRequestPersistence.countAll();
+	}
+
 	public MembershipRequest updateMembershipRequest(
 		MembershipRequest membershipRequest) throws SystemException {
 		membershipRequest.setNew(false);

@@ -100,6 +100,20 @@ public class EmailAddressLocalServiceUtil {
 		return emailAddressLocalService.getEmailAddress(emailAddressId);
 	}
 
+	public static java.util.List<com.liferay.portal.model.EmailAddress> getEmailAddresss(
+		int start, int end) throws com.liferay.portal.SystemException {
+		EmailAddressLocalService emailAddressLocalService = EmailAddressLocalServiceFactory.getService();
+
+		return emailAddressLocalService.getEmailAddresss(start, end);
+	}
+
+	public static int getEmailAddresssCount()
+		throws com.liferay.portal.SystemException {
+		EmailAddressLocalService emailAddressLocalService = EmailAddressLocalServiceFactory.getService();
+
+		return emailAddressLocalService.getEmailAddresssCount();
+	}
+
 	public static com.liferay.portal.model.EmailAddress updateEmailAddress(
 		com.liferay.portal.model.EmailAddress emailAddress)
 		throws com.liferay.portal.SystemException {

@@ -101,6 +101,20 @@ public class JournalStructureLocalServiceUtil {
 		return journalStructureLocalService.getJournalStructure(id);
 	}
 
+	public static java.util.List<com.liferay.portlet.journal.model.JournalStructure> getJournalStructures(
+		int start, int end) throws com.liferay.portal.SystemException {
+		JournalStructureLocalService journalStructureLocalService = JournalStructureLocalServiceFactory.getService();
+
+		return journalStructureLocalService.getJournalStructures(start, end);
+	}
+
+	public static int getJournalStructuresCount()
+		throws com.liferay.portal.SystemException {
+		JournalStructureLocalService journalStructureLocalService = JournalStructureLocalServiceFactory.getService();
+
+		return journalStructureLocalService.getJournalStructuresCount();
+	}
+
 	public static com.liferay.portlet.journal.model.JournalStructure updateJournalStructure(
 		com.liferay.portlet.journal.model.JournalStructure journalStructure)
 		throws com.liferay.portal.SystemException {

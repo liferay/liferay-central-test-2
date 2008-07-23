@@ -311,6 +311,15 @@ public abstract class PortletPreferencesLocalServiceBaseImpl
 		return portletPreferencesPersistence.findByPrimaryKey(portletPreferencesId);
 	}
 
+	public List<PortletPreferences> getPortletPreferencess(int start, int end)
+		throws SystemException {
+		return portletPreferencesPersistence.findAll(start, end);
+	}
+
+	public int getPortletPreferencessCount() throws SystemException {
+		return portletPreferencesPersistence.countAll();
+	}
+
 	public PortletPreferences updatePortletPreferences(
 		PortletPreferences portletPreferences) throws SystemException {
 		portletPreferences.setNew(false);

@@ -72,6 +72,11 @@ public interface LayoutSetLocalService {
 		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
+	public java.util.List<com.liferay.portal.model.LayoutSet> getLayoutSets(
+		int start, int end) throws com.liferay.portal.SystemException;
+
+	public int getLayoutSetsCount() throws com.liferay.portal.SystemException;
+
 	public com.liferay.portal.model.LayoutSet updateLayoutSet(
 		com.liferay.portal.model.LayoutSet layoutSet)
 		throws com.liferay.portal.SystemException;

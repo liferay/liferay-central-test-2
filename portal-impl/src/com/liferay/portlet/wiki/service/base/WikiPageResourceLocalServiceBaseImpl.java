@@ -94,6 +94,15 @@ public abstract class WikiPageResourceLocalServiceBaseImpl
 		return wikiPageResourcePersistence.findByPrimaryKey(resourcePrimKey);
 	}
 
+	public List<WikiPageResource> getWikiPageResources(int start, int end)
+		throws SystemException {
+		return wikiPageResourcePersistence.findAll(start, end);
+	}
+
+	public int getWikiPageResourcesCount() throws SystemException {
+		return wikiPageResourcePersistence.countAll();
+	}
+
 	public WikiPageResource updateWikiPageResource(
 		WikiPageResource wikiPageResource) throws SystemException {
 		wikiPageResource.setNew(false);

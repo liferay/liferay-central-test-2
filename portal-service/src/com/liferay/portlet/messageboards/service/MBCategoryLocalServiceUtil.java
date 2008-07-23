@@ -100,6 +100,20 @@ public class MBCategoryLocalServiceUtil {
 		return mbCategoryLocalService.getMBCategory(categoryId);
 	}
 
+	public static java.util.List<com.liferay.portlet.messageboards.model.MBCategory> getMBCategories(
+		int start, int end) throws com.liferay.portal.SystemException {
+		MBCategoryLocalService mbCategoryLocalService = MBCategoryLocalServiceFactory.getService();
+
+		return mbCategoryLocalService.getMBCategories(start, end);
+	}
+
+	public static int getMBCategoriesCount()
+		throws com.liferay.portal.SystemException {
+		MBCategoryLocalService mbCategoryLocalService = MBCategoryLocalServiceFactory.getService();
+
+		return mbCategoryLocalService.getMBCategoriesCount();
+	}
+
 	public static com.liferay.portlet.messageboards.model.MBCategory updateMBCategory(
 		com.liferay.portlet.messageboards.model.MBCategory mbCategory)
 		throws com.liferay.portal.SystemException {

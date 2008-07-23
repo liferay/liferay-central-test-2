@@ -114,6 +114,15 @@ public abstract class TagsPropertyLocalServiceBaseImpl
 		return tagsPropertyPersistence.findByPrimaryKey(propertyId);
 	}
 
+	public List<TagsProperty> getTagsProperties(int start, int end)
+		throws SystemException {
+		return tagsPropertyPersistence.findAll(start, end);
+	}
+
+	public int getTagsPropertiesCount() throws SystemException {
+		return tagsPropertyPersistence.countAll();
+	}
+
 	public TagsProperty updateTagsProperty(TagsProperty tagsProperty)
 		throws SystemException {
 		tagsProperty.setNew(false);

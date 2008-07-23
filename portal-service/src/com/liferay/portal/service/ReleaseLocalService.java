@@ -72,6 +72,11 @@ public interface ReleaseLocalService {
 		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
+	public java.util.List<com.liferay.portal.model.Release> getReleases(
+		int start, int end) throws com.liferay.portal.SystemException;
+
+	public int getReleasesCount() throws com.liferay.portal.SystemException;
+
 	public com.liferay.portal.model.Release updateRelease(
 		com.liferay.portal.model.Release release)
 		throws com.liferay.portal.SystemException;

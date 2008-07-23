@@ -100,6 +100,20 @@ public class ShoppingCartLocalServiceUtil {
 		return shoppingCartLocalService.getShoppingCart(cartId);
 	}
 
+	public static java.util.List<com.liferay.portlet.shopping.model.ShoppingCart> getShoppingCarts(
+		int start, int end) throws com.liferay.portal.SystemException {
+		ShoppingCartLocalService shoppingCartLocalService = ShoppingCartLocalServiceFactory.getService();
+
+		return shoppingCartLocalService.getShoppingCarts(start, end);
+	}
+
+	public static int getShoppingCartsCount()
+		throws com.liferay.portal.SystemException {
+		ShoppingCartLocalService shoppingCartLocalService = ShoppingCartLocalServiceFactory.getService();
+
+		return shoppingCartLocalService.getShoppingCartsCount();
+	}
+
 	public static com.liferay.portlet.shopping.model.ShoppingCart updateShoppingCart(
 		com.liferay.portlet.shopping.model.ShoppingCart shoppingCart)
 		throws com.liferay.portal.SystemException {

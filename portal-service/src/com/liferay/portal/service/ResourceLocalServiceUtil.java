@@ -99,6 +99,20 @@ public class ResourceLocalServiceUtil {
 		return resourceLocalService.getResource(resourceId);
 	}
 
+	public static java.util.List<com.liferay.portal.model.Resource> getResources(
+		int start, int end) throws com.liferay.portal.SystemException {
+		ResourceLocalService resourceLocalService = ResourceLocalServiceFactory.getService();
+
+		return resourceLocalService.getResources(start, end);
+	}
+
+	public static int getResourcesCount()
+		throws com.liferay.portal.SystemException {
+		ResourceLocalService resourceLocalService = ResourceLocalServiceFactory.getService();
+
+		return resourceLocalService.getResourcesCount();
+	}
+
 	public static com.liferay.portal.model.Resource updateResource(
 		com.liferay.portal.model.Resource resource)
 		throws com.liferay.portal.SystemException {

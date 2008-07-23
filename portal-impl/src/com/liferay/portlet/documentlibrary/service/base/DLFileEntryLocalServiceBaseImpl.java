@@ -156,6 +156,15 @@ public abstract class DLFileEntryLocalServiceBaseImpl
 		return dlFileEntryPersistence.findByPrimaryKey(fileEntryId);
 	}
 
+	public List<DLFileEntry> getDLFileEntries(int start, int end)
+		throws SystemException {
+		return dlFileEntryPersistence.findAll(start, end);
+	}
+
+	public int getDLFileEntriesCount() throws SystemException {
+		return dlFileEntryPersistence.countAll();
+	}
+
 	public DLFileEntry updateDLFileEntry(DLFileEntry dlFileEntry)
 		throws SystemException {
 		dlFileEntry.setNew(false);

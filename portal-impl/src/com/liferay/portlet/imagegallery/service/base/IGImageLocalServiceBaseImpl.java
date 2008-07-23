@@ -113,6 +113,15 @@ public abstract class IGImageLocalServiceBaseImpl implements IGImageLocalService
 		return igImagePersistence.findByPrimaryKey(imageId);
 	}
 
+	public List<IGImage> getIGImages(int start, int end)
+		throws SystemException {
+		return igImagePersistence.findAll(start, end);
+	}
+
+	public int getIGImagesCount() throws SystemException {
+		return igImagePersistence.countAll();
+	}
+
 	public IGImage updateIGImage(IGImage igImage) throws SystemException {
 		igImage.setNew(false);
 

@@ -101,6 +101,20 @@ public class ShoppingCategoryLocalServiceUtil {
 		return shoppingCategoryLocalService.getShoppingCategory(categoryId);
 	}
 
+	public static java.util.List<com.liferay.portlet.shopping.model.ShoppingCategory> getShoppingCategories(
+		int start, int end) throws com.liferay.portal.SystemException {
+		ShoppingCategoryLocalService shoppingCategoryLocalService = ShoppingCategoryLocalServiceFactory.getService();
+
+		return shoppingCategoryLocalService.getShoppingCategories(start, end);
+	}
+
+	public static int getShoppingCategoriesCount()
+		throws com.liferay.portal.SystemException {
+		ShoppingCategoryLocalService shoppingCategoryLocalService = ShoppingCategoryLocalServiceFactory.getService();
+
+		return shoppingCategoryLocalService.getShoppingCategoriesCount();
+	}
+
 	public static com.liferay.portlet.shopping.model.ShoppingCategory updateShoppingCategory(
 		com.liferay.portlet.shopping.model.ShoppingCategory shoppingCategory)
 		throws com.liferay.portal.SystemException {

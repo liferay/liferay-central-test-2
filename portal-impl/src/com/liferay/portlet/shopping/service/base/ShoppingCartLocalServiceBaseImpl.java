@@ -130,6 +130,15 @@ public abstract class ShoppingCartLocalServiceBaseImpl
 		return shoppingCartPersistence.findByPrimaryKey(cartId);
 	}
 
+	public List<ShoppingCart> getShoppingCarts(int start, int end)
+		throws SystemException {
+		return shoppingCartPersistence.findAll(start, end);
+	}
+
+	public int getShoppingCartsCount() throws SystemException {
+		return shoppingCartPersistence.countAll();
+	}
+
 	public ShoppingCart updateShoppingCart(ShoppingCart shoppingCart)
 		throws SystemException {
 		shoppingCart.setNew(false);

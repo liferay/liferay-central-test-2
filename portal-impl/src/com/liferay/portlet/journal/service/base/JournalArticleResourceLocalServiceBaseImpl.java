@@ -123,6 +123,15 @@ public abstract class JournalArticleResourceLocalServiceBaseImpl
 		return journalArticleResourcePersistence.findByPrimaryKey(resourcePrimKey);
 	}
 
+	public List<JournalArticleResource> getJournalArticleResources(int start,
+		int end) throws SystemException {
+		return journalArticleResourcePersistence.findAll(start, end);
+	}
+
+	public int getJournalArticleResourcesCount() throws SystemException {
+		return journalArticleResourcePersistence.countAll();
+	}
+
 	public JournalArticleResource updateJournalArticleResource(
 		JournalArticleResource journalArticleResource)
 		throws SystemException {

@@ -306,6 +306,14 @@ public abstract class RoleLocalServiceBaseImpl implements RoleLocalService,
 		return rolePersistence.findByPrimaryKey(roleId);
 	}
 
+	public List<Role> getRoles(int start, int end) throws SystemException {
+		return rolePersistence.findAll(start, end);
+	}
+
+	public int getRolesCount() throws SystemException {
+		return rolePersistence.countAll();
+	}
+
 	public Role updateRole(Role role) throws SystemException {
 		role.setNew(false);
 

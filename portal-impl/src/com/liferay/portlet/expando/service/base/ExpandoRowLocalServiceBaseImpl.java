@@ -98,6 +98,15 @@ public abstract class ExpandoRowLocalServiceBaseImpl
 		return expandoRowPersistence.findByPrimaryKey(rowId);
 	}
 
+	public List<ExpandoRow> getExpandoRows(int start, int end)
+		throws SystemException {
+		return expandoRowPersistence.findAll(start, end);
+	}
+
+	public int getExpandoRowsCount() throws SystemException {
+		return expandoRowPersistence.countAll();
+	}
+
 	public ExpandoRow updateExpandoRow(ExpandoRow expandoRow)
 		throws SystemException {
 		expandoRow.setNew(false);

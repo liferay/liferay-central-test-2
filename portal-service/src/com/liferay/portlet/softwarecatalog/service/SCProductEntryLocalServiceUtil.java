@@ -100,6 +100,20 @@ public class SCProductEntryLocalServiceUtil {
 		return scProductEntryLocalService.getSCProductEntry(productEntryId);
 	}
 
+	public static java.util.List<com.liferay.portlet.softwarecatalog.model.SCProductEntry> getSCProductEntries(
+		int start, int end) throws com.liferay.portal.SystemException {
+		SCProductEntryLocalService scProductEntryLocalService = SCProductEntryLocalServiceFactory.getService();
+
+		return scProductEntryLocalService.getSCProductEntries(start, end);
+	}
+
+	public static int getSCProductEntriesCount()
+		throws com.liferay.portal.SystemException {
+		SCProductEntryLocalService scProductEntryLocalService = SCProductEntryLocalServiceFactory.getService();
+
+		return scProductEntryLocalService.getSCProductEntriesCount();
+	}
+
 	public static com.liferay.portlet.softwarecatalog.model.SCProductEntry updateSCProductEntry(
 		com.liferay.portlet.softwarecatalog.model.SCProductEntry scProductEntry)
 		throws com.liferay.portal.SystemException {

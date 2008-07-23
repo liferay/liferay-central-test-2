@@ -74,6 +74,11 @@ public interface DLFileRankLocalService {
 		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
+	public java.util.List<com.liferay.portlet.documentlibrary.model.DLFileRank> getDLFileRanks(
+		int start, int end) throws com.liferay.portal.SystemException;
+
+	public int getDLFileRanksCount() throws com.liferay.portal.SystemException;
+
 	public com.liferay.portlet.documentlibrary.model.DLFileRank updateDLFileRank(
 		com.liferay.portlet.documentlibrary.model.DLFileRank dlFileRank)
 		throws com.liferay.portal.SystemException;

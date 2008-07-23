@@ -100,6 +100,20 @@ public class PluginSettingLocalServiceUtil {
 		return pluginSettingLocalService.getPluginSetting(pluginSettingId);
 	}
 
+	public static java.util.List<com.liferay.portal.model.PluginSetting> getPluginSettings(
+		int start, int end) throws com.liferay.portal.SystemException {
+		PluginSettingLocalService pluginSettingLocalService = PluginSettingLocalServiceFactory.getService();
+
+		return pluginSettingLocalService.getPluginSettings(start, end);
+	}
+
+	public static int getPluginSettingsCount()
+		throws com.liferay.portal.SystemException {
+		PluginSettingLocalService pluginSettingLocalService = PluginSettingLocalServiceFactory.getService();
+
+		return pluginSettingLocalService.getPluginSettingsCount();
+	}
+
 	public static com.liferay.portal.model.PluginSetting updatePluginSetting(
 		com.liferay.portal.model.PluginSetting pluginSetting)
 		throws com.liferay.portal.SystemException {

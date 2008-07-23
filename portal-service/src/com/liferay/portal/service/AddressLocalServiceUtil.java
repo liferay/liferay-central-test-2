@@ -98,6 +98,20 @@ public class AddressLocalServiceUtil {
 		return addressLocalService.getAddress(addressId);
 	}
 
+	public static java.util.List<com.liferay.portal.model.Address> getAddresss(
+		int start, int end) throws com.liferay.portal.SystemException {
+		AddressLocalService addressLocalService = AddressLocalServiceFactory.getService();
+
+		return addressLocalService.getAddresss(start, end);
+	}
+
+	public static int getAddresssCount()
+		throws com.liferay.portal.SystemException {
+		AddressLocalService addressLocalService = AddressLocalServiceFactory.getService();
+
+		return addressLocalService.getAddresssCount();
+	}
+
 	public static com.liferay.portal.model.Address updateAddress(
 		com.liferay.portal.model.Address address)
 		throws com.liferay.portal.SystemException {

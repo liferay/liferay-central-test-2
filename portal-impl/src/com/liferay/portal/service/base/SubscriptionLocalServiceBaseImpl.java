@@ -313,6 +313,15 @@ public abstract class SubscriptionLocalServiceBaseImpl
 		return subscriptionPersistence.findByPrimaryKey(subscriptionId);
 	}
 
+	public List<Subscription> getSubscriptions(int start, int end)
+		throws SystemException {
+		return subscriptionPersistence.findAll(start, end);
+	}
+
+	public int getSubscriptionsCount() throws SystemException {
+		return subscriptionPersistence.countAll();
+	}
+
 	public Subscription updateSubscription(Subscription subscription)
 		throws SystemException {
 		subscription.setNew(false);

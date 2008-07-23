@@ -98,6 +98,15 @@ public abstract class BlogsStatsUserLocalServiceBaseImpl
 		return blogsStatsUserPersistence.findByPrimaryKey(statsUserId);
 	}
 
+	public List<BlogsStatsUser> getBlogsStatsUsers(int start, int end)
+		throws SystemException {
+		return blogsStatsUserPersistence.findAll(start, end);
+	}
+
+	public int getBlogsStatsUsersCount() throws SystemException {
+		return blogsStatsUserPersistence.countAll();
+	}
+
 	public BlogsStatsUser updateBlogsStatsUser(BlogsStatsUser blogsStatsUser)
 		throws SystemException {
 		blogsStatsUser.setNew(false);

@@ -124,6 +124,15 @@ public abstract class JournalArticleImageLocalServiceBaseImpl
 		return journalArticleImagePersistence.findByPrimaryKey(articleImageId);
 	}
 
+	public List<JournalArticleImage> getJournalArticleImages(int start, int end)
+		throws SystemException {
+		return journalArticleImagePersistence.findAll(start, end);
+	}
+
+	public int getJournalArticleImagesCount() throws SystemException {
+		return journalArticleImagePersistence.countAll();
+	}
+
 	public JournalArticleImage updateJournalArticleImage(
 		JournalArticleImage journalArticleImage) throws SystemException {
 		journalArticleImage.setNew(false);

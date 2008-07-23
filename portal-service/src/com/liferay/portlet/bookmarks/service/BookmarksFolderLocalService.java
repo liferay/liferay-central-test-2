@@ -74,6 +74,12 @@ public interface BookmarksFolderLocalService {
 		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
+	public java.util.List<com.liferay.portlet.bookmarks.model.BookmarksFolder> getBookmarksFolders(
+		int start, int end) throws com.liferay.portal.SystemException;
+
+	public int getBookmarksFoldersCount()
+		throws com.liferay.portal.SystemException;
+
 	public com.liferay.portlet.bookmarks.model.BookmarksFolder updateBookmarksFolder(
 		com.liferay.portlet.bookmarks.model.BookmarksFolder bookmarksFolder)
 		throws com.liferay.portal.SystemException;

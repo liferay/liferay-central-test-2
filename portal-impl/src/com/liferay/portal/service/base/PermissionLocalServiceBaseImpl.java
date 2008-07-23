@@ -311,6 +311,15 @@ public abstract class PermissionLocalServiceBaseImpl
 		return permissionPersistence.findByPrimaryKey(permissionId);
 	}
 
+	public List<Permission> getPermissions(int start, int end)
+		throws SystemException {
+		return permissionPersistence.findAll(start, end);
+	}
+
+	public int getPermissionsCount() throws SystemException {
+		return permissionPersistence.countAll();
+	}
+
 	public Permission updatePermission(Permission permission)
 		throws SystemException {
 		permission.setNew(false);

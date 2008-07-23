@@ -100,6 +100,20 @@ public class PollsVoteLocalServiceUtil {
 		return pollsVoteLocalService.getPollsVote(voteId);
 	}
 
+	public static java.util.List<com.liferay.portlet.polls.model.PollsVote> getPollsVotes(
+		int start, int end) throws com.liferay.portal.SystemException {
+		PollsVoteLocalService pollsVoteLocalService = PollsVoteLocalServiceFactory.getService();
+
+		return pollsVoteLocalService.getPollsVotes(start, end);
+	}
+
+	public static int getPollsVotesCount()
+		throws com.liferay.portal.SystemException {
+		PollsVoteLocalService pollsVoteLocalService = PollsVoteLocalServiceFactory.getService();
+
+		return pollsVoteLocalService.getPollsVotesCount();
+	}
+
 	public static com.liferay.portlet.polls.model.PollsVote updatePollsVote(
 		com.liferay.portlet.polls.model.PollsVote pollsVote)
 		throws com.liferay.portal.SystemException {

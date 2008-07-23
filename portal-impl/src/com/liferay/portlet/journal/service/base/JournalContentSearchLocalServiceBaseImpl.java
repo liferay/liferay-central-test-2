@@ -145,6 +145,15 @@ public abstract class JournalContentSearchLocalServiceBaseImpl
 		return journalContentSearchPersistence.findByPrimaryKey(contentSearchId);
 	}
 
+	public List<JournalContentSearch> getJournalContentSearchs(int start,
+		int end) throws SystemException {
+		return journalContentSearchPersistence.findAll(start, end);
+	}
+
+	public int getJournalContentSearchsCount() throws SystemException {
+		return journalContentSearchPersistence.countAll();
+	}
+
 	public JournalContentSearch updateJournalContentSearch(
 		JournalContentSearch journalContentSearch) throws SystemException {
 		journalContentSearch.setNew(false);

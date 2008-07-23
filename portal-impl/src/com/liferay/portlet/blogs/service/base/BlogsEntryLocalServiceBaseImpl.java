@@ -160,6 +160,15 @@ public abstract class BlogsEntryLocalServiceBaseImpl
 		return blogsEntryPersistence.findByPrimaryKey(entryId);
 	}
 
+	public List<BlogsEntry> getBlogsEntries(int start, int end)
+		throws SystemException {
+		return blogsEntryPersistence.findAll(start, end);
+	}
+
+	public int getBlogsEntriesCount() throws SystemException {
+		return blogsEntryPersistence.countAll();
+	}
+
 	public BlogsEntry updateBlogsEntry(BlogsEntry blogsEntry)
 		throws SystemException {
 		blogsEntry.setNew(false);

@@ -74,6 +74,12 @@ public interface SCProductEntryLocalService {
 		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
+	public java.util.List<com.liferay.portlet.softwarecatalog.model.SCProductEntry> getSCProductEntries(
+		int start, int end) throws com.liferay.portal.SystemException;
+
+	public int getSCProductEntriesCount()
+		throws com.liferay.portal.SystemException;
+
 	public com.liferay.portlet.softwarecatalog.model.SCProductEntry updateSCProductEntry(
 		com.liferay.portlet.softwarecatalog.model.SCProductEntry scProductEntry)
 		throws com.liferay.portal.SystemException;

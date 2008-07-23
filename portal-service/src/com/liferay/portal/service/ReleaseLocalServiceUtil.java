@@ -98,6 +98,20 @@ public class ReleaseLocalServiceUtil {
 		return releaseLocalService.getRelease(releaseId);
 	}
 
+	public static java.util.List<com.liferay.portal.model.Release> getReleases(
+		int start, int end) throws com.liferay.portal.SystemException {
+		ReleaseLocalService releaseLocalService = ReleaseLocalServiceFactory.getService();
+
+		return releaseLocalService.getReleases(start, end);
+	}
+
+	public static int getReleasesCount()
+		throws com.liferay.portal.SystemException {
+		ReleaseLocalService releaseLocalService = ReleaseLocalServiceFactory.getService();
+
+		return releaseLocalService.getReleasesCount();
+	}
+
 	public static com.liferay.portal.model.Release updateRelease(
 		com.liferay.portal.model.Release release)
 		throws com.liferay.portal.SystemException {

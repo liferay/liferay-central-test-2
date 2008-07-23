@@ -98,6 +98,19 @@ public class RoleLocalServiceUtil {
 		return roleLocalService.getRole(roleId);
 	}
 
+	public static java.util.List<com.liferay.portal.model.Role> getRoles(
+		int start, int end) throws com.liferay.portal.SystemException {
+		RoleLocalService roleLocalService = RoleLocalServiceFactory.getService();
+
+		return roleLocalService.getRoles(start, end);
+	}
+
+	public static int getRolesCount() throws com.liferay.portal.SystemException {
+		RoleLocalService roleLocalService = RoleLocalServiceFactory.getService();
+
+		return roleLocalService.getRolesCount();
+	}
+
 	public static com.liferay.portal.model.Role updateRole(
 		com.liferay.portal.model.Role role)
 		throws com.liferay.portal.SystemException {

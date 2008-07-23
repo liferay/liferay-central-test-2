@@ -118,6 +118,15 @@ public abstract class SCFrameworkVersionLocalServiceBaseImpl
 		return scFrameworkVersionPersistence.findByPrimaryKey(frameworkVersionId);
 	}
 
+	public List<SCFrameworkVersion> getSCFrameworkVersions(int start, int end)
+		throws SystemException {
+		return scFrameworkVersionPersistence.findAll(start, end);
+	}
+
+	public int getSCFrameworkVersionsCount() throws SystemException {
+		return scFrameworkVersionPersistence.countAll();
+	}
+
 	public SCFrameworkVersion updateSCFrameworkVersion(
 		SCFrameworkVersion scFrameworkVersion) throws SystemException {
 		scFrameworkVersion.setNew(false);

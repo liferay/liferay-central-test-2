@@ -145,6 +145,15 @@ public abstract class ShoppingOrderLocalServiceBaseImpl
 		return shoppingOrderPersistence.findByPrimaryKey(orderId);
 	}
 
+	public List<ShoppingOrder> getShoppingOrders(int start, int end)
+		throws SystemException {
+		return shoppingOrderPersistence.findAll(start, end);
+	}
+
+	public int getShoppingOrdersCount() throws SystemException {
+		return shoppingOrderPersistence.countAll();
+	}
+
 	public ShoppingOrder updateShoppingOrder(ShoppingOrder shoppingOrder)
 		throws SystemException {
 		shoppingOrder.setNew(false);

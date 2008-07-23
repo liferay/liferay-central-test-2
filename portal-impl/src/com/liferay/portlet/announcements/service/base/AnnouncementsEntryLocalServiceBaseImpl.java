@@ -151,6 +151,15 @@ public abstract class AnnouncementsEntryLocalServiceBaseImpl
 		return announcementsEntryPersistence.findByPrimaryKey(entryId);
 	}
 
+	public List<AnnouncementsEntry> getAnnouncementsEntries(int start, int end)
+		throws SystemException {
+		return announcementsEntryPersistence.findAll(start, end);
+	}
+
+	public int getAnnouncementsEntriesCount() throws SystemException {
+		return announcementsEntryPersistence.countAll();
+	}
+
 	public AnnouncementsEntry updateAnnouncementsEntry(
 		AnnouncementsEntry announcementsEntry) throws SystemException {
 		announcementsEntry.setNew(false);

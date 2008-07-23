@@ -100,6 +100,20 @@ public class ShoppingItemLocalServiceUtil {
 		return shoppingItemLocalService.getShoppingItem(itemId);
 	}
 
+	public static java.util.List<com.liferay.portlet.shopping.model.ShoppingItem> getShoppingItems(
+		int start, int end) throws com.liferay.portal.SystemException {
+		ShoppingItemLocalService shoppingItemLocalService = ShoppingItemLocalServiceFactory.getService();
+
+		return shoppingItemLocalService.getShoppingItems(start, end);
+	}
+
+	public static int getShoppingItemsCount()
+		throws com.liferay.portal.SystemException {
+		ShoppingItemLocalService shoppingItemLocalService = ShoppingItemLocalServiceFactory.getService();
+
+		return shoppingItemLocalService.getShoppingItemsCount();
+	}
+
 	public static com.liferay.portlet.shopping.model.ShoppingItem updateShoppingItem(
 		com.liferay.portlet.shopping.model.ShoppingItem shoppingItem)
 		throws com.liferay.portal.SystemException {

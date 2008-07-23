@@ -74,6 +74,11 @@ public interface DLFolderLocalService {
 		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
+	public java.util.List<com.liferay.portlet.documentlibrary.model.DLFolder> getDLFolders(
+		int start, int end) throws com.liferay.portal.SystemException;
+
+	public int getDLFoldersCount() throws com.liferay.portal.SystemException;
+
 	public com.liferay.portlet.documentlibrary.model.DLFolder updateDLFolder(
 		com.liferay.portlet.documentlibrary.model.DLFolder dlFolder)
 		throws com.liferay.portal.SystemException;

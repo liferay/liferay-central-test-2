@@ -74,6 +74,12 @@ public interface JournalArticleImageLocalService {
 		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
+	public java.util.List<com.liferay.portlet.journal.model.JournalArticleImage> getJournalArticleImages(
+		int start, int end) throws com.liferay.portal.SystemException;
+
+	public int getJournalArticleImagesCount()
+		throws com.liferay.portal.SystemException;
+
 	public com.liferay.portlet.journal.model.JournalArticleImage updateJournalArticleImage(
 		com.liferay.portlet.journal.model.JournalArticleImage journalArticleImage)
 		throws com.liferay.portal.SystemException;

@@ -138,6 +138,15 @@ public abstract class DLFolderLocalServiceBaseImpl
 		return dlFolderPersistence.findByPrimaryKey(folderId);
 	}
 
+	public List<DLFolder> getDLFolders(int start, int end)
+		throws SystemException {
+		return dlFolderPersistence.findAll(start, end);
+	}
+
+	public int getDLFoldersCount() throws SystemException {
+		return dlFolderPersistence.countAll();
+	}
+
 	public DLFolder updateDLFolder(DLFolder dlFolder) throws SystemException {
 		dlFolder.setNew(false);
 

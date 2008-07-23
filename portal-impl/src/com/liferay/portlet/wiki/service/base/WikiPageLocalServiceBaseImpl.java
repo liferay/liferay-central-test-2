@@ -158,6 +158,15 @@ public abstract class WikiPageLocalServiceBaseImpl
 		return wikiPagePersistence.findByPrimaryKey(pageId);
 	}
 
+	public List<WikiPage> getWikiPages(int start, int end)
+		throws SystemException {
+		return wikiPagePersistence.findAll(start, end);
+	}
+
+	public int getWikiPagesCount() throws SystemException {
+		return wikiPagePersistence.countAll();
+	}
+
 	public WikiPage updateWikiPage(WikiPage wikiPage) throws SystemException {
 		wikiPage.setNew(false);
 

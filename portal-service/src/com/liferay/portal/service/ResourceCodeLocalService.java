@@ -73,6 +73,12 @@ public interface ResourceCodeLocalService {
 		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
+	public java.util.List<com.liferay.portal.model.ResourceCode> getResourceCodes(
+		int start, int end) throws com.liferay.portal.SystemException;
+
+	public int getResourceCodesCount()
+		throws com.liferay.portal.SystemException;
+
 	public com.liferay.portal.model.ResourceCode updateResourceCode(
 		com.liferay.portal.model.ResourceCode resourceCode)
 		throws com.liferay.portal.SystemException;

@@ -74,6 +74,12 @@ public interface ServiceComponentLocalService {
 		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
+	public java.util.List<com.liferay.portal.model.ServiceComponent> getServiceComponents(
+		int start, int end) throws com.liferay.portal.SystemException;
+
+	public int getServiceComponentsCount()
+		throws com.liferay.portal.SystemException;
+
 	public com.liferay.portal.model.ServiceComponent updateServiceComponent(
 		com.liferay.portal.model.ServiceComponent serviceComponent)
 		throws com.liferay.portal.SystemException;

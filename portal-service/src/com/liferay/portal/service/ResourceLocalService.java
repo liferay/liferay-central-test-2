@@ -72,6 +72,11 @@ public interface ResourceLocalService {
 		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
+	public java.util.List<com.liferay.portal.model.Resource> getResources(
+		int start, int end) throws com.liferay.portal.SystemException;
+
+	public int getResourcesCount() throws com.liferay.portal.SystemException;
+
 	public com.liferay.portal.model.Resource updateResource(
 		com.liferay.portal.model.Resource resource)
 		throws com.liferay.portal.SystemException;

@@ -121,6 +121,15 @@ public abstract class IGFolderLocalServiceBaseImpl
 		return igFolderPersistence.findByPrimaryKey(folderId);
 	}
 
+	public List<IGFolder> getIGFolders(int start, int end)
+		throws SystemException {
+		return igFolderPersistence.findAll(start, end);
+	}
+
+	public int getIGFoldersCount() throws SystemException {
+		return igFolderPersistence.countAll();
+	}
+
 	public IGFolder updateIGFolder(IGFolder igFolder) throws SystemException {
 		igFolder.setNew(false);
 

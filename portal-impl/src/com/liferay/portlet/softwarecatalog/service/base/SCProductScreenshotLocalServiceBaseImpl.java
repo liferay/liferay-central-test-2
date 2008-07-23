@@ -103,6 +103,15 @@ public abstract class SCProductScreenshotLocalServiceBaseImpl
 		return scProductScreenshotPersistence.findByPrimaryKey(productScreenshotId);
 	}
 
+	public List<SCProductScreenshot> getSCProductScreenshots(int start, int end)
+		throws SystemException {
+		return scProductScreenshotPersistence.findAll(start, end);
+	}
+
+	public int getSCProductScreenshotsCount() throws SystemException {
+		return scProductScreenshotPersistence.countAll();
+	}
+
 	public SCProductScreenshot updateSCProductScreenshot(
 		SCProductScreenshot scProductScreenshot) throws SystemException {
 		scProductScreenshot.setNew(false);

@@ -118,6 +118,15 @@ public abstract class DLFileRankLocalServiceBaseImpl
 		return dlFileRankPersistence.findByPrimaryKey(fileRankId);
 	}
 
+	public List<DLFileRank> getDLFileRanks(int start, int end)
+		throws SystemException {
+		return dlFileRankPersistence.findAll(start, end);
+	}
+
+	public int getDLFileRanksCount() throws SystemException {
+		return dlFileRankPersistence.countAll();
+	}
+
 	public DLFileRank updateDLFileRank(DLFileRank dlFileRank)
 		throws SystemException {
 		dlFileRank.setNew(false);

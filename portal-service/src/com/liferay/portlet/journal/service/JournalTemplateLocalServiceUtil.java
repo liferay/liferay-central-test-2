@@ -100,6 +100,20 @@ public class JournalTemplateLocalServiceUtil {
 		return journalTemplateLocalService.getJournalTemplate(id);
 	}
 
+	public static java.util.List<com.liferay.portlet.journal.model.JournalTemplate> getJournalTemplates(
+		int start, int end) throws com.liferay.portal.SystemException {
+		JournalTemplateLocalService journalTemplateLocalService = JournalTemplateLocalServiceFactory.getService();
+
+		return journalTemplateLocalService.getJournalTemplates(start, end);
+	}
+
+	public static int getJournalTemplatesCount()
+		throws com.liferay.portal.SystemException {
+		JournalTemplateLocalService journalTemplateLocalService = JournalTemplateLocalServiceFactory.getService();
+
+		return journalTemplateLocalService.getJournalTemplatesCount();
+	}
+
 	public static com.liferay.portlet.journal.model.JournalTemplate updateJournalTemplate(
 		com.liferay.portlet.journal.model.JournalTemplate journalTemplate)
 		throws com.liferay.portal.SystemException {

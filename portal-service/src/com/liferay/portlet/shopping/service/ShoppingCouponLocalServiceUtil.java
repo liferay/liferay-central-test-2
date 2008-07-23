@@ -100,6 +100,20 @@ public class ShoppingCouponLocalServiceUtil {
 		return shoppingCouponLocalService.getShoppingCoupon(couponId);
 	}
 
+	public static java.util.List<com.liferay.portlet.shopping.model.ShoppingCoupon> getShoppingCoupons(
+		int start, int end) throws com.liferay.portal.SystemException {
+		ShoppingCouponLocalService shoppingCouponLocalService = ShoppingCouponLocalServiceFactory.getService();
+
+		return shoppingCouponLocalService.getShoppingCoupons(start, end);
+	}
+
+	public static int getShoppingCouponsCount()
+		throws com.liferay.portal.SystemException {
+		ShoppingCouponLocalService shoppingCouponLocalService = ShoppingCouponLocalServiceFactory.getService();
+
+		return shoppingCouponLocalService.getShoppingCouponsCount();
+	}
+
 	public static com.liferay.portlet.shopping.model.ShoppingCoupon updateShoppingCoupon(
 		com.liferay.portlet.shopping.model.ShoppingCoupon shoppingCoupon)
 		throws com.liferay.portal.SystemException {

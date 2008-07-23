@@ -74,6 +74,12 @@ public interface JournalStructureLocalService {
 		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
+	public java.util.List<com.liferay.portlet.journal.model.JournalStructure> getJournalStructures(
+		int start, int end) throws com.liferay.portal.SystemException;
+
+	public int getJournalStructuresCount()
+		throws com.liferay.portal.SystemException;
+
 	public com.liferay.portlet.journal.model.JournalStructure updateJournalStructure(
 		com.liferay.portlet.journal.model.JournalStructure journalStructure)
 		throws com.liferay.portal.SystemException;

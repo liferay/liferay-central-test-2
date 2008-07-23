@@ -72,6 +72,11 @@ public interface RoleLocalService {
 		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
+	public java.util.List<com.liferay.portal.model.Role> getRoles(int start,
+		int end) throws com.liferay.portal.SystemException;
+
+	public int getRolesCount() throws com.liferay.portal.SystemException;
+
 	public com.liferay.portal.model.Role updateRole(
 		com.liferay.portal.model.Role role)
 		throws com.liferay.portal.SystemException;

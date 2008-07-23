@@ -74,6 +74,11 @@ public interface MBThreadLocalService {
 		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
+	public java.util.List<com.liferay.portlet.messageboards.model.MBThread> getMBThreads(
+		int start, int end) throws com.liferay.portal.SystemException;
+
+	public int getMBThreadsCount() throws com.liferay.portal.SystemException;
+
 	public com.liferay.portlet.messageboards.model.MBThread updateMBThread(
 		com.liferay.portlet.messageboards.model.MBThread mbThread)
 		throws com.liferay.portal.SystemException;

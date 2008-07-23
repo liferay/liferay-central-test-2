@@ -74,6 +74,12 @@ public interface PasswordPolicyRelLocalService {
 		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
+	public java.util.List<com.liferay.portal.model.PasswordPolicyRel> getPasswordPolicyRels(
+		int start, int end) throws com.liferay.portal.SystemException;
+
+	public int getPasswordPolicyRelsCount()
+		throws com.liferay.portal.SystemException;
+
 	public com.liferay.portal.model.PasswordPolicyRel updatePasswordPolicyRel(
 		com.liferay.portal.model.PasswordPolicyRel passwordPolicyRel)
 		throws com.liferay.portal.SystemException;

@@ -134,6 +134,15 @@ public abstract class JournalFeedLocalServiceBaseImpl
 		return journalFeedPersistence.findByPrimaryKey(id);
 	}
 
+	public List<JournalFeed> getJournalFeeds(int start, int end)
+		throws SystemException {
+		return journalFeedPersistence.findAll(start, end);
+	}
+
+	public int getJournalFeedsCount() throws SystemException {
+		return journalFeedPersistence.countAll();
+	}
+
 	public JournalFeed updateJournalFeed(JournalFeed journalFeed)
 		throws SystemException {
 		journalFeed.setNew(false);

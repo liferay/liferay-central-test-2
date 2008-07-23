@@ -74,6 +74,12 @@ public interface AnnouncementsFlagLocalService {
 		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
+	public java.util.List<com.liferay.portlet.announcements.model.AnnouncementsFlag> getAnnouncementsFlags(
+		int start, int end) throws com.liferay.portal.SystemException;
+
+	public int getAnnouncementsFlagsCount()
+		throws com.liferay.portal.SystemException;
+
 	public com.liferay.portlet.announcements.model.AnnouncementsFlag updateAnnouncementsFlag(
 		com.liferay.portlet.announcements.model.AnnouncementsFlag announcementsFlag)
 		throws com.liferay.portal.SystemException;

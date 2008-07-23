@@ -98,6 +98,20 @@ public class ImageLocalServiceUtil {
 		return imageLocalService.getImage(imageId);
 	}
 
+	public static java.util.List<com.liferay.portal.model.Image> getImages(
+		int start, int end) throws com.liferay.portal.SystemException {
+		ImageLocalService imageLocalService = ImageLocalServiceFactory.getService();
+
+		return imageLocalService.getImages(start, end);
+	}
+
+	public static int getImagesCount()
+		throws com.liferay.portal.SystemException {
+		ImageLocalService imageLocalService = ImageLocalServiceFactory.getService();
+
+		return imageLocalService.getImagesCount();
+	}
+
 	public static com.liferay.portal.model.Image updateImage(
 		com.liferay.portal.model.Image image)
 		throws com.liferay.portal.SystemException {
@@ -168,13 +182,6 @@ public class ImageLocalServiceUtil {
 		ImageLocalService imageLocalService = ImageLocalServiceFactory.getService();
 
 		return imageLocalService.getImages();
-	}
-
-	public static java.util.List<com.liferay.portal.model.Image> getImages(
-		int start, int end) throws com.liferay.portal.SystemException {
-		ImageLocalService imageLocalService = ImageLocalServiceFactory.getService();
-
-		return imageLocalService.getImages(start, end);
 	}
 
 	public static java.util.List<com.liferay.portal.model.Image> getImagesBySize(

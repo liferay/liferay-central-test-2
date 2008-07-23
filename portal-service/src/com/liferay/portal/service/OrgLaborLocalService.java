@@ -72,6 +72,11 @@ public interface OrgLaborLocalService {
 		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
+	public java.util.List<com.liferay.portal.model.OrgLabor> getOrgLabors(
+		int start, int end) throws com.liferay.portal.SystemException;
+
+	public int getOrgLaborsCount() throws com.liferay.portal.SystemException;
+
 	public com.liferay.portal.model.OrgLabor updateOrgLabor(
 		com.liferay.portal.model.OrgLabor orgLabor)
 		throws com.liferay.portal.SystemException;

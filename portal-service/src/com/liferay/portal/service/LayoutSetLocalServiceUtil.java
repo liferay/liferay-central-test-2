@@ -100,6 +100,20 @@ public class LayoutSetLocalServiceUtil {
 		return layoutSetLocalService.getLayoutSet(layoutSetId);
 	}
 
+	public static java.util.List<com.liferay.portal.model.LayoutSet> getLayoutSets(
+		int start, int end) throws com.liferay.portal.SystemException {
+		LayoutSetLocalService layoutSetLocalService = LayoutSetLocalServiceFactory.getService();
+
+		return layoutSetLocalService.getLayoutSets(start, end);
+	}
+
+	public static int getLayoutSetsCount()
+		throws com.liferay.portal.SystemException {
+		LayoutSetLocalService layoutSetLocalService = LayoutSetLocalServiceFactory.getService();
+
+		return layoutSetLocalService.getLayoutSetsCount();
+	}
+
 	public static com.liferay.portal.model.LayoutSet updateLayoutSet(
 		com.liferay.portal.model.LayoutSet layoutSet)
 		throws com.liferay.portal.SystemException {

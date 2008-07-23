@@ -73,6 +73,11 @@ public interface TagsAssetLocalService {
 		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
+	public java.util.List<com.liferay.portlet.tags.model.TagsAsset> getTagsAssets(
+		int start, int end) throws com.liferay.portal.SystemException;
+
+	public int getTagsAssetsCount() throws com.liferay.portal.SystemException;
+
 	public com.liferay.portlet.tags.model.TagsAsset updateTagsAsset(
 		com.liferay.portlet.tags.model.TagsAsset tagsAsset)
 		throws com.liferay.portal.SystemException;

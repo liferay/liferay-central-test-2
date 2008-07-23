@@ -313,6 +313,15 @@ public abstract class ServiceComponentLocalServiceBaseImpl
 		return serviceComponentPersistence.findByPrimaryKey(serviceComponentId);
 	}
 
+	public List<ServiceComponent> getServiceComponents(int start, int end)
+		throws SystemException {
+		return serviceComponentPersistence.findAll(start, end);
+	}
+
+	public int getServiceComponentsCount() throws SystemException {
+		return serviceComponentPersistence.countAll();
+	}
+
 	public ServiceComponent updateServiceComponent(
 		ServiceComponent serviceComponent) throws SystemException {
 		serviceComponent.setNew(false);

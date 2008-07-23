@@ -100,6 +100,20 @@ public class ClassNameLocalServiceUtil {
 		return classNameLocalService.getClassName(classNameId);
 	}
 
+	public static java.util.List<com.liferay.portal.model.ClassName> getClassNames(
+		int start, int end) throws com.liferay.portal.SystemException {
+		ClassNameLocalService classNameLocalService = ClassNameLocalServiceFactory.getService();
+
+		return classNameLocalService.getClassNames(start, end);
+	}
+
+	public static int getClassNamesCount()
+		throws com.liferay.portal.SystemException {
+		ClassNameLocalService classNameLocalService = ClassNameLocalServiceFactory.getService();
+
+		return classNameLocalService.getClassNamesCount();
+	}
+
 	public static com.liferay.portal.model.ClassName updateClassName(
 		com.liferay.portal.model.ClassName className)
 		throws com.liferay.portal.SystemException {

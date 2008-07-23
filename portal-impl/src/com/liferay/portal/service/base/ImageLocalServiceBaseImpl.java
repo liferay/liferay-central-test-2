@@ -304,6 +304,14 @@ public abstract class ImageLocalServiceBaseImpl implements ImageLocalService,
 		return imagePersistence.findByPrimaryKey(imageId);
 	}
 
+	public List<Image> getImages(int start, int end) throws SystemException {
+		return imagePersistence.findAll(start, end);
+	}
+
+	public int getImagesCount() throws SystemException {
+		return imagePersistence.countAll();
+	}
+
 	public Image updateImage(Image image) throws SystemException {
 		image.setNew(false);
 

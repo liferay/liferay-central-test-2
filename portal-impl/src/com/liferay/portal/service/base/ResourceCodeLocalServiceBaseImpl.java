@@ -313,6 +313,15 @@ public abstract class ResourceCodeLocalServiceBaseImpl
 		return resourceCodePersistence.findByPrimaryKey(codeId);
 	}
 
+	public List<ResourceCode> getResourceCodes(int start, int end)
+		throws SystemException {
+		return resourceCodePersistence.findAll(start, end);
+	}
+
+	public int getResourceCodesCount() throws SystemException {
+		return resourceCodePersistence.countAll();
+	}
+
 	public ResourceCode updateResourceCode(ResourceCode resourceCode)
 		throws SystemException {
 		resourceCode.setNew(false);

@@ -74,6 +74,11 @@ public interface ExpandoRowLocalService {
 		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
+	public java.util.List<com.liferay.portlet.expando.model.ExpandoRow> getExpandoRows(
+		int start, int end) throws com.liferay.portal.SystemException;
+
+	public int getExpandoRowsCount() throws com.liferay.portal.SystemException;
+
 	public com.liferay.portlet.expando.model.ExpandoRow updateExpandoRow(
 		com.liferay.portlet.expando.model.ExpandoRow expandoRow)
 		throws com.liferay.portal.SystemException;

@@ -102,6 +102,15 @@ public abstract class SocialRequestLocalServiceBaseImpl
 		return socialRequestPersistence.findByPrimaryKey(requestId);
 	}
 
+	public List<SocialRequest> getSocialRequests(int start, int end)
+		throws SystemException {
+		return socialRequestPersistence.findAll(start, end);
+	}
+
+	public int getSocialRequestsCount() throws SystemException {
+		return socialRequestPersistence.countAll();
+	}
+
 	public SocialRequest updateSocialRequest(SocialRequest socialRequest)
 		throws SystemException {
 		socialRequest.setNew(false);

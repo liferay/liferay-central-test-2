@@ -98,6 +98,20 @@ public class PortletLocalServiceUtil {
 		return portletLocalService.getPortlet(id);
 	}
 
+	public static java.util.List<com.liferay.portal.model.Portlet> getPortlets(
+		int start, int end) throws com.liferay.portal.SystemException {
+		PortletLocalService portletLocalService = PortletLocalServiceFactory.getService();
+
+		return portletLocalService.getPortlets(start, end);
+	}
+
+	public static int getPortletsCount()
+		throws com.liferay.portal.SystemException {
+		PortletLocalService portletLocalService = PortletLocalServiceFactory.getService();
+
+		return portletLocalService.getPortletsCount();
+	}
+
 	public static com.liferay.portal.model.Portlet updatePortlet(
 		com.liferay.portal.model.Portlet portlet)
 		throws com.liferay.portal.SystemException {

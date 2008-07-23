@@ -73,6 +73,11 @@ public interface JournalFeedLocalService {
 		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
+	public java.util.List<com.liferay.portlet.journal.model.JournalFeed> getJournalFeeds(
+		int start, int end) throws com.liferay.portal.SystemException;
+
+	public int getJournalFeedsCount() throws com.liferay.portal.SystemException;
+
 	public com.liferay.portlet.journal.model.JournalFeed updateJournalFeed(
 		com.liferay.portlet.journal.model.JournalFeed journalFeed)
 		throws com.liferay.portal.SystemException;

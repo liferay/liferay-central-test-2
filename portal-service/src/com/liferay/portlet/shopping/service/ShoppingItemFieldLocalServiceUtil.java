@@ -101,6 +101,20 @@ public class ShoppingItemFieldLocalServiceUtil {
 		return shoppingItemFieldLocalService.getShoppingItemField(itemFieldId);
 	}
 
+	public static java.util.List<com.liferay.portlet.shopping.model.ShoppingItemField> getShoppingItemFields(
+		int start, int end) throws com.liferay.portal.SystemException {
+		ShoppingItemFieldLocalService shoppingItemFieldLocalService = ShoppingItemFieldLocalServiceFactory.getService();
+
+		return shoppingItemFieldLocalService.getShoppingItemFields(start, end);
+	}
+
+	public static int getShoppingItemFieldsCount()
+		throws com.liferay.portal.SystemException {
+		ShoppingItemFieldLocalService shoppingItemFieldLocalService = ShoppingItemFieldLocalServiceFactory.getService();
+
+		return shoppingItemFieldLocalService.getShoppingItemFieldsCount();
+	}
+
 	public static com.liferay.portlet.shopping.model.ShoppingItemField updateShoppingItemField(
 		com.liferay.portlet.shopping.model.ShoppingItemField shoppingItemField)
 		throws com.liferay.portal.SystemException {

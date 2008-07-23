@@ -74,6 +74,11 @@ public interface UserTrackerLocalService {
 		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
+	public java.util.List<com.liferay.portal.model.UserTracker> getUserTrackers(
+		int start, int end) throws com.liferay.portal.SystemException;
+
+	public int getUserTrackersCount() throws com.liferay.portal.SystemException;
+
 	public com.liferay.portal.model.UserTracker updateUserTracker(
 		com.liferay.portal.model.UserTracker userTracker)
 		throws com.liferay.portal.SystemException;

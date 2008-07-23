@@ -100,6 +100,20 @@ public class PortletItemLocalServiceUtil {
 		return portletItemLocalService.getPortletItem(portletItemId);
 	}
 
+	public static java.util.List<com.liferay.portal.model.PortletItem> getPortletItems(
+		int start, int end) throws com.liferay.portal.SystemException {
+		PortletItemLocalService portletItemLocalService = PortletItemLocalServiceFactory.getService();
+
+		return portletItemLocalService.getPortletItems(start, end);
+	}
+
+	public static int getPortletItemsCount()
+		throws com.liferay.portal.SystemException {
+		PortletItemLocalService portletItemLocalService = PortletItemLocalServiceFactory.getService();
+
+		return portletItemLocalService.getPortletItemsCount();
+	}
+
 	public static com.liferay.portal.model.PortletItem updatePortletItem(
 		com.liferay.portal.model.PortletItem portletItem)
 		throws com.liferay.portal.SystemException {

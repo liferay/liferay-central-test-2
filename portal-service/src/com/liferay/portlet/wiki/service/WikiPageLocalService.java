@@ -72,6 +72,11 @@ public interface WikiPageLocalService {
 		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
+	public java.util.List<com.liferay.portlet.wiki.model.WikiPage> getWikiPages(
+		int start, int end) throws com.liferay.portal.SystemException;
+
+	public int getWikiPagesCount() throws com.liferay.portal.SystemException;
+
 	public com.liferay.portlet.wiki.model.WikiPage updateWikiPage(
 		com.liferay.portlet.wiki.model.WikiPage wikiPage)
 		throws com.liferay.portal.SystemException;

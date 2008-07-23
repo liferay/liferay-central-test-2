@@ -74,6 +74,11 @@ public interface IGFolderLocalService {
 		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
+	public java.util.List<com.liferay.portlet.imagegallery.model.IGFolder> getIGFolders(
+		int start, int end) throws com.liferay.portal.SystemException;
+
+	public int getIGFoldersCount() throws com.liferay.portal.SystemException;
+
 	public com.liferay.portlet.imagegallery.model.IGFolder updateIGFolder(
 		com.liferay.portlet.imagegallery.model.IGFolder igFolder)
 		throws com.liferay.portal.SystemException;

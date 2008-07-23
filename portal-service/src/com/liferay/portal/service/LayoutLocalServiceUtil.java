@@ -98,6 +98,20 @@ public class LayoutLocalServiceUtil {
 		return layoutLocalService.getLayout(plid);
 	}
 
+	public static java.util.List<com.liferay.portal.model.Layout> getLayouts(
+		int start, int end) throws com.liferay.portal.SystemException {
+		LayoutLocalService layoutLocalService = LayoutLocalServiceFactory.getService();
+
+		return layoutLocalService.getLayouts(start, end);
+	}
+
+	public static int getLayoutsCount()
+		throws com.liferay.portal.SystemException {
+		LayoutLocalService layoutLocalService = LayoutLocalServiceFactory.getService();
+
+		return layoutLocalService.getLayoutsCount();
+	}
+
 	public static com.liferay.portal.model.Layout updateLayout(
 		com.liferay.portal.model.Layout layout)
 		throws com.liferay.portal.SystemException {

@@ -313,6 +313,15 @@ public abstract class UserIdMapperLocalServiceBaseImpl
 		return userIdMapperPersistence.findByPrimaryKey(userIdMapperId);
 	}
 
+	public List<UserIdMapper> getUserIdMappers(int start, int end)
+		throws SystemException {
+		return userIdMapperPersistence.findAll(start, end);
+	}
+
+	public int getUserIdMappersCount() throws SystemException {
+		return userIdMapperPersistence.countAll();
+	}
+
 	public UserIdMapper updateUserIdMapper(UserIdMapper userIdMapper)
 		throws SystemException {
 		userIdMapper.setNew(false);

@@ -74,6 +74,12 @@ public interface SCProductScreenshotLocalService {
 		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
+	public java.util.List<com.liferay.portlet.softwarecatalog.model.SCProductScreenshot> getSCProductScreenshots(
+		int start, int end) throws com.liferay.portal.SystemException;
+
+	public int getSCProductScreenshotsCount()
+		throws com.liferay.portal.SystemException;
+
 	public com.liferay.portlet.softwarecatalog.model.SCProductScreenshot updateSCProductScreenshot(
 		com.liferay.portlet.softwarecatalog.model.SCProductScreenshot scProductScreenshot)
 		throws com.liferay.portal.SystemException;

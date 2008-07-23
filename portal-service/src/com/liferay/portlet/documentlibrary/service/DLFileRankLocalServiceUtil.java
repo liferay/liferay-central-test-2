@@ -100,6 +100,20 @@ public class DLFileRankLocalServiceUtil {
 		return dlFileRankLocalService.getDLFileRank(fileRankId);
 	}
 
+	public static java.util.List<com.liferay.portlet.documentlibrary.model.DLFileRank> getDLFileRanks(
+		int start, int end) throws com.liferay.portal.SystemException {
+		DLFileRankLocalService dlFileRankLocalService = DLFileRankLocalServiceFactory.getService();
+
+		return dlFileRankLocalService.getDLFileRanks(start, end);
+	}
+
+	public static int getDLFileRanksCount()
+		throws com.liferay.portal.SystemException {
+		DLFileRankLocalService dlFileRankLocalService = DLFileRankLocalServiceFactory.getService();
+
+		return dlFileRankLocalService.getDLFileRanksCount();
+	}
+
 	public static com.liferay.portlet.documentlibrary.model.DLFileRank updateDLFileRank(
 		com.liferay.portlet.documentlibrary.model.DLFileRank dlFileRank)
 		throws com.liferay.portal.SystemException {

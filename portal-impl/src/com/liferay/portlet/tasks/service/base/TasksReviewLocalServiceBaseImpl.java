@@ -102,6 +102,15 @@ public abstract class TasksReviewLocalServiceBaseImpl
 		return tasksReviewPersistence.findByPrimaryKey(reviewId);
 	}
 
+	public List<TasksReview> getTasksReviews(int start, int end)
+		throws SystemException {
+		return tasksReviewPersistence.findAll(start, end);
+	}
+
+	public int getTasksReviewsCount() throws SystemException {
+		return tasksReviewPersistence.countAll();
+	}
+
 	public TasksReview updateTasksReview(TasksReview tasksReview)
 		throws SystemException {
 		tasksReview.setNew(false);

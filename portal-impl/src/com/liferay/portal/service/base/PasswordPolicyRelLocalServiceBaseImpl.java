@@ -313,6 +313,15 @@ public abstract class PasswordPolicyRelLocalServiceBaseImpl
 		return passwordPolicyRelPersistence.findByPrimaryKey(passwordPolicyRelId);
 	}
 
+	public List<PasswordPolicyRel> getPasswordPolicyRels(int start, int end)
+		throws SystemException {
+		return passwordPolicyRelPersistence.findAll(start, end);
+	}
+
+	public int getPasswordPolicyRelsCount() throws SystemException {
+		return passwordPolicyRelPersistence.countAll();
+	}
+
 	public PasswordPolicyRel updatePasswordPolicyRel(
 		PasswordPolicyRel passwordPolicyRel) throws SystemException {
 		passwordPolicyRel.setNew(false);

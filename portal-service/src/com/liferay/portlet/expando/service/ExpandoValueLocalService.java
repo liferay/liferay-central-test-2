@@ -74,6 +74,12 @@ public interface ExpandoValueLocalService {
 		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
+	public java.util.List<com.liferay.portlet.expando.model.ExpandoValue> getExpandoValues(
+		int start, int end) throws com.liferay.portal.SystemException;
+
+	public int getExpandoValuesCount()
+		throws com.liferay.portal.SystemException;
+
 	public com.liferay.portlet.expando.model.ExpandoValue updateExpandoValue(
 		com.liferay.portlet.expando.model.ExpandoValue expandoValue)
 		throws com.liferay.portal.SystemException;

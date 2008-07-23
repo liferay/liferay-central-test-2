@@ -124,6 +124,15 @@ public abstract class DLFileShortcutLocalServiceBaseImpl
 		return dlFileShortcutPersistence.findByPrimaryKey(fileShortcutId);
 	}
 
+	public List<DLFileShortcut> getDLFileShortcuts(int start, int end)
+		throws SystemException {
+		return dlFileShortcutPersistence.findAll(start, end);
+	}
+
+	public int getDLFileShortcutsCount() throws SystemException {
+		return dlFileShortcutPersistence.countAll();
+	}
+
 	public DLFileShortcut updateDLFileShortcut(DLFileShortcut dlFileShortcut)
 		throws SystemException {
 		dlFileShortcut.setNew(false);

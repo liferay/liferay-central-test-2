@@ -100,6 +100,20 @@ public class WebDAVPropsLocalServiceUtil {
 		return webDAVPropsLocalService.getWebDAVProps(webDavPropsId);
 	}
 
+	public static java.util.List<com.liferay.portal.model.WebDAVProps> getWebDAVPropss(
+		int start, int end) throws com.liferay.portal.SystemException {
+		WebDAVPropsLocalService webDAVPropsLocalService = WebDAVPropsLocalServiceFactory.getService();
+
+		return webDAVPropsLocalService.getWebDAVPropss(start, end);
+	}
+
+	public static int getWebDAVPropssCount()
+		throws com.liferay.portal.SystemException {
+		WebDAVPropsLocalService webDAVPropsLocalService = WebDAVPropsLocalServiceFactory.getService();
+
+		return webDAVPropsLocalService.getWebDAVPropssCount();
+	}
+
 	public static com.liferay.portal.model.WebDAVProps updateWebDAVProps(
 		com.liferay.portal.model.WebDAVProps webDAVProps)
 		throws com.liferay.portal.SystemException {

@@ -102,6 +102,15 @@ public abstract class SocialActivityLocalServiceBaseImpl
 		return socialActivityPersistence.findByPrimaryKey(activityId);
 	}
 
+	public List<SocialActivity> getSocialActivities(int start, int end)
+		throws SystemException {
+		return socialActivityPersistence.findAll(start, end);
+	}
+
+	public int getSocialActivitiesCount() throws SystemException {
+		return socialActivityPersistence.countAll();
+	}
+
 	public SocialActivity updateSocialActivity(SocialActivity socialActivity)
 		throws SystemException {
 		socialActivity.setNew(false);

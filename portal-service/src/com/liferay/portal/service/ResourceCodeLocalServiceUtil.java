@@ -100,6 +100,20 @@ public class ResourceCodeLocalServiceUtil {
 		return resourceCodeLocalService.getResourceCode(codeId);
 	}
 
+	public static java.util.List<com.liferay.portal.model.ResourceCode> getResourceCodes(
+		int start, int end) throws com.liferay.portal.SystemException {
+		ResourceCodeLocalService resourceCodeLocalService = ResourceCodeLocalServiceFactory.getService();
+
+		return resourceCodeLocalService.getResourceCodes(start, end);
+	}
+
+	public static int getResourceCodesCount()
+		throws com.liferay.portal.SystemException {
+		ResourceCodeLocalService resourceCodeLocalService = ResourceCodeLocalServiceFactory.getService();
+
+		return resourceCodeLocalService.getResourceCodesCount();
+	}
+
 	public static com.liferay.portal.model.ResourceCode updateResourceCode(
 		com.liferay.portal.model.ResourceCode resourceCode)
 		throws com.liferay.portal.SystemException {

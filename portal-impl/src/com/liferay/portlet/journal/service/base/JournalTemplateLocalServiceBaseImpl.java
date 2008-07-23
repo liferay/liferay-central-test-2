@@ -142,6 +142,15 @@ public abstract class JournalTemplateLocalServiceBaseImpl
 		return journalTemplatePersistence.findByPrimaryKey(id);
 	}
 
+	public List<JournalTemplate> getJournalTemplates(int start, int end)
+		throws SystemException {
+		return journalTemplatePersistence.findAll(start, end);
+	}
+
+	public int getJournalTemplatesCount() throws SystemException {
+		return journalTemplatePersistence.countAll();
+	}
+
 	public JournalTemplate updateJournalTemplate(
 		JournalTemplate journalTemplate) throws SystemException {
 		journalTemplate.setNew(false);

@@ -100,6 +100,20 @@ public class MBThreadLocalServiceUtil {
 		return mbThreadLocalService.getMBThread(threadId);
 	}
 
+	public static java.util.List<com.liferay.portlet.messageboards.model.MBThread> getMBThreads(
+		int start, int end) throws com.liferay.portal.SystemException {
+		MBThreadLocalService mbThreadLocalService = MBThreadLocalServiceFactory.getService();
+
+		return mbThreadLocalService.getMBThreads(start, end);
+	}
+
+	public static int getMBThreadsCount()
+		throws com.liferay.portal.SystemException {
+		MBThreadLocalService mbThreadLocalService = MBThreadLocalServiceFactory.getService();
+
+		return mbThreadLocalService.getMBThreadsCount();
+	}
+
 	public static com.liferay.portlet.messageboards.model.MBThread updateMBThread(
 		com.liferay.portlet.messageboards.model.MBThread mbThread)
 		throws com.liferay.portal.SystemException {

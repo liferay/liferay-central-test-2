@@ -98,6 +98,15 @@ public abstract class ExpandoValueLocalServiceBaseImpl
 		return expandoValuePersistence.findByPrimaryKey(valueId);
 	}
 
+	public List<ExpandoValue> getExpandoValues(int start, int end)
+		throws SystemException {
+		return expandoValuePersistence.findAll(start, end);
+	}
+
+	public int getExpandoValuesCount() throws SystemException {
+		return expandoValuePersistence.countAll();
+	}
+
 	public ExpandoValue updateExpandoValue(ExpandoValue expandoValue)
 		throws SystemException {
 		expandoValue.setNew(false);

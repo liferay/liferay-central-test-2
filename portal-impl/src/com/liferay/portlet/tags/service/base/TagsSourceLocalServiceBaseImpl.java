@@ -101,6 +101,15 @@ public abstract class TagsSourceLocalServiceBaseImpl
 		return tagsSourcePersistence.findByPrimaryKey(sourceId);
 	}
 
+	public List<TagsSource> getTagsSources(int start, int end)
+		throws SystemException {
+		return tagsSourcePersistence.findAll(start, end);
+	}
+
+	public int getTagsSourcesCount() throws SystemException {
+		return tagsSourcePersistence.countAll();
+	}
+
 	public TagsSource updateTagsSource(TagsSource tagsSource)
 		throws SystemException {
 		tagsSource.setNew(false);

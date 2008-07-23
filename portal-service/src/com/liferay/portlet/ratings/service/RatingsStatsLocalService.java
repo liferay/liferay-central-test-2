@@ -74,6 +74,12 @@ public interface RatingsStatsLocalService {
 		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
+	public java.util.List<com.liferay.portlet.ratings.model.RatingsStats> getRatingsStatss(
+		int start, int end) throws com.liferay.portal.SystemException;
+
+	public int getRatingsStatssCount()
+		throws com.liferay.portal.SystemException;
+
 	public com.liferay.portlet.ratings.model.RatingsStats updateRatingsStats(
 		com.liferay.portlet.ratings.model.RatingsStats ratingsStats)
 		throws com.liferay.portal.SystemException;
