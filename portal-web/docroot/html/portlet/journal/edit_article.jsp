@@ -171,6 +171,29 @@ else {
 	content = ParamUtil.getString(request, "content");
 }
 
+Document contentDoc = null;
+
+SAXReader reader = new SAXReader();
+
+String[] availableLocales = null;
+
+if (Validator.isNotNull(content)) {
+	try {
+		contentDoc = reader.read(new StringReader(content));
+
+		Element contentEl = contentDoc.getRootElement();
+
+		availableLocales = StringUtil.split(contentEl.attributeValue("available-locales"));
+
+		if (structure == null) {
+			content = contentDoc.getRootElement().element("static-content").getTextTrim();
+		}
+	}
+	catch (Exception e) {
+		contentDoc = null;
+	}
+}
+
 boolean disableIncrementVersion = false;
 
 if (PropsValues.JOURNAL_ARTICLE_FORCE_INCREMENT_VERSION) {
@@ -190,6 +213,7 @@ if (PropsValues.JOURNAL_ARTICLE_FORCE_INCREMENT_VERSION) {
 boolean smallImage = BeanParamUtil.getBoolean(article, request, "smallImage");
 String smallImageURL = BeanParamUtil.getString(article, request, "smallImageURL");
 %>
+
 
 <script type="text/javascript">
 	var <portlet:namespace />count = 0;
@@ -553,14 +577,6 @@ String smallImageURL = BeanParamUtil.getString(article, request, "smallImageURL"
 	backURL="<%= redirect %>"
 />
 
-<%
-SAXReader reader = new SAXReader();
-
-Document contentDoc = null;
-
-String[] availableLocales = null;
-%>
-
 <table class="lfr-table" width="100%">
 <tr>
 	<td valign="top">
@@ -656,22 +672,6 @@ String[] availableLocales = null;
 					</td>
 					<td>
 						<table class="lfr-table">
-
-						<%
-						contentDoc = null;
-
-						try {
-							contentDoc = reader.read(new StringReader(content));
-
-							Element contentEl = contentDoc.getRootElement();
-
-							availableLocales = StringUtil.split(contentEl.attributeValue("available-locales"));
-						}
-						catch (Exception e) {
-							contentDoc = null;
-						}
-						%>
-
 						<tr>
 							<td>
 								<liferay-ui:message key="default-language" />
