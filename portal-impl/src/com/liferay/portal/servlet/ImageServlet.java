@@ -62,33 +62,35 @@ public class ImageServlet extends HttpServlet {
 	public void init(ServletConfig filterConfig) throws ServletException {
 		super.init(filterConfig);
 
-		_last_modified = GetterUtil.getBoolean(
-				filterConfig.getInitParameter("last_modified"), true);
+		_lastModified = GetterUtil.getBoolean(
+			filterConfig.getInitParameter("last_modified"), true);
 	}
 
 	public void service(
 			HttpServletRequest request, HttpServletResponse response)
 		throws IOException, ServletException {
 
-		if( _last_modified ) {
+		if (_lastModified) {
 			long lastModified = getLastModified(request);
-	
+
 			if (lastModified > 0) {
-				long ifModifiedSince =
-					request.getDateHeader(HttpHeaders.IF_MODIFIED_SINCE);
-	
-				if ((ifModifiedSince > 0) && (ifModifiedSince == lastModified)) {
+				long ifModifiedSince = request.getDateHeader(
+					HttpHeaders.IF_MODIFIED_SINCE);
+
+				if ((ifModifiedSince > 0) &&
+					(ifModifiedSince == lastModified)) {
+
 					response.setStatus(HttpServletResponse.SC_NOT_MODIFIED);
-	
+
 					return;
 				}
 			}
-	
+
 			if (lastModified > 0) {
 				response.setDateHeader(HttpHeaders.LAST_MODIFIED, lastModified);
 			}
 		}
-		
+
 		try {
 			writeImage(request, response);
 		}
@@ -230,6 +232,7 @@ public class ImageServlet extends HttpServlet {
 	}
 
 	private static Log _log = LogFactory.getLog(ImageServlet.class);
-	
-	private boolean _last_modified = true;
+
+	private boolean _lastModified = true;
+
 }
