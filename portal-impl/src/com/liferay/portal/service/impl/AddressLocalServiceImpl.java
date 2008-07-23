@@ -28,7 +28,10 @@ import com.liferay.portal.AddressZipException;
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.util.Validator;
+import com.liferay.portal.model.Account;
 import com.liferay.portal.model.Address;
+import com.liferay.portal.model.Contact;
+import com.liferay.portal.model.Organization;
 import com.liferay.portal.model.User;
 import com.liferay.portal.model.impl.ListTypeImpl;
 import com.liferay.portal.service.base.AddressLocalServiceBaseImpl;
@@ -189,7 +192,14 @@ public class AddressLocalServiceImpl extends AddressLocalServiceBaseImpl {
 		}
 
 		try {
-			listTypeService.validate(typeId, classNameId, ListTypeImpl.ADDRESS);
+			if ((classNameId == PortalUtil.getClassNameId(Account.class)) ||
+				(classNameId == PortalUtil.getClassNameId(Contact.class)) ||
+				(classNameId ==
+					PortalUtil.getClassNameId(Organization.class))) {
+
+				listTypeService.validate(
+					typeId, classNameId, ListTypeImpl.ADDRESS);
+			}
 		}
 		catch (RemoteException re) {
 			throw new SystemException(re);

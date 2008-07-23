@@ -25,6 +25,7 @@ package com.liferay.portal.model;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.ListUtil;
 import com.liferay.portal.kernel.util.StringUtil;
+import com.liferay.portal.service.ClassNameLocalServiceUtil;
 import com.liferay.portal.util.PropsKeys;
 import com.liferay.portal.util.PropsUtil;
 import com.liferay.portal.xml.ElementImpl;
@@ -181,6 +182,10 @@ public class ModelHintsImpl implements ModelHints {
 			Element model = itr1.next();
 
 			String name = model.attributeValue("name");
+
+			if (classLoader != ModelHintsImpl.class.getClassLoader()) {
+				ClassNameLocalServiceUtil.getClassName(name);
+			}
 
 			Map<String, String> defaultHints = new HashMap<String, String>();
 
