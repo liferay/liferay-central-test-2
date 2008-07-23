@@ -61,27 +61,6 @@ public class TagsEntryServiceUtil {
 	}
 
 	public static com.liferay.portlet.tags.model.TagsEntry addEntry(
-		java.lang.String name, java.lang.String vocabularyName,
-		java.lang.String[] properties)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException, java.rmi.RemoteException {
-		TagsEntryService tagsEntryService = TagsEntryServiceFactory.getService();
-
-		return tagsEntryService.addEntry(name, vocabularyName, properties);
-	}
-
-	public static com.liferay.portlet.tags.model.TagsEntry addEntry(
-		java.lang.String name, java.lang.String vocabularyName,
-		java.lang.String[] properties, java.lang.String parentCategory)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException, java.rmi.RemoteException {
-		TagsEntryService tagsEntryService = TagsEntryServiceFactory.getService();
-
-		return tagsEntryService.addEntry(name, vocabularyName, properties,
-			parentCategory);
-	}
-
-	public static com.liferay.portlet.tags.model.TagsEntry addEntry(
 		java.lang.String name, java.lang.String[] properties)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
@@ -112,24 +91,6 @@ public class TagsEntryServiceUtil {
 		TagsEntryService tagsEntryService = TagsEntryServiceFactory.getService();
 
 		return tagsEntryService.getEntries(groupId, companyId, classNameId, name);
-	}
-
-	public static java.util.List<com.liferay.portlet.tags.model.TagsEntry> getVocabularyEntries(
-		long companyId, java.lang.String vocabularyName)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException, java.rmi.RemoteException {
-		TagsEntryService tagsEntryService = TagsEntryServiceFactory.getService();
-
-		return tagsEntryService.getVocabularyEntries(companyId, vocabularyName);
-	}
-
-	public static com.liferay.portlet.tags.model.TagsEntry getEntry(
-		long entryId)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException, java.rmi.RemoteException {
-		TagsEntryService tagsEntryService = TagsEntryServiceFactory.getService();
-
-		return tagsEntryService.getEntry(entryId);
 	}
 
 	public static void mergeEntries(long fromEntryId, long toEntryId)
@@ -182,17 +143,6 @@ public class TagsEntryServiceUtil {
 		TagsEntryService tagsEntryService = TagsEntryServiceFactory.getService();
 
 		return tagsEntryService.updateEntry(entryId, name);
-	}
-
-	public static com.liferay.portlet.tags.model.TagsEntry updateEntry(
-		long entryId, java.lang.String name, java.lang.String parentEntryName,
-		java.lang.String[] properties, java.lang.String vocabularyName)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException, java.rmi.RemoteException {
-		TagsEntryService tagsEntryService = TagsEntryServiceFactory.getService();
-
-		return tagsEntryService.updateEntry(entryId, name, parentEntryName,
-			properties, vocabularyName);
 	}
 
 	public static com.liferay.portlet.tags.model.TagsEntry updateEntry(

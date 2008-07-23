@@ -96,39 +96,6 @@ public class TagsEntryServiceSoap {
 	}
 
 	public static com.liferay.portlet.tags.model.TagsEntrySoap addEntry(
-		java.lang.String name, java.lang.String vocabularyName,
-		java.lang.String[] properties) throws RemoteException {
-		try {
-			com.liferay.portlet.tags.model.TagsEntry returnValue = TagsEntryServiceUtil.addEntry(name,
-					vocabularyName, properties);
-
-			return com.liferay.portlet.tags.model.TagsEntrySoap.toSoapModel(returnValue);
-		}
-		catch (Exception e) {
-			_log.error(e, e);
-
-			throw new RemoteException(e.getMessage());
-		}
-	}
-
-	public static com.liferay.portlet.tags.model.TagsEntrySoap addEntry(
-		java.lang.String name, java.lang.String vocabularyName,
-		java.lang.String[] properties, java.lang.String parentCategory)
-		throws RemoteException {
-		try {
-			com.liferay.portlet.tags.model.TagsEntry returnValue = TagsEntryServiceUtil.addEntry(name,
-					vocabularyName, properties, parentCategory);
-
-			return com.liferay.portlet.tags.model.TagsEntrySoap.toSoapModel(returnValue);
-		}
-		catch (Exception e) {
-			_log.error(e, e);
-
-			throw new RemoteException(e.getMessage());
-		}
-	}
-
-	public static com.liferay.portlet.tags.model.TagsEntrySoap addEntry(
 		java.lang.String name, java.lang.String[] properties)
 		throws RemoteException {
 		try {
@@ -179,37 +146,6 @@ public class TagsEntryServiceSoap {
 					classNameId, name);
 
 			return com.liferay.portlet.tags.model.TagsEntrySoap.toSoapModels(returnValue);
-		}
-		catch (Exception e) {
-			_log.error(e, e);
-
-			throw new RemoteException(e.getMessage());
-		}
-	}
-
-	public static com.liferay.portlet.tags.model.TagsEntrySoap[] getVocabularyEntries(
-		long companyId, java.lang.String vocabularyName)
-		throws RemoteException {
-		try {
-			java.util.List<com.liferay.portlet.tags.model.TagsEntry> returnValue =
-				TagsEntryServiceUtil.getVocabularyEntries(companyId,
-					vocabularyName);
-
-			return com.liferay.portlet.tags.model.TagsEntrySoap.toSoapModels(returnValue);
-		}
-		catch (Exception e) {
-			_log.error(e, e);
-
-			throw new RemoteException(e.getMessage());
-		}
-	}
-
-	public static com.liferay.portlet.tags.model.TagsEntrySoap getEntry(
-		long entryId) throws RemoteException {
-		try {
-			com.liferay.portlet.tags.model.TagsEntry returnValue = TagsEntryServiceUtil.getEntry(entryId);
-
-			return com.liferay.portlet.tags.model.TagsEntrySoap.toSoapModel(returnValue);
 		}
 		catch (Exception e) {
 			_log.error(e, e);
@@ -299,23 +235,6 @@ public class TagsEntryServiceSoap {
 		try {
 			com.liferay.portlet.tags.model.TagsEntry returnValue = TagsEntryServiceUtil.updateEntry(entryId,
 					name);
-
-			return com.liferay.portlet.tags.model.TagsEntrySoap.toSoapModel(returnValue);
-		}
-		catch (Exception e) {
-			_log.error(e, e);
-
-			throw new RemoteException(e.getMessage());
-		}
-	}
-
-	public static com.liferay.portlet.tags.model.TagsEntrySoap updateEntry(
-		long entryId, java.lang.String name, java.lang.String parentEntryName,
-		java.lang.String[] properties, java.lang.String vocabularyName)
-		throws RemoteException {
-		try {
-			com.liferay.portlet.tags.model.TagsEntry returnValue = TagsEntryServiceUtil.updateEntry(entryId,
-					name, parentEntryName, properties, vocabularyName);
 
 			return com.liferay.portlet.tags.model.TagsEntrySoap.toSoapModel(returnValue);
 		}

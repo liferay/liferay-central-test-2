@@ -401,7 +401,6 @@ create index IX_1AB6D6D2 on TagsAsset (classNameId, classPK);
 create index IX_AB3D8BCB on TagsAsset (companyId);
 
 create index IX_10563688 on TagsEntry (companyId, name);
-create index IX_AB1B8C1E on TagsEntry (companyId, vocabularyId);
 
 create index IX_C134234 on TagsProperty (companyId);
 create index IX_EB974D08 on TagsProperty (companyId, key_);
@@ -452,11 +451,6 @@ create index IX_A18034A4 on User_ (portraitId);
 create index IX_E0422BDA on User_ (uuid_);
 
 create index LIFERAY_003 on Users_Permissions (permissionId);
-
-create index IX_A14CB55C on Vocabulary (companyId);
-create index IX_EB4A3321 on Vocabulary (companyId, folksonomy);
-create index IX_A788901B on Vocabulary (companyId, name);
-create index IX_37D21D11 on Vocabulary (folksonomy);
 
 create index IX_97DFA146 on WebDAVProps (classNameId, classPK);
 

@@ -66,9 +66,6 @@ public class TagsEntryModelImpl extends BaseModelImpl {
 			{ "entryId", new Integer(Types.BIGINT) },
 			
 
-			{ "groupId", new Integer(Types.BIGINT) },
-			
-
 			{ "companyId", new Integer(Types.BIGINT) },
 			
 
@@ -84,15 +81,9 @@ public class TagsEntryModelImpl extends BaseModelImpl {
 			{ "modifiedDate", new Integer(Types.TIMESTAMP) },
 			
 
-			{ "vocabularyId", new Integer(Types.BIGINT) },
-			
-
-			{ "parentEntryId", new Integer(Types.BIGINT) },
-			
-
 			{ "name", new Integer(Types.VARCHAR) }
 		};
-	public static final String TABLE_SQL_CREATE = "create table TagsEntry (entryId LONG not null primary key,groupId LONG,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,vocabularyId LONG,parentEntryId LONG,name VARCHAR(75) null)";
+	public static final String TABLE_SQL_CREATE = "create table TagsEntry (entryId LONG not null primary key,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,name VARCHAR(75) null)";
 	public static final String TABLE_SQL_DROP = "drop table TagsEntry";
 	public static final String DATA_SOURCE = "liferayDataSource";
 	public static final String SESSION_FACTORY = "liferaySessionFactory";
@@ -105,14 +96,11 @@ public class TagsEntryModelImpl extends BaseModelImpl {
 		TagsEntry model = new TagsEntryImpl();
 
 		model.setEntryId(soapModel.getEntryId());
-		model.setGroupId(soapModel.getGroupId());
 		model.setCompanyId(soapModel.getCompanyId());
 		model.setUserId(soapModel.getUserId());
 		model.setUserName(soapModel.getUserName());
 		model.setCreateDate(soapModel.getCreateDate());
 		model.setModifiedDate(soapModel.getModifiedDate());
-		model.setVocabularyId(soapModel.getVocabularyId());
-		model.setParentEntryId(soapModel.getParentEntryId());
 		model.setName(soapModel.getName());
 
 		return model;
@@ -154,16 +142,6 @@ public class TagsEntryModelImpl extends BaseModelImpl {
 	public void setEntryId(long entryId) {
 		if (entryId != _entryId) {
 			_entryId = entryId;
-		}
-	}
-
-	public long getGroupId() {
-		return _groupId;
-	}
-
-	public void setGroupId(long groupId) {
-		if (groupId != _groupId) {
-			_groupId = groupId;
 		}
 	}
 
@@ -226,26 +204,6 @@ public class TagsEntryModelImpl extends BaseModelImpl {
 		}
 	}
 
-	public long getVocabularyId() {
-		return _vocabularyId;
-	}
-
-	public void setVocabularyId(long vocabularyId) {
-		if (vocabularyId != _vocabularyId) {
-			_vocabularyId = vocabularyId;
-		}
-	}
-
-	public long getParentEntryId() {
-		return _parentEntryId;
-	}
-
-	public void setParentEntryId(long parentEntryId) {
-		if (parentEntryId != _parentEntryId) {
-			_parentEntryId = parentEntryId;
-		}
-	}
-
 	public String getName() {
 		return GetterUtil.getString(_name);
 	}
@@ -268,14 +226,11 @@ public class TagsEntryModelImpl extends BaseModelImpl {
 			model.setEscapedModel(true);
 
 			model.setEntryId(getEntryId());
-			model.setGroupId(getGroupId());
 			model.setCompanyId(getCompanyId());
 			model.setUserId(getUserId());
 			model.setUserName(HtmlUtil.escape(getUserName()));
 			model.setCreateDate(getCreateDate());
 			model.setModifiedDate(getModifiedDate());
-			model.setVocabularyId(getVocabularyId());
-			model.setParentEntryId(getParentEntryId());
 			model.setName(HtmlUtil.escape(getName()));
 
 			model = (TagsEntry)Proxy.newProxyInstance(TagsEntry.class.getClassLoader(),
@@ -290,14 +245,11 @@ public class TagsEntryModelImpl extends BaseModelImpl {
 		TagsEntryImpl clone = new TagsEntryImpl();
 
 		clone.setEntryId(getEntryId());
-		clone.setGroupId(getGroupId());
 		clone.setCompanyId(getCompanyId());
 		clone.setUserId(getUserId());
 		clone.setUserName(getUserName());
 		clone.setCreateDate(getCreateDate());
 		clone.setModifiedDate(getModifiedDate());
-		clone.setVocabularyId(getVocabularyId());
-		clone.setParentEntryId(getParentEntryId());
 		clone.setName(getName());
 
 		return clone;
@@ -350,13 +302,10 @@ public class TagsEntryModelImpl extends BaseModelImpl {
 	}
 
 	private long _entryId;
-	private long _groupId;
 	private long _companyId;
 	private long _userId;
 	private String _userName;
 	private Date _createDate;
 	private Date _modifiedDate;
-	private long _vocabularyId;
-	private long _parentEntryId;
 	private String _name;
 }

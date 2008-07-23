@@ -26,64 +26,6 @@
 
 <form id="<portlet:namespace />fm">
 
-<table width="100%">
-<tr>
-<td align="right" colspan="3">
-	<liferay-ui:message key="tag-value" />
-
-	<input id="<portlet:namespace />addEntryNameInput" type="text" />
-
-	<liferay-ui:message key="vocabulary" />
-
-	<input id="<portlet:namespace />addEntryVocabularyInput" type="text" value="" />
-
-	<input id="<portlet:namespace />addEntryButton" type="button" value="<liferay-ui:message key="add" />" />
-</td>
-</tr>
-<tr>
-<td valign="top">
-<fieldset id="<portlet:namespace />Vocabularies">
-	<legend><liferay-ui:message key="vocabularies" /></legend>
-
-	<div class="ui-tags" id="<portlet:namespace />listVocabulariesDiv" /></div>
-
-	<br />
-
-	<div>
-		<b><liferay-ui:message key="new-vocabulary" /></b>
-		<br />
-		<liferay-ui:message key="name" />
-		<input id="<portlet:namespace />addVocabularyNameInput" type="text" />
-		<br />
-		<liferay-ui:message key="folksonomy" /><input id="<portlet:namespace />addVocabularyFolksonomyCheck" type="checkbox" />
-		<br />
-		<input id="<portlet:namespace />addVocabularyButton" type="button" value="<liferay-ui:message key="add" />" />
-	</div>
-</fieldset>
-</td>
-
-<td valign="top">
-<fieldset id="<portlet:namespace />editVocabularyFields">
-	<legend><liferay-ui:message key="edit-vocabulary" /></legend>
-
-
-	<div class="ui-tags" id="<portlet:namespace />vocabularyTagsDiv" /></div>
-
-	<br /><br />
-
-	<liferay-ui:message key="vocabulary-name" />
-	<input id="<portlet:namespace />editVocabularyNameInput" type="text" />
-
-	<br />
-	<liferay-ui:message key="folksonomy" /><input id="<portlet:namespace />editVocabularyFolksonomyCheck" type="checkbox" value="" disabled />
-	<br /><br />
-	<input id="<portlet:namespace />updateVocabularyButton" type="button" value="<liferay-ui:message key="save" />" />
-
-	<input id="<portlet:namespace />deleteVocabularyButton" type="button" value="<liferay-ui:message key="delete" />" />
-</fieldset>
-</td>
-
-<!--
 <fieldset id="<portlet:namespace />searchEntriesFields">
 	<legend><liferay-ui:message key="search-tag" /></legend>
 
@@ -101,32 +43,19 @@
 
 	<div class="ui-tags" id="<portlet:namespace />searchResultsDiv" /></div>
 </fieldset>
- -->
-<td valign="top">
+
 <fieldset id="<portlet:namespace />editEntryFields">
 	<legend><liferay-ui:message key="edit-tag" /></legend>
 
 	<liferay-ui:message key="tag-value" />
 
+	<br />
+
 	<input id="<portlet:namespace />editEntryNameInput" type="text" value="" />
 
 	<%--<input id="<portlet:namespace />updateEntryButton" type="button" value="<liferay-ui:message key="copy" />" />--%>
 
-	<br />
-
-	<liferay-ui:message key="tag-vocabulary" />
-
-	<input id="<portlet:namespace />editEntryVocabularyInput" type="text" value="" />
-
-	<br />
-
-	<div id="<portlet:namespace />editEntryParentDiv" style="padding-left: 10px;">
-		<liferay-ui:message key="tag-parent" />
-
-		<input id="<portlet:namespace />editEntryParentInput" type="text" value="" />
-
-		<br /><br />
-	</div>
+	<br /><br />
 
 	<liferay-ui:message key="properties" />
 
@@ -134,15 +63,27 @@
 
 	<input id="<portlet:namespace />addPropertyButton" type="button" value="<liferay-ui:message key="add-property" />" />
 
+	<hr />
+
 	<input id="<portlet:namespace />updateEntryButton" type="button" value="<liferay-ui:message key="save" />" />
 
 	<input id="<portlet:namespace />deleteEntryButton" type="button" value="<liferay-ui:message key="delete" />" />
 
 	<input id="<portlet:namespace />cancelEditEntryButton" type="button" value="<liferay-ui:message key="cancel" />" />
 </fieldset>
-</td>
-</tr>
-</table>
+
+<fieldset id="<portlet:namespace />addEntryFields">
+	<legend><liferay-ui:message key="add-tag" /></legend>
+
+	<input id="<portlet:namespace />addEntryNameInput" type="text" />
+
+	<span id="<portlet:namespace />addToCategorySpan" style="padding-left: 10px;"></span>
+
+	<input id="<portlet:namespace />addCategoryNameInput" type="text" value="" />
+
+	<input id="<portlet:namespace />addEntryButton" type="button" value="<liferay-ui:message key="save" />" />
+</fieldset>
+
 </form>
 
 <script type="text/javascript">
@@ -152,33 +93,18 @@
 			addCategoryNameInput: "<portlet:namespace />addCategoryNameInput",
 			addEntryButton: "<portlet:namespace />addEntryButton",
 			addEntryNameInput: "<portlet:namespace />addEntryNameInput",
-			addEntryVocabularyInput: "<portlet:namespace />addEntryVocabularyInput",
 			addPropertyButton: "<portlet:namespace />addPropertyButton",
 			addToCategorySpan: "<portlet:namespace />addToCategorySpan",
-			addVocabularyButton: "<portlet:namespace />addVocabularyButton",
-			addVocabularyFolksonomyCheck: "<portlet:namespace />addVocabularyFolksonomyCheck",
-			addVocabularyNameInput: "<portlet:namespace />addVocabularyNameInput",
 			cancelEditEntryButton: "<portlet:namespace />cancelEditEntryButton",
-			cancelEditVocabularyButton: "<portlet:namespace />cancelEditVocabularyButton",
 			deleteEntryButton: "<portlet:namespace />deleteEntryButton",
-			deleteVocabularyButton: "<portlet:namespace />deleteVocabularyButton",
 			editEntryFields: "<portlet:namespace />editEntryFields",
 			editEntryNameInput: "<portlet:namespace />editEntryNameInput",
-			editEntryParentInput: "<portlet:namespace />editEntryParentInput",
-			editEntryParentDiv: "<portlet:namespace />editEntryParentDiv",
-			editEntryVocabularyInput: "<portlet:namespace />editEntryVocabularyInput",
-			editVocabularyFields: "<portlet:namespace />editVocabularyFields",
-			editVocabularyFolksonomyCheck: "<portlet:namespace />editVocabularyFolksonomyCheck",
-			editVocabularyNameInput: "<portlet:namespace />editVocabularyNameInput",
 			form: "<portlet:namespace />fm",
 			keywordsInput: "<portlet:namespace />keywordsInput",
-			listVocabulariesDiv: "<portlet:namespace />listVocabulariesDiv",
 			propertiesTable: "<portlet:namespace />propertiesTable",
 			searchPropertiesSpan: "<portlet:namespace />searchPropertiesSpan",
 			searchResultsDiv: "<portlet:namespace />searchResultsDiv",
-			updateEntryButton: "<portlet:namespace />updateEntryButton",
-			updateVocabularyButton: "<portlet:namespace />updateVocabularyButton",
-			vocabularyTagsDiv: "<portlet:namespace />vocabularyTagsDiv"
+			updateEntryButton: "<portlet:namespace />updateEntryButton"
 		}
 	);
 </script>
