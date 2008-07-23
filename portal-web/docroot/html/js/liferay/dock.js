@@ -181,7 +181,5 @@ Liferay.Dock = {
 			dockList.toggle();
 			dock.toggleClass('expanded');
 		}
-	},
-
-	_hovered: false
+	}
 };

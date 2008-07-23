@@ -257,12 +257,9 @@ Liferay.Session = {
 	},
 
 	_banner: [],
-	_countdownTimer: null,
 	_currentTime: 0,
 	_originalTitle: '',
 	_sessionUrls: {},
-	_sessionWarning: null,
-	_sessionExpired: null,
 	_timeout: 0,
 	_timeoutDiff: 0,
 	_warning: 0

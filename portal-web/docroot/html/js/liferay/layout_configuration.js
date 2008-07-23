@@ -1,6 +1,5 @@
 var LayoutConfiguration = {
 	categories: [],
-	menu: null,
 	portlets: [],
 	showTimer: 0,
 

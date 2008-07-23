@@ -521,6 +521,5 @@ Liferay.Layout.FreeForm = {
 		}
 	},
 
-	_current: null,
 	_maxZIndex: 99
 };

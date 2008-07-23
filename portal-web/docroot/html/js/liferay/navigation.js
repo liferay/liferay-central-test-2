@@ -574,10 +574,6 @@ Liferay.Navigation = new Class({
 		}
 	},
 
-	_isSortable: false,
-	_isModifiable: false,
-	_isUseHandle: false,
-	_hasPermission: false,
 	_enterPage: '',
 	_updateURL: ''
 });
