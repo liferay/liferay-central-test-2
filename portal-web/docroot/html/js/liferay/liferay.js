@@ -36,9 +36,9 @@ Liferay.Service = {
 		var instance = this;
 
 		var serviceUrl = instance.actionUrl;
-		var isUsingTunnel = (Liferay.ServiceAuth && Liferay.ServiceAuth.header);
+		var tunnelEnabled = (Liferay.ServiceAuth && Liferay.ServiceAuth.header);
 
-		if (isUsingTunnel) {
+		if (tunnelEnabled) {
 			serviceUrl = instance.tunnelUrl;
 		}
 
@@ -52,7 +52,7 @@ Liferay.Service = {
 					data: options,
 					dataType: 'json',
 					beforeSend: function(xHR) {
-						if (isUsingTunnel) {
+						if (tunnelEnabled) {
 							xHR.setRequestHeader('Authorization', Liferay.ServiceAuth.header);
 						}
 					},

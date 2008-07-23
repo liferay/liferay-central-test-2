@@ -7403,18 +7403,19 @@ jQuery.ajaxSetup(
 );
 
 Liferay.Service = {
-	actionUrl: themeDisplay.getPathMain() + "/portal/json_service",
+	actionUrl: themeDisplay.getPathMain() + '/portal/json_service',
 
-	tunnelUrl: themeDisplay.getPathContext() + "/tunnel-web/secure/json",
+	tunnelUrl: themeDisplay.getPathContext() + '/tunnel-web/secure/json',
 
-	classNameSuffix: "ServiceJSON",
+	classNameSuffix: 'ServiceJSON',
 
 	ajax: function(options, callback) {
 		var instance = this;
 
 		var serviceUrl = instance.actionUrl;
+		var tunnelEnabled = (Liferay.ServiceAuth && Liferay.ServiceAuth.header);
 
-		if (Liferay.ServiceAuth.header) {
+		if (tunnelEnabled) {
 			serviceUrl = instance.tunnelUrl;
 		}
 
@@ -7428,7 +7429,7 @@ Liferay.Service = {
 					data: options,
 					dataType: 'json',
 					beforeSend: function(xHR) {
-						if (Liferay.ServiceAuth.header) {
+						if (tunnelEnabled) {
 							xHR.setRequestHeader('Authorization', Liferay.ServiceAuth.header);
 						}
 					},
@@ -7446,26 +7447,30 @@ Liferay.Service = {
 				}
 			);
 
-			return eval("(" + xHR.responseText + ")");
+			return eval('(' + xHR.responseText + ')');
 		}
 	},
 
 	getParameters: function(options) {
-		var serviceParameters = "";
+		var serviceParameters = '';
 
 		for (var key in options) {
-			if ((key != "serviceClassName") && (key != "serviceMethodName") && (key != "serviceParameterTypes")) {
-				serviceParameters += key + ",";
+			if ((key != 'serviceClassName') && (key != 'serviceMethodName') && (key != 'serviceParameterTypes')) {
+				serviceParameters += key + ',';
 			}
 		}
 
-		if (Liferay.Util.endsWith(serviceParameters, ",")) {
+		if (Liferay.Util.endsWith(serviceParameters, ',')) {
 			serviceParameters = serviceParameters.substring(0, serviceParameters.length - 1);
 		}
 
 		return serviceParameters;
 	}
 };
+
+/*
+
+LEP-6815
 
 Liferay.ServiceAuth = {
 	header: null,
@@ -7477,9 +7482,6 @@ Liferay.ServiceAuth = {
 	}
 };
 
-/*
-http://www.webtoolkit.info/
-*/
 Liferay.Base64 = {
 	encode: function(input) {
 		var instance = this;
@@ -7605,6 +7607,8 @@ Liferay.Base64 = {
 
 	_keyStr: "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/="
 };
+
+*/
 
 Liferay.Template = {
 	PORTLET: '<div class="portlet"><div class="portlet-topper"><div class="portlet-title"></div></div><div class="portlet-content"></div><div class="forbidden-action"></div></div>'
@@ -10042,9 +10046,7 @@ Liferay.Dock = {
 			dockList.toggle();
 			dock.toggleClass('expanded');
 		}
-	},
-
-	_hovered: false
+	}
 };
 Liferay.Menu = new Class({
 	initialize: function(options) {

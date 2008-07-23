@@ -49,12 +49,12 @@
 			StringBuilder portletList = new StringBuilder();
 
 			for (int i = 0; i < nonAjaxPortletIds.size(); i++) {
-				portletList.append("'");
-				portletList.append("_");
+				portletList.append(StringPool.APOSTROPHE);
+				portletList.append(StringPool.UNDERLINE);
 				portletList.append(nonAjaxPortletIds.get(i));
-				portletList.append("'");
+				portletList.append(StringPool.APOSTROPHE);
 				portletList.append(":true");
-				portletList.append((i < nonAjaxPortletIds.size() - 1) ? "," : "");
+				portletList.append((i < nonAjaxPortletIds.size() - 1) ? StringPool.COMMA : StringPool.BLANK);
 			}
 			%>
 
