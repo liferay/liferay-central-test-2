@@ -41,6 +41,7 @@ import java.io.IOException;
 
 import java.util.Date;
 
+import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -58,29 +59,36 @@ import org.apache.commons.logging.LogFactory;
  */
 public class ImageServlet extends HttpServlet {
 
+	public void init(ServletConfig filterConfig) throws ServletException {
+		super.init(filterConfig);
+
+		_last_modified = GetterUtil.getBoolean(
+				filterConfig.getInitParameter("last_modified"), true);
+	}
+
 	public void service(
 			HttpServletRequest request, HttpServletResponse response)
 		throws IOException, ServletException {
 
-		long lastModified = getLastModified(request);
-
-		if (lastModified > 0) {
-			long ifModifiedSince =
-				request.getDateHeader(HttpHeaders.IF_MODIFIED_SINCE);
-
-			if ((ifModifiedSince > 0) && (ifModifiedSince == lastModified)) {
-				response.setStatus(HttpServletResponse.SC_NOT_MODIFIED);
-
-				return;
+		if( _last_modified ) {
+			long lastModified = getLastModified(request);
+	
+			if (lastModified > 0) {
+				long ifModifiedSince =
+					request.getDateHeader(HttpHeaders.IF_MODIFIED_SINCE);
+	
+				if ((ifModifiedSince > 0) && (ifModifiedSince == lastModified)) {
+					response.setStatus(HttpServletResponse.SC_NOT_MODIFIED);
+	
+					return;
+				}
+			}
+	
+			if (lastModified > 0) {
+				response.setDateHeader(HttpHeaders.LAST_MODIFIED, lastModified);
 			}
 		}
-
-		//res.addHeader(HttpHeaders.CACHE_CONTROL, "max-age=0");
-
-		if (lastModified > 0) {
-			response.setDateHeader(HttpHeaders.LAST_MODIFIED, lastModified);
-		}
-
+		
 		try {
 			writeImage(request, response);
 		}
@@ -222,5 +230,6 @@ public class ImageServlet extends HttpServlet {
 	}
 
 	private static Log _log = LogFactory.getLog(ImageServlet.class);
-
+	
+	private boolean _last_modified = true;
 }

@@ -496,6 +496,10 @@
 	<servlet>
 		<servlet-name>ImageServlet</servlet-name>
 		<servlet-class>com.liferay.portal.servlet.ImageServlet</servlet-class>
+		<init-param>
+			<param-name>last_modified</param-name>
+			<param-value>true</param-value>
+		</init-param>
 		<load-on-startup>8</load-on-startup>
 	</servlet>
 	<servlet>
