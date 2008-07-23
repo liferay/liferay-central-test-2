@@ -14,14 +14,19 @@ Liferay.Portlet.TagsAdmin = new Class({
 		var addEntryButton = jQuery('#' + params.addEntryButton);
 		var addEntryNameInput = jQuery('#' + params.addEntryNameInput);
 		var addPropertyButton = jQuery('#' + params.addPropertyButton);
-		var addToCategorySpan = jQuery('#' + params.addToCategorySpan);
+		var addVocabularyButton = jQuery('#' + params.addVocabularyButton);
+		var addVocabularyNameInput = jQuery('#' + params.addVocabularyNameInput);
 		var cancelEditEntryButton = jQuery('#' + params.cancelEditEntryButton);
+		var cancelEditVocabularyButton = jQuery('#' + params.cancelEditVocabularyButton);
 		var deleteEntryButton = jQuery('#' + params.deleteEntryButton);
+		var deleteVocabularyButton = jQuery('#' + params.deleteVocabularyButton);
 		var editEntryFields = jQuery('#' + params.editEntryFields);
 		var editEntryNameInput = jQuery('#' + params.editEntryNameInput);
+		var editVocabularyFields = jQuery('#' + params.editVocabularyFields);
 		var form = jQuery('#' + params.form);
 		var keywordsInput = jQuery('#' + params.keywordsInput);
 		var updateEntryButton = jQuery('#' + params.updateEntryButton);
+		var updateVocabularyButton = jQuery('#' + params.updateVocabularyButton);
 
 		instance._form = form;
 
@@ -29,9 +34,14 @@ Liferay.Portlet.TagsAdmin = new Class({
 
 		instance._getEntries(instance);
 
+		// Show all vocabularies
+
+		instance._getVocabularies(instance);
+
 		// Divs
 
 		editEntryFields.hide();
+		editVocabularyFields.hide();
 
 		// Form
 
@@ -59,6 +69,14 @@ Liferay.Portlet.TagsAdmin = new Class({
 					instance._addEntry(instance);
 				}
 			}
+		);
+
+		addVocabularyNameInput.keypress(
+			function(event) {
+				if (event.keyCode == 13) {
+					instance._addVocabulary(instance);
+				}
+			}			
 		);
 
 		editEntryNameInput.keypress(
@@ -99,11 +117,24 @@ Liferay.Portlet.TagsAdmin = new Class({
 			}
 		);
 
+		addVocabularyButton.click(
+			function() {
+				instance._addVocabulary(instance);
+			}
+		);
+
 		cancelEditEntryButton.click(
 			function() {
 				editEntryFields.hide();
 			}
 		);
+
+		cancelEditVocabularyButton.click(
+			function() {
+				editVocabularyFields.hide();
+			}
+		);
+		
 
 		deleteEntryButton.click(
 			function() {
@@ -111,28 +142,82 @@ Liferay.Portlet.TagsAdmin = new Class({
 			}
 		);
 
+		deleteVocabularyButton.click(
+			function() {
+				instance._deleteVocabulary(instance, instance._vocabularyId);
+			}
+		);
+		
+
 		updateEntryButton.click(
 			function() {
 				instance._updateEntry(instance);
 			}
 		);
+		
+		updateVocabularyButton.click(
+			function() {
+				instance._updateVocabulary(instance);
+			}
+		);
+		
+		
 	},
 
 	deleteEntry: function(instance, entryId) {
 		instance._deleteEntry(instance, entryId);
 	},
 
-	editEntry: function(instance, entryId, name) {
+	deleteVocabulary: function(instance, vocabularyId) {
+		instance._deleteVocabulary(instance, vocabularyId);
+	},
+
+	editEntry: function(instance, entryId, name, vocabularyId, parentId) {
 		var params = instance.params;
 
 		instance._entryId = entryId;
 
 		var editEntryFields = jQuery('#' + params.editEntryFields);
 		var editEntryNameInput = jQuery('#' + params.editEntryNameInput);
+		var editEntryVocabularyInput = jQuery('#' + params.editEntryVocabularyInput);
+		var editEntryParentInput = jQuery('#' + params.editEntryParentInput);
+		var editEntryParentDiv = jQuery('#' + params.editEntryParentDiv);
 		var propertiesTable = jQuery('#' + params.propertiesTable);
 
 		editEntryNameInput.val(name);
 
+		editEntryParentInput.val('');
+		editEntryVocabularyInput.val('');
+		
+		if (vocabularyId != '') {
+			Liferay.Service.Tags.Vocabulary.getVocabulary(
+				{
+					vocabularyId: vocabularyId
+				},
+				function(vocabulary) {
+					editEntryVocabularyInput.val(vocabulary.name);
+
+					if (vocabulary.folksonomy) {
+						editEntryParentDiv.hide();
+					}
+					else {
+						editEntryParentDiv.show();
+					}
+				}
+			);
+		}
+
+		if (parentId != '') {
+			Liferay.Service.Tags.TagsEntry.getEntry(
+				{
+					entryId: parentId
+				},
+				function(parent) {
+					editEntryParentInput.val(parent.name);
+				}
+			);
+		}
+		
 		propertiesTable.find('tr').slice(0).remove();
 
 		Liferay.Service.Tags.TagsProperty.getProperties(
@@ -147,11 +232,40 @@ Liferay.Portlet.TagsAdmin = new Class({
 		editEntryFields.show();
 	},
 
+	editVocabulary: function(instance, vocabularyId, name, folksonomy) {
+		var params = instance.params;
+
+		instance._vocabularyId = vocabularyId;
+
+		var editVocabularyFields = jQuery('#' + params.editVocabularyFields);
+		var editVocabularyNameInput = jQuery('#' + params.editVocabularyNameInput);
+		var editVocabularyFolksonomyCheck = jQuery('#' + params.editVocabularyFolksonomyCheck);
+
+		editVocabularyNameInput.val(name);
+		
+		if (folksonomy) { 
+			editVocabularyFolksonomyCheck.attr('checked', true);
+		}
+		else {
+			editVocabularyFolksonomyCheck.attr('checked', false);
+		}
+		
+		setTimeout(
+			function() {
+				instance._displayVocabularyEntries(instance, name);				
+			},
+			500
+		);
+				
+		editVocabularyFields.show();
+	},
+
 	_addEntry: function(instance) {
 		var params = instance.params;
 
 		var instanceVar = params.instanceVar;
 		var addEntryNameInput = jQuery('#' + params.addEntryNameInput);
+		var addEntryVocabularyInput = jQuery('#' + params.addEntryVocabularyInput);
 
 		var categorySel = jQuery('#' + instanceVar + 'categorySel');
 		var filterSel = jQuery('#' + instanceVar + 'CategoryFilterSel');
@@ -181,6 +295,7 @@ Liferay.Portlet.TagsAdmin = new Class({
 		Liferay.Service.Tags.TagsEntry.addEntry(
 			{
 				name: addEntryNameInput.val(),
+				vocabulary: addEntryVocabularyInput.val(),
 				properties: properties
 			},
 			function(json) {
@@ -194,6 +309,9 @@ Liferay.Portlet.TagsAdmin = new Class({
 					else if (json.exception.indexOf('com.liferay.portlet.tags.EntryNameException') > -1) {
 						instance._sendMessage('error', 'one-of-your-fields-contain-invalid-characters');
 					}
+					else if (json.exception.indexOf('com.liferay.portlet.tags.NoSuchVocabularyException') > -1) {
+						instance._sendMessage('error', 'that-vocabulary-does-not-exists');
+					}
 
 					jQuery('#' + params.addCategoryNameInput).show();
 				}
@@ -201,6 +319,7 @@ Liferay.Portlet.TagsAdmin = new Class({
 		);
 
 		instance._resetFields(instance);
+		instance._displayVocabularyEntries(instance, addEntryVocabularyInput.val());
 
 		addEntryNameInput.focus();
 	},
@@ -245,8 +364,8 @@ Liferay.Portlet.TagsAdmin = new Class({
 			html += ' disabled';
 		}
 
-		html += ' name="' + instanceVar + 'propertyKey" type="text" value="' + key + '" />\n';
-		html += '<input name="' + instanceVar + 'propertyValue" type="text" value="' + value + '" />\n';
+		html += ' name="' + instanceVar + 'propertyKey" size="10" type="text" value="' + key + '" />\n';
+		html += '<input name="' + instanceVar + 'propertyValue" size="10" type="text" value="' + value + '" />\n';
 
 		if (key != 'category') {
 			html += '<input name="' + instanceVar + 'deletePropertyButton" type="button" value="Delete" />\n';
@@ -257,12 +376,49 @@ Liferay.Portlet.TagsAdmin = new Class({
 		return html;
 	},
 
+	_addVocabulary: function(instance) {
+		var params = instance.params;
+
+		var instanceVar = params.instanceVar;
+		var addVocabularyFolksonomyCheck = jQuery('#' + params.addVocabularyFolksonomyCheck);
+		var addVocabularyNameInput = jQuery('#' + params.addVocabularyNameInput);
+		
+		Liferay.Service.Tags.Vocabulary.addVocabulary(
+			{
+				name: addVocabularyNameInput.val(),
+				folksonomy: addVocabularyFolksonomyCheck.attr('checked')
+			},
+			function(json) {
+				if (!json.exception) {
+					instance._getVocabularies(instance);
+				}
+				else {
+					if (json.exception.indexOf('com.liferay.portlet.tags.DuplicateVocabularyException') > -1) {
+						instance._sendMessage('error', 'that-vocabulary-already-exists');
+					}
+					else if (json.exception.indexOf('com.liferay.portlet.tags.VocabularyNameException') > -1) {
+						instance._sendMessage('error', 'one-of-your-fields-contain-invalid-characters');
+					}
+					else if (json.exception.indexOf('com.liferay.portlet.tags.NoSuchVocabularyException') > -1) {
+						instance._sendMessage('error', 'that-parent-vocabulary-does-not-exist');
+					}
+					
+				}
+			}
+		);
+
+		instance._resetFields(instance);
+
+		addVocabularyNameInput.focus();
+	},
+
 	_deleteEntry: function(instance, entryId) {
 		var params = instance.params;
 
 		if (confirm(Liferay.Language.get('are-you-sure-you-want-to-delete-this-tag'))) {
 			var instanceVar = params.instanceVar;
 			var editEntryFields = jQuery('#' + params.editEntryFields);
+			var editVocabularyFields = jQuery('#' + params.editVocabularyFields);
 
 			Liferay.Service.Tags.TagsEntry.deleteEntry(
 				{
@@ -282,11 +438,29 @@ Liferay.Portlet.TagsAdmin = new Class({
 			);
 
 			editEntryFields.hide();
+			editVocabularyFields.hide();
 		}
 	},
 
 	_deleteProperty: function() {
 		jQuery(this).parents('tr').eq(0).remove();
+	},
+
+	_deleteVocabulary: function(instance, vocabularyId) {
+		var params = instance.params;
+
+		if (confirm(Liferay.Language.get('are-you-sure-you-want-to-delete-this-vocabulary-and-its-tags'))) {
+			var instanceVar = params.instanceVar;
+			var editVocabularyFields = jQuery('#' + params.editVocabularyFields);
+
+			Liferay.Service.Tags.Vocabulary.deleteVocabulary(
+				{
+					vocabularyId: vocabularyId
+				}
+			);
+			instance._getVocabularies(instance);
+			editVocabularyFields.hide();
+		}
 	},
 
 	_displayEntries: function(instance, properties, keywords) {
@@ -412,6 +586,50 @@ Liferay.Portlet.TagsAdmin = new Class({
 		);
 	},
 
+	_displayVocabularyEntries: function(instance, vocabulary) {
+		var params = instance.params;
+
+		var instanceVar = params.instanceVar;
+		var vocabularyTagsDiv = jQuery('#' + params.vocabularyTagsDiv);
+
+		var html = '<br />';
+
+		Liferay.Service.Tags.TagsEntry.getVocabularyEntries(
+			{
+				companyId: themeDisplay.getCompanyId(),
+				name: vocabulary
+			},
+			function(entries) {
+				html += '';
+
+				jQuery.each(
+					entries,
+					function(i, entry) {
+						var hrefJS = instanceVar + '.editEntry(' + instanceVar + ', ' + entry.entryId + ', \'';
+						hrefJS += encodeURIComponent(entry.name) + '\', \'' + entry.vocabularyId + '\',\'';
+						hrefJS += entry.parentEntryId + '\'';
+						hrefJS +=');';
+
+						var numEntries = entries.length;
+
+						html += '<span class="ui-tag">';
+						html += ' <a class="tag-name" href="javascript: ' + hrefJS + '" tagId="' + entry.entryId + '">' + entry.name + ' ('+entry.parentEntryId+')'+ '</a>';
+						html += ' <a class="ui-tag-delete" href="javascript: ' + instanceVar + '.deleteEntry(' + instanceVar + ', ' + entry.entryId + ')"><span>x</span></a>';
+						html += '</span>';
+					}
+				);
+
+				html += '</div>';
+
+				if (entries.length == 0) {
+					html += Liferay.Language.get('no-vocabulary-tags-found');
+				}
+
+				vocabularyTagsDiv.html(html);
+			}
+		);
+	},
+
 	_displayFilters: function(instance, propertyKey, properties) {
 		var params = instance.params;
 
@@ -495,6 +713,46 @@ Liferay.Portlet.TagsAdmin = new Class({
 		);
 	},
 
+	_displayVocabularies: function(instance) {
+		var params = instance.params;
+
+		var instanceVar = params.instanceVar;
+		var listVocabulariesDiv = jQuery('#' + params.listVocabulariesDiv);
+
+		var html = '<br />';
+
+		Liferay.Service.Tags.Vocabulary.search(
+			{
+				companyId: themeDisplay.getCompanyId()
+			},
+			function(vocabularies) {
+				html += '';
+
+				jQuery.each(
+					vocabularies,
+					function(i, vocabulary) {
+						var hrefJS = instanceVar + '.editVocabulary(' + instanceVar + ', ' + vocabulary.vocabularyId + ', \'' + encodeURIComponent(vocabulary.name) +  '\', ' + vocabulary.folksonomy + ');';
+
+						var numVocabularies = vocabularies.length;
+
+						html += '<span class="ui-tag">';
+						html += ' <a class="tag-name" href="javascript: ' + hrefJS + '" vocabularyId="' + vocabulary.vocabularyId + '">' + vocabulary.name + '</a>';
+						html += ' <a class="ui-tag-delete" href="javascript: ' + instanceVar + '.deleteVocabulary(' + instanceVar + ', ' + vocabulary.vocabularyId + ')"><span>x</span></a>';
+						html += '</span>';
+					}
+				);
+
+
+				if (vocabularies.length == 0) {
+					html += Liferay.Language.get('no-vocabularies-found');
+				}
+
+				listVocabulariesDiv.html(html);
+
+			}
+		);
+	},
+
 	_editProperties: function(instance, properties) {
 		var html = '';
 
@@ -559,15 +817,27 @@ Liferay.Portlet.TagsAdmin = new Class({
 		);
 	},
 
+	_getVocabularies: function(instance) {
+		instance._resetFields(instance);
+
+		instance._displayVocabularies(instance,'%');
+	},
+
 	_resetFields: function(instance) {
 		var params = instance.params;
 
 		var addCategoryNameInput = jQuery('#' + params.addCategoryNameInput);
 		var addEntryNameInput = jQuery('#' + params.addEntryNameInput);
+		var addVocabularyNameInput = jQuery('#' + params.addVocabularyNameInput);
 		var keywordsInput = jQuery('#' + params.keywordsInput);
+		var addVocabularyFolksonomyCheck = jQuery('#' + params.editVocabularyFolksonomyCheck);
+		var editVocabularyFolksonomyCheck = jQuery('#' + params.editVocabularyFolksonomyCheck);
 
 		addCategoryNameInput.val('');
 		addEntryNameInput.val('');
+		addVocabularyNameInput.val('');
+		addVocabularyFolksonomyCheck.attr('checked', false);
+		editVocabularyFolksonomyCheck.attr('checked', false);
 		keywordsInput.val('');
 	},
 
@@ -597,6 +867,22 @@ Liferay.Portlet.TagsAdmin = new Class({
 						instance._displayEntries(instance, properties, keywords);
 					}
 				);
+			},
+			250
+		);
+	},
+
+	_searchVocabularies: function(instance) {
+		var params = instance.params;
+
+		if (instance.showTimerV) {
+			clearTimeout(instance.showTimerV);
+			instance.showTimerV = 0;
+		}
+
+		instance.showTimerV = setTimeout(
+			function() {
+				instance._displayVocabularies(instance, keywords);				
 			},
 			250
 		);
@@ -641,6 +927,8 @@ Liferay.Portlet.TagsAdmin = new Class({
 		var instanceVar = params.instanceVar;
 		var editEntryNameInput = jQuery('#' + params.editEntryNameInput);
 		var editEntryFields = jQuery('#' + params.editEntryFields);
+		var editEntryParentInput = jQuery('#' + params.editEntryParentInput);
+		var editEntryVocabularyInput = jQuery('#' + params.editEntryVocabularyInput);
 		var propertiesTable = jQuery('#' + params.propertiesTable);
 
 		var properties = '';
@@ -665,11 +953,47 @@ Liferay.Portlet.TagsAdmin = new Class({
 			{
 				entryId: instance._entryId,
 				name: editEntryNameInput.val(),
-				properties: properties
+				parentCategoryName: editEntryParentInput.val(),
+				properties: properties,
+				vocabularyName: editEntryVocabularyInput.val()
 			},
 			function(json) {
 				if (!json.exception) {
-					instance._getEntries(instance);
+					instance._displayVocabularyEntries(instance, editEntryVocabularyInput.val());					
+					editEntryFields.hide();
+				}
+				else {
+					if (json.exception.indexOf('com.liferay.portlet.tags.NoSuchVocabularyException') > -1) {
+						instance._sendMessage('error', 'that-vocabulary-does-not-exist');
+					}					
+					else if (json.exception.indexOf('com.liferay.portlet.tags.NoSuchEntryException') > -1) {
+						instance._sendMessage('error', 'that-parent-category-does-not-exist');
+					}					
+					else if (json.exception.indexOf('Exception') > -1) {
+						instance._sendMessage('error', 'one-of-your-fields-contain-invalid-characters');
+					}
+				}
+			}
+		);
+	},
+	
+	_updateVocabulary: function(instance) {
+		var params = instance.params;
+
+		var instanceVar = params.instanceVar;
+		var editVocabularyNameInput = jQuery('#' + params.editVocabularyNameInput);
+		var editVocabularyFields = jQuery('#' + params.editVocabularyFields);
+		var editVocabularyFolksonomyCheck = jQuery('#' + params.editVocabularyFolksonomyCheck);
+
+		Liferay.Service.Tags.Vocabulary.updateVocabulary(
+			{
+				vocabularyId: instance._vocabularyId,
+				name: editVocabularyNameInput.val(),
+				folksonomy: editVocabularyFolksonomyCheck.attr('checked')
+			},
+			function(json) {
+				if (!json.exception) {
+					instance._getVocabularies(instance);
 				}
 				else {
 					if (json.exception.indexOf('Exception') > -1) {
@@ -679,6 +1003,6 @@ Liferay.Portlet.TagsAdmin = new Class({
 			}
 		);
 
-		editEntryFields.hide();
+		editVocabularyFields.hide();
 	}
 });

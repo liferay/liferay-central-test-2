@@ -1526,11 +1526,14 @@
 	</model>
 	<model name="com.liferay.portlet.tags.model.TagsEntry">
 		<field name="entryId" type="long" />
+		<field name="groupId" type="long" />
 		<field name="companyId" type="long" />
 		<field name="userId" type="long" />
 		<field name="userName" type="String" />
 		<field name="createDate" type="Date" />
 		<field name="modifiedDate" type="Date" />
+		<field name="vocabularyId" type="long" />
+		<field name="parentEntryId" type="long" />
 		<field name="name" type="String" />
 	</model>
 	<model name="com.liferay.portlet.tags.model.TagsProperty">
@@ -1551,6 +1554,18 @@
 		<field name="parentSourceId" type="long" />
 		<field name="name" type="String" />
 		<field name="acronym" type="String" />
+	</model>
+	<model name="com.liferay.portlet.tags.model.Vocabulary">
+		<field name="vocabularyId" type="long" />
+		<field name="groupId" type="long" />
+		<field name="companyId" type="long" />
+		<field name="userId" type="long" />
+		<field name="userName" type="String" />
+		<field name="createDate" type="Date" />
+		<field name="modifiedDate" type="Date" />
+		<field name="name" type="String" />
+		<field name="description" type="String" />
+		<field name="folksonomy" type="boolean" />
 	</model>
 	<model name="com.liferay.portlet.tasks.model.TasksReview">
 		<field name="reviewId" type="long" />

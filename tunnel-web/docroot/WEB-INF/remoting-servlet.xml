@@ -758,6 +758,18 @@
 		<property name="service" ref="com.liferay.portlet.tags.service.TagsSourceService.transaction" />
 		<property name="serviceInterface" value="com.liferay.portlet.tags.service.TagsSourceService" />
 	</bean>
+	<bean name="/com_liferay_portlet_tags_service_spring_VocabularyService-burlap" class="org.springframework.remoting.caucho.BurlapServiceExporter">
+		<property name="service" ref="com.liferay.portlet.tags.service.VocabularyService.transaction" />
+		<property name="serviceInterface" value="com.liferay.portlet.tags.service.VocabularyService" />
+	</bean>
+	<bean name="/com_liferay_portlet_tags_service_spring_VocabularyService-hessian" class="org.springframework.remoting.caucho.HessianServiceExporter">
+		<property name="service" ref="com.liferay.portlet.tags.service.VocabularyService.transaction" />
+		<property name="serviceInterface" value="com.liferay.portlet.tags.service.VocabularyService" />
+	</bean>
+	<bean name="/com_liferay_portlet_tags_service_spring_VocabularyService-http" class="org.springframework.remoting.httpinvoker.HttpInvokerServiceExporter">
+		<property name="service" ref="com.liferay.portlet.tags.service.VocabularyService.transaction" />
+		<property name="serviceInterface" value="com.liferay.portlet.tags.service.VocabularyService" />
+	</bean>
 	<bean name="/com_liferay_portlet_tasks_service_spring_TasksReviewService-burlap" class="org.springframework.remoting.caucho.BurlapServiceExporter">
 		<property name="service" ref="com.liferay.portlet.tasks.service.TasksReviewService.transaction" />
 		<property name="serviceInterface" value="com.liferay.portlet.tasks.service.TasksReviewService" />

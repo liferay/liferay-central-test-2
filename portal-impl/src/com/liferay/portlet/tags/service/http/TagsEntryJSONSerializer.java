@@ -56,6 +56,7 @@ public class TagsEntryJSONSerializer {
 		JSONObject jsonObj = JSONFactoryUtil.createJSONObject();
 
 		jsonObj.put("entryId", model.getEntryId());
+		jsonObj.put("groupId", model.getGroupId());
 		jsonObj.put("companyId", model.getCompanyId());
 		jsonObj.put("userId", model.getUserId());
 		jsonObj.put("userName", model.getUserName());
@@ -79,6 +80,8 @@ public class TagsEntryJSONSerializer {
 		}
 
 		jsonObj.put("modifiedDate", modifiedDateJSON);
+		jsonObj.put("vocabularyId", model.getVocabularyId());
+		jsonObj.put("parentEntryId", model.getParentEntryId());
 		jsonObj.put("name", model.getName());
 
 		return jsonObj;

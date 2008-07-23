@@ -41,6 +41,10 @@ import com.liferay.portlet.tags.service.TagsPropertyLocalServiceFactory;
 import com.liferay.portlet.tags.service.TagsPropertyService;
 import com.liferay.portlet.tags.service.TagsPropertyServiceFactory;
 import com.liferay.portlet.tags.service.TagsSourceLocalService;
+import com.liferay.portlet.tags.service.VocabularyLocalService;
+import com.liferay.portlet.tags.service.VocabularyLocalServiceFactory;
+import com.liferay.portlet.tags.service.VocabularyService;
+import com.liferay.portlet.tags.service.VocabularyServiceFactory;
 import com.liferay.portlet.tags.service.persistence.TagsAssetFinder;
 import com.liferay.portlet.tags.service.persistence.TagsAssetFinderUtil;
 import com.liferay.portlet.tags.service.persistence.TagsAssetPersistence;
@@ -57,6 +61,8 @@ import com.liferay.portlet.tags.service.persistence.TagsPropertyPersistence;
 import com.liferay.portlet.tags.service.persistence.TagsPropertyUtil;
 import com.liferay.portlet.tags.service.persistence.TagsSourcePersistence;
 import com.liferay.portlet.tags.service.persistence.TagsSourceUtil;
+import com.liferay.portlet.tags.service.persistence.VocabularyPersistence;
+import com.liferay.portlet.tags.service.persistence.VocabularyUtil;
 
 import java.util.List;
 
@@ -237,6 +243,32 @@ public abstract class TagsSourceLocalServiceBaseImpl
 		this.tagsSourcePersistence = tagsSourcePersistence;
 	}
 
+	public VocabularyLocalService getVocabularyLocalService() {
+		return vocabularyLocalService;
+	}
+
+	public void setVocabularyLocalService(
+		VocabularyLocalService vocabularyLocalService) {
+		this.vocabularyLocalService = vocabularyLocalService;
+	}
+
+	public VocabularyService getVocabularyService() {
+		return vocabularyService;
+	}
+
+	public void setVocabularyService(VocabularyService vocabularyService) {
+		this.vocabularyService = vocabularyService;
+	}
+
+	public VocabularyPersistence getVocabularyPersistence() {
+		return vocabularyPersistence;
+	}
+
+	public void setVocabularyPersistence(
+		VocabularyPersistence vocabularyPersistence) {
+		this.vocabularyPersistence = vocabularyPersistence;
+	}
+
 	public void afterPropertiesSet() {
 		if (tagsAssetLocalService == null) {
 			tagsAssetLocalService = TagsAssetLocalServiceFactory.getImpl();
@@ -293,6 +325,18 @@ public abstract class TagsSourceLocalServiceBaseImpl
 		if (tagsSourcePersistence == null) {
 			tagsSourcePersistence = TagsSourceUtil.getPersistence();
 		}
+
+		if (vocabularyLocalService == null) {
+			vocabularyLocalService = VocabularyLocalServiceFactory.getImpl();
+		}
+
+		if (vocabularyService == null) {
+			vocabularyService = VocabularyServiceFactory.getImpl();
+		}
+
+		if (vocabularyPersistence == null) {
+			vocabularyPersistence = VocabularyUtil.getPersistence();
+		}
 	}
 
 	protected TagsAssetLocalService tagsAssetLocalService;
@@ -309,4 +353,7 @@ public abstract class TagsSourceLocalServiceBaseImpl
 	protected TagsPropertyFinder tagsPropertyFinder;
 	protected TagsPropertyKeyFinder tagsPropertyKeyFinder;
 	protected TagsSourcePersistence tagsSourcePersistence;
+	protected VocabularyLocalService vocabularyLocalService;
+	protected VocabularyService vocabularyService;
+	protected VocabularyPersistence vocabularyPersistence;
 }

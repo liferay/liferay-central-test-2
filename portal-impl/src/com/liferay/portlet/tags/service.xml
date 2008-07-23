@@ -74,6 +74,10 @@
 
 		<column name="entryId" type="long" primary="true" />
 
+		<!-- Group instance -->
+
+		<column name="groupId" type="long" />
+
 		<!-- Audit fields -->
 
 		<column name="companyId" type="long" />
@@ -84,6 +88,8 @@
 
 		<!-- Other fields -->
 
+		<column name="vocabularyId" type="long" />
+		<column name="parentEntryId" type="long" />
 		<column name="name" type="String" />
 
 		<!-- Relationships -->
@@ -101,6 +107,11 @@
 		<finder name="C_N" return-type="TagsEntry">
 			<finder-column name="companyId" />
 			<finder-column name="name" />
+		</finder>
+
+		<finder name="C_V" return-type="Collection">
+			<finder-column name="companyId" />
+			<finder-column name="vocabularyId" />
 		</finder>
 
 		<!-- References -->
@@ -169,11 +180,60 @@
 		<column name="name" type="String" />
 		<column name="acronym" type="String" />
 	</entity>
+	<entity name="Vocabulary" local-service="true" remote-service="true">
+		
+		<!-- PK fields -->
+
+		<column name="vocabularyId" type="long" primary="true" />
+		
+		<!-- Group instance -->
+
+		<column name="groupId" type="long" />
+
+		<!-- Audit fields -->
+
+		<column name="companyId" type="long" />
+		<column name="userId" type="long" />
+		<column name="userName" type="String" />
+		<column name="createDate" type="Date" />
+		<column name="modifiedDate" type="Date" />
+
+		<!-- Other fields -->
+
+		<column name="name" type="String" />
+		<column name="description" type="String" />
+		<column name="folksonomy" type="boolean" />
+
+		<!-- Finder methods -->
+
+		<finder name="C_N" return-type="Vocabulary">
+			<finder-column name="companyId" />
+			<finder-column name="name" />
+		</finder>
+		
+		<finder name="CompanyId" return-type="Collection">
+			<finder-column name="companyId" />
+		</finder>
+
+		<finder name="C_F" return-type="Collection">
+			<finder-column name="companyId" />
+			<finder-column name="folksonomy" />
+		</finder>
+
+		<!-- References -->
+		
+		<reference package-path="com.liferay.counter" entity="Counter" />
+		<reference package-path="com.liferay.portal" entity="User" />	
+	</entity>	
+	
+	
 	<exceptions>
 		<exception>DuplicateEntry</exception>
+		<exception>DuplicateVocabulary</exception>
 		<exception>EntryName</exception>
 		<exception>PropertyKey</exception>
 		<exception>PropertyValue</exception>
 		<exception>TagsEntry</exception>
+		<exception>VocabularyName</exception>
 	</exceptions>
 </service-builder>

@@ -83,6 +83,27 @@ public class TagsEntryServiceJSON {
 	}
 
 	public static JSONObject addEntry(java.lang.String name,
+		java.lang.String vocabularyName, java.lang.String[] properties)
+		throws java.rmi.RemoteException, com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
+		com.liferay.portlet.tags.model.TagsEntry returnValue = TagsEntryServiceUtil.addEntry(name,
+				vocabularyName, properties);
+
+		return TagsEntryJSONSerializer.toJSONObject(returnValue);
+	}
+
+	public static JSONObject addEntry(java.lang.String name,
+		java.lang.String vocabularyName, java.lang.String[] properties,
+		java.lang.String parentCategory)
+		throws java.rmi.RemoteException, com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
+		com.liferay.portlet.tags.model.TagsEntry returnValue = TagsEntryServiceUtil.addEntry(name,
+				vocabularyName, properties, parentCategory);
+
+		return TagsEntryJSONSerializer.toJSONObject(returnValue);
+	}
+
+	public static JSONObject addEntry(java.lang.String name,
 		java.lang.String[] properties)
 		throws java.rmi.RemoteException, com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
@@ -113,6 +134,24 @@ public class TagsEntryServiceJSON {
 				companyId, classNameId, name);
 
 		return TagsEntryJSONSerializer.toJSONArray(returnValue);
+	}
+
+	public static JSONArray getVocabularyEntries(long companyId,
+		java.lang.String vocabularyName)
+		throws java.rmi.RemoteException, com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
+		java.util.List<com.liferay.portlet.tags.model.TagsEntry> returnValue = TagsEntryServiceUtil.getVocabularyEntries(companyId,
+				vocabularyName);
+
+		return TagsEntryJSONSerializer.toJSONArray(returnValue);
+	}
+
+	public static JSONObject getEntry(long entryId)
+		throws java.rmi.RemoteException, com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
+		com.liferay.portlet.tags.model.TagsEntry returnValue = TagsEntryServiceUtil.getEntry(entryId);
+
+		return TagsEntryJSONSerializer.toJSONObject(returnValue);
 	}
 
 	public static void mergeEntries(long fromEntryId, long toEntryId)
@@ -163,6 +202,17 @@ public class TagsEntryServiceJSON {
 			com.liferay.portal.SystemException {
 		com.liferay.portlet.tags.model.TagsEntry returnValue = TagsEntryServiceUtil.updateEntry(entryId,
 				name);
+
+		return TagsEntryJSONSerializer.toJSONObject(returnValue);
+	}
+
+	public static JSONObject updateEntry(long entryId, java.lang.String name,
+		java.lang.String parentEntryName, java.lang.String[] properties,
+		java.lang.String vocabularyName)
+		throws java.rmi.RemoteException, com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
+		com.liferay.portlet.tags.model.TagsEntry returnValue = TagsEntryServiceUtil.updateEntry(entryId,
+				name, parentEntryName, properties, vocabularyName);
 
 		return TagsEntryJSONSerializer.toJSONObject(returnValue);
 	}

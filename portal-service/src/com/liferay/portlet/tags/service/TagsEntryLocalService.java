@@ -88,7 +88,18 @@ public interface TagsEntryLocalService {
 			com.liferay.portal.SystemException;
 
 	public com.liferay.portlet.tags.model.TagsEntry addEntry(long userId,
+		java.lang.String name, java.lang.String vocabularyName)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException;
+
+	public com.liferay.portlet.tags.model.TagsEntry addEntry(long userId,
 		java.lang.String name, java.lang.String[] properties)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException;
+
+	public com.liferay.portlet.tags.model.TagsEntry addEntry(long userId,
+		java.lang.String name, java.lang.String vocabularyName,
+		java.lang.String[] properties, java.lang.String parentEntryName)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;
 
@@ -101,6 +112,10 @@ public interface TagsEntryLocalService {
 			com.liferay.portal.SystemException;
 
 	public void deleteEntry(com.liferay.portlet.tags.model.TagsEntry entry)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException;
+
+	public void deleteEntries(long companyId, long vocabularyId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;
 
@@ -128,6 +143,11 @@ public interface TagsEntryLocalService {
 	public java.util.List<com.liferay.portlet.tags.model.TagsEntry> getEntries(
 		long groupId, long companyId, long classNameId, java.lang.String name,
 		int start, int end) throws com.liferay.portal.SystemException;
+
+	public java.util.List<com.liferay.portlet.tags.model.TagsEntry> getVocabularyEntries(
+		long companyId, java.lang.String vocabularyName)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException;
 
 	public int getEntriesSize(long groupId, long companyId, long classNameId,
 		java.lang.String name) throws com.liferay.portal.SystemException;
@@ -178,8 +198,20 @@ public interface TagsEntryLocalService {
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;
 
+	public com.liferay.portlet.tags.model.TagsEntry updateEntry(long entryId,
+		java.lang.String name, java.lang.String parentEntryName,
+		java.lang.String vocabularyName)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException;
+
 	public com.liferay.portlet.tags.model.TagsEntry updateEntry(long userId,
 		long entryId, java.lang.String name, java.lang.String[] properties)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException;
+
+	public com.liferay.portlet.tags.model.TagsEntry updateEntry(long userId,
+		long entryId, java.lang.String name, java.lang.String parentEntryName,
+		java.lang.String[] properties, java.lang.String vocabularyName)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;
 }

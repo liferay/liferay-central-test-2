@@ -37,6 +37,10 @@ import com.liferay.portlet.tags.EntryNameException;
 import com.liferay.portlet.tags.model.TagsAsset;
 import com.liferay.portlet.tags.model.TagsEntry;
 import com.liferay.portlet.tags.model.TagsProperty;
+import com.liferay.portlet.tags.model.Vocabulary;
+import com.liferay.portlet.tags.model.TagsEntryConstants;
+import com.liferay.portlet.tags.model.impl.TagsEntryImpl;
+import com.liferay.portlet.tags.service.VocabularyLocalServiceUtil;
 import com.liferay.portlet.tags.service.base.TagsEntryLocalServiceBaseImpl;
 import com.liferay.portlet.tags.util.TagsUtil;
 import com.liferay.util.Autocomplete;
@@ -44,6 +48,7 @@ import com.liferay.util.Autocomplete;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashSet;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
 
@@ -51,6 +56,8 @@ import java.util.Set;
  * <a href="TagsEntryLocalServiceImpl.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
+ * @author Alvaro del Castillo
+ * @author Jorge Ferrer
  *
  */
 public class TagsEntryLocalServiceImpl extends TagsEntryLocalServiceBaseImpl {
@@ -62,10 +69,24 @@ public class TagsEntryLocalServiceImpl extends TagsEntryLocalServiceBaseImpl {
 	public TagsEntry addEntry(long userId, String name)
 		throws PortalException, SystemException {
 
-		return addEntry(userId, name, new String[0]);
+		return addEntry(userId, name, null, new String[0],  null);
+	}
+
+	public TagsEntry addEntry(long userId, String name, String vocabularyName)
+			throws PortalException, SystemException {
+
+		return addEntry(userId, name, vocabularyName, new String[0], null);
 	}
 
 	public TagsEntry addEntry(long userId, String name, String[] properties)
+			throws PortalException, SystemException {
+
+		return addEntry(userId, name, null, new String[0], null);
+	}
+
+	public TagsEntry addEntry(
+			long userId, String name, String vocabularyName,
+			String[] properties, String parentEntryName)
 		throws PortalException, SystemException {
 
 		User user = userPersistence.findByPrimaryKey(userId);
@@ -89,6 +110,27 @@ public class TagsEntryLocalServiceImpl extends TagsEntryLocalServiceBaseImpl {
 		entry.setCreateDate(now);
 		entry.setModifiedDate(now);
 		entry.setName(name);
+
+		if (Validator.isNotNull(vocabularyName)) {
+			Vocabulary vocabulary = vocabularyPersistence.findByC_N(
+					user.getCompanyId(), vocabularyName);
+
+			entry.setVocabularyId(vocabulary.getVocabularyId());
+		}
+		else {
+			entry.setParentEntryId(TagsEntryConstants.DEFAULT_VOCABULARY_ID);
+		}
+
+		if (Validator.isNotNull(parentEntryName)) {
+			TagsEntry parentEntry = tagsEntryPersistence.findByC_N(
+					user.getCompanyId(), parentEntryName);
+
+			entry.setParentEntryId(parentEntry.getEntryId());
+		}
+		else {
+			entry.setParentEntryId(TagsEntryConstants.DEFAULT_PARENT_ENTRY_ID);
+		}
+
 
 		tagsEntryPersistence.update(entry, false);
 
@@ -155,6 +197,19 @@ public class TagsEntryLocalServiceImpl extends TagsEntryLocalServiceBaseImpl {
 		tagsEntryPersistence.remove(entry.getEntryId());
 	}
 
+	public void deleteEntries(long companyId, long vocabularyId)
+			throws PortalException, SystemException {
+
+		List<TagsEntry> entries = tagsEntryPersistence.findByC_V(
+			companyId, vocabularyId);
+
+		Iterator itr = entries.iterator();
+
+		while (itr.hasNext()) {
+			deleteEntry((TagsEntry) itr.next());
+		}
+	}
+
 	public boolean hasEntry(long companyId, String name)
 		throws SystemException {
 
@@ -212,6 +267,17 @@ public class TagsEntryLocalServiceImpl extends TagsEntryLocalServiceBaseImpl {
 
 		return tagsEntryFinder.findByG_C_C_N(
 			groupId, companyId, classNameId, name, start, end);
+	}
+
+	public List<TagsEntry> getVocabularyEntries(
+			long companyId, String vocabularyName)
+		throws SystemException, PortalException {
+
+		Vocabulary vocabulary = VocabularyLocalServiceUtil.getVocabulary(
+				companyId, vocabularyName);
+
+		return tagsEntryPersistence.findByC_V(
+			companyId, vocabulary.getVocabularyId());
 	}
 
 	public int getEntriesSize(
@@ -335,6 +401,14 @@ public class TagsEntryLocalServiceImpl extends TagsEntryLocalServiceBaseImpl {
 	public TagsEntry updateEntry(long entryId, String name)
 		throws PortalException, SystemException {
 
+		return updateEntry(entryId, name, null, null);
+	}
+
+	public TagsEntry updateEntry(
+			long entryId, String name, String parentEntryName,
+			String vocabularyName)
+		throws PortalException, SystemException {
+
 		name = name.trim().toLowerCase();
 
 		validate(name);
@@ -350,6 +424,25 @@ public class TagsEntryLocalServiceImpl extends TagsEntryLocalServiceBaseImpl {
 		entry.setModifiedDate(new Date());
 		entry.setName(name);
 
+		if (Validator.isNotNull(vocabularyName)) {
+			Vocabulary vocabulary = VocabularyLocalServiceUtil.getVocabulary(
+					entry.getCompanyId(), vocabularyName);
+			
+			entry.setVocabularyId(vocabulary.getVocabularyId());
+		}
+		else {
+			entry.setParentEntryId(TagsEntryConstants.DEFAULT_VOCABULARY_ID);
+		}
+
+		if (Validator.isNotNull(parentEntryName)) {
+			TagsEntry parent = getEntry(entry.getCompanyId(), parentEntryName);
+
+			entry.setParentEntryId(parent.getEntryId());
+		}
+		else {
+			entry.setParentEntryId(TagsEntryConstants.DEFAULT_PARENT_ENTRY_ID);
+		}
+
 		tagsEntryPersistence.update(entry, false);
 
 		return entry;
@@ -359,7 +452,16 @@ public class TagsEntryLocalServiceImpl extends TagsEntryLocalServiceBaseImpl {
 			long userId, long entryId, String name, String[] properties)
 		throws PortalException, SystemException {
 
-		TagsEntry entry = updateEntry(entryId, name);
+		return updateEntry(userId, entryId, name, null, properties, null);
+	}
+
+	public TagsEntry updateEntry(
+			long userId, long entryId, String name, String parentEntryName,
+			String[] properties, String vocabularyName) 
+		throws PortalException, SystemException {
+
+		TagsEntry entry = updateEntry(
+			entryId, name, parentEntryName, vocabularyName);
 
 		Set<Long> newProperties = new HashSet<Long>();
 

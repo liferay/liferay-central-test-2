@@ -83,6 +83,37 @@ public interface TagsEntryPersistence {
 	public com.liferay.portlet.tags.model.TagsEntry fetchByC_N(long companyId,
 		java.lang.String name) throws com.liferay.portal.SystemException;
 
+	public java.util.List<com.liferay.portlet.tags.model.TagsEntry> findByC_V(
+		long companyId, long vocabularyId)
+		throws com.liferay.portal.SystemException;
+
+	public java.util.List<com.liferay.portlet.tags.model.TagsEntry> findByC_V(
+		long companyId, long vocabularyId, int start, int end)
+		throws com.liferay.portal.SystemException;
+
+	public java.util.List<com.liferay.portlet.tags.model.TagsEntry> findByC_V(
+		long companyId, long vocabularyId, int start, int end,
+		com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException;
+
+	public com.liferay.portlet.tags.model.TagsEntry findByC_V_First(
+		long companyId, long vocabularyId,
+		com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException,
+			com.liferay.portlet.tags.NoSuchEntryException;
+
+	public com.liferay.portlet.tags.model.TagsEntry findByC_V_Last(
+		long companyId, long vocabularyId,
+		com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException,
+			com.liferay.portlet.tags.NoSuchEntryException;
+
+	public com.liferay.portlet.tags.model.TagsEntry[] findByC_V_PrevAndNext(
+		long entryId, long companyId, long vocabularyId,
+		com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException,
+			com.liferay.portlet.tags.NoSuchEntryException;
+
 	public java.util.List<Object> findWithDynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery)
 		throws com.liferay.portal.SystemException;
@@ -105,9 +136,15 @@ public interface TagsEntryPersistence {
 		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.tags.NoSuchEntryException;
 
+	public void removeByC_V(long companyId, long vocabularyId)
+		throws com.liferay.portal.SystemException;
+
 	public void removeAll() throws com.liferay.portal.SystemException;
 
 	public int countByC_N(long companyId, java.lang.String name)
+		throws com.liferay.portal.SystemException;
+
+	public int countByC_V(long companyId, long vocabularyId)
 		throws com.liferay.portal.SystemException;
 
 	public int countAll() throws com.liferay.portal.SystemException;
