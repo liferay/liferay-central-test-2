@@ -172,18 +172,17 @@ public class ThemeUtil {
 
 		VelocityContext velocityContext = null;
 
-		// this pattern is used to cache introspection data for better
-		// performance
-		
-		if (_dummyInnerContext == null) {
+		// LEP-6865
+
+		if (_innerVelocityContext == null) {
 			velocityContext = new VelocityContext();
-			
-			_dummyInnerContext = velocityContext;
+
+			_innerVelocityContext = velocityContext;
 		}
 		else {
-			velocityContext = new VelocityContext(_dummyInnerContext);			
+			velocityContext = new VelocityContext(_innerVelocityContext);
 		}
-		
+
 		// Velocity variables
 
 		VelocityVariables.insertVariables(velocityContext, request);
@@ -236,7 +235,7 @@ public class ThemeUtil {
 	}
 
 	private static Log _log = LogFactory.getLog(ThemeUtil.class);
-	
-	private static VelocityContext _dummyInnerContext;
+
+	private static VelocityContext _innerVelocityContext;
 
 }
