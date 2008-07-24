@@ -58,6 +58,12 @@ public class LoginPostAction extends Action {
 
 			HttpSession session = request.getSession();
 
+			// Language
+
+			session.removeAttribute(Globals.LOCALE_KEY);
+
+			// Live users
+
 			if (PropsValues.LIVE_USERS_ENABLED) {
 				long companyId = PortalUtil.getCompanyId(request);
 				long userId = PortalUtil.getUserId(request);
@@ -80,7 +86,21 @@ public class LoginPostAction extends Action {
 					DestinationNames.LIVE_USERS, jsonObj.toString());
 			}
 
-			session.removeAttribute(Globals.LOCALE_KEY);
+			// RUON
+
+			JSONObject ruonJSON = JSONFactoryUtil.createJSONObject();
+
+			JSONObject setPresenceStatusRequestJSON =
+				JSONFactoryUtil.createJSONObject();
+
+			setPresenceStatusRequestJSON.put("userId", request.getRemoteUser());
+			setPresenceStatusRequestJSON.put("status", "online");
+
+			ruonJSON.put(
+				"setPresenceStatusRequest", setPresenceStatusRequestJSON);
+
+			MessageBusUtil.sendSynchronizedMessage(
+				DestinationNames.RUON, ruonJSON.toString());
 		}
 		catch (Exception e) {
 			throw new ActionException(e);

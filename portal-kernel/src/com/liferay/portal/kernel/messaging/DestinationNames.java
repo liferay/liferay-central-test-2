@@ -46,7 +46,7 @@ public interface DestinationNames {
 
 	public static final String MESSAGE_BOARDS = "liferay/message_boards";
 
-	public static final String RUON_WEB = "liferay/ruon-web";
+	public static final String RUON = "liferay/ruon";
 
 	public static final String SCHEDULER = "liferay/scheduler";
 

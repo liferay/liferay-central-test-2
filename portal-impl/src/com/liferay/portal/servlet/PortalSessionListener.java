@@ -92,6 +92,12 @@ public class PortalSessionListener implements HttpSessionListener {
 				return;
 			}
 
+			// Language
+
+			session.removeAttribute(Globals.LOCALE_KEY);
+
+			// Live users
+
 			if (PropsValues.LIVE_USERS_ENABLED) {
 				long userId = userIdObj.longValue();
 				long companyId = getCompanyId(userId);
@@ -108,7 +114,21 @@ public class PortalSessionListener implements HttpSessionListener {
 					DestinationNames.LIVE_USERS, jsonObj.toString());
 			}
 
-			session.removeAttribute(Globals.LOCALE_KEY);
+			// RUON
+
+			JSONObject ruonJSON = JSONFactoryUtil.createJSONObject();
+
+			JSONObject setPresenceStatusRequestJSON =
+				JSONFactoryUtil.createJSONObject();
+
+			setPresenceStatusRequestJSON.put("userId", userIdObj.toString());
+			setPresenceStatusRequestJSON.put("status", "offline");
+
+			ruonJSON.put(
+				"setPresenceStatusRequest", setPresenceStatusRequestJSON);
+
+			MessageBusUtil.sendSynchronizedMessage(
+				DestinationNames.RUON, ruonJSON.toString());
 		}
 		catch (IllegalStateException ise) {
 			_log.warn("Please upgrade to a servlet 2.4 compliant container");

@@ -35,10 +35,6 @@ import com.liferay.portal.UserPasswordException;
 import com.liferay.portal.UserScreenNameException;
 import com.liferay.portal.captcha.CaptchaTextException;
 import com.liferay.portal.captcha.CaptchaUtil;
-import com.liferay.portal.kernel.json.JSONFactoryUtil;
-import com.liferay.portal.kernel.json.JSONObject;
-import com.liferay.portal.kernel.messaging.DestinationNames;
-import com.liferay.portal.kernel.messaging.MessageBusUtil;
 import com.liferay.portal.kernel.servlet.HttpHeaders;
 import com.liferay.portal.kernel.servlet.SessionErrors;
 import com.liferay.portal.kernel.servlet.SessionMessages;
@@ -201,23 +197,6 @@ public class LoginAction extends Action {
 					session.setAttribute(WebKeys.LAST_PATH, lastPath);
 				}
 			}
-
-			//Adding RUON hooks
-
-			JSONObject ruonJSON =
-					JSONFactoryUtil.createJSONObject();
-
-			JSONObject setPresenceStatusRequestJSON =
-					JSONFactoryUtil.createJSONObject();
-
-			setPresenceStatusRequestJSON.put("userId",userId);
-			setPresenceStatusRequestJSON.put("status","online");
-
-			ruonJSON.put(
-					"setPresenceStatusRequest",setPresenceStatusRequestJSON);
-
-			MessageBusUtil.sendSynchronizedMessage(
-							DestinationNames.RUON_WEB, ruonJSON.toString());
 
 			// Set cookies
 
