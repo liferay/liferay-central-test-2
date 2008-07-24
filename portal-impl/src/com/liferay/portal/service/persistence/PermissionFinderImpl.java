@@ -36,6 +36,7 @@ import com.liferay.portal.model.Permission;
 import com.liferay.portal.model.Role;
 import com.liferay.portal.model.impl.PermissionImpl;
 import com.liferay.portal.model.impl.PermissionModelImpl;
+import com.liferay.portal.model.impl.RoleModelImpl;
 import com.liferay.portal.service.persistence.impl.BasePersistenceImpl;
 import com.liferay.util.dao.orm.CustomSQLUtil;
 
@@ -427,9 +428,16 @@ public class PermissionFinderImpl
 			List<Permission> permissions, List<Role> roles)
 		throws SystemException {
 
-		boolean finderClassNameCacheEnabled =
-			PermissionModelImpl.CACHE_ENABLED_ROLES_PERMISSIONS;
-		String finderClassName = Permission.class.getName();
+		String finderSQL = Permission.class.getName();
+		boolean[] finderClassNamesCacheEnabled = new boolean[] {
+			PermissionModelImpl.CACHE_ENABLED,
+			RoleModelImpl.CACHE_ENABLED,
+			RoleModelImpl.CACHE_ENABLED_ROLES_PERMISSIONS
+		};
+		String[] finderClassNames = new String[] {
+			Permission.class.getName(), Role.class.getName(),
+			"Roles_Permissions"
+		};
 		String finderMethodName = "customCountByRolesPermissions";
 		String finderParams[] = new String[] {
 			java.util.List.class.getName(), java.util.List.class.getName()
@@ -439,8 +447,13 @@ public class PermissionFinderImpl
 			ListUtil.toString(roles, "roleId")
 		};
 
-		Object result = FinderCacheUtil.getResult(
-			finderClassName, finderMethodName, finderParams, finderArgs, this);
+		Object result = null;
+
+		if (!ArrayUtil.contains(finderClassNamesCacheEnabled, false)) {
+			result = FinderCacheUtil.getResult(
+				finderSQL, finderClassNames, finderMethodName, finderParams,
+				finderArgs, this);
+		}
 
 		if (result == null) {
 			Session session = null;
@@ -479,7 +492,7 @@ public class PermissionFinderImpl
 				}
 
 				FinderCacheUtil.putResult(
-					finderClassNameCacheEnabled, finderClassName,
+					finderSQL, finderClassNamesCacheEnabled, finderClassNames,
 					finderMethodName, finderParams, finderArgs,
 					new Long(count));
 
