@@ -37,6 +37,8 @@ import java.util.List;
  */
 public interface Query {
 
+	public int executeUpdate() throws ORMException;
+
 	public Iterator iterate() throws ORMException;
 
 	public List list() throws ORMException;
@@ -66,7 +68,5 @@ public interface Query {
 	public Query setTimestamp(int pos, Timestamp value);
 
 	public Object uniqueResult() throws ORMException;
-
-    public int executeUpdate() throws ORMException;
 
 }

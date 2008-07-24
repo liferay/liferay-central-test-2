@@ -59,6 +59,15 @@ public class SQLQueryImpl implements SQLQuery {
 		return this;
 	}
 
+    public int executeUpdate() throws ORMException {
+        try {
+            return _sqlQuery.executeUpdate();
+        }
+        catch (Exception e) {
+            throw ExceptionTranslator.translate(e);
+        }
+    }
+
 	public Iterator iterate() throws ORMException {
 		try {
 			return _sqlQuery.iterate();
@@ -161,15 +170,6 @@ public class SQLQueryImpl implements SQLQuery {
 		}
 	}
 
-    public int executeUpdate() throws ORMException {
-        try {
-            return _sqlQuery.executeUpdate();
-        }
-        catch (Exception e) {
-            throw ExceptionTranslator.translate(e);
-        }
-    }
-
-    private org.hibernate.SQLQuery _sqlQuery;
+	private org.hibernate.SQLQuery _sqlQuery;
 
 }

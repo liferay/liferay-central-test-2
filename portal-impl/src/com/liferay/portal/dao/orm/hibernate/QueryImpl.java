@@ -45,6 +45,15 @@ public class QueryImpl implements Query {
 		_query = query;
 	}
 
+	public int executeUpdate() throws ORMException {
+		try {
+			return _query.executeUpdate();
+		}
+		catch (Exception e) {
+			throw ExceptionTranslator.translate(e);
+		}
+	}
+
 	public Iterator iterate() throws ORMException {
 		try {
 			return _query.iterate();
@@ -141,15 +150,6 @@ public class QueryImpl implements Query {
 	public Object uniqueResult() throws ORMException {
 		try {
 			return _query.uniqueResult();
-		}
-		catch (Exception e) {
-			throw ExceptionTranslator.translate(e);
-		}
-	}
-
-	public int executeUpdate() throws ORMException {
-		try {
-			return _query.executeUpdate();
 		}
 		catch (Exception e) {
 			throw ExceptionTranslator.translate(e);
