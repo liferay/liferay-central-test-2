@@ -41,7 +41,7 @@ import org.hibernate.cfg.Environment;
  * </a>
  *
  * @author Brian Wing Shun Chan
- * @author Ganesh P.Ram
+ * @author Ganesh Ram
  *
  */
 public class PortletHibernateConfiguration
@@ -51,20 +51,18 @@ public class PortletHibernateConfiguration
 		Configuration configuration = new Configuration();
 
 		try {
-			ClassLoader classLoader =
-				PortletClassLoaderUtil.getClassLoader();
+			ClassLoader classLoader = PortletClassLoaderUtil.getClassLoader();
 
 			String[] hibernateConfigs = PropsUtil.getArray(
 				PropsKeys.HIBERNATE_CONFIGS);
 
-			String[] configs = new String[hibernateConfigs.length + 1];
-			ArrayUtil.combine(hibernateConfigs, new String[]{
-					"META-INF/portlet-hbm.xml"}, configs);
+			hibernateConfigs = ArrayUtil.append(
+				hibernateConfigs, "META-INF/portlet-hbm.xml");
 
-			for (int i = 0; i < configs.length; i++) {
+			for (String hibernateConfig : hibernateConfigs) {
 				try {
 					InputStream is = classLoader.getResourceAsStream(
-						configs[i]);
+						hibernateConfig);
 
 					if (is != null) {
 						configuration = configuration.addInputStream(is);

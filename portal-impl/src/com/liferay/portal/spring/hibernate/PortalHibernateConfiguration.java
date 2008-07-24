@@ -50,12 +50,13 @@ public class PortalHibernateConfiguration
 		try {
 			ClassLoader classLoader = getClass().getClassLoader();
 
-			String[] configs = PropsUtil.getArray(PropsKeys.HIBERNATE_CONFIGS);
+			String[] hibernateConfigs = PropsUtil.getArray(
+				PropsKeys.HIBERNATE_CONFIGS);
 
-			for (int i = 0; i < configs.length; i++) {
+			for (String hibernateConfig : hibernateConfigs) {
 				try {
 					InputStream is = classLoader.getResourceAsStream(
-						configs[i]);
+						hibernateConfig);
 
 					if (is != null) {
 						configuration = configuration.addInputStream(is);

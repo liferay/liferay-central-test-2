@@ -39,7 +39,7 @@ import junit.framework.TestCase;
  * <a href="BaseTestCase.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
- * @author Ganesh P.Ram
+ * @author Ganesh Ram
  *
  */
 public class BaseTestCase extends TestCase {
@@ -75,21 +75,20 @@ public class BaseTestCase extends TestCase {
 	}
 
 	protected void setUp() throws Exception {
-		if (PortletClassLoaderUtil.getClassLoader() == null){
-			PortletClassLoaderUtil.setClassLoader(Thread.currentThread().
-				getContextClassLoader());
-
-		}
-
-		if (PortletBeanLocatorUtil.getBeanLocator() == null){
-			PortletBeanLocatorUtil.setBeanLocator(new BeanLocatorImpl());
-		}
-
 		if (PortalBeanLocatorUtil.getBeanLocator() == null) {
 			PortalBeanLocatorUtil.setBeanLocator(new BeanLocatorImpl());
+
 			SpringUtil.initContext(SpringUtil.getContext());
 		}
 
+		if (PortletClassLoaderUtil.getClassLoader() == null) {
+			PortletClassLoaderUtil.setClassLoader(
+				Thread.currentThread().getContextClassLoader());
+		}
+
+		if (PortletBeanLocatorUtil.getBeanLocator() == null) {
+			PortletBeanLocatorUtil.setBeanLocator(new BeanLocatorImpl());
+		}
 	}
 
 	private Random _random = new Random();
