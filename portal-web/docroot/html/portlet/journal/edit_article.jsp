@@ -214,7 +214,6 @@ boolean smallImage = BeanParamUtil.getBoolean(article, request, "smallImage");
 String smallImageURL = BeanParamUtil.getString(article, request, "smallImageURL");
 %>
 
-
 <script type="text/javascript">
 	var <portlet:namespace />count = 0;
 	var <portlet:namespace />documentLibraryInput = null;
