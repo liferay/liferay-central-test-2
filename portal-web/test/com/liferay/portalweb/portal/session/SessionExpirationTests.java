@@ -20,7 +20,7 @@
  * SOFTWARE.
  */
 
-package com.liferay.portalweb.portlet.sessionexpiration;
+package com.liferay.portalweb.portal.session;
 
 import com.liferay.portalweb.portal.BaseTests;
 
