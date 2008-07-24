@@ -23,6 +23,10 @@
 package com.liferay.portal.action;
 
 import com.liferay.portal.events.EventsProcessor;
+import com.liferay.portal.kernel.json.JSONObject;
+import com.liferay.portal.kernel.json.JSONFactoryUtil;
+import com.liferay.portal.kernel.messaging.DestinationNames;
+import com.liferay.portal.kernel.messaging.MessageBusUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.struts.ActionConstants;
@@ -95,6 +99,25 @@ public class LogoutAction extends Action {
 			CookieKeys.addCookie(response, companyIdCookie);
 			CookieKeys.addCookie(response, idCookie);
 			CookieKeys.addCookie(response, passwordCookie);
+
+			//Adding RUON hooks
+
+			String userId = (String) session.getAttribute("j_username");
+
+			JSONObject ruonJSON =
+					JSONFactoryUtil.createJSONObject();
+
+			JSONObject setPresenceStatusRequestJSON =
+					JSONFactoryUtil.createJSONObject();
+
+			setPresenceStatusRequestJSON.put("userId",userId);
+			setPresenceStatusRequestJSON.put("status","offline");
+
+			ruonJSON.put(
+					"setPresenceStatusRequest",setPresenceStatusRequestJSON);
+
+			MessageBusUtil.sendSynchronizedMessage(
+							DestinationNames.RUON_WEB, ruonJSON.toString());
 
 			try {
 				session.invalidate();
