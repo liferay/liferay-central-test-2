@@ -147,6 +147,15 @@ public class QueryImpl implements Query {
 		}
 	}
 
+	public int executeUpdate() throws ORMException {
+		try {
+			return _query.executeUpdate();
+		}
+		catch (Exception e) {
+			throw ExceptionTranslator.translate(e);
+		}
+	}
+
 	private org.hibernate.Query _query;
 
 }

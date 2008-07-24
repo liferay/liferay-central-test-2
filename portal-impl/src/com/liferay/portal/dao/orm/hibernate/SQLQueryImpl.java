@@ -161,6 +161,15 @@ public class SQLQueryImpl implements SQLQuery {
 		}
 	}
 
-	private org.hibernate.SQLQuery _sqlQuery;
+    public int executeUpdate() throws ORMException {
+        try {
+            return _sqlQuery.executeUpdate();
+        }
+        catch (Exception e) {
+            throw ExceptionTranslator.translate(e);
+        }
+    }
+
+    private org.hibernate.SQLQuery _sqlQuery;
 
 }

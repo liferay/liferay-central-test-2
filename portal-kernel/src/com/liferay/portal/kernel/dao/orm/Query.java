@@ -67,4 +67,6 @@ public interface Query {
 
 	public Object uniqueResult() throws ORMException;
 
+    public int executeUpdate() throws ORMException;
+
 }
