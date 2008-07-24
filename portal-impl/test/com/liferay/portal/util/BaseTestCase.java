@@ -25,8 +25,10 @@ package com.liferay.portal.util;
 import com.liferay.counter.service.CounterLocalServiceUtil;
 import com.liferay.portal.bean.BeanLocatorImpl;
 import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
+import com.liferay.portal.kernel.portlet.PortletClassLoaderUtil;
 import com.liferay.portal.spring.util.SpringUtil;
 import com.liferay.util.PwdGenerator;
+import com.liferay.util.bean.PortletBeanLocatorUtil;
 
 import java.util.Date;
 import java.util.Random;
@@ -37,6 +39,7 @@ import junit.framework.TestCase;
  * <a href="BaseTestCase.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
+ * @author Ganesh P.Ram
  *
  */
 public class BaseTestCase extends TestCase {
@@ -72,11 +75,21 @@ public class BaseTestCase extends TestCase {
 	}
 
 	protected void setUp() throws Exception {
+		if (PortletClassLoaderUtil.getClassLoader() == null){
+			PortletClassLoaderUtil.setClassLoader(Thread.currentThread().
+				getContextClassLoader());
+
+		}
+
+		if (PortletBeanLocatorUtil.getBeanLocator() == null){
+			PortletBeanLocatorUtil.setBeanLocator(new BeanLocatorImpl());
+		}
+
 		if (PortalBeanLocatorUtil.getBeanLocator() == null) {
 			PortalBeanLocatorUtil.setBeanLocator(new BeanLocatorImpl());
-
 			SpringUtil.initContext(SpringUtil.getContext());
 		}
+
 	}
 
 	private Random _random = new Random();

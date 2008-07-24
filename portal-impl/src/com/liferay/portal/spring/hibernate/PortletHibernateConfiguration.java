@@ -23,7 +23,9 @@
 package com.liferay.portal.spring.hibernate;
 
 import com.liferay.portal.kernel.portlet.PortletClassLoaderUtil;
+import com.liferay.portal.kernel.util.ArrayUtil;
 import com.liferay.portal.kernel.util.Validator;
+import com.liferay.portal.util.PropsKeys;
 import com.liferay.portal.util.PropsUtil;
 
 import java.io.InputStream;
@@ -39,6 +41,7 @@ import org.hibernate.cfg.Environment;
  * </a>
  *
  * @author Brian Wing Shun Chan
+ * @author Ganesh P.Ram
  *
  */
 public class PortletHibernateConfiguration
@@ -51,13 +54,29 @@ public class PortletHibernateConfiguration
 			ClassLoader classLoader =
 				PortletClassLoaderUtil.getClassLoader();
 
-			InputStream is = classLoader.getResourceAsStream(
-				"META-INF/portlet-hbm.xml");
+			String[] hibernateConfigs = PropsUtil.getArray(
+				PropsKeys.HIBERNATE_CONFIGS);
 
-			if (is != null) {
-				configuration = configuration.addInputStream(is);
+			String[] configs = new String[hibernateConfigs.length + 1];
+			ArrayUtil.combine(hibernateConfigs, new String[]{
+					"META-INF/portlet-hbm.xml"}, configs);
 
-				is.close();
+			for (int i = 0; i < configs.length; i++) {
+				try {
+					InputStream is = classLoader.getResourceAsStream(
+						configs[i]);
+
+					if (is != null) {
+						configuration = configuration.addInputStream(is);
+
+						is.close();
+					}
+				}
+				catch (Exception e1) {
+					if (_log.isWarnEnabled()) {
+						_log.warn(e1);
+					}
+				}
 			}
 
 			configuration.setProperties(PropsUtil.getProperties());
