@@ -45,6 +45,8 @@ public class JournalTests extends BaseTests {
 		//addTestSuite(AddFeedTest.class);
 		addTestSuite(SearchTest.class);
 		addTestSuite(RecentPageTest.class);
+		addTestSuite(AddBlankArticleTest.class);
+		addTestSuite(CancelPopupTest.class);
 	}
 
 }
