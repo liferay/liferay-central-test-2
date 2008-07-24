@@ -212,6 +212,20 @@ public class RuntimePortletUtil {
 
 		vc.put("processor", processor);
 
+		VelocityContext velocityContext = null;
+
+		// this pattern is used to cache introspection data for better
+		// performance
+		
+		if (_dummyInnerContext == null) {
+			velocityContext = new VelocityContext();
+			
+			_dummyInnerContext = velocityContext;
+		}
+		else {
+			velocityContext = new VelocityContext(_dummyInnerContext);			
+		}
+
 		// Velocity variables
 
 		VelocityVariables.insertVariables(vc, request);
@@ -357,5 +371,7 @@ public class RuntimePortletUtil {
 	}
 
 	private static Log _log = LogFactory.getLog(RuntimePortletUtil.class);
+
+	private static VelocityContext _dummyInnerContext;
 
 }

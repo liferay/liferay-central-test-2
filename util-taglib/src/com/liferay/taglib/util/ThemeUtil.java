@@ -170,8 +170,20 @@ public class ThemeUtil {
 
 		StringWriter sw = new StringWriter();
 
-		VelocityContext velocityContext = new VelocityContext();
+		VelocityContext velocityContext = null;
 
+		// this pattern is used to cache introspection data for better
+		// performance
+		
+		if (_dummyInnerContext == null) {
+			velocityContext = new VelocityContext();
+			
+			_dummyInnerContext = velocityContext;
+		}
+		else {
+			velocityContext = new VelocityContext(_dummyInnerContext);			
+		}
+		
 		// Velocity variables
 
 		VelocityVariables.insertVariables(velocityContext, request);
@@ -224,5 +236,7 @@ public class ThemeUtil {
 	}
 
 	private static Log _log = LogFactory.getLog(ThemeUtil.class);
+	
+	private static VelocityContext _dummyInnerContext;
 
 }
