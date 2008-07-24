@@ -1,3 +1,4 @@
+<%
 /**
  * Copyright (c) 2000-2008 Liferay, Inc. All rights reserved.
  *
@@ -19,33 +20,4 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-
-package com.liferay.portal.kernel.util;
-
-/**
- * <a href="WebKeys.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
-public interface WebKeys {
-
-	public static final String CTX = "CTX";
-
-	public static final String LIFERAY_SHARED_VISITED_GROUP_ID_PREVIOUS = "LIFERAY_SHARED_VISITED_GROUP_ID_PREVIOUS";
-
-	public static final String LIFERAY_SHARED_VISITED_GROUP_ID_RECENT = "LIFERAY_SHARED_VISITED_GROUP_ID_RECENT";
-
-	public static final String SEARCH_CONTAINER = "SEARCH_CONTAINER";
-
-	public static final String SEARCH_CONTAINER_RESULT_ROW = "SEARCH_CONTAINER_RESULT_ROW";
-
-	public static final String SEARCH_CONTAINER_RESULT_ROW_ENTRY = "SEARCH_CONTAINER_RESULT_ROW_ENTRY";
-
-	public static final String SEARCH_SEARCH_RESULTS = "SEARCH_SEARCH_RESULTS";
-
-	public static final String THEME_DISPLAY = "THEME_DISPLAY";
-
-	public static final String VELOCITY_TAGLIB = "VELOCITY_TAGLIB";
-
-}
+%>

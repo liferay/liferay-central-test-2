@@ -1,3 +1,4 @@
+<%
 /**
  * Copyright (c) 2000-2008 Liferay, Inc. All rights reserved.
  *
@@ -19,33 +20,34 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
+%>
 
-package com.liferay.portal.kernel.util;
+<%@ include file="/html/taglib/init.jsp" %>
 
-/**
- * <a href="WebKeys.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
-public interface WebKeys {
+<%@ page import="com.liferay.portlet.enterpriseadmin.search.UserSearch" %>
+<%@ page import="com.liferay.portlet.enterpriseadmin.search.UserSearchTerms" %>
 
-	public static final String CTX = "CTX";
+<portlet:defineObjects />
 
-	public static final String LIFERAY_SHARED_VISITED_GROUP_ID_PREVIOUS = "LIFERAY_SHARED_VISITED_GROUP_ID_PREVIOUS";
+<%
+PortletURL portletURL = (PortletURL)request.getAttribute("liferay-ui:user-search:portletURL");
+RowChecker rowChecker = (RowChecker)request.getAttribute("liferay-ui:user-search:rowChecker");
+LinkedHashMap userParams = (LinkedHashMap)request.getAttribute("liferay-ui:user-search:userParams");
 
-	public static final String LIFERAY_SHARED_VISITED_GROUP_ID_RECENT = "LIFERAY_SHARED_VISITED_GROUP_ID_RECENT";
+UserSearch searchContainer = new UserSearch(renderRequest, portletURL);
 
-	public static final String SEARCH_CONTAINER = "SEARCH_CONTAINER";
+request.setAttribute(WebKeys.SEARCH_CONTAINER, searchContainer);
 
-	public static final String SEARCH_CONTAINER_RESULT_ROW = "SEARCH_CONTAINER_RESULT_ROW";
+searchContainer.setRowChecker(rowChecker);
+%>
 
-	public static final String SEARCH_CONTAINER_RESULT_ROW_ENTRY = "SEARCH_CONTAINER_RESULT_ROW_ENTRY";
+<liferay-ui:search-form
+	page="/html/portlet/enterprise_admin/user_search.jsp"
+	searchContainer="<%= searchContainer %>"
+/>
 
-	public static final String SEARCH_SEARCH_RESULTS = "SEARCH_SEARCH_RESULTS";
+<%
+UserSearchTerms searchTerms = (UserSearchTerms)searchContainer.getSearchTerms();
+%>
 
-	public static final String THEME_DISPLAY = "THEME_DISPLAY";
-
-	public static final String VELOCITY_TAGLIB = "VELOCITY_TAGLIB";
-
-}
+<%@ include file="/html/portlet/enterprise_admin/user_search_results.jspf" %>

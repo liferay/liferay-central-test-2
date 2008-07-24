@@ -125,19 +125,6 @@ portletURL.setParameter("groupId", String.valueOf(group.getGroupId()));
 				/>
 
 				<%
-				UserSearch searchContainer = new UserSearch(renderRequest, portletURL);
-
-				searchContainer.setRowChecker(new UserGroupChecker(renderResponse, group));
-				%>
-
-				<liferay-ui:search-form
-					page="/html/portlet/enterprise_admin/user_search.jsp"
-					searchContainer="<%= searchContainer %>"
-				/>
-
-				<%
-				UserSearchTerms searchTerms = (UserSearchTerms)searchContainer.getSearchTerms();
-
 				LinkedHashMap userParams = new LinkedHashMap();
 
 				if (tabs2.equals("current")) {
@@ -145,74 +132,84 @@ portletURL.setParameter("groupId", String.valueOf(group.getGroupId()));
 				}
 				%>
 
-				<%@ include file="/html/portlet/enterprise_admin/user_search_results.jspf" %>
+				<liferay-ui:user-search
+					portletURL="<%= portletURL %>"
+					rowChecker="<%= new UserGroupChecker(renderResponse, group) %>"
+					userParams="<%= userParams %>"
+				>
 
-				<div class="separator"><!-- --></div>
+					<%
+					SearchContainer searchContainer = (SearchContainer)request.getAttribute(WebKeys.SEARCH_CONTAINER);
+					%>
 
-				<input type="button" value="<liferay-ui:message key="update-associations" />" onClick="<portlet:namespace />updateGroupUsers('<%= portletURL.toString() %>&<portlet:namespace />cur=<%= cur %>');" />
+					<div class="separator"><!-- --></div>
 
-				<br /><br />
+					<input type="button" value="<liferay-ui:message key="update-associations" />" onClick="<portlet:namespace />updateGroupUsers('<%= portletURL.toString() %>&<portlet:namespace />cur=<%= cur %>');" />
 
-				<%
-				List<String> headerNames = new ArrayList<String>();
+					<br /><br />
 
-				headerNames.add("name");
-				headerNames.add("screen-name");
-				//headerNames.add("email-address");
+					<%
+					List<String> headerNames = new ArrayList<String>();
 
-				if (tabs2.equals("current")) {
-					headerNames.add("community-roles");
-					headerNames.add(StringPool.BLANK);
-				}
-
-				searchContainer.setHeaderNames(headerNames);
-
-				List resultRows = searchContainer.getResultRows();
-
-				for (int i = 0; i < results.size(); i++) {
-					User user2 = (User)results.get(i);
-
-					ResultRow row = new ResultRow(new Object[] {user2, group}, user2.getUserId(), i);
-
-					// Name, screen name, and email address
-
-					row.addText(user2.getFullName());
-					row.addText(user2.getScreenName());
-					//row.addText(user2.getEmailAddress());
-
-					// Community roles and action
+					headerNames.add("name");
+					headerNames.add("screen-name");
+					//headerNames.add("email-address");
 
 					if (tabs2.equals("current")) {
-						List userGroupRoles = UserGroupRoleLocalServiceUtil.getUserGroupRoles(user2.getUserId(), group.getGroupId());
-
-						Iterator itr = userGroupRoles.iterator();
-
-						StringBuilder roleNames = new StringBuilder();
-
-						while (itr.hasNext()) {
-							UserGroupRole userGroupRole = (UserGroupRole)itr.next();
-
-							Role role = RoleLocalServiceUtil.getRole(userGroupRole.getRoleId());
-
-							roleNames.append(role.getName());
-
-							if (itr.hasNext()) {
-								roleNames.append(StringPool.COMMA + StringPool.SPACE);
-							}
-						}
-
-						row.addText(roleNames.toString());
-
-						row.addJSP("right", SearchEntry.DEFAULT_VALIGN, "/html/portlet/communities/user_action.jsp");
+						headerNames.add("community-roles");
+						headerNames.add(StringPool.BLANK);
 					}
 
-					// Add result row
+					searchContainer.setHeaderNames(headerNames);
 
-					resultRows.add(row);
-				}
-				%>
+					List results = searchContainer.getResults();
+					List resultRows = searchContainer.getResultRows();
 
-				<liferay-ui:search-iterator searchContainer="<%= searchContainer %>" />
+					for (int i = 0; i < results.size(); i++) {
+						User user2 = (User)results.get(i);
+
+						ResultRow row = new ResultRow(new Object[] {user2, group}, user2.getUserId(), i);
+
+						// Name, screen name, and email address
+
+						row.addText(user2.getFullName());
+						row.addText(user2.getScreenName());
+						//row.addText(user2.getEmailAddress());
+
+						// Community roles and action
+
+						if (tabs2.equals("current")) {
+							List userGroupRoles = UserGroupRoleLocalServiceUtil.getUserGroupRoles(user2.getUserId(), group.getGroupId());
+
+							Iterator itr = userGroupRoles.iterator();
+
+							StringBuilder roleNames = new StringBuilder();
+
+							while (itr.hasNext()) {
+								UserGroupRole userGroupRole = (UserGroupRole)itr.next();
+
+								Role role = RoleLocalServiceUtil.getRole(userGroupRole.getRoleId());
+
+								roleNames.append(role.getName());
+
+								if (itr.hasNext()) {
+									roleNames.append(StringPool.COMMA + StringPool.SPACE);
+								}
+							}
+
+							row.addText(roleNames.toString());
+
+							row.addJSP("right", SearchEntry.DEFAULT_VALIGN, "/html/portlet/communities/user_action.jsp");
+						}
+
+						// Add result row
+
+						resultRows.add(row);
+					}
+					%>
+
+					<liferay-ui:search-iterator searchContainer="<%= searchContainer %>" />
+				</liferay-ui:user-search>
 			</c:when>
 			<c:otherwise>
 				<input name="<portlet:namespace />p_u_i_d" type="hidden" value="<%= selUser.getUserId() %>" />
