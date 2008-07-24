@@ -30,6 +30,11 @@
 <%@ page import="com.liferay.portlet.blogs.service.BlogsStatsUserLocalServiceUtil" %>
 <%@ page import="com.liferay.portlet.blogs.util.comparator.StatsUserLastPostDateComparator" %>
 
+<%@ page import="com.liferay.portal.kernel.messaging.DestinationNames"%>
+<%@ page import="com.liferay.portal.kernel.messaging.MessageBusUtil"%>
+<%@ page import="com.liferay.portal.kernel.json.JSONFactoryUtil"%>
+<%@ page import="com.liferay.portal.kernel.json.JSONObject"%>
+
 <%
 PortletPreferences prefs = renderRequest.getPreferences();
 
