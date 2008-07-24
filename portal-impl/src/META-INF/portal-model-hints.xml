@@ -1532,9 +1532,9 @@
 		<field name="userName" type="String" />
 		<field name="createDate" type="Date" />
 		<field name="modifiedDate" type="Date" />
-		<field name="vocabularyId" type="long" />
 		<field name="parentEntryId" type="long" />
 		<field name="name" type="String" />
+		<field name="vocabularyId" type="long" />
 	</model>
 	<model name="com.liferay.portlet.tags.model.TagsProperty">
 		<field name="propertyId" type="long" />

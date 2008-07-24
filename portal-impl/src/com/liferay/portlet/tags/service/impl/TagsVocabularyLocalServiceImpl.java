@@ -55,8 +55,8 @@ public class TagsVocabularyLocalServiceImpl
 		throws PortalException, SystemException {
 
 		User user = userPersistence.findByPrimaryKey(userId);
-		Date now = new Date();
 		name = name.trim().toLowerCase();
+		Date now = new Date();
 
 		validate(name);
 
@@ -85,7 +85,8 @@ public class TagsVocabularyLocalServiceImpl
 	}
 
 	public void deleteVocabulary(long userId, long vocabularyId)
-			throws PortalException, SystemException {
+		throws PortalException, SystemException {
+
 		User user = userPersistence.findByPrimaryKey(userId);
 
 		tagsEntryLocalService.deleteEntries(user.getCompanyId(), vocabularyId);
@@ -130,14 +131,14 @@ public class TagsVocabularyLocalServiceImpl
 			vocabularyId);
 
 		if (!vocabulary.getName().equals(name) &&
-				hasVocabulary(vocabulary.getCompanyId(), name)) {
+			hasVocabulary(vocabulary.getCompanyId(), name)) {
 
-			throw new DuplicateVocabularyException();
+			throw new DuplicateVocabularyException(name);
 		}
 
-		vocabulary.setFolksonomy(folksonomy);
 		vocabulary.setModifiedDate(new Date());
 		vocabulary.setName(name);
+		vocabulary.setFolksonomy(folksonomy);
 
 		tagsVocabularyPersistence.update(vocabulary, false);
 

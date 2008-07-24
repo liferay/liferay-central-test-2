@@ -98,14 +98,6 @@ public class TagsVocabularyServiceJSON {
 		TagsVocabularyServiceUtil.deleteVocabulary(vocabularyId);
 	}
 
-	public static JSONObject getTagsVocabulary(long vocabularyId)
-		throws java.rmi.RemoteException, com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
-		com.liferay.portlet.tags.model.TagsVocabulary returnValue = TagsVocabularyServiceUtil.getTagsVocabulary(vocabularyId);
-
-		return TagsVocabularyJSONSerializer.toJSONObject(returnValue);
-	}
-
 	public static JSONArray getVocabularies(long companyId)
 		throws java.rmi.RemoteException, com.liferay.portal.SystemException {
 		java.util.List<com.liferay.portlet.tags.model.TagsVocabulary> returnValue =
@@ -120,6 +112,14 @@ public class TagsVocabularyServiceJSON {
 			TagsVocabularyServiceUtil.getVocabularies(companyId, folksonomy);
 
 		return TagsVocabularyJSONSerializer.toJSONArray(returnValue);
+	}
+
+	public static JSONObject getVocabulary(long vocabularyId)
+		throws java.rmi.RemoteException, com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
+		com.liferay.portlet.tags.model.TagsVocabulary returnValue = TagsVocabularyServiceUtil.getVocabulary(vocabularyId);
+
+		return TagsVocabularyJSONSerializer.toJSONObject(returnValue);
 	}
 
 	public static JSONObject updateVocabulary(long vocabularyId,

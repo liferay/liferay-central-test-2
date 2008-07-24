@@ -187,42 +187,6 @@ public class TagsVocabularyServiceHttp {
 		}
 	}
 
-	public static com.liferay.portlet.tags.model.TagsVocabulary getTagsVocabulary(
-		HttpPrincipal httpPrincipal, long vocabularyId)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
-		try {
-			Object paramObj0 = new LongWrapper(vocabularyId);
-
-			MethodWrapper methodWrapper = new MethodWrapper(TagsVocabularyServiceUtil.class.getName(),
-					"getTagsVocabulary", new Object[] { paramObj0 });
-
-			Object returnObj = null;
-
-			try {
-				returnObj = TunnelUtil.invoke(httpPrincipal, methodWrapper);
-			}
-			catch (Exception e) {
-				if (e instanceof com.liferay.portal.PortalException) {
-					throw (com.liferay.portal.PortalException)e;
-				}
-
-				if (e instanceof com.liferay.portal.SystemException) {
-					throw (com.liferay.portal.SystemException)e;
-				}
-
-				throw new com.liferay.portal.SystemException(e);
-			}
-
-			return (com.liferay.portlet.tags.model.TagsVocabulary)returnObj;
-		}
-		catch (com.liferay.portal.SystemException se) {
-			_log.error(se, se);
-
-			throw se;
-		}
-	}
-
 	public static java.util.List<com.liferay.portlet.tags.model.TagsVocabulary> getVocabularies(
 		HttpPrincipal httpPrincipal, long companyId)
 		throws com.liferay.portal.SystemException {
@@ -279,6 +243,42 @@ public class TagsVocabularyServiceHttp {
 			}
 
 			return (java.util.List<com.liferay.portlet.tags.model.TagsVocabulary>)returnObj;
+		}
+		catch (com.liferay.portal.SystemException se) {
+			_log.error(se, se);
+
+			throw se;
+		}
+	}
+
+	public static com.liferay.portlet.tags.model.TagsVocabulary getVocabulary(
+		HttpPrincipal httpPrincipal, long vocabularyId)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
+		try {
+			Object paramObj0 = new LongWrapper(vocabularyId);
+
+			MethodWrapper methodWrapper = new MethodWrapper(TagsVocabularyServiceUtil.class.getName(),
+					"getVocabulary", new Object[] { paramObj0 });
+
+			Object returnObj = null;
+
+			try {
+				returnObj = TunnelUtil.invoke(httpPrincipal, methodWrapper);
+			}
+			catch (Exception e) {
+				if (e instanceof com.liferay.portal.PortalException) {
+					throw (com.liferay.portal.PortalException)e;
+				}
+
+				if (e instanceof com.liferay.portal.SystemException) {
+					throw (com.liferay.portal.SystemException)e;
+				}
+
+				throw new com.liferay.portal.SystemException(e);
+			}
+
+			return (com.liferay.portlet.tags.model.TagsVocabulary)returnObj;
 		}
 		catch (com.liferay.portal.SystemException se) {
 			_log.error(se, se);

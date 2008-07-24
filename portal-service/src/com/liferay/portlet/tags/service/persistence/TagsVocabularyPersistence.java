@@ -77,15 +77,6 @@ public interface TagsVocabularyPersistence {
 	public com.liferay.portlet.tags.model.TagsVocabulary fetchByPrimaryKey(
 		long vocabularyId) throws com.liferay.portal.SystemException;
 
-	public com.liferay.portlet.tags.model.TagsVocabulary findByC_N(
-		long companyId, java.lang.String name)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portlet.tags.NoSuchVocabularyException;
-
-	public com.liferay.portlet.tags.model.TagsVocabulary fetchByC_N(
-		long companyId, java.lang.String name)
-		throws com.liferay.portal.SystemException;
-
 	public java.util.List<com.liferay.portlet.tags.model.TagsVocabulary> findByCompanyId(
 		long companyId) throws com.liferay.portal.SystemException;
 
@@ -113,6 +104,15 @@ public interface TagsVocabularyPersistence {
 		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.tags.NoSuchVocabularyException;
+
+	public com.liferay.portlet.tags.model.TagsVocabulary findByC_N(
+		long companyId, java.lang.String name)
+		throws com.liferay.portal.SystemException,
+			com.liferay.portlet.tags.NoSuchVocabularyException;
+
+	public com.liferay.portlet.tags.model.TagsVocabulary fetchByC_N(
+		long companyId, java.lang.String name)
+		throws com.liferay.portal.SystemException;
 
 	public java.util.List<com.liferay.portlet.tags.model.TagsVocabulary> findByC_F(
 		long companyId, boolean folksonomy)
@@ -163,22 +163,22 @@ public interface TagsVocabularyPersistence {
 		int start, int end, com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException;
 
+	public void removeByCompanyId(long companyId)
+		throws com.liferay.portal.SystemException;
+
 	public void removeByC_N(long companyId, java.lang.String name)
 		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.tags.NoSuchVocabularyException;
-
-	public void removeByCompanyId(long companyId)
-		throws com.liferay.portal.SystemException;
 
 	public void removeByC_F(long companyId, boolean folksonomy)
 		throws com.liferay.portal.SystemException;
 
 	public void removeAll() throws com.liferay.portal.SystemException;
 
-	public int countByC_N(long companyId, java.lang.String name)
+	public int countByCompanyId(long companyId)
 		throws com.liferay.portal.SystemException;
 
-	public int countByCompanyId(long companyId)
+	public int countByC_N(long companyId, java.lang.String name)
 		throws com.liferay.portal.SystemException;
 
 	public int countByC_F(long companyId, boolean folksonomy)

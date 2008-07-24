@@ -39,7 +39,6 @@ import com.liferay.portlet.tags.model.TagsEntry;
 import com.liferay.portlet.tags.model.TagsEntryConstants;
 import com.liferay.portlet.tags.model.TagsProperty;
 import com.liferay.portlet.tags.model.TagsVocabulary;
-import com.liferay.portlet.tags.service.TagsVocabularyLocalServiceUtil;
 import com.liferay.portlet.tags.service.base.TagsEntryLocalServiceBaseImpl;
 import com.liferay.portlet.tags.util.TagsUtil;
 import com.liferay.util.Autocomplete;
@@ -47,7 +46,6 @@ import com.liferay.util.Autocomplete;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashSet;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
 
@@ -68,24 +66,26 @@ public class TagsEntryLocalServiceImpl extends TagsEntryLocalServiceBaseImpl {
 	public TagsEntry addEntry(long userId, String name)
 		throws PortalException, SystemException {
 
-		return addEntry(userId, name, null, new String[0], null);
-	}
-
-	public TagsEntry addEntry(long userId, String name, String vocabularyName)
-		throws PortalException, SystemException {
-
-		return addEntry(userId, name, vocabularyName, new String[0], null);
+		return addEntry(userId, name, new String[0]);
 	}
 
 	public TagsEntry addEntry(long userId, String name, String[] properties)
 		throws PortalException, SystemException {
 
-		return addEntry(userId, name, null, new String[0], null);
+		return addEntry(userId, name, null, properties);
 	}
 
 	public TagsEntry addEntry(
 			long userId, String name, String vocabularyName,
-			String[] properties, String parentEntryName)
+			String[] properties)
+		throws PortalException, SystemException {
+
+		return addEntry(userId, null, name, vocabularyName, properties);
+	}
+
+	public TagsEntry addEntry(
+			long userId, String parentEntryName, String name,
+			String vocabularyName, String[] properties)
 		throws PortalException, SystemException {
 
 		User user = userPersistence.findByPrimaryKey(userId);
@@ -122,7 +122,7 @@ public class TagsEntryLocalServiceImpl extends TagsEntryLocalServiceBaseImpl {
 
 		if (Validator.isNotNull(parentEntryName)) {
 			TagsEntry parentEntry = tagsEntryPersistence.findByC_N(
-					user.getCompanyId(), parentEntryName);
+				user.getCompanyId(), parentEntryName);
 
 			entry.setParentEntryId(parentEntry.getEntryId());
 		}
@@ -175,6 +175,17 @@ public class TagsEntryLocalServiceImpl extends TagsEntryLocalServiceBaseImpl {
 		}
 	}
 
+	public void deleteEntries(long companyId, long vocabularyId)
+		throws PortalException, SystemException {
+
+		List<TagsEntry> entries = tagsEntryPersistence.findByC_V(
+			companyId, vocabularyId);
+
+		for (TagsEntry entry : entries) {
+			deleteEntry(entry);
+		}
+	}
+
 	public void deleteEntry(long entryId)
 		throws PortalException, SystemException {
 
@@ -193,19 +204,6 @@ public class TagsEntryLocalServiceImpl extends TagsEntryLocalServiceBaseImpl {
 		// Entry
 
 		tagsEntryPersistence.remove(entry.getEntryId());
-	}
-
-	public void deleteEntries(long companyId, long vocabularyId)
-		throws PortalException, SystemException {
-
-		List<TagsEntry> entries = tagsEntryPersistence.findByC_V(
-			companyId, vocabularyId);
-
-		Iterator itr = entries.iterator();
-
-		while (itr.hasNext()) {
-			deleteEntry((TagsEntry) itr.next());
-		}
 	}
 
 	public boolean hasEntry(long companyId, String name)
@@ -329,11 +327,10 @@ public class TagsEntryLocalServiceImpl extends TagsEntryLocalServiceBaseImpl {
 
 	public List<TagsEntry> getVocabularyEntries(
 			long companyId, String vocabularyName)
-		throws SystemException, PortalException {
+		throws PortalException, SystemException {
 
-		TagsVocabulary vocabulary =
-			TagsVocabularyLocalServiceUtil.getVocabulary(
-				companyId, vocabularyName);
+		TagsVocabulary vocabulary = tagsVocabularyLocalService.getVocabulary(
+			companyId, vocabularyName);
 
 		return tagsEntryPersistence.findByC_V(
 			companyId, vocabulary.getVocabularyId());
@@ -400,11 +397,11 @@ public class TagsEntryLocalServiceImpl extends TagsEntryLocalServiceBaseImpl {
 	public TagsEntry updateEntry(long entryId, String name)
 		throws PortalException, SystemException {
 
-		return updateEntry(entryId, name, null, null);
+		return updateEntry(entryId, null, name, null);
 	}
 
 	public TagsEntry updateEntry(
-			long entryId, String name, String parentEntryName,
+			long entryId, String parentEntryName, String name,
 			String vocabularyName)
 		throws PortalException, SystemException {
 
@@ -425,7 +422,7 @@ public class TagsEntryLocalServiceImpl extends TagsEntryLocalServiceBaseImpl {
 
 		if (Validator.isNotNull(vocabularyName)) {
 			TagsVocabulary vocabulary =
-				TagsVocabularyLocalServiceUtil.getVocabulary(
+				tagsVocabularyLocalService.getVocabulary(
 					entry.getCompanyId(), vocabularyName);
 
 			entry.setVocabularyId(vocabulary.getVocabularyId());
@@ -452,12 +449,12 @@ public class TagsEntryLocalServiceImpl extends TagsEntryLocalServiceBaseImpl {
 			long userId, long entryId, String name, String[] properties)
 		throws PortalException, SystemException {
 
-		return updateEntry(userId, entryId, name, null, properties, null);
+		return updateEntry(userId, entryId, null, name, null, properties);
 	}
 
 	public TagsEntry updateEntry(
-			long userId, long entryId, String name, String parentEntryName,
-			String[] properties, String vocabularyName)
+			long userId, long entryId, String parentEntryName, String name,
+			String vocabularyName, String[] properties)
 		throws PortalException, SystemException {
 
 		TagsEntry entry = updateEntry(

@@ -2604,16 +2604,16 @@ Liferay.Service.Tags.TagsVocabulary = {
 		return Liferay.Service.ajax(params, callback);
 	},
 
-	getTagsVocabulary: function(params, callback) {
+	getVocabularies: function(params, callback) {
 		params.serviceClassName = this.serviceClassName;
-		params.serviceMethodName = "getTagsVocabulary";
+		params.serviceMethodName = "getVocabularies";
 
 		return Liferay.Service.ajax(params, callback);
 	},
 
-	getVocabularies: function(params, callback) {
+	getVocabulary: function(params, callback) {
 		params.serviceClassName = this.serviceClassName;
-		params.serviceMethodName = "getVocabularies";
+		params.serviceMethodName = "getVocabulary";
 
 		return Liferay.Service.ajax(params, callback);
 	},

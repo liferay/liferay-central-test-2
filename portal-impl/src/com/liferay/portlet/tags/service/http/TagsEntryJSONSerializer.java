@@ -80,9 +80,9 @@ public class TagsEntryJSONSerializer {
 		}
 
 		jsonObj.put("modifiedDate", modifiedDateJSON);
-		jsonObj.put("vocabularyId", model.getVocabularyId());
 		jsonObj.put("parentEntryId", model.getParentEntryId());
 		jsonObj.put("name", model.getName());
+		jsonObj.put("vocabularyId", model.getVocabularyId());
 
 		return jsonObj;
 	}

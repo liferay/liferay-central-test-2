@@ -26,6 +26,7 @@ package com.liferay.portlet.tags.model;
  * <a href="TagsEntryConstants.java.html"><b><i>View Source</i></b></a>
  *
  * @author Jorge Ferrer
+ *
  */
 public class TagsEntryConstants {
 

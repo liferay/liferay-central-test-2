@@ -88,9 +88,9 @@
 
 		<!-- Other fields -->
 
-		<column name="vocabularyId" type="long" />
 		<column name="parentEntryId" type="long" />
 		<column name="name" type="String" />
+		<column name="vocabularyId" type="long" />
 
 		<!-- Relationships -->
 
@@ -181,11 +181,11 @@
 		<column name="acronym" type="String" />
 	</entity>
 	<entity name="TagsVocabulary" local-service="true" remote-service="true">
-		
+
 		<!-- PK fields -->
 
 		<column name="vocabularyId" type="long" primary="true" />
-		
+
 		<!-- Group instance -->
 
 		<column name="groupId" type="long" />
@@ -206,27 +206,23 @@
 
 		<!-- Finder methods -->
 
+		<finder name="CompanyId" return-type="Collection">
+			<finder-column name="companyId" />
+		</finder>
 		<finder name="C_N" return-type="Vocabulary">
 			<finder-column name="companyId" />
 			<finder-column name="name" />
 		</finder>
-		
-		<finder name="CompanyId" return-type="Collection">
-			<finder-column name="companyId" />
-		</finder>
-
 		<finder name="C_F" return-type="Collection">
 			<finder-column name="companyId" />
 			<finder-column name="folksonomy" />
 		</finder>
 
 		<!-- References -->
-		
+
 		<reference package-path="com.liferay.counter" entity="Counter" />
-		<reference package-path="com.liferay.portal" entity="User" />	
-	</entity>	
-	
-	
+		<reference package-path="com.liferay.portal" entity="User" />
+	</entity>
 	<exceptions>
 		<exception>DuplicateEntry</exception>
 		<exception>DuplicateVocabulary</exception>

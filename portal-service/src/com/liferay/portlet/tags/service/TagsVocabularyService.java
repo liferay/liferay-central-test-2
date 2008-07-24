@@ -63,11 +63,6 @@ public interface TagsVocabularyService {
 		throws java.rmi.RemoteException, com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;
 
-	public com.liferay.portlet.tags.model.TagsVocabulary getTagsVocabulary(
-		long vocabularyId)
-		throws java.rmi.RemoteException, com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException;
-
 	public java.util.List<com.liferay.portlet.tags.model.TagsVocabulary> getVocabularies(
 		long companyId)
 		throws java.rmi.RemoteException, com.liferay.portal.SystemException;
@@ -75,6 +70,11 @@ public interface TagsVocabularyService {
 	public java.util.List<com.liferay.portlet.tags.model.TagsVocabulary> getVocabularies(
 		long companyId, boolean folksonomy)
 		throws java.rmi.RemoteException, com.liferay.portal.SystemException;
+
+	public com.liferay.portlet.tags.model.TagsVocabulary getVocabulary(
+		long vocabularyId)
+		throws java.rmi.RemoteException, com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException;
 
 	public com.liferay.portlet.tags.model.TagsVocabulary updateVocabulary(
 		long vocabularyId, java.lang.String name, boolean folksonomy)

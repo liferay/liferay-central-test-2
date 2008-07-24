@@ -80,6 +80,7 @@ import com.liferay.portlet.tags.service.persistence.TagsAssetPersistenceTest;
 import com.liferay.portlet.tags.service.persistence.TagsEntryPersistenceTest;
 import com.liferay.portlet.tags.service.persistence.TagsPropertyPersistenceTest;
 import com.liferay.portlet.tags.service.persistence.TagsSourcePersistenceTest;
+import com.liferay.portlet.tags.service.persistence.TagsVocabularyPersistenceTest;
 import com.liferay.portlet.tasks.service.persistence.TasksProposalPersistenceTest;
 import com.liferay.portlet.tasks.service.persistence.TasksReviewPersistenceTest;
 import com.liferay.portlet.wiki.service.persistence.WikiNodePersistenceTest;
@@ -211,6 +212,7 @@ public class PersistenceTestSuite extends TestSuite {
 		addTestSuite(TagsEntryPersistenceTest.class);
 		addTestSuite(TagsPropertyPersistenceTest.class);
 		addTestSuite(TagsSourcePersistenceTest.class);
+		addTestSuite(TagsVocabularyPersistenceTest.class);
 
 		addTestSuite(TasksProposalPersistenceTest.class);
 		addTestSuite(TasksReviewPersistenceTest.class);

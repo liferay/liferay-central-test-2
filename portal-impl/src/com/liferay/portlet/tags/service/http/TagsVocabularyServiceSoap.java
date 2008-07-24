@@ -122,20 +122,6 @@ public class TagsVocabularyServiceSoap {
 		}
 	}
 
-	public static com.liferay.portlet.tags.model.TagsVocabularySoap getTagsVocabulary(
-		long vocabularyId) throws RemoteException {
-		try {
-			com.liferay.portlet.tags.model.TagsVocabulary returnValue = TagsVocabularyServiceUtil.getTagsVocabulary(vocabularyId);
-
-			return com.liferay.portlet.tags.model.TagsVocabularySoap.toSoapModel(returnValue);
-		}
-		catch (Exception e) {
-			_log.error(e, e);
-
-			throw new RemoteException(e.getMessage());
-		}
-	}
-
 	public static com.liferay.portlet.tags.model.TagsVocabularySoap[] getVocabularies(
 		long companyId) throws RemoteException {
 		try {
@@ -158,6 +144,20 @@ public class TagsVocabularyServiceSoap {
 				TagsVocabularyServiceUtil.getVocabularies(companyId, folksonomy);
 
 			return com.liferay.portlet.tags.model.TagsVocabularySoap.toSoapModels(returnValue);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
+	public static com.liferay.portlet.tags.model.TagsVocabularySoap getVocabulary(
+		long vocabularyId) throws RemoteException {
+		try {
+			com.liferay.portlet.tags.model.TagsVocabulary returnValue = TagsVocabularyServiceUtil.getVocabulary(vocabularyId);
+
+			return com.liferay.portlet.tags.model.TagsVocabularySoap.toSoapModel(returnValue);
 		}
 		catch (Exception e) {
 			_log.error(e, e);

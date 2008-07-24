@@ -55,19 +55,19 @@ public interface TagsEntryService {
 			com.liferay.portal.SystemException;
 
 	public com.liferay.portlet.tags.model.TagsEntry addEntry(
+		java.lang.String name, java.lang.String[] properties)
+		throws java.rmi.RemoteException, com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException;
+
+	public com.liferay.portlet.tags.model.TagsEntry addEntry(
 		java.lang.String name, java.lang.String vocabularyName,
 		java.lang.String[] properties)
 		throws java.rmi.RemoteException, com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;
 
 	public com.liferay.portlet.tags.model.TagsEntry addEntry(
-		java.lang.String name, java.lang.String vocabularyName,
-		java.lang.String[] properties, java.lang.String parentCategory)
-		throws java.rmi.RemoteException, com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException;
-
-	public com.liferay.portlet.tags.model.TagsEntry addEntry(
-		java.lang.String name, java.lang.String[] properties)
+		java.lang.String parentEntryName, java.lang.String name,
+		java.lang.String vocabularyName, java.lang.String[] properties)
 		throws java.rmi.RemoteException, com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;
 
@@ -120,13 +120,19 @@ public interface TagsEntryService {
 			com.liferay.portal.SystemException;
 
 	public com.liferay.portlet.tags.model.TagsEntry updateEntry(long entryId,
-		java.lang.String name, java.lang.String parentEntryName,
-		java.lang.String[] properties, java.lang.String vocabularyName)
+		java.lang.String parentEntryName, java.lang.String name,
+		java.lang.String vocabularyName)
 		throws java.rmi.RemoteException, com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;
 
 	public com.liferay.portlet.tags.model.TagsEntry updateEntry(long entryId,
 		java.lang.String name, java.lang.String[] properties)
+		throws java.rmi.RemoteException, com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException;
+
+	public com.liferay.portlet.tags.model.TagsEntry updateEntry(long entryId,
+		java.lang.String parentEntryName, java.lang.String name,
+		java.lang.String vocabularyName, java.lang.String[] properties)
 		throws java.rmi.RemoteException, com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;
 }

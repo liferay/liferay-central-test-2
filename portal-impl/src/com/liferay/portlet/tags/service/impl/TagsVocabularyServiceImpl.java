@@ -45,7 +45,7 @@ public class TagsVocabularyServiceImpl extends TagsVocabularyServiceBaseImpl {
 	}
 
 	public TagsVocabulary addVocabulary(String name, boolean folksonomy)
-			throws PortalException, SystemException {
+		throws PortalException, SystemException {
 
 		return tagsVocabularyLocalService.addVocabulary(
 			getUserId(), name, folksonomy);
@@ -54,14 +54,7 @@ public class TagsVocabularyServiceImpl extends TagsVocabularyServiceBaseImpl {
 	public void deleteVocabulary(long vocabularyId)
 		throws PortalException, SystemException {
 
-		tagsVocabularyLocalService.deleteVocabulary(
-			getUserId(), vocabularyId);
-	}
-
-	public TagsVocabulary getTagsVocabulary(long vocabularyId)
-		throws PortalException, SystemException {
-
-		return tagsVocabularyLocalService.getTagsVocabulary(vocabularyId);
+		tagsVocabularyLocalService.deleteVocabulary(getUserId(), vocabularyId);
 	}
 
 	public List<TagsVocabulary> getVocabularies(long companyId)
@@ -78,8 +71,14 @@ public class TagsVocabularyServiceImpl extends TagsVocabularyServiceBaseImpl {
 			companyId, folksonomy);
 	}
 
+	public TagsVocabulary getVocabulary(long vocabularyId)
+		throws PortalException, SystemException {
+
+		return tagsVocabularyLocalService.getVocabulary(vocabularyId);
+	}
+
 	public TagsVocabulary updateVocabulary(
-			long vocabularyId, String name, boolean folksonomy) 
+			long vocabularyId, String name, boolean folksonomy)
 		throws PortalException, SystemException {
 
 		return tagsVocabularyLocalService.updateVocabulary(

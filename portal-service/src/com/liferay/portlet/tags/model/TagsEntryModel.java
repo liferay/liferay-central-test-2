@@ -79,10 +79,6 @@ public interface TagsEntryModel extends BaseModel {
 
 	public void setModifiedDate(Date modifiedDate);
 
-	public long getVocabularyId();
-
-	public void setVocabularyId(long vocabularyId);
-
 	public long getParentEntryId();
 
 	public void setParentEntryId(long parentEntryId);
@@ -90,6 +86,10 @@ public interface TagsEntryModel extends BaseModel {
 	public String getName();
 
 	public void setName(String name);
+
+	public long getVocabularyId();
+
+	public void setVocabularyId(long vocabularyId);
 
 	public TagsEntry toEscapedModel();
 }

@@ -75,9 +75,9 @@ public class TagsEntryPersistenceTest extends BasePersistenceTestCase {
 		newTagsEntry.setUserName(randomString());
 		newTagsEntry.setCreateDate(nextDate());
 		newTagsEntry.setModifiedDate(nextDate());
-		newTagsEntry.setVocabularyId(nextLong());
 		newTagsEntry.setParentEntryId(nextLong());
 		newTagsEntry.setName(randomString());
+		newTagsEntry.setVocabularyId(nextLong());
 
 		_persistence.update(newTagsEntry, false);
 
@@ -93,11 +93,11 @@ public class TagsEntryPersistenceTest extends BasePersistenceTestCase {
 			newTagsEntry.getCreateDate());
 		assertEquals(existingTagsEntry.getModifiedDate(),
 			newTagsEntry.getModifiedDate());
-		assertEquals(existingTagsEntry.getVocabularyId(),
-			newTagsEntry.getVocabularyId());
 		assertEquals(existingTagsEntry.getParentEntryId(),
 			newTagsEntry.getParentEntryId());
 		assertEquals(existingTagsEntry.getName(), newTagsEntry.getName());
+		assertEquals(existingTagsEntry.getVocabularyId(),
+			newTagsEntry.getVocabularyId());
 	}
 
 	public void testFindByPrimaryKeyExisting() throws Exception {
@@ -147,9 +147,9 @@ public class TagsEntryPersistenceTest extends BasePersistenceTestCase {
 		tagsEntry.setUserName(randomString());
 		tagsEntry.setCreateDate(nextDate());
 		tagsEntry.setModifiedDate(nextDate());
-		tagsEntry.setVocabularyId(nextLong());
 		tagsEntry.setParentEntryId(nextLong());
 		tagsEntry.setName(randomString());
+		tagsEntry.setVocabularyId(nextLong());
 
 		_persistence.update(tagsEntry, false);
 

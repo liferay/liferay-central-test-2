@@ -1382,9 +1382,9 @@
 		<property name="userName" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="createDate" type="org.hibernate.type.TimestampType" />
 		<property name="modifiedDate" type="org.hibernate.type.TimestampType" />
-		<property name="vocabularyId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
 		<property name="parentEntryId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
 		<property name="name" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="vocabularyId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
 	</class>
 	<class name="com.liferay.portlet.tags.model.impl.TagsPropertyImpl" table="TagsProperty">
 		<cache usage="read-write" />

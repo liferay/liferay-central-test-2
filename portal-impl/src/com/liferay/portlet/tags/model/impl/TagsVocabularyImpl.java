@@ -30,8 +30,8 @@ import com.liferay.portlet.tags.model.TagsVocabulary;
  * @author Brian Wing Shun Chan
  *
  */
-public class TagsVocabularyImpl extends TagsVocabularyModelImpl
-	implements TagsVocabulary {
+public class TagsVocabularyImpl
+	extends TagsVocabularyModelImpl implements TagsVocabulary {
 
 	public TagsVocabularyImpl() {
 	}

@@ -1,3 +1,7 @@
+alter table TagsEntry add groupId LONG;
+alter table TagsEntry add parentEntryId LONG;
+alter table TagsEntry add vocabularyId LONG;
+
 create table TagsVocabulary (
 	vocabularyId LONG not null primary key,
 	groupId LONG,
@@ -10,7 +14,3 @@ create table TagsVocabulary (
 	description VARCHAR(75) null,
 	folksonomy BOOLEAN
 );
-
-alter table TagsEntry add groupId LONG;
-alter table TagsEntry add vocabularyId LONG;
-alter table TagsEntry add parentEntryId LONG;

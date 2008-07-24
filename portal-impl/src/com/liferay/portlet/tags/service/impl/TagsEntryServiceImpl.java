@@ -44,26 +44,26 @@ public class TagsEntryServiceImpl extends TagsEntryServiceBaseImpl {
 		return tagsEntryLocalService.addEntry(getUserId(), name);
 	}
 
-	public TagsEntry addEntry(
-			String name, String vocabularyName, String[] properties)
-		throws PortalException, SystemException {
-
-		return addEntry(name, vocabularyName, properties, null);
-	}
-
-	public TagsEntry addEntry(
-			String name, String vocabularyName, String[] properties,
-			String parentCategory)
-		throws PortalException, SystemException {
-
-		return tagsEntryLocalService.addEntry(
-			getUserId(), name, vocabularyName, properties, parentCategory);
-	}
-
 	public TagsEntry addEntry(String name, String[] properties)
 		throws PortalException, SystemException {
 
 		return tagsEntryLocalService.addEntry(getUserId(), name, properties);
+	}
+
+	public TagsEntry addEntry(
+			String name, String vocabularyName, String[] properties)
+		throws PortalException, SystemException {
+
+		return addEntry(name, vocabularyName, properties);
+	}
+
+	public TagsEntry addEntry(
+			String parentEntryName, String name, String vocabularyName,
+			String[] properties)
+		throws PortalException, SystemException {
+
+		return tagsEntryLocalService.addEntry(
+			getUserId(), parentEntryName, name, vocabularyName, properties);
 	}
 
 	public void deleteEntry(long entryId)
@@ -143,13 +143,12 @@ public class TagsEntryServiceImpl extends TagsEntryServiceBaseImpl {
 	}
 
 	public TagsEntry updateEntry(
-			long entryId, String name, String parentEntryName,
-			String[] properties, String vocabularyName)
+			long entryId, String parentEntryName, String name,
+			String vocabularyName)
 		throws PortalException, SystemException {
 
 		return tagsEntryLocalService.updateEntry(
-			getUserId(), entryId, name, parentEntryName, properties,
-			vocabularyName);
+			entryId, parentEntryName, name, vocabularyName);
 	}
 
 	public TagsEntry updateEntry(long entryId, String name, String[] properties)
@@ -157,6 +156,16 @@ public class TagsEntryServiceImpl extends TagsEntryServiceBaseImpl {
 
 		return tagsEntryLocalService.updateEntry(
 			getUserId(), entryId, name, properties);
+	}
+
+	public TagsEntry updateEntry(
+			long entryId, String parentEntryName, String name,
+			String vocabularyName, String[] properties)
+		throws PortalException, SystemException {
+
+		return tagsEntryLocalService.updateEntry(
+			getUserId(), entryId, parentEntryName, name, vocabularyName,
+			properties);
 	}
 
 }

@@ -33,7 +33,7 @@ import com.liferay.portal.upgrade.SmartUpgradeSchema;
 public class UpgradeSchema extends SmartUpgradeSchema {
 
 	protected void upgradeOnce() throws Exception {
-		runSQLTemplate("update-5.1.1-5.2.0.sql", false);
+		runSQLTemplate("update-5.1.0-5.2.0.sql", false);
 	}
 
 }

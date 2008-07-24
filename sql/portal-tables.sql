@@ -1290,9 +1290,9 @@ create table TagsEntry (
 	userName VARCHAR(75) null,
 	createDate DATE null,
 	modifiedDate DATE null,
-	vocabularyId LONG,
 	parentEntryId LONG,
-	name VARCHAR(75) null
+	name VARCHAR(75) null,
+	vocabularyId LONG
 );
 
 create table TagsProperty (
