@@ -44,19 +44,25 @@ import org.hibernate.cfg.Environment;
 public class PortalHibernateConfiguration
 	extends TransactionAwareConfiguration {
 
+	protected ClassLoader getConfigurationClassLoader() {
+		return getClass().getClassLoader();
+	}
+
+	protected String[] getConfigurationResources() {
+		return PropsUtil.getArray(PropsKeys.HIBERNATE_CONFIGS);
+	}
+
 	protected Configuration newConfiguration() {
 		Configuration configuration = new Configuration();
 
 		try {
-			ClassLoader classLoader = getClass().getClassLoader();
+			ClassLoader classLoader = getConfigurationClassLoader();
 
-			String[] hibernateConfigs = PropsUtil.getArray(
-				PropsKeys.HIBERNATE_CONFIGS);
+			String[] resources = getConfigurationResources();
 
-			for (String hibernateConfig : hibernateConfigs) {
+			for (String resource : resources) {
 				try {
-					InputStream is = classLoader.getResourceAsStream(
-						hibernateConfig);
+					InputStream is = classLoader.getResourceAsStream(resource);
 
 					if (is != null) {
 						configuration = configuration.addInputStream(is);
