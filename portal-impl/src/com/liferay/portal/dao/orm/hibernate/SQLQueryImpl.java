@@ -59,14 +59,14 @@ public class SQLQueryImpl implements SQLQuery {
 		return this;
 	}
 
-    public int executeUpdate() throws ORMException {
-        try {
-            return _sqlQuery.executeUpdate();
-        }
-        catch (Exception e) {
-            throw ExceptionTranslator.translate(e);
-        }
-    }
+	public int executeUpdate() throws ORMException {
+		try {
+			return _sqlQuery.executeUpdate();
+		}
+		catch (Exception e) {
+			throw ExceptionTranslator.translate(e);
+		}
+	}
 
 	public Iterator iterate() throws ORMException {
 		try {
