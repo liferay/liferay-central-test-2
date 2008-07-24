@@ -100,7 +100,7 @@ public class PermissionsURLTag extends TagSupport {
 		try {
 			doTag(
 				_redirect, _modelResource, _modelResourceDescription,
-					_resourcePrimKey, _var, true, pageContext);
+				_resourcePrimKey, _var, true, pageContext);
 		}
 		catch (Exception e) {
 			if (e instanceof JspException) {

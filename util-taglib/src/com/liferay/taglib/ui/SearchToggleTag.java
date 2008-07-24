@@ -67,14 +67,6 @@ public class SearchToggleTag extends TagSupport {
 		}
 	}
 
-	public void setId(String id) {
-		_id = id;
-	}
-
-	public void setDisplayTerms(DisplayTerms displayTerms) {
-		_displayTerms = displayTerms;
-	}
-
 	public String getStartPage() {
 		if (Validator.isNull(_startPage)) {
 			return _START_PAGE;
@@ -99,6 +91,14 @@ public class SearchToggleTag extends TagSupport {
 
 	public void setEndPage(String endPage) {
 		_endPage = endPage;
+	}
+
+	public void setId(String id) {
+		_id = id;
+	}
+
+	public void setDisplayTerms(DisplayTerms displayTerms) {
+		_displayTerms = displayTerms;
 	}
 
 	private static final String _START_PAGE =
