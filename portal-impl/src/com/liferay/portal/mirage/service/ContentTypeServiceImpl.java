@@ -41,6 +41,17 @@
 
 package com.liferay.portal.mirage.service;
 
+import com.liferay.portal.mirage.aop.ContentTypeInvoker;
+import com.liferay.portal.mirage.aop.SearchCriteriaInvoker;
+import com.liferay.portal.mirage.aop.TemplateInvoker;
+import com.liferay.portal.mirage.model.MirageJournalStructure;
+import com.liferay.portal.mirage.model.MirageJournalTemplate;
+import com.liferay.portal.mirage.util.MirageLoggerUtil;
+import com.liferay.portlet.journal.model.JournalStructure;
+import com.liferay.portlet.journal.model.JournalTemplate;
+
+import com.sun.portal.cms.mirage.exception.CMSException;
+import com.sun.portal.cms.mirage.exception.TemplateNotFoundException;
 import com.sun.portal.cms.mirage.model.custom.Category;
 import com.sun.portal.cms.mirage.model.custom.ContentType;
 import com.sun.portal.cms.mirage.model.custom.OptionalCriteria;
@@ -49,7 +60,11 @@ import com.sun.portal.cms.mirage.model.custom.UpdateCriteria;
 import com.sun.portal.cms.mirage.model.search.SearchCriteria;
 import com.sun.portal.cms.mirage.service.custom.ContentTypeService;
 
+import java.util.ArrayList;
 import java.util.List;
+
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 
 /**
  * <a href="ContentTypeServiceImpl.java.html"><b><i>View Source</i></b></a>
@@ -62,9 +77,14 @@ import java.util.List;
 public class ContentTypeServiceImpl implements ContentTypeService {
 
 	public void addTemplateToContentType(
-		Template template, ContentType contentType) {
+			Template template, ContentType contentType)
+		throws CMSException {
 
-		throw new UnsupportedOperationException();
+		MirageLoggerUtil.enter(_log, _CLASS_NAME, "addTemplateToContentType");
+
+		process(template);
+
+		MirageLoggerUtil.exit(_log, _CLASS_NAME, "addTemplateToContentType");
 	}
 
 	public void assignDefaultTemplate(
@@ -82,29 +102,62 @@ public class ContentTypeServiceImpl implements ContentTypeService {
 	}
 
 	public int contentTypeSearchCount(
-		Category category, SearchCriteria searchCriteria) {
+			Category category, SearchCriteria searchCriteria)
+		throws CMSException {
 
-		throw new UnsupportedOperationException();
+		MirageLoggerUtil.enter(_log, _CLASS_NAME, "contentTypeSearchCount");
+
+		SearchCriteriaInvoker searchCriteriaInvoker =
+			(SearchCriteriaInvoker)searchCriteria;
+
+		searchCriteriaInvoker.invoke();
+
+		Integer i = (Integer)searchCriteriaInvoker.getReturnValue();
+
+		MirageLoggerUtil.exit(_log, _CLASS_NAME, "contentTypeSearchCount");
+
+		return i.intValue();
 	}
 
-	public void createContentType(ContentType contentType) {
-		throw new UnsupportedOperationException();
+	public void createContentType(ContentType contentType) throws CMSException {
+		MirageLoggerUtil.enter(_log, _CLASS_NAME, "createContentType");
+
+		process(contentType);
+
+		MirageLoggerUtil.exit(_log, _CLASS_NAME, "createContentType");
 	}
 
-	public void deleteContentType(ContentType contentType) {
-		throw new UnsupportedOperationException();
+	public void deleteContentType(ContentType contentType) throws CMSException {
+		MirageLoggerUtil.enter(_log, _CLASS_NAME, "deleteContentType");
+
+		process(contentType);
+
+		MirageLoggerUtil.exit(_log, _CLASS_NAME, "deleteContentType");
 	}
 
 	public void deleteTemplateOfContentType(
-		ContentType contentType, Template template) {
+			ContentType contentType, Template template)
+		throws CMSException {
 
-		throw new UnsupportedOperationException();
+		MirageLoggerUtil.enter(
+			_log, _CLASS_NAME, "deleteTemplateOfContentType");
+
+		process(template);
+
+		MirageLoggerUtil.exit(_log, _CLASS_NAME, "deleteTemplateOfContentType");
 	}
 
 	public void deleteTemplatesOfContentType(
-		ContentType contentType, Template[] templatesToBeDeleted) {
+			ContentType contentType, Template[] templatesToBeDeleted)
+		throws CMSException {
 
-		throw new UnsupportedOperationException();
+		MirageLoggerUtil.enter(
+			_log, _CLASS_NAME, "deleteTemplatesOfContentType");
+
+		process(templatesToBeDeleted[0]);
+
+		MirageLoggerUtil.exit(
+			_log, _CLASS_NAME, "deleteTemplatesOfContentType");
 	}
 
 	public List<Template> getAllVersionsOfTemplate(
@@ -121,8 +174,21 @@ public class ContentTypeServiceImpl implements ContentTypeService {
 		throw new UnsupportedOperationException();
 	}
 
-	public ContentType getContentType(ContentType contentType) {
-		throw new UnsupportedOperationException();
+	public ContentType getContentType(ContentType contentType)
+		throws CMSException {
+
+		MirageLoggerUtil.enter(_log, _CLASS_NAME, "getContentType");
+
+		process(contentType);
+
+		ContentTypeInvoker contentTypeInvoker = (ContentTypeInvoker)contentType;
+
+		JournalStructure structure =
+			(JournalStructure)contentTypeInvoker.getReturnValue();
+
+		MirageLoggerUtil.exit(_log, _CLASS_NAME, "getContentType");
+
+		return new MirageJournalStructure(structure);
 	}
 
 	public ContentType getContentType(
@@ -147,8 +213,27 @@ public class ContentTypeServiceImpl implements ContentTypeService {
 		throw new UnsupportedOperationException();
 	}
 
-	public Template getTemplate(Template template, OptionalCriteria criteria) {
-		throw new UnsupportedOperationException();
+	public Template getTemplate(Template template, OptionalCriteria criteria)
+		throws TemplateNotFoundException {
+
+		MirageLoggerUtil.enter(_log, _CLASS_NAME, "getTemplate");
+
+		try {
+			process(template);
+		}
+		catch (CMSException cmse) {
+			throw new TemplateNotFoundException(
+				cmse.getErrorCode(), cmse.getMessage());
+		}
+
+		TemplateInvoker templateInvoker = (TemplateInvoker)template;
+
+		JournalTemplate journalTemplate =
+			(JournalTemplate)templateInvoker.getReturnValue();
+
+		MirageLoggerUtil.exit(_log, _CLASS_NAME, "getTemplate");
+
+		return new MirageJournalTemplate(journalTemplate);
 	}
 
 	public List<Template> getTemplates(
@@ -183,8 +268,29 @@ public class ContentTypeServiceImpl implements ContentTypeService {
 		throw new UnsupportedOperationException();
 	}
 
-	public List<ContentType> searchContentTypes(SearchCriteria searchCriteria) {
-		throw new UnsupportedOperationException();
+	public List<ContentType> searchContentTypes(SearchCriteria searchCriteria)
+		throws CMSException {
+
+		MirageLoggerUtil.enter(_log, _CLASS_NAME, "searchContentTypes");
+
+		SearchCriteriaInvoker searchCriteriaInvoker =
+			(SearchCriteriaInvoker)searchCriteria;
+
+		searchCriteriaInvoker.invoke();
+
+		List<JournalStructure> structures =
+			(List<JournalStructure>)searchCriteriaInvoker.getReturnValue();
+
+		List<ContentType> contentTypes =
+			new ArrayList<ContentType>(structures.size());
+
+		for (JournalStructure structure : structures) {
+			contentTypes.add(new MirageJournalStructure(structure));
+		}
+
+		MirageLoggerUtil.exit(_log, _CLASS_NAME, "searchContentTypes");
+
+		return contentTypes;
 	}
 
 	public List<ContentType> searchContentTypesByCategory(
@@ -193,12 +299,46 @@ public class ContentTypeServiceImpl implements ContentTypeService {
 		throw new UnsupportedOperationException();
 	}
 
-	public List<Template> searchTemplates(SearchCriteria searchCriteria) {
-		throw new UnsupportedOperationException();
+	public List<Template> searchTemplates(SearchCriteria searchCriteria)
+		throws CMSException {
+
+		MirageLoggerUtil.enter(_log, _CLASS_NAME, "searchTemplates");
+
+		SearchCriteriaInvoker searchCriteriaInvoker =
+			(SearchCriteriaInvoker)searchCriteria;
+
+		searchCriteriaInvoker.invoke();
+
+		List<JournalTemplate> journalTemplates =
+			(List<JournalTemplate>)searchCriteriaInvoker.getReturnValue();
+
+		List<Template> mirageTemplates =
+			new ArrayList<Template>(journalTemplates.size());
+
+		for (JournalTemplate template : journalTemplates) {
+			mirageTemplates.add(new MirageJournalTemplate(template));
+		}
+
+		MirageLoggerUtil.exit(_log, _CLASS_NAME, "searchTemplates");
+
+		return mirageTemplates;
 	}
 
-	public int searchTemplatesCount(SearchCriteria searchCriteria) {
-		throw new UnsupportedOperationException();
+	public int searchTemplatesCount(SearchCriteria searchCriteria)
+		throws CMSException {
+
+		MirageLoggerUtil.enter(_log, _CLASS_NAME, "searchTemplatesCount");
+
+		SearchCriteriaInvoker searchCriteriaInvoker =
+			(SearchCriteriaInvoker)searchCriteria;
+
+		searchCriteriaInvoker.invoke();
+
+		Integer i = (Integer)searchCriteriaInvoker.getReturnValue();
+
+		MirageLoggerUtil.exit(_log, _CLASS_NAME, "searchTemplatesCount");
+
+		return i.intValue();
 	}
 
 	public List<Template> searchTemplatesOfContentType(
@@ -215,8 +355,12 @@ public class ContentTypeServiceImpl implements ContentTypeService {
 		throw new UnsupportedOperationException();
 	}
 
-	public void updateContentType(ContentType contentType) {
-		throw new UnsupportedOperationException();
+	public void updateContentType(ContentType contentType) throws CMSException {
+		MirageLoggerUtil.enter(_log, _CLASS_NAME, "updateContentType");
+
+		process(contentType);
+
+		MirageLoggerUtil.exit(_log, _CLASS_NAME, "updateContentType");
 	}
 
 	public void updateContentType(
@@ -226,9 +370,15 @@ public class ContentTypeServiceImpl implements ContentTypeService {
 	}
 
 	public void updateTemplateOfContentType(
-		Template template, ContentType contentType) {
+			Template template, ContentType contentType)
+		throws CMSException {
 
-		throw new UnsupportedOperationException();
+		MirageLoggerUtil.enter(
+			_log, _CLASS_NAME, "updateTemplateOfContentType");
+
+		process(template);
+
+		MirageLoggerUtil.exit(_log, _CLASS_NAME, "updateTemplateOfContentType");
 	}
 
 	public void updateTemplateOfContentType(
@@ -242,5 +392,23 @@ public class ContentTypeServiceImpl implements ContentTypeService {
 
 		throw new UnsupportedOperationException();
 	}
+
+	protected void process(ContentType contentType) throws CMSException {
+		ContentTypeInvoker contentTypeInvoker = (ContentTypeInvoker)contentType;
+
+		contentTypeInvoker.invoke();
+	}
+
+	protected void process(Template template) throws CMSException {
+		TemplateInvoker templateInvoker = (TemplateInvoker)template;
+
+		templateInvoker.invoke();
+	}
+
+	private static final String _CLASS_NAME =
+		ContentTypeServiceImpl.class.getName();
+
+	private static final Log _log =
+		LogFactory.getLog(ContentTypeServiceImpl.class);
 
 }
