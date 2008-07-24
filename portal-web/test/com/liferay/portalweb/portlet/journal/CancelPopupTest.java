@@ -59,8 +59,7 @@ public class CancelPopupTest extends BaseTestCase {
 		selenium.click(
 			"//input[@value='Cancel' and @type='button' and @onclick='Liferay.Popup.close(this);']");
 		Thread.sleep(2000);
-		assertFalse(selenium.isElementPresent(
-				"//div[@class=\"ui-dialog-container\"]"));
+		assertFalse(selenium.isElementPresent("_15_xsdContent"));
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
