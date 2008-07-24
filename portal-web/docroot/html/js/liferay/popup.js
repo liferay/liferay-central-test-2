@@ -234,7 +234,7 @@ jQuery.extend(
 
 			var obj = el;
 
-			if (!el.jQuery) {
+			if (!el.jquery) {
 				obj = jQuery(el);
 			}
 
@@ -242,7 +242,7 @@ jQuery.extend(
 				obj = obj.parents('.ui-dialog-content');
 			}
 
-			obj.trigger('dialogclose');
+			obj.dialog('close');
 		},
 
 		update: function(id, url) {
