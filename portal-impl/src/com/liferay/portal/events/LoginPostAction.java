@@ -99,7 +99,7 @@ public class LoginPostAction extends Action {
 			ruonJSON.put(
 				"setPresenceStatusRequest", setPresenceStatusRequestJSON);
 
-			MessageBusUtil.sendSynchronizedMessage(
+			MessageBusUtil.sendMessage(
 				DestinationNames.RUON, ruonJSON.toString());
 		}
 		catch (Exception e) {

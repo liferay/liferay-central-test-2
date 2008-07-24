@@ -127,7 +127,7 @@ public class PortalSessionListener implements HttpSessionListener {
 			ruonJSON.put(
 				"setPresenceStatusRequest", setPresenceStatusRequestJSON);
 
-			MessageBusUtil.sendSynchronizedMessage(
+			MessageBusUtil.sendMessage(
 				DestinationNames.RUON, ruonJSON.toString());
 		}
 		catch (IllegalStateException ise) {
