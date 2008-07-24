@@ -209,7 +209,7 @@
 		<finder name="CompanyId" return-type="Collection">
 			<finder-column name="companyId" />
 		</finder>
-		<finder name="C_N" return-type="Vocabulary">
+		<finder name="C_N" return-type="TagsVocabulary">
 			<finder-column name="companyId" />
 			<finder-column name="name" />
 		</finder>
