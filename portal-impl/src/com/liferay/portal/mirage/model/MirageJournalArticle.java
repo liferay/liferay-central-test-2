@@ -48,7 +48,7 @@ import com.sun.portal.cms.mirage.model.custom.Content;
 /**
  * <a href="MirageJournalArticle.java.html"><b><i>View Source</i></b></a>
  *
- * @author k.Joshna Reddy
+ * @author Joshna Reddy
  *
  */
 public class MirageJournalArticle extends Content {

@@ -89,9 +89,9 @@ public class JournalStructureLocalServiceInterceptor extends MirageInterceptor {
 			return contentTypeInvoker.getReturnValue();
 		}
 		else if (methodName.equals("getStructures") ||
-				methodName.equals("getStructuresCount") ||
-				methodName.equals("search") ||
-				methodName.equals("searchCount")) {
+				 methodName.equals("getStructuresCount") ||
+				 methodName.equals("search") ||
+				 methodName.equals("searchCount")) {
 
 			SearchCriteriaInvoker searchCriteriaInvoker =
 				new SearchCriteriaInvoker(invocation);
@@ -105,7 +105,7 @@ public class JournalStructureLocalServiceInterceptor extends MirageInterceptor {
 				contentTypeService.searchContentTypes(searchCriteriaInvoker);
 			}
 			else if (methodName.equals("getStructuresCount") ||
-					methodName.equals("searchCount")) {
+					 methodName.equals("searchCount")) {
 
 				contentTypeService.contentTypeSearchCount(
 					null, searchCriteriaInvoker);

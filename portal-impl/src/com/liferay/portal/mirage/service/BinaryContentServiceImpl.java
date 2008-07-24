@@ -41,8 +41,6 @@
 
 package com.liferay.portal.mirage.service;
 
-import com.liferay.portal.mirage.util.MirageLoggerUtil;
-
 import com.sun.portal.cms.mirage.exception.CMSException;
 import com.sun.portal.cms.mirage.model.custom.BinaryContent;
 import com.sun.portal.cms.mirage.model.custom.OptionalCriteria;
@@ -50,9 +48,6 @@ import com.sun.portal.cms.mirage.service.custom.BinaryContentService;
 
 import java.util.Collections;
 import java.util.List;
-
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 
 /**
  * <a href="BinaryContentServiceImpl.java.html"><b><i>View Source</i></b></a>
@@ -63,56 +58,32 @@ import org.apache.commons.logging.LogFactory;
 public abstract class BinaryContentServiceImpl implements BinaryContentService {
 
 	public void createBinaryContent(BinaryContent content) throws CMSException {
-		MirageLoggerUtil.enter(_log, _className, "createBinaryContent");
-
 		process(content);
-
-		MirageLoggerUtil.exit(_log, _className, "createBinaryContent");
 	}
 
 	public void deleteBinaryContent(
 			BinaryContent content, OptionalCriteria criteria)
 		throws CMSException {
 
-		MirageLoggerUtil.enter(_log, _className, "deleteBinaryContent");
-
 		process(content);
-
-		MirageLoggerUtil.exit(_log, _className, "deleteBinaryContent");
 	}
 
 	public void deleteBinaryContents(OptionalCriteria criteria)
 		throws CMSException {
 
-		MirageLoggerUtil.enter(_log, _className, "deleteBinaryContents");
-
 		process(criteria);
-
-		MirageLoggerUtil.exit(_log, _className, "deleteBinaryContents");
 	}
 
 	public BinaryContent getBinaryContent(BinaryContent content)
 		throws CMSException {
 
-		MirageLoggerUtil.enter(_log, _className, "getBinaryContent");
-
 		process(content);
-
-		MirageLoggerUtil.exit(_log, _className, "getBinaryContent");
-
-		// The returned value is not being used so return the argument passed
 
 		return content;
 	}
 
 	public long getBinaryContentId(BinaryContent content) throws CMSException {
-		MirageLoggerUtil.enter(_log, _className, "getBinaryContentId");
-
 		process(content);
-
-		MirageLoggerUtil.exit(_log, _className, "getBinaryContentId");
-
-		// Return the default value
 
 		return 0;
 	}
@@ -120,15 +91,9 @@ public abstract class BinaryContentServiceImpl implements BinaryContentService {
 	public List<BinaryContent> getBinaryContents(OptionalCriteria criteria)
 		throws CMSException {
 
-		MirageLoggerUtil.enter(_log, _className, "getBinaryContents");
-
 		process(criteria);
 
-		MirageLoggerUtil.exit(_log, _className, "getBinaryContents");
-
-		// Return empty list
-
-		return Collections.emptyList();
+		return Collections.EMPTY_LIST;
 	}
 
 	public void updateBinaryContent(BinaryContent content) {
@@ -139,11 +104,5 @@ public abstract class BinaryContentServiceImpl implements BinaryContentService {
 
 	protected abstract void process(OptionalCriteria criteria)
 		throws CMSException;
-
-	private static final String _className =
-		BinaryContentServiceImpl.class.getName();
-
-	private static final Log _log =
-		LogFactory.getLog(BinaryContentServiceImpl.class);
 
 }

@@ -48,8 +48,8 @@ import com.sun.portal.cms.mirage.service.custom.BinaryContentService;
 import org.aopalliance.intercept.MethodInvocation;
 
 /**
- * <a href="JournalArticleImageLocalServiceInterceptor.java.html"><b><i>
- * View Source</i></b></a>
+ * <a href="JournalArticleImageLocalServiceInterceptor.java.html"><b><i>View
+ * Source</i></b></a>
  *
  * @author Karthik Sudarshan
  *

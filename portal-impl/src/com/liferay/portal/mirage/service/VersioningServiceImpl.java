@@ -53,6 +53,7 @@ import javax.jcr.Node;
  *
  * @author Jorge Ferrer
  * @author Prakash Reddy
+ *
  */
 public class VersioningServiceImpl<VersionableContent>
 	implements VersioningService<VersionableContent> {

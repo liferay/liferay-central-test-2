@@ -48,14 +48,14 @@ import com.sun.portal.cms.mirage.service.custom.BinaryContentService;
 import org.aopalliance.intercept.MethodInvocation;
 
 /**
- * <a href="JournalArticleResourceLocalServiceInterceptor.java.html"><b><i>
- * View Source</i></b></a>
+ * <a href="JournalArticleResourceLocalServiceInterceptor.java.html"><b><i>View
+ * Source</i></b></a>
  *
  * @author Karthik Sudarshan
  *
  */
 public class JournalArticleResourceLocalServiceInterceptor
-	extends MirageInterceptor{
+	extends MirageInterceptor {
 
 	protected Object doInvoke(MethodInvocation invocation) throws Throwable {
 		String methodName = invocation.getMethod().getName();

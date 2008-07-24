@@ -33,7 +33,7 @@ import org.aopalliance.intercept.MethodInvocation;
  * <a href="JournalArticleLocalServiceInterceptor.java.html"><b><i>View Source
  * </i></b></a>
  *
- * @author K.Joshna Reddy
+ * @author Joshna Reddy
  *
  */
 public class JournalArticleLocalServiceInterceptor extends MirageInterceptor {
@@ -69,6 +69,23 @@ public class JournalArticleLocalServiceInterceptor extends MirageInterceptor {
 			}
 
 			return contentInvoker.getReturnValue();
+		}
+		else if (methodName.equals("approveArticle") ||
+				 methodName.equals("expireArticle")) {
+
+			WorkflowInvoker workflowInvoker = new WorkflowInvoker(invocation);
+
+			WorkflowService workflowService =
+				MirageServiceFactory.getWorkflowService();
+
+			if (methodName.equals("approveArticle")) {
+				workflowService.updateWorkflowComplete(workflowInvoker);
+			}
+			else if (methodName.equals("expireArticle")) {
+				workflowService.updateWorkflowContentRejected(workflowInvoker);
+			}
+
+			return workflowInvoker.getReturnValue();
 		}
 		else if (methodName.equals("getArticles") ||
 				 methodName.equals("getArticlesBySmallImageId")||
@@ -112,23 +129,6 @@ public class JournalArticleLocalServiceInterceptor extends MirageInterceptor {
 			}
 
 			return searchCriteriaInvoker.getReturnValue();
-		}
-		else if (methodName.equals("approveArticle") ||
-				 methodName.equals("expireArticle")) {
-
-			WorkflowInvoker workflowInvoker = new WorkflowInvoker(invocation);
-
-			WorkflowService workflowService =
-				MirageServiceFactory.getWorkflowService();
-
-			if (methodName.equals("approveArticle")) {
-				workflowService.updateWorkflowComplete(workflowInvoker);
-			}
-			else if (methodName.equals("expireArticle")) {
-				workflowService.updateWorkflowContentRejected(workflowInvoker);
-			}
-
-			return workflowInvoker.getReturnValue();
 		}
 		else {
 			return invocation.proceed();

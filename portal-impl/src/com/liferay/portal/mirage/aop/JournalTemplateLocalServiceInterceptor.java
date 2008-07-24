@@ -83,11 +83,11 @@ public class JournalTemplateLocalServiceInterceptor extends MirageInterceptor {
 					null, templateInvoker);
 			}
 			else if (methodName.equals("deleteTemplates")) {
-				contentTypeService.deleteTemplatesOfContentType(null,
-					new TemplateInvoker[]{templateInvoker});
+				contentTypeService.deleteTemplatesOfContentType(
+					null, new TemplateInvoker[] {templateInvoker});
 			}
 			else if (methodName.equals("getTemplate") ||
-					methodName.equals("getTemplateBySmallImageId")) {
+					 methodName.equals("getTemplateBySmallImageId")) {
 
 				contentTypeService.getTemplate(templateInvoker, null);
 			}
@@ -99,10 +99,10 @@ public class JournalTemplateLocalServiceInterceptor extends MirageInterceptor {
 			return templateInvoker.getReturnValue();
 		}
 		else if (methodName.equals("getStructureTemplates") ||
-				methodName.equals("getTemplates") ||
-				methodName.equals("getTemplatesCount") ||
-				methodName.equals("search") ||
-				methodName.equals("searchCount")) {
+				 methodName.equals("getTemplates") ||
+				 methodName.equals("getTemplatesCount") ||
+				 methodName.equals("search") ||
+				 methodName.equals("searchCount")) {
 
 			SearchCriteriaInvoker searchCriteriaInvoker =
 				new SearchCriteriaInvoker(invocation);
@@ -117,7 +117,7 @@ public class JournalTemplateLocalServiceInterceptor extends MirageInterceptor {
 				contentTypeService.searchTemplates(searchCriteriaInvoker);
 			}
 			else if (methodName.equals("getTemplatesCount") ||
-					methodName.equals("searchCount")) {
+					 methodName.equals("searchCount")) {
 
 				contentTypeService.searchTemplatesCount(searchCriteriaInvoker);
 			}

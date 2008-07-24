@@ -42,21 +42,17 @@
 package com.liferay.portal.mirage.service;
 
 import com.liferay.portal.mirage.aop.WorkflowInvoker;
-import com.liferay.portal.mirage.util.MirageLoggerUtil;
 
 import com.sun.portal.cms.mirage.exception.CMSException;
 import com.sun.portal.cms.mirage.model.custom.Content;
 import com.sun.portal.cms.mirage.service.custom.WorkflowService;
-
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 
 /**
  * <a href="WorkflowServiceImpl.java.html"><b><i>View Source</i></b></a>
  *
  * @author Prakash Reddy
  * @author Karthik Sudarshan
- * @author K.Joshna Reddy
+ * @author Joshna Reddy
  *
  */
 public class WorkflowServiceImpl implements WorkflowService {
@@ -70,11 +66,7 @@ public class WorkflowServiceImpl implements WorkflowService {
 	}
 
 	public void updateWorkflowComplete(Content content) throws CMSException {
-		MirageLoggerUtil.enter(_log, _CLASS_NAME, "updateWorkflowComplete");
-
 		process(content);
-
-		MirageLoggerUtil.exit(_log, _CLASS_NAME, "updateWorkflowComplete");
 	}
 
 	public void updateWorkflowComplete(String contentUUID) {
@@ -84,17 +76,11 @@ public class WorkflowServiceImpl implements WorkflowService {
 	public void updateWorkflowContentRejected(Content content)
 		throws CMSException {
 
-		MirageLoggerUtil.enter(
-			_log, _CLASS_NAME, "updateWorkflowContentRejected");
-
 		process(content);
-
-		MirageLoggerUtil.exit(
-			_log, _CLASS_NAME, "updateWorkflowContentRejected");
 	}
 
 	public void updateWorkflowContentRejected(
-			String contentUUID, String comments) {
+		String contentUUID, String comments) {
 
 		throw new UnsupportedOperationException();
 	}
@@ -109,9 +95,4 @@ public class WorkflowServiceImpl implements WorkflowService {
 		workflowInvoker.invoke();
 	}
 
-	private static final String _CLASS_NAME =
-		WorkflowServiceImpl.class.getName();
-
-	private static final Log _log =
-		LogFactory.getLog(WorkflowServiceImpl.class);
 }

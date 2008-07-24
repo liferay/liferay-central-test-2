@@ -55,7 +55,7 @@ import com.sun.portal.cms.mirage.service.custom.WorkflowService;
  * @author Karthik Sudarshan
  * @author Brian Wing Shun Chan
  * @author Prakash Reddy
- * @author K.Joshna Reddy
+ * @author Joshna Reddy
  *
  */
 public class MirageServiceFactory {

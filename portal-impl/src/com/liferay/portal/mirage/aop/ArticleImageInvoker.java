@@ -55,14 +55,14 @@ import org.aopalliance.intercept.MethodInvocation;
  * @author Karthik Sudarshan
  *
  */
-public class ArticleImageInvoker extends BinaryContent
-	implements OptionalCriteria {
+public class ArticleImageInvoker
+	extends BinaryContent implements OptionalCriteria {
 
 	public ArticleImageInvoker(MethodInvocation invocation) {
 		_invoker = new MirageInvoker(invocation);
 	}
 
-	public Map getOptions() {
+	public Map<Object, Object> getOptions() {
 		return null;
 	}
 
