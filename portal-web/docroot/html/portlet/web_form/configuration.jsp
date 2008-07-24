@@ -24,45 +24,6 @@
 
 <%@ include file="/html/portlet/web_form/init.jsp" %>
 
-<script type="text/javascript">
-	function <portlet:namespace />swapValues(fieldA, fieldB) {
-		var tempValue = fieldA.val();
-		fieldA.val(fieldB.val());
-		fieldB.val(tempValue);
-	}
-
-	function <portlet:namespace />moveDown(index) {
-		var typeA = jQuery('#<portlet:namespace/>fieldType' + index);
-		var labelA = jQuery('#<portlet:namespace/>fieldLabel' + index);
-		var optionalA = jQuery('#<portlet:namespace/>fieldOptional' + index);
-		var optionsA = jQuery('#<portlet:namespace/>fieldOptions' + index);
-
-		var typeB = jQuery('#<portlet:namespace/>fieldType' + (index + 1));
-		var labelB = jQuery('#<portlet:namespace/>fieldLabel' + (index + 1));
-		var optionalB = jQuery('#<portlet:namespace/>fieldOptional' + (index + 1));
-		var optionsB = jQuery('#<portlet:namespace/>fieldOptions' + (index + 1));
-
-		if ( index < jQuery('#<portlet:namespace/>webFields>fieldset').length ) {
-			<portlet:namespace />swapValues(typeA, typeB);
-			<portlet:namespace />swapValues(labelA, labelB);
-			<portlet:namespace />swapValues(optionsA, optionsB);
-
-			var tmpA = optionalA.attr('checked');
-			var tmpB = optionalB.attr('checked');
-			if( tmpA && ! tmpB ) { optionalA.removeAttr('checked'); optionalB.attr('checked', 'true'); }
-			if( ! tmpA && tmpB ) { optionalB.removeAttr('checked'); optionalA.attr('checked', 'true'); }
-
-			typeA.change();
-			typeB.change();
-		}
-	}
-
-	function <portlet:namespace />moveUp(index) {
-		if( index > 1 ) 
-			<portlet:namespace />moveDown(index - 1);
-	}
-</script>
-
 <%
 String redirect = ParamUtil.getString(request, "redirect");
 
@@ -87,6 +48,55 @@ if (WebFormUtil.getTableRowsCount(databaseTableName) > 0) {
 	fieldsEditingDisabled = true;
 }
 %>
+
+<script type="text/javascript">
+	function <portlet:namespace />moveDown(index) {
+		var typeA = jQuery('#<portlet:namespace/>fieldType' + index);
+		var labelA = jQuery('#<portlet:namespace/>fieldLabel' + index);
+		var optionalA = jQuery('#<portlet:namespace/>fieldOptional' + index);
+		var optionsA = jQuery('#<portlet:namespace/>fieldOptions' + index);
+
+		var typeB = jQuery('#<portlet:namespace/>fieldType' + (index + 1));
+		var labelB = jQuery('#<portlet:namespace/>fieldLabel' + (index + 1));
+		var optionalB = jQuery('#<portlet:namespace/>fieldOptional' + (index + 1));
+		var optionsB = jQuery('#<portlet:namespace/>fieldOptions' + (index + 1));
+
+		if (index < jQuery('#<portlet:namespace/>webFields>fieldset').length) {
+			<portlet:namespace />swapValues(typeA, typeB);
+			<portlet:namespace />swapValues(labelA, labelB);
+			<portlet:namespace />swapValues(optionsA, optionsB);
+
+			var tmpA = optionalA.attr('checked');
+			var tmpB = optionalB.attr('checked');
+
+			if(tmpA && !tmpB) {
+				optionalA.removeAttr('checked');
+				optionalB.attr('checked', 'true');
+			}
+
+			if (!tmpA && tmpB) {
+				optionalB.removeAttr('checked');
+				optionalA.attr('checked', 'true');
+			}
+
+			typeA.change();
+			typeB.change();
+		}
+	}
+
+	function <portlet:namespace />moveUp(index) {
+		if (index > 1) {
+			<portlet:namespace />moveDown(index - 1);
+		}
+	}
+
+	function <portlet:namespace />swapValues(fieldA, fieldB) {
+		var tempValue = fieldA.val();
+
+		fieldA.val(fieldB.val());
+		fieldB.val(tempValue);
+	}
+</script>
 
 <form action="<liferay-portlet:actionURL portletConfiguration="true" />" class="uni-form" method="post" id="<portlet:namespace />fm" name="<portlet:namespace />fm">
 <input name="<portlet:namespace /><%= Constants.CMD %>" type="hidden" value="<%= Constants.UPDATE %>" />
@@ -231,7 +241,7 @@ if (WebFormUtil.getTableRowsCount(databaseTableName) > 0) {
 						<input id="<portlet:namespace/>fieldOptional<%= i %>" name="<portlet:namespace/>fieldOptional<%= i %>" type="hidden" value="on" />
 					</c:when>
 					<c:when test="<%= !fieldsEditingDisabled %>">
-						<input <c:if test="<%= fieldOptional %>">checked</c:if> type="checkbox" id="<portlet:namespace/>fieldOptional<%= i %>" name="<portlet:namespace/>fieldOptional<%= i %>" /> <liferay-ui:message key="optional" />
+						<input <c:if test="<%= fieldOptional %>">checked</c:if> id="<portlet:namespace/>fieldOptional<%= i %>" name="<portlet:namespace/>fieldOptional<%= i %>" type="checkbox" /> <liferay-ui:message key="optional" />
 					</c:when>
 					<c:otherwise>
 						<label><liferay-ui:message key="optional" /></label>
@@ -277,8 +287,9 @@ if (WebFormUtil.getTableRowsCount(databaseTableName) > 0) {
 
 			<c:if test="<%= !fieldsEditingDisabled %>">
 				<div class="ctrl-holder">
-					<a href="javascript:<portlet:namespace />moveUp(<%= i %>);"><img src="<%= themeDisplay.getPathThemeImages() %>/arrows/01_up.png" /></a>
-					<a href="javascript:<portlet:namespace />moveDown(<%= i %>);"><img src="<%= themeDisplay.getPathThemeImages() %>/arrows/01_down.png" /></a>
+					<a href="javascript: <portlet:namespace />moveUp(<%= i %>);"><img src="<%= themeDisplay.getPathThemeImages() %>/arrows/01_up.png" /></a>
+
+					<a href="javascript: <portlet:namespace />moveDown(<%= i %>);"><img src="<%= themeDisplay.getPathThemeImages() %>/arrows/01_down.png" /></a>
 				</div>
 			</c:if>
 		</fieldset>
