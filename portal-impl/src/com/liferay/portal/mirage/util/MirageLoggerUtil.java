@@ -39,63 +39,30 @@
  * Copyright 2008 Sun Microsystems Inc. All rights reserved.
  */
 
-package com.liferay.portal.mirage.service;
+package com.liferay.portal.mirage.util;
 
-import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
-
-import com.sun.portal.cms.mirage.service.custom.BinaryContentService;
-import com.sun.portal.cms.mirage.service.custom.ContentFeedService;
+import org.apache.commons.logging.Log;
 
 /**
- * <a href="MirageServiceFactory.java.html"><b><i>View Source</i></b></a>
+ * <a href="MirageLoggerUtil.java.html"><b><i>View Source</i></b></a>
  *
  * @author Karthik Sudarshan
- * @author Brian Wing Shun Chan
  *
  */
-public class MirageServiceFactory {
+public class MirageLoggerUtil {
 
-	public static BinaryContentService getArticleImageService() {
-		if (_articleImageService == null) {
-			_articleImageService =
-				(BinaryContentService)PortalBeanLocatorUtil.locate(
-					_ARTICLE_IMAGE_SERVICE);
+	public static void enter(Log log, String className, String methodName) {
+		if (log.isInfoEnabled()) {
+			log.info("Entering method : " + methodName
+				+ " of class : " + className);
 		}
-
-		return _articleImageService;
 	}
 
-	public static BinaryContentService getArticleResourceService() {
-		if (_articleResourceService == null) {
-			_articleResourceService =
-				(BinaryContentService)PortalBeanLocatorUtil.locate(
-					_ARTICLE_RESOURCE_SERVICE);
+	public static void exit(Log log, String className, String methodName) {
+		if (log.isInfoEnabled()) {
+			log.info("Exiting method : " + methodName
+				+ " of class : " + className);
 		}
-
-		return _articleResourceService;
 	}
-
-	public static ContentFeedService getContentFeedService() {
-		if (_contentFeedService == null) {
-			_contentFeedService =
-				(ContentFeedService)PortalBeanLocatorUtil.locate(
-					_CONTENT_FEED_SERVICE);
-		}
-
-		return _contentFeedService;
-	}
-
-	private static final String _ARTICLE_IMAGE_SERVICE =
-		"com.liferay.portal.mirage.ArticleImageService";
-
-	private static final String _ARTICLE_RESOURCE_SERVICE =
-		"com.liferay.portal.mirage.ArticleResourceService";
-
-	private static final String _CONTENT_FEED_SERVICE =
-		"com.liferay.portal.mirage.ContentFeedService";
-
-	private static BinaryContentService _articleImageService;
-	private static BinaryContentService _articleResourceService;
-	private static ContentFeedService _contentFeedService;
 
 }

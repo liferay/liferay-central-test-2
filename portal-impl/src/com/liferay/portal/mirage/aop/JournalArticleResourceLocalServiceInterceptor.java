@@ -39,63 +39,57 @@
  * Copyright 2008 Sun Microsystems Inc. All rights reserved.
  */
 
-package com.liferay.portal.mirage.service;
+package com.liferay.portal.mirage.aop;
 
-import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
+import com.liferay.portal.mirage.service.MirageServiceFactory;
 
 import com.sun.portal.cms.mirage.service.custom.BinaryContentService;
-import com.sun.portal.cms.mirage.service.custom.ContentFeedService;
+
+import org.aopalliance.intercept.MethodInvocation;
 
 /**
- * <a href="MirageServiceFactory.java.html"><b><i>View Source</i></b></a>
+ * <a href="JournalArticleResourceLocalServiceInterceptor.java.html"><b><i>
+ * View Source</i></b></a>
  *
  * @author Karthik Sudarshan
- * @author Brian Wing Shun Chan
  *
  */
-public class MirageServiceFactory {
+public class JournalArticleResourceLocalServiceInterceptor
+	extends MirageInterceptor{
 
-	public static BinaryContentService getArticleImageService() {
-		if (_articleImageService == null) {
-			_articleImageService =
-				(BinaryContentService)PortalBeanLocatorUtil.locate(
-					_ARTICLE_IMAGE_SERVICE);
+	protected Object doInvoke(MethodInvocation invocation) throws Throwable {
+		String methodName = invocation.getMethod().getName();
+
+		if (methodName.equals("deleteArticleResource") ||
+			methodName.equals("getArticleResource") ||
+			methodName.equals("getArticleResourcePrimKey") ||
+			methodName.equals("getArticleResources")) {
+
+			ArticleResourceInvoker articleResourceInvoker =
+				new ArticleResourceInvoker(invocation);
+
+			BinaryContentService binaryContentService =
+				MirageServiceFactory.getArticleResourceService();
+
+			if (methodName.equals("deleteArticleResource")) {
+				binaryContentService.deleteBinaryContent(
+					articleResourceInvoker, null);
+			}
+			else if (methodName.equals("getArticleResource")) {
+				binaryContentService.getBinaryContent(articleResourceInvoker);
+			}
+			else if (methodName.equals("getArticleResourcePrimKey")) {
+				binaryContentService.getBinaryContentId(articleResourceInvoker);
+			}
+			else if (methodName.equals("getArticleResources")) {
+				binaryContentService.getBinaryContents(articleResourceInvoker);
+			}
+
+			return articleResourceInvoker.getReturnValue();
 		}
-
-		return _articleImageService;
-	}
-
-	public static BinaryContentService getArticleResourceService() {
-		if (_articleResourceService == null) {
-			_articleResourceService =
-				(BinaryContentService)PortalBeanLocatorUtil.locate(
-					_ARTICLE_RESOURCE_SERVICE);
+		else {
+			return invocation.proceed();
 		}
-
-		return _articleResourceService;
 	}
-
-	public static ContentFeedService getContentFeedService() {
-		if (_contentFeedService == null) {
-			_contentFeedService =
-				(ContentFeedService)PortalBeanLocatorUtil.locate(
-					_CONTENT_FEED_SERVICE);
-		}
-
-		return _contentFeedService;
-	}
-
-	private static final String _ARTICLE_IMAGE_SERVICE =
-		"com.liferay.portal.mirage.ArticleImageService";
-
-	private static final String _ARTICLE_RESOURCE_SERVICE =
-		"com.liferay.portal.mirage.ArticleResourceService";
-
-	private static final String _CONTENT_FEED_SERVICE =
-		"com.liferay.portal.mirage.ContentFeedService";
-
-	private static BinaryContentService _articleImageService;
-	private static BinaryContentService _articleResourceService;
-	private static ContentFeedService _contentFeedService;
 
 }

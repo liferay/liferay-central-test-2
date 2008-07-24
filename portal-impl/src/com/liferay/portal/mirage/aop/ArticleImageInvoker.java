@@ -39,63 +39,41 @@
  * Copyright 2008 Sun Microsystems Inc. All rights reserved.
  */
 
-package com.liferay.portal.mirage.service;
+package com.liferay.portal.mirage.aop;
 
-import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
+import com.sun.portal.cms.mirage.exception.CMSException;
+import com.sun.portal.cms.mirage.model.custom.BinaryContent;
+import com.sun.portal.cms.mirage.model.custom.OptionalCriteria;
 
-import com.sun.portal.cms.mirage.service.custom.BinaryContentService;
-import com.sun.portal.cms.mirage.service.custom.ContentFeedService;
+import java.util.Map;
+
+import org.aopalliance.intercept.MethodInvocation;
 
 /**
- * <a href="MirageServiceFactory.java.html"><b><i>View Source</i></b></a>
+ * <a href="ArticleImageInvoker.java.html"><b><i>View Source</i></b></a>
  *
  * @author Karthik Sudarshan
- * @author Brian Wing Shun Chan
  *
  */
-public class MirageServiceFactory {
+public class ArticleImageInvoker extends BinaryContent
+	implements OptionalCriteria {
 
-	public static BinaryContentService getArticleImageService() {
-		if (_articleImageService == null) {
-			_articleImageService =
-				(BinaryContentService)PortalBeanLocatorUtil.locate(
-					_ARTICLE_IMAGE_SERVICE);
-		}
-
-		return _articleImageService;
+	public ArticleImageInvoker(MethodInvocation invocation) {
+		_invoker = new MirageInvoker(invocation);
 	}
 
-	public static BinaryContentService getArticleResourceService() {
-		if (_articleResourceService == null) {
-			_articleResourceService =
-				(BinaryContentService)PortalBeanLocatorUtil.locate(
-					_ARTICLE_RESOURCE_SERVICE);
-		}
-
-		return _articleResourceService;
+	public Map getOptions() {
+		return null;
 	}
 
-	public static ContentFeedService getContentFeedService() {
-		if (_contentFeedService == null) {
-			_contentFeedService =
-				(ContentFeedService)PortalBeanLocatorUtil.locate(
-					_CONTENT_FEED_SERVICE);
-		}
-
-		return _contentFeedService;
+	public Object getReturnValue() {
+		return _invoker.getReturnValue();
 	}
 
-	private static final String _ARTICLE_IMAGE_SERVICE =
-		"com.liferay.portal.mirage.ArticleImageService";
+	public Object invoke() throws CMSException {
+		return _invoker.invoke();
+	}
 
-	private static final String _ARTICLE_RESOURCE_SERVICE =
-		"com.liferay.portal.mirage.ArticleResourceService";
-
-	private static final String _CONTENT_FEED_SERVICE =
-		"com.liferay.portal.mirage.ContentFeedService";
-
-	private static BinaryContentService _articleImageService;
-	private static BinaryContentService _articleResourceService;
-	private static ContentFeedService _contentFeedService;
+	private MirageInvoker _invoker;
 
 }
