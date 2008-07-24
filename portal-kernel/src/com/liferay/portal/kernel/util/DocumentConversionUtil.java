@@ -49,9 +49,7 @@ public class DocumentConversionUtil {
 		}
 	}
 
-	public static String[] getConversions(String extension)
-		throws Exception {
-
+	public static String[] getConversions(String extension) throws Exception {
 		Object returnObj = PortalClassInvoker.invoke(
 			_CLASS, "getConversions", new Object[] {extension}, false);
 
