@@ -39,79 +39,32 @@
  * Copyright 2008 Sun Microsystems Inc. All rights reserved.
  */
 
-package com.liferay.portal.mirage.service;
+package com.liferay.portal.mirage.model;
 
-import com.liferay.portal.mirage.aop.WorkflowInvoker;
-import com.liferay.portal.mirage.util.MirageLoggerUtil;
+import com.liferay.portlet.journal.model.JournalArticle;
 
-import com.sun.portal.cms.mirage.exception.CMSException;
 import com.sun.portal.cms.mirage.model.custom.Content;
-import com.sun.portal.cms.mirage.service.custom.WorkflowService;
-
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 
 /**
- * <a href="WorkflowServiceImpl.java.html"><b><i>View Source</i></b></a>
+ * <a href="MirageJournalArticle.java.html"><b><i>View Source</i></b></a>
  *
- * @author Prakash Reddy
- * @author Karthik Sudarshan
- * @author K.Joshna Reddy
+ * @author k.Joshna Reddy
  *
  */
-public class WorkflowServiceImpl implements WorkflowService {
+public class MirageJournalArticle extends Content {
 
-	public void submitContentToWorkflow(String contentUUID) {
-		throw new UnsupportedOperationException();
+	public MirageJournalArticle(JournalArticle article) {
+		_article = article;
 	}
 
-	public void updateWorkflowCommentsAccepted(String contentUUID) {
-		throw new UnsupportedOperationException();
+	public JournalArticle getFeed() {
+		return _article;
 	}
 
-	public void updateWorkflowComplete(Content content) throws CMSException {
-		MirageLoggerUtil.enter(_log, _CLASS_NAME, "updateWorkflowComplete");
-
-		process(content);
-
-		MirageLoggerUtil.exit(_log, _CLASS_NAME, "updateWorkflowComplete");
+	public void setFeed(JournalArticle article) {
+		_article= article;
 	}
 
-	public void updateWorkflowComplete(String contentUUID) {
-		throw new UnsupportedOperationException();
-	}
+	private JournalArticle _article;
 
-	public void updateWorkflowContentRejected(Content content)
-		throws CMSException {
-
-		MirageLoggerUtil.enter(
-			_log, _CLASS_NAME, "updateWorkflowContentRejected");
-
-		process(content);
-
-		MirageLoggerUtil.exit(
-			_log, _CLASS_NAME, "updateWorkflowContentRejected");
-	}
-
-	public void updateWorkflowContentRejected(
-			String contentUUID, String comments) {
-
-		throw new UnsupportedOperationException();
-	}
-
-	public void updateWorkflowStatus(String contentUUID, String status) {
-		throw new UnsupportedOperationException();
-	}
-
-	protected void process(Content content) throws CMSException {
-		WorkflowInvoker workflowInvoker = (WorkflowInvoker)content;
-
-		workflowInvoker.invoke();
-	}
-
-	private static final String _CLASS_NAME =
-		WorkflowServiceImpl.class.getName();
-
-	private static final Log _log =
-		LogFactory.getLog(WorkflowServiceImpl.class);
 }

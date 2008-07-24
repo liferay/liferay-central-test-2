@@ -5,10 +5,14 @@
 	<bean id="com.liferay.portal.mirage.ArticleImageService" class="com.liferay.portal.mirage.service.ArticleImageServiceImpl" lazy-init="true" />
 	<bean id="com.liferay.portal.mirage.ArticleResourceService" class="com.liferay.portal.mirage.service.ArticleResourceServiceImpl" lazy-init="true" />
 	<bean id="com.liferay.portal.mirage.ContentFeedService" class="com.liferay.portal.mirage.service.ContentFeedServiceImpl" lazy-init="true" />
+	<bean id="com.liferay.portal.mirage.ContentService" class="com.liferay.portal.mirage.service.ContentServiceImpl" lazy-init="true" />
+	<bean id="com.liferay.portal.mirage.WorkflowService" class="com.liferay.portal.mirage.service.WorkflowServiceImpl" lazy-init="true" />
 	<bean id="com.liferay.portal.mirage.aop.JournalArticleImageLocalServiceInterceptor" class="com.liferay.portal.mirage.aop.JournalArticleImageLocalServiceInterceptor" lazy-init="true" />
+	<bean id="com.liferay.portal.mirage.aop.JournalArticleLocalServiceInterceptor" class="com.liferay.portal.mirage.aop.JournalArticleLocalServiceInterceptor" lazy-init="true" />
 	<bean id="com.liferay.portal.mirage.aop.JournalArticleResourceLocalServiceInterceptor" class="com.liferay.portal.mirage.aop.JournalArticleResourceLocalServiceInterceptor" lazy-init="true" />
 	<bean id="com.liferay.portal.mirage.aop.JournalFeedLocalServiceInterceptor" class="com.liferay.portal.mirage.aop.JournalFeedLocalServiceInterceptor" lazy-init="true" />
 	<bean id="com.liferay.portlet.journal.service.impl.JournalArticleImageLocalServiceImpl" class="com.liferay.portlet.journal.service.impl.JournalArticleImageLocalServiceImpl" lazy-init="true" />
+	<bean id="com.liferay.portlet.journal.service.impl.JournalArticleLocalServiceImpl" class="com.liferay.portlet.journal.service.impl.JournalArticleLocalServiceImpl" lazy-init="true" />
 	<bean id="com.liferay.portlet.journal.service.impl.JournalArticleResourceLocalServiceImpl" class="com.liferay.portlet.journal.service.impl.JournalArticleResourceLocalServiceImpl" lazy-init="true" />
 	<bean id="com.liferay.portlet.journal.service.impl.JournalFeedLocalServiceImpl" class="com.liferay.portlet.journal.service.impl.JournalFeedLocalServiceImpl" lazy-init="true" />
 	<bean id="com.liferay.portlet.journal.service.JournalArticleImageLocalService.impl" class="org.springframework.aop.framework.ProxyFactoryBean" lazy-init="true">
@@ -22,6 +26,19 @@
 		</property>
 		<property name="target">
 			<ref bean="com.liferay.portlet.journal.service.impl.JournalArticleImageLocalServiceImpl" />
+		</property>
+	</bean>
+	<bean id="com.liferay.portlet.journal.service.JournalArticleLocalService.impl" class="org.springframework.aop.framework.ProxyFactoryBean" lazy-init="true">
+		<property name="proxyInterfaces">
+			<value>com.liferay.portlet.journal.service.JournalArticleLocalService</value>
+		</property>
+		<property name="interceptorNames">
+			<list>
+				<value>com.liferay.portal.mirage.aop.JournalArticleLocalServiceInterceptor</value>
+			</list>
+		</property>
+		<property name="target">
+			<ref bean="com.liferay.portlet.journal.service.impl.JournalArticleLocalServiceImpl" />
 		</property>
 	</bean>
 	<bean id="com.liferay.portlet.journal.service.JournalArticleResourceLocalService.impl" class="org.springframework.aop.framework.ProxyFactoryBean" lazy-init="true">

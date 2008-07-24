@@ -45,12 +45,15 @@ import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
 
 import com.sun.portal.cms.mirage.service.custom.BinaryContentService;
 import com.sun.portal.cms.mirage.service.custom.ContentFeedService;
+import com.sun.portal.cms.mirage.service.custom.ContentService;
+import com.sun.portal.cms.mirage.service.custom.WorkflowService;
 
 /**
  * <a href="MirageServiceFactory.java.html"><b><i>View Source</i></b></a>
  *
  * @author Karthik Sudarshan
  * @author Brian Wing Shun Chan
+ * @author K.Joshna Reddy
  *
  */
 public class MirageServiceFactory {
@@ -85,6 +88,26 @@ public class MirageServiceFactory {
 		return _contentFeedService;
 	}
 
+	public static ContentService getContentService() {
+		if (_contentService == null) {
+			_contentService =
+				(ContentService)PortalBeanLocatorUtil.locate(
+					_CONTENT_SERVICE);
+		}
+
+		return _contentService;
+	}
+
+	public static WorkflowService getWorkflowService() {
+		if (_workflowService == null) {
+			_workflowService =
+				(WorkflowService)PortalBeanLocatorUtil.locate(
+					_WORKFLOW_SERVICE);
+		}
+
+		return _workflowService;
+	}
+
 	private static final String _ARTICLE_IMAGE_SERVICE =
 		"com.liferay.portal.mirage.ArticleImageService";
 
@@ -94,8 +117,16 @@ public class MirageServiceFactory {
 	private static final String _CONTENT_FEED_SERVICE =
 		"com.liferay.portal.mirage.ContentFeedService";
 
+	private static final String _CONTENT_SERVICE =
+		"com.liferay.portal.mirage.ContentService";
+
+	private static final String _WORKFLOW_SERVICE =
+		"com.liferay.portal.mirage.WorkflowService";
+
 	private static BinaryContentService _articleImageService;
 	private static BinaryContentService _articleResourceService;
 	private static ContentFeedService _contentFeedService;
+	private static ContentService _contentService;
+	private static WorkflowService _workflowService;
 
 }

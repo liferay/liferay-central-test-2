@@ -41,6 +41,13 @@
 
 package com.liferay.portal.mirage.service;
 
+import com.liferay.portal.mirage.aop.ContentInvoker;
+import com.liferay.portal.mirage.aop.SearchCriteriaInvoker;
+import com.liferay.portal.mirage.model.MirageJournalArticle;
+import com.liferay.portal.mirage.util.MirageLoggerUtil;
+import com.liferay.portlet.journal.model.JournalArticle;
+
+import com.sun.portal.cms.mirage.exception.CMSException;
 import com.sun.portal.cms.mirage.model.custom.Content;
 import com.sun.portal.cms.mirage.model.custom.ContentType;
 import com.sun.portal.cms.mirage.model.custom.OptionalCriteria;
@@ -50,7 +57,11 @@ import com.sun.portal.cms.mirage.service.custom.ContentService;
 
 import java.io.InputStream;
 
+import java.util.ArrayList;
 import java.util.List;
+
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 
 /**
  * <a href="ContentServiceImpl.java.html"><b><i>View Source</i></b></a>
@@ -58,6 +69,7 @@ import java.util.List;
  * @author Jorge Ferrer
  * @author Prakash Reddy
  * @author Karthik Sudarshan
+ * @author K.Joshna Reddy
  *
  */
 public class ContentServiceImpl implements ContentService {
@@ -73,29 +85,75 @@ public class ContentServiceImpl implements ContentService {
 	}
 
 	public int contentSearchCount(
-		ContentType contentType, SearchCriteria searchCriteria) {
+			ContentType contentType, SearchCriteria searchCriteria)
+		throws CMSException {
 
-		throw new UnsupportedOperationException();
+		MirageLoggerUtil.enter(_log, _CLASS_NAME, "contentSearchCount");
+
+		SearchCriteriaInvoker searchCriteriaInvoker =
+			(SearchCriteriaInvoker)searchCriteria;
+
+		searchCriteriaInvoker.invoke();
+
+		Integer i = (Integer)searchCriteriaInvoker.getReturnValue();
+
+		MirageLoggerUtil.exit(_log, _CLASS_NAME, "contentSearchCount");
+
+		return i.intValue();
 	}
 
-	public int contentSearchCount(SearchCriteria searchCriteria) {
-		throw new UnsupportedOperationException();
+	public int contentSearchCount(SearchCriteria searchCriteria)
+		throws CMSException {
+
+		MirageLoggerUtil.enter(_log, _CLASS_NAME, "contentSearchCount");
+
+		SearchCriteriaInvoker searchCriteriaInvoker =
+			(SearchCriteriaInvoker)searchCriteria;
+
+		searchCriteriaInvoker.invoke();
+
+		Integer i = (Integer)searchCriteriaInvoker.getReturnValue();
+
+		MirageLoggerUtil.exit(_log, _CLASS_NAME, "contentSearchCount");
+
+		return i.intValue();
 	}
 
-	public void createContent(Content content) {
-		throw new UnsupportedOperationException();
+	public void createContent(Content content) throws CMSException {
+		MirageLoggerUtil.enter(_log, _CLASS_NAME, "createContent");
+
+		process(content);
+
+		MirageLoggerUtil.exit(_log, _CLASS_NAME, "createContent");
 	}
 
-	public void deleteContent(Content content) {
-		throw new UnsupportedOperationException();
+	public void deleteContent(Content content) throws CMSException {
+		MirageLoggerUtil.enter(_log, _CLASS_NAME, "deleteContent");
+
+		process(content);
+
+		MirageLoggerUtil.exit(_log, _CLASS_NAME, "deleteContent");
 	}
 
 	public void deleteContent(String contentName, String contentTypeUUID) {
 		throw new UnsupportedOperationException();
 	}
 
-	public Content getContent(Content content, OptionalCriteria criteria) {
-		throw new UnsupportedOperationException();
+	public Content getContent(Content content, OptionalCriteria criteria)
+		throws CMSException {
+
+		MirageLoggerUtil.enter(_log, _CLASS_NAME, "getContent");
+
+		ContentInvoker contentInvoker = (ContentInvoker)content;
+
+		contentInvoker.invoke();
+
+		JournalArticle article =
+			(JournalArticle)contentInvoker.getReturnValue();
+
+		MirageLoggerUtil.exit(_log, _CLASS_NAME, "getContent");
+
+		return new MirageJournalArticle(article);
 	}
 
 	public Content getContentByNameAndType(
@@ -144,26 +202,76 @@ public class ContentServiceImpl implements ContentService {
 		throw new UnsupportedOperationException();
 	}
 
-	public List<Content> searchContents(SearchCriteria searchCriteria) {
-		throw new UnsupportedOperationException();
+	public List<Content> searchContents(SearchCriteria searchCriteria)
+		throws CMSException {
+
+		MirageLoggerUtil.enter(_log, _CLASS_NAME, "searchContents");
+
+		SearchCriteriaInvoker searchCriteriaInvoker =
+			(SearchCriteriaInvoker)searchCriteria;
+
+		searchCriteriaInvoker.invoke();
+
+		List<JournalArticle> articles = (List<JournalArticle>)
+			searchCriteriaInvoker.getReturnValue();
+
+		List<Content> contents = new ArrayList<Content>(
+			articles.size());
+
+		for (JournalArticle article : articles) {
+			contents.add(new MirageJournalArticle(article));
+		}
+
+		MirageLoggerUtil.exit(_log, _CLASS_NAME, "searchContents");
+
+		return contents;
 	}
 
 	public List<Content> searchContentsByType(
-		ContentType contentType, SearchCriteria searchCriteria) {
+			ContentType contentType, SearchCriteria searchCriteria)
+		throws CMSException {
 
-		throw new UnsupportedOperationException();
+		MirageLoggerUtil.enter(_log, _CLASS_NAME, "searchContentsByType");
+
+		SearchCriteriaInvoker searchCriteriaInvoker =
+			(SearchCriteriaInvoker)searchCriteria;
+
+		searchCriteriaInvoker.invoke();
+
+		List<JournalArticle> articles = (List<JournalArticle>)
+			searchCriteriaInvoker.getReturnValue();
+
+		List<Content> contents = new ArrayList<Content>(articles.size());
+
+		for (JournalArticle article : articles) {
+			contents.add(new MirageJournalArticle(article));
+		}
+
+		MirageLoggerUtil.exit(_log, _CLASS_NAME, "searchContentsByType");
+
+		return contents;
 	}
 
 	public void unCheckoutContent(String contentName, String contentTypeUUID) {
 		throw new UnsupportedOperationException();
 	}
 
-	public void updateContent(Content content) {
-		throw new UnsupportedOperationException();
+	public void updateContent(Content content) throws CMSException {
+		MirageLoggerUtil.enter(_log, _CLASS_NAME, "updateContent");
+
+		process(content);
+
+		MirageLoggerUtil.exit(_log, _CLASS_NAME, "updateContent");
 	}
 
-	public void updateContent(Content content, OptionalCriteria criteria) {
-		throw new UnsupportedOperationException();
+	public void updateContent(Content content, OptionalCriteria criteria)
+		throws CMSException {
+
+		MirageLoggerUtil.enter(_log, _CLASS_NAME, "updateContent");
+
+		process(content);
+
+		MirageLoggerUtil.exit(_log, _CLASS_NAME, "updateContent");
 	}
 
 	public void updateFileField(
@@ -172,5 +280,17 @@ public class ContentServiceImpl implements ContentService {
 
 		throw new UnsupportedOperationException();
 	}
+
+	protected void process(Content content) throws CMSException {
+		ContentInvoker contentInvoker = (ContentInvoker)content;
+
+		contentInvoker.invoke();
+	}
+
+	private static final String _CLASS_NAME =
+		ContentServiceImpl.class.getName();
+
+	private static final Log _log =
+		LogFactory.getLog(ContentServiceImpl.class);
 
 }
