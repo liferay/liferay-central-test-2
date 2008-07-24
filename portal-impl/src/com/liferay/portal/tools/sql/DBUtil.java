@@ -353,37 +353,72 @@ public abstract class DBUtil {
 
 		while ((line = br.readLine()) != null) {
 			if (!line.startsWith("##")) {
-				sb.append(line);
+				if (line.startsWith("@include ")) {
+					int pos = line.indexOf(" ");
 
-				if (line.endsWith(";")) {
-					String sql = sb.toString();
+					String includeFileName = line.substring(pos + 1);
 
-					sb = new StringBuilder();
+					ClassLoader classLoader = getClass().getClassLoader();
 
-					try {
-						if (!sql.equals("COMMIT_TRANSACTION;")) {
-							runSQL(sql);
+					InputStream is = classLoader.getResourceAsStream(
+						"com/liferay/portal/tools/sql/dependencies/" +
+							includeFileName);
+
+					if (is == null) {
+						is = classLoader.getResourceAsStream(includeFileName);
+					}
+
+					String include = StringUtil.read(is);
+
+					is.close();
+
+					if (includeFileName.endsWith(".vm")) {
+						try {
+							include = evaluateVM(include);
 						}
-						else {
-							if (_log.isDebugEnabled()) {
-								_log.debug("Skip commit sql");
+						catch (Exception e) {
+							_log.error(e, e);
+						}
+					}
+
+					include = convertTimestamp(include);
+					include = replaceTemplate(include, getTemplate());
+
+					runSQLTemplateString(include, false, true);
+				}
+				else{
+					sb.append(line);
+
+					if (line.endsWith(";")) {
+						String sql = sb.toString();
+
+						sb = new StringBuilder();
+
+						try {
+							if (!sql.equals("COMMIT_TRANSACTION;")) {
+								runSQL(sql);
+							}
+							else {
+								if (_log.isDebugEnabled()) {
+									_log.debug("Skip commit sql");
+								}
 							}
 						}
-					}
-					catch (IOException ioe) {
-						if (failOnError) {
-							throw ioe;
+						catch (IOException ioe) {
+							if (failOnError) {
+								throw ioe;
+							}
+							else if (_log.isWarnEnabled()) {
+								_log.warn(ioe.getMessage());
+							}
 						}
-						else if (_log.isWarnEnabled()) {
-							_log.warn(ioe.getMessage());
-						}
-					}
-					catch (SQLException sqle) {
-						if (failOnError) {
-							throw sqle;
-						}
-						else if (_log.isWarnEnabled()) {
-							_log.warn(sqle.getMessage());
+						catch (SQLException sqle) {
+							if (failOnError) {
+								throw sqle;
+							}
+							else if (_log.isWarnEnabled()) {
+								_log.warn(sqle.getMessage());
+							}
 						}
 					}
 				}
@@ -455,8 +490,7 @@ public abstract class DBUtil {
 				if (line.startsWith("@include ")) {
 					int pos = line.indexOf(" ");
 
-					String includeFileName =
-						line.substring(pos + 1, line.length());
+					String includeFileName = line.substring(pos + 1);
 
 					File includeFile = new File("../sql/" + includeFileName);
 
@@ -471,7 +505,7 @@ public abstract class DBUtil {
 							include = evaluateVM(include);
 						}
 						catch (Exception e) {
-							e.printStackTrace();
+							_log.error(e, e);
 						}
 					}
 

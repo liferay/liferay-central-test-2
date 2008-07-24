@@ -11,10 +11,10 @@ alter table Contact_ add facebookSn VARCHAR(75) null;
 alter table Contact_ add mySpaceSn VARCHAR(75) null;
 alter table Contact_ add twitterSn VARCHAR(75) null;
 
-update Country set a2 = 'KR' where countryId = '10';
-update Country set a2 = 'CR' where countryId = '69';
-update Country set a2 = 'NI', a3 = 'NIC' where countryId = '159';
-update Country set a2 = 'RS', a3 = 'SRB' where countryId = '189';
+update Country set a2 = 'KR' where countryId = 10;
+update Country set a2 = 'CR' where countryId = 69;
+update Country set a2 = 'NI', a3 = 'NIC' where countryId = 159;
+update Country set a2 = 'RS', a3 = 'SRB' where countryId = 189;
 
 drop table ExpandoRow;
 create table ExpandoRow (
