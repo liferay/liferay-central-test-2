@@ -1,5 +1,6 @@
-<project name="portal-bundles" basedir="." default="dist" xmlns:antelope="antlib:ise.antelope.tasks">
+<?xml version="1.0"?>
 
+<project name="portal-dist" basedir="." default="dist">
 	<import file="build.xml" />
 
 	<target name="deploy-default-theme">

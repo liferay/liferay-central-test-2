@@ -1,8 +1,9 @@
-<project name="portal-test" basedir="." default="run" xmlns:antelope="antlib:ise.antelope.tasks">
+<?xml version="1.0"?>
 
+<project name="portal-test" basedir="." default="test" xmlns:antelope="antlib:ise.antelope.tasks">
 	<import file="build.xml" />
 
-	<target name="run">
+	<target name="test">
 		<antcall target="all" />
 
 		<ant dir="sql" target="rebuild-mysql" inheritAll="false" />
@@ -89,5 +90,4 @@ plugins.includes=analog-clock-portlet,chat-portlet,flash-portlet,google-search-p
 
 		<antelope:post to="http://localhost:4444/selenium-server/driver/?cmd=shutDown" wantresponse="false" />
 	</target>
-
 </project>

@@ -764,6 +764,10 @@
 		</copy>
 	</target>
 
+	<target name="dist">
+		<ant antfile="build-dist.xml" target="dist" inheritAll="false" />
+	</target>
+
 	<target name="sync-ext">
 		<copy todir="tools/ext_tmpl/ext-impl/src" overwrite="yes">
 			<fileset
@@ -786,6 +790,10 @@
 		</copy>
 	</target>
 
+	<target name="test">
+		<ant antfile="build-test.xml" target="test" inheritAll="false" />
+	</target>
+
 	<target name="validate-xml">
 		<xmlvalidate failonerror="no">
 			<fileset dir="${project.dir}"
@@ -795,9 +803,4 @@
 			<xmlcatalog refid="dtd.catalog" />
 		</xmlvalidate>
 	</target>
-
-	<target name="test">
-	        <ant antfile="build-test.xml" target="run" inheritAll="false"/>
-	</target>
-
 </project>
