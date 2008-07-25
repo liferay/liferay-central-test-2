@@ -51,22 +51,26 @@ public class PortletContextLoaderListener extends ContextLoaderListener {
 	public void contextInitialized(ServletContextEvent event) {
 		super.contextInitialized(event);
 
+		ClassLoader classLoader = PortletClassLoaderUtil.getClassLoader();
+
 		ServletContext servletContext = event.getServletContext();
 
 		ApplicationContext applicationContext =
 			WebApplicationContextUtils.getWebApplicationContext(servletContext);
 
+		BeanLocator beanLocator = new BeanLocatorImpl(
+			classLoader, applicationContext);
+
 		try {
 			Class<?> beanLocatorUtilClass = Class.forName(
 				"com.liferay.util.bean.PortletBeanLocatorUtil", true,
-				PortletClassLoaderUtil.getClassLoader());
+				classLoader);
 
 			Method setBeanLocatorMethod = beanLocatorUtilClass.getMethod(
 				"setBeanLocator", new Class[] {BeanLocator.class});
 
 			setBeanLocatorMethod.invoke(
-				beanLocatorUtilClass,
-				new Object[] {new BeanLocatorImpl(applicationContext)});
+				beanLocatorUtilClass, new Object[] {beanLocator});
 		}
 		catch (Exception e) {
 			_log.error(e, e);
