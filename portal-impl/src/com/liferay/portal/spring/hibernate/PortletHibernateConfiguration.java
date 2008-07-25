@@ -45,7 +45,7 @@ public class PortletHibernateConfiguration
 		String[] configs = new String[hibernateConfigs.length + 1];
 		ArrayUtil.combine(hibernateConfigs, new String[]{
 				"META-INF/portlet-hbm.xml"}, configs);
-		
+
 		return configs;
 	}
 

@@ -806,7 +806,7 @@
 		<ajaxable>false</ajaxable>
 		<header-portlet-css>/html/portlet/tags_admin/css.jsp</header-portlet-css>
 		<header-portal-javascript>/html/js/liferay/service_packed.js</header-portal-javascript>
-		<header-portlet-javascript>/html/portlet/tags_admin/unpacked.js</header-portlet-javascript>
+		<header-portlet-javascript>/html/portlet/tags_admin/packed.js</header-portlet-javascript>
 		<css-class-wrapper>portlet-tags-admin</css-class-wrapper>
 	</portlet>
 	<portlet>
@@ -1041,8 +1041,8 @@
 	</portlet>
 	<portlet>
 		<portlet-name>122</portlet-name>
-		<icon>/html/portlet/categories/icon.png</icon>
-		<struts-path>categories-navigation</struts-path>
+		<icon>/html/portlet/categories_navigation/icon.png</icon>
+		<struts-path>categories_navigation</struts-path>
 		<use-default-template>false</use-default-template>
 		<restore-current-view>false</restore-current-view>
 		<layout-cacheable>true</layout-cacheable>
@@ -1050,7 +1050,7 @@
 		<private-request-attributes>false</private-request-attributes>
 		<private-session-attributes>false</private-session-attributes>
 		<render-weight>1</render-weight>
-		<css-class-wrapper>portlet-categories</css-class-wrapper>
+		<css-class-wrapper>portlet-categories-navigation</css-class-wrapper>
 	</portlet>
 	<role-mapper>
 		<role-name>administrator</role-name>

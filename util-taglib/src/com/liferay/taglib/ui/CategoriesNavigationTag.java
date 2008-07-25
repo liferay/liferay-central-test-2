@@ -24,21 +24,15 @@ package com.liferay.taglib.ui;
 
 import com.liferay.taglib.util.IncludeTag;
 
-import javax.servlet.http.HttpServletRequest;
-
 /**
- * <a href="NavigationTag.java.html"><b><i>View Source</i></b></a>
+ * <a href="CategoriesNavigationTag.java.html"><b><i>View Source</i></b></a>
  *
- * @author Brian Wing Shun Chan
- * @author Jorge Ferrer
+ * @author Alvaro del Castillo
  *
  */
 public class CategoriesNavigationTag extends IncludeTag {
 
 	public int doStartTag() {
-		HttpServletRequest request =
-			(HttpServletRequest)pageContext.getRequest();
-
 		return EVAL_BODY_BUFFERED;
 	}
 
@@ -46,5 +40,7 @@ public class CategoriesNavigationTag extends IncludeTag {
 		return _PAGE;
 	}
 
-	private static final String _PAGE = "/html/taglib/ui/categories-navigation/page.jsp";
+	private static final String _PAGE =
+		"/html/taglib/ui/categories_navigation/page.jsp";
+
 }

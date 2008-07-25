@@ -342,15 +342,13 @@ public class TagsEntryLocalServiceImpl extends TagsEntryLocalServiceBaseImpl {
 
 		TagsVocabulary vocabulary = tagsVocabularyLocalService.getVocabulary(
 			companyId, vocabularyName);
-		
+
 		TagsEntry entry = getEntry(companyId, parentName);
 
 		return tagsEntryPersistence.findByC_V_P(
-			companyId, vocabulary.getVocabularyId(), entry.getEntryId()); 
+			companyId, vocabulary.getVocabularyId(), entry.getEntryId());
 	}
 
-	
-	
 	public List<TagsEntry> getVocabularyRootEntries(
 			long companyId, String vocabularyName)
 		throws PortalException, SystemException {
@@ -359,11 +357,10 @@ public class TagsEntryLocalServiceImpl extends TagsEntryLocalServiceBaseImpl {
 			companyId, vocabularyName);
 
 		return tagsEntryPersistence.findByC_V_P(
-			companyId, vocabulary.getVocabularyId(), 
+			companyId, vocabulary.getVocabularyId(),
 			TagsEntryConstants.DEFAULT_PARENT_ENTRY_ID);
 	}
 
-	
 	public void mergeEntries(long fromEntryId, long toEntryId)
 		throws PortalException, SystemException {
 

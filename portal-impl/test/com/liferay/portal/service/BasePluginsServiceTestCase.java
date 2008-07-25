@@ -40,8 +40,6 @@
 
 package com.liferay.portal.service;
 
-import java.net.URL;
-
 import com.liferay.portal.bean.BeanLocatorImpl;
 import com.liferay.portal.kernel.portlet.PortletClassLoaderUtil;
 import com.liferay.portal.model.User;
@@ -54,13 +52,14 @@ import com.liferay.portal.util.PortalInstances;
 import com.liferay.portal.util.TestPropsValues;
 import com.liferay.util.bean.PortletBeanLocatorUtil;
 
+import java.net.URL;
+
 /**
  * <a href="BasePluginsServiceTestCase.java.html"><b><i>View Source</i></b></a>
  *
  * @author Ganesh Ram
  *
  */
-
 
 public class BasePluginsServiceTestCase extends BaseTestCase {
 
@@ -69,14 +68,14 @@ public class BasePluginsServiceTestCase extends BaseTestCase {
 	}
 
 	protected void setUp() throws Exception {
-		System.setProperty("external-properties", 
+		System.setProperty("external-properties",
 			"portal-plugin-test.properties");
-		
+
 		if (PortletClassLoaderUtil.getClassLoader() == null) {
 			PortletClassLoaderUtil.setClassLoader(
 				Thread.currentThread().getContextClassLoader());
 		}
-		
+
 		if (PortletBeanLocatorUtil.getBeanLocator() == null) {
 			PortletBeanLocatorUtil.setBeanLocator(new BeanLocatorImpl());
 		}

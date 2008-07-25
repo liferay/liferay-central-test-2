@@ -111,7 +111,7 @@
 			<rtexprvalue>true</rtexprvalue>
 		</attribute>
 	</tag>
-		<tag>
+	<tag>
 		<name>categories-navigation</name>
 		<tag-class>com.liferay.taglib.ui.CategoriesNavigationTag</tag-class>
 		<body-content>JSP</body-content>

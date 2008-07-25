@@ -562,7 +562,7 @@ public class VelocityTaglib {
 
 		return _stringResponse.getString();
 	}
-	
+
 	public String runtime(
 		String portletName, String queryString, String defaultPreferences, boolean exclusive)
 		throws Exception {

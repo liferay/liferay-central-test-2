@@ -22,4 +22,6 @@
  */
 %>
 
-<%@ include file="/html/taglib/init.jsp" %>
+<%@ include file="/html/portlet/categories_navigation/init.jsp" %>
+
+<liferay-ui:categories-navigation />

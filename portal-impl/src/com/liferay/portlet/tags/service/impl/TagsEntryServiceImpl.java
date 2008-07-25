@@ -44,7 +44,7 @@ public class TagsEntryServiceImpl extends TagsEntryServiceBaseImpl {
 
 		return tagsEntryLocalService.addEntry(getUserId(), name);
 	}
-	
+
 	public TagsEntry addEntry(String name, String[] properties)
 		throws PortalException, SystemException {
 
@@ -105,16 +105,15 @@ public class TagsEntryServiceImpl extends TagsEntryServiceBaseImpl {
 	public List<TagsEntry> getVocabularyEntries(
 			long companyId, String vocabularyName, String parentName)
 		throws PortalException, SystemException {
-		
+
 		return tagsEntryLocalService.getVocabularyEntries(
 				companyId, vocabularyName, parentName);
 	}
 
-	
 	public List<TagsEntry> getVocabularyRootEntries(
 			long companyId, String vocabularyName)
 		throws PortalException, SystemException {
-		
+
 		return tagsEntryLocalService.getVocabularyRootEntries(
 				companyId, vocabularyName);
 	}

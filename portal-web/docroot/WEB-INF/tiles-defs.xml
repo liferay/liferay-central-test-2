@@ -214,10 +214,10 @@
 	
 	<!-- Categories Navigation -->
 
-	<definition name="portlet.categories-navigation" extends="portlet" />
+	<definition name="portlet.categories_navigation" extends="portlet" />
 
-	<definition name="portlet.categories-navigation.view" extends="portlet.categories-navigation">
-		<put name="portlet_content" value="/portlet/categories-navigation/view.jsp" />
+	<definition name="portlet.categories_navigation.view" extends="portlet.categories_navigation">
+		<put name="portlet_content" value="/portlet/categories_navigation/view.jsp" />
 	</definition>
 
 	<!-- Communities -->

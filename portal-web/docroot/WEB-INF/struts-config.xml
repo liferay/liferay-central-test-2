@@ -242,7 +242,7 @@
 		
 		<!-- Categories Navigation -->
 
-		<action path="/categories-navigation/view" forward="portlet.categories-navigation.view" />
+		<action path="/categories_navigation/view" forward="portlet.categories_navigation.view" />
 		
 		<!-- Communities -->
 
