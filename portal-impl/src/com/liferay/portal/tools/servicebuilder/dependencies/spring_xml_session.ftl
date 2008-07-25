@@ -28,13 +28,10 @@
 	</bean>
 </#if>
 
-<bean id="${packagePath}.service.${entity.name}${sessionType}Service.exceptionSafe" class="org.springframework.aop.framework.ProxyFactoryBean" lazy-init="true">
-	<property name="proxyInterfaces">
-		<value>${packagePath}.service.${entity.name}${sessionType}Service</value>
-	</property>
+<bean id="${packagePath}.service.${entity.name}${sessionType}Service.velocity" class="org.springframework.aop.framework.ProxyFactoryBean" lazy-init="true">
 	<property name="interceptorNames">
 		<list>
-			<value>com.liferay.portal.spring.aop.ExceptionSafeInterceptor</value>
+			<value>velocityServiceInterceptor</value>
 		</list>
 	</property>
 	<property name="target">

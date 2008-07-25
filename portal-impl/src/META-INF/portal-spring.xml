@@ -22,13 +22,10 @@
 			</props>
 		</property>
 	</bean>
-	<bean id="com.liferay.portal.service.AccountLocalService.exceptionSafe" class="org.springframework.aop.framework.ProxyFactoryBean" lazy-init="true">
-		<property name="proxyInterfaces">
-			<value>com.liferay.portal.service.AccountLocalService</value>
-		</property>
+	<bean id="com.liferay.portal.service.AccountLocalService.velocity" class="org.springframework.aop.framework.ProxyFactoryBean" lazy-init="true">
 		<property name="interceptorNames">
 			<list>
-				<value>com.liferay.portal.spring.aop.ExceptionSafeInterceptor</value>
+				<value>velocityServiceInterceptor</value>
 			</list>
 		</property>
 		<property name="target">
@@ -60,13 +57,10 @@
 			</props>
 		</property>
 	</bean>
-	<bean id="com.liferay.portal.service.AccountService.exceptionSafe" class="org.springframework.aop.framework.ProxyFactoryBean" lazy-init="true">
-		<property name="proxyInterfaces">
-			<value>com.liferay.portal.service.AccountService</value>
-		</property>
+	<bean id="com.liferay.portal.service.AccountService.velocity" class="org.springframework.aop.framework.ProxyFactoryBean" lazy-init="true">
 		<property name="interceptorNames">
 			<list>
-				<value>com.liferay.portal.spring.aop.ExceptionSafeInterceptor</value>
+				<value>velocityServiceInterceptor</value>
 			</list>
 		</property>
 		<property name="target">
@@ -127,13 +121,10 @@
 			</props>
 		</property>
 	</bean>
-	<bean id="com.liferay.portal.service.AddressLocalService.exceptionSafe" class="org.springframework.aop.framework.ProxyFactoryBean" lazy-init="true">
-		<property name="proxyInterfaces">
-			<value>com.liferay.portal.service.AddressLocalService</value>
-		</property>
+	<bean id="com.liferay.portal.service.AddressLocalService.velocity" class="org.springframework.aop.framework.ProxyFactoryBean" lazy-init="true">
 		<property name="interceptorNames">
 			<list>
-				<value>com.liferay.portal.spring.aop.ExceptionSafeInterceptor</value>
+				<value>velocityServiceInterceptor</value>
 			</list>
 		</property>
 		<property name="target">
@@ -165,13 +156,10 @@
 			</props>
 		</property>
 	</bean>
-	<bean id="com.liferay.portal.service.AddressService.exceptionSafe" class="org.springframework.aop.framework.ProxyFactoryBean" lazy-init="true">
-		<property name="proxyInterfaces">
-			<value>com.liferay.portal.service.AddressService</value>
-		</property>
+	<bean id="com.liferay.portal.service.AddressService.velocity" class="org.springframework.aop.framework.ProxyFactoryBean" lazy-init="true">
 		<property name="interceptorNames">
 			<list>
-				<value>com.liferay.portal.spring.aop.ExceptionSafeInterceptor</value>
+				<value>velocityServiceInterceptor</value>
 			</list>
 		</property>
 		<property name="target">
@@ -232,13 +220,10 @@
 			</props>
 		</property>
 	</bean>
-	<bean id="com.liferay.portal.service.ClassNameLocalService.exceptionSafe" class="org.springframework.aop.framework.ProxyFactoryBean" lazy-init="true">
-		<property name="proxyInterfaces">
-			<value>com.liferay.portal.service.ClassNameLocalService</value>
-		</property>
+	<bean id="com.liferay.portal.service.ClassNameLocalService.velocity" class="org.springframework.aop.framework.ProxyFactoryBean" lazy-init="true">
 		<property name="interceptorNames">
 			<list>
-				<value>com.liferay.portal.spring.aop.ExceptionSafeInterceptor</value>
+				<value>velocityServiceInterceptor</value>
 			</list>
 		</property>
 		<property name="target">
@@ -270,13 +255,10 @@
 			</props>
 		</property>
 	</bean>
-	<bean id="com.liferay.portal.service.ClassNameService.exceptionSafe" class="org.springframework.aop.framework.ProxyFactoryBean" lazy-init="true">
-		<property name="proxyInterfaces">
-			<value>com.liferay.portal.service.ClassNameService</value>
-		</property>
+	<bean id="com.liferay.portal.service.ClassNameService.velocity" class="org.springframework.aop.framework.ProxyFactoryBean" lazy-init="true">
 		<property name="interceptorNames">
 			<list>
-				<value>com.liferay.portal.spring.aop.ExceptionSafeInterceptor</value>
+				<value>velocityServiceInterceptor</value>
 			</list>
 		</property>
 		<property name="target">
@@ -337,13 +319,10 @@
 			</props>
 		</property>
 	</bean>
-	<bean id="com.liferay.portal.service.CompanyLocalService.exceptionSafe" class="org.springframework.aop.framework.ProxyFactoryBean" lazy-init="true">
-		<property name="proxyInterfaces">
-			<value>com.liferay.portal.service.CompanyLocalService</value>
-		</property>
+	<bean id="com.liferay.portal.service.CompanyLocalService.velocity" class="org.springframework.aop.framework.ProxyFactoryBean" lazy-init="true">
 		<property name="interceptorNames">
 			<list>
-				<value>com.liferay.portal.spring.aop.ExceptionSafeInterceptor</value>
+				<value>velocityServiceInterceptor</value>
 			</list>
 		</property>
 		<property name="target">
@@ -375,13 +354,10 @@
 			</props>
 		</property>
 	</bean>
-	<bean id="com.liferay.portal.service.CompanyService.exceptionSafe" class="org.springframework.aop.framework.ProxyFactoryBean" lazy-init="true">
-		<property name="proxyInterfaces">
-			<value>com.liferay.portal.service.CompanyService</value>
-		</property>
+	<bean id="com.liferay.portal.service.CompanyService.velocity" class="org.springframework.aop.framework.ProxyFactoryBean" lazy-init="true">
 		<property name="interceptorNames">
 			<list>
-				<value>com.liferay.portal.spring.aop.ExceptionSafeInterceptor</value>
+				<value>velocityServiceInterceptor</value>
 			</list>
 		</property>
 		<property name="target">
@@ -442,13 +418,10 @@
 			</props>
 		</property>
 	</bean>
-	<bean id="com.liferay.portal.service.ContactLocalService.exceptionSafe" class="org.springframework.aop.framework.ProxyFactoryBean" lazy-init="true">
-		<property name="proxyInterfaces">
-			<value>com.liferay.portal.service.ContactLocalService</value>
-		</property>
+	<bean id="com.liferay.portal.service.ContactLocalService.velocity" class="org.springframework.aop.framework.ProxyFactoryBean" lazy-init="true">
 		<property name="interceptorNames">
 			<list>
-				<value>com.liferay.portal.spring.aop.ExceptionSafeInterceptor</value>
+				<value>velocityServiceInterceptor</value>
 			</list>
 		</property>
 		<property name="target">
@@ -480,13 +453,10 @@
 			</props>
 		</property>
 	</bean>
-	<bean id="com.liferay.portal.service.ContactService.exceptionSafe" class="org.springframework.aop.framework.ProxyFactoryBean" lazy-init="true">
-		<property name="proxyInterfaces">
-			<value>com.liferay.portal.service.ContactService</value>
-		</property>
+	<bean id="com.liferay.portal.service.ContactService.velocity" class="org.springframework.aop.framework.ProxyFactoryBean" lazy-init="true">
 		<property name="interceptorNames">
 			<list>
-				<value>com.liferay.portal.spring.aop.ExceptionSafeInterceptor</value>
+				<value>velocityServiceInterceptor</value>
 			</list>
 		</property>
 		<property name="target">
@@ -547,13 +517,10 @@
 			</props>
 		</property>
 	</bean>
-	<bean id="com.liferay.portal.service.CountryService.exceptionSafe" class="org.springframework.aop.framework.ProxyFactoryBean" lazy-init="true">
-		<property name="proxyInterfaces">
-			<value>com.liferay.portal.service.CountryService</value>
-		</property>
+	<bean id="com.liferay.portal.service.CountryService.velocity" class="org.springframework.aop.framework.ProxyFactoryBean" lazy-init="true">
 		<property name="interceptorNames">
 			<list>
-				<value>com.liferay.portal.spring.aop.ExceptionSafeInterceptor</value>
+				<value>velocityServiceInterceptor</value>
 			</list>
 		</property>
 		<property name="target">
@@ -614,13 +581,10 @@
 			</props>
 		</property>
 	</bean>
-	<bean id="com.liferay.portal.service.EmailAddressLocalService.exceptionSafe" class="org.springframework.aop.framework.ProxyFactoryBean" lazy-init="true">
-		<property name="proxyInterfaces">
-			<value>com.liferay.portal.service.EmailAddressLocalService</value>
-		</property>
+	<bean id="com.liferay.portal.service.EmailAddressLocalService.velocity" class="org.springframework.aop.framework.ProxyFactoryBean" lazy-init="true">
 		<property name="interceptorNames">
 			<list>
-				<value>com.liferay.portal.spring.aop.ExceptionSafeInterceptor</value>
+				<value>velocityServiceInterceptor</value>
 			</list>
 		</property>
 		<property name="target">
@@ -652,13 +616,10 @@
 			</props>
 		</property>
 	</bean>
-	<bean id="com.liferay.portal.service.EmailAddressService.exceptionSafe" class="org.springframework.aop.framework.ProxyFactoryBean" lazy-init="true">
-		<property name="proxyInterfaces">
-			<value>com.liferay.portal.service.EmailAddressService</value>
-		</property>
+	<bean id="com.liferay.portal.service.EmailAddressService.velocity" class="org.springframework.aop.framework.ProxyFactoryBean" lazy-init="true">
 		<property name="interceptorNames">
 			<list>
-				<value>com.liferay.portal.spring.aop.ExceptionSafeInterceptor</value>
+				<value>velocityServiceInterceptor</value>
 			</list>
 		</property>
 		<property name="target">
@@ -719,13 +680,10 @@
 			</props>
 		</property>
 	</bean>
-	<bean id="com.liferay.portal.service.GroupLocalService.exceptionSafe" class="org.springframework.aop.framework.ProxyFactoryBean" lazy-init="true">
-		<property name="proxyInterfaces">
-			<value>com.liferay.portal.service.GroupLocalService</value>
-		</property>
+	<bean id="com.liferay.portal.service.GroupLocalService.velocity" class="org.springframework.aop.framework.ProxyFactoryBean" lazy-init="true">
 		<property name="interceptorNames">
 			<list>
-				<value>com.liferay.portal.spring.aop.ExceptionSafeInterceptor</value>
+				<value>velocityServiceInterceptor</value>
 			</list>
 		</property>
 		<property name="target">
@@ -757,13 +715,10 @@
 			</props>
 		</property>
 	</bean>
-	<bean id="com.liferay.portal.service.GroupService.exceptionSafe" class="org.springframework.aop.framework.ProxyFactoryBean" lazy-init="true">
-		<property name="proxyInterfaces">
-			<value>com.liferay.portal.service.GroupService</value>
-		</property>
+	<bean id="com.liferay.portal.service.GroupService.velocity" class="org.springframework.aop.framework.ProxyFactoryBean" lazy-init="true">
 		<property name="interceptorNames">
 			<list>
-				<value>com.liferay.portal.spring.aop.ExceptionSafeInterceptor</value>
+				<value>velocityServiceInterceptor</value>
 			</list>
 		</property>
 		<property name="target">
@@ -837,13 +792,10 @@
 			</props>
 		</property>
 	</bean>
-	<bean id="com.liferay.portal.service.ImageLocalService.exceptionSafe" class="org.springframework.aop.framework.ProxyFactoryBean" lazy-init="true">
-		<property name="proxyInterfaces">
-			<value>com.liferay.portal.service.ImageLocalService</value>
-		</property>
+	<bean id="com.liferay.portal.service.ImageLocalService.velocity" class="org.springframework.aop.framework.ProxyFactoryBean" lazy-init="true">
 		<property name="interceptorNames">
 			<list>
-				<value>com.liferay.portal.spring.aop.ExceptionSafeInterceptor</value>
+				<value>velocityServiceInterceptor</value>
 			</list>
 		</property>
 		<property name="target">
@@ -904,13 +856,10 @@
 			</props>
 		</property>
 	</bean>
-	<bean id="com.liferay.portal.service.LayoutLocalService.exceptionSafe" class="org.springframework.aop.framework.ProxyFactoryBean" lazy-init="true">
-		<property name="proxyInterfaces">
-			<value>com.liferay.portal.service.LayoutLocalService</value>
-		</property>
+	<bean id="com.liferay.portal.service.LayoutLocalService.velocity" class="org.springframework.aop.framework.ProxyFactoryBean" lazy-init="true">
 		<property name="interceptorNames">
 			<list>
-				<value>com.liferay.portal.spring.aop.ExceptionSafeInterceptor</value>
+				<value>velocityServiceInterceptor</value>
 			</list>
 		</property>
 		<property name="target">
@@ -942,13 +891,10 @@
 			</props>
 		</property>
 	</bean>
-	<bean id="com.liferay.portal.service.LayoutService.exceptionSafe" class="org.springframework.aop.framework.ProxyFactoryBean" lazy-init="true">
-		<property name="proxyInterfaces">
-			<value>com.liferay.portal.service.LayoutService</value>
-		</property>
+	<bean id="com.liferay.portal.service.LayoutService.velocity" class="org.springframework.aop.framework.ProxyFactoryBean" lazy-init="true">
 		<property name="interceptorNames">
 			<list>
-				<value>com.liferay.portal.spring.aop.ExceptionSafeInterceptor</value>
+				<value>velocityServiceInterceptor</value>
 			</list>
 		</property>
 		<property name="target">
@@ -1022,13 +968,10 @@
 			</props>
 		</property>
 	</bean>
-	<bean id="com.liferay.portal.service.LayoutSetLocalService.exceptionSafe" class="org.springframework.aop.framework.ProxyFactoryBean" lazy-init="true">
-		<property name="proxyInterfaces">
-			<value>com.liferay.portal.service.LayoutSetLocalService</value>
-		</property>
+	<bean id="com.liferay.portal.service.LayoutSetLocalService.velocity" class="org.springframework.aop.framework.ProxyFactoryBean" lazy-init="true">
 		<property name="interceptorNames">
 			<list>
-				<value>com.liferay.portal.spring.aop.ExceptionSafeInterceptor</value>
+				<value>velocityServiceInterceptor</value>
 			</list>
 		</property>
 		<property name="target">
@@ -1060,13 +1003,10 @@
 			</props>
 		</property>
 	</bean>
-	<bean id="com.liferay.portal.service.LayoutSetService.exceptionSafe" class="org.springframework.aop.framework.ProxyFactoryBean" lazy-init="true">
-		<property name="proxyInterfaces">
-			<value>com.liferay.portal.service.LayoutSetService</value>
-		</property>
+	<bean id="com.liferay.portal.service.LayoutSetService.velocity" class="org.springframework.aop.framework.ProxyFactoryBean" lazy-init="true">
 		<property name="interceptorNames">
 			<list>
-				<value>com.liferay.portal.spring.aop.ExceptionSafeInterceptor</value>
+				<value>velocityServiceInterceptor</value>
 			</list>
 		</property>
 		<property name="target">
@@ -1108,13 +1048,10 @@
 		</property>
 	</bean>
 	<bean id="com.liferay.portal.service.LayoutTemplateLocalService.impl" class="com.liferay.portal.service.impl.LayoutTemplateLocalServiceImpl" lazy-init="true" />
-	<bean id="com.liferay.portal.service.LayoutTemplateLocalService.exceptionSafe" class="org.springframework.aop.framework.ProxyFactoryBean" lazy-init="true">
-		<property name="proxyInterfaces">
-			<value>com.liferay.portal.service.LayoutTemplateLocalService</value>
-		</property>
+	<bean id="com.liferay.portal.service.LayoutTemplateLocalService.velocity" class="org.springframework.aop.framework.ProxyFactoryBean" lazy-init="true">
 		<property name="interceptorNames">
 			<list>
-				<value>com.liferay.portal.spring.aop.ExceptionSafeInterceptor</value>
+				<value>velocityServiceInterceptor</value>
 			</list>
 		</property>
 		<property name="target">
@@ -1146,13 +1083,10 @@
 			</props>
 		</property>
 	</bean>
-	<bean id="com.liferay.portal.service.ListTypeService.exceptionSafe" class="org.springframework.aop.framework.ProxyFactoryBean" lazy-init="true">
-		<property name="proxyInterfaces">
-			<value>com.liferay.portal.service.ListTypeService</value>
-		</property>
+	<bean id="com.liferay.portal.service.ListTypeService.velocity" class="org.springframework.aop.framework.ProxyFactoryBean" lazy-init="true">
 		<property name="interceptorNames">
 			<list>
-				<value>com.liferay.portal.spring.aop.ExceptionSafeInterceptor</value>
+				<value>velocityServiceInterceptor</value>
 			</list>
 		</property>
 		<property name="target">
@@ -1213,13 +1147,10 @@
 			</props>
 		</property>
 	</bean>
-	<bean id="com.liferay.portal.service.MembershipRequestLocalService.exceptionSafe" class="org.springframework.aop.framework.ProxyFactoryBean" lazy-init="true">
-		<property name="proxyInterfaces">
-			<value>com.liferay.portal.service.MembershipRequestLocalService</value>
-		</property>
+	<bean id="com.liferay.portal.service.MembershipRequestLocalService.velocity" class="org.springframework.aop.framework.ProxyFactoryBean" lazy-init="true">
 		<property name="interceptorNames">
 			<list>
-				<value>com.liferay.portal.spring.aop.ExceptionSafeInterceptor</value>
+				<value>velocityServiceInterceptor</value>
 			</list>
 		</property>
 		<property name="target">
@@ -1251,13 +1182,10 @@
 			</props>
 		</property>
 	</bean>
-	<bean id="com.liferay.portal.service.MembershipRequestService.exceptionSafe" class="org.springframework.aop.framework.ProxyFactoryBean" lazy-init="true">
-		<property name="proxyInterfaces">
-			<value>com.liferay.portal.service.MembershipRequestService</value>
-		</property>
+	<bean id="com.liferay.portal.service.MembershipRequestService.velocity" class="org.springframework.aop.framework.ProxyFactoryBean" lazy-init="true">
 		<property name="interceptorNames">
 			<list>
-				<value>com.liferay.portal.spring.aop.ExceptionSafeInterceptor</value>
+				<value>velocityServiceInterceptor</value>
 			</list>
 		</property>
 		<property name="target">
@@ -1318,13 +1246,10 @@
 			</props>
 		</property>
 	</bean>
-	<bean id="com.liferay.portal.service.OrganizationLocalService.exceptionSafe" class="org.springframework.aop.framework.ProxyFactoryBean" lazy-init="true">
-		<property name="proxyInterfaces">
-			<value>com.liferay.portal.service.OrganizationLocalService</value>
-		</property>
+	<bean id="com.liferay.portal.service.OrganizationLocalService.velocity" class="org.springframework.aop.framework.ProxyFactoryBean" lazy-init="true">
 		<property name="interceptorNames">
 			<list>
-				<value>com.liferay.portal.spring.aop.ExceptionSafeInterceptor</value>
+				<value>velocityServiceInterceptor</value>
 			</list>
 		</property>
 		<property name="target">
@@ -1356,13 +1281,10 @@
 			</props>
 		</property>
 	</bean>
-	<bean id="com.liferay.portal.service.OrganizationService.exceptionSafe" class="org.springframework.aop.framework.ProxyFactoryBean" lazy-init="true">
-		<property name="proxyInterfaces">
-			<value>com.liferay.portal.service.OrganizationService</value>
-		</property>
+	<bean id="com.liferay.portal.service.OrganizationService.velocity" class="org.springframework.aop.framework.ProxyFactoryBean" lazy-init="true">
 		<property name="interceptorNames">
 			<list>
-				<value>com.liferay.portal.spring.aop.ExceptionSafeInterceptor</value>
+				<value>velocityServiceInterceptor</value>
 			</list>
 		</property>
 		<property name="target">
@@ -1507,13 +1429,10 @@
 			</props>
 		</property>
 	</bean>
-	<bean id="com.liferay.portal.service.OrgLaborLocalService.exceptionSafe" class="org.springframework.aop.framework.ProxyFactoryBean" lazy-init="true">
-		<property name="proxyInterfaces">
-			<value>com.liferay.portal.service.OrgLaborLocalService</value>
-		</property>
+	<bean id="com.liferay.portal.service.OrgLaborLocalService.velocity" class="org.springframework.aop.framework.ProxyFactoryBean" lazy-init="true">
 		<property name="interceptorNames">
 			<list>
-				<value>com.liferay.portal.spring.aop.ExceptionSafeInterceptor</value>
+				<value>velocityServiceInterceptor</value>
 			</list>
 		</property>
 		<property name="target">
@@ -1545,13 +1464,10 @@
 			</props>
 		</property>
 	</bean>
-	<bean id="com.liferay.portal.service.OrgLaborService.exceptionSafe" class="org.springframework.aop.framework.ProxyFactoryBean" lazy-init="true">
-		<property name="proxyInterfaces">
-			<value>com.liferay.portal.service.OrgLaborService</value>
-		</property>
+	<bean id="com.liferay.portal.service.OrgLaborService.velocity" class="org.springframework.aop.framework.ProxyFactoryBean" lazy-init="true">
 		<property name="interceptorNames">
 			<list>
-				<value>com.liferay.portal.spring.aop.ExceptionSafeInterceptor</value>
+				<value>velocityServiceInterceptor</value>
 			</list>
 		</property>
 		<property name="target">
@@ -1612,13 +1528,10 @@
 			</props>
 		</property>
 	</bean>
-	<bean id="com.liferay.portal.service.PasswordPolicyLocalService.exceptionSafe" class="org.springframework.aop.framework.ProxyFactoryBean" lazy-init="true">
-		<property name="proxyInterfaces">
-			<value>com.liferay.portal.service.PasswordPolicyLocalService</value>
-		</property>
+	<bean id="com.liferay.portal.service.PasswordPolicyLocalService.velocity" class="org.springframework.aop.framework.ProxyFactoryBean" lazy-init="true">
 		<property name="interceptorNames">
 			<list>
-				<value>com.liferay.portal.spring.aop.ExceptionSafeInterceptor</value>
+				<value>velocityServiceInterceptor</value>
 			</list>
 		</property>
 		<property name="target">
@@ -1650,13 +1563,10 @@
 			</props>
 		</property>
 	</bean>
-	<bean id="com.liferay.portal.service.PasswordPolicyService.exceptionSafe" class="org.springframework.aop.framework.ProxyFactoryBean" lazy-init="true">
-		<property name="proxyInterfaces">
-			<value>com.liferay.portal.service.PasswordPolicyService</value>
-		</property>
+	<bean id="com.liferay.portal.service.PasswordPolicyService.velocity" class="org.springframework.aop.framework.ProxyFactoryBean" lazy-init="true">
 		<property name="interceptorNames">
 			<list>
-				<value>com.liferay.portal.spring.aop.ExceptionSafeInterceptor</value>
+				<value>velocityServiceInterceptor</value>
 			</list>
 		</property>
 		<property name="target">
@@ -1730,13 +1640,10 @@
 			</props>
 		</property>
 	</bean>
-	<bean id="com.liferay.portal.service.PasswordPolicyRelLocalService.exceptionSafe" class="org.springframework.aop.framework.ProxyFactoryBean" lazy-init="true">
-		<property name="proxyInterfaces">
-			<value>com.liferay.portal.service.PasswordPolicyRelLocalService</value>
-		</property>
+	<bean id="com.liferay.portal.service.PasswordPolicyRelLocalService.velocity" class="org.springframework.aop.framework.ProxyFactoryBean" lazy-init="true">
 		<property name="interceptorNames">
 			<list>
-				<value>com.liferay.portal.spring.aop.ExceptionSafeInterceptor</value>
+				<value>velocityServiceInterceptor</value>
 			</list>
 		</property>
 		<property name="target">
@@ -1797,13 +1704,10 @@
 			</props>
 		</property>
 	</bean>
-	<bean id="com.liferay.portal.service.PasswordTrackerLocalService.exceptionSafe" class="org.springframework.aop.framework.ProxyFactoryBean" lazy-init="true">
-		<property name="proxyInterfaces">
-			<value>com.liferay.portal.service.PasswordTrackerLocalService</value>
-		</property>
+	<bean id="com.liferay.portal.service.PasswordTrackerLocalService.velocity" class="org.springframework.aop.framework.ProxyFactoryBean" lazy-init="true">
 		<property name="interceptorNames">
 			<list>
-				<value>com.liferay.portal.spring.aop.ExceptionSafeInterceptor</value>
+				<value>velocityServiceInterceptor</value>
 			</list>
 		</property>
 		<property name="target">
@@ -1864,13 +1768,10 @@
 			</props>
 		</property>
 	</bean>
-	<bean id="com.liferay.portal.service.PermissionLocalService.exceptionSafe" class="org.springframework.aop.framework.ProxyFactoryBean" lazy-init="true">
-		<property name="proxyInterfaces">
-			<value>com.liferay.portal.service.PermissionLocalService</value>
-		</property>
+	<bean id="com.liferay.portal.service.PermissionLocalService.velocity" class="org.springframework.aop.framework.ProxyFactoryBean" lazy-init="true">
 		<property name="interceptorNames">
 			<list>
-				<value>com.liferay.portal.spring.aop.ExceptionSafeInterceptor</value>
+				<value>velocityServiceInterceptor</value>
 			</list>
 		</property>
 		<property name="target">
@@ -1902,13 +1803,10 @@
 			</props>
 		</property>
 	</bean>
-	<bean id="com.liferay.portal.service.PermissionService.exceptionSafe" class="org.springframework.aop.framework.ProxyFactoryBean" lazy-init="true">
-		<property name="proxyInterfaces">
-			<value>com.liferay.portal.service.PermissionService</value>
-		</property>
+	<bean id="com.liferay.portal.service.PermissionService.velocity" class="org.springframework.aop.framework.ProxyFactoryBean" lazy-init="true">
 		<property name="interceptorNames">
 			<list>
-				<value>com.liferay.portal.spring.aop.ExceptionSafeInterceptor</value>
+				<value>velocityServiceInterceptor</value>
 			</list>
 		</property>
 		<property name="target">
@@ -1995,13 +1893,10 @@
 			</props>
 		</property>
 	</bean>
-	<bean id="com.liferay.portal.service.PhoneLocalService.exceptionSafe" class="org.springframework.aop.framework.ProxyFactoryBean" lazy-init="true">
-		<property name="proxyInterfaces">
-			<value>com.liferay.portal.service.PhoneLocalService</value>
-		</property>
+	<bean id="com.liferay.portal.service.PhoneLocalService.velocity" class="org.springframework.aop.framework.ProxyFactoryBean" lazy-init="true">
 		<property name="interceptorNames">
 			<list>
-				<value>com.liferay.portal.spring.aop.ExceptionSafeInterceptor</value>
+				<value>velocityServiceInterceptor</value>
 			</list>
 		</property>
 		<property name="target">
@@ -2033,13 +1928,10 @@
 			</props>
 		</property>
 	</bean>
-	<bean id="com.liferay.portal.service.PhoneService.exceptionSafe" class="org.springframework.aop.framework.ProxyFactoryBean" lazy-init="true">
-		<property name="proxyInterfaces">
-			<value>com.liferay.portal.service.PhoneService</value>
-		</property>
+	<bean id="com.liferay.portal.service.PhoneService.velocity" class="org.springframework.aop.framework.ProxyFactoryBean" lazy-init="true">
 		<property name="interceptorNames">
 			<list>
-				<value>com.liferay.portal.spring.aop.ExceptionSafeInterceptor</value>
+				<value>velocityServiceInterceptor</value>
 			</list>
 		</property>
 		<property name="target">
@@ -2100,13 +1992,10 @@
 			</props>
 		</property>
 	</bean>
-	<bean id="com.liferay.portal.service.PortalService.exceptionSafe" class="org.springframework.aop.framework.ProxyFactoryBean" lazy-init="true">
-		<property name="proxyInterfaces">
-			<value>com.liferay.portal.service.PortalService</value>
-		</property>
+	<bean id="com.liferay.portal.service.PortalService.velocity" class="org.springframework.aop.framework.ProxyFactoryBean" lazy-init="true">
 		<property name="interceptorNames">
 			<list>
-				<value>com.liferay.portal.spring.aop.ExceptionSafeInterceptor</value>
+				<value>velocityServiceInterceptor</value>
 			</list>
 		</property>
 		<property name="target">
@@ -2138,13 +2027,10 @@
 			</props>
 		</property>
 	</bean>
-	<bean id="com.liferay.portal.service.PluginSettingLocalService.exceptionSafe" class="org.springframework.aop.framework.ProxyFactoryBean" lazy-init="true">
-		<property name="proxyInterfaces">
-			<value>com.liferay.portal.service.PluginSettingLocalService</value>
-		</property>
+	<bean id="com.liferay.portal.service.PluginSettingLocalService.velocity" class="org.springframework.aop.framework.ProxyFactoryBean" lazy-init="true">
 		<property name="interceptorNames">
 			<list>
-				<value>com.liferay.portal.spring.aop.ExceptionSafeInterceptor</value>
+				<value>velocityServiceInterceptor</value>
 			</list>
 		</property>
 		<property name="target">
@@ -2176,13 +2062,10 @@
 			</props>
 		</property>
 	</bean>
-	<bean id="com.liferay.portal.service.PluginSettingService.exceptionSafe" class="org.springframework.aop.framework.ProxyFactoryBean" lazy-init="true">
-		<property name="proxyInterfaces">
-			<value>com.liferay.portal.service.PluginSettingService</value>
-		</property>
+	<bean id="com.liferay.portal.service.PluginSettingService.velocity" class="org.springframework.aop.framework.ProxyFactoryBean" lazy-init="true">
 		<property name="interceptorNames">
 			<list>
-				<value>com.liferay.portal.spring.aop.ExceptionSafeInterceptor</value>
+				<value>velocityServiceInterceptor</value>
 			</list>
 		</property>
 		<property name="target">
@@ -2243,13 +2126,10 @@
 			</props>
 		</property>
 	</bean>
-	<bean id="com.liferay.portal.service.PortletLocalService.exceptionSafe" class="org.springframework.aop.framework.ProxyFactoryBean" lazy-init="true">
-		<property name="proxyInterfaces">
-			<value>com.liferay.portal.service.PortletLocalService</value>
-		</property>
+	<bean id="com.liferay.portal.service.PortletLocalService.velocity" class="org.springframework.aop.framework.ProxyFactoryBean" lazy-init="true">
 		<property name="interceptorNames">
 			<list>
-				<value>com.liferay.portal.spring.aop.ExceptionSafeInterceptor</value>
+				<value>velocityServiceInterceptor</value>
 			</list>
 		</property>
 		<property name="target">
@@ -2281,13 +2161,10 @@
 			</props>
 		</property>
 	</bean>
-	<bean id="com.liferay.portal.service.PortletService.exceptionSafe" class="org.springframework.aop.framework.ProxyFactoryBean" lazy-init="true">
-		<property name="proxyInterfaces">
-			<value>com.liferay.portal.service.PortletService</value>
-		</property>
+	<bean id="com.liferay.portal.service.PortletService.velocity" class="org.springframework.aop.framework.ProxyFactoryBean" lazy-init="true">
 		<property name="interceptorNames">
 			<list>
-				<value>com.liferay.portal.spring.aop.ExceptionSafeInterceptor</value>
+				<value>velocityServiceInterceptor</value>
 			</list>
 		</property>
 		<property name="target">
@@ -2348,13 +2225,10 @@
 			</props>
 		</property>
 	</bean>
-	<bean id="com.liferay.portal.service.PortletPreferencesLocalService.exceptionSafe" class="org.springframework.aop.framework.ProxyFactoryBean" lazy-init="true">
-		<property name="proxyInterfaces">
-			<value>com.liferay.portal.service.PortletPreferencesLocalService</value>
-		</property>
+	<bean id="com.liferay.portal.service.PortletPreferencesLocalService.velocity" class="org.springframework.aop.framework.ProxyFactoryBean" lazy-init="true">
 		<property name="interceptorNames">
 			<list>
-				<value>com.liferay.portal.spring.aop.ExceptionSafeInterceptor</value>
+				<value>velocityServiceInterceptor</value>
 			</list>
 		</property>
 		<property name="target">
@@ -2386,13 +2260,10 @@
 			</props>
 		</property>
 	</bean>
-	<bean id="com.liferay.portal.service.PortletPreferencesService.exceptionSafe" class="org.springframework.aop.framework.ProxyFactoryBean" lazy-init="true">
-		<property name="proxyInterfaces">
-			<value>com.liferay.portal.service.PortletPreferencesService</value>
-		</property>
+	<bean id="com.liferay.portal.service.PortletPreferencesService.velocity" class="org.springframework.aop.framework.ProxyFactoryBean" lazy-init="true">
 		<property name="interceptorNames">
 			<list>
-				<value>com.liferay.portal.spring.aop.ExceptionSafeInterceptor</value>
+				<value>velocityServiceInterceptor</value>
 			</list>
 		</property>
 		<property name="target">
@@ -2466,13 +2337,10 @@
 			</props>
 		</property>
 	</bean>
-	<bean id="com.liferay.portal.service.RegionService.exceptionSafe" class="org.springframework.aop.framework.ProxyFactoryBean" lazy-init="true">
-		<property name="proxyInterfaces">
-			<value>com.liferay.portal.service.RegionService</value>
-		</property>
+	<bean id="com.liferay.portal.service.RegionService.velocity" class="org.springframework.aop.framework.ProxyFactoryBean" lazy-init="true">
 		<property name="interceptorNames">
 			<list>
-				<value>com.liferay.portal.spring.aop.ExceptionSafeInterceptor</value>
+				<value>velocityServiceInterceptor</value>
 			</list>
 		</property>
 		<property name="target">
@@ -2533,13 +2401,10 @@
 			</props>
 		</property>
 	</bean>
-	<bean id="com.liferay.portal.service.ReleaseLocalService.exceptionSafe" class="org.springframework.aop.framework.ProxyFactoryBean" lazy-init="true">
-		<property name="proxyInterfaces">
-			<value>com.liferay.portal.service.ReleaseLocalService</value>
-		</property>
+	<bean id="com.liferay.portal.service.ReleaseLocalService.velocity" class="org.springframework.aop.framework.ProxyFactoryBean" lazy-init="true">
 		<property name="interceptorNames">
 			<list>
-				<value>com.liferay.portal.spring.aop.ExceptionSafeInterceptor</value>
+				<value>velocityServiceInterceptor</value>
 			</list>
 		</property>
 		<property name="target">
@@ -2600,13 +2465,10 @@
 			</props>
 		</property>
 	</bean>
-	<bean id="com.liferay.portal.service.ResourceLocalService.exceptionSafe" class="org.springframework.aop.framework.ProxyFactoryBean" lazy-init="true">
-		<property name="proxyInterfaces">
-			<value>com.liferay.portal.service.ResourceLocalService</value>
-		</property>
+	<bean id="com.liferay.portal.service.ResourceLocalService.velocity" class="org.springframework.aop.framework.ProxyFactoryBean" lazy-init="true">
 		<property name="interceptorNames">
 			<list>
-				<value>com.liferay.portal.spring.aop.ExceptionSafeInterceptor</value>
+				<value>velocityServiceInterceptor</value>
 			</list>
 		</property>
 		<property name="target">
@@ -2638,13 +2500,10 @@
 			</props>
 		</property>
 	</bean>
-	<bean id="com.liferay.portal.service.ResourceService.exceptionSafe" class="org.springframework.aop.framework.ProxyFactoryBean" lazy-init="true">
-		<property name="proxyInterfaces">
-			<value>com.liferay.portal.service.ResourceService</value>
-		</property>
+	<bean id="com.liferay.portal.service.ResourceService.velocity" class="org.springframework.aop.framework.ProxyFactoryBean" lazy-init="true">
 		<property name="interceptorNames">
 			<list>
-				<value>com.liferay.portal.spring.aop.ExceptionSafeInterceptor</value>
+				<value>velocityServiceInterceptor</value>
 			</list>
 		</property>
 		<property name="target">
@@ -2718,13 +2577,10 @@
 			</props>
 		</property>
 	</bean>
-	<bean id="com.liferay.portal.service.ResourceCodeLocalService.exceptionSafe" class="org.springframework.aop.framework.ProxyFactoryBean" lazy-init="true">
-		<property name="proxyInterfaces">
-			<value>com.liferay.portal.service.ResourceCodeLocalService</value>
-		</property>
+	<bean id="com.liferay.portal.service.ResourceCodeLocalService.velocity" class="org.springframework.aop.framework.ProxyFactoryBean" lazy-init="true">
 		<property name="interceptorNames">
 			<list>
-				<value>com.liferay.portal.spring.aop.ExceptionSafeInterceptor</value>
+				<value>velocityServiceInterceptor</value>
 			</list>
 		</property>
 		<property name="target">
@@ -2785,13 +2641,10 @@
 			</props>
 		</property>
 	</bean>
-	<bean id="com.liferay.portal.service.RoleLocalService.exceptionSafe" class="org.springframework.aop.framework.ProxyFactoryBean" lazy-init="true">
-		<property name="proxyInterfaces">
-			<value>com.liferay.portal.service.RoleLocalService</value>
-		</property>
+	<bean id="com.liferay.portal.service.RoleLocalService.velocity" class="org.springframework.aop.framework.ProxyFactoryBean" lazy-init="true">
 		<property name="interceptorNames">
 			<list>
-				<value>com.liferay.portal.spring.aop.ExceptionSafeInterceptor</value>
+				<value>velocityServiceInterceptor</value>
 			</list>
 		</property>
 		<property name="target">
@@ -2823,13 +2676,10 @@
 			</props>
 		</property>
 	</bean>
-	<bean id="com.liferay.portal.service.RoleService.exceptionSafe" class="org.springframework.aop.framework.ProxyFactoryBean" lazy-init="true">
-		<property name="proxyInterfaces">
-			<value>com.liferay.portal.service.RoleService</value>
-		</property>
+	<bean id="com.liferay.portal.service.RoleService.velocity" class="org.springframework.aop.framework.ProxyFactoryBean" lazy-init="true">
 		<property name="interceptorNames">
 			<list>
-				<value>com.liferay.portal.spring.aop.ExceptionSafeInterceptor</value>
+				<value>velocityServiceInterceptor</value>
 			</list>
 		</property>
 		<property name="target">
@@ -2903,13 +2753,10 @@
 			</props>
 		</property>
 	</bean>
-	<bean id="com.liferay.portal.service.ServiceComponentLocalService.exceptionSafe" class="org.springframework.aop.framework.ProxyFactoryBean" lazy-init="true">
-		<property name="proxyInterfaces">
-			<value>com.liferay.portal.service.ServiceComponentLocalService</value>
-		</property>
+	<bean id="com.liferay.portal.service.ServiceComponentLocalService.velocity" class="org.springframework.aop.framework.ProxyFactoryBean" lazy-init="true">
 		<property name="interceptorNames">
 			<list>
-				<value>com.liferay.portal.spring.aop.ExceptionSafeInterceptor</value>
+				<value>velocityServiceInterceptor</value>
 			</list>
 		</property>
 		<property name="target">
@@ -2970,13 +2817,10 @@
 			</props>
 		</property>
 	</bean>
-	<bean id="com.liferay.portal.service.PortletItemLocalService.exceptionSafe" class="org.springframework.aop.framework.ProxyFactoryBean" lazy-init="true">
-		<property name="proxyInterfaces">
-			<value>com.liferay.portal.service.PortletItemLocalService</value>
-		</property>
+	<bean id="com.liferay.portal.service.PortletItemLocalService.velocity" class="org.springframework.aop.framework.ProxyFactoryBean" lazy-init="true">
 		<property name="interceptorNames">
 			<list>
-				<value>com.liferay.portal.spring.aop.ExceptionSafeInterceptor</value>
+				<value>velocityServiceInterceptor</value>
 			</list>
 		</property>
 		<property name="target">
@@ -3037,13 +2881,10 @@
 			</props>
 		</property>
 	</bean>
-	<bean id="com.liferay.portal.service.SubscriptionLocalService.exceptionSafe" class="org.springframework.aop.framework.ProxyFactoryBean" lazy-init="true">
-		<property name="proxyInterfaces">
-			<value>com.liferay.portal.service.SubscriptionLocalService</value>
-		</property>
+	<bean id="com.liferay.portal.service.SubscriptionLocalService.velocity" class="org.springframework.aop.framework.ProxyFactoryBean" lazy-init="true">
 		<property name="interceptorNames">
 			<list>
-				<value>com.liferay.portal.spring.aop.ExceptionSafeInterceptor</value>
+				<value>velocityServiceInterceptor</value>
 			</list>
 		</property>
 		<property name="target">
@@ -3085,13 +2926,10 @@
 		</property>
 	</bean>
 	<bean id="com.liferay.portal.service.ThemeLocalService.impl" class="com.liferay.portal.service.impl.ThemeLocalServiceImpl" lazy-init="true" />
-	<bean id="com.liferay.portal.service.ThemeLocalService.exceptionSafe" class="org.springframework.aop.framework.ProxyFactoryBean" lazy-init="true">
-		<property name="proxyInterfaces">
-			<value>com.liferay.portal.service.ThemeLocalService</value>
-		</property>
+	<bean id="com.liferay.portal.service.ThemeLocalService.velocity" class="org.springframework.aop.framework.ProxyFactoryBean" lazy-init="true">
 		<property name="interceptorNames">
 			<list>
-				<value>com.liferay.portal.spring.aop.ExceptionSafeInterceptor</value>
+				<value>velocityServiceInterceptor</value>
 			</list>
 		</property>
 		<property name="target">
@@ -3124,13 +2962,10 @@
 			</props>
 		</property>
 	</bean>
-	<bean id="com.liferay.portal.service.UserLocalService.exceptionSafe" class="org.springframework.aop.framework.ProxyFactoryBean" lazy-init="true">
-		<property name="proxyInterfaces">
-			<value>com.liferay.portal.service.UserLocalService</value>
-		</property>
+	<bean id="com.liferay.portal.service.UserLocalService.velocity" class="org.springframework.aop.framework.ProxyFactoryBean" lazy-init="true">
 		<property name="interceptorNames">
 			<list>
-				<value>com.liferay.portal.spring.aop.ExceptionSafeInterceptor</value>
+				<value>velocityServiceInterceptor</value>
 			</list>
 		</property>
 		<property name="target">
@@ -3163,13 +2998,10 @@
 			</props>
 		</property>
 	</bean>
-	<bean id="com.liferay.portal.service.UserService.exceptionSafe" class="org.springframework.aop.framework.ProxyFactoryBean" lazy-init="true">
-		<property name="proxyInterfaces">
-			<value>com.liferay.portal.service.UserService</value>
-		</property>
+	<bean id="com.liferay.portal.service.UserService.velocity" class="org.springframework.aop.framework.ProxyFactoryBean" lazy-init="true">
 		<property name="interceptorNames">
 			<list>
-				<value>com.liferay.portal.spring.aop.ExceptionSafeInterceptor</value>
+				<value>velocityServiceInterceptor</value>
 			</list>
 		</property>
 		<property name="target">
@@ -3243,13 +3075,10 @@
 			</props>
 		</property>
 	</bean>
-	<bean id="com.liferay.portal.service.UserGroupLocalService.exceptionSafe" class="org.springframework.aop.framework.ProxyFactoryBean" lazy-init="true">
-		<property name="proxyInterfaces">
-			<value>com.liferay.portal.service.UserGroupLocalService</value>
-		</property>
+	<bean id="com.liferay.portal.service.UserGroupLocalService.velocity" class="org.springframework.aop.framework.ProxyFactoryBean" lazy-init="true">
 		<property name="interceptorNames">
 			<list>
-				<value>com.liferay.portal.spring.aop.ExceptionSafeInterceptor</value>
+				<value>velocityServiceInterceptor</value>
 			</list>
 		</property>
 		<property name="target">
@@ -3281,13 +3110,10 @@
 			</props>
 		</property>
 	</bean>
-	<bean id="com.liferay.portal.service.UserGroupService.exceptionSafe" class="org.springframework.aop.framework.ProxyFactoryBean" lazy-init="true">
-		<property name="proxyInterfaces">
-			<value>com.liferay.portal.service.UserGroupService</value>
-		</property>
+	<bean id="com.liferay.portal.service.UserGroupService.velocity" class="org.springframework.aop.framework.ProxyFactoryBean" lazy-init="true">
 		<property name="interceptorNames">
 			<list>
-				<value>com.liferay.portal.spring.aop.ExceptionSafeInterceptor</value>
+				<value>velocityServiceInterceptor</value>
 			</list>
 		</property>
 		<property name="target">
@@ -3361,13 +3187,10 @@
 			</props>
 		</property>
 	</bean>
-	<bean id="com.liferay.portal.service.UserGroupRoleLocalService.exceptionSafe" class="org.springframework.aop.framework.ProxyFactoryBean" lazy-init="true">
-		<property name="proxyInterfaces">
-			<value>com.liferay.portal.service.UserGroupRoleLocalService</value>
-		</property>
+	<bean id="com.liferay.portal.service.UserGroupRoleLocalService.velocity" class="org.springframework.aop.framework.ProxyFactoryBean" lazy-init="true">
 		<property name="interceptorNames">
 			<list>
-				<value>com.liferay.portal.spring.aop.ExceptionSafeInterceptor</value>
+				<value>velocityServiceInterceptor</value>
 			</list>
 		</property>
 		<property name="target">
@@ -3399,13 +3222,10 @@
 			</props>
 		</property>
 	</bean>
-	<bean id="com.liferay.portal.service.UserGroupRoleService.exceptionSafe" class="org.springframework.aop.framework.ProxyFactoryBean" lazy-init="true">
-		<property name="proxyInterfaces">
-			<value>com.liferay.portal.service.UserGroupRoleService</value>
-		</property>
+	<bean id="com.liferay.portal.service.UserGroupRoleService.velocity" class="org.springframework.aop.framework.ProxyFactoryBean" lazy-init="true">
 		<property name="interceptorNames">
 			<list>
-				<value>com.liferay.portal.spring.aop.ExceptionSafeInterceptor</value>
+				<value>velocityServiceInterceptor</value>
 			</list>
 		</property>
 		<property name="target">
@@ -3466,13 +3286,10 @@
 			</props>
 		</property>
 	</bean>
-	<bean id="com.liferay.portal.service.UserIdMapperLocalService.exceptionSafe" class="org.springframework.aop.framework.ProxyFactoryBean" lazy-init="true">
-		<property name="proxyInterfaces">
-			<value>com.liferay.portal.service.UserIdMapperLocalService</value>
-		</property>
+	<bean id="com.liferay.portal.service.UserIdMapperLocalService.velocity" class="org.springframework.aop.framework.ProxyFactoryBean" lazy-init="true">
 		<property name="interceptorNames">
 			<list>
-				<value>com.liferay.portal.spring.aop.ExceptionSafeInterceptor</value>
+				<value>velocityServiceInterceptor</value>
 			</list>
 		</property>
 		<property name="target">
@@ -3533,13 +3350,10 @@
 			</props>
 		</property>
 	</bean>
-	<bean id="com.liferay.portal.service.UserTrackerLocalService.exceptionSafe" class="org.springframework.aop.framework.ProxyFactoryBean" lazy-init="true">
-		<property name="proxyInterfaces">
-			<value>com.liferay.portal.service.UserTrackerLocalService</value>
-		</property>
+	<bean id="com.liferay.portal.service.UserTrackerLocalService.velocity" class="org.springframework.aop.framework.ProxyFactoryBean" lazy-init="true">
 		<property name="interceptorNames">
 			<list>
-				<value>com.liferay.portal.spring.aop.ExceptionSafeInterceptor</value>
+				<value>velocityServiceInterceptor</value>
 			</list>
 		</property>
 		<property name="target">
@@ -3600,13 +3414,10 @@
 			</props>
 		</property>
 	</bean>
-	<bean id="com.liferay.portal.service.UserTrackerPathLocalService.exceptionSafe" class="org.springframework.aop.framework.ProxyFactoryBean" lazy-init="true">
-		<property name="proxyInterfaces">
-			<value>com.liferay.portal.service.UserTrackerPathLocalService</value>
-		</property>
+	<bean id="com.liferay.portal.service.UserTrackerPathLocalService.velocity" class="org.springframework.aop.framework.ProxyFactoryBean" lazy-init="true">
 		<property name="interceptorNames">
 			<list>
-				<value>com.liferay.portal.spring.aop.ExceptionSafeInterceptor</value>
+				<value>velocityServiceInterceptor</value>
 			</list>
 		</property>
 		<property name="target">
@@ -3667,13 +3478,10 @@
 			</props>
 		</property>
 	</bean>
-	<bean id="com.liferay.portal.service.WebDAVPropsLocalService.exceptionSafe" class="org.springframework.aop.framework.ProxyFactoryBean" lazy-init="true">
-		<property name="proxyInterfaces">
-			<value>com.liferay.portal.service.WebDAVPropsLocalService</value>
-		</property>
+	<bean id="com.liferay.portal.service.WebDAVPropsLocalService.velocity" class="org.springframework.aop.framework.ProxyFactoryBean" lazy-init="true">
 		<property name="interceptorNames">
 			<list>
-				<value>com.liferay.portal.spring.aop.ExceptionSafeInterceptor</value>
+				<value>velocityServiceInterceptor</value>
 			</list>
 		</property>
 		<property name="target">
@@ -3734,13 +3542,10 @@
 			</props>
 		</property>
 	</bean>
-	<bean id="com.liferay.portal.service.WebsiteLocalService.exceptionSafe" class="org.springframework.aop.framework.ProxyFactoryBean" lazy-init="true">
-		<property name="proxyInterfaces">
-			<value>com.liferay.portal.service.WebsiteLocalService</value>
-		</property>
+	<bean id="com.liferay.portal.service.WebsiteLocalService.velocity" class="org.springframework.aop.framework.ProxyFactoryBean" lazy-init="true">
 		<property name="interceptorNames">
 			<list>
-				<value>com.liferay.portal.spring.aop.ExceptionSafeInterceptor</value>
+				<value>velocityServiceInterceptor</value>
 			</list>
 		</property>
 		<property name="target">
@@ -3772,13 +3577,10 @@
 			</props>
 		</property>
 	</bean>
-	<bean id="com.liferay.portal.service.WebsiteService.exceptionSafe" class="org.springframework.aop.framework.ProxyFactoryBean" lazy-init="true">
-		<property name="proxyInterfaces">
-			<value>com.liferay.portal.service.WebsiteService</value>
-		</property>
+	<bean id="com.liferay.portal.service.WebsiteService.velocity" class="org.springframework.aop.framework.ProxyFactoryBean" lazy-init="true">
 		<property name="interceptorNames">
 			<list>
-				<value>com.liferay.portal.spring.aop.ExceptionSafeInterceptor</value>
+				<value>velocityServiceInterceptor</value>
 			</list>
 		</property>
 		<property name="target">
@@ -3839,13 +3641,10 @@
 			</props>
 		</property>
 	</bean>
-	<bean id="com.liferay.portlet.announcements.service.AnnouncementsDeliveryLocalService.exceptionSafe" class="org.springframework.aop.framework.ProxyFactoryBean" lazy-init="true">
-		<property name="proxyInterfaces">
-			<value>com.liferay.portlet.announcements.service.AnnouncementsDeliveryLocalService</value>
-		</property>
+	<bean id="com.liferay.portlet.announcements.service.AnnouncementsDeliveryLocalService.velocity" class="org.springframework.aop.framework.ProxyFactoryBean" lazy-init="true">
 		<property name="interceptorNames">
 			<list>
-				<value>com.liferay.portal.spring.aop.ExceptionSafeInterceptor</value>
+				<value>velocityServiceInterceptor</value>
 			</list>
 		</property>
 		<property name="target">
@@ -3877,13 +3676,10 @@
 			</props>
 		</property>
 	</bean>
-	<bean id="com.liferay.portlet.announcements.service.AnnouncementsDeliveryService.exceptionSafe" class="org.springframework.aop.framework.ProxyFactoryBean" lazy-init="true">
-		<property name="proxyInterfaces">
-			<value>com.liferay.portlet.announcements.service.AnnouncementsDeliveryService</value>
-		</property>
+	<bean id="com.liferay.portlet.announcements.service.AnnouncementsDeliveryService.velocity" class="org.springframework.aop.framework.ProxyFactoryBean" lazy-init="true">
 		<property name="interceptorNames">
 			<list>
-				<value>com.liferay.portal.spring.aop.ExceptionSafeInterceptor</value>
+				<value>velocityServiceInterceptor</value>
 			</list>
 		</property>
 		<property name="target">
@@ -3944,13 +3740,10 @@
 			</props>
 		</property>
 	</bean>
-	<bean id="com.liferay.portlet.announcements.service.AnnouncementsEntryLocalService.exceptionSafe" class="org.springframework.aop.framework.ProxyFactoryBean" lazy-init="true">
-		<property name="proxyInterfaces">
-			<value>com.liferay.portlet.announcements.service.AnnouncementsEntryLocalService</value>
-		</property>
+	<bean id="com.liferay.portlet.announcements.service.AnnouncementsEntryLocalService.velocity" class="org.springframework.aop.framework.ProxyFactoryBean" lazy-init="true">
 		<property name="interceptorNames">
 			<list>
-				<value>com.liferay.portal.spring.aop.ExceptionSafeInterceptor</value>
+				<value>velocityServiceInterceptor</value>
 			</list>
 		</property>
 		<property name="target">
@@ -3982,13 +3775,10 @@
 			</props>
 		</property>
 	</bean>
-	<bean id="com.liferay.portlet.announcements.service.AnnouncementsEntryService.exceptionSafe" class="org.springframework.aop.framework.ProxyFactoryBean" lazy-init="true">
-		<property name="proxyInterfaces">
-			<value>com.liferay.portlet.announcements.service.AnnouncementsEntryService</value>
-		</property>
+	<bean id="com.liferay.portlet.announcements.service.AnnouncementsEntryService.velocity" class="org.springframework.aop.framework.ProxyFactoryBean" lazy-init="true">
 		<property name="interceptorNames">
 			<list>
-				<value>com.liferay.portal.spring.aop.ExceptionSafeInterceptor</value>
+				<value>velocityServiceInterceptor</value>
 			</list>
 		</property>
 		<property name="target">
@@ -4062,13 +3852,10 @@
 			</props>
 		</property>
 	</bean>
-	<bean id="com.liferay.portlet.announcements.service.AnnouncementsFlagLocalService.exceptionSafe" class="org.springframework.aop.framework.ProxyFactoryBean" lazy-init="true">
-		<property name="proxyInterfaces">
-			<value>com.liferay.portlet.announcements.service.AnnouncementsFlagLocalService</value>
-		</property>
+	<bean id="com.liferay.portlet.announcements.service.AnnouncementsFlagLocalService.velocity" class="org.springframework.aop.framework.ProxyFactoryBean" lazy-init="true">
 		<property name="interceptorNames">
 			<list>
-				<value>com.liferay.portal.spring.aop.ExceptionSafeInterceptor</value>
+				<value>velocityServiceInterceptor</value>
 			</list>
 		</property>
 		<property name="target">
@@ -4100,13 +3887,10 @@
 			</props>
 		</property>
 	</bean>
-	<bean id="com.liferay.portlet.announcements.service.AnnouncementsFlagService.exceptionSafe" class="org.springframework.aop.framework.ProxyFactoryBean" lazy-init="true">
-		<property name="proxyInterfaces">
-			<value>com.liferay.portlet.announcements.service.AnnouncementsFlagService</value>
-		</property>
+	<bean id="com.liferay.portlet.announcements.service.AnnouncementsFlagService.velocity" class="org.springframework.aop.framework.ProxyFactoryBean" lazy-init="true">
 		<property name="interceptorNames">
 			<list>
-				<value>com.liferay.portal.spring.aop.ExceptionSafeInterceptor</value>
+				<value>velocityServiceInterceptor</value>
 			</list>
 		</property>
 		<property name="target">
@@ -4167,13 +3951,10 @@
 			</props>
 		</property>
 	</bean>
-	<bean id="com.liferay.portlet.blogs.service.BlogsEntryLocalService.exceptionSafe" class="org.springframework.aop.framework.ProxyFactoryBean" lazy-init="true">
-		<property name="proxyInterfaces">
-			<value>com.liferay.portlet.blogs.service.BlogsEntryLocalService</value>
-		</property>
+	<bean id="com.liferay.portlet.blogs.service.BlogsEntryLocalService.velocity" class="org.springframework.aop.framework.ProxyFactoryBean" lazy-init="true">
 		<property name="interceptorNames">
 			<list>
-				<value>com.liferay.portal.spring.aop.ExceptionSafeInterceptor</value>
+				<value>velocityServiceInterceptor</value>
 			</list>
 		</property>
 		<property name="target">
@@ -4205,13 +3986,10 @@
 			</props>
 		</property>
 	</bean>
-	<bean id="com.liferay.portlet.blogs.service.BlogsEntryService.exceptionSafe" class="org.springframework.aop.framework.ProxyFactoryBean" lazy-init="true">
-		<property name="proxyInterfaces">
-			<value>com.liferay.portlet.blogs.service.BlogsEntryService</value>
-		</property>
+	<bean id="com.liferay.portlet.blogs.service.BlogsEntryService.velocity" class="org.springframework.aop.framework.ProxyFactoryBean" lazy-init="true">
 		<property name="interceptorNames">
 			<list>
-				<value>com.liferay.portal.spring.aop.ExceptionSafeInterceptor</value>
+				<value>velocityServiceInterceptor</value>
 			</list>
 		</property>
 		<property name="target">
@@ -4285,13 +4063,10 @@
 			</props>
 		</property>
 	</bean>
-	<bean id="com.liferay.portlet.blogs.service.BlogsStatsUserLocalService.exceptionSafe" class="org.springframework.aop.framework.ProxyFactoryBean" lazy-init="true">
-		<property name="proxyInterfaces">
-			<value>com.liferay.portlet.blogs.service.BlogsStatsUserLocalService</value>
-		</property>
+	<bean id="com.liferay.portlet.blogs.service.BlogsStatsUserLocalService.velocity" class="org.springframework.aop.framework.ProxyFactoryBean" lazy-init="true">
 		<property name="interceptorNames">
 			<list>
-				<value>com.liferay.portal.spring.aop.ExceptionSafeInterceptor</value>
+				<value>velocityServiceInterceptor</value>
 			</list>
 		</property>
 		<property name="target">
@@ -4365,13 +4140,10 @@
 			</props>
 		</property>
 	</bean>
-	<bean id="com.liferay.portlet.bookmarks.service.BookmarksEntryLocalService.exceptionSafe" class="org.springframework.aop.framework.ProxyFactoryBean" lazy-init="true">
-		<property name="proxyInterfaces">
-			<value>com.liferay.portlet.bookmarks.service.BookmarksEntryLocalService</value>
-		</property>
+	<bean id="com.liferay.portlet.bookmarks.service.BookmarksEntryLocalService.velocity" class="org.springframework.aop.framework.ProxyFactoryBean" lazy-init="true">
 		<property name="interceptorNames">
 			<list>
-				<value>com.liferay.portal.spring.aop.ExceptionSafeInterceptor</value>
+				<value>velocityServiceInterceptor</value>
 			</list>
 		</property>
 		<property name="target">
@@ -4403,13 +4175,10 @@
 			</props>
 		</property>
 	</bean>
-	<bean id="com.liferay.portlet.bookmarks.service.BookmarksEntryService.exceptionSafe" class="org.springframework.aop.framework.ProxyFactoryBean" lazy-init="true">
-		<property name="proxyInterfaces">
-			<value>com.liferay.portlet.bookmarks.service.BookmarksEntryService</value>
-		</property>
+	<bean id="com.liferay.portlet.bookmarks.service.BookmarksEntryService.velocity" class="org.springframework.aop.framework.ProxyFactoryBean" lazy-init="true">
 		<property name="interceptorNames">
 			<list>
-				<value>com.liferay.portal.spring.aop.ExceptionSafeInterceptor</value>
+				<value>velocityServiceInterceptor</value>
 			</list>
 		</property>
 		<property name="target">
@@ -4483,13 +4252,10 @@
 			</props>
 		</property>
 	</bean>
-	<bean id="com.liferay.portlet.bookmarks.service.BookmarksFolderLocalService.exceptionSafe" class="org.springframework.aop.framework.ProxyFactoryBean" lazy-init="true">
-		<property name="proxyInterfaces">
-			<value>com.liferay.portlet.bookmarks.service.BookmarksFolderLocalService</value>
-		</property>
+	<bean id="com.liferay.portlet.bookmarks.service.BookmarksFolderLocalService.velocity" class="org.springframework.aop.framework.ProxyFactoryBean" lazy-init="true">
 		<property name="interceptorNames">
 			<list>
-				<value>com.liferay.portal.spring.aop.ExceptionSafeInterceptor</value>
+				<value>velocityServiceInterceptor</value>
 			</list>
 		</property>
 		<property name="target">
@@ -4521,13 +4287,10 @@
 			</props>
 		</property>
 	</bean>
-	<bean id="com.liferay.portlet.bookmarks.service.BookmarksFolderService.exceptionSafe" class="org.springframework.aop.framework.ProxyFactoryBean" lazy-init="true">
-		<property name="proxyInterfaces">
-			<value>com.liferay.portlet.bookmarks.service.BookmarksFolderService</value>
-		</property>
+	<bean id="com.liferay.portlet.bookmarks.service.BookmarksFolderService.velocity" class="org.springframework.aop.framework.ProxyFactoryBean" lazy-init="true">
 		<property name="interceptorNames">
 			<list>
-				<value>com.liferay.portal.spring.aop.ExceptionSafeInterceptor</value>
+				<value>velocityServiceInterceptor</value>
 			</list>
 		</property>
 		<property name="target">
@@ -4588,13 +4351,10 @@
 			</props>
 		</property>
 	</bean>
-	<bean id="com.liferay.portlet.calendar.service.CalEventLocalService.exceptionSafe" class="org.springframework.aop.framework.ProxyFactoryBean" lazy-init="true">
-		<property name="proxyInterfaces">
-			<value>com.liferay.portlet.calendar.service.CalEventLocalService</value>
-		</property>
+	<bean id="com.liferay.portlet.calendar.service.CalEventLocalService.velocity" class="org.springframework.aop.framework.ProxyFactoryBean" lazy-init="true">
 		<property name="interceptorNames">
 			<list>
-				<value>com.liferay.portal.spring.aop.ExceptionSafeInterceptor</value>
+				<value>velocityServiceInterceptor</value>
 			</list>
 		</property>
 		<property name="target">
@@ -4626,13 +4386,10 @@
 			</props>
 		</property>
 	</bean>
-	<bean id="com.liferay.portlet.calendar.service.CalEventService.exceptionSafe" class="org.springframework.aop.framework.ProxyFactoryBean" lazy-init="true">
-		<property name="proxyInterfaces">
-			<value>com.liferay.portlet.calendar.service.CalEventService</value>
-		</property>
+	<bean id="com.liferay.portlet.calendar.service.CalEventService.velocity" class="org.springframework.aop.framework.ProxyFactoryBean" lazy-init="true">
 		<property name="interceptorNames">
 			<list>
-				<value>com.liferay.portal.spring.aop.ExceptionSafeInterceptor</value>
+				<value>velocityServiceInterceptor</value>
 			</list>
 		</property>
 		<property name="target">
@@ -4706,13 +4463,10 @@
 			</props>
 		</property>
 	</bean>
-	<bean id="com.liferay.portlet.documentlibrary.service.DLFileEntryLocalService.exceptionSafe" class="org.springframework.aop.framework.ProxyFactoryBean" lazy-init="true">
-		<property name="proxyInterfaces">
-			<value>com.liferay.portlet.documentlibrary.service.DLFileEntryLocalService</value>
-		</property>
+	<bean id="com.liferay.portlet.documentlibrary.service.DLFileEntryLocalService.velocity" class="org.springframework.aop.framework.ProxyFactoryBean" lazy-init="true">
 		<property name="interceptorNames">
 			<list>
-				<value>com.liferay.portal.spring.aop.ExceptionSafeInterceptor</value>
+				<value>velocityServiceInterceptor</value>
 			</list>
 		</property>
 		<property name="target">
@@ -4744,13 +4498,10 @@
 			</props>
 		</property>
 	</bean>
-	<bean id="com.liferay.portlet.documentlibrary.service.DLFileEntryService.exceptionSafe" class="org.springframework.aop.framework.ProxyFactoryBean" lazy-init="true">
-		<property name="proxyInterfaces">
-			<value>com.liferay.portlet.documentlibrary.service.DLFileEntryService</value>
-		</property>
+	<bean id="com.liferay.portlet.documentlibrary.service.DLFileEntryService.velocity" class="org.springframework.aop.framework.ProxyFactoryBean" lazy-init="true">
 		<property name="interceptorNames">
 			<list>
-				<value>com.liferay.portal.spring.aop.ExceptionSafeInterceptor</value>
+				<value>velocityServiceInterceptor</value>
 			</list>
 		</property>
 		<property name="target">
@@ -4837,13 +4588,10 @@
 			</props>
 		</property>
 	</bean>
-	<bean id="com.liferay.portlet.documentlibrary.service.DLFileRankLocalService.exceptionSafe" class="org.springframework.aop.framework.ProxyFactoryBean" lazy-init="true">
-		<property name="proxyInterfaces">
-			<value>com.liferay.portlet.documentlibrary.service.DLFileRankLocalService</value>
-		</property>
+	<bean id="com.liferay.portlet.documentlibrary.service.DLFileRankLocalService.velocity" class="org.springframework.aop.framework.ProxyFactoryBean" lazy-init="true">
 		<property name="interceptorNames">
 			<list>
-				<value>com.liferay.portal.spring.aop.ExceptionSafeInterceptor</value>
+				<value>velocityServiceInterceptor</value>
 			</list>
 		</property>
 		<property name="target">
@@ -4917,13 +4665,10 @@
 			</props>
 		</property>
 	</bean>
-	<bean id="com.liferay.portlet.documentlibrary.service.DLFileShortcutLocalService.exceptionSafe" class="org.springframework.aop.framework.ProxyFactoryBean" lazy-init="true">
-		<property name="proxyInterfaces">
-			<value>com.liferay.portlet.documentlibrary.service.DLFileShortcutLocalService</value>
-		</property>
+	<bean id="com.liferay.portlet.documentlibrary.service.DLFileShortcutLocalService.velocity" class="org.springframework.aop.framework.ProxyFactoryBean" lazy-init="true">
 		<property name="interceptorNames">
 			<list>
-				<value>com.liferay.portal.spring.aop.ExceptionSafeInterceptor</value>
+				<value>velocityServiceInterceptor</value>
 			</list>
 		</property>
 		<property name="target">
@@ -4955,13 +4700,10 @@
 			</props>
 		</property>
 	</bean>
-	<bean id="com.liferay.portlet.documentlibrary.service.DLFileShortcutService.exceptionSafe" class="org.springframework.aop.framework.ProxyFactoryBean" lazy-init="true">
-		<property name="proxyInterfaces">
-			<value>com.liferay.portlet.documentlibrary.service.DLFileShortcutService</value>
-		</property>
+	<bean id="com.liferay.portlet.documentlibrary.service.DLFileShortcutService.velocity" class="org.springframework.aop.framework.ProxyFactoryBean" lazy-init="true">
 		<property name="interceptorNames">
 			<list>
-				<value>com.liferay.portal.spring.aop.ExceptionSafeInterceptor</value>
+				<value>velocityServiceInterceptor</value>
 			</list>
 		</property>
 		<property name="target">
@@ -5035,13 +4777,10 @@
 			</props>
 		</property>
 	</bean>
-	<bean id="com.liferay.portlet.documentlibrary.service.DLFileVersionLocalService.exceptionSafe" class="org.springframework.aop.framework.ProxyFactoryBean" lazy-init="true">
-		<property name="proxyInterfaces">
-			<value>com.liferay.portlet.documentlibrary.service.DLFileVersionLocalService</value>
-		</property>
+	<bean id="com.liferay.portlet.documentlibrary.service.DLFileVersionLocalService.velocity" class="org.springframework.aop.framework.ProxyFactoryBean" lazy-init="true">
 		<property name="interceptorNames">
 			<list>
-				<value>com.liferay.portal.spring.aop.ExceptionSafeInterceptor</value>
+				<value>velocityServiceInterceptor</value>
 			</list>
 		</property>
 		<property name="target">
@@ -5102,13 +4841,10 @@
 			</props>
 		</property>
 	</bean>
-	<bean id="com.liferay.portlet.documentlibrary.service.DLFolderLocalService.exceptionSafe" class="org.springframework.aop.framework.ProxyFactoryBean" lazy-init="true">
-		<property name="proxyInterfaces">
-			<value>com.liferay.portlet.documentlibrary.service.DLFolderLocalService</value>
-		</property>
+	<bean id="com.liferay.portlet.documentlibrary.service.DLFolderLocalService.velocity" class="org.springframework.aop.framework.ProxyFactoryBean" lazy-init="true">
 		<property name="interceptorNames">
 			<list>
-				<value>com.liferay.portal.spring.aop.ExceptionSafeInterceptor</value>
+				<value>velocityServiceInterceptor</value>
 			</list>
 		</property>
 		<property name="target">
@@ -5140,13 +4876,10 @@
 			</props>
 		</property>
 	</bean>
-	<bean id="com.liferay.portlet.documentlibrary.service.DLFolderService.exceptionSafe" class="org.springframework.aop.framework.ProxyFactoryBean" lazy-init="true">
-		<property name="proxyInterfaces">
-			<value>com.liferay.portlet.documentlibrary.service.DLFolderService</value>
-		</property>
+	<bean id="com.liferay.portlet.documentlibrary.service.DLFolderService.velocity" class="org.springframework.aop.framework.ProxyFactoryBean" lazy-init="true">
 		<property name="interceptorNames">
 			<list>
-				<value>com.liferay.portal.spring.aop.ExceptionSafeInterceptor</value>
+				<value>velocityServiceInterceptor</value>
 			</list>
 		</property>
 		<property name="target">
@@ -5207,13 +4940,10 @@
 			</props>
 		</property>
 	</bean>
-	<bean id="com.liferay.portlet.expando.service.ExpandoColumnLocalService.exceptionSafe" class="org.springframework.aop.framework.ProxyFactoryBean" lazy-init="true">
-		<property name="proxyInterfaces">
-			<value>com.liferay.portlet.expando.service.ExpandoColumnLocalService</value>
-		</property>
+	<bean id="com.liferay.portlet.expando.service.ExpandoColumnLocalService.velocity" class="org.springframework.aop.framework.ProxyFactoryBean" lazy-init="true">
 		<property name="interceptorNames">
 			<list>
-				<value>com.liferay.portal.spring.aop.ExceptionSafeInterceptor</value>
+				<value>velocityServiceInterceptor</value>
 			</list>
 		</property>
 		<property name="target">
@@ -5287,13 +5017,10 @@
 			</props>
 		</property>
 	</bean>
-	<bean id="com.liferay.portlet.expando.service.ExpandoRowLocalService.exceptionSafe" class="org.springframework.aop.framework.ProxyFactoryBean" lazy-init="true">
-		<property name="proxyInterfaces">
-			<value>com.liferay.portlet.expando.service.ExpandoRowLocalService</value>
-		</property>
+	<bean id="com.liferay.portlet.expando.service.ExpandoRowLocalService.velocity" class="org.springframework.aop.framework.ProxyFactoryBean" lazy-init="true">
 		<property name="interceptorNames">
 			<list>
-				<value>com.liferay.portal.spring.aop.ExceptionSafeInterceptor</value>
+				<value>velocityServiceInterceptor</value>
 			</list>
 		</property>
 		<property name="target">
@@ -5367,13 +5094,10 @@
 			</props>
 		</property>
 	</bean>
-	<bean id="com.liferay.portlet.expando.service.ExpandoTableLocalService.exceptionSafe" class="org.springframework.aop.framework.ProxyFactoryBean" lazy-init="true">
-		<property name="proxyInterfaces">
-			<value>com.liferay.portlet.expando.service.ExpandoTableLocalService</value>
-		</property>
+	<bean id="com.liferay.portlet.expando.service.ExpandoTableLocalService.velocity" class="org.springframework.aop.framework.ProxyFactoryBean" lazy-init="true">
 		<property name="interceptorNames">
 			<list>
-				<value>com.liferay.portal.spring.aop.ExceptionSafeInterceptor</value>
+				<value>velocityServiceInterceptor</value>
 			</list>
 		</property>
 		<property name="target">
@@ -5434,13 +5158,10 @@
 			</props>
 		</property>
 	</bean>
-	<bean id="com.liferay.portlet.expando.service.ExpandoValueLocalService.exceptionSafe" class="org.springframework.aop.framework.ProxyFactoryBean" lazy-init="true">
-		<property name="proxyInterfaces">
-			<value>com.liferay.portlet.expando.service.ExpandoValueLocalService</value>
-		</property>
+	<bean id="com.liferay.portlet.expando.service.ExpandoValueLocalService.velocity" class="org.springframework.aop.framework.ProxyFactoryBean" lazy-init="true">
 		<property name="interceptorNames">
 			<list>
-				<value>com.liferay.portal.spring.aop.ExceptionSafeInterceptor</value>
+				<value>velocityServiceInterceptor</value>
 			</list>
 		</property>
 		<property name="target">
@@ -5514,13 +5235,10 @@
 			</props>
 		</property>
 	</bean>
-	<bean id="com.liferay.portlet.imagegallery.service.IGFolderLocalService.exceptionSafe" class="org.springframework.aop.framework.ProxyFactoryBean" lazy-init="true">
-		<property name="proxyInterfaces">
-			<value>com.liferay.portlet.imagegallery.service.IGFolderLocalService</value>
-		</property>
+	<bean id="com.liferay.portlet.imagegallery.service.IGFolderLocalService.velocity" class="org.springframework.aop.framework.ProxyFactoryBean" lazy-init="true">
 		<property name="interceptorNames">
 			<list>
-				<value>com.liferay.portal.spring.aop.ExceptionSafeInterceptor</value>
+				<value>velocityServiceInterceptor</value>
 			</list>
 		</property>
 		<property name="target">
@@ -5552,13 +5270,10 @@
 			</props>
 		</property>
 	</bean>
-	<bean id="com.liferay.portlet.imagegallery.service.IGFolderService.exceptionSafe" class="org.springframework.aop.framework.ProxyFactoryBean" lazy-init="true">
-		<property name="proxyInterfaces">
-			<value>com.liferay.portlet.imagegallery.service.IGFolderService</value>
-		</property>
+	<bean id="com.liferay.portlet.imagegallery.service.IGFolderService.velocity" class="org.springframework.aop.framework.ProxyFactoryBean" lazy-init="true">
 		<property name="interceptorNames">
 			<list>
-				<value>com.liferay.portal.spring.aop.ExceptionSafeInterceptor</value>
+				<value>velocityServiceInterceptor</value>
 			</list>
 		</property>
 		<property name="target">
@@ -5619,13 +5334,10 @@
 			</props>
 		</property>
 	</bean>
-	<bean id="com.liferay.portlet.imagegallery.service.IGImageLocalService.exceptionSafe" class="org.springframework.aop.framework.ProxyFactoryBean" lazy-init="true">
-		<property name="proxyInterfaces">
-			<value>com.liferay.portlet.imagegallery.service.IGImageLocalService</value>
-		</property>
+	<bean id="com.liferay.portlet.imagegallery.service.IGImageLocalService.velocity" class="org.springframework.aop.framework.ProxyFactoryBean" lazy-init="true">
 		<property name="interceptorNames">
 			<list>
-				<value>com.liferay.portal.spring.aop.ExceptionSafeInterceptor</value>
+				<value>velocityServiceInterceptor</value>
 			</list>
 		</property>
 		<property name="target">
@@ -5657,13 +5369,10 @@
 			</props>
 		</property>
 	</bean>
-	<bean id="com.liferay.portlet.imagegallery.service.IGImageService.exceptionSafe" class="org.springframework.aop.framework.ProxyFactoryBean" lazy-init="true">
-		<property name="proxyInterfaces">
-			<value>com.liferay.portlet.imagegallery.service.IGImageService</value>
-		</property>
+	<bean id="com.liferay.portlet.imagegallery.service.IGImageService.velocity" class="org.springframework.aop.framework.ProxyFactoryBean" lazy-init="true">
 		<property name="interceptorNames">
 			<list>
-				<value>com.liferay.portal.spring.aop.ExceptionSafeInterceptor</value>
+				<value>velocityServiceInterceptor</value>
 			</list>
 		</property>
 		<property name="target">
@@ -5737,13 +5446,10 @@
 			</props>
 		</property>
 	</bean>
-	<bean id="com.liferay.portlet.journal.service.JournalArticleLocalService.exceptionSafe" class="org.springframework.aop.framework.ProxyFactoryBean" lazy-init="true">
-		<property name="proxyInterfaces">
-			<value>com.liferay.portlet.journal.service.JournalArticleLocalService</value>
-		</property>
+	<bean id="com.liferay.portlet.journal.service.JournalArticleLocalService.velocity" class="org.springframework.aop.framework.ProxyFactoryBean" lazy-init="true">
 		<property name="interceptorNames">
 			<list>
-				<value>com.liferay.portal.spring.aop.ExceptionSafeInterceptor</value>
+				<value>velocityServiceInterceptor</value>
 			</list>
 		</property>
 		<property name="target">
@@ -5775,13 +5481,10 @@
 			</props>
 		</property>
 	</bean>
-	<bean id="com.liferay.portlet.journal.service.JournalArticleService.exceptionSafe" class="org.springframework.aop.framework.ProxyFactoryBean" lazy-init="true">
-		<property name="proxyInterfaces">
-			<value>com.liferay.portlet.journal.service.JournalArticleService</value>
-		</property>
+	<bean id="com.liferay.portlet.journal.service.JournalArticleService.velocity" class="org.springframework.aop.framework.ProxyFactoryBean" lazy-init="true">
 		<property name="interceptorNames">
 			<list>
-				<value>com.liferay.portal.spring.aop.ExceptionSafeInterceptor</value>
+				<value>velocityServiceInterceptor</value>
 			</list>
 		</property>
 		<property name="target">
@@ -5855,13 +5558,10 @@
 			</props>
 		</property>
 	</bean>
-	<bean id="com.liferay.portlet.journal.service.JournalArticleImageLocalService.exceptionSafe" class="org.springframework.aop.framework.ProxyFactoryBean" lazy-init="true">
-		<property name="proxyInterfaces">
-			<value>com.liferay.portlet.journal.service.JournalArticleImageLocalService</value>
-		</property>
+	<bean id="com.liferay.portlet.journal.service.JournalArticleImageLocalService.velocity" class="org.springframework.aop.framework.ProxyFactoryBean" lazy-init="true">
 		<property name="interceptorNames">
 			<list>
-				<value>com.liferay.portal.spring.aop.ExceptionSafeInterceptor</value>
+				<value>velocityServiceInterceptor</value>
 			</list>
 		</property>
 		<property name="target">
@@ -5922,13 +5622,10 @@
 			</props>
 		</property>
 	</bean>
-	<bean id="com.liferay.portlet.journal.service.JournalArticleResourceLocalService.exceptionSafe" class="org.springframework.aop.framework.ProxyFactoryBean" lazy-init="true">
-		<property name="proxyInterfaces">
-			<value>com.liferay.portlet.journal.service.JournalArticleResourceLocalService</value>
-		</property>
+	<bean id="com.liferay.portlet.journal.service.JournalArticleResourceLocalService.velocity" class="org.springframework.aop.framework.ProxyFactoryBean" lazy-init="true">
 		<property name="interceptorNames">
 			<list>
-				<value>com.liferay.portal.spring.aop.ExceptionSafeInterceptor</value>
+				<value>velocityServiceInterceptor</value>
 			</list>
 		</property>
 		<property name="target">
@@ -5989,13 +5686,10 @@
 			</props>
 		</property>
 	</bean>
-	<bean id="com.liferay.portlet.journal.service.JournalContentSearchLocalService.exceptionSafe" class="org.springframework.aop.framework.ProxyFactoryBean" lazy-init="true">
-		<property name="proxyInterfaces">
-			<value>com.liferay.portlet.journal.service.JournalContentSearchLocalService</value>
-		</property>
+	<bean id="com.liferay.portlet.journal.service.JournalContentSearchLocalService.velocity" class="org.springframework.aop.framework.ProxyFactoryBean" lazy-init="true">
 		<property name="interceptorNames">
 			<list>
-				<value>com.liferay.portal.spring.aop.ExceptionSafeInterceptor</value>
+				<value>velocityServiceInterceptor</value>
 			</list>
 		</property>
 		<property name="target">
@@ -6056,13 +5750,10 @@
 			</props>
 		</property>
 	</bean>
-	<bean id="com.liferay.portlet.journal.service.JournalFeedLocalService.exceptionSafe" class="org.springframework.aop.framework.ProxyFactoryBean" lazy-init="true">
-		<property name="proxyInterfaces">
-			<value>com.liferay.portlet.journal.service.JournalFeedLocalService</value>
-		</property>
+	<bean id="com.liferay.portlet.journal.service.JournalFeedLocalService.velocity" class="org.springframework.aop.framework.ProxyFactoryBean" lazy-init="true">
 		<property name="interceptorNames">
 			<list>
-				<value>com.liferay.portal.spring.aop.ExceptionSafeInterceptor</value>
+				<value>velocityServiceInterceptor</value>
 			</list>
 		</property>
 		<property name="target">
@@ -6094,13 +5785,10 @@
 			</props>
 		</property>
 	</bean>
-	<bean id="com.liferay.portlet.journal.service.JournalFeedService.exceptionSafe" class="org.springframework.aop.framework.ProxyFactoryBean" lazy-init="true">
-		<property name="proxyInterfaces">
-			<value>com.liferay.portlet.journal.service.JournalFeedService</value>
-		</property>
+	<bean id="com.liferay.portlet.journal.service.JournalFeedService.velocity" class="org.springframework.aop.framework.ProxyFactoryBean" lazy-init="true">
 		<property name="interceptorNames">
 			<list>
-				<value>com.liferay.portal.spring.aop.ExceptionSafeInterceptor</value>
+				<value>velocityServiceInterceptor</value>
 			</list>
 		</property>
 		<property name="target">
@@ -6174,13 +5862,10 @@
 			</props>
 		</property>
 	</bean>
-	<bean id="com.liferay.portlet.journal.service.JournalStructureLocalService.exceptionSafe" class="org.springframework.aop.framework.ProxyFactoryBean" lazy-init="true">
-		<property name="proxyInterfaces">
-			<value>com.liferay.portlet.journal.service.JournalStructureLocalService</value>
-		</property>
+	<bean id="com.liferay.portlet.journal.service.JournalStructureLocalService.velocity" class="org.springframework.aop.framework.ProxyFactoryBean" lazy-init="true">
 		<property name="interceptorNames">
 			<list>
-				<value>com.liferay.portal.spring.aop.ExceptionSafeInterceptor</value>
+				<value>velocityServiceInterceptor</value>
 			</list>
 		</property>
 		<property name="target">
@@ -6212,13 +5897,10 @@
 			</props>
 		</property>
 	</bean>
-	<bean id="com.liferay.portlet.journal.service.JournalStructureService.exceptionSafe" class="org.springframework.aop.framework.ProxyFactoryBean" lazy-init="true">
-		<property name="proxyInterfaces">
-			<value>com.liferay.portlet.journal.service.JournalStructureService</value>
-		</property>
+	<bean id="com.liferay.portlet.journal.service.JournalStructureService.velocity" class="org.springframework.aop.framework.ProxyFactoryBean" lazy-init="true">
 		<property name="interceptorNames">
 			<list>
-				<value>com.liferay.portal.spring.aop.ExceptionSafeInterceptor</value>
+				<value>velocityServiceInterceptor</value>
 			</list>
 		</property>
 		<property name="target">
@@ -6292,13 +5974,10 @@
 			</props>
 		</property>
 	</bean>
-	<bean id="com.liferay.portlet.journal.service.JournalTemplateLocalService.exceptionSafe" class="org.springframework.aop.framework.ProxyFactoryBean" lazy-init="true">
-		<property name="proxyInterfaces">
-			<value>com.liferay.portlet.journal.service.JournalTemplateLocalService</value>
-		</property>
+	<bean id="com.liferay.portlet.journal.service.JournalTemplateLocalService.velocity" class="org.springframework.aop.framework.ProxyFactoryBean" lazy-init="true">
 		<property name="interceptorNames">
 			<list>
-				<value>com.liferay.portal.spring.aop.ExceptionSafeInterceptor</value>
+				<value>velocityServiceInterceptor</value>
 			</list>
 		</property>
 		<property name="target">
@@ -6330,13 +6009,10 @@
 			</props>
 		</property>
 	</bean>
-	<bean id="com.liferay.portlet.journal.service.JournalTemplateService.exceptionSafe" class="org.springframework.aop.framework.ProxyFactoryBean" lazy-init="true">
-		<property name="proxyInterfaces">
-			<value>com.liferay.portlet.journal.service.JournalTemplateService</value>
-		</property>
+	<bean id="com.liferay.portlet.journal.service.JournalTemplateService.velocity" class="org.springframework.aop.framework.ProxyFactoryBean" lazy-init="true">
 		<property name="interceptorNames">
 			<list>
-				<value>com.liferay.portal.spring.aop.ExceptionSafeInterceptor</value>
+				<value>velocityServiceInterceptor</value>
 			</list>
 		</property>
 		<property name="target">
@@ -6410,13 +6086,10 @@
 			</props>
 		</property>
 	</bean>
-	<bean id="com.liferay.portlet.messageboards.service.MBBanLocalService.exceptionSafe" class="org.springframework.aop.framework.ProxyFactoryBean" lazy-init="true">
-		<property name="proxyInterfaces">
-			<value>com.liferay.portlet.messageboards.service.MBBanLocalService</value>
-		</property>
+	<bean id="com.liferay.portlet.messageboards.service.MBBanLocalService.velocity" class="org.springframework.aop.framework.ProxyFactoryBean" lazy-init="true">
 		<property name="interceptorNames">
 			<list>
-				<value>com.liferay.portal.spring.aop.ExceptionSafeInterceptor</value>
+				<value>velocityServiceInterceptor</value>
 			</list>
 		</property>
 		<property name="target">
@@ -6448,13 +6121,10 @@
 			</props>
 		</property>
 	</bean>
-	<bean id="com.liferay.portlet.messageboards.service.MBBanService.exceptionSafe" class="org.springframework.aop.framework.ProxyFactoryBean" lazy-init="true">
-		<property name="proxyInterfaces">
-			<value>com.liferay.portlet.messageboards.service.MBBanService</value>
-		</property>
+	<bean id="com.liferay.portlet.messageboards.service.MBBanService.velocity" class="org.springframework.aop.framework.ProxyFactoryBean" lazy-init="true">
 		<property name="interceptorNames">
 			<list>
-				<value>com.liferay.portal.spring.aop.ExceptionSafeInterceptor</value>
+				<value>velocityServiceInterceptor</value>
 			</list>
 		</property>
 		<property name="target">
@@ -6515,13 +6185,10 @@
 			</props>
 		</property>
 	</bean>
-	<bean id="com.liferay.portlet.messageboards.service.MBCategoryLocalService.exceptionSafe" class="org.springframework.aop.framework.ProxyFactoryBean" lazy-init="true">
-		<property name="proxyInterfaces">
-			<value>com.liferay.portlet.messageboards.service.MBCategoryLocalService</value>
-		</property>
+	<bean id="com.liferay.portlet.messageboards.service.MBCategoryLocalService.velocity" class="org.springframework.aop.framework.ProxyFactoryBean" lazy-init="true">
 		<property name="interceptorNames">
 			<list>
-				<value>com.liferay.portal.spring.aop.ExceptionSafeInterceptor</value>
+				<value>velocityServiceInterceptor</value>
 			</list>
 		</property>
 		<property name="target">
@@ -6553,13 +6220,10 @@
 			</props>
 		</property>
 	</bean>
-	<bean id="com.liferay.portlet.messageboards.service.MBCategoryService.exceptionSafe" class="org.springframework.aop.framework.ProxyFactoryBean" lazy-init="true">
-		<property name="proxyInterfaces">
-			<value>com.liferay.portlet.messageboards.service.MBCategoryService</value>
-		</property>
+	<bean id="com.liferay.portlet.messageboards.service.MBCategoryService.velocity" class="org.springframework.aop.framework.ProxyFactoryBean" lazy-init="true">
 		<property name="interceptorNames">
 			<list>
-				<value>com.liferay.portal.spring.aop.ExceptionSafeInterceptor</value>
+				<value>velocityServiceInterceptor</value>
 			</list>
 		</property>
 		<property name="target">
@@ -6662,13 +6326,10 @@
 			</props>
 		</property>
 	</bean>
-	<bean id="com.liferay.portlet.messageboards.service.MBMessageLocalService.exceptionSafe" class="org.springframework.aop.framework.ProxyFactoryBean" lazy-init="true">
-		<property name="proxyInterfaces">
-			<value>com.liferay.portlet.messageboards.service.MBMessageLocalService</value>
-		</property>
+	<bean id="com.liferay.portlet.messageboards.service.MBMessageLocalService.velocity" class="org.springframework.aop.framework.ProxyFactoryBean" lazy-init="true">
 		<property name="interceptorNames">
 			<list>
-				<value>com.liferay.portal.spring.aop.ExceptionSafeInterceptor</value>
+				<value>velocityServiceInterceptor</value>
 			</list>
 		</property>
 		<property name="target">
@@ -6700,13 +6361,10 @@
 			</props>
 		</property>
 	</bean>
-	<bean id="com.liferay.portlet.messageboards.service.MBMessageService.exceptionSafe" class="org.springframework.aop.framework.ProxyFactoryBean" lazy-init="true">
-		<property name="proxyInterfaces">
-			<value>com.liferay.portlet.messageboards.service.MBMessageService</value>
-		</property>
+	<bean id="com.liferay.portlet.messageboards.service.MBMessageService.velocity" class="org.springframework.aop.framework.ProxyFactoryBean" lazy-init="true">
 		<property name="interceptorNames">
 			<list>
-				<value>com.liferay.portal.spring.aop.ExceptionSafeInterceptor</value>
+				<value>velocityServiceInterceptor</value>
 			</list>
 		</property>
 		<property name="target">
@@ -6780,13 +6438,10 @@
 			</props>
 		</property>
 	</bean>
-	<bean id="com.liferay.portlet.messageboards.service.MBMessageFlagLocalService.exceptionSafe" class="org.springframework.aop.framework.ProxyFactoryBean" lazy-init="true">
-		<property name="proxyInterfaces">
-			<value>com.liferay.portlet.messageboards.service.MBMessageFlagLocalService</value>
-		</property>
+	<bean id="com.liferay.portlet.messageboards.service.MBMessageFlagLocalService.velocity" class="org.springframework.aop.framework.ProxyFactoryBean" lazy-init="true">
 		<property name="interceptorNames">
 			<list>
-				<value>com.liferay.portal.spring.aop.ExceptionSafeInterceptor</value>
+				<value>velocityServiceInterceptor</value>
 			</list>
 		</property>
 		<property name="target">
@@ -6860,13 +6515,10 @@
 			</props>
 		</property>
 	</bean>
-	<bean id="com.liferay.portlet.messageboards.service.MBStatsUserLocalService.exceptionSafe" class="org.springframework.aop.framework.ProxyFactoryBean" lazy-init="true">
-		<property name="proxyInterfaces">
-			<value>com.liferay.portlet.messageboards.service.MBStatsUserLocalService</value>
-		</property>
+	<bean id="com.liferay.portlet.messageboards.service.MBStatsUserLocalService.velocity" class="org.springframework.aop.framework.ProxyFactoryBean" lazy-init="true">
 		<property name="interceptorNames">
 			<list>
-				<value>com.liferay.portal.spring.aop.ExceptionSafeInterceptor</value>
+				<value>velocityServiceInterceptor</value>
 			</list>
 		</property>
 		<property name="target">
@@ -6927,13 +6579,10 @@
 			</props>
 		</property>
 	</bean>
-	<bean id="com.liferay.portlet.messageboards.service.MBThreadLocalService.exceptionSafe" class="org.springframework.aop.framework.ProxyFactoryBean" lazy-init="true">
-		<property name="proxyInterfaces">
-			<value>com.liferay.portlet.messageboards.service.MBThreadLocalService</value>
-		</property>
+	<bean id="com.liferay.portlet.messageboards.service.MBThreadLocalService.velocity" class="org.springframework.aop.framework.ProxyFactoryBean" lazy-init="true">
 		<property name="interceptorNames">
 			<list>
-				<value>com.liferay.portal.spring.aop.ExceptionSafeInterceptor</value>
+				<value>velocityServiceInterceptor</value>
 			</list>
 		</property>
 		<property name="target">
@@ -6965,13 +6614,10 @@
 			</props>
 		</property>
 	</bean>
-	<bean id="com.liferay.portlet.messageboards.service.MBThreadService.exceptionSafe" class="org.springframework.aop.framework.ProxyFactoryBean" lazy-init="true">
-		<property name="proxyInterfaces">
-			<value>com.liferay.portlet.messageboards.service.MBThreadService</value>
-		</property>
+	<bean id="com.liferay.portlet.messageboards.service.MBThreadService.velocity" class="org.springframework.aop.framework.ProxyFactoryBean" lazy-init="true">
 		<property name="interceptorNames">
 			<list>
-				<value>com.liferay.portal.spring.aop.ExceptionSafeInterceptor</value>
+				<value>velocityServiceInterceptor</value>
 			</list>
 		</property>
 		<property name="target">
@@ -7045,13 +6691,10 @@
 			</props>
 		</property>
 	</bean>
-	<bean id="com.liferay.portlet.polls.service.PollsChoiceLocalService.exceptionSafe" class="org.springframework.aop.framework.ProxyFactoryBean" lazy-init="true">
-		<property name="proxyInterfaces">
-			<value>com.liferay.portlet.polls.service.PollsChoiceLocalService</value>
-		</property>
+	<bean id="com.liferay.portlet.polls.service.PollsChoiceLocalService.velocity" class="org.springframework.aop.framework.ProxyFactoryBean" lazy-init="true">
 		<property name="interceptorNames">
 			<list>
-				<value>com.liferay.portal.spring.aop.ExceptionSafeInterceptor</value>
+				<value>velocityServiceInterceptor</value>
 			</list>
 		</property>
 		<property name="target">
@@ -7125,13 +6768,10 @@
 			</props>
 		</property>
 	</bean>
-	<bean id="com.liferay.portlet.polls.service.PollsQuestionLocalService.exceptionSafe" class="org.springframework.aop.framework.ProxyFactoryBean" lazy-init="true">
-		<property name="proxyInterfaces">
-			<value>com.liferay.portlet.polls.service.PollsQuestionLocalService</value>
-		</property>
+	<bean id="com.liferay.portlet.polls.service.PollsQuestionLocalService.velocity" class="org.springframework.aop.framework.ProxyFactoryBean" lazy-init="true">
 		<property name="interceptorNames">
 			<list>
-				<value>com.liferay.portal.spring.aop.ExceptionSafeInterceptor</value>
+				<value>velocityServiceInterceptor</value>
 			</list>
 		</property>
 		<property name="target">
@@ -7163,13 +6803,10 @@
 			</props>
 		</property>
 	</bean>
-	<bean id="com.liferay.portlet.polls.service.PollsQuestionService.exceptionSafe" class="org.springframework.aop.framework.ProxyFactoryBean" lazy-init="true">
-		<property name="proxyInterfaces">
-			<value>com.liferay.portlet.polls.service.PollsQuestionService</value>
-		</property>
+	<bean id="com.liferay.portlet.polls.service.PollsQuestionService.velocity" class="org.springframework.aop.framework.ProxyFactoryBean" lazy-init="true">
 		<property name="interceptorNames">
 			<list>
-				<value>com.liferay.portal.spring.aop.ExceptionSafeInterceptor</value>
+				<value>velocityServiceInterceptor</value>
 			</list>
 		</property>
 		<property name="target">
@@ -7230,13 +6867,10 @@
 			</props>
 		</property>
 	</bean>
-	<bean id="com.liferay.portlet.polls.service.PollsVoteLocalService.exceptionSafe" class="org.springframework.aop.framework.ProxyFactoryBean" lazy-init="true">
-		<property name="proxyInterfaces">
-			<value>com.liferay.portlet.polls.service.PollsVoteLocalService</value>
-		</property>
+	<bean id="com.liferay.portlet.polls.service.PollsVoteLocalService.velocity" class="org.springframework.aop.framework.ProxyFactoryBean" lazy-init="true">
 		<property name="interceptorNames">
 			<list>
-				<value>com.liferay.portal.spring.aop.ExceptionSafeInterceptor</value>
+				<value>velocityServiceInterceptor</value>
 			</list>
 		</property>
 		<property name="target">
@@ -7268,13 +6902,10 @@
 			</props>
 		</property>
 	</bean>
-	<bean id="com.liferay.portlet.polls.service.PollsVoteService.exceptionSafe" class="org.springframework.aop.framework.ProxyFactoryBean" lazy-init="true">
-		<property name="proxyInterfaces">
-			<value>com.liferay.portlet.polls.service.PollsVoteService</value>
-		</property>
+	<bean id="com.liferay.portlet.polls.service.PollsVoteService.velocity" class="org.springframework.aop.framework.ProxyFactoryBean" lazy-init="true">
 		<property name="interceptorNames">
 			<list>
-				<value>com.liferay.portal.spring.aop.ExceptionSafeInterceptor</value>
+				<value>velocityServiceInterceptor</value>
 			</list>
 		</property>
 		<property name="target">
@@ -7335,13 +6966,10 @@
 			</props>
 		</property>
 	</bean>
-	<bean id="com.liferay.portlet.ratings.service.RatingsEntryLocalService.exceptionSafe" class="org.springframework.aop.framework.ProxyFactoryBean" lazy-init="true">
-		<property name="proxyInterfaces">
-			<value>com.liferay.portlet.ratings.service.RatingsEntryLocalService</value>
-		</property>
+	<bean id="com.liferay.portlet.ratings.service.RatingsEntryLocalService.velocity" class="org.springframework.aop.framework.ProxyFactoryBean" lazy-init="true">
 		<property name="interceptorNames">
 			<list>
-				<value>com.liferay.portal.spring.aop.ExceptionSafeInterceptor</value>
+				<value>velocityServiceInterceptor</value>
 			</list>
 		</property>
 		<property name="target">
@@ -7373,13 +7001,10 @@
 			</props>
 		</property>
 	</bean>
-	<bean id="com.liferay.portlet.ratings.service.RatingsEntryService.exceptionSafe" class="org.springframework.aop.framework.ProxyFactoryBean" lazy-init="true">
-		<property name="proxyInterfaces">
-			<value>com.liferay.portlet.ratings.service.RatingsEntryService</value>
-		</property>
+	<bean id="com.liferay.portlet.ratings.service.RatingsEntryService.velocity" class="org.springframework.aop.framework.ProxyFactoryBean" lazy-init="true">
 		<property name="interceptorNames">
 			<list>
-				<value>com.liferay.portal.spring.aop.ExceptionSafeInterceptor</value>
+				<value>velocityServiceInterceptor</value>
 			</list>
 		</property>
 		<property name="target">
@@ -7440,13 +7065,10 @@
 			</props>
 		</property>
 	</bean>
-	<bean id="com.liferay.portlet.ratings.service.RatingsStatsLocalService.exceptionSafe" class="org.springframework.aop.framework.ProxyFactoryBean" lazy-init="true">
-		<property name="proxyInterfaces">
-			<value>com.liferay.portlet.ratings.service.RatingsStatsLocalService</value>
-		</property>
+	<bean id="com.liferay.portlet.ratings.service.RatingsStatsLocalService.velocity" class="org.springframework.aop.framework.ProxyFactoryBean" lazy-init="true">
 		<property name="interceptorNames">
 			<list>
-				<value>com.liferay.portal.spring.aop.ExceptionSafeInterceptor</value>
+				<value>velocityServiceInterceptor</value>
 			</list>
 		</property>
 		<property name="target">
@@ -7507,13 +7129,10 @@
 			</props>
 		</property>
 	</bean>
-	<bean id="com.liferay.portlet.shopping.service.ShoppingCartLocalService.exceptionSafe" class="org.springframework.aop.framework.ProxyFactoryBean" lazy-init="true">
-		<property name="proxyInterfaces">
-			<value>com.liferay.portlet.shopping.service.ShoppingCartLocalService</value>
-		</property>
+	<bean id="com.liferay.portlet.shopping.service.ShoppingCartLocalService.velocity" class="org.springframework.aop.framework.ProxyFactoryBean" lazy-init="true">
 		<property name="interceptorNames">
 			<list>
-				<value>com.liferay.portal.spring.aop.ExceptionSafeInterceptor</value>
+				<value>velocityServiceInterceptor</value>
 			</list>
 		</property>
 		<property name="target">
@@ -7574,13 +7193,10 @@
 			</props>
 		</property>
 	</bean>
-	<bean id="com.liferay.portlet.shopping.service.ShoppingCategoryLocalService.exceptionSafe" class="org.springframework.aop.framework.ProxyFactoryBean" lazy-init="true">
-		<property name="proxyInterfaces">
-			<value>com.liferay.portlet.shopping.service.ShoppingCategoryLocalService</value>
-		</property>
+	<bean id="com.liferay.portlet.shopping.service.ShoppingCategoryLocalService.velocity" class="org.springframework.aop.framework.ProxyFactoryBean" lazy-init="true">
 		<property name="interceptorNames">
 			<list>
-				<value>com.liferay.portal.spring.aop.ExceptionSafeInterceptor</value>
+				<value>velocityServiceInterceptor</value>
 			</list>
 		</property>
 		<property name="target">
@@ -7612,13 +7228,10 @@
 			</props>
 		</property>
 	</bean>
-	<bean id="com.liferay.portlet.shopping.service.ShoppingCategoryService.exceptionSafe" class="org.springframework.aop.framework.ProxyFactoryBean" lazy-init="true">
-		<property name="proxyInterfaces">
-			<value>com.liferay.portlet.shopping.service.ShoppingCategoryService</value>
-		</property>
+	<bean id="com.liferay.portlet.shopping.service.ShoppingCategoryService.velocity" class="org.springframework.aop.framework.ProxyFactoryBean" lazy-init="true">
 		<property name="interceptorNames">
 			<list>
-				<value>com.liferay.portal.spring.aop.ExceptionSafeInterceptor</value>
+				<value>velocityServiceInterceptor</value>
 			</list>
 		</property>
 		<property name="target">
@@ -7679,13 +7292,10 @@
 			</props>
 		</property>
 	</bean>
-	<bean id="com.liferay.portlet.shopping.service.ShoppingCouponLocalService.exceptionSafe" class="org.springframework.aop.framework.ProxyFactoryBean" lazy-init="true">
-		<property name="proxyInterfaces">
-			<value>com.liferay.portlet.shopping.service.ShoppingCouponLocalService</value>
-		</property>
+	<bean id="com.liferay.portlet.shopping.service.ShoppingCouponLocalService.velocity" class="org.springframework.aop.framework.ProxyFactoryBean" lazy-init="true">
 		<property name="interceptorNames">
 			<list>
-				<value>com.liferay.portal.spring.aop.ExceptionSafeInterceptor</value>
+				<value>velocityServiceInterceptor</value>
 			</list>
 		</property>
 		<property name="target">
@@ -7717,13 +7327,10 @@
 			</props>
 		</property>
 	</bean>
-	<bean id="com.liferay.portlet.shopping.service.ShoppingCouponService.exceptionSafe" class="org.springframework.aop.framework.ProxyFactoryBean" lazy-init="true">
-		<property name="proxyInterfaces">
-			<value>com.liferay.portlet.shopping.service.ShoppingCouponService</value>
-		</property>
+	<bean id="com.liferay.portlet.shopping.service.ShoppingCouponService.velocity" class="org.springframework.aop.framework.ProxyFactoryBean" lazy-init="true">
 		<property name="interceptorNames">
 			<list>
-				<value>com.liferay.portal.spring.aop.ExceptionSafeInterceptor</value>
+				<value>velocityServiceInterceptor</value>
 			</list>
 		</property>
 		<property name="target">
@@ -7797,13 +7404,10 @@
 			</props>
 		</property>
 	</bean>
-	<bean id="com.liferay.portlet.shopping.service.ShoppingItemLocalService.exceptionSafe" class="org.springframework.aop.framework.ProxyFactoryBean" lazy-init="true">
-		<property name="proxyInterfaces">
-			<value>com.liferay.portlet.shopping.service.ShoppingItemLocalService</value>
-		</property>
+	<bean id="com.liferay.portlet.shopping.service.ShoppingItemLocalService.velocity" class="org.springframework.aop.framework.ProxyFactoryBean" lazy-init="true">
 		<property name="interceptorNames">
 			<list>
-				<value>com.liferay.portal.spring.aop.ExceptionSafeInterceptor</value>
+				<value>velocityServiceInterceptor</value>
 			</list>
 		</property>
 		<property name="target">
@@ -7835,13 +7439,10 @@
 			</props>
 		</property>
 	</bean>
-	<bean id="com.liferay.portlet.shopping.service.ShoppingItemService.exceptionSafe" class="org.springframework.aop.framework.ProxyFactoryBean" lazy-init="true">
-		<property name="proxyInterfaces">
-			<value>com.liferay.portlet.shopping.service.ShoppingItemService</value>
-		</property>
+	<bean id="com.liferay.portlet.shopping.service.ShoppingItemService.velocity" class="org.springframework.aop.framework.ProxyFactoryBean" lazy-init="true">
 		<property name="interceptorNames">
 			<list>
-				<value>com.liferay.portal.spring.aop.ExceptionSafeInterceptor</value>
+				<value>velocityServiceInterceptor</value>
 			</list>
 		</property>
 		<property name="target">
@@ -7915,13 +7516,10 @@
 			</props>
 		</property>
 	</bean>
-	<bean id="com.liferay.portlet.shopping.service.ShoppingItemFieldLocalService.exceptionSafe" class="org.springframework.aop.framework.ProxyFactoryBean" lazy-init="true">
-		<property name="proxyInterfaces">
-			<value>com.liferay.portlet.shopping.service.ShoppingItemFieldLocalService</value>
-		</property>
+	<bean id="com.liferay.portlet.shopping.service.ShoppingItemFieldLocalService.velocity" class="org.springframework.aop.framework.ProxyFactoryBean" lazy-init="true">
 		<property name="interceptorNames">
 			<list>
-				<value>com.liferay.portal.spring.aop.ExceptionSafeInterceptor</value>
+				<value>velocityServiceInterceptor</value>
 			</list>
 		</property>
 		<property name="target">
@@ -7982,13 +7580,10 @@
 			</props>
 		</property>
 	</bean>
-	<bean id="com.liferay.portlet.shopping.service.ShoppingItemPriceLocalService.exceptionSafe" class="org.springframework.aop.framework.ProxyFactoryBean" lazy-init="true">
-		<property name="proxyInterfaces">
-			<value>com.liferay.portlet.shopping.service.ShoppingItemPriceLocalService</value>
-		</property>
+	<bean id="com.liferay.portlet.shopping.service.ShoppingItemPriceLocalService.velocity" class="org.springframework.aop.framework.ProxyFactoryBean" lazy-init="true">
 		<property name="interceptorNames">
 			<list>
-				<value>com.liferay.portal.spring.aop.ExceptionSafeInterceptor</value>
+				<value>velocityServiceInterceptor</value>
 			</list>
 		</property>
 		<property name="target">
@@ -8049,13 +7644,10 @@
 			</props>
 		</property>
 	</bean>
-	<bean id="com.liferay.portlet.shopping.service.ShoppingOrderLocalService.exceptionSafe" class="org.springframework.aop.framework.ProxyFactoryBean" lazy-init="true">
-		<property name="proxyInterfaces">
-			<value>com.liferay.portlet.shopping.service.ShoppingOrderLocalService</value>
-		</property>
+	<bean id="com.liferay.portlet.shopping.service.ShoppingOrderLocalService.velocity" class="org.springframework.aop.framework.ProxyFactoryBean" lazy-init="true">
 		<property name="interceptorNames">
 			<list>
-				<value>com.liferay.portal.spring.aop.ExceptionSafeInterceptor</value>
+				<value>velocityServiceInterceptor</value>
 			</list>
 		</property>
 		<property name="target">
@@ -8087,13 +7679,10 @@
 			</props>
 		</property>
 	</bean>
-	<bean id="com.liferay.portlet.shopping.service.ShoppingOrderService.exceptionSafe" class="org.springframework.aop.framework.ProxyFactoryBean" lazy-init="true">
-		<property name="proxyInterfaces">
-			<value>com.liferay.portlet.shopping.service.ShoppingOrderService</value>
-		</property>
+	<bean id="com.liferay.portlet.shopping.service.ShoppingOrderService.velocity" class="org.springframework.aop.framework.ProxyFactoryBean" lazy-init="true">
 		<property name="interceptorNames">
 			<list>
-				<value>com.liferay.portal.spring.aop.ExceptionSafeInterceptor</value>
+				<value>velocityServiceInterceptor</value>
 			</list>
 		</property>
 		<property name="target">
@@ -8167,13 +7756,10 @@
 			</props>
 		</property>
 	</bean>
-	<bean id="com.liferay.portlet.shopping.service.ShoppingOrderItemLocalService.exceptionSafe" class="org.springframework.aop.framework.ProxyFactoryBean" lazy-init="true">
-		<property name="proxyInterfaces">
-			<value>com.liferay.portlet.shopping.service.ShoppingOrderItemLocalService</value>
-		</property>
+	<bean id="com.liferay.portlet.shopping.service.ShoppingOrderItemLocalService.velocity" class="org.springframework.aop.framework.ProxyFactoryBean" lazy-init="true">
 		<property name="interceptorNames">
 			<list>
-				<value>com.liferay.portal.spring.aop.ExceptionSafeInterceptor</value>
+				<value>velocityServiceInterceptor</value>
 			</list>
 		</property>
 		<property name="target">
@@ -8234,13 +7820,10 @@
 			</props>
 		</property>
 	</bean>
-	<bean id="com.liferay.portlet.social.service.SocialActivityLocalService.exceptionSafe" class="org.springframework.aop.framework.ProxyFactoryBean" lazy-init="true">
-		<property name="proxyInterfaces">
-			<value>com.liferay.portlet.social.service.SocialActivityLocalService</value>
-		</property>
+	<bean id="com.liferay.portlet.social.service.SocialActivityLocalService.velocity" class="org.springframework.aop.framework.ProxyFactoryBean" lazy-init="true">
 		<property name="interceptorNames">
 			<list>
-				<value>com.liferay.portal.spring.aop.ExceptionSafeInterceptor</value>
+				<value>velocityServiceInterceptor</value>
 			</list>
 		</property>
 		<property name="target">
@@ -8295,13 +7878,10 @@
 		</property>
 	</bean>
 	<bean id="com.liferay.portlet.social.service.SocialActivityInterpreterLocalService.impl" class="com.liferay.portlet.social.service.impl.SocialActivityInterpreterLocalServiceImpl" lazy-init="true" />
-	<bean id="com.liferay.portlet.social.service.SocialActivityInterpreterLocalService.exceptionSafe" class="org.springframework.aop.framework.ProxyFactoryBean" lazy-init="true">
-		<property name="proxyInterfaces">
-			<value>com.liferay.portlet.social.service.SocialActivityInterpreterLocalService</value>
-		</property>
+	<bean id="com.liferay.portlet.social.service.SocialActivityInterpreterLocalService.velocity" class="org.springframework.aop.framework.ProxyFactoryBean" lazy-init="true">
 		<property name="interceptorNames">
 			<list>
-				<value>com.liferay.portal.spring.aop.ExceptionSafeInterceptor</value>
+				<value>velocityServiceInterceptor</value>
 			</list>
 		</property>
 		<property name="target">
@@ -8333,13 +7913,10 @@
 			</props>
 		</property>
 	</bean>
-	<bean id="com.liferay.portlet.social.service.SocialRelationLocalService.exceptionSafe" class="org.springframework.aop.framework.ProxyFactoryBean" lazy-init="true">
-		<property name="proxyInterfaces">
-			<value>com.liferay.portlet.social.service.SocialRelationLocalService</value>
-		</property>
+	<bean id="com.liferay.portlet.social.service.SocialRelationLocalService.velocity" class="org.springframework.aop.framework.ProxyFactoryBean" lazy-init="true">
 		<property name="interceptorNames">
 			<list>
-				<value>com.liferay.portal.spring.aop.ExceptionSafeInterceptor</value>
+				<value>velocityServiceInterceptor</value>
 			</list>
 		</property>
 		<property name="target">
@@ -8400,13 +7977,10 @@
 			</props>
 		</property>
 	</bean>
-	<bean id="com.liferay.portlet.social.service.SocialRequestLocalService.exceptionSafe" class="org.springframework.aop.framework.ProxyFactoryBean" lazy-init="true">
-		<property name="proxyInterfaces">
-			<value>com.liferay.portlet.social.service.SocialRequestLocalService</value>
-		</property>
+	<bean id="com.liferay.portlet.social.service.SocialRequestLocalService.velocity" class="org.springframework.aop.framework.ProxyFactoryBean" lazy-init="true">
 		<property name="interceptorNames">
 			<list>
-				<value>com.liferay.portal.spring.aop.ExceptionSafeInterceptor</value>
+				<value>velocityServiceInterceptor</value>
 			</list>
 		</property>
 		<property name="target">
@@ -8448,13 +8022,10 @@
 		</property>
 	</bean>
 	<bean id="com.liferay.portlet.social.service.SocialRequestInterpreterLocalService.impl" class="com.liferay.portlet.social.service.impl.SocialRequestInterpreterLocalServiceImpl" lazy-init="true" />
-	<bean id="com.liferay.portlet.social.service.SocialRequestInterpreterLocalService.exceptionSafe" class="org.springframework.aop.framework.ProxyFactoryBean" lazy-init="true">
-		<property name="proxyInterfaces">
-			<value>com.liferay.portlet.social.service.SocialRequestInterpreterLocalService</value>
-		</property>
+	<bean id="com.liferay.portlet.social.service.SocialRequestInterpreterLocalService.velocity" class="org.springframework.aop.framework.ProxyFactoryBean" lazy-init="true">
 		<property name="interceptorNames">
 			<list>
-				<value>com.liferay.portal.spring.aop.ExceptionSafeInterceptor</value>
+				<value>velocityServiceInterceptor</value>
 			</list>
 		</property>
 		<property name="target">
@@ -8486,13 +8057,10 @@
 			</props>
 		</property>
 	</bean>
-	<bean id="com.liferay.portlet.softwarecatalog.service.SCLicenseLocalService.exceptionSafe" class="org.springframework.aop.framework.ProxyFactoryBean" lazy-init="true">
-		<property name="proxyInterfaces">
-			<value>com.liferay.portlet.softwarecatalog.service.SCLicenseLocalService</value>
-		</property>
+	<bean id="com.liferay.portlet.softwarecatalog.service.SCLicenseLocalService.velocity" class="org.springframework.aop.framework.ProxyFactoryBean" lazy-init="true">
 		<property name="interceptorNames">
 			<list>
-				<value>com.liferay.portal.spring.aop.ExceptionSafeInterceptor</value>
+				<value>velocityServiceInterceptor</value>
 			</list>
 		</property>
 		<property name="target">
@@ -8524,13 +8092,10 @@
 			</props>
 		</property>
 	</bean>
-	<bean id="com.liferay.portlet.softwarecatalog.service.SCLicenseService.exceptionSafe" class="org.springframework.aop.framework.ProxyFactoryBean" lazy-init="true">
-		<property name="proxyInterfaces">
-			<value>com.liferay.portlet.softwarecatalog.service.SCLicenseService</value>
-		</property>
+	<bean id="com.liferay.portlet.softwarecatalog.service.SCLicenseService.velocity" class="org.springframework.aop.framework.ProxyFactoryBean" lazy-init="true">
 		<property name="interceptorNames">
 			<list>
-				<value>com.liferay.portal.spring.aop.ExceptionSafeInterceptor</value>
+				<value>velocityServiceInterceptor</value>
 			</list>
 		</property>
 		<property name="target">
@@ -8591,13 +8156,10 @@
 			</props>
 		</property>
 	</bean>
-	<bean id="com.liferay.portlet.softwarecatalog.service.SCFrameworkVersionLocalService.exceptionSafe" class="org.springframework.aop.framework.ProxyFactoryBean" lazy-init="true">
-		<property name="proxyInterfaces">
-			<value>com.liferay.portlet.softwarecatalog.service.SCFrameworkVersionLocalService</value>
-		</property>
+	<bean id="com.liferay.portlet.softwarecatalog.service.SCFrameworkVersionLocalService.velocity" class="org.springframework.aop.framework.ProxyFactoryBean" lazy-init="true">
 		<property name="interceptorNames">
 			<list>
-				<value>com.liferay.portal.spring.aop.ExceptionSafeInterceptor</value>
+				<value>velocityServiceInterceptor</value>
 			</list>
 		</property>
 		<property name="target">
@@ -8629,13 +8191,10 @@
 			</props>
 		</property>
 	</bean>
-	<bean id="com.liferay.portlet.softwarecatalog.service.SCFrameworkVersionService.exceptionSafe" class="org.springframework.aop.framework.ProxyFactoryBean" lazy-init="true">
-		<property name="proxyInterfaces">
-			<value>com.liferay.portlet.softwarecatalog.service.SCFrameworkVersionService</value>
-		</property>
+	<bean id="com.liferay.portlet.softwarecatalog.service.SCFrameworkVersionService.velocity" class="org.springframework.aop.framework.ProxyFactoryBean" lazy-init="true">
 		<property name="interceptorNames">
 			<list>
-				<value>com.liferay.portal.spring.aop.ExceptionSafeInterceptor</value>
+				<value>velocityServiceInterceptor</value>
 			</list>
 		</property>
 		<property name="target">
@@ -8696,13 +8255,10 @@
 			</props>
 		</property>
 	</bean>
-	<bean id="com.liferay.portlet.softwarecatalog.service.SCProductEntryLocalService.exceptionSafe" class="org.springframework.aop.framework.ProxyFactoryBean" lazy-init="true">
-		<property name="proxyInterfaces">
-			<value>com.liferay.portlet.softwarecatalog.service.SCProductEntryLocalService</value>
-		</property>
+	<bean id="com.liferay.portlet.softwarecatalog.service.SCProductEntryLocalService.velocity" class="org.springframework.aop.framework.ProxyFactoryBean" lazy-init="true">
 		<property name="interceptorNames">
 			<list>
-				<value>com.liferay.portal.spring.aop.ExceptionSafeInterceptor</value>
+				<value>velocityServiceInterceptor</value>
 			</list>
 		</property>
 		<property name="target">
@@ -8734,13 +8290,10 @@
 			</props>
 		</property>
 	</bean>
-	<bean id="com.liferay.portlet.softwarecatalog.service.SCProductEntryService.exceptionSafe" class="org.springframework.aop.framework.ProxyFactoryBean" lazy-init="true">
-		<property name="proxyInterfaces">
-			<value>com.liferay.portlet.softwarecatalog.service.SCProductEntryService</value>
-		</property>
+	<bean id="com.liferay.portlet.softwarecatalog.service.SCProductEntryService.velocity" class="org.springframework.aop.framework.ProxyFactoryBean" lazy-init="true">
 		<property name="interceptorNames">
 			<list>
-				<value>com.liferay.portal.spring.aop.ExceptionSafeInterceptor</value>
+				<value>velocityServiceInterceptor</value>
 			</list>
 		</property>
 		<property name="target">
@@ -8801,13 +8354,10 @@
 			</props>
 		</property>
 	</bean>
-	<bean id="com.liferay.portlet.softwarecatalog.service.SCProductScreenshotLocalService.exceptionSafe" class="org.springframework.aop.framework.ProxyFactoryBean" lazy-init="true">
-		<property name="proxyInterfaces">
-			<value>com.liferay.portlet.softwarecatalog.service.SCProductScreenshotLocalService</value>
-		</property>
+	<bean id="com.liferay.portlet.softwarecatalog.service.SCProductScreenshotLocalService.velocity" class="org.springframework.aop.framework.ProxyFactoryBean" lazy-init="true">
 		<property name="interceptorNames">
 			<list>
-				<value>com.liferay.portal.spring.aop.ExceptionSafeInterceptor</value>
+				<value>velocityServiceInterceptor</value>
 			</list>
 		</property>
 		<property name="target">
@@ -8868,13 +8418,10 @@
 			</props>
 		</property>
 	</bean>
-	<bean id="com.liferay.portlet.softwarecatalog.service.SCProductVersionLocalService.exceptionSafe" class="org.springframework.aop.framework.ProxyFactoryBean" lazy-init="true">
-		<property name="proxyInterfaces">
-			<value>com.liferay.portlet.softwarecatalog.service.SCProductVersionLocalService</value>
-		</property>
+	<bean id="com.liferay.portlet.softwarecatalog.service.SCProductVersionLocalService.velocity" class="org.springframework.aop.framework.ProxyFactoryBean" lazy-init="true">
 		<property name="interceptorNames">
 			<list>
-				<value>com.liferay.portal.spring.aop.ExceptionSafeInterceptor</value>
+				<value>velocityServiceInterceptor</value>
 			</list>
 		</property>
 		<property name="target">
@@ -8906,13 +8453,10 @@
 			</props>
 		</property>
 	</bean>
-	<bean id="com.liferay.portlet.softwarecatalog.service.SCProductVersionService.exceptionSafe" class="org.springframework.aop.framework.ProxyFactoryBean" lazy-init="true">
-		<property name="proxyInterfaces">
-			<value>com.liferay.portlet.softwarecatalog.service.SCProductVersionService</value>
-		</property>
+	<bean id="com.liferay.portlet.softwarecatalog.service.SCProductVersionService.velocity" class="org.springframework.aop.framework.ProxyFactoryBean" lazy-init="true">
 		<property name="interceptorNames">
 			<list>
-				<value>com.liferay.portal.spring.aop.ExceptionSafeInterceptor</value>
+				<value>velocityServiceInterceptor</value>
 			</list>
 		</property>
 		<property name="target">
@@ -8973,13 +8517,10 @@
 			</props>
 		</property>
 	</bean>
-	<bean id="com.liferay.portlet.tags.service.TagsAssetLocalService.exceptionSafe" class="org.springframework.aop.framework.ProxyFactoryBean" lazy-init="true">
-		<property name="proxyInterfaces">
-			<value>com.liferay.portlet.tags.service.TagsAssetLocalService</value>
-		</property>
+	<bean id="com.liferay.portlet.tags.service.TagsAssetLocalService.velocity" class="org.springframework.aop.framework.ProxyFactoryBean" lazy-init="true">
 		<property name="interceptorNames">
 			<list>
-				<value>com.liferay.portal.spring.aop.ExceptionSafeInterceptor</value>
+				<value>velocityServiceInterceptor</value>
 			</list>
 		</property>
 		<property name="target">
@@ -9011,13 +8552,10 @@
 			</props>
 		</property>
 	</bean>
-	<bean id="com.liferay.portlet.tags.service.TagsAssetService.exceptionSafe" class="org.springframework.aop.framework.ProxyFactoryBean" lazy-init="true">
-		<property name="proxyInterfaces">
-			<value>com.liferay.portlet.tags.service.TagsAssetService</value>
-		</property>
+	<bean id="com.liferay.portlet.tags.service.TagsAssetService.velocity" class="org.springframework.aop.framework.ProxyFactoryBean" lazy-init="true">
 		<property name="interceptorNames">
 			<list>
-				<value>com.liferay.portal.spring.aop.ExceptionSafeInterceptor</value>
+				<value>velocityServiceInterceptor</value>
 			</list>
 		</property>
 		<property name="target">
@@ -9091,13 +8629,10 @@
 			</props>
 		</property>
 	</bean>
-	<bean id="com.liferay.portlet.tags.service.TagsEntryLocalService.exceptionSafe" class="org.springframework.aop.framework.ProxyFactoryBean" lazy-init="true">
-		<property name="proxyInterfaces">
-			<value>com.liferay.portlet.tags.service.TagsEntryLocalService</value>
-		</property>
+	<bean id="com.liferay.portlet.tags.service.TagsEntryLocalService.velocity" class="org.springframework.aop.framework.ProxyFactoryBean" lazy-init="true">
 		<property name="interceptorNames">
 			<list>
-				<value>com.liferay.portal.spring.aop.ExceptionSafeInterceptor</value>
+				<value>velocityServiceInterceptor</value>
 			</list>
 		</property>
 		<property name="target">
@@ -9129,13 +8664,10 @@
 			</props>
 		</property>
 	</bean>
-	<bean id="com.liferay.portlet.tags.service.TagsEntryService.exceptionSafe" class="org.springframework.aop.framework.ProxyFactoryBean" lazy-init="true">
-		<property name="proxyInterfaces">
-			<value>com.liferay.portlet.tags.service.TagsEntryService</value>
-		</property>
+	<bean id="com.liferay.portlet.tags.service.TagsEntryService.velocity" class="org.springframework.aop.framework.ProxyFactoryBean" lazy-init="true">
 		<property name="interceptorNames">
 			<list>
-				<value>com.liferay.portal.spring.aop.ExceptionSafeInterceptor</value>
+				<value>velocityServiceInterceptor</value>
 			</list>
 		</property>
 		<property name="target">
@@ -9209,13 +8741,10 @@
 			</props>
 		</property>
 	</bean>
-	<bean id="com.liferay.portlet.tags.service.TagsPropertyLocalService.exceptionSafe" class="org.springframework.aop.framework.ProxyFactoryBean" lazy-init="true">
-		<property name="proxyInterfaces">
-			<value>com.liferay.portlet.tags.service.TagsPropertyLocalService</value>
-		</property>
+	<bean id="com.liferay.portlet.tags.service.TagsPropertyLocalService.velocity" class="org.springframework.aop.framework.ProxyFactoryBean" lazy-init="true">
 		<property name="interceptorNames">
 			<list>
-				<value>com.liferay.portal.spring.aop.ExceptionSafeInterceptor</value>
+				<value>velocityServiceInterceptor</value>
 			</list>
 		</property>
 		<property name="target">
@@ -9247,13 +8776,10 @@
 			</props>
 		</property>
 	</bean>
-	<bean id="com.liferay.portlet.tags.service.TagsPropertyService.exceptionSafe" class="org.springframework.aop.framework.ProxyFactoryBean" lazy-init="true">
-		<property name="proxyInterfaces">
-			<value>com.liferay.portlet.tags.service.TagsPropertyService</value>
-		</property>
+	<bean id="com.liferay.portlet.tags.service.TagsPropertyService.velocity" class="org.springframework.aop.framework.ProxyFactoryBean" lazy-init="true">
 		<property name="interceptorNames">
 			<list>
-				<value>com.liferay.portal.spring.aop.ExceptionSafeInterceptor</value>
+				<value>velocityServiceInterceptor</value>
 			</list>
 		</property>
 		<property name="target">
@@ -9340,13 +8866,10 @@
 			</props>
 		</property>
 	</bean>
-	<bean id="com.liferay.portlet.tags.service.TagsSourceLocalService.exceptionSafe" class="org.springframework.aop.framework.ProxyFactoryBean" lazy-init="true">
-		<property name="proxyInterfaces">
-			<value>com.liferay.portlet.tags.service.TagsSourceLocalService</value>
-		</property>
+	<bean id="com.liferay.portlet.tags.service.TagsSourceLocalService.velocity" class="org.springframework.aop.framework.ProxyFactoryBean" lazy-init="true">
 		<property name="interceptorNames">
 			<list>
-				<value>com.liferay.portal.spring.aop.ExceptionSafeInterceptor</value>
+				<value>velocityServiceInterceptor</value>
 			</list>
 		</property>
 		<property name="target">
@@ -9378,13 +8901,10 @@
 			</props>
 		</property>
 	</bean>
-	<bean id="com.liferay.portlet.tags.service.TagsSourceService.exceptionSafe" class="org.springframework.aop.framework.ProxyFactoryBean" lazy-init="true">
-		<property name="proxyInterfaces">
-			<value>com.liferay.portlet.tags.service.TagsSourceService</value>
-		</property>
+	<bean id="com.liferay.portlet.tags.service.TagsSourceService.velocity" class="org.springframework.aop.framework.ProxyFactoryBean" lazy-init="true">
 		<property name="interceptorNames">
 			<list>
-				<value>com.liferay.portal.spring.aop.ExceptionSafeInterceptor</value>
+				<value>velocityServiceInterceptor</value>
 			</list>
 		</property>
 		<property name="target">
@@ -9445,13 +8965,10 @@
 			</props>
 		</property>
 	</bean>
-	<bean id="com.liferay.portlet.tags.service.TagsVocabularyLocalService.exceptionSafe" class="org.springframework.aop.framework.ProxyFactoryBean" lazy-init="true">
-		<property name="proxyInterfaces">
-			<value>com.liferay.portlet.tags.service.TagsVocabularyLocalService</value>
-		</property>
+	<bean id="com.liferay.portlet.tags.service.TagsVocabularyLocalService.velocity" class="org.springframework.aop.framework.ProxyFactoryBean" lazy-init="true">
 		<property name="interceptorNames">
 			<list>
-				<value>com.liferay.portal.spring.aop.ExceptionSafeInterceptor</value>
+				<value>velocityServiceInterceptor</value>
 			</list>
 		</property>
 		<property name="target">
@@ -9483,13 +9000,10 @@
 			</props>
 		</property>
 	</bean>
-	<bean id="com.liferay.portlet.tags.service.TagsVocabularyService.exceptionSafe" class="org.springframework.aop.framework.ProxyFactoryBean" lazy-init="true">
-		<property name="proxyInterfaces">
-			<value>com.liferay.portlet.tags.service.TagsVocabularyService</value>
-		</property>
+	<bean id="com.liferay.portlet.tags.service.TagsVocabularyService.velocity" class="org.springframework.aop.framework.ProxyFactoryBean" lazy-init="true">
 		<property name="interceptorNames">
 			<list>
-				<value>com.liferay.portal.spring.aop.ExceptionSafeInterceptor</value>
+				<value>velocityServiceInterceptor</value>
 			</list>
 		</property>
 		<property name="target">
@@ -9550,13 +9064,10 @@
 			</props>
 		</property>
 	</bean>
-	<bean id="com.liferay.portlet.tasks.service.TasksReviewLocalService.exceptionSafe" class="org.springframework.aop.framework.ProxyFactoryBean" lazy-init="true">
-		<property name="proxyInterfaces">
-			<value>com.liferay.portlet.tasks.service.TasksReviewLocalService</value>
-		</property>
+	<bean id="com.liferay.portlet.tasks.service.TasksReviewLocalService.velocity" class="org.springframework.aop.framework.ProxyFactoryBean" lazy-init="true">
 		<property name="interceptorNames">
 			<list>
-				<value>com.liferay.portal.spring.aop.ExceptionSafeInterceptor</value>
+				<value>velocityServiceInterceptor</value>
 			</list>
 		</property>
 		<property name="target">
@@ -9588,13 +9099,10 @@
 			</props>
 		</property>
 	</bean>
-	<bean id="com.liferay.portlet.tasks.service.TasksReviewService.exceptionSafe" class="org.springframework.aop.framework.ProxyFactoryBean" lazy-init="true">
-		<property name="proxyInterfaces">
-			<value>com.liferay.portlet.tasks.service.TasksReviewService</value>
-		</property>
+	<bean id="com.liferay.portlet.tasks.service.TasksReviewService.velocity" class="org.springframework.aop.framework.ProxyFactoryBean" lazy-init="true">
 		<property name="interceptorNames">
 			<list>
-				<value>com.liferay.portal.spring.aop.ExceptionSafeInterceptor</value>
+				<value>velocityServiceInterceptor</value>
 			</list>
 		</property>
 		<property name="target">
@@ -9655,13 +9163,10 @@
 			</props>
 		</property>
 	</bean>
-	<bean id="com.liferay.portlet.tasks.service.TasksProposalLocalService.exceptionSafe" class="org.springframework.aop.framework.ProxyFactoryBean" lazy-init="true">
-		<property name="proxyInterfaces">
-			<value>com.liferay.portlet.tasks.service.TasksProposalLocalService</value>
-		</property>
+	<bean id="com.liferay.portlet.tasks.service.TasksProposalLocalService.velocity" class="org.springframework.aop.framework.ProxyFactoryBean" lazy-init="true">
 		<property name="interceptorNames">
 			<list>
-				<value>com.liferay.portal.spring.aop.ExceptionSafeInterceptor</value>
+				<value>velocityServiceInterceptor</value>
 			</list>
 		</property>
 		<property name="target">
@@ -9693,13 +9198,10 @@
 			</props>
 		</property>
 	</bean>
-	<bean id="com.liferay.portlet.tasks.service.TasksProposalService.exceptionSafe" class="org.springframework.aop.framework.ProxyFactoryBean" lazy-init="true">
-		<property name="proxyInterfaces">
-			<value>com.liferay.portlet.tasks.service.TasksProposalService</value>
-		</property>
+	<bean id="com.liferay.portlet.tasks.service.TasksProposalService.velocity" class="org.springframework.aop.framework.ProxyFactoryBean" lazy-init="true">
 		<property name="interceptorNames">
 			<list>
-				<value>com.liferay.portal.spring.aop.ExceptionSafeInterceptor</value>
+				<value>velocityServiceInterceptor</value>
 			</list>
 		</property>
 		<property name="target">
@@ -9773,13 +9275,10 @@
 			</props>
 		</property>
 	</bean>
-	<bean id="com.liferay.portlet.wiki.service.WikiNodeLocalService.exceptionSafe" class="org.springframework.aop.framework.ProxyFactoryBean" lazy-init="true">
-		<property name="proxyInterfaces">
-			<value>com.liferay.portlet.wiki.service.WikiNodeLocalService</value>
-		</property>
+	<bean id="com.liferay.portlet.wiki.service.WikiNodeLocalService.velocity" class="org.springframework.aop.framework.ProxyFactoryBean" lazy-init="true">
 		<property name="interceptorNames">
 			<list>
-				<value>com.liferay.portal.spring.aop.ExceptionSafeInterceptor</value>
+				<value>velocityServiceInterceptor</value>
 			</list>
 		</property>
 		<property name="target">
@@ -9811,13 +9310,10 @@
 			</props>
 		</property>
 	</bean>
-	<bean id="com.liferay.portlet.wiki.service.WikiNodeService.exceptionSafe" class="org.springframework.aop.framework.ProxyFactoryBean" lazy-init="true">
-		<property name="proxyInterfaces">
-			<value>com.liferay.portlet.wiki.service.WikiNodeService</value>
-		</property>
+	<bean id="com.liferay.portlet.wiki.service.WikiNodeService.velocity" class="org.springframework.aop.framework.ProxyFactoryBean" lazy-init="true">
 		<property name="interceptorNames">
 			<list>
-				<value>com.liferay.portal.spring.aop.ExceptionSafeInterceptor</value>
+				<value>velocityServiceInterceptor</value>
 			</list>
 		</property>
 		<property name="target">
@@ -9878,13 +9374,10 @@
 			</props>
 		</property>
 	</bean>
-	<bean id="com.liferay.portlet.wiki.service.WikiPageLocalService.exceptionSafe" class="org.springframework.aop.framework.ProxyFactoryBean" lazy-init="true">
-		<property name="proxyInterfaces">
-			<value>com.liferay.portlet.wiki.service.WikiPageLocalService</value>
-		</property>
+	<bean id="com.liferay.portlet.wiki.service.WikiPageLocalService.velocity" class="org.springframework.aop.framework.ProxyFactoryBean" lazy-init="true">
 		<property name="interceptorNames">
 			<list>
-				<value>com.liferay.portal.spring.aop.ExceptionSafeInterceptor</value>
+				<value>velocityServiceInterceptor</value>
 			</list>
 		</property>
 		<property name="target">
@@ -9916,13 +9409,10 @@
 			</props>
 		</property>
 	</bean>
-	<bean id="com.liferay.portlet.wiki.service.WikiPageService.exceptionSafe" class="org.springframework.aop.framework.ProxyFactoryBean" lazy-init="true">
-		<property name="proxyInterfaces">
-			<value>com.liferay.portlet.wiki.service.WikiPageService</value>
-		</property>
+	<bean id="com.liferay.portlet.wiki.service.WikiPageService.velocity" class="org.springframework.aop.framework.ProxyFactoryBean" lazy-init="true">
 		<property name="interceptorNames">
 			<list>
-				<value>com.liferay.portal.spring.aop.ExceptionSafeInterceptor</value>
+				<value>velocityServiceInterceptor</value>
 			</list>
 		</property>
 		<property name="target">
@@ -9996,13 +9486,10 @@
 			</props>
 		</property>
 	</bean>
-	<bean id="com.liferay.portlet.wiki.service.WikiPageResourceLocalService.exceptionSafe" class="org.springframework.aop.framework.ProxyFactoryBean" lazy-init="true">
-		<property name="proxyInterfaces">
-			<value>com.liferay.portlet.wiki.service.WikiPageResourceLocalService</value>
-		</property>
+	<bean id="com.liferay.portlet.wiki.service.WikiPageResourceLocalService.velocity" class="org.springframework.aop.framework.ProxyFactoryBean" lazy-init="true">
 		<property name="interceptorNames">
 			<list>
-				<value>com.liferay.portal.spring.aop.ExceptionSafeInterceptor</value>
+				<value>velocityServiceInterceptor</value>
 			</list>
 		</property>
 		<property name="target">
@@ -10063,13 +9550,10 @@
 			</props>
 		</property>
 	</bean>
-	<bean id="com.liferay.portlet.workflow.service.WorkflowComponentService.exceptionSafe" class="org.springframework.aop.framework.ProxyFactoryBean" lazy-init="true">
-		<property name="proxyInterfaces">
-			<value>com.liferay.portlet.workflow.service.WorkflowComponentService</value>
-		</property>
+	<bean id="com.liferay.portlet.workflow.service.WorkflowComponentService.velocity" class="org.springframework.aop.framework.ProxyFactoryBean" lazy-init="true">
 		<property name="interceptorNames">
 			<list>
-				<value>com.liferay.portal.spring.aop.ExceptionSafeInterceptor</value>
+				<value>velocityServiceInterceptor</value>
 			</list>
 		</property>
 		<property name="target">
@@ -10101,13 +9585,10 @@
 			</props>
 		</property>
 	</bean>
-	<bean id="com.liferay.portlet.workflow.service.WorkflowDefinitionService.exceptionSafe" class="org.springframework.aop.framework.ProxyFactoryBean" lazy-init="true">
-		<property name="proxyInterfaces">
-			<value>com.liferay.portlet.workflow.service.WorkflowDefinitionService</value>
-		</property>
+	<bean id="com.liferay.portlet.workflow.service.WorkflowDefinitionService.velocity" class="org.springframework.aop.framework.ProxyFactoryBean" lazy-init="true">
 		<property name="interceptorNames">
 			<list>
-				<value>com.liferay.portal.spring.aop.ExceptionSafeInterceptor</value>
+				<value>velocityServiceInterceptor</value>
 			</list>
 		</property>
 		<property name="target">
@@ -10139,13 +9620,10 @@
 			</props>
 		</property>
 	</bean>
-	<bean id="com.liferay.portlet.workflow.service.WorkflowInstanceService.exceptionSafe" class="org.springframework.aop.framework.ProxyFactoryBean" lazy-init="true">
-		<property name="proxyInterfaces">
-			<value>com.liferay.portlet.workflow.service.WorkflowInstanceService</value>
-		</property>
+	<bean id="com.liferay.portlet.workflow.service.WorkflowInstanceService.velocity" class="org.springframework.aop.framework.ProxyFactoryBean" lazy-init="true">
 		<property name="interceptorNames">
 			<list>
-				<value>com.liferay.portal.spring.aop.ExceptionSafeInterceptor</value>
+				<value>velocityServiceInterceptor</value>
 			</list>
 		</property>
 		<property name="target">
@@ -10177,13 +9655,10 @@
 			</props>
 		</property>
 	</bean>
-	<bean id="com.liferay.portlet.workflow.service.WorkflowTaskService.exceptionSafe" class="org.springframework.aop.framework.ProxyFactoryBean" lazy-init="true">
-		<property name="proxyInterfaces">
-			<value>com.liferay.portlet.workflow.service.WorkflowTaskService</value>
-		</property>
+	<bean id="com.liferay.portlet.workflow.service.WorkflowTaskService.velocity" class="org.springframework.aop.framework.ProxyFactoryBean" lazy-init="true">
 		<property name="interceptorNames">
 			<list>
-				<value>com.liferay.portal.spring.aop.ExceptionSafeInterceptor</value>
+				<value>velocityServiceInterceptor</value>
 			</list>
 		</property>
 		<property name="target">

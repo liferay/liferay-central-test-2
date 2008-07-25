@@ -20,26 +20,55 @@
  * SOFTWARE.
  */
 
-package com.liferay.portal.spring.aop;
+package com.liferay.portal.kernel.bean;
 
-import org.aopalliance.intercept.MethodInterceptor;
-import org.aopalliance.intercept.MethodInvocation;
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
+
+import java.util.HashMap;
+import java.util.Map;
 
 /**
- * <a href="ExceptionSafeInterceptor.java.html"><b><i>View Source</i></b></a>
+ * <a href="PortletBeanLocatorUtil.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *
  */
-public class ExceptionSafeInterceptor implements MethodInterceptor {
+public class PortletBeanLocatorUtil {
 
-	public Object invoke(MethodInvocation invocation) throws Throwable {
-		try {
-			return invocation.proceed();
+	public static BeanLocator getBeanLocator(String servletContextName) {
+		return _beanLocators.get(servletContextName);
+	}
+
+	public static Object locate(String servletContextName, String name)
+		throws BeanLocatorException {
+
+		BeanLocator beanLocator = getBeanLocator(servletContextName);
+
+		if (beanLocator == null) {
+			_log.error("BeanLocator is null");
+
+			throw new BeanLocatorException("BeanLocator has not been set");
 		}
-		catch (Throwable t) {
-			return null;
+		else {
+			return beanLocator.locate(name);
 		}
 	}
+
+	public static void setBeanLocator(
+		String servletContextName, BeanLocator beanLocator) {
+
+		if (_log.isDebugEnabled()) {
+			_log.debug("Setting BeanLocator " + beanLocator.hashCode());
+		}
+
+		_beanLocators.put(servletContextName, beanLocator);
+	}
+
+	private static Log _log =
+		LogFactoryUtil.getLog(PortletBeanLocatorUtil.class);
+
+	private static Map<String, BeanLocator> _beanLocators =
+		new HashMap<String, BeanLocator>();
 
 }

@@ -115,6 +115,7 @@ public class ServiceBuilder {
 			String modelHintsFileName = args[2];
 			String springFileName = args[3];
 			String springDataSourceFileName = "";
+			String springMiscFileName = "";
 			String apiDir = args[5];
 			String implDir = "src";
 			String jsonFileName = args[6];
@@ -131,10 +132,11 @@ public class ServiceBuilder {
 
 			serviceBuilder = new ServiceBuilder(
 				fileName, hbmFileName, modelHintsFileName, springFileName,
-				springDataSourceFileName, apiDir, implDir, jsonFileName,
-				remotingFileName, sqlDir, sqlFileName, sqlIndexesFileName,
-				sqlIndexesPropertiesFileName, sqlSequencesFileName,
-				autoNamespaceTables, beanLocatorUtil, propsUtil, testDir);
+				springDataSourceFileName, springMiscFileName, apiDir, implDir,
+				jsonFileName, remotingFileName, sqlDir, sqlFileName,
+				sqlIndexesFileName, sqlIndexesPropertiesFileName,
+				sqlSequencesFileName, autoNamespaceTables, beanLocatorUtil,
+				propsUtil, testDir);
 		}
 		else if (args.length == 0) {
 			String fileName = System.getProperty("service.input.file");
@@ -142,6 +144,7 @@ public class ServiceBuilder {
 			String modelHintsFileName = System.getProperty("service.model.hints.file");
 			String springFileName = System.getProperty("service.spring.file");
 			String springDataSourceFileName = System.getProperty("service.spring.data.source.file");
+			String springMiscFileName = System.getProperty("service.spring.misc.file");
 			String apiDir = System.getProperty("service.api.dir");
 			String implDir = System.getProperty("service.impl.dir");
 			String jsonFileName = System.getProperty("service.json.file");
@@ -158,10 +161,11 @@ public class ServiceBuilder {
 
 			serviceBuilder = new ServiceBuilder(
 				fileName, hbmFileName, modelHintsFileName, springFileName,
-				springDataSourceFileName, apiDir, implDir, jsonFileName,
-				remotingFileName, sqlDir, sqlFileName, sqlIndexesFileName,
-				sqlIndexesPropertiesFileName, sqlSequencesFileName,
-				autoNamespaceTables, beanLocatorUtil, propsUtil, testDir);
+				springDataSourceFileName, springMiscFileName, apiDir, implDir,
+				jsonFileName, remotingFileName, sqlDir, sqlFileName,
+				sqlIndexesFileName, sqlIndexesPropertiesFileName,
+				sqlSequencesFileName, autoNamespaceTables, beanLocatorUtil,
+				propsUtil, testDir);
 		}
 
 		if (serviceBuilder == null) {
@@ -218,6 +222,7 @@ public class ServiceBuilder {
 				"\t-Dservice.tpl.service_soap=" + _TPL_ROOT + "service_soap.ftl\n"+
 				"\t-Dservice.tpl.service_util=" + _TPL_ROOT + "service_util.ftl\n"+
 				"\t-Dservice.tpl.spring_data_source_xml=" + _TPL_ROOT + "spring_data_source_xml.ftl\n"+
+				"\t-Dservice.tpl.spring_misc_xml=" + _TPL_ROOT + "spring_misc_xml.ftl\n"+
 				"\t-Dservice.tpl.spring_xml=" + _TPL_ROOT + "spring_xml.ftl\n"+
 				"\t-Dservice.tpl.spring_xml_session=" + _TPL_ROOT + "spring_xml_session.ftl");
 		}
@@ -376,26 +381,29 @@ public class ServiceBuilder {
 
 	public ServiceBuilder(
 		String fileName, String hbmFileName, String modelHintsFileName,
-		String springFileName, String springDataSourceFileName, String apiDir,
-		String implDir, String jsonFileName, String remotingFileName,
-		String sqlDir, String sqlFileName, String sqlIndexesFileName,
+		String springFileName, String springDataSourceFileName,
+		String springMiscFileName, String apiDir, String implDir,
+		String jsonFileName, String remotingFileName, String sqlDir,
+		String sqlFileName, String sqlIndexesFileName,
 		String sqlIndexesPropertiesFileName, String sqlSequencesFileName,
 		boolean autoNamespaceTables, String beanLocatorUtil, String propsUtil,
 		String testDir) {
 
 		new ServiceBuilder(
 			fileName, hbmFileName, modelHintsFileName, springFileName,
-			springDataSourceFileName, apiDir, implDir, jsonFileName,
-			remotingFileName, sqlDir, sqlFileName, sqlIndexesFileName,
-			sqlIndexesPropertiesFileName, sqlSequencesFileName,
-			autoNamespaceTables, beanLocatorUtil, propsUtil, testDir, true);
+			springDataSourceFileName, springMiscFileName, apiDir, implDir,
+			jsonFileName, remotingFileName, sqlDir, sqlFileName,
+			sqlIndexesFileName, sqlIndexesPropertiesFileName,
+			sqlSequencesFileName, autoNamespaceTables, beanLocatorUtil,
+			propsUtil, testDir, true);
 	}
 
 	public ServiceBuilder(
 		String fileName, String hbmFileName, String modelHintsFileName,
-		String springFileName, String springDataSourceFileName, String apiDir,
-		String implDir, String jsonFileName, String remotingFileName,
-		String sqlDir, String sqlFileName, String sqlIndexesFileName,
+		String springFileName, String springDataSourceFileName,
+		String springMiscFileName, String apiDir, String implDir,
+		String jsonFileName, String remotingFileName, String sqlDir,
+		String sqlFileName, String sqlIndexesFileName,
 		String sqlIndexesPropertiesFileName, String sqlSequencesFileName,
 		boolean autoNamespaceTables, String beanLocatorUtil, String propsUtil,
 		String testDir, boolean build) {
@@ -441,6 +449,8 @@ public class ServiceBuilder {
 		_tplServiceUtil = _getTplProperty("service_util", _tplServiceUtil);
 		_tplSpringDataSourceXml = _getTplProperty(
 			"spring_data_source_xml", _tplSpringDataSourceXml);
+		_tplSpringMiscXml = _getTplProperty(
+			"spring_misc_xml", _tplSpringMiscXml);
 		_tplSpringXml = _getTplProperty("spring_xml", _tplSpringXml);
 
 		try {
@@ -452,6 +462,7 @@ public class ServiceBuilder {
 			_modelHintsFileName = modelHintsFileName;
 			_springFileName = springFileName;
 			_springDataSourceFileName = springDataSourceFileName;
+			_springMiscFileName = springMiscFileName;
 			_apiDir = apiDir;
 			_implDir = implDir;
 			_jsonFileName = jsonFileName;
@@ -951,6 +962,7 @@ public class ServiceBuilder {
 
 				_createProps();
 				_createSpringDataSourceXML();
+				_createSpringMiscXML();
 			}
 		}
 		catch (Exception e) {
@@ -1071,8 +1083,9 @@ public class ServiceBuilder {
 
 			ServiceBuilder serviceBuilder = new ServiceBuilder(
 				refFileName, _hbmFileName, _modelHintsFileName, _springFileName,
-				_springDataSourceFileName, _apiDir, _implDir, _jsonFileName,
-				_remotingFileName, _sqlDir, _sqlFileName, _sqlIndexesFileName,
+				_springDataSourceFileName, _springMiscFileName, _apiDir,
+				_implDir, _jsonFileName, _remotingFileName, _sqlDir,
+				_sqlFileName, _sqlIndexesFileName,
 				_sqlIndexesPropertiesFileName, _sqlSequencesFileName,
 				_autoNamespaceTables, _beanLocatorUtil, _propsUtil, _testDir,
 				false);
@@ -2307,6 +2320,22 @@ public class ServiceBuilder {
 		FileUtil.write(ejbFile, content, true);
 	}
 
+	private void _createSpringMiscXML() throws Exception {
+		if (Validator.isNull(_springMiscFileName)) {
+			return;
+		}
+
+		// Content
+
+		String content = _processTemplate(_tplSpringMiscXml);
+
+		// Write file
+
+		File ejbFile = new File(_springMiscFileName);
+
+		FileUtil.write(ejbFile, content, true);
+	}
+
 	private void _createSpringXML() throws Exception {
 		Map<String, Object> context = _getContext();
 
@@ -2875,6 +2904,7 @@ public class ServiceBuilder {
 		context.put("modelHintsFileName", _modelHintsFileName);
 		context.put("springFileName", _springFileName);
 		context.put("springDataSourceFileName", _springDataSourceFileName);
+		context.put("springMiscFileName", _springMiscFileName);
 		context.put("apiDir", _apiDir);
 		context.put("implDir", _implDir);
 		context.put("jsonFileName", _jsonFileName);
@@ -3260,6 +3290,7 @@ public class ServiceBuilder {
 	private String _tplServiceUtil = _TPL_ROOT + "service_util.ftl";
 	private String _tplSpringDataSourceXml =
 		_TPL_ROOT + "spring_data_source_xml.ftl";
+	private String _tplSpringMiscXml = _TPL_ROOT + "spring_misc_xml.ftl";
 	private String _tplSpringXml = _TPL_ROOT + "spring_xml.ftl";
 	private Set<String> _badTableNames;
 	private Set<String> _badColumnNames;
@@ -3267,6 +3298,7 @@ public class ServiceBuilder {
 	private String _modelHintsFileName;
 	private String _springFileName;
 	private String _springDataSourceFileName;
+	private String _springMiscFileName;
 	private String _apiDir;
 	private String _implDir;
 	private String _jsonFileName;

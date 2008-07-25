@@ -2,6 +2,11 @@
 <!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN" "http://www.springframework.org/dtd/spring-beans.dtd">
 
 <beans>
+	<bean id="velocityServiceInterceptor" class="com.liferay.portal.spring.aop.ServiceInterceptor" lazy-init="true">
+		<property name="exceptionSafe">
+			<value>true</value>
+		</property>
+	</bean>
 	<bean id="com.liferay.portal.bean.BeanPropertiesImpl" class="com.liferay.portal.bean.BeanPropertiesImpl" lazy-init="true" />
 	<bean id="com.liferay.portal.kernel.bean.BeanPropertiesUtil" class="com.liferay.portal.kernel.bean.BeanPropertiesUtil" lazy-init="true">
 		<property name="beanProperties">
@@ -206,7 +211,6 @@
 			<ref bean="com.liferay.portal.servlet.ImageServletTokenImpl" />
 		</property>
 	</bean>
-	<bean id="com.liferay.portal.spring.aop.ExceptionSafeInterceptor" class="com.liferay.portal.spring.aop.ExceptionSafeInterceptor" lazy-init="true" />
 	<bean id="com.liferay.portal.util.CalendarFactoryImpl" class="com.liferay.portal.util.CalendarFactoryImpl" lazy-init="true" />
 	<bean id="com.liferay.portal.kernel.util.CalendarFactoryUtil" class="com.liferay.portal.kernel.util.CalendarFactoryUtil" lazy-init="true">
 		<property name="calendarFactory">

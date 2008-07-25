@@ -22,6 +22,7 @@
 
 package com.liferay.portal.deploy.hot;
 
+import com.liferay.portal.kernel.bean.PortletBeanLocatorUtil;
 import com.liferay.portal.kernel.cache.CacheRegistry;
 import com.liferay.portal.kernel.configuration.Configuration;
 import com.liferay.portal.kernel.configuration.ConfigurationFactoryUtil;
@@ -241,6 +242,8 @@ public class PluginPackageHotDeployListener extends BaseHotDeployListener {
 		event.setPluginPackage(pluginPackage);
 
 		PluginPackageUtil.unregisterInstalledPluginPackage(pluginPackage);
+
+		PortletBeanLocatorUtil.setBeanLocator(servletContextName, null);
 
 		if (_processServiceBuilderProperties) {
 			CacheRegistry.clear();

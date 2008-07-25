@@ -20,37 +20,59 @@
  * SOFTWARE.
  */
 
-package com.liferay.portal.util;
+package com.liferay.portal.spring.aop;
 
-import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
-import com.liferay.portal.kernel.bean.PortletBeanLocatorUtil;
+import org.aopalliance.intercept.MethodInterceptor;
+import org.aopalliance.intercept.MethodInvocation;
 
 /**
- * <a href="ServiceLocator.java.html"><b><i>View Source</i></b></a>
+ * <a href="ServiceInterceptor.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *
  */
-public class ServiceLocator {
+public class ServiceInterceptor implements MethodInterceptor {
 
-	public static ServiceLocator getInstance() {
-		return _instance;
+	public Object invoke(MethodInvocation invocation) throws Throwable {
+		ClassLoader contextClassLoader =
+			Thread.currentThread().getContextClassLoader();
+
+		try {
+			if ((_classLoader != null) &&
+				(contextClassLoader != _classLoader)) {
+
+				Thread.currentThread().setContextClassLoader(_classLoader);
+			}
+
+			return invocation.proceed();
+		}
+		catch (Throwable t) {
+			if (_exceptionSafe) {
+				return null;
+			}
+			else {
+				throw t;
+			}
+		}
+		finally {
+			if ((_classLoader != null) &&
+				(contextClassLoader != _classLoader)) {
+
+				Thread.currentThread().setContextClassLoader(
+					contextClassLoader);
+			}
+		}
 	}
 
-	public Object findService(String serviceName) {
-		return PortalBeanLocatorUtil.locate(serviceName + _VELOCITY);
+	public void setClassLoader(ClassLoader classLoader) {
+		_classLoader = classLoader;
 	}
 
-	public Object findService(String servletContextName, String serviceName) {
-		return PortletBeanLocatorUtil.locate(
-			servletContextName, serviceName + _VELOCITY);
+	public void setExceptionSafe(boolean exceptionSafe) {
+		_exceptionSafe = exceptionSafe;
 	}
 
-	private ServiceLocator() {
-	}
-
-	private static final String _VELOCITY = ".velocity";
-
-	private static ServiceLocator _instance = new ServiceLocator();
+	private ClassLoader _classLoader;
+	private boolean _exceptionSafe;
 
 }
