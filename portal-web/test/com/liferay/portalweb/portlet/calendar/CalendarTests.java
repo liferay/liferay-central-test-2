@@ -45,6 +45,7 @@ public class CalendarTests extends BaseTests {
 		addTestSuite(EditEventTest.class);
 		addTestSuite(AddTemporaryEventTest.class);
 		addTestSuite(DeleteTemporaryEventTest.class);
+		addTestSuite(AssertConfigurationTest.class);
 		addTestSuite(DeleteAllEventsTest.class);
 		addTestSuite(UploadLARFileTest.class);
 	}

@@ -87,7 +87,6 @@ public class WorkflowTest extends BaseTestCase {
 		}
 
 		selenium.click("//input[@value='Save']");
-		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {

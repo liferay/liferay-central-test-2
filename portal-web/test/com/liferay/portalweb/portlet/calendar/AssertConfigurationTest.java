@@ -23,16 +23,15 @@
 package com.liferay.portalweb.portlet.calendar;
 
 import com.liferay.portalweb.portal.BaseTestCase;
-import com.liferay.portalweb.portal.util.RuntimeVariables;
 
 /**
- * <a href="UploadLARFileTest.java.html"><b><i>View Source</i></b></a>
+ * <a href="AssertConfigurationTest.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *
  */
-public class UploadLARFileTest extends BaseTestCase {
-	public void testUploadLARFile() throws Exception {
+public class AssertConfigurationTest extends BaseTestCase {
+	public void testAssertConfiguration() throws Exception {
 		for (int second = 0;; second++) {
 			if (second >= 60) {
 				fail("timeout");
@@ -51,10 +50,6 @@ public class UploadLARFileTest extends BaseTestCase {
 
 		selenium.click("//img[@alt='Configuration']");
 		selenium.waitForPageToLoad("30000");
-		selenium.click("link=Export / Import");
-		selenium.waitForPageToLoad("30000");
-		selenium.click("link=Import");
-		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -62,7 +57,7 @@ public class UploadLARFileTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("_86_importFileName")) {
+				if (selenium.isTextPresent("Joe Bloggs")) {
 					break;
 				}
 			}
@@ -72,60 +67,13 @@ public class UploadLARFileTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.type("_86_importFileName",
-			RuntimeVariables.replace(
-				"L:\\portal\\build\\portal-web\\test\\com\\liferay\\portalweb\\portlet\\calendar\\Calendar-Selenium.portlet.lar"));
-		selenium.click("_86_PORTLET_ARCHIVED_SETUPSCheckbox");
-		selenium.click("_86_PORTLET_USER_PREFERENCESCheckbox");
-		selenium.click("_86_DELETE_PORTLET_DATA");
-
 		for (int second = 0;; second++) {
 			if (second >= 60) {
 				fail("timeout");
 			}
 
 			try {
-				if (selenium.isElementPresent("//input[@value='Import']")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
-		selenium.click("//input[@value='Import']");
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isTextPresent(
-							"Your request processed successfully.")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
-		selenium.click("link=Return to Full Page");
-		selenium.waitForPageToLoad("30000");
-		selenium.click("//img[@alt='Configuration']");
-		selenium.waitForPageToLoad("30000");
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isTextPresent("Test")) {
+				if (selenium.isTextPresent("")) {
 					break;
 				}
 			}
@@ -137,7 +85,7 @@ public class UploadLARFileTest extends BaseTestCase {
 
 		selenium.click("link=Archived");
 		selenium.waitForPageToLoad("30000");
-		assertTrue(selenium.isElementPresent("link=Restore"));
+		assertFalse(selenium.isElementPresent("link=Test"));
 		selenium.click("link=Return to Full Page");
 		selenium.waitForPageToLoad("30000");
 	}
