@@ -24,7 +24,6 @@ package com.liferay.portal.kernel.bean;
 
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
-import com.liferay.portal.kernel.util.PortalClassLoaderUtil;
 
 /**
  * <a href="PortalBeanLocatorUtil.java.html"><b><i>View Source</i></b></a>
