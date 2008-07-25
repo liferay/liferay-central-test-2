@@ -84,6 +84,7 @@ public class WikiPageJSONSerializer {
 		jsonObj.put("nodeId", model.getNodeId());
 		jsonObj.put("title", model.getTitle());
 		jsonObj.put("version", model.getVersion());
+		jsonObj.put("minorEdit", model.getMinorEdit());
 		jsonObj.put("content", model.getContent());
 		jsonObj.put("summary", model.getSummary());
 		jsonObj.put("format", model.getFormat());

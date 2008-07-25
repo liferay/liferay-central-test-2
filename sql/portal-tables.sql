@@ -1526,6 +1526,7 @@ create table WikiPage (
 	nodeId LONG,
 	title VARCHAR(75) null,
 	version DOUBLE,
+	minorEdit BOOLEAN,
 	content TEXT null,
 	summary STRING null,
 	format VARCHAR(75) null,

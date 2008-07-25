@@ -258,7 +258,13 @@ for (int i = 0; i < results.size(); i++) {
 	// Revision
 
 	if (!curWikiPage.isNew()) {
-		row.addText(String.valueOf(curWikiPage.getVersion()), rowURL);
+		String revision = String.valueOf(curWikiPage.getVersion());
+
+		if (curWikiPage.isMinorEdit()) {
+			revision += " (" + LanguageUtil.get(pageContext, "minor-edit") + ")";
+		}
+
+		row.addText(revision, rowURL);
 	}
 	else {
 		row.addText(StringPool.BLANK);

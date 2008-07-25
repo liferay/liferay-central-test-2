@@ -77,6 +77,7 @@
 		<column name="nodeId" type="long" />
 		<column name="title" type="String" />
 		<column name="version" type="double" />
+		<column name="minorEdit" type="boolean" />
 		<column name="content" type="String" />
 		<column name="summary" type="String" />
 		<column name="format" type="String" />

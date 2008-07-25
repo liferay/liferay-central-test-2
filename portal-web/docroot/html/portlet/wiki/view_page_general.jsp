@@ -84,6 +84,10 @@ int count = 0;
 	</th>
 	<td>
 		<%= wikiPage.getVersion() %>
+
+		<c:if test="<%= wikiPage.isMinorEdit() %>">
+			(<liferay-ui:message key="minor-edit" />)
+		</c:if>
 	</td>
 </tr>
 <tr class="portlet-section-body<%= MathUtil.isOdd(count++) ? "-alternate" : "" %> results-row <%= MathUtil.isOdd(count) ? "alt" : "" %>">

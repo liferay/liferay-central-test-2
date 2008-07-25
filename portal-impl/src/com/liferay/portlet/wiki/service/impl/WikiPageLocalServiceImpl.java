@@ -155,6 +155,7 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 		page.setNodeId(nodeId);
 		page.setTitle(title);
 		page.setVersion(version);
+		page.setMinorEdit(minorEdit);
 		page.setContent(content);
 		page.setSummary(summary);
 		page.setFormat(format);
@@ -906,6 +907,7 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 		page.setNodeId(nodeId);
 		page.setTitle(title);
 		page.setVersion(newVersion);
+		page.setMinorEdit(minorEdit);
 		page.setContent(content);
 		page.setSummary(summary);
 		page.setFormat(format);

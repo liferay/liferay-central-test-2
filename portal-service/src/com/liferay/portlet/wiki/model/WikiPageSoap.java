@@ -61,6 +61,7 @@ public class WikiPageSoap implements Serializable {
 		soapModel.setNodeId(model.getNodeId());
 		soapModel.setTitle(model.getTitle());
 		soapModel.setVersion(model.getVersion());
+		soapModel.setMinorEdit(model.getMinorEdit());
 		soapModel.setContent(model.getContent());
 		soapModel.setSummary(model.getSummary());
 		soapModel.setFormat(model.getFormat());
@@ -180,6 +181,18 @@ public class WikiPageSoap implements Serializable {
 		_version = version;
 	}
 
+	public boolean getMinorEdit() {
+		return _minorEdit;
+	}
+
+	public boolean isMinorEdit() {
+		return _minorEdit;
+	}
+
+	public void setMinorEdit(boolean minorEdit) {
+		_minorEdit = minorEdit;
+	}
+
 	public String getContent() {
 		return _content;
 	}
@@ -243,6 +256,7 @@ public class WikiPageSoap implements Serializable {
 	private long _nodeId;
 	private String _title;
 	private double _version;
+	private boolean _minorEdit;
 	private String _content;
 	private String _summary;
 	private String _format;
