@@ -44,6 +44,7 @@ public class JournalArticleLocalServiceInterceptor extends MirageInterceptor {
 		if (methodName.equals("addArticle") ||
 			methodName.equals("deleteArticle") ||
 			methodName.equals("getArticle") ||
+			methodName.equals("getLatestArticle") ||
 			methodName.equals("updateArticle")||
 			methodName.equals("updateContent")) {
 
@@ -58,7 +59,9 @@ public class JournalArticleLocalServiceInterceptor extends MirageInterceptor {
 			else if (methodName.equals("deleteArticle")) {
 				contentService.deleteContent(contentInvoker);
 			}
-			else if (methodName.equals("getArticle")) {
+			else if (methodName.equals("getArticle") ||
+					 methodName.equals("getLatestArticle")) {
+
 				contentService.getContent(contentInvoker, null);
 			}
 			else if (methodName.equals("updateArticle")) {
@@ -91,7 +94,6 @@ public class JournalArticleLocalServiceInterceptor extends MirageInterceptor {
 				 methodName.equals("getArticlesBySmallImageId")||
 				 methodName.equals("getArticlesCount") ||
 				 methodName.equals("getDisplayArticle") ||
-				 methodName.equals("getLatestArticle") ||
 				 methodName.equals("getStructureArticles") ||
 				 methodName.equals("getStructureArticlesCount") ||
 				 methodName.equals("getTemplateArticles") ||
@@ -109,7 +111,6 @@ public class JournalArticleLocalServiceInterceptor extends MirageInterceptor {
 				methodName.equals("getArticlesBySmallImageId") ||
 				methodName.equals("getDisplayArticle")||
 				methodName.equals("getTemplateArticles")||
-				methodName.equals("getLatestArticle")||
 				methodName.equals("search")) {
 
 				contentService.searchContents(searchCriteriaInvoker);
