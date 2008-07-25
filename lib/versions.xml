@@ -1397,7 +1397,7 @@
 	</library>
 	<library>
 		<file-name>portal/jabsorb.jar</file-name>
-		<version>1.2.2</version>
+		<version>1.3 RC2</version>
 		<project-name>jabsorb</project-name>
 		<project-url>http://jabsorb.org</project-url>
 		<licenses>
