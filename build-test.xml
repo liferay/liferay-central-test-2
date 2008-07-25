@@ -1,0 +1,93 @@
+<project name="portal-test" basedir="." default="run" xmlns:antelope="antlib:ise.antelope.tasks">
+
+	<import file="build.xml" />
+
+	<target name="run">
+		<antcall target="all" />
+
+		<ant dir="sql" target="rebuild-mysql" inheritAll="false" />
+
+		<ant dir="portal-impl" target="test-class" inheritAll="false">
+			<property name="class" value="ServiceTestSuite" />
+		</ant>
+
+		<ant dir="portal-impl" target="test-class" inheritAll="false">
+			<property name="class" value="PersistenceTestSuite" />
+		</ant>
+
+		<ant dir="portal-impl" target="test-class" inheritAll="false">
+			<property name="class" value="MiscTestSuite" />
+		</ant>
+
+		<ant dir="util-java" target="test" inheritAll="false" />
+
+		<ant dir="sql" target="rebuild-mysql" inheritAll="false" />
+
+		<antcall target="test-${app.server.type}" />
+	</target>
+
+	<target name="test-tomcat">
+		<taskdef classname="com.liferay.portal.util.PropsUtilTask" classpathref="project.classpath" name="propsutil" />
+
+		<propsutil key="resource.repositories.root" result="propsutil.resource.repositories.root" />
+
+		<delete dir="${propsutil.resource.repositories.root}" />
+
+		<taskdef classname="com.liferay.portal.util.PropsUtilTask" classpathref="project.classpath" name="propsutil" />
+
+		<propsutil key="resource.repositories.root" result="propsutil.resource.repositories.root" />
+
+		<replace
+			file="${app.server.tomcat.portal.dir}/WEB-INF/web.xml"
+			token="session-timeout&gt;30&lt;"
+			value="session-timeout&gt;2&lt;"
+		/>
+
+		<exec dir="${lp.plugins.dir}" executable="cmd.exe" os="${os.windows}">
+			<arg line="/c svn update" />
+		</exec>
+
+		<echo file="${lp.plugins.dir}/build.${user.name}.properties">app.server.dir=${app.server.dir}
+app.server.portal.dir=${app.server.portal.dir}
+
+auto.deploy.dir=${propsutil.resource.repositories.root}/deploy
+
+plugins.includes=analog-clock-portlet,chat-portlet,flash-portlet,google-search-portlet,sample-hibernate-portlet,sample-jsp-portlet,sample-lar-portlet,sample-localized-portlet,sample-php-portlet,sample-sign-in-portlet,weather-portlet</echo>
+
+		<ant dir="${lp.plugins.dir}/portlets" inheritAll="false">
+			<target name="clean" />
+			<target name="deploy" />
+		</ant>
+
+		<java jar="lib/development/selenium-server.jar" fork="true" spawn="true" />
+
+		<parallel>
+			<exec dir="${app.server.tomcat.bin.dir}" executable="startup${file.suffix.bat}" resolveexecutable="true" spawn="true" />
+
+			<sequential>
+				<waitfor>
+					<http url="http://localhost:8080" />
+				</waitfor>
+
+				<sleep seconds="60" />
+
+				<ant dir="portal-impl" target="test-class" inheritAll="false">
+					<property name="class" value="ServiceHttpTestSuite" />
+				</ant>
+
+				<ant dir="portal-impl" target="test-class" inheritAll="false">
+					<property name="class" value="ServiceSoapTestSuite" />
+				</ant>
+
+				<ant dir="portal-web" target="test" inheritAll="false" />
+
+				<exec dir="${app.server.tomcat.bin.dir}" executable="shutdown${file.suffix.bat}" resolveexecutable="true" spawn="true" />
+
+				<sleep seconds="10" />
+			</sequential>
+		</parallel>
+
+		<antelope:post to="http://localhost:4444/selenium-server/driver/?cmd=shutDown" wantresponse="false" />
+	</target>
+
+</project>
