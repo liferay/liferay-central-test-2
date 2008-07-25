@@ -38,8 +38,11 @@ String columnId = (String)request.getAttribute(WebKeys.RENDER_PORTLET_COLUMN_ID)
 Integer columnPos = (Integer)request.getAttribute(WebKeys.RENDER_PORTLET_COLUMN_POS);
 Integer columnCount = (Integer)request.getAttribute(WebKeys.RENDER_PORTLET_COLUMN_COUNT);
 Boolean renderPortletResource = (Boolean)request.getAttribute(WebKeys.RENDER_PORTLET_RESOURCE);
+Boolean runtimePortletExclusive = (Boolean)request.getAttribute(WebKeys.RUNTIME_PORTLET_EXCLUSIVE);
 
 boolean runtimePortlet = (renderPortletResource != null) && renderPortletResource.booleanValue();
+
+boolean exclusiveRuntimePortlet = runtimePortlet && runtimePortletExclusive != null && runtimePortletExclusive.booleanValue();
 
 boolean denyAccess = false;
 
@@ -673,7 +676,7 @@ if (portlet.isActive() && access && supportsMimeType) {
 
 <%@ include file="/html/portal/render_portlet-ext.jsp" %>
 
-<c:if test="<%= !themeDisplay.isFacebook() && !themeDisplay.isStateExclusive() && !themeDisplay.isWapTheme() %>">
+<c:if test="<%= !themeDisplay.isFacebook() && !themeDisplay.isStateExclusive() && !themeDisplay.isWapTheme() && !exclusiveRuntimePortlet %>">
 
 	<%
 	String freeformStyles = StringPool.BLANK;
@@ -829,7 +832,7 @@ else {
 }
 %>
 
-<c:if test="<%= !themeDisplay.isFacebook() && !themeDisplay.isStateExclusive() && !themeDisplay.isWapTheme() %>">
+<c:if test="<%= !themeDisplay.isFacebook() && !themeDisplay.isStateExclusive() && !themeDisplay.isWapTheme() && !exclusiveRuntimePortlet %>">
 		<script type="text/javascript">
 			<c:if test="<%= !runtimePortlet %>">
 				Liferay.Portlet.onLoad(

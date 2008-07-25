@@ -76,8 +76,11 @@ if (Validator.isNull(portletTitle)) {
 portletDisplay.setTitle(portletTitle);
 
 Boolean renderPortletResource = (Boolean)request.getAttribute(WebKeys.RENDER_PORTLET_RESOURCE);
+Boolean runtimePortletExclusive = (Boolean)request.getAttribute(WebKeys.RUNTIME_PORTLET_EXCLUSIVE);
 
 boolean runtimePortlet = (renderPortletResource != null) && renderPortletResource.booleanValue();
+
+boolean exclusiveRuntimePortlet = runtimePortlet && runtimePortletExclusive != null && runtimePortletExclusive.booleanValue();
 
 boolean freeformPortlet = themeDisplay.isFreeformLayout() && !runtimePortlet && !layoutTypePortlet.hasStateMax();
 
@@ -105,7 +108,7 @@ containerStyles = sb.toString();
 	<c:when test="<%= themeDisplay.isFacebook() %>">
 		<%@ include file="/html/common/themes/portlet_facebook.jspf" %>
 	</c:when>
-	<c:when test="<%= themeDisplay.isStateExclusive() %>">
+	<c:when test="<%= themeDisplay.isStateExclusive() || exclusiveRuntimePortlet %>">
 		<%@ include file="/html/common/themes/portlet_content_wrapper.jspf" %>
 	</c:when>
 	<c:when test="<%= themeDisplay.isStatePopUp() %>">

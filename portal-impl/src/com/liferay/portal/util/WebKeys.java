@@ -266,6 +266,8 @@ public class WebKeys implements com.liferay.portal.kernel.util.WebKeys {
 	public static final String REQUESTED_LAYOUT = "REQUESTED_LAYOUT";
 
 	public static final String ROLE = "ROLE";
+	
+	public static final String RUNTIME_PORTLET_EXCLUSIVE = "RUNTIME_PORTLET_EXCLUSIVE";
 
 	public static final String SEL_COMPANY = "SEL_COMPANY";
 
