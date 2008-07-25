@@ -332,10 +332,10 @@ if (WebFormUtil.getTableRowsCount(databaseTableName) > 0) {
 				}
 				else if (value == 'paragraph') {
 
-					// Show just the textarea, not the labels since there are multiple choice inputs.
+					// Show just the text field, not the labels since there are multiple choice inputs.
 
 					div.children().hide();
-					div.children(".<portlet:namespace />input-field").show();
+					div.children(".lfr-input-text").show();
 					div.show();
 				}
 				else {
