@@ -208,10 +208,6 @@ public class RuntimePortletUtil {
 		TemplateProcessor processor = new TemplateProcessor(
 			servletContext, request, response, portletId);
 
-		VelocityContext vc = new VelocityContext();
-
-		vc.put("processor", processor);
-
 		VelocityContext velocityContext = null;
 
 		// LEP-6865
@@ -225,9 +221,11 @@ public class RuntimePortletUtil {
 			velocityContext = new VelocityContext(_innerVelocityContext);
 		}
 
+		velocityContext.put("processor", processor);
+
 		// Velocity variables
 
-		VelocityVariables.insertVariables(vc, request);
+		VelocityVariables.insertVariables(velocityContext, request);
 
 		// liferay:include tag library
 
@@ -242,14 +240,15 @@ public class RuntimePortletUtil {
 
 		Object velocityTaglib = MethodInvoker.invoke(methodWrapper);
 
-		vc.put("taglibLiferay", velocityTaglib);
-		vc.put("theme", velocityTaglib);
+		velocityContext.put("taglibLiferay", velocityTaglib);
+		velocityContext.put("theme", velocityTaglib);
 
 		StringWriter sw = new StringWriter();
 
 		try {
 			Velocity.evaluate(
-				vc, sw, RuntimePortletUtil.class.getName(), content);
+				velocityContext, sw, RuntimePortletUtil.class.getName(),
+				content);
 		}
 		catch (Exception e) {
 			_log.error(e, e);
