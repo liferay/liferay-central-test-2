@@ -1726,41 +1726,7 @@ public class PortalImpl implements Portal {
 			return StringPool.BLANK;
 		}
 
-		int strutsActionCount = 0;
-
-		Enumeration<String> enu = request.getParameterNames();
-
-		while (enu.hasMoreElements()) {
-			String name = enu.nextElement();
-
-			int pos = name.indexOf("_struts_action");
-
-			if (pos != -1) {
-				strutsActionCount++;
-
-				// There should never be more than one Struts action
-
-				if (strutsActionCount > 1) {
-					return StringPool.BLANK;
-				}
-
-				String curStrutsAction = ParamUtil.getString(request, name);
-
-				if (Validator.isNotNull(curStrutsAction)) {
-
-					// The Struts action must be for the correct portlet
-
-					String portletId1 = name.substring(1, pos);
-					String portletId2 = ParamUtil.getString(request, "p_p_id");
-
-					if (portletId1.equals(portletId2)) {
-						strutsAction = curStrutsAction;
-					}
-				}
-			}
-		}
-
-		return strutsAction;
+		return _getPortletParam(request, "struts_action");
 	}
 
 	public String[] getSystemCommunityRoles() {
@@ -2672,12 +2638,19 @@ public class PortalImpl implements Portal {
 			_log.debug("Struts action " + strutsAction);
 		}
 
+		String actionName = _getPortletParam(request, "actionName");
+
+		if (_log.isDebugEnabled()) {
+			_log.debug("Struts action " + strutsAction);
+		}
+
 		boolean alwaysAllowDoAsUser = false;
 
 		if (path.equals("/portal/fckeditor") ||
 			strutsAction.equals("/document_library/edit_file_entry") ||
 			strutsAction.equals("/image_gallery/edit_image") ||
-			strutsAction.equals("/wiki/edit_page_attachment")) {
+			strutsAction.equals("/wiki/edit_page_attachment") ||
+			actionName.equals("addAttachment")) {
 
 			alwaysAllowDoAsUser = true;
 		}
@@ -2842,6 +2815,48 @@ public class PortalImpl implements Portal {
 		}
 
 		return plid;
+	}
+
+	private String _getPortletParam(HttpServletRequest request, String name) {
+		String value = null;
+
+		int strutsActionCount = 0;
+
+		Enumeration<String> enu = request.getParameterNames();
+
+		while (enu.hasMoreElements()) {
+			String curName = enu.nextElement();
+
+			int pos = curName.indexOf(StringPool.UNDERLINE + name);
+			if (pos != -1) {
+				strutsActionCount++;
+
+				// There should never be more than one Struts action
+
+				if (strutsActionCount > 1) {
+					return StringPool.BLANK;
+				}
+
+				String curStrutsAction = ParamUtil.getString(request, curName);
+
+				if (Validator.isNotNull(curStrutsAction)) {
+
+					// The Struts action must be for the correct portlet
+
+					String portletId1 = curName.substring(1, pos);
+					String portletId2 = ParamUtil.getString(request, "p_p_id");
+
+					if (portletId1.equals(portletId2)) {
+						value = curStrutsAction;
+					}
+				}
+			}
+		}
+
+		if (value == null) {
+			value = StringPool.BLANK;
+		}
+		return value;
 	}
 
 	private void _initCustomSQL() {
