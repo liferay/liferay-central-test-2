@@ -402,6 +402,7 @@ create index IX_AB3D8BCB on TagsAsset (companyId);
 
 create index IX_10563688 on TagsEntry (companyId, name);
 create index IX_AB1B8C1E on TagsEntry (companyId, vocabularyId);
+create index IX_E26B8935 on TagsEntry (companyId, vocabularyId, parentEntryId);
 
 create index IX_C134234 on TagsProperty (companyId);
 create index IX_EB974D08 on TagsProperty (companyId, key_);

@@ -465,6 +465,100 @@ public class TagsEntryServiceHttp {
 		}
 	}
 
+	public static java.util.List<com.liferay.portlet.tags.model.TagsEntry> getVocabularyEntries(
+		HttpPrincipal httpPrincipal, long companyId,
+		java.lang.String vocabularyName, java.lang.String parentName)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
+		try {
+			Object paramObj0 = new LongWrapper(companyId);
+
+			Object paramObj1 = vocabularyName;
+
+			if (vocabularyName == null) {
+				paramObj1 = new NullWrapper("java.lang.String");
+			}
+
+			Object paramObj2 = parentName;
+
+			if (parentName == null) {
+				paramObj2 = new NullWrapper("java.lang.String");
+			}
+
+			MethodWrapper methodWrapper = new MethodWrapper(TagsEntryServiceUtil.class.getName(),
+					"getVocabularyEntries",
+					new Object[] { paramObj0, paramObj1, paramObj2 });
+
+			Object returnObj = null;
+
+			try {
+				returnObj = TunnelUtil.invoke(httpPrincipal, methodWrapper);
+			}
+			catch (Exception e) {
+				if (e instanceof com.liferay.portal.PortalException) {
+					throw (com.liferay.portal.PortalException)e;
+				}
+
+				if (e instanceof com.liferay.portal.SystemException) {
+					throw (com.liferay.portal.SystemException)e;
+				}
+
+				throw new com.liferay.portal.SystemException(e);
+			}
+
+			return (java.util.List<com.liferay.portlet.tags.model.TagsEntry>)returnObj;
+		}
+		catch (com.liferay.portal.SystemException se) {
+			_log.error(se, se);
+
+			throw se;
+		}
+	}
+
+	public static java.util.List<com.liferay.portlet.tags.model.TagsEntry> getVocabularyRootEntries(
+		HttpPrincipal httpPrincipal, long companyId,
+		java.lang.String vocabularyName)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
+		try {
+			Object paramObj0 = new LongWrapper(companyId);
+
+			Object paramObj1 = vocabularyName;
+
+			if (vocabularyName == null) {
+				paramObj1 = new NullWrapper("java.lang.String");
+			}
+
+			MethodWrapper methodWrapper = new MethodWrapper(TagsEntryServiceUtil.class.getName(),
+					"getVocabularyRootEntries",
+					new Object[] { paramObj0, paramObj1 });
+
+			Object returnObj = null;
+
+			try {
+				returnObj = TunnelUtil.invoke(httpPrincipal, methodWrapper);
+			}
+			catch (Exception e) {
+				if (e instanceof com.liferay.portal.PortalException) {
+					throw (com.liferay.portal.PortalException)e;
+				}
+
+				if (e instanceof com.liferay.portal.SystemException) {
+					throw (com.liferay.portal.SystemException)e;
+				}
+
+				throw new com.liferay.portal.SystemException(e);
+			}
+
+			return (java.util.List<com.liferay.portlet.tags.model.TagsEntry>)returnObj;
+		}
+		catch (com.liferay.portal.SystemException se) {
+			_log.error(se, se);
+
+			throw se;
+		}
+	}
+
 	public static void mergeEntries(HttpPrincipal httpPrincipal,
 		long fromEntryId, long toEntryId)
 		throws com.liferay.portal.PortalException,

@@ -667,6 +667,306 @@ public class TagsEntryPersistenceImpl extends BasePersistenceImpl
 		}
 	}
 
+	public List<TagsEntry> findByC_V_P(long companyId, long vocabularyId,
+		long parentEntryId) throws SystemException {
+		boolean finderClassNameCacheEnabled = TagsEntryModelImpl.CACHE_ENABLED;
+		String finderClassName = TagsEntry.class.getName();
+		String finderMethodName = "findByC_V_P";
+		String[] finderParams = new String[] {
+				Long.class.getName(), Long.class.getName(), Long.class.getName()
+			};
+		Object[] finderArgs = new Object[] {
+				new Long(companyId), new Long(vocabularyId),
+				new Long(parentEntryId)
+			};
+
+		Object result = null;
+
+		if (finderClassNameCacheEnabled) {
+			result = FinderCacheUtil.getResult(finderClassName,
+					finderMethodName, finderParams, finderArgs, this);
+		}
+
+		if (result == null) {
+			Session session = null;
+
+			try {
+				session = openSession();
+
+				StringBuilder query = new StringBuilder();
+
+				query.append(
+					"FROM com.liferay.portlet.tags.model.TagsEntry WHERE ");
+
+				query.append("companyId = ?");
+
+				query.append(" AND ");
+
+				query.append("vocabularyId = ?");
+
+				query.append(" AND ");
+
+				query.append("parentEntryId = ?");
+
+				query.append(" ");
+
+				query.append("ORDER BY ");
+
+				query.append("name ASC");
+
+				Query q = session.createQuery(query.toString());
+
+				QueryPos qPos = QueryPos.getInstance(q);
+
+				qPos.add(companyId);
+
+				qPos.add(vocabularyId);
+
+				qPos.add(parentEntryId);
+
+				List<TagsEntry> list = q.list();
+
+				FinderCacheUtil.putResult(finderClassNameCacheEnabled,
+					finderClassName, finderMethodName, finderParams,
+					finderArgs, list);
+
+				return list;
+			}
+			catch (Exception e) {
+				throw processException(e);
+			}
+			finally {
+				closeSession(session);
+			}
+		}
+		else {
+			return (List<TagsEntry>)result;
+		}
+	}
+
+	public List<TagsEntry> findByC_V_P(long companyId, long vocabularyId,
+		long parentEntryId, int start, int end) throws SystemException {
+		return findByC_V_P(companyId, vocabularyId, parentEntryId, start, end,
+			null);
+	}
+
+	public List<TagsEntry> findByC_V_P(long companyId, long vocabularyId,
+		long parentEntryId, int start, int end, OrderByComparator obc)
+		throws SystemException {
+		boolean finderClassNameCacheEnabled = TagsEntryModelImpl.CACHE_ENABLED;
+		String finderClassName = TagsEntry.class.getName();
+		String finderMethodName = "findByC_V_P";
+		String[] finderParams = new String[] {
+				Long.class.getName(), Long.class.getName(), Long.class.getName(),
+				
+				"java.lang.Integer", "java.lang.Integer",
+				"com.liferay.portal.kernel.util.OrderByComparator"
+			};
+		Object[] finderArgs = new Object[] {
+				new Long(companyId), new Long(vocabularyId),
+				new Long(parentEntryId),
+				
+				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
+			};
+
+		Object result = null;
+
+		if (finderClassNameCacheEnabled) {
+			result = FinderCacheUtil.getResult(finderClassName,
+					finderMethodName, finderParams, finderArgs, this);
+		}
+
+		if (result == null) {
+			Session session = null;
+
+			try {
+				session = openSession();
+
+				StringBuilder query = new StringBuilder();
+
+				query.append(
+					"FROM com.liferay.portlet.tags.model.TagsEntry WHERE ");
+
+				query.append("companyId = ?");
+
+				query.append(" AND ");
+
+				query.append("vocabularyId = ?");
+
+				query.append(" AND ");
+
+				query.append("parentEntryId = ?");
+
+				query.append(" ");
+
+				if (obc != null) {
+					query.append("ORDER BY ");
+					query.append(obc.getOrderBy());
+				}
+
+				else {
+					query.append("ORDER BY ");
+
+					query.append("name ASC");
+				}
+
+				Query q = session.createQuery(query.toString());
+
+				QueryPos qPos = QueryPos.getInstance(q);
+
+				qPos.add(companyId);
+
+				qPos.add(vocabularyId);
+
+				qPos.add(parentEntryId);
+
+				List<TagsEntry> list = (List<TagsEntry>)QueryUtil.list(q,
+						getDialect(), start, end);
+
+				FinderCacheUtil.putResult(finderClassNameCacheEnabled,
+					finderClassName, finderMethodName, finderParams,
+					finderArgs, list);
+
+				return list;
+			}
+			catch (Exception e) {
+				throw processException(e);
+			}
+			finally {
+				closeSession(session);
+			}
+		}
+		else {
+			return (List<TagsEntry>)result;
+		}
+	}
+
+	public TagsEntry findByC_V_P_First(long companyId, long vocabularyId,
+		long parentEntryId, OrderByComparator obc)
+		throws NoSuchEntryException, SystemException {
+		List<TagsEntry> list = findByC_V_P(companyId, vocabularyId,
+				parentEntryId, 0, 1, obc);
+
+		if (list.size() == 0) {
+			StringBuilder msg = new StringBuilder();
+
+			msg.append("No TagsEntry exists with the key {");
+
+			msg.append("companyId=" + companyId);
+
+			msg.append(", ");
+			msg.append("vocabularyId=" + vocabularyId);
+
+			msg.append(", ");
+			msg.append("parentEntryId=" + parentEntryId);
+
+			msg.append(StringPool.CLOSE_CURLY_BRACE);
+
+			throw new NoSuchEntryException(msg.toString());
+		}
+		else {
+			return list.get(0);
+		}
+	}
+
+	public TagsEntry findByC_V_P_Last(long companyId, long vocabularyId,
+		long parentEntryId, OrderByComparator obc)
+		throws NoSuchEntryException, SystemException {
+		int count = countByC_V_P(companyId, vocabularyId, parentEntryId);
+
+		List<TagsEntry> list = findByC_V_P(companyId, vocabularyId,
+				parentEntryId, count - 1, count, obc);
+
+		if (list.size() == 0) {
+			StringBuilder msg = new StringBuilder();
+
+			msg.append("No TagsEntry exists with the key {");
+
+			msg.append("companyId=" + companyId);
+
+			msg.append(", ");
+			msg.append("vocabularyId=" + vocabularyId);
+
+			msg.append(", ");
+			msg.append("parentEntryId=" + parentEntryId);
+
+			msg.append(StringPool.CLOSE_CURLY_BRACE);
+
+			throw new NoSuchEntryException(msg.toString());
+		}
+		else {
+			return list.get(0);
+		}
+	}
+
+	public TagsEntry[] findByC_V_P_PrevAndNext(long entryId, long companyId,
+		long vocabularyId, long parentEntryId, OrderByComparator obc)
+		throws NoSuchEntryException, SystemException {
+		TagsEntry tagsEntry = findByPrimaryKey(entryId);
+
+		int count = countByC_V_P(companyId, vocabularyId, parentEntryId);
+
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			StringBuilder query = new StringBuilder();
+
+			query.append("FROM com.liferay.portlet.tags.model.TagsEntry WHERE ");
+
+			query.append("companyId = ?");
+
+			query.append(" AND ");
+
+			query.append("vocabularyId = ?");
+
+			query.append(" AND ");
+
+			query.append("parentEntryId = ?");
+
+			query.append(" ");
+
+			if (obc != null) {
+				query.append("ORDER BY ");
+				query.append(obc.getOrderBy());
+			}
+
+			else {
+				query.append("ORDER BY ");
+
+				query.append("name ASC");
+			}
+
+			Query q = session.createQuery(query.toString());
+
+			QueryPos qPos = QueryPos.getInstance(q);
+
+			qPos.add(companyId);
+
+			qPos.add(vocabularyId);
+
+			qPos.add(parentEntryId);
+
+			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc,
+					tagsEntry);
+
+			TagsEntry[] array = new TagsEntryImpl[3];
+
+			array[0] = (TagsEntry)objArray[0];
+			array[1] = (TagsEntry)objArray[1];
+			array[2] = (TagsEntry)objArray[2];
+
+			return array;
+		}
+		catch (Exception e) {
+			throw processException(e);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
+
 	public List<Object> findWithDynamicQuery(DynamicQuery dynamicQuery)
 		throws SystemException {
 		Session session = null;
@@ -794,6 +1094,14 @@ public class TagsEntryPersistenceImpl extends BasePersistenceImpl
 	public void removeByC_V(long companyId, long vocabularyId)
 		throws SystemException {
 		for (TagsEntry tagsEntry : findByC_V(companyId, vocabularyId)) {
+			remove(tagsEntry);
+		}
+	}
+
+	public void removeByC_V_P(long companyId, long vocabularyId,
+		long parentEntryId) throws SystemException {
+		for (TagsEntry tagsEntry : findByC_V_P(companyId, vocabularyId,
+				parentEntryId)) {
 			remove(tagsEntry);
 		}
 	}
@@ -932,6 +1240,90 @@ public class TagsEntryPersistenceImpl extends BasePersistenceImpl
 				qPos.add(companyId);
 
 				qPos.add(vocabularyId);
+
+				Long count = null;
+
+				Iterator<Long> itr = q.list().iterator();
+
+				if (itr.hasNext()) {
+					count = itr.next();
+				}
+
+				if (count == null) {
+					count = new Long(0);
+				}
+
+				FinderCacheUtil.putResult(finderClassNameCacheEnabled,
+					finderClassName, finderMethodName, finderParams,
+					finderArgs, count);
+
+				return count.intValue();
+			}
+			catch (Exception e) {
+				throw processException(e);
+			}
+			finally {
+				closeSession(session);
+			}
+		}
+		else {
+			return ((Long)result).intValue();
+		}
+	}
+
+	public int countByC_V_P(long companyId, long vocabularyId,
+		long parentEntryId) throws SystemException {
+		boolean finderClassNameCacheEnabled = TagsEntryModelImpl.CACHE_ENABLED;
+		String finderClassName = TagsEntry.class.getName();
+		String finderMethodName = "countByC_V_P";
+		String[] finderParams = new String[] {
+				Long.class.getName(), Long.class.getName(), Long.class.getName()
+			};
+		Object[] finderArgs = new Object[] {
+				new Long(companyId), new Long(vocabularyId),
+				new Long(parentEntryId)
+			};
+
+		Object result = null;
+
+		if (finderClassNameCacheEnabled) {
+			result = FinderCacheUtil.getResult(finderClassName,
+					finderMethodName, finderParams, finderArgs, this);
+		}
+
+		if (result == null) {
+			Session session = null;
+
+			try {
+				session = openSession();
+
+				StringBuilder query = new StringBuilder();
+
+				query.append("SELECT COUNT(*) ");
+				query.append(
+					"FROM com.liferay.portlet.tags.model.TagsEntry WHERE ");
+
+				query.append("companyId = ?");
+
+				query.append(" AND ");
+
+				query.append("vocabularyId = ?");
+
+				query.append(" AND ");
+
+				query.append("parentEntryId = ?");
+
+				query.append(" ");
+
+				Query q = session.createQuery(query.toString());
+
+				QueryPos qPos = QueryPos.getInstance(q);
+
+				qPos.add(companyId);
+
+				qPos.add(vocabularyId);
+
+				qPos.add(parentEntryId);
 
 				Long count = null;
 

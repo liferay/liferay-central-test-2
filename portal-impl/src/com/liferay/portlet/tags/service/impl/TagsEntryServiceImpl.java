@@ -34,7 +34,8 @@ import java.util.List;
  * <a href="TagsEntryServiceImpl.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
- *
+ * @author Jorge Ferrer
+ * @author Alvaro del Castillo
  */
 public class TagsEntryServiceImpl extends TagsEntryServiceBaseImpl {
 
@@ -43,7 +44,7 @@ public class TagsEntryServiceImpl extends TagsEntryServiceBaseImpl {
 
 		return tagsEntryLocalService.addEntry(getUserId(), name);
 	}
-
+	
 	public TagsEntry addEntry(String name, String[] properties)
 		throws PortalException, SystemException {
 
@@ -54,7 +55,8 @@ public class TagsEntryServiceImpl extends TagsEntryServiceBaseImpl {
 			String name, String vocabularyName, String[] properties)
 		throws PortalException, SystemException {
 
-		return addEntry(name, vocabularyName, properties);
+		return tagsEntryLocalService.addEntry(
+				getUserId(), name, vocabularyName, properties);
 	}
 
 	public TagsEntry addEntry(
@@ -98,6 +100,23 @@ public class TagsEntryServiceImpl extends TagsEntryServiceBaseImpl {
 
 		return tagsEntryLocalService.getVocabularyEntries(
 			companyId, vocabularyName);
+	}
+
+	public List<TagsEntry> getVocabularyEntries(
+			long companyId, String vocabularyName, String parentName)
+		throws PortalException, SystemException {
+		
+		return tagsEntryLocalService.getVocabularyEntries(
+				companyId, vocabularyName, parentName);
+	}
+
+	
+	public List<TagsEntry> getVocabularyRootEntries(
+			long companyId, String vocabularyName)
+		throws PortalException, SystemException {
+		
+		return tagsEntryLocalService.getVocabularyRootEntries(
+				companyId, vocabularyName);
 	}
 
 	public void mergeEntries(long fromEntryId, long toEntryId)

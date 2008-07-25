@@ -154,6 +154,26 @@ public class TagsEntryServiceJSON {
 		return TagsEntryJSONSerializer.toJSONArray(returnValue);
 	}
 
+	public static JSONArray getVocabularyEntries(long companyId,
+		java.lang.String vocabularyName, java.lang.String parentName)
+		throws java.rmi.RemoteException, com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
+		java.util.List<com.liferay.portlet.tags.model.TagsEntry> returnValue = TagsEntryServiceUtil.getVocabularyEntries(companyId,
+				vocabularyName, parentName);
+
+		return TagsEntryJSONSerializer.toJSONArray(returnValue);
+	}
+
+	public static JSONArray getVocabularyRootEntries(long companyId,
+		java.lang.String vocabularyName)
+		throws java.rmi.RemoteException, com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
+		java.util.List<com.liferay.portlet.tags.model.TagsEntry> returnValue = TagsEntryServiceUtil.getVocabularyRootEntries(companyId,
+				vocabularyName);
+
+		return TagsEntryJSONSerializer.toJSONArray(returnValue);
+	}
+
 	public static void mergeEntries(long fromEntryId, long toEntryId)
 		throws java.rmi.RemoteException, com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {

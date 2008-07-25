@@ -114,6 +114,12 @@
 			<finder-column name="vocabularyId" />
 		</finder>
 
+		<finder name="C_V_P" return-type="Collection">
+			<finder-column name="companyId" />
+			<finder-column name="vocabularyId" />
+			<finder-column name="parentEntryId" />
+		</finder>
+
 		<!-- References -->
 
 		<reference package-path="com.liferay.counter" entity="Counter" />

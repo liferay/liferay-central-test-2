@@ -2512,6 +2512,13 @@ Liferay.Service.Tags.TagsEntry = {
 		return Liferay.Service.ajax(params, callback);
 	},
 
+	getVocabularyRootEntries: function(params, callback) {
+		params.serviceClassName = this.serviceClassName;
+		params.serviceMethodName = "getVocabularyRootEntries";
+
+		return Liferay.Service.ajax(params, callback);
+	},
+
 	mergeEntries: function(params, callback) {
 		params.serviceClassName = this.serviceClassName;
 		params.serviceMethodName = "mergeEntries";
