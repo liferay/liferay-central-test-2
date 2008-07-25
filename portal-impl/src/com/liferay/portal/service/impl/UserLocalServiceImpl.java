@@ -392,6 +392,9 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 					companyId, defaultUserGroupNames[i]);
 
 				userGroups.add(userGroup);
+
+				copyUserGroupLayouts(
+					userGroup.getUserGroupId(), new long[] {userId});
 			}
 			catch (NoSuchUserGroupException nsuge) {
 			}
