@@ -48,15 +48,21 @@ public class PortalBeanLocatorUtil {
 			ClassLoader contextClassLoader =
 				Thread.currentThread().getContextClassLoader();
 
+			ClassLoader beanClassLoader = _beanLocator.getClassLoader();
+
 			try {
-				Thread.currentThread().setContextClassLoader(
-					PortalClassLoaderUtil.getClassLoader());
+				if (contextClassLoader != beanClassLoader) {
+					Thread.currentThread().setContextClassLoader(
+						beanClassLoader);
+				}
 
 				return _beanLocator.locate(name);
 			}
 			finally {
-				Thread.currentThread().setContextClassLoader(
-					contextClassLoader);
+				if (contextClassLoader != beanClassLoader) {
+					Thread.currentThread().setContextClassLoader(
+						contextClassLoader);
+				}
 			}
 		}
 	}

@@ -30,6 +30,8 @@ package com.liferay.portal.kernel.bean;
  */
 public interface BeanLocator {
 
+	public ClassLoader getClassLoader();
+
 	public Object locate(String name) throws BeanLocatorException;
 
 }

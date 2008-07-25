@@ -40,10 +40,18 @@ import org.springframework.context.ApplicationContext;
 public class BeanLocatorImpl implements BeanLocator {
 
 	public BeanLocatorImpl() {
+		this(BeanLocatorImpl.class.getClassLoader(), null);
 	}
 
-	public BeanLocatorImpl(ApplicationContext applicationContext) {
+	public BeanLocatorImpl(
+		ClassLoader classLoader, ApplicationContext applicationContext) {
+
+		_classLoader = classLoader;
 		_applicationContext = applicationContext;
+	}
+
+	public ClassLoader getClassLoader() {
+		return _classLoader;
 	}
 
 	public Object locate(String name) throws BeanLocatorException {
@@ -60,6 +68,7 @@ public class BeanLocatorImpl implements BeanLocator {
 
 	private static Log _log = LogFactory.getLog(BeanLocatorImpl.class);
 
+	private ClassLoader _classLoader;
 	private ApplicationContext _applicationContext;
 
 }
