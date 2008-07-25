@@ -22,14 +22,7 @@
 
 package com.liferay.portal.util;
 
-import com.liferay.portal.kernel.bean.ExceptionSafeBeanHandler;
-import com.liferay.portal.kernel.util.MethodInvoker;
-import com.liferay.portal.kernel.util.MethodWrapper;
-
-import java.lang.reflect.Proxy;
-
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
 
 /**
  * <a href="ServiceLocator.java.html"><b><i>View Source</i></b></a>
@@ -44,43 +37,11 @@ public class ServiceLocator {
 	}
 
 	public Object findService(String serviceName) {
-		Object obj = null;
-
-		try {
-			String factoryName = serviceName + _FACTORY_SUFFIX;
-
-			MethodWrapper methodWrapper = new MethodWrapper(
-				factoryName, _SERVICE_METHOD, new Object[0]);
-
-			obj = MethodInvoker.invoke(methodWrapper, false);
-		}
-		catch (Exception e) {
-			_log.error(e);
-		}
-
-		return obj;
-	}
-
-	public Object findExceptionSafeService(Class<?> serviceClass) {
-		Object obj = findService(serviceClass.getName());
-
-		if (obj != null) {
-			obj = Proxy.newProxyInstance(
-				serviceClass.getClassLoader(), new Class[] {serviceClass},
-				new ExceptionSafeBeanHandler(obj));
-		}
-
-		return obj;
+		return PortalBeanLocatorUtil.locate(serviceName + ".exceptionSafe");
 	}
 
 	private ServiceLocator() {
 	}
-
-	private static Log _log = LogFactory.getLog(ServiceLocator.class);
-
-	private static final String _FACTORY_SUFFIX = "Factory";
-
-	private static final String _SERVICE_METHOD = "getService";
 
 	private static ServiceLocator _instance = new ServiceLocator();
 

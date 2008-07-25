@@ -22,6 +22,19 @@
 			</props>
 		</property>
 	</bean>
+	<bean id="com.liferay.portal.service.AccountLocalService.exceptionSafe" class="org.springframework.aop.framework.ProxyFactoryBean" lazy-init="true">
+		<property name="proxyInterfaces">
+			<value>com.liferay.portal.service.AccountLocalService</value>
+		</property>
+		<property name="interceptorNames">
+			<list>
+				<value>com.liferay.portal.spring.aop.ExceptionSafeInterceptor</value>
+			</list>
+		</property>
+		<property name="target">
+			<ref bean="com.liferay.portal.service.AccountLocalService.transaction" />
+		</property>
+	</bean>
 	<bean id="com.liferay.portal.service.AccountLocalServiceFactory" class="com.liferay.portal.service.AccountLocalServiceFactory" lazy-init="true">
 		<property name="service">
 			<ref bean="com.liferay.portal.service.AccountLocalService.transaction" />
@@ -45,6 +58,19 @@
 				<prop key="update*">PROPAGATION_REQUIRED,-com.liferay.portal.PortalException,-com.liferay.portal.SystemException</prop>
 				<prop key="*">PROPAGATION_SUPPORTS,readOnly</prop>
 			</props>
+		</property>
+	</bean>
+	<bean id="com.liferay.portal.service.AccountService.exceptionSafe" class="org.springframework.aop.framework.ProxyFactoryBean" lazy-init="true">
+		<property name="proxyInterfaces">
+			<value>com.liferay.portal.service.AccountService</value>
+		</property>
+		<property name="interceptorNames">
+			<list>
+				<value>com.liferay.portal.spring.aop.ExceptionSafeInterceptor</value>
+			</list>
+		</property>
+		<property name="target">
+			<ref bean="com.liferay.portal.service.AccountService.transaction" />
 		</property>
 	</bean>
 	<bean id="com.liferay.portal.service.AccountServiceFactory" class="com.liferay.portal.service.AccountServiceFactory" lazy-init="true">
@@ -101,6 +127,19 @@
 			</props>
 		</property>
 	</bean>
+	<bean id="com.liferay.portal.service.AddressLocalService.exceptionSafe" class="org.springframework.aop.framework.ProxyFactoryBean" lazy-init="true">
+		<property name="proxyInterfaces">
+			<value>com.liferay.portal.service.AddressLocalService</value>
+		</property>
+		<property name="interceptorNames">
+			<list>
+				<value>com.liferay.portal.spring.aop.ExceptionSafeInterceptor</value>
+			</list>
+		</property>
+		<property name="target">
+			<ref bean="com.liferay.portal.service.AddressLocalService.transaction" />
+		</property>
+	</bean>
 	<bean id="com.liferay.portal.service.AddressLocalServiceFactory" class="com.liferay.portal.service.AddressLocalServiceFactory" lazy-init="true">
 		<property name="service">
 			<ref bean="com.liferay.portal.service.AddressLocalService.transaction" />
@@ -124,6 +163,19 @@
 				<prop key="update*">PROPAGATION_REQUIRED,-com.liferay.portal.PortalException,-com.liferay.portal.SystemException</prop>
 				<prop key="*">PROPAGATION_SUPPORTS,readOnly</prop>
 			</props>
+		</property>
+	</bean>
+	<bean id="com.liferay.portal.service.AddressService.exceptionSafe" class="org.springframework.aop.framework.ProxyFactoryBean" lazy-init="true">
+		<property name="proxyInterfaces">
+			<value>com.liferay.portal.service.AddressService</value>
+		</property>
+		<property name="interceptorNames">
+			<list>
+				<value>com.liferay.portal.spring.aop.ExceptionSafeInterceptor</value>
+			</list>
+		</property>
+		<property name="target">
+			<ref bean="com.liferay.portal.service.AddressService.transaction" />
 		</property>
 	</bean>
 	<bean id="com.liferay.portal.service.AddressServiceFactory" class="com.liferay.portal.service.AddressServiceFactory" lazy-init="true">
@@ -180,6 +232,19 @@
 			</props>
 		</property>
 	</bean>
+	<bean id="com.liferay.portal.service.ClassNameLocalService.exceptionSafe" class="org.springframework.aop.framework.ProxyFactoryBean" lazy-init="true">
+		<property name="proxyInterfaces">
+			<value>com.liferay.portal.service.ClassNameLocalService</value>
+		</property>
+		<property name="interceptorNames">
+			<list>
+				<value>com.liferay.portal.spring.aop.ExceptionSafeInterceptor</value>
+			</list>
+		</property>
+		<property name="target">
+			<ref bean="com.liferay.portal.service.ClassNameLocalService.transaction" />
+		</property>
+	</bean>
 	<bean id="com.liferay.portal.service.ClassNameLocalServiceFactory" class="com.liferay.portal.service.ClassNameLocalServiceFactory" lazy-init="true">
 		<property name="service">
 			<ref bean="com.liferay.portal.service.ClassNameLocalService.transaction" />
@@ -203,6 +268,19 @@
 				<prop key="update*">PROPAGATION_REQUIRED,-com.liferay.portal.PortalException,-com.liferay.portal.SystemException</prop>
 				<prop key="*">PROPAGATION_SUPPORTS,readOnly</prop>
 			</props>
+		</property>
+	</bean>
+	<bean id="com.liferay.portal.service.ClassNameService.exceptionSafe" class="org.springframework.aop.framework.ProxyFactoryBean" lazy-init="true">
+		<property name="proxyInterfaces">
+			<value>com.liferay.portal.service.ClassNameService</value>
+		</property>
+		<property name="interceptorNames">
+			<list>
+				<value>com.liferay.portal.spring.aop.ExceptionSafeInterceptor</value>
+			</list>
+		</property>
+		<property name="target">
+			<ref bean="com.liferay.portal.service.ClassNameService.transaction" />
 		</property>
 	</bean>
 	<bean id="com.liferay.portal.service.ClassNameServiceFactory" class="com.liferay.portal.service.ClassNameServiceFactory" lazy-init="true">
@@ -259,6 +337,19 @@
 			</props>
 		</property>
 	</bean>
+	<bean id="com.liferay.portal.service.CompanyLocalService.exceptionSafe" class="org.springframework.aop.framework.ProxyFactoryBean" lazy-init="true">
+		<property name="proxyInterfaces">
+			<value>com.liferay.portal.service.CompanyLocalService</value>
+		</property>
+		<property name="interceptorNames">
+			<list>
+				<value>com.liferay.portal.spring.aop.ExceptionSafeInterceptor</value>
+			</list>
+		</property>
+		<property name="target">
+			<ref bean="com.liferay.portal.service.CompanyLocalService.transaction" />
+		</property>
+	</bean>
 	<bean id="com.liferay.portal.service.CompanyLocalServiceFactory" class="com.liferay.portal.service.CompanyLocalServiceFactory" lazy-init="true">
 		<property name="service">
 			<ref bean="com.liferay.portal.service.CompanyLocalService.transaction" />
@@ -282,6 +373,19 @@
 				<prop key="update*">PROPAGATION_REQUIRED,-com.liferay.portal.PortalException,-com.liferay.portal.SystemException</prop>
 				<prop key="*">PROPAGATION_SUPPORTS,readOnly</prop>
 			</props>
+		</property>
+	</bean>
+	<bean id="com.liferay.portal.service.CompanyService.exceptionSafe" class="org.springframework.aop.framework.ProxyFactoryBean" lazy-init="true">
+		<property name="proxyInterfaces">
+			<value>com.liferay.portal.service.CompanyService</value>
+		</property>
+		<property name="interceptorNames">
+			<list>
+				<value>com.liferay.portal.spring.aop.ExceptionSafeInterceptor</value>
+			</list>
+		</property>
+		<property name="target">
+			<ref bean="com.liferay.portal.service.CompanyService.transaction" />
 		</property>
 	</bean>
 	<bean id="com.liferay.portal.service.CompanyServiceFactory" class="com.liferay.portal.service.CompanyServiceFactory" lazy-init="true">
@@ -338,6 +442,19 @@
 			</props>
 		</property>
 	</bean>
+	<bean id="com.liferay.portal.service.ContactLocalService.exceptionSafe" class="org.springframework.aop.framework.ProxyFactoryBean" lazy-init="true">
+		<property name="proxyInterfaces">
+			<value>com.liferay.portal.service.ContactLocalService</value>
+		</property>
+		<property name="interceptorNames">
+			<list>
+				<value>com.liferay.portal.spring.aop.ExceptionSafeInterceptor</value>
+			</list>
+		</property>
+		<property name="target">
+			<ref bean="com.liferay.portal.service.ContactLocalService.transaction" />
+		</property>
+	</bean>
 	<bean id="com.liferay.portal.service.ContactLocalServiceFactory" class="com.liferay.portal.service.ContactLocalServiceFactory" lazy-init="true">
 		<property name="service">
 			<ref bean="com.liferay.portal.service.ContactLocalService.transaction" />
@@ -361,6 +478,19 @@
 				<prop key="update*">PROPAGATION_REQUIRED,-com.liferay.portal.PortalException,-com.liferay.portal.SystemException</prop>
 				<prop key="*">PROPAGATION_SUPPORTS,readOnly</prop>
 			</props>
+		</property>
+	</bean>
+	<bean id="com.liferay.portal.service.ContactService.exceptionSafe" class="org.springframework.aop.framework.ProxyFactoryBean" lazy-init="true">
+		<property name="proxyInterfaces">
+			<value>com.liferay.portal.service.ContactService</value>
+		</property>
+		<property name="interceptorNames">
+			<list>
+				<value>com.liferay.portal.spring.aop.ExceptionSafeInterceptor</value>
+			</list>
+		</property>
+		<property name="target">
+			<ref bean="com.liferay.portal.service.ContactService.transaction" />
 		</property>
 	</bean>
 	<bean id="com.liferay.portal.service.ContactServiceFactory" class="com.liferay.portal.service.ContactServiceFactory" lazy-init="true">
@@ -417,6 +547,19 @@
 			</props>
 		</property>
 	</bean>
+	<bean id="com.liferay.portal.service.CountryService.exceptionSafe" class="org.springframework.aop.framework.ProxyFactoryBean" lazy-init="true">
+		<property name="proxyInterfaces">
+			<value>com.liferay.portal.service.CountryService</value>
+		</property>
+		<property name="interceptorNames">
+			<list>
+				<value>com.liferay.portal.spring.aop.ExceptionSafeInterceptor</value>
+			</list>
+		</property>
+		<property name="target">
+			<ref bean="com.liferay.portal.service.CountryService.transaction" />
+		</property>
+	</bean>
 	<bean id="com.liferay.portal.service.CountryServiceFactory" class="com.liferay.portal.service.CountryServiceFactory" lazy-init="true">
 		<property name="service">
 			<ref bean="com.liferay.portal.service.CountryService.transaction" />
@@ -471,6 +614,19 @@
 			</props>
 		</property>
 	</bean>
+	<bean id="com.liferay.portal.service.EmailAddressLocalService.exceptionSafe" class="org.springframework.aop.framework.ProxyFactoryBean" lazy-init="true">
+		<property name="proxyInterfaces">
+			<value>com.liferay.portal.service.EmailAddressLocalService</value>
+		</property>
+		<property name="interceptorNames">
+			<list>
+				<value>com.liferay.portal.spring.aop.ExceptionSafeInterceptor</value>
+			</list>
+		</property>
+		<property name="target">
+			<ref bean="com.liferay.portal.service.EmailAddressLocalService.transaction" />
+		</property>
+	</bean>
 	<bean id="com.liferay.portal.service.EmailAddressLocalServiceFactory" class="com.liferay.portal.service.EmailAddressLocalServiceFactory" lazy-init="true">
 		<property name="service">
 			<ref bean="com.liferay.portal.service.EmailAddressLocalService.transaction" />
@@ -494,6 +650,19 @@
 				<prop key="update*">PROPAGATION_REQUIRED,-com.liferay.portal.PortalException,-com.liferay.portal.SystemException</prop>
 				<prop key="*">PROPAGATION_SUPPORTS,readOnly</prop>
 			</props>
+		</property>
+	</bean>
+	<bean id="com.liferay.portal.service.EmailAddressService.exceptionSafe" class="org.springframework.aop.framework.ProxyFactoryBean" lazy-init="true">
+		<property name="proxyInterfaces">
+			<value>com.liferay.portal.service.EmailAddressService</value>
+		</property>
+		<property name="interceptorNames">
+			<list>
+				<value>com.liferay.portal.spring.aop.ExceptionSafeInterceptor</value>
+			</list>
+		</property>
+		<property name="target">
+			<ref bean="com.liferay.portal.service.EmailAddressService.transaction" />
 		</property>
 	</bean>
 	<bean id="com.liferay.portal.service.EmailAddressServiceFactory" class="com.liferay.portal.service.EmailAddressServiceFactory" lazy-init="true">
@@ -550,6 +719,19 @@
 			</props>
 		</property>
 	</bean>
+	<bean id="com.liferay.portal.service.GroupLocalService.exceptionSafe" class="org.springframework.aop.framework.ProxyFactoryBean" lazy-init="true">
+		<property name="proxyInterfaces">
+			<value>com.liferay.portal.service.GroupLocalService</value>
+		</property>
+		<property name="interceptorNames">
+			<list>
+				<value>com.liferay.portal.spring.aop.ExceptionSafeInterceptor</value>
+			</list>
+		</property>
+		<property name="target">
+			<ref bean="com.liferay.portal.service.GroupLocalService.transaction" />
+		</property>
+	</bean>
 	<bean id="com.liferay.portal.service.GroupLocalServiceFactory" class="com.liferay.portal.service.GroupLocalServiceFactory" lazy-init="true">
 		<property name="service">
 			<ref bean="com.liferay.portal.service.GroupLocalService.transaction" />
@@ -573,6 +755,19 @@
 				<prop key="update*">PROPAGATION_REQUIRED,-com.liferay.portal.PortalException,-com.liferay.portal.SystemException</prop>
 				<prop key="*">PROPAGATION_SUPPORTS,readOnly</prop>
 			</props>
+		</property>
+	</bean>
+	<bean id="com.liferay.portal.service.GroupService.exceptionSafe" class="org.springframework.aop.framework.ProxyFactoryBean" lazy-init="true">
+		<property name="proxyInterfaces">
+			<value>com.liferay.portal.service.GroupService</value>
+		</property>
+		<property name="interceptorNames">
+			<list>
+				<value>com.liferay.portal.spring.aop.ExceptionSafeInterceptor</value>
+			</list>
+		</property>
+		<property name="target">
+			<ref bean="com.liferay.portal.service.GroupService.transaction" />
 		</property>
 	</bean>
 	<bean id="com.liferay.portal.service.GroupServiceFactory" class="com.liferay.portal.service.GroupServiceFactory" lazy-init="true">
@@ -642,6 +837,19 @@
 			</props>
 		</property>
 	</bean>
+	<bean id="com.liferay.portal.service.ImageLocalService.exceptionSafe" class="org.springframework.aop.framework.ProxyFactoryBean" lazy-init="true">
+		<property name="proxyInterfaces">
+			<value>com.liferay.portal.service.ImageLocalService</value>
+		</property>
+		<property name="interceptorNames">
+			<list>
+				<value>com.liferay.portal.spring.aop.ExceptionSafeInterceptor</value>
+			</list>
+		</property>
+		<property name="target">
+			<ref bean="com.liferay.portal.service.ImageLocalService.transaction" />
+		</property>
+	</bean>
 	<bean id="com.liferay.portal.service.ImageLocalServiceFactory" class="com.liferay.portal.service.ImageLocalServiceFactory" lazy-init="true">
 		<property name="service">
 			<ref bean="com.liferay.portal.service.ImageLocalService.transaction" />
@@ -696,6 +904,19 @@
 			</props>
 		</property>
 	</bean>
+	<bean id="com.liferay.portal.service.LayoutLocalService.exceptionSafe" class="org.springframework.aop.framework.ProxyFactoryBean" lazy-init="true">
+		<property name="proxyInterfaces">
+			<value>com.liferay.portal.service.LayoutLocalService</value>
+		</property>
+		<property name="interceptorNames">
+			<list>
+				<value>com.liferay.portal.spring.aop.ExceptionSafeInterceptor</value>
+			</list>
+		</property>
+		<property name="target">
+			<ref bean="com.liferay.portal.service.LayoutLocalService.transaction" />
+		</property>
+	</bean>
 	<bean id="com.liferay.portal.service.LayoutLocalServiceFactory" class="com.liferay.portal.service.LayoutLocalServiceFactory" lazy-init="true">
 		<property name="service">
 			<ref bean="com.liferay.portal.service.LayoutLocalService.transaction" />
@@ -719,6 +940,19 @@
 				<prop key="update*">PROPAGATION_REQUIRED,-com.liferay.portal.PortalException,-com.liferay.portal.SystemException</prop>
 				<prop key="*">PROPAGATION_SUPPORTS,readOnly</prop>
 			</props>
+		</property>
+	</bean>
+	<bean id="com.liferay.portal.service.LayoutService.exceptionSafe" class="org.springframework.aop.framework.ProxyFactoryBean" lazy-init="true">
+		<property name="proxyInterfaces">
+			<value>com.liferay.portal.service.LayoutService</value>
+		</property>
+		<property name="interceptorNames">
+			<list>
+				<value>com.liferay.portal.spring.aop.ExceptionSafeInterceptor</value>
+			</list>
+		</property>
+		<property name="target">
+			<ref bean="com.liferay.portal.service.LayoutService.transaction" />
 		</property>
 	</bean>
 	<bean id="com.liferay.portal.service.LayoutServiceFactory" class="com.liferay.portal.service.LayoutServiceFactory" lazy-init="true">
@@ -788,6 +1022,19 @@
 			</props>
 		</property>
 	</bean>
+	<bean id="com.liferay.portal.service.LayoutSetLocalService.exceptionSafe" class="org.springframework.aop.framework.ProxyFactoryBean" lazy-init="true">
+		<property name="proxyInterfaces">
+			<value>com.liferay.portal.service.LayoutSetLocalService</value>
+		</property>
+		<property name="interceptorNames">
+			<list>
+				<value>com.liferay.portal.spring.aop.ExceptionSafeInterceptor</value>
+			</list>
+		</property>
+		<property name="target">
+			<ref bean="com.liferay.portal.service.LayoutSetLocalService.transaction" />
+		</property>
+	</bean>
 	<bean id="com.liferay.portal.service.LayoutSetLocalServiceFactory" class="com.liferay.portal.service.LayoutSetLocalServiceFactory" lazy-init="true">
 		<property name="service">
 			<ref bean="com.liferay.portal.service.LayoutSetLocalService.transaction" />
@@ -811,6 +1058,19 @@
 				<prop key="update*">PROPAGATION_REQUIRED,-com.liferay.portal.PortalException,-com.liferay.portal.SystemException</prop>
 				<prop key="*">PROPAGATION_SUPPORTS,readOnly</prop>
 			</props>
+		</property>
+	</bean>
+	<bean id="com.liferay.portal.service.LayoutSetService.exceptionSafe" class="org.springframework.aop.framework.ProxyFactoryBean" lazy-init="true">
+		<property name="proxyInterfaces">
+			<value>com.liferay.portal.service.LayoutSetService</value>
+		</property>
+		<property name="interceptorNames">
+			<list>
+				<value>com.liferay.portal.spring.aop.ExceptionSafeInterceptor</value>
+			</list>
+		</property>
+		<property name="target">
+			<ref bean="com.liferay.portal.service.LayoutSetService.transaction" />
 		</property>
 	</bean>
 	<bean id="com.liferay.portal.service.LayoutSetServiceFactory" class="com.liferay.portal.service.LayoutSetServiceFactory" lazy-init="true">
@@ -848,6 +1108,19 @@
 		</property>
 	</bean>
 	<bean id="com.liferay.portal.service.LayoutTemplateLocalService.impl" class="com.liferay.portal.service.impl.LayoutTemplateLocalServiceImpl" lazy-init="true" />
+	<bean id="com.liferay.portal.service.LayoutTemplateLocalService.exceptionSafe" class="org.springframework.aop.framework.ProxyFactoryBean" lazy-init="true">
+		<property name="proxyInterfaces">
+			<value>com.liferay.portal.service.LayoutTemplateLocalService</value>
+		</property>
+		<property name="interceptorNames">
+			<list>
+				<value>com.liferay.portal.spring.aop.ExceptionSafeInterceptor</value>
+			</list>
+		</property>
+		<property name="target">
+			<ref bean="com.liferay.portal.service.LayoutTemplateLocalService.impl" />
+		</property>
+	</bean>
 	<bean id="com.liferay.portal.service.LayoutTemplateLocalServiceFactory" class="com.liferay.portal.service.LayoutTemplateLocalServiceFactory" lazy-init="true">
 		<property name="service">
 			<ref bean="com.liferay.portal.service.LayoutTemplateLocalService.impl" />
@@ -871,6 +1144,19 @@
 				<prop key="update*">PROPAGATION_REQUIRED,-com.liferay.portal.PortalException,-com.liferay.portal.SystemException</prop>
 				<prop key="*">PROPAGATION_SUPPORTS,readOnly</prop>
 			</props>
+		</property>
+	</bean>
+	<bean id="com.liferay.portal.service.ListTypeService.exceptionSafe" class="org.springframework.aop.framework.ProxyFactoryBean" lazy-init="true">
+		<property name="proxyInterfaces">
+			<value>com.liferay.portal.service.ListTypeService</value>
+		</property>
+		<property name="interceptorNames">
+			<list>
+				<value>com.liferay.portal.spring.aop.ExceptionSafeInterceptor</value>
+			</list>
+		</property>
+		<property name="target">
+			<ref bean="com.liferay.portal.service.ListTypeService.transaction" />
 		</property>
 	</bean>
 	<bean id="com.liferay.portal.service.ListTypeServiceFactory" class="com.liferay.portal.service.ListTypeServiceFactory" lazy-init="true">
@@ -927,6 +1213,19 @@
 			</props>
 		</property>
 	</bean>
+	<bean id="com.liferay.portal.service.MembershipRequestLocalService.exceptionSafe" class="org.springframework.aop.framework.ProxyFactoryBean" lazy-init="true">
+		<property name="proxyInterfaces">
+			<value>com.liferay.portal.service.MembershipRequestLocalService</value>
+		</property>
+		<property name="interceptorNames">
+			<list>
+				<value>com.liferay.portal.spring.aop.ExceptionSafeInterceptor</value>
+			</list>
+		</property>
+		<property name="target">
+			<ref bean="com.liferay.portal.service.MembershipRequestLocalService.transaction" />
+		</property>
+	</bean>
 	<bean id="com.liferay.portal.service.MembershipRequestLocalServiceFactory" class="com.liferay.portal.service.MembershipRequestLocalServiceFactory" lazy-init="true">
 		<property name="service">
 			<ref bean="com.liferay.portal.service.MembershipRequestLocalService.transaction" />
@@ -950,6 +1249,19 @@
 				<prop key="update*">PROPAGATION_REQUIRED,-com.liferay.portal.PortalException,-com.liferay.portal.SystemException</prop>
 				<prop key="*">PROPAGATION_SUPPORTS,readOnly</prop>
 			</props>
+		</property>
+	</bean>
+	<bean id="com.liferay.portal.service.MembershipRequestService.exceptionSafe" class="org.springframework.aop.framework.ProxyFactoryBean" lazy-init="true">
+		<property name="proxyInterfaces">
+			<value>com.liferay.portal.service.MembershipRequestService</value>
+		</property>
+		<property name="interceptorNames">
+			<list>
+				<value>com.liferay.portal.spring.aop.ExceptionSafeInterceptor</value>
+			</list>
+		</property>
+		<property name="target">
+			<ref bean="com.liferay.portal.service.MembershipRequestService.transaction" />
 		</property>
 	</bean>
 	<bean id="com.liferay.portal.service.MembershipRequestServiceFactory" class="com.liferay.portal.service.MembershipRequestServiceFactory" lazy-init="true">
@@ -1006,6 +1318,19 @@
 			</props>
 		</property>
 	</bean>
+	<bean id="com.liferay.portal.service.OrganizationLocalService.exceptionSafe" class="org.springframework.aop.framework.ProxyFactoryBean" lazy-init="true">
+		<property name="proxyInterfaces">
+			<value>com.liferay.portal.service.OrganizationLocalService</value>
+		</property>
+		<property name="interceptorNames">
+			<list>
+				<value>com.liferay.portal.spring.aop.ExceptionSafeInterceptor</value>
+			</list>
+		</property>
+		<property name="target">
+			<ref bean="com.liferay.portal.service.OrganizationLocalService.transaction" />
+		</property>
+	</bean>
 	<bean id="com.liferay.portal.service.OrganizationLocalServiceFactory" class="com.liferay.portal.service.OrganizationLocalServiceFactory" lazy-init="true">
 		<property name="service">
 			<ref bean="com.liferay.portal.service.OrganizationLocalService.transaction" />
@@ -1029,6 +1354,19 @@
 				<prop key="update*">PROPAGATION_REQUIRED,-com.liferay.portal.PortalException,-com.liferay.portal.SystemException</prop>
 				<prop key="*">PROPAGATION_SUPPORTS,readOnly</prop>
 			</props>
+		</property>
+	</bean>
+	<bean id="com.liferay.portal.service.OrganizationService.exceptionSafe" class="org.springframework.aop.framework.ProxyFactoryBean" lazy-init="true">
+		<property name="proxyInterfaces">
+			<value>com.liferay.portal.service.OrganizationService</value>
+		</property>
+		<property name="interceptorNames">
+			<list>
+				<value>com.liferay.portal.spring.aop.ExceptionSafeInterceptor</value>
+			</list>
+		</property>
+		<property name="target">
+			<ref bean="com.liferay.portal.service.OrganizationService.transaction" />
 		</property>
 	</bean>
 	<bean id="com.liferay.portal.service.OrganizationServiceFactory" class="com.liferay.portal.service.OrganizationServiceFactory" lazy-init="true">
@@ -1169,6 +1507,19 @@
 			</props>
 		</property>
 	</bean>
+	<bean id="com.liferay.portal.service.OrgLaborLocalService.exceptionSafe" class="org.springframework.aop.framework.ProxyFactoryBean" lazy-init="true">
+		<property name="proxyInterfaces">
+			<value>com.liferay.portal.service.OrgLaborLocalService</value>
+		</property>
+		<property name="interceptorNames">
+			<list>
+				<value>com.liferay.portal.spring.aop.ExceptionSafeInterceptor</value>
+			</list>
+		</property>
+		<property name="target">
+			<ref bean="com.liferay.portal.service.OrgLaborLocalService.transaction" />
+		</property>
+	</bean>
 	<bean id="com.liferay.portal.service.OrgLaborLocalServiceFactory" class="com.liferay.portal.service.OrgLaborLocalServiceFactory" lazy-init="true">
 		<property name="service">
 			<ref bean="com.liferay.portal.service.OrgLaborLocalService.transaction" />
@@ -1192,6 +1543,19 @@
 				<prop key="update*">PROPAGATION_REQUIRED,-com.liferay.portal.PortalException,-com.liferay.portal.SystemException</prop>
 				<prop key="*">PROPAGATION_SUPPORTS,readOnly</prop>
 			</props>
+		</property>
+	</bean>
+	<bean id="com.liferay.portal.service.OrgLaborService.exceptionSafe" class="org.springframework.aop.framework.ProxyFactoryBean" lazy-init="true">
+		<property name="proxyInterfaces">
+			<value>com.liferay.portal.service.OrgLaborService</value>
+		</property>
+		<property name="interceptorNames">
+			<list>
+				<value>com.liferay.portal.spring.aop.ExceptionSafeInterceptor</value>
+			</list>
+		</property>
+		<property name="target">
+			<ref bean="com.liferay.portal.service.OrgLaborService.transaction" />
 		</property>
 	</bean>
 	<bean id="com.liferay.portal.service.OrgLaborServiceFactory" class="com.liferay.portal.service.OrgLaborServiceFactory" lazy-init="true">
@@ -1248,6 +1612,19 @@
 			</props>
 		</property>
 	</bean>
+	<bean id="com.liferay.portal.service.PasswordPolicyLocalService.exceptionSafe" class="org.springframework.aop.framework.ProxyFactoryBean" lazy-init="true">
+		<property name="proxyInterfaces">
+			<value>com.liferay.portal.service.PasswordPolicyLocalService</value>
+		</property>
+		<property name="interceptorNames">
+			<list>
+				<value>com.liferay.portal.spring.aop.ExceptionSafeInterceptor</value>
+			</list>
+		</property>
+		<property name="target">
+			<ref bean="com.liferay.portal.service.PasswordPolicyLocalService.transaction" />
+		</property>
+	</bean>
 	<bean id="com.liferay.portal.service.PasswordPolicyLocalServiceFactory" class="com.liferay.portal.service.PasswordPolicyLocalServiceFactory" lazy-init="true">
 		<property name="service">
 			<ref bean="com.liferay.portal.service.PasswordPolicyLocalService.transaction" />
@@ -1271,6 +1648,19 @@
 				<prop key="update*">PROPAGATION_REQUIRED,-com.liferay.portal.PortalException,-com.liferay.portal.SystemException</prop>
 				<prop key="*">PROPAGATION_SUPPORTS,readOnly</prop>
 			</props>
+		</property>
+	</bean>
+	<bean id="com.liferay.portal.service.PasswordPolicyService.exceptionSafe" class="org.springframework.aop.framework.ProxyFactoryBean" lazy-init="true">
+		<property name="proxyInterfaces">
+			<value>com.liferay.portal.service.PasswordPolicyService</value>
+		</property>
+		<property name="interceptorNames">
+			<list>
+				<value>com.liferay.portal.spring.aop.ExceptionSafeInterceptor</value>
+			</list>
+		</property>
+		<property name="target">
+			<ref bean="com.liferay.portal.service.PasswordPolicyService.transaction" />
 		</property>
 	</bean>
 	<bean id="com.liferay.portal.service.PasswordPolicyServiceFactory" class="com.liferay.portal.service.PasswordPolicyServiceFactory" lazy-init="true">
@@ -1340,6 +1730,19 @@
 			</props>
 		</property>
 	</bean>
+	<bean id="com.liferay.portal.service.PasswordPolicyRelLocalService.exceptionSafe" class="org.springframework.aop.framework.ProxyFactoryBean" lazy-init="true">
+		<property name="proxyInterfaces">
+			<value>com.liferay.portal.service.PasswordPolicyRelLocalService</value>
+		</property>
+		<property name="interceptorNames">
+			<list>
+				<value>com.liferay.portal.spring.aop.ExceptionSafeInterceptor</value>
+			</list>
+		</property>
+		<property name="target">
+			<ref bean="com.liferay.portal.service.PasswordPolicyRelLocalService.transaction" />
+		</property>
+	</bean>
 	<bean id="com.liferay.portal.service.PasswordPolicyRelLocalServiceFactory" class="com.liferay.portal.service.PasswordPolicyRelLocalServiceFactory" lazy-init="true">
 		<property name="service">
 			<ref bean="com.liferay.portal.service.PasswordPolicyRelLocalService.transaction" />
@@ -1392,6 +1795,19 @@
 				<prop key="update*">PROPAGATION_REQUIRED,-com.liferay.portal.PortalException,-com.liferay.portal.SystemException</prop>
 				<prop key="*">PROPAGATION_SUPPORTS,readOnly</prop>
 			</props>
+		</property>
+	</bean>
+	<bean id="com.liferay.portal.service.PasswordTrackerLocalService.exceptionSafe" class="org.springframework.aop.framework.ProxyFactoryBean" lazy-init="true">
+		<property name="proxyInterfaces">
+			<value>com.liferay.portal.service.PasswordTrackerLocalService</value>
+		</property>
+		<property name="interceptorNames">
+			<list>
+				<value>com.liferay.portal.spring.aop.ExceptionSafeInterceptor</value>
+			</list>
+		</property>
+		<property name="target">
+			<ref bean="com.liferay.portal.service.PasswordTrackerLocalService.transaction" />
 		</property>
 	</bean>
 	<bean id="com.liferay.portal.service.PasswordTrackerLocalServiceFactory" class="com.liferay.portal.service.PasswordTrackerLocalServiceFactory" lazy-init="true">
@@ -1448,6 +1864,19 @@
 			</props>
 		</property>
 	</bean>
+	<bean id="com.liferay.portal.service.PermissionLocalService.exceptionSafe" class="org.springframework.aop.framework.ProxyFactoryBean" lazy-init="true">
+		<property name="proxyInterfaces">
+			<value>com.liferay.portal.service.PermissionLocalService</value>
+		</property>
+		<property name="interceptorNames">
+			<list>
+				<value>com.liferay.portal.spring.aop.ExceptionSafeInterceptor</value>
+			</list>
+		</property>
+		<property name="target">
+			<ref bean="com.liferay.portal.service.PermissionLocalService.transaction" />
+		</property>
+	</bean>
 	<bean id="com.liferay.portal.service.PermissionLocalServiceFactory" class="com.liferay.portal.service.PermissionLocalServiceFactory" lazy-init="true">
 		<property name="service">
 			<ref bean="com.liferay.portal.service.PermissionLocalService.transaction" />
@@ -1471,6 +1900,19 @@
 				<prop key="update*">PROPAGATION_REQUIRED,-com.liferay.portal.PortalException,-com.liferay.portal.SystemException</prop>
 				<prop key="*">PROPAGATION_SUPPORTS,readOnly</prop>
 			</props>
+		</property>
+	</bean>
+	<bean id="com.liferay.portal.service.PermissionService.exceptionSafe" class="org.springframework.aop.framework.ProxyFactoryBean" lazy-init="true">
+		<property name="proxyInterfaces">
+			<value>com.liferay.portal.service.PermissionService</value>
+		</property>
+		<property name="interceptorNames">
+			<list>
+				<value>com.liferay.portal.spring.aop.ExceptionSafeInterceptor</value>
+			</list>
+		</property>
+		<property name="target">
+			<ref bean="com.liferay.portal.service.PermissionService.transaction" />
 		</property>
 	</bean>
 	<bean id="com.liferay.portal.service.PermissionServiceFactory" class="com.liferay.portal.service.PermissionServiceFactory" lazy-init="true">
@@ -1553,6 +1995,19 @@
 			</props>
 		</property>
 	</bean>
+	<bean id="com.liferay.portal.service.PhoneLocalService.exceptionSafe" class="org.springframework.aop.framework.ProxyFactoryBean" lazy-init="true">
+		<property name="proxyInterfaces">
+			<value>com.liferay.portal.service.PhoneLocalService</value>
+		</property>
+		<property name="interceptorNames">
+			<list>
+				<value>com.liferay.portal.spring.aop.ExceptionSafeInterceptor</value>
+			</list>
+		</property>
+		<property name="target">
+			<ref bean="com.liferay.portal.service.PhoneLocalService.transaction" />
+		</property>
+	</bean>
 	<bean id="com.liferay.portal.service.PhoneLocalServiceFactory" class="com.liferay.portal.service.PhoneLocalServiceFactory" lazy-init="true">
 		<property name="service">
 			<ref bean="com.liferay.portal.service.PhoneLocalService.transaction" />
@@ -1576,6 +2031,19 @@
 				<prop key="update*">PROPAGATION_REQUIRED,-com.liferay.portal.PortalException,-com.liferay.portal.SystemException</prop>
 				<prop key="*">PROPAGATION_SUPPORTS,readOnly</prop>
 			</props>
+		</property>
+	</bean>
+	<bean id="com.liferay.portal.service.PhoneService.exceptionSafe" class="org.springframework.aop.framework.ProxyFactoryBean" lazy-init="true">
+		<property name="proxyInterfaces">
+			<value>com.liferay.portal.service.PhoneService</value>
+		</property>
+		<property name="interceptorNames">
+			<list>
+				<value>com.liferay.portal.spring.aop.ExceptionSafeInterceptor</value>
+			</list>
+		</property>
+		<property name="target">
+			<ref bean="com.liferay.portal.service.PhoneService.transaction" />
 		</property>
 	</bean>
 	<bean id="com.liferay.portal.service.PhoneServiceFactory" class="com.liferay.portal.service.PhoneServiceFactory" lazy-init="true">
@@ -1632,6 +2100,19 @@
 			</props>
 		</property>
 	</bean>
+	<bean id="com.liferay.portal.service.PortalService.exceptionSafe" class="org.springframework.aop.framework.ProxyFactoryBean" lazy-init="true">
+		<property name="proxyInterfaces">
+			<value>com.liferay.portal.service.PortalService</value>
+		</property>
+		<property name="interceptorNames">
+			<list>
+				<value>com.liferay.portal.spring.aop.ExceptionSafeInterceptor</value>
+			</list>
+		</property>
+		<property name="target">
+			<ref bean="com.liferay.portal.service.PortalService.transaction" />
+		</property>
+	</bean>
 	<bean id="com.liferay.portal.service.PortalServiceFactory" class="com.liferay.portal.service.PortalServiceFactory" lazy-init="true">
 		<property name="service">
 			<ref bean="com.liferay.portal.service.PortalService.transaction" />
@@ -1657,6 +2138,19 @@
 			</props>
 		</property>
 	</bean>
+	<bean id="com.liferay.portal.service.PluginSettingLocalService.exceptionSafe" class="org.springframework.aop.framework.ProxyFactoryBean" lazy-init="true">
+		<property name="proxyInterfaces">
+			<value>com.liferay.portal.service.PluginSettingLocalService</value>
+		</property>
+		<property name="interceptorNames">
+			<list>
+				<value>com.liferay.portal.spring.aop.ExceptionSafeInterceptor</value>
+			</list>
+		</property>
+		<property name="target">
+			<ref bean="com.liferay.portal.service.PluginSettingLocalService.transaction" />
+		</property>
+	</bean>
 	<bean id="com.liferay.portal.service.PluginSettingLocalServiceFactory" class="com.liferay.portal.service.PluginSettingLocalServiceFactory" lazy-init="true">
 		<property name="service">
 			<ref bean="com.liferay.portal.service.PluginSettingLocalService.transaction" />
@@ -1680,6 +2174,19 @@
 				<prop key="update*">PROPAGATION_REQUIRED,-com.liferay.portal.PortalException,-com.liferay.portal.SystemException</prop>
 				<prop key="*">PROPAGATION_SUPPORTS,readOnly</prop>
 			</props>
+		</property>
+	</bean>
+	<bean id="com.liferay.portal.service.PluginSettingService.exceptionSafe" class="org.springframework.aop.framework.ProxyFactoryBean" lazy-init="true">
+		<property name="proxyInterfaces">
+			<value>com.liferay.portal.service.PluginSettingService</value>
+		</property>
+		<property name="interceptorNames">
+			<list>
+				<value>com.liferay.portal.spring.aop.ExceptionSafeInterceptor</value>
+			</list>
+		</property>
+		<property name="target">
+			<ref bean="com.liferay.portal.service.PluginSettingService.transaction" />
 		</property>
 	</bean>
 	<bean id="com.liferay.portal.service.PluginSettingServiceFactory" class="com.liferay.portal.service.PluginSettingServiceFactory" lazy-init="true">
@@ -1736,6 +2243,19 @@
 			</props>
 		</property>
 	</bean>
+	<bean id="com.liferay.portal.service.PortletLocalService.exceptionSafe" class="org.springframework.aop.framework.ProxyFactoryBean" lazy-init="true">
+		<property name="proxyInterfaces">
+			<value>com.liferay.portal.service.PortletLocalService</value>
+		</property>
+		<property name="interceptorNames">
+			<list>
+				<value>com.liferay.portal.spring.aop.ExceptionSafeInterceptor</value>
+			</list>
+		</property>
+		<property name="target">
+			<ref bean="com.liferay.portal.service.PortletLocalService.transaction" />
+		</property>
+	</bean>
 	<bean id="com.liferay.portal.service.PortletLocalServiceFactory" class="com.liferay.portal.service.PortletLocalServiceFactory" lazy-init="true">
 		<property name="service">
 			<ref bean="com.liferay.portal.service.PortletLocalService.transaction" />
@@ -1759,6 +2279,19 @@
 				<prop key="update*">PROPAGATION_REQUIRED,-com.liferay.portal.PortalException,-com.liferay.portal.SystemException</prop>
 				<prop key="*">PROPAGATION_SUPPORTS,readOnly</prop>
 			</props>
+		</property>
+	</bean>
+	<bean id="com.liferay.portal.service.PortletService.exceptionSafe" class="org.springframework.aop.framework.ProxyFactoryBean" lazy-init="true">
+		<property name="proxyInterfaces">
+			<value>com.liferay.portal.service.PortletService</value>
+		</property>
+		<property name="interceptorNames">
+			<list>
+				<value>com.liferay.portal.spring.aop.ExceptionSafeInterceptor</value>
+			</list>
+		</property>
+		<property name="target">
+			<ref bean="com.liferay.portal.service.PortletService.transaction" />
 		</property>
 	</bean>
 	<bean id="com.liferay.portal.service.PortletServiceFactory" class="com.liferay.portal.service.PortletServiceFactory" lazy-init="true">
@@ -1815,6 +2348,19 @@
 			</props>
 		</property>
 	</bean>
+	<bean id="com.liferay.portal.service.PortletPreferencesLocalService.exceptionSafe" class="org.springframework.aop.framework.ProxyFactoryBean" lazy-init="true">
+		<property name="proxyInterfaces">
+			<value>com.liferay.portal.service.PortletPreferencesLocalService</value>
+		</property>
+		<property name="interceptorNames">
+			<list>
+				<value>com.liferay.portal.spring.aop.ExceptionSafeInterceptor</value>
+			</list>
+		</property>
+		<property name="target">
+			<ref bean="com.liferay.portal.service.PortletPreferencesLocalService.transaction" />
+		</property>
+	</bean>
 	<bean id="com.liferay.portal.service.PortletPreferencesLocalServiceFactory" class="com.liferay.portal.service.PortletPreferencesLocalServiceFactory" lazy-init="true">
 		<property name="service">
 			<ref bean="com.liferay.portal.service.PortletPreferencesLocalService.transaction" />
@@ -1838,6 +2384,19 @@
 				<prop key="update*">PROPAGATION_REQUIRED,-com.liferay.portal.PortalException,-com.liferay.portal.SystemException</prop>
 				<prop key="*">PROPAGATION_SUPPORTS,readOnly</prop>
 			</props>
+		</property>
+	</bean>
+	<bean id="com.liferay.portal.service.PortletPreferencesService.exceptionSafe" class="org.springframework.aop.framework.ProxyFactoryBean" lazy-init="true">
+		<property name="proxyInterfaces">
+			<value>com.liferay.portal.service.PortletPreferencesService</value>
+		</property>
+		<property name="interceptorNames">
+			<list>
+				<value>com.liferay.portal.spring.aop.ExceptionSafeInterceptor</value>
+			</list>
+		</property>
+		<property name="target">
+			<ref bean="com.liferay.portal.service.PortletPreferencesService.transaction" />
 		</property>
 	</bean>
 	<bean id="com.liferay.portal.service.PortletPreferencesServiceFactory" class="com.liferay.portal.service.PortletPreferencesServiceFactory" lazy-init="true">
@@ -1907,6 +2466,19 @@
 			</props>
 		</property>
 	</bean>
+	<bean id="com.liferay.portal.service.RegionService.exceptionSafe" class="org.springframework.aop.framework.ProxyFactoryBean" lazy-init="true">
+		<property name="proxyInterfaces">
+			<value>com.liferay.portal.service.RegionService</value>
+		</property>
+		<property name="interceptorNames">
+			<list>
+				<value>com.liferay.portal.spring.aop.ExceptionSafeInterceptor</value>
+			</list>
+		</property>
+		<property name="target">
+			<ref bean="com.liferay.portal.service.RegionService.transaction" />
+		</property>
+	</bean>
 	<bean id="com.liferay.portal.service.RegionServiceFactory" class="com.liferay.portal.service.RegionServiceFactory" lazy-init="true">
 		<property name="service">
 			<ref bean="com.liferay.portal.service.RegionService.transaction" />
@@ -1959,6 +2531,19 @@
 				<prop key="update*">PROPAGATION_REQUIRED,-com.liferay.portal.PortalException,-com.liferay.portal.SystemException</prop>
 				<prop key="*">PROPAGATION_SUPPORTS,readOnly</prop>
 			</props>
+		</property>
+	</bean>
+	<bean id="com.liferay.portal.service.ReleaseLocalService.exceptionSafe" class="org.springframework.aop.framework.ProxyFactoryBean" lazy-init="true">
+		<property name="proxyInterfaces">
+			<value>com.liferay.portal.service.ReleaseLocalService</value>
+		</property>
+		<property name="interceptorNames">
+			<list>
+				<value>com.liferay.portal.spring.aop.ExceptionSafeInterceptor</value>
+			</list>
+		</property>
+		<property name="target">
+			<ref bean="com.liferay.portal.service.ReleaseLocalService.transaction" />
 		</property>
 	</bean>
 	<bean id="com.liferay.portal.service.ReleaseLocalServiceFactory" class="com.liferay.portal.service.ReleaseLocalServiceFactory" lazy-init="true">
@@ -2015,6 +2600,19 @@
 			</props>
 		</property>
 	</bean>
+	<bean id="com.liferay.portal.service.ResourceLocalService.exceptionSafe" class="org.springframework.aop.framework.ProxyFactoryBean" lazy-init="true">
+		<property name="proxyInterfaces">
+			<value>com.liferay.portal.service.ResourceLocalService</value>
+		</property>
+		<property name="interceptorNames">
+			<list>
+				<value>com.liferay.portal.spring.aop.ExceptionSafeInterceptor</value>
+			</list>
+		</property>
+		<property name="target">
+			<ref bean="com.liferay.portal.service.ResourceLocalService.transaction" />
+		</property>
+	</bean>
 	<bean id="com.liferay.portal.service.ResourceLocalServiceFactory" class="com.liferay.portal.service.ResourceLocalServiceFactory" lazy-init="true">
 		<property name="service">
 			<ref bean="com.liferay.portal.service.ResourceLocalService.transaction" />
@@ -2038,6 +2636,19 @@
 				<prop key="update*">PROPAGATION_REQUIRED,-com.liferay.portal.PortalException,-com.liferay.portal.SystemException</prop>
 				<prop key="*">PROPAGATION_SUPPORTS,readOnly</prop>
 			</props>
+		</property>
+	</bean>
+	<bean id="com.liferay.portal.service.ResourceService.exceptionSafe" class="org.springframework.aop.framework.ProxyFactoryBean" lazy-init="true">
+		<property name="proxyInterfaces">
+			<value>com.liferay.portal.service.ResourceService</value>
+		</property>
+		<property name="interceptorNames">
+			<list>
+				<value>com.liferay.portal.spring.aop.ExceptionSafeInterceptor</value>
+			</list>
+		</property>
+		<property name="target">
+			<ref bean="com.liferay.portal.service.ResourceService.transaction" />
 		</property>
 	</bean>
 	<bean id="com.liferay.portal.service.ResourceServiceFactory" class="com.liferay.portal.service.ResourceServiceFactory" lazy-init="true">
@@ -2107,6 +2718,19 @@
 			</props>
 		</property>
 	</bean>
+	<bean id="com.liferay.portal.service.ResourceCodeLocalService.exceptionSafe" class="org.springframework.aop.framework.ProxyFactoryBean" lazy-init="true">
+		<property name="proxyInterfaces">
+			<value>com.liferay.portal.service.ResourceCodeLocalService</value>
+		</property>
+		<property name="interceptorNames">
+			<list>
+				<value>com.liferay.portal.spring.aop.ExceptionSafeInterceptor</value>
+			</list>
+		</property>
+		<property name="target">
+			<ref bean="com.liferay.portal.service.ResourceCodeLocalService.transaction" />
+		</property>
+	</bean>
 	<bean id="com.liferay.portal.service.ResourceCodeLocalServiceFactory" class="com.liferay.portal.service.ResourceCodeLocalServiceFactory" lazy-init="true">
 		<property name="service">
 			<ref bean="com.liferay.portal.service.ResourceCodeLocalService.transaction" />
@@ -2161,6 +2785,19 @@
 			</props>
 		</property>
 	</bean>
+	<bean id="com.liferay.portal.service.RoleLocalService.exceptionSafe" class="org.springframework.aop.framework.ProxyFactoryBean" lazy-init="true">
+		<property name="proxyInterfaces">
+			<value>com.liferay.portal.service.RoleLocalService</value>
+		</property>
+		<property name="interceptorNames">
+			<list>
+				<value>com.liferay.portal.spring.aop.ExceptionSafeInterceptor</value>
+			</list>
+		</property>
+		<property name="target">
+			<ref bean="com.liferay.portal.service.RoleLocalService.transaction" />
+		</property>
+	</bean>
 	<bean id="com.liferay.portal.service.RoleLocalServiceFactory" class="com.liferay.portal.service.RoleLocalServiceFactory" lazy-init="true">
 		<property name="service">
 			<ref bean="com.liferay.portal.service.RoleLocalService.transaction" />
@@ -2184,6 +2821,19 @@
 				<prop key="update*">PROPAGATION_REQUIRED,-com.liferay.portal.PortalException,-com.liferay.portal.SystemException</prop>
 				<prop key="*">PROPAGATION_SUPPORTS,readOnly</prop>
 			</props>
+		</property>
+	</bean>
+	<bean id="com.liferay.portal.service.RoleService.exceptionSafe" class="org.springframework.aop.framework.ProxyFactoryBean" lazy-init="true">
+		<property name="proxyInterfaces">
+			<value>com.liferay.portal.service.RoleService</value>
+		</property>
+		<property name="interceptorNames">
+			<list>
+				<value>com.liferay.portal.spring.aop.ExceptionSafeInterceptor</value>
+			</list>
+		</property>
+		<property name="target">
+			<ref bean="com.liferay.portal.service.RoleService.transaction" />
 		</property>
 	</bean>
 	<bean id="com.liferay.portal.service.RoleServiceFactory" class="com.liferay.portal.service.RoleServiceFactory" lazy-init="true">
@@ -2253,6 +2903,19 @@
 			</props>
 		</property>
 	</bean>
+	<bean id="com.liferay.portal.service.ServiceComponentLocalService.exceptionSafe" class="org.springframework.aop.framework.ProxyFactoryBean" lazy-init="true">
+		<property name="proxyInterfaces">
+			<value>com.liferay.portal.service.ServiceComponentLocalService</value>
+		</property>
+		<property name="interceptorNames">
+			<list>
+				<value>com.liferay.portal.spring.aop.ExceptionSafeInterceptor</value>
+			</list>
+		</property>
+		<property name="target">
+			<ref bean="com.liferay.portal.service.ServiceComponentLocalService.transaction" />
+		</property>
+	</bean>
 	<bean id="com.liferay.portal.service.ServiceComponentLocalServiceFactory" class="com.liferay.portal.service.ServiceComponentLocalServiceFactory" lazy-init="true">
 		<property name="service">
 			<ref bean="com.liferay.portal.service.ServiceComponentLocalService.transaction" />
@@ -2305,6 +2968,19 @@
 				<prop key="update*">PROPAGATION_REQUIRED,-com.liferay.portal.PortalException,-com.liferay.portal.SystemException</prop>
 				<prop key="*">PROPAGATION_SUPPORTS,readOnly</prop>
 			</props>
+		</property>
+	</bean>
+	<bean id="com.liferay.portal.service.PortletItemLocalService.exceptionSafe" class="org.springframework.aop.framework.ProxyFactoryBean" lazy-init="true">
+		<property name="proxyInterfaces">
+			<value>com.liferay.portal.service.PortletItemLocalService</value>
+		</property>
+		<property name="interceptorNames">
+			<list>
+				<value>com.liferay.portal.spring.aop.ExceptionSafeInterceptor</value>
+			</list>
+		</property>
+		<property name="target">
+			<ref bean="com.liferay.portal.service.PortletItemLocalService.transaction" />
 		</property>
 	</bean>
 	<bean id="com.liferay.portal.service.PortletItemLocalServiceFactory" class="com.liferay.portal.service.PortletItemLocalServiceFactory" lazy-init="true">
@@ -2361,6 +3037,19 @@
 			</props>
 		</property>
 	</bean>
+	<bean id="com.liferay.portal.service.SubscriptionLocalService.exceptionSafe" class="org.springframework.aop.framework.ProxyFactoryBean" lazy-init="true">
+		<property name="proxyInterfaces">
+			<value>com.liferay.portal.service.SubscriptionLocalService</value>
+		</property>
+		<property name="interceptorNames">
+			<list>
+				<value>com.liferay.portal.spring.aop.ExceptionSafeInterceptor</value>
+			</list>
+		</property>
+		<property name="target">
+			<ref bean="com.liferay.portal.service.SubscriptionLocalService.transaction" />
+		</property>
+	</bean>
 	<bean id="com.liferay.portal.service.SubscriptionLocalServiceFactory" class="com.liferay.portal.service.SubscriptionLocalServiceFactory" lazy-init="true">
 		<property name="service">
 			<ref bean="com.liferay.portal.service.SubscriptionLocalService.transaction" />
@@ -2396,6 +3085,19 @@
 		</property>
 	</bean>
 	<bean id="com.liferay.portal.service.ThemeLocalService.impl" class="com.liferay.portal.service.impl.ThemeLocalServiceImpl" lazy-init="true" />
+	<bean id="com.liferay.portal.service.ThemeLocalService.exceptionSafe" class="org.springframework.aop.framework.ProxyFactoryBean" lazy-init="true">
+		<property name="proxyInterfaces">
+			<value>com.liferay.portal.service.ThemeLocalService</value>
+		</property>
+		<property name="interceptorNames">
+			<list>
+				<value>com.liferay.portal.spring.aop.ExceptionSafeInterceptor</value>
+			</list>
+		</property>
+		<property name="target">
+			<ref bean="com.liferay.portal.service.ThemeLocalService.impl" />
+		</property>
+	</bean>
 	<bean id="com.liferay.portal.service.ThemeLocalServiceFactory" class="com.liferay.portal.service.ThemeLocalServiceFactory" lazy-init="true">
 		<property name="service">
 			<ref bean="com.liferay.portal.service.ThemeLocalService.impl" />
@@ -2422,6 +3124,19 @@
 			</props>
 		</property>
 	</bean>
+	<bean id="com.liferay.portal.service.UserLocalService.exceptionSafe" class="org.springframework.aop.framework.ProxyFactoryBean" lazy-init="true">
+		<property name="proxyInterfaces">
+			<value>com.liferay.portal.service.UserLocalService</value>
+		</property>
+		<property name="interceptorNames">
+			<list>
+				<value>com.liferay.portal.spring.aop.ExceptionSafeInterceptor</value>
+			</list>
+		</property>
+		<property name="target">
+			<ref bean="com.liferay.portal.service.UserLocalService.transaction" />
+		</property>
+	</bean>
 	<bean id="com.liferay.portal.service.UserLocalServiceFactory" class="com.liferay.portal.service.UserLocalServiceFactory" lazy-init="true">
 		<property name="service">
 			<ref bean="com.liferay.portal.service.UserLocalService.transaction" />
@@ -2446,6 +3161,19 @@
 				<prop key="update*">PROPAGATION_REQUIRED,-com.liferay.portal.PortalException,-com.liferay.portal.SystemException</prop>
 				<prop key="*">PROPAGATION_SUPPORTS,readOnly</prop>
 			</props>
+		</property>
+	</bean>
+	<bean id="com.liferay.portal.service.UserService.exceptionSafe" class="org.springframework.aop.framework.ProxyFactoryBean" lazy-init="true">
+		<property name="proxyInterfaces">
+			<value>com.liferay.portal.service.UserService</value>
+		</property>
+		<property name="interceptorNames">
+			<list>
+				<value>com.liferay.portal.spring.aop.ExceptionSafeInterceptor</value>
+			</list>
+		</property>
+		<property name="target">
+			<ref bean="com.liferay.portal.service.UserService.transaction" />
 		</property>
 	</bean>
 	<bean id="com.liferay.portal.service.UserServiceFactory" class="com.liferay.portal.service.UserServiceFactory" lazy-init="true">
@@ -2515,6 +3243,19 @@
 			</props>
 		</property>
 	</bean>
+	<bean id="com.liferay.portal.service.UserGroupLocalService.exceptionSafe" class="org.springframework.aop.framework.ProxyFactoryBean" lazy-init="true">
+		<property name="proxyInterfaces">
+			<value>com.liferay.portal.service.UserGroupLocalService</value>
+		</property>
+		<property name="interceptorNames">
+			<list>
+				<value>com.liferay.portal.spring.aop.ExceptionSafeInterceptor</value>
+			</list>
+		</property>
+		<property name="target">
+			<ref bean="com.liferay.portal.service.UserGroupLocalService.transaction" />
+		</property>
+	</bean>
 	<bean id="com.liferay.portal.service.UserGroupLocalServiceFactory" class="com.liferay.portal.service.UserGroupLocalServiceFactory" lazy-init="true">
 		<property name="service">
 			<ref bean="com.liferay.portal.service.UserGroupLocalService.transaction" />
@@ -2538,6 +3279,19 @@
 				<prop key="update*">PROPAGATION_REQUIRED,-com.liferay.portal.PortalException,-com.liferay.portal.SystemException</prop>
 				<prop key="*">PROPAGATION_SUPPORTS,readOnly</prop>
 			</props>
+		</property>
+	</bean>
+	<bean id="com.liferay.portal.service.UserGroupService.exceptionSafe" class="org.springframework.aop.framework.ProxyFactoryBean" lazy-init="true">
+		<property name="proxyInterfaces">
+			<value>com.liferay.portal.service.UserGroupService</value>
+		</property>
+		<property name="interceptorNames">
+			<list>
+				<value>com.liferay.portal.spring.aop.ExceptionSafeInterceptor</value>
+			</list>
+		</property>
+		<property name="target">
+			<ref bean="com.liferay.portal.service.UserGroupService.transaction" />
 		</property>
 	</bean>
 	<bean id="com.liferay.portal.service.UserGroupServiceFactory" class="com.liferay.portal.service.UserGroupServiceFactory" lazy-init="true">
@@ -2607,6 +3361,19 @@
 			</props>
 		</property>
 	</bean>
+	<bean id="com.liferay.portal.service.UserGroupRoleLocalService.exceptionSafe" class="org.springframework.aop.framework.ProxyFactoryBean" lazy-init="true">
+		<property name="proxyInterfaces">
+			<value>com.liferay.portal.service.UserGroupRoleLocalService</value>
+		</property>
+		<property name="interceptorNames">
+			<list>
+				<value>com.liferay.portal.spring.aop.ExceptionSafeInterceptor</value>
+			</list>
+		</property>
+		<property name="target">
+			<ref bean="com.liferay.portal.service.UserGroupRoleLocalService.transaction" />
+		</property>
+	</bean>
 	<bean id="com.liferay.portal.service.UserGroupRoleLocalServiceFactory" class="com.liferay.portal.service.UserGroupRoleLocalServiceFactory" lazy-init="true">
 		<property name="service">
 			<ref bean="com.liferay.portal.service.UserGroupRoleLocalService.transaction" />
@@ -2630,6 +3397,19 @@
 				<prop key="update*">PROPAGATION_REQUIRED,-com.liferay.portal.PortalException,-com.liferay.portal.SystemException</prop>
 				<prop key="*">PROPAGATION_SUPPORTS,readOnly</prop>
 			</props>
+		</property>
+	</bean>
+	<bean id="com.liferay.portal.service.UserGroupRoleService.exceptionSafe" class="org.springframework.aop.framework.ProxyFactoryBean" lazy-init="true">
+		<property name="proxyInterfaces">
+			<value>com.liferay.portal.service.UserGroupRoleService</value>
+		</property>
+		<property name="interceptorNames">
+			<list>
+				<value>com.liferay.portal.spring.aop.ExceptionSafeInterceptor</value>
+			</list>
+		</property>
+		<property name="target">
+			<ref bean="com.liferay.portal.service.UserGroupRoleService.transaction" />
 		</property>
 	</bean>
 	<bean id="com.liferay.portal.service.UserGroupRoleServiceFactory" class="com.liferay.portal.service.UserGroupRoleServiceFactory" lazy-init="true">
@@ -2686,6 +3466,19 @@
 			</props>
 		</property>
 	</bean>
+	<bean id="com.liferay.portal.service.UserIdMapperLocalService.exceptionSafe" class="org.springframework.aop.framework.ProxyFactoryBean" lazy-init="true">
+		<property name="proxyInterfaces">
+			<value>com.liferay.portal.service.UserIdMapperLocalService</value>
+		</property>
+		<property name="interceptorNames">
+			<list>
+				<value>com.liferay.portal.spring.aop.ExceptionSafeInterceptor</value>
+			</list>
+		</property>
+		<property name="target">
+			<ref bean="com.liferay.portal.service.UserIdMapperLocalService.transaction" />
+		</property>
+	</bean>
 	<bean id="com.liferay.portal.service.UserIdMapperLocalServiceFactory" class="com.liferay.portal.service.UserIdMapperLocalServiceFactory" lazy-init="true">
 		<property name="service">
 			<ref bean="com.liferay.portal.service.UserIdMapperLocalService.transaction" />
@@ -2738,6 +3531,19 @@
 				<prop key="update*">PROPAGATION_REQUIRED,-com.liferay.portal.PortalException,-com.liferay.portal.SystemException</prop>
 				<prop key="*">PROPAGATION_SUPPORTS,readOnly</prop>
 			</props>
+		</property>
+	</bean>
+	<bean id="com.liferay.portal.service.UserTrackerLocalService.exceptionSafe" class="org.springframework.aop.framework.ProxyFactoryBean" lazy-init="true">
+		<property name="proxyInterfaces">
+			<value>com.liferay.portal.service.UserTrackerLocalService</value>
+		</property>
+		<property name="interceptorNames">
+			<list>
+				<value>com.liferay.portal.spring.aop.ExceptionSafeInterceptor</value>
+			</list>
+		</property>
+		<property name="target">
+			<ref bean="com.liferay.portal.service.UserTrackerLocalService.transaction" />
 		</property>
 	</bean>
 	<bean id="com.liferay.portal.service.UserTrackerLocalServiceFactory" class="com.liferay.portal.service.UserTrackerLocalServiceFactory" lazy-init="true">
@@ -2794,6 +3600,19 @@
 			</props>
 		</property>
 	</bean>
+	<bean id="com.liferay.portal.service.UserTrackerPathLocalService.exceptionSafe" class="org.springframework.aop.framework.ProxyFactoryBean" lazy-init="true">
+		<property name="proxyInterfaces">
+			<value>com.liferay.portal.service.UserTrackerPathLocalService</value>
+		</property>
+		<property name="interceptorNames">
+			<list>
+				<value>com.liferay.portal.spring.aop.ExceptionSafeInterceptor</value>
+			</list>
+		</property>
+		<property name="target">
+			<ref bean="com.liferay.portal.service.UserTrackerPathLocalService.transaction" />
+		</property>
+	</bean>
 	<bean id="com.liferay.portal.service.UserTrackerPathLocalServiceFactory" class="com.liferay.portal.service.UserTrackerPathLocalServiceFactory" lazy-init="true">
 		<property name="service">
 			<ref bean="com.liferay.portal.service.UserTrackerPathLocalService.transaction" />
@@ -2846,6 +3665,19 @@
 				<prop key="update*">PROPAGATION_REQUIRED,-com.liferay.portal.PortalException,-com.liferay.portal.SystemException</prop>
 				<prop key="*">PROPAGATION_SUPPORTS,readOnly</prop>
 			</props>
+		</property>
+	</bean>
+	<bean id="com.liferay.portal.service.WebDAVPropsLocalService.exceptionSafe" class="org.springframework.aop.framework.ProxyFactoryBean" lazy-init="true">
+		<property name="proxyInterfaces">
+			<value>com.liferay.portal.service.WebDAVPropsLocalService</value>
+		</property>
+		<property name="interceptorNames">
+			<list>
+				<value>com.liferay.portal.spring.aop.ExceptionSafeInterceptor</value>
+			</list>
+		</property>
+		<property name="target">
+			<ref bean="com.liferay.portal.service.WebDAVPropsLocalService.transaction" />
 		</property>
 	</bean>
 	<bean id="com.liferay.portal.service.WebDAVPropsLocalServiceFactory" class="com.liferay.portal.service.WebDAVPropsLocalServiceFactory" lazy-init="true">
@@ -2902,6 +3734,19 @@
 			</props>
 		</property>
 	</bean>
+	<bean id="com.liferay.portal.service.WebsiteLocalService.exceptionSafe" class="org.springframework.aop.framework.ProxyFactoryBean" lazy-init="true">
+		<property name="proxyInterfaces">
+			<value>com.liferay.portal.service.WebsiteLocalService</value>
+		</property>
+		<property name="interceptorNames">
+			<list>
+				<value>com.liferay.portal.spring.aop.ExceptionSafeInterceptor</value>
+			</list>
+		</property>
+		<property name="target">
+			<ref bean="com.liferay.portal.service.WebsiteLocalService.transaction" />
+		</property>
+	</bean>
 	<bean id="com.liferay.portal.service.WebsiteLocalServiceFactory" class="com.liferay.portal.service.WebsiteLocalServiceFactory" lazy-init="true">
 		<property name="service">
 			<ref bean="com.liferay.portal.service.WebsiteLocalService.transaction" />
@@ -2925,6 +3770,19 @@
 				<prop key="update*">PROPAGATION_REQUIRED,-com.liferay.portal.PortalException,-com.liferay.portal.SystemException</prop>
 				<prop key="*">PROPAGATION_SUPPORTS,readOnly</prop>
 			</props>
+		</property>
+	</bean>
+	<bean id="com.liferay.portal.service.WebsiteService.exceptionSafe" class="org.springframework.aop.framework.ProxyFactoryBean" lazy-init="true">
+		<property name="proxyInterfaces">
+			<value>com.liferay.portal.service.WebsiteService</value>
+		</property>
+		<property name="interceptorNames">
+			<list>
+				<value>com.liferay.portal.spring.aop.ExceptionSafeInterceptor</value>
+			</list>
+		</property>
+		<property name="target">
+			<ref bean="com.liferay.portal.service.WebsiteService.transaction" />
 		</property>
 	</bean>
 	<bean id="com.liferay.portal.service.WebsiteServiceFactory" class="com.liferay.portal.service.WebsiteServiceFactory" lazy-init="true">
@@ -2981,6 +3839,19 @@
 			</props>
 		</property>
 	</bean>
+	<bean id="com.liferay.portlet.announcements.service.AnnouncementsDeliveryLocalService.exceptionSafe" class="org.springframework.aop.framework.ProxyFactoryBean" lazy-init="true">
+		<property name="proxyInterfaces">
+			<value>com.liferay.portlet.announcements.service.AnnouncementsDeliveryLocalService</value>
+		</property>
+		<property name="interceptorNames">
+			<list>
+				<value>com.liferay.portal.spring.aop.ExceptionSafeInterceptor</value>
+			</list>
+		</property>
+		<property name="target">
+			<ref bean="com.liferay.portlet.announcements.service.AnnouncementsDeliveryLocalService.transaction" />
+		</property>
+	</bean>
 	<bean id="com.liferay.portlet.announcements.service.AnnouncementsDeliveryLocalServiceFactory" class="com.liferay.portlet.announcements.service.AnnouncementsDeliveryLocalServiceFactory" lazy-init="true">
 		<property name="service">
 			<ref bean="com.liferay.portlet.announcements.service.AnnouncementsDeliveryLocalService.transaction" />
@@ -3004,6 +3875,19 @@
 				<prop key="update*">PROPAGATION_REQUIRED,-com.liferay.portal.PortalException,-com.liferay.portal.SystemException</prop>
 				<prop key="*">PROPAGATION_SUPPORTS,readOnly</prop>
 			</props>
+		</property>
+	</bean>
+	<bean id="com.liferay.portlet.announcements.service.AnnouncementsDeliveryService.exceptionSafe" class="org.springframework.aop.framework.ProxyFactoryBean" lazy-init="true">
+		<property name="proxyInterfaces">
+			<value>com.liferay.portlet.announcements.service.AnnouncementsDeliveryService</value>
+		</property>
+		<property name="interceptorNames">
+			<list>
+				<value>com.liferay.portal.spring.aop.ExceptionSafeInterceptor</value>
+			</list>
+		</property>
+		<property name="target">
+			<ref bean="com.liferay.portlet.announcements.service.AnnouncementsDeliveryService.transaction" />
 		</property>
 	</bean>
 	<bean id="com.liferay.portlet.announcements.service.AnnouncementsDeliveryServiceFactory" class="com.liferay.portlet.announcements.service.AnnouncementsDeliveryServiceFactory" lazy-init="true">
@@ -3060,6 +3944,19 @@
 			</props>
 		</property>
 	</bean>
+	<bean id="com.liferay.portlet.announcements.service.AnnouncementsEntryLocalService.exceptionSafe" class="org.springframework.aop.framework.ProxyFactoryBean" lazy-init="true">
+		<property name="proxyInterfaces">
+			<value>com.liferay.portlet.announcements.service.AnnouncementsEntryLocalService</value>
+		</property>
+		<property name="interceptorNames">
+			<list>
+				<value>com.liferay.portal.spring.aop.ExceptionSafeInterceptor</value>
+			</list>
+		</property>
+		<property name="target">
+			<ref bean="com.liferay.portlet.announcements.service.AnnouncementsEntryLocalService.transaction" />
+		</property>
+	</bean>
 	<bean id="com.liferay.portlet.announcements.service.AnnouncementsEntryLocalServiceFactory" class="com.liferay.portlet.announcements.service.AnnouncementsEntryLocalServiceFactory" lazy-init="true">
 		<property name="service">
 			<ref bean="com.liferay.portlet.announcements.service.AnnouncementsEntryLocalService.transaction" />
@@ -3083,6 +3980,19 @@
 				<prop key="update*">PROPAGATION_REQUIRED,-com.liferay.portal.PortalException,-com.liferay.portal.SystemException</prop>
 				<prop key="*">PROPAGATION_SUPPORTS,readOnly</prop>
 			</props>
+		</property>
+	</bean>
+	<bean id="com.liferay.portlet.announcements.service.AnnouncementsEntryService.exceptionSafe" class="org.springframework.aop.framework.ProxyFactoryBean" lazy-init="true">
+		<property name="proxyInterfaces">
+			<value>com.liferay.portlet.announcements.service.AnnouncementsEntryService</value>
+		</property>
+		<property name="interceptorNames">
+			<list>
+				<value>com.liferay.portal.spring.aop.ExceptionSafeInterceptor</value>
+			</list>
+		</property>
+		<property name="target">
+			<ref bean="com.liferay.portlet.announcements.service.AnnouncementsEntryService.transaction" />
 		</property>
 	</bean>
 	<bean id="com.liferay.portlet.announcements.service.AnnouncementsEntryServiceFactory" class="com.liferay.portlet.announcements.service.AnnouncementsEntryServiceFactory" lazy-init="true">
@@ -3152,6 +4062,19 @@
 			</props>
 		</property>
 	</bean>
+	<bean id="com.liferay.portlet.announcements.service.AnnouncementsFlagLocalService.exceptionSafe" class="org.springframework.aop.framework.ProxyFactoryBean" lazy-init="true">
+		<property name="proxyInterfaces">
+			<value>com.liferay.portlet.announcements.service.AnnouncementsFlagLocalService</value>
+		</property>
+		<property name="interceptorNames">
+			<list>
+				<value>com.liferay.portal.spring.aop.ExceptionSafeInterceptor</value>
+			</list>
+		</property>
+		<property name="target">
+			<ref bean="com.liferay.portlet.announcements.service.AnnouncementsFlagLocalService.transaction" />
+		</property>
+	</bean>
 	<bean id="com.liferay.portlet.announcements.service.AnnouncementsFlagLocalServiceFactory" class="com.liferay.portlet.announcements.service.AnnouncementsFlagLocalServiceFactory" lazy-init="true">
 		<property name="service">
 			<ref bean="com.liferay.portlet.announcements.service.AnnouncementsFlagLocalService.transaction" />
@@ -3175,6 +4098,19 @@
 				<prop key="update*">PROPAGATION_REQUIRED,-com.liferay.portal.PortalException,-com.liferay.portal.SystemException</prop>
 				<prop key="*">PROPAGATION_SUPPORTS,readOnly</prop>
 			</props>
+		</property>
+	</bean>
+	<bean id="com.liferay.portlet.announcements.service.AnnouncementsFlagService.exceptionSafe" class="org.springframework.aop.framework.ProxyFactoryBean" lazy-init="true">
+		<property name="proxyInterfaces">
+			<value>com.liferay.portlet.announcements.service.AnnouncementsFlagService</value>
+		</property>
+		<property name="interceptorNames">
+			<list>
+				<value>com.liferay.portal.spring.aop.ExceptionSafeInterceptor</value>
+			</list>
+		</property>
+		<property name="target">
+			<ref bean="com.liferay.portlet.announcements.service.AnnouncementsFlagService.transaction" />
 		</property>
 	</bean>
 	<bean id="com.liferay.portlet.announcements.service.AnnouncementsFlagServiceFactory" class="com.liferay.portlet.announcements.service.AnnouncementsFlagServiceFactory" lazy-init="true">
@@ -3231,6 +4167,19 @@
 			</props>
 		</property>
 	</bean>
+	<bean id="com.liferay.portlet.blogs.service.BlogsEntryLocalService.exceptionSafe" class="org.springframework.aop.framework.ProxyFactoryBean" lazy-init="true">
+		<property name="proxyInterfaces">
+			<value>com.liferay.portlet.blogs.service.BlogsEntryLocalService</value>
+		</property>
+		<property name="interceptorNames">
+			<list>
+				<value>com.liferay.portal.spring.aop.ExceptionSafeInterceptor</value>
+			</list>
+		</property>
+		<property name="target">
+			<ref bean="com.liferay.portlet.blogs.service.BlogsEntryLocalService.transaction" />
+		</property>
+	</bean>
 	<bean id="com.liferay.portlet.blogs.service.BlogsEntryLocalServiceFactory" class="com.liferay.portlet.blogs.service.BlogsEntryLocalServiceFactory" lazy-init="true">
 		<property name="service">
 			<ref bean="com.liferay.portlet.blogs.service.BlogsEntryLocalService.transaction" />
@@ -3254,6 +4203,19 @@
 				<prop key="update*">PROPAGATION_REQUIRED,-com.liferay.portal.PortalException,-com.liferay.portal.SystemException</prop>
 				<prop key="*">PROPAGATION_SUPPORTS,readOnly</prop>
 			</props>
+		</property>
+	</bean>
+	<bean id="com.liferay.portlet.blogs.service.BlogsEntryService.exceptionSafe" class="org.springframework.aop.framework.ProxyFactoryBean" lazy-init="true">
+		<property name="proxyInterfaces">
+			<value>com.liferay.portlet.blogs.service.BlogsEntryService</value>
+		</property>
+		<property name="interceptorNames">
+			<list>
+				<value>com.liferay.portal.spring.aop.ExceptionSafeInterceptor</value>
+			</list>
+		</property>
+		<property name="target">
+			<ref bean="com.liferay.portlet.blogs.service.BlogsEntryService.transaction" />
 		</property>
 	</bean>
 	<bean id="com.liferay.portlet.blogs.service.BlogsEntryServiceFactory" class="com.liferay.portlet.blogs.service.BlogsEntryServiceFactory" lazy-init="true">
@@ -3323,6 +4285,19 @@
 			</props>
 		</property>
 	</bean>
+	<bean id="com.liferay.portlet.blogs.service.BlogsStatsUserLocalService.exceptionSafe" class="org.springframework.aop.framework.ProxyFactoryBean" lazy-init="true">
+		<property name="proxyInterfaces">
+			<value>com.liferay.portlet.blogs.service.BlogsStatsUserLocalService</value>
+		</property>
+		<property name="interceptorNames">
+			<list>
+				<value>com.liferay.portal.spring.aop.ExceptionSafeInterceptor</value>
+			</list>
+		</property>
+		<property name="target">
+			<ref bean="com.liferay.portlet.blogs.service.BlogsStatsUserLocalService.transaction" />
+		</property>
+	</bean>
 	<bean id="com.liferay.portlet.blogs.service.BlogsStatsUserLocalServiceFactory" class="com.liferay.portlet.blogs.service.BlogsStatsUserLocalServiceFactory" lazy-init="true">
 		<property name="service">
 			<ref bean="com.liferay.portlet.blogs.service.BlogsStatsUserLocalService.transaction" />
@@ -3390,6 +4365,19 @@
 			</props>
 		</property>
 	</bean>
+	<bean id="com.liferay.portlet.bookmarks.service.BookmarksEntryLocalService.exceptionSafe" class="org.springframework.aop.framework.ProxyFactoryBean" lazy-init="true">
+		<property name="proxyInterfaces">
+			<value>com.liferay.portlet.bookmarks.service.BookmarksEntryLocalService</value>
+		</property>
+		<property name="interceptorNames">
+			<list>
+				<value>com.liferay.portal.spring.aop.ExceptionSafeInterceptor</value>
+			</list>
+		</property>
+		<property name="target">
+			<ref bean="com.liferay.portlet.bookmarks.service.BookmarksEntryLocalService.transaction" />
+		</property>
+	</bean>
 	<bean id="com.liferay.portlet.bookmarks.service.BookmarksEntryLocalServiceFactory" class="com.liferay.portlet.bookmarks.service.BookmarksEntryLocalServiceFactory" lazy-init="true">
 		<property name="service">
 			<ref bean="com.liferay.portlet.bookmarks.service.BookmarksEntryLocalService.transaction" />
@@ -3413,6 +4401,19 @@
 				<prop key="update*">PROPAGATION_REQUIRED,-com.liferay.portal.PortalException,-com.liferay.portal.SystemException</prop>
 				<prop key="*">PROPAGATION_SUPPORTS,readOnly</prop>
 			</props>
+		</property>
+	</bean>
+	<bean id="com.liferay.portlet.bookmarks.service.BookmarksEntryService.exceptionSafe" class="org.springframework.aop.framework.ProxyFactoryBean" lazy-init="true">
+		<property name="proxyInterfaces">
+			<value>com.liferay.portlet.bookmarks.service.BookmarksEntryService</value>
+		</property>
+		<property name="interceptorNames">
+			<list>
+				<value>com.liferay.portal.spring.aop.ExceptionSafeInterceptor</value>
+			</list>
+		</property>
+		<property name="target">
+			<ref bean="com.liferay.portlet.bookmarks.service.BookmarksEntryService.transaction" />
 		</property>
 	</bean>
 	<bean id="com.liferay.portlet.bookmarks.service.BookmarksEntryServiceFactory" class="com.liferay.portlet.bookmarks.service.BookmarksEntryServiceFactory" lazy-init="true">
@@ -3482,6 +4483,19 @@
 			</props>
 		</property>
 	</bean>
+	<bean id="com.liferay.portlet.bookmarks.service.BookmarksFolderLocalService.exceptionSafe" class="org.springframework.aop.framework.ProxyFactoryBean" lazy-init="true">
+		<property name="proxyInterfaces">
+			<value>com.liferay.portlet.bookmarks.service.BookmarksFolderLocalService</value>
+		</property>
+		<property name="interceptorNames">
+			<list>
+				<value>com.liferay.portal.spring.aop.ExceptionSafeInterceptor</value>
+			</list>
+		</property>
+		<property name="target">
+			<ref bean="com.liferay.portlet.bookmarks.service.BookmarksFolderLocalService.transaction" />
+		</property>
+	</bean>
 	<bean id="com.liferay.portlet.bookmarks.service.BookmarksFolderLocalServiceFactory" class="com.liferay.portlet.bookmarks.service.BookmarksFolderLocalServiceFactory" lazy-init="true">
 		<property name="service">
 			<ref bean="com.liferay.portlet.bookmarks.service.BookmarksFolderLocalService.transaction" />
@@ -3505,6 +4519,19 @@
 				<prop key="update*">PROPAGATION_REQUIRED,-com.liferay.portal.PortalException,-com.liferay.portal.SystemException</prop>
 				<prop key="*">PROPAGATION_SUPPORTS,readOnly</prop>
 			</props>
+		</property>
+	</bean>
+	<bean id="com.liferay.portlet.bookmarks.service.BookmarksFolderService.exceptionSafe" class="org.springframework.aop.framework.ProxyFactoryBean" lazy-init="true">
+		<property name="proxyInterfaces">
+			<value>com.liferay.portlet.bookmarks.service.BookmarksFolderService</value>
+		</property>
+		<property name="interceptorNames">
+			<list>
+				<value>com.liferay.portal.spring.aop.ExceptionSafeInterceptor</value>
+			</list>
+		</property>
+		<property name="target">
+			<ref bean="com.liferay.portlet.bookmarks.service.BookmarksFolderService.transaction" />
 		</property>
 	</bean>
 	<bean id="com.liferay.portlet.bookmarks.service.BookmarksFolderServiceFactory" class="com.liferay.portlet.bookmarks.service.BookmarksFolderServiceFactory" lazy-init="true">
@@ -3561,6 +4588,19 @@
 			</props>
 		</property>
 	</bean>
+	<bean id="com.liferay.portlet.calendar.service.CalEventLocalService.exceptionSafe" class="org.springframework.aop.framework.ProxyFactoryBean" lazy-init="true">
+		<property name="proxyInterfaces">
+			<value>com.liferay.portlet.calendar.service.CalEventLocalService</value>
+		</property>
+		<property name="interceptorNames">
+			<list>
+				<value>com.liferay.portal.spring.aop.ExceptionSafeInterceptor</value>
+			</list>
+		</property>
+		<property name="target">
+			<ref bean="com.liferay.portlet.calendar.service.CalEventLocalService.transaction" />
+		</property>
+	</bean>
 	<bean id="com.liferay.portlet.calendar.service.CalEventLocalServiceFactory" class="com.liferay.portlet.calendar.service.CalEventLocalServiceFactory" lazy-init="true">
 		<property name="service">
 			<ref bean="com.liferay.portlet.calendar.service.CalEventLocalService.transaction" />
@@ -3584,6 +4624,19 @@
 				<prop key="update*">PROPAGATION_REQUIRED,-com.liferay.portal.PortalException,-com.liferay.portal.SystemException</prop>
 				<prop key="*">PROPAGATION_SUPPORTS,readOnly</prop>
 			</props>
+		</property>
+	</bean>
+	<bean id="com.liferay.portlet.calendar.service.CalEventService.exceptionSafe" class="org.springframework.aop.framework.ProxyFactoryBean" lazy-init="true">
+		<property name="proxyInterfaces">
+			<value>com.liferay.portlet.calendar.service.CalEventService</value>
+		</property>
+		<property name="interceptorNames">
+			<list>
+				<value>com.liferay.portal.spring.aop.ExceptionSafeInterceptor</value>
+			</list>
+		</property>
+		<property name="target">
+			<ref bean="com.liferay.portlet.calendar.service.CalEventService.transaction" />
 		</property>
 	</bean>
 	<bean id="com.liferay.portlet.calendar.service.CalEventServiceFactory" class="com.liferay.portlet.calendar.service.CalEventServiceFactory" lazy-init="true">
@@ -3653,6 +4706,19 @@
 			</props>
 		</property>
 	</bean>
+	<bean id="com.liferay.portlet.documentlibrary.service.DLFileEntryLocalService.exceptionSafe" class="org.springframework.aop.framework.ProxyFactoryBean" lazy-init="true">
+		<property name="proxyInterfaces">
+			<value>com.liferay.portlet.documentlibrary.service.DLFileEntryLocalService</value>
+		</property>
+		<property name="interceptorNames">
+			<list>
+				<value>com.liferay.portal.spring.aop.ExceptionSafeInterceptor</value>
+			</list>
+		</property>
+		<property name="target">
+			<ref bean="com.liferay.portlet.documentlibrary.service.DLFileEntryLocalService.transaction" />
+		</property>
+	</bean>
 	<bean id="com.liferay.portlet.documentlibrary.service.DLFileEntryLocalServiceFactory" class="com.liferay.portlet.documentlibrary.service.DLFileEntryLocalServiceFactory" lazy-init="true">
 		<property name="service">
 			<ref bean="com.liferay.portlet.documentlibrary.service.DLFileEntryLocalService.transaction" />
@@ -3676,6 +4742,19 @@
 				<prop key="update*">PROPAGATION_REQUIRED,-com.liferay.portal.PortalException,-com.liferay.portal.SystemException</prop>
 				<prop key="*">PROPAGATION_SUPPORTS,readOnly</prop>
 			</props>
+		</property>
+	</bean>
+	<bean id="com.liferay.portlet.documentlibrary.service.DLFileEntryService.exceptionSafe" class="org.springframework.aop.framework.ProxyFactoryBean" lazy-init="true">
+		<property name="proxyInterfaces">
+			<value>com.liferay.portlet.documentlibrary.service.DLFileEntryService</value>
+		</property>
+		<property name="interceptorNames">
+			<list>
+				<value>com.liferay.portal.spring.aop.ExceptionSafeInterceptor</value>
+			</list>
+		</property>
+		<property name="target">
+			<ref bean="com.liferay.portlet.documentlibrary.service.DLFileEntryService.transaction" />
 		</property>
 	</bean>
 	<bean id="com.liferay.portlet.documentlibrary.service.DLFileEntryServiceFactory" class="com.liferay.portlet.documentlibrary.service.DLFileEntryServiceFactory" lazy-init="true">
@@ -3758,6 +4837,19 @@
 			</props>
 		</property>
 	</bean>
+	<bean id="com.liferay.portlet.documentlibrary.service.DLFileRankLocalService.exceptionSafe" class="org.springframework.aop.framework.ProxyFactoryBean" lazy-init="true">
+		<property name="proxyInterfaces">
+			<value>com.liferay.portlet.documentlibrary.service.DLFileRankLocalService</value>
+		</property>
+		<property name="interceptorNames">
+			<list>
+				<value>com.liferay.portal.spring.aop.ExceptionSafeInterceptor</value>
+			</list>
+		</property>
+		<property name="target">
+			<ref bean="com.liferay.portlet.documentlibrary.service.DLFileRankLocalService.transaction" />
+		</property>
+	</bean>
 	<bean id="com.liferay.portlet.documentlibrary.service.DLFileRankLocalServiceFactory" class="com.liferay.portlet.documentlibrary.service.DLFileRankLocalServiceFactory" lazy-init="true">
 		<property name="service">
 			<ref bean="com.liferay.portlet.documentlibrary.service.DLFileRankLocalService.transaction" />
@@ -3825,6 +4917,19 @@
 			</props>
 		</property>
 	</bean>
+	<bean id="com.liferay.portlet.documentlibrary.service.DLFileShortcutLocalService.exceptionSafe" class="org.springframework.aop.framework.ProxyFactoryBean" lazy-init="true">
+		<property name="proxyInterfaces">
+			<value>com.liferay.portlet.documentlibrary.service.DLFileShortcutLocalService</value>
+		</property>
+		<property name="interceptorNames">
+			<list>
+				<value>com.liferay.portal.spring.aop.ExceptionSafeInterceptor</value>
+			</list>
+		</property>
+		<property name="target">
+			<ref bean="com.liferay.portlet.documentlibrary.service.DLFileShortcutLocalService.transaction" />
+		</property>
+	</bean>
 	<bean id="com.liferay.portlet.documentlibrary.service.DLFileShortcutLocalServiceFactory" class="com.liferay.portlet.documentlibrary.service.DLFileShortcutLocalServiceFactory" lazy-init="true">
 		<property name="service">
 			<ref bean="com.liferay.portlet.documentlibrary.service.DLFileShortcutLocalService.transaction" />
@@ -3848,6 +4953,19 @@
 				<prop key="update*">PROPAGATION_REQUIRED,-com.liferay.portal.PortalException,-com.liferay.portal.SystemException</prop>
 				<prop key="*">PROPAGATION_SUPPORTS,readOnly</prop>
 			</props>
+		</property>
+	</bean>
+	<bean id="com.liferay.portlet.documentlibrary.service.DLFileShortcutService.exceptionSafe" class="org.springframework.aop.framework.ProxyFactoryBean" lazy-init="true">
+		<property name="proxyInterfaces">
+			<value>com.liferay.portlet.documentlibrary.service.DLFileShortcutService</value>
+		</property>
+		<property name="interceptorNames">
+			<list>
+				<value>com.liferay.portal.spring.aop.ExceptionSafeInterceptor</value>
+			</list>
+		</property>
+		<property name="target">
+			<ref bean="com.liferay.portlet.documentlibrary.service.DLFileShortcutService.transaction" />
 		</property>
 	</bean>
 	<bean id="com.liferay.portlet.documentlibrary.service.DLFileShortcutServiceFactory" class="com.liferay.portlet.documentlibrary.service.DLFileShortcutServiceFactory" lazy-init="true">
@@ -3917,6 +5035,19 @@
 			</props>
 		</property>
 	</bean>
+	<bean id="com.liferay.portlet.documentlibrary.service.DLFileVersionLocalService.exceptionSafe" class="org.springframework.aop.framework.ProxyFactoryBean" lazy-init="true">
+		<property name="proxyInterfaces">
+			<value>com.liferay.portlet.documentlibrary.service.DLFileVersionLocalService</value>
+		</property>
+		<property name="interceptorNames">
+			<list>
+				<value>com.liferay.portal.spring.aop.ExceptionSafeInterceptor</value>
+			</list>
+		</property>
+		<property name="target">
+			<ref bean="com.liferay.portlet.documentlibrary.service.DLFileVersionLocalService.transaction" />
+		</property>
+	</bean>
 	<bean id="com.liferay.portlet.documentlibrary.service.DLFileVersionLocalServiceFactory" class="com.liferay.portlet.documentlibrary.service.DLFileVersionLocalServiceFactory" lazy-init="true">
 		<property name="service">
 			<ref bean="com.liferay.portlet.documentlibrary.service.DLFileVersionLocalService.transaction" />
@@ -3971,6 +5102,19 @@
 			</props>
 		</property>
 	</bean>
+	<bean id="com.liferay.portlet.documentlibrary.service.DLFolderLocalService.exceptionSafe" class="org.springframework.aop.framework.ProxyFactoryBean" lazy-init="true">
+		<property name="proxyInterfaces">
+			<value>com.liferay.portlet.documentlibrary.service.DLFolderLocalService</value>
+		</property>
+		<property name="interceptorNames">
+			<list>
+				<value>com.liferay.portal.spring.aop.ExceptionSafeInterceptor</value>
+			</list>
+		</property>
+		<property name="target">
+			<ref bean="com.liferay.portlet.documentlibrary.service.DLFolderLocalService.transaction" />
+		</property>
+	</bean>
 	<bean id="com.liferay.portlet.documentlibrary.service.DLFolderLocalServiceFactory" class="com.liferay.portlet.documentlibrary.service.DLFolderLocalServiceFactory" lazy-init="true">
 		<property name="service">
 			<ref bean="com.liferay.portlet.documentlibrary.service.DLFolderLocalService.transaction" />
@@ -3994,6 +5138,19 @@
 				<prop key="update*">PROPAGATION_REQUIRED,-com.liferay.portal.PortalException,-com.liferay.portal.SystemException</prop>
 				<prop key="*">PROPAGATION_SUPPORTS,readOnly</prop>
 			</props>
+		</property>
+	</bean>
+	<bean id="com.liferay.portlet.documentlibrary.service.DLFolderService.exceptionSafe" class="org.springframework.aop.framework.ProxyFactoryBean" lazy-init="true">
+		<property name="proxyInterfaces">
+			<value>com.liferay.portlet.documentlibrary.service.DLFolderService</value>
+		</property>
+		<property name="interceptorNames">
+			<list>
+				<value>com.liferay.portal.spring.aop.ExceptionSafeInterceptor</value>
+			</list>
+		</property>
+		<property name="target">
+			<ref bean="com.liferay.portlet.documentlibrary.service.DLFolderService.transaction" />
 		</property>
 	</bean>
 	<bean id="com.liferay.portlet.documentlibrary.service.DLFolderServiceFactory" class="com.liferay.portlet.documentlibrary.service.DLFolderServiceFactory" lazy-init="true">
@@ -4048,6 +5205,19 @@
 				<prop key="update*">PROPAGATION_REQUIRED,-com.liferay.portal.PortalException,-com.liferay.portal.SystemException</prop>
 				<prop key="*">PROPAGATION_SUPPORTS,readOnly</prop>
 			</props>
+		</property>
+	</bean>
+	<bean id="com.liferay.portlet.expando.service.ExpandoColumnLocalService.exceptionSafe" class="org.springframework.aop.framework.ProxyFactoryBean" lazy-init="true">
+		<property name="proxyInterfaces">
+			<value>com.liferay.portlet.expando.service.ExpandoColumnLocalService</value>
+		</property>
+		<property name="interceptorNames">
+			<list>
+				<value>com.liferay.portal.spring.aop.ExceptionSafeInterceptor</value>
+			</list>
+		</property>
+		<property name="target">
+			<ref bean="com.liferay.portlet.expando.service.ExpandoColumnLocalService.transaction" />
 		</property>
 	</bean>
 	<bean id="com.liferay.portlet.expando.service.ExpandoColumnLocalServiceFactory" class="com.liferay.portlet.expando.service.ExpandoColumnLocalServiceFactory" lazy-init="true">
@@ -4117,6 +5287,19 @@
 			</props>
 		</property>
 	</bean>
+	<bean id="com.liferay.portlet.expando.service.ExpandoRowLocalService.exceptionSafe" class="org.springframework.aop.framework.ProxyFactoryBean" lazy-init="true">
+		<property name="proxyInterfaces">
+			<value>com.liferay.portlet.expando.service.ExpandoRowLocalService</value>
+		</property>
+		<property name="interceptorNames">
+			<list>
+				<value>com.liferay.portal.spring.aop.ExceptionSafeInterceptor</value>
+			</list>
+		</property>
+		<property name="target">
+			<ref bean="com.liferay.portlet.expando.service.ExpandoRowLocalService.transaction" />
+		</property>
+	</bean>
 	<bean id="com.liferay.portlet.expando.service.ExpandoRowLocalServiceFactory" class="com.liferay.portlet.expando.service.ExpandoRowLocalServiceFactory" lazy-init="true">
 		<property name="service">
 			<ref bean="com.liferay.portlet.expando.service.ExpandoRowLocalService.transaction" />
@@ -4184,6 +5367,19 @@
 			</props>
 		</property>
 	</bean>
+	<bean id="com.liferay.portlet.expando.service.ExpandoTableLocalService.exceptionSafe" class="org.springframework.aop.framework.ProxyFactoryBean" lazy-init="true">
+		<property name="proxyInterfaces">
+			<value>com.liferay.portlet.expando.service.ExpandoTableLocalService</value>
+		</property>
+		<property name="interceptorNames">
+			<list>
+				<value>com.liferay.portal.spring.aop.ExceptionSafeInterceptor</value>
+			</list>
+		</property>
+		<property name="target">
+			<ref bean="com.liferay.portlet.expando.service.ExpandoTableLocalService.transaction" />
+		</property>
+	</bean>
 	<bean id="com.liferay.portlet.expando.service.ExpandoTableLocalServiceFactory" class="com.liferay.portlet.expando.service.ExpandoTableLocalServiceFactory" lazy-init="true">
 		<property name="service">
 			<ref bean="com.liferay.portlet.expando.service.ExpandoTableLocalService.transaction" />
@@ -4236,6 +5432,19 @@
 				<prop key="update*">PROPAGATION_REQUIRED,-com.liferay.portal.PortalException,-com.liferay.portal.SystemException</prop>
 				<prop key="*">PROPAGATION_SUPPORTS,readOnly</prop>
 			</props>
+		</property>
+	</bean>
+	<bean id="com.liferay.portlet.expando.service.ExpandoValueLocalService.exceptionSafe" class="org.springframework.aop.framework.ProxyFactoryBean" lazy-init="true">
+		<property name="proxyInterfaces">
+			<value>com.liferay.portlet.expando.service.ExpandoValueLocalService</value>
+		</property>
+		<property name="interceptorNames">
+			<list>
+				<value>com.liferay.portal.spring.aop.ExceptionSafeInterceptor</value>
+			</list>
+		</property>
+		<property name="target">
+			<ref bean="com.liferay.portlet.expando.service.ExpandoValueLocalService.transaction" />
 		</property>
 	</bean>
 	<bean id="com.liferay.portlet.expando.service.ExpandoValueLocalServiceFactory" class="com.liferay.portlet.expando.service.ExpandoValueLocalServiceFactory" lazy-init="true">
@@ -4305,6 +5514,19 @@
 			</props>
 		</property>
 	</bean>
+	<bean id="com.liferay.portlet.imagegallery.service.IGFolderLocalService.exceptionSafe" class="org.springframework.aop.framework.ProxyFactoryBean" lazy-init="true">
+		<property name="proxyInterfaces">
+			<value>com.liferay.portlet.imagegallery.service.IGFolderLocalService</value>
+		</property>
+		<property name="interceptorNames">
+			<list>
+				<value>com.liferay.portal.spring.aop.ExceptionSafeInterceptor</value>
+			</list>
+		</property>
+		<property name="target">
+			<ref bean="com.liferay.portlet.imagegallery.service.IGFolderLocalService.transaction" />
+		</property>
+	</bean>
 	<bean id="com.liferay.portlet.imagegallery.service.IGFolderLocalServiceFactory" class="com.liferay.portlet.imagegallery.service.IGFolderLocalServiceFactory" lazy-init="true">
 		<property name="service">
 			<ref bean="com.liferay.portlet.imagegallery.service.IGFolderLocalService.transaction" />
@@ -4328,6 +5550,19 @@
 				<prop key="update*">PROPAGATION_REQUIRED,-com.liferay.portal.PortalException,-com.liferay.portal.SystemException</prop>
 				<prop key="*">PROPAGATION_SUPPORTS,readOnly</prop>
 			</props>
+		</property>
+	</bean>
+	<bean id="com.liferay.portlet.imagegallery.service.IGFolderService.exceptionSafe" class="org.springframework.aop.framework.ProxyFactoryBean" lazy-init="true">
+		<property name="proxyInterfaces">
+			<value>com.liferay.portlet.imagegallery.service.IGFolderService</value>
+		</property>
+		<property name="interceptorNames">
+			<list>
+				<value>com.liferay.portal.spring.aop.ExceptionSafeInterceptor</value>
+			</list>
+		</property>
+		<property name="target">
+			<ref bean="com.liferay.portlet.imagegallery.service.IGFolderService.transaction" />
 		</property>
 	</bean>
 	<bean id="com.liferay.portlet.imagegallery.service.IGFolderServiceFactory" class="com.liferay.portlet.imagegallery.service.IGFolderServiceFactory" lazy-init="true">
@@ -4384,6 +5619,19 @@
 			</props>
 		</property>
 	</bean>
+	<bean id="com.liferay.portlet.imagegallery.service.IGImageLocalService.exceptionSafe" class="org.springframework.aop.framework.ProxyFactoryBean" lazy-init="true">
+		<property name="proxyInterfaces">
+			<value>com.liferay.portlet.imagegallery.service.IGImageLocalService</value>
+		</property>
+		<property name="interceptorNames">
+			<list>
+				<value>com.liferay.portal.spring.aop.ExceptionSafeInterceptor</value>
+			</list>
+		</property>
+		<property name="target">
+			<ref bean="com.liferay.portlet.imagegallery.service.IGImageLocalService.transaction" />
+		</property>
+	</bean>
 	<bean id="com.liferay.portlet.imagegallery.service.IGImageLocalServiceFactory" class="com.liferay.portlet.imagegallery.service.IGImageLocalServiceFactory" lazy-init="true">
 		<property name="service">
 			<ref bean="com.liferay.portlet.imagegallery.service.IGImageLocalService.transaction" />
@@ -4407,6 +5655,19 @@
 				<prop key="update*">PROPAGATION_REQUIRED,-com.liferay.portal.PortalException,-com.liferay.portal.SystemException</prop>
 				<prop key="*">PROPAGATION_SUPPORTS,readOnly</prop>
 			</props>
+		</property>
+	</bean>
+	<bean id="com.liferay.portlet.imagegallery.service.IGImageService.exceptionSafe" class="org.springframework.aop.framework.ProxyFactoryBean" lazy-init="true">
+		<property name="proxyInterfaces">
+			<value>com.liferay.portlet.imagegallery.service.IGImageService</value>
+		</property>
+		<property name="interceptorNames">
+			<list>
+				<value>com.liferay.portal.spring.aop.ExceptionSafeInterceptor</value>
+			</list>
+		</property>
+		<property name="target">
+			<ref bean="com.liferay.portlet.imagegallery.service.IGImageService.transaction" />
 		</property>
 	</bean>
 	<bean id="com.liferay.portlet.imagegallery.service.IGImageServiceFactory" class="com.liferay.portlet.imagegallery.service.IGImageServiceFactory" lazy-init="true">
@@ -4476,6 +5737,19 @@
 			</props>
 		</property>
 	</bean>
+	<bean id="com.liferay.portlet.journal.service.JournalArticleLocalService.exceptionSafe" class="org.springframework.aop.framework.ProxyFactoryBean" lazy-init="true">
+		<property name="proxyInterfaces">
+			<value>com.liferay.portlet.journal.service.JournalArticleLocalService</value>
+		</property>
+		<property name="interceptorNames">
+			<list>
+				<value>com.liferay.portal.spring.aop.ExceptionSafeInterceptor</value>
+			</list>
+		</property>
+		<property name="target">
+			<ref bean="com.liferay.portlet.journal.service.JournalArticleLocalService.transaction" />
+		</property>
+	</bean>
 	<bean id="com.liferay.portlet.journal.service.JournalArticleLocalServiceFactory" class="com.liferay.portlet.journal.service.JournalArticleLocalServiceFactory" lazy-init="true">
 		<property name="service">
 			<ref bean="com.liferay.portlet.journal.service.JournalArticleLocalService.transaction" />
@@ -4499,6 +5773,19 @@
 				<prop key="update*">PROPAGATION_REQUIRED,-com.liferay.portal.PortalException,-com.liferay.portal.SystemException</prop>
 				<prop key="*">PROPAGATION_SUPPORTS,readOnly</prop>
 			</props>
+		</property>
+	</bean>
+	<bean id="com.liferay.portlet.journal.service.JournalArticleService.exceptionSafe" class="org.springframework.aop.framework.ProxyFactoryBean" lazy-init="true">
+		<property name="proxyInterfaces">
+			<value>com.liferay.portlet.journal.service.JournalArticleService</value>
+		</property>
+		<property name="interceptorNames">
+			<list>
+				<value>com.liferay.portal.spring.aop.ExceptionSafeInterceptor</value>
+			</list>
+		</property>
+		<property name="target">
+			<ref bean="com.liferay.portlet.journal.service.JournalArticleService.transaction" />
 		</property>
 	</bean>
 	<bean id="com.liferay.portlet.journal.service.JournalArticleServiceFactory" class="com.liferay.portlet.journal.service.JournalArticleServiceFactory" lazy-init="true">
@@ -4568,6 +5855,19 @@
 			</props>
 		</property>
 	</bean>
+	<bean id="com.liferay.portlet.journal.service.JournalArticleImageLocalService.exceptionSafe" class="org.springframework.aop.framework.ProxyFactoryBean" lazy-init="true">
+		<property name="proxyInterfaces">
+			<value>com.liferay.portlet.journal.service.JournalArticleImageLocalService</value>
+		</property>
+		<property name="interceptorNames">
+			<list>
+				<value>com.liferay.portal.spring.aop.ExceptionSafeInterceptor</value>
+			</list>
+		</property>
+		<property name="target">
+			<ref bean="com.liferay.portlet.journal.service.JournalArticleImageLocalService.transaction" />
+		</property>
+	</bean>
 	<bean id="com.liferay.portlet.journal.service.JournalArticleImageLocalServiceFactory" class="com.liferay.portlet.journal.service.JournalArticleImageLocalServiceFactory" lazy-init="true">
 		<property name="service">
 			<ref bean="com.liferay.portlet.journal.service.JournalArticleImageLocalService.transaction" />
@@ -4620,6 +5920,19 @@
 				<prop key="update*">PROPAGATION_REQUIRED,-com.liferay.portal.PortalException,-com.liferay.portal.SystemException</prop>
 				<prop key="*">PROPAGATION_SUPPORTS,readOnly</prop>
 			</props>
+		</property>
+	</bean>
+	<bean id="com.liferay.portlet.journal.service.JournalArticleResourceLocalService.exceptionSafe" class="org.springframework.aop.framework.ProxyFactoryBean" lazy-init="true">
+		<property name="proxyInterfaces">
+			<value>com.liferay.portlet.journal.service.JournalArticleResourceLocalService</value>
+		</property>
+		<property name="interceptorNames">
+			<list>
+				<value>com.liferay.portal.spring.aop.ExceptionSafeInterceptor</value>
+			</list>
+		</property>
+		<property name="target">
+			<ref bean="com.liferay.portlet.journal.service.JournalArticleResourceLocalService.transaction" />
 		</property>
 	</bean>
 	<bean id="com.liferay.portlet.journal.service.JournalArticleResourceLocalServiceFactory" class="com.liferay.portlet.journal.service.JournalArticleResourceLocalServiceFactory" lazy-init="true">
@@ -4676,6 +5989,19 @@
 			</props>
 		</property>
 	</bean>
+	<bean id="com.liferay.portlet.journal.service.JournalContentSearchLocalService.exceptionSafe" class="org.springframework.aop.framework.ProxyFactoryBean" lazy-init="true">
+		<property name="proxyInterfaces">
+			<value>com.liferay.portlet.journal.service.JournalContentSearchLocalService</value>
+		</property>
+		<property name="interceptorNames">
+			<list>
+				<value>com.liferay.portal.spring.aop.ExceptionSafeInterceptor</value>
+			</list>
+		</property>
+		<property name="target">
+			<ref bean="com.liferay.portlet.journal.service.JournalContentSearchLocalService.transaction" />
+		</property>
+	</bean>
 	<bean id="com.liferay.portlet.journal.service.JournalContentSearchLocalServiceFactory" class="com.liferay.portlet.journal.service.JournalContentSearchLocalServiceFactory" lazy-init="true">
 		<property name="service">
 			<ref bean="com.liferay.portlet.journal.service.JournalContentSearchLocalService.transaction" />
@@ -4730,6 +6056,19 @@
 			</props>
 		</property>
 	</bean>
+	<bean id="com.liferay.portlet.journal.service.JournalFeedLocalService.exceptionSafe" class="org.springframework.aop.framework.ProxyFactoryBean" lazy-init="true">
+		<property name="proxyInterfaces">
+			<value>com.liferay.portlet.journal.service.JournalFeedLocalService</value>
+		</property>
+		<property name="interceptorNames">
+			<list>
+				<value>com.liferay.portal.spring.aop.ExceptionSafeInterceptor</value>
+			</list>
+		</property>
+		<property name="target">
+			<ref bean="com.liferay.portlet.journal.service.JournalFeedLocalService.transaction" />
+		</property>
+	</bean>
 	<bean id="com.liferay.portlet.journal.service.JournalFeedLocalServiceFactory" class="com.liferay.portlet.journal.service.JournalFeedLocalServiceFactory" lazy-init="true">
 		<property name="service">
 			<ref bean="com.liferay.portlet.journal.service.JournalFeedLocalService.transaction" />
@@ -4753,6 +6092,19 @@
 				<prop key="update*">PROPAGATION_REQUIRED,-com.liferay.portal.PortalException,-com.liferay.portal.SystemException</prop>
 				<prop key="*">PROPAGATION_SUPPORTS,readOnly</prop>
 			</props>
+		</property>
+	</bean>
+	<bean id="com.liferay.portlet.journal.service.JournalFeedService.exceptionSafe" class="org.springframework.aop.framework.ProxyFactoryBean" lazy-init="true">
+		<property name="proxyInterfaces">
+			<value>com.liferay.portlet.journal.service.JournalFeedService</value>
+		</property>
+		<property name="interceptorNames">
+			<list>
+				<value>com.liferay.portal.spring.aop.ExceptionSafeInterceptor</value>
+			</list>
+		</property>
+		<property name="target">
+			<ref bean="com.liferay.portlet.journal.service.JournalFeedService.transaction" />
 		</property>
 	</bean>
 	<bean id="com.liferay.portlet.journal.service.JournalFeedServiceFactory" class="com.liferay.portlet.journal.service.JournalFeedServiceFactory" lazy-init="true">
@@ -4822,6 +6174,19 @@
 			</props>
 		</property>
 	</bean>
+	<bean id="com.liferay.portlet.journal.service.JournalStructureLocalService.exceptionSafe" class="org.springframework.aop.framework.ProxyFactoryBean" lazy-init="true">
+		<property name="proxyInterfaces">
+			<value>com.liferay.portlet.journal.service.JournalStructureLocalService</value>
+		</property>
+		<property name="interceptorNames">
+			<list>
+				<value>com.liferay.portal.spring.aop.ExceptionSafeInterceptor</value>
+			</list>
+		</property>
+		<property name="target">
+			<ref bean="com.liferay.portlet.journal.service.JournalStructureLocalService.transaction" />
+		</property>
+	</bean>
 	<bean id="com.liferay.portlet.journal.service.JournalStructureLocalServiceFactory" class="com.liferay.portlet.journal.service.JournalStructureLocalServiceFactory" lazy-init="true">
 		<property name="service">
 			<ref bean="com.liferay.portlet.journal.service.JournalStructureLocalService.transaction" />
@@ -4845,6 +6210,19 @@
 				<prop key="update*">PROPAGATION_REQUIRED,-com.liferay.portal.PortalException,-com.liferay.portal.SystemException</prop>
 				<prop key="*">PROPAGATION_SUPPORTS,readOnly</prop>
 			</props>
+		</property>
+	</bean>
+	<bean id="com.liferay.portlet.journal.service.JournalStructureService.exceptionSafe" class="org.springframework.aop.framework.ProxyFactoryBean" lazy-init="true">
+		<property name="proxyInterfaces">
+			<value>com.liferay.portlet.journal.service.JournalStructureService</value>
+		</property>
+		<property name="interceptorNames">
+			<list>
+				<value>com.liferay.portal.spring.aop.ExceptionSafeInterceptor</value>
+			</list>
+		</property>
+		<property name="target">
+			<ref bean="com.liferay.portlet.journal.service.JournalStructureService.transaction" />
 		</property>
 	</bean>
 	<bean id="com.liferay.portlet.journal.service.JournalStructureServiceFactory" class="com.liferay.portlet.journal.service.JournalStructureServiceFactory" lazy-init="true">
@@ -4914,6 +6292,19 @@
 			</props>
 		</property>
 	</bean>
+	<bean id="com.liferay.portlet.journal.service.JournalTemplateLocalService.exceptionSafe" class="org.springframework.aop.framework.ProxyFactoryBean" lazy-init="true">
+		<property name="proxyInterfaces">
+			<value>com.liferay.portlet.journal.service.JournalTemplateLocalService</value>
+		</property>
+		<property name="interceptorNames">
+			<list>
+				<value>com.liferay.portal.spring.aop.ExceptionSafeInterceptor</value>
+			</list>
+		</property>
+		<property name="target">
+			<ref bean="com.liferay.portlet.journal.service.JournalTemplateLocalService.transaction" />
+		</property>
+	</bean>
 	<bean id="com.liferay.portlet.journal.service.JournalTemplateLocalServiceFactory" class="com.liferay.portlet.journal.service.JournalTemplateLocalServiceFactory" lazy-init="true">
 		<property name="service">
 			<ref bean="com.liferay.portlet.journal.service.JournalTemplateLocalService.transaction" />
@@ -4937,6 +6328,19 @@
 				<prop key="update*">PROPAGATION_REQUIRED,-com.liferay.portal.PortalException,-com.liferay.portal.SystemException</prop>
 				<prop key="*">PROPAGATION_SUPPORTS,readOnly</prop>
 			</props>
+		</property>
+	</bean>
+	<bean id="com.liferay.portlet.journal.service.JournalTemplateService.exceptionSafe" class="org.springframework.aop.framework.ProxyFactoryBean" lazy-init="true">
+		<property name="proxyInterfaces">
+			<value>com.liferay.portlet.journal.service.JournalTemplateService</value>
+		</property>
+		<property name="interceptorNames">
+			<list>
+				<value>com.liferay.portal.spring.aop.ExceptionSafeInterceptor</value>
+			</list>
+		</property>
+		<property name="target">
+			<ref bean="com.liferay.portlet.journal.service.JournalTemplateService.transaction" />
 		</property>
 	</bean>
 	<bean id="com.liferay.portlet.journal.service.JournalTemplateServiceFactory" class="com.liferay.portlet.journal.service.JournalTemplateServiceFactory" lazy-init="true">
@@ -5006,6 +6410,19 @@
 			</props>
 		</property>
 	</bean>
+	<bean id="com.liferay.portlet.messageboards.service.MBBanLocalService.exceptionSafe" class="org.springframework.aop.framework.ProxyFactoryBean" lazy-init="true">
+		<property name="proxyInterfaces">
+			<value>com.liferay.portlet.messageboards.service.MBBanLocalService</value>
+		</property>
+		<property name="interceptorNames">
+			<list>
+				<value>com.liferay.portal.spring.aop.ExceptionSafeInterceptor</value>
+			</list>
+		</property>
+		<property name="target">
+			<ref bean="com.liferay.portlet.messageboards.service.MBBanLocalService.transaction" />
+		</property>
+	</bean>
 	<bean id="com.liferay.portlet.messageboards.service.MBBanLocalServiceFactory" class="com.liferay.portlet.messageboards.service.MBBanLocalServiceFactory" lazy-init="true">
 		<property name="service">
 			<ref bean="com.liferay.portlet.messageboards.service.MBBanLocalService.transaction" />
@@ -5029,6 +6446,19 @@
 				<prop key="update*">PROPAGATION_REQUIRED,-com.liferay.portal.PortalException,-com.liferay.portal.SystemException</prop>
 				<prop key="*">PROPAGATION_SUPPORTS,readOnly</prop>
 			</props>
+		</property>
+	</bean>
+	<bean id="com.liferay.portlet.messageboards.service.MBBanService.exceptionSafe" class="org.springframework.aop.framework.ProxyFactoryBean" lazy-init="true">
+		<property name="proxyInterfaces">
+			<value>com.liferay.portlet.messageboards.service.MBBanService</value>
+		</property>
+		<property name="interceptorNames">
+			<list>
+				<value>com.liferay.portal.spring.aop.ExceptionSafeInterceptor</value>
+			</list>
+		</property>
+		<property name="target">
+			<ref bean="com.liferay.portlet.messageboards.service.MBBanService.transaction" />
 		</property>
 	</bean>
 	<bean id="com.liferay.portlet.messageboards.service.MBBanServiceFactory" class="com.liferay.portlet.messageboards.service.MBBanServiceFactory" lazy-init="true">
@@ -5085,6 +6515,19 @@
 			</props>
 		</property>
 	</bean>
+	<bean id="com.liferay.portlet.messageboards.service.MBCategoryLocalService.exceptionSafe" class="org.springframework.aop.framework.ProxyFactoryBean" lazy-init="true">
+		<property name="proxyInterfaces">
+			<value>com.liferay.portlet.messageboards.service.MBCategoryLocalService</value>
+		</property>
+		<property name="interceptorNames">
+			<list>
+				<value>com.liferay.portal.spring.aop.ExceptionSafeInterceptor</value>
+			</list>
+		</property>
+		<property name="target">
+			<ref bean="com.liferay.portlet.messageboards.service.MBCategoryLocalService.transaction" />
+		</property>
+	</bean>
 	<bean id="com.liferay.portlet.messageboards.service.MBCategoryLocalServiceFactory" class="com.liferay.portlet.messageboards.service.MBCategoryLocalServiceFactory" lazy-init="true">
 		<property name="service">
 			<ref bean="com.liferay.portlet.messageboards.service.MBCategoryLocalService.transaction" />
@@ -5108,6 +6551,19 @@
 				<prop key="update*">PROPAGATION_REQUIRED,-com.liferay.portal.PortalException,-com.liferay.portal.SystemException</prop>
 				<prop key="*">PROPAGATION_SUPPORTS,readOnly</prop>
 			</props>
+		</property>
+	</bean>
+	<bean id="com.liferay.portlet.messageboards.service.MBCategoryService.exceptionSafe" class="org.springframework.aop.framework.ProxyFactoryBean" lazy-init="true">
+		<property name="proxyInterfaces">
+			<value>com.liferay.portlet.messageboards.service.MBCategoryService</value>
+		</property>
+		<property name="interceptorNames">
+			<list>
+				<value>com.liferay.portal.spring.aop.ExceptionSafeInterceptor</value>
+			</list>
+		</property>
+		<property name="target">
+			<ref bean="com.liferay.portlet.messageboards.service.MBCategoryService.transaction" />
 		</property>
 	</bean>
 	<bean id="com.liferay.portlet.messageboards.service.MBCategoryServiceFactory" class="com.liferay.portlet.messageboards.service.MBCategoryServiceFactory" lazy-init="true">
@@ -5206,6 +6662,19 @@
 			</props>
 		</property>
 	</bean>
+	<bean id="com.liferay.portlet.messageboards.service.MBMessageLocalService.exceptionSafe" class="org.springframework.aop.framework.ProxyFactoryBean" lazy-init="true">
+		<property name="proxyInterfaces">
+			<value>com.liferay.portlet.messageboards.service.MBMessageLocalService</value>
+		</property>
+		<property name="interceptorNames">
+			<list>
+				<value>com.liferay.portal.spring.aop.ExceptionSafeInterceptor</value>
+			</list>
+		</property>
+		<property name="target">
+			<ref bean="com.liferay.portlet.messageboards.service.MBMessageLocalService.transaction" />
+		</property>
+	</bean>
 	<bean id="com.liferay.portlet.messageboards.service.MBMessageLocalServiceFactory" class="com.liferay.portlet.messageboards.service.MBMessageLocalServiceFactory" lazy-init="true">
 		<property name="service">
 			<ref bean="com.liferay.portlet.messageboards.service.MBMessageLocalService.transaction" />
@@ -5229,6 +6698,19 @@
 				<prop key="update*">PROPAGATION_REQUIRED,-com.liferay.portal.PortalException,-com.liferay.portal.SystemException</prop>
 				<prop key="*">PROPAGATION_SUPPORTS,readOnly</prop>
 			</props>
+		</property>
+	</bean>
+	<bean id="com.liferay.portlet.messageboards.service.MBMessageService.exceptionSafe" class="org.springframework.aop.framework.ProxyFactoryBean" lazy-init="true">
+		<property name="proxyInterfaces">
+			<value>com.liferay.portlet.messageboards.service.MBMessageService</value>
+		</property>
+		<property name="interceptorNames">
+			<list>
+				<value>com.liferay.portal.spring.aop.ExceptionSafeInterceptor</value>
+			</list>
+		</property>
+		<property name="target">
+			<ref bean="com.liferay.portlet.messageboards.service.MBMessageService.transaction" />
 		</property>
 	</bean>
 	<bean id="com.liferay.portlet.messageboards.service.MBMessageServiceFactory" class="com.liferay.portlet.messageboards.service.MBMessageServiceFactory" lazy-init="true">
@@ -5298,6 +6780,19 @@
 			</props>
 		</property>
 	</bean>
+	<bean id="com.liferay.portlet.messageboards.service.MBMessageFlagLocalService.exceptionSafe" class="org.springframework.aop.framework.ProxyFactoryBean" lazy-init="true">
+		<property name="proxyInterfaces">
+			<value>com.liferay.portlet.messageboards.service.MBMessageFlagLocalService</value>
+		</property>
+		<property name="interceptorNames">
+			<list>
+				<value>com.liferay.portal.spring.aop.ExceptionSafeInterceptor</value>
+			</list>
+		</property>
+		<property name="target">
+			<ref bean="com.liferay.portlet.messageboards.service.MBMessageFlagLocalService.transaction" />
+		</property>
+	</bean>
 	<bean id="com.liferay.portlet.messageboards.service.MBMessageFlagLocalServiceFactory" class="com.liferay.portlet.messageboards.service.MBMessageFlagLocalServiceFactory" lazy-init="true">
 		<property name="service">
 			<ref bean="com.liferay.portlet.messageboards.service.MBMessageFlagLocalService.transaction" />
@@ -5365,6 +6860,19 @@
 			</props>
 		</property>
 	</bean>
+	<bean id="com.liferay.portlet.messageboards.service.MBStatsUserLocalService.exceptionSafe" class="org.springframework.aop.framework.ProxyFactoryBean" lazy-init="true">
+		<property name="proxyInterfaces">
+			<value>com.liferay.portlet.messageboards.service.MBStatsUserLocalService</value>
+		</property>
+		<property name="interceptorNames">
+			<list>
+				<value>com.liferay.portal.spring.aop.ExceptionSafeInterceptor</value>
+			</list>
+		</property>
+		<property name="target">
+			<ref bean="com.liferay.portlet.messageboards.service.MBStatsUserLocalService.transaction" />
+		</property>
+	</bean>
 	<bean id="com.liferay.portlet.messageboards.service.MBStatsUserLocalServiceFactory" class="com.liferay.portlet.messageboards.service.MBStatsUserLocalServiceFactory" lazy-init="true">
 		<property name="service">
 			<ref bean="com.liferay.portlet.messageboards.service.MBStatsUserLocalService.transaction" />
@@ -5419,6 +6927,19 @@
 			</props>
 		</property>
 	</bean>
+	<bean id="com.liferay.portlet.messageboards.service.MBThreadLocalService.exceptionSafe" class="org.springframework.aop.framework.ProxyFactoryBean" lazy-init="true">
+		<property name="proxyInterfaces">
+			<value>com.liferay.portlet.messageboards.service.MBThreadLocalService</value>
+		</property>
+		<property name="interceptorNames">
+			<list>
+				<value>com.liferay.portal.spring.aop.ExceptionSafeInterceptor</value>
+			</list>
+		</property>
+		<property name="target">
+			<ref bean="com.liferay.portlet.messageboards.service.MBThreadLocalService.transaction" />
+		</property>
+	</bean>
 	<bean id="com.liferay.portlet.messageboards.service.MBThreadLocalServiceFactory" class="com.liferay.portlet.messageboards.service.MBThreadLocalServiceFactory" lazy-init="true">
 		<property name="service">
 			<ref bean="com.liferay.portlet.messageboards.service.MBThreadLocalService.transaction" />
@@ -5442,6 +6963,19 @@
 				<prop key="update*">PROPAGATION_REQUIRED,-com.liferay.portal.PortalException,-com.liferay.portal.SystemException</prop>
 				<prop key="*">PROPAGATION_SUPPORTS,readOnly</prop>
 			</props>
+		</property>
+	</bean>
+	<bean id="com.liferay.portlet.messageboards.service.MBThreadService.exceptionSafe" class="org.springframework.aop.framework.ProxyFactoryBean" lazy-init="true">
+		<property name="proxyInterfaces">
+			<value>com.liferay.portlet.messageboards.service.MBThreadService</value>
+		</property>
+		<property name="interceptorNames">
+			<list>
+				<value>com.liferay.portal.spring.aop.ExceptionSafeInterceptor</value>
+			</list>
+		</property>
+		<property name="target">
+			<ref bean="com.liferay.portlet.messageboards.service.MBThreadService.transaction" />
 		</property>
 	</bean>
 	<bean id="com.liferay.portlet.messageboards.service.MBThreadServiceFactory" class="com.liferay.portlet.messageboards.service.MBThreadServiceFactory" lazy-init="true">
@@ -5511,6 +7045,19 @@
 			</props>
 		</property>
 	</bean>
+	<bean id="com.liferay.portlet.polls.service.PollsChoiceLocalService.exceptionSafe" class="org.springframework.aop.framework.ProxyFactoryBean" lazy-init="true">
+		<property name="proxyInterfaces">
+			<value>com.liferay.portlet.polls.service.PollsChoiceLocalService</value>
+		</property>
+		<property name="interceptorNames">
+			<list>
+				<value>com.liferay.portal.spring.aop.ExceptionSafeInterceptor</value>
+			</list>
+		</property>
+		<property name="target">
+			<ref bean="com.liferay.portlet.polls.service.PollsChoiceLocalService.transaction" />
+		</property>
+	</bean>
 	<bean id="com.liferay.portlet.polls.service.PollsChoiceLocalServiceFactory" class="com.liferay.portlet.polls.service.PollsChoiceLocalServiceFactory" lazy-init="true">
 		<property name="service">
 			<ref bean="com.liferay.portlet.polls.service.PollsChoiceLocalService.transaction" />
@@ -5578,6 +7125,19 @@
 			</props>
 		</property>
 	</bean>
+	<bean id="com.liferay.portlet.polls.service.PollsQuestionLocalService.exceptionSafe" class="org.springframework.aop.framework.ProxyFactoryBean" lazy-init="true">
+		<property name="proxyInterfaces">
+			<value>com.liferay.portlet.polls.service.PollsQuestionLocalService</value>
+		</property>
+		<property name="interceptorNames">
+			<list>
+				<value>com.liferay.portal.spring.aop.ExceptionSafeInterceptor</value>
+			</list>
+		</property>
+		<property name="target">
+			<ref bean="com.liferay.portlet.polls.service.PollsQuestionLocalService.transaction" />
+		</property>
+	</bean>
 	<bean id="com.liferay.portlet.polls.service.PollsQuestionLocalServiceFactory" class="com.liferay.portlet.polls.service.PollsQuestionLocalServiceFactory" lazy-init="true">
 		<property name="service">
 			<ref bean="com.liferay.portlet.polls.service.PollsQuestionLocalService.transaction" />
@@ -5601,6 +7161,19 @@
 				<prop key="update*">PROPAGATION_REQUIRED,-com.liferay.portal.PortalException,-com.liferay.portal.SystemException</prop>
 				<prop key="*">PROPAGATION_SUPPORTS,readOnly</prop>
 			</props>
+		</property>
+	</bean>
+	<bean id="com.liferay.portlet.polls.service.PollsQuestionService.exceptionSafe" class="org.springframework.aop.framework.ProxyFactoryBean" lazy-init="true">
+		<property name="proxyInterfaces">
+			<value>com.liferay.portlet.polls.service.PollsQuestionService</value>
+		</property>
+		<property name="interceptorNames">
+			<list>
+				<value>com.liferay.portal.spring.aop.ExceptionSafeInterceptor</value>
+			</list>
+		</property>
+		<property name="target">
+			<ref bean="com.liferay.portlet.polls.service.PollsQuestionService.transaction" />
 		</property>
 	</bean>
 	<bean id="com.liferay.portlet.polls.service.PollsQuestionServiceFactory" class="com.liferay.portlet.polls.service.PollsQuestionServiceFactory" lazy-init="true">
@@ -5657,6 +7230,19 @@
 			</props>
 		</property>
 	</bean>
+	<bean id="com.liferay.portlet.polls.service.PollsVoteLocalService.exceptionSafe" class="org.springframework.aop.framework.ProxyFactoryBean" lazy-init="true">
+		<property name="proxyInterfaces">
+			<value>com.liferay.portlet.polls.service.PollsVoteLocalService</value>
+		</property>
+		<property name="interceptorNames">
+			<list>
+				<value>com.liferay.portal.spring.aop.ExceptionSafeInterceptor</value>
+			</list>
+		</property>
+		<property name="target">
+			<ref bean="com.liferay.portlet.polls.service.PollsVoteLocalService.transaction" />
+		</property>
+	</bean>
 	<bean id="com.liferay.portlet.polls.service.PollsVoteLocalServiceFactory" class="com.liferay.portlet.polls.service.PollsVoteLocalServiceFactory" lazy-init="true">
 		<property name="service">
 			<ref bean="com.liferay.portlet.polls.service.PollsVoteLocalService.transaction" />
@@ -5680,6 +7266,19 @@
 				<prop key="update*">PROPAGATION_REQUIRED,-com.liferay.portal.PortalException,-com.liferay.portal.SystemException</prop>
 				<prop key="*">PROPAGATION_SUPPORTS,readOnly</prop>
 			</props>
+		</property>
+	</bean>
+	<bean id="com.liferay.portlet.polls.service.PollsVoteService.exceptionSafe" class="org.springframework.aop.framework.ProxyFactoryBean" lazy-init="true">
+		<property name="proxyInterfaces">
+			<value>com.liferay.portlet.polls.service.PollsVoteService</value>
+		</property>
+		<property name="interceptorNames">
+			<list>
+				<value>com.liferay.portal.spring.aop.ExceptionSafeInterceptor</value>
+			</list>
+		</property>
+		<property name="target">
+			<ref bean="com.liferay.portlet.polls.service.PollsVoteService.transaction" />
 		</property>
 	</bean>
 	<bean id="com.liferay.portlet.polls.service.PollsVoteServiceFactory" class="com.liferay.portlet.polls.service.PollsVoteServiceFactory" lazy-init="true">
@@ -5736,6 +7335,19 @@
 			</props>
 		</property>
 	</bean>
+	<bean id="com.liferay.portlet.ratings.service.RatingsEntryLocalService.exceptionSafe" class="org.springframework.aop.framework.ProxyFactoryBean" lazy-init="true">
+		<property name="proxyInterfaces">
+			<value>com.liferay.portlet.ratings.service.RatingsEntryLocalService</value>
+		</property>
+		<property name="interceptorNames">
+			<list>
+				<value>com.liferay.portal.spring.aop.ExceptionSafeInterceptor</value>
+			</list>
+		</property>
+		<property name="target">
+			<ref bean="com.liferay.portlet.ratings.service.RatingsEntryLocalService.transaction" />
+		</property>
+	</bean>
 	<bean id="com.liferay.portlet.ratings.service.RatingsEntryLocalServiceFactory" class="com.liferay.portlet.ratings.service.RatingsEntryLocalServiceFactory" lazy-init="true">
 		<property name="service">
 			<ref bean="com.liferay.portlet.ratings.service.RatingsEntryLocalService.transaction" />
@@ -5759,6 +7371,19 @@
 				<prop key="update*">PROPAGATION_REQUIRED,-com.liferay.portal.PortalException,-com.liferay.portal.SystemException</prop>
 				<prop key="*">PROPAGATION_SUPPORTS,readOnly</prop>
 			</props>
+		</property>
+	</bean>
+	<bean id="com.liferay.portlet.ratings.service.RatingsEntryService.exceptionSafe" class="org.springframework.aop.framework.ProxyFactoryBean" lazy-init="true">
+		<property name="proxyInterfaces">
+			<value>com.liferay.portlet.ratings.service.RatingsEntryService</value>
+		</property>
+		<property name="interceptorNames">
+			<list>
+				<value>com.liferay.portal.spring.aop.ExceptionSafeInterceptor</value>
+			</list>
+		</property>
+		<property name="target">
+			<ref bean="com.liferay.portlet.ratings.service.RatingsEntryService.transaction" />
 		</property>
 	</bean>
 	<bean id="com.liferay.portlet.ratings.service.RatingsEntryServiceFactory" class="com.liferay.portlet.ratings.service.RatingsEntryServiceFactory" lazy-init="true">
@@ -5815,6 +7440,19 @@
 			</props>
 		</property>
 	</bean>
+	<bean id="com.liferay.portlet.ratings.service.RatingsStatsLocalService.exceptionSafe" class="org.springframework.aop.framework.ProxyFactoryBean" lazy-init="true">
+		<property name="proxyInterfaces">
+			<value>com.liferay.portlet.ratings.service.RatingsStatsLocalService</value>
+		</property>
+		<property name="interceptorNames">
+			<list>
+				<value>com.liferay.portal.spring.aop.ExceptionSafeInterceptor</value>
+			</list>
+		</property>
+		<property name="target">
+			<ref bean="com.liferay.portlet.ratings.service.RatingsStatsLocalService.transaction" />
+		</property>
+	</bean>
 	<bean id="com.liferay.portlet.ratings.service.RatingsStatsLocalServiceFactory" class="com.liferay.portlet.ratings.service.RatingsStatsLocalServiceFactory" lazy-init="true">
 		<property name="service">
 			<ref bean="com.liferay.portlet.ratings.service.RatingsStatsLocalService.transaction" />
@@ -5867,6 +7505,19 @@
 				<prop key="update*">PROPAGATION_REQUIRED,-com.liferay.portal.PortalException,-com.liferay.portal.SystemException</prop>
 				<prop key="*">PROPAGATION_SUPPORTS,readOnly</prop>
 			</props>
+		</property>
+	</bean>
+	<bean id="com.liferay.portlet.shopping.service.ShoppingCartLocalService.exceptionSafe" class="org.springframework.aop.framework.ProxyFactoryBean" lazy-init="true">
+		<property name="proxyInterfaces">
+			<value>com.liferay.portlet.shopping.service.ShoppingCartLocalService</value>
+		</property>
+		<property name="interceptorNames">
+			<list>
+				<value>com.liferay.portal.spring.aop.ExceptionSafeInterceptor</value>
+			</list>
+		</property>
+		<property name="target">
+			<ref bean="com.liferay.portlet.shopping.service.ShoppingCartLocalService.transaction" />
 		</property>
 	</bean>
 	<bean id="com.liferay.portlet.shopping.service.ShoppingCartLocalServiceFactory" class="com.liferay.portlet.shopping.service.ShoppingCartLocalServiceFactory" lazy-init="true">
@@ -5923,6 +7574,19 @@
 			</props>
 		</property>
 	</bean>
+	<bean id="com.liferay.portlet.shopping.service.ShoppingCategoryLocalService.exceptionSafe" class="org.springframework.aop.framework.ProxyFactoryBean" lazy-init="true">
+		<property name="proxyInterfaces">
+			<value>com.liferay.portlet.shopping.service.ShoppingCategoryLocalService</value>
+		</property>
+		<property name="interceptorNames">
+			<list>
+				<value>com.liferay.portal.spring.aop.ExceptionSafeInterceptor</value>
+			</list>
+		</property>
+		<property name="target">
+			<ref bean="com.liferay.portlet.shopping.service.ShoppingCategoryLocalService.transaction" />
+		</property>
+	</bean>
 	<bean id="com.liferay.portlet.shopping.service.ShoppingCategoryLocalServiceFactory" class="com.liferay.portlet.shopping.service.ShoppingCategoryLocalServiceFactory" lazy-init="true">
 		<property name="service">
 			<ref bean="com.liferay.portlet.shopping.service.ShoppingCategoryLocalService.transaction" />
@@ -5946,6 +7610,19 @@
 				<prop key="update*">PROPAGATION_REQUIRED,-com.liferay.portal.PortalException,-com.liferay.portal.SystemException</prop>
 				<prop key="*">PROPAGATION_SUPPORTS,readOnly</prop>
 			</props>
+		</property>
+	</bean>
+	<bean id="com.liferay.portlet.shopping.service.ShoppingCategoryService.exceptionSafe" class="org.springframework.aop.framework.ProxyFactoryBean" lazy-init="true">
+		<property name="proxyInterfaces">
+			<value>com.liferay.portlet.shopping.service.ShoppingCategoryService</value>
+		</property>
+		<property name="interceptorNames">
+			<list>
+				<value>com.liferay.portal.spring.aop.ExceptionSafeInterceptor</value>
+			</list>
+		</property>
+		<property name="target">
+			<ref bean="com.liferay.portlet.shopping.service.ShoppingCategoryService.transaction" />
 		</property>
 	</bean>
 	<bean id="com.liferay.portlet.shopping.service.ShoppingCategoryServiceFactory" class="com.liferay.portlet.shopping.service.ShoppingCategoryServiceFactory" lazy-init="true">
@@ -6002,6 +7679,19 @@
 			</props>
 		</property>
 	</bean>
+	<bean id="com.liferay.portlet.shopping.service.ShoppingCouponLocalService.exceptionSafe" class="org.springframework.aop.framework.ProxyFactoryBean" lazy-init="true">
+		<property name="proxyInterfaces">
+			<value>com.liferay.portlet.shopping.service.ShoppingCouponLocalService</value>
+		</property>
+		<property name="interceptorNames">
+			<list>
+				<value>com.liferay.portal.spring.aop.ExceptionSafeInterceptor</value>
+			</list>
+		</property>
+		<property name="target">
+			<ref bean="com.liferay.portlet.shopping.service.ShoppingCouponLocalService.transaction" />
+		</property>
+	</bean>
 	<bean id="com.liferay.portlet.shopping.service.ShoppingCouponLocalServiceFactory" class="com.liferay.portlet.shopping.service.ShoppingCouponLocalServiceFactory" lazy-init="true">
 		<property name="service">
 			<ref bean="com.liferay.portlet.shopping.service.ShoppingCouponLocalService.transaction" />
@@ -6025,6 +7715,19 @@
 				<prop key="update*">PROPAGATION_REQUIRED,-com.liferay.portal.PortalException,-com.liferay.portal.SystemException</prop>
 				<prop key="*">PROPAGATION_SUPPORTS,readOnly</prop>
 			</props>
+		</property>
+	</bean>
+	<bean id="com.liferay.portlet.shopping.service.ShoppingCouponService.exceptionSafe" class="org.springframework.aop.framework.ProxyFactoryBean" lazy-init="true">
+		<property name="proxyInterfaces">
+			<value>com.liferay.portlet.shopping.service.ShoppingCouponService</value>
+		</property>
+		<property name="interceptorNames">
+			<list>
+				<value>com.liferay.portal.spring.aop.ExceptionSafeInterceptor</value>
+			</list>
+		</property>
+		<property name="target">
+			<ref bean="com.liferay.portlet.shopping.service.ShoppingCouponService.transaction" />
 		</property>
 	</bean>
 	<bean id="com.liferay.portlet.shopping.service.ShoppingCouponServiceFactory" class="com.liferay.portlet.shopping.service.ShoppingCouponServiceFactory" lazy-init="true">
@@ -6094,6 +7797,19 @@
 			</props>
 		</property>
 	</bean>
+	<bean id="com.liferay.portlet.shopping.service.ShoppingItemLocalService.exceptionSafe" class="org.springframework.aop.framework.ProxyFactoryBean" lazy-init="true">
+		<property name="proxyInterfaces">
+			<value>com.liferay.portlet.shopping.service.ShoppingItemLocalService</value>
+		</property>
+		<property name="interceptorNames">
+			<list>
+				<value>com.liferay.portal.spring.aop.ExceptionSafeInterceptor</value>
+			</list>
+		</property>
+		<property name="target">
+			<ref bean="com.liferay.portlet.shopping.service.ShoppingItemLocalService.transaction" />
+		</property>
+	</bean>
 	<bean id="com.liferay.portlet.shopping.service.ShoppingItemLocalServiceFactory" class="com.liferay.portlet.shopping.service.ShoppingItemLocalServiceFactory" lazy-init="true">
 		<property name="service">
 			<ref bean="com.liferay.portlet.shopping.service.ShoppingItemLocalService.transaction" />
@@ -6117,6 +7833,19 @@
 				<prop key="update*">PROPAGATION_REQUIRED,-com.liferay.portal.PortalException,-com.liferay.portal.SystemException</prop>
 				<prop key="*">PROPAGATION_SUPPORTS,readOnly</prop>
 			</props>
+		</property>
+	</bean>
+	<bean id="com.liferay.portlet.shopping.service.ShoppingItemService.exceptionSafe" class="org.springframework.aop.framework.ProxyFactoryBean" lazy-init="true">
+		<property name="proxyInterfaces">
+			<value>com.liferay.portlet.shopping.service.ShoppingItemService</value>
+		</property>
+		<property name="interceptorNames">
+			<list>
+				<value>com.liferay.portal.spring.aop.ExceptionSafeInterceptor</value>
+			</list>
+		</property>
+		<property name="target">
+			<ref bean="com.liferay.portlet.shopping.service.ShoppingItemService.transaction" />
 		</property>
 	</bean>
 	<bean id="com.liferay.portlet.shopping.service.ShoppingItemServiceFactory" class="com.liferay.portlet.shopping.service.ShoppingItemServiceFactory" lazy-init="true">
@@ -6186,6 +7915,19 @@
 			</props>
 		</property>
 	</bean>
+	<bean id="com.liferay.portlet.shopping.service.ShoppingItemFieldLocalService.exceptionSafe" class="org.springframework.aop.framework.ProxyFactoryBean" lazy-init="true">
+		<property name="proxyInterfaces">
+			<value>com.liferay.portlet.shopping.service.ShoppingItemFieldLocalService</value>
+		</property>
+		<property name="interceptorNames">
+			<list>
+				<value>com.liferay.portal.spring.aop.ExceptionSafeInterceptor</value>
+			</list>
+		</property>
+		<property name="target">
+			<ref bean="com.liferay.portlet.shopping.service.ShoppingItemFieldLocalService.transaction" />
+		</property>
+	</bean>
 	<bean id="com.liferay.portlet.shopping.service.ShoppingItemFieldLocalServiceFactory" class="com.liferay.portlet.shopping.service.ShoppingItemFieldLocalServiceFactory" lazy-init="true">
 		<property name="service">
 			<ref bean="com.liferay.portlet.shopping.service.ShoppingItemFieldLocalService.transaction" />
@@ -6238,6 +7980,19 @@
 				<prop key="update*">PROPAGATION_REQUIRED,-com.liferay.portal.PortalException,-com.liferay.portal.SystemException</prop>
 				<prop key="*">PROPAGATION_SUPPORTS,readOnly</prop>
 			</props>
+		</property>
+	</bean>
+	<bean id="com.liferay.portlet.shopping.service.ShoppingItemPriceLocalService.exceptionSafe" class="org.springframework.aop.framework.ProxyFactoryBean" lazy-init="true">
+		<property name="proxyInterfaces">
+			<value>com.liferay.portlet.shopping.service.ShoppingItemPriceLocalService</value>
+		</property>
+		<property name="interceptorNames">
+			<list>
+				<value>com.liferay.portal.spring.aop.ExceptionSafeInterceptor</value>
+			</list>
+		</property>
+		<property name="target">
+			<ref bean="com.liferay.portlet.shopping.service.ShoppingItemPriceLocalService.transaction" />
 		</property>
 	</bean>
 	<bean id="com.liferay.portlet.shopping.service.ShoppingItemPriceLocalServiceFactory" class="com.liferay.portlet.shopping.service.ShoppingItemPriceLocalServiceFactory" lazy-init="true">
@@ -6294,6 +8049,19 @@
 			</props>
 		</property>
 	</bean>
+	<bean id="com.liferay.portlet.shopping.service.ShoppingOrderLocalService.exceptionSafe" class="org.springframework.aop.framework.ProxyFactoryBean" lazy-init="true">
+		<property name="proxyInterfaces">
+			<value>com.liferay.portlet.shopping.service.ShoppingOrderLocalService</value>
+		</property>
+		<property name="interceptorNames">
+			<list>
+				<value>com.liferay.portal.spring.aop.ExceptionSafeInterceptor</value>
+			</list>
+		</property>
+		<property name="target">
+			<ref bean="com.liferay.portlet.shopping.service.ShoppingOrderLocalService.transaction" />
+		</property>
+	</bean>
 	<bean id="com.liferay.portlet.shopping.service.ShoppingOrderLocalServiceFactory" class="com.liferay.portlet.shopping.service.ShoppingOrderLocalServiceFactory" lazy-init="true">
 		<property name="service">
 			<ref bean="com.liferay.portlet.shopping.service.ShoppingOrderLocalService.transaction" />
@@ -6317,6 +8085,19 @@
 				<prop key="update*">PROPAGATION_REQUIRED,-com.liferay.portal.PortalException,-com.liferay.portal.SystemException</prop>
 				<prop key="*">PROPAGATION_SUPPORTS,readOnly</prop>
 			</props>
+		</property>
+	</bean>
+	<bean id="com.liferay.portlet.shopping.service.ShoppingOrderService.exceptionSafe" class="org.springframework.aop.framework.ProxyFactoryBean" lazy-init="true">
+		<property name="proxyInterfaces">
+			<value>com.liferay.portlet.shopping.service.ShoppingOrderService</value>
+		</property>
+		<property name="interceptorNames">
+			<list>
+				<value>com.liferay.portal.spring.aop.ExceptionSafeInterceptor</value>
+			</list>
+		</property>
+		<property name="target">
+			<ref bean="com.liferay.portlet.shopping.service.ShoppingOrderService.transaction" />
 		</property>
 	</bean>
 	<bean id="com.liferay.portlet.shopping.service.ShoppingOrderServiceFactory" class="com.liferay.portlet.shopping.service.ShoppingOrderServiceFactory" lazy-init="true">
@@ -6386,6 +8167,19 @@
 			</props>
 		</property>
 	</bean>
+	<bean id="com.liferay.portlet.shopping.service.ShoppingOrderItemLocalService.exceptionSafe" class="org.springframework.aop.framework.ProxyFactoryBean" lazy-init="true">
+		<property name="proxyInterfaces">
+			<value>com.liferay.portlet.shopping.service.ShoppingOrderItemLocalService</value>
+		</property>
+		<property name="interceptorNames">
+			<list>
+				<value>com.liferay.portal.spring.aop.ExceptionSafeInterceptor</value>
+			</list>
+		</property>
+		<property name="target">
+			<ref bean="com.liferay.portlet.shopping.service.ShoppingOrderItemLocalService.transaction" />
+		</property>
+	</bean>
 	<bean id="com.liferay.portlet.shopping.service.ShoppingOrderItemLocalServiceFactory" class="com.liferay.portlet.shopping.service.ShoppingOrderItemLocalServiceFactory" lazy-init="true">
 		<property name="service">
 			<ref bean="com.liferay.portlet.shopping.service.ShoppingOrderItemLocalService.transaction" />
@@ -6440,6 +8234,19 @@
 			</props>
 		</property>
 	</bean>
+	<bean id="com.liferay.portlet.social.service.SocialActivityLocalService.exceptionSafe" class="org.springframework.aop.framework.ProxyFactoryBean" lazy-init="true">
+		<property name="proxyInterfaces">
+			<value>com.liferay.portlet.social.service.SocialActivityLocalService</value>
+		</property>
+		<property name="interceptorNames">
+			<list>
+				<value>com.liferay.portal.spring.aop.ExceptionSafeInterceptor</value>
+			</list>
+		</property>
+		<property name="target">
+			<ref bean="com.liferay.portlet.social.service.SocialActivityLocalService.transaction" />
+		</property>
+	</bean>
 	<bean id="com.liferay.portlet.social.service.SocialActivityLocalServiceFactory" class="com.liferay.portlet.social.service.SocialActivityLocalServiceFactory" lazy-init="true">
 		<property name="service">
 			<ref bean="com.liferay.portlet.social.service.SocialActivityLocalService.transaction" />
@@ -6488,6 +8295,19 @@
 		</property>
 	</bean>
 	<bean id="com.liferay.portlet.social.service.SocialActivityInterpreterLocalService.impl" class="com.liferay.portlet.social.service.impl.SocialActivityInterpreterLocalServiceImpl" lazy-init="true" />
+	<bean id="com.liferay.portlet.social.service.SocialActivityInterpreterLocalService.exceptionSafe" class="org.springframework.aop.framework.ProxyFactoryBean" lazy-init="true">
+		<property name="proxyInterfaces">
+			<value>com.liferay.portlet.social.service.SocialActivityInterpreterLocalService</value>
+		</property>
+		<property name="interceptorNames">
+			<list>
+				<value>com.liferay.portal.spring.aop.ExceptionSafeInterceptor</value>
+			</list>
+		</property>
+		<property name="target">
+			<ref bean="com.liferay.portlet.social.service.SocialActivityInterpreterLocalService.impl" />
+		</property>
+	</bean>
 	<bean id="com.liferay.portlet.social.service.SocialActivityInterpreterLocalServiceFactory" class="com.liferay.portlet.social.service.SocialActivityInterpreterLocalServiceFactory" lazy-init="true">
 		<property name="service">
 			<ref bean="com.liferay.portlet.social.service.SocialActivityInterpreterLocalService.impl" />
@@ -6511,6 +8331,19 @@
 				<prop key="update*">PROPAGATION_REQUIRED,-com.liferay.portal.PortalException,-com.liferay.portal.SystemException</prop>
 				<prop key="*">PROPAGATION_SUPPORTS,readOnly</prop>
 			</props>
+		</property>
+	</bean>
+	<bean id="com.liferay.portlet.social.service.SocialRelationLocalService.exceptionSafe" class="org.springframework.aop.framework.ProxyFactoryBean" lazy-init="true">
+		<property name="proxyInterfaces">
+			<value>com.liferay.portlet.social.service.SocialRelationLocalService</value>
+		</property>
+		<property name="interceptorNames">
+			<list>
+				<value>com.liferay.portal.spring.aop.ExceptionSafeInterceptor</value>
+			</list>
+		</property>
+		<property name="target">
+			<ref bean="com.liferay.portlet.social.service.SocialRelationLocalService.transaction" />
 		</property>
 	</bean>
 	<bean id="com.liferay.portlet.social.service.SocialRelationLocalServiceFactory" class="com.liferay.portlet.social.service.SocialRelationLocalServiceFactory" lazy-init="true">
@@ -6567,6 +8400,19 @@
 			</props>
 		</property>
 	</bean>
+	<bean id="com.liferay.portlet.social.service.SocialRequestLocalService.exceptionSafe" class="org.springframework.aop.framework.ProxyFactoryBean" lazy-init="true">
+		<property name="proxyInterfaces">
+			<value>com.liferay.portlet.social.service.SocialRequestLocalService</value>
+		</property>
+		<property name="interceptorNames">
+			<list>
+				<value>com.liferay.portal.spring.aop.ExceptionSafeInterceptor</value>
+			</list>
+		</property>
+		<property name="target">
+			<ref bean="com.liferay.portlet.social.service.SocialRequestLocalService.transaction" />
+		</property>
+	</bean>
 	<bean id="com.liferay.portlet.social.service.SocialRequestLocalServiceFactory" class="com.liferay.portlet.social.service.SocialRequestLocalServiceFactory" lazy-init="true">
 		<property name="service">
 			<ref bean="com.liferay.portlet.social.service.SocialRequestLocalService.transaction" />
@@ -6602,6 +8448,19 @@
 		</property>
 	</bean>
 	<bean id="com.liferay.portlet.social.service.SocialRequestInterpreterLocalService.impl" class="com.liferay.portlet.social.service.impl.SocialRequestInterpreterLocalServiceImpl" lazy-init="true" />
+	<bean id="com.liferay.portlet.social.service.SocialRequestInterpreterLocalService.exceptionSafe" class="org.springframework.aop.framework.ProxyFactoryBean" lazy-init="true">
+		<property name="proxyInterfaces">
+			<value>com.liferay.portlet.social.service.SocialRequestInterpreterLocalService</value>
+		</property>
+		<property name="interceptorNames">
+			<list>
+				<value>com.liferay.portal.spring.aop.ExceptionSafeInterceptor</value>
+			</list>
+		</property>
+		<property name="target">
+			<ref bean="com.liferay.portlet.social.service.SocialRequestInterpreterLocalService.impl" />
+		</property>
+	</bean>
 	<bean id="com.liferay.portlet.social.service.SocialRequestInterpreterLocalServiceFactory" class="com.liferay.portlet.social.service.SocialRequestInterpreterLocalServiceFactory" lazy-init="true">
 		<property name="service">
 			<ref bean="com.liferay.portlet.social.service.SocialRequestInterpreterLocalService.impl" />
@@ -6627,6 +8486,19 @@
 			</props>
 		</property>
 	</bean>
+	<bean id="com.liferay.portlet.softwarecatalog.service.SCLicenseLocalService.exceptionSafe" class="org.springframework.aop.framework.ProxyFactoryBean" lazy-init="true">
+		<property name="proxyInterfaces">
+			<value>com.liferay.portlet.softwarecatalog.service.SCLicenseLocalService</value>
+		</property>
+		<property name="interceptorNames">
+			<list>
+				<value>com.liferay.portal.spring.aop.ExceptionSafeInterceptor</value>
+			</list>
+		</property>
+		<property name="target">
+			<ref bean="com.liferay.portlet.softwarecatalog.service.SCLicenseLocalService.transaction" />
+		</property>
+	</bean>
 	<bean id="com.liferay.portlet.softwarecatalog.service.SCLicenseLocalServiceFactory" class="com.liferay.portlet.softwarecatalog.service.SCLicenseLocalServiceFactory" lazy-init="true">
 		<property name="service">
 			<ref bean="com.liferay.portlet.softwarecatalog.service.SCLicenseLocalService.transaction" />
@@ -6650,6 +8522,19 @@
 				<prop key="update*">PROPAGATION_REQUIRED,-com.liferay.portal.PortalException,-com.liferay.portal.SystemException</prop>
 				<prop key="*">PROPAGATION_SUPPORTS,readOnly</prop>
 			</props>
+		</property>
+	</bean>
+	<bean id="com.liferay.portlet.softwarecatalog.service.SCLicenseService.exceptionSafe" class="org.springframework.aop.framework.ProxyFactoryBean" lazy-init="true">
+		<property name="proxyInterfaces">
+			<value>com.liferay.portlet.softwarecatalog.service.SCLicenseService</value>
+		</property>
+		<property name="interceptorNames">
+			<list>
+				<value>com.liferay.portal.spring.aop.ExceptionSafeInterceptor</value>
+			</list>
+		</property>
+		<property name="target">
+			<ref bean="com.liferay.portlet.softwarecatalog.service.SCLicenseService.transaction" />
 		</property>
 	</bean>
 	<bean id="com.liferay.portlet.softwarecatalog.service.SCLicenseServiceFactory" class="com.liferay.portlet.softwarecatalog.service.SCLicenseServiceFactory" lazy-init="true">
@@ -6706,6 +8591,19 @@
 			</props>
 		</property>
 	</bean>
+	<bean id="com.liferay.portlet.softwarecatalog.service.SCFrameworkVersionLocalService.exceptionSafe" class="org.springframework.aop.framework.ProxyFactoryBean" lazy-init="true">
+		<property name="proxyInterfaces">
+			<value>com.liferay.portlet.softwarecatalog.service.SCFrameworkVersionLocalService</value>
+		</property>
+		<property name="interceptorNames">
+			<list>
+				<value>com.liferay.portal.spring.aop.ExceptionSafeInterceptor</value>
+			</list>
+		</property>
+		<property name="target">
+			<ref bean="com.liferay.portlet.softwarecatalog.service.SCFrameworkVersionLocalService.transaction" />
+		</property>
+	</bean>
 	<bean id="com.liferay.portlet.softwarecatalog.service.SCFrameworkVersionLocalServiceFactory" class="com.liferay.portlet.softwarecatalog.service.SCFrameworkVersionLocalServiceFactory" lazy-init="true">
 		<property name="service">
 			<ref bean="com.liferay.portlet.softwarecatalog.service.SCFrameworkVersionLocalService.transaction" />
@@ -6729,6 +8627,19 @@
 				<prop key="update*">PROPAGATION_REQUIRED,-com.liferay.portal.PortalException,-com.liferay.portal.SystemException</prop>
 				<prop key="*">PROPAGATION_SUPPORTS,readOnly</prop>
 			</props>
+		</property>
+	</bean>
+	<bean id="com.liferay.portlet.softwarecatalog.service.SCFrameworkVersionService.exceptionSafe" class="org.springframework.aop.framework.ProxyFactoryBean" lazy-init="true">
+		<property name="proxyInterfaces">
+			<value>com.liferay.portlet.softwarecatalog.service.SCFrameworkVersionService</value>
+		</property>
+		<property name="interceptorNames">
+			<list>
+				<value>com.liferay.portal.spring.aop.ExceptionSafeInterceptor</value>
+			</list>
+		</property>
+		<property name="target">
+			<ref bean="com.liferay.portlet.softwarecatalog.service.SCFrameworkVersionService.transaction" />
 		</property>
 	</bean>
 	<bean id="com.liferay.portlet.softwarecatalog.service.SCFrameworkVersionServiceFactory" class="com.liferay.portlet.softwarecatalog.service.SCFrameworkVersionServiceFactory" lazy-init="true">
@@ -6785,6 +8696,19 @@
 			</props>
 		</property>
 	</bean>
+	<bean id="com.liferay.portlet.softwarecatalog.service.SCProductEntryLocalService.exceptionSafe" class="org.springframework.aop.framework.ProxyFactoryBean" lazy-init="true">
+		<property name="proxyInterfaces">
+			<value>com.liferay.portlet.softwarecatalog.service.SCProductEntryLocalService</value>
+		</property>
+		<property name="interceptorNames">
+			<list>
+				<value>com.liferay.portal.spring.aop.ExceptionSafeInterceptor</value>
+			</list>
+		</property>
+		<property name="target">
+			<ref bean="com.liferay.portlet.softwarecatalog.service.SCProductEntryLocalService.transaction" />
+		</property>
+	</bean>
 	<bean id="com.liferay.portlet.softwarecatalog.service.SCProductEntryLocalServiceFactory" class="com.liferay.portlet.softwarecatalog.service.SCProductEntryLocalServiceFactory" lazy-init="true">
 		<property name="service">
 			<ref bean="com.liferay.portlet.softwarecatalog.service.SCProductEntryLocalService.transaction" />
@@ -6808,6 +8732,19 @@
 				<prop key="update*">PROPAGATION_REQUIRED,-com.liferay.portal.PortalException,-com.liferay.portal.SystemException</prop>
 				<prop key="*">PROPAGATION_SUPPORTS,readOnly</prop>
 			</props>
+		</property>
+	</bean>
+	<bean id="com.liferay.portlet.softwarecatalog.service.SCProductEntryService.exceptionSafe" class="org.springframework.aop.framework.ProxyFactoryBean" lazy-init="true">
+		<property name="proxyInterfaces">
+			<value>com.liferay.portlet.softwarecatalog.service.SCProductEntryService</value>
+		</property>
+		<property name="interceptorNames">
+			<list>
+				<value>com.liferay.portal.spring.aop.ExceptionSafeInterceptor</value>
+			</list>
+		</property>
+		<property name="target">
+			<ref bean="com.liferay.portlet.softwarecatalog.service.SCProductEntryService.transaction" />
 		</property>
 	</bean>
 	<bean id="com.liferay.portlet.softwarecatalog.service.SCProductEntryServiceFactory" class="com.liferay.portlet.softwarecatalog.service.SCProductEntryServiceFactory" lazy-init="true">
@@ -6864,6 +8801,19 @@
 			</props>
 		</property>
 	</bean>
+	<bean id="com.liferay.portlet.softwarecatalog.service.SCProductScreenshotLocalService.exceptionSafe" class="org.springframework.aop.framework.ProxyFactoryBean" lazy-init="true">
+		<property name="proxyInterfaces">
+			<value>com.liferay.portlet.softwarecatalog.service.SCProductScreenshotLocalService</value>
+		</property>
+		<property name="interceptorNames">
+			<list>
+				<value>com.liferay.portal.spring.aop.ExceptionSafeInterceptor</value>
+			</list>
+		</property>
+		<property name="target">
+			<ref bean="com.liferay.portlet.softwarecatalog.service.SCProductScreenshotLocalService.transaction" />
+		</property>
+	</bean>
 	<bean id="com.liferay.portlet.softwarecatalog.service.SCProductScreenshotLocalServiceFactory" class="com.liferay.portlet.softwarecatalog.service.SCProductScreenshotLocalServiceFactory" lazy-init="true">
 		<property name="service">
 			<ref bean="com.liferay.portlet.softwarecatalog.service.SCProductScreenshotLocalService.transaction" />
@@ -6918,6 +8868,19 @@
 			</props>
 		</property>
 	</bean>
+	<bean id="com.liferay.portlet.softwarecatalog.service.SCProductVersionLocalService.exceptionSafe" class="org.springframework.aop.framework.ProxyFactoryBean" lazy-init="true">
+		<property name="proxyInterfaces">
+			<value>com.liferay.portlet.softwarecatalog.service.SCProductVersionLocalService</value>
+		</property>
+		<property name="interceptorNames">
+			<list>
+				<value>com.liferay.portal.spring.aop.ExceptionSafeInterceptor</value>
+			</list>
+		</property>
+		<property name="target">
+			<ref bean="com.liferay.portlet.softwarecatalog.service.SCProductVersionLocalService.transaction" />
+		</property>
+	</bean>
 	<bean id="com.liferay.portlet.softwarecatalog.service.SCProductVersionLocalServiceFactory" class="com.liferay.portlet.softwarecatalog.service.SCProductVersionLocalServiceFactory" lazy-init="true">
 		<property name="service">
 			<ref bean="com.liferay.portlet.softwarecatalog.service.SCProductVersionLocalService.transaction" />
@@ -6941,6 +8904,19 @@
 				<prop key="update*">PROPAGATION_REQUIRED,-com.liferay.portal.PortalException,-com.liferay.portal.SystemException</prop>
 				<prop key="*">PROPAGATION_SUPPORTS,readOnly</prop>
 			</props>
+		</property>
+	</bean>
+	<bean id="com.liferay.portlet.softwarecatalog.service.SCProductVersionService.exceptionSafe" class="org.springframework.aop.framework.ProxyFactoryBean" lazy-init="true">
+		<property name="proxyInterfaces">
+			<value>com.liferay.portlet.softwarecatalog.service.SCProductVersionService</value>
+		</property>
+		<property name="interceptorNames">
+			<list>
+				<value>com.liferay.portal.spring.aop.ExceptionSafeInterceptor</value>
+			</list>
+		</property>
+		<property name="target">
+			<ref bean="com.liferay.portlet.softwarecatalog.service.SCProductVersionService.transaction" />
 		</property>
 	</bean>
 	<bean id="com.liferay.portlet.softwarecatalog.service.SCProductVersionServiceFactory" class="com.liferay.portlet.softwarecatalog.service.SCProductVersionServiceFactory" lazy-init="true">
@@ -6997,6 +8973,19 @@
 			</props>
 		</property>
 	</bean>
+	<bean id="com.liferay.portlet.tags.service.TagsAssetLocalService.exceptionSafe" class="org.springframework.aop.framework.ProxyFactoryBean" lazy-init="true">
+		<property name="proxyInterfaces">
+			<value>com.liferay.portlet.tags.service.TagsAssetLocalService</value>
+		</property>
+		<property name="interceptorNames">
+			<list>
+				<value>com.liferay.portal.spring.aop.ExceptionSafeInterceptor</value>
+			</list>
+		</property>
+		<property name="target">
+			<ref bean="com.liferay.portlet.tags.service.TagsAssetLocalService.transaction" />
+		</property>
+	</bean>
 	<bean id="com.liferay.portlet.tags.service.TagsAssetLocalServiceFactory" class="com.liferay.portlet.tags.service.TagsAssetLocalServiceFactory" lazy-init="true">
 		<property name="service">
 			<ref bean="com.liferay.portlet.tags.service.TagsAssetLocalService.transaction" />
@@ -7020,6 +9009,19 @@
 				<prop key="update*">PROPAGATION_REQUIRED,-com.liferay.portal.PortalException,-com.liferay.portal.SystemException</prop>
 				<prop key="*">PROPAGATION_SUPPORTS,readOnly</prop>
 			</props>
+		</property>
+	</bean>
+	<bean id="com.liferay.portlet.tags.service.TagsAssetService.exceptionSafe" class="org.springframework.aop.framework.ProxyFactoryBean" lazy-init="true">
+		<property name="proxyInterfaces">
+			<value>com.liferay.portlet.tags.service.TagsAssetService</value>
+		</property>
+		<property name="interceptorNames">
+			<list>
+				<value>com.liferay.portal.spring.aop.ExceptionSafeInterceptor</value>
+			</list>
+		</property>
+		<property name="target">
+			<ref bean="com.liferay.portlet.tags.service.TagsAssetService.transaction" />
 		</property>
 	</bean>
 	<bean id="com.liferay.portlet.tags.service.TagsAssetServiceFactory" class="com.liferay.portlet.tags.service.TagsAssetServiceFactory" lazy-init="true">
@@ -7089,6 +9091,19 @@
 			</props>
 		</property>
 	</bean>
+	<bean id="com.liferay.portlet.tags.service.TagsEntryLocalService.exceptionSafe" class="org.springframework.aop.framework.ProxyFactoryBean" lazy-init="true">
+		<property name="proxyInterfaces">
+			<value>com.liferay.portlet.tags.service.TagsEntryLocalService</value>
+		</property>
+		<property name="interceptorNames">
+			<list>
+				<value>com.liferay.portal.spring.aop.ExceptionSafeInterceptor</value>
+			</list>
+		</property>
+		<property name="target">
+			<ref bean="com.liferay.portlet.tags.service.TagsEntryLocalService.transaction" />
+		</property>
+	</bean>
 	<bean id="com.liferay.portlet.tags.service.TagsEntryLocalServiceFactory" class="com.liferay.portlet.tags.service.TagsEntryLocalServiceFactory" lazy-init="true">
 		<property name="service">
 			<ref bean="com.liferay.portlet.tags.service.TagsEntryLocalService.transaction" />
@@ -7112,6 +9127,19 @@
 				<prop key="update*">PROPAGATION_REQUIRED,-com.liferay.portal.PortalException,-com.liferay.portal.SystemException</prop>
 				<prop key="*">PROPAGATION_SUPPORTS,readOnly</prop>
 			</props>
+		</property>
+	</bean>
+	<bean id="com.liferay.portlet.tags.service.TagsEntryService.exceptionSafe" class="org.springframework.aop.framework.ProxyFactoryBean" lazy-init="true">
+		<property name="proxyInterfaces">
+			<value>com.liferay.portlet.tags.service.TagsEntryService</value>
+		</property>
+		<property name="interceptorNames">
+			<list>
+				<value>com.liferay.portal.spring.aop.ExceptionSafeInterceptor</value>
+			</list>
+		</property>
+		<property name="target">
+			<ref bean="com.liferay.portlet.tags.service.TagsEntryService.transaction" />
 		</property>
 	</bean>
 	<bean id="com.liferay.portlet.tags.service.TagsEntryServiceFactory" class="com.liferay.portlet.tags.service.TagsEntryServiceFactory" lazy-init="true">
@@ -7181,6 +9209,19 @@
 			</props>
 		</property>
 	</bean>
+	<bean id="com.liferay.portlet.tags.service.TagsPropertyLocalService.exceptionSafe" class="org.springframework.aop.framework.ProxyFactoryBean" lazy-init="true">
+		<property name="proxyInterfaces">
+			<value>com.liferay.portlet.tags.service.TagsPropertyLocalService</value>
+		</property>
+		<property name="interceptorNames">
+			<list>
+				<value>com.liferay.portal.spring.aop.ExceptionSafeInterceptor</value>
+			</list>
+		</property>
+		<property name="target">
+			<ref bean="com.liferay.portlet.tags.service.TagsPropertyLocalService.transaction" />
+		</property>
+	</bean>
 	<bean id="com.liferay.portlet.tags.service.TagsPropertyLocalServiceFactory" class="com.liferay.portlet.tags.service.TagsPropertyLocalServiceFactory" lazy-init="true">
 		<property name="service">
 			<ref bean="com.liferay.portlet.tags.service.TagsPropertyLocalService.transaction" />
@@ -7204,6 +9245,19 @@
 				<prop key="update*">PROPAGATION_REQUIRED,-com.liferay.portal.PortalException,-com.liferay.portal.SystemException</prop>
 				<prop key="*">PROPAGATION_SUPPORTS,readOnly</prop>
 			</props>
+		</property>
+	</bean>
+	<bean id="com.liferay.portlet.tags.service.TagsPropertyService.exceptionSafe" class="org.springframework.aop.framework.ProxyFactoryBean" lazy-init="true">
+		<property name="proxyInterfaces">
+			<value>com.liferay.portlet.tags.service.TagsPropertyService</value>
+		</property>
+		<property name="interceptorNames">
+			<list>
+				<value>com.liferay.portal.spring.aop.ExceptionSafeInterceptor</value>
+			</list>
+		</property>
+		<property name="target">
+			<ref bean="com.liferay.portlet.tags.service.TagsPropertyService.transaction" />
 		</property>
 	</bean>
 	<bean id="com.liferay.portlet.tags.service.TagsPropertyServiceFactory" class="com.liferay.portlet.tags.service.TagsPropertyServiceFactory" lazy-init="true">
@@ -7286,6 +9340,19 @@
 			</props>
 		</property>
 	</bean>
+	<bean id="com.liferay.portlet.tags.service.TagsSourceLocalService.exceptionSafe" class="org.springframework.aop.framework.ProxyFactoryBean" lazy-init="true">
+		<property name="proxyInterfaces">
+			<value>com.liferay.portlet.tags.service.TagsSourceLocalService</value>
+		</property>
+		<property name="interceptorNames">
+			<list>
+				<value>com.liferay.portal.spring.aop.ExceptionSafeInterceptor</value>
+			</list>
+		</property>
+		<property name="target">
+			<ref bean="com.liferay.portlet.tags.service.TagsSourceLocalService.transaction" />
+		</property>
+	</bean>
 	<bean id="com.liferay.portlet.tags.service.TagsSourceLocalServiceFactory" class="com.liferay.portlet.tags.service.TagsSourceLocalServiceFactory" lazy-init="true">
 		<property name="service">
 			<ref bean="com.liferay.portlet.tags.service.TagsSourceLocalService.transaction" />
@@ -7309,6 +9376,19 @@
 				<prop key="update*">PROPAGATION_REQUIRED,-com.liferay.portal.PortalException,-com.liferay.portal.SystemException</prop>
 				<prop key="*">PROPAGATION_SUPPORTS,readOnly</prop>
 			</props>
+		</property>
+	</bean>
+	<bean id="com.liferay.portlet.tags.service.TagsSourceService.exceptionSafe" class="org.springframework.aop.framework.ProxyFactoryBean" lazy-init="true">
+		<property name="proxyInterfaces">
+			<value>com.liferay.portlet.tags.service.TagsSourceService</value>
+		</property>
+		<property name="interceptorNames">
+			<list>
+				<value>com.liferay.portal.spring.aop.ExceptionSafeInterceptor</value>
+			</list>
+		</property>
+		<property name="target">
+			<ref bean="com.liferay.portlet.tags.service.TagsSourceService.transaction" />
 		</property>
 	</bean>
 	<bean id="com.liferay.portlet.tags.service.TagsSourceServiceFactory" class="com.liferay.portlet.tags.service.TagsSourceServiceFactory" lazy-init="true">
@@ -7365,6 +9445,19 @@
 			</props>
 		</property>
 	</bean>
+	<bean id="com.liferay.portlet.tags.service.TagsVocabularyLocalService.exceptionSafe" class="org.springframework.aop.framework.ProxyFactoryBean" lazy-init="true">
+		<property name="proxyInterfaces">
+			<value>com.liferay.portlet.tags.service.TagsVocabularyLocalService</value>
+		</property>
+		<property name="interceptorNames">
+			<list>
+				<value>com.liferay.portal.spring.aop.ExceptionSafeInterceptor</value>
+			</list>
+		</property>
+		<property name="target">
+			<ref bean="com.liferay.portlet.tags.service.TagsVocabularyLocalService.transaction" />
+		</property>
+	</bean>
 	<bean id="com.liferay.portlet.tags.service.TagsVocabularyLocalServiceFactory" class="com.liferay.portlet.tags.service.TagsVocabularyLocalServiceFactory" lazy-init="true">
 		<property name="service">
 			<ref bean="com.liferay.portlet.tags.service.TagsVocabularyLocalService.transaction" />
@@ -7388,6 +9481,19 @@
 				<prop key="update*">PROPAGATION_REQUIRED,-com.liferay.portal.PortalException,-com.liferay.portal.SystemException</prop>
 				<prop key="*">PROPAGATION_SUPPORTS,readOnly</prop>
 			</props>
+		</property>
+	</bean>
+	<bean id="com.liferay.portlet.tags.service.TagsVocabularyService.exceptionSafe" class="org.springframework.aop.framework.ProxyFactoryBean" lazy-init="true">
+		<property name="proxyInterfaces">
+			<value>com.liferay.portlet.tags.service.TagsVocabularyService</value>
+		</property>
+		<property name="interceptorNames">
+			<list>
+				<value>com.liferay.portal.spring.aop.ExceptionSafeInterceptor</value>
+			</list>
+		</property>
+		<property name="target">
+			<ref bean="com.liferay.portlet.tags.service.TagsVocabularyService.transaction" />
 		</property>
 	</bean>
 	<bean id="com.liferay.portlet.tags.service.TagsVocabularyServiceFactory" class="com.liferay.portlet.tags.service.TagsVocabularyServiceFactory" lazy-init="true">
@@ -7444,6 +9550,19 @@
 			</props>
 		</property>
 	</bean>
+	<bean id="com.liferay.portlet.tasks.service.TasksReviewLocalService.exceptionSafe" class="org.springframework.aop.framework.ProxyFactoryBean" lazy-init="true">
+		<property name="proxyInterfaces">
+			<value>com.liferay.portlet.tasks.service.TasksReviewLocalService</value>
+		</property>
+		<property name="interceptorNames">
+			<list>
+				<value>com.liferay.portal.spring.aop.ExceptionSafeInterceptor</value>
+			</list>
+		</property>
+		<property name="target">
+			<ref bean="com.liferay.portlet.tasks.service.TasksReviewLocalService.transaction" />
+		</property>
+	</bean>
 	<bean id="com.liferay.portlet.tasks.service.TasksReviewLocalServiceFactory" class="com.liferay.portlet.tasks.service.TasksReviewLocalServiceFactory" lazy-init="true">
 		<property name="service">
 			<ref bean="com.liferay.portlet.tasks.service.TasksReviewLocalService.transaction" />
@@ -7467,6 +9586,19 @@
 				<prop key="update*">PROPAGATION_REQUIRED,-com.liferay.portal.PortalException,-com.liferay.portal.SystemException</prop>
 				<prop key="*">PROPAGATION_SUPPORTS,readOnly</prop>
 			</props>
+		</property>
+	</bean>
+	<bean id="com.liferay.portlet.tasks.service.TasksReviewService.exceptionSafe" class="org.springframework.aop.framework.ProxyFactoryBean" lazy-init="true">
+		<property name="proxyInterfaces">
+			<value>com.liferay.portlet.tasks.service.TasksReviewService</value>
+		</property>
+		<property name="interceptorNames">
+			<list>
+				<value>com.liferay.portal.spring.aop.ExceptionSafeInterceptor</value>
+			</list>
+		</property>
+		<property name="target">
+			<ref bean="com.liferay.portlet.tasks.service.TasksReviewService.transaction" />
 		</property>
 	</bean>
 	<bean id="com.liferay.portlet.tasks.service.TasksReviewServiceFactory" class="com.liferay.portlet.tasks.service.TasksReviewServiceFactory" lazy-init="true">
@@ -7523,6 +9655,19 @@
 			</props>
 		</property>
 	</bean>
+	<bean id="com.liferay.portlet.tasks.service.TasksProposalLocalService.exceptionSafe" class="org.springframework.aop.framework.ProxyFactoryBean" lazy-init="true">
+		<property name="proxyInterfaces">
+			<value>com.liferay.portlet.tasks.service.TasksProposalLocalService</value>
+		</property>
+		<property name="interceptorNames">
+			<list>
+				<value>com.liferay.portal.spring.aop.ExceptionSafeInterceptor</value>
+			</list>
+		</property>
+		<property name="target">
+			<ref bean="com.liferay.portlet.tasks.service.TasksProposalLocalService.transaction" />
+		</property>
+	</bean>
 	<bean id="com.liferay.portlet.tasks.service.TasksProposalLocalServiceFactory" class="com.liferay.portlet.tasks.service.TasksProposalLocalServiceFactory" lazy-init="true">
 		<property name="service">
 			<ref bean="com.liferay.portlet.tasks.service.TasksProposalLocalService.transaction" />
@@ -7546,6 +9691,19 @@
 				<prop key="update*">PROPAGATION_REQUIRED,-com.liferay.portal.PortalException,-com.liferay.portal.SystemException</prop>
 				<prop key="*">PROPAGATION_SUPPORTS,readOnly</prop>
 			</props>
+		</property>
+	</bean>
+	<bean id="com.liferay.portlet.tasks.service.TasksProposalService.exceptionSafe" class="org.springframework.aop.framework.ProxyFactoryBean" lazy-init="true">
+		<property name="proxyInterfaces">
+			<value>com.liferay.portlet.tasks.service.TasksProposalService</value>
+		</property>
+		<property name="interceptorNames">
+			<list>
+				<value>com.liferay.portal.spring.aop.ExceptionSafeInterceptor</value>
+			</list>
+		</property>
+		<property name="target">
+			<ref bean="com.liferay.portlet.tasks.service.TasksProposalService.transaction" />
 		</property>
 	</bean>
 	<bean id="com.liferay.portlet.tasks.service.TasksProposalServiceFactory" class="com.liferay.portlet.tasks.service.TasksProposalServiceFactory" lazy-init="true">
@@ -7615,6 +9773,19 @@
 			</props>
 		</property>
 	</bean>
+	<bean id="com.liferay.portlet.wiki.service.WikiNodeLocalService.exceptionSafe" class="org.springframework.aop.framework.ProxyFactoryBean" lazy-init="true">
+		<property name="proxyInterfaces">
+			<value>com.liferay.portlet.wiki.service.WikiNodeLocalService</value>
+		</property>
+		<property name="interceptorNames">
+			<list>
+				<value>com.liferay.portal.spring.aop.ExceptionSafeInterceptor</value>
+			</list>
+		</property>
+		<property name="target">
+			<ref bean="com.liferay.portlet.wiki.service.WikiNodeLocalService.transaction" />
+		</property>
+	</bean>
 	<bean id="com.liferay.portlet.wiki.service.WikiNodeLocalServiceFactory" class="com.liferay.portlet.wiki.service.WikiNodeLocalServiceFactory" lazy-init="true">
 		<property name="service">
 			<ref bean="com.liferay.portlet.wiki.service.WikiNodeLocalService.transaction" />
@@ -7638,6 +9809,19 @@
 				<prop key="update*">PROPAGATION_REQUIRED,-com.liferay.portal.PortalException,-com.liferay.portal.SystemException</prop>
 				<prop key="*">PROPAGATION_SUPPORTS,readOnly</prop>
 			</props>
+		</property>
+	</bean>
+	<bean id="com.liferay.portlet.wiki.service.WikiNodeService.exceptionSafe" class="org.springframework.aop.framework.ProxyFactoryBean" lazy-init="true">
+		<property name="proxyInterfaces">
+			<value>com.liferay.portlet.wiki.service.WikiNodeService</value>
+		</property>
+		<property name="interceptorNames">
+			<list>
+				<value>com.liferay.portal.spring.aop.ExceptionSafeInterceptor</value>
+			</list>
+		</property>
+		<property name="target">
+			<ref bean="com.liferay.portlet.wiki.service.WikiNodeService.transaction" />
 		</property>
 	</bean>
 	<bean id="com.liferay.portlet.wiki.service.WikiNodeServiceFactory" class="com.liferay.portlet.wiki.service.WikiNodeServiceFactory" lazy-init="true">
@@ -7694,6 +9878,19 @@
 			</props>
 		</property>
 	</bean>
+	<bean id="com.liferay.portlet.wiki.service.WikiPageLocalService.exceptionSafe" class="org.springframework.aop.framework.ProxyFactoryBean" lazy-init="true">
+		<property name="proxyInterfaces">
+			<value>com.liferay.portlet.wiki.service.WikiPageLocalService</value>
+		</property>
+		<property name="interceptorNames">
+			<list>
+				<value>com.liferay.portal.spring.aop.ExceptionSafeInterceptor</value>
+			</list>
+		</property>
+		<property name="target">
+			<ref bean="com.liferay.portlet.wiki.service.WikiPageLocalService.transaction" />
+		</property>
+	</bean>
 	<bean id="com.liferay.portlet.wiki.service.WikiPageLocalServiceFactory" class="com.liferay.portlet.wiki.service.WikiPageLocalServiceFactory" lazy-init="true">
 		<property name="service">
 			<ref bean="com.liferay.portlet.wiki.service.WikiPageLocalService.transaction" />
@@ -7717,6 +9914,19 @@
 				<prop key="update*">PROPAGATION_REQUIRED,-com.liferay.portal.PortalException,-com.liferay.portal.SystemException</prop>
 				<prop key="*">PROPAGATION_SUPPORTS,readOnly</prop>
 			</props>
+		</property>
+	</bean>
+	<bean id="com.liferay.portlet.wiki.service.WikiPageService.exceptionSafe" class="org.springframework.aop.framework.ProxyFactoryBean" lazy-init="true">
+		<property name="proxyInterfaces">
+			<value>com.liferay.portlet.wiki.service.WikiPageService</value>
+		</property>
+		<property name="interceptorNames">
+			<list>
+				<value>com.liferay.portal.spring.aop.ExceptionSafeInterceptor</value>
+			</list>
+		</property>
+		<property name="target">
+			<ref bean="com.liferay.portlet.wiki.service.WikiPageService.transaction" />
 		</property>
 	</bean>
 	<bean id="com.liferay.portlet.wiki.service.WikiPageServiceFactory" class="com.liferay.portlet.wiki.service.WikiPageServiceFactory" lazy-init="true">
@@ -7786,6 +9996,19 @@
 			</props>
 		</property>
 	</bean>
+	<bean id="com.liferay.portlet.wiki.service.WikiPageResourceLocalService.exceptionSafe" class="org.springframework.aop.framework.ProxyFactoryBean" lazy-init="true">
+		<property name="proxyInterfaces">
+			<value>com.liferay.portlet.wiki.service.WikiPageResourceLocalService</value>
+		</property>
+		<property name="interceptorNames">
+			<list>
+				<value>com.liferay.portal.spring.aop.ExceptionSafeInterceptor</value>
+			</list>
+		</property>
+		<property name="target">
+			<ref bean="com.liferay.portlet.wiki.service.WikiPageResourceLocalService.transaction" />
+		</property>
+	</bean>
 	<bean id="com.liferay.portlet.wiki.service.WikiPageResourceLocalServiceFactory" class="com.liferay.portlet.wiki.service.WikiPageResourceLocalServiceFactory" lazy-init="true">
 		<property name="service">
 			<ref bean="com.liferay.portlet.wiki.service.WikiPageResourceLocalService.transaction" />
@@ -7840,6 +10063,19 @@
 			</props>
 		</property>
 	</bean>
+	<bean id="com.liferay.portlet.workflow.service.WorkflowComponentService.exceptionSafe" class="org.springframework.aop.framework.ProxyFactoryBean" lazy-init="true">
+		<property name="proxyInterfaces">
+			<value>com.liferay.portlet.workflow.service.WorkflowComponentService</value>
+		</property>
+		<property name="interceptorNames">
+			<list>
+				<value>com.liferay.portal.spring.aop.ExceptionSafeInterceptor</value>
+			</list>
+		</property>
+		<property name="target">
+			<ref bean="com.liferay.portlet.workflow.service.WorkflowComponentService.transaction" />
+		</property>
+	</bean>
 	<bean id="com.liferay.portlet.workflow.service.WorkflowComponentServiceFactory" class="com.liferay.portlet.workflow.service.WorkflowComponentServiceFactory" lazy-init="true">
 		<property name="service">
 			<ref bean="com.liferay.portlet.workflow.service.WorkflowComponentService.transaction" />
@@ -7863,6 +10099,19 @@
 				<prop key="update*">PROPAGATION_REQUIRED,-com.liferay.portal.PortalException,-com.liferay.portal.SystemException</prop>
 				<prop key="*">PROPAGATION_SUPPORTS,readOnly</prop>
 			</props>
+		</property>
+	</bean>
+	<bean id="com.liferay.portlet.workflow.service.WorkflowDefinitionService.exceptionSafe" class="org.springframework.aop.framework.ProxyFactoryBean" lazy-init="true">
+		<property name="proxyInterfaces">
+			<value>com.liferay.portlet.workflow.service.WorkflowDefinitionService</value>
+		</property>
+		<property name="interceptorNames">
+			<list>
+				<value>com.liferay.portal.spring.aop.ExceptionSafeInterceptor</value>
+			</list>
+		</property>
+		<property name="target">
+			<ref bean="com.liferay.portlet.workflow.service.WorkflowDefinitionService.transaction" />
 		</property>
 	</bean>
 	<bean id="com.liferay.portlet.workflow.service.WorkflowDefinitionServiceFactory" class="com.liferay.portlet.workflow.service.WorkflowDefinitionServiceFactory" lazy-init="true">
@@ -7890,6 +10139,19 @@
 			</props>
 		</property>
 	</bean>
+	<bean id="com.liferay.portlet.workflow.service.WorkflowInstanceService.exceptionSafe" class="org.springframework.aop.framework.ProxyFactoryBean" lazy-init="true">
+		<property name="proxyInterfaces">
+			<value>com.liferay.portlet.workflow.service.WorkflowInstanceService</value>
+		</property>
+		<property name="interceptorNames">
+			<list>
+				<value>com.liferay.portal.spring.aop.ExceptionSafeInterceptor</value>
+			</list>
+		</property>
+		<property name="target">
+			<ref bean="com.liferay.portlet.workflow.service.WorkflowInstanceService.transaction" />
+		</property>
+	</bean>
 	<bean id="com.liferay.portlet.workflow.service.WorkflowInstanceServiceFactory" class="com.liferay.portlet.workflow.service.WorkflowInstanceServiceFactory" lazy-init="true">
 		<property name="service">
 			<ref bean="com.liferay.portlet.workflow.service.WorkflowInstanceService.transaction" />
@@ -7913,6 +10175,19 @@
 				<prop key="update*">PROPAGATION_REQUIRED,-com.liferay.portal.PortalException,-com.liferay.portal.SystemException</prop>
 				<prop key="*">PROPAGATION_SUPPORTS,readOnly</prop>
 			</props>
+		</property>
+	</bean>
+	<bean id="com.liferay.portlet.workflow.service.WorkflowTaskService.exceptionSafe" class="org.springframework.aop.framework.ProxyFactoryBean" lazy-init="true">
+		<property name="proxyInterfaces">
+			<value>com.liferay.portlet.workflow.service.WorkflowTaskService</value>
+		</property>
+		<property name="interceptorNames">
+			<list>
+				<value>com.liferay.portal.spring.aop.ExceptionSafeInterceptor</value>
+			</list>
+		</property>
+		<property name="target">
+			<ref bean="com.liferay.portlet.workflow.service.WorkflowTaskService.transaction" />
 		</property>
 	</bean>
 	<bean id="com.liferay.portlet.workflow.service.WorkflowTaskServiceFactory" class="com.liferay.portlet.workflow.service.WorkflowTaskServiceFactory" lazy-init="true">

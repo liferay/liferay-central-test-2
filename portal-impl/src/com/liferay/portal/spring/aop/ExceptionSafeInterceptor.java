@@ -20,34 +20,26 @@
  * SOFTWARE.
  */
 
-package com.liferay.portal.kernel.bean;
+package com.liferay.portal.spring.aop;
 
-import java.lang.reflect.InvocationHandler;
-import java.lang.reflect.Method;
+import org.aopalliance.intercept.MethodInterceptor;
+import org.aopalliance.intercept.MethodInvocation;
 
 /**
- * <a href="ExceptionSafeBeanHandler.java.html"><b><i>View Source</i></b></a>
+ * <a href="ExceptionSafeInterceptor.java.html"><b><i>View Source</i></b></a>
  *
- * @author Raymond Augé
+ * @author Brian Wing Shun Chan
  *
  */
-public class ExceptionSafeBeanHandler implements InvocationHandler {
+public class ExceptionSafeInterceptor implements MethodInterceptor {
 
-	public ExceptionSafeBeanHandler(Object bean) {
-		_bean = bean;
-	}
-
-	public Object invoke(Object proxy, Method method, Object[] args)
-		throws Throwable {
-
+	public Object invoke(MethodInvocation invocation) throws Throwable {
 		try {
-			return method.invoke(_bean, args);
+			return invocation.proceed();
 		}
-		catch (Exception e) {
+		catch (Throwable t) {
 			return null;
 		}
 	}
-
-	private Object _bean;
 
 }

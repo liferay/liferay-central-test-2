@@ -135,29 +135,28 @@ public class VelocityVariables {
 
 		velocityContext.put(
 			"expandoColumnLocalService",
-			serviceLocator.findExceptionSafeService(
-				ExpandoColumnLocalService.class));
+			serviceLocator.findService(
+				ExpandoColumnLocalService.class.getName()));
 
 		// Expando row service
 
 		velocityContext.put(
 			"expandoRowLocalService",
-			serviceLocator.findExceptionSafeService(
-				ExpandoRowLocalService.class));
+			serviceLocator.findService(ExpandoRowLocalService.class.getName()));
 
 		// Expando table service
 
 		velocityContext.put(
 			"expandoTableLocalService",
-			serviceLocator.findExceptionSafeService(
-				ExpandoTableLocalService.class));
+			serviceLocator.findService(
+				ExpandoTableLocalService.class.getName()));
 
 		// Expando value service
 
 		velocityContext.put(
 			"expandoValueLocalService",
-			serviceLocator.findExceptionSafeService(
-				ExpandoValueLocalService.class));
+			serviceLocator.findService(
+				ExpandoValueLocalService.class.getName()));
 
 		// Getter util
 
