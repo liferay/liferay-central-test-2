@@ -233,13 +233,10 @@ if (WebFormUtil.getTableRowsCount(databaseTableName) > 0) {
 						<b><%= fieldLabel %></b>
 					</c:otherwise>
 				</c:choose>
+			</div>
 
-				<br />
-
+			<div class="ctrl-holder">
 				<c:choose>
-					<c:when test='<%= fieldType.equals("paragraph") %>'>
-						<input id="<portlet:namespace/>fieldOptional<%= i %>" name="<portlet:namespace/>fieldOptional<%= i %>" type="hidden" value="on" />
-					</c:when>
 					<c:when test="<%= !fieldsEditingDisabled %>">
 						<input <c:if test="<%= fieldOptional %>">checked</c:if> id="<portlet:namespace/>fieldOptional<%= i %>" name="<portlet:namespace/>fieldOptional<%= i %>" type="checkbox" /> <liferay-ui:message key="optional" />
 					</c:when>
@@ -340,6 +337,16 @@ if (WebFormUtil.getTableRowsCount(databaseTableName) > 0) {
 				}
 				else {
 					div.hide();
+				}
+
+				var optional = select.parent().prev();
+
+				if (value == 'paragraph') {
+					optional.hide();
+					optional.children("input[type='checkbox']").attr('checked', 'true');
+				}
+				else {
+					optional.show();
 				}
 			};
 
