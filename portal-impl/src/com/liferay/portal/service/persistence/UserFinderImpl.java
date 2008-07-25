@@ -23,6 +23,7 @@
 package com.liferay.portal.service.persistence;
 
 import com.liferay.portal.SystemException;
+import com.liferay.portal.kernel.dao.orm.CustomSQLParam;
 import com.liferay.portal.kernel.dao.orm.QueryPos;
 import com.liferay.portal.kernel.dao.orm.QueryUtil;
 import com.liferay.portal.kernel.dao.orm.SQLQuery;
@@ -385,14 +386,14 @@ public class UserFinderImpl extends BasePersistenceImpl implements UserFinder {
 			Object value = entry.getValue();
 
 			if (Validator.isNotNull(value)) {
-				sb.append(getJoin(key));
+				sb.append(getJoin(key, value));
 			}
 		}
 
 		return sb.toString();
 	}
 
-	protected String getJoin(String key) {
+	protected String getJoin(String key, Object value) {
 		String join = StringPool.BLANK;
 
 		if (key.equals("contactTwitterSn")) {
@@ -434,6 +435,11 @@ public class UserFinderImpl extends BasePersistenceImpl implements UserFinder {
 		}
 		else if (key.equals("socialRelationType")) {
 			join = CustomSQLUtil.get(JOIN_BY_SOCIAL_RELATION_TYPE);
+		}
+		else if (value instanceof CustomSQLParam) {
+			CustomSQLParam customSQLParam = (CustomSQLParam)value;
+
+			join = customSQLParam.getSQL();
 		}
 
 		if (Validator.isNotNull(join)) {
@@ -533,6 +539,11 @@ public class UserFinderImpl extends BasePersistenceImpl implements UserFinder {
 		else if (key.equals("socialRelationType")) {
 			join = CustomSQLUtil.get(JOIN_BY_SOCIAL_RELATION_TYPE);
 		}
+		else if (value instanceof CustomSQLParam) {
+			CustomSQLParam customSQLParam = (CustomSQLParam)value;
+
+			join = customSQLParam.getSQL();
+		}
 
 		if (Validator.isNotNull(join)) {
 			int pos = join.indexOf("WHERE");
@@ -596,6 +607,11 @@ public class UserFinderImpl extends BasePersistenceImpl implements UserFinder {
 							qPos.add(valueArray[i]);
 						}
 					}
+				}
+				else if (value instanceof CustomSQLParam) {
+					CustomSQLParam customSQLParam = (CustomSQLParam)value;
+
+					customSQLParam.process(qPos);
 				}
 			}
 		}
