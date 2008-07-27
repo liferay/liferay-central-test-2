@@ -550,10 +550,12 @@ public class PortletImporter {
 				List<MBMessage> messages = new ArrayList<MBMessage>();
 
 				for (ObjectValuePair<String, byte[]> entry : entries) {
-					MBMessage message =
-						(MBMessage)context.fromXML(entry.getValue());
+					if (entry.getValue().length > 0) {
+						MBMessage message =
+							(MBMessage)context.fromXML(entry.getValue());
 
-					messages.add(message);
+						messages.add(message);
+					}
 				}
 
 				context.addComments(className, new Long(classPK), messages);
@@ -589,10 +591,12 @@ public class PortletImporter {
 				List<RatingsEntry> ratings = new ArrayList<RatingsEntry>();
 
 				for (ObjectValuePair<String, byte[]> entry : entries) {
-					RatingsEntry rating =
-						(RatingsEntry)context.fromXML(entry.getValue());
+					if (entry.getValue().length > 0) {
+						RatingsEntry rating =
+							(RatingsEntry)context.fromXML(entry.getValue());
 
-					ratings.add(rating);
+						ratings.add(rating);
+					}
 				}
 
 				context.addRatingsEntries(className, new Long(classPK), ratings);

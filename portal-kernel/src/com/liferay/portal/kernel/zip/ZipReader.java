@@ -138,7 +138,13 @@ public class ZipReader implements Serializable {
 	}
 
 	public byte[] getEntryAsByteArray(String name) {
-		return _entries.get(name);
+		byte[] bytes = _entries.get(name);
+
+		if ((bytes == null) && name.startsWith(StringPool.SLASH)) {
+			bytes = _entries.get(name.substring(1));
+		}
+
+		return bytes;
 	}
 
 	public Map<String, List<ObjectValuePair<String, byte[]>>>

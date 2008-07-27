@@ -200,6 +200,10 @@ public class LayoutImporter {
 
 		String xml = context.getZipEntryAsString("/manifest.xml");
 
+		if (xml == null) {
+			throw new LARFileException("manifest.xml not found in the LAR");
+		}
+
 		try {
 			Document doc = DocumentUtil.readDocumentFromXML(xml);
 

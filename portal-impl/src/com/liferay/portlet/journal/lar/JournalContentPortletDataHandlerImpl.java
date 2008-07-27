@@ -48,6 +48,7 @@ import com.liferay.portlet.journal.service.persistence.JournalTemplateUtil;
 import com.liferay.util.MapUtil;
 import com.liferay.util.xml.XMLFormatter;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 
@@ -265,8 +266,13 @@ public class JournalContentPortletDataHandlerImpl
 				prefs.setValue("article-id", articleId);
 			}
 
-			List<Element> dlFolderEls = root.element("dl-folders").elements(
-				"folder");
+			Element dlFoldersEl = root.element("dl-folders");
+
+			List<Element> dlFolderEls = Collections.EMPTY_LIST;
+
+			if (dlFoldersEl != null) {
+				dlFolderEls = dlFoldersEl.elements("folder");
+			}
 
 			Map<Long, Long> dlFolderPKs = context.getNewPrimaryKeysMap(
 				DLFolder.class);
@@ -283,8 +289,13 @@ public class JournalContentPortletDataHandlerImpl
 				}
 			}
 
-			List<Element> fileEntryEls = root.element(
-				"dl-file-entries").elements("file-entry");
+			Element fileEntriesEl = root.element("dl-file-entries");
+
+			List<Element> fileEntryEls = Collections.EMPTY_LIST;
+
+			if (fileEntriesEl != null) {
+				fileEntryEls = dlFoldersEl.elements("file-entry");
+			}
 
 			Map<String, String> fileEntryNames = context.getNewPrimaryKeysMap(
 				DLFileEntry.class);
@@ -303,8 +314,12 @@ public class JournalContentPortletDataHandlerImpl
 				}
 			}
 
-			List<Element> fileRankEls = root.element("dl-file-ranks").elements(
-				"file-rank");
+			Element dlFileRanksEl = root.element("dl-file-ranks");
+			List<Element> fileRankEls = Collections.EMPTY_LIST;
+
+			if (dlFileRanksEl != null) {
+				fileRankEls = dlFileRanksEl.elements("file-rank");
+			}
 
 			for (Element fileRankEl : fileRankEls) {
 				String path = fileRankEl.attributeValue("path");
@@ -318,8 +333,13 @@ public class JournalContentPortletDataHandlerImpl
 				}
 			}
 
-			List<Element> folderEls = root.element("ig-folders").elements(
-				"folder");
+			Element igFoldersEl = root.element("ig-folders");
+
+			List<Element> folderEls = Collections.EMPTY_LIST;
+
+			if (igFoldersEl != null) {
+				folderEls = igFoldersEl.elements("folder");
+			}
 
 			Map<Long, Long> folderPKs = context.getNewPrimaryKeysMap(
 				IGFolder.class);
@@ -336,8 +356,13 @@ public class JournalContentPortletDataHandlerImpl
 				}
 			}
 
-			List<Element> imageEls = root.element("ig-images").elements(
-				"image");
+			Element igImagesEl = root.element("ig-images");
+
+			List<Element> imageEls = Collections.EMPTY_LIST;
+
+			if (igImagesEl != null) {
+				imageEls = igImagesEl.elements("image");
+			}
 
 			for (Element imageEl : imageEls) {
 				String path = imageEl.attributeValue("path");
