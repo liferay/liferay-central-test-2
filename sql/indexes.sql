@@ -457,11 +457,6 @@ create index IX_E0422BDA on User_ (uuid_);
 
 create index LIFERAY_003 on Users_Permissions (permissionId);
 
-create index IX_A14CB55C on Vocabulary (companyId);
-create index IX_EB4A3321 on Vocabulary (companyId, folksonomy);
-create index IX_A788901B on Vocabulary (companyId, name);
-create index IX_37D21D11 on Vocabulary (folksonomy);
-
 create index IX_97DFA146 on WebDAVProps (classNameId, classPK);
 
 create index IX_96F07007 on Website (companyId);
