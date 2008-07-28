@@ -1,25 +1,15 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>MoveDocumentTest</title>
+<title>MoveImageTest</title>
 </head>
 <body>
 <table cellpadding="1" cellspacing="1" border="1">
 <thead>
-<tr><td rowspan="1" colspan="3">MoveDocumentTest</td></tr>
+<tr><td rowspan="1" colspan="3">MoveImageTest</td></tr>
 </thead><tbody>
 <tr>
 	<td>waitForElementPresent</td>
-	<td>link=Test Folder</td>
-	<td></td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>link=Test Folder</td>
-	<td></td>
-</tr>
-<tr>
-	<td>waitForElementPresent</td>
 	<td>link=Test Subfolder</td>
 	<td></td>
 </tr>
@@ -30,12 +20,27 @@
 </tr>
 <tr>
 	<td>waitForElementPresent</td>
+	<td>//img[@alt='Image']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>//img[@alt='Image']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
 	<td>link=Edit</td>
 	<td></td>
 </tr>
 <tr>
-	<td>clickAndWait</td>
+	<td>click</td>
 	<td>link=Edit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//img[@alt='This is the Liferay logo!']</td>
 	<td></td>
 </tr>
 <tr>
@@ -55,7 +60,7 @@
 </tr>
 <tr>
 	<td>selectWindow</td>
-	<td>title=Document Library Test Page</td>
+	<td>title=Image Gallery Test Page</td>
 	<td></td>
 </tr>
 <tr>
@@ -70,17 +75,12 @@
 </tr>
 <tr>
 	<td>waitForElementPresent</td>
-	<td>link=Another</td>
+	<td>link=Test Folder 2</td>
 	<td></td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>link=Another</td>
-	<td></td>
-</tr>
-<tr>
-	<td>waitForElementPresent</td>
-	<td>link=Another1</td>
+	<td>link=Test Folder 2</td>
 	<td></td>
 </tr>
 <tr>
@@ -100,8 +100,8 @@
 </tr>
 <tr>
 	<td>waitForElementPresent</td>
-	<td>_20_folderName</td>
-	<td></td>
+	<td>_31_folderName</td>
+	<td>Test Subfolder 2</td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
@@ -109,13 +109,8 @@
 	<td></td>
 </tr>
 <tr>
-	<td>waitForElementPresent</td>
-	<td>link=Folders</td>
-	<td></td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>link=Folders</td>
+	<td>assertElementNotPresent</td>
+	<td>//img[@alt='This is the Liferay logo!']</td>
 	<td></td>
 </tr>
 <tr>
@@ -129,28 +124,18 @@
 	<td></td>
 </tr>
 <tr>
-	<td>clickAndWait</td>
-	<td>link=Another</td>
+	<td>waitForElementPresent</td>
+	<td>link=Test Subfolder 2</td>
 	<td></td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
-	<td>link=Another1</td>
-	<td></td>
-</tr>
-<tr>
-	<td>waitForTextPresent</td>
-	<td>Test Document.txt<br />This is a test document!</td>
-	<td></td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>link=Edit</td>
+	<td>link=Test Subfolder 2</td>
 	<td></td>
 </tr>
 <tr>
 	<td>waitForElementPresent</td>
-	<td>link=Test Document.txt</td>
+	<td>//img[@alt='Image']</td>
 	<td></td>
 </tr>
 <tr>

@@ -20,38 +20,19 @@
  * SOFTWARE.
  */
 
-package com.liferay.portalweb.portlet.documentlibrary;
+package com.liferay.portalweb.portlet.imagegallery;
 
 import com.liferay.portalweb.portal.BaseTestCase;
 import com.liferay.portalweb.portal.util.RuntimeVariables;
 
 /**
- * <a href="MoveDocumentTest.java.html"><b><i>View Source</i></b></a>
+ * <a href="MoveImageTest.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *
  */
-public class MoveDocumentTest extends BaseTestCase {
-	public void testMoveDocument() throws Exception {
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isElementPresent("link=Test Folder")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
-		selenium.click("link=Test Folder");
-		selenium.waitForPageToLoad("30000");
-
+public class MoveImageTest extends BaseTestCase {
+	public void testMoveImage() throws Exception {
 		for (int second = 0;; second++) {
 			if (second >= 60) {
 				fail("timeout");
@@ -77,6 +58,24 @@ public class MoveDocumentTest extends BaseTestCase {
 			}
 
 			try {
+				if (selenium.isElementPresent("//img[@alt='Image']")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
+		selenium.click("//img[@alt='Image']");
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
 				if (selenium.isElementPresent("link=Edit")) {
 					break;
 				}
@@ -88,7 +87,23 @@ public class MoveDocumentTest extends BaseTestCase {
 		}
 
 		selenium.click("link=Edit");
-		selenium.waitForPageToLoad("30000");
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isElementPresent(
+							"//img[@alt='This is the Liferay logo!']")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -108,7 +123,7 @@ public class MoveDocumentTest extends BaseTestCase {
 
 		selenium.click("//input[@value='Select']");
 		selenium.waitForPopUp("folder", RuntimeVariables.replace("30000"));
-		selenium.selectWindow("title=Document Library Test Page");
+		selenium.selectWindow("title=Image Gallery Test Page");
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -135,7 +150,7 @@ public class MoveDocumentTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("link=Another")) {
+				if (selenium.isElementPresent("link=Test Folder 2")) {
 					break;
 				}
 			}
@@ -145,24 +160,8 @@ public class MoveDocumentTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click("link=Another");
+		selenium.click("link=Test Folder 2");
 		selenium.waitForPageToLoad("30000");
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isElementPresent("link=Another1")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -189,7 +188,7 @@ public class MoveDocumentTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("_20_folderName")) {
+				if (selenium.isElementPresent("_31_folderName")) {
 					break;
 				}
 			}
@@ -201,25 +200,8 @@ public class MoveDocumentTest extends BaseTestCase {
 
 		selenium.click("//input[@value='Save']");
 		selenium.waitForPageToLoad("30000");
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isElementPresent("link=Folders")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
-		selenium.click("link=Folders");
-		selenium.waitForPageToLoad("30000");
+		assertFalse(selenium.isElementPresent(
+				"//img[@alt='This is the Liferay logo!']"));
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -239,10 +221,6 @@ public class MoveDocumentTest extends BaseTestCase {
 
 		selenium.click("link=Return to Full Page");
 		selenium.waitForPageToLoad("30000");
-		selenium.click("link=Another");
-		selenium.waitForPageToLoad("30000");
-		selenium.click("link=Another1");
-		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -250,8 +228,7 @@ public class MoveDocumentTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isTextPresent(
-							"Test Document.txt\nThis is a test document!")) {
+				if (selenium.isElementPresent("link=Test Subfolder 2")) {
 					break;
 				}
 			}
@@ -261,7 +238,7 @@ public class MoveDocumentTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click("link=Edit");
+		selenium.click("link=Test Subfolder 2");
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {
@@ -270,7 +247,7 @@ public class MoveDocumentTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("link=Test Document.txt")) {
+				if (selenium.isElementPresent("//img[@alt='Image']")) {
 					break;
 				}
 			}

@@ -22,31 +22,55 @@
 
 package com.liferay.portalweb.portlet.imagegallery;
 
-import com.liferay.portalweb.portal.BaseTests;
+import com.liferay.portalweb.portal.BaseTestCase;
+import com.liferay.portalweb.portal.util.RuntimeVariables;
 
 /**
- * <a href="ImageGalleryTests.java.html"><b><i>View Source</i></b></a>
+ * <a href="SearchPortletTest.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *
  */
-public class ImageGalleryTests extends BaseTests {
+public class SearchPortletTest extends BaseTestCase {
+	public void testSearchPortlet() throws Exception {
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
 
-	public ImageGalleryTests() {
-		addTestSuite(AddPageTest.class);
-		addTestSuite(AddPortletTest.class);
-		addTestSuite(AddFolderTest.class);
-		addTestSuite(AddSubfolderTest.class);
-		addTestSuite(AddImageTest.class);
-		addTestSuite(ViewSlideshowTest.class);
-		addTestSuite(BrowseImageTabsTest.class);
-		addTestSuite(SearchPortletTest.class);
-		addTestSuite(AddSecondTestFoldersTest.class);
-		addTestSuite(MoveImageTest.class);
-		addTestSuite(DeleteFoldersTest.class);
-		addTestSuite(UploadLARFileTest.class);
-		addTestSuite(AssertLARImportTest.class);
-		addTestSuite(ImageEdittingTest.class);
+			try {
+				if (selenium.isElementPresent("link=Return to Full Page")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
+		selenium.click("link=Return to Full Page");
+		selenium.waitForPageToLoad("30000");
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isElementPresent("_31_keywords1")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
+		selenium.type("_31_keywords1", RuntimeVariables.replace("liferay"));
+		selenium.click("//input[@value='Search Images']");
+		selenium.waitForPageToLoad("30000");
+		assertTrue(selenium.isElementPresent("//img[@alt='Image']"));
 	}
-
 }
