@@ -23,7 +23,6 @@
 package com.liferay.portal.spring.hibernate;
 
 import com.liferay.portal.kernel.portlet.PortletClassLoaderUtil;
-import com.liferay.portal.kernel.util.ArrayUtil;
 
 /**
  * <a href="PortletHibernateConfiguration.java.html"><b><i>View Source</i></b>
@@ -41,12 +40,7 @@ public class PortletHibernateConfiguration
 	}
 
 	protected String[] getConfigurationResources() {
-		String[] hibernateConfigs = super.getConfigurationResources();
-		String[] configs = new String[hibernateConfigs.length + 1];
-		ArrayUtil.combine(hibernateConfigs, new String[]{
-				"META-INF/portlet-hbm.xml"}, configs);
-		
-		return configs;
+		return new String[] {"META-INF/portlet-hbm.xml"};
 	}
 
 }
