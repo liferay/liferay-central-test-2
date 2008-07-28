@@ -74,18 +74,8 @@ public class RuntimeTag extends TagSupport {
 	}
 
 	public static void doTag(
-		String portletName, String queryString, String defaultPreferences,
-		PageContext pageContext, ServletContext servletContext,
-		HttpServletRequest request, HttpServletResponse response)
-	throws Exception {
-		doTag(
-			portletName, queryString, defaultPreferences, false, pageContext,
-			servletContext, request, response);
-	}
-	
-	public static void doTag(
 			String portletName, String queryString, String defaultPreferences,
-			boolean exclusive, PageContext pageContext, ServletContext servletContext,
+			PageContext pageContext, ServletContext servletContext,
 			HttpServletRequest request, HttpServletResponse response)
 		throws Exception {
 
@@ -117,8 +107,7 @@ public class RuntimeTag extends TagSupport {
 
 		try {
 			request.setAttribute(WebKeys.RENDER_PORTLET_RESOURCE, Boolean.TRUE);
-			request.setAttribute(WebKeys.RUNTIME_PORTLET_EXCLUSIVE, Boolean.valueOf(exclusive));
-			
+
 			if (Validator.isNotNull(defaultPreferences)) {
 				PortletPreferencesFactoryUtil.getPortletSetup(
 					request, portletId, defaultPreferences);
