@@ -137,7 +137,7 @@ public class FindPageAction extends Action {
 		}
 		else {
 			throw new NoSuchLayoutException(
-				"No layout was found with the Wiki portlet.");
+				"No page was found with the Wiki portlet.");
 		}
 	}
 

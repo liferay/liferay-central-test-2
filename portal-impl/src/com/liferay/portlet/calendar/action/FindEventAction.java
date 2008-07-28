@@ -120,7 +120,7 @@ public class FindEventAction extends Action {
 		}
 		else {
 			throw new NoSuchLayoutException(
-				"No layout was found with the Calendar portlet.");
+				"No page was found with the Calendar portlet.");
 		}
 	}
 

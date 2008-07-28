@@ -125,7 +125,7 @@ public class FindMessageAction extends Action {
 		}
 		else {
 			throw new NoSuchLayoutException(
-				"No layout was found with the Message Boards portlet.");
+				"No page was found with the Message Boards portlet.");
 		}
 	}
 

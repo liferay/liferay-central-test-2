@@ -143,7 +143,7 @@ public class FindEntryAction extends Action {
 		}
 		else {
 			throw new NoSuchLayoutException(
-				"No layout was found with the Blogs portlet.");
+				"No page was found with the Blogs portlet.");
 		}
 	}
 
