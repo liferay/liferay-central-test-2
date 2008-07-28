@@ -83,6 +83,8 @@ public class EditSharingAction extends EditConfigurationAction {
 		}
 		else if (tabs2.equals("facebook")) {
 			updateFacebook(actionRequest, prefs);
+		} else if (tabs2.equals("request-share-tab-name")) {
+			 updateWidgetShareWithFriends(actionRequest, prefs);
 		}
 
 		prefs.store();
@@ -124,6 +126,19 @@ public class EditSharingAction extends EditConfigurationAction {
 			"lfr-widget-show-add-app-link",
 			String.valueOf(widgetShowAddAppLink));
 	}
+
+	protected void updateWidgetShareWithFriends(
+			ActionRequest actionRequest, PortletPreferences prefs)
+		throws Exception {
+
+		boolean widgetShareWithFriends = ParamUtil.getBoolean(
+			actionRequest, "widgetShareWithFriends");
+
+		prefs.setValue(
+			"lfr-share-widget-with-friends",
+			String.valueOf(widgetShareWithFriends));
+		}
+
 
 	protected void updateFacebook(
 			ActionRequest actionRequest, PortletPreferences prefs)
