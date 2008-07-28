@@ -22,11 +22,6 @@
  */
 %>
 
-<%@ include file="/html/taglib/init.jsp" %>
+<%@ include file="/html/portlet/categories-navigation/init.jsp" %>
 
-<%@ page import="com.liferay.portlet.tags.model.TagsEntry" %>
-<%@ page import="com.liferay.portlet.tags.model.TagsVocabulary" %>
-<%@ page import="com.liferay.portlet.tags.service.TagsEntryServiceUtil" %>
-<%@ page import="com.liferay.portlet.tags.service.TagsVocabularyServiceUtil" %>
-
-<portlet:defineObjects />
+<liferay-ui:categories-navigation />

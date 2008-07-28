@@ -1941,19 +1941,24 @@
 			<role-name>user</role-name>
 		</security-role-ref>
 	</portlet>
+	<public-render-parameter>
+   		<identifier>tag</identifier>
+   		<qname xmlns:x="http://liferay.com/taxonomy">x:tag</qname>
+   </public-render-parameter>
 	<portlet>
 		<portlet-name>122</portlet-name>
 		<display-name>Categories Navigation</display-name>
 		<portlet-class>com.liferay.portlet.StrutsPortlet</portlet-class>
 		<init-param>
 			<name>view-action</name>
-			<value>/categories_navigation/view</value>
+			<value>/categories-navigation/view</value>
 		</init-param>
 		<expiration-cache>0</expiration-cache>
 		<supports>
 			<mime-type>text/html</mime-type>
 		</supports>
 		<resource-bundle>com.liferay.portlet.StrutsResourceBundle</resource-bundle>
+		<supported-public-render-parameter>tag</supported-public-render-parameter>
 		<security-role-ref>
 			<role-name>guest</role-name>
 		</security-role-ref>
@@ -1963,12 +1968,7 @@
 		<security-role-ref>
 			<role-name>user</role-name>
 		</security-role-ref>
-		<supported-public-render-parameter>tag</supported-public-render-parameter>
-	</portlet>
-	<public-render-parameter>
-		<identifier>tag</identifier>
-		<qname xmlns:x="http://www.liferay.com/public-render-parameters">x:tag</qname>
-	</public-render-parameter>
+	</portlet>	
 	<custom-window-state>
 		<window-state>exclusive</window-state>
 	</custom-window-state>
