@@ -2641,7 +2641,7 @@ public class PortalImpl implements Portal {
 		String actionName = _getPortletParam(request, "actionName");
 
 		if (_log.isDebugEnabled()) {
-			_log.debug("Struts action " + strutsAction);
+			_log.debug("Action name " + actionName);
 		}
 
 		boolean alwaysAllowDoAsUser = false;
@@ -2650,7 +2650,7 @@ public class PortalImpl implements Portal {
 			strutsAction.equals("/document_library/edit_file_entry") ||
 			strutsAction.equals("/image_gallery/edit_image") ||
 			strutsAction.equals("/wiki/edit_page_attachment") ||
-			actionName.equals("addAttachment")) {
+			actionName.equals("addFile")) {
 
 			alwaysAllowDoAsUser = true;
 		}
@@ -2820,7 +2820,7 @@ public class PortalImpl implements Portal {
 	private String _getPortletParam(HttpServletRequest request, String name) {
 		String value = null;
 
-		int strutsActionCount = 0;
+		int valueCount = 0;
 
 		Enumeration<String> enu = request.getParameterNames();
 
@@ -2828,18 +2828,19 @@ public class PortalImpl implements Portal {
 			String curName = enu.nextElement();
 
 			int pos = curName.indexOf(StringPool.UNDERLINE + name);
+
 			if (pos != -1) {
-				strutsActionCount++;
+				valueCount++;
 
-				// There should never be more than one Struts action
+				// There should never be more than one value
 
-				if (strutsActionCount > 1) {
+				if (valueCount > 1) {
 					return StringPool.BLANK;
 				}
 
-				String curStrutsAction = ParamUtil.getString(request, curName);
+				String curValue = ParamUtil.getString(request, curName);
 
-				if (Validator.isNotNull(curStrutsAction)) {
+				if (Validator.isNotNull(curValue)) {
 
 					// The Struts action must be for the correct portlet
 
@@ -2847,7 +2848,7 @@ public class PortalImpl implements Portal {
 					String portletId2 = ParamUtil.getString(request, "p_p_id");
 
 					if (portletId1.equals(portletId2)) {
-						value = curStrutsAction;
+						value = curValue;
 					}
 				}
 			}
@@ -2856,6 +2857,7 @@ public class PortalImpl implements Portal {
 		if (value == null) {
 			value = StringPool.BLANK;
 		}
+
 		return value;
 	}
 
