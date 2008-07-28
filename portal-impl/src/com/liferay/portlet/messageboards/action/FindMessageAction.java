@@ -112,12 +112,20 @@ public class FindMessageAction extends Action {
 			message.getCategory().getGroupId(), false,
 			PortletKeys.MESSAGE_BOARDS);
 
-		if (plid == LayoutConstants.DEFAULT_PLID) {
-			throw new NoSuchLayoutException(
-				"No public page was found with the Message Boards portlet.");
+		if (plid != LayoutConstants.DEFAULT_PLID) {
+			return plid;
+		}
+
+		plid = PortalUtil.getPlidFromPortletId(
+			message.getCategory().getGroupId(), true,
+			PortletKeys.MESSAGE_BOARDS);
+
+		if (plid != LayoutConstants.DEFAULT_PLID) {
+			return plid;
 		}
 		else {
-			return plid;
+			throw new NoSuchLayoutException(
+				"No layout was found with the Message Boards portlet.");
 		}
 	}
 

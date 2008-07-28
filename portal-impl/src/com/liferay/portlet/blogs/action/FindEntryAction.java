@@ -131,12 +131,19 @@ public class FindEntryAction extends Action {
 		plid = PortalUtil.getPlidFromPortletId(
 			entry.getGroupId(), false, PortletKeys.BLOGS);
 
-		if (plid == LayoutConstants.DEFAULT_PLID) {
-			throw new NoSuchLayoutException(
-				"No public page was found with the Blogs portlet.");
+		if (plid != LayoutConstants.DEFAULT_PLID) {
+			return plid;
+		}
+
+		plid = PortalUtil.getPlidFromPortletId(
+			entry.getGroupId(), true, PortletKeys.BLOGS);
+
+		if (plid != LayoutConstants.DEFAULT_PLID) {
+			return plid;
 		}
 		else {
-			return plid;
+			throw new NoSuchLayoutException(
+				"No layout was found with the Blogs portlet.");
 		}
 	}
 

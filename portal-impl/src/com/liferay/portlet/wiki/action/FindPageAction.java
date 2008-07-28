@@ -125,12 +125,19 @@ public class FindPageAction extends Action {
 		plid = PortalUtil.getPlidFromPortletId(
 			node.getGroupId(), false, PortletKeys.WIKI);
 
-		if (plid == LayoutConstants.DEFAULT_PLID) {
-			throw new NoSuchLayoutException(
-				"No public page was found with the Wiki portlet.");
+		if (plid != LayoutConstants.DEFAULT_PLID) {
+			return plid;
+		}
+
+		plid = PortalUtil.getPlidFromPortletId(
+			node.getGroupId(), true, PortletKeys.WIKI);
+
+		if (plid != LayoutConstants.DEFAULT_PLID) {
+			return plid;
 		}
 		else {
-			return plid;
+			throw new NoSuchLayoutException(
+				"No layout was found with the Wiki portlet.");
 		}
 	}
 

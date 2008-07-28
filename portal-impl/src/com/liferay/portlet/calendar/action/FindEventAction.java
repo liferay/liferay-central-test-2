@@ -108,12 +108,19 @@ public class FindEventAction extends Action {
 		plid = PortalUtil.getPlidFromPortletId(
 			event.getGroupId(), false, PortletKeys.CALENDAR);
 
-		if (plid == LayoutConstants.DEFAULT_PLID) {
-			throw new NoSuchLayoutException(
-				"No public page was found with the Calendar portlet.");
+		if (plid != LayoutConstants.DEFAULT_PLID) {
+			return plid;
+		}
+
+		plid = PortalUtil.getPlidFromPortletId(
+			event.getGroupId(), true, PortletKeys.CALENDAR);
+
+		if (plid != LayoutConstants.DEFAULT_PLID) {
+			return plid;
 		}
 		else {
-			return plid;
+			throw new NoSuchLayoutException(
+				"No layout was found with the Calendar portlet.");
 		}
 	}
 
