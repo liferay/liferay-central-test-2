@@ -22,6 +22,9 @@
 
 package com.liferay.portal.action;
 
+import com.liferay.portal.kernel.json.JSONFactoryUtil;
+import com.liferay.portal.kernel.json.JSONObject;
+import com.liferay.portal.kernel.servlet.StringServletResponse;
 import com.liferay.portal.kernel.util.Constants;
 import com.liferay.portal.kernel.util.InstancePool;
 import com.liferay.portal.kernel.util.ParamUtil;
@@ -47,6 +50,7 @@ import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.WebKeys;
 import com.liferay.portlet.PortletPreferencesFactoryUtil;
 import com.liferay.util.servlet.DynamicServletRequest;
+import com.liferay.util.servlet.ServletResponseUtil;
 
 import javax.portlet.PortletPreferences;
 
@@ -194,47 +198,78 @@ public class UpdateLayoutAction extends Action {
 			}
 		}
 
+		// The check for the refresh variable can be removed in the future. See
+		// LEP-6910.
+
 		if (ParamUtil.getBoolean(request, "refresh")) {
 			return mapping.findForward(ActionConstants.COMMON_REFERER);
 		}
 		else {
 			if (cmd.equals(Constants.ADD) && (portletId != null)) {
-
-				// Run the render portlet action to add a portlet without
-				// refreshing.
-
-				Action renderPortletAction = (Action)InstancePool.get(
-					RenderPortletAction.class.getName());
-
-				// Pass in the portlet id because the portlet id may be the
-				// instance id. Namespace the request if necessary. See
-				// LEP-4644.
-
-				long companyId = PortalUtil.getCompanyId(request);
-
-				Portlet portlet = PortletLocalServiceUtil.getPortletById(
-					companyId, portletId);
-
-				DynamicServletRequest dynamicRequest = null;
-
-				if (portlet.isPrivateRequestAttributes()) {
-					String portletNamespace =
-						PortalUtil.getPortletNamespace(portlet.getPortletId());
-
-					dynamicRequest = new NamespaceServletRequest(
-						request, portletNamespace, portletNamespace);
-				}
-				else {
-					dynamicRequest = new DynamicServletRequest(request);
-				}
-
-				dynamicRequest.setParameter("p_p_id", portletId);
-
-				renderPortletAction.execute(
-					mapping, form, dynamicRequest, response);
+				addPortlet(mapping, form, request, response, portletId);
 			}
 
 			return null;
+		}
+	}
+
+	protected void addPortlet(
+			ActionMapping mapping, ActionForm form, HttpServletRequest request,
+			HttpServletResponse response, String portletId)
+		throws Exception {
+
+		// Run the render portlet action to add a portlet without refreshing.
+
+		Action renderPortletAction = (Action)InstancePool.get(
+			RenderPortletAction.class.getName());
+
+		// Pass in the portlet id because the portlet id may be the instance id.
+		// Namespace the request if necessary. See LEP-4644.
+
+		long companyId = PortalUtil.getCompanyId(request);
+
+		Portlet portlet = PortletLocalServiceUtil.getPortletById(
+			companyId, portletId);
+
+		DynamicServletRequest dynamicRequest = null;
+
+		if (portlet.isPrivateRequestAttributes()) {
+			String portletNamespace =
+				PortalUtil.getPortletNamespace(portlet.getPortletId());
+
+			dynamicRequest = new NamespaceServletRequest(
+				request, portletNamespace, portletNamespace);
+		}
+		else {
+			dynamicRequest = new DynamicServletRequest(request);
+		}
+
+		dynamicRequest.setParameter("p_p_id", portletId);
+
+		String dataType = ParamUtil.getString(request, "dataType");
+
+		if (dataType.equals("json")) {
+			JSONObject jsonObj = JSONFactoryUtil.createJSONObject();
+
+			if (portlet.isAjaxable()) {
+				StringServletResponse stringResponse =
+					new StringServletResponse(response);
+
+				renderPortletAction.execute(
+					mapping, form, dynamicRequest, stringResponse);
+
+				jsonObj.put("refresh", "false");
+				jsonObj.put("portletHTML", stringResponse.getString());
+			}
+			else {
+				jsonObj.put("refresh", "true");
+			}
+
+			ServletResponseUtil.write(response, jsonObj.toString());
+		}
+		else {
+			renderPortletAction.execute(
+				mapping, form, dynamicRequest, response);
 		}
 	}
 
