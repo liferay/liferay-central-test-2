@@ -149,6 +149,59 @@ public class TagsEntryUtil {
 				   .findByC_V_PrevAndNext(entryId, companyId, vocabularyId, obc);
 	}
 
+	public static java.util.List<com.liferay.portlet.tags.model.TagsEntry> findByC_V_P(
+		long companyId, long vocabularyId, long parentEntryId)
+		throws com.liferay.portal.SystemException {
+		return getPersistence()
+				   .findByC_V_P(companyId, vocabularyId, parentEntryId);
+	}
+
+	public static java.util.List<com.liferay.portlet.tags.model.TagsEntry> findByC_V_P(
+		long companyId, long vocabularyId, long parentEntryId, int start,
+		int end) throws com.liferay.portal.SystemException {
+		return getPersistence()
+				   .findByC_V_P(companyId, vocabularyId, parentEntryId, start,
+			end);
+	}
+
+	public static java.util.List<com.liferay.portlet.tags.model.TagsEntry> findByC_V_P(
+		long companyId, long vocabularyId, long parentEntryId, int start,
+		int end, com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException {
+		return getPersistence()
+				   .findByC_V_P(companyId, vocabularyId, parentEntryId, start,
+			end, obc);
+	}
+
+	public static com.liferay.portlet.tags.model.TagsEntry findByC_V_P_First(
+		long companyId, long vocabularyId, long parentEntryId,
+		com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException,
+			com.liferay.portlet.tags.NoSuchEntryException {
+		return getPersistence()
+				   .findByC_V_P_First(companyId, vocabularyId, parentEntryId,
+			obc);
+	}
+
+	public static com.liferay.portlet.tags.model.TagsEntry findByC_V_P_Last(
+		long companyId, long vocabularyId, long parentEntryId,
+		com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException,
+			com.liferay.portlet.tags.NoSuchEntryException {
+		return getPersistence()
+				   .findByC_V_P_Last(companyId, vocabularyId, parentEntryId, obc);
+	}
+
+	public static com.liferay.portlet.tags.model.TagsEntry[] findByC_V_P_PrevAndNext(
+		long entryId, long companyId, long vocabularyId, long parentEntryId,
+		com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException,
+			com.liferay.portlet.tags.NoSuchEntryException {
+		return getPersistence()
+				   .findByC_V_P_PrevAndNext(entryId, companyId, vocabularyId,
+			parentEntryId, obc);
+	}
+
 	public static java.util.List<Object> findWithDynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery)
 		throws com.liferay.portal.SystemException {
@@ -188,6 +241,11 @@ public class TagsEntryUtil {
 		getPersistence().removeByC_V(companyId, vocabularyId);
 	}
 
+	public static void removeByC_V_P(long companyId, long vocabularyId,
+		long parentEntryId) throws com.liferay.portal.SystemException {
+		getPersistence().removeByC_V_P(companyId, vocabularyId, parentEntryId);
+	}
+
 	public static void removeAll() throws com.liferay.portal.SystemException {
 		getPersistence().removeAll();
 	}
@@ -200,6 +258,12 @@ public class TagsEntryUtil {
 	public static int countByC_V(long companyId, long vocabularyId)
 		throws com.liferay.portal.SystemException {
 		return getPersistence().countByC_V(companyId, vocabularyId);
+	}
+
+	public static int countByC_V_P(long companyId, long vocabularyId,
+		long parentEntryId) throws com.liferay.portal.SystemException {
+		return getPersistence()
+				   .countByC_V_P(companyId, vocabularyId, parentEntryId);
 	}
 
 	public static int countAll() throws com.liferay.portal.SystemException {

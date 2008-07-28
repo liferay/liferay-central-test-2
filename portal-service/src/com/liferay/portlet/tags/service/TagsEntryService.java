@@ -92,6 +92,17 @@ public interface TagsEntryService {
 		throws java.rmi.RemoteException, com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;
 
+	public java.util.List<com.liferay.portlet.tags.model.TagsEntry> getVocabularyEntries(
+		long companyId, java.lang.String vocabularyName,
+		java.lang.String parentName)
+		throws java.rmi.RemoteException, com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException;
+
+	public java.util.List<com.liferay.portlet.tags.model.TagsEntry> getVocabularyRootEntries(
+		long companyId, java.lang.String vocabularyName)
+		throws java.rmi.RemoteException, com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException;
+
 	public void mergeEntries(long fromEntryId, long toEntryId)
 		throws java.rmi.RemoteException, com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;

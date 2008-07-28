@@ -1039,6 +1039,19 @@
 		<render-weight>1</render-weight>
 		<css-class-wrapper>portlet-activities</css-class-wrapper>
 	</portlet>
+	<portlet>
+		<portlet-name>122</portlet-name>
+		<icon>/html/portlet/categories_navigation/icon.png</icon>
+		<struts-path>categories_navigation</struts-path>
+		<use-default-template>false</use-default-template>
+		<restore-current-view>false</restore-current-view>
+		<layout-cacheable>true</layout-cacheable>
+		<instanceable>true</instanceable>
+		<private-request-attributes>false</private-request-attributes>
+		<private-session-attributes>false</private-session-attributes>
+		<render-weight>1</render-weight>
+		<css-class-wrapper>portlet-categories-navigation</css-class-wrapper>
+	</portlet>
 	<role-mapper>
 		<role-name>administrator</role-name>
 		<role-link>Administrator</role-link>

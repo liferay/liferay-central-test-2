@@ -218,6 +218,40 @@ public class TagsEntryServiceSoap {
 		}
 	}
 
+	public static com.liferay.portlet.tags.model.TagsEntrySoap[] getVocabularyEntries(
+		long companyId, java.lang.String vocabularyName,
+		java.lang.String parentName) throws RemoteException {
+		try {
+			java.util.List<com.liferay.portlet.tags.model.TagsEntry> returnValue =
+				TagsEntryServiceUtil.getVocabularyEntries(companyId,
+					vocabularyName, parentName);
+
+			return com.liferay.portlet.tags.model.TagsEntrySoap.toSoapModels(returnValue);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
+	public static com.liferay.portlet.tags.model.TagsEntrySoap[] getVocabularyRootEntries(
+		long companyId, java.lang.String vocabularyName)
+		throws RemoteException {
+		try {
+			java.util.List<com.liferay.portlet.tags.model.TagsEntry> returnValue =
+				TagsEntryServiceUtil.getVocabularyRootEntries(companyId,
+					vocabularyName);
+
+			return com.liferay.portlet.tags.model.TagsEntrySoap.toSoapModels(returnValue);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
 	public static void mergeEntries(long fromEntryId, long toEntryId)
 		throws RemoteException {
 		try {
