@@ -180,7 +180,8 @@ public class WindowInvoker extends InvokerPortlet {
 					actionRequestImpl.getPortletMode(), _getPlid(actionRequest),
 					isFacesPortlet(), _remotePortlet);
 
-			_populateContainerRequest(request, response, executeActionRequest);
+			_populateContainerRequest(request, response, executeActionRequest,
+				actionRequest);
 
 			ExecuteActionResponse executeActionResponse =
 				ContainerResponseFactory.createExecuteActionResponse(response);
@@ -258,7 +259,8 @@ public class WindowInvoker extends InvokerPortlet {
 					renderRequestImpl.getPortletMode(), _getPlid(renderRequest),
 					isFacesPortlet(), _remotePortlet);
 
-			_populateContainerRequest(request, response, getMarkupRequest);
+			_populateContainerRequest(request, response, getMarkupRequest,
+				renderRequest);
 
 			GetMarkupResponse getMarkupResponse =
 				ContainerResponseFactory.createGetMarkUpResponse(response);
@@ -333,7 +335,8 @@ public class WindowInvoker extends InvokerPortlet {
 					_getPlid(resourceRequest), isFacesPortlet(),
 					_remotePortlet);
 
-			_populateContainerRequest(request, response, getResourceRequest);
+			_populateContainerRequest(request, response, getResourceRequest,
+				resourceRequest);
 
 			GetResourceResponse getResourceResponse =
 				ContainerResponseFactory .createGetResourceResponse(response);
@@ -477,7 +480,7 @@ public class WindowInvoker extends InvokerPortlet {
 
 	private void _populateContainerRequest(
 		HttpServletRequest request, HttpServletResponse response,
-		ContainerRequest containerRequest) {
+		ContainerRequest containerRequest, PortletRequest portletRequest) {
 
 		containerRequest.setRoles(_getRoles(request));
 		containerRequest.setUserID(_remoteUser);
@@ -488,6 +491,10 @@ public class WindowInvoker extends InvokerPortlet {
 
 		containerRequest.setAttribute(
 			PortletRequest.CCPP_PROFILE, _getCCPPProfile(request));
+
+		containerRequest.setAttribute(
+			WebKeys.THEME_DISPLAY, 
+			portletRequest.getAttribute(WebKeys.THEME_DISPLAY));
 	}
 
 	private void _setPortletAttributes(
