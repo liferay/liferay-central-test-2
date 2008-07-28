@@ -127,16 +127,6 @@ public class ZipReader implements Serializable {
 		return _entries;
 	}
 
-	public String getEntryAsString(String name) {
-		byte[] bytes = getEntryAsByteArray(name);
-
-		if (bytes != null) {
-			return new String(bytes);
-		}
-
-		return null;
-	}
-
 	public byte[] getEntryAsByteArray(String name) {
 		byte[] bytes = _entries.get(name);
 
@@ -145,6 +135,16 @@ public class ZipReader implements Serializable {
 		}
 
 		return bytes;
+	}
+
+	public String getEntryAsString(String name) {
+		byte[] bytes = getEntryAsByteArray(name);
+
+		if (bytes != null) {
+			return new String(bytes);
+		}
+
+		return null;
 	}
 
 	public Map<String, List<ObjectValuePair<String, byte[]>>>
