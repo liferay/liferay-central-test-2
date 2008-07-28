@@ -119,21 +119,29 @@ public class BlogsEntryServiceImpl extends BlogsEntryServiceBaseImpl {
 		throws PortalException, SystemException {
 
 		List<BlogsEntry> entries = new ArrayList<BlogsEntry>();
+		int lastIntervalStart = 0;
+		boolean listNotExhausted = true;
+		
+		while( (entries.size() < max) && listNotExhausted ) {
+			List<BlogsEntry> entryList = blogsEntryLocalService.getCompanyEntries(
+					companyId, false, lastIntervalStart, lastIntervalStart+max, 
+					new EntryDisplayDateComparator());
+			Iterator<BlogsEntry> itr = entryList.iterator();
 
-		Iterator<BlogsEntry> itr = blogsEntryLocalService.getCompanyEntries(
-			companyId, false, 0, _MAX_END, new EntryDisplayDateComparator())
-				.iterator();
-
-		while (itr.hasNext() && (entries.size() < max)) {
-			BlogsEntry entry = itr.next();
-
-			if (BlogsEntryPermission.contains(
-					getPermissionChecker(), entry, ActionKeys.VIEW)) {
-
-				entries.add(entry);
+			lastIntervalStart += max;
+			listNotExhausted = ( entryList.size() == max ); 
+			
+			while (itr.hasNext() && (entries.size() < max)) {
+				BlogsEntry entry = itr.next();
+	
+				if (BlogsEntryPermission.contains(
+						getPermissionChecker(), entry, ActionKeys.VIEW)) {
+	
+					entries.add(entry);
+				}
 			}
 		}
-
+		
 		return entries;
 	}
 
@@ -216,20 +224,29 @@ public class BlogsEntryServiceImpl extends BlogsEntryServiceBaseImpl {
 		throws PortalException, SystemException {
 
 		List<BlogsEntry> entries = new ArrayList<BlogsEntry>();
+		int lastIntervalStart = 0;
+		boolean listNotExhausted = true;
 
-		Iterator<BlogsEntry> itr = blogsEntryFinder.findByOrganizationId(
-			organizationId, false, 0, _MAX_END).iterator();
+		while( (entries.size() < max) && listNotExhausted ) {
 
-		while (itr.hasNext() && (entries.size() < max)) {
-			BlogsEntry entry = itr.next();
+			List<BlogsEntry> entryList = blogsEntryFinder.findByOrganizationId(
+					organizationId, false, lastIntervalStart, lastIntervalStart+max);
+			Iterator<BlogsEntry> itr = entryList.iterator();
 
-			if (BlogsEntryPermission.contains(
-					getPermissionChecker(), entry, ActionKeys.VIEW)) {
-
-				entries.add(entry);
+			lastIntervalStart += max;
+			listNotExhausted = ( entryList.size() == max ); 
+			
+			while (itr.hasNext() && (entries.size() < max)) {
+				BlogsEntry entry = itr.next();
+	
+				if (BlogsEntryPermission.contains(
+						getPermissionChecker(), entry, ActionKeys.VIEW)) {
+	
+					entries.add(entry);
+				}
 			}
 		}
-
+		
 		return entries;
 	}
 
