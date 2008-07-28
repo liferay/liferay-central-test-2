@@ -31,6 +31,7 @@ import java.io.IOException;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.Comparator;
 import java.util.Enumeration;
 import java.util.Iterator;
@@ -221,6 +222,10 @@ public class ListUtil {
 	}
 
 	public static List<Boolean> toList(Boolean[] list) {
+		if ((list == null) || (list.length == 0)) {
+			return Collections.EMPTY_LIST;
+		}
+
 		List<Boolean> newList = new ArrayList<Boolean>(list.length);
 
 		for (Boolean value : list) {
@@ -231,6 +236,10 @@ public class ListUtil {
 	}
 
 	public static List<Double> toList(Double[] list) {
+		if ((list == null) || (list.length == 0)) {
+			return Collections.EMPTY_LIST;
+		}
+
 		List<Double> newList = new ArrayList<Double>(list.length);
 
 		for (Double value : list) {
@@ -241,6 +250,10 @@ public class ListUtil {
 	}
 
 	public static List<Float> toList(Float[] list) {
+		if ((list == null) || (list.length == 0)) {
+			return Collections.EMPTY_LIST;
+		}
+
 		List<Float> newList = new ArrayList<Float>(list.length);
 
 		for (Float value : list) {
@@ -251,6 +264,10 @@ public class ListUtil {
 	}
 
 	public static List<Integer> toList(Integer[] list) {
+		if ((list == null) || (list.length == 0)) {
+			return Collections.EMPTY_LIST;
+		}
+
 		List<Integer> newList = new ArrayList<Integer>(list.length);
 
 		for (Integer value : list) {
@@ -261,6 +278,10 @@ public class ListUtil {
 	}
 
 	public static List<Long> toList(Long[] list) {
+		if ((list == null) || (list.length == 0)) {
+			return Collections.EMPTY_LIST;
+		}
+
 		List<Long> newList = new ArrayList<Long>(list.length);
 
 		for (Long value : list) {
@@ -271,6 +292,10 @@ public class ListUtil {
 	}
 
 	public static List<Short> toList(Short[] list) {
+		if ((list == null) || (list.length == 0)) {
+			return Collections.EMPTY_LIST;
+		}
+
 		List<Short> newList = new ArrayList<Short>(list.length);
 
 		for (Short value : list) {
@@ -281,6 +306,10 @@ public class ListUtil {
 	}
 
 	public static List<String> toList(String[] list) {
+		if ((list == null) || (list.length == 0)) {
+			return Collections.EMPTY_LIST;
+		}
+
 		List<String> newList = new ArrayList<String>(list.length);
 
 		for (String value : list) {
