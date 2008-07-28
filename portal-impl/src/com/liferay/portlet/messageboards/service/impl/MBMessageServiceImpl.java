@@ -389,19 +389,30 @@ public class MBMessageServiceImpl extends MBMessageServiceBaseImpl {
 
 		List<MBMessage> messages = new ArrayList<MBMessage>();
 
+		int lastIntervalStart = 0;
+		boolean listNotExhausted = true;
 		MessageCreateDateComparator comparator =
 			new MessageCreateDateComparator(false, false);
 
-		Iterator<MBMessage> itr = mbMessageLocalService.getCategoryMessages(
-			categoryId, 0, _MAX_END, comparator).iterator();
+		while ((messages.size() < max) && listNotExhausted) {
+			List<MBMessage> messageList =
+				mbMessageLocalService.getCategoryMessages(
+					categoryId, lastIntervalStart, lastIntervalStart + max,
+					comparator);
 
-		while (itr.hasNext() && (messages.size() < max)) {
-			MBMessage message = itr.next();
+			Iterator<MBMessage> itr = messageList.iterator();
 
-			if (MBMessagePermission.contains(
-					getPermissionChecker(), message, ActionKeys.VIEW)) {
+			lastIntervalStart += max;
+			listNotExhausted = (messageList.size() == max);
 
-				messages.add(message);
+			while (itr.hasNext() && (messages.size() < max)) {
+				MBMessage message = itr.next();
+
+				if (MBMessagePermission.contains(
+						getPermissionChecker(), message, ActionKeys.VIEW)) {
+
+					messages.add(message);
+				}
 			}
 		}
 
@@ -423,19 +434,30 @@ public class MBMessageServiceImpl extends MBMessageServiceBaseImpl {
 
 		List<MBMessage> messages = new ArrayList<MBMessage>();
 
+		int lastIntervalStart = 0;
+		boolean listNotExhausted = true;
 		MessageCreateDateComparator comparator =
 			new MessageCreateDateComparator(false, false);
 
-		Iterator<MBMessage> itr = mbMessageLocalService.getCompanyMessages(
-			companyId, 0, _MAX_END, comparator).iterator();
+		while ((messages.size() < max) && listNotExhausted) {
+			List<MBMessage> messageList =
+				mbMessageLocalService.getCompanyMessages(
+					companyId, lastIntervalStart, lastIntervalStart + max,
+					comparator);
 
-		while (itr.hasNext() && (messages.size() < max)) {
-			MBMessage message = itr.next();
+			Iterator<MBMessage> itr = messageList.iterator();
 
-			if (MBMessagePermission.contains(
-					getPermissionChecker(), message, ActionKeys.VIEW)) {
+			lastIntervalStart += max;
+			listNotExhausted = (messageList.size() == max);
 
-				messages.add(message);
+			while (itr.hasNext() && (messages.size() < max)) {
+				MBMessage message = itr.next();
+
+				if (MBMessagePermission.contains(
+						getPermissionChecker(), message, ActionKeys.VIEW)) {
+
+					messages.add(message);
+				}
 			}
 		}
 
@@ -455,19 +477,30 @@ public class MBMessageServiceImpl extends MBMessageServiceBaseImpl {
 
 		List<MBMessage> messages = new ArrayList<MBMessage>();
 
+		int lastIntervalStart = 0;
+		boolean listNotExhausted = true;
 		MessageCreateDateComparator comparator =
 			new MessageCreateDateComparator(false, true);
 
-		Iterator<MBMessage> itr = mbMessageLocalService.getGroupMessages(
-			groupId, 0, _MAX_END, comparator).iterator();
+		while ((messages.size() < max) && listNotExhausted) {
+			List<MBMessage> messageList =
+				mbMessageLocalService.getGroupMessages(
+					groupId, lastIntervalStart, lastIntervalStart + max,
+					comparator);
 
-		while (itr.hasNext() && (messages.size() < max)) {
-			MBMessage message = itr.next();
+			Iterator<MBMessage> itr = messageList.iterator();
 
-			if (MBMessagePermission.contains(
-					getPermissionChecker(), message, ActionKeys.VIEW)) {
+			lastIntervalStart += max;
+			listNotExhausted = (messageList.size() == max);
 
-				messages.add(message);
+			while (itr.hasNext() && (messages.size() < max)) {
+				MBMessage message = itr.next();
+
+				if (MBMessagePermission.contains(
+						getPermissionChecker(), message, ActionKeys.VIEW)) {
+
+					messages.add(message);
+				}
 			}
 		}
 
@@ -494,19 +527,30 @@ public class MBMessageServiceImpl extends MBMessageServiceBaseImpl {
 
 		List<MBMessage> messages = new ArrayList<MBMessage>();
 
+		int lastIntervalStart = 0;
+		boolean listNotExhausted = true;
 		MessageCreateDateComparator comparator =
 			new MessageCreateDateComparator(false, true);
 
-		Iterator<MBMessage> itr = mbMessageLocalService.getGroupMessages(
-			groupId, userId, 0, _MAX_END, comparator).iterator();
+		while ((messages.size() < max) && listNotExhausted) {
+			List<MBMessage> messageList =
+				mbMessageLocalService.getGroupMessages(
+					groupId, userId, lastIntervalStart, lastIntervalStart + max,
+					comparator);
 
-		while (itr.hasNext() && (messages.size() < max)) {
-			MBMessage message = itr.next();
+			Iterator<MBMessage> itr = messageList.iterator();
 
-			if (MBMessagePermission.contains(
-					getPermissionChecker(), message, ActionKeys.VIEW)) {
+			lastIntervalStart += max;
+			listNotExhausted = (messageList.size() == max);
 
-				messages.add(message);
+			while (itr.hasNext() && (messages.size() < max)) {
+				MBMessage message = itr.next();
+
+				if (MBMessagePermission.contains(
+						getPermissionChecker(), message, ActionKeys.VIEW)) {
+
+					messages.add(message);
+				}
 			}
 		}
 
@@ -796,8 +840,6 @@ public class MBMessageServiceImpl extends MBMessageServiceBaseImpl {
 			throw new SystemException(ioe);
 		}
 	}
-
-	private static final int _MAX_END = 200;
 
 	private static final int _RSS_ABSTRACT_LENGTH = GetterUtil.getInteger(
 		PropsUtil.get(PropsKeys.MESSAGE_BOARDS_RSS_ABSTRACT_LENGTH));

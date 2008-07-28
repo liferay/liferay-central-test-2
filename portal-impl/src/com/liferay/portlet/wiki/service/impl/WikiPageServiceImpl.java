@@ -141,16 +141,26 @@ public class WikiPageServiceImpl extends WikiPageServiceBaseImpl {
 
 		List<WikiPage> pages = new ArrayList<WikiPage>();
 
-		Iterator<WikiPage> itr = wikiPageLocalService.getPages(nodeId, true, 0,
-			_MAX_END).iterator();
+		int lastIntervalStart = 0;
+		boolean listNotExhausted = true;
 
-		while (itr.hasNext() && (pages.size() < max)) {
-			WikiPage page = itr.next();
+		while ((pages.size() < max) && listNotExhausted) {
+			List<WikiPage> pageList = wikiPageLocalService.getPages(
+				nodeId, true, lastIntervalStart, lastIntervalStart + max);
 
-			if (WikiPagePermission.contains(getPermissionChecker(), page,
-					ActionKeys.VIEW)) {
+			Iterator<WikiPage> itr = pageList.iterator();
 
-				pages.add(page);
+			lastIntervalStart += max;
+			listNotExhausted = (pageList.size() == max);
+
+			while (itr.hasNext() && (pages.size() < max)) {
+				WikiPage page = itr.next();
+
+				if (WikiPagePermission.contains(getPermissionChecker(), page,
+						ActionKeys.VIEW)) {
+
+					pages.add(page);
+				}
 			}
 		}
 
@@ -410,8 +420,6 @@ public class WikiPageServiceImpl extends WikiPageServiceBaseImpl {
 			throw new SystemException(e);
 		}
 	}
-
-	private static final int _MAX_END = 200;
 
 	private static final int _RSS_ABSTRACT_LENGTH = GetterUtil.getInteger(
 		PropsUtil.get(PropsKeys.WIKI_RSS_ABSTRACT_LENGTH));

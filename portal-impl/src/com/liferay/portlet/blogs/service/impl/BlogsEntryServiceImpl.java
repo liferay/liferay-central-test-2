@@ -119,29 +119,32 @@ public class BlogsEntryServiceImpl extends BlogsEntryServiceBaseImpl {
 		throws PortalException, SystemException {
 
 		List<BlogsEntry> entries = new ArrayList<BlogsEntry>();
+
 		int lastIntervalStart = 0;
 		boolean listNotExhausted = true;
-		
-		while( (entries.size() < max) && listNotExhausted ) {
-			List<BlogsEntry> entryList = blogsEntryLocalService.getCompanyEntries(
-					companyId, false, lastIntervalStart, lastIntervalStart+max, 
-					new EntryDisplayDateComparator());
+
+		while ((entries.size() < max) && listNotExhausted) {
+			List<BlogsEntry> entryList =
+				blogsEntryLocalService.getCompanyEntries(
+					companyId, false, lastIntervalStart,
+					lastIntervalStart + max, new EntryDisplayDateComparator());
+
 			Iterator<BlogsEntry> itr = entryList.iterator();
 
 			lastIntervalStart += max;
-			listNotExhausted = ( entryList.size() == max ); 
-			
+			listNotExhausted = (entryList.size() == max);
+
 			while (itr.hasNext() && (entries.size() < max)) {
 				BlogsEntry entry = itr.next();
-	
+
 				if (BlogsEntryPermission.contains(
 						getPermissionChecker(), entry, ActionKeys.VIEW)) {
-	
+
 					entries.add(entry);
 				}
 			}
 		}
-		
+
 		return entries;
 	}
 
@@ -187,16 +190,27 @@ public class BlogsEntryServiceImpl extends BlogsEntryServiceBaseImpl {
 
 		List<BlogsEntry> entries = new ArrayList<BlogsEntry>();
 
-		Iterator<BlogsEntry> itr = blogsEntryLocalService.getGroupEntries(
-			groupId, false, 0, _MAX_END).iterator();
+		int lastIntervalStart = 0;
+		boolean listNotExhausted = true;
 
-		while (itr.hasNext() && (entries.size() < max)) {
-			BlogsEntry entry = itr.next();
+		while ((entries.size() < max) && listNotExhausted) {
+			List<BlogsEntry> entryList = blogsEntryLocalService.getGroupEntries(
+				groupId, false, lastIntervalStart,
+				lastIntervalStart + max);
 
-			if (BlogsEntryPermission.contains(
-					getPermissionChecker(), entry, ActionKeys.VIEW)) {
+			Iterator<BlogsEntry> itr = entryList.iterator();
 
-				entries.add(entry);
+			lastIntervalStart += max;
+			listNotExhausted = (entryList.size() == max);
+
+			while (itr.hasNext() && (entries.size() < max)) {
+				BlogsEntry entry = itr.next();
+
+				if (BlogsEntryPermission.contains(
+						getPermissionChecker(), entry, ActionKeys.VIEW)) {
+
+					entries.add(entry);
+				}
 			}
 		}
 
@@ -224,29 +238,31 @@ public class BlogsEntryServiceImpl extends BlogsEntryServiceBaseImpl {
 		throws PortalException, SystemException {
 
 		List<BlogsEntry> entries = new ArrayList<BlogsEntry>();
+
 		int lastIntervalStart = 0;
 		boolean listNotExhausted = true;
 
-		while( (entries.size() < max) && listNotExhausted ) {
-
+		while ((entries.size() < max) && listNotExhausted) {
 			List<BlogsEntry> entryList = blogsEntryFinder.findByOrganizationId(
-					organizationId, false, lastIntervalStart, lastIntervalStart+max);
+				organizationId, false, lastIntervalStart,
+				lastIntervalStart + max);
+
 			Iterator<BlogsEntry> itr = entryList.iterator();
 
 			lastIntervalStart += max;
-			listNotExhausted = ( entryList.size() == max ); 
-			
+			listNotExhausted = (entryList.size() == max);
+
 			while (itr.hasNext() && (entries.size() < max)) {
 				BlogsEntry entry = itr.next();
-	
+
 				if (BlogsEntryPermission.contains(
 						getPermissionChecker(), entry, ActionKeys.VIEW)) {
-	
+
 					entries.add(entry);
 				}
 			}
 		}
-		
+
 		return entries;
 	}
 
@@ -372,8 +388,6 @@ public class BlogsEntryServiceImpl extends BlogsEntryServiceBaseImpl {
 			throw new SystemException(ioe);
 		}
 	}
-
-	private static final int _MAX_END = 200;
 
 	private static final int _RSS_ABSTRACT_LENGTH = GetterUtil.getInteger(
 		PropsUtil.get(PropsKeys.BLOGS_RSS_ABSTRACT_LENGTH));
