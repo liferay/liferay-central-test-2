@@ -310,14 +310,14 @@ public class WikiPageServiceImpl extends WikiPageServiceBaseImpl {
 			String author = PortalUtil.getUserName(
 				page.getUserId(), page.getUserName());
 
-			String syndTitle =
+			String title =
 				page.getTitle() + StringPool.SPACE + page.getVersion();
 
 			if (page.isMinorEdit()) {
-				syndTitle +=
+				title +=
 					StringPool.SPACE + StringPool.OPEN_PARENTHESIS +
-					LanguageUtil.get(locale, "minor-edit") +
-					StringPool.CLOSE_PARENTHESIS;
+						LanguageUtil.get(locale, "minor-edit") +
+							StringPool.CLOSE_PARENTHESIS;
 			}
 
 			String link = entryURL;
@@ -325,7 +325,7 @@ public class WikiPageServiceImpl extends WikiPageServiceBaseImpl {
 			SyndEntry syndEntry = new SyndEntryImpl();
 
 			syndEntry.setAuthor(author);
-			syndEntry.setTitle(syndTitle);
+			syndEntry.setTitle(title);
 			syndEntry.setPublishedDate(page.getCreateDate());
 
 			SyndContent syndContent = new SyndContentImpl();
