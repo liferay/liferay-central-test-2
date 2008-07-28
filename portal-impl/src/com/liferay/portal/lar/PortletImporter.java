@@ -551,8 +551,8 @@ public class PortletImporter {
 
 				for (ObjectValuePair<String, byte[]> entry : entries) {
 					if (entry.getValue().length > 0) {
-						MBMessage message =
-							(MBMessage)context.fromXML(entry.getValue());
+						MBMessage message = (MBMessage)context.fromXML(
+							entry.getValue());
 
 						messages.add(message);
 					}
@@ -592,8 +592,8 @@ public class PortletImporter {
 
 				for (ObjectValuePair<String, byte[]> entry : entries) {
 					if (entry.getValue().length > 0) {
-						RatingsEntry rating =
-							(RatingsEntry)context.fromXML(entry.getValue());
+						RatingsEntry rating = (RatingsEntry)context.fromXML(
+							entry.getValue());
 
 						ratings.add(rating);
 					}

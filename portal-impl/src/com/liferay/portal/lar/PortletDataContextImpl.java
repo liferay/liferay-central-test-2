@@ -430,7 +430,7 @@ public class PortletDataContextImpl implements PortletDataContext {
 		List<ObjectValuePair<String, byte[]>> folderEntries =
 			getZipReader().getFolderEntries(path);
 
-		if (folderEntries == null && path.startsWith(StringPool.SLASH)) {
+		if ((folderEntries == null) && path.startsWith(StringPool.SLASH)) {
 			folderEntries = getZipReader().getFolderEntries(path.substring(1));
 		}
 

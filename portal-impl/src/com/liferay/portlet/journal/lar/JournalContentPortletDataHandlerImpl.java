@@ -289,18 +289,18 @@ public class JournalContentPortletDataHandlerImpl
 				}
 			}
 
-			Element fileEntriesEl = root.element("dl-file-entries");
+			Element dlFileEntriesEl = root.element("dl-file-entries");
 
-			List<Element> fileEntryEls = Collections.EMPTY_LIST;
+			List<Element> dlFileEntryEls = Collections.EMPTY_LIST;
 
-			if (fileEntriesEl != null) {
-				fileEntryEls = dlFoldersEl.elements("file-entry");
+			if (dlFileEntriesEl != null) {
+				dlFileEntryEls = dlFoldersEl.elements("file-entry");
 			}
 
 			Map<String, String> fileEntryNames = context.getNewPrimaryKeysMap(
 				DLFileEntry.class);
 
-			for (Element fileEntryEl : fileEntryEls) {
+			for (Element fileEntryEl : dlFileEntryEls) {
 				String path = fileEntryEl.attributeValue("path");
 				String binPath = fileEntryEl.attributeValue("bin-path");
 
@@ -315,13 +315,14 @@ public class JournalContentPortletDataHandlerImpl
 			}
 
 			Element dlFileRanksEl = root.element("dl-file-ranks");
-			List<Element> fileRankEls = Collections.EMPTY_LIST;
+
+			List<Element> dlFileRankEls = Collections.EMPTY_LIST;
 
 			if (dlFileRanksEl != null) {
-				fileRankEls = dlFileRanksEl.elements("file-rank");
+				dlFileRankEls = dlFileRanksEl.elements("file-rank");
 			}
 
-			for (Element fileRankEl : fileRankEls) {
+			for (Element fileRankEl : dlFileRankEls) {
 				String path = fileRankEl.attributeValue("path");
 
 				if (context.isPathNotProcessed(path)) {
@@ -335,16 +336,16 @@ public class JournalContentPortletDataHandlerImpl
 
 			Element igFoldersEl = root.element("ig-folders");
 
-			List<Element> folderEls = Collections.EMPTY_LIST;
+			List<Element> igFolderEls = Collections.EMPTY_LIST;
 
 			if (igFoldersEl != null) {
-				folderEls = igFoldersEl.elements("folder");
+				igFolderEls = igFoldersEl.elements("folder");
 			}
 
-			Map<Long, Long> folderPKs = context.getNewPrimaryKeysMap(
+			Map<Long, Long> igFolderPKs = context.getNewPrimaryKeysMap(
 				IGFolder.class);
 
-			for (Element folderEl : folderEls) {
+			for (Element folderEl : igFolderEls) {
 				String path = folderEl.attributeValue("path");
 
 				if (context.isPathNotProcessed(path)) {
@@ -352,19 +353,19 @@ public class JournalContentPortletDataHandlerImpl
 						path);
 
 					IGPortletDataHandlerImpl.importFolder(
-						context, folderPKs, folder);
+						context, igFolderPKs, folder);
 				}
 			}
 
 			Element igImagesEl = root.element("ig-images");
 
-			List<Element> imageEls = Collections.EMPTY_LIST;
+			List<Element> igImageEls = Collections.EMPTY_LIST;
 
 			if (igImagesEl != null) {
-				imageEls = igImagesEl.elements("image");
+				igImageEls = igImagesEl.elements("image");
 			}
 
-			for (Element imageEl : imageEls) {
+			for (Element imageEl : igImageEls) {
 				String path = imageEl.attributeValue("path");
 				String binPath = imageEl.attributeValue("bin-path");
 
@@ -372,7 +373,7 @@ public class JournalContentPortletDataHandlerImpl
 					IGImage image = (IGImage)context.getZipEntryAsObject(path);
 
 					IGPortletDataHandlerImpl.importImage(
-						context, folderPKs, image, binPath);
+						context, igFolderPKs, image, binPath);
 				}
 			}
 
