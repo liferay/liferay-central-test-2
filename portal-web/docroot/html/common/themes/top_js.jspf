@@ -153,26 +153,6 @@
 		Liferay.currentURL = '<%= currentURL %>';
 		Liferay.currentURLEncoded = '<%= HttpUtil.encodeURL(currentURL) %>';
 
-		function showShare(url, title) {
-
-			jQuery.ajax(
-				{
-					url: url,
-					success: function(response) {
-						Liferay.Popup(
-							{
-								width: 700,
-								modal: true,
-								message: response,
-								position: ['center', 100],
-								title: title
-							}
-						);
-					}
-				}
-			);
-		}
-
 		jQuery(
 			function() {
 				Liferay.Util.addInputType();
