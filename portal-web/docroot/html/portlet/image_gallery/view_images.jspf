@@ -70,7 +70,7 @@
 			noTitleBar: true,
 			message: html,
 			messageId: messageId,
-			onBeforeClose: function() {
+			onClose: function() {
 				var buttons = jQuery("#<portlet:namespace />buttons_" + id);
 
 				jQuery("#<portlet:namespace />buttonsContainer_" + id).append(buttons);
