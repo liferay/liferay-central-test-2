@@ -87,8 +87,12 @@
 					<liferay-ui:message key="robots" />
 				</td>
 				<td>
-				        <% String tmpProperty = "typeSettingsProperties(meta-robots_" + defaultLanguageId + ")"; %>
-					<textarea class="lfr-textarea" name="TypeSettingsProperties(meta-robots_<%= defaultLanguageId %>)" wrap="soft" style="width: 300px;"><bean:write name="SEL_LAYOUT" property="<%= tmpProperty %>" /></textarea>
+
+					<%
+					String selLayoutProperty = "typeSettingsProperties(meta-robots_" + defaultLanguageId + ")";
+					%>
+
+					<textarea class="lfr-textarea" name="TypeSettingsProperties(meta-robots_<%= defaultLanguageId %>)" wrap="soft" style="width: 300px;"><bean:write name="SEL_LAYOUT" property="<%= selLayoutProperty %>" /></textarea>
 				</td>
 				<td>
 
@@ -117,8 +121,13 @@
 				<td>
 					<liferay-ui:message key="description" />
 				</td>
-				<td>    <% tmpProperty = "typeSettingsProperties(meta-description_" + defaultLanguageId + ")"; %>
-					<textarea class="lfr-textarea" name="TypeSettingsProperties(meta-description_<%= defaultLanguageId %>)" wrap="soft" style="width: 300px;"><bean:write name="SEL_LAYOUT" property="<%=tmpProperty %>" /></textarea>
+				<td>
+
+					<%
+					selLayoutProperty = "typeSettingsProperties(meta-description_" + defaultLanguageId + ")";
+					%>
+
+					<textarea class="lfr-textarea" name="TypeSettingsProperties(meta-description_<%= defaultLanguageId %>)" wrap="soft" style="width: 300px;"><bean:write name="SEL_LAYOUT" property="<%= selLayoutProperty %>" /></textarea>
 				</td>
 				<td>
 
@@ -142,8 +151,13 @@
 				<td>
 					<liferay-ui:message key="keywords" />
 				</td>
-				<td>    <% tmpProperty = "typeSettingsProperties(meta-keywords_" + defaultLanguageId + ")"; %>
-					<textarea class="lfr-textarea" name="TypeSettingsProperties(meta-keywords_<%= defaultLanguageId %>)" wrap="soft" style="width: 300px;"><bean:write name="SEL_LAYOUT" property="<%=tmpProperty %>" /></textarea>
+				<td>
+
+					<%
+					selLayoutProperty = "typeSettingsProperties(meta-keywords_" + defaultLanguageId + ")";
+					%>
+
+					<textarea class="lfr-textarea" name="TypeSettingsProperties(meta-keywords_<%= defaultLanguageId %>)" wrap="soft" style="width: 300px;"><bean:write name="SEL_LAYOUT" property="<%= selLayoutProperty %>" /></textarea>
 				</td>
 				<td>
 
