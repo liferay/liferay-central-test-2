@@ -87,7 +87,8 @@
 					<liferay-ui:message key="robots" />
 				</td>
 				<td>
-					<textarea class="lfr-textarea" name="TypeSettingsProperties(meta-robots_<%= defaultLanguageId %>)" wrap="soft" style="width: 300px;"><bean:write name="SEL_LAYOUT" property="<%= "typeSettingsProperties(meta-robots_" + defaultLanguageId + ")" %>" /></textarea>
+				        <% String tmpProperty = "typeSettingsProperties(meta-robots_" + defaultLanguageId + ")"; %>
+					<textarea class="lfr-textarea" name="TypeSettingsProperties(meta-robots_<%= defaultLanguageId %>)" wrap="soft" style="width: 300px;"><bean:write name="SEL_LAYOUT" property="<%= tmpProperty %>" /></textarea>
 				</td>
 				<td>
 
@@ -116,8 +117,8 @@
 				<td>
 					<liferay-ui:message key="description" />
 				</td>
-				<td>
-					<textarea class="lfr-textarea" name="TypeSettingsProperties(meta-description_<%= defaultLanguageId %>)" wrap="soft" style="width: 300px;"><bean:write name="SEL_LAYOUT" property="<%= "typeSettingsProperties(meta-description_" + defaultLanguageId + ")" %>" /></textarea>
+				<td>    <% tmpProperty = "typeSettingsProperties(meta-description_" + defaultLanguageId + ")"; %>
+					<textarea class="lfr-textarea" name="TypeSettingsProperties(meta-description_<%= defaultLanguageId %>)" wrap="soft" style="width: 300px;"><bean:write name="SEL_LAYOUT" property="<%=tmpProperty %>" /></textarea>
 				</td>
 				<td>
 
@@ -141,8 +142,8 @@
 				<td>
 					<liferay-ui:message key="keywords" />
 				</td>
-				<td>
-					<textarea class="lfr-textarea" name="TypeSettingsProperties(meta-keywords_<%= defaultLanguageId %>)" wrap="soft" style="width: 300px;"><bean:write name="SEL_LAYOUT" property="<%= "typeSettingsProperties(meta-keywords_" + defaultLanguageId + ")" %>" /></textarea>
+				<td>    <% tmpProperty = "typeSettingsProperties(meta-keywords_" + defaultLanguageId + ")"; %>
+					<textarea class="lfr-textarea" name="TypeSettingsProperties(meta-keywords_<%= defaultLanguageId %>)" wrap="soft" style="width: 300px;"><bean:write name="SEL_LAYOUT" property="<%=tmpProperty %>" /></textarea>
 				</td>
 				<td>
 

@@ -93,7 +93,8 @@ UserGroup userGroup = (UserGroup)row.getObject();
 
 	<c:if test="<%= portletName.equals(PortletKeys.ENTERPRISE_ADMIN) || portletName.equals(PortletKeys.ORGANIZATION_ADMIN) %>">
 		<c:if test="<%= UserGroupPermissionUtil.contains(permissionChecker, userGroup.getUserGroupId(), ActionKeys.DELETE) %>">
-			<liferay-ui:icon image="delete" url='<%= "javascript: " + renderResponse.getNamespace() + "deleteUserGroup('" + userGroup.getUserGroupId() + "');" %>' />
+			<% String deleteURL = "javascript: " + renderResponse.getNamespace() + "deleteUserGroup('" + userGroup.getUserGroupId() + "');"; %>
+			<liferay-ui:icon image="delete" url='<%=deleteURL %>' />
 		</c:if>
 	</c:if>
 </liferay-ui:icon-menu>
