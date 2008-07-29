@@ -5,18 +5,21 @@
 	<bean id="com.liferay.portal.mirage.ArticleImageService" class="com.liferay.portal.mirage.service.ArticleImageServiceImpl" lazy-init="true" />
 	<bean id="com.liferay.portal.mirage.ArticleResourceService" class="com.liferay.portal.mirage.service.ArticleResourceServiceImpl" lazy-init="true" />
 	<bean id="com.liferay.portal.mirage.ContentFeedService" class="com.liferay.portal.mirage.service.ContentFeedServiceImpl" lazy-init="true" />
+	<bean id="com.liferay.portal.mirage.ContentSearchService" class="com.liferay.portal.mirage.service.ContentSearchServiceImpl" lazy-init="true" />
 	<bean id="com.liferay.portal.mirage.ContentService" class="com.liferay.portal.mirage.service.ContentServiceImpl" lazy-init="true" />
 	<bean id="com.liferay.portal.mirage.ContentTypeService" class="com.liferay.portal.mirage.service.ContentTypeServiceImpl" lazy-init="true" />
 	<bean id="com.liferay.portal.mirage.WorkflowService" class="com.liferay.portal.mirage.service.WorkflowServiceImpl" lazy-init="true" />
 	<bean id="com.liferay.portal.mirage.aop.JournalArticleImageLocalServiceInterceptor" class="com.liferay.portal.mirage.aop.JournalArticleImageLocalServiceInterceptor" lazy-init="true" />
 	<bean id="com.liferay.portal.mirage.aop.JournalArticleLocalServiceInterceptor" class="com.liferay.portal.mirage.aop.JournalArticleLocalServiceInterceptor" lazy-init="true" />
 	<bean id="com.liferay.portal.mirage.aop.JournalArticleResourceLocalServiceInterceptor" class="com.liferay.portal.mirage.aop.JournalArticleResourceLocalServiceInterceptor" lazy-init="true" />
+	<bean id="com.liferay.portal.mirage.aop.JournalContentSearchLocalServiceInterceptor" class="com.liferay.portal.mirage.aop.JournalContentSearchLocalServiceInterceptor" lazy-init="true" />
 	<bean id="com.liferay.portal.mirage.aop.JournalFeedLocalServiceInterceptor" class="com.liferay.portal.mirage.aop.JournalFeedLocalServiceInterceptor" lazy-init="true" />
 	<bean id="com.liferay.portal.mirage.aop.JournalStructureLocalServiceInterceptor" class="com.liferay.portal.mirage.aop.JournalStructureLocalServiceInterceptor" lazy-init="true" />
 	<bean id="com.liferay.portal.mirage.aop.JournalTemplateLocalServiceInterceptor" class="com.liferay.portal.mirage.aop.JournalTemplateLocalServiceInterceptor" lazy-init="true" />
 	<bean id="com.liferay.portlet.journal.service.impl.JournalArticleImageLocalServiceImpl" class="com.liferay.portlet.journal.service.impl.JournalArticleImageLocalServiceImpl" lazy-init="true" />
 	<bean id="com.liferay.portlet.journal.service.impl.JournalArticleLocalServiceImpl" class="com.liferay.portlet.journal.service.impl.JournalArticleLocalServiceImpl" lazy-init="true" />
 	<bean id="com.liferay.portlet.journal.service.impl.JournalArticleResourceLocalServiceImpl" class="com.liferay.portlet.journal.service.impl.JournalArticleResourceLocalServiceImpl" lazy-init="true" />
+	<bean id="com.liferay.portlet.journal.service.impl.JournalContentSearchLocalServiceImpl" class="com.liferay.portlet.journal.service.impl.JournalContentSearchLocalServiceImpl" lazy-init="true" />
 	<bean id="com.liferay.portlet.journal.service.impl.JournalFeedLocalServiceImpl" class="com.liferay.portlet.journal.service.impl.JournalFeedLocalServiceImpl" lazy-init="true" />
 	<bean id="com.liferay.portlet.journal.service.impl.JournalStructureLocalServiceImpl" class="com.liferay.portlet.journal.service.impl.JournalStructureLocalServiceImpl" lazy-init="true" />
 	<bean id="com.liferay.portlet.journal.service.impl.JournalTemplateLocalServiceImpl" class="com.liferay.portlet.journal.service.impl.JournalTemplateLocalServiceImpl" lazy-init="true" />
@@ -57,6 +60,19 @@
 		</property>
 		<property name="target">
 			<ref bean="com.liferay.portlet.journal.service.impl.JournalArticleResourceLocalServiceImpl" />
+		</property>
+	</bean>
+	<bean id="com.liferay.portlet.journal.service.JournalContentSearchLocalService.impl" class="org.springframework.aop.framework.ProxyFactoryBean" lazy-init="true">
+		<property name="proxyInterfaces">
+			<value>com.liferay.portlet.journal.service.JournalContentSearchLocalService</value>
+		</property>
+		<property name="interceptorNames">
+			<list>
+				<value>com.liferay.portal.mirage.aop.JournalContentSearchLocalServiceInterceptor</value>
+			</list>
+		</property>
+		<property name="target">
+			<ref bean="com.liferay.portlet.journal.service.impl.JournalContentSearchLocalServiceImpl" />
 		</property>
 	</bean>
 	<bean id="com.liferay.portlet.journal.service.JournalFeedLocalService.impl" class="org.springframework.aop.framework.ProxyFactoryBean" lazy-init="true">

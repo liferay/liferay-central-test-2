@@ -90,6 +90,16 @@ public class MirageServiceFactory {
 		return _contentFeedService;
 	}
 
+	public static BinaryContentService getContentSearchService() {
+		if (_contentSearchService == null) {
+			_contentSearchService =
+				(BinaryContentService)PortalBeanLocatorUtil.locate(
+					_CONTENT_SEARCH_SERVICE);
+		}
+
+		return _contentSearchService;
+	}
+
 	public static ContentService getContentService() {
 		if (_contentService == null) {
 			_contentService =
@@ -129,6 +139,9 @@ public class MirageServiceFactory {
 	private static final String _CONTENT_FEED_SERVICE =
 		"com.liferay.portal.mirage.ContentFeedService";
 
+	private static final String _CONTENT_SEARCH_SERVICE =
+		"com.liferay.portal.mirage.ContentSearchService";
+
 	private static final String _CONTENT_SERVICE =
 		"com.liferay.portal.mirage.ContentService";
 
@@ -141,6 +154,7 @@ public class MirageServiceFactory {
 	private static BinaryContentService _articleImageService;
 	private static BinaryContentService _articleResourceService;
 	private static ContentFeedService _contentFeedService;
+	private static BinaryContentService _contentSearchService;
 	private static ContentService _contentService;
 	private static ContentTypeService _contentTypeService;
 	private static WorkflowService _workflowService;
