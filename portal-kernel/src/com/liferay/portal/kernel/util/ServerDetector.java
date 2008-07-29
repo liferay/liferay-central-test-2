@@ -38,10 +38,10 @@ public class ServerDetector {
 
 	public static final String GERONIMO_ID = "geronimo";
 
-	public static final String GLASSFISH_SYSTEM_PROPERTY = 
-		"com.sun.aas.instanceRoot";
-
 	public static final String GLASSFISH_ID = "glassfish";
+
+	public static final String GLASSFISH_SYSTEM_PROPERTY =
+		"com.sun.aas.instanceRoot";
 
 	public static final String JBOSS_CLASS = "/org/jboss/Main.class";
 
@@ -176,12 +176,13 @@ public class ServerDetector {
 	public static boolean isGlassfish() {
 		ServerDetector sd = _instance;
 
-		if (sd._glassfish == null) {			
-			String propVal = System.getProperty(GLASSFISH_SYSTEM_PROPERTY);
+		if (sd._glassfish == null) {
+			String value = System.getProperty(GLASSFISH_SYSTEM_PROPERTY);
 
-			if (propVal != null) {
+			if (value != null) {
 				sd._glassfish = Boolean.TRUE;
-			} else {
+			}
+			else {
 				sd._glassfish = Boolean.FALSE;
 			}
 		}
