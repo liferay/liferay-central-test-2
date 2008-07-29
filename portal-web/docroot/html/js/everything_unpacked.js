@@ -17415,8 +17415,6 @@ Liferay.Portlet = {
 		var beforePortletLoaded = options.beforePortletLoaded;
 		var onComplete = options.onComplete;
 
-		var refreshPortletList = getRefreshPortletList();
-
 		var container = jQuery('.lfr-portlet-column:first');
 
 		if (!container.length) {
@@ -17444,46 +17442,37 @@ Liferay.Portlet = {
 			p_p_col_id: currentColumnId,
 			p_p_col_pos: portletPosition,
 			doAsUserId: doAsUserId,
+			dataType: 'json',
 			cmd: 'add'
 		};
 
-		if (refreshPortletList["_" + portletId]) {
-			data.referer = Liferay.currentURL;
-			data.refresh = 1;
+		var firstPortlet = container.find('.portlet-boundary:first');
+		var hasStaticPortlet = (firstPortlet.length && firstPortlet[0].isStatic);
 
-			if (plid) {
-				location.href = url + '?' + jQuery.param(data);
-			}
-		}
-		else {
-			var firstPortlet = container.find('.portlet-boundary:first');
-			var hasStaticPortlet = (firstPortlet.length && firstPortlet[0].isStatic);
-
-			if (!options.placeHolder && !options.plid) {
-				if (!hasStaticPortlet) {
-					container.prepend(placeHolder);
-				}
-				else {
-					firstPortlet.after(placeHolder);
-				}
-			}
-
-			if (themeDisplay.isFreeformLayout()) {
+		if (!options.placeHolder && !options.plid) {
+			if (!hasStaticPortlet) {
 				container.prepend(placeHolder);
 			}
-
-			data.currentURL = Liferay.currentURL;
-
-			return instance.addHTML(
-				{
-					beforePortletLoaded: beforePortletLoaded,
-					data: data,
-					url: url,
-					placeHolder: placeHolder[0],
-					onComplete: onComplete
-				}
-			);
+			else {
+				firstPortlet.after(placeHolder);
+			}
 		}
+
+		if (themeDisplay.isFreeformLayout()) {
+			container.prepend(placeHolder);
+		}
+
+		data.currentURL = Liferay.currentURL;
+
+		return instance.addHTML(
+			{
+				beforePortletLoaded: beforePortletLoaded,
+				data: data,
+				url: url,
+				placeHolder: placeHolder[0],
+				onComplete: onComplete
+			}
+		);
 	},
 
 	addHTML: function(options) {
@@ -17542,8 +17531,14 @@ Liferay.Portlet = {
 			{
 				url: url,
 				data: data,
-				complete: function(xHR) {
-					addPortletReturn(xHR.responseText);
+				dataType: 'json',
+				success: function(obj) {
+					if (obj.refresh) {
+						location.reload();
+					}
+					else {
+						addPortletReturn(obj.portletHTML);
+					}
 				}
 			}
 		);
