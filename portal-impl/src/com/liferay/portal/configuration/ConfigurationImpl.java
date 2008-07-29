@@ -262,11 +262,16 @@ public class ConfigurationImpl
 		// If the resource is located inside of a .jar, then
 		// EasyConf needs the jar:file: prefix appended to
 		// the path.  Use URL.toExternalForm() to achieve that.
-
-		if (url.getProtocol().equals("jar")) {
-			name = url.toExternalForm();
-		}
-		else {
+		// When running under WebLogic, the protocol returned is 
+		// zip; when running under WebSphere, the protocol returned 
+		// is wsjar. 
+		String protocol = url.getProtocol();
+		if (protocol.equals("jar") 
+			|| protocol.equals("zip") 
+			|| protocol.equals("wsjar")) {
+		    name = url.toExternalForm();
+		    
+		} else {
 			try {
 				name = new URI(url.getPath()).getPath();
 			}
