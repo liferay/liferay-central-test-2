@@ -259,19 +259,20 @@ public class ConfigurationImpl
 	protected String getFileName(ClassLoader classLoader, String name) {
 		URL url = classLoader.getResource(name + ".properties");
 
-		// If the resource is located inside of a .jar, then
-		// EasyConf needs the jar:file: prefix appended to
-		// the path.  Use URL.toExternalForm() to achieve that.
-		// When running under WebLogic, the protocol returned is 
-		// zip; when running under WebSphere, the protocol returned 
-		// is wsjar. 
+		// If the resource is located inside of a JAR, then EasyConf needs the
+		// "jar:file:" prefix appended to the path. Use URL.toExternalForm() to
+		// achieve that. When running under WebLogic, the protocol returned is
+		// "zip". When running under WebSphere, the protocol returned is
+		// "wsjar".
+
 		String protocol = url.getProtocol();
-		if (protocol.equals("jar") 
-			|| protocol.equals("zip") 
-			|| protocol.equals("wsjar")) {
-		    name = url.toExternalForm();
-		    
-		} else {
+
+		if (protocol.equals("jar") || protocol.equals("wsjar") ||
+			protocol.equals("zip")) {
+
+			name = url.toExternalForm();
+		}
+		else {
 			try {
 				name = new URI(url.getPath()).getPath();
 			}
