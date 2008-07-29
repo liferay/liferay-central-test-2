@@ -258,11 +258,11 @@ public class UpdateLayoutAction extends Action {
 				renderPortletAction.execute(
 					mapping, form, dynamicRequest, stringResponse);
 
-				jsonObj.put("refresh", "false");
-				jsonObj.put("portletHTML", stringResponse.getString());
+				jsonObj.put("refresh", false);
+				jsonObj.put("portletHTML", stringResponse.getString().trim());
 			}
 			else {
-				jsonObj.put("refresh", "true");
+				jsonObj.put("refresh", true);
 			}
 
 			ServletResponseUtil.write(response, jsonObj.toString());

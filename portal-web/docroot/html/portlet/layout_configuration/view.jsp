@@ -32,36 +32,6 @@
 	refererURL.setParameter("updateLayout", "true");
 	%>
 
-	<script type="text/javascript">
-		function getRefreshPortletList() {
-
-			<%
-			List<Portlet> allPortlets = PortletLocalServiceUtil.getPortlets(company.getCompanyId(), false, false);
-
-			List<String> nonAjaxPortletIds = new ArrayList<String>();
-
-			for (Portlet portlet : allPortlets) {
-				if (!portlet.isAjaxable()) {
-					nonAjaxPortletIds.add(portlet.getPortletId());
-				}
-			}
-
-			StringBuilder portletList = new StringBuilder();
-
-			for (int i = 0; i < nonAjaxPortletIds.size(); i++) {
-				portletList.append(StringPool.APOSTROPHE);
-				portletList.append(StringPool.UNDERLINE);
-				portletList.append(nonAjaxPortletIds.get(i));
-				portletList.append(StringPool.APOSTROPHE);
-				portletList.append(":true");
-				portletList.append((i < nonAjaxPortletIds.size() - 1) ? StringPool.COMMA : StringPool.BLANK);
-			}
-			%>
-
-			return {<%= portletList.toString() %>};
-		}
-	</script>
-
 	<div id="portal_add_content">
 		<div class="portal-add-content">
 			<form action="<%= themeDisplay.getPathMain() %>/portal/update_layout?p_l_id=<%= plid %>" class="uni-form" method="post" name="<portlet:namespace />fm">
