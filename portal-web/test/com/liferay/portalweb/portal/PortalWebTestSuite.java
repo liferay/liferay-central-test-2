@@ -32,6 +32,7 @@ import com.liferay.portalweb.portlet.assetpublisher.AssetPublisherTests;
 import com.liferay.portalweb.portlet.biblegateway.BibleGatewayTests;
 import com.liferay.portalweb.portlet.blogs.BlogsTests;
 import com.liferay.portalweb.portlet.blogsaggregator.BlogsAggregatorTests;
+import com.liferay.portalweb.portlet.bookmarks.BookmarksTests;
 import com.liferay.portalweb.portlet.breadcrumb.BreadcrumbTests;
 import com.liferay.portalweb.portlet.calendar.CalendarTests;
 import com.liferay.portalweb.portlet.communities.CommunitiesTests;
@@ -116,7 +117,7 @@ public class PortalWebTestSuite extends BaseTests {
 		addTestSuite(BlogsTests.class);
 		addTestSuite(BlogsAggregatorTests.class);
 		addTestSuite(AssetPublisherTests.class);
-		//addTestSuite(BookmarksTests.class);
+		addTestSuite(BookmarksTests.class);
 		addTestSuite(BreadcrumbTests.class);
 		addTestSuite(CalendarTests.class);
 		//addTestSuite(ChatTests.class);
