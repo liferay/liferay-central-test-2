@@ -74,13 +74,6 @@ public class PortletLocalServiceUtil {
 		portletLocalService.deletePortlet(portlet);
 	}
 
-	public static com.liferay.portal.model.Portlet deployRemotePortlet(
-		com.liferay.portal.model.Portlet remotePortlet) {
-		PortletLocalService portletLocalService = PortletLocalServiceFactory.getService();
-
-		return portletLocalService.deployRemotePortlet(remotePortlet);
-	}
-
 	public static java.util.List<Object> dynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery)
 		throws com.liferay.portal.SystemException {

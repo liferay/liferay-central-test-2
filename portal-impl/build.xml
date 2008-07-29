@@ -9,43 +9,8 @@
 
 	<target name="clean">
 		<delete dir="classes" />
-		<delete dir="generated"/>
-		<delete file="wsrp-generated.jar"/>
-		
+
 		<antcall target="build-common-java.clean" />
-	</target>
-
-	<taskdef name="xjc" classname="com.sun.tools.xjc.XJCTask">
-		<classpath refid="project.classpath"/>
-	</taskdef>
-
-	<target name="generate-wsrp-classes">
-		<mkdir dir="generated/src"/>
-		<xjc 
-			schema="src/com/liferay/portal/wsrp/consumer/admin/WSRPPortlets.xsd"
-			destdir="generated/src"
-			package="com.liferay.portal.wsrp.consumer.admin"/>
-	</target>
-
-	<target name="compile-wsrp-classes">
-		<mkdir dir="generated/classes"/>
-		<javac
-			classpathref="project.classpath"
-			compiler="${javac.compiler}"
-			debug="${javac.debug}"
-			deprecation="${javac.deprecation}"
-			destdir="generated/classes"
-			fork="${javac.fork}"
-			memoryMaximumSize="${javac.memoryMaximumSize}"
-			nowarn="${javac.nowarn}"
-			srcdir="generated/src"/>
-	</target>
-
-	<target name="build-wsrp-jar" depends="generate-wsrp-classes, compile-wsrp-classes">
-		<jar
-			basedir="generated/classes"			
-			jarfile="wsrp-generated.jar"
-		/>
 	</target>
 
 	<target name="compile">

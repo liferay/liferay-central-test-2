@@ -216,6 +216,7 @@ public class MainServlet extends ActionServlet {
 				if (i == 0) {
 					initPortletApp(portlet, servletContext);
 				}
+
 				PortletInstanceFactory.create(portlet, servletContext);
 			}
 		}

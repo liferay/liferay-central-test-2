@@ -151,12 +151,7 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 		Map<String, PortletFilter> portletFilters, Set<QName> processingEvents,
 		Set<QName> publishingEvents,
 		Set<PublicRenderParameter> publicRenderParameters,
-		PortletApp portletApp,
-		boolean isRemote,
-		String consumerId,
-		String producerEntityId,
-		String remotePortletHandle,
-		String remotePortletId) {
+		PortletApp portletApp) {
 
 		setPortletId(portletId);
 		_pluginPackage = pluginPackage;
@@ -229,11 +224,7 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 		setPublishingEvents(publishingEvents);
 		setPublicRenderParameters(publicRenderParameters);
 		_portletApp = portletApp;
-		_isRemote = isRemote;
-		_consumerId = consumerId;
-		_producerEntityId = producerEntityId;
-		_remotePortletHandle = remotePortletHandle;
-		_remotePortletId = remotePortletId;
+
 		if (_instanceable) {
 			_clonedInstances = new Hashtable<String, Portlet>();
 		}
@@ -2442,109 +2433,6 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 	}
 
 	/**
-	 * Returns true if the portlet is a remote or WSRP Portlet
-	 *
-	 * @return		true if the portlet is a remote portlet.
-	 */
-	public boolean isRemote() {
-		return _isRemote;
-	}
-
-	/**
-	 * Set true if the portlet is a remote or WSRP Portlet
-	 *
-	 * @param		isRemote boolean value for the portlet is a remote
-	 * portlet.
-	 */
-	public void setRemote(boolean isRemote) {
-		_isRemote = isRemote;
-	}
-
-	/**
-	 * Returns a String that represents a unique Consumer instance
-	 *
-	 * @return		the unique String that represents a consumer instance.
-	 */
-	public String getProducerEntityId() {
-		return this._producerEntityId;
-	}
-
-	/**
-	 * Sets a string that represents a unique Consumer instance
-	 *
-	 * @param		producer entity id a unique String that
-	 * represents a consumer instance.
-	 */
-	public void setProducerEntityId(String producerEntityId) {
-		this._producerEntityId = producerEntityId;
-	}
-
-	/**
-	 * Gets the name of WSRP Consumer that this portlet is associated with
-	 *
-	 * @return		the name of the WSRP Consumer that this
-	 * portlet is associated with
-	 */
-	public String getConsumerId() {
-		return this._consumerId;
-	}
-
-	/**
-	 * Sets the name of WSRP Consumer that this portlet is associated with.
-	 *
-	 * @param		the name of the WSRP Consumer that this
-	 * portlet is associated with
-	 */
-	public void setConsumerId(String consumerId) {
-		this._consumerId = consumerId;
-	}
-
-	/**
-	 * Gets the portlet handle of this remote portlet. Portlet handle
-	 * is a unique string that represents a instance of the portlet.
-	 *
-	 * @return		the name of the portlet handle of the remote
-	 * portlet
-	 */
-	public String getRemotePortletHandle() {
-		return this._remotePortletHandle;
-	}
-
-	/**
-	 * Sets the portlet handle of this remote portlet. Portlet handle
-	 * is a unique string that represents a instance of the portlet.
-	 *
-	 * @param		the name of the portlet handle of the remote portlet
-	 */
-	public void setRemotePortletHandle(String remotePortletHandle) {
-		this._remotePortletHandle = remotePortletHandle;
-	}
-
-	/**
-	 * Gets the portlet id of this remote portlet. Portlet id is a unique
-	 * string that represents a instance of the remote portlet in the consumer
-	 * portal. A remote portlet can have 'n'number local instances that may
-	 * or may not be reflected by the portlet Handle.
-	 *
-	 * @return		the name of the portlet id of the remote portlet
-	 */
-	public String getRemotePortletId() {
-		return this._remotePortletId;
-	}
-
-	/**
-	 * Sets the portlet id of this remote portlet. Portlet id is a unique string
-	 * that represents a instance of the remote portlet in the consumer portal.
-	 * A remote portlet can have 'n'number local instances that may or may not
-	 * be reflected by the portlet Handle.
-	 *
-	 * @param		the name of the portlet id of the remote portlet
-	 */
-	public void setRemotePortletId(String remotePortletId) {
-		this._remotePortletId = remotePortletId;
-	}
-
-	/**
 	 * Creates and returns a copy of this object.
 	 *
 	 * @return		a copy of this object
@@ -2578,9 +2466,7 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 			getInitParams(), getExpCache(), getPortletModes(),
 			getSupportedLocales(), getResourceBundle(), getPortletInfo(),
 			getPortletFilters(), getProcessingEvents(), getPublishingEvents(),
-			getPublicRenderParameters(), getPortletApp(), isRemote(),
-			getConsumerId(), getProducerEntityId(), getRemotePortletHandle(),
-			getRemotePortletId());
+			getPublicRenderParameters(), getPortletApp());
 	}
 
 	/**
@@ -3013,29 +2899,5 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 	 * portlets.
 	 */
 	private boolean _staticPortletStart;
-	/**
-	 * True if the portlet is a WSRP/Remote portlet.
-	 */
-	private boolean _isRemote = false;
-	/**
-	 * If the portlet is a remote portlet the following is used
-	 * to identify the consumer name that is portlet is associated with.
-	 */
-	private String _consumerId;
-	/**
-	 * Entity Id is a unique string that represents a WSRP consumer
-	 * to which this portlet is associated with.
-	 */
-	private String _producerEntityId;
-	/**
-	 * Portlet handle of this remote portlet. A portlet handle can
-	 * change its state after the creation of the portlet upon
-	 * WSRP implict clone.
-	 */
-	private String _remotePortletHandle;
-	/**
-	 * Portlet Id of the remote portlet
-	 */
-	private String _remotePortletId;
 
 }
