@@ -23,6 +23,7 @@
 package com.liferay.portal.dao.orm.hibernate;
 
 import com.liferay.portal.kernel.dao.jdbc.DataAccess;
+import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.tools.sql.DBUtil;
 
 import java.sql.CallableStatement;
@@ -109,7 +110,7 @@ public class DynamicDialect extends Dialect {
 			}
 		}
 		catch (Exception e) {
-			String msg = e.getMessage();
+			String msg = GetterUtil.getString(e.getMessage());
 
 			if (msg.indexOf("explicitly set for database: DB2") != -1) {
 				_dialect = new DB2400Dialect();
