@@ -161,18 +161,26 @@ public class PluginsEnvironmentBuilder {
 
 		Collections.sort(portalJars);
 
-		List<String> customJars = ListUtil.toList(
-			libDir.list(new GlobFilenameFilter("*.jar")));
+		String[] customJarsArray = libDir.list(new GlobFilenameFilter("*.jar"));
 
-		Collections.sort(customJars);
+		List<String> customJars = null;
 
-		for (String jar : portalJars) {
-			customJars.remove(jar);
+		if (customJarsArray != null) {
+			customJars = ListUtil.toList(customJarsArray);
+
+			Collections.sort(customJars);
+
+			for (String jar : portalJars) {
+				customJars.remove(jar);
+			}
+
+			customJars.remove("util-bridges.jar");
+			customJars.remove("util-java.jar");
+			customJars.remove("util-taglib.jar");
 		}
-
-		customJars.remove("util-bridges.jar");
-		customJars.remove("util-java.jar");
-		customJars.remove("util-taglib.jar");
+		else {
+			customJars = new ArrayList<String>();
+		}
 
 		sb = new StringBuilder();
 
@@ -184,6 +192,7 @@ public class PluginsEnvironmentBuilder {
 		sb.append("\t<classpathentry kind=\"con\" ");
 		sb.append("path=\"org.eclipse.jdt.launching.JRE_CONTAINER\" />\n");
 
+		_addClasspathEntry(sb, "/portal/lib/development/activation.jar");
 		_addClasspathEntry(sb, "/portal/lib/development/mail.jar");
 		_addClasspathEntry(sb, "/portal/lib/development/servlet.jar");
 		_addClasspathEntry(sb, "/portal/lib/global/container.jar");
@@ -265,8 +274,8 @@ public class PluginsEnvironmentBuilder {
 			_fileUtil.write(tempFile, sb.toString());
 
 			_exec(
-				_SVN_SET_IGNORES + "-F \"" + tempFile.getCanonicalPath() +
-					"\" " + libPath);
+				_SVN_SET_IGNORES + "-F " + tempFile.getCanonicalPath() +
+					" " + libPath);
 
 			String[] newIgnores = _exec(_SVN_GET_IGNORES + libPath);
 
