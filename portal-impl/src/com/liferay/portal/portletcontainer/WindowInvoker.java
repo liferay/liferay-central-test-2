@@ -55,6 +55,7 @@ import com.liferay.portal.model.User;
 import com.liferay.portal.service.RoleLocalServiceUtil;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.PortalUtil;
+import com.liferay.portal.util.PropsValues;
 import com.liferay.portal.util.WebKeys;
 import com.liferay.portal.wsrp.consumer.invoker.WSRPWindowInvoker;
 import com.liferay.portlet.ActionRequestImpl;
@@ -80,6 +81,7 @@ import com.sun.portal.container.GetMarkupResponse;
 import com.sun.portal.container.GetResourceRequest;
 import com.sun.portal.container.GetResourceResponse;
 import com.sun.portal.portletcontainer.appengine.PortletAppEngineUtils;
+import com.sun.portal.portletcontainer.portlet.impl.PortletRequestConstants;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -511,6 +513,10 @@ public class WindowInvoker extends InvokerPortlet {
 		containerRequest.setAttribute(
 			WebKeys.THEME_DISPLAY,
 			portletRequest.getAttribute(WebKeys.THEME_DISPLAY));
+
+		containerRequest.setAttribute(
+			PortletRequestConstants.ESCAPE_XML_VALUE, 
+			Boolean.valueOf(PropsValues.PORTLET_URL_ESCAPE_XML));
 	}
 
 	private void _setPortletAttributes(
