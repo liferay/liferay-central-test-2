@@ -515,7 +515,7 @@ public class WindowInvoker extends InvokerPortlet {
 			portletRequest.getAttribute(WebKeys.THEME_DISPLAY));
 
 		containerRequest.setAttribute(
-			PortletRequestConstants.ESCAPE_XML_VALUE, 
+			PortletRequestConstants.ESCAPE_XML_VALUE,
 			Boolean.valueOf(PropsValues.PORTLET_URL_ESCAPE_XML));
 	}
 
