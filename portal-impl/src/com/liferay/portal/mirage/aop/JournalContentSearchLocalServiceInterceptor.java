@@ -48,8 +48,8 @@ import com.sun.portal.cms.mirage.service.custom.BinaryContentService;
 import org.aopalliance.intercept.MethodInvocation;
 
 /**
- * <a href="JournalContentSearchLocalServiceInterceptor.java.html"><b><i>
- * View Source</i></b></a>
+ * <a href="JournalContentSearchLocalServiceInterceptor.java.html"><b><i>View
+ * Source</i></b></a>
  *
  * @author Prakash Reddy
  *
@@ -65,8 +65,8 @@ public class JournalContentSearchLocalServiceInterceptor
 			methodName.equals("deleteArticleContentSearches") ||
 			methodName.equals("deleteLayoutContentSearches") ||
 			methodName.equals("deleteOwnerContentSearches") ||
-			methodName.equals("updateContentSearch") ||
-			methodName.equals("getArticleContentSearches")) {
+			methodName.equals("getArticleContentSearches") ||
+			methodName.equals("updateContentSearch")) {
 
 			ContentSearchInvoker contentSearchInvoker =
 				new ContentSearchInvoker(invocation);
@@ -87,11 +87,11 @@ public class JournalContentSearchLocalServiceInterceptor
 
 				binaryContentService.deleteBinaryContents(contentSearchInvoker);
 			}
-			else if (methodName.equals("updateContentSearch")) {
-				binaryContentService.updateBinaryContent(contentSearchInvoker);
-			}
 			else if (methodName.equals("getArticleContentSearches")) {
 				binaryContentService.getBinaryContents(contentSearchInvoker);
+			}
+			else if (methodName.equals("updateContentSearch")) {
+				binaryContentService.updateBinaryContent(contentSearchInvoker);
 			}
 
 			return contentSearchInvoker.getReturnValue();

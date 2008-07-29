@@ -80,15 +80,11 @@ public class ContentSearchServiceImpl implements BinaryContentService {
 		process(criteria);
 	}
 
-	public BinaryContent getBinaryContent(BinaryContent binaryContent)
-		throws CMSException {
-
+	public BinaryContent getBinaryContent(BinaryContent binaryContent) {
 		throw new UnsupportedOperationException();
 	}
 
-	public long getBinaryContentId(BinaryContent binaryContent)
-		throws CMSException {
-
+	public long getBinaryContentId(BinaryContent binaryContent) {
 		throw new UnsupportedOperationException();
 	}
 

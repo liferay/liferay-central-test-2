@@ -56,7 +56,7 @@ import org.aopalliance.intercept.MethodInvocation;
  *
  */
 public class ContentSearchInvoker
-	extends BinaryContent implements OptionalCriteria{
+	extends BinaryContent implements OptionalCriteria {
 
 	public ContentSearchInvoker(MethodInvocation invocation) {
 		_invoker = new MirageInvoker(invocation);
