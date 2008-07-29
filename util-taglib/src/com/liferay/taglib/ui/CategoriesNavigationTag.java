@@ -32,10 +32,6 @@ import com.liferay.taglib.util.IncludeTag;
  */
 public class CategoriesNavigationTag extends IncludeTag {
 
-	public int doStartTag() {
-		return EVAL_BODY_BUFFERED;
-	}
-
 	protected String getDefaultPage() {
 		return _PAGE;
 	}

@@ -667,17 +667,17 @@ public class TagsEntryPersistenceImpl extends BasePersistenceImpl
 		}
 	}
 
-	public List<TagsEntry> findByC_V_P(long companyId, long vocabularyId,
-		long parentEntryId) throws SystemException {
+	public List<TagsEntry> findByC_P_V(long companyId, long parentEntryId,
+		long vocabularyId) throws SystemException {
 		boolean finderClassNameCacheEnabled = TagsEntryModelImpl.CACHE_ENABLED;
 		String finderClassName = TagsEntry.class.getName();
-		String finderMethodName = "findByC_V_P";
+		String finderMethodName = "findByC_P_V";
 		String[] finderParams = new String[] {
 				Long.class.getName(), Long.class.getName(), Long.class.getName()
 			};
 		Object[] finderArgs = new Object[] {
-				new Long(companyId), new Long(vocabularyId),
-				new Long(parentEntryId)
+				new Long(companyId), new Long(parentEntryId),
+				new Long(vocabularyId)
 			};
 
 		Object result = null;
@@ -702,11 +702,11 @@ public class TagsEntryPersistenceImpl extends BasePersistenceImpl
 
 				query.append(" AND ");
 
-				query.append("vocabularyId = ?");
+				query.append("parentEntryId = ?");
 
 				query.append(" AND ");
 
-				query.append("parentEntryId = ?");
+				query.append("vocabularyId = ?");
 
 				query.append(" ");
 
@@ -720,9 +720,9 @@ public class TagsEntryPersistenceImpl extends BasePersistenceImpl
 
 				qPos.add(companyId);
 
-				qPos.add(vocabularyId);
-
 				qPos.add(parentEntryId);
+
+				qPos.add(vocabularyId);
 
 				List<TagsEntry> list = q.list();
 
@@ -744,18 +744,18 @@ public class TagsEntryPersistenceImpl extends BasePersistenceImpl
 		}
 	}
 
-	public List<TagsEntry> findByC_V_P(long companyId, long vocabularyId,
-		long parentEntryId, int start, int end) throws SystemException {
-		return findByC_V_P(companyId, vocabularyId, parentEntryId, start, end,
+	public List<TagsEntry> findByC_P_V(long companyId, long parentEntryId,
+		long vocabularyId, int start, int end) throws SystemException {
+		return findByC_P_V(companyId, parentEntryId, vocabularyId, start, end,
 			null);
 	}
 
-	public List<TagsEntry> findByC_V_P(long companyId, long vocabularyId,
-		long parentEntryId, int start, int end, OrderByComparator obc)
+	public List<TagsEntry> findByC_P_V(long companyId, long parentEntryId,
+		long vocabularyId, int start, int end, OrderByComparator obc)
 		throws SystemException {
 		boolean finderClassNameCacheEnabled = TagsEntryModelImpl.CACHE_ENABLED;
 		String finderClassName = TagsEntry.class.getName();
-		String finderMethodName = "findByC_V_P";
+		String finderMethodName = "findByC_P_V";
 		String[] finderParams = new String[] {
 				Long.class.getName(), Long.class.getName(), Long.class.getName(),
 				
@@ -763,8 +763,8 @@ public class TagsEntryPersistenceImpl extends BasePersistenceImpl
 				"com.liferay.portal.kernel.util.OrderByComparator"
 			};
 		Object[] finderArgs = new Object[] {
-				new Long(companyId), new Long(vocabularyId),
-				new Long(parentEntryId),
+				new Long(companyId), new Long(parentEntryId),
+				new Long(vocabularyId),
 				
 				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
 			};
@@ -791,11 +791,11 @@ public class TagsEntryPersistenceImpl extends BasePersistenceImpl
 
 				query.append(" AND ");
 
-				query.append("vocabularyId = ?");
+				query.append("parentEntryId = ?");
 
 				query.append(" AND ");
 
-				query.append("parentEntryId = ?");
+				query.append("vocabularyId = ?");
 
 				query.append(" ");
 
@@ -816,9 +816,9 @@ public class TagsEntryPersistenceImpl extends BasePersistenceImpl
 
 				qPos.add(companyId);
 
-				qPos.add(vocabularyId);
-
 				qPos.add(parentEntryId);
+
+				qPos.add(vocabularyId);
 
 				List<TagsEntry> list = (List<TagsEntry>)QueryUtil.list(q,
 						getDialect(), start, end);
@@ -841,11 +841,11 @@ public class TagsEntryPersistenceImpl extends BasePersistenceImpl
 		}
 	}
 
-	public TagsEntry findByC_V_P_First(long companyId, long vocabularyId,
-		long parentEntryId, OrderByComparator obc)
+	public TagsEntry findByC_P_V_First(long companyId, long parentEntryId,
+		long vocabularyId, OrderByComparator obc)
 		throws NoSuchEntryException, SystemException {
-		List<TagsEntry> list = findByC_V_P(companyId, vocabularyId,
-				parentEntryId, 0, 1, obc);
+		List<TagsEntry> list = findByC_P_V(companyId, parentEntryId,
+				vocabularyId, 0, 1, obc);
 
 		if (list.size() == 0) {
 			StringBuilder msg = new StringBuilder();
@@ -855,10 +855,10 @@ public class TagsEntryPersistenceImpl extends BasePersistenceImpl
 			msg.append("companyId=" + companyId);
 
 			msg.append(", ");
-			msg.append("vocabularyId=" + vocabularyId);
+			msg.append("parentEntryId=" + parentEntryId);
 
 			msg.append(", ");
-			msg.append("parentEntryId=" + parentEntryId);
+			msg.append("vocabularyId=" + vocabularyId);
 
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
 
@@ -869,13 +869,13 @@ public class TagsEntryPersistenceImpl extends BasePersistenceImpl
 		}
 	}
 
-	public TagsEntry findByC_V_P_Last(long companyId, long vocabularyId,
-		long parentEntryId, OrderByComparator obc)
+	public TagsEntry findByC_P_V_Last(long companyId, long parentEntryId,
+		long vocabularyId, OrderByComparator obc)
 		throws NoSuchEntryException, SystemException {
-		int count = countByC_V_P(companyId, vocabularyId, parentEntryId);
+		int count = countByC_P_V(companyId, parentEntryId, vocabularyId);
 
-		List<TagsEntry> list = findByC_V_P(companyId, vocabularyId,
-				parentEntryId, count - 1, count, obc);
+		List<TagsEntry> list = findByC_P_V(companyId, parentEntryId,
+				vocabularyId, count - 1, count, obc);
 
 		if (list.size() == 0) {
 			StringBuilder msg = new StringBuilder();
@@ -885,10 +885,10 @@ public class TagsEntryPersistenceImpl extends BasePersistenceImpl
 			msg.append("companyId=" + companyId);
 
 			msg.append(", ");
-			msg.append("vocabularyId=" + vocabularyId);
+			msg.append("parentEntryId=" + parentEntryId);
 
 			msg.append(", ");
-			msg.append("parentEntryId=" + parentEntryId);
+			msg.append("vocabularyId=" + vocabularyId);
 
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
 
@@ -899,12 +899,12 @@ public class TagsEntryPersistenceImpl extends BasePersistenceImpl
 		}
 	}
 
-	public TagsEntry[] findByC_V_P_PrevAndNext(long entryId, long companyId,
-		long vocabularyId, long parentEntryId, OrderByComparator obc)
+	public TagsEntry[] findByC_P_V_PrevAndNext(long entryId, long companyId,
+		long parentEntryId, long vocabularyId, OrderByComparator obc)
 		throws NoSuchEntryException, SystemException {
 		TagsEntry tagsEntry = findByPrimaryKey(entryId);
 
-		int count = countByC_V_P(companyId, vocabularyId, parentEntryId);
+		int count = countByC_P_V(companyId, parentEntryId, vocabularyId);
 
 		Session session = null;
 
@@ -919,11 +919,11 @@ public class TagsEntryPersistenceImpl extends BasePersistenceImpl
 
 			query.append(" AND ");
 
-			query.append("vocabularyId = ?");
+			query.append("parentEntryId = ?");
 
 			query.append(" AND ");
 
-			query.append("parentEntryId = ?");
+			query.append("vocabularyId = ?");
 
 			query.append(" ");
 
@@ -944,9 +944,9 @@ public class TagsEntryPersistenceImpl extends BasePersistenceImpl
 
 			qPos.add(companyId);
 
-			qPos.add(vocabularyId);
-
 			qPos.add(parentEntryId);
+
+			qPos.add(vocabularyId);
 
 			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc,
 					tagsEntry);
@@ -1098,10 +1098,10 @@ public class TagsEntryPersistenceImpl extends BasePersistenceImpl
 		}
 	}
 
-	public void removeByC_V_P(long companyId, long vocabularyId,
-		long parentEntryId) throws SystemException {
-		for (TagsEntry tagsEntry : findByC_V_P(companyId, vocabularyId,
-				parentEntryId)) {
+	public void removeByC_P_V(long companyId, long parentEntryId,
+		long vocabularyId) throws SystemException {
+		for (TagsEntry tagsEntry : findByC_P_V(companyId, parentEntryId,
+				vocabularyId)) {
 			remove(tagsEntry);
 		}
 	}
@@ -1271,17 +1271,17 @@ public class TagsEntryPersistenceImpl extends BasePersistenceImpl
 		}
 	}
 
-	public int countByC_V_P(long companyId, long vocabularyId,
-		long parentEntryId) throws SystemException {
+	public int countByC_P_V(long companyId, long parentEntryId,
+		long vocabularyId) throws SystemException {
 		boolean finderClassNameCacheEnabled = TagsEntryModelImpl.CACHE_ENABLED;
 		String finderClassName = TagsEntry.class.getName();
-		String finderMethodName = "countByC_V_P";
+		String finderMethodName = "countByC_P_V";
 		String[] finderParams = new String[] {
 				Long.class.getName(), Long.class.getName(), Long.class.getName()
 			};
 		Object[] finderArgs = new Object[] {
-				new Long(companyId), new Long(vocabularyId),
-				new Long(parentEntryId)
+				new Long(companyId), new Long(parentEntryId),
+				new Long(vocabularyId)
 			};
 
 		Object result = null;
@@ -1307,11 +1307,11 @@ public class TagsEntryPersistenceImpl extends BasePersistenceImpl
 
 				query.append(" AND ");
 
-				query.append("vocabularyId = ?");
+				query.append("parentEntryId = ?");
 
 				query.append(" AND ");
 
-				query.append("parentEntryId = ?");
+				query.append("vocabularyId = ?");
 
 				query.append(" ");
 
@@ -1321,9 +1321,9 @@ public class TagsEntryPersistenceImpl extends BasePersistenceImpl
 
 				qPos.add(companyId);
 
-				qPos.add(vocabularyId);
-
 				qPos.add(parentEntryId);
+
+				qPos.add(vocabularyId);
 
 				Long count = null;
 

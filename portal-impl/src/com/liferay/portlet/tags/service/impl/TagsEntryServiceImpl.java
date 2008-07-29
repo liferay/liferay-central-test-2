@@ -56,7 +56,7 @@ public class TagsEntryServiceImpl extends TagsEntryServiceBaseImpl {
 		throws PortalException, SystemException {
 
 		return tagsEntryLocalService.addEntry(
-				getUserId(), name, vocabularyName, properties);
+			getUserId(), name, vocabularyName, properties);
 	}
 
 	public TagsEntry addEntry(
@@ -103,11 +103,11 @@ public class TagsEntryServiceImpl extends TagsEntryServiceBaseImpl {
 	}
 
 	public List<TagsEntry> getVocabularyEntries(
-			long companyId, String vocabularyName, String parentName)
+			long companyId, String parentEntryName, String vocabularyName)
 		throws PortalException, SystemException {
 
 		return tagsEntryLocalService.getVocabularyEntries(
-				companyId, vocabularyName, parentName);
+			companyId, parentEntryName, vocabularyName);
 	}
 
 	public List<TagsEntry> getVocabularyRootEntries(
@@ -115,7 +115,7 @@ public class TagsEntryServiceImpl extends TagsEntryServiceBaseImpl {
 		throws PortalException, SystemException {
 
 		return tagsEntryLocalService.getVocabularyRootEntries(
-				companyId, vocabularyName);
+			companyId, vocabularyName);
 	}
 
 	public void mergeEntries(long fromEntryId, long toEntryId)

@@ -133,14 +133,14 @@ public class TagsEntryServiceUtil {
 	}
 
 	public static java.util.List<com.liferay.portlet.tags.model.TagsEntry> getVocabularyEntries(
-		long companyId, java.lang.String vocabularyName,
-		java.lang.String parentName)
+		long companyId, java.lang.String parentEntryName,
+		java.lang.String vocabularyName)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		TagsEntryService tagsEntryService = TagsEntryServiceFactory.getService();
 
-		return tagsEntryService.getVocabularyEntries(companyId, vocabularyName,
-			parentName);
+		return tagsEntryService.getVocabularyEntries(companyId,
+			parentEntryName, vocabularyName);
 	}
 
 	public static java.util.List<com.liferay.portlet.tags.model.TagsEntry> getVocabularyRootEntries(

@@ -113,11 +113,10 @@
 			<finder-column name="companyId" />
 			<finder-column name="vocabularyId" />
 		</finder>
-
-		<finder name="C_V_P" return-type="Collection">
+		<finder name="C_P_V" return-type="Collection">
 			<finder-column name="companyId" />
-			<finder-column name="vocabularyId" />
 			<finder-column name="parentEntryId" />
+			<finder-column name="vocabularyId" />
 		</finder>
 
 		<!-- References -->

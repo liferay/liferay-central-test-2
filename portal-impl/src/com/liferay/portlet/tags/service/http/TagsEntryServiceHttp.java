@@ -467,21 +467,21 @@ public class TagsEntryServiceHttp {
 
 	public static java.util.List<com.liferay.portlet.tags.model.TagsEntry> getVocabularyEntries(
 		HttpPrincipal httpPrincipal, long companyId,
-		java.lang.String vocabularyName, java.lang.String parentName)
+		java.lang.String parentEntryName, java.lang.String vocabularyName)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		try {
 			Object paramObj0 = new LongWrapper(companyId);
 
-			Object paramObj1 = vocabularyName;
+			Object paramObj1 = parentEntryName;
 
-			if (vocabularyName == null) {
+			if (parentEntryName == null) {
 				paramObj1 = new NullWrapper("java.lang.String");
 			}
 
-			Object paramObj2 = parentName;
+			Object paramObj2 = vocabularyName;
 
-			if (parentName == null) {
+			if (vocabularyName == null) {
 				paramObj2 = new NullWrapper("java.lang.String");
 			}
 

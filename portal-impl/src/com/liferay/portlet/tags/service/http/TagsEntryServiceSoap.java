@@ -219,12 +219,12 @@ public class TagsEntryServiceSoap {
 	}
 
 	public static com.liferay.portlet.tags.model.TagsEntrySoap[] getVocabularyEntries(
-		long companyId, java.lang.String vocabularyName,
-		java.lang.String parentName) throws RemoteException {
+		long companyId, java.lang.String parentEntryName,
+		java.lang.String vocabularyName) throws RemoteException {
 		try {
 			java.util.List<com.liferay.portlet.tags.model.TagsEntry> returnValue =
 				TagsEntryServiceUtil.getVocabularyEntries(companyId,
-					vocabularyName, parentName);
+					parentEntryName, vocabularyName);
 
 			return com.liferay.portlet.tags.model.TagsEntrySoap.toSoapModels(returnValue);
 		}

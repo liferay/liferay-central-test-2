@@ -175,8 +175,8 @@ public interface TagsEntryLocalService {
 			com.liferay.portal.SystemException;
 
 	public java.util.List<com.liferay.portlet.tags.model.TagsEntry> getVocabularyEntries(
-		long companyId, java.lang.String vocabularyName,
-		java.lang.String parentName)
+		long companyId, java.lang.String parentEntryName,
+		java.lang.String vocabularyName)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;
 

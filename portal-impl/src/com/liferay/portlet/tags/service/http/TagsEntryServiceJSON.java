@@ -155,11 +155,11 @@ public class TagsEntryServiceJSON {
 	}
 
 	public static JSONArray getVocabularyEntries(long companyId,
-		java.lang.String vocabularyName, java.lang.String parentName)
+		java.lang.String parentEntryName, java.lang.String vocabularyName)
 		throws java.rmi.RemoteException, com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		java.util.List<com.liferay.portlet.tags.model.TagsEntry> returnValue = TagsEntryServiceUtil.getVocabularyEntries(companyId,
-				vocabularyName, parentName);
+				parentEntryName, vocabularyName);
 
 		return TagsEntryJSONSerializer.toJSONArray(returnValue);
 	}

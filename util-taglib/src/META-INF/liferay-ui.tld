@@ -120,7 +120,7 @@
 			<required>false</required>
 			<rtexprvalue>true</rtexprvalue>
 		</attribute>
-	</tag>	
+	</tag>
 	<tag>
 		<name>diff</name>
 		<tag-class>com.liferay.taglib.ui.DiffTag</tag-class>

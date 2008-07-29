@@ -25,43 +25,44 @@
 <%@ include file="/html/taglib/ui/categories_navigation/init.jsp"%>
 
 <div>
-<%
-String tag = ParamUtil.get(renderRequest, "tag", StringPool.BLANK);
 
-StringBuilder sb = new StringBuilder();
+	<%
+	String tag = ParamUtil.getString(renderRequest, "tag");
 
-List<TagsVocabulary> vocabularies = TagsVocabularyServiceUtil.getVocabularies(company.getCompanyId(), false);
+	PortletURL portletURL = renderResponse.createRenderURL();
 
-sb.append("<ul>");
+	StringBuilder sb = new StringBuilder();
 
-for (TagsVocabulary vocabulary : vocabularies) {
-	String vocabularyName = vocabulary.getName();
-
-	sb.append("<li class=\"tags-vocabulary-name\">");
-	sb.append(vocabularyName);
 	sb.append("<ul>");
 
-	List<TagsEntry> entries = TagsEntryServiceUtil.getVocabularyRootEntries(company.getCompanyId(), vocabularyName);
+	List<TagsVocabulary> vocabularies = TagsVocabularyServiceUtil.getVocabularies(company.getCompanyId(), false);
 
-	for (TagsEntry entry : entries) {
-		_buildCategoryTree(company.getCompanyId(), sb, vocabularyName, entry, tag, renderResponse);
+	for (TagsVocabulary vocabulary : vocabularies) {
+		String vocabularyName = vocabulary.getName();
+
+		sb.append("<li class=\"tags-vocabulary-name\">");
+		sb.append(vocabularyName);
+		sb.append("<ul>");
+
+		List<TagsEntry> entries = TagsEntryServiceUtil.getVocabularyRootEntries(company.getCompanyId(), vocabularyName);
+
+		for (TagsEntry entry : entries) {
+			_buildNavigation(entry, vocabularyName, tag, portletURL, sb);
+		}
+
+		sb.append("</ul>");
+		sb.append("</li>");
 	}
 
 	sb.append("</ul>");
-	sb.append("</li>");
-}
-sb.append("</ul>");
 
-out.print(sb.toString());
-%>
+	out.print(sb.toString());
+	%>
+
 </div>
 
 <%!
-private void _buildCategoryTree(long companyId, StringBuilder sb, String vocabularyName, TagsEntry entry, String tag, RenderResponse renderResponse) throws SystemException, PortalException, java.rmi.RemoteException {
-	PortletURL url = renderResponse.createRenderURL();
-
-	url.setParameter("tag", entry.getName());
-
+private void _buildNavigation(TagsEntry entry, String vocabularyName, String tag, PortletURL portletURL, StringBuilder sb) throws Exception {
 	String entryName = entry.getName();
 
 	sb.append("<li>");
@@ -72,8 +73,10 @@ private void _buildCategoryTree(long companyId, StringBuilder sb, String vocabul
 		sb.append("</b>");
 	}
 	else {
+		portletURL.setParameter("tag", entry.getName());
+
 		sb.append("<a href=\"");
-		sb.append(url);
+		sb.append(portletURL.toString());
 		sb.append("\">");
 		sb.append(entryName);
 		sb.append("</a>");
@@ -81,10 +84,10 @@ private void _buildCategoryTree(long companyId, StringBuilder sb, String vocabul
 
 	sb.append("<ul>");
 
-	List<TagsEntry> children = TagsEntryServiceUtil.getVocabularyEntries(companyId, vocabularyName, entryName);
+	List<TagsEntry> entryChildren = TagsEntryServiceUtil.getVocabularyEntries(entry.getCompanyId(), entryName, vocabularyName);
 
-	for (TagsEntry child : children) {
-		_buildCategoryTree(companyId, sb, vocabularyName, child, tag, renderResponse);
+	for (TagsEntry entryChild : entryChildren) {
+		_buildNavigation(entryChild, vocabularyName, tag, portletURL, sb);
 	}
 
 	sb.append("</ul>");
