@@ -1,3 +1,4 @@
+<%
 /**
  * Copyright (c) 2000-2008 Liferay, Inc. All rights reserved.
  *
@@ -19,7 +20,9 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
+%>
 
+<%
 /**
  * The contents of this file are subject to the terms of the Common Development
  * and Distribution License (the License). You may not use this file except in
@@ -38,39 +41,75 @@
  *
  * Copyright 2008 Sun Microsystems Inc. All rights reserved.
  */
+%>
 
-package com.liferay.portal.portletcontainer;
+<%@ include file="/html/portlet/css_init.jsp" %>
 
-import com.liferay.portal.model.Portlet;
-import com.liferay.portal.model.PortletApp;
+.tableHead
+{
+  font-weight: bold;
+  text-align: left;
+  text-indent: 3pt;
+  color: White;
+  /*background-color: #6d8b92;*/
+  background-color: #902
+}
 
-import com.sun.portal.container.EntityID;
-import com.sun.portal.container.PortletID;
+.withBackground
+{
+    /*background-color: #b7c4c6;*/
+    background-color: #EFE6CE
+}
 
-/**
- * <a href="WindowInvokerUtil.java.html"><b><i>View Source</i></b></a>
- *
- * @author Deepak Gothe
- * @author Brian Wing Shun Chan
- *
- */
-public class WindowInvokerUtil {
+.thStyle
+{
+    text-indent: 3pt;
+    text-align: left;
+    font-weight: bold;
+    background-color: #e7e9eb;
+}
 
-	public static EntityID getEntityID(Portlet portlet) {
-		PortletApp portletApp = portlet.getPortletApp();
+.tdStyle
+{
+    font-size: 15;
+    font-family: courier;
+    text-indent: 3pt;
+    text-align: left;
+    background-color: white;
+}
 
-		PortletID portletID = new PortletID(
-			portletApp.getServletContextName(), portlet.getPortletName());
+.buttonStyle
+{
+    text-align: center;
+    /*background-color: #b3d2df;
+    border:  1px solid #4497b7;*/
+    background-color: white;
+    border:  1px solid #902;
+    width: 60;
+}
 
-		if (portlet.isRemote()){
-			portletID = null;
-		}
+.longButtonStyle
+{
+    text-align: center;
+    background-color: white;
+    border:  1px solid #902;
+    width: 80;
+}
+.labelStyle
+{
+    text-align: left;
+    text-indent: 3pt;
+    font-weight: bold;
+    color: #727272;
+}
 
-		EntityID portletEntityId = new EntityID(portletID);
+.textboxStyle
+{
+    border: 1px solid black;
+    width: 150;
+}
 
-		portletEntityId.setPortletWindowName(portlet.getPortletId());
-
-		return portletEntityId;
-	}
-
+.checkboxStyle
+{
+    border: 1px solid black;
 }

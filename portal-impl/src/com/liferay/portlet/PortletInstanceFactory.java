@@ -214,16 +214,17 @@ public class PortletInstanceFactory {
 		throws PortletException {
 
 		InvokerPortlet invokerPortlet = null;
+		boolean isRemote = portlet.isRemote();
 
 		try {
-			if (portletInstance == null) {
+			if (portletInstance == null && !isRemote) {
 				portletInstance = (javax.portlet.Portlet)
 					Class.forName(portlet.getPortletClass()).newInstance();
 			}
 
 			PortletContext portletContext = portletConfig.getPortletContext();
 
-			if (PropsValues.PORTLET_CONTAINER_IMPL_SUN) {
+			if (isRemote || PropsValues.PORTLET_CONTAINER_IMPL_SUN) {
 				invokerPortlet = new WindowInvoker(
 					portlet, portletInstance, portletContext);
 			}
@@ -233,6 +234,7 @@ public class PortletInstanceFactory {
 			}
 
 			invokerPortlet.init(portletConfig);
+
 		}
 		catch (ClassNotFoundException cnofe) {
 			throw new UnavailableException(cnofe.getMessage());

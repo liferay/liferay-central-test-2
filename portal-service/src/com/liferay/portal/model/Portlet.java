@@ -457,6 +457,26 @@ public interface Portlet extends PortletModel {
 
 	public boolean isStaticEnd();
 
+	public boolean isRemote();
+
+	public void setRemote(boolean isRemote);
+
+	public java.lang.String getProducerEntityId();
+
+	public void setProducerEntityId(java.lang.String producerEntityId);
+
+	public java.lang.String getConsumerId();
+
+	public void setConsumerId(java.lang.String consumerId);
+
+	public java.lang.String getRemotePortletHandle();
+
+	public void setRemotePortletHandle(java.lang.String remotePortletHandle);
+
+	public java.lang.String getRemotePortletId();
+
+	public void setRemotePortletId(java.lang.String remotePortletId);
+
 	public java.lang.Object clone();
 
 	public int compareTo(java.lang.Object obj);

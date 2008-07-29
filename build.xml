@@ -163,9 +163,11 @@
 		<delete failonerror="false">
 			<fileset
 				dir="${app.server.classes.portal.dir}"
-				includes="portal-*.properties,system-*.properties"
+				includes="portal-*.properties,system-*.properties,wsrpconfig.properties"
 			/>
 		</delete>
+
+		<delete dir="${app.server.instance.dir}/wsrp"/>
 
 		<delete includeemptydirs="true" failonerror="false">
 			<fileset
@@ -518,6 +520,8 @@
 
 				<ant dir="support-tomcat" target="deploy" inheritAll="false" />
 
+				<mkdir dir="${app.server.lib.endorsed.dir}"/>
+
 				<copy todir="${app.server.lib.endorsed.dir}" flatten="true">
 					<fileset
 						dir="lib"
@@ -528,7 +532,7 @@
 				<copy todir="${app.server.lib.global.dir}">
 					<fileset
 						dir="lib/development"
-						includes="activation.jar,jms.jar,jta.jar,mail.jar"
+						includes="activation.jar,jms.jar,jta.jar,mail.jar,webservices*.jar"
 					/>
 				</copy>
 
@@ -665,9 +669,32 @@
 	</target>
 
 	<target name="deploy-properties">
+	
 		<copy todir="${app.server.classes.portal.dir}" overwrite="yes">
-			<fileset dir="portal-impl/src" includes="portal-*.properties,system-*.properties" />
+			<fileset 
+				dir="portal-impl/src" includes="portal-*.properties,system-*.properties,wsrpconfig.properties" />
 		</copy>
+
+		<if>
+			<equals arg1="${app.server.instance.dir}" arg2="" />
+			<then>
+				<property name="wsrp.data.dir" value="${app.server.instance.dir}/wsrp/data" />
+			</then>
+
+			<else>
+				<property name="wsrp.data.dir" value="${app.server.dir}/wsrp/data" />
+			</else>
+
+		</if>
+					
+		<mkdir dir="${wsrp.data.dir}"/>
+                
+		<copy todir="${wsrp.data.dir}" overwrite="yes" flatten="true">
+			<fileset 
+				dir="portal-impl/src" includes="**/consumer.xml" />
+		</copy>
+
+		<replace file="${app.server.classes.portal.dir}/wsrpconfig.properties" token="@WSRP_DATA_DIR@" value="${wsrp.data.dir}"/>
 	</target>
 
 	<target name="build-ext">

@@ -39,38 +39,25 @@
  * Copyright 2008 Sun Microsystems Inc. All rights reserved.
  */
 
-package com.liferay.portal.portletcontainer;
+package com.liferay.portal.wsrp.consumer.invoker;
 
-import com.liferay.portal.model.Portlet;
-import com.liferay.portal.model.PortletApp;
-
-import com.sun.portal.container.EntityID;
-import com.sun.portal.container.PortletID;
+import com.sun.portal.container.Container;
+import com.sun.portal.wsrp.consumer.markup.WSRPContainerFactory;
 
 /**
- * <a href="WindowInvokerUtil.java.html"><b><i>View Source</i></b></a>
+ * <a href="WSRPWindowInvoker.java.html"><b><i>View Source</i></b></a>
  *
- * @author Deepak Gothe
- * @author Brian Wing Shun Chan
+ * @author ManishKG
  *
  */
-public class WindowInvokerUtil {
+public class WSRPWindowInvoker {
 
-	public static EntityID getEntityID(Portlet portlet) {
-		PortletApp portletApp = portlet.getPortletApp();
+	//WSRP Consumer Container (viz MarkupManager)
+	private static Container _container =
+						(Container) WSRPContainerFactory.getInstance();
 
-		PortletID portletID = new PortletID(
-			portletApp.getServletContextName(), portlet.getPortletName());
-
-		if (portlet.isRemote()){
-			portletID = null;
-		}
-
-		EntityID portletEntityId = new EntityID(portletID);
-
-		portletEntityId.setPortletWindowName(portlet.getPortletId());
-
-		return portletEntityId;
+	public static Container getContainer() {
+		return _container;
 	}
 
 }

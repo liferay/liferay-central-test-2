@@ -1965,6 +1965,32 @@
 		</security-role-ref>
 		<supported-public-render-parameter>tag</supported-public-render-parameter>
 	</portlet>
+	<portlet>
+		<portlet-name>123</portlet-name>
+		<display-name>WSRP Consumer Admin Portlet</display-name>
+		<portlet-class>com.sun.portal.wsrp.consumer.portlets.WSRPConsumerAdminPortlet</portlet-class>
+		<init-param>
+			<name>jsp-path</name>
+			<value>/html/portlet/wsrp_consumer_admin</value>
+		</init-param>
+		<expiration-cache>0</expiration-cache>
+		<supports>
+			<mime-type>text/html</mime-type>
+			<portlet-mode>edit</portlet-mode>
+			<portlet-mode>help</portlet-mode>
+		</supports>
+		<portlet-info>
+			<title>WSRP Consumer Admin Portlet</title>
+			<short-title>WSRP Consumer Admin Portlet</short-title>
+			<keywords>WSRP Consumer Admin Portlet</keywords>
+		</portlet-info>
+		<security-role-ref>
+			<role-name>power-user</role-name>
+		</security-role-ref>
+		<security-role-ref>
+			<role-name>user</role-name>
+		</security-role-ref>
+	</portlet>
 	<public-render-parameter>
 		<identifier>tag</identifier>
 		<qname xmlns:x="http://www.liferay.com/public-render-parameters">x:tag</qname>
