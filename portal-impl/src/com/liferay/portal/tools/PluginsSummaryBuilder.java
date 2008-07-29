@@ -217,7 +217,7 @@ public class PluginsSummaryBuilder {
 		return GetterUtil.getString(props.getProperty(key));
 	}
 
-	private static FileImpl _fileUtil = new FileImpl();
+	private static FileImpl _fileUtil = FileImpl.getInstance();
 
 	private Set<String> _distinctAuthors = new TreeSet<String>();
 	private Set<String> _distinctLicenses = new TreeSet<String>();

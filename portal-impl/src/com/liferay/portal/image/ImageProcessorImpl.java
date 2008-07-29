@@ -251,6 +251,6 @@ public class ImageProcessorImpl implements ImageProcessor {
 
 	private static Log _log = LogFactory.getLog(ImageProcessorImpl.class);
 
-	private static FileImpl _fileUtil = new FileImpl();
+	private static FileImpl _fileUtil = FileImpl.getInstance();
 
 }

@@ -763,7 +763,7 @@ public class SourceFormatter {
 		"tiles"
 	};
 
-	private static FileImpl _fileUtil = new FileImpl();
+	private static FileImpl _fileUtil = FileImpl.getInstance();
 	private static Properties _exclusions;
 	private static Pattern _xssPattern = Pattern.compile(
 		"String\\s+([^\\s]+)\\s*=\\s*ParamUtil\\.getString\\(");

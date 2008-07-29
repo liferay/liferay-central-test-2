@@ -115,7 +115,7 @@ public class BatchJspCompiler {
 		}
 	}
 
-	private static FileImpl _fileUtil = new FileImpl();
+	private static FileImpl _fileUtil = FileImpl.getInstance();
 
 	private String _appDir;
 	private String _classDir;

@@ -57,7 +57,11 @@
 			<ref bean="com.liferay.portal.dao.orm.hibernate.DynamicQueryFactoryImpl" />
 		</property>
 	</bean>
-	<bean id="com.liferay.portal.dao.orm.hibernate.FinderCacheImpl" class="com.liferay.portal.dao.orm.hibernate.FinderCacheImpl" lazy-init="true" />
+	<bean id="com.liferay.portal.dao.orm.hibernate.FinderCacheImpl" class="com.liferay.portal.dao.orm.hibernate.FinderCacheImpl" lazy-init="true">
+		<property name="multiVMPool">
+			<ref bean="com.liferay.portal.cache.MultiVMPoolImpl" />
+		</property>
+	</bean>
 	<bean id="com.liferay.portal.kernel.dao.orm.FinderCacheUtil" class="com.liferay.portal.kernel.dao.orm.FinderCacheUtil" lazy-init="true">
 		<property name="finderCache">
 			<ref bean="com.liferay.portal.dao.orm.hibernate.FinderCacheImpl" />
@@ -205,7 +209,11 @@
 			<ref bean="com.liferay.portal.servlet.BrowserSnifferImpl" />
 		</property>
 	</bean>
-	<bean id="com.liferay.portal.servlet.ImageServletTokenImpl" class="com.liferay.portal.servlet.ImageServletTokenImpl" lazy-init="true" />
+	<bean id="com.liferay.portal.servlet.ImageServletTokenImpl" class="com.liferay.portal.servlet.ImageServletTokenImpl" lazy-init="true">
+		<property name="multiVMPool">
+			<ref bean="com.liferay.portal.cache.MultiVMPoolImpl" />
+		</property>
+	</bean>
 	<bean id="com.liferay.portal.kernel.servlet.ImageServletTokenUtil" class="com.liferay.portal.kernel.servlet.ImageServletTokenUtil" lazy-init="true">
 		<property name="imageServletToken">
 			<ref bean="com.liferay.portal.servlet.ImageServletTokenImpl" />
@@ -259,7 +267,11 @@
 			<ref bean="com.liferay.portal.uuid.PortalUUIDImpl" />
 		</property>
 	</bean>
-	<bean id="com.liferay.portal.webcache.WebCachePoolImpl" class="com.liferay.portal.webcache.WebCachePoolImpl" lazy-init="true" />
+	<bean id="com.liferay.portal.webcache.WebCachePoolImpl" class="com.liferay.portal.webcache.WebCachePoolImpl" lazy-init="true">
+		<property name="singleVMPool">
+			<ref bean="com.liferay.portal.cache.SingleVMPoolImpl" />
+		</property>
+	</bean>
 	<bean id="com.liferay.portal.kernel.webcache.WebCachePoolUtil" class="com.liferay.portal.kernel.webcache.WebCachePoolUtil" lazy-init="true">
 		<property name="webCachePool">
 			<ref bean="com.liferay.portal.webcache.WebCachePoolImpl" />

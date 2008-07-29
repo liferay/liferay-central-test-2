@@ -231,7 +231,7 @@ public class DBLoader {
 		br.close();
 	}
 
-	private static FileImpl _fileUtil = new FileImpl();
+	private static FileImpl _fileUtil = FileImpl.getInstance();
 
 	private String _databaseType;
 	private String _databaseName;

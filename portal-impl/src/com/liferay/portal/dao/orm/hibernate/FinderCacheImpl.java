@@ -22,10 +22,11 @@
 
 package com.liferay.portal.dao.orm.hibernate;
 
+import com.liferay.portal.kernel.bean.InitializingBean;
 import com.liferay.portal.kernel.cache.CacheKVP;
 import com.liferay.portal.kernel.cache.CacheRegistry;
 import com.liferay.portal.kernel.cache.CacheRegistryItem;
-import com.liferay.portal.kernel.cache.MultiVMPoolUtil;
+import com.liferay.portal.kernel.cache.MultiVMPool;
 import com.liferay.portal.kernel.cache.PortalCache;
 import com.liferay.portal.kernel.dao.orm.FinderCache;
 import com.liferay.portal.kernel.dao.orm.Session;
@@ -51,15 +52,18 @@ import java.util.concurrent.ConcurrentHashMap;
  * @author Brian Wing Shun Chan
  *
  */
-public class FinderCacheImpl implements CacheRegistryItem, FinderCache {
+public class FinderCacheImpl
+	implements CacheRegistryItem, FinderCache, InitializingBean {
 
 	public static final boolean CACHE_ENABLED = GetterUtil.getBoolean(
 		PropsUtil.get(PropsKeys.VALUE_OBJECT_FINDER_CACHE_ENABLED), true);
 
 	public static final String CACHE_NAME = FinderCache.class.getName();
 
-	public FinderCacheImpl() {
+	public void afterPropertiesSet() {
 		CacheRegistry.register(this);
+
+		_cache = _multiVMPool.getCache(CACHE_NAME);
 	}
 
 	public void clearCache() {
@@ -69,7 +73,7 @@ public class FinderCacheImpl implements CacheRegistryItem, FinderCache {
 	public void clearCache(String className) {
 		String groupKey = _encodeGroupKey(className);
 
-		MultiVMPoolUtil.clearGroup(_groups, groupKey, _cache);
+		_multiVMPool.clearGroup(_groups, groupKey, _cache);
 	}
 
 	public Object getResult(
@@ -78,7 +82,7 @@ public class FinderCacheImpl implements CacheRegistryItem, FinderCache {
 
 		String key = _encodeKey(className, methodName, params, args);
 
-		Object primaryKey = MultiVMPoolUtil.get(_cache, key);
+		Object primaryKey = _multiVMPool.get(_cache, key);
 
 		if (primaryKey != null) {
 			Session session = null;
@@ -103,7 +107,7 @@ public class FinderCacheImpl implements CacheRegistryItem, FinderCache {
 
 		String key = _encodeKey(sql, methodName, params, args);
 
-		Object primaryKey = MultiVMPoolUtil.get(_cache, key);
+		Object primaryKey = _multiVMPool.get(_cache, key);
 
 		if (primaryKey != null) {
 			Session session = null;
@@ -122,6 +126,10 @@ public class FinderCacheImpl implements CacheRegistryItem, FinderCache {
 		}
 	}
 
+	public void invalidate() {
+		clearCache();
+	}
+
 	public void putResult(
 		boolean classNameCacheEnabled, String className, String methodName,
 		String[] params, Object[] args, Object result) {
@@ -133,7 +141,7 @@ public class FinderCacheImpl implements CacheRegistryItem, FinderCache {
 
 			String groupKey = _encodeGroupKey(className);
 
-			MultiVMPoolUtil.put(
+			_multiVMPool.put(
 				_cache, key, _groups, groupKey, _resultToPrimaryKey(result));
 		}
 	}
@@ -152,15 +160,15 @@ public class FinderCacheImpl implements CacheRegistryItem, FinderCache {
 			for (String className : classNames) {
 				String groupKey = _encodeGroupKey(className);
 
-				MultiVMPoolUtil.updateGroup(_groups, groupKey, key);
+				_multiVMPool.updateGroup(_groups, groupKey, key);
 			}
 
-			MultiVMPoolUtil.put(_cache, key, _resultToPrimaryKey(result));
+			_multiVMPool.put(_cache, key, _resultToPrimaryKey(result));
 		}
 	}
 
-	public void invalidate() {
-		clearCache();
+	public void setMultiVMPool(MultiVMPool multiVMPool) {
+		_multiVMPool = multiVMPool;
 	}
 
 	private String _encodeGroupKey(String className) {
@@ -260,8 +268,8 @@ public class FinderCacheImpl implements CacheRegistryItem, FinderCache {
 
 	private static final String _PARAMS_SEPARATOR = "_PARAMS_SEPARATOR_";
 
-	private PortalCache _cache = MultiVMPoolUtil.getCache(CACHE_NAME);
-
+	private MultiVMPool _multiVMPool;
+	private PortalCache _cache;
 	private Map<String, Set<String>> _groups =
 		new ConcurrentHashMap<String, Set<String>>();
 

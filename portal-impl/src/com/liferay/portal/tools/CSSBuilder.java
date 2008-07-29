@@ -55,13 +55,11 @@ public class CSSBuilder {
 				return;
 			}
 
-			FileImpl fileImpl = new FileImpl();
-
-			String content = fileImpl.read(mainCssFile);
+			String content = _fileUtil.read(mainCssFile);
 
 			content = replaceImports(cssDir, content);
 
-			fileImpl.write(mergedFile, content);
+			_fileUtil.write(mergedFile, content);
 		}
 		catch (Exception e) {
 			e.printStackTrace();
@@ -113,6 +111,6 @@ public class CSSBuilder {
 
 	private static final String _END = ");";
 
-	private static FileImpl _fileUtil = new FileImpl();
+	private static FileImpl _fileUtil = FileImpl.getInstance();
 
 }

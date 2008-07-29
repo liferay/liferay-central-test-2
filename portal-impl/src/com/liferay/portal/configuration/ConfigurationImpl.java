@@ -58,6 +58,13 @@ import org.apache.commons.logging.LogFactory;
 public class ConfigurationImpl
 	implements com.liferay.portal.kernel.configuration.Configuration {
 
+	public ConfigurationImpl(ClassLoader classLoader, String name) {
+		_componentConfiguration = EasyConf.getConfiguration(
+			getFileName(classLoader, name));
+
+		printSources();
+	}
+
 	public void addProperties(Properties properties) {
 		try {
 			ComponentProperties componentProperties =
@@ -232,13 +239,6 @@ public class ConfigurationImpl
 
 	public void set(String key, String value) {
 		getComponentProperties().setProperty(key, value);
-	}
-
-	protected ConfigurationImpl(ClassLoader classLoader, String name) {
-		_componentConfiguration = EasyConf.getConfiguration(
-			getFileName(classLoader, name));
-
-		printSources();
 	}
 
 	protected ComponentProperties getComponentProperties() {

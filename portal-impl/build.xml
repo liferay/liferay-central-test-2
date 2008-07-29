@@ -86,29 +86,6 @@ ${exception.message}
 			/>
 		</copy>
 
-		<copy todir="${portal-impl.classes.dir}/com/liferay/portal/tools/dependencies">
-			<fileset
-				dir="src/com/liferay/portal/model/impl"
-				includes="BaseModelImpl.java"
-			/>
-			<fileset
-				dir="src/com/liferay/portal/service/impl"
-				includes="PrincipalBean.java"
-			/>
-			<fileset
-				dir="src/com/liferay/portal/service/persistence"
-				includes="BasePersistence.java"
-			/>
-			<fileset
-				dir="src/com/liferay/portal/spring/hibernate"
-				includes="DynamicDialect.java,FinderCache.java,HibernateConfiguration.java,HibernateUtil.java"
-			/>
-			<fileset
-				dir="src/com/liferay/portal/spring/util"
-				includes="SpringUtil.java"
-			/>
-		</copy>
-
 		<copy todir="${portal-impl.classes.dir}/com/liferay/portal/tools/sql/dependencies">
 			<fileset
 				dir="${project.dir}/sql"

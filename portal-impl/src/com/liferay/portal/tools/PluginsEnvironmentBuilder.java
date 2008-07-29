@@ -368,7 +368,7 @@ public class PluginsEnvironmentBuilder {
 
 	private static final String _SVN_SET_IGNORES = "svn propset svn:ignore ";
 
-	private static FileImpl _fileUtil = new FileImpl();
+	private static FileImpl _fileUtil = FileImpl.getInstance();
 
 	private boolean _svn;
 

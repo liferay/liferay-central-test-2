@@ -22,8 +22,8 @@
 
 package com.liferay.portal.util;
 
+import com.liferay.portal.configuration.ConfigurationImpl;
 import com.liferay.portal.kernel.configuration.Configuration;
-import com.liferay.portal.kernel.configuration.ConfigurationFactoryUtil;
 import com.liferay.portal.kernel.configuration.Filter;
 import com.liferay.util.SystemProperties;
 
@@ -37,9 +37,9 @@ import java.util.Properties;
  */
 public class PropsUtil {
 
-	static {
+	/*static {
 		InitUtil.init();
-	}
+	}*/
 
 	public static void addProperties(Properties properties) {
 		_instance._addProperties(properties);
@@ -78,7 +78,7 @@ public class PropsUtil {
 	}
 
 	private PropsUtil() {
-		_configuration = ConfigurationFactoryUtil.getConfiguration(
+		_configuration = new ConfigurationImpl(
 			PropsUtil.class.getClassLoader(), PropsFiles.PORTAL);
 
 		// Set the portal property "resource.repositories.root" as a system

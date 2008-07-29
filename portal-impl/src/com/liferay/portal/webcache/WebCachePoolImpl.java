@@ -22,8 +22,9 @@
 
 package com.liferay.portal.webcache;
 
+import com.liferay.portal.kernel.bean.InitializingBean;
 import com.liferay.portal.kernel.cache.PortalCache;
-import com.liferay.portal.kernel.cache.SingleVMPoolUtil;
+import com.liferay.portal.kernel.cache.SingleVMPool;
 import com.liferay.portal.kernel.util.Time;
 import com.liferay.portal.kernel.webcache.WebCacheException;
 import com.liferay.portal.kernel.webcache.WebCacheItem;
@@ -38,16 +39,20 @@ import org.apache.commons.logging.LogFactory;
  * @author Brian Wing Shun Chan
  *
  */
-public class WebCachePoolImpl implements WebCachePool {
+public class WebCachePoolImpl implements InitializingBean, WebCachePool {
 
 	public static final String CACHE_NAME = WebCachePool.class.getName();
+
+	public void afterPropertiesSet() {
+		_cache = _singleVMPool.getCache(CACHE_NAME);
+	}
 
 	public void clear() {
 		_cache.removeAll();
 	}
 
 	public Object get(String key, WebCacheItem wci) {
-		Object obj = SingleVMPoolUtil.get(_cache, key);
+		Object obj = _singleVMPool.get(_cache, key);
 
 		if (obj == null) {
 			try {
@@ -73,15 +78,16 @@ public class WebCachePoolImpl implements WebCachePool {
 	}
 
 	public void remove(String key) {
-		SingleVMPoolUtil.remove(_cache, key);
+		_singleVMPool.remove(_cache, key);
 	}
 
-	private WebCachePoolImpl() {
-		_cache = SingleVMPoolUtil.getCache(CACHE_NAME);
+	public void setSingleVMPool(SingleVMPool singleVMPool) {
+		_singleVMPool = singleVMPool;
 	}
 
 	private static Log _log = LogFactory.getLog(WebCachePoolImpl.class);
 
+	private SingleVMPool _singleVMPool;
 	private PortalCache _cache;
 
 }

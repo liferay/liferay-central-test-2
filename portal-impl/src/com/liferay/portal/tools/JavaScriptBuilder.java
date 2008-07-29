@@ -64,6 +64,6 @@ public class JavaScriptBuilder {
 		}
 	}
 
-	private static FileImpl _fileUtil = new FileImpl();
+	private static FileImpl _fileUtil = FileImpl.getInstance();
 
 }

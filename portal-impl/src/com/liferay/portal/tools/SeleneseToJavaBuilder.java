@@ -392,6 +392,6 @@ public class SeleneseToJavaBuilder {
 		"\\n", "\\n"
 	};
 
-	private static FileImpl _fileUtil = new FileImpl();
+	private static FileImpl _fileUtil = FileImpl.getInstance();
 
 }

@@ -62,7 +62,6 @@ import com.liferay.portal.struts.PortletRequestProcessor;
 import com.liferay.portal.struts.StrutsUtil;
 import com.liferay.portal.util.ContentUtil;
 import com.liferay.portal.util.DocumentUtil;
-import com.liferay.portal.util.InitUtil;
 import com.liferay.portal.util.Portal;
 import com.liferay.portal.util.PortalInstances;
 import com.liferay.portal.util.PortalUtil;
@@ -124,10 +123,6 @@ import org.dom4j.Element;
  *
  */
 public class MainServlet extends ActionServlet {
-
-	static {
-		InitUtil.init();
-	}
 
 	public void init() throws ServletException {
 

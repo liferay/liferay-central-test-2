@@ -47,6 +47,8 @@ public class SpringUtil {
 
 	public static ApplicationContext getContext() {
 		if (_applicationContext == null) {
+			System.out.println("Manually loading Spring context");
+
 			_applicationContext = new ArrayApplicationContext(
 				PropsUtil.getArray(PropsKeys.SPRING_CONFIGS));
 		}
