@@ -50,6 +50,7 @@ Liferay.Service = {
 					type: 'GET',
 					url: serviceUrl,
 					data: options,
+					cache: false,
 					dataType: 'json',
 					beforeSend: function(xHR) {
 						if (tunnelEnabled) {
