@@ -192,22 +192,12 @@ public class PasswordPolicyRelUtil {
 	}
 
 	public static PasswordPolicyRelPersistence getPersistence() {
-		return _getUtil()._persistence;
+		return _persistence;
 	}
 
 	public void setPersistence(PasswordPolicyRelPersistence persistence) {
 		_persistence = persistence;
 	}
 
-	private static PasswordPolicyRelUtil _getUtil() {
-		if (_util == null) {
-			_util = (PasswordPolicyRelUtil)com.liferay.portal.kernel.bean.PortalBeanLocatorUtil.locate(_UTIL);
-		}
-
-		return _util;
-	}
-
-	private static final String _UTIL = PasswordPolicyRelUtil.class.getName();
-	private static PasswordPolicyRelUtil _util;
-	private PasswordPolicyRelPersistence _persistence;
+	private static PasswordPolicyRelPersistence _persistence;
 }

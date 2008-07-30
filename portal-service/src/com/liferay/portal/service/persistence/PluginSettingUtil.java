@@ -216,22 +216,12 @@ public class PluginSettingUtil {
 	}
 
 	public static PluginSettingPersistence getPersistence() {
-		return _getUtil()._persistence;
+		return _persistence;
 	}
 
 	public void setPersistence(PluginSettingPersistence persistence) {
 		_persistence = persistence;
 	}
 
-	private static PluginSettingUtil _getUtil() {
-		if (_util == null) {
-			_util = (PluginSettingUtil)com.liferay.portal.kernel.bean.PortalBeanLocatorUtil.locate(_UTIL);
-		}
-
-		return _util;
-	}
-
-	private static final String _UTIL = PluginSettingUtil.class.getName();
-	private static PluginSettingUtil _util;
-	private PluginSettingPersistence _persistence;
+	private static PluginSettingPersistence _persistence;
 }

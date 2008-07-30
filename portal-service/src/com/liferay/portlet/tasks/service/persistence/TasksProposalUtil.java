@@ -268,22 +268,12 @@ public class TasksProposalUtil {
 	}
 
 	public static TasksProposalPersistence getPersistence() {
-		return _getUtil()._persistence;
+		return _persistence;
 	}
 
 	public void setPersistence(TasksProposalPersistence persistence) {
 		_persistence = persistence;
 	}
 
-	private static TasksProposalUtil _getUtil() {
-		if (_util == null) {
-			_util = (TasksProposalUtil)com.liferay.portal.kernel.bean.PortalBeanLocatorUtil.locate(_UTIL);
-		}
-
-		return _util;
-	}
-
-	private static final String _UTIL = TasksProposalUtil.class.getName();
-	private static TasksProposalUtil _util;
-	private TasksProposalPersistence _persistence;
+	private static TasksProposalPersistence _persistence;
 }

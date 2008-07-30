@@ -373,22 +373,12 @@ public class TagsEntryUtil {
 	}
 
 	public static TagsEntryPersistence getPersistence() {
-		return _getUtil()._persistence;
+		return _persistence;
 	}
 
 	public void setPersistence(TagsEntryPersistence persistence) {
 		_persistence = persistence;
 	}
 
-	private static TagsEntryUtil _getUtil() {
-		if (_util == null) {
-			_util = (TagsEntryUtil)com.liferay.portal.kernel.bean.PortalBeanLocatorUtil.locate(_UTIL);
-		}
-
-		return _util;
-	}
-
-	private static final String _UTIL = TagsEntryUtil.class.getName();
-	private static TagsEntryUtil _util;
-	private TagsEntryPersistence _persistence;
+	private static TagsEntryPersistence _persistence;
 }

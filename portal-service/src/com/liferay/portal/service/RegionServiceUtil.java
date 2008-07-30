@@ -39,15 +39,9 @@ package com.liferay.portal.service;
  * on a bean instead of writing a lookup call and a method call.
  * </p>
  *
- * <p>
- * <code>com.liferay.portal.service.RegionServiceFactory</code>
- * is responsible for the lookup of the bean.
- * </p>
- *
  * @author Brian Wing Shun Chan
  *
  * @see com.liferay.portal.service.RegionService
- * @see com.liferay.portal.service.RegionServiceFactory
  *
  */
 public class RegionServiceUtil {
@@ -55,47 +49,45 @@ public class RegionServiceUtil {
 		java.lang.String regionCode, java.lang.String name, boolean active)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
-		RegionService regionService = RegionServiceFactory.getService();
-
-		return regionService.addRegion(countryId, regionCode, name, active);
+		return _service.addRegion(countryId, regionCode, name, active);
 	}
 
 	public static java.util.List<com.liferay.portal.model.Region> getRegions()
 		throws com.liferay.portal.SystemException, java.rmi.RemoteException {
-		RegionService regionService = RegionServiceFactory.getService();
-
-		return regionService.getRegions();
+		return _service.getRegions();
 	}
 
 	public static java.util.List<com.liferay.portal.model.Region> getRegions(
 		long countryId)
 		throws com.liferay.portal.SystemException, java.rmi.RemoteException {
-		RegionService regionService = RegionServiceFactory.getService();
-
-		return regionService.getRegions(countryId);
+		return _service.getRegions(countryId);
 	}
 
 	public static java.util.List<com.liferay.portal.model.Region> getRegions(
 		boolean active)
 		throws com.liferay.portal.SystemException, java.rmi.RemoteException {
-		RegionService regionService = RegionServiceFactory.getService();
-
-		return regionService.getRegions(active);
+		return _service.getRegions(active);
 	}
 
 	public static java.util.List<com.liferay.portal.model.Region> getRegions(
 		long countryId, boolean active)
 		throws com.liferay.portal.SystemException, java.rmi.RemoteException {
-		RegionService regionService = RegionServiceFactory.getService();
-
-		return regionService.getRegions(countryId, active);
+		return _service.getRegions(countryId, active);
 	}
 
 	public static com.liferay.portal.model.Region getRegion(long regionId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
-		RegionService regionService = RegionServiceFactory.getService();
-
-		return regionService.getRegion(regionId);
+		return _service.getRegion(regionId);
 	}
+
+	public static RegionService getService() {
+		return _service;
+	}
+
+	public void setService(RegionService service) {
+		_service = service;
+	}
+
+	private static RegionService _service;
 }

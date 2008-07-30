@@ -22,6 +22,7 @@
 
 package com.liferay.portlet.tags.service;
 
+import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
 
 /**
  * <a href="TagsPropertyLocalServiceFactory.java.html"><b><i>View Source</i></b></a>
@@ -51,33 +52,45 @@ package com.liferay.portlet.tags.service;
  *
  */
 public class TagsPropertyLocalServiceFactory {
+	/**
+	 * @deprecated
+	 */
 	public static TagsPropertyLocalService getService() {
 		return _getFactory()._service;
 	}
 
+	/**
+	 * @deprecated
+	 */
 	public static TagsPropertyLocalService getImpl() {
 		if (_impl == null) {
-			_impl = (TagsPropertyLocalService)com.liferay.portal.kernel.bean.PortalBeanLocatorUtil.locate(_IMPL);
+			_impl = (TagsPropertyLocalService)PortalBeanLocatorUtil.locate(_IMPL);
 		}
 
 		return _impl;
 	}
 
+	/**
+	 * @deprecated
+	 */
 	public static TagsPropertyLocalService getTxImpl() {
 		if (_txImpl == null) {
-			_txImpl = (TagsPropertyLocalService)com.liferay.portal.kernel.bean.PortalBeanLocatorUtil.locate(_TX_IMPL);
+			_txImpl = (TagsPropertyLocalService)PortalBeanLocatorUtil.locate(_TX_IMPL);
 		}
 
 		return _txImpl;
 	}
 
+	/**
+	 * @deprecated
+	 */
 	public void setService(TagsPropertyLocalService service) {
 		_service = service;
 	}
 
 	private static TagsPropertyLocalServiceFactory _getFactory() {
 		if (_factory == null) {
-			_factory = (TagsPropertyLocalServiceFactory)com.liferay.portal.kernel.bean.PortalBeanLocatorUtil.locate(_FACTORY);
+			_factory = (TagsPropertyLocalServiceFactory)PortalBeanLocatorUtil.locate(_FACTORY);
 		}
 
 		return _factory;

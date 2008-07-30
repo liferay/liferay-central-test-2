@@ -39,15 +39,9 @@ package com.liferay.portal.service;
  * on a bean instead of writing a lookup call and a method call.
  * </p>
  *
- * <p>
- * <code>com.liferay.portal.service.PhoneServiceFactory</code>
- * is responsible for the lookup of the bean.
- * </p>
- *
  * @author Brian Wing Shun Chan
  *
  * @see com.liferay.portal.service.PhoneService
- * @see com.liferay.portal.service.PhoneServiceFactory
  *
  */
 public class PhoneServiceUtil {
@@ -56,35 +50,27 @@ public class PhoneServiceUtil {
 		java.lang.String extension, int typeId, boolean primary)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
-		PhoneService phoneService = PhoneServiceFactory.getService();
-
-		return phoneService.addPhone(className, classPK, number, extension,
-			typeId, primary);
+		return _service.addPhone(className, classPK, number, extension, typeId,
+			primary);
 	}
 
 	public static void deletePhone(long phoneId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
-		PhoneService phoneService = PhoneServiceFactory.getService();
-
-		phoneService.deletePhone(phoneId);
+		_service.deletePhone(phoneId);
 	}
 
 	public static com.liferay.portal.model.Phone getPhone(long phoneId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
-		PhoneService phoneService = PhoneServiceFactory.getService();
-
-		return phoneService.getPhone(phoneId);
+		return _service.getPhone(phoneId);
 	}
 
 	public static java.util.List<com.liferay.portal.model.Phone> getPhones(
 		java.lang.String className, long classPK)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
-		PhoneService phoneService = PhoneServiceFactory.getService();
-
-		return phoneService.getPhones(className, classPK);
+		return _service.getPhones(className, classPK);
 	}
 
 	public static com.liferay.portal.model.Phone updatePhone(long phoneId,
@@ -92,9 +78,16 @@ public class PhoneServiceUtil {
 		boolean primary)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
-		PhoneService phoneService = PhoneServiceFactory.getService();
-
-		return phoneService.updatePhone(phoneId, number, extension, typeId,
-			primary);
+		return _service.updatePhone(phoneId, number, extension, typeId, primary);
 	}
+
+	public static PhoneService getService() {
+		return _service;
+	}
+
+	public void setService(PhoneService service) {
+		_service = service;
+	}
+
+	private static PhoneService _service;
 }

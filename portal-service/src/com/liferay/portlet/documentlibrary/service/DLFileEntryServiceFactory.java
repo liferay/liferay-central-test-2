@@ -22,6 +22,7 @@
 
 package com.liferay.portlet.documentlibrary.service;
 
+import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
 
 /**
  * <a href="DLFileEntryServiceFactory.java.html"><b><i>View Source</i></b></a>
@@ -51,33 +52,45 @@ package com.liferay.portlet.documentlibrary.service;
  *
  */
 public class DLFileEntryServiceFactory {
+	/**
+	 * @deprecated
+	 */
 	public static DLFileEntryService getService() {
 		return _getFactory()._service;
 	}
 
+	/**
+	 * @deprecated
+	 */
 	public static DLFileEntryService getImpl() {
 		if (_impl == null) {
-			_impl = (DLFileEntryService)com.liferay.portal.kernel.bean.PortalBeanLocatorUtil.locate(_IMPL);
+			_impl = (DLFileEntryService)PortalBeanLocatorUtil.locate(_IMPL);
 		}
 
 		return _impl;
 	}
 
+	/**
+	 * @deprecated
+	 */
 	public static DLFileEntryService getTxImpl() {
 		if (_txImpl == null) {
-			_txImpl = (DLFileEntryService)com.liferay.portal.kernel.bean.PortalBeanLocatorUtil.locate(_TX_IMPL);
+			_txImpl = (DLFileEntryService)PortalBeanLocatorUtil.locate(_TX_IMPL);
 		}
 
 		return _txImpl;
 	}
 
+	/**
+	 * @deprecated
+	 */
 	public void setService(DLFileEntryService service) {
 		_service = service;
 	}
 
 	private static DLFileEntryServiceFactory _getFactory() {
 		if (_factory == null) {
-			_factory = (DLFileEntryServiceFactory)com.liferay.portal.kernel.bean.PortalBeanLocatorUtil.locate(_FACTORY);
+			_factory = (DLFileEntryServiceFactory)PortalBeanLocatorUtil.locate(_FACTORY);
 		}
 
 		return _factory;

@@ -22,6 +22,7 @@
 
 package com.liferay.portlet.documentlibrary.service;
 
+import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
 
 /**
  * <a href="DLFolderLocalServiceFactory.java.html"><b><i>View Source</i></b></a>
@@ -51,33 +52,45 @@ package com.liferay.portlet.documentlibrary.service;
  *
  */
 public class DLFolderLocalServiceFactory {
+	/**
+	 * @deprecated
+	 */
 	public static DLFolderLocalService getService() {
 		return _getFactory()._service;
 	}
 
+	/**
+	 * @deprecated
+	 */
 	public static DLFolderLocalService getImpl() {
 		if (_impl == null) {
-			_impl = (DLFolderLocalService)com.liferay.portal.kernel.bean.PortalBeanLocatorUtil.locate(_IMPL);
+			_impl = (DLFolderLocalService)PortalBeanLocatorUtil.locate(_IMPL);
 		}
 
 		return _impl;
 	}
 
+	/**
+	 * @deprecated
+	 */
 	public static DLFolderLocalService getTxImpl() {
 		if (_txImpl == null) {
-			_txImpl = (DLFolderLocalService)com.liferay.portal.kernel.bean.PortalBeanLocatorUtil.locate(_TX_IMPL);
+			_txImpl = (DLFolderLocalService)PortalBeanLocatorUtil.locate(_TX_IMPL);
 		}
 
 		return _txImpl;
 	}
 
+	/**
+	 * @deprecated
+	 */
 	public void setService(DLFolderLocalService service) {
 		_service = service;
 	}
 
 	private static DLFolderLocalServiceFactory _getFactory() {
 		if (_factory == null) {
-			_factory = (DLFolderLocalServiceFactory)com.liferay.portal.kernel.bean.PortalBeanLocatorUtil.locate(_FACTORY);
+			_factory = (DLFolderLocalServiceFactory)PortalBeanLocatorUtil.locate(_FACTORY);
 		}
 
 		return _factory;

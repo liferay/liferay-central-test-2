@@ -22,6 +22,7 @@
 
 package com.liferay.portal.service;
 
+import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
 
 /**
  * <a href="MembershipRequestLocalServiceFactory.java.html"><b><i>View Source</i></b></a>
@@ -51,33 +52,45 @@ package com.liferay.portal.service;
  *
  */
 public class MembershipRequestLocalServiceFactory {
+	/**
+	 * @deprecated
+	 */
 	public static MembershipRequestLocalService getService() {
 		return _getFactory()._service;
 	}
 
+	/**
+	 * @deprecated
+	 */
 	public static MembershipRequestLocalService getImpl() {
 		if (_impl == null) {
-			_impl = (MembershipRequestLocalService)com.liferay.portal.kernel.bean.PortalBeanLocatorUtil.locate(_IMPL);
+			_impl = (MembershipRequestLocalService)PortalBeanLocatorUtil.locate(_IMPL);
 		}
 
 		return _impl;
 	}
 
+	/**
+	 * @deprecated
+	 */
 	public static MembershipRequestLocalService getTxImpl() {
 		if (_txImpl == null) {
-			_txImpl = (MembershipRequestLocalService)com.liferay.portal.kernel.bean.PortalBeanLocatorUtil.locate(_TX_IMPL);
+			_txImpl = (MembershipRequestLocalService)PortalBeanLocatorUtil.locate(_TX_IMPL);
 		}
 
 		return _txImpl;
 	}
 
+	/**
+	 * @deprecated
+	 */
 	public void setService(MembershipRequestLocalService service) {
 		_service = service;
 	}
 
 	private static MembershipRequestLocalServiceFactory _getFactory() {
 		if (_factory == null) {
-			_factory = (MembershipRequestLocalServiceFactory)com.liferay.portal.kernel.bean.PortalBeanLocatorUtil.locate(_FACTORY);
+			_factory = (MembershipRequestLocalServiceFactory)PortalBeanLocatorUtil.locate(_FACTORY);
 		}
 
 		return _factory;

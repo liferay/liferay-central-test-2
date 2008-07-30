@@ -39,165 +39,131 @@ package com.liferay.portlet.social.service;
  * on a bean instead of writing a lookup call and a method call.
  * </p>
  *
- * <p>
- * <code>com.liferay.portlet.social.service.SocialRelationLocalServiceFactory</code>
- * is responsible for the lookup of the bean.
- * </p>
- *
  * @author Brian Wing Shun Chan
  *
  * @see com.liferay.portlet.social.service.SocialRelationLocalService
- * @see com.liferay.portlet.social.service.SocialRelationLocalServiceFactory
  *
  */
 public class SocialRelationLocalServiceUtil {
 	public static com.liferay.portlet.social.model.SocialRelation addSocialRelation(
 		com.liferay.portlet.social.model.SocialRelation socialRelation)
 		throws com.liferay.portal.SystemException {
-		SocialRelationLocalService socialRelationLocalService = SocialRelationLocalServiceFactory.getService();
-
-		return socialRelationLocalService.addSocialRelation(socialRelation);
+		return _service.addSocialRelation(socialRelation);
 	}
 
 	public static void deleteSocialRelation(long relationId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		SocialRelationLocalService socialRelationLocalService = SocialRelationLocalServiceFactory.getService();
-
-		socialRelationLocalService.deleteSocialRelation(relationId);
+		_service.deleteSocialRelation(relationId);
 	}
 
 	public static void deleteSocialRelation(
 		com.liferay.portlet.social.model.SocialRelation socialRelation)
 		throws com.liferay.portal.SystemException {
-		SocialRelationLocalService socialRelationLocalService = SocialRelationLocalServiceFactory.getService();
-
-		socialRelationLocalService.deleteSocialRelation(socialRelation);
+		_service.deleteSocialRelation(socialRelation);
 	}
 
 	public static java.util.List<Object> dynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery)
 		throws com.liferay.portal.SystemException {
-		SocialRelationLocalService socialRelationLocalService = SocialRelationLocalServiceFactory.getService();
-
-		return socialRelationLocalService.dynamicQuery(dynamicQuery);
+		return _service.dynamicQuery(dynamicQuery);
 	}
 
 	public static java.util.List<Object> dynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery, int start,
 		int end) throws com.liferay.portal.SystemException {
-		SocialRelationLocalService socialRelationLocalService = SocialRelationLocalServiceFactory.getService();
-
-		return socialRelationLocalService.dynamicQuery(dynamicQuery, start, end);
+		return _service.dynamicQuery(dynamicQuery, start, end);
 	}
 
 	public static com.liferay.portlet.social.model.SocialRelation getSocialRelation(
 		long relationId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		SocialRelationLocalService socialRelationLocalService = SocialRelationLocalServiceFactory.getService();
-
-		return socialRelationLocalService.getSocialRelation(relationId);
+		return _service.getSocialRelation(relationId);
 	}
 
 	public static java.util.List<com.liferay.portlet.social.model.SocialRelation> getSocialRelations(
 		int start, int end) throws com.liferay.portal.SystemException {
-		SocialRelationLocalService socialRelationLocalService = SocialRelationLocalServiceFactory.getService();
-
-		return socialRelationLocalService.getSocialRelations(start, end);
+		return _service.getSocialRelations(start, end);
 	}
 
 	public static int getSocialRelationsCount()
 		throws com.liferay.portal.SystemException {
-		SocialRelationLocalService socialRelationLocalService = SocialRelationLocalServiceFactory.getService();
-
-		return socialRelationLocalService.getSocialRelationsCount();
+		return _service.getSocialRelationsCount();
 	}
 
 	public static com.liferay.portlet.social.model.SocialRelation updateSocialRelation(
 		com.liferay.portlet.social.model.SocialRelation socialRelation)
 		throws com.liferay.portal.SystemException {
-		SocialRelationLocalService socialRelationLocalService = SocialRelationLocalServiceFactory.getService();
-
-		return socialRelationLocalService.updateSocialRelation(socialRelation);
+		return _service.updateSocialRelation(socialRelation);
 	}
 
 	public static com.liferay.portlet.social.model.SocialRelation addRelation(
 		long userId1, long userId2, int type)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		SocialRelationLocalService socialRelationLocalService = SocialRelationLocalServiceFactory.getService();
-
-		return socialRelationLocalService.addRelation(userId1, userId2, type);
+		return _service.addRelation(userId1, userId2, type);
 	}
 
 	public static void deleteRelation(long relationId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		SocialRelationLocalService socialRelationLocalService = SocialRelationLocalServiceFactory.getService();
-
-		socialRelationLocalService.deleteRelation(relationId);
+		_service.deleteRelation(relationId);
 	}
 
 	public static void deleteRelation(long userId1, long userId2, int type)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		SocialRelationLocalService socialRelationLocalService = SocialRelationLocalServiceFactory.getService();
-
-		socialRelationLocalService.deleteRelation(userId1, userId2, type);
+		_service.deleteRelation(userId1, userId2, type);
 	}
 
 	public static void deleteRelations(long userId)
 		throws com.liferay.portal.SystemException {
-		SocialRelationLocalService socialRelationLocalService = SocialRelationLocalServiceFactory.getService();
-
-		socialRelationLocalService.deleteRelations(userId);
+		_service.deleteRelations(userId);
 	}
 
 	public static com.liferay.portlet.social.model.SocialRelation getRelation(
 		long relationId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		SocialRelationLocalService socialRelationLocalService = SocialRelationLocalServiceFactory.getService();
-
-		return socialRelationLocalService.getRelation(relationId);
+		return _service.getRelation(relationId);
 	}
 
 	public static com.liferay.portlet.social.model.SocialRelation getRelation(
 		long userId1, long userId2, int type)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		SocialRelationLocalService socialRelationLocalService = SocialRelationLocalServiceFactory.getService();
-
-		return socialRelationLocalService.getRelation(userId1, userId2, type);
+		return _service.getRelation(userId1, userId2, type);
 	}
 
 	public static java.util.List<com.liferay.portlet.social.model.SocialRelation> getRelations(
 		long userId, int type, int start, int end)
 		throws com.liferay.portal.SystemException {
-		SocialRelationLocalService socialRelationLocalService = SocialRelationLocalServiceFactory.getService();
-
-		return socialRelationLocalService.getRelations(userId, type, start, end);
+		return _service.getRelations(userId, type, start, end);
 	}
 
 	public static int getRelationsCount(long userId, int type)
 		throws com.liferay.portal.SystemException {
-		SocialRelationLocalService socialRelationLocalService = SocialRelationLocalServiceFactory.getService();
-
-		return socialRelationLocalService.getRelationsCount(userId, type);
+		return _service.getRelationsCount(userId, type);
 	}
 
 	public static boolean hasRelation(long userId1, long userId2, int type)
 		throws com.liferay.portal.SystemException {
-		SocialRelationLocalService socialRelationLocalService = SocialRelationLocalServiceFactory.getService();
-
-		return socialRelationLocalService.hasRelation(userId1, userId2, type);
+		return _service.hasRelation(userId1, userId2, type);
 	}
 
 	public static boolean isRelatable(long userId1, long userId2, int type)
 		throws com.liferay.portal.SystemException {
-		SocialRelationLocalService socialRelationLocalService = SocialRelationLocalServiceFactory.getService();
-
-		return socialRelationLocalService.isRelatable(userId1, userId2, type);
+		return _service.isRelatable(userId1, userId2, type);
 	}
+
+	public static SocialRelationLocalService getService() {
+		return _service;
+	}
+
+	public void setService(SocialRelationLocalService service) {
+		_service = service;
+	}
+
+	private static SocialRelationLocalService _service;
 }

@@ -39,96 +39,70 @@ package com.liferay.portlet.polls.service;
  * on a bean instead of writing a lookup call and a method call.
  * </p>
  *
- * <p>
- * <code>com.liferay.portlet.polls.service.PollsChoiceLocalServiceFactory</code>
- * is responsible for the lookup of the bean.
- * </p>
- *
  * @author Brian Wing Shun Chan
  *
  * @see com.liferay.portlet.polls.service.PollsChoiceLocalService
- * @see com.liferay.portlet.polls.service.PollsChoiceLocalServiceFactory
  *
  */
 public class PollsChoiceLocalServiceUtil {
 	public static com.liferay.portlet.polls.model.PollsChoice addPollsChoice(
 		com.liferay.portlet.polls.model.PollsChoice pollsChoice)
 		throws com.liferay.portal.SystemException {
-		PollsChoiceLocalService pollsChoiceLocalService = PollsChoiceLocalServiceFactory.getService();
-
-		return pollsChoiceLocalService.addPollsChoice(pollsChoice);
+		return _service.addPollsChoice(pollsChoice);
 	}
 
 	public static void deletePollsChoice(long choiceId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		PollsChoiceLocalService pollsChoiceLocalService = PollsChoiceLocalServiceFactory.getService();
-
-		pollsChoiceLocalService.deletePollsChoice(choiceId);
+		_service.deletePollsChoice(choiceId);
 	}
 
 	public static void deletePollsChoice(
 		com.liferay.portlet.polls.model.PollsChoice pollsChoice)
 		throws com.liferay.portal.SystemException {
-		PollsChoiceLocalService pollsChoiceLocalService = PollsChoiceLocalServiceFactory.getService();
-
-		pollsChoiceLocalService.deletePollsChoice(pollsChoice);
+		_service.deletePollsChoice(pollsChoice);
 	}
 
 	public static java.util.List<Object> dynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery)
 		throws com.liferay.portal.SystemException {
-		PollsChoiceLocalService pollsChoiceLocalService = PollsChoiceLocalServiceFactory.getService();
-
-		return pollsChoiceLocalService.dynamicQuery(dynamicQuery);
+		return _service.dynamicQuery(dynamicQuery);
 	}
 
 	public static java.util.List<Object> dynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery, int start,
 		int end) throws com.liferay.portal.SystemException {
-		PollsChoiceLocalService pollsChoiceLocalService = PollsChoiceLocalServiceFactory.getService();
-
-		return pollsChoiceLocalService.dynamicQuery(dynamicQuery, start, end);
+		return _service.dynamicQuery(dynamicQuery, start, end);
 	}
 
 	public static com.liferay.portlet.polls.model.PollsChoice getPollsChoice(
 		long choiceId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		PollsChoiceLocalService pollsChoiceLocalService = PollsChoiceLocalServiceFactory.getService();
-
-		return pollsChoiceLocalService.getPollsChoice(choiceId);
+		return _service.getPollsChoice(choiceId);
 	}
 
 	public static java.util.List<com.liferay.portlet.polls.model.PollsChoice> getPollsChoices(
 		int start, int end) throws com.liferay.portal.SystemException {
-		PollsChoiceLocalService pollsChoiceLocalService = PollsChoiceLocalServiceFactory.getService();
-
-		return pollsChoiceLocalService.getPollsChoices(start, end);
+		return _service.getPollsChoices(start, end);
 	}
 
 	public static int getPollsChoicesCount()
 		throws com.liferay.portal.SystemException {
-		PollsChoiceLocalService pollsChoiceLocalService = PollsChoiceLocalServiceFactory.getService();
-
-		return pollsChoiceLocalService.getPollsChoicesCount();
+		return _service.getPollsChoicesCount();
 	}
 
 	public static com.liferay.portlet.polls.model.PollsChoice updatePollsChoice(
 		com.liferay.portlet.polls.model.PollsChoice pollsChoice)
 		throws com.liferay.portal.SystemException {
-		PollsChoiceLocalService pollsChoiceLocalService = PollsChoiceLocalServiceFactory.getService();
-
-		return pollsChoiceLocalService.updatePollsChoice(pollsChoice);
+		return _service.updatePollsChoice(pollsChoice);
 	}
 
 	public static com.liferay.portlet.polls.model.PollsChoice addChoice(
 		long questionId, java.lang.String name, java.lang.String description)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		PollsChoiceLocalService pollsChoiceLocalService = PollsChoiceLocalServiceFactory.getService();
-
-		return pollsChoiceLocalService.addChoice(questionId, name, description);
+		return _service.addChoice(questionId, name, description);
 	}
 
 	public static com.liferay.portlet.polls.model.PollsChoice addChoice(
@@ -136,33 +110,24 @@ public class PollsChoiceLocalServiceUtil {
 		java.lang.String description)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		PollsChoiceLocalService pollsChoiceLocalService = PollsChoiceLocalServiceFactory.getService();
-
-		return pollsChoiceLocalService.addChoice(uuid, questionId, name,
-			description);
+		return _service.addChoice(uuid, questionId, name, description);
 	}
 
 	public static com.liferay.portlet.polls.model.PollsChoice getChoice(
 		long choiceId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		PollsChoiceLocalService pollsChoiceLocalService = PollsChoiceLocalServiceFactory.getService();
-
-		return pollsChoiceLocalService.getChoice(choiceId);
+		return _service.getChoice(choiceId);
 	}
 
 	public static java.util.List<com.liferay.portlet.polls.model.PollsChoice> getChoices(
 		long questionId) throws com.liferay.portal.SystemException {
-		PollsChoiceLocalService pollsChoiceLocalService = PollsChoiceLocalServiceFactory.getService();
-
-		return pollsChoiceLocalService.getChoices(questionId);
+		return _service.getChoices(questionId);
 	}
 
 	public static int getChoicesCount(long questionId)
 		throws com.liferay.portal.SystemException {
-		PollsChoiceLocalService pollsChoiceLocalService = PollsChoiceLocalServiceFactory.getService();
-
-		return pollsChoiceLocalService.getChoicesCount(questionId);
+		return _service.getChoicesCount(questionId);
 	}
 
 	public static com.liferay.portlet.polls.model.PollsChoice updateChoice(
@@ -170,9 +135,16 @@ public class PollsChoiceLocalServiceUtil {
 		java.lang.String description)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		PollsChoiceLocalService pollsChoiceLocalService = PollsChoiceLocalServiceFactory.getService();
-
-		return pollsChoiceLocalService.updateChoice(choiceId, questionId, name,
-			description);
+		return _service.updateChoice(choiceId, questionId, name, description);
 	}
+
+	public static PollsChoiceLocalService getService() {
+		return _service;
+	}
+
+	public void setService(PollsChoiceLocalService service) {
+		_service = service;
+	}
+
+	private static PollsChoiceLocalService _service;
 }

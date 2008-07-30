@@ -39,84 +39,70 @@ package com.liferay.portal.service;
  * on a bean instead of writing a lookup call and a method call.
  * </p>
  *
- * <p>
- * <code>com.liferay.portal.service.ContactLocalServiceFactory</code>
- * is responsible for the lookup of the bean.
- * </p>
- *
  * @author Brian Wing Shun Chan
  *
  * @see com.liferay.portal.service.ContactLocalService
- * @see com.liferay.portal.service.ContactLocalServiceFactory
  *
  */
 public class ContactLocalServiceUtil {
 	public static com.liferay.portal.model.Contact addContact(
 		com.liferay.portal.model.Contact contact)
 		throws com.liferay.portal.SystemException {
-		ContactLocalService contactLocalService = ContactLocalServiceFactory.getService();
-
-		return contactLocalService.addContact(contact);
+		return _service.addContact(contact);
 	}
 
 	public static void deleteContact(long contactId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		ContactLocalService contactLocalService = ContactLocalServiceFactory.getService();
-
-		contactLocalService.deleteContact(contactId);
+		_service.deleteContact(contactId);
 	}
 
 	public static void deleteContact(com.liferay.portal.model.Contact contact)
 		throws com.liferay.portal.SystemException {
-		ContactLocalService contactLocalService = ContactLocalServiceFactory.getService();
-
-		contactLocalService.deleteContact(contact);
+		_service.deleteContact(contact);
 	}
 
 	public static java.util.List<Object> dynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery)
 		throws com.liferay.portal.SystemException {
-		ContactLocalService contactLocalService = ContactLocalServiceFactory.getService();
-
-		return contactLocalService.dynamicQuery(dynamicQuery);
+		return _service.dynamicQuery(dynamicQuery);
 	}
 
 	public static java.util.List<Object> dynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery, int start,
 		int end) throws com.liferay.portal.SystemException {
-		ContactLocalService contactLocalService = ContactLocalServiceFactory.getService();
-
-		return contactLocalService.dynamicQuery(dynamicQuery, start, end);
+		return _service.dynamicQuery(dynamicQuery, start, end);
 	}
 
 	public static com.liferay.portal.model.Contact getContact(long contactId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		ContactLocalService contactLocalService = ContactLocalServiceFactory.getService();
-
-		return contactLocalService.getContact(contactId);
+		return _service.getContact(contactId);
 	}
 
 	public static java.util.List<com.liferay.portal.model.Contact> getContacts(
 		int start, int end) throws com.liferay.portal.SystemException {
-		ContactLocalService contactLocalService = ContactLocalServiceFactory.getService();
-
-		return contactLocalService.getContacts(start, end);
+		return _service.getContacts(start, end);
 	}
 
 	public static int getContactsCount()
 		throws com.liferay.portal.SystemException {
-		ContactLocalService contactLocalService = ContactLocalServiceFactory.getService();
-
-		return contactLocalService.getContactsCount();
+		return _service.getContactsCount();
 	}
 
 	public static com.liferay.portal.model.Contact updateContact(
 		com.liferay.portal.model.Contact contact)
 		throws com.liferay.portal.SystemException {
-		ContactLocalService contactLocalService = ContactLocalServiceFactory.getService();
-
-		return contactLocalService.updateContact(contact);
+		return _service.updateContact(contact);
 	}
+
+	public static ContactLocalService getService() {
+		return _service;
+	}
+
+	public void setService(ContactLocalService service) {
+		_service = service;
+	}
+
+	private static ContactLocalService _service;
 }

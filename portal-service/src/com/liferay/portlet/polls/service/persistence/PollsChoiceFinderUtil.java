@@ -37,22 +37,12 @@ public class PollsChoiceFinderUtil {
 	}
 
 	public static PollsChoiceFinder getFinder() {
-		return _getUtil()._finder;
+		return _finder;
 	}
 
 	public void setFinder(PollsChoiceFinder finder) {
 		_finder = finder;
 	}
 
-	private static PollsChoiceFinderUtil _getUtil() {
-		if (_util == null) {
-			_util = (PollsChoiceFinderUtil)com.liferay.portal.kernel.bean.PortalBeanLocatorUtil.locate(_UTIL);
-		}
-
-		return _util;
-	}
-
-	private static final String _UTIL = PollsChoiceFinderUtil.class.getName();
-	private static PollsChoiceFinderUtil _util;
-	private PollsChoiceFinder _finder;
+	private static PollsChoiceFinder _finder;
 }

@@ -44,7 +44,6 @@ package com.liferay.portlet.documentlibrary.service;
  *
  * @author Brian Wing Shun Chan
  *
- * @see com.liferay.portlet.documentlibrary.service.DLFileShortcutLocalServiceFactory
  * @see com.liferay.portlet.documentlibrary.service.DLFileShortcutLocalServiceUtil
  *
  */

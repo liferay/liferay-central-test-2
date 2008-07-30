@@ -44,7 +44,6 @@ package com.liferay.portlet.softwarecatalog.service;
  *
  * @author Brian Wing Shun Chan
  *
- * @see com.liferay.portlet.softwarecatalog.service.SCProductVersionLocalServiceFactory
  * @see com.liferay.portlet.softwarecatalog.service.SCProductVersionLocalServiceUtil
  *
  */

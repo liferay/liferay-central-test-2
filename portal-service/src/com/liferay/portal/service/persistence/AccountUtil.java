@@ -138,22 +138,12 @@ public class AccountUtil {
 	}
 
 	public static AccountPersistence getPersistence() {
-		return _getUtil()._persistence;
+		return _persistence;
 	}
 
 	public void setPersistence(AccountPersistence persistence) {
 		_persistence = persistence;
 	}
 
-	private static AccountUtil _getUtil() {
-		if (_util == null) {
-			_util = (AccountUtil)com.liferay.portal.kernel.bean.PortalBeanLocatorUtil.locate(_UTIL);
-		}
-
-		return _util;
-	}
-
-	private static final String _UTIL = AccountUtil.class.getName();
-	private static AccountUtil _util;
-	private AccountPersistence _persistence;
+	private static AccountPersistence _persistence;
 }

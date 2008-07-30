@@ -39,15 +39,9 @@ package com.liferay.portlet.documentlibrary.service;
  * on a bean instead of writing a lookup call and a method call.
  * </p>
  *
- * <p>
- * <code>com.liferay.portlet.documentlibrary.service.DLFileEntryServiceFactory</code>
- * is responsible for the lookup of the bean.
- * </p>
- *
  * @author Brian Wing Shun Chan
  *
  * @see com.liferay.portlet.documentlibrary.service.DLFileEntryService
- * @see com.liferay.portlet.documentlibrary.service.DLFileEntryServiceFactory
  *
  */
 public class DLFileEntryServiceUtil {
@@ -58,11 +52,9 @@ public class DLFileEntryServiceUtil {
 		boolean addCommunityPermissions, boolean addGuestPermissions)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
-		DLFileEntryService dlFileEntryService = DLFileEntryServiceFactory.getService();
-
-		return dlFileEntryService.addFileEntry(folderId, name, title,
-			description, tagsEntries, extraSettings, file,
-			addCommunityPermissions, addGuestPermissions);
+		return _service.addFileEntry(folderId, name, title, description,
+			tagsEntries, extraSettings, file, addCommunityPermissions,
+			addGuestPermissions);
 	}
 
 	public static com.liferay.portlet.documentlibrary.model.DLFileEntry addFileEntry(
@@ -72,11 +64,9 @@ public class DLFileEntryServiceUtil {
 		boolean addCommunityPermissions, boolean addGuestPermissions)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
-		DLFileEntryService dlFileEntryService = DLFileEntryServiceFactory.getService();
-
-		return dlFileEntryService.addFileEntry(folderId, name, title,
-			description, tagsEntries, extraSettings, bytes,
-			addCommunityPermissions, addGuestPermissions);
+		return _service.addFileEntry(folderId, name, title, description,
+			tagsEntries, extraSettings, bytes, addCommunityPermissions,
+			addGuestPermissions);
 	}
 
 	public static com.liferay.portlet.documentlibrary.model.DLFileEntry addFileEntry(
@@ -87,11 +77,9 @@ public class DLFileEntryServiceUtil {
 		java.lang.String[] guestPermissions)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
-		DLFileEntryService dlFileEntryService = DLFileEntryServiceFactory.getService();
-
-		return dlFileEntryService.addFileEntry(folderId, name, title,
-			description, tagsEntries, extraSettings, file,
-			communityPermissions, guestPermissions);
+		return _service.addFileEntry(folderId, name, title, description,
+			tagsEntries, extraSettings, file, communityPermissions,
+			guestPermissions);
 	}
 
 	public static com.liferay.portlet.documentlibrary.model.DLFileEntry addFileEntry(
@@ -102,80 +90,61 @@ public class DLFileEntryServiceUtil {
 		java.lang.String[] guestPermissions)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
-		DLFileEntryService dlFileEntryService = DLFileEntryServiceFactory.getService();
-
-		return dlFileEntryService.addFileEntry(folderId, name, title,
-			description, tagsEntries, extraSettings, bytes,
-			communityPermissions, guestPermissions);
+		return _service.addFileEntry(folderId, name, title, description,
+			tagsEntries, extraSettings, bytes, communityPermissions,
+			guestPermissions);
 	}
 
 	public static void deleteFileEntry(long folderId, java.lang.String name)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
-		DLFileEntryService dlFileEntryService = DLFileEntryServiceFactory.getService();
-
-		dlFileEntryService.deleteFileEntry(folderId, name);
+		_service.deleteFileEntry(folderId, name);
 	}
 
 	public static void deleteFileEntry(long folderId, java.lang.String name,
 		double version)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
-		DLFileEntryService dlFileEntryService = DLFileEntryServiceFactory.getService();
-
-		dlFileEntryService.deleteFileEntry(folderId, name, version);
+		_service.deleteFileEntry(folderId, name, version);
 	}
 
 	public static void deleteFileEntryByTitle(long folderId,
 		java.lang.String titleWithExtension)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
-		DLFileEntryService dlFileEntryService = DLFileEntryServiceFactory.getService();
-
-		dlFileEntryService.deleteFileEntryByTitle(folderId, titleWithExtension);
+		_service.deleteFileEntryByTitle(folderId, titleWithExtension);
 	}
 
 	public static java.util.List<com.liferay.portlet.documentlibrary.model.DLFileEntry> getFileEntries(
 		long folderId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
-		DLFileEntryService dlFileEntryService = DLFileEntryServiceFactory.getService();
-
-		return dlFileEntryService.getFileEntries(folderId);
+		return _service.getFileEntries(folderId);
 	}
 
 	public static com.liferay.portlet.documentlibrary.model.DLFileEntry getFileEntry(
 		long folderId, java.lang.String name)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
-		DLFileEntryService dlFileEntryService = DLFileEntryServiceFactory.getService();
-
-		return dlFileEntryService.getFileEntry(folderId, name);
+		return _service.getFileEntry(folderId, name);
 	}
 
 	public static com.liferay.portlet.documentlibrary.model.DLFileEntry getFileEntryByTitle(
 		long folderId, java.lang.String titleWithExtension)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
-		DLFileEntryService dlFileEntryService = DLFileEntryServiceFactory.getService();
-
-		return dlFileEntryService.getFileEntryByTitle(folderId,
-			titleWithExtension);
+		return _service.getFileEntryByTitle(folderId, titleWithExtension);
 	}
 
 	public static void lockFileEntry(long folderId, java.lang.String name)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
-		DLFileEntryService dlFileEntryService = DLFileEntryServiceFactory.getService();
-
-		dlFileEntryService.lockFileEntry(folderId, name);
+		_service.lockFileEntry(folderId, name);
 	}
 
 	public static void unlockFileEntry(long folderId, java.lang.String name)
 		throws java.rmi.RemoteException {
-		DLFileEntryService dlFileEntryService = DLFileEntryServiceFactory.getService();
-
-		dlFileEntryService.unlockFileEntry(folderId, name);
+		_service.unlockFileEntry(folderId, name);
 	}
 
 	public static com.liferay.portlet.documentlibrary.model.DLFileEntry updateFileEntry(
@@ -185,10 +154,18 @@ public class DLFileEntryServiceUtil {
 		java.lang.String extraSettings, byte[] bytes)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
-		DLFileEntryService dlFileEntryService = DLFileEntryServiceFactory.getService();
-
-		return dlFileEntryService.updateFileEntry(folderId, newFolderId, name,
+		return _service.updateFileEntry(folderId, newFolderId, name,
 			sourceFileName, title, description, tagsEntries, extraSettings,
 			bytes);
 	}
+
+	public static DLFileEntryService getService() {
+		return _service;
+	}
+
+	public void setService(DLFileEntryService service) {
+		_service = service;
+	}
+
+	private static DLFileEntryService _service;
 }

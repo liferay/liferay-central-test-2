@@ -687,22 +687,12 @@ public class GroupUtil {
 	}
 
 	public static GroupPersistence getPersistence() {
-		return _getUtil()._persistence;
+		return _persistence;
 	}
 
 	public void setPersistence(GroupPersistence persistence) {
 		_persistence = persistence;
 	}
 
-	private static GroupUtil _getUtil() {
-		if (_util == null) {
-			_util = (GroupUtil)com.liferay.portal.kernel.bean.PortalBeanLocatorUtil.locate(_UTIL);
-		}
-
-		return _util;
-	}
-
-	private static final String _UTIL = GroupUtil.class.getName();
-	private static GroupUtil _util;
-	private GroupPersistence _persistence;
+	private static GroupPersistence _persistence;
 }

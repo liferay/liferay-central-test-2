@@ -255,22 +255,12 @@ public class CountryUtil {
 	}
 
 	public static CountryPersistence getPersistence() {
-		return _getUtil()._persistence;
+		return _persistence;
 	}
 
 	public void setPersistence(CountryPersistence persistence) {
 		_persistence = persistence;
 	}
 
-	private static CountryUtil _getUtil() {
-		if (_util == null) {
-			_util = (CountryUtil)com.liferay.portal.kernel.bean.PortalBeanLocatorUtil.locate(_UTIL);
-		}
-
-		return _util;
-	}
-
-	private static final String _UTIL = CountryUtil.class.getName();
-	private static CountryUtil _util;
-	private CountryPersistence _persistence;
+	private static CountryPersistence _persistence;
 }

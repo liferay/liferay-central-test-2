@@ -39,61 +39,47 @@ package com.liferay.portlet.social.service;
  * on a bean instead of writing a lookup call and a method call.
  * </p>
  *
- * <p>
- * <code>com.liferay.portlet.social.service.SocialRequestInterpreterLocalServiceFactory</code>
- * is responsible for the lookup of the bean.
- * </p>
- *
  * @author Brian Wing Shun Chan
  *
  * @see com.liferay.portlet.social.service.SocialRequestInterpreterLocalService
- * @see com.liferay.portlet.social.service.SocialRequestInterpreterLocalServiceFactory
  *
  */
 public class SocialRequestInterpreterLocalServiceUtil {
 	public static void addRequestInterpreter(
 		com.liferay.portlet.social.model.SocialRequestInterpreter requestInterpreter) {
-		SocialRequestInterpreterLocalService socialRequestInterpreterLocalService =
-			SocialRequestInterpreterLocalServiceFactory.getService();
-
-		socialRequestInterpreterLocalService.addRequestInterpreter(requestInterpreter);
+		_service.addRequestInterpreter(requestInterpreter);
 	}
 
 	public static void deleteRequestInterpreter(
 		com.liferay.portlet.social.model.SocialRequestInterpreter requestInterpreter) {
-		SocialRequestInterpreterLocalService socialRequestInterpreterLocalService =
-			SocialRequestInterpreterLocalServiceFactory.getService();
-
-		socialRequestInterpreterLocalService.deleteRequestInterpreter(requestInterpreter);
+		_service.deleteRequestInterpreter(requestInterpreter);
 	}
 
 	public static com.liferay.portlet.social.model.SocialRequestFeedEntry interpret(
 		com.liferay.portlet.social.model.SocialRequest request,
 		com.liferay.portal.theme.ThemeDisplay themeDisplay) {
-		SocialRequestInterpreterLocalService socialRequestInterpreterLocalService =
-			SocialRequestInterpreterLocalServiceFactory.getService();
-
-		return socialRequestInterpreterLocalService.interpret(request,
-			themeDisplay);
+		return _service.interpret(request, themeDisplay);
 	}
 
 	public static void processConfirmation(
 		com.liferay.portlet.social.model.SocialRequest request,
 		com.liferay.portal.theme.ThemeDisplay themeDisplay) {
-		SocialRequestInterpreterLocalService socialRequestInterpreterLocalService =
-			SocialRequestInterpreterLocalServiceFactory.getService();
-
-		socialRequestInterpreterLocalService.processConfirmation(request,
-			themeDisplay);
+		_service.processConfirmation(request, themeDisplay);
 	}
 
 	public static void processRejection(
 		com.liferay.portlet.social.model.SocialRequest request,
 		com.liferay.portal.theme.ThemeDisplay themeDisplay) {
-		SocialRequestInterpreterLocalService socialRequestInterpreterLocalService =
-			SocialRequestInterpreterLocalServiceFactory.getService();
-
-		socialRequestInterpreterLocalService.processRejection(request,
-			themeDisplay);
+		_service.processRejection(request, themeDisplay);
 	}
+
+	public static SocialRequestInterpreterLocalService getService() {
+		return _service;
+	}
+
+	public void setService(SocialRequestInterpreterLocalService service) {
+		_service = service;
+	}
+
+	private static SocialRequestInterpreterLocalService _service;
 }

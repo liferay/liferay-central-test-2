@@ -39,118 +39,86 @@ package com.liferay.portlet.shopping.service;
  * on a bean instead of writing a lookup call and a method call.
  * </p>
  *
- * <p>
- * <code>com.liferay.portlet.shopping.service.ShoppingCartLocalServiceFactory</code>
- * is responsible for the lookup of the bean.
- * </p>
- *
  * @author Brian Wing Shun Chan
  *
  * @see com.liferay.portlet.shopping.service.ShoppingCartLocalService
- * @see com.liferay.portlet.shopping.service.ShoppingCartLocalServiceFactory
  *
  */
 public class ShoppingCartLocalServiceUtil {
 	public static com.liferay.portlet.shopping.model.ShoppingCart addShoppingCart(
 		com.liferay.portlet.shopping.model.ShoppingCart shoppingCart)
 		throws com.liferay.portal.SystemException {
-		ShoppingCartLocalService shoppingCartLocalService = ShoppingCartLocalServiceFactory.getService();
-
-		return shoppingCartLocalService.addShoppingCart(shoppingCart);
+		return _service.addShoppingCart(shoppingCart);
 	}
 
 	public static void deleteShoppingCart(long cartId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		ShoppingCartLocalService shoppingCartLocalService = ShoppingCartLocalServiceFactory.getService();
-
-		shoppingCartLocalService.deleteShoppingCart(cartId);
+		_service.deleteShoppingCart(cartId);
 	}
 
 	public static void deleteShoppingCart(
 		com.liferay.portlet.shopping.model.ShoppingCart shoppingCart)
 		throws com.liferay.portal.SystemException {
-		ShoppingCartLocalService shoppingCartLocalService = ShoppingCartLocalServiceFactory.getService();
-
-		shoppingCartLocalService.deleteShoppingCart(shoppingCart);
+		_service.deleteShoppingCart(shoppingCart);
 	}
 
 	public static java.util.List<Object> dynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery)
 		throws com.liferay.portal.SystemException {
-		ShoppingCartLocalService shoppingCartLocalService = ShoppingCartLocalServiceFactory.getService();
-
-		return shoppingCartLocalService.dynamicQuery(dynamicQuery);
+		return _service.dynamicQuery(dynamicQuery);
 	}
 
 	public static java.util.List<Object> dynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery, int start,
 		int end) throws com.liferay.portal.SystemException {
-		ShoppingCartLocalService shoppingCartLocalService = ShoppingCartLocalServiceFactory.getService();
-
-		return shoppingCartLocalService.dynamicQuery(dynamicQuery, start, end);
+		return _service.dynamicQuery(dynamicQuery, start, end);
 	}
 
 	public static com.liferay.portlet.shopping.model.ShoppingCart getShoppingCart(
 		long cartId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		ShoppingCartLocalService shoppingCartLocalService = ShoppingCartLocalServiceFactory.getService();
-
-		return shoppingCartLocalService.getShoppingCart(cartId);
+		return _service.getShoppingCart(cartId);
 	}
 
 	public static java.util.List<com.liferay.portlet.shopping.model.ShoppingCart> getShoppingCarts(
 		int start, int end) throws com.liferay.portal.SystemException {
-		ShoppingCartLocalService shoppingCartLocalService = ShoppingCartLocalServiceFactory.getService();
-
-		return shoppingCartLocalService.getShoppingCarts(start, end);
+		return _service.getShoppingCarts(start, end);
 	}
 
 	public static int getShoppingCartsCount()
 		throws com.liferay.portal.SystemException {
-		ShoppingCartLocalService shoppingCartLocalService = ShoppingCartLocalServiceFactory.getService();
-
-		return shoppingCartLocalService.getShoppingCartsCount();
+		return _service.getShoppingCartsCount();
 	}
 
 	public static com.liferay.portlet.shopping.model.ShoppingCart updateShoppingCart(
 		com.liferay.portlet.shopping.model.ShoppingCart shoppingCart)
 		throws com.liferay.portal.SystemException {
-		ShoppingCartLocalService shoppingCartLocalService = ShoppingCartLocalServiceFactory.getService();
-
-		return shoppingCartLocalService.updateShoppingCart(shoppingCart);
+		return _service.updateShoppingCart(shoppingCart);
 	}
 
 	public static void deleteGroupCarts(long groupId)
 		throws com.liferay.portal.SystemException {
-		ShoppingCartLocalService shoppingCartLocalService = ShoppingCartLocalServiceFactory.getService();
-
-		shoppingCartLocalService.deleteGroupCarts(groupId);
+		_service.deleteGroupCarts(groupId);
 	}
 
 	public static void deleteUserCarts(long userId)
 		throws com.liferay.portal.SystemException {
-		ShoppingCartLocalService shoppingCartLocalService = ShoppingCartLocalServiceFactory.getService();
-
-		shoppingCartLocalService.deleteUserCarts(userId);
+		_service.deleteUserCarts(userId);
 	}
 
 	public static com.liferay.portlet.shopping.model.ShoppingCart getCart(
 		long userId, long groupId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		ShoppingCartLocalService shoppingCartLocalService = ShoppingCartLocalServiceFactory.getService();
-
-		return shoppingCartLocalService.getCart(userId, groupId);
+		return _service.getCart(userId, groupId);
 	}
 
 	public static java.util.Map<com.liferay.portlet.shopping.model.ShoppingCartItem, Integer> getItems(
 		long groupId, java.lang.String itemIds)
 		throws com.liferay.portal.SystemException {
-		ShoppingCartLocalService shoppingCartLocalService = ShoppingCartLocalServiceFactory.getService();
-
-		return shoppingCartLocalService.getItems(groupId, itemIds);
+		return _service.getItems(groupId, itemIds);
 	}
 
 	public static com.liferay.portlet.shopping.model.ShoppingCart updateCart(
@@ -158,9 +126,17 @@ public class ShoppingCartLocalServiceUtil {
 		java.lang.String couponCodes, int altShipping, boolean insure)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		ShoppingCartLocalService shoppingCartLocalService = ShoppingCartLocalServiceFactory.getService();
-
-		return shoppingCartLocalService.updateCart(userId, groupId, itemIds,
-			couponCodes, altShipping, insure);
+		return _service.updateCart(userId, groupId, itemIds, couponCodes,
+			altShipping, insure);
 	}
+
+	public static ShoppingCartLocalService getService() {
+		return _service;
+	}
+
+	public void setService(ShoppingCartLocalService service) {
+		_service = service;
+	}
+
+	private static ShoppingCartLocalService _service;
 }

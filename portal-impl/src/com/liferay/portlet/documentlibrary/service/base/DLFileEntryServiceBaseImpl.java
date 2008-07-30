@@ -23,94 +23,54 @@
 package com.liferay.portlet.documentlibrary.service.base;
 
 import com.liferay.counter.service.CounterLocalService;
-import com.liferay.counter.service.CounterLocalServiceFactory;
 import com.liferay.counter.service.CounterService;
-import com.liferay.counter.service.CounterServiceFactory;
 
 import com.liferay.documentlibrary.service.DLLocalService;
-import com.liferay.documentlibrary.service.DLLocalServiceFactory;
 import com.liferay.documentlibrary.service.DLService;
-import com.liferay.documentlibrary.service.DLServiceFactory;
 
 import com.liferay.lock.service.LockService;
-import com.liferay.lock.service.LockServiceFactory;
 
 import com.liferay.portal.kernel.bean.InitializingBean;
+import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
 import com.liferay.portal.service.ResourceLocalService;
-import com.liferay.portal.service.ResourceLocalServiceFactory;
 import com.liferay.portal.service.ResourceService;
-import com.liferay.portal.service.ResourceServiceFactory;
 import com.liferay.portal.service.UserLocalService;
-import com.liferay.portal.service.UserLocalServiceFactory;
 import com.liferay.portal.service.UserService;
-import com.liferay.portal.service.UserServiceFactory;
 import com.liferay.portal.service.WebDAVPropsLocalService;
-import com.liferay.portal.service.WebDAVPropsLocalServiceFactory;
 import com.liferay.portal.service.base.PrincipalBean;
 import com.liferay.portal.service.persistence.ResourceFinder;
-import com.liferay.portal.service.persistence.ResourceFinderUtil;
 import com.liferay.portal.service.persistence.ResourcePersistence;
-import com.liferay.portal.service.persistence.ResourceUtil;
 import com.liferay.portal.service.persistence.UserFinder;
-import com.liferay.portal.service.persistence.UserFinderUtil;
 import com.liferay.portal.service.persistence.UserPersistence;
-import com.liferay.portal.service.persistence.UserUtil;
 import com.liferay.portal.service.persistence.WebDAVPropsPersistence;
-import com.liferay.portal.service.persistence.WebDAVPropsUtil;
 
 import com.liferay.portlet.documentlibrary.service.DLFileEntryLocalService;
-import com.liferay.portlet.documentlibrary.service.DLFileEntryLocalServiceFactory;
 import com.liferay.portlet.documentlibrary.service.DLFileEntryService;
 import com.liferay.portlet.documentlibrary.service.DLFileRankLocalService;
-import com.liferay.portlet.documentlibrary.service.DLFileRankLocalServiceFactory;
 import com.liferay.portlet.documentlibrary.service.DLFileShortcutLocalService;
-import com.liferay.portlet.documentlibrary.service.DLFileShortcutLocalServiceFactory;
 import com.liferay.portlet.documentlibrary.service.DLFileShortcutService;
-import com.liferay.portlet.documentlibrary.service.DLFileShortcutServiceFactory;
 import com.liferay.portlet.documentlibrary.service.DLFileVersionLocalService;
-import com.liferay.portlet.documentlibrary.service.DLFileVersionLocalServiceFactory;
 import com.liferay.portlet.documentlibrary.service.DLFolderLocalService;
-import com.liferay.portlet.documentlibrary.service.DLFolderLocalServiceFactory;
 import com.liferay.portlet.documentlibrary.service.DLFolderService;
-import com.liferay.portlet.documentlibrary.service.DLFolderServiceFactory;
 import com.liferay.portlet.documentlibrary.service.persistence.DLFileEntryAndShortcutFinder;
-import com.liferay.portlet.documentlibrary.service.persistence.DLFileEntryAndShortcutFinderUtil;
 import com.liferay.portlet.documentlibrary.service.persistence.DLFileEntryFinder;
-import com.liferay.portlet.documentlibrary.service.persistence.DLFileEntryFinderUtil;
 import com.liferay.portlet.documentlibrary.service.persistence.DLFileEntryPersistence;
-import com.liferay.portlet.documentlibrary.service.persistence.DLFileEntryUtil;
 import com.liferay.portlet.documentlibrary.service.persistence.DLFileRankFinder;
-import com.liferay.portlet.documentlibrary.service.persistence.DLFileRankFinderUtil;
 import com.liferay.portlet.documentlibrary.service.persistence.DLFileRankPersistence;
-import com.liferay.portlet.documentlibrary.service.persistence.DLFileRankUtil;
 import com.liferay.portlet.documentlibrary.service.persistence.DLFileShortcutFinder;
-import com.liferay.portlet.documentlibrary.service.persistence.DLFileShortcutFinderUtil;
 import com.liferay.portlet.documentlibrary.service.persistence.DLFileShortcutPersistence;
-import com.liferay.portlet.documentlibrary.service.persistence.DLFileShortcutUtil;
 import com.liferay.portlet.documentlibrary.service.persistence.DLFileVersionPersistence;
-import com.liferay.portlet.documentlibrary.service.persistence.DLFileVersionUtil;
 import com.liferay.portlet.documentlibrary.service.persistence.DLFolderPersistence;
-import com.liferay.portlet.documentlibrary.service.persistence.DLFolderUtil;
 import com.liferay.portlet.messageboards.service.MBMessageLocalService;
-import com.liferay.portlet.messageboards.service.MBMessageLocalServiceFactory;
 import com.liferay.portlet.messageboards.service.MBMessageService;
-import com.liferay.portlet.messageboards.service.MBMessageServiceFactory;
 import com.liferay.portlet.messageboards.service.persistence.MBMessageFinder;
-import com.liferay.portlet.messageboards.service.persistence.MBMessageFinderUtil;
 import com.liferay.portlet.messageboards.service.persistence.MBMessagePersistence;
-import com.liferay.portlet.messageboards.service.persistence.MBMessageUtil;
 import com.liferay.portlet.ratings.service.RatingsStatsLocalService;
-import com.liferay.portlet.ratings.service.RatingsStatsLocalServiceFactory;
 import com.liferay.portlet.ratings.service.persistence.RatingsStatsPersistence;
-import com.liferay.portlet.ratings.service.persistence.RatingsStatsUtil;
 import com.liferay.portlet.tags.service.TagsAssetLocalService;
-import com.liferay.portlet.tags.service.TagsAssetLocalServiceFactory;
 import com.liferay.portlet.tags.service.TagsAssetService;
-import com.liferay.portlet.tags.service.TagsAssetServiceFactory;
 import com.liferay.portlet.tags.service.persistence.TagsAssetFinder;
-import com.liferay.portlet.tags.service.persistence.TagsAssetFinderUtil;
 import com.liferay.portlet.tags.service.persistence.TagsAssetPersistence;
-import com.liferay.portlet.tags.service.persistence.TagsAssetUtil;
 
 /**
  * <a href="DLFileEntryServiceBaseImpl.java.html"><b><i>View Source</i></b></a>
@@ -471,167 +431,208 @@ public abstract class DLFileEntryServiceBaseImpl extends PrincipalBean
 
 	public void afterPropertiesSet() {
 		if (dlFileEntryLocalService == null) {
-			dlFileEntryLocalService = DLFileEntryLocalServiceFactory.getImpl();
+			dlFileEntryLocalService = (DLFileEntryLocalService)PortalBeanLocatorUtil.locate(DLFileEntryLocalService.class.getName() +
+					".impl");
 		}
 
 		if (dlFileEntryPersistence == null) {
-			dlFileEntryPersistence = DLFileEntryUtil.getPersistence();
+			dlFileEntryPersistence = (DLFileEntryPersistence)PortalBeanLocatorUtil.locate(DLFileEntryPersistence.class.getName() +
+					".impl");
 		}
 
 		if (dlFileEntryFinder == null) {
-			dlFileEntryFinder = DLFileEntryFinderUtil.getFinder();
+			dlFileEntryFinder = (DLFileEntryFinder)PortalBeanLocatorUtil.locate(DLFileEntryFinder.class.getName() +
+					".impl");
 		}
 
 		if (dlFileEntryAndShortcutFinder == null) {
-			dlFileEntryAndShortcutFinder = DLFileEntryAndShortcutFinderUtil.getFinder();
+			dlFileEntryAndShortcutFinder = (DLFileEntryAndShortcutFinder)PortalBeanLocatorUtil.locate(DLFileEntryAndShortcutFinder.class.getName() +
+					".impl");
 		}
 
 		if (dlFileRankLocalService == null) {
-			dlFileRankLocalService = DLFileRankLocalServiceFactory.getImpl();
+			dlFileRankLocalService = (DLFileRankLocalService)PortalBeanLocatorUtil.locate(DLFileRankLocalService.class.getName() +
+					".impl");
 		}
 
 		if (dlFileRankPersistence == null) {
-			dlFileRankPersistence = DLFileRankUtil.getPersistence();
+			dlFileRankPersistence = (DLFileRankPersistence)PortalBeanLocatorUtil.locate(DLFileRankPersistence.class.getName() +
+					".impl");
 		}
 
 		if (dlFileRankFinder == null) {
-			dlFileRankFinder = DLFileRankFinderUtil.getFinder();
+			dlFileRankFinder = (DLFileRankFinder)PortalBeanLocatorUtil.locate(DLFileRankFinder.class.getName() +
+					".impl");
 		}
 
 		if (dlFileShortcutLocalService == null) {
-			dlFileShortcutLocalService = DLFileShortcutLocalServiceFactory.getImpl();
+			dlFileShortcutLocalService = (DLFileShortcutLocalService)PortalBeanLocatorUtil.locate(DLFileShortcutLocalService.class.getName() +
+					".impl");
 		}
 
 		if (dlFileShortcutService == null) {
-			dlFileShortcutService = DLFileShortcutServiceFactory.getImpl();
+			dlFileShortcutService = (DLFileShortcutService)PortalBeanLocatorUtil.locate(DLFileShortcutService.class.getName() +
+					".impl");
 		}
 
 		if (dlFileShortcutPersistence == null) {
-			dlFileShortcutPersistence = DLFileShortcutUtil.getPersistence();
+			dlFileShortcutPersistence = (DLFileShortcutPersistence)PortalBeanLocatorUtil.locate(DLFileShortcutPersistence.class.getName() +
+					".impl");
 		}
 
 		if (dlFileShortcutFinder == null) {
-			dlFileShortcutFinder = DLFileShortcutFinderUtil.getFinder();
+			dlFileShortcutFinder = (DLFileShortcutFinder)PortalBeanLocatorUtil.locate(DLFileShortcutFinder.class.getName() +
+					".impl");
 		}
 
 		if (dlFileVersionLocalService == null) {
-			dlFileVersionLocalService = DLFileVersionLocalServiceFactory.getImpl();
+			dlFileVersionLocalService = (DLFileVersionLocalService)PortalBeanLocatorUtil.locate(DLFileVersionLocalService.class.getName() +
+					".impl");
 		}
 
 		if (dlFileVersionPersistence == null) {
-			dlFileVersionPersistence = DLFileVersionUtil.getPersistence();
+			dlFileVersionPersistence = (DLFileVersionPersistence)PortalBeanLocatorUtil.locate(DLFileVersionPersistence.class.getName() +
+					".impl");
 		}
 
 		if (dlFolderLocalService == null) {
-			dlFolderLocalService = DLFolderLocalServiceFactory.getImpl();
+			dlFolderLocalService = (DLFolderLocalService)PortalBeanLocatorUtil.locate(DLFolderLocalService.class.getName() +
+					".impl");
 		}
 
 		if (dlFolderService == null) {
-			dlFolderService = DLFolderServiceFactory.getImpl();
+			dlFolderService = (DLFolderService)PortalBeanLocatorUtil.locate(DLFolderService.class.getName() +
+					".impl");
 		}
 
 		if (dlFolderPersistence == null) {
-			dlFolderPersistence = DLFolderUtil.getPersistence();
+			dlFolderPersistence = (DLFolderPersistence)PortalBeanLocatorUtil.locate(DLFolderPersistence.class.getName() +
+					".impl");
 		}
 
 		if (counterLocalService == null) {
-			counterLocalService = CounterLocalServiceFactory.getImpl();
+			counterLocalService = (CounterLocalService)PortalBeanLocatorUtil.locate(CounterLocalService.class.getName() +
+					".impl");
 		}
 
 		if (counterService == null) {
-			counterService = CounterServiceFactory.getImpl();
+			counterService = (CounterService)PortalBeanLocatorUtil.locate(CounterService.class.getName() +
+					".impl");
 		}
 
 		if (dlLocalService == null) {
-			dlLocalService = DLLocalServiceFactory.getImpl();
+			dlLocalService = (DLLocalService)PortalBeanLocatorUtil.locate(DLLocalService.class.getName() +
+					".impl");
 		}
 
 		if (dlService == null) {
-			dlService = DLServiceFactory.getImpl();
+			dlService = (DLService)PortalBeanLocatorUtil.locate(DLService.class.getName() +
+					".impl");
 		}
 
 		if (lockService == null) {
-			lockService = LockServiceFactory.getImpl();
+			lockService = (LockService)PortalBeanLocatorUtil.locate(LockService.class.getName() +
+					".impl");
 		}
 
 		if (resourceLocalService == null) {
-			resourceLocalService = ResourceLocalServiceFactory.getImpl();
+			resourceLocalService = (ResourceLocalService)PortalBeanLocatorUtil.locate(ResourceLocalService.class.getName() +
+					".impl");
 		}
 
 		if (resourceService == null) {
-			resourceService = ResourceServiceFactory.getImpl();
+			resourceService = (ResourceService)PortalBeanLocatorUtil.locate(ResourceService.class.getName() +
+					".impl");
 		}
 
 		if (resourcePersistence == null) {
-			resourcePersistence = ResourceUtil.getPersistence();
+			resourcePersistence = (ResourcePersistence)PortalBeanLocatorUtil.locate(ResourcePersistence.class.getName() +
+					".impl");
 		}
 
 		if (resourceFinder == null) {
-			resourceFinder = ResourceFinderUtil.getFinder();
+			resourceFinder = (ResourceFinder)PortalBeanLocatorUtil.locate(ResourceFinder.class.getName() +
+					".impl");
 		}
 
 		if (userLocalService == null) {
-			userLocalService = UserLocalServiceFactory.getImpl();
+			userLocalService = (UserLocalService)PortalBeanLocatorUtil.locate(UserLocalService.class.getName() +
+					".impl");
 		}
 
 		if (userService == null) {
-			userService = UserServiceFactory.getImpl();
+			userService = (UserService)PortalBeanLocatorUtil.locate(UserService.class.getName() +
+					".impl");
 		}
 
 		if (userPersistence == null) {
-			userPersistence = UserUtil.getPersistence();
+			userPersistence = (UserPersistence)PortalBeanLocatorUtil.locate(UserPersistence.class.getName() +
+					".impl");
 		}
 
 		if (userFinder == null) {
-			userFinder = UserFinderUtil.getFinder();
+			userFinder = (UserFinder)PortalBeanLocatorUtil.locate(UserFinder.class.getName() +
+					".impl");
 		}
 
 		if (webDAVPropsLocalService == null) {
-			webDAVPropsLocalService = WebDAVPropsLocalServiceFactory.getImpl();
+			webDAVPropsLocalService = (WebDAVPropsLocalService)PortalBeanLocatorUtil.locate(WebDAVPropsLocalService.class.getName() +
+					".impl");
 		}
 
 		if (webDAVPropsPersistence == null) {
-			webDAVPropsPersistence = WebDAVPropsUtil.getPersistence();
+			webDAVPropsPersistence = (WebDAVPropsPersistence)PortalBeanLocatorUtil.locate(WebDAVPropsPersistence.class.getName() +
+					".impl");
 		}
 
 		if (mbMessageLocalService == null) {
-			mbMessageLocalService = MBMessageLocalServiceFactory.getImpl();
+			mbMessageLocalService = (MBMessageLocalService)PortalBeanLocatorUtil.locate(MBMessageLocalService.class.getName() +
+					".impl");
 		}
 
 		if (mbMessageService == null) {
-			mbMessageService = MBMessageServiceFactory.getImpl();
+			mbMessageService = (MBMessageService)PortalBeanLocatorUtil.locate(MBMessageService.class.getName() +
+					".impl");
 		}
 
 		if (mbMessagePersistence == null) {
-			mbMessagePersistence = MBMessageUtil.getPersistence();
+			mbMessagePersistence = (MBMessagePersistence)PortalBeanLocatorUtil.locate(MBMessagePersistence.class.getName() +
+					".impl");
 		}
 
 		if (mbMessageFinder == null) {
-			mbMessageFinder = MBMessageFinderUtil.getFinder();
+			mbMessageFinder = (MBMessageFinder)PortalBeanLocatorUtil.locate(MBMessageFinder.class.getName() +
+					".impl");
 		}
 
 		if (ratingsStatsLocalService == null) {
-			ratingsStatsLocalService = RatingsStatsLocalServiceFactory.getImpl();
+			ratingsStatsLocalService = (RatingsStatsLocalService)PortalBeanLocatorUtil.locate(RatingsStatsLocalService.class.getName() +
+					".impl");
 		}
 
 		if (ratingsStatsPersistence == null) {
-			ratingsStatsPersistence = RatingsStatsUtil.getPersistence();
+			ratingsStatsPersistence = (RatingsStatsPersistence)PortalBeanLocatorUtil.locate(RatingsStatsPersistence.class.getName() +
+					".impl");
 		}
 
 		if (tagsAssetLocalService == null) {
-			tagsAssetLocalService = TagsAssetLocalServiceFactory.getImpl();
+			tagsAssetLocalService = (TagsAssetLocalService)PortalBeanLocatorUtil.locate(TagsAssetLocalService.class.getName() +
+					".impl");
 		}
 
 		if (tagsAssetService == null) {
-			tagsAssetService = TagsAssetServiceFactory.getImpl();
+			tagsAssetService = (TagsAssetService)PortalBeanLocatorUtil.locate(TagsAssetService.class.getName() +
+					".impl");
 		}
 
 		if (tagsAssetPersistence == null) {
-			tagsAssetPersistence = TagsAssetUtil.getPersistence();
+			tagsAssetPersistence = (TagsAssetPersistence)PortalBeanLocatorUtil.locate(TagsAssetPersistence.class.getName() +
+					".impl");
 		}
 
 		if (tagsAssetFinder == null) {
-			tagsAssetFinder = TagsAssetFinderUtil.getFinder();
+			tagsAssetFinder = (TagsAssetFinder)PortalBeanLocatorUtil.locate(TagsAssetFinder.class.getName() +
+					".impl");
 		}
 	}
 

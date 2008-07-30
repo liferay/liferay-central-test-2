@@ -39,15 +39,9 @@ package com.liferay.portal.service;
  * on a bean instead of writing a lookup call and a method call.
  * </p>
  *
- * <p>
- * <code>com.liferay.portal.service.CountryServiceFactory</code>
- * is responsible for the lookup of the bean.
- * </p>
- *
  * @author Brian Wing Shun Chan
  *
  * @see com.liferay.portal.service.CountryService
- * @see com.liferay.portal.service.CountryServiceFactory
  *
  */
 public class CountryServiceUtil {
@@ -56,58 +50,54 @@ public class CountryServiceUtil {
 		java.lang.String number, java.lang.String idd, boolean active)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
-		CountryService countryService = CountryServiceFactory.getService();
-
-		return countryService.addCountry(name, a2, a3, number, idd, active);
+		return _service.addCountry(name, a2, a3, number, idd, active);
 	}
 
 	public static java.util.List<com.liferay.portal.model.Country> getCountries()
 		throws com.liferay.portal.SystemException, java.rmi.RemoteException {
-		CountryService countryService = CountryServiceFactory.getService();
-
-		return countryService.getCountries();
+		return _service.getCountries();
 	}
 
 	public static java.util.List<com.liferay.portal.model.Country> getCountries(
 		boolean active)
 		throws com.liferay.portal.SystemException, java.rmi.RemoteException {
-		CountryService countryService = CountryServiceFactory.getService();
-
-		return countryService.getCountries(active);
+		return _service.getCountries(active);
 	}
 
 	public static com.liferay.portal.model.Country getCountry(long countryId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
-		CountryService countryService = CountryServiceFactory.getService();
-
-		return countryService.getCountry(countryId);
+		return _service.getCountry(countryId);
 	}
 
 	public static com.liferay.portal.model.Country getCountryByA2(
 		java.lang.String a2)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
-		CountryService countryService = CountryServiceFactory.getService();
-
-		return countryService.getCountryByA2(a2);
+		return _service.getCountryByA2(a2);
 	}
 
 	public static com.liferay.portal.model.Country getCountryByA3(
 		java.lang.String a3)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
-		CountryService countryService = CountryServiceFactory.getService();
-
-		return countryService.getCountryByA3(a3);
+		return _service.getCountryByA3(a3);
 	}
 
 	public static com.liferay.portal.model.Country getCountryByName(
 		java.lang.String name)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
-		CountryService countryService = CountryServiceFactory.getService();
-
-		return countryService.getCountryByName(name);
+		return _service.getCountryByName(name);
 	}
+
+	public static CountryService getService() {
+		return _service;
+	}
+
+	public void setService(CountryService service) {
+		_service = service;
+	}
+
+	private static CountryService _service;
 }

@@ -23,37 +23,26 @@
 package com.liferay.portlet.expando.service.base;
 
 import com.liferay.counter.service.CounterLocalService;
-import com.liferay.counter.service.CounterLocalServiceFactory;
 import com.liferay.counter.service.CounterService;
-import com.liferay.counter.service.CounterServiceFactory;
 
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.bean.InitializingBean;
+import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
 import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 
 import com.liferay.portlet.expando.model.ExpandoRow;
 import com.liferay.portlet.expando.service.ExpandoColumnLocalService;
-import com.liferay.portlet.expando.service.ExpandoColumnLocalServiceFactory;
 import com.liferay.portlet.expando.service.ExpandoRowLocalService;
 import com.liferay.portlet.expando.service.ExpandoTableLocalService;
-import com.liferay.portlet.expando.service.ExpandoTableLocalServiceFactory;
 import com.liferay.portlet.expando.service.ExpandoValueLocalService;
-import com.liferay.portlet.expando.service.ExpandoValueLocalServiceFactory;
 import com.liferay.portlet.expando.service.persistence.ExpandoColumnFinder;
-import com.liferay.portlet.expando.service.persistence.ExpandoColumnFinderUtil;
 import com.liferay.portlet.expando.service.persistence.ExpandoColumnPersistence;
-import com.liferay.portlet.expando.service.persistence.ExpandoColumnUtil;
 import com.liferay.portlet.expando.service.persistence.ExpandoRowFinder;
-import com.liferay.portlet.expando.service.persistence.ExpandoRowFinderUtil;
 import com.liferay.portlet.expando.service.persistence.ExpandoRowPersistence;
-import com.liferay.portlet.expando.service.persistence.ExpandoRowUtil;
 import com.liferay.portlet.expando.service.persistence.ExpandoTablePersistence;
-import com.liferay.portlet.expando.service.persistence.ExpandoTableUtil;
 import com.liferay.portlet.expando.service.persistence.ExpandoValueFinder;
-import com.liferay.portlet.expando.service.persistence.ExpandoValueFinderUtil;
 import com.liferay.portlet.expando.service.persistence.ExpandoValuePersistence;
-import com.liferay.portlet.expando.service.persistence.ExpandoValueUtil;
 
 import java.util.List;
 
@@ -219,51 +208,63 @@ public abstract class ExpandoRowLocalServiceBaseImpl
 
 	public void afterPropertiesSet() {
 		if (expandoColumnLocalService == null) {
-			expandoColumnLocalService = ExpandoColumnLocalServiceFactory.getImpl();
+			expandoColumnLocalService = (ExpandoColumnLocalService)PortalBeanLocatorUtil.locate(ExpandoColumnLocalService.class.getName() +
+					".impl");
 		}
 
 		if (expandoColumnPersistence == null) {
-			expandoColumnPersistence = ExpandoColumnUtil.getPersistence();
+			expandoColumnPersistence = (ExpandoColumnPersistence)PortalBeanLocatorUtil.locate(ExpandoColumnPersistence.class.getName() +
+					".impl");
 		}
 
 		if (expandoColumnFinder == null) {
-			expandoColumnFinder = ExpandoColumnFinderUtil.getFinder();
+			expandoColumnFinder = (ExpandoColumnFinder)PortalBeanLocatorUtil.locate(ExpandoColumnFinder.class.getName() +
+					".impl");
 		}
 
 		if (expandoRowPersistence == null) {
-			expandoRowPersistence = ExpandoRowUtil.getPersistence();
+			expandoRowPersistence = (ExpandoRowPersistence)PortalBeanLocatorUtil.locate(ExpandoRowPersistence.class.getName() +
+					".impl");
 		}
 
 		if (expandoRowFinder == null) {
-			expandoRowFinder = ExpandoRowFinderUtil.getFinder();
+			expandoRowFinder = (ExpandoRowFinder)PortalBeanLocatorUtil.locate(ExpandoRowFinder.class.getName() +
+					".impl");
 		}
 
 		if (expandoTableLocalService == null) {
-			expandoTableLocalService = ExpandoTableLocalServiceFactory.getImpl();
+			expandoTableLocalService = (ExpandoTableLocalService)PortalBeanLocatorUtil.locate(ExpandoTableLocalService.class.getName() +
+					".impl");
 		}
 
 		if (expandoTablePersistence == null) {
-			expandoTablePersistence = ExpandoTableUtil.getPersistence();
+			expandoTablePersistence = (ExpandoTablePersistence)PortalBeanLocatorUtil.locate(ExpandoTablePersistence.class.getName() +
+					".impl");
 		}
 
 		if (expandoValueLocalService == null) {
-			expandoValueLocalService = ExpandoValueLocalServiceFactory.getImpl();
+			expandoValueLocalService = (ExpandoValueLocalService)PortalBeanLocatorUtil.locate(ExpandoValueLocalService.class.getName() +
+					".impl");
 		}
 
 		if (expandoValuePersistence == null) {
-			expandoValuePersistence = ExpandoValueUtil.getPersistence();
+			expandoValuePersistence = (ExpandoValuePersistence)PortalBeanLocatorUtil.locate(ExpandoValuePersistence.class.getName() +
+					".impl");
 		}
 
 		if (expandoValueFinder == null) {
-			expandoValueFinder = ExpandoValueFinderUtil.getFinder();
+			expandoValueFinder = (ExpandoValueFinder)PortalBeanLocatorUtil.locate(ExpandoValueFinder.class.getName() +
+					".impl");
 		}
 
 		if (counterLocalService == null) {
-			counterLocalService = CounterLocalServiceFactory.getImpl();
+			counterLocalService = (CounterLocalService)PortalBeanLocatorUtil.locate(CounterLocalService.class.getName() +
+					".impl");
 		}
 
 		if (counterService == null) {
-			counterService = CounterServiceFactory.getImpl();
+			counterService = (CounterService)PortalBeanLocatorUtil.locate(CounterService.class.getName() +
+					".impl");
 		}
 	}
 

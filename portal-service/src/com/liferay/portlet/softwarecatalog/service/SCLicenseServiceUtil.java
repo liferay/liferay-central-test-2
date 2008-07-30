@@ -39,15 +39,9 @@ package com.liferay.portlet.softwarecatalog.service;
  * on a bean instead of writing a lookup call and a method call.
  * </p>
  *
- * <p>
- * <code>com.liferay.portlet.softwarecatalog.service.SCLicenseServiceFactory</code>
- * is responsible for the lookup of the bean.
- * </p>
- *
  * @author Brian Wing Shun Chan
  *
  * @see com.liferay.portlet.softwarecatalog.service.SCLicenseService
- * @see com.liferay.portlet.softwarecatalog.service.SCLicenseServiceFactory
  *
  */
 public class SCLicenseServiceUtil {
@@ -56,27 +50,20 @@ public class SCLicenseServiceUtil {
 		boolean active, boolean recommended)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
-		SCLicenseService scLicenseService = SCLicenseServiceFactory.getService();
-
-		return scLicenseService.addLicense(name, url, openSource, active,
-			recommended);
+		return _service.addLicense(name, url, openSource, active, recommended);
 	}
 
 	public static void deleteLicense(long licenseId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
-		SCLicenseService scLicenseService = SCLicenseServiceFactory.getService();
-
-		scLicenseService.deleteLicense(licenseId);
+		_service.deleteLicense(licenseId);
 	}
 
 	public static com.liferay.portlet.softwarecatalog.model.SCLicense getLicense(
 		long licenseId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
-		SCLicenseService scLicenseService = SCLicenseServiceFactory.getService();
-
-		return scLicenseService.getLicense(licenseId);
+		return _service.getLicense(licenseId);
 	}
 
 	public static com.liferay.portlet.softwarecatalog.model.SCLicense updateLicense(
@@ -84,9 +71,17 @@ public class SCLicenseServiceUtil {
 		boolean openSource, boolean active, boolean recommended)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
-		SCLicenseService scLicenseService = SCLicenseServiceFactory.getService();
-
-		return scLicenseService.updateLicense(licenseId, name, url, openSource,
-			active, recommended);
+		return _service.updateLicense(licenseId, name, url, openSource, active,
+			recommended);
 	}
+
+	public static SCLicenseService getService() {
+		return _service;
+	}
+
+	public void setService(SCLicenseService service) {
+		_service = service;
+	}
+
+	private static SCLicenseService _service;
 }

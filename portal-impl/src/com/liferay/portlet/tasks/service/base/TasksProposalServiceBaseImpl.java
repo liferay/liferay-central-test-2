@@ -23,56 +23,34 @@
 package com.liferay.portlet.tasks.service.base;
 
 import com.liferay.counter.service.CounterLocalService;
-import com.liferay.counter.service.CounterLocalServiceFactory;
 import com.liferay.counter.service.CounterService;
-import com.liferay.counter.service.CounterServiceFactory;
 
 import com.liferay.portal.kernel.bean.InitializingBean;
+import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
 import com.liferay.portal.service.ResourceLocalService;
-import com.liferay.portal.service.ResourceLocalServiceFactory;
 import com.liferay.portal.service.ResourceService;
-import com.liferay.portal.service.ResourceServiceFactory;
 import com.liferay.portal.service.UserLocalService;
-import com.liferay.portal.service.UserLocalServiceFactory;
 import com.liferay.portal.service.UserService;
-import com.liferay.portal.service.UserServiceFactory;
 import com.liferay.portal.service.base.PrincipalBean;
 import com.liferay.portal.service.persistence.ResourceFinder;
-import com.liferay.portal.service.persistence.ResourceFinderUtil;
 import com.liferay.portal.service.persistence.ResourcePersistence;
-import com.liferay.portal.service.persistence.ResourceUtil;
 import com.liferay.portal.service.persistence.UserFinder;
-import com.liferay.portal.service.persistence.UserFinderUtil;
 import com.liferay.portal.service.persistence.UserPersistence;
-import com.liferay.portal.service.persistence.UserUtil;
 
 import com.liferay.portlet.messageboards.service.MBMessageLocalService;
-import com.liferay.portlet.messageboards.service.MBMessageLocalServiceFactory;
 import com.liferay.portlet.messageboards.service.MBMessageService;
-import com.liferay.portlet.messageboards.service.MBMessageServiceFactory;
 import com.liferay.portlet.messageboards.service.persistence.MBMessageFinder;
-import com.liferay.portlet.messageboards.service.persistence.MBMessageFinderUtil;
 import com.liferay.portlet.messageboards.service.persistence.MBMessagePersistence;
-import com.liferay.portlet.messageboards.service.persistence.MBMessageUtil;
 import com.liferay.portlet.social.service.SocialActivityLocalService;
-import com.liferay.portlet.social.service.SocialActivityLocalServiceFactory;
 import com.liferay.portlet.social.service.persistence.SocialActivityFinder;
-import com.liferay.portlet.social.service.persistence.SocialActivityFinderUtil;
 import com.liferay.portlet.social.service.persistence.SocialActivityPersistence;
-import com.liferay.portlet.social.service.persistence.SocialActivityUtil;
 import com.liferay.portlet.tasks.service.TasksProposalLocalService;
-import com.liferay.portlet.tasks.service.TasksProposalLocalServiceFactory;
 import com.liferay.portlet.tasks.service.TasksProposalService;
 import com.liferay.portlet.tasks.service.TasksReviewLocalService;
-import com.liferay.portlet.tasks.service.TasksReviewLocalServiceFactory;
 import com.liferay.portlet.tasks.service.TasksReviewService;
-import com.liferay.portlet.tasks.service.TasksReviewServiceFactory;
 import com.liferay.portlet.tasks.service.persistence.TasksProposalFinder;
-import com.liferay.portlet.tasks.service.persistence.TasksProposalFinderUtil;
 import com.liferay.portlet.tasks.service.persistence.TasksProposalPersistence;
-import com.liferay.portlet.tasks.service.persistence.TasksProposalUtil;
 import com.liferay.portlet.tasks.service.persistence.TasksReviewPersistence;
-import com.liferay.portlet.tasks.service.persistence.TasksReviewUtil;
 
 /**
  * <a href="TasksProposalServiceBaseImpl.java.html"><b><i>View Source</i></b></a>
@@ -278,95 +256,118 @@ public abstract class TasksProposalServiceBaseImpl extends PrincipalBean
 
 	public void afterPropertiesSet() {
 		if (tasksReviewLocalService == null) {
-			tasksReviewLocalService = TasksReviewLocalServiceFactory.getImpl();
+			tasksReviewLocalService = (TasksReviewLocalService)PortalBeanLocatorUtil.locate(TasksReviewLocalService.class.getName() +
+					".impl");
 		}
 
 		if (tasksReviewService == null) {
-			tasksReviewService = TasksReviewServiceFactory.getImpl();
+			tasksReviewService = (TasksReviewService)PortalBeanLocatorUtil.locate(TasksReviewService.class.getName() +
+					".impl");
 		}
 
 		if (tasksReviewPersistence == null) {
-			tasksReviewPersistence = TasksReviewUtil.getPersistence();
+			tasksReviewPersistence = (TasksReviewPersistence)PortalBeanLocatorUtil.locate(TasksReviewPersistence.class.getName() +
+					".impl");
 		}
 
 		if (tasksProposalLocalService == null) {
-			tasksProposalLocalService = TasksProposalLocalServiceFactory.getImpl();
+			tasksProposalLocalService = (TasksProposalLocalService)PortalBeanLocatorUtil.locate(TasksProposalLocalService.class.getName() +
+					".impl");
 		}
 
 		if (tasksProposalPersistence == null) {
-			tasksProposalPersistence = TasksProposalUtil.getPersistence();
+			tasksProposalPersistence = (TasksProposalPersistence)PortalBeanLocatorUtil.locate(TasksProposalPersistence.class.getName() +
+					".impl");
 		}
 
 		if (tasksProposalFinder == null) {
-			tasksProposalFinder = TasksProposalFinderUtil.getFinder();
+			tasksProposalFinder = (TasksProposalFinder)PortalBeanLocatorUtil.locate(TasksProposalFinder.class.getName() +
+					".impl");
 		}
 
 		if (counterLocalService == null) {
-			counterLocalService = CounterLocalServiceFactory.getImpl();
+			counterLocalService = (CounterLocalService)PortalBeanLocatorUtil.locate(CounterLocalService.class.getName() +
+					".impl");
 		}
 
 		if (counterService == null) {
-			counterService = CounterServiceFactory.getImpl();
+			counterService = (CounterService)PortalBeanLocatorUtil.locate(CounterService.class.getName() +
+					".impl");
 		}
 
 		if (resourceLocalService == null) {
-			resourceLocalService = ResourceLocalServiceFactory.getImpl();
+			resourceLocalService = (ResourceLocalService)PortalBeanLocatorUtil.locate(ResourceLocalService.class.getName() +
+					".impl");
 		}
 
 		if (resourceService == null) {
-			resourceService = ResourceServiceFactory.getImpl();
+			resourceService = (ResourceService)PortalBeanLocatorUtil.locate(ResourceService.class.getName() +
+					".impl");
 		}
 
 		if (resourcePersistence == null) {
-			resourcePersistence = ResourceUtil.getPersistence();
+			resourcePersistence = (ResourcePersistence)PortalBeanLocatorUtil.locate(ResourcePersistence.class.getName() +
+					".impl");
 		}
 
 		if (resourceFinder == null) {
-			resourceFinder = ResourceFinderUtil.getFinder();
+			resourceFinder = (ResourceFinder)PortalBeanLocatorUtil.locate(ResourceFinder.class.getName() +
+					".impl");
 		}
 
 		if (userLocalService == null) {
-			userLocalService = UserLocalServiceFactory.getImpl();
+			userLocalService = (UserLocalService)PortalBeanLocatorUtil.locate(UserLocalService.class.getName() +
+					".impl");
 		}
 
 		if (userService == null) {
-			userService = UserServiceFactory.getImpl();
+			userService = (UserService)PortalBeanLocatorUtil.locate(UserService.class.getName() +
+					".impl");
 		}
 
 		if (userPersistence == null) {
-			userPersistence = UserUtil.getPersistence();
+			userPersistence = (UserPersistence)PortalBeanLocatorUtil.locate(UserPersistence.class.getName() +
+					".impl");
 		}
 
 		if (userFinder == null) {
-			userFinder = UserFinderUtil.getFinder();
+			userFinder = (UserFinder)PortalBeanLocatorUtil.locate(UserFinder.class.getName() +
+					".impl");
 		}
 
 		if (mbMessageLocalService == null) {
-			mbMessageLocalService = MBMessageLocalServiceFactory.getImpl();
+			mbMessageLocalService = (MBMessageLocalService)PortalBeanLocatorUtil.locate(MBMessageLocalService.class.getName() +
+					".impl");
 		}
 
 		if (mbMessageService == null) {
-			mbMessageService = MBMessageServiceFactory.getImpl();
+			mbMessageService = (MBMessageService)PortalBeanLocatorUtil.locate(MBMessageService.class.getName() +
+					".impl");
 		}
 
 		if (mbMessagePersistence == null) {
-			mbMessagePersistence = MBMessageUtil.getPersistence();
+			mbMessagePersistence = (MBMessagePersistence)PortalBeanLocatorUtil.locate(MBMessagePersistence.class.getName() +
+					".impl");
 		}
 
 		if (mbMessageFinder == null) {
-			mbMessageFinder = MBMessageFinderUtil.getFinder();
+			mbMessageFinder = (MBMessageFinder)PortalBeanLocatorUtil.locate(MBMessageFinder.class.getName() +
+					".impl");
 		}
 
 		if (socialActivityLocalService == null) {
-			socialActivityLocalService = SocialActivityLocalServiceFactory.getImpl();
+			socialActivityLocalService = (SocialActivityLocalService)PortalBeanLocatorUtil.locate(SocialActivityLocalService.class.getName() +
+					".impl");
 		}
 
 		if (socialActivityPersistence == null) {
-			socialActivityPersistence = SocialActivityUtil.getPersistence();
+			socialActivityPersistence = (SocialActivityPersistence)PortalBeanLocatorUtil.locate(SocialActivityPersistence.class.getName() +
+					".impl");
 		}
 
 		if (socialActivityFinder == null) {
-			socialActivityFinder = SocialActivityFinderUtil.getFinder();
+			socialActivityFinder = (SocialActivityFinder)PortalBeanLocatorUtil.locate(SocialActivityFinder.class.getName() +
+					".impl");
 		}
 	}
 

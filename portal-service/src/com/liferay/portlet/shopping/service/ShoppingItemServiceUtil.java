@@ -39,24 +39,16 @@ package com.liferay.portlet.shopping.service;
  * on a bean instead of writing a lookup call and a method call.
  * </p>
  *
- * <p>
- * <code>com.liferay.portlet.shopping.service.ShoppingItemServiceFactory</code>
- * is responsible for the lookup of the bean.
- * </p>
- *
  * @author Brian Wing Shun Chan
  *
  * @see com.liferay.portlet.shopping.service.ShoppingItemService
- * @see com.liferay.portlet.shopping.service.ShoppingItemServiceFactory
  *
  */
 public class ShoppingItemServiceUtil {
 	public static void addBookItems(long categoryId, java.lang.String[] isbns)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
-		ShoppingItemService shoppingItemService = ShoppingItemServiceFactory.getService();
-
-		shoppingItemService.addBookItems(categoryId, isbns);
+		_service.addBookItems(categoryId, isbns);
 	}
 
 	public static com.liferay.portlet.shopping.model.ShoppingItem addItem(
@@ -74,13 +66,11 @@ public class ShoppingItemServiceUtil {
 		boolean addCommunityPermissions, boolean addGuestPermissions)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
-		ShoppingItemService shoppingItemService = ShoppingItemServiceFactory.getService();
-
-		return shoppingItemService.addItem(categoryId, sku, name, description,
-			properties, fieldsQuantities, requiresShipping, stockQuantity,
-			featured, sale, smallImage, smallImageURL, smallFile, mediumImage,
-			mediumImageURL, mediumFile, largeImage, largeImageURL, largeFile,
-			itemFields, itemPrices, addCommunityPermissions, addGuestPermissions);
+		return _service.addItem(categoryId, sku, name, description, properties,
+			fieldsQuantities, requiresShipping, stockQuantity, featured, sale,
+			smallImage, smallImageURL, smallFile, mediumImage, mediumImageURL,
+			mediumFile, largeImage, largeImageURL, largeFile, itemFields,
+			itemPrices, addCommunityPermissions, addGuestPermissions);
 	}
 
 	public static com.liferay.portlet.shopping.model.ShoppingItem addItem(
@@ -99,30 +89,24 @@ public class ShoppingItemServiceUtil {
 		java.lang.String[] guestPermissions)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
-		ShoppingItemService shoppingItemService = ShoppingItemServiceFactory.getService();
-
-		return shoppingItemService.addItem(categoryId, sku, name, description,
-			properties, fieldsQuantities, requiresShipping, stockQuantity,
-			featured, sale, smallImage, smallImageURL, smallFile, mediumImage,
-			mediumImageURL, mediumFile, largeImage, largeImageURL, largeFile,
-			itemFields, itemPrices, communityPermissions, guestPermissions);
+		return _service.addItem(categoryId, sku, name, description, properties,
+			fieldsQuantities, requiresShipping, stockQuantity, featured, sale,
+			smallImage, smallImageURL, smallFile, mediumImage, mediumImageURL,
+			mediumFile, largeImage, largeImageURL, largeFile, itemFields,
+			itemPrices, communityPermissions, guestPermissions);
 	}
 
 	public static void deleteItem(long itemId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
-		ShoppingItemService shoppingItemService = ShoppingItemServiceFactory.getService();
-
-		shoppingItemService.deleteItem(itemId);
+		_service.deleteItem(itemId);
 	}
 
 	public static com.liferay.portlet.shopping.model.ShoppingItem getItem(
 		long itemId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
-		ShoppingItemService shoppingItemService = ShoppingItemServiceFactory.getService();
-
-		return shoppingItemService.getItem(itemId);
+		return _service.getItem(itemId);
 	}
 
 	public static com.liferay.portlet.shopping.model.ShoppingItem updateItem(
@@ -139,12 +123,20 @@ public class ShoppingItemServiceUtil {
 		java.util.List<com.liferay.portlet.shopping.model.ShoppingItemPrice> itemPrices)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
-		ShoppingItemService shoppingItemService = ShoppingItemServiceFactory.getService();
-
-		return shoppingItemService.updateItem(itemId, categoryId, sku, name,
-			description, properties, fieldsQuantities, requiresShipping,
-			stockQuantity, featured, sale, smallImage, smallImageURL,
-			smallFile, mediumImage, mediumImageURL, mediumFile, largeImage,
-			largeImageURL, largeFile, itemFields, itemPrices);
+		return _service.updateItem(itemId, categoryId, sku, name, description,
+			properties, fieldsQuantities, requiresShipping, stockQuantity,
+			featured, sale, smallImage, smallImageURL, smallFile, mediumImage,
+			mediumImageURL, mediumFile, largeImage, largeImageURL, largeFile,
+			itemFields, itemPrices);
 	}
+
+	public static ShoppingItemService getService() {
+		return _service;
+	}
+
+	public void setService(ShoppingItemService service) {
+		_service = service;
+	}
+
+	private static ShoppingItemService _service;
 }

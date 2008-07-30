@@ -215,22 +215,12 @@ public class JournalArticleResourceUtil {
 	}
 
 	public static JournalArticleResourcePersistence getPersistence() {
-		return _getUtil()._persistence;
+		return _persistence;
 	}
 
 	public void setPersistence(JournalArticleResourcePersistence persistence) {
 		_persistence = persistence;
 	}
 
-	private static JournalArticleResourceUtil _getUtil() {
-		if (_util == null) {
-			_util = (JournalArticleResourceUtil)com.liferay.portal.kernel.bean.PortalBeanLocatorUtil.locate(_UTIL);
-		}
-
-		return _util;
-	}
-
-	private static final String _UTIL = JournalArticleResourceUtil.class.getName();
-	private static JournalArticleResourceUtil _util;
-	private JournalArticleResourcePersistence _persistence;
+	private static JournalArticleResourcePersistence _persistence;
 }

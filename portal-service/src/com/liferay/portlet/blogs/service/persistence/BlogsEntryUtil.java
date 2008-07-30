@@ -556,22 +556,12 @@ public class BlogsEntryUtil {
 	}
 
 	public static BlogsEntryPersistence getPersistence() {
-		return _getUtil()._persistence;
+		return _persistence;
 	}
 
 	public void setPersistence(BlogsEntryPersistence persistence) {
 		_persistence = persistence;
 	}
 
-	private static BlogsEntryUtil _getUtil() {
-		if (_util == null) {
-			_util = (BlogsEntryUtil)com.liferay.portal.kernel.bean.PortalBeanLocatorUtil.locate(_UTIL);
-		}
-
-		return _util;
-	}
-
-	private static final String _UTIL = BlogsEntryUtil.class.getName();
-	private static BlogsEntryUtil _util;
-	private BlogsEntryPersistence _persistence;
+	private static BlogsEntryPersistence _persistence;
 }

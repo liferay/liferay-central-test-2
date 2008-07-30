@@ -39,140 +39,111 @@ package com.liferay.portlet.softwarecatalog.service;
  * on a bean instead of writing a lookup call and a method call.
  * </p>
  *
- * <p>
- * <code>com.liferay.portlet.softwarecatalog.service.SCProductScreenshotLocalServiceFactory</code>
- * is responsible for the lookup of the bean.
- * </p>
- *
  * @author Brian Wing Shun Chan
  *
  * @see com.liferay.portlet.softwarecatalog.service.SCProductScreenshotLocalService
- * @see com.liferay.portlet.softwarecatalog.service.SCProductScreenshotLocalServiceFactory
  *
  */
 public class SCProductScreenshotLocalServiceUtil {
 	public static com.liferay.portlet.softwarecatalog.model.SCProductScreenshot addSCProductScreenshot(
 		com.liferay.portlet.softwarecatalog.model.SCProductScreenshot scProductScreenshot)
 		throws com.liferay.portal.SystemException {
-		SCProductScreenshotLocalService scProductScreenshotLocalService = SCProductScreenshotLocalServiceFactory.getService();
-
-		return scProductScreenshotLocalService.addSCProductScreenshot(scProductScreenshot);
+		return _service.addSCProductScreenshot(scProductScreenshot);
 	}
 
 	public static void deleteSCProductScreenshot(long productScreenshotId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		SCProductScreenshotLocalService scProductScreenshotLocalService = SCProductScreenshotLocalServiceFactory.getService();
-
-		scProductScreenshotLocalService.deleteSCProductScreenshot(productScreenshotId);
+		_service.deleteSCProductScreenshot(productScreenshotId);
 	}
 
 	public static void deleteSCProductScreenshot(
 		com.liferay.portlet.softwarecatalog.model.SCProductScreenshot scProductScreenshot)
 		throws com.liferay.portal.SystemException {
-		SCProductScreenshotLocalService scProductScreenshotLocalService = SCProductScreenshotLocalServiceFactory.getService();
-
-		scProductScreenshotLocalService.deleteSCProductScreenshot(scProductScreenshot);
+		_service.deleteSCProductScreenshot(scProductScreenshot);
 	}
 
 	public static java.util.List<Object> dynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery)
 		throws com.liferay.portal.SystemException {
-		SCProductScreenshotLocalService scProductScreenshotLocalService = SCProductScreenshotLocalServiceFactory.getService();
-
-		return scProductScreenshotLocalService.dynamicQuery(dynamicQuery);
+		return _service.dynamicQuery(dynamicQuery);
 	}
 
 	public static java.util.List<Object> dynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery, int start,
 		int end) throws com.liferay.portal.SystemException {
-		SCProductScreenshotLocalService scProductScreenshotLocalService = SCProductScreenshotLocalServiceFactory.getService();
-
-		return scProductScreenshotLocalService.dynamicQuery(dynamicQuery,
-			start, end);
+		return _service.dynamicQuery(dynamicQuery, start, end);
 	}
 
 	public static com.liferay.portlet.softwarecatalog.model.SCProductScreenshot getSCProductScreenshot(
 		long productScreenshotId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		SCProductScreenshotLocalService scProductScreenshotLocalService = SCProductScreenshotLocalServiceFactory.getService();
-
-		return scProductScreenshotLocalService.getSCProductScreenshot(productScreenshotId);
+		return _service.getSCProductScreenshot(productScreenshotId);
 	}
 
 	public static java.util.List<com.liferay.portlet.softwarecatalog.model.SCProductScreenshot> getSCProductScreenshots(
 		int start, int end) throws com.liferay.portal.SystemException {
-		SCProductScreenshotLocalService scProductScreenshotLocalService = SCProductScreenshotLocalServiceFactory.getService();
-
-		return scProductScreenshotLocalService.getSCProductScreenshots(start,
-			end);
+		return _service.getSCProductScreenshots(start, end);
 	}
 
 	public static int getSCProductScreenshotsCount()
 		throws com.liferay.portal.SystemException {
-		SCProductScreenshotLocalService scProductScreenshotLocalService = SCProductScreenshotLocalServiceFactory.getService();
-
-		return scProductScreenshotLocalService.getSCProductScreenshotsCount();
+		return _service.getSCProductScreenshotsCount();
 	}
 
 	public static com.liferay.portlet.softwarecatalog.model.SCProductScreenshot updateSCProductScreenshot(
 		com.liferay.portlet.softwarecatalog.model.SCProductScreenshot scProductScreenshot)
 		throws com.liferay.portal.SystemException {
-		SCProductScreenshotLocalService scProductScreenshotLocalService = SCProductScreenshotLocalServiceFactory.getService();
-
-		return scProductScreenshotLocalService.updateSCProductScreenshot(scProductScreenshot);
+		return _service.updateSCProductScreenshot(scProductScreenshot);
 	}
 
 	public static void deleteProductScreenshot(
 		com.liferay.portlet.softwarecatalog.model.SCProductScreenshot productScreenshot)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		SCProductScreenshotLocalService scProductScreenshotLocalService = SCProductScreenshotLocalServiceFactory.getService();
-
-		scProductScreenshotLocalService.deleteProductScreenshot(productScreenshot);
+		_service.deleteProductScreenshot(productScreenshot);
 	}
 
 	public static void deleteProductScreenshots(long productEntryId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		SCProductScreenshotLocalService scProductScreenshotLocalService = SCProductScreenshotLocalServiceFactory.getService();
-
-		scProductScreenshotLocalService.deleteProductScreenshots(productEntryId);
+		_service.deleteProductScreenshots(productEntryId);
 	}
 
 	public static com.liferay.portlet.softwarecatalog.model.SCProductScreenshot getProductScreenshot(
 		long productEntryId, int priority)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		SCProductScreenshotLocalService scProductScreenshotLocalService = SCProductScreenshotLocalServiceFactory.getService();
-
-		return scProductScreenshotLocalService.getProductScreenshot(productEntryId,
-			priority);
+		return _service.getProductScreenshot(productEntryId, priority);
 	}
 
 	public static java.util.List<com.liferay.portlet.softwarecatalog.model.SCProductScreenshot> getProductScreenshots(
 		long productEntryId) throws com.liferay.portal.SystemException {
-		SCProductScreenshotLocalService scProductScreenshotLocalService = SCProductScreenshotLocalServiceFactory.getService();
-
-		return scProductScreenshotLocalService.getProductScreenshots(productEntryId);
+		return _service.getProductScreenshots(productEntryId);
 	}
 
 	public static com.liferay.portlet.softwarecatalog.model.SCProductScreenshot getProductScreenshotByFullImageId(
 		long fullImageId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		SCProductScreenshotLocalService scProductScreenshotLocalService = SCProductScreenshotLocalServiceFactory.getService();
-
-		return scProductScreenshotLocalService.getProductScreenshotByFullImageId(fullImageId);
+		return _service.getProductScreenshotByFullImageId(fullImageId);
 	}
 
 	public static com.liferay.portlet.softwarecatalog.model.SCProductScreenshot getProductScreenshotByThumbnailId(
 		long thumbnailId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		SCProductScreenshotLocalService scProductScreenshotLocalService = SCProductScreenshotLocalServiceFactory.getService();
-
-		return scProductScreenshotLocalService.getProductScreenshotByThumbnailId(thumbnailId);
+		return _service.getProductScreenshotByThumbnailId(thumbnailId);
 	}
+
+	public static SCProductScreenshotLocalService getService() {
+		return _service;
+	}
+
+	public void setService(SCProductScreenshotLocalService service) {
+		_service = service;
+	}
+
+	private static SCProductScreenshotLocalService _service;
 }

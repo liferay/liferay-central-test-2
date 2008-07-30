@@ -39,15 +39,9 @@ package com.liferay.portal.service;
  * on a bean instead of writing a lookup call and a method call.
  * </p>
  *
- * <p>
- * <code>com.liferay.portal.service.CompanyServiceFactory</code>
- * is responsible for the lookup of the bean.
- * </p>
- *
  * @author Brian Wing Shun Chan
  *
  * @see com.liferay.portal.service.CompanyService
- * @see com.liferay.portal.service.CompanyServiceFactory
  *
  */
 public class CompanyServiceUtil {
@@ -56,18 +50,14 @@ public class CompanyServiceUtil {
 		java.lang.String mx)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
-		CompanyService companyService = CompanyServiceFactory.getService();
-
-		return companyService.addCompany(webId, virtualHost, mx);
+		return _service.addCompany(webId, virtualHost, mx);
 	}
 
 	public static com.liferay.portal.model.Company updateCompany(
 		long companyId, java.lang.String virtualHost, java.lang.String mx)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
-		CompanyService companyService = CompanyServiceFactory.getService();
-
-		return companyService.updateCompany(companyId, virtualHost, mx);
+		return _service.updateCompany(companyId, virtualHost, mx);
 	}
 
 	public static com.liferay.portal.model.Company updateCompany(
@@ -78,9 +68,7 @@ public class CompanyServiceUtil {
 		java.lang.String industry, java.lang.String type, java.lang.String size)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
-		CompanyService companyService = CompanyServiceFactory.getService();
-
-		return companyService.updateCompany(companyId, virtualHost, mx, name,
+		return _service.updateCompany(companyId, virtualHost, mx, name,
 			legalName, legalId, legalType, sicCode, tickerSymbol, industry,
 			type, size);
 	}
@@ -89,17 +77,13 @@ public class CompanyServiceUtil {
 		java.lang.String languageId, java.lang.String timeZoneId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
-		CompanyService companyService = CompanyServiceFactory.getService();
-
-		companyService.updateDisplay(companyId, languageId, timeZoneId);
+		_service.updateDisplay(companyId, languageId, timeZoneId);
 	}
 
 	public static void updateLogo(long companyId, java.io.File file)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
-		CompanyService companyService = CompanyServiceFactory.getService();
-
-		companyService.updateLogo(companyId, file);
+		_service.updateLogo(companyId, file);
 	}
 
 	public static void updateSecurity(long companyId,
@@ -108,10 +92,17 @@ public class CompanyServiceUtil {
 		boolean communityLogo)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
-		CompanyService companyService = CompanyServiceFactory.getService();
-
-		companyService.updateSecurity(companyId, authType, autoLogin,
-			sendPassword, strangers, strangersWithMx, strangersVerify,
-			communityLogo);
+		_service.updateSecurity(companyId, authType, autoLogin, sendPassword,
+			strangers, strangersWithMx, strangersVerify, communityLogo);
 	}
+
+	public static CompanyService getService() {
+		return _service;
+	}
+
+	public void setService(CompanyService service) {
+		_service = service;
+	}
+
+	private static CompanyService _service;
 }

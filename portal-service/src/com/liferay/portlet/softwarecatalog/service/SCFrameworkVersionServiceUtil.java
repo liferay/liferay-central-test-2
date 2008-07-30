@@ -39,15 +39,9 @@ package com.liferay.portlet.softwarecatalog.service;
  * on a bean instead of writing a lookup call and a method call.
  * </p>
  *
- * <p>
- * <code>com.liferay.portlet.softwarecatalog.service.SCFrameworkVersionServiceFactory</code>
- * is responsible for the lookup of the bean.
- * </p>
- *
  * @author Brian Wing Shun Chan
  *
  * @see com.liferay.portlet.softwarecatalog.service.SCFrameworkVersionService
- * @see com.liferay.portlet.softwarecatalog.service.SCFrameworkVersionServiceFactory
  *
  */
 public class SCFrameworkVersionServiceUtil {
@@ -57,10 +51,8 @@ public class SCFrameworkVersionServiceUtil {
 		boolean addGuestPermissions)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
-		SCFrameworkVersionService scFrameworkVersionService = SCFrameworkVersionServiceFactory.getService();
-
-		return scFrameworkVersionService.addFrameworkVersion(plid, name, url,
-			active, priority, addCommunityPermissions, addGuestPermissions);
+		return _service.addFrameworkVersion(plid, name, url, active, priority,
+			addCommunityPermissions, addGuestPermissions);
 	}
 
 	public static com.liferay.portlet.softwarecatalog.model.SCFrameworkVersion addFrameworkVersion(
@@ -69,44 +61,33 @@ public class SCFrameworkVersionServiceUtil {
 		java.lang.String[] guestPermissions)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
-		SCFrameworkVersionService scFrameworkVersionService = SCFrameworkVersionServiceFactory.getService();
-
-		return scFrameworkVersionService.addFrameworkVersion(plid, name, url,
-			active, priority, communityPermissions, guestPermissions);
+		return _service.addFrameworkVersion(plid, name, url, active, priority,
+			communityPermissions, guestPermissions);
 	}
 
 	public static void deleteFrameworkVersion(long frameworkVersionId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
-		SCFrameworkVersionService scFrameworkVersionService = SCFrameworkVersionServiceFactory.getService();
-
-		scFrameworkVersionService.deleteFrameworkVersion(frameworkVersionId);
+		_service.deleteFrameworkVersion(frameworkVersionId);
 	}
 
 	public static com.liferay.portlet.softwarecatalog.model.SCFrameworkVersion getFrameworkVersion(
 		long frameworkVersionId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
-		SCFrameworkVersionService scFrameworkVersionService = SCFrameworkVersionServiceFactory.getService();
-
-		return scFrameworkVersionService.getFrameworkVersion(frameworkVersionId);
+		return _service.getFrameworkVersion(frameworkVersionId);
 	}
 
 	public static java.util.List<com.liferay.portlet.softwarecatalog.model.SCFrameworkVersion> getFrameworkVersions(
 		long groupId, boolean active)
 		throws com.liferay.portal.SystemException, java.rmi.RemoteException {
-		SCFrameworkVersionService scFrameworkVersionService = SCFrameworkVersionServiceFactory.getService();
-
-		return scFrameworkVersionService.getFrameworkVersions(groupId, active);
+		return _service.getFrameworkVersions(groupId, active);
 	}
 
 	public static java.util.List<com.liferay.portlet.softwarecatalog.model.SCFrameworkVersion> getFrameworkVersions(
 		long groupId, boolean active, int start, int end)
 		throws com.liferay.portal.SystemException, java.rmi.RemoteException {
-		SCFrameworkVersionService scFrameworkVersionService = SCFrameworkVersionServiceFactory.getService();
-
-		return scFrameworkVersionService.getFrameworkVersions(groupId, active,
-			start, end);
+		return _service.getFrameworkVersions(groupId, active, start, end);
 	}
 
 	public static com.liferay.portlet.softwarecatalog.model.SCFrameworkVersion updateFrameworkVersion(
@@ -114,9 +95,17 @@ public class SCFrameworkVersionServiceUtil {
 		boolean active, int priority)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
-		SCFrameworkVersionService scFrameworkVersionService = SCFrameworkVersionServiceFactory.getService();
-
-		return scFrameworkVersionService.updateFrameworkVersion(frameworkVersionId,
-			name, url, active, priority);
+		return _service.updateFrameworkVersion(frameworkVersionId, name, url,
+			active, priority);
 	}
+
+	public static SCFrameworkVersionService getService() {
+		return _service;
+	}
+
+	public void setService(SCFrameworkVersionService service) {
+		_service = service;
+	}
+
+	private static SCFrameworkVersionService _service;
 }

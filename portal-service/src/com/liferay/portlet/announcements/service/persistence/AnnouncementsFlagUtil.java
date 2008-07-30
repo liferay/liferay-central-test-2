@@ -214,22 +214,12 @@ public class AnnouncementsFlagUtil {
 	}
 
 	public static AnnouncementsFlagPersistence getPersistence() {
-		return _getUtil()._persistence;
+		return _persistence;
 	}
 
 	public void setPersistence(AnnouncementsFlagPersistence persistence) {
 		_persistence = persistence;
 	}
 
-	private static AnnouncementsFlagUtil _getUtil() {
-		if (_util == null) {
-			_util = (AnnouncementsFlagUtil)com.liferay.portal.kernel.bean.PortalBeanLocatorUtil.locate(_UTIL);
-		}
-
-		return _util;
-	}
-
-	private static final String _UTIL = AnnouncementsFlagUtil.class.getName();
-	private static AnnouncementsFlagUtil _util;
-	private AnnouncementsFlagPersistence _persistence;
+	private static AnnouncementsFlagPersistence _persistence;
 }

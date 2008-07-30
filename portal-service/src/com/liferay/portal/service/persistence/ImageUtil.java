@@ -186,22 +186,12 @@ public class ImageUtil {
 	}
 
 	public static ImagePersistence getPersistence() {
-		return _getUtil()._persistence;
+		return _persistence;
 	}
 
 	public void setPersistence(ImagePersistence persistence) {
 		_persistence = persistence;
 	}
 
-	private static ImageUtil _getUtil() {
-		if (_util == null) {
-			_util = (ImageUtil)com.liferay.portal.kernel.bean.PortalBeanLocatorUtil.locate(_UTIL);
-		}
-
-		return _util;
-	}
-
-	private static final String _UTIL = ImageUtil.class.getName();
-	private static ImageUtil _util;
-	private ImagePersistence _persistence;
+	private static ImagePersistence _persistence;
 }

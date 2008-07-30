@@ -39,152 +39,120 @@ package com.liferay.portlet.messageboards.service;
  * on a bean instead of writing a lookup call and a method call.
  * </p>
  *
- * <p>
- * <code>com.liferay.portlet.messageboards.service.MBBanLocalServiceFactory</code>
- * is responsible for the lookup of the bean.
- * </p>
- *
  * @author Brian Wing Shun Chan
  *
  * @see com.liferay.portlet.messageboards.service.MBBanLocalService
- * @see com.liferay.portlet.messageboards.service.MBBanLocalServiceFactory
  *
  */
 public class MBBanLocalServiceUtil {
 	public static com.liferay.portlet.messageboards.model.MBBan addMBBan(
 		com.liferay.portlet.messageboards.model.MBBan mbBan)
 		throws com.liferay.portal.SystemException {
-		MBBanLocalService mbBanLocalService = MBBanLocalServiceFactory.getService();
-
-		return mbBanLocalService.addMBBan(mbBan);
+		return _service.addMBBan(mbBan);
 	}
 
 	public static void deleteMBBan(long banId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		MBBanLocalService mbBanLocalService = MBBanLocalServiceFactory.getService();
-
-		mbBanLocalService.deleteMBBan(banId);
+		_service.deleteMBBan(banId);
 	}
 
 	public static void deleteMBBan(
 		com.liferay.portlet.messageboards.model.MBBan mbBan)
 		throws com.liferay.portal.SystemException {
-		MBBanLocalService mbBanLocalService = MBBanLocalServiceFactory.getService();
-
-		mbBanLocalService.deleteMBBan(mbBan);
+		_service.deleteMBBan(mbBan);
 	}
 
 	public static java.util.List<Object> dynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery)
 		throws com.liferay.portal.SystemException {
-		MBBanLocalService mbBanLocalService = MBBanLocalServiceFactory.getService();
-
-		return mbBanLocalService.dynamicQuery(dynamicQuery);
+		return _service.dynamicQuery(dynamicQuery);
 	}
 
 	public static java.util.List<Object> dynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery, int start,
 		int end) throws com.liferay.portal.SystemException {
-		MBBanLocalService mbBanLocalService = MBBanLocalServiceFactory.getService();
-
-		return mbBanLocalService.dynamicQuery(dynamicQuery, start, end);
+		return _service.dynamicQuery(dynamicQuery, start, end);
 	}
 
 	public static com.liferay.portlet.messageboards.model.MBBan getMBBan(
 		long banId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		MBBanLocalService mbBanLocalService = MBBanLocalServiceFactory.getService();
-
-		return mbBanLocalService.getMBBan(banId);
+		return _service.getMBBan(banId);
 	}
 
 	public static java.util.List<com.liferay.portlet.messageboards.model.MBBan> getMBBans(
 		int start, int end) throws com.liferay.portal.SystemException {
-		MBBanLocalService mbBanLocalService = MBBanLocalServiceFactory.getService();
-
-		return mbBanLocalService.getMBBans(start, end);
+		return _service.getMBBans(start, end);
 	}
 
 	public static int getMBBansCount()
 		throws com.liferay.portal.SystemException {
-		MBBanLocalService mbBanLocalService = MBBanLocalServiceFactory.getService();
-
-		return mbBanLocalService.getMBBansCount();
+		return _service.getMBBansCount();
 	}
 
 	public static com.liferay.portlet.messageboards.model.MBBan updateMBBan(
 		com.liferay.portlet.messageboards.model.MBBan mbBan)
 		throws com.liferay.portal.SystemException {
-		MBBanLocalService mbBanLocalService = MBBanLocalServiceFactory.getService();
-
-		return mbBanLocalService.updateMBBan(mbBan);
+		return _service.updateMBBan(mbBan);
 	}
 
 	public static com.liferay.portlet.messageboards.model.MBBan addBan(
 		long userId, long plid, long banUserId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		MBBanLocalService mbBanLocalService = MBBanLocalServiceFactory.getService();
-
-		return mbBanLocalService.addBan(userId, plid, banUserId);
+		return _service.addBan(userId, plid, banUserId);
 	}
 
 	public static void checkBan(long groupId, long banUserId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		MBBanLocalService mbBanLocalService = MBBanLocalServiceFactory.getService();
-
-		mbBanLocalService.checkBan(groupId, banUserId);
+		_service.checkBan(groupId, banUserId);
 	}
 
 	public static void deleteBan(long plid, long banUserId)
 		throws com.liferay.portal.SystemException {
-		MBBanLocalService mbBanLocalService = MBBanLocalServiceFactory.getService();
-
-		mbBanLocalService.deleteBan(plid, banUserId);
+		_service.deleteBan(plid, banUserId);
 	}
 
 	public static void deleteBansByBanUserId(long banUserId)
 		throws com.liferay.portal.SystemException {
-		MBBanLocalService mbBanLocalService = MBBanLocalServiceFactory.getService();
-
-		mbBanLocalService.deleteBansByBanUserId(banUserId);
+		_service.deleteBansByBanUserId(banUserId);
 	}
 
 	public static void deleteBansByGroupId(long groupId)
 		throws com.liferay.portal.SystemException {
-		MBBanLocalService mbBanLocalService = MBBanLocalServiceFactory.getService();
-
-		mbBanLocalService.deleteBansByGroupId(groupId);
+		_service.deleteBansByGroupId(groupId);
 	}
 
 	public static void expireBans() throws com.liferay.portal.SystemException {
-		MBBanLocalService mbBanLocalService = MBBanLocalServiceFactory.getService();
-
-		mbBanLocalService.expireBans();
+		_service.expireBans();
 	}
 
 	public static java.util.List<com.liferay.portlet.messageboards.model.MBBan> getBans(
 		long groupId, int start, int end)
 		throws com.liferay.portal.SystemException {
-		MBBanLocalService mbBanLocalService = MBBanLocalServiceFactory.getService();
-
-		return mbBanLocalService.getBans(groupId, start, end);
+		return _service.getBans(groupId, start, end);
 	}
 
 	public static int getBansCount(long groupId)
 		throws com.liferay.portal.SystemException {
-		MBBanLocalService mbBanLocalService = MBBanLocalServiceFactory.getService();
-
-		return mbBanLocalService.getBansCount(groupId);
+		return _service.getBansCount(groupId);
 	}
 
 	public static boolean hasBan(long groupId, long banUserId)
 		throws com.liferay.portal.SystemException {
-		MBBanLocalService mbBanLocalService = MBBanLocalServiceFactory.getService();
-
-		return mbBanLocalService.hasBan(groupId, banUserId);
+		return _service.hasBan(groupId, banUserId);
 	}
+
+	public static MBBanLocalService getService() {
+		return _service;
+	}
+
+	public void setService(MBBanLocalService service) {
+		_service = service;
+	}
+
+	private static MBBanLocalService _service;
 }

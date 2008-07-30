@@ -39,126 +39,100 @@ package com.liferay.portal.service;
  * on a bean instead of writing a lookup call and a method call.
  * </p>
  *
- * <p>
- * <code>com.liferay.portal.service.PluginSettingLocalServiceFactory</code>
- * is responsible for the lookup of the bean.
- * </p>
- *
  * @author Brian Wing Shun Chan
  *
  * @see com.liferay.portal.service.PluginSettingLocalService
- * @see com.liferay.portal.service.PluginSettingLocalServiceFactory
  *
  */
 public class PluginSettingLocalServiceUtil {
 	public static com.liferay.portal.model.PluginSetting addPluginSetting(
 		com.liferay.portal.model.PluginSetting pluginSetting)
 		throws com.liferay.portal.SystemException {
-		PluginSettingLocalService pluginSettingLocalService = PluginSettingLocalServiceFactory.getService();
-
-		return pluginSettingLocalService.addPluginSetting(pluginSetting);
+		return _service.addPluginSetting(pluginSetting);
 	}
 
 	public static void deletePluginSetting(long pluginSettingId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		PluginSettingLocalService pluginSettingLocalService = PluginSettingLocalServiceFactory.getService();
-
-		pluginSettingLocalService.deletePluginSetting(pluginSettingId);
+		_service.deletePluginSetting(pluginSettingId);
 	}
 
 	public static void deletePluginSetting(
 		com.liferay.portal.model.PluginSetting pluginSetting)
 		throws com.liferay.portal.SystemException {
-		PluginSettingLocalService pluginSettingLocalService = PluginSettingLocalServiceFactory.getService();
-
-		pluginSettingLocalService.deletePluginSetting(pluginSetting);
+		_service.deletePluginSetting(pluginSetting);
 	}
 
 	public static java.util.List<Object> dynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery)
 		throws com.liferay.portal.SystemException {
-		PluginSettingLocalService pluginSettingLocalService = PluginSettingLocalServiceFactory.getService();
-
-		return pluginSettingLocalService.dynamicQuery(dynamicQuery);
+		return _service.dynamicQuery(dynamicQuery);
 	}
 
 	public static java.util.List<Object> dynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery, int start,
 		int end) throws com.liferay.portal.SystemException {
-		PluginSettingLocalService pluginSettingLocalService = PluginSettingLocalServiceFactory.getService();
-
-		return pluginSettingLocalService.dynamicQuery(dynamicQuery, start, end);
+		return _service.dynamicQuery(dynamicQuery, start, end);
 	}
 
 	public static com.liferay.portal.model.PluginSetting getPluginSetting(
 		long pluginSettingId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		PluginSettingLocalService pluginSettingLocalService = PluginSettingLocalServiceFactory.getService();
-
-		return pluginSettingLocalService.getPluginSetting(pluginSettingId);
+		return _service.getPluginSetting(pluginSettingId);
 	}
 
 	public static java.util.List<com.liferay.portal.model.PluginSetting> getPluginSettings(
 		int start, int end) throws com.liferay.portal.SystemException {
-		PluginSettingLocalService pluginSettingLocalService = PluginSettingLocalServiceFactory.getService();
-
-		return pluginSettingLocalService.getPluginSettings(start, end);
+		return _service.getPluginSettings(start, end);
 	}
 
 	public static int getPluginSettingsCount()
 		throws com.liferay.portal.SystemException {
-		PluginSettingLocalService pluginSettingLocalService = PluginSettingLocalServiceFactory.getService();
-
-		return pluginSettingLocalService.getPluginSettingsCount();
+		return _service.getPluginSettingsCount();
 	}
 
 	public static com.liferay.portal.model.PluginSetting updatePluginSetting(
 		com.liferay.portal.model.PluginSetting pluginSetting)
 		throws com.liferay.portal.SystemException {
-		PluginSettingLocalService pluginSettingLocalService = PluginSettingLocalServiceFactory.getService();
-
-		return pluginSettingLocalService.updatePluginSetting(pluginSetting);
+		return _service.updatePluginSetting(pluginSetting);
 	}
 
 	public static void checkPermission(long userId, java.lang.String pluginId,
 		java.lang.String pluginType) throws com.liferay.portal.PortalException {
-		PluginSettingLocalService pluginSettingLocalService = PluginSettingLocalServiceFactory.getService();
-
-		pluginSettingLocalService.checkPermission(userId, pluginId, pluginType);
+		_service.checkPermission(userId, pluginId, pluginType);
 	}
 
 	public static com.liferay.portal.model.PluginSetting getDefaultPluginSetting() {
-		PluginSettingLocalService pluginSettingLocalService = PluginSettingLocalServiceFactory.getService();
-
-		return pluginSettingLocalService.getDefaultPluginSetting();
+		return _service.getDefaultPluginSetting();
 	}
 
 	public static com.liferay.portal.model.PluginSetting getPluginSetting(
 		long companyId, java.lang.String pluginId, java.lang.String pluginType)
 		throws com.liferay.portal.SystemException {
-		PluginSettingLocalService pluginSettingLocalService = PluginSettingLocalServiceFactory.getService();
-
-		return pluginSettingLocalService.getPluginSetting(companyId, pluginId,
-			pluginType);
+		return _service.getPluginSetting(companyId, pluginId, pluginType);
 	}
 
 	public static boolean hasPermission(long userId, java.lang.String pluginId,
 		java.lang.String pluginType) {
-		PluginSettingLocalService pluginSettingLocalService = PluginSettingLocalServiceFactory.getService();
-
-		return pluginSettingLocalService.hasPermission(userId, pluginId,
-			pluginType);
+		return _service.hasPermission(userId, pluginId, pluginType);
 	}
 
 	public static com.liferay.portal.model.PluginSetting updatePluginSetting(
 		long companyId, java.lang.String pluginId, java.lang.String pluginType,
 		java.lang.String roles, boolean active)
 		throws com.liferay.portal.SystemException {
-		PluginSettingLocalService pluginSettingLocalService = PluginSettingLocalServiceFactory.getService();
-
-		return pluginSettingLocalService.updatePluginSetting(companyId,
-			pluginId, pluginType, roles, active);
+		return _service.updatePluginSetting(companyId, pluginId, pluginType,
+			roles, active);
 	}
+
+	public static PluginSettingLocalService getService() {
+		return _service;
+	}
+
+	public void setService(PluginSettingLocalService service) {
+		_service = service;
+	}
+
+	private static PluginSettingLocalService _service;
 }

@@ -39,15 +39,9 @@ package com.liferay.portlet.messageboards.service;
  * on a bean instead of writing a lookup call and a method call.
  * </p>
  *
- * <p>
- * <code>com.liferay.portlet.messageboards.service.MBThreadServiceFactory</code>
- * is responsible for the lookup of the bean.
- * </p>
- *
  * @author Brian Wing Shun Chan
  *
  * @see com.liferay.portlet.messageboards.service.MBThreadService
- * @see com.liferay.portlet.messageboards.service.MBThreadServiceFactory
  *
  */
 public class MBThreadServiceUtil {
@@ -55,9 +49,7 @@ public class MBThreadServiceUtil {
 		long categoryId, long threadId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
-		MBThreadService mbThreadService = MBThreadServiceFactory.getService();
-
-		return mbThreadService.moveThread(categoryId, threadId);
+		return _service.moveThread(categoryId, threadId);
 	}
 
 	public static com.liferay.portlet.messageboards.model.MBThread splitThread(
@@ -65,8 +57,16 @@ public class MBThreadServiceUtil {
 		com.liferay.portal.theme.ThemeDisplay themeDisplay)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
-		MBThreadService mbThreadService = MBThreadServiceFactory.getService();
-
-		return mbThreadService.splitThread(messageId, prefs, themeDisplay);
+		return _service.splitThread(messageId, prefs, themeDisplay);
 	}
+
+	public static MBThreadService getService() {
+		return _service;
+	}
+
+	public void setService(MBThreadService service) {
+		_service = service;
+	}
+
+	private static MBThreadService _service;
 }

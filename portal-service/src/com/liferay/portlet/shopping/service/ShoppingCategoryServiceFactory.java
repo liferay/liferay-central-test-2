@@ -22,6 +22,7 @@
 
 package com.liferay.portlet.shopping.service;
 
+import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
 
 /**
  * <a href="ShoppingCategoryServiceFactory.java.html"><b><i>View Source</i></b></a>
@@ -51,33 +52,45 @@ package com.liferay.portlet.shopping.service;
  *
  */
 public class ShoppingCategoryServiceFactory {
+	/**
+	 * @deprecated
+	 */
 	public static ShoppingCategoryService getService() {
 		return _getFactory()._service;
 	}
 
+	/**
+	 * @deprecated
+	 */
 	public static ShoppingCategoryService getImpl() {
 		if (_impl == null) {
-			_impl = (ShoppingCategoryService)com.liferay.portal.kernel.bean.PortalBeanLocatorUtil.locate(_IMPL);
+			_impl = (ShoppingCategoryService)PortalBeanLocatorUtil.locate(_IMPL);
 		}
 
 		return _impl;
 	}
 
+	/**
+	 * @deprecated
+	 */
 	public static ShoppingCategoryService getTxImpl() {
 		if (_txImpl == null) {
-			_txImpl = (ShoppingCategoryService)com.liferay.portal.kernel.bean.PortalBeanLocatorUtil.locate(_TX_IMPL);
+			_txImpl = (ShoppingCategoryService)PortalBeanLocatorUtil.locate(_TX_IMPL);
 		}
 
 		return _txImpl;
 	}
 
+	/**
+	 * @deprecated
+	 */
 	public void setService(ShoppingCategoryService service) {
 		_service = service;
 	}
 
 	private static ShoppingCategoryServiceFactory _getFactory() {
 		if (_factory == null) {
-			_factory = (ShoppingCategoryServiceFactory)com.liferay.portal.kernel.bean.PortalBeanLocatorUtil.locate(_FACTORY);
+			_factory = (ShoppingCategoryServiceFactory)PortalBeanLocatorUtil.locate(_FACTORY);
 		}
 
 		return _factory;

@@ -284,22 +284,12 @@ public class PortletItemUtil {
 	}
 
 	public static PortletItemPersistence getPersistence() {
-		return _getUtil()._persistence;
+		return _persistence;
 	}
 
 	public void setPersistence(PortletItemPersistence persistence) {
 		_persistence = persistence;
 	}
 
-	private static PortletItemUtil _getUtil() {
-		if (_util == null) {
-			_util = (PortletItemUtil)com.liferay.portal.kernel.bean.PortalBeanLocatorUtil.locate(_UTIL);
-		}
-
-		return _util;
-	}
-
-	private static final String _UTIL = PortletItemUtil.class.getName();
-	private static PortletItemUtil _util;
-	private PortletItemPersistence _persistence;
+	private static PortletItemPersistence _persistence;
 }

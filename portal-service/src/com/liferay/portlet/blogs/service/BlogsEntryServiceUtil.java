@@ -39,15 +39,9 @@ package com.liferay.portlet.blogs.service;
  * on a bean instead of writing a lookup call and a method call.
  * </p>
  *
- * <p>
- * <code>com.liferay.portlet.blogs.service.BlogsEntryServiceFactory</code>
- * is responsible for the lookup of the bean.
- * </p>
- *
  * @author Brian Wing Shun Chan
  *
  * @see com.liferay.portlet.blogs.service.BlogsEntryService
- * @see com.liferay.portlet.blogs.service.BlogsEntryServiceFactory
  *
  */
 public class BlogsEntryServiceUtil {
@@ -61,10 +55,8 @@ public class BlogsEntryServiceUtil {
 		com.liferay.portal.theme.ThemeDisplay themeDisplay)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
-		BlogsEntryService blogsEntryService = BlogsEntryServiceFactory.getService();
-
-		return blogsEntryService.addEntry(plid, title, content,
-			displayDateMonth, displayDateDay, displayDateYear, displayDateHour,
+		return _service.addEntry(plid, title, content, displayDateMonth,
+			displayDateDay, displayDateYear, displayDateHour,
 			displayDateMinute, draft, allowTrackbacks, trackbacks, tagsEntries,
 			addCommunityPermissions, addGuestPermissions, themeDisplay);
 	}
@@ -80,10 +72,8 @@ public class BlogsEntryServiceUtil {
 		com.liferay.portal.theme.ThemeDisplay themeDisplay)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
-		BlogsEntryService blogsEntryService = BlogsEntryServiceFactory.getService();
-
-		return blogsEntryService.addEntry(plid, title, content,
-			displayDateMonth, displayDateDay, displayDateYear, displayDateHour,
+		return _service.addEntry(plid, title, content, displayDateMonth,
+			displayDateDay, displayDateYear, displayDateHour,
 			displayDateMinute, draft, allowTrackbacks, trackbacks, tagsEntries,
 			communityPermissions, guestPermissions, themeDisplay);
 	}
@@ -91,18 +81,14 @@ public class BlogsEntryServiceUtil {
 	public static void deleteEntry(long entryId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
-		BlogsEntryService blogsEntryService = BlogsEntryServiceFactory.getService();
-
-		blogsEntryService.deleteEntry(entryId);
+		_service.deleteEntry(entryId);
 	}
 
 	public static java.util.List<com.liferay.portlet.blogs.model.BlogsEntry> getCompanyEntries(
 		long companyId, int max)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
-		BlogsEntryService blogsEntryService = BlogsEntryServiceFactory.getService();
-
-		return blogsEntryService.getCompanyEntries(companyId, max);
+		return _service.getCompanyEntries(companyId, max);
 	}
 
 	public static java.lang.String getCompanyEntriesRSS(long companyId,
@@ -112,37 +98,29 @@ public class BlogsEntryServiceUtil {
 		com.liferay.portal.theme.ThemeDisplay themeDisplay)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
-		BlogsEntryService blogsEntryService = BlogsEntryServiceFactory.getService();
-
-		return blogsEntryService.getCompanyEntriesRSS(companyId, max, type,
-			version, displayStyle, feedURL, entryURL, themeDisplay);
+		return _service.getCompanyEntriesRSS(companyId, max, type, version,
+			displayStyle, feedURL, entryURL, themeDisplay);
 	}
 
 	public static com.liferay.portlet.blogs.model.BlogsEntry getEntry(
 		long entryId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
-		BlogsEntryService blogsEntryService = BlogsEntryServiceFactory.getService();
-
-		return blogsEntryService.getEntry(entryId);
+		return _service.getEntry(entryId);
 	}
 
 	public static com.liferay.portlet.blogs.model.BlogsEntry getEntry(
 		long groupId, java.lang.String urlTitle)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
-		BlogsEntryService blogsEntryService = BlogsEntryServiceFactory.getService();
-
-		return blogsEntryService.getEntry(groupId, urlTitle);
+		return _service.getEntry(groupId, urlTitle);
 	}
 
 	public static java.util.List<com.liferay.portlet.blogs.model.BlogsEntry> getGroupEntries(
 		long groupId, int max)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
-		BlogsEntryService blogsEntryService = BlogsEntryServiceFactory.getService();
-
-		return blogsEntryService.getGroupEntries(groupId, max);
+		return _service.getGroupEntries(groupId, max);
 	}
 
 	public static java.lang.String getGroupEntriesRSS(long groupId, int max,
@@ -151,19 +129,15 @@ public class BlogsEntryServiceUtil {
 		com.liferay.portal.theme.ThemeDisplay themeDisplay)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
-		BlogsEntryService blogsEntryService = BlogsEntryServiceFactory.getService();
-
-		return blogsEntryService.getGroupEntriesRSS(groupId, max, type,
-			version, displayStyle, feedURL, entryURL, themeDisplay);
+		return _service.getGroupEntriesRSS(groupId, max, type, version,
+			displayStyle, feedURL, entryURL, themeDisplay);
 	}
 
 	public static java.util.List<com.liferay.portlet.blogs.model.BlogsEntry> getOrganizationEntries(
 		long organizationId, int max)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
-		BlogsEntryService blogsEntryService = BlogsEntryServiceFactory.getService();
-
-		return blogsEntryService.getOrganizationEntries(organizationId, max);
+		return _service.getOrganizationEntries(organizationId, max);
 	}
 
 	public static java.lang.String getOrganizationEntriesRSS(
@@ -173,10 +147,8 @@ public class BlogsEntryServiceUtil {
 		com.liferay.portal.theme.ThemeDisplay themeDisplay)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
-		BlogsEntryService blogsEntryService = BlogsEntryServiceFactory.getService();
-
-		return blogsEntryService.getOrganizationEntriesRSS(organizationId, max,
-			type, version, displayStyle, feedURL, entryURL, themeDisplay);
+		return _service.getOrganizationEntriesRSS(organizationId, max, type,
+			version, displayStyle, feedURL, entryURL, themeDisplay);
 	}
 
 	public static com.liferay.portlet.blogs.model.BlogsEntry updateEntry(
@@ -188,11 +160,19 @@ public class BlogsEntryServiceUtil {
 		com.liferay.portal.theme.ThemeDisplay themeDisplay)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
-		BlogsEntryService blogsEntryService = BlogsEntryServiceFactory.getService();
-
-		return blogsEntryService.updateEntry(entryId, title, content,
-			displayDateMonth, displayDateDay, displayDateYear, displayDateHour,
+		return _service.updateEntry(entryId, title, content, displayDateMonth,
+			displayDateDay, displayDateYear, displayDateHour,
 			displayDateMinute, draft, allowTrackbacks, trackbacks, tagsEntries,
 			themeDisplay);
 	}
+
+	public static BlogsEntryService getService() {
+		return _service;
+	}
+
+	public void setService(BlogsEntryService service) {
+		_service = service;
+	}
+
+	private static BlogsEntryService _service;
 }

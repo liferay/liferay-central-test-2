@@ -389,22 +389,12 @@ public class SCFrameworkVersionUtil {
 	}
 
 	public static SCFrameworkVersionPersistence getPersistence() {
-		return _getUtil()._persistence;
+		return _persistence;
 	}
 
 	public void setPersistence(SCFrameworkVersionPersistence persistence) {
 		_persistence = persistence;
 	}
 
-	private static SCFrameworkVersionUtil _getUtil() {
-		if (_util == null) {
-			_util = (SCFrameworkVersionUtil)com.liferay.portal.kernel.bean.PortalBeanLocatorUtil.locate(_UTIL);
-		}
-
-		return _util;
-	}
-
-	private static final String _UTIL = SCFrameworkVersionUtil.class.getName();
-	private static SCFrameworkVersionUtil _util;
-	private SCFrameworkVersionPersistence _persistence;
+	private static SCFrameworkVersionPersistence _persistence;
 }

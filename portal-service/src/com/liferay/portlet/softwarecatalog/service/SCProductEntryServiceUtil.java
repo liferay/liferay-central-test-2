@@ -39,15 +39,9 @@ package com.liferay.portlet.softwarecatalog.service;
  * on a bean instead of writing a lookup call and a method call.
  * </p>
  *
- * <p>
- * <code>com.liferay.portlet.softwarecatalog.service.SCProductEntryServiceFactory</code>
- * is responsible for the lookup of the bean.
- * </p>
- *
  * @author Brian Wing Shun Chan
  *
  * @see com.liferay.portlet.softwarecatalog.service.SCProductEntryService
- * @see com.liferay.portlet.softwarecatalog.service.SCProductEntryServiceFactory
  *
  */
 public class SCProductEntryServiceUtil {
@@ -61,9 +55,7 @@ public class SCProductEntryServiceUtil {
 		boolean addCommunityPermissions, boolean addGuestPermissions)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
-		SCProductEntryService scProductEntryService = SCProductEntryServiceFactory.getService();
-
-		return scProductEntryService.addProductEntry(plid, name, type, tags,
+		return _service.addProductEntry(plid, name, type, tags,
 			shortDescription, longDescription, pageURL, author, repoGroupId,
 			repoArtifactId, licenseIds, thumbnails, fullImages,
 			addCommunityPermissions, addGuestPermissions);
@@ -80,9 +72,7 @@ public class SCProductEntryServiceUtil {
 		java.lang.String[] guestPermissions)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
-		SCProductEntryService scProductEntryService = SCProductEntryServiceFactory.getService();
-
-		return scProductEntryService.addProductEntry(plid, name, type, tags,
+		return _service.addProductEntry(plid, name, type, tags,
 			shortDescription, longDescription, pageURL, author, repoGroupId,
 			repoArtifactId, licenseIds, thumbnails, fullImages,
 			communityPermissions, guestPermissions);
@@ -91,18 +81,14 @@ public class SCProductEntryServiceUtil {
 	public static void deleteProductEntry(long productEntryId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
-		SCProductEntryService scProductEntryService = SCProductEntryServiceFactory.getService();
-
-		scProductEntryService.deleteProductEntry(productEntryId);
+		_service.deleteProductEntry(productEntryId);
 	}
 
 	public static com.liferay.portlet.softwarecatalog.model.SCProductEntry getProductEntry(
 		long productEntryId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
-		SCProductEntryService scProductEntryService = SCProductEntryServiceFactory.getService();
-
-		return scProductEntryService.getProductEntry(productEntryId);
+		return _service.getProductEntry(productEntryId);
 	}
 
 	public static com.liferay.portlet.softwarecatalog.model.SCProductEntry updateProductEntry(
@@ -114,10 +100,18 @@ public class SCProductEntryServiceUtil {
 		java.util.List<byte[]> thumbnails, java.util.List<byte[]> fullImages)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
-		SCProductEntryService scProductEntryService = SCProductEntryServiceFactory.getService();
-
-		return scProductEntryService.updateProductEntry(productEntryId, name,
-			type, tags, shortDescription, longDescription, pageURL, author,
-			repoGroupId, repoArtifactId, licenseIds, thumbnails, fullImages);
+		return _service.updateProductEntry(productEntryId, name, type, tags,
+			shortDescription, longDescription, pageURL, author, repoGroupId,
+			repoArtifactId, licenseIds, thumbnails, fullImages);
 	}
+
+	public static SCProductEntryService getService() {
+		return _service;
+	}
+
+	public void setService(SCProductEntryService service) {
+		_service = service;
+	}
+
+	private static SCProductEntryService _service;
 }

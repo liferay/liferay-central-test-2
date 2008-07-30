@@ -44,7 +44,6 @@ package com.liferay.portlet.announcements.service;
  *
  * @author Brian Wing Shun Chan
  *
- * @see com.liferay.portlet.announcements.service.AnnouncementsDeliveryLocalServiceFactory
  * @see com.liferay.portlet.announcements.service.AnnouncementsDeliveryLocalServiceUtil
  *
  */

@@ -39,84 +39,70 @@ package com.liferay.portal.service;
  * on a bean instead of writing a lookup call and a method call.
  * </p>
  *
- * <p>
- * <code>com.liferay.portal.service.AccountLocalServiceFactory</code>
- * is responsible for the lookup of the bean.
- * </p>
- *
  * @author Brian Wing Shun Chan
  *
  * @see com.liferay.portal.service.AccountLocalService
- * @see com.liferay.portal.service.AccountLocalServiceFactory
  *
  */
 public class AccountLocalServiceUtil {
 	public static com.liferay.portal.model.Account addAccount(
 		com.liferay.portal.model.Account account)
 		throws com.liferay.portal.SystemException {
-		AccountLocalService accountLocalService = AccountLocalServiceFactory.getService();
-
-		return accountLocalService.addAccount(account);
+		return _service.addAccount(account);
 	}
 
 	public static void deleteAccount(long accountId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		AccountLocalService accountLocalService = AccountLocalServiceFactory.getService();
-
-		accountLocalService.deleteAccount(accountId);
+		_service.deleteAccount(accountId);
 	}
 
 	public static void deleteAccount(com.liferay.portal.model.Account account)
 		throws com.liferay.portal.SystemException {
-		AccountLocalService accountLocalService = AccountLocalServiceFactory.getService();
-
-		accountLocalService.deleteAccount(account);
+		_service.deleteAccount(account);
 	}
 
 	public static java.util.List<Object> dynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery)
 		throws com.liferay.portal.SystemException {
-		AccountLocalService accountLocalService = AccountLocalServiceFactory.getService();
-
-		return accountLocalService.dynamicQuery(dynamicQuery);
+		return _service.dynamicQuery(dynamicQuery);
 	}
 
 	public static java.util.List<Object> dynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery, int start,
 		int end) throws com.liferay.portal.SystemException {
-		AccountLocalService accountLocalService = AccountLocalServiceFactory.getService();
-
-		return accountLocalService.dynamicQuery(dynamicQuery, start, end);
+		return _service.dynamicQuery(dynamicQuery, start, end);
 	}
 
 	public static com.liferay.portal.model.Account getAccount(long accountId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		AccountLocalService accountLocalService = AccountLocalServiceFactory.getService();
-
-		return accountLocalService.getAccount(accountId);
+		return _service.getAccount(accountId);
 	}
 
 	public static java.util.List<com.liferay.portal.model.Account> getAccounts(
 		int start, int end) throws com.liferay.portal.SystemException {
-		AccountLocalService accountLocalService = AccountLocalServiceFactory.getService();
-
-		return accountLocalService.getAccounts(start, end);
+		return _service.getAccounts(start, end);
 	}
 
 	public static int getAccountsCount()
 		throws com.liferay.portal.SystemException {
-		AccountLocalService accountLocalService = AccountLocalServiceFactory.getService();
-
-		return accountLocalService.getAccountsCount();
+		return _service.getAccountsCount();
 	}
 
 	public static com.liferay.portal.model.Account updateAccount(
 		com.liferay.portal.model.Account account)
 		throws com.liferay.portal.SystemException {
-		AccountLocalService accountLocalService = AccountLocalServiceFactory.getService();
-
-		return accountLocalService.updateAccount(account);
+		return _service.updateAccount(account);
 	}
+
+	public static AccountLocalService getService() {
+		return _service;
+	}
+
+	public void setService(AccountLocalService service) {
+		_service = service;
+	}
+
+	private static AccountLocalService _service;
 }

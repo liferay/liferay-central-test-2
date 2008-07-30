@@ -22,6 +22,7 @@
 
 package com.liferay.portlet.ratings.service;
 
+import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
 
 /**
  * <a href="RatingsStatsLocalServiceFactory.java.html"><b><i>View Source</i></b></a>
@@ -51,33 +52,45 @@ package com.liferay.portlet.ratings.service;
  *
  */
 public class RatingsStatsLocalServiceFactory {
+	/**
+	 * @deprecated
+	 */
 	public static RatingsStatsLocalService getService() {
 		return _getFactory()._service;
 	}
 
+	/**
+	 * @deprecated
+	 */
 	public static RatingsStatsLocalService getImpl() {
 		if (_impl == null) {
-			_impl = (RatingsStatsLocalService)com.liferay.portal.kernel.bean.PortalBeanLocatorUtil.locate(_IMPL);
+			_impl = (RatingsStatsLocalService)PortalBeanLocatorUtil.locate(_IMPL);
 		}
 
 		return _impl;
 	}
 
+	/**
+	 * @deprecated
+	 */
 	public static RatingsStatsLocalService getTxImpl() {
 		if (_txImpl == null) {
-			_txImpl = (RatingsStatsLocalService)com.liferay.portal.kernel.bean.PortalBeanLocatorUtil.locate(_TX_IMPL);
+			_txImpl = (RatingsStatsLocalService)PortalBeanLocatorUtil.locate(_TX_IMPL);
 		}
 
 		return _txImpl;
 	}
 
+	/**
+	 * @deprecated
+	 */
 	public void setService(RatingsStatsLocalService service) {
 		_service = service;
 	}
 
 	private static RatingsStatsLocalServiceFactory _getFactory() {
 		if (_factory == null) {
-			_factory = (RatingsStatsLocalServiceFactory)com.liferay.portal.kernel.bean.PortalBeanLocatorUtil.locate(_FACTORY);
+			_factory = (RatingsStatsLocalServiceFactory)PortalBeanLocatorUtil.locate(_FACTORY);
 		}
 
 		return _factory;

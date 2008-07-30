@@ -22,6 +22,7 @@
 
 package com.liferay.portlet.journal.service;
 
+import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
 
 /**
  * <a href="JournalStructureServiceFactory.java.html"><b><i>View Source</i></b></a>
@@ -51,33 +52,45 @@ package com.liferay.portlet.journal.service;
  *
  */
 public class JournalStructureServiceFactory {
+	/**
+	 * @deprecated
+	 */
 	public static JournalStructureService getService() {
 		return _getFactory()._service;
 	}
 
+	/**
+	 * @deprecated
+	 */
 	public static JournalStructureService getImpl() {
 		if (_impl == null) {
-			_impl = (JournalStructureService)com.liferay.portal.kernel.bean.PortalBeanLocatorUtil.locate(_IMPL);
+			_impl = (JournalStructureService)PortalBeanLocatorUtil.locate(_IMPL);
 		}
 
 		return _impl;
 	}
 
+	/**
+	 * @deprecated
+	 */
 	public static JournalStructureService getTxImpl() {
 		if (_txImpl == null) {
-			_txImpl = (JournalStructureService)com.liferay.portal.kernel.bean.PortalBeanLocatorUtil.locate(_TX_IMPL);
+			_txImpl = (JournalStructureService)PortalBeanLocatorUtil.locate(_TX_IMPL);
 		}
 
 		return _txImpl;
 	}
 
+	/**
+	 * @deprecated
+	 */
 	public void setService(JournalStructureService service) {
 		_service = service;
 	}
 
 	private static JournalStructureServiceFactory _getFactory() {
 		if (_factory == null) {
-			_factory = (JournalStructureServiceFactory)com.liferay.portal.kernel.bean.PortalBeanLocatorUtil.locate(_FACTORY);
+			_factory = (JournalStructureServiceFactory)PortalBeanLocatorUtil.locate(_FACTORY);
 		}
 
 		return _factory;

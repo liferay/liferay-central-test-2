@@ -39,15 +39,9 @@ package com.liferay.portlet.journal.service;
  * on a bean instead of writing a lookup call and a method call.
  * </p>
  *
- * <p>
- * <code>com.liferay.portlet.journal.service.JournalFeedServiceFactory</code>
- * is responsible for the lookup of the bean.
- * </p>
- *
  * @author Brian Wing Shun Chan
  *
  * @see com.liferay.portlet.journal.service.JournalFeedService
- * @see com.liferay.portlet.journal.service.JournalFeedServiceFactory
  *
  */
 public class JournalFeedServiceUtil {
@@ -63,13 +57,11 @@ public class JournalFeedServiceUtil {
 		boolean addCommunityPermissions, boolean addGuestPermissions)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
-		JournalFeedService journalFeedService = JournalFeedServiceFactory.getService();
-
-		return journalFeedService.addFeed(plid, feedId, autoFeedId, name,
-			description, type, structureId, templateId, rendererTemplateId,
-			delta, orderByCol, orderByType, targetLayoutFriendlyUrl,
-			targetPortletId, contentField, feedType, feedVersion,
-			addCommunityPermissions, addGuestPermissions);
+		return _service.addFeed(plid, feedId, autoFeedId, name, description,
+			type, structureId, templateId, rendererTemplateId, delta,
+			orderByCol, orderByType, targetLayoutFriendlyUrl, targetPortletId,
+			contentField, feedType, feedVersion, addCommunityPermissions,
+			addGuestPermissions);
 	}
 
 	public static com.liferay.portlet.journal.model.JournalFeed addFeed(
@@ -85,47 +77,37 @@ public class JournalFeedServiceUtil {
 		java.lang.String[] guestPermissions)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
-		JournalFeedService journalFeedService = JournalFeedServiceFactory.getService();
-
-		return journalFeedService.addFeed(plid, feedId, autoFeedId, name,
-			description, type, structureId, templateId, rendererTemplateId,
-			delta, orderByCol, orderByType, targetLayoutFriendlyUrl,
-			targetPortletId, contentField, feedType, feedVersion,
-			communityPermissions, guestPermissions);
+		return _service.addFeed(plid, feedId, autoFeedId, name, description,
+			type, structureId, templateId, rendererTemplateId, delta,
+			orderByCol, orderByType, targetLayoutFriendlyUrl, targetPortletId,
+			contentField, feedType, feedVersion, communityPermissions,
+			guestPermissions);
 	}
 
 	public static void deleteFeed(long groupId, long feedId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
-		JournalFeedService journalFeedService = JournalFeedServiceFactory.getService();
-
-		journalFeedService.deleteFeed(groupId, feedId);
+		_service.deleteFeed(groupId, feedId);
 	}
 
 	public static void deleteFeed(long groupId, java.lang.String feedId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
-		JournalFeedService journalFeedService = JournalFeedServiceFactory.getService();
-
-		journalFeedService.deleteFeed(groupId, feedId);
+		_service.deleteFeed(groupId, feedId);
 	}
 
 	public static com.liferay.portlet.journal.model.JournalFeed getFeed(
 		long groupId, long feedId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
-		JournalFeedService journalFeedService = JournalFeedServiceFactory.getService();
-
-		return journalFeedService.getFeed(groupId, feedId);
+		return _service.getFeed(groupId, feedId);
 	}
 
 	public static com.liferay.portlet.journal.model.JournalFeed getFeed(
 		long groupId, java.lang.String feedId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
-		JournalFeedService journalFeedService = JournalFeedServiceFactory.getService();
-
-		return journalFeedService.getFeed(groupId, feedId);
+		return _service.getFeed(groupId, feedId);
 	}
 
 	public static com.liferay.portlet.journal.model.JournalFeed updateFeed(
@@ -139,11 +121,19 @@ public class JournalFeedServiceUtil {
 		java.lang.String feedType, double feedVersion)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
-		JournalFeedService journalFeedService = JournalFeedServiceFactory.getService();
-
-		return journalFeedService.updateFeed(groupId, feedId, name,
-			description, type, structureId, templateId, rendererTemplateId,
-			delta, orderByCol, orderByType, targetLayoutFriendlyUrl,
-			targetPortletId, contentField, feedType, feedVersion);
+		return _service.updateFeed(groupId, feedId, name, description, type,
+			structureId, templateId, rendererTemplateId, delta, orderByCol,
+			orderByType, targetLayoutFriendlyUrl, targetPortletId,
+			contentField, feedType, feedVersion);
 	}
+
+	public static JournalFeedService getService() {
+		return _service;
+	}
+
+	public void setService(JournalFeedService service) {
+		_service = service;
+	}
+
+	private static JournalFeedService _service;
 }

@@ -44,7 +44,6 @@ package com.liferay.portlet.blogs.service;
  *
  * @author Brian Wing Shun Chan
  *
- * @see com.liferay.portlet.blogs.service.BlogsEntryLocalServiceFactory
  * @see com.liferay.portlet.blogs.service.BlogsEntryLocalServiceUtil
  *
  */

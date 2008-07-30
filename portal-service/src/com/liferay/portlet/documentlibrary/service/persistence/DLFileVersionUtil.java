@@ -219,22 +219,12 @@ public class DLFileVersionUtil {
 	}
 
 	public static DLFileVersionPersistence getPersistence() {
-		return _getUtil()._persistence;
+		return _persistence;
 	}
 
 	public void setPersistence(DLFileVersionPersistence persistence) {
 		_persistence = persistence;
 	}
 
-	private static DLFileVersionUtil _getUtil() {
-		if (_util == null) {
-			_util = (DLFileVersionUtil)com.liferay.portal.kernel.bean.PortalBeanLocatorUtil.locate(_UTIL);
-		}
-
-		return _util;
-	}
-
-	private static final String _UTIL = DLFileVersionUtil.class.getName();
-	private static DLFileVersionUtil _util;
-	private DLFileVersionPersistence _persistence;
+	private static DLFileVersionPersistence _persistence;
 }

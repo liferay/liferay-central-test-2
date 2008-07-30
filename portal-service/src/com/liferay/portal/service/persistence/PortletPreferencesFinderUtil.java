@@ -35,22 +35,12 @@ public class PortletPreferencesFinderUtil {
 	}
 
 	public static PortletPreferencesFinder getFinder() {
-		return _getUtil()._finder;
+		return _finder;
 	}
 
 	public void setFinder(PortletPreferencesFinder finder) {
 		_finder = finder;
 	}
 
-	private static PortletPreferencesFinderUtil _getUtil() {
-		if (_util == null) {
-			_util = (PortletPreferencesFinderUtil)com.liferay.portal.kernel.bean.PortalBeanLocatorUtil.locate(_UTIL);
-		}
-
-		return _util;
-	}
-
-	private static final String _UTIL = PortletPreferencesFinderUtil.class.getName();
-	private static PortletPreferencesFinderUtil _util;
-	private PortletPreferencesFinder _finder;
+	private static PortletPreferencesFinder _finder;
 }

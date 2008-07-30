@@ -39,100 +39,82 @@ package com.liferay.portal.service;
  * on a bean instead of writing a lookup call and a method call.
  * </p>
  *
- * <p>
- * <code>com.liferay.portal.service.ClassNameLocalServiceFactory</code>
- * is responsible for the lookup of the bean.
- * </p>
- *
  * @author Brian Wing Shun Chan
  *
  * @see com.liferay.portal.service.ClassNameLocalService
- * @see com.liferay.portal.service.ClassNameLocalServiceFactory
  *
  */
 public class ClassNameLocalServiceUtil {
 	public static com.liferay.portal.model.ClassName addClassName(
 		com.liferay.portal.model.ClassName className)
 		throws com.liferay.portal.SystemException {
-		ClassNameLocalService classNameLocalService = ClassNameLocalServiceFactory.getService();
-
-		return classNameLocalService.addClassName(className);
+		return _service.addClassName(className);
 	}
 
 	public static void deleteClassName(long classNameId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		ClassNameLocalService classNameLocalService = ClassNameLocalServiceFactory.getService();
-
-		classNameLocalService.deleteClassName(classNameId);
+		_service.deleteClassName(classNameId);
 	}
 
 	public static void deleteClassName(
 		com.liferay.portal.model.ClassName className)
 		throws com.liferay.portal.SystemException {
-		ClassNameLocalService classNameLocalService = ClassNameLocalServiceFactory.getService();
-
-		classNameLocalService.deleteClassName(className);
+		_service.deleteClassName(className);
 	}
 
 	public static java.util.List<Object> dynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery)
 		throws com.liferay.portal.SystemException {
-		ClassNameLocalService classNameLocalService = ClassNameLocalServiceFactory.getService();
-
-		return classNameLocalService.dynamicQuery(dynamicQuery);
+		return _service.dynamicQuery(dynamicQuery);
 	}
 
 	public static java.util.List<Object> dynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery, int start,
 		int end) throws com.liferay.portal.SystemException {
-		ClassNameLocalService classNameLocalService = ClassNameLocalServiceFactory.getService();
-
-		return classNameLocalService.dynamicQuery(dynamicQuery, start, end);
+		return _service.dynamicQuery(dynamicQuery, start, end);
 	}
 
 	public static com.liferay.portal.model.ClassName getClassName(
 		long classNameId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		ClassNameLocalService classNameLocalService = ClassNameLocalServiceFactory.getService();
-
-		return classNameLocalService.getClassName(classNameId);
+		return _service.getClassName(classNameId);
 	}
 
 	public static java.util.List<com.liferay.portal.model.ClassName> getClassNames(
 		int start, int end) throws com.liferay.portal.SystemException {
-		ClassNameLocalService classNameLocalService = ClassNameLocalServiceFactory.getService();
-
-		return classNameLocalService.getClassNames(start, end);
+		return _service.getClassNames(start, end);
 	}
 
 	public static int getClassNamesCount()
 		throws com.liferay.portal.SystemException {
-		ClassNameLocalService classNameLocalService = ClassNameLocalServiceFactory.getService();
-
-		return classNameLocalService.getClassNamesCount();
+		return _service.getClassNamesCount();
 	}
 
 	public static com.liferay.portal.model.ClassName updateClassName(
 		com.liferay.portal.model.ClassName className)
 		throws com.liferay.portal.SystemException {
-		ClassNameLocalService classNameLocalService = ClassNameLocalServiceFactory.getService();
-
-		return classNameLocalService.updateClassName(className);
+		return _service.updateClassName(className);
 	}
 
 	public static void checkClassNames()
 		throws com.liferay.portal.SystemException {
-		ClassNameLocalService classNameLocalService = ClassNameLocalServiceFactory.getService();
-
-		classNameLocalService.checkClassNames();
+		_service.checkClassNames();
 	}
 
 	public static com.liferay.portal.model.ClassName getClassName(
 		java.lang.String value) throws com.liferay.portal.SystemException {
-		ClassNameLocalService classNameLocalService = ClassNameLocalServiceFactory.getService();
-
-		return classNameLocalService.getClassName(value);
+		return _service.getClassName(value);
 	}
+
+	public static ClassNameLocalService getService() {
+		return _service;
+	}
+
+	public void setService(ClassNameLocalService service) {
+		_service = service;
+	}
+
+	private static ClassNameLocalService _service;
 }

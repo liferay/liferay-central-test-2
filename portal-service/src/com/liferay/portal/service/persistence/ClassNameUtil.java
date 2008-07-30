@@ -161,22 +161,12 @@ public class ClassNameUtil {
 	}
 
 	public static ClassNamePersistence getPersistence() {
-		return _getUtil()._persistence;
+		return _persistence;
 	}
 
 	public void setPersistence(ClassNamePersistence persistence) {
 		_persistence = persistence;
 	}
 
-	private static ClassNameUtil _getUtil() {
-		if (_util == null) {
-			_util = (ClassNameUtil)com.liferay.portal.kernel.bean.PortalBeanLocatorUtil.locate(_UTIL);
-		}
-
-		return _util;
-	}
-
-	private static final String _UTIL = ClassNameUtil.class.getName();
-	private static ClassNameUtil _util;
-	private ClassNamePersistence _persistence;
+	private static ClassNamePersistence _persistence;
 }

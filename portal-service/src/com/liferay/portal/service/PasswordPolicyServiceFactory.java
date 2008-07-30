@@ -22,6 +22,7 @@
 
 package com.liferay.portal.service;
 
+import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
 
 /**
  * <a href="PasswordPolicyServiceFactory.java.html"><b><i>View Source</i></b></a>
@@ -51,33 +52,45 @@ package com.liferay.portal.service;
  *
  */
 public class PasswordPolicyServiceFactory {
+	/**
+	 * @deprecated
+	 */
 	public static PasswordPolicyService getService() {
 		return _getFactory()._service;
 	}
 
+	/**
+	 * @deprecated
+	 */
 	public static PasswordPolicyService getImpl() {
 		if (_impl == null) {
-			_impl = (PasswordPolicyService)com.liferay.portal.kernel.bean.PortalBeanLocatorUtil.locate(_IMPL);
+			_impl = (PasswordPolicyService)PortalBeanLocatorUtil.locate(_IMPL);
 		}
 
 		return _impl;
 	}
 
+	/**
+	 * @deprecated
+	 */
 	public static PasswordPolicyService getTxImpl() {
 		if (_txImpl == null) {
-			_txImpl = (PasswordPolicyService)com.liferay.portal.kernel.bean.PortalBeanLocatorUtil.locate(_TX_IMPL);
+			_txImpl = (PasswordPolicyService)PortalBeanLocatorUtil.locate(_TX_IMPL);
 		}
 
 		return _txImpl;
 	}
 
+	/**
+	 * @deprecated
+	 */
 	public void setService(PasswordPolicyService service) {
 		_service = service;
 	}
 
 	private static PasswordPolicyServiceFactory _getFactory() {
 		if (_factory == null) {
-			_factory = (PasswordPolicyServiceFactory)com.liferay.portal.kernel.bean.PortalBeanLocatorUtil.locate(_FACTORY);
+			_factory = (PasswordPolicyServiceFactory)PortalBeanLocatorUtil.locate(_FACTORY);
 		}
 
 		return _factory;

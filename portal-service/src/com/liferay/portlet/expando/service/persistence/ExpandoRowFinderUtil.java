@@ -47,22 +47,12 @@ public class ExpandoRowFinderUtil {
 	}
 
 	public static ExpandoRowFinder getFinder() {
-		return _getUtil()._finder;
+		return _finder;
 	}
 
 	public void setFinder(ExpandoRowFinder finder) {
 		_finder = finder;
 	}
 
-	private static ExpandoRowFinderUtil _getUtil() {
-		if (_util == null) {
-			_util = (ExpandoRowFinderUtil)com.liferay.portal.kernel.bean.PortalBeanLocatorUtil.locate(_UTIL);
-		}
-
-		return _util;
-	}
-
-	private static final String _UTIL = ExpandoRowFinderUtil.class.getName();
-	private static ExpandoRowFinderUtil _util;
-	private ExpandoRowFinder _finder;
+	private static ExpandoRowFinder _finder;
 }

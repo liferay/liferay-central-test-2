@@ -69,22 +69,12 @@ public class BookmarksEntryFinderUtil {
 	}
 
 	public static BookmarksEntryFinder getFinder() {
-		return _getUtil()._finder;
+		return _finder;
 	}
 
 	public void setFinder(BookmarksEntryFinder finder) {
 		_finder = finder;
 	}
 
-	private static BookmarksEntryFinderUtil _getUtil() {
-		if (_util == null) {
-			_util = (BookmarksEntryFinderUtil)com.liferay.portal.kernel.bean.PortalBeanLocatorUtil.locate(_UTIL);
-		}
-
-		return _util;
-	}
-
-	private static final String _UTIL = BookmarksEntryFinderUtil.class.getName();
-	private static BookmarksEntryFinderUtil _util;
-	private BookmarksEntryFinder _finder;
+	private static BookmarksEntryFinder _finder;
 }

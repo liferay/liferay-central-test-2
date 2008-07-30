@@ -443,22 +443,12 @@ public class TasksReviewUtil {
 	}
 
 	public static TasksReviewPersistence getPersistence() {
-		return _getUtil()._persistence;
+		return _persistence;
 	}
 
 	public void setPersistence(TasksReviewPersistence persistence) {
 		_persistence = persistence;
 	}
 
-	private static TasksReviewUtil _getUtil() {
-		if (_util == null) {
-			_util = (TasksReviewUtil)com.liferay.portal.kernel.bean.PortalBeanLocatorUtil.locate(_UTIL);
-		}
-
-		return _util;
-	}
-
-	private static final String _UTIL = TasksReviewUtil.class.getName();
-	private static TasksReviewUtil _util;
-	private TasksReviewPersistence _persistence;
+	private static TasksReviewPersistence _persistence;
 }

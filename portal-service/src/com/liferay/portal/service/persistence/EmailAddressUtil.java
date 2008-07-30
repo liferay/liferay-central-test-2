@@ -425,22 +425,12 @@ public class EmailAddressUtil {
 	}
 
 	public static EmailAddressPersistence getPersistence() {
-		return _getUtil()._persistence;
+		return _persistence;
 	}
 
 	public void setPersistence(EmailAddressPersistence persistence) {
 		_persistence = persistence;
 	}
 
-	private static EmailAddressUtil _getUtil() {
-		if (_util == null) {
-			_util = (EmailAddressUtil)com.liferay.portal.kernel.bean.PortalBeanLocatorUtil.locate(_UTIL);
-		}
-
-		return _util;
-	}
-
-	private static final String _UTIL = EmailAddressUtil.class.getName();
-	private static EmailAddressUtil _util;
-	private EmailAddressPersistence _persistence;
+	private static EmailAddressPersistence _persistence;
 }

@@ -455,22 +455,12 @@ public class MBMessageUtil {
 	}
 
 	public static MBMessagePersistence getPersistence() {
-		return _getUtil()._persistence;
+		return _persistence;
 	}
 
 	public void setPersistence(MBMessagePersistence persistence) {
 		_persistence = persistence;
 	}
 
-	private static MBMessageUtil _getUtil() {
-		if (_util == null) {
-			_util = (MBMessageUtil)com.liferay.portal.kernel.bean.PortalBeanLocatorUtil.locate(_UTIL);
-		}
-
-		return _util;
-	}
-
-	private static final String _UTIL = MBMessageUtil.class.getName();
-	private static MBMessageUtil _util;
-	private MBMessagePersistence _persistence;
+	private static MBMessagePersistence _persistence;
 }

@@ -85,22 +85,12 @@ public class PermissionUserFinderUtil {
 	}
 
 	public static PermissionUserFinder getFinder() {
-		return _getUtil()._finder;
+		return _finder;
 	}
 
 	public void setFinder(PermissionUserFinder finder) {
 		_finder = finder;
 	}
 
-	private static PermissionUserFinderUtil _getUtil() {
-		if (_util == null) {
-			_util = (PermissionUserFinderUtil)com.liferay.portal.kernel.bean.PortalBeanLocatorUtil.locate(_UTIL);
-		}
-
-		return _util;
-	}
-
-	private static final String _UTIL = PermissionUserFinderUtil.class.getName();
-	private static PermissionUserFinderUtil _util;
-	private PermissionUserFinder _finder;
+	private static PermissionUserFinder _finder;
 }

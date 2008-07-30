@@ -22,6 +22,7 @@
 
 package com.liferay.portlet.documentlibrary.service;
 
+import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
 
 /**
  * <a href="DLFileRankLocalServiceFactory.java.html"><b><i>View Source</i></b></a>
@@ -51,33 +52,45 @@ package com.liferay.portlet.documentlibrary.service;
  *
  */
 public class DLFileRankLocalServiceFactory {
+	/**
+	 * @deprecated
+	 */
 	public static DLFileRankLocalService getService() {
 		return _getFactory()._service;
 	}
 
+	/**
+	 * @deprecated
+	 */
 	public static DLFileRankLocalService getImpl() {
 		if (_impl == null) {
-			_impl = (DLFileRankLocalService)com.liferay.portal.kernel.bean.PortalBeanLocatorUtil.locate(_IMPL);
+			_impl = (DLFileRankLocalService)PortalBeanLocatorUtil.locate(_IMPL);
 		}
 
 		return _impl;
 	}
 
+	/**
+	 * @deprecated
+	 */
 	public static DLFileRankLocalService getTxImpl() {
 		if (_txImpl == null) {
-			_txImpl = (DLFileRankLocalService)com.liferay.portal.kernel.bean.PortalBeanLocatorUtil.locate(_TX_IMPL);
+			_txImpl = (DLFileRankLocalService)PortalBeanLocatorUtil.locate(_TX_IMPL);
 		}
 
 		return _txImpl;
 	}
 
+	/**
+	 * @deprecated
+	 */
 	public void setService(DLFileRankLocalService service) {
 		_service = service;
 	}
 
 	private static DLFileRankLocalServiceFactory _getFactory() {
 		if (_factory == null) {
-			_factory = (DLFileRankLocalServiceFactory)com.liferay.portal.kernel.bean.PortalBeanLocatorUtil.locate(_FACTORY);
+			_factory = (DLFileRankLocalServiceFactory)PortalBeanLocatorUtil.locate(_FACTORY);
 		}
 
 		return _factory;

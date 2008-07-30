@@ -483,22 +483,12 @@ public class PermissionUtil {
 	}
 
 	public static PermissionPersistence getPersistence() {
-		return _getUtil()._persistence;
+		return _persistence;
 	}
 
 	public void setPersistence(PermissionPersistence persistence) {
 		_persistence = persistence;
 	}
 
-	private static PermissionUtil _getUtil() {
-		if (_util == null) {
-			_util = (PermissionUtil)com.liferay.portal.kernel.bean.PortalBeanLocatorUtil.locate(_UTIL);
-		}
-
-		return _util;
-	}
-
-	private static final String _UTIL = PermissionUtil.class.getName();
-	private static PermissionUtil _util;
-	private PermissionPersistence _persistence;
+	private static PermissionPersistence _persistence;
 }

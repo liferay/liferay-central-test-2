@@ -23,50 +23,31 @@
 package com.liferay.portlet.bookmarks.service.base;
 
 import com.liferay.counter.service.CounterLocalService;
-import com.liferay.counter.service.CounterLocalServiceFactory;
 import com.liferay.counter.service.CounterService;
-import com.liferay.counter.service.CounterServiceFactory;
 
 import com.liferay.portal.kernel.bean.InitializingBean;
+import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
 import com.liferay.portal.service.ResourceLocalService;
-import com.liferay.portal.service.ResourceLocalServiceFactory;
 import com.liferay.portal.service.ResourceService;
-import com.liferay.portal.service.ResourceServiceFactory;
 import com.liferay.portal.service.UserLocalService;
-import com.liferay.portal.service.UserLocalServiceFactory;
 import com.liferay.portal.service.UserService;
-import com.liferay.portal.service.UserServiceFactory;
 import com.liferay.portal.service.base.PrincipalBean;
 import com.liferay.portal.service.persistence.ResourceFinder;
-import com.liferay.portal.service.persistence.ResourceFinderUtil;
 import com.liferay.portal.service.persistence.ResourcePersistence;
-import com.liferay.portal.service.persistence.ResourceUtil;
 import com.liferay.portal.service.persistence.UserFinder;
-import com.liferay.portal.service.persistence.UserFinderUtil;
 import com.liferay.portal.service.persistence.UserPersistence;
-import com.liferay.portal.service.persistence.UserUtil;
 
 import com.liferay.portlet.bookmarks.service.BookmarksEntryLocalService;
-import com.liferay.portlet.bookmarks.service.BookmarksEntryLocalServiceFactory;
 import com.liferay.portlet.bookmarks.service.BookmarksEntryService;
-import com.liferay.portlet.bookmarks.service.BookmarksEntryServiceFactory;
 import com.liferay.portlet.bookmarks.service.BookmarksFolderLocalService;
-import com.liferay.portlet.bookmarks.service.BookmarksFolderLocalServiceFactory;
 import com.liferay.portlet.bookmarks.service.BookmarksFolderService;
 import com.liferay.portlet.bookmarks.service.persistence.BookmarksEntryFinder;
-import com.liferay.portlet.bookmarks.service.persistence.BookmarksEntryFinderUtil;
 import com.liferay.portlet.bookmarks.service.persistence.BookmarksEntryPersistence;
-import com.liferay.portlet.bookmarks.service.persistence.BookmarksEntryUtil;
 import com.liferay.portlet.bookmarks.service.persistence.BookmarksFolderPersistence;
-import com.liferay.portlet.bookmarks.service.persistence.BookmarksFolderUtil;
 import com.liferay.portlet.tags.service.TagsEntryLocalService;
-import com.liferay.portlet.tags.service.TagsEntryLocalServiceFactory;
 import com.liferay.portlet.tags.service.TagsEntryService;
-import com.liferay.portlet.tags.service.TagsEntryServiceFactory;
 import com.liferay.portlet.tags.service.persistence.TagsEntryFinder;
-import com.liferay.portlet.tags.service.persistence.TagsEntryFinderUtil;
 import com.liferay.portlet.tags.service.persistence.TagsEntryPersistence;
-import com.liferay.portlet.tags.service.persistence.TagsEntryUtil;
 
 /**
  * <a href="BookmarksFolderServiceBaseImpl.java.html"><b><i>View Source</i></b></a>
@@ -247,83 +228,103 @@ public abstract class BookmarksFolderServiceBaseImpl extends PrincipalBean
 
 	public void afterPropertiesSet() {
 		if (bookmarksEntryLocalService == null) {
-			bookmarksEntryLocalService = BookmarksEntryLocalServiceFactory.getImpl();
+			bookmarksEntryLocalService = (BookmarksEntryLocalService)PortalBeanLocatorUtil.locate(BookmarksEntryLocalService.class.getName() +
+					".impl");
 		}
 
 		if (bookmarksEntryService == null) {
-			bookmarksEntryService = BookmarksEntryServiceFactory.getImpl();
+			bookmarksEntryService = (BookmarksEntryService)PortalBeanLocatorUtil.locate(BookmarksEntryService.class.getName() +
+					".impl");
 		}
 
 		if (bookmarksEntryPersistence == null) {
-			bookmarksEntryPersistence = BookmarksEntryUtil.getPersistence();
+			bookmarksEntryPersistence = (BookmarksEntryPersistence)PortalBeanLocatorUtil.locate(BookmarksEntryPersistence.class.getName() +
+					".impl");
 		}
 
 		if (bookmarksEntryFinder == null) {
-			bookmarksEntryFinder = BookmarksEntryFinderUtil.getFinder();
+			bookmarksEntryFinder = (BookmarksEntryFinder)PortalBeanLocatorUtil.locate(BookmarksEntryFinder.class.getName() +
+					".impl");
 		}
 
 		if (bookmarksFolderLocalService == null) {
-			bookmarksFolderLocalService = BookmarksFolderLocalServiceFactory.getImpl();
+			bookmarksFolderLocalService = (BookmarksFolderLocalService)PortalBeanLocatorUtil.locate(BookmarksFolderLocalService.class.getName() +
+					".impl");
 		}
 
 		if (bookmarksFolderPersistence == null) {
-			bookmarksFolderPersistence = BookmarksFolderUtil.getPersistence();
+			bookmarksFolderPersistence = (BookmarksFolderPersistence)PortalBeanLocatorUtil.locate(BookmarksFolderPersistence.class.getName() +
+					".impl");
 		}
 
 		if (counterLocalService == null) {
-			counterLocalService = CounterLocalServiceFactory.getImpl();
+			counterLocalService = (CounterLocalService)PortalBeanLocatorUtil.locate(CounterLocalService.class.getName() +
+					".impl");
 		}
 
 		if (counterService == null) {
-			counterService = CounterServiceFactory.getImpl();
+			counterService = (CounterService)PortalBeanLocatorUtil.locate(CounterService.class.getName() +
+					".impl");
 		}
 
 		if (resourceLocalService == null) {
-			resourceLocalService = ResourceLocalServiceFactory.getImpl();
+			resourceLocalService = (ResourceLocalService)PortalBeanLocatorUtil.locate(ResourceLocalService.class.getName() +
+					".impl");
 		}
 
 		if (resourceService == null) {
-			resourceService = ResourceServiceFactory.getImpl();
+			resourceService = (ResourceService)PortalBeanLocatorUtil.locate(ResourceService.class.getName() +
+					".impl");
 		}
 
 		if (resourcePersistence == null) {
-			resourcePersistence = ResourceUtil.getPersistence();
+			resourcePersistence = (ResourcePersistence)PortalBeanLocatorUtil.locate(ResourcePersistence.class.getName() +
+					".impl");
 		}
 
 		if (resourceFinder == null) {
-			resourceFinder = ResourceFinderUtil.getFinder();
+			resourceFinder = (ResourceFinder)PortalBeanLocatorUtil.locate(ResourceFinder.class.getName() +
+					".impl");
 		}
 
 		if (userLocalService == null) {
-			userLocalService = UserLocalServiceFactory.getImpl();
+			userLocalService = (UserLocalService)PortalBeanLocatorUtil.locate(UserLocalService.class.getName() +
+					".impl");
 		}
 
 		if (userService == null) {
-			userService = UserServiceFactory.getImpl();
+			userService = (UserService)PortalBeanLocatorUtil.locate(UserService.class.getName() +
+					".impl");
 		}
 
 		if (userPersistence == null) {
-			userPersistence = UserUtil.getPersistence();
+			userPersistence = (UserPersistence)PortalBeanLocatorUtil.locate(UserPersistence.class.getName() +
+					".impl");
 		}
 
 		if (userFinder == null) {
-			userFinder = UserFinderUtil.getFinder();
+			userFinder = (UserFinder)PortalBeanLocatorUtil.locate(UserFinder.class.getName() +
+					".impl");
 		}
 
 		if (tagsEntryLocalService == null) {
-			tagsEntryLocalService = TagsEntryLocalServiceFactory.getImpl();
+			tagsEntryLocalService = (TagsEntryLocalService)PortalBeanLocatorUtil.locate(TagsEntryLocalService.class.getName() +
+					".impl");
 		}
 
 		if (tagsEntryService == null) {
-			tagsEntryService = TagsEntryServiceFactory.getImpl();
+			tagsEntryService = (TagsEntryService)PortalBeanLocatorUtil.locate(TagsEntryService.class.getName() +
+					".impl");
 		}
 
 		if (tagsEntryPersistence == null) {
-			tagsEntryPersistence = TagsEntryUtil.getPersistence();
+			tagsEntryPersistence = (TagsEntryPersistence)PortalBeanLocatorUtil.locate(TagsEntryPersistence.class.getName() +
+					".impl");
 		}
 
 		if (tagsEntryFinder == null) {
-			tagsEntryFinder = TagsEntryFinderUtil.getFinder();
+			tagsEntryFinder = (TagsEntryFinder)PortalBeanLocatorUtil.locate(TagsEntryFinder.class.getName() +
+					".impl");
 		}
 	}
 

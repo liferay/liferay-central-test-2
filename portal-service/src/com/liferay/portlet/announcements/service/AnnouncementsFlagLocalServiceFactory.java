@@ -22,6 +22,7 @@
 
 package com.liferay.portlet.announcements.service;
 
+import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
 
 /**
  * <a href="AnnouncementsFlagLocalServiceFactory.java.html"><b><i>View Source</i></b></a>
@@ -51,33 +52,45 @@ package com.liferay.portlet.announcements.service;
  *
  */
 public class AnnouncementsFlagLocalServiceFactory {
+	/**
+	 * @deprecated
+	 */
 	public static AnnouncementsFlagLocalService getService() {
 		return _getFactory()._service;
 	}
 
+	/**
+	 * @deprecated
+	 */
 	public static AnnouncementsFlagLocalService getImpl() {
 		if (_impl == null) {
-			_impl = (AnnouncementsFlagLocalService)com.liferay.portal.kernel.bean.PortalBeanLocatorUtil.locate(_IMPL);
+			_impl = (AnnouncementsFlagLocalService)PortalBeanLocatorUtil.locate(_IMPL);
 		}
 
 		return _impl;
 	}
 
+	/**
+	 * @deprecated
+	 */
 	public static AnnouncementsFlagLocalService getTxImpl() {
 		if (_txImpl == null) {
-			_txImpl = (AnnouncementsFlagLocalService)com.liferay.portal.kernel.bean.PortalBeanLocatorUtil.locate(_TX_IMPL);
+			_txImpl = (AnnouncementsFlagLocalService)PortalBeanLocatorUtil.locate(_TX_IMPL);
 		}
 
 		return _txImpl;
 	}
 
+	/**
+	 * @deprecated
+	 */
 	public void setService(AnnouncementsFlagLocalService service) {
 		_service = service;
 	}
 
 	private static AnnouncementsFlagLocalServiceFactory _getFactory() {
 		if (_factory == null) {
-			_factory = (AnnouncementsFlagLocalServiceFactory)com.liferay.portal.kernel.bean.PortalBeanLocatorUtil.locate(_FACTORY);
+			_factory = (AnnouncementsFlagLocalServiceFactory)PortalBeanLocatorUtil.locate(_FACTORY);
 		}
 
 		return _factory;

@@ -39,16 +39,19 @@ package com.liferay.portlet.tags.service;
  * on a bean instead of writing a lookup call and a method call.
  * </p>
  *
- * <p>
- * <code>com.liferay.portlet.tags.service.TagsSourceServiceFactory</code>
- * is responsible for the lookup of the bean.
- * </p>
- *
  * @author Brian Wing Shun Chan
  *
  * @see com.liferay.portlet.tags.service.TagsSourceService
- * @see com.liferay.portlet.tags.service.TagsSourceServiceFactory
  *
  */
 public class TagsSourceServiceUtil {
+	public static TagsSourceService getService() {
+		return _service;
+	}
+
+	public void setService(TagsSourceService service) {
+		_service = service;
+	}
+
+	private static TagsSourceService _service;
 }

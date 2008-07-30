@@ -966,22 +966,12 @@ public class UserUtil {
 	}
 
 	public static UserPersistence getPersistence() {
-		return _getUtil()._persistence;
+		return _persistence;
 	}
 
 	public void setPersistence(UserPersistence persistence) {
 		_persistence = persistence;
 	}
 
-	private static UserUtil _getUtil() {
-		if (_util == null) {
-			_util = (UserUtil)com.liferay.portal.kernel.bean.PortalBeanLocatorUtil.locate(_UTIL);
-		}
-
-		return _util;
-	}
-
-	private static final String _UTIL = UserUtil.class.getName();
-	private static UserUtil _util;
-	private UserPersistence _persistence;
+	private static UserPersistence _persistence;
 }

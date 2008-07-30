@@ -44,7 +44,6 @@ package com.liferay.portlet.journal.service;
  *
  * @author Brian Wing Shun Chan
  *
- * @see com.liferay.portlet.journal.service.JournalArticleImageLocalServiceFactory
  * @see com.liferay.portlet.journal.service.JournalArticleImageLocalServiceUtil
  *
  */

@@ -39,15 +39,9 @@ package com.liferay.portal.service;
  * on a bean instead of writing a lookup call and a method call.
  * </p>
  *
- * <p>
- * <code>com.liferay.portal.service.UserGroupRoleServiceFactory</code>
- * is responsible for the lookup of the bean.
- * </p>
- *
  * @author Brian Wing Shun Chan
  *
  * @see com.liferay.portal.service.UserGroupRoleService
- * @see com.liferay.portal.service.UserGroupRoleServiceFactory
  *
  */
 public class UserGroupRoleServiceUtil {
@@ -55,35 +49,37 @@ public class UserGroupRoleServiceUtil {
 		long[] roleIds)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
-		UserGroupRoleService userGroupRoleService = UserGroupRoleServiceFactory.getService();
-
-		userGroupRoleService.addUserGroupRoles(userId, groupId, roleIds);
+		_service.addUserGroupRoles(userId, groupId, roleIds);
 	}
 
 	public static void addUserGroupRoles(long[] userIds, long groupId,
 		long roleId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
-		UserGroupRoleService userGroupRoleService = UserGroupRoleServiceFactory.getService();
-
-		userGroupRoleService.addUserGroupRoles(userIds, groupId, roleId);
+		_service.addUserGroupRoles(userIds, groupId, roleId);
 	}
 
 	public static void deleteUserGroupRoles(long userId, long groupId,
 		long[] roleIds)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
-		UserGroupRoleService userGroupRoleService = UserGroupRoleServiceFactory.getService();
-
-		userGroupRoleService.deleteUserGroupRoles(userId, groupId, roleIds);
+		_service.deleteUserGroupRoles(userId, groupId, roleIds);
 	}
 
 	public static void deleteUserGroupRoles(long[] userIds, long groupId,
 		long roleId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
-		UserGroupRoleService userGroupRoleService = UserGroupRoleServiceFactory.getService();
-
-		userGroupRoleService.deleteUserGroupRoles(userIds, groupId, roleId);
+		_service.deleteUserGroupRoles(userIds, groupId, roleId);
 	}
+
+	public static UserGroupRoleService getService() {
+		return _service;
+	}
+
+	public void setService(UserGroupRoleService service) {
+		_service = service;
+	}
+
+	private static UserGroupRoleService _service;
 }

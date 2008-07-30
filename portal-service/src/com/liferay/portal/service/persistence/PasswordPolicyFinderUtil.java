@@ -42,22 +42,12 @@ public class PasswordPolicyFinderUtil {
 	}
 
 	public static PasswordPolicyFinder getFinder() {
-		return _getUtil()._finder;
+		return _finder;
 	}
 
 	public void setFinder(PasswordPolicyFinder finder) {
 		_finder = finder;
 	}
 
-	private static PasswordPolicyFinderUtil _getUtil() {
-		if (_util == null) {
-			_util = (PasswordPolicyFinderUtil)com.liferay.portal.kernel.bean.PortalBeanLocatorUtil.locate(_UTIL);
-		}
-
-		return _util;
-	}
-
-	private static final String _UTIL = PasswordPolicyFinderUtil.class.getName();
-	private static PasswordPolicyFinderUtil _util;
-	private PasswordPolicyFinder _finder;
+	private static PasswordPolicyFinder _finder;
 }

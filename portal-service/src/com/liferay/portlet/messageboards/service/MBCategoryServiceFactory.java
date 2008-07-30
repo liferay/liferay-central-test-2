@@ -22,6 +22,7 @@
 
 package com.liferay.portlet.messageboards.service;
 
+import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
 
 /**
  * <a href="MBCategoryServiceFactory.java.html"><b><i>View Source</i></b></a>
@@ -51,33 +52,45 @@ package com.liferay.portlet.messageboards.service;
  *
  */
 public class MBCategoryServiceFactory {
+	/**
+	 * @deprecated
+	 */
 	public static MBCategoryService getService() {
 		return _getFactory()._service;
 	}
 
+	/**
+	 * @deprecated
+	 */
 	public static MBCategoryService getImpl() {
 		if (_impl == null) {
-			_impl = (MBCategoryService)com.liferay.portal.kernel.bean.PortalBeanLocatorUtil.locate(_IMPL);
+			_impl = (MBCategoryService)PortalBeanLocatorUtil.locate(_IMPL);
 		}
 
 		return _impl;
 	}
 
+	/**
+	 * @deprecated
+	 */
 	public static MBCategoryService getTxImpl() {
 		if (_txImpl == null) {
-			_txImpl = (MBCategoryService)com.liferay.portal.kernel.bean.PortalBeanLocatorUtil.locate(_TX_IMPL);
+			_txImpl = (MBCategoryService)PortalBeanLocatorUtil.locate(_TX_IMPL);
 		}
 
 		return _txImpl;
 	}
 
+	/**
+	 * @deprecated
+	 */
 	public void setService(MBCategoryService service) {
 		_service = service;
 	}
 
 	private static MBCategoryServiceFactory _getFactory() {
 		if (_factory == null) {
-			_factory = (MBCategoryServiceFactory)com.liferay.portal.kernel.bean.PortalBeanLocatorUtil.locate(_FACTORY);
+			_factory = (MBCategoryServiceFactory)PortalBeanLocatorUtil.locate(_FACTORY);
 		}
 
 		return _factory;

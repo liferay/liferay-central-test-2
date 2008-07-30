@@ -243,22 +243,12 @@ public class BookmarksEntryUtil {
 	}
 
 	public static BookmarksEntryPersistence getPersistence() {
-		return _getUtil()._persistence;
+		return _persistence;
 	}
 
 	public void setPersistence(BookmarksEntryPersistence persistence) {
 		_persistence = persistence;
 	}
 
-	private static BookmarksEntryUtil _getUtil() {
-		if (_util == null) {
-			_util = (BookmarksEntryUtil)com.liferay.portal.kernel.bean.PortalBeanLocatorUtil.locate(_UTIL);
-		}
-
-		return _util;
-	}
-
-	private static final String _UTIL = BookmarksEntryUtil.class.getName();
-	private static BookmarksEntryUtil _util;
-	private BookmarksEntryPersistence _persistence;
+	private static BookmarksEntryPersistence _persistence;
 }

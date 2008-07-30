@@ -114,22 +114,12 @@ public class OrganizationFinderUtil {
 	}
 
 	public static OrganizationFinder getFinder() {
-		return _getUtil()._finder;
+		return _finder;
 	}
 
 	public void setFinder(OrganizationFinder finder) {
 		_finder = finder;
 	}
 
-	private static OrganizationFinderUtil _getUtil() {
-		if (_util == null) {
-			_util = (OrganizationFinderUtil)com.liferay.portal.kernel.bean.PortalBeanLocatorUtil.locate(_UTIL);
-		}
-
-		return _util;
-	}
-
-	private static final String _UTIL = OrganizationFinderUtil.class.getName();
-	private static OrganizationFinderUtil _util;
-	private OrganizationFinder _finder;
+	private static OrganizationFinder _finder;
 }

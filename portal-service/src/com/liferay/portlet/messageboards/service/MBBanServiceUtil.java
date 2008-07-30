@@ -39,15 +39,9 @@ package com.liferay.portlet.messageboards.service;
  * on a bean instead of writing a lookup call and a method call.
  * </p>
  *
- * <p>
- * <code>com.liferay.portlet.messageboards.service.MBBanServiceFactory</code>
- * is responsible for the lookup of the bean.
- * </p>
- *
  * @author Brian Wing Shun Chan
  *
  * @see com.liferay.portlet.messageboards.service.MBBanService
- * @see com.liferay.portlet.messageboards.service.MBBanServiceFactory
  *
  */
 public class MBBanServiceUtil {
@@ -55,16 +49,22 @@ public class MBBanServiceUtil {
 		long plid, long banUserId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
-		MBBanService mbBanService = MBBanServiceFactory.getService();
-
-		return mbBanService.addBan(plid, banUserId);
+		return _service.addBan(plid, banUserId);
 	}
 
 	public static void deleteBan(long plid, long banUserId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
-		MBBanService mbBanService = MBBanServiceFactory.getService();
-
-		mbBanService.deleteBan(plid, banUserId);
+		_service.deleteBan(plid, banUserId);
 	}
+
+	public static MBBanService getService() {
+		return _service;
+	}
+
+	public void setService(MBBanService service) {
+		_service = service;
+	}
+
+	private static MBBanService _service;
 }

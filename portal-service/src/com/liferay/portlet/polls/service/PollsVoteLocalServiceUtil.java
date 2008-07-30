@@ -39,134 +39,108 @@ package com.liferay.portlet.polls.service;
  * on a bean instead of writing a lookup call and a method call.
  * </p>
  *
- * <p>
- * <code>com.liferay.portlet.polls.service.PollsVoteLocalServiceFactory</code>
- * is responsible for the lookup of the bean.
- * </p>
- *
  * @author Brian Wing Shun Chan
  *
  * @see com.liferay.portlet.polls.service.PollsVoteLocalService
- * @see com.liferay.portlet.polls.service.PollsVoteLocalServiceFactory
  *
  */
 public class PollsVoteLocalServiceUtil {
 	public static com.liferay.portlet.polls.model.PollsVote addPollsVote(
 		com.liferay.portlet.polls.model.PollsVote pollsVote)
 		throws com.liferay.portal.SystemException {
-		PollsVoteLocalService pollsVoteLocalService = PollsVoteLocalServiceFactory.getService();
-
-		return pollsVoteLocalService.addPollsVote(pollsVote);
+		return _service.addPollsVote(pollsVote);
 	}
 
 	public static void deletePollsVote(long voteId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		PollsVoteLocalService pollsVoteLocalService = PollsVoteLocalServiceFactory.getService();
-
-		pollsVoteLocalService.deletePollsVote(voteId);
+		_service.deletePollsVote(voteId);
 	}
 
 	public static void deletePollsVote(
 		com.liferay.portlet.polls.model.PollsVote pollsVote)
 		throws com.liferay.portal.SystemException {
-		PollsVoteLocalService pollsVoteLocalService = PollsVoteLocalServiceFactory.getService();
-
-		pollsVoteLocalService.deletePollsVote(pollsVote);
+		_service.deletePollsVote(pollsVote);
 	}
 
 	public static java.util.List<Object> dynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery)
 		throws com.liferay.portal.SystemException {
-		PollsVoteLocalService pollsVoteLocalService = PollsVoteLocalServiceFactory.getService();
-
-		return pollsVoteLocalService.dynamicQuery(dynamicQuery);
+		return _service.dynamicQuery(dynamicQuery);
 	}
 
 	public static java.util.List<Object> dynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery, int start,
 		int end) throws com.liferay.portal.SystemException {
-		PollsVoteLocalService pollsVoteLocalService = PollsVoteLocalServiceFactory.getService();
-
-		return pollsVoteLocalService.dynamicQuery(dynamicQuery, start, end);
+		return _service.dynamicQuery(dynamicQuery, start, end);
 	}
 
 	public static com.liferay.portlet.polls.model.PollsVote getPollsVote(
 		long voteId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		PollsVoteLocalService pollsVoteLocalService = PollsVoteLocalServiceFactory.getService();
-
-		return pollsVoteLocalService.getPollsVote(voteId);
+		return _service.getPollsVote(voteId);
 	}
 
 	public static java.util.List<com.liferay.portlet.polls.model.PollsVote> getPollsVotes(
 		int start, int end) throws com.liferay.portal.SystemException {
-		PollsVoteLocalService pollsVoteLocalService = PollsVoteLocalServiceFactory.getService();
-
-		return pollsVoteLocalService.getPollsVotes(start, end);
+		return _service.getPollsVotes(start, end);
 	}
 
 	public static int getPollsVotesCount()
 		throws com.liferay.portal.SystemException {
-		PollsVoteLocalService pollsVoteLocalService = PollsVoteLocalServiceFactory.getService();
-
-		return pollsVoteLocalService.getPollsVotesCount();
+		return _service.getPollsVotesCount();
 	}
 
 	public static com.liferay.portlet.polls.model.PollsVote updatePollsVote(
 		com.liferay.portlet.polls.model.PollsVote pollsVote)
 		throws com.liferay.portal.SystemException {
-		PollsVoteLocalService pollsVoteLocalService = PollsVoteLocalServiceFactory.getService();
-
-		return pollsVoteLocalService.updatePollsVote(pollsVote);
+		return _service.updatePollsVote(pollsVote);
 	}
 
 	public static com.liferay.portlet.polls.model.PollsVote addVote(
 		long userId, long questionId, long choiceId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		PollsVoteLocalService pollsVoteLocalService = PollsVoteLocalServiceFactory.getService();
-
-		return pollsVoteLocalService.addVote(userId, questionId, choiceId);
+		return _service.addVote(userId, questionId, choiceId);
 	}
 
 	public static java.util.List<com.liferay.portlet.polls.model.PollsVote> getChoiceVotes(
 		long choiceId, int start, int end)
 		throws com.liferay.portal.SystemException {
-		PollsVoteLocalService pollsVoteLocalService = PollsVoteLocalServiceFactory.getService();
-
-		return pollsVoteLocalService.getChoiceVotes(choiceId, start, end);
+		return _service.getChoiceVotes(choiceId, start, end);
 	}
 
 	public static int getChoiceVotesCount(long choiceId)
 		throws com.liferay.portal.SystemException {
-		PollsVoteLocalService pollsVoteLocalService = PollsVoteLocalServiceFactory.getService();
-
-		return pollsVoteLocalService.getChoiceVotesCount(choiceId);
+		return _service.getChoiceVotesCount(choiceId);
 	}
 
 	public static com.liferay.portlet.polls.model.PollsVote getVote(
 		long questionId, long userId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		PollsVoteLocalService pollsVoteLocalService = PollsVoteLocalServiceFactory.getService();
-
-		return pollsVoteLocalService.getVote(questionId, userId);
+		return _service.getVote(questionId, userId);
 	}
 
 	public static java.util.List<com.liferay.portlet.polls.model.PollsVote> getQuestionVotes(
 		long questionId, int start, int end)
 		throws com.liferay.portal.SystemException {
-		PollsVoteLocalService pollsVoteLocalService = PollsVoteLocalServiceFactory.getService();
-
-		return pollsVoteLocalService.getQuestionVotes(questionId, start, end);
+		return _service.getQuestionVotes(questionId, start, end);
 	}
 
 	public static int getQuestionVotesCount(long questionId)
 		throws com.liferay.portal.SystemException {
-		PollsVoteLocalService pollsVoteLocalService = PollsVoteLocalServiceFactory.getService();
-
-		return pollsVoteLocalService.getQuestionVotesCount(questionId);
+		return _service.getQuestionVotesCount(questionId);
 	}
+
+	public static PollsVoteLocalService getService() {
+		return _service;
+	}
+
+	public void setService(PollsVoteLocalService service) {
+		_service = service;
+	}
+
+	private static PollsVoteLocalService _service;
 }

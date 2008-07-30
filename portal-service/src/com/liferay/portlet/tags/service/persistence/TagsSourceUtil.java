@@ -140,22 +140,12 @@ public class TagsSourceUtil {
 	}
 
 	public static TagsSourcePersistence getPersistence() {
-		return _getUtil()._persistence;
+		return _persistence;
 	}
 
 	public void setPersistence(TagsSourcePersistence persistence) {
 		_persistence = persistence;
 	}
 
-	private static TagsSourceUtil _getUtil() {
-		if (_util == null) {
-			_util = (TagsSourceUtil)com.liferay.portal.kernel.bean.PortalBeanLocatorUtil.locate(_UTIL);
-		}
-
-		return _util;
-	}
-
-	private static final String _UTIL = TagsSourceUtil.class.getName();
-	private static TagsSourceUtil _util;
-	private TagsSourcePersistence _persistence;
+	private static TagsSourcePersistence _persistence;
 }

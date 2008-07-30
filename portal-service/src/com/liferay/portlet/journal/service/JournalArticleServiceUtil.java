@@ -39,15 +39,9 @@ package com.liferay.portlet.journal.service;
  * on a bean instead of writing a lookup call and a method call.
  * </p>
  *
- * <p>
- * <code>com.liferay.portlet.journal.service.JournalArticleServiceFactory</code>
- * is responsible for the lookup of the bean.
- * </p>
- *
  * @author Brian Wing Shun Chan
  *
  * @see com.liferay.portlet.journal.service.JournalArticleService
- * @see com.liferay.portlet.journal.service.JournalArticleServiceFactory
  *
  */
 public class JournalArticleServiceUtil {
@@ -69,10 +63,8 @@ public class JournalArticleServiceUtil {
 		boolean addGuestPermissions)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
-		JournalArticleService journalArticleService = JournalArticleServiceFactory.getService();
-
-		return journalArticleService.addArticle(articleId, autoArticleId, plid,
-			title, description, content, type, structureId, templateId,
+		return _service.addArticle(articleId, autoArticleId, plid, title,
+			description, content, type, structureId, templateId,
 			displayDateMonth, displayDateDay, displayDateYear, displayDateHour,
 			displayDateMinute, expirationDateMonth, expirationDateDay,
 			expirationDateYear, expirationDateHour, expirationDateMinute,
@@ -101,10 +93,8 @@ public class JournalArticleServiceUtil {
 		java.lang.String[] guestPermissions)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
-		JournalArticleService journalArticleService = JournalArticleServiceFactory.getService();
-
-		return journalArticleService.addArticle(articleId, autoArticleId, plid,
-			title, description, content, type, structureId, templateId,
+		return _service.addArticle(articleId, autoArticleId, plid, title,
+			description, content, type, structureId, templateId,
 			displayDateMonth, displayDateDay, displayDateYear, displayDateHour,
 			displayDateMinute, expirationDateMonth, expirationDateDay,
 			expirationDateYear, expirationDateHour, expirationDateMinute,
@@ -119,19 +109,15 @@ public class JournalArticleServiceUtil {
 		java.lang.String articleURL, javax.portlet.PortletPreferences prefs)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
-		JournalArticleService journalArticleService = JournalArticleServiceFactory.getService();
-
-		return journalArticleService.approveArticle(groupId, articleId,
-			version, plid, articleURL, prefs);
+		return _service.approveArticle(groupId, articleId, version, plid,
+			articleURL, prefs);
 	}
 
 	public static com.liferay.portlet.journal.model.JournalArticle getArticle(
 		long groupId, java.lang.String articleId, double version)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
-		JournalArticleService journalArticleService = JournalArticleServiceFactory.getService();
-
-		return journalArticleService.getArticle(groupId, articleId, version);
+		return _service.getArticle(groupId, articleId, version);
 	}
 
 	public static java.lang.String getArticleContent(long groupId,
@@ -139,10 +125,8 @@ public class JournalArticleServiceUtil {
 		com.liferay.portal.theme.ThemeDisplay themeDisplay)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
-		JournalArticleService journalArticleService = JournalArticleServiceFactory.getService();
-
-		return journalArticleService.getArticleContent(groupId, articleId,
-			languageId, themeDisplay);
+		return _service.getArticleContent(groupId, articleId, languageId,
+			themeDisplay);
 	}
 
 	public static java.lang.String getArticleContent(long groupId,
@@ -151,10 +135,8 @@ public class JournalArticleServiceUtil {
 		com.liferay.portal.theme.ThemeDisplay themeDisplay)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
-		JournalArticleService journalArticleService = JournalArticleServiceFactory.getService();
-
-		return journalArticleService.getArticleContent(groupId, articleId,
-			version, languageId, themeDisplay);
+		return _service.getArticleContent(groupId, articleId, version,
+			languageId, themeDisplay);
 	}
 
 	public static void deleteArticle(long groupId, java.lang.String articleId,
@@ -162,10 +144,7 @@ public class JournalArticleServiceUtil {
 		javax.portlet.PortletPreferences prefs)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
-		JournalArticleService journalArticleService = JournalArticleServiceFactory.getService();
-
-		journalArticleService.deleteArticle(groupId, articleId, version,
-			articleURL, prefs);
+		_service.deleteArticle(groupId, articleId, version, articleURL, prefs);
 	}
 
 	public static void expireArticle(long groupId, java.lang.String articleId,
@@ -173,19 +152,14 @@ public class JournalArticleServiceUtil {
 		javax.portlet.PortletPreferences prefs)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
-		JournalArticleService journalArticleService = JournalArticleServiceFactory.getService();
-
-		journalArticleService.expireArticle(groupId, articleId, version,
-			articleURL, prefs);
+		_service.expireArticle(groupId, articleId, version, articleURL, prefs);
 	}
 
 	public static void removeArticleLocale(long companyId,
 		java.lang.String languageId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
-		JournalArticleService journalArticleService = JournalArticleServiceFactory.getService();
-
-		journalArticleService.removeArticleLocale(companyId, languageId);
+		_service.removeArticleLocale(companyId, languageId);
 	}
 
 	public static com.liferay.portlet.journal.model.JournalArticle removeArticleLocale(
@@ -193,10 +167,8 @@ public class JournalArticleServiceUtil {
 		java.lang.String languageId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
-		JournalArticleService journalArticleService = JournalArticleServiceFactory.getService();
-
-		return journalArticleService.removeArticleLocale(groupId, articleId,
-			version, languageId);
+		return _service.removeArticleLocale(groupId, articleId, version,
+			languageId);
 	}
 
 	public static com.liferay.portlet.journal.model.JournalArticle updateArticle(
@@ -216,9 +188,7 @@ public class JournalArticleServiceUtil {
 		java.lang.String[] tagsEntries)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
-		JournalArticleService journalArticleService = JournalArticleServiceFactory.getService();
-
-		return journalArticleService.updateArticle(groupId, articleId, version,
+		return _service.updateArticle(groupId, articleId, version,
 			incrementVersion, title, description, content, type, structureId,
 			templateId, displayDateMonth, displayDateDay, displayDateYear,
 			displayDateHour, displayDateMinute, expirationDateMonth,
@@ -234,9 +204,16 @@ public class JournalArticleServiceUtil {
 		java.lang.String content)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
-		JournalArticleService journalArticleService = JournalArticleServiceFactory.getService();
-
-		return journalArticleService.updateContent(groupId, articleId, version,
-			content);
+		return _service.updateContent(groupId, articleId, version, content);
 	}
+
+	public static JournalArticleService getService() {
+		return _service;
+	}
+
+	public void setService(JournalArticleService service) {
+		_service = service;
+	}
+
+	private static JournalArticleService _service;
 }

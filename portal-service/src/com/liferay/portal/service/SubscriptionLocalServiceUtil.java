@@ -39,97 +39,70 @@ package com.liferay.portal.service;
  * on a bean instead of writing a lookup call and a method call.
  * </p>
  *
- * <p>
- * <code>com.liferay.portal.service.SubscriptionLocalServiceFactory</code>
- * is responsible for the lookup of the bean.
- * </p>
- *
  * @author Brian Wing Shun Chan
  *
  * @see com.liferay.portal.service.SubscriptionLocalService
- * @see com.liferay.portal.service.SubscriptionLocalServiceFactory
  *
  */
 public class SubscriptionLocalServiceUtil {
 	public static com.liferay.portal.model.Subscription addSubscription(
 		com.liferay.portal.model.Subscription subscription)
 		throws com.liferay.portal.SystemException {
-		SubscriptionLocalService subscriptionLocalService = SubscriptionLocalServiceFactory.getService();
-
-		return subscriptionLocalService.addSubscription(subscription);
+		return _service.addSubscription(subscription);
 	}
 
 	public static void deleteSubscription(long subscriptionId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		SubscriptionLocalService subscriptionLocalService = SubscriptionLocalServiceFactory.getService();
-
-		subscriptionLocalService.deleteSubscription(subscriptionId);
+		_service.deleteSubscription(subscriptionId);
 	}
 
 	public static void deleteSubscription(
 		com.liferay.portal.model.Subscription subscription)
 		throws com.liferay.portal.SystemException {
-		SubscriptionLocalService subscriptionLocalService = SubscriptionLocalServiceFactory.getService();
-
-		subscriptionLocalService.deleteSubscription(subscription);
+		_service.deleteSubscription(subscription);
 	}
 
 	public static java.util.List<Object> dynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery)
 		throws com.liferay.portal.SystemException {
-		SubscriptionLocalService subscriptionLocalService = SubscriptionLocalServiceFactory.getService();
-
-		return subscriptionLocalService.dynamicQuery(dynamicQuery);
+		return _service.dynamicQuery(dynamicQuery);
 	}
 
 	public static java.util.List<Object> dynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery, int start,
 		int end) throws com.liferay.portal.SystemException {
-		SubscriptionLocalService subscriptionLocalService = SubscriptionLocalServiceFactory.getService();
-
-		return subscriptionLocalService.dynamicQuery(dynamicQuery, start, end);
+		return _service.dynamicQuery(dynamicQuery, start, end);
 	}
 
 	public static com.liferay.portal.model.Subscription getSubscription(
 		long subscriptionId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		SubscriptionLocalService subscriptionLocalService = SubscriptionLocalServiceFactory.getService();
-
-		return subscriptionLocalService.getSubscription(subscriptionId);
+		return _service.getSubscription(subscriptionId);
 	}
 
 	public static java.util.List<com.liferay.portal.model.Subscription> getSubscriptions(
 		int start, int end) throws com.liferay.portal.SystemException {
-		SubscriptionLocalService subscriptionLocalService = SubscriptionLocalServiceFactory.getService();
-
-		return subscriptionLocalService.getSubscriptions(start, end);
+		return _service.getSubscriptions(start, end);
 	}
 
 	public static int getSubscriptionsCount()
 		throws com.liferay.portal.SystemException {
-		SubscriptionLocalService subscriptionLocalService = SubscriptionLocalServiceFactory.getService();
-
-		return subscriptionLocalService.getSubscriptionsCount();
+		return _service.getSubscriptionsCount();
 	}
 
 	public static com.liferay.portal.model.Subscription updateSubscription(
 		com.liferay.portal.model.Subscription subscription)
 		throws com.liferay.portal.SystemException {
-		SubscriptionLocalService subscriptionLocalService = SubscriptionLocalServiceFactory.getService();
-
-		return subscriptionLocalService.updateSubscription(subscription);
+		return _service.updateSubscription(subscription);
 	}
 
 	public static com.liferay.portal.model.Subscription addSubscription(
 		long userId, java.lang.String className, long classPK)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		SubscriptionLocalService subscriptionLocalService = SubscriptionLocalServiceFactory.getService();
-
-		return subscriptionLocalService.addSubscription(userId, className,
-			classPK);
+		return _service.addSubscription(userId, className, classPK);
 	}
 
 	public static com.liferay.portal.model.Subscription addSubscription(
@@ -137,62 +110,53 @@ public class SubscriptionLocalServiceUtil {
 		java.lang.String frequency)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		SubscriptionLocalService subscriptionLocalService = SubscriptionLocalServiceFactory.getService();
-
-		return subscriptionLocalService.addSubscription(userId, className,
-			classPK, frequency);
+		return _service.addSubscription(userId, className, classPK, frequency);
 	}
 
 	public static void deleteSubscription(long userId,
 		java.lang.String className, long classPK)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		SubscriptionLocalService subscriptionLocalService = SubscriptionLocalServiceFactory.getService();
-
-		subscriptionLocalService.deleteSubscription(userId, className, classPK);
+		_service.deleteSubscription(userId, className, classPK);
 	}
 
 	public static void deleteSubscriptions(long userId)
 		throws com.liferay.portal.SystemException {
-		SubscriptionLocalService subscriptionLocalService = SubscriptionLocalServiceFactory.getService();
-
-		subscriptionLocalService.deleteSubscriptions(userId);
+		_service.deleteSubscriptions(userId);
 	}
 
 	public static void deleteSubscriptions(long companyId,
 		java.lang.String className, long classPK)
 		throws com.liferay.portal.SystemException {
-		SubscriptionLocalService subscriptionLocalService = SubscriptionLocalServiceFactory.getService();
-
-		subscriptionLocalService.deleteSubscriptions(companyId, className,
-			classPK);
+		_service.deleteSubscriptions(companyId, className, classPK);
 	}
 
 	public static com.liferay.portal.model.Subscription getSubscription(
 		long companyId, long userId, java.lang.String className, long classPK)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		SubscriptionLocalService subscriptionLocalService = SubscriptionLocalServiceFactory.getService();
-
-		return subscriptionLocalService.getSubscription(companyId, userId,
-			className, classPK);
+		return _service.getSubscription(companyId, userId, className, classPK);
 	}
 
 	public static java.util.List<com.liferay.portal.model.Subscription> getSubscriptions(
 		long companyId, java.lang.String className, long classPK)
 		throws com.liferay.portal.SystemException {
-		SubscriptionLocalService subscriptionLocalService = SubscriptionLocalServiceFactory.getService();
-
-		return subscriptionLocalService.getSubscriptions(companyId, className,
-			classPK);
+		return _service.getSubscriptions(companyId, className, classPK);
 	}
 
 	public static boolean isSubscribed(long companyId, long userId,
 		java.lang.String className, long classPK)
 		throws com.liferay.portal.SystemException {
-		SubscriptionLocalService subscriptionLocalService = SubscriptionLocalServiceFactory.getService();
-
-		return subscriptionLocalService.isSubscribed(companyId, userId,
-			className, classPK);
+		return _service.isSubscribed(companyId, userId, className, classPK);
 	}
+
+	public static SubscriptionLocalService getService() {
+		return _service;
+	}
+
+	public void setService(SubscriptionLocalService service) {
+		_service = service;
+	}
+
+	private static SubscriptionLocalService _service;
 }

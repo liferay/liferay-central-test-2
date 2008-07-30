@@ -44,7 +44,6 @@ package com.liferay.portal.service;
  *
  * @author Brian Wing Shun Chan
  *
- * @see com.liferay.portal.service.AddressServiceFactory
  * @see com.liferay.portal.service.AddressServiceUtil
  *
  */

@@ -39,129 +39,103 @@ package com.liferay.portlet.messageboards.service;
  * on a bean instead of writing a lookup call and a method call.
  * </p>
  *
- * <p>
- * <code>com.liferay.portlet.messageboards.service.MBStatsUserLocalServiceFactory</code>
- * is responsible for the lookup of the bean.
- * </p>
- *
  * @author Brian Wing Shun Chan
  *
  * @see com.liferay.portlet.messageboards.service.MBStatsUserLocalService
- * @see com.liferay.portlet.messageboards.service.MBStatsUserLocalServiceFactory
  *
  */
 public class MBStatsUserLocalServiceUtil {
 	public static com.liferay.portlet.messageboards.model.MBStatsUser addMBStatsUser(
 		com.liferay.portlet.messageboards.model.MBStatsUser mbStatsUser)
 		throws com.liferay.portal.SystemException {
-		MBStatsUserLocalService mbStatsUserLocalService = MBStatsUserLocalServiceFactory.getService();
-
-		return mbStatsUserLocalService.addMBStatsUser(mbStatsUser);
+		return _service.addMBStatsUser(mbStatsUser);
 	}
 
 	public static void deleteMBStatsUser(long statsUserId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		MBStatsUserLocalService mbStatsUserLocalService = MBStatsUserLocalServiceFactory.getService();
-
-		mbStatsUserLocalService.deleteMBStatsUser(statsUserId);
+		_service.deleteMBStatsUser(statsUserId);
 	}
 
 	public static void deleteMBStatsUser(
 		com.liferay.portlet.messageboards.model.MBStatsUser mbStatsUser)
 		throws com.liferay.portal.SystemException {
-		MBStatsUserLocalService mbStatsUserLocalService = MBStatsUserLocalServiceFactory.getService();
-
-		mbStatsUserLocalService.deleteMBStatsUser(mbStatsUser);
+		_service.deleteMBStatsUser(mbStatsUser);
 	}
 
 	public static java.util.List<Object> dynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery)
 		throws com.liferay.portal.SystemException {
-		MBStatsUserLocalService mbStatsUserLocalService = MBStatsUserLocalServiceFactory.getService();
-
-		return mbStatsUserLocalService.dynamicQuery(dynamicQuery);
+		return _service.dynamicQuery(dynamicQuery);
 	}
 
 	public static java.util.List<Object> dynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery, int start,
 		int end) throws com.liferay.portal.SystemException {
-		MBStatsUserLocalService mbStatsUserLocalService = MBStatsUserLocalServiceFactory.getService();
-
-		return mbStatsUserLocalService.dynamicQuery(dynamicQuery, start, end);
+		return _service.dynamicQuery(dynamicQuery, start, end);
 	}
 
 	public static com.liferay.portlet.messageboards.model.MBStatsUser getMBStatsUser(
 		long statsUserId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		MBStatsUserLocalService mbStatsUserLocalService = MBStatsUserLocalServiceFactory.getService();
-
-		return mbStatsUserLocalService.getMBStatsUser(statsUserId);
+		return _service.getMBStatsUser(statsUserId);
 	}
 
 	public static java.util.List<com.liferay.portlet.messageboards.model.MBStatsUser> getMBStatsUsers(
 		int start, int end) throws com.liferay.portal.SystemException {
-		MBStatsUserLocalService mbStatsUserLocalService = MBStatsUserLocalServiceFactory.getService();
-
-		return mbStatsUserLocalService.getMBStatsUsers(start, end);
+		return _service.getMBStatsUsers(start, end);
 	}
 
 	public static int getMBStatsUsersCount()
 		throws com.liferay.portal.SystemException {
-		MBStatsUserLocalService mbStatsUserLocalService = MBStatsUserLocalServiceFactory.getService();
-
-		return mbStatsUserLocalService.getMBStatsUsersCount();
+		return _service.getMBStatsUsersCount();
 	}
 
 	public static com.liferay.portlet.messageboards.model.MBStatsUser updateMBStatsUser(
 		com.liferay.portlet.messageboards.model.MBStatsUser mbStatsUser)
 		throws com.liferay.portal.SystemException {
-		MBStatsUserLocalService mbStatsUserLocalService = MBStatsUserLocalServiceFactory.getService();
-
-		return mbStatsUserLocalService.updateMBStatsUser(mbStatsUser);
+		return _service.updateMBStatsUser(mbStatsUser);
 	}
 
 	public static void deleteStatsUserByGroupId(long groupId)
 		throws com.liferay.portal.SystemException {
-		MBStatsUserLocalService mbStatsUserLocalService = MBStatsUserLocalServiceFactory.getService();
-
-		mbStatsUserLocalService.deleteStatsUserByGroupId(groupId);
+		_service.deleteStatsUserByGroupId(groupId);
 	}
 
 	public static void deleteStatsUserByUserId(long userId)
 		throws com.liferay.portal.SystemException {
-		MBStatsUserLocalService mbStatsUserLocalService = MBStatsUserLocalServiceFactory.getService();
-
-		mbStatsUserLocalService.deleteStatsUserByUserId(userId);
+		_service.deleteStatsUserByUserId(userId);
 	}
 
 	public static com.liferay.portlet.messageboards.model.MBStatsUser getStatsUser(
 		long groupId, long userId) throws com.liferay.portal.SystemException {
-		MBStatsUserLocalService mbStatsUserLocalService = MBStatsUserLocalServiceFactory.getService();
-
-		return mbStatsUserLocalService.getStatsUser(groupId, userId);
+		return _service.getStatsUser(groupId, userId);
 	}
 
 	public static java.util.List<com.liferay.portlet.messageboards.model.MBStatsUser> getStatsUsers(
 		long groupId, int start, int end)
 		throws com.liferay.portal.SystemException {
-		MBStatsUserLocalService mbStatsUserLocalService = MBStatsUserLocalServiceFactory.getService();
-
-		return mbStatsUserLocalService.getStatsUsers(groupId, start, end);
+		return _service.getStatsUsers(groupId, start, end);
 	}
 
 	public static int getStatsUsersCount(long groupId)
 		throws com.liferay.portal.SystemException {
-		MBStatsUserLocalService mbStatsUserLocalService = MBStatsUserLocalServiceFactory.getService();
-
-		return mbStatsUserLocalService.getStatsUsersCount(groupId);
+		return _service.getStatsUsersCount(groupId);
 	}
 
 	public static void updateStatsUser(long groupId, long userId)
 		throws com.liferay.portal.SystemException {
-		MBStatsUserLocalService mbStatsUserLocalService = MBStatsUserLocalServiceFactory.getService();
-
-		mbStatsUserLocalService.updateStatsUser(groupId, userId);
+		_service.updateStatsUser(groupId, userId);
 	}
+
+	public static MBStatsUserLocalService getService() {
+		return _service;
+	}
+
+	public void setService(MBStatsUserLocalService service) {
+		_service = service;
+	}
+
+	private static MBStatsUserLocalService _service;
 }

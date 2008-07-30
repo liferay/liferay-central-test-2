@@ -39,15 +39,9 @@ package com.liferay.portlet.tasks.service;
  * on a bean instead of writing a lookup call and a method call.
  * </p>
  *
- * <p>
- * <code>com.liferay.portlet.tasks.service.TasksProposalServiceFactory</code>
- * is responsible for the lookup of the bean.
- * </p>
- *
  * @author Brian Wing Shun Chan
  *
  * @see com.liferay.portlet.tasks.service.TasksProposalService
- * @see com.liferay.portlet.tasks.service.TasksProposalServiceFactory
  *
  */
 public class TasksProposalServiceUtil {
@@ -57,10 +51,8 @@ public class TasksProposalServiceUtil {
 		boolean addCommunityPermissions, boolean addGuestPermissions)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
-		TasksProposalService tasksProposalService = TasksProposalServiceFactory.getService();
-
-		return tasksProposalService.addProposal(groupId, className, classPK,
-			name, description, reviewUserId, addCommunityPermissions,
+		return _service.addProposal(groupId, className, classPK, name,
+			description, reviewUserId, addCommunityPermissions,
 			addGuestPermissions);
 	}
 
@@ -71,19 +63,14 @@ public class TasksProposalServiceUtil {
 		java.lang.String[] guestPermissions)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
-		TasksProposalService tasksProposalService = TasksProposalServiceFactory.getService();
-
-		return tasksProposalService.addProposal(groupId, className, classPK,
-			name, description, reviewUserId, communityPermissions,
-			guestPermissions);
+		return _service.addProposal(groupId, className, classPK, name,
+			description, reviewUserId, communityPermissions, guestPermissions);
 	}
 
 	public static void deleteProposal(long proposalId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
-		TasksProposalService tasksProposalService = TasksProposalServiceFactory.getService();
-
-		tasksProposalService.deleteProposal(proposalId);
+		_service.deleteProposal(proposalId);
 	}
 
 	public static com.liferay.portlet.tasks.model.TasksProposal updateProposal(
@@ -91,9 +78,17 @@ public class TasksProposalServiceUtil {
 		int dueDateDay, int dueDateYear, int dueDateHour, int dueDateMinute)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
-		TasksProposalService tasksProposalService = TasksProposalServiceFactory.getService();
-
-		return tasksProposalService.updateProposal(proposalId, description,
-			dueDateMonth, dueDateDay, dueDateYear, dueDateHour, dueDateMinute);
+		return _service.updateProposal(proposalId, description, dueDateMonth,
+			dueDateDay, dueDateYear, dueDateHour, dueDateMinute);
 	}
+
+	public static TasksProposalService getService() {
+		return _service;
+	}
+
+	public void setService(TasksProposalService service) {
+		_service = service;
+	}
+
+	private static TasksProposalService _service;
 }

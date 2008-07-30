@@ -320,22 +320,12 @@ public class MBStatsUserUtil {
 	}
 
 	public static MBStatsUserPersistence getPersistence() {
-		return _getUtil()._persistence;
+		return _persistence;
 	}
 
 	public void setPersistence(MBStatsUserPersistence persistence) {
 		_persistence = persistence;
 	}
 
-	private static MBStatsUserUtil _getUtil() {
-		if (_util == null) {
-			_util = (MBStatsUserUtil)com.liferay.portal.kernel.bean.PortalBeanLocatorUtil.locate(_UTIL);
-		}
-
-		return _util;
-	}
-
-	private static final String _UTIL = MBStatsUserUtil.class.getName();
-	private static MBStatsUserUtil _util;
-	private MBStatsUserPersistence _persistence;
+	private static MBStatsUserPersistence _persistence;
 }

@@ -339,22 +339,12 @@ public class WikiNodeUtil {
 	}
 
 	public static WikiNodePersistence getPersistence() {
-		return _getUtil()._persistence;
+		return _persistence;
 	}
 
 	public void setPersistence(WikiNodePersistence persistence) {
 		_persistence = persistence;
 	}
 
-	private static WikiNodeUtil _getUtil() {
-		if (_util == null) {
-			_util = (WikiNodeUtil)com.liferay.portal.kernel.bean.PortalBeanLocatorUtil.locate(_UTIL);
-		}
-
-		return _util;
-	}
-
-	private static final String _UTIL = WikiNodeUtil.class.getName();
-	private static WikiNodeUtil _util;
-	private WikiNodePersistence _persistence;
+	private static WikiNodePersistence _persistence;
 }

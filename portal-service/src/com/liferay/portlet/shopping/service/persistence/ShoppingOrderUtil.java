@@ -299,22 +299,12 @@ public class ShoppingOrderUtil {
 	}
 
 	public static ShoppingOrderPersistence getPersistence() {
-		return _getUtil()._persistence;
+		return _persistence;
 	}
 
 	public void setPersistence(ShoppingOrderPersistence persistence) {
 		_persistence = persistence;
 	}
 
-	private static ShoppingOrderUtil _getUtil() {
-		if (_util == null) {
-			_util = (ShoppingOrderUtil)com.liferay.portal.kernel.bean.PortalBeanLocatorUtil.locate(_UTIL);
-		}
-
-		return _util;
-	}
-
-	private static final String _UTIL = ShoppingOrderUtil.class.getName();
-	private static ShoppingOrderUtil _util;
-	private ShoppingOrderPersistence _persistence;
+	private static ShoppingOrderPersistence _persistence;
 }

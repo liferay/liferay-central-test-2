@@ -44,7 +44,6 @@ package com.liferay.portlet.tags.service;
  *
  * @author Brian Wing Shun Chan
  *
- * @see com.liferay.portlet.tags.service.TagsPropertyLocalServiceFactory
  * @see com.liferay.portlet.tags.service.TagsPropertyLocalServiceUtil
  *
  */

@@ -39,87 +39,63 @@ package com.liferay.portlet.messageboards.service;
  * on a bean instead of writing a lookup call and a method call.
  * </p>
  *
- * <p>
- * <code>com.liferay.portlet.messageboards.service.MBMessageLocalServiceFactory</code>
- * is responsible for the lookup of the bean.
- * </p>
- *
  * @author Brian Wing Shun Chan
  *
  * @see com.liferay.portlet.messageboards.service.MBMessageLocalService
- * @see com.liferay.portlet.messageboards.service.MBMessageLocalServiceFactory
  *
  */
 public class MBMessageLocalServiceUtil {
 	public static com.liferay.portlet.messageboards.model.MBMessage addMBMessage(
 		com.liferay.portlet.messageboards.model.MBMessage mbMessage)
 		throws com.liferay.portal.SystemException {
-		MBMessageLocalService mbMessageLocalService = MBMessageLocalServiceFactory.getService();
-
-		return mbMessageLocalService.addMBMessage(mbMessage);
+		return _service.addMBMessage(mbMessage);
 	}
 
 	public static void deleteMBMessage(long messageId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		MBMessageLocalService mbMessageLocalService = MBMessageLocalServiceFactory.getService();
-
-		mbMessageLocalService.deleteMBMessage(messageId);
+		_service.deleteMBMessage(messageId);
 	}
 
 	public static void deleteMBMessage(
 		com.liferay.portlet.messageboards.model.MBMessage mbMessage)
 		throws com.liferay.portal.SystemException {
-		MBMessageLocalService mbMessageLocalService = MBMessageLocalServiceFactory.getService();
-
-		mbMessageLocalService.deleteMBMessage(mbMessage);
+		_service.deleteMBMessage(mbMessage);
 	}
 
 	public static java.util.List<Object> dynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery)
 		throws com.liferay.portal.SystemException {
-		MBMessageLocalService mbMessageLocalService = MBMessageLocalServiceFactory.getService();
-
-		return mbMessageLocalService.dynamicQuery(dynamicQuery);
+		return _service.dynamicQuery(dynamicQuery);
 	}
 
 	public static java.util.List<Object> dynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery, int start,
 		int end) throws com.liferay.portal.SystemException {
-		MBMessageLocalService mbMessageLocalService = MBMessageLocalServiceFactory.getService();
-
-		return mbMessageLocalService.dynamicQuery(dynamicQuery, start, end);
+		return _service.dynamicQuery(dynamicQuery, start, end);
 	}
 
 	public static com.liferay.portlet.messageboards.model.MBMessage getMBMessage(
 		long messageId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		MBMessageLocalService mbMessageLocalService = MBMessageLocalServiceFactory.getService();
-
-		return mbMessageLocalService.getMBMessage(messageId);
+		return _service.getMBMessage(messageId);
 	}
 
 	public static java.util.List<com.liferay.portlet.messageboards.model.MBMessage> getMBMessages(
 		int start, int end) throws com.liferay.portal.SystemException {
-		MBMessageLocalService mbMessageLocalService = MBMessageLocalServiceFactory.getService();
-
-		return mbMessageLocalService.getMBMessages(start, end);
+		return _service.getMBMessages(start, end);
 	}
 
 	public static int getMBMessagesCount()
 		throws com.liferay.portal.SystemException {
-		MBMessageLocalService mbMessageLocalService = MBMessageLocalServiceFactory.getService();
-
-		return mbMessageLocalService.getMBMessagesCount();
+		return _service.getMBMessagesCount();
 	}
 
 	public static com.liferay.portlet.messageboards.model.MBMessage updateMBMessage(
 		com.liferay.portlet.messageboards.model.MBMessage mbMessage)
 		throws com.liferay.portal.SystemException {
-		MBMessageLocalService mbMessageLocalService = MBMessageLocalServiceFactory.getService();
-
-		return mbMessageLocalService.updateMBMessage(mbMessage);
+		return _service.updateMBMessage(mbMessage);
 	}
 
 	public static com.liferay.portlet.messageboards.model.MBMessage addDiscussionMessage(
@@ -127,10 +103,7 @@ public class MBMessageLocalServiceUtil {
 		java.lang.String body)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		MBMessageLocalService mbMessageLocalService = MBMessageLocalServiceFactory.getService();
-
-		return mbMessageLocalService.addDiscussionMessage(userId, userName,
-			subject, body);
+		return _service.addDiscussionMessage(userId, userName, subject, body);
 	}
 
 	public static com.liferay.portlet.messageboards.model.MBMessage addDiscussionMessage(
@@ -139,11 +112,8 @@ public class MBMessageLocalServiceUtil {
 		long parentMessageId, java.lang.String subject, java.lang.String body)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		MBMessageLocalService mbMessageLocalService = MBMessageLocalServiceFactory.getService();
-
-		return mbMessageLocalService.addDiscussionMessage(userId, userName,
-			groupId, className, classPK, threadId, parentMessageId, subject,
-			body);
+		return _service.addDiscussionMessage(userId, userName, groupId,
+			className, classPK, threadId, parentMessageId, subject, body);
 	}
 
 	public static com.liferay.portlet.messageboards.model.MBMessage addDiscussionMessage(
@@ -153,11 +123,9 @@ public class MBMessageLocalServiceUtil {
 		com.liferay.portal.theme.ThemeDisplay themeDisplay)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		MBMessageLocalService mbMessageLocalService = MBMessageLocalServiceFactory.getService();
-
-		return mbMessageLocalService.addDiscussionMessage(userId, userName,
-			groupId, className, classPK, threadId, parentMessageId, subject,
-			body, themeDisplay);
+		return _service.addDiscussionMessage(userId, userName, groupId,
+			className, classPK, threadId, parentMessageId, subject, body,
+			themeDisplay);
 	}
 
 	public static com.liferay.portlet.messageboards.model.MBMessage addMessage(
@@ -170,10 +138,8 @@ public class MBMessageLocalServiceUtil {
 		com.liferay.portal.theme.ThemeDisplay themeDisplay)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		MBMessageLocalService mbMessageLocalService = MBMessageLocalServiceFactory.getService();
-
-		return mbMessageLocalService.addMessage(userId, userName, categoryId,
-			subject, body, files, anonymous, priority, tagsEntries, prefs,
+		return _service.addMessage(userId, userName, categoryId, subject, body,
+			files, anonymous, priority, tagsEntries, prefs,
 			addCommunityPermissions, addGuestPermissions, themeDisplay);
 	}
 
@@ -188,10 +154,8 @@ public class MBMessageLocalServiceUtil {
 		com.liferay.portal.theme.ThemeDisplay themeDisplay)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		MBMessageLocalService mbMessageLocalService = MBMessageLocalServiceFactory.getService();
-
-		return mbMessageLocalService.addMessage(userId, userName, categoryId,
-			subject, body, files, anonymous, priority, tagsEntries, prefs,
+		return _service.addMessage(userId, userName, categoryId, subject, body,
+			files, anonymous, priority, tagsEntries, prefs,
 			communityPermissions, guestPermissions, themeDisplay);
 	}
 
@@ -208,10 +172,8 @@ public class MBMessageLocalServiceUtil {
 		com.liferay.portal.theme.ThemeDisplay themeDisplay)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		MBMessageLocalService mbMessageLocalService = MBMessageLocalServiceFactory.getService();
-
-		return mbMessageLocalService.addMessage(userId, userName, categoryId,
-			subject, body, files, anonymous, priority, tagsEntries, prefs,
+		return _service.addMessage(userId, userName, categoryId, subject, body,
+			files, anonymous, priority, tagsEntries, prefs,
 			addCommunityPermissions, addGuestPermissions, communityPermissions,
 			guestPermissions, themeDisplay);
 	}
@@ -226,12 +188,10 @@ public class MBMessageLocalServiceUtil {
 		com.liferay.portal.theme.ThemeDisplay themeDisplay)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		MBMessageLocalService mbMessageLocalService = MBMessageLocalServiceFactory.getService();
-
-		return mbMessageLocalService.addMessage(userId, userName, categoryId,
-			threadId, parentMessageId, subject, body, files, anonymous,
-			priority, tagsEntries, prefs, addCommunityPermissions,
-			addGuestPermissions, themeDisplay);
+		return _service.addMessage(userId, userName, categoryId, threadId,
+			parentMessageId, subject, body, files, anonymous, priority,
+			tagsEntries, prefs, addCommunityPermissions, addGuestPermissions,
+			themeDisplay);
 	}
 
 	public static com.liferay.portlet.messageboards.model.MBMessage addMessage(
@@ -245,12 +205,10 @@ public class MBMessageLocalServiceUtil {
 		com.liferay.portal.theme.ThemeDisplay themeDisplay)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		MBMessageLocalService mbMessageLocalService = MBMessageLocalServiceFactory.getService();
-
-		return mbMessageLocalService.addMessage(userId, userName, categoryId,
-			threadId, parentMessageId, subject, body, files, anonymous,
-			priority, tagsEntries, prefs, communityPermissions,
-			guestPermissions, themeDisplay);
+		return _service.addMessage(userId, userName, categoryId, threadId,
+			parentMessageId, subject, body, files, anonymous, priority,
+			tagsEntries, prefs, communityPermissions, guestPermissions,
+			themeDisplay);
 	}
 
 	public static com.liferay.portlet.messageboards.model.MBMessage addMessage(
@@ -264,11 +222,9 @@ public class MBMessageLocalServiceUtil {
 		com.liferay.portal.theme.ThemeDisplay themeDisplay)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		MBMessageLocalService mbMessageLocalService = MBMessageLocalServiceFactory.getService();
-
-		return mbMessageLocalService.addMessage(uuid, userId, userName,
-			categoryId, threadId, parentMessageId, subject, body, files,
-			anonymous, priority, tagsEntries, prefs, addCommunityPermissions,
+		return _service.addMessage(uuid, userId, userName, categoryId,
+			threadId, parentMessageId, subject, body, files, anonymous,
+			priority, tagsEntries, prefs, addCommunityPermissions,
 			addGuestPermissions, themeDisplay);
 	}
 
@@ -286,11 +242,9 @@ public class MBMessageLocalServiceUtil {
 		com.liferay.portal.theme.ThemeDisplay themeDisplay)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		MBMessageLocalService mbMessageLocalService = MBMessageLocalServiceFactory.getService();
-
-		return mbMessageLocalService.addMessage(uuid, userId, userName,
-			categoryId, threadId, parentMessageId, subject, body, files,
-			anonymous, priority, tagsEntries, prefs, addCommunityPermissions,
+		return _service.addMessage(uuid, userId, userName, categoryId,
+			threadId, parentMessageId, subject, body, files, anonymous,
+			priority, tagsEntries, prefs, addCommunityPermissions,
 			addGuestPermissions, communityPermissions, guestPermissions,
 			themeDisplay);
 	}
@@ -299,9 +253,7 @@ public class MBMessageLocalServiceUtil {
 		boolean addCommunityPermissions, boolean addGuestPermissions)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		MBMessageLocalService mbMessageLocalService = MBMessageLocalServiceFactory.getService();
-
-		mbMessageLocalService.addMessageResources(categoryId, messageId,
+		_service.addMessageResources(categoryId, messageId,
 			addCommunityPermissions, addGuestPermissions);
 	}
 
@@ -310,10 +262,8 @@ public class MBMessageLocalServiceUtil {
 		boolean addCommunityPermissions, boolean addGuestPermissions)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		MBMessageLocalService mbMessageLocalService = MBMessageLocalServiceFactory.getService();
-
-		mbMessageLocalService.addMessageResources(categoryId, topicId,
-			messageId, addCommunityPermissions, addGuestPermissions);
+		_service.addMessageResources(categoryId, topicId, messageId,
+			addCommunityPermissions, addGuestPermissions);
 	}
 
 	public static void addMessageResources(
@@ -322,9 +272,7 @@ public class MBMessageLocalServiceUtil {
 		boolean addCommunityPermissions, boolean addGuestPermissions)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		MBMessageLocalService mbMessageLocalService = MBMessageLocalServiceFactory.getService();
-
-		mbMessageLocalService.addMessageResources(category, message,
+		_service.addMessageResources(category, message,
 			addCommunityPermissions, addGuestPermissions);
 	}
 
@@ -333,9 +281,7 @@ public class MBMessageLocalServiceUtil {
 		java.lang.String[] guestPermissions)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		MBMessageLocalService mbMessageLocalService = MBMessageLocalServiceFactory.getService();
-
-		mbMessageLocalService.addMessageResources(categoryId, messageId,
+		_service.addMessageResources(categoryId, messageId,
 			communityPermissions, guestPermissions);
 	}
 
@@ -345,10 +291,8 @@ public class MBMessageLocalServiceUtil {
 		java.lang.String[] guestPermissions)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		MBMessageLocalService mbMessageLocalService = MBMessageLocalServiceFactory.getService();
-
-		mbMessageLocalService.addMessageResources(categoryId, topicId,
-			messageId, communityPermissions, guestPermissions);
+		_service.addMessageResources(categoryId, topicId, messageId,
+			communityPermissions, guestPermissions);
 	}
 
 	public static void addMessageResources(
@@ -358,258 +302,190 @@ public class MBMessageLocalServiceUtil {
 		java.lang.String[] guestPermissions)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		MBMessageLocalService mbMessageLocalService = MBMessageLocalServiceFactory.getService();
-
-		mbMessageLocalService.addMessageResources(category, message,
-			communityPermissions, guestPermissions);
+		_service.addMessageResources(category, message, communityPermissions,
+			guestPermissions);
 	}
 
 	public static void deleteDiscussionMessage(long messageId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		MBMessageLocalService mbMessageLocalService = MBMessageLocalServiceFactory.getService();
-
-		mbMessageLocalService.deleteDiscussionMessage(messageId);
+		_service.deleteDiscussionMessage(messageId);
 	}
 
 	public static void deleteDiscussionMessages(java.lang.String className,
 		long classPK)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		MBMessageLocalService mbMessageLocalService = MBMessageLocalServiceFactory.getService();
-
-		mbMessageLocalService.deleteDiscussionMessages(className, classPK);
+		_service.deleteDiscussionMessages(className, classPK);
 	}
 
 	public static void deleteMessage(long messageId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		MBMessageLocalService mbMessageLocalService = MBMessageLocalServiceFactory.getService();
-
-		mbMessageLocalService.deleteMessage(messageId);
+		_service.deleteMessage(messageId);
 	}
 
 	public static void deleteMessage(
 		com.liferay.portlet.messageboards.model.MBMessage message)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		MBMessageLocalService mbMessageLocalService = MBMessageLocalServiceFactory.getService();
-
-		mbMessageLocalService.deleteMessage(message);
+		_service.deleteMessage(message);
 	}
 
 	public static java.util.List<com.liferay.portlet.messageboards.model.MBMessage> getCategoryMessages(
 		long categoryId, int start, int end)
 		throws com.liferay.portal.SystemException {
-		MBMessageLocalService mbMessageLocalService = MBMessageLocalServiceFactory.getService();
-
-		return mbMessageLocalService.getCategoryMessages(categoryId, start, end);
+		return _service.getCategoryMessages(categoryId, start, end);
 	}
 
 	public static java.util.List<com.liferay.portlet.messageboards.model.MBMessage> getCategoryMessages(
 		long categoryId, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException {
-		MBMessageLocalService mbMessageLocalService = MBMessageLocalServiceFactory.getService();
-
-		return mbMessageLocalService.getCategoryMessages(categoryId, start,
-			end, obc);
+		return _service.getCategoryMessages(categoryId, start, end, obc);
 	}
 
 	public static int getCategoryMessagesCount(long categoryId)
 		throws com.liferay.portal.SystemException {
-		MBMessageLocalService mbMessageLocalService = MBMessageLocalServiceFactory.getService();
-
-		return mbMessageLocalService.getCategoryMessagesCount(categoryId);
+		return _service.getCategoryMessagesCount(categoryId);
 	}
 
 	public static int getCategoriesMessagesCount(
 		java.util.List<Long> categoryIds)
 		throws com.liferay.portal.SystemException {
-		MBMessageLocalService mbMessageLocalService = MBMessageLocalServiceFactory.getService();
-
-		return mbMessageLocalService.getCategoriesMessagesCount(categoryIds);
+		return _service.getCategoriesMessagesCount(categoryIds);
 	}
 
 	public static java.util.List<com.liferay.portlet.messageboards.model.MBMessage> getCompanyMessages(
 		long companyId, int start, int end)
 		throws com.liferay.portal.SystemException {
-		MBMessageLocalService mbMessageLocalService = MBMessageLocalServiceFactory.getService();
-
-		return mbMessageLocalService.getCompanyMessages(companyId, start, end);
+		return _service.getCompanyMessages(companyId, start, end);
 	}
 
 	public static java.util.List<com.liferay.portlet.messageboards.model.MBMessage> getCompanyMessages(
 		long companyId, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException {
-		MBMessageLocalService mbMessageLocalService = MBMessageLocalServiceFactory.getService();
-
-		return mbMessageLocalService.getCompanyMessages(companyId, start, end,
-			obc);
+		return _service.getCompanyMessages(companyId, start, end, obc);
 	}
 
 	public static int getCompanyMessagesCount(long companyId)
 		throws com.liferay.portal.SystemException {
-		MBMessageLocalService mbMessageLocalService = MBMessageLocalServiceFactory.getService();
-
-		return mbMessageLocalService.getCompanyMessagesCount(companyId);
+		return _service.getCompanyMessagesCount(companyId);
 	}
 
 	public static com.liferay.portlet.messageboards.model.MBMessageDisplay getDiscussionMessageDisplay(
 		long userId, java.lang.String className, long classPK)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		MBMessageLocalService mbMessageLocalService = MBMessageLocalServiceFactory.getService();
-
-		return mbMessageLocalService.getDiscussionMessageDisplay(userId,
-			className, classPK);
+		return _service.getDiscussionMessageDisplay(userId, className, classPK);
 	}
 
 	public static int getDiscussionMessagesCount(long classNameId, long classPK)
 		throws com.liferay.portal.SystemException {
-		MBMessageLocalService mbMessageLocalService = MBMessageLocalServiceFactory.getService();
-
-		return mbMessageLocalService.getDiscussionMessagesCount(classNameId,
-			classPK);
+		return _service.getDiscussionMessagesCount(classNameId, classPK);
 	}
 
 	public static java.util.List<com.liferay.portlet.messageboards.model.MBDiscussion> getDiscussions(
 		java.lang.String className) throws com.liferay.portal.SystemException {
-		MBMessageLocalService mbMessageLocalService = MBMessageLocalServiceFactory.getService();
-
-		return mbMessageLocalService.getDiscussions(className);
+		return _service.getDiscussions(className);
 	}
 
 	public static java.util.List<com.liferay.portlet.messageboards.model.MBMessage> getGroupMessages(
 		long groupId, int start, int end)
 		throws com.liferay.portal.SystemException {
-		MBMessageLocalService mbMessageLocalService = MBMessageLocalServiceFactory.getService();
-
-		return mbMessageLocalService.getGroupMessages(groupId, start, end);
+		return _service.getGroupMessages(groupId, start, end);
 	}
 
 	public static java.util.List<com.liferay.portlet.messageboards.model.MBMessage> getGroupMessages(
 		long groupId, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException {
-		MBMessageLocalService mbMessageLocalService = MBMessageLocalServiceFactory.getService();
-
-		return mbMessageLocalService.getGroupMessages(groupId, start, end, obc);
+		return _service.getGroupMessages(groupId, start, end, obc);
 	}
 
 	public static java.util.List<com.liferay.portlet.messageboards.model.MBMessage> getGroupMessages(
 		long groupId, long userId, int start, int end)
 		throws com.liferay.portal.SystemException {
-		MBMessageLocalService mbMessageLocalService = MBMessageLocalServiceFactory.getService();
-
-		return mbMessageLocalService.getGroupMessages(groupId, userId, start,
-			end);
+		return _service.getGroupMessages(groupId, userId, start, end);
 	}
 
 	public static java.util.List<com.liferay.portlet.messageboards.model.MBMessage> getGroupMessages(
 		long groupId, long userId, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException {
-		MBMessageLocalService mbMessageLocalService = MBMessageLocalServiceFactory.getService();
-
-		return mbMessageLocalService.getGroupMessages(groupId, userId, start,
-			end, obc);
+		return _service.getGroupMessages(groupId, userId, start, end, obc);
 	}
 
 	public static int getGroupMessagesCount(long groupId)
 		throws com.liferay.portal.SystemException {
-		MBMessageLocalService mbMessageLocalService = MBMessageLocalServiceFactory.getService();
-
-		return mbMessageLocalService.getGroupMessagesCount(groupId);
+		return _service.getGroupMessagesCount(groupId);
 	}
 
 	public static int getGroupMessagesCount(long groupId, long userId)
 		throws com.liferay.portal.SystemException {
-		MBMessageLocalService mbMessageLocalService = MBMessageLocalServiceFactory.getService();
-
-		return mbMessageLocalService.getGroupMessagesCount(groupId, userId);
+		return _service.getGroupMessagesCount(groupId, userId);
 	}
 
 	public static com.liferay.portlet.messageboards.model.MBMessage getMessage(
 		long messageId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		MBMessageLocalService mbMessageLocalService = MBMessageLocalServiceFactory.getService();
-
-		return mbMessageLocalService.getMessage(messageId);
+		return _service.getMessage(messageId);
 	}
 
 	public static java.util.List<com.liferay.portlet.messageboards.model.MBMessage> getMessages(
 		java.lang.String className, long classPK)
 		throws com.liferay.portal.SystemException {
-		MBMessageLocalService mbMessageLocalService = MBMessageLocalServiceFactory.getService();
-
-		return mbMessageLocalService.getMessages(className, classPK);
+		return _service.getMessages(className, classPK);
 	}
 
 	public static com.liferay.portlet.messageboards.model.MBMessageDisplay getMessageDisplay(
 		long messageId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		MBMessageLocalService mbMessageLocalService = MBMessageLocalServiceFactory.getService();
-
-		return mbMessageLocalService.getMessageDisplay(messageId);
+		return _service.getMessageDisplay(messageId);
 	}
 
 	public static com.liferay.portlet.messageboards.model.MBMessageDisplay getMessageDisplay(
 		com.liferay.portlet.messageboards.model.MBMessage message)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		MBMessageLocalService mbMessageLocalService = MBMessageLocalServiceFactory.getService();
-
-		return mbMessageLocalService.getMessageDisplay(message);
+		return _service.getMessageDisplay(message);
 	}
 
 	public static java.util.List<com.liferay.portlet.messageboards.model.MBMessage> getNoAssetMessages()
 		throws com.liferay.portal.SystemException {
-		MBMessageLocalService mbMessageLocalService = MBMessageLocalServiceFactory.getService();
-
-		return mbMessageLocalService.getNoAssetMessages();
+		return _service.getNoAssetMessages();
 	}
 
 	public static java.util.List<com.liferay.portlet.messageboards.model.MBMessage> getThreadMessages(
 		long threadId) throws com.liferay.portal.SystemException {
-		MBMessageLocalService mbMessageLocalService = MBMessageLocalServiceFactory.getService();
-
-		return mbMessageLocalService.getThreadMessages(threadId);
+		return _service.getThreadMessages(threadId);
 	}
 
 	public static java.util.List<com.liferay.portlet.messageboards.model.MBMessage> getThreadMessages(
 		long threadId,
 		java.util.Comparator<com.liferay.portlet.messageboards.model.MBMessage> comparator)
 		throws com.liferay.portal.SystemException {
-		MBMessageLocalService mbMessageLocalService = MBMessageLocalServiceFactory.getService();
-
-		return mbMessageLocalService.getThreadMessages(threadId, comparator);
+		return _service.getThreadMessages(threadId, comparator);
 	}
 
 	public static int getThreadMessagesCount(long threadId)
 		throws com.liferay.portal.SystemException {
-		MBMessageLocalService mbMessageLocalService = MBMessageLocalServiceFactory.getService();
-
-		return mbMessageLocalService.getThreadMessagesCount(threadId);
+		return _service.getThreadMessagesCount(threadId);
 	}
 
 	public static void subscribeMessage(long userId, long messageId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		MBMessageLocalService mbMessageLocalService = MBMessageLocalServiceFactory.getService();
-
-		mbMessageLocalService.subscribeMessage(userId, messageId);
+		_service.subscribeMessage(userId, messageId);
 	}
 
 	public static void unsubscribeMessage(long userId, long messageId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		MBMessageLocalService mbMessageLocalService = MBMessageLocalServiceFactory.getService();
-
-		mbMessageLocalService.unsubscribeMessage(userId, messageId);
+		_service.unsubscribeMessage(userId, messageId);
 	}
 
 	public static com.liferay.portlet.messageboards.model.MBMessage updateDiscussionMessage(
@@ -617,10 +493,7 @@ public class MBMessageLocalServiceUtil {
 		java.lang.String body)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		MBMessageLocalService mbMessageLocalService = MBMessageLocalServiceFactory.getService();
-
-		return mbMessageLocalService.updateDiscussionMessage(userId, messageId,
-			subject, body);
+		return _service.updateDiscussionMessage(userId, messageId, subject, body);
 	}
 
 	public static com.liferay.portlet.messageboards.model.MBMessage updateMessage(
@@ -632,30 +505,22 @@ public class MBMessageLocalServiceUtil {
 		com.liferay.portal.theme.ThemeDisplay themeDisplay)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		MBMessageLocalService mbMessageLocalService = MBMessageLocalServiceFactory.getService();
-
-		return mbMessageLocalService.updateMessage(userId, messageId, subject,
-			body, files, existingFiles, priority, tagsEntries, prefs,
-			themeDisplay);
+		return _service.updateMessage(userId, messageId, subject, body, files,
+			existingFiles, priority, tagsEntries, prefs, themeDisplay);
 	}
 
 	public static com.liferay.portlet.messageboards.model.MBMessage updateMessage(
 		long messageId, java.util.Date createDate, java.util.Date modifiedDate)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		MBMessageLocalService mbMessageLocalService = MBMessageLocalServiceFactory.getService();
-
-		return mbMessageLocalService.updateMessage(messageId, createDate,
-			modifiedDate);
+		return _service.updateMessage(messageId, createDate, modifiedDate);
 	}
 
 	public static com.liferay.portlet.messageboards.model.MBMessage updateMessage(
 		long messageId, java.lang.String body)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		MBMessageLocalService mbMessageLocalService = MBMessageLocalServiceFactory.getService();
-
-		return mbMessageLocalService.updateMessage(messageId, body);
+		return _service.updateMessage(messageId, body);
 	}
 
 	public static void updateTagsAsset(long userId,
@@ -663,8 +528,16 @@ public class MBMessageLocalServiceUtil {
 		java.lang.String[] tagsEntries)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		MBMessageLocalService mbMessageLocalService = MBMessageLocalServiceFactory.getService();
-
-		mbMessageLocalService.updateTagsAsset(userId, message, tagsEntries);
+		_service.updateTagsAsset(userId, message, tagsEntries);
 	}
+
+	public static MBMessageLocalService getService() {
+		return _service;
+	}
+
+	public void setService(MBMessageLocalService service) {
+		_service = service;
+	}
+
+	private static MBMessageLocalService _service;
 }

@@ -56,22 +56,12 @@ public class BlogsStatsUserFinderUtil {
 	}
 
 	public static BlogsStatsUserFinder getFinder() {
-		return _getUtil()._finder;
+		return _finder;
 	}
 
 	public void setFinder(BlogsStatsUserFinder finder) {
 		_finder = finder;
 	}
 
-	private static BlogsStatsUserFinderUtil _getUtil() {
-		if (_util == null) {
-			_util = (BlogsStatsUserFinderUtil)com.liferay.portal.kernel.bean.PortalBeanLocatorUtil.locate(_UTIL);
-		}
-
-		return _util;
-	}
-
-	private static final String _UTIL = BlogsStatsUserFinderUtil.class.getName();
-	private static BlogsStatsUserFinderUtil _util;
-	private BlogsStatsUserFinder _finder;
+	private static BlogsStatsUserFinder _finder;
 }

@@ -83,22 +83,12 @@ public class ExpandoValueFinderUtil {
 	}
 
 	public static ExpandoValueFinder getFinder() {
-		return _getUtil()._finder;
+		return _finder;
 	}
 
 	public void setFinder(ExpandoValueFinder finder) {
 		_finder = finder;
 	}
 
-	private static ExpandoValueFinderUtil _getUtil() {
-		if (_util == null) {
-			_util = (ExpandoValueFinderUtil)com.liferay.portal.kernel.bean.PortalBeanLocatorUtil.locate(_UTIL);
-		}
-
-		return _util;
-	}
-
-	private static final String _UTIL = ExpandoValueFinderUtil.class.getName();
-	private static ExpandoValueFinderUtil _util;
-	private ExpandoValueFinder _finder;
+	private static ExpandoValueFinder _finder;
 }

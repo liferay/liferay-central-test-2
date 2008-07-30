@@ -39,88 +39,63 @@ package com.liferay.portlet.softwarecatalog.service;
  * on a bean instead of writing a lookup call and a method call.
  * </p>
  *
- * <p>
- * <code>com.liferay.portlet.softwarecatalog.service.SCProductVersionLocalServiceFactory</code>
- * is responsible for the lookup of the bean.
- * </p>
- *
  * @author Brian Wing Shun Chan
  *
  * @see com.liferay.portlet.softwarecatalog.service.SCProductVersionLocalService
- * @see com.liferay.portlet.softwarecatalog.service.SCProductVersionLocalServiceFactory
  *
  */
 public class SCProductVersionLocalServiceUtil {
 	public static com.liferay.portlet.softwarecatalog.model.SCProductVersion addSCProductVersion(
 		com.liferay.portlet.softwarecatalog.model.SCProductVersion scProductVersion)
 		throws com.liferay.portal.SystemException {
-		SCProductVersionLocalService scProductVersionLocalService = SCProductVersionLocalServiceFactory.getService();
-
-		return scProductVersionLocalService.addSCProductVersion(scProductVersion);
+		return _service.addSCProductVersion(scProductVersion);
 	}
 
 	public static void deleteSCProductVersion(long productVersionId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		SCProductVersionLocalService scProductVersionLocalService = SCProductVersionLocalServiceFactory.getService();
-
-		scProductVersionLocalService.deleteSCProductVersion(productVersionId);
+		_service.deleteSCProductVersion(productVersionId);
 	}
 
 	public static void deleteSCProductVersion(
 		com.liferay.portlet.softwarecatalog.model.SCProductVersion scProductVersion)
 		throws com.liferay.portal.SystemException {
-		SCProductVersionLocalService scProductVersionLocalService = SCProductVersionLocalServiceFactory.getService();
-
-		scProductVersionLocalService.deleteSCProductVersion(scProductVersion);
+		_service.deleteSCProductVersion(scProductVersion);
 	}
 
 	public static java.util.List<Object> dynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery)
 		throws com.liferay.portal.SystemException {
-		SCProductVersionLocalService scProductVersionLocalService = SCProductVersionLocalServiceFactory.getService();
-
-		return scProductVersionLocalService.dynamicQuery(dynamicQuery);
+		return _service.dynamicQuery(dynamicQuery);
 	}
 
 	public static java.util.List<Object> dynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery, int start,
 		int end) throws com.liferay.portal.SystemException {
-		SCProductVersionLocalService scProductVersionLocalService = SCProductVersionLocalServiceFactory.getService();
-
-		return scProductVersionLocalService.dynamicQuery(dynamicQuery, start,
-			end);
+		return _service.dynamicQuery(dynamicQuery, start, end);
 	}
 
 	public static com.liferay.portlet.softwarecatalog.model.SCProductVersion getSCProductVersion(
 		long productVersionId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		SCProductVersionLocalService scProductVersionLocalService = SCProductVersionLocalServiceFactory.getService();
-
-		return scProductVersionLocalService.getSCProductVersion(productVersionId);
+		return _service.getSCProductVersion(productVersionId);
 	}
 
 	public static java.util.List<com.liferay.portlet.softwarecatalog.model.SCProductVersion> getSCProductVersions(
 		int start, int end) throws com.liferay.portal.SystemException {
-		SCProductVersionLocalService scProductVersionLocalService = SCProductVersionLocalServiceFactory.getService();
-
-		return scProductVersionLocalService.getSCProductVersions(start, end);
+		return _service.getSCProductVersions(start, end);
 	}
 
 	public static int getSCProductVersionsCount()
 		throws com.liferay.portal.SystemException {
-		SCProductVersionLocalService scProductVersionLocalService = SCProductVersionLocalServiceFactory.getService();
-
-		return scProductVersionLocalService.getSCProductVersionsCount();
+		return _service.getSCProductVersionsCount();
 	}
 
 	public static com.liferay.portlet.softwarecatalog.model.SCProductVersion updateSCProductVersion(
 		com.liferay.portlet.softwarecatalog.model.SCProductVersion scProductVersion)
 		throws com.liferay.portal.SystemException {
-		SCProductVersionLocalService scProductVersionLocalService = SCProductVersionLocalServiceFactory.getService();
-
-		return scProductVersionLocalService.updateSCProductVersion(scProductVersion);
+		return _service.updateSCProductVersion(scProductVersion);
 	}
 
 	public static com.liferay.portlet.softwarecatalog.model.SCProductVersion addProductVersion(
@@ -131,12 +106,9 @@ public class SCProductVersionLocalServiceUtil {
 		boolean addGuestPermissions)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		SCProductVersionLocalService scProductVersionLocalService = SCProductVersionLocalServiceFactory.getService();
-
-		return scProductVersionLocalService.addProductVersion(userId,
-			productEntryId, version, changeLog, downloadPageURL,
-			directDownloadURL, repoStoreArtifact, frameworkVersionIds,
-			addCommunityPermissions, addGuestPermissions);
+		return _service.addProductVersion(userId, productEntryId, version,
+			changeLog, downloadPageURL, directDownloadURL, repoStoreArtifact,
+			frameworkVersionIds, addCommunityPermissions, addGuestPermissions);
 	}
 
 	public static com.liferay.portlet.softwarecatalog.model.SCProductVersion addProductVersion(
@@ -147,12 +119,9 @@ public class SCProductVersionLocalServiceUtil {
 		java.lang.String[] guestPermissions)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		SCProductVersionLocalService scProductVersionLocalService = SCProductVersionLocalServiceFactory.getService();
-
-		return scProductVersionLocalService.addProductVersion(userId,
-			productEntryId, version, changeLog, downloadPageURL,
-			directDownloadURL, repoStoreArtifact, frameworkVersionIds,
-			communityPermissions, guestPermissions);
+		return _service.addProductVersion(userId, productEntryId, version,
+			changeLog, downloadPageURL, directDownloadURL, repoStoreArtifact,
+			frameworkVersionIds, communityPermissions, guestPermissions);
 	}
 
 	public static com.liferay.portlet.softwarecatalog.model.SCProductVersion addProductVersion(
@@ -165,70 +134,52 @@ public class SCProductVersionLocalServiceUtil {
 		java.lang.String[] guestPermissions)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		SCProductVersionLocalService scProductVersionLocalService = SCProductVersionLocalServiceFactory.getService();
-
-		return scProductVersionLocalService.addProductVersion(userId,
-			productEntryId, version, changeLog, downloadPageURL,
-			directDownloadURL, repoStoreArtifact, frameworkVersionIds,
-			addCommunityPermissions, addGuestPermissions, communityPermissions,
-			guestPermissions);
+		return _service.addProductVersion(userId, productEntryId, version,
+			changeLog, downloadPageURL, directDownloadURL, repoStoreArtifact,
+			frameworkVersionIds, addCommunityPermissions, addGuestPermissions,
+			communityPermissions, guestPermissions);
 	}
 
 	public static void deleteProductVersion(long productVersionId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		SCProductVersionLocalService scProductVersionLocalService = SCProductVersionLocalServiceFactory.getService();
-
-		scProductVersionLocalService.deleteProductVersion(productVersionId);
+		_service.deleteProductVersion(productVersionId);
 	}
 
 	public static void deleteProductVersion(
 		com.liferay.portlet.softwarecatalog.model.SCProductVersion productVersion)
 		throws com.liferay.portal.SystemException {
-		SCProductVersionLocalService scProductVersionLocalService = SCProductVersionLocalServiceFactory.getService();
-
-		scProductVersionLocalService.deleteProductVersion(productVersion);
+		_service.deleteProductVersion(productVersion);
 	}
 
 	public static void deleteProductVersions(long productEntryId)
 		throws com.liferay.portal.SystemException {
-		SCProductVersionLocalService scProductVersionLocalService = SCProductVersionLocalServiceFactory.getService();
-
-		scProductVersionLocalService.deleteProductVersions(productEntryId);
+		_service.deleteProductVersions(productEntryId);
 	}
 
 	public static com.liferay.portlet.softwarecatalog.model.SCProductVersion getProductVersion(
 		long productVersionId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		SCProductVersionLocalService scProductVersionLocalService = SCProductVersionLocalServiceFactory.getService();
-
-		return scProductVersionLocalService.getProductVersion(productVersionId);
+		return _service.getProductVersion(productVersionId);
 	}
 
 	public static com.liferay.portlet.softwarecatalog.model.SCProductVersion getProductVersionByDirectDownloadURL(
 		java.lang.String directDownloadURL)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		SCProductVersionLocalService scProductVersionLocalService = SCProductVersionLocalServiceFactory.getService();
-
-		return scProductVersionLocalService.getProductVersionByDirectDownloadURL(directDownloadURL);
+		return _service.getProductVersionByDirectDownloadURL(directDownloadURL);
 	}
 
 	public static java.util.List<com.liferay.portlet.softwarecatalog.model.SCProductVersion> getProductVersions(
 		long productEntryId, int start, int end)
 		throws com.liferay.portal.SystemException {
-		SCProductVersionLocalService scProductVersionLocalService = SCProductVersionLocalServiceFactory.getService();
-
-		return scProductVersionLocalService.getProductVersions(productEntryId,
-			start, end);
+		return _service.getProductVersions(productEntryId, start, end);
 	}
 
 	public static int getProductVersionsCount(long productEntryId)
 		throws com.liferay.portal.SystemException {
-		SCProductVersionLocalService scProductVersionLocalService = SCProductVersionLocalServiceFactory.getService();
-
-		return scProductVersionLocalService.getProductVersionsCount(productEntryId);
+		return _service.getProductVersionsCount(productEntryId);
 	}
 
 	public static com.liferay.portlet.softwarecatalog.model.SCProductVersion updateProductVersion(
@@ -238,10 +189,18 @@ public class SCProductVersionLocalServiceUtil {
 		long[] frameworkVersionIds)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		SCProductVersionLocalService scProductVersionLocalService = SCProductVersionLocalServiceFactory.getService();
-
-		return scProductVersionLocalService.updateProductVersion(productVersionId,
-			version, changeLog, downloadPageURL, directDownloadURL,
-			repoStoreArtifact, frameworkVersionIds);
+		return _service.updateProductVersion(productVersionId, version,
+			changeLog, downloadPageURL, directDownloadURL, repoStoreArtifact,
+			frameworkVersionIds);
 	}
+
+	public static SCProductVersionLocalService getService() {
+		return _service;
+	}
+
+	public void setService(SCProductVersionLocalService service) {
+		_service = service;
+	}
+
+	private static SCProductVersionLocalService _service;
 }

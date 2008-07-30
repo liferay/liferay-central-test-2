@@ -22,6 +22,7 @@
 
 package com.liferay.portlet.wiki.service;
 
+import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
 
 /**
  * <a href="WikiPageResourceLocalServiceFactory.java.html"><b><i>View Source</i></b></a>
@@ -51,33 +52,45 @@ package com.liferay.portlet.wiki.service;
  *
  */
 public class WikiPageResourceLocalServiceFactory {
+	/**
+	 * @deprecated
+	 */
 	public static WikiPageResourceLocalService getService() {
 		return _getFactory()._service;
 	}
 
+	/**
+	 * @deprecated
+	 */
 	public static WikiPageResourceLocalService getImpl() {
 		if (_impl == null) {
-			_impl = (WikiPageResourceLocalService)com.liferay.portal.kernel.bean.PortalBeanLocatorUtil.locate(_IMPL);
+			_impl = (WikiPageResourceLocalService)PortalBeanLocatorUtil.locate(_IMPL);
 		}
 
 		return _impl;
 	}
 
+	/**
+	 * @deprecated
+	 */
 	public static WikiPageResourceLocalService getTxImpl() {
 		if (_txImpl == null) {
-			_txImpl = (WikiPageResourceLocalService)com.liferay.portal.kernel.bean.PortalBeanLocatorUtil.locate(_TX_IMPL);
+			_txImpl = (WikiPageResourceLocalService)PortalBeanLocatorUtil.locate(_TX_IMPL);
 		}
 
 		return _txImpl;
 	}
 
+	/**
+	 * @deprecated
+	 */
 	public void setService(WikiPageResourceLocalService service) {
 		_service = service;
 	}
 
 	private static WikiPageResourceLocalServiceFactory _getFactory() {
 		if (_factory == null) {
-			_factory = (WikiPageResourceLocalServiceFactory)com.liferay.portal.kernel.bean.PortalBeanLocatorUtil.locate(_FACTORY);
+			_factory = (WikiPageResourceLocalServiceFactory)PortalBeanLocatorUtil.locate(_FACTORY);
 		}
 
 		return _factory;

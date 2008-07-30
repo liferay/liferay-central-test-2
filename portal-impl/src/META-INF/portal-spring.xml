@@ -37,6 +37,11 @@
 			<ref bean="com.liferay.portal.service.AccountLocalService.transaction" />
 		</property>
 	</bean>
+	<bean id="com.liferay.portal.service.AccountLocalServiceUtil" class="com.liferay.portal.service.AccountLocalServiceUtil" lazy-init="true">
+		<property name="service">
+			<ref bean="com.liferay.portal.service.AccountLocalService.transaction" />
+		</property>
+	</bean>
 	<bean id="com.liferay.portal.service.AccountService.impl" class="com.liferay.portal.service.impl.AccountServiceImpl" lazy-init="true" />
 	<bean id="com.liferay.portal.service.AccountService.transaction" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean" lazy-init="true">
 		<property name="transactionManager">
@@ -68,6 +73,11 @@
 		</property>
 	</bean>
 	<bean id="com.liferay.portal.service.AccountServiceFactory" class="com.liferay.portal.service.AccountServiceFactory" lazy-init="true">
+		<property name="service">
+			<ref bean="com.liferay.portal.service.AccountService.transaction" />
+		</property>
+	</bean>
+	<bean id="com.liferay.portal.service.AccountServiceUtil" class="com.liferay.portal.service.AccountServiceUtil" lazy-init="true">
 		<property name="service">
 			<ref bean="com.liferay.portal.service.AccountService.transaction" />
 		</property>
@@ -136,6 +146,11 @@
 			<ref bean="com.liferay.portal.service.AddressLocalService.transaction" />
 		</property>
 	</bean>
+	<bean id="com.liferay.portal.service.AddressLocalServiceUtil" class="com.liferay.portal.service.AddressLocalServiceUtil" lazy-init="true">
+		<property name="service">
+			<ref bean="com.liferay.portal.service.AddressLocalService.transaction" />
+		</property>
+	</bean>
 	<bean id="com.liferay.portal.service.AddressService.impl" class="com.liferay.portal.service.impl.AddressServiceImpl" lazy-init="true" />
 	<bean id="com.liferay.portal.service.AddressService.transaction" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean" lazy-init="true">
 		<property name="transactionManager">
@@ -167,6 +182,11 @@
 		</property>
 	</bean>
 	<bean id="com.liferay.portal.service.AddressServiceFactory" class="com.liferay.portal.service.AddressServiceFactory" lazy-init="true">
+		<property name="service">
+			<ref bean="com.liferay.portal.service.AddressService.transaction" />
+		</property>
+	</bean>
+	<bean id="com.liferay.portal.service.AddressServiceUtil" class="com.liferay.portal.service.AddressServiceUtil" lazy-init="true">
 		<property name="service">
 			<ref bean="com.liferay.portal.service.AddressService.transaction" />
 		</property>
@@ -235,6 +255,11 @@
 			<ref bean="com.liferay.portal.service.ClassNameLocalService.transaction" />
 		</property>
 	</bean>
+	<bean id="com.liferay.portal.service.ClassNameLocalServiceUtil" class="com.liferay.portal.service.ClassNameLocalServiceUtil" lazy-init="true">
+		<property name="service">
+			<ref bean="com.liferay.portal.service.ClassNameLocalService.transaction" />
+		</property>
+	</bean>
 	<bean id="com.liferay.portal.service.ClassNameService.impl" class="com.liferay.portal.service.impl.ClassNameServiceImpl" lazy-init="true" />
 	<bean id="com.liferay.portal.service.ClassNameService.transaction" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean" lazy-init="true">
 		<property name="transactionManager">
@@ -266,6 +291,11 @@
 		</property>
 	</bean>
 	<bean id="com.liferay.portal.service.ClassNameServiceFactory" class="com.liferay.portal.service.ClassNameServiceFactory" lazy-init="true">
+		<property name="service">
+			<ref bean="com.liferay.portal.service.ClassNameService.transaction" />
+		</property>
+	</bean>
+	<bean id="com.liferay.portal.service.ClassNameServiceUtil" class="com.liferay.portal.service.ClassNameServiceUtil" lazy-init="true">
 		<property name="service">
 			<ref bean="com.liferay.portal.service.ClassNameService.transaction" />
 		</property>
@@ -334,6 +364,11 @@
 			<ref bean="com.liferay.portal.service.CompanyLocalService.transaction" />
 		</property>
 	</bean>
+	<bean id="com.liferay.portal.service.CompanyLocalServiceUtil" class="com.liferay.portal.service.CompanyLocalServiceUtil" lazy-init="true">
+		<property name="service">
+			<ref bean="com.liferay.portal.service.CompanyLocalService.transaction" />
+		</property>
+	</bean>
 	<bean id="com.liferay.portal.service.CompanyService.impl" class="com.liferay.portal.service.impl.CompanyServiceImpl" lazy-init="true" />
 	<bean id="com.liferay.portal.service.CompanyService.transaction" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean" lazy-init="true">
 		<property name="transactionManager">
@@ -365,6 +400,11 @@
 		</property>
 	</bean>
 	<bean id="com.liferay.portal.service.CompanyServiceFactory" class="com.liferay.portal.service.CompanyServiceFactory" lazy-init="true">
+		<property name="service">
+			<ref bean="com.liferay.portal.service.CompanyService.transaction" />
+		</property>
+	</bean>
+	<bean id="com.liferay.portal.service.CompanyServiceUtil" class="com.liferay.portal.service.CompanyServiceUtil" lazy-init="true">
 		<property name="service">
 			<ref bean="com.liferay.portal.service.CompanyService.transaction" />
 		</property>
@@ -433,6 +473,11 @@
 			<ref bean="com.liferay.portal.service.ContactLocalService.transaction" />
 		</property>
 	</bean>
+	<bean id="com.liferay.portal.service.ContactLocalServiceUtil" class="com.liferay.portal.service.ContactLocalServiceUtil" lazy-init="true">
+		<property name="service">
+			<ref bean="com.liferay.portal.service.ContactLocalService.transaction" />
+		</property>
+	</bean>
 	<bean id="com.liferay.portal.service.ContactService.impl" class="com.liferay.portal.service.impl.ContactServiceImpl" lazy-init="true" />
 	<bean id="com.liferay.portal.service.ContactService.transaction" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean" lazy-init="true">
 		<property name="transactionManager">
@@ -464,6 +509,11 @@
 		</property>
 	</bean>
 	<bean id="com.liferay.portal.service.ContactServiceFactory" class="com.liferay.portal.service.ContactServiceFactory" lazy-init="true">
+		<property name="service">
+			<ref bean="com.liferay.portal.service.ContactService.transaction" />
+		</property>
+	</bean>
+	<bean id="com.liferay.portal.service.ContactServiceUtil" class="com.liferay.portal.service.ContactServiceUtil" lazy-init="true">
 		<property name="service">
 			<ref bean="com.liferay.portal.service.ContactService.transaction" />
 		</property>
@@ -532,6 +582,11 @@
 			<ref bean="com.liferay.portal.service.CountryService.transaction" />
 		</property>
 	</bean>
+	<bean id="com.liferay.portal.service.CountryServiceUtil" class="com.liferay.portal.service.CountryServiceUtil" lazy-init="true">
+		<property name="service">
+			<ref bean="com.liferay.portal.service.CountryService.transaction" />
+		</property>
+	</bean>
 	<bean id="com.liferay.portal.service.persistence.CountryPersistence.impl" class="com.liferay.portal.service.persistence.CountryPersistenceImpl" lazy-init="true">
 		<property name="dataSource">
 			<ref bean="liferayDataSource" />
@@ -596,6 +651,11 @@
 			<ref bean="com.liferay.portal.service.EmailAddressLocalService.transaction" />
 		</property>
 	</bean>
+	<bean id="com.liferay.portal.service.EmailAddressLocalServiceUtil" class="com.liferay.portal.service.EmailAddressLocalServiceUtil" lazy-init="true">
+		<property name="service">
+			<ref bean="com.liferay.portal.service.EmailAddressLocalService.transaction" />
+		</property>
+	</bean>
 	<bean id="com.liferay.portal.service.EmailAddressService.impl" class="com.liferay.portal.service.impl.EmailAddressServiceImpl" lazy-init="true" />
 	<bean id="com.liferay.portal.service.EmailAddressService.transaction" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean" lazy-init="true">
 		<property name="transactionManager">
@@ -627,6 +687,11 @@
 		</property>
 	</bean>
 	<bean id="com.liferay.portal.service.EmailAddressServiceFactory" class="com.liferay.portal.service.EmailAddressServiceFactory" lazy-init="true">
+		<property name="service">
+			<ref bean="com.liferay.portal.service.EmailAddressService.transaction" />
+		</property>
+	</bean>
+	<bean id="com.liferay.portal.service.EmailAddressServiceUtil" class="com.liferay.portal.service.EmailAddressServiceUtil" lazy-init="true">
 		<property name="service">
 			<ref bean="com.liferay.portal.service.EmailAddressService.transaction" />
 		</property>
@@ -695,6 +760,11 @@
 			<ref bean="com.liferay.portal.service.GroupLocalService.transaction" />
 		</property>
 	</bean>
+	<bean id="com.liferay.portal.service.GroupLocalServiceUtil" class="com.liferay.portal.service.GroupLocalServiceUtil" lazy-init="true">
+		<property name="service">
+			<ref bean="com.liferay.portal.service.GroupLocalService.transaction" />
+		</property>
+	</bean>
 	<bean id="com.liferay.portal.service.GroupService.impl" class="com.liferay.portal.service.impl.GroupServiceImpl" lazy-init="true" />
 	<bean id="com.liferay.portal.service.GroupService.transaction" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean" lazy-init="true">
 		<property name="transactionManager">
@@ -726,6 +796,11 @@
 		</property>
 	</bean>
 	<bean id="com.liferay.portal.service.GroupServiceFactory" class="com.liferay.portal.service.GroupServiceFactory" lazy-init="true">
+		<property name="service">
+			<ref bean="com.liferay.portal.service.GroupService.transaction" />
+		</property>
+	</bean>
+	<bean id="com.liferay.portal.service.GroupServiceUtil" class="com.liferay.portal.service.GroupServiceUtil" lazy-init="true">
 		<property name="service">
 			<ref bean="com.liferay.portal.service.GroupService.transaction" />
 		</property>
@@ -807,6 +882,11 @@
 			<ref bean="com.liferay.portal.service.ImageLocalService.transaction" />
 		</property>
 	</bean>
+	<bean id="com.liferay.portal.service.ImageLocalServiceUtil" class="com.liferay.portal.service.ImageLocalServiceUtil" lazy-init="true">
+		<property name="service">
+			<ref bean="com.liferay.portal.service.ImageLocalService.transaction" />
+		</property>
+	</bean>
 	<bean id="com.liferay.portal.service.persistence.ImagePersistence.impl" class="com.liferay.portal.service.persistence.ImagePersistenceImpl" lazy-init="true">
 		<property name="dataSource">
 			<ref bean="liferayDataSource" />
@@ -871,6 +951,11 @@
 			<ref bean="com.liferay.portal.service.LayoutLocalService.transaction" />
 		</property>
 	</bean>
+	<bean id="com.liferay.portal.service.LayoutLocalServiceUtil" class="com.liferay.portal.service.LayoutLocalServiceUtil" lazy-init="true">
+		<property name="service">
+			<ref bean="com.liferay.portal.service.LayoutLocalService.transaction" />
+		</property>
+	</bean>
 	<bean id="com.liferay.portal.service.LayoutService.impl" class="com.liferay.portal.service.impl.LayoutServiceImpl" lazy-init="true" />
 	<bean id="com.liferay.portal.service.LayoutService.transaction" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean" lazy-init="true">
 		<property name="transactionManager">
@@ -902,6 +987,11 @@
 		</property>
 	</bean>
 	<bean id="com.liferay.portal.service.LayoutServiceFactory" class="com.liferay.portal.service.LayoutServiceFactory" lazy-init="true">
+		<property name="service">
+			<ref bean="com.liferay.portal.service.LayoutService.transaction" />
+		</property>
+	</bean>
+	<bean id="com.liferay.portal.service.LayoutServiceUtil" class="com.liferay.portal.service.LayoutServiceUtil" lazy-init="true">
 		<property name="service">
 			<ref bean="com.liferay.portal.service.LayoutService.transaction" />
 		</property>
@@ -983,6 +1073,11 @@
 			<ref bean="com.liferay.portal.service.LayoutSetLocalService.transaction" />
 		</property>
 	</bean>
+	<bean id="com.liferay.portal.service.LayoutSetLocalServiceUtil" class="com.liferay.portal.service.LayoutSetLocalServiceUtil" lazy-init="true">
+		<property name="service">
+			<ref bean="com.liferay.portal.service.LayoutSetLocalService.transaction" />
+		</property>
+	</bean>
 	<bean id="com.liferay.portal.service.LayoutSetService.impl" class="com.liferay.portal.service.impl.LayoutSetServiceImpl" lazy-init="true" />
 	<bean id="com.liferay.portal.service.LayoutSetService.transaction" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean" lazy-init="true">
 		<property name="transactionManager">
@@ -1014,6 +1109,11 @@
 		</property>
 	</bean>
 	<bean id="com.liferay.portal.service.LayoutSetServiceFactory" class="com.liferay.portal.service.LayoutSetServiceFactory" lazy-init="true">
+		<property name="service">
+			<ref bean="com.liferay.portal.service.LayoutSetService.transaction" />
+		</property>
+	</bean>
+	<bean id="com.liferay.portal.service.LayoutSetServiceUtil" class="com.liferay.portal.service.LayoutSetServiceUtil" lazy-init="true">
 		<property name="service">
 			<ref bean="com.liferay.portal.service.LayoutSetService.transaction" />
 		</property>
@@ -1063,6 +1163,11 @@
 			<ref bean="com.liferay.portal.service.LayoutTemplateLocalService.impl" />
 		</property>
 	</bean>
+	<bean id="com.liferay.portal.service.LayoutTemplateLocalServiceUtil" class="com.liferay.portal.service.LayoutTemplateLocalServiceUtil" lazy-init="true">
+		<property name="service">
+			<ref bean="com.liferay.portal.service.LayoutTemplateLocalService.impl" />
+		</property>
+	</bean>
 	<bean id="com.liferay.portal.service.ListTypeService.impl" class="com.liferay.portal.service.impl.ListTypeServiceImpl" lazy-init="true" />
 	<bean id="com.liferay.portal.service.ListTypeService.transaction" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean" lazy-init="true">
 		<property name="transactionManager">
@@ -1094,6 +1199,11 @@
 		</property>
 	</bean>
 	<bean id="com.liferay.portal.service.ListTypeServiceFactory" class="com.liferay.portal.service.ListTypeServiceFactory" lazy-init="true">
+		<property name="service">
+			<ref bean="com.liferay.portal.service.ListTypeService.transaction" />
+		</property>
+	</bean>
+	<bean id="com.liferay.portal.service.ListTypeServiceUtil" class="com.liferay.portal.service.ListTypeServiceUtil" lazy-init="true">
 		<property name="service">
 			<ref bean="com.liferay.portal.service.ListTypeService.transaction" />
 		</property>
@@ -1162,6 +1272,11 @@
 			<ref bean="com.liferay.portal.service.MembershipRequestLocalService.transaction" />
 		</property>
 	</bean>
+	<bean id="com.liferay.portal.service.MembershipRequestLocalServiceUtil" class="com.liferay.portal.service.MembershipRequestLocalServiceUtil" lazy-init="true">
+		<property name="service">
+			<ref bean="com.liferay.portal.service.MembershipRequestLocalService.transaction" />
+		</property>
+	</bean>
 	<bean id="com.liferay.portal.service.MembershipRequestService.impl" class="com.liferay.portal.service.impl.MembershipRequestServiceImpl" lazy-init="true" />
 	<bean id="com.liferay.portal.service.MembershipRequestService.transaction" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean" lazy-init="true">
 		<property name="transactionManager">
@@ -1193,6 +1308,11 @@
 		</property>
 	</bean>
 	<bean id="com.liferay.portal.service.MembershipRequestServiceFactory" class="com.liferay.portal.service.MembershipRequestServiceFactory" lazy-init="true">
+		<property name="service">
+			<ref bean="com.liferay.portal.service.MembershipRequestService.transaction" />
+		</property>
+	</bean>
+	<bean id="com.liferay.portal.service.MembershipRequestServiceUtil" class="com.liferay.portal.service.MembershipRequestServiceUtil" lazy-init="true">
 		<property name="service">
 			<ref bean="com.liferay.portal.service.MembershipRequestService.transaction" />
 		</property>
@@ -1261,6 +1381,11 @@
 			<ref bean="com.liferay.portal.service.OrganizationLocalService.transaction" />
 		</property>
 	</bean>
+	<bean id="com.liferay.portal.service.OrganizationLocalServiceUtil" class="com.liferay.portal.service.OrganizationLocalServiceUtil" lazy-init="true">
+		<property name="service">
+			<ref bean="com.liferay.portal.service.OrganizationLocalService.transaction" />
+		</property>
+	</bean>
 	<bean id="com.liferay.portal.service.OrganizationService.impl" class="com.liferay.portal.service.impl.OrganizationServiceImpl" lazy-init="true" />
 	<bean id="com.liferay.portal.service.OrganizationService.transaction" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean" lazy-init="true">
 		<property name="transactionManager">
@@ -1292,6 +1417,11 @@
 		</property>
 	</bean>
 	<bean id="com.liferay.portal.service.OrganizationServiceFactory" class="com.liferay.portal.service.OrganizationServiceFactory" lazy-init="true">
+		<property name="service">
+			<ref bean="com.liferay.portal.service.OrganizationService.transaction" />
+		</property>
+	</bean>
+	<bean id="com.liferay.portal.service.OrganizationServiceUtil" class="com.liferay.portal.service.OrganizationServiceUtil" lazy-init="true">
 		<property name="service">
 			<ref bean="com.liferay.portal.service.OrganizationService.transaction" />
 		</property>
@@ -1444,6 +1574,11 @@
 			<ref bean="com.liferay.portal.service.OrgLaborLocalService.transaction" />
 		</property>
 	</bean>
+	<bean id="com.liferay.portal.service.OrgLaborLocalServiceUtil" class="com.liferay.portal.service.OrgLaborLocalServiceUtil" lazy-init="true">
+		<property name="service">
+			<ref bean="com.liferay.portal.service.OrgLaborLocalService.transaction" />
+		</property>
+	</bean>
 	<bean id="com.liferay.portal.service.OrgLaborService.impl" class="com.liferay.portal.service.impl.OrgLaborServiceImpl" lazy-init="true" />
 	<bean id="com.liferay.portal.service.OrgLaborService.transaction" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean" lazy-init="true">
 		<property name="transactionManager">
@@ -1475,6 +1610,11 @@
 		</property>
 	</bean>
 	<bean id="com.liferay.portal.service.OrgLaborServiceFactory" class="com.liferay.portal.service.OrgLaborServiceFactory" lazy-init="true">
+		<property name="service">
+			<ref bean="com.liferay.portal.service.OrgLaborService.transaction" />
+		</property>
+	</bean>
+	<bean id="com.liferay.portal.service.OrgLaborServiceUtil" class="com.liferay.portal.service.OrgLaborServiceUtil" lazy-init="true">
 		<property name="service">
 			<ref bean="com.liferay.portal.service.OrgLaborService.transaction" />
 		</property>
@@ -1543,6 +1683,11 @@
 			<ref bean="com.liferay.portal.service.PasswordPolicyLocalService.transaction" />
 		</property>
 	</bean>
+	<bean id="com.liferay.portal.service.PasswordPolicyLocalServiceUtil" class="com.liferay.portal.service.PasswordPolicyLocalServiceUtil" lazy-init="true">
+		<property name="service">
+			<ref bean="com.liferay.portal.service.PasswordPolicyLocalService.transaction" />
+		</property>
+	</bean>
 	<bean id="com.liferay.portal.service.PasswordPolicyService.impl" class="com.liferay.portal.service.impl.PasswordPolicyServiceImpl" lazy-init="true" />
 	<bean id="com.liferay.portal.service.PasswordPolicyService.transaction" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean" lazy-init="true">
 		<property name="transactionManager">
@@ -1574,6 +1719,11 @@
 		</property>
 	</bean>
 	<bean id="com.liferay.portal.service.PasswordPolicyServiceFactory" class="com.liferay.portal.service.PasswordPolicyServiceFactory" lazy-init="true">
+		<property name="service">
+			<ref bean="com.liferay.portal.service.PasswordPolicyService.transaction" />
+		</property>
+	</bean>
+	<bean id="com.liferay.portal.service.PasswordPolicyServiceUtil" class="com.liferay.portal.service.PasswordPolicyServiceUtil" lazy-init="true">
 		<property name="service">
 			<ref bean="com.liferay.portal.service.PasswordPolicyService.transaction" />
 		</property>
@@ -1655,6 +1805,11 @@
 			<ref bean="com.liferay.portal.service.PasswordPolicyRelLocalService.transaction" />
 		</property>
 	</bean>
+	<bean id="com.liferay.portal.service.PasswordPolicyRelLocalServiceUtil" class="com.liferay.portal.service.PasswordPolicyRelLocalServiceUtil" lazy-init="true">
+		<property name="service">
+			<ref bean="com.liferay.portal.service.PasswordPolicyRelLocalService.transaction" />
+		</property>
+	</bean>
 	<bean id="com.liferay.portal.service.persistence.PasswordPolicyRelPersistence.impl" class="com.liferay.portal.service.persistence.PasswordPolicyRelPersistenceImpl" lazy-init="true">
 		<property name="dataSource">
 			<ref bean="liferayDataSource" />
@@ -1715,6 +1870,11 @@
 		</property>
 	</bean>
 	<bean id="com.liferay.portal.service.PasswordTrackerLocalServiceFactory" class="com.liferay.portal.service.PasswordTrackerLocalServiceFactory" lazy-init="true">
+		<property name="service">
+			<ref bean="com.liferay.portal.service.PasswordTrackerLocalService.transaction" />
+		</property>
+	</bean>
+	<bean id="com.liferay.portal.service.PasswordTrackerLocalServiceUtil" class="com.liferay.portal.service.PasswordTrackerLocalServiceUtil" lazy-init="true">
 		<property name="service">
 			<ref bean="com.liferay.portal.service.PasswordTrackerLocalService.transaction" />
 		</property>
@@ -1783,6 +1943,11 @@
 			<ref bean="com.liferay.portal.service.PermissionLocalService.transaction" />
 		</property>
 	</bean>
+	<bean id="com.liferay.portal.service.PermissionLocalServiceUtil" class="com.liferay.portal.service.PermissionLocalServiceUtil" lazy-init="true">
+		<property name="service">
+			<ref bean="com.liferay.portal.service.PermissionLocalService.transaction" />
+		</property>
+	</bean>
 	<bean id="com.liferay.portal.service.PermissionService.impl" class="com.liferay.portal.service.impl.PermissionServiceImpl" lazy-init="true" />
 	<bean id="com.liferay.portal.service.PermissionService.transaction" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean" lazy-init="true">
 		<property name="transactionManager">
@@ -1814,6 +1979,11 @@
 		</property>
 	</bean>
 	<bean id="com.liferay.portal.service.PermissionServiceFactory" class="com.liferay.portal.service.PermissionServiceFactory" lazy-init="true">
+		<property name="service">
+			<ref bean="com.liferay.portal.service.PermissionService.transaction" />
+		</property>
+	</bean>
+	<bean id="com.liferay.portal.service.PermissionServiceUtil" class="com.liferay.portal.service.PermissionServiceUtil" lazy-init="true">
 		<property name="service">
 			<ref bean="com.liferay.portal.service.PermissionService.transaction" />
 		</property>
@@ -1908,6 +2078,11 @@
 			<ref bean="com.liferay.portal.service.PhoneLocalService.transaction" />
 		</property>
 	</bean>
+	<bean id="com.liferay.portal.service.PhoneLocalServiceUtil" class="com.liferay.portal.service.PhoneLocalServiceUtil" lazy-init="true">
+		<property name="service">
+			<ref bean="com.liferay.portal.service.PhoneLocalService.transaction" />
+		</property>
+	</bean>
 	<bean id="com.liferay.portal.service.PhoneService.impl" class="com.liferay.portal.service.impl.PhoneServiceImpl" lazy-init="true" />
 	<bean id="com.liferay.portal.service.PhoneService.transaction" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean" lazy-init="true">
 		<property name="transactionManager">
@@ -1939,6 +2114,11 @@
 		</property>
 	</bean>
 	<bean id="com.liferay.portal.service.PhoneServiceFactory" class="com.liferay.portal.service.PhoneServiceFactory" lazy-init="true">
+		<property name="service">
+			<ref bean="com.liferay.portal.service.PhoneService.transaction" />
+		</property>
+	</bean>
+	<bean id="com.liferay.portal.service.PhoneServiceUtil" class="com.liferay.portal.service.PhoneServiceUtil" lazy-init="true">
 		<property name="service">
 			<ref bean="com.liferay.portal.service.PhoneService.transaction" />
 		</property>
@@ -2007,6 +2187,11 @@
 			<ref bean="com.liferay.portal.service.PortalService.transaction" />
 		</property>
 	</bean>
+	<bean id="com.liferay.portal.service.PortalServiceUtil" class="com.liferay.portal.service.PortalServiceUtil" lazy-init="true">
+		<property name="service">
+			<ref bean="com.liferay.portal.service.PortalService.transaction" />
+		</property>
+	</bean>
 	<bean id="com.liferay.portal.service.PluginSettingLocalService.impl" class="com.liferay.portal.service.impl.PluginSettingLocalServiceImpl" lazy-init="true" />
 	<bean id="com.liferay.portal.service.PluginSettingLocalService.transaction" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean" lazy-init="true">
 		<property name="transactionManager">
@@ -2042,6 +2227,11 @@
 			<ref bean="com.liferay.portal.service.PluginSettingLocalService.transaction" />
 		</property>
 	</bean>
+	<bean id="com.liferay.portal.service.PluginSettingLocalServiceUtil" class="com.liferay.portal.service.PluginSettingLocalServiceUtil" lazy-init="true">
+		<property name="service">
+			<ref bean="com.liferay.portal.service.PluginSettingLocalService.transaction" />
+		</property>
+	</bean>
 	<bean id="com.liferay.portal.service.PluginSettingService.impl" class="com.liferay.portal.service.impl.PluginSettingServiceImpl" lazy-init="true" />
 	<bean id="com.liferay.portal.service.PluginSettingService.transaction" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean" lazy-init="true">
 		<property name="transactionManager">
@@ -2073,6 +2263,11 @@
 		</property>
 	</bean>
 	<bean id="com.liferay.portal.service.PluginSettingServiceFactory" class="com.liferay.portal.service.PluginSettingServiceFactory" lazy-init="true">
+		<property name="service">
+			<ref bean="com.liferay.portal.service.PluginSettingService.transaction" />
+		</property>
+	</bean>
+	<bean id="com.liferay.portal.service.PluginSettingServiceUtil" class="com.liferay.portal.service.PluginSettingServiceUtil" lazy-init="true">
 		<property name="service">
 			<ref bean="com.liferay.portal.service.PluginSettingService.transaction" />
 		</property>
@@ -2141,6 +2336,11 @@
 			<ref bean="com.liferay.portal.service.PortletLocalService.transaction" />
 		</property>
 	</bean>
+	<bean id="com.liferay.portal.service.PortletLocalServiceUtil" class="com.liferay.portal.service.PortletLocalServiceUtil" lazy-init="true">
+		<property name="service">
+			<ref bean="com.liferay.portal.service.PortletLocalService.transaction" />
+		</property>
+	</bean>
 	<bean id="com.liferay.portal.service.PortletService.impl" class="com.liferay.portal.service.impl.PortletServiceImpl" lazy-init="true" />
 	<bean id="com.liferay.portal.service.PortletService.transaction" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean" lazy-init="true">
 		<property name="transactionManager">
@@ -2172,6 +2372,11 @@
 		</property>
 	</bean>
 	<bean id="com.liferay.portal.service.PortletServiceFactory" class="com.liferay.portal.service.PortletServiceFactory" lazy-init="true">
+		<property name="service">
+			<ref bean="com.liferay.portal.service.PortletService.transaction" />
+		</property>
+	</bean>
+	<bean id="com.liferay.portal.service.PortletServiceUtil" class="com.liferay.portal.service.PortletServiceUtil" lazy-init="true">
 		<property name="service">
 			<ref bean="com.liferay.portal.service.PortletService.transaction" />
 		</property>
@@ -2240,6 +2445,11 @@
 			<ref bean="com.liferay.portal.service.PortletPreferencesLocalService.transaction" />
 		</property>
 	</bean>
+	<bean id="com.liferay.portal.service.PortletPreferencesLocalServiceUtil" class="com.liferay.portal.service.PortletPreferencesLocalServiceUtil" lazy-init="true">
+		<property name="service">
+			<ref bean="com.liferay.portal.service.PortletPreferencesLocalService.transaction" />
+		</property>
+	</bean>
 	<bean id="com.liferay.portal.service.PortletPreferencesService.impl" class="com.liferay.portal.service.impl.PortletPreferencesServiceImpl" lazy-init="true" />
 	<bean id="com.liferay.portal.service.PortletPreferencesService.transaction" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean" lazy-init="true">
 		<property name="transactionManager">
@@ -2271,6 +2481,11 @@
 		</property>
 	</bean>
 	<bean id="com.liferay.portal.service.PortletPreferencesServiceFactory" class="com.liferay.portal.service.PortletPreferencesServiceFactory" lazy-init="true">
+		<property name="service">
+			<ref bean="com.liferay.portal.service.PortletPreferencesService.transaction" />
+		</property>
+	</bean>
+	<bean id="com.liferay.portal.service.PortletPreferencesServiceUtil" class="com.liferay.portal.service.PortletPreferencesServiceUtil" lazy-init="true">
 		<property name="service">
 			<ref bean="com.liferay.portal.service.PortletPreferencesService.transaction" />
 		</property>
@@ -2352,6 +2567,11 @@
 			<ref bean="com.liferay.portal.service.RegionService.transaction" />
 		</property>
 	</bean>
+	<bean id="com.liferay.portal.service.RegionServiceUtil" class="com.liferay.portal.service.RegionServiceUtil" lazy-init="true">
+		<property name="service">
+			<ref bean="com.liferay.portal.service.RegionService.transaction" />
+		</property>
+	</bean>
 	<bean id="com.liferay.portal.service.persistence.RegionPersistence.impl" class="com.liferay.portal.service.persistence.RegionPersistenceImpl" lazy-init="true">
 		<property name="dataSource">
 			<ref bean="liferayDataSource" />
@@ -2412,6 +2632,11 @@
 		</property>
 	</bean>
 	<bean id="com.liferay.portal.service.ReleaseLocalServiceFactory" class="com.liferay.portal.service.ReleaseLocalServiceFactory" lazy-init="true">
+		<property name="service">
+			<ref bean="com.liferay.portal.service.ReleaseLocalService.transaction" />
+		</property>
+	</bean>
+	<bean id="com.liferay.portal.service.ReleaseLocalServiceUtil" class="com.liferay.portal.service.ReleaseLocalServiceUtil" lazy-init="true">
 		<property name="service">
 			<ref bean="com.liferay.portal.service.ReleaseLocalService.transaction" />
 		</property>
@@ -2480,6 +2705,11 @@
 			<ref bean="com.liferay.portal.service.ResourceLocalService.transaction" />
 		</property>
 	</bean>
+	<bean id="com.liferay.portal.service.ResourceLocalServiceUtil" class="com.liferay.portal.service.ResourceLocalServiceUtil" lazy-init="true">
+		<property name="service">
+			<ref bean="com.liferay.portal.service.ResourceLocalService.transaction" />
+		</property>
+	</bean>
 	<bean id="com.liferay.portal.service.ResourceService.impl" class="com.liferay.portal.service.impl.ResourceServiceImpl" lazy-init="true" />
 	<bean id="com.liferay.portal.service.ResourceService.transaction" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean" lazy-init="true">
 		<property name="transactionManager">
@@ -2511,6 +2741,11 @@
 		</property>
 	</bean>
 	<bean id="com.liferay.portal.service.ResourceServiceFactory" class="com.liferay.portal.service.ResourceServiceFactory" lazy-init="true">
+		<property name="service">
+			<ref bean="com.liferay.portal.service.ResourceService.transaction" />
+		</property>
+	</bean>
+	<bean id="com.liferay.portal.service.ResourceServiceUtil" class="com.liferay.portal.service.ResourceServiceUtil" lazy-init="true">
 		<property name="service">
 			<ref bean="com.liferay.portal.service.ResourceService.transaction" />
 		</property>
@@ -2592,6 +2827,11 @@
 			<ref bean="com.liferay.portal.service.ResourceCodeLocalService.transaction" />
 		</property>
 	</bean>
+	<bean id="com.liferay.portal.service.ResourceCodeLocalServiceUtil" class="com.liferay.portal.service.ResourceCodeLocalServiceUtil" lazy-init="true">
+		<property name="service">
+			<ref bean="com.liferay.portal.service.ResourceCodeLocalService.transaction" />
+		</property>
+	</bean>
 	<bean id="com.liferay.portal.service.persistence.ResourceCodePersistence.impl" class="com.liferay.portal.service.persistence.ResourceCodePersistenceImpl" lazy-init="true">
 		<property name="dataSource">
 			<ref bean="liferayDataSource" />
@@ -2656,6 +2896,11 @@
 			<ref bean="com.liferay.portal.service.RoleLocalService.transaction" />
 		</property>
 	</bean>
+	<bean id="com.liferay.portal.service.RoleLocalServiceUtil" class="com.liferay.portal.service.RoleLocalServiceUtil" lazy-init="true">
+		<property name="service">
+			<ref bean="com.liferay.portal.service.RoleLocalService.transaction" />
+		</property>
+	</bean>
 	<bean id="com.liferay.portal.service.RoleService.impl" class="com.liferay.portal.service.impl.RoleServiceImpl" lazy-init="true" />
 	<bean id="com.liferay.portal.service.RoleService.transaction" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean" lazy-init="true">
 		<property name="transactionManager">
@@ -2687,6 +2932,11 @@
 		</property>
 	</bean>
 	<bean id="com.liferay.portal.service.RoleServiceFactory" class="com.liferay.portal.service.RoleServiceFactory" lazy-init="true">
+		<property name="service">
+			<ref bean="com.liferay.portal.service.RoleService.transaction" />
+		</property>
+	</bean>
+	<bean id="com.liferay.portal.service.RoleServiceUtil" class="com.liferay.portal.service.RoleServiceUtil" lazy-init="true">
 		<property name="service">
 			<ref bean="com.liferay.portal.service.RoleService.transaction" />
 		</property>
@@ -2768,6 +3018,11 @@
 			<ref bean="com.liferay.portal.service.ServiceComponentLocalService.transaction" />
 		</property>
 	</bean>
+	<bean id="com.liferay.portal.service.ServiceComponentLocalServiceUtil" class="com.liferay.portal.service.ServiceComponentLocalServiceUtil" lazy-init="true">
+		<property name="service">
+			<ref bean="com.liferay.portal.service.ServiceComponentLocalService.transaction" />
+		</property>
+	</bean>
 	<bean id="com.liferay.portal.service.persistence.ServiceComponentPersistence.impl" class="com.liferay.portal.service.persistence.ServiceComponentPersistenceImpl" lazy-init="true">
 		<property name="dataSource">
 			<ref bean="liferayDataSource" />
@@ -2828,6 +3083,11 @@
 		</property>
 	</bean>
 	<bean id="com.liferay.portal.service.PortletItemLocalServiceFactory" class="com.liferay.portal.service.PortletItemLocalServiceFactory" lazy-init="true">
+		<property name="service">
+			<ref bean="com.liferay.portal.service.PortletItemLocalService.transaction" />
+		</property>
+	</bean>
+	<bean id="com.liferay.portal.service.PortletItemLocalServiceUtil" class="com.liferay.portal.service.PortletItemLocalServiceUtil" lazy-init="true">
 		<property name="service">
 			<ref bean="com.liferay.portal.service.PortletItemLocalService.transaction" />
 		</property>
@@ -2896,6 +3156,11 @@
 			<ref bean="com.liferay.portal.service.SubscriptionLocalService.transaction" />
 		</property>
 	</bean>
+	<bean id="com.liferay.portal.service.SubscriptionLocalServiceUtil" class="com.liferay.portal.service.SubscriptionLocalServiceUtil" lazy-init="true">
+		<property name="service">
+			<ref bean="com.liferay.portal.service.SubscriptionLocalService.transaction" />
+		</property>
+	</bean>
 	<bean id="com.liferay.portal.service.persistence.SubscriptionPersistence.impl" class="com.liferay.portal.service.persistence.SubscriptionPersistenceImpl" lazy-init="true">
 		<property name="dataSource">
 			<ref bean="liferayDataSource" />
@@ -2941,6 +3206,11 @@
 			<ref bean="com.liferay.portal.service.ThemeLocalService.impl" />
 		</property>
 	</bean>
+	<bean id="com.liferay.portal.service.ThemeLocalServiceUtil" class="com.liferay.portal.service.ThemeLocalServiceUtil" lazy-init="true">
+		<property name="service">
+			<ref bean="com.liferay.portal.service.ThemeLocalService.impl" />
+		</property>
+	</bean>
 	<bean id="com.liferay.portal.service.UserLocalService.impl" class="com.liferay.portal.service.impl.UserLocalServiceImpl" lazy-init="true" />
 	<bean id="com.liferay.portal.service.UserLocalService.transaction" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean" lazy-init="true">
 		<property name="transactionManager">
@@ -2977,6 +3247,11 @@
 			<ref bean="com.liferay.portal.service.UserLocalService.transaction" />
 		</property>
 	</bean>
+	<bean id="com.liferay.portal.service.UserLocalServiceUtil" class="com.liferay.portal.service.UserLocalServiceUtil" lazy-init="true">
+		<property name="service">
+			<ref bean="com.liferay.portal.service.UserLocalService.transaction" />
+		</property>
+	</bean>
 	<bean id="com.liferay.portal.service.UserService.impl" class="com.liferay.portal.service.impl.UserServiceImpl" lazy-init="true" />
 	<bean id="com.liferay.portal.service.UserService.transaction" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean" lazy-init="true">
 		<property name="transactionManager">
@@ -3009,6 +3284,11 @@
 		</property>
 	</bean>
 	<bean id="com.liferay.portal.service.UserServiceFactory" class="com.liferay.portal.service.UserServiceFactory" lazy-init="true">
+		<property name="service">
+			<ref bean="com.liferay.portal.service.UserService.transaction" />
+		</property>
+	</bean>
+	<bean id="com.liferay.portal.service.UserServiceUtil" class="com.liferay.portal.service.UserServiceUtil" lazy-init="true">
 		<property name="service">
 			<ref bean="com.liferay.portal.service.UserService.transaction" />
 		</property>
@@ -3090,6 +3370,11 @@
 			<ref bean="com.liferay.portal.service.UserGroupLocalService.transaction" />
 		</property>
 	</bean>
+	<bean id="com.liferay.portal.service.UserGroupLocalServiceUtil" class="com.liferay.portal.service.UserGroupLocalServiceUtil" lazy-init="true">
+		<property name="service">
+			<ref bean="com.liferay.portal.service.UserGroupLocalService.transaction" />
+		</property>
+	</bean>
 	<bean id="com.liferay.portal.service.UserGroupService.impl" class="com.liferay.portal.service.impl.UserGroupServiceImpl" lazy-init="true" />
 	<bean id="com.liferay.portal.service.UserGroupService.transaction" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean" lazy-init="true">
 		<property name="transactionManager">
@@ -3121,6 +3406,11 @@
 		</property>
 	</bean>
 	<bean id="com.liferay.portal.service.UserGroupServiceFactory" class="com.liferay.portal.service.UserGroupServiceFactory" lazy-init="true">
+		<property name="service">
+			<ref bean="com.liferay.portal.service.UserGroupService.transaction" />
+		</property>
+	</bean>
+	<bean id="com.liferay.portal.service.UserGroupServiceUtil" class="com.liferay.portal.service.UserGroupServiceUtil" lazy-init="true">
 		<property name="service">
 			<ref bean="com.liferay.portal.service.UserGroupService.transaction" />
 		</property>
@@ -3202,6 +3492,11 @@
 			<ref bean="com.liferay.portal.service.UserGroupRoleLocalService.transaction" />
 		</property>
 	</bean>
+	<bean id="com.liferay.portal.service.UserGroupRoleLocalServiceUtil" class="com.liferay.portal.service.UserGroupRoleLocalServiceUtil" lazy-init="true">
+		<property name="service">
+			<ref bean="com.liferay.portal.service.UserGroupRoleLocalService.transaction" />
+		</property>
+	</bean>
 	<bean id="com.liferay.portal.service.UserGroupRoleService.impl" class="com.liferay.portal.service.impl.UserGroupRoleServiceImpl" lazy-init="true" />
 	<bean id="com.liferay.portal.service.UserGroupRoleService.transaction" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean" lazy-init="true">
 		<property name="transactionManager">
@@ -3233,6 +3528,11 @@
 		</property>
 	</bean>
 	<bean id="com.liferay.portal.service.UserGroupRoleServiceFactory" class="com.liferay.portal.service.UserGroupRoleServiceFactory" lazy-init="true">
+		<property name="service">
+			<ref bean="com.liferay.portal.service.UserGroupRoleService.transaction" />
+		</property>
+	</bean>
+	<bean id="com.liferay.portal.service.UserGroupRoleServiceUtil" class="com.liferay.portal.service.UserGroupRoleServiceUtil" lazy-init="true">
 		<property name="service">
 			<ref bean="com.liferay.portal.service.UserGroupRoleService.transaction" />
 		</property>
@@ -3301,6 +3601,11 @@
 			<ref bean="com.liferay.portal.service.UserIdMapperLocalService.transaction" />
 		</property>
 	</bean>
+	<bean id="com.liferay.portal.service.UserIdMapperLocalServiceUtil" class="com.liferay.portal.service.UserIdMapperLocalServiceUtil" lazy-init="true">
+		<property name="service">
+			<ref bean="com.liferay.portal.service.UserIdMapperLocalService.transaction" />
+		</property>
+	</bean>
 	<bean id="com.liferay.portal.service.persistence.UserIdMapperPersistence.impl" class="com.liferay.portal.service.persistence.UserIdMapperPersistenceImpl" lazy-init="true">
 		<property name="dataSource">
 			<ref bean="liferayDataSource" />
@@ -3361,6 +3666,11 @@
 		</property>
 	</bean>
 	<bean id="com.liferay.portal.service.UserTrackerLocalServiceFactory" class="com.liferay.portal.service.UserTrackerLocalServiceFactory" lazy-init="true">
+		<property name="service">
+			<ref bean="com.liferay.portal.service.UserTrackerLocalService.transaction" />
+		</property>
+	</bean>
+	<bean id="com.liferay.portal.service.UserTrackerLocalServiceUtil" class="com.liferay.portal.service.UserTrackerLocalServiceUtil" lazy-init="true">
 		<property name="service">
 			<ref bean="com.liferay.portal.service.UserTrackerLocalService.transaction" />
 		</property>
@@ -3429,6 +3739,11 @@
 			<ref bean="com.liferay.portal.service.UserTrackerPathLocalService.transaction" />
 		</property>
 	</bean>
+	<bean id="com.liferay.portal.service.UserTrackerPathLocalServiceUtil" class="com.liferay.portal.service.UserTrackerPathLocalServiceUtil" lazy-init="true">
+		<property name="service">
+			<ref bean="com.liferay.portal.service.UserTrackerPathLocalService.transaction" />
+		</property>
+	</bean>
 	<bean id="com.liferay.portal.service.persistence.UserTrackerPathPersistence.impl" class="com.liferay.portal.service.persistence.UserTrackerPathPersistenceImpl" lazy-init="true">
 		<property name="dataSource">
 			<ref bean="liferayDataSource" />
@@ -3489,6 +3804,11 @@
 		</property>
 	</bean>
 	<bean id="com.liferay.portal.service.WebDAVPropsLocalServiceFactory" class="com.liferay.portal.service.WebDAVPropsLocalServiceFactory" lazy-init="true">
+		<property name="service">
+			<ref bean="com.liferay.portal.service.WebDAVPropsLocalService.transaction" />
+		</property>
+	</bean>
+	<bean id="com.liferay.portal.service.WebDAVPropsLocalServiceUtil" class="com.liferay.portal.service.WebDAVPropsLocalServiceUtil" lazy-init="true">
 		<property name="service">
 			<ref bean="com.liferay.portal.service.WebDAVPropsLocalService.transaction" />
 		</property>
@@ -3557,6 +3877,11 @@
 			<ref bean="com.liferay.portal.service.WebsiteLocalService.transaction" />
 		</property>
 	</bean>
+	<bean id="com.liferay.portal.service.WebsiteLocalServiceUtil" class="com.liferay.portal.service.WebsiteLocalServiceUtil" lazy-init="true">
+		<property name="service">
+			<ref bean="com.liferay.portal.service.WebsiteLocalService.transaction" />
+		</property>
+	</bean>
 	<bean id="com.liferay.portal.service.WebsiteService.impl" class="com.liferay.portal.service.impl.WebsiteServiceImpl" lazy-init="true" />
 	<bean id="com.liferay.portal.service.WebsiteService.transaction" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean" lazy-init="true">
 		<property name="transactionManager">
@@ -3588,6 +3913,11 @@
 		</property>
 	</bean>
 	<bean id="com.liferay.portal.service.WebsiteServiceFactory" class="com.liferay.portal.service.WebsiteServiceFactory" lazy-init="true">
+		<property name="service">
+			<ref bean="com.liferay.portal.service.WebsiteService.transaction" />
+		</property>
+	</bean>
+	<bean id="com.liferay.portal.service.WebsiteServiceUtil" class="com.liferay.portal.service.WebsiteServiceUtil" lazy-init="true">
 		<property name="service">
 			<ref bean="com.liferay.portal.service.WebsiteService.transaction" />
 		</property>
@@ -3656,6 +3986,11 @@
 			<ref bean="com.liferay.portlet.announcements.service.AnnouncementsDeliveryLocalService.transaction" />
 		</property>
 	</bean>
+	<bean id="com.liferay.portlet.announcements.service.AnnouncementsDeliveryLocalServiceUtil" class="com.liferay.portlet.announcements.service.AnnouncementsDeliveryLocalServiceUtil" lazy-init="true">
+		<property name="service">
+			<ref bean="com.liferay.portlet.announcements.service.AnnouncementsDeliveryLocalService.transaction" />
+		</property>
+	</bean>
 	<bean id="com.liferay.portlet.announcements.service.AnnouncementsDeliveryService.impl" class="com.liferay.portlet.announcements.service.impl.AnnouncementsDeliveryServiceImpl" lazy-init="true" />
 	<bean id="com.liferay.portlet.announcements.service.AnnouncementsDeliveryService.transaction" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean" lazy-init="true">
 		<property name="transactionManager">
@@ -3687,6 +4022,11 @@
 		</property>
 	</bean>
 	<bean id="com.liferay.portlet.announcements.service.AnnouncementsDeliveryServiceFactory" class="com.liferay.portlet.announcements.service.AnnouncementsDeliveryServiceFactory" lazy-init="true">
+		<property name="service">
+			<ref bean="com.liferay.portlet.announcements.service.AnnouncementsDeliveryService.transaction" />
+		</property>
+	</bean>
+	<bean id="com.liferay.portlet.announcements.service.AnnouncementsDeliveryServiceUtil" class="com.liferay.portlet.announcements.service.AnnouncementsDeliveryServiceUtil" lazy-init="true">
 		<property name="service">
 			<ref bean="com.liferay.portlet.announcements.service.AnnouncementsDeliveryService.transaction" />
 		</property>
@@ -3755,6 +4095,11 @@
 			<ref bean="com.liferay.portlet.announcements.service.AnnouncementsEntryLocalService.transaction" />
 		</property>
 	</bean>
+	<bean id="com.liferay.portlet.announcements.service.AnnouncementsEntryLocalServiceUtil" class="com.liferay.portlet.announcements.service.AnnouncementsEntryLocalServiceUtil" lazy-init="true">
+		<property name="service">
+			<ref bean="com.liferay.portlet.announcements.service.AnnouncementsEntryLocalService.transaction" />
+		</property>
+	</bean>
 	<bean id="com.liferay.portlet.announcements.service.AnnouncementsEntryService.impl" class="com.liferay.portlet.announcements.service.impl.AnnouncementsEntryServiceImpl" lazy-init="true" />
 	<bean id="com.liferay.portlet.announcements.service.AnnouncementsEntryService.transaction" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean" lazy-init="true">
 		<property name="transactionManager">
@@ -3786,6 +4131,11 @@
 		</property>
 	</bean>
 	<bean id="com.liferay.portlet.announcements.service.AnnouncementsEntryServiceFactory" class="com.liferay.portlet.announcements.service.AnnouncementsEntryServiceFactory" lazy-init="true">
+		<property name="service">
+			<ref bean="com.liferay.portlet.announcements.service.AnnouncementsEntryService.transaction" />
+		</property>
+	</bean>
+	<bean id="com.liferay.portlet.announcements.service.AnnouncementsEntryServiceUtil" class="com.liferay.portlet.announcements.service.AnnouncementsEntryServiceUtil" lazy-init="true">
 		<property name="service">
 			<ref bean="com.liferay.portlet.announcements.service.AnnouncementsEntryService.transaction" />
 		</property>
@@ -3867,6 +4217,11 @@
 			<ref bean="com.liferay.portlet.announcements.service.AnnouncementsFlagLocalService.transaction" />
 		</property>
 	</bean>
+	<bean id="com.liferay.portlet.announcements.service.AnnouncementsFlagLocalServiceUtil" class="com.liferay.portlet.announcements.service.AnnouncementsFlagLocalServiceUtil" lazy-init="true">
+		<property name="service">
+			<ref bean="com.liferay.portlet.announcements.service.AnnouncementsFlagLocalService.transaction" />
+		</property>
+	</bean>
 	<bean id="com.liferay.portlet.announcements.service.AnnouncementsFlagService.impl" class="com.liferay.portlet.announcements.service.impl.AnnouncementsFlagServiceImpl" lazy-init="true" />
 	<bean id="com.liferay.portlet.announcements.service.AnnouncementsFlagService.transaction" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean" lazy-init="true">
 		<property name="transactionManager">
@@ -3898,6 +4253,11 @@
 		</property>
 	</bean>
 	<bean id="com.liferay.portlet.announcements.service.AnnouncementsFlagServiceFactory" class="com.liferay.portlet.announcements.service.AnnouncementsFlagServiceFactory" lazy-init="true">
+		<property name="service">
+			<ref bean="com.liferay.portlet.announcements.service.AnnouncementsFlagService.transaction" />
+		</property>
+	</bean>
+	<bean id="com.liferay.portlet.announcements.service.AnnouncementsFlagServiceUtil" class="com.liferay.portlet.announcements.service.AnnouncementsFlagServiceUtil" lazy-init="true">
 		<property name="service">
 			<ref bean="com.liferay.portlet.announcements.service.AnnouncementsFlagService.transaction" />
 		</property>
@@ -3966,6 +4326,11 @@
 			<ref bean="com.liferay.portlet.blogs.service.BlogsEntryLocalService.transaction" />
 		</property>
 	</bean>
+	<bean id="com.liferay.portlet.blogs.service.BlogsEntryLocalServiceUtil" class="com.liferay.portlet.blogs.service.BlogsEntryLocalServiceUtil" lazy-init="true">
+		<property name="service">
+			<ref bean="com.liferay.portlet.blogs.service.BlogsEntryLocalService.transaction" />
+		</property>
+	</bean>
 	<bean id="com.liferay.portlet.blogs.service.BlogsEntryService.impl" class="com.liferay.portlet.blogs.service.impl.BlogsEntryServiceImpl" lazy-init="true" />
 	<bean id="com.liferay.portlet.blogs.service.BlogsEntryService.transaction" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean" lazy-init="true">
 		<property name="transactionManager">
@@ -3997,6 +4362,11 @@
 		</property>
 	</bean>
 	<bean id="com.liferay.portlet.blogs.service.BlogsEntryServiceFactory" class="com.liferay.portlet.blogs.service.BlogsEntryServiceFactory" lazy-init="true">
+		<property name="service">
+			<ref bean="com.liferay.portlet.blogs.service.BlogsEntryService.transaction" />
+		</property>
+	</bean>
+	<bean id="com.liferay.portlet.blogs.service.BlogsEntryServiceUtil" class="com.liferay.portlet.blogs.service.BlogsEntryServiceUtil" lazy-init="true">
 		<property name="service">
 			<ref bean="com.liferay.portlet.blogs.service.BlogsEntryService.transaction" />
 		</property>
@@ -4078,6 +4448,11 @@
 			<ref bean="com.liferay.portlet.blogs.service.BlogsStatsUserLocalService.transaction" />
 		</property>
 	</bean>
+	<bean id="com.liferay.portlet.blogs.service.BlogsStatsUserLocalServiceUtil" class="com.liferay.portlet.blogs.service.BlogsStatsUserLocalServiceUtil" lazy-init="true">
+		<property name="service">
+			<ref bean="com.liferay.portlet.blogs.service.BlogsStatsUserLocalService.transaction" />
+		</property>
+	</bean>
 	<bean id="com.liferay.portlet.blogs.service.persistence.BlogsStatsUserPersistence.impl" class="com.liferay.portlet.blogs.service.persistence.BlogsStatsUserPersistenceImpl" lazy-init="true">
 		<property name="dataSource">
 			<ref bean="liferayDataSource" />
@@ -4155,6 +4530,11 @@
 			<ref bean="com.liferay.portlet.bookmarks.service.BookmarksEntryLocalService.transaction" />
 		</property>
 	</bean>
+	<bean id="com.liferay.portlet.bookmarks.service.BookmarksEntryLocalServiceUtil" class="com.liferay.portlet.bookmarks.service.BookmarksEntryLocalServiceUtil" lazy-init="true">
+		<property name="service">
+			<ref bean="com.liferay.portlet.bookmarks.service.BookmarksEntryLocalService.transaction" />
+		</property>
+	</bean>
 	<bean id="com.liferay.portlet.bookmarks.service.BookmarksEntryService.impl" class="com.liferay.portlet.bookmarks.service.impl.BookmarksEntryServiceImpl" lazy-init="true" />
 	<bean id="com.liferay.portlet.bookmarks.service.BookmarksEntryService.transaction" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean" lazy-init="true">
 		<property name="transactionManager">
@@ -4186,6 +4566,11 @@
 		</property>
 	</bean>
 	<bean id="com.liferay.portlet.bookmarks.service.BookmarksEntryServiceFactory" class="com.liferay.portlet.bookmarks.service.BookmarksEntryServiceFactory" lazy-init="true">
+		<property name="service">
+			<ref bean="com.liferay.portlet.bookmarks.service.BookmarksEntryService.transaction" />
+		</property>
+	</bean>
+	<bean id="com.liferay.portlet.bookmarks.service.BookmarksEntryServiceUtil" class="com.liferay.portlet.bookmarks.service.BookmarksEntryServiceUtil" lazy-init="true">
 		<property name="service">
 			<ref bean="com.liferay.portlet.bookmarks.service.BookmarksEntryService.transaction" />
 		</property>
@@ -4267,6 +4652,11 @@
 			<ref bean="com.liferay.portlet.bookmarks.service.BookmarksFolderLocalService.transaction" />
 		</property>
 	</bean>
+	<bean id="com.liferay.portlet.bookmarks.service.BookmarksFolderLocalServiceUtil" class="com.liferay.portlet.bookmarks.service.BookmarksFolderLocalServiceUtil" lazy-init="true">
+		<property name="service">
+			<ref bean="com.liferay.portlet.bookmarks.service.BookmarksFolderLocalService.transaction" />
+		</property>
+	</bean>
 	<bean id="com.liferay.portlet.bookmarks.service.BookmarksFolderService.impl" class="com.liferay.portlet.bookmarks.service.impl.BookmarksFolderServiceImpl" lazy-init="true" />
 	<bean id="com.liferay.portlet.bookmarks.service.BookmarksFolderService.transaction" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean" lazy-init="true">
 		<property name="transactionManager">
@@ -4298,6 +4688,11 @@
 		</property>
 	</bean>
 	<bean id="com.liferay.portlet.bookmarks.service.BookmarksFolderServiceFactory" class="com.liferay.portlet.bookmarks.service.BookmarksFolderServiceFactory" lazy-init="true">
+		<property name="service">
+			<ref bean="com.liferay.portlet.bookmarks.service.BookmarksFolderService.transaction" />
+		</property>
+	</bean>
+	<bean id="com.liferay.portlet.bookmarks.service.BookmarksFolderServiceUtil" class="com.liferay.portlet.bookmarks.service.BookmarksFolderServiceUtil" lazy-init="true">
 		<property name="service">
 			<ref bean="com.liferay.portlet.bookmarks.service.BookmarksFolderService.transaction" />
 		</property>
@@ -4366,6 +4761,11 @@
 			<ref bean="com.liferay.portlet.calendar.service.CalEventLocalService.transaction" />
 		</property>
 	</bean>
+	<bean id="com.liferay.portlet.calendar.service.CalEventLocalServiceUtil" class="com.liferay.portlet.calendar.service.CalEventLocalServiceUtil" lazy-init="true">
+		<property name="service">
+			<ref bean="com.liferay.portlet.calendar.service.CalEventLocalService.transaction" />
+		</property>
+	</bean>
 	<bean id="com.liferay.portlet.calendar.service.CalEventService.impl" class="com.liferay.portlet.calendar.service.impl.CalEventServiceImpl" lazy-init="true" />
 	<bean id="com.liferay.portlet.calendar.service.CalEventService.transaction" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean" lazy-init="true">
 		<property name="transactionManager">
@@ -4397,6 +4797,11 @@
 		</property>
 	</bean>
 	<bean id="com.liferay.portlet.calendar.service.CalEventServiceFactory" class="com.liferay.portlet.calendar.service.CalEventServiceFactory" lazy-init="true">
+		<property name="service">
+			<ref bean="com.liferay.portlet.calendar.service.CalEventService.transaction" />
+		</property>
+	</bean>
+	<bean id="com.liferay.portlet.calendar.service.CalEventServiceUtil" class="com.liferay.portlet.calendar.service.CalEventServiceUtil" lazy-init="true">
 		<property name="service">
 			<ref bean="com.liferay.portlet.calendar.service.CalEventService.transaction" />
 		</property>
@@ -4478,6 +4883,11 @@
 			<ref bean="com.liferay.portlet.documentlibrary.service.DLFileEntryLocalService.transaction" />
 		</property>
 	</bean>
+	<bean id="com.liferay.portlet.documentlibrary.service.DLFileEntryLocalServiceUtil" class="com.liferay.portlet.documentlibrary.service.DLFileEntryLocalServiceUtil" lazy-init="true">
+		<property name="service">
+			<ref bean="com.liferay.portlet.documentlibrary.service.DLFileEntryLocalService.transaction" />
+		</property>
+	</bean>
 	<bean id="com.liferay.portlet.documentlibrary.service.DLFileEntryService.impl" class="com.liferay.portlet.documentlibrary.service.impl.DLFileEntryServiceImpl" lazy-init="true" />
 	<bean id="com.liferay.portlet.documentlibrary.service.DLFileEntryService.transaction" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean" lazy-init="true">
 		<property name="transactionManager">
@@ -4509,6 +4919,11 @@
 		</property>
 	</bean>
 	<bean id="com.liferay.portlet.documentlibrary.service.DLFileEntryServiceFactory" class="com.liferay.portlet.documentlibrary.service.DLFileEntryServiceFactory" lazy-init="true">
+		<property name="service">
+			<ref bean="com.liferay.portlet.documentlibrary.service.DLFileEntryService.transaction" />
+		</property>
+	</bean>
+	<bean id="com.liferay.portlet.documentlibrary.service.DLFileEntryServiceUtil" class="com.liferay.portlet.documentlibrary.service.DLFileEntryServiceUtil" lazy-init="true">
 		<property name="service">
 			<ref bean="com.liferay.portlet.documentlibrary.service.DLFileEntryService.transaction" />
 		</property>
@@ -4603,6 +5018,11 @@
 			<ref bean="com.liferay.portlet.documentlibrary.service.DLFileRankLocalService.transaction" />
 		</property>
 	</bean>
+	<bean id="com.liferay.portlet.documentlibrary.service.DLFileRankLocalServiceUtil" class="com.liferay.portlet.documentlibrary.service.DLFileRankLocalServiceUtil" lazy-init="true">
+		<property name="service">
+			<ref bean="com.liferay.portlet.documentlibrary.service.DLFileRankLocalService.transaction" />
+		</property>
+	</bean>
 	<bean id="com.liferay.portlet.documentlibrary.service.persistence.DLFileRankPersistence.impl" class="com.liferay.portlet.documentlibrary.service.persistence.DLFileRankPersistenceImpl" lazy-init="true">
 		<property name="dataSource">
 			<ref bean="liferayDataSource" />
@@ -4680,6 +5100,11 @@
 			<ref bean="com.liferay.portlet.documentlibrary.service.DLFileShortcutLocalService.transaction" />
 		</property>
 	</bean>
+	<bean id="com.liferay.portlet.documentlibrary.service.DLFileShortcutLocalServiceUtil" class="com.liferay.portlet.documentlibrary.service.DLFileShortcutLocalServiceUtil" lazy-init="true">
+		<property name="service">
+			<ref bean="com.liferay.portlet.documentlibrary.service.DLFileShortcutLocalService.transaction" />
+		</property>
+	</bean>
 	<bean id="com.liferay.portlet.documentlibrary.service.DLFileShortcutService.impl" class="com.liferay.portlet.documentlibrary.service.impl.DLFileShortcutServiceImpl" lazy-init="true" />
 	<bean id="com.liferay.portlet.documentlibrary.service.DLFileShortcutService.transaction" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean" lazy-init="true">
 		<property name="transactionManager">
@@ -4711,6 +5136,11 @@
 		</property>
 	</bean>
 	<bean id="com.liferay.portlet.documentlibrary.service.DLFileShortcutServiceFactory" class="com.liferay.portlet.documentlibrary.service.DLFileShortcutServiceFactory" lazy-init="true">
+		<property name="service">
+			<ref bean="com.liferay.portlet.documentlibrary.service.DLFileShortcutService.transaction" />
+		</property>
+	</bean>
+	<bean id="com.liferay.portlet.documentlibrary.service.DLFileShortcutServiceUtil" class="com.liferay.portlet.documentlibrary.service.DLFileShortcutServiceUtil" lazy-init="true">
 		<property name="service">
 			<ref bean="com.liferay.portlet.documentlibrary.service.DLFileShortcutService.transaction" />
 		</property>
@@ -4792,6 +5222,11 @@
 			<ref bean="com.liferay.portlet.documentlibrary.service.DLFileVersionLocalService.transaction" />
 		</property>
 	</bean>
+	<bean id="com.liferay.portlet.documentlibrary.service.DLFileVersionLocalServiceUtil" class="com.liferay.portlet.documentlibrary.service.DLFileVersionLocalServiceUtil" lazy-init="true">
+		<property name="service">
+			<ref bean="com.liferay.portlet.documentlibrary.service.DLFileVersionLocalService.transaction" />
+		</property>
+	</bean>
 	<bean id="com.liferay.portlet.documentlibrary.service.persistence.DLFileVersionPersistence.impl" class="com.liferay.portlet.documentlibrary.service.persistence.DLFileVersionPersistenceImpl" lazy-init="true">
 		<property name="dataSource">
 			<ref bean="liferayDataSource" />
@@ -4856,6 +5291,11 @@
 			<ref bean="com.liferay.portlet.documentlibrary.service.DLFolderLocalService.transaction" />
 		</property>
 	</bean>
+	<bean id="com.liferay.portlet.documentlibrary.service.DLFolderLocalServiceUtil" class="com.liferay.portlet.documentlibrary.service.DLFolderLocalServiceUtil" lazy-init="true">
+		<property name="service">
+			<ref bean="com.liferay.portlet.documentlibrary.service.DLFolderLocalService.transaction" />
+		</property>
+	</bean>
 	<bean id="com.liferay.portlet.documentlibrary.service.DLFolderService.impl" class="com.liferay.portlet.documentlibrary.service.impl.DLFolderServiceImpl" lazy-init="true" />
 	<bean id="com.liferay.portlet.documentlibrary.service.DLFolderService.transaction" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean" lazy-init="true">
 		<property name="transactionManager">
@@ -4887,6 +5327,11 @@
 		</property>
 	</bean>
 	<bean id="com.liferay.portlet.documentlibrary.service.DLFolderServiceFactory" class="com.liferay.portlet.documentlibrary.service.DLFolderServiceFactory" lazy-init="true">
+		<property name="service">
+			<ref bean="com.liferay.portlet.documentlibrary.service.DLFolderService.transaction" />
+		</property>
+	</bean>
+	<bean id="com.liferay.portlet.documentlibrary.service.DLFolderServiceUtil" class="com.liferay.portlet.documentlibrary.service.DLFolderServiceUtil" lazy-init="true">
 		<property name="service">
 			<ref bean="com.liferay.portlet.documentlibrary.service.DLFolderService.transaction" />
 		</property>
@@ -4951,6 +5396,11 @@
 		</property>
 	</bean>
 	<bean id="com.liferay.portlet.expando.service.ExpandoColumnLocalServiceFactory" class="com.liferay.portlet.expando.service.ExpandoColumnLocalServiceFactory" lazy-init="true">
+		<property name="service">
+			<ref bean="com.liferay.portlet.expando.service.ExpandoColumnLocalService.transaction" />
+		</property>
+	</bean>
+	<bean id="com.liferay.portlet.expando.service.ExpandoColumnLocalServiceUtil" class="com.liferay.portlet.expando.service.ExpandoColumnLocalServiceUtil" lazy-init="true">
 		<property name="service">
 			<ref bean="com.liferay.portlet.expando.service.ExpandoColumnLocalService.transaction" />
 		</property>
@@ -5032,6 +5482,11 @@
 			<ref bean="com.liferay.portlet.expando.service.ExpandoRowLocalService.transaction" />
 		</property>
 	</bean>
+	<bean id="com.liferay.portlet.expando.service.ExpandoRowLocalServiceUtil" class="com.liferay.portlet.expando.service.ExpandoRowLocalServiceUtil" lazy-init="true">
+		<property name="service">
+			<ref bean="com.liferay.portlet.expando.service.ExpandoRowLocalService.transaction" />
+		</property>
+	</bean>
 	<bean id="com.liferay.portlet.expando.service.persistence.ExpandoRowPersistence.impl" class="com.liferay.portlet.expando.service.persistence.ExpandoRowPersistenceImpl" lazy-init="true">
 		<property name="dataSource">
 			<ref bean="liferayDataSource" />
@@ -5109,6 +5564,11 @@
 			<ref bean="com.liferay.portlet.expando.service.ExpandoTableLocalService.transaction" />
 		</property>
 	</bean>
+	<bean id="com.liferay.portlet.expando.service.ExpandoTableLocalServiceUtil" class="com.liferay.portlet.expando.service.ExpandoTableLocalServiceUtil" lazy-init="true">
+		<property name="service">
+			<ref bean="com.liferay.portlet.expando.service.ExpandoTableLocalService.transaction" />
+		</property>
+	</bean>
 	<bean id="com.liferay.portlet.expando.service.persistence.ExpandoTablePersistence.impl" class="com.liferay.portlet.expando.service.persistence.ExpandoTablePersistenceImpl" lazy-init="true">
 		<property name="dataSource">
 			<ref bean="liferayDataSource" />
@@ -5169,6 +5629,11 @@
 		</property>
 	</bean>
 	<bean id="com.liferay.portlet.expando.service.ExpandoValueLocalServiceFactory" class="com.liferay.portlet.expando.service.ExpandoValueLocalServiceFactory" lazy-init="true">
+		<property name="service">
+			<ref bean="com.liferay.portlet.expando.service.ExpandoValueLocalService.transaction" />
+		</property>
+	</bean>
+	<bean id="com.liferay.portlet.expando.service.ExpandoValueLocalServiceUtil" class="com.liferay.portlet.expando.service.ExpandoValueLocalServiceUtil" lazy-init="true">
 		<property name="service">
 			<ref bean="com.liferay.portlet.expando.service.ExpandoValueLocalService.transaction" />
 		</property>
@@ -5250,6 +5715,11 @@
 			<ref bean="com.liferay.portlet.imagegallery.service.IGFolderLocalService.transaction" />
 		</property>
 	</bean>
+	<bean id="com.liferay.portlet.imagegallery.service.IGFolderLocalServiceUtil" class="com.liferay.portlet.imagegallery.service.IGFolderLocalServiceUtil" lazy-init="true">
+		<property name="service">
+			<ref bean="com.liferay.portlet.imagegallery.service.IGFolderLocalService.transaction" />
+		</property>
+	</bean>
 	<bean id="com.liferay.portlet.imagegallery.service.IGFolderService.impl" class="com.liferay.portlet.imagegallery.service.impl.IGFolderServiceImpl" lazy-init="true" />
 	<bean id="com.liferay.portlet.imagegallery.service.IGFolderService.transaction" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean" lazy-init="true">
 		<property name="transactionManager">
@@ -5281,6 +5751,11 @@
 		</property>
 	</bean>
 	<bean id="com.liferay.portlet.imagegallery.service.IGFolderServiceFactory" class="com.liferay.portlet.imagegallery.service.IGFolderServiceFactory" lazy-init="true">
+		<property name="service">
+			<ref bean="com.liferay.portlet.imagegallery.service.IGFolderService.transaction" />
+		</property>
+	</bean>
+	<bean id="com.liferay.portlet.imagegallery.service.IGFolderServiceUtil" class="com.liferay.portlet.imagegallery.service.IGFolderServiceUtil" lazy-init="true">
 		<property name="service">
 			<ref bean="com.liferay.portlet.imagegallery.service.IGFolderService.transaction" />
 		</property>
@@ -5349,6 +5824,11 @@
 			<ref bean="com.liferay.portlet.imagegallery.service.IGImageLocalService.transaction" />
 		</property>
 	</bean>
+	<bean id="com.liferay.portlet.imagegallery.service.IGImageLocalServiceUtil" class="com.liferay.portlet.imagegallery.service.IGImageLocalServiceUtil" lazy-init="true">
+		<property name="service">
+			<ref bean="com.liferay.portlet.imagegallery.service.IGImageLocalService.transaction" />
+		</property>
+	</bean>
 	<bean id="com.liferay.portlet.imagegallery.service.IGImageService.impl" class="com.liferay.portlet.imagegallery.service.impl.IGImageServiceImpl" lazy-init="true" />
 	<bean id="com.liferay.portlet.imagegallery.service.IGImageService.transaction" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean" lazy-init="true">
 		<property name="transactionManager">
@@ -5380,6 +5860,11 @@
 		</property>
 	</bean>
 	<bean id="com.liferay.portlet.imagegallery.service.IGImageServiceFactory" class="com.liferay.portlet.imagegallery.service.IGImageServiceFactory" lazy-init="true">
+		<property name="service">
+			<ref bean="com.liferay.portlet.imagegallery.service.IGImageService.transaction" />
+		</property>
+	</bean>
+	<bean id="com.liferay.portlet.imagegallery.service.IGImageServiceUtil" class="com.liferay.portlet.imagegallery.service.IGImageServiceUtil" lazy-init="true">
 		<property name="service">
 			<ref bean="com.liferay.portlet.imagegallery.service.IGImageService.transaction" />
 		</property>
@@ -5461,6 +5946,11 @@
 			<ref bean="com.liferay.portlet.journal.service.JournalArticleLocalService.transaction" />
 		</property>
 	</bean>
+	<bean id="com.liferay.portlet.journal.service.JournalArticleLocalServiceUtil" class="com.liferay.portlet.journal.service.JournalArticleLocalServiceUtil" lazy-init="true">
+		<property name="service">
+			<ref bean="com.liferay.portlet.journal.service.JournalArticleLocalService.transaction" />
+		</property>
+	</bean>
 	<bean id="com.liferay.portlet.journal.service.JournalArticleService.impl" class="com.liferay.portlet.journal.service.impl.JournalArticleServiceImpl" lazy-init="true" />
 	<bean id="com.liferay.portlet.journal.service.JournalArticleService.transaction" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean" lazy-init="true">
 		<property name="transactionManager">
@@ -5492,6 +5982,11 @@
 		</property>
 	</bean>
 	<bean id="com.liferay.portlet.journal.service.JournalArticleServiceFactory" class="com.liferay.portlet.journal.service.JournalArticleServiceFactory" lazy-init="true">
+		<property name="service">
+			<ref bean="com.liferay.portlet.journal.service.JournalArticleService.transaction" />
+		</property>
+	</bean>
+	<bean id="com.liferay.portlet.journal.service.JournalArticleServiceUtil" class="com.liferay.portlet.journal.service.JournalArticleServiceUtil" lazy-init="true">
 		<property name="service">
 			<ref bean="com.liferay.portlet.journal.service.JournalArticleService.transaction" />
 		</property>
@@ -5573,6 +6068,11 @@
 			<ref bean="com.liferay.portlet.journal.service.JournalArticleImageLocalService.transaction" />
 		</property>
 	</bean>
+	<bean id="com.liferay.portlet.journal.service.JournalArticleImageLocalServiceUtil" class="com.liferay.portlet.journal.service.JournalArticleImageLocalServiceUtil" lazy-init="true">
+		<property name="service">
+			<ref bean="com.liferay.portlet.journal.service.JournalArticleImageLocalService.transaction" />
+		</property>
+	</bean>
 	<bean id="com.liferay.portlet.journal.service.persistence.JournalArticleImagePersistence.impl" class="com.liferay.portlet.journal.service.persistence.JournalArticleImagePersistenceImpl" lazy-init="true">
 		<property name="dataSource">
 			<ref bean="liferayDataSource" />
@@ -5633,6 +6133,11 @@
 		</property>
 	</bean>
 	<bean id="com.liferay.portlet.journal.service.JournalArticleResourceLocalServiceFactory" class="com.liferay.portlet.journal.service.JournalArticleResourceLocalServiceFactory" lazy-init="true">
+		<property name="service">
+			<ref bean="com.liferay.portlet.journal.service.JournalArticleResourceLocalService.transaction" />
+		</property>
+	</bean>
+	<bean id="com.liferay.portlet.journal.service.JournalArticleResourceLocalServiceUtil" class="com.liferay.portlet.journal.service.JournalArticleResourceLocalServiceUtil" lazy-init="true">
 		<property name="service">
 			<ref bean="com.liferay.portlet.journal.service.JournalArticleResourceLocalService.transaction" />
 		</property>
@@ -5701,6 +6206,11 @@
 			<ref bean="com.liferay.portlet.journal.service.JournalContentSearchLocalService.transaction" />
 		</property>
 	</bean>
+	<bean id="com.liferay.portlet.journal.service.JournalContentSearchLocalServiceUtil" class="com.liferay.portlet.journal.service.JournalContentSearchLocalServiceUtil" lazy-init="true">
+		<property name="service">
+			<ref bean="com.liferay.portlet.journal.service.JournalContentSearchLocalService.transaction" />
+		</property>
+	</bean>
 	<bean id="com.liferay.portlet.journal.service.persistence.JournalContentSearchPersistence.impl" class="com.liferay.portlet.journal.service.persistence.JournalContentSearchPersistenceImpl" lazy-init="true">
 		<property name="dataSource">
 			<ref bean="liferayDataSource" />
@@ -5765,6 +6275,11 @@
 			<ref bean="com.liferay.portlet.journal.service.JournalFeedLocalService.transaction" />
 		</property>
 	</bean>
+	<bean id="com.liferay.portlet.journal.service.JournalFeedLocalServiceUtil" class="com.liferay.portlet.journal.service.JournalFeedLocalServiceUtil" lazy-init="true">
+		<property name="service">
+			<ref bean="com.liferay.portlet.journal.service.JournalFeedLocalService.transaction" />
+		</property>
+	</bean>
 	<bean id="com.liferay.portlet.journal.service.JournalFeedService.impl" class="com.liferay.portlet.journal.service.impl.JournalFeedServiceImpl" lazy-init="true" />
 	<bean id="com.liferay.portlet.journal.service.JournalFeedService.transaction" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean" lazy-init="true">
 		<property name="transactionManager">
@@ -5796,6 +6311,11 @@
 		</property>
 	</bean>
 	<bean id="com.liferay.portlet.journal.service.JournalFeedServiceFactory" class="com.liferay.portlet.journal.service.JournalFeedServiceFactory" lazy-init="true">
+		<property name="service">
+			<ref bean="com.liferay.portlet.journal.service.JournalFeedService.transaction" />
+		</property>
+	</bean>
+	<bean id="com.liferay.portlet.journal.service.JournalFeedServiceUtil" class="com.liferay.portlet.journal.service.JournalFeedServiceUtil" lazy-init="true">
 		<property name="service">
 			<ref bean="com.liferay.portlet.journal.service.JournalFeedService.transaction" />
 		</property>
@@ -5877,6 +6397,11 @@
 			<ref bean="com.liferay.portlet.journal.service.JournalStructureLocalService.transaction" />
 		</property>
 	</bean>
+	<bean id="com.liferay.portlet.journal.service.JournalStructureLocalServiceUtil" class="com.liferay.portlet.journal.service.JournalStructureLocalServiceUtil" lazy-init="true">
+		<property name="service">
+			<ref bean="com.liferay.portlet.journal.service.JournalStructureLocalService.transaction" />
+		</property>
+	</bean>
 	<bean id="com.liferay.portlet.journal.service.JournalStructureService.impl" class="com.liferay.portlet.journal.service.impl.JournalStructureServiceImpl" lazy-init="true" />
 	<bean id="com.liferay.portlet.journal.service.JournalStructureService.transaction" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean" lazy-init="true">
 		<property name="transactionManager">
@@ -5908,6 +6433,11 @@
 		</property>
 	</bean>
 	<bean id="com.liferay.portlet.journal.service.JournalStructureServiceFactory" class="com.liferay.portlet.journal.service.JournalStructureServiceFactory" lazy-init="true">
+		<property name="service">
+			<ref bean="com.liferay.portlet.journal.service.JournalStructureService.transaction" />
+		</property>
+	</bean>
+	<bean id="com.liferay.portlet.journal.service.JournalStructureServiceUtil" class="com.liferay.portlet.journal.service.JournalStructureServiceUtil" lazy-init="true">
 		<property name="service">
 			<ref bean="com.liferay.portlet.journal.service.JournalStructureService.transaction" />
 		</property>
@@ -5989,6 +6519,11 @@
 			<ref bean="com.liferay.portlet.journal.service.JournalTemplateLocalService.transaction" />
 		</property>
 	</bean>
+	<bean id="com.liferay.portlet.journal.service.JournalTemplateLocalServiceUtil" class="com.liferay.portlet.journal.service.JournalTemplateLocalServiceUtil" lazy-init="true">
+		<property name="service">
+			<ref bean="com.liferay.portlet.journal.service.JournalTemplateLocalService.transaction" />
+		</property>
+	</bean>
 	<bean id="com.liferay.portlet.journal.service.JournalTemplateService.impl" class="com.liferay.portlet.journal.service.impl.JournalTemplateServiceImpl" lazy-init="true" />
 	<bean id="com.liferay.portlet.journal.service.JournalTemplateService.transaction" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean" lazy-init="true">
 		<property name="transactionManager">
@@ -6020,6 +6555,11 @@
 		</property>
 	</bean>
 	<bean id="com.liferay.portlet.journal.service.JournalTemplateServiceFactory" class="com.liferay.portlet.journal.service.JournalTemplateServiceFactory" lazy-init="true">
+		<property name="service">
+			<ref bean="com.liferay.portlet.journal.service.JournalTemplateService.transaction" />
+		</property>
+	</bean>
+	<bean id="com.liferay.portlet.journal.service.JournalTemplateServiceUtil" class="com.liferay.portlet.journal.service.JournalTemplateServiceUtil" lazy-init="true">
 		<property name="service">
 			<ref bean="com.liferay.portlet.journal.service.JournalTemplateService.transaction" />
 		</property>
@@ -6101,6 +6641,11 @@
 			<ref bean="com.liferay.portlet.messageboards.service.MBBanLocalService.transaction" />
 		</property>
 	</bean>
+	<bean id="com.liferay.portlet.messageboards.service.MBBanLocalServiceUtil" class="com.liferay.portlet.messageboards.service.MBBanLocalServiceUtil" lazy-init="true">
+		<property name="service">
+			<ref bean="com.liferay.portlet.messageboards.service.MBBanLocalService.transaction" />
+		</property>
+	</bean>
 	<bean id="com.liferay.portlet.messageboards.service.MBBanService.impl" class="com.liferay.portlet.messageboards.service.impl.MBBanServiceImpl" lazy-init="true" />
 	<bean id="com.liferay.portlet.messageboards.service.MBBanService.transaction" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean" lazy-init="true">
 		<property name="transactionManager">
@@ -6132,6 +6677,11 @@
 		</property>
 	</bean>
 	<bean id="com.liferay.portlet.messageboards.service.MBBanServiceFactory" class="com.liferay.portlet.messageboards.service.MBBanServiceFactory" lazy-init="true">
+		<property name="service">
+			<ref bean="com.liferay.portlet.messageboards.service.MBBanService.transaction" />
+		</property>
+	</bean>
+	<bean id="com.liferay.portlet.messageboards.service.MBBanServiceUtil" class="com.liferay.portlet.messageboards.service.MBBanServiceUtil" lazy-init="true">
 		<property name="service">
 			<ref bean="com.liferay.portlet.messageboards.service.MBBanService.transaction" />
 		</property>
@@ -6200,6 +6750,11 @@
 			<ref bean="com.liferay.portlet.messageboards.service.MBCategoryLocalService.transaction" />
 		</property>
 	</bean>
+	<bean id="com.liferay.portlet.messageboards.service.MBCategoryLocalServiceUtil" class="com.liferay.portlet.messageboards.service.MBCategoryLocalServiceUtil" lazy-init="true">
+		<property name="service">
+			<ref bean="com.liferay.portlet.messageboards.service.MBCategoryLocalService.transaction" />
+		</property>
+	</bean>
 	<bean id="com.liferay.portlet.messageboards.service.MBCategoryService.impl" class="com.liferay.portlet.messageboards.service.impl.MBCategoryServiceImpl" lazy-init="true" />
 	<bean id="com.liferay.portlet.messageboards.service.MBCategoryService.transaction" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean" lazy-init="true">
 		<property name="transactionManager">
@@ -6231,6 +6786,11 @@
 		</property>
 	</bean>
 	<bean id="com.liferay.portlet.messageboards.service.MBCategoryServiceFactory" class="com.liferay.portlet.messageboards.service.MBCategoryServiceFactory" lazy-init="true">
+		<property name="service">
+			<ref bean="com.liferay.portlet.messageboards.service.MBCategoryService.transaction" />
+		</property>
+	</bean>
+	<bean id="com.liferay.portlet.messageboards.service.MBCategoryServiceUtil" class="com.liferay.portlet.messageboards.service.MBCategoryServiceUtil" lazy-init="true">
 		<property name="service">
 			<ref bean="com.liferay.portlet.messageboards.service.MBCategoryService.transaction" />
 		</property>
@@ -6341,6 +6901,11 @@
 			<ref bean="com.liferay.portlet.messageboards.service.MBMessageLocalService.transaction" />
 		</property>
 	</bean>
+	<bean id="com.liferay.portlet.messageboards.service.MBMessageLocalServiceUtil" class="com.liferay.portlet.messageboards.service.MBMessageLocalServiceUtil" lazy-init="true">
+		<property name="service">
+			<ref bean="com.liferay.portlet.messageboards.service.MBMessageLocalService.transaction" />
+		</property>
+	</bean>
 	<bean id="com.liferay.portlet.messageboards.service.MBMessageService.impl" class="com.liferay.portlet.messageboards.service.impl.MBMessageServiceImpl" lazy-init="true" />
 	<bean id="com.liferay.portlet.messageboards.service.MBMessageService.transaction" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean" lazy-init="true">
 		<property name="transactionManager">
@@ -6372,6 +6937,11 @@
 		</property>
 	</bean>
 	<bean id="com.liferay.portlet.messageboards.service.MBMessageServiceFactory" class="com.liferay.portlet.messageboards.service.MBMessageServiceFactory" lazy-init="true">
+		<property name="service">
+			<ref bean="com.liferay.portlet.messageboards.service.MBMessageService.transaction" />
+		</property>
+	</bean>
+	<bean id="com.liferay.portlet.messageboards.service.MBMessageServiceUtil" class="com.liferay.portlet.messageboards.service.MBMessageServiceUtil" lazy-init="true">
 		<property name="service">
 			<ref bean="com.liferay.portlet.messageboards.service.MBMessageService.transaction" />
 		</property>
@@ -6453,6 +7023,11 @@
 			<ref bean="com.liferay.portlet.messageboards.service.MBMessageFlagLocalService.transaction" />
 		</property>
 	</bean>
+	<bean id="com.liferay.portlet.messageboards.service.MBMessageFlagLocalServiceUtil" class="com.liferay.portlet.messageboards.service.MBMessageFlagLocalServiceUtil" lazy-init="true">
+		<property name="service">
+			<ref bean="com.liferay.portlet.messageboards.service.MBMessageFlagLocalService.transaction" />
+		</property>
+	</bean>
 	<bean id="com.liferay.portlet.messageboards.service.persistence.MBMessageFlagPersistence.impl" class="com.liferay.portlet.messageboards.service.persistence.MBMessageFlagPersistenceImpl" lazy-init="true">
 		<property name="dataSource">
 			<ref bean="liferayDataSource" />
@@ -6530,6 +7105,11 @@
 			<ref bean="com.liferay.portlet.messageboards.service.MBStatsUserLocalService.transaction" />
 		</property>
 	</bean>
+	<bean id="com.liferay.portlet.messageboards.service.MBStatsUserLocalServiceUtil" class="com.liferay.portlet.messageboards.service.MBStatsUserLocalServiceUtil" lazy-init="true">
+		<property name="service">
+			<ref bean="com.liferay.portlet.messageboards.service.MBStatsUserLocalService.transaction" />
+		</property>
+	</bean>
 	<bean id="com.liferay.portlet.messageboards.service.persistence.MBStatsUserPersistence.impl" class="com.liferay.portlet.messageboards.service.persistence.MBStatsUserPersistenceImpl" lazy-init="true">
 		<property name="dataSource">
 			<ref bean="liferayDataSource" />
@@ -6594,6 +7174,11 @@
 			<ref bean="com.liferay.portlet.messageboards.service.MBThreadLocalService.transaction" />
 		</property>
 	</bean>
+	<bean id="com.liferay.portlet.messageboards.service.MBThreadLocalServiceUtil" class="com.liferay.portlet.messageboards.service.MBThreadLocalServiceUtil" lazy-init="true">
+		<property name="service">
+			<ref bean="com.liferay.portlet.messageboards.service.MBThreadLocalService.transaction" />
+		</property>
+	</bean>
 	<bean id="com.liferay.portlet.messageboards.service.MBThreadService.impl" class="com.liferay.portlet.messageboards.service.impl.MBThreadServiceImpl" lazy-init="true" />
 	<bean id="com.liferay.portlet.messageboards.service.MBThreadService.transaction" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean" lazy-init="true">
 		<property name="transactionManager">
@@ -6625,6 +7210,11 @@
 		</property>
 	</bean>
 	<bean id="com.liferay.portlet.messageboards.service.MBThreadServiceFactory" class="com.liferay.portlet.messageboards.service.MBThreadServiceFactory" lazy-init="true">
+		<property name="service">
+			<ref bean="com.liferay.portlet.messageboards.service.MBThreadService.transaction" />
+		</property>
+	</bean>
+	<bean id="com.liferay.portlet.messageboards.service.MBThreadServiceUtil" class="com.liferay.portlet.messageboards.service.MBThreadServiceUtil" lazy-init="true">
 		<property name="service">
 			<ref bean="com.liferay.portlet.messageboards.service.MBThreadService.transaction" />
 		</property>
@@ -6706,6 +7296,11 @@
 			<ref bean="com.liferay.portlet.polls.service.PollsChoiceLocalService.transaction" />
 		</property>
 	</bean>
+	<bean id="com.liferay.portlet.polls.service.PollsChoiceLocalServiceUtil" class="com.liferay.portlet.polls.service.PollsChoiceLocalServiceUtil" lazy-init="true">
+		<property name="service">
+			<ref bean="com.liferay.portlet.polls.service.PollsChoiceLocalService.transaction" />
+		</property>
+	</bean>
 	<bean id="com.liferay.portlet.polls.service.persistence.PollsChoicePersistence.impl" class="com.liferay.portlet.polls.service.persistence.PollsChoicePersistenceImpl" lazy-init="true">
 		<property name="dataSource">
 			<ref bean="liferayDataSource" />
@@ -6783,6 +7378,11 @@
 			<ref bean="com.liferay.portlet.polls.service.PollsQuestionLocalService.transaction" />
 		</property>
 	</bean>
+	<bean id="com.liferay.portlet.polls.service.PollsQuestionLocalServiceUtil" class="com.liferay.portlet.polls.service.PollsQuestionLocalServiceUtil" lazy-init="true">
+		<property name="service">
+			<ref bean="com.liferay.portlet.polls.service.PollsQuestionLocalService.transaction" />
+		</property>
+	</bean>
 	<bean id="com.liferay.portlet.polls.service.PollsQuestionService.impl" class="com.liferay.portlet.polls.service.impl.PollsQuestionServiceImpl" lazy-init="true" />
 	<bean id="com.liferay.portlet.polls.service.PollsQuestionService.transaction" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean" lazy-init="true">
 		<property name="transactionManager">
@@ -6814,6 +7414,11 @@
 		</property>
 	</bean>
 	<bean id="com.liferay.portlet.polls.service.PollsQuestionServiceFactory" class="com.liferay.portlet.polls.service.PollsQuestionServiceFactory" lazy-init="true">
+		<property name="service">
+			<ref bean="com.liferay.portlet.polls.service.PollsQuestionService.transaction" />
+		</property>
+	</bean>
+	<bean id="com.liferay.portlet.polls.service.PollsQuestionServiceUtil" class="com.liferay.portlet.polls.service.PollsQuestionServiceUtil" lazy-init="true">
 		<property name="service">
 			<ref bean="com.liferay.portlet.polls.service.PollsQuestionService.transaction" />
 		</property>
@@ -6882,6 +7487,11 @@
 			<ref bean="com.liferay.portlet.polls.service.PollsVoteLocalService.transaction" />
 		</property>
 	</bean>
+	<bean id="com.liferay.portlet.polls.service.PollsVoteLocalServiceUtil" class="com.liferay.portlet.polls.service.PollsVoteLocalServiceUtil" lazy-init="true">
+		<property name="service">
+			<ref bean="com.liferay.portlet.polls.service.PollsVoteLocalService.transaction" />
+		</property>
+	</bean>
 	<bean id="com.liferay.portlet.polls.service.PollsVoteService.impl" class="com.liferay.portlet.polls.service.impl.PollsVoteServiceImpl" lazy-init="true" />
 	<bean id="com.liferay.portlet.polls.service.PollsVoteService.transaction" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean" lazy-init="true">
 		<property name="transactionManager">
@@ -6913,6 +7523,11 @@
 		</property>
 	</bean>
 	<bean id="com.liferay.portlet.polls.service.PollsVoteServiceFactory" class="com.liferay.portlet.polls.service.PollsVoteServiceFactory" lazy-init="true">
+		<property name="service">
+			<ref bean="com.liferay.portlet.polls.service.PollsVoteService.transaction" />
+		</property>
+	</bean>
+	<bean id="com.liferay.portlet.polls.service.PollsVoteServiceUtil" class="com.liferay.portlet.polls.service.PollsVoteServiceUtil" lazy-init="true">
 		<property name="service">
 			<ref bean="com.liferay.portlet.polls.service.PollsVoteService.transaction" />
 		</property>
@@ -6981,6 +7596,11 @@
 			<ref bean="com.liferay.portlet.ratings.service.RatingsEntryLocalService.transaction" />
 		</property>
 	</bean>
+	<bean id="com.liferay.portlet.ratings.service.RatingsEntryLocalServiceUtil" class="com.liferay.portlet.ratings.service.RatingsEntryLocalServiceUtil" lazy-init="true">
+		<property name="service">
+			<ref bean="com.liferay.portlet.ratings.service.RatingsEntryLocalService.transaction" />
+		</property>
+	</bean>
 	<bean id="com.liferay.portlet.ratings.service.RatingsEntryService.impl" class="com.liferay.portlet.ratings.service.impl.RatingsEntryServiceImpl" lazy-init="true" />
 	<bean id="com.liferay.portlet.ratings.service.RatingsEntryService.transaction" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean" lazy-init="true">
 		<property name="transactionManager">
@@ -7012,6 +7632,11 @@
 		</property>
 	</bean>
 	<bean id="com.liferay.portlet.ratings.service.RatingsEntryServiceFactory" class="com.liferay.portlet.ratings.service.RatingsEntryServiceFactory" lazy-init="true">
+		<property name="service">
+			<ref bean="com.liferay.portlet.ratings.service.RatingsEntryService.transaction" />
+		</property>
+	</bean>
+	<bean id="com.liferay.portlet.ratings.service.RatingsEntryServiceUtil" class="com.liferay.portlet.ratings.service.RatingsEntryServiceUtil" lazy-init="true">
 		<property name="service">
 			<ref bean="com.liferay.portlet.ratings.service.RatingsEntryService.transaction" />
 		</property>
@@ -7080,6 +7705,11 @@
 			<ref bean="com.liferay.portlet.ratings.service.RatingsStatsLocalService.transaction" />
 		</property>
 	</bean>
+	<bean id="com.liferay.portlet.ratings.service.RatingsStatsLocalServiceUtil" class="com.liferay.portlet.ratings.service.RatingsStatsLocalServiceUtil" lazy-init="true">
+		<property name="service">
+			<ref bean="com.liferay.portlet.ratings.service.RatingsStatsLocalService.transaction" />
+		</property>
+	</bean>
 	<bean id="com.liferay.portlet.ratings.service.persistence.RatingsStatsPersistence.impl" class="com.liferay.portlet.ratings.service.persistence.RatingsStatsPersistenceImpl" lazy-init="true">
 		<property name="dataSource">
 			<ref bean="liferayDataSource" />
@@ -7140,6 +7770,11 @@
 		</property>
 	</bean>
 	<bean id="com.liferay.portlet.shopping.service.ShoppingCartLocalServiceFactory" class="com.liferay.portlet.shopping.service.ShoppingCartLocalServiceFactory" lazy-init="true">
+		<property name="service">
+			<ref bean="com.liferay.portlet.shopping.service.ShoppingCartLocalService.transaction" />
+		</property>
+	</bean>
+	<bean id="com.liferay.portlet.shopping.service.ShoppingCartLocalServiceUtil" class="com.liferay.portlet.shopping.service.ShoppingCartLocalServiceUtil" lazy-init="true">
 		<property name="service">
 			<ref bean="com.liferay.portlet.shopping.service.ShoppingCartLocalService.transaction" />
 		</property>
@@ -7208,6 +7843,11 @@
 			<ref bean="com.liferay.portlet.shopping.service.ShoppingCategoryLocalService.transaction" />
 		</property>
 	</bean>
+	<bean id="com.liferay.portlet.shopping.service.ShoppingCategoryLocalServiceUtil" class="com.liferay.portlet.shopping.service.ShoppingCategoryLocalServiceUtil" lazy-init="true">
+		<property name="service">
+			<ref bean="com.liferay.portlet.shopping.service.ShoppingCategoryLocalService.transaction" />
+		</property>
+	</bean>
 	<bean id="com.liferay.portlet.shopping.service.ShoppingCategoryService.impl" class="com.liferay.portlet.shopping.service.impl.ShoppingCategoryServiceImpl" lazy-init="true" />
 	<bean id="com.liferay.portlet.shopping.service.ShoppingCategoryService.transaction" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean" lazy-init="true">
 		<property name="transactionManager">
@@ -7239,6 +7879,11 @@
 		</property>
 	</bean>
 	<bean id="com.liferay.portlet.shopping.service.ShoppingCategoryServiceFactory" class="com.liferay.portlet.shopping.service.ShoppingCategoryServiceFactory" lazy-init="true">
+		<property name="service">
+			<ref bean="com.liferay.portlet.shopping.service.ShoppingCategoryService.transaction" />
+		</property>
+	</bean>
+	<bean id="com.liferay.portlet.shopping.service.ShoppingCategoryServiceUtil" class="com.liferay.portlet.shopping.service.ShoppingCategoryServiceUtil" lazy-init="true">
 		<property name="service">
 			<ref bean="com.liferay.portlet.shopping.service.ShoppingCategoryService.transaction" />
 		</property>
@@ -7307,6 +7952,11 @@
 			<ref bean="com.liferay.portlet.shopping.service.ShoppingCouponLocalService.transaction" />
 		</property>
 	</bean>
+	<bean id="com.liferay.portlet.shopping.service.ShoppingCouponLocalServiceUtil" class="com.liferay.portlet.shopping.service.ShoppingCouponLocalServiceUtil" lazy-init="true">
+		<property name="service">
+			<ref bean="com.liferay.portlet.shopping.service.ShoppingCouponLocalService.transaction" />
+		</property>
+	</bean>
 	<bean id="com.liferay.portlet.shopping.service.ShoppingCouponService.impl" class="com.liferay.portlet.shopping.service.impl.ShoppingCouponServiceImpl" lazy-init="true" />
 	<bean id="com.liferay.portlet.shopping.service.ShoppingCouponService.transaction" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean" lazy-init="true">
 		<property name="transactionManager">
@@ -7338,6 +7988,11 @@
 		</property>
 	</bean>
 	<bean id="com.liferay.portlet.shopping.service.ShoppingCouponServiceFactory" class="com.liferay.portlet.shopping.service.ShoppingCouponServiceFactory" lazy-init="true">
+		<property name="service">
+			<ref bean="com.liferay.portlet.shopping.service.ShoppingCouponService.transaction" />
+		</property>
+	</bean>
+	<bean id="com.liferay.portlet.shopping.service.ShoppingCouponServiceUtil" class="com.liferay.portlet.shopping.service.ShoppingCouponServiceUtil" lazy-init="true">
 		<property name="service">
 			<ref bean="com.liferay.portlet.shopping.service.ShoppingCouponService.transaction" />
 		</property>
@@ -7419,6 +8074,11 @@
 			<ref bean="com.liferay.portlet.shopping.service.ShoppingItemLocalService.transaction" />
 		</property>
 	</bean>
+	<bean id="com.liferay.portlet.shopping.service.ShoppingItemLocalServiceUtil" class="com.liferay.portlet.shopping.service.ShoppingItemLocalServiceUtil" lazy-init="true">
+		<property name="service">
+			<ref bean="com.liferay.portlet.shopping.service.ShoppingItemLocalService.transaction" />
+		</property>
+	</bean>
 	<bean id="com.liferay.portlet.shopping.service.ShoppingItemService.impl" class="com.liferay.portlet.shopping.service.impl.ShoppingItemServiceImpl" lazy-init="true" />
 	<bean id="com.liferay.portlet.shopping.service.ShoppingItemService.transaction" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean" lazy-init="true">
 		<property name="transactionManager">
@@ -7450,6 +8110,11 @@
 		</property>
 	</bean>
 	<bean id="com.liferay.portlet.shopping.service.ShoppingItemServiceFactory" class="com.liferay.portlet.shopping.service.ShoppingItemServiceFactory" lazy-init="true">
+		<property name="service">
+			<ref bean="com.liferay.portlet.shopping.service.ShoppingItemService.transaction" />
+		</property>
+	</bean>
+	<bean id="com.liferay.portlet.shopping.service.ShoppingItemServiceUtil" class="com.liferay.portlet.shopping.service.ShoppingItemServiceUtil" lazy-init="true">
 		<property name="service">
 			<ref bean="com.liferay.portlet.shopping.service.ShoppingItemService.transaction" />
 		</property>
@@ -7531,6 +8196,11 @@
 			<ref bean="com.liferay.portlet.shopping.service.ShoppingItemFieldLocalService.transaction" />
 		</property>
 	</bean>
+	<bean id="com.liferay.portlet.shopping.service.ShoppingItemFieldLocalServiceUtil" class="com.liferay.portlet.shopping.service.ShoppingItemFieldLocalServiceUtil" lazy-init="true">
+		<property name="service">
+			<ref bean="com.liferay.portlet.shopping.service.ShoppingItemFieldLocalService.transaction" />
+		</property>
+	</bean>
 	<bean id="com.liferay.portlet.shopping.service.persistence.ShoppingItemFieldPersistence.impl" class="com.liferay.portlet.shopping.service.persistence.ShoppingItemFieldPersistenceImpl" lazy-init="true">
 		<property name="dataSource">
 			<ref bean="liferayDataSource" />
@@ -7591,6 +8261,11 @@
 		</property>
 	</bean>
 	<bean id="com.liferay.portlet.shopping.service.ShoppingItemPriceLocalServiceFactory" class="com.liferay.portlet.shopping.service.ShoppingItemPriceLocalServiceFactory" lazy-init="true">
+		<property name="service">
+			<ref bean="com.liferay.portlet.shopping.service.ShoppingItemPriceLocalService.transaction" />
+		</property>
+	</bean>
+	<bean id="com.liferay.portlet.shopping.service.ShoppingItemPriceLocalServiceUtil" class="com.liferay.portlet.shopping.service.ShoppingItemPriceLocalServiceUtil" lazy-init="true">
 		<property name="service">
 			<ref bean="com.liferay.portlet.shopping.service.ShoppingItemPriceLocalService.transaction" />
 		</property>
@@ -7659,6 +8334,11 @@
 			<ref bean="com.liferay.portlet.shopping.service.ShoppingOrderLocalService.transaction" />
 		</property>
 	</bean>
+	<bean id="com.liferay.portlet.shopping.service.ShoppingOrderLocalServiceUtil" class="com.liferay.portlet.shopping.service.ShoppingOrderLocalServiceUtil" lazy-init="true">
+		<property name="service">
+			<ref bean="com.liferay.portlet.shopping.service.ShoppingOrderLocalService.transaction" />
+		</property>
+	</bean>
 	<bean id="com.liferay.portlet.shopping.service.ShoppingOrderService.impl" class="com.liferay.portlet.shopping.service.impl.ShoppingOrderServiceImpl" lazy-init="true" />
 	<bean id="com.liferay.portlet.shopping.service.ShoppingOrderService.transaction" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean" lazy-init="true">
 		<property name="transactionManager">
@@ -7690,6 +8370,11 @@
 		</property>
 	</bean>
 	<bean id="com.liferay.portlet.shopping.service.ShoppingOrderServiceFactory" class="com.liferay.portlet.shopping.service.ShoppingOrderServiceFactory" lazy-init="true">
+		<property name="service">
+			<ref bean="com.liferay.portlet.shopping.service.ShoppingOrderService.transaction" />
+		</property>
+	</bean>
+	<bean id="com.liferay.portlet.shopping.service.ShoppingOrderServiceUtil" class="com.liferay.portlet.shopping.service.ShoppingOrderServiceUtil" lazy-init="true">
 		<property name="service">
 			<ref bean="com.liferay.portlet.shopping.service.ShoppingOrderService.transaction" />
 		</property>
@@ -7771,6 +8456,11 @@
 			<ref bean="com.liferay.portlet.shopping.service.ShoppingOrderItemLocalService.transaction" />
 		</property>
 	</bean>
+	<bean id="com.liferay.portlet.shopping.service.ShoppingOrderItemLocalServiceUtil" class="com.liferay.portlet.shopping.service.ShoppingOrderItemLocalServiceUtil" lazy-init="true">
+		<property name="service">
+			<ref bean="com.liferay.portlet.shopping.service.ShoppingOrderItemLocalService.transaction" />
+		</property>
+	</bean>
 	<bean id="com.liferay.portlet.shopping.service.persistence.ShoppingOrderItemPersistence.impl" class="com.liferay.portlet.shopping.service.persistence.ShoppingOrderItemPersistenceImpl" lazy-init="true">
 		<property name="dataSource">
 			<ref bean="liferayDataSource" />
@@ -7835,6 +8525,11 @@
 			<ref bean="com.liferay.portlet.social.service.SocialActivityLocalService.transaction" />
 		</property>
 	</bean>
+	<bean id="com.liferay.portlet.social.service.SocialActivityLocalServiceUtil" class="com.liferay.portlet.social.service.SocialActivityLocalServiceUtil" lazy-init="true">
+		<property name="service">
+			<ref bean="com.liferay.portlet.social.service.SocialActivityLocalService.transaction" />
+		</property>
+	</bean>
 	<bean id="com.liferay.portlet.social.service.persistence.SocialActivityPersistence.impl" class="com.liferay.portlet.social.service.persistence.SocialActivityPersistenceImpl" lazy-init="true">
 		<property name="dataSource">
 			<ref bean="liferayDataSource" />
@@ -7893,6 +8588,11 @@
 			<ref bean="com.liferay.portlet.social.service.SocialActivityInterpreterLocalService.impl" />
 		</property>
 	</bean>
+	<bean id="com.liferay.portlet.social.service.SocialActivityInterpreterLocalServiceUtil" class="com.liferay.portlet.social.service.SocialActivityInterpreterLocalServiceUtil" lazy-init="true">
+		<property name="service">
+			<ref bean="com.liferay.portlet.social.service.SocialActivityInterpreterLocalService.impl" />
+		</property>
+	</bean>
 	<bean id="com.liferay.portlet.social.service.SocialRelationLocalService.impl" class="com.liferay.portlet.social.service.impl.SocialRelationLocalServiceImpl" lazy-init="true" />
 	<bean id="com.liferay.portlet.social.service.SocialRelationLocalService.transaction" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean" lazy-init="true">
 		<property name="transactionManager">
@@ -7924,6 +8624,11 @@
 		</property>
 	</bean>
 	<bean id="com.liferay.portlet.social.service.SocialRelationLocalServiceFactory" class="com.liferay.portlet.social.service.SocialRelationLocalServiceFactory" lazy-init="true">
+		<property name="service">
+			<ref bean="com.liferay.portlet.social.service.SocialRelationLocalService.transaction" />
+		</property>
+	</bean>
+	<bean id="com.liferay.portlet.social.service.SocialRelationLocalServiceUtil" class="com.liferay.portlet.social.service.SocialRelationLocalServiceUtil" lazy-init="true">
 		<property name="service">
 			<ref bean="com.liferay.portlet.social.service.SocialRelationLocalService.transaction" />
 		</property>
@@ -7992,6 +8697,11 @@
 			<ref bean="com.liferay.portlet.social.service.SocialRequestLocalService.transaction" />
 		</property>
 	</bean>
+	<bean id="com.liferay.portlet.social.service.SocialRequestLocalServiceUtil" class="com.liferay.portlet.social.service.SocialRequestLocalServiceUtil" lazy-init="true">
+		<property name="service">
+			<ref bean="com.liferay.portlet.social.service.SocialRequestLocalService.transaction" />
+		</property>
+	</bean>
 	<bean id="com.liferay.portlet.social.service.persistence.SocialRequestPersistence.impl" class="com.liferay.portlet.social.service.persistence.SocialRequestPersistenceImpl" lazy-init="true">
 		<property name="dataSource">
 			<ref bean="liferayDataSource" />
@@ -8037,6 +8747,11 @@
 			<ref bean="com.liferay.portlet.social.service.SocialRequestInterpreterLocalService.impl" />
 		</property>
 	</bean>
+	<bean id="com.liferay.portlet.social.service.SocialRequestInterpreterLocalServiceUtil" class="com.liferay.portlet.social.service.SocialRequestInterpreterLocalServiceUtil" lazy-init="true">
+		<property name="service">
+			<ref bean="com.liferay.portlet.social.service.SocialRequestInterpreterLocalService.impl" />
+		</property>
+	</bean>
 	<bean id="com.liferay.portlet.softwarecatalog.service.SCLicenseLocalService.impl" class="com.liferay.portlet.softwarecatalog.service.impl.SCLicenseLocalServiceImpl" lazy-init="true" />
 	<bean id="com.liferay.portlet.softwarecatalog.service.SCLicenseLocalService.transaction" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean" lazy-init="true">
 		<property name="transactionManager">
@@ -8072,6 +8787,11 @@
 			<ref bean="com.liferay.portlet.softwarecatalog.service.SCLicenseLocalService.transaction" />
 		</property>
 	</bean>
+	<bean id="com.liferay.portlet.softwarecatalog.service.SCLicenseLocalServiceUtil" class="com.liferay.portlet.softwarecatalog.service.SCLicenseLocalServiceUtil" lazy-init="true">
+		<property name="service">
+			<ref bean="com.liferay.portlet.softwarecatalog.service.SCLicenseLocalService.transaction" />
+		</property>
+	</bean>
 	<bean id="com.liferay.portlet.softwarecatalog.service.SCLicenseService.impl" class="com.liferay.portlet.softwarecatalog.service.impl.SCLicenseServiceImpl" lazy-init="true" />
 	<bean id="com.liferay.portlet.softwarecatalog.service.SCLicenseService.transaction" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean" lazy-init="true">
 		<property name="transactionManager">
@@ -8103,6 +8823,11 @@
 		</property>
 	</bean>
 	<bean id="com.liferay.portlet.softwarecatalog.service.SCLicenseServiceFactory" class="com.liferay.portlet.softwarecatalog.service.SCLicenseServiceFactory" lazy-init="true">
+		<property name="service">
+			<ref bean="com.liferay.portlet.softwarecatalog.service.SCLicenseService.transaction" />
+		</property>
+	</bean>
+	<bean id="com.liferay.portlet.softwarecatalog.service.SCLicenseServiceUtil" class="com.liferay.portlet.softwarecatalog.service.SCLicenseServiceUtil" lazy-init="true">
 		<property name="service">
 			<ref bean="com.liferay.portlet.softwarecatalog.service.SCLicenseService.transaction" />
 		</property>
@@ -8171,6 +8896,11 @@
 			<ref bean="com.liferay.portlet.softwarecatalog.service.SCFrameworkVersionLocalService.transaction" />
 		</property>
 	</bean>
+	<bean id="com.liferay.portlet.softwarecatalog.service.SCFrameworkVersionLocalServiceUtil" class="com.liferay.portlet.softwarecatalog.service.SCFrameworkVersionLocalServiceUtil" lazy-init="true">
+		<property name="service">
+			<ref bean="com.liferay.portlet.softwarecatalog.service.SCFrameworkVersionLocalService.transaction" />
+		</property>
+	</bean>
 	<bean id="com.liferay.portlet.softwarecatalog.service.SCFrameworkVersionService.impl" class="com.liferay.portlet.softwarecatalog.service.impl.SCFrameworkVersionServiceImpl" lazy-init="true" />
 	<bean id="com.liferay.portlet.softwarecatalog.service.SCFrameworkVersionService.transaction" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean" lazy-init="true">
 		<property name="transactionManager">
@@ -8202,6 +8932,11 @@
 		</property>
 	</bean>
 	<bean id="com.liferay.portlet.softwarecatalog.service.SCFrameworkVersionServiceFactory" class="com.liferay.portlet.softwarecatalog.service.SCFrameworkVersionServiceFactory" lazy-init="true">
+		<property name="service">
+			<ref bean="com.liferay.portlet.softwarecatalog.service.SCFrameworkVersionService.transaction" />
+		</property>
+	</bean>
+	<bean id="com.liferay.portlet.softwarecatalog.service.SCFrameworkVersionServiceUtil" class="com.liferay.portlet.softwarecatalog.service.SCFrameworkVersionServiceUtil" lazy-init="true">
 		<property name="service">
 			<ref bean="com.liferay.portlet.softwarecatalog.service.SCFrameworkVersionService.transaction" />
 		</property>
@@ -8270,6 +9005,11 @@
 			<ref bean="com.liferay.portlet.softwarecatalog.service.SCProductEntryLocalService.transaction" />
 		</property>
 	</bean>
+	<bean id="com.liferay.portlet.softwarecatalog.service.SCProductEntryLocalServiceUtil" class="com.liferay.portlet.softwarecatalog.service.SCProductEntryLocalServiceUtil" lazy-init="true">
+		<property name="service">
+			<ref bean="com.liferay.portlet.softwarecatalog.service.SCProductEntryLocalService.transaction" />
+		</property>
+	</bean>
 	<bean id="com.liferay.portlet.softwarecatalog.service.SCProductEntryService.impl" class="com.liferay.portlet.softwarecatalog.service.impl.SCProductEntryServiceImpl" lazy-init="true" />
 	<bean id="com.liferay.portlet.softwarecatalog.service.SCProductEntryService.transaction" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean" lazy-init="true">
 		<property name="transactionManager">
@@ -8301,6 +9041,11 @@
 		</property>
 	</bean>
 	<bean id="com.liferay.portlet.softwarecatalog.service.SCProductEntryServiceFactory" class="com.liferay.portlet.softwarecatalog.service.SCProductEntryServiceFactory" lazy-init="true">
+		<property name="service">
+			<ref bean="com.liferay.portlet.softwarecatalog.service.SCProductEntryService.transaction" />
+		</property>
+	</bean>
+	<bean id="com.liferay.portlet.softwarecatalog.service.SCProductEntryServiceUtil" class="com.liferay.portlet.softwarecatalog.service.SCProductEntryServiceUtil" lazy-init="true">
 		<property name="service">
 			<ref bean="com.liferay.portlet.softwarecatalog.service.SCProductEntryService.transaction" />
 		</property>
@@ -8369,6 +9114,11 @@
 			<ref bean="com.liferay.portlet.softwarecatalog.service.SCProductScreenshotLocalService.transaction" />
 		</property>
 	</bean>
+	<bean id="com.liferay.portlet.softwarecatalog.service.SCProductScreenshotLocalServiceUtil" class="com.liferay.portlet.softwarecatalog.service.SCProductScreenshotLocalServiceUtil" lazy-init="true">
+		<property name="service">
+			<ref bean="com.liferay.portlet.softwarecatalog.service.SCProductScreenshotLocalService.transaction" />
+		</property>
+	</bean>
 	<bean id="com.liferay.portlet.softwarecatalog.service.persistence.SCProductScreenshotPersistence.impl" class="com.liferay.portlet.softwarecatalog.service.persistence.SCProductScreenshotPersistenceImpl" lazy-init="true">
 		<property name="dataSource">
 			<ref bean="liferayDataSource" />
@@ -8433,6 +9183,11 @@
 			<ref bean="com.liferay.portlet.softwarecatalog.service.SCProductVersionLocalService.transaction" />
 		</property>
 	</bean>
+	<bean id="com.liferay.portlet.softwarecatalog.service.SCProductVersionLocalServiceUtil" class="com.liferay.portlet.softwarecatalog.service.SCProductVersionLocalServiceUtil" lazy-init="true">
+		<property name="service">
+			<ref bean="com.liferay.portlet.softwarecatalog.service.SCProductVersionLocalService.transaction" />
+		</property>
+	</bean>
 	<bean id="com.liferay.portlet.softwarecatalog.service.SCProductVersionService.impl" class="com.liferay.portlet.softwarecatalog.service.impl.SCProductVersionServiceImpl" lazy-init="true" />
 	<bean id="com.liferay.portlet.softwarecatalog.service.SCProductVersionService.transaction" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean" lazy-init="true">
 		<property name="transactionManager">
@@ -8464,6 +9219,11 @@
 		</property>
 	</bean>
 	<bean id="com.liferay.portlet.softwarecatalog.service.SCProductVersionServiceFactory" class="com.liferay.portlet.softwarecatalog.service.SCProductVersionServiceFactory" lazy-init="true">
+		<property name="service">
+			<ref bean="com.liferay.portlet.softwarecatalog.service.SCProductVersionService.transaction" />
+		</property>
+	</bean>
+	<bean id="com.liferay.portlet.softwarecatalog.service.SCProductVersionServiceUtil" class="com.liferay.portlet.softwarecatalog.service.SCProductVersionServiceUtil" lazy-init="true">
 		<property name="service">
 			<ref bean="com.liferay.portlet.softwarecatalog.service.SCProductVersionService.transaction" />
 		</property>
@@ -8532,6 +9292,11 @@
 			<ref bean="com.liferay.portlet.tags.service.TagsAssetLocalService.transaction" />
 		</property>
 	</bean>
+	<bean id="com.liferay.portlet.tags.service.TagsAssetLocalServiceUtil" class="com.liferay.portlet.tags.service.TagsAssetLocalServiceUtil" lazy-init="true">
+		<property name="service">
+			<ref bean="com.liferay.portlet.tags.service.TagsAssetLocalService.transaction" />
+		</property>
+	</bean>
 	<bean id="com.liferay.portlet.tags.service.TagsAssetService.impl" class="com.liferay.portlet.tags.service.impl.TagsAssetServiceImpl" lazy-init="true" />
 	<bean id="com.liferay.portlet.tags.service.TagsAssetService.transaction" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean" lazy-init="true">
 		<property name="transactionManager">
@@ -8563,6 +9328,11 @@
 		</property>
 	</bean>
 	<bean id="com.liferay.portlet.tags.service.TagsAssetServiceFactory" class="com.liferay.portlet.tags.service.TagsAssetServiceFactory" lazy-init="true">
+		<property name="service">
+			<ref bean="com.liferay.portlet.tags.service.TagsAssetService.transaction" />
+		</property>
+	</bean>
+	<bean id="com.liferay.portlet.tags.service.TagsAssetServiceUtil" class="com.liferay.portlet.tags.service.TagsAssetServiceUtil" lazy-init="true">
 		<property name="service">
 			<ref bean="com.liferay.portlet.tags.service.TagsAssetService.transaction" />
 		</property>
@@ -8644,6 +9414,11 @@
 			<ref bean="com.liferay.portlet.tags.service.TagsEntryLocalService.transaction" />
 		</property>
 	</bean>
+	<bean id="com.liferay.portlet.tags.service.TagsEntryLocalServiceUtil" class="com.liferay.portlet.tags.service.TagsEntryLocalServiceUtil" lazy-init="true">
+		<property name="service">
+			<ref bean="com.liferay.portlet.tags.service.TagsEntryLocalService.transaction" />
+		</property>
+	</bean>
 	<bean id="com.liferay.portlet.tags.service.TagsEntryService.impl" class="com.liferay.portlet.tags.service.impl.TagsEntryServiceImpl" lazy-init="true" />
 	<bean id="com.liferay.portlet.tags.service.TagsEntryService.transaction" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean" lazy-init="true">
 		<property name="transactionManager">
@@ -8675,6 +9450,11 @@
 		</property>
 	</bean>
 	<bean id="com.liferay.portlet.tags.service.TagsEntryServiceFactory" class="com.liferay.portlet.tags.service.TagsEntryServiceFactory" lazy-init="true">
+		<property name="service">
+			<ref bean="com.liferay.portlet.tags.service.TagsEntryService.transaction" />
+		</property>
+	</bean>
+	<bean id="com.liferay.portlet.tags.service.TagsEntryServiceUtil" class="com.liferay.portlet.tags.service.TagsEntryServiceUtil" lazy-init="true">
 		<property name="service">
 			<ref bean="com.liferay.portlet.tags.service.TagsEntryService.transaction" />
 		</property>
@@ -8756,6 +9536,11 @@
 			<ref bean="com.liferay.portlet.tags.service.TagsPropertyLocalService.transaction" />
 		</property>
 	</bean>
+	<bean id="com.liferay.portlet.tags.service.TagsPropertyLocalServiceUtil" class="com.liferay.portlet.tags.service.TagsPropertyLocalServiceUtil" lazy-init="true">
+		<property name="service">
+			<ref bean="com.liferay.portlet.tags.service.TagsPropertyLocalService.transaction" />
+		</property>
+	</bean>
 	<bean id="com.liferay.portlet.tags.service.TagsPropertyService.impl" class="com.liferay.portlet.tags.service.impl.TagsPropertyServiceImpl" lazy-init="true" />
 	<bean id="com.liferay.portlet.tags.service.TagsPropertyService.transaction" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean" lazy-init="true">
 		<property name="transactionManager">
@@ -8787,6 +9572,11 @@
 		</property>
 	</bean>
 	<bean id="com.liferay.portlet.tags.service.TagsPropertyServiceFactory" class="com.liferay.portlet.tags.service.TagsPropertyServiceFactory" lazy-init="true">
+		<property name="service">
+			<ref bean="com.liferay.portlet.tags.service.TagsPropertyService.transaction" />
+		</property>
+	</bean>
+	<bean id="com.liferay.portlet.tags.service.TagsPropertyServiceUtil" class="com.liferay.portlet.tags.service.TagsPropertyServiceUtil" lazy-init="true">
 		<property name="service">
 			<ref bean="com.liferay.portlet.tags.service.TagsPropertyService.transaction" />
 		</property>
@@ -8881,6 +9671,11 @@
 			<ref bean="com.liferay.portlet.tags.service.TagsSourceLocalService.transaction" />
 		</property>
 	</bean>
+	<bean id="com.liferay.portlet.tags.service.TagsSourceLocalServiceUtil" class="com.liferay.portlet.tags.service.TagsSourceLocalServiceUtil" lazy-init="true">
+		<property name="service">
+			<ref bean="com.liferay.portlet.tags.service.TagsSourceLocalService.transaction" />
+		</property>
+	</bean>
 	<bean id="com.liferay.portlet.tags.service.TagsSourceService.impl" class="com.liferay.portlet.tags.service.impl.TagsSourceServiceImpl" lazy-init="true" />
 	<bean id="com.liferay.portlet.tags.service.TagsSourceService.transaction" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean" lazy-init="true">
 		<property name="transactionManager">
@@ -8912,6 +9707,11 @@
 		</property>
 	</bean>
 	<bean id="com.liferay.portlet.tags.service.TagsSourceServiceFactory" class="com.liferay.portlet.tags.service.TagsSourceServiceFactory" lazy-init="true">
+		<property name="service">
+			<ref bean="com.liferay.portlet.tags.service.TagsSourceService.transaction" />
+		</property>
+	</bean>
+	<bean id="com.liferay.portlet.tags.service.TagsSourceServiceUtil" class="com.liferay.portlet.tags.service.TagsSourceServiceUtil" lazy-init="true">
 		<property name="service">
 			<ref bean="com.liferay.portlet.tags.service.TagsSourceService.transaction" />
 		</property>
@@ -8980,6 +9780,11 @@
 			<ref bean="com.liferay.portlet.tags.service.TagsVocabularyLocalService.transaction" />
 		</property>
 	</bean>
+	<bean id="com.liferay.portlet.tags.service.TagsVocabularyLocalServiceUtil" class="com.liferay.portlet.tags.service.TagsVocabularyLocalServiceUtil" lazy-init="true">
+		<property name="service">
+			<ref bean="com.liferay.portlet.tags.service.TagsVocabularyLocalService.transaction" />
+		</property>
+	</bean>
 	<bean id="com.liferay.portlet.tags.service.TagsVocabularyService.impl" class="com.liferay.portlet.tags.service.impl.TagsVocabularyServiceImpl" lazy-init="true" />
 	<bean id="com.liferay.portlet.tags.service.TagsVocabularyService.transaction" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean" lazy-init="true">
 		<property name="transactionManager">
@@ -9011,6 +9816,11 @@
 		</property>
 	</bean>
 	<bean id="com.liferay.portlet.tags.service.TagsVocabularyServiceFactory" class="com.liferay.portlet.tags.service.TagsVocabularyServiceFactory" lazy-init="true">
+		<property name="service">
+			<ref bean="com.liferay.portlet.tags.service.TagsVocabularyService.transaction" />
+		</property>
+	</bean>
+	<bean id="com.liferay.portlet.tags.service.TagsVocabularyServiceUtil" class="com.liferay.portlet.tags.service.TagsVocabularyServiceUtil" lazy-init="true">
 		<property name="service">
 			<ref bean="com.liferay.portlet.tags.service.TagsVocabularyService.transaction" />
 		</property>
@@ -9079,6 +9889,11 @@
 			<ref bean="com.liferay.portlet.tasks.service.TasksReviewLocalService.transaction" />
 		</property>
 	</bean>
+	<bean id="com.liferay.portlet.tasks.service.TasksReviewLocalServiceUtil" class="com.liferay.portlet.tasks.service.TasksReviewLocalServiceUtil" lazy-init="true">
+		<property name="service">
+			<ref bean="com.liferay.portlet.tasks.service.TasksReviewLocalService.transaction" />
+		</property>
+	</bean>
 	<bean id="com.liferay.portlet.tasks.service.TasksReviewService.impl" class="com.liferay.portlet.tasks.service.impl.TasksReviewServiceImpl" lazy-init="true" />
 	<bean id="com.liferay.portlet.tasks.service.TasksReviewService.transaction" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean" lazy-init="true">
 		<property name="transactionManager">
@@ -9110,6 +9925,11 @@
 		</property>
 	</bean>
 	<bean id="com.liferay.portlet.tasks.service.TasksReviewServiceFactory" class="com.liferay.portlet.tasks.service.TasksReviewServiceFactory" lazy-init="true">
+		<property name="service">
+			<ref bean="com.liferay.portlet.tasks.service.TasksReviewService.transaction" />
+		</property>
+	</bean>
+	<bean id="com.liferay.portlet.tasks.service.TasksReviewServiceUtil" class="com.liferay.portlet.tasks.service.TasksReviewServiceUtil" lazy-init="true">
 		<property name="service">
 			<ref bean="com.liferay.portlet.tasks.service.TasksReviewService.transaction" />
 		</property>
@@ -9178,6 +9998,11 @@
 			<ref bean="com.liferay.portlet.tasks.service.TasksProposalLocalService.transaction" />
 		</property>
 	</bean>
+	<bean id="com.liferay.portlet.tasks.service.TasksProposalLocalServiceUtil" class="com.liferay.portlet.tasks.service.TasksProposalLocalServiceUtil" lazy-init="true">
+		<property name="service">
+			<ref bean="com.liferay.portlet.tasks.service.TasksProposalLocalService.transaction" />
+		</property>
+	</bean>
 	<bean id="com.liferay.portlet.tasks.service.TasksProposalService.impl" class="com.liferay.portlet.tasks.service.impl.TasksProposalServiceImpl" lazy-init="true" />
 	<bean id="com.liferay.portlet.tasks.service.TasksProposalService.transaction" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean" lazy-init="true">
 		<property name="transactionManager">
@@ -9209,6 +10034,11 @@
 		</property>
 	</bean>
 	<bean id="com.liferay.portlet.tasks.service.TasksProposalServiceFactory" class="com.liferay.portlet.tasks.service.TasksProposalServiceFactory" lazy-init="true">
+		<property name="service">
+			<ref bean="com.liferay.portlet.tasks.service.TasksProposalService.transaction" />
+		</property>
+	</bean>
+	<bean id="com.liferay.portlet.tasks.service.TasksProposalServiceUtil" class="com.liferay.portlet.tasks.service.TasksProposalServiceUtil" lazy-init="true">
 		<property name="service">
 			<ref bean="com.liferay.portlet.tasks.service.TasksProposalService.transaction" />
 		</property>
@@ -9290,6 +10120,11 @@
 			<ref bean="com.liferay.portlet.wiki.service.WikiNodeLocalService.transaction" />
 		</property>
 	</bean>
+	<bean id="com.liferay.portlet.wiki.service.WikiNodeLocalServiceUtil" class="com.liferay.portlet.wiki.service.WikiNodeLocalServiceUtil" lazy-init="true">
+		<property name="service">
+			<ref bean="com.liferay.portlet.wiki.service.WikiNodeLocalService.transaction" />
+		</property>
+	</bean>
 	<bean id="com.liferay.portlet.wiki.service.WikiNodeService.impl" class="com.liferay.portlet.wiki.service.impl.WikiNodeServiceImpl" lazy-init="true" />
 	<bean id="com.liferay.portlet.wiki.service.WikiNodeService.transaction" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean" lazy-init="true">
 		<property name="transactionManager">
@@ -9321,6 +10156,11 @@
 		</property>
 	</bean>
 	<bean id="com.liferay.portlet.wiki.service.WikiNodeServiceFactory" class="com.liferay.portlet.wiki.service.WikiNodeServiceFactory" lazy-init="true">
+		<property name="service">
+			<ref bean="com.liferay.portlet.wiki.service.WikiNodeService.transaction" />
+		</property>
+	</bean>
+	<bean id="com.liferay.portlet.wiki.service.WikiNodeServiceUtil" class="com.liferay.portlet.wiki.service.WikiNodeServiceUtil" lazy-init="true">
 		<property name="service">
 			<ref bean="com.liferay.portlet.wiki.service.WikiNodeService.transaction" />
 		</property>
@@ -9389,6 +10229,11 @@
 			<ref bean="com.liferay.portlet.wiki.service.WikiPageLocalService.transaction" />
 		</property>
 	</bean>
+	<bean id="com.liferay.portlet.wiki.service.WikiPageLocalServiceUtil" class="com.liferay.portlet.wiki.service.WikiPageLocalServiceUtil" lazy-init="true">
+		<property name="service">
+			<ref bean="com.liferay.portlet.wiki.service.WikiPageLocalService.transaction" />
+		</property>
+	</bean>
 	<bean id="com.liferay.portlet.wiki.service.WikiPageService.impl" class="com.liferay.portlet.wiki.service.impl.WikiPageServiceImpl" lazy-init="true" />
 	<bean id="com.liferay.portlet.wiki.service.WikiPageService.transaction" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean" lazy-init="true">
 		<property name="transactionManager">
@@ -9420,6 +10265,11 @@
 		</property>
 	</bean>
 	<bean id="com.liferay.portlet.wiki.service.WikiPageServiceFactory" class="com.liferay.portlet.wiki.service.WikiPageServiceFactory" lazy-init="true">
+		<property name="service">
+			<ref bean="com.liferay.portlet.wiki.service.WikiPageService.transaction" />
+		</property>
+	</bean>
+	<bean id="com.liferay.portlet.wiki.service.WikiPageServiceUtil" class="com.liferay.portlet.wiki.service.WikiPageServiceUtil" lazy-init="true">
 		<property name="service">
 			<ref bean="com.liferay.portlet.wiki.service.WikiPageService.transaction" />
 		</property>
@@ -9501,6 +10351,11 @@
 			<ref bean="com.liferay.portlet.wiki.service.WikiPageResourceLocalService.transaction" />
 		</property>
 	</bean>
+	<bean id="com.liferay.portlet.wiki.service.WikiPageResourceLocalServiceUtil" class="com.liferay.portlet.wiki.service.WikiPageResourceLocalServiceUtil" lazy-init="true">
+		<property name="service">
+			<ref bean="com.liferay.portlet.wiki.service.WikiPageResourceLocalService.transaction" />
+		</property>
+	</bean>
 	<bean id="com.liferay.portlet.wiki.service.persistence.WikiPageResourcePersistence.impl" class="com.liferay.portlet.wiki.service.persistence.WikiPageResourcePersistenceImpl" lazy-init="true">
 		<property name="dataSource">
 			<ref bean="liferayDataSource" />
@@ -9565,6 +10420,11 @@
 			<ref bean="com.liferay.portlet.workflow.service.WorkflowComponentService.transaction" />
 		</property>
 	</bean>
+	<bean id="com.liferay.portlet.workflow.service.WorkflowComponentServiceUtil" class="com.liferay.portlet.workflow.service.WorkflowComponentServiceUtil" lazy-init="true">
+		<property name="service">
+			<ref bean="com.liferay.portlet.workflow.service.WorkflowComponentService.transaction" />
+		</property>
+	</bean>
 	<bean id="com.liferay.portlet.workflow.service.WorkflowDefinitionService.impl" class="com.liferay.portlet.workflow.service.impl.WorkflowDefinitionServiceImpl" lazy-init="true" />
 	<bean id="com.liferay.portlet.workflow.service.WorkflowDefinitionService.transaction" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean" lazy-init="true">
 		<property name="transactionManager">
@@ -9596,6 +10456,11 @@
 		</property>
 	</bean>
 	<bean id="com.liferay.portlet.workflow.service.WorkflowDefinitionServiceFactory" class="com.liferay.portlet.workflow.service.WorkflowDefinitionServiceFactory" lazy-init="true">
+		<property name="service">
+			<ref bean="com.liferay.portlet.workflow.service.WorkflowDefinitionService.transaction" />
+		</property>
+	</bean>
+	<bean id="com.liferay.portlet.workflow.service.WorkflowDefinitionServiceUtil" class="com.liferay.portlet.workflow.service.WorkflowDefinitionServiceUtil" lazy-init="true">
 		<property name="service">
 			<ref bean="com.liferay.portlet.workflow.service.WorkflowDefinitionService.transaction" />
 		</property>
@@ -9635,6 +10500,11 @@
 			<ref bean="com.liferay.portlet.workflow.service.WorkflowInstanceService.transaction" />
 		</property>
 	</bean>
+	<bean id="com.liferay.portlet.workflow.service.WorkflowInstanceServiceUtil" class="com.liferay.portlet.workflow.service.WorkflowInstanceServiceUtil" lazy-init="true">
+		<property name="service">
+			<ref bean="com.liferay.portlet.workflow.service.WorkflowInstanceService.transaction" />
+		</property>
+	</bean>
 	<bean id="com.liferay.portlet.workflow.service.WorkflowTaskService.impl" class="com.liferay.portlet.workflow.service.impl.WorkflowTaskServiceImpl" lazy-init="true" />
 	<bean id="com.liferay.portlet.workflow.service.WorkflowTaskService.transaction" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean" lazy-init="true">
 		<property name="transactionManager">
@@ -9666,6 +10536,11 @@
 		</property>
 	</bean>
 	<bean id="com.liferay.portlet.workflow.service.WorkflowTaskServiceFactory" class="com.liferay.portlet.workflow.service.WorkflowTaskServiceFactory" lazy-init="true">
+		<property name="service">
+			<ref bean="com.liferay.portlet.workflow.service.WorkflowTaskService.transaction" />
+		</property>
+	</bean>
+	<bean id="com.liferay.portlet.workflow.service.WorkflowTaskServiceUtil" class="com.liferay.portlet.workflow.service.WorkflowTaskServiceUtil" lazy-init="true">
 		<property name="service">
 			<ref bean="com.liferay.portlet.workflow.service.WorkflowTaskService.transaction" />
 		</property>

@@ -39,15 +39,9 @@ package com.liferay.portal.service;
  * on a bean instead of writing a lookup call and a method call.
  * </p>
  *
- * <p>
- * <code>com.liferay.portal.service.PluginSettingServiceFactory</code>
- * is responsible for the lookup of the bean.
- * </p>
- *
  * @author Brian Wing Shun Chan
  *
  * @see com.liferay.portal.service.PluginSettingService
- * @see com.liferay.portal.service.PluginSettingServiceFactory
  *
  */
 public class PluginSettingServiceUtil {
@@ -56,9 +50,17 @@ public class PluginSettingServiceUtil {
 		java.lang.String roles, boolean active)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
-		PluginSettingService pluginSettingService = PluginSettingServiceFactory.getService();
-
-		return pluginSettingService.updatePluginSetting(companyId, pluginId,
-			pluginType, roles, active);
+		return _service.updatePluginSetting(companyId, pluginId, pluginType,
+			roles, active);
 	}
+
+	public static PluginSettingService getService() {
+		return _service;
+	}
+
+	public void setService(PluginSettingService service) {
+		_service = service;
+	}
+
+	private static PluginSettingService _service;
 }

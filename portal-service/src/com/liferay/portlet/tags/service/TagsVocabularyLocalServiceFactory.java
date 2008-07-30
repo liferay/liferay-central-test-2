@@ -22,6 +22,7 @@
 
 package com.liferay.portlet.tags.service;
 
+import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
 
 /**
  * <a href="TagsVocabularyLocalServiceFactory.java.html"><b><i>View Source</i></b></a>
@@ -51,33 +52,45 @@ package com.liferay.portlet.tags.service;
  *
  */
 public class TagsVocabularyLocalServiceFactory {
+	/**
+	 * @deprecated
+	 */
 	public static TagsVocabularyLocalService getService() {
 		return _getFactory()._service;
 	}
 
+	/**
+	 * @deprecated
+	 */
 	public static TagsVocabularyLocalService getImpl() {
 		if (_impl == null) {
-			_impl = (TagsVocabularyLocalService)com.liferay.portal.kernel.bean.PortalBeanLocatorUtil.locate(_IMPL);
+			_impl = (TagsVocabularyLocalService)PortalBeanLocatorUtil.locate(_IMPL);
 		}
 
 		return _impl;
 	}
 
+	/**
+	 * @deprecated
+	 */
 	public static TagsVocabularyLocalService getTxImpl() {
 		if (_txImpl == null) {
-			_txImpl = (TagsVocabularyLocalService)com.liferay.portal.kernel.bean.PortalBeanLocatorUtil.locate(_TX_IMPL);
+			_txImpl = (TagsVocabularyLocalService)PortalBeanLocatorUtil.locate(_TX_IMPL);
 		}
 
 		return _txImpl;
 	}
 
+	/**
+	 * @deprecated
+	 */
 	public void setService(TagsVocabularyLocalService service) {
 		_service = service;
 	}
 
 	private static TagsVocabularyLocalServiceFactory _getFactory() {
 		if (_factory == null) {
-			_factory = (TagsVocabularyLocalServiceFactory)com.liferay.portal.kernel.bean.PortalBeanLocatorUtil.locate(_FACTORY);
+			_factory = (TagsVocabularyLocalServiceFactory)PortalBeanLocatorUtil.locate(_FACTORY);
 		}
 
 		return _factory;

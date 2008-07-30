@@ -39,122 +39,96 @@ package com.liferay.portlet.journal.service;
  * on a bean instead of writing a lookup call and a method call.
  * </p>
  *
- * <p>
- * <code>com.liferay.portlet.journal.service.JournalArticleResourceLocalServiceFactory</code>
- * is responsible for the lookup of the bean.
- * </p>
- *
  * @author Brian Wing Shun Chan
  *
  * @see com.liferay.portlet.journal.service.JournalArticleResourceLocalService
- * @see com.liferay.portlet.journal.service.JournalArticleResourceLocalServiceFactory
  *
  */
 public class JournalArticleResourceLocalServiceUtil {
 	public static com.liferay.portlet.journal.model.JournalArticleResource addJournalArticleResource(
 		com.liferay.portlet.journal.model.JournalArticleResource journalArticleResource)
 		throws com.liferay.portal.SystemException {
-		JournalArticleResourceLocalService journalArticleResourceLocalService = JournalArticleResourceLocalServiceFactory.getService();
-
-		return journalArticleResourceLocalService.addJournalArticleResource(journalArticleResource);
+		return _service.addJournalArticleResource(journalArticleResource);
 	}
 
 	public static void deleteJournalArticleResource(long resourcePrimKey)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		JournalArticleResourceLocalService journalArticleResourceLocalService = JournalArticleResourceLocalServiceFactory.getService();
-
-		journalArticleResourceLocalService.deleteJournalArticleResource(resourcePrimKey);
+		_service.deleteJournalArticleResource(resourcePrimKey);
 	}
 
 	public static void deleteJournalArticleResource(
 		com.liferay.portlet.journal.model.JournalArticleResource journalArticleResource)
 		throws com.liferay.portal.SystemException {
-		JournalArticleResourceLocalService journalArticleResourceLocalService = JournalArticleResourceLocalServiceFactory.getService();
-
-		journalArticleResourceLocalService.deleteJournalArticleResource(journalArticleResource);
+		_service.deleteJournalArticleResource(journalArticleResource);
 	}
 
 	public static java.util.List<Object> dynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery)
 		throws com.liferay.portal.SystemException {
-		JournalArticleResourceLocalService journalArticleResourceLocalService = JournalArticleResourceLocalServiceFactory.getService();
-
-		return journalArticleResourceLocalService.dynamicQuery(dynamicQuery);
+		return _service.dynamicQuery(dynamicQuery);
 	}
 
 	public static java.util.List<Object> dynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery, int start,
 		int end) throws com.liferay.portal.SystemException {
-		JournalArticleResourceLocalService journalArticleResourceLocalService = JournalArticleResourceLocalServiceFactory.getService();
-
-		return journalArticleResourceLocalService.dynamicQuery(dynamicQuery,
-			start, end);
+		return _service.dynamicQuery(dynamicQuery, start, end);
 	}
 
 	public static com.liferay.portlet.journal.model.JournalArticleResource getJournalArticleResource(
 		long resourcePrimKey)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		JournalArticleResourceLocalService journalArticleResourceLocalService = JournalArticleResourceLocalServiceFactory.getService();
-
-		return journalArticleResourceLocalService.getJournalArticleResource(resourcePrimKey);
+		return _service.getJournalArticleResource(resourcePrimKey);
 	}
 
 	public static java.util.List<com.liferay.portlet.journal.model.JournalArticleResource> getJournalArticleResources(
 		int start, int end) throws com.liferay.portal.SystemException {
-		JournalArticleResourceLocalService journalArticleResourceLocalService = JournalArticleResourceLocalServiceFactory.getService();
-
-		return journalArticleResourceLocalService.getJournalArticleResources(start,
-			end);
+		return _service.getJournalArticleResources(start, end);
 	}
 
 	public static int getJournalArticleResourcesCount()
 		throws com.liferay.portal.SystemException {
-		JournalArticleResourceLocalService journalArticleResourceLocalService = JournalArticleResourceLocalServiceFactory.getService();
-
-		return journalArticleResourceLocalService.getJournalArticleResourcesCount();
+		return _service.getJournalArticleResourcesCount();
 	}
 
 	public static com.liferay.portlet.journal.model.JournalArticleResource updateJournalArticleResource(
 		com.liferay.portlet.journal.model.JournalArticleResource journalArticleResource)
 		throws com.liferay.portal.SystemException {
-		JournalArticleResourceLocalService journalArticleResourceLocalService = JournalArticleResourceLocalServiceFactory.getService();
-
-		return journalArticleResourceLocalService.updateJournalArticleResource(journalArticleResource);
+		return _service.updateJournalArticleResource(journalArticleResource);
 	}
 
 	public static void deleteArticleResource(long groupId,
 		java.lang.String articleId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		JournalArticleResourceLocalService journalArticleResourceLocalService = JournalArticleResourceLocalServiceFactory.getService();
-
-		journalArticleResourceLocalService.deleteArticleResource(groupId,
-			articleId);
+		_service.deleteArticleResource(groupId, articleId);
 	}
 
 	public static com.liferay.portlet.journal.model.JournalArticleResource getArticleResource(
 		long articleResourcePrimKey)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		JournalArticleResourceLocalService journalArticleResourceLocalService = JournalArticleResourceLocalServiceFactory.getService();
-
-		return journalArticleResourceLocalService.getArticleResource(articleResourcePrimKey);
+		return _service.getArticleResource(articleResourcePrimKey);
 	}
 
 	public static long getArticleResourcePrimKey(long groupId,
 		java.lang.String articleId) throws com.liferay.portal.SystemException {
-		JournalArticleResourceLocalService journalArticleResourceLocalService = JournalArticleResourceLocalServiceFactory.getService();
-
-		return journalArticleResourceLocalService.getArticleResourcePrimKey(groupId,
-			articleId);
+		return _service.getArticleResourcePrimKey(groupId, articleId);
 	}
 
 	public static java.util.List<com.liferay.portlet.journal.model.JournalArticleResource> getArticleResources(
 		long groupId) throws com.liferay.portal.SystemException {
-		JournalArticleResourceLocalService journalArticleResourceLocalService = JournalArticleResourceLocalServiceFactory.getService();
-
-		return journalArticleResourceLocalService.getArticleResources(groupId);
+		return _service.getArticleResources(groupId);
 	}
+
+	public static JournalArticleResourceLocalService getService() {
+		return _service;
+	}
+
+	public void setService(JournalArticleResourceLocalService service) {
+		_service = service;
+	}
+
+	private static JournalArticleResourceLocalService _service;
 }

@@ -164,22 +164,12 @@ public class WikiPageResourceUtil {
 	}
 
 	public static WikiPageResourcePersistence getPersistence() {
-		return _getUtil()._persistence;
+		return _persistence;
 	}
 
 	public void setPersistence(WikiPageResourcePersistence persistence) {
 		_persistence = persistence;
 	}
 
-	private static WikiPageResourceUtil _getUtil() {
-		if (_util == null) {
-			_util = (WikiPageResourceUtil)com.liferay.portal.kernel.bean.PortalBeanLocatorUtil.locate(_UTIL);
-		}
-
-		return _util;
-	}
-
-	private static final String _UTIL = WikiPageResourceUtil.class.getName();
-	private static WikiPageResourceUtil _util;
-	private WikiPageResourcePersistence _persistence;
+	private static WikiPageResourcePersistence _persistence;
 }

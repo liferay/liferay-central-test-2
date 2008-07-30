@@ -44,7 +44,6 @@ package com.liferay.portlet.social.service;
  *
  * @author Brian Wing Shun Chan
  *
- * @see com.liferay.portlet.social.service.SocialRequestInterpreterLocalServiceFactory
  * @see com.liferay.portlet.social.service.SocialRequestInterpreterLocalServiceUtil
  *
  */

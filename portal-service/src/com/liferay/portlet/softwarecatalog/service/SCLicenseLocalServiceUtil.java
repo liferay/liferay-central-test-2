@@ -39,87 +39,63 @@ package com.liferay.portlet.softwarecatalog.service;
  * on a bean instead of writing a lookup call and a method call.
  * </p>
  *
- * <p>
- * <code>com.liferay.portlet.softwarecatalog.service.SCLicenseLocalServiceFactory</code>
- * is responsible for the lookup of the bean.
- * </p>
- *
  * @author Brian Wing Shun Chan
  *
  * @see com.liferay.portlet.softwarecatalog.service.SCLicenseLocalService
- * @see com.liferay.portlet.softwarecatalog.service.SCLicenseLocalServiceFactory
  *
  */
 public class SCLicenseLocalServiceUtil {
 	public static com.liferay.portlet.softwarecatalog.model.SCLicense addSCLicense(
 		com.liferay.portlet.softwarecatalog.model.SCLicense scLicense)
 		throws com.liferay.portal.SystemException {
-		SCLicenseLocalService scLicenseLocalService = SCLicenseLocalServiceFactory.getService();
-
-		return scLicenseLocalService.addSCLicense(scLicense);
+		return _service.addSCLicense(scLicense);
 	}
 
 	public static void deleteSCLicense(long licenseId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		SCLicenseLocalService scLicenseLocalService = SCLicenseLocalServiceFactory.getService();
-
-		scLicenseLocalService.deleteSCLicense(licenseId);
+		_service.deleteSCLicense(licenseId);
 	}
 
 	public static void deleteSCLicense(
 		com.liferay.portlet.softwarecatalog.model.SCLicense scLicense)
 		throws com.liferay.portal.SystemException {
-		SCLicenseLocalService scLicenseLocalService = SCLicenseLocalServiceFactory.getService();
-
-		scLicenseLocalService.deleteSCLicense(scLicense);
+		_service.deleteSCLicense(scLicense);
 	}
 
 	public static java.util.List<Object> dynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery)
 		throws com.liferay.portal.SystemException {
-		SCLicenseLocalService scLicenseLocalService = SCLicenseLocalServiceFactory.getService();
-
-		return scLicenseLocalService.dynamicQuery(dynamicQuery);
+		return _service.dynamicQuery(dynamicQuery);
 	}
 
 	public static java.util.List<Object> dynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery, int start,
 		int end) throws com.liferay.portal.SystemException {
-		SCLicenseLocalService scLicenseLocalService = SCLicenseLocalServiceFactory.getService();
-
-		return scLicenseLocalService.dynamicQuery(dynamicQuery, start, end);
+		return _service.dynamicQuery(dynamicQuery, start, end);
 	}
 
 	public static com.liferay.portlet.softwarecatalog.model.SCLicense getSCLicense(
 		long licenseId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		SCLicenseLocalService scLicenseLocalService = SCLicenseLocalServiceFactory.getService();
-
-		return scLicenseLocalService.getSCLicense(licenseId);
+		return _service.getSCLicense(licenseId);
 	}
 
 	public static java.util.List<com.liferay.portlet.softwarecatalog.model.SCLicense> getSCLicenses(
 		int start, int end) throws com.liferay.portal.SystemException {
-		SCLicenseLocalService scLicenseLocalService = SCLicenseLocalServiceFactory.getService();
-
-		return scLicenseLocalService.getSCLicenses(start, end);
+		return _service.getSCLicenses(start, end);
 	}
 
 	public static int getSCLicensesCount()
 		throws com.liferay.portal.SystemException {
-		SCLicenseLocalService scLicenseLocalService = SCLicenseLocalServiceFactory.getService();
-
-		return scLicenseLocalService.getSCLicensesCount();
+		return _service.getSCLicensesCount();
 	}
 
 	public static com.liferay.portlet.softwarecatalog.model.SCLicense updateSCLicense(
 		com.liferay.portlet.softwarecatalog.model.SCLicense scLicense)
 		throws com.liferay.portal.SystemException {
-		SCLicenseLocalService scLicenseLocalService = SCLicenseLocalServiceFactory.getService();
-
-		return scLicenseLocalService.updateSCLicense(scLicense);
+		return _service.updateSCLicense(scLicense);
 	}
 
 	public static com.liferay.portlet.softwarecatalog.model.SCLicense addLicense(
@@ -127,78 +103,57 @@ public class SCLicenseLocalServiceUtil {
 		boolean active, boolean recommended)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		SCLicenseLocalService scLicenseLocalService = SCLicenseLocalServiceFactory.getService();
-
-		return scLicenseLocalService.addLicense(name, url, openSource, active,
-			recommended);
+		return _service.addLicense(name, url, openSource, active, recommended);
 	}
 
 	public static void deleteLicense(long licenseId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		SCLicenseLocalService scLicenseLocalService = SCLicenseLocalServiceFactory.getService();
-
-		scLicenseLocalService.deleteLicense(licenseId);
+		_service.deleteLicense(licenseId);
 	}
 
 	public static com.liferay.portlet.softwarecatalog.model.SCLicense getLicense(
 		long licenseId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		SCLicenseLocalService scLicenseLocalService = SCLicenseLocalServiceFactory.getService();
-
-		return scLicenseLocalService.getLicense(licenseId);
+		return _service.getLicense(licenseId);
 	}
 
 	public static java.util.List<com.liferay.portlet.softwarecatalog.model.SCLicense> getLicenses()
 		throws com.liferay.portal.SystemException {
-		SCLicenseLocalService scLicenseLocalService = SCLicenseLocalServiceFactory.getService();
-
-		return scLicenseLocalService.getLicenses();
+		return _service.getLicenses();
 	}
 
 	public static java.util.List<com.liferay.portlet.softwarecatalog.model.SCLicense> getLicenses(
 		int start, int end) throws com.liferay.portal.SystemException {
-		SCLicenseLocalService scLicenseLocalService = SCLicenseLocalServiceFactory.getService();
-
-		return scLicenseLocalService.getLicenses(start, end);
+		return _service.getLicenses(start, end);
 	}
 
 	public static java.util.List<com.liferay.portlet.softwarecatalog.model.SCLicense> getLicenses(
 		boolean active, boolean recommended)
 		throws com.liferay.portal.SystemException {
-		SCLicenseLocalService scLicenseLocalService = SCLicenseLocalServiceFactory.getService();
-
-		return scLicenseLocalService.getLicenses(active, recommended);
+		return _service.getLicenses(active, recommended);
 	}
 
 	public static java.util.List<com.liferay.portlet.softwarecatalog.model.SCLicense> getLicenses(
 		boolean active, boolean recommended, int start, int end)
 		throws com.liferay.portal.SystemException {
-		SCLicenseLocalService scLicenseLocalService = SCLicenseLocalServiceFactory.getService();
-
-		return scLicenseLocalService.getLicenses(active, recommended, start, end);
+		return _service.getLicenses(active, recommended, start, end);
 	}
 
 	public static int getLicensesCount()
 		throws com.liferay.portal.SystemException {
-		SCLicenseLocalService scLicenseLocalService = SCLicenseLocalServiceFactory.getService();
-
-		return scLicenseLocalService.getLicensesCount();
+		return _service.getLicensesCount();
 	}
 
 	public static int getLicensesCount(boolean active, boolean recommended)
 		throws com.liferay.portal.SystemException {
-		SCLicenseLocalService scLicenseLocalService = SCLicenseLocalServiceFactory.getService();
-
-		return scLicenseLocalService.getLicensesCount(active, recommended);
+		return _service.getLicensesCount(active, recommended);
 	}
 
 	public static java.util.List<com.liferay.portlet.softwarecatalog.model.SCLicense> getProductEntryLicenses(
 		long productEntryId) throws com.liferay.portal.SystemException {
-		SCLicenseLocalService scLicenseLocalService = SCLicenseLocalServiceFactory.getService();
-
-		return scLicenseLocalService.getProductEntryLicenses(productEntryId);
+		return _service.getProductEntryLicenses(productEntryId);
 	}
 
 	public static com.liferay.portlet.softwarecatalog.model.SCLicense updateLicense(
@@ -206,9 +161,17 @@ public class SCLicenseLocalServiceUtil {
 		boolean openSource, boolean active, boolean recommended)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		SCLicenseLocalService scLicenseLocalService = SCLicenseLocalServiceFactory.getService();
-
-		return scLicenseLocalService.updateLicense(licenseId, name, url,
-			openSource, active, recommended);
+		return _service.updateLicense(licenseId, name, url, openSource, active,
+			recommended);
 	}
+
+	public static SCLicenseLocalService getService() {
+		return _service;
+	}
+
+	public void setService(SCLicenseLocalService service) {
+		_service = service;
+	}
+
+	private static SCLicenseLocalService _service;
 }

@@ -67,22 +67,12 @@ public class WikiPageFinderUtil {
 	}
 
 	public static WikiPageFinder getFinder() {
-		return _getUtil()._finder;
+		return _finder;
 	}
 
 	public void setFinder(WikiPageFinder finder) {
 		_finder = finder;
 	}
 
-	private static WikiPageFinderUtil _getUtil() {
-		if (_util == null) {
-			_util = (WikiPageFinderUtil)com.liferay.portal.kernel.bean.PortalBeanLocatorUtil.locate(_UTIL);
-		}
-
-		return _util;
-	}
-
-	private static final String _UTIL = WikiPageFinderUtil.class.getName();
-	private static WikiPageFinderUtil _util;
-	private WikiPageFinder _finder;
+	private static WikiPageFinder _finder;
 }

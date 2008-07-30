@@ -68,22 +68,12 @@ public class TagsEntryFinderUtil {
 	}
 
 	public static TagsEntryFinder getFinder() {
-		return _getUtil()._finder;
+		return _finder;
 	}
 
 	public void setFinder(TagsEntryFinder finder) {
 		_finder = finder;
 	}
 
-	private static TagsEntryFinderUtil _getUtil() {
-		if (_util == null) {
-			_util = (TagsEntryFinderUtil)com.liferay.portal.kernel.bean.PortalBeanLocatorUtil.locate(_UTIL);
-		}
-
-		return _util;
-	}
-
-	private static final String _UTIL = TagsEntryFinderUtil.class.getName();
-	private static TagsEntryFinderUtil _util;
-	private TagsEntryFinder _finder;
+	private static TagsEntryFinder _finder;
 }

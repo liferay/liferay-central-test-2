@@ -138,22 +138,12 @@ public class ReleaseUtil {
 	}
 
 	public static ReleasePersistence getPersistence() {
-		return _getUtil()._persistence;
+		return _persistence;
 	}
 
 	public void setPersistence(ReleasePersistence persistence) {
 		_persistence = persistence;
 	}
 
-	private static ReleaseUtil _getUtil() {
-		if (_util == null) {
-			_util = (ReleaseUtil)com.liferay.portal.kernel.bean.PortalBeanLocatorUtil.locate(_UTIL);
-		}
-
-		return _util;
-	}
-
-	private static final String _UTIL = ReleaseUtil.class.getName();
-	private static ReleaseUtil _util;
-	private ReleasePersistence _persistence;
+	private static ReleasePersistence _persistence;
 }

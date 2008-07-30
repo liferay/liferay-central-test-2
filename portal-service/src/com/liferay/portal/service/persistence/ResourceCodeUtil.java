@@ -266,22 +266,12 @@ public class ResourceCodeUtil {
 	}
 
 	public static ResourceCodePersistence getPersistence() {
-		return _getUtil()._persistence;
+		return _persistence;
 	}
 
 	public void setPersistence(ResourceCodePersistence persistence) {
 		_persistence = persistence;
 	}
 
-	private static ResourceCodeUtil _getUtil() {
-		if (_util == null) {
-			_util = (ResourceCodeUtil)com.liferay.portal.kernel.bean.PortalBeanLocatorUtil.locate(_UTIL);
-		}
-
-		return _util;
-	}
-
-	private static final String _UTIL = ResourceCodeUtil.class.getName();
-	private static ResourceCodeUtil _util;
-	private ResourceCodePersistence _persistence;
+	private static ResourceCodePersistence _persistence;
 }

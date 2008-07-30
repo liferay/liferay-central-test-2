@@ -228,22 +228,12 @@ public class CompanyUtil {
 	}
 
 	public static CompanyPersistence getPersistence() {
-		return _getUtil()._persistence;
+		return _persistence;
 	}
 
 	public void setPersistence(CompanyPersistence persistence) {
 		_persistence = persistence;
 	}
 
-	private static CompanyUtil _getUtil() {
-		if (_util == null) {
-			_util = (CompanyUtil)com.liferay.portal.kernel.bean.PortalBeanLocatorUtil.locate(_UTIL);
-		}
-
-		return _util;
-	}
-
-	private static final String _UTIL = CompanyUtil.class.getName();
-	private static CompanyUtil _util;
-	private CompanyPersistence _persistence;
+	private static CompanyPersistence _persistence;
 }

@@ -23,33 +23,24 @@
 package com.liferay.portlet.wiki.service.base;
 
 import com.liferay.counter.service.CounterLocalService;
-import com.liferay.counter.service.CounterLocalServiceFactory;
 import com.liferay.counter.service.CounterService;
-import com.liferay.counter.service.CounterServiceFactory;
 
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.bean.InitializingBean;
+import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
 import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 
 import com.liferay.portlet.wiki.model.WikiPageResource;
 import com.liferay.portlet.wiki.service.WikiNodeLocalService;
-import com.liferay.portlet.wiki.service.WikiNodeLocalServiceFactory;
 import com.liferay.portlet.wiki.service.WikiNodeService;
-import com.liferay.portlet.wiki.service.WikiNodeServiceFactory;
 import com.liferay.portlet.wiki.service.WikiPageLocalService;
-import com.liferay.portlet.wiki.service.WikiPageLocalServiceFactory;
 import com.liferay.portlet.wiki.service.WikiPageResourceLocalService;
 import com.liferay.portlet.wiki.service.WikiPageService;
-import com.liferay.portlet.wiki.service.WikiPageServiceFactory;
 import com.liferay.portlet.wiki.service.persistence.WikiNodePersistence;
-import com.liferay.portlet.wiki.service.persistence.WikiNodeUtil;
 import com.liferay.portlet.wiki.service.persistence.WikiPageFinder;
-import com.liferay.portlet.wiki.service.persistence.WikiPageFinderUtil;
 import com.liferay.portlet.wiki.service.persistence.WikiPagePersistence;
 import com.liferay.portlet.wiki.service.persistence.WikiPageResourcePersistence;
-import com.liferay.portlet.wiki.service.persistence.WikiPageResourceUtil;
-import com.liferay.portlet.wiki.service.persistence.WikiPageUtil;
 
 import java.util.List;
 
@@ -195,43 +186,53 @@ public abstract class WikiPageResourceLocalServiceBaseImpl
 
 	public void afterPropertiesSet() {
 		if (wikiNodeLocalService == null) {
-			wikiNodeLocalService = WikiNodeLocalServiceFactory.getImpl();
+			wikiNodeLocalService = (WikiNodeLocalService)PortalBeanLocatorUtil.locate(WikiNodeLocalService.class.getName() +
+					".impl");
 		}
 
 		if (wikiNodeService == null) {
-			wikiNodeService = WikiNodeServiceFactory.getImpl();
+			wikiNodeService = (WikiNodeService)PortalBeanLocatorUtil.locate(WikiNodeService.class.getName() +
+					".impl");
 		}
 
 		if (wikiNodePersistence == null) {
-			wikiNodePersistence = WikiNodeUtil.getPersistence();
+			wikiNodePersistence = (WikiNodePersistence)PortalBeanLocatorUtil.locate(WikiNodePersistence.class.getName() +
+					".impl");
 		}
 
 		if (wikiPageLocalService == null) {
-			wikiPageLocalService = WikiPageLocalServiceFactory.getImpl();
+			wikiPageLocalService = (WikiPageLocalService)PortalBeanLocatorUtil.locate(WikiPageLocalService.class.getName() +
+					".impl");
 		}
 
 		if (wikiPageService == null) {
-			wikiPageService = WikiPageServiceFactory.getImpl();
+			wikiPageService = (WikiPageService)PortalBeanLocatorUtil.locate(WikiPageService.class.getName() +
+					".impl");
 		}
 
 		if (wikiPagePersistence == null) {
-			wikiPagePersistence = WikiPageUtil.getPersistence();
+			wikiPagePersistence = (WikiPagePersistence)PortalBeanLocatorUtil.locate(WikiPagePersistence.class.getName() +
+					".impl");
 		}
 
 		if (wikiPageFinder == null) {
-			wikiPageFinder = WikiPageFinderUtil.getFinder();
+			wikiPageFinder = (WikiPageFinder)PortalBeanLocatorUtil.locate(WikiPageFinder.class.getName() +
+					".impl");
 		}
 
 		if (wikiPageResourcePersistence == null) {
-			wikiPageResourcePersistence = WikiPageResourceUtil.getPersistence();
+			wikiPageResourcePersistence = (WikiPageResourcePersistence)PortalBeanLocatorUtil.locate(WikiPageResourcePersistence.class.getName() +
+					".impl");
 		}
 
 		if (counterLocalService == null) {
-			counterLocalService = CounterLocalServiceFactory.getImpl();
+			counterLocalService = (CounterLocalService)PortalBeanLocatorUtil.locate(CounterLocalService.class.getName() +
+					".impl");
 		}
 
 		if (counterService == null) {
-			counterService = CounterServiceFactory.getImpl();
+			counterService = (CounterService)PortalBeanLocatorUtil.locate(CounterService.class.getName() +
+					".impl");
 		}
 	}
 

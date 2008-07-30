@@ -511,22 +511,12 @@ public class LayoutUtil {
 	}
 
 	public static LayoutPersistence getPersistence() {
-		return _getUtil()._persistence;
+		return _persistence;
 	}
 
 	public void setPersistence(LayoutPersistence persistence) {
 		_persistence = persistence;
 	}
 
-	private static LayoutUtil _getUtil() {
-		if (_util == null) {
-			_util = (LayoutUtil)com.liferay.portal.kernel.bean.PortalBeanLocatorUtil.locate(_UTIL);
-		}
-
-		return _util;
-	}
-
-	private static final String _UTIL = LayoutUtil.class.getName();
-	private static LayoutUtil _util;
-	private LayoutPersistence _persistence;
+	private static LayoutPersistence _persistence;
 }

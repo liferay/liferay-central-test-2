@@ -22,6 +22,7 @@
 
 package com.liferay.portal.service;
 
+import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
 
 /**
  * <a href="PasswordTrackerLocalServiceFactory.java.html"><b><i>View Source</i></b></a>
@@ -51,33 +52,45 @@ package com.liferay.portal.service;
  *
  */
 public class PasswordTrackerLocalServiceFactory {
+	/**
+	 * @deprecated
+	 */
 	public static PasswordTrackerLocalService getService() {
 		return _getFactory()._service;
 	}
 
+	/**
+	 * @deprecated
+	 */
 	public static PasswordTrackerLocalService getImpl() {
 		if (_impl == null) {
-			_impl = (PasswordTrackerLocalService)com.liferay.portal.kernel.bean.PortalBeanLocatorUtil.locate(_IMPL);
+			_impl = (PasswordTrackerLocalService)PortalBeanLocatorUtil.locate(_IMPL);
 		}
 
 		return _impl;
 	}
 
+	/**
+	 * @deprecated
+	 */
 	public static PasswordTrackerLocalService getTxImpl() {
 		if (_txImpl == null) {
-			_txImpl = (PasswordTrackerLocalService)com.liferay.portal.kernel.bean.PortalBeanLocatorUtil.locate(_TX_IMPL);
+			_txImpl = (PasswordTrackerLocalService)PortalBeanLocatorUtil.locate(_TX_IMPL);
 		}
 
 		return _txImpl;
 	}
 
+	/**
+	 * @deprecated
+	 */
 	public void setService(PasswordTrackerLocalService service) {
 		_service = service;
 	}
 
 	private static PasswordTrackerLocalServiceFactory _getFactory() {
 		if (_factory == null) {
-			_factory = (PasswordTrackerLocalServiceFactory)com.liferay.portal.kernel.bean.PortalBeanLocatorUtil.locate(_FACTORY);
+			_factory = (PasswordTrackerLocalServiceFactory)PortalBeanLocatorUtil.locate(_FACTORY);
 		}
 
 		return _factory;

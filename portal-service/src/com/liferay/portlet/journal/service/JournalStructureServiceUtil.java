@@ -39,15 +39,9 @@ package com.liferay.portlet.journal.service;
  * on a bean instead of writing a lookup call and a method call.
  * </p>
  *
- * <p>
- * <code>com.liferay.portlet.journal.service.JournalStructureServiceFactory</code>
- * is responsible for the lookup of the bean.
- * </p>
- *
  * @author Brian Wing Shun Chan
  *
  * @see com.liferay.portlet.journal.service.JournalStructureService
- * @see com.liferay.portlet.journal.service.JournalStructureServiceFactory
  *
  */
 public class JournalStructureServiceUtil {
@@ -58,11 +52,8 @@ public class JournalStructureServiceUtil {
 		boolean addGuestPermissions)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
-		JournalStructureService journalStructureService = JournalStructureServiceFactory.getService();
-
-		return journalStructureService.addStructure(structureId,
-			autoStructureId, plid, name, description, xsd,
-			addCommunityPermissions, addGuestPermissions);
+		return _service.addStructure(structureId, autoStructureId, plid, name,
+			description, xsd, addCommunityPermissions, addGuestPermissions);
 	}
 
 	public static com.liferay.portlet.journal.model.JournalStructure addStructure(
@@ -72,29 +63,22 @@ public class JournalStructureServiceUtil {
 		java.lang.String[] guestPermissions)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
-		JournalStructureService journalStructureService = JournalStructureServiceFactory.getService();
-
-		return journalStructureService.addStructure(structureId,
-			autoStructureId, plid, name, description, xsd,
-			communityPermissions, guestPermissions);
+		return _service.addStructure(structureId, autoStructureId, plid, name,
+			description, xsd, communityPermissions, guestPermissions);
 	}
 
 	public static void deleteStructure(long groupId,
 		java.lang.String structureId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
-		JournalStructureService journalStructureService = JournalStructureServiceFactory.getService();
-
-		journalStructureService.deleteStructure(groupId, structureId);
+		_service.deleteStructure(groupId, structureId);
 	}
 
 	public static com.liferay.portlet.journal.model.JournalStructure getStructure(
 		long groupId, java.lang.String structureId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
-		JournalStructureService journalStructureService = JournalStructureServiceFactory.getService();
-
-		return journalStructureService.getStructure(groupId, structureId);
+		return _service.getStructure(groupId, structureId);
 	}
 
 	public static com.liferay.portlet.journal.model.JournalStructure updateStructure(
@@ -102,9 +86,17 @@ public class JournalStructureServiceUtil {
 		java.lang.String description, java.lang.String xsd)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
-		JournalStructureService journalStructureService = JournalStructureServiceFactory.getService();
-
-		return journalStructureService.updateStructure(groupId, structureId,
-			name, description, xsd);
+		return _service.updateStructure(groupId, structureId, name,
+			description, xsd);
 	}
+
+	public static JournalStructureService getService() {
+		return _service;
+	}
+
+	public void setService(JournalStructureService service) {
+		_service = service;
+	}
+
+	private static JournalStructureService _service;
 }

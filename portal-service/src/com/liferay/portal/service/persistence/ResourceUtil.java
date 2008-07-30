@@ -211,22 +211,12 @@ public class ResourceUtil {
 	}
 
 	public static ResourcePersistence getPersistence() {
-		return _getUtil()._persistence;
+		return _persistence;
 	}
 
 	public void setPersistence(ResourcePersistence persistence) {
 		_persistence = persistence;
 	}
 
-	private static ResourceUtil _getUtil() {
-		if (_util == null) {
-			_util = (ResourceUtil)com.liferay.portal.kernel.bean.PortalBeanLocatorUtil.locate(_UTIL);
-		}
-
-		return _util;
-	}
-
-	private static final String _UTIL = ResourceUtil.class.getName();
-	private static ResourceUtil _util;
-	private ResourcePersistence _persistence;
+	private static ResourcePersistence _persistence;
 }

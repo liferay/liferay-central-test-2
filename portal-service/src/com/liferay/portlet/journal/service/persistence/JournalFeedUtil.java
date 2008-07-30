@@ -288,22 +288,12 @@ public class JournalFeedUtil {
 	}
 
 	public static JournalFeedPersistence getPersistence() {
-		return _getUtil()._persistence;
+		return _persistence;
 	}
 
 	public void setPersistence(JournalFeedPersistence persistence) {
 		_persistence = persistence;
 	}
 
-	private static JournalFeedUtil _getUtil() {
-		if (_util == null) {
-			_util = (JournalFeedUtil)com.liferay.portal.kernel.bean.PortalBeanLocatorUtil.locate(_UTIL);
-		}
-
-		return _util;
-	}
-
-	private static final String _UTIL = JournalFeedUtil.class.getName();
-	private static JournalFeedUtil _util;
-	private JournalFeedPersistence _persistence;
+	private static JournalFeedPersistence _persistence;
 }

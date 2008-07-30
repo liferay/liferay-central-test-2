@@ -41,22 +41,12 @@ public class ResourceFinderUtil {
 	}
 
 	public static ResourceFinder getFinder() {
-		return _getUtil()._finder;
+		return _finder;
 	}
 
 	public void setFinder(ResourceFinder finder) {
 		_finder = finder;
 	}
 
-	private static ResourceFinderUtil _getUtil() {
-		if (_util == null) {
-			_util = (ResourceFinderUtil)com.liferay.portal.kernel.bean.PortalBeanLocatorUtil.locate(_UTIL);
-		}
-
-		return _util;
-	}
-
-	private static final String _UTIL = ResourceFinderUtil.class.getName();
-	private static ResourceFinderUtil _util;
-	private ResourceFinder _finder;
+	private static ResourceFinder _finder;
 }

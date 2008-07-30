@@ -22,6 +22,7 @@
 
 package com.liferay.portlet.tasks.service;
 
+import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
 
 /**
  * <a href="TasksProposalLocalServiceFactory.java.html"><b><i>View Source</i></b></a>
@@ -51,33 +52,45 @@ package com.liferay.portlet.tasks.service;
  *
  */
 public class TasksProposalLocalServiceFactory {
+	/**
+	 * @deprecated
+	 */
 	public static TasksProposalLocalService getService() {
 		return _getFactory()._service;
 	}
 
+	/**
+	 * @deprecated
+	 */
 	public static TasksProposalLocalService getImpl() {
 		if (_impl == null) {
-			_impl = (TasksProposalLocalService)com.liferay.portal.kernel.bean.PortalBeanLocatorUtil.locate(_IMPL);
+			_impl = (TasksProposalLocalService)PortalBeanLocatorUtil.locate(_IMPL);
 		}
 
 		return _impl;
 	}
 
+	/**
+	 * @deprecated
+	 */
 	public static TasksProposalLocalService getTxImpl() {
 		if (_txImpl == null) {
-			_txImpl = (TasksProposalLocalService)com.liferay.portal.kernel.bean.PortalBeanLocatorUtil.locate(_TX_IMPL);
+			_txImpl = (TasksProposalLocalService)PortalBeanLocatorUtil.locate(_TX_IMPL);
 		}
 
 		return _txImpl;
 	}
 
+	/**
+	 * @deprecated
+	 */
 	public void setService(TasksProposalLocalService service) {
 		_service = service;
 	}
 
 	private static TasksProposalLocalServiceFactory _getFactory() {
 		if (_factory == null) {
-			_factory = (TasksProposalLocalServiceFactory)com.liferay.portal.kernel.bean.PortalBeanLocatorUtil.locate(_FACTORY);
+			_factory = (TasksProposalLocalServiceFactory)PortalBeanLocatorUtil.locate(_FACTORY);
 		}
 
 		return _factory;

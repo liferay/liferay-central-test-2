@@ -22,6 +22,7 @@
 
 package com.liferay.portlet.shopping.service;
 
+import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
 
 /**
  * <a href="ShoppingOrderServiceFactory.java.html"><b><i>View Source</i></b></a>
@@ -51,33 +52,45 @@ package com.liferay.portlet.shopping.service;
  *
  */
 public class ShoppingOrderServiceFactory {
+	/**
+	 * @deprecated
+	 */
 	public static ShoppingOrderService getService() {
 		return _getFactory()._service;
 	}
 
+	/**
+	 * @deprecated
+	 */
 	public static ShoppingOrderService getImpl() {
 		if (_impl == null) {
-			_impl = (ShoppingOrderService)com.liferay.portal.kernel.bean.PortalBeanLocatorUtil.locate(_IMPL);
+			_impl = (ShoppingOrderService)PortalBeanLocatorUtil.locate(_IMPL);
 		}
 
 		return _impl;
 	}
 
+	/**
+	 * @deprecated
+	 */
 	public static ShoppingOrderService getTxImpl() {
 		if (_txImpl == null) {
-			_txImpl = (ShoppingOrderService)com.liferay.portal.kernel.bean.PortalBeanLocatorUtil.locate(_TX_IMPL);
+			_txImpl = (ShoppingOrderService)PortalBeanLocatorUtil.locate(_TX_IMPL);
 		}
 
 		return _txImpl;
 	}
 
+	/**
+	 * @deprecated
+	 */
 	public void setService(ShoppingOrderService service) {
 		_service = service;
 	}
 
 	private static ShoppingOrderServiceFactory _getFactory() {
 		if (_factory == null) {
-			_factory = (ShoppingOrderServiceFactory)com.liferay.portal.kernel.bean.PortalBeanLocatorUtil.locate(_FACTORY);
+			_factory = (ShoppingOrderServiceFactory)PortalBeanLocatorUtil.locate(_FACTORY);
 		}
 
 		return _factory;

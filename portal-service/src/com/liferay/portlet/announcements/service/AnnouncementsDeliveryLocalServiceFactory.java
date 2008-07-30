@@ -22,6 +22,7 @@
 
 package com.liferay.portlet.announcements.service;
 
+import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
 
 /**
  * <a href="AnnouncementsDeliveryLocalServiceFactory.java.html"><b><i>View Source</i></b></a>
@@ -51,33 +52,45 @@ package com.liferay.portlet.announcements.service;
  *
  */
 public class AnnouncementsDeliveryLocalServiceFactory {
+	/**
+	 * @deprecated
+	 */
 	public static AnnouncementsDeliveryLocalService getService() {
 		return _getFactory()._service;
 	}
 
+	/**
+	 * @deprecated
+	 */
 	public static AnnouncementsDeliveryLocalService getImpl() {
 		if (_impl == null) {
-			_impl = (AnnouncementsDeliveryLocalService)com.liferay.portal.kernel.bean.PortalBeanLocatorUtil.locate(_IMPL);
+			_impl = (AnnouncementsDeliveryLocalService)PortalBeanLocatorUtil.locate(_IMPL);
 		}
 
 		return _impl;
 	}
 
+	/**
+	 * @deprecated
+	 */
 	public static AnnouncementsDeliveryLocalService getTxImpl() {
 		if (_txImpl == null) {
-			_txImpl = (AnnouncementsDeliveryLocalService)com.liferay.portal.kernel.bean.PortalBeanLocatorUtil.locate(_TX_IMPL);
+			_txImpl = (AnnouncementsDeliveryLocalService)PortalBeanLocatorUtil.locate(_TX_IMPL);
 		}
 
 		return _txImpl;
 	}
 
+	/**
+	 * @deprecated
+	 */
 	public void setService(AnnouncementsDeliveryLocalService service) {
 		_service = service;
 	}
 
 	private static AnnouncementsDeliveryLocalServiceFactory _getFactory() {
 		if (_factory == null) {
-			_factory = (AnnouncementsDeliveryLocalServiceFactory)com.liferay.portal.kernel.bean.PortalBeanLocatorUtil.locate(_FACTORY);
+			_factory = (AnnouncementsDeliveryLocalServiceFactory)PortalBeanLocatorUtil.locate(_FACTORY);
 		}
 
 		return _factory;

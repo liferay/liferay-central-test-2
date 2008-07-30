@@ -355,22 +355,12 @@ public class AnnouncementsEntryUtil {
 	}
 
 	public static AnnouncementsEntryPersistence getPersistence() {
-		return _getUtil()._persistence;
+		return _persistence;
 	}
 
 	public void setPersistence(AnnouncementsEntryPersistence persistence) {
 		_persistence = persistence;
 	}
 
-	private static AnnouncementsEntryUtil _getUtil() {
-		if (_util == null) {
-			_util = (AnnouncementsEntryUtil)com.liferay.portal.kernel.bean.PortalBeanLocatorUtil.locate(_UTIL);
-		}
-
-		return _util;
-	}
-
-	private static final String _UTIL = AnnouncementsEntryUtil.class.getName();
-	private static AnnouncementsEntryUtil _util;
-	private AnnouncementsEntryPersistence _persistence;
+	private static AnnouncementsEntryPersistence _persistence;
 }

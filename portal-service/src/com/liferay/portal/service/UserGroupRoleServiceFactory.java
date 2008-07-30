@@ -22,6 +22,7 @@
 
 package com.liferay.portal.service;
 
+import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
 
 /**
  * <a href="UserGroupRoleServiceFactory.java.html"><b><i>View Source</i></b></a>
@@ -51,33 +52,45 @@ package com.liferay.portal.service;
  *
  */
 public class UserGroupRoleServiceFactory {
+	/**
+	 * @deprecated
+	 */
 	public static UserGroupRoleService getService() {
 		return _getFactory()._service;
 	}
 
+	/**
+	 * @deprecated
+	 */
 	public static UserGroupRoleService getImpl() {
 		if (_impl == null) {
-			_impl = (UserGroupRoleService)com.liferay.portal.kernel.bean.PortalBeanLocatorUtil.locate(_IMPL);
+			_impl = (UserGroupRoleService)PortalBeanLocatorUtil.locate(_IMPL);
 		}
 
 		return _impl;
 	}
 
+	/**
+	 * @deprecated
+	 */
 	public static UserGroupRoleService getTxImpl() {
 		if (_txImpl == null) {
-			_txImpl = (UserGroupRoleService)com.liferay.portal.kernel.bean.PortalBeanLocatorUtil.locate(_TX_IMPL);
+			_txImpl = (UserGroupRoleService)PortalBeanLocatorUtil.locate(_TX_IMPL);
 		}
 
 		return _txImpl;
 	}
 
+	/**
+	 * @deprecated
+	 */
 	public void setService(UserGroupRoleService service) {
 		_service = service;
 	}
 
 	private static UserGroupRoleServiceFactory _getFactory() {
 		if (_factory == null) {
-			_factory = (UserGroupRoleServiceFactory)com.liferay.portal.kernel.bean.PortalBeanLocatorUtil.locate(_FACTORY);
+			_factory = (UserGroupRoleServiceFactory)PortalBeanLocatorUtil.locate(_FACTORY);
 		}
 
 		return _factory;

@@ -39,15 +39,9 @@ package com.liferay.portlet.announcements.service;
  * on a bean instead of writing a lookup call and a method call.
  * </p>
  *
- * <p>
- * <code>com.liferay.portlet.announcements.service.AnnouncementsDeliveryServiceFactory</code>
- * is responsible for the lookup of the bean.
- * </p>
- *
  * @author Brian Wing Shun Chan
  *
  * @see com.liferay.portlet.announcements.service.AnnouncementsDeliveryService
- * @see com.liferay.portlet.announcements.service.AnnouncementsDeliveryServiceFactory
  *
  */
 public class AnnouncementsDeliveryServiceUtil {
@@ -56,9 +50,16 @@ public class AnnouncementsDeliveryServiceUtil {
 		boolean website)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
-		AnnouncementsDeliveryService announcementsDeliveryService = AnnouncementsDeliveryServiceFactory.getService();
-
-		return announcementsDeliveryService.updateDelivery(userId, type, email,
-			sms, website);
+		return _service.updateDelivery(userId, type, email, sms, website);
 	}
+
+	public static AnnouncementsDeliveryService getService() {
+		return _service;
+	}
+
+	public void setService(AnnouncementsDeliveryService service) {
+		_service = service;
+	}
+
+	private static AnnouncementsDeliveryService _service;
 }

@@ -39,122 +39,88 @@ package com.liferay.portal.service;
  * on a bean instead of writing a lookup call and a method call.
  * </p>
  *
- * <p>
- * <code>com.liferay.portal.service.UserLocalServiceFactory</code>
- * is responsible for the lookup of the bean.
- * </p>
- *
  * @author Brian Wing Shun Chan
  *
  * @see com.liferay.portal.service.UserLocalService
- * @see com.liferay.portal.service.UserLocalServiceFactory
  *
  */
 public class UserLocalServiceUtil {
 	public static com.liferay.portal.model.User addUser(
 		com.liferay.portal.model.User user)
 		throws com.liferay.portal.SystemException {
-		UserLocalService userLocalService = UserLocalServiceFactory.getService();
-
-		return userLocalService.addUser(user);
+		return _service.addUser(user);
 	}
 
 	public static void deleteUser(long userId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		UserLocalService userLocalService = UserLocalServiceFactory.getService();
-
-		userLocalService.deleteUser(userId);
+		_service.deleteUser(userId);
 	}
 
 	public static void deleteUser(com.liferay.portal.model.User user)
 		throws com.liferay.portal.SystemException {
-		UserLocalService userLocalService = UserLocalServiceFactory.getService();
-
-		userLocalService.deleteUser(user);
+		_service.deleteUser(user);
 	}
 
 	public static java.util.List<Object> dynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery)
 		throws com.liferay.portal.SystemException {
-		UserLocalService userLocalService = UserLocalServiceFactory.getService();
-
-		return userLocalService.dynamicQuery(dynamicQuery);
+		return _service.dynamicQuery(dynamicQuery);
 	}
 
 	public static java.util.List<Object> dynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery, int start,
 		int end) throws com.liferay.portal.SystemException {
-		UserLocalService userLocalService = UserLocalServiceFactory.getService();
-
-		return userLocalService.dynamicQuery(dynamicQuery, start, end);
+		return _service.dynamicQuery(dynamicQuery, start, end);
 	}
 
 	public static com.liferay.portal.model.User getUser(long userId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		UserLocalService userLocalService = UserLocalServiceFactory.getService();
-
-		return userLocalService.getUser(userId);
+		return _service.getUser(userId);
 	}
 
 	public static java.util.List<com.liferay.portal.model.User> getUsers(
 		int start, int end) throws com.liferay.portal.SystemException {
-		UserLocalService userLocalService = UserLocalServiceFactory.getService();
-
-		return userLocalService.getUsers(start, end);
+		return _service.getUsers(start, end);
 	}
 
 	public static int getUsersCount() throws com.liferay.portal.SystemException {
-		UserLocalService userLocalService = UserLocalServiceFactory.getService();
-
-		return userLocalService.getUsersCount();
+		return _service.getUsersCount();
 	}
 
 	public static com.liferay.portal.model.User updateUser(
 		com.liferay.portal.model.User user)
 		throws com.liferay.portal.SystemException {
-		UserLocalService userLocalService = UserLocalServiceFactory.getService();
-
-		return userLocalService.updateUser(user);
+		return _service.updateUser(user);
 	}
 
 	public static void addGroupUsers(long groupId, long[] userIds)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		UserLocalService userLocalService = UserLocalServiceFactory.getService();
-
-		userLocalService.addGroupUsers(groupId, userIds);
+		_service.addGroupUsers(groupId, userIds);
 	}
 
 	public static void addOrganizationUsers(long organizationId, long[] userIds)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		UserLocalService userLocalService = UserLocalServiceFactory.getService();
-
-		userLocalService.addOrganizationUsers(organizationId, userIds);
+		_service.addOrganizationUsers(organizationId, userIds);
 	}
 
 	public static void addPasswordPolicyUsers(long passwordPolicyId,
 		long[] userIds) throws com.liferay.portal.SystemException {
-		UserLocalService userLocalService = UserLocalServiceFactory.getService();
-
-		userLocalService.addPasswordPolicyUsers(passwordPolicyId, userIds);
+		_service.addPasswordPolicyUsers(passwordPolicyId, userIds);
 	}
 
 	public static void addRoleUsers(long roleId, long[] userIds)
 		throws com.liferay.portal.SystemException {
-		UserLocalService userLocalService = UserLocalServiceFactory.getService();
-
-		userLocalService.addRoleUsers(roleId, userIds);
+		_service.addRoleUsers(roleId, userIds);
 	}
 
 	public static void addUserGroupUsers(long userGroupId, long[] userIds)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		UserLocalService userLocalService = UserLocalServiceFactory.getService();
-
-		userLocalService.addUserGroupUsers(userGroupId, userIds);
+		_service.addUserGroupUsers(userGroupId, userIds);
 	}
 
 	public static com.liferay.portal.model.User addUser(long creatorUserId,
@@ -168,9 +134,7 @@ public class UserLocalServiceUtil {
 		boolean sendEmail)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		UserLocalService userLocalService = UserLocalServiceFactory.getService();
-
-		return userLocalService.addUser(creatorUserId, companyId, autoPassword,
+		return _service.addUser(creatorUserId, companyId, autoPassword,
 			password1, password2, autoScreenName, screenName, emailAddress,
 			locale, firstName, middleName, lastName, prefixId, suffixId, male,
 			birthdayMonth, birthdayDay, birthdayYear, jobTitle,
@@ -183,10 +147,8 @@ public class UserLocalServiceUtil {
 		java.util.Map<String, String[]> parameterMap)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		UserLocalService userLocalService = UserLocalServiceFactory.getService();
-
-		return userLocalService.authenticateByEmailAddress(companyId,
-			emailAddress, password, headerMap, parameterMap);
+		return _service.authenticateByEmailAddress(companyId, emailAddress,
+			password, headerMap, parameterMap);
 	}
 
 	public static int authenticateByScreenName(long companyId,
@@ -195,9 +157,7 @@ public class UserLocalServiceUtil {
 		java.util.Map<String, String[]> parameterMap)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		UserLocalService userLocalService = UserLocalServiceFactory.getService();
-
-		return userLocalService.authenticateByScreenName(companyId, screenName,
+		return _service.authenticateByScreenName(companyId, screenName,
 			password, headerMap, parameterMap);
 	}
 
@@ -206,10 +166,8 @@ public class UserLocalServiceUtil {
 		java.util.Map<String, String[]> parameterMap)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		UserLocalService userLocalService = UserLocalServiceFactory.getService();
-
-		return userLocalService.authenticateByUserId(companyId, userId,
-			password, headerMap, parameterMap);
+		return _service.authenticateByUserId(companyId, userId, password,
+			headerMap, parameterMap);
 	}
 
 	public static long authenticateForBasic(long companyId,
@@ -217,179 +175,133 @@ public class UserLocalServiceUtil {
 		java.lang.String password)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		UserLocalService userLocalService = UserLocalServiceFactory.getService();
-
-		return userLocalService.authenticateForBasic(companyId, authType,
-			login, password);
+		return _service.authenticateForBasic(companyId, authType, login,
+			password);
 	}
 
 	public static boolean authenticateForJAAS(long userId,
 		java.lang.String encPassword) {
-		UserLocalService userLocalService = UserLocalServiceFactory.getService();
-
-		return userLocalService.authenticateForJAAS(userId, encPassword);
+		return _service.authenticateForJAAS(userId, encPassword);
 	}
 
 	public static void checkLockout(com.liferay.portal.model.User user)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		UserLocalService userLocalService = UserLocalServiceFactory.getService();
-
-		userLocalService.checkLockout(user);
+		_service.checkLockout(user);
 	}
 
 	public static void checkLoginFailure(com.liferay.portal.model.User user)
 		throws com.liferay.portal.SystemException {
-		UserLocalService userLocalService = UserLocalServiceFactory.getService();
-
-		userLocalService.checkLoginFailure(user);
+		_service.checkLoginFailure(user);
 	}
 
 	public static void checkLoginFailureByEmailAddress(long companyId,
 		java.lang.String emailAddress)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		UserLocalService userLocalService = UserLocalServiceFactory.getService();
-
-		userLocalService.checkLoginFailureByEmailAddress(companyId, emailAddress);
+		_service.checkLoginFailureByEmailAddress(companyId, emailAddress);
 	}
 
 	public static void checkLoginFailureById(long userId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		UserLocalService userLocalService = UserLocalServiceFactory.getService();
-
-		userLocalService.checkLoginFailureById(userId);
+		_service.checkLoginFailureById(userId);
 	}
 
 	public static void checkLoginFailureByScreenName(long companyId,
 		java.lang.String screenName)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		UserLocalService userLocalService = UserLocalServiceFactory.getService();
-
-		userLocalService.checkLoginFailureByScreenName(companyId, screenName);
+		_service.checkLoginFailureByScreenName(companyId, screenName);
 	}
 
 	public static void checkPasswordExpired(com.liferay.portal.model.User user)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		UserLocalService userLocalService = UserLocalServiceFactory.getService();
-
-		userLocalService.checkPasswordExpired(user);
+		_service.checkPasswordExpired(user);
 	}
 
 	public static void clearOrganizationUsers(long organizationId)
 		throws com.liferay.portal.SystemException {
-		UserLocalService userLocalService = UserLocalServiceFactory.getService();
-
-		userLocalService.clearOrganizationUsers(organizationId);
+		_service.clearOrganizationUsers(organizationId);
 	}
 
 	public static void clearUserGroupUsers(long userGroupId)
 		throws com.liferay.portal.SystemException {
-		UserLocalService userLocalService = UserLocalServiceFactory.getService();
-
-		userLocalService.clearUserGroupUsers(userGroupId);
+		_service.clearUserGroupUsers(userGroupId);
 	}
 
 	public static com.liferay.portal.kernel.util.KeyValuePair decryptUserId(
 		long companyId, java.lang.String name, java.lang.String password)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		UserLocalService userLocalService = UserLocalServiceFactory.getService();
-
-		return userLocalService.decryptUserId(companyId, name, password);
+		return _service.decryptUserId(companyId, name, password);
 	}
 
 	public static void deletePasswordPolicyUser(long passwordPolicyId,
 		long userId) throws com.liferay.portal.SystemException {
-		UserLocalService userLocalService = UserLocalServiceFactory.getService();
-
-		userLocalService.deletePasswordPolicyUser(passwordPolicyId, userId);
+		_service.deletePasswordPolicyUser(passwordPolicyId, userId);
 	}
 
 	public static void deleteRoleUser(long roleId, long userId)
 		throws com.liferay.portal.SystemException {
-		UserLocalService userLocalService = UserLocalServiceFactory.getService();
-
-		userLocalService.deleteRoleUser(roleId, userId);
+		_service.deleteRoleUser(roleId, userId);
 	}
 
 	public static java.lang.String encryptUserId(java.lang.String name)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		UserLocalService userLocalService = UserLocalServiceFactory.getService();
-
-		return userLocalService.encryptUserId(name);
+		return _service.encryptUserId(name);
 	}
 
 	public static com.liferay.portal.model.User getDefaultUser(long companyId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		UserLocalService userLocalService = UserLocalServiceFactory.getService();
-
-		return userLocalService.getDefaultUser(companyId);
+		return _service.getDefaultUser(companyId);
 	}
 
 	public static long getDefaultUserId(long companyId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		UserLocalService userLocalService = UserLocalServiceFactory.getService();
-
-		return userLocalService.getDefaultUserId(companyId);
+		return _service.getDefaultUserId(companyId);
 	}
 
 	public static java.util.List<com.liferay.portal.model.User> getGroupUsers(
 		long groupId) throws com.liferay.portal.SystemException {
-		UserLocalService userLocalService = UserLocalServiceFactory.getService();
-
-		return userLocalService.getGroupUsers(groupId);
+		return _service.getGroupUsers(groupId);
 	}
 
 	public static int getGroupUsersCount(long groupId)
 		throws com.liferay.portal.SystemException {
-		UserLocalService userLocalService = UserLocalServiceFactory.getService();
-
-		return userLocalService.getGroupUsersCount(groupId);
+		return _service.getGroupUsersCount(groupId);
 	}
 
 	public static int getGroupUsersCount(long groupId, boolean active)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		UserLocalService userLocalService = UserLocalServiceFactory.getService();
-
-		return userLocalService.getGroupUsersCount(groupId, active);
+		return _service.getGroupUsersCount(groupId, active);
 	}
 
 	public static java.util.List<com.liferay.portal.model.User> getNoAnnouncementsDeliveries(
 		java.lang.String type) throws com.liferay.portal.SystemException {
-		UserLocalService userLocalService = UserLocalServiceFactory.getService();
-
-		return userLocalService.getNoAnnouncementsDeliveries(type);
+		return _service.getNoAnnouncementsDeliveries(type);
 	}
 
 	public static java.util.List<com.liferay.portal.model.User> getOrganizationUsers(
 		long organizationId) throws com.liferay.portal.SystemException {
-		UserLocalService userLocalService = UserLocalServiceFactory.getService();
-
-		return userLocalService.getOrganizationUsers(organizationId);
+		return _service.getOrganizationUsers(organizationId);
 	}
 
 	public static int getOrganizationUsersCount(long organizationId)
 		throws com.liferay.portal.SystemException {
-		UserLocalService userLocalService = UserLocalServiceFactory.getService();
-
-		return userLocalService.getOrganizationUsersCount(organizationId);
+		return _service.getOrganizationUsersCount(organizationId);
 	}
 
 	public static int getOrganizationUsersCount(long organizationId,
 		boolean active)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		UserLocalService userLocalService = UserLocalServiceFactory.getService();
-
-		return userLocalService.getOrganizationUsersCount(organizationId, active);
+		return _service.getOrganizationUsersCount(organizationId, active);
 	}
 
 	public static java.util.List<com.liferay.portal.model.User> getPermissionUsers(
@@ -399,10 +311,8 @@ public class UserLocalServiceUtil {
 		java.lang.String lastName, java.lang.String emailAddress,
 		boolean andOperator, int start, int end)
 		throws com.liferay.portal.SystemException {
-		UserLocalService userLocalService = UserLocalServiceFactory.getService();
-
-		return userLocalService.getPermissionUsers(companyId, groupId, name,
-			primKey, actionId, firstName, middleName, lastName, emailAddress,
+		return _service.getPermissionUsers(companyId, groupId, name, primKey,
+			actionId, firstName, middleName, lastName, emailAddress,
 			andOperator, start, end);
 	}
 
@@ -412,33 +322,25 @@ public class UserLocalServiceUtil {
 		java.lang.String middleName, java.lang.String lastName,
 		java.lang.String emailAddress, boolean andOperator)
 		throws com.liferay.portal.SystemException {
-		UserLocalService userLocalService = UserLocalServiceFactory.getService();
-
-		return userLocalService.getPermissionUsersCount(companyId, groupId,
-			name, primKey, actionId, firstName, middleName, lastName,
-			emailAddress, andOperator);
+		return _service.getPermissionUsersCount(companyId, groupId, name,
+			primKey, actionId, firstName, middleName, lastName, emailAddress,
+			andOperator);
 	}
 
 	public static java.util.List<com.liferay.portal.model.User> getRoleUsers(
 		long roleId) throws com.liferay.portal.SystemException {
-		UserLocalService userLocalService = UserLocalServiceFactory.getService();
-
-		return userLocalService.getRoleUsers(roleId);
+		return _service.getRoleUsers(roleId);
 	}
 
 	public static int getRoleUsersCount(long roleId)
 		throws com.liferay.portal.SystemException {
-		UserLocalService userLocalService = UserLocalServiceFactory.getService();
-
-		return userLocalService.getRoleUsersCount(roleId);
+		return _service.getRoleUsersCount(roleId);
 	}
 
 	public static int getRoleUsersCount(long roleId, boolean active)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		UserLocalService userLocalService = UserLocalServiceFactory.getService();
-
-		return userLocalService.getRoleUsersCount(roleId, active);
+		return _service.getRoleUsersCount(roleId, active);
 	}
 
 	public static java.util.List<com.liferay.portal.model.User> getSocialUsers(
@@ -446,9 +348,7 @@ public class UserLocalServiceUtil {
 		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		UserLocalService userLocalService = UserLocalServiceFactory.getService();
-
-		return userLocalService.getSocialUsers(userId, start, end, obc);
+		return _service.getSocialUsers(userId, start, end, obc);
 	}
 
 	public static java.util.List<com.liferay.portal.model.User> getSocialUsers(
@@ -456,9 +356,7 @@ public class UserLocalServiceUtil {
 		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		UserLocalService userLocalService = UserLocalServiceFactory.getService();
-
-		return userLocalService.getSocialUsers(userId, type, start, end, obc);
+		return _service.getSocialUsers(userId, type, start, end, obc);
 	}
 
 	public static java.util.List<com.liferay.portal.model.User> getSocialUsers(
@@ -466,9 +364,7 @@ public class UserLocalServiceUtil {
 		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		UserLocalService userLocalService = UserLocalServiceFactory.getService();
-
-		return userLocalService.getSocialUsers(userId1, userId2, start, end, obc);
+		return _service.getSocialUsers(userId1, userId2, start, end, obc);
 	}
 
 	public static java.util.List<com.liferay.portal.model.User> getSocialUsers(
@@ -476,196 +372,147 @@ public class UserLocalServiceUtil {
 		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		UserLocalService userLocalService = UserLocalServiceFactory.getService();
-
-		return userLocalService.getSocialUsers(userId1, userId2, type, start,
-			end, obc);
+		return _service.getSocialUsers(userId1, userId2, type, start, end, obc);
 	}
 
 	public static int getSocialUsersCount(long userId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		UserLocalService userLocalService = UserLocalServiceFactory.getService();
-
-		return userLocalService.getSocialUsersCount(userId);
+		return _service.getSocialUsersCount(userId);
 	}
 
 	public static int getSocialUsersCount(long userId, int type)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		UserLocalService userLocalService = UserLocalServiceFactory.getService();
-
-		return userLocalService.getSocialUsersCount(userId, type);
+		return _service.getSocialUsersCount(userId, type);
 	}
 
 	public static int getSocialUsersCount(long userId1, long userId2)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		UserLocalService userLocalService = UserLocalServiceFactory.getService();
-
-		return userLocalService.getSocialUsersCount(userId1, userId2);
+		return _service.getSocialUsersCount(userId1, userId2);
 	}
 
 	public static int getSocialUsersCount(long userId1, long userId2, int type)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		UserLocalService userLocalService = UserLocalServiceFactory.getService();
-
-		return userLocalService.getSocialUsersCount(userId1, userId2, type);
+		return _service.getSocialUsersCount(userId1, userId2, type);
 	}
 
 	public static java.util.List<com.liferay.portal.model.User> getUserGroupUsers(
 		long userGroupId) throws com.liferay.portal.SystemException {
-		UserLocalService userLocalService = UserLocalServiceFactory.getService();
-
-		return userLocalService.getUserGroupUsers(userGroupId);
+		return _service.getUserGroupUsers(userGroupId);
 	}
 
 	public static int getUserGroupUsersCount(long userGroupId)
 		throws com.liferay.portal.SystemException {
-		UserLocalService userLocalService = UserLocalServiceFactory.getService();
-
-		return userLocalService.getUserGroupUsersCount(userGroupId);
+		return _service.getUserGroupUsersCount(userGroupId);
 	}
 
 	public static int getUserGroupUsersCount(long userGroupId, boolean active)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		UserLocalService userLocalService = UserLocalServiceFactory.getService();
-
-		return userLocalService.getUserGroupUsersCount(userGroupId, active);
+		return _service.getUserGroupUsersCount(userGroupId, active);
 	}
 
 	public static com.liferay.portal.model.User getUserByContactId(
 		long contactId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		UserLocalService userLocalService = UserLocalServiceFactory.getService();
-
-		return userLocalService.getUserByContactId(contactId);
+		return _service.getUserByContactId(contactId);
 	}
 
 	public static com.liferay.portal.model.User getUserByEmailAddress(
 		long companyId, java.lang.String emailAddress)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		UserLocalService userLocalService = UserLocalServiceFactory.getService();
-
-		return userLocalService.getUserByEmailAddress(companyId, emailAddress);
+		return _service.getUserByEmailAddress(companyId, emailAddress);
 	}
 
 	public static com.liferay.portal.model.User getUserById(long userId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		UserLocalService userLocalService = UserLocalServiceFactory.getService();
-
-		return userLocalService.getUserById(userId);
+		return _service.getUserById(userId);
 	}
 
 	public static com.liferay.portal.model.User getUserById(long companyId,
 		long userId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		UserLocalService userLocalService = UserLocalServiceFactory.getService();
-
-		return userLocalService.getUserById(companyId, userId);
+		return _service.getUserById(companyId, userId);
 	}
 
 	public static com.liferay.portal.model.User getUserByOpenId(
 		java.lang.String openId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		UserLocalService userLocalService = UserLocalServiceFactory.getService();
-
-		return userLocalService.getUserByOpenId(openId);
+		return _service.getUserByOpenId(openId);
 	}
 
 	public static com.liferay.portal.model.User getUserByPortraitId(
 		long portraitId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		UserLocalService userLocalService = UserLocalServiceFactory.getService();
-
-		return userLocalService.getUserByPortraitId(portraitId);
+		return _service.getUserByPortraitId(portraitId);
 	}
 
 	public static com.liferay.portal.model.User getUserByScreenName(
 		long companyId, java.lang.String screenName)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		UserLocalService userLocalService = UserLocalServiceFactory.getService();
-
-		return userLocalService.getUserByScreenName(companyId, screenName);
+		return _service.getUserByScreenName(companyId, screenName);
 	}
 
 	public static long getUserIdByEmailAddress(long companyId,
 		java.lang.String emailAddress)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		UserLocalService userLocalService = UserLocalServiceFactory.getService();
-
-		return userLocalService.getUserIdByEmailAddress(companyId, emailAddress);
+		return _service.getUserIdByEmailAddress(companyId, emailAddress);
 	}
 
 	public static long getUserIdByScreenName(long companyId,
 		java.lang.String screenName)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		UserLocalService userLocalService = UserLocalServiceFactory.getService();
-
-		return userLocalService.getUserIdByScreenName(companyId, screenName);
+		return _service.getUserIdByScreenName(companyId, screenName);
 	}
 
 	public static boolean hasGroupUser(long groupId, long userId)
 		throws com.liferay.portal.SystemException {
-		UserLocalService userLocalService = UserLocalServiceFactory.getService();
-
-		return userLocalService.hasGroupUser(groupId, userId);
+		return _service.hasGroupUser(groupId, userId);
 	}
 
 	public static boolean hasOrganizationUser(long organizationId, long userId)
 		throws com.liferay.portal.SystemException {
-		UserLocalService userLocalService = UserLocalServiceFactory.getService();
-
-		return userLocalService.hasOrganizationUser(organizationId, userId);
+		return _service.hasOrganizationUser(organizationId, userId);
 	}
 
 	public static boolean hasPasswordPolicyUser(long passwordPolicyId,
 		long userId) throws com.liferay.portal.SystemException {
-		UserLocalService userLocalService = UserLocalServiceFactory.getService();
-
-		return userLocalService.hasPasswordPolicyUser(passwordPolicyId, userId);
+		return _service.hasPasswordPolicyUser(passwordPolicyId, userId);
 	}
 
 	public static boolean hasRoleUser(long roleId, long userId)
 		throws com.liferay.portal.SystemException {
-		UserLocalService userLocalService = UserLocalServiceFactory.getService();
-
-		return userLocalService.hasRoleUser(roleId, userId);
+		return _service.hasRoleUser(roleId, userId);
 	}
 
 	public static boolean hasUserGroupUser(long userGroupId, long userId)
 		throws com.liferay.portal.SystemException {
-		UserLocalService userLocalService = UserLocalServiceFactory.getService();
-
-		return userLocalService.hasUserGroupUser(userGroupId, userId);
+		return _service.hasUserGroupUser(userGroupId, userId);
 	}
 
 	public static boolean isPasswordExpired(com.liferay.portal.model.User user)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		UserLocalService userLocalService = UserLocalServiceFactory.getService();
-
-		return userLocalService.isPasswordExpired(user);
+		return _service.isPasswordExpired(user);
 	}
 
 	public static boolean isPasswordExpiringSoon(
 		com.liferay.portal.model.User user)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		UserLocalService userLocalService = UserLocalServiceFactory.getService();
-
-		return userLocalService.isPasswordExpiringSoon(user);
+		return _service.isPasswordExpiringSoon(user);
 	}
 
 	public static java.util.List<com.liferay.portal.model.User> search(
@@ -673,10 +520,8 @@ public class UserLocalServiceUtil {
 		java.util.LinkedHashMap<String, Object> params, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException {
-		UserLocalService userLocalService = UserLocalServiceFactory.getService();
-
-		return userLocalService.search(companyId, keywords, active, params,
-			start, end, obc);
+		return _service.search(companyId, keywords, active, params, start, end,
+			obc);
 	}
 
 	public static java.util.List<com.liferay.portal.model.User> search(
@@ -687,19 +532,14 @@ public class UserLocalServiceUtil {
 		java.util.LinkedHashMap<String, Object> params, boolean andSearch,
 		int start, int end, com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException {
-		UserLocalService userLocalService = UserLocalServiceFactory.getService();
-
-		return userLocalService.search(companyId, firstName, middleName,
-			lastName, screenName, emailAddress, active, params, andSearch,
-			start, end, obc);
+		return _service.search(companyId, firstName, middleName, lastName,
+			screenName, emailAddress, active, params, andSearch, start, end, obc);
 	}
 
 	public static int searchCount(long companyId, java.lang.String keywords,
 		java.lang.Boolean active, java.util.LinkedHashMap<String, Object> params)
 		throws com.liferay.portal.SystemException {
-		UserLocalService userLocalService = UserLocalServiceFactory.getService();
-
-		return userLocalService.searchCount(companyId, keywords, active, params);
+		return _service.searchCount(companyId, keywords, active, params);
 	}
 
 	public static int searchCount(long companyId, java.lang.String firstName,
@@ -708,10 +548,8 @@ public class UserLocalServiceUtil {
 		java.lang.Boolean active,
 		java.util.LinkedHashMap<String, Object> params, boolean andSearch)
 		throws com.liferay.portal.SystemException {
-		UserLocalService userLocalService = UserLocalServiceFactory.getService();
-
-		return userLocalService.searchCount(companyId, firstName, middleName,
-			lastName, screenName, emailAddress, active, params, andSearch);
+		return _service.searchCount(companyId, firstName, middleName, lastName,
+			screenName, emailAddress, active, params, andSearch);
 	}
 
 	public static void sendPassword(long companyId,
@@ -719,171 +557,129 @@ public class UserLocalServiceUtil {
 		java.lang.String remoteHost, java.lang.String userAgent)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		UserLocalService userLocalService = UserLocalServiceFactory.getService();
-
-		userLocalService.sendPassword(companyId, emailAddress, remoteAddr,
-			remoteHost, userAgent);
+		_service.sendPassword(companyId, emailAddress, remoteAddr, remoteHost,
+			userAgent);
 	}
 
 	public static void setRoleUsers(long roleId, long[] userIds)
 		throws com.liferay.portal.SystemException {
-		UserLocalService userLocalService = UserLocalServiceFactory.getService();
-
-		userLocalService.setRoleUsers(roleId, userIds);
+		_service.setRoleUsers(roleId, userIds);
 	}
 
 	public static void setUserGroupUsers(long userGroupId, long[] userIds)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		UserLocalService userLocalService = UserLocalServiceFactory.getService();
-
-		userLocalService.setUserGroupUsers(userGroupId, userIds);
+		_service.setUserGroupUsers(userGroupId, userIds);
 	}
 
 	public static void unsetGroupUsers(long groupId, long[] userIds)
 		throws com.liferay.portal.SystemException {
-		UserLocalService userLocalService = UserLocalServiceFactory.getService();
-
-		userLocalService.unsetGroupUsers(groupId, userIds);
+		_service.unsetGroupUsers(groupId, userIds);
 	}
 
 	public static void unsetOrganizationUsers(long organizationId,
 		long[] userIds)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		UserLocalService userLocalService = UserLocalServiceFactory.getService();
-
-		userLocalService.unsetOrganizationUsers(organizationId, userIds);
+		_service.unsetOrganizationUsers(organizationId, userIds);
 	}
 
 	public static void unsetPasswordPolicyUsers(long passwordPolicyId,
 		long[] userIds) throws com.liferay.portal.SystemException {
-		UserLocalService userLocalService = UserLocalServiceFactory.getService();
-
-		userLocalService.unsetPasswordPolicyUsers(passwordPolicyId, userIds);
+		_service.unsetPasswordPolicyUsers(passwordPolicyId, userIds);
 	}
 
 	public static void unsetRoleUsers(long roleId, long[] userIds)
 		throws com.liferay.portal.SystemException {
-		UserLocalService userLocalService = UserLocalServiceFactory.getService();
-
-		userLocalService.unsetRoleUsers(roleId, userIds);
+		_service.unsetRoleUsers(roleId, userIds);
 	}
 
 	public static void unsetRoleUsers(long roleId,
 		java.util.List<com.liferay.portal.model.User> users)
 		throws com.liferay.portal.SystemException {
-		UserLocalService userLocalService = UserLocalServiceFactory.getService();
-
-		userLocalService.unsetRoleUsers(roleId, users);
+		_service.unsetRoleUsers(roleId, users);
 	}
 
 	public static void unsetUserGroupUsers(long userGroupId, long[] userIds)
 		throws com.liferay.portal.SystemException {
-		UserLocalService userLocalService = UserLocalServiceFactory.getService();
-
-		userLocalService.unsetUserGroupUsers(userGroupId, userIds);
+		_service.unsetUserGroupUsers(userGroupId, userIds);
 	}
 
 	public static com.liferay.portal.model.User updateActive(long userId,
 		boolean active)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		UserLocalService userLocalService = UserLocalServiceFactory.getService();
-
-		return userLocalService.updateActive(userId, active);
+		return _service.updateActive(userId, active);
 	}
 
 	public static com.liferay.portal.model.User updateAgreedToTermsOfUse(
 		long userId, boolean agreedToTermsOfUse)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		UserLocalService userLocalService = UserLocalServiceFactory.getService();
-
-		return userLocalService.updateAgreedToTermsOfUse(userId,
-			agreedToTermsOfUse);
+		return _service.updateAgreedToTermsOfUse(userId, agreedToTermsOfUse);
 	}
 
 	public static com.liferay.portal.model.User updateCreateDate(long userId,
 		java.util.Date createDate)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		UserLocalService userLocalService = UserLocalServiceFactory.getService();
-
-		return userLocalService.updateCreateDate(userId, createDate);
+		return _service.updateCreateDate(userId, createDate);
 	}
 
 	public static com.liferay.portal.model.User updateLastLogin(long userId,
 		java.lang.String loginIP)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		UserLocalService userLocalService = UserLocalServiceFactory.getService();
-
-		return userLocalService.updateLastLogin(userId, loginIP);
+		return _service.updateLastLogin(userId, loginIP);
 	}
 
 	public static com.liferay.portal.model.User updateLockout(
 		com.liferay.portal.model.User user, boolean lockout)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		UserLocalService userLocalService = UserLocalServiceFactory.getService();
-
-		return userLocalService.updateLockout(user, lockout);
+		return _service.updateLockout(user, lockout);
 	}
 
 	public static com.liferay.portal.model.User updateLockoutByEmailAddress(
 		long companyId, java.lang.String emailAddress, boolean lockout)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		UserLocalService userLocalService = UserLocalServiceFactory.getService();
-
-		return userLocalService.updateLockoutByEmailAddress(companyId,
-			emailAddress, lockout);
+		return _service.updateLockoutByEmailAddress(companyId, emailAddress,
+			lockout);
 	}
 
 	public static com.liferay.portal.model.User updateLockoutById(long userId,
 		boolean lockout)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		UserLocalService userLocalService = UserLocalServiceFactory.getService();
-
-		return userLocalService.updateLockoutById(userId, lockout);
+		return _service.updateLockoutById(userId, lockout);
 	}
 
 	public static com.liferay.portal.model.User updateLockoutByScreenName(
 		long companyId, java.lang.String screenName, boolean lockout)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		UserLocalService userLocalService = UserLocalServiceFactory.getService();
-
-		return userLocalService.updateLockoutByScreenName(companyId,
-			screenName, lockout);
+		return _service.updateLockoutByScreenName(companyId, screenName, lockout);
 	}
 
 	public static com.liferay.portal.model.User updateModifiedDate(
 		long userId, java.util.Date modifiedDate)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		UserLocalService userLocalService = UserLocalServiceFactory.getService();
-
-		return userLocalService.updateModifiedDate(userId, modifiedDate);
+		return _service.updateModifiedDate(userId, modifiedDate);
 	}
 
 	public static void updateOpenId(long userId, java.lang.String openId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		UserLocalService userLocalService = UserLocalServiceFactory.getService();
-
-		userLocalService.updateOpenId(userId, openId);
+		_service.updateOpenId(userId, openId);
 	}
 
 	public static void updateOrganizations(long userId,
 		long[] newOrganizationIds)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		UserLocalService userLocalService = UserLocalServiceFactory.getService();
-
-		userLocalService.updateOrganizations(userId, newOrganizationIds);
+		_service.updateOrganizations(userId, newOrganizationIds);
 	}
 
 	public static com.liferay.portal.model.User updatePassword(long userId,
@@ -891,9 +687,7 @@ public class UserLocalServiceUtil {
 		boolean passwordReset)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		UserLocalService userLocalService = UserLocalServiceFactory.getService();
-
-		return userLocalService.updatePassword(userId, password1, password2,
+		return _service.updatePassword(userId, password1, password2,
 			passwordReset);
 	}
 
@@ -902,9 +696,7 @@ public class UserLocalServiceUtil {
 		boolean passwordReset, boolean silentUpdate)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		UserLocalService userLocalService = UserLocalServiceFactory.getService();
-
-		return userLocalService.updatePassword(userId, password1, password2,
+		return _service.updatePassword(userId, password1, password2,
 			passwordReset, silentUpdate);
 	}
 
@@ -913,34 +705,26 @@ public class UserLocalServiceUtil {
 		boolean passwordReset, java.util.Date passwordModifiedDate)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		UserLocalService userLocalService = UserLocalServiceFactory.getService();
-
-		return userLocalService.updatePasswordManually(userId, password,
+		return _service.updatePasswordManually(userId, password,
 			passwordEncrypted, passwordReset, passwordModifiedDate);
 	}
 
 	public static void updatePasswordReset(long userId, boolean passwordReset)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		UserLocalService userLocalService = UserLocalServiceFactory.getService();
-
-		userLocalService.updatePasswordReset(userId, passwordReset);
+		_service.updatePasswordReset(userId, passwordReset);
 	}
 
 	public static void updatePortrait(long userId, byte[] bytes)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		UserLocalService userLocalService = UserLocalServiceFactory.getService();
-
-		userLocalService.updatePortrait(userId, bytes);
+		_service.updatePortrait(userId, bytes);
 	}
 
 	public static void updateScreenName(long userId, java.lang.String screenName)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		UserLocalService userLocalService = UserLocalServiceFactory.getService();
-
-		userLocalService.updateScreenName(userId, screenName);
+		_service.updateScreenName(userId, screenName);
 	}
 
 	public static com.liferay.portal.model.User updateUser(long userId,
@@ -959,9 +743,7 @@ public class UserLocalServiceUtil {
 		java.lang.String jobTitle, long[] organizationIds)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		UserLocalService userLocalService = UserLocalServiceFactory.getService();
-
-		return userLocalService.updateUser(userId, oldPassword, passwordReset,
+		return _service.updateUser(userId, oldPassword, passwordReset,
 			screenName, emailAddress, languageId, timeZoneId, greeting,
 			comments, firstName, middleName, lastName, prefixId, suffixId,
 			male, birthdayMonth, birthdayDay, birthdayYear, smsSn, aimSn,
@@ -986,13 +768,21 @@ public class UserLocalServiceUtil {
 		java.lang.String jobTitle, long[] organizationIds)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		UserLocalService userLocalService = UserLocalServiceFactory.getService();
-
-		return userLocalService.updateUser(userId, oldPassword, newPassword1,
+		return _service.updateUser(userId, oldPassword, newPassword1,
 			newPassword2, passwordReset, screenName, emailAddress, languageId,
 			timeZoneId, greeting, comments, firstName, middleName, lastName,
 			prefixId, suffixId, male, birthdayMonth, birthdayDay, birthdayYear,
 			smsSn, aimSn, facebookSn, icqSn, jabberSn, msnSn, mySpaceSn,
 			skypeSn, twitterSn, ymSn, jobTitle, organizationIds);
 	}
+
+	public static UserLocalService getService() {
+		return _service;
+	}
+
+	public void setService(UserLocalService service) {
+		_service = service;
+	}
+
+	private static UserLocalService _service;
 }

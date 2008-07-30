@@ -46,22 +46,12 @@ public class DLFileRankFinderUtil {
 	}
 
 	public static DLFileRankFinder getFinder() {
-		return _getUtil()._finder;
+		return _finder;
 	}
 
 	public void setFinder(DLFileRankFinder finder) {
 		_finder = finder;
 	}
 
-	private static DLFileRankFinderUtil _getUtil() {
-		if (_util == null) {
-			_util = (DLFileRankFinderUtil)com.liferay.portal.kernel.bean.PortalBeanLocatorUtil.locate(_UTIL);
-		}
-
-		return _util;
-	}
-
-	private static final String _UTIL = DLFileRankFinderUtil.class.getName();
-	private static DLFileRankFinderUtil _util;
-	private DLFileRankFinder _finder;
+	private static DLFileRankFinder _finder;
 }

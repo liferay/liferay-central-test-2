@@ -39,85 +39,61 @@ package com.liferay.portal.service;
  * on a bean instead of writing a lookup call and a method call.
  * </p>
  *
- * <p>
- * <code>com.liferay.portal.service.PhoneLocalServiceFactory</code>
- * is responsible for the lookup of the bean.
- * </p>
- *
  * @author Brian Wing Shun Chan
  *
  * @see com.liferay.portal.service.PhoneLocalService
- * @see com.liferay.portal.service.PhoneLocalServiceFactory
  *
  */
 public class PhoneLocalServiceUtil {
 	public static com.liferay.portal.model.Phone addPhone(
 		com.liferay.portal.model.Phone phone)
 		throws com.liferay.portal.SystemException {
-		PhoneLocalService phoneLocalService = PhoneLocalServiceFactory.getService();
-
-		return phoneLocalService.addPhone(phone);
+		return _service.addPhone(phone);
 	}
 
 	public static void deletePhone(long phoneId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		PhoneLocalService phoneLocalService = PhoneLocalServiceFactory.getService();
-
-		phoneLocalService.deletePhone(phoneId);
+		_service.deletePhone(phoneId);
 	}
 
 	public static void deletePhone(com.liferay.portal.model.Phone phone)
 		throws com.liferay.portal.SystemException {
-		PhoneLocalService phoneLocalService = PhoneLocalServiceFactory.getService();
-
-		phoneLocalService.deletePhone(phone);
+		_service.deletePhone(phone);
 	}
 
 	public static java.util.List<Object> dynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery)
 		throws com.liferay.portal.SystemException {
-		PhoneLocalService phoneLocalService = PhoneLocalServiceFactory.getService();
-
-		return phoneLocalService.dynamicQuery(dynamicQuery);
+		return _service.dynamicQuery(dynamicQuery);
 	}
 
 	public static java.util.List<Object> dynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery, int start,
 		int end) throws com.liferay.portal.SystemException {
-		PhoneLocalService phoneLocalService = PhoneLocalServiceFactory.getService();
-
-		return phoneLocalService.dynamicQuery(dynamicQuery, start, end);
+		return _service.dynamicQuery(dynamicQuery, start, end);
 	}
 
 	public static com.liferay.portal.model.Phone getPhone(long phoneId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		PhoneLocalService phoneLocalService = PhoneLocalServiceFactory.getService();
-
-		return phoneLocalService.getPhone(phoneId);
+		return _service.getPhone(phoneId);
 	}
 
 	public static java.util.List<com.liferay.portal.model.Phone> getPhones(
 		int start, int end) throws com.liferay.portal.SystemException {
-		PhoneLocalService phoneLocalService = PhoneLocalServiceFactory.getService();
-
-		return phoneLocalService.getPhones(start, end);
+		return _service.getPhones(start, end);
 	}
 
 	public static int getPhonesCount()
 		throws com.liferay.portal.SystemException {
-		PhoneLocalService phoneLocalService = PhoneLocalServiceFactory.getService();
-
-		return phoneLocalService.getPhonesCount();
+		return _service.getPhonesCount();
 	}
 
 	public static com.liferay.portal.model.Phone updatePhone(
 		com.liferay.portal.model.Phone phone)
 		throws com.liferay.portal.SystemException {
-		PhoneLocalService phoneLocalService = PhoneLocalServiceFactory.getService();
-
-		return phoneLocalService.updatePhone(phone);
+		return _service.updatePhone(phone);
 	}
 
 	public static com.liferay.portal.model.Phone addPhone(long userId,
@@ -125,32 +101,24 @@ public class PhoneLocalServiceUtil {
 		java.lang.String extension, int typeId, boolean primary)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		PhoneLocalService phoneLocalService = PhoneLocalServiceFactory.getService();
-
-		return phoneLocalService.addPhone(userId, className, classPK, number,
-			extension, typeId, primary);
+		return _service.addPhone(userId, className, classPK, number, extension,
+			typeId, primary);
 	}
 
 	public static void deletePhones(long companyId, java.lang.String className,
 		long classPK) throws com.liferay.portal.SystemException {
-		PhoneLocalService phoneLocalService = PhoneLocalServiceFactory.getService();
-
-		phoneLocalService.deletePhones(companyId, className, classPK);
+		_service.deletePhones(companyId, className, classPK);
 	}
 
 	public static java.util.List<com.liferay.portal.model.Phone> getPhones()
 		throws com.liferay.portal.SystemException {
-		PhoneLocalService phoneLocalService = PhoneLocalServiceFactory.getService();
-
-		return phoneLocalService.getPhones();
+		return _service.getPhones();
 	}
 
 	public static java.util.List<com.liferay.portal.model.Phone> getPhones(
 		long companyId, java.lang.String className, long classPK)
 		throws com.liferay.portal.SystemException {
-		PhoneLocalService phoneLocalService = PhoneLocalServiceFactory.getService();
-
-		return phoneLocalService.getPhones(companyId, className, classPK);
+		return _service.getPhones(companyId, className, classPK);
 	}
 
 	public static com.liferay.portal.model.Phone updatePhone(long phoneId,
@@ -158,9 +126,16 @@ public class PhoneLocalServiceUtil {
 		boolean primary)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		PhoneLocalService phoneLocalService = PhoneLocalServiceFactory.getService();
-
-		return phoneLocalService.updatePhone(phoneId, number, extension,
-			typeId, primary);
+		return _service.updatePhone(phoneId, number, extension, typeId, primary);
 	}
+
+	public static PhoneLocalService getService() {
+		return _service;
+	}
+
+	public void setService(PhoneLocalService service) {
+		_service = service;
+	}
+
+	private static PhoneLocalService _service;
 }

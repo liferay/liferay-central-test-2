@@ -320,22 +320,12 @@ public class TagsPropertyUtil {
 	}
 
 	public static TagsPropertyPersistence getPersistence() {
-		return _getUtil()._persistence;
+		return _persistence;
 	}
 
 	public void setPersistence(TagsPropertyPersistence persistence) {
 		_persistence = persistence;
 	}
 
-	private static TagsPropertyUtil _getUtil() {
-		if (_util == null) {
-			_util = (TagsPropertyUtil)com.liferay.portal.kernel.bean.PortalBeanLocatorUtil.locate(_UTIL);
-		}
-
-		return _util;
-	}
-
-	private static final String _UTIL = TagsPropertyUtil.class.getName();
-	private static TagsPropertyUtil _util;
-	private TagsPropertyPersistence _persistence;
+	private static TagsPropertyPersistence _persistence;
 }

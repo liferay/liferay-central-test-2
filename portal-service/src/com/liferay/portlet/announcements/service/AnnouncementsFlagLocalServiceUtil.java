@@ -39,119 +39,96 @@ package com.liferay.portlet.announcements.service;
  * on a bean instead of writing a lookup call and a method call.
  * </p>
  *
- * <p>
- * <code>com.liferay.portlet.announcements.service.AnnouncementsFlagLocalServiceFactory</code>
- * is responsible for the lookup of the bean.
- * </p>
- *
  * @author Brian Wing Shun Chan
  *
  * @see com.liferay.portlet.announcements.service.AnnouncementsFlagLocalService
- * @see com.liferay.portlet.announcements.service.AnnouncementsFlagLocalServiceFactory
  *
  */
 public class AnnouncementsFlagLocalServiceUtil {
 	public static com.liferay.portlet.announcements.model.AnnouncementsFlag addAnnouncementsFlag(
 		com.liferay.portlet.announcements.model.AnnouncementsFlag announcementsFlag)
 		throws com.liferay.portal.SystemException {
-		AnnouncementsFlagLocalService announcementsFlagLocalService = AnnouncementsFlagLocalServiceFactory.getService();
-
-		return announcementsFlagLocalService.addAnnouncementsFlag(announcementsFlag);
+		return _service.addAnnouncementsFlag(announcementsFlag);
 	}
 
 	public static void deleteAnnouncementsFlag(long flagId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		AnnouncementsFlagLocalService announcementsFlagLocalService = AnnouncementsFlagLocalServiceFactory.getService();
-
-		announcementsFlagLocalService.deleteAnnouncementsFlag(flagId);
+		_service.deleteAnnouncementsFlag(flagId);
 	}
 
 	public static void deleteAnnouncementsFlag(
 		com.liferay.portlet.announcements.model.AnnouncementsFlag announcementsFlag)
 		throws com.liferay.portal.SystemException {
-		AnnouncementsFlagLocalService announcementsFlagLocalService = AnnouncementsFlagLocalServiceFactory.getService();
-
-		announcementsFlagLocalService.deleteAnnouncementsFlag(announcementsFlag);
+		_service.deleteAnnouncementsFlag(announcementsFlag);
 	}
 
 	public static java.util.List<Object> dynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery)
 		throws com.liferay.portal.SystemException {
-		AnnouncementsFlagLocalService announcementsFlagLocalService = AnnouncementsFlagLocalServiceFactory.getService();
-
-		return announcementsFlagLocalService.dynamicQuery(dynamicQuery);
+		return _service.dynamicQuery(dynamicQuery);
 	}
 
 	public static java.util.List<Object> dynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery, int start,
 		int end) throws com.liferay.portal.SystemException {
-		AnnouncementsFlagLocalService announcementsFlagLocalService = AnnouncementsFlagLocalServiceFactory.getService();
-
-		return announcementsFlagLocalService.dynamicQuery(dynamicQuery, start,
-			end);
+		return _service.dynamicQuery(dynamicQuery, start, end);
 	}
 
 	public static com.liferay.portlet.announcements.model.AnnouncementsFlag getAnnouncementsFlag(
 		long flagId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		AnnouncementsFlagLocalService announcementsFlagLocalService = AnnouncementsFlagLocalServiceFactory.getService();
-
-		return announcementsFlagLocalService.getAnnouncementsFlag(flagId);
+		return _service.getAnnouncementsFlag(flagId);
 	}
 
 	public static java.util.List<com.liferay.portlet.announcements.model.AnnouncementsFlag> getAnnouncementsFlags(
 		int start, int end) throws com.liferay.portal.SystemException {
-		AnnouncementsFlagLocalService announcementsFlagLocalService = AnnouncementsFlagLocalServiceFactory.getService();
-
-		return announcementsFlagLocalService.getAnnouncementsFlags(start, end);
+		return _service.getAnnouncementsFlags(start, end);
 	}
 
 	public static int getAnnouncementsFlagsCount()
 		throws com.liferay.portal.SystemException {
-		AnnouncementsFlagLocalService announcementsFlagLocalService = AnnouncementsFlagLocalServiceFactory.getService();
-
-		return announcementsFlagLocalService.getAnnouncementsFlagsCount();
+		return _service.getAnnouncementsFlagsCount();
 	}
 
 	public static com.liferay.portlet.announcements.model.AnnouncementsFlag updateAnnouncementsFlag(
 		com.liferay.portlet.announcements.model.AnnouncementsFlag announcementsFlag)
 		throws com.liferay.portal.SystemException {
-		AnnouncementsFlagLocalService announcementsFlagLocalService = AnnouncementsFlagLocalServiceFactory.getService();
-
-		return announcementsFlagLocalService.updateAnnouncementsFlag(announcementsFlag);
+		return _service.updateAnnouncementsFlag(announcementsFlag);
 	}
 
 	public static com.liferay.portlet.announcements.model.AnnouncementsFlag addFlag(
 		long userId, long entryId, int value)
 		throws com.liferay.portal.SystemException {
-		AnnouncementsFlagLocalService announcementsFlagLocalService = AnnouncementsFlagLocalServiceFactory.getService();
-
-		return announcementsFlagLocalService.addFlag(userId, entryId, value);
+		return _service.addFlag(userId, entryId, value);
 	}
 
 	public static com.liferay.portlet.announcements.model.AnnouncementsFlag getFlag(
 		long userId, long entryId, int value)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		AnnouncementsFlagLocalService announcementsFlagLocalService = AnnouncementsFlagLocalServiceFactory.getService();
-
-		return announcementsFlagLocalService.getFlag(userId, entryId, value);
+		return _service.getFlag(userId, entryId, value);
 	}
 
 	public static void deleteFlag(long flagId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		AnnouncementsFlagLocalService announcementsFlagLocalService = AnnouncementsFlagLocalServiceFactory.getService();
-
-		announcementsFlagLocalService.deleteFlag(flagId);
+		_service.deleteFlag(flagId);
 	}
 
 	public static void deleteFlags(long entryId)
 		throws com.liferay.portal.SystemException {
-		AnnouncementsFlagLocalService announcementsFlagLocalService = AnnouncementsFlagLocalServiceFactory.getService();
-
-		announcementsFlagLocalService.deleteFlags(entryId);
+		_service.deleteFlags(entryId);
 	}
+
+	public static AnnouncementsFlagLocalService getService() {
+		return _service;
+	}
+
+	public void setService(AnnouncementsFlagLocalService service) {
+		_service = service;
+	}
+
+	private static AnnouncementsFlagLocalService _service;
 }

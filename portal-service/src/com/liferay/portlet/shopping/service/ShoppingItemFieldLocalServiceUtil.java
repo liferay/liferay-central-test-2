@@ -39,94 +39,77 @@ package com.liferay.portlet.shopping.service;
  * on a bean instead of writing a lookup call and a method call.
  * </p>
  *
- * <p>
- * <code>com.liferay.portlet.shopping.service.ShoppingItemFieldLocalServiceFactory</code>
- * is responsible for the lookup of the bean.
- * </p>
- *
  * @author Brian Wing Shun Chan
  *
  * @see com.liferay.portlet.shopping.service.ShoppingItemFieldLocalService
- * @see com.liferay.portlet.shopping.service.ShoppingItemFieldLocalServiceFactory
  *
  */
 public class ShoppingItemFieldLocalServiceUtil {
 	public static com.liferay.portlet.shopping.model.ShoppingItemField addShoppingItemField(
 		com.liferay.portlet.shopping.model.ShoppingItemField shoppingItemField)
 		throws com.liferay.portal.SystemException {
-		ShoppingItemFieldLocalService shoppingItemFieldLocalService = ShoppingItemFieldLocalServiceFactory.getService();
-
-		return shoppingItemFieldLocalService.addShoppingItemField(shoppingItemField);
+		return _service.addShoppingItemField(shoppingItemField);
 	}
 
 	public static void deleteShoppingItemField(long itemFieldId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		ShoppingItemFieldLocalService shoppingItemFieldLocalService = ShoppingItemFieldLocalServiceFactory.getService();
-
-		shoppingItemFieldLocalService.deleteShoppingItemField(itemFieldId);
+		_service.deleteShoppingItemField(itemFieldId);
 	}
 
 	public static void deleteShoppingItemField(
 		com.liferay.portlet.shopping.model.ShoppingItemField shoppingItemField)
 		throws com.liferay.portal.SystemException {
-		ShoppingItemFieldLocalService shoppingItemFieldLocalService = ShoppingItemFieldLocalServiceFactory.getService();
-
-		shoppingItemFieldLocalService.deleteShoppingItemField(shoppingItemField);
+		_service.deleteShoppingItemField(shoppingItemField);
 	}
 
 	public static java.util.List<Object> dynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery)
 		throws com.liferay.portal.SystemException {
-		ShoppingItemFieldLocalService shoppingItemFieldLocalService = ShoppingItemFieldLocalServiceFactory.getService();
-
-		return shoppingItemFieldLocalService.dynamicQuery(dynamicQuery);
+		return _service.dynamicQuery(dynamicQuery);
 	}
 
 	public static java.util.List<Object> dynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery, int start,
 		int end) throws com.liferay.portal.SystemException {
-		ShoppingItemFieldLocalService shoppingItemFieldLocalService = ShoppingItemFieldLocalServiceFactory.getService();
-
-		return shoppingItemFieldLocalService.dynamicQuery(dynamicQuery, start,
-			end);
+		return _service.dynamicQuery(dynamicQuery, start, end);
 	}
 
 	public static com.liferay.portlet.shopping.model.ShoppingItemField getShoppingItemField(
 		long itemFieldId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		ShoppingItemFieldLocalService shoppingItemFieldLocalService = ShoppingItemFieldLocalServiceFactory.getService();
-
-		return shoppingItemFieldLocalService.getShoppingItemField(itemFieldId);
+		return _service.getShoppingItemField(itemFieldId);
 	}
 
 	public static java.util.List<com.liferay.portlet.shopping.model.ShoppingItemField> getShoppingItemFields(
 		int start, int end) throws com.liferay.portal.SystemException {
-		ShoppingItemFieldLocalService shoppingItemFieldLocalService = ShoppingItemFieldLocalServiceFactory.getService();
-
-		return shoppingItemFieldLocalService.getShoppingItemFields(start, end);
+		return _service.getShoppingItemFields(start, end);
 	}
 
 	public static int getShoppingItemFieldsCount()
 		throws com.liferay.portal.SystemException {
-		ShoppingItemFieldLocalService shoppingItemFieldLocalService = ShoppingItemFieldLocalServiceFactory.getService();
-
-		return shoppingItemFieldLocalService.getShoppingItemFieldsCount();
+		return _service.getShoppingItemFieldsCount();
 	}
 
 	public static com.liferay.portlet.shopping.model.ShoppingItemField updateShoppingItemField(
 		com.liferay.portlet.shopping.model.ShoppingItemField shoppingItemField)
 		throws com.liferay.portal.SystemException {
-		ShoppingItemFieldLocalService shoppingItemFieldLocalService = ShoppingItemFieldLocalServiceFactory.getService();
-
-		return shoppingItemFieldLocalService.updateShoppingItemField(shoppingItemField);
+		return _service.updateShoppingItemField(shoppingItemField);
 	}
 
 	public static java.util.List<com.liferay.portlet.shopping.model.ShoppingItemField> getItemFields(
 		long itemId) throws com.liferay.portal.SystemException {
-		ShoppingItemFieldLocalService shoppingItemFieldLocalService = ShoppingItemFieldLocalServiceFactory.getService();
-
-		return shoppingItemFieldLocalService.getItemFields(itemId);
+		return _service.getItemFields(itemId);
 	}
+
+	public static ShoppingItemFieldLocalService getService() {
+		return _service;
+	}
+
+	public void setService(ShoppingItemFieldLocalService service) {
+		_service = service;
+	}
+
+	private static ShoppingItemFieldLocalService _service;
 }

@@ -279,22 +279,12 @@ public class SubscriptionUtil {
 	}
 
 	public static SubscriptionPersistence getPersistence() {
-		return _getUtil()._persistence;
+		return _persistence;
 	}
 
 	public void setPersistence(SubscriptionPersistence persistence) {
 		_persistence = persistence;
 	}
 
-	private static SubscriptionUtil _getUtil() {
-		if (_util == null) {
-			_util = (SubscriptionUtil)com.liferay.portal.kernel.bean.PortalBeanLocatorUtil.locate(_UTIL);
-		}
-
-		return _util;
-	}
-
-	private static final String _UTIL = SubscriptionUtil.class.getName();
-	private static SubscriptionUtil _util;
-	private SubscriptionPersistence _persistence;
+	private static SubscriptionPersistence _persistence;
 }

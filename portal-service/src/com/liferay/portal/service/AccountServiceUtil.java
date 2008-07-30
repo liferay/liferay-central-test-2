@@ -39,16 +39,19 @@ package com.liferay.portal.service;
  * on a bean instead of writing a lookup call and a method call.
  * </p>
  *
- * <p>
- * <code>com.liferay.portal.service.AccountServiceFactory</code>
- * is responsible for the lookup of the bean.
- * </p>
- *
  * @author Brian Wing Shun Chan
  *
  * @see com.liferay.portal.service.AccountService
- * @see com.liferay.portal.service.AccountServiceFactory
  *
  */
 public class AccountServiceUtil {
+	public static AccountService getService() {
+		return _service;
+	}
+
+	public void setService(AccountService service) {
+		_service = service;
+	}
+
+	private static AccountService _service;
 }

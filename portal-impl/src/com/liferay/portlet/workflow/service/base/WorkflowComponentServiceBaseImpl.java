@@ -23,15 +23,13 @@
 package com.liferay.portlet.workflow.service.base;
 
 import com.liferay.portal.kernel.bean.InitializingBean;
+import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
 import com.liferay.portal.service.base.PrincipalBean;
 
 import com.liferay.portlet.workflow.service.WorkflowComponentService;
 import com.liferay.portlet.workflow.service.WorkflowDefinitionService;
-import com.liferay.portlet.workflow.service.WorkflowDefinitionServiceFactory;
 import com.liferay.portlet.workflow.service.WorkflowInstanceService;
-import com.liferay.portlet.workflow.service.WorkflowInstanceServiceFactory;
 import com.liferay.portlet.workflow.service.WorkflowTaskService;
-import com.liferay.portlet.workflow.service.WorkflowTaskServiceFactory;
 
 /**
  * <a href="WorkflowComponentServiceBaseImpl.java.html"><b><i>View Source</i></b></a>
@@ -69,15 +67,18 @@ public abstract class WorkflowComponentServiceBaseImpl extends PrincipalBean
 
 	public void afterPropertiesSet() {
 		if (workflowDefinitionService == null) {
-			workflowDefinitionService = WorkflowDefinitionServiceFactory.getImpl();
+			workflowDefinitionService = (WorkflowDefinitionService)PortalBeanLocatorUtil.locate(WorkflowDefinitionService.class.getName() +
+					".impl");
 		}
 
 		if (workflowInstanceService == null) {
-			workflowInstanceService = WorkflowInstanceServiceFactory.getImpl();
+			workflowInstanceService = (WorkflowInstanceService)PortalBeanLocatorUtil.locate(WorkflowInstanceService.class.getName() +
+					".impl");
 		}
 
 		if (workflowTaskService == null) {
-			workflowTaskService = WorkflowTaskServiceFactory.getImpl();
+			workflowTaskService = (WorkflowTaskService)PortalBeanLocatorUtil.locate(WorkflowTaskService.class.getName() +
+					".impl");
 		}
 	}
 

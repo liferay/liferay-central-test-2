@@ -39,85 +39,61 @@ package com.liferay.portal.service;
  * on a bean instead of writing a lookup call and a method call.
  * </p>
  *
- * <p>
- * <code>com.liferay.portal.service.AddressLocalServiceFactory</code>
- * is responsible for the lookup of the bean.
- * </p>
- *
  * @author Brian Wing Shun Chan
  *
  * @see com.liferay.portal.service.AddressLocalService
- * @see com.liferay.portal.service.AddressLocalServiceFactory
  *
  */
 public class AddressLocalServiceUtil {
 	public static com.liferay.portal.model.Address addAddress(
 		com.liferay.portal.model.Address address)
 		throws com.liferay.portal.SystemException {
-		AddressLocalService addressLocalService = AddressLocalServiceFactory.getService();
-
-		return addressLocalService.addAddress(address);
+		return _service.addAddress(address);
 	}
 
 	public static void deleteAddress(long addressId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		AddressLocalService addressLocalService = AddressLocalServiceFactory.getService();
-
-		addressLocalService.deleteAddress(addressId);
+		_service.deleteAddress(addressId);
 	}
 
 	public static void deleteAddress(com.liferay.portal.model.Address address)
 		throws com.liferay.portal.SystemException {
-		AddressLocalService addressLocalService = AddressLocalServiceFactory.getService();
-
-		addressLocalService.deleteAddress(address);
+		_service.deleteAddress(address);
 	}
 
 	public static java.util.List<Object> dynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery)
 		throws com.liferay.portal.SystemException {
-		AddressLocalService addressLocalService = AddressLocalServiceFactory.getService();
-
-		return addressLocalService.dynamicQuery(dynamicQuery);
+		return _service.dynamicQuery(dynamicQuery);
 	}
 
 	public static java.util.List<Object> dynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery, int start,
 		int end) throws com.liferay.portal.SystemException {
-		AddressLocalService addressLocalService = AddressLocalServiceFactory.getService();
-
-		return addressLocalService.dynamicQuery(dynamicQuery, start, end);
+		return _service.dynamicQuery(dynamicQuery, start, end);
 	}
 
 	public static com.liferay.portal.model.Address getAddress(long addressId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		AddressLocalService addressLocalService = AddressLocalServiceFactory.getService();
-
-		return addressLocalService.getAddress(addressId);
+		return _service.getAddress(addressId);
 	}
 
 	public static java.util.List<com.liferay.portal.model.Address> getAddresss(
 		int start, int end) throws com.liferay.portal.SystemException {
-		AddressLocalService addressLocalService = AddressLocalServiceFactory.getService();
-
-		return addressLocalService.getAddresss(start, end);
+		return _service.getAddresss(start, end);
 	}
 
 	public static int getAddresssCount()
 		throws com.liferay.portal.SystemException {
-		AddressLocalService addressLocalService = AddressLocalServiceFactory.getService();
-
-		return addressLocalService.getAddresssCount();
+		return _service.getAddresssCount();
 	}
 
 	public static com.liferay.portal.model.Address updateAddress(
 		com.liferay.portal.model.Address address)
 		throws com.liferay.portal.SystemException {
-		AddressLocalService addressLocalService = AddressLocalServiceFactory.getService();
-
-		return addressLocalService.updateAddress(address);
+		return _service.updateAddress(address);
 	}
 
 	public static com.liferay.portal.model.Address addAddress(long userId,
@@ -127,34 +103,26 @@ public class AddressLocalServiceUtil {
 		long countryId, int typeId, boolean mailing, boolean primary)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		AddressLocalService addressLocalService = AddressLocalServiceFactory.getService();
-
-		return addressLocalService.addAddress(userId, className, classPK,
-			street1, street2, street3, city, zip, regionId, countryId, typeId,
-			mailing, primary);
+		return _service.addAddress(userId, className, classPK, street1,
+			street2, street3, city, zip, regionId, countryId, typeId, mailing,
+			primary);
 	}
 
 	public static void deleteAddresses(long companyId,
 		java.lang.String className, long classPK)
 		throws com.liferay.portal.SystemException {
-		AddressLocalService addressLocalService = AddressLocalServiceFactory.getService();
-
-		addressLocalService.deleteAddresses(companyId, className, classPK);
+		_service.deleteAddresses(companyId, className, classPK);
 	}
 
 	public static java.util.List<com.liferay.portal.model.Address> getAddresses()
 		throws com.liferay.portal.SystemException {
-		AddressLocalService addressLocalService = AddressLocalServiceFactory.getService();
-
-		return addressLocalService.getAddresses();
+		return _service.getAddresses();
 	}
 
 	public static java.util.List<com.liferay.portal.model.Address> getAddresses(
 		long companyId, java.lang.String className, long classPK)
 		throws com.liferay.portal.SystemException {
-		AddressLocalService addressLocalService = AddressLocalServiceFactory.getService();
-
-		return addressLocalService.getAddresses(companyId, className, classPK);
+		return _service.getAddresses(companyId, className, classPK);
 	}
 
 	public static com.liferay.portal.model.Address updateAddress(
@@ -164,9 +132,17 @@ public class AddressLocalServiceUtil {
 		boolean primary)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		AddressLocalService addressLocalService = AddressLocalServiceFactory.getService();
-
-		return addressLocalService.updateAddress(addressId, street1, street2,
-			street3, city, zip, regionId, countryId, typeId, mailing, primary);
+		return _service.updateAddress(addressId, street1, street2, street3,
+			city, zip, regionId, countryId, typeId, mailing, primary);
 	}
+
+	public static AddressLocalService getService() {
+		return _service;
+	}
+
+	public void setService(AddressLocalService service) {
+		_service = service;
+	}
+
+	private static AddressLocalService _service;
 }

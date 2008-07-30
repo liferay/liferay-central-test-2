@@ -44,7 +44,6 @@ package com.liferay.portlet.messageboards.service;
  *
  * @author Brian Wing Shun Chan
  *
- * @see com.liferay.portlet.messageboards.service.MBBanServiceFactory
  * @see com.liferay.portlet.messageboards.service.MBBanServiceUtil
  *
  */

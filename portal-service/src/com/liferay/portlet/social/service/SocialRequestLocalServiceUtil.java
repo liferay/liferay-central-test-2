@@ -39,87 +39,63 @@ package com.liferay.portlet.social.service;
  * on a bean instead of writing a lookup call and a method call.
  * </p>
  *
- * <p>
- * <code>com.liferay.portlet.social.service.SocialRequestLocalServiceFactory</code>
- * is responsible for the lookup of the bean.
- * </p>
- *
  * @author Brian Wing Shun Chan
  *
  * @see com.liferay.portlet.social.service.SocialRequestLocalService
- * @see com.liferay.portlet.social.service.SocialRequestLocalServiceFactory
  *
  */
 public class SocialRequestLocalServiceUtil {
 	public static com.liferay.portlet.social.model.SocialRequest addSocialRequest(
 		com.liferay.portlet.social.model.SocialRequest socialRequest)
 		throws com.liferay.portal.SystemException {
-		SocialRequestLocalService socialRequestLocalService = SocialRequestLocalServiceFactory.getService();
-
-		return socialRequestLocalService.addSocialRequest(socialRequest);
+		return _service.addSocialRequest(socialRequest);
 	}
 
 	public static void deleteSocialRequest(long requestId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		SocialRequestLocalService socialRequestLocalService = SocialRequestLocalServiceFactory.getService();
-
-		socialRequestLocalService.deleteSocialRequest(requestId);
+		_service.deleteSocialRequest(requestId);
 	}
 
 	public static void deleteSocialRequest(
 		com.liferay.portlet.social.model.SocialRequest socialRequest)
 		throws com.liferay.portal.SystemException {
-		SocialRequestLocalService socialRequestLocalService = SocialRequestLocalServiceFactory.getService();
-
-		socialRequestLocalService.deleteSocialRequest(socialRequest);
+		_service.deleteSocialRequest(socialRequest);
 	}
 
 	public static java.util.List<Object> dynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery)
 		throws com.liferay.portal.SystemException {
-		SocialRequestLocalService socialRequestLocalService = SocialRequestLocalServiceFactory.getService();
-
-		return socialRequestLocalService.dynamicQuery(dynamicQuery);
+		return _service.dynamicQuery(dynamicQuery);
 	}
 
 	public static java.util.List<Object> dynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery, int start,
 		int end) throws com.liferay.portal.SystemException {
-		SocialRequestLocalService socialRequestLocalService = SocialRequestLocalServiceFactory.getService();
-
-		return socialRequestLocalService.dynamicQuery(dynamicQuery, start, end);
+		return _service.dynamicQuery(dynamicQuery, start, end);
 	}
 
 	public static com.liferay.portlet.social.model.SocialRequest getSocialRequest(
 		long requestId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		SocialRequestLocalService socialRequestLocalService = SocialRequestLocalServiceFactory.getService();
-
-		return socialRequestLocalService.getSocialRequest(requestId);
+		return _service.getSocialRequest(requestId);
 	}
 
 	public static java.util.List<com.liferay.portlet.social.model.SocialRequest> getSocialRequests(
 		int start, int end) throws com.liferay.portal.SystemException {
-		SocialRequestLocalService socialRequestLocalService = SocialRequestLocalServiceFactory.getService();
-
-		return socialRequestLocalService.getSocialRequests(start, end);
+		return _service.getSocialRequests(start, end);
 	}
 
 	public static int getSocialRequestsCount()
 		throws com.liferay.portal.SystemException {
-		SocialRequestLocalService socialRequestLocalService = SocialRequestLocalServiceFactory.getService();
-
-		return socialRequestLocalService.getSocialRequestsCount();
+		return _service.getSocialRequestsCount();
 	}
 
 	public static com.liferay.portlet.social.model.SocialRequest updateSocialRequest(
 		com.liferay.portlet.social.model.SocialRequest socialRequest)
 		throws com.liferay.portal.SystemException {
-		SocialRequestLocalService socialRequestLocalService = SocialRequestLocalServiceFactory.getService();
-
-		return socialRequestLocalService.updateSocialRequest(socialRequest);
+		return _service.updateSocialRequest(socialRequest);
 	}
 
 	public static com.liferay.portlet.social.model.SocialRequest addRequest(
@@ -127,114 +103,82 @@ public class SocialRequestLocalServiceUtil {
 		int type, java.lang.String extraData, long receiverUserId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		SocialRequestLocalService socialRequestLocalService = SocialRequestLocalServiceFactory.getService();
-
-		return socialRequestLocalService.addRequest(userId, groupId, className,
-			classPK, type, extraData, receiverUserId);
+		return _service.addRequest(userId, groupId, className, classPK, type,
+			extraData, receiverUserId);
 	}
 
 	public static void deleteReceiverUserRequests(long receiverUserId)
 		throws com.liferay.portal.SystemException {
-		SocialRequestLocalService socialRequestLocalService = SocialRequestLocalServiceFactory.getService();
-
-		socialRequestLocalService.deleteReceiverUserRequests(receiverUserId);
+		_service.deleteReceiverUserRequests(receiverUserId);
 	}
 
 	public static void deleteRequest(long requestId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		SocialRequestLocalService socialRequestLocalService = SocialRequestLocalServiceFactory.getService();
-
-		socialRequestLocalService.deleteRequest(requestId);
+		_service.deleteRequest(requestId);
 	}
 
 	public static void deleteUserRequests(long userId)
 		throws com.liferay.portal.SystemException {
-		SocialRequestLocalService socialRequestLocalService = SocialRequestLocalServiceFactory.getService();
-
-		socialRequestLocalService.deleteUserRequests(userId);
+		_service.deleteUserRequests(userId);
 	}
 
 	public static java.util.List<com.liferay.portlet.social.model.SocialRequest> getReceiverUserRequests(
 		long receiverUserId, int start, int end)
 		throws com.liferay.portal.SystemException {
-		SocialRequestLocalService socialRequestLocalService = SocialRequestLocalServiceFactory.getService();
-
-		return socialRequestLocalService.getReceiverUserRequests(receiverUserId,
-			start, end);
+		return _service.getReceiverUserRequests(receiverUserId, start, end);
 	}
 
 	public static java.util.List<com.liferay.portlet.social.model.SocialRequest> getReceiverUserRequests(
 		long receiverUserId, int status, int start, int end)
 		throws com.liferay.portal.SystemException {
-		SocialRequestLocalService socialRequestLocalService = SocialRequestLocalServiceFactory.getService();
-
-		return socialRequestLocalService.getReceiverUserRequests(receiverUserId,
-			status, start, end);
+		return _service.getReceiverUserRequests(receiverUserId, status, start,
+			end);
 	}
 
 	public static int getReceiverUserRequestsCount(long receiverUserId)
 		throws com.liferay.portal.SystemException {
-		SocialRequestLocalService socialRequestLocalService = SocialRequestLocalServiceFactory.getService();
-
-		return socialRequestLocalService.getReceiverUserRequestsCount(receiverUserId);
+		return _service.getReceiverUserRequestsCount(receiverUserId);
 	}
 
 	public static int getReceiverUserRequestsCount(long receiverUserId,
 		int status) throws com.liferay.portal.SystemException {
-		SocialRequestLocalService socialRequestLocalService = SocialRequestLocalServiceFactory.getService();
-
-		return socialRequestLocalService.getReceiverUserRequestsCount(receiverUserId,
-			status);
+		return _service.getReceiverUserRequestsCount(receiverUserId, status);
 	}
 
 	public static java.util.List<com.liferay.portlet.social.model.SocialRequest> getUserRequests(
 		long userId, int start, int end)
 		throws com.liferay.portal.SystemException {
-		SocialRequestLocalService socialRequestLocalService = SocialRequestLocalServiceFactory.getService();
-
-		return socialRequestLocalService.getUserRequests(userId, start, end);
+		return _service.getUserRequests(userId, start, end);
 	}
 
 	public static java.util.List<com.liferay.portlet.social.model.SocialRequest> getUserRequests(
 		long userId, int status, int start, int end)
 		throws com.liferay.portal.SystemException {
-		SocialRequestLocalService socialRequestLocalService = SocialRequestLocalServiceFactory.getService();
-
-		return socialRequestLocalService.getUserRequests(userId, status, start,
-			end);
+		return _service.getUserRequests(userId, status, start, end);
 	}
 
 	public static int getUserRequestsCount(long userId)
 		throws com.liferay.portal.SystemException {
-		SocialRequestLocalService socialRequestLocalService = SocialRequestLocalServiceFactory.getService();
-
-		return socialRequestLocalService.getUserRequestsCount(userId);
+		return _service.getUserRequestsCount(userId);
 	}
 
 	public static int getUserRequestsCount(long userId, int status)
 		throws com.liferay.portal.SystemException {
-		SocialRequestLocalService socialRequestLocalService = SocialRequestLocalServiceFactory.getService();
-
-		return socialRequestLocalService.getUserRequestsCount(userId, status);
+		return _service.getUserRequestsCount(userId, status);
 	}
 
 	public static boolean hasRequest(long userId, java.lang.String className,
 		long classPK, int type, int status)
 		throws com.liferay.portal.SystemException {
-		SocialRequestLocalService socialRequestLocalService = SocialRequestLocalServiceFactory.getService();
-
-		return socialRequestLocalService.hasRequest(userId, className, classPK,
-			type, status);
+		return _service.hasRequest(userId, className, classPK, type, status);
 	}
 
 	public static boolean hasRequest(long userId, java.lang.String className,
 		long classPK, int type, long receiverUserId, int status)
 		throws com.liferay.portal.SystemException {
-		SocialRequestLocalService socialRequestLocalService = SocialRequestLocalServiceFactory.getService();
-
-		return socialRequestLocalService.hasRequest(userId, className, classPK,
-			type, receiverUserId, status);
+		return _service.hasRequest(userId, className, classPK, type,
+			receiverUserId, status);
 	}
 
 	public static com.liferay.portlet.social.model.SocialRequest updateRequest(
@@ -242,9 +186,16 @@ public class SocialRequestLocalServiceUtil {
 		com.liferay.portal.theme.ThemeDisplay themeDisplay)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		SocialRequestLocalService socialRequestLocalService = SocialRequestLocalServiceFactory.getService();
-
-		return socialRequestLocalService.updateRequest(requestId, status,
-			themeDisplay);
+		return _service.updateRequest(requestId, status, themeDisplay);
 	}
+
+	public static SocialRequestLocalService getService() {
+		return _service;
+	}
+
+	public void setService(SocialRequestLocalService service) {
+		_service = service;
+	}
+
+	private static SocialRequestLocalService _service;
 }

@@ -39,106 +39,86 @@ package com.liferay.portal.service;
  * on a bean instead of writing a lookup call and a method call.
  * </p>
  *
- * <p>
- * <code>com.liferay.portal.service.ReleaseLocalServiceFactory</code>
- * is responsible for the lookup of the bean.
- * </p>
- *
  * @author Brian Wing Shun Chan
  *
  * @see com.liferay.portal.service.ReleaseLocalService
- * @see com.liferay.portal.service.ReleaseLocalServiceFactory
  *
  */
 public class ReleaseLocalServiceUtil {
 	public static com.liferay.portal.model.Release addRelease(
 		com.liferay.portal.model.Release release)
 		throws com.liferay.portal.SystemException {
-		ReleaseLocalService releaseLocalService = ReleaseLocalServiceFactory.getService();
-
-		return releaseLocalService.addRelease(release);
+		return _service.addRelease(release);
 	}
 
 	public static void deleteRelease(long releaseId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		ReleaseLocalService releaseLocalService = ReleaseLocalServiceFactory.getService();
-
-		releaseLocalService.deleteRelease(releaseId);
+		_service.deleteRelease(releaseId);
 	}
 
 	public static void deleteRelease(com.liferay.portal.model.Release release)
 		throws com.liferay.portal.SystemException {
-		ReleaseLocalService releaseLocalService = ReleaseLocalServiceFactory.getService();
-
-		releaseLocalService.deleteRelease(release);
+		_service.deleteRelease(release);
 	}
 
 	public static java.util.List<Object> dynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery)
 		throws com.liferay.portal.SystemException {
-		ReleaseLocalService releaseLocalService = ReleaseLocalServiceFactory.getService();
-
-		return releaseLocalService.dynamicQuery(dynamicQuery);
+		return _service.dynamicQuery(dynamicQuery);
 	}
 
 	public static java.util.List<Object> dynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery, int start,
 		int end) throws com.liferay.portal.SystemException {
-		ReleaseLocalService releaseLocalService = ReleaseLocalServiceFactory.getService();
-
-		return releaseLocalService.dynamicQuery(dynamicQuery, start, end);
+		return _service.dynamicQuery(dynamicQuery, start, end);
 	}
 
 	public static com.liferay.portal.model.Release getRelease(long releaseId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		ReleaseLocalService releaseLocalService = ReleaseLocalServiceFactory.getService();
-
-		return releaseLocalService.getRelease(releaseId);
+		return _service.getRelease(releaseId);
 	}
 
 	public static java.util.List<com.liferay.portal.model.Release> getReleases(
 		int start, int end) throws com.liferay.portal.SystemException {
-		ReleaseLocalService releaseLocalService = ReleaseLocalServiceFactory.getService();
-
-		return releaseLocalService.getReleases(start, end);
+		return _service.getReleases(start, end);
 	}
 
 	public static int getReleasesCount()
 		throws com.liferay.portal.SystemException {
-		ReleaseLocalService releaseLocalService = ReleaseLocalServiceFactory.getService();
-
-		return releaseLocalService.getReleasesCount();
+		return _service.getReleasesCount();
 	}
 
 	public static com.liferay.portal.model.Release updateRelease(
 		com.liferay.portal.model.Release release)
 		throws com.liferay.portal.SystemException {
-		ReleaseLocalService releaseLocalService = ReleaseLocalServiceFactory.getService();
-
-		return releaseLocalService.updateRelease(release);
+		return _service.updateRelease(release);
 	}
 
 	public static int getBuildNumberOrCreate()
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		ReleaseLocalService releaseLocalService = ReleaseLocalServiceFactory.getService();
-
-		return releaseLocalService.getBuildNumberOrCreate();
+		return _service.getBuildNumberOrCreate();
 	}
 
 	public static com.liferay.portal.model.Release getRelease()
 		throws com.liferay.portal.SystemException {
-		ReleaseLocalService releaseLocalService = ReleaseLocalServiceFactory.getService();
-
-		return releaseLocalService.getRelease();
+		return _service.getRelease();
 	}
 
 	public static com.liferay.portal.model.Release updateRelease(
 		boolean verified) throws com.liferay.portal.SystemException {
-		ReleaseLocalService releaseLocalService = ReleaseLocalServiceFactory.getService();
-
-		return releaseLocalService.updateRelease(verified);
+		return _service.updateRelease(verified);
 	}
+
+	public static ReleaseLocalService getService() {
+		return _service;
+	}
+
+	public void setService(ReleaseLocalService service) {
+		_service = service;
+	}
+
+	private static ReleaseLocalService _service;
 }

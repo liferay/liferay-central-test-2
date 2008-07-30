@@ -188,22 +188,12 @@ public class PasswordPolicyUtil {
 	}
 
 	public static PasswordPolicyPersistence getPersistence() {
-		return _getUtil()._persistence;
+		return _persistence;
 	}
 
 	public void setPersistence(PasswordPolicyPersistence persistence) {
 		_persistence = persistence;
 	}
 
-	private static PasswordPolicyUtil _getUtil() {
-		if (_util == null) {
-			_util = (PasswordPolicyUtil)com.liferay.portal.kernel.bean.PortalBeanLocatorUtil.locate(_UTIL);
-		}
-
-		return _util;
-	}
-
-	private static final String _UTIL = PasswordPolicyUtil.class.getName();
-	private static PasswordPolicyUtil _util;
-	private PasswordPolicyPersistence _persistence;
+	private static PasswordPolicyPersistence _persistence;
 }

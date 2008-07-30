@@ -39,15 +39,9 @@ package com.liferay.portal.service;
  * on a bean instead of writing a lookup call and a method call.
  * </p>
  *
- * <p>
- * <code>com.liferay.portal.service.ResourceServiceFactory</code>
- * is responsible for the lookup of the bean.
- * </p>
- *
  * @author Brian Wing Shun Chan
  *
  * @see com.liferay.portal.service.ResourceService
- * @see com.liferay.portal.service.ResourceServiceFactory
  *
  */
 public class ResourceServiceUtil {
@@ -56,8 +50,16 @@ public class ResourceServiceUtil {
 		java.lang.String primKey)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
-		ResourceService resourceService = ResourceServiceFactory.getService();
-
-		return resourceService.getResource(companyId, name, scope, primKey);
+		return _service.getResource(companyId, name, scope, primKey);
 	}
+
+	public static ResourceService getService() {
+		return _service;
+	}
+
+	public void setService(ResourceService service) {
+		_service = service;
+	}
+
+	private static ResourceService _service;
 }

@@ -397,22 +397,12 @@ public class IGFolderUtil {
 	}
 
 	public static IGFolderPersistence getPersistence() {
-		return _getUtil()._persistence;
+		return _persistence;
 	}
 
 	public void setPersistence(IGFolderPersistence persistence) {
 		_persistence = persistence;
 	}
 
-	private static IGFolderUtil _getUtil() {
-		if (_util == null) {
-			_util = (IGFolderUtil)com.liferay.portal.kernel.bean.PortalBeanLocatorUtil.locate(_UTIL);
-		}
-
-		return _util;
-	}
-
-	private static final String _UTIL = IGFolderUtil.class.getName();
-	private static IGFolderUtil _util;
-	private IGFolderPersistence _persistence;
+	private static IGFolderPersistence _persistence;
 }

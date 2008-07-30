@@ -330,22 +330,12 @@ public class PortletPreferencesUtil {
 	}
 
 	public static PortletPreferencesPersistence getPersistence() {
-		return _getUtil()._persistence;
+		return _persistence;
 	}
 
 	public void setPersistence(PortletPreferencesPersistence persistence) {
 		_persistence = persistence;
 	}
 
-	private static PortletPreferencesUtil _getUtil() {
-		if (_util == null) {
-			_util = (PortletPreferencesUtil)com.liferay.portal.kernel.bean.PortalBeanLocatorUtil.locate(_UTIL);
-		}
-
-		return _util;
-	}
-
-	private static final String _UTIL = PortletPreferencesUtil.class.getName();
-	private static PortletPreferencesUtil _util;
-	private PortletPreferencesPersistence _persistence;
+	private static PortletPreferencesPersistence _persistence;
 }

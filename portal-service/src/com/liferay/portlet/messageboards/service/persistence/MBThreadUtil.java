@@ -191,22 +191,12 @@ public class MBThreadUtil {
 	}
 
 	public static MBThreadPersistence getPersistence() {
-		return _getUtil()._persistence;
+		return _persistence;
 	}
 
 	public void setPersistence(MBThreadPersistence persistence) {
 		_persistence = persistence;
 	}
 
-	private static MBThreadUtil _getUtil() {
-		if (_util == null) {
-			_util = (MBThreadUtil)com.liferay.portal.kernel.bean.PortalBeanLocatorUtil.locate(_UTIL);
-		}
-
-		return _util;
-	}
-
-	private static final String _UTIL = MBThreadUtil.class.getName();
-	private static MBThreadUtil _util;
-	private MBThreadPersistence _persistence;
+	private static MBThreadPersistence _persistence;
 }

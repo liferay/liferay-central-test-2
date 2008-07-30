@@ -39,15 +39,9 @@ package com.liferay.portlet.workflow.service;
  * on a bean instead of writing a lookup call and a method call.
  * </p>
  *
- * <p>
- * <code>com.liferay.portlet.workflow.service.WorkflowInstanceServiceFactory</code>
- * is responsible for the lookup of the bean.
- * </p>
- *
  * @author Brian Wing Shun Chan
  *
  * @see com.liferay.portlet.workflow.service.WorkflowInstanceService
- * @see com.liferay.portlet.workflow.service.WorkflowInstanceServiceFactory
  *
  */
 public class WorkflowInstanceServiceUtil {
@@ -55,24 +49,28 @@ public class WorkflowInstanceServiceUtil {
 		long definitionId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
-		WorkflowInstanceService workflowInstanceService = WorkflowInstanceServiceFactory.getService();
-
-		return workflowInstanceService.addInstance(definitionId);
+		return _service.addInstance(definitionId);
 	}
 
 	public static void signalInstance(long instanceId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
-		WorkflowInstanceService workflowInstanceService = WorkflowInstanceServiceFactory.getService();
-
-		workflowInstanceService.signalInstance(instanceId);
+		_service.signalInstance(instanceId);
 	}
 
 	public static void signalToken(long instanceId, long tokenId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
-		WorkflowInstanceService workflowInstanceService = WorkflowInstanceServiceFactory.getService();
-
-		workflowInstanceService.signalToken(instanceId, tokenId);
+		_service.signalToken(instanceId, tokenId);
 	}
+
+	public static WorkflowInstanceService getService() {
+		return _service;
+	}
+
+	public void setService(WorkflowInstanceService service) {
+		_service = service;
+	}
+
+	private static WorkflowInstanceService _service;
 }

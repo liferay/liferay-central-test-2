@@ -39,111 +39,90 @@ package com.liferay.portlet.wiki.service;
  * on a bean instead of writing a lookup call and a method call.
  * </p>
  *
- * <p>
- * <code>com.liferay.portlet.wiki.service.WikiPageResourceLocalServiceFactory</code>
- * is responsible for the lookup of the bean.
- * </p>
- *
  * @author Brian Wing Shun Chan
  *
  * @see com.liferay.portlet.wiki.service.WikiPageResourceLocalService
- * @see com.liferay.portlet.wiki.service.WikiPageResourceLocalServiceFactory
  *
  */
 public class WikiPageResourceLocalServiceUtil {
 	public static com.liferay.portlet.wiki.model.WikiPageResource addWikiPageResource(
 		com.liferay.portlet.wiki.model.WikiPageResource wikiPageResource)
 		throws com.liferay.portal.SystemException {
-		WikiPageResourceLocalService wikiPageResourceLocalService = WikiPageResourceLocalServiceFactory.getService();
-
-		return wikiPageResourceLocalService.addWikiPageResource(wikiPageResource);
+		return _service.addWikiPageResource(wikiPageResource);
 	}
 
 	public static void deleteWikiPageResource(long resourcePrimKey)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		WikiPageResourceLocalService wikiPageResourceLocalService = WikiPageResourceLocalServiceFactory.getService();
-
-		wikiPageResourceLocalService.deleteWikiPageResource(resourcePrimKey);
+		_service.deleteWikiPageResource(resourcePrimKey);
 	}
 
 	public static void deleteWikiPageResource(
 		com.liferay.portlet.wiki.model.WikiPageResource wikiPageResource)
 		throws com.liferay.portal.SystemException {
-		WikiPageResourceLocalService wikiPageResourceLocalService = WikiPageResourceLocalServiceFactory.getService();
-
-		wikiPageResourceLocalService.deleteWikiPageResource(wikiPageResource);
+		_service.deleteWikiPageResource(wikiPageResource);
 	}
 
 	public static java.util.List<Object> dynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery)
 		throws com.liferay.portal.SystemException {
-		WikiPageResourceLocalService wikiPageResourceLocalService = WikiPageResourceLocalServiceFactory.getService();
-
-		return wikiPageResourceLocalService.dynamicQuery(dynamicQuery);
+		return _service.dynamicQuery(dynamicQuery);
 	}
 
 	public static java.util.List<Object> dynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery, int start,
 		int end) throws com.liferay.portal.SystemException {
-		WikiPageResourceLocalService wikiPageResourceLocalService = WikiPageResourceLocalServiceFactory.getService();
-
-		return wikiPageResourceLocalService.dynamicQuery(dynamicQuery, start,
-			end);
+		return _service.dynamicQuery(dynamicQuery, start, end);
 	}
 
 	public static com.liferay.portlet.wiki.model.WikiPageResource getWikiPageResource(
 		long resourcePrimKey)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		WikiPageResourceLocalService wikiPageResourceLocalService = WikiPageResourceLocalServiceFactory.getService();
-
-		return wikiPageResourceLocalService.getWikiPageResource(resourcePrimKey);
+		return _service.getWikiPageResource(resourcePrimKey);
 	}
 
 	public static java.util.List<com.liferay.portlet.wiki.model.WikiPageResource> getWikiPageResources(
 		int start, int end) throws com.liferay.portal.SystemException {
-		WikiPageResourceLocalService wikiPageResourceLocalService = WikiPageResourceLocalServiceFactory.getService();
-
-		return wikiPageResourceLocalService.getWikiPageResources(start, end);
+		return _service.getWikiPageResources(start, end);
 	}
 
 	public static int getWikiPageResourcesCount()
 		throws com.liferay.portal.SystemException {
-		WikiPageResourceLocalService wikiPageResourceLocalService = WikiPageResourceLocalServiceFactory.getService();
-
-		return wikiPageResourceLocalService.getWikiPageResourcesCount();
+		return _service.getWikiPageResourcesCount();
 	}
 
 	public static com.liferay.portlet.wiki.model.WikiPageResource updateWikiPageResource(
 		com.liferay.portlet.wiki.model.WikiPageResource wikiPageResource)
 		throws com.liferay.portal.SystemException {
-		WikiPageResourceLocalService wikiPageResourceLocalService = WikiPageResourceLocalServiceFactory.getService();
-
-		return wikiPageResourceLocalService.updateWikiPageResource(wikiPageResource);
+		return _service.updateWikiPageResource(wikiPageResource);
 	}
 
 	public static void deletePageResource(long nodeId, java.lang.String title)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		WikiPageResourceLocalService wikiPageResourceLocalService = WikiPageResourceLocalServiceFactory.getService();
-
-		wikiPageResourceLocalService.deletePageResource(nodeId, title);
+		_service.deletePageResource(nodeId, title);
 	}
 
 	public static com.liferay.portlet.wiki.model.WikiPageResource getPageResource(
 		long pageResourcePrimKey)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		WikiPageResourceLocalService wikiPageResourceLocalService = WikiPageResourceLocalServiceFactory.getService();
-
-		return wikiPageResourceLocalService.getPageResource(pageResourcePrimKey);
+		return _service.getPageResource(pageResourcePrimKey);
 	}
 
 	public static long getPageResourcePrimKey(long nodeId,
 		java.lang.String title) throws com.liferay.portal.SystemException {
-		WikiPageResourceLocalService wikiPageResourceLocalService = WikiPageResourceLocalServiceFactory.getService();
-
-		return wikiPageResourceLocalService.getPageResourcePrimKey(nodeId, title);
+		return _service.getPageResourcePrimKey(nodeId, title);
 	}
+
+	public static WikiPageResourceLocalService getService() {
+		return _service;
+	}
+
+	public void setService(WikiPageResourceLocalService service) {
+		_service = service;
+	}
+
+	private static WikiPageResourceLocalService _service;
 }

@@ -576,22 +576,12 @@ public class SocialActivityUtil {
 	}
 
 	public static SocialActivityPersistence getPersistence() {
-		return _getUtil()._persistence;
+		return _persistence;
 	}
 
 	public void setPersistence(SocialActivityPersistence persistence) {
 		_persistence = persistence;
 	}
 
-	private static SocialActivityUtil _getUtil() {
-		if (_util == null) {
-			_util = (SocialActivityUtil)com.liferay.portal.kernel.bean.PortalBeanLocatorUtil.locate(_UTIL);
-		}
-
-		return _util;
-	}
-
-	private static final String _UTIL = SocialActivityUtil.class.getName();
-	private static SocialActivityUtil _util;
-	private SocialActivityPersistence _persistence;
+	private static SocialActivityPersistence _persistence;
 }

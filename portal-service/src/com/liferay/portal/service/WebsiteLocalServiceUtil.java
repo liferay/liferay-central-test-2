@@ -39,85 +39,61 @@ package com.liferay.portal.service;
  * on a bean instead of writing a lookup call and a method call.
  * </p>
  *
- * <p>
- * <code>com.liferay.portal.service.WebsiteLocalServiceFactory</code>
- * is responsible for the lookup of the bean.
- * </p>
- *
  * @author Brian Wing Shun Chan
  *
  * @see com.liferay.portal.service.WebsiteLocalService
- * @see com.liferay.portal.service.WebsiteLocalServiceFactory
  *
  */
 public class WebsiteLocalServiceUtil {
 	public static com.liferay.portal.model.Website addWebsite(
 		com.liferay.portal.model.Website website)
 		throws com.liferay.portal.SystemException {
-		WebsiteLocalService websiteLocalService = WebsiteLocalServiceFactory.getService();
-
-		return websiteLocalService.addWebsite(website);
+		return _service.addWebsite(website);
 	}
 
 	public static void deleteWebsite(long websiteId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		WebsiteLocalService websiteLocalService = WebsiteLocalServiceFactory.getService();
-
-		websiteLocalService.deleteWebsite(websiteId);
+		_service.deleteWebsite(websiteId);
 	}
 
 	public static void deleteWebsite(com.liferay.portal.model.Website website)
 		throws com.liferay.portal.SystemException {
-		WebsiteLocalService websiteLocalService = WebsiteLocalServiceFactory.getService();
-
-		websiteLocalService.deleteWebsite(website);
+		_service.deleteWebsite(website);
 	}
 
 	public static java.util.List<Object> dynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery)
 		throws com.liferay.portal.SystemException {
-		WebsiteLocalService websiteLocalService = WebsiteLocalServiceFactory.getService();
-
-		return websiteLocalService.dynamicQuery(dynamicQuery);
+		return _service.dynamicQuery(dynamicQuery);
 	}
 
 	public static java.util.List<Object> dynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery, int start,
 		int end) throws com.liferay.portal.SystemException {
-		WebsiteLocalService websiteLocalService = WebsiteLocalServiceFactory.getService();
-
-		return websiteLocalService.dynamicQuery(dynamicQuery, start, end);
+		return _service.dynamicQuery(dynamicQuery, start, end);
 	}
 
 	public static com.liferay.portal.model.Website getWebsite(long websiteId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		WebsiteLocalService websiteLocalService = WebsiteLocalServiceFactory.getService();
-
-		return websiteLocalService.getWebsite(websiteId);
+		return _service.getWebsite(websiteId);
 	}
 
 	public static java.util.List<com.liferay.portal.model.Website> getWebsites(
 		int start, int end) throws com.liferay.portal.SystemException {
-		WebsiteLocalService websiteLocalService = WebsiteLocalServiceFactory.getService();
-
-		return websiteLocalService.getWebsites(start, end);
+		return _service.getWebsites(start, end);
 	}
 
 	public static int getWebsitesCount()
 		throws com.liferay.portal.SystemException {
-		WebsiteLocalService websiteLocalService = WebsiteLocalServiceFactory.getService();
-
-		return websiteLocalService.getWebsitesCount();
+		return _service.getWebsitesCount();
 	}
 
 	public static com.liferay.portal.model.Website updateWebsite(
 		com.liferay.portal.model.Website website)
 		throws com.liferay.portal.SystemException {
-		WebsiteLocalService websiteLocalService = WebsiteLocalServiceFactory.getService();
-
-		return websiteLocalService.updateWebsite(website);
+		return _service.updateWebsite(website);
 	}
 
 	public static com.liferay.portal.model.Website addWebsite(long userId,
@@ -125,41 +101,41 @@ public class WebsiteLocalServiceUtil {
 		int typeId, boolean primary)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		WebsiteLocalService websiteLocalService = WebsiteLocalServiceFactory.getService();
-
-		return websiteLocalService.addWebsite(userId, className, classPK, url,
-			typeId, primary);
+		return _service.addWebsite(userId, className, classPK, url, typeId,
+			primary);
 	}
 
 	public static void deleteWebsites(long companyId,
 		java.lang.String className, long classPK)
 		throws com.liferay.portal.SystemException {
-		WebsiteLocalService websiteLocalService = WebsiteLocalServiceFactory.getService();
-
-		websiteLocalService.deleteWebsites(companyId, className, classPK);
+		_service.deleteWebsites(companyId, className, classPK);
 	}
 
 	public static java.util.List<com.liferay.portal.model.Website> getWebsites()
 		throws com.liferay.portal.SystemException {
-		WebsiteLocalService websiteLocalService = WebsiteLocalServiceFactory.getService();
-
-		return websiteLocalService.getWebsites();
+		return _service.getWebsites();
 	}
 
 	public static java.util.List<com.liferay.portal.model.Website> getWebsites(
 		long companyId, java.lang.String className, long classPK)
 		throws com.liferay.portal.SystemException {
-		WebsiteLocalService websiteLocalService = WebsiteLocalServiceFactory.getService();
-
-		return websiteLocalService.getWebsites(companyId, className, classPK);
+		return _service.getWebsites(companyId, className, classPK);
 	}
 
 	public static com.liferay.portal.model.Website updateWebsite(
 		long websiteId, java.lang.String url, int typeId, boolean primary)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		WebsiteLocalService websiteLocalService = WebsiteLocalServiceFactory.getService();
-
-		return websiteLocalService.updateWebsite(websiteId, url, typeId, primary);
+		return _service.updateWebsite(websiteId, url, typeId, primary);
 	}
+
+	public static WebsiteLocalService getService() {
+		return _service;
+	}
+
+	public void setService(WebsiteLocalService service) {
+		_service = service;
+	}
+
+	private static WebsiteLocalService _service;
 }

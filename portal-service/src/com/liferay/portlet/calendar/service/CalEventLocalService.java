@@ -44,7 +44,6 @@ package com.liferay.portlet.calendar.service;
  *
  * @author Brian Wing Shun Chan
  *
- * @see com.liferay.portlet.calendar.service.CalEventLocalServiceFactory
  * @see com.liferay.portlet.calendar.service.CalEventLocalServiceUtil
  *
  */

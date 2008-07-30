@@ -39,33 +39,23 @@ package com.liferay.portlet.tags.service;
  * on a bean instead of writing a lookup call and a method call.
  * </p>
  *
- * <p>
- * <code>com.liferay.portlet.tags.service.TagsAssetServiceFactory</code>
- * is responsible for the lookup of the bean.
- * </p>
- *
  * @author Brian Wing Shun Chan
  *
  * @see com.liferay.portlet.tags.service.TagsAssetService
- * @see com.liferay.portlet.tags.service.TagsAssetServiceFactory
  *
  */
 public class TagsAssetServiceUtil {
 	public static void deleteAsset(long assetId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
-		TagsAssetService tagsAssetService = TagsAssetServiceFactory.getService();
-
-		tagsAssetService.deleteAsset(assetId);
+		_service.deleteAsset(assetId);
 	}
 
 	public static com.liferay.portlet.tags.model.TagsAsset getAsset(
 		long assetId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
-		TagsAssetService tagsAssetService = TagsAssetServiceFactory.getService();
-
-		return tagsAssetService.getAsset(assetId);
+		return _service.getAsset(assetId);
 	}
 
 	public static java.lang.String getAssetsRSS(long groupId,
@@ -78,9 +68,7 @@ public class TagsAssetServiceUtil {
 		java.lang.String feedURL, java.lang.String entryURL)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
-		TagsAssetService tagsAssetService = TagsAssetServiceFactory.getService();
-
-		return tagsAssetService.getAssetsRSS(groupId, classNameIds, entryIds,
+		return _service.getAssetsRSS(groupId, classNameIds, entryIds,
 			notEntryIds, andOperator, orderByCol1, orderByCol2, orderByType1,
 			orderByType2, excludeZeroViewCount, publishDate, expirationDate,
 			max, type, version, displayStyle, feedURL, entryURL);
@@ -88,33 +76,25 @@ public class TagsAssetServiceUtil {
 
 	public static com.liferay.portlet.tags.model.TagsAssetType[] getAssetTypes(
 		java.lang.String languageId) throws java.rmi.RemoteException {
-		TagsAssetService tagsAssetService = TagsAssetServiceFactory.getService();
-
-		return tagsAssetService.getAssetTypes(languageId);
+		return _service.getAssetTypes(languageId);
 	}
 
 	public static com.liferay.portlet.tags.model.TagsAssetDisplay[] getCompanyAssetDisplays(
 		long companyId, int start, int end, java.lang.String languageId)
 		throws com.liferay.portal.SystemException, java.rmi.RemoteException {
-		TagsAssetService tagsAssetService = TagsAssetServiceFactory.getService();
-
-		return tagsAssetService.getCompanyAssetDisplays(companyId, start, end,
+		return _service.getCompanyAssetDisplays(companyId, start, end,
 			languageId);
 	}
 
 	public static java.util.List<com.liferay.portlet.tags.model.TagsAsset> getCompanyAssets(
 		long companyId, int start, int end)
 		throws com.liferay.portal.SystemException, java.rmi.RemoteException {
-		TagsAssetService tagsAssetService = TagsAssetServiceFactory.getService();
-
-		return tagsAssetService.getCompanyAssets(companyId, start, end);
+		return _service.getCompanyAssets(companyId, start, end);
 	}
 
 	public static int getCompanyAssetsCount(long companyId)
 		throws com.liferay.portal.SystemException, java.rmi.RemoteException {
-		TagsAssetService tagsAssetService = TagsAssetServiceFactory.getService();
-
-		return tagsAssetService.getCompanyAssetsCount(companyId);
+		return _service.getCompanyAssetsCount(companyId);
 	}
 
 	public static java.lang.String getCompanyAssetsRSS(long companyId, int max,
@@ -122,37 +102,29 @@ public class TagsAssetServiceUtil {
 		java.lang.String feedURL, java.lang.String entryURL)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
-		TagsAssetService tagsAssetService = TagsAssetServiceFactory.getService();
-
-		return tagsAssetService.getCompanyAssetsRSS(companyId, max, type,
-			version, displayStyle, feedURL, entryURL);
+		return _service.getCompanyAssetsRSS(companyId, max, type, version,
+			displayStyle, feedURL, entryURL);
 	}
 
 	public static com.liferay.portlet.tags.model.TagsAsset incrementViewCounter(
 		java.lang.String className, long classPK)
 		throws com.liferay.portal.SystemException, java.rmi.RemoteException {
-		TagsAssetService tagsAssetService = TagsAssetServiceFactory.getService();
-
-		return tagsAssetService.incrementViewCounter(className, classPK);
+		return _service.incrementViewCounter(className, classPK);
 	}
 
 	public static com.liferay.portlet.tags.model.TagsAssetDisplay[] searchAssetDisplays(
 		long companyId, java.lang.String portletId, java.lang.String keywords,
 		java.lang.String languageId, int start, int end)
 		throws com.liferay.portal.SystemException, java.rmi.RemoteException {
-		TagsAssetService tagsAssetService = TagsAssetServiceFactory.getService();
-
-		return tagsAssetService.searchAssetDisplays(companyId, portletId,
-			keywords, languageId, start, end);
+		return _service.searchAssetDisplays(companyId, portletId, keywords,
+			languageId, start, end);
 	}
 
 	public static int searchAssetDisplaysCount(long companyId,
 		java.lang.String portletId, java.lang.String keywords,
 		java.lang.String languageId)
 		throws com.liferay.portal.SystemException, java.rmi.RemoteException {
-		TagsAssetService tagsAssetService = TagsAssetServiceFactory.getService();
-
-		return tagsAssetService.searchAssetDisplaysCount(companyId, portletId,
+		return _service.searchAssetDisplaysCount(companyId, portletId,
 			keywords, languageId);
 	}
 
@@ -166,10 +138,18 @@ public class TagsAssetServiceUtil {
 		java.lang.Integer priority)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
-		TagsAssetService tagsAssetService = TagsAssetServiceFactory.getService();
-
-		return tagsAssetService.updateAsset(groupId, className, classPK,
-			entryNames, startDate, endDate, publishDate, expirationDate,
-			mimeType, title, description, summary, url, height, width, priority);
+		return _service.updateAsset(groupId, className, classPK, entryNames,
+			startDate, endDate, publishDate, expirationDate, mimeType, title,
+			description, summary, url, height, width, priority);
 	}
+
+	public static TagsAssetService getService() {
+		return _service;
+	}
+
+	public void setService(TagsAssetService service) {
+		_service = service;
+	}
+
+	private static TagsAssetService _service;
 }

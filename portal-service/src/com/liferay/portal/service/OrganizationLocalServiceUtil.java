@@ -39,94 +39,68 @@ package com.liferay.portal.service;
  * on a bean instead of writing a lookup call and a method call.
  * </p>
  *
- * <p>
- * <code>com.liferay.portal.service.OrganizationLocalServiceFactory</code>
- * is responsible for the lookup of the bean.
- * </p>
- *
  * @author Brian Wing Shun Chan
  *
  * @see com.liferay.portal.service.OrganizationLocalService
- * @see com.liferay.portal.service.OrganizationLocalServiceFactory
  *
  */
 public class OrganizationLocalServiceUtil {
 	public static com.liferay.portal.model.Organization addOrganization(
 		com.liferay.portal.model.Organization organization)
 		throws com.liferay.portal.SystemException {
-		OrganizationLocalService organizationLocalService = OrganizationLocalServiceFactory.getService();
-
-		return organizationLocalService.addOrganization(organization);
+		return _service.addOrganization(organization);
 	}
 
 	public static void deleteOrganization(long organizationId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		OrganizationLocalService organizationLocalService = OrganizationLocalServiceFactory.getService();
-
-		organizationLocalService.deleteOrganization(organizationId);
+		_service.deleteOrganization(organizationId);
 	}
 
 	public static void deleteOrganization(
 		com.liferay.portal.model.Organization organization)
 		throws com.liferay.portal.SystemException {
-		OrganizationLocalService organizationLocalService = OrganizationLocalServiceFactory.getService();
-
-		organizationLocalService.deleteOrganization(organization);
+		_service.deleteOrganization(organization);
 	}
 
 	public static java.util.List<Object> dynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery)
 		throws com.liferay.portal.SystemException {
-		OrganizationLocalService organizationLocalService = OrganizationLocalServiceFactory.getService();
-
-		return organizationLocalService.dynamicQuery(dynamicQuery);
+		return _service.dynamicQuery(dynamicQuery);
 	}
 
 	public static java.util.List<Object> dynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery, int start,
 		int end) throws com.liferay.portal.SystemException {
-		OrganizationLocalService organizationLocalService = OrganizationLocalServiceFactory.getService();
-
-		return organizationLocalService.dynamicQuery(dynamicQuery, start, end);
+		return _service.dynamicQuery(dynamicQuery, start, end);
 	}
 
 	public static com.liferay.portal.model.Organization getOrganization(
 		long organizationId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		OrganizationLocalService organizationLocalService = OrganizationLocalServiceFactory.getService();
-
-		return organizationLocalService.getOrganization(organizationId);
+		return _service.getOrganization(organizationId);
 	}
 
 	public static java.util.List<com.liferay.portal.model.Organization> getOrganizations(
 		int start, int end) throws com.liferay.portal.SystemException {
-		OrganizationLocalService organizationLocalService = OrganizationLocalServiceFactory.getService();
-
-		return organizationLocalService.getOrganizations(start, end);
+		return _service.getOrganizations(start, end);
 	}
 
 	public static int getOrganizationsCount()
 		throws com.liferay.portal.SystemException {
-		OrganizationLocalService organizationLocalService = OrganizationLocalServiceFactory.getService();
-
-		return organizationLocalService.getOrganizationsCount();
+		return _service.getOrganizationsCount();
 	}
 
 	public static com.liferay.portal.model.Organization updateOrganization(
 		com.liferay.portal.model.Organization organization)
 		throws com.liferay.portal.SystemException {
-		OrganizationLocalService organizationLocalService = OrganizationLocalServiceFactory.getService();
-
-		return organizationLocalService.updateOrganization(organization);
+		return _service.updateOrganization(organization);
 	}
 
 	public static void addGroupOrganizations(long groupId,
 		long[] organizationIds) throws com.liferay.portal.SystemException {
-		OrganizationLocalService organizationLocalService = OrganizationLocalServiceFactory.getService();
-
-		organizationLocalService.addGroupOrganizations(groupId, organizationIds);
+		_service.addGroupOrganizations(groupId, organizationIds);
 	}
 
 	public static com.liferay.portal.model.Organization addOrganization(
@@ -135,130 +109,95 @@ public class OrganizationLocalServiceUtil {
 		int statusId, java.lang.String comments)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		OrganizationLocalService organizationLocalService = OrganizationLocalServiceFactory.getService();
-
-		return organizationLocalService.addOrganization(userId,
-			parentOrganizationId, name, type, recursable, regionId, countryId,
-			statusId, comments);
+		return _service.addOrganization(userId, parentOrganizationId, name,
+			type, recursable, regionId, countryId, statusId, comments);
 	}
 
 	public static void addOrganizationResources(long userId,
 		com.liferay.portal.model.Organization organization)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		OrganizationLocalService organizationLocalService = OrganizationLocalServiceFactory.getService();
-
-		organizationLocalService.addOrganizationResources(userId, organization);
+		_service.addOrganizationResources(userId, organization);
 	}
 
 	public static void addPasswordPolicyOrganizations(long passwordPolicyId,
 		long[] organizationIds) throws com.liferay.portal.SystemException {
-		OrganizationLocalService organizationLocalService = OrganizationLocalServiceFactory.getService();
-
-		organizationLocalService.addPasswordPolicyOrganizations(passwordPolicyId,
+		_service.addPasswordPolicyOrganizations(passwordPolicyId,
 			organizationIds);
 	}
 
 	public static java.util.List<com.liferay.portal.model.Organization> getGroupOrganizations(
 		long groupId) throws com.liferay.portal.SystemException {
-		OrganizationLocalService organizationLocalService = OrganizationLocalServiceFactory.getService();
-
-		return organizationLocalService.getGroupOrganizations(groupId);
+		return _service.getGroupOrganizations(groupId);
 	}
 
 	public static java.util.List<com.liferay.portal.model.Organization> getManageableOrganizations(
 		long userId) throws com.liferay.portal.SystemException {
-		OrganizationLocalService organizationLocalService = OrganizationLocalServiceFactory.getService();
-
-		return organizationLocalService.getManageableOrganizations(userId);
+		return _service.getManageableOrganizations(userId);
 	}
 
 	public static com.liferay.portal.model.Organization getOrganization(
 		long companyId, java.lang.String name)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		OrganizationLocalService organizationLocalService = OrganizationLocalServiceFactory.getService();
-
-		return organizationLocalService.getOrganization(companyId, name);
+		return _service.getOrganization(companyId, name);
 	}
 
 	public static long getOrganizationId(long companyId, java.lang.String name)
 		throws com.liferay.portal.SystemException {
-		OrganizationLocalService organizationLocalService = OrganizationLocalServiceFactory.getService();
-
-		return organizationLocalService.getOrganizationId(companyId, name);
+		return _service.getOrganizationId(companyId, name);
 	}
 
 	public static java.util.List<com.liferay.portal.model.Organization> getOrganizations(
 		long[] organizationIds)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		OrganizationLocalService organizationLocalService = OrganizationLocalServiceFactory.getService();
-
-		return organizationLocalService.getOrganizations(organizationIds);
+		return _service.getOrganizations(organizationIds);
 	}
 
 	public static java.util.List<com.liferay.portal.model.Organization> getParentOrganizations(
 		long organizationId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		OrganizationLocalService organizationLocalService = OrganizationLocalServiceFactory.getService();
-
-		return organizationLocalService.getParentOrganizations(organizationId);
+		return _service.getParentOrganizations(organizationId);
 	}
 
 	public static java.util.List<com.liferay.portal.model.Organization> getSuborganizations(
 		java.util.List<com.liferay.portal.model.Organization> organizations)
 		throws com.liferay.portal.SystemException {
-		OrganizationLocalService organizationLocalService = OrganizationLocalServiceFactory.getService();
-
-		return organizationLocalService.getSuborganizations(organizations);
+		return _service.getSuborganizations(organizations);
 	}
 
 	public static java.util.List<com.liferay.portal.model.Organization> getSubsetOrganizations(
 		java.util.List<com.liferay.portal.model.Organization> allOrganizations,
 		java.util.List<com.liferay.portal.model.Organization> availableOrganizations) {
-		OrganizationLocalService organizationLocalService = OrganizationLocalServiceFactory.getService();
-
-		return organizationLocalService.getSubsetOrganizations(allOrganizations,
+		return _service.getSubsetOrganizations(allOrganizations,
 			availableOrganizations);
 	}
 
 	public static java.util.List<com.liferay.portal.model.Organization> getUserOrganizations(
 		long userId) throws com.liferay.portal.SystemException {
-		OrganizationLocalService organizationLocalService = OrganizationLocalServiceFactory.getService();
-
-		return organizationLocalService.getUserOrganizations(userId);
+		return _service.getUserOrganizations(userId);
 	}
 
 	public static int getUserOrganizationsCount(long userId)
 		throws com.liferay.portal.SystemException {
-		OrganizationLocalService organizationLocalService = OrganizationLocalServiceFactory.getService();
-
-		return organizationLocalService.getUserOrganizationsCount(userId);
+		return _service.getUserOrganizationsCount(userId);
 	}
 
 	public static boolean hasGroupOrganization(long groupId, long organizationId)
 		throws com.liferay.portal.SystemException {
-		OrganizationLocalService organizationLocalService = OrganizationLocalServiceFactory.getService();
-
-		return organizationLocalService.hasGroupOrganization(groupId,
-			organizationId);
+		return _service.hasGroupOrganization(groupId, organizationId);
 	}
 
 	public static boolean hasUserOrganization(long userId, long organizationId)
 		throws com.liferay.portal.SystemException {
-		OrganizationLocalService organizationLocalService = OrganizationLocalServiceFactory.getService();
-
-		return organizationLocalService.hasUserOrganization(userId,
-			organizationId);
+		return _service.hasUserOrganization(userId, organizationId);
 	}
 
 	public static boolean hasPasswordPolicyOrganization(long passwordPolicyId,
 		long organizationId) throws com.liferay.portal.SystemException {
-		OrganizationLocalService organizationLocalService = OrganizationLocalServiceFactory.getService();
-
-		return organizationLocalService.hasPasswordPolicyOrganization(passwordPolicyId,
+		return _service.hasPasswordPolicyOrganization(passwordPolicyId,
 			organizationId);
 	}
 
@@ -267,10 +206,8 @@ public class OrganizationLocalServiceUtil {
 		int type, java.lang.Long regionId, java.lang.Long countryId,
 		java.util.LinkedHashMap<String, Object> params, int start, int end)
 		throws com.liferay.portal.SystemException {
-		OrganizationLocalService organizationLocalService = OrganizationLocalServiceFactory.getService();
-
-		return organizationLocalService.search(companyId, parentOrganizationId,
-			keywords, type, regionId, countryId, params, start, end);
+		return _service.search(companyId, parentOrganizationId, keywords, type,
+			regionId, countryId, params, start, end);
 	}
 
 	public static java.util.List<com.liferay.portal.model.Organization> search(
@@ -279,10 +216,8 @@ public class OrganizationLocalServiceUtil {
 		java.util.LinkedHashMap<String, Object> params, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException {
-		OrganizationLocalService organizationLocalService = OrganizationLocalServiceFactory.getService();
-
-		return organizationLocalService.search(companyId, parentOrganizationId,
-			keywords, type, regionId, countryId, params, start, end, obc);
+		return _service.search(companyId, parentOrganizationId, keywords, type,
+			regionId, countryId, params, start, end, obc);
 	}
 
 	public static java.util.List<com.liferay.portal.model.Organization> search(
@@ -292,11 +227,9 @@ public class OrganizationLocalServiceUtil {
 		java.lang.Long countryId,
 		java.util.LinkedHashMap<String, Object> params, boolean andOperator,
 		int start, int end) throws com.liferay.portal.SystemException {
-		OrganizationLocalService organizationLocalService = OrganizationLocalServiceFactory.getService();
-
-		return organizationLocalService.search(companyId, parentOrganizationId,
-			name, type, street, city, zip, regionId, countryId, params,
-			andOperator, start, end);
+		return _service.search(companyId, parentOrganizationId, name, type,
+			street, city, zip, regionId, countryId, params, andOperator, start,
+			end);
 	}
 
 	public static java.util.List<com.liferay.portal.model.Organization> search(
@@ -307,21 +240,17 @@ public class OrganizationLocalServiceUtil {
 		java.util.LinkedHashMap<String, Object> params, boolean andOperator,
 		int start, int end, com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException {
-		OrganizationLocalService organizationLocalService = OrganizationLocalServiceFactory.getService();
-
-		return organizationLocalService.search(companyId, parentOrganizationId,
-			name, type, street, city, zip, regionId, countryId, params,
-			andOperator, start, end, obc);
+		return _service.search(companyId, parentOrganizationId, name, type,
+			street, city, zip, regionId, countryId, params, andOperator, start,
+			end, obc);
 	}
 
 	public static int searchCount(long companyId, long parentOrganizationId,
 		java.lang.String keywords, int type, java.lang.Long regionId,
 		java.lang.Long countryId, java.util.LinkedHashMap<String, Object> params)
 		throws com.liferay.portal.SystemException {
-		OrganizationLocalService organizationLocalService = OrganizationLocalServiceFactory.getService();
-
-		return organizationLocalService.searchCount(companyId,
-			parentOrganizationId, keywords, type, regionId, countryId, params);
+		return _service.searchCount(companyId, parentOrganizationId, keywords,
+			type, regionId, countryId, params);
 	}
 
 	public static int searchCount(long companyId, long parentOrganizationId,
@@ -330,33 +259,23 @@ public class OrganizationLocalServiceUtil {
 		java.lang.Long countryId,
 		java.util.LinkedHashMap<String, Object> params, boolean andOperator)
 		throws com.liferay.portal.SystemException {
-		OrganizationLocalService organizationLocalService = OrganizationLocalServiceFactory.getService();
-
-		return organizationLocalService.searchCount(companyId,
-			parentOrganizationId, name, type, street, city, zip, regionId,
-			countryId, params, andOperator);
+		return _service.searchCount(companyId, parentOrganizationId, name,
+			type, street, city, zip, regionId, countryId, params, andOperator);
 	}
 
 	public static void setGroupOrganizations(long groupId,
 		long[] organizationIds) throws com.liferay.portal.SystemException {
-		OrganizationLocalService organizationLocalService = OrganizationLocalServiceFactory.getService();
-
-		organizationLocalService.setGroupOrganizations(groupId, organizationIds);
+		_service.setGroupOrganizations(groupId, organizationIds);
 	}
 
 	public static void unsetGroupOrganizations(long groupId,
 		long[] organizationIds) throws com.liferay.portal.SystemException {
-		OrganizationLocalService organizationLocalService = OrganizationLocalServiceFactory.getService();
-
-		organizationLocalService.unsetGroupOrganizations(groupId,
-			organizationIds);
+		_service.unsetGroupOrganizations(groupId, organizationIds);
 	}
 
 	public static void unsetPasswordPolicyOrganizations(long passwordPolicyId,
 		long[] organizationIds) throws com.liferay.portal.SystemException {
-		OrganizationLocalService organizationLocalService = OrganizationLocalServiceFactory.getService();
-
-		organizationLocalService.unsetPasswordPolicyOrganizations(passwordPolicyId,
+		_service.unsetPasswordPolicyOrganizations(passwordPolicyId,
 			organizationIds);
 	}
 
@@ -366,10 +285,18 @@ public class OrganizationLocalServiceUtil {
 		long countryId, int statusId, java.lang.String comments)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		OrganizationLocalService organizationLocalService = OrganizationLocalServiceFactory.getService();
-
-		return organizationLocalService.updateOrganization(companyId,
-			organizationId, parentOrganizationId, name, type, recursable,
-			regionId, countryId, statusId, comments);
+		return _service.updateOrganization(companyId, organizationId,
+			parentOrganizationId, name, type, recursable, regionId, countryId,
+			statusId, comments);
 	}
+
+	public static OrganizationLocalService getService() {
+		return _service;
+	}
+
+	public void setService(OrganizationLocalService service) {
+		_service = service;
+	}
+
+	private static OrganizationLocalService _service;
 }

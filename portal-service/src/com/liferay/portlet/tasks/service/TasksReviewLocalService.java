@@ -44,7 +44,6 @@ package com.liferay.portlet.tasks.service;
  *
  * @author Brian Wing Shun Chan
  *
- * @see com.liferay.portlet.tasks.service.TasksReviewLocalServiceFactory
  * @see com.liferay.portlet.tasks.service.TasksReviewLocalServiceUtil
  *
  */

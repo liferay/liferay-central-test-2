@@ -23,33 +23,24 @@
 package com.liferay.portlet.polls.service.base;
 
 import com.liferay.counter.service.CounterLocalService;
-import com.liferay.counter.service.CounterLocalServiceFactory;
 import com.liferay.counter.service.CounterService;
-import com.liferay.counter.service.CounterServiceFactory;
 
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.bean.InitializingBean;
+import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
 import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 
 import com.liferay.portlet.polls.model.PollsChoice;
 import com.liferay.portlet.polls.service.PollsChoiceLocalService;
 import com.liferay.portlet.polls.service.PollsQuestionLocalService;
-import com.liferay.portlet.polls.service.PollsQuestionLocalServiceFactory;
 import com.liferay.portlet.polls.service.PollsQuestionService;
-import com.liferay.portlet.polls.service.PollsQuestionServiceFactory;
 import com.liferay.portlet.polls.service.PollsVoteLocalService;
-import com.liferay.portlet.polls.service.PollsVoteLocalServiceFactory;
 import com.liferay.portlet.polls.service.PollsVoteService;
-import com.liferay.portlet.polls.service.PollsVoteServiceFactory;
 import com.liferay.portlet.polls.service.persistence.PollsChoiceFinder;
-import com.liferay.portlet.polls.service.persistence.PollsChoiceFinderUtil;
 import com.liferay.portlet.polls.service.persistence.PollsChoicePersistence;
-import com.liferay.portlet.polls.service.persistence.PollsChoiceUtil;
 import com.liferay.portlet.polls.service.persistence.PollsQuestionPersistence;
-import com.liferay.portlet.polls.service.persistence.PollsQuestionUtil;
 import com.liferay.portlet.polls.service.persistence.PollsVotePersistence;
-import com.liferay.portlet.polls.service.persistence.PollsVoteUtil;
 
 import java.util.List;
 
@@ -198,43 +189,53 @@ public abstract class PollsChoiceLocalServiceBaseImpl
 
 	public void afterPropertiesSet() {
 		if (pollsChoicePersistence == null) {
-			pollsChoicePersistence = PollsChoiceUtil.getPersistence();
+			pollsChoicePersistence = (PollsChoicePersistence)PortalBeanLocatorUtil.locate(PollsChoicePersistence.class.getName() +
+					".impl");
 		}
 
 		if (pollsChoiceFinder == null) {
-			pollsChoiceFinder = PollsChoiceFinderUtil.getFinder();
+			pollsChoiceFinder = (PollsChoiceFinder)PortalBeanLocatorUtil.locate(PollsChoiceFinder.class.getName() +
+					".impl");
 		}
 
 		if (pollsQuestionLocalService == null) {
-			pollsQuestionLocalService = PollsQuestionLocalServiceFactory.getImpl();
+			pollsQuestionLocalService = (PollsQuestionLocalService)PortalBeanLocatorUtil.locate(PollsQuestionLocalService.class.getName() +
+					".impl");
 		}
 
 		if (pollsQuestionService == null) {
-			pollsQuestionService = PollsQuestionServiceFactory.getImpl();
+			pollsQuestionService = (PollsQuestionService)PortalBeanLocatorUtil.locate(PollsQuestionService.class.getName() +
+					".impl");
 		}
 
 		if (pollsQuestionPersistence == null) {
-			pollsQuestionPersistence = PollsQuestionUtil.getPersistence();
+			pollsQuestionPersistence = (PollsQuestionPersistence)PortalBeanLocatorUtil.locate(PollsQuestionPersistence.class.getName() +
+					".impl");
 		}
 
 		if (pollsVoteLocalService == null) {
-			pollsVoteLocalService = PollsVoteLocalServiceFactory.getImpl();
+			pollsVoteLocalService = (PollsVoteLocalService)PortalBeanLocatorUtil.locate(PollsVoteLocalService.class.getName() +
+					".impl");
 		}
 
 		if (pollsVoteService == null) {
-			pollsVoteService = PollsVoteServiceFactory.getImpl();
+			pollsVoteService = (PollsVoteService)PortalBeanLocatorUtil.locate(PollsVoteService.class.getName() +
+					".impl");
 		}
 
 		if (pollsVotePersistence == null) {
-			pollsVotePersistence = PollsVoteUtil.getPersistence();
+			pollsVotePersistence = (PollsVotePersistence)PortalBeanLocatorUtil.locate(PollsVotePersistence.class.getName() +
+					".impl");
 		}
 
 		if (counterLocalService == null) {
-			counterLocalService = CounterLocalServiceFactory.getImpl();
+			counterLocalService = (CounterLocalService)PortalBeanLocatorUtil.locate(CounterLocalService.class.getName() +
+					".impl");
 		}
 
 		if (counterService == null) {
-			counterService = CounterServiceFactory.getImpl();
+			counterService = (CounterService)PortalBeanLocatorUtil.locate(CounterService.class.getName() +
+					".impl");
 		}
 	}
 

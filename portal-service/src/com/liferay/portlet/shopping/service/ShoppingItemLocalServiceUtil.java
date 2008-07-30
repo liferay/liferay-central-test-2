@@ -39,96 +39,70 @@ package com.liferay.portlet.shopping.service;
  * on a bean instead of writing a lookup call and a method call.
  * </p>
  *
- * <p>
- * <code>com.liferay.portlet.shopping.service.ShoppingItemLocalServiceFactory</code>
- * is responsible for the lookup of the bean.
- * </p>
- *
  * @author Brian Wing Shun Chan
  *
  * @see com.liferay.portlet.shopping.service.ShoppingItemLocalService
- * @see com.liferay.portlet.shopping.service.ShoppingItemLocalServiceFactory
  *
  */
 public class ShoppingItemLocalServiceUtil {
 	public static com.liferay.portlet.shopping.model.ShoppingItem addShoppingItem(
 		com.liferay.portlet.shopping.model.ShoppingItem shoppingItem)
 		throws com.liferay.portal.SystemException {
-		ShoppingItemLocalService shoppingItemLocalService = ShoppingItemLocalServiceFactory.getService();
-
-		return shoppingItemLocalService.addShoppingItem(shoppingItem);
+		return _service.addShoppingItem(shoppingItem);
 	}
 
 	public static void deleteShoppingItem(long itemId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		ShoppingItemLocalService shoppingItemLocalService = ShoppingItemLocalServiceFactory.getService();
-
-		shoppingItemLocalService.deleteShoppingItem(itemId);
+		_service.deleteShoppingItem(itemId);
 	}
 
 	public static void deleteShoppingItem(
 		com.liferay.portlet.shopping.model.ShoppingItem shoppingItem)
 		throws com.liferay.portal.SystemException {
-		ShoppingItemLocalService shoppingItemLocalService = ShoppingItemLocalServiceFactory.getService();
-
-		shoppingItemLocalService.deleteShoppingItem(shoppingItem);
+		_service.deleteShoppingItem(shoppingItem);
 	}
 
 	public static java.util.List<Object> dynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery)
 		throws com.liferay.portal.SystemException {
-		ShoppingItemLocalService shoppingItemLocalService = ShoppingItemLocalServiceFactory.getService();
-
-		return shoppingItemLocalService.dynamicQuery(dynamicQuery);
+		return _service.dynamicQuery(dynamicQuery);
 	}
 
 	public static java.util.List<Object> dynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery, int start,
 		int end) throws com.liferay.portal.SystemException {
-		ShoppingItemLocalService shoppingItemLocalService = ShoppingItemLocalServiceFactory.getService();
-
-		return shoppingItemLocalService.dynamicQuery(dynamicQuery, start, end);
+		return _service.dynamicQuery(dynamicQuery, start, end);
 	}
 
 	public static com.liferay.portlet.shopping.model.ShoppingItem getShoppingItem(
 		long itemId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		ShoppingItemLocalService shoppingItemLocalService = ShoppingItemLocalServiceFactory.getService();
-
-		return shoppingItemLocalService.getShoppingItem(itemId);
+		return _service.getShoppingItem(itemId);
 	}
 
 	public static java.util.List<com.liferay.portlet.shopping.model.ShoppingItem> getShoppingItems(
 		int start, int end) throws com.liferay.portal.SystemException {
-		ShoppingItemLocalService shoppingItemLocalService = ShoppingItemLocalServiceFactory.getService();
-
-		return shoppingItemLocalService.getShoppingItems(start, end);
+		return _service.getShoppingItems(start, end);
 	}
 
 	public static int getShoppingItemsCount()
 		throws com.liferay.portal.SystemException {
-		ShoppingItemLocalService shoppingItemLocalService = ShoppingItemLocalServiceFactory.getService();
-
-		return shoppingItemLocalService.getShoppingItemsCount();
+		return _service.getShoppingItemsCount();
 	}
 
 	public static com.liferay.portlet.shopping.model.ShoppingItem updateShoppingItem(
 		com.liferay.portlet.shopping.model.ShoppingItem shoppingItem)
 		throws com.liferay.portal.SystemException {
-		ShoppingItemLocalService shoppingItemLocalService = ShoppingItemLocalServiceFactory.getService();
-
-		return shoppingItemLocalService.updateShoppingItem(shoppingItem);
+		return _service.updateShoppingItem(shoppingItem);
 	}
 
 	public static void addBookItems(long userId, long categoryId,
 		java.lang.String[] isbns)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		ShoppingItemLocalService shoppingItemLocalService = ShoppingItemLocalServiceFactory.getService();
-
-		shoppingItemLocalService.addBookItems(userId, categoryId, isbns);
+		_service.addBookItems(userId, categoryId, isbns);
 	}
 
 	public static com.liferay.portlet.shopping.model.ShoppingItem addItem(
@@ -146,14 +120,11 @@ public class ShoppingItemLocalServiceUtil {
 		boolean addCommunityPermissions, boolean addGuestPermissions)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		ShoppingItemLocalService shoppingItemLocalService = ShoppingItemLocalServiceFactory.getService();
-
-		return shoppingItemLocalService.addItem(userId, categoryId, sku, name,
-			description, properties, fieldsQuantities, requiresShipping,
-			stockQuantity, featured, sale, smallImage, smallImageURL,
-			smallFile, mediumImage, mediumImageURL, mediumFile, largeImage,
-			largeImageURL, largeFile, itemFields, itemPrices,
-			addCommunityPermissions, addGuestPermissions);
+		return _service.addItem(userId, categoryId, sku, name, description,
+			properties, fieldsQuantities, requiresShipping, stockQuantity,
+			featured, sale, smallImage, smallImageURL, smallFile, mediumImage,
+			mediumImageURL, mediumFile, largeImage, largeImageURL, largeFile,
+			itemFields, itemPrices, addCommunityPermissions, addGuestPermissions);
 	}
 
 	public static com.liferay.portlet.shopping.model.ShoppingItem addItem(
@@ -172,14 +143,11 @@ public class ShoppingItemLocalServiceUtil {
 		java.lang.String[] guestPermissions)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		ShoppingItemLocalService shoppingItemLocalService = ShoppingItemLocalServiceFactory.getService();
-
-		return shoppingItemLocalService.addItem(userId, categoryId, sku, name,
-			description, properties, fieldsQuantities, requiresShipping,
-			stockQuantity, featured, sale, smallImage, smallImageURL,
-			smallFile, mediumImage, mediumImageURL, mediumFile, largeImage,
-			largeImageURL, largeFile, itemFields, itemPrices,
-			communityPermissions, guestPermissions);
+		return _service.addItem(userId, categoryId, sku, name, description,
+			properties, fieldsQuantities, requiresShipping, stockQuantity,
+			featured, sale, smallImage, smallImageURL, smallFile, mediumImage,
+			mediumImageURL, mediumFile, largeImage, largeImageURL, largeFile,
+			itemFields, itemPrices, communityPermissions, guestPermissions);
 	}
 
 	public static com.liferay.portlet.shopping.model.ShoppingItem addItem(
@@ -200,25 +168,20 @@ public class ShoppingItemLocalServiceUtil {
 		java.lang.String[] guestPermissions)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		ShoppingItemLocalService shoppingItemLocalService = ShoppingItemLocalServiceFactory.getService();
-
-		return shoppingItemLocalService.addItem(userId, categoryId, sku, name,
-			description, properties, fieldsQuantities, requiresShipping,
-			stockQuantity, featured, sale, smallImage, smallImageURL,
-			smallFile, mediumImage, mediumImageURL, mediumFile, largeImage,
-			largeImageURL, largeFile, itemFields, itemPrices,
-			addCommunityPermissions, addGuestPermissions, communityPermissions,
-			guestPermissions);
+		return _service.addItem(userId, categoryId, sku, name, description,
+			properties, fieldsQuantities, requiresShipping, stockQuantity,
+			featured, sale, smallImage, smallImageURL, smallFile, mediumImage,
+			mediumImageURL, mediumFile, largeImage, largeImageURL, largeFile,
+			itemFields, itemPrices, addCommunityPermissions,
+			addGuestPermissions, communityPermissions, guestPermissions);
 	}
 
 	public static void addItemResources(long itemId,
 		boolean addCommunityPermissions, boolean addGuestPermissions)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		ShoppingItemLocalService shoppingItemLocalService = ShoppingItemLocalServiceFactory.getService();
-
-		shoppingItemLocalService.addItemResources(itemId,
-			addCommunityPermissions, addGuestPermissions);
+		_service.addItemResources(itemId, addCommunityPermissions,
+			addGuestPermissions);
 	}
 
 	public static void addItemResources(
@@ -227,10 +190,8 @@ public class ShoppingItemLocalServiceUtil {
 		boolean addCommunityPermissions, boolean addGuestPermissions)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		ShoppingItemLocalService shoppingItemLocalService = ShoppingItemLocalServiceFactory.getService();
-
-		shoppingItemLocalService.addItemResources(category, item,
-			addCommunityPermissions, addGuestPermissions);
+		_service.addItemResources(category, item, addCommunityPermissions,
+			addGuestPermissions);
 	}
 
 	public static void addItemResources(long itemId,
@@ -238,10 +199,7 @@ public class ShoppingItemLocalServiceUtil {
 		java.lang.String[] guestPermissions)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		ShoppingItemLocalService shoppingItemLocalService = ShoppingItemLocalServiceFactory.getService();
-
-		shoppingItemLocalService.addItemResources(itemId, communityPermissions,
-			guestPermissions);
+		_service.addItemResources(itemId, communityPermissions, guestPermissions);
 	}
 
 	public static void addItemResources(
@@ -251,154 +209,114 @@ public class ShoppingItemLocalServiceUtil {
 		java.lang.String[] guestPermissions)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		ShoppingItemLocalService shoppingItemLocalService = ShoppingItemLocalServiceFactory.getService();
-
-		shoppingItemLocalService.addItemResources(category, item,
-			communityPermissions, guestPermissions);
+		_service.addItemResources(category, item, communityPermissions,
+			guestPermissions);
 	}
 
 	public static void deleteItem(long itemId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		ShoppingItemLocalService shoppingItemLocalService = ShoppingItemLocalServiceFactory.getService();
-
-		shoppingItemLocalService.deleteItem(itemId);
+		_service.deleteItem(itemId);
 	}
 
 	public static void deleteItem(
 		com.liferay.portlet.shopping.model.ShoppingItem item)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		ShoppingItemLocalService shoppingItemLocalService = ShoppingItemLocalServiceFactory.getService();
-
-		shoppingItemLocalService.deleteItem(item);
+		_service.deleteItem(item);
 	}
 
 	public static void deleteItems(long categoryId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		ShoppingItemLocalService shoppingItemLocalService = ShoppingItemLocalServiceFactory.getService();
-
-		shoppingItemLocalService.deleteItems(categoryId);
+		_service.deleteItems(categoryId);
 	}
 
 	public static int getCategoriesItemsCount(java.util.List<Long> categoryIds)
 		throws com.liferay.portal.SystemException {
-		ShoppingItemLocalService shoppingItemLocalService = ShoppingItemLocalServiceFactory.getService();
-
-		return shoppingItemLocalService.getCategoriesItemsCount(categoryIds);
+		return _service.getCategoriesItemsCount(categoryIds);
 	}
 
 	public static java.util.List<com.liferay.portlet.shopping.model.ShoppingItem> getFeaturedItems(
 		long groupId, long categoryId, int numOfItems)
 		throws com.liferay.portal.SystemException {
-		ShoppingItemLocalService shoppingItemLocalService = ShoppingItemLocalServiceFactory.getService();
-
-		return shoppingItemLocalService.getFeaturedItems(groupId, categoryId,
-			numOfItems);
+		return _service.getFeaturedItems(groupId, categoryId, numOfItems);
 	}
 
 	public static com.liferay.portlet.shopping.model.ShoppingItem getItem(
 		long itemId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		ShoppingItemLocalService shoppingItemLocalService = ShoppingItemLocalServiceFactory.getService();
-
-		return shoppingItemLocalService.getItem(itemId);
+		return _service.getItem(itemId);
 	}
 
 	public static com.liferay.portlet.shopping.model.ShoppingItem getItem(
 		long companyId, java.lang.String sku)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		ShoppingItemLocalService shoppingItemLocalService = ShoppingItemLocalServiceFactory.getService();
-
-		return shoppingItemLocalService.getItem(companyId, sku);
+		return _service.getItem(companyId, sku);
 	}
 
 	public static com.liferay.portlet.shopping.model.ShoppingItem getItemByLargeImageId(
 		long largeImageId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		ShoppingItemLocalService shoppingItemLocalService = ShoppingItemLocalServiceFactory.getService();
-
-		return shoppingItemLocalService.getItemByLargeImageId(largeImageId);
+		return _service.getItemByLargeImageId(largeImageId);
 	}
 
 	public static com.liferay.portlet.shopping.model.ShoppingItem getItemByMediumImageId(
 		long mediumImageId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		ShoppingItemLocalService shoppingItemLocalService = ShoppingItemLocalServiceFactory.getService();
-
-		return shoppingItemLocalService.getItemByMediumImageId(mediumImageId);
+		return _service.getItemByMediumImageId(mediumImageId);
 	}
 
 	public static com.liferay.portlet.shopping.model.ShoppingItem getItemBySmallImageId(
 		long smallImageId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		ShoppingItemLocalService shoppingItemLocalService = ShoppingItemLocalServiceFactory.getService();
-
-		return shoppingItemLocalService.getItemBySmallImageId(smallImageId);
+		return _service.getItemBySmallImageId(smallImageId);
 	}
 
 	public static java.util.List<com.liferay.portlet.shopping.model.ShoppingItem> getItems(
 		long categoryId) throws com.liferay.portal.SystemException {
-		ShoppingItemLocalService shoppingItemLocalService = ShoppingItemLocalServiceFactory.getService();
-
-		return shoppingItemLocalService.getItems(categoryId);
+		return _service.getItems(categoryId);
 	}
 
 	public static java.util.List<com.liferay.portlet.shopping.model.ShoppingItem> getItems(
 		long categoryId, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException {
-		ShoppingItemLocalService shoppingItemLocalService = ShoppingItemLocalServiceFactory.getService();
-
-		return shoppingItemLocalService.getItems(categoryId, start, end, obc);
+		return _service.getItems(categoryId, start, end, obc);
 	}
 
 	public static com.liferay.portlet.shopping.model.ShoppingItem[] getItemsPrevAndNext(
 		long itemId, com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		ShoppingItemLocalService shoppingItemLocalService = ShoppingItemLocalServiceFactory.getService();
-
-		return shoppingItemLocalService.getItemsPrevAndNext(itemId, obc);
+		return _service.getItemsPrevAndNext(itemId, obc);
 	}
 
 	public static int getItemsCount(long categoryId)
 		throws com.liferay.portal.SystemException {
-		ShoppingItemLocalService shoppingItemLocalService = ShoppingItemLocalServiceFactory.getService();
-
-		return shoppingItemLocalService.getItemsCount(categoryId);
+		return _service.getItemsCount(categoryId);
 	}
 
 	public static java.util.List<com.liferay.portlet.shopping.model.ShoppingItem> getSaleItems(
 		long groupId, long categoryId, int numOfItems)
 		throws com.liferay.portal.SystemException {
-		ShoppingItemLocalService shoppingItemLocalService = ShoppingItemLocalServiceFactory.getService();
-
-		return shoppingItemLocalService.getSaleItems(groupId, categoryId,
-			numOfItems);
+		return _service.getSaleItems(groupId, categoryId, numOfItems);
 	}
 
 	public static java.util.List<com.liferay.portlet.shopping.model.ShoppingItem> search(
 		long groupId, long[] categoryIds, java.lang.String keywords, int start,
 		int end) throws com.liferay.portal.SystemException {
-		ShoppingItemLocalService shoppingItemLocalService = ShoppingItemLocalServiceFactory.getService();
-
-		return shoppingItemLocalService.search(groupId, categoryIds, keywords,
-			start, end);
+		return _service.search(groupId, categoryIds, keywords, start, end);
 	}
 
 	public static int searchCount(long groupId, long[] categoryIds,
 		java.lang.String keywords) throws com.liferay.portal.SystemException {
-		ShoppingItemLocalService shoppingItemLocalService = ShoppingItemLocalServiceFactory.getService();
-
-		return shoppingItemLocalService.searchCount(groupId, categoryIds,
-			keywords);
+		return _service.searchCount(groupId, categoryIds, keywords);
 	}
 
 	public static com.liferay.portlet.shopping.model.ShoppingItem updateItem(
@@ -415,12 +333,20 @@ public class ShoppingItemLocalServiceUtil {
 		java.util.List<com.liferay.portlet.shopping.model.ShoppingItemPrice> itemPrices)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		ShoppingItemLocalService shoppingItemLocalService = ShoppingItemLocalServiceFactory.getService();
-
-		return shoppingItemLocalService.updateItem(userId, itemId, categoryId,
-			sku, name, description, properties, fieldsQuantities,
-			requiresShipping, stockQuantity, featured, sale, smallImage,
-			smallImageURL, smallFile, mediumImage, mediumImageURL, mediumFile,
-			largeImage, largeImageURL, largeFile, itemFields, itemPrices);
+		return _service.updateItem(userId, itemId, categoryId, sku, name,
+			description, properties, fieldsQuantities, requiresShipping,
+			stockQuantity, featured, sale, smallImage, smallImageURL,
+			smallFile, mediumImage, mediumImageURL, mediumFile, largeImage,
+			largeImageURL, largeFile, itemFields, itemPrices);
 	}
+
+	public static ShoppingItemLocalService getService() {
+		return _service;
+	}
+
+	public void setService(ShoppingItemLocalService service) {
+		_service = service;
+	}
+
+	private static ShoppingItemLocalService _service;
 }

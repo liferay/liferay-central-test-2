@@ -39,24 +39,16 @@ package com.liferay.portal.service;
  * on a bean instead of writing a lookup call and a method call.
  * </p>
  *
- * <p>
- * <code>com.liferay.portal.service.PortletPreferencesServiceFactory</code>
- * is responsible for the lookup of the bean.
- * </p>
- *
  * @author Brian Wing Shun Chan
  *
  * @see com.liferay.portal.service.PortletPreferencesService
- * @see com.liferay.portal.service.PortletPreferencesServiceFactory
  *
  */
 public class PortletPreferencesServiceUtil {
 	public static void deleteArchivedPreferences(long portletItemId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
-		PortletPreferencesService portletPreferencesService = PortletPreferencesServiceFactory.getService();
-
-		portletPreferencesService.deleteArchivedPreferences(portletItemId);
+		_service.deleteArchivedPreferences(portletItemId);
 	}
 
 	public static void restoreArchivedPreferences(long groupId,
@@ -64,10 +56,7 @@ public class PortletPreferencesServiceUtil {
 		javax.portlet.PortletPreferences prefs)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
-		PortletPreferencesService portletPreferencesService = PortletPreferencesServiceFactory.getService();
-
-		portletPreferencesService.restoreArchivedPreferences(groupId, name,
-			portletId, prefs);
+		_service.restoreArchivedPreferences(groupId, name, portletId, prefs);
 	}
 
 	public static void updateArchivePreferences(long userId, long groupId,
@@ -75,9 +64,17 @@ public class PortletPreferencesServiceUtil {
 		javax.portlet.PortletPreferences prefs)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
-		PortletPreferencesService portletPreferencesService = PortletPreferencesServiceFactory.getService();
-
-		portletPreferencesService.updateArchivePreferences(userId, groupId,
-			name, portletId, prefs);
+		_service.updateArchivePreferences(userId, groupId, name, portletId,
+			prefs);
 	}
+
+	public static PortletPreferencesService getService() {
+		return _service;
+	}
+
+	public void setService(PortletPreferencesService service) {
+		_service = service;
+	}
+
+	private static PortletPreferencesService _service;
 }

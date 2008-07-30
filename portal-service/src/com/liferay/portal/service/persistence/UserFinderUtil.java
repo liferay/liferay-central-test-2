@@ -103,22 +103,12 @@ public class UserFinderUtil {
 	}
 
 	public static UserFinder getFinder() {
-		return _getUtil()._finder;
+		return _finder;
 	}
 
 	public void setFinder(UserFinder finder) {
 		_finder = finder;
 	}
 
-	private static UserFinderUtil _getUtil() {
-		if (_util == null) {
-			_util = (UserFinderUtil)com.liferay.portal.kernel.bean.PortalBeanLocatorUtil.locate(_UTIL);
-		}
-
-		return _util;
-	}
-
-	private static final String _UTIL = UserFinderUtil.class.getName();
-	private static UserFinderUtil _util;
-	private UserFinder _finder;
+	private static UserFinder _finder;
 }

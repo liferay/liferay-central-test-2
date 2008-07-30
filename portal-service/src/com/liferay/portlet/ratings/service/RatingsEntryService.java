@@ -44,7 +44,6 @@ package com.liferay.portlet.ratings.service;
  *
  * @author Brian Wing Shun Chan
  *
- * @see com.liferay.portlet.ratings.service.RatingsEntryServiceFactory
  * @see com.liferay.portlet.ratings.service.RatingsEntryServiceUtil
  *
  */

@@ -39,87 +39,63 @@ package com.liferay.portlet.softwarecatalog.service;
  * on a bean instead of writing a lookup call and a method call.
  * </p>
  *
- * <p>
- * <code>com.liferay.portlet.softwarecatalog.service.SCProductEntryLocalServiceFactory</code>
- * is responsible for the lookup of the bean.
- * </p>
- *
  * @author Brian Wing Shun Chan
  *
  * @see com.liferay.portlet.softwarecatalog.service.SCProductEntryLocalService
- * @see com.liferay.portlet.softwarecatalog.service.SCProductEntryLocalServiceFactory
  *
  */
 public class SCProductEntryLocalServiceUtil {
 	public static com.liferay.portlet.softwarecatalog.model.SCProductEntry addSCProductEntry(
 		com.liferay.portlet.softwarecatalog.model.SCProductEntry scProductEntry)
 		throws com.liferay.portal.SystemException {
-		SCProductEntryLocalService scProductEntryLocalService = SCProductEntryLocalServiceFactory.getService();
-
-		return scProductEntryLocalService.addSCProductEntry(scProductEntry);
+		return _service.addSCProductEntry(scProductEntry);
 	}
 
 	public static void deleteSCProductEntry(long productEntryId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		SCProductEntryLocalService scProductEntryLocalService = SCProductEntryLocalServiceFactory.getService();
-
-		scProductEntryLocalService.deleteSCProductEntry(productEntryId);
+		_service.deleteSCProductEntry(productEntryId);
 	}
 
 	public static void deleteSCProductEntry(
 		com.liferay.portlet.softwarecatalog.model.SCProductEntry scProductEntry)
 		throws com.liferay.portal.SystemException {
-		SCProductEntryLocalService scProductEntryLocalService = SCProductEntryLocalServiceFactory.getService();
-
-		scProductEntryLocalService.deleteSCProductEntry(scProductEntry);
+		_service.deleteSCProductEntry(scProductEntry);
 	}
 
 	public static java.util.List<Object> dynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery)
 		throws com.liferay.portal.SystemException {
-		SCProductEntryLocalService scProductEntryLocalService = SCProductEntryLocalServiceFactory.getService();
-
-		return scProductEntryLocalService.dynamicQuery(dynamicQuery);
+		return _service.dynamicQuery(dynamicQuery);
 	}
 
 	public static java.util.List<Object> dynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery, int start,
 		int end) throws com.liferay.portal.SystemException {
-		SCProductEntryLocalService scProductEntryLocalService = SCProductEntryLocalServiceFactory.getService();
-
-		return scProductEntryLocalService.dynamicQuery(dynamicQuery, start, end);
+		return _service.dynamicQuery(dynamicQuery, start, end);
 	}
 
 	public static com.liferay.portlet.softwarecatalog.model.SCProductEntry getSCProductEntry(
 		long productEntryId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		SCProductEntryLocalService scProductEntryLocalService = SCProductEntryLocalServiceFactory.getService();
-
-		return scProductEntryLocalService.getSCProductEntry(productEntryId);
+		return _service.getSCProductEntry(productEntryId);
 	}
 
 	public static java.util.List<com.liferay.portlet.softwarecatalog.model.SCProductEntry> getSCProductEntries(
 		int start, int end) throws com.liferay.portal.SystemException {
-		SCProductEntryLocalService scProductEntryLocalService = SCProductEntryLocalServiceFactory.getService();
-
-		return scProductEntryLocalService.getSCProductEntries(start, end);
+		return _service.getSCProductEntries(start, end);
 	}
 
 	public static int getSCProductEntriesCount()
 		throws com.liferay.portal.SystemException {
-		SCProductEntryLocalService scProductEntryLocalService = SCProductEntryLocalServiceFactory.getService();
-
-		return scProductEntryLocalService.getSCProductEntriesCount();
+		return _service.getSCProductEntriesCount();
 	}
 
 	public static com.liferay.portlet.softwarecatalog.model.SCProductEntry updateSCProductEntry(
 		com.liferay.portlet.softwarecatalog.model.SCProductEntry scProductEntry)
 		throws com.liferay.portal.SystemException {
-		SCProductEntryLocalService scProductEntryLocalService = SCProductEntryLocalServiceFactory.getService();
-
-		return scProductEntryLocalService.updateSCProductEntry(scProductEntry);
+		return _service.updateSCProductEntry(scProductEntry);
 	}
 
 	public static com.liferay.portlet.softwarecatalog.model.SCProductEntry addProductEntry(
@@ -132,11 +108,9 @@ public class SCProductEntryLocalServiceUtil {
 		boolean addCommunityPermissions, boolean addGuestPermissions)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		SCProductEntryLocalService scProductEntryLocalService = SCProductEntryLocalServiceFactory.getService();
-
-		return scProductEntryLocalService.addProductEntry(userId, plid, name,
-			type, tags, shortDescription, longDescription, pageURL, author,
-			repoGroupId, repoArtifactId, licenseIds, thumbnails, fullImages,
+		return _service.addProductEntry(userId, plid, name, type, tags,
+			shortDescription, longDescription, pageURL, author, repoGroupId,
+			repoArtifactId, licenseIds, thumbnails, fullImages,
 			addCommunityPermissions, addGuestPermissions);
 	}
 
@@ -151,11 +125,9 @@ public class SCProductEntryLocalServiceUtil {
 		java.lang.String[] guestPermissions)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		SCProductEntryLocalService scProductEntryLocalService = SCProductEntryLocalServiceFactory.getService();
-
-		return scProductEntryLocalService.addProductEntry(userId, plid, name,
-			type, tags, shortDescription, longDescription, pageURL, author,
-			repoGroupId, repoArtifactId, licenseIds, thumbnails, fullImages,
+		return _service.addProductEntry(userId, plid, name, type, tags,
+			shortDescription, longDescription, pageURL, author, repoGroupId,
+			repoArtifactId, licenseIds, thumbnails, fullImages,
 			communityPermissions, guestPermissions);
 	}
 
@@ -172,11 +144,9 @@ public class SCProductEntryLocalServiceUtil {
 		java.lang.String[] guestPermissions)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		SCProductEntryLocalService scProductEntryLocalService = SCProductEntryLocalServiceFactory.getService();
-
-		return scProductEntryLocalService.addProductEntry(userId, plid, name,
-			type, tags, shortDescription, longDescription, pageURL, author,
-			repoGroupId, repoArtifactId, licenseIds, thumbnails, fullImages,
+		return _service.addProductEntry(userId, plid, name, type, tags,
+			shortDescription, longDescription, pageURL, author, repoGroupId,
+			repoArtifactId, licenseIds, thumbnails, fullImages,
 			addCommunityPermissions, addGuestPermissions, communityPermissions,
 			guestPermissions);
 	}
@@ -185,9 +155,7 @@ public class SCProductEntryLocalServiceUtil {
 		boolean addCommunityPermissions, boolean addGuestPermissions)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		SCProductEntryLocalService scProductEntryLocalService = SCProductEntryLocalServiceFactory.getService();
-
-		scProductEntryLocalService.addProductEntryResources(productEntryId,
+		_service.addProductEntryResources(productEntryId,
 			addCommunityPermissions, addGuestPermissions);
 	}
 
@@ -196,9 +164,7 @@ public class SCProductEntryLocalServiceUtil {
 		boolean addCommunityPermissions, boolean addGuestPermissions)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		SCProductEntryLocalService scProductEntryLocalService = SCProductEntryLocalServiceFactory.getService();
-
-		scProductEntryLocalService.addProductEntryResources(productEntry,
+		_service.addProductEntryResources(productEntry,
 			addCommunityPermissions, addGuestPermissions);
 	}
 
@@ -207,10 +173,8 @@ public class SCProductEntryLocalServiceUtil {
 		java.lang.String[] guestPermissions)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		SCProductEntryLocalService scProductEntryLocalService = SCProductEntryLocalServiceFactory.getService();
-
-		scProductEntryLocalService.addProductEntryResources(productEntryId,
-			communityPermissions, guestPermissions);
+		_service.addProductEntryResources(productEntryId, communityPermissions,
+			guestPermissions);
 	}
 
 	public static void addProductEntryResources(
@@ -219,95 +183,70 @@ public class SCProductEntryLocalServiceUtil {
 		java.lang.String[] guestPermissions)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		SCProductEntryLocalService scProductEntryLocalService = SCProductEntryLocalServiceFactory.getService();
-
-		scProductEntryLocalService.addProductEntryResources(productEntry,
-			communityPermissions, guestPermissions);
+		_service.addProductEntryResources(productEntry, communityPermissions,
+			guestPermissions);
 	}
 
 	public static void deleteProductEntries(long groupId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		SCProductEntryLocalService scProductEntryLocalService = SCProductEntryLocalServiceFactory.getService();
-
-		scProductEntryLocalService.deleteProductEntries(groupId);
+		_service.deleteProductEntries(groupId);
 	}
 
 	public static void deleteProductEntry(long productEntryId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		SCProductEntryLocalService scProductEntryLocalService = SCProductEntryLocalServiceFactory.getService();
-
-		scProductEntryLocalService.deleteProductEntry(productEntryId);
+		_service.deleteProductEntry(productEntryId);
 	}
 
 	public static void deleteProductEntry(
 		com.liferay.portlet.softwarecatalog.model.SCProductEntry productEntry)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		SCProductEntryLocalService scProductEntryLocalService = SCProductEntryLocalServiceFactory.getService();
-
-		scProductEntryLocalService.deleteProductEntry(productEntry);
+		_service.deleteProductEntry(productEntry);
 	}
 
 	public static com.liferay.portlet.softwarecatalog.model.SCProductEntry getProductEntry(
 		long productEntryId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		SCProductEntryLocalService scProductEntryLocalService = SCProductEntryLocalServiceFactory.getService();
-
-		return scProductEntryLocalService.getProductEntry(productEntryId);
+		return _service.getProductEntry(productEntryId);
 	}
 
 	public static java.util.List<com.liferay.portlet.softwarecatalog.model.SCProductEntry> getProductEntries(
 		long groupId, int start, int end)
 		throws com.liferay.portal.SystemException {
-		SCProductEntryLocalService scProductEntryLocalService = SCProductEntryLocalServiceFactory.getService();
-
-		return scProductEntryLocalService.getProductEntries(groupId, start, end);
+		return _service.getProductEntries(groupId, start, end);
 	}
 
 	public static java.util.List<com.liferay.portlet.softwarecatalog.model.SCProductEntry> getProductEntries(
 		long groupId, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException {
-		SCProductEntryLocalService scProductEntryLocalService = SCProductEntryLocalServiceFactory.getService();
-
-		return scProductEntryLocalService.getProductEntries(groupId, start,
-			end, obc);
+		return _service.getProductEntries(groupId, start, end, obc);
 	}
 
 	public static java.util.List<com.liferay.portlet.softwarecatalog.model.SCProductEntry> getProductEntries(
 		long groupId, long userId, int start, int end)
 		throws com.liferay.portal.SystemException {
-		SCProductEntryLocalService scProductEntryLocalService = SCProductEntryLocalServiceFactory.getService();
-
-		return scProductEntryLocalService.getProductEntries(groupId, userId,
-			start, end);
+		return _service.getProductEntries(groupId, userId, start, end);
 	}
 
 	public static java.util.List<com.liferay.portlet.softwarecatalog.model.SCProductEntry> getProductEntries(
 		long groupId, long userId, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException {
-		SCProductEntryLocalService scProductEntryLocalService = SCProductEntryLocalServiceFactory.getService();
-
-		return scProductEntryLocalService.getProductEntries(groupId, userId,
-			start, end, obc);
+		return _service.getProductEntries(groupId, userId, start, end, obc);
 	}
 
 	public static int getProductEntriesCount(long groupId)
 		throws com.liferay.portal.SystemException {
-		SCProductEntryLocalService scProductEntryLocalService = SCProductEntryLocalServiceFactory.getService();
-
-		return scProductEntryLocalService.getProductEntriesCount(groupId);
+		return _service.getProductEntriesCount(groupId);
 	}
 
 	public static int getProductEntriesCount(long groupId, long userId)
 		throws com.liferay.portal.SystemException {
-		SCProductEntryLocalService scProductEntryLocalService = SCProductEntryLocalServiceFactory.getService();
-
-		return scProductEntryLocalService.getProductEntriesCount(groupId, userId);
+		return _service.getProductEntriesCount(groupId, userId);
 	}
 
 	public static java.lang.String getRepositoryXML(long groupId,
@@ -315,10 +254,8 @@ public class SCProductEntryLocalServiceUtil {
 		int maxNumOfVersions, java.util.Properties repoSettings)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		SCProductEntryLocalService scProductEntryLocalService = SCProductEntryLocalServiceFactory.getService();
-
-		return scProductEntryLocalService.getRepositoryXML(groupId,
-			baseImageURL, oldestDate, maxNumOfVersions, repoSettings);
+		return _service.getRepositoryXML(groupId, baseImageURL, oldestDate,
+			maxNumOfVersions, repoSettings);
 	}
 
 	public static java.lang.String getRepositoryXML(long groupId,
@@ -327,26 +264,19 @@ public class SCProductEntryLocalServiceUtil {
 		java.util.Properties repoSettings)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		SCProductEntryLocalService scProductEntryLocalService = SCProductEntryLocalServiceFactory.getService();
-
-		return scProductEntryLocalService.getRepositoryXML(groupId, version,
-			baseImageURL, oldestDate, maxNumOfVersions, repoSettings);
+		return _service.getRepositoryXML(groupId, version, baseImageURL,
+			oldestDate, maxNumOfVersions, repoSettings);
 	}
 
 	public static void reIndex(java.lang.String[] ids)
 		throws com.liferay.portal.SystemException {
-		SCProductEntryLocalService scProductEntryLocalService = SCProductEntryLocalServiceFactory.getService();
-
-		scProductEntryLocalService.reIndex(ids);
+		_service.reIndex(ids);
 	}
 
 	public static com.liferay.portal.kernel.search.Hits search(long companyId,
 		long groupId, java.lang.String keywords, java.lang.String type,
 		int start, int end) throws com.liferay.portal.SystemException {
-		SCProductEntryLocalService scProductEntryLocalService = SCProductEntryLocalServiceFactory.getService();
-
-		return scProductEntryLocalService.search(companyId, groupId, keywords,
-			type, start, end);
+		return _service.search(companyId, groupId, keywords, type, start, end);
 	}
 
 	public static com.liferay.portlet.softwarecatalog.model.SCProductEntry updateProductEntry(
@@ -358,11 +288,18 @@ public class SCProductEntryLocalServiceUtil {
 		java.util.List<byte[]> thumbnails, java.util.List<byte[]> fullImages)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		SCProductEntryLocalService scProductEntryLocalService = SCProductEntryLocalServiceFactory.getService();
-
-		return scProductEntryLocalService.updateProductEntry(productEntryId,
-			name, type, tags, shortDescription, longDescription, pageURL,
-			author, repoGroupId, repoArtifactId, licenseIds, thumbnails,
-			fullImages);
+		return _service.updateProductEntry(productEntryId, name, type, tags,
+			shortDescription, longDescription, pageURL, author, repoGroupId,
+			repoArtifactId, licenseIds, thumbnails, fullImages);
 	}
+
+	public static SCProductEntryLocalService getService() {
+		return _service;
+	}
+
+	public void setService(SCProductEntryLocalService service) {
+		_service = service;
+	}
+
+	private static SCProductEntryLocalService _service;
 }

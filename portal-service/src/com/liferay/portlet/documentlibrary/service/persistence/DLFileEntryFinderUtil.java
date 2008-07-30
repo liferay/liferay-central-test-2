@@ -83,22 +83,12 @@ public class DLFileEntryFinderUtil {
 	}
 
 	public static DLFileEntryFinder getFinder() {
-		return _getUtil()._finder;
+		return _finder;
 	}
 
 	public void setFinder(DLFileEntryFinder finder) {
 		_finder = finder;
 	}
 
-	private static DLFileEntryFinderUtil _getUtil() {
-		if (_util == null) {
-			_util = (DLFileEntryFinderUtil)com.liferay.portal.kernel.bean.PortalBeanLocatorUtil.locate(_UTIL);
-		}
-
-		return _util;
-	}
-
-	private static final String _UTIL = DLFileEntryFinderUtil.class.getName();
-	private static DLFileEntryFinderUtil _util;
-	private DLFileEntryFinder _finder;
+	private static DLFileEntryFinder _finder;
 }

@@ -39,87 +39,63 @@ package com.liferay.portal.service;
  * on a bean instead of writing a lookup call and a method call.
  * </p>
  *
- * <p>
- * <code>com.liferay.portal.service.PortletItemLocalServiceFactory</code>
- * is responsible for the lookup of the bean.
- * </p>
- *
  * @author Brian Wing Shun Chan
  *
  * @see com.liferay.portal.service.PortletItemLocalService
- * @see com.liferay.portal.service.PortletItemLocalServiceFactory
  *
  */
 public class PortletItemLocalServiceUtil {
 	public static com.liferay.portal.model.PortletItem addPortletItem(
 		com.liferay.portal.model.PortletItem portletItem)
 		throws com.liferay.portal.SystemException {
-		PortletItemLocalService portletItemLocalService = PortletItemLocalServiceFactory.getService();
-
-		return portletItemLocalService.addPortletItem(portletItem);
+		return _service.addPortletItem(portletItem);
 	}
 
 	public static void deletePortletItem(long portletItemId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		PortletItemLocalService portletItemLocalService = PortletItemLocalServiceFactory.getService();
-
-		portletItemLocalService.deletePortletItem(portletItemId);
+		_service.deletePortletItem(portletItemId);
 	}
 
 	public static void deletePortletItem(
 		com.liferay.portal.model.PortletItem portletItem)
 		throws com.liferay.portal.SystemException {
-		PortletItemLocalService portletItemLocalService = PortletItemLocalServiceFactory.getService();
-
-		portletItemLocalService.deletePortletItem(portletItem);
+		_service.deletePortletItem(portletItem);
 	}
 
 	public static java.util.List<Object> dynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery)
 		throws com.liferay.portal.SystemException {
-		PortletItemLocalService portletItemLocalService = PortletItemLocalServiceFactory.getService();
-
-		return portletItemLocalService.dynamicQuery(dynamicQuery);
+		return _service.dynamicQuery(dynamicQuery);
 	}
 
 	public static java.util.List<Object> dynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery, int start,
 		int end) throws com.liferay.portal.SystemException {
-		PortletItemLocalService portletItemLocalService = PortletItemLocalServiceFactory.getService();
-
-		return portletItemLocalService.dynamicQuery(dynamicQuery, start, end);
+		return _service.dynamicQuery(dynamicQuery, start, end);
 	}
 
 	public static com.liferay.portal.model.PortletItem getPortletItem(
 		long portletItemId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		PortletItemLocalService portletItemLocalService = PortletItemLocalServiceFactory.getService();
-
-		return portletItemLocalService.getPortletItem(portletItemId);
+		return _service.getPortletItem(portletItemId);
 	}
 
 	public static java.util.List<com.liferay.portal.model.PortletItem> getPortletItems(
 		int start, int end) throws com.liferay.portal.SystemException {
-		PortletItemLocalService portletItemLocalService = PortletItemLocalServiceFactory.getService();
-
-		return portletItemLocalService.getPortletItems(start, end);
+		return _service.getPortletItems(start, end);
 	}
 
 	public static int getPortletItemsCount()
 		throws com.liferay.portal.SystemException {
-		PortletItemLocalService portletItemLocalService = PortletItemLocalServiceFactory.getService();
-
-		return portletItemLocalService.getPortletItemsCount();
+		return _service.getPortletItemsCount();
 	}
 
 	public static com.liferay.portal.model.PortletItem updatePortletItem(
 		com.liferay.portal.model.PortletItem portletItem)
 		throws com.liferay.portal.SystemException {
-		PortletItemLocalService portletItemLocalService = PortletItemLocalServiceFactory.getService();
-
-		return portletItemLocalService.updatePortletItem(portletItem);
+		return _service.updatePortletItem(portletItem);
 	}
 
 	public static com.liferay.portal.model.PortletItem addPortletItem(
@@ -127,10 +103,8 @@ public class PortletItemLocalServiceUtil {
 		java.lang.String portletId, java.lang.String className)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		PortletItemLocalService portletItemLocalService = PortletItemLocalServiceFactory.getService();
-
-		return portletItemLocalService.addPortletItem(userId, groupId, name,
-			portletId, className);
+		return _service.addPortletItem(userId, groupId, name, portletId,
+			className);
 	}
 
 	public static com.liferay.portal.model.PortletItem getPortletItem(
@@ -138,27 +112,19 @@ public class PortletItemLocalServiceUtil {
 		java.lang.String className)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		PortletItemLocalService portletItemLocalService = PortletItemLocalServiceFactory.getService();
-
-		return portletItemLocalService.getPortletItem(groupId, name, portletId,
-			className);
+		return _service.getPortletItem(groupId, name, portletId, className);
 	}
 
 	public static java.util.List<com.liferay.portal.model.PortletItem> getPortletItems(
 		long groupId, java.lang.String className)
 		throws com.liferay.portal.SystemException {
-		PortletItemLocalService portletItemLocalService = PortletItemLocalServiceFactory.getService();
-
-		return portletItemLocalService.getPortletItems(groupId, className);
+		return _service.getPortletItems(groupId, className);
 	}
 
 	public static java.util.List<com.liferay.portal.model.PortletItem> getPortletItems(
 		long groupId, java.lang.String portletId, java.lang.String className)
 		throws com.liferay.portal.SystemException {
-		PortletItemLocalService portletItemLocalService = PortletItemLocalServiceFactory.getService();
-
-		return portletItemLocalService.getPortletItems(groupId, portletId,
-			className);
+		return _service.getPortletItems(groupId, portletId, className);
 	}
 
 	public static com.liferay.portal.model.PortletItem updatePortletItem(
@@ -166,9 +132,17 @@ public class PortletItemLocalServiceUtil {
 		java.lang.String portletId, java.lang.String className)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		PortletItemLocalService portletItemLocalService = PortletItemLocalServiceFactory.getService();
-
-		return portletItemLocalService.updatePortletItem(userId, groupId, name,
-			portletId, className);
+		return _service.updatePortletItem(userId, groupId, name, portletId,
+			className);
 	}
+
+	public static PortletItemLocalService getService() {
+		return _service;
+	}
+
+	public void setService(PortletItemLocalService service) {
+		_service = service;
+	}
+
+	private static PortletItemLocalService _service;
 }

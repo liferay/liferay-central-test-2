@@ -39,167 +39,119 @@ package com.liferay.portal.service;
  * on a bean instead of writing a lookup call and a method call.
  * </p>
  *
- * <p>
- * <code>com.liferay.portal.service.PortletPreferencesLocalServiceFactory</code>
- * is responsible for the lookup of the bean.
- * </p>
- *
  * @author Brian Wing Shun Chan
  *
  * @see com.liferay.portal.service.PortletPreferencesLocalService
- * @see com.liferay.portal.service.PortletPreferencesLocalServiceFactory
  *
  */
 public class PortletPreferencesLocalServiceUtil {
 	public static com.liferay.portal.model.PortletPreferences addPortletPreferences(
 		com.liferay.portal.model.PortletPreferences portletPreferences)
 		throws com.liferay.portal.SystemException {
-		PortletPreferencesLocalService portletPreferencesLocalService = PortletPreferencesLocalServiceFactory.getService();
-
-		return portletPreferencesLocalService.addPortletPreferences(portletPreferences);
+		return _service.addPortletPreferences(portletPreferences);
 	}
 
 	public static void deletePortletPreferences(long portletPreferencesId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		PortletPreferencesLocalService portletPreferencesLocalService = PortletPreferencesLocalServiceFactory.getService();
-
-		portletPreferencesLocalService.deletePortletPreferences(portletPreferencesId);
+		_service.deletePortletPreferences(portletPreferencesId);
 	}
 
 	public static void deletePortletPreferences(
 		com.liferay.portal.model.PortletPreferences portletPreferences)
 		throws com.liferay.portal.SystemException {
-		PortletPreferencesLocalService portletPreferencesLocalService = PortletPreferencesLocalServiceFactory.getService();
-
-		portletPreferencesLocalService.deletePortletPreferences(portletPreferences);
+		_service.deletePortletPreferences(portletPreferences);
 	}
 
 	public static java.util.List<Object> dynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery)
 		throws com.liferay.portal.SystemException {
-		PortletPreferencesLocalService portletPreferencesLocalService = PortletPreferencesLocalServiceFactory.getService();
-
-		return portletPreferencesLocalService.dynamicQuery(dynamicQuery);
+		return _service.dynamicQuery(dynamicQuery);
 	}
 
 	public static java.util.List<Object> dynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery, int start,
 		int end) throws com.liferay.portal.SystemException {
-		PortletPreferencesLocalService portletPreferencesLocalService = PortletPreferencesLocalServiceFactory.getService();
-
-		return portletPreferencesLocalService.dynamicQuery(dynamicQuery, start,
-			end);
+		return _service.dynamicQuery(dynamicQuery, start, end);
 	}
 
 	public static com.liferay.portal.model.PortletPreferences getPortletPreferences(
 		long portletPreferencesId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		PortletPreferencesLocalService portletPreferencesLocalService = PortletPreferencesLocalServiceFactory.getService();
-
-		return portletPreferencesLocalService.getPortletPreferences(portletPreferencesId);
+		return _service.getPortletPreferences(portletPreferencesId);
 	}
 
 	public static java.util.List<com.liferay.portal.model.PortletPreferences> getPortletPreferencess(
 		int start, int end) throws com.liferay.portal.SystemException {
-		PortletPreferencesLocalService portletPreferencesLocalService = PortletPreferencesLocalServiceFactory.getService();
-
-		return portletPreferencesLocalService.getPortletPreferencess(start, end);
+		return _service.getPortletPreferencess(start, end);
 	}
 
 	public static int getPortletPreferencessCount()
 		throws com.liferay.portal.SystemException {
-		PortletPreferencesLocalService portletPreferencesLocalService = PortletPreferencesLocalServiceFactory.getService();
-
-		return portletPreferencesLocalService.getPortletPreferencessCount();
+		return _service.getPortletPreferencessCount();
 	}
 
 	public static com.liferay.portal.model.PortletPreferences updatePortletPreferences(
 		com.liferay.portal.model.PortletPreferences portletPreferences)
 		throws com.liferay.portal.SystemException {
-		PortletPreferencesLocalService portletPreferencesLocalService = PortletPreferencesLocalServiceFactory.getService();
-
-		return portletPreferencesLocalService.updatePortletPreferences(portletPreferences);
+		return _service.updatePortletPreferences(portletPreferences);
 	}
 
 	public static void deletePortletPreferences(long ownerId, int ownerType,
 		long plid) throws com.liferay.portal.SystemException {
-		PortletPreferencesLocalService portletPreferencesLocalService = PortletPreferencesLocalServiceFactory.getService();
-
-		portletPreferencesLocalService.deletePortletPreferences(ownerId,
-			ownerType, plid);
+		_service.deletePortletPreferences(ownerId, ownerType, plid);
 	}
 
 	public static void deletePortletPreferences(long ownerId, int ownerType,
 		long plid, java.lang.String portletId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		PortletPreferencesLocalService portletPreferencesLocalService = PortletPreferencesLocalServiceFactory.getService();
-
-		portletPreferencesLocalService.deletePortletPreferences(ownerId,
-			ownerType, plid, portletId);
+		_service.deletePortletPreferences(ownerId, ownerType, plid, portletId);
 	}
 
 	public static javax.portlet.PortletPreferences getDefaultPreferences(
 		long companyId, java.lang.String portletId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		PortletPreferencesLocalService portletPreferencesLocalService = PortletPreferencesLocalServiceFactory.getService();
-
-		return portletPreferencesLocalService.getDefaultPreferences(companyId,
-			portletId);
+		return _service.getDefaultPreferences(companyId, portletId);
 	}
 
 	public static java.util.List<com.liferay.portal.model.PortletPreferences> getPortletPreferences()
 		throws com.liferay.portal.SystemException {
-		PortletPreferencesLocalService portletPreferencesLocalService = PortletPreferencesLocalServiceFactory.getService();
-
-		return portletPreferencesLocalService.getPortletPreferences();
+		return _service.getPortletPreferences();
 	}
 
 	public static java.util.List<com.liferay.portal.model.PortletPreferences> getPortletPreferences(
 		long plid, java.lang.String portletId)
 		throws com.liferay.portal.SystemException {
-		PortletPreferencesLocalService portletPreferencesLocalService = PortletPreferencesLocalServiceFactory.getService();
-
-		return portletPreferencesLocalService.getPortletPreferences(plid,
-			portletId);
+		return _service.getPortletPreferences(plid, portletId);
 	}
 
 	public static java.util.List<com.liferay.portal.model.PortletPreferences> getPortletPreferences(
 		long ownerId, int ownerType, long plid)
 		throws com.liferay.portal.SystemException {
-		PortletPreferencesLocalService portletPreferencesLocalService = PortletPreferencesLocalServiceFactory.getService();
-
-		return portletPreferencesLocalService.getPortletPreferences(ownerId,
-			ownerType, plid);
+		return _service.getPortletPreferences(ownerId, ownerType, plid);
 	}
 
 	public static com.liferay.portal.model.PortletPreferences getPortletPreferences(
 		long ownerId, int ownerType, long plid, java.lang.String portletId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		PortletPreferencesLocalService portletPreferencesLocalService = PortletPreferencesLocalServiceFactory.getService();
-
-		return portletPreferencesLocalService.getPortletPreferences(ownerId,
-			ownerType, plid, portletId);
+		return _service.getPortletPreferences(ownerId, ownerType, plid,
+			portletId);
 	}
 
 	public static java.util.List<com.liferay.portal.model.PortletPreferences> getPortletPreferencesByPlid(
 		long plid) throws com.liferay.portal.SystemException {
-		PortletPreferencesLocalService portletPreferencesLocalService = PortletPreferencesLocalServiceFactory.getService();
-
-		return portletPreferencesLocalService.getPortletPreferencesByPlid(plid);
+		return _service.getPortletPreferencesByPlid(plid);
 	}
 
 	public static javax.portlet.PortletPreferences getPreferences(
 		com.liferay.portal.model.PortletPreferencesIds portletPreferencesIds)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		PortletPreferencesLocalService portletPreferencesLocalService = PortletPreferencesLocalServiceFactory.getService();
-
-		return portletPreferencesLocalService.getPreferences(portletPreferencesIds);
+		return _service.getPreferences(portletPreferencesIds);
 	}
 
 	public static javax.portlet.PortletPreferences getPreferences(
@@ -207,10 +159,8 @@ public class PortletPreferencesLocalServiceUtil {
 		java.lang.String portletId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		PortletPreferencesLocalService portletPreferencesLocalService = PortletPreferencesLocalServiceFactory.getService();
-
-		return portletPreferencesLocalService.getPreferences(companyId,
-			ownerId, ownerType, plid, portletId);
+		return _service.getPreferences(companyId, ownerId, ownerType, plid,
+			portletId);
 	}
 
 	public static javax.portlet.PortletPreferences getPreferences(
@@ -218,19 +168,25 @@ public class PortletPreferencesLocalServiceUtil {
 		java.lang.String portletId, java.lang.String defaultPreferences)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		PortletPreferencesLocalService portletPreferencesLocalService = PortletPreferencesLocalServiceFactory.getService();
-
-		return portletPreferencesLocalService.getPreferences(companyId,
-			ownerId, ownerType, plid, portletId, defaultPreferences);
+		return _service.getPreferences(companyId, ownerId, ownerType, plid,
+			portletId, defaultPreferences);
 	}
 
 	public static com.liferay.portal.model.PortletPreferences updatePreferences(
 		long ownerId, int ownerType, long plid, java.lang.String portletId,
 		javax.portlet.PortletPreferences prefs)
 		throws com.liferay.portal.SystemException {
-		PortletPreferencesLocalService portletPreferencesLocalService = PortletPreferencesLocalServiceFactory.getService();
-
-		return portletPreferencesLocalService.updatePreferences(ownerId,
-			ownerType, plid, portletId, prefs);
+		return _service.updatePreferences(ownerId, ownerType, plid, portletId,
+			prefs);
 	}
+
+	public static PortletPreferencesLocalService getService() {
+		return _service;
+	}
+
+	public void setService(PortletPreferencesLocalService service) {
+		_service = service;
+	}
+
+	private static PortletPreferencesLocalService _service;
 }

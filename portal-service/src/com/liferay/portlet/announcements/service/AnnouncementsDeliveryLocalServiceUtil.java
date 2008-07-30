@@ -39,138 +39,100 @@ package com.liferay.portlet.announcements.service;
  * on a bean instead of writing a lookup call and a method call.
  * </p>
  *
- * <p>
- * <code>com.liferay.portlet.announcements.service.AnnouncementsDeliveryLocalServiceFactory</code>
- * is responsible for the lookup of the bean.
- * </p>
- *
  * @author Brian Wing Shun Chan
  *
  * @see com.liferay.portlet.announcements.service.AnnouncementsDeliveryLocalService
- * @see com.liferay.portlet.announcements.service.AnnouncementsDeliveryLocalServiceFactory
  *
  */
 public class AnnouncementsDeliveryLocalServiceUtil {
 	public static com.liferay.portlet.announcements.model.AnnouncementsDelivery addAnnouncementsDelivery(
 		com.liferay.portlet.announcements.model.AnnouncementsDelivery announcementsDelivery)
 		throws com.liferay.portal.SystemException {
-		AnnouncementsDeliveryLocalService announcementsDeliveryLocalService = AnnouncementsDeliveryLocalServiceFactory.getService();
-
-		return announcementsDeliveryLocalService.addAnnouncementsDelivery(announcementsDelivery);
+		return _service.addAnnouncementsDelivery(announcementsDelivery);
 	}
 
 	public static void deleteAnnouncementsDelivery(long deliveryId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		AnnouncementsDeliveryLocalService announcementsDeliveryLocalService = AnnouncementsDeliveryLocalServiceFactory.getService();
-
-		announcementsDeliveryLocalService.deleteAnnouncementsDelivery(deliveryId);
+		_service.deleteAnnouncementsDelivery(deliveryId);
 	}
 
 	public static void deleteAnnouncementsDelivery(
 		com.liferay.portlet.announcements.model.AnnouncementsDelivery announcementsDelivery)
 		throws com.liferay.portal.SystemException {
-		AnnouncementsDeliveryLocalService announcementsDeliveryLocalService = AnnouncementsDeliveryLocalServiceFactory.getService();
-
-		announcementsDeliveryLocalService.deleteAnnouncementsDelivery(announcementsDelivery);
+		_service.deleteAnnouncementsDelivery(announcementsDelivery);
 	}
 
 	public static java.util.List<Object> dynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery)
 		throws com.liferay.portal.SystemException {
-		AnnouncementsDeliveryLocalService announcementsDeliveryLocalService = AnnouncementsDeliveryLocalServiceFactory.getService();
-
-		return announcementsDeliveryLocalService.dynamicQuery(dynamicQuery);
+		return _service.dynamicQuery(dynamicQuery);
 	}
 
 	public static java.util.List<Object> dynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery, int start,
 		int end) throws com.liferay.portal.SystemException {
-		AnnouncementsDeliveryLocalService announcementsDeliveryLocalService = AnnouncementsDeliveryLocalServiceFactory.getService();
-
-		return announcementsDeliveryLocalService.dynamicQuery(dynamicQuery,
-			start, end);
+		return _service.dynamicQuery(dynamicQuery, start, end);
 	}
 
 	public static com.liferay.portlet.announcements.model.AnnouncementsDelivery getAnnouncementsDelivery(
 		long deliveryId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		AnnouncementsDeliveryLocalService announcementsDeliveryLocalService = AnnouncementsDeliveryLocalServiceFactory.getService();
-
-		return announcementsDeliveryLocalService.getAnnouncementsDelivery(deliveryId);
+		return _service.getAnnouncementsDelivery(deliveryId);
 	}
 
 	public static java.util.List<com.liferay.portlet.announcements.model.AnnouncementsDelivery> getAnnouncementsDeliveries(
 		int start, int end) throws com.liferay.portal.SystemException {
-		AnnouncementsDeliveryLocalService announcementsDeliveryLocalService = AnnouncementsDeliveryLocalServiceFactory.getService();
-
-		return announcementsDeliveryLocalService.getAnnouncementsDeliveries(start,
-			end);
+		return _service.getAnnouncementsDeliveries(start, end);
 	}
 
 	public static int getAnnouncementsDeliveriesCount()
 		throws com.liferay.portal.SystemException {
-		AnnouncementsDeliveryLocalService announcementsDeliveryLocalService = AnnouncementsDeliveryLocalServiceFactory.getService();
-
-		return announcementsDeliveryLocalService.getAnnouncementsDeliveriesCount();
+		return _service.getAnnouncementsDeliveriesCount();
 	}
 
 	public static com.liferay.portlet.announcements.model.AnnouncementsDelivery updateAnnouncementsDelivery(
 		com.liferay.portlet.announcements.model.AnnouncementsDelivery announcementsDelivery)
 		throws com.liferay.portal.SystemException {
-		AnnouncementsDeliveryLocalService announcementsDeliveryLocalService = AnnouncementsDeliveryLocalServiceFactory.getService();
-
-		return announcementsDeliveryLocalService.updateAnnouncementsDelivery(announcementsDelivery);
+		return _service.updateAnnouncementsDelivery(announcementsDelivery);
 	}
 
 	public static void deleteDeliveries(long userId)
 		throws com.liferay.portal.SystemException {
-		AnnouncementsDeliveryLocalService announcementsDeliveryLocalService = AnnouncementsDeliveryLocalServiceFactory.getService();
-
-		announcementsDeliveryLocalService.deleteDeliveries(userId);
+		_service.deleteDeliveries(userId);
 	}
 
 	public static void deleteDelivery(long deliveryId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		AnnouncementsDeliveryLocalService announcementsDeliveryLocalService = AnnouncementsDeliveryLocalServiceFactory.getService();
-
-		announcementsDeliveryLocalService.deleteDelivery(deliveryId);
+		_service.deleteDelivery(deliveryId);
 	}
 
 	public static void deleteDelivery(long userId, java.lang.String type)
 		throws com.liferay.portal.SystemException {
-		AnnouncementsDeliveryLocalService announcementsDeliveryLocalService = AnnouncementsDeliveryLocalServiceFactory.getService();
-
-		announcementsDeliveryLocalService.deleteDelivery(userId, type);
+		_service.deleteDelivery(userId, type);
 	}
 
 	public static com.liferay.portlet.announcements.model.AnnouncementsDelivery getDelivery(
 		long deliveryId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		AnnouncementsDeliveryLocalService announcementsDeliveryLocalService = AnnouncementsDeliveryLocalServiceFactory.getService();
-
-		return announcementsDeliveryLocalService.getDelivery(deliveryId);
+		return _service.getDelivery(deliveryId);
 	}
 
 	public static java.util.List<com.liferay.portlet.announcements.model.AnnouncementsDelivery> getUserDeliveries(
 		long userId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		AnnouncementsDeliveryLocalService announcementsDeliveryLocalService = AnnouncementsDeliveryLocalServiceFactory.getService();
-
-		return announcementsDeliveryLocalService.getUserDeliveries(userId);
+		return _service.getUserDeliveries(userId);
 	}
 
 	public static com.liferay.portlet.announcements.model.AnnouncementsDelivery getUserDelivery(
 		long userId, java.lang.String type)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		AnnouncementsDeliveryLocalService announcementsDeliveryLocalService = AnnouncementsDeliveryLocalServiceFactory.getService();
-
-		return announcementsDeliveryLocalService.getUserDelivery(userId, type);
+		return _service.getUserDelivery(userId, type);
 	}
 
 	public static com.liferay.portlet.announcements.model.AnnouncementsDelivery updateDelivery(
@@ -178,9 +140,16 @@ public class AnnouncementsDeliveryLocalServiceUtil {
 		boolean website)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		AnnouncementsDeliveryLocalService announcementsDeliveryLocalService = AnnouncementsDeliveryLocalServiceFactory.getService();
-
-		return announcementsDeliveryLocalService.updateDelivery(userId, type,
-			email, sms, website);
+		return _service.updateDelivery(userId, type, email, sms, website);
 	}
+
+	public static AnnouncementsDeliveryLocalService getService() {
+		return _service;
+	}
+
+	public void setService(AnnouncementsDeliveryLocalService service) {
+		_service = service;
+	}
+
+	private static AnnouncementsDeliveryLocalService _service;
 }

@@ -39,87 +39,63 @@ package com.liferay.portal.service;
  * on a bean instead of writing a lookup call and a method call.
  * </p>
  *
- * <p>
- * <code>com.liferay.portal.service.EmailAddressLocalServiceFactory</code>
- * is responsible for the lookup of the bean.
- * </p>
- *
  * @author Brian Wing Shun Chan
  *
  * @see com.liferay.portal.service.EmailAddressLocalService
- * @see com.liferay.portal.service.EmailAddressLocalServiceFactory
  *
  */
 public class EmailAddressLocalServiceUtil {
 	public static com.liferay.portal.model.EmailAddress addEmailAddress(
 		com.liferay.portal.model.EmailAddress emailAddress)
 		throws com.liferay.portal.SystemException {
-		EmailAddressLocalService emailAddressLocalService = EmailAddressLocalServiceFactory.getService();
-
-		return emailAddressLocalService.addEmailAddress(emailAddress);
+		return _service.addEmailAddress(emailAddress);
 	}
 
 	public static void deleteEmailAddress(long emailAddressId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		EmailAddressLocalService emailAddressLocalService = EmailAddressLocalServiceFactory.getService();
-
-		emailAddressLocalService.deleteEmailAddress(emailAddressId);
+		_service.deleteEmailAddress(emailAddressId);
 	}
 
 	public static void deleteEmailAddress(
 		com.liferay.portal.model.EmailAddress emailAddress)
 		throws com.liferay.portal.SystemException {
-		EmailAddressLocalService emailAddressLocalService = EmailAddressLocalServiceFactory.getService();
-
-		emailAddressLocalService.deleteEmailAddress(emailAddress);
+		_service.deleteEmailAddress(emailAddress);
 	}
 
 	public static java.util.List<Object> dynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery)
 		throws com.liferay.portal.SystemException {
-		EmailAddressLocalService emailAddressLocalService = EmailAddressLocalServiceFactory.getService();
-
-		return emailAddressLocalService.dynamicQuery(dynamicQuery);
+		return _service.dynamicQuery(dynamicQuery);
 	}
 
 	public static java.util.List<Object> dynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery, int start,
 		int end) throws com.liferay.portal.SystemException {
-		EmailAddressLocalService emailAddressLocalService = EmailAddressLocalServiceFactory.getService();
-
-		return emailAddressLocalService.dynamicQuery(dynamicQuery, start, end);
+		return _service.dynamicQuery(dynamicQuery, start, end);
 	}
 
 	public static com.liferay.portal.model.EmailAddress getEmailAddress(
 		long emailAddressId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		EmailAddressLocalService emailAddressLocalService = EmailAddressLocalServiceFactory.getService();
-
-		return emailAddressLocalService.getEmailAddress(emailAddressId);
+		return _service.getEmailAddress(emailAddressId);
 	}
 
 	public static java.util.List<com.liferay.portal.model.EmailAddress> getEmailAddresss(
 		int start, int end) throws com.liferay.portal.SystemException {
-		EmailAddressLocalService emailAddressLocalService = EmailAddressLocalServiceFactory.getService();
-
-		return emailAddressLocalService.getEmailAddresss(start, end);
+		return _service.getEmailAddresss(start, end);
 	}
 
 	public static int getEmailAddresssCount()
 		throws com.liferay.portal.SystemException {
-		EmailAddressLocalService emailAddressLocalService = EmailAddressLocalServiceFactory.getService();
-
-		return emailAddressLocalService.getEmailAddresssCount();
+		return _service.getEmailAddresssCount();
 	}
 
 	public static com.liferay.portal.model.EmailAddress updateEmailAddress(
 		com.liferay.portal.model.EmailAddress emailAddress)
 		throws com.liferay.portal.SystemException {
-		EmailAddressLocalService emailAddressLocalService = EmailAddressLocalServiceFactory.getService();
-
-		return emailAddressLocalService.updateEmailAddress(emailAddress);
+		return _service.updateEmailAddress(emailAddress);
 	}
 
 	public static com.liferay.portal.model.EmailAddress addEmailAddress(
@@ -127,35 +103,25 @@ public class EmailAddressLocalServiceUtil {
 		java.lang.String address, int typeId, boolean primary)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		EmailAddressLocalService emailAddressLocalService = EmailAddressLocalServiceFactory.getService();
-
-		return emailAddressLocalService.addEmailAddress(userId, className,
-			classPK, address, typeId, primary);
+		return _service.addEmailAddress(userId, className, classPK, address,
+			typeId, primary);
 	}
 
 	public static void deleteEmailAddresses(long companyId,
 		java.lang.String className, long classPK)
 		throws com.liferay.portal.SystemException {
-		EmailAddressLocalService emailAddressLocalService = EmailAddressLocalServiceFactory.getService();
-
-		emailAddressLocalService.deleteEmailAddresses(companyId, className,
-			classPK);
+		_service.deleteEmailAddresses(companyId, className, classPK);
 	}
 
 	public static java.util.List<com.liferay.portal.model.EmailAddress> getEmailAddresses()
 		throws com.liferay.portal.SystemException {
-		EmailAddressLocalService emailAddressLocalService = EmailAddressLocalServiceFactory.getService();
-
-		return emailAddressLocalService.getEmailAddresses();
+		return _service.getEmailAddresses();
 	}
 
 	public static java.util.List<com.liferay.portal.model.EmailAddress> getEmailAddresses(
 		long companyId, java.lang.String className, long classPK)
 		throws com.liferay.portal.SystemException {
-		EmailAddressLocalService emailAddressLocalService = EmailAddressLocalServiceFactory.getService();
-
-		return emailAddressLocalService.getEmailAddresses(companyId, className,
-			classPK);
+		return _service.getEmailAddresses(companyId, className, classPK);
 	}
 
 	public static com.liferay.portal.model.EmailAddress updateEmailAddress(
@@ -163,9 +129,17 @@ public class EmailAddressLocalServiceUtil {
 		boolean primary)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		EmailAddressLocalService emailAddressLocalService = EmailAddressLocalServiceFactory.getService();
-
-		return emailAddressLocalService.updateEmailAddress(emailAddressId,
-			address, typeId, primary);
+		return _service.updateEmailAddress(emailAddressId, address, typeId,
+			primary);
 	}
+
+	public static EmailAddressLocalService getService() {
+		return _service;
+	}
+
+	public void setService(EmailAddressLocalService service) {
+		_service = service;
+	}
+
+	private static EmailAddressLocalService _service;
 }

@@ -39,94 +39,78 @@ package com.liferay.portal.service;
  * on a bean instead of writing a lookup call and a method call.
  * </p>
  *
- * <p>
- * <code>com.liferay.portal.service.ResourceCodeLocalServiceFactory</code>
- * is responsible for the lookup of the bean.
- * </p>
- *
  * @author Brian Wing Shun Chan
  *
  * @see com.liferay.portal.service.ResourceCodeLocalService
- * @see com.liferay.portal.service.ResourceCodeLocalServiceFactory
  *
  */
 public class ResourceCodeLocalServiceUtil {
 	public static com.liferay.portal.model.ResourceCode addResourceCode(
 		com.liferay.portal.model.ResourceCode resourceCode)
 		throws com.liferay.portal.SystemException {
-		ResourceCodeLocalService resourceCodeLocalService = ResourceCodeLocalServiceFactory.getService();
-
-		return resourceCodeLocalService.addResourceCode(resourceCode);
+		return _service.addResourceCode(resourceCode);
 	}
 
 	public static void deleteResourceCode(long codeId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		ResourceCodeLocalService resourceCodeLocalService = ResourceCodeLocalServiceFactory.getService();
-
-		resourceCodeLocalService.deleteResourceCode(codeId);
+		_service.deleteResourceCode(codeId);
 	}
 
 	public static void deleteResourceCode(
 		com.liferay.portal.model.ResourceCode resourceCode)
 		throws com.liferay.portal.SystemException {
-		ResourceCodeLocalService resourceCodeLocalService = ResourceCodeLocalServiceFactory.getService();
-
-		resourceCodeLocalService.deleteResourceCode(resourceCode);
+		_service.deleteResourceCode(resourceCode);
 	}
 
 	public static java.util.List<Object> dynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery)
 		throws com.liferay.portal.SystemException {
-		ResourceCodeLocalService resourceCodeLocalService = ResourceCodeLocalServiceFactory.getService();
-
-		return resourceCodeLocalService.dynamicQuery(dynamicQuery);
+		return _service.dynamicQuery(dynamicQuery);
 	}
 
 	public static java.util.List<Object> dynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery, int start,
 		int end) throws com.liferay.portal.SystemException {
-		ResourceCodeLocalService resourceCodeLocalService = ResourceCodeLocalServiceFactory.getService();
-
-		return resourceCodeLocalService.dynamicQuery(dynamicQuery, start, end);
+		return _service.dynamicQuery(dynamicQuery, start, end);
 	}
 
 	public static com.liferay.portal.model.ResourceCode getResourceCode(
 		long codeId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		ResourceCodeLocalService resourceCodeLocalService = ResourceCodeLocalServiceFactory.getService();
-
-		return resourceCodeLocalService.getResourceCode(codeId);
+		return _service.getResourceCode(codeId);
 	}
 
 	public static java.util.List<com.liferay.portal.model.ResourceCode> getResourceCodes(
 		int start, int end) throws com.liferay.portal.SystemException {
-		ResourceCodeLocalService resourceCodeLocalService = ResourceCodeLocalServiceFactory.getService();
-
-		return resourceCodeLocalService.getResourceCodes(start, end);
+		return _service.getResourceCodes(start, end);
 	}
 
 	public static int getResourceCodesCount()
 		throws com.liferay.portal.SystemException {
-		ResourceCodeLocalService resourceCodeLocalService = ResourceCodeLocalServiceFactory.getService();
-
-		return resourceCodeLocalService.getResourceCodesCount();
+		return _service.getResourceCodesCount();
 	}
 
 	public static com.liferay.portal.model.ResourceCode updateResourceCode(
 		com.liferay.portal.model.ResourceCode resourceCode)
 		throws com.liferay.portal.SystemException {
-		ResourceCodeLocalService resourceCodeLocalService = ResourceCodeLocalServiceFactory.getService();
-
-		return resourceCodeLocalService.updateResourceCode(resourceCode);
+		return _service.updateResourceCode(resourceCode);
 	}
 
 	public static com.liferay.portal.model.ResourceCode getResourceCode(
 		long companyId, java.lang.String name, int scope)
 		throws com.liferay.portal.SystemException {
-		ResourceCodeLocalService resourceCodeLocalService = ResourceCodeLocalServiceFactory.getService();
-
-		return resourceCodeLocalService.getResourceCode(companyId, name, scope);
+		return _service.getResourceCode(companyId, name, scope);
 	}
+
+	public static ResourceCodeLocalService getService() {
+		return _service;
+	}
+
+	public void setService(ResourceCodeLocalService service) {
+		_service = service;
+	}
+
+	private static ResourceCodeLocalService _service;
 }

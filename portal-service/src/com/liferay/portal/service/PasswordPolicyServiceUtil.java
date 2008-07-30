@@ -39,15 +39,9 @@ package com.liferay.portal.service;
  * on a bean instead of writing a lookup call and a method call.
  * </p>
  *
- * <p>
- * <code>com.liferay.portal.service.PasswordPolicyServiceFactory</code>
- * is responsible for the lookup of the bean.
- * </p>
- *
  * @author Brian Wing Shun Chan
  *
  * @see com.liferay.portal.service.PasswordPolicyService
- * @see com.liferay.portal.service.PasswordPolicyServiceFactory
  *
  */
 public class PasswordPolicyServiceUtil {
@@ -60,21 +54,16 @@ public class PasswordPolicyServiceUtil {
 		long lockoutDuration, long resetFailureCount)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
-		PasswordPolicyService passwordPolicyService = PasswordPolicyServiceFactory.getService();
-
-		return passwordPolicyService.addPasswordPolicy(name, description,
-			changeable, changeRequired, minAge, checkSyntax,
-			allowDictionaryWords, minLength, history, historyCount, expireable,
-			maxAge, warningTime, graceLimit, lockout, maxFailure,
-			lockoutDuration, resetFailureCount);
+		return _service.addPasswordPolicy(name, description, changeable,
+			changeRequired, minAge, checkSyntax, allowDictionaryWords,
+			minLength, history, historyCount, expireable, maxAge, warningTime,
+			graceLimit, lockout, maxFailure, lockoutDuration, resetFailureCount);
 	}
 
 	public static void deletePasswordPolicy(long passwordPolicyId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
-		PasswordPolicyService passwordPolicyService = PasswordPolicyServiceFactory.getService();
-
-		passwordPolicyService.deletePasswordPolicy(passwordPolicyId);
+		_service.deletePasswordPolicy(passwordPolicyId);
 	}
 
 	public static com.liferay.portal.model.PasswordPolicy updatePasswordPolicy(
@@ -87,12 +76,20 @@ public class PasswordPolicyServiceUtil {
 		long resetFailureCount)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
-		PasswordPolicyService passwordPolicyService = PasswordPolicyServiceFactory.getService();
-
-		return passwordPolicyService.updatePasswordPolicy(passwordPolicyId,
-			name, description, changeable, changeRequired, minAge, checkSyntax,
+		return _service.updatePasswordPolicy(passwordPolicyId, name,
+			description, changeable, changeRequired, minAge, checkSyntax,
 			allowDictionaryWords, minLength, history, historyCount, expireable,
 			maxAge, warningTime, graceLimit, lockout, maxFailure,
 			lockoutDuration, resetFailureCount);
 	}
+
+	public static PasswordPolicyService getService() {
+		return _service;
+	}
+
+	public void setService(PasswordPolicyService service) {
+		_service = service;
+	}
+
+	private static PasswordPolicyService _service;
 }

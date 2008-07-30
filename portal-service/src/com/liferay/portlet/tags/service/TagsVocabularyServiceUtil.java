@@ -39,15 +39,9 @@ package com.liferay.portlet.tags.service;
  * on a bean instead of writing a lookup call and a method call.
  * </p>
  *
- * <p>
- * <code>com.liferay.portlet.tags.service.TagsVocabularyServiceFactory</code>
- * is responsible for the lookup of the bean.
- * </p>
- *
  * @author Brian Wing Shun Chan
  *
  * @see com.liferay.portlet.tags.service.TagsVocabularyService
- * @see com.liferay.portlet.tags.service.TagsVocabularyServiceFactory
  *
  */
 public class TagsVocabularyServiceUtil {
@@ -55,60 +49,55 @@ public class TagsVocabularyServiceUtil {
 		java.lang.String name)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
-		TagsVocabularyService tagsVocabularyService = TagsVocabularyServiceFactory.getService();
-
-		return tagsVocabularyService.addVocabulary(name);
+		return _service.addVocabulary(name);
 	}
 
 	public static com.liferay.portlet.tags.model.TagsVocabulary addVocabulary(
 		java.lang.String name, boolean folksonomy)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
-		TagsVocabularyService tagsVocabularyService = TagsVocabularyServiceFactory.getService();
-
-		return tagsVocabularyService.addVocabulary(name, folksonomy);
+		return _service.addVocabulary(name, folksonomy);
 	}
 
 	public static void deleteVocabulary(long vocabularyId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
-		TagsVocabularyService tagsVocabularyService = TagsVocabularyServiceFactory.getService();
-
-		tagsVocabularyService.deleteVocabulary(vocabularyId);
+		_service.deleteVocabulary(vocabularyId);
 	}
 
 	public static java.util.List<com.liferay.portlet.tags.model.TagsVocabulary> getVocabularies(
 		long companyId)
 		throws com.liferay.portal.SystemException, java.rmi.RemoteException {
-		TagsVocabularyService tagsVocabularyService = TagsVocabularyServiceFactory.getService();
-
-		return tagsVocabularyService.getVocabularies(companyId);
+		return _service.getVocabularies(companyId);
 	}
 
 	public static java.util.List<com.liferay.portlet.tags.model.TagsVocabulary> getVocabularies(
 		long companyId, boolean folksonomy)
 		throws com.liferay.portal.SystemException, java.rmi.RemoteException {
-		TagsVocabularyService tagsVocabularyService = TagsVocabularyServiceFactory.getService();
-
-		return tagsVocabularyService.getVocabularies(companyId, folksonomy);
+		return _service.getVocabularies(companyId, folksonomy);
 	}
 
 	public static com.liferay.portlet.tags.model.TagsVocabulary getVocabulary(
 		long vocabularyId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
-		TagsVocabularyService tagsVocabularyService = TagsVocabularyServiceFactory.getService();
-
-		return tagsVocabularyService.getVocabulary(vocabularyId);
+		return _service.getVocabulary(vocabularyId);
 	}
 
 	public static com.liferay.portlet.tags.model.TagsVocabulary updateVocabulary(
 		long vocabularyId, java.lang.String name, boolean folksonomy)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
-		TagsVocabularyService tagsVocabularyService = TagsVocabularyServiceFactory.getService();
-
-		return tagsVocabularyService.updateVocabulary(vocabularyId, name,
-			folksonomy);
+		return _service.updateVocabulary(vocabularyId, name, folksonomy);
 	}
+
+	public static TagsVocabularyService getService() {
+		return _service;
+	}
+
+	public void setService(TagsVocabularyService service) {
+		_service = service;
+	}
+
+	private static TagsVocabularyService _service;
 }

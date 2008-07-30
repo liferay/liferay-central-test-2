@@ -35,22 +35,12 @@ public class OrgGroupPermissionFinderUtil {
 	}
 
 	public static OrgGroupPermissionFinder getFinder() {
-		return _getUtil()._finder;
+		return _finder;
 	}
 
 	public void setFinder(OrgGroupPermissionFinder finder) {
 		_finder = finder;
 	}
 
-	private static OrgGroupPermissionFinderUtil _getUtil() {
-		if (_util == null) {
-			_util = (OrgGroupPermissionFinderUtil)com.liferay.portal.kernel.bean.PortalBeanLocatorUtil.locate(_UTIL);
-		}
-
-		return _util;
-	}
-
-	private static final String _UTIL = OrgGroupPermissionFinderUtil.class.getName();
-	private static OrgGroupPermissionFinderUtil _util;
-	private OrgGroupPermissionFinder _finder;
+	private static OrgGroupPermissionFinder _finder;
 }

@@ -263,22 +263,12 @@ public class ShoppingCartUtil {
 	}
 
 	public static ShoppingCartPersistence getPersistence() {
-		return _getUtil()._persistence;
+		return _persistence;
 	}
 
 	public void setPersistence(ShoppingCartPersistence persistence) {
 		_persistence = persistence;
 	}
 
-	private static ShoppingCartUtil _getUtil() {
-		if (_util == null) {
-			_util = (ShoppingCartUtil)com.liferay.portal.kernel.bean.PortalBeanLocatorUtil.locate(_UTIL);
-		}
-
-		return _util;
-	}
-
-	private static final String _UTIL = ShoppingCartUtil.class.getName();
-	private static ShoppingCartUtil _util;
-	private ShoppingCartPersistence _persistence;
+	private static ShoppingCartPersistence _persistence;
 }

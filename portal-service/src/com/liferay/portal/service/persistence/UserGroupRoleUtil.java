@@ -402,22 +402,12 @@ public class UserGroupRoleUtil {
 	}
 
 	public static UserGroupRolePersistence getPersistence() {
-		return _getUtil()._persistence;
+		return _persistence;
 	}
 
 	public void setPersistence(UserGroupRolePersistence persistence) {
 		_persistence = persistence;
 	}
 
-	private static UserGroupRoleUtil _getUtil() {
-		if (_util == null) {
-			_util = (UserGroupRoleUtil)com.liferay.portal.kernel.bean.PortalBeanLocatorUtil.locate(_UTIL);
-		}
-
-		return _util;
-	}
-
-	private static final String _UTIL = UserGroupRoleUtil.class.getName();
-	private static UserGroupRoleUtil _util;
-	private UserGroupRolePersistence _persistence;
+	private static UserGroupRolePersistence _persistence;
 }

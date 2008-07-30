@@ -337,22 +337,12 @@ public class JournalArticleImageUtil {
 	}
 
 	public static JournalArticleImagePersistence getPersistence() {
-		return _getUtil()._persistence;
+		return _persistence;
 	}
 
 	public void setPersistence(JournalArticleImagePersistence persistence) {
 		_persistence = persistence;
 	}
 
-	private static JournalArticleImageUtil _getUtil() {
-		if (_util == null) {
-			_util = (JournalArticleImageUtil)com.liferay.portal.kernel.bean.PortalBeanLocatorUtil.locate(_UTIL);
-		}
-
-		return _util;
-	}
-
-	private static final String _UTIL = JournalArticleImageUtil.class.getName();
-	private static JournalArticleImageUtil _util;
-	private JournalArticleImagePersistence _persistence;
+	private static JournalArticleImagePersistence _persistence;
 }

@@ -83,22 +83,12 @@ public class JournalStructureFinderUtil {
 	}
 
 	public static JournalStructureFinder getFinder() {
-		return _getUtil()._finder;
+		return _finder;
 	}
 
 	public void setFinder(JournalStructureFinder finder) {
 		_finder = finder;
 	}
 
-	private static JournalStructureFinderUtil _getUtil() {
-		if (_util == null) {
-			_util = (JournalStructureFinderUtil)com.liferay.portal.kernel.bean.PortalBeanLocatorUtil.locate(_UTIL);
-		}
-
-		return _util;
-	}
-
-	private static final String _UTIL = JournalStructureFinderUtil.class.getName();
-	private static JournalStructureFinderUtil _util;
-	private JournalStructureFinder _finder;
+	private static JournalStructureFinder _finder;
 }

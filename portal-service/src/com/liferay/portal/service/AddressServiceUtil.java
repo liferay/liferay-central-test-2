@@ -39,15 +39,9 @@ package com.liferay.portal.service;
  * on a bean instead of writing a lookup call and a method call.
  * </p>
  *
- * <p>
- * <code>com.liferay.portal.service.AddressServiceFactory</code>
- * is responsible for the lookup of the bean.
- * </p>
- *
  * @author Brian Wing Shun Chan
  *
  * @see com.liferay.portal.service.AddressService
- * @see com.liferay.portal.service.AddressServiceFactory
  *
  */
 public class AddressServiceUtil {
@@ -58,35 +52,27 @@ public class AddressServiceUtil {
 		long countryId, int typeId, boolean mailing, boolean primary)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
-		AddressService addressService = AddressServiceFactory.getService();
-
-		return addressService.addAddress(className, classPK, street1, street2,
+		return _service.addAddress(className, classPK, street1, street2,
 			street3, city, zip, regionId, countryId, typeId, mailing, primary);
 	}
 
 	public static void deleteAddress(long addressId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
-		AddressService addressService = AddressServiceFactory.getService();
-
-		addressService.deleteAddress(addressId);
+		_service.deleteAddress(addressId);
 	}
 
 	public static com.liferay.portal.model.Address getAddress(long addressId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
-		AddressService addressService = AddressServiceFactory.getService();
-
-		return addressService.getAddress(addressId);
+		return _service.getAddress(addressId);
 	}
 
 	public static java.util.List<com.liferay.portal.model.Address> getAddresses(
 		java.lang.String className, long classPK)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
-		AddressService addressService = AddressServiceFactory.getService();
-
-		return addressService.getAddresses(className, classPK);
+		return _service.getAddresses(className, classPK);
 	}
 
 	public static com.liferay.portal.model.Address updateAddress(
@@ -96,9 +82,17 @@ public class AddressServiceUtil {
 		boolean primary)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
-		AddressService addressService = AddressServiceFactory.getService();
-
-		return addressService.updateAddress(addressId, street1, street2,
-			street3, city, zip, regionId, countryId, typeId, mailing, primary);
+		return _service.updateAddress(addressId, street1, street2, street3,
+			city, zip, regionId, countryId, typeId, mailing, primary);
 	}
+
+	public static AddressService getService() {
+		return _service;
+	}
+
+	public void setService(AddressService service) {
+		_service = service;
+	}
+
+	private static AddressService _service;
 }

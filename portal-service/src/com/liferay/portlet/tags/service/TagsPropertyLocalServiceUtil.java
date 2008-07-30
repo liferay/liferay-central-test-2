@@ -39,96 +39,70 @@ package com.liferay.portlet.tags.service;
  * on a bean instead of writing a lookup call and a method call.
  * </p>
  *
- * <p>
- * <code>com.liferay.portlet.tags.service.TagsPropertyLocalServiceFactory</code>
- * is responsible for the lookup of the bean.
- * </p>
- *
  * @author Brian Wing Shun Chan
  *
  * @see com.liferay.portlet.tags.service.TagsPropertyLocalService
- * @see com.liferay.portlet.tags.service.TagsPropertyLocalServiceFactory
  *
  */
 public class TagsPropertyLocalServiceUtil {
 	public static com.liferay.portlet.tags.model.TagsProperty addTagsProperty(
 		com.liferay.portlet.tags.model.TagsProperty tagsProperty)
 		throws com.liferay.portal.SystemException {
-		TagsPropertyLocalService tagsPropertyLocalService = TagsPropertyLocalServiceFactory.getService();
-
-		return tagsPropertyLocalService.addTagsProperty(tagsProperty);
+		return _service.addTagsProperty(tagsProperty);
 	}
 
 	public static void deleteTagsProperty(long propertyId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		TagsPropertyLocalService tagsPropertyLocalService = TagsPropertyLocalServiceFactory.getService();
-
-		tagsPropertyLocalService.deleteTagsProperty(propertyId);
+		_service.deleteTagsProperty(propertyId);
 	}
 
 	public static void deleteTagsProperty(
 		com.liferay.portlet.tags.model.TagsProperty tagsProperty)
 		throws com.liferay.portal.SystemException {
-		TagsPropertyLocalService tagsPropertyLocalService = TagsPropertyLocalServiceFactory.getService();
-
-		tagsPropertyLocalService.deleteTagsProperty(tagsProperty);
+		_service.deleteTagsProperty(tagsProperty);
 	}
 
 	public static java.util.List<Object> dynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery)
 		throws com.liferay.portal.SystemException {
-		TagsPropertyLocalService tagsPropertyLocalService = TagsPropertyLocalServiceFactory.getService();
-
-		return tagsPropertyLocalService.dynamicQuery(dynamicQuery);
+		return _service.dynamicQuery(dynamicQuery);
 	}
 
 	public static java.util.List<Object> dynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery, int start,
 		int end) throws com.liferay.portal.SystemException {
-		TagsPropertyLocalService tagsPropertyLocalService = TagsPropertyLocalServiceFactory.getService();
-
-		return tagsPropertyLocalService.dynamicQuery(dynamicQuery, start, end);
+		return _service.dynamicQuery(dynamicQuery, start, end);
 	}
 
 	public static com.liferay.portlet.tags.model.TagsProperty getTagsProperty(
 		long propertyId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		TagsPropertyLocalService tagsPropertyLocalService = TagsPropertyLocalServiceFactory.getService();
-
-		return tagsPropertyLocalService.getTagsProperty(propertyId);
+		return _service.getTagsProperty(propertyId);
 	}
 
 	public static java.util.List<com.liferay.portlet.tags.model.TagsProperty> getTagsProperties(
 		int start, int end) throws com.liferay.portal.SystemException {
-		TagsPropertyLocalService tagsPropertyLocalService = TagsPropertyLocalServiceFactory.getService();
-
-		return tagsPropertyLocalService.getTagsProperties(start, end);
+		return _service.getTagsProperties(start, end);
 	}
 
 	public static int getTagsPropertiesCount()
 		throws com.liferay.portal.SystemException {
-		TagsPropertyLocalService tagsPropertyLocalService = TagsPropertyLocalServiceFactory.getService();
-
-		return tagsPropertyLocalService.getTagsPropertiesCount();
+		return _service.getTagsPropertiesCount();
 	}
 
 	public static com.liferay.portlet.tags.model.TagsProperty updateTagsProperty(
 		com.liferay.portlet.tags.model.TagsProperty tagsProperty)
 		throws com.liferay.portal.SystemException {
-		TagsPropertyLocalService tagsPropertyLocalService = TagsPropertyLocalServiceFactory.getService();
-
-		return tagsPropertyLocalService.updateTagsProperty(tagsProperty);
+		return _service.updateTagsProperty(tagsProperty);
 	}
 
 	public static com.liferay.portlet.tags.model.TagsProperty addProperty(
 		long userId, long entryId, java.lang.String key, java.lang.String value)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		TagsPropertyLocalService tagsPropertyLocalService = TagsPropertyLocalServiceFactory.getService();
-
-		return tagsPropertyLocalService.addProperty(userId, entryId, key, value);
+		return _service.addProperty(userId, entryId, key, value);
 	}
 
 	public static com.liferay.portlet.tags.model.TagsProperty addProperty(
@@ -136,90 +110,77 @@ public class TagsPropertyLocalServiceUtil {
 		java.lang.String value)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		TagsPropertyLocalService tagsPropertyLocalService = TagsPropertyLocalServiceFactory.getService();
-
-		return tagsPropertyLocalService.addProperty(userId, entryName, key,
-			value);
+		return _service.addProperty(userId, entryName, key, value);
 	}
 
 	public static void deleteProperties(long entryId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		TagsPropertyLocalService tagsPropertyLocalService = TagsPropertyLocalServiceFactory.getService();
-
-		tagsPropertyLocalService.deleteProperties(entryId);
+		_service.deleteProperties(entryId);
 	}
 
 	public static void deleteProperty(long propertyId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		TagsPropertyLocalService tagsPropertyLocalService = TagsPropertyLocalServiceFactory.getService();
-
-		tagsPropertyLocalService.deleteProperty(propertyId);
+		_service.deleteProperty(propertyId);
 	}
 
 	public static void deleteProperty(
 		com.liferay.portlet.tags.model.TagsProperty property)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		TagsPropertyLocalService tagsPropertyLocalService = TagsPropertyLocalServiceFactory.getService();
-
-		tagsPropertyLocalService.deleteProperty(property);
+		_service.deleteProperty(property);
 	}
 
 	public static java.util.List<com.liferay.portlet.tags.model.TagsProperty> getProperties()
 		throws com.liferay.portal.SystemException {
-		TagsPropertyLocalService tagsPropertyLocalService = TagsPropertyLocalServiceFactory.getService();
-
-		return tagsPropertyLocalService.getProperties();
+		return _service.getProperties();
 	}
 
 	public static java.util.List<com.liferay.portlet.tags.model.TagsProperty> getProperties(
 		long entryId) throws com.liferay.portal.SystemException {
-		TagsPropertyLocalService tagsPropertyLocalService = TagsPropertyLocalServiceFactory.getService();
-
-		return tagsPropertyLocalService.getProperties(entryId);
+		return _service.getProperties(entryId);
 	}
 
 	public static com.liferay.portlet.tags.model.TagsProperty getProperty(
 		long propertyId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		TagsPropertyLocalService tagsPropertyLocalService = TagsPropertyLocalServiceFactory.getService();
-
-		return tagsPropertyLocalService.getProperty(propertyId);
+		return _service.getProperty(propertyId);
 	}
 
 	public static com.liferay.portlet.tags.model.TagsProperty getProperty(
 		long entryId, java.lang.String key)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		TagsPropertyLocalService tagsPropertyLocalService = TagsPropertyLocalServiceFactory.getService();
-
-		return tagsPropertyLocalService.getProperty(entryId, key);
+		return _service.getProperty(entryId, key);
 	}
 
 	public static java.lang.String[] getPropertyKeys(long companyId)
 		throws com.liferay.portal.SystemException {
-		TagsPropertyLocalService tagsPropertyLocalService = TagsPropertyLocalServiceFactory.getService();
-
-		return tagsPropertyLocalService.getPropertyKeys(companyId);
+		return _service.getPropertyKeys(companyId);
 	}
 
 	public static java.util.List<com.liferay.portlet.tags.model.TagsProperty> getPropertyValues(
 		long companyId, java.lang.String key)
 		throws com.liferay.portal.SystemException {
-		TagsPropertyLocalService tagsPropertyLocalService = TagsPropertyLocalServiceFactory.getService();
-
-		return tagsPropertyLocalService.getPropertyValues(companyId, key);
+		return _service.getPropertyValues(companyId, key);
 	}
 
 	public static com.liferay.portlet.tags.model.TagsProperty updateProperty(
 		long propertyId, java.lang.String key, java.lang.String value)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		TagsPropertyLocalService tagsPropertyLocalService = TagsPropertyLocalServiceFactory.getService();
-
-		return tagsPropertyLocalService.updateProperty(propertyId, key, value);
+		return _service.updateProperty(propertyId, key, value);
 	}
+
+	public static TagsPropertyLocalService getService() {
+		return _service;
+	}
+
+	public void setService(TagsPropertyLocalService service) {
+		_service = service;
+	}
+
+	private static TagsPropertyLocalService _service;
 }

@@ -421,22 +421,12 @@ public class WebsiteUtil {
 	}
 
 	public static WebsitePersistence getPersistence() {
-		return _getUtil()._persistence;
+		return _persistence;
 	}
 
 	public void setPersistence(WebsitePersistence persistence) {
 		_persistence = persistence;
 	}
 
-	private static WebsiteUtil _getUtil() {
-		if (_util == null) {
-			_util = (WebsiteUtil)com.liferay.portal.kernel.bean.PortalBeanLocatorUtil.locate(_UTIL);
-		}
-
-		return _util;
-	}
-
-	private static final String _UTIL = WebsiteUtil.class.getName();
-	private static WebsiteUtil _util;
-	private WebsitePersistence _persistence;
+	private static WebsitePersistence _persistence;
 }

@@ -47,22 +47,12 @@ public class ShoppingCouponFinderUtil {
 	}
 
 	public static ShoppingCouponFinder getFinder() {
-		return _getUtil()._finder;
+		return _finder;
 	}
 
 	public void setFinder(ShoppingCouponFinder finder) {
 		_finder = finder;
 	}
 
-	private static ShoppingCouponFinderUtil _getUtil() {
-		if (_util == null) {
-			_util = (ShoppingCouponFinderUtil)com.liferay.portal.kernel.bean.PortalBeanLocatorUtil.locate(_UTIL);
-		}
-
-		return _util;
-	}
-
-	private static final String _UTIL = ShoppingCouponFinderUtil.class.getName();
-	private static ShoppingCouponFinderUtil _util;
-	private ShoppingCouponFinder _finder;
+	private static ShoppingCouponFinder _finder;
 }

@@ -39,21 +39,23 @@ package com.liferay.portal.service;
  * on a bean instead of writing a lookup call and a method call.
  * </p>
  *
- * <p>
- * <code>com.liferay.portal.service.PortalServiceFactory</code>
- * is responsible for the lookup of the bean.
- * </p>
- *
  * @author Brian Wing Shun Chan
  *
  * @see com.liferay.portal.service.PortalService
- * @see com.liferay.portal.service.PortalServiceFactory
  *
  */
 public class PortalServiceUtil {
 	public static void test() throws java.rmi.RemoteException {
-		PortalService portalService = PortalServiceFactory.getService();
-
-		portalService.test();
+		_service.test();
 	}
+
+	public static PortalService getService() {
+		return _service;
+	}
+
+	public void setService(PortalService service) {
+		_service = service;
+	}
+
+	private static PortalService _service;
 }

@@ -22,6 +22,7 @@
 
 package com.liferay.portlet.bookmarks.service;
 
+import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
 
 /**
  * <a href="BookmarksEntryServiceFactory.java.html"><b><i>View Source</i></b></a>
@@ -51,33 +52,45 @@ package com.liferay.portlet.bookmarks.service;
  *
  */
 public class BookmarksEntryServiceFactory {
+	/**
+	 * @deprecated
+	 */
 	public static BookmarksEntryService getService() {
 		return _getFactory()._service;
 	}
 
+	/**
+	 * @deprecated
+	 */
 	public static BookmarksEntryService getImpl() {
 		if (_impl == null) {
-			_impl = (BookmarksEntryService)com.liferay.portal.kernel.bean.PortalBeanLocatorUtil.locate(_IMPL);
+			_impl = (BookmarksEntryService)PortalBeanLocatorUtil.locate(_IMPL);
 		}
 
 		return _impl;
 	}
 
+	/**
+	 * @deprecated
+	 */
 	public static BookmarksEntryService getTxImpl() {
 		if (_txImpl == null) {
-			_txImpl = (BookmarksEntryService)com.liferay.portal.kernel.bean.PortalBeanLocatorUtil.locate(_TX_IMPL);
+			_txImpl = (BookmarksEntryService)PortalBeanLocatorUtil.locate(_TX_IMPL);
 		}
 
 		return _txImpl;
 	}
 
+	/**
+	 * @deprecated
+	 */
 	public void setService(BookmarksEntryService service) {
 		_service = service;
 	}
 
 	private static BookmarksEntryServiceFactory _getFactory() {
 		if (_factory == null) {
-			_factory = (BookmarksEntryServiceFactory)com.liferay.portal.kernel.bean.PortalBeanLocatorUtil.locate(_FACTORY);
+			_factory = (BookmarksEntryServiceFactory)PortalBeanLocatorUtil.locate(_FACTORY);
 		}
 
 		return _factory;

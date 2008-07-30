@@ -110,22 +110,12 @@ public class TagsAssetFinderUtil {
 	}
 
 	public static TagsAssetFinder getFinder() {
-		return _getUtil()._finder;
+		return _finder;
 	}
 
 	public void setFinder(TagsAssetFinder finder) {
 		_finder = finder;
 	}
 
-	private static TagsAssetFinderUtil _getUtil() {
-		if (_util == null) {
-			_util = (TagsAssetFinderUtil)com.liferay.portal.kernel.bean.PortalBeanLocatorUtil.locate(_UTIL);
-		}
-
-		return _util;
-	}
-
-	private static final String _UTIL = TagsAssetFinderUtil.class.getName();
-	private static TagsAssetFinderUtil _util;
-	private TagsAssetFinder _finder;
+	private static TagsAssetFinder _finder;
 }

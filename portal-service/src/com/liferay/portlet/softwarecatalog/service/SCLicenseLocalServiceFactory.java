@@ -22,6 +22,7 @@
 
 package com.liferay.portlet.softwarecatalog.service;
 
+import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
 
 /**
  * <a href="SCLicenseLocalServiceFactory.java.html"><b><i>View Source</i></b></a>
@@ -51,33 +52,45 @@ package com.liferay.portlet.softwarecatalog.service;
  *
  */
 public class SCLicenseLocalServiceFactory {
+	/**
+	 * @deprecated
+	 */
 	public static SCLicenseLocalService getService() {
 		return _getFactory()._service;
 	}
 
+	/**
+	 * @deprecated
+	 */
 	public static SCLicenseLocalService getImpl() {
 		if (_impl == null) {
-			_impl = (SCLicenseLocalService)com.liferay.portal.kernel.bean.PortalBeanLocatorUtil.locate(_IMPL);
+			_impl = (SCLicenseLocalService)PortalBeanLocatorUtil.locate(_IMPL);
 		}
 
 		return _impl;
 	}
 
+	/**
+	 * @deprecated
+	 */
 	public static SCLicenseLocalService getTxImpl() {
 		if (_txImpl == null) {
-			_txImpl = (SCLicenseLocalService)com.liferay.portal.kernel.bean.PortalBeanLocatorUtil.locate(_TX_IMPL);
+			_txImpl = (SCLicenseLocalService)PortalBeanLocatorUtil.locate(_TX_IMPL);
 		}
 
 		return _txImpl;
 	}
 
+	/**
+	 * @deprecated
+	 */
 	public void setService(SCLicenseLocalService service) {
 		_service = service;
 	}
 
 	private static SCLicenseLocalServiceFactory _getFactory() {
 		if (_factory == null) {
-			_factory = (SCLicenseLocalServiceFactory)com.liferay.portal.kernel.bean.PortalBeanLocatorUtil.locate(_FACTORY);
+			_factory = (SCLicenseLocalServiceFactory)PortalBeanLocatorUtil.locate(_FACTORY);
 		}
 
 		return _factory;

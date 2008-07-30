@@ -39,15 +39,9 @@ package com.liferay.portlet.journal.service;
  * on a bean instead of writing a lookup call and a method call.
  * </p>
  *
- * <p>
- * <code>com.liferay.portlet.journal.service.JournalTemplateServiceFactory</code>
- * is responsible for the lookup of the bean.
- * </p>
- *
  * @author Brian Wing Shun Chan
  *
  * @see com.liferay.portlet.journal.service.JournalTemplateService
- * @see com.liferay.portlet.journal.service.JournalTemplateServiceFactory
  *
  */
 public class JournalTemplateServiceUtil {
@@ -60,10 +54,8 @@ public class JournalTemplateServiceUtil {
 		boolean addCommunityPermissions, boolean addGuestPermissions)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
-		JournalTemplateService journalTemplateService = JournalTemplateServiceFactory.getService();
-
-		return journalTemplateService.addTemplate(templateId, autoTemplateId,
-			plid, structureId, name, description, xsl, formatXsl, langType,
+		return _service.addTemplate(templateId, autoTemplateId, plid,
+			structureId, name, description, xsl, formatXsl, langType,
 			cacheable, smallImage, smallImageURL, smallFile,
 			addCommunityPermissions, addGuestPermissions);
 	}
@@ -78,10 +70,8 @@ public class JournalTemplateServiceUtil {
 		java.lang.String[] guestPermissions)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
-		JournalTemplateService journalTemplateService = JournalTemplateServiceFactory.getService();
-
-		return journalTemplateService.addTemplate(templateId, autoTemplateId,
-			plid, structureId, name, description, xsl, formatXsl, langType,
+		return _service.addTemplate(templateId, autoTemplateId, plid,
+			structureId, name, description, xsl, formatXsl, langType,
 			cacheable, smallImage, smallImageURL, smallFile,
 			communityPermissions, guestPermissions);
 	}
@@ -89,27 +79,21 @@ public class JournalTemplateServiceUtil {
 	public static void deleteTemplate(long groupId, java.lang.String templateId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
-		JournalTemplateService journalTemplateService = JournalTemplateServiceFactory.getService();
-
-		journalTemplateService.deleteTemplate(groupId, templateId);
+		_service.deleteTemplate(groupId, templateId);
 	}
 
 	public static java.util.List<com.liferay.portlet.journal.model.JournalTemplate> getStructureTemplates(
 		long groupId, java.lang.String structureId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
-		JournalTemplateService journalTemplateService = JournalTemplateServiceFactory.getService();
-
-		return journalTemplateService.getStructureTemplates(groupId, structureId);
+		return _service.getStructureTemplates(groupId, structureId);
 	}
 
 	public static com.liferay.portlet.journal.model.JournalTemplate getTemplate(
 		long groupId, java.lang.String templateId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
-		JournalTemplateService journalTemplateService = JournalTemplateServiceFactory.getService();
-
-		return journalTemplateService.getTemplate(groupId, templateId);
+		return _service.getTemplate(groupId, templateId);
 	}
 
 	public static com.liferay.portlet.journal.model.JournalTemplate updateTemplate(
@@ -120,10 +104,18 @@ public class JournalTemplateServiceUtil {
 		java.lang.String smallImageURL, java.io.File smallFile)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
-		JournalTemplateService journalTemplateService = JournalTemplateServiceFactory.getService();
-
-		return journalTemplateService.updateTemplate(groupId, templateId,
-			structureId, name, description, xsl, formatXsl, langType,
-			cacheable, smallImage, smallImageURL, smallFile);
+		return _service.updateTemplate(groupId, templateId, structureId, name,
+			description, xsl, formatXsl, langType, cacheable, smallImage,
+			smallImageURL, smallFile);
 	}
+
+	public static JournalTemplateService getService() {
+		return _service;
+	}
+
+	public void setService(JournalTemplateService service) {
+		_service = service;
+	}
+
+	private static JournalTemplateService _service;
 }

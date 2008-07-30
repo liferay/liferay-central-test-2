@@ -190,22 +190,12 @@ public class ListTypeUtil {
 	}
 
 	public static ListTypePersistence getPersistence() {
-		return _getUtil()._persistence;
+		return _persistence;
 	}
 
 	public void setPersistence(ListTypePersistence persistence) {
 		_persistence = persistence;
 	}
 
-	private static ListTypeUtil _getUtil() {
-		if (_util == null) {
-			_util = (ListTypeUtil)com.liferay.portal.kernel.bean.PortalBeanLocatorUtil.locate(_UTIL);
-		}
-
-		return _util;
-	}
-
-	private static final String _UTIL = ListTypeUtil.class.getName();
-	private static ListTypeUtil _util;
-	private ListTypePersistence _persistence;
+	private static ListTypePersistence _persistence;
 }

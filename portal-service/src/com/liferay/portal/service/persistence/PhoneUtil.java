@@ -420,22 +420,12 @@ public class PhoneUtil {
 	}
 
 	public static PhonePersistence getPersistence() {
-		return _getUtil()._persistence;
+		return _persistence;
 	}
 
 	public void setPersistence(PhonePersistence persistence) {
 		_persistence = persistence;
 	}
 
-	private static PhoneUtil _getUtil() {
-		if (_util == null) {
-			_util = (PhoneUtil)com.liferay.portal.kernel.bean.PortalBeanLocatorUtil.locate(_UTIL);
-		}
-
-		return _util;
-	}
-
-	private static final String _UTIL = PhoneUtil.class.getName();
-	private static PhoneUtil _util;
-	private PhonePersistence _persistence;
+	private static PhonePersistence _persistence;
 }

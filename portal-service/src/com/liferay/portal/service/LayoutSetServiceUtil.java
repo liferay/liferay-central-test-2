@@ -39,15 +39,9 @@ package com.liferay.portal.service;
  * on a bean instead of writing a lookup call and a method call.
  * </p>
  *
- * <p>
- * <code>com.liferay.portal.service.LayoutSetServiceFactory</code>
- * is responsible for the lookup of the bean.
- * </p>
- *
  * @author Brian Wing Shun Chan
  *
  * @see com.liferay.portal.service.LayoutSetService
- * @see com.liferay.portal.service.LayoutSetServiceFactory
  *
  */
 public class LayoutSetServiceUtil {
@@ -55,9 +49,7 @@ public class LayoutSetServiceUtil {
 		boolean logo, java.io.File file)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
-		LayoutSetService layoutSetService = LayoutSetServiceFactory.getService();
-
-		layoutSetService.updateLogo(groupId, privateLayout, logo, file);
+		_service.updateLogo(groupId, privateLayout, logo, file);
 	}
 
 	public static com.liferay.portal.model.LayoutSet updateLookAndFeel(
@@ -65,19 +57,24 @@ public class LayoutSetServiceUtil {
 		java.lang.String colorSchemeId, java.lang.String css, boolean wapTheme)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
-		LayoutSetService layoutSetService = LayoutSetServiceFactory.getService();
-
-		return layoutSetService.updateLookAndFeel(groupId, privateLayout,
-			themeId, colorSchemeId, css, wapTheme);
+		return _service.updateLookAndFeel(groupId, privateLayout, themeId,
+			colorSchemeId, css, wapTheme);
 	}
 
 	public static com.liferay.portal.model.LayoutSet updateVirtualHost(
 		long groupId, boolean privateLayout, java.lang.String virtualHost)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
-		LayoutSetService layoutSetService = LayoutSetServiceFactory.getService();
-
-		return layoutSetService.updateVirtualHost(groupId, privateLayout,
-			virtualHost);
+		return _service.updateVirtualHost(groupId, privateLayout, virtualHost);
 	}
+
+	public static LayoutSetService getService() {
+		return _service;
+	}
+
+	public void setService(LayoutSetService service) {
+		_service = service;
+	}
+
+	private static LayoutSetService _service;
 }

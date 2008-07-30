@@ -39,85 +39,61 @@ package com.liferay.portal.service;
  * on a bean instead of writing a lookup call and a method call.
  * </p>
  *
- * <p>
- * <code>com.liferay.portal.service.CompanyLocalServiceFactory</code>
- * is responsible for the lookup of the bean.
- * </p>
- *
  * @author Brian Wing Shun Chan
  *
  * @see com.liferay.portal.service.CompanyLocalService
- * @see com.liferay.portal.service.CompanyLocalServiceFactory
  *
  */
 public class CompanyLocalServiceUtil {
 	public static com.liferay.portal.model.Company addCompany(
 		com.liferay.portal.model.Company company)
 		throws com.liferay.portal.SystemException {
-		CompanyLocalService companyLocalService = CompanyLocalServiceFactory.getService();
-
-		return companyLocalService.addCompany(company);
+		return _service.addCompany(company);
 	}
 
 	public static void deleteCompany(long companyId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		CompanyLocalService companyLocalService = CompanyLocalServiceFactory.getService();
-
-		companyLocalService.deleteCompany(companyId);
+		_service.deleteCompany(companyId);
 	}
 
 	public static void deleteCompany(com.liferay.portal.model.Company company)
 		throws com.liferay.portal.SystemException {
-		CompanyLocalService companyLocalService = CompanyLocalServiceFactory.getService();
-
-		companyLocalService.deleteCompany(company);
+		_service.deleteCompany(company);
 	}
 
 	public static java.util.List<Object> dynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery)
 		throws com.liferay.portal.SystemException {
-		CompanyLocalService companyLocalService = CompanyLocalServiceFactory.getService();
-
-		return companyLocalService.dynamicQuery(dynamicQuery);
+		return _service.dynamicQuery(dynamicQuery);
 	}
 
 	public static java.util.List<Object> dynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery, int start,
 		int end) throws com.liferay.portal.SystemException {
-		CompanyLocalService companyLocalService = CompanyLocalServiceFactory.getService();
-
-		return companyLocalService.dynamicQuery(dynamicQuery, start, end);
+		return _service.dynamicQuery(dynamicQuery, start, end);
 	}
 
 	public static com.liferay.portal.model.Company getCompany(long companyId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		CompanyLocalService companyLocalService = CompanyLocalServiceFactory.getService();
-
-		return companyLocalService.getCompany(companyId);
+		return _service.getCompany(companyId);
 	}
 
 	public static java.util.List<com.liferay.portal.model.Company> getCompanies(
 		int start, int end) throws com.liferay.portal.SystemException {
-		CompanyLocalService companyLocalService = CompanyLocalServiceFactory.getService();
-
-		return companyLocalService.getCompanies(start, end);
+		return _service.getCompanies(start, end);
 	}
 
 	public static int getCompaniesCount()
 		throws com.liferay.portal.SystemException {
-		CompanyLocalService companyLocalService = CompanyLocalServiceFactory.getService();
-
-		return companyLocalService.getCompaniesCount();
+		return _service.getCompaniesCount();
 	}
 
 	public static com.liferay.portal.model.Company updateCompany(
 		com.liferay.portal.model.Company company)
 		throws com.liferay.portal.SystemException {
-		CompanyLocalService companyLocalService = CompanyLocalServiceFactory.getService();
-
-		return companyLocalService.updateCompany(company);
+		return _service.updateCompany(company);
 	}
 
 	public static com.liferay.portal.model.Company addCompany(
@@ -125,114 +101,88 @@ public class CompanyLocalServiceUtil {
 		java.lang.String mx)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		CompanyLocalService companyLocalService = CompanyLocalServiceFactory.getService();
-
-		return companyLocalService.addCompany(webId, virtualHost, mx);
+		return _service.addCompany(webId, virtualHost, mx);
 	}
 
 	public static com.liferay.portal.model.Company checkCompany(
 		java.lang.String webId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		CompanyLocalService companyLocalService = CompanyLocalServiceFactory.getService();
-
-		return companyLocalService.checkCompany(webId);
+		return _service.checkCompany(webId);
 	}
 
 	public static com.liferay.portal.model.Company checkCompany(
 		java.lang.String webId, java.lang.String mx)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		CompanyLocalService companyLocalService = CompanyLocalServiceFactory.getService();
-
-		return companyLocalService.checkCompany(webId, mx);
+		return _service.checkCompany(webId, mx);
 	}
 
 	public static void checkCompanyKey(long companyId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		CompanyLocalService companyLocalService = CompanyLocalServiceFactory.getService();
-
-		companyLocalService.checkCompanyKey(companyId);
+		_service.checkCompanyKey(companyId);
 	}
 
 	public static java.util.List<com.liferay.portal.model.Company> getCompanies()
 		throws com.liferay.portal.SystemException {
-		CompanyLocalService companyLocalService = CompanyLocalServiceFactory.getService();
-
-		return companyLocalService.getCompanies();
+		return _service.getCompanies();
 	}
 
 	public static com.liferay.portal.model.Company getCompanyById(
 		long companyId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		CompanyLocalService companyLocalService = CompanyLocalServiceFactory.getService();
-
-		return companyLocalService.getCompanyById(companyId);
+		return _service.getCompanyById(companyId);
 	}
 
 	public static com.liferay.portal.model.Company getCompanyByLogoId(
 		long logoId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		CompanyLocalService companyLocalService = CompanyLocalServiceFactory.getService();
-
-		return companyLocalService.getCompanyByLogoId(logoId);
+		return _service.getCompanyByLogoId(logoId);
 	}
 
 	public static com.liferay.portal.model.Company getCompanyByMx(
 		java.lang.String mx)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		CompanyLocalService companyLocalService = CompanyLocalServiceFactory.getService();
-
-		return companyLocalService.getCompanyByMx(mx);
+		return _service.getCompanyByMx(mx);
 	}
 
 	public static com.liferay.portal.model.Company getCompanyByVirtualHost(
 		java.lang.String virtualHost)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		CompanyLocalService companyLocalService = CompanyLocalServiceFactory.getService();
-
-		return companyLocalService.getCompanyByVirtualHost(virtualHost);
+		return _service.getCompanyByVirtualHost(virtualHost);
 	}
 
 	public static com.liferay.portal.model.Company getCompanyByWebId(
 		java.lang.String webId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		CompanyLocalService companyLocalService = CompanyLocalServiceFactory.getService();
-
-		return companyLocalService.getCompanyByWebId(webId);
+		return _service.getCompanyByWebId(webId);
 	}
 
 	public static com.liferay.portal.kernel.search.Hits search(long companyId,
 		java.lang.String keywords, int start, int end)
 		throws com.liferay.portal.SystemException {
-		CompanyLocalService companyLocalService = CompanyLocalServiceFactory.getService();
-
-		return companyLocalService.search(companyId, keywords, start, end);
+		return _service.search(companyId, keywords, start, end);
 	}
 
 	public static com.liferay.portal.kernel.search.Hits search(long companyId,
 		java.lang.String portletId, long groupId, java.lang.String type,
 		java.lang.String keywords, int start, int end)
 		throws com.liferay.portal.SystemException {
-		CompanyLocalService companyLocalService = CompanyLocalServiceFactory.getService();
-
-		return companyLocalService.search(companyId, portletId, groupId, type,
-			keywords, start, end);
+		return _service.search(companyId, portletId, groupId, type, keywords,
+			start, end);
 	}
 
 	public static com.liferay.portal.model.Company updateCompany(
 		long companyId, java.lang.String virtualHost, java.lang.String mx)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		CompanyLocalService companyLocalService = CompanyLocalServiceFactory.getService();
-
-		return companyLocalService.updateCompany(companyId, virtualHost, mx);
+		return _service.updateCompany(companyId, virtualHost, mx);
 	}
 
 	public static com.liferay.portal.model.Company updateCompany(
@@ -243,28 +193,22 @@ public class CompanyLocalServiceUtil {
 		java.lang.String industry, java.lang.String type, java.lang.String size)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		CompanyLocalService companyLocalService = CompanyLocalServiceFactory.getService();
-
-		return companyLocalService.updateCompany(companyId, virtualHost, mx,
-			name, legalName, legalId, legalType, sicCode, tickerSymbol,
-			industry, type, size);
+		return _service.updateCompany(companyId, virtualHost, mx, name,
+			legalName, legalId, legalType, sicCode, tickerSymbol, industry,
+			type, size);
 	}
 
 	public static void updateDisplay(long companyId,
 		java.lang.String languageId, java.lang.String timeZoneId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		CompanyLocalService companyLocalService = CompanyLocalServiceFactory.getService();
-
-		companyLocalService.updateDisplay(companyId, languageId, timeZoneId);
+		_service.updateDisplay(companyId, languageId, timeZoneId);
 	}
 
 	public static void updateLogo(long companyId, java.io.File file)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		CompanyLocalService companyLocalService = CompanyLocalServiceFactory.getService();
-
-		companyLocalService.updateLogo(companyId, file);
+		_service.updateLogo(companyId, file);
 	}
 
 	public static void updateSecurity(long companyId,
@@ -273,10 +217,17 @@ public class CompanyLocalServiceUtil {
 		boolean communityLogo)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		CompanyLocalService companyLocalService = CompanyLocalServiceFactory.getService();
-
-		companyLocalService.updateSecurity(companyId, authType, autoLogin,
-			sendPassword, strangers, strangersWithMx, strangersVerify,
-			communityLogo);
+		_service.updateSecurity(companyId, authType, autoLogin, sendPassword,
+			strangers, strangersWithMx, strangersVerify, communityLogo);
 	}
+
+	public static CompanyLocalService getService() {
+		return _service;
+	}
+
+	public void setService(CompanyLocalService service) {
+		_service = service;
+	}
+
+	private static CompanyLocalService _service;
 }

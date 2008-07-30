@@ -214,22 +214,12 @@ public class ExpandoColumnUtil {
 	}
 
 	public static ExpandoColumnPersistence getPersistence() {
-		return _getUtil()._persistence;
+		return _persistence;
 	}
 
 	public void setPersistence(ExpandoColumnPersistence persistence) {
 		_persistence = persistence;
 	}
 
-	private static ExpandoColumnUtil _getUtil() {
-		if (_util == null) {
-			_util = (ExpandoColumnUtil)com.liferay.portal.kernel.bean.PortalBeanLocatorUtil.locate(_UTIL);
-		}
-
-		return _util;
-	}
-
-	private static final String _UTIL = ExpandoColumnUtil.class.getName();
-	private static ExpandoColumnUtil _util;
-	private ExpandoColumnPersistence _persistence;
+	private static ExpandoColumnPersistence _persistence;
 }

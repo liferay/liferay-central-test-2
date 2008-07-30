@@ -577,22 +577,12 @@ public class SocialRelationUtil {
 	}
 
 	public static SocialRelationPersistence getPersistence() {
-		return _getUtil()._persistence;
+		return _persistence;
 	}
 
 	public void setPersistence(SocialRelationPersistence persistence) {
 		_persistence = persistence;
 	}
 
-	private static SocialRelationUtil _getUtil() {
-		if (_util == null) {
-			_util = (SocialRelationUtil)com.liferay.portal.kernel.bean.PortalBeanLocatorUtil.locate(_UTIL);
-		}
-
-		return _util;
-	}
-
-	private static final String _UTIL = SocialRelationUtil.class.getName();
-	private static SocialRelationUtil _util;
-	private SocialRelationPersistence _persistence;
+	private static SocialRelationPersistence _persistence;
 }

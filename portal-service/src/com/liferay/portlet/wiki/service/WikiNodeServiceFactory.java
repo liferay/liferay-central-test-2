@@ -22,6 +22,7 @@
 
 package com.liferay.portlet.wiki.service;
 
+import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
 
 /**
  * <a href="WikiNodeServiceFactory.java.html"><b><i>View Source</i></b></a>
@@ -51,33 +52,45 @@ package com.liferay.portlet.wiki.service;
  *
  */
 public class WikiNodeServiceFactory {
+	/**
+	 * @deprecated
+	 */
 	public static WikiNodeService getService() {
 		return _getFactory()._service;
 	}
 
+	/**
+	 * @deprecated
+	 */
 	public static WikiNodeService getImpl() {
 		if (_impl == null) {
-			_impl = (WikiNodeService)com.liferay.portal.kernel.bean.PortalBeanLocatorUtil.locate(_IMPL);
+			_impl = (WikiNodeService)PortalBeanLocatorUtil.locate(_IMPL);
 		}
 
 		return _impl;
 	}
 
+	/**
+	 * @deprecated
+	 */
 	public static WikiNodeService getTxImpl() {
 		if (_txImpl == null) {
-			_txImpl = (WikiNodeService)com.liferay.portal.kernel.bean.PortalBeanLocatorUtil.locate(_TX_IMPL);
+			_txImpl = (WikiNodeService)PortalBeanLocatorUtil.locate(_TX_IMPL);
 		}
 
 		return _txImpl;
 	}
 
+	/**
+	 * @deprecated
+	 */
 	public void setService(WikiNodeService service) {
 		_service = service;
 	}
 
 	private static WikiNodeServiceFactory _getFactory() {
 		if (_factory == null) {
-			_factory = (WikiNodeServiceFactory)com.liferay.portal.kernel.bean.PortalBeanLocatorUtil.locate(_FACTORY);
+			_factory = (WikiNodeServiceFactory)PortalBeanLocatorUtil.locate(_FACTORY);
 		}
 
 		return _factory;

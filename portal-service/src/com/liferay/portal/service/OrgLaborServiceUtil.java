@@ -39,15 +39,9 @@ package com.liferay.portal.service;
  * on a bean instead of writing a lookup call and a method call.
  * </p>
  *
- * <p>
- * <code>com.liferay.portal.service.OrgLaborServiceFactory</code>
- * is responsible for the lookup of the bean.
- * </p>
- *
  * @author Brian Wing Shun Chan
  *
  * @see com.liferay.portal.service.OrgLaborService
- * @see com.liferay.portal.service.OrgLaborServiceFactory
  *
  */
 public class OrgLaborServiceUtil {
@@ -58,36 +52,28 @@ public class OrgLaborServiceUtil {
 		int satOpen, int satClose)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
-		OrgLaborService orgLaborService = OrgLaborServiceFactory.getService();
-
-		return orgLaborService.addOrgLabor(organizationId, typeId, sunOpen,
-			sunClose, monOpen, monClose, tueOpen, tueClose, wedOpen, wedClose,
-			thuOpen, thuClose, friOpen, friClose, satOpen, satClose);
+		return _service.addOrgLabor(organizationId, typeId, sunOpen, sunClose,
+			monOpen, monClose, tueOpen, tueClose, wedOpen, wedClose, thuOpen,
+			thuClose, friOpen, friClose, satOpen, satClose);
 	}
 
 	public static void deleteOrgLabor(long orgLaborId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
-		OrgLaborService orgLaborService = OrgLaborServiceFactory.getService();
-
-		orgLaborService.deleteOrgLabor(orgLaborId);
+		_service.deleteOrgLabor(orgLaborId);
 	}
 
 	public static com.liferay.portal.model.OrgLabor getOrgLabor(long orgLaborId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
-		OrgLaborService orgLaborService = OrgLaborServiceFactory.getService();
-
-		return orgLaborService.getOrgLabor(orgLaborId);
+		return _service.getOrgLabor(orgLaborId);
 	}
 
 	public static java.util.List<com.liferay.portal.model.OrgLabor> getOrgLabors(
 		long organizationId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
-		OrgLaborService orgLaborService = OrgLaborServiceFactory.getService();
-
-		return orgLaborService.getOrgLabors(organizationId);
+		return _service.getOrgLabors(organizationId);
 	}
 
 	public static com.liferay.portal.model.OrgLabor updateOrgLabor(
@@ -97,10 +83,18 @@ public class OrgLaborServiceUtil {
 		int satClose)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
-		OrgLaborService orgLaborService = OrgLaborServiceFactory.getService();
-
-		return orgLaborService.updateOrgLabor(orgLaborId, typeId, sunOpen,
-			sunClose, monOpen, monClose, tueOpen, tueClose, wedOpen, wedClose,
-			thuOpen, thuClose, friOpen, friClose, satOpen, satClose);
+		return _service.updateOrgLabor(orgLaborId, typeId, sunOpen, sunClose,
+			monOpen, monClose, tueOpen, tueClose, wedOpen, wedClose, thuOpen,
+			thuClose, friOpen, friClose, satOpen, satClose);
 	}
+
+	public static OrgLaborService getService() {
+		return _service;
+	}
+
+	public void setService(OrgLaborService service) {
+		_service = service;
+	}
+
+	private static OrgLaborService _service;
 }

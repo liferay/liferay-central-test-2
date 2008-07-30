@@ -39,75 +39,51 @@ package com.liferay.portal.service;
  * on a bean instead of writing a lookup call and a method call.
  * </p>
  *
- * <p>
- * <code>com.liferay.portal.service.LayoutTemplateLocalServiceFactory</code>
- * is responsible for the lookup of the bean.
- * </p>
- *
  * @author Brian Wing Shun Chan
  *
  * @see com.liferay.portal.service.LayoutTemplateLocalService
- * @see com.liferay.portal.service.LayoutTemplateLocalServiceFactory
  *
  */
 public class LayoutTemplateLocalServiceUtil {
 	public static java.lang.String getContent(
 		java.lang.String layoutTemplateId, boolean standard,
 		java.lang.String themeId) throws com.liferay.portal.SystemException {
-		LayoutTemplateLocalService layoutTemplateLocalService = LayoutTemplateLocalServiceFactory.getService();
-
-		return layoutTemplateLocalService.getContent(layoutTemplateId,
-			standard, themeId);
+		return _service.getContent(layoutTemplateId, standard, themeId);
 	}
 
 	public static com.liferay.portal.model.LayoutTemplate getLayoutTemplate(
 		java.lang.String layoutTemplateId, boolean standard,
 		java.lang.String themeId) {
-		LayoutTemplateLocalService layoutTemplateLocalService = LayoutTemplateLocalServiceFactory.getService();
-
-		return layoutTemplateLocalService.getLayoutTemplate(layoutTemplateId,
-			standard, themeId);
+		return _service.getLayoutTemplate(layoutTemplateId, standard, themeId);
 	}
 
 	public static java.util.List<com.liferay.portal.model.LayoutTemplate> getLayoutTemplates() {
-		LayoutTemplateLocalService layoutTemplateLocalService = LayoutTemplateLocalServiceFactory.getService();
-
-		return layoutTemplateLocalService.getLayoutTemplates();
+		return _service.getLayoutTemplates();
 	}
 
 	public static java.util.List<com.liferay.portal.model.LayoutTemplate> getLayoutTemplates(
 		java.lang.String themeId) {
-		LayoutTemplateLocalService layoutTemplateLocalService = LayoutTemplateLocalServiceFactory.getService();
-
-		return layoutTemplateLocalService.getLayoutTemplates(themeId);
+		return _service.getLayoutTemplates(themeId);
 	}
 
 	public static java.lang.String getWapContent(
 		java.lang.String layoutTemplateId, boolean standard,
 		java.lang.String themeId) throws com.liferay.portal.SystemException {
-		LayoutTemplateLocalService layoutTemplateLocalService = LayoutTemplateLocalServiceFactory.getService();
-
-		return layoutTemplateLocalService.getWapContent(layoutTemplateId,
-			standard, themeId);
+		return _service.getWapContent(layoutTemplateId, standard, themeId);
 	}
 
 	public static java.util.List<com.liferay.portal.kernel.util.ObjectValuePair<String, Boolean>> init(
 		javax.servlet.ServletContext servletContext, java.lang.String[] xmls,
 		com.liferay.portal.kernel.plugin.PluginPackage pluginPackage) {
-		LayoutTemplateLocalService layoutTemplateLocalService = LayoutTemplateLocalServiceFactory.getService();
-
-		return layoutTemplateLocalService.init(servletContext, xmls,
-			pluginPackage);
+		return _service.init(servletContext, xmls, pluginPackage);
 	}
 
 	public static java.util.List<com.liferay.portal.kernel.util.ObjectValuePair<String, Boolean>> init(
 		java.lang.String servletContextName,
 		javax.servlet.ServletContext servletContext, java.lang.String[] xmls,
 		com.liferay.portal.kernel.plugin.PluginPackage pluginPackage) {
-		LayoutTemplateLocalService layoutTemplateLocalService = LayoutTemplateLocalServiceFactory.getService();
-
-		return layoutTemplateLocalService.init(servletContextName,
-			servletContext, xmls, pluginPackage);
+		return _service.init(servletContextName, servletContext, xmls,
+			pluginPackage);
 	}
 
 	public static void readLayoutTemplate(java.lang.String servletContextName,
@@ -116,24 +92,26 @@ public class LayoutTemplateLocalServiceUtil {
 		com.liferay.portal.kernel.xml.Element el, boolean standard,
 		java.lang.String themeId,
 		com.liferay.portal.kernel.plugin.PluginPackage pluginPackage) {
-		LayoutTemplateLocalService layoutTemplateLocalService = LayoutTemplateLocalServiceFactory.getService();
-
-		layoutTemplateLocalService.readLayoutTemplate(servletContextName,
-			servletContext, layoutTemplateIds, el, standard, themeId,
-			pluginPackage);
+		_service.readLayoutTemplate(servletContextName, servletContext,
+			layoutTemplateIds, el, standard, themeId, pluginPackage);
 	}
 
 	public static void uninstallLayoutTemplate(
 		java.lang.String layoutTemplateId, boolean standard) {
-		LayoutTemplateLocalService layoutTemplateLocalService = LayoutTemplateLocalServiceFactory.getService();
-
-		layoutTemplateLocalService.uninstallLayoutTemplate(layoutTemplateId,
-			standard);
+		_service.uninstallLayoutTemplate(layoutTemplateId, standard);
 	}
 
 	public static void uninstallLayoutTemplates(java.lang.String themeId) {
-		LayoutTemplateLocalService layoutTemplateLocalService = LayoutTemplateLocalServiceFactory.getService();
-
-		layoutTemplateLocalService.uninstallLayoutTemplates(themeId);
+		_service.uninstallLayoutTemplates(themeId);
 	}
+
+	public static LayoutTemplateLocalService getService() {
+		return _service;
+	}
+
+	public void setService(LayoutTemplateLocalService service) {
+		_service = service;
+	}
+
+	private static LayoutTemplateLocalService _service;
 }

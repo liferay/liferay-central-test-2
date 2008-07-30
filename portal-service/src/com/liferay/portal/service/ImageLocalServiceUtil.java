@@ -39,191 +39,144 @@ package com.liferay.portal.service;
  * on a bean instead of writing a lookup call and a method call.
  * </p>
  *
- * <p>
- * <code>com.liferay.portal.service.ImageLocalServiceFactory</code>
- * is responsible for the lookup of the bean.
- * </p>
- *
  * @author Brian Wing Shun Chan
  *
  * @see com.liferay.portal.service.ImageLocalService
- * @see com.liferay.portal.service.ImageLocalServiceFactory
  *
  */
 public class ImageLocalServiceUtil {
 	public static com.liferay.portal.model.Image addImage(
 		com.liferay.portal.model.Image image)
 		throws com.liferay.portal.SystemException {
-		ImageLocalService imageLocalService = ImageLocalServiceFactory.getService();
-
-		return imageLocalService.addImage(image);
+		return _service.addImage(image);
 	}
 
 	public static void deleteImage(long imageId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		ImageLocalService imageLocalService = ImageLocalServiceFactory.getService();
-
-		imageLocalService.deleteImage(imageId);
+		_service.deleteImage(imageId);
 	}
 
 	public static void deleteImage(com.liferay.portal.model.Image image)
 		throws com.liferay.portal.SystemException {
-		ImageLocalService imageLocalService = ImageLocalServiceFactory.getService();
-
-		imageLocalService.deleteImage(image);
+		_service.deleteImage(image);
 	}
 
 	public static java.util.List<Object> dynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery)
 		throws com.liferay.portal.SystemException {
-		ImageLocalService imageLocalService = ImageLocalServiceFactory.getService();
-
-		return imageLocalService.dynamicQuery(dynamicQuery);
+		return _service.dynamicQuery(dynamicQuery);
 	}
 
 	public static java.util.List<Object> dynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery, int start,
 		int end) throws com.liferay.portal.SystemException {
-		ImageLocalService imageLocalService = ImageLocalServiceFactory.getService();
-
-		return imageLocalService.dynamicQuery(dynamicQuery, start, end);
+		return _service.dynamicQuery(dynamicQuery, start, end);
 	}
 
 	public static com.liferay.portal.model.Image getImage(long imageId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		ImageLocalService imageLocalService = ImageLocalServiceFactory.getService();
-
-		return imageLocalService.getImage(imageId);
+		return _service.getImage(imageId);
 	}
 
 	public static java.util.List<com.liferay.portal.model.Image> getImages(
 		int start, int end) throws com.liferay.portal.SystemException {
-		ImageLocalService imageLocalService = ImageLocalServiceFactory.getService();
-
-		return imageLocalService.getImages(start, end);
+		return _service.getImages(start, end);
 	}
 
 	public static int getImagesCount()
 		throws com.liferay.portal.SystemException {
-		ImageLocalService imageLocalService = ImageLocalServiceFactory.getService();
-
-		return imageLocalService.getImagesCount();
+		return _service.getImagesCount();
 	}
 
 	public static com.liferay.portal.model.Image updateImage(
 		com.liferay.portal.model.Image image)
 		throws com.liferay.portal.SystemException {
-		ImageLocalService imageLocalService = ImageLocalServiceFactory.getService();
-
-		return imageLocalService.updateImage(image);
+		return _service.updateImage(image);
 	}
 
 	public static com.liferay.portal.model.Image getCompanyLogo(long imageId) {
-		ImageLocalService imageLocalService = ImageLocalServiceFactory.getService();
-
-		return imageLocalService.getCompanyLogo(imageId);
+		return _service.getCompanyLogo(imageId);
 	}
 
 	public static com.liferay.portal.model.Image getDefaultCompanyLogo() {
-		ImageLocalService imageLocalService = ImageLocalServiceFactory.getService();
-
-		return imageLocalService.getDefaultCompanyLogo();
+		return _service.getDefaultCompanyLogo();
 	}
 
 	public static com.liferay.portal.model.Image getDefaultSpacer() {
-		ImageLocalService imageLocalService = ImageLocalServiceFactory.getService();
-
-		return imageLocalService.getDefaultSpacer();
+		return _service.getDefaultSpacer();
 	}
 
 	public static com.liferay.portal.model.Image getDefaultUserFemalePortrait() {
-		ImageLocalService imageLocalService = ImageLocalServiceFactory.getService();
-
-		return imageLocalService.getDefaultUserFemalePortrait();
+		return _service.getDefaultUserFemalePortrait();
 	}
 
 	public static com.liferay.portal.model.Image getDefaultUserMalePortrait() {
-		ImageLocalService imageLocalService = ImageLocalServiceFactory.getService();
-
-		return imageLocalService.getDefaultUserMalePortrait();
+		return _service.getDefaultUserMalePortrait();
 	}
 
 	public static com.liferay.portal.model.Image getImage(byte[] bytes)
 		throws java.io.IOException {
-		ImageLocalService imageLocalService = ImageLocalServiceFactory.getService();
-
-		return imageLocalService.getImage(bytes);
+		return _service.getImage(bytes);
 	}
 
 	public static com.liferay.portal.model.Image getImage(java.io.File file)
 		throws java.io.IOException {
-		ImageLocalService imageLocalService = ImageLocalServiceFactory.getService();
-
-		return imageLocalService.getImage(file);
+		return _service.getImage(file);
 	}
 
 	public static com.liferay.portal.model.Image getImage(
 		java.io.InputStream is) throws java.io.IOException {
-		ImageLocalService imageLocalService = ImageLocalServiceFactory.getService();
-
-		return imageLocalService.getImage(is);
+		return _service.getImage(is);
 	}
 
 	public static com.liferay.portal.model.Image getImageOrDefault(long imageId) {
-		ImageLocalService imageLocalService = ImageLocalServiceFactory.getService();
-
-		return imageLocalService.getImageOrDefault(imageId);
+		return _service.getImageOrDefault(imageId);
 	}
 
 	public static java.util.List<com.liferay.portal.model.Image> getImages()
 		throws com.liferay.portal.SystemException {
-		ImageLocalService imageLocalService = ImageLocalServiceFactory.getService();
-
-		return imageLocalService.getImages();
+		return _service.getImages();
 	}
 
 	public static java.util.List<com.liferay.portal.model.Image> getImagesBySize(
 		int size) throws com.liferay.portal.SystemException {
-		ImageLocalService imageLocalService = ImageLocalServiceFactory.getService();
-
-		return imageLocalService.getImagesBySize(size);
+		return _service.getImagesBySize(size);
 	}
 
 	public static boolean isNullOrDefaultSpacer(byte[] bytes) {
-		ImageLocalService imageLocalService = ImageLocalServiceFactory.getService();
-
-		return imageLocalService.isNullOrDefaultSpacer(bytes);
+		return _service.isNullOrDefaultSpacer(bytes);
 	}
 
 	public static com.liferay.portal.model.Image updateImage(long imageId,
 		byte[] bytes) throws com.liferay.portal.SystemException {
-		ImageLocalService imageLocalService = ImageLocalServiceFactory.getService();
-
-		return imageLocalService.updateImage(imageId, bytes);
+		return _service.updateImage(imageId, bytes);
 	}
 
 	public static com.liferay.portal.model.Image updateImage(long imageId,
 		java.io.File file) throws com.liferay.portal.SystemException {
-		ImageLocalService imageLocalService = ImageLocalServiceFactory.getService();
-
-		return imageLocalService.updateImage(imageId, file);
+		return _service.updateImage(imageId, file);
 	}
 
 	public static com.liferay.portal.model.Image updateImage(long imageId,
 		java.io.InputStream is) throws com.liferay.portal.SystemException {
-		ImageLocalService imageLocalService = ImageLocalServiceFactory.getService();
-
-		return imageLocalService.updateImage(imageId, is);
+		return _service.updateImage(imageId, is);
 	}
 
 	public static com.liferay.portal.model.Image updateImage(long imageId,
 		byte[] bytes, java.lang.String type, int height, int width, int size)
 		throws com.liferay.portal.SystemException {
-		ImageLocalService imageLocalService = ImageLocalServiceFactory.getService();
-
-		return imageLocalService.updateImage(imageId, bytes, type, height,
-			width, size);
+		return _service.updateImage(imageId, bytes, type, height, width, size);
 	}
+
+	public static ImageLocalService getService() {
+		return _service;
+	}
+
+	public void setService(ImageLocalService service) {
+		_service = service;
+	}
+
+	private static ImageLocalService _service;
 }

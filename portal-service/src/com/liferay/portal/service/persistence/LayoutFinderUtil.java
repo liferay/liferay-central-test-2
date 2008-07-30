@@ -42,22 +42,12 @@ public class LayoutFinderUtil {
 	}
 
 	public static LayoutFinder getFinder() {
-		return _getUtil()._finder;
+		return _finder;
 	}
 
 	public void setFinder(LayoutFinder finder) {
 		_finder = finder;
 	}
 
-	private static LayoutFinderUtil _getUtil() {
-		if (_util == null) {
-			_util = (LayoutFinderUtil)com.liferay.portal.kernel.bean.PortalBeanLocatorUtil.locate(_UTIL);
-		}
-
-		return _util;
-	}
-
-	private static final String _UTIL = LayoutFinderUtil.class.getName();
-	private static LayoutFinderUtil _util;
-	private LayoutFinder _finder;
+	private static LayoutFinder _finder;
 }

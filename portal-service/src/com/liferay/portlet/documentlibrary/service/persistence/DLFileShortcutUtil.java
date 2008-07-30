@@ -298,22 +298,12 @@ public class DLFileShortcutUtil {
 	}
 
 	public static DLFileShortcutPersistence getPersistence() {
-		return _getUtil()._persistence;
+		return _persistence;
 	}
 
 	public void setPersistence(DLFileShortcutPersistence persistence) {
 		_persistence = persistence;
 	}
 
-	private static DLFileShortcutUtil _getUtil() {
-		if (_util == null) {
-			_util = (DLFileShortcutUtil)com.liferay.portal.kernel.bean.PortalBeanLocatorUtil.locate(_UTIL);
-		}
-
-		return _util;
-	}
-
-	private static final String _UTIL = DLFileShortcutUtil.class.getName();
-	private static DLFileShortcutUtil _util;
-	private DLFileShortcutPersistence _persistence;
+	private static DLFileShortcutPersistence _persistence;
 }

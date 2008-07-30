@@ -22,6 +22,7 @@
 
 package com.liferay.portlet.expando.service;
 
+import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
 
 /**
  * <a href="ExpandoColumnLocalServiceFactory.java.html"><b><i>View Source</i></b></a>
@@ -51,33 +52,45 @@ package com.liferay.portlet.expando.service;
  *
  */
 public class ExpandoColumnLocalServiceFactory {
+	/**
+	 * @deprecated
+	 */
 	public static ExpandoColumnLocalService getService() {
 		return _getFactory()._service;
 	}
 
+	/**
+	 * @deprecated
+	 */
 	public static ExpandoColumnLocalService getImpl() {
 		if (_impl == null) {
-			_impl = (ExpandoColumnLocalService)com.liferay.portal.kernel.bean.PortalBeanLocatorUtil.locate(_IMPL);
+			_impl = (ExpandoColumnLocalService)PortalBeanLocatorUtil.locate(_IMPL);
 		}
 
 		return _impl;
 	}
 
+	/**
+	 * @deprecated
+	 */
 	public static ExpandoColumnLocalService getTxImpl() {
 		if (_txImpl == null) {
-			_txImpl = (ExpandoColumnLocalService)com.liferay.portal.kernel.bean.PortalBeanLocatorUtil.locate(_TX_IMPL);
+			_txImpl = (ExpandoColumnLocalService)PortalBeanLocatorUtil.locate(_TX_IMPL);
 		}
 
 		return _txImpl;
 	}
 
+	/**
+	 * @deprecated
+	 */
 	public void setService(ExpandoColumnLocalService service) {
 		_service = service;
 	}
 
 	private static ExpandoColumnLocalServiceFactory _getFactory() {
 		if (_factory == null) {
-			_factory = (ExpandoColumnLocalServiceFactory)com.liferay.portal.kernel.bean.PortalBeanLocatorUtil.locate(_FACTORY);
+			_factory = (ExpandoColumnLocalServiceFactory)PortalBeanLocatorUtil.locate(_FACTORY);
 		}
 
 		return _factory;

@@ -39,15 +39,9 @@ package com.liferay.portal.service;
  * on a bean instead of writing a lookup call and a method call.
  * </p>
  *
- * <p>
- * <code>com.liferay.portal.service.ClassNameServiceFactory</code>
- * is responsible for the lookup of the bean.
- * </p>
- *
  * @author Brian Wing Shun Chan
  *
  * @see com.liferay.portal.service.ClassNameService
- * @see com.liferay.portal.service.ClassNameServiceFactory
  *
  */
 public class ClassNameServiceUtil {
@@ -55,16 +49,22 @@ public class ClassNameServiceUtil {
 		long classNameId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
-		ClassNameService classNameService = ClassNameServiceFactory.getService();
-
-		return classNameService.getClassName(classNameId);
+		return _service.getClassName(classNameId);
 	}
 
 	public static com.liferay.portal.model.ClassName getClassName(
 		java.lang.String value)
 		throws com.liferay.portal.SystemException, java.rmi.RemoteException {
-		ClassNameService classNameService = ClassNameServiceFactory.getService();
-
-		return classNameService.getClassName(value);
+		return _service.getClassName(value);
 	}
+
+	public static ClassNameService getService() {
+		return _service;
+	}
+
+	public void setService(ClassNameService service) {
+		_service = service;
+	}
+
+	private static ClassNameService _service;
 }

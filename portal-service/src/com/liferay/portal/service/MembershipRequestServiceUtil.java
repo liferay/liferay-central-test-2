@@ -39,15 +39,9 @@ package com.liferay.portal.service;
  * on a bean instead of writing a lookup call and a method call.
  * </p>
  *
- * <p>
- * <code>com.liferay.portal.service.MembershipRequestServiceFactory</code>
- * is responsible for the lookup of the bean.
- * </p>
- *
  * @author Brian Wing Shun Chan
  *
  * @see com.liferay.portal.service.MembershipRequestService
- * @see com.liferay.portal.service.MembershipRequestServiceFactory
  *
  */
 public class MembershipRequestServiceUtil {
@@ -55,35 +49,36 @@ public class MembershipRequestServiceUtil {
 		long groupId, java.lang.String comments)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
-		MembershipRequestService membershipRequestService = MembershipRequestServiceFactory.getService();
-
-		return membershipRequestService.addMembershipRequest(groupId, comments);
+		return _service.addMembershipRequest(groupId, comments);
 	}
 
 	public static void deleteMembershipRequests(long groupId, int statusId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
-		MembershipRequestService membershipRequestService = MembershipRequestServiceFactory.getService();
-
-		membershipRequestService.deleteMembershipRequests(groupId, statusId);
+		_service.deleteMembershipRequests(groupId, statusId);
 	}
 
 	public static com.liferay.portal.model.MembershipRequest getMembershipRequest(
 		long membershipRequestId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
-		MembershipRequestService membershipRequestService = MembershipRequestServiceFactory.getService();
-
-		return membershipRequestService.getMembershipRequest(membershipRequestId);
+		return _service.getMembershipRequest(membershipRequestId);
 	}
 
 	public static void updateStatus(long membershipRequestId,
 		java.lang.String reviewComments, int statusId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
-		MembershipRequestService membershipRequestService = MembershipRequestServiceFactory.getService();
-
-		membershipRequestService.updateStatus(membershipRequestId,
-			reviewComments, statusId);
+		_service.updateStatus(membershipRequestId, reviewComments, statusId);
 	}
+
+	public static MembershipRequestService getService() {
+		return _service;
+	}
+
+	public void setService(MembershipRequestService service) {
+		_service = service;
+	}
+
+	private static MembershipRequestService _service;
 }

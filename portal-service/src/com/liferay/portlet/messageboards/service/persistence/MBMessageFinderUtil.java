@@ -89,22 +89,12 @@ public class MBMessageFinderUtil {
 	}
 
 	public static MBMessageFinder getFinder() {
-		return _getUtil()._finder;
+		return _finder;
 	}
 
 	public void setFinder(MBMessageFinder finder) {
 		_finder = finder;
 	}
 
-	private static MBMessageFinderUtil _getUtil() {
-		if (_util == null) {
-			_util = (MBMessageFinderUtil)com.liferay.portal.kernel.bean.PortalBeanLocatorUtil.locate(_UTIL);
-		}
-
-		return _util;
-	}
-
-	private static final String _UTIL = MBMessageFinderUtil.class.getName();
-	private static MBMessageFinderUtil _util;
-	private MBMessageFinder _finder;
+	private static MBMessageFinder _finder;
 }

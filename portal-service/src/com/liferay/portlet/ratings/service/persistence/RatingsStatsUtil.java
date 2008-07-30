@@ -164,22 +164,12 @@ public class RatingsStatsUtil {
 	}
 
 	public static RatingsStatsPersistence getPersistence() {
-		return _getUtil()._persistence;
+		return _persistence;
 	}
 
 	public void setPersistence(RatingsStatsPersistence persistence) {
 		_persistence = persistence;
 	}
 
-	private static RatingsStatsUtil _getUtil() {
-		if (_util == null) {
-			_util = (RatingsStatsUtil)com.liferay.portal.kernel.bean.PortalBeanLocatorUtil.locate(_UTIL);
-		}
-
-		return _util;
-	}
-
-	private static final String _UTIL = RatingsStatsUtil.class.getName();
-	private static RatingsStatsUtil _util;
-	private RatingsStatsPersistence _persistence;
+	private static RatingsStatsPersistence _persistence;
 }

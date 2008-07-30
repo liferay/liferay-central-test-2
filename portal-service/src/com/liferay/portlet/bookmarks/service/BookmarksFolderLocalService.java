@@ -44,7 +44,6 @@ package com.liferay.portlet.bookmarks.service;
  *
  * @author Brian Wing Shun Chan
  *
- * @see com.liferay.portlet.bookmarks.service.BookmarksFolderLocalServiceFactory
  * @see com.liferay.portlet.bookmarks.service.BookmarksFolderLocalServiceUtil
  *
  */

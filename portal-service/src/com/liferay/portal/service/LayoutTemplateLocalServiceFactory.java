@@ -22,6 +22,7 @@
 
 package com.liferay.portal.service;
 
+import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
 
 /**
  * <a href="LayoutTemplateLocalServiceFactory.java.html"><b><i>View Source</i></b></a>
@@ -51,33 +52,45 @@ package com.liferay.portal.service;
  *
  */
 public class LayoutTemplateLocalServiceFactory {
+	/**
+	 * @deprecated
+	 */
 	public static LayoutTemplateLocalService getService() {
 		return _getFactory()._service;
 	}
 
+	/**
+	 * @deprecated
+	 */
 	public static LayoutTemplateLocalService getImpl() {
 		if (_impl == null) {
-			_impl = (LayoutTemplateLocalService)com.liferay.portal.kernel.bean.PortalBeanLocatorUtil.locate(_IMPL);
+			_impl = (LayoutTemplateLocalService)PortalBeanLocatorUtil.locate(_IMPL);
 		}
 
 		return _impl;
 	}
 
+	/**
+	 * @deprecated
+	 */
 	public static LayoutTemplateLocalService getTxImpl() {
 		if (_txImpl == null) {
-			_txImpl = (LayoutTemplateLocalService)com.liferay.portal.kernel.bean.PortalBeanLocatorUtil.locate(_TX_IMPL);
+			_txImpl = (LayoutTemplateLocalService)PortalBeanLocatorUtil.locate(_TX_IMPL);
 		}
 
 		return _txImpl;
 	}
 
+	/**
+	 * @deprecated
+	 */
 	public void setService(LayoutTemplateLocalService service) {
 		_service = service;
 	}
 
 	private static LayoutTemplateLocalServiceFactory _getFactory() {
 		if (_factory == null) {
-			_factory = (LayoutTemplateLocalServiceFactory)com.liferay.portal.kernel.bean.PortalBeanLocatorUtil.locate(_FACTORY);
+			_factory = (LayoutTemplateLocalServiceFactory)PortalBeanLocatorUtil.locate(_FACTORY);
 		}
 
 		return _factory;

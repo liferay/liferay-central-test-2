@@ -44,7 +44,6 @@ package com.liferay.portlet.polls.service;
  *
  * @author Brian Wing Shun Chan
  *
- * @see com.liferay.portlet.polls.service.PollsQuestionLocalServiceFactory
  * @see com.liferay.portlet.polls.service.PollsQuestionLocalServiceUtil
  *
  */

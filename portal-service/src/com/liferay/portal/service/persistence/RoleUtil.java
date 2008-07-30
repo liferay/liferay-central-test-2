@@ -508,22 +508,12 @@ public class RoleUtil {
 	}
 
 	public static RolePersistence getPersistence() {
-		return _getUtil()._persistence;
+		return _persistence;
 	}
 
 	public void setPersistence(RolePersistence persistence) {
 		_persistence = persistence;
 	}
 
-	private static RoleUtil _getUtil() {
-		if (_util == null) {
-			_util = (RoleUtil)com.liferay.portal.kernel.bean.PortalBeanLocatorUtil.locate(_UTIL);
-		}
-
-		return _util;
-	}
-
-	private static final String _UTIL = RoleUtil.class.getName();
-	private static RoleUtil _util;
-	private RolePersistence _persistence;
+	private static RolePersistence _persistence;
 }

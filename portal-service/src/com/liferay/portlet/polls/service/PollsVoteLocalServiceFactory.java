@@ -22,6 +22,7 @@
 
 package com.liferay.portlet.polls.service;
 
+import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
 
 /**
  * <a href="PollsVoteLocalServiceFactory.java.html"><b><i>View Source</i></b></a>
@@ -51,33 +52,45 @@ package com.liferay.portlet.polls.service;
  *
  */
 public class PollsVoteLocalServiceFactory {
+	/**
+	 * @deprecated
+	 */
 	public static PollsVoteLocalService getService() {
 		return _getFactory()._service;
 	}
 
+	/**
+	 * @deprecated
+	 */
 	public static PollsVoteLocalService getImpl() {
 		if (_impl == null) {
-			_impl = (PollsVoteLocalService)com.liferay.portal.kernel.bean.PortalBeanLocatorUtil.locate(_IMPL);
+			_impl = (PollsVoteLocalService)PortalBeanLocatorUtil.locate(_IMPL);
 		}
 
 		return _impl;
 	}
 
+	/**
+	 * @deprecated
+	 */
 	public static PollsVoteLocalService getTxImpl() {
 		if (_txImpl == null) {
-			_txImpl = (PollsVoteLocalService)com.liferay.portal.kernel.bean.PortalBeanLocatorUtil.locate(_TX_IMPL);
+			_txImpl = (PollsVoteLocalService)PortalBeanLocatorUtil.locate(_TX_IMPL);
 		}
 
 		return _txImpl;
 	}
 
+	/**
+	 * @deprecated
+	 */
 	public void setService(PollsVoteLocalService service) {
 		_service = service;
 	}
 
 	private static PollsVoteLocalServiceFactory _getFactory() {
 		if (_factory == null) {
-			_factory = (PollsVoteLocalServiceFactory)com.liferay.portal.kernel.bean.PortalBeanLocatorUtil.locate(_FACTORY);
+			_factory = (PollsVoteLocalServiceFactory)PortalBeanLocatorUtil.locate(_FACTORY);
 		}
 
 		return _factory;

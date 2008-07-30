@@ -361,22 +361,12 @@ public class UserGroupUtil {
 	}
 
 	public static UserGroupPersistence getPersistence() {
-		return _getUtil()._persistence;
+		return _persistence;
 	}
 
 	public void setPersistence(UserGroupPersistence persistence) {
 		_persistence = persistence;
 	}
 
-	private static UserGroupUtil _getUtil() {
-		if (_util == null) {
-			_util = (UserGroupUtil)com.liferay.portal.kernel.bean.PortalBeanLocatorUtil.locate(_UTIL);
-		}
-
-		return _util;
-	}
-
-	private static final String _UTIL = UserGroupUtil.class.getName();
-	private static UserGroupUtil _util;
-	private UserGroupPersistence _persistence;
+	private static UserGroupPersistence _persistence;
 }

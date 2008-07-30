@@ -39,15 +39,9 @@ package com.liferay.portlet.shopping.service;
  * on a bean instead of writing a lookup call and a method call.
  * </p>
  *
- * <p>
- * <code>com.liferay.portlet.shopping.service.ShoppingCategoryServiceFactory</code>
- * is responsible for the lookup of the bean.
- * </p>
- *
  * @author Brian Wing Shun Chan
  *
  * @see com.liferay.portlet.shopping.service.ShoppingCategoryService
- * @see com.liferay.portlet.shopping.service.ShoppingCategoryServiceFactory
  *
  */
 public class ShoppingCategoryServiceUtil {
@@ -57,10 +51,8 @@ public class ShoppingCategoryServiceUtil {
 		boolean addGuestPermissions)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
-		ShoppingCategoryService shoppingCategoryService = ShoppingCategoryServiceFactory.getService();
-
-		return shoppingCategoryService.addCategory(plid, parentCategoryId,
-			name, description, addCommunityPermissions, addGuestPermissions);
+		return _service.addCategory(plid, parentCategoryId, name, description,
+			addCommunityPermissions, addGuestPermissions);
 	}
 
 	public static com.liferay.portlet.shopping.model.ShoppingCategory addCategory(
@@ -69,27 +61,21 @@ public class ShoppingCategoryServiceUtil {
 		java.lang.String[] guestPermissions)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
-		ShoppingCategoryService shoppingCategoryService = ShoppingCategoryServiceFactory.getService();
-
-		return shoppingCategoryService.addCategory(plid, parentCategoryId,
-			name, description, communityPermissions, guestPermissions);
+		return _service.addCategory(plid, parentCategoryId, name, description,
+			communityPermissions, guestPermissions);
 	}
 
 	public static void deleteCategory(long categoryId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
-		ShoppingCategoryService shoppingCategoryService = ShoppingCategoryServiceFactory.getService();
-
-		shoppingCategoryService.deleteCategory(categoryId);
+		_service.deleteCategory(categoryId);
 	}
 
 	public static com.liferay.portlet.shopping.model.ShoppingCategory getCategory(
 		long categoryId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
-		ShoppingCategoryService shoppingCategoryService = ShoppingCategoryServiceFactory.getService();
-
-		return shoppingCategoryService.getCategory(categoryId);
+		return _service.getCategory(categoryId);
 	}
 
 	public static com.liferay.portlet.shopping.model.ShoppingCategory updateCategory(
@@ -97,9 +83,17 @@ public class ShoppingCategoryServiceUtil {
 		java.lang.String description, boolean mergeWithParentCategory)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
-		ShoppingCategoryService shoppingCategoryService = ShoppingCategoryServiceFactory.getService();
-
-		return shoppingCategoryService.updateCategory(categoryId,
-			parentCategoryId, name, description, mergeWithParentCategory);
+		return _service.updateCategory(categoryId, parentCategoryId, name,
+			description, mergeWithParentCategory);
 	}
+
+	public static ShoppingCategoryService getService() {
+		return _service;
+	}
+
+	public void setService(ShoppingCategoryService service) {
+		_service = service;
+	}
+
+	private static ShoppingCategoryService _service;
 }

@@ -191,22 +191,12 @@ public class PasswordTrackerUtil {
 	}
 
 	public static PasswordTrackerPersistence getPersistence() {
-		return _getUtil()._persistence;
+		return _persistence;
 	}
 
 	public void setPersistence(PasswordTrackerPersistence persistence) {
 		_persistence = persistence;
 	}
 
-	private static PasswordTrackerUtil _getUtil() {
-		if (_util == null) {
-			_util = (PasswordTrackerUtil)com.liferay.portal.kernel.bean.PortalBeanLocatorUtil.locate(_UTIL);
-		}
-
-		return _util;
-	}
-
-	private static final String _UTIL = PasswordTrackerUtil.class.getName();
-	private static PasswordTrackerUtil _util;
-	private PasswordTrackerPersistence _persistence;
+	private static PasswordTrackerPersistence _persistence;
 }

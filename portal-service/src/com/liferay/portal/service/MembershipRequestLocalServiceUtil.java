@@ -39,136 +39,108 @@ package com.liferay.portal.service;
  * on a bean instead of writing a lookup call and a method call.
  * </p>
  *
- * <p>
- * <code>com.liferay.portal.service.MembershipRequestLocalServiceFactory</code>
- * is responsible for the lookup of the bean.
- * </p>
- *
  * @author Brian Wing Shun Chan
  *
  * @see com.liferay.portal.service.MembershipRequestLocalService
- * @see com.liferay.portal.service.MembershipRequestLocalServiceFactory
  *
  */
 public class MembershipRequestLocalServiceUtil {
 	public static com.liferay.portal.model.MembershipRequest addMembershipRequest(
 		com.liferay.portal.model.MembershipRequest membershipRequest)
 		throws com.liferay.portal.SystemException {
-		MembershipRequestLocalService membershipRequestLocalService = MembershipRequestLocalServiceFactory.getService();
-
-		return membershipRequestLocalService.addMembershipRequest(membershipRequest);
+		return _service.addMembershipRequest(membershipRequest);
 	}
 
 	public static void deleteMembershipRequest(long membershipRequestId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		MembershipRequestLocalService membershipRequestLocalService = MembershipRequestLocalServiceFactory.getService();
-
-		membershipRequestLocalService.deleteMembershipRequest(membershipRequestId);
+		_service.deleteMembershipRequest(membershipRequestId);
 	}
 
 	public static void deleteMembershipRequest(
 		com.liferay.portal.model.MembershipRequest membershipRequest)
 		throws com.liferay.portal.SystemException {
-		MembershipRequestLocalService membershipRequestLocalService = MembershipRequestLocalServiceFactory.getService();
-
-		membershipRequestLocalService.deleteMembershipRequest(membershipRequest);
+		_service.deleteMembershipRequest(membershipRequest);
 	}
 
 	public static java.util.List<Object> dynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery)
 		throws com.liferay.portal.SystemException {
-		MembershipRequestLocalService membershipRequestLocalService = MembershipRequestLocalServiceFactory.getService();
-
-		return membershipRequestLocalService.dynamicQuery(dynamicQuery);
+		return _service.dynamicQuery(dynamicQuery);
 	}
 
 	public static java.util.List<Object> dynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery, int start,
 		int end) throws com.liferay.portal.SystemException {
-		MembershipRequestLocalService membershipRequestLocalService = MembershipRequestLocalServiceFactory.getService();
-
-		return membershipRequestLocalService.dynamicQuery(dynamicQuery, start,
-			end);
+		return _service.dynamicQuery(dynamicQuery, start, end);
 	}
 
 	public static com.liferay.portal.model.MembershipRequest getMembershipRequest(
 		long membershipRequestId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		MembershipRequestLocalService membershipRequestLocalService = MembershipRequestLocalServiceFactory.getService();
-
-		return membershipRequestLocalService.getMembershipRequest(membershipRequestId);
+		return _service.getMembershipRequest(membershipRequestId);
 	}
 
 	public static java.util.List<com.liferay.portal.model.MembershipRequest> getMembershipRequests(
 		int start, int end) throws com.liferay.portal.SystemException {
-		MembershipRequestLocalService membershipRequestLocalService = MembershipRequestLocalServiceFactory.getService();
-
-		return membershipRequestLocalService.getMembershipRequests(start, end);
+		return _service.getMembershipRequests(start, end);
 	}
 
 	public static int getMembershipRequestsCount()
 		throws com.liferay.portal.SystemException {
-		MembershipRequestLocalService membershipRequestLocalService = MembershipRequestLocalServiceFactory.getService();
-
-		return membershipRequestLocalService.getMembershipRequestsCount();
+		return _service.getMembershipRequestsCount();
 	}
 
 	public static com.liferay.portal.model.MembershipRequest updateMembershipRequest(
 		com.liferay.portal.model.MembershipRequest membershipRequest)
 		throws com.liferay.portal.SystemException {
-		MembershipRequestLocalService membershipRequestLocalService = MembershipRequestLocalServiceFactory.getService();
-
-		return membershipRequestLocalService.updateMembershipRequest(membershipRequest);
+		return _service.updateMembershipRequest(membershipRequest);
 	}
 
 	public static com.liferay.portal.model.MembershipRequest addMembershipRequest(
 		long userId, long groupId, java.lang.String comments)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		MembershipRequestLocalService membershipRequestLocalService = MembershipRequestLocalServiceFactory.getService();
-
-		return membershipRequestLocalService.addMembershipRequest(userId,
-			groupId, comments);
+		return _service.addMembershipRequest(userId, groupId, comments);
 	}
 
 	public static void deleteMembershipRequests(long groupId)
 		throws com.liferay.portal.SystemException {
-		MembershipRequestLocalService membershipRequestLocalService = MembershipRequestLocalServiceFactory.getService();
-
-		membershipRequestLocalService.deleteMembershipRequests(groupId);
+		_service.deleteMembershipRequests(groupId);
 	}
 
 	public static void deleteMembershipRequests(long groupId, int statusId)
 		throws com.liferay.portal.SystemException {
-		MembershipRequestLocalService membershipRequestLocalService = MembershipRequestLocalServiceFactory.getService();
-
-		membershipRequestLocalService.deleteMembershipRequests(groupId, statusId);
+		_service.deleteMembershipRequests(groupId, statusId);
 	}
 
 	public static java.util.List<com.liferay.portal.model.MembershipRequest> search(
 		long groupId, int status, int start, int end)
 		throws com.liferay.portal.SystemException {
-		MembershipRequestLocalService membershipRequestLocalService = MembershipRequestLocalServiceFactory.getService();
-
-		return membershipRequestLocalService.search(groupId, status, start, end);
+		return _service.search(groupId, status, start, end);
 	}
 
 	public static int searchCount(long groupId, int status)
 		throws com.liferay.portal.SystemException {
-		MembershipRequestLocalService membershipRequestLocalService = MembershipRequestLocalServiceFactory.getService();
-
-		return membershipRequestLocalService.searchCount(groupId, status);
+		return _service.searchCount(groupId, status);
 	}
 
 	public static void updateStatus(long replierUserId,
 		long membershipRequestId, java.lang.String replyComments, int statusId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		MembershipRequestLocalService membershipRequestLocalService = MembershipRequestLocalServiceFactory.getService();
-
-		membershipRequestLocalService.updateStatus(replierUserId,
-			membershipRequestId, replyComments, statusId);
+		_service.updateStatus(replierUserId, membershipRequestId,
+			replyComments, statusId);
 	}
+
+	public static MembershipRequestLocalService getService() {
+		return _service;
+	}
+
+	public void setService(MembershipRequestLocalService service) {
+		_service = service;
+	}
+
+	private static MembershipRequestLocalService _service;
 }

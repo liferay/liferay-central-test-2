@@ -247,22 +247,12 @@ public class ShoppingCategoryUtil {
 	}
 
 	public static ShoppingCategoryPersistence getPersistence() {
-		return _getUtil()._persistence;
+		return _persistence;
 	}
 
 	public void setPersistence(ShoppingCategoryPersistence persistence) {
 		_persistence = persistence;
 	}
 
-	private static ShoppingCategoryUtil _getUtil() {
-		if (_util == null) {
-			_util = (ShoppingCategoryUtil)com.liferay.portal.kernel.bean.PortalBeanLocatorUtil.locate(_UTIL);
-		}
-
-		return _util;
-	}
-
-	private static final String _UTIL = ShoppingCategoryUtil.class.getName();
-	private static ShoppingCategoryUtil _util;
-	private ShoppingCategoryPersistence _persistence;
+	private static ShoppingCategoryPersistence _persistence;
 }

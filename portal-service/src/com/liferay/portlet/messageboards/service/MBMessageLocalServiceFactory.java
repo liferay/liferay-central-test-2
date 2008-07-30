@@ -22,6 +22,7 @@
 
 package com.liferay.portlet.messageboards.service;
 
+import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
 
 /**
  * <a href="MBMessageLocalServiceFactory.java.html"><b><i>View Source</i></b></a>
@@ -51,33 +52,45 @@ package com.liferay.portlet.messageboards.service;
  *
  */
 public class MBMessageLocalServiceFactory {
+	/**
+	 * @deprecated
+	 */
 	public static MBMessageLocalService getService() {
 		return _getFactory()._service;
 	}
 
+	/**
+	 * @deprecated
+	 */
 	public static MBMessageLocalService getImpl() {
 		if (_impl == null) {
-			_impl = (MBMessageLocalService)com.liferay.portal.kernel.bean.PortalBeanLocatorUtil.locate(_IMPL);
+			_impl = (MBMessageLocalService)PortalBeanLocatorUtil.locate(_IMPL);
 		}
 
 		return _impl;
 	}
 
+	/**
+	 * @deprecated
+	 */
 	public static MBMessageLocalService getTxImpl() {
 		if (_txImpl == null) {
-			_txImpl = (MBMessageLocalService)com.liferay.portal.kernel.bean.PortalBeanLocatorUtil.locate(_TX_IMPL);
+			_txImpl = (MBMessageLocalService)PortalBeanLocatorUtil.locate(_TX_IMPL);
 		}
 
 		return _txImpl;
 	}
 
+	/**
+	 * @deprecated
+	 */
 	public void setService(MBMessageLocalService service) {
 		_service = service;
 	}
 
 	private static MBMessageLocalServiceFactory _getFactory() {
 		if (_factory == null) {
-			_factory = (MBMessageLocalServiceFactory)com.liferay.portal.kernel.bean.PortalBeanLocatorUtil.locate(_FACTORY);
+			_factory = (MBMessageLocalServiceFactory)PortalBeanLocatorUtil.locate(_FACTORY);
 		}
 
 		return _factory;

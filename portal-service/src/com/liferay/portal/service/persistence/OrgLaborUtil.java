@@ -193,22 +193,12 @@ public class OrgLaborUtil {
 	}
 
 	public static OrgLaborPersistence getPersistence() {
-		return _getUtil()._persistence;
+		return _persistence;
 	}
 
 	public void setPersistence(OrgLaborPersistence persistence) {
 		_persistence = persistence;
 	}
 
-	private static OrgLaborUtil _getUtil() {
-		if (_util == null) {
-			_util = (OrgLaborUtil)com.liferay.portal.kernel.bean.PortalBeanLocatorUtil.locate(_UTIL);
-		}
-
-		return _util;
-	}
-
-	private static final String _UTIL = OrgLaborUtil.class.getName();
-	private static OrgLaborUtil _util;
-	private OrgLaborPersistence _persistence;
+	private static OrgLaborPersistence _persistence;
 }

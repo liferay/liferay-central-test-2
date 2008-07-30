@@ -39,87 +39,63 @@ package com.liferay.portlet.polls.service;
  * on a bean instead of writing a lookup call and a method call.
  * </p>
  *
- * <p>
- * <code>com.liferay.portlet.polls.service.PollsQuestionLocalServiceFactory</code>
- * is responsible for the lookup of the bean.
- * </p>
- *
  * @author Brian Wing Shun Chan
  *
  * @see com.liferay.portlet.polls.service.PollsQuestionLocalService
- * @see com.liferay.portlet.polls.service.PollsQuestionLocalServiceFactory
  *
  */
 public class PollsQuestionLocalServiceUtil {
 	public static com.liferay.portlet.polls.model.PollsQuestion addPollsQuestion(
 		com.liferay.portlet.polls.model.PollsQuestion pollsQuestion)
 		throws com.liferay.portal.SystemException {
-		PollsQuestionLocalService pollsQuestionLocalService = PollsQuestionLocalServiceFactory.getService();
-
-		return pollsQuestionLocalService.addPollsQuestion(pollsQuestion);
+		return _service.addPollsQuestion(pollsQuestion);
 	}
 
 	public static void deletePollsQuestion(long questionId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		PollsQuestionLocalService pollsQuestionLocalService = PollsQuestionLocalServiceFactory.getService();
-
-		pollsQuestionLocalService.deletePollsQuestion(questionId);
+		_service.deletePollsQuestion(questionId);
 	}
 
 	public static void deletePollsQuestion(
 		com.liferay.portlet.polls.model.PollsQuestion pollsQuestion)
 		throws com.liferay.portal.SystemException {
-		PollsQuestionLocalService pollsQuestionLocalService = PollsQuestionLocalServiceFactory.getService();
-
-		pollsQuestionLocalService.deletePollsQuestion(pollsQuestion);
+		_service.deletePollsQuestion(pollsQuestion);
 	}
 
 	public static java.util.List<Object> dynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery)
 		throws com.liferay.portal.SystemException {
-		PollsQuestionLocalService pollsQuestionLocalService = PollsQuestionLocalServiceFactory.getService();
-
-		return pollsQuestionLocalService.dynamicQuery(dynamicQuery);
+		return _service.dynamicQuery(dynamicQuery);
 	}
 
 	public static java.util.List<Object> dynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery, int start,
 		int end) throws com.liferay.portal.SystemException {
-		PollsQuestionLocalService pollsQuestionLocalService = PollsQuestionLocalServiceFactory.getService();
-
-		return pollsQuestionLocalService.dynamicQuery(dynamicQuery, start, end);
+		return _service.dynamicQuery(dynamicQuery, start, end);
 	}
 
 	public static com.liferay.portlet.polls.model.PollsQuestion getPollsQuestion(
 		long questionId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		PollsQuestionLocalService pollsQuestionLocalService = PollsQuestionLocalServiceFactory.getService();
-
-		return pollsQuestionLocalService.getPollsQuestion(questionId);
+		return _service.getPollsQuestion(questionId);
 	}
 
 	public static java.util.List<com.liferay.portlet.polls.model.PollsQuestion> getPollsQuestions(
 		int start, int end) throws com.liferay.portal.SystemException {
-		PollsQuestionLocalService pollsQuestionLocalService = PollsQuestionLocalServiceFactory.getService();
-
-		return pollsQuestionLocalService.getPollsQuestions(start, end);
+		return _service.getPollsQuestions(start, end);
 	}
 
 	public static int getPollsQuestionsCount()
 		throws com.liferay.portal.SystemException {
-		PollsQuestionLocalService pollsQuestionLocalService = PollsQuestionLocalServiceFactory.getService();
-
-		return pollsQuestionLocalService.getPollsQuestionsCount();
+		return _service.getPollsQuestionsCount();
 	}
 
 	public static com.liferay.portlet.polls.model.PollsQuestion updatePollsQuestion(
 		com.liferay.portlet.polls.model.PollsQuestion pollsQuestion)
 		throws com.liferay.portal.SystemException {
-		PollsQuestionLocalService pollsQuestionLocalService = PollsQuestionLocalServiceFactory.getService();
-
-		return pollsQuestionLocalService.updatePollsQuestion(pollsQuestion);
+		return _service.updatePollsQuestion(pollsQuestion);
 	}
 
 	public static com.liferay.portlet.polls.model.PollsQuestion addQuestion(
@@ -130,12 +106,10 @@ public class PollsQuestionLocalServiceUtil {
 		boolean addCommunityPermissions, boolean addGuestPermissions)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		PollsQuestionLocalService pollsQuestionLocalService = PollsQuestionLocalServiceFactory.getService();
-
-		return pollsQuestionLocalService.addQuestion(userId, plid, title,
-			description, expirationDateMonth, expirationDateDay,
-			expirationDateYear, expirationDateHour, expirationDateMinute,
-			neverExpire, addCommunityPermissions, addGuestPermissions);
+		return _service.addQuestion(userId, plid, title, description,
+			expirationDateMonth, expirationDateDay, expirationDateYear,
+			expirationDateHour, expirationDateMinute, neverExpire,
+			addCommunityPermissions, addGuestPermissions);
 	}
 
 	public static com.liferay.portlet.polls.model.PollsQuestion addQuestion(
@@ -146,12 +120,10 @@ public class PollsQuestionLocalServiceUtil {
 		boolean addCommunityPermissions, boolean addGuestPermissions)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		PollsQuestionLocalService pollsQuestionLocalService = PollsQuestionLocalServiceFactory.getService();
-
-		return pollsQuestionLocalService.addQuestion(uuid, userId, plid, title,
-			description, expirationDateMonth, expirationDateDay,
-			expirationDateYear, expirationDateHour, expirationDateMinute,
-			neverExpire, addCommunityPermissions, addGuestPermissions);
+		return _service.addQuestion(uuid, userId, plid, title, description,
+			expirationDateMonth, expirationDateDay, expirationDateYear,
+			expirationDateHour, expirationDateMinute, neverExpire,
+			addCommunityPermissions, addGuestPermissions);
 	}
 
 	public static com.liferay.portlet.polls.model.PollsQuestion addQuestion(
@@ -163,12 +135,10 @@ public class PollsQuestionLocalServiceUtil {
 		boolean addCommunityPermissions, boolean addGuestPermissions)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		PollsQuestionLocalService pollsQuestionLocalService = PollsQuestionLocalServiceFactory.getService();
-
-		return pollsQuestionLocalService.addQuestion(userId, plid, title,
-			description, expirationDateMonth, expirationDateDay,
-			expirationDateYear, expirationDateHour, expirationDateMinute,
-			neverExpire, choices, addCommunityPermissions, addGuestPermissions);
+		return _service.addQuestion(userId, plid, title, description,
+			expirationDateMonth, expirationDateDay, expirationDateYear,
+			expirationDateHour, expirationDateMinute, neverExpire, choices,
+			addCommunityPermissions, addGuestPermissions);
 	}
 
 	public static com.liferay.portlet.polls.model.PollsQuestion addQuestion(
@@ -181,12 +151,10 @@ public class PollsQuestionLocalServiceUtil {
 		java.lang.String[] guestPermissions)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		PollsQuestionLocalService pollsQuestionLocalService = PollsQuestionLocalServiceFactory.getService();
-
-		return pollsQuestionLocalService.addQuestion(userId, plid, title,
-			description, expirationDateMonth, expirationDateDay,
-			expirationDateYear, expirationDateHour, expirationDateMinute,
-			neverExpire, choices, communityPermissions, guestPermissions);
+		return _service.addQuestion(userId, plid, title, description,
+			expirationDateMonth, expirationDateDay, expirationDateYear,
+			expirationDateHour, expirationDateMinute, neverExpire, choices,
+			communityPermissions, guestPermissions);
 	}
 
 	public static com.liferay.portlet.polls.model.PollsQuestion addQuestion(
@@ -201,23 +169,19 @@ public class PollsQuestionLocalServiceUtil {
 		java.lang.String[] guestPermissions)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		PollsQuestionLocalService pollsQuestionLocalService = PollsQuestionLocalServiceFactory.getService();
-
-		return pollsQuestionLocalService.addQuestion(uuid, userId, plid, title,
-			description, expirationDateMonth, expirationDateDay,
-			expirationDateYear, expirationDateHour, expirationDateMinute,
-			neverExpire, choices, addCommunityPermissions, addGuestPermissions,
-			communityPermissions, guestPermissions);
+		return _service.addQuestion(uuid, userId, plid, title, description,
+			expirationDateMonth, expirationDateDay, expirationDateYear,
+			expirationDateHour, expirationDateMinute, neverExpire, choices,
+			addCommunityPermissions, addGuestPermissions, communityPermissions,
+			guestPermissions);
 	}
 
 	public static void addQuestionResources(long questionId,
 		boolean addCommunityPermissions, boolean addGuestPermissions)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		PollsQuestionLocalService pollsQuestionLocalService = PollsQuestionLocalServiceFactory.getService();
-
-		pollsQuestionLocalService.addQuestionResources(questionId,
-			addCommunityPermissions, addGuestPermissions);
+		_service.addQuestionResources(questionId, addCommunityPermissions,
+			addGuestPermissions);
 	}
 
 	public static void addQuestionResources(
@@ -225,10 +189,8 @@ public class PollsQuestionLocalServiceUtil {
 		boolean addCommunityPermissions, boolean addGuestPermissions)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		PollsQuestionLocalService pollsQuestionLocalService = PollsQuestionLocalServiceFactory.getService();
-
-		pollsQuestionLocalService.addQuestionResources(question,
-			addCommunityPermissions, addGuestPermissions);
+		_service.addQuestionResources(question, addCommunityPermissions,
+			addGuestPermissions);
 	}
 
 	public static void addQuestionResources(long questionId,
@@ -236,10 +198,8 @@ public class PollsQuestionLocalServiceUtil {
 		java.lang.String[] guestPermissions)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		PollsQuestionLocalService pollsQuestionLocalService = PollsQuestionLocalServiceFactory.getService();
-
-		pollsQuestionLocalService.addQuestionResources(questionId,
-			communityPermissions, guestPermissions);
+		_service.addQuestionResources(questionId, communityPermissions,
+			guestPermissions);
 	}
 
 	public static void addQuestionResources(
@@ -248,66 +208,50 @@ public class PollsQuestionLocalServiceUtil {
 		java.lang.String[] guestPermissions)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		PollsQuestionLocalService pollsQuestionLocalService = PollsQuestionLocalServiceFactory.getService();
-
-		pollsQuestionLocalService.addQuestionResources(question,
-			communityPermissions, guestPermissions);
+		_service.addQuestionResources(question, communityPermissions,
+			guestPermissions);
 	}
 
 	public static void deleteQuestion(long questionId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		PollsQuestionLocalService pollsQuestionLocalService = PollsQuestionLocalServiceFactory.getService();
-
-		pollsQuestionLocalService.deleteQuestion(questionId);
+		_service.deleteQuestion(questionId);
 	}
 
 	public static void deleteQuestion(
 		com.liferay.portlet.polls.model.PollsQuestion question)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		PollsQuestionLocalService pollsQuestionLocalService = PollsQuestionLocalServiceFactory.getService();
-
-		pollsQuestionLocalService.deleteQuestion(question);
+		_service.deleteQuestion(question);
 	}
 
 	public static void deleteQuestions(long groupId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		PollsQuestionLocalService pollsQuestionLocalService = PollsQuestionLocalServiceFactory.getService();
-
-		pollsQuestionLocalService.deleteQuestions(groupId);
+		_service.deleteQuestions(groupId);
 	}
 
 	public static com.liferay.portlet.polls.model.PollsQuestion getQuestion(
 		long questionId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		PollsQuestionLocalService pollsQuestionLocalService = PollsQuestionLocalServiceFactory.getService();
-
-		return pollsQuestionLocalService.getQuestion(questionId);
+		return _service.getQuestion(questionId);
 	}
 
 	public static java.util.List<com.liferay.portlet.polls.model.PollsQuestion> getQuestions(
 		long groupId) throws com.liferay.portal.SystemException {
-		PollsQuestionLocalService pollsQuestionLocalService = PollsQuestionLocalServiceFactory.getService();
-
-		return pollsQuestionLocalService.getQuestions(groupId);
+		return _service.getQuestions(groupId);
 	}
 
 	public static java.util.List<com.liferay.portlet.polls.model.PollsQuestion> getQuestions(
 		long groupId, int start, int end)
 		throws com.liferay.portal.SystemException {
-		PollsQuestionLocalService pollsQuestionLocalService = PollsQuestionLocalServiceFactory.getService();
-
-		return pollsQuestionLocalService.getQuestions(groupId, start, end);
+		return _service.getQuestions(groupId, start, end);
 	}
 
 	public static int getQuestionsCount(long groupId)
 		throws com.liferay.portal.SystemException {
-		PollsQuestionLocalService pollsQuestionLocalService = PollsQuestionLocalServiceFactory.getService();
-
-		return pollsQuestionLocalService.getQuestionsCount(groupId);
+		return _service.getQuestionsCount(groupId);
 	}
 
 	public static com.liferay.portlet.polls.model.PollsQuestion updateQuestion(
@@ -317,12 +261,9 @@ public class PollsQuestionLocalServiceUtil {
 		int expirationDateMinute, boolean neverExpire)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		PollsQuestionLocalService pollsQuestionLocalService = PollsQuestionLocalServiceFactory.getService();
-
-		return pollsQuestionLocalService.updateQuestion(userId, questionId,
-			title, description, expirationDateMonth, expirationDateDay,
-			expirationDateYear, expirationDateHour, expirationDateMinute,
-			neverExpire);
+		return _service.updateQuestion(userId, questionId, title, description,
+			expirationDateMonth, expirationDateDay, expirationDateYear,
+			expirationDateHour, expirationDateMinute, neverExpire);
 	}
 
 	public static com.liferay.portlet.polls.model.PollsQuestion updateQuestion(
@@ -333,11 +274,18 @@ public class PollsQuestionLocalServiceUtil {
 		java.util.List<com.liferay.portlet.polls.model.PollsChoice> choices)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		PollsQuestionLocalService pollsQuestionLocalService = PollsQuestionLocalServiceFactory.getService();
-
-		return pollsQuestionLocalService.updateQuestion(userId, questionId,
-			title, description, expirationDateMonth, expirationDateDay,
-			expirationDateYear, expirationDateHour, expirationDateMinute,
-			neverExpire, choices);
+		return _service.updateQuestion(userId, questionId, title, description,
+			expirationDateMonth, expirationDateDay, expirationDateYear,
+			expirationDateHour, expirationDateMinute, neverExpire, choices);
 	}
+
+	public static PollsQuestionLocalService getService() {
+		return _service;
+	}
+
+	public void setService(PollsQuestionLocalService service) {
+		_service = service;
+	}
+
+	private static PollsQuestionLocalService _service;
 }

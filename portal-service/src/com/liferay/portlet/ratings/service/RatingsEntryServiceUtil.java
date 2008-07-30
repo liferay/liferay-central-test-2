@@ -39,32 +39,32 @@ package com.liferay.portlet.ratings.service;
  * on a bean instead of writing a lookup call and a method call.
  * </p>
  *
- * <p>
- * <code>com.liferay.portlet.ratings.service.RatingsEntryServiceFactory</code>
- * is responsible for the lookup of the bean.
- * </p>
- *
  * @author Brian Wing Shun Chan
  *
  * @see com.liferay.portlet.ratings.service.RatingsEntryService
- * @see com.liferay.portlet.ratings.service.RatingsEntryServiceFactory
  *
  */
 public class RatingsEntryServiceUtil {
 	public static void deleteEntry(java.lang.String className, long classPK)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
-		RatingsEntryService ratingsEntryService = RatingsEntryServiceFactory.getService();
-
-		ratingsEntryService.deleteEntry(className, classPK);
+		_service.deleteEntry(className, classPK);
 	}
 
 	public static com.liferay.portlet.ratings.model.RatingsEntry updateEntry(
 		java.lang.String className, long classPK, double score)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
-		RatingsEntryService ratingsEntryService = RatingsEntryServiceFactory.getService();
-
-		return ratingsEntryService.updateEntry(className, classPK, score);
+		return _service.updateEntry(className, classPK, score);
 	}
+
+	public static RatingsEntryService getService() {
+		return _service;
+	}
+
+	public void setService(RatingsEntryService service) {
+		_service = service;
+	}
+
+	private static RatingsEntryService _service;
 }

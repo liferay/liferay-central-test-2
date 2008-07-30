@@ -41,22 +41,12 @@ public class MBCategoryFinderUtil {
 	}
 
 	public static MBCategoryFinder getFinder() {
-		return _getUtil()._finder;
+		return _finder;
 	}
 
 	public void setFinder(MBCategoryFinder finder) {
 		_finder = finder;
 	}
 
-	private static MBCategoryFinderUtil _getUtil() {
-		if (_util == null) {
-			_util = (MBCategoryFinderUtil)com.liferay.portal.kernel.bean.PortalBeanLocatorUtil.locate(_UTIL);
-		}
-
-		return _util;
-	}
-
-	private static final String _UTIL = MBCategoryFinderUtil.class.getName();
-	private static MBCategoryFinderUtil _util;
-	private MBCategoryFinder _finder;
+	private static MBCategoryFinder _finder;
 }

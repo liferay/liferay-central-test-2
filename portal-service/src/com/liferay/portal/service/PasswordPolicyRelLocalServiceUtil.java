@@ -39,159 +39,124 @@ package com.liferay.portal.service;
  * on a bean instead of writing a lookup call and a method call.
  * </p>
  *
- * <p>
- * <code>com.liferay.portal.service.PasswordPolicyRelLocalServiceFactory</code>
- * is responsible for the lookup of the bean.
- * </p>
- *
  * @author Brian Wing Shun Chan
  *
  * @see com.liferay.portal.service.PasswordPolicyRelLocalService
- * @see com.liferay.portal.service.PasswordPolicyRelLocalServiceFactory
  *
  */
 public class PasswordPolicyRelLocalServiceUtil {
 	public static com.liferay.portal.model.PasswordPolicyRel addPasswordPolicyRel(
 		com.liferay.portal.model.PasswordPolicyRel passwordPolicyRel)
 		throws com.liferay.portal.SystemException {
-		PasswordPolicyRelLocalService passwordPolicyRelLocalService = PasswordPolicyRelLocalServiceFactory.getService();
-
-		return passwordPolicyRelLocalService.addPasswordPolicyRel(passwordPolicyRel);
+		return _service.addPasswordPolicyRel(passwordPolicyRel);
 	}
 
 	public static void deletePasswordPolicyRel(long passwordPolicyRelId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		PasswordPolicyRelLocalService passwordPolicyRelLocalService = PasswordPolicyRelLocalServiceFactory.getService();
-
-		passwordPolicyRelLocalService.deletePasswordPolicyRel(passwordPolicyRelId);
+		_service.deletePasswordPolicyRel(passwordPolicyRelId);
 	}
 
 	public static void deletePasswordPolicyRel(
 		com.liferay.portal.model.PasswordPolicyRel passwordPolicyRel)
 		throws com.liferay.portal.SystemException {
-		PasswordPolicyRelLocalService passwordPolicyRelLocalService = PasswordPolicyRelLocalServiceFactory.getService();
-
-		passwordPolicyRelLocalService.deletePasswordPolicyRel(passwordPolicyRel);
+		_service.deletePasswordPolicyRel(passwordPolicyRel);
 	}
 
 	public static java.util.List<Object> dynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery)
 		throws com.liferay.portal.SystemException {
-		PasswordPolicyRelLocalService passwordPolicyRelLocalService = PasswordPolicyRelLocalServiceFactory.getService();
-
-		return passwordPolicyRelLocalService.dynamicQuery(dynamicQuery);
+		return _service.dynamicQuery(dynamicQuery);
 	}
 
 	public static java.util.List<Object> dynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery, int start,
 		int end) throws com.liferay.portal.SystemException {
-		PasswordPolicyRelLocalService passwordPolicyRelLocalService = PasswordPolicyRelLocalServiceFactory.getService();
-
-		return passwordPolicyRelLocalService.dynamicQuery(dynamicQuery, start,
-			end);
+		return _service.dynamicQuery(dynamicQuery, start, end);
 	}
 
 	public static com.liferay.portal.model.PasswordPolicyRel getPasswordPolicyRel(
 		long passwordPolicyRelId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		PasswordPolicyRelLocalService passwordPolicyRelLocalService = PasswordPolicyRelLocalServiceFactory.getService();
-
-		return passwordPolicyRelLocalService.getPasswordPolicyRel(passwordPolicyRelId);
+		return _service.getPasswordPolicyRel(passwordPolicyRelId);
 	}
 
 	public static java.util.List<com.liferay.portal.model.PasswordPolicyRel> getPasswordPolicyRels(
 		int start, int end) throws com.liferay.portal.SystemException {
-		PasswordPolicyRelLocalService passwordPolicyRelLocalService = PasswordPolicyRelLocalServiceFactory.getService();
-
-		return passwordPolicyRelLocalService.getPasswordPolicyRels(start, end);
+		return _service.getPasswordPolicyRels(start, end);
 	}
 
 	public static int getPasswordPolicyRelsCount()
 		throws com.liferay.portal.SystemException {
-		PasswordPolicyRelLocalService passwordPolicyRelLocalService = PasswordPolicyRelLocalServiceFactory.getService();
-
-		return passwordPolicyRelLocalService.getPasswordPolicyRelsCount();
+		return _service.getPasswordPolicyRelsCount();
 	}
 
 	public static com.liferay.portal.model.PasswordPolicyRel updatePasswordPolicyRel(
 		com.liferay.portal.model.PasswordPolicyRel passwordPolicyRel)
 		throws com.liferay.portal.SystemException {
-		PasswordPolicyRelLocalService passwordPolicyRelLocalService = PasswordPolicyRelLocalServiceFactory.getService();
-
-		return passwordPolicyRelLocalService.updatePasswordPolicyRel(passwordPolicyRel);
+		return _service.updatePasswordPolicyRel(passwordPolicyRel);
 	}
 
 	public static com.liferay.portal.model.PasswordPolicyRel addPasswordPolicyRel(
 		long passwordPolicyId, java.lang.String className, long classPK)
 		throws com.liferay.portal.SystemException {
-		PasswordPolicyRelLocalService passwordPolicyRelLocalService = PasswordPolicyRelLocalServiceFactory.getService();
-
-		return passwordPolicyRelLocalService.addPasswordPolicyRel(passwordPolicyId,
-			className, classPK);
+		return _service.addPasswordPolicyRel(passwordPolicyId, className,
+			classPK);
 	}
 
 	public static void addPasswordPolicyRels(long passwordPolicyId,
 		java.lang.String className, long[] classPKs)
 		throws com.liferay.portal.SystemException {
-		PasswordPolicyRelLocalService passwordPolicyRelLocalService = PasswordPolicyRelLocalServiceFactory.getService();
-
-		passwordPolicyRelLocalService.addPasswordPolicyRels(passwordPolicyId,
-			className, classPKs);
+		_service.addPasswordPolicyRels(passwordPolicyId, className, classPKs);
 	}
 
 	public static void deletePasswordPolicyRel(java.lang.String className,
 		long classPK) throws com.liferay.portal.SystemException {
-		PasswordPolicyRelLocalService passwordPolicyRelLocalService = PasswordPolicyRelLocalServiceFactory.getService();
-
-		passwordPolicyRelLocalService.deletePasswordPolicyRel(className, classPK);
+		_service.deletePasswordPolicyRel(className, classPK);
 	}
 
 	public static void deletePasswordPolicyRel(long passwordPolicyId,
 		java.lang.String className, long classPK)
 		throws com.liferay.portal.SystemException {
-		PasswordPolicyRelLocalService passwordPolicyRelLocalService = PasswordPolicyRelLocalServiceFactory.getService();
-
-		passwordPolicyRelLocalService.deletePasswordPolicyRel(passwordPolicyId,
-			className, classPK);
+		_service.deletePasswordPolicyRel(passwordPolicyId, className, classPK);
 	}
 
 	public static void deletePasswordPolicyRels(long passwordPolicyId,
 		java.lang.String className, long[] classPKs)
 		throws com.liferay.portal.SystemException {
-		PasswordPolicyRelLocalService passwordPolicyRelLocalService = PasswordPolicyRelLocalServiceFactory.getService();
-
-		passwordPolicyRelLocalService.deletePasswordPolicyRels(passwordPolicyId,
-			className, classPKs);
+		_service.deletePasswordPolicyRels(passwordPolicyId, className, classPKs);
 	}
 
 	public static com.liferay.portal.model.PasswordPolicyRel getPasswordPolicyRel(
 		java.lang.String className, long classPK)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		PasswordPolicyRelLocalService passwordPolicyRelLocalService = PasswordPolicyRelLocalServiceFactory.getService();
-
-		return passwordPolicyRelLocalService.getPasswordPolicyRel(className,
-			classPK);
+		return _service.getPasswordPolicyRel(className, classPK);
 	}
 
 	public static com.liferay.portal.model.PasswordPolicyRel getPasswordPolicyRel(
 		long passwordPolicyId, java.lang.String className, long classPK)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		PasswordPolicyRelLocalService passwordPolicyRelLocalService = PasswordPolicyRelLocalServiceFactory.getService();
-
-		return passwordPolicyRelLocalService.getPasswordPolicyRel(passwordPolicyId,
-			className, classPK);
+		return _service.getPasswordPolicyRel(passwordPolicyId, className,
+			classPK);
 	}
 
 	public static boolean hasPasswordPolicyRel(long passwordPolicyId,
 		java.lang.String className, long classPK)
 		throws com.liferay.portal.SystemException {
-		PasswordPolicyRelLocalService passwordPolicyRelLocalService = PasswordPolicyRelLocalServiceFactory.getService();
-
-		return passwordPolicyRelLocalService.hasPasswordPolicyRel(passwordPolicyId,
-			className, classPK);
+		return _service.hasPasswordPolicyRel(passwordPolicyId, className,
+			classPK);
 	}
+
+	public static PasswordPolicyRelLocalService getService() {
+		return _service;
+	}
+
+	public void setService(PasswordPolicyRelLocalService service) {
+		_service = service;
+	}
+
+	private static PasswordPolicyRelLocalService _service;
 }

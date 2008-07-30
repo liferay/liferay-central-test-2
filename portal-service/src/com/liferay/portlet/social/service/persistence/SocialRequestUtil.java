@@ -619,22 +619,12 @@ public class SocialRequestUtil {
 	}
 
 	public static SocialRequestPersistence getPersistence() {
-		return _getUtil()._persistence;
+		return _persistence;
 	}
 
 	public void setPersistence(SocialRequestPersistence persistence) {
 		_persistence = persistence;
 	}
 
-	private static SocialRequestUtil _getUtil() {
-		if (_util == null) {
-			_util = (SocialRequestUtil)com.liferay.portal.kernel.bean.PortalBeanLocatorUtil.locate(_UTIL);
-		}
-
-		return _util;
-	}
-
-	private static final String _UTIL = SocialRequestUtil.class.getName();
-	private static SocialRequestUtil _util;
-	private SocialRequestPersistence _persistence;
+	private static SocialRequestPersistence _persistence;
 }

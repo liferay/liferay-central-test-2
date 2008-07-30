@@ -22,6 +22,7 @@
 
 package com.liferay.portlet.imagegallery.service;
 
+import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
 
 /**
  * <a href="IGFolderLocalServiceFactory.java.html"><b><i>View Source</i></b></a>
@@ -51,33 +52,45 @@ package com.liferay.portlet.imagegallery.service;
  *
  */
 public class IGFolderLocalServiceFactory {
+	/**
+	 * @deprecated
+	 */
 	public static IGFolderLocalService getService() {
 		return _getFactory()._service;
 	}
 
+	/**
+	 * @deprecated
+	 */
 	public static IGFolderLocalService getImpl() {
 		if (_impl == null) {
-			_impl = (IGFolderLocalService)com.liferay.portal.kernel.bean.PortalBeanLocatorUtil.locate(_IMPL);
+			_impl = (IGFolderLocalService)PortalBeanLocatorUtil.locate(_IMPL);
 		}
 
 		return _impl;
 	}
 
+	/**
+	 * @deprecated
+	 */
 	public static IGFolderLocalService getTxImpl() {
 		if (_txImpl == null) {
-			_txImpl = (IGFolderLocalService)com.liferay.portal.kernel.bean.PortalBeanLocatorUtil.locate(_TX_IMPL);
+			_txImpl = (IGFolderLocalService)PortalBeanLocatorUtil.locate(_TX_IMPL);
 		}
 
 		return _txImpl;
 	}
 
+	/**
+	 * @deprecated
+	 */
 	public void setService(IGFolderLocalService service) {
 		_service = service;
 	}
 
 	private static IGFolderLocalServiceFactory _getFactory() {
 		if (_factory == null) {
-			_factory = (IGFolderLocalServiceFactory)com.liferay.portal.kernel.bean.PortalBeanLocatorUtil.locate(_FACTORY);
+			_factory = (IGFolderLocalServiceFactory)PortalBeanLocatorUtil.locate(_FACTORY);
 		}
 
 		return _factory;

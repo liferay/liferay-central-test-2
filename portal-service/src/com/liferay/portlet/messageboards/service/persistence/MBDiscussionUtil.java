@@ -215,22 +215,12 @@ public class MBDiscussionUtil {
 	}
 
 	public static MBDiscussionPersistence getPersistence() {
-		return _getUtil()._persistence;
+		return _persistence;
 	}
 
 	public void setPersistence(MBDiscussionPersistence persistence) {
 		_persistence = persistence;
 	}
 
-	private static MBDiscussionUtil _getUtil() {
-		if (_util == null) {
-			_util = (MBDiscussionUtil)com.liferay.portal.kernel.bean.PortalBeanLocatorUtil.locate(_UTIL);
-		}
-
-		return _util;
-	}
-
-	private static final String _UTIL = MBDiscussionUtil.class.getName();
-	private static MBDiscussionUtil _util;
-	private MBDiscussionPersistence _persistence;
+	private static MBDiscussionPersistence _persistence;
 }

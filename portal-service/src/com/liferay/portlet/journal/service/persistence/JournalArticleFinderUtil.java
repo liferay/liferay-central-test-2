@@ -175,22 +175,12 @@ public class JournalArticleFinderUtil {
 	}
 
 	public static JournalArticleFinder getFinder() {
-		return _getUtil()._finder;
+		return _finder;
 	}
 
 	public void setFinder(JournalArticleFinder finder) {
 		_finder = finder;
 	}
 
-	private static JournalArticleFinderUtil _getUtil() {
-		if (_util == null) {
-			_util = (JournalArticleFinderUtil)com.liferay.portal.kernel.bean.PortalBeanLocatorUtil.locate(_UTIL);
-		}
-
-		return _util;
-	}
-
-	private static final String _UTIL = JournalArticleFinderUtil.class.getName();
-	private static JournalArticleFinderUtil _util;
-	private JournalArticleFinder _finder;
+	private static JournalArticleFinder _finder;
 }

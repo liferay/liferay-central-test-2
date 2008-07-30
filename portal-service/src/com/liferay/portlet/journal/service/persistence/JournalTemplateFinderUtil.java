@@ -95,22 +95,12 @@ public class JournalTemplateFinderUtil {
 	}
 
 	public static JournalTemplateFinder getFinder() {
-		return _getUtil()._finder;
+		return _finder;
 	}
 
 	public void setFinder(JournalTemplateFinder finder) {
 		_finder = finder;
 	}
 
-	private static JournalTemplateFinderUtil _getUtil() {
-		if (_util == null) {
-			_util = (JournalTemplateFinderUtil)com.liferay.portal.kernel.bean.PortalBeanLocatorUtil.locate(_UTIL);
-		}
-
-		return _util;
-	}
-
-	private static final String _UTIL = JournalTemplateFinderUtil.class.getName();
-	private static JournalTemplateFinderUtil _util;
-	private JournalTemplateFinder _finder;
+	private static JournalTemplateFinder _finder;
 }

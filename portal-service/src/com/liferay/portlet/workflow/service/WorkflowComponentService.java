@@ -44,7 +44,6 @@ package com.liferay.portlet.workflow.service;
  *
  * @author Brian Wing Shun Chan
  *
- * @see com.liferay.portlet.workflow.service.WorkflowComponentServiceFactory
  * @see com.liferay.portlet.workflow.service.WorkflowComponentServiceUtil
  *
  */

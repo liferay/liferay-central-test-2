@@ -23,59 +23,37 @@
 package com.liferay.portlet.journal.service.base;
 
 import com.liferay.counter.service.CounterLocalService;
-import com.liferay.counter.service.CounterLocalServiceFactory;
 import com.liferay.counter.service.CounterService;
-import com.liferay.counter.service.CounterServiceFactory;
 
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.bean.InitializingBean;
+import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
 import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 
 import com.liferay.portlet.journal.model.JournalArticleResource;
 import com.liferay.portlet.journal.service.JournalArticleImageLocalService;
-import com.liferay.portlet.journal.service.JournalArticleImageLocalServiceFactory;
 import com.liferay.portlet.journal.service.JournalArticleLocalService;
-import com.liferay.portlet.journal.service.JournalArticleLocalServiceFactory;
 import com.liferay.portlet.journal.service.JournalArticleResourceLocalService;
 import com.liferay.portlet.journal.service.JournalArticleService;
-import com.liferay.portlet.journal.service.JournalArticleServiceFactory;
 import com.liferay.portlet.journal.service.JournalContentSearchLocalService;
-import com.liferay.portlet.journal.service.JournalContentSearchLocalServiceFactory;
 import com.liferay.portlet.journal.service.JournalFeedLocalService;
-import com.liferay.portlet.journal.service.JournalFeedLocalServiceFactory;
 import com.liferay.portlet.journal.service.JournalFeedService;
-import com.liferay.portlet.journal.service.JournalFeedServiceFactory;
 import com.liferay.portlet.journal.service.JournalStructureLocalService;
-import com.liferay.portlet.journal.service.JournalStructureLocalServiceFactory;
 import com.liferay.portlet.journal.service.JournalStructureService;
-import com.liferay.portlet.journal.service.JournalStructureServiceFactory;
 import com.liferay.portlet.journal.service.JournalTemplateLocalService;
-import com.liferay.portlet.journal.service.JournalTemplateLocalServiceFactory;
 import com.liferay.portlet.journal.service.JournalTemplateService;
-import com.liferay.portlet.journal.service.JournalTemplateServiceFactory;
 import com.liferay.portlet.journal.service.persistence.JournalArticleFinder;
-import com.liferay.portlet.journal.service.persistence.JournalArticleFinderUtil;
 import com.liferay.portlet.journal.service.persistence.JournalArticleImagePersistence;
-import com.liferay.portlet.journal.service.persistence.JournalArticleImageUtil;
 import com.liferay.portlet.journal.service.persistence.JournalArticlePersistence;
 import com.liferay.portlet.journal.service.persistence.JournalArticleResourcePersistence;
-import com.liferay.portlet.journal.service.persistence.JournalArticleResourceUtil;
-import com.liferay.portlet.journal.service.persistence.JournalArticleUtil;
 import com.liferay.portlet.journal.service.persistence.JournalContentSearchPersistence;
-import com.liferay.portlet.journal.service.persistence.JournalContentSearchUtil;
 import com.liferay.portlet.journal.service.persistence.JournalFeedFinder;
-import com.liferay.portlet.journal.service.persistence.JournalFeedFinderUtil;
 import com.liferay.portlet.journal.service.persistence.JournalFeedPersistence;
-import com.liferay.portlet.journal.service.persistence.JournalFeedUtil;
 import com.liferay.portlet.journal.service.persistence.JournalStructureFinder;
-import com.liferay.portlet.journal.service.persistence.JournalStructureFinderUtil;
 import com.liferay.portlet.journal.service.persistence.JournalStructurePersistence;
-import com.liferay.portlet.journal.service.persistence.JournalStructureUtil;
 import com.liferay.portlet.journal.service.persistence.JournalTemplateFinder;
-import com.liferay.portlet.journal.service.persistence.JournalTemplateFinderUtil;
 import com.liferay.portlet.journal.service.persistence.JournalTemplatePersistence;
-import com.liferay.portlet.journal.service.persistence.JournalTemplateUtil;
 
 import java.util.List;
 
@@ -346,95 +324,118 @@ public abstract class JournalArticleResourceLocalServiceBaseImpl
 
 	public void afterPropertiesSet() {
 		if (journalArticleLocalService == null) {
-			journalArticleLocalService = JournalArticleLocalServiceFactory.getImpl();
+			journalArticleLocalService = (JournalArticleLocalService)PortalBeanLocatorUtil.locate(JournalArticleLocalService.class.getName() +
+					".impl");
 		}
 
 		if (journalArticleService == null) {
-			journalArticleService = JournalArticleServiceFactory.getImpl();
+			journalArticleService = (JournalArticleService)PortalBeanLocatorUtil.locate(JournalArticleService.class.getName() +
+					".impl");
 		}
 
 		if (journalArticlePersistence == null) {
-			journalArticlePersistence = JournalArticleUtil.getPersistence();
+			journalArticlePersistence = (JournalArticlePersistence)PortalBeanLocatorUtil.locate(JournalArticlePersistence.class.getName() +
+					".impl");
 		}
 
 		if (journalArticleFinder == null) {
-			journalArticleFinder = JournalArticleFinderUtil.getFinder();
+			journalArticleFinder = (JournalArticleFinder)PortalBeanLocatorUtil.locate(JournalArticleFinder.class.getName() +
+					".impl");
 		}
 
 		if (journalArticleImageLocalService == null) {
-			journalArticleImageLocalService = JournalArticleImageLocalServiceFactory.getImpl();
+			journalArticleImageLocalService = (JournalArticleImageLocalService)PortalBeanLocatorUtil.locate(JournalArticleImageLocalService.class.getName() +
+					".impl");
 		}
 
 		if (journalArticleImagePersistence == null) {
-			journalArticleImagePersistence = JournalArticleImageUtil.getPersistence();
+			journalArticleImagePersistence = (JournalArticleImagePersistence)PortalBeanLocatorUtil.locate(JournalArticleImagePersistence.class.getName() +
+					".impl");
 		}
 
 		if (journalArticleResourcePersistence == null) {
-			journalArticleResourcePersistence = JournalArticleResourceUtil.getPersistence();
+			journalArticleResourcePersistence = (JournalArticleResourcePersistence)PortalBeanLocatorUtil.locate(JournalArticleResourcePersistence.class.getName() +
+					".impl");
 		}
 
 		if (journalContentSearchLocalService == null) {
-			journalContentSearchLocalService = JournalContentSearchLocalServiceFactory.getImpl();
+			journalContentSearchLocalService = (JournalContentSearchLocalService)PortalBeanLocatorUtil.locate(JournalContentSearchLocalService.class.getName() +
+					".impl");
 		}
 
 		if (journalContentSearchPersistence == null) {
-			journalContentSearchPersistence = JournalContentSearchUtil.getPersistence();
+			journalContentSearchPersistence = (JournalContentSearchPersistence)PortalBeanLocatorUtil.locate(JournalContentSearchPersistence.class.getName() +
+					".impl");
 		}
 
 		if (journalFeedLocalService == null) {
-			journalFeedLocalService = JournalFeedLocalServiceFactory.getImpl();
+			journalFeedLocalService = (JournalFeedLocalService)PortalBeanLocatorUtil.locate(JournalFeedLocalService.class.getName() +
+					".impl");
 		}
 
 		if (journalFeedService == null) {
-			journalFeedService = JournalFeedServiceFactory.getImpl();
+			journalFeedService = (JournalFeedService)PortalBeanLocatorUtil.locate(JournalFeedService.class.getName() +
+					".impl");
 		}
 
 		if (journalFeedPersistence == null) {
-			journalFeedPersistence = JournalFeedUtil.getPersistence();
+			journalFeedPersistence = (JournalFeedPersistence)PortalBeanLocatorUtil.locate(JournalFeedPersistence.class.getName() +
+					".impl");
 		}
 
 		if (journalFeedFinder == null) {
-			journalFeedFinder = JournalFeedFinderUtil.getFinder();
+			journalFeedFinder = (JournalFeedFinder)PortalBeanLocatorUtil.locate(JournalFeedFinder.class.getName() +
+					".impl");
 		}
 
 		if (journalStructureLocalService == null) {
-			journalStructureLocalService = JournalStructureLocalServiceFactory.getImpl();
+			journalStructureLocalService = (JournalStructureLocalService)PortalBeanLocatorUtil.locate(JournalStructureLocalService.class.getName() +
+					".impl");
 		}
 
 		if (journalStructureService == null) {
-			journalStructureService = JournalStructureServiceFactory.getImpl();
+			journalStructureService = (JournalStructureService)PortalBeanLocatorUtil.locate(JournalStructureService.class.getName() +
+					".impl");
 		}
 
 		if (journalStructurePersistence == null) {
-			journalStructurePersistence = JournalStructureUtil.getPersistence();
+			journalStructurePersistence = (JournalStructurePersistence)PortalBeanLocatorUtil.locate(JournalStructurePersistence.class.getName() +
+					".impl");
 		}
 
 		if (journalStructureFinder == null) {
-			journalStructureFinder = JournalStructureFinderUtil.getFinder();
+			journalStructureFinder = (JournalStructureFinder)PortalBeanLocatorUtil.locate(JournalStructureFinder.class.getName() +
+					".impl");
 		}
 
 		if (journalTemplateLocalService == null) {
-			journalTemplateLocalService = JournalTemplateLocalServiceFactory.getImpl();
+			journalTemplateLocalService = (JournalTemplateLocalService)PortalBeanLocatorUtil.locate(JournalTemplateLocalService.class.getName() +
+					".impl");
 		}
 
 		if (journalTemplateService == null) {
-			journalTemplateService = JournalTemplateServiceFactory.getImpl();
+			journalTemplateService = (JournalTemplateService)PortalBeanLocatorUtil.locate(JournalTemplateService.class.getName() +
+					".impl");
 		}
 
 		if (journalTemplatePersistence == null) {
-			journalTemplatePersistence = JournalTemplateUtil.getPersistence();
+			journalTemplatePersistence = (JournalTemplatePersistence)PortalBeanLocatorUtil.locate(JournalTemplatePersistence.class.getName() +
+					".impl");
 		}
 
 		if (journalTemplateFinder == null) {
-			journalTemplateFinder = JournalTemplateFinderUtil.getFinder();
+			journalTemplateFinder = (JournalTemplateFinder)PortalBeanLocatorUtil.locate(JournalTemplateFinder.class.getName() +
+					".impl");
 		}
 
 		if (counterLocalService == null) {
-			counterLocalService = CounterLocalServiceFactory.getImpl();
+			counterLocalService = (CounterLocalService)PortalBeanLocatorUtil.locate(CounterLocalService.class.getName() +
+					".impl");
 		}
 
 		if (counterService == null) {
-			counterService = CounterServiceFactory.getImpl();
+			counterService = (CounterService)PortalBeanLocatorUtil.locate(CounterService.class.getName() +
+					".impl");
 		}
 	}
 

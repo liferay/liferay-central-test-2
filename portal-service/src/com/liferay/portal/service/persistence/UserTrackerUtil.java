@@ -295,22 +295,12 @@ public class UserTrackerUtil {
 	}
 
 	public static UserTrackerPersistence getPersistence() {
-		return _getUtil()._persistence;
+		return _persistence;
 	}
 
 	public void setPersistence(UserTrackerPersistence persistence) {
 		_persistence = persistence;
 	}
 
-	private static UserTrackerUtil _getUtil() {
-		if (_util == null) {
-			_util = (UserTrackerUtil)com.liferay.portal.kernel.bean.PortalBeanLocatorUtil.locate(_UTIL);
-		}
-
-		return _util;
-	}
-
-	private static final String _UTIL = UserTrackerUtil.class.getName();
-	private static UserTrackerUtil _util;
-	private UserTrackerPersistence _persistence;
+	private static UserTrackerPersistence _persistence;
 }

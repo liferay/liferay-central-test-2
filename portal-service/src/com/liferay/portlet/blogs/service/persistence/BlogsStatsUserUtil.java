@@ -373,22 +373,12 @@ public class BlogsStatsUserUtil {
 	}
 
 	public static BlogsStatsUserPersistence getPersistence() {
-		return _getUtil()._persistence;
+		return _persistence;
 	}
 
 	public void setPersistence(BlogsStatsUserPersistence persistence) {
 		_persistence = persistence;
 	}
 
-	private static BlogsStatsUserUtil _getUtil() {
-		if (_util == null) {
-			_util = (BlogsStatsUserUtil)com.liferay.portal.kernel.bean.PortalBeanLocatorUtil.locate(_UTIL);
-		}
-
-		return _util;
-	}
-
-	private static final String _UTIL = BlogsStatsUserUtil.class.getName();
-	private static BlogsStatsUserUtil _util;
-	private BlogsStatsUserPersistence _persistence;
+	private static BlogsStatsUserPersistence _persistence;
 }

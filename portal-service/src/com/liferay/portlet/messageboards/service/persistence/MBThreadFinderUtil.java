@@ -68,22 +68,12 @@ public class MBThreadFinderUtil {
 	}
 
 	public static MBThreadFinder getFinder() {
-		return _getUtil()._finder;
+		return _finder;
 	}
 
 	public void setFinder(MBThreadFinder finder) {
 		_finder = finder;
 	}
 
-	private static MBThreadFinderUtil _getUtil() {
-		if (_util == null) {
-			_util = (MBThreadFinderUtil)com.liferay.portal.kernel.bean.PortalBeanLocatorUtil.locate(_UTIL);
-		}
-
-		return _util;
-	}
-
-	private static final String _UTIL = MBThreadFinderUtil.class.getName();
-	private static MBThreadFinderUtil _util;
-	private MBThreadFinder _finder;
+	private static MBThreadFinder _finder;
 }

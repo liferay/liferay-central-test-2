@@ -243,22 +243,12 @@ public class OrgGroupRoleUtil {
 	}
 
 	public static OrgGroupRolePersistence getPersistence() {
-		return _getUtil()._persistence;
+		return _persistence;
 	}
 
 	public void setPersistence(OrgGroupRolePersistence persistence) {
 		_persistence = persistence;
 	}
 
-	private static OrgGroupRoleUtil _getUtil() {
-		if (_util == null) {
-			_util = (OrgGroupRoleUtil)com.liferay.portal.kernel.bean.PortalBeanLocatorUtil.locate(_UTIL);
-		}
-
-		return _util;
-	}
-
-	private static final String _UTIL = OrgGroupRoleUtil.class.getName();
-	private static OrgGroupRoleUtil _util;
-	private OrgGroupRolePersistence _persistence;
+	private static OrgGroupRolePersistence _persistence;
 }

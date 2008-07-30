@@ -512,22 +512,12 @@ public class ExpandoValueUtil {
 	}
 
 	public static ExpandoValuePersistence getPersistence() {
-		return _getUtil()._persistence;
+		return _persistence;
 	}
 
 	public void setPersistence(ExpandoValuePersistence persistence) {
 		_persistence = persistence;
 	}
 
-	private static ExpandoValueUtil _getUtil() {
-		if (_util == null) {
-			_util = (ExpandoValueUtil)com.liferay.portal.kernel.bean.PortalBeanLocatorUtil.locate(_UTIL);
-		}
-
-		return _util;
-	}
-
-	private static final String _UTIL = ExpandoValueUtil.class.getName();
-	private static ExpandoValueUtil _util;
-	private ExpandoValuePersistence _persistence;
+	private static ExpandoValuePersistence _persistence;
 }

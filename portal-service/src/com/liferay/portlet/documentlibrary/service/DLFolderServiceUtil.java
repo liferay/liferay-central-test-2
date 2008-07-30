@@ -39,15 +39,9 @@ package com.liferay.portlet.documentlibrary.service;
  * on a bean instead of writing a lookup call and a method call.
  * </p>
  *
- * <p>
- * <code>com.liferay.portlet.documentlibrary.service.DLFolderServiceFactory</code>
- * is responsible for the lookup of the bean.
- * </p>
- *
  * @author Brian Wing Shun Chan
  *
  * @see com.liferay.portlet.documentlibrary.service.DLFolderService
- * @see com.liferay.portlet.documentlibrary.service.DLFolderServiceFactory
  *
  */
 public class DLFolderServiceUtil {
@@ -57,10 +51,8 @@ public class DLFolderServiceUtil {
 		boolean addGuestPermissions)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
-		DLFolderService dlFolderService = DLFolderServiceFactory.getService();
-
-		return dlFolderService.addFolder(plid, parentFolderId, name,
-			description, addCommunityPermissions, addGuestPermissions);
+		return _service.addFolder(plid, parentFolderId, name, description,
+			addCommunityPermissions, addGuestPermissions);
 	}
 
 	public static com.liferay.portlet.documentlibrary.model.DLFolder addFolder(
@@ -69,10 +61,8 @@ public class DLFolderServiceUtil {
 		java.lang.String[] guestPermissions)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
-		DLFolderService dlFolderService = DLFolderServiceFactory.getService();
-
-		return dlFolderService.addFolder(plid, parentFolderId, name,
-			description, communityPermissions, guestPermissions);
+		return _service.addFolder(plid, parentFolderId, name, description,
+			communityPermissions, guestPermissions);
 	}
 
 	public static com.liferay.portlet.documentlibrary.model.DLFolder copyFolder(
@@ -81,71 +71,55 @@ public class DLFolderServiceUtil {
 		boolean addCommunityPermissions, boolean addGuestPermissions)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
-		DLFolderService dlFolderService = DLFolderServiceFactory.getService();
-
-		return dlFolderService.copyFolder(plid, sourceFolderId, parentFolderId,
-			name, description, addCommunityPermissions, addGuestPermissions);
+		return _service.copyFolder(plid, sourceFolderId, parentFolderId, name,
+			description, addCommunityPermissions, addGuestPermissions);
 	}
 
 	public static void deleteFolder(long folderId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
-		DLFolderService dlFolderService = DLFolderServiceFactory.getService();
-
-		dlFolderService.deleteFolder(folderId);
+		_service.deleteFolder(folderId);
 	}
 
 	public static void deleteFolder(long groupId, long parentFolderId,
 		java.lang.String name)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
-		DLFolderService dlFolderService = DLFolderServiceFactory.getService();
-
-		dlFolderService.deleteFolder(groupId, parentFolderId, name);
+		_service.deleteFolder(groupId, parentFolderId, name);
 	}
 
 	public static com.liferay.portlet.documentlibrary.model.DLFolder getFolder(
 		long folderId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
-		DLFolderService dlFolderService = DLFolderServiceFactory.getService();
-
-		return dlFolderService.getFolder(folderId);
+		return _service.getFolder(folderId);
 	}
 
 	public static com.liferay.portlet.documentlibrary.model.DLFolder getFolder(
 		long groupId, long parentFolderId, java.lang.String name)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
-		DLFolderService dlFolderService = DLFolderServiceFactory.getService();
-
-		return dlFolderService.getFolder(groupId, parentFolderId, name);
+		return _service.getFolder(groupId, parentFolderId, name);
 	}
 
 	public static long getFolderId(long groupId, long parentFolderId,
 		java.lang.String name)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
-		DLFolderService dlFolderService = DLFolderServiceFactory.getService();
-
-		return dlFolderService.getFolderId(groupId, parentFolderId, name);
+		return _service.getFolderId(groupId, parentFolderId, name);
 	}
 
 	public static java.util.List<com.liferay.portlet.documentlibrary.model.DLFolder> getFolders(
 		long groupId, long parentFolderId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
-		DLFolderService dlFolderService = DLFolderServiceFactory.getService();
-
-		return dlFolderService.getFolders(groupId, parentFolderId);
+		return _service.getFolders(groupId, parentFolderId);
 	}
 
 	public static void reIndexSearch(long companyId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
-		DLFolderService dlFolderService = DLFolderServiceFactory.getService();
-
-		dlFolderService.reIndexSearch(companyId);
+		_service.reIndexSearch(companyId);
 	}
 
 	public static com.liferay.portlet.documentlibrary.model.DLFolder updateFolder(
@@ -153,9 +127,16 @@ public class DLFolderServiceUtil {
 		java.lang.String description)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
-		DLFolderService dlFolderService = DLFolderServiceFactory.getService();
-
-		return dlFolderService.updateFolder(folderId, parentFolderId, name,
-			description);
+		return _service.updateFolder(folderId, parentFolderId, name, description);
 	}
+
+	public static DLFolderService getService() {
+		return _service;
+	}
+
+	public void setService(DLFolderService service) {
+		_service = service;
+	}
+
+	private static DLFolderService _service;
 }

@@ -265,22 +265,12 @@ public class MBMessageFlagUtil {
 	}
 
 	public static MBMessageFlagPersistence getPersistence() {
-		return _getUtil()._persistence;
+		return _persistence;
 	}
 
 	public void setPersistence(MBMessageFlagPersistence persistence) {
 		_persistence = persistence;
 	}
 
-	private static MBMessageFlagUtil _getUtil() {
-		if (_util == null) {
-			_util = (MBMessageFlagUtil)com.liferay.portal.kernel.bean.PortalBeanLocatorUtil.locate(_UTIL);
-		}
-
-		return _util;
-	}
-
-	private static final String _UTIL = MBMessageFlagUtil.class.getName();
-	private static MBMessageFlagUtil _util;
-	private MBMessageFlagPersistence _persistence;
+	private static MBMessageFlagPersistence _persistence;
 }

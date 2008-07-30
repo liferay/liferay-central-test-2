@@ -481,22 +481,12 @@ public class JournalContentSearchUtil {
 	}
 
 	public static JournalContentSearchPersistence getPersistence() {
-		return _getUtil()._persistence;
+		return _persistence;
 	}
 
 	public void setPersistence(JournalContentSearchPersistence persistence) {
 		_persistence = persistence;
 	}
 
-	private static JournalContentSearchUtil _getUtil() {
-		if (_util == null) {
-			_util = (JournalContentSearchUtil)com.liferay.portal.kernel.bean.PortalBeanLocatorUtil.locate(_UTIL);
-		}
-
-		return _util;
-	}
-
-	private static final String _UTIL = JournalContentSearchUtil.class.getName();
-	private static JournalContentSearchUtil _util;
-	private JournalContentSearchPersistence _persistence;
+	private static JournalContentSearchPersistence _persistence;
 }

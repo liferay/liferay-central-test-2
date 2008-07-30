@@ -39,15 +39,9 @@ package com.liferay.portlet.calendar.service;
  * on a bean instead of writing a lookup call and a method call.
  * </p>
  *
- * <p>
- * <code>com.liferay.portlet.calendar.service.CalEventServiceFactory</code>
- * is responsible for the lookup of the bean.
- * </p>
- *
  * @author Brian Wing Shun Chan
  *
  * @see com.liferay.portlet.calendar.service.CalEventService
- * @see com.liferay.portlet.calendar.service.CalEventServiceFactory
  *
  */
 public class CalEventServiceUtil {
@@ -62,13 +56,11 @@ public class CalEventServiceUtil {
 		boolean addCommunityPermissions, boolean addGuestPermissions)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
-		CalEventService calEventService = CalEventServiceFactory.getService();
-
-		return calEventService.addEvent(plid, title, description,
-			startDateMonth, startDateDay, startDateYear, startDateHour,
-			startDateMinute, endDateMonth, endDateDay, endDateYear,
-			durationHour, durationMinute, allDay, timeZoneSensitive, type,
-			repeating, recurrence, remindBy, firstReminder, secondReminder,
+		return _service.addEvent(plid, title, description, startDateMonth,
+			startDateDay, startDateYear, startDateHour, startDateMinute,
+			endDateMonth, endDateDay, endDateYear, durationHour,
+			durationMinute, allDay, timeZoneSensitive, type, repeating,
+			recurrence, remindBy, firstReminder, secondReminder,
 			addCommunityPermissions, addGuestPermissions);
 	}
 
@@ -84,56 +76,44 @@ public class CalEventServiceUtil {
 		java.lang.String[] guestPermissions)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
-		CalEventService calEventService = CalEventServiceFactory.getService();
-
-		return calEventService.addEvent(plid, title, description,
-			startDateMonth, startDateDay, startDateYear, startDateHour,
-			startDateMinute, endDateMonth, endDateDay, endDateYear,
-			durationHour, durationMinute, allDay, timeZoneSensitive, type,
-			repeating, recurrence, remindBy, firstReminder, secondReminder,
+		return _service.addEvent(plid, title, description, startDateMonth,
+			startDateDay, startDateYear, startDateHour, startDateMinute,
+			endDateMonth, endDateDay, endDateYear, durationHour,
+			durationMinute, allDay, timeZoneSensitive, type, repeating,
+			recurrence, remindBy, firstReminder, secondReminder,
 			communityPermissions, guestPermissions);
 	}
 
 	public static void deleteEvent(long eventId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
-		CalEventService calEventService = CalEventServiceFactory.getService();
-
-		calEventService.deleteEvent(eventId);
+		_service.deleteEvent(eventId);
 	}
 
 	public static java.io.File exportEvent(long eventId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
-		CalEventService calEventService = CalEventServiceFactory.getService();
-
-		return calEventService.exportEvent(eventId);
+		return _service.exportEvent(eventId);
 	}
 
 	public static java.io.File exportGroupEvents(long plid,
 		java.lang.String fileName)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
-		CalEventService calEventService = CalEventServiceFactory.getService();
-
-		return calEventService.exportGroupEvents(plid, fileName);
+		return _service.exportGroupEvents(plid, fileName);
 	}
 
 	public static com.liferay.portlet.calendar.model.CalEvent getEvent(
 		long eventId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
-		CalEventService calEventService = CalEventServiceFactory.getService();
-
-		return calEventService.getEvent(eventId);
+		return _service.getEvent(eventId);
 	}
 
 	public static void importICal4j(long plid, java.io.File file)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
-		CalEventService calEventService = CalEventServiceFactory.getService();
-
-		calEventService.importICal4j(plid, file);
+		_service.importICal4j(plid, file);
 	}
 
 	public static com.liferay.portlet.calendar.model.CalEvent updateEvent(
@@ -146,12 +126,20 @@ public class CalEventServiceUtil {
 		java.lang.String remindBy, int firstReminder, int secondReminder)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
-		CalEventService calEventService = CalEventServiceFactory.getService();
-
-		return calEventService.updateEvent(eventId, title, description,
+		return _service.updateEvent(eventId, title, description,
 			startDateMonth, startDateDay, startDateYear, startDateHour,
 			startDateMinute, endDateMonth, endDateDay, endDateYear,
 			durationHour, durationMinute, allDay, timeZoneSensitive, type,
 			repeating, recurrence, remindBy, firstReminder, secondReminder);
 	}
+
+	public static CalEventService getService() {
+		return _service;
+	}
+
+	public void setService(CalEventService service) {
+		_service = service;
+	}
+
+	private static CalEventService _service;
 }

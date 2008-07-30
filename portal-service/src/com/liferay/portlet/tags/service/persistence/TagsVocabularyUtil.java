@@ -270,22 +270,12 @@ public class TagsVocabularyUtil {
 	}
 
 	public static TagsVocabularyPersistence getPersistence() {
-		return _getUtil()._persistence;
+		return _persistence;
 	}
 
 	public void setPersistence(TagsVocabularyPersistence persistence) {
 		_persistence = persistence;
 	}
 
-	private static TagsVocabularyUtil _getUtil() {
-		if (_util == null) {
-			_util = (TagsVocabularyUtil)com.liferay.portal.kernel.bean.PortalBeanLocatorUtil.locate(_UTIL);
-		}
-
-		return _util;
-	}
-
-	private static final String _UTIL = TagsVocabularyUtil.class.getName();
-	private static TagsVocabularyUtil _util;
-	private TagsVocabularyPersistence _persistence;
+	private static TagsVocabularyPersistence _persistence;
 }

@@ -39,15 +39,9 @@ package com.liferay.portlet.imagegallery.service;
  * on a bean instead of writing a lookup call and a method call.
  * </p>
  *
- * <p>
- * <code>com.liferay.portlet.imagegallery.service.IGFolderServiceFactory</code>
- * is responsible for the lookup of the bean.
- * </p>
- *
  * @author Brian Wing Shun Chan
  *
  * @see com.liferay.portlet.imagegallery.service.IGFolderService
- * @see com.liferay.portlet.imagegallery.service.IGFolderServiceFactory
  *
  */
 public class IGFolderServiceUtil {
@@ -57,10 +51,8 @@ public class IGFolderServiceUtil {
 		boolean addGuestPermissions)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
-		IGFolderService igFolderService = IGFolderServiceFactory.getService();
-
-		return igFolderService.addFolder(plid, parentFolderId, name,
-			description, addCommunityPermissions, addGuestPermissions);
+		return _service.addFolder(plid, parentFolderId, name, description,
+			addCommunityPermissions, addGuestPermissions);
 	}
 
 	public static com.liferay.portlet.imagegallery.model.IGFolder addFolder(
@@ -69,10 +61,8 @@ public class IGFolderServiceUtil {
 		java.lang.String[] guestPermissions)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
-		IGFolderService igFolderService = IGFolderServiceFactory.getService();
-
-		return igFolderService.addFolder(plid, parentFolderId, name,
-			description, communityPermissions, guestPermissions);
+		return _service.addFolder(plid, parentFolderId, name, description,
+			communityPermissions, guestPermissions);
 	}
 
 	public static com.liferay.portlet.imagegallery.model.IGFolder copyFolder(
@@ -81,45 +71,35 @@ public class IGFolderServiceUtil {
 		boolean addCommunityPermissions, boolean addGuestPermissions)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
-		IGFolderService igFolderService = IGFolderServiceFactory.getService();
-
-		return igFolderService.copyFolder(plid, sourceFolderId, parentFolderId,
-			name, description, addCommunityPermissions, addGuestPermissions);
+		return _service.copyFolder(plid, sourceFolderId, parentFolderId, name,
+			description, addCommunityPermissions, addGuestPermissions);
 	}
 
 	public static void deleteFolder(long folderId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
-		IGFolderService igFolderService = IGFolderServiceFactory.getService();
-
-		igFolderService.deleteFolder(folderId);
+		_service.deleteFolder(folderId);
 	}
 
 	public static com.liferay.portlet.imagegallery.model.IGFolder getFolder(
 		long folderId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
-		IGFolderService igFolderService = IGFolderServiceFactory.getService();
-
-		return igFolderService.getFolder(folderId);
+		return _service.getFolder(folderId);
 	}
 
 	public static com.liferay.portlet.imagegallery.model.IGFolder getFolder(
 		long groupId, long parentFolderId, java.lang.String name)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
-		IGFolderService igFolderService = IGFolderServiceFactory.getService();
-
-		return igFolderService.getFolder(groupId, parentFolderId, name);
+		return _service.getFolder(groupId, parentFolderId, name);
 	}
 
 	public static java.util.List<com.liferay.portlet.imagegallery.model.IGFolder> getFolders(
 		long groupId, long parentFolderId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
-		IGFolderService igFolderService = IGFolderServiceFactory.getService();
-
-		return igFolderService.getFolders(groupId, parentFolderId);
+		return _service.getFolders(groupId, parentFolderId);
 	}
 
 	public static com.liferay.portlet.imagegallery.model.IGFolder updateFolder(
@@ -127,9 +107,17 @@ public class IGFolderServiceUtil {
 		java.lang.String description, boolean mergeWithParentFolder)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
-		IGFolderService igFolderService = IGFolderServiceFactory.getService();
-
-		return igFolderService.updateFolder(folderId, parentFolderId, name,
+		return _service.updateFolder(folderId, parentFolderId, name,
 			description, mergeWithParentFolder);
 	}
+
+	public static IGFolderService getService() {
+		return _service;
+	}
+
+	public void setService(IGFolderService service) {
+		_service = service;
+	}
+
+	private static IGFolderService _service;
 }

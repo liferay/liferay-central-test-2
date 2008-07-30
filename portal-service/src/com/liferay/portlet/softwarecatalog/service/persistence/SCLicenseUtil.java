@@ -336,22 +336,12 @@ public class SCLicenseUtil {
 	}
 
 	public static SCLicensePersistence getPersistence() {
-		return _getUtil()._persistence;
+		return _persistence;
 	}
 
 	public void setPersistence(SCLicensePersistence persistence) {
 		_persistence = persistence;
 	}
 
-	private static SCLicenseUtil _getUtil() {
-		if (_util == null) {
-			_util = (SCLicenseUtil)com.liferay.portal.kernel.bean.PortalBeanLocatorUtil.locate(_UTIL);
-		}
-
-		return _util;
-	}
-
-	private static final String _UTIL = SCLicenseUtil.class.getName();
-	private static SCLicenseUtil _util;
-	private SCLicensePersistence _persistence;
+	private static SCLicensePersistence _persistence;
 }

@@ -39,15 +39,9 @@ package com.liferay.portal.service;
  * on a bean instead of writing a lookup call and a method call.
  * </p>
  *
- * <p>
- * <code>com.liferay.portal.service.WebsiteServiceFactory</code>
- * is responsible for the lookup of the bean.
- * </p>
- *
  * @author Brian Wing Shun Chan
  *
  * @see com.liferay.portal.service.WebsiteService
- * @see com.liferay.portal.service.WebsiteServiceFactory
  *
  */
 public class WebsiteServiceUtil {
@@ -56,43 +50,42 @@ public class WebsiteServiceUtil {
 		int typeId, boolean primary)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
-		WebsiteService websiteService = WebsiteServiceFactory.getService();
-
-		return websiteService.addWebsite(className, classPK, url, typeId,
-			primary);
+		return _service.addWebsite(className, classPK, url, typeId, primary);
 	}
 
 	public static void deleteWebsite(long websiteId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
-		WebsiteService websiteService = WebsiteServiceFactory.getService();
-
-		websiteService.deleteWebsite(websiteId);
+		_service.deleteWebsite(websiteId);
 	}
 
 	public static com.liferay.portal.model.Website getWebsite(long websiteId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
-		WebsiteService websiteService = WebsiteServiceFactory.getService();
-
-		return websiteService.getWebsite(websiteId);
+		return _service.getWebsite(websiteId);
 	}
 
 	public static java.util.List<com.liferay.portal.model.Website> getWebsites(
 		java.lang.String className, long classPK)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
-		WebsiteService websiteService = WebsiteServiceFactory.getService();
-
-		return websiteService.getWebsites(className, classPK);
+		return _service.getWebsites(className, classPK);
 	}
 
 	public static com.liferay.portal.model.Website updateWebsite(
 		long websiteId, java.lang.String url, int typeId, boolean primary)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
-		WebsiteService websiteService = WebsiteServiceFactory.getService();
-
-		return websiteService.updateWebsite(websiteId, url, typeId, primary);
+		return _service.updateWebsite(websiteId, url, typeId, primary);
 	}
+
+	public static WebsiteService getService() {
+		return _service;
+	}
+
+	public void setService(WebsiteService service) {
+		_service = service;
+	}
+
+	private static WebsiteService _service;
 }

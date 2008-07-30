@@ -39,15 +39,9 @@ package com.liferay.portal.service;
  * on a bean instead of writing a lookup call and a method call.
  * </p>
  *
- * <p>
- * <code>com.liferay.portal.service.EmailAddressServiceFactory</code>
- * is responsible for the lookup of the bean.
- * </p>
- *
  * @author Brian Wing Shun Chan
  *
  * @see com.liferay.portal.service.EmailAddressService
- * @see com.liferay.portal.service.EmailAddressServiceFactory
  *
  */
 public class EmailAddressServiceUtil {
@@ -56,36 +50,28 @@ public class EmailAddressServiceUtil {
 		int typeId, boolean primary)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
-		EmailAddressService emailAddressService = EmailAddressServiceFactory.getService();
-
-		return emailAddressService.addEmailAddress(className, classPK, address,
-			typeId, primary);
+		return _service.addEmailAddress(className, classPK, address, typeId,
+			primary);
 	}
 
 	public static void deleteEmailAddress(long emailAddressId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
-		EmailAddressService emailAddressService = EmailAddressServiceFactory.getService();
-
-		emailAddressService.deleteEmailAddress(emailAddressId);
+		_service.deleteEmailAddress(emailAddressId);
 	}
 
 	public static com.liferay.portal.model.EmailAddress getEmailAddress(
 		long emailAddressId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
-		EmailAddressService emailAddressService = EmailAddressServiceFactory.getService();
-
-		return emailAddressService.getEmailAddress(emailAddressId);
+		return _service.getEmailAddress(emailAddressId);
 	}
 
 	public static java.util.List<com.liferay.portal.model.EmailAddress> getEmailAddresses(
 		java.lang.String className, long classPK)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
-		EmailAddressService emailAddressService = EmailAddressServiceFactory.getService();
-
-		return emailAddressService.getEmailAddresses(className, classPK);
+		return _service.getEmailAddresses(className, classPK);
 	}
 
 	public static com.liferay.portal.model.EmailAddress updateEmailAddress(
@@ -93,9 +79,17 @@ public class EmailAddressServiceUtil {
 		boolean primary)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
-		EmailAddressService emailAddressService = EmailAddressServiceFactory.getService();
-
-		return emailAddressService.updateEmailAddress(emailAddressId, address,
-			typeId, primary);
+		return _service.updateEmailAddress(emailAddressId, address, typeId,
+			primary);
 	}
+
+	public static EmailAddressService getService() {
+		return _service;
+	}
+
+	public void setService(EmailAddressService service) {
+		_service = service;
+	}
+
+	private static EmailAddressService _service;
 }

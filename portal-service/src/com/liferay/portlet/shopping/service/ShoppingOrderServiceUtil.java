@@ -39,15 +39,9 @@ package com.liferay.portlet.shopping.service;
  * on a bean instead of writing a lookup call and a method call.
  * </p>
  *
- * <p>
- * <code>com.liferay.portlet.shopping.service.ShoppingOrderServiceFactory</code>
- * is responsible for the lookup of the bean.
- * </p>
- *
  * @author Brian Wing Shun Chan
  *
  * @see com.liferay.portlet.shopping.service.ShoppingOrderService
- * @see com.liferay.portlet.shopping.service.ShoppingOrderServiceFactory
  *
  */
 public class ShoppingOrderServiceUtil {
@@ -57,36 +51,28 @@ public class ShoppingOrderServiceUtil {
 		java.lang.String ppPayerEmail)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
-		ShoppingOrderService shoppingOrderService = ShoppingOrderServiceFactory.getService();
-
-		shoppingOrderService.completeOrder(plid, number, ppTxnId,
-			ppPaymentStatus, ppPaymentGross, ppReceiverEmail, ppPayerEmail);
+		_service.completeOrder(plid, number, ppTxnId, ppPaymentStatus,
+			ppPaymentGross, ppReceiverEmail, ppPayerEmail);
 	}
 
 	public static void deleteOrder(long plid, long orderId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
-		ShoppingOrderService shoppingOrderService = ShoppingOrderServiceFactory.getService();
-
-		shoppingOrderService.deleteOrder(plid, orderId);
+		_service.deleteOrder(plid, orderId);
 	}
 
 	public static com.liferay.portlet.shopping.model.ShoppingOrder getOrder(
 		long plid, long orderId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
-		ShoppingOrderService shoppingOrderService = ShoppingOrderServiceFactory.getService();
-
-		return shoppingOrderService.getOrder(plid, orderId);
+		return _service.getOrder(plid, orderId);
 	}
 
 	public static void sendEmail(long plid, long orderId,
 		java.lang.String emailType)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
-		ShoppingOrderService shoppingOrderService = ShoppingOrderServiceFactory.getService();
-
-		shoppingOrderService.sendEmail(plid, orderId, emailType);
+		_service.sendEmail(plid, orderId, emailType);
 	}
 
 	public static com.liferay.portlet.shopping.model.ShoppingOrder updateOrder(
@@ -106,16 +92,14 @@ public class ShoppingOrderServiceUtil {
 		int ccExpYear, java.lang.String ccVerNumber, java.lang.String comments)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
-		ShoppingOrderService shoppingOrderService = ShoppingOrderServiceFactory.getService();
-
-		return shoppingOrderService.updateOrder(plid, orderId,
-			billingFirstName, billingLastName, billingEmailAddress,
-			billingCompany, billingStreet, billingCity, billingState,
-			billingZip, billingCountry, billingPhone, shipToBilling,
-			shippingFirstName, shippingLastName, shippingEmailAddress,
-			shippingCompany, shippingStreet, shippingCity, shippingState,
-			shippingZip, shippingCountry, shippingPhone, ccName, ccType,
-			ccNumber, ccExpMonth, ccExpYear, ccVerNumber, comments);
+		return _service.updateOrder(plid, orderId, billingFirstName,
+			billingLastName, billingEmailAddress, billingCompany,
+			billingStreet, billingCity, billingState, billingZip,
+			billingCountry, billingPhone, shipToBilling, shippingFirstName,
+			shippingLastName, shippingEmailAddress, shippingCompany,
+			shippingStreet, shippingCity, shippingState, shippingZip,
+			shippingCountry, shippingPhone, ccName, ccType, ccNumber,
+			ccExpMonth, ccExpYear, ccVerNumber, comments);
 	}
 
 	public static com.liferay.portlet.shopping.model.ShoppingOrder updateOrder(
@@ -124,9 +108,17 @@ public class ShoppingOrderServiceUtil {
 		java.lang.String ppReceiverEmail, java.lang.String ppPayerEmail)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
-		ShoppingOrderService shoppingOrderService = ShoppingOrderServiceFactory.getService();
-
-		return shoppingOrderService.updateOrder(plid, orderId, ppTxnId,
-			ppPaymentStatus, ppPaymentGross, ppReceiverEmail, ppPayerEmail);
+		return _service.updateOrder(plid, orderId, ppTxnId, ppPaymentStatus,
+			ppPaymentGross, ppReceiverEmail, ppPayerEmail);
 	}
+
+	public static ShoppingOrderService getService() {
+		return _service;
+	}
+
+	public void setService(ShoppingOrderService service) {
+		_service = service;
+	}
+
+	private static ShoppingOrderService _service;
 }

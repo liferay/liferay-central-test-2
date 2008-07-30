@@ -39,15 +39,9 @@ package com.liferay.portlet.bookmarks.service;
  * on a bean instead of writing a lookup call and a method call.
  * </p>
  *
- * <p>
- * <code>com.liferay.portlet.bookmarks.service.BookmarksEntryServiceFactory</code>
- * is responsible for the lookup of the bean.
- * </p>
- *
  * @author Brian Wing Shun Chan
  *
  * @see com.liferay.portlet.bookmarks.service.BookmarksEntryService
- * @see com.liferay.portlet.bookmarks.service.BookmarksEntryServiceFactory
  *
  */
 public class BookmarksEntryServiceUtil {
@@ -57,10 +51,8 @@ public class BookmarksEntryServiceUtil {
 		boolean addCommunityPermissions, boolean addGuestPermissions)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
-		BookmarksEntryService bookmarksEntryService = BookmarksEntryServiceFactory.getService();
-
-		return bookmarksEntryService.addEntry(folderId, name, url, comments,
-			tagsEntries, addCommunityPermissions, addGuestPermissions);
+		return _service.addEntry(folderId, name, url, comments, tagsEntries,
+			addCommunityPermissions, addGuestPermissions);
 	}
 
 	public static com.liferay.portlet.bookmarks.model.BookmarksEntry addEntry(
@@ -70,36 +62,28 @@ public class BookmarksEntryServiceUtil {
 		java.lang.String[] guestPermissions)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
-		BookmarksEntryService bookmarksEntryService = BookmarksEntryServiceFactory.getService();
-
-		return bookmarksEntryService.addEntry(folderId, name, url, comments,
-			tagsEntries, communityPermissions, guestPermissions);
+		return _service.addEntry(folderId, name, url, comments, tagsEntries,
+			communityPermissions, guestPermissions);
 	}
 
 	public static void deleteEntry(long entryId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
-		BookmarksEntryService bookmarksEntryService = BookmarksEntryServiceFactory.getService();
-
-		bookmarksEntryService.deleteEntry(entryId);
+		_service.deleteEntry(entryId);
 	}
 
 	public static com.liferay.portlet.bookmarks.model.BookmarksEntry getEntry(
 		long entryId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
-		BookmarksEntryService bookmarksEntryService = BookmarksEntryServiceFactory.getService();
-
-		return bookmarksEntryService.getEntry(entryId);
+		return _service.getEntry(entryId);
 	}
 
 	public static com.liferay.portlet.bookmarks.model.BookmarksEntry openEntry(
 		long entryId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
-		BookmarksEntryService bookmarksEntryService = BookmarksEntryServiceFactory.getService();
-
-		return bookmarksEntryService.openEntry(entryId);
+		return _service.openEntry(entryId);
 	}
 
 	public static com.liferay.portlet.bookmarks.model.BookmarksEntry updateEntry(
@@ -108,9 +92,17 @@ public class BookmarksEntryServiceUtil {
 		java.lang.String[] tagsEntries)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
-		BookmarksEntryService bookmarksEntryService = BookmarksEntryServiceFactory.getService();
-
-		return bookmarksEntryService.updateEntry(entryId, folderId, name, url,
-			comments, tagsEntries);
+		return _service.updateEntry(entryId, folderId, name, url, comments,
+			tagsEntries);
 	}
+
+	public static BookmarksEntryService getService() {
+		return _service;
+	}
+
+	public void setService(BookmarksEntryService service) {
+		_service = service;
+	}
+
+	private static BookmarksEntryService _service;
 }

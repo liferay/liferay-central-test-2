@@ -44,7 +44,6 @@ package com.liferay.portlet.wiki.service;
  *
  * @author Brian Wing Shun Chan
  *
- * @see com.liferay.portlet.wiki.service.WikiNodeServiceFactory
  * @see com.liferay.portlet.wiki.service.WikiNodeServiceUtil
  *
  */

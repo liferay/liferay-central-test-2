@@ -45,22 +45,12 @@ public class TagsPropertyKeyFinderUtil {
 	}
 
 	public static TagsPropertyKeyFinder getFinder() {
-		return _getUtil()._finder;
+		return _finder;
 	}
 
 	public void setFinder(TagsPropertyKeyFinder finder) {
 		_finder = finder;
 	}
 
-	private static TagsPropertyKeyFinderUtil _getUtil() {
-		if (_util == null) {
-			_util = (TagsPropertyKeyFinderUtil)com.liferay.portal.kernel.bean.PortalBeanLocatorUtil.locate(_UTIL);
-		}
-
-		return _util;
-	}
-
-	private static final String _UTIL = TagsPropertyKeyFinderUtil.class.getName();
-	private static TagsPropertyKeyFinderUtil _util;
-	private TagsPropertyKeyFinder _finder;
+	private static TagsPropertyKeyFinder _finder;
 }

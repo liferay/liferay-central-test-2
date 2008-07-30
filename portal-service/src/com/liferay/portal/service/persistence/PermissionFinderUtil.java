@@ -134,22 +134,12 @@ public class PermissionFinderUtil {
 	}
 
 	public static PermissionFinder getFinder() {
-		return _getUtil()._finder;
+		return _finder;
 	}
 
 	public void setFinder(PermissionFinder finder) {
 		_finder = finder;
 	}
 
-	private static PermissionFinderUtil _getUtil() {
-		if (_util == null) {
-			_util = (PermissionFinderUtil)com.liferay.portal.kernel.bean.PortalBeanLocatorUtil.locate(_UTIL);
-		}
-
-		return _util;
-	}
-
-	private static final String _UTIL = PermissionFinderUtil.class.getName();
-	private static PermissionFinderUtil _util;
-	private PermissionFinder _finder;
+	private static PermissionFinder _finder;
 }

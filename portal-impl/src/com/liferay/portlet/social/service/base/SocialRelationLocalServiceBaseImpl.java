@@ -23,41 +23,28 @@
 package com.liferay.portlet.social.service.base;
 
 import com.liferay.counter.service.CounterLocalService;
-import com.liferay.counter.service.CounterLocalServiceFactory;
 import com.liferay.counter.service.CounterService;
-import com.liferay.counter.service.CounterServiceFactory;
 
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.bean.InitializingBean;
+import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
 import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 import com.liferay.portal.service.UserLocalService;
-import com.liferay.portal.service.UserLocalServiceFactory;
 import com.liferay.portal.service.UserService;
-import com.liferay.portal.service.UserServiceFactory;
 import com.liferay.portal.service.persistence.UserFinder;
-import com.liferay.portal.service.persistence.UserFinderUtil;
 import com.liferay.portal.service.persistence.UserPersistence;
-import com.liferay.portal.service.persistence.UserUtil;
 
 import com.liferay.portlet.social.model.SocialRelation;
 import com.liferay.portlet.social.service.SocialActivityInterpreterLocalService;
-import com.liferay.portlet.social.service.SocialActivityInterpreterLocalServiceFactory;
 import com.liferay.portlet.social.service.SocialActivityLocalService;
-import com.liferay.portlet.social.service.SocialActivityLocalServiceFactory;
 import com.liferay.portlet.social.service.SocialRelationLocalService;
 import com.liferay.portlet.social.service.SocialRequestInterpreterLocalService;
-import com.liferay.portlet.social.service.SocialRequestInterpreterLocalServiceFactory;
 import com.liferay.portlet.social.service.SocialRequestLocalService;
-import com.liferay.portlet.social.service.SocialRequestLocalServiceFactory;
 import com.liferay.portlet.social.service.persistence.SocialActivityFinder;
-import com.liferay.portlet.social.service.persistence.SocialActivityFinderUtil;
 import com.liferay.portlet.social.service.persistence.SocialActivityPersistence;
-import com.liferay.portlet.social.service.persistence.SocialActivityUtil;
 import com.liferay.portlet.social.service.persistence.SocialRelationPersistence;
-import com.liferay.portlet.social.service.persistence.SocialRelationUtil;
 import com.liferay.portlet.social.service.persistence.SocialRequestPersistence;
-import com.liferay.portlet.social.service.persistence.SocialRequestUtil;
 
 import java.util.List;
 
@@ -240,59 +227,73 @@ public abstract class SocialRelationLocalServiceBaseImpl
 
 	public void afterPropertiesSet() {
 		if (socialActivityLocalService == null) {
-			socialActivityLocalService = SocialActivityLocalServiceFactory.getImpl();
+			socialActivityLocalService = (SocialActivityLocalService)PortalBeanLocatorUtil.locate(SocialActivityLocalService.class.getName() +
+					".impl");
 		}
 
 		if (socialActivityPersistence == null) {
-			socialActivityPersistence = SocialActivityUtil.getPersistence();
+			socialActivityPersistence = (SocialActivityPersistence)PortalBeanLocatorUtil.locate(SocialActivityPersistence.class.getName() +
+					".impl");
 		}
 
 		if (socialActivityFinder == null) {
-			socialActivityFinder = SocialActivityFinderUtil.getFinder();
+			socialActivityFinder = (SocialActivityFinder)PortalBeanLocatorUtil.locate(SocialActivityFinder.class.getName() +
+					".impl");
 		}
 
 		if (socialActivityInterpreterLocalService == null) {
-			socialActivityInterpreterLocalService = SocialActivityInterpreterLocalServiceFactory.getImpl();
+			socialActivityInterpreterLocalService = (SocialActivityInterpreterLocalService)PortalBeanLocatorUtil.locate(SocialActivityInterpreterLocalService.class.getName() +
+					".impl");
 		}
 
 		if (socialRelationPersistence == null) {
-			socialRelationPersistence = SocialRelationUtil.getPersistence();
+			socialRelationPersistence = (SocialRelationPersistence)PortalBeanLocatorUtil.locate(SocialRelationPersistence.class.getName() +
+					".impl");
 		}
 
 		if (socialRequestLocalService == null) {
-			socialRequestLocalService = SocialRequestLocalServiceFactory.getImpl();
+			socialRequestLocalService = (SocialRequestLocalService)PortalBeanLocatorUtil.locate(SocialRequestLocalService.class.getName() +
+					".impl");
 		}
 
 		if (socialRequestPersistence == null) {
-			socialRequestPersistence = SocialRequestUtil.getPersistence();
+			socialRequestPersistence = (SocialRequestPersistence)PortalBeanLocatorUtil.locate(SocialRequestPersistence.class.getName() +
+					".impl");
 		}
 
 		if (socialRequestInterpreterLocalService == null) {
-			socialRequestInterpreterLocalService = SocialRequestInterpreterLocalServiceFactory.getImpl();
+			socialRequestInterpreterLocalService = (SocialRequestInterpreterLocalService)PortalBeanLocatorUtil.locate(SocialRequestInterpreterLocalService.class.getName() +
+					".impl");
 		}
 
 		if (counterLocalService == null) {
-			counterLocalService = CounterLocalServiceFactory.getImpl();
+			counterLocalService = (CounterLocalService)PortalBeanLocatorUtil.locate(CounterLocalService.class.getName() +
+					".impl");
 		}
 
 		if (counterService == null) {
-			counterService = CounterServiceFactory.getImpl();
+			counterService = (CounterService)PortalBeanLocatorUtil.locate(CounterService.class.getName() +
+					".impl");
 		}
 
 		if (userLocalService == null) {
-			userLocalService = UserLocalServiceFactory.getImpl();
+			userLocalService = (UserLocalService)PortalBeanLocatorUtil.locate(UserLocalService.class.getName() +
+					".impl");
 		}
 
 		if (userService == null) {
-			userService = UserServiceFactory.getImpl();
+			userService = (UserService)PortalBeanLocatorUtil.locate(UserService.class.getName() +
+					".impl");
 		}
 
 		if (userPersistence == null) {
-			userPersistence = UserUtil.getPersistence();
+			userPersistence = (UserPersistence)PortalBeanLocatorUtil.locate(UserPersistence.class.getName() +
+					".impl");
 		}
 
 		if (userFinder == null) {
-			userFinder = UserFinderUtil.getFinder();
+			userFinder = (UserFinder)PortalBeanLocatorUtil.locate(UserFinder.class.getName() +
+					".impl");
 		}
 	}
 

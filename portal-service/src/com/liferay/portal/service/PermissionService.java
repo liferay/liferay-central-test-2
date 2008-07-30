@@ -44,7 +44,6 @@ package com.liferay.portal.service;
  *
  * @author Brian Wing Shun Chan
  *
- * @see com.liferay.portal.service.PermissionServiceFactory
  * @see com.liferay.portal.service.PermissionServiceUtil
  *
  */

@@ -39,15 +39,9 @@ package com.liferay.portlet.workflow.service;
  * on a bean instead of writing a lookup call and a method call.
  * </p>
  *
- * <p>
- * <code>com.liferay.portlet.workflow.service.WorkflowDefinitionServiceFactory</code>
- * is responsible for the lookup of the bean.
- * </p>
- *
  * @author Brian Wing Shun Chan
  *
  * @see com.liferay.portlet.workflow.service.WorkflowDefinitionService
- * @see com.liferay.portlet.workflow.service.WorkflowDefinitionServiceFactory
  *
  */
 public class WorkflowDefinitionServiceUtil {
@@ -56,10 +50,8 @@ public class WorkflowDefinitionServiceUtil {
 		boolean addGuestPermissions)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
-		WorkflowDefinitionService workflowDefinitionService = WorkflowDefinitionServiceFactory.getService();
-
-		return workflowDefinitionService.addDefinition(xml,
-			addCommunityPermissions, addGuestPermissions);
+		return _service.addDefinition(xml, addCommunityPermissions,
+			addGuestPermissions);
 	}
 
 	public static com.liferay.portlet.workflow.model.WorkflowDefinition addDefinition(
@@ -67,10 +59,8 @@ public class WorkflowDefinitionServiceUtil {
 		java.lang.String[] guestPermissions)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
-		WorkflowDefinitionService workflowDefinitionService = WorkflowDefinitionServiceFactory.getService();
-
-		return workflowDefinitionService.addDefinition(xml,
-			communityPermissions, guestPermissions);
+		return _service.addDefinition(xml, communityPermissions,
+			guestPermissions);
 	}
 
 	public static com.liferay.portlet.workflow.model.WorkflowDefinition addDefinition(
@@ -80,11 +70,8 @@ public class WorkflowDefinitionServiceUtil {
 		java.lang.String[] guestPermissions)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
-		WorkflowDefinitionService workflowDefinitionService = WorkflowDefinitionServiceFactory.getService();
-
-		return workflowDefinitionService.addDefinition(xml,
-			addCommunityPermissions, addGuestPermissions, communityPermissions,
-			guestPermissions);
+		return _service.addDefinition(xml, addCommunityPermissions,
+			addGuestPermissions, communityPermissions, guestPermissions);
 	}
 
 	public static void addDefinitionResources(
@@ -92,9 +79,7 @@ public class WorkflowDefinitionServiceUtil {
 		boolean addCommunityPermissions, boolean addGuestPermissions)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
-		WorkflowDefinitionService workflowDefinitionService = WorkflowDefinitionServiceFactory.getService();
-
-		workflowDefinitionService.addDefinitionResources(user, definitionId,
+		_service.addDefinitionResources(user, definitionId,
 			addCommunityPermissions, addGuestPermissions);
 	}
 
@@ -104,9 +89,7 @@ public class WorkflowDefinitionServiceUtil {
 		java.lang.String[] guestPermissions)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
-		WorkflowDefinitionService workflowDefinitionService = WorkflowDefinitionServiceFactory.getService();
-
-		workflowDefinitionService.addDefinitionResources(user, definitionId,
+		_service.addDefinitionResources(user, definitionId,
 			communityPermissions, guestPermissions);
 	}
 
@@ -114,8 +97,16 @@ public class WorkflowDefinitionServiceUtil {
 		long definitionId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
-		WorkflowDefinitionService workflowDefinitionService = WorkflowDefinitionServiceFactory.getService();
-
-		return workflowDefinitionService.getDefinition(definitionId);
+		return _service.getDefinition(definitionId);
 	}
+
+	public static WorkflowDefinitionService getService() {
+		return _service;
+	}
+
+	public void setService(WorkflowDefinitionService service) {
+		_service = service;
+	}
+
+	private static WorkflowDefinitionService _service;
 }

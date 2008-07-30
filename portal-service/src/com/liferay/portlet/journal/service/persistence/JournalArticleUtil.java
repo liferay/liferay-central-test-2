@@ -613,22 +613,12 @@ public class JournalArticleUtil {
 	}
 
 	public static JournalArticlePersistence getPersistence() {
-		return _getUtil()._persistence;
+		return _persistence;
 	}
 
 	public void setPersistence(JournalArticlePersistence persistence) {
 		_persistence = persistence;
 	}
 
-	private static JournalArticleUtil _getUtil() {
-		if (_util == null) {
-			_util = (JournalArticleUtil)com.liferay.portal.kernel.bean.PortalBeanLocatorUtil.locate(_UTIL);
-		}
-
-		return _util;
-	}
-
-	private static final String _UTIL = JournalArticleUtil.class.getName();
-	private static JournalArticleUtil _util;
-	private JournalArticlePersistence _persistence;
+	private static JournalArticlePersistence _persistence;
 }

@@ -41,22 +41,12 @@ public class DLFileEntryAndShortcutFinderUtil {
 	}
 
 	public static DLFileEntryAndShortcutFinder getFinder() {
-		return _getUtil()._finder;
+		return _finder;
 	}
 
 	public void setFinder(DLFileEntryAndShortcutFinder finder) {
 		_finder = finder;
 	}
 
-	private static DLFileEntryAndShortcutFinderUtil _getUtil() {
-		if (_util == null) {
-			_util = (DLFileEntryAndShortcutFinderUtil)com.liferay.portal.kernel.bean.PortalBeanLocatorUtil.locate(_UTIL);
-		}
-
-		return _util;
-	}
-
-	private static final String _UTIL = DLFileEntryAndShortcutFinderUtil.class.getName();
-	private static DLFileEntryAndShortcutFinderUtil _util;
-	private DLFileEntryAndShortcutFinder _finder;
+	private static DLFileEntryAndShortcutFinder _finder;
 }

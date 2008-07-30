@@ -374,22 +374,12 @@ public class CalEventUtil {
 	}
 
 	public static CalEventPersistence getPersistence() {
-		return _getUtil()._persistence;
+		return _persistence;
 	}
 
 	public void setPersistence(CalEventPersistence persistence) {
 		_persistence = persistence;
 	}
 
-	private static CalEventUtil _getUtil() {
-		if (_util == null) {
-			_util = (CalEventUtil)com.liferay.portal.kernel.bean.PortalBeanLocatorUtil.locate(_UTIL);
-		}
-
-		return _util;
-	}
-
-	private static final String _UTIL = CalEventUtil.class.getName();
-	private static CalEventUtil _util;
-	private CalEventPersistence _persistence;
+	private static CalEventPersistence _persistence;
 }

@@ -39,48 +39,44 @@ package com.liferay.portal.service;
  * on a bean instead of writing a lookup call and a method call.
  * </p>
  *
- * <p>
- * <code>com.liferay.portal.service.ListTypeServiceFactory</code>
- * is responsible for the lookup of the bean.
- * </p>
- *
  * @author Brian Wing Shun Chan
  *
  * @see com.liferay.portal.service.ListTypeService
- * @see com.liferay.portal.service.ListTypeServiceFactory
  *
  */
 public class ListTypeServiceUtil {
 	public static com.liferay.portal.model.ListType getListType(int listTypeId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
-		ListTypeService listTypeService = ListTypeServiceFactory.getService();
-
-		return listTypeService.getListType(listTypeId);
+		return _service.getListType(listTypeId);
 	}
 
 	public static java.util.List<com.liferay.portal.model.ListType> getListTypes(
 		java.lang.String type)
 		throws com.liferay.portal.SystemException, java.rmi.RemoteException {
-		ListTypeService listTypeService = ListTypeServiceFactory.getService();
-
-		return listTypeService.getListTypes(type);
+		return _service.getListTypes(type);
 	}
 
 	public static void validate(int listTypeId, java.lang.String type)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
-		ListTypeService listTypeService = ListTypeServiceFactory.getService();
-
-		listTypeService.validate(listTypeId, type);
+		_service.validate(listTypeId, type);
 	}
 
 	public static void validate(int listTypeId, long classNameId,
 		java.lang.String type)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
-		ListTypeService listTypeService = ListTypeServiceFactory.getService();
-
-		listTypeService.validate(listTypeId, classNameId, type);
+		_service.validate(listTypeId, classNameId, type);
 	}
+
+	public static ListTypeService getService() {
+		return _service;
+	}
+
+	public void setService(ListTypeService service) {
+		_service = service;
+	}
+
+	private static ListTypeService _service;
 }

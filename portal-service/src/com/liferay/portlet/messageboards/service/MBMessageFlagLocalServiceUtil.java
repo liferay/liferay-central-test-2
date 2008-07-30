@@ -39,110 +39,90 @@ package com.liferay.portlet.messageboards.service;
  * on a bean instead of writing a lookup call and a method call.
  * </p>
  *
- * <p>
- * <code>com.liferay.portlet.messageboards.service.MBMessageFlagLocalServiceFactory</code>
- * is responsible for the lookup of the bean.
- * </p>
- *
  * @author Brian Wing Shun Chan
  *
  * @see com.liferay.portlet.messageboards.service.MBMessageFlagLocalService
- * @see com.liferay.portlet.messageboards.service.MBMessageFlagLocalServiceFactory
  *
  */
 public class MBMessageFlagLocalServiceUtil {
 	public static com.liferay.portlet.messageboards.model.MBMessageFlag addMBMessageFlag(
 		com.liferay.portlet.messageboards.model.MBMessageFlag mbMessageFlag)
 		throws com.liferay.portal.SystemException {
-		MBMessageFlagLocalService mbMessageFlagLocalService = MBMessageFlagLocalServiceFactory.getService();
-
-		return mbMessageFlagLocalService.addMBMessageFlag(mbMessageFlag);
+		return _service.addMBMessageFlag(mbMessageFlag);
 	}
 
 	public static void deleteMBMessageFlag(long messageFlagId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		MBMessageFlagLocalService mbMessageFlagLocalService = MBMessageFlagLocalServiceFactory.getService();
-
-		mbMessageFlagLocalService.deleteMBMessageFlag(messageFlagId);
+		_service.deleteMBMessageFlag(messageFlagId);
 	}
 
 	public static void deleteMBMessageFlag(
 		com.liferay.portlet.messageboards.model.MBMessageFlag mbMessageFlag)
 		throws com.liferay.portal.SystemException {
-		MBMessageFlagLocalService mbMessageFlagLocalService = MBMessageFlagLocalServiceFactory.getService();
-
-		mbMessageFlagLocalService.deleteMBMessageFlag(mbMessageFlag);
+		_service.deleteMBMessageFlag(mbMessageFlag);
 	}
 
 	public static java.util.List<Object> dynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery)
 		throws com.liferay.portal.SystemException {
-		MBMessageFlagLocalService mbMessageFlagLocalService = MBMessageFlagLocalServiceFactory.getService();
-
-		return mbMessageFlagLocalService.dynamicQuery(dynamicQuery);
+		return _service.dynamicQuery(dynamicQuery);
 	}
 
 	public static java.util.List<Object> dynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery, int start,
 		int end) throws com.liferay.portal.SystemException {
-		MBMessageFlagLocalService mbMessageFlagLocalService = MBMessageFlagLocalServiceFactory.getService();
-
-		return mbMessageFlagLocalService.dynamicQuery(dynamicQuery, start, end);
+		return _service.dynamicQuery(dynamicQuery, start, end);
 	}
 
 	public static com.liferay.portlet.messageboards.model.MBMessageFlag getMBMessageFlag(
 		long messageFlagId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		MBMessageFlagLocalService mbMessageFlagLocalService = MBMessageFlagLocalServiceFactory.getService();
-
-		return mbMessageFlagLocalService.getMBMessageFlag(messageFlagId);
+		return _service.getMBMessageFlag(messageFlagId);
 	}
 
 	public static java.util.List<com.liferay.portlet.messageboards.model.MBMessageFlag> getMBMessageFlags(
 		int start, int end) throws com.liferay.portal.SystemException {
-		MBMessageFlagLocalService mbMessageFlagLocalService = MBMessageFlagLocalServiceFactory.getService();
-
-		return mbMessageFlagLocalService.getMBMessageFlags(start, end);
+		return _service.getMBMessageFlags(start, end);
 	}
 
 	public static int getMBMessageFlagsCount()
 		throws com.liferay.portal.SystemException {
-		MBMessageFlagLocalService mbMessageFlagLocalService = MBMessageFlagLocalServiceFactory.getService();
-
-		return mbMessageFlagLocalService.getMBMessageFlagsCount();
+		return _service.getMBMessageFlagsCount();
 	}
 
 	public static com.liferay.portlet.messageboards.model.MBMessageFlag updateMBMessageFlag(
 		com.liferay.portlet.messageboards.model.MBMessageFlag mbMessageFlag)
 		throws com.liferay.portal.SystemException {
-		MBMessageFlagLocalService mbMessageFlagLocalService = MBMessageFlagLocalServiceFactory.getService();
-
-		return mbMessageFlagLocalService.updateMBMessageFlag(mbMessageFlag);
+		return _service.updateMBMessageFlag(mbMessageFlag);
 	}
 
 	public static void addReadFlags(long userId,
 		java.util.List<com.liferay.portlet.messageboards.model.MBMessage> messages)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		MBMessageFlagLocalService mbMessageFlagLocalService = MBMessageFlagLocalServiceFactory.getService();
-
-		mbMessageFlagLocalService.addReadFlags(userId, messages);
+		_service.addReadFlags(userId, messages);
 	}
 
 	public static void deleteFlags(long userId)
 		throws com.liferay.portal.SystemException {
-		MBMessageFlagLocalService mbMessageFlagLocalService = MBMessageFlagLocalServiceFactory.getService();
-
-		mbMessageFlagLocalService.deleteFlags(userId);
+		_service.deleteFlags(userId);
 	}
 
 	public static boolean hasReadFlag(long userId, long messageId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		MBMessageFlagLocalService mbMessageFlagLocalService = MBMessageFlagLocalServiceFactory.getService();
-
-		return mbMessageFlagLocalService.hasReadFlag(userId, messageId);
+		return _service.hasReadFlag(userId, messageId);
 	}
+
+	public static MBMessageFlagLocalService getService() {
+		return _service;
+	}
+
+	public void setService(MBMessageFlagLocalService service) {
+		_service = service;
+	}
+
+	private static MBMessageFlagLocalService _service;
 }

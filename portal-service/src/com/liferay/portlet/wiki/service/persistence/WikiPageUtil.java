@@ -641,22 +641,12 @@ public class WikiPageUtil {
 	}
 
 	public static WikiPagePersistence getPersistence() {
-		return _getUtil()._persistence;
+		return _persistence;
 	}
 
 	public void setPersistence(WikiPagePersistence persistence) {
 		_persistence = persistence;
 	}
 
-	private static WikiPageUtil _getUtil() {
-		if (_util == null) {
-			_util = (WikiPageUtil)com.liferay.portal.kernel.bean.PortalBeanLocatorUtil.locate(_UTIL);
-		}
-
-		return _util;
-	}
-
-	private static final String _UTIL = WikiPageUtil.class.getName();
-	private static WikiPageUtil _util;
-	private WikiPagePersistence _persistence;
+	private static WikiPagePersistence _persistence;
 }

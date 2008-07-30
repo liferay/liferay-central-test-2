@@ -22,6 +22,7 @@
 
 package com.liferay.portal.service;
 
+import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
 
 /**
  * <a href="PortletPreferencesServiceFactory.java.html"><b><i>View Source</i></b></a>
@@ -51,33 +52,45 @@ package com.liferay.portal.service;
  *
  */
 public class PortletPreferencesServiceFactory {
+	/**
+	 * @deprecated
+	 */
 	public static PortletPreferencesService getService() {
 		return _getFactory()._service;
 	}
 
+	/**
+	 * @deprecated
+	 */
 	public static PortletPreferencesService getImpl() {
 		if (_impl == null) {
-			_impl = (PortletPreferencesService)com.liferay.portal.kernel.bean.PortalBeanLocatorUtil.locate(_IMPL);
+			_impl = (PortletPreferencesService)PortalBeanLocatorUtil.locate(_IMPL);
 		}
 
 		return _impl;
 	}
 
+	/**
+	 * @deprecated
+	 */
 	public static PortletPreferencesService getTxImpl() {
 		if (_txImpl == null) {
-			_txImpl = (PortletPreferencesService)com.liferay.portal.kernel.bean.PortalBeanLocatorUtil.locate(_TX_IMPL);
+			_txImpl = (PortletPreferencesService)PortalBeanLocatorUtil.locate(_TX_IMPL);
 		}
 
 		return _txImpl;
 	}
 
+	/**
+	 * @deprecated
+	 */
 	public void setService(PortletPreferencesService service) {
 		_service = service;
 	}
 
 	private static PortletPreferencesServiceFactory _getFactory() {
 		if (_factory == null) {
-			_factory = (PortletPreferencesServiceFactory)com.liferay.portal.kernel.bean.PortalBeanLocatorUtil.locate(_FACTORY);
+			_factory = (PortletPreferencesServiceFactory)PortalBeanLocatorUtil.locate(_FACTORY);
 		}
 
 		return _factory;

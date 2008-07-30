@@ -74,22 +74,12 @@ public class SocialActivityFinderUtil {
 	}
 
 	public static SocialActivityFinder getFinder() {
-		return _getUtil()._finder;
+		return _finder;
 	}
 
 	public void setFinder(SocialActivityFinder finder) {
 		_finder = finder;
 	}
 
-	private static SocialActivityFinderUtil _getUtil() {
-		if (_util == null) {
-			_util = (SocialActivityFinderUtil)com.liferay.portal.kernel.bean.PortalBeanLocatorUtil.locate(_UTIL);
-		}
-
-		return _util;
-	}
-
-	private static final String _UTIL = SocialActivityFinderUtil.class.getName();
-	private static SocialActivityFinderUtil _util;
-	private SocialActivityFinder _finder;
+	private static SocialActivityFinder _finder;
 }

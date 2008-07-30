@@ -39,15 +39,9 @@ package com.liferay.portlet.messageboards.service;
  * on a bean instead of writing a lookup call and a method call.
  * </p>
  *
- * <p>
- * <code>com.liferay.portlet.messageboards.service.MBCategoryServiceFactory</code>
- * is responsible for the lookup of the bean.
- * </p>
- *
  * @author Brian Wing Shun Chan
  *
  * @see com.liferay.portlet.messageboards.service.MBCategoryService
- * @see com.liferay.portlet.messageboards.service.MBCategoryServiceFactory
  *
  */
 public class MBCategoryServiceUtil {
@@ -57,10 +51,8 @@ public class MBCategoryServiceUtil {
 		boolean addGuestPermissions)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
-		MBCategoryService mbCategoryService = MBCategoryServiceFactory.getService();
-
-		return mbCategoryService.addCategory(plid, parentCategoryId, name,
-			description, addCommunityPermissions, addGuestPermissions);
+		return _service.addCategory(plid, parentCategoryId, name, description,
+			addCommunityPermissions, addGuestPermissions);
 	}
 
 	public static com.liferay.portlet.messageboards.model.MBCategory addCategory(
@@ -69,60 +61,45 @@ public class MBCategoryServiceUtil {
 		java.lang.String[] guestPermissions)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
-		MBCategoryService mbCategoryService = MBCategoryServiceFactory.getService();
-
-		return mbCategoryService.addCategory(plid, parentCategoryId, name,
-			description, communityPermissions, guestPermissions);
+		return _service.addCategory(plid, parentCategoryId, name, description,
+			communityPermissions, guestPermissions);
 	}
 
 	public static void deleteCategory(long categoryId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
-		MBCategoryService mbCategoryService = MBCategoryServiceFactory.getService();
-
-		mbCategoryService.deleteCategory(categoryId);
+		_service.deleteCategory(categoryId);
 	}
 
 	public static com.liferay.portlet.messageboards.model.MBCategory getCategory(
 		long categoryId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
-		MBCategoryService mbCategoryService = MBCategoryServiceFactory.getService();
-
-		return mbCategoryService.getCategory(categoryId);
+		return _service.getCategory(categoryId);
 	}
 
 	public static java.util.List<com.liferay.portlet.messageboards.model.MBCategory> getCategories(
 		long groupId, long parentCategoryId, int start, int end)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
-		MBCategoryService mbCategoryService = MBCategoryServiceFactory.getService();
-
-		return mbCategoryService.getCategories(groupId, parentCategoryId,
-			start, end);
+		return _service.getCategories(groupId, parentCategoryId, start, end);
 	}
 
 	public static int getCategoriesCount(long groupId, long parentCategoryId)
 		throws com.liferay.portal.SystemException, java.rmi.RemoteException {
-		MBCategoryService mbCategoryService = MBCategoryServiceFactory.getService();
-
-		return mbCategoryService.getCategoriesCount(groupId, parentCategoryId);
+		return _service.getCategoriesCount(groupId, parentCategoryId);
 	}
 
 	public static void subscribeCategory(long categoryId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
-		MBCategoryService mbCategoryService = MBCategoryServiceFactory.getService();
-
-		mbCategoryService.subscribeCategory(categoryId);
+		_service.subscribeCategory(categoryId);
 	}
 
 	public static void unsubscribeCategory(long categoryId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
-		MBCategoryService mbCategoryService = MBCategoryServiceFactory.getService();
-
-		mbCategoryService.unsubscribeCategory(categoryId);
+		_service.unsubscribeCategory(categoryId);
 	}
 
 	public static com.liferay.portlet.messageboards.model.MBCategory updateCategory(
@@ -130,9 +107,17 @@ public class MBCategoryServiceUtil {
 		java.lang.String description, boolean mergeWithParentCategory)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
-		MBCategoryService mbCategoryService = MBCategoryServiceFactory.getService();
-
-		return mbCategoryService.updateCategory(categoryId, parentCategoryId,
-			name, description, mergeWithParentCategory);
+		return _service.updateCategory(categoryId, parentCategoryId, name,
+			description, mergeWithParentCategory);
 	}
+
+	public static MBCategoryService getService() {
+		return _service;
+	}
+
+	public void setService(MBCategoryService service) {
+		_service = service;
+	}
+
+	private static MBCategoryService _service;
 }

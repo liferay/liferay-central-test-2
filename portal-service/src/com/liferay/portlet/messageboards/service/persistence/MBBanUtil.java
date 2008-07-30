@@ -314,22 +314,12 @@ public class MBBanUtil {
 	}
 
 	public static MBBanPersistence getPersistence() {
-		return _getUtil()._persistence;
+		return _persistence;
 	}
 
 	public void setPersistence(MBBanPersistence persistence) {
 		_persistence = persistence;
 	}
 
-	private static MBBanUtil _getUtil() {
-		if (_util == null) {
-			_util = (MBBanUtil)com.liferay.portal.kernel.bean.PortalBeanLocatorUtil.locate(_UTIL);
-		}
-
-		return _util;
-	}
-
-	private static final String _UTIL = MBBanUtil.class.getName();
-	private static MBBanUtil _util;
-	private MBBanPersistence _persistence;
+	private static MBBanPersistence _persistence;
 }

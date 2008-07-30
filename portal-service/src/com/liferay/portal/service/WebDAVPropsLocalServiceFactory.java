@@ -22,6 +22,7 @@
 
 package com.liferay.portal.service;
 
+import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
 
 /**
  * <a href="WebDAVPropsLocalServiceFactory.java.html"><b><i>View Source</i></b></a>
@@ -51,33 +52,45 @@ package com.liferay.portal.service;
  *
  */
 public class WebDAVPropsLocalServiceFactory {
+	/**
+	 * @deprecated
+	 */
 	public static WebDAVPropsLocalService getService() {
 		return _getFactory()._service;
 	}
 
+	/**
+	 * @deprecated
+	 */
 	public static WebDAVPropsLocalService getImpl() {
 		if (_impl == null) {
-			_impl = (WebDAVPropsLocalService)com.liferay.portal.kernel.bean.PortalBeanLocatorUtil.locate(_IMPL);
+			_impl = (WebDAVPropsLocalService)PortalBeanLocatorUtil.locate(_IMPL);
 		}
 
 		return _impl;
 	}
 
+	/**
+	 * @deprecated
+	 */
 	public static WebDAVPropsLocalService getTxImpl() {
 		if (_txImpl == null) {
-			_txImpl = (WebDAVPropsLocalService)com.liferay.portal.kernel.bean.PortalBeanLocatorUtil.locate(_TX_IMPL);
+			_txImpl = (WebDAVPropsLocalService)PortalBeanLocatorUtil.locate(_TX_IMPL);
 		}
 
 		return _txImpl;
 	}
 
+	/**
+	 * @deprecated
+	 */
 	public void setService(WebDAVPropsLocalService service) {
 		_service = service;
 	}
 
 	private static WebDAVPropsLocalServiceFactory _getFactory() {
 		if (_factory == null) {
-			_factory = (WebDAVPropsLocalServiceFactory)com.liferay.portal.kernel.bean.PortalBeanLocatorUtil.locate(_FACTORY);
+			_factory = (WebDAVPropsLocalServiceFactory)PortalBeanLocatorUtil.locate(_FACTORY);
 		}
 
 		return _factory;

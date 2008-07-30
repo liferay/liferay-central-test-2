@@ -41,22 +41,12 @@ public class TasksProposalFinderUtil {
 	}
 
 	public static TasksProposalFinder getFinder() {
-		return _getUtil()._finder;
+		return _finder;
 	}
 
 	public void setFinder(TasksProposalFinder finder) {
 		_finder = finder;
 	}
 
-	private static TasksProposalFinderUtil _getUtil() {
-		if (_util == null) {
-			_util = (TasksProposalFinderUtil)com.liferay.portal.kernel.bean.PortalBeanLocatorUtil.locate(_UTIL);
-		}
-
-		return _util;
-	}
-
-	private static final String _UTIL = TasksProposalFinderUtil.class.getName();
-	private static TasksProposalFinderUtil _util;
-	private TasksProposalFinder _finder;
+	private static TasksProposalFinder _finder;
 }

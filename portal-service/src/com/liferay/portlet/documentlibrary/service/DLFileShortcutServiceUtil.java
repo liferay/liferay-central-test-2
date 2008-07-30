@@ -39,15 +39,9 @@ package com.liferay.portlet.documentlibrary.service;
  * on a bean instead of writing a lookup call and a method call.
  * </p>
  *
- * <p>
- * <code>com.liferay.portlet.documentlibrary.service.DLFileShortcutServiceFactory</code>
- * is responsible for the lookup of the bean.
- * </p>
- *
  * @author Brian Wing Shun Chan
  *
  * @see com.liferay.portlet.documentlibrary.service.DLFileShortcutService
- * @see com.liferay.portlet.documentlibrary.service.DLFileShortcutServiceFactory
  *
  */
 public class DLFileShortcutServiceUtil {
@@ -56,10 +50,8 @@ public class DLFileShortcutServiceUtil {
 		boolean addCommunityPermissions, boolean addGuestPermissions)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
-		DLFileShortcutService dlFileShortcutService = DLFileShortcutServiceFactory.getService();
-
-		return dlFileShortcutService.addFileShortcut(folderId, toFolderId,
-			toName, addCommunityPermissions, addGuestPermissions);
+		return _service.addFileShortcut(folderId, toFolderId, toName,
+			addCommunityPermissions, addGuestPermissions);
 	}
 
 	public static com.liferay.portlet.documentlibrary.model.DLFileShortcut addFileShortcut(
@@ -68,27 +60,21 @@ public class DLFileShortcutServiceUtil {
 		java.lang.String[] guestPermissions)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
-		DLFileShortcutService dlFileShortcutService = DLFileShortcutServiceFactory.getService();
-
-		return dlFileShortcutService.addFileShortcut(folderId, toFolderId,
-			toName, communityPermissions, guestPermissions);
+		return _service.addFileShortcut(folderId, toFolderId, toName,
+			communityPermissions, guestPermissions);
 	}
 
 	public static void deleteFileShortcut(long fileShortcutId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
-		DLFileShortcutService dlFileShortcutService = DLFileShortcutServiceFactory.getService();
-
-		dlFileShortcutService.deleteFileShortcut(fileShortcutId);
+		_service.deleteFileShortcut(fileShortcutId);
 	}
 
 	public static com.liferay.portlet.documentlibrary.model.DLFileShortcut getFileShortcut(
 		long fileShortcutId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
-		DLFileShortcutService dlFileShortcutService = DLFileShortcutServiceFactory.getService();
-
-		return dlFileShortcutService.getFileShortcut(fileShortcutId);
+		return _service.getFileShortcut(fileShortcutId);
 	}
 
 	public static com.liferay.portlet.documentlibrary.model.DLFileShortcut updateFileShortcut(
@@ -96,9 +82,17 @@ public class DLFileShortcutServiceUtil {
 		java.lang.String toName)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
-		DLFileShortcutService dlFileShortcutService = DLFileShortcutServiceFactory.getService();
-
-		return dlFileShortcutService.updateFileShortcut(fileShortcutId,
-			folderId, toFolderId, toName);
+		return _service.updateFileShortcut(fileShortcutId, folderId,
+			toFolderId, toName);
 	}
+
+	public static DLFileShortcutService getService() {
+		return _service;
+	}
+
+	public void setService(DLFileShortcutService service) {
+		_service = service;
+	}
+
+	private static DLFileShortcutService _service;
 }

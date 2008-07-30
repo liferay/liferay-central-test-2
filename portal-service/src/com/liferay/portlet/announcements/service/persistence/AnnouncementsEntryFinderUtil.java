@@ -95,22 +95,12 @@ public class AnnouncementsEntryFinderUtil {
 	}
 
 	public static AnnouncementsEntryFinder getFinder() {
-		return _getUtil()._finder;
+		return _finder;
 	}
 
 	public void setFinder(AnnouncementsEntryFinder finder) {
 		_finder = finder;
 	}
 
-	private static AnnouncementsEntryFinderUtil _getUtil() {
-		if (_util == null) {
-			_util = (AnnouncementsEntryFinderUtil)com.liferay.portal.kernel.bean.PortalBeanLocatorUtil.locate(_UTIL);
-		}
-
-		return _util;
-	}
-
-	private static final String _UTIL = AnnouncementsEntryFinderUtil.class.getName();
-	private static AnnouncementsEntryFinderUtil _util;
-	private AnnouncementsEntryFinder _finder;
+	private static AnnouncementsEntryFinder _finder;
 }

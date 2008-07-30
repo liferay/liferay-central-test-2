@@ -39,48 +39,34 @@ package com.liferay.portal.service;
  * on a bean instead of writing a lookup call and a method call.
  * </p>
  *
- * <p>
- * <code>com.liferay.portal.service.ThemeLocalServiceFactory</code>
- * is responsible for the lookup of the bean.
- * </p>
- *
  * @author Brian Wing Shun Chan
  *
  * @see com.liferay.portal.service.ThemeLocalService
- * @see com.liferay.portal.service.ThemeLocalServiceFactory
  *
  */
 public class ThemeLocalServiceUtil {
 	public static com.liferay.portal.model.ColorScheme getColorScheme(
 		long companyId, java.lang.String themeId,
 		java.lang.String colorSchemeId, boolean wapTheme) {
-		ThemeLocalService themeLocalService = ThemeLocalServiceFactory.getService();
-
-		return themeLocalService.getColorScheme(companyId, themeId,
-			colorSchemeId, wapTheme);
+		return _service.getColorScheme(companyId, themeId, colorSchemeId,
+			wapTheme);
 	}
 
 	public static com.liferay.portal.model.Theme getTheme(long companyId,
 		java.lang.String themeId, boolean wapTheme) {
-		ThemeLocalService themeLocalService = ThemeLocalServiceFactory.getService();
-
-		return themeLocalService.getTheme(companyId, themeId, wapTheme);
+		return _service.getTheme(companyId, themeId, wapTheme);
 	}
 
 	public static java.util.List<com.liferay.portal.model.Theme> getThemes(
 		long companyId) {
-		ThemeLocalService themeLocalService = ThemeLocalServiceFactory.getService();
-
-		return themeLocalService.getThemes(companyId);
+		return _service.getThemes(companyId);
 	}
 
 	public static java.util.List<com.liferay.portal.model.Theme> getThemes(
 		long companyId, long groupId, long userId, boolean wapTheme)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		ThemeLocalService themeLocalService = ThemeLocalServiceFactory.getService();
-
-		return themeLocalService.getThemes(companyId, groupId, userId, wapTheme);
+		return _service.getThemes(companyId, groupId, userId, wapTheme);
 	}
 
 	public static java.util.List<String> init(
@@ -88,9 +74,7 @@ public class ThemeLocalServiceUtil {
 		java.lang.String themesPath, boolean loadFromServletContext,
 		java.lang.String[] xmls,
 		com.liferay.portal.kernel.plugin.PluginPackage pluginPackage) {
-		ThemeLocalService themeLocalService = ThemeLocalServiceFactory.getService();
-
-		return themeLocalService.init(servletContext, themesPath,
+		return _service.init(servletContext, themesPath,
 			loadFromServletContext, xmls, pluginPackage);
 	}
 
@@ -100,15 +84,21 @@ public class ThemeLocalServiceUtil {
 		java.lang.String themesPath, boolean loadFromServletContext,
 		java.lang.String[] xmls,
 		com.liferay.portal.kernel.plugin.PluginPackage pluginPackage) {
-		ThemeLocalService themeLocalService = ThemeLocalServiceFactory.getService();
-
-		return themeLocalService.init(servletContextName, servletContext,
-			themesPath, loadFromServletContext, xmls, pluginPackage);
+		return _service.init(servletContextName, servletContext, themesPath,
+			loadFromServletContext, xmls, pluginPackage);
 	}
 
 	public static void uninstallThemes(java.util.List<String> themeIds) {
-		ThemeLocalService themeLocalService = ThemeLocalServiceFactory.getService();
-
-		themeLocalService.uninstallThemes(themeIds);
+		_service.uninstallThemes(themeIds);
 	}
+
+	public static ThemeLocalService getService() {
+		return _service;
+	}
+
+	public void setService(ThemeLocalService service) {
+		_service = service;
+	}
+
+	private static ThemeLocalService _service;
 }

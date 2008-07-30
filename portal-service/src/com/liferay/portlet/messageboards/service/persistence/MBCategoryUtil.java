@@ -374,22 +374,12 @@ public class MBCategoryUtil {
 	}
 
 	public static MBCategoryPersistence getPersistence() {
-		return _getUtil()._persistence;
+		return _persistence;
 	}
 
 	public void setPersistence(MBCategoryPersistence persistence) {
 		_persistence = persistence;
 	}
 
-	private static MBCategoryUtil _getUtil() {
-		if (_util == null) {
-			_util = (MBCategoryUtil)com.liferay.portal.kernel.bean.PortalBeanLocatorUtil.locate(_UTIL);
-		}
-
-		return _util;
-	}
-
-	private static final String _UTIL = MBCategoryUtil.class.getName();
-	private static MBCategoryUtil _util;
-	private MBCategoryPersistence _persistence;
+	private static MBCategoryPersistence _persistence;
 }

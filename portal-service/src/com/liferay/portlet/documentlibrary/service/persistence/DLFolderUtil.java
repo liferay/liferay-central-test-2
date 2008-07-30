@@ -451,22 +451,12 @@ public class DLFolderUtil {
 	}
 
 	public static DLFolderPersistence getPersistence() {
-		return _getUtil()._persistence;
+		return _persistence;
 	}
 
 	public void setPersistence(DLFolderPersistence persistence) {
 		_persistence = persistence;
 	}
 
-	private static DLFolderUtil _getUtil() {
-		if (_util == null) {
-			_util = (DLFolderUtil)com.liferay.portal.kernel.bean.PortalBeanLocatorUtil.locate(_UTIL);
-		}
-
-		return _util;
-	}
-
-	private static final String _UTIL = DLFolderUtil.class.getName();
-	private static DLFolderUtil _util;
-	private DLFolderPersistence _persistence;
+	private static DLFolderPersistence _persistence;
 }

@@ -372,22 +372,12 @@ public class DLFileEntryUtil {
 	}
 
 	public static DLFileEntryPersistence getPersistence() {
-		return _getUtil()._persistence;
+		return _persistence;
 	}
 
 	public void setPersistence(DLFileEntryPersistence persistence) {
 		_persistence = persistence;
 	}
 
-	private static DLFileEntryUtil _getUtil() {
-		if (_util == null) {
-			_util = (DLFileEntryUtil)com.liferay.portal.kernel.bean.PortalBeanLocatorUtil.locate(_UTIL);
-		}
-
-		return _util;
-	}
-
-	private static final String _UTIL = DLFileEntryUtil.class.getName();
-	private static DLFileEntryUtil _util;
-	private DLFileEntryPersistence _persistence;
+	private static DLFileEntryPersistence _persistence;
 }

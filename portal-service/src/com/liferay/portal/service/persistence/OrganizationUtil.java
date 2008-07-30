@@ -505,22 +505,12 @@ public class OrganizationUtil {
 	}
 
 	public static OrganizationPersistence getPersistence() {
-		return _getUtil()._persistence;
+		return _persistence;
 	}
 
 	public void setPersistence(OrganizationPersistence persistence) {
 		_persistence = persistence;
 	}
 
-	private static OrganizationUtil _getUtil() {
-		if (_util == null) {
-			_util = (OrganizationUtil)com.liferay.portal.kernel.bean.PortalBeanLocatorUtil.locate(_UTIL);
-		}
-
-		return _util;
-	}
-
-	private static final String _UTIL = OrganizationUtil.class.getName();
-	private static OrganizationUtil _util;
-	private OrganizationPersistence _persistence;
+	private static OrganizationPersistence _persistence;
 }

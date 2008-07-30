@@ -39,95 +39,78 @@ package com.liferay.portal.service;
  * on a bean instead of writing a lookup call and a method call.
  * </p>
  *
- * <p>
- * <code>com.liferay.portal.service.UserTrackerPathLocalServiceFactory</code>
- * is responsible for the lookup of the bean.
- * </p>
- *
  * @author Brian Wing Shun Chan
  *
  * @see com.liferay.portal.service.UserTrackerPathLocalService
- * @see com.liferay.portal.service.UserTrackerPathLocalServiceFactory
  *
  */
 public class UserTrackerPathLocalServiceUtil {
 	public static com.liferay.portal.model.UserTrackerPath addUserTrackerPath(
 		com.liferay.portal.model.UserTrackerPath userTrackerPath)
 		throws com.liferay.portal.SystemException {
-		UserTrackerPathLocalService userTrackerPathLocalService = UserTrackerPathLocalServiceFactory.getService();
-
-		return userTrackerPathLocalService.addUserTrackerPath(userTrackerPath);
+		return _service.addUserTrackerPath(userTrackerPath);
 	}
 
 	public static void deleteUserTrackerPath(long userTrackerPathId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		UserTrackerPathLocalService userTrackerPathLocalService = UserTrackerPathLocalServiceFactory.getService();
-
-		userTrackerPathLocalService.deleteUserTrackerPath(userTrackerPathId);
+		_service.deleteUserTrackerPath(userTrackerPathId);
 	}
 
 	public static void deleteUserTrackerPath(
 		com.liferay.portal.model.UserTrackerPath userTrackerPath)
 		throws com.liferay.portal.SystemException {
-		UserTrackerPathLocalService userTrackerPathLocalService = UserTrackerPathLocalServiceFactory.getService();
-
-		userTrackerPathLocalService.deleteUserTrackerPath(userTrackerPath);
+		_service.deleteUserTrackerPath(userTrackerPath);
 	}
 
 	public static java.util.List<Object> dynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery)
 		throws com.liferay.portal.SystemException {
-		UserTrackerPathLocalService userTrackerPathLocalService = UserTrackerPathLocalServiceFactory.getService();
-
-		return userTrackerPathLocalService.dynamicQuery(dynamicQuery);
+		return _service.dynamicQuery(dynamicQuery);
 	}
 
 	public static java.util.List<Object> dynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery, int start,
 		int end) throws com.liferay.portal.SystemException {
-		UserTrackerPathLocalService userTrackerPathLocalService = UserTrackerPathLocalServiceFactory.getService();
-
-		return userTrackerPathLocalService.dynamicQuery(dynamicQuery, start, end);
+		return _service.dynamicQuery(dynamicQuery, start, end);
 	}
 
 	public static com.liferay.portal.model.UserTrackerPath getUserTrackerPath(
 		long userTrackerPathId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		UserTrackerPathLocalService userTrackerPathLocalService = UserTrackerPathLocalServiceFactory.getService();
-
-		return userTrackerPathLocalService.getUserTrackerPath(userTrackerPathId);
+		return _service.getUserTrackerPath(userTrackerPathId);
 	}
 
 	public static java.util.List<com.liferay.portal.model.UserTrackerPath> getUserTrackerPaths(
 		int start, int end) throws com.liferay.portal.SystemException {
-		UserTrackerPathLocalService userTrackerPathLocalService = UserTrackerPathLocalServiceFactory.getService();
-
-		return userTrackerPathLocalService.getUserTrackerPaths(start, end);
+		return _service.getUserTrackerPaths(start, end);
 	}
 
 	public static int getUserTrackerPathsCount()
 		throws com.liferay.portal.SystemException {
-		UserTrackerPathLocalService userTrackerPathLocalService = UserTrackerPathLocalServiceFactory.getService();
-
-		return userTrackerPathLocalService.getUserTrackerPathsCount();
+		return _service.getUserTrackerPathsCount();
 	}
 
 	public static com.liferay.portal.model.UserTrackerPath updateUserTrackerPath(
 		com.liferay.portal.model.UserTrackerPath userTrackerPath)
 		throws com.liferay.portal.SystemException {
-		UserTrackerPathLocalService userTrackerPathLocalService = UserTrackerPathLocalServiceFactory.getService();
-
-		return userTrackerPathLocalService.updateUserTrackerPath(userTrackerPath);
+		return _service.updateUserTrackerPath(userTrackerPath);
 	}
 
 	public static java.util.List<com.liferay.portal.model.UserTrackerPath> getUserTrackerPaths(
 		long userTrackerId, int start, int end)
 		throws com.liferay.portal.SystemException {
-		UserTrackerPathLocalService userTrackerPathLocalService = UserTrackerPathLocalServiceFactory.getService();
-
-		return userTrackerPathLocalService.getUserTrackerPaths(userTrackerId,
-			start, end);
+		return _service.getUserTrackerPaths(userTrackerId, start, end);
 	}
+
+	public static UserTrackerPathLocalService getService() {
+		return _service;
+	}
+
+	public void setService(UserTrackerPathLocalService service) {
+		_service = service;
+	}
+
+	private static UserTrackerPathLocalService _service;
 }

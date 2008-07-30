@@ -39,87 +39,63 @@ package com.liferay.portlet.expando.service;
  * on a bean instead of writing a lookup call and a method call.
  * </p>
  *
- * <p>
- * <code>com.liferay.portlet.expando.service.ExpandoValueLocalServiceFactory</code>
- * is responsible for the lookup of the bean.
- * </p>
- *
  * @author Brian Wing Shun Chan
  *
  * @see com.liferay.portlet.expando.service.ExpandoValueLocalService
- * @see com.liferay.portlet.expando.service.ExpandoValueLocalServiceFactory
  *
  */
 public class ExpandoValueLocalServiceUtil {
 	public static com.liferay.portlet.expando.model.ExpandoValue addExpandoValue(
 		com.liferay.portlet.expando.model.ExpandoValue expandoValue)
 		throws com.liferay.portal.SystemException {
-		ExpandoValueLocalService expandoValueLocalService = ExpandoValueLocalServiceFactory.getService();
-
-		return expandoValueLocalService.addExpandoValue(expandoValue);
+		return _service.addExpandoValue(expandoValue);
 	}
 
 	public static void deleteExpandoValue(long valueId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		ExpandoValueLocalService expandoValueLocalService = ExpandoValueLocalServiceFactory.getService();
-
-		expandoValueLocalService.deleteExpandoValue(valueId);
+		_service.deleteExpandoValue(valueId);
 	}
 
 	public static void deleteExpandoValue(
 		com.liferay.portlet.expando.model.ExpandoValue expandoValue)
 		throws com.liferay.portal.SystemException {
-		ExpandoValueLocalService expandoValueLocalService = ExpandoValueLocalServiceFactory.getService();
-
-		expandoValueLocalService.deleteExpandoValue(expandoValue);
+		_service.deleteExpandoValue(expandoValue);
 	}
 
 	public static java.util.List<Object> dynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery)
 		throws com.liferay.portal.SystemException {
-		ExpandoValueLocalService expandoValueLocalService = ExpandoValueLocalServiceFactory.getService();
-
-		return expandoValueLocalService.dynamicQuery(dynamicQuery);
+		return _service.dynamicQuery(dynamicQuery);
 	}
 
 	public static java.util.List<Object> dynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery, int start,
 		int end) throws com.liferay.portal.SystemException {
-		ExpandoValueLocalService expandoValueLocalService = ExpandoValueLocalServiceFactory.getService();
-
-		return expandoValueLocalService.dynamicQuery(dynamicQuery, start, end);
+		return _service.dynamicQuery(dynamicQuery, start, end);
 	}
 
 	public static com.liferay.portlet.expando.model.ExpandoValue getExpandoValue(
 		long valueId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		ExpandoValueLocalService expandoValueLocalService = ExpandoValueLocalServiceFactory.getService();
-
-		return expandoValueLocalService.getExpandoValue(valueId);
+		return _service.getExpandoValue(valueId);
 	}
 
 	public static java.util.List<com.liferay.portlet.expando.model.ExpandoValue> getExpandoValues(
 		int start, int end) throws com.liferay.portal.SystemException {
-		ExpandoValueLocalService expandoValueLocalService = ExpandoValueLocalServiceFactory.getService();
-
-		return expandoValueLocalService.getExpandoValues(start, end);
+		return _service.getExpandoValues(start, end);
 	}
 
 	public static int getExpandoValuesCount()
 		throws com.liferay.portal.SystemException {
-		ExpandoValueLocalService expandoValueLocalService = ExpandoValueLocalServiceFactory.getService();
-
-		return expandoValueLocalService.getExpandoValuesCount();
+		return _service.getExpandoValuesCount();
 	}
 
 	public static com.liferay.portlet.expando.model.ExpandoValue updateExpandoValue(
 		com.liferay.portlet.expando.model.ExpandoValue expandoValue)
 		throws com.liferay.portal.SystemException {
-		ExpandoValueLocalService expandoValueLocalService = ExpandoValueLocalServiceFactory.getService();
-
-		return expandoValueLocalService.updateExpandoValue(expandoValue);
+		return _service.updateExpandoValue(expandoValue);
 	}
 
 	public static com.liferay.portlet.expando.model.ExpandoValue addValue(
@@ -127,10 +103,7 @@ public class ExpandoValueLocalServiceUtil {
 		java.lang.String columnName, long classPK, boolean data)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		ExpandoValueLocalService expandoValueLocalService = ExpandoValueLocalServiceFactory.getService();
-
-		return expandoValueLocalService.addValue(className, tableName,
-			columnName, classPK, data);
+		return _service.addValue(className, tableName, columnName, classPK, data);
 	}
 
 	public static com.liferay.portlet.expando.model.ExpandoValue addValue(
@@ -138,10 +111,7 @@ public class ExpandoValueLocalServiceUtil {
 		java.lang.String columnName, long classPK, boolean[] data)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		ExpandoValueLocalService expandoValueLocalService = ExpandoValueLocalServiceFactory.getService();
-
-		return expandoValueLocalService.addValue(className, tableName,
-			columnName, classPK, data);
+		return _service.addValue(className, tableName, columnName, classPK, data);
 	}
 
 	public static com.liferay.portlet.expando.model.ExpandoValue addValue(
@@ -149,10 +119,7 @@ public class ExpandoValueLocalServiceUtil {
 		java.lang.String columnName, long classPK, java.util.Date data)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		ExpandoValueLocalService expandoValueLocalService = ExpandoValueLocalServiceFactory.getService();
-
-		return expandoValueLocalService.addValue(className, tableName,
-			columnName, classPK, data);
+		return _service.addValue(className, tableName, columnName, classPK, data);
 	}
 
 	public static com.liferay.portlet.expando.model.ExpandoValue addValue(
@@ -160,10 +127,7 @@ public class ExpandoValueLocalServiceUtil {
 		java.lang.String columnName, long classPK, java.util.Date[] data)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		ExpandoValueLocalService expandoValueLocalService = ExpandoValueLocalServiceFactory.getService();
-
-		return expandoValueLocalService.addValue(className, tableName,
-			columnName, classPK, data);
+		return _service.addValue(className, tableName, columnName, classPK, data);
 	}
 
 	public static com.liferay.portlet.expando.model.ExpandoValue addValue(
@@ -171,10 +135,7 @@ public class ExpandoValueLocalServiceUtil {
 		java.lang.String columnName, long classPK, double data)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		ExpandoValueLocalService expandoValueLocalService = ExpandoValueLocalServiceFactory.getService();
-
-		return expandoValueLocalService.addValue(className, tableName,
-			columnName, classPK, data);
+		return _service.addValue(className, tableName, columnName, classPK, data);
 	}
 
 	public static com.liferay.portlet.expando.model.ExpandoValue addValue(
@@ -182,10 +143,7 @@ public class ExpandoValueLocalServiceUtil {
 		java.lang.String columnName, long classPK, double[] data)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		ExpandoValueLocalService expandoValueLocalService = ExpandoValueLocalServiceFactory.getService();
-
-		return expandoValueLocalService.addValue(className, tableName,
-			columnName, classPK, data);
+		return _service.addValue(className, tableName, columnName, classPK, data);
 	}
 
 	public static com.liferay.portlet.expando.model.ExpandoValue addValue(
@@ -193,10 +151,7 @@ public class ExpandoValueLocalServiceUtil {
 		java.lang.String columnName, long classPK, float data)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		ExpandoValueLocalService expandoValueLocalService = ExpandoValueLocalServiceFactory.getService();
-
-		return expandoValueLocalService.addValue(className, tableName,
-			columnName, classPK, data);
+		return _service.addValue(className, tableName, columnName, classPK, data);
 	}
 
 	public static com.liferay.portlet.expando.model.ExpandoValue addValue(
@@ -204,10 +159,7 @@ public class ExpandoValueLocalServiceUtil {
 		java.lang.String columnName, long classPK, float[] data)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		ExpandoValueLocalService expandoValueLocalService = ExpandoValueLocalServiceFactory.getService();
-
-		return expandoValueLocalService.addValue(className, tableName,
-			columnName, classPK, data);
+		return _service.addValue(className, tableName, columnName, classPK, data);
 	}
 
 	public static com.liferay.portlet.expando.model.ExpandoValue addValue(
@@ -215,10 +167,7 @@ public class ExpandoValueLocalServiceUtil {
 		java.lang.String columnName, long classPK, int data)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		ExpandoValueLocalService expandoValueLocalService = ExpandoValueLocalServiceFactory.getService();
-
-		return expandoValueLocalService.addValue(className, tableName,
-			columnName, classPK, data);
+		return _service.addValue(className, tableName, columnName, classPK, data);
 	}
 
 	public static com.liferay.portlet.expando.model.ExpandoValue addValue(
@@ -226,10 +175,7 @@ public class ExpandoValueLocalServiceUtil {
 		java.lang.String columnName, long classPK, int[] data)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		ExpandoValueLocalService expandoValueLocalService = ExpandoValueLocalServiceFactory.getService();
-
-		return expandoValueLocalService.addValue(className, tableName,
-			columnName, classPK, data);
+		return _service.addValue(className, tableName, columnName, classPK, data);
 	}
 
 	public static com.liferay.portlet.expando.model.ExpandoValue addValue(
@@ -237,10 +183,7 @@ public class ExpandoValueLocalServiceUtil {
 		java.lang.String columnName, long classPK, long data)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		ExpandoValueLocalService expandoValueLocalService = ExpandoValueLocalServiceFactory.getService();
-
-		return expandoValueLocalService.addValue(className, tableName,
-			columnName, classPK, data);
+		return _service.addValue(className, tableName, columnName, classPK, data);
 	}
 
 	public static com.liferay.portlet.expando.model.ExpandoValue addValue(
@@ -248,10 +191,7 @@ public class ExpandoValueLocalServiceUtil {
 		java.lang.String columnName, long classPK, long[] data)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		ExpandoValueLocalService expandoValueLocalService = ExpandoValueLocalServiceFactory.getService();
-
-		return expandoValueLocalService.addValue(className, tableName,
-			columnName, classPK, data);
+		return _service.addValue(className, tableName, columnName, classPK, data);
 	}
 
 	public static com.liferay.portlet.expando.model.ExpandoValue addValue(
@@ -259,10 +199,7 @@ public class ExpandoValueLocalServiceUtil {
 		java.lang.String columnName, long classPK, short data)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		ExpandoValueLocalService expandoValueLocalService = ExpandoValueLocalServiceFactory.getService();
-
-		return expandoValueLocalService.addValue(className, tableName,
-			columnName, classPK, data);
+		return _service.addValue(className, tableName, columnName, classPK, data);
 	}
 
 	public static com.liferay.portlet.expando.model.ExpandoValue addValue(
@@ -270,10 +207,7 @@ public class ExpandoValueLocalServiceUtil {
 		java.lang.String columnName, long classPK, short[] data)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		ExpandoValueLocalService expandoValueLocalService = ExpandoValueLocalServiceFactory.getService();
-
-		return expandoValueLocalService.addValue(className, tableName,
-			columnName, classPK, data);
+		return _service.addValue(className, tableName, columnName, classPK, data);
 	}
 
 	public static com.liferay.portlet.expando.model.ExpandoValue addValue(
@@ -281,10 +215,7 @@ public class ExpandoValueLocalServiceUtil {
 		java.lang.String columnName, long classPK, java.lang.String data)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		ExpandoValueLocalService expandoValueLocalService = ExpandoValueLocalServiceFactory.getService();
-
-		return expandoValueLocalService.addValue(className, tableName,
-			columnName, classPK, data);
+		return _service.addValue(className, tableName, columnName, classPK, data);
 	}
 
 	public static com.liferay.portlet.expando.model.ExpandoValue addValue(
@@ -292,181 +223,133 @@ public class ExpandoValueLocalServiceUtil {
 		java.lang.String columnName, long classPK, java.lang.String[] data)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		ExpandoValueLocalService expandoValueLocalService = ExpandoValueLocalServiceFactory.getService();
-
-		return expandoValueLocalService.addValue(className, tableName,
-			columnName, classPK, data);
+		return _service.addValue(className, tableName, columnName, classPK, data);
 	}
 
 	public static com.liferay.portlet.expando.model.ExpandoValue addValue(
 		long classNameId, long tableId, long columnId, long classPK,
 		java.lang.String data) throws com.liferay.portal.SystemException {
-		ExpandoValueLocalService expandoValueLocalService = ExpandoValueLocalServiceFactory.getService();
-
-		return expandoValueLocalService.addValue(classNameId, tableId,
-			columnId, classPK, data);
+		return _service.addValue(classNameId, tableId, columnId, classPK, data);
 	}
 
 	public static void deleteColumnValues(long columnId)
 		throws com.liferay.portal.SystemException {
-		ExpandoValueLocalService expandoValueLocalService = ExpandoValueLocalServiceFactory.getService();
-
-		expandoValueLocalService.deleteColumnValues(columnId);
+		_service.deleteColumnValues(columnId);
 	}
 
 	public static void deleteRowValues(long rowId)
 		throws com.liferay.portal.SystemException {
-		ExpandoValueLocalService expandoValueLocalService = ExpandoValueLocalServiceFactory.getService();
-
-		expandoValueLocalService.deleteRowValues(rowId);
+		_service.deleteRowValues(rowId);
 	}
 
 	public static void deleteTableValues(long tableId)
 		throws com.liferay.portal.SystemException {
-		ExpandoValueLocalService expandoValueLocalService = ExpandoValueLocalServiceFactory.getService();
-
-		expandoValueLocalService.deleteTableValues(tableId);
+		_service.deleteTableValues(tableId);
 	}
 
 	public static void deleteValue(long valueId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		ExpandoValueLocalService expandoValueLocalService = ExpandoValueLocalServiceFactory.getService();
-
-		expandoValueLocalService.deleteValue(valueId);
+		_service.deleteValue(valueId);
 	}
 
 	public static void deleteValue(long columnId, long rowId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		ExpandoValueLocalService expandoValueLocalService = ExpandoValueLocalServiceFactory.getService();
-
-		expandoValueLocalService.deleteValue(columnId, rowId);
+		_service.deleteValue(columnId, rowId);
 	}
 
 	public static void deleteValue(java.lang.String className,
 		java.lang.String tableName, java.lang.String columnName, long classPK)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		ExpandoValueLocalService expandoValueLocalService = ExpandoValueLocalServiceFactory.getService();
-
-		expandoValueLocalService.deleteValue(className, tableName, columnName,
-			classPK);
+		_service.deleteValue(className, tableName, columnName, classPK);
 	}
 
 	public static void deleteValue(long classNameId,
 		java.lang.String tableName, java.lang.String columnName, long classPK)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		ExpandoValueLocalService expandoValueLocalService = ExpandoValueLocalServiceFactory.getService();
-
-		expandoValueLocalService.deleteValue(classNameId, tableName,
-			columnName, classPK);
+		_service.deleteValue(classNameId, tableName, columnName, classPK);
 	}
 
 	public static void deleteValues(java.lang.String className, long classPK)
 		throws com.liferay.portal.SystemException {
-		ExpandoValueLocalService expandoValueLocalService = ExpandoValueLocalServiceFactory.getService();
-
-		expandoValueLocalService.deleteValues(className, classPK);
+		_service.deleteValues(className, classPK);
 	}
 
 	public static void deleteValues(long classNameId, long classPK)
 		throws com.liferay.portal.SystemException {
-		ExpandoValueLocalService expandoValueLocalService = ExpandoValueLocalServiceFactory.getService();
-
-		expandoValueLocalService.deleteValues(classNameId, classPK);
+		_service.deleteValues(classNameId, classPK);
 	}
 
 	public static java.util.List<com.liferay.portlet.expando.model.ExpandoValue> getColumnValues(
 		long columnId, int start, int end)
 		throws com.liferay.portal.SystemException {
-		ExpandoValueLocalService expandoValueLocalService = ExpandoValueLocalServiceFactory.getService();
-
-		return expandoValueLocalService.getColumnValues(columnId, start, end);
+		return _service.getColumnValues(columnId, start, end);
 	}
 
 	public static java.util.List<com.liferay.portlet.expando.model.ExpandoValue> getColumnValues(
 		java.lang.String className, java.lang.String tableName,
 		java.lang.String columnName, int start, int end)
 		throws com.liferay.portal.SystemException {
-		ExpandoValueLocalService expandoValueLocalService = ExpandoValueLocalServiceFactory.getService();
-
-		return expandoValueLocalService.getColumnValues(className, tableName,
-			columnName, start, end);
+		return _service.getColumnValues(className, tableName, columnName,
+			start, end);
 	}
 
 	public static java.util.List<com.liferay.portlet.expando.model.ExpandoValue> getColumnValues(
 		long classNameId, java.lang.String tableName,
 		java.lang.String columnName, int start, int end)
 		throws com.liferay.portal.SystemException {
-		ExpandoValueLocalService expandoValueLocalService = ExpandoValueLocalServiceFactory.getService();
-
-		return expandoValueLocalService.getColumnValues(classNameId, tableName,
-			columnName, start, end);
+		return _service.getColumnValues(classNameId, tableName, columnName,
+			start, end);
 	}
 
 	public static java.util.List<com.liferay.portlet.expando.model.ExpandoValue> getColumnValues(
 		java.lang.String className, java.lang.String tableName,
 		java.lang.String columnName, java.lang.String data, int start, int end)
 		throws com.liferay.portal.SystemException {
-		ExpandoValueLocalService expandoValueLocalService = ExpandoValueLocalServiceFactory.getService();
-
-		return expandoValueLocalService.getColumnValues(className, tableName,
-			columnName, data, start, end);
+		return _service.getColumnValues(className, tableName, columnName, data,
+			start, end);
 	}
 
 	public static java.util.List<com.liferay.portlet.expando.model.ExpandoValue> getColumnValues(
 		long classNameId, java.lang.String tableName,
 		java.lang.String columnName, java.lang.String data, int start, int end)
 		throws com.liferay.portal.SystemException {
-		ExpandoValueLocalService expandoValueLocalService = ExpandoValueLocalServiceFactory.getService();
-
-		return expandoValueLocalService.getColumnValues(classNameId, tableName,
-			columnName, data, start, end);
+		return _service.getColumnValues(classNameId, tableName, columnName,
+			data, start, end);
 	}
 
 	public static int getColumnValuesCount(long columnId)
 		throws com.liferay.portal.SystemException {
-		ExpandoValueLocalService expandoValueLocalService = ExpandoValueLocalServiceFactory.getService();
-
-		return expandoValueLocalService.getColumnValuesCount(columnId);
+		return _service.getColumnValuesCount(columnId);
 	}
 
 	public static int getColumnValuesCount(java.lang.String className,
 		java.lang.String tableName, java.lang.String columnName)
 		throws com.liferay.portal.SystemException {
-		ExpandoValueLocalService expandoValueLocalService = ExpandoValueLocalServiceFactory.getService();
-
-		return expandoValueLocalService.getColumnValuesCount(className,
-			tableName, columnName);
+		return _service.getColumnValuesCount(className, tableName, columnName);
 	}
 
 	public static int getColumnValuesCount(long classNameId,
 		java.lang.String tableName, java.lang.String columnName)
 		throws com.liferay.portal.SystemException {
-		ExpandoValueLocalService expandoValueLocalService = ExpandoValueLocalServiceFactory.getService();
-
-		return expandoValueLocalService.getColumnValuesCount(classNameId,
-			tableName, columnName);
+		return _service.getColumnValuesCount(classNameId, tableName, columnName);
 	}
 
 	public static int getColumnValuesCount(java.lang.String className,
 		java.lang.String tableName, java.lang.String columnName,
 		java.lang.String data) throws com.liferay.portal.SystemException {
-		ExpandoValueLocalService expandoValueLocalService = ExpandoValueLocalServiceFactory.getService();
-
-		return expandoValueLocalService.getColumnValuesCount(className,
-			tableName, columnName, data);
+		return _service.getColumnValuesCount(className, tableName, columnName,
+			data);
 	}
 
 	public static int getColumnValuesCount(long classNameId,
 		java.lang.String tableName, java.lang.String columnName,
 		java.lang.String data) throws com.liferay.portal.SystemException {
-		ExpandoValueLocalService expandoValueLocalService = ExpandoValueLocalServiceFactory.getService();
-
-		return expandoValueLocalService.getColumnValuesCount(classNameId,
-			tableName, columnName, data);
+		return _service.getColumnValuesCount(classNameId, tableName,
+			columnName, data);
 	}
 
 	public static boolean getData(java.lang.String className,
@@ -474,10 +357,8 @@ public class ExpandoValueLocalServiceUtil {
 		boolean defaultData)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		ExpandoValueLocalService expandoValueLocalService = ExpandoValueLocalServiceFactory.getService();
-
-		return expandoValueLocalService.getData(className, tableName,
-			columnName, classPK, defaultData);
+		return _service.getData(className, tableName, columnName, classPK,
+			defaultData);
 	}
 
 	public static boolean[] getData(java.lang.String className,
@@ -485,10 +366,8 @@ public class ExpandoValueLocalServiceUtil {
 		boolean[] defaultData)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		ExpandoValueLocalService expandoValueLocalService = ExpandoValueLocalServiceFactory.getService();
-
-		return expandoValueLocalService.getData(className, tableName,
-			columnName, classPK, defaultData);
+		return _service.getData(className, tableName, columnName, classPK,
+			defaultData);
 	}
 
 	public static java.util.Date getData(java.lang.String className,
@@ -496,10 +375,8 @@ public class ExpandoValueLocalServiceUtil {
 		java.util.Date defaultData)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		ExpandoValueLocalService expandoValueLocalService = ExpandoValueLocalServiceFactory.getService();
-
-		return expandoValueLocalService.getData(className, tableName,
-			columnName, classPK, defaultData);
+		return _service.getData(className, tableName, columnName, classPK,
+			defaultData);
 	}
 
 	public static java.util.Date[] getData(java.lang.String className,
@@ -507,10 +384,8 @@ public class ExpandoValueLocalServiceUtil {
 		java.util.Date[] defaultData)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		ExpandoValueLocalService expandoValueLocalService = ExpandoValueLocalServiceFactory.getService();
-
-		return expandoValueLocalService.getData(className, tableName,
-			columnName, classPK, defaultData);
+		return _service.getData(className, tableName, columnName, classPK,
+			defaultData);
 	}
 
 	public static double getData(java.lang.String className,
@@ -518,10 +393,8 @@ public class ExpandoValueLocalServiceUtil {
 		double defaultData)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		ExpandoValueLocalService expandoValueLocalService = ExpandoValueLocalServiceFactory.getService();
-
-		return expandoValueLocalService.getData(className, tableName,
-			columnName, classPK, defaultData);
+		return _service.getData(className, tableName, columnName, classPK,
+			defaultData);
 	}
 
 	public static double[] getData(java.lang.String className,
@@ -529,10 +402,8 @@ public class ExpandoValueLocalServiceUtil {
 		double[] defaultData)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		ExpandoValueLocalService expandoValueLocalService = ExpandoValueLocalServiceFactory.getService();
-
-		return expandoValueLocalService.getData(className, tableName,
-			columnName, classPK, defaultData);
+		return _service.getData(className, tableName, columnName, classPK,
+			defaultData);
 	}
 
 	public static float getData(java.lang.String className,
@@ -540,10 +411,8 @@ public class ExpandoValueLocalServiceUtil {
 		float defaultData)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		ExpandoValueLocalService expandoValueLocalService = ExpandoValueLocalServiceFactory.getService();
-
-		return expandoValueLocalService.getData(className, tableName,
-			columnName, classPK, defaultData);
+		return _service.getData(className, tableName, columnName, classPK,
+			defaultData);
 	}
 
 	public static float[] getData(java.lang.String className,
@@ -551,10 +420,8 @@ public class ExpandoValueLocalServiceUtil {
 		float[] defaultData)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		ExpandoValueLocalService expandoValueLocalService = ExpandoValueLocalServiceFactory.getService();
-
-		return expandoValueLocalService.getData(className, tableName,
-			columnName, classPK, defaultData);
+		return _service.getData(className, tableName, columnName, classPK,
+			defaultData);
 	}
 
 	public static int getData(java.lang.String className,
@@ -562,10 +429,8 @@ public class ExpandoValueLocalServiceUtil {
 		int defaultData)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		ExpandoValueLocalService expandoValueLocalService = ExpandoValueLocalServiceFactory.getService();
-
-		return expandoValueLocalService.getData(className, tableName,
-			columnName, classPK, defaultData);
+		return _service.getData(className, tableName, columnName, classPK,
+			defaultData);
 	}
 
 	public static int[] getData(java.lang.String className,
@@ -573,10 +438,8 @@ public class ExpandoValueLocalServiceUtil {
 		int[] defaultData)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		ExpandoValueLocalService expandoValueLocalService = ExpandoValueLocalServiceFactory.getService();
-
-		return expandoValueLocalService.getData(className, tableName,
-			columnName, classPK, defaultData);
+		return _service.getData(className, tableName, columnName, classPK,
+			defaultData);
 	}
 
 	public static long getData(java.lang.String className,
@@ -584,10 +447,8 @@ public class ExpandoValueLocalServiceUtil {
 		long defaultData)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		ExpandoValueLocalService expandoValueLocalService = ExpandoValueLocalServiceFactory.getService();
-
-		return expandoValueLocalService.getData(className, tableName,
-			columnName, classPK, defaultData);
+		return _service.getData(className, tableName, columnName, classPK,
+			defaultData);
 	}
 
 	public static long[] getData(java.lang.String className,
@@ -595,10 +456,8 @@ public class ExpandoValueLocalServiceUtil {
 		long[] defaultData)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		ExpandoValueLocalService expandoValueLocalService = ExpandoValueLocalServiceFactory.getService();
-
-		return expandoValueLocalService.getData(className, tableName,
-			columnName, classPK, defaultData);
+		return _service.getData(className, tableName, columnName, classPK,
+			defaultData);
 	}
 
 	public static short getData(java.lang.String className,
@@ -606,10 +465,8 @@ public class ExpandoValueLocalServiceUtil {
 		short defaultData)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		ExpandoValueLocalService expandoValueLocalService = ExpandoValueLocalServiceFactory.getService();
-
-		return expandoValueLocalService.getData(className, tableName,
-			columnName, classPK, defaultData);
+		return _service.getData(className, tableName, columnName, classPK,
+			defaultData);
 	}
 
 	public static short[] getData(java.lang.String className,
@@ -617,10 +474,8 @@ public class ExpandoValueLocalServiceUtil {
 		short[] defaultData)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		ExpandoValueLocalService expandoValueLocalService = ExpandoValueLocalServiceFactory.getService();
-
-		return expandoValueLocalService.getData(className, tableName,
-			columnName, classPK, defaultData);
+		return _service.getData(className, tableName, columnName, classPK,
+			defaultData);
 	}
 
 	public static java.lang.String getData(java.lang.String className,
@@ -628,10 +483,8 @@ public class ExpandoValueLocalServiceUtil {
 		java.lang.String defaultData)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		ExpandoValueLocalService expandoValueLocalService = ExpandoValueLocalServiceFactory.getService();
-
-		return expandoValueLocalService.getData(className, tableName,
-			columnName, classPK, defaultData);
+		return _service.getData(className, tableName, columnName, classPK,
+			defaultData);
 	}
 
 	public static java.lang.String[] getData(java.lang.String className,
@@ -639,140 +492,110 @@ public class ExpandoValueLocalServiceUtil {
 		java.lang.String[] defaultData)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		ExpandoValueLocalService expandoValueLocalService = ExpandoValueLocalServiceFactory.getService();
-
-		return expandoValueLocalService.getData(className, tableName,
-			columnName, classPK, defaultData);
+		return _service.getData(className, tableName, columnName, classPK,
+			defaultData);
 	}
 
 	public static java.util.List<com.liferay.portlet.expando.model.ExpandoValue> getDefaultTableColumnValues(
 		java.lang.String className, java.lang.String columnName, int start,
 		int end) throws com.liferay.portal.SystemException {
-		ExpandoValueLocalService expandoValueLocalService = ExpandoValueLocalServiceFactory.getService();
-
-		return expandoValueLocalService.getDefaultTableColumnValues(className,
-			columnName, start, end);
+		return _service.getDefaultTableColumnValues(className, columnName,
+			start, end);
 	}
 
 	public static java.util.List<com.liferay.portlet.expando.model.ExpandoValue> getDefaultTableColumnValues(
 		long classNameId, java.lang.String columnName, int start, int end)
 		throws com.liferay.portal.SystemException {
-		ExpandoValueLocalService expandoValueLocalService = ExpandoValueLocalServiceFactory.getService();
-
-		return expandoValueLocalService.getDefaultTableColumnValues(classNameId,
-			columnName, start, end);
+		return _service.getDefaultTableColumnValues(classNameId, columnName,
+			start, end);
 	}
 
 	public static int getDefaultTableColumnValuesCount(
 		java.lang.String className, java.lang.String columnName)
 		throws com.liferay.portal.SystemException {
-		ExpandoValueLocalService expandoValueLocalService = ExpandoValueLocalServiceFactory.getService();
-
-		return expandoValueLocalService.getDefaultTableColumnValuesCount(className,
-			columnName);
+		return _service.getDefaultTableColumnValuesCount(className, columnName);
 	}
 
 	public static int getDefaultTableColumnValuesCount(long classNameId,
 		java.lang.String columnName) throws com.liferay.portal.SystemException {
-		ExpandoValueLocalService expandoValueLocalService = ExpandoValueLocalServiceFactory.getService();
-
-		return expandoValueLocalService.getDefaultTableColumnValuesCount(classNameId,
-			columnName);
+		return _service.getDefaultTableColumnValuesCount(classNameId, columnName);
 	}
 
 	public static java.util.List<com.liferay.portlet.expando.model.ExpandoValue> getRowValues(
 		long rowId) throws com.liferay.portal.SystemException {
-		ExpandoValueLocalService expandoValueLocalService = ExpandoValueLocalServiceFactory.getService();
-
-		return expandoValueLocalService.getRowValues(rowId);
+		return _service.getRowValues(rowId);
 	}
 
 	public static java.util.List<com.liferay.portlet.expando.model.ExpandoValue> getRowValues(
 		long rowId, int start, int end)
 		throws com.liferay.portal.SystemException {
-		ExpandoValueLocalService expandoValueLocalService = ExpandoValueLocalServiceFactory.getService();
-
-		return expandoValueLocalService.getRowValues(rowId, start, end);
+		return _service.getRowValues(rowId, start, end);
 	}
 
 	public static java.util.List<com.liferay.portlet.expando.model.ExpandoValue> getRowValues(
 		java.lang.String className, java.lang.String tableName, long classPK,
 		int start, int end) throws com.liferay.portal.SystemException {
-		ExpandoValueLocalService expandoValueLocalService = ExpandoValueLocalServiceFactory.getService();
-
-		return expandoValueLocalService.getRowValues(className, tableName,
-			classPK, start, end);
+		return _service.getRowValues(className, tableName, classPK, start, end);
 	}
 
 	public static java.util.List<com.liferay.portlet.expando.model.ExpandoValue> getRowValues(
 		long classNameId, java.lang.String tableName, long classPK, int start,
 		int end) throws com.liferay.portal.SystemException {
-		ExpandoValueLocalService expandoValueLocalService = ExpandoValueLocalServiceFactory.getService();
-
-		return expandoValueLocalService.getRowValues(classNameId, tableName,
-			classPK, start, end);
+		return _service.getRowValues(classNameId, tableName, classPK, start, end);
 	}
 
 	public static int getRowValuesCount(long rowId)
 		throws com.liferay.portal.SystemException {
-		ExpandoValueLocalService expandoValueLocalService = ExpandoValueLocalServiceFactory.getService();
-
-		return expandoValueLocalService.getRowValuesCount(rowId);
+		return _service.getRowValuesCount(rowId);
 	}
 
 	public static int getRowValuesCount(java.lang.String className,
 		java.lang.String tableName, long classPK)
 		throws com.liferay.portal.SystemException {
-		ExpandoValueLocalService expandoValueLocalService = ExpandoValueLocalServiceFactory.getService();
-
-		return expandoValueLocalService.getRowValuesCount(className, tableName,
-			classPK);
+		return _service.getRowValuesCount(className, tableName, classPK);
 	}
 
 	public static int getRowValuesCount(long classNameId,
 		java.lang.String tableName, long classPK)
 		throws com.liferay.portal.SystemException {
-		ExpandoValueLocalService expandoValueLocalService = ExpandoValueLocalServiceFactory.getService();
-
-		return expandoValueLocalService.getRowValuesCount(classNameId,
-			tableName, classPK);
+		return _service.getRowValuesCount(classNameId, tableName, classPK);
 	}
 
 	public static com.liferay.portlet.expando.model.ExpandoValue getValue(
 		long valueId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		ExpandoValueLocalService expandoValueLocalService = ExpandoValueLocalServiceFactory.getService();
-
-		return expandoValueLocalService.getValue(valueId);
+		return _service.getValue(valueId);
 	}
 
 	public static com.liferay.portlet.expando.model.ExpandoValue getValue(
 		long columnId, long rowId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		ExpandoValueLocalService expandoValueLocalService = ExpandoValueLocalServiceFactory.getService();
-
-		return expandoValueLocalService.getValue(columnId, rowId);
+		return _service.getValue(columnId, rowId);
 	}
 
 	public static com.liferay.portlet.expando.model.ExpandoValue getValue(
 		java.lang.String className, java.lang.String tableName,
 		java.lang.String columnName, long classPK)
 		throws com.liferay.portal.SystemException {
-		ExpandoValueLocalService expandoValueLocalService = ExpandoValueLocalServiceFactory.getService();
-
-		return expandoValueLocalService.getValue(className, tableName,
-			columnName, classPK);
+		return _service.getValue(className, tableName, columnName, classPK);
 	}
 
 	public static com.liferay.portlet.expando.model.ExpandoValue getValue(
 		long classNameId, java.lang.String tableName,
 		java.lang.String columnName, long classPK)
 		throws com.liferay.portal.SystemException {
-		ExpandoValueLocalService expandoValueLocalService = ExpandoValueLocalServiceFactory.getService();
-
-		return expandoValueLocalService.getValue(classNameId, tableName,
-			columnName, classPK);
+		return _service.getValue(classNameId, tableName, columnName, classPK);
 	}
+
+	public static ExpandoValueLocalService getService() {
+		return _service;
+	}
+
+	public void setService(ExpandoValueLocalService service) {
+		_service = service;
+	}
+
+	private static ExpandoValueLocalService _service;
 }

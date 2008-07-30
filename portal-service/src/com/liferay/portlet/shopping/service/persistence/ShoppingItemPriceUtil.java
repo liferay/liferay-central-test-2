@@ -191,22 +191,12 @@ public class ShoppingItemPriceUtil {
 	}
 
 	public static ShoppingItemPricePersistence getPersistence() {
-		return _getUtil()._persistence;
+		return _persistence;
 	}
 
 	public void setPersistence(ShoppingItemPricePersistence persistence) {
 		_persistence = persistence;
 	}
 
-	private static ShoppingItemPriceUtil _getUtil() {
-		if (_util == null) {
-			_util = (ShoppingItemPriceUtil)com.liferay.portal.kernel.bean.PortalBeanLocatorUtil.locate(_UTIL);
-		}
-
-		return _util;
-	}
-
-	private static final String _UTIL = ShoppingItemPriceUtil.class.getName();
-	private static ShoppingItemPriceUtil _util;
-	private ShoppingItemPricePersistence _persistence;
+	private static ShoppingItemPricePersistence _persistence;
 }

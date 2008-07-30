@@ -22,6 +22,7 @@
 
 package com.liferay.portlet.social.service;
 
+import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
 
 /**
  * <a href="SocialRequestInterpreterLocalServiceFactory.java.html"><b><i>View Source</i></b></a>
@@ -51,33 +52,45 @@ package com.liferay.portlet.social.service;
  *
  */
 public class SocialRequestInterpreterLocalServiceFactory {
+	/**
+	 * @deprecated
+	 */
 	public static SocialRequestInterpreterLocalService getService() {
 		return _getFactory()._service;
 	}
 
+	/**
+	 * @deprecated
+	 */
 	public static SocialRequestInterpreterLocalService getImpl() {
 		if (_impl == null) {
-			_impl = (SocialRequestInterpreterLocalService)com.liferay.portal.kernel.bean.PortalBeanLocatorUtil.locate(_IMPL);
+			_impl = (SocialRequestInterpreterLocalService)PortalBeanLocatorUtil.locate(_IMPL);
 		}
 
 		return _impl;
 	}
 
+	/**
+	 * @deprecated
+	 */
 	public static SocialRequestInterpreterLocalService getTxImpl() {
 		if (_txImpl == null) {
-			_txImpl = (SocialRequestInterpreterLocalService)com.liferay.portal.kernel.bean.PortalBeanLocatorUtil.locate(_TX_IMPL);
+			_txImpl = (SocialRequestInterpreterLocalService)PortalBeanLocatorUtil.locate(_TX_IMPL);
 		}
 
 		return _txImpl;
 	}
 
+	/**
+	 * @deprecated
+	 */
 	public void setService(SocialRequestInterpreterLocalService service) {
 		_service = service;
 	}
 
 	private static SocialRequestInterpreterLocalServiceFactory _getFactory() {
 		if (_factory == null) {
-			_factory = (SocialRequestInterpreterLocalServiceFactory)com.liferay.portal.kernel.bean.PortalBeanLocatorUtil.locate(_FACTORY);
+			_factory = (SocialRequestInterpreterLocalServiceFactory)PortalBeanLocatorUtil.locate(_FACTORY);
 		}
 
 		return _factory;

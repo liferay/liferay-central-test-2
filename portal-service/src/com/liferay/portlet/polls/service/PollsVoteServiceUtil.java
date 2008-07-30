@@ -39,15 +39,9 @@ package com.liferay.portlet.polls.service;
  * on a bean instead of writing a lookup call and a method call.
  * </p>
  *
- * <p>
- * <code>com.liferay.portlet.polls.service.PollsVoteServiceFactory</code>
- * is responsible for the lookup of the bean.
- * </p>
- *
  * @author Brian Wing Shun Chan
  *
  * @see com.liferay.portlet.polls.service.PollsVoteService
- * @see com.liferay.portlet.polls.service.PollsVoteServiceFactory
  *
  */
 public class PollsVoteServiceUtil {
@@ -55,8 +49,16 @@ public class PollsVoteServiceUtil {
 		long questionId, long choiceId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
-		PollsVoteService pollsVoteService = PollsVoteServiceFactory.getService();
-
-		return pollsVoteService.addVote(questionId, choiceId);
+		return _service.addVote(questionId, choiceId);
 	}
+
+	public static PollsVoteService getService() {
+		return _service;
+	}
+
+	public void setService(PollsVoteService service) {
+		_service = service;
+	}
+
+	private static PollsVoteService _service;
 }

@@ -489,22 +489,12 @@ public class AddressUtil {
 	}
 
 	public static AddressPersistence getPersistence() {
-		return _getUtil()._persistence;
+		return _persistence;
 	}
 
 	public void setPersistence(AddressPersistence persistence) {
 		_persistence = persistence;
 	}
 
-	private static AddressUtil _getUtil() {
-		if (_util == null) {
-			_util = (AddressUtil)com.liferay.portal.kernel.bean.PortalBeanLocatorUtil.locate(_UTIL);
-		}
-
-		return _util;
-	}
-
-	private static final String _UTIL = AddressUtil.class.getName();
-	private static AddressUtil _util;
-	private AddressPersistence _persistence;
+	private static AddressPersistence _persistence;
 }

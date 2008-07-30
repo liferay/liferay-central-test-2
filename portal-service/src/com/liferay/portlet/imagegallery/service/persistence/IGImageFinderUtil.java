@@ -69,22 +69,12 @@ public class IGImageFinderUtil {
 	}
 
 	public static IGImageFinder getFinder() {
-		return _getUtil()._finder;
+		return _finder;
 	}
 
 	public void setFinder(IGImageFinder finder) {
 		_finder = finder;
 	}
 
-	private static IGImageFinderUtil _getUtil() {
-		if (_util == null) {
-			_util = (IGImageFinderUtil)com.liferay.portal.kernel.bean.PortalBeanLocatorUtil.locate(_UTIL);
-		}
-
-		return _util;
-	}
-
-	private static final String _UTIL = IGImageFinderUtil.class.getName();
-	private static IGImageFinderUtil _util;
-	private IGImageFinder _finder;
+	private static IGImageFinder _finder;
 }

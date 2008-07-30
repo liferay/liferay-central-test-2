@@ -87,22 +87,12 @@ public class RoleFinderUtil {
 	}
 
 	public static RoleFinder getFinder() {
-		return _getUtil()._finder;
+		return _finder;
 	}
 
 	public void setFinder(RoleFinder finder) {
 		_finder = finder;
 	}
 
-	private static RoleFinderUtil _getUtil() {
-		if (_util == null) {
-			_util = (RoleFinderUtil)com.liferay.portal.kernel.bean.PortalBeanLocatorUtil.locate(_UTIL);
-		}
-
-		return _util;
-	}
-
-	private static final String _UTIL = RoleFinderUtil.class.getName();
-	private static RoleFinderUtil _util;
-	private RoleFinder _finder;
+	private static RoleFinder _finder;
 }

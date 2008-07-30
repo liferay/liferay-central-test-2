@@ -39,15 +39,9 @@ package com.liferay.portlet.wiki.service;
  * on a bean instead of writing a lookup call and a method call.
  * </p>
  *
- * <p>
- * <code>com.liferay.portlet.wiki.service.WikiNodeServiceFactory</code>
- * is responsible for the lookup of the bean.
- * </p>
- *
  * @author Brian Wing Shun Chan
  *
  * @see com.liferay.portlet.wiki.service.WikiNodeService
- * @see com.liferay.portlet.wiki.service.WikiNodeServiceFactory
  *
  */
 public class WikiNodeServiceUtil {
@@ -56,9 +50,7 @@ public class WikiNodeServiceUtil {
 		boolean addCommunityPermissions, boolean addGuestPermissions)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
-		WikiNodeService wikiNodeService = WikiNodeServiceFactory.getService();
-
-		return wikiNodeService.addNode(plid, name, description,
+		return _service.addNode(plid, name, description,
 			addCommunityPermissions, addGuestPermissions);
 	}
 
@@ -68,68 +60,62 @@ public class WikiNodeServiceUtil {
 		java.lang.String[] guestPermissions)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
-		WikiNodeService wikiNodeService = WikiNodeServiceFactory.getService();
-
-		return wikiNodeService.addNode(plid, name, description,
-			communityPermissions, guestPermissions);
+		return _service.addNode(plid, name, description, communityPermissions,
+			guestPermissions);
 	}
 
 	public static void deleteNode(long nodeId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
-		WikiNodeService wikiNodeService = WikiNodeServiceFactory.getService();
-
-		wikiNodeService.deleteNode(nodeId);
+		_service.deleteNode(nodeId);
 	}
 
 	public static com.liferay.portlet.wiki.model.WikiNode getNode(long nodeId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
-		WikiNodeService wikiNodeService = WikiNodeServiceFactory.getService();
-
-		return wikiNodeService.getNode(nodeId);
+		return _service.getNode(nodeId);
 	}
 
 	public static com.liferay.portlet.wiki.model.WikiNode getNode(
 		long groupId, java.lang.String name)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
-		WikiNodeService wikiNodeService = WikiNodeServiceFactory.getService();
-
-		return wikiNodeService.getNode(groupId, name);
+		return _service.getNode(groupId, name);
 	}
 
 	public static void importPages(long nodeId, java.lang.String importer,
 		java.io.File[] files, java.util.Map<String, String[]> options)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
-		WikiNodeService wikiNodeService = WikiNodeServiceFactory.getService();
-
-		wikiNodeService.importPages(nodeId, importer, files, options);
+		_service.importPages(nodeId, importer, files, options);
 	}
 
 	public static void subscribeNode(long nodeId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
-		WikiNodeService wikiNodeService = WikiNodeServiceFactory.getService();
-
-		wikiNodeService.subscribeNode(nodeId);
+		_service.subscribeNode(nodeId);
 	}
 
 	public static void unsubscribeNode(long nodeId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
-		WikiNodeService wikiNodeService = WikiNodeServiceFactory.getService();
-
-		wikiNodeService.unsubscribeNode(nodeId);
+		_service.unsubscribeNode(nodeId);
 	}
 
 	public static com.liferay.portlet.wiki.model.WikiNode updateNode(
 		long nodeId, java.lang.String name, java.lang.String description)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
-		WikiNodeService wikiNodeService = WikiNodeServiceFactory.getService();
-
-		return wikiNodeService.updateNode(nodeId, name, description);
+		return _service.updateNode(nodeId, name, description);
 	}
+
+	public static WikiNodeService getService() {
+		return _service;
+	}
+
+	public void setService(WikiNodeService service) {
+		_service = service;
+	}
+
+	private static WikiNodeService _service;
 }

@@ -54,22 +54,12 @@ public class UserGroupFinderUtil {
 	}
 
 	public static UserGroupFinder getFinder() {
-		return _getUtil()._finder;
+		return _finder;
 	}
 
 	public void setFinder(UserGroupFinder finder) {
 		_finder = finder;
 	}
 
-	private static UserGroupFinderUtil _getUtil() {
-		if (_util == null) {
-			_util = (UserGroupFinderUtil)com.liferay.portal.kernel.bean.PortalBeanLocatorUtil.locate(_UTIL);
-		}
-
-		return _util;
-	}
-
-	private static final String _UTIL = UserGroupFinderUtil.class.getName();
-	private static UserGroupFinderUtil _util;
-	private UserGroupFinder _finder;
+	private static UserGroupFinder _finder;
 }

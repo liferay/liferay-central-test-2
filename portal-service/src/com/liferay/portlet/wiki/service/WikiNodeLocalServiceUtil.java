@@ -39,87 +39,63 @@ package com.liferay.portlet.wiki.service;
  * on a bean instead of writing a lookup call and a method call.
  * </p>
  *
- * <p>
- * <code>com.liferay.portlet.wiki.service.WikiNodeLocalServiceFactory</code>
- * is responsible for the lookup of the bean.
- * </p>
- *
  * @author Brian Wing Shun Chan
  *
  * @see com.liferay.portlet.wiki.service.WikiNodeLocalService
- * @see com.liferay.portlet.wiki.service.WikiNodeLocalServiceFactory
  *
  */
 public class WikiNodeLocalServiceUtil {
 	public static com.liferay.portlet.wiki.model.WikiNode addWikiNode(
 		com.liferay.portlet.wiki.model.WikiNode wikiNode)
 		throws com.liferay.portal.SystemException {
-		WikiNodeLocalService wikiNodeLocalService = WikiNodeLocalServiceFactory.getService();
-
-		return wikiNodeLocalService.addWikiNode(wikiNode);
+		return _service.addWikiNode(wikiNode);
 	}
 
 	public static void deleteWikiNode(long nodeId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		WikiNodeLocalService wikiNodeLocalService = WikiNodeLocalServiceFactory.getService();
-
-		wikiNodeLocalService.deleteWikiNode(nodeId);
+		_service.deleteWikiNode(nodeId);
 	}
 
 	public static void deleteWikiNode(
 		com.liferay.portlet.wiki.model.WikiNode wikiNode)
 		throws com.liferay.portal.SystemException {
-		WikiNodeLocalService wikiNodeLocalService = WikiNodeLocalServiceFactory.getService();
-
-		wikiNodeLocalService.deleteWikiNode(wikiNode);
+		_service.deleteWikiNode(wikiNode);
 	}
 
 	public static java.util.List<Object> dynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery)
 		throws com.liferay.portal.SystemException {
-		WikiNodeLocalService wikiNodeLocalService = WikiNodeLocalServiceFactory.getService();
-
-		return wikiNodeLocalService.dynamicQuery(dynamicQuery);
+		return _service.dynamicQuery(dynamicQuery);
 	}
 
 	public static java.util.List<Object> dynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery, int start,
 		int end) throws com.liferay.portal.SystemException {
-		WikiNodeLocalService wikiNodeLocalService = WikiNodeLocalServiceFactory.getService();
-
-		return wikiNodeLocalService.dynamicQuery(dynamicQuery, start, end);
+		return _service.dynamicQuery(dynamicQuery, start, end);
 	}
 
 	public static com.liferay.portlet.wiki.model.WikiNode getWikiNode(
 		long nodeId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		WikiNodeLocalService wikiNodeLocalService = WikiNodeLocalServiceFactory.getService();
-
-		return wikiNodeLocalService.getWikiNode(nodeId);
+		return _service.getWikiNode(nodeId);
 	}
 
 	public static java.util.List<com.liferay.portlet.wiki.model.WikiNode> getWikiNodes(
 		int start, int end) throws com.liferay.portal.SystemException {
-		WikiNodeLocalService wikiNodeLocalService = WikiNodeLocalServiceFactory.getService();
-
-		return wikiNodeLocalService.getWikiNodes(start, end);
+		return _service.getWikiNodes(start, end);
 	}
 
 	public static int getWikiNodesCount()
 		throws com.liferay.portal.SystemException {
-		WikiNodeLocalService wikiNodeLocalService = WikiNodeLocalServiceFactory.getService();
-
-		return wikiNodeLocalService.getWikiNodesCount();
+		return _service.getWikiNodesCount();
 	}
 
 	public static com.liferay.portlet.wiki.model.WikiNode updateWikiNode(
 		com.liferay.portlet.wiki.model.WikiNode wikiNode)
 		throws com.liferay.portal.SystemException {
-		WikiNodeLocalService wikiNodeLocalService = WikiNodeLocalServiceFactory.getService();
-
-		return wikiNodeLocalService.updateWikiNode(wikiNode);
+		return _service.updateWikiNode(wikiNode);
 	}
 
 	public static com.liferay.portlet.wiki.model.WikiNode addNode(long userId,
@@ -127,9 +103,7 @@ public class WikiNodeLocalServiceUtil {
 		boolean addCommunityPermissions, boolean addGuestPermissions)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		WikiNodeLocalService wikiNodeLocalService = WikiNodeLocalServiceFactory.getService();
-
-		return wikiNodeLocalService.addNode(userId, plid, name, description,
+		return _service.addNode(userId, plid, name, description,
 			addCommunityPermissions, addGuestPermissions);
 	}
 
@@ -139,10 +113,8 @@ public class WikiNodeLocalServiceUtil {
 		boolean addGuestPermissions)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		WikiNodeLocalService wikiNodeLocalService = WikiNodeLocalServiceFactory.getService();
-
-		return wikiNodeLocalService.addNode(uuid, userId, plid, name,
-			description, addCommunityPermissions, addGuestPermissions);
+		return _service.addNode(uuid, userId, plid, name, description,
+			addCommunityPermissions, addGuestPermissions);
 	}
 
 	public static com.liferay.portlet.wiki.model.WikiNode addNode(long userId,
@@ -151,9 +123,7 @@ public class WikiNodeLocalServiceUtil {
 		java.lang.String[] guestPermissions)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		WikiNodeLocalService wikiNodeLocalService = WikiNodeLocalServiceFactory.getService();
-
-		return wikiNodeLocalService.addNode(userId, plid, name, description,
+		return _service.addNode(userId, plid, name, description,
 			communityPermissions, guestPermissions);
 	}
 
@@ -166,20 +136,16 @@ public class WikiNodeLocalServiceUtil {
 		java.lang.String[] guestPermissions)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		WikiNodeLocalService wikiNodeLocalService = WikiNodeLocalServiceFactory.getService();
-
-		return wikiNodeLocalService.addNode(uuid, userId, plid, name,
-			description, addCommunityPermissions, addGuestPermissions,
-			communityPermissions, guestPermissions);
+		return _service.addNode(uuid, userId, plid, name, description,
+			addCommunityPermissions, addGuestPermissions, communityPermissions,
+			guestPermissions);
 	}
 
 	public static void addNodeResources(long nodeId,
 		boolean addCommunityPermissions, boolean addGuestPermissions)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		WikiNodeLocalService wikiNodeLocalService = WikiNodeLocalServiceFactory.getService();
-
-		wikiNodeLocalService.addNodeResources(nodeId, addCommunityPermissions,
+		_service.addNodeResources(nodeId, addCommunityPermissions,
 			addGuestPermissions);
 	}
 
@@ -188,9 +154,7 @@ public class WikiNodeLocalServiceUtil {
 		boolean addCommunityPermissions, boolean addGuestPermissions)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		WikiNodeLocalService wikiNodeLocalService = WikiNodeLocalServiceFactory.getService();
-
-		wikiNodeLocalService.addNodeResources(node, addCommunityPermissions,
+		_service.addNodeResources(node, addCommunityPermissions,
 			addGuestPermissions);
 	}
 
@@ -199,10 +163,7 @@ public class WikiNodeLocalServiceUtil {
 		java.lang.String[] guestPermissions)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		WikiNodeLocalService wikiNodeLocalService = WikiNodeLocalServiceFactory.getService();
-
-		wikiNodeLocalService.addNodeResources(nodeId, communityPermissions,
-			guestPermissions);
+		_service.addNodeResources(nodeId, communityPermissions, guestPermissions);
 	}
 
 	public static void addNodeResources(
@@ -211,73 +172,54 @@ public class WikiNodeLocalServiceUtil {
 		java.lang.String[] guestPermissions)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		WikiNodeLocalService wikiNodeLocalService = WikiNodeLocalServiceFactory.getService();
-
-		wikiNodeLocalService.addNodeResources(node, communityPermissions,
-			guestPermissions);
+		_service.addNodeResources(node, communityPermissions, guestPermissions);
 	}
 
 	public static void deleteNode(long nodeId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		WikiNodeLocalService wikiNodeLocalService = WikiNodeLocalServiceFactory.getService();
-
-		wikiNodeLocalService.deleteNode(nodeId);
+		_service.deleteNode(nodeId);
 	}
 
 	public static void deleteNode(com.liferay.portlet.wiki.model.WikiNode node)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		WikiNodeLocalService wikiNodeLocalService = WikiNodeLocalServiceFactory.getService();
-
-		wikiNodeLocalService.deleteNode(node);
+		_service.deleteNode(node);
 	}
 
 	public static void deleteNodes(long groupId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		WikiNodeLocalService wikiNodeLocalService = WikiNodeLocalServiceFactory.getService();
-
-		wikiNodeLocalService.deleteNodes(groupId);
+		_service.deleteNodes(groupId);
 	}
 
 	public static com.liferay.portlet.wiki.model.WikiNode getNode(long nodeId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		WikiNodeLocalService wikiNodeLocalService = WikiNodeLocalServiceFactory.getService();
-
-		return wikiNodeLocalService.getNode(nodeId);
+		return _service.getNode(nodeId);
 	}
 
 	public static com.liferay.portlet.wiki.model.WikiNode getNode(
 		long groupId, java.lang.String nodeName)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		WikiNodeLocalService wikiNodeLocalService = WikiNodeLocalServiceFactory.getService();
-
-		return wikiNodeLocalService.getNode(groupId, nodeName);
+		return _service.getNode(groupId, nodeName);
 	}
 
 	public static java.util.List<com.liferay.portlet.wiki.model.WikiNode> getNodes(
 		long groupId) throws com.liferay.portal.SystemException {
-		WikiNodeLocalService wikiNodeLocalService = WikiNodeLocalServiceFactory.getService();
-
-		return wikiNodeLocalService.getNodes(groupId);
+		return _service.getNodes(groupId);
 	}
 
 	public static java.util.List<com.liferay.portlet.wiki.model.WikiNode> getNodes(
 		long groupId, int start, int end)
 		throws com.liferay.portal.SystemException {
-		WikiNodeLocalService wikiNodeLocalService = WikiNodeLocalServiceFactory.getService();
-
-		return wikiNodeLocalService.getNodes(groupId, start, end);
+		return _service.getNodes(groupId, start, end);
 	}
 
 	public static int getNodesCount(long groupId)
 		throws com.liferay.portal.SystemException {
-		WikiNodeLocalService wikiNodeLocalService = WikiNodeLocalServiceFactory.getService();
-
-		return wikiNodeLocalService.getNodesCount(groupId);
+		return _service.getNodesCount(groupId);
 	}
 
 	public static void importPages(long userId, long nodeId,
@@ -285,50 +227,46 @@ public class WikiNodeLocalServiceUtil {
 		java.util.Map<String, String[]> options)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		WikiNodeLocalService wikiNodeLocalService = WikiNodeLocalServiceFactory.getService();
-
-		wikiNodeLocalService.importPages(userId, nodeId, importer, files,
-			options);
+		_service.importPages(userId, nodeId, importer, files, options);
 	}
 
 	public static void reIndex(java.lang.String[] ids)
 		throws com.liferay.portal.SystemException {
-		WikiNodeLocalService wikiNodeLocalService = WikiNodeLocalServiceFactory.getService();
-
-		wikiNodeLocalService.reIndex(ids);
+		_service.reIndex(ids);
 	}
 
 	public static com.liferay.portal.kernel.search.Hits search(long companyId,
 		long groupId, long[] nodeIds, java.lang.String keywords, int start,
 		int end) throws com.liferay.portal.SystemException {
-		WikiNodeLocalService wikiNodeLocalService = WikiNodeLocalServiceFactory.getService();
-
-		return wikiNodeLocalService.search(companyId, groupId, nodeIds,
-			keywords, start, end);
+		return _service.search(companyId, groupId, nodeIds, keywords, start, end);
 	}
 
 	public static void subscribeNode(long userId, long nodeId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		WikiNodeLocalService wikiNodeLocalService = WikiNodeLocalServiceFactory.getService();
-
-		wikiNodeLocalService.subscribeNode(userId, nodeId);
+		_service.subscribeNode(userId, nodeId);
 	}
 
 	public static void unsubscribeNode(long userId, long nodeId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		WikiNodeLocalService wikiNodeLocalService = WikiNodeLocalServiceFactory.getService();
-
-		wikiNodeLocalService.unsubscribeNode(userId, nodeId);
+		_service.unsubscribeNode(userId, nodeId);
 	}
 
 	public static com.liferay.portlet.wiki.model.WikiNode updateNode(
 		long nodeId, java.lang.String name, java.lang.String description)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		WikiNodeLocalService wikiNodeLocalService = WikiNodeLocalServiceFactory.getService();
-
-		return wikiNodeLocalService.updateNode(nodeId, name, description);
+		return _service.updateNode(nodeId, name, description);
 	}
+
+	public static WikiNodeLocalService getService() {
+		return _service;
+	}
+
+	public void setService(WikiNodeLocalService service) {
+		_service = service;
+	}
+
+	private static WikiNodeLocalService _service;
 }

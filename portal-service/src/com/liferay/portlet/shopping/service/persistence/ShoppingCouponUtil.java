@@ -213,22 +213,12 @@ public class ShoppingCouponUtil {
 	}
 
 	public static ShoppingCouponPersistence getPersistence() {
-		return _getUtil()._persistence;
+		return _persistence;
 	}
 
 	public void setPersistence(ShoppingCouponPersistence persistence) {
 		_persistence = persistence;
 	}
 
-	private static ShoppingCouponUtil _getUtil() {
-		if (_util == null) {
-			_util = (ShoppingCouponUtil)com.liferay.portal.kernel.bean.PortalBeanLocatorUtil.locate(_UTIL);
-		}
-
-		return _util;
-	}
-
-	private static final String _UTIL = ShoppingCouponUtil.class.getName();
-	private static ShoppingCouponUtil _util;
-	private ShoppingCouponPersistence _persistence;
+	private static ShoppingCouponPersistence _persistence;
 }

@@ -39,15 +39,9 @@ package com.liferay.portlet.tasks.service;
  * on a bean instead of writing a lookup call and a method call.
  * </p>
  *
- * <p>
- * <code>com.liferay.portlet.tasks.service.TasksReviewServiceFactory</code>
- * is responsible for the lookup of the bean.
- * </p>
- *
  * @author Brian Wing Shun Chan
  *
  * @see com.liferay.portlet.tasks.service.TasksReviewService
- * @see com.liferay.portlet.tasks.service.TasksReviewServiceFactory
  *
  */
 public class TasksReviewServiceUtil {
@@ -55,25 +49,29 @@ public class TasksReviewServiceUtil {
 		long proposalId, int stage)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
-		TasksReviewService tasksReviewService = TasksReviewServiceFactory.getService();
-
-		return tasksReviewService.approveReview(proposalId, stage);
+		return _service.approveReview(proposalId, stage);
 	}
 
 	public static com.liferay.portlet.tasks.model.TasksReview rejectReview(
 		long proposalId, int stage)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
-		TasksReviewService tasksReviewService = TasksReviewServiceFactory.getService();
-
-		return tasksReviewService.rejectReview(proposalId, stage);
+		return _service.rejectReview(proposalId, stage);
 	}
 
 	public static void updateReviews(long proposalId, long[][] userIdsPerStage)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
-		TasksReviewService tasksReviewService = TasksReviewServiceFactory.getService();
-
-		tasksReviewService.updateReviews(proposalId, userIdsPerStage);
+		_service.updateReviews(proposalId, userIdsPerStage);
 	}
+
+	public static TasksReviewService getService() {
+		return _service;
+	}
+
+	public void setService(TasksReviewService service) {
+		_service = service;
+	}
+
+	private static TasksReviewService _service;
 }

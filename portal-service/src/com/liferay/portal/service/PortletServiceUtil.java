@@ -39,23 +39,15 @@ package com.liferay.portal.service;
  * on a bean instead of writing a lookup call and a method call.
  * </p>
  *
- * <p>
- * <code>com.liferay.portal.service.PortletServiceFactory</code>
- * is responsible for the lookup of the bean.
- * </p>
- *
  * @author Brian Wing Shun Chan
  *
  * @see com.liferay.portal.service.PortletService
- * @see com.liferay.portal.service.PortletServiceFactory
  *
  */
 public class PortletServiceUtil {
 	public static com.liferay.portal.kernel.json.JSONArray getWARPortlets()
 		throws java.rmi.RemoteException {
-		PortletService portletService = PortletServiceFactory.getService();
-
-		return portletService.getWARPortlets();
+		return _service.getWARPortlets();
 	}
 
 	public static com.liferay.portal.model.Portlet updatePortlet(
@@ -63,8 +55,16 @@ public class PortletServiceUtil {
 		boolean active)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
-		PortletService portletService = PortletServiceFactory.getService();
-
-		return portletService.updatePortlet(companyId, portletId, roles, active);
+		return _service.updatePortlet(companyId, portletId, roles, active);
 	}
+
+	public static PortletService getService() {
+		return _service;
+	}
+
+	public void setService(PortletService service) {
+		_service = service;
+	}
+
+	private static PortletService _service;
 }

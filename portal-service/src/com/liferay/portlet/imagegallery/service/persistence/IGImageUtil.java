@@ -389,22 +389,12 @@ public class IGImageUtil {
 	}
 
 	public static IGImagePersistence getPersistence() {
-		return _getUtil()._persistence;
+		return _persistence;
 	}
 
 	public void setPersistence(IGImagePersistence persistence) {
 		_persistence = persistence;
 	}
 
-	private static IGImageUtil _getUtil() {
-		if (_util == null) {
-			_util = (IGImageUtil)com.liferay.portal.kernel.bean.PortalBeanLocatorUtil.locate(_UTIL);
-		}
-
-		return _util;
-	}
-
-	private static final String _UTIL = IGImageUtil.class.getName();
-	private static IGImageUtil _util;
-	private IGImagePersistence _persistence;
+	private static IGImagePersistence _persistence;
 }

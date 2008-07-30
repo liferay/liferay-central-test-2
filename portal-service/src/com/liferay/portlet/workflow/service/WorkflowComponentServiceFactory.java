@@ -22,6 +22,7 @@
 
 package com.liferay.portlet.workflow.service;
 
+import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
 
 /**
  * <a href="WorkflowComponentServiceFactory.java.html"><b><i>View Source</i></b></a>
@@ -51,33 +52,45 @@ package com.liferay.portlet.workflow.service;
  *
  */
 public class WorkflowComponentServiceFactory {
+	/**
+	 * @deprecated
+	 */
 	public static WorkflowComponentService getService() {
 		return _getFactory()._service;
 	}
 
+	/**
+	 * @deprecated
+	 */
 	public static WorkflowComponentService getImpl() {
 		if (_impl == null) {
-			_impl = (WorkflowComponentService)com.liferay.portal.kernel.bean.PortalBeanLocatorUtil.locate(_IMPL);
+			_impl = (WorkflowComponentService)PortalBeanLocatorUtil.locate(_IMPL);
 		}
 
 		return _impl;
 	}
 
+	/**
+	 * @deprecated
+	 */
 	public static WorkflowComponentService getTxImpl() {
 		if (_txImpl == null) {
-			_txImpl = (WorkflowComponentService)com.liferay.portal.kernel.bean.PortalBeanLocatorUtil.locate(_TX_IMPL);
+			_txImpl = (WorkflowComponentService)PortalBeanLocatorUtil.locate(_TX_IMPL);
 		}
 
 		return _txImpl;
 	}
 
+	/**
+	 * @deprecated
+	 */
 	public void setService(WorkflowComponentService service) {
 		_service = service;
 	}
 
 	private static WorkflowComponentServiceFactory _getFactory() {
 		if (_factory == null) {
-			_factory = (WorkflowComponentServiceFactory)com.liferay.portal.kernel.bean.PortalBeanLocatorUtil.locate(_FACTORY);
+			_factory = (WorkflowComponentServiceFactory)PortalBeanLocatorUtil.locate(_FACTORY);
 		}
 
 		return _factory;

@@ -39,196 +39,153 @@ package com.liferay.portlet.tasks.service;
  * on a bean instead of writing a lookup call and a method call.
  * </p>
  *
- * <p>
- * <code>com.liferay.portlet.tasks.service.TasksReviewLocalServiceFactory</code>
- * is responsible for the lookup of the bean.
- * </p>
- *
  * @author Brian Wing Shun Chan
  *
  * @see com.liferay.portlet.tasks.service.TasksReviewLocalService
- * @see com.liferay.portlet.tasks.service.TasksReviewLocalServiceFactory
  *
  */
 public class TasksReviewLocalServiceUtil {
 	public static com.liferay.portlet.tasks.model.TasksReview addTasksReview(
 		com.liferay.portlet.tasks.model.TasksReview tasksReview)
 		throws com.liferay.portal.SystemException {
-		TasksReviewLocalService tasksReviewLocalService = TasksReviewLocalServiceFactory.getService();
-
-		return tasksReviewLocalService.addTasksReview(tasksReview);
+		return _service.addTasksReview(tasksReview);
 	}
 
 	public static void deleteTasksReview(long reviewId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		TasksReviewLocalService tasksReviewLocalService = TasksReviewLocalServiceFactory.getService();
-
-		tasksReviewLocalService.deleteTasksReview(reviewId);
+		_service.deleteTasksReview(reviewId);
 	}
 
 	public static void deleteTasksReview(
 		com.liferay.portlet.tasks.model.TasksReview tasksReview)
 		throws com.liferay.portal.SystemException {
-		TasksReviewLocalService tasksReviewLocalService = TasksReviewLocalServiceFactory.getService();
-
-		tasksReviewLocalService.deleteTasksReview(tasksReview);
+		_service.deleteTasksReview(tasksReview);
 	}
 
 	public static java.util.List<Object> dynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery)
 		throws com.liferay.portal.SystemException {
-		TasksReviewLocalService tasksReviewLocalService = TasksReviewLocalServiceFactory.getService();
-
-		return tasksReviewLocalService.dynamicQuery(dynamicQuery);
+		return _service.dynamicQuery(dynamicQuery);
 	}
 
 	public static java.util.List<Object> dynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery, int start,
 		int end) throws com.liferay.portal.SystemException {
-		TasksReviewLocalService tasksReviewLocalService = TasksReviewLocalServiceFactory.getService();
-
-		return tasksReviewLocalService.dynamicQuery(dynamicQuery, start, end);
+		return _service.dynamicQuery(dynamicQuery, start, end);
 	}
 
 	public static com.liferay.portlet.tasks.model.TasksReview getTasksReview(
 		long reviewId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		TasksReviewLocalService tasksReviewLocalService = TasksReviewLocalServiceFactory.getService();
-
-		return tasksReviewLocalService.getTasksReview(reviewId);
+		return _service.getTasksReview(reviewId);
 	}
 
 	public static java.util.List<com.liferay.portlet.tasks.model.TasksReview> getTasksReviews(
 		int start, int end) throws com.liferay.portal.SystemException {
-		TasksReviewLocalService tasksReviewLocalService = TasksReviewLocalServiceFactory.getService();
-
-		return tasksReviewLocalService.getTasksReviews(start, end);
+		return _service.getTasksReviews(start, end);
 	}
 
 	public static int getTasksReviewsCount()
 		throws com.liferay.portal.SystemException {
-		TasksReviewLocalService tasksReviewLocalService = TasksReviewLocalServiceFactory.getService();
-
-		return tasksReviewLocalService.getTasksReviewsCount();
+		return _service.getTasksReviewsCount();
 	}
 
 	public static com.liferay.portlet.tasks.model.TasksReview updateTasksReview(
 		com.liferay.portlet.tasks.model.TasksReview tasksReview)
 		throws com.liferay.portal.SystemException {
-		TasksReviewLocalService tasksReviewLocalService = TasksReviewLocalServiceFactory.getService();
-
-		return tasksReviewLocalService.updateTasksReview(tasksReview);
+		return _service.updateTasksReview(tasksReview);
 	}
 
 	public static com.liferay.portlet.tasks.model.TasksReview addReview(
 		long userId, long proposalId, long assignedByUserId, int stage)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		TasksReviewLocalService tasksReviewLocalService = TasksReviewLocalServiceFactory.getService();
-
-		return tasksReviewLocalService.addReview(userId, proposalId,
-			assignedByUserId, stage);
+		return _service.addReview(userId, proposalId, assignedByUserId, stage);
 	}
 
 	public static com.liferay.portlet.tasks.model.TasksReview approveReview(
 		long userId, long proposalId, int stage)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		TasksReviewLocalService tasksReviewLocalService = TasksReviewLocalServiceFactory.getService();
-
-		return tasksReviewLocalService.approveReview(userId, proposalId, stage);
+		return _service.approveReview(userId, proposalId, stage);
 	}
 
 	public static void deleteReview(long reviewId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		TasksReviewLocalService tasksReviewLocalService = TasksReviewLocalServiceFactory.getService();
-
-		tasksReviewLocalService.deleteReview(reviewId);
+		_service.deleteReview(reviewId);
 	}
 
 	public static void deleteReview(
 		com.liferay.portlet.tasks.model.TasksReview review)
 		throws com.liferay.portal.SystemException {
-		TasksReviewLocalService tasksReviewLocalService = TasksReviewLocalServiceFactory.getService();
-
-		tasksReviewLocalService.deleteReview(review);
+		_service.deleteReview(review);
 	}
 
 	public static void deleteReviews(long proposalId)
 		throws com.liferay.portal.SystemException {
-		TasksReviewLocalService tasksReviewLocalService = TasksReviewLocalServiceFactory.getService();
-
-		tasksReviewLocalService.deleteReviews(proposalId);
+		_service.deleteReviews(proposalId);
 	}
 
 	public static com.liferay.portlet.tasks.model.TasksReview getReview(
 		long reviewId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		TasksReviewLocalService tasksReviewLocalService = TasksReviewLocalServiceFactory.getService();
-
-		return tasksReviewLocalService.getReview(reviewId);
+		return _service.getReview(reviewId);
 	}
 
 	public static com.liferay.portlet.tasks.model.TasksReview getReview(
 		long userId, long proposalId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		TasksReviewLocalService tasksReviewLocalService = TasksReviewLocalServiceFactory.getService();
-
-		return tasksReviewLocalService.getReview(userId, proposalId);
+		return _service.getReview(userId, proposalId);
 	}
 
 	public static java.util.List<com.liferay.portlet.tasks.model.TasksReview> getReviews(
 		long proposalId) throws com.liferay.portal.SystemException {
-		TasksReviewLocalService tasksReviewLocalService = TasksReviewLocalServiceFactory.getService();
-
-		return tasksReviewLocalService.getReviews(proposalId);
+		return _service.getReviews(proposalId);
 	}
 
 	public static java.util.List<com.liferay.portlet.tasks.model.TasksReview> getReviews(
 		long proposalId, int stage) throws com.liferay.portal.SystemException {
-		TasksReviewLocalService tasksReviewLocalService = TasksReviewLocalServiceFactory.getService();
-
-		return tasksReviewLocalService.getReviews(proposalId, stage);
+		return _service.getReviews(proposalId, stage);
 	}
 
 	public static java.util.List<com.liferay.portlet.tasks.model.TasksReview> getReviews(
 		long proposalId, int stage, boolean completed)
 		throws com.liferay.portal.SystemException {
-		TasksReviewLocalService tasksReviewLocalService = TasksReviewLocalServiceFactory.getService();
-
-		return tasksReviewLocalService.getReviews(proposalId, stage, completed);
+		return _service.getReviews(proposalId, stage, completed);
 	}
 
 	public static java.util.List<com.liferay.portlet.tasks.model.TasksReview> getReviews(
 		long proposalId, int stage, boolean completed, boolean rejected)
 		throws com.liferay.portal.SystemException {
-		TasksReviewLocalService tasksReviewLocalService = TasksReviewLocalServiceFactory.getService();
-
-		return tasksReviewLocalService.getReviews(proposalId, stage, completed,
-			rejected);
+		return _service.getReviews(proposalId, stage, completed, rejected);
 	}
 
 	public static com.liferay.portlet.tasks.model.TasksReview rejectReview(
 		long userId, long proposalId, int stage)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		TasksReviewLocalService tasksReviewLocalService = TasksReviewLocalServiceFactory.getService();
-
-		return tasksReviewLocalService.rejectReview(userId, proposalId, stage);
+		return _service.rejectReview(userId, proposalId, stage);
 	}
 
 	public static void updateReviews(long proposalId, long assignedByUserId,
 		long[][] userIdsPerStage)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		TasksReviewLocalService tasksReviewLocalService = TasksReviewLocalServiceFactory.getService();
-
-		tasksReviewLocalService.updateReviews(proposalId, assignedByUserId,
-			userIdsPerStage);
+		_service.updateReviews(proposalId, assignedByUserId, userIdsPerStage);
 	}
+
+	public static TasksReviewLocalService getService() {
+		return _service;
+	}
+
+	public void setService(TasksReviewLocalService service) {
+		_service = service;
+	}
+
+	private static TasksReviewLocalService _service;
 }

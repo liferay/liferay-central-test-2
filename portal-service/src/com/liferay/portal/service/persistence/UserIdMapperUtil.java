@@ -241,22 +241,12 @@ public class UserIdMapperUtil {
 	}
 
 	public static UserIdMapperPersistence getPersistence() {
-		return _getUtil()._persistence;
+		return _persistence;
 	}
 
 	public void setPersistence(UserIdMapperPersistence persistence) {
 		_persistence = persistence;
 	}
 
-	private static UserIdMapperUtil _getUtil() {
-		if (_util == null) {
-			_util = (UserIdMapperUtil)com.liferay.portal.kernel.bean.PortalBeanLocatorUtil.locate(_UTIL);
-		}
-
-		return _util;
-	}
-
-	private static final String _UTIL = UserIdMapperUtil.class.getName();
-	private static UserIdMapperUtil _util;
-	private UserIdMapperPersistence _persistence;
+	private static UserIdMapperPersistence _persistence;
 }

@@ -267,22 +267,12 @@ public class PollsQuestionUtil {
 	}
 
 	public static PollsQuestionPersistence getPersistence() {
-		return _getUtil()._persistence;
+		return _persistence;
 	}
 
 	public void setPersistence(PollsQuestionPersistence persistence) {
 		_persistence = persistence;
 	}
 
-	private static PollsQuestionUtil _getUtil() {
-		if (_util == null) {
-			_util = (PollsQuestionUtil)com.liferay.portal.kernel.bean.PortalBeanLocatorUtil.locate(_UTIL);
-		}
-
-		return _util;
-	}
-
-	private static final String _UTIL = PollsQuestionUtil.class.getName();
-	private static PollsQuestionUtil _util;
-	private PollsQuestionPersistence _persistence;
+	private static PollsQuestionPersistence _persistence;
 }

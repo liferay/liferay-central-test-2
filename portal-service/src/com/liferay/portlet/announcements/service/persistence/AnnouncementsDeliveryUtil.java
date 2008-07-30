@@ -214,22 +214,12 @@ public class AnnouncementsDeliveryUtil {
 	}
 
 	public static AnnouncementsDeliveryPersistence getPersistence() {
-		return _getUtil()._persistence;
+		return _persistence;
 	}
 
 	public void setPersistence(AnnouncementsDeliveryPersistence persistence) {
 		_persistence = persistence;
 	}
 
-	private static AnnouncementsDeliveryUtil _getUtil() {
-		if (_util == null) {
-			_util = (AnnouncementsDeliveryUtil)com.liferay.portal.kernel.bean.PortalBeanLocatorUtil.locate(_UTIL);
-		}
-
-		return _util;
-	}
-
-	private static final String _UTIL = AnnouncementsDeliveryUtil.class.getName();
-	private static AnnouncementsDeliveryUtil _util;
-	private AnnouncementsDeliveryPersistence _persistence;
+	private static AnnouncementsDeliveryPersistence _persistence;
 }

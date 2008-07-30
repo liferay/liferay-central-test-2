@@ -270,22 +270,12 @@ public class DLFileRankUtil {
 	}
 
 	public static DLFileRankPersistence getPersistence() {
-		return _getUtil()._persistence;
+		return _persistence;
 	}
 
 	public void setPersistence(DLFileRankPersistence persistence) {
 		_persistence = persistence;
 	}
 
-	private static DLFileRankUtil _getUtil() {
-		if (_util == null) {
-			_util = (DLFileRankUtil)com.liferay.portal.kernel.bean.PortalBeanLocatorUtil.locate(_UTIL);
-		}
-
-		return _util;
-	}
-
-	private static final String _UTIL = DLFileRankUtil.class.getName();
-	private static DLFileRankUtil _util;
-	private DLFileRankPersistence _persistence;
+	private static DLFileRankPersistence _persistence;
 }

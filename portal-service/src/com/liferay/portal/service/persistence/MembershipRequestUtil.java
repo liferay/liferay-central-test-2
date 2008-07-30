@@ -296,22 +296,12 @@ public class MembershipRequestUtil {
 	}
 
 	public static MembershipRequestPersistence getPersistence() {
-		return _getUtil()._persistence;
+		return _persistence;
 	}
 
 	public void setPersistence(MembershipRequestPersistence persistence) {
 		_persistence = persistence;
 	}
 
-	private static MembershipRequestUtil _getUtil() {
-		if (_util == null) {
-			_util = (MembershipRequestUtil)com.liferay.portal.kernel.bean.PortalBeanLocatorUtil.locate(_UTIL);
-		}
-
-		return _util;
-	}
-
-	private static final String _UTIL = MembershipRequestUtil.class.getName();
-	private static MembershipRequestUtil _util;
-	private MembershipRequestPersistence _persistence;
+	private static MembershipRequestPersistence _persistence;
 }

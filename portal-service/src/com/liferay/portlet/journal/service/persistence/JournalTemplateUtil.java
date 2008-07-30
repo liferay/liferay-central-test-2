@@ -419,22 +419,12 @@ public class JournalTemplateUtil {
 	}
 
 	public static JournalTemplatePersistence getPersistence() {
-		return _getUtil()._persistence;
+		return _persistence;
 	}
 
 	public void setPersistence(JournalTemplatePersistence persistence) {
 		_persistence = persistence;
 	}
 
-	private static JournalTemplateUtil _getUtil() {
-		if (_util == null) {
-			_util = (JournalTemplateUtil)com.liferay.portal.kernel.bean.PortalBeanLocatorUtil.locate(_UTIL);
-		}
-
-		return _util;
-	}
-
-	private static final String _UTIL = JournalTemplateUtil.class.getName();
-	private static JournalTemplateUtil _util;
-	private JournalTemplatePersistence _persistence;
+	private static JournalTemplatePersistence _persistence;
 }

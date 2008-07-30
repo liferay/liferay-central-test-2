@@ -265,22 +265,12 @@ public class SCProductScreenshotUtil {
 	}
 
 	public static SCProductScreenshotPersistence getPersistence() {
-		return _getUtil()._persistence;
+		return _persistence;
 	}
 
 	public void setPersistence(SCProductScreenshotPersistence persistence) {
 		_persistence = persistence;
 	}
 
-	private static SCProductScreenshotUtil _getUtil() {
-		if (_util == null) {
-			_util = (SCProductScreenshotUtil)com.liferay.portal.kernel.bean.PortalBeanLocatorUtil.locate(_UTIL);
-		}
-
-		return _util;
-	}
-
-	private static final String _UTIL = SCProductScreenshotUtil.class.getName();
-	private static SCProductScreenshotUtil _util;
-	private SCProductScreenshotPersistence _persistence;
+	private static SCProductScreenshotPersistence _persistence;
 }

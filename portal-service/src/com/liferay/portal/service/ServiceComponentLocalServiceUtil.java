@@ -39,88 +39,63 @@ package com.liferay.portal.service;
  * on a bean instead of writing a lookup call and a method call.
  * </p>
  *
- * <p>
- * <code>com.liferay.portal.service.ServiceComponentLocalServiceFactory</code>
- * is responsible for the lookup of the bean.
- * </p>
- *
  * @author Brian Wing Shun Chan
  *
  * @see com.liferay.portal.service.ServiceComponentLocalService
- * @see com.liferay.portal.service.ServiceComponentLocalServiceFactory
  *
  */
 public class ServiceComponentLocalServiceUtil {
 	public static com.liferay.portal.model.ServiceComponent addServiceComponent(
 		com.liferay.portal.model.ServiceComponent serviceComponent)
 		throws com.liferay.portal.SystemException {
-		ServiceComponentLocalService serviceComponentLocalService = ServiceComponentLocalServiceFactory.getService();
-
-		return serviceComponentLocalService.addServiceComponent(serviceComponent);
+		return _service.addServiceComponent(serviceComponent);
 	}
 
 	public static void deleteServiceComponent(long serviceComponentId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		ServiceComponentLocalService serviceComponentLocalService = ServiceComponentLocalServiceFactory.getService();
-
-		serviceComponentLocalService.deleteServiceComponent(serviceComponentId);
+		_service.deleteServiceComponent(serviceComponentId);
 	}
 
 	public static void deleteServiceComponent(
 		com.liferay.portal.model.ServiceComponent serviceComponent)
 		throws com.liferay.portal.SystemException {
-		ServiceComponentLocalService serviceComponentLocalService = ServiceComponentLocalServiceFactory.getService();
-
-		serviceComponentLocalService.deleteServiceComponent(serviceComponent);
+		_service.deleteServiceComponent(serviceComponent);
 	}
 
 	public static java.util.List<Object> dynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery)
 		throws com.liferay.portal.SystemException {
-		ServiceComponentLocalService serviceComponentLocalService = ServiceComponentLocalServiceFactory.getService();
-
-		return serviceComponentLocalService.dynamicQuery(dynamicQuery);
+		return _service.dynamicQuery(dynamicQuery);
 	}
 
 	public static java.util.List<Object> dynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery, int start,
 		int end) throws com.liferay.portal.SystemException {
-		ServiceComponentLocalService serviceComponentLocalService = ServiceComponentLocalServiceFactory.getService();
-
-		return serviceComponentLocalService.dynamicQuery(dynamicQuery, start,
-			end);
+		return _service.dynamicQuery(dynamicQuery, start, end);
 	}
 
 	public static com.liferay.portal.model.ServiceComponent getServiceComponent(
 		long serviceComponentId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		ServiceComponentLocalService serviceComponentLocalService = ServiceComponentLocalServiceFactory.getService();
-
-		return serviceComponentLocalService.getServiceComponent(serviceComponentId);
+		return _service.getServiceComponent(serviceComponentId);
 	}
 
 	public static java.util.List<com.liferay.portal.model.ServiceComponent> getServiceComponents(
 		int start, int end) throws com.liferay.portal.SystemException {
-		ServiceComponentLocalService serviceComponentLocalService = ServiceComponentLocalServiceFactory.getService();
-
-		return serviceComponentLocalService.getServiceComponents(start, end);
+		return _service.getServiceComponents(start, end);
 	}
 
 	public static int getServiceComponentsCount()
 		throws com.liferay.portal.SystemException {
-		ServiceComponentLocalService serviceComponentLocalService = ServiceComponentLocalServiceFactory.getService();
-
-		return serviceComponentLocalService.getServiceComponentsCount();
+		return _service.getServiceComponentsCount();
 	}
 
 	public static com.liferay.portal.model.ServiceComponent updateServiceComponent(
 		com.liferay.portal.model.ServiceComponent serviceComponent)
 		throws com.liferay.portal.SystemException {
-		ServiceComponentLocalService serviceComponentLocalService = ServiceComponentLocalServiceFactory.getService();
-
-		return serviceComponentLocalService.updateServiceComponent(serviceComponent);
+		return _service.updateServiceComponent(serviceComponent);
 	}
 
 	public static com.liferay.portal.model.ServiceComponent updateServiceComponent(
@@ -129,9 +104,17 @@ public class ServiceComponentLocalServiceUtil {
 		long buildNumber, long buildDate)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		ServiceComponentLocalService serviceComponentLocalService = ServiceComponentLocalServiceFactory.getService();
-
-		return serviceComponentLocalService.updateServiceComponent(servletContext,
-			classLoader, buildNamespace, buildNumber, buildDate);
+		return _service.updateServiceComponent(servletContext, classLoader,
+			buildNamespace, buildNumber, buildDate);
 	}
+
+	public static ServiceComponentLocalService getService() {
+		return _service;
+	}
+
+	public void setService(ServiceComponentLocalService service) {
+		_service = service;
+	}
+
+	private static ServiceComponentLocalService _service;
 }

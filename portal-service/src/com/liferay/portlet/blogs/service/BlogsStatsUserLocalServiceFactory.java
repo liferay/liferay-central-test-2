@@ -22,6 +22,7 @@
 
 package com.liferay.portlet.blogs.service;
 
+import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
 
 /**
  * <a href="BlogsStatsUserLocalServiceFactory.java.html"><b><i>View Source</i></b></a>
@@ -51,33 +52,45 @@ package com.liferay.portlet.blogs.service;
  *
  */
 public class BlogsStatsUserLocalServiceFactory {
+	/**
+	 * @deprecated
+	 */
 	public static BlogsStatsUserLocalService getService() {
 		return _getFactory()._service;
 	}
 
+	/**
+	 * @deprecated
+	 */
 	public static BlogsStatsUserLocalService getImpl() {
 		if (_impl == null) {
-			_impl = (BlogsStatsUserLocalService)com.liferay.portal.kernel.bean.PortalBeanLocatorUtil.locate(_IMPL);
+			_impl = (BlogsStatsUserLocalService)PortalBeanLocatorUtil.locate(_IMPL);
 		}
 
 		return _impl;
 	}
 
+	/**
+	 * @deprecated
+	 */
 	public static BlogsStatsUserLocalService getTxImpl() {
 		if (_txImpl == null) {
-			_txImpl = (BlogsStatsUserLocalService)com.liferay.portal.kernel.bean.PortalBeanLocatorUtil.locate(_TX_IMPL);
+			_txImpl = (BlogsStatsUserLocalService)PortalBeanLocatorUtil.locate(_TX_IMPL);
 		}
 
 		return _txImpl;
 	}
 
+	/**
+	 * @deprecated
+	 */
 	public void setService(BlogsStatsUserLocalService service) {
 		_service = service;
 	}
 
 	private static BlogsStatsUserLocalServiceFactory _getFactory() {
 		if (_factory == null) {
-			_factory = (BlogsStatsUserLocalServiceFactory)com.liferay.portal.kernel.bean.PortalBeanLocatorUtil.locate(_FACTORY);
+			_factory = (BlogsStatsUserLocalServiceFactory)PortalBeanLocatorUtil.locate(_FACTORY);
 		}
 
 		return _factory;

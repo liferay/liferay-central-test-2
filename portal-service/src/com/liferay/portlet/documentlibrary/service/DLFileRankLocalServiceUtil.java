@@ -39,116 +39,84 @@ package com.liferay.portlet.documentlibrary.service;
  * on a bean instead of writing a lookup call and a method call.
  * </p>
  *
- * <p>
- * <code>com.liferay.portlet.documentlibrary.service.DLFileRankLocalServiceFactory</code>
- * is responsible for the lookup of the bean.
- * </p>
- *
  * @author Brian Wing Shun Chan
  *
  * @see com.liferay.portlet.documentlibrary.service.DLFileRankLocalService
- * @see com.liferay.portlet.documentlibrary.service.DLFileRankLocalServiceFactory
  *
  */
 public class DLFileRankLocalServiceUtil {
 	public static com.liferay.portlet.documentlibrary.model.DLFileRank addDLFileRank(
 		com.liferay.portlet.documentlibrary.model.DLFileRank dlFileRank)
 		throws com.liferay.portal.SystemException {
-		DLFileRankLocalService dlFileRankLocalService = DLFileRankLocalServiceFactory.getService();
-
-		return dlFileRankLocalService.addDLFileRank(dlFileRank);
+		return _service.addDLFileRank(dlFileRank);
 	}
 
 	public static void deleteDLFileRank(long fileRankId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		DLFileRankLocalService dlFileRankLocalService = DLFileRankLocalServiceFactory.getService();
-
-		dlFileRankLocalService.deleteDLFileRank(fileRankId);
+		_service.deleteDLFileRank(fileRankId);
 	}
 
 	public static void deleteDLFileRank(
 		com.liferay.portlet.documentlibrary.model.DLFileRank dlFileRank)
 		throws com.liferay.portal.SystemException {
-		DLFileRankLocalService dlFileRankLocalService = DLFileRankLocalServiceFactory.getService();
-
-		dlFileRankLocalService.deleteDLFileRank(dlFileRank);
+		_service.deleteDLFileRank(dlFileRank);
 	}
 
 	public static java.util.List<Object> dynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery)
 		throws com.liferay.portal.SystemException {
-		DLFileRankLocalService dlFileRankLocalService = DLFileRankLocalServiceFactory.getService();
-
-		return dlFileRankLocalService.dynamicQuery(dynamicQuery);
+		return _service.dynamicQuery(dynamicQuery);
 	}
 
 	public static java.util.List<Object> dynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery, int start,
 		int end) throws com.liferay.portal.SystemException {
-		DLFileRankLocalService dlFileRankLocalService = DLFileRankLocalServiceFactory.getService();
-
-		return dlFileRankLocalService.dynamicQuery(dynamicQuery, start, end);
+		return _service.dynamicQuery(dynamicQuery, start, end);
 	}
 
 	public static com.liferay.portlet.documentlibrary.model.DLFileRank getDLFileRank(
 		long fileRankId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		DLFileRankLocalService dlFileRankLocalService = DLFileRankLocalServiceFactory.getService();
-
-		return dlFileRankLocalService.getDLFileRank(fileRankId);
+		return _service.getDLFileRank(fileRankId);
 	}
 
 	public static java.util.List<com.liferay.portlet.documentlibrary.model.DLFileRank> getDLFileRanks(
 		int start, int end) throws com.liferay.portal.SystemException {
-		DLFileRankLocalService dlFileRankLocalService = DLFileRankLocalServiceFactory.getService();
-
-		return dlFileRankLocalService.getDLFileRanks(start, end);
+		return _service.getDLFileRanks(start, end);
 	}
 
 	public static int getDLFileRanksCount()
 		throws com.liferay.portal.SystemException {
-		DLFileRankLocalService dlFileRankLocalService = DLFileRankLocalServiceFactory.getService();
-
-		return dlFileRankLocalService.getDLFileRanksCount();
+		return _service.getDLFileRanksCount();
 	}
 
 	public static com.liferay.portlet.documentlibrary.model.DLFileRank updateDLFileRank(
 		com.liferay.portlet.documentlibrary.model.DLFileRank dlFileRank)
 		throws com.liferay.portal.SystemException {
-		DLFileRankLocalService dlFileRankLocalService = DLFileRankLocalServiceFactory.getService();
-
-		return dlFileRankLocalService.updateDLFileRank(dlFileRank);
+		return _service.updateDLFileRank(dlFileRank);
 	}
 
 	public static void deleteFileRanks(long userId)
 		throws com.liferay.portal.SystemException {
-		DLFileRankLocalService dlFileRankLocalService = DLFileRankLocalServiceFactory.getService();
-
-		dlFileRankLocalService.deleteFileRanks(userId);
+		_service.deleteFileRanks(userId);
 	}
 
 	public static void deleteFileRanks(long folderId, java.lang.String name)
 		throws com.liferay.portal.SystemException {
-		DLFileRankLocalService dlFileRankLocalService = DLFileRankLocalServiceFactory.getService();
-
-		dlFileRankLocalService.deleteFileRanks(folderId, name);
+		_service.deleteFileRanks(folderId, name);
 	}
 
 	public static java.util.List<com.liferay.portlet.documentlibrary.model.DLFileRank> getFileRanks(
 		long groupId, long userId) throws com.liferay.portal.SystemException {
-		DLFileRankLocalService dlFileRankLocalService = DLFileRankLocalServiceFactory.getService();
-
-		return dlFileRankLocalService.getFileRanks(groupId, userId);
+		return _service.getFileRanks(groupId, userId);
 	}
 
 	public static java.util.List<com.liferay.portlet.documentlibrary.model.DLFileRank> getFileRanks(
 		long groupId, long userId, int start, int end)
 		throws com.liferay.portal.SystemException {
-		DLFileRankLocalService dlFileRankLocalService = DLFileRankLocalServiceFactory.getService();
-
-		return dlFileRankLocalService.getFileRanks(groupId, userId, start, end);
+		return _service.getFileRanks(groupId, userId, start, end);
 	}
 
 	public static com.liferay.portlet.documentlibrary.model.DLFileRank updateFileRank(
@@ -156,9 +124,17 @@ public class DLFileRankLocalServiceUtil {
 		java.lang.String name)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		DLFileRankLocalService dlFileRankLocalService = DLFileRankLocalServiceFactory.getService();
-
-		return dlFileRankLocalService.updateFileRank(groupId, companyId,
-			userId, folderId, name);
+		return _service.updateFileRank(groupId, companyId, userId, folderId,
+			name);
 	}
+
+	public static DLFileRankLocalService getService() {
+		return _service;
+	}
+
+	public void setService(DLFileRankLocalService service) {
+		_service = service;
+	}
+
+	private static DLFileRankLocalService _service;
 }

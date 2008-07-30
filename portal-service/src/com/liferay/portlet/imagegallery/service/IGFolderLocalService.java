@@ -44,7 +44,6 @@ package com.liferay.portlet.imagegallery.service;
  *
  * @author Brian Wing Shun Chan
  *
- * @see com.liferay.portlet.imagegallery.service.IGFolderLocalServiceFactory
  * @see com.liferay.portlet.imagegallery.service.IGFolderLocalServiceUtil
  *
  */

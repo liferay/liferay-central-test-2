@@ -221,22 +221,12 @@ public class ServiceComponentUtil {
 	}
 
 	public static ServiceComponentPersistence getPersistence() {
-		return _getUtil()._persistence;
+		return _persistence;
 	}
 
 	public void setPersistence(ServiceComponentPersistence persistence) {
 		_persistence = persistence;
 	}
 
-	private static ServiceComponentUtil _getUtil() {
-		if (_util == null) {
-			_util = (ServiceComponentUtil)com.liferay.portal.kernel.bean.PortalBeanLocatorUtil.locate(_UTIL);
-		}
-
-		return _util;
-	}
-
-	private static final String _UTIL = ServiceComponentUtil.class.getName();
-	private static ServiceComponentUtil _util;
-	private ServiceComponentPersistence _persistence;
+	private static ServiceComponentPersistence _persistence;
 }

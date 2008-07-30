@@ -293,22 +293,12 @@ public class RegionUtil {
 	}
 
 	public static RegionPersistence getPersistence() {
-		return _getUtil()._persistence;
+		return _persistence;
 	}
 
 	public void setPersistence(RegionPersistence persistence) {
 		_persistence = persistence;
 	}
 
-	private static RegionUtil _getUtil() {
-		if (_util == null) {
-			_util = (RegionUtil)com.liferay.portal.kernel.bean.PortalBeanLocatorUtil.locate(_UTIL);
-		}
-
-		return _util;
-	}
-
-	private static final String _UTIL = RegionUtil.class.getName();
-	private static RegionUtil _util;
-	private RegionPersistence _persistence;
+	private static RegionPersistence _persistence;
 }

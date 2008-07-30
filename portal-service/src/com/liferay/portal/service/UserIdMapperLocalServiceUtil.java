@@ -39,129 +39,104 @@ package com.liferay.portal.service;
  * on a bean instead of writing a lookup call and a method call.
  * </p>
  *
- * <p>
- * <code>com.liferay.portal.service.UserIdMapperLocalServiceFactory</code>
- * is responsible for the lookup of the bean.
- * </p>
- *
  * @author Brian Wing Shun Chan
  *
  * @see com.liferay.portal.service.UserIdMapperLocalService
- * @see com.liferay.portal.service.UserIdMapperLocalServiceFactory
  *
  */
 public class UserIdMapperLocalServiceUtil {
 	public static com.liferay.portal.model.UserIdMapper addUserIdMapper(
 		com.liferay.portal.model.UserIdMapper userIdMapper)
 		throws com.liferay.portal.SystemException {
-		UserIdMapperLocalService userIdMapperLocalService = UserIdMapperLocalServiceFactory.getService();
-
-		return userIdMapperLocalService.addUserIdMapper(userIdMapper);
+		return _service.addUserIdMapper(userIdMapper);
 	}
 
 	public static void deleteUserIdMapper(long userIdMapperId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		UserIdMapperLocalService userIdMapperLocalService = UserIdMapperLocalServiceFactory.getService();
-
-		userIdMapperLocalService.deleteUserIdMapper(userIdMapperId);
+		_service.deleteUserIdMapper(userIdMapperId);
 	}
 
 	public static void deleteUserIdMapper(
 		com.liferay.portal.model.UserIdMapper userIdMapper)
 		throws com.liferay.portal.SystemException {
-		UserIdMapperLocalService userIdMapperLocalService = UserIdMapperLocalServiceFactory.getService();
-
-		userIdMapperLocalService.deleteUserIdMapper(userIdMapper);
+		_service.deleteUserIdMapper(userIdMapper);
 	}
 
 	public static java.util.List<Object> dynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery)
 		throws com.liferay.portal.SystemException {
-		UserIdMapperLocalService userIdMapperLocalService = UserIdMapperLocalServiceFactory.getService();
-
-		return userIdMapperLocalService.dynamicQuery(dynamicQuery);
+		return _service.dynamicQuery(dynamicQuery);
 	}
 
 	public static java.util.List<Object> dynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery, int start,
 		int end) throws com.liferay.portal.SystemException {
-		UserIdMapperLocalService userIdMapperLocalService = UserIdMapperLocalServiceFactory.getService();
-
-		return userIdMapperLocalService.dynamicQuery(dynamicQuery, start, end);
+		return _service.dynamicQuery(dynamicQuery, start, end);
 	}
 
 	public static com.liferay.portal.model.UserIdMapper getUserIdMapper(
 		long userIdMapperId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		UserIdMapperLocalService userIdMapperLocalService = UserIdMapperLocalServiceFactory.getService();
-
-		return userIdMapperLocalService.getUserIdMapper(userIdMapperId);
+		return _service.getUserIdMapper(userIdMapperId);
 	}
 
 	public static java.util.List<com.liferay.portal.model.UserIdMapper> getUserIdMappers(
 		int start, int end) throws com.liferay.portal.SystemException {
-		UserIdMapperLocalService userIdMapperLocalService = UserIdMapperLocalServiceFactory.getService();
-
-		return userIdMapperLocalService.getUserIdMappers(start, end);
+		return _service.getUserIdMappers(start, end);
 	}
 
 	public static int getUserIdMappersCount()
 		throws com.liferay.portal.SystemException {
-		UserIdMapperLocalService userIdMapperLocalService = UserIdMapperLocalServiceFactory.getService();
-
-		return userIdMapperLocalService.getUserIdMappersCount();
+		return _service.getUserIdMappersCount();
 	}
 
 	public static com.liferay.portal.model.UserIdMapper updateUserIdMapper(
 		com.liferay.portal.model.UserIdMapper userIdMapper)
 		throws com.liferay.portal.SystemException {
-		UserIdMapperLocalService userIdMapperLocalService = UserIdMapperLocalServiceFactory.getService();
-
-		return userIdMapperLocalService.updateUserIdMapper(userIdMapper);
+		return _service.updateUserIdMapper(userIdMapper);
 	}
 
 	public static void deleteUserIdMappers(long userId)
 		throws com.liferay.portal.SystemException {
-		UserIdMapperLocalService userIdMapperLocalService = UserIdMapperLocalServiceFactory.getService();
-
-		userIdMapperLocalService.deleteUserIdMappers(userId);
+		_service.deleteUserIdMappers(userId);
 	}
 
 	public static com.liferay.portal.model.UserIdMapper getUserIdMapper(
 		long userId, java.lang.String type)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		UserIdMapperLocalService userIdMapperLocalService = UserIdMapperLocalServiceFactory.getService();
-
-		return userIdMapperLocalService.getUserIdMapper(userId, type);
+		return _service.getUserIdMapper(userId, type);
 	}
 
 	public static com.liferay.portal.model.UserIdMapper getUserIdMapperByExternalUserId(
 		java.lang.String type, java.lang.String externalUserId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		UserIdMapperLocalService userIdMapperLocalService = UserIdMapperLocalServiceFactory.getService();
-
-		return userIdMapperLocalService.getUserIdMapperByExternalUserId(type,
-			externalUserId);
+		return _service.getUserIdMapperByExternalUserId(type, externalUserId);
 	}
 
 	public static java.util.List<com.liferay.portal.model.UserIdMapper> getUserIdMappers(
 		long userId) throws com.liferay.portal.SystemException {
-		UserIdMapperLocalService userIdMapperLocalService = UserIdMapperLocalServiceFactory.getService();
-
-		return userIdMapperLocalService.getUserIdMappers(userId);
+		return _service.getUserIdMappers(userId);
 	}
 
 	public static com.liferay.portal.model.UserIdMapper updateUserIdMapper(
 		long userId, java.lang.String type, java.lang.String description,
 		java.lang.String externalUserId)
 		throws com.liferay.portal.SystemException {
-		UserIdMapperLocalService userIdMapperLocalService = UserIdMapperLocalServiceFactory.getService();
-
-		return userIdMapperLocalService.updateUserIdMapper(userId, type,
-			description, externalUserId);
+		return _service.updateUserIdMapper(userId, type, description,
+			externalUserId);
 	}
+
+	public static UserIdMapperLocalService getService() {
+		return _service;
+	}
+
+	public void setService(UserIdMapperLocalService service) {
+		_service = service;
+	}
+
+	private static UserIdMapperLocalService _service;
 }

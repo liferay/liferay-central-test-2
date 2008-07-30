@@ -22,6 +22,7 @@
 
 package com.liferay.portlet.softwarecatalog.service;
 
+import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
 
 /**
  * <a href="SCProductScreenshotLocalServiceFactory.java.html"><b><i>View Source</i></b></a>
@@ -51,33 +52,45 @@ package com.liferay.portlet.softwarecatalog.service;
  *
  */
 public class SCProductScreenshotLocalServiceFactory {
+	/**
+	 * @deprecated
+	 */
 	public static SCProductScreenshotLocalService getService() {
 		return _getFactory()._service;
 	}
 
+	/**
+	 * @deprecated
+	 */
 	public static SCProductScreenshotLocalService getImpl() {
 		if (_impl == null) {
-			_impl = (SCProductScreenshotLocalService)com.liferay.portal.kernel.bean.PortalBeanLocatorUtil.locate(_IMPL);
+			_impl = (SCProductScreenshotLocalService)PortalBeanLocatorUtil.locate(_IMPL);
 		}
 
 		return _impl;
 	}
 
+	/**
+	 * @deprecated
+	 */
 	public static SCProductScreenshotLocalService getTxImpl() {
 		if (_txImpl == null) {
-			_txImpl = (SCProductScreenshotLocalService)com.liferay.portal.kernel.bean.PortalBeanLocatorUtil.locate(_TX_IMPL);
+			_txImpl = (SCProductScreenshotLocalService)PortalBeanLocatorUtil.locate(_TX_IMPL);
 		}
 
 		return _txImpl;
 	}
 
+	/**
+	 * @deprecated
+	 */
 	public void setService(SCProductScreenshotLocalService service) {
 		_service = service;
 	}
 
 	private static SCProductScreenshotLocalServiceFactory _getFactory() {
 		if (_factory == null) {
-			_factory = (SCProductScreenshotLocalServiceFactory)com.liferay.portal.kernel.bean.PortalBeanLocatorUtil.locate(_FACTORY);
+			_factory = (SCProductScreenshotLocalServiceFactory)PortalBeanLocatorUtil.locate(_FACTORY);
 		}
 
 		return _factory;

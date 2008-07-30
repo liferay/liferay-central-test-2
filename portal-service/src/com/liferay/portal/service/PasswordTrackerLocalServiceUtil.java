@@ -39,120 +39,96 @@ package com.liferay.portal.service;
  * on a bean instead of writing a lookup call and a method call.
  * </p>
  *
- * <p>
- * <code>com.liferay.portal.service.PasswordTrackerLocalServiceFactory</code>
- * is responsible for the lookup of the bean.
- * </p>
- *
  * @author Brian Wing Shun Chan
  *
  * @see com.liferay.portal.service.PasswordTrackerLocalService
- * @see com.liferay.portal.service.PasswordTrackerLocalServiceFactory
  *
  */
 public class PasswordTrackerLocalServiceUtil {
 	public static com.liferay.portal.model.PasswordTracker addPasswordTracker(
 		com.liferay.portal.model.PasswordTracker passwordTracker)
 		throws com.liferay.portal.SystemException {
-		PasswordTrackerLocalService passwordTrackerLocalService = PasswordTrackerLocalServiceFactory.getService();
-
-		return passwordTrackerLocalService.addPasswordTracker(passwordTracker);
+		return _service.addPasswordTracker(passwordTracker);
 	}
 
 	public static void deletePasswordTracker(long passwordTrackerId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		PasswordTrackerLocalService passwordTrackerLocalService = PasswordTrackerLocalServiceFactory.getService();
-
-		passwordTrackerLocalService.deletePasswordTracker(passwordTrackerId);
+		_service.deletePasswordTracker(passwordTrackerId);
 	}
 
 	public static void deletePasswordTracker(
 		com.liferay.portal.model.PasswordTracker passwordTracker)
 		throws com.liferay.portal.SystemException {
-		PasswordTrackerLocalService passwordTrackerLocalService = PasswordTrackerLocalServiceFactory.getService();
-
-		passwordTrackerLocalService.deletePasswordTracker(passwordTracker);
+		_service.deletePasswordTracker(passwordTracker);
 	}
 
 	public static java.util.List<Object> dynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery)
 		throws com.liferay.portal.SystemException {
-		PasswordTrackerLocalService passwordTrackerLocalService = PasswordTrackerLocalServiceFactory.getService();
-
-		return passwordTrackerLocalService.dynamicQuery(dynamicQuery);
+		return _service.dynamicQuery(dynamicQuery);
 	}
 
 	public static java.util.List<Object> dynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery, int start,
 		int end) throws com.liferay.portal.SystemException {
-		PasswordTrackerLocalService passwordTrackerLocalService = PasswordTrackerLocalServiceFactory.getService();
-
-		return passwordTrackerLocalService.dynamicQuery(dynamicQuery, start, end);
+		return _service.dynamicQuery(dynamicQuery, start, end);
 	}
 
 	public static com.liferay.portal.model.PasswordTracker getPasswordTracker(
 		long passwordTrackerId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		PasswordTrackerLocalService passwordTrackerLocalService = PasswordTrackerLocalServiceFactory.getService();
-
-		return passwordTrackerLocalService.getPasswordTracker(passwordTrackerId);
+		return _service.getPasswordTracker(passwordTrackerId);
 	}
 
 	public static java.util.List<com.liferay.portal.model.PasswordTracker> getPasswordTrackers(
 		int start, int end) throws com.liferay.portal.SystemException {
-		PasswordTrackerLocalService passwordTrackerLocalService = PasswordTrackerLocalServiceFactory.getService();
-
-		return passwordTrackerLocalService.getPasswordTrackers(start, end);
+		return _service.getPasswordTrackers(start, end);
 	}
 
 	public static int getPasswordTrackersCount()
 		throws com.liferay.portal.SystemException {
-		PasswordTrackerLocalService passwordTrackerLocalService = PasswordTrackerLocalServiceFactory.getService();
-
-		return passwordTrackerLocalService.getPasswordTrackersCount();
+		return _service.getPasswordTrackersCount();
 	}
 
 	public static com.liferay.portal.model.PasswordTracker updatePasswordTracker(
 		com.liferay.portal.model.PasswordTracker passwordTracker)
 		throws com.liferay.portal.SystemException {
-		PasswordTrackerLocalService passwordTrackerLocalService = PasswordTrackerLocalServiceFactory.getService();
-
-		return passwordTrackerLocalService.updatePasswordTracker(passwordTracker);
+		return _service.updatePasswordTracker(passwordTracker);
 	}
 
 	public static void deletePasswordTrackers(long userId)
 		throws com.liferay.portal.SystemException {
-		PasswordTrackerLocalService passwordTrackerLocalService = PasswordTrackerLocalServiceFactory.getService();
-
-		passwordTrackerLocalService.deletePasswordTrackers(userId);
+		_service.deletePasswordTrackers(userId);
 	}
 
 	public static boolean isSameAsCurrentPassword(long userId,
 		java.lang.String newClearTextPwd)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		PasswordTrackerLocalService passwordTrackerLocalService = PasswordTrackerLocalServiceFactory.getService();
-
-		return passwordTrackerLocalService.isSameAsCurrentPassword(userId,
-			newClearTextPwd);
+		return _service.isSameAsCurrentPassword(userId, newClearTextPwd);
 	}
 
 	public static boolean isValidPassword(long userId,
 		java.lang.String newClearTextPwd)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		PasswordTrackerLocalService passwordTrackerLocalService = PasswordTrackerLocalServiceFactory.getService();
-
-		return passwordTrackerLocalService.isValidPassword(userId,
-			newClearTextPwd);
+		return _service.isValidPassword(userId, newClearTextPwd);
 	}
 
 	public static void trackPassword(long userId, java.lang.String encPassword)
 		throws com.liferay.portal.SystemException {
-		PasswordTrackerLocalService passwordTrackerLocalService = PasswordTrackerLocalServiceFactory.getService();
-
-		passwordTrackerLocalService.trackPassword(userId, encPassword);
+		_service.trackPassword(userId, encPassword);
 	}
+
+	public static PasswordTrackerLocalService getService() {
+		return _service;
+	}
+
+	public void setService(PasswordTrackerLocalService service) {
+		_service = service;
+	}
+
+	private static PasswordTrackerLocalService _service;
 }

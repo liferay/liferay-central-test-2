@@ -43,22 +43,12 @@ public class CalEventFinderUtil {
 	}
 
 	public static CalEventFinder getFinder() {
-		return _getUtil()._finder;
+		return _finder;
 	}
 
 	public void setFinder(CalEventFinder finder) {
 		_finder = finder;
 	}
 
-	private static CalEventFinderUtil _getUtil() {
-		if (_util == null) {
-			_util = (CalEventFinderUtil)com.liferay.portal.kernel.bean.PortalBeanLocatorUtil.locate(_UTIL);
-		}
-
-		return _util;
-	}
-
-	private static final String _UTIL = CalEventFinderUtil.class.getName();
-	private static CalEventFinderUtil _util;
-	private CalEventFinder _finder;
+	private static CalEventFinder _finder;
 }

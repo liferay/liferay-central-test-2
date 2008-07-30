@@ -44,7 +44,6 @@ package com.liferay.portlet.shopping.service;
  *
  * @author Brian Wing Shun Chan
  *
- * @see com.liferay.portlet.shopping.service.ShoppingOrderLocalServiceFactory
  * @see com.liferay.portlet.shopping.service.ShoppingOrderLocalServiceUtil
  *
  */

@@ -39,15 +39,9 @@ package com.liferay.portal.service;
  * on a bean instead of writing a lookup call and a method call.
  * </p>
  *
- * <p>
- * <code>com.liferay.portal.service.OrganizationServiceFactory</code>
- * is responsible for the lookup of the bean.
- * </p>
- *
  * @author Brian Wing Shun Chan
  *
  * @see com.liferay.portal.service.OrganizationService
- * @see com.liferay.portal.service.OrganizationServiceFactory
  *
  */
 public class OrganizationServiceUtil {
@@ -55,18 +49,14 @@ public class OrganizationServiceUtil {
 		long[] organizationIds)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
-		OrganizationService organizationService = OrganizationServiceFactory.getService();
-
-		organizationService.addGroupOrganizations(groupId, organizationIds);
+		_service.addGroupOrganizations(groupId, organizationIds);
 	}
 
 	public static void addPasswordPolicyOrganizations(long passwordPolicyId,
 		long[] organizationIds)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
-		OrganizationService organizationService = OrganizationServiceFactory.getService();
-
-		organizationService.addPasswordPolicyOrganizations(passwordPolicyId,
+		_service.addPasswordPolicyOrganizations(passwordPolicyId,
 			organizationIds);
 	}
 
@@ -76,69 +66,53 @@ public class OrganizationServiceUtil {
 		java.lang.String comments)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
-		OrganizationService organizationService = OrganizationServiceFactory.getService();
-
-		return organizationService.addOrganization(parentOrganizationId, name,
-			type, recursable, regionId, countryId, statusId, comments);
+		return _service.addOrganization(parentOrganizationId, name, type,
+			recursable, regionId, countryId, statusId, comments);
 	}
 
 	public static void deleteOrganization(long organizationId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
-		OrganizationService organizationService = OrganizationServiceFactory.getService();
-
-		organizationService.deleteOrganization(organizationId);
+		_service.deleteOrganization(organizationId);
 	}
 
 	public static com.liferay.portal.model.Organization getOrganization(
 		long organizationId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
-		OrganizationService organizationService = OrganizationServiceFactory.getService();
-
-		return organizationService.getOrganization(organizationId);
+		return _service.getOrganization(organizationId);
 	}
 
 	public static long getOrganizationId(long companyId, java.lang.String name)
 		throws com.liferay.portal.SystemException, java.rmi.RemoteException {
-		OrganizationService organizationService = OrganizationServiceFactory.getService();
-
-		return organizationService.getOrganizationId(companyId, name);
+		return _service.getOrganizationId(companyId, name);
 	}
 
 	public static java.util.List<com.liferay.portal.model.Organization> getUserOrganizations(
 		long userId)
 		throws com.liferay.portal.SystemException, java.rmi.RemoteException {
-		OrganizationService organizationService = OrganizationServiceFactory.getService();
-
-		return organizationService.getUserOrganizations(userId);
+		return _service.getUserOrganizations(userId);
 	}
 
 	public static void setGroupOrganizations(long groupId,
 		long[] organizationIds)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
-		OrganizationService organizationService = OrganizationServiceFactory.getService();
-
-		organizationService.setGroupOrganizations(groupId, organizationIds);
+		_service.setGroupOrganizations(groupId, organizationIds);
 	}
 
 	public static void unsetGroupOrganizations(long groupId,
 		long[] organizationIds)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
-		OrganizationService organizationService = OrganizationServiceFactory.getService();
-
-		organizationService.unsetGroupOrganizations(groupId, organizationIds);
+		_service.unsetGroupOrganizations(groupId, organizationIds);
 	}
 
 	public static void unsetPasswordPolicyOrganizations(long passwordPolicyId,
 		long[] organizationIds)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
-		OrganizationService organizationService = OrganizationServiceFactory.getService();
-
-		organizationService.unsetPasswordPolicyOrganizations(passwordPolicyId,
+		_service.unsetPasswordPolicyOrganizations(passwordPolicyId,
 			organizationIds);
 	}
 
@@ -148,10 +122,18 @@ public class OrganizationServiceUtil {
 		int statusId, java.lang.String comments)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
-		OrganizationService organizationService = OrganizationServiceFactory.getService();
-
-		return organizationService.updateOrganization(organizationId,
+		return _service.updateOrganization(organizationId,
 			parentOrganizationId, name, type, recursable, regionId, countryId,
 			statusId, comments);
 	}
+
+	public static OrganizationService getService() {
+		return _service;
+	}
+
+	public void setService(OrganizationService service) {
+		_service = service;
+	}
+
+	private static OrganizationService _service;
 }

@@ -39,40 +39,38 @@ package com.liferay.portlet.announcements.service;
  * on a bean instead of writing a lookup call and a method call.
  * </p>
  *
- * <p>
- * <code>com.liferay.portlet.announcements.service.AnnouncementsFlagServiceFactory</code>
- * is responsible for the lookup of the bean.
- * </p>
- *
  * @author Brian Wing Shun Chan
  *
  * @see com.liferay.portlet.announcements.service.AnnouncementsFlagService
- * @see com.liferay.portlet.announcements.service.AnnouncementsFlagServiceFactory
  *
  */
 public class AnnouncementsFlagServiceUtil {
 	public static void addFlag(long entryId, int value)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
-		AnnouncementsFlagService announcementsFlagService = AnnouncementsFlagServiceFactory.getService();
-
-		announcementsFlagService.addFlag(entryId, value);
+		_service.addFlag(entryId, value);
 	}
 
 	public static com.liferay.portlet.announcements.model.AnnouncementsFlag getFlag(
 		long entryId, int value)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
-		AnnouncementsFlagService announcementsFlagService = AnnouncementsFlagServiceFactory.getService();
-
-		return announcementsFlagService.getFlag(entryId, value);
+		return _service.getFlag(entryId, value);
 	}
 
 	public static void deleteFlag(long flagId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
-		AnnouncementsFlagService announcementsFlagService = AnnouncementsFlagServiceFactory.getService();
-
-		announcementsFlagService.deleteFlag(flagId);
+		_service.deleteFlag(flagId);
 	}
+
+	public static AnnouncementsFlagService getService() {
+		return _service;
+	}
+
+	public void setService(AnnouncementsFlagService service) {
+		_service = service;
+	}
+
+	private static AnnouncementsFlagService _service;
 }

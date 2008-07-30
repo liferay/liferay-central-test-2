@@ -39,87 +39,63 @@ package com.liferay.portlet.bookmarks.service;
  * on a bean instead of writing a lookup call and a method call.
  * </p>
  *
- * <p>
- * <code>com.liferay.portlet.bookmarks.service.BookmarksFolderLocalServiceFactory</code>
- * is responsible for the lookup of the bean.
- * </p>
- *
  * @author Brian Wing Shun Chan
  *
  * @see com.liferay.portlet.bookmarks.service.BookmarksFolderLocalService
- * @see com.liferay.portlet.bookmarks.service.BookmarksFolderLocalServiceFactory
  *
  */
 public class BookmarksFolderLocalServiceUtil {
 	public static com.liferay.portlet.bookmarks.model.BookmarksFolder addBookmarksFolder(
 		com.liferay.portlet.bookmarks.model.BookmarksFolder bookmarksFolder)
 		throws com.liferay.portal.SystemException {
-		BookmarksFolderLocalService bookmarksFolderLocalService = BookmarksFolderLocalServiceFactory.getService();
-
-		return bookmarksFolderLocalService.addBookmarksFolder(bookmarksFolder);
+		return _service.addBookmarksFolder(bookmarksFolder);
 	}
 
 	public static void deleteBookmarksFolder(long folderId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		BookmarksFolderLocalService bookmarksFolderLocalService = BookmarksFolderLocalServiceFactory.getService();
-
-		bookmarksFolderLocalService.deleteBookmarksFolder(folderId);
+		_service.deleteBookmarksFolder(folderId);
 	}
 
 	public static void deleteBookmarksFolder(
 		com.liferay.portlet.bookmarks.model.BookmarksFolder bookmarksFolder)
 		throws com.liferay.portal.SystemException {
-		BookmarksFolderLocalService bookmarksFolderLocalService = BookmarksFolderLocalServiceFactory.getService();
-
-		bookmarksFolderLocalService.deleteBookmarksFolder(bookmarksFolder);
+		_service.deleteBookmarksFolder(bookmarksFolder);
 	}
 
 	public static java.util.List<Object> dynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery)
 		throws com.liferay.portal.SystemException {
-		BookmarksFolderLocalService bookmarksFolderLocalService = BookmarksFolderLocalServiceFactory.getService();
-
-		return bookmarksFolderLocalService.dynamicQuery(dynamicQuery);
+		return _service.dynamicQuery(dynamicQuery);
 	}
 
 	public static java.util.List<Object> dynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery, int start,
 		int end) throws com.liferay.portal.SystemException {
-		BookmarksFolderLocalService bookmarksFolderLocalService = BookmarksFolderLocalServiceFactory.getService();
-
-		return bookmarksFolderLocalService.dynamicQuery(dynamicQuery, start, end);
+		return _service.dynamicQuery(dynamicQuery, start, end);
 	}
 
 	public static com.liferay.portlet.bookmarks.model.BookmarksFolder getBookmarksFolder(
 		long folderId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		BookmarksFolderLocalService bookmarksFolderLocalService = BookmarksFolderLocalServiceFactory.getService();
-
-		return bookmarksFolderLocalService.getBookmarksFolder(folderId);
+		return _service.getBookmarksFolder(folderId);
 	}
 
 	public static java.util.List<com.liferay.portlet.bookmarks.model.BookmarksFolder> getBookmarksFolders(
 		int start, int end) throws com.liferay.portal.SystemException {
-		BookmarksFolderLocalService bookmarksFolderLocalService = BookmarksFolderLocalServiceFactory.getService();
-
-		return bookmarksFolderLocalService.getBookmarksFolders(start, end);
+		return _service.getBookmarksFolders(start, end);
 	}
 
 	public static int getBookmarksFoldersCount()
 		throws com.liferay.portal.SystemException {
-		BookmarksFolderLocalService bookmarksFolderLocalService = BookmarksFolderLocalServiceFactory.getService();
-
-		return bookmarksFolderLocalService.getBookmarksFoldersCount();
+		return _service.getBookmarksFoldersCount();
 	}
 
 	public static com.liferay.portlet.bookmarks.model.BookmarksFolder updateBookmarksFolder(
 		com.liferay.portlet.bookmarks.model.BookmarksFolder bookmarksFolder)
 		throws com.liferay.portal.SystemException {
-		BookmarksFolderLocalService bookmarksFolderLocalService = BookmarksFolderLocalServiceFactory.getService();
-
-		return bookmarksFolderLocalService.updateBookmarksFolder(bookmarksFolder);
+		return _service.updateBookmarksFolder(bookmarksFolder);
 	}
 
 	public static com.liferay.portlet.bookmarks.model.BookmarksFolder addFolder(
@@ -128,11 +104,8 @@ public class BookmarksFolderLocalServiceUtil {
 		boolean addGuestPermissions)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		BookmarksFolderLocalService bookmarksFolderLocalService = BookmarksFolderLocalServiceFactory.getService();
-
-		return bookmarksFolderLocalService.addFolder(userId, plid,
-			parentFolderId, name, description, addCommunityPermissions,
-			addGuestPermissions);
+		return _service.addFolder(userId, plid, parentFolderId, name,
+			description, addCommunityPermissions, addGuestPermissions);
 	}
 
 	public static com.liferay.portlet.bookmarks.model.BookmarksFolder addFolder(
@@ -141,11 +114,8 @@ public class BookmarksFolderLocalServiceUtil {
 		boolean addCommunityPermissions, boolean addGuestPermissions)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		BookmarksFolderLocalService bookmarksFolderLocalService = BookmarksFolderLocalServiceFactory.getService();
-
-		return bookmarksFolderLocalService.addFolder(uuid, userId, plid,
-			parentFolderId, name, description, addCommunityPermissions,
-			addGuestPermissions);
+		return _service.addFolder(uuid, userId, plid, parentFolderId, name,
+			description, addCommunityPermissions, addGuestPermissions);
 	}
 
 	public static com.liferay.portlet.bookmarks.model.BookmarksFolder addFolder(
@@ -154,11 +124,8 @@ public class BookmarksFolderLocalServiceUtil {
 		java.lang.String[] guestPermissions)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		BookmarksFolderLocalService bookmarksFolderLocalService = BookmarksFolderLocalServiceFactory.getService();
-
-		return bookmarksFolderLocalService.addFolder(userId, plid,
-			parentFolderId, name, description, communityPermissions,
-			guestPermissions);
+		return _service.addFolder(userId, plid, parentFolderId, name,
+			description, communityPermissions, guestPermissions);
 	}
 
 	public static com.liferay.portlet.bookmarks.model.BookmarksFolder addFolder(
@@ -170,21 +137,17 @@ public class BookmarksFolderLocalServiceUtil {
 		java.lang.String[] guestPermissions)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		BookmarksFolderLocalService bookmarksFolderLocalService = BookmarksFolderLocalServiceFactory.getService();
-
-		return bookmarksFolderLocalService.addFolder(uuid, userId, plid,
-			parentFolderId, name, description, addCommunityPermissions,
-			addGuestPermissions, communityPermissions, guestPermissions);
+		return _service.addFolder(uuid, userId, plid, parentFolderId, name,
+			description, addCommunityPermissions, addGuestPermissions,
+			communityPermissions, guestPermissions);
 	}
 
 	public static void addFolderResources(long folderId,
 		boolean addCommunityPermissions, boolean addGuestPermissions)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		BookmarksFolderLocalService bookmarksFolderLocalService = BookmarksFolderLocalServiceFactory.getService();
-
-		bookmarksFolderLocalService.addFolderResources(folderId,
-			addCommunityPermissions, addGuestPermissions);
+		_service.addFolderResources(folderId, addCommunityPermissions,
+			addGuestPermissions);
 	}
 
 	public static void addFolderResources(
@@ -192,10 +155,8 @@ public class BookmarksFolderLocalServiceUtil {
 		boolean addCommunityPermissions, boolean addGuestPermissions)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		BookmarksFolderLocalService bookmarksFolderLocalService = BookmarksFolderLocalServiceFactory.getService();
-
-		bookmarksFolderLocalService.addFolderResources(folder,
-			addCommunityPermissions, addGuestPermissions);
+		_service.addFolderResources(folder, addCommunityPermissions,
+			addGuestPermissions);
 	}
 
 	public static void addFolderResources(long folderId,
@@ -203,10 +164,8 @@ public class BookmarksFolderLocalServiceUtil {
 		java.lang.String[] guestPermissions)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		BookmarksFolderLocalService bookmarksFolderLocalService = BookmarksFolderLocalServiceFactory.getService();
-
-		bookmarksFolderLocalService.addFolderResources(folderId,
-			communityPermissions, guestPermissions);
+		_service.addFolderResources(folderId, communityPermissions,
+			guestPermissions);
 	}
 
 	public static void addFolderResources(
@@ -215,84 +174,62 @@ public class BookmarksFolderLocalServiceUtil {
 		java.lang.String[] guestPermissions)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		BookmarksFolderLocalService bookmarksFolderLocalService = BookmarksFolderLocalServiceFactory.getService();
-
-		bookmarksFolderLocalService.addFolderResources(folder,
-			communityPermissions, guestPermissions);
+		_service.addFolderResources(folder, communityPermissions,
+			guestPermissions);
 	}
 
 	public static void deleteFolder(long folderId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		BookmarksFolderLocalService bookmarksFolderLocalService = BookmarksFolderLocalServiceFactory.getService();
-
-		bookmarksFolderLocalService.deleteFolder(folderId);
+		_service.deleteFolder(folderId);
 	}
 
 	public static void deleteFolder(
 		com.liferay.portlet.bookmarks.model.BookmarksFolder folder)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		BookmarksFolderLocalService bookmarksFolderLocalService = BookmarksFolderLocalServiceFactory.getService();
-
-		bookmarksFolderLocalService.deleteFolder(folder);
+		_service.deleteFolder(folder);
 	}
 
 	public static void deleteFolders(long groupId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		BookmarksFolderLocalService bookmarksFolderLocalService = BookmarksFolderLocalServiceFactory.getService();
-
-		bookmarksFolderLocalService.deleteFolders(groupId);
+		_service.deleteFolders(groupId);
 	}
 
 	public static com.liferay.portlet.bookmarks.model.BookmarksFolder getFolder(
 		long folderId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		BookmarksFolderLocalService bookmarksFolderLocalService = BookmarksFolderLocalServiceFactory.getService();
-
-		return bookmarksFolderLocalService.getFolder(folderId);
+		return _service.getFolder(folderId);
 	}
 
 	public static java.util.List<com.liferay.portlet.bookmarks.model.BookmarksFolder> getFolders(
 		long groupId, long parentFolderId, int start, int end)
 		throws com.liferay.portal.SystemException {
-		BookmarksFolderLocalService bookmarksFolderLocalService = BookmarksFolderLocalServiceFactory.getService();
-
-		return bookmarksFolderLocalService.getFolders(groupId, parentFolderId,
-			start, end);
+		return _service.getFolders(groupId, parentFolderId, start, end);
 	}
 
 	public static int getFoldersCount(long groupId, long parentFolderId)
 		throws com.liferay.portal.SystemException {
-		BookmarksFolderLocalService bookmarksFolderLocalService = BookmarksFolderLocalServiceFactory.getService();
-
-		return bookmarksFolderLocalService.getFoldersCount(groupId,
-			parentFolderId);
+		return _service.getFoldersCount(groupId, parentFolderId);
 	}
 
 	public static void getSubfolderIds(java.util.List<Long> folderIds,
 		long groupId, long folderId) throws com.liferay.portal.SystemException {
-		BookmarksFolderLocalService bookmarksFolderLocalService = BookmarksFolderLocalServiceFactory.getService();
-
-		bookmarksFolderLocalService.getSubfolderIds(folderIds, groupId, folderId);
+		_service.getSubfolderIds(folderIds, groupId, folderId);
 	}
 
 	public static void reIndex(java.lang.String[] ids)
 		throws com.liferay.portal.SystemException {
-		BookmarksFolderLocalService bookmarksFolderLocalService = BookmarksFolderLocalServiceFactory.getService();
-
-		bookmarksFolderLocalService.reIndex(ids);
+		_service.reIndex(ids);
 	}
 
 	public static com.liferay.portal.kernel.search.Hits search(long companyId,
 		long groupId, long[] folderIds, java.lang.String keywords, int start,
 		int end) throws com.liferay.portal.SystemException {
-		BookmarksFolderLocalService bookmarksFolderLocalService = BookmarksFolderLocalServiceFactory.getService();
-
-		return bookmarksFolderLocalService.search(companyId, groupId,
-			folderIds, keywords, start, end);
+		return _service.search(companyId, groupId, folderIds, keywords, start,
+			end);
 	}
 
 	public static com.liferay.portlet.bookmarks.model.BookmarksFolder updateFolder(
@@ -300,9 +237,17 @@ public class BookmarksFolderLocalServiceUtil {
 		java.lang.String description, boolean mergeWithParentFolder)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		BookmarksFolderLocalService bookmarksFolderLocalService = BookmarksFolderLocalServiceFactory.getService();
-
-		return bookmarksFolderLocalService.updateFolder(folderId,
-			parentFolderId, name, description, mergeWithParentFolder);
+		return _service.updateFolder(folderId, parentFolderId, name,
+			description, mergeWithParentFolder);
 	}
+
+	public static BookmarksFolderLocalService getService() {
+		return _service;
+	}
+
+	public void setService(BookmarksFolderLocalService service) {
+		_service = service;
+	}
+
+	private static BookmarksFolderLocalService _service;
 }

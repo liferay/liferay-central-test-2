@@ -44,7 +44,6 @@ package com.liferay.portlet.expando.service;
  *
  * @author Brian Wing Shun Chan
  *
- * @see com.liferay.portlet.expando.service.ExpandoRowLocalServiceFactory
  * @see com.liferay.portlet.expando.service.ExpandoRowLocalServiceUtil
  *
  */

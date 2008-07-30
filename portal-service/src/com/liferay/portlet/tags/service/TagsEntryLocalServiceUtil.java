@@ -39,105 +39,77 @@ package com.liferay.portlet.tags.service;
  * on a bean instead of writing a lookup call and a method call.
  * </p>
  *
- * <p>
- * <code>com.liferay.portlet.tags.service.TagsEntryLocalServiceFactory</code>
- * is responsible for the lookup of the bean.
- * </p>
- *
  * @author Brian Wing Shun Chan
  *
  * @see com.liferay.portlet.tags.service.TagsEntryLocalService
- * @see com.liferay.portlet.tags.service.TagsEntryLocalServiceFactory
  *
  */
 public class TagsEntryLocalServiceUtil {
 	public static com.liferay.portlet.tags.model.TagsEntry addTagsEntry(
 		com.liferay.portlet.tags.model.TagsEntry tagsEntry)
 		throws com.liferay.portal.SystemException {
-		TagsEntryLocalService tagsEntryLocalService = TagsEntryLocalServiceFactory.getService();
-
-		return tagsEntryLocalService.addTagsEntry(tagsEntry);
+		return _service.addTagsEntry(tagsEntry);
 	}
 
 	public static void deleteTagsEntry(long entryId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		TagsEntryLocalService tagsEntryLocalService = TagsEntryLocalServiceFactory.getService();
-
-		tagsEntryLocalService.deleteTagsEntry(entryId);
+		_service.deleteTagsEntry(entryId);
 	}
 
 	public static void deleteTagsEntry(
 		com.liferay.portlet.tags.model.TagsEntry tagsEntry)
 		throws com.liferay.portal.SystemException {
-		TagsEntryLocalService tagsEntryLocalService = TagsEntryLocalServiceFactory.getService();
-
-		tagsEntryLocalService.deleteTagsEntry(tagsEntry);
+		_service.deleteTagsEntry(tagsEntry);
 	}
 
 	public static java.util.List<Object> dynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery)
 		throws com.liferay.portal.SystemException {
-		TagsEntryLocalService tagsEntryLocalService = TagsEntryLocalServiceFactory.getService();
-
-		return tagsEntryLocalService.dynamicQuery(dynamicQuery);
+		return _service.dynamicQuery(dynamicQuery);
 	}
 
 	public static java.util.List<Object> dynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery, int start,
 		int end) throws com.liferay.portal.SystemException {
-		TagsEntryLocalService tagsEntryLocalService = TagsEntryLocalServiceFactory.getService();
-
-		return tagsEntryLocalService.dynamicQuery(dynamicQuery, start, end);
+		return _service.dynamicQuery(dynamicQuery, start, end);
 	}
 
 	public static com.liferay.portlet.tags.model.TagsEntry getTagsEntry(
 		long entryId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		TagsEntryLocalService tagsEntryLocalService = TagsEntryLocalServiceFactory.getService();
-
-		return tagsEntryLocalService.getTagsEntry(entryId);
+		return _service.getTagsEntry(entryId);
 	}
 
 	public static java.util.List<com.liferay.portlet.tags.model.TagsEntry> getTagsEntries(
 		int start, int end) throws com.liferay.portal.SystemException {
-		TagsEntryLocalService tagsEntryLocalService = TagsEntryLocalServiceFactory.getService();
-
-		return tagsEntryLocalService.getTagsEntries(start, end);
+		return _service.getTagsEntries(start, end);
 	}
 
 	public static int getTagsEntriesCount()
 		throws com.liferay.portal.SystemException {
-		TagsEntryLocalService tagsEntryLocalService = TagsEntryLocalServiceFactory.getService();
-
-		return tagsEntryLocalService.getTagsEntriesCount();
+		return _service.getTagsEntriesCount();
 	}
 
 	public static com.liferay.portlet.tags.model.TagsEntry updateTagsEntry(
 		com.liferay.portlet.tags.model.TagsEntry tagsEntry)
 		throws com.liferay.portal.SystemException {
-		TagsEntryLocalService tagsEntryLocalService = TagsEntryLocalServiceFactory.getService();
-
-		return tagsEntryLocalService.updateTagsEntry(tagsEntry);
+		return _service.updateTagsEntry(tagsEntry);
 	}
 
 	public static com.liferay.portlet.tags.model.TagsEntry addEntry(
 		long userId, java.lang.String name)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		TagsEntryLocalService tagsEntryLocalService = TagsEntryLocalServiceFactory.getService();
-
-		return tagsEntryLocalService.addEntry(userId, name);
+		return _service.addEntry(userId, name);
 	}
 
 	public static com.liferay.portlet.tags.model.TagsEntry addEntry(
 		long userId, java.lang.String name, java.lang.String[] properties)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		TagsEntryLocalService tagsEntryLocalService = TagsEntryLocalServiceFactory.getService();
-
-		return tagsEntryLocalService.addEntry(userId, name, properties);
+		return _service.addEntry(userId, name, properties);
 	}
 
 	public static com.liferay.portlet.tags.model.TagsEntry addEntry(
@@ -145,10 +117,7 @@ public class TagsEntryLocalServiceUtil {
 		java.lang.String[] properties)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		TagsEntryLocalService tagsEntryLocalService = TagsEntryLocalServiceFactory.getService();
-
-		return tagsEntryLocalService.addEntry(userId, name, vocabularyName,
-			properties);
+		return _service.addEntry(userId, name, vocabularyName, properties);
 	}
 
 	public static com.liferay.portlet.tags.model.TagsEntry addEntry(
@@ -156,163 +125,120 @@ public class TagsEntryLocalServiceUtil {
 		java.lang.String vocabularyName, java.lang.String[] properties)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		TagsEntryLocalService tagsEntryLocalService = TagsEntryLocalServiceFactory.getService();
-
-		return tagsEntryLocalService.addEntry(userId, parentEntryName, name,
-			vocabularyName, properties);
+		return _service.addEntry(userId, parentEntryName, name, vocabularyName,
+			properties);
 	}
 
 	public static void checkEntries(long userId, java.lang.String[] names)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		TagsEntryLocalService tagsEntryLocalService = TagsEntryLocalServiceFactory.getService();
-
-		tagsEntryLocalService.checkEntries(userId, names);
+		_service.checkEntries(userId, names);
 	}
 
 	public static void deleteEntries(long companyId, long vocabularyId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		TagsEntryLocalService tagsEntryLocalService = TagsEntryLocalServiceFactory.getService();
-
-		tagsEntryLocalService.deleteEntries(companyId, vocabularyId);
+		_service.deleteEntries(companyId, vocabularyId);
 	}
 
 	public static void deleteEntry(long entryId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		TagsEntryLocalService tagsEntryLocalService = TagsEntryLocalServiceFactory.getService();
-
-		tagsEntryLocalService.deleteEntry(entryId);
+		_service.deleteEntry(entryId);
 	}
 
 	public static void deleteEntry(
 		com.liferay.portlet.tags.model.TagsEntry entry)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		TagsEntryLocalService tagsEntryLocalService = TagsEntryLocalServiceFactory.getService();
-
-		tagsEntryLocalService.deleteEntry(entry);
+		_service.deleteEntry(entry);
 	}
 
 	public static boolean hasEntry(long companyId, java.lang.String name)
 		throws com.liferay.portal.SystemException {
-		TagsEntryLocalService tagsEntryLocalService = TagsEntryLocalServiceFactory.getService();
-
-		return tagsEntryLocalService.hasEntry(companyId, name);
+		return _service.hasEntry(companyId, name);
 	}
 
 	public static java.util.List<com.liferay.portlet.tags.model.TagsEntry> getAssetEntries(
 		long assetId) throws com.liferay.portal.SystemException {
-		TagsEntryLocalService tagsEntryLocalService = TagsEntryLocalServiceFactory.getService();
-
-		return tagsEntryLocalService.getAssetEntries(assetId);
+		return _service.getAssetEntries(assetId);
 	}
 
 	public static java.util.List<com.liferay.portlet.tags.model.TagsEntry> getEntries()
 		throws com.liferay.portal.SystemException {
-		TagsEntryLocalService tagsEntryLocalService = TagsEntryLocalServiceFactory.getService();
-
-		return tagsEntryLocalService.getEntries();
+		return _service.getEntries();
 	}
 
 	public static java.util.List<com.liferay.portlet.tags.model.TagsEntry> getEntries(
 		java.lang.String className, long classPK)
 		throws com.liferay.portal.SystemException {
-		TagsEntryLocalService tagsEntryLocalService = TagsEntryLocalServiceFactory.getService();
-
-		return tagsEntryLocalService.getEntries(className, classPK);
+		return _service.getEntries(className, classPK);
 	}
 
 	public static java.util.List<com.liferay.portlet.tags.model.TagsEntry> getEntries(
 		long classNameId, long classPK)
 		throws com.liferay.portal.SystemException {
-		TagsEntryLocalService tagsEntryLocalService = TagsEntryLocalServiceFactory.getService();
-
-		return tagsEntryLocalService.getEntries(classNameId, classPK);
+		return _service.getEntries(classNameId, classPK);
 	}
 
 	public static java.util.List<com.liferay.portlet.tags.model.TagsEntry> getEntries(
 		long groupId, long companyId, long classNameId, java.lang.String name)
 		throws com.liferay.portal.SystemException {
-		TagsEntryLocalService tagsEntryLocalService = TagsEntryLocalServiceFactory.getService();
-
-		return tagsEntryLocalService.getEntries(groupId, companyId,
-			classNameId, name);
+		return _service.getEntries(groupId, companyId, classNameId, name);
 	}
 
 	public static java.util.List<com.liferay.portlet.tags.model.TagsEntry> getEntries(
 		long groupId, long companyId, long classNameId, java.lang.String name,
 		int start, int end) throws com.liferay.portal.SystemException {
-		TagsEntryLocalService tagsEntryLocalService = TagsEntryLocalServiceFactory.getService();
-
-		return tagsEntryLocalService.getEntries(groupId, companyId,
-			classNameId, name, start, end);
+		return _service.getEntries(groupId, companyId, classNameId, name,
+			start, end);
 	}
 
 	public static int getEntriesSize(long groupId, long companyId,
 		long classNameId, java.lang.String name)
 		throws com.liferay.portal.SystemException {
-		TagsEntryLocalService tagsEntryLocalService = TagsEntryLocalServiceFactory.getService();
-
-		return tagsEntryLocalService.getEntriesSize(groupId, companyId,
-			classNameId, name);
+		return _service.getEntriesSize(groupId, companyId, classNameId, name);
 	}
 
 	public static com.liferay.portlet.tags.model.TagsEntry getEntry(
 		long entryId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		TagsEntryLocalService tagsEntryLocalService = TagsEntryLocalServiceFactory.getService();
-
-		return tagsEntryLocalService.getEntry(entryId);
+		return _service.getEntry(entryId);
 	}
 
 	public static com.liferay.portlet.tags.model.TagsEntry getEntry(
 		long companyId, java.lang.String name)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		TagsEntryLocalService tagsEntryLocalService = TagsEntryLocalServiceFactory.getService();
-
-		return tagsEntryLocalService.getEntry(companyId, name);
+		return _service.getEntry(companyId, name);
 	}
 
 	public static long[] getEntryIds(long companyId, java.lang.String[] names)
 		throws com.liferay.portal.SystemException {
-		TagsEntryLocalService tagsEntryLocalService = TagsEntryLocalServiceFactory.getService();
-
-		return tagsEntryLocalService.getEntryIds(companyId, names);
+		return _service.getEntryIds(companyId, names);
 	}
 
 	public static java.lang.String[] getEntryNames()
 		throws com.liferay.portal.SystemException {
-		TagsEntryLocalService tagsEntryLocalService = TagsEntryLocalServiceFactory.getService();
-
-		return tagsEntryLocalService.getEntryNames();
+		return _service.getEntryNames();
 	}
 
 	public static java.lang.String[] getEntryNames(java.lang.String className,
 		long classPK) throws com.liferay.portal.SystemException {
-		TagsEntryLocalService tagsEntryLocalService = TagsEntryLocalServiceFactory.getService();
-
-		return tagsEntryLocalService.getEntryNames(className, classPK);
+		return _service.getEntryNames(className, classPK);
 	}
 
 	public static java.lang.String[] getEntryNames(long classNameId,
 		long classPK) throws com.liferay.portal.SystemException {
-		TagsEntryLocalService tagsEntryLocalService = TagsEntryLocalServiceFactory.getService();
-
-		return tagsEntryLocalService.getEntryNames(classNameId, classPK);
+		return _service.getEntryNames(classNameId, classPK);
 	}
 
 	public static java.util.List<com.liferay.portlet.tags.model.TagsEntry> getVocabularyEntries(
 		long companyId, java.lang.String vocabularyName)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		TagsEntryLocalService tagsEntryLocalService = TagsEntryLocalServiceFactory.getService();
-
-		return tagsEntryLocalService.getVocabularyEntries(companyId,
-			vocabularyName);
+		return _service.getVocabularyEntries(companyId, vocabularyName);
 	}
 
 	public static java.util.List<com.liferay.portlet.tags.model.TagsEntry> getVocabularyEntries(
@@ -320,71 +246,53 @@ public class TagsEntryLocalServiceUtil {
 		java.lang.String vocabularyName)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		TagsEntryLocalService tagsEntryLocalService = TagsEntryLocalServiceFactory.getService();
-
-		return tagsEntryLocalService.getVocabularyEntries(companyId,
-			parentEntryName, vocabularyName);
+		return _service.getVocabularyEntries(companyId, parentEntryName,
+			vocabularyName);
 	}
 
 	public static java.util.List<com.liferay.portlet.tags.model.TagsEntry> getVocabularyRootEntries(
 		long companyId, java.lang.String vocabularyName)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		TagsEntryLocalService tagsEntryLocalService = TagsEntryLocalServiceFactory.getService();
-
-		return tagsEntryLocalService.getVocabularyRootEntries(companyId,
-			vocabularyName);
+		return _service.getVocabularyRootEntries(companyId, vocabularyName);
 	}
 
 	public static void mergeEntries(long fromEntryId, long toEntryId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		TagsEntryLocalService tagsEntryLocalService = TagsEntryLocalServiceFactory.getService();
-
-		tagsEntryLocalService.mergeEntries(fromEntryId, toEntryId);
+		_service.mergeEntries(fromEntryId, toEntryId);
 	}
 
 	public static java.util.List<com.liferay.portlet.tags.model.TagsEntry> search(
 		long companyId, java.lang.String name, java.lang.String[] properties)
 		throws com.liferay.portal.SystemException {
-		TagsEntryLocalService tagsEntryLocalService = TagsEntryLocalServiceFactory.getService();
-
-		return tagsEntryLocalService.search(companyId, name, properties);
+		return _service.search(companyId, name, properties);
 	}
 
 	public static java.util.List<com.liferay.portlet.tags.model.TagsEntry> search(
 		long companyId, java.lang.String name, java.lang.String[] properties,
 		int start, int end) throws com.liferay.portal.SystemException {
-		TagsEntryLocalService tagsEntryLocalService = TagsEntryLocalServiceFactory.getService();
-
-		return tagsEntryLocalService.search(companyId, name, properties, start,
-			end);
+		return _service.search(companyId, name, properties, start, end);
 	}
 
 	public static com.liferay.portal.kernel.json.JSONArray searchAutocomplete(
 		long companyId, java.lang.String name, java.lang.String[] properties,
 		int start, int end) throws com.liferay.portal.SystemException {
-		TagsEntryLocalService tagsEntryLocalService = TagsEntryLocalServiceFactory.getService();
-
-		return tagsEntryLocalService.searchAutocomplete(companyId, name,
-			properties, start, end);
+		return _service.searchAutocomplete(companyId, name, properties, start,
+			end);
 	}
 
 	public static int searchCount(long companyId, java.lang.String name,
 		java.lang.String[] properties)
 		throws com.liferay.portal.SystemException {
-		TagsEntryLocalService tagsEntryLocalService = TagsEntryLocalServiceFactory.getService();
-
-		return tagsEntryLocalService.searchCount(companyId, name, properties);
+		return _service.searchCount(companyId, name, properties);
 	}
 
 	public static com.liferay.portlet.tags.model.TagsEntry updateEntry(
 		long entryId, java.lang.String name)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		TagsEntryLocalService tagsEntryLocalService = TagsEntryLocalServiceFactory.getService();
-
-		return tagsEntryLocalService.updateEntry(entryId, name);
+		return _service.updateEntry(entryId, name);
 	}
 
 	public static com.liferay.portlet.tags.model.TagsEntry updateEntry(
@@ -392,10 +300,8 @@ public class TagsEntryLocalServiceUtil {
 		java.lang.String vocabularyName)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		TagsEntryLocalService tagsEntryLocalService = TagsEntryLocalServiceFactory.getService();
-
-		return tagsEntryLocalService.updateEntry(entryId, parentEntryName,
-			name, vocabularyName);
+		return _service.updateEntry(entryId, parentEntryName, name,
+			vocabularyName);
 	}
 
 	public static com.liferay.portlet.tags.model.TagsEntry updateEntry(
@@ -403,10 +309,7 @@ public class TagsEntryLocalServiceUtil {
 		java.lang.String[] properties)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		TagsEntryLocalService tagsEntryLocalService = TagsEntryLocalServiceFactory.getService();
-
-		return tagsEntryLocalService.updateEntry(userId, entryId, name,
-			properties);
+		return _service.updateEntry(userId, entryId, name, properties);
 	}
 
 	public static com.liferay.portlet.tags.model.TagsEntry updateEntry(
@@ -415,9 +318,17 @@ public class TagsEntryLocalServiceUtil {
 		java.lang.String[] properties)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		TagsEntryLocalService tagsEntryLocalService = TagsEntryLocalServiceFactory.getService();
-
-		return tagsEntryLocalService.updateEntry(userId, entryId,
-			parentEntryName, name, vocabularyName, properties);
+		return _service.updateEntry(userId, entryId, parentEntryName, name,
+			vocabularyName, properties);
 	}
+
+	public static TagsEntryLocalService getService() {
+		return _service;
+	}
+
+	public void setService(TagsEntryLocalService service) {
+		_service = service;
+	}
+
+	private static TagsEntryLocalService _service;
 }

@@ -39,15 +39,9 @@ package com.liferay.portlet.tags.service;
  * on a bean instead of writing a lookup call and a method call.
  * </p>
  *
- * <p>
- * <code>com.liferay.portlet.tags.service.TagsPropertyServiceFactory</code>
- * is responsible for the lookup of the bean.
- * </p>
- *
  * @author Brian Wing Shun Chan
  *
  * @see com.liferay.portlet.tags.service.TagsPropertyService
- * @see com.liferay.portlet.tags.service.TagsPropertyServiceFactory
  *
  */
 public class TagsPropertyServiceUtil {
@@ -55,50 +49,48 @@ public class TagsPropertyServiceUtil {
 		long entryId, java.lang.String key, java.lang.String value)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
-		TagsPropertyService tagsPropertyService = TagsPropertyServiceFactory.getService();
-
-		return tagsPropertyService.addProperty(entryId, key, value);
+		return _service.addProperty(entryId, key, value);
 	}
 
 	public static com.liferay.portlet.tags.model.TagsProperty addProperty(
 		java.lang.String entryName, java.lang.String key, java.lang.String value)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
-		TagsPropertyService tagsPropertyService = TagsPropertyServiceFactory.getService();
-
-		return tagsPropertyService.addProperty(entryName, key, value);
+		return _service.addProperty(entryName, key, value);
 	}
 
 	public static void deleteProperty(long propertyId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
-		TagsPropertyService tagsPropertyService = TagsPropertyServiceFactory.getService();
-
-		tagsPropertyService.deleteProperty(propertyId);
+		_service.deleteProperty(propertyId);
 	}
 
 	public static java.util.List<com.liferay.portlet.tags.model.TagsProperty> getProperties(
 		long entryId)
 		throws com.liferay.portal.SystemException, java.rmi.RemoteException {
-		TagsPropertyService tagsPropertyService = TagsPropertyServiceFactory.getService();
-
-		return tagsPropertyService.getProperties(entryId);
+		return _service.getProperties(entryId);
 	}
 
 	public static java.util.List<com.liferay.portlet.tags.model.TagsProperty> getPropertyValues(
 		long companyId, java.lang.String key)
 		throws com.liferay.portal.SystemException, java.rmi.RemoteException {
-		TagsPropertyService tagsPropertyService = TagsPropertyServiceFactory.getService();
-
-		return tagsPropertyService.getPropertyValues(companyId, key);
+		return _service.getPropertyValues(companyId, key);
 	}
 
 	public static com.liferay.portlet.tags.model.TagsProperty updateProperty(
 		long propertyId, java.lang.String key, java.lang.String value)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
-		TagsPropertyService tagsPropertyService = TagsPropertyServiceFactory.getService();
-
-		return tagsPropertyService.updateProperty(propertyId, key, value);
+		return _service.updateProperty(propertyId, key, value);
 	}
+
+	public static TagsPropertyService getService() {
+		return _service;
+	}
+
+	public void setService(TagsPropertyService service) {
+		_service = service;
+	}
+
+	private static TagsPropertyService _service;
 }

@@ -44,7 +44,6 @@ package com.liferay.portlet.tasks.service;
  *
  * @author Brian Wing Shun Chan
  *
- * @see com.liferay.portlet.tasks.service.TasksProposalServiceFactory
  * @see com.liferay.portlet.tasks.service.TasksProposalServiceUtil
  *
  */

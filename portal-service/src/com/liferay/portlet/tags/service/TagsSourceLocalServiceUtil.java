@@ -39,86 +39,72 @@ package com.liferay.portlet.tags.service;
  * on a bean instead of writing a lookup call and a method call.
  * </p>
  *
- * <p>
- * <code>com.liferay.portlet.tags.service.TagsSourceLocalServiceFactory</code>
- * is responsible for the lookup of the bean.
- * </p>
- *
  * @author Brian Wing Shun Chan
  *
  * @see com.liferay.portlet.tags.service.TagsSourceLocalService
- * @see com.liferay.portlet.tags.service.TagsSourceLocalServiceFactory
  *
  */
 public class TagsSourceLocalServiceUtil {
 	public static com.liferay.portlet.tags.model.TagsSource addTagsSource(
 		com.liferay.portlet.tags.model.TagsSource tagsSource)
 		throws com.liferay.portal.SystemException {
-		TagsSourceLocalService tagsSourceLocalService = TagsSourceLocalServiceFactory.getService();
-
-		return tagsSourceLocalService.addTagsSource(tagsSource);
+		return _service.addTagsSource(tagsSource);
 	}
 
 	public static void deleteTagsSource(long sourceId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		TagsSourceLocalService tagsSourceLocalService = TagsSourceLocalServiceFactory.getService();
-
-		tagsSourceLocalService.deleteTagsSource(sourceId);
+		_service.deleteTagsSource(sourceId);
 	}
 
 	public static void deleteTagsSource(
 		com.liferay.portlet.tags.model.TagsSource tagsSource)
 		throws com.liferay.portal.SystemException {
-		TagsSourceLocalService tagsSourceLocalService = TagsSourceLocalServiceFactory.getService();
-
-		tagsSourceLocalService.deleteTagsSource(tagsSource);
+		_service.deleteTagsSource(tagsSource);
 	}
 
 	public static java.util.List<Object> dynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery)
 		throws com.liferay.portal.SystemException {
-		TagsSourceLocalService tagsSourceLocalService = TagsSourceLocalServiceFactory.getService();
-
-		return tagsSourceLocalService.dynamicQuery(dynamicQuery);
+		return _service.dynamicQuery(dynamicQuery);
 	}
 
 	public static java.util.List<Object> dynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery, int start,
 		int end) throws com.liferay.portal.SystemException {
-		TagsSourceLocalService tagsSourceLocalService = TagsSourceLocalServiceFactory.getService();
-
-		return tagsSourceLocalService.dynamicQuery(dynamicQuery, start, end);
+		return _service.dynamicQuery(dynamicQuery, start, end);
 	}
 
 	public static com.liferay.portlet.tags.model.TagsSource getTagsSource(
 		long sourceId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		TagsSourceLocalService tagsSourceLocalService = TagsSourceLocalServiceFactory.getService();
-
-		return tagsSourceLocalService.getTagsSource(sourceId);
+		return _service.getTagsSource(sourceId);
 	}
 
 	public static java.util.List<com.liferay.portlet.tags.model.TagsSource> getTagsSources(
 		int start, int end) throws com.liferay.portal.SystemException {
-		TagsSourceLocalService tagsSourceLocalService = TagsSourceLocalServiceFactory.getService();
-
-		return tagsSourceLocalService.getTagsSources(start, end);
+		return _service.getTagsSources(start, end);
 	}
 
 	public static int getTagsSourcesCount()
 		throws com.liferay.portal.SystemException {
-		TagsSourceLocalService tagsSourceLocalService = TagsSourceLocalServiceFactory.getService();
-
-		return tagsSourceLocalService.getTagsSourcesCount();
+		return _service.getTagsSourcesCount();
 	}
 
 	public static com.liferay.portlet.tags.model.TagsSource updateTagsSource(
 		com.liferay.portlet.tags.model.TagsSource tagsSource)
 		throws com.liferay.portal.SystemException {
-		TagsSourceLocalService tagsSourceLocalService = TagsSourceLocalServiceFactory.getService();
-
-		return tagsSourceLocalService.updateTagsSource(tagsSource);
+		return _service.updateTagsSource(tagsSource);
 	}
+
+	public static TagsSourceLocalService getService() {
+		return _service;
+	}
+
+	public void setService(TagsSourceLocalService service) {
+		_service = service;
+	}
+
+	private static TagsSourceLocalService _service;
 }

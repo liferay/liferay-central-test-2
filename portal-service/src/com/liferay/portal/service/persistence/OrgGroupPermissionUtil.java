@@ -244,22 +244,12 @@ public class OrgGroupPermissionUtil {
 	}
 
 	public static OrgGroupPermissionPersistence getPersistence() {
-		return _getUtil()._persistence;
+		return _persistence;
 	}
 
 	public void setPersistence(OrgGroupPermissionPersistence persistence) {
 		_persistence = persistence;
 	}
 
-	private static OrgGroupPermissionUtil _getUtil() {
-		if (_util == null) {
-			_util = (OrgGroupPermissionUtil)com.liferay.portal.kernel.bean.PortalBeanLocatorUtil.locate(_UTIL);
-		}
-
-		return _util;
-	}
-
-	private static final String _UTIL = OrgGroupPermissionUtil.class.getName();
-	private static OrgGroupPermissionUtil _util;
-	private OrgGroupPermissionPersistence _persistence;
+	private static OrgGroupPermissionPersistence _persistence;
 }

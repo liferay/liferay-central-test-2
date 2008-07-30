@@ -61,22 +61,12 @@ public class ShoppingOrderFinderUtil {
 	}
 
 	public static ShoppingOrderFinder getFinder() {
-		return _getUtil()._finder;
+		return _finder;
 	}
 
 	public void setFinder(ShoppingOrderFinder finder) {
 		_finder = finder;
 	}
 
-	private static ShoppingOrderFinderUtil _getUtil() {
-		if (_util == null) {
-			_util = (ShoppingOrderFinderUtil)com.liferay.portal.kernel.bean.PortalBeanLocatorUtil.locate(_UTIL);
-		}
-
-		return _util;
-	}
-
-	private static final String _UTIL = ShoppingOrderFinderUtil.class.getName();
-	private static ShoppingOrderFinderUtil _util;
-	private ShoppingOrderFinder _finder;
+	private static ShoppingOrderFinder _finder;
 }

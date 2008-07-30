@@ -39,41 +39,35 @@ package com.liferay.portlet.social.service;
  * on a bean instead of writing a lookup call and a method call.
  * </p>
  *
- * <p>
- * <code>com.liferay.portlet.social.service.SocialActivityInterpreterLocalServiceFactory</code>
- * is responsible for the lookup of the bean.
- * </p>
- *
  * @author Brian Wing Shun Chan
  *
  * @see com.liferay.portlet.social.service.SocialActivityInterpreterLocalService
- * @see com.liferay.portlet.social.service.SocialActivityInterpreterLocalServiceFactory
  *
  */
 public class SocialActivityInterpreterLocalServiceUtil {
 	public static void addActivityInterpreter(
 		com.liferay.portlet.social.model.SocialActivityInterpreter activityInterpreter) {
-		SocialActivityInterpreterLocalService socialActivityInterpreterLocalService =
-			SocialActivityInterpreterLocalServiceFactory.getService();
-
-		socialActivityInterpreterLocalService.addActivityInterpreter(activityInterpreter);
+		_service.addActivityInterpreter(activityInterpreter);
 	}
 
 	public static void deleteActivityInterpreter(
 		com.liferay.portlet.social.model.SocialActivityInterpreter activityInterpreter) {
-		SocialActivityInterpreterLocalService socialActivityInterpreterLocalService =
-			SocialActivityInterpreterLocalServiceFactory.getService();
-
-		socialActivityInterpreterLocalService.deleteActivityInterpreter(activityInterpreter);
+		_service.deleteActivityInterpreter(activityInterpreter);
 	}
 
 	public static com.liferay.portlet.social.model.SocialActivityFeedEntry interpret(
 		com.liferay.portlet.social.model.SocialActivity activity,
 		com.liferay.portal.theme.ThemeDisplay themeDisplay) {
-		SocialActivityInterpreterLocalService socialActivityInterpreterLocalService =
-			SocialActivityInterpreterLocalServiceFactory.getService();
-
-		return socialActivityInterpreterLocalService.interpret(activity,
-			themeDisplay);
+		return _service.interpret(activity, themeDisplay);
 	}
+
+	public static SocialActivityInterpreterLocalService getService() {
+		return _service;
+	}
+
+	public void setService(SocialActivityInterpreterLocalService service) {
+		_service = service;
+	}
+
+	private static SocialActivityInterpreterLocalService _service;
 }

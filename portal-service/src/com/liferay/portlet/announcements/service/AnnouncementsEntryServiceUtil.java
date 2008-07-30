@@ -39,15 +39,9 @@ package com.liferay.portlet.announcements.service;
  * on a bean instead of writing a lookup call and a method call.
  * </p>
  *
- * <p>
- * <code>com.liferay.portlet.announcements.service.AnnouncementsEntryServiceFactory</code>
- * is responsible for the lookup of the bean.
- * </p>
- *
  * @author Brian Wing Shun Chan
  *
  * @see com.liferay.portlet.announcements.service.AnnouncementsEntryService
- * @see com.liferay.portlet.announcements.service.AnnouncementsEntryServiceFactory
  *
  */
 public class AnnouncementsEntryServiceUtil {
@@ -60,21 +54,17 @@ public class AnnouncementsEntryServiceUtil {
 		int expirationDateMinute, int priority, boolean alert)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
-		AnnouncementsEntryService announcementsEntryService = AnnouncementsEntryServiceFactory.getService();
-
-		return announcementsEntryService.addEntry(plid, classNameId, classPK,
-			title, content, url, type, displayDateMonth, displayDateDay,
-			displayDateYear, displayDateHour, displayDateMinute,
-			expirationDateMonth, expirationDateDay, expirationDateYear,
-			expirationDateHour, expirationDateMinute, priority, alert);
+		return _service.addEntry(plid, classNameId, classPK, title, content,
+			url, type, displayDateMonth, displayDateDay, displayDateYear,
+			displayDateHour, displayDateMinute, expirationDateMonth,
+			expirationDateDay, expirationDateYear, expirationDateHour,
+			expirationDateMinute, priority, alert);
 	}
 
 	public static void deleteEntry(long entryId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
-		AnnouncementsEntryService announcementsEntryService = AnnouncementsEntryServiceFactory.getService();
-
-		announcementsEntryService.deleteEntry(entryId);
+		_service.deleteEntry(entryId);
 	}
 
 	public static com.liferay.portlet.announcements.model.AnnouncementsEntry updateEntry(
@@ -86,12 +76,20 @@ public class AnnouncementsEntryServiceUtil {
 		int expirationDateMinute, int priority)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
-		AnnouncementsEntryService announcementsEntryService = AnnouncementsEntryServiceFactory.getService();
-
-		return announcementsEntryService.updateEntry(entryId, title, content,
-			url, type, displayDateMonth, displayDateDay, displayDateYear,
-			displayDateHour, displayDateMinute, expirationDateMonth,
-			expirationDateDay, expirationDateYear, expirationDateHour,
-			expirationDateMinute, priority);
+		return _service.updateEntry(entryId, title, content, url, type,
+			displayDateMonth, displayDateDay, displayDateYear, displayDateHour,
+			displayDateMinute, expirationDateMonth, expirationDateDay,
+			expirationDateYear, expirationDateHour, expirationDateMinute,
+			priority);
 	}
+
+	public static AnnouncementsEntryService getService() {
+		return _service;
+	}
+
+	public void setService(AnnouncementsEntryService service) {
+		_service = service;
+	}
+
+	private static AnnouncementsEntryService _service;
 }

@@ -39,94 +39,78 @@ package com.liferay.portlet.documentlibrary.service;
  * on a bean instead of writing a lookup call and a method call.
  * </p>
  *
- * <p>
- * <code>com.liferay.portlet.documentlibrary.service.DLFileVersionLocalServiceFactory</code>
- * is responsible for the lookup of the bean.
- * </p>
- *
  * @author Brian Wing Shun Chan
  *
  * @see com.liferay.portlet.documentlibrary.service.DLFileVersionLocalService
- * @see com.liferay.portlet.documentlibrary.service.DLFileVersionLocalServiceFactory
  *
  */
 public class DLFileVersionLocalServiceUtil {
 	public static com.liferay.portlet.documentlibrary.model.DLFileVersion addDLFileVersion(
 		com.liferay.portlet.documentlibrary.model.DLFileVersion dlFileVersion)
 		throws com.liferay.portal.SystemException {
-		DLFileVersionLocalService dlFileVersionLocalService = DLFileVersionLocalServiceFactory.getService();
-
-		return dlFileVersionLocalService.addDLFileVersion(dlFileVersion);
+		return _service.addDLFileVersion(dlFileVersion);
 	}
 
 	public static void deleteDLFileVersion(long fileVersionId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		DLFileVersionLocalService dlFileVersionLocalService = DLFileVersionLocalServiceFactory.getService();
-
-		dlFileVersionLocalService.deleteDLFileVersion(fileVersionId);
+		_service.deleteDLFileVersion(fileVersionId);
 	}
 
 	public static void deleteDLFileVersion(
 		com.liferay.portlet.documentlibrary.model.DLFileVersion dlFileVersion)
 		throws com.liferay.portal.SystemException {
-		DLFileVersionLocalService dlFileVersionLocalService = DLFileVersionLocalServiceFactory.getService();
-
-		dlFileVersionLocalService.deleteDLFileVersion(dlFileVersion);
+		_service.deleteDLFileVersion(dlFileVersion);
 	}
 
 	public static java.util.List<Object> dynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery)
 		throws com.liferay.portal.SystemException {
-		DLFileVersionLocalService dlFileVersionLocalService = DLFileVersionLocalServiceFactory.getService();
-
-		return dlFileVersionLocalService.dynamicQuery(dynamicQuery);
+		return _service.dynamicQuery(dynamicQuery);
 	}
 
 	public static java.util.List<Object> dynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery, int start,
 		int end) throws com.liferay.portal.SystemException {
-		DLFileVersionLocalService dlFileVersionLocalService = DLFileVersionLocalServiceFactory.getService();
-
-		return dlFileVersionLocalService.dynamicQuery(dynamicQuery, start, end);
+		return _service.dynamicQuery(dynamicQuery, start, end);
 	}
 
 	public static com.liferay.portlet.documentlibrary.model.DLFileVersion getDLFileVersion(
 		long fileVersionId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		DLFileVersionLocalService dlFileVersionLocalService = DLFileVersionLocalServiceFactory.getService();
-
-		return dlFileVersionLocalService.getDLFileVersion(fileVersionId);
+		return _service.getDLFileVersion(fileVersionId);
 	}
 
 	public static java.util.List<com.liferay.portlet.documentlibrary.model.DLFileVersion> getDLFileVersions(
 		int start, int end) throws com.liferay.portal.SystemException {
-		DLFileVersionLocalService dlFileVersionLocalService = DLFileVersionLocalServiceFactory.getService();
-
-		return dlFileVersionLocalService.getDLFileVersions(start, end);
+		return _service.getDLFileVersions(start, end);
 	}
 
 	public static int getDLFileVersionsCount()
 		throws com.liferay.portal.SystemException {
-		DLFileVersionLocalService dlFileVersionLocalService = DLFileVersionLocalServiceFactory.getService();
-
-		return dlFileVersionLocalService.getDLFileVersionsCount();
+		return _service.getDLFileVersionsCount();
 	}
 
 	public static com.liferay.portlet.documentlibrary.model.DLFileVersion updateDLFileVersion(
 		com.liferay.portlet.documentlibrary.model.DLFileVersion dlFileVersion)
 		throws com.liferay.portal.SystemException {
-		DLFileVersionLocalService dlFileVersionLocalService = DLFileVersionLocalServiceFactory.getService();
-
-		return dlFileVersionLocalService.updateDLFileVersion(dlFileVersion);
+		return _service.updateDLFileVersion(dlFileVersion);
 	}
 
 	public static java.util.List<com.liferay.portlet.documentlibrary.model.DLFileVersion> getFileVersions(
 		long folderId, java.lang.String name)
 		throws com.liferay.portal.SystemException {
-		DLFileVersionLocalService dlFileVersionLocalService = DLFileVersionLocalServiceFactory.getService();
-
-		return dlFileVersionLocalService.getFileVersions(folderId, name);
+		return _service.getFileVersions(folderId, name);
 	}
+
+	public static DLFileVersionLocalService getService() {
+		return _service;
+	}
+
+	public void setService(DLFileVersionLocalService service) {
+		_service = service;
+	}
+
+	private static DLFileVersionLocalService _service;
 }

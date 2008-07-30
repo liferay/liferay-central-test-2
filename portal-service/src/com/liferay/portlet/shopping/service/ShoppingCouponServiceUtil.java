@@ -39,15 +39,9 @@ package com.liferay.portlet.shopping.service;
  * on a bean instead of writing a lookup call and a method call.
  * </p>
  *
- * <p>
- * <code>com.liferay.portlet.shopping.service.ShoppingCouponServiceFactory</code>
- * is responsible for the lookup of the bean.
- * </p>
- *
  * @author Brian Wing Shun Chan
  *
  * @see com.liferay.portlet.shopping.service.ShoppingCouponService
- * @see com.liferay.portlet.shopping.service.ShoppingCouponServiceFactory
  *
  */
 public class ShoppingCouponServiceUtil {
@@ -62,30 +56,24 @@ public class ShoppingCouponServiceUtil {
 		java.lang.String discountType)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
-		ShoppingCouponService shoppingCouponService = ShoppingCouponServiceFactory.getService();
-
-		return shoppingCouponService.addCoupon(plid, code, autoCode, name,
-			description, startDateMonth, startDateDay, startDateYear,
-			startDateHour, startDateMinute, endDateMonth, endDateDay,
-			endDateYear, endDateHour, endDateMinute, neverExpire, active,
-			limitCategories, limitSkus, minOrder, discount, discountType);
+		return _service.addCoupon(plid, code, autoCode, name, description,
+			startDateMonth, startDateDay, startDateYear, startDateHour,
+			startDateMinute, endDateMonth, endDateDay, endDateYear,
+			endDateHour, endDateMinute, neverExpire, active, limitCategories,
+			limitSkus, minOrder, discount, discountType);
 	}
 
 	public static void deleteCoupon(long plid, long couponId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
-		ShoppingCouponService shoppingCouponService = ShoppingCouponServiceFactory.getService();
-
-		shoppingCouponService.deleteCoupon(plid, couponId);
+		_service.deleteCoupon(plid, couponId);
 	}
 
 	public static com.liferay.portlet.shopping.model.ShoppingCoupon getCoupon(
 		long plid, long couponId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
-		ShoppingCouponService shoppingCouponService = ShoppingCouponServiceFactory.getService();
-
-		return shoppingCouponService.getCoupon(plid, couponId);
+		return _service.getCoupon(plid, couponId);
 	}
 
 	public static java.util.List<com.liferay.portlet.shopping.model.ShoppingCoupon> search(
@@ -93,10 +81,8 @@ public class ShoppingCouponServiceUtil {
 		java.lang.String discountType, boolean andOperator, int start, int end)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
-		ShoppingCouponService shoppingCouponService = ShoppingCouponServiceFactory.getService();
-
-		return shoppingCouponService.search(plid, companyId, code, active,
-			discountType, andOperator, start, end);
+		return _service.search(plid, companyId, code, active, discountType,
+			andOperator, start, end);
 	}
 
 	public static com.liferay.portlet.shopping.model.ShoppingCoupon updateCoupon(
@@ -109,12 +95,20 @@ public class ShoppingCouponServiceUtil {
 		double minOrder, double discount, java.lang.String discountType)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
-		ShoppingCouponService shoppingCouponService = ShoppingCouponServiceFactory.getService();
-
-		return shoppingCouponService.updateCoupon(plid, couponId, name,
-			description, startDateMonth, startDateDay, startDateYear,
-			startDateHour, startDateMinute, endDateMonth, endDateDay,
-			endDateYear, endDateHour, endDateMinute, neverExpire, active,
-			limitCategories, limitSkus, minOrder, discount, discountType);
+		return _service.updateCoupon(plid, couponId, name, description,
+			startDateMonth, startDateDay, startDateYear, startDateHour,
+			startDateMinute, endDateMonth, endDateDay, endDateYear,
+			endDateHour, endDateMinute, neverExpire, active, limitCategories,
+			limitSkus, minOrder, discount, discountType);
 	}
+
+	public static ShoppingCouponService getService() {
+		return _service;
+	}
+
+	public void setService(ShoppingCouponService service) {
+		_service = service;
+	}
+
+	private static ShoppingCouponService _service;
 }
