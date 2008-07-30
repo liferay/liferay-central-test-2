@@ -1303,6 +1303,7 @@
 		</action>
 
 		<action path="/web_form/view" type="com.liferay.portlet.webform.action.ViewAction">
+			<forward name="portlet.web_form.error" path="portlet.web_form.error" />
 			<forward name="portlet.web_form.view" path="portlet.web_form.view" />
 		</action>
 

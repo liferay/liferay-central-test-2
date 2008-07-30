@@ -46,11 +46,19 @@ import java.util.List;
 
 import javax.portlet.PortletPreferences;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+
+import org.mozilla.javascript.Context;
+import org.mozilla.javascript.Scriptable;
+import org.mozilla.javascript.ScriptableObject;
+
 /**
  * <a href="WebFormUtil.java.html"><b><i>View Source</i></b></a>
  *
  * @author Daniel Weisser
  * @author Jorge Ferrer
+ * @author Albert Montero
  *
  */
 public class WebFormUtil {
@@ -176,5 +184,68 @@ public class WebFormUtil {
 
 		return nodeValues.toArray(new String[nodeValues.size()]);
 	}
+
+	public static boolean validate(
+			String thisFieldValue, List<String> fieldValues,
+			String validationScript)
+		throws Exception {
+
+		boolean validationResult = false;
+
+		Context cx = Context.enter();
+
+		StringBuilder sb = new StringBuilder();
+
+		sb.append("thisFieldValue = String('" + thisFieldValue + "');\n");
+
+		sb.append("var fieldValues = new Array();\n");
+
+		for (int i =  1; i <= fieldValues.size(); i++) {
+			sb.append(
+				"fieldValues[" + i + "] = '" + fieldValues.get(i - 1) + "';\n");
+		}
+
+		sb.append("function validation(thisFieldValue, fieldValues) {\n");
+		sb.append(validationScript);
+		sb.append("};\n");
+		sb.append("internalValidationResult = ");
+		sb.append("validation(thisFieldValue, fieldValues);");
+
+		String script = sb.toString();
+
+		try {
+			Scriptable scope = cx.initStandardObjects();
+			Object jsFieldValues = Context.javaToJS(fieldValues, scope);
+
+			ScriptableObject.putProperty(scope, "jsFieldValues", jsFieldValues);
+
+			cx.evaluateString(scope, script, "Validation Script", 1, null);
+
+			Object obj = ScriptableObject.getProperty(
+				scope, "internalValidationResult");
+
+			if (obj instanceof Boolean) {
+				validationResult = ((Boolean) obj).booleanValue();
+			}
+			else {
+				throw new Exception("The script must return a boolean value");
+			}
+		}
+		catch (Exception e) {
+			String msg =
+				"The following script has execution errors:\n" +
+					validationScript + "\n" + e.getMessage();
+			_log.error(msg);
+
+			throw new Exception(msg, e);
+		}
+		finally {
+			Context.exit();
+		}
+
+		return validationResult;
+	}
+
+	private static Log _log = LogFactory.getLog(WebFormUtil.class);
 
 }

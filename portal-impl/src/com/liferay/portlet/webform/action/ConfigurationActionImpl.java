@@ -46,6 +46,7 @@ import javax.portlet.RenderResponse;
  * <a href="ConfigurationActionImpl.java.html"><b><i>View Source</i></b></a>
  *
  * @author Jorge Ferrer
+ * @author Alberto Montero
  *
  */
 public class ConfigurationActionImpl implements ConfigurationAction {
@@ -158,13 +159,28 @@ public class ConfigurationActionImpl implements ConfigurationAction {
 				actionRequest, "fieldOptional" + i);
 			String fieldOptions = ParamUtil.getString(
 				actionRequest, "fieldOptions" + i);
+			String fieldValidationScript = ParamUtil.getString(
+				actionRequest, "fieldValidationScript" + i);
+			String fieldValidationErrorMessage = ParamUtil.getString(
+				actionRequest, "fieldValidationErrorMessage" + i);
 
 			while ((i == 1) || (Validator.isNotNull(fieldLabel))) {
+				if ((Validator.isNotNull(fieldValidationScript) ^
+						Validator.isNotNull(fieldValidationErrorMessage))) {
+					SessionErrors.add(
+						actionRequest, "invalidValidationDefinition" + i);
+				}
+
 				prefs.setValue("fieldLabel" + i, fieldLabel);
 				prefs.setValue("fieldType" + i, fieldType);
 				prefs.setValue(
 					"fieldOptional" + i, String.valueOf(fieldOptional));
 				prefs.setValue("fieldOptions" + i, fieldOptions);
+				prefs.setValue(
+					"fieldValidationScript" + i, fieldValidationScript);
+				prefs.setValue(
+					"fieldValidationErrorMessage" + i,
+						fieldValidationErrorMessage);
 
 				i++;
 
@@ -175,6 +191,14 @@ public class ConfigurationActionImpl implements ConfigurationAction {
 					actionRequest, "fieldOptional" + i);
 				fieldOptions = ParamUtil.getString(
 					actionRequest, "fieldOptions" + i);
+				fieldValidationScript = ParamUtil.getString(
+					actionRequest, "fieldValidationScript" + i);
+				fieldValidationErrorMessage = ParamUtil.getString(
+					actionRequest, "fieldValidationErrorMessage" + i);
+			}
+
+			if (!SessionErrors.isEmpty(actionRequest)) {
+				return;
 			}
 
 			// Clear previous preferences that are now blank
@@ -186,6 +210,9 @@ public class ConfigurationActionImpl implements ConfigurationAction {
 				prefs.setValue("fieldType" + i, StringPool.BLANK);
 				prefs.setValue("fieldOptional" + i, StringPool.BLANK);
 				prefs.setValue("fieldOptions" + i, StringPool.BLANK);
+				prefs.setValue("fieldValidationScript" + i, StringPool.BLANK);
+				prefs.setValue(
+						"fieldValidationErrorMessage" + i, StringPool.BLANK);
 
 				i++;
 

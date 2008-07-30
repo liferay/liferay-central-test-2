@@ -41,8 +41,10 @@ import com.liferay.portlet.expando.service.ExpandoValueLocalServiceUtil;
 import com.liferay.portlet.webform.util.WebFormUtil;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Set;
 
 import javax.mail.internet.InternetAddress;
 
@@ -115,7 +117,21 @@ public class ViewAction extends PortletAction {
 			fieldValues.add(actionRequest.getParameter("field" + i));
 		}
 
-		if (validate(fieldValues, prefs)) {
+		Set<String> validationErrors = null;
+
+		try {
+			validationErrors = validate(fieldValues, prefs);
+		}
+		catch (Exception e) {
+			actionRequest.setAttribute(
+					"validationScriptError", e.getMessage().trim());
+
+			setForward(actionRequest, "portlet.web_form.error");
+
+			return;
+		}
+
+		if (validationErrors.isEmpty()) {
 			boolean emailSuccess = true;
 			boolean databaseSuccess = true;
 			boolean fileSuccess = true;
@@ -150,25 +166,28 @@ public class ViewAction extends PortletAction {
 			}
 		}
 		else {
-			SessionErrors.add(actionRequest, "requiredFieldMissing");
+			for (String badField : validationErrors) {
+				SessionErrors.add(actionRequest, "error" + badField);
+			}
 		}
 
-		if (SessionErrors.isEmpty(actionRequest)) {
-			if (Validator.isNotNull(successURL)) {
-				actionResponse.sendRedirect(successURL);
-			}
-			else {
-				sendRedirect(actionRequest, actionResponse);
-			}
+		if (SessionErrors.isEmpty(actionRequest) &&
+			Validator.isNotNull(successURL)) {
+
+			actionResponse.sendRedirect(successURL);
+		}
+		else {
+			sendRedirect(actionRequest, actionResponse);
 		}
 	}
 
 	public ActionForward render(
-			ActionMapping mapping, ActionForm form, PortletConfig portletConfig,
+		ActionMapping mapping, ActionForm form, PortletConfig portletConfig,
 			RenderRequest renderRequest, RenderResponse renderResponse)
 		throws Exception {
 
-		return mapping.findForward("portlet.web_form.view");
+		return mapping.findForward(
+			getForward(renderRequest, "portlet.web_form.view"));
 	}
 
 	protected String getMailBody(
@@ -304,8 +323,11 @@ public class ViewAction extends PortletAction {
 		}
 	}
 
-	protected boolean validate(
-		List<String> fieldValues, PortletPreferences prefs) {
+	protected Set<String> validate(
+			List<String> fieldValues, PortletPreferences prefs)
+		throws Exception {
+
+		Set<String> validationErrors = new HashSet<String>();
 
 		for (int i = 1; i < WebFormUtil.MAX_FIELDS; i++) {
 			String fieldValue = fieldValues.get(i - 1);
@@ -318,11 +340,25 @@ public class ViewAction extends PortletAction {
 			if (!fieldOptional && Validator.isNotNull(fieldLabel) &&
 				Validator.isNull(fieldValue)) {
 
-				return false;
+				validationErrors.add(fieldLabel);
+
+				continue;
+			}
+
+			String validationScript = GetterUtil.getString(
+				prefs.getValue("fieldValidationScript" + i, StringPool.BLANK));
+
+			if (Validator.isNotNull(validationScript) &&
+				!WebFormUtil.validate(
+					fieldValue, fieldValues, validationScript)) {
+
+				validationErrors.add(fieldLabel);
+
+				continue;
 			}
 		}
 
-		return true;
+		return validationErrors;
 	}
 
 	private static Log _log = LogFactory.getLog(ViewAction.class);

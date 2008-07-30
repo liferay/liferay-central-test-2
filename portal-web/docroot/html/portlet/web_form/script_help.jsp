@@ -22,18 +22,12 @@
  */
 %>
 
-<%@ include file="/html/portlet/init.jsp" %>
+<%@ include file="/html/portlet/web_form/init.jsp" %>
 
-<%@ page import="com.liferay.portal.security.permission.ActionKeys" %>
-<%@ page import="com.liferay.portlet.expando.service.ExpandoRowLocalServiceUtil" %>
-<%@ page import="com.liferay.portlet.webform.util.WebFormUtil" %>
-
-<%
-PortletPreferences prefs = renderRequest.getPreferences();
-
-String portletResource = ParamUtil.getString(request, "portletResource");
-
-if (Validator.isNotNull(portletResource)) {
-	prefs = PortletPreferencesFactoryUtil.getPortletSetup(request, portletResource);
-}
-%>
+<p>
+	<liferay-ui:message key="enter-javascript-code-that-returns-true-or-false-to-validate-the-field.-the-following-implicit-variables-are-available"></liferay-ui:message>
+</p>
+<ul>
+	<li><b>thisFieldValue</b>: <liferay-ui:message key="the-value-being-validated" /></li>
+	<li><b>fieldValues</b>: <liferay-ui:message key="the-array-of-all-form-values-indexed-by-position" /></li>
+</ul>
