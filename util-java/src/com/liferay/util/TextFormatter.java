@@ -152,7 +152,10 @@ public class TextFormatter {
 			return s;
 		}
 
-		if (s.endsWith("y")) {
+		if (s.endsWith("s")) {
+			s = s.substring(0, s.length() -1) + "ses";
+		}
+		else if (s.endsWith("y")) {
 			s = s.substring(0, s.length() -1) + "ies";
 		}
 		else {
