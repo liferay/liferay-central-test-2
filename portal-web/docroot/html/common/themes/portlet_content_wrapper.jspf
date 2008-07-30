@@ -41,8 +41,6 @@
 						<%
 						boolean widgetShowAddAppLink = GetterUtil.getBoolean(portletSetup.getValue("lfr-widget-show-add-app-link", StringPool.BLANK));
 
-						boolean widgetShareWithFriends = GetterUtil.getBoolean(portletSetup.getValue("lfr-share-widget-with-friends", StringPool.BLANK));
-
 						String facebookAPIKey = portletSetup.getValue("lfr-facebook-api-key", StringPool.BLANK);
 						String facebookCanvasPageURL = portletSetup.getValue("lfr-facebook-canvas-page-url", StringPool.BLANK);
 						boolean facebookShowAddAppLink = GetterUtil.getBoolean(portletSetup.getValue("lfr-facebook-show-add-app-link", StringPool.BLANK));
@@ -50,12 +48,9 @@
 						if (Validator.isNull(facebookCanvasPageURL) || Validator.isNull(facebookAPIKey)) {
 							facebookShowAddAppLink = false;
 						}
-						String portletId1 = portletDisplay.getId();
-						String portletTitle1 = portletDisplay.getTitle();
-						String url = "javascript: showShare('/c/portal/share?portletId=" + portletId1 + "&portletTitle=" + portletTitle1 + "','Share this widget');";
 						%>
 
-						<c:if test="<%= widgetShowAddAppLink || facebookShowAddAppLink || widgetShareWithFriends %>">
+						<c:if test="<%= widgetShowAddAppLink || facebookShowAddAppLink %>">
 							<div class="lfr-widget-bar">
 								<liferay-ui:icon-menu
 									message="sharing"
@@ -68,15 +63,6 @@
 											url="javascript: ;"
 											label="<%= true %>"
 											cssClass='<%= portletDisplay.getNamespace() + "expose-as-widget" %>'
-										/>
-									</c:if>
-
-									<c:if test="<%= widgetShareWithFriends  && themeDisplay.isSignedIn() %>">
-										<liferay-ui:icon
-											image="../dock/share_friends"
-											message="request-share-widget"
-											url="<%= url %>"
-											label="<%= true %>"
 										/>
 									</c:if>
 

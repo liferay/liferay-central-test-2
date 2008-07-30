@@ -264,7 +264,7 @@ if (WebFormUtil.getTableRowsCount(databaseTableName) > 0) {
 						<liferay-ui:message key="field" /> <%= i %>
 					</c:otherwise>
 				</c:choose>
-
+				
 				<c:if test="<%= !fieldsEditingDisabled %>">
 					&nbsp;
 					<a href="javascript: <portlet:namespace />moveUp(<%= i %>);"><img src="<%= themeDisplay.getPathThemeImages() %>/arrows/01_up.png" /></a>
@@ -349,7 +349,7 @@ if (WebFormUtil.getTableRowsCount(databaseTableName) > 0) {
 							</script>
 						</c:if>
 
-						<div id='<portlet:namespace />inputValidation<%= i %>' style='<%= Validator.isNull(fieldValidationScript)?"display:none":"" %>'>
+						<div id='<portlet:namespace />inputValidation<%= i %>' style="<%= Validator.isNull(fieldValidationScript)?"display:none":"" %>">
 							<div class="ctrl-holder">
 								<table>
 									<tr>
