@@ -22,7 +22,6 @@
 
 package com.liferay.portal.service;
 
-import com.liferay.portal.bean.BeanLocatorImpl;
 import com.liferay.portal.jcr.JCRFactoryUtil;
 import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
 import com.liferay.portal.kernel.messaging.MessageBus;
@@ -36,6 +35,7 @@ import com.liferay.portal.search.lucene.LuceneSearchEngineUtil;
 import com.liferay.portal.search.lucene.LuceneUtil;
 import com.liferay.portal.service.CompanyLocalServiceUtil;
 import com.liferay.portal.spring.util.SpringUtil;
+import com.liferay.portal.util.InitUtil;
 import com.liferay.portal.util.PropsValues;
 import com.liferay.portal.util.TestPropsValues;
 import com.liferay.portlet.bookmarks.service.BookmarksEntryServiceTest;
@@ -55,15 +55,15 @@ import junit.framework.TestSuite;
  */
 public class ServiceTestSuite extends TestSuite {
 
+	static {
+		InitUtil.init();
+	}
+
 	public ServiceTestSuite() {
 
-		// Bean locator
+		// Spring
 
-		if (PortalBeanLocatorUtil.getBeanLocator() == null) {
-			PortalBeanLocatorUtil.setBeanLocator(new BeanLocatorImpl());
-
-			SpringUtil.initContext(SpringUtil.getContext());
-		}
+		SpringUtil.initContext();
 
 		// Resource repositories root
 

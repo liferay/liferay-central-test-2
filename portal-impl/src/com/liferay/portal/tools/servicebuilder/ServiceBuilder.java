@@ -474,6 +474,8 @@ public class ServiceBuilder {
 			_sqlSequencesFileName = sqlSequencesFileName;
 			_autoNamespaceTables = autoNamespaceTables;
 			_beanLocatorUtil = beanLocatorUtil;
+			_beanLocatorUtilShortName = _beanLocatorUtil.substring(
+				_beanLocatorUtil.lastIndexOf(".") + 1);
 			_propsUtil = propsUtil;
 			_testDir = testDir;
 
@@ -2911,6 +2913,7 @@ public class ServiceBuilder {
 		context.put("sqlDir", _sqlDir);
 		context.put("sqlFileName", _sqlFileName);
 		context.put("beanLocatorUtil", _beanLocatorUtil);
+		context.put("beanLocatorUtilShortName", _beanLocatorUtilShortName);
 		context.put("propsUtil", _propsUtil);
 		context.put("portletName", _portletName);
 		context.put("portletShortName", _portletShortName);
@@ -3310,6 +3313,7 @@ public class ServiceBuilder {
 	private String _sqlSequencesFileName;
 	private boolean _autoNamespaceTables;
 	private String _beanLocatorUtil;
+	private String _beanLocatorUtilShortName;
 	private String _propsUtil;
 	private String _testDir;
 	private String _author;

@@ -5,6 +5,7 @@ package ${packagePath}.service.persistence;
 import ${packagePath}.${noSuchEntity}Exception;
 import ${packagePath}.model.${entity.name};
 
+import ${beanLocatorUtil};
 import com.liferay.portal.service.persistence.BasePersistenceTestCase;
 
 public class ${entity.name}PersistenceTest extends BasePersistenceTestCase {
@@ -12,7 +13,7 @@ public class ${entity.name}PersistenceTest extends BasePersistenceTestCase {
 	protected void setUp() throws Exception {
 		super.setUp();
 
-		_persistence = (${entity.name}Persistence)${beanLocatorUtil}.locate(_TX_IMPL);
+		_persistence = (${entity.name}Persistence)${beanLocatorUtilShortName}.locate(_TX_IMPL);
 	}
 
 	public void testCreate() throws Exception {

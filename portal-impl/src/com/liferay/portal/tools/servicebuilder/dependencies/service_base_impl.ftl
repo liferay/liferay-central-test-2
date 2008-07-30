@@ -3,6 +3,7 @@ package ${packagePath}.service.base;
 import ${packagePath}.service.${entity.name}${sessionTypeName}Service;
 
 import com.liferay.portal.kernel.bean.InitializingBean;
+import ${beanLocatorUtil};
 
 <#if sessionTypeName == "">
 	import com.liferay.portal.service.base.PrincipalBean;
@@ -27,16 +28,13 @@ import com.liferay.portal.kernel.bean.InitializingBean;
 	<#if entity.equals(tempEntity)>
 		<#if sessionTypeName == "" && tempEntity.hasLocalService()>
 			import ${tempEntity.packagePath}.service.${tempEntity.name}LocalService;
-			import ${tempEntity.packagePath}.service.${tempEntity.name}LocalServiceFactory;
 		</#if>
 	<#else>
 		<#if tempEntity.hasLocalService()>
 			import ${tempEntity.packagePath}.service.${tempEntity.name}LocalService;
-			import ${tempEntity.packagePath}.service.${tempEntity.name}LocalServiceFactory;
 		</#if>
 		<#if tempEntity.hasRemoteService()>
 			import ${tempEntity.packagePath}.service.${tempEntity.name}Service;
-			import ${tempEntity.packagePath}.service.${tempEntity.name}ServiceFactory;
 		</#if>
 	</#if>
 
@@ -159,32 +157,32 @@ import com.liferay.portal.kernel.bean.InitializingBean;
 			<#if entity.equals(tempEntity)>
 				<#if sessionTypeName == "" && tempEntity.hasLocalService()>
 					if (${tempEntity.varName}LocalService == null) {
-						${tempEntity.varName}LocalService = ${tempEntity.name}LocalServiceFactory.getImpl();
+						${tempEntity.varName}LocalService = (${tempEntity.name}LocalService)${beanLocatorUtilShortName}.locate(${tempEntity.name}LocalService.class.getName() + ".impl");
 					}
 				</#if>
 			<#else>
 				<#if tempEntity.hasLocalService()>
 					if (${tempEntity.varName}LocalService == null) {
-						${tempEntity.varName}LocalService = ${tempEntity.name}LocalServiceFactory.getImpl();
+						${tempEntity.varName}LocalService = (${tempEntity.name}LocalService)${beanLocatorUtilShortName}.locate(${tempEntity.name}LocalService.class.getName() + ".impl");
 					}
 				</#if>
 
 				<#if tempEntity.hasRemoteService()>
 					if (${tempEntity.varName}Service == null) {
-						${tempEntity.varName}Service = ${tempEntity.name}ServiceFactory.getImpl();
+						${tempEntity.varName}Service = (${tempEntity.name}Service)${beanLocatorUtilShortName}.locate(${tempEntity.name}Service.class.getName() + ".impl");
 					}
 				</#if>
 			</#if>
 
 			<#if tempEntity.hasColumns()>
 				if (${tempEntity.varName}Persistence == null) {
-					${tempEntity.varName}Persistence = ${tempEntity.name}Util.getPersistence();
+					${tempEntity.varName}Persistence = (${tempEntity.name}Persistence)${beanLocatorUtilShortName}.locate(${tempEntity.name}Persistence.class.getName() + ".impl");
 				}
 			</#if>
 
 			<#if tempEntity.hasFinderClass()>
 				if (${tempEntity.varName}Finder == null) {
-					${tempEntity.varName}Finder = ${tempEntity.name}FinderUtil.getFinder();
+					${tempEntity.varName}Finder = (${tempEntity.name}Finder)${beanLocatorUtilShortName}.locate(${tempEntity.name}Finder.class.getName() + ".impl");
 				}
 			</#if>
 		</#list>

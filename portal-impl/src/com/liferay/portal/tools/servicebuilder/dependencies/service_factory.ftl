@@ -1,5 +1,7 @@
 package ${packagePath}.service;
 
+import ${beanLocatorUtil};
+
 /**
  * <a href="${entity.name}${sessionTypeName}ServiceFactory.java.html"><b><i>View Source</i></b></a>
  *
@@ -29,33 +31,45 @@ package ${packagePath}.service;
  */
 public class ${entity.name}${sessionTypeName}ServiceFactory {
 
+	/**
+	 * @deprecated
+	 */
 	public static ${entity.name}${sessionTypeName}Service getService() {
 		return _getFactory()._service;
 	}
 
+	/**
+	 * @deprecated
+	 */
 	public static ${entity.name}${sessionTypeName}Service getImpl() {
 		if (_impl == null) {
-			_impl = (${entity.name}${sessionTypeName}Service) ${beanLocatorUtil}.locate(_IMPL);
+			_impl = (${entity.name}${sessionTypeName}Service)${beanLocatorUtilShortName}.locate(_IMPL);
 		}
 
 		return _impl;
 	}
 
+	/**
+	 * @deprecated
+	 */
 	public static ${entity.name}${sessionTypeName}Service getTxImpl() {
 		if (_txImpl == null) {
-			_txImpl = (${entity.name}${sessionTypeName}Service)${beanLocatorUtil}.locate(_TX_IMPL);
+			_txImpl = (${entity.name}${sessionTypeName}Service)${beanLocatorUtilShortName}.locate(_TX_IMPL);
 		}
 
 		return _txImpl;
 	}
 
+	/**
+	 * @deprecated
+	 */
 	public void setService(${entity.name}${sessionTypeName}Service service) {
 		_service = service;
 	}
 
 	private static ${entity.name}${sessionTypeName}ServiceFactory _getFactory() {
 		if (_factory == null) {
-			_factory = (${entity.name}${sessionTypeName}ServiceFactory)${beanLocatorUtil}.locate(_FACTORY);
+			_factory = (${entity.name}${sessionTypeName}ServiceFactory)${beanLocatorUtilShortName}.locate(_FACTORY);
 		}
 
 		return _factory;

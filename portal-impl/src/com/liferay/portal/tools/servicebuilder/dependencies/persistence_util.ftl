@@ -73,25 +73,13 @@ public class ${entity.name}Util {
 	</#list>
 
 	public static ${entity.name}Persistence getPersistence() {
-		return _getUtil()._persistence;
+		return _persistence;
 	}
 
 	public void setPersistence(${entity.name}Persistence persistence) {
 		_persistence = persistence;
 	}
 
-	private static ${entity.name}Util _getUtil() {
-		if (_util == null) {
-			_util = (${entity.name}Util) ${beanLocatorUtil}.locate(_UTIL);
-		}
-
-		return _util;
-	}
-
-	private static final String _UTIL = ${entity.name}Util.class.getName();
-
-	private static ${entity.name}Util _util;
-
-	private ${entity.name}Persistence _persistence;
+	private static ${entity.name}Persistence _persistence;
 
 }

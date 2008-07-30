@@ -56,6 +56,14 @@ public class SpringUtil {
 		return _applicationContext;
 	}
 
+	public static void initContext() {
+		if (_applicationContext == null) {
+			getContext();
+		}
+
+		initContext(_applicationContext);
+	}
+
 	public static void initContext(ApplicationContext applicationContext) {
 
 		// Preinitialize Spring beans. See LEP-4734.

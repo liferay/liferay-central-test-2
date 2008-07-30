@@ -51,3 +51,12 @@
 		</#if>
 	</property>
 </bean>
+<bean id="${packagePath}.service.${entity.name}${sessionType}ServiceUtil" class="${packagePath}.service.${entity.name}${sessionType}ServiceUtil" lazy-init="true">
+	<property name="service">
+		<#if entity.TXManager != "none">
+			<ref bean="${packagePath}.service.${entity.name}${sessionType}Service.transaction" />
+		<#else>
+			<ref bean="${packagePath}.service.${entity.name}${sessionType}Service.impl" />
+		</#if>
+	</property>
+</bean>

@@ -16,15 +16,9 @@ package ${packagePath}.service;
  * on a bean instead of writing a lookup call and a method call.
  * </p>
  *
- * <p>
- * <code>${packagePath}.service.${entity.name}${sessionTypeName}ServiceFactory</code>
- * is responsible for the lookup of the bean.
- * </p>
- *
  * @author Brian Wing Shun Chan
  *
  * @see ${packagePath}.service.${entity.name}${sessionTypeName}Service
- * @see ${packagePath}.service.${entity.name}${sessionTypeName}ServiceFactory
  *
  */
 public class ${entity.name}${sessionTypeName}ServiceUtil {
@@ -56,13 +50,11 @@ public class ${entity.name}${sessionTypeName}ServiceUtil {
 			</#list>
 
 			{
-				${entity.name}${sessionTypeName}Service ${entity.varName}${sessionTypeName}Service = ${entity.name}${sessionTypeName}ServiceFactory.getService();
-
 				<#if method.returns.value != "void">
 					return
 				</#if>
 
-				${entity.varName}${sessionTypeName}Service.${method.name}(
+				_service.${method.name}(
 
 				<#list method.parameters as parameter>
 					${parameter.name}
@@ -76,5 +68,15 @@ public class ${entity.name}${sessionTypeName}ServiceUtil {
 			}
 		</#if>
 	</#list>
+
+	public static ${entity.name}${sessionTypeName}Service getService() {
+		return _service;
+	}
+
+	public void setService(${entity.name}${sessionTypeName}Service service) {
+		_service = service;
+	}
+
+	private static ${entity.name}${sessionTypeName}Service _service;
 
 }

@@ -49,25 +49,13 @@ public class ${entity.name}FinderUtil {
 	</#list>
 
 	public static ${entity.name}Finder getFinder() {
-		return _getUtil()._finder;
+		return _finder;
 	}
 
 	public void setFinder(${entity.name}Finder finder) {
 		_finder = finder;
 	}
 
-	private static ${entity.name}FinderUtil _getUtil() {
-		if (_util == null) {
-			_util = (${entity.name}FinderUtil)${beanLocatorUtil}.locate(_UTIL);
-		}
-
-		return _util;
-	}
-
-	private static final String _UTIL = ${entity.name}FinderUtil.class.getName();
-
-	private static ${entity.name}FinderUtil _util;
-
-	private ${entity.name}Finder _finder;
+	private static ${entity.name}Finder _finder;
 
 }

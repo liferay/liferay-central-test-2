@@ -21,7 +21,6 @@ package ${packagePath}.service;
  *
  * @author Brian Wing Shun Chan
  *
- * @see ${packagePath}.service.${entity.name}${sessionTypeName}ServiceFactory
  * @see ${packagePath}.service.${entity.name}${sessionTypeName}ServiceUtil
  *
  */
