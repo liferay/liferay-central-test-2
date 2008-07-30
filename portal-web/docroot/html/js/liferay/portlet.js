@@ -79,9 +79,14 @@ Liferay.Portlet = {
 
 		var url = options.url;
 		var data = options.data;
+		var dataType = 'html';
 		var placeHolder = options.placeHolder;
 		var beforePortletLoaded = options.beforePortletLoaded;
 		var onComplete = options.onComplete;
+
+		if (data && data.dataType) {
+			dataType = data.dataType;
+		}
 
 		var addPortletReturn = function(html) {
 			var container = placeHolder.parentNode;
@@ -128,13 +133,18 @@ Liferay.Portlet = {
 			{
 				url: url,
 				data: data,
-				dataType: 'json',
-				success: function(obj) {
-					if (obj.refresh) {
-						location.reload();
+				dataType: dataType,
+				success: function(message) {
+					if (dataType == 'html') {
+						addPortletReturn(message);
 					}
 					else {
-						addPortletReturn(obj.portletHTML);
+						if (message.refresh) {
+							location.reload();
+						}
+						else {
+							addPortletReturn(message.portletHTML);
+						}
 					}
 				}
 			}
