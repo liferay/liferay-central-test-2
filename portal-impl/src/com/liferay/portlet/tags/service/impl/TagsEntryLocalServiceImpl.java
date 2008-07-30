@@ -483,7 +483,7 @@ public class TagsEntryLocalServiceImpl extends TagsEntryLocalServiceBaseImpl {
 		throws PortalException, SystemException {
 
 		TagsEntry entry = updateEntry(
-			entryId, name, parentEntryName, vocabularyName);
+			entryId, parentEntryName, name, vocabularyName);
 
 		Set<Long> newProperties = new HashSet<Long>();
 
