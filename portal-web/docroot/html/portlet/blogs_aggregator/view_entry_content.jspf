@@ -43,13 +43,15 @@
 		User user2 = UserLocalServiceUtil.getUserById(entry.getUserId());
 		%>
 
-		<div class="entry-title">
-			<a href="<%= viewEntryURL %>"><%= entry.getTitle() %></a>
-		</div>
-
-		<div class="entry-author">
-			<liferay-ui:message key="written-by" /> <a href="<%= viewAllEntriesURL %>"><%= PortalUtil.getUserName(entry.getUserId(), entry.getUserName()) %></a>, <liferay-ui:message key="on-date" /> <%= dateFormatDateTime.format(entry.getDisplayDate()) %>
-		</div>
+		<c:if test='<%= displayStyle.indexOf("-without-title") < 0 %>'>
+			<div class="entry-title">
+				<a href="<%= viewEntryURL %>"><%= entry.getTitle() %></a>
+			</div>
+	
+			<div class="entry-author">
+				<liferay-ui:message key="written-by" /> <a href="<%= viewAllEntriesURL %>"><%= PortalUtil.getUserName(entry.getUserId(), entry.getUserName()) %></a>, <liferay-ui:message key="on-date" /> <%= dateFormatDateTime.format(entry.getDisplayDate()) %>
+			</div>
+		</c:if>
 
 		<liferay-ui:tags-summary
 			className="<%= BlogsEntry.class.getName() %>"
@@ -66,6 +68,14 @@
 				<c:when test='<%= displayStyle.startsWith("abstract") %>'>
 					<%= StringUtil.shorten(HtmlUtil.stripHtml(entry.getContent()), 200, StringPool.BLANK) %>
 				</c:when>
+				<c:when test='<%= displayStyle.startsWith("quote") %>'>
+					<span class="quote">
+						<a href="<%= viewAllEntriesURL %>">
+							&quot;<%= StringUtil.shorten(StringUtil.trim(HtmlUtil.stripHtml(entry.getContent())), 100, StringPool.BLANK) %> ...&quot;
+							<span class="nobreak"><liferay-ui:message key="read-more"/> &raquo;</span>
+						</a>
+					</span>
+				</c:when>
 				<c:otherwise>
 					<%= entry.getContent() %>
 				</c:otherwise>
@@ -77,7 +87,7 @@
 				<c:when test='<%= displayStyle.startsWith("abstract") %>'>
 					<a href="<%= viewEntryURL %>"><liferay-ui:message key="read-more" /> &raquo;</a>
 				</c:when>
-				<c:otherwise>
+				<c:when test='<%= !displayStyle.startsWith("quote") %>'>
 
 					<%
 					long classNameId = PortalUtil.getClassNameId(BlogsEntry.class.getName());
@@ -86,7 +96,7 @@
 					%>
 
 					<a href="<%= viewEntryURL %>#<portlet:namespace />messageScroll0"><%= messagesCount %> <liferay-ui:message key="comments" /></a>
-				</c:otherwise>
+				</c:when>
 			</c:choose>
 		</div>
 	</c:if>

@@ -46,23 +46,25 @@
 	</c:otherwise>
 </c:choose>
 
-<%
-StringBuilder sb = new StringBuilder();
-
-sb.append(themeDisplay.getPathMain());
-sb.append("/blogs/rss?");
-
-if (organizationId > 0) {
-	sb.append("organizationId=" + organizationId);
-}
-else {
-	sb.append("companyId=" + company.getCompanyId());
-}
-
-String rssURL = sb.toString();
-%>
-
-<liferay-ui:icon image="rss" message="subscribe-to-this-blog" url="<%= rssURL %>" target="_blank" label="<%= true %>" />
+<c:if test="<%= enableRssSubscription %>">
+	<%
+	StringBuilder sb = new StringBuilder();
+	
+	sb.append(themeDisplay.getPathMain());
+	sb.append("/blogs/rss?");
+	
+	if (organizationId > 0) {
+		sb.append("organizationId=" + organizationId);
+	}
+	else {
+		sb.append("companyId=" + company.getCompanyId());
+	}
+	
+	String rssURL = sb.toString();
+	%>
+	
+	<liferay-ui:icon image="rss" message="subscribe-to-this-blog" url="<%= rssURL %>" target="_blank" label="<%= true %>" />
+</c:if>
 
 <c:if test="<%= results.size() > 0 %>">
 	<div class="search-container">

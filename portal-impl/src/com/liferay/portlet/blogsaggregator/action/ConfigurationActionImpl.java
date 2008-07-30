@@ -57,8 +57,10 @@ public class ConfigurationActionImpl implements ConfigurationAction {
 		String organizationId = ParamUtil.getString(
 			actionRequest, "organizationId");
 		String displayStyle = ParamUtil.getString(
-			actionRequest, "displayStyle");
+				actionRequest, "displayStyle");
 		int max = ParamUtil.getInteger(actionRequest, "max");
+		boolean enableRssSubscription = ParamUtil.getBoolean(
+				actionRequest, "enableRssSubscription");
 
 		String portletResource = ParamUtil.getString(
 			actionRequest, "portletResource");
@@ -70,6 +72,7 @@ public class ConfigurationActionImpl implements ConfigurationAction {
 		prefs.setValue("organization-id", organizationId);
 		prefs.setValue("display-style", displayStyle);
 		prefs.setValue("max", String.valueOf(max));
+		prefs.setValue("enable-rss-subscription", String.valueOf(enableRssSubscription));
 
 		prefs.store();
 
