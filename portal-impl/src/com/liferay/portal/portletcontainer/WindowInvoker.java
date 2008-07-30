@@ -57,6 +57,7 @@ import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PropsValues;
 import com.liferay.portal.util.WebKeys;
+import com.liferay.portal.wsrp.consumer.invoker.WSRPWindowInvoker;
 import com.liferay.portlet.ActionRequestImpl;
 import com.liferay.portlet.ActionResponseImpl;
 import com.liferay.portlet.InvokerPortlet;
@@ -123,6 +124,7 @@ import org.apache.commons.logging.LogFactory;
  *
  * @author Deepak Gothe
  * @author Brian Wing Shun Chan
+ * @author Manish K Gupta
  *
  */
 public class WindowInvoker extends InvokerPortlet {
@@ -135,6 +137,7 @@ public class WindowInvoker extends InvokerPortlet {
 		super(portletModel, portlet, portletContext);
 
 		_portletModel = portletModel;
+		_remotePortlet = portletModel.isRemote();
 		_container = _getContainer();
 	}
 
@@ -150,7 +153,17 @@ public class WindowInvoker extends InvokerPortlet {
 			strutsPortlet, strutsBridgePortlet);
 
 		_portletModel = portletModel;
+		_remotePortlet = portletModel.isRemote();
 		_container = _getContainer();
+	}
+
+	@Override
+	public void init(PortletConfig portletConfig) throws PortletException {
+		if (_remotePortlet){
+			_portletConfigLocal = portletConfig;
+		}else{
+			super.init(portletConfig);
+		}
 	}
 
 	protected void invokeAction(
@@ -385,7 +398,7 @@ public class WindowInvoker extends InvokerPortlet {
 
 	private Container _getContainer() {
 		if (_remotePortlet) {
-			return ContainerFactory.getContainer(ContainerType.WSRP_CONSUMER);
+			return WSRPWindowInvoker.getContainer();
 		}
 		else {
 			return ContainerFactory.getContainer(
@@ -477,6 +490,9 @@ public class WindowInvoker extends InvokerPortlet {
 	}
 
 	private boolean _isWARFile() {
+		if (_remotePortlet) {
+			return true;
+		}
 		return getPortletConfig().isWARFile();
 	}
 
@@ -509,8 +525,14 @@ public class WindowInvoker extends InvokerPortlet {
 		HttpServletRequest request = PortalUtil.getHttpServletRequest(
 			portletRequest);
 
-		request.setAttribute(
-			JavaConstants.JAVAX_PORTLET_CONFIG, getPortletConfig());
+		if (_portletConfigLocal==null){
+			request.setAttribute(
+				JavaConstants.JAVAX_PORTLET_CONFIG, getPortletConfig());
+		}else{
+			request.setAttribute(
+				JavaConstants.JAVAX_PORTLET_CONFIG, _portletConfigLocal);
+		}
+
 		request.setAttribute(
 			JavaConstants.JAVAX_PORTLET_REQUEST, portletRequest);
 		request.setAttribute(
@@ -526,5 +548,6 @@ public class WindowInvoker extends InvokerPortlet {
 	private String _remoteUser;
 	private long _remoteUserId;
 	private Principal _userPrincipal;
+	private PortletConfig _portletConfigLocal;
 
 }

@@ -557,6 +557,14 @@
 		</init-param>
 		<load-on-startup>15</load-on-startup>
 	</servlet>
+	<servlet>
+		<servlet-name>WSRPConsumerResourceProxyServlet</servlet-name>
+		<servlet-class>com.sun.portal.wsrp.consumer.resourceproxy.ResourceProxyServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>WSRPConsumerResourceProxyServlet</servlet-name>
+		<url-pattern>/wsrpconsumer/resourceproxy/*</url-pattern>
+	</servlet-mapping> 	
 	<servlet-mapping>
 		<servlet-name>MainServlet</servlet-name>
 		<url-pattern>/c/*</url-pattern>
