@@ -25,18 +25,18 @@ package com.liferay.taglib.ui;
 import com.liferay.taglib.util.IncludeTag;
 
 /**
- * <a href="CategoriesNavigationTag.java.html"><b><i>View Source</i></b></a>
+ * <a href="TagsNavigationTag.java.html"><b><i>View Source</i></b></a>
  *
  * @author Alvaro del Castillo
  *
  */
-public class CategoriesNavigationTag extends IncludeTag {
+public class TagsNavigationTag extends IncludeTag {
 
 	protected String getDefaultPage() {
 		return _PAGE;
 	}
 
 	private static final String _PAGE =
-		"/html/taglib/ui/categories_navigation/page.jsp";
+		"/html/taglib/ui/tags_navigation/page.jsp";
 
 }

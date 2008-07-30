@@ -1943,11 +1943,11 @@
 	</portlet>
 	<portlet>
 		<portlet-name>122</portlet-name>
-		<display-name>Categories Navigation</display-name>
+		<display-name>Tags Navigation</display-name>
 		<portlet-class>com.liferay.portlet.StrutsPortlet</portlet-class>
 		<init-param>
 			<name>view-action</name>
-			<value>/categories_navigation/view</value>
+			<value>/tags_navigation/view</value>
 		</init-param>
 		<expiration-cache>0</expiration-cache>
 		<supports>

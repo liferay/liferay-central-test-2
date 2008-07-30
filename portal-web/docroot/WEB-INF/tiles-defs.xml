@@ -212,14 +212,6 @@
 		<put name="portlet_content" value="/portlet/calendar/view_event.jsp" />
 	</definition>
 
-	<!-- Categories Navigation -->
-
-	<definition name="portlet.categories_navigation" extends="portlet" />
-
-	<definition name="portlet.categories_navigation.view" extends="portlet.categories_navigation">
-		<put name="portlet_content" value="/portlet/categories_navigation/view.jsp" />
-	</definition>
-
 	<!-- Communities -->
 
 	<definition name="portlet.communities" extends="portlet" />
@@ -1047,6 +1039,14 @@
 
 	<definition name="portlet.tags_admin.view" extends="portlet.tags_admin">
 		<put name="portlet_content" value="/portlet/tags_admin/view.jsp" />
+	</definition>
+
+	<!-- Tags Navigation -->
+
+	<definition name="portlet.tags_navigation" extends="portlet" />
+
+	<definition name="portlet.tags_navigation.view" extends="portlet.tags_navigation">
+		<put name="portlet_content" value="/portlet/tags_navigation/view.jsp" />
 	</definition>
 
 	<!-- Update Manager -->

@@ -22,7 +22,7 @@
  */
 %>
 
-<%@ include file="/html/taglib/ui/categories_navigation/init.jsp"%>
+<%@ include file="/html/taglib/ui/tags_navigation/init.jsp"%>
 
 <div>
 
