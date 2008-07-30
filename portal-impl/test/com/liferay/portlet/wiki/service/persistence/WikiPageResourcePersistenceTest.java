@@ -22,6 +22,7 @@
 
 package com.liferay.portlet.wiki.service.persistence;
 
+import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
 import com.liferay.portal.service.persistence.BasePersistenceTestCase;
 
 import com.liferay.portlet.wiki.NoSuchPageResourceException;
@@ -37,7 +38,7 @@ public class WikiPageResourcePersistenceTest extends BasePersistenceTestCase {
 	protected void setUp() throws Exception {
 		super.setUp();
 
-		_persistence = (WikiPageResourcePersistence)com.liferay.portal.kernel.bean.PortalBeanLocatorUtil.locate(_TX_IMPL);
+		_persistence = (WikiPageResourcePersistence)PortalBeanLocatorUtil.locate(_TX_IMPL);
 	}
 
 	public void testCreate() throws Exception {

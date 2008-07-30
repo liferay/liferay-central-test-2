@@ -23,6 +23,7 @@
 package com.liferay.portal.service.persistence;
 
 import com.liferay.portal.NoSuchUserGroupRoleException;
+import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
 import com.liferay.portal.model.UserGroupRole;
 import com.liferay.portal.service.persistence.BasePersistenceTestCase;
 
@@ -36,7 +37,7 @@ public class UserGroupRolePersistenceTest extends BasePersistenceTestCase {
 	protected void setUp() throws Exception {
 		super.setUp();
 
-		_persistence = (UserGroupRolePersistence)com.liferay.portal.kernel.bean.PortalBeanLocatorUtil.locate(_TX_IMPL);
+		_persistence = (UserGroupRolePersistence)PortalBeanLocatorUtil.locate(_TX_IMPL);
 	}
 
 	public void testCreate() throws Exception {

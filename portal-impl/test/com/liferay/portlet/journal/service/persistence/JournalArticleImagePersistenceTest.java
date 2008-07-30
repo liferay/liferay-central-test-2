@@ -22,6 +22,7 @@
 
 package com.liferay.portlet.journal.service.persistence;
 
+import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
 import com.liferay.portal.service.persistence.BasePersistenceTestCase;
 
 import com.liferay.portlet.journal.NoSuchArticleImageException;
@@ -37,7 +38,7 @@ public class JournalArticleImagePersistenceTest extends BasePersistenceTestCase 
 	protected void setUp() throws Exception {
 		super.setUp();
 
-		_persistence = (JournalArticleImagePersistence)com.liferay.portal.kernel.bean.PortalBeanLocatorUtil.locate(_TX_IMPL);
+		_persistence = (JournalArticleImagePersistence)PortalBeanLocatorUtil.locate(_TX_IMPL);
 	}
 
 	public void testCreate() throws Exception {
