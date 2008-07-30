@@ -194,12 +194,12 @@ public abstract class WebDAVPropsLocalServiceBaseImpl
 		return webDAVPropsPersistence.findByPrimaryKey(webDavPropsId);
 	}
 
-	public List<WebDAVProps> getWebDAVPropss(int start, int end)
+	public List<WebDAVProps> getWebDAVPropses(int start, int end)
 		throws SystemException {
 		return webDAVPropsPersistence.findAll(start, end);
 	}
 
-	public int getWebDAVPropssCount() throws SystemException {
+	public int getWebDAVPropsesCount() throws SystemException {
 		return webDAVPropsPersistence.countAll();
 	}
 

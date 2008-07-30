@@ -73,10 +73,11 @@ public interface WebDAVPropsLocalService {
 		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
-	public java.util.List<com.liferay.portal.model.WebDAVProps> getWebDAVPropss(
+	public java.util.List<com.liferay.portal.model.WebDAVProps> getWebDAVPropses(
 		int start, int end) throws com.liferay.portal.SystemException;
 
-	public int getWebDAVPropssCount() throws com.liferay.portal.SystemException;
+	public int getWebDAVPropsesCount()
+		throws com.liferay.portal.SystemException;
 
 	public com.liferay.portal.model.WebDAVProps updateWebDAVProps(
 		com.liferay.portal.model.WebDAVProps webDAVProps)

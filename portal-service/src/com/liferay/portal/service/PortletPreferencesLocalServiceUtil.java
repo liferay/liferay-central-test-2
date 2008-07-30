@@ -82,14 +82,14 @@ public class PortletPreferencesLocalServiceUtil {
 		return _service.getPortletPreferences(portletPreferencesId);
 	}
 
-	public static java.util.List<com.liferay.portal.model.PortletPreferences> getPortletPreferencess(
+	public static java.util.List<com.liferay.portal.model.PortletPreferences> getPortletPreferenceses(
 		int start, int end) throws com.liferay.portal.SystemException {
-		return _service.getPortletPreferencess(start, end);
+		return _service.getPortletPreferenceses(start, end);
 	}
 
-	public static int getPortletPreferencessCount()
+	public static int getPortletPreferencesesCount()
 		throws com.liferay.portal.SystemException {
-		return _service.getPortletPreferencessCount();
+		return _service.getPortletPreferencesesCount();
 	}
 
 	public static com.liferay.portal.model.PortletPreferences updatePortletPreferences(

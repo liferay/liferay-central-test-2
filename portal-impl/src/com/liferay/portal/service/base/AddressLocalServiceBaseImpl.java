@@ -190,12 +190,12 @@ public abstract class AddressLocalServiceBaseImpl implements AddressLocalService
 		return addressPersistence.findByPrimaryKey(addressId);
 	}
 
-	public List<Address> getAddresss(int start, int end)
+	public List<Address> getAddresses(int start, int end)
 		throws SystemException {
 		return addressPersistence.findAll(start, end);
 	}
 
-	public int getAddresssCount() throws SystemException {
+	public int getAddressesCount() throws SystemException {
 		return addressPersistence.countAll();
 	}
 

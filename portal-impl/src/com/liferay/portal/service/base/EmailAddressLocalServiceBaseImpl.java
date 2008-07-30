@@ -193,12 +193,12 @@ public abstract class EmailAddressLocalServiceBaseImpl
 		return emailAddressPersistence.findByPrimaryKey(emailAddressId);
 	}
 
-	public List<EmailAddress> getEmailAddresss(int start, int end)
+	public List<EmailAddress> getEmailAddresses(int start, int end)
 		throws SystemException {
 		return emailAddressPersistence.findAll(start, end);
 	}
 
-	public int getEmailAddresssCount() throws SystemException {
+	public int getEmailAddressesCount() throws SystemException {
 		return emailAddressPersistence.countAll();
 	}
 

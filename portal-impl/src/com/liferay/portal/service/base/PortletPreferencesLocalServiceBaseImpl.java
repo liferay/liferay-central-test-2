@@ -193,12 +193,12 @@ public abstract class PortletPreferencesLocalServiceBaseImpl
 		return portletPreferencesPersistence.findByPrimaryKey(portletPreferencesId);
 	}
 
-	public List<PortletPreferences> getPortletPreferencess(int start, int end)
+	public List<PortletPreferences> getPortletPreferenceses(int start, int end)
 		throws SystemException {
 		return portletPreferencesPersistence.findAll(start, end);
 	}
 
-	public int getPortletPreferencessCount() throws SystemException {
+	public int getPortletPreferencesesCount() throws SystemException {
 		return portletPreferencesPersistence.countAll();
 	}
 

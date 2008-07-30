@@ -73,10 +73,10 @@ public interface PortletPreferencesLocalService {
 		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
-	public java.util.List<com.liferay.portal.model.PortletPreferences> getPortletPreferencess(
+	public java.util.List<com.liferay.portal.model.PortletPreferences> getPortletPreferenceses(
 		int start, int end) throws com.liferay.portal.SystemException;
 
-	public int getPortletPreferencessCount()
+	public int getPortletPreferencesesCount()
 		throws com.liferay.portal.SystemException;
 
 	public com.liferay.portal.model.PortletPreferences updatePortletPreferences(

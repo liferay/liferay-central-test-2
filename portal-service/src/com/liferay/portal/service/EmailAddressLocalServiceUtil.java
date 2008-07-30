@@ -82,14 +82,14 @@ public class EmailAddressLocalServiceUtil {
 		return _service.getEmailAddress(emailAddressId);
 	}
 
-	public static java.util.List<com.liferay.portal.model.EmailAddress> getEmailAddresss(
+	public static java.util.List<com.liferay.portal.model.EmailAddress> getEmailAddresses(
 		int start, int end) throws com.liferay.portal.SystemException {
-		return _service.getEmailAddresss(start, end);
+		return _service.getEmailAddresses(start, end);
 	}
 
-	public static int getEmailAddresssCount()
+	public static int getEmailAddressesCount()
 		throws com.liferay.portal.SystemException {
-		return _service.getEmailAddresssCount();
+		return _service.getEmailAddressesCount();
 	}
 
 	public static com.liferay.portal.model.EmailAddress updateEmailAddress(

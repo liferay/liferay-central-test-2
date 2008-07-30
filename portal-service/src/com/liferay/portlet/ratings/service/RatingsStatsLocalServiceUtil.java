@@ -82,14 +82,14 @@ public class RatingsStatsLocalServiceUtil {
 		return _service.getRatingsStats(statsId);
 	}
 
-	public static java.util.List<com.liferay.portlet.ratings.model.RatingsStats> getRatingsStatss(
+	public static java.util.List<com.liferay.portlet.ratings.model.RatingsStats> getRatingsStatses(
 		int start, int end) throws com.liferay.portal.SystemException {
-		return _service.getRatingsStatss(start, end);
+		return _service.getRatingsStatses(start, end);
 	}
 
-	public static int getRatingsStatssCount()
+	public static int getRatingsStatsesCount()
 		throws com.liferay.portal.SystemException {
-		return _service.getRatingsStatssCount();
+		return _service.getRatingsStatsesCount();
 	}
 
 	public static com.liferay.portlet.ratings.model.RatingsStats updateRatingsStats(

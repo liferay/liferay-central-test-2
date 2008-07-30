@@ -81,12 +81,12 @@ public abstract class RatingsStatsLocalServiceBaseImpl
 		return ratingsStatsPersistence.findByPrimaryKey(statsId);
 	}
 
-	public List<RatingsStats> getRatingsStatss(int start, int end)
+	public List<RatingsStats> getRatingsStatses(int start, int end)
 		throws SystemException {
 		return ratingsStatsPersistence.findAll(start, end);
 	}
 
-	public int getRatingsStatssCount() throws SystemException {
+	public int getRatingsStatsesCount() throws SystemException {
 		return ratingsStatsPersistence.countAll();
 	}
 

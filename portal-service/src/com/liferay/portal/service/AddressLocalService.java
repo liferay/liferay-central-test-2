@@ -71,10 +71,10 @@ public interface AddressLocalService {
 		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
-	public java.util.List<com.liferay.portal.model.Address> getAddresss(
+	public java.util.List<com.liferay.portal.model.Address> getAddresses(
 		int start, int end) throws com.liferay.portal.SystemException;
 
-	public int getAddresssCount() throws com.liferay.portal.SystemException;
+	public int getAddressesCount() throws com.liferay.portal.SystemException;
 
 	public com.liferay.portal.model.Address updateAddress(
 		com.liferay.portal.model.Address address)

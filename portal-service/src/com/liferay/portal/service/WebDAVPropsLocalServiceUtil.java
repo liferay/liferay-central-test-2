@@ -82,14 +82,14 @@ public class WebDAVPropsLocalServiceUtil {
 		return _service.getWebDAVProps(webDavPropsId);
 	}
 
-	public static java.util.List<com.liferay.portal.model.WebDAVProps> getWebDAVPropss(
+	public static java.util.List<com.liferay.portal.model.WebDAVProps> getWebDAVPropses(
 		int start, int end) throws com.liferay.portal.SystemException {
-		return _service.getWebDAVPropss(start, end);
+		return _service.getWebDAVPropses(start, end);
 	}
 
-	public static int getWebDAVPropssCount()
+	public static int getWebDAVPropsesCount()
 		throws com.liferay.portal.SystemException {
-		return _service.getWebDAVPropssCount();
+		return _service.getWebDAVPropsesCount();
 	}
 
 	public static com.liferay.portal.model.WebDAVProps updateWebDAVProps(

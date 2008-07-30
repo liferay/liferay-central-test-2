@@ -80,14 +80,14 @@ public class AddressLocalServiceUtil {
 		return _service.getAddress(addressId);
 	}
 
-	public static java.util.List<com.liferay.portal.model.Address> getAddresss(
+	public static java.util.List<com.liferay.portal.model.Address> getAddresses(
 		int start, int end) throws com.liferay.portal.SystemException {
-		return _service.getAddresss(start, end);
+		return _service.getAddresses(start, end);
 	}
 
-	public static int getAddresssCount()
+	public static int getAddressesCount()
 		throws com.liferay.portal.SystemException {
-		return _service.getAddresssCount();
+		return _service.getAddressesCount();
 	}
 
 	public static com.liferay.portal.model.Address updateAddress(
