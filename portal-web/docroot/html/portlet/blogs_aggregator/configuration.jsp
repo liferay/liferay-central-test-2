@@ -82,20 +82,13 @@ if (organizationId > 0) {
 	</td>
 	<td>
 		<select name="<portlet:namespace />displayStyle">
-			<option <%= (displayStyle.equals("body-and-image")) ? "selected" : "" %> value="body-and-image">
-				<liferay-ui:message key="body-and-image" /></option>
-			<option <%= (displayStyle.equals("body")) ? "selected" : "" %> value="body">
-				<liferay-ui:message key="body" /></option>
-			<option <%= (displayStyle.equals("abstract")) ? "selected" : "" %> value="abstract">
-				<liferay-ui:message key="abstract" /></option>
-			<option <%= (displayStyle.equals("abstract-without-title")) ? "selected" : "" %> value="abstract-without-title">
-				<liferay-ui:message key="abstract-without-title"/></option>
-			<option <%= (displayStyle.equals("quote")) ? "selected" : "" %> value="quote">
-				<liferay-ui:message key="quote"/></option>
-			<option <%= (displayStyle.equals("quote-without-title")) ? "selected" : "" %> value="quote-without-title">
-				<liferay-ui:message key="quote-without-title"/></option>
-			<option <%= (displayStyle.equals("title")) ? "selected" : "" %> value="title">
-				<liferay-ui:message key="title" /></option>
+			<option <%= (displayStyle.equals("body-and-image")) ? "selected" : "" %> value="body-and-image"><liferay-ui:message key="body-and-image" /></option>
+			<option <%= (displayStyle.equals("body")) ? "selected" : "" %> value="body"><liferay-ui:message key="body" /></option>
+			<option <%= (displayStyle.equals("abstract")) ? "selected" : "" %> value="abstract"><liferay-ui:message key="abstract" /></option>
+			<option <%= (displayStyle.equals("abstract-without-title")) ? "selected" : "" %> value="abstract-without-title"><liferay-ui:message key="abstract-without-title" /></option>
+			<option <%= (displayStyle.equals("quote")) ? "selected" : "" %> value="quote"><liferay-ui:message key="quote" /></option>
+			<option <%= (displayStyle.equals("quote-without-title")) ? "selected" : "" %> value="quote-without-title"><liferay-ui:message key="quote-without-title" /></option>
+			<option <%= (displayStyle.equals("title")) ? "selected" : "" %> value="title"><liferay-ui:message key="title" /></option>
 		</select>
 	</td>
 </tr>
