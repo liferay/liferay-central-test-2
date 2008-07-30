@@ -274,8 +274,8 @@ public class PluginsEnvironmentBuilder {
 			_fileUtil.write(tempFile, sb.toString());
 
 			_exec(
-				_SVN_SET_IGNORES + "-F " + tempFile.getCanonicalPath() +
-					" " + libPath);
+				_SVN_SET_IGNORES + "-F " + tempFile.getCanonicalPath() + " " +
+					libPath);
 
 			String[] newIgnores = _exec(_SVN_GET_IGNORES + libPath);
 
