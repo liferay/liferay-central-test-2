@@ -361,6 +361,12 @@ public class ViewAction extends PortletAction {
 		return validationErrors;
 	}
 
+	protected boolean isCheckMethodOnProcessAction() {
+		return _CHECK_METHOD_ON_PROCESS_ACTION;
+	}
+
+	private static final boolean _CHECK_METHOD_ON_PROCESS_ACTION = false;
+
 	private static Log _log = LogFactory.getLog(ViewAction.class);
 
 }
