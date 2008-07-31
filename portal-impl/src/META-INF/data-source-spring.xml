@@ -1,6 +1,17 @@
 <?xml version="1.0"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN" "http://www.springframework.org/dtd/spring-beans.dtd">
 
-<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd">
+<beans>
+	<bean id="liferayDataSourceTarget" class="com.liferay.portal.spring.jndi.JndiObjectFactoryBean" lazy-init="true">
+		<property name="jndiName">
+			<value>jdbc/LiferayPool</value>
+		</property>
+	</bean>
+	<bean id="liferayDataSource" class="org.springframework.jdbc.datasource.LazyConnectionDataSourceProxy" lazy-init="true">
+		<property name="targetDataSource">
+			<ref bean="liferayDataSourceTarget" />
+		</property>
+	</bean>
 	<bean id="liferayHibernateSessionFactory" class="com.liferay.portal.spring.hibernate.PortalHibernateConfiguration" lazy-init="true">
 		<property name="dataSource">
 			<ref bean="liferayDataSource" />

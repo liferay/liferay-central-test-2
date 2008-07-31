@@ -24,7 +24,6 @@ package com.liferay.portal.tools;
 
 import com.liferay.portal.kernel.util.FileUtil;
 import com.liferay.portal.kernel.util.StringUtil;
-import com.liferay.portal.spring.util.PortalApplicationContextUtil;
 import com.liferay.portal.tools.sql.DBUtil;
 import com.liferay.portal.util.InitUtil;
 
@@ -45,8 +44,6 @@ public class DBBuilder {
 	}
 
 	public static void main(String[] args) {
-		PortalApplicationContextUtil.loadStandaloneContext();
-		
 		if (args.length == 1) {
 			new DBBuilder(args[0], DBUtil.DB_TYPE_ALL);
 		}

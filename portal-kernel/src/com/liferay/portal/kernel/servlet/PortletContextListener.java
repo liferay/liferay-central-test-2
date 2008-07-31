@@ -24,7 +24,7 @@ package com.liferay.portal.kernel.servlet;
 
 import com.liferay.portal.kernel.deploy.hot.HotDeployEvent;
 import com.liferay.portal.kernel.deploy.hot.HotDeployUtil;
-import com.liferay.portal.kernel.jndi.InfrastructureUtil;
+import com.liferay.portal.kernel.jndi.PortalJNDIUtil;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.PortalInitable;
@@ -97,7 +97,7 @@ public class PortletContextListener
 				_log.debug("Dynamically binding the Liferay data source");
 			}
 
-			DataSource dataSource = InfrastructureUtil.getDataSource();
+			DataSource dataSource = PortalJNDIUtil.getDataSource();
 
 			if (dataSource == null) {
 				if (_log.isDebugEnabled()) {
@@ -113,7 +113,7 @@ public class PortletContextListener
 
 			ctx.createSubcontext(_JNDI_JDBC);
 
-			ctx.bind(_JNDI_JDBC_LIFERAY_POOL, InfrastructureUtil.getDataSource());
+			ctx.bind(_JNDI_JDBC_LIFERAY_POOL, PortalJNDIUtil.getDataSource());
 
 			_bindLiferayPool = true;
 		}

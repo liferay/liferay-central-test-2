@@ -20,43 +20,55 @@
  * SOFTWARE.
  */
 
-package com.liferay.portal.kernel.jndi;
+package com.liferay.portal.bean;
 
-import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
+import com.liferay.portal.kernel.bean.BeanLocator;
+import com.liferay.portal.kernel.bean.BeanLocatorException;
+import com.liferay.portal.spring.util.SpringUtil;
 
-import javax.mail.Session;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 
-import javax.naming.NamingException;
-
-import javax.sql.DataSource;
+import org.springframework.context.ApplicationContext;
 
 /**
- * <a href="InfrastructureUtil.java.html"><b><i>View Source</i></b></a>
+ * <a href="BeanLocatorImpl.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *
  */
-public class InfrastructureUtil {
+public class BeanLocatorImpl implements BeanLocator {
 
-	public static DataSource getDataSource() {
-		if (_dataSource == null) {
-			_dataSource = 
-				(DataSource)PortalBeanLocatorUtil.locate("liferayDataSource");
-		}
-		
-		return _dataSource;
+	public BeanLocatorImpl() {
+		this(BeanLocatorImpl.class.getClassLoader(), null);
 	}
 
-	public static Session getMailSession() {
-		if (_mailSession == null) {
-			_mailSession = 
-				(Session)PortalBeanLocatorUtil.locate("mailSession");
-		}
-		
-		return _mailSession;
+	public BeanLocatorImpl(
+		ClassLoader classLoader, ApplicationContext applicationContext) {
+
+		_classLoader = classLoader;
+		_applicationContext = applicationContext;
 	}
 
-	private static Session _mailSession;
-	
-	private static DataSource _dataSource;
+	public ClassLoader getClassLoader() {
+		return _classLoader;
+	}
+
+	public Object locate(String name) throws BeanLocatorException {
+		if (_applicationContext == null) {
+			_applicationContext = SpringUtil.getContext();
+		}
+
+		if (_log.isDebugEnabled()) {
+			_log.debug("Locating " + name);
+		}
+
+		return _applicationContext.getBean(name);
+	}
+
+	private static Log _log = LogFactory.getLog(BeanLocatorImpl.class);
+
+	private ClassLoader _classLoader;
+	private ApplicationContext _applicationContext;
+
 }

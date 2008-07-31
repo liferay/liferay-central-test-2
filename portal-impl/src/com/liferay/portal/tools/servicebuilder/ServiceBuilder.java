@@ -33,7 +33,6 @@ import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.StringUtil_IW;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.ModelHintsUtil;
-import com.liferay.portal.spring.util.PortalApplicationContextUtil;
 import com.liferay.portal.tools.SourceFormatter;
 import com.liferay.portal.util.DocumentUtil;
 import com.liferay.portal.util.InitUtil;
@@ -409,8 +408,6 @@ public class ServiceBuilder {
 		boolean autoNamespaceTables, String beanLocatorUtil, String propsUtil,
 		String testDir, boolean build) {
 
-		PortalApplicationContextUtil.loadStandaloneContext();
-		
 		_tplBadColumnNames = _getTplProperty(
 			"bad_column_names", _tplBadColumnNames);
 		_tplBadTableNames = _getTplProperty(
@@ -2355,8 +2352,9 @@ public class ServiceBuilder {
 		if (!xmlFile.exists()) {
 			String xml =
 				"<?xml version=\"1.0\"?>\n" +
+				"<!DOCTYPE beans PUBLIC \"-//SPRING//DTD BEAN//EN\" \"http://www.springframework.org/dtd/spring-beans.dtd\">\n" +
 				"\n" +
-				"<beans xmlns=\"http://www.springframework.org/schema/beans\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xsi:schemaLocation=\"http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd\">\n" +
+				"<beans>\n" +
 				"</beans>";
 
 			FileUtil.write(xmlFile, xml);
@@ -2365,7 +2363,7 @@ public class ServiceBuilder {
 		String oldContent = FileUtil.read(xmlFile);
 		String newContent = _fixSpringXML(oldContent);
 
-		int x = oldContent.indexOf("<beans xmlns=\"http://www.springframework.org/schema/beans\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xsi:schemaLocation=\"http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd\">");
+		int x = oldContent.indexOf("<beans>");
 		int y = oldContent.lastIndexOf("</beans>");
 
 		int firstSession = newContent.indexOf(

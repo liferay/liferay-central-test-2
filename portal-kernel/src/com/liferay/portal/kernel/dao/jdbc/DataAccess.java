@@ -23,7 +23,7 @@
 package com.liferay.portal.kernel.dao.jdbc;
 
 import com.liferay.portal.kernel.jndi.JNDIUtil;
-import com.liferay.portal.kernel.jndi.InfrastructureUtil;
+import com.liferay.portal.kernel.jndi.PortalJNDIUtil;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 
@@ -48,7 +48,7 @@ public class DataAccess {
 	public static Connection getConnection()
 		throws NamingException, SQLException {
 
-		DataSource ds = InfrastructureUtil.getDataSource();
+		DataSource ds = PortalJNDIUtil.getDataSource();
 
 		return ds.getConnection();
 	}

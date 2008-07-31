@@ -62,6 +62,7 @@
 	<classpathentry kind="lib" path="lib/development/qdox.jar"/>
 	<classpathentry kind="lib" path="lib/development/quercus.jar"/>
 	<classpathentry kind="lib" path="lib/development/resin-util.jar"/>
+	<classpathentry kind="lib" path="lib/development/rhino.jar"/>
 	<classpathentry kind="lib" path="lib/development/sap.jar"/>
 	<classpathentry kind="lib" path="lib/development/saxpath.jar"/>
 	<classpathentry kind="lib" path="lib/development/script-10.jar"/>
@@ -72,7 +73,6 @@
 	<classpathentry kind="lib" path="lib/development/smtp.jar"/>
 	<classpathentry kind="lib" path="lib/development/tomcat-coyote.jar"/>
 	<classpathentry kind="lib" path="lib/development/tomcat-util.jar"/>
-	<classpathentry kind="lib" path="lib/development/webservices-api.jar"/>
 	<classpathentry kind="lib" path="lib/development/yuicompressor.jar"/>
 	<classpathentry kind="lib" path="lib/global/container.jar"/>
 	<classpathentry kind="lib" path="lib/global/portlet.jar"/>
@@ -187,7 +187,6 @@
 	<classpathentry kind="lib" path="lib/portal/portletbridge-portlet.jar"/>
 	<classpathentry kind="lib" path="lib/portal/quartz.jar"/>
 	<classpathentry kind="lib" path="lib/portal/rdffilter.jar"/>
-	<classpathentry kind="lib" path="lib/portal/rhino.jar"/>
 	<classpathentry kind="lib" path="lib/portal/ridl.jar"/>
 	<classpathentry kind="lib" path="lib/portal/rome.jar"/>
 	<classpathentry kind="lib" path="lib/portal/saaj-api.jar"/>
@@ -213,7 +212,6 @@
 	<classpathentry kind="lib" path="lib/portal/wsdl4j.jar"/>
 	<classpathentry kind="lib" path="lib/portal/wsrp-common.jar"/>
 	<classpathentry kind="lib" path="lib/portal/wsrp-consumer.jar"/>
-	<classpathentry kind="lib" path="lib/portal/wsrp-generated.jar"/>	
 	<classpathentry kind="lib" path="lib/portal/wsrp-producer.jar"/>
 	<classpathentry kind="lib" path="lib/portal/wstx.jar"/>
 	<classpathentry kind="lib" path="lib/portal/xalan.jar"/>

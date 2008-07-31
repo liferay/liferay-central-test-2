@@ -22,7 +22,7 @@
 
 package com.liferay.portal.scheduler.quartz;
 
-import com.liferay.portal.kernel.jndi.InfrastructureUtil;
+import com.liferay.portal.kernel.jndi.PortalJNDIUtil;
 
 import java.sql.Connection;
 
@@ -44,7 +44,7 @@ public class QuartzConnectionProviderImpl implements ConnectionProvider {
 		Connection con = null;
 
 		try {
-			con = InfrastructureUtil.getDataSource().getConnection();
+			con = PortalJNDIUtil.getDataSource().getConnection();
 		}
 		catch (Exception e) {
 			_log.error(e, e);

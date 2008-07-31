@@ -20,36 +20,52 @@
  * SOFTWARE.
  */
 
-package com.liferay.portal.spring.context;
+package com.liferay.portal.kernel.jndi;
 
-import com.liferay.portal.spring.util.PortalApplicationContextUtil;
-import com.liferay.portal.util.PropsKeys;
-import com.liferay.portal.util.PropsUtil;
+import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
 
-import javax.servlet.ServletContext;
+import javax.mail.Session;
 
-import org.springframework.beans.BeansException;
-import org.springframework.context.ApplicationContext;
-import org.springframework.web.context.ContextLoader;
+import javax.naming.NamingException;
+
+import javax.sql.DataSource;
 
 /**
- * <a href="PortalContextLoader.java.html"><b><i>View Source</i></b></a>
+ * <a href="PortalJNDIUtil.java.html"><b><i>View Source</i></b></a>
  *
- * @author Michael Young
+ * @author Brian Wing Shun Chan
  *
  */
-public class PortalContextLoader extends ContextLoader {
+public class PortalJNDIUtil {
 
-	protected ApplicationContext loadParentContext(
-		ServletContext servletContext) throws BeansException {
-		
-		ApplicationContext applicationContext = new ArrayApplicationContext(
-			PropsUtil.getArray(PropsKeys.SPRING_PARENT_CONFIGS)); 
-		
-		PortalApplicationContextUtil.setParentContext(applicationContext);
-
-		return applicationContext; 
-		
+	public static DataSource getDataSource() throws NamingException {
+		return getPortalJNDI().getDataSource();
 	}
+
+	public static Session getMailSession() throws NamingException {
+		return getPortalJNDI().getMailSession();
+	}
+
+	public static PortalJNDI getPortalJNDI() {
+		return _getUtil()._portalJNDI;
+	}
+
+	public void setPortalJNDI(PortalJNDI portalJNDI) {
+		_portalJNDI = portalJNDI;
+	}
+
+	private static PortalJNDIUtil _getUtil() {
+		if (_util == null) {
+			_util = (PortalJNDIUtil)PortalBeanLocatorUtil.locate(_UTIL);
+		}
+
+		return _util;
+	}
+
+	private static final String _UTIL = PortalJNDIUtil.class.getName();
+
+	private static PortalJNDIUtil _util;
+
+	private PortalJNDI _portalJNDI;
 
 }
