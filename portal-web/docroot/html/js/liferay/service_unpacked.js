@@ -3068,8 +3068,3 @@ Liferay.Service.Workflow.WorkflowInstance = {
 Liferay.Service.Social = {
 	servicePackage: "com.liferay.portlet.social.service.http."
 };
-
-
-Liferay.Service.WebForm = {
-	servicePackage: "com.liferay.portlet.webform.service.http."
-};

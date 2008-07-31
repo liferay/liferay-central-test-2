@@ -30,7 +30,7 @@ String description = prefs.getValue("description", StringPool.BLANK);
 boolean requireCaptcha = GetterUtil.getBoolean(prefs.getValue("requireCaptcha", StringPool.BLANK));
 %>
 
-<form enctype="multipart/form-data" action="<portlet:actionURL><portlet:param name="struts_action" value="/web_form/view" /></portlet:actionURL>" class="uni-form" id="<portlet:namespace />fm" method="post" name="<portlet:namespace />fm" >
+<form action="<portlet:actionURL><portlet:param name="struts_action" value="/web_form/view" /></portlet:actionURL>" class="uni-form" id="<portlet:namespace />fm" method="post" name="<portlet:namespace />fm" >
 <input type="hidden" name="<portlet:namespace/>redirect" value="<%= currentURL %>" />
 
 <fieldset class="block-labels">
@@ -42,10 +42,6 @@ boolean requireCaptcha = GetterUtil.getBoolean(prefs.getValue("requireCaptcha", 
 
 	<liferay-ui:error exception="<%= CaptchaTextException.class %>" message="text-verification-failed" />
 	<liferay-ui:error key="error" message="an-error-occurred-while-sending-the-form-information" />
-
-	<liferay-ui:error key="uploadFailed" message="upload-failed" />
-	<liferay-ui:error key="uploadFileNameIllegal" message="upload-file-name-illegal" />
-	<liferay-ui:error key="uploadFileTooLarge" message="upload-file-too-large" />
 
 	<%
 	int i = 1;
@@ -140,13 +136,6 @@ boolean requireCaptcha = GetterUtil.getBoolean(prefs.getValue("requireCaptcha", 
 						%>
 
 					</select>
-				</div>
-			</c:when>
-			<c:when test='<%= fieldType.equals("file") %>'>
-				<div class="ctrl-holder">
-					<label class='<%= fieldOptional ? "optional" : "" %>' for="<portlet:namespace /><%= fieldName %>"><%= HtmlUtil.escape(fieldLabel) %></label>
-
-					<input id="<portlet:namespace /><%= fieldName %>" name="<portlet:namespace /><%= fieldName %>" type="file" />
 				</div>
 			</c:when>
 		</c:choose>

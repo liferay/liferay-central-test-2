@@ -80,13 +80,6 @@ public class ConfigurationActionImpl implements ConfigurationAction {
 		boolean saveToFile = ParamUtil.getBoolean(actionRequest, "saveToFile");
 		String fileName = ParamUtil.getString(actionRequest, "fileName");
 
-		boolean uploadToDL = ParamUtil.getBoolean(
-				actionRequest, "uploadToDL");
-		boolean uploadToDisk = ParamUtil.getBoolean(
-				actionRequest, "uploadToDisk");
-		String uploadDiskDir = ParamUtil.getString(
-				actionRequest, "uploadDiskDir");
-
 		boolean updateFields = ParamUtil.getBoolean(
 			actionRequest, "updateFields");
 
@@ -157,10 +150,6 @@ public class ConfigurationActionImpl implements ConfigurationAction {
 				portletResource);
 
 			prefs.setValue("databaseTableName", databaseTableName);
-
-			prefs.setValue("uploadToDL", String.valueOf(uploadToDL));
-			prefs.setValue("uploadToDisk", String.valueOf(uploadToDisk));
-			prefs.setValue("uploadDiskDir", uploadDiskDir);
 
 			String fieldLabel = ParamUtil.getString(
 				actionRequest, "fieldLabel" + i);

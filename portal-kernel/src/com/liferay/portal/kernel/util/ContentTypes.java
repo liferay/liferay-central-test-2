@@ -32,8 +32,6 @@ public interface ContentTypes {
 
 	public static final String APPLICATION_TEXT = "application/text";
 
-	public static final String APPLICATION_ZIP = "application/zip";
-
 	public static final String HTTPD_UNIX_DIRECTORY = "httpd/unix-directory";
 
 	public static final String MESSAGE_RFC822 = "message/rfc822";

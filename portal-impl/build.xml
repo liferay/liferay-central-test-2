@@ -583,12 +583,6 @@ ${exception.message}
 		</antcall>
 	</target>
 
-	<target name="build-service-portlet-webform">
-		<antcall target="build-service">
-			<param name="service.file" value="src/com/liferay/portlet/webform/service.xml" />
-		</antcall>
-	</target>
-
 	<target name="build-service-portlet-wiki">
 		<antcall target="build-service">
 			<param name="service.file" value="src/com/liferay/portlet/wiki/service.xml" />
@@ -618,7 +612,6 @@ ${exception.message}
 		<antcall target="build-service-portlet-softwarecatalog" />
 		<antcall target="build-service-portlet-tags" />
 		<antcall target="build-service-portlet-tasks" />
-		<antcall target="build-service-portlet-webform" />
 		<antcall target="build-service-portlet-wiki" />
 		<antcall target="build-service-portlet-workflow" />
 	</target>
@@ -748,12 +741,6 @@ ${exception.message}
 		</antcall>
 	</target>
 
-	<target name="build-wsdd-portlet-webform">
-		<antcall target="build-wsdd">
-			<param name="service.file" value="src/com/liferay/portlet/webform/service.xml" />
-		</antcall>
-	</target>
-
 	<target name="build-wsdd-portlet-wiki">
 		<antcall target="build-wsdd">
 			<param name="service.file" value="src/com/liferay/portlet/wiki/service.xml" />
@@ -782,7 +769,6 @@ ${exception.message}
 		<antcall target="build-wsdd-portlet-softwarecatalog" />
 		<antcall target="build-wsdd-portlet-tags" />
 		<antcall target="build-wsdd-portlet-tasks" />
-		<antcall target="build-wsdd-portlet-webform" />
 		<antcall target="build-wsdd-portlet-wiki" />
 		<antcall target="build-wsdd-portlet-workflow" />
 	</target>
