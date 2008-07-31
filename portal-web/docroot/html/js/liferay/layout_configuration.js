@@ -285,7 +285,7 @@ var LayoutConfiguration = {
 					'sortstart.sortable',
 					function(event, ui) {
 						if (ui.item.is('.lfr-portlet-item')) {
-							ui.item.css(
+							ui.placeholder.css(
 								{
 									height: 200,
 									width: 300

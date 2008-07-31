@@ -29,6 +29,8 @@ var setDataSwitch = {
 
 $.widget("ui.dialog", {
 	init: function() {
+		this.options.title = this.options.title || this.element.attr('title');
+		
 		var self = this,
 			options = this.options,
 			resizeHandles = typeof options.resizable == 'string'
@@ -40,11 +42,15 @@ $.widget("ui.dialog", {
 				.wrap('<div/>')
 				.wrap('<div/>'),
 			
-			uiDialogContainer = (this.uiDialogContainer = uiDialogContent.parent()
+			uiDialogContainer = (this.uiDialogContainer = uiDialogContent.parent())
 				.addClass('ui-dialog-container')
-				.css({position: 'relative', width: '100%', height: '100%'})),
+				.css({
+					position: 'relative',
+					width: '100%',
+					height: '100%'
+				}),
 			
-			title = options.title || uiDialogContent.attr('title') || '',
+			title = options.title || '&nbsp;',
 			uiDialogTitlebar = (this.uiDialogTitlebar =
 				$('<div class="ui-dialog-titlebar"/>'))
 				.append('<span class="ui-dialog-title">' + title + '</span>')
@@ -80,7 +86,11 @@ $.widget("ui.dialog", {
 				}),
 			
 			uiDialogButtonPane = (this.uiDialogButtonPane = $('<div/>'))
-				.addClass('ui-dialog-buttonpane').css({ position: 'absolute', bottom: 0 })
+				.addClass('ui-dialog-buttonpane')
+				.css({
+					position: 'absolute',
+					bottom: 0
+				})
 				.appendTo(uiDialog);
 		
 		this.uiDialogTitlebarClose = $('.ui-dialog-titlebar-close', uiDialogTitlebar)
@@ -99,24 +109,24 @@ $.widget("ui.dialog", {
 				self.close();
 				return false;
 			});
-
-		this.uiDialogTitlebar.find("*").add(this.uiDialogTitlebar).each(function() {
+		
+		uiDialogTitlebar.find("*").add(uiDialogTitlebar).each(function() {
 			$.ui.disableSelection(this);
 		});
-
+		
 		if ($.fn.draggable) {
 			uiDialog.draggable({
 				cancel: '.ui-dialog-content',
 				helper: options.dragHelper,
 				handle: '.ui-dialog-titlebar',
-				start: function(e, ui) {
+				start: function() {
 					self.moveToTop();
 					(options.dragStart && options.dragStart.apply(self.element[0], arguments));
 				},
-				drag: function(e, ui) {
+				drag: function() {
 					(options.drag && options.drag.apply(self.element[0], arguments));
 				},
-				stop: function(e, ui) {
+				stop: function() {
 					(options.dragStop && options.dragStop.apply(self.element[0], arguments));
 					$.ui.dialog.overlay.resize();
 				}
@@ -135,12 +145,12 @@ $.widget("ui.dialog", {
 				start: function() {
 					(options.resizeStart && options.resizeStart.apply(self.element[0], arguments));
 				},
-				resize: function(e, ui) {
+				resize: function() {
 					(options.autoResize && self.size.apply(self));
 					(options.resize && options.resize.apply(self.element[0], arguments));
 				},
 				handles: resizeHandles,
-				stop: function(e, ui) {
+				stop: function() {
 					(options.autoResize && self.size.apply(self));
 					(options.resizeStop && options.resizeStop.apply(self.element[0], arguments));
 					$.ui.dialog.overlay.resize();
@@ -176,7 +186,7 @@ $.widget("ui.dialog", {
 				this.uiDialog.resizable(value ? 'enable' : 'disable');
 				break;
 			case "title":
-				$(".ui-dialog-title", this.uiDialogTitlebar).text(value);
+				$(".ui-dialog-title", this.uiDialogTitlebar).html(value || '&nbsp;');
 				break;
 			case "width":
 				this.uiDialog.width(value);
@@ -236,13 +246,15 @@ $.widget("ui.dialog", {
 		pTop = Math.max(pTop, minTop);
 		this.uiDialog.css({top: pTop, left: pLeft});
 	},
-
+	
 	size: function() {
 		var container = this.uiDialogContainer,
 			titlebar = this.uiDialogTitlebar,
 			content = this.element,
-			tbMargin = parseInt(content.css('margin-top'),10) + parseInt(content.css('margin-bottom'),10),
-			lrMargin = parseInt(content.css('margin-left'),10) + parseInt(content.css('margin-right'),10);
+			tbMargin = (parseInt(content.css('margin-top'), 10) || 0)
+				+ (parseInt(content.css('margin-bottom'), 10) || 0),
+			lrMargin = (parseInt(content.css('margin-left'), 10) || 0)
+				+ (parseInt(content.css('margin-right'), 10) || 0);
 		content.height(container.height() - titlebar.outerHeight() - tbMargin);
 		content.width(container.width() - lrMargin);
 	},
@@ -251,28 +263,24 @@ $.widget("ui.dialog", {
 		if (this.isOpen) { return; }
 		
 		this.overlay = this.options.modal ? new $.ui.dialog.overlay(this) : null;
-		(this.uiDialog.next().length > 0) && this.uiDialog.appendTo('body');
+		(this.uiDialog.next().length && this.uiDialog.appendTo('body'));
 		this.position(this.options.position);
 		this.uiDialog.show(this.options.show);
-		this.options.autoResize && this.size();
+		(this.options.autoResize && this.size());
 		this.moveToTop(true);
 		
-		// CALLBACK: open
-		var openEV = null;
-		var openUI = {
-			options: this.options
-		};
-		this.uiDialogTitlebarClose.focus();
-		this.element.triggerHandler("dialogopen", [openEV, openUI], this.options.open);
-		
+		this.trigger('open', null, { options: this.options });
 		this.isOpen = true;
 	},
 	
 	// the force parameter allows us to move modal dialogs to their correct
 	// position on open
 	moveToTop: function(force) {
+		
 		if ((this.options.modal && !force)
-			|| (!this.options.stack && !this.options.modal)) { return this.element.triggerHandler("dialogfocus", [null, { options: this.options }], this.options.focus); }
+			|| (!this.options.stack && !this.options.modal)) {
+			return this.trigger('focus', null, { options: this.options });
+		}
 		
 		var maxZ = this.options.zIndex, options = this.options;
 		$('.ui-dialog:visible').each(function() {
@@ -281,19 +289,14 @@ $.widget("ui.dialog", {
 		(this.overlay && this.overlay.$el.css('z-index', ++maxZ));
 		this.uiDialog.css('z-index', ++maxZ);
 		
-		this.element.triggerHandler("dialogfocus", [null, { options: this.options }], this.options.focus);
+		this.trigger('focus', null, { options: this.options });
 	},
 	
 	close: function() {
 		(this.overlay && this.overlay.destroy());
 		this.uiDialog.hide(this.options.hide);
-
-		// CALLBACK: close
-		var closeEV = null;
-		var closeUI = {
-			options: this.options
-		};
-		this.element.triggerHandler("dialogclose", [closeEV, closeUI], this.options.close);
+		
+		this.trigger('close', null, { options: this.options });
 		$.ui.dialog.overlay.resize();
 		
 		this.isOpen = false;
@@ -328,6 +331,13 @@ $.widget("ui.dialog", {
 					.appendTo(uiDialogButtonPane);
 			});
 		}
+	},
+	
+	fakeEvent: function(type) {
+		return $.event.fix({
+			type: type,
+			target: this.element[0]
+		});
 	}
 });
 
@@ -423,6 +433,7 @@ $.extend($.ui.dialog.overlay, {
 	},
 	
 	height: function() {
+		// handle IE 6
 		if ($.browser.msie && $.browser.version < 7) {
 			var scrollHeight = Math.max(
 				document.documentElement.scrollHeight,
@@ -438,12 +449,20 @@ $.extend($.ui.dialog.overlay, {
 			} else {
 				return scrollHeight + 'px';
 			}
+		// handle Opera
+		} else if ($.browser.opera) {
+			return Math.max(
+				window.innerHeight,
+				$(document).height()
+			) + 'px';
+		// handle "good" browsers
 		} else {
 			return $(document).height() + 'px';
 		}
 	},
 	
 	width: function() {
+		// handle IE 6
 		if ($.browser.msie && $.browser.version < 7) {
 			var scrollWidth = Math.max(
 				document.documentElement.scrollWidth,
@@ -459,6 +478,13 @@ $.extend($.ui.dialog.overlay, {
 			} else {
 				return scrollWidth + 'px';
 			}
+		// handle Opera
+		} else if ($.browser.opera) {
+			return Math.max(
+				window.innerWidth,
+				$(document).width()
+			) + 'px';
+		// handle "good" browsers
 		} else {
 			return $(document).width() + 'px';
 		}

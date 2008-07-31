@@ -1,18 +1,16 @@
 /*
- * Autocomplete - jQuery plugin 1.0.1pre
+ * jQuery UI Autocomplete
  *
- * Copyright (c) 2007 Dylan Verheul, Dan G. Switzer, Anjesh Tuladhar, Jörn Zaefferer
+ * Copyright (c) 2007, 2008 Dylan Verheul, Dan G. Switzer, Anjesh Tuladhar, Jörn Zaefferer
+ * Dual licensed under the MIT (MIT-LICENSE.txt)
+ * and GPL (GPL-LICENSE.txt) licenses.
+ * 
+ * http://docs.jquery.com/UI/Autocomplete
  *
- * Dual licensed under the MIT and GPL licenses:
- *   http://www.opensource.org/licenses/mit-license.php
- *   http://www.gnu.org/licenses/gpl.html
- *
- * Revision: $Id: jquery.autocomplete.js 5698 2008-05-27 13:53:30Z paul.bakaus $
- *
+ * Depends:
+ *	ui.core.js
  */
-
-;(function($) {
-
+(function($) {
 
 $.widget("ui.autocomplete", {
 	
@@ -46,7 +44,6 @@ $.widget("ui.autocomplete", {
 	}
 	
 });
-
 
 $.Autocompleter = function(input, options) {
 
@@ -355,14 +352,14 @@ $.Autocompleter = function(input, options) {
 				}
 			});
 		}
+
 		else if (options.source && typeof options.source == 'function') {
 			var resultData = options.source(term);
 			var parsed = (options.parse) ? options.parse(resultData) : resultData;
 
 			cache.add(term, parsed);
 			success(term, parsed);
-		}
-		 else {
+		} else {
 			// if we have a failure, we need to empty the list -- this prevents the the [TAB] key from selecting the last successful match
 			select.emptyList();
 			failure(term);

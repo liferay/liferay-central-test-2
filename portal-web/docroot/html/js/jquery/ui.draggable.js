@@ -15,38 +15,31 @@
 $.widget("ui.draggable", $.extend({}, $.ui.mouse, {
 	init: function() {
 		
-		//Initialize needed constants
-		var o = this.options, positioned = /^(?:r|a|f)/, element = this.element[0];
+		if (this.options.helper == 'original' && !(/^(?:r|a|f)/).test(this.element.css("position")))
+			this.element[0].style.position = 'relative';
 		
-		if (!this.element.length)
-			return false;
-
-		var style = element.style || {}, 
-			position = style.position || "static"; 
-		
-		//Position the node
-		if (o.helper == 'original' && !positioned.test(position))
-			style.position = 'relative';
-
-		(o.disabled && this.element.addClass('ui-draggable-disabled'));
+		(this.options.cssNamespace && this.element.addClass(this.options.cssNamespace+"-draggable"));
+		(this.options.disabled && this.element.addClass('ui-draggable-disabled'));
 		
 		this.mouseInit();
 		
 	},
 	mouseStart: function(e) {
+		
 		var o = this.options;
 		
-		if (this.helper || o.disabled || $(e.target).is('.ui-resizable-handle')) return false;
+		if (this.helper || o.disabled || $(e.target).is('.ui-resizable-handle'))
+			return false;
 		
+		//Check if we have a valid handle
 		var handle = !this.options.handle || !$(this.options.handle, this.element).length ? true : false;
-		
-	
 		$(this.options.handle, this.element).find("*").andSelf().each(function() {
 			if(this == e.target) handle = true;
 		});
 		if (!handle) return false;
 		
-		if($.ui.ddmanager) $.ui.ddmanager.current = this;
+		if($.ui.ddmanager)
+			$.ui.ddmanager.current = this;
 		
 		//Create and append the visible helper
 		this.helper = $.isFunction(o.helper) ? $(o.helper.apply(this.element[0], [e])) : (o.helper == 'clone' ? this.element.clone() : this.element);
@@ -74,6 +67,15 @@ $.widget("ui.draggable", $.extend({}, $.ui.mouse, {
 			left: e.pageX - this.offset.left,
 			top: e.pageY - this.offset.top
 		};
+
+		this.scrollTopParent = function(el) {
+			do { if(/auto|scroll/.test(el.css('overflow')) || (/auto|scroll/).test(el.css('overflow-y'))) return el; el = el.parent(); } while (el[0].parentNode);
+			return $(document);
+		}(this.helper);
+		this.scrollLeftParent = function(el) {
+			do { if(/auto|scroll/.test(el.css('overflow')) || (/auto|scroll/).test(el.css('overflow-x'))) return el; el = el.parent(); } while (el[0].parentNode);
+			return $(document);
+		}(this.helper);
 		
 		this.offsetParent = this.helper.offsetParent(); var po = this.offsetParent.offset();			//Get the offsetParent and cache its position
 		if(this.offsetParent[0] == document.body && $.browser.mozilla) po = { top: 0, left: 0 };		//Ugly FF3 fix
@@ -84,8 +86,8 @@ $.widget("ui.draggable", $.extend({}, $.ui.mouse, {
 		
 		var p = this.element.position();																//This is a relative to absolute position minus the actual position calculation - only used for relative positioned helpers
 		this.offset.relative = this.cssPosition == "relative" ? {
-			top: p.top - (parseInt(this.helper.css("top"),10) || 0) + this.offsetParent[0].scrollTop,
-			left: p.left - (parseInt(this.helper.css("left"),10) || 0) + this.offsetParent[0].scrollLeft
+			top: p.top - (parseInt(this.helper.css("top"),10) || 0) + (this.scrollTopParent[0].scrollTop || 0),
+			left: p.left - (parseInt(this.helper.css("left"),10) || 0) + (this.scrollLeftParent[0].scrollLeft || 0)
 		} : { top: 0, left: 0 };
 		
 		this.originalPosition = this.generatePosition(e);												//Generate the original position
@@ -144,7 +146,7 @@ $.widget("ui.draggable", $.extend({}, $.ui.mouse, {
 				pos.top																	// the calculated relative position
 				+ this.offset.relative.top	* mod										// Only for relative positioned nodes: Relative offset from element to offset parent
 				+ this.offset.parent.top * mod											// The offsetParent's offset without borders (offset + border)
-				- (this.cssPosition == "fixed" || (this.cssPosition == "absolute" && this.offsetParent[0] == document.body) ? 0 : this.offsetParent[0].scrollTop) * mod	// The offsetParent's scroll position, not if the element is fixed
+				- (this.cssPosition == "fixed" || (this.cssPosition == "absolute" && this.offsetParent[0] == document.body) ? 0 : this.scrollTopParent[0].scrollTop) * mod	// The offsetParent's scroll position, not if the element is fixed
 				+ (this.cssPosition == "fixed" ? $(document).scrollTop() : 0) * mod
 				+ this.margins.top * mod												//Add the margin (you don't want the margin counting in intersection methods)
 			),
@@ -152,14 +154,14 @@ $.widget("ui.draggable", $.extend({}, $.ui.mouse, {
 				pos.left																// the calculated relative position
 				+ this.offset.relative.left	* mod										// Only for relative positioned nodes: Relative offset from element to offset parent
 				+ this.offset.parent.left * mod											// The offsetParent's offset without borders (offset + border)
-				- (this.cssPosition == "fixed" || (this.cssPosition == "absolute" && this.offsetParent[0] == document.body) ? 0 : this.offsetParent[0].scrollLeft) * mod	// The offsetParent's scroll position, not if the element is fixed
+				- (this.cssPosition == "fixed" || (this.cssPosition == "absolute" && this.offsetParent[0] == document.body) ? 0 : this.scrollLeftParent[0].scrollLeft) * mod	// The offsetParent's scroll position, not if the element is fixed
 				+ (this.cssPosition == "fixed" ? $(document).scrollLeft() : 0) * mod
 				+ this.margins.left * mod												//Add the margin (you don't want the margin counting in intersection methods)
 			)
 		};
 	},
 	generatePosition: function(e) {
-		
+
 		var o = this.options;
 		var position = {
 			top: (
@@ -167,7 +169,7 @@ $.widget("ui.draggable", $.extend({}, $.ui.mouse, {
 				- this.offset.click.top													// Click offset (relative to the element)
 				- this.offset.relative.top												// Only for relative positioned nodes: Relative offset from element to offset parent
 				- this.offset.parent.top												// The offsetParent's offset without borders (offset + border)
-				+ (this.cssPosition == "fixed" || (this.cssPosition == "absolute" && this.offsetParent[0] == document.body) ? 0 : this.offsetParent[0].scrollTop)	// The offsetParent's scroll position, not if the element is fixed
+				+ (this.cssPosition == "fixed" || (this.cssPosition == "absolute" && this.offsetParent[0] == document.body) ? 0 : (this.scrollTopParent[0].scrollTop || 0))	// The offsetParent's scroll position, not if the element is fixed
 				- (this.cssPosition == "fixed" ? $(document).scrollTop() : 0)
 			),
 			left: (
@@ -175,11 +177,11 @@ $.widget("ui.draggable", $.extend({}, $.ui.mouse, {
 				- this.offset.click.left												// Click offset (relative to the element)
 				- this.offset.relative.left												// Only for relative positioned nodes: Relative offset from element to offset parent
 				- this.offset.parent.left												// The offsetParent's offset without borders (offset + border)
-				+ (this.cssPosition == "fixed" || (this.cssPosition == "absolute" && this.offsetParent[0] == document.body) ? 0 : this.offsetParent[0].scrollLeft)	// The offsetParent's scroll position, not if the element is fixed
+				+ (this.cssPosition == "fixed" || (this.cssPosition == "absolute" && this.offsetParent[0] == document.body) ? 0 : (this.scrollLeftParent[0].scrollLeft || 0))	// The offsetParent's scroll position, not if the element is fixed
 				- (this.cssPosition == "fixed" ? $(document).scrollLeft() : 0)
 			)
 		};
-		
+	
 		if(!this.originalPosition) return position;										//If we are not dragging yet, we won't check for options
 		
 		/*
@@ -204,14 +206,14 @@ $.widget("ui.draggable", $.extend({}, $.ui.mouse, {
 		return position;
 	},
 	mouseDrag: function(e) {
-		
+	
 		//Compute the helpers position
 		this.position = this.generatePosition(e);
 		this.positionAbs = this.convertPositionTo("absolute");
 		
 		//Call plugins and callbacks and use the resulting position if something is returned		
 		this.position = this.propagate("drag", e) || this.position;
-		
+	
 		if(!this.options.axis || this.options.axis != "y") this.helper[0].style.left = this.position.left+'px';
 		if(!this.options.axis || this.options.axis != "x") this.helper[0].style.top = this.position.top+'px';
 		if($.ui.ddmanager) $.ui.ddmanager.drag(this, e);
@@ -227,7 +229,7 @@ $.widget("ui.draggable", $.extend({}, $.ui.mouse, {
 		
 		if((this.options.revert == "invalid" && !dropped) || (this.options.revert == "valid" && dropped) || this.options.revert === true) {
 			var self = this;
-			$(this.helper).animate(this.originalPosition, parseInt(this.options.revert, 10) || 500, function() {
+			$(this.helper).animate(this.originalPosition, parseInt(this.options.revertDuration, 10) || 500, function() {
 				self.propagate("stop", e);
 				self.clear();
 			});
@@ -275,7 +277,9 @@ $.extend($.ui.draggable, {
 		cancel: ":input",
 		delay: 0,
 		distance: 1,
-		helper: "original"
+		helper: "original",
+		scope: "default",
+		cssNamespace: "ui"
 	}
 });
 
@@ -329,6 +333,8 @@ $.ui.plugin.add("draggable", "iframeFix", {
 	}
 });
 
+
+
 $.ui.plugin.add("draggable", "scroll", {
 	start: function(e, ui) {
 		var o = ui.options;
@@ -351,43 +357,48 @@ $.ui.plugin.add("draggable", "scroll", {
 	},
 	drag: function(e, ui) {
 		
-		var o = ui.options;
+		var o = ui.options, scrolled = false;
 		var i = $(this).data("draggable");
 		
 		if(i.overflowY[0] != document && i.overflowY[0].tagName != 'HTML') {
 			if((i.overflowYOffset.top + i.overflowY[0].offsetHeight) - e.pageY < o.scrollSensitivity)
-				i.overflowY[0].scrollTop = i.overflowY[0].scrollTop + o.scrollSpeed;
+				i.overflowY[0].scrollTop = scrolled = i.overflowY[0].scrollTop + o.scrollSpeed;
 			if(e.pageY - i.overflowYOffset.top < o.scrollSensitivity)
-				i.overflowY[0].scrollTop = i.overflowY[0].scrollTop - o.scrollSpeed;
+				i.overflowY[0].scrollTop = scrolled = i.overflowY[0].scrollTop - o.scrollSpeed;
 							
 		} else {
 			if(e.pageY - $(document).scrollTop() < o.scrollSensitivity)
-				$(document).scrollTop($(document).scrollTop() - o.scrollSpeed);
+				scrolled = $(document).scrollTop($(document).scrollTop() - o.scrollSpeed);
 			if($(window).height() - (e.pageY - $(document).scrollTop()) < o.scrollSensitivity)
-				$(document).scrollTop($(document).scrollTop() + o.scrollSpeed);
+				scrolled = $(document).scrollTop($(document).scrollTop() + o.scrollSpeed);
 		}
 		
 		if(i.overflowX[0] != document && i.overflowX[0].tagName != 'HTML') {
 			if((i.overflowXOffset.left + i.overflowX[0].offsetWidth) - e.pageX < o.scrollSensitivity)
-				i.overflowX[0].scrollLeft = i.overflowX[0].scrollLeft + o.scrollSpeed;
+				i.overflowX[0].scrollLeft = scrolled = i.overflowX[0].scrollLeft + o.scrollSpeed;
 			if(e.pageX - i.overflowXOffset.left < o.scrollSensitivity)
-				i.overflowX[0].scrollLeft = i.overflowX[0].scrollLeft - o.scrollSpeed;
+				i.overflowX[0].scrollLeft = scrolled = i.overflowX[0].scrollLeft - o.scrollSpeed;
 		} else {
 			if(e.pageX - $(document).scrollLeft() < o.scrollSensitivity)
-				$(document).scrollLeft($(document).scrollLeft() - o.scrollSpeed);
+				scrolled = $(document).scrollLeft($(document).scrollLeft() - o.scrollSpeed);
 			if($(window).width() - (e.pageX - $(document).scrollLeft()) < o.scrollSensitivity)
-				$(document).scrollLeft($(document).scrollLeft() + o.scrollSpeed);
+				scrolled = $(document).scrollLeft($(document).scrollLeft() + o.scrollSpeed);
 		}
+		
+		if(scrolled !== false)
+			$.ui.ddmanager.prepareOffsets(i, e);
 		
 	}
 });
+
 
 $.ui.plugin.add("draggable", "snap", {
 	start: function(e, ui) {
 		
 		var inst = $(this).data("draggable");
 		inst.snapElements = [];
-		$(ui.options.snap === true ? ':data(draggable)' : ui.options.snap).each(function() {
+
+		$(ui.options.snap.constructor != String ? ( ui.options.snap.items || ':data(draggable)' ) : ui.options.snap).each(function() {
 			var $t = $(this); var $o = $t.offset();
 			if(this != inst.element[0]) inst.snapElements.push({
 				item: this,
@@ -398,7 +409,7 @@ $.ui.plugin.add("draggable", "snap", {
 		
 	},
 	drag: function(e, ui) {
-		
+	
 		var inst = $(this).data("draggable");
 		var d = ui.options.snapTolerance || 20;
 		var x1 = ui.absolutePosition.left, x2 = x1 + inst.helperProportions.width,
@@ -410,7 +421,11 @@ $.ui.plugin.add("draggable", "snap", {
 				t = inst.snapElements[i].top, b = t + inst.snapElements[i].height;
 			
 			//Yes, I know, this is insane ;)
-			if(!((l-d < x1 && x1 < r+d && t-d < y1 && y1 < b+d) || (l-d < x1 && x1 < r+d && t-d < y2 && y2 < b+d) || (l-d < x2 && x2 < r+d && t-d < y1 && y1 < b+d) || (l-d < x2 && x2 < r+d && t-d < y2 && y2 < b+d))) continue;
+			if(!((l-d < x1 && x1 < r+d && t-d < y1 && y1 < b+d) || (l-d < x1 && x1 < r+d && t-d < y2 && y2 < b+d) || (l-d < x2 && x2 < r+d && t-d < y1 && y1 < b+d) || (l-d < x2 && x2 < r+d && t-d < y2 && y2 < b+d))) {
+				if(inst.snapElements[i].snapping) (inst.options.snap.release && inst.options.snap.release.call(inst.element, null, $.extend(inst.uiHash(), { snapItem: inst.snapElements[i].item })));
+				inst.snapElements[i].snapping = false;
+				continue;
+			}
 			
 			if(ui.options.snapMode != 'inner') {
 				var ts = Math.abs(t - y2) <= 20;
@@ -423,6 +438,8 @@ $.ui.plugin.add("draggable", "snap", {
 				if(rs) ui.position.left = inst.convertPositionTo("relative", { top: 0, left: r }).left;
 			}
 			
+			var first = (ts || bs || ls || rs);
+			
 			if(ui.options.snapMode != 'outer') {
 				var ts = Math.abs(t - y1) <= 20;
 				var bs = Math.abs(b - y2) <= 20;
@@ -434,7 +451,12 @@ $.ui.plugin.add("draggable", "snap", {
 				if(rs) ui.position.left = inst.convertPositionTo("relative", { top: 0, left: r - inst.helperProportions.width }).left;
 			}
 			
+			if(!inst.snapElements[i].snapping && (ts || bs || ls || rs || first))
+				(inst.options.snap.snap && inst.options.snap.snap.call(inst.element, null, $.extend(inst.uiHash(), { snapItem: inst.snapElements[i].item })));
+			inst.snapElements[i].snapping = (ts || bs || ls || rs || first);
+			
 		};
+
 	}
 });
 

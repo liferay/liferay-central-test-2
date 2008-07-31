@@ -108,7 +108,7 @@ Liferay.Layout.Columns = {
 			handle: instance._handleSelector,
 			items: instance._boxSelector,
 			helper: instance._createHelper,
-			placeholder: 'portlet-sort-helper',
+			//placeholder: 'portlet-sort-helper',
 			tolerance: 'guess',
 			revert:	false,
 			distance: 2,
