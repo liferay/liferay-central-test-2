@@ -80,9 +80,6 @@ public interface PortletLocalService {
 		com.liferay.portal.model.Portlet portlet)
 		throws com.liferay.portal.SystemException;
 
-	public com.liferay.portal.model.Portlet deployRemotePortlet(
-		com.liferay.portal.model.Portlet remotePortlet);
-
 	public void destroyPortlet(com.liferay.portal.model.Portlet portlet);
 
 	public com.liferay.portal.model.PortletCategory getEARDisplay(

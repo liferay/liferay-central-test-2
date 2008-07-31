@@ -96,11 +96,6 @@ public class PortletLocalServiceUtil {
 		return _service.updatePortlet(portlet);
 	}
 
-	public static com.liferay.portal.model.Portlet deployRemotePortlet(
-		com.liferay.portal.model.Portlet remotePortlet) {
-		return _service.deployRemotePortlet(remotePortlet);
-	}
-
 	public static void destroyPortlet(com.liferay.portal.model.Portlet portlet) {
 		_service.destroyPortlet(portlet);
 	}
