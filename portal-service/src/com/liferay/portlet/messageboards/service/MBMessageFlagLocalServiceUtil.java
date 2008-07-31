@@ -105,9 +105,51 @@ public class MBMessageFlagLocalServiceUtil {
 		_service.addReadFlags(userId, messages);
 	}
 
+	public static void addQuestionFlag(long userId,
+		com.liferay.portlet.messageboards.model.MBMessage message)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
+		MBMessageFlagLocalService mbMessageFlagLocalService = MBMessageFlagLocalServiceFactory.getService();
+
+		mbMessageFlagLocalService.addQuestionFlag(userId, message);
+	}
+
+	public static void addAnswerFlag(long userId,
+		com.liferay.portlet.messageboards.model.MBMessage message)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
+		MBMessageFlagLocalService mbMessageFlagLocalService = MBMessageFlagLocalServiceFactory.getService();
+
+		mbMessageFlagLocalService.addAnswerFlag(userId, message);
+	}
+
 	public static void deleteFlags(long userId)
 		throws com.liferay.portal.SystemException {
 		_service.deleteFlags(userId);
+	}
+
+	public static boolean hasQuestionFlag(long messageId)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
+		MBMessageFlagLocalService mbMessageFlagLocalService = MBMessageFlagLocalServiceFactory.getService();
+
+		return mbMessageFlagLocalService.hasQuestionFlag(messageId);
+	}
+
+	public static boolean hasResolvedFlag(long messageId)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
+		MBMessageFlagLocalService mbMessageFlagLocalService = MBMessageFlagLocalServiceFactory.getService();
+
+		return mbMessageFlagLocalService.hasResolvedFlag(messageId);
+	}
+
+	public static boolean hasAnswerFlag(long messageId)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
+		MBMessageFlagLocalService mbMessageFlagLocalService = MBMessageFlagLocalServiceFactory.getService();
+
+		return mbMessageFlagLocalService.hasAnswerFlag(messageId);
 	}
 
 	public static boolean hasReadFlag(long userId, long messageId)

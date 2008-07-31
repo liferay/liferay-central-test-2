@@ -27,6 +27,7 @@ import com.liferay.portal.SystemException;
 import com.liferay.portal.model.User;
 import com.liferay.portlet.messageboards.model.MBMessage;
 import com.liferay.portlet.messageboards.model.MBMessageFlag;
+import com.liferay.portlet.messageboards.model.MBThread;
 import com.liferay.portlet.messageboards.model.impl.MBMessageFlagImpl;
 import com.liferay.portlet.messageboards.service.base.MBMessageFlagLocalServiceBaseImpl;
 
@@ -52,8 +53,7 @@ public class MBMessageFlagLocalServiceImpl
 		}
 
 		for (MBMessage message : messages) {
-			MBMessageFlag messageFlag = mbMessageFlagPersistence.fetchByU_M(
-				userId, message.getMessageId());
+			MBMessageFlag messageFlag = mbMessageFlagPersistence.fetchByU_M_F(userId, message.getMessageId(), MBMessageFlagImpl.READ_FLAG);
 
 			if (messageFlag == null) {
 				long messageFlagId = counterLocalService.increment();
@@ -69,8 +69,82 @@ public class MBMessageFlagLocalServiceImpl
 		}
 	}
 
+	public void addQuestionFlag(long userId, MBMessage message)
+		throws PortalException, SystemException {
+
+		User user = userPersistence.findByPrimaryKey(userId);
+
+		if (user.isDefaultUser()) {
+			return;
+		}
+
+			if (message.getUserId() == userId) {
+			MBMessageFlag messageFlag = mbMessageFlagPersistence.fetchByU_M_F(userId, message.getMessageId(), MBMessageFlagImpl.QUESTION_FLAG);
+			if (messageFlag == null) {
+				long messageFlagId = counterLocalService.increment();
+
+				messageFlag = mbMessageFlagPersistence.create(messageFlagId);
+			}
+
+				messageFlag.setUserId(userId);
+				messageFlag.setMessageId(message.getMessageId());
+				messageFlag.setFlag(MBMessageFlagImpl.QUESTION_FLAG);
+
+				mbMessageFlagPersistence.update(messageFlag, false);
+
+		}
+	}
+
+	public void addAnswerFlag(long userId, MBMessage message)
+		throws PortalException, SystemException {
+
+		User user = userPersistence.findByPrimaryKey(userId);
+
+		if (user.isDefaultUser()) {
+			return;
+		}
+		long threadId = message.getThreadId();
+		MBThread thread = this.mbThreadPersistence.fetchByPrimaryKey(threadId);
+		MBMessage rootMessage = this.mbMessagePersistence.findByPrimaryKey(thread.getRootMessageId());
+
+		if (rootMessage.getUserId() == userId) {
+			MBMessageFlag messageFlag = mbMessageFlagPersistence.fetchByM_F(rootMessage.getMessageId(), MBMessageFlagImpl.QUESTION_FLAG);
+			if (messageFlag != null) {
+				messageFlag.setFlag(MBMessageFlagImpl.RESOLVED_FLAG);
+				mbMessageFlagPersistence.update(messageFlag, false);
+			}
+
+			messageFlag = mbMessageFlagPersistence.fetchByM_F(message.getMessageId(), MBMessageFlagImpl.ANSWER_FLAG);
+			if (messageFlag == null) {
+				long messageFlagId = counterLocalService.increment();
+
+				messageFlag = mbMessageFlagPersistence.create(messageFlagId);
+			}
+
+				messageFlag.setUserId(userId);
+				messageFlag.setMessageId(message.getMessageId());
+				messageFlag.setFlag(MBMessageFlagImpl.ANSWER_FLAG);
+
+				mbMessageFlagPersistence.update(messageFlag, false);
+				return;
+		}
+	}
+
 	public void deleteFlags(long userId) throws SystemException {
 		mbMessageFlagPersistence.removeByUserId(userId);
+	}
+
+	public boolean hasQuestionFlag(long messageId)
+		throws PortalException, SystemException {
+		return this.mbMessageFlagPersistence.fetchByM_F(messageId, MBMessageFlagImpl.QUESTION_FLAG) != null;
+	}
+	public boolean hasResolvedFlag(long messageId)
+		throws PortalException, SystemException {
+		return this.mbMessageFlagPersistence.fetchByM_F(messageId, MBMessageFlagImpl.RESOLVED_FLAG) != null;
+	}
+	public boolean hasAnswerFlag(long messageId)
+		throws PortalException, SystemException {
+		return this.mbMessageFlagPersistence.fetchByM_F(messageId, MBMessageFlagImpl.ANSWER_FLAG) != null;
 	}
 
 	public boolean hasReadFlag(long userId, long messageId)
@@ -82,15 +156,14 @@ public class MBMessageFlagLocalServiceImpl
 			return true;
 		}
 
-		MBMessageFlag messageFlag = mbMessageFlagPersistence.fetchByU_M(
-			userId, messageId);
+		MBMessageFlag messageFlag = mbMessageFlagPersistence.fetchByU_M_F(userId, messageId, MBMessageFlagImpl.READ_FLAG);
 
 		if (messageFlag != null) {
 			return true;
-		}
+		    }
 		else {
-			return false;
-		}
+		return false;
+	}
 	}
 
 }

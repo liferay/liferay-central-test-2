@@ -62,6 +62,8 @@
 <%@ page import="com.liferay.portlet.messageboards.util.ThreadHits" %>
 <%@ page import="com.liferay.portlet.messageboards.util.comparator.MessageCreateDateComparator" %>
 <%@ page import="com.liferay.util.RSSUtil" %>
+<%@ page import="com.liferay.portlet.tags.model.TagsEntry" %>
+<%@ page import="com.liferay.portlet.tags.service.TagsEntryLocalServiceUtil" %>
 
 <%
 PortletPreferences prefs = renderRequest.getPreferences();

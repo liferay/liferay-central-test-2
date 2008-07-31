@@ -120,6 +120,29 @@
 							classPK="<%= message.getMessageId() %>"
 						/>
 					</div>
+					<%
+						if (MBMessageFlagLocalServiceUtil.hasResolvedFlag(message.getMessageId())) {
+					%>
+					<div class="question" style="color:blue;font-weight:bolder;">
+						<liferay-ui:icon image="checked" message="resolved" label="<%= true %>" />
+					</div>
+					<%
+						}
+						else if (MBMessageFlagLocalServiceUtil.hasQuestionFlag(message.getMessageId())) {
+					%>
+					<div class="question" style="color:red;font-weight:bolder;">
+						<liferay-ui:icon image="help" message="question" label="<%= true %>" />
+					</div>
+					<%
+						}
+						else if (MBMessageFlagLocalServiceUtil.hasAnswerFlag(message.getMessageId())) {
+					%>
+					<div class="question" style="color:blue;font-weight:bolder;">
+						<liferay-ui:icon image="checked" message="answer" label="<%= true %>" />
+					</div>
+					<%
+						}
+					%>
 
 					<%= dateFormatDateTime.format(message.getModifiedDate()) %>
 
@@ -151,6 +174,26 @@
 
 				<c:if test="<%= editable && (MBCategoryPermission.contains(permissionChecker, category, ActionKeys.ADD_MESSAGE) || MBCategoryPermission.contains(permissionChecker, category, ActionKeys.REPLY_TO_MESSAGE)) %>">
 					<ul class="edit-controls lfr-component">
+						<%
+							try {
+								MBMessage rootMessage=MBMessageLocalServiceUtil.getMBMessage(thread.getRootMessageId());
+								if (message.getParentMessageId() > 0 && 
+									rootMessage.getUserId() == user.getUserId() &&
+									(
+										MBMessageFlagLocalServiceUtil.hasQuestionFlag(rootMessage.getMessageId()) ||
+										MBMessageFlagLocalServiceUtil.hasResolvedFlag(rootMessage.getMessageId())
+									) &&
+									!MBMessageFlagLocalServiceUtil.hasAnswerFlag(message.getMessageId())) {
+									String surl = "javascript: Liferay.Messageboards.setAnswer(" + message.getMessageId() + ");location.reload(true);";
+						%>
+						<li>
+							<liferay-ui:icon image="checked" message="mark-as-an-answer" url="<%=surl%>" label="<%= true %>" />
+						</li>
+						<%
+								}
+							} catch (Exception e) {
+							}
+						%>
 						<li>
 							<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="replyURL">
 								<portlet:param name="struts_action" value="/message_boards/edit_message" />

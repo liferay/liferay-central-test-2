@@ -38,6 +38,7 @@ long parentMessageId = BeanParamUtil.getLong(message, request, "parentMessageId"
 String subject = BeanParamUtil.getString(message, request, "subject");
 
 MBMessage curParentMessage = null;
+MBThread thread = null;
 String parentAuthor = null;
 
 if (threadId > 0) {
@@ -309,7 +310,7 @@ if (message != null) {
 			double threadPriority = 0.0;
 
 			try {
-				MBThread thread = MBThreadLocalServiceUtil.getThread(threadId);
+				thread = MBThreadLocalServiceUtil.getThread(threadId);
 
 				threadPriority = thread.getPriority();
 			}
@@ -354,6 +355,7 @@ if (message != null) {
 		<br />
 	</td>
 </tr>
+
 <tr>
 	<td>
 		<liferay-ui:message key="tags" />
@@ -377,6 +379,45 @@ if (message != null) {
 	</td>
 </tr>
 
+<c:if test="<%= (parentMessageId <= 0) %>">
+<tr>
+	<td colspan="2">
+		<br />
+	</td>
+</tr>
+<tr>
+	<td>
+		<liferay-ui:message key="question" />
+	</td>
+	<td>
+	<%
+	boolean hasQuestionFlag = false;
+	boolean hasResolvedFlag = false;
+	if (message != null) {
+		hasQuestionFlag = MBMessageFlagLocalServiceUtil.hasQuestionFlag(message.getMessageId());
+		if (!hasQuestionFlag) {
+			hasResolvedFlag = MBMessageFlagLocalServiceUtil.hasResolvedFlag(message.getMessageId());
+		}
+	}
+	if (hasResolvedFlag) {
+	%>
+		<liferay-ui:message key="resolved" />
+	<%
+	}
+	if (hasQuestionFlag) {
+	%>
+		<liferay-ui:message key="question" />
+	<%
+	}
+	else {
+	%>
+		<input type="checkbox" name="<portlet:namespace />questionFlag" value="question" <%=(hasQuestionFlag?"CHECKED":"")%>/>
+	<%
+	}
+	%>
+	</td>
+</tr>
+</c:if>
 <c:if test="<%= message == null %>">
 	<tr>
 		<td colspan="2">
@@ -442,7 +483,7 @@ if (message != null) {
 <script type="text/javascript">
 	jQuery(document).ready(
 		function() {
-			<c:if test="<%= windowState.equals(WindowState.MAXIMIZED) && !themeDisplay.isFacebook() %>">
+			<c:if test="<%= windowState.equals(WindowState.MAXIMIZED)  && !themeDisplay.isFacebook() %>">
 				Liferay.Util.focusFormField(document.<portlet:namespace />fm.<portlet:namespace />subject);
 			</c:if>
 

@@ -212,9 +212,14 @@
 		<finder name="MessageId" return-type="Collection">
 			<finder-column name="messageId" />
 		</finder>
-		<finder name="U_M" return-type="MBMessageFlag">
+		<finder name="U_M_F" return-type="MBMessageFlag">
 			<finder-column name="userId" />
 			<finder-column name="messageId" />
+			<finder-column name="flag" />
+		</finder>
+		<finder name="M_F" return-type="MBMessageFlag">
+			<finder-column name="messageId" />
+			<finder-column name="flag" />
 		</finder>
 
 		<!-- References -->

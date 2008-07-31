@@ -181,6 +181,18 @@ public class MBMessageServiceJSON {
 		return returnValue;
 	}
 
+	public static void setMessageQuestion(long messageId)
+		throws java.rmi.RemoteException, com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
+		MBMessageServiceUtil.setMessageQuestion(messageId);
+	}
+
+	public static void setMessageAnswer(long messageId)
+		throws java.rmi.RemoteException, com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
+		MBMessageServiceUtil.setMessageAnswer(messageId);
+	}
+
 	public static void subscribeMessage(long messageId)
 		throws java.rmi.RemoteException, com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {

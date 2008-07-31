@@ -217,8 +217,10 @@ create index IX_A7038CD7 on MBMessage (threadId, parentMessageId);
 create index IX_C57B16BC on MBMessage (uuid_);
 
 create index IX_D180D4AE on MBMessageFlag (messageId);
+create index IX_A6973A8E on MBMessageFlag (messageId, flag);
 create index IX_7B2917BE on MBMessageFlag (userId);
 create index IX_94A83834 on MBMessageFlag (userId, messageId);
+create index IX_E9EB6194 on MBMessageFlag (userId, messageId, flag);
 
 create index IX_A00A898F on MBStatsUser (groupId);
 create index IX_FAB5A88B on MBStatsUser (groupId, messageCount);

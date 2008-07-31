@@ -133,13 +133,22 @@ public interface MBMessageFlagPersistence {
 		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.messageboards.NoSuchMessageFlagException;
 
-	public com.liferay.portlet.messageboards.model.MBMessageFlag findByU_M(
-		long userId, long messageId)
+	public com.liferay.portlet.messageboards.model.MBMessageFlag findByU_M_F(
+		long userId, long messageId, int flag)
 		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.messageboards.NoSuchMessageFlagException;
 
-	public com.liferay.portlet.messageboards.model.MBMessageFlag fetchByU_M(
-		long userId, long messageId) throws com.liferay.portal.SystemException;
+	public com.liferay.portlet.messageboards.model.MBMessageFlag fetchByU_M_F(
+		long userId, long messageId, int flag)
+		throws com.liferay.portal.SystemException;
+
+	public com.liferay.portlet.messageboards.model.MBMessageFlag findByM_F(
+		long messageId, int flag)
+		throws com.liferay.portal.SystemException,
+			com.liferay.portlet.messageboards.NoSuchMessageFlagException;
+
+	public com.liferay.portlet.messageboards.model.MBMessageFlag fetchByM_F(
+		long messageId, int flag) throws com.liferay.portal.SystemException;
 
 	public java.util.List<Object> findWithDynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery)
@@ -165,7 +174,11 @@ public interface MBMessageFlagPersistence {
 	public void removeByMessageId(long messageId)
 		throws com.liferay.portal.SystemException;
 
-	public void removeByU_M(long userId, long messageId)
+	public void removeByU_M_F(long userId, long messageId, int flag)
+		throws com.liferay.portal.SystemException,
+			com.liferay.portlet.messageboards.NoSuchMessageFlagException;
+
+	public void removeByM_F(long messageId, int flag)
 		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.messageboards.NoSuchMessageFlagException;
 
@@ -177,7 +190,10 @@ public interface MBMessageFlagPersistence {
 	public int countByMessageId(long messageId)
 		throws com.liferay.portal.SystemException;
 
-	public int countByU_M(long userId, long messageId)
+	public int countByU_M_F(long userId, long messageId, int flag)
+		throws com.liferay.portal.SystemException;
+
+	public int countByM_F(long messageId, int flag)
 		throws com.liferay.portal.SystemException;
 
 	public int countAll() throws com.liferay.portal.SystemException;

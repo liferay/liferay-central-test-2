@@ -623,6 +623,25 @@ public class MBMessageServiceImpl extends MBMessageServiceBaseImpl {
 			messages, themeDisplay);
 	}
 
+	public void setMessageQuestion(long messageId)
+		throws PortalException, SystemException {
+
+		MBMessagePermission.check(
+			getPermissionChecker(), messageId, ActionKeys.UPDATE);
+
+		mbMessageLocalService.setQuestion(getUserId(), messageId);
+	}
+
+	public void setMessageAnswer(long messageId)
+		throws PortalException, SystemException {
+
+//		MBMessage message = mbMessageLocalService.getMessage(messageId);
+//		MBMessagePermission.check(
+//			getPermissionChecker(), messageId, ActionKeys.UPDATE);
+
+		mbMessageLocalService.setAnswer(getUserId(), messageId);
+	}
+
 	public void subscribeMessage(long messageId)
 		throws PortalException, SystemException {
 

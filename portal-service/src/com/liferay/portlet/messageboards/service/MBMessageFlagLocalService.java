@@ -88,8 +88,30 @@ public interface MBMessageFlagLocalService {
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;
 
+	public void addQuestionFlag(long userId,
+		com.liferay.portlet.messageboards.model.MBMessage message)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException;
+
+	public void addAnswerFlag(long userId,
+		com.liferay.portlet.messageboards.model.MBMessage message)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException;
+
 	public void deleteFlags(long userId)
 		throws com.liferay.portal.SystemException;
+
+	public boolean hasQuestionFlag(long messageId)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException;
+
+	public boolean hasResolvedFlag(long messageId)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException;
+
+	public boolean hasAnswerFlag(long messageId)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException;
 
 	public boolean hasReadFlag(long userId, long messageId)
 		throws com.liferay.portal.PortalException,
