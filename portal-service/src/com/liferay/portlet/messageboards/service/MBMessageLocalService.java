@@ -365,14 +365,6 @@ public interface MBMessageLocalService {
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;
 
-	public void setQuestion(long userId, long messageId)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException;
-
-	public void setAnswer(long userId, long messageId)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException;
-
 	public com.liferay.portlet.messageboards.model.MBMessage updateMessage(
 		long messageId, java.util.Date createDate, java.util.Date modifiedDate)
 		throws com.liferay.portal.PortalException,

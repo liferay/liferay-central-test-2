@@ -257,22 +257,6 @@ public class MBMessageServiceUtil {
 			displayStyle, feedURL, entryURL, themeDisplay);
 	}
 
-	public static void setMessageQuestion(long messageId)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException, java.rmi.RemoteException {
-		MBMessageService mbMessageService = MBMessageServiceFactory.getService();
-
-		mbMessageService.setMessageQuestion(messageId);
-	}
-
-	public static void setMessageAnswer(long messageId)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException, java.rmi.RemoteException {
-		MBMessageService mbMessageService = MBMessageServiceFactory.getService();
-
-		mbMessageService.setMessageAnswer(messageId);
-	}
-
 	public static void subscribeMessage(long messageId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {

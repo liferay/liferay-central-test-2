@@ -723,9 +723,9 @@ public class MBMessageFlagPersistenceImpl extends BasePersistenceImpl
 		}
 	}
 
-	public MBMessageFlag findByU_M_F(long userId, long messageId, int flag)
+	public MBMessageFlag findByU_M(long userId, long messageId)
 		throws NoSuchMessageFlagException, SystemException {
-		MBMessageFlag mbMessageFlag = fetchByU_M_F(userId, messageId, flag);
+		MBMessageFlag mbMessageFlag = fetchByU_M(userId, messageId);
 
 		if (mbMessageFlag == null) {
 			StringBuilder msg = new StringBuilder();
@@ -736,9 +736,6 @@ public class MBMessageFlagPersistenceImpl extends BasePersistenceImpl
 
 			msg.append(", ");
 			msg.append("messageId=" + messageId);
-
-			msg.append(", ");
-			msg.append("flag=" + flag);
 
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
 
@@ -752,18 +749,15 @@ public class MBMessageFlagPersistenceImpl extends BasePersistenceImpl
 		return mbMessageFlag;
 	}
 
-	public MBMessageFlag fetchByU_M_F(long userId, long messageId, int flag)
+	public MBMessageFlag fetchByU_M(long userId, long messageId)
 		throws SystemException {
 		boolean finderClassNameCacheEnabled = MBMessageFlagModelImpl.CACHE_ENABLED;
 		String finderClassName = MBMessageFlag.class.getName();
-		String finderMethodName = "fetchByU_M_F";
+		String finderMethodName = "fetchByU_M";
 		String[] finderParams = new String[] {
-				Long.class.getName(), Long.class.getName(),
-				Integer.class.getName()
+				Long.class.getName(), Long.class.getName()
 			};
-		Object[] finderArgs = new Object[] {
-				new Long(userId), new Long(messageId), new Integer(flag)
-			};
+		Object[] finderArgs = new Object[] { new Long(userId), new Long(messageId) };
 
 		Object result = null;
 
@@ -789,10 +783,6 @@ public class MBMessageFlagPersistenceImpl extends BasePersistenceImpl
 
 				query.append("messageId = ?");
 
-				query.append(" AND ");
-
-				query.append("flag = ?");
-
 				query.append(" ");
 
 				Query q = session.createQuery(query.toString());
@@ -802,112 +792,6 @@ public class MBMessageFlagPersistenceImpl extends BasePersistenceImpl
 				qPos.add(userId);
 
 				qPos.add(messageId);
-
-				qPos.add(flag);
-
-				List<MBMessageFlag> list = q.list();
-
-				FinderCacheUtil.putResult(finderClassNameCacheEnabled,
-					finderClassName, finderMethodName, finderParams,
-					finderArgs, list);
-
-				if (list.size() == 0) {
-					return null;
-				}
-				else {
-					return list.get(0);
-				}
-			}
-			catch (Exception e) {
-				throw processException(e);
-			}
-			finally {
-				closeSession(session);
-			}
-		}
-		else {
-			List<MBMessageFlag> list = (List<MBMessageFlag>)result;
-
-			if (list.size() == 0) {
-				return null;
-			}
-			else {
-				return list.get(0);
-			}
-		}
-	}
-
-	public MBMessageFlag findByM_F(long messageId, int flag)
-		throws NoSuchMessageFlagException, SystemException {
-		MBMessageFlag mbMessageFlag = fetchByM_F(messageId, flag);
-
-		if (mbMessageFlag == null) {
-			StringBuilder msg = new StringBuilder();
-
-			msg.append("No MBMessageFlag exists with the key {");
-
-			msg.append("messageId=" + messageId);
-
-			msg.append(", ");
-			msg.append("flag=" + flag);
-
-			msg.append(StringPool.CLOSE_CURLY_BRACE);
-
-			if (_log.isWarnEnabled()) {
-				_log.warn(msg.toString());
-			}
-
-			throw new NoSuchMessageFlagException(msg.toString());
-		}
-
-		return mbMessageFlag;
-	}
-
-	public MBMessageFlag fetchByM_F(long messageId, int flag)
-		throws SystemException {
-		boolean finderClassNameCacheEnabled = MBMessageFlagModelImpl.CACHE_ENABLED;
-		String finderClassName = MBMessageFlag.class.getName();
-		String finderMethodName = "fetchByM_F";
-		String[] finderParams = new String[] {
-				Long.class.getName(), Integer.class.getName()
-			};
-		Object[] finderArgs = new Object[] {
-				new Long(messageId), new Integer(flag)
-			};
-
-		Object result = null;
-
-		if (finderClassNameCacheEnabled) {
-			result = FinderCacheUtil.getResult(finderClassName,
-					finderMethodName, finderParams, finderArgs, this);
-		}
-
-		if (result == null) {
-			Session session = null;
-
-			try {
-				session = openSession();
-
-				StringBuilder query = new StringBuilder();
-
-				query.append(
-					"FROM com.liferay.portlet.messageboards.model.MBMessageFlag WHERE ");
-
-				query.append("messageId = ?");
-
-				query.append(" AND ");
-
-				query.append("flag = ?");
-
-				query.append(" ");
-
-				Query q = session.createQuery(query.toString());
-
-				QueryPos qPos = QueryPos.getInstance(q);
-
-				qPos.add(messageId);
-
-				qPos.add(flag);
 
 				List<MBMessageFlag> list = q.list();
 
@@ -1065,16 +949,9 @@ public class MBMessageFlagPersistenceImpl extends BasePersistenceImpl
 		}
 	}
 
-	public void removeByU_M_F(long userId, long messageId, int flag)
+	public void removeByU_M(long userId, long messageId)
 		throws NoSuchMessageFlagException, SystemException {
-		MBMessageFlag mbMessageFlag = findByU_M_F(userId, messageId, flag);
-
-		remove(mbMessageFlag);
-	}
-
-	public void removeByM_F(long messageId, int flag)
-		throws NoSuchMessageFlagException, SystemException {
-		MBMessageFlag mbMessageFlag = findByM_F(messageId, flag);
+		MBMessageFlag mbMessageFlag = findByU_M(userId, messageId);
 
 		remove(mbMessageFlag);
 	}
@@ -1217,18 +1094,15 @@ public class MBMessageFlagPersistenceImpl extends BasePersistenceImpl
 		}
 	}
 
-	public int countByU_M_F(long userId, long messageId, int flag)
+	public int countByU_M(long userId, long messageId)
 		throws SystemException {
 		boolean finderClassNameCacheEnabled = MBMessageFlagModelImpl.CACHE_ENABLED;
 		String finderClassName = MBMessageFlag.class.getName();
-		String finderMethodName = "countByU_M_F";
+		String finderMethodName = "countByU_M";
 		String[] finderParams = new String[] {
-				Long.class.getName(), Long.class.getName(),
-				Integer.class.getName()
+				Long.class.getName(), Long.class.getName()
 			};
-		Object[] finderArgs = new Object[] {
-				new Long(userId), new Long(messageId), new Integer(flag)
-			};
+		Object[] finderArgs = new Object[] { new Long(userId), new Long(messageId) };
 
 		Object result = null;
 
@@ -1255,10 +1129,6 @@ public class MBMessageFlagPersistenceImpl extends BasePersistenceImpl
 
 				query.append("messageId = ?");
 
-				query.append(" AND ");
-
-				query.append("flag = ?");
-
 				query.append(" ");
 
 				Query q = session.createQuery(query.toString());
@@ -1268,84 +1138,6 @@ public class MBMessageFlagPersistenceImpl extends BasePersistenceImpl
 				qPos.add(userId);
 
 				qPos.add(messageId);
-
-				qPos.add(flag);
-
-				Long count = null;
-
-				Iterator<Long> itr = q.list().iterator();
-
-				if (itr.hasNext()) {
-					count = itr.next();
-				}
-
-				if (count == null) {
-					count = new Long(0);
-				}
-
-				FinderCacheUtil.putResult(finderClassNameCacheEnabled,
-					finderClassName, finderMethodName, finderParams,
-					finderArgs, count);
-
-				return count.intValue();
-			}
-			catch (Exception e) {
-				throw processException(e);
-			}
-			finally {
-				closeSession(session);
-			}
-		}
-		else {
-			return ((Long)result).intValue();
-		}
-	}
-
-	public int countByM_F(long messageId, int flag) throws SystemException {
-		boolean finderClassNameCacheEnabled = MBMessageFlagModelImpl.CACHE_ENABLED;
-		String finderClassName = MBMessageFlag.class.getName();
-		String finderMethodName = "countByM_F";
-		String[] finderParams = new String[] {
-				Long.class.getName(), Integer.class.getName()
-			};
-		Object[] finderArgs = new Object[] {
-				new Long(messageId), new Integer(flag)
-			};
-
-		Object result = null;
-
-		if (finderClassNameCacheEnabled) {
-			result = FinderCacheUtil.getResult(finderClassName,
-					finderMethodName, finderParams, finderArgs, this);
-		}
-
-		if (result == null) {
-			Session session = null;
-
-			try {
-				session = openSession();
-
-				StringBuilder query = new StringBuilder();
-
-				query.append("SELECT COUNT(*) ");
-				query.append(
-					"FROM com.liferay.portlet.messageboards.model.MBMessageFlag WHERE ");
-
-				query.append("messageId = ?");
-
-				query.append(" AND ");
-
-				query.append("flag = ?");
-
-				query.append(" ");
-
-				Query q = session.createQuery(query.toString());
-
-				QueryPos qPos = QueryPos.getInstance(q);
-
-				qPos.add(messageId);
-
-				qPos.add(flag);
 
 				Long count = null;
 

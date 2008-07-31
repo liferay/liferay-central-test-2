@@ -46,7 +46,6 @@ import com.liferay.portlet.messageboards.MessageSubjectException;
 import com.liferay.portlet.messageboards.NoSuchMessageException;
 import com.liferay.portlet.messageboards.RequiredMessageException;
 import com.liferay.portlet.messageboards.model.MBMessage;
-import com.liferay.portlet.messageboards.service.MBMessageFlagLocalServiceUtil;
 import com.liferay.portlet.messageboards.service.MBMessageServiceUtil;
 import com.liferay.portlet.tags.TagsEntryException;
 
@@ -227,7 +226,6 @@ public class EditMessageAction extends PortletAction {
 			"communityPermissions");
 		String[] guestPermissions = actionRequest.getParameterValues(
 			"guestPermissions");
-		String questionFlag = ParamUtil.getString(actionRequest, "questionFlag");
 
 		MBMessage message = null;
 
@@ -272,10 +270,6 @@ public class EditMessageAction extends PortletAction {
 			message = MBMessageServiceUtil.updateMessage(
 				messageId, subject, body, files, existingFiles, priority,
 				tagsEntries, prefs, themeDisplay);
-		}
-
-		if ("question".equals(questionFlag)) {
-		    MBMessageFlagLocalServiceUtil.addQuestionFlag(message.getUserId(), message);
 		}
 
 		PortletURL portletURL =

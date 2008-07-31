@@ -1981,20 +1981,6 @@ Liferay.Service.MB.MBMessage = {
 		return Liferay.Service.ajax(params, callback);
 	},
 
-	setMessageQuestion: function(params, callback) {
-		params.serviceClassName = this.serviceClassName;
-		params.serviceMethodName = "setMessageQuestion";
-
-		return Liferay.Service.ajax(params, callback);
-	},
-
-	setMessageAnswer: function(params, callback) {
-		params.serviceClassName = this.serviceClassName;
-		params.serviceMethodName = "setMessageAnswer";
-
-		return Liferay.Service.ajax(params, callback);
-	},
-
 	subscribeMessage: function(params, callback) {
 		params.serviceClassName = this.serviceClassName;
 		params.serviceMethodName = "subscribeMessage";

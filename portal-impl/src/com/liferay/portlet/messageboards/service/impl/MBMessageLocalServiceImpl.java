@@ -1248,22 +1248,6 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 		return message;
 	}
 
-	public void setQuestion(long userId, long messageId)
-		throws PortalException, SystemException {
-
-		MBMessage message = this.mbMessagePersistence.fetchByPrimaryKey(messageId);
-		this.mbMessageFlagLocalService.addQuestionFlag(userId, message);
-
-	}
-
-	public void setAnswer(long userId, long messageId)
-		throws PortalException, SystemException {
-
-		MBMessage message = this.mbMessagePersistence.fetchByPrimaryKey(messageId);
-		this.mbMessageFlagLocalService.addAnswerFlag(userId, message);
-
-	}
-
 	public MBMessage updateMessage(
 			long messageId, Date createDate, Date modifiedDate)
 		throws PortalException, SystemException {

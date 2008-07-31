@@ -556,15 +556,3 @@ if (!Liferay.Editor.bbCode) {
 		}
 	});
 }
-
-if (!Liferay.Messageboards) {
-	Liferay.Messageboards = {
-		setAnswer: function(messageId) {
-			var r = Liferay.Service.MB.MBMessage.setMessageAnswer(
-					{
-						messageId: messageId
-					}
-				);
-		}
-	}
-}

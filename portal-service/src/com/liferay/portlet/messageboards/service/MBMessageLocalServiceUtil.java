@@ -509,22 +509,6 @@ public class MBMessageLocalServiceUtil {
 			existingFiles, priority, tagsEntries, prefs, themeDisplay);
 	}
 
-	public static void setQuestion(long userId, long messageId)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
-		MBMessageLocalService mbMessageLocalService = MBMessageLocalServiceFactory.getService();
-
-		mbMessageLocalService.setQuestion(userId, messageId);
-	}
-
-	public static void setAnswer(long userId, long messageId)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
-		MBMessageLocalService mbMessageLocalService = MBMessageLocalServiceFactory.getService();
-
-		mbMessageLocalService.setAnswer(userId, messageId);
-	}
-
 	public static com.liferay.portlet.messageboards.model.MBMessage updateMessage(
 		long messageId, java.util.Date createDate, java.util.Date modifiedDate)
 		throws com.liferay.portal.PortalException,

@@ -198,14 +198,6 @@ public interface MBMessageService {
 		throws java.rmi.RemoteException, com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;
 
-	public void setMessageQuestion(long messageId)
-		throws java.rmi.RemoteException, com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException;
-
-	public void setMessageAnswer(long messageId)
-		throws java.rmi.RemoteException, com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException;
-
 	public void subscribeMessage(long messageId)
 		throws java.rmi.RemoteException, com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;

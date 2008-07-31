@@ -36,9 +36,6 @@ public class MBMessageFlagImpl
 	extends MBMessageFlagModelImpl implements MBMessageFlag {
 
 	public static final int READ_FLAG = 1;
-	public static final int QUESTION_FLAG = 10;
-	public static final int RESOLVED_FLAG = 11;
-	public static final int ANSWER_FLAG = 12;
 
 	public MBMessageFlagImpl() {
 	}
