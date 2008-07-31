@@ -23,75 +23,37 @@
 package com.liferay.portal.spring.util;
 
 import com.liferay.portal.kernel.bean.InitializingBean;
-import com.liferay.portal.spring.context.ArrayApplicationContext;
-import com.liferay.portal.util.PropsKeys;
-import com.liferay.portal.util.PropsUtil;
 
 import org.springframework.context.ApplicationContext;
 
 /**
  * <a href="SpringUtil.java.html"><b><i>View Source</i></b></a>
  *
- * <p>
- * In most cases, SpringUtil.setContext() would have been called by
- * com.liferay.portal.spring.context.PortalContextLoaderListener, configured in
- * web.xml for the web application. However, there will be times in which
- * SpringUtil will be called in a non-web application and, therefore, require
- * manual instantiation of the application context.
- * </p>
- *
  * @author Michael Young
  *
  */
 public class SpringUtil {
 
-	public static ApplicationContext getContext() {
-		if (_applicationContext == null) {
-			System.out.println("Manually loading Spring context");
-
-			_applicationContext = new ArrayApplicationContext(
-				PropsUtil.getArray(PropsKeys.SPRING_CONFIGS));
-		}
-
-		return _applicationContext;
-	}
-
-	public static void initContext() {
-		if (_applicationContext == null) {
-			getContext();
-		}
-
-		initContext(_applicationContext);
-	}
-
 	public static void initContext(ApplicationContext applicationContext) {
-
+	
 		// Preinitialize Spring beans. See LEP-4734.
-
+	
 		String[] beanDefinitionNames =
 			applicationContext.getBeanDefinitionNames();
-
+	
 		for (String beanDefinitionName : beanDefinitionNames) {
 			applicationContext.getBean(beanDefinitionName);
 		}
-
+	
 		for (String beanDefinitionName : beanDefinitionNames) {
 			Object obj = applicationContext.getBean(beanDefinitionName);
-
+	
 			if (obj instanceof InitializingBean) {
 				InitializingBean initializingBean = (InitializingBean)obj;
-
+	
 				initializingBean.afterPropertiesSet();
 			}
 		}
 	}
-
-	public static void setContext(ApplicationContext applicationContext) {
-		_applicationContext = applicationContext;
-
-		initContext(applicationContext);
-	}
-
-	private static ApplicationContext _applicationContext = null;
 
 }

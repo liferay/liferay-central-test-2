@@ -20,55 +20,43 @@
  * SOFTWARE.
  */
 
-package com.liferay.portal.bean;
+package com.liferay.portal.kernel.jndi;
 
-import com.liferay.portal.kernel.bean.BeanLocator;
-import com.liferay.portal.kernel.bean.BeanLocatorException;
-import com.liferay.portal.spring.util.SpringUtil;
+import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import javax.mail.Session;
 
-import org.springframework.context.ApplicationContext;
+import javax.naming.NamingException;
+
+import javax.sql.DataSource;
 
 /**
- * <a href="BeanLocatorImpl.java.html"><b><i>View Source</i></b></a>
+ * <a href="InfrastructureUtil.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *
  */
-public class BeanLocatorImpl implements BeanLocator {
+public class InfrastructureUtil {
 
-	public BeanLocatorImpl() {
-		this(BeanLocatorImpl.class.getClassLoader(), null);
-	}
-
-	public BeanLocatorImpl(
-		ClassLoader classLoader, ApplicationContext applicationContext) {
-
-		_classLoader = classLoader;
-		_applicationContext = applicationContext;
-	}
-
-	public ClassLoader getClassLoader() {
-		return _classLoader;
-	}
-
-	public Object locate(String name) throws BeanLocatorException {
-		if (_applicationContext == null) {
-			_applicationContext = SpringUtil.getContext();
+	public static DataSource getDataSource() {
+		if (_dataSource == null) {
+			_dataSource = 
+				(DataSource)PortalBeanLocatorUtil.locate("liferayDataSource");
 		}
-
-		if (_log.isDebugEnabled()) {
-			_log.debug("Locating " + name);
-		}
-
-		return _applicationContext.getBean(name);
+		
+		return _dataSource;
 	}
 
-	private static Log _log = LogFactory.getLog(BeanLocatorImpl.class);
+	public static Session getMailSession() {
+		if (_mailSession == null) {
+			_mailSession = 
+				(Session)PortalBeanLocatorUtil.locate("mailSession");
+		}
+		
+		return _mailSession;
+	}
 
-	private ClassLoader _classLoader;
-	private ApplicationContext _applicationContext;
-
+	private static Session _mailSession;
+	
+	private static DataSource _dataSource;
 }

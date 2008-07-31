@@ -26,6 +26,7 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
 import org.springframework.beans.factory.xml.XmlBeanDefinitionReader;
+import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 /**
@@ -38,6 +39,12 @@ public class ArrayApplicationContext extends ClassPathXmlApplicationContext {
 
 	public ArrayApplicationContext(String[] configLocations) {
 		super(configLocations);
+	}
+
+	public ArrayApplicationContext(String[] configLocations, 
+		ApplicationContext parentApplicationContext) {
+
+		super(configLocations, parentApplicationContext);
 	}
 
 	protected void loadBeanDefinitions(XmlBeanDefinitionReader reader) {

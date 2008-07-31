@@ -1,7 +1,6 @@
 <?xml version="1.0"?>
-<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN" "http://www.springframework.org/dtd/spring-beans.dtd">
 
-<beans>
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd">
 	<bean id="velocityServiceInterceptor" class="com.liferay.portal.spring.aop.ServiceInterceptor" lazy-init="true">
 		<property name="exceptionSafe">
 			<value>true</value>
@@ -95,12 +94,6 @@
 	<bean id="com.liferay.portal.kernel.job.JobSchedulerUtil" class="com.liferay.portal.kernel.job.JobSchedulerUtil" lazy-init="true">
 		<property name="jobScheduler">
 			<ref bean="com.liferay.portal.job.JobSchedulerImpl" />
-		</property>
-	</bean>
-	<bean id="com.liferay.portal.jndi.PortalJNDIImpl" class="com.liferay.portal.jndi.PortalJNDIImpl" lazy-init="true" />
-	<bean id="com.liferay.portal.kernel.jndi.PortalJNDIUtil" class="com.liferay.portal.kernel.jndi.PortalJNDIUtil" lazy-init="true">
-		<property name="portalJNDI">
-			<ref bean="com.liferay.portal.jndi.PortalJNDIImpl" />
 		</property>
 	</bean>
 	<bean id="com.liferay.portal.json.JSONFactoryImpl" class="com.liferay.portal.json.JSONFactoryImpl" lazy-init="true" />
@@ -277,8 +270,8 @@
 			<ref bean="com.liferay.portal.webcache.WebCachePoolImpl" />
 		</property>
 	</bean>
-	<bean id="com.liferay.portal.xml.SAXReaderImpl" class="com.liferay.portal.xml.SAXReaderImpl" singleton="false" lazy-init="true" />
-	<bean id="com.liferay.portal.kernel.xml.SAXReaderUtil" class="com.liferay.portal.kernel.xml.SAXReaderUtil" singleton="false" lazy-init="true">
+	<bean id="com.liferay.portal.xml.SAXReaderImpl" class="com.liferay.portal.xml.SAXReaderImpl" scope="prototype" lazy-init="true" />
+	<bean id="com.liferay.portal.kernel.xml.SAXReaderUtil" class="com.liferay.portal.kernel.xml.SAXReaderUtil" scope="prototype" lazy-init="true">
 		<property name="SAXReader">
 			<ref bean="com.liferay.portal.xml.SAXReaderImpl" />
 		</property>

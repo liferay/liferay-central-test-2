@@ -22,7 +22,7 @@
 
 package com.liferay.portal.spring.context;
 
-import com.liferay.portal.bean.BeanLocatorImpl;
+import com.liferay.portal.bean.PortletBeanLocatorImpl;
 import com.liferay.portal.kernel.bean.BeanLocator;
 import com.liferay.portal.kernel.bean.PortletBeanLocatorUtil;
 import com.liferay.portal.kernel.portlet.PortletClassLoaderUtil;
@@ -59,7 +59,7 @@ public class PortletContextLoaderListener extends ContextLoaderListener {
 		ApplicationContext applicationContext =
 			WebApplicationContextUtils.getWebApplicationContext(servletContext);
 
-		BeanLocator beanLocator = new BeanLocatorImpl(
+		BeanLocator beanLocator = new PortletBeanLocatorImpl(
 			classLoader, applicationContext);
 
 		PortletBeanLocatorUtil.setBeanLocator(

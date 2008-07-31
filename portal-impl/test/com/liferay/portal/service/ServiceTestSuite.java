@@ -34,7 +34,7 @@ import com.liferay.portal.search.IndexWriterImpl;
 import com.liferay.portal.search.lucene.LuceneSearchEngineUtil;
 import com.liferay.portal.search.lucene.LuceneUtil;
 import com.liferay.portal.service.CompanyLocalServiceUtil;
-import com.liferay.portal.spring.util.SpringUtil;
+import com.liferay.portal.spring.util.PortalApplicationContextUtil;
 import com.liferay.portal.util.InitUtil;
 import com.liferay.portal.util.PropsValues;
 import com.liferay.portal.util.TestPropsValues;
@@ -63,7 +63,7 @@ public class ServiceTestSuite extends TestSuite {
 
 		// Spring
 
-		SpringUtil.initContext();
+		PortalApplicationContextUtil.initContext();
 
 		// Resource repositories root
 

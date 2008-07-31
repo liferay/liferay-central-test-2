@@ -22,7 +22,7 @@
 
 package com.liferay.portal.spring.context;
 
-import com.liferay.portal.spring.util.SpringUtil;
+import com.liferay.portal.spring.util.PortalApplicationContextUtil;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -41,7 +41,7 @@ public class TunnelApplicationContext extends XmlWebApplicationContext {
 
 	public void setParent(ApplicationContext parent) {
 		if (parent == null) {
-			parent = SpringUtil.getContext();
+			parent = PortalApplicationContextUtil.getContext();
 		}
 
 		super.setParent(parent);

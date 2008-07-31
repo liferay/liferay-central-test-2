@@ -23,7 +23,7 @@
 package com.liferay.portal.util;
 
 import com.liferay.counter.service.CounterLocalServiceUtil;
-import com.liferay.portal.spring.util.SpringUtil;
+import com.liferay.portal.spring.util.PortalApplicationContextUtil;
 import com.liferay.portal.util.InitUtil;
 import com.liferay.util.PwdGenerator;
 
@@ -76,7 +76,7 @@ public class BaseTestCase extends TestCase {
 	}
 
 	protected void setUp() throws Exception {
-		SpringUtil.initContext();
+		PortalApplicationContextUtil.initContext();
 	}
 
 	private Random _random = new Random();

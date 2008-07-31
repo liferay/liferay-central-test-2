@@ -20,46 +20,36 @@
  * SOFTWARE.
  */
 
-package com.liferay.portal.spring.context;
+package com.liferay.portal.bean;
 
+import com.liferay.portal.kernel.bean.BeanLocator;
+import com.liferay.portal.kernel.bean.BeanLocatorException;
 import com.liferay.portal.spring.util.PortalApplicationContextUtil;
-import com.liferay.portal.util.InitUtil;
 
-import javax.servlet.ServletContext;
-import javax.servlet.ServletContextEvent;
-
-import org.springframework.context.ApplicationContext;
-import org.springframework.web.context.ContextLoader;
-import org.springframework.web.context.ContextLoaderListener;
-import org.springframework.web.context.support.WebApplicationContextUtils;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 
 /**
- * <a href="PortalContextLoaderListener.java.html"><b><i>View Source</i></b></a>
+ * <a href="PortalBeanLocatorImpl.java.html"><b><i>View Source</i></b></a>
  *
- * @author Michael Young
+ * @author Brian Wing Shun Chan
  *
  */
-public class PortalContextLoaderListener extends ContextLoaderListener {
+public class PortalBeanLocatorImpl implements BeanLocator {
 
-	static {
-		InitUtil.init();
+	public ClassLoader getClassLoader() {
+		return _classLoader;
 	}
 
-	public void contextInitialized(ServletContextEvent event) {
-		super.contextInitialized(event);
+	public Object locate(String name) throws BeanLocatorException {
+		if (_log.isDebugEnabled()) {
+			_log.debug("Locating " + name);
+		}
 
-		ServletContext servletContext = event.getServletContext();
-
-		ApplicationContext applicationContext =
-			WebApplicationContextUtils.getWebApplicationContext(servletContext);
-
-		PortalApplicationContextUtil.setContext(applicationContext);
+		return PortalApplicationContextUtil.getContext().getBean(name);
 	}
 
-	protected ContextLoader createContextLoader() {
-		return new PortalContextLoader();
-	}
-	
-	
+	private static Log _log = LogFactory.getLog(PortalBeanLocatorImpl.class);
 
+	private ClassLoader _classLoader = this.getClass().getClassLoader();
 }

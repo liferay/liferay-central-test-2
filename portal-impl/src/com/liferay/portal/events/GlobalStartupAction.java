@@ -32,7 +32,7 @@ import com.liferay.portal.kernel.deploy.auto.AutoDeployUtil;
 import com.liferay.portal.kernel.deploy.hot.HotDeployListener;
 import com.liferay.portal.kernel.deploy.hot.HotDeployUtil;
 import com.liferay.portal.kernel.events.SimpleAction;
-import com.liferay.portal.kernel.jndi.PortalJNDIUtil;
+import com.liferay.portal.kernel.jndi.InfrastructureUtil;
 import com.liferay.portal.kernel.messaging.Destination;
 import com.liferay.portal.kernel.messaging.DestinationNames;
 import com.liferay.portal.kernel.messaging.MessageBusUtil;
@@ -196,7 +196,7 @@ public class GlobalStartupAction extends SimpleAction {
 		// JNDI
 
 		try {
-			PortalJNDIUtil.getDataSource();
+			InfrastructureUtil.getDataSource();
 		}
 		catch (Exception e) {
 			_log.error(e, e);
@@ -204,7 +204,7 @@ public class GlobalStartupAction extends SimpleAction {
 
 		try {
 			if (!ServerDetector.isJOnAS()) {
-				PortalJNDIUtil.getMailSession();
+				InfrastructureUtil.getMailSession();
 			}
 		}
 		catch (Exception e) {

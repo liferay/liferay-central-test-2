@@ -963,6 +963,8 @@ public class PropsKeys {
 
 	public static final String SPRING_CONFIGS = "spring.configs";
 
+	public static final String SPRING_PARENT_CONFIGS = "spring.parent.configs";
+
 	public static final String SPRING_HIBERNATE_DATA_SOURCE = "spring.hibernate.data.source";
 
 	public static final String SPRING_HIBERNATE_SESSION_FACTORY = "spring.hibernate.session.factory";
