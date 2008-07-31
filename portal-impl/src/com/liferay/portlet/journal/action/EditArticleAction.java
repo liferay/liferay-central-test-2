@@ -108,9 +108,6 @@ public class EditArticleAction extends PortletAction {
 			else if (cmd.equals(Constants.APPROVE)) {
 				approveArticle(actionRequest);
 			}
-			else if (cmd.equals(Constants.COPY)) {
-				copyArticle(actionRequest);
-			}
 			else if (cmd.equals(Constants.DELETE)) {
 				deleteArticles(actionRequest);
 			}
@@ -218,14 +215,6 @@ public class EditArticleAction extends PortletAction {
 		JournalArticleServiceUtil.approveArticle(
 			groupId, articleId, version, layout.getPlid(), articleURL,
 			actionRequest.getPreferences());
-	}
-
-	protected void copyArticle(ActionRequest actionRequest) throws Exception {
-		long groupId = ParamUtil.getLong(actionRequest, "groupId");
-
-		String articleId = ParamUtil.getString(actionRequest, "articleId");
-
-		JournalArticleServiceUtil.copyArticle(groupId, articleId);
 	}
 
 	protected void deleteArticles(ActionRequest actionRequest)
