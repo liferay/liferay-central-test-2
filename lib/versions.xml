@@ -719,61 +719,6 @@
 		</licenses>
 	</library>
 	<library>
-		<file-name>development/webservices-rt.jar</file-name>
-		<version>1.2</version>
-		<project-name>metro</project-name>
-		<project-url>https://metro.dev.java.net</project-url>
-		<licenses>
-			<license>
-				<license-name>COMMON DEVELOPMENT AND DISTRIBUTION LICENSE (CDDL) Version 1.0</license-name>
-			</license>
-		</licenses>
-	</library>
-	<library>
-		<file-name>development/webservices-tools.jar</file-name>
-		<version>1.2</version>
-		<project-name>metro</project-name>
-		<project-url>https://metro.dev.java.net</project-url>
-		<licenses>
-			<license>
-				<license-name>COMMON DEVELOPMENT AND DISTRIBUTION LICENSE (CDDL) Version 1.0</license-name>
-			</license>
-		</licenses>
-	</library>
-	<library>
-		<file-name>development/webservices-api.jar</file-name>
-		<version>1.2</version>
-		<project-name>metro</project-name>
-		<project-url>https://metro.dev.java.net</project-url>
-		<licenses>
-			<license>
-				<license-name>COMMON DEVELOPMENT AND DISTRIBUTION LICENSE (CDDL) Version 1.0</license-name>
-			</license>
-		</licenses>
-	</library>
-	<library>
-		<file-name>development/webservices-extra.jar</file-name>
-		<version>1.2</version>
-		<project-name>metro</project-name>
-		<project-url>https://metro.dev.java.net</project-url>
-		<licenses>
-			<license>
-				<license-name>COMMON DEVELOPMENT AND DISTRIBUTION LICENSE (CDDL) Version 1.0</license-name>
-			</license>
-		</licenses>
-	</library>
-	<library>
-		<file-name>development/webservices-extra-api.jar</file-name>
-		<version>1.2</version>
-		<project-name>metro</project-name>
-		<project-url>https://metro.dev.java.net</project-url>
-		<licenses>
-			<license>
-				<license-name>COMMON DEVELOPMENT AND DISTRIBUTION LICENSE (CDDL) Version 1.0</license-name>
-			</license>
-		</licenses>
-	</library>
-	<library>
 		<file-name>development/yuicompressor.jar</file-name>
 		<version>2.1.2</version>
 		<project-name>YUI Compressor</project-name>
@@ -2372,50 +2317,6 @@
 			<license>
 				<license-name>Common Public License 1.0</license-name>
 				<copyright-notice>Copyright (c) IBM Corp 2001, 2005</copyright-notice>
-			</license>
-		</licenses>
-	</library>
-	<library>
-		<file-name>portal/wsrp-common.jar</file-name>
-		<version>2.0(trunk 705)</version>
-		<project-name>OpenPortal WSRP Project</project-name>
-		<project-url>https://wsrp.dev.java.net</project-url>
-		<licenses>
-			<license>
-				<license-name>CDDL 1.0</license-name>
-			</license>
-		</licenses>
-	</library>
-	<library>
-		<file-name>portal/wsrp-consumer.jar</file-name>
-		<version>2.0(trunk 705)</version>
-		<project-name>OpenPortal WSRP Project</project-name>
-		<project-url>https://wsrp.dev.java.net</project-url>
-		<licenses>
-			<license>
-				<license-name>CDDL 1.0</license-name>
-			</license>
-		</licenses>
-	</library>
-	<library>
-		<file-name>portal/wsrp-consumer-portlet.jar</file-name>
-		<version>2.0(trunk 705)</version>
-		<project-name>OpenPortal WSRP Project</project-name>
-		<project-url>https://wsrp.dev.java.net</project-url>
-		<licenses>
-			<license>
-				<license-name>CDDL 1.0</license-name>
-			</license>
-		</licenses>
-	</library>
-	<library>
-		<file-name>portal/wsrp-producer.jar</file-name>
-		<version>2.0(trunk 705)</version>
-		<project-name>OpenPortal WSRP Project</project-name>
-		<project-url>https://wsrp.dev.java.net</project-url>
-		<licenses>
-			<license>
-				<license-name>CDDL 1.0</license-name>
 			</license>
 		</licenses>
 	</library>

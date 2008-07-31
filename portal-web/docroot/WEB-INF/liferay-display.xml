@@ -10,7 +10,6 @@
 		<portlet id="99" />
 		<portlet id="104" />
 		<portlet id="111" />
-		<portlet id="123" />
 	</category>
 	<category name="category.cms">
 		<portlet id="15" />

@@ -158,10 +158,6 @@ public class InvokerPortlet
 					_portletContextImpl.getPortlet().getPortletId());
 		}
 
-		if (portletModel.isRemote()) {
-			return;
-		}
-
 		if (ClassUtil.isSubclass(
 				_portlet.getClass(), PortletDeployer.JSF_MYFACES) ||
 			ClassUtil.isSubclass(
