@@ -32,6 +32,7 @@ import com.liferay.portal.model.LayoutSet;
 import com.liferay.portal.model.impl.LayoutImpl;
 import com.liferay.portal.service.GroupLocalServiceUtil;
 import com.liferay.portal.servlet.AbsoluteRedirectsResponse;
+import com.liferay.portal.servlet.I18nServlet;
 import com.liferay.portal.servlet.filters.BasePortalFilter;
 import com.liferay.portal.struts.LastPath;
 import com.liferay.portal.util.PortalInstances;
@@ -39,6 +40,8 @@ import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.WebKeys;
 
 import java.io.IOException;
+
+import java.util.Set;
 
 import javax.servlet.FilterChain;
 import javax.servlet.FilterConfig;
@@ -159,6 +162,21 @@ public class VirtualHostFilter extends BasePortalFilter {
 		friendlyURL = StringUtil.replace(
 			friendlyURL, StringPool.DOUBLE_SLASH, StringPool.SLASH);
 
+		String i18nLanguageId = null;
+
+		Set<String> languageIds = I18nServlet.getLanguageIds();
+
+		for (String languageId : languageIds) {
+			if (friendlyURL.startsWith(languageId)) {
+				int pos = friendlyURL.indexOf(StringPool.SLASH, 1);
+
+				i18nLanguageId = friendlyURL.substring(0, pos);
+				friendlyURL = friendlyURL.substring(pos);
+
+				break;
+			}
+		}
+
 		if (_log.isDebugEnabled()) {
 			_log.debug("Friendly URL " + friendlyURL);
 		}
@@ -200,6 +218,10 @@ public class VirtualHostFilter extends BasePortalFilter {
 				prefix.append(group.getFriendlyURL());
 
 				StringBuilder redirect = new StringBuilder();
+
+				if (i18nLanguageId != null) {
+					redirect.append(i18nLanguageId);
+				}
 
 				redirect.append(prefix);
 				redirect.append(friendlyURL);

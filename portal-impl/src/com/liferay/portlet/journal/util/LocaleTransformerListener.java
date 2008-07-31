@@ -129,8 +129,8 @@ public class LocaleTransformerListener extends TransformerListener {
 		while (listIndex >= 0) {
 			Element child = children.get(listIndex);
 
-			String languageId =
-				child.attributeValue("language-id", getLanguageId());
+			String languageId = child.attributeValue(
+				"language-id", getLanguageId());
 
 			if (!languageId.equalsIgnoreCase(getLanguageId())) {
 				root.remove(child);

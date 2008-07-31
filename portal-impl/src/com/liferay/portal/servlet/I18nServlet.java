@@ -23,13 +23,20 @@
 package com.liferay.portal.servlet;
 
 import com.liferay.portal.NoSuchLayoutException;
+import com.liferay.portal.kernel.language.LanguageUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
+import com.liferay.portal.kernel.util.LocaleUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.WebKeys;
 
 import java.io.IOException;
+
+import java.util.HashSet;
+import java.util.Iterator;
+import java.util.Locale;
+import java.util.Set;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletContext;
@@ -41,6 +48,8 @@ import javax.servlet.http.HttpServletResponse;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
+import org.dom4j.Element;
+
 /**
  * <a href="I18nServlet.java.html"><b><i>View Source</i></b></a>
  *
@@ -48,6 +57,29 @@ import org.apache.commons.logging.LogFactory;
  *
  */
 public class I18nServlet extends HttpServlet {
+
+	public static Set<String> getLanguageIds() {
+		return _languageIds;
+	}
+
+	public static void setLanguageIds(Element root) {
+		Iterator<Element> itr = root.elements("servlet-mapping").iterator();
+
+		while (itr.hasNext()) {
+			Element el = itr.next();
+
+			String servletName = el.elementText("servlet-name");
+
+			if (servletName.equals("I18nServlet")) {
+				String urlPattern = el.elementText("url-pattern");
+
+				String languageId = urlPattern.substring(
+					0, urlPattern.lastIndexOf(StringPool.SLASH));
+
+				_languageIds.add(languageId);
+			}
+		}
+	}
 
 	public void service(
 			HttpServletRequest request, HttpServletResponse response)
@@ -105,6 +137,17 @@ public class I18nServlet extends HttpServlet {
 			return null;
 		}
 
+		Locale locale = LocaleUtil.fromLanguageId(languageId);
+
+		if (Validator.isNull(locale.getCountry())) {
+
+			// Locales must contain the country code
+
+			locale = LanguageUtil.getLocale(locale.getLanguage());
+
+			languageId = LocaleUtil.toLanguageId(locale);
+		}
+
 		String redirect = path;
 
 		if (_log.isDebugEnabled()) {
@@ -115,5 +158,7 @@ public class I18nServlet extends HttpServlet {
 	}
 
 	private static Log _log = LogFactory.getLog(I18nServlet.class);
+
+	private static Set<String> _languageIds = new HashSet<String>();
 
 }

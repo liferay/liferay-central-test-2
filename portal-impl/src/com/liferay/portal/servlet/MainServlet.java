@@ -832,6 +832,8 @@ public class MainServlet extends ActionServlet {
 		PropsUtil.set(PropsKeys.SESSION_TIMEOUT, String.valueOf(timeout));
 
 		PropsValues.SESSION_TIMEOUT = timeout;
+
+		I18nServlet.setLanguageIds(root);
 	}
 
 	protected void destroyCompany(long companyId) {
