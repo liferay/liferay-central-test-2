@@ -23,23 +23,31 @@
 package com.liferay.portlet.webform.action;
 
 import com.liferay.counter.service.CounterLocalServiceUtil;
+import com.liferay.documentlibrary.FileNameException;
+import com.liferay.documentlibrary.FileSizeException;
+import com.liferay.documentlibrary.service.DLLocalServiceUtil;
 import com.liferay.mail.service.MailServiceUtil;
 import com.liferay.portal.captcha.CaptchaTextException;
 import com.liferay.portal.captcha.CaptchaUtil;
 import com.liferay.portal.kernel.mail.MailMessage;
 import com.liferay.portal.kernel.servlet.SessionErrors;
 import com.liferay.portal.kernel.servlet.SessionMessages;
+import com.liferay.portal.kernel.upload.UploadPortletRequest;
 import com.liferay.portal.kernel.util.FileUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.struts.PortletAction;
+import com.liferay.portal.util.PortalUtil;
 import com.liferay.portlet.PortletConfigImpl;
 import com.liferay.portlet.PortletPreferencesFactoryUtil;
 import com.liferay.portlet.expando.service.ExpandoValueLocalServiceUtil;
+import com.liferay.portlet.webform.service.WebFormLocalServiceUtil;
 import com.liferay.portlet.webform.util.WebFormUtil;
+import com.liferay.util.PwdGenerator;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Iterator;
@@ -98,6 +106,14 @@ public class ViewAction extends PortletAction {
 			prefs.getValue("saveToFile", StringPool.BLANK));
 		String fileName = GetterUtil.getString(
 			prefs.getValue("fileName", StringPool.BLANK));
+		boolean uploadToDL = GetterUtil.getBoolean(
+			prefs.getValue("uploadToDL", StringPool.BLANK));
+		boolean uploadToDisk = GetterUtil.getBoolean(
+			prefs.getValue("uploadToDisk", StringPool.BLANK));
+		String uploadDiskDir = GetterUtil.getString(
+			prefs.getValue("uploadDiskDir", StringPool.BLANK));
+
+		if (uploadToDisk) uploadToDisk = Validator.isNotNull(uploadDiskDir);
 
 		if (requireCaptcha) {
 			try {
@@ -113,8 +129,23 @@ public class ViewAction extends PortletAction {
 
 		List<String> fieldValues = new ArrayList<String>();
 
+		UploadPortletRequest uploadReq = null;
+
 		for (int i = 1; i <= WebFormUtil.MAX_FIELDS; i++) {
-			fieldValues.add(actionRequest.getParameter("field" + i));
+			String fieldType = prefs.getValue("fieldType" + i, null);
+
+			if ("file".equals(fieldType)) {
+				if (uploadReq == null) uploadReq = PortalUtil.getUploadPortletRequest(actionRequest);
+
+				String uploadFileName = uploadReq.getFileName("field" + i);
+				if (Validator.isNotNull(uploadFileName)) {
+					uploadFileName = PwdGenerator.getPassword(4) + "_" + uploadFileName;
+				}
+				fieldValues.add(uploadFileName);
+			}
+			else {
+				fieldValues.add(actionRequest.getParameter("field" + i));
+			}
 		}
 
 		Set<String> validationErrors = null;
@@ -132,33 +163,79 @@ public class ViewAction extends PortletAction {
 		}
 
 		if (validationErrors.isEmpty()) {
+			boolean uploadSuccess = true;
 			boolean emailSuccess = true;
 			boolean databaseSuccess = true;
 			boolean fileSuccess = true;
 
-			if (sendAsEmail) {
-				emailSuccess = sendEmail(fieldValues, prefs);
+			if (uploadReq != null) {
+				try {
+					for (int i = 1; i <= fieldValues.size(); i++) {
+						String fieldType = prefs.getValue("fieldType" + i, null);
+
+						if ("file".equals(fieldType)) {
+							File uploadFile = uploadReq.getFile("field" + i);
+							String uploadFileName = fieldValues.get(i - 1);
+
+							if (uploadFile != null && Validator.isNotNull(uploadFileName)) {
+								if (uploadToDL || uploadToDisk) {
+									byte[] bytes = FileUtil.getBytes(uploadFile);
+
+									if (uploadToDL) {
+										WebFormLocalServiceUtil.storeUploadedFile(PortalUtil.getCompany(actionRequest).getCompanyId(), portletId, uploadFileName, bytes);
+									}
+
+									if (uploadToDisk) {
+										DLLocalServiceUtil.validate(uploadFileName, uploadFile);
+										FileUtil.write(new File(uploadDiskDir + "/" + uploadFileName), bytes);
+									}
+								}
+								else {
+									throw new Exception();
+								}
+							}
+						}
+					}
+				}
+				catch(FileNameException e) {
+					SessionErrors.add(actionRequest, "uploadFileNameIllegal");
+					uploadSuccess = false;
+				}
+				catch(FileSizeException e) {
+					SessionErrors.add(actionRequest, "uploadFileTooLarge");
+					uploadSuccess = false;
+				}
+				catch(Exception e) {
+					SessionErrors.add(actionRequest, "uploadFailed");
+					uploadSuccess = false;
+				}
 			}
 
-			if (saveToDatabase) {
-				if (Validator.isNull(databaseTableName)) {
-					databaseTableName = WebFormUtil.getNewDatabaseTableName(
-						portletId);
-
-					prefs.setValue("databaseTableName", databaseTableName);
-
-					prefs.store();
+			if (uploadSuccess) {
+				if (sendAsEmail) {
+					emailSuccess = sendEmail(fieldValues, prefs);
 				}
 
-				databaseSuccess = saveDatabase(
-					fieldValues, prefs, databaseTableName);
+				if (saveToDatabase) {
+					if (Validator.isNull(databaseTableName)) {
+						databaseTableName = WebFormUtil.getNewDatabaseTableName(
+							portletId);
+
+						prefs.setValue("databaseTableName", databaseTableName);
+
+						prefs.store();
+					}
+
+					databaseSuccess = saveDatabase(
+						fieldValues, prefs, databaseTableName);
+				}
+
+				if (saveToFile) {
+					fileSuccess = saveFile(fieldValues, prefs, fileName);
+				}
 			}
 
-			if (saveToFile) {
-				fileSuccess = saveFile(fieldValues, prefs, fileName);
-			}
-
-			if (emailSuccess && databaseSuccess && fileSuccess) {
+			if (uploadSuccess && emailSuccess && databaseSuccess && fileSuccess) {
 				SessionMessages.add(actionRequest, "success");
 			}
 			else {

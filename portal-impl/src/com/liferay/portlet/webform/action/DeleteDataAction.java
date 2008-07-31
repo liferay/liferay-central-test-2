@@ -22,11 +22,16 @@
 
 package com.liferay.portlet.webform.action;
 
+import com.liferay.documentlibrary.NoSuchDirectoryException;
+import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.struts.PortletAction;
+import com.liferay.portal.util.PortalUtil;
+import com.liferay.portlet.PortletConfigImpl;
 import com.liferay.portlet.PortletPreferencesFactoryUtil;
 import com.liferay.portlet.expando.service.ExpandoTableLocalServiceUtil;
+import com.liferay.portlet.webform.service.WebFormLocalServiceUtil;
 import com.liferay.portlet.webform.util.WebFormUtil;
 
 import javax.portlet.ActionRequest;
@@ -50,15 +55,29 @@ public class DeleteDataAction extends PortletAction {
 			ActionRequest actionRequest, ActionResponse actionResponse)
 		throws Exception {
 
+		PortletConfigImpl portletConfigImpl = (PortletConfigImpl)portletConfig;
+
+		String portletId = portletConfigImpl.getPortletId();
+
 		PortletPreferences prefs =
 			PortletPreferencesFactoryUtil.getPortletSetup(actionRequest);
 
 		String databaseTableName = prefs.getValue(
 			"databaseTableName", StringPool.BLANK);
+		boolean uploadToDL = GetterUtil.getBoolean(
+				prefs.getValue("uploadToDL", StringPool.BLANK));
 
 		if (Validator.isNotNull(databaseTableName)) {
 			ExpandoTableLocalServiceUtil.deleteTable(
 				WebFormUtil.class.getName(), databaseTableName);
+		}
+
+		if (uploadToDL) {
+			try {
+				WebFormLocalServiceUtil.deleteUploadedFiles(PortalUtil.getCompany(actionRequest).getCompanyId(), portletId);
+			}
+			catch (NoSuchDirectoryException e) {
+			}
 		}
 
 		sendRedirect(actionRequest, actionResponse);

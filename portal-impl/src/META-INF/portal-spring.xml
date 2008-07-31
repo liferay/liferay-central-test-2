@@ -10545,4 +10545,84 @@
 			<ref bean="com.liferay.portlet.workflow.service.WorkflowTaskService.transaction" />
 		</property>
 	</bean>
+	<bean id="com.liferay.portlet.webform.service.WebFormLocalService.impl" class="com.liferay.portlet.webform.service.impl.WebFormLocalServiceImpl" lazy-init="true" />
+	<bean id="com.liferay.portlet.webform.service.WebFormLocalService.transaction" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean" lazy-init="true">
+		<property name="transactionManager">
+			<ref bean="liferayTransactionManager" />
+		</property>
+		<property name="target">
+			<ref bean="com.liferay.portlet.webform.service.WebFormLocalService.impl" />
+		</property>
+		<property name="transactionAttributes">
+			<props>
+				<prop key="add*">PROPAGATION_REQUIRED,-com.liferay.portal.PortalException,-com.liferay.portal.SystemException</prop>
+				<prop key="check*">PROPAGATION_REQUIRED,-com.liferay.portal.PortalException,-com.liferay.portal.SystemException</prop>
+				<prop key="clear*">PROPAGATION_REQUIRED,-com.liferay.portal.PortalException,-com.liferay.portal.SystemException</prop>
+				<prop key="delete*">PROPAGATION_REQUIRED,-com.liferay.portal.PortalException,-com.liferay.portal.SystemException</prop>
+				<prop key="set*">PROPAGATION_REQUIRED,-com.liferay.portal.PortalException,-com.liferay.portal.SystemException</prop>
+				<prop key="update*">PROPAGATION_REQUIRED,-com.liferay.portal.PortalException,-com.liferay.portal.SystemException</prop>
+				<prop key="*">PROPAGATION_SUPPORTS,readOnly</prop>
+			</props>
+		</property>
+	</bean>
+	<bean id="com.liferay.portlet.webform.service.WebFormLocalService.velocity" class="org.springframework.aop.framework.ProxyFactoryBean" lazy-init="true">
+		<property name="interceptorNames">
+			<list>
+				<value>velocityServiceInterceptor</value>
+			</list>
+		</property>
+		<property name="target">
+			<ref bean="com.liferay.portlet.webform.service.WebFormLocalService.transaction" />
+		</property>
+	</bean>
+	<bean id="com.liferay.portlet.webform.service.WebFormLocalServiceFactory" class="com.liferay.portlet.webform.service.WebFormLocalServiceFactory" lazy-init="true">
+		<property name="service">
+			<ref bean="com.liferay.portlet.webform.service.WebFormLocalService.transaction" />
+		</property>
+	</bean>
+	<bean id="com.liferay.portlet.webform.service.WebFormLocalServiceUtil" class="com.liferay.portlet.webform.service.WebFormLocalServiceUtil" lazy-init="true">
+		<property name="service">
+			<ref bean="com.liferay.portlet.webform.service.WebFormLocalService.transaction" />
+		</property>
+	</bean>
+	<bean id="com.liferay.portlet.webform.service.WebFormService.impl" class="com.liferay.portlet.webform.service.impl.WebFormServiceImpl" lazy-init="true" />
+	<bean id="com.liferay.portlet.webform.service.WebFormService.transaction" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean" lazy-init="true">
+		<property name="transactionManager">
+			<ref bean="liferayTransactionManager" />
+		</property>
+		<property name="target">
+			<ref bean="com.liferay.portlet.webform.service.WebFormService.impl" />
+		</property>
+		<property name="transactionAttributes">
+			<props>
+				<prop key="add*">PROPAGATION_REQUIRED,-com.liferay.portal.PortalException,-com.liferay.portal.SystemException</prop>
+				<prop key="check*">PROPAGATION_REQUIRED,-com.liferay.portal.PortalException,-com.liferay.portal.SystemException</prop>
+				<prop key="clear*">PROPAGATION_REQUIRED,-com.liferay.portal.PortalException,-com.liferay.portal.SystemException</prop>
+				<prop key="delete*">PROPAGATION_REQUIRED,-com.liferay.portal.PortalException,-com.liferay.portal.SystemException</prop>
+				<prop key="set*">PROPAGATION_REQUIRED,-com.liferay.portal.PortalException,-com.liferay.portal.SystemException</prop>
+				<prop key="update*">PROPAGATION_REQUIRED,-com.liferay.portal.PortalException,-com.liferay.portal.SystemException</prop>
+				<prop key="*">PROPAGATION_SUPPORTS,readOnly</prop>
+			</props>
+		</property>
+	</bean>
+	<bean id="com.liferay.portlet.webform.service.WebFormService.velocity" class="org.springframework.aop.framework.ProxyFactoryBean" lazy-init="true">
+		<property name="interceptorNames">
+			<list>
+				<value>velocityServiceInterceptor</value>
+			</list>
+		</property>
+		<property name="target">
+			<ref bean="com.liferay.portlet.webform.service.WebFormService.transaction" />
+		</property>
+	</bean>
+	<bean id="com.liferay.portlet.webform.service.WebFormServiceFactory" class="com.liferay.portlet.webform.service.WebFormServiceFactory" lazy-init="true">
+		<property name="service">
+			<ref bean="com.liferay.portlet.webform.service.WebFormService.transaction" />
+		</property>
+	</bean>
+	<bean id="com.liferay.portlet.webform.service.WebFormServiceUtil" class="com.liferay.portlet.webform.service.WebFormServiceUtil" lazy-init="true">
+		<property name="service">
+			<ref bean="com.liferay.portlet.webform.service.WebFormService.transaction" />
+		</property>
+	</bean>
 </beans>

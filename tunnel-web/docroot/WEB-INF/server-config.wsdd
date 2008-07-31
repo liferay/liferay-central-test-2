@@ -3253,6 +3253,15 @@
 		<arrayMapping xmlns:ns="urn:http.service.tasks.portlet.liferay.com" xmlns:cmp-ns="http://www.w3.org/2001/XMLSchema" qname="ns:ArrayOfArrayOf_xsd_long" type="java:long[][]" innerType="cmp-ns:long" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"></arrayMapping>
 		<typeMapping xmlns:ns="http://model.tasks.portlet.liferay.com" qname="ns:TasksReviewSoap" type="java:com.liferay.portlet.tasks.model.TasksReviewSoap" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"></typeMapping>
 	</service>
+	<service name="Portlet_WebForm_WebFormService" provider="java:RPC" style="rpc" use="encoded">
+		<parameter name="wsdlTargetNamespace" value="urn:http.service.webform.portlet.liferay.com"/>
+		<parameter name="wsdlServiceElement" value="WebFormServiceSoapService"/>
+		<parameter name="wsdlServicePort" value="Portlet_WebForm_WebFormService"/>
+		<parameter name="className" value="com.liferay.portlet.webform.service.http.WebFormServiceSoap"/>
+		<parameter name="wsdlPortType" value="WebFormServiceSoap"/>
+		<parameter name="typeMappingVersion" value="1.2"/>
+		<parameter name="allowedMethods" value="*"/>
+	</service>
 	<service name="Portlet_Wiki_WikiNodeService" provider="java:RPC" style="rpc" use="encoded">
 		<parameter name="wsdlTargetNamespace" value="urn:http.service.wiki.portlet.liferay.com"/>
 		<parameter name="wsdlServiceElement" value="WikiNodeServiceSoapService"/>

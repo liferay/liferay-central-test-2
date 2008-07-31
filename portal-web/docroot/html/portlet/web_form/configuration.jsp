@@ -42,6 +42,10 @@ String databaseTableName = prefs.getValue("databaseTableName", StringPool.BLANK)
 boolean saveToFile = PrefsParamUtil.getBoolean(prefs, request, "saveToFile");
 String fileName = PrefsParamUtil.getString(prefs, request, "fileName");
 
+boolean uploadToDL = PrefsParamUtil.getBoolean(prefs, request, "uploadToDL");
+boolean uploadToDisk = PrefsParamUtil.getBoolean(prefs, request, "uploadToDisk");
+String uploadDiskDir = PrefsParamUtil.getString(prefs, request, "uploadDiskDir");
+
 boolean fieldsEditingDisabled = false;
 
 if (WebFormUtil.getTableRowsCount(databaseTableName) > 0) {
@@ -212,6 +216,44 @@ if (WebFormUtil.getTableRowsCount(databaseTableName) > 0) {
 			<input class="lfr-input-text" id="<portlet:namespace />filename" name="<portlet:namespace />fileName" type="text" value="<%= fileName %>" />
 		</div>
 	</fieldset>
+
+	<fieldset class="block-labels">
+		<legend><liferay-ui:message key="upload" /></legend>
+
+		<c:choose>
+			<c:when test="<%= !fieldsEditingDisabled %>">
+
+				<div class="ctrl-holder">
+					<label><liferay-ui:message key="upload-to-dl" /> <liferay-ui:input-checkbox param="uploadToDL" defaultValue="<%= uploadToDL %>" /></label>
+				</div>
+
+				<div class="ctrl-holder">
+					<label><liferay-ui:message key="upload-to-disk" /> <liferay-ui:input-checkbox param="uploadToDisk" defaultValue="<%= uploadToDisk %>" /></label>
+				</div>
+
+				<div class="ctrl-holder">
+					<label for="<portlet:namespace />uploadDiskDir"><liferay-ui:message key="upload-disk-dir" /></label>
+
+					<input class="lfr-input-text" id="<portlet:namespace />uploadDiskDir" name="<portlet:namespace />uploadDiskDir" type="text" value="<%= uploadDiskDir %>" />
+				</div>
+
+			</c:when>
+			<c:otherwise>
+
+				<div class="ctrl-holder">
+					<label><liferay-ui:message key="upload-to-dl" /></label>
+					<b><%= LanguageUtil.get(pageContext, uploadToDL ? "yes" : "no") %></b>
+				</div>
+
+				<div class="ctrl-holder">
+					<label><liferay-ui:message key="upload-to-disk" /></label>
+					<b><%= uploadToDisk && !uploadDiskDir.isEmpty() ? uploadDiskDir : LanguageUtil.get(pageContext, "no") %></b>
+				</div>
+
+			</c:otherwise>
+		</c:choose>
+
+	</fieldset>
 </fieldset>
 
 <fieldset class="block-labels" id="<portlet:namespace/>webFields">
@@ -222,9 +264,9 @@ if (WebFormUtil.getTableRowsCount(databaseTableName) > 0) {
 			<liferay-ui:message key="there-is-existing-form-data-please-export-and-delete-it-before-making-changes-to-the-fields" />
 		</div>
 
-		<liferay-portlet:actionURL var="exportURL" portletName="<%= portletResource %>">
+		<liferay-portlet:resourceURL var="exportURL" portletName="<%= portletResource %>">
 			<portlet:param name="struts_action" value="/web_form/export_data" />
-		</liferay-portlet:actionURL>
+		</liferay-portlet:resourceURL>
 
 		<input type="button" value="<liferay-ui:message key="export-data" />" onclick="submitForm(document.hrefFm, '<%= exportURL %>');" />
 
@@ -309,6 +351,7 @@ if (WebFormUtil.getTableRowsCount(databaseTableName) > 0) {
 							<option <%= (fieldType.equals("radio")) ? "selected" : "" %> value="radio"><liferay-ui:message key="radiobuttons" /></option>
 							<option <%= (fieldType.equals("paragraph")) ? "selected" : "" %> value="paragraph"><liferay-ui:message key="paragraph" /></option>
 							<option <%= (fieldType.equals("checkbox")) ? "selected" : "" %> value="checkbox"><liferay-ui:message key="checkbox" /></option>
+							<option <%= (fieldType.equals("file")) ? "selected" : "" %> value="file"><liferay-ui:message key="file" /></option>
 						</select>
 					</c:when>
 					<c:otherwise>
@@ -317,7 +360,7 @@ if (WebFormUtil.getTableRowsCount(databaseTableName) > 0) {
 				</c:choose>
 			</div>
 
-			<div class="ctrl-holder" id="<portlet:namespace/>optionsGroup<%= i %>">
+			<div class="ctrl-holder">
 				<label for="<portlet:namespace/>fieldOptions<%= i %>"><liferay-ui:message key="options" /></label>
 
 				<c:choose>
@@ -485,7 +528,7 @@ if (WebFormUtil.getTableRowsCount(databaseTableName) > 0) {
 							var instance = this;
 
 							var numField = instance._numField;
-							var inputs = newField.find('[@class$=lfr-input-text]');
+							var inputs = newField.find('input');
 							var selects = newField.find('select');
 							var label = newField.find('label');
 							var selectId = '<portlet:namespace/>fieldType' + numField;

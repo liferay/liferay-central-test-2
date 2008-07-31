@@ -24,28 +24,33 @@ package com.liferay.portlet.webform.action;
 
 import com.liferay.portal.kernel.dao.orm.QueryUtil;
 import com.liferay.portal.kernel.util.ContentTypes;
+import com.liferay.portal.kernel.util.FileUtil;
+import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;
-import com.liferay.portal.struts.ActionConstants;
+import com.liferay.portal.kernel.zip.ZipWriter;
 import com.liferay.portal.struts.PortletAction;
+import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.PortalUtil;
-import com.liferay.portlet.PortletPreferencesFactoryUtil;
+import com.liferay.portal.util.WebKeys;
+import com.liferay.portlet.PortletConfigImpl;
 import com.liferay.portlet.expando.model.ExpandoRow;
 import com.liferay.portlet.expando.service.ExpandoRowLocalServiceUtil;
 import com.liferay.portlet.expando.service.ExpandoValueLocalServiceUtil;
+import com.liferay.portlet.webform.service.WebFormLocalServiceUtil;
 import com.liferay.portlet.webform.util.WebFormUtil;
 import com.liferay.util.servlet.ServletResponseUtil;
 
 import java.io.ByteArrayInputStream;
-import java.io.InputStream;
+import java.io.File;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.portlet.ActionRequest;
-import javax.portlet.ActionResponse;
 import javax.portlet.PortletConfig;
 import javax.portlet.PortletPreferences;
+import javax.portlet.ResourceRequest;
+import javax.portlet.ResourceResponse;
 
 import javax.servlet.http.HttpServletResponse;
 
@@ -60,21 +65,38 @@ import org.apache.struts.action.ActionMapping;
  */
 public class ExportDataAction extends PortletAction {
 
-	public void processAction(
+	public void serveResource(
 			ActionMapping mapping, ActionForm form, PortletConfig portletConfig,
-			ActionRequest actionRequest, ActionResponse actionResponse)
+			ResourceRequest resourceRequest, ResourceResponse resourceResponse)
 		throws Exception {
+	
+		PortletConfigImpl portletConfigImpl = (PortletConfigImpl)portletConfig;
 
-		PortletPreferences prefs =
-			PortletPreferencesFactoryUtil.getPortletSetup(actionRequest);
+		String portletId = portletConfigImpl.getPortletId();
 
+		PortletPreferences prefs = resourceRequest.getPreferences();
+
+		ThemeDisplay themeDisplay =
+			(ThemeDisplay)resourceRequest.getAttribute(
+				WebKeys.THEME_DISPLAY);
+		
 		String databaseTableName = prefs.getValue(
 			"databaseTableName", StringPool.BLANK);
 		String title = prefs.getValue("title", "no-title");
+		boolean uploadToDL = GetterUtil.getBoolean(
+			prefs.getValue("uploadToDL", StringPool.BLANK));
+		boolean uploadToDisk = GetterUtil.getBoolean(
+			prefs.getValue("uploadToDisk", StringPool.BLANK));
+		String uploadDiskDir = GetterUtil.getString(
+				prefs.getValue("uploadDiskDir", StringPool.BLANK));
+
+		if (uploadToDisk) uploadToDisk = Validator.isNotNull(uploadDiskDir);
 
 		StringBuilder sb = new StringBuilder();
+		boolean hasFiles = false;
 
 		List<String> fieldLabels = new ArrayList<String>();
+		List<Boolean> fieldFiles = new ArrayList<Boolean>();
 
 		for (int i = 1; i <= WebFormUtil.MAX_FIELDS; i++) {
 			String fieldLabel = prefs.getValue(
@@ -86,11 +108,19 @@ public class ExportDataAction extends PortletAction {
 				sb.append("\"");
 				sb.append(fieldLabel.replaceAll("\"", "\\\""));
 				sb.append("\";");
+
+				String fieldType = prefs.getValue("fieldType" + i, null);
+				boolean isFile = "file".equals(fieldType);
+				fieldFiles.add(Boolean.valueOf(isFile));
+				if (isFile) hasFiles = true;
 			}
 		}
 
 		sb.deleteCharAt(sb.length() - 1);
 		sb.append("\n");
+
+		ZipWriter zipWriter = null;
+		if (hasFiles) zipWriter = new ZipWriter();
 
 		if (Validator.isNotNull(databaseTableName)) {
 			List<ExpandoRow> rows = ExpandoRowLocalServiceUtil.getRows(
@@ -98,10 +128,29 @@ public class ExportDataAction extends PortletAction {
 				QueryUtil.ALL_POS, QueryUtil.ALL_POS);
 
 			for (ExpandoRow row : rows) {
-				for (String fieldName : fieldLabels) {
+				for (int i = 0; i < fieldLabels.size(); i++) {
+					String fieldName = fieldLabels.get(i);
+					boolean fieldIsFile = fieldFiles.get(i).booleanValue();
+
 					String data = ExpandoValueLocalServiceUtil.getData(
 						WebFormUtil.class.getName(), databaseTableName,
 						fieldName, row.getClassPK(), StringPool.BLANK);
+
+					if (fieldIsFile && Validator.isNotNull(data)) {
+						byte[] bytes = null;
+
+						if (uploadToDL) {
+							bytes = WebFormLocalServiceUtil.retrieveUploadedFile(themeDisplay.getCompanyId(), portletId, data);
+						}
+
+						if (bytes == null && uploadToDisk) {
+							bytes = FileUtil.getBytes(new File(uploadDiskDir + "/" + data));
+						}
+
+						if (bytes != null) {
+							zipWriter.addEntry(data, bytes);
+						}
+					}
 
 					data = data.replaceAll("\"", "\\\"");
 
@@ -115,15 +164,28 @@ public class ExportDataAction extends PortletAction {
 			}
 		}
 
+		byte[] csvBytes = sb.toString().getBytes();
+
+		String fileName;
+		byte[] bytes;
+		String contentType;
+
+		if (hasFiles) {
+			zipWriter.addEntry("submissions.csv", csvBytes);
+
+			fileName = title + ".zip";
+			bytes = zipWriter.finish();
+			contentType = ContentTypes.APPLICATION_ZIP;
+		}
+		else {
+			fileName = title + ".csv";
+			bytes = csvBytes;
+			contentType = ContentTypes.APPLICATION_TEXT;
+		}
+
 		HttpServletResponse response = PortalUtil.getHttpServletResponse(
-			actionResponse);
-		String fileName = title + ".csv";
-		InputStream is = new ByteArrayInputStream(sb.toString().getBytes());
-		String contentType = ContentTypes.APPLICATION_TEXT;
+				resourceResponse);
 
-		ServletResponseUtil.sendFile(response, fileName, is, contentType);
-
-		setForward(actionRequest, ActionConstants.COMMON_NULL);
+		ServletResponseUtil.sendFile(response, fileName, new ByteArrayInputStream(bytes), contentType);
 	}
-
 }
