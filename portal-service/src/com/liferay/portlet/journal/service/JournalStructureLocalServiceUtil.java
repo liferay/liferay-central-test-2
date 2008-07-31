@@ -208,6 +208,15 @@ public class JournalStructureLocalServiceUtil {
 		_service.checkNewLine(groupId, structureId);
 	}
 
+	public static com.liferay.portlet.journal.model.JournalStructure copyStructure(
+		long userId, long groupId, java.lang.String oldStructureId,
+		java.lang.String newStructureId, boolean autoStructureId)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
+		return _service.copyStructure(userId, groupId, oldStructureId,
+			newStructureId, autoStructureId);
+	}
+
 	public static void deleteStructure(long groupId,
 		java.lang.String structureId)
 		throws com.liferay.portal.PortalException,

@@ -30,6 +30,7 @@ import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
+import com.liferay.portal.model.Image;
 import com.liferay.portal.model.ResourceConstants;
 import com.liferay.portal.model.User;
 import com.liferay.portal.util.PortalUtil;
@@ -291,6 +292,77 @@ public class JournalTemplateLocalServiceImpl
 
 			journalTemplatePersistence.update(template, false);
 		}
+	}
+
+	public JournalTemplate copyTemplate(
+			long userId, long groupId, String oldTemplateId,
+			String newTemplateId, boolean autoTemplateId)
+		throws PortalException, SystemException {
+
+		// Template
+
+		User user = userPersistence.findByPrimaryKey(userId);
+		oldTemplateId = oldTemplateId.trim().toUpperCase();
+		newTemplateId = newTemplateId.trim().toUpperCase();
+		Date now = new Date();
+
+		JournalTemplate oldTemplate = journalTemplatePersistence.findByG_T(
+			groupId, oldTemplateId);
+
+		if (autoTemplateId) {
+			newTemplateId = String.valueOf(counterLocalService.increment());
+		}
+		else {
+			validate(newTemplateId);
+
+			JournalTemplate newTemplate = journalTemplatePersistence.fetchByG_T(
+				groupId, newTemplateId);
+
+			if (newTemplate != null) {
+				throw new DuplicateTemplateIdException();
+			}
+		}
+
+		long id = counterLocalService.increment();
+
+		JournalTemplate newTemplate = journalTemplatePersistence.create(id);
+
+		newTemplate.setGroupId(groupId);
+		newTemplate.setCompanyId(user.getCompanyId());
+		newTemplate.setUserId(user.getUserId());
+		newTemplate.setUserName(user.getFullName());
+		newTemplate.setCreateDate(now);
+		newTemplate.setModifiedDate(now);
+		newTemplate.setTemplateId(newTemplateId);
+		newTemplate.setStructureId(oldTemplate.getStructureId());
+		newTemplate.setName(oldTemplate.getName());
+		newTemplate.setDescription(oldTemplate.getDescription());
+		newTemplate.setXsl(oldTemplate.getXsl());
+		newTemplate.setLangType(oldTemplate.getLangType());
+		newTemplate.setCacheable(oldTemplate.isCacheable());
+		newTemplate.setSmallImage(oldTemplate.isSmallImage());
+		newTemplate.setSmallImageId(counterLocalService.increment());
+		newTemplate.setSmallImageURL(oldTemplate.getSmallImageURL());
+
+		journalTemplatePersistence.update(newTemplate, false);
+
+		// Small image
+
+		if (oldTemplate.getSmallImage()) {
+			Image image = imageLocalService.getImage(
+				oldTemplate.getSmallImageId());
+
+			byte[] smallBytes = image.getTextObj();
+
+			imageLocalService.updateImage(
+				newTemplate.getSmallImageId(), smallBytes);
+		}
+
+		// Resources
+
+		addTemplateResources(newTemplate, true, true);
+
+		return null;
 	}
 
 	public void deleteTemplate(long groupId, String templateId)
@@ -569,6 +641,15 @@ public class JournalTemplateLocalServiceImpl
 		}
 	}
 
+	protected void validate(String templateId) throws PortalException {
+		if ((Validator.isNull(templateId)) ||
+			(Validator.isNumber(templateId)) ||
+			(templateId.indexOf(StringPool.SPACE) != -1)) {
+
+			throw new TemplateIdException();
+		}
+	}
+
 	protected void validate(
 			long groupId, String templateId, boolean autoTemplateId,
 			String name, String description, String xsl, boolean smallImage,
@@ -576,12 +657,7 @@ public class JournalTemplateLocalServiceImpl
 		throws PortalException, SystemException {
 
 		if (!autoTemplateId) {
-			if ((Validator.isNull(templateId)) ||
-				(Validator.isNumber(templateId)) ||
-				(templateId.indexOf(StringPool.SPACE) != -1)) {
-
-				throw new TemplateIdException();
-			}
+			validate(templateId);
 
 			try {
 				journalTemplatePersistence.findByG_T(groupId, templateId);

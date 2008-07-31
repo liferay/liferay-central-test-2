@@ -611,6 +611,21 @@
 
 		<!-- Journal -->
 
+		<action path="/journal/copy_article" type="com.liferay.portlet.journal.action.CopyArticleAction">
+			<forward name="portlet.journal.copy_article" path="portlet.journal.copy_article" />
+			<forward name="portlet.journal.error" path="portlet.journal.error" />
+		</action>
+
+		<action path="/journal/copy_structure" type="com.liferay.portlet.journal.action.CopyStructureAction">
+			<forward name="portlet.journal.copy_structure" path="portlet.journal.copy_structure" />
+			<forward name="portlet.journal.error" path="portlet.journal.error" />
+		</action>
+
+		<action path="/journal/copy_template" type="com.liferay.portlet.journal.action.CopyTemplateAction">
+			<forward name="portlet.journal.copy_template" path="portlet.journal.copy_template" />
+			<forward name="portlet.journal.error" path="portlet.journal.error" />
+		</action>
+
 		<action path="/journal/edit_article" type="com.liferay.portlet.journal.action.EditArticleAction">
 			<forward name="portlet.journal.edit_article" path="portlet.journal.edit_article" />
 			<forward name="portlet.journal.error" path="portlet.journal.error" />

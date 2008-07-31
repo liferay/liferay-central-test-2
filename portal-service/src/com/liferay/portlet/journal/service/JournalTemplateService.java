@@ -69,6 +69,12 @@ public interface JournalTemplateService {
 		throws java.rmi.RemoteException, com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;
 
+	public com.liferay.portlet.journal.model.JournalTemplate copyTemplate(
+		long groupId, java.lang.String oldTemplateId,
+		java.lang.String newTemplateId, boolean autoTemplateId)
+		throws java.rmi.RemoteException, com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException;
+
 	public void deleteTemplate(long groupId, java.lang.String templateId)
 		throws java.rmi.RemoteException, com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;

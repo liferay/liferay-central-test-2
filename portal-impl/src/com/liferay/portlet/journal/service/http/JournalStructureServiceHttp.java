@@ -228,6 +228,59 @@ public class JournalStructureServiceHttp {
 		}
 	}
 
+	public static com.liferay.portlet.journal.model.JournalStructure copyStructure(
+		HttpPrincipal httpPrincipal, long groupId,
+		java.lang.String oldStructureId, java.lang.String newStructureId,
+		boolean autoStructureId)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
+		try {
+			Object paramObj0 = new LongWrapper(groupId);
+
+			Object paramObj1 = oldStructureId;
+
+			if (oldStructureId == null) {
+				paramObj1 = new NullWrapper("java.lang.String");
+			}
+
+			Object paramObj2 = newStructureId;
+
+			if (newStructureId == null) {
+				paramObj2 = new NullWrapper("java.lang.String");
+			}
+
+			Object paramObj3 = new BooleanWrapper(autoStructureId);
+
+			MethodWrapper methodWrapper = new MethodWrapper(JournalStructureServiceUtil.class.getName(),
+					"copyStructure",
+					new Object[] { paramObj0, paramObj1, paramObj2, paramObj3 });
+
+			Object returnObj = null;
+
+			try {
+				returnObj = TunnelUtil.invoke(httpPrincipal, methodWrapper);
+			}
+			catch (Exception e) {
+				if (e instanceof com.liferay.portal.PortalException) {
+					throw (com.liferay.portal.PortalException)e;
+				}
+
+				if (e instanceof com.liferay.portal.SystemException) {
+					throw (com.liferay.portal.SystemException)e;
+				}
+
+				throw new com.liferay.portal.SystemException(e);
+			}
+
+			return (com.liferay.portlet.journal.model.JournalStructure)returnObj;
+		}
+		catch (com.liferay.portal.SystemException se) {
+			_log.error(se, se);
+
+			throw se;
+		}
+	}
+
 	public static void deleteStructure(HttpPrincipal httpPrincipal,
 		long groupId, java.lang.String structureId)
 		throws com.liferay.portal.PortalException,

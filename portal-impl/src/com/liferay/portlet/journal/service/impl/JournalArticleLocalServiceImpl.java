@@ -650,6 +650,96 @@ public class JournalArticleLocalServiceImpl
 		}
 	}
 
+	public JournalArticle copyArticle(
+			long userId, long groupId, String oldArticleId, String newArticleId,
+			boolean autoArticleId, double version)
+		throws PortalException, SystemException {
+
+		// Article
+
+		User user = userPersistence.findByPrimaryKey(userId);
+		oldArticleId = oldArticleId.trim().toUpperCase();
+		newArticleId = newArticleId.trim().toUpperCase();
+		Date now = new Date();
+
+		JournalArticle oldArticle = journalArticlePersistence.findByG_A_V(
+			groupId, oldArticleId, version);
+
+		if (autoArticleId) {
+			newArticleId = String.valueOf(counterLocalService.increment());
+		}
+		else {
+			validate(newArticleId);
+
+			JournalArticle newArticle = journalArticlePersistence.fetchByG_A_V(
+				groupId, newArticleId, version);
+
+			if (newArticle != null) {
+				throw new DuplicateArticleIdException();
+			}
+		}
+
+		long id = counterLocalService.increment();
+
+		long resourcePrimKey =
+			journalArticleResourceLocalService.getArticleResourcePrimKey(
+				groupId, newArticleId);
+
+		JournalArticle newArticle = journalArticlePersistence.create(id);
+
+		newArticle.setResourcePrimKey(resourcePrimKey);
+		newArticle.setGroupId(groupId);
+		newArticle.setCompanyId(user.getCompanyId());
+		newArticle.setUserId(user.getUserId());
+		newArticle.setUserName(user.getFullName());
+		newArticle.setCreateDate(now);
+		newArticle.setModifiedDate(now);
+		newArticle.setArticleId(newArticleId);
+		newArticle.setVersion(JournalArticleImpl.DEFAULT_VERSION);
+		newArticle.setTitle(oldArticle.getTitle());
+		newArticle.setDescription(oldArticle.getDescription());
+		newArticle.setContent(oldArticle.getContent());
+		newArticle.setType(oldArticle.getType());
+		newArticle.setStructureId(oldArticle.getStructureId());
+		newArticle.setTemplateId(oldArticle.getTemplateId());
+		newArticle.setDisplayDate(oldArticle.getDisplayDate());
+		newArticle.setApproved(oldArticle.isApproved());
+		newArticle.setExpired(oldArticle.isExpired());
+		newArticle.setExpirationDate(oldArticle.getExpirationDate());
+		newArticle.setReviewDate(oldArticle.getReviewDate());
+		newArticle.setIndexable(oldArticle.isIndexable());
+		newArticle.setSmallImage(oldArticle.isSmallImage());
+		newArticle.setSmallImageId(counterLocalService.increment());
+		newArticle.setSmallImageURL(oldArticle.getSmallImageURL());
+
+		journalArticlePersistence.update(newArticle, false);
+
+		// Small image
+
+		if (oldArticle.getSmallImage()) {
+			Image image = imageLocalService.getImage(
+				oldArticle.getSmallImageId());
+
+			byte[] smallBytes = image.getTextObj();
+
+			imageLocalService.updateImage(
+				newArticle.getSmallImageId(), smallBytes);
+		}
+
+		// Resources
+
+		addArticleResources(newArticle, true, true);
+
+		// Tags
+
+		String[] tagsEntries = tagsEntryLocalService.getEntryNames(
+			JournalArticle.class.getName(), oldArticle.getResourcePrimKey());
+
+		updateTagsAsset(userId, newArticle, tagsEntries);
+
+		return null;
+	}
+
 	public void deleteArticle(
 			long groupId, String articleId, double version, String articleURL,
 			PortletPreferences prefs)
@@ -2252,6 +2342,14 @@ public class JournalArticleLocalServiceImpl
 		mailService.sendEmail(message);
 	}
 
+	protected void validate(String articleId) throws PortalException {
+		if ((Validator.isNull(articleId)) ||
+			(articleId.indexOf(StringPool.SPACE) != -1)) {
+
+			throw new ArticleIdException();
+		}
+	}
+
 	protected void validate(
 			long groupId, String articleId, boolean autoArticleId,
 			double version, String title, String content, String type,
@@ -2260,11 +2358,7 @@ public class JournalArticleLocalServiceImpl
 		throws PortalException, SystemException {
 
 		if (!autoArticleId) {
-			if ((Validator.isNull(articleId)) ||
-				(articleId.indexOf(StringPool.SPACE) != -1)) {
-
-				throw new ArticleIdException();
-			}
+			validate(articleId);
 
 			try {
 				journalArticlePersistence.findByG_A_V(

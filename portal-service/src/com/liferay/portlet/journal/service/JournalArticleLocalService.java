@@ -256,6 +256,12 @@ public interface JournalArticleLocalService {
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;
 
+	public com.liferay.portlet.journal.model.JournalArticle copyArticle(
+		long userId, long groupId, java.lang.String oldArticleId,
+		java.lang.String newArticleId, boolean autoArticleId, double version)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException;
+
 	public void deleteArticle(long groupId, java.lang.String articleId,
 		double version, java.lang.String articleURL,
 		javax.portlet.PortletPreferences prefs)

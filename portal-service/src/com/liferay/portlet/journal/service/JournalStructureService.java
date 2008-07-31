@@ -64,6 +64,12 @@ public interface JournalStructureService {
 		throws java.rmi.RemoteException, com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;
 
+	public com.liferay.portlet.journal.model.JournalStructure copyStructure(
+		long groupId, java.lang.String oldStructureId,
+		java.lang.String newStructureId, boolean autoStructureId)
+		throws java.rmi.RemoteException, com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException;
+
 	public void deleteStructure(long groupId, java.lang.String structureId)
 		throws java.rmi.RemoteException, com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;

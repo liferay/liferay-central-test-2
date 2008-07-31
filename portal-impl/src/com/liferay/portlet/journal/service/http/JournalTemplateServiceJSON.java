@@ -74,6 +74,17 @@ import com.liferay.portlet.journal.service.JournalTemplateServiceUtil;
  *
  */
 public class JournalTemplateServiceJSON {
+	public static JSONObject copyTemplate(long groupId,
+		java.lang.String oldTemplateId, java.lang.String newTemplateId,
+		boolean autoTemplateId)
+		throws java.rmi.RemoteException, com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
+		com.liferay.portlet.journal.model.JournalTemplate returnValue = JournalTemplateServiceUtil.copyTemplate(groupId,
+				oldTemplateId, newTemplateId, autoTemplateId);
+
+		return JournalTemplateJSONSerializer.toJSONObject(returnValue);
+	}
+
 	public static void deleteTemplate(long groupId, java.lang.String templateId)
 		throws java.rmi.RemoteException, com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {

@@ -119,6 +119,23 @@ public class JournalStructureServiceSoap {
 		}
 	}
 
+	public static com.liferay.portlet.journal.model.JournalStructureSoap copyStructure(
+		long groupId, java.lang.String oldStructureId,
+		java.lang.String newStructureId, boolean autoStructureId)
+		throws RemoteException {
+		try {
+			com.liferay.portlet.journal.model.JournalStructure returnValue = JournalStructureServiceUtil.copyStructure(groupId,
+					oldStructureId, newStructureId, autoStructureId);
+
+			return com.liferay.portlet.journal.model.JournalStructureSoap.toSoapModel(returnValue);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
 	public static void deleteStructure(long groupId,
 		java.lang.String structureId) throws RemoteException {
 		try {

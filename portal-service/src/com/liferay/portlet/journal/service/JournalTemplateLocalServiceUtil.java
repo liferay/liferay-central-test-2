@@ -226,6 +226,15 @@ public class JournalTemplateLocalServiceUtil {
 		_service.checkNewLine(groupId, templateId);
 	}
 
+	public static com.liferay.portlet.journal.model.JournalTemplate copyTemplate(
+		long userId, long groupId, java.lang.String oldTemplateId,
+		java.lang.String newTemplateId, boolean autoTemplateId)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
+		return _service.copyTemplate(userId, groupId, oldTemplateId,
+			newTemplateId, autoTemplateId);
+	}
+
 	public static void deleteTemplate(long groupId, java.lang.String templateId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {

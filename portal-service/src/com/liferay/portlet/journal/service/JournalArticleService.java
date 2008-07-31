@@ -93,6 +93,12 @@ public interface JournalArticleService {
 		throws java.rmi.RemoteException, com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;
 
+	public com.liferay.portlet.journal.model.JournalArticle copyArticle(
+		long groupId, java.lang.String oldArticleId,
+		java.lang.String newArticleId, boolean autoArticleId, double version)
+		throws java.rmi.RemoteException, com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException;
+
 	public com.liferay.portlet.journal.model.JournalArticle getArticle(
 		long groupId, java.lang.String articleId, double version)
 		throws java.rmi.RemoteException, com.liferay.portal.PortalException,

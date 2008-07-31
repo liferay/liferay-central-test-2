@@ -83,6 +83,19 @@ public class JournalTemplateServiceImpl extends JournalTemplateServiceBaseImpl {
 			smallImageURL, smallFile, communityPermissions, guestPermissions);
 	}
 
+	public JournalTemplate copyTemplate(
+			long groupId, String oldTemplateId, String newTemplateId,
+			boolean autoTemplateId)
+		throws PortalException, SystemException {
+
+		JournalTemplatePermission.check(
+			getPermissionChecker(), groupId, oldTemplateId,
+			ActionKeys.ADD_TEMPLATE);
+
+		return journalTemplateLocalService.copyTemplate(
+			getUserId(), groupId, oldTemplateId, newTemplateId, autoTemplateId);
+	}
+
 	public void deleteTemplate(long groupId, String templateId)
 		throws PortalException, SystemException {
 

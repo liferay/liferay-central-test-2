@@ -1736,6 +1736,13 @@ Liferay.Service.Journal = {
 Liferay.Service.Journal.JournalArticle = {
 	serviceClassName: Liferay.Service.Journal.servicePackage + "JournalArticle" + Liferay.Service.classNameSuffix,
 
+	copyArticle: function(params, callback) {
+		params.serviceClassName = this.serviceClassName;
+		params.serviceMethodName = "copyArticle";
+
+		return Liferay.Service.ajax(params, callback);
+	},
+
 	getArticle: function(params, callback) {
 		params.serviceClassName = this.serviceClassName;
 		params.serviceMethodName = "getArticle";
@@ -1800,6 +1807,13 @@ Liferay.Service.Journal.JournalStructure = {
 		return Liferay.Service.ajax(params, callback);
 	},
 
+	copyStructure: function(params, callback) {
+		params.serviceClassName = this.serviceClassName;
+		params.serviceMethodName = "copyStructure";
+
+		return Liferay.Service.ajax(params, callback);
+	},
+
 	deleteStructure: function(params, callback) {
 		params.serviceClassName = this.serviceClassName;
 		params.serviceMethodName = "deleteStructure";
@@ -1824,6 +1838,13 @@ Liferay.Service.Journal.JournalStructure = {
 
 Liferay.Service.Journal.JournalTemplate = {
 	serviceClassName: Liferay.Service.Journal.servicePackage + "JournalTemplate" + Liferay.Service.classNameSuffix,
+
+	copyTemplate: function(params, callback) {
+		params.serviceClassName = this.serviceClassName;
+		params.serviceMethodName = "copyTemplate";
+
+		return Liferay.Service.ajax(params, callback);
+	},
 
 	deleteTemplate: function(params, callback) {
 		params.serviceClassName = this.serviceClassName;

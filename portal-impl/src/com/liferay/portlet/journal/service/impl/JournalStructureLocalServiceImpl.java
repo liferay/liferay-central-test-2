@@ -255,6 +255,59 @@ public class JournalStructureLocalServiceImpl
 		}
 	}
 
+	public JournalStructure copyStructure(
+			long userId, long groupId, String oldStructureId,
+			String newStructureId, boolean autoStructureId)
+		throws PortalException, SystemException {
+
+		// Structure
+
+		User user = userPersistence.findByPrimaryKey(userId);
+		oldStructureId = oldStructureId.trim().toUpperCase();
+		newStructureId = newStructureId.trim().toUpperCase();
+		Date now = new Date();
+
+		JournalStructure oldStructure = journalStructurePersistence.findByG_S(
+			groupId, oldStructureId);
+
+		if (autoStructureId) {
+			newStructureId = String.valueOf(counterLocalService.increment());
+		}
+		else {
+			validate(newStructureId);
+
+			JournalStructure newStructure =
+				journalStructurePersistence.fetchByG_S(groupId, newStructureId);
+
+			if (newStructure != null) {
+				throw new DuplicateStructureIdException();
+			}
+		}
+
+		long id = counterLocalService.increment();
+
+		JournalStructure newStructure = journalStructurePersistence.create(id);
+
+		newStructure.setGroupId(groupId);
+		newStructure.setCompanyId(user.getCompanyId());
+		newStructure.setUserId(user.getUserId());
+		newStructure.setUserName(user.getFullName());
+		newStructure.setCreateDate(now);
+		newStructure.setModifiedDate(now);
+		newStructure.setStructureId(newStructureId);
+		newStructure.setName(oldStructure.getName());
+		newStructure.setDescription(oldStructure.getDescription());
+		newStructure.setXsd(oldStructure.getXsd());
+
+		journalStructurePersistence.update(newStructure, false);
+
+		// Resources
+
+		addStructureResources(newStructure, true, true);
+
+		return null;
+	}
+
 	public void deleteStructure(long groupId, String structureId)
 		throws PortalException, SystemException {
 
@@ -430,18 +483,22 @@ public class JournalStructureLocalServiceImpl
 		return structure;
 	}
 
+	protected void validate(String structureId) throws PortalException {
+		if ((Validator.isNull(structureId)) ||
+			(Validator.isNumber(structureId)) ||
+			(structureId.indexOf(StringPool.SPACE) != -1)) {
+
+			throw new StructureIdException();
+		}
+	}
+
 	protected void validate(
 			long groupId, String structureId, boolean autoStructureId,
 			String name, String description, String xsd)
 		throws PortalException, SystemException {
 
 		if (!autoStructureId) {
-			if ((Validator.isNull(structureId)) ||
-				(Validator.isNumber(structureId)) ||
-				(structureId.indexOf(StringPool.SPACE) != -1)) {
-
-				throw new StructureIdException();
-			}
+			validate(structureId);
 
 			try {
 				journalStructurePersistence.findByG_S(groupId, structureId);

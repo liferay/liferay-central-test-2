@@ -100,6 +100,17 @@ public class JournalStructureServiceJSON {
 		return JournalStructureJSONSerializer.toJSONObject(returnValue);
 	}
 
+	public static JSONObject copyStructure(long groupId,
+		java.lang.String oldStructureId, java.lang.String newStructureId,
+		boolean autoStructureId)
+		throws java.rmi.RemoteException, com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
+		com.liferay.portlet.journal.model.JournalStructure returnValue = JournalStructureServiceUtil.copyStructure(groupId,
+				oldStructureId, newStructureId, autoStructureId);
+
+		return JournalStructureJSONSerializer.toJSONObject(returnValue);
+	}
+
 	public static void deleteStructure(long groupId,
 		java.lang.String structureId)
 		throws java.rmi.RemoteException, com.liferay.portal.PortalException,

@@ -67,6 +67,15 @@ public class JournalStructureServiceUtil {
 			description, xsd, communityPermissions, guestPermissions);
 	}
 
+	public static com.liferay.portlet.journal.model.JournalStructure copyStructure(
+		long groupId, java.lang.String oldStructureId,
+		java.lang.String newStructureId, boolean autoStructureId)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException, java.rmi.RemoteException {
+		return _service.copyStructure(groupId, oldStructureId, newStructureId,
+			autoStructureId);
+	}
+
 	public static void deleteStructure(long groupId,
 		java.lang.String structureId)
 		throws com.liferay.portal.PortalException,

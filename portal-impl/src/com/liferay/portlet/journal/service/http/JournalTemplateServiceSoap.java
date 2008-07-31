@@ -81,6 +81,23 @@ import java.rmi.RemoteException;
  *
  */
 public class JournalTemplateServiceSoap {
+	public static com.liferay.portlet.journal.model.JournalTemplateSoap copyTemplate(
+		long groupId, java.lang.String oldTemplateId,
+		java.lang.String newTemplateId, boolean autoTemplateId)
+		throws RemoteException {
+		try {
+			com.liferay.portlet.journal.model.JournalTemplate returnValue = JournalTemplateServiceUtil.copyTemplate(groupId,
+					oldTemplateId, newTemplateId, autoTemplateId);
+
+			return com.liferay.portlet.journal.model.JournalTemplateSoap.toSoapModel(returnValue);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
 	public static void deleteTemplate(long groupId, java.lang.String templateId)
 		throws RemoteException {
 		try {

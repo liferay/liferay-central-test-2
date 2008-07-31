@@ -81,6 +81,23 @@ import java.rmi.RemoteException;
  *
  */
 public class JournalArticleServiceSoap {
+	public static com.liferay.portlet.journal.model.JournalArticleSoap copyArticle(
+		long groupId, java.lang.String oldArticleId,
+		java.lang.String newArticleId, boolean autoArticleId, double version)
+		throws RemoteException {
+		try {
+			com.liferay.portlet.journal.model.JournalArticle returnValue = JournalArticleServiceUtil.copyArticle(groupId,
+					oldArticleId, newArticleId, autoArticleId, version);
+
+			return com.liferay.portlet.journal.model.JournalArticleSoap.toSoapModel(returnValue);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
 	public static com.liferay.portlet.journal.model.JournalArticleSoap getArticle(
 		long groupId, java.lang.String articleId, double version)
 		throws RemoteException {

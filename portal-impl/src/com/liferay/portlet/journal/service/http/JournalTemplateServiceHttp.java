@@ -297,6 +297,59 @@ public class JournalTemplateServiceHttp {
 		}
 	}
 
+	public static com.liferay.portlet.journal.model.JournalTemplate copyTemplate(
+		HttpPrincipal httpPrincipal, long groupId,
+		java.lang.String oldTemplateId, java.lang.String newTemplateId,
+		boolean autoTemplateId)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
+		try {
+			Object paramObj0 = new LongWrapper(groupId);
+
+			Object paramObj1 = oldTemplateId;
+
+			if (oldTemplateId == null) {
+				paramObj1 = new NullWrapper("java.lang.String");
+			}
+
+			Object paramObj2 = newTemplateId;
+
+			if (newTemplateId == null) {
+				paramObj2 = new NullWrapper("java.lang.String");
+			}
+
+			Object paramObj3 = new BooleanWrapper(autoTemplateId);
+
+			MethodWrapper methodWrapper = new MethodWrapper(JournalTemplateServiceUtil.class.getName(),
+					"copyTemplate",
+					new Object[] { paramObj0, paramObj1, paramObj2, paramObj3 });
+
+			Object returnObj = null;
+
+			try {
+				returnObj = TunnelUtil.invoke(httpPrincipal, methodWrapper);
+			}
+			catch (Exception e) {
+				if (e instanceof com.liferay.portal.PortalException) {
+					throw (com.liferay.portal.PortalException)e;
+				}
+
+				if (e instanceof com.liferay.portal.SystemException) {
+					throw (com.liferay.portal.SystemException)e;
+				}
+
+				throw new com.liferay.portal.SystemException(e);
+			}
+
+			return (com.liferay.portlet.journal.model.JournalTemplate)returnObj;
+		}
+		catch (com.liferay.portal.SystemException se) {
+			_log.error(se, se);
+
+			throw se;
+		}
+	}
+
 	public static void deleteTemplate(HttpPrincipal httpPrincipal,
 		long groupId, java.lang.String templateId)
 		throws com.liferay.portal.PortalException,

@@ -506,6 +506,18 @@
 
 	<definition name="portlet.journal" extends="portlet" />
 
+	<definition name="portlet.journal.copy_article" extends="portlet.journal">
+		<put name="portlet_content" value="/portlet/journal/copy_article.jsp" />
+	</definition>
+
+	<definition name="portlet.journal.copy_structure" extends="portlet.journal">
+		<put name="portlet_content" value="/portlet/journal/copy_structure.jsp" />
+	</definition>
+
+	<definition name="portlet.journal.copy_template" extends="portlet.journal">
+		<put name="portlet_content" value="/portlet/journal/copy_template.jsp" />
+	</definition>
+
 	<definition name="portlet.journal.edit_article" extends="portlet.journal">
 		<put name="portlet_content" value="/portlet/journal/edit_article.jsp" />
 	</definition>

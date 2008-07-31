@@ -126,6 +126,20 @@ public class JournalArticleServiceImpl extends JournalArticleServiceBaseImpl {
 			user.getUserId(), groupId, articleId, version, articleURL, prefs);
 	}
 
+	public JournalArticle copyArticle(
+			long groupId, String oldArticleId, String newArticleId,
+			boolean autoArticleId, double version)
+		throws PortalException, SystemException {
+
+		JournalArticlePermission.check(
+			getPermissionChecker(), groupId, oldArticleId,
+			ActionKeys.ADD_ARTICLE);
+
+		return journalArticleLocalService.copyArticle(
+			getUserId(), groupId, oldArticleId, newArticleId, autoArticleId,
+			version);
+	}
+
 	public JournalArticle getArticle(
 			long groupId, String articleId, double version)
 		throws PortalException, SystemException {

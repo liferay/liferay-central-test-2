@@ -113,6 +113,15 @@ public class JournalArticleServiceUtil {
 			articleURL, prefs);
 	}
 
+	public static com.liferay.portlet.journal.model.JournalArticle copyArticle(
+		long groupId, java.lang.String oldArticleId,
+		java.lang.String newArticleId, boolean autoArticleId, double version)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException, java.rmi.RemoteException {
+		return _service.copyArticle(groupId, oldArticleId, newArticleId,
+			autoArticleId, version);
+	}
+
 	public static com.liferay.portlet.journal.model.JournalArticle getArticle(
 		long groupId, java.lang.String articleId, double version)
 		throws com.liferay.portal.PortalException,

@@ -73,6 +73,17 @@ import com.liferay.portlet.journal.service.JournalArticleServiceUtil;
  *
  */
 public class JournalArticleServiceJSON {
+	public static JSONObject copyArticle(long groupId,
+		java.lang.String oldArticleId, java.lang.String newArticleId,
+		boolean autoArticleId, double version)
+		throws java.rmi.RemoteException, com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
+		com.liferay.portlet.journal.model.JournalArticle returnValue = JournalArticleServiceUtil.copyArticle(groupId,
+				oldArticleId, newArticleId, autoArticleId, version);
+
+		return JournalArticleJSONSerializer.toJSONObject(returnValue);
+	}
+
 	public static JSONObject getArticle(long groupId,
 		java.lang.String articleId, double version)
 		throws java.rmi.RemoteException, com.liferay.portal.PortalException,

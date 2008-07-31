@@ -70,6 +70,20 @@ public class JournalStructureServiceImpl
 			xsd, communityPermissions, guestPermissions);
 	}
 
+	public JournalStructure copyStructure(
+			long groupId, String oldStructureId, String newStructureId,
+			boolean autoStructureId)
+		throws PortalException, SystemException {
+
+		JournalStructurePermission.check(
+			getPermissionChecker(), groupId, oldStructureId,
+			ActionKeys.ADD_STRUCTURE);
+
+		return journalStructureLocalService.copyStructure(
+			getUserId(), groupId, oldStructureId, newStructureId,
+			autoStructureId);
+	}
+
 	public void deleteStructure(long groupId, String structureId)
 		throws PortalException, SystemException {
 

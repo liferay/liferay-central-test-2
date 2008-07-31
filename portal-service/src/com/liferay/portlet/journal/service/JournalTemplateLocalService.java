@@ -169,6 +169,12 @@ public interface JournalTemplateLocalService {
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;
 
+	public com.liferay.portlet.journal.model.JournalTemplate copyTemplate(
+		long userId, long groupId, java.lang.String oldTemplateId,
+		java.lang.String newTemplateId, boolean autoTemplateId)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException;
+
 	public void deleteTemplate(long groupId, java.lang.String templateId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;

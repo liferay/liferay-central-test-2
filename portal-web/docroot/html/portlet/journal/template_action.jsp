@@ -53,6 +53,17 @@ JournalTemplate template = (JournalTemplate)row.getObject();
 		<liferay-ui:icon image="permissions" url="<%= permissionsTemplateURL %>" />
 	</c:if>
 
+	<c:if test="<%= PortletPermissionUtil.contains(permissionChecker, plid.longValue(), PortletKeys.JOURNAL, ActionKeys.ADD_TEMPLATE) %>">
+		<portlet:renderURL var="copyURL">
+			<portlet:param name="struts_action" value="/journal/copy_template" />
+			<portlet:param name="redirect" value="<%= currentURL %>" />
+			<portlet:param name="groupId" value="<%= String.valueOf(template.getGroupId()) %>" />
+			<portlet:param name="oldTemplateId" value="<%= template.getTemplateId() %>" />
+		</portlet:renderURL>
+
+		<liferay-ui:icon image="copy" url="<%= copyURL.toString() %>" />
+	</c:if>
+
 	<c:if test="<%= Validator.isNotNull(template.getStructureId()) %>">
 		<c:if test="<%= PortletPermissionUtil.contains(permissionChecker, plid.longValue(), PortletKeys.JOURNAL, ActionKeys.ADD_ARTICLE) %>">
 			<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="addArticleURL">
