@@ -176,6 +176,7 @@ Liferay.Portlet.TagsAdmin = new Class({
 			});
 			
 			buffer.push("</ul>");
+			
 			list.html(buffer.join(''));
 			
 			/* Storing vocabulary useful data */
@@ -250,7 +251,7 @@ Liferay.Portlet.TagsAdmin = new Class({
 		});
 		buffer.push("</ul>");
 		
-		if (entries.length == 0) {
+		if (!entries.length) {
 			buffer = [];
 			instance._sendMessage('error', 'no-entries-were-found', '#ui-tags-entry-messages', true);
 		}
@@ -478,7 +479,8 @@ Liferay.Portlet.TagsAdmin = new Class({
 	},
 	
 	_feedVocabularySelect: function(vocabularies, defaultValue) {
-		var select = jQuery('select.ui-tags-select-list'), buffer = ['<option value="0">(new)</option>'];
+		var select = jQuery('select.ui-tags-select-list'), 
+			buffer = ['<option value="0"></option>', '<option value="0">(new)</option>'];
 		jQuery.each(vocabularies, function(i) {
 			var selected = this.vocabularyId == defaultValue;
 			buffer.push("<option");
