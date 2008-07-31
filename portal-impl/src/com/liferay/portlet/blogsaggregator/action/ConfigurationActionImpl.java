@@ -72,7 +72,8 @@ public class ConfigurationActionImpl implements ConfigurationAction {
 		prefs.setValue("organization-id", organizationId);
 		prefs.setValue("display-style", displayStyle);
 		prefs.setValue("max", String.valueOf(max));
-		prefs.setValue("enable-rss-subscription", String.valueOf(enableRssSubscription));
+		prefs.setValue(
+			"enable-rss-subscription", String.valueOf(enableRssSubscription));
 
 		prefs.store();
 
