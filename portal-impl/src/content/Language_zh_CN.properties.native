@@ -131,6 +131,7 @@ category.wsrp=WSRP
 ## Model resources
 ##
 
+model.resource.com.liferay.knowledgebase.model.KBArticle
 model.resource.com.liferay.portal.model.Group=群组
 model.resource.com.liferay.portal.model.Layout=设计
 model.resource.com.liferay.portal.model.Location=地点
@@ -239,6 +240,7 @@ action.MANAGE_LAYOUTS=处理页
 action.MANAGE_ORDERS=处理命令
 action.MANAGE_STAGING=处理分级法
 action.MANAGE_SUBORGANIZATIONS=处理Suborganizations
+action.MANAGE_TEMPLATES=处理模板
 action.MANAGE_USERS=处理用户
 action.MOVE_THREAD=移动螺纹
 action.PERMISSIONS=允许
@@ -357,6 +359,7 @@ add-blog=增加Blog
 add-bookmark=增加书签
 add-books=增加书
 add-category=增加类别
+add-child-article=增加儿童文章
 add-child-category=增加子类别
 add-child-folder=增加子文件夹
 add-child-page=增加儿童页。
@@ -654,6 +657,7 @@ article-title=文章标题
 article-type=文章类型
 article=文章
 articles-per-page=文章每页
+articles-with-tag-x=Articles with tag {0}
 articles=文章
 artifact-id=人工制品身份证
 ascending=由小到大

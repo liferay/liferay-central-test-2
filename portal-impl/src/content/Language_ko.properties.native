@@ -131,6 +131,7 @@ category.wsrp=WSRP
 ## Model resources
 ##
 
+model.resource.com.liferay.knowledgebase.model.KBArticle
 model.resource.com.liferay.portal.model.Group=지역 사회
 model.resource.com.liferay.portal.model.Layout=페이지
 model.resource.com.liferay.portal.model.Location=위치
@@ -239,6 +240,7 @@ action.MANAGE_LAYOUTS=페이지를 처리하십시요
 action.MANAGE_ORDERS=순서를 처리하십시요
 action.MANAGE_STAGING=발판을 처리하십시요
 action.MANAGE_SUBORGANIZATIONS=Suborganizations을 처리하십시요
+action.MANAGE_TEMPLATES=템플렛을 처리하십시오
 action.MANAGE_USERS=사용자를 처리하십시요
 action.MOVE_THREAD=움직임 실
 action.PERMISSIONS=허가
@@ -357,6 +359,7 @@ add-blog=Blog을 추가하십시요
 add-bookmark=갈피표를 추가하십시요
 add-books=책을 추가하십시요
 add-category=종류를 추가하십시요
+add-child-article=아이 기사를 추가하십시오
 add-child-category=아이 종류를 추가하십시요
 add-child-folder=아이 폴더를 추가하십시요
 add-child-page=아이 페이지를 추가하십시요.
@@ -654,6 +657,7 @@ article-title=기사 제목
 article-type=기사 유형
 article=기사
 articles-per-page=페이지당 기사
+articles-with-tag-x=Articles with tag {0}
 articles=기사
 artifact-id=인공물 식별
 ascending=올라감

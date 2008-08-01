@@ -101,6 +101,7 @@ category.wsrp=WSRP
 ## Model resources
 ##
 
+model.resource.com.liferay.knowledgebase.model.KBArticle
 model.resource.com.liferay.portal.model.Group=انجمن
 model.resource.com.liferay.portal.model.Layout=صفحه
 model.resource.com.liferay.portal.model.Location=منطقه
@@ -415,6 +416,7 @@ article-title=عنوان مقاله
 article-type=نوع مقاله
 article=مقاله
 articles-per-page=تعداد مقاله در صفحه
+articles-with-tag-x=Articles with tag {0}
 articles=مقالات
 ascending=صعودی
 ask-x-to-be-your-friend=Ask {0} to be your friend.

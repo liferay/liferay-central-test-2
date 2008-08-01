@@ -112,6 +112,7 @@ category.wsrp=WSRP
 ## Model resources
 ##
 
+model.resource.com.liferay.knowledgebase.model.KBArticle
 model.resource.com.liferay.portal.model.Group=مجتمع
 model.resource.com.liferay.portal.model.Layout=تصميم
 model.resource.com.liferay.portal.model.Location=موقع
@@ -487,6 +488,7 @@ article-title=عنوان المقالة
 article-type=نوع المقالة
 article=مقالة
 articles-per-page=عدد المقالات في الصفحة
+articles-with-tag-x=Articles with tag {0}
 articles=المقالات
 artifact-id=الرمز التعريفي للمنتج
 ascending=تصاعدي

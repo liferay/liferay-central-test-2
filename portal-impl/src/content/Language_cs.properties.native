@@ -22,6 +22,7 @@ category.development=Vývoj
 ## Model resources
 ##
 
+model.resource.com.liferay.knowledgebase.model.KBArticle
 
 ##
 ## Action names
@@ -217,6 +218,7 @@ area=Pole
 article-id=Identifikátor článku
 article-title=Nadpis článku
 article=Článek
+articles-with-tag-x=Articles with tag {0}
 articles=Články
 ask-x-to-be-your-friend=Ask {0} to be your friend.
 assigned=Přiřazené

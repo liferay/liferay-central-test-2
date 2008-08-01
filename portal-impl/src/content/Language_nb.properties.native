@@ -124,6 +124,7 @@ category.wsrp=WSRP
 ## Model resources
 ##
 
+model.resource.com.liferay.knowledgebase.model.KBArticle
 model.resource.com.liferay.portal.model.Group=Gruppe
 model.resource.com.liferay.portal.model.Layout=Side
 model.resource.com.liferay.portal.model.Location=Sted
@@ -560,6 +561,7 @@ article-title=Artikel navn
 article-type=Artikel type
 article=Artikel
 articles-per-page=Artikler per side
+articles-with-tag-x=Articles with tag {0}
 articles=Artikler
 artifact-id=Artefakt ID
 ascending=Stigende

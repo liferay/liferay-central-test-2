@@ -98,6 +98,7 @@ category.wsrp=WSRP
 ## Model resources
 ##
 
+model.resource.com.liferay.knowledgebase.model.KBArticle
 model.resource.com.liferay.portal.model.Group=Comunitat
 model.resource.com.liferay.portal.model.Layout=Pàgina
 model.resource.com.liferay.portal.model.Location=Localització
@@ -391,6 +392,7 @@ article-title=Títol de l'article
 article-type=Tipus d'article
 article=Article
 articles-per-page=Articles per pàgina
+articles-with-tag-x=Articles with tag {0}
 articles=Articles
 ascending=Creixent
 ask-x-to-be-your-friend=Ask {0} to be your friend.

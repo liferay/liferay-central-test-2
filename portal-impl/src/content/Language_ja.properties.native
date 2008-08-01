@@ -131,6 +131,7 @@ category.wsrp=WSRP
 ## Model resources
 ##
 
+model.resource.com.liferay.knowledgebase.model.KBArticle
 model.resource.com.liferay.portal.model.Group=コミュニティ
 model.resource.com.liferay.portal.model.Layout=ページ
 model.resource.com.liferay.portal.model.Location=位置
@@ -239,6 +240,7 @@ action.MANAGE_LAYOUTS=ページを経営しなさい
 action.MANAGE_ORDERS=順序を管理しなさい
 action.MANAGE_STAGING=足場を経営しなさい
 action.MANAGE_SUBORGANIZATIONS=Suborganizations を管理しなさい
+action.MANAGE_TEMPLATES=型板を管理しなさい
 action.MANAGE_USERS=ユーザーを経営しなさい
 action.MOVE_THREAD=移動糸
 action.PERMISSIONS=許可
@@ -357,6 +359,7 @@ add-blog=Blog を加えなさい
 add-bookmark=しおりを加えなさい
 add-books=本を加えなさい
 add-category=部門を加えなさい
+add-child-article=子供の記事を加えなさい
 add-child-category=子供の部門を加えなさい
 add-child-folder=子供のホールダーを加えなさい
 add-child-page=子供のページを加えなさい。
@@ -654,6 +657,7 @@ article-title=記事のタイトル
 article-type=記事のタイプ
 article=記事
 articles-per-page=1 ページ毎の記事数
+articles-with-tag-x=Articles with tag {0}
 articles=記事
 artifact-id=人工物ID
 ascending=上昇

@@ -131,6 +131,7 @@ category.wsrp=WSRP
 ## Model resources
 ##
 
+model.resource.com.liferay.knowledgebase.model.KBArticle
 model.resource.com.liferay.portal.model.Group=群組
 model.resource.com.liferay.portal.model.Layout=設計
 model.resource.com.liferay.portal.model.Location=地點
@@ -239,6 +240,7 @@ action.MANAGE_LAYOUTS=處理頁
 action.MANAGE_ORDERS=處理命令
 action.MANAGE_STAGING=處理分級法
 action.MANAGE_SUBORGANIZATIONS=處理Suborganizations
+action.MANAGE_TEMPLATES=處理模板
 action.MANAGE_USERS=處理用戶
 action.MOVE_THREAD=移動螺紋
 action.PERMISSIONS=允許
@@ -357,6 +359,7 @@ add-blog=增加Blog
 add-bookmark=增加書簽
 add-books=增加書
 add-category=增加類別
+add-child-article=增加儿童文章
 add-child-category=增加子類別
 add-child-folder=增加子文件夾
 add-child-page=增加兒童頁。
@@ -654,6 +657,7 @@ article-title=文章標題
 article-type=文章類型
 article=文章
 articles-per-page=文章每頁
+articles-with-tag-x=Articles with tag {0}
 articles=文章
 artifact-id=人工製品身份證
 ascending=由小到大

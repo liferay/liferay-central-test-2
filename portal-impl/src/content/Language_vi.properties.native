@@ -70,6 +70,7 @@ category.wiki=Wiki
 ## Model resources
 ##
 
+model.resource.com.liferay.knowledgebase.model.KBArticle
 
 ##
 ## Action names
@@ -260,6 +261,7 @@ area=Vùng
 article-id=Định danh bài viết 
 article-title=Tiêu đề bài viết
 article=Bài viết
+articles-with-tag-x=Articles with tag {0}
 articles=Các bài viết
 ask-x-to-be-your-friend=Ask {0} to be your friend.
 assigned=Gán cho

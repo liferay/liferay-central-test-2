@@ -131,6 +131,7 @@ category.wsrp=WSRP
 ## Model resources
 ##
 
+model.resource.com.liferay.knowledgebase.model.KBArticle
 model.resource.com.liferay.portal.model.Group=Community
 model.resource.com.liferay.portal.model.Layout=Seite
 model.resource.com.liferay.portal.model.Location=Position
@@ -239,6 +240,7 @@ action.MANAGE_LAYOUTS=Seiten verwalten
 action.MANAGE_ORDERS=Aufträge verwalten
 action.MANAGE_STAGING=Staging verwalten
 action.MANAGE_SUBORGANIZATIONS=Unerorganisationen verwalten
+action.MANAGE_TEMPLATES=Handhaben Sie Schablonen
 action.MANAGE_USERS=Benutzer verwalten
 action.MOVE_THREAD=Thread verschieben
 action.PERMISSIONS=Rechte
@@ -357,6 +359,7 @@ add-blog=Blog hinzufügen
 add-bookmark=Lesezeichen hinzufügen
 add-books=Bücher hinzufügen
 add-category=Kategorie hinzufügen
+add-child-article=Addieren Sie Kind-Artikel
 add-child-category=Untergeordnete Kategorie hinzufügen
 add-child-folder=Untergeordnete Ordner hinzufügen
 add-child-page=Untergeordnete Seite hinzufügen
@@ -654,6 +657,7 @@ article-title=Artikel Titel
 article-type=Artikel Typ
 article=Artikel
 articles-per-page=Artikel pro Seite
+articles-with-tag-x=Articles with tag {0}
 articles=Artikel
 artifact-id=Artefakt ID
 ascending=Aufsteigend
