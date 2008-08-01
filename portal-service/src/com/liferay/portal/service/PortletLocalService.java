@@ -113,6 +113,9 @@ public interface PortletLocalService {
 	public void initEAR(java.lang.String[] xmls,
 		com.liferay.portal.kernel.plugin.PluginPackage pluginPackage);
 
+	public com.liferay.portal.model.Portlet deployRemotePortlet(
+		com.liferay.portal.model.Portlet remotePortlet);
+
 	public java.util.List<com.liferay.portal.model.Portlet> initWAR(
 		java.lang.String servletContextName, java.lang.String[] xmls,
 		com.liferay.portal.kernel.plugin.PluginPackage pluginPackage);

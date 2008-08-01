@@ -1,3 +1,4 @@
+<%
 /**
  * Copyright (c) 2000-2008 Liferay, Inc. All rights reserved.
  *
@@ -19,7 +20,9 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
+%>
 
+<%
 /**
  * The contents of this file are subject to the terms of the Common Development
  * and Distribution License (the License). You may not use this file except in
@@ -38,39 +41,16 @@
  *
  * Copyright 2008 Sun Microsystems Inc. All rights reserved.
  */
+%>
 
-package com.liferay.portal.portletcontainer;
+<%@page contentType="text/html"%>
+<%@page pageEncoding="UTF-8"%>
 
-import com.liferay.portal.model.Portlet;
-import com.liferay.portal.model.PortletApp;
+<%@ taglib uri="http://java.sun.com/portlet" prefix="portlet" %>
+<%@ taglib uri="http://java.sun.com/jstl/fmt" prefix="fmt" %>
 
-import com.sun.portal.container.EntityID;
-import com.sun.portal.container.PortletID;
-
-/**
- * <a href="WindowInvokerUtil.java.html"><b><i>View Source</i></b></a>
- *
- * @author Deepak Gothe
- * @author Brian Wing Shun Chan
- *
- */
-public class WindowInvokerUtil {
-
-	public static EntityID getEntityID(Portlet portlet) {
-		PortletApp portletApp = portlet.getPortletApp();
-
-		PortletID portletID = new PortletID(
-			portletApp.getServletContextName(), portlet.getPortletName());
-
-		if (portlet.isRemote()){
-			portletID = null;
-		}
-
-		EntityID portletEntityId = new EntityID(portletID);
-
-		portletEntityId.setPortletWindowName(portlet.getPortletId());
-
-		return portletEntityId;
-	}
-
-}
+<portlet:defineObjects/>
+<fmt:setBundle basename="ConsumerAdminPortlet" />
+<br><br>
+<b><a href='http://wiki.java.net/bin/view/OpenPortal/WSRPUserGuide' target='_new'><fmt:message key="help.page" /></a></b>
+<br><br><br>
