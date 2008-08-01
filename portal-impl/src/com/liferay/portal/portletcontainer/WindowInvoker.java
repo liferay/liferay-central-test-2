@@ -406,8 +406,15 @@ public class WindowInvoker extends InvokerPortlet {
 		}
 	}
 
-	public Locale _getLocale(HttpServletRequest request) {
-		Locale locale = request.getLocale();
+	public Locale _getLocale(
+		HttpServletRequest request, PortletRequest portletRequest) {
+
+		ThemeDisplay themeDisplay = _getThemeDisplay(portletRequest);
+		Locale locale = themeDisplay.getLocale();
+
+		if (locale == null) {
+			locale = request.getLocale();
+		}
 
 		if (locale == null) {
 			locale = LocaleUtil.getDefault();
@@ -417,9 +424,7 @@ public class WindowInvoker extends InvokerPortlet {
 	}
 
 	private long _getPlid(PortletRequest portletRequest) {
-		ThemeDisplay themeDisplay = (ThemeDisplay)portletRequest.getAttribute(
-			WebKeys.THEME_DISPLAY);
-
+		ThemeDisplay themeDisplay = _getThemeDisplay(portletRequest);
 		return themeDisplay.getPlid();
 	}
 
@@ -451,6 +456,13 @@ public class WindowInvoker extends InvokerPortlet {
 
 			return roleNames;
 		}
+	}
+
+	private ThemeDisplay _getThemeDisplay(PortletRequest portletRequest) {
+		ThemeDisplay themeDisplay = (ThemeDisplay)portletRequest.getAttribute(
+			WebKeys.THEME_DISPLAY);
+
+		return themeDisplay;
 	}
 
 	private void _initUser(
@@ -503,7 +515,7 @@ public class WindowInvoker extends InvokerPortlet {
 		containerRequest.setRoles(_getRoles(request));
 		containerRequest.setUserID(_remoteUser);
 		containerRequest.setUserPrincipal(_userPrincipal);
-		containerRequest.setLocale(_getLocale(request));
+		containerRequest.setLocale(_getLocale(request, portletRequest));
 		containerRequest.setUserInfo(
 			UserInfoFactory.getUserInfo(_remoteUserId, _portletModel));
 
@@ -511,8 +523,7 @@ public class WindowInvoker extends InvokerPortlet {
 			PortletRequest.CCPP_PROFILE, _getCCPPProfile(request));
 
 		containerRequest.setAttribute(
-			WebKeys.THEME_DISPLAY,
-			portletRequest.getAttribute(WebKeys.THEME_DISPLAY));
+			WebKeys.THEME_DISPLAY, _getThemeDisplay(portletRequest));
 
 		containerRequest.setAttribute(
 			PortletRequestConstants.ESCAPE_XML_VALUE,
