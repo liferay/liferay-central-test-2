@@ -3,6 +3,7 @@ package ${packagePath}.service.base;
 import ${packagePath}.service.${entity.name}${sessionTypeName}Service;
 
 import com.liferay.portal.kernel.bean.InitializingBean;
+import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
 import ${beanLocatorUtil};
 
 <#if sessionTypeName == "">
@@ -154,35 +155,41 @@ import ${beanLocatorUtil};
 
 	public void afterPropertiesSet() {
 		<#list referenceList as tempEntity>
+			<#if tempEntity.isPortalReference()>
+				<#assign tempBeanLocatorUtilShortName = "PortalBeanLocatorUtil">
+			<#else>
+				<#assign tempBeanLocatorUtilShortName = beanLocatorUtilShortName>
+			</#if>
+
 			<#if entity.equals(tempEntity)>
 				<#if sessionTypeName == "" && tempEntity.hasLocalService()>
 					if (${tempEntity.varName}LocalService == null) {
-						${tempEntity.varName}LocalService = (${tempEntity.name}LocalService)${beanLocatorUtilShortName}.locate(${tempEntity.name}LocalService.class.getName() + ".impl");
+						${tempEntity.varName}LocalService = (${tempEntity.name}LocalService)${tempBeanLocatorUtilShortName}.locate(${tempEntity.name}LocalService.class.getName() + ".impl");
 					}
 				</#if>
 			<#else>
 				<#if tempEntity.hasLocalService()>
 					if (${tempEntity.varName}LocalService == null) {
-						${tempEntity.varName}LocalService = (${tempEntity.name}LocalService)${beanLocatorUtilShortName}.locate(${tempEntity.name}LocalService.class.getName() + ".impl");
+						${tempEntity.varName}LocalService = (${tempEntity.name}LocalService)${tempBeanLocatorUtilShortName}.locate(${tempEntity.name}LocalService.class.getName() + ".impl");
 					}
 				</#if>
 
 				<#if tempEntity.hasRemoteService()>
 					if (${tempEntity.varName}Service == null) {
-						${tempEntity.varName}Service = (${tempEntity.name}Service)${beanLocatorUtilShortName}.locate(${tempEntity.name}Service.class.getName() + ".impl");
+						${tempEntity.varName}Service = (${tempEntity.name}Service)${tempBeanLocatorUtilShortName}.locate(${tempEntity.name}Service.class.getName() + ".impl");
 					}
 				</#if>
 			</#if>
 
 			<#if tempEntity.hasColumns()>
 				if (${tempEntity.varName}Persistence == null) {
-					${tempEntity.varName}Persistence = (${tempEntity.name}Persistence)${beanLocatorUtilShortName}.locate(${tempEntity.name}Persistence.class.getName() + ".impl");
+					${tempEntity.varName}Persistence = (${tempEntity.name}Persistence)${tempBeanLocatorUtilShortName}.locate(${tempEntity.name}Persistence.class.getName() + ".impl");
 				}
 			</#if>
 
 			<#if tempEntity.hasFinderClass()>
 				if (${tempEntity.varName}Finder == null) {
-					${tempEntity.varName}Finder = (${tempEntity.name}Finder)${beanLocatorUtilShortName}.locate(${tempEntity.name}Finder.class.getName() + ".impl");
+					${tempEntity.varName}Finder = (${tempEntity.name}Finder)${tempBeanLocatorUtilShortName}.locate(${tempEntity.name}Finder.class.getName() + ".impl");
 				}
 			</#if>
 		</#list>

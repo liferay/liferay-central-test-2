@@ -299,6 +299,14 @@ public class Entity {
 		return _finderList;
 	}
 
+	public boolean isPortalReference() {
+		return _portalReference;
+	}
+
+	public void setPortalReference(boolean portalReference) {
+		_portalReference = portalReference;
+	}
+
 	public List<Entity> getReferenceList() {
 		return _referenceList;
 	}
@@ -358,6 +366,7 @@ public class Entity {
 	private List<EntityColumn> _columnList;
 	private EntityOrder _order;
 	private List<EntityFinder> _finderList;
+	private boolean _portalReference;
 	private List<Entity> _referenceList;
 	private List<String> _txRequiredList;
 

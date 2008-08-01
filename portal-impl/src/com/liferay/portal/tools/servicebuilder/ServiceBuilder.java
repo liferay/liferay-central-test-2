@@ -1094,6 +1094,8 @@ public class ServiceBuilder {
 
 			entity = serviceBuilder.getEntity(refEntity);
 
+			entity.setPortalReference(useTempFile);
+
 			_entityPool.put(name, entity);
 
 			if (useTempFile) {
