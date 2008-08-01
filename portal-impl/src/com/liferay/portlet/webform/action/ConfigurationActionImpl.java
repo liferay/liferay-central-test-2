@@ -166,7 +166,8 @@ public class ConfigurationActionImpl implements ConfigurationAction {
 
 			while ((i == 1) || (Validator.isNotNull(fieldLabel))) {
 				if ((Validator.isNotNull(fieldValidationScript) ^
-						Validator.isNotNull(fieldValidationErrorMessage))) {
+					(Validator.isNotNull(fieldValidationErrorMessage)))) {
+
 					SessionErrors.add(
 						actionRequest, "invalidValidationDefinition" + i);
 				}
@@ -180,7 +181,7 @@ public class ConfigurationActionImpl implements ConfigurationAction {
 					"fieldValidationScript" + i, fieldValidationScript);
 				prefs.setValue(
 					"fieldValidationErrorMessage" + i,
-						fieldValidationErrorMessage);
+					fieldValidationErrorMessage);
 
 				i++;
 
@@ -212,7 +213,7 @@ public class ConfigurationActionImpl implements ConfigurationAction {
 				prefs.setValue("fieldOptions" + i, StringPool.BLANK);
 				prefs.setValue("fieldValidationScript" + i, StringPool.BLANK);
 				prefs.setValue(
-						"fieldValidationErrorMessage" + i, StringPool.BLANK);
+					"fieldValidationErrorMessage" + i, StringPool.BLANK);
 
 				i++;
 

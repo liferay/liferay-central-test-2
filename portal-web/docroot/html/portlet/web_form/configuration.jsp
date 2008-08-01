@@ -75,9 +75,11 @@ if (WebFormUtil.getTableRowsCount(databaseTableName) > 0) {
 			<portlet:namespace />swapValues(validationScriptA, validationScriptB);
 			<portlet:namespace />swapValues(validationErrorMessageA, validationErrorMessageB);
 
-			jQuery(".validation-script").each(function() {
-				<portlet:namespace />swapFieldTexts(jQuery(this), "[" + (index + 1) + "]", "[" + index + "]");
-			});
+			jQuery(".validation-script").each(
+				function() {
+					<portlet:namespace />swapFieldTexts(jQuery(this), "[" + (index + 1) + "]", "[" + index + "]");
+				}
+			);
 
 			var tmpA = optionalA.attr('checked');
 			var tmpB = optionalB.attr('checked');
@@ -255,7 +257,6 @@ if (WebFormUtil.getTableRowsCount(databaseTableName) > 0) {
 
 		<fieldset id="<portlet:namespace/>fieldset<%= i %>" >
 			<legend>
-
 				<c:choose>
 					<c:when test="<%= Validator.isNotNull(fieldLabel) %>">
 						<span><%= fieldLabel %></span>
@@ -264,10 +265,12 @@ if (WebFormUtil.getTableRowsCount(databaseTableName) > 0) {
 						<liferay-ui:message key="field" /> <%= i %>
 					</c:otherwise>
 				</c:choose>
-				
+
 				<c:if test="<%= !fieldsEditingDisabled %>">
 					&nbsp;
+
 					<a href="javascript: <portlet:namespace />moveUp(<%= i %>);"><img src="<%= themeDisplay.getPathThemeImages() %>/arrows/01_up.png" /></a>
+
 					<a href="javascript: <portlet:namespace />moveDown(<%= i %>);"><img src="<%= themeDisplay.getPathThemeImages() %>/arrows/01_down.png" /></a>
 				</c:if>
 			</legend>
@@ -292,6 +295,7 @@ if (WebFormUtil.getTableRowsCount(databaseTableName) > 0) {
 					</c:when>
 					<c:otherwise>
 						<label><liferay-ui:message key="optional" /></label>
+
 						<b><%= LanguageUtil.get(pageContext, fieldOptional ? "yes" : "no") %></b>
 					</c:otherwise>
 				</c:choose>
@@ -341,6 +345,7 @@ if (WebFormUtil.getTableRowsCount(databaseTableName) > 0) {
 							<div class="ctrl-holder" id="<portlet:namespace />inputValidationLink<%= i %>" >
 								<a href="javascript: <portlet:namespace />inputValidationConfigure<%= i %>();"><liferay-ui:message key="validation" /> &raquo;</a>
 							</div>
+
 							<script type="text/javascript">
 								function <portlet:namespace />inputValidationConfigure<%= i %>() {
 									document.getElementById("<portlet:namespace />inputValidation<%= i %>").style.display = "";
@@ -349,48 +354,49 @@ if (WebFormUtil.getTableRowsCount(databaseTableName) > 0) {
 							</script>
 						</c:if>
 
-						<div id='<portlet:namespace />inputValidation<%= i %>' style="<%= Validator.isNull(fieldValidationScript)?"display:none":"" %>">
+						<div id='<portlet:namespace />inputValidation<%= i %>' style='<%= Validator.isNull(fieldValidationScript) ? "display:none" : "" %>'>
 							<div class="ctrl-holder">
 								<table>
-									<tr>
-										<td>
-											<label for="<portlet:namespace/>fieldValidationScript<%= i %>"><liferay-ui:message key="validation-script" /></label>
-											<textarea class="lfr-textarea validation-script" cols="80" id="<portlet:namespace />fieldValidationScript<%= i %>" name="<portlet:namespace />fieldValidationScript<%= i %>" style="width: 95%" wrap="off"><%= fieldValidationScript %></textarea>
-										</td>
-										<td>
-											<div class="syntax-help"  >
-												<liferay-util:include page="/html/portlet/web_form/script_help.jsp" />
-											</div>
-										</td>
-									</tr>
+								<tr>
+									<td>
+										<label for="<portlet:namespace/>fieldValidationScript<%= i %>"><liferay-ui:message key="validation-script" /></label>
+
+										<textarea class="lfr-textarea validation-script" cols="80" id="<portlet:namespace />fieldValidationScript<%= i %>" name="<portlet:namespace />fieldValidationScript<%= i %>" style="width: 95%" wrap="off"><%= fieldValidationScript %></textarea>
+									</td>
+									<td>
+										<div class="syntax-help"  >
+											<liferay-util:include page="/html/portlet/web_form/script_help.jsp" />
+										</div>
+									</td>
+								</tr>
 								</table>
 							</div>
 							<div class="ctrl-holder">
 								<label for="<portlet:namespace/>fieldValidationErrorMessage<%= i %>"><liferay-ui:message key="validation-error-message" /></label>
+
 								<input class="lfr-input-text" id="<portlet:namespace />fieldValidationErrorMessage<%= i %>" name="<portlet:namespace />fieldValidationErrorMessage<%= i %>" size="80" type="text" value="<%= fieldValidationErrorMessage %>" />
 							</div>
 						</div>
 					</c:when>
 					<c:when test="<%= Validator.isNotNull(fieldValidationScript) %>">
 						<div class="ctrl-holder">
-							<label class='optional'><liferay-ui:message key="validation" /></label>
+							<label class="optional"><liferay-ui:message key="validation" /></label>
+
 							<pre><%= fieldValidationScript %></pre>
+
 							<liferay-ui:message key="validation-error-message" />:
+
 							<b><%= fieldValidationErrorMessage %></b>
 						</div>
 					</c:when>
 					<c:otherwise>
 						<div class="ctrl-holder">
-							<label class='optional'><liferay-ui:message key="validation" /></label>
+							<label class="optional"><liferay-ui:message key="validation" /></label>
+
 							<b><liferay-ui:message key="this-field-does-not-have-any-specific-validation" /></b>
 						</div>
 					</c:otherwise>
 				</c:choose>
-
-				<c:if test="<%= !fieldsEditingDisabled %>">
-				</c:if>
-				<c:if test="<%= fieldsEditingDisabled %>">
-				</c:if>
 			</div>
 		</fieldset>
 

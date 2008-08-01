@@ -34,6 +34,7 @@ String primKey = portletDisplay.getResourcePK();
 	<c:choose>
 		<c:when test="<%= permissionChecker.hasPermission(groupId, name, primKey, ActionKeys.CONFIGURATION) %>">
 			<span class="portlet-msg-error"><liferay-ui:message key="an-error-occurred-while-executing-the-validation.-please-review-the-following-errors" /></span>
+
 			<pre><%= request.getAttribute("validationScriptError") %></pre>
 		</c:when>
 		<c:otherwise>

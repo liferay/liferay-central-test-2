@@ -58,7 +58,7 @@ import org.mozilla.javascript.ScriptableObject;
  *
  * @author Daniel Weisser
  * @author Jorge Ferrer
- * @author Albert Montero
+ * @author Alberto Montero
  *
  */
 public class WebFormUtil {
@@ -192,7 +192,7 @@ public class WebFormUtil {
 
 		boolean validationResult = false;
 
-		Context cx = Context.enter();
+		Context context = Context.enter();
 
 		StringBuilder sb = new StringBuilder();
 
@@ -214,18 +214,19 @@ public class WebFormUtil {
 		String script = sb.toString();
 
 		try {
-			Scriptable scope = cx.initStandardObjects();
+			Scriptable scope = context.initStandardObjects();
+
 			Object jsFieldValues = Context.javaToJS(fieldValues, scope);
 
 			ScriptableObject.putProperty(scope, "jsFieldValues", jsFieldValues);
 
-			cx.evaluateString(scope, script, "Validation Script", 1, null);
+			context.evaluateString(scope, script, "Validation Script", 1, null);
 
 			Object obj = ScriptableObject.getProperty(
 				scope, "internalValidationResult");
 
 			if (obj instanceof Boolean) {
-				validationResult = ((Boolean) obj).booleanValue();
+				validationResult = ((Boolean)obj).booleanValue();
 			}
 			else {
 				throw new Exception("The script must return a boolean value");
@@ -235,6 +236,7 @@ public class WebFormUtil {
 			String msg =
 				"The following script has execution errors:\n" +
 					validationScript + "\n" + e.getMessage();
+
 			_log.error(msg);
 
 			throw new Exception(msg, e);

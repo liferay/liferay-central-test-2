@@ -124,7 +124,7 @@ public class ViewAction extends PortletAction {
 		}
 		catch (Exception e) {
 			actionRequest.setAttribute(
-					"validationScriptError", e.getMessage().trim());
+				"validationScriptError", e.getMessage().trim());
 
 			setForward(actionRequest, "portlet.web_form.error");
 
@@ -182,7 +182,7 @@ public class ViewAction extends PortletAction {
 	}
 
 	public ActionForward render(
-		ActionMapping mapping, ActionForm form, PortletConfig portletConfig,
+			ActionMapping mapping, ActionForm form, PortletConfig portletConfig,
 			RenderRequest renderRequest, RenderResponse renderResponse)
 		throws Exception {
 

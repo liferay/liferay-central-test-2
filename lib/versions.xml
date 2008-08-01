@@ -598,17 +598,6 @@
 		</licenses>
 	</library>
 	<library>
-		<file-name>development/rhino.jar</file-name>
-		<version>1.6 R7</version>
-		<project-name>Rhino</project-name>
-		<project-url>http://www.mozilla.org/rhino</project-url>
-		<licenses>
-			<license>
-				<license-name>MPL 1.1</license-name>
-			</license>
-		</licenses>
-	</library>
-	<library>
 		<file-name>development/sap.jar</file-name>
 		<version></version>
 		<project-name>SAP DB / MaxDB</project-name>
@@ -2050,6 +2039,17 @@
 		<licenses>
 			<license>
 				<license-name>Public Domain</license-name>
+			</license>
+		</licenses>
+	</library>
+	<library>
+		<file-name>portal/rhino.jar</file-name>
+		<version>1.6 R7</version>
+		<project-name>Rhino</project-name>
+		<project-url>http://www.mozilla.org/rhino</project-url>
+		<licenses>
+			<license>
+				<license-name>MPL 1.1</license-name>
 			</license>
 		</licenses>
 	</library>

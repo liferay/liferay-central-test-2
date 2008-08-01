@@ -30,7 +30,7 @@ String description = prefs.getValue("description", StringPool.BLANK);
 boolean requireCaptcha = GetterUtil.getBoolean(prefs.getValue("requireCaptcha", StringPool.BLANK));
 %>
 
-<form action="<portlet:actionURL><portlet:param name="struts_action" value="/web_form/view" /></portlet:actionURL>" class="uni-form" id="<portlet:namespace />fm" method="post" name="<portlet:namespace />fm" >
+<form action="<portlet:actionURL><portlet:param name="struts_action" value="/web_form/view" /></portlet:actionURL>" class="uni-form" id="<portlet:namespace />fm" method="post" name="<portlet:namespace />fm">
 <input type="hidden" name="<portlet:namespace/>redirect" value="<%= currentURL %>" />
 
 <fieldset class="block-labels">
@@ -66,6 +66,7 @@ boolean requireCaptcha = GetterUtil.getBoolean(prefs.getValue("requireCaptcha", 
 				<span class="portlet-msg-error"><%= fieldValidationErrorMessage %></span>
 			</div>
 		</c:if>
+
 		<c:if test="<%= !fieldOptional %>">
 			<div id="<portlet:namespace/>fieldOptionalError<%= fieldLabel %>" style="display: none">
 				<span class="portlet-msg-error"><liferay-ui:message key="this-field-is-mandatory" /></span>
@@ -151,7 +152,7 @@ boolean requireCaptcha = GetterUtil.getBoolean(prefs.getValue("requireCaptcha", 
 	%>
 
 	<c:if test="<%= requireCaptcha %>">
-		<portlet:actionURL var="captchaURL" windowState="<%= LiferayWindowState.EXCLUSIVE.toString() %>">
+		<portlet:actionURL windowState="<%= LiferayWindowState.EXCLUSIVE.toString() %>" var="captchaURL">
 			<portlet:param name="struts_action" value="/web_form/captcha" />
 		</portlet:actionURL>
 
@@ -183,6 +184,7 @@ boolean requireCaptcha = GetterUtil.getBoolean(prefs.getValue("requireCaptcha", 
 				String fieldValidationScript = prefs.getValue("fieldValidationScript" + fieldIndex, StringPool.BLANK);
 				String fieldValidationErrorMessage = prefs.getValue("fieldValidationErrorMessage" + fieldIndex, StringPool.BLANK);
 			%>
+
 				fieldLabels[<%= fieldIndex %>] = "<%= HtmlUtil.escape(fieldLabel) %>";
 				fieldValidationErrorMessages[<%= fieldIndex %>] = "<%= fieldValidationErrorMessage %>";
 
@@ -196,9 +198,11 @@ boolean requireCaptcha = GetterUtil.getBoolean(prefs.getValue("requireCaptcha", 
 						</c:otherwise>
 					</c:choose>
 				};
+
 				fieldOptional[<%= fieldIndex %>] = <%= fieldOptional %>;
 				fieldValidationFunctions[<%= fieldIndex %>] = fieldValidationFunction<%= fieldIndex %>;
 				fieldValues[<%= fieldIndex %>] = jQuery("#<portlet:namespace />" + "field<%= fieldIndex %>")[0].value;
+
 			<%
 				fieldIndex++;
 				fieldLabel = prefs.getValue("fieldLabel" + fieldIndex, "");
@@ -212,11 +216,13 @@ boolean requireCaptcha = GetterUtil.getBoolean(prefs.getValue("requireCaptcha", 
 
 				if (!fieldOptional[i] && thisFieldValue.match(/^\s*$/)) {
 					validationErrors = true;
+
 					jQuery(".portlet-msg-success").slideUp();
 					jQuery("#<portlet:namespace />fieldOptionalError" + fieldLabels[i]).slideDown();
 			   }
 			   else if (!fieldValidationFunctions[i](thisFieldValue, fieldValues)) {
 					validationErrors = true;
+
 					jQuery(".portlet-msg-success").slideUp();
 					jQuery("#<portlet:namespace />fieldOptionalError" + fieldLabels[i]).slideUp();
 					jQuery("#<portlet:namespace />validationError" + fieldLabels[i]).slideDown();
