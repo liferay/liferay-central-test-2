@@ -26,85 +26,88 @@
 
 <form id="<portlet:namespace />fm">
 
-<fieldset id="<portlet:namespace />searchEntriesFields">
-	<legend><liferay-ui:message key="search-tag" /></legend>
+<div id="ui-tags-messages" class="lfr-message-response" style="display: none;"></div>
 
-	<liferay-ui:message key="enter-text-below-to-refine-the-list-of-tags" />
-
-	<br /><br />
-
-	<input id="<portlet:namespace />keywordsInput" type="text" size="40" />
-
-	<span id="<portlet:namespace />searchPropertiesSpan" style="padding-left: 10px;"></span>
-
-	<br /><br />
-
-	<liferay-ui:message key="click-on-any-tag-to-edit-it" />
-
-	<div class="ui-tags" id="<portlet:namespace />searchResultsDiv" /></div>
-</fieldset>
-
-<fieldset id="<portlet:namespace />editEntryFields">
-	<legend><liferay-ui:message key="edit-tag" /></legend>
-
-	<liferay-ui:message key="tag-value" />
-
-	<br />
-
-	<input id="<portlet:namespace />editEntryNameInput" type="text" value="" />
-
-	<%--<input id="<portlet:namespace />updateEntryButton" type="button" value="<liferay-ui:message key="copy" />" />--%>
-
-	<br /><br />
-
-	<liferay-ui:message key="properties" />
-
-	<table border="0" cellpadding="0" cellspacing="0" id="<portlet:namespace />propertiesTable"></table>
-
-	<input id="<portlet:namespace />addPropertyButton" type="button" value="<liferay-ui:message key="add-property" />" />
-
-	<hr />
-
-	<input id="<portlet:namespace />updateEntryButton" type="button" value="<liferay-ui:message key="save" />" />
-
-	<input id="<portlet:namespace />deleteEntryButton" type="button" value="<liferay-ui:message key="delete" />" />
-
-	<input id="<portlet:namespace />cancelEditEntryButton" type="button" value="<liferay-ui:message key="cancel" />" />
-</fieldset>
-
-<fieldset id="<portlet:namespace />addEntryFields">
-	<legend><liferay-ui:message key="add-tag" /></legend>
-
-	<input id="<portlet:namespace />addEntryNameInput" type="text" />
-
-	<span id="<portlet:namespace />addToCategorySpan" style="padding-left: 10px;"></span>
-
-	<input id="<portlet:namespace />addCategoryNameInput" type="text" value="" />
-
-	<input id="<portlet:namespace />addEntryButton" type="button" value="<liferay-ui:message key="save" />" />
-</fieldset>
-
+<div class="ui-tags">
+		
+	<table class="ui-tags-container">
+	
+		<tr>
+			<td colspan="3">
+				<div class="ui-tags-search-bar">
+					<input id="<portlet:namespace />searchInput" type="text" value="" size="50" />
+					<input id="<portlet:namespace />searchButton" type="button" value="<liferay-ui:message key="search" />" />
+				</div>			
+			</td>
+		</tr>
+		
+		<tr class="ui-tags-toolbar">
+			<td>
+				<div class="ui-tags-buttons">
+					<span class="button selected tags-sets">Tags sets</span>
+					<span class="button categories">Categories</span>
+				</div>
+			</td>
+			<td colspan="2">
+				<div class="ui-tags-actions">
+					<b class="ui-tags-label">Add tag</b> 
+					<input name="ui-tags-entry-name" class="ui-tags-entry-name" type="text" value="" />
+					<select name="ui-tags-select-list" class="ui-tags-select-list">
+						<option value="new">(new)</option>
+					</select>
+					<input name="ui-tags-vocabulary-name" class="ui-tags-vocabulary-name" type="text" value="" />
+					<input class="ui-tags-save-entry" type="button" value="<liferay-ui:message key="save" />" />
+				</div>
+			</td>
+		</tr>
+		
+		<tr class="ui-tags-content">
+			<td>
+				<div class="ui-tags-vocabulary-list"></div>			
+			</td>
+			<td>
+				<div id="ui-tags-entry-messages" class="lfr-message-response" style="display: none;"></div>	
+				<div class="ui-tags-vocabulary-entries"></div>			
+			</td>
+			<td>
+				<div class="ui-tags-vocabulary-edit">
+					<div class="ui-tags-close"><span><liferay-ui:icon image="close" /></span></div>
+					<div class="ui-tags-label">Tag name:</div>
+					<input name="entry-name" class="entry-name" type="text" size="40" /> 
+					<input class="ui-tags-delete-entries-button" type="button" value="<liferay-ui:message key="delete" />" />
+					<br/><br/>
+					<div class="ui-tags-properties">
+						Properties:
+						<div class="ui-tags-property-line">
+							<input class="property-key" type="text" />
+							<input class="property-value" type="text" />
+							<liferay-ui:icon image="add" />
+							<liferay-ui:icon image="delete" />
+						</div>
+						<br/>
+						<input class="ui-tags-save-properties" type="button" value="<liferay-ui:message key="save" />" />
+						<input class="ui-tags-close" type="button" value="<liferay-ui:message key="close" />" />					
+					</div>
+				</div>			
+			</td>
+		</tr>
+		
+		<tr>
+			<td colspan="3">
+				<div class="ui-tags-footer">
+					<input class="ui-tags-delete-list-button" type="button" value="<liferay-ui:message key="delete" /> vocabulary" />
+				</div>
+			</td>
+		</tr>
+	
+	</table>
+</div>
 </form>
 
-<script type="text/javascript">
-	var <portlet:namespace />tagsAdmin = new Liferay.Portlet.TagsAdmin(
-		{
-			instanceVar: "<portlet:namespace />tagsAdmin",
-			addCategoryNameInput: "<portlet:namespace />addCategoryNameInput",
-			addEntryButton: "<portlet:namespace />addEntryButton",
-			addEntryNameInput: "<portlet:namespace />addEntryNameInput",
-			addPropertyButton: "<portlet:namespace />addPropertyButton",
-			addToCategorySpan: "<portlet:namespace />addToCategorySpan",
-			cancelEditEntryButton: "<portlet:namespace />cancelEditEntryButton",
-			deleteEntryButton: "<portlet:namespace />deleteEntryButton",
-			editEntryFields: "<portlet:namespace />editEntryFields",
-			editEntryNameInput: "<portlet:namespace />editEntryNameInput",
-			form: "<portlet:namespace />fm",
-			keywordsInput: "<portlet:namespace />keywordsInput",
-			propertiesTable: "<portlet:namespace />propertiesTable",
-			searchPropertiesSpan: "<portlet:namespace />searchPropertiesSpan",
-			searchResultsDiv: "<portlet:namespace />searchResultsDiv",
-			updateEntryButton: "<portlet:namespace />updateEntryButton"
-		}
-	);
+<script>
+jQuery(function() {
+	var <portlet:namespace />tagsAdmin = new Liferay.Portlet.TagsAdmin({
+		
+	});
+});
 </script>
