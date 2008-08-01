@@ -29,18 +29,18 @@
 <div id="ui-tags-messages" class="lfr-message-response" style="display: none;"></div>
 
 <div class="ui-tags">
-		
+
 	<table class="ui-tags-container">
-	
+
 		<tr>
 			<td colspan="3">
 				<div class="ui-tags-search-bar">
 					<input id="<portlet:namespace />searchInput" type="text" value="" size="50" />
 					<input id="<portlet:namespace />searchButton" type="button" value="<liferay-ui:message key="search" />" />
-				</div>			
+				</div>
 			</td>
 		</tr>
-		
+
 		<tr class="ui-tags-toolbar">
 			<td>
 				<div class="ui-tags-buttons">
@@ -50,7 +50,7 @@
 			</td>
 			<td colspan="2">
 				<div class="ui-tags-actions">
-					<b class="ui-tags-label">Add tag</b> 
+					<b class="ui-tags-label">Add tag</b>
 					<input name="ui-tags-entry-name" class="ui-tags-entry-name" type="text" value="" />
 					<select name="ui-tags-select-list" class="ui-tags-select-list">
 						<option value="new">(new)</option>
@@ -60,22 +60,22 @@
 				</div>
 			</td>
 		</tr>
-		
+
 		<tr class="ui-tags-content">
 			<td>
-				<div class="ui-tags-vocabulary-list"></div>			
+				<div class="ui-tags-vocabulary-list"></div>
 			</td>
 			<td>
-				<div id="ui-tags-entry-messages" class="lfr-message-response" style="display: none;"></div>	
-				<div class="ui-tags-vocabulary-entries"></div>			
+				<div id="ui-tags-entry-messages" class="lfr-message-response" style="display: none;"></div>
+				<div class="ui-tags-vocabulary-entries"></div>
 			</td>
 			<td>
 				<div class="ui-tags-vocabulary-edit">
 					<div class="ui-tags-close"><span><liferay-ui:icon image="close" /></span></div>
 					<div class="ui-tags-label">Tag name:</div>
-					<input name="entry-name" class="entry-name" type="text" size="40" /> 
+					<input name="entry-name" class="entry-name" type="text" size="40" />
 					<input class="ui-tags-delete-entries-button" type="button" value="<liferay-ui:message key="delete" />" />
-					<br/><br/>
+					<br /><br />
 					<div class="ui-tags-properties">
 						Properties:
 						<div class="ui-tags-property-line">
@@ -84,14 +84,14 @@
 							<liferay-ui:icon image="add" />
 							<liferay-ui:icon image="delete" />
 						</div>
-						<br/>
+						<br />
 						<input class="ui-tags-save-properties" type="button" value="<liferay-ui:message key="save" />" />
-						<input class="ui-tags-close" type="button" value="<liferay-ui:message key="close" />" />					
+						<input class="ui-tags-close" type="button" value="<liferay-ui:message key="close" />" />
 					</div>
-				</div>			
+				</div>
 			</td>
 		</tr>
-		
+
 		<tr>
 			<td colspan="3">
 				<div class="ui-tags-footer">
@@ -99,7 +99,7 @@
 				</div>
 			</td>
 		</tr>
-	
+
 	</table>
 </div>
 </form>
@@ -107,7 +107,7 @@
 <script>
 jQuery(function() {
 	var <portlet:namespace />tagsAdmin = new Liferay.Portlet.TagsAdmin({
-		
+
 	});
 });
 </script>
