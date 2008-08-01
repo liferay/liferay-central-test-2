@@ -4435,10 +4435,12 @@ function Datepicker() {
 	this._datepickerShowing = false; // True if the popup picker is showing , false if not
 	this._inDialog = false; // True if showing within a "dialog", false if not
 	this._mainDivId = 'ui-datepicker-div'; // The ID of the main datepicker division
+	this._inlineClass = 'ui-datepicker-inline'; // The name of the inline marker class
 	this._appendClass = 'ui-datepicker-append'; // The name of the append marker class
 	this._triggerClass = 'ui-datepicker-trigger'; // The name of the trigger marker class
 	this._dialogClass = 'ui-datepicker-dialog'; // The name of the dialog marker class
 	this._promptClass = 'ui-datepicker-prompt'; // The name of the dialog prompt marker class
+	this._disableClass = 'ui-datepicker-disabled'; // The name of the disabled covering marker class
 	this._unselectableClass = 'ui-datepicker-unselectable'; // The name of the unselectable cell marker class
 	this._currentClass = 'ui-datepicker-current-day'; // The name of the current day marker class
 	this.regional = []; // Available regional settings, indexed by language code
@@ -4449,8 +4451,12 @@ function Datepicker() {
 		closeStatus: 'Close without change', // Status text for close link
 		prevText: '&#x3c;Prev', // Display text for previous month link
 		prevStatus: 'Show the previous month', // Status text for previous month link
+		prevBigText: '&#x3c;&#x3c;', // Display text for previous year link
+		prevBigStatus: 'Show the previous year', // Status text for previous year link
 		nextText: 'Next&#x3e;', // Display text for next month link
 		nextStatus: 'Show the next month', // Status text for next month link
+		nextBigText: '&#x3e;&#x3e;', // Display text for next year link
+		nextBigStatus: 'Show the next year', // Status text for next year link
 		currentText: 'Today', // Display text for current month link
 		currentStatus: 'Show the current month', // Status text for current month link
 		monthNames: ['January','February','March','April','May','June',
@@ -4487,9 +4493,11 @@ function Datepicker() {
 		hideIfNoPrevNext: false, // True to hide next/previous month links
 			// if not applicable, false to just disable them
 		navigationAsDateFormat: false, // True if date formatting applied to prev/today/next links
+		showBigPrevNext: false, // True to show big prev/next links
 		gotoCurrent: false, // True if today link goes back to current selection instead
 		changeMonth: true, // True if month can be selected directly, false if only prev/next
 		changeYear: true, // True if year can be selected directly, false if only prev/next
+		monthAfterYear: false, // True if the year select precedes month, false for month then year
 		yearRange: '-10:+10', // Range of years to display in drop-down,
 			// either relative to current year (-nn:+nn) or absolute (nnnn:nnnn)
 		changeFirstDay: true, // True to click on day name to change, false to remain as set
@@ -4516,7 +4524,9 @@ function Datepicker() {
 		onChangeMonthYear: null, // Define a callback function when the month or year is changed
 		onClose: null, // Define a callback function when the datepicker is closed
 		numberOfMonths: 1, // Number of months to show at a time
+		showCurrentAtPos: 0, // The position in multipe months at which to show the current month (starting at 0)
 		stepMonths: 1, // Number of months to step back/forward
+		stepBigMonths: 12, // Number of months to step back/forward for the big links
 		rangeSelect: false, // Allows for selecting a date range on one date picker
 		rangeSeparator: ' - ', // Text between two dates in a range
 		altField: '', // Selector for an alternate field to store selected dates into
@@ -4576,12 +4586,13 @@ $.extend(Datepicker.prototype, {
 
 	/* Create a new instance object. */
 	_newInst: function(target, inline) {
-		return {id: target[0].id, input: target, // associated target
+		var id = target[0].id.replace(/([:\[\]\.])/g, '\\\\$1'); // escape jQuery meta chars
+		return {id: id, input: target, // associated target
 			selectedDay: 0, selectedMonth: 0, selectedYear: 0, // current selection
 			drawMonth: 0, drawYear: 0, // month being drawn
 			inline: inline, // is datepicker inline or not
 			dpDiv: (!inline ? this.dpDiv : // presentation div
-			$('<div class="ui-datepicker-inline"></div>'))};
+			$('<div class="' + this._inlineClass + '"></div>'))};
 	},
 
 	/* Attach the date picker to an input field. */
@@ -4694,8 +4705,11 @@ $.extend(Datepicker.prototype, {
 	/* Detach a datepicker from its control.
 	   @param  target    element - the target input field or division or span */
 	_destroyDatepicker: function(target) {
-		var nodeName = target.nodeName.toLowerCase();
 		var $target = $(target);
+		if (!$target.hasClass(this.markerClassName)) {
+			return;
+		}
+		var nodeName = target.nodeName.toLowerCase();
 		$.removeData(target, PROP_NAME);
 		if (nodeName == 'input') {
 			$target.siblings('.' + this._appendClass).remove().end().
@@ -4711,9 +4725,21 @@ $.extend(Datepicker.prototype, {
 	/* Enable the date picker to a jQuery selection.
 	   @param  target    element - the target input field or division or span */
 	_enableDatepicker: function(target) {
+		var $target = $(target);
+		if (!$target.hasClass(this.markerClassName)) {
+			return;
+		}
+		var nodeName = target.nodeName.toLowerCase();
+		if (nodeName == 'input') {
 		target.disabled = false;
-		$(target).siblings('button.' + this._triggerClass).each(function() { this.disabled = false; }).end().
-			siblings('img.' + this._triggerClass).css({opacity: '1.0', cursor: ''});
+			$target.siblings('button.' + this._triggerClass).
+			each(function() { this.disabled = false; }).end().
+				siblings('img.' + this._triggerClass).
+				css({opacity: '1.0', cursor: ''});
+		}
+		else if (nodeName == 'div' || nodeName == 'span') {
+			$target.children('.' + this._disableClass).remove();
+		}
 		this._disabledInputs = $.map(this._disabledInputs,
 			function(value) { return (value == target ? null : value); }); // delete entry
 	},
@@ -4721,9 +4747,34 @@ $.extend(Datepicker.prototype, {
 	/* Disable the date picker to a jQuery selection.
 	   @param  target    element - the target input field or division or span */
 	_disableDatepicker: function(target) {
+		var $target = $(target);
+		if (!$target.hasClass(this.markerClassName)) {
+			return;
+		}
+		var nodeName = target.nodeName.toLowerCase();
+		if (nodeName == 'input') {
 		target.disabled = true;
-		$(target).siblings('button.' + this._triggerClass).each(function() { this.disabled = true; }).end().
-			siblings('img.' + this._triggerClass).css({opacity: '0.5', cursor: 'default'});
+			$target.siblings('button.' + this._triggerClass).
+			each(function() { this.disabled = true; }).end().
+				siblings('img.' + this._triggerClass).
+				css({opacity: '0.5', cursor: 'default'});
+		}
+		else if (nodeName == 'div' || nodeName == 'span') {
+			var inline = $target.children('.' + this._inlineClass);
+			var offset = inline.offset();
+			var relOffset = {left: 0, top: 0};
+			inline.parents().each(function() {
+				if ($(this).css('position') == 'relative') {
+					relOffset = $(this).offset();
+					return false;
+				}
+			});
+			$target.prepend('<div class="' + this._disableClass + '" style="' +
+				($.browser.msie ? 'background-color: transparent; ' : '') +
+				'width: ' + inline.width() + 'px; height: ' + inline.height() +
+				'px; left: ' + (offset.left - relOffset.left) +
+				'px; top: ' + (offset.top - relOffset.top) + 'px;"></div>');
+		}
 		this._disabledInputs = $.map(this._disabledInputs,
 			function(value) { return (value == target ? null : value); }); // delete entry
 		this._disabledInputs[this._disabledInputs.length] = target;
@@ -4777,7 +4828,7 @@ $.extend(Datepicker.prototype, {
 	           Date[2] - the current dates for a range */
 	_getDateDatepicker: function(target) {
 		var inst = $.data(target, PROP_NAME);
-		if (inst)
+		if (inst && !inst.inline)
 			this._setDateFromField(inst); 
 		return (inst ? this._getDate(inst) : null);
 	},
@@ -4803,16 +4854,22 @@ $.extend(Datepicker.prototype, {
 							+$.datepicker._get(inst, 'stepMonths')), (e.ctrlKey ? 'Y' : 'M'));
 						break; // next month/year on page down/+ ctrl
 				case 35: if (e.ctrlKey) $.datepicker._clearDate(e.target);
+						handled = e.ctrlKey;
 						break; // clear on ctrl+end
 				case 36: if (e.ctrlKey) $.datepicker._gotoToday(e.target);
+						handled = e.ctrlKey;
 						break; // current on ctrl+home
 				case 37: if (e.ctrlKey) $.datepicker._adjustDate(e.target, -1, 'D');
+						handled = e.ctrlKey;
 						break; // -1 day on ctrl+left
 				case 38: if (e.ctrlKey) $.datepicker._adjustDate(e.target, -7, 'D');
+						handled = e.ctrlKey;
 						break; // -1 week on ctrl+up
 				case 39: if (e.ctrlKey) $.datepicker._adjustDate(e.target, +1, 'D');
+						handled = e.ctrlKey;
 						break; // +1 day on ctrl+right
 				case 40: if (e.ctrlKey) $.datepicker._adjustDate(e.target, +7, 'D');
+						handled = e.ctrlKey;
 						break; // +1 week on ctrl+down
 				default: handled = false;
 			}
@@ -4903,7 +4960,7 @@ $.extend(Datepicker.prototype, {
 	_updateDatepicker: function(inst) {
 		var dims = {width: inst.dpDiv.width() + 4,
 			height: inst.dpDiv.height() + 4};
-		inst.dpDiv.empty().append(this._generateDatepicker(inst)).
+		inst.dpDiv.empty().append(this._generateHTML(inst)).
 			find('iframe.ui-datepicker-cover').
 			css({width: dims.width, height: dims.height});
 		var numMonths = this._getNumberOfMonths(inst);
@@ -5224,6 +5281,7 @@ $.extend(Datepicker.prototype, {
 		var year = -1;
 		var month = -1;
 		var day = -1;
+		var doy = -1;
 		var literal = false;
 		// Check whether a format character is doubled
 		var lookAhead = function(match) {
@@ -5235,7 +5293,7 @@ $.extend(Datepicker.prototype, {
 		// Extract a number from the string value
 		var getNumber = function(match) {
 			lookAhead(match);
-			var origSize = (match == '@' ? 14 : (match == 'y' ? 4 : 2));
+			var origSize = (match == '@' ? 14 : (match == 'y' ? 4 : (match == 'o' ? 3 : 2)));
 			var size = origSize;
 			var num = 0;
 			while (size > 0 && iValue < value.length &&
@@ -5285,6 +5343,9 @@ $.extend(Datepicker.prototype, {
 					case 'D': 
 						getName('D', dayNamesShort, dayNames);
 						break;
+					case 'o':
+						doy = getNumber('o');
+						break;
 					case 'm': 
 						month = getNumber('m');
 						break;
@@ -5313,6 +5374,17 @@ $.extend(Datepicker.prototype, {
 		if (year < 100)
 			year += new Date().getFullYear() - new Date().getFullYear() % 100 +
 				(year <= shortYearCutoff ? 0 : -100);
+		if (doy > -1) {
+			month = 1;
+			day = doy;
+			do {
+				var dim = this._getDaysInMonth(year, month - 1);
+				if (day <= dim)
+					break;
+				month++;
+				day -= dim;
+			} while (true);
+		}
 		var date = new Date(year, month - 1, day);
 		if (date.getFullYear() != year || date.getMonth() + 1 != month || date.getDate() != day)
 			throw 'Invalid date'; // E.g. 31/02/*
@@ -5336,6 +5408,8 @@ $.extend(Datepicker.prototype, {
 	   The format can be combinations of the following:
 	   d  - day of month (no leading zero)
 	   dd - day of month (two digit)
+	   o  - day of year (no leading zeros)
+	   oo - day of year (three digit)
 	   D  - day name short
 	   DD - day name long
 	   m  - month of year (no leading zero)
@@ -5371,8 +5445,12 @@ $.extend(Datepicker.prototype, {
 			return matches;	
 		};
 		// Format a number, with leading zero if necessary
-		var formatNumber = function(match, value) {
-			return (lookAhead(match) && value < 10 ? '0' : '') + value;
+		var formatNumber = function(match, value, len) {
+			var num = '' + value;
+			if (lookAhead(match))
+				while (num.length < len)
+					num = '0' + num;
+			return num;
 		};
 		// Format a name, short or long as requested
 		var formatName = function(match, value, shortNames, longNames) {
@@ -5390,13 +5468,19 @@ $.extend(Datepicker.prototype, {
 				else
 					switch (format.charAt(iFormat)) {
 						case 'd':
-							output += formatNumber('d', date.getDate()); 
+							output += formatNumber('d', date.getDate(), 2);
 							break;
 						case 'D': 
 							output += formatName('D', date.getDay(), dayNamesShort, dayNames);
 							break;
+						case 'o':
+							var doy = date.getDate();
+							for (var m = date.getMonth() - 1; m >= 0; m--)
+								doy += this._getDaysInMonth(date.getFullYear(), m);
+							output += formatNumber('o', doy, 3);
+							break;
 						case 'm': 
-							output += formatNumber('m', date.getMonth() + 1); 
+							output += formatNumber('m', date.getMonth() + 1, 2);
 							break;
 						case 'M':
 							output += formatName('M', date.getMonth(), monthNamesShort, monthNames); 
@@ -5565,40 +5649,49 @@ $.extend(Datepicker.prototype, {
 		var startDate = (!inst.currentYear || (inst.input && inst.input.val() == '') ? null :
 			new Date(inst.currentYear, inst.currentMonth, inst.currentDay));
 		if (this._get(inst, 'rangeSelect')) {
-			return [inst.rangeStart || startDate, (!inst.endYear ? null :
+			return [inst.rangeStart || startDate,
+				(!inst.endYear ? inst.rangeStart || startDate :
 				new Date(inst.endYear, inst.endMonth, inst.endDay))];
 		} else
 			return startDate;
 	},
 
 	/* Generate the HTML for the current state of the date picker. */
-	_generateDatepicker: function(inst) {
+	_generateHTML: function(inst) {
 		var today = new Date();
 		today = new Date(today.getFullYear(), today.getMonth(), today.getDate()); // clear time
 		var showStatus = this._get(inst, 'showStatus');
+		var initStatus = this._get(inst, 'initStatus') || '&#xa0;';
 		var isRTL = this._get(inst, 'isRTL');
 		// build the date picker HTML
 		var clear = (this._get(inst, 'mandatory') ? '' :
 			'<div class="ui-datepicker-clear"><a onclick="jQuery.datepicker._clearDate(\'#' + inst.id + '\');"' +
-			(showStatus ? this._addStatus(inst, this._get(inst, 'clearStatus') || '&#xa0;') : '') + '>' +
+			this._addStatus(showStatus, inst.id, this._get(inst, 'clearStatus'), initStatus) + '>' +
 			this._get(inst, 'clearText') + '</a></div>');
 		var controls = '<div class="ui-datepicker-control">' + (isRTL ? '' : clear) +
 			'<div class="ui-datepicker-close"><a onclick="jQuery.datepicker._hideDatepicker();"' +
-			(showStatus ? this._addStatus(inst, this._get(inst, 'closeStatus') || '&#xa0;') : '') + '>' +
+			this._addStatus(showStatus, inst.id, this._get(inst, 'closeStatus'), initStatus) + '>' +
 			this._get(inst, 'closeText') + '</a></div>' + (isRTL ? clear : '')  + '</div>';
 		var prompt = this._get(inst, 'prompt');
 		var closeAtTop = this._get(inst, 'closeAtTop');
 		var hideIfNoPrevNext = this._get(inst, 'hideIfNoPrevNext');
 		var navigationAsDateFormat = this._get(inst, 'navigationAsDateFormat');
+		var showBigPrevNext = this._get(inst, 'showBigPrevNext');
 		var numMonths = this._getNumberOfMonths(inst);
+		var showCurrentAtPos = this._get(inst, 'showCurrentAtPos');
 		var stepMonths = this._get(inst, 'stepMonths');
+		var stepBigMonths = this._get(inst, 'stepBigMonths');
 		var isMultiMonth = (numMonths[0] != 1 || numMonths[1] != 1);
 		var currentDate = (!inst.currentDay ? new Date(9999, 9, 9) :
 			new Date(inst.currentYear, inst.currentMonth, inst.currentDay));
 		var minDate = this._getMinMaxDate(inst, 'min', true);
 		var maxDate = this._getMinMaxDate(inst, 'max');
-		var drawMonth = inst.drawMonth;
+		var drawMonth = inst.drawMonth - showCurrentAtPos;
 		var drawYear = inst.drawYear;
+		if (drawMonth < 0) {
+			drawMonth += 12;
+			drawYear--;
+		}
 		if (maxDate) {
 			var maxDraw = new Date(maxDate.getFullYear(),
 				maxDate.getMonth() - numMonths[1] + 1, maxDate.getDate());
@@ -5615,27 +5708,37 @@ $.extend(Datepicker.prototype, {
 		var prevText = this._get(inst, 'prevText');
 		prevText = (!navigationAsDateFormat ? prevText : this.formatDate(
 			prevText, new Date(drawYear, drawMonth - stepMonths, 1), this._getFormatConfig(inst)));
+		var prevBigText = (showBigPrevNext ? this._get(inst, 'prevBigText') : '');
+		prevBigText = (!navigationAsDateFormat ? prevBigText : this.formatDate(
+			prevBigText, new Date(drawYear, drawMonth - stepBigMonths, 1), this._getFormatConfig(inst)));
 		var prev = '<div class="ui-datepicker-prev">' + (this._canAdjustMonth(inst, -1, drawYear, drawMonth) ? 
+			(showBigPrevNext ? '<a onclick="jQuery.datepicker._adjustDate(\'#' + inst.id + '\', -' + stepBigMonths + ', \'M\');"' +
+			this._addStatus(showStatus, inst.id, this._get(inst, 'prevBigStatus'), initStatus) + '>' + prevBigText + '</a>' : '') +
 			'<a onclick="jQuery.datepicker._adjustDate(\'#' + inst.id + '\', -' + stepMonths + ', \'M\');"' +
-			(showStatus ? this._addStatus(inst, this._get(inst, 'prevStatus') || '&#xa0;') : '') + '>' + prevText + '</a>' :
-			(hideIfNoPrevNext ? '' : '<label>' + prevText + '</label>')) + '</div>';
+			this._addStatus(showStatus, inst.id, this._get(inst, 'prevStatus'), initStatus) + '>' + prevText + '</a>' :
+			(hideIfNoPrevNext ? '' : '<label>' + prevBigText + '</label><label>' + prevText + '</label>')) + '</div>';
 		var nextText = this._get(inst, 'nextText');
 		nextText = (!navigationAsDateFormat ? nextText : this.formatDate(
 			nextText, new Date(drawYear, drawMonth + stepMonths, 1), this._getFormatConfig(inst)));
+		var nextBigText = (showBigPrevNext ? this._get(inst, 'nextBigText') : '');
+		nextBigText = (!navigationAsDateFormat ? nextBigText : this.formatDate(
+			nextBigText, new Date(drawYear, drawMonth + stepBigMonths, 1), this._getFormatConfig(inst)));
 		var next = '<div class="ui-datepicker-next">' + (this._canAdjustMonth(inst, +1, drawYear, drawMonth) ?
 			'<a onclick="jQuery.datepicker._adjustDate(\'#' + inst.id + '\', +' + stepMonths + ', \'M\');"' +
-			(showStatus ? this._addStatus(inst, this._get(inst, 'nextStatus') || '&#xa0;') : '') + '>' + nextText + '</a>' :
-			(hideIfNoPrevNext ? '' : '<label>' + nextText + '</label>')) + '</div>';
+			this._addStatus(showStatus, inst.id, this._get(inst, 'nextStatus'), initStatus) + '>' + nextText + '</a>' +
+			(showBigPrevNext ? '<a onclick="jQuery.datepicker._adjustDate(\'#' + inst.id + '\', +' + stepBigMonths + ', \'M\');"' +
+			this._addStatus(showStatus, inst.id, this._get(inst, 'nextBigStatus'), initStatus) + '>' + nextBigText + '</a>' : '') :
+			(hideIfNoPrevNext ? '' : '<label>' + nextText + '</label><label>' + nextBigText + '</label>')) + '</div>';
 		var currentText = this._get(inst, 'currentText');
-		currentText = (!navigationAsDateFormat ? currentText: this.formatDate(
-			currentText, today, this._getFormatConfig(inst)));
+		var gotoDate = (this._get(inst, 'gotoCurrent') && inst.currentDay ? currentDate : today); 
+		currentText = (!navigationAsDateFormat ? currentText :
+			this.formatDate(currentText, gotoDate, this._getFormatConfig(inst)));
 		var html = (prompt ? '<div class="' + this._promptClass + '">' + prompt + '</div>' : '') +
 			(closeAtTop && !inst.inline ? controls : '') +
 			'<div class="ui-datepicker-links">' + (isRTL ? next : prev) +
-			(this._isInRange(inst, (this._get(inst, 'gotoCurrent') && inst.currentDay ?
-			currentDate : today)) ? '<div class="ui-datepicker-current">' +
+			(this._isInRange(inst, gotoDate) ? '<div class="ui-datepicker-current">' +
 			'<a onclick="jQuery.datepicker._gotoToday(\'#' + inst.id + '\');"' +
-			(showStatus ? this._addStatus(inst, this._get(inst, 'currentStatus') || '&#xa0;') : '') + '>' +
+			this._addStatus(showStatus, inst.id, this._get(inst, 'currentStatus'), initStatus) + '>' +
 			currentText + '</a></div>' : '') + (isRTL ? prev : next) + '</div>';
 		var firstDay = this._get(inst, 'firstDay');
 		var changeFirstDay = this._get(inst, 'changeFirstDay');
@@ -5648,7 +5751,8 @@ $.extend(Datepicker.prototype, {
 		var showOtherMonths = this._get(inst, 'showOtherMonths');
 		var showWeeks = this._get(inst, 'showWeeks');
 		var calculateWeek = this._get(inst, 'calculateWeek') || this.iso8601Week;
-		var status = (showStatus ? this._get(inst, 'dayStatus') || '&#xa0;' : '');
+		var weekStatus = this._get(inst, 'weekStatus');
+		var status = (showStatus ? this._get(inst, 'dayStatus') || initStatus : '');
 		var dateStatus = this._get(inst, 'statusForDate') || this.dateStatus;
 		var endDate = inst.endDay ? new Date(inst.endYear, inst.endMonth, inst.endDay) : currentDate;
 		for (var row = 0; row < numMonths[0]; row++)
@@ -5656,10 +5760,11 @@ $.extend(Datepicker.prototype, {
 				var selectedDate = new Date(drawYear, drawMonth, inst.selectedDay);
 				html += '<div class="ui-datepicker-one-month' + (col == 0 ? ' ui-datepicker-new-row' : '') + '">' +
 					this._generateMonthYearHeader(inst, drawMonth, drawYear, minDate, maxDate,
-					selectedDate, row > 0 || col > 0, showStatus, monthNames) + // draw month headers
+					selectedDate, row > 0 || col > 0, showStatus, initStatus, monthNames) + // draw month headers
 					'<table class="ui-datepicker" cellpadding="0" cellspacing="0"><thead>' + 
 					'<tr class="ui-datepicker-title-row">' +
-					(showWeeks ? '<td>' + this._get(inst, 'weekHeader') + '</td>' : '');
+					(showWeeks ? '<td' + this._addStatus(showStatus, inst.id, weekStatus, initStatus) + '>' +
+					this._get(inst, 'weekHeader') + '</td>' : '');
 				for (var dow = 0; dow < 7; dow++) { // days of the week
 					var day = (dow + firstDay) % 7;
 					var dayStatus = (status.indexOf('DD') > -1 ? status.replace(/DD/, dayNames[day]) :
@@ -5667,7 +5772,7 @@ $.extend(Datepicker.prototype, {
 					html += '<td' + ((dow + firstDay + 6) % 7 >= 5 ? ' class="ui-datepicker-week-end-cell"' : '') + '>' +
 						(!changeFirstDay ? '<span' :
 						'<a onclick="jQuery.datepicker._changeFirstDay(\'#' + inst.id + '\', ' + day + ');"') + 
-						(showStatus ? this._addStatus(inst, dayStatus) : '') + ' title="' + dayNames[day] + '">' +
+						this._addStatus(showStatus, inst.id, dayStatus, initStatus) + ' title="' + dayNames[day] + '">' +
 						dayNamesMin[day] + (changeFirstDay ? '</a>' : '</span>') + '</td>';
 				}
 				html += '</tr></thead><tbody>';
@@ -5675,11 +5780,15 @@ $.extend(Datepicker.prototype, {
 				if (drawYear == inst.selectedYear && drawMonth == inst.selectedMonth)
 					inst.selectedDay = Math.min(inst.selectedDay, daysInMonth);
 				var leadDays = (this._getFirstDayOfMonth(drawYear, drawMonth) - firstDay + 7) % 7;
-				var printDate = new Date(drawYear, drawMonth, 1 - leadDays);
+				var tzDate = new Date(drawYear, drawMonth, 1 - leadDays);
+				var utcDate = new Date(drawYear, drawMonth, 1 - leadDays);
+				var printDate = utcDate;
 				var numRows = (isMultiMonth ? 6 : Math.ceil((leadDays + daysInMonth) / 7)); // calculate the number of rows to generate
 				for (var dRow = 0; dRow < numRows; dRow++) { // create date picker rows
 					html += '<tr class="ui-datepicker-days-row">' +
-						(showWeeks ? '<td class="ui-datepicker-week-col">' + calculateWeek(printDate) + '</td>' : '');
+						(showWeeks ? '<td class="ui-datepicker-week-col"' +
+						this._addStatus(showStatus, inst.id, weekStatus, initStatus) + '>' +
+						calculateWeek(printDate) + '</td>' : '');
 					for (var dow = 0; dow < 7; dow++) { // create date picker days
 						var daySettings = (beforeShowDay ?
 							beforeShowDay.apply((inst.input ? inst.input[0] : null), [printDate]) : [true, '']);
@@ -5688,7 +5797,7 @@ $.extend(Datepicker.prototype, {
 							(minDate && printDate < minDate) || (maxDate && printDate > maxDate);
 						html += '<td class="ui-datepicker-days-cell' +
 							((dow + firstDay + 6) % 7 >= 5 ? ' ui-datepicker-week-end-cell' : '') + // highlight weekends
-							(otherMonth ? ' ui-datepicker-otherMonth' : '') + // highlight days from other months
+							(otherMonth ? ' ui-datepicker-other-month' : '') + // highlight days from other months
 							(printDate.getTime() == selectedDate.getTime() && drawMonth == inst.selectedMonth ?
 							' ui-datepicker-days-cell-over' : '') + // highlight selected day
 							(unselectable ? ' ' + this._unselectableClass : '') +  // highlight unselectable days
@@ -5703,15 +5812,17 @@ $.extend(Datepicker.prototype, {
 							(highlightWeek ? '.parent().addClass(\'ui-datepicker-week-over\')' : '') + ';' + // highlight selection week
 							(!showStatus || (otherMonth && !showOtherMonths) ? '' : 'jQuery(\'#ui-datepicker-status-' +
 							inst.id + '\').html(\'' + (dateStatus.apply((inst.input ? inst.input[0] : null),
-							[printDate, inst]) || '&#xa0;') +'\');') + '"' +
+							[printDate, inst]) || initStatus) +'\');') + '"' +
 							' onmouseout="jQuery(this).removeClass(\'ui-datepicker-days-cell-over\')' + // unhighlight selection
 							(highlightWeek ? '.parent().removeClass(\'ui-datepicker-week-over\')' : '') + ';' + // unhighlight selection week
 							(!showStatus || (otherMonth && !showOtherMonths) ? '' : 'jQuery(\'#ui-datepicker-status-' +
-							inst.id + '\').html(\'&#xa0;\');') + '" onclick="jQuery.datepicker._selectDay(\'#' +
+							inst.id + '\').html(\'' + initStatus + '\');') + '" onclick="jQuery.datepicker._selectDay(\'#' +
 							inst.id + '\',' + drawMonth + ',' + drawYear + ', this);"') + '>' + // actions
 							(otherMonth ? (showOtherMonths ? printDate.getDate() : '&#xa0;') : // display for other months
 							(unselectable ? printDate.getDate() : '<a>' + printDate.getDate() + '</a>')) + '</td>'; // display for this month
-						printDate.setUTCDate(printDate.getUTCDate() + 1);
+						tzDate.setDate(tzDate.getDate() + 1);
+						utcDate.setUTCDate(utcDate.getUTCDate() + 1);
+						printDate = (tzDate > utcDate ? tzDate : utcDate);
 					}
 					html += '</tr>';
 				}
@@ -5723,7 +5834,7 @@ $.extend(Datepicker.prototype, {
 				html += '</tbody></table></div>';
 			}
 		html += (showStatus ? '<div style="clear: both;"></div><div id="ui-datepicker-status-' + inst.id + 
-			'" class="ui-datepicker-status">' + (this._get(inst, 'initStatus') || '&#xa0;') + '</div>' : '') +
+			'" class="ui-datepicker-status">' + initStatus + '</div>' : '') +
 			(!closeAtTop && !inst.inline ? controls : '') +
 			'<div style="clear: both;"></div>' + 
 			($.browser.msie && parseInt($.browser.version) < 7 && !inst.inline ? 
@@ -5733,28 +5844,32 @@ $.extend(Datepicker.prototype, {
 	
 	/* Generate the month and year header. */
 	_generateMonthYearHeader: function(inst, drawMonth, drawYear, minDate, maxDate,
-			selectedDate, secondary, showStatus, monthNames) {
+			selectedDate, secondary, showStatus, initStatus, monthNames) {
 		minDate = (inst.rangeStart && minDate && selectedDate < minDate ? selectedDate : minDate);
+		var monthAfterYear = this._get(inst, 'monthAfterYear');
 		var html = '<div class="ui-datepicker-header">';
+		var monthHtml = '';
 		// month selection
 		if (secondary || !this._get(inst, 'changeMonth'))
-			html += monthNames[drawMonth] + '&#xa0;';
+			monthHtml += monthNames[drawMonth] + '&#xa0;';
 		else {
 			var inMinYear = (minDate && minDate.getFullYear() == drawYear);
 			var inMaxYear = (maxDate && maxDate.getFullYear() == drawYear);
-			html += '<select class="ui-datepicker-new-month" ' +
+			monthHtml += '<select class="ui-datepicker-new-month" ' +
 				'onchange="jQuery.datepicker._selectMonthYear(\'#' + inst.id + '\', this, \'M\');" ' +
 				'onclick="jQuery.datepicker._clickMonthYear(\'#' + inst.id + '\');"' +
-				(showStatus ? this._addStatus(inst, this._get(inst, 'monthStatus') || '&#xa0;') : '') + '>';
+				this._addStatus(showStatus, inst.id, this._get(inst, 'monthStatus'), initStatus) + '>';
 			for (var month = 0; month < 12; month++) {
 				if ((!inMinYear || month >= minDate.getMonth()) &&
 						(!inMaxYear || month <= maxDate.getMonth()))
-					html += '<option value="' + month + '"' +
+					monthHtml += '<option value="' + month + '"' +
 						(month == drawMonth ? ' selected="selected"' : '') +
 						'>' + monthNames[month] + '</option>';
 			}
-			html += '</select>';
+			monthHtml += '</select>';
 		}
+		if (!monthAfterYear)
+			html += monthHtml;
 		// year selection
 		if (secondary || !this._get(inst, 'changeYear'))
 			html += drawYear;
@@ -5779,7 +5894,7 @@ $.extend(Datepicker.prototype, {
 			html += '<select class="ui-datepicker-new-year" ' +
 				'onchange="jQuery.datepicker._selectMonthYear(\'#' + inst.id + '\', this, \'Y\');" ' +
 				'onclick="jQuery.datepicker._clickMonthYear(\'#' + inst.id + '\');"' +
-				(showStatus ? this._addStatus(inst, this._get(inst, 'yearStatus') || '&#xa0;') : '') + '>';
+				this._addStatus(showStatus, inst.id, this._get(inst, 'yearStatus'), initStatus) + '>';
 			for (; year <= endYear; year++) {
 				html += '<option value="' + year + '"' +
 					(year == drawYear ? ' selected="selected"' : '') +
@@ -5787,14 +5902,18 @@ $.extend(Datepicker.prototype, {
 			}
 			html += '</select>';
 		}
+		if (monthAfterYear)
+			html += monthHtml;
 		html += '</div>'; // Close datepicker_header
 		return html;
 	},
 
 	/* Provide code to set and clear the status panel. */
-	_addStatus: function(inst, text) {
-		return ' onmouseover="jQuery(\'#ui-datepicker-status-' + inst.id + '\').html(\'' + text + '\');" ' +
-			'onmouseout="jQuery(\'#ui-datepicker-status-' + inst.id + '\').html(\'&#xa0;\');"';
+	_addStatus: function(showStatus, id, text, initStatus) {
+		return (showStatus ? ' onmouseover="jQuery(\'#ui-datepicker-status-' + id +
+			'\').html(\'' + (text || initStatus) + '\');" ' +
+			'onmouseout="jQuery(\'#ui-datepicker-status-' + id +
+			'\').html(\'' + initStatus + '\');"' : '');
 	},
 
 	/* Adjust one of the date sub-fields. */
@@ -5916,6 +6035,15 @@ function isArray(a) {
                     Object - settings for attaching new datepicker functionality
    @return  jQuery object */
 $.fn.datepicker = function(options){
+	
+	/* Initialise the date picker. */
+	if (!$.datepicker.initialized) {
+		$(document.body)
+			.append($.datepicker.dpDiv)
+			.mousedown($.datepicker._checkExternalClick);
+		$.datepicker.initialized = true;
+	}
+	
 	var otherArgs = Array.prototype.slice.call(arguments, 1);
 	if (typeof options == 'string' && (options == 'isDisabled' || options == 'getDate'))
 		return $.datepicker['_' + options + 'Datepicker'].
@@ -5929,12 +6057,7 @@ $.fn.datepicker = function(options){
 };
 
 $.datepicker = new Datepicker(); // singleton instance
-	
-/* Initialise the date picker. */
-$(document).ready(function() {
-	$(document.body).append($.datepicker.dpDiv).
-		mousedown($.datepicker._checkExternalClick);
-});
+$.datepicker.initialized = false;
 
 })(jQuery);
 
@@ -5969,6 +6092,8 @@ var setDataSwitch = {
 
 $.widget("ui.dialog", {
 	init: function() {
+		this.options.title = this.options.title || this.element.attr('title');
+		
 		var self = this,
 			options = this.options,
 			resizeHandles = typeof options.resizable == 'string'
@@ -5980,11 +6105,15 @@ $.widget("ui.dialog", {
 				.wrap('<div/>')
 				.wrap('<div/>'),
 			
-			uiDialogContainer = (this.uiDialogContainer = uiDialogContent.parent()
+			uiDialogContainer = (this.uiDialogContainer = uiDialogContent.parent())
 				.addClass('ui-dialog-container')
-				.css({position: 'relative', width: '100%', height: '100%'})),
+				.css({
+					position: 'relative',
+					width: '100%',
+					height: '100%'
+				}),
 			
-			title = options.title || uiDialogContent.attr('title') || '',
+			title = options.title || '&nbsp;',
 			uiDialogTitlebar = (this.uiDialogTitlebar =
 				$('<div class="ui-dialog-titlebar"/>'))
 				.append('<span class="ui-dialog-title">' + title + '</span>')
@@ -6020,7 +6149,11 @@ $.widget("ui.dialog", {
 				}),
 			
 			uiDialogButtonPane = (this.uiDialogButtonPane = $('<div/>'))
-				.addClass('ui-dialog-buttonpane').css({ position: 'absolute', bottom: 0 })
+				.addClass('ui-dialog-buttonpane')
+				.css({
+					position: 'absolute',
+					bottom: 0
+				})
 				.appendTo(uiDialog);
 		
 		this.uiDialogTitlebarClose = $('.ui-dialog-titlebar-close', uiDialogTitlebar)
@@ -6039,24 +6172,24 @@ $.widget("ui.dialog", {
 				self.close();
 				return false;
 			});
-
-		this.uiDialogTitlebar.find("*").add(this.uiDialogTitlebar).each(function() {
+		
+		uiDialogTitlebar.find("*").add(uiDialogTitlebar).each(function() {
 			$.ui.disableSelection(this);
 		});
-
+		
 		if ($.fn.draggable) {
 			uiDialog.draggable({
 				cancel: '.ui-dialog-content',
 				helper: options.dragHelper,
 				handle: '.ui-dialog-titlebar',
-				start: function(e, ui) {
+				start: function() {
 					self.moveToTop();
 					(options.dragStart && options.dragStart.apply(self.element[0], arguments));
 				},
-				drag: function(e, ui) {
+				drag: function() {
 					(options.drag && options.drag.apply(self.element[0], arguments));
 				},
-				stop: function(e, ui) {
+				stop: function() {
 					(options.dragStop && options.dragStop.apply(self.element[0], arguments));
 					$.ui.dialog.overlay.resize();
 				}
@@ -6075,12 +6208,12 @@ $.widget("ui.dialog", {
 				start: function() {
 					(options.resizeStart && options.resizeStart.apply(self.element[0], arguments));
 				},
-				resize: function(e, ui) {
+				resize: function() {
 					(options.autoResize && self.size.apply(self));
 					(options.resize && options.resize.apply(self.element[0], arguments));
 				},
 				handles: resizeHandles,
-				stop: function(e, ui) {
+				stop: function() {
 					(options.autoResize && self.size.apply(self));
 					(options.resizeStop && options.resizeStop.apply(self.element[0], arguments));
 					$.ui.dialog.overlay.resize();
@@ -6116,7 +6249,7 @@ $.widget("ui.dialog", {
 				this.uiDialog.resizable(value ? 'enable' : 'disable');
 				break;
 			case "title":
-				$(".ui-dialog-title", this.uiDialogTitlebar).text(value);
+				$(".ui-dialog-title", this.uiDialogTitlebar).html(value || '&nbsp;');
 				break;
 			case "width":
 				this.uiDialog.width(value);
@@ -6176,13 +6309,15 @@ $.widget("ui.dialog", {
 		pTop = Math.max(pTop, minTop);
 		this.uiDialog.css({top: pTop, left: pLeft});
 	},
-
+	
 	size: function() {
 		var container = this.uiDialogContainer,
 			titlebar = this.uiDialogTitlebar,
 			content = this.element,
-			tbMargin = parseInt(content.css('margin-top'),10) + parseInt(content.css('margin-bottom'),10),
-			lrMargin = parseInt(content.css('margin-left'),10) + parseInt(content.css('margin-right'),10);
+			tbMargin = (parseInt(content.css('margin-top'), 10) || 0)
+				+ (parseInt(content.css('margin-bottom'), 10) || 0),
+			lrMargin = (parseInt(content.css('margin-left'), 10) || 0)
+				+ (parseInt(content.css('margin-right'), 10) || 0);
 		content.height(container.height() - titlebar.outerHeight() - tbMargin);
 		content.width(container.width() - lrMargin);
 	},
@@ -6191,28 +6326,24 @@ $.widget("ui.dialog", {
 		if (this.isOpen) { return; }
 		
 		this.overlay = this.options.modal ? new $.ui.dialog.overlay(this) : null;
-		(this.uiDialog.next().length > 0) && this.uiDialog.appendTo('body');
+		(this.uiDialog.next().length && this.uiDialog.appendTo('body'));
 		this.position(this.options.position);
 		this.uiDialog.show(this.options.show);
-		this.options.autoResize && this.size();
+		(this.options.autoResize && this.size());
 		this.moveToTop(true);
 		
-		// CALLBACK: open
-		var openEV = null;
-		var openUI = {
-			options: this.options
-		};
-		this.uiDialogTitlebarClose.focus();
-		this.element.triggerHandler("dialogopen", [openEV, openUI], this.options.open);
-		
+		this.trigger('open', null, { options: this.options });
 		this.isOpen = true;
 	},
 	
 	// the force parameter allows us to move modal dialogs to their correct
 	// position on open
 	moveToTop: function(force) {
+		
 		if ((this.options.modal && !force)
-			|| (!this.options.stack && !this.options.modal)) { return this.element.triggerHandler("dialogfocus", [null, { options: this.options }], this.options.focus); }
+			|| (!this.options.stack && !this.options.modal)) {
+			return this.trigger('focus', null, { options: this.options });
+		}
 		
 		var maxZ = this.options.zIndex, options = this.options;
 		$('.ui-dialog:visible').each(function() {
@@ -6221,19 +6352,14 @@ $.widget("ui.dialog", {
 		(this.overlay && this.overlay.$el.css('z-index', ++maxZ));
 		this.uiDialog.css('z-index', ++maxZ);
 		
-		this.element.triggerHandler("dialogfocus", [null, { options: this.options }], this.options.focus);
+		this.trigger('focus', null, { options: this.options });
 	},
 	
 	close: function() {
 		(this.overlay && this.overlay.destroy());
 		this.uiDialog.hide(this.options.hide);
-
-		// CALLBACK: close
-		var closeEV = null;
-		var closeUI = {
-			options: this.options
-		};
-		this.element.triggerHandler("dialogclose", [closeEV, closeUI], this.options.close);
+		
+		this.trigger('close', null, { options: this.options });
 		$.ui.dialog.overlay.resize();
 		
 		this.isOpen = false;
@@ -6268,6 +6394,13 @@ $.widget("ui.dialog", {
 					.appendTo(uiDialogButtonPane);
 			});
 		}
+	},
+	
+	fakeEvent: function(type) {
+		return $.event.fix({
+			type: type,
+			target: this.element[0]
+		});
 	}
 });
 
@@ -6363,6 +6496,7 @@ $.extend($.ui.dialog.overlay, {
 	},
 	
 	height: function() {
+		// handle IE 6
 		if ($.browser.msie && $.browser.version < 7) {
 			var scrollHeight = Math.max(
 				document.documentElement.scrollHeight,
@@ -6378,12 +6512,20 @@ $.extend($.ui.dialog.overlay, {
 			} else {
 				return scrollHeight + 'px';
 			}
+		// handle Opera
+		} else if ($.browser.opera) {
+			return Math.max(
+				window.innerHeight,
+				$(document).height()
+			) + 'px';
+		// handle "good" browsers
 		} else {
 			return $(document).height() + 'px';
 		}
 	},
 	
 	width: function() {
+		// handle IE 6
 		if ($.browser.msie && $.browser.version < 7) {
 			var scrollWidth = Math.max(
 				document.documentElement.scrollWidth,
@@ -6399,6 +6541,13 @@ $.extend($.ui.dialog.overlay, {
 			} else {
 				return scrollWidth + 'px';
 			}
+		// handle Opera
+		} else if ($.browser.opera) {
+			return Math.max(
+				window.innerWidth,
+				$(document).width()
+			) + 'px';
+		// handle "good" browsers
 		} else {
 			return $(document).width() + 'px';
 		}
@@ -6453,38 +6602,31 @@ $.extend($.ui.dialog.overlay.prototype, {
 $.widget("ui.draggable", $.extend({}, $.ui.mouse, {
 	init: function() {
 		
-		//Initialize needed constants
-		var o = this.options, positioned = /^(?:r|a|f)/, element = this.element[0];
+		if (this.options.helper == 'original' && !(/^(?:r|a|f)/).test(this.element.css("position")))
+			this.element[0].style.position = 'relative';
 		
-		if (!this.element.length)
-			return false;
-
-		var style = element.style || {}, 
-			position = style.position || "static"; 
-		
-		//Position the node
-		if (o.helper == 'original' && !positioned.test(position))
-			style.position = 'relative';
-
-		(o.disabled && this.element.addClass('ui-draggable-disabled'));
+		(this.options.cssNamespace && this.element.addClass(this.options.cssNamespace+"-draggable"));
+		(this.options.disabled && this.element.addClass('ui-draggable-disabled'));
 		
 		this.mouseInit();
 		
 	},
 	mouseStart: function(e) {
+		
 		var o = this.options;
 		
-		if (this.helper || o.disabled || $(e.target).is('.ui-resizable-handle')) return false;
+		if (this.helper || o.disabled || $(e.target).is('.ui-resizable-handle'))
+			return false;
 		
+		//Check if we have a valid handle
 		var handle = !this.options.handle || !$(this.options.handle, this.element).length ? true : false;
-		
-	
 		$(this.options.handle, this.element).find("*").andSelf().each(function() {
 			if(this == e.target) handle = true;
 		});
 		if (!handle) return false;
 		
-		if($.ui.ddmanager) $.ui.ddmanager.current = this;
+		if($.ui.ddmanager)
+			$.ui.ddmanager.current = this;
 		
 		//Create and append the visible helper
 		this.helper = $.isFunction(o.helper) ? $(o.helper.apply(this.element[0], [e])) : (o.helper == 'clone' ? this.element.clone() : this.element);
@@ -6512,6 +6654,15 @@ $.widget("ui.draggable", $.extend({}, $.ui.mouse, {
 			left: e.pageX - this.offset.left,
 			top: e.pageY - this.offset.top
 		};
+
+		this.scrollTopParent = function(el) {
+			do { if(/auto|scroll/.test(el.css('overflow')) || (/auto|scroll/).test(el.css('overflow-y'))) return el; el = el.parent(); } while (el[0].parentNode);
+			return $(document);
+		}(this.helper);
+		this.scrollLeftParent = function(el) {
+			do { if(/auto|scroll/.test(el.css('overflow')) || (/auto|scroll/).test(el.css('overflow-x'))) return el; el = el.parent(); } while (el[0].parentNode);
+			return $(document);
+		}(this.helper);
 		
 		this.offsetParent = this.helper.offsetParent(); var po = this.offsetParent.offset();			//Get the offsetParent and cache its position
 		if(this.offsetParent[0] == document.body && $.browser.mozilla) po = { top: 0, left: 0 };		//Ugly FF3 fix
@@ -6522,8 +6673,8 @@ $.widget("ui.draggable", $.extend({}, $.ui.mouse, {
 		
 		var p = this.element.position();																//This is a relative to absolute position minus the actual position calculation - only used for relative positioned helpers
 		this.offset.relative = this.cssPosition == "relative" ? {
-			top: p.top - (parseInt(this.helper.css("top"),10) || 0) + this.offsetParent[0].scrollTop,
-			left: p.left - (parseInt(this.helper.css("left"),10) || 0) + this.offsetParent[0].scrollLeft
+			top: p.top - (parseInt(this.helper.css("top"),10) || 0) + (this.scrollTopParent[0].scrollTop || 0),
+			left: p.left - (parseInt(this.helper.css("left"),10) || 0) + (this.scrollLeftParent[0].scrollLeft || 0)
 		} : { top: 0, left: 0 };
 		
 		this.originalPosition = this.generatePosition(e);												//Generate the original position
@@ -6582,7 +6733,7 @@ $.widget("ui.draggable", $.extend({}, $.ui.mouse, {
 				pos.top																	// the calculated relative position
 				+ this.offset.relative.top	* mod										// Only for relative positioned nodes: Relative offset from element to offset parent
 				+ this.offset.parent.top * mod											// The offsetParent's offset without borders (offset + border)
-				- (this.cssPosition == "fixed" || (this.cssPosition == "absolute" && this.offsetParent[0] == document.body) ? 0 : this.offsetParent[0].scrollTop) * mod	// The offsetParent's scroll position, not if the element is fixed
+				- (this.cssPosition == "fixed" || (this.cssPosition == "absolute" && this.offsetParent[0] == document.body) ? 0 : this.scrollTopParent[0].scrollTop) * mod	// The offsetParent's scroll position, not if the element is fixed
 				+ (this.cssPosition == "fixed" ? $(document).scrollTop() : 0) * mod
 				+ this.margins.top * mod												//Add the margin (you don't want the margin counting in intersection methods)
 			),
@@ -6590,14 +6741,14 @@ $.widget("ui.draggable", $.extend({}, $.ui.mouse, {
 				pos.left																// the calculated relative position
 				+ this.offset.relative.left	* mod										// Only for relative positioned nodes: Relative offset from element to offset parent
 				+ this.offset.parent.left * mod											// The offsetParent's offset without borders (offset + border)
-				- (this.cssPosition == "fixed" || (this.cssPosition == "absolute" && this.offsetParent[0] == document.body) ? 0 : this.offsetParent[0].scrollLeft) * mod	// The offsetParent's scroll position, not if the element is fixed
+				- (this.cssPosition == "fixed" || (this.cssPosition == "absolute" && this.offsetParent[0] == document.body) ? 0 : this.scrollLeftParent[0].scrollLeft) * mod	// The offsetParent's scroll position, not if the element is fixed
 				+ (this.cssPosition == "fixed" ? $(document).scrollLeft() : 0) * mod
 				+ this.margins.left * mod												//Add the margin (you don't want the margin counting in intersection methods)
 			)
 		};
 	},
 	generatePosition: function(e) {
-		
+
 		var o = this.options;
 		var position = {
 			top: (
@@ -6605,7 +6756,7 @@ $.widget("ui.draggable", $.extend({}, $.ui.mouse, {
 				- this.offset.click.top													// Click offset (relative to the element)
 				- this.offset.relative.top												// Only for relative positioned nodes: Relative offset from element to offset parent
 				- this.offset.parent.top												// The offsetParent's offset without borders (offset + border)
-				+ (this.cssPosition == "fixed" || (this.cssPosition == "absolute" && this.offsetParent[0] == document.body) ? 0 : this.offsetParent[0].scrollTop)	// The offsetParent's scroll position, not if the element is fixed
+				+ (this.cssPosition == "fixed" || (this.cssPosition == "absolute" && this.offsetParent[0] == document.body) ? 0 : (this.scrollTopParent[0].scrollTop || 0))	// The offsetParent's scroll position, not if the element is fixed
 				- (this.cssPosition == "fixed" ? $(document).scrollTop() : 0)
 			),
 			left: (
@@ -6613,11 +6764,11 @@ $.widget("ui.draggable", $.extend({}, $.ui.mouse, {
 				- this.offset.click.left												// Click offset (relative to the element)
 				- this.offset.relative.left												// Only for relative positioned nodes: Relative offset from element to offset parent
 				- this.offset.parent.left												// The offsetParent's offset without borders (offset + border)
-				+ (this.cssPosition == "fixed" || (this.cssPosition == "absolute" && this.offsetParent[0] == document.body) ? 0 : this.offsetParent[0].scrollLeft)	// The offsetParent's scroll position, not if the element is fixed
+				+ (this.cssPosition == "fixed" || (this.cssPosition == "absolute" && this.offsetParent[0] == document.body) ? 0 : (this.scrollLeftParent[0].scrollLeft || 0))	// The offsetParent's scroll position, not if the element is fixed
 				- (this.cssPosition == "fixed" ? $(document).scrollLeft() : 0)
 			)
 		};
-		
+	
 		if(!this.originalPosition) return position;										//If we are not dragging yet, we won't check for options
 		
 		/*
@@ -6642,14 +6793,14 @@ $.widget("ui.draggable", $.extend({}, $.ui.mouse, {
 		return position;
 	},
 	mouseDrag: function(e) {
-		
+	
 		//Compute the helpers position
 		this.position = this.generatePosition(e);
 		this.positionAbs = this.convertPositionTo("absolute");
 		
 		//Call plugins and callbacks and use the resulting position if something is returned		
 		this.position = this.propagate("drag", e) || this.position;
-		
+	
 		if(!this.options.axis || this.options.axis != "y") this.helper[0].style.left = this.position.left+'px';
 		if(!this.options.axis || this.options.axis != "x") this.helper[0].style.top = this.position.top+'px';
 		if($.ui.ddmanager) $.ui.ddmanager.drag(this, e);
@@ -6665,7 +6816,7 @@ $.widget("ui.draggable", $.extend({}, $.ui.mouse, {
 		
 		if((this.options.revert == "invalid" && !dropped) || (this.options.revert == "valid" && dropped) || this.options.revert === true) {
 			var self = this;
-			$(this.helper).animate(this.originalPosition, parseInt(this.options.revert, 10) || 500, function() {
+			$(this.helper).animate(this.originalPosition, parseInt(this.options.revertDuration, 10) || 500, function() {
 				self.propagate("stop", e);
 				self.clear();
 			});
@@ -6713,7 +6864,9 @@ $.extend($.ui.draggable, {
 		cancel: ":input",
 		delay: 0,
 		distance: 1,
-		helper: "original"
+		helper: "original",
+		scope: "default",
+		cssNamespace: "ui"
 	}
 });
 
@@ -6767,6 +6920,8 @@ $.ui.plugin.add("draggable", "iframeFix", {
 	}
 });
 
+
+
 $.ui.plugin.add("draggable", "scroll", {
 	start: function(e, ui) {
 		var o = ui.options;
@@ -6789,43 +6944,48 @@ $.ui.plugin.add("draggable", "scroll", {
 	},
 	drag: function(e, ui) {
 		
-		var o = ui.options;
+		var o = ui.options, scrolled = false;
 		var i = $(this).data("draggable");
 		
 		if(i.overflowY[0] != document && i.overflowY[0].tagName != 'HTML') {
 			if((i.overflowYOffset.top + i.overflowY[0].offsetHeight) - e.pageY < o.scrollSensitivity)
-				i.overflowY[0].scrollTop = i.overflowY[0].scrollTop + o.scrollSpeed;
+				i.overflowY[0].scrollTop = scrolled = i.overflowY[0].scrollTop + o.scrollSpeed;
 			if(e.pageY - i.overflowYOffset.top < o.scrollSensitivity)
-				i.overflowY[0].scrollTop = i.overflowY[0].scrollTop - o.scrollSpeed;
+				i.overflowY[0].scrollTop = scrolled = i.overflowY[0].scrollTop - o.scrollSpeed;
 							
 		} else {
 			if(e.pageY - $(document).scrollTop() < o.scrollSensitivity)
-				$(document).scrollTop($(document).scrollTop() - o.scrollSpeed);
+				scrolled = $(document).scrollTop($(document).scrollTop() - o.scrollSpeed);
 			if($(window).height() - (e.pageY - $(document).scrollTop()) < o.scrollSensitivity)
-				$(document).scrollTop($(document).scrollTop() + o.scrollSpeed);
+				scrolled = $(document).scrollTop($(document).scrollTop() + o.scrollSpeed);
 		}
 		
 		if(i.overflowX[0] != document && i.overflowX[0].tagName != 'HTML') {
 			if((i.overflowXOffset.left + i.overflowX[0].offsetWidth) - e.pageX < o.scrollSensitivity)
-				i.overflowX[0].scrollLeft = i.overflowX[0].scrollLeft + o.scrollSpeed;
+				i.overflowX[0].scrollLeft = scrolled = i.overflowX[0].scrollLeft + o.scrollSpeed;
 			if(e.pageX - i.overflowXOffset.left < o.scrollSensitivity)
-				i.overflowX[0].scrollLeft = i.overflowX[0].scrollLeft - o.scrollSpeed;
+				i.overflowX[0].scrollLeft = scrolled = i.overflowX[0].scrollLeft - o.scrollSpeed;
 		} else {
 			if(e.pageX - $(document).scrollLeft() < o.scrollSensitivity)
-				$(document).scrollLeft($(document).scrollLeft() - o.scrollSpeed);
+				scrolled = $(document).scrollLeft($(document).scrollLeft() - o.scrollSpeed);
 			if($(window).width() - (e.pageX - $(document).scrollLeft()) < o.scrollSensitivity)
-				$(document).scrollLeft($(document).scrollLeft() + o.scrollSpeed);
+				scrolled = $(document).scrollLeft($(document).scrollLeft() + o.scrollSpeed);
 		}
+		
+		if(scrolled !== false)
+			$.ui.ddmanager.prepareOffsets(i, e);
 		
 	}
 });
+
 
 $.ui.plugin.add("draggable", "snap", {
 	start: function(e, ui) {
 		
 		var inst = $(this).data("draggable");
 		inst.snapElements = [];
-		$(ui.options.snap === true ? ':data(draggable)' : ui.options.snap).each(function() {
+
+		$(ui.options.snap.constructor != String ? ( ui.options.snap.items || ':data(draggable)' ) : ui.options.snap).each(function() {
 			var $t = $(this); var $o = $t.offset();
 			if(this != inst.element[0]) inst.snapElements.push({
 				item: this,
@@ -6836,7 +6996,7 @@ $.ui.plugin.add("draggable", "snap", {
 		
 	},
 	drag: function(e, ui) {
-		
+	
 		var inst = $(this).data("draggable");
 		var d = ui.options.snapTolerance || 20;
 		var x1 = ui.absolutePosition.left, x2 = x1 + inst.helperProportions.width,
@@ -6848,7 +7008,11 @@ $.ui.plugin.add("draggable", "snap", {
 				t = inst.snapElements[i].top, b = t + inst.snapElements[i].height;
 			
 			//Yes, I know, this is insane ;)
-			if(!((l-d < x1 && x1 < r+d && t-d < y1 && y1 < b+d) || (l-d < x1 && x1 < r+d && t-d < y2 && y2 < b+d) || (l-d < x2 && x2 < r+d && t-d < y1 && y1 < b+d) || (l-d < x2 && x2 < r+d && t-d < y2 && y2 < b+d))) continue;
+			if(!((l-d < x1 && x1 < r+d && t-d < y1 && y1 < b+d) || (l-d < x1 && x1 < r+d && t-d < y2 && y2 < b+d) || (l-d < x2 && x2 < r+d && t-d < y1 && y1 < b+d) || (l-d < x2 && x2 < r+d && t-d < y2 && y2 < b+d))) {
+				if(inst.snapElements[i].snapping) (inst.options.snap.release && inst.options.snap.release.call(inst.element, null, $.extend(inst.uiHash(), { snapItem: inst.snapElements[i].item })));
+				inst.snapElements[i].snapping = false;
+				continue;
+			}
 			
 			if(ui.options.snapMode != 'inner') {
 				var ts = Math.abs(t - y2) <= 20;
@@ -6861,6 +7025,8 @@ $.ui.plugin.add("draggable", "snap", {
 				if(rs) ui.position.left = inst.convertPositionTo("relative", { top: 0, left: r }).left;
 			}
 			
+			var first = (ts || bs || ls || rs);
+			
 			if(ui.options.snapMode != 'outer') {
 				var ts = Math.abs(t - y1) <= 20;
 				var bs = Math.abs(b - y2) <= 20;
@@ -6872,7 +7038,12 @@ $.ui.plugin.add("draggable", "snap", {
 				if(rs) ui.position.left = inst.convertPositionTo("relative", { top: 0, left: r - inst.helperProportions.width }).left;
 			}
 			
+			if(!inst.snapElements[i].snapping && (ts || bs || ls || rs || first))
+				(inst.options.snap.snap && inst.options.snap.snap.call(inst.element, null, $.extend(inst.uiHash(), { snapItem: inst.snapElements[i].item })));
+			inst.snapElements[i].snapping = (ts || bs || ls || rs || first);
+			
 		};
+
 	}
 });
 
@@ -7427,6 +7598,7 @@ Liferay.Service = {
 					type: 'GET',
 					url: serviceUrl,
 					data: options,
+					cache: false,
 					dataType: 'json',
 					beforeSend: function(xHR) {
 						if (tunnelEnabled) {
@@ -9541,9 +9713,14 @@ Liferay.Portlet = {
 
 		var url = options.url;
 		var data = options.data;
+		var dataType = 'html';
 		var placeHolder = options.placeHolder;
 		var beforePortletLoaded = options.beforePortletLoaded;
 		var onComplete = options.onComplete;
+
+		if (data && data.dataType) {
+			dataType = data.dataType;
+		}
 
 		var addPortletReturn = function(html) {
 			var container = placeHolder.parentNode;
@@ -9590,13 +9767,18 @@ Liferay.Portlet = {
 			{
 				url: url,
 				data: data,
-				dataType: 'json',
-				success: function(obj) {
-					if (obj.refresh) {
-						location.reload();
+				dataType: dataType,
+				success: function(message) {
+					if (dataType == 'html') {
+						addPortletReturn(message);
 					}
 					else {
-						addPortletReturn(obj.portletHTML);
+						if (message.refresh) {
+							location.reload();
+						}
+						else {
+							addPortletReturn(message.portletHTML);
+						}
 					}
 				}
 			}
