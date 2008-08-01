@@ -36,6 +36,10 @@ public interface TagsEntryFinder {
 	public int countByG_C_C_N(long groupId, long companyId, long classNameId,
 		java.lang.String name) throws com.liferay.portal.SystemException;
 
+	public java.util.List<com.liferay.portlet.tags.model.TagsEntry> findByA_F(
+		long assetId, boolean folksonomy)
+		throws com.liferay.portal.SystemException;
+
 	public java.util.List<com.liferay.portlet.tags.model.TagsEntry> findByC_N_P(
 		long companyId, java.lang.String name, java.lang.String[] properties)
 		throws com.liferay.portal.SystemException;

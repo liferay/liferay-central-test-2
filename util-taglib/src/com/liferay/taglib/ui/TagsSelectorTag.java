@@ -42,6 +42,9 @@ public class TagsSelectorTag extends IncludeTag {
 		request.setAttribute(
 			"liferay-ui:tags_selector:classPK", String.valueOf(_classPK));
 		request.setAttribute(
+				"liferay-ui:tags_selector:folksonomy",
+				String.valueOf(_folksonomy));
+		request.setAttribute(
 			"liferay-ui:tags_selector:hiddenInput", _hiddenInput);
 		request.setAttribute("liferay-ui:tags_selector:curTags", _curTags);
 		request.setAttribute(
@@ -59,6 +62,10 @@ public class TagsSelectorTag extends IncludeTag {
 
 	public void setClassPK(long classPK) {
 		_classPK = classPK;
+	}
+
+	public void setFolksonomy(boolean folksonomy) {
+		_folksonomy = folksonomy;
 	}
 
 	public void setHiddenInput(String hiddenInput) {
@@ -86,6 +93,7 @@ public class TagsSelectorTag extends IncludeTag {
 
 	private String _className;
 	private long _classPK;
+	private boolean _folksonomy;
 	private String _hiddenInput;
 	private String _curTags;
 	private boolean _focus;

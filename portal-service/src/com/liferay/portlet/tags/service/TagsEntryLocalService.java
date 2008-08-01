@@ -125,6 +125,10 @@ public interface TagsEntryLocalService {
 	public java.util.List<com.liferay.portlet.tags.model.TagsEntry> getAssetEntries(
 		long assetId) throws com.liferay.portal.SystemException;
 
+	public java.util.List<com.liferay.portlet.tags.model.TagsEntry> getAssetEntries(
+		long assetId, boolean folksonomy)
+		throws com.liferay.portal.SystemException;
+
 	public java.util.List<com.liferay.portlet.tags.model.TagsEntry> getEntries()
 		throws com.liferay.portal.SystemException;
 
@@ -134,6 +138,10 @@ public interface TagsEntryLocalService {
 
 	public java.util.List<com.liferay.portlet.tags.model.TagsEntry> getEntries(
 		long classNameId, long classPK)
+		throws com.liferay.portal.SystemException;
+
+	public java.util.List<com.liferay.portlet.tags.model.TagsEntry> getEntries(
+		java.lang.String className, long classPK, boolean folksonomy)
 		throws com.liferay.portal.SystemException;
 
 	public java.util.List<com.liferay.portlet.tags.model.TagsEntry> getEntries(

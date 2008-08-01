@@ -164,6 +164,12 @@ public class TagsEntryLocalServiceUtil {
 		return _service.getAssetEntries(assetId);
 	}
 
+	public static java.util.List<com.liferay.portlet.tags.model.TagsEntry> getAssetEntries(
+		long assetId, boolean folksonomy)
+		throws com.liferay.portal.SystemException {
+		return _service.getAssetEntries(assetId, folksonomy);
+	}
+
 	public static java.util.List<com.liferay.portlet.tags.model.TagsEntry> getEntries()
 		throws com.liferay.portal.SystemException {
 		return _service.getEntries();
@@ -179,6 +185,12 @@ public class TagsEntryLocalServiceUtil {
 		long classNameId, long classPK)
 		throws com.liferay.portal.SystemException {
 		return _service.getEntries(classNameId, classPK);
+	}
+
+	public static java.util.List<com.liferay.portlet.tags.model.TagsEntry> getEntries(
+		java.lang.String className, long classPK, boolean folksonomy)
+		throws com.liferay.portal.SystemException {
+		return _service.getEntries(className, classPK, folksonomy);
 	}
 
 	public static java.util.List<com.liferay.portlet.tags.model.TagsEntry> getEntries(

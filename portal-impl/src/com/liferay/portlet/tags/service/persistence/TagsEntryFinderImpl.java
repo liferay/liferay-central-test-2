@@ -54,6 +54,9 @@ public class TagsEntryFinderImpl
 	public static String COUNT_BY_G_C_C_N =
 		TagsEntryFinder.class.getName() + ".countByG_C_C_N";
 
+	public static String FIND_BY_A_F =
+		TagsEntryFinder.class.getName() + ".findByA_F";
+
 	public static String FIND_BY_C_N_P =
 		TagsEntryFinder.class.getName() + ".findByC_N_P";
 
@@ -137,6 +140,36 @@ public class TagsEntryFinderImpl
 			}
 
 			return 0;
+		}
+		catch (Exception e) {
+			throw new SystemException(e);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
+
+	public List<TagsEntry> findByA_F(long assetId, boolean folksonomy)
+		throws SystemException {
+
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			String sql = CustomSQLUtil.get(FIND_BY_A_F);
+
+			SQLQuery q = session.createSQLQuery(sql);
+
+			q.addEntity("TagsEntry", TagsEntryImpl.class);
+
+			QueryPos qPos = QueryPos.getInstance(q);
+
+			qPos.add(assetId);
+			qPos.add(folksonomy);
+
+			return (List<TagsEntry>) QueryUtil.list(
+				q, getDialect(), QueryUtil.ALL_POS, QueryUtil.ALL_POS);
 		}
 		catch (Exception e) {
 			throw new SystemException(e);

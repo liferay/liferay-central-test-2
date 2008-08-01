@@ -29,77 +29,14 @@
 <%
 themeDisplay.setIncludeServiceJs(true);
 
-String randomNamespace = PwdGenerator.getPassword(PwdGenerator.KEY3, 4) + StringPool.UNDERLINE;
-
-String className = (String)request.getAttribute("liferay-ui:tags_selector:className");
-long classPK = GetterUtil.getLong((String)request.getAttribute("liferay-ui:tags_selector:classPK"));
-String hiddenInput = (String)request.getAttribute("liferay-ui:tags_selector:hiddenInput");
-String curTags = GetterUtil.getString((String)request.getAttribute("liferay-ui:tags_selector:curTags"));
-boolean focus = GetterUtil.getBoolean((String)request.getAttribute("liferay-ui:tags_selector:focus"));
-String contentCallback = GetterUtil.getString((String)request.getAttribute("liferay-ui:tags_selector:contentCallback"));
-
-boolean suggestible = Validator.isNotNull(contentCallback);
-
-if (Validator.isNotNull(className) && (classPK > 0)) {
-	List entries = TagsEntryLocalServiceUtil.getEntries(className, classPK);
-
-	curTags = ListUtil.toString(entries, "name");
-}
-
-String curTagsParam = request.getParameter(hiddenInput);
-
-if (curTagsParam != null) {
-	curTags = curTagsParam;
-}
+boolean folksonomy = GetterUtil.getBoolean((String)request.getAttribute("liferay-ui:tags_selector:folksonomy"), true);
 %>
 
-<input id="<%= namespace %><%= hiddenInput %>" type="hidden" />
-
-<span class="ui-tags empty" id="<%= randomNamespace %>tagsSummary"></span>
-	<input class="ui-tags-input" id="<%= randomNamespace %>tags" size="15" type="text" />
-
-	<input disabled id="<%= randomNamespace %>addTag" type="button" value="<liferay-ui:message key="add-tags" />" />
-</nobr>
-
-<liferay-ui:message key="or" />
-
-<input id="<%= randomNamespace %>selectTag" type="button" value="<liferay-ui:message key="select-tags" />" />
-
-<c:if test="<%= suggestible %>">
-	<input id="<%= randomNamespace %>suggestions" type="button" value="<liferay-ui:message key="suggestions" />" />
-</c:if>
-
-<script type="text/javascript">
-	var <%= randomNamespace %> = null;
-
-	jQuery(
-		function() {
-			<%= randomNamespace %> = new Liferay.TagsSelector(
-				{
-					instanceVar: "<%= randomNamespace %>",
-					hiddenInput: "<%= namespace + hiddenInput %>",
-					textInput: "<%= randomNamespace %>tags",
-					summarySpan: "<%= randomNamespace %>tagsSummary",
-					curTags: "<%= curTags %>",
-					focus: <%= focus %>,
-					contentCallback: function() {
-						return <%= contentCallback %>();
-					}
-				}
-			);
-
-			jQuery("#<%= randomNamespace %>tags").keyup(
-				function() {
-					var addTagInput = jQuery("#<%= randomNamespace %>addTag");
-
-					if (this.value != "") {
-						addTagInput.attr("disabled", false);
-					}
-					else {
-						addTagInput.attr("disabled", true);
-					}
-				}
-			);
-		}
-	);
-</script>
+<c:choose>
+	<c:when test="<%= folksonomy %>">
+		<liferay-util:include page="/html/taglib/ui/tags_selector/folksonomy.jsp" />
+	</c:when>
+	<c:otherwise>
+		<liferay-util:include page="/html/taglib/ui/tags_selector/other.jsp" />
+	</c:otherwise>
+</c:choose>

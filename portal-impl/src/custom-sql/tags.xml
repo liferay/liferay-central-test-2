@@ -138,6 +138,23 @@
 				TagsEntry.name ASC
 		]]>
 	</sql>
+	<sql id="com.liferay.portlet.tags.service.persistence.TagsEntryFinder.findByA_F">
+		<![CDATA[
+			SELECT
+				{TagsEntry.*}
+			FROM
+				TagsEntry
+			INNER JOIN
+				TagsAssets_TagsEntries ON
+					(TagsEntry.entryId = TagsAssets_TagsEntries.entryId) AND
+					(TagsAssets_TagsEntries.assetId = ?)
+			INNER JOIN
+				TagsVocabulary ON
+					(TagsEntry.vocabularyId = TagsVocabulary.vocabularyId)
+			WHERE
+				TagsVocabulary.folksonomy = ?
+		]]>
+	</sql>
 	<sql id="com.liferay.portlet.tags.service.persistence.TagsPropertyFinder.countByC_K">
 		<![CDATA[
 			SELECT

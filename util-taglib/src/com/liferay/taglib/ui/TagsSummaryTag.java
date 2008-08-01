@@ -43,6 +43,9 @@ public class TagsSummaryTag extends IncludeTag {
 		request.setAttribute("liferay-ui:tags_summary:className", _className);
 		request.setAttribute(
 			"liferay-ui:tags_summary:classPK", String.valueOf(_classPK));
+		request.setAttribute(
+				"liferay-ui:tags_summary:folksonomy", 
+				String.valueOf(_folksonomy));
 		request.setAttribute("liferay-ui:tags_summary:message", _message);
 		request.setAttribute("liferay-ui:tags_summary:portletURL", _portletURL);
 
@@ -57,6 +60,10 @@ public class TagsSummaryTag extends IncludeTag {
 		_classPK = classPK;
 	}
 
+	public void setFolksonomy(boolean folksonomy) {
+		_folksonomy = folksonomy;
+	}
+	
 	public void setMessage(String message) {
 		_message = message;
 	}
@@ -77,6 +84,7 @@ public class TagsSummaryTag extends IncludeTag {
 
 	private String _className;
 	private long _classPK;
+	private boolean _folksonomy;
 	private String _message;
 	private PortletURL _portletURL;
 

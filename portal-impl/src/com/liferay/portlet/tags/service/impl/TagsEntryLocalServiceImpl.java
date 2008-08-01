@@ -223,6 +223,12 @@ public class TagsEntryLocalServiceImpl extends TagsEntryLocalServiceBaseImpl {
 		return tagsAssetPersistence.getTagsEntries(assetId);
 	}
 
+	public List<TagsEntry> getAssetEntries(long assetId, boolean folksonomy)
+		throws SystemException {
+
+		return tagsEntryFinder.findByA_F(assetId, folksonomy);
+	}
+
 	public List<TagsEntry> getEntries() throws SystemException {
 		return tagsEntryPersistence.findAll();
 	}
@@ -245,6 +251,21 @@ public class TagsEntryLocalServiceImpl extends TagsEntryLocalServiceBaseImpl {
 		}
 		else {
 			return tagsAssetPersistence.getTagsEntries(asset.getAssetId());
+		}
+	}
+
+	public List<TagsEntry> getEntries(
+			String className, long classPK, boolean folksonomy)
+		throws SystemException {
+
+		long classNameId = PortalUtil.getClassNameId(className);
+
+		TagsAsset asset = tagsAssetPersistence.fetchByC_C(classNameId, classPK);
+
+		if (asset == null) {
+			return new ArrayList<TagsEntry>();
+		} else {
+			return getAssetEntries(asset.getAssetId(), folksonomy);
 		}
 	}
 

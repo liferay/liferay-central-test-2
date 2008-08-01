@@ -41,6 +41,12 @@ public class TagsEntryFinderUtil {
 		return getFinder().countByG_C_C_N(groupId, companyId, classNameId, name);
 	}
 
+	public static java.util.List<com.liferay.portlet.tags.model.TagsEntry> findByA_F(
+		long assetId, boolean folksonomy)
+		throws com.liferay.portal.SystemException {
+		return getFinder().findByA_F(assetId, folksonomy);
+	}
+
 	public static java.util.List<com.liferay.portlet.tags.model.TagsEntry> findByC_N_P(
 		long companyId, java.lang.String name, java.lang.String[] properties)
 		throws com.liferay.portal.SystemException {
