@@ -150,6 +150,7 @@ GroupSearch searchContainer = new GroupSearch(renderRequest, portletURL);
 		rowURL.setWindowState(WindowState.NORMAL);
 
 		rowURL.setParameter("struts_action", "/communities/page");
+		rowURL.setParameter("groupId", String.valueOf(group.getGroupId()));
 		rowURL.setParameter("redirect", currentURL);
 
 		// Name
