@@ -192,6 +192,10 @@ DateFormat timeFormat = new SimpleDateFormat("h:mma", locale);
 			for (int j = 0; j < events.size(); j++) {
 				CalEvent event = (CalEvent)events.get(j);
 
+				if (!CalEventPermission.contains(permissionChecker, event, ActionKeys.VIEW)) {
+					break;
+				}
+
 				event = event.toEscapedModel();
 
 				className = "portlet-section-body results-row";
