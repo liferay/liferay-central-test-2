@@ -642,8 +642,6 @@ public class AdvancedPermissionChecker extends BasePermissionChecker {
 					stopWatch.getTime() + " ms");
 	}
 
-	protected static final int GUEST_GROUP_BAG_ID = -101;
-
 	protected static final String RESULTS_SEPARATOR = "_RESULTS_SEPARATOR_";
 
 	protected Map<Long, Boolean> companyAdmins = new HashMap<Long, Boolean>();
