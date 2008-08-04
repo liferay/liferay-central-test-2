@@ -36,7 +36,7 @@ if (classPK > 0) {
 	assetEntries = SetUtil.fromList(TagsEntryLocalServiceUtil.getAssetEntries(asset.getAssetId(), false));
 }
 
-List<TagsVocabulary> vocabularies = TagsVocabularyServiceUtil.getVocabularies(company.getCompanyId(), false);
+List<TagsVocabulary> vocabularies = TagsVocabularyLocalServiceUtil.getVocabularies(company.getCompanyId(), false);
 %>
 
 <div>

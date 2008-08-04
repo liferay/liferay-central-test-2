@@ -27,7 +27,7 @@
 <%
 String tag = ParamUtil.getString(renderRequest, "tag");
 
-List<TagsVocabulary> vocabularies = TagsVocabularyServiceUtil.getVocabularies(company.getCompanyId(), false);
+List<TagsVocabulary> vocabularies = TagsVocabularyLocalServiceUtil.getVocabularies(company.getCompanyId(), false);
 
 PortletURL portletURL = renderResponse.createRenderURL();
 %>
