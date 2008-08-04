@@ -24,81 +24,77 @@
 
 <%@ include file="/html/taglib/ui/tags_selector/init.jsp"%>
 
-<div>
 <%
 String className = (String)request.getAttribute("liferay-ui:tags_selector:className");
 long classPK = GetterUtil.getLong((String)request.getAttribute("liferay-ui:tags_selector:classPK"));
 
-StringBuilder sb = new StringBuilder();
-
-List<TagsVocabulary> vocabularies = TagsVocabularyServiceUtil.getVocabularies(company.getCompanyId(), false);
-
 TagsAsset asset = null;
-
-List<TagsEntry> tags = Collections.EMPTY_LIST;
+Set<TagsEntry> assetEntries = Collections.EMPTY_SET;
 
 if (classPK > 0) {
 	asset = TagsAssetLocalServiceUtil.getAsset(className, classPK);
-	tags =TagsEntryLocalServiceUtil.getAssetEntries(asset.getAssetId(), false);
+	assetEntries = SetUtil.fromList(TagsEntryLocalServiceUtil.getAssetEntries(asset.getAssetId(), false));
 }
 
-sb.append("<table>");
-
-for (TagsVocabulary vocabulary : vocabularies) {
-	String vocabularyName = vocabulary.getName();
-
-	sb.append("<tr>");
-	sb.append("<td>");
-	sb.append(vocabularyName);
-	sb.append("</td>");
-	sb.append("<td>");
-	sb.append("<select name=\"");
-	sb.append(TagsEntryConstants.VOCABULARY);
-	sb.append(vocabulary.getVocabularyId());
-	sb.append("\">");
-	sb.append("<option value=\"\"></option>");
-
-	List<TagsEntry> entries = TagsEntryLocalServiceUtil.getVocabularyRootEntries(company.getCompanyId(), vocabularyName);
-
-	for (TagsEntry entry : entries) {
-		_buildTree(company.getCompanyId(), sb, vocabularyName, entry, tags, renderResponse, StringPool.BLANK);
-	}
-
-	sb.append("</select>");
-	sb.append("</td>");
-	sb.append("</tr>");
-}
-sb.append("</table>");
+List<TagsVocabulary> vocabularies = TagsVocabularyServiceUtil.getVocabularies(company.getCompanyId(), false);
 %>
 
-<%= sb.toString() %>
+<div>
 
+	<%
+	StringBuilder sb = new StringBuilder();
+
+	sb.append("<table>");
+
+	for (TagsVocabulary vocabulary : vocabularies) {
+		String vocabularyName = vocabulary.getName();
+
+		sb.append("<tr><td>");
+		sb.append(vocabularyName);
+		sb.append("</td><td><select name=\"");
+		sb.append(TagsEntryConstants.VOCABULARY);
+		sb.append(vocabulary.getVocabularyId());
+		sb.append("\"><option value=\"\"></option>");
+
+		List<TagsEntry> entries = TagsEntryLocalServiceUtil.getVocabularyRootEntries(company.getCompanyId(), vocabularyName);
+
+		for (TagsEntry entry : entries) {
+			_buildTree(entry, vocabularyName, assetEntries, StringPool.BLANK, sb);
+		}
+
+		sb.append("</select></td></tr>");
+	}
+
+	sb.append("</table>");
+	%>
+
+	<%= sb.toString() %>
 </div>
 
 <%!
-private void _buildTree(long companyId, StringBuilder sb, String vocabularyName, TagsEntry entry, List<TagsEntry> tags, RenderResponse renderResponse, String level)
+private void _buildTree(TagsEntry entry, String vocabularyName, Set<TagsEntry> assetEntries, String level, StringBuilder sb)
 	throws SystemException, PortalException, java.rmi.RemoteException {
 
 	String entryName = entry.getName();
 
-	sb.append("<option value=\"");
-	sb.append(entry.getEntryId());
-	sb.append("\"");
+	sb.append("<option ");
 
-	if (tags.contains(entry)) {
-		sb.append(" selected=\"selected\" ");
+	if (assetEntries.contains(entry)) {
+		sb.append("selected=\"selected\" ");
 	}
 
-	sb.append(">");
+	sb.append("value=\"");
+	sb.append(entry.getEntryId());
+	sb.append("\">");
 	sb.append(level);
 	sb.append(StringPool.SPACE);
 	sb.append(entryName);
 	sb.append("</option>");
 
-	List<TagsEntry> children = TagsEntryLocalServiceUtil.getVocabularyEntries(companyId, entryName, vocabularyName);
+	List<TagsEntry> entryChildren = TagsEntryLocalServiceUtil.getVocabularyEntries(entry.getCompanyId(), entryName, vocabularyName);
 
-	for (TagsEntry child : children) {
-		_buildTree(companyId, sb, vocabularyName, child, tags, renderResponse, level + StringPool.DASH);
+	for (TagsEntry entryChild : entryChildren) {
+		_buildTree(entryChild, vocabularyName, assetEntries, level + StringPool.DASH, sb);
 	}
 }
 %>

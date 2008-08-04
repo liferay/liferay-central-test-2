@@ -264,7 +264,8 @@ public class TagsEntryLocalServiceImpl extends TagsEntryLocalServiceBaseImpl {
 
 		if (asset == null) {
 			return new ArrayList<TagsEntry>();
-		} else {
+		}
+		else {
 			return getAssetEntries(asset.getAssetId(), folksonomy);
 		}
 	}

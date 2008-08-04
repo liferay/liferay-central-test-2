@@ -44,8 +44,7 @@ public class TagsSummaryTag extends IncludeTag {
 		request.setAttribute(
 			"liferay-ui:tags_summary:classPK", String.valueOf(_classPK));
 		request.setAttribute(
-				"liferay-ui:tags_summary:folksonomy",
-				String.valueOf(_folksonomy));
+			"liferay-ui:tags_summary:folksonomy", String.valueOf(_folksonomy));
 		request.setAttribute("liferay-ui:tags_summary:message", _message);
 		request.setAttribute("liferay-ui:tags_summary:portletURL", _portletURL);
 

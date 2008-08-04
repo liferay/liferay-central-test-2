@@ -43,8 +43,7 @@ public class TagsSelectorTag extends IncludeTag {
 		request.setAttribute(
 			"liferay-ui:tags_selector:classPK", String.valueOf(_classPK));
 		request.setAttribute(
-				"liferay-ui:tags_selector:folksonomy",
-				String.valueOf(_folksonomy));
+			"liferay-ui:tags_selector:folksonomy", String.valueOf(_folksonomy));
 		request.setAttribute(
 			"liferay-ui:tags_selector:hiddenInput", _hiddenInput);
 		request.setAttribute("liferay-ui:tags_selector:curTags", _curTags);

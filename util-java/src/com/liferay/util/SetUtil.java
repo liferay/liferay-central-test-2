@@ -31,6 +31,7 @@ import java.io.FileReader;
 import java.io.IOException;
 
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 /**
@@ -85,6 +86,20 @@ public class SetUtil {
 		}
 
 		br.close();
+
+		return set;
+	}
+
+	public static Set fromList(List array) {
+		if ((array == null) || (array.size() == 0)) {
+			return new HashSet();
+		}
+
+		Set set = new HashSet(array.size());
+
+		for (int i = 0; i < array.size(); i++) {
+			set.add(array.get(i));
+		}
 
 		return set;
 	}

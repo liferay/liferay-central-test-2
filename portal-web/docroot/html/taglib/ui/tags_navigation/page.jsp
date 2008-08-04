@@ -24,18 +24,20 @@
 
 <%@ include file="/html/taglib/ui/tags_navigation/init.jsp"%>
 
+<%
+String tag = ParamUtil.getString(renderRequest, "tag");
+
+List<TagsVocabulary> vocabularies = TagsVocabularyServiceUtil.getVocabularies(company.getCompanyId(), false);
+
+PortletURL portletURL = renderResponse.createRenderURL();
+%>
+
 <div>
 
 	<%
-	String tag = ParamUtil.getString(renderRequest, "tag");
-
-	PortletURL portletURL = renderResponse.createRenderURL();
-
 	StringBuilder sb = new StringBuilder();
 
 	sb.append("<ul>");
-
-	List<TagsVocabulary> vocabularies = TagsVocabularyServiceUtil.getVocabularies(company.getCompanyId(), false);
 
 	for (TagsVocabulary vocabulary : vocabularies) {
 		String vocabularyName = vocabulary.getName();

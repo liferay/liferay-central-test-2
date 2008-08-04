@@ -34,7 +34,7 @@ boolean folksonomy = GetterUtil.getBoolean((String)request.getAttribute("liferay
 String message = GetterUtil.getString((String)request.getAttribute("liferay-ui:tags_summary:message"), "tags");
 LiferayPortletURL portletURL = (LiferayPortletURL)request.getAttribute("liferay-ui:tags_summary:portletURL");
 
-List entries = TagsEntryLocalServiceUtil.getEntries(className, classPK, folksonomy);
+List<TagsEntry> entries = TagsEntryLocalServiceUtil.getEntries(className, classPK, folksonomy);
 %>
 
 <c:if test="<%= entries.size() > 0 %>">
@@ -45,9 +45,7 @@ List entries = TagsEntryLocalServiceUtil.getEntries(className, classPK, folksono
 			<c:when test="<%= portletURL != null %>">
 
 				<%
-				for (int i = 0; i < entries.size(); i++) {
-					TagsEntry entry = (TagsEntry)entries.get(i);
-
+				for (TagsEntry entry : entries) {
 					portletURL.setParameter("tag", entry.getName());
 				%>
 
