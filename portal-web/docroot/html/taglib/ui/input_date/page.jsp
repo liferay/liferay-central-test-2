@@ -136,9 +136,9 @@ else {
 			_onSelect: function(date, datepicker) {
 				var instance = this;
 
-				var day = datepicker._selectedDay;
-				var month = datepicker._selectedMonth;
-				var year = datepicker._selectedYear;
+				var day = datepicker.selectedDay;
+				var month = datepicker.selectedMonth;
+				var year = datepicker.selectedYear;
 
 				if (!instance._combinedMonthYear) {
 					instance._monthField.val(month);
