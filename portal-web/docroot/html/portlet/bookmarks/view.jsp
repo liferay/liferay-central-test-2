@@ -83,6 +83,10 @@ portletURL.setParameter("folderId", String.valueOf(folderId));
 		for (int i = 0; i < results.size(); i++) {
 			BookmarksFolder curFolder = (BookmarksFolder)results.get(i);
 
+			if (!BookmarksFolderPermission.contains(permissionChecker, curFolder, ActionKeys.VIEW)) {
+				break;
+			}
+
 			curFolder = curFolder.toEscapedModel();
 
 			ResultRow row = new ResultRow(curFolder, curFolder.getFolderId(), i);
@@ -289,6 +293,10 @@ portletURL.setParameter("folderId", String.valueOf(folderId));
 
 			for (int i = 0; i < results.size(); i++) {
 				BookmarksEntry entry = (BookmarksEntry)results.get(i);
+
+				if (!BookmarksEntryPermission.contains(permissionChecker, entry, ActionKeys.VIEW)) {
+					break;
+				}
 
 				entry = entry.toEscapedModel();
 
