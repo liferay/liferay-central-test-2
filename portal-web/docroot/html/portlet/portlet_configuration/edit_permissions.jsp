@@ -1009,6 +1009,8 @@ portletURL.setParameter("resourcePrimKey", resourcePrimKey);
 
 					<%
 					Role role = RoleLocalServiceUtil.getRole(roleIdsArray[roleIdsPos]);
+
+					boolean isGuestRole = role.getName().equals(RoleImpl.GUEST);
 					%>
 
 					<liferay-ui:tabs names="<%= role.getName() %>" />
@@ -1019,6 +1021,8 @@ portletURL.setParameter("resourcePrimKey", resourcePrimKey);
 					List actions1 = ResourceActionsUtil.getResourceActions(company.getCompanyId(), portletResource, modelResource);
 					List actions2 = ResourceActionsUtil.getActions(permissions);
 
+					List guestUnsupportedActions = ResourceActionsUtil.getResourceGuestUnsupportedActions(portletResource, modelResource);
+
 					// Left list
 
 					List leftList = new ArrayList();
@@ -1026,7 +1030,14 @@ portletURL.setParameter("resourcePrimKey", resourcePrimKey);
 					for (int i = 0; i < actions2.size(); i++) {
 						String actionId = (String)actions2.get(i);
 
-						leftList.add(new KeyValuePair(actionId, ResourceActionsUtil.getAction(pageContext, actionId)));
+						if (isGuestRole) {
+							if (!guestUnsupportedActions.contains(actionId)) {
+								leftList.add(new KeyValuePair(actionId, ResourceActionsUtil.getAction(pageContext, actionId)));
+							}
+						}
+						else {
+							leftList.add(new KeyValuePair(actionId, ResourceActionsUtil.getAction(pageContext, actionId)));
+						}
 					}
 
 					Collections.sort(leftList, new KeyValuePairComparator(false, true));
@@ -1038,7 +1049,14 @@ portletURL.setParameter("resourcePrimKey", resourcePrimKey);
 					for (int i = 0; i < actions1.size(); i++) {
 						String actionId = (String)actions1.get(i);
 
-						if (!actions2.contains(actionId)) {
+						if (isGuestRole) {
+							if (!guestUnsupportedActions.contains(actionId)) {
+								if (!actions2.contains(actionId)) {
+									rightList.add(new KeyValuePair(actionId, ResourceActionsUtil.getAction(pageContext, actionId)));
+								}
+							}
+						}
+						else {
 							rightList.add(new KeyValuePair(actionId, ResourceActionsUtil.getAction(pageContext, actionId)));
 						}
 					}
@@ -1079,8 +1097,6 @@ portletURL.setParameter("resourcePrimKey", resourcePrimKey);
 
 			List actions1 = ResourceActionsUtil.getResourceActions(company.getCompanyId(), portletResource, modelResource);
 			List actions2 = ResourceActionsUtil.getActions(permissions);
-
-			List guestUnsupportedActions = ResourceActionsUtil.getResourceGuestUnsupportedActions(portletResource, modelResource);
 
 			// Left list
 

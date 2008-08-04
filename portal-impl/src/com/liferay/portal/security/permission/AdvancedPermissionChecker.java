@@ -417,13 +417,13 @@ public class AdvancedPermissionChecker extends BasePermissionChecker {
 		long[] resourceIds = getResourceIds(
 			companyId, 0, name, primKey, actionId);
 
+		Group guestGroup = GroupLocalServiceUtil.getGroup(
+			companyId, GroupImpl.GUEST);
+
 		PermissionCheckerBag bag = PermissionCacheUtil.getBag(
-			defaultUserId, GUEST_GROUP_BAG_ID);
+			defaultUserId, guestGroup.getGroupId());
 
 		if (bag == null) {
-			Group guestGroup = GroupLocalServiceUtil.getGroup(
-				companyId, GroupImpl.GUEST);
-
 			List<Group> groups = new ArrayList<Group>();
 
 			groups.add(guestGroup);
@@ -436,7 +436,8 @@ public class AdvancedPermissionChecker extends BasePermissionChecker {
 				new ArrayList<Organization>(), new ArrayList<Group>(),
 				new ArrayList<Group>(), new ArrayList<Group>(), roles);
 
-			PermissionCacheUtil.putBag(defaultUserId, GUEST_GROUP_BAG_ID, bag);
+			PermissionCacheUtil.putBag(
+				defaultUserId, guestGroup.getGroupId(), bag);
 		}
 
 		try {
