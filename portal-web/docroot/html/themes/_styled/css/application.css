@@ -776,40 +776,43 @@ img.ui-datepicker-trigger {
 }
 
 .ui-tags-content li.ui-tags-vocabulary, li.ui-tags-item {
-	list-style: none;
 	border-bottom: 1px #D3D7DB solid;
 	font-size: 13px;
 	font-weight: bold;
 	height: 35px;
 	line-height: 35px;
+	list-style: none;
 }
+
 .ui-tags-content ul {
 	margin: 0;
 	padding: 0;
 }
+
 .ui-tags-vocabulary-list a {
-	padding-left: 20px;
-	color: #336699;
+	color: #369;
 	display: block;
+	padding-left: 20px;
 	text-decoration: none;
 	zoom: 1;
 }
+
 .ui-tags-vocabulary-edit {
-	display: none;
 	background: #F0F2F4;
+	display: none;
 }
 
 .ui-tags-vocabulary-entries li.ui-tags-item {
-	cursor: pointer;
 	background: #fff;
+	cursor: pointer;
 }
 
 .ui-tags-item a {
-	color: #336699;
-	text-decoration: underline;
+	color: #369;
 	font-size: 11px;
 	padding: 0;
-} 
+	text-decoration: underline;
+}
 
 .ui-tags-item span {
 	padding-left: 20px;
@@ -833,21 +836,22 @@ img.ui-datepicker-trigger {
 }
 
 .ui-tags-vocabulary-entries .active-area {
-	background: #FFFFCC !important;
+	background: #FFC !important;
 }
 
 .ui-tags-vocabulary-entries {
-	overflow: auto;
-	height: 300px;
 	border-right: 1px #D3D7DB solid;
+	height: 300px;
 	min-width: 200px;
+	overflow: auto;
 }
+
 .ui-tags-vocabulary-list {
+	border-left: 1px #D3D7DB solid;
+	border-right: 1px #D3D7DB solid;
+	height: 300px;
 	overflow: auto;
 	overflow-x: hidden;
-	height: 300px;
-	border-right: 1px #D3D7DB solid;
-	border-left: 1px #D3D7DB solid;
 }
 
 .ui-tags-properties {
@@ -855,9 +859,9 @@ img.ui-datepicker-trigger {
 }
 
 .ui-tags .nowrap {
-	white-space: nowrap;
-	overflow: hidden;
 	empty-cells: show;
+	overflow: hidden;
+	white-space: nowrap;
 }
 
 .ui-tags-search-bar {
@@ -865,7 +869,7 @@ img.ui-datepicker-trigger {
 	border: 1px #D3D7DB solid;
 	border-left: 0;
 	border-right: 0;
-	padding:10px 20px 10px 20px;
+	padding: 10px 20px 10px 20px;
 }
 
 .ui-tags-toolbar {
@@ -874,36 +878,34 @@ img.ui-datepicker-trigger {
 }
 
 .ui-tags-buttons {
-	padding: 5px 0px 5px 20px;
 	float: left;
+	padding: 5px 0px 5px 20px;
 }
 
 .ui-tags-actions {
-	text-align: right;
 	padding: 5px;
+	text-align: right;
 }
 
-.ui-tags-actions input, 
-.ui-tags-actions div, 
-.ui-tags-actions select {
+.ui-tags-actions input,   .ui-tags-actions div,   .ui-tags-actions select {
 	margin-left: 5px;
 }
 
 .ui-tags-buttons .button {
-	float: left;
-	display: block;
-	cursor: pointer;
-	margin-right: 5px;
-	padding: 3px 3px 3px 20px;
-	min-width: 70px;
-	color: #9EA8AD;
 	background: transparent url(../images/common/page.png) no-repeat scroll 0pt 50%;
+	color: #9EA8AD;
+	cursor: pointer;
+	display: block;
+	float: left;
+	margin-right: 5px;
+	min-width: 70px;
+	padding: 3px 3px 3px 20px;
 }
 
 .ui-tags-buttons .selected {
-	font-weight: bold;
-	color: #0F0F0F;
 	background: #CFD5D7 url(../images/common/page.png) no-repeat scroll 0pt 50%;
+	color: #0F0F0F;
+	font-weight: bold;
 }
 
 .ui-tags-vocabulary-edit {
@@ -923,9 +925,9 @@ img.ui-datepicker-trigger {
 }
 
 .ui-tags-footer {
+	border-top: 1px #848B95 solid;
 	margin-top: 5px;
 	padding: 10px 0 0 20px;
-	border-top: 1px #848B95 solid;
 }
 
 .ui-tags-vocabulary-name {
@@ -945,7 +947,6 @@ img.ui-datepicker-trigger {
 }
 
 .ui-tags-edit-vocabulary input {
-
 }
 
 span.ui-tags-delete {
@@ -961,14 +962,14 @@ span.ui-tags-delete {
 /* ---------- Treeview ---------- */
 
 .treeview {
-	font-size: 13px;
 	cursor: pointer;
+	font-size: 13px;
 }
 
-.treeview, .treeview ul { 
-	padding: 0;
-	margin: 0;
+.treeview, .treeview ul {
 	list-style: none;
+	margin: 0;
+	padding: 0;
 }
 
 .treeview ul {
@@ -977,19 +978,21 @@ span.ui-tags-delete {
 }
 
 .treeview .hitarea {
-	height: 1px;
-	width: 16px;
-	margin-left: -16px;
-	float: left;
 	cursor: pointer;
-}
-/* fix for IE6 */
-* html .hitarea {
-	display: inline;
-	float:none;
+	float: left;
+	height: 1px;
+	margin-left: -16px;
+	width: 16px;
 }
 
-.treeview li { 
+/* fix for IE6 */
+
+* html .hitarea {
+	display: inline;
+	float: none;
+}
+
+.treeview li {
 	margin: 0;
 	padding: 4px 0 5px 16px;
 }
@@ -998,33 +1001,69 @@ span.ui-tags-delete {
 	background-color: #eee;
 }
 
-#treecontrol { margin: 1em 0; display: none; }
+#treecontrol {
+	display: none;
+	margin: 1em 0;
+}
 
-.treeview .hover { cursor: pointer; }
+.treeview .hover {
+	cursor: pointer;
+}
 
-.treeview li.collapsable, .treeview li.expandable { background-position: 0 -176px; }
+.treeview li.collapsable, .treeview li.expandable {
+	background-position: 0 -176px;
+}
 
-.treeview .expandable-hitarea { background-position: -80px -3px; }
+.treeview .expandable-hitarea {
+	background-position: -80px -3px;
+}
 
-.treeview li.last { background-position: 0 -1766px }
-.treeview li.lastCollapsable, .treeview li.lastExpandable {  }  
-.treeview li.lastCollapsable { background-position: 0 -111px }
-.treeview li.lastExpandable { background-position: -32px -67px }
+.treeview li.last {
+	background-position: 0 -1766px;
+}
 
-.treeview div.lastCollapsable-hitarea, .treeview div.lastExpandable-hitarea { background-position: 0; }
+.treeview li.lastCollapsable, .treeview li.lastExpandable {
+}
+
+.treeview li.lastCollapsable {
+	background-position: 0 -111px;
+}
+
+.treeview li.lastExpandable {
+	background-position: -32px -67px;
+}
+
+.treeview div.lastCollapsable-hitarea, .treeview div.lastExpandable-hitarea {
+	background-position: 0;
+}
 
 .treeview .placeholder {
 	background: url(../images/trees/ajax_loader.gif) 0 0 no-repeat;
+	display: block;
 	height: 16px;
 	width: 16px;
-	display: block;
 }
 
-.filetree li { padding: 4px 0 5px 16px; }
-.filetree span.folder, .filetree span.file { padding: 1px 0 1px 16px; display: block; }
-.filetree span.folder { background: url(../images/trees/folder.png) 0 0 no-repeat; }
-.filetree li.expandable span.folder { background: url(../images/trees/folder_closed.png) 0 0 no-repeat; }
-.filetree span.file { background: url(../images/trees/file.gif) 0 0 no-repeat; }
+.filetree li {
+	padding: 4px 0 5px 16px;
+}
+
+.filetree span.folder, .filetree span.file {
+	display: block;
+	padding: 1px 0 1px 16px;
+}
+
+.filetree span.folder {
+	background: url(../images/trees/folder.png) 0 0 no-repeat;
+}
+
+.filetree li.expandable span.folder {
+	background: url(../images/trees/folder_closed.png) 0 0 no-repeat;
+}
+
+.filetree span.file {
+	background: url(../images/trees/file.gif) 0 0 no-repeat;
+}
 
 .treeview .hover-up {
 	border-bottom: 2px solid black;
@@ -1035,5 +1074,5 @@ span.ui-tags-delete {
 }
 
 .treeview .hover-folder {
-	background: #FFFFCC url(../images/trees/folder.png) no-repeat scroll 0 0 !important;
+	background: #FFC url(../images/trees/folder.png) no-repeat scroll 0 0 !important;
 }

@@ -305,7 +305,7 @@ font {
 	padding: 0.15em 1em;
 }
 
-.ui-tabs li a:hover, .ui-tabs li span:hover, .ui-tabs li.current:hover, .ui-tabs li.current a:hover  {
+.ui-tabs li a:hover, .ui-tabs li span:hover, .ui-tabs li.current:hover, .ui-tabs li.current a:hover {
 	background-color: transparent;
 	color: #ABCBE7;
 }
