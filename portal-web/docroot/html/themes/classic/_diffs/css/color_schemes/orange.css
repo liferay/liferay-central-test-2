@@ -3,7 +3,7 @@
 /* ---------- Wrapper ---------- */
 
 .orange #wrapper {
-	background-image: url(../../images/color_schemes/orange/common/body_bg.png);
+	background-image: url(../images/color_schemes/orange/common/body_bg.png);
 }
 
 /* ---------- Links ---------- */
@@ -19,7 +19,7 @@
 /* ---------- Banner ---------- */
 
 .orange #banner {
-	background-image: url(../../images/color_schemes/orange/common/banner_bg.jpg);
+	background-image: url(../images/color_schemes/orange/common/banner_bg.jpg);
 }
 
 /* ---------- Portal tool tips ---------- */
@@ -195,22 +195,22 @@
 }
 
 .orange #navigation li.selected a span {
-	background-image: url(../../images/color_schemes/orange/navigation/bullet_selected.png) ;
+	background-image: url(../images/color_schemes/orange/navigation/bullet_selected.png) ;
 }
 
 /* ---------- Dock with Javascript ---------- */
 
 .js .orange .interactive-mode {
 	background-color: #090602;
-	background-image: url(../../images/color_schemes/orange/dock/center_bg.png);
+	background-image: url(../images/color_schemes/orange/dock/center_bg.png);
 }
 
 .js .orange .interactive-mode h2 {
-	background-image: url(../../images/color_schemes/orange/dock/right_bg.png);
+	background-image: url(../images/color_schemes/orange/dock/right_bg.png);
 }
 
 .js .orange .interactive-mode h2 span {
-	background-image: url(../../images/color_schemes/orange/dock/left_bg.png);
+	background-image: url(../images/color_schemes/orange/dock/left_bg.png);
 	border-right-color: #4d4033;
 }
 
@@ -236,7 +236,7 @@
 }
 
 .js .orange .lfr-flyout.has-children {
-	background-image: url(../../images/color_schemes/orange/arrows/04_left.png);
+	background-image: url(../images/color_schemes/orange/arrows/04_left.png);
 }
 
 /* This CSS sets the default styles for portlets. */
@@ -314,7 +314,7 @@
 /* This CSS sets the default styles for forms. */
 
 .orange input[type="text"], .orange input[type="password"], .orange input[type="file"], .orange textarea, .orange .textarea {
-	background-image: url(../../images/color_schemes/orange/forms/input_shadow.png);
+	background-image: url(../images/color_schemes/orange/forms/input_shadow.png);
 }
 
 .orange input[type="submit"], .orange input[type="button"], .orange input[type="reset"] {
@@ -330,7 +330,7 @@
 /* ---------- IE6 chokes on attribute selectors in a chain, so we separate them into their own rule ---------- */
 
 .ie6 .orange input.text, .ie6 .orange input.password, .ie6 .orange input.file {
-	background-image: url(../../images/color_schemes/orange/forms/input_shadow.png);
+	background-image: url(../images/color_schemes/orange/forms/input_shadow.png);
 }
 
 .ie6 .orange input.submit, .ie6 .orange input.button {
