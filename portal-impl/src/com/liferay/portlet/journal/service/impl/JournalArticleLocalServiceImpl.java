@@ -22,6 +22,7 @@
 
 package com.liferay.portlet.journal.service.impl;
 
+import com.liferay.portal.NoSuchImageException;
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.mail.MailMessage;
@@ -46,8 +47,10 @@ import com.liferay.portal.model.Image;
 import com.liferay.portal.model.ResourceConstants;
 import com.liferay.portal.model.User;
 import com.liferay.portal.search.lucene.LuceneUtil;
+import com.liferay.portal.service.ImageLocalServiceUtil;
 import com.liferay.portal.servlet.filters.layoutcache.LayoutCacheUtil;
 import com.liferay.portal.theme.ThemeDisplay;
+import com.liferay.portal.util.DocumentUtil;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PortletKeys;
 import com.liferay.portal.util.PropsKeys;
@@ -79,6 +82,8 @@ import com.liferay.portlet.journal.util.JournalUtil;
 import com.liferay.portlet.journalcontent.util.JournalContentUtil;
 import com.liferay.util.LocalizationUtil;
 import com.liferay.util.MathUtil;
+import com.liferay.util.xml.DocUtil;
+import com.liferay.util.xml.XMLFormatter;
 
 import java.io.File;
 import java.io.IOException;
@@ -698,7 +703,60 @@ public class JournalArticleLocalServiceImpl
 		newArticle.setVersion(JournalArticleImpl.DEFAULT_VERSION);
 		newArticle.setTitle(oldArticle.getTitle());
 		newArticle.setDescription(oldArticle.getDescription());
-		newArticle.setContent(oldArticle.getContent());
+
+		try {
+			Document contentDoc = DocumentUtil.readDocumentFromXML(
+				oldArticle.getContent());
+
+			XPath xpathSelector = DocumentHelper.createXPath(
+				"//dynamic-element[@type='image']");
+
+			List<Element> imageEls = xpathSelector.selectNodes(contentDoc);
+
+			for (Element el : imageEls) {
+				String name = el.attributeValue("name");
+
+				List<Element> dynamicContentEls = el.elements(
+					"dynamic-content");
+
+				for (Element dynamicContentEl : dynamicContentEls) {
+					long imageId = GetterUtil.getLong(
+						dynamicContentEl.attributeValue("id"));
+					String languageId = dynamicContentEl.attributeValue(
+						"language-id");
+
+					try {
+						Image oldImg = ImageLocalServiceUtil.getImage(imageId);
+
+						imageId =
+							journalArticleImageLocalService.getArticleImageId(
+								groupId, newArticle.getArticleId(), version,
+								name, languageId);
+
+						Image newImage = ImageLocalServiceUtil.updateImage(
+							imageId, oldImg.getTextObj());
+
+						String elContent =
+							"/image/journal/article?img_id=" +
+								newImage.getImageId() + "&t=" +
+									ImageServletTokenUtil.getToken(
+										newImage.getImageId());
+
+						dynamicContentEl.setText(elContent);
+						dynamicContentEl.addAttribute(
+							"id", String.valueOf(imageId));
+					}
+					catch (NoSuchImageException nsie) {
+					}
+				}
+			}
+
+			newArticle.setContent(XMLFormatter.toString(contentDoc));
+		}
+		catch (Exception e) {
+			newArticle.setContent(oldArticle.getContent());
+		}
+
 		newArticle.setType(oldArticle.getType());
 		newArticle.setStructureId(oldArticle.getStructureId());
 		newArticle.setTemplateId(oldArticle.getTemplateId());
