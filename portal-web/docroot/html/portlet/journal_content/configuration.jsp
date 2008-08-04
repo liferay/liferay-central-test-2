@@ -50,7 +50,7 @@ type = ParamUtil.getString(request, "type", type);
 
 <script type="text/javascript">
 	function <portlet:namespace />save() {
-		jQuery('#fm1').ajaxSubmit();
+		jQuery('#<portlet:namespace />fm1').ajaxSubmit();
 	}
 
 	function <portlet:namespace />selectArticle(articleId) {
