@@ -30,6 +30,7 @@ import javax.servlet.http.HttpServletRequest;
  * <a href="TagsSelectorTag.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
+ * @author Jorge Ferrer
  *
  */
 public class TagsSelectorTag extends IncludeTag {
@@ -93,7 +94,7 @@ public class TagsSelectorTag extends IncludeTag {
 
 	private String _className;
 	private long _classPK;
-	private boolean _folksonomy;
+	private boolean _folksonomy = true;
 	private String _hiddenInput;
 	private String _curTags;
 	private boolean _focus;

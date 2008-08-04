@@ -29,7 +29,7 @@
 <%
 themeDisplay.setIncludeServiceJs(true);
 
-boolean folksonomy = GetterUtil.getBoolean((String)request.getAttribute("liferay-ui:tags_selector:folksonomy"), true);
+boolean folksonomy = GetterUtil.getBoolean((String)request.getAttribute("liferay-ui:tags_selector:folksonomy"));
 %>
 
 <c:choose>
