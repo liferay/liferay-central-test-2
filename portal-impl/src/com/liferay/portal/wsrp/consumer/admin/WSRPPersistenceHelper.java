@@ -172,7 +172,6 @@ public class WSRPPersistenceHelper {
 		File file = new File(_fileStore);
 
 		if (!file.exists()) {
-			FileOutputStream fos = null;
 
 			try {
 				file.createNewFile();
@@ -182,16 +181,6 @@ public class WSRPPersistenceHelper {
 
 				throw new WSRPConsumerException("Cannot create default " +
 						"WSRP Portlet store", e);
-			}
-			finally {
-				try {
-					if (fos != null) {
-						fos.close();
-					}
-				}
-				catch (Exception e) {
-					// Ignore this.
-				}
 			}
 		}
 

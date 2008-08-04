@@ -694,7 +694,11 @@
 				dir="portal-impl/src" includes="**/consumer.xml" />
 		</copy>
 
-		<replace file="${app.server.classes.portal.dir}/wsrpconfig.properties" token="@WSRP_DATA_DIR@" value="${wsrp.data.dir}"/>
+		<path id="wsrp.data.pathid" path="${wsrp.data.dir}"/>
+		<pathconvert targetos="unix" property="wsrp-full-path" refid="wsrp.data.pathid"/>
+
+		<replace file="${app.server.classes.portal.dir}/wsrpconfig.properties" token="@WSRP_DATA_DIR@" value="${wsrp-full-path}"/>
+
 	</target>
 
 	<target name="build-ext">
