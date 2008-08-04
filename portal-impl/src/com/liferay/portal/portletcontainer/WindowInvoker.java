@@ -410,6 +410,7 @@ public class WindowInvoker extends InvokerPortlet {
 		HttpServletRequest request, PortletRequest portletRequest) {
 
 		ThemeDisplay themeDisplay = _getThemeDisplay(portletRequest);
+
 		Locale locale = themeDisplay.getLocale();
 
 		if (locale == null) {
@@ -425,6 +426,7 @@ public class WindowInvoker extends InvokerPortlet {
 
 	private long _getPlid(PortletRequest portletRequest) {
 		ThemeDisplay themeDisplay = _getThemeDisplay(portletRequest);
+
 		return themeDisplay.getPlid();
 	}
 
@@ -520,10 +522,10 @@ public class WindowInvoker extends InvokerPortlet {
 			UserInfoFactory.getUserInfo(_remoteUserId, _portletModel));
 
 		containerRequest.setAttribute(
-			PortletRequest.CCPP_PROFILE, _getCCPPProfile(request));
+			WebKeys.THEME_DISPLAY, _getThemeDisplay(portletRequest));
 
 		containerRequest.setAttribute(
-			WebKeys.THEME_DISPLAY, _getThemeDisplay(portletRequest));
+			PortletRequest.CCPP_PROFILE, _getCCPPProfile(request));
 
 		containerRequest.setAttribute(
 			PortletRequestConstants.ESCAPE_XML_VALUE,
