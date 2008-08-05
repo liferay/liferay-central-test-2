@@ -82,7 +82,6 @@ import com.liferay.portlet.journal.util.JournalUtil;
 import com.liferay.portlet.journalcontent.util.JournalContentUtil;
 import com.liferay.util.LocalizationUtil;
 import com.liferay.util.MathUtil;
-import com.liferay.util.xml.DocUtil;
 import com.liferay.util.xml.XMLFormatter;
 
 import java.io.File;
@@ -705,53 +704,7 @@ public class JournalArticleLocalServiceImpl
 		newArticle.setDescription(oldArticle.getDescription());
 
 		try {
-			Document contentDoc = DocumentUtil.readDocumentFromXML(
-				oldArticle.getContent());
-
-			XPath xpathSelector = DocumentHelper.createXPath(
-				"//dynamic-element[@type='image']");
-
-			List<Element> imageEls = xpathSelector.selectNodes(contentDoc);
-
-			for (Element el : imageEls) {
-				String name = el.attributeValue("name");
-
-				List<Element> dynamicContentEls = el.elements(
-					"dynamic-content");
-
-				for (Element dynamicContentEl : dynamicContentEls) {
-					long imageId = GetterUtil.getLong(
-						dynamicContentEl.attributeValue("id"));
-					String languageId = dynamicContentEl.attributeValue(
-						"language-id");
-
-					try {
-						Image oldImg = ImageLocalServiceUtil.getImage(imageId);
-
-						imageId =
-							journalArticleImageLocalService.getArticleImageId(
-								groupId, newArticle.getArticleId(), version,
-								name, languageId);
-
-						Image newImage = ImageLocalServiceUtil.updateImage(
-							imageId, oldImg.getTextObj());
-
-						String elContent =
-							"/image/journal/article?img_id=" +
-								newImage.getImageId() + "&t=" +
-									ImageServletTokenUtil.getToken(
-										newImage.getImageId());
-
-						dynamicContentEl.setText(elContent);
-						dynamicContentEl.addAttribute(
-							"id", String.valueOf(imageId));
-					}
-					catch (NoSuchImageException nsie) {
-					}
-				}
-			}
-
-			newArticle.setContent(XMLFormatter.toString(contentDoc));
+			copyArticleImages(oldArticle, newArticle);
 		}
 		catch (Exception e) {
 			newArticle.setContent(oldArticle.getContent());
@@ -1979,6 +1932,58 @@ public class JournalArticleLocalServiceImpl
 				break;
 			}
 		}
+	}
+
+	protected void copyArticleImages(
+			JournalArticle oldArticle, JournalArticle newArticle)
+		throws Exception {
+
+		Document contentDoc = DocumentUtil.readDocumentFromXML(
+			oldArticle.getContent());
+
+		XPath xpathSelector = DocumentHelper.createXPath(
+			"//dynamic-element[@type='image']");
+
+		List<Element> imageEls = xpathSelector.selectNodes(contentDoc);
+
+		for (Element imageEl : imageEls) {
+			String name = imageEl.attributeValue("name");
+
+			List<Element> dynamicContentEls = imageEl.elements(
+				"dynamic-content");
+
+			for (Element dynamicContentEl : dynamicContentEls) {
+				long imageId = GetterUtil.getLong(
+					dynamicContentEl.attributeValue("id"));
+				String languageId = dynamicContentEl.attributeValue(
+					"language-id");
+
+				Image oldImage = null;
+
+				try {
+					oldImage = ImageLocalServiceUtil.getImage(imageId);
+				}
+				catch (NoSuchImageException nsie) {
+					continue;
+				}
+
+				imageId = journalArticleImageLocalService.getArticleImageId(
+					newArticle.getGroupId(), newArticle.getArticleId(),
+					newArticle.getVersion(), name, languageId);
+
+				ImageLocalServiceUtil.updateImage(
+					imageId, oldImage.getTextObj());
+
+				String elContent =
+					"/image/journal/article?img_id=" + imageId + "&t=" +
+						ImageServletTokenUtil.getToken(imageId);
+
+				dynamicContentEl.setText(elContent);
+				dynamicContentEl.addAttribute("id", String.valueOf(imageId));
+			}
+		}
+
+		newArticle.setContent(XMLFormatter.toString(contentDoc));
 	}
 
 	protected String format(
