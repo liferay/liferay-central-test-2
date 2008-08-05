@@ -15,11 +15,55 @@ var LayoutConfiguration = {
 			instance.categories = menu.find('.lfr-content-category');
 			instance.categoryContainers = menu.find('.lfr-add-content');
 
-			jQuery('#layout_configuration_content').keyup(
-				function(event) {
-					instance.startShowTimer(event, this);
-				}
-			);
+			var searchField = jQuery('#layout_configuration_content');			
+
+				searchField.liveSearch(
+					{
+						list: instance.portlets,
+						
+						data: function(){
+							return jQuery(this).attr('id').toLowerCase();
+						},
+						show: function() {
+							var portlet = jQuery(this);
+							portlet.show();
+							portlet.parents('.lfr-content-category').addClass('visible').removeClass('hidden').show();
+							portlet.parents('.lfr-add-content').addClass('expanded').removeClass('collapsed').show();
+							
+						},
+						hide: function() {
+							var portlet = jQuery(this);
+							portlet.hide();
+						}
+					}
+				);
+				
+				searchField.liveSearch(
+					{
+						list: instance.categoryContainers,
+						
+						data: function(){
+							return jQuery(this).attr('id').toLowerCase();
+						},
+						after: function() {
+							if (!this.term) {
+								instance.categories.addClass('hidden').removeClass('visible').css('display', '');
+								instance.categoryContainers.addClass('collapsed').removeClass('expanded').css('display', '');
+								instance.portlets.css('display', '');
+							}
+							if (this.term == "*") {
+								instance.categories.addClass('visible').removeClass('hidden');
+								instance.categoryContainers.addClass('expanded').removeClass('collapsed');
+								instance.portlets.show();
+							}
+						},
+						exclude: function() {
+							var categoryContent = jQuery('.lfr-content-category', this);
+							var totalVisibleChildren = categoryContent.find('> div:visible').length;
+							return totalVisibleChildren > 0;
+						}
+					}
+				);
 		}
 	},
 
@@ -68,62 +112,7 @@ var LayoutConfiguration = {
 			);
 		}
 	},
-
-	searchField: function(event, obj) {
-		var instance = this;
-
-		var word = jQuery.trim(obj.value).toLowerCase();
-		var portlets = instance.portlets;
-		var categories = instance.categories;
-		var categoryContainers = instance.categoryContainers;
-
-		if (word != '*' && word.length) {
-			word = word.match(/[a-zA-Z0-9]*/g).join("");
-			portlets.hide();
-			categories.hide();
-			categoryContainers.hide();
-			portlets.each(
-				function(i) {
-					var name = this.id.toLowerCase();
-					if (name.indexOf(word) > -1) {
-						var portlet = jQuery(this);
-						portlet.show();
-						portlet.parents('.lfr-content-category').addClass('visible').removeClass('hidden').show();
-						portlet.parents('.lfr-add-content').addClass('expanded').removeClass('collapsed').show();
-					}
-				}
-			);
-		}
-		else {
-			if (!word.length) {
-				categories.addClass('hidden').removeClass('visible').css('display', '');
-				categoryContainers.addClass('collapsed').removeClass('expanded').css('display', '');
-				portlets.css('display', '');
-			}
-			else if (word == '*') {
-				categories.addClass('visible').removeClass('hidden');
-				categoryContainers.addClass('expanded').removeClass('collapsed');
-				portlets.show();
-			}
-		}
-	},
-
-	startShowTimer: function(event, obj) {
-		var instance = this;
-
-		if (instance.showTimer) {
-			clearTimeout(instance.showTimer);
-			instance.showTimer = 0;
-		}
-
-		instance.showTimer = setTimeout(
-			function() {
-				instance.searchField(event, obj);
-			},
-			250
-		);
-	},
-
+	
 	_addPortlet: function(portlet, options) {
 		var instance = this;
 
