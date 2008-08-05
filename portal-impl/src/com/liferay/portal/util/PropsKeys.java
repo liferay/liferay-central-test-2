@@ -218,7 +218,7 @@ public class PropsKeys {
 
 	public static final String COMPANY_DEFAULT_WEB_ID = "company.default.web.id";
 
-	public static final String COMPANY_LOGIN_APPEND_DOMAIN = "company.login.append.domain";
+	public static final String COMPANY_LOGIN_PREPOPULATE_DOMAIN = "company.login.prepopulate.domain";
 
 	public static final String COMPANY_SECURITY_AUTH_REQUIRES_HTTPS = "company.security.auth.requires.https";
 
@@ -994,7 +994,7 @@ public class PropsKeys {
 	public static final String TAGS_ASSET_VALIDATOR = "tags.asset.validator";
 
 	public static final String TAGS_COMPILER_ENABLED = "tags.compiler.enabled";
-	
+
 	public static final String TAGS_PROPERTIES_DEFAULT = "tags.properties.default";
 
 	public static final String TAGS_VOCABULARY_DEFAULT = "tags.vocabulary.default";
