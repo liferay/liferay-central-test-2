@@ -26,10 +26,8 @@ import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.model.User;
 import com.liferay.portlet.tags.DuplicateVocabularyException;
-import com.liferay.portlet.tags.VocabularyNameException;
 import com.liferay.portlet.tags.model.TagsVocabulary;
 import com.liferay.portlet.tags.service.base.TagsVocabularyLocalServiceBaseImpl;
-import com.liferay.portlet.tags.util.TagsUtil;
 
 import java.util.Date;
 import java.util.List;
@@ -55,10 +53,8 @@ public class TagsVocabularyLocalServiceImpl
 		throws PortalException, SystemException {
 
 		User user = userPersistence.findByPrimaryKey(userId);
-		name = name.trim().toLowerCase();
+		name = name.trim();
 		Date now = new Date();
-
-		validate(name);
 
 		if (hasVocabulary(user.getCompanyId(), name)) {
 			throw new DuplicateVocabularyException(
@@ -123,9 +119,7 @@ public class TagsVocabularyLocalServiceImpl
 			long vocabularyId, String name, boolean folksonomy)
 		throws PortalException, SystemException {
 
-		name = name.trim().toLowerCase();
-
-		validate(name);
+		name = name.trim();
 
 		TagsVocabulary vocabulary = tagsVocabularyPersistence.findByPrimaryKey(
 			vocabularyId);
@@ -153,12 +147,6 @@ public class TagsVocabularyLocalServiceImpl
 		}
 		else {
 			return true;
-		}
-	}
-
-	protected void validate(String name) throws PortalException {
-		if (!TagsUtil.isValidWord(name)) {
-			throw new VocabularyNameException();
 		}
 	}
 
