@@ -24,10 +24,15 @@ package com.liferay.portlet.tags.service.impl;
 
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
+import com.liferay.portal.kernel.search.BooleanClauseOccur;
+import com.liferay.portal.kernel.search.BooleanQuery;
+import com.liferay.portal.kernel.search.BooleanQueryFactoryUtil;
 import com.liferay.portal.kernel.search.Document;
 import com.liferay.portal.kernel.search.Field;
 import com.liferay.portal.kernel.search.Hits;
 import com.liferay.portal.kernel.search.SearchEngineUtil;
+import com.liferay.portal.kernel.search.TermQuery;
+import com.liferay.portal.kernel.search.TermQueryFactoryUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.InstancePool;
 import com.liferay.portal.kernel.util.ListUtil;
@@ -35,7 +40,6 @@ import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.User;
-import com.liferay.portal.search.lucene.LuceneUtil;
 import com.liferay.portal.util.PortalInstances;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PortletKeys;
@@ -61,10 +65,6 @@ import java.util.List;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.apache.lucene.index.Term;
-import org.apache.lucene.search.BooleanClause;
-import org.apache.lucene.search.BooleanQuery;
-import org.apache.lucene.search.TermQuery;
 
 /**
  * <a href="TagsAssetLocalServiceImpl.java.html"><b><i>View Source</i></b></a>
@@ -341,44 +341,42 @@ public class TagsAssetLocalServiceImpl extends TagsAssetLocalServiceBaseImpl {
 		throws SystemException {
 
 		try {
-			BooleanQuery contextQuery = new BooleanQuery();
+			BooleanQuery contextQuery = BooleanQueryFactoryUtil.create();
 
 			if (Validator.isNotNull(portletId)) {
-				LuceneUtil.addRequiredTerm(
-					contextQuery, Field.PORTLET_ID, portletId);
+				contextQuery.addRequiredTerm(Field.PORTLET_ID, portletId);
 			}
 			else {
-				BooleanQuery portletIdsQuery = new BooleanQuery();
+				BooleanQuery portletIdsQuery = BooleanQueryFactoryUtil.create();
 
-				for (int i = 0; i < TagsUtil.ASSET_TYPE_PORTLET_IDS.length;
-						i++) {
+				for (String assetTypePortletId :
+						TagsUtil.ASSET_TYPE_PORTLET_IDS) {
 
-					Term term = new Term(
-						Field.PORTLET_ID, TagsUtil.ASSET_TYPE_PORTLET_IDS[i]);
-					TermQuery termQuery = new TermQuery(term);
+					TermQuery termQuery = TermQueryFactoryUtil.create(
+						Field.PORTLET_ID, assetTypePortletId);
 
-					portletIdsQuery.add(termQuery, BooleanClause.Occur.SHOULD);
+					portletIdsQuery.add(termQuery, BooleanClauseOccur.SHOULD);
 				}
 
-				contextQuery.add(portletIdsQuery, BooleanClause.Occur.MUST);
+				contextQuery.add(portletIdsQuery, BooleanClauseOccur.MUST);
 			}
 
-			BooleanQuery searchQuery = new BooleanQuery();
+			BooleanQuery searchQuery = BooleanQueryFactoryUtil.create();
 
 			if (Validator.isNotNull(keywords)) {
-				LuceneUtil.addTerm(searchQuery, Field.TITLE, keywords);
-				LuceneUtil.addTerm(searchQuery, Field.CONTENT, keywords);
-				LuceneUtil.addTerm(searchQuery, Field.DESCRIPTION, keywords);
-				LuceneUtil.addTerm(searchQuery, Field.PROPERTIES, keywords);
-				LuceneUtil.addTerm(searchQuery, Field.TAGS_ENTRIES, keywords);
+				searchQuery.addTerm(Field.TITLE, keywords);
+				searchQuery.addTerm(Field.CONTENT, keywords);
+				searchQuery.addTerm(Field.DESCRIPTION, keywords);
+				searchQuery.addTerm(Field.PROPERTIES, keywords);
+				searchQuery.addTerm(Field.TAGS_ENTRIES, keywords);
 			}
 
-			BooleanQuery fullQuery = new BooleanQuery();
+			BooleanQuery fullQuery = BooleanQueryFactoryUtil.create();
 
-			fullQuery.add(contextQuery, BooleanClause.Occur.MUST);
+			fullQuery.add(contextQuery, BooleanClauseOccur.MUST);
 
 			if (searchQuery.clauses().size() > 0) {
-				fullQuery.add(searchQuery, BooleanClause.Occur.MUST);
+				fullQuery.add(searchQuery, BooleanClauseOccur.MUST);
 			}
 
 			return SearchEngineUtil.search(

@@ -25,17 +25,21 @@ package com.liferay.portlet.wiki.service.impl;
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.configuration.Filter;
+import com.liferay.portal.kernel.search.BooleanClauseOccur;
+import com.liferay.portal.kernel.search.BooleanQuery;
+import com.liferay.portal.kernel.search.BooleanQueryFactoryUtil;
 import com.liferay.portal.kernel.search.Document;
 import com.liferay.portal.kernel.search.Field;
 import com.liferay.portal.kernel.search.Hits;
 import com.liferay.portal.kernel.search.SearchEngineUtil;
 import com.liferay.portal.kernel.search.SearchException;
+import com.liferay.portal.kernel.search.TermQuery;
+import com.liferay.portal.kernel.search.TermQueryFactoryUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.InstancePool;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.ResourceConstants;
 import com.liferay.portal.model.User;
-import com.liferay.portal.search.lucene.LuceneUtil;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PropsKeys;
 import com.liferay.portal.util.PropsUtil;
@@ -57,10 +61,6 @@ import java.util.Map;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.apache.lucene.index.Term;
-import org.apache.lucene.search.BooleanClause;
-import org.apache.lucene.search.BooleanQuery;
-import org.apache.lucene.search.TermQuery;
 
 /**
  * <a href="WikiNodeLocalServiceImpl.java.html"><b><i>View Source</i></b></a>
@@ -338,44 +338,41 @@ public class WikiNodeLocalServiceImpl extends WikiNodeLocalServiceBaseImpl {
 		throws SystemException {
 
 		try {
-			BooleanQuery contextQuery = new BooleanQuery();
+			BooleanQuery contextQuery = BooleanQueryFactoryUtil.create();
 
-			LuceneUtil.addRequiredTerm(
-				contextQuery, Field.PORTLET_ID, Indexer.PORTLET_ID);
+			contextQuery.addRequiredTerm(Field.PORTLET_ID, Indexer.PORTLET_ID);
 
 			if (groupId > 0) {
-				LuceneUtil.addRequiredTerm(
-					contextQuery, Field.GROUP_ID, groupId);
+				contextQuery.addRequiredTerm(Field.GROUP_ID, groupId);
 			}
 
 			if ((nodeIds != null) && (nodeIds.length > 0)) {
-				BooleanQuery nodeIdsQuery = new BooleanQuery();
+				BooleanQuery nodeIdsQuery = BooleanQueryFactoryUtil.create();
 
 				for (long nodeId : nodeIds) {
-					Term term = new Term(
-						Field.ENTRY_CLASS_PK, String.valueOf(nodeId));
-					TermQuery termQuery = new TermQuery(term);
+					TermQuery termQuery = TermQueryFactoryUtil.create(
+						Field.ENTRY_CLASS_PK, nodeId);
 
-					nodeIdsQuery.add(termQuery, BooleanClause.Occur.SHOULD);
+					nodeIdsQuery.add(termQuery, BooleanClauseOccur.SHOULD);
 				}
 
-				contextQuery.add(nodeIdsQuery, BooleanClause.Occur.MUST);
+				contextQuery.add(nodeIdsQuery, BooleanClauseOccur.MUST);
 			}
 
-			BooleanQuery searchQuery = new BooleanQuery();
+			BooleanQuery searchQuery = BooleanQueryFactoryUtil.create();
 
 			if (Validator.isNotNull(keywords)) {
-				LuceneUtil.addTerm(searchQuery, Field.TITLE, keywords);
-				LuceneUtil.addTerm(searchQuery, Field.CONTENT, keywords);
-				LuceneUtil.addTerm(searchQuery, Field.TAGS_ENTRIES, keywords);
+				searchQuery.addTerm(Field.TITLE, keywords);
+				searchQuery.addTerm(Field.CONTENT, keywords);
+				searchQuery.addTerm(Field.TAGS_ENTRIES, keywords);
 			}
 
-			BooleanQuery fullQuery = new BooleanQuery();
+			BooleanQuery fullQuery = BooleanQueryFactoryUtil.create();
 
-			fullQuery.add(contextQuery, BooleanClause.Occur.MUST);
+			fullQuery.add(contextQuery, BooleanClauseOccur.MUST);
 
 			if (searchQuery.clauses().size() > 0) {
-				fullQuery.add(searchQuery, BooleanClause.Occur.MUST);
+				fullQuery.add(searchQuery, BooleanClauseOccur.MUST);
 			}
 
 			return SearchEngineUtil.search(

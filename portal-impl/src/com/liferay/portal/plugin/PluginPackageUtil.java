@@ -28,9 +28,14 @@ import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.plugin.PluginPackage;
 import com.liferay.portal.kernel.plugin.RemotePluginPackageRepository;
+import com.liferay.portal.kernel.search.BooleanClauseOccur;
+import com.liferay.portal.kernel.search.BooleanQuery;
+import com.liferay.portal.kernel.search.BooleanQueryFactoryUtil;
 import com.liferay.portal.kernel.search.Field;
 import com.liferay.portal.kernel.search.Hits;
+import com.liferay.portal.kernel.search.Query;
 import com.liferay.portal.kernel.search.SearchEngineUtil;
+import com.liferay.portal.kernel.search.TermQueryFactoryUtil;
 import com.liferay.portal.kernel.util.ArrayUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.HtmlUtil;
@@ -42,7 +47,6 @@ import com.liferay.portal.kernel.util.Time;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.CompanyConstants;
 import com.liferay.portal.model.Plugin;
-import com.liferay.portal.search.lucene.LuceneUtil;
 import com.liferay.portal.util.DocumentUtil;
 import com.liferay.portal.util.HttpImpl;
 import com.liferay.portal.util.PrefsPropsUtil;
@@ -76,11 +80,6 @@ import org.apache.commons.httpclient.HostConfiguration;
 import org.apache.commons.httpclient.HttpClient;
 import org.apache.commons.httpclient.methods.GetMethod;
 import org.apache.commons.lang.time.StopWatch;
-import org.apache.lucene.index.Term;
-import org.apache.lucene.search.BooleanClause;
-import org.apache.lucene.search.BooleanQuery;
-import org.apache.lucene.search.Query;
-import org.apache.lucene.search.TermQuery;
 
 import org.dom4j.Attribute;
 import org.dom4j.Document;
@@ -139,7 +138,7 @@ public class PluginPackageUtil {
 
 	public static PluginPackage getPluginPackageByModuleId(
 			String moduleId, String repositoryURL)
-		throws DocumentException, IOException, PluginPackageException {
+		throws PluginPackageException {
 
 		return _instance._getPluginPackageByModuleId(moduleId, repositoryURL);
 	}
@@ -383,7 +382,7 @@ public class PluginPackageUtil {
 
 	private PluginPackage _getPluginPackageByModuleId(
 			String moduleId, String repositoryURL)
-		throws DocumentException, IOException, PluginPackageException {
+		throws PluginPackageException {
 
 		RemotePluginPackageRepository repository = _getRepository(
 			repositoryURL);
@@ -717,7 +716,7 @@ public class PluginPackageUtil {
 
 	private RemotePluginPackageRepository _parseRepositoryXml(
 			String xml, String repositoryURL)
-		throws DocumentException, IOException {
+		throws DocumentException {
 
 		List<String> supportedPluginTypes = Arrays.asList(getSupportedTypes());
 
@@ -1175,78 +1174,76 @@ public class PluginPackageUtil {
 		_checkRepositories(repositoryURL);
 
 		try {
-			BooleanQuery contextQuery = new BooleanQuery();
+			BooleanQuery contextQuery = BooleanQueryFactoryUtil.create();
 
-			LuceneUtil.addRequiredTerm(
-				contextQuery, Field.PORTLET_ID,
-				PluginPackageIndexer.PORTLET_ID);
+			contextQuery.addRequiredTerm(
+				Field.PORTLET_ID, PluginPackageIndexer.PORTLET_ID);
 
-			BooleanQuery fullQuery = new BooleanQuery();
+			BooleanQuery fullQuery = BooleanQueryFactoryUtil.create();
 
-			fullQuery.add(contextQuery, BooleanClause.Occur.MUST);
+			fullQuery.add(contextQuery, BooleanClauseOccur.MUST);
 
 			if (Validator.isNotNull(keywords)) {
-				BooleanQuery searchQuery = new BooleanQuery();
+				BooleanQuery searchQuery = BooleanQueryFactoryUtil.create();
 
-				LuceneUtil.addTerm(searchQuery, Field.TITLE, keywords);
-				LuceneUtil.addTerm(searchQuery, Field.CONTENT, keywords);
+				searchQuery.addTerm(Field.TITLE, keywords);
+				searchQuery.addTerm(Field.CONTENT, keywords);
 
-				fullQuery.add(searchQuery, BooleanClause.Occur.MUST);
+				fullQuery.add(searchQuery, BooleanClauseOccur.MUST);
 			}
 
 			if (Validator.isNotNull(type)) {
-				BooleanQuery searchQuery = new BooleanQuery();
+				BooleanQuery searchQuery = BooleanQueryFactoryUtil.create();
 
-				LuceneUtil.addExactTerm(searchQuery, "type", type);
+				searchQuery.addExactTerm("type", type);
 
-				fullQuery.add(searchQuery, BooleanClause.Occur.MUST);
+				fullQuery.add(searchQuery, BooleanClauseOccur.MUST);
 			}
 
 			if (Validator.isNotNull(tag)) {
-				BooleanQuery searchQuery = new BooleanQuery();
+				BooleanQuery searchQuery = BooleanQueryFactoryUtil.create();
 
-				LuceneUtil.addExactTerm(searchQuery, "tag", tag);
+				searchQuery.addExactTerm("tag", tag);
 
-				fullQuery.add(searchQuery, BooleanClause.Occur.MUST);
+				fullQuery.add(searchQuery, BooleanClauseOccur.MUST);
 			}
 
 			if (Validator.isNotNull(repositoryURL)) {
-				BooleanQuery searchQuery = new BooleanQuery();
+				BooleanQuery searchQuery = BooleanQueryFactoryUtil.create();
 
-				Query query = new TermQuery(
-					new Term("repositoryURL", repositoryURL));
+				Query query = TermQueryFactoryUtil.create(
+					"repositoryURL", repositoryURL);
 
-				searchQuery.add(query, BooleanClause.Occur.SHOULD);
+				searchQuery.add(query, BooleanClauseOccur.SHOULD);
 
-				fullQuery.add(searchQuery, BooleanClause.Occur.MUST);
+				fullQuery.add(searchQuery, BooleanClauseOccur.MUST);
 			}
 
 			if (Validator.isNotNull(license)) {
-				BooleanQuery searchQuery = new BooleanQuery();
+				BooleanQuery searchQuery = BooleanQueryFactoryUtil.create();
 
-				LuceneUtil.addExactTerm(searchQuery, "license", license);
+				searchQuery.addExactTerm("license", license);
 
-				fullQuery.add(searchQuery, BooleanClause.Occur.MUST);
+				fullQuery.add(searchQuery, BooleanClauseOccur.MUST);
 			}
 
 			if (Validator.isNotNull(status) && !status.equals("all")) {
-				BooleanQuery searchQuery = new BooleanQuery();
+				BooleanQuery searchQuery = BooleanQueryFactoryUtil.create();
 
 				if (status.equals(PluginPackageImpl.
 						STATUS_NOT_INSTALLED_OR_OLDER_VERSION_INSTALLED)) {
 
-					LuceneUtil.addExactTerm(
-						searchQuery, "status",
-						PluginPackageImpl.STATUS_NOT_INSTALLED);
-					LuceneUtil.addExactTerm(
-						searchQuery, "status",
+					searchQuery.addExactTerm(
+						"status", PluginPackageImpl.STATUS_NOT_INSTALLED);
+					searchQuery.addExactTerm(
+						"status",
 						PluginPackageImpl.STATUS_OLDER_VERSION_INSTALLED);
 				}
 				else {
-					LuceneUtil.addExactTerm(searchQuery, "status", status);
+					searchQuery.addExactTerm("status", status);
 				}
 
-				fullQuery.add(searchQuery, BooleanClause.Occur.MUST);
+				fullQuery.add(searchQuery, BooleanClauseOccur.MUST);
 			}
 
 			return SearchEngineUtil.search(

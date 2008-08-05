@@ -33,6 +33,9 @@ import com.liferay.portal.NoSuchUserException;
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.language.LanguageUtil;
+import com.liferay.portal.kernel.search.BooleanClauseOccur;
+import com.liferay.portal.kernel.search.BooleanQuery;
+import com.liferay.portal.kernel.search.BooleanQueryFactoryUtil;
 import com.liferay.portal.kernel.search.Field;
 import com.liferay.portal.kernel.search.Hits;
 import com.liferay.portal.kernel.search.SearchEngineUtil;
@@ -73,9 +76,6 @@ import java.util.Locale;
 
 import javax.portlet.PortletException;
 import javax.portlet.PortletPreferences;
-
-import org.apache.lucene.search.BooleanClause;
-import org.apache.lucene.search.BooleanQuery;
 
 /**
  * <a href="CompanyLocalServiceImpl.java.html"><b><i>View Source</i></b></a>
@@ -422,41 +422,38 @@ public class CompanyLocalServiceImpl extends CompanyLocalServiceBaseImpl {
 		throws SystemException {
 
 		try {
-			BooleanQuery contextQuery = new BooleanQuery();
+			BooleanQuery contextQuery = BooleanQueryFactoryUtil.create();
 
-			LuceneUtil.addRequiredTerm(
-				contextQuery, Field.COMPANY_ID, companyId);
+			contextQuery.addRequiredTerm(Field.COMPANY_ID, companyId);
 
 			if (Validator.isNotNull(portletId)) {
-				LuceneUtil.addRequiredTerm(
-					contextQuery, Field.PORTLET_ID, portletId);
+				contextQuery.addRequiredTerm(Field.PORTLET_ID, portletId);
 			}
 
 			if (groupId > 0) {
-				LuceneUtil.addRequiredTerm(
-					contextQuery, Field.GROUP_ID, groupId);
+				contextQuery.addRequiredTerm(Field.GROUP_ID, groupId);
 			}
 
 			if (Validator.isNotNull(type)) {
-				LuceneUtil.addRequiredTerm(contextQuery, Field.TYPE, type);
+				contextQuery.addRequiredTerm(Field.TYPE, type);
 			}
 
-			BooleanQuery searchQuery = new BooleanQuery();
+			BooleanQuery searchQuery = BooleanQueryFactoryUtil.create();
 
 			if (Validator.isNotNull(keywords)) {
-				LuceneUtil.addTerm(searchQuery, Field.TITLE, keywords);
-				LuceneUtil.addTerm(searchQuery, Field.CONTENT, keywords);
-				LuceneUtil.addTerm(searchQuery, Field.DESCRIPTION, keywords);
-				LuceneUtil.addTerm(searchQuery, Field.PROPERTIES, keywords);
-				LuceneUtil.addTerm(searchQuery, Field.TAGS_ENTRIES, keywords);
+				searchQuery.addTerm(Field.TITLE, keywords);
+				searchQuery.addTerm(Field.CONTENT, keywords);
+				searchQuery.addTerm(Field.DESCRIPTION, keywords);
+				searchQuery.addTerm(Field.PROPERTIES, keywords);
+				searchQuery.addTerm(Field.TAGS_ENTRIES, keywords);
 			}
 
-			BooleanQuery fullQuery = new BooleanQuery();
+			BooleanQuery fullQuery = BooleanQueryFactoryUtil.create();
 
-			fullQuery.add(contextQuery, BooleanClause.Occur.MUST);
+			fullQuery.add(contextQuery, BooleanClauseOccur.MUST);
 
 			if (searchQuery.clauses().size() > 0) {
-				fullQuery.add(searchQuery, BooleanClause.Occur.MUST);
+				fullQuery.add(searchQuery, BooleanClauseOccur.MUST);
 			}
 
 			return SearchEngineUtil.search(

@@ -24,15 +24,19 @@ package com.liferay.portlet.bookmarks.service.impl;
 
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
+import com.liferay.portal.kernel.search.BooleanClauseOccur;
+import com.liferay.portal.kernel.search.BooleanQuery;
+import com.liferay.portal.kernel.search.BooleanQueryFactoryUtil;
 import com.liferay.portal.kernel.search.Document;
 import com.liferay.portal.kernel.search.Field;
 import com.liferay.portal.kernel.search.Hits;
 import com.liferay.portal.kernel.search.SearchEngineUtil;
+import com.liferay.portal.kernel.search.TermQuery;
+import com.liferay.portal.kernel.search.TermQueryFactoryUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.ResourceConstants;
 import com.liferay.portal.model.User;
-import com.liferay.portal.search.lucene.LuceneUtil;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portlet.bookmarks.FolderNameException;
 import com.liferay.portlet.bookmarks.model.BookmarksEntry;
@@ -47,10 +51,6 @@ import java.util.List;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.apache.lucene.index.Term;
-import org.apache.lucene.search.BooleanClause;
-import org.apache.lucene.search.BooleanQuery;
-import org.apache.lucene.search.TermQuery;
 
 /**
  * <a href="BookmarksFolderLocalServiceImpl.java.html"><b><i>View Source</i></b>
@@ -326,45 +326,42 @@ public class BookmarksFolderLocalServiceImpl
 		throws SystemException {
 
 		try {
-			BooleanQuery contextQuery = new BooleanQuery();
+			BooleanQuery contextQuery = BooleanQueryFactoryUtil.create();
 
-			LuceneUtil.addRequiredTerm(
-				contextQuery, Field.PORTLET_ID, Indexer.PORTLET_ID);
+			contextQuery.addRequiredTerm(Field.PORTLET_ID, Indexer.PORTLET_ID);
 
 			if (groupId > 0) {
-				LuceneUtil.addRequiredTerm(
-					contextQuery, Field.GROUP_ID, groupId);
+				contextQuery.addRequiredTerm(Field.GROUP_ID, groupId);
 			}
 
 			if ((folderIds != null) && (folderIds.length > 0)) {
-				BooleanQuery folderIdsQuery = new BooleanQuery();
+				BooleanQuery folderIdsQuery = BooleanQueryFactoryUtil.create();
 
-				for (int i = 0; i < folderIds.length; i++) {
-					Term term = new Term(
-						"folderId", String.valueOf(folderIds[i]));
-					TermQuery termQuery = new TermQuery(term);
+				for (long folderId : folderIds) {
+					TermQuery termQuery = TermQueryFactoryUtil.create(
+						"folderId", folderId);
 
-					folderIdsQuery.add(termQuery, BooleanClause.Occur.SHOULD);
+					folderIdsQuery.add(termQuery, BooleanClauseOccur.SHOULD);
 				}
 
-				contextQuery.add(folderIdsQuery, BooleanClause.Occur.MUST);
+				contextQuery.add(folderIdsQuery, BooleanClauseOccur.MUST);
 			}
 
-			BooleanQuery searchQuery = new BooleanQuery();
+			BooleanQuery searchQuery = BooleanQueryFactoryUtil.create();
 
 			if (Validator.isNotNull(keywords)) {
-				LuceneUtil.addTerm(searchQuery, Field.NAME, keywords);
-				LuceneUtil.addTerm(searchQuery, Field.URL, keywords);
-				LuceneUtil.addTerm(searchQuery, Field.COMMENTS, keywords);
-				LuceneUtil.addTerm(searchQuery, Field.TAGS_ENTRIES, keywords);
+				searchQuery.addTerm(Field.NAME, keywords);
+				searchQuery.addTerm(Field.URL, keywords);
+				searchQuery.addTerm(Field.COMMENTS, keywords);
+				searchQuery.addTerm(Field.TAGS_ENTRIES, keywords);
 			}
 
-			BooleanQuery fullQuery = new BooleanQuery();
+			BooleanQuery fullQuery = BooleanQueryFactoryUtil.create();
 
-			fullQuery.add(contextQuery, BooleanClause.Occur.MUST);
+			fullQuery.add(contextQuery, BooleanClauseOccur.MUST);
 
 			if (searchQuery.clauses().size() > 0) {
-				fullQuery.add(searchQuery, BooleanClause.Occur.MUST);
+				fullQuery.add(searchQuery, BooleanClauseOccur.MUST);
 			}
 
 			return SearchEngineUtil.search(

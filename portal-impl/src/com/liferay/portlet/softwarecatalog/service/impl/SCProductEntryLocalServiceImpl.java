@@ -24,6 +24,9 @@ package com.liferay.portlet.softwarecatalog.service.impl;
 
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
+import com.liferay.portal.kernel.search.BooleanClauseOccur;
+import com.liferay.portal.kernel.search.BooleanQuery;
+import com.liferay.portal.kernel.search.BooleanQueryFactoryUtil;
 import com.liferay.portal.kernel.search.Field;
 import com.liferay.portal.kernel.search.Hits;
 import com.liferay.portal.kernel.search.SearchEngineUtil;
@@ -38,7 +41,6 @@ import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.ResourceConstants;
 import com.liferay.portal.model.User;
 import com.liferay.portal.plugin.ModuleId;
-import com.liferay.portal.search.lucene.LuceneUtil;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portlet.softwarecatalog.DuplicateProductEntryModuleIdException;
 import com.liferay.portlet.softwarecatalog.NoSuchProductEntryException;
@@ -69,8 +71,6 @@ import java.util.Properties;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.apache.lucene.search.BooleanClause;
-import org.apache.lucene.search.BooleanQuery;
 
 import org.dom4j.Document;
 import org.dom4j.DocumentHelper;
@@ -495,31 +495,30 @@ public class SCProductEntryLocalServiceImpl
 		throws SystemException {
 
 		try {
-			BooleanQuery contextQuery = new BooleanQuery();
+			BooleanQuery contextQuery = BooleanQueryFactoryUtil.create();
 
-			LuceneUtil.addRequiredTerm(
-				contextQuery, Field.PORTLET_ID, Indexer.PORTLET_ID);
-			LuceneUtil.addRequiredTerm(contextQuery, Field.GROUP_ID, groupId);
+			contextQuery.addRequiredTerm(Field.PORTLET_ID, Indexer.PORTLET_ID);
+			contextQuery.addRequiredTerm(Field.GROUP_ID, groupId);
 
-			BooleanQuery fullQuery = new BooleanQuery();
+			BooleanQuery fullQuery = BooleanQueryFactoryUtil.create();
 
-			fullQuery.add(contextQuery, BooleanClause.Occur.MUST);
+			fullQuery.add(contextQuery, BooleanClauseOccur.MUST);
 
 			if (Validator.isNotNull(keywords)) {
-				BooleanQuery searchQuery = new BooleanQuery();
+				BooleanQuery searchQuery = BooleanQueryFactoryUtil.create();
 
-				LuceneUtil.addTerm(searchQuery, Field.NAME, keywords);
-				LuceneUtil.addTerm(searchQuery, Field.CONTENT, keywords);
+				searchQuery.addTerm(Field.NAME, keywords);
+				searchQuery.addTerm(Field.CONTENT, keywords);
 
-				fullQuery.add(searchQuery, BooleanClause.Occur.MUST);
+				fullQuery.add(searchQuery, BooleanClauseOccur.MUST);
 			}
 
 			if (Validator.isNotNull(type)) {
-				BooleanQuery searchQuery = new BooleanQuery();
+				BooleanQuery searchQuery = BooleanQueryFactoryUtil.create();
 
-				LuceneUtil.addRequiredTerm(searchQuery, "type", type);
+				searchQuery.addRequiredTerm("type", type);
 
-				fullQuery.add(searchQuery, BooleanClause.Occur.MUST);
+				fullQuery.add(searchQuery, BooleanClauseOccur.MUST);
 			}
 
 			return SearchEngineUtil.search(

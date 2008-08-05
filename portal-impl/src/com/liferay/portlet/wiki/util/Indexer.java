@@ -22,6 +22,8 @@
 
 package com.liferay.portlet.wiki.util;
 
+import com.liferay.portal.kernel.search.BooleanQuery;
+import com.liferay.portal.kernel.search.BooleanQueryFactoryUtil;
 import com.liferay.portal.kernel.search.Document;
 import com.liferay.portal.kernel.search.DocumentImpl;
 import com.liferay.portal.kernel.search.DocumentSummary;
@@ -31,13 +33,10 @@ import com.liferay.portal.kernel.search.SearchEngineUtil;
 import com.liferay.portal.kernel.search.SearchException;
 import com.liferay.portal.kernel.util.HtmlUtil;
 import com.liferay.portal.kernel.util.StringUtil;
-import com.liferay.portal.search.lucene.LuceneUtil;
 import com.liferay.portal.util.PortletKeys;
 import com.liferay.portlet.wiki.service.WikiNodeLocalServiceUtil;
 
 import javax.portlet.PortletURL;
-
-import org.apache.lucene.search.BooleanQuery;
 
 /**
  * <a href="Indexer.java.html"><b><i>View Source</i></b></a>
@@ -77,11 +76,11 @@ public class Indexer implements com.liferay.portal.kernel.search.Indexer {
 	public static void deletePages(long companyId, long nodeId)
 		throws SearchException {
 
-		BooleanQuery booleanQuery = new BooleanQuery();
+		BooleanQuery booleanQuery = BooleanQueryFactoryUtil.create();
 
-		LuceneUtil.addRequiredTerm(booleanQuery, Field.PORTLET_ID, PORTLET_ID);
+		booleanQuery.addRequiredTerm(Field.PORTLET_ID, PORTLET_ID);
 
-		LuceneUtil.addRequiredTerm(booleanQuery, "nodeId", nodeId);
+		booleanQuery.addRequiredTerm("nodeId", nodeId);
 
 		Hits hits = SearchEngineUtil.search(
 			companyId, booleanQuery.toString(), SearchEngineUtil.ALL_POS,
