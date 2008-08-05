@@ -15,21 +15,19 @@ var LayoutConfiguration = {
 			instance.categories = menu.find('.lfr-content-category');
 			instance.categoryContainers = menu.find('.lfr-add-content');
 
-			var searchField = jQuery('#layout_configuration_content');			
-
+			var searchField = jQuery('#layout_configuration_content');
 				searchField.liveSearch(
 					{
 						list: instance.portlets,
-						
-						data: function(){
+						data: function() {
 							return jQuery(this).attr('id').toLowerCase();
 						},
 						show: function() {
 							var portlet = jQuery(this);
+
 							portlet.show();
 							portlet.parents('.lfr-content-category').addClass('visible').removeClass('hidden').show();
 							portlet.parents('.lfr-add-content').addClass('expanded').removeClass('collapsed').show();
-							
 						},
 						hide: function() {
 							var portlet = jQuery(this);
@@ -37,12 +35,11 @@ var LayoutConfiguration = {
 						}
 					}
 				);
-				
+
 				searchField.liveSearch(
 					{
 						list: instance.categoryContainers,
-						
-						data: function(){
+						data: function() {
 							return jQuery(this).attr('id').toLowerCase();
 						},
 						after: function() {
@@ -51,6 +48,7 @@ var LayoutConfiguration = {
 								instance.categoryContainers.addClass('collapsed').removeClass('expanded').css('display', '');
 								instance.portlets.css('display', '');
 							}
+
 							if (this.term == "*") {
 								instance.categories.addClass('visible').removeClass('hidden');
 								instance.categoryContainers.addClass('expanded').removeClass('collapsed');
@@ -59,7 +57,9 @@ var LayoutConfiguration = {
 						},
 						exclude: function() {
 							var categoryContent = jQuery('.lfr-content-category', this);
+
 							var totalVisibleChildren = categoryContent.find('> div:visible').length;
+
 							return totalVisibleChildren > 0;
 						}
 					}
@@ -112,7 +112,7 @@ var LayoutConfiguration = {
 			);
 		}
 	},
-	
+
 	_addPortlet: function(portlet, options) {
 		var instance = this;
 
