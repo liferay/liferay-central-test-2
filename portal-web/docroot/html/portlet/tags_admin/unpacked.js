@@ -64,6 +64,11 @@ Liferay.Portlet.TagsAdmin = new Class({
 			}
 		});
 		
+		jQuery('#ui-tags-select-search').change(function() {
+				jQuery('#ui-tags-search-input').focus();
+				instance._reloadSearch();
+		});
+		
 		var addEntry = function() {
 			var actionScope = jQuery('.ui-tags-actions'), 
 				entryName = actionScope.find('.ui-tags-entry-name').val(),
@@ -256,6 +261,8 @@ Liferay.Portlet.TagsAdmin = new Class({
 	displayVocabularyEntries: function(vocabulary, fn) {
 		var instance = this;
 		
+		jQuery('#ui-tags-entry-messages').hide();
+		
 		this.getVocabularyEntries(vocabulary, function(entries) {
 			if (!instance.VOCABULARY_SELECTED || instance.VOCABULARY_SELECTED == 'tag')
 				instance.displayFolksonomiesVocabularyEntries(entries, fn);
@@ -291,7 +298,9 @@ Liferay.Portlet.TagsAdmin = new Class({
 		
 		childrenList.html(buffer.join(''));
 		
-		var	entryList = jQuery(instance.EXP_ENTRY_LIST);
+		instance._reloadSearch();
+		
+		var entryList = jQuery(instance.EXP_ENTRY_LIST);
 		
 		entryList.mousedown(function() {
 			var entryId = instance._getEntryId(this), 
@@ -360,6 +369,8 @@ Liferay.Portlet.TagsAdmin = new Class({
 		buffer.push('</ul></div>');
 		
 		childrenList.html(buffer.join(''));
+		
+		instance._reloadSearch();
 		
 		var	entryList = jQuery(instance.EXP_ENTRY_LIST);
 		
@@ -816,6 +827,38 @@ Liferay.Portlet.TagsAdmin = new Class({
 				buffer.push(['0', ':', key, ':', value, ','].join(''));
 		});
 		return buffer.join('');
+	},
+	
+	_reloadSearch: function() {
+		var	instance = this, 
+			options = {},
+			selected = jQuery('#ui-tags-select-search').val(), 
+			input = jQuery('#ui-tags-search-input'),
+			entryList = jQuery(instance.EXP_ENTRY_LIST), 
+			vocabularyList = jQuery(instance.EXP_VOCABULARY_LIST);
+		
+		input.unbind('keyup');
+		
+		if (/vocabularies/.test(selected)) {
+			options = {
+				list: vocabularyList,
+				filter: jQuery('a', vocabularyList)
+			};
+		}
+		else {
+			var filter = 'span';
+			
+			if (instance.VOCABULARY_SELECTED == "tag") {
+				filter = 'span a';
+			}
+			
+			options = {
+				list: entryList,
+				filter: jQuery(filter, entryList)
+			};
+		}
+		
+		input.liveSearch(options);
 	},
 	
 	_closeEditSection: function() {

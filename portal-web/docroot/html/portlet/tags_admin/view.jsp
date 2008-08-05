@@ -33,9 +33,14 @@
 	<tr>
 		<td colspan="3">
 			<div class="ui-tags-search-bar">
-				<input id="<portlet:namespace />searchInput" size="50" type="text" value="" />
-
-				<input id="<portlet:namespace />searchButton" type="button" value="<liferay-ui:message key="search" />" />
+				<input id="ui-tags-search-input" size="50" type="text" value="" />
+				
+				<select class="ui-tags-select-search" id="ui-tags-select-search">
+					<option value="vocabularies">Vocabularies</option>
+					<option value="entries">Entries</option>
+				</select>
+				
+				<input id="ui-tags-search-button" type="button" value="<liferay-ui:message key="search" />" />
 			</div>
 		</td>
 	</tr>
@@ -76,7 +81,7 @@
 			<div class="ui-tags-vocabulary-edit">
 				<div class="ui-tags-close"><span><liferay-ui:icon image="close" /></span></div>
 
-				<div class="ui-tags-label"><liferay-ui:icon image="tag-name" />:</div>
+				<div class="ui-tags-label"><liferay-ui:message key="tag-name" />:</div>
 
 				<input class="entry-name" name="entry-name" size="40" type="text" />
 
