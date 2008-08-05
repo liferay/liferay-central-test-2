@@ -25,7 +25,8 @@ package com.liferay.portalweb.portlet.samplejsf11myfacesfacelets;
 import com.liferay.portalweb.portal.BaseTests;
 
 /**
- * <a href="SampleJSF11MyfacesFaceletsTests.java.html"><b><i>View Source</i></b></a>
+ * <a href="SampleJSF11MyfacesFaceletsTests.java.html"><b><i>View Source</i></b>
+ * </a>
  *
  * @author Brian Wing Shun Chan
  *

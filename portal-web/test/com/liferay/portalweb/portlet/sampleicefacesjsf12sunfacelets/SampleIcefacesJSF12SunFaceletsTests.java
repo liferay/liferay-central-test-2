@@ -25,7 +25,8 @@ package com.liferay.portalweb.portlet.sampleicefacesjsf12sunfacelets;
 import com.liferay.portalweb.portal.BaseTests;
 
 /**
- * <a href="SampleIcefacesJSF12SunFaceletsTests.java.html"><b><i>View Source</i></b></a>
+ * <a href="SampleIcefacesJSF12SunFaceletsTests.java.html"><b><i>View Source</i>
+ * </b></a>
  *
  * @author Brian Wing Shun Chan
  *
