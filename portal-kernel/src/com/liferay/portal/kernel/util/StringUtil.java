@@ -775,8 +775,7 @@ public class StringUtil {
 	}
 
 	public static String safePath(String path) {
-		return StringUtil.replace(
-			path, StringPool.DOUBLE_SLASH, StringPool.SLASH);
+		return replace(path, StringPool.DOUBLE_SLASH, StringPool.SLASH);
 	}
 
 	public static String shorten(String s) {
