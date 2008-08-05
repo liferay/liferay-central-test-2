@@ -81,7 +81,7 @@ public interface PortletLocalService {
 		throws com.liferay.portal.SystemException;
 
 	public com.liferay.portal.model.Portlet deployRemotePortlet(
-		com.liferay.portal.model.Portlet remotePortlet);
+		com.liferay.portal.model.Portlet portlet);
 
 	public void destroyPortlet(com.liferay.portal.model.Portlet portlet);
 
