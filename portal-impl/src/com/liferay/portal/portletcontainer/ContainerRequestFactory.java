@@ -166,7 +166,8 @@ public class ContainerRequestFactory {
 		if (!remotePortlet) {
 			channelURLFactory = new PortletWindowURLFactory(
 				request, portlet, channelWindowState, channelPortletMode, plid);
-		}else{
+		}
+		else {
 			channelURLFactory = new WSRPWindowChannelURLFactory(
 				request, portlet, channelWindowState, channelPortletMode, plid);
  		}
@@ -179,9 +180,9 @@ public class ContainerRequestFactory {
 			if (!remotePortlet) {
 				windowRequestReader = new PortletWindowRequestReader(
 					facesPortlet);
-			}else{
-				windowRequestReader =
-					new WSRPWindowRequestReader();
+			}
+			else {
+				windowRequestReader = new WSRPWindowRequestReader();
  			}
 
 			ChannelState newWindowState =

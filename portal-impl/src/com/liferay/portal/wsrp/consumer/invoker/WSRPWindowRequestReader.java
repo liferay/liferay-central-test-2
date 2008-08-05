@@ -41,6 +41,7 @@
 
 package com.liferay.portal.wsrp.consumer.invoker;
 
+import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.QNameUtil;
 
@@ -59,52 +60,44 @@ import javax.servlet.http.HttpServletRequest;
 /**
  * <a href="WSRPWindowRequestReader.java.html"><b><i>View Source</i></b></a>
  *
- * @author ManishKG
+ * @author Manish Gupta
  *
  */
-public class WSRPWindowRequestReader implements WindowRequestReader{
+public class WSRPWindowRequestReader implements WindowRequestReader {
 
 	public String getCacheLevel(HttpServletRequest request) {
-		String cacheLevel = request.getParameter(
-			WSRPWindowChannelURL.RESOURCE_CACHE_LEVEL);
-		// No Need to map cache level wsrp and portlet container use the
-		// same strings i.e full, page & portlet string to represent cache
-		// level for a resource
-		return cacheLevel;
+		return request.getParameter(WSRPWindowChannelURL.RESOURCE_CACHE_LEVEL);
 	}
 
 	public String getResourceID(HttpServletRequest request) {
-		String resourceID = request.getParameter(
-			WSRPWindowChannelURL.RESOURCE_ID);
-		return resourceID;
+		return request.getParameter(WSRPWindowChannelURL.RESOURCE_ID);
 	}
 
 	public ChannelMode readNewPortletWindowMode(HttpServletRequest request) {
-
 		String newChannelMode = request.getParameter(
-				WSRPWindowChannelURL.NEW_CHANNEL_MODE);
+			WSRPWindowChannelURL.NEW_CHANNEL_MODE);
 
-		if ( newChannelMode != null && newChannelMode.length() > 0) {
+		if (Validator.isNotNull(newChannelMode)) {
 			return WSRPToContainerMap.mapChannelModeToContainer(newChannelMode);
 		}
-
-		return null;
+		else {
+			return null;
+		}
 	}
 
 	public ChannelState readNewWindowState(HttpServletRequest request) {
-
 		String newWindowState = request.getParameter(
-				WSRPWindowChannelURL.NEW_WINDOW_STATE);
+			WSRPWindowChannelURL.NEW_WINDOW_STATE);
 
-		if ( newWindowState != null && newWindowState.length() > 0 ) {
+		if (Validator.isNotNull(newWindowState)) {
 			return WSRPToContainerMap.mapWindowStateToContainer(newWindowState);
 		}
-
-		return null;
+		else {
+			return null;
+		}
 	}
 
 	public Map<String, String[]> readParameterMap(HttpServletRequest request) {
-
 		Map<String, String[]> parameterMap = new HashMap<String, String[]>();
 
 		String portletId = request.getParameter("p_p_id");
@@ -143,13 +136,14 @@ public class WSRPWindowRequestReader implements WindowRequestReader{
 	}
 
 	public ChannelURLType readURLType(HttpServletRequest request) {
-		String urlType =  request.getParameter(
-				WSRPWindowChannelURL.PORTLET_ACTION);
+		String portletAction = request.getParameter(
+			WSRPWindowChannelURL.PORTLET_ACTION);
 
-		if (urlType != null) {
-			return WSRPToContainerMap.mapURLTypeToContainer(urlType);
-		}else {
-			throw new RuntimeException("Bad WSRP URL");
+		if (Validator.isNotNull(portletAction)) {
+			return WSRPToContainerMap.mapURLTypeToContainer(portletAction);
+		}
+		else {
+			throw new RuntimeException("Invalid WSRP URL");
 		}
 	}
 

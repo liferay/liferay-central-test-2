@@ -1967,7 +1967,7 @@
 	</portlet>
 	<portlet>
 		<portlet-name>123</portlet-name>
-		<display-name>WSRP Consumer Admin Portlet</display-name>
+		<display-name>WSRP Consumer Admin</display-name>
 		<portlet-class>com.sun.portal.wsrp.consumer.portlets.WSRPConsumerAdminPortlet</portlet-class>
 		<init-param>
 			<name>jsp-path</name>
@@ -1980,9 +1980,9 @@
 			<portlet-mode>help</portlet-mode>
 		</supports>
 		<portlet-info>
-			<title>WSRP Consumer Admin Portlet</title>
-			<short-title>WSRP Consumer Admin Portlet</short-title>
-			<keywords>WSRP Consumer Admin Portlet</keywords>
+			<title>WSRP Consumer Admin</title>
+			<short-title>WSRP Consumer Admin</short-title>
+			<keywords>WSRP Consumer Admin</keywords>
 		</portlet-info>
 		<security-role-ref>
 			<role-name>administrator</role-name>

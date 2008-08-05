@@ -55,13 +55,10 @@ import javax.servlet.http.HttpServletResponse;
 /**
  * <a href="WSRPWindowChannelURLFactory.java.html"><b><i>View Source</i></b></a>
  *
- * @author ManishKG
+ * @author Manish Gupta
  *
  */
 public class WSRPWindowChannelURLFactory implements ChannelURLFactory {
-
-	private String _providerDesktopURLPrefix = null;
-	private String _securityErrorURL = null;
 
 	public WSRPWindowChannelURLFactory(
 		HttpServletRequest request, Portlet portlet, ChannelState windowState,
@@ -79,46 +76,52 @@ public class WSRPWindowChannelURLFactory implements ChannelURLFactory {
 	}
 
 	public String encodeURL(
-			HttpServletRequest request,
-			HttpServletResponse response, String url ) {
+		HttpServletRequest request, HttpServletResponse response, String url) {
+
 		return null;
 	}
 
 	public String getActionTemplate() {
 		WSRPWindowChannelURL channelURL = getWSRPWindowChannelURL();
+
 		channelURL.setURLType(ChannelURLType.ACTION);
+
 		return channelURL.getTemplate();
 	}
 
 	public String getProviderDesktopURLPrefix() {
-		return _providerDesktopURLPrefix;
+		return null;
 	}
 
 	public String getRenderTemplate() {
 		WSRPWindowChannelURL channelURL = getWSRPWindowChannelURL();
+
 		channelURL.setURLType(ChannelURLType.RENDER);
+
 		return channelURL.getTemplate();
 	}
 
 	public String getResourceTemplate() {
 		WSRPWindowChannelURL channelURL = getWSRPWindowChannelURL();
+
 		channelURL.setURLType(ChannelURLType.RESOURCE);
+
 		return channelURL.getTemplate();
 	}
 
 	public String getSecurityErrorURL() {
-		return _securityErrorURL;
+		return null;
 	}
 
-	private WSRPWindowChannelURL getWSRPWindowChannelURL(){
-		return new WSRPWindowChannelURL(_request, _portlet, _windowState,
-				_portletMode,  _plid);
+	protected WSRPWindowChannelURL getWSRPWindowChannelURL() {
+		return new WSRPWindowChannelURL(
+			_request, _portlet, _windowState, _portletMode, _plid);
 	}
 
-	private long _plid;
-	private Portlet _portlet;
-	private ChannelMode _portletMode;
 	private HttpServletRequest _request;
+	private Portlet _portlet;
 	private ChannelState _windowState;
+	private ChannelMode _portletMode;
+	private long _plid;
 
 }

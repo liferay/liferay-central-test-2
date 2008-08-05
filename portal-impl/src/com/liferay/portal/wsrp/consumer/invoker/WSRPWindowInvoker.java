@@ -47,17 +47,16 @@ import com.sun.portal.wsrp.consumer.markup.WSRPContainerFactory;
 /**
  * <a href="WSRPWindowInvoker.java.html"><b><i>View Source</i></b></a>
  *
- * @author ManishKG
+ * @author Manish Gupta
  *
  */
 public class WSRPWindowInvoker {
 
-	//WSRP Consumer Container (viz MarkupManager)
-	private static Container _container =
-						(Container) WSRPContainerFactory.getInstance();
-
 	public static Container getContainer() {
 		return _container;
 	}
+
+	private static Container _container =
+		(Container)WSRPContainerFactory.getInstance();
 
 }

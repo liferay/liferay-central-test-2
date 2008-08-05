@@ -41,6 +41,7 @@
 
 package com.liferay.portal.wsrp.consumer.invoker;
 
+import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.Portlet;
 import com.liferay.portlet.PortletURLImpl;
 
@@ -62,13 +63,29 @@ import javax.portlet.WindowStateException;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+
 /**
  * <a href="WSRPWindowChannelURL.java.html"><b><i>View Source</i></b></a>
  *
- * @author ManishKG
+ * @author Manish Gupta
  *
  */
 public class WSRPWindowChannelURL implements ChannelURL, Serializable {
+
+	public final static String NEW_CHANNEL_MODE = "dt.window.newChannelMode";
+
+	public final static String NEW_WINDOW_STATE = "dt.window.newWindowState";
+
+	public final static String PORTLET_ACTION = "dt.window.portletAction";
+
+	public final static String RESOURCE_CACHE_LEVEL =
+		"wsrp-resourceCacheability";
+
+	public final static String RESOURCE_ID = "wsrp-resourceID";
+
+	public final static String RESOURCE_STATE = "wsrp-resourceState";
 
 	public WSRPWindowChannelURL(
 		HttpServletRequest request, Portlet portlet, ChannelState windowState,
@@ -82,7 +99,6 @@ public class WSRPWindowChannelURL implements ChannelURL, Serializable {
 	}
 
 	public void addProperty(String name, String value) {
-		//TODO
 	}
 
 	public String getCacheLevel() {
@@ -99,8 +115,7 @@ public class WSRPWindowChannelURL implements ChannelURL, Serializable {
 	}
 
 	public Map<String, List<String>> getProperties() {
-		//TODO
-		return Collections.emptyMap();
+		return Collections.EMPTY_MAP;
 	}
 
 	public ChannelURLType getURLType() {
@@ -126,7 +141,7 @@ public class WSRPWindowChannelURL implements ChannelURL, Serializable {
 				PortletAppEngineUtils.getPortletMode(portletMode));
 		}
 		catch (PortletModeException pme) {
-			//_log.error(pme);
+			_log.error(pme, pme);
 		}
 	}
 
@@ -143,7 +158,6 @@ public class WSRPWindowChannelURL implements ChannelURL, Serializable {
 	}
 
 	public void setProperty(String name, String value) {
-		//TODO
 	}
 
 	public void setResourceID(String resourceID) {
@@ -159,7 +173,6 @@ public class WSRPWindowChannelURL implements ChannelURL, Serializable {
 
 		_portletURLImpl.setLifecycle(getLifecycle());
 		_portletURLImpl.setURLType(getURLType());
-
 	}
 
 	public void setWindowState(ChannelState windowState) {
@@ -168,12 +181,12 @@ public class WSRPWindowChannelURL implements ChannelURL, Serializable {
 				PortletAppEngineUtils.getWindowState(windowState));
 		}
 		catch (WindowStateException wse) {
-			//_log.error(wse);
+			_log.error(wse, wse);
 		}
 	}
 
 	public String toString() {
-		return  _portletURLImpl.toString();
+		return _portletURLImpl.toString();
 	}
 
 	protected String getLifecycle() {
@@ -194,62 +207,54 @@ public class WSRPWindowChannelURL implements ChannelURL, Serializable {
 		}
 	}
 
-	// TODO Need to be optimize
-	// use constants from the WSRPSpecKeys
+	protected String getTemplate() {
+		StringBuffer sb = new StringBuffer();
 
-	String getTemplate() {
-		StringBuffer buf = new StringBuffer();
+		sb.append(_portletURLImpl.toString());
 
-		buf.append( _portletURLImpl.toString() );
-		buf.append( "&" );
-		buf.append( PORTLET_ACTION).append("=").append("{wsrp-urlType}");
+		sb.append(StringPool.AMPERSAND);
+		sb.append(PORTLET_ACTION);
+		sb.append(StringPool.EQUAL);
+		sb.append("{wsrp-urlType}");
 
-		buf.append( "&" );
-		buf.append(NEW_WINDOW_STATE).append( "=" ).append("{wsrp-windowState}");
+		sb.append(StringPool.AMPERSAND);
+		sb.append(NEW_WINDOW_STATE);
+		sb.append(StringPool.EQUAL);
+		sb.append("{wsrp-windowState}");
 
-		buf.append( "&" );
-		buf.append( NEW_CHANNEL_MODE).append("=").append("{wsrp-mode}");
-		buf.append("&wsrp-navigationalState={wsrp-navigationalState}");
+		sb.append(StringPool.AMPERSAND);
+		sb.append(NEW_CHANNEL_MODE);
+		sb.append(StringPool.EQUAL);
+		sb.append("{wsrp-mode}");
 
-		if ( ChannelURLType.ACTION.equals(_urlType)) {
-			buf.append("&wsrp-interactionState={wsrp-interactionState}");
+		sb.append("&wsrp-navigationalState={wsrp-navigationalState}");
+
+		if (ChannelURLType.ACTION.equals(_urlType)) {
+			sb.append("&wsrp-interactionState={wsrp-interactionState}");
 		}
-		else if ( ChannelURLType.RESOURCE.equals(_urlType)) {
-			buf.append("&");
-			buf.append( RESOURCE_ID);
-			buf.append("=");
-			buf.append("{wsrp-resourceID}");
-			buf.append("&");
-			buf.append( RESOURCE_STATE);
-			buf.append("=");
-			buf.append("{wsrp-resourceState}");
-			buf.append("&");
-			buf.append( RESOURCE_CACHE_LEVEL);
-			buf.append("=");
-			buf.append("{wsrp-resourceCacheability}");
+		else if (ChannelURLType.RESOURCE.equals(_urlType)) {
+			sb.append(StringPool.AMPERSAND);
+			sb.append(RESOURCE_ID);
+			sb.append(StringPool.EQUAL);
+			sb.append("{wsrp-resourceID}");
+
+			sb.append(StringPool.AMPERSAND);
+			sb.append(RESOURCE_STATE);
+			sb.append(StringPool.EQUAL);
+			sb.append("{wsrp-resourceState}");
+
+			sb.append(StringPool.AMPERSAND);
+			sb.append(RESOURCE_CACHE_LEVEL);
+			sb.append(StringPool.EQUAL);
+			sb.append("{wsrp-resourceCacheability}");
 		}
 
-		return buf.toString();
+		return sb.toString();
 	}
 
-	public final static String KEYWORD_PREFIX = "dt." + "window.";
-	public final static String NEW_CHANNEL_MODE =
-			KEYWORD_PREFIX + "newChannelMode";
+	private static Log _log = LogFactory.getLog(WSRPWindowChannelURL.class);
 
-	public final static String NEW_WINDOW_STATE =
-			KEYWORD_PREFIX + "newWindowState";
-
-	public final static String PORTLET_ACTION =
-			KEYWORD_PREFIX + "portletAction";
-
-	public final static String RESOURCE_CACHE_LEVEL =
-			"wsrp-resourceCacheability";
-
-	public final static String RESOURCE_ID = "wsrp-resourceID";
-
-	public final static String RESOURCE_STATE = "wsrp-resourceState";
-
-	private ChannelURLType _urlType;
 	private PortletURLImpl _portletURLImpl;
+	private ChannelURLType _urlType;
 
 }

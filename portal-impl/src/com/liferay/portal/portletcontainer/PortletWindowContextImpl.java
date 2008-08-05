@@ -92,7 +92,7 @@ import org.apache.commons.logging.LogFactory;
  *
  * @author Deepak Gothe
  * @author Brian Wing Shun Chan
- * @author Manish K Gupta
+ * @author Manish Gupta
  *
  */
 public class PortletWindowContextImpl implements PortletWindowContext {
@@ -191,10 +191,9 @@ public class PortletWindowContextImpl implements PortletWindowContext {
 	}
 
 	public String getPortletHandle(String portletWindowName) {
-		String remotePortletHandle =
-				_getPortletModel(portletWindowName).getRemotePortletHandle();
+		Portlet portlet = getPortletModel(portletWindowName);
 
-		return remotePortletHandle;
+		return portlet.getRemotePortletHandle();
 	}
 
 	public String getPortletID(String portletWindowName) {
@@ -206,8 +205,7 @@ public class PortletWindowContextImpl implements PortletWindowContext {
 	}
 
 	public String getPortletName(String portletWindowName) {
-		String portletName = _portlet.getPortletName();
-		return portletName;
+		return _portlet.getPortletName();
 	}
 
 	public List<EntityID> getPortletWindows(
@@ -277,11 +275,9 @@ public class PortletWindowContextImpl implements PortletWindowContext {
 	}
 
 	public String getProducerEntityID(String portletWindowName) {
+		Portlet portlet = getPortletModel(portletWindowName);
 
-		String producerEntityId =
-				_getPortletModel(portletWindowName).getProducerEntityId();
-
-		return producerEntityId;
+		return portlet.getRemoteProducerEntityId();
 	}
 
 	public Object getProperty(String name) {
@@ -461,6 +457,30 @@ public class PortletWindowContextImpl implements PortletWindowContext {
 		return portletDescriptorHolder;
 	}
 
+	protected Portlet getPortletModel(String portletWindowName){
+		if (portletWindowName.equalsIgnoreCase(_portlet.getPortletId())){
+			return _portlet;
+		}
+
+		try{
+			List<Portlet> remotePortlets = getAllPortletWindows(
+				PortletType.REMOTE);
+
+			for (Portlet portlet : remotePortlets){
+				if (portlet.isRemote() &&
+					portletWindowName.equals(portlet.getPortletId())){
+
+					return portlet;
+				}
+			}
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+		}
+
+		return null;
+	}
+
 	protected List<Portlet> getVisiblePortletWindows(PortletType portletType)
 		throws PortletWindowContextException {
 
@@ -481,30 +501,6 @@ public class PortletWindowContextImpl implements PortletWindowContext {
 		}
 
 		return portlets;
-	}
-
-	private Portlet _getPortletModel(String portletWindowName){
-
-		if (portletWindowName.equalsIgnoreCase(_portlet.getPortletId())){
-			return _portlet;
-		}else{
-			try{
-				List<Portlet> remotePortlets = getAllPortletWindows(
-					PortletType.REMOTE);
-
-				for(Portlet portlet : remotePortlets){
-					if (portlet.isRemote() &&
-						portletWindowName.equals(portlet.getPortletId())){
-
-						return portlet;
-					}
-				}
-			}catch(Exception pre){
-				_log.error(pre);
-			}
-		}
-
-		return null;
 	}
 
 	private static Log _log = LogFactory.getLog(PortletWindowContextImpl.class);

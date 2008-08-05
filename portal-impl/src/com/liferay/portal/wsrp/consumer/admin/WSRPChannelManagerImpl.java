@@ -72,67 +72,46 @@ import org.apache.commons.logging.LogFactory;
 /**
  * <a href="WSRPChannelManagerImpl.java.html"><b><i>View Source</i></b></a>
  *
- * @author Rajesh T
+ * @author Rajesh Thiagarajan
  *
- */
-
-/*
- * An implementation of the OpenPortal WSRP Channel Administration Mbean.
- * Responsible for creation of WSRP creation/deletion/ modifucation of
- * WSRP Remote Portlets
  */
 public class WSRPChannelManagerImpl implements WSRPChannelManagerMBean {
 
-	/**
-	 * Create a new window/channel for a remote portlet.
-	 *
-	 * @param		consumerName Consumer/Organization name.
-	 * @param		channelName Name for the remote portlet window.
-	 * @param		prodEntityId Configured producer Id
-	 * @param		portletId Remote portlet Id
-	 */
 	public void createWSRPChannel(
-			String channelName,
-			String consumerId,
-			String producerEntityId,
-			String portletHandle) {
+		String channelName, String consumerId, String producerEntityId,
+		String portletHandle) {
 
 		try {
 			String portletId = PortalUtil.getJsSafePortletId(channelName);
-			Portlet remotePortletModel =
-					new PortletImpl(CompanyConstants.SYSTEM, portletId);
 
-			remotePortletModel.setRemote(true);
-			remotePortletModel.setProducerEntityId(producerEntityId);
-			remotePortletModel.setConsumerId(consumerId);
-			remotePortletModel.setRemotePortletHandle(portletHandle);
-			remotePortletModel.setRemotePortletId(channelName);
-			remotePortletModel.setPortletId(portletId);
-			remotePortletModel.setPortletName(portletId);
-			remotePortletModel.setActive(true);
-			remotePortletModel.setTimestamp(System.currentTimeMillis());
+			Portlet portlet = new PortletImpl(
+				CompanyConstants.SYSTEM, portletId);
 
-			_addPortletInfo(
-					remotePortletModel,
-					producerEntityId,
-					portletHandle);
+			portlet.setPortletId(portletId);
+			portlet.setTimestamp(System.currentTimeMillis());
+			portlet.setPortletName(portletId);
+			portlet.setActive(true);
+			portlet.setRemote(true);
+			portlet.setRemoteConsumerId(consumerId);
+			portlet.setRemoteProducerEntityId(producerEntityId);
+			portlet.setRemotePortletHandle(portletHandle);
+			portlet.setRemotePortletId(channelName);
 
-			_persistRemotePortlet(remotePortletModel);
+			addPortletInfo(portlet, producerEntityId, portletHandle);
 
-			PortletLocalServiceUtil.deployRemotePortlet(remotePortletModel);
+			persistRemotePortlet(portlet);
+
+			PortletLocalServiceUtil.deployRemotePortlet(portlet);
 
 		}
-		catch (Exception ex) {
-			_log.error(ex);
+		catch (Exception e) {
+			_log.error(e, e);
 		}
 	}
 
-	/**
-	 * Provides a list of existing remote portlet channels
-	 * @return a List of existing remote channels
-	 */
 	public List<String> listWSRPChannels() {
 		List<String> remotePortlets = new ArrayList<String>();
+
 		List<Portlet> portlets = PortletLocalServiceUtil.getPortlets();
 
 		for (Portlet portlet : portlets) {
@@ -144,152 +123,156 @@ public class WSRPChannelManagerImpl implements WSRPChannelManagerMBean {
 		return remotePortlets;
 	}
 
-	/**
-	 * Removes a channel/window for remote portlet.
-	 * @param channelName Name for the remote portlet window.
-	 */
 	public void removeWSRPChannel(String channelName) {
 		try {
-			Portlet remotePortlet = PortletLocalServiceUtil.
-					getPortletById(CompanyConstants.SYSTEM,
-					channelName);
+			Portlet portlet = PortletLocalServiceUtil.getPortletById(
+				CompanyConstants.SYSTEM, channelName);
 
-			if (!remotePortlet.isRemote()) {
+			if (!portlet.isRemote()) {
 				return;
 			}
 
-			PortletLocalServiceUtil.deletePortlet(remotePortlet);
-			PortletLocalServiceUtil.destroyPortlet(remotePortlet);
+			PortletLocalServiceUtil.destroyPortlet(portlet);
 
 			WSRPPersistenceHelper persistenceHelper =
-					WSRPPersistenceHelper.getInstance();
+				WSRPPersistenceHelper.getInstance();
 
-			persistenceHelper.deleteWSRPPortlet(remotePortlet);
+			persistenceHelper.deleteWSRPPortlet(portlet);
 		}
-		catch (WSRPConsumerException wcex) {
-			_log.error(wcex);
+		catch (SystemException se) {
+			_log.error(se, se);
 		}
-		catch (SystemException ex) {
-			_log.error(ex);
+		catch (WSRPConsumerException wsrpce) {
+			_log.error(wsrpce, wsrpce);
 		}
 	}
 
-	/**
-	 * Removes a numbers of channel/window for remote portlet.
-	 * @param channelNames List of channel names.
-	 */
 	public void removeWSRPChannels(List<String> channelNames) {
 		for (String channelName : channelNames) {
 			removeWSRPChannel(channelName);
 		}
 	}
 
-	private void _addPortletInfo(
-			Portlet remotePortlet,
-			String producerEntityId,
-			String portletHandle)
+	protected void addPortletInfo(
+			Portlet portlet, String producerEntityId, String portletHandle)
 		throws WSRPConsumerException {
 
-		ProducerEntityManagerFactory pemFactory =
-				ProducerEntityManagerFactory.getInstance();
+		ProducerEntityManagerFactory producerEntityManagerFactory =
+			ProducerEntityManagerFactory.getInstance();
 
 		String portalId = WSRPConfig.getPortalId();
 
 		ProducerEntityManager producerEntityManager =
-				pemFactory.getProducerEntityManager(portalId, null);
+			producerEntityManagerFactory.getProducerEntityManager(
+				portalId, null);
 
-		ProducerEntity producerEntity =
-				producerEntityManager.getProducerEntity(producerEntityId);
+		ProducerEntity producerEntity = producerEntityManager.getProducerEntity(
+			producerEntityId);
 
 		PortletDescription portletDescription =
-				producerEntity.getPortletDescription(portletHandle);
+			producerEntity.getPortletDescription(portletHandle);
+
+		Map<String, Set<String>> portletModes =
+			new HashMap<String, Set<String>>();
 
 		List<MarkupType> markupTypes = portletDescription.getMarkupTypes();
-		Map<String, Set<String>> portletModes =
-				new HashMap<String, Set<String>>();
 
 		for (MarkupType markupType : markupTypes) {
-			Set<String> mimeModes = _getPortalModes(markupType.getModes());
+			Set<String> mimeModes = getPortalModes(markupType.getModes());
+
 			portletModes.put(markupType.getMimeType(), mimeModes);
 		}
 
-		remotePortlet.setPortletModes(portletModes);
+		portlet.setPortletModes(portletModes);
+
+		LocalizedString displayName = portletDescription.getDisplayName();
+
+		if (displayName != null) {
+			String display = displayName.getValue();
+
+			if (display == null) {
+				portlet.setDisplayName(portletHandle);
+			}
+			else {
+				portlet.setDisplayName(display);
+			}
+		}
 
 		String title = portletDescription.getTitle().getValue();
+
 		if (title == null) {
 			title = portletHandle;
 		}
 
 		String shortTitle = portletDescription.getShortTitle().getValue();
+
 		if (shortTitle == null) {
 			shortTitle = portletHandle;
 		}
 
-		List<LocalizedString> keywords = portletDescription.getKeywords();
 		String keyword = null;
-		if (keywords != null && keywords.size() >= 1) {
+
+		List<LocalizedString> keywords = portletDescription.getKeywords();
+
+		if ((keywords != null) && (keywords.size() >= 1)) {
 			LocalizedString element = keywords.get(0);
+
 			if (element != null) {
 				keyword = element.getValue();
 			}
 		}
+
 		if (keyword == null) {
 			keyword = _DEFAULT_KEYWORD;
 		}
 
-		LocalizedString displayName = portletDescription.getDisplayName();
-		if (displayName != null) {
-			String display = displayName.getValue();
-			if (display == null) {
-				remotePortlet.setDisplayName(portletHandle);
-			}
-			else {
-				remotePortlet.setDisplayName(display);
-			}
-		}
-
 		PortletInfo portletInfo = new PortletInfo(title, shortTitle, keyword);
-		remotePortlet.setPortletInfo(portletInfo);
+
+		portlet.setPortletInfo(portletInfo);
 	}
 
-	private Set<String> _getPortalModes(List<String> modes) {
-		Set<String> portalModes = new HashSet<String>();
+	protected Set<String> getPortalModes(List<String> modes) {
+		Set<String> portalModes = new HashSet<String>(modes.size());
 
-		//view mode is present by default- Even if its not there
-		//assume that view mode exists
-
-		portalModes.add(_VIEW_MODE);
+		portalModes.add(_MODE_VIEW);
 
 		for (String mode : modes) {
 			if (mode.equals(_WSRP_EDIT)) {
-				portalModes.add(_EDIT_MODE);
-			}
-			else if (mode.equals(_WSRP_VIEW)) {
-				portalModes.add(_VIEW_MODE);
+				portalModes.add(_MODE_EDIT);
 			}
 			else if (mode.equals(_WSRP_HELP)) {
-				portalModes.add(_HELP_MODE);
-			}// Ignore rest of the modes
+				portalModes.add(_MODE_HELP);
+			}
+			else if (mode.equals(_WSRP_VIEW)) {
+				portalModes.add(_MODE_VIEW);
+			}
 		}
 
 		return portalModes;
 	}
 
-	private void _persistRemotePortlet(Portlet remotePortlet)
-			throws WSRPConsumerException {
+	protected void persistRemotePortlet(Portlet remotePortlet)
+		throws WSRPConsumerException {
+
 		WSRPPersistenceHelper persistenceHelper =
-				WSRPPersistenceHelper.getInstance();
+			WSRPPersistenceHelper.getInstance();
 
 		persistenceHelper.addWSRPPortlet(remotePortlet);
 	}
 
 	private static final String _DEFAULT_KEYWORD = "WSRP";
-	private static final String _EDIT_MODE = "edit";
-	private static final String _HELP_MODE = "help";
-	private static final String _VIEW_MODE = "view";
+
+	private static final String _MODE_EDIT = "edit";
+
+	private static final String _MODE_HELP = "help";
+
+	private static final String _MODE_VIEW = "view";
+
 	private static final String _WSRP_EDIT = "wsrp:edit";
-	private static final String _WSRP_VIEW = "wsrp:view";
+
 	private static final String _WSRP_HELP = "wsrp:help";
+
+	private static final String _WSRP_VIEW = "wsrp:view";
 
 	private static Log _log = LogFactory.getLog(WSRPChannelManagerImpl.class);
 

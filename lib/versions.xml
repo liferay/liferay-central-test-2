@@ -389,7 +389,7 @@
 	<library>
 		<file-name>development/jsf-portlet.jar</file-name>
 		<version>1.1.5</version>
-		<project-name>OpenPortal JSF Portlet Bridge</project-name>
+		<project-name>JSF Portlet Bridge</project-name>
 		<project-url>https://jsfportletbridge.dev.java.net</project-url>
 		<licenses>
 			<license>
@@ -708,57 +708,57 @@
 		</licenses>
 	</library>
 	<library>
-		<file-name>development/webservices-rt.jar</file-name>
-		<version>1.2</version>
-		<project-name>metro</project-name>
-		<project-url>https://metro.dev.java.net</project-url>
-		<licenses>
-			<license>
-				<license-name>COMMON DEVELOPMENT AND DISTRIBUTION LICENSE (CDDL) Version 1.0</license-name>
-			</license>
-		</licenses>
-	</library>
-	<library>
-		<file-name>development/webservices-tools.jar</file-name>
-		<version>1.2</version>
-		<project-name>metro</project-name>
-		<project-url>https://metro.dev.java.net</project-url>
-		<licenses>
-			<license>
-				<license-name>COMMON DEVELOPMENT AND DISTRIBUTION LICENSE (CDDL) Version 1.0</license-name>
-			</license>
-		</licenses>
-	</library>
-	<library>
 		<file-name>development/webservices-api.jar</file-name>
 		<version>1.2</version>
-		<project-name>metro</project-name>
+		<project-name>Metro</project-name>
 		<project-url>https://metro.dev.java.net</project-url>
 		<licenses>
 			<license>
-				<license-name>COMMON DEVELOPMENT AND DISTRIBUTION LICENSE (CDDL) Version 1.0</license-name>
+				<license-name>CDDL 1.0</license-name>
 			</license>
 		</licenses>
 	</library>
 	<library>
 		<file-name>development/webservices-extra.jar</file-name>
 		<version>1.2</version>
-		<project-name>metro</project-name>
+		<project-name>Metro</project-name>
 		<project-url>https://metro.dev.java.net</project-url>
 		<licenses>
 			<license>
-				<license-name>COMMON DEVELOPMENT AND DISTRIBUTION LICENSE (CDDL) Version 1.0</license-name>
+				<license-name>CDDL 1.0</license-name>
 			</license>
 		</licenses>
 	</library>
 	<library>
 		<file-name>development/webservices-extra-api.jar</file-name>
 		<version>1.2</version>
-		<project-name>metro</project-name>
+		<project-name>Metro</project-name>
 		<project-url>https://metro.dev.java.net</project-url>
 		<licenses>
 			<license>
-				<license-name>COMMON DEVELOPMENT AND DISTRIBUTION LICENSE (CDDL) Version 1.0</license-name>
+				<license-name>CDDL 1.0</license-name>
+			</license>
+		</licenses>
+	</library>
+	<library>
+		<file-name>development/webservices-rt.jar</file-name>
+		<version>1.2</version>
+		<project-name>Metro</project-name>
+		<project-url>https://metro.dev.java.net</project-url>
+		<licenses>
+			<license>
+				<license-name>CDDL 1.0</license-name>
+			</license>
+		</licenses>
+	</library>
+	<library>
+		<file-name>development/webservices-tools.jar</file-name>
+		<version>1.2</version>
+		<project-name>Metro</project-name>
+		<project-url>https://metro.dev.java.net</project-url>
+		<licenses>
+			<license>
+				<license-name>CDDL 1.0</license-name>
 			</license>
 		</licenses>
 	</library>
@@ -2377,8 +2377,8 @@
 	</library>
 	<library>
 		<file-name>portal/wsrp-common.jar</file-name>
-		<version>2.0(trunk 705)</version>
-		<project-name>OpenPortal WSRP Project</project-name>
+		<version>2.0 (trunk 705)</version>
+		<project-name>WSRP</project-name>
 		<project-url>https://wsrp.dev.java.net</project-url>
 		<licenses>
 			<license>
@@ -2388,8 +2388,8 @@
 	</library>
 	<library>
 		<file-name>portal/wsrp-consumer.jar</file-name>
-		<version>2.0(trunk 705)</version>
-		<project-name>OpenPortal WSRP Project</project-name>
+		<version>2.0 (trunk 705)</version>
+		<project-name>WSRP</project-name>
 		<project-url>https://wsrp.dev.java.net</project-url>
 		<licenses>
 			<license>
@@ -2399,8 +2399,8 @@
 	</library>
 	<library>
 		<file-name>portal/wsrp-consumer-portlet.jar</file-name>
-		<version>2.0(trunk 705)</version>
-		<project-name>OpenPortal WSRP Project</project-name>
+		<version>2.0 (trunk 705)</version>
+		<project-name>WSRP</project-name>
 		<project-url>https://wsrp.dev.java.net</project-url>
 		<licenses>
 			<license>
@@ -2410,8 +2410,8 @@
 	</library>
 	<library>
 		<file-name>portal/wsrp-producer.jar</file-name>
-		<version>2.0(trunk 705)</version>
-		<project-name>OpenPortal WSRP Project</project-name>
+		<version>2.0 (trunk 705)</version>
+		<project-name>WSRP</project-name>
 		<project-url>https://wsrp.dev.java.net</project-url>
 		<licenses>
 			<license>

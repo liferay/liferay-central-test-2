@@ -533,6 +533,11 @@
 		<load-on-startup>14</load-on-startup>
 	</servlet>
 	<servlet>
+		<servlet-name>WSRPConsumerResourceProxyServlet</servlet-name>
+		<servlet-class>com.sun.portal.wsrp.consumer.resourceproxy.ResourceProxyServlet</servlet-class>
+		<load-on-startup>15</load-on-startup>
+	</servlet>
+	<servlet>
 		<servlet-name>PortletBridgeServlet</servlet-name>
 		<servlet-class>org.portletbridge.portlet.PortletBridgeServlet</servlet-class>
 		<init-param>
@@ -555,19 +560,15 @@
 			<param-name>ignorePostToGetRequestHeaders</param-name>
 			<param-value>content-type,content-length</param-value>
 		</init-param>
-		<load-on-startup>15</load-on-startup>
+		<load-on-startup>16</load-on-startup>
 	</servlet>
-	<servlet>
-		<servlet-name>WSRPConsumerResourceProxyServlet</servlet-name>
-		<servlet-class>com.sun.portal.wsrp.consumer.resourceproxy.ResourceProxyServlet</servlet-class>
-	</servlet>
-	<servlet-mapping>
-		<servlet-name>WSRPConsumerResourceProxyServlet</servlet-name>
-		<url-pattern>/wsrpconsumer/resourceproxy/*</url-pattern>
-	</servlet-mapping> 	
 	<servlet-mapping>
 		<servlet-name>MainServlet</servlet-name>
 		<url-pattern>/c/*</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>DisplayChart</servlet-name>
+		<url-pattern>/display_chart/*</url-pattern>
 	</servlet-mapping>
 	<servlet-mapping>
 		<servlet-name>FacebookServlet</servlet-name>
@@ -622,8 +623,8 @@
 		<url-pattern>/widget/*</url-pattern>
 	</servlet-mapping>
 	<servlet-mapping>
-		<servlet-name>DisplayChart</servlet-name>
-		<url-pattern>/display_chart/*</url-pattern>
+		<servlet-name>WSRPConsumerResourceProxyServlet</servlet-name>
+		<url-pattern>/wsrpconsumer/resourceproxy/*</url-pattern>
 	</servlet-mapping>
 	<servlet-mapping>
 		<servlet-name>PortletBridgeServlet</servlet-name>

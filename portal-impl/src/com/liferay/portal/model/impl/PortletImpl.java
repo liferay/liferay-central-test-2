@@ -150,13 +150,10 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 		String resourceBundle, PortletInfo portletInfo,
 		Map<String, PortletFilter> portletFilters, Set<QName> processingEvents,
 		Set<QName> publishingEvents,
-		Set<PublicRenderParameter> publicRenderParameters,
-		PortletApp portletApp,
-		boolean isRemote,
-		String consumerId,
-		String producerEntityId,
-		String remotePortletHandle,
-		String remotePortletId) {
+		Set<PublicRenderParameter> publicRenderParameters, boolean remote,
+		String remoteConsumerId, String remoteProducerEntityId,
+		String remotePortletHandle, String remotePortletId,
+		PortletApp portletApp) {
 
 		setPortletId(portletId);
 		_pluginPackage = pluginPackage;
@@ -228,12 +225,13 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 		setProcessingEvents(processingEvents);
 		setPublishingEvents(publishingEvents);
 		setPublicRenderParameters(publicRenderParameters);
-		_portletApp = portletApp;
-		_isRemote = isRemote;
-		_consumerId = consumerId;
-		_producerEntityId = producerEntityId;
+		_remote = remote;
+		_remoteConsumerId = remoteConsumerId;
+		_remoteProducerEntityId = remoteProducerEntityId;
 		_remotePortletHandle = remotePortletHandle;
 		_remotePortletId = remotePortletId;
+		_portletApp = portletApp;
+
 		if (_instanceable) {
 			_clonedInstances = new Hashtable<String, Portlet>();
 		}
@@ -946,7 +944,7 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 	}
 
 	/**
-	 * Sets to true if preferences are shared across the entire company.
+	 * Set to true if preferences are shared across the entire company.
 	 *
 	 * @param		prefsCompanyWide boolean value for whether preferences
 	 *				are shared across the entire company
@@ -974,7 +972,7 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 	}
 
 	/**
-	 * Sets to true if preferences are unique per layout.
+	 * Set to true if preferences are unique per layout.
 	 *
 	 * @param		prefsUniquePerLayout boolean value for whether preferences
 	 *				are unique per layout
@@ -1010,8 +1008,8 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 	}
 
 	/**
-	 * Sets to true if preferences are owned by the group when the portlet is
-	 * shown in a group layout. Sets to false if preferences are owned by the
+	 * Set to true if preferences are owned by the group when the portlet is
+	 * shown in a group layout. Set to false if preferences are owned by the
 	 * user at all times.
 	 *
 	 * @param		prefsOwnedByGroup boolean value for whether preferences are
@@ -1041,7 +1039,7 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 	}
 
 	/**
-	 * Sets to true if the portlet uses the default template.
+	 * Set to true if the portlet uses the default template.
 	 *
 	 * @param		useDefaultTemplate boolean value for whether the portlet
 	 *				uses the default template
@@ -1073,7 +1071,7 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 	}
 
 	/**
-	 * Sets to true if users are shown that they do not have access to the
+	 * Set to true if users are shown that they do not have access to the
 	 * portlet.
 	 *
 	 * @param		showPortletAccessDenied boolean value for whether users are
@@ -1102,7 +1100,7 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 	}
 
 	/**
-	 * Sets to true if users are shown that the portlet is inactive.
+	 * Set to true if users are shown that the portlet is inactive.
 	 *
 	 * @param		showPortletInactive boolean value for whether users are
 	 *				shown that the portlet is inactive
@@ -1134,7 +1132,7 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 	}
 
 	/**
-	 * Sets to true if an action URL for this portlet should cause an auto
+	 * Set to true if an action URL for this portlet should cause an auto
 	 * redirect.
 	 *
 	 * @param		actionURLRedirect boolean value for whether an action URL
@@ -1167,7 +1165,7 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 	}
 
 	/**
-	 * Sets to true if the portlet restores to the current view from the
+	 * Set to true if the portlet restores to the current view from the
 	 * maximized state.
 	 *
 	 * @param		restoreCurrentView boolean value for whether the portlet
@@ -1200,7 +1198,7 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 	}
 
 	/**
-	 * Sets to true if the portlet goes into the maximized state when the user
+	 * Set to true if the portlet goes into the maximized state when the user
 	 * goes into the edit mode.
 	 *
 	 * @param		maximizeEdit boolean value for whether the portlet goes into
@@ -1233,7 +1231,7 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 	}
 
 	/**
-	 * Sets to true if the portlet goes into the maximized state when the user
+	 * Set to true if the portlet goes into the maximized state when the user
 	 * goes into the help mode.
 	 *
 	 * @param		maximizeHelp boolean value for whether the portlet goes into
@@ -1266,7 +1264,7 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 	}
 
 	/**
-	 * Sets to true if the portlet goes into the pop up state when the user goes
+	 * Set to true if the portlet goes into the pop up state when the user goes
 	 * into the print mode.
 	 *
 	 * @param		popUpPrint boolean value for whether the portlet goes into
@@ -1295,7 +1293,7 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 	}
 
 	/**
-	 * Sets to true to allow the portlet to be cached within the layout.
+	 * Set to true to allow the portlet to be cached within the layout.
 	 *
 	 * @param	layoutCacheable boolean value for whether the portlet can be
 	 *			cached within the layout
@@ -1323,7 +1321,7 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 	}
 
 	/**
-	 * Sets to true if the portlet can be added multiple times to a layout.
+	 * Set to true if the portlet can be added multiple times to a layout.
 	 *
 	 * @param		instanceable boolean value for whether the portlet can be
 	 *				added multiple times to a layout
@@ -1376,7 +1374,7 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 	}
 
 	/**
-	 * Sets to true if the portlet does not share request attributes with the
+	 * Set to true if the portlet does not share request attributes with the
 	 * portal or portlets from another WAR.
 	 *
 	 * @param		privateRequestAttributes boolean value for whether the
@@ -1410,7 +1408,7 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 	}
 
 	/**
-	 * Sets to true if the portlet does not share session attributes with the
+	 * Set to true if the portlet does not share session attributes with the
 	 * portal.
 	 *
 	 * @param		privateSessionAttributes boolean value for whether the
@@ -1457,7 +1455,7 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 	}
 
 	/**
-	 * Sets to true if the portlet can be displayed via Ajax.
+	 * Set to true if the portlet can be displayed via Ajax.
 	 *
 	 * @param		ajaxable boolean value for whether the portlet can be
 	 *				displayed via Ajax
@@ -1716,7 +1714,7 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 	}
 
 	/**
-	 * Sets to true if default resources for the portlet are added to a page.
+	 * Set to true if default resources for the portlet are added to a page.
 	 *
 	 * @param		addDefaultResource boolean value for whether or not default
 	 *				resources for the portlet are added to a page
@@ -1904,7 +1902,7 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 	}
 
 	/**
-	 * Sets to true if the portlet is a system portlet that a user cannot
+	 * Set to true if the portlet is a system portlet that a user cannot
 	 * manually add to their page.
 	 *
 	 * @param		system boolean value for whether the portlet is a system
@@ -1937,7 +1935,7 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 	}
 
 	/**
-	 * Sets to true to include the portlet and make it available to be made
+	 * Set to true to include the portlet and make it available to be made
 	 * active.
 	 *
 	 * @param		include boolean value for whether to include the portlet and
@@ -2280,6 +2278,97 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 	}
 
 	/**
+	 * Returns true if the portlet is a remote portlet.
+	 *
+	 * @return		true if the portlet is a remote portlet
+	 */
+	public boolean isRemote() {
+		return _remote;
+	}
+
+	/**
+	 * Set to true if the portlet is a remote portlet.
+	 *
+	 * @param		remote boolean value for the portlet is a remote portlet
+	 */
+	public void setRemote(boolean remote) {
+		_remote = remote;
+	}
+
+	/**
+	 * Gets the remote consumer id of the portlet.
+	 *
+	 * @return		the remote consumer id of the portlet
+	 */
+	public String getRemoteConsumerId() {
+		return _remoteConsumerId;
+	}
+
+	/**
+	 * Sets the remote consumer id of the portlet.
+	 *
+	 * @param		remoteConsumerId the remote consumer id of the portlet
+	 */
+	public void setRemoteConsumerId(String remoteConsumerId) {
+		_remoteConsumerId = remoteConsumerId;
+	}
+
+	/**
+	 * Gets the remote producer entity id of the portlet.
+	 *
+	 * @return		the remote producer entity id of the portlet
+	 */
+	public String getRemoteProducerEntityId() {
+		return _remoteProducerEntityId;
+	}
+
+	/**
+	 * Sets the remote producer entity id of the portlet.
+	 *
+	 * @param		remoteProducerEntityId the remote producer entity id of the
+	 *				portlet
+	 */
+	public void setRemoteProducerEntityId(String remoteProducerEntityId) {
+		_remoteProducerEntityId = remoteProducerEntityId;
+	}
+
+	/**
+	 * Gets the remote portlet handle of the portlet.
+	 *
+	 * @return		the remote portlet handle of the portlet
+	 */
+	public String getRemotePortletHandle() {
+		return _remotePortletHandle;
+	}
+
+	/**
+	 * Sets the remote portlet handle of the portlet.
+	 *
+	 * @param		remotePortletHandle the remote portlet handle of the portlet
+	 */
+	public void setRemotePortletHandle(String remotePortletHandle) {
+		_remotePortletHandle = remotePortletHandle;
+	}
+
+	/**
+	 * Gets the remote portlet id of the portlet.
+	 *
+	 * @return		the remote portlet id of the portlet
+	 */
+	public String getRemotePortletId() {
+		return _remotePortletId;
+	}
+
+	/**
+	 * Sets the remote portlet id of the portlet.
+	 *
+	 * @param		remotePortletId the remote portlet id of the portlet
+	 */
+	public void setRemotePortletId(String remotePortletId) {
+		_remotePortletId = remotePortletId;
+	}
+
+	/**
 	 * Gets the servlet context path of the portlet.
 	 *
 	 * @return		the servlet context path of the portlet
@@ -2377,7 +2466,7 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 	}
 
 	/**
-	 * Sets to true if the portlet is a static portlet that is cannot be moved.
+	 * Set to true if the portlet is a static portlet that is cannot be moved.
 	 *
 	 * @param		staticPortlet boolean value for whether the portlet is a
 	 *				static portlet that cannot be moved
@@ -2409,7 +2498,7 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 	}
 
 	/**
-	 * Sets to true if the portlet is a static portlet at the start of a list of
+	 * Set to true if the portlet is a static portlet at the start of a list of
 	 * portlets.
 	 *
 	 * @param		staticPortletStart boolean value for whether the portlet is
@@ -2439,109 +2528,6 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 	 */
 	public boolean isStaticEnd() {
 		return !_staticPortletStart;
-	}
-
-	/**
-	 * Returns true if the portlet is a remote or WSRP Portlet
-	 *
-	 * @return		true if the portlet is a remote portlet.
-	 */
-	public boolean isRemote() {
-		return _isRemote;
-	}
-
-	/**
-	 * Set true if the portlet is a remote or WSRP Portlet
-	 *
-	 * @param		isRemote boolean value for the portlet is a remote
-	 * portlet.
-	 */
-	public void setRemote(boolean isRemote) {
-		_isRemote = isRemote;
-	}
-
-	/**
-	 * Returns a String that represents a unique Consumer instance
-	 *
-	 * @return		the unique String that represents a consumer instance.
-	 */
-	public String getProducerEntityId() {
-		return this._producerEntityId;
-	}
-
-	/**
-	 * Sets a string that represents a unique Consumer instance
-	 *
-	 * @param		producer entity id a unique String that
-	 * represents a consumer instance.
-	 */
-	public void setProducerEntityId(String producerEntityId) {
-		this._producerEntityId = producerEntityId;
-	}
-
-	/**
-	 * Gets the name of WSRP Consumer that this portlet is associated with
-	 *
-	 * @return		the name of the WSRP Consumer that this
-	 * portlet is associated with
-	 */
-	public String getConsumerId() {
-		return this._consumerId;
-	}
-
-	/**
-	 * Sets the name of WSRP Consumer that this portlet is associated with.
-	 *
-	 * @param		the name of the WSRP Consumer that this
-	 * portlet is associated with
-	 */
-	public void setConsumerId(String consumerId) {
-		this._consumerId = consumerId;
-	}
-
-	/**
-	 * Gets the portlet handle of this remote portlet. Portlet handle
-	 * is a unique string that represents a instance of the portlet.
-	 *
-	 * @return		the name of the portlet handle of the remote
-	 * portlet
-	 */
-	public String getRemotePortletHandle() {
-		return this._remotePortletHandle;
-	}
-
-	/**
-	 * Sets the portlet handle of this remote portlet. Portlet handle
-	 * is a unique string that represents a instance of the portlet.
-	 *
-	 * @param		the name of the portlet handle of the remote portlet
-	 */
-	public void setRemotePortletHandle(String remotePortletHandle) {
-		this._remotePortletHandle = remotePortletHandle;
-	}
-
-	/**
-	 * Gets the portlet id of this remote portlet. Portlet id is a unique
-	 * string that represents a instance of the remote portlet in the consumer
-	 * portal. A remote portlet can have 'n'number local instances that may
-	 * or may not be reflected by the portlet Handle.
-	 *
-	 * @return		the name of the portlet id of the remote portlet
-	 */
-	public String getRemotePortletId() {
-		return this._remotePortletId;
-	}
-
-	/**
-	 * Sets the portlet id of this remote portlet. Portlet id is a unique string
-	 * that represents a instance of the remote portlet in the consumer portal.
-	 * A remote portlet can have 'n'number local instances that may or may not
-	 * be reflected by the portlet Handle.
-	 *
-	 * @param		the name of the portlet id of the remote portlet
-	 */
-	public void setRemotePortletId(String remotePortletId) {
-		this._remotePortletId = remotePortletId;
 	}
 
 	/**
@@ -2578,9 +2564,9 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 			getInitParams(), getExpCache(), getPortletModes(),
 			getSupportedLocales(), getResourceBundle(), getPortletInfo(),
 			getPortletFilters(), getProcessingEvents(), getPublishingEvents(),
-			getPublicRenderParameters(), getPortletApp(), isRemote(),
-			getConsumerId(), getProducerEntityId(), getRemotePortletHandle(),
-			getRemotePortletId());
+			getPublicRenderParameters(), isRemote(), getRemoteConsumerId(),
+			getRemoteProducerEntityId(), getRemotePortletHandle(),
+			getRemotePortletId(), getPortletApp());
 	}
 
 	/**
@@ -2994,6 +2980,31 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 			new HashMap<String, PublicRenderParameter>();
 
 	/**
+	 * True if the portlet is a remote portlet.
+	 */
+	private boolean _remote = false;
+
+	/**
+	 * The remote consumer id of the portlet.
+	 */
+	private String _remoteConsumerId;
+
+	/**
+	 * The remote producer entity id of the portlet.
+	 */
+	private String _remoteProducerEntityId;
+
+	/**
+	 * The remote portlet handle of the portlet.
+	 */
+	private String _remotePortletHandle;
+
+	/**
+	 * The remote portlet id of the portlet.
+	 */
+	private String _remotePortletId;
+
+	/**
 	 * The application this portlet belongs to.
 	 */
 	private PortletApp _portletApp;
@@ -3013,29 +3024,5 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 	 * portlets.
 	 */
 	private boolean _staticPortletStart;
-	/**
-	 * True if the portlet is a WSRP/Remote portlet.
-	 */
-	private boolean _isRemote = false;
-	/**
-	 * If the portlet is a remote portlet the following is used
-	 * to identify the consumer name that is portlet is associated with.
-	 */
-	private String _consumerId;
-	/**
-	 * Entity Id is a unique string that represents a WSRP consumer
-	 * to which this portlet is associated with.
-	 */
-	private String _producerEntityId;
-	/**
-	 * Portlet handle of this remote portlet. A portlet handle can
-	 * change its state after the creation of the portlet upon
-	 * WSRP implict clone.
-	 */
-	private String _remotePortletHandle;
-	/**
-	 * Portlet Id of the remote portlet
-	 */
-	private String _remotePortletId;
 
 }

@@ -64,7 +64,6 @@ import java.io.IOException;
 import java.io.StringWriter;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
@@ -97,18 +96,16 @@ import org.dom4j.io.XMLWriter;
  */
 public class PortletLocalServiceImpl extends PortletLocalServiceBaseImpl {
 
-	public Portlet deployRemotePortlet(Portlet remotePortlet) {
-
+	public Portlet deployRemotePortlet(Portlet portlet) {
 		PortletApp portletApp = _getPortletApp(StringPool.BLANK);
-		remotePortlet.setPortletApp(portletApp);
 
-		_getPortletsPool().put(remotePortlet.getPortletId(), remotePortlet);
+		portlet.setPortletApp(portletApp);
+
+		Map<String, Portlet> portletsPool = _getPortletsPool();
+
+		portletsPool.put(portlet.getPortletId(), portlet);
 
 		_clearCaches();
-
-		// Add to portletCategory for admin operations
-
-		long[] companyIds = PortalInstances.getCompanyIds();
 
 		PortletCategory newPortletCategory = new PortletCategory();
 
@@ -116,26 +113,25 @@ public class PortletLocalServiceImpl extends PortletLocalServiceBaseImpl {
 
 		newPortletCategory.addCategory(wsrpCategory);
 
-		wsrpCategory.getPortletIds().add(remotePortlet.getPortletId());
+		wsrpCategory.getPortletIds().add(portlet.getPortletId());
 
-		for (int i = 0; i < companyIds.length; i++) {
-			long companyId = companyIds[i];
+		long[] companyIds = PortalInstances.getCompanyIds();
 
-			PortletCategory portletCategory =
-					(PortletCategory) WebAppPool.get(
-					String.valueOf(companyId), WebKeys.PORTLET_CATEGORY);
+		for (long companyId : companyIds) {
+			PortletCategory portletCategory = (PortletCategory)WebAppPool.get(
+				String.valueOf(companyId), WebKeys.PORTLET_CATEGORY);
 
 			if (portletCategory != null) {
 				portletCategory.merge(newPortletCategory);
 			}
 			else {
 				_log.error(
-						"Unable to register remote portlet for company "
-						+ companyId + " because it does not exist");
+					"Unable to register remote portlet for company " +
+						companyId + " because it does not exist");
 			}
 		}
 
-		return remotePortlet;
+		return portlet;
 	}
 
 	public void destroyPortlet(Portlet portlet) {
@@ -252,6 +248,7 @@ public class PortletLocalServiceImpl extends PortletLocalServiceBaseImpl {
 				}
 			}
 		}
+
 		return portlets;
 	}
 
@@ -359,7 +356,10 @@ public class PortletLocalServiceImpl extends PortletLocalServiceBaseImpl {
 					portletPoolsItr.remove();
 				}
 			}
-			_initWSRPPortlets();
+
+			// Remote portlets
+
+			_initRemotePortlets();
 		}
 		catch (Exception e) {
 			_log.error(e, e);
@@ -679,59 +679,17 @@ public class PortletLocalServiceImpl extends PortletLocalServiceBaseImpl {
 		return portletsPool;
 	}
 
-	private List<Portlet> _initWSRPPortlets() {
+	private List<Portlet> _initRemotePortlets() throws WSRPConsumerException {
+		WSRPPersistenceHelper wsrpPersistence =
+			WSRPPersistenceHelper.getInstance();
 
-		List<Portlet> wsrpPortlets = Collections.EMPTY_LIST;
-		try {
-			WSRPPersistenceHelper wsrpPersistence =
-					WSRPPersistenceHelper.getInstance();
+		List<Portlet> portlets = wsrpPersistence.getWSRPPortlets();
 
-			wsrpPortlets = wsrpPersistence.getWSRPPortlets();
-
-			for (Portlet wsrpPortlet : wsrpPortlets) {
-				PortletApp portletApp = _getPortletApp(StringPool.BLANK);
-
-				wsrpPortlet.setPortletApp(portletApp);
-
-				_getPortletsPool().put(wsrpPortlet.getPortletId(),
-						wsrpPortlet);
-
-				long[] companyIds = PortalInstances.getCompanyIds();
-
-				PortletCategory newPortletCategory = new PortletCategory();
-
-				PortletCategory wsrpCategory = new PortletCategory(
-						_WSRP_CATEGORY);
-
-				newPortletCategory.addCategory(wsrpCategory);
-
-				wsrpCategory.getPortletIds().
-						add(wsrpPortlet.getPortletId());
-
-				for (int i = 0; i < companyIds.length; i++) {
-					long companyId = companyIds[i];
-
-					PortletCategory portletCategory =
-							(PortletCategory) WebAppPool.get(
-							String.valueOf(companyId),
-							WebKeys.PORTLET_CATEGORY);
-
-					if (portletCategory != null) {
-						portletCategory.merge(newPortletCategory);
-					}
-					else {
-						_log.error(
-								"Unable to register remote portlet for company "
-								+ companyId + " because it does not exist");
-					}
-				}
-			}
-		}
-		catch (WSRPConsumerException ex) {
-			_log.error("Cannot load WSRP Portlets", ex);
+		for (Portlet portlet : portlets) {
+			deployRemotePortlet(portlet);
 		}
 
-		return wsrpPortlets;
+		return portlets;
 	}
 
 	private void _readLiferayDisplay(
@@ -812,7 +770,8 @@ public class PortletLocalServiceImpl extends PortletLocalServiceBaseImpl {
 			Portlet portlet = itr.next();
 
 			if (portlet.isRemote()) {
-				_readWSRPDisplay(portlet, portletCategory);
+				_readRemoteDisplay(portlet, portletCategory);
+
 				continue;
 			}
 
@@ -1626,6 +1585,25 @@ public class PortletLocalServiceImpl extends PortletLocalServiceBaseImpl {
 		return portletIds;
 	}
 
+	private void _readRemoteDisplay(
+		Portlet remotePortlet, PortletCategory portletCategory) {
+
+		PortletCategory newPortletCategory = new PortletCategory();
+
+		PortletCategory wsrpCategory = portletCategory.getCategory(
+			_WSRP_CATEGORY);
+
+		if (wsrpCategory == null) {
+			wsrpCategory = new PortletCategory(_WSRP_CATEGORY);
+
+			newPortletCategory.addCategory(wsrpCategory);
+		}
+
+		wsrpCategory.getPortletIds().add(remotePortlet.getPortletId());
+
+		portletCategory.merge(newPortletCategory);
+	}
+
 	private List<String> _readWebXML(String xml) throws DocumentException {
 		List<String> servletURLPatterns = new ArrayList<String>();
 
@@ -1651,24 +1629,7 @@ public class PortletLocalServiceImpl extends PortletLocalServiceBaseImpl {
 
 	}
 
-	private void _readWSRPDisplay(Portlet wsrpPortlet,
-			PortletCategory portletCategory) {
-
-		PortletCategory wsrpCategory =
-				portletCategory.getCategory(_WSRP_CATEGORY);
-
-		PortletCategory rootCategory = new PortletCategory();
-
-		if (wsrpCategory == null) {
-			wsrpCategory = new PortletCategory(_WSRP_CATEGORY);
-			rootCategory.addCategory(wsrpCategory);
-		}
-
-		wsrpCategory.getPortletIds().add(wsrpPortlet.getPortletId());
-
-		portletCategory.merge(rootCategory);
-
-	}
+	private static final String _WSRP_CATEGORY = "category.wsrp";
 
 	private static Log _log = LogFactory.getLog(PortletLocalServiceImpl.class);
 
@@ -1682,6 +1643,5 @@ public class PortletLocalServiceImpl extends PortletLocalServiceBaseImpl {
 		new ConcurrentHashMap<String, String>();
 	private static Map<String, Portlet> _friendlyURLMapperPortlets =
 		new ConcurrentHashMap<String, Portlet>();
-	private static final String _WSRP_CATEGORY = "category.wsrp";
 
 }

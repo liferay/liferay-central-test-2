@@ -124,7 +124,7 @@ import org.apache.commons.logging.LogFactory;
  *
  * @author Deepak Gothe
  * @author Brian Wing Shun Chan
- * @author Manish K Gupta
+ * @author Manish Gupta
  *
  */
 public class WindowInvoker extends InvokerPortlet {
@@ -157,11 +157,11 @@ public class WindowInvoker extends InvokerPortlet {
 		_container = _getContainer();
 	}
 
-	@Override
 	public void init(PortletConfig portletConfig) throws PortletException {
 		if (_remotePortlet){
-			_portletConfigLocal = portletConfig;
-		}else{
+			_portletConfig = portletConfig;
+		}
+		else {
 			super.init(portletConfig);
 		}
 	}
@@ -507,7 +507,9 @@ public class WindowInvoker extends InvokerPortlet {
 		if (_remotePortlet) {
 			return true;
 		}
-		return getPortletConfig().isWARFile();
+		else {
+			return getPortletConfig().isWARFile();
+		}
 	}
 
 	private void _populateContainerRequest(
@@ -538,12 +540,13 @@ public class WindowInvoker extends InvokerPortlet {
 		HttpServletRequest request = PortalUtil.getHttpServletRequest(
 			portletRequest);
 
-		if (_portletConfigLocal==null){
+		if (_portletConfig != null) {
+			request.setAttribute(
+				JavaConstants.JAVAX_PORTLET_CONFIG, _portletConfig);
+		}
+		else {
 			request.setAttribute(
 				JavaConstants.JAVAX_PORTLET_CONFIG, getPortletConfig());
-		}else{
-			request.setAttribute(
-				JavaConstants.JAVAX_PORTLET_CONFIG, _portletConfigLocal);
 		}
 
 		request.setAttribute(
@@ -555,12 +558,12 @@ public class WindowInvoker extends InvokerPortlet {
 	private static Log _log = LogFactory.getLog(WindowInvoker.class);
 
 	private com.liferay.portal.model.Portlet _portletModel;
+	private PortletConfig _portletConfig;
 	private Container _container;
 	private boolean _remotePortlet;
 	private Profile _profile;
 	private String _remoteUser;
 	private long _remoteUserId;
 	private Principal _userPrincipal;
-	private PortletConfig _portletConfigLocal;
 
 }
