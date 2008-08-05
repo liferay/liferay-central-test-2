@@ -38,11 +38,9 @@ import com.liferay.portal.captcha.CaptchaUtil;
 import com.liferay.portal.kernel.servlet.HttpHeaders;
 import com.liferay.portal.kernel.servlet.SessionErrors;
 import com.liferay.portal.kernel.servlet.SessionMessages;
+import com.liferay.portal.kernel.util.*;
+import com.liferay.portal.kernel.util.PropsUtil;
 import com.liferay.portal.kernel.util.Constants;
-import com.liferay.portal.kernel.util.GetterUtil;
-import com.liferay.portal.kernel.util.ParamUtil;
-import com.liferay.portal.kernel.util.StringPool;
-import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.Company;
 import com.liferay.portal.model.CompanyConstants;
 import com.liferay.portal.model.User;
@@ -51,9 +49,7 @@ import com.liferay.portal.security.auth.Authenticator;
 import com.liferay.portal.service.UserLocalServiceUtil;
 import com.liferay.portal.struts.LastPath;
 import com.liferay.portal.theme.ThemeDisplay;
-import com.liferay.portal.util.CookieKeys;
-import com.liferay.portal.util.PortalUtil;
-import com.liferay.portal.util.PropsValues;
+import com.liferay.portal.util.*;
 import com.liferay.portal.util.WebKeys;
 import com.liferay.util.Encryptor;
 import com.liferay.util.servlet.SessionParameters;
@@ -94,8 +90,17 @@ public class LoginAction extends Action {
 		if ((login == null) || (login.equals(StringPool.NULL))) {
 			login = GetterUtil.getString(
 				CookieKeys.getCookie(request, CookieKeys.LOGIN));
+			boolean appendDomain = true;
 
-			if (Validator.isNull(login) &&
+			try {
+				 appendDomain = PropsUtil.get(PropsKeys.COMPANY_LOGIN_APPEND_DOMAIN).equals(StringPool.TRUE);
+			} catch (Exception e) {
+				if (_log.isWarnEnabled()) {
+					_log.warn(e.getMessage());
+				}
+			}
+
+			if (appendDomain && Validator.isNull(login) &&
 				company.getAuthType().equals(CompanyConstants.AUTH_TYPE_EA)) {
 
 				login = "@" + company.getMx();

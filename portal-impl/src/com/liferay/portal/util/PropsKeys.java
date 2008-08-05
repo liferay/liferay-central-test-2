@@ -218,6 +218,8 @@ public class PropsKeys {
 
 	public static final String COMPANY_DEFAULT_WEB_ID = "company.default.web.id";
 
+	public static final String COMPANY_LOGIN_APPEND_DOMAIN = "company.login.append.domain";
+
 	public static final String COMPANY_SECURITY_AUTH_REQUIRES_HTTPS = "company.security.auth.requires.https";
 
 	public static final String COMPANY_SECURITY_AUTH_TYPE = "company.security.auth.type";
