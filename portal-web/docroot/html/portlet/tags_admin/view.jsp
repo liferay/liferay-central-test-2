@@ -34,12 +34,12 @@
 		<td colspan="3">
 			<div class="ui-tags-search-bar">
 				<input id="ui-tags-search-input" size="50" type="text" value="" />
-				
+
 				<select class="ui-tags-select-search" id="ui-tags-select-search">
-					<option value="vocabularies">Vocabularies</option>
-					<option value="entries">Entries</option>
+					<option value="vocabularies"><liferay-ui:message key="vocabularies" /></option>
+					<option value="entries"><liferay-ui:message key="entries" /></option>
 				</select>
-				
+
 				<input id="ui-tags-search-button" type="button" value="<liferay-ui:message key="search" />" />
 			</div>
 		</td>
