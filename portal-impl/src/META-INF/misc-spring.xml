@@ -137,6 +137,18 @@
 			<ref bean="com.liferay.portal.model.ModelHintsImpl" />
 		</property>
 	</bean>
+	<bean id="com.liferay.portal.search.lucene.BooleanQueryFactoryImpl" class="com.liferay.portal.search.lucene.BooleanQueryFactoryImpl" lazy-init="true" />
+	<bean id="com.liferay.portal.kernel.search.BooleanQueryFactoryUtil" class="com.liferay.portal.kernel.search.BooleanQueryFactoryUtil" lazy-init="true">
+		<property name="booleanQueryFactory">
+			<ref bean="com.liferay.portal.search.lucene.BooleanQueryFactoryImpl" />
+		</property>
+	</bean>
+	<bean id="com.liferay.portal.search.lucene.TermQueryFactoryImpl" class="com.liferay.portal.search.lucene.TermQueryFactoryImpl" lazy-init="true" />
+	<bean id="com.liferay.portal.kernel.search.TermQueryFactoryUtil" class="com.liferay.portal.kernel.search.TermQueryFactoryUtil" lazy-init="true">
+		<property name="termQueryFactory">
+			<ref bean="com.liferay.portal.search.lucene.TermQueryFactoryImpl" />
+		</property>
+	</bean>
 	<bean id="com.liferay.portal.service.permission.AccountPermissionImpl" class="com.liferay.portal.service.permission.AccountPermissionImpl" lazy-init="true" />
 	<bean id="com.liferay.portal.service.permission.AccountPermissionUtil" class="com.liferay.portal.service.permission.AccountPermissionUtil" lazy-init="true">
 		<property name="accountPermission">

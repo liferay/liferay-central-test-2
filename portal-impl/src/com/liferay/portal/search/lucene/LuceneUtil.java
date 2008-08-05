@@ -102,11 +102,11 @@ public class LuceneUtil {
 	}
 
 	public static void addExactTerm(
-		BooleanQuery booleanQuery, String field, String text) {
+		BooleanQuery booleanQuery, String field, String value) {
 
-		//text = KeywordsUtil.escape(text);
+		//text = KeywordsUtil.escape(value);
 
-		Query query = new TermQuery(new Term(field, text));
+		Query query = new TermQuery(new Term(field, value));
 
 		booleanQuery.add(query, BooleanClause.Occur.SHOULD);
 	}
@@ -142,11 +142,11 @@ public class LuceneUtil {
 	}
 
 	public static void addRequiredTerm(
-		BooleanQuery booleanQuery, String field, String text) {
+		BooleanQuery booleanQuery, String field, String value) {
 
-		//text = KeywordsUtil.escape(text);
+		//text = KeywordsUtil.escape(value);
 
-		Term term = new Term(field, text);
+		Term term = new Term(field, value);
 		TermQuery termQuery = new TermQuery(term);
 
 		booleanQuery.add(termQuery, BooleanClause.Occur.MUST);
@@ -164,15 +164,15 @@ public class LuceneUtil {
 	}
 
 	public static void addTerm(
-			BooleanQuery booleanQuery, String field, String text)
+			BooleanQuery booleanQuery, String field, String value)
 		throws ParseException {
 
-		if (Validator.isNotNull(text)) {
+		if (Validator.isNotNull(value)) {
 			QueryParser queryParser = new QueryParser(
 				field, LuceneUtil.getAnalyzer());
 
 			try {
-				Query query = queryParser.parse(text);
+				Query query = queryParser.parse(value);
 
 				booleanQuery.add(query, BooleanClause.Occur.SHOULD);
 			}
@@ -183,9 +183,9 @@ public class LuceneUtil {
 						pe);
 				}
 
-				text = KeywordsUtil.escape(text);
+				value = KeywordsUtil.escape(value);
 
-				Query query = queryParser.parse(text);
+				Query query = queryParser.parse(value);
 
 				booleanQuery.add(query, BooleanClause.Occur.SHOULD);
 			}
