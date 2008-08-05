@@ -36,6 +36,7 @@ public class LoanCalculatorTests extends BaseTests {
 		addTestSuite(AddPageTest.class);
 		addTestSuite(AddPortletTest.class);
 		addTestSuite(CalculateLoanTest.class);
+		addTestSuite(DeletePageTest.class);
 	}
 
 }

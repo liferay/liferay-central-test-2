@@ -38,6 +38,7 @@ public class AdminTests extends BaseTests {
 		addTestSuite(BrowseServerTest.class);
 		addTestSuite(BrowseInstanceTest.class);
 		addTestSuite(BrowsePluginsTest.class);
+		addTestSuite(DeletePageTest.class);
 	}
 
 }

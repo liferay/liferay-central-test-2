@@ -35,6 +35,7 @@ public class ChatTests extends BaseTests {
 	public ChatTests() {
 		addTestSuite(AddPageTest.class);
 		addTestSuite(AddPortletTest.class);
+		addTestSuite(DeletePageTest.class);
 	}
 
 }

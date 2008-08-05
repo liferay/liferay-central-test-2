@@ -35,6 +35,7 @@ public class WestminsterCatechismTests extends BaseTests {
 	public WestminsterCatechismTests() {
 		addTestSuite(AddPageTest.class);
 		addTestSuite(AddPortletTest.class);
+		addTestSuite(DeletePageTest.class);
 	}
 
 }

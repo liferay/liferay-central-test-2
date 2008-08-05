@@ -36,6 +36,7 @@ public class WebcamTests extends BaseTests {
 		addTestSuite(DownloadPortletTest.class);
 		addTestSuite(AddPageTest.class);
 		addTestSuite(AddPortletTest.class);
+		addTestSuite(DeletePageTest.class);
 	}
 
 }

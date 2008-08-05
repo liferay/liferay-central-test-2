@@ -35,6 +35,7 @@ public class ReverendFunTests extends BaseTests {
 	public ReverendFunTests() {
 		addTestSuite(AddPageTest.class);
 		addTestSuite(AddPortletTest.class);
+		addTestSuite(DeletePageTest.class);
 	}
 
 }

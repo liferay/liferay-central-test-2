@@ -42,6 +42,7 @@ public class CommunitiesTests extends BaseTests {
 		addTestSuite(AddNullCommunityTest.class);
 		addTestSuite(MergeLayoutsTest.class);
 		addTestSuite(VerifyMergeLayoutsTest.class);
+		addTestSuite(DeletePageTest.class);
 	}
 
 }

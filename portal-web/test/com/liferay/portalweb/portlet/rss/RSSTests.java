@@ -36,6 +36,7 @@ public class RSSTests extends BaseTests {
 		addTestSuite(AddPageTest.class);
 		addTestSuite(AddPortletTest.class);
 		addTestSuite(EditConfigurationTest.class);
+		addTestSuite(DeletePageTest.class);
 	}
 
 }

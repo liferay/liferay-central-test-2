@@ -71,6 +71,7 @@ public class StagingTests extends BaseTests {
 		//addTestSuite(VerifyNewPrivateSampleDataTest.class);
 		//addTestSuite(RemotePublishStagedPrivatePagesTest.class);
 		//addTestSuite(VerifyRemotePublishStagedPrivatePagesTest.class);
+		addTestSuite(DeletePageTest.class);
 	}
 
 }

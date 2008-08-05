@@ -35,6 +35,7 @@ public class PasswordGeneratorTests extends BaseTests {
 	public PasswordGeneratorTests() {
 		addTestSuite(AddPageTest.class);
 		addTestSuite(AddPortletTest.class);
+		addTestSuite(DeletePageTest.class);
 	}
 
 }

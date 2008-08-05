@@ -38,6 +38,7 @@ public class OrganizationAdminTests extends BaseTests {
 		addTestSuite(SearchUsersTest.class);
 		addTestSuite(SearchOrganizationsTest.class);
 		addTestSuite(SearchUserGroupsTest.class);
+		addTestSuite(DeletePageTest.class);
 	}
 
 }

@@ -35,6 +35,7 @@ public class SMSTextMessengerTests extends BaseTests {
 	public SMSTextMessengerTests() {
 		addTestSuite(AddPageTest.class);
 		addTestSuite(AddPortletTest.class);
+		addTestSuite(DeletePageTest.class);
 	}
 
 }

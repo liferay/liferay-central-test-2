@@ -35,6 +35,7 @@ public class BibleGatewayTests extends BaseTests {
 	public BibleGatewayTests() {
 		addTestSuite(AddPageTest.class);
 		addTestSuite(AddPortletTest.class);
+		addTestSuite(DeletePageTest.class);
 	}
 
 }

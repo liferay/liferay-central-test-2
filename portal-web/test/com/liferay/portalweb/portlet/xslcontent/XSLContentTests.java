@@ -35,6 +35,7 @@ public class XSLContentTests extends BaseTests {
 	public XSLContentTests() {
 		addTestSuite(AddPageTest.class);
 		addTestSuite(AddPortletTest.class);
+		addTestSuite(DeletePageTest.class);
 	}
 
 }

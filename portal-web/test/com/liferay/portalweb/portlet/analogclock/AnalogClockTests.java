@@ -35,6 +35,7 @@ public class AnalogClockTests extends BaseTests {
 	public AnalogClockTests() {
 		addTestSuite(AddPageTest.class);
 		addTestSuite(AddPortletTest.class);
+		addTestSuite(DeletePageTest.class);
 	}
 
 }

@@ -37,6 +37,7 @@ public class CurrencyConverterTests extends BaseTests {
 		addTestSuite(AddPortletTest.class);
 		addTestSuite(ConvertCurrencyTest.class);
 		addTestSuite(ViewGraphsTest.class);
+		addTestSuite(DeletePageTest.class);
 	}
 
 }

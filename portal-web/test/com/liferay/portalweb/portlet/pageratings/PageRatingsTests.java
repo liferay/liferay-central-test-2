@@ -35,6 +35,7 @@ public class PageRatingsTests extends BaseTests {
 	public PageRatingsTests() {
 		addTestSuite(AddPageTest.class);
 		addTestSuite(AddPortletTest.class);
+		addTestSuite(DeletePageTest.class);
 	}
 
 }

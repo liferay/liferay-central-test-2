@@ -35,6 +35,7 @@ public class RecentDocumentsTests extends BaseTests {
 	public RecentDocumentsTests() {
 		addTestSuite(AddPageTest.class);
 		addTestSuite(AddPortletTest.class);
+		addTestSuite(DeletePageTest.class);
 	}
 
 }

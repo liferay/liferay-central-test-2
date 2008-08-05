@@ -37,6 +37,7 @@ public class ManagePagesTests extends BaseTests {
 		addTestSuite(AddChildPagesTest.class);
 		addTestSuite(DisplayOrderTest.class);
 		addTestSuite(AddJavaScriptTest.class);
+		addTestSuite(DeletePageTest.class);
 	}
 
 }

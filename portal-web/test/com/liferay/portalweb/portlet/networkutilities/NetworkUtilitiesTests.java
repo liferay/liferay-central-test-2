@@ -35,6 +35,7 @@ public class NetworkUtilitiesTests extends BaseTests {
 	public NetworkUtilitiesTests() {
 		addTestSuite(AddPageTest.class);
 		addTestSuite(AddPortletTest.class);
+		addTestSuite(DeletePageTest.class);
 	}
 
 }

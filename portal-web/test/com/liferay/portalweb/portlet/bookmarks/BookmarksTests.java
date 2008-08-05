@@ -46,6 +46,7 @@ public class BookmarksTests extends BaseTests {
 		addTestSuite(DeleteAllTest.class);
 		addTestSuite(ImportLARTest.class);
 		addTestSuite(VerifyImportLARTest.class);
+		addTestSuite(DeletePageTest.class);
 
 	}
 

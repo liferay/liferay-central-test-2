@@ -50,6 +50,7 @@ public class BlogsTests extends BaseTests {
 		addTestSuite(ConfigureDisplaySettingsTest.class);
 		addTestSuite(DeleteEntryTest.class);
 		addTestSuite(UploadLARFileTest.class);
+		addTestSuite(DeletePageTest.class);
 	}
 
 }

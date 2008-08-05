@@ -37,6 +37,7 @@ public class DirectoryTests extends BaseTests {
 		addTestSuite(AddPortletTest.class);
 		addTestSuite(SearchUsersTest.class);
 		addTestSuite(SearchOrganizationsTest.class);
+		addTestSuite(DeletePageTest.class);
 	}
 
 }

@@ -36,6 +36,7 @@ public class SampleLARTests extends BaseTests {
 		addTestSuite(AddPageTest.class);
 		addTestSuite(AddPortletTest.class);
 		addTestSuite(ConfigurationTest.class);
+		addTestSuite(DeletePageTest.class);
 	}
 
 }

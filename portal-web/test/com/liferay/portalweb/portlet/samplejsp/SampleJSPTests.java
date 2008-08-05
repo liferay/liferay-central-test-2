@@ -35,6 +35,7 @@ public class SampleJSPTests extends BaseTests {
 	public SampleJSPTests() {
 		addTestSuite(AddPageTest.class);
 		addTestSuite(AddPortletTest.class);
+		addTestSuite(DeletePageTest.class);
 	}
 
 }

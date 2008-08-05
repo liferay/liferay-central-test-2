@@ -37,6 +37,7 @@ public class WebFormTests extends BaseTests {
 		addTestSuite(AddPortletTest.class);
 		addTestSuite(EditFormTest.class);
 		addTestSuite(ArchiveTest.class);
+		addTestSuite(DeletePageTest.class);
 	}
 
 }

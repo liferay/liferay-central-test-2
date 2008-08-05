@@ -35,6 +35,7 @@ public class WebProxyTests extends BaseTests {
 	public WebProxyTests() {
 		addTestSuite(AddPageTest.class);
 		addTestSuite(AddPortletTest.class);
+		addTestSuite(DeletePageTest.class);
 	}
 
 }

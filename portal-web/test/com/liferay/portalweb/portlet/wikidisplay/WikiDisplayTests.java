@@ -36,6 +36,7 @@ public class WikiDisplayTests extends BaseTests {
 		addTestSuite(AddPageTest.class);
 		addTestSuite(AddPortletTest.class);
 		addTestSuite(EditConfigurationsTest.class);
+		addTestSuite(DeletePageTest.class);
 	}
 
 }

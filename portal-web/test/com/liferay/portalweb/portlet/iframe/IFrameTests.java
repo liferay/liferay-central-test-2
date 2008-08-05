@@ -36,6 +36,7 @@ public class IFrameTests extends BaseTests {
 		addTestSuite(AddPageTest.class);
 		addTestSuite(AddPortletTest.class);
 		addTestSuite(AddIFrameSourceTest.class);
+		addTestSuite(DeletePageTest.class);
 	}
 
 }

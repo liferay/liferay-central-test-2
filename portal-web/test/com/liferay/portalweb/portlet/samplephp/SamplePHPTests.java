@@ -36,6 +36,7 @@ public class SamplePHPTests extends BaseTests {
 		addTestSuite(AddPageTest.class);
 		addTestSuite(AddPortletTest.class);
 		addTestSuite(VerifyFunctionalityTest.class);
+		addTestSuite(DeletePageTest.class);
 	}
 
 }

@@ -35,6 +35,7 @@ public class QuickNoteTests extends BaseTests {
 	public QuickNoteTests() {
 		addTestSuite(AddPageTest.class);
 		addTestSuite(AddPortletTest.class);
+		addTestSuite(DeletePageTest.class);
 	}
 
 }

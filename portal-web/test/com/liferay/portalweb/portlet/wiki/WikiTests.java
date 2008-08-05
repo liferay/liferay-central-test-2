@@ -55,6 +55,7 @@ public class WikiTests extends BaseTests {
 		addTestSuite(VerifyOrphanedPagesTest.class);
 		addTestSuite(AddLinksTest.class);
 		addTestSuite(VerifyNoOrphanedPagesTest.class);
+		addTestSuite(DeletePageTest.class);
 	}
 
 }

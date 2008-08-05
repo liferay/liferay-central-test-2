@@ -36,6 +36,7 @@ public class WSRPProxyTests extends BaseTests {
 		addTestSuite(AddPageTest.class);
 		addTestSuite(AddPortletTest.class);
 		addTestSuite(VerifyTest.class);
+		addTestSuite(DeletePageTest.class);
 	}
 
 }

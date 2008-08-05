@@ -36,6 +36,7 @@ public class SearchTests extends BaseTests {
 		addTestSuite(AddPageTest.class);
 		addTestSuite(AddPortletTest.class);
 		addTestSuite(SearchTest.class);
+		addTestSuite(DeletePageTest.class);
 	}
 
 }

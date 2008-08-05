@@ -55,7 +55,7 @@ public class TranslatorTests extends BaseTests {
 		addTestSuite(TranslateJapaneseEnglishTest.class);
 		addTestSuite(TranslatePortugueseEnglishTest.class);
 		addTestSuite(TranslateSpanishEnglishTest.class);
-
+		addTestSuite(DeletePageTest.class);
 	}
 
 }

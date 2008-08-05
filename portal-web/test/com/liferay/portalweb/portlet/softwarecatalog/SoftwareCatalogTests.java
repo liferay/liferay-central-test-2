@@ -35,6 +35,7 @@ public class SoftwareCatalogTests extends BaseTests {
 	public SoftwareCatalogTests() {
 		addTestSuite(AddPageTest.class);
 		addTestSuite(AddPortletTest.class);
+		addTestSuite(DeletePageTest.class);
 	}
 
 }

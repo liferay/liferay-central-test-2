@@ -35,6 +35,7 @@ public class NestedPortletsTests extends BaseTests {
 	public NestedPortletsTests() {
 		addTestSuite(AddPageTest.class);
 		addTestSuite(AddPortletTest.class);
+		addTestSuite(DeletePageTest.class);
 	}
 
 }

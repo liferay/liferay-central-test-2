@@ -35,6 +35,7 @@ public class SampleLocalizedTests extends BaseTests {
 	public SampleLocalizedTests() {
 		addTestSuite(AddPageTest.class);
 		addTestSuite(AddPortletTest.class);
+		addTestSuite(DeletePageTest.class);
 	}
 
 }

@@ -35,6 +35,7 @@ public class WordsTests extends BaseTests {
 	public WordsTests() {
 		addTestSuite(AddPageTest.class);
 		addTestSuite(AddPortletTest.class);
+		addTestSuite(DeletePageTest.class);
 	}
 
 }

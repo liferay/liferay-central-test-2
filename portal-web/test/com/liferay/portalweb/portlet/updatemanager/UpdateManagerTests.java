@@ -35,6 +35,7 @@ public class UpdateManagerTests extends BaseTests {
 	public UpdateManagerTests() {
 		addTestSuite(AddPageTest.class);
 		addTestSuite(AddPortletTest.class);
+		addTestSuite(DeletePageTest.class);
 	}
 
 }

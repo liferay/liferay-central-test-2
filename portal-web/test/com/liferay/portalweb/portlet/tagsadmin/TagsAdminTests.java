@@ -35,6 +35,7 @@ public class TagsAdminTests extends BaseTests {
 	public TagsAdminTests() {
 		addTestSuite(AddPageTest.class);
 		addTestSuite(AddPortletTest.class);
+		addTestSuite(DeletePageTest.class);
 	}
 
 }

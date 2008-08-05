@@ -36,6 +36,7 @@ public class PollsDisplayTests extends BaseTests {
 		addTestSuite(AddPageTest.class);
 		addTestSuite(AddPortletTest.class);
 		addTestSuite(EditPreferencesTest.class);
+		addTestSuite(DeletePageTest.class);
 	}
 
 }

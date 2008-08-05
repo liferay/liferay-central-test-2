@@ -35,6 +35,7 @@ public class GospelForAsiaTests extends BaseTests {
 	public GospelForAsiaTests() {
 		addTestSuite(AddPageTest.class);
 		addTestSuite(AddPortletTest.class);
+		addTestSuite(DeletePageTest.class);
 	}
 
 }

@@ -35,6 +35,7 @@ public class DictionaryTests extends BaseTests {
 	public DictionaryTests() {
 		addTestSuite(AddPageTest.class);
 		addTestSuite(AddPortletTest.class);
+		addTestSuite(DeletePageTest.class);
 	}
 
 }

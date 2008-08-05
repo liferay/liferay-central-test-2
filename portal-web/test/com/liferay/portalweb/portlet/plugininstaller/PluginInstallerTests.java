@@ -36,6 +36,7 @@ public class PluginInstallerTests extends BaseTests {
 		addTestSuite(AddPageTest.class);
 		addTestSuite(AddPortletTest.class);
 		addTestSuite(PluginUpdateTest.class);
+		addTestSuite(DeletePageTest.class);
 	}
 
 }

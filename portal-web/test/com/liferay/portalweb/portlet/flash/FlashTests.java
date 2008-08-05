@@ -35,6 +35,7 @@ public class FlashTests extends BaseTests {
 	public FlashTests() {
 		addTestSuite(AddPageTest.class);
 		addTestSuite(AddPortletTest.class);
+		addTestSuite(DeletePageTest.class);
 	}
 
 }

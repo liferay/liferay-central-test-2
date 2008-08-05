@@ -35,6 +35,7 @@ public class NavigationTests extends BaseTests {
 	public NavigationTests() {
 		addTestSuite(AddPageTest.class);
 		addTestSuite(AddPortletTest.class);
+		addTestSuite(DeletePageTest.class);
 	}
 
 }

@@ -35,6 +35,7 @@ public class AmazonRankingsTests extends BaseTests {
 	public AmazonRankingsTests() {
 		addTestSuite(AddPageTest.class);
 		addTestSuite(AddPortletTest.class);
+		addTestSuite(DeletePageTest.class);
 	}
 
 }

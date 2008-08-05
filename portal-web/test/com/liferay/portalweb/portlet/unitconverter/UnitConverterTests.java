@@ -36,6 +36,7 @@ public class UnitConverterTests extends BaseTests {
 		addTestSuite(AddPageTest.class);
 		addTestSuite(AddPortletTest.class);
 		addTestSuite(ConvertUnitTest.class);
+		addTestSuite(DeletePageTest.class);
 	}
 
 }

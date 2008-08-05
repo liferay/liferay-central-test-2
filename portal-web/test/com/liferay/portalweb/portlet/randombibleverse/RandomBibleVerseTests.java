@@ -35,6 +35,7 @@ public class RandomBibleVerseTests extends BaseTests {
 	public RandomBibleVerseTests() {
 		addTestSuite(AddPageTest.class);
 		addTestSuite(AddPortletTest.class);
+		addTestSuite(DeletePageTest.class);
 	}
 
 }

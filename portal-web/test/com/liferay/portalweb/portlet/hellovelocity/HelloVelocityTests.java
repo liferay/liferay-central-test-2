@@ -35,6 +35,7 @@ public class HelloVelocityTests extends BaseTests {
 	public HelloVelocityTests() {
 		addTestSuite(AddPageTest.class);
 		addTestSuite(AddPortletTest.class);
+		addTestSuite(DeletePageTest.class);
 	}
 
 }

@@ -36,6 +36,7 @@ public class SampleSignInTests extends BaseTests {
 		addTestSuite(AddPageTest.class);
 		addTestSuite(AddPortletTest.class);
 		addTestSuite(VerifyLinksTest.class);
+		addTestSuite(DeletePageTest.class);
 	}
 
 }

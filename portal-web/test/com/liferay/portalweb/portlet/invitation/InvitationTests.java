@@ -35,6 +35,7 @@ public class InvitationTests extends BaseTests {
 	public InvitationTests() {
 		addTestSuite(AddPageTest.class);
 		addTestSuite(AddPortletTest.class);
+		addTestSuite(DeletePageTest.class);
 	}
 
 }

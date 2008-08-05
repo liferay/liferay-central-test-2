@@ -35,6 +35,7 @@ public class OpenIDSignInTests extends BaseTests {
 	public OpenIDSignInTests() {
 		addTestSuite(AddPageTest.class);
 		addTestSuite(AddPortletTest.class);
+		addTestSuite(DeletePageTest.class);
 	}
 
 }

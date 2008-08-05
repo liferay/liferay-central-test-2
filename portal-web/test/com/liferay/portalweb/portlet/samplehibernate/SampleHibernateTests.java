@@ -35,6 +35,7 @@ public class SampleHibernateTests extends BaseTests {
 	public SampleHibernateTests() {
 		addTestSuite(AddPageTest.class);
 		addTestSuite(AddPortletTest.class);
+		addTestSuite(DeletePageTest.class);
 	}
 
 }

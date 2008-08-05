@@ -36,6 +36,7 @@ public class TodayinChristianHistoryTests extends BaseTests {
 	public TodayinChristianHistoryTests() {
 		addTestSuite(AddPageTest.class);
 		addTestSuite(AddPortletTest.class);
+		addTestSuite(DeletePageTest.class);
 	}
 
 }

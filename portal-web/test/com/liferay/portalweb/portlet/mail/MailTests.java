@@ -35,6 +35,7 @@ public class MailTests extends BaseTests {
 	public MailTests() {
 		addTestSuite(AddPageTest.class);
 		addTestSuite(AddPortletTest.class);
+		addTestSuite(DeletePageTest.class);
 	}
 
 }

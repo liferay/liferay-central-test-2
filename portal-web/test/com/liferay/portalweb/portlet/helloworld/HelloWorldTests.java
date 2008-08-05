@@ -35,6 +35,7 @@ public class HelloWorldTests extends BaseTests {
 	public HelloWorldTests() {
 		addTestSuite(AddPageTest.class);
 		addTestSuite(AddPortletTest.class);
+		addTestSuite(DeletePageTest.class);
 	}
 
 }

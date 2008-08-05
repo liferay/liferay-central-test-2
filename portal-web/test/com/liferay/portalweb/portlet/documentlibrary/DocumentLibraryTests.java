@@ -43,6 +43,7 @@ public class DocumentLibraryTests extends BaseTests {
 		addTestSuite(AddSecondFolderTest.class);
 		addTestSuite(AddSecondSubfolderTest.class);
 		addTestSuite(MoveDocumentTest.class);
+		addTestSuite(DeletePageTest.class);
 	}
 
 }
