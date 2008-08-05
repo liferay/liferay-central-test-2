@@ -992,6 +992,10 @@ public class PropsKeys {
 	public static final String TAGS_ASSET_VALIDATOR = "tags.asset.validator";
 
 	public static final String TAGS_COMPILER_ENABLED = "tags.compiler.enabled";
+	
+	public static final String TAGS_PROPERTIES_DEFAULT = "tags.properties.default";
+
+	public static final String TAGS_VOCABULARY_DEFAULT = "tags.vocabulary.default";
 
 	public static final String TASKS_DEFAULT_ROLE_NAMES = "tasks.default.role.names";
 

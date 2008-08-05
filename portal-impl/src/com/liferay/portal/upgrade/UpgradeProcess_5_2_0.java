@@ -24,6 +24,7 @@ package com.liferay.portal.upgrade;
 
 import com.liferay.portal.kernel.util.ReleaseInfo;
 import com.liferay.portal.upgrade.v5_2_0.UpgradeSchema;
+import com.liferay.portal.upgrade.v5_2_0.UpgradeTags;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -44,6 +45,7 @@ public class UpgradeProcess_5_2_0 extends UpgradeProcess {
 		_log.info("Upgrading");
 
 		upgrade(UpgradeSchema.class);
+		upgrade(UpgradeTags.class);
 	}
 
 	private static Log _log = LogFactory.getLog(UpgradeProcess_5_1_0.class);

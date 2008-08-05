@@ -32,8 +32,10 @@ import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.User;
 import com.liferay.portal.util.PortalUtil;
+import com.liferay.portal.util.PropsValues;
 import com.liferay.portlet.tags.DuplicateEntryException;
 import com.liferay.portlet.tags.EntryNameException;
+import com.liferay.portlet.tags.NoSuchVocabularyException;
 import com.liferay.portlet.tags.model.TagsAsset;
 import com.liferay.portlet.tags.model.TagsEntry;
 import com.liferay.portlet.tags.model.TagsEntryConstants;
@@ -59,9 +61,8 @@ import java.util.Set;
  */
 public class TagsEntryLocalServiceImpl extends TagsEntryLocalServiceBaseImpl {
 
-	public static String[] DEFAULT_PROPERTIES = new String[] {
-		"0:category:no category"
-	};
+	public static String[] DEFAULT_PROPERTIES =
+		PropsValues.TAGS_PROPERTIES_DEFAULT;
 
 	public TagsEntry addEntry(long userId, String name)
 		throws PortalException, SystemException {
@@ -72,7 +73,8 @@ public class TagsEntryLocalServiceImpl extends TagsEntryLocalServiceBaseImpl {
 	public TagsEntry addEntry(long userId, String name, String[] properties)
 		throws PortalException, SystemException {
 
-		return addEntry(userId, name, null, properties);
+		return addEntry(
+			userId, name, PropsValues.TAGS_VOCABULARY_DEFAULT, properties);
 	}
 
 	public TagsEntry addEntry(
@@ -110,15 +112,27 @@ public class TagsEntryLocalServiceImpl extends TagsEntryLocalServiceBaseImpl {
 		entry.setModifiedDate(now);
 		entry.setName(name);
 
-		if (Validator.isNotNull(vocabularyName)) {
-			TagsVocabulary vocabulary = tagsVocabularyPersistence.findByC_N(
-				user.getCompanyId(), vocabularyName);
+		if (Validator.isNull(vocabularyName)) {
+			vocabularyName = PropsValues.TAGS_VOCABULARY_DEFAULT;
+		}
 
-			entry.setVocabularyId(vocabulary.getVocabularyId());
+		TagsVocabulary vocabulary;
+
+		try {
+			vocabulary = tagsVocabularyPersistence.findByC_N(
+				user.getCompanyId(), vocabularyName);
 		}
-		else {
-			entry.setParentEntryId(TagsEntryConstants.DEFAULT_VOCABULARY_ID);
+		catch (NoSuchVocabularyException nsve) {
+			if (vocabularyName.equals(PropsValues.TAGS_VOCABULARY_DEFAULT)) {
+				vocabulary = tagsVocabularyLocalService.addVocabulary(
+					userId, vocabularyName, true);
+			}
+			else {
+				throw nsve;
+			}
 		}
+
+		entry.setVocabularyId(vocabulary.getVocabularyId());
 
 		if (Validator.isNotNull(parentEntryName)) {
 			TagsEntry parentEntry = tagsEntryPersistence.findByC_N(
@@ -444,7 +458,8 @@ public class TagsEntryLocalServiceImpl extends TagsEntryLocalServiceBaseImpl {
 	public TagsEntry updateEntry(long entryId, String name)
 		throws PortalException, SystemException {
 
-		return updateEntry(entryId, null, name, null);
+		return updateEntry(
+			entryId, null, name, PropsValues.TAGS_VOCABULARY_DEFAULT);
 	}
 
 	public TagsEntry updateEntry(
@@ -467,16 +482,28 @@ public class TagsEntryLocalServiceImpl extends TagsEntryLocalServiceBaseImpl {
 		entry.setModifiedDate(new Date());
 		entry.setName(name);
 
-		if (Validator.isNotNull(vocabularyName)) {
-			TagsVocabulary vocabulary =
-				tagsVocabularyLocalService.getVocabulary(
-					entry.getCompanyId(), vocabularyName);
+		if (Validator.isNull(vocabularyName)) {
+			vocabularyName = PropsValues.TAGS_VOCABULARY_DEFAULT;
+		}
 
-			entry.setVocabularyId(vocabulary.getVocabularyId());
+		TagsVocabulary vocabulary;
+
+		try {
+			vocabulary = tagsVocabularyPersistence.findByC_N(
+				entry.getCompanyId(), vocabularyName);
 		}
-		else {
-			entry.setParentEntryId(TagsEntryConstants.DEFAULT_VOCABULARY_ID);
+		catch (NoSuchVocabularyException nsve) {
+
+			if (vocabularyName.equals(PropsValues.TAGS_VOCABULARY_DEFAULT)) {
+				vocabulary = tagsVocabularyLocalService.addVocabulary(
+					entry.getUserId(), vocabularyName, true);
+			}
+			else {
+				throw nsve;
+			}
 		}
+
+		entry.setVocabularyId(vocabulary.getVocabularyId());
 
 		if (Validator.isNotNull(parentEntryName)) {
 			TagsEntry parent = getEntry(entry.getCompanyId(), parentEntryName);

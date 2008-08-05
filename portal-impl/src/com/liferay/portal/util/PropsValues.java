@@ -934,6 +934,12 @@ public class PropsValues {
 	public static final boolean TAGS_COMPILER_ENABLED = GetterUtil.getBoolean(
 		PropsUtil.get(PropsKeys.TAGS_COMPILER_ENABLED));
 
+	public static final String[] TAGS_PROPERTIES_DEFAULT =
+		PropsUtil.getArray(PropsKeys.TAGS_PROPERTIES_DEFAULT);
+
+	public static final String TAGS_VOCABULARY_DEFAULT = PropsUtil.get(
+		PropsKeys.TAGS_VOCABULARY_DEFAULT);
+
 	public static final String TASKS_DEFAULT_ROLE_NAMES = PropsUtil.get(
 		PropsKeys.TASKS_DEFAULT_ROLE_NAMES);
 

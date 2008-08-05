@@ -293,7 +293,7 @@ Liferay.Portlet.TagsAdmin = new Class({
 		
 		if (!entries.length) {
 			buffer = [];
-			instance._sendMessage('error', 'no-entries-were-found', '#ui-tags-entry-messages', true);
+			instance._sendMessage('info', 'no-entries-were-found', '#ui-tags-entry-messages', true);
 		}
 		
 		childrenList.html(buffer.join(''));
@@ -586,7 +586,7 @@ Liferay.Portlet.TagsAdmin = new Class({
 	},
 	
 	_addEntry: function(entryName, vocabulary, fn) {
-		var instance = this, properties = ['0:category:category'];
+		var instance = this, properties = [];
 		
 		Liferay.Service.Tags.TagsEntry.addEntry(
 				{
