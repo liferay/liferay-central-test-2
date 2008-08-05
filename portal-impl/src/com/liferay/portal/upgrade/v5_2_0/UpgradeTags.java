@@ -63,9 +63,40 @@ public class UpgradeTags extends UpgradeProcess {
 		}
 	}
 
-	protected void upgradeCategoryProperty()
-		throws Exception {
+	protected long getVocabularyId(
+			long companyId, long userId, String vocabularyName)
+		throws PortalException, SystemException {
 
+		vocabularyName = vocabularyName.trim();
+
+		if (Validator.isNull(vocabularyName) ||
+			ArrayUtil.contains(
+				_DEFAULT_CATEGORY_PROPERTY_VALUES, vocabularyName)) {
+
+			vocabularyName = PropsValues.TAGS_VOCABULARY_DEFAULT;
+		}
+
+		String key = companyId + StringPool.UNDERLINE + vocabularyName;
+
+		TagsVocabulary vocabulary = _vocabulariesMap.get(key);
+
+		if (vocabulary == null) {
+			try {
+				vocabulary = TagsVocabularyLocalServiceUtil.getVocabulary(
+					companyId, vocabularyName);
+			}
+			catch (NoSuchVocabularyException nsve) {
+				vocabulary = TagsVocabularyLocalServiceUtil.addVocabulary(
+					userId, vocabularyName, true);
+			}
+
+			_vocabulariesMap.put(key, vocabulary);
+		}
+
+		return vocabulary.getVocabularyId();
+	}
+
+	protected void upgradeCategoryProperty() throws Exception {
 		Connection con = null;
 		PreparedStatement ps = null;
 		ResultSet rs = null;
@@ -113,45 +144,13 @@ public class UpgradeTags extends UpgradeProcess {
 		}
 	}
 
-	private long getVocabularyId(
-			long companyId, long userId, String vocabularyName)
-		throws PortalException, SystemException {
-
-		vocabularyName = vocabularyName.trim();
-
-		if (Validator.isNull(vocabularyName) ||
-			ArrayUtil.contains(
-				_defaultCategoryPropertyValues, vocabularyName)) {
-
-			vocabularyName = PropsValues.TAGS_VOCABULARY_DEFAULT;
-		}
-
-		String cacheKey = companyId + StringPool.UNDERLINE + vocabularyName;
-
-		TagsVocabulary vocabulary = _cache.get(cacheKey);
-
-		if (vocabulary == null) {
-			try {
-				vocabulary = TagsVocabularyLocalServiceUtil.getVocabulary(
-					companyId, vocabularyName);
-			}
-			catch (NoSuchVocabularyException nsve) {
-				vocabulary = TagsVocabularyLocalServiceUtil.addVocabulary(
-					userId, vocabularyName, true);
-			}
-
-			_cache.put (cacheKey, vocabulary);
-		}
-
-		return vocabulary.getVocabularyId();
-	}
+	private String[] _DEFAULT_CATEGORY_PROPERTY_VALUES = new String[] {
+		"undefined", "no category", "category"
+	};
 
 	private static Log _log = LogFactory.getLog(UpgradeTags.class);
 
-	private Map<String, TagsVocabulary> _cache =
+	private Map<String, TagsVocabulary> _vocabulariesMap =
 		new HashMap<String, TagsVocabulary>();
-
-	private String[] _defaultCategoryPropertyValues = new String[]{
-		"undefined", "no category", "category"};
 
 }

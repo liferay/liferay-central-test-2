@@ -116,7 +116,7 @@ public class TagsEntryLocalServiceImpl extends TagsEntryLocalServiceBaseImpl {
 			vocabularyName = PropsValues.TAGS_VOCABULARY_DEFAULT;
 		}
 
-		TagsVocabulary vocabulary;
+		TagsVocabulary vocabulary = null;
 
 		try {
 			vocabulary = tagsVocabularyPersistence.findByC_N(
@@ -486,14 +486,13 @@ public class TagsEntryLocalServiceImpl extends TagsEntryLocalServiceBaseImpl {
 			vocabularyName = PropsValues.TAGS_VOCABULARY_DEFAULT;
 		}
 
-		TagsVocabulary vocabulary;
+		TagsVocabulary vocabulary = null;
 
 		try {
 			vocabulary = tagsVocabularyPersistence.findByC_N(
 				entry.getCompanyId(), vocabularyName);
 		}
 		catch (NoSuchVocabularyException nsve) {
-
 			if (vocabularyName.equals(PropsValues.TAGS_VOCABULARY_DEFAULT)) {
 				vocabulary = tagsVocabularyLocalService.addVocabulary(
 					entry.getUserId(), vocabularyName, true);
