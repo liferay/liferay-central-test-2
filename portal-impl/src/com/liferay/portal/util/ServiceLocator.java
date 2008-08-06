@@ -38,16 +38,25 @@ public class ServiceLocator {
 	}
 
 	public Object findService(String serviceName) {
-		return PortalBeanLocatorUtil.locate(serviceName + _VELOCITY);
+		if (serviceName.endsWith(_SERVICE)) {
+			serviceName += _VELOCITY;
+		}
+
+		return PortalBeanLocatorUtil.locate(serviceName);
 	}
 
 	public Object findService(String servletContextName, String serviceName) {
-		return PortletBeanLocatorUtil.locate(
-			servletContextName, serviceName + _VELOCITY);
+		if (serviceName.endsWith(_SERVICE)) {
+			serviceName += _VELOCITY;
+		}
+
+		return PortletBeanLocatorUtil.locate(servletContextName, serviceName);
 	}
 
 	private ServiceLocator() {
 	}
+
+	private static final String _SERVICE = "Service";
 
 	private static final String _VELOCITY = ".velocity";
 
