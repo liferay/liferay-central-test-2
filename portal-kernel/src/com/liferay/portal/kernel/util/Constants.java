@@ -30,6 +30,8 @@ package com.liferay.portal.kernel.util;
  */
 public interface Constants {
 
+	public static final String ACTION = "action";
+
 	public static final String ADD = "add";
 
 	public static final String APPROVE = "approve";
