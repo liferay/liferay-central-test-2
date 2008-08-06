@@ -3,6 +3,30 @@
 <project name="portal-test" basedir="." default="test" xmlns:antelope="antlib:ise.antelope.tasks">
 	<import file="build.xml" />
 
+	<target name="deploy-portlet-plugins">
+		<taskdef classname="com.liferay.portal.util.PropsUtilTask" classpathref="project.classpath" name="propsutil" />
+
+		<propsutil key="resource.repositories.root" result="propsutil.resource.repositories.root" />
+
+		<delete dir="${propsutil.resource.repositories.root}" />
+
+		<taskdef classname="com.liferay.portal.util.PropsUtilTask" classpathref="project.classpath" name="propsutil" />
+
+		<propsutil key="resource.repositories.root" result="propsutil.resource.repositories.root" />
+
+		<echo file="${lp.plugins.dir}/build.${user.name}.properties">app.server.dir=${app.server.dir}
+app.server.portal.dir=${app.server.portal.dir}
+
+auto.deploy.dir=${propsutil.resource.repositories.root}/deploy
+
+plugins.includes=${plugins.includes}</echo>
+
+		<ant dir="${lp.plugins.dir}/portlets" inheritAll="false">
+			<target name="clean" />
+			<target name="deploy" />
+		</ant>
+	</target>
+
 	<target name="test">
 		<antcall target="all" />
 
@@ -22,22 +46,10 @@
 
 		<ant dir="util-java" target="test" inheritAll="false" />
 
-		<ant dir="sql" target="rebuild-mysql" inheritAll="false" />
-
 		<antcall target="test-${app.server.type}" />
 	</target>
 
 	<target name="test-tomcat">
-		<taskdef classname="com.liferay.portal.util.PropsUtilTask" classpathref="project.classpath" name="propsutil" />
-
-		<propsutil key="resource.repositories.root" result="propsutil.resource.repositories.root" />
-
-		<delete dir="${propsutil.resource.repositories.root}" />
-
-		<taskdef classname="com.liferay.portal.util.PropsUtilTask" classpathref="project.classpath" name="propsutil" />
-
-		<propsutil key="resource.repositories.root" result="propsutil.resource.repositories.root" />
-
 		<replace
 			file="${app.server.tomcat.portal.dir}/WEB-INF/web.xml"
 			token="session-timeout&gt;30&lt;"
@@ -48,19 +60,40 @@
 			<arg line="/c svn update" />
 		</exec>
 
-		<echo file="${lp.plugins.dir}/build.${user.name}.properties">app.server.dir=${app.server.dir}
-app.server.portal.dir=${app.server.portal.dir}
-
-auto.deploy.dir=${propsutil.resource.repositories.root}/deploy
-
-plugins.includes=alfresco-content-portlet,analog-clock-portlet,application-builder-portlet,chat-portlet,flash-portlet,flash-portlet,google-adsense-portlet,google-gadget-portlet,google-maps-portlet,google-search-portlet,ip-geocoder-portlet,mail-portlet,release-tools-portlet,ruby-console-portlet,sample-dao-portlet,sample-groovy-portlet,sample-hibernate-portlet,sample-icefaces-jsf-1.1-myfaces-jsp-portlet,sample-icefaces-jsf-1.2-sun-facelets-portlet,sample-icefaces-jsf-1.1-sun-facelets-portlet,sample-icefaces-jsf-1.1-sun-jsp-portlet,sample-javascript-portlet,sample-jsp-portlet,sample-jsf-1.2-sun-facelets-portlet,sample-jsf-1.1-myfaces-facelets-portlet,sample-jsf-1.1-myfaces-jsp-portlet,sample-jsf-1.1-sun-facelets-portlet,sample-jsf-1.1-sun-jsp-portlet,sample-jsf-1.2-sun-facelets-portlet,sample-jsf-1.2-sun-jsp-portlet,sample-json-portlet,sample-lar-portlet,sample-localized-portlet,sample-laszlo-portlet,sample-php-portlet,sample-permissions-portlet,sample-portal-client-portlet,sample-portal-service-portlet,sample-python-portlet,sample-ruby-portlet,sample-sign-in-portlet,sample-spring-portlet,sample-struts-portlet,sample-tapestry-portlet,sample-ui-taglibs-portlet,sample-wap-portlet,sshvnc-portlet,sun-bookmark-portlet,sun-elluminate-portlet,sun-flickr-portlet,sun-iframe-portlet,sun-mashup-portlet,sun-notepad-portlet,sun-photoshow-ajax-portlet,sun-privacy-guard-portlet,sun-rss-portlet,sun-showtime-portlet,sun-tour-ipc-portlet,sun-video-portlet,weather-portlet,sample-test-portlet,twitter-portlet</echo>
-
-		<ant dir="${lp.plugins.dir}/portlets" inheritAll="false">
-			<target name="clean" />
-			<target name="deploy" />
-		</ant>
-
 		<java jar="lib/development/selenium-server.jar" fork="true" spawn="true" />
+
+		<antcall target="test-tomcat-runtime">
+			<param name="test.class" value="PortalWebTestSuite" />
+		</antcall>
+
+		<antcall target="test-tomcat-runtime">
+			<param name="test.class" value="Plugins1TestSuite" />
+			<param name="plugins.includes" value="sample-test-portlet,twitter-portlet" />
+		</antcall>
+
+		<antelope:post to="http://localhost:4444/selenium-server/driver/?cmd=shutDown" wantresponse="false" />
+	</target>
+
+	<target name="test-tomcat-runtime">
+		<ant dir="sql" target="rebuild-mysql" inheritAll="false" />
+
+		<delete includeemptydirs="true" failonerror="false">
+			<fileset
+				dir="${app.server.deploy.dir}"
+				includes="*-portlet/**"
+			/>
+		</delete>
+
+		<if>
+			<not>
+				<equals arg1="${plugins.includes}" arg2="$${plugins.includes}" />
+			</not>
+			<then>
+				<antcall target="deploy-portlet-plugins">
+					<param name="plugins.includes" value="${plugins.includes}" />
+				</antcall>
+			</then>
+		</if>
 
 		<parallel>
 			<exec dir="${app.server.tomcat.bin.dir}" executable="startup${file.suffix.bat}" resolveexecutable="true" spawn="true" />
@@ -72,22 +105,27 @@ plugins.includes=alfresco-content-portlet,analog-clock-portlet,application-build
 
 				<sleep seconds="60" />
 
-				<ant dir="portal-impl" target="test-class" inheritAll="false">
-					<property name="class" value="ServiceHttpTestSuite" />
-				</ant>
+				<if>
+					<equals arg1="${test.class}" arg2="PortalWebTestSuite" />
+					<then>
+						<ant dir="portal-impl" target="test-class" inheritAll="false">
+							<property name="class" value="ServiceHttpTestSuite" />
+						</ant>
 
-				<ant dir="portal-impl" target="test-class" inheritAll="false">
-					<property name="class" value="ServiceSoapTestSuite" />
-				</ant>
+						<ant dir="portal-impl" target="test-class" inheritAll="false">
+							<property name="class" value="ServiceSoapTestSuite" />
+						</ant>
+					</then>
+				</if>
 
-				<ant dir="portal-web" target="test" inheritAll="false" />
+				<ant dir="portal-web" target="test-class" inheritAll="false">
+					<property name="class" value="${test.class}" />
+				</ant>
 
 				<exec dir="${app.server.tomcat.bin.dir}" executable="shutdown${file.suffix.bat}" resolveexecutable="true" spawn="true" />
 
 				<sleep seconds="10" />
 			</sequential>
 		</parallel>
-
-		<antelope:post to="http://localhost:4444/selenium-server/driver/?cmd=shutDown" wantresponse="false" />
 	</target>
 </project>
