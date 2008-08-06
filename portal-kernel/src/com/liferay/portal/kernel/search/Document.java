@@ -82,6 +82,10 @@ public interface Document {
 	public void addUID(
 		String portletId, String field1, String field2, String field3);
 
+	public void addUID(
+		String portletId, String field1, String field2, String field3,
+		String field4);
+
 	public String get(String name);
 
 	public Date getDate(String name) throws ParseException;
