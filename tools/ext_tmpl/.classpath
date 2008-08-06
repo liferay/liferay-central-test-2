@@ -62,11 +62,6 @@
 	<classpathentry kind="lib" path="lib/development/smtp.jar"/>
 	<classpathentry kind="lib" path="lib/development/tomcat-coyote.jar"/>
 	<classpathentry kind="lib" path="lib/development/tomcat-util.jar"/>
-	<classpathentry kind="lib" path="lib/development/webservices-api.jar"/>
-	<classpathentry kind="lib" path="lib/development/webservices-extra.jar"/>
-	<classpathentry kind="lib" path="lib/development/webservices-extra-api.jar"/>
-	<classpathentry kind="lib" path="lib/development/webservices-rt.jar"/>
-	<classpathentry kind="lib" path="lib/development/webservices-tools.jar"/>
 	<classpathentry kind="lib" path="lib/development/yuicompressor.jar"/>
 	<classpathentry kind="lib" path="lib/global/container.jar"/>
 	<classpathentry kind="lib" path="lib/global/portal-kernel.jar"/>
@@ -209,6 +204,11 @@
 	<classpathentry kind="lib" path="lib/portal/util-taglib.jar"/>
 	<classpathentry kind="lib" path="lib/portal/velocity.jar"/>
 	<classpathentry kind="lib" path="lib/portal/velocity-tools.jar"/>
+	<classpathentry kind="lib" path="lib/portal/webservices-api.jar"/>
+	<classpathentry kind="lib" path="lib/portal/webservices-extra.jar"/>
+	<classpathentry kind="lib" path="lib/portal/webservices-extra-api.jar"/>
+	<classpathentry kind="lib" path="lib/portal/webservices-rt.jar"/>
+	<classpathentry kind="lib" path="lib/portal/webservices-tools.jar"/>
 	<classpathentry kind="lib" path="lib/portal/wsdl4j.jar"/>
 	<classpathentry kind="lib" path="lib/portal/wsrp-common.jar"/>
 	<classpathentry kind="lib" path="lib/portal/wsrp-consumer.jar"/>

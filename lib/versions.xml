@@ -708,61 +708,6 @@
 		</licenses>
 	</library>
 	<library>
-		<file-name>development/webservices-api.jar</file-name>
-		<version>1.2</version>
-		<project-name>Metro</project-name>
-		<project-url>https://metro.dev.java.net</project-url>
-		<licenses>
-			<license>
-				<license-name>CDDL 1.0</license-name>
-			</license>
-		</licenses>
-	</library>
-	<library>
-		<file-name>development/webservices-extra.jar</file-name>
-		<version>1.2</version>
-		<project-name>Metro</project-name>
-		<project-url>https://metro.dev.java.net</project-url>
-		<licenses>
-			<license>
-				<license-name>CDDL 1.0</license-name>
-			</license>
-		</licenses>
-	</library>
-	<library>
-		<file-name>development/webservices-extra-api.jar</file-name>
-		<version>1.2</version>
-		<project-name>Metro</project-name>
-		<project-url>https://metro.dev.java.net</project-url>
-		<licenses>
-			<license>
-				<license-name>CDDL 1.0</license-name>
-			</license>
-		</licenses>
-	</library>
-	<library>
-		<file-name>development/webservices-rt.jar</file-name>
-		<version>1.2</version>
-		<project-name>Metro</project-name>
-		<project-url>https://metro.dev.java.net</project-url>
-		<licenses>
-			<license>
-				<license-name>CDDL 1.0</license-name>
-			</license>
-		</licenses>
-	</library>
-	<library>
-		<file-name>development/webservices-tools.jar</file-name>
-		<version>1.2</version>
-		<project-name>Metro</project-name>
-		<project-url>https://metro.dev.java.net</project-url>
-		<licenses>
-			<license>
-				<license-name>CDDL 1.0</license-name>
-			</license>
-		</licenses>
-	</library>
-	<library>
 		<file-name>development/yuicompressor.jar</file-name>
 		<version>2.1.2</version>
 		<project-name>YUI Compressor</project-name>
@@ -1753,8 +1698,8 @@
 			</license>
 		</licenses>
 		<comments>
-			Removed org.json.* because it's already in jabsorb.jar. This JAR is
-			still necessary until JSPWiki upgrades to jabsorb.jar.
+			Removed org.json.* because it conflicts with jabsorb.jar. This JAR
+			is still necessary until JSPWiki upgrades to jabsorb.jar.
 		</comments>
 	</library>
 	<library>
@@ -2360,6 +2305,64 @@
 			<license>
 				<license-name>Apache License 2.0</license-name>
 				<copyright-notice>Copyright (c) 2000-2007 The Apache Software Foundation</copyright-notice>
+			</license>
+		</licenses>
+	</library>
+	<library>
+		<file-name>portal/webservices-api.jar</file-name>
+		<version>1.2</version>
+		<project-name>Metro</project-name>
+		<project-url>https://metro.dev.java.net</project-url>
+		<licenses>
+			<license>
+				<license-name>CDDL 1.0</license-name>
+			</license>
+		</licenses>
+	</library>
+	<library>
+		<file-name>portal/webservices-extra.jar</file-name>
+		<version>1.2</version>
+		<project-name>Metro</project-name>
+		<project-url>https://metro.dev.java.net</project-url>
+		<licenses>
+			<license>
+				<license-name>CDDL 1.0</license-name>
+			</license>
+		</licenses>
+		<comments>
+			Removed javax.mail.* because it conflicts with mail.jar.
+		</comments>
+	</library>
+	<library>
+		<file-name>portal/webservices-extra-api.jar</file-name>
+		<version>1.2</version>
+		<project-name>Metro</project-name>
+		<project-url>https://metro.dev.java.net</project-url>
+		<licenses>
+			<license>
+				<license-name>CDDL 1.0</license-name>
+			</license>
+		</licenses>
+	</library>
+	<library>
+		<file-name>portal/webservices-rt.jar</file-name>
+		<version>1.2</version>
+		<project-name>Metro</project-name>
+		<project-url>https://metro.dev.java.net</project-url>
+		<licenses>
+			<license>
+				<license-name>CDDL 1.0</license-name>
+			</license>
+		</licenses>
+	</library>
+	<library>
+		<file-name>portal/webservices-tools.jar</file-name>
+		<version>1.2</version>
+		<project-name>Metro</project-name>
+		<project-url>https://metro.dev.java.net</project-url>
+		<licenses>
+			<license>
+				<license-name>CDDL 1.0</license-name>
 			</license>
 		</licenses>
 	</library>

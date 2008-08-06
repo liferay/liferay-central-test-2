@@ -528,7 +528,7 @@
 				<copy todir="${app.server.lib.global.dir}">
 					<fileset
 						dir="lib/development"
-						includes="activation.jar,jms.jar,jta.jar,mail.jar,webservices*.jar"
+						includes="activation.jar,jms.jar,jta.jar,mail.jar"
 					/>
 				</copy>
 
