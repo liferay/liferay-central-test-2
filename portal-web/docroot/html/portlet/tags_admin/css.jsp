@@ -52,3 +52,61 @@
 .portlet-tags-admin .tags-category {
 	clear: both;
 }
+
+/* ---------- Treeview ---------- */
+
+.portlet-tags-admin .treeview {
+	cursor: pointer;
+	font-size: 13px;
+}
+
+.portlet-tags-admin .treeview .hitarea {
+	cursor: pointer;
+	float: left;
+	height: 1px;
+	margin-left: -16px;
+	width: 16px;
+}
+
+.portlet-tags-admin .treeview .hover {
+	cursor: pointer;
+}
+
+.portlet-tags-admin .treeview li.lastCollapsable, .treeview li.lastExpandable {
+	background-image: none;
+}
+
+.portlet-tags-admin .treeview .placeholder {
+	background: url(<%= themeImagesPath %>/trees/ajax_loader.gif) 0 0 no-repeat;
+	display: block;
+	height: 16px;
+	width: 16px;
+}
+
+.portlet-tags-admin .filetree li {
+	padding: 4px 0 5px 16px;
+}
+
+.portlet-tags-admin .filetree span.folder {
+	background: url(<%= themeImagesPath %>/trees/folder.png) 0 0 no-repeat;
+}
+
+.portlet-tags-admin .filetree li.expandable span.folder {
+	background: url(<%= themeImagesPath %>/trees/folder_closed.png) 0 0 no-repeat;
+}
+
+.portlet-tags-admin .filetree span.file {
+	background: url(<%= themeImagesPath %>/trees/file.gif) 0 0 no-repeat;
+}
+
+.portlet-tags-admin .treeview .hover-up {
+	border-bottom: 2px solid black;
+}
+
+.portlet-tags-admin .treeview .hover-down {
+	border-top: 2px solid black;
+}
+
+.portlet-tags-admin .treeview .hover-folder {
+	background: #FFC url(<%= themeImagesPath %>/trees/folder.png) no-repeat scroll 0 0 !important;
+}

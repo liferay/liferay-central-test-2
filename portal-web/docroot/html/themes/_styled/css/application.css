@@ -869,7 +869,7 @@ img.ui-datepicker-trigger {
 	border: 1px #D3D7DB solid;
 	border-left: 0;
 	border-right: 0;
-	padding: 10px 20px 10px 20px;
+	padding: 10px 20px;
 }
 
 .ui-tags-toolbar {
@@ -887,7 +887,7 @@ img.ui-datepicker-trigger {
 	text-align: right;
 }
 
-.ui-tags-actions input,   .ui-tags-actions div,   .ui-tags-actions select {
+.ui-tags-actions input, .ui-tags-actions div, .ui-tags-actions select {
 	margin-left: 5px;
 }
 
@@ -961,9 +961,8 @@ span.ui-tags-delete {
 
 /* ---------- Treeview ---------- */
 
-.treeview {
-	cursor: pointer;
-	font-size: 13px;
+.treeview ul li, .treeview ul ol li, .treeview ul ul li {
+	list-style-type: none;
 }
 
 .treeview, .treeview ul {
@@ -973,14 +972,14 @@ span.ui-tags-delete {
 }
 
 .treeview ul {
-	background-color: white;
 	margin-top: 4px;
 }
 
 .treeview .hitarea {
+	background: url(../images/trees/treeview-default.gif) -64px -25px no-repeat;
 	cursor: pointer;
 	float: left;
-	height: 1px;
+	height: 16px;
 	margin-left: -16px;
 	width: 16px;
 }
@@ -994,7 +993,7 @@ span.ui-tags-delete {
 
 .treeview li {
 	margin: 0;
-	padding: 4px 0 5px 16px;
+	padding: 3px 0pt 3px 16px;
 }
 
 .treeview a.selected {
@@ -1007,7 +1006,12 @@ span.ui-tags-delete {
 }
 
 .treeview .hover {
+	color: red;
 	cursor: pointer;
+}
+
+.treeview li {
+	background: url(../images/trees/treeview-default-line.gif) 0 0 no-repeat;
 }
 
 .treeview li.collapsable, .treeview li.expandable {
@@ -1023,6 +1027,7 @@ span.ui-tags-delete {
 }
 
 .treeview li.lastCollapsable, .treeview li.lastExpandable {
+	background-image: url(../images/trees/treeview-default.gif);
 }
 
 .treeview li.lastCollapsable {
@@ -1037,15 +1042,40 @@ span.ui-tags-delete {
 	background-position: 0;
 }
 
-.treeview .placeholder {
-	background: url(../images/trees/ajax_loader.gif) 0 0 no-repeat;
-	display: block;
-	height: 16px;
-	width: 16px;
+.treeview-red li {
+	background-image: url(../images/trees/treeview-red-line.gif);
+}
+
+.treeview-red .hitarea, .treeview-red li.lastCollapsable, .treeview-red li.lastExpandable {
+	background-image: url(../images/treeview-red.gif);
+}
+
+.treeview-black li {
+	background-image: url(../images/trees/treeview-black-line.gif);
+}
+
+.treeview-black .hitarea, .treeview-black li.lastCollapsable, .treeview-black li.lastExpandable {
+	background-image: url(../images/treeview-black.gif);
+}
+
+.treeview-gray li {
+	background-image: url(../images/trees/treeview-gray-line.gif);
+}
+
+.treeview-gray .hitarea, .treeview-gray li.lastCollapsable, .treeview-gray li.lastExpandable {
+	background-image: url(../images/treeview-gray.gif);
+}
+
+.treeview-famfamfam li {
+	background-image: url(../images/trees/treeview-famfamfam-line.gif);
+}
+
+.treeview-famfamfam .hitarea, .treeview-famfamfam li.lastCollapsable, .treeview-famfamfam li.lastExpandable {
+	background-image: url(../images/treeview-famfamfam.gif);
 }
 
 .filetree li {
-	padding: 4px 0 5px 16px;
+	padding: 3px 0 2px 16px;
 }
 
 .filetree span.folder, .filetree span.file {
@@ -1054,25 +1084,13 @@ span.ui-tags-delete {
 }
 
 .filetree span.folder {
-	background: url(../images/trees/folder.png) 0 0 no-repeat;
+	background: url(../images/trees/folder.gif) 0 0 no-repeat;
 }
 
 .filetree li.expandable span.folder {
-	background: url(../images/trees/folder_closed.png) 0 0 no-repeat;
+	background: url(../images/trees/folder-closed.gif) 0 0 no-repeat;
 }
 
 .filetree span.file {
 	background: url(../images/trees/file.gif) 0 0 no-repeat;
-}
-
-.treeview .hover-up {
-	border-bottom: 2px solid black;
-}
-
-.treeview .hover-down {
-	border-top: 2px solid black;
-}
-
-.treeview .hover-folder {
-	background: #FFC url(../images/trees/folder.png) no-repeat scroll 0 0 !important;
 }
