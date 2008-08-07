@@ -23,8 +23,36 @@
 package com.liferay.portalweb.portal;
 
 import com.liferay.portalweb.portal.login.LoginTests;
-import com.liferay.portalweb.portlet.sampletest.SampleTestTests;
-import com.liferay.portalweb.portlet.twitter.TwitterTests;
+import com.liferay.portalweb.portlet.alfrescocontent.AlfrescoContentTests;
+import com.liferay.portalweb.portlet.analogclock.AnalogClockTests;
+import com.liferay.portalweb.portlet.applicationbuilder.ApplicationBuilderTests;
+import com.liferay.portalweb.portlet.chat.ChatTests;
+import com.liferay.portalweb.portlet.flash.FlashTests;
+import com.liferay.portalweb.portlet.googleadsense.GoogleAdSenseTests;
+import com.liferay.portalweb.portlet.googlegadget.GoogleGadgetTests;
+import com.liferay.portalweb.portlet.googlemaps.GoogleMapsTests;
+import com.liferay.portalweb.portlet.googlesearch.GoogleSearchTests;
+import com.liferay.portalweb.portlet.ipgeocoder.IPGeocoderTests;
+import com.liferay.portalweb.portlet.mail.MailTests;
+import com.liferay.portalweb.portlet.releasetools.ReleaseToolsTests;
+import com.liferay.portalweb.portlet.rubyconsole.RubyConsoleTests;
+import com.liferay.portalweb.portlet.sampledao.SampleDAOTests;
+import com.liferay.portalweb.portlet.samplegroovy.SampleGroovyTests;
+import com.liferay.portalweb.portlet.samplehibernate.SampleHibernateTests;
+import com.liferay.portalweb.portlet.sampleicefacesjsf11sunfacelets.SampleIcefacesJSF11SunFaceletsTests;
+import com.liferay.portalweb.portlet.sampleicefacesjsf11sunjsp.SampleIcefacesJSF11SunJSPTests;
+import com.liferay.portalweb.portlet.sampleicefacesjsf11sunmyfacesjsp.SampleIcefacesJSF11SunMyfacesJSPTests;
+import com.liferay.portalweb.portlet.sampleicefacesjsf12sunfacelets.SampleIcefacesJSF12SunFaceletsTests;
+import com.liferay.portalweb.portlet.samplejsf11myfacesfacelets.SampleJSF11MyfacesFaceletsTests;
+import com.liferay.portalweb.portlet.samplejsf11myfacesjsp.SampleJSF11MyfacesJSPTests;
+import com.liferay.portalweb.portlet.samplejsf11sunfacelets.SampleJSF11SunFaceletsTests;
+import com.liferay.portalweb.portlet.samplejsf11sunjsp.SampleJSF11SunJSPTests;
+import com.liferay.portalweb.portlet.samplejsf12sunfacelets.SampleJSF12SunFaceletsTests;
+import com.liferay.portalweb.portlet.samplejsf12sunjsp.SampleJSF12SunJSPTests;
+import com.liferay.portalweb.portlet.samplejson.SampleJSONTests;
+import com.liferay.portalweb.portlet.samplejsp.SampleJSPTests;
+import com.liferay.portalweb.portlet.samplelar.SampleLARTests;
+import com.liferay.portalweb.portlet.samplelaszlo.SampleLaszloTests;
 
 /**
  * <a href="Plugins1TestSuite.java.html"><b><i>View Source</i></b></a>
@@ -36,8 +64,37 @@ public class Plugins1TestSuite extends BaseTests {
 
 	public Plugins1TestSuite() {
 		addTestSuite(LoginTests.class);
-		addTestSuite(SampleTestTests.class);
-		addTestSuite(TwitterTests.class);
+		addTestSuite(AlfrescoContentTests.class);
+		addTestSuite(AnalogClockTests.class);
+		addTestSuite(ApplicationBuilderTests.class);
+		addTestSuite(ChatTests.class);
+		addTestSuite(FlashTests.class);
+		addTestSuite(GoogleAdSenseTests.class);
+		addTestSuite(GoogleGadgetTests.class);
+		addTestSuite(GoogleMapsTests.class);
+		addTestSuite(GoogleSearchTests.class);
+		addTestSuite(IPGeocoderTests.class);
+		addTestSuite(MailTests.class);
+		addTestSuite(ReleaseToolsTests.class);
+		addTestSuite(RubyConsoleTests.class);
+		addTestSuite(SampleDAOTests.class);
+		addTestSuite(SampleGroovyTests.class);
+		addTestSuite(SampleHibernateTests.class);
+		addTestSuite(SampleIcefacesJSF11SunFaceletsTests.class);
+		addTestSuite(SampleIcefacesJSF11SunJSPTests.class);
+		addTestSuite(SampleIcefacesJSF11SunMyfacesJSPTests.class);
+		addTestSuite(SampleIcefacesJSF12SunFaceletsTests.class);
+		//addTestSuite(SampleJavascriptTests.class);
+		addTestSuite(SampleJSF11MyfacesFaceletsTests.class);
+		addTestSuite(SampleJSF11MyfacesJSPTests.class);
+		addTestSuite(SampleJSF11SunFaceletsTests.class);
+		addTestSuite(SampleJSF11SunJSPTests.class);
+		addTestSuite(SampleJSF12SunFaceletsTests.class);
+		addTestSuite(SampleJSF12SunJSPTests.class);
+		addTestSuite(SampleJSONTests.class);
+		addTestSuite(SampleJSPTests.class);
+		addTestSuite(SampleLARTests.class);
+		addTestSuite(SampleLaszloTests.class);
 
 		addTestSuite(StopSeleniumTest.class);
 	}
