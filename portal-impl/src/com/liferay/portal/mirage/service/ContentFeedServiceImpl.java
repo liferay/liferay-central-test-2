@@ -44,7 +44,6 @@ package com.liferay.portal.mirage.service;
 import com.liferay.portal.mirage.aop.ContentFeedInvoker;
 import com.liferay.portal.mirage.aop.SearchCriteriaInvoker;
 import com.liferay.portal.mirage.model.MirageJournalFeed;
-import com.liferay.portal.mirage.util.MirageLoggerUtil;
 import com.liferay.portlet.journal.model.JournalFeed;
 
 import com.sun.portal.cms.mirage.exception.CMSException;
@@ -57,44 +56,30 @@ import com.sun.portal.cms.mirage.service.custom.ContentFeedService;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
-
 /**
  * <a href="ContentFeedServiceImpl.java.html"><b><i>View Source</i></b></a>
  *
  * @author Karthik Sudarshan
  * @author Brian Wing Shun Chan
- * @author Prakash Reddy
  *
  */
 public class ContentFeedServiceImpl implements ContentFeedService {
 
 	public void createContentFeed(ContentFeed contentFeed) throws CMSException {
-		MirageLoggerUtil.enter(_log, _CLASS_NAME, "createContentFeed");
-
 		ContentFeedInvoker contentFeedInvoker = (ContentFeedInvoker)contentFeed;
 
 		contentFeedInvoker.invoke();
-
-		MirageLoggerUtil.exit(_log, _CLASS_NAME, "createContentFeed");
 	}
 
 	public void deleteContentFeed(ContentFeed contentFeed) throws CMSException {
-		MirageLoggerUtil.enter(_log, _CLASS_NAME, "deleteContentFeed");
-
 		ContentFeedInvoker contentFeedInvoker = (ContentFeedInvoker)contentFeed;
 
 		contentFeedInvoker.invoke();
-
-		MirageLoggerUtil.exit(_log, _CLASS_NAME, "deleteContentFeed");
 	}
 
 	public ContentFeed getContentFeed(
 			ContentFeed contentFeed, OptionalCriteria optionalCriteria)
 		throws CMSException {
-
-		MirageLoggerUtil.enter(_log, _CLASS_NAME, "getContentFeed");
 
 		ContentFeedInvoker contentFeedInvoker = (ContentFeedInvoker)contentFeed;
 
@@ -102,15 +87,11 @@ public class ContentFeedServiceImpl implements ContentFeedService {
 
 		JournalFeed feed = (JournalFeed)contentFeedInvoker.getReturnValue();
 
-		MirageLoggerUtil.exit(_log, _CLASS_NAME, "getContentFeed");
-
 		return new MirageJournalFeed(feed);
 	}
 
 	public int getContentFeedSearchCount(SearchCriteria searchCriteria)
 		throws CMSException {
-
-		MirageLoggerUtil.enter(_log, _CLASS_NAME, "getContentFeedSearchCount");
 
 		SearchCriteriaInvoker searchCriteriaInvoker =
 			(SearchCriteriaInvoker)searchCriteria;
@@ -119,15 +100,11 @@ public class ContentFeedServiceImpl implements ContentFeedService {
 
 		Integer i = (Integer)searchCriteriaInvoker.getReturnValue();
 
-		MirageLoggerUtil.exit(_log, _CLASS_NAME, "getContentFeedSearchCount");
-
 		return i.intValue();
 	}
 
 	public List<ContentFeed> searchContentFeeds(SearchCriteria searchCriteria)
 		throws CMSException {
-
-		MirageLoggerUtil.enter(_log, _CLASS_NAME, "searchContentFeeds");
 
 		SearchCriteriaInvoker searchCriteriaInvoker =
 			(SearchCriteriaInvoker)searchCriteria;
@@ -144,8 +121,6 @@ public class ContentFeedServiceImpl implements ContentFeedService {
 			contentFeeds.add(new MirageJournalFeed(feed));
 		}
 
-		MirageLoggerUtil.exit(_log, _CLASS_NAME, "searchContentFeeds");
-
 		return contentFeeds;
 	}
 
@@ -153,19 +128,9 @@ public class ContentFeedServiceImpl implements ContentFeedService {
 			ContentFeed contentFeed, UpdateCriteria updateCriteria)
 		throws CMSException {
 
-		MirageLoggerUtil.enter(_log, _CLASS_NAME, "updateContentFeed");
-
 		ContentFeedInvoker contentFeedInvoker = (ContentFeedInvoker)contentFeed;
 
 		contentFeedInvoker.invoke();
-
-		MirageLoggerUtil.exit(_log, _CLASS_NAME, "updateContentFeed");
 	}
-
-	private static final String _CLASS_NAME =
-		ContentFeedServiceImpl.class.getName();
-
-	private static final Log _log =
-		LogFactory.getLog(ContentFeedServiceImpl.class);
 
 }
