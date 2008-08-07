@@ -63,7 +63,7 @@ if (configuredProducerBeans == null) {
 				<liferay-ui:message key="url" />
 			</td>
 			<td>
-				<input class="lfr-input-text" name="<portlet:namespace />wsdl" type="text" value="<%= wsdl %>" />
+				<input class="lfr-input-text" name="<portlet:namespace />wsdl" type="text" value="<%= HtmlUtil.escape(wsdl) %>" />
 			</td>
 		</tr>
 		</table>
@@ -87,7 +87,7 @@ if (configuredProducerBeans == null) {
 		<form action="<portlet:actionURL />" method="post" name="<portlet:namespace />fm">
 		<input name="<portlet:namespace /><%= Constants.ACTION %>" type="hidden" value="<%= action %>" />
 		<input name="<portlet:namespace />redirect" type="hidden" value="<%= HtmlUtil.escape(redirect) %>" />
-		<input name="<portlet:namespace />wsdl" type="hidden" value="<%= wsdl %>" />
+		<input name="<portlet:namespace />wsdl" type="hidden" value="<%= HtmlUtil.escape(wsdl) %>" />
 
 		<liferay-ui:tabs names="producer" />
 
@@ -97,7 +97,7 @@ if (configuredProducerBeans == null) {
 				<liferay-ui:message key="url" />
 			</td>
 			<td>
-				<a href="<%= wsdl %>" target="_blank"><%= wsdl %></a>
+				<a href="<%= HtmlUtil.escape(wsdl) %>" target="_blank"><%= HtmlUtil.escape(wsdl) %></a>
 			</td>
 		</tr>
 		<tr>
@@ -141,8 +141,8 @@ if (configuredProducerBeans == null) {
 		<form action="<portlet:actionURL />" method="post" name="<portlet:namespace />fm">
 		<input name="<portlet:namespace /><%= Constants.ACTION %>" type="hidden" value="<%= AdminPortletAction.CREATE %>" />
 		<input name="<portlet:namespace />redirect" type="hidden" value="<%= HtmlUtil.escape(redirect) %>" />
-		<input name="<portlet:namespace />wsdl" type="hidden" value="<%= wsdl %>" />
-		<input name="<portlet:namespace />version" type="hidden" value="<%= version %>" />
+		<input name="<portlet:namespace />wsdl" type="hidden" value="<%= HtmlUtil.escape(wsdl) %>" />
+		<input name="<portlet:namespace />version" type="hidden" value="<%= HtmlUtil.escape(version) %>" />
 
 		<liferay-ui:tabs names="producer" />
 
@@ -166,7 +166,7 @@ if (configuredProducerBeans == null) {
 				<liferay-ui:message key="url" />
 			</td>
 			<td>
-				<a href="<%= wsdl %>" target="_blank"><%= wsdl %></a>
+				<a href="<%= HtmlUtil.escape(wsdl) %>" target="_blank"><%= HtmlUtil.escape(wsdl) %></a>
 			</td>
 		</tr>
 		<tr>
@@ -197,8 +197,8 @@ if (configuredProducerBeans == null) {
 		<form action="<portlet:actionURL />" method="post" name="<portlet:namespace />fm">
 		<input name="<portlet:namespace /><%= Constants.ACTION %>" type="hidden" value="<%= AdminPortletAction.CREATE_CHANNEL %>" />
 		<input name="<portlet:namespace />redirect" type="hidden" value="<%= HtmlUtil.escape(redirect) %>" />
-		<input name="<portlet:namespace />configuredProducerName" type="hidden" value="<%= name %>" />
-		<input name="<portlet:namespace />configuredProducerId" type="hidden" value="<%= id %>" />
+		<input name="<portlet:namespace />configuredProducerName" type="hidden" value="<%= HtmlUtil.escape(name) %>" />
+		<input name="<portlet:namespace />configuredProducerId" type="hidden" value="<%= HtmlUtil.escape(id) %>" />
 
 		<liferay-ui:tabs names="portlet" />
 
