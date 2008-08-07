@@ -255,6 +255,7 @@ portletURL.setParameter("categoryId", String.valueOf(categoryId));
 			headerNames.clear();
 
 			headerNames.add("thread");
+			headerNames.add("status");
 			headerNames.add("started-by");
 			headerNames.add("posts");
 			headerNames.add("views");
@@ -310,6 +311,19 @@ portletURL.setParameter("categoryId", String.valueOf(categoryId));
 				}
 
 				sb.append(message.getSubject());
+
+				row.addText(sb.toString(), rowURL);
+
+				// Status
+
+				sb = new StringBuilder();
+
+				if (MBMessageFlagLocalServiceUtil.hasQuestionFlag(message.getMessageId())) {
+					sb.append(LanguageUtil.get(pageContext, "waiting-for-an-answer"));
+				}
+				if (MBMessageFlagLocalServiceUtil.hasAnswerFlag(message.getMessageId())) {
+					sb.append(LanguageUtil.get(pageContext, "resolved"));
+				}
 
 				row.addText(sb.toString(), rowURL);
 

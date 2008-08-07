@@ -52,8 +52,8 @@ public class MBMessageFlagLocalServiceImpl
 		}
 
 		for (MBMessage message : messages) {
-			MBMessageFlag messageFlag = mbMessageFlagPersistence.fetchByU_M(
-				userId, message.getMessageId());
+			MBMessageFlag messageFlag = mbMessageFlagPersistence.fetchByU_M_F(
+				userId, message.getMessageId(), MBMessageFlagImpl.READ_FLAG);
 
 			if (messageFlag == null) {
 				long messageFlagId = counterLocalService.increment();
@@ -69,8 +69,62 @@ public class MBMessageFlagLocalServiceImpl
 		}
 	}
 
+	public void addQuestionFlag(long messageId)
+		throws PortalException, SystemException {
+
+		MBMessage message = mbMessagePersistence.findByPrimaryKey(messageId);
+
+		MBMessageFlag messageFlag = mbMessageFlagPersistence.fetchByU_M_F(
+			message.getUserId(), message.getMessageId(),
+			MBMessageFlagImpl.QUESTION_FLAG);
+
+		if (messageFlag == null) {
+			long messageFlagId = counterLocalService.increment();
+
+			messageFlag = mbMessageFlagPersistence.create(messageFlagId);
+
+			messageFlag.setUserId(message.getUserId());
+			messageFlag.setMessageId(message.getMessageId());
+			messageFlag.setFlag(MBMessageFlagImpl.QUESTION_FLAG);
+
+			mbMessageFlagPersistence.update(messageFlag, false);
+		}
+	}
+
 	public void deleteFlags(long userId) throws SystemException {
 		mbMessageFlagPersistence.removeByUserId(userId);
+	}
+
+	public void deleteFlags(long messageId, int flag) throws SystemException {
+		mbMessageFlagPersistence.removeByM_F(messageId, flag);
+	}
+
+	public boolean hasAnswerFlag(long messageId)
+		throws PortalException, SystemException {
+
+		int count = mbMessageFlagPersistence.countByM_F(
+			messageId, MBMessageFlagImpl.ANSWER_FLAG);
+
+		if (count > 0) {
+			return true;
+		}
+		else {
+			return false;
+		}
+	}
+
+	public boolean hasQuestionFlag(long messageId)
+		throws PortalException, SystemException {
+
+		int count = mbMessageFlagPersistence.countByM_F(
+			messageId, MBMessageFlagImpl.QUESTION_FLAG);
+
+		if (count > 0) {
+			return true;
+		}
+		else {
+			return false;
+		}
 	}
 
 	public boolean hasReadFlag(long userId, long messageId)
@@ -82,8 +136,8 @@ public class MBMessageFlagLocalServiceImpl
 			return true;
 		}
 
-		MBMessageFlag messageFlag = mbMessageFlagPersistence.fetchByU_M(
-			userId, messageId);
+		MBMessageFlag messageFlag = mbMessageFlagPersistence.fetchByU_M_F(
+			userId, messageId, MBMessageFlagImpl.READ_FLAG);
 
 		if (messageFlag != null) {
 			return true;

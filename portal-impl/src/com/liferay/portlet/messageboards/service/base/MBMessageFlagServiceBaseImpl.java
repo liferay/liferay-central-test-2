@@ -25,18 +25,11 @@ package com.liferay.portlet.messageboards.service.base;
 import com.liferay.counter.service.CounterLocalService;
 import com.liferay.counter.service.CounterService;
 
-import com.liferay.documentlibrary.service.DLLocalService;
-import com.liferay.documentlibrary.service.DLService;
-
 import com.liferay.portal.kernel.bean.InitializingBean;
 import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
-import com.liferay.portal.service.ResourceLocalService;
-import com.liferay.portal.service.ResourceService;
 import com.liferay.portal.service.UserLocalService;
 import com.liferay.portal.service.UserService;
 import com.liferay.portal.service.base.PrincipalBean;
-import com.liferay.portal.service.persistence.ResourceFinder;
-import com.liferay.portal.service.persistence.ResourcePersistence;
 import com.liferay.portal.service.persistence.UserFinder;
 import com.liferay.portal.service.persistence.UserPersistence;
 
@@ -62,24 +55,15 @@ import com.liferay.portlet.messageboards.service.persistence.MBMessagePersistenc
 import com.liferay.portlet.messageboards.service.persistence.MBStatsUserPersistence;
 import com.liferay.portlet.messageboards.service.persistence.MBThreadFinder;
 import com.liferay.portlet.messageboards.service.persistence.MBThreadPersistence;
-import com.liferay.portlet.ratings.service.RatingsStatsLocalService;
-import com.liferay.portlet.ratings.service.persistence.RatingsStatsPersistence;
-import com.liferay.portlet.social.service.SocialActivityLocalService;
-import com.liferay.portlet.social.service.persistence.SocialActivityFinder;
-import com.liferay.portlet.social.service.persistence.SocialActivityPersistence;
-import com.liferay.portlet.tags.service.TagsAssetLocalService;
-import com.liferay.portlet.tags.service.TagsAssetService;
-import com.liferay.portlet.tags.service.persistence.TagsAssetFinder;
-import com.liferay.portlet.tags.service.persistence.TagsAssetPersistence;
 
 /**
- * <a href="MBThreadServiceBaseImpl.java.html"><b><i>View Source</i></b></a>
+ * <a href="MBMessageFlagServiceBaseImpl.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *
  */
-public abstract class MBThreadServiceBaseImpl extends PrincipalBean
-	implements MBThreadService, InitializingBean {
+public abstract class MBMessageFlagServiceBaseImpl extends PrincipalBean
+	implements MBMessageFlagService, InitializingBean {
 	public MBBanLocalService getMBBanLocalService() {
 		return mbBanLocalService;
 	}
@@ -190,15 +174,6 @@ public abstract class MBThreadServiceBaseImpl extends PrincipalBean
 		this.mbMessageFlagLocalService = mbMessageFlagLocalService;
 	}
 
-	public MBMessageFlagService getMBMessageFlagService() {
-		return mbMessageFlagService;
-	}
-
-	public void setMBMessageFlagService(
-		MBMessageFlagService mbMessageFlagService) {
-		this.mbMessageFlagService = mbMessageFlagService;
-	}
-
 	public MBMessageFlagPersistence getMBMessageFlagPersistence() {
 		return mbMessageFlagPersistence;
 	}
@@ -243,6 +218,14 @@ public abstract class MBThreadServiceBaseImpl extends PrincipalBean
 		this.mbThreadLocalService = mbThreadLocalService;
 	}
 
+	public MBThreadService getMBThreadService() {
+		return mbThreadService;
+	}
+
+	public void setMBThreadService(MBThreadService mbThreadService) {
+		this.mbThreadService = mbThreadService;
+	}
+
 	public MBThreadPersistence getMBThreadPersistence() {
 		return mbThreadPersistence;
 	}
@@ -275,55 +258,6 @@ public abstract class MBThreadServiceBaseImpl extends PrincipalBean
 		this.counterService = counterService;
 	}
 
-	public DLLocalService getDLLocalService() {
-		return dlLocalService;
-	}
-
-	public void setDLLocalService(DLLocalService dlLocalService) {
-		this.dlLocalService = dlLocalService;
-	}
-
-	public DLService getDLService() {
-		return dlService;
-	}
-
-	public void setDLService(DLService dlService) {
-		this.dlService = dlService;
-	}
-
-	public ResourceLocalService getResourceLocalService() {
-		return resourceLocalService;
-	}
-
-	public void setResourceLocalService(
-		ResourceLocalService resourceLocalService) {
-		this.resourceLocalService = resourceLocalService;
-	}
-
-	public ResourceService getResourceService() {
-		return resourceService;
-	}
-
-	public void setResourceService(ResourceService resourceService) {
-		this.resourceService = resourceService;
-	}
-
-	public ResourcePersistence getResourcePersistence() {
-		return resourcePersistence;
-	}
-
-	public void setResourcePersistence(ResourcePersistence resourcePersistence) {
-		this.resourcePersistence = resourcePersistence;
-	}
-
-	public ResourceFinder getResourceFinder() {
-		return resourceFinder;
-	}
-
-	public void setResourceFinder(ResourceFinder resourceFinder) {
-		this.resourceFinder = resourceFinder;
-	}
-
 	public UserLocalService getUserLocalService() {
 		return userLocalService;
 	}
@@ -354,85 +288,6 @@ public abstract class MBThreadServiceBaseImpl extends PrincipalBean
 
 	public void setUserFinder(UserFinder userFinder) {
 		this.userFinder = userFinder;
-	}
-
-	public RatingsStatsLocalService getRatingsStatsLocalService() {
-		return ratingsStatsLocalService;
-	}
-
-	public void setRatingsStatsLocalService(
-		RatingsStatsLocalService ratingsStatsLocalService) {
-		this.ratingsStatsLocalService = ratingsStatsLocalService;
-	}
-
-	public RatingsStatsPersistence getRatingsStatsPersistence() {
-		return ratingsStatsPersistence;
-	}
-
-	public void setRatingsStatsPersistence(
-		RatingsStatsPersistence ratingsStatsPersistence) {
-		this.ratingsStatsPersistence = ratingsStatsPersistence;
-	}
-
-	public SocialActivityLocalService getSocialActivityLocalService() {
-		return socialActivityLocalService;
-	}
-
-	public void setSocialActivityLocalService(
-		SocialActivityLocalService socialActivityLocalService) {
-		this.socialActivityLocalService = socialActivityLocalService;
-	}
-
-	public SocialActivityPersistence getSocialActivityPersistence() {
-		return socialActivityPersistence;
-	}
-
-	public void setSocialActivityPersistence(
-		SocialActivityPersistence socialActivityPersistence) {
-		this.socialActivityPersistence = socialActivityPersistence;
-	}
-
-	public SocialActivityFinder getSocialActivityFinder() {
-		return socialActivityFinder;
-	}
-
-	public void setSocialActivityFinder(
-		SocialActivityFinder socialActivityFinder) {
-		this.socialActivityFinder = socialActivityFinder;
-	}
-
-	public TagsAssetLocalService getTagsAssetLocalService() {
-		return tagsAssetLocalService;
-	}
-
-	public void setTagsAssetLocalService(
-		TagsAssetLocalService tagsAssetLocalService) {
-		this.tagsAssetLocalService = tagsAssetLocalService;
-	}
-
-	public TagsAssetService getTagsAssetService() {
-		return tagsAssetService;
-	}
-
-	public void setTagsAssetService(TagsAssetService tagsAssetService) {
-		this.tagsAssetService = tagsAssetService;
-	}
-
-	public TagsAssetPersistence getTagsAssetPersistence() {
-		return tagsAssetPersistence;
-	}
-
-	public void setTagsAssetPersistence(
-		TagsAssetPersistence tagsAssetPersistence) {
-		this.tagsAssetPersistence = tagsAssetPersistence;
-	}
-
-	public TagsAssetFinder getTagsAssetFinder() {
-		return tagsAssetFinder;
-	}
-
-	public void setTagsAssetFinder(TagsAssetFinder tagsAssetFinder) {
-		this.tagsAssetFinder = tagsAssetFinder;
 	}
 
 	public void afterPropertiesSet() {
@@ -501,11 +356,6 @@ public abstract class MBThreadServiceBaseImpl extends PrincipalBean
 					".impl");
 		}
 
-		if (mbMessageFlagService == null) {
-			mbMessageFlagService = (MBMessageFlagService)PortalBeanLocatorUtil.locate(MBMessageFlagService.class.getName() +
-					".impl");
-		}
-
 		if (mbMessageFlagPersistence == null) {
 			mbMessageFlagPersistence = (MBMessageFlagPersistence)PortalBeanLocatorUtil.locate(MBMessageFlagPersistence.class.getName() +
 					".impl");
@@ -531,6 +381,11 @@ public abstract class MBThreadServiceBaseImpl extends PrincipalBean
 					".impl");
 		}
 
+		if (mbThreadService == null) {
+			mbThreadService = (MBThreadService)PortalBeanLocatorUtil.locate(MBThreadService.class.getName() +
+					".impl");
+		}
+
 		if (mbThreadPersistence == null) {
 			mbThreadPersistence = (MBThreadPersistence)PortalBeanLocatorUtil.locate(MBThreadPersistence.class.getName() +
 					".impl");
@@ -548,36 +403,6 @@ public abstract class MBThreadServiceBaseImpl extends PrincipalBean
 
 		if (counterService == null) {
 			counterService = (CounterService)PortalBeanLocatorUtil.locate(CounterService.class.getName() +
-					".impl");
-		}
-
-		if (dlLocalService == null) {
-			dlLocalService = (DLLocalService)PortalBeanLocatorUtil.locate(DLLocalService.class.getName() +
-					".impl");
-		}
-
-		if (dlService == null) {
-			dlService = (DLService)PortalBeanLocatorUtil.locate(DLService.class.getName() +
-					".impl");
-		}
-
-		if (resourceLocalService == null) {
-			resourceLocalService = (ResourceLocalService)PortalBeanLocatorUtil.locate(ResourceLocalService.class.getName() +
-					".impl");
-		}
-
-		if (resourceService == null) {
-			resourceService = (ResourceService)PortalBeanLocatorUtil.locate(ResourceService.class.getName() +
-					".impl");
-		}
-
-		if (resourcePersistence == null) {
-			resourcePersistence = (ResourcePersistence)PortalBeanLocatorUtil.locate(ResourcePersistence.class.getName() +
-					".impl");
-		}
-
-		if (resourceFinder == null) {
-			resourceFinder = (ResourceFinder)PortalBeanLocatorUtil.locate(ResourceFinder.class.getName() +
 					".impl");
 		}
 
@@ -600,51 +425,6 @@ public abstract class MBThreadServiceBaseImpl extends PrincipalBean
 			userFinder = (UserFinder)PortalBeanLocatorUtil.locate(UserFinder.class.getName() +
 					".impl");
 		}
-
-		if (ratingsStatsLocalService == null) {
-			ratingsStatsLocalService = (RatingsStatsLocalService)PortalBeanLocatorUtil.locate(RatingsStatsLocalService.class.getName() +
-					".impl");
-		}
-
-		if (ratingsStatsPersistence == null) {
-			ratingsStatsPersistence = (RatingsStatsPersistence)PortalBeanLocatorUtil.locate(RatingsStatsPersistence.class.getName() +
-					".impl");
-		}
-
-		if (socialActivityLocalService == null) {
-			socialActivityLocalService = (SocialActivityLocalService)PortalBeanLocatorUtil.locate(SocialActivityLocalService.class.getName() +
-					".impl");
-		}
-
-		if (socialActivityPersistence == null) {
-			socialActivityPersistence = (SocialActivityPersistence)PortalBeanLocatorUtil.locate(SocialActivityPersistence.class.getName() +
-					".impl");
-		}
-
-		if (socialActivityFinder == null) {
-			socialActivityFinder = (SocialActivityFinder)PortalBeanLocatorUtil.locate(SocialActivityFinder.class.getName() +
-					".impl");
-		}
-
-		if (tagsAssetLocalService == null) {
-			tagsAssetLocalService = (TagsAssetLocalService)PortalBeanLocatorUtil.locate(TagsAssetLocalService.class.getName() +
-					".impl");
-		}
-
-		if (tagsAssetService == null) {
-			tagsAssetService = (TagsAssetService)PortalBeanLocatorUtil.locate(TagsAssetService.class.getName() +
-					".impl");
-		}
-
-		if (tagsAssetPersistence == null) {
-			tagsAssetPersistence = (TagsAssetPersistence)PortalBeanLocatorUtil.locate(TagsAssetPersistence.class.getName() +
-					".impl");
-		}
-
-		if (tagsAssetFinder == null) {
-			tagsAssetFinder = (TagsAssetFinder)PortalBeanLocatorUtil.locate(TagsAssetFinder.class.getName() +
-					".impl");
-		}
 	}
 
 	protected MBBanLocalService mbBanLocalService;
@@ -660,33 +440,18 @@ public abstract class MBThreadServiceBaseImpl extends PrincipalBean
 	protected MBMessagePersistence mbMessagePersistence;
 	protected MBMessageFinder mbMessageFinder;
 	protected MBMessageFlagLocalService mbMessageFlagLocalService;
-	protected MBMessageFlagService mbMessageFlagService;
 	protected MBMessageFlagPersistence mbMessageFlagPersistence;
 	protected MBMessageFlagFinder mbMessageFlagFinder;
 	protected MBStatsUserLocalService mbStatsUserLocalService;
 	protected MBStatsUserPersistence mbStatsUserPersistence;
 	protected MBThreadLocalService mbThreadLocalService;
+	protected MBThreadService mbThreadService;
 	protected MBThreadPersistence mbThreadPersistence;
 	protected MBThreadFinder mbThreadFinder;
 	protected CounterLocalService counterLocalService;
 	protected CounterService counterService;
-	protected DLLocalService dlLocalService;
-	protected DLService dlService;
-	protected ResourceLocalService resourceLocalService;
-	protected ResourceService resourceService;
-	protected ResourcePersistence resourcePersistence;
-	protected ResourceFinder resourceFinder;
 	protected UserLocalService userLocalService;
 	protected UserService userService;
 	protected UserPersistence userPersistence;
 	protected UserFinder userFinder;
-	protected RatingsStatsLocalService ratingsStatsLocalService;
-	protected RatingsStatsPersistence ratingsStatsPersistence;
-	protected SocialActivityLocalService socialActivityLocalService;
-	protected SocialActivityPersistence socialActivityPersistence;
-	protected SocialActivityFinder socialActivityFinder;
-	protected TagsAssetLocalService tagsAssetLocalService;
-	protected TagsAssetService tagsAssetService;
-	protected TagsAssetPersistence tagsAssetPersistence;
-	protected TagsAssetFinder tagsAssetFinder;
 }

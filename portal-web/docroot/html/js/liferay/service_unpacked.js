@@ -2031,6 +2031,17 @@ Liferay.Service.MB.MBMessage = {
 	}
 };
 
+Liferay.Service.MB.MBMessageFlag = {
+	serviceClassName: Liferay.Service.MB.servicePackage + "MBMessageFlag" + Liferay.Service.classNameSuffix,
+
+	addAnswerFlag: function(params, callback) {
+		params.serviceClassName = this.serviceClassName;
+		params.serviceMethodName = "addAnswerFlag";
+
+		return Liferay.Service.ajax(params, callback);
+	}
+};
+
 Liferay.Service.MB.MBThread = {
 	serviceClassName: Liferay.Service.MB.servicePackage + "MBThread" + Liferay.Service.classNameSuffix,
 

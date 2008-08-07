@@ -46,6 +46,7 @@ import com.liferay.portlet.messageboards.MessageSubjectException;
 import com.liferay.portlet.messageboards.NoSuchMessageException;
 import com.liferay.portlet.messageboards.RequiredMessageException;
 import com.liferay.portlet.messageboards.model.MBMessage;
+import com.liferay.portlet.messageboards.service.MBMessageFlagLocalServiceUtil;
 import com.liferay.portlet.messageboards.service.MBMessageServiceUtil;
 import com.liferay.portlet.tags.TagsEntryException;
 
@@ -242,6 +243,14 @@ public class EditMessageAction extends PortletAction {
 					categoryId, subject, body, files, anonymous, priority,
 					tagsEntries, prefs, communityPermissions, guestPermissions,
 					themeDisplay);
+
+				boolean question = ParamUtil.getBoolean(
+					actionRequest, "question");
+
+				if (question) {
+					MBMessageFlagLocalServiceUtil.addQuestionFlag(
+						message.getMessageId());
+				}
 			}
 			else {
 

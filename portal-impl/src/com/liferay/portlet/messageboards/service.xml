@@ -189,7 +189,7 @@
 		<reference package-path="com.liferay.portlet.tags" entity="TagsAsset" />
 		<reference package-path="com.liferay.portlet.tags" entity="TagsEntry" />
 	</entity>
-	<entity name="MBMessageFlag" local-service="true" remote-service="false">
+	<entity name="MBMessageFlag" local-service="true" remote-service="true">
 
 		<!-- PK fields -->
 
@@ -212,9 +212,14 @@
 		<finder name="MessageId" return-type="Collection">
 			<finder-column name="messageId" />
 		</finder>
-		<finder name="U_M" return-type="MBMessageFlag">
+		<finder name="M_F" return-type="Collection">
+			<finder-column name="messageId" />
+			<finder-column name="flag" />
+		</finder>
+		<finder name="U_M_F" return-type="MBMessageFlag">
 			<finder-column name="userId" />
 			<finder-column name="messageId" />
+			<finder-column name="flag" />
 		</finder>
 
 		<!-- References -->

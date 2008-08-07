@@ -20,38 +20,44 @@
  * SOFTWARE.
  */
 
-package com.liferay.portlet.messageboards.model.impl;
+package com.liferay.portlet.messageboards.service;
 
-import com.liferay.portal.SystemException;
-import com.liferay.portal.util.PortalUtil;
-import com.liferay.portlet.messageboards.model.MBMessageFlag;
 
 /**
- * <a href="MBMessageFlagImpl.java.html"><b><i>View Source</i></b></a>
+ * <a href="MBMessageFlagServiceUtil.java.html"><b><i>View Source</i></b></a>
+ *
+ * <p>
+ * ServiceBuilder generated this class. Modifications in this class will be
+ * overwritten the next time is generated.
+ * </p>
+ *
+ * <p>
+ * This class provides static methods for the
+ * <code>com.liferay.portlet.messageboards.service.MBMessageFlagService</code>
+ * bean. The static methods of this class calls the same methods of the bean
+ * instance. It's convenient to be able to just write one line to call a method
+ * on a bean instead of writing a lookup call and a method call.
+ * </p>
  *
  * @author Brian Wing Shun Chan
  *
+ * @see com.liferay.portlet.messageboards.service.MBMessageFlagService
+ *
  */
-public class MBMessageFlagImpl
-	extends MBMessageFlagModelImpl implements MBMessageFlag {
-
-	public static final int ANSWER_FLAG = 3;
-
-	public static final int READ_FLAG = 1;
-
-	public static final int QUESTION_FLAG = 2;
-
-	public MBMessageFlagImpl() {
+public class MBMessageFlagServiceUtil {
+	public static void addAnswerFlag(long messageId)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException, java.rmi.RemoteException {
+		_service.addAnswerFlag(messageId);
 	}
 
-	public String getUserUuid() throws SystemException {
-		return PortalUtil.getUserValue(getUserId(), "uuid", _userUuid);
+	public static MBMessageFlagService getService() {
+		return _service;
 	}
 
-	public void setUserUuid(String userUuid) {
-		_userUuid = userUuid;
+	public void setService(MBMessageFlagService service) {
+		_service = service;
 	}
 
-	private String _userUuid;
-
+	private static MBMessageFlagService _service;
 }

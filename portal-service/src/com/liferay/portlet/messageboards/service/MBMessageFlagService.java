@@ -20,38 +20,35 @@
  * SOFTWARE.
  */
 
-package com.liferay.portlet.messageboards.model.impl;
+package com.liferay.portlet.messageboards.service;
 
-import com.liferay.portal.SystemException;
-import com.liferay.portal.util.PortalUtil;
-import com.liferay.portlet.messageboards.model.MBMessageFlag;
 
 /**
- * <a href="MBMessageFlagImpl.java.html"><b><i>View Source</i></b></a>
+ * <a href="MBMessageFlagService.java.html"><b><i>View Source</i></b></a>
+ *
+ * <p>
+ * ServiceBuilder generated this class. Modifications in this class will be
+ * overwritten the next time is generated.
+ * </p>
+ *
+ * <p>
+ * This interface defines the service. The default implementation is
+ * <code>com.liferay.portlet.messageboards.service.impl.MBMessageFlagServiceImpl</code>.
+ * Modify methods in that class and rerun ServiceBuilder to populate this class
+ * and all other generated classes.
+ * </p>
+ *
+ * <p>
+ * This is a remote service. Methods of this service are expected to have security checks based on the propagated JAAS credentials because this service can be accessed remotely.
+ * </p>
  *
  * @author Brian Wing Shun Chan
  *
+ * @see com.liferay.portlet.messageboards.service.MBMessageFlagServiceUtil
+ *
  */
-public class MBMessageFlagImpl
-	extends MBMessageFlagModelImpl implements MBMessageFlag {
-
-	public static final int ANSWER_FLAG = 3;
-
-	public static final int READ_FLAG = 1;
-
-	public static final int QUESTION_FLAG = 2;
-
-	public MBMessageFlagImpl() {
-	}
-
-	public String getUserUuid() throws SystemException {
-		return PortalUtil.getUserValue(getUserId(), "uuid", _userUuid);
-	}
-
-	public void setUserUuid(String userUuid) {
-		_userUuid = userUuid;
-	}
-
-	private String _userUuid;
-
+public interface MBMessageFlagService {
+	public void addAnswerFlag(long messageId)
+		throws java.rmi.RemoteException, com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException;
 }

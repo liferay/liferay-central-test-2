@@ -37,6 +37,8 @@ long parentMessageId = BeanParamUtil.getLong(message, request, "parentMessageId"
 
 String subject = BeanParamUtil.getString(message, request, "subject");
 
+MBThread thread = null;
+
 MBMessage curParentMessage = null;
 String parentAuthor = null;
 
@@ -277,6 +279,39 @@ if (message != null) {
 	</tr>
 </c:if>
 
+<c:if test="<%= parentMessageId <= 0 %>">
+
+	<%
+	boolean questionFlag = MBMessageFlagLocalServiceUtil.hasQuestionFlag(messageId);
+	boolean answerFlag = MBMessageFlagLocalServiceUtil.hasAnswerFlag(messageId);
+	%>
+
+	<c:if test="<%= (message == null) || ((message != null) && questionFlag || answerFlag) %>">
+		<tr>
+			<td colspan="2">
+				<br />
+			</td>
+		</tr>
+		<tr>
+			<td>
+				<liferay-ui:message key="mark-as-a-question" />
+			</td>
+			<td>
+				<c:choose>
+					<c:when test="<%= message == null %>">
+						<liferay-ui:input-checkbox param="question" />
+
+						<liferay-ui:icon-help message="message-boards-message-question-help" />
+					</c:when>
+					<c:otherwise>
+						<%= LanguageUtil.get(pageContext, answerFlag ? "resolved" : "not-resolved") %>
+					</c:otherwise>
+				</c:choose>
+			</td>
+		</tr>
+	</c:if>
+</c:if>
+
 <c:if test="<%= (message == null) && themeDisplay.isSignedIn() && allowAnonymousPosting %>">
 	<tr>
 		<td colspan="2">
@@ -289,6 +324,8 @@ if (message != null) {
 		</td>
 		<td>
 			<liferay-ui:input-checkbox param="anonymous" />
+
+			<liferay-ui:icon-help message="message-boards-message-anonymous-help" />
 		</td>
 	</tr>
 </c:if>
@@ -308,12 +345,10 @@ if (message != null) {
 			<%
 			double threadPriority = 0.0;
 
-			try {
-				MBThread thread = MBThreadLocalServiceUtil.getThread(threadId);
+			if (threadId > 0) {
+				thread = MBThreadLocalServiceUtil.getThread(threadId);
 
 				threadPriority = thread.getPriority();
-			}
-			catch (NoSuchThreadException nste) {
 			}
 
 			threadPriority = ParamUtil.getDouble(request, "priority", threadPriority);

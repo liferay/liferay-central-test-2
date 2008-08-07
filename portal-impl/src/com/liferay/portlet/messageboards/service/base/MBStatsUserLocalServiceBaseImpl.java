@@ -37,6 +37,7 @@ import com.liferay.portlet.messageboards.service.MBBanService;
 import com.liferay.portlet.messageboards.service.MBCategoryLocalService;
 import com.liferay.portlet.messageboards.service.MBCategoryService;
 import com.liferay.portlet.messageboards.service.MBMessageFlagLocalService;
+import com.liferay.portlet.messageboards.service.MBMessageFlagService;
 import com.liferay.portlet.messageboards.service.MBMessageLocalService;
 import com.liferay.portlet.messageboards.service.MBMessageService;
 import com.liferay.portlet.messageboards.service.MBStatsUserLocalService;
@@ -223,6 +224,15 @@ public abstract class MBStatsUserLocalServiceBaseImpl
 		this.mbMessageFlagLocalService = mbMessageFlagLocalService;
 	}
 
+	public MBMessageFlagService getMBMessageFlagService() {
+		return mbMessageFlagService;
+	}
+
+	public void setMBMessageFlagService(
+		MBMessageFlagService mbMessageFlagService) {
+		this.mbMessageFlagService = mbMessageFlagService;
+	}
+
 	public MBMessageFlagPersistence getMBMessageFlagPersistence() {
 		return mbMessageFlagPersistence;
 	}
@@ -364,6 +374,11 @@ public abstract class MBStatsUserLocalServiceBaseImpl
 					".impl");
 		}
 
+		if (mbMessageFlagService == null) {
+			mbMessageFlagService = (MBMessageFlagService)PortalBeanLocatorUtil.locate(MBMessageFlagService.class.getName() +
+					".impl");
+		}
+
 		if (mbMessageFlagPersistence == null) {
 			mbMessageFlagPersistence = (MBMessageFlagPersistence)PortalBeanLocatorUtil.locate(MBMessageFlagPersistence.class.getName() +
 					".impl");
@@ -423,6 +438,7 @@ public abstract class MBStatsUserLocalServiceBaseImpl
 	protected MBMessagePersistence mbMessagePersistence;
 	protected MBMessageFinder mbMessageFinder;
 	protected MBMessageFlagLocalService mbMessageFlagLocalService;
+	protected MBMessageFlagService mbMessageFlagService;
 	protected MBMessageFlagPersistence mbMessageFlagPersistence;
 	protected MBMessageFlagFinder mbMessageFlagFinder;
 	protected MBStatsUserPersistence mbStatsUserPersistence;

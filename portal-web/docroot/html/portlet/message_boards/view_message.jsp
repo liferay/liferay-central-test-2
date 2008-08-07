@@ -25,6 +25,8 @@
 <%@ include file="/html/portlet/message_boards/init.jsp" %>
 
 <%
+themeDisplay.setIncludeServiceJs(true);
+
 MBMessageDisplay messageDisplay = (MBMessageDisplay)request.getAttribute(WebKeys.MESSAGE_BOARDS_MESSAGE);
 
 MBMessage message = messageDisplay.getMessage();
@@ -64,6 +66,20 @@ else {
 %>
 
 <script type="text/javascript">
+	function <portlet:namespace />markAsAnAnswer(messageId) {
+		Liferay.Service.MB.MBMessageFlag.addAnswerFlag(
+			{
+				messageId: messageId
+			}
+		);
+
+		var answerDiv = jQuery('#<portlet:namespace />answerDiv').clone();
+
+		jQuery('#<portlet:namespace />message_' + messageId).find('div.tags:first').html(answerDiv.html());
+
+		jQuery('#<portlet:namespace />markAsAnAnswer_' + messageId).hide();
+	}
+
 	<c:if test="<%= thread.getRootMessageId() != message.getMessageId() %>">
 		jQuery(document).ready(
 			function() {
@@ -72,6 +88,10 @@ else {
 		);
 	</c:if>
 </script>
+
+<div id="<portlet:namespace />answerDiv" style="display: none;">
+	<liferay-ui:icon image="checked" message="answer" label="<%= true %>" />
+</div>
 
 <form>
 <input name="<portlet:namespace />breadcrumbsCategoryId" type="hidden" value="<%= category.getCategoryId() %>" />

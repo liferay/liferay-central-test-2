@@ -105,9 +105,32 @@ public class MBMessageFlagLocalServiceUtil {
 		_service.addReadFlags(userId, messages);
 	}
 
+	public static void addQuestionFlag(long messageId)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
+		_service.addQuestionFlag(messageId);
+	}
+
 	public static void deleteFlags(long userId)
 		throws com.liferay.portal.SystemException {
 		_service.deleteFlags(userId);
+	}
+
+	public static void deleteFlags(long messageId, int flag)
+		throws com.liferay.portal.SystemException {
+		_service.deleteFlags(messageId, flag);
+	}
+
+	public static boolean hasAnswerFlag(long messageId)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
+		return _service.hasAnswerFlag(messageId);
+	}
+
+	public static boolean hasQuestionFlag(long messageId)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
+		return _service.hasQuestionFlag(messageId);
 	}
 
 	public static boolean hasReadFlag(long userId, long messageId)

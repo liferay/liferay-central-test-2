@@ -121,6 +121,18 @@
 						/>
 					</div>
 
+					<c:choose>
+						<c:when test="<%= MBMessageFlagLocalServiceUtil.hasAnswerFlag(message.getMessageId()) %>">
+							<div class="question">
+								<liferay-ui:icon
+									image="checked"
+									message='<%= message.isRoot() ? "resolved" : "answer" %>'
+									label="<%= true %>"
+								/>
+							</div>
+						</c:when>
+					</c:choose>
+
 					<%= dateFormatDateTime.format(message.getModifiedDate()) %>
 
 					<%
@@ -151,6 +163,30 @@
 
 				<c:if test="<%= editable && (MBCategoryPermission.contains(permissionChecker, category, ActionKeys.ADD_MESSAGE) || MBCategoryPermission.contains(permissionChecker, category, ActionKeys.REPLY_TO_MESSAGE)) %>">
 					<ul class="edit-controls lfr-component">
+
+						<%
+						if (!message.isRoot()) {
+							MBMessage rootMessage = MBMessageLocalServiceUtil.getMBMessage(thread.getRootMessageId());
+
+							if (MBMessagePermission.contains(permissionChecker, rootMessage, ActionKeys.UPDATE) &&
+								!MBMessageFlagLocalServiceUtil.hasAnswerFlag(message.getMessageId()) &&
+								(MBMessageFlagLocalServiceUtil.hasQuestionFlag(rootMessage.getMessageId()) || MBMessageFlagLocalServiceUtil.hasAnswerFlag(rootMessage.getMessageId()))) {
+						%>
+
+								<li id="<portlet:namespace />markAsAnAnswer_<%= message.getMessageId() %>">
+									<liferay-ui:icon
+										image="checked"
+										message="mark-as-an-answer"
+										url='<%= "javascript: " + renderResponse.getNamespace() + "markAsAnAnswer('" + message.getMessageId() + "');" %>'
+										label="<%= true %>"
+									/>
+								</li>
+
+						<%
+							}
+						}
+						%>
+
 						<li>
 							<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="replyURL">
 								<portlet:param name="struts_action" value="/message_boards/edit_message" />
