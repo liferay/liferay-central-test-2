@@ -48,8 +48,8 @@ import com.sun.portal.container.service.policy.DistributionTypeUtil;
 import com.sun.portal.container.service.policy.PublicRenderParameterPolicy;
 
 /**
- * <a href="PublicRenderParameterPolicyImpl.java.html"><b><i>View Source</i>
- * </b></a>
+ * <a href="PublicRenderParameterPolicyImpl.java.html"><b><i>View Source</i></b>
+ * </a>
  *
  * @author Deepak Gothe
  *

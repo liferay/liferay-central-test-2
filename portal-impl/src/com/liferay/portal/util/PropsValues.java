@@ -843,9 +843,9 @@ public class PropsValues {
 	public static final String PORTLET_EVENT_DISTRIBUTION =
 		PropsUtil.get(PropsKeys.PORTLET_EVENT_DISTRIBUTION);
 
-	public static final int PORTLET_MAX_EVENT_GENERATION =
+	public static final int PORTLET_EVENT_MAX_GENERATION =
 		GetterUtil.getInteger(
-			PropsUtil.get(PropsKeys.PORTLET_MAX_EVENT_GENERATION));
+			PropsUtil.get(PropsKeys.PORTLET_EVENT_MAX_GENERATION));
 
 	public static final String PORTLET_PUBLIC_RENDER_PARAMETER_DISTRIBUTION =
 		PropsUtil.get(PropsKeys.PORTLET_PUBLIC_RENDER_PARAMETER_DISTRIBUTION);

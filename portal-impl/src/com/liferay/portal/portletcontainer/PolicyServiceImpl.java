@@ -88,21 +88,25 @@ public class PolicyServiceImpl extends ServiceAdapter implements PolicyService {
 
 	public void init(ServletContext context) {
 		_eventPolicy = new EventPolicyImpl();
-		_publicRenderParameterPolicy = new PublicRenderParameterPolicyImpl();
 		_containerEventPolicy = new ContainerEventPolicyImpl();
+		_publicRenderParameterPolicy = new PublicRenderParameterPolicyImpl();
 	}
 
 	public boolean renderPortletsInParallel(HttpServletRequest request) {
 		Boolean portletParallelRender = (Boolean)request.getAttribute(
 			WebKeys.PORTLET_PARALLEL_RENDER);
+
 		if (portletParallelRender != null) {
 			return portletParallelRender.booleanValue();
 		}
+
 		return false;
 	}
 
-	private static final String _DESCRIPTION = "Providing policy information " +
-		"of event and public render parameter that is in effect";
+	private static final String _DESCRIPTION =
+		"Provide policy information for events and public render parameters " +
+			"that are in effect";
+
 	private EventPolicy _eventPolicy;
 	private ContainerEventPolicy _containerEventPolicy;
 	private PublicRenderParameterPolicy _publicRenderParameterPolicy;

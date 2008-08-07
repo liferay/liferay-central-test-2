@@ -65,7 +65,7 @@ public class EventPolicyImpl implements EventPolicy {
 	}
 
 	public int getMaxGenerationOfEvents() {
-		return PropsValues.PORTLET_MAX_EVENT_GENERATION;
+		return PropsValues.PORTLET_EVENT_MAX_GENERATION;
 	}
 
 }
