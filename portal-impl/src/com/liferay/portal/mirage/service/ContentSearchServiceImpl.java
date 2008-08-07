@@ -43,6 +43,7 @@ package com.liferay.portal.mirage.service;
 
 import com.liferay.portal.mirage.aop.ContentSearchInvoker;
 import com.liferay.portal.mirage.model.MirageJournalContentSearch;
+import com.liferay.portal.mirage.util.MirageLoggerUtil;
 import com.liferay.portlet.journal.model.JournalContentSearch;
 
 import com.sun.portal.cms.mirage.exception.CMSException;
@@ -52,6 +53,9 @@ import com.sun.portal.cms.mirage.service.custom.BinaryContentService;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 
 /**
  * <a href="ContentSearchServiceImpl.java.html"><b><i>View Source</i></b></a>
@@ -64,20 +68,32 @@ public class ContentSearchServiceImpl implements BinaryContentService {
 	public void createBinaryContent(BinaryContent binaryContent)
 		throws CMSException {
 
+		MirageLoggerUtil.enter(_log, _CLASS_NAME, "createBinaryContent");
+
 		process(binaryContent);
+
+		MirageLoggerUtil.exit(_log, _CLASS_NAME, "createBinaryContent");
 	}
 
 	public void deleteBinaryContent(
 			BinaryContent binaryContent, OptionalCriteria criteria)
 		throws CMSException {
 
+		MirageLoggerUtil.enter(_log, _CLASS_NAME, "deleteBinaryContent");
+
 		process(binaryContent);
+
+		MirageLoggerUtil.exit(_log, _CLASS_NAME, "deleteBinaryContent");
 	}
 
 	public void deleteBinaryContents(OptionalCriteria criteria)
 		throws CMSException {
 
+		MirageLoggerUtil.enter(_log, _CLASS_NAME, "deleteBinaryContents");
+
 		process(criteria);
+
+		MirageLoggerUtil.exit(_log, _CLASS_NAME, "deleteBinaryContents");
 	}
 
 	public BinaryContent getBinaryContent(BinaryContent binaryContent) {
@@ -90,6 +106,8 @@ public class ContentSearchServiceImpl implements BinaryContentService {
 
 	public List<BinaryContent> getBinaryContents(OptionalCriteria criteria)
 		throws CMSException {
+
+		MirageLoggerUtil.enter(_log, _CLASS_NAME, "getBinaryContents");
 
 		process(criteria);
 
@@ -106,13 +124,19 @@ public class ContentSearchServiceImpl implements BinaryContentService {
 			binaryContents.add(new MirageJournalContentSearch(contentSearch));
 		}
 
+		MirageLoggerUtil.exit(_log, _CLASS_NAME, "getBinaryContents");
+
 		return binaryContents;
 	}
 
 	public void updateBinaryContent(BinaryContent binaryContent)
 		throws CMSException {
 
+		MirageLoggerUtil.enter(_log, _CLASS_NAME, "updateBinaryContent");
+
 		process(binaryContent);
+
+		MirageLoggerUtil.exit(_log, _CLASS_NAME, "updateBinaryContent");
 	}
 
 	protected void process(BinaryContent binaryContent) throws CMSException {
@@ -128,5 +152,11 @@ public class ContentSearchServiceImpl implements BinaryContentService {
 
 		contentSearchInvoker.invoke();
 	}
+
+	private static final String _CLASS_NAME =
+		ContentSearchServiceImpl.class.getName();
+
+	private static final Log _log =
+		LogFactory.getLog(ContentSearchServiceImpl.class);
 
 }

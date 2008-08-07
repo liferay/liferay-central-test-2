@@ -46,6 +46,7 @@ import com.liferay.portal.mirage.aop.SearchCriteriaInvoker;
 import com.liferay.portal.mirage.aop.TemplateInvoker;
 import com.liferay.portal.mirage.model.MirageJournalStructure;
 import com.liferay.portal.mirage.model.MirageJournalTemplate;
+import com.liferay.portal.mirage.util.MirageLoggerUtil;
 import com.liferay.portlet.journal.model.JournalStructure;
 import com.liferay.portlet.journal.model.JournalTemplate;
 
@@ -62,6 +63,9 @@ import com.sun.portal.cms.mirage.service.custom.ContentTypeService;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+
 /**
  * <a href="ContentTypeServiceImpl.java.html"><b><i>View Source</i></b></a>
  *
@@ -76,7 +80,11 @@ public class ContentTypeServiceImpl implements ContentTypeService {
 			Template template, ContentType contentType)
 		throws CMSException {
 
+		MirageLoggerUtil.enter(_log, _CLASS_NAME, "addTemplateToContentType");
+
 		process(template);
+
+		MirageLoggerUtil.exit(_log, _CLASS_NAME, "addTemplateToContentType");
 	}
 
 	public void assignDefaultTemplate(
@@ -97,6 +105,8 @@ public class ContentTypeServiceImpl implements ContentTypeService {
 			Category category, SearchCriteria searchCriteria)
 		throws CMSException {
 
+		MirageLoggerUtil.enter(_log, _CLASS_NAME, "contentTypeSearchCount");
+
 		SearchCriteriaInvoker searchCriteriaInvoker =
 			(SearchCriteriaInvoker)searchCriteria;
 
@@ -104,29 +114,50 @@ public class ContentTypeServiceImpl implements ContentTypeService {
 
 		Integer i = (Integer)searchCriteriaInvoker.getReturnValue();
 
+		MirageLoggerUtil.exit(_log, _CLASS_NAME, "contentTypeSearchCount");
+
 		return i.intValue();
 	}
 
 	public void createContentType(ContentType contentType) throws CMSException {
+		MirageLoggerUtil.enter(_log, _CLASS_NAME, "createContentType");
+
 		process(contentType);
+
+		MirageLoggerUtil.exit(_log, _CLASS_NAME, "createContentType");
 	}
 
 	public void deleteContentType(ContentType contentType) throws CMSException {
+		MirageLoggerUtil.enter(_log, _CLASS_NAME, "deleteContentType");
+
 		process(contentType);
+
+		MirageLoggerUtil.exit(_log, _CLASS_NAME, "deleteContentType");
 	}
 
 	public void deleteTemplateOfContentType(
 			ContentType contentType, Template template)
 		throws CMSException {
 
+		MirageLoggerUtil.enter(
+			_log, _CLASS_NAME, "deleteTemplateOfContentType");
+
 		process(template);
+
+		MirageLoggerUtil.exit(_log, _CLASS_NAME, "deleteTemplateOfContentType");
 	}
 
 	public void deleteTemplatesOfContentType(
 			ContentType contentType, Template[] templatesToBeDeleted)
 		throws CMSException {
 
+		MirageLoggerUtil.enter(
+			_log, _CLASS_NAME, "deleteTemplatesOfContentType");
+
 		process(templatesToBeDeleted[0]);
+
+		MirageLoggerUtil.exit(
+			_log, _CLASS_NAME, "deleteTemplatesOfContentType");
 	}
 
 	public List<Template> getAllVersionsOfTemplate(
@@ -146,12 +177,16 @@ public class ContentTypeServiceImpl implements ContentTypeService {
 	public ContentType getContentType(ContentType contentType)
 		throws CMSException {
 
+		MirageLoggerUtil.enter(_log, _CLASS_NAME, "getContentType");
+
 		process(contentType);
 
 		ContentTypeInvoker contentTypeInvoker = (ContentTypeInvoker)contentType;
 
 		JournalStructure structure =
 			(JournalStructure)contentTypeInvoker.getReturnValue();
+
+		MirageLoggerUtil.exit(_log, _CLASS_NAME, "getContentType");
 
 		return new MirageJournalStructure(structure);
 	}
@@ -181,6 +216,8 @@ public class ContentTypeServiceImpl implements ContentTypeService {
 	public Template getTemplate(Template template, OptionalCriteria criteria)
 		throws TemplateNotFoundException {
 
+		MirageLoggerUtil.enter(_log, _CLASS_NAME, "getTemplate");
+
 		try {
 			process(template);
 		}
@@ -193,6 +230,8 @@ public class ContentTypeServiceImpl implements ContentTypeService {
 
 		JournalTemplate journalTemplate =
 			(JournalTemplate)templateInvoker.getReturnValue();
+
+		MirageLoggerUtil.exit(_log, _CLASS_NAME, "getTemplate");
 
 		return new MirageJournalTemplate(journalTemplate);
 	}
@@ -232,6 +271,8 @@ public class ContentTypeServiceImpl implements ContentTypeService {
 	public List<ContentType> searchContentTypes(SearchCriteria searchCriteria)
 		throws CMSException {
 
+		MirageLoggerUtil.enter(_log, _CLASS_NAME, "searchContentTypes");
+
 		SearchCriteriaInvoker searchCriteriaInvoker =
 			(SearchCriteriaInvoker)searchCriteria;
 
@@ -247,6 +288,8 @@ public class ContentTypeServiceImpl implements ContentTypeService {
 			contentTypes.add(new MirageJournalStructure(structure));
 		}
 
+		MirageLoggerUtil.exit(_log, _CLASS_NAME, "searchContentTypes");
+
 		return contentTypes;
 	}
 
@@ -258,6 +301,8 @@ public class ContentTypeServiceImpl implements ContentTypeService {
 
 	public List<Template> searchTemplates(SearchCriteria searchCriteria)
 		throws CMSException {
+
+		MirageLoggerUtil.enter(_log, _CLASS_NAME, "searchTemplates");
 
 		SearchCriteriaInvoker searchCriteriaInvoker =
 			(SearchCriteriaInvoker)searchCriteria;
@@ -274,11 +319,15 @@ public class ContentTypeServiceImpl implements ContentTypeService {
 			mirageTemplates.add(new MirageJournalTemplate(template));
 		}
 
+		MirageLoggerUtil.exit(_log, _CLASS_NAME, "searchTemplates");
+
 		return mirageTemplates;
 	}
 
 	public int searchTemplatesCount(SearchCriteria searchCriteria)
 		throws CMSException {
+
+		MirageLoggerUtil.enter(_log, _CLASS_NAME, "searchTemplatesCount");
 
 		SearchCriteriaInvoker searchCriteriaInvoker =
 			(SearchCriteriaInvoker)searchCriteria;
@@ -286,6 +335,8 @@ public class ContentTypeServiceImpl implements ContentTypeService {
 		searchCriteriaInvoker.invoke();
 
 		Integer i = (Integer)searchCriteriaInvoker.getReturnValue();
+
+		MirageLoggerUtil.exit(_log, _CLASS_NAME, "searchTemplatesCount");
 
 		return i.intValue();
 	}
@@ -305,7 +356,11 @@ public class ContentTypeServiceImpl implements ContentTypeService {
 	}
 
 	public void updateContentType(ContentType contentType) throws CMSException {
+		MirageLoggerUtil.enter(_log, _CLASS_NAME, "updateContentType");
+
 		process(contentType);
+
+		MirageLoggerUtil.exit(_log, _CLASS_NAME, "updateContentType");
 	}
 
 	public void updateContentType(
@@ -318,7 +373,12 @@ public class ContentTypeServiceImpl implements ContentTypeService {
 			Template template, ContentType contentType)
 		throws CMSException {
 
+		MirageLoggerUtil.enter(
+			_log, _CLASS_NAME, "updateTemplateOfContentType");
+
 		process(template);
+
+		MirageLoggerUtil.exit(_log, _CLASS_NAME, "updateTemplateOfContentType");
 	}
 
 	public void updateTemplateOfContentType(
@@ -344,5 +404,11 @@ public class ContentTypeServiceImpl implements ContentTypeService {
 
 		templateInvoker.invoke();
 	}
+
+	private static final String _CLASS_NAME =
+		ContentTypeServiceImpl.class.getName();
+
+	private static final Log _log =
+		LogFactory.getLog(ContentTypeServiceImpl.class);
 
 }
