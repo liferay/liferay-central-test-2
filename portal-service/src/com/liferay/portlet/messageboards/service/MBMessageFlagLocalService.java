@@ -98,6 +98,9 @@ public interface MBMessageFlagLocalService {
 	public void deleteFlags(long messageId, int flag)
 		throws com.liferay.portal.SystemException;
 
+	public void deleteQuestionAndAnswerFlags(long threadId)
+		throws com.liferay.portal.SystemException;
+
 	public boolean hasAnswerFlag(long messageId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;

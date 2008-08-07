@@ -310,6 +310,10 @@ public class MBThreadLocalServiceImpl extends MBThreadLocalServiceBaseImpl {
 		long oldThreadId = message.getThreadId();
 		String oldAttachmentsDir = message.getAttachmentsDir();
 
+		// Message flags
+
+		mbMessageFlagLocalService.deleteQuestionAndAnswerFlags(oldThreadId);
+
 		// Create new thread
 
 		MBThread thread = addThread(message.getCategoryId(), message);

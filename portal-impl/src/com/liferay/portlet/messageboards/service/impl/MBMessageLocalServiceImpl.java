@@ -708,6 +708,13 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 
 		int count = mbMessagePersistence.countByThreadId(message.getThreadId());
 
+		// Message flags
+
+		if (message.isRoot()) {
+			mbMessageFlagLocalService.deleteQuestionAndAnswerFlags(
+				message.getThreadId());
+		}
+
 		if (count == 1) {
 
 			// Attachments

@@ -99,6 +99,23 @@ public class MBMessageFlagLocalServiceImpl
 		mbMessageFlagPersistence.removeByM_F(messageId, flag);
 	}
 
+	public void deleteQuestionAndAnswerFlags(long threadId)
+		throws SystemException {
+
+		List<MBMessage> messages = mbMessagePersistence.findByThreadId(
+			threadId);
+
+		for (MBMessage message : messages) {
+			if (message.isRoot()) {
+				mbMessageFlagPersistence.removeByM_F(
+					message.getMessageId(), MBMessageFlagImpl.QUESTION_FLAG);
+			}
+
+			mbMessageFlagPersistence.removeByM_F(
+				message.getMessageId(), MBMessageFlagImpl.ANSWER_FLAG);
+		}
+	}
+
 	public boolean hasAnswerFlag(long messageId)
 		throws PortalException, SystemException {
 
