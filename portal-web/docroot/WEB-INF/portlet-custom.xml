@@ -1968,7 +1968,7 @@
 	<portlet>
 		<portlet-name>123</portlet-name>
 		<display-name>WSRP Consumer Admin</display-name>
-		<portlet-class>com.sun.portal.wsrp.consumer.portlets.WSRPConsumerAdminPortlet</portlet-class>
+		<portlet-class>com.liferay.portlet.wsrpconsumeradmin.WSRPConsumerAdminPortlet</portlet-class>
 		<init-param>
 			<name>jsp-path</name>
 			<value>/html/portlet/wsrp_consumer_admin</value>
@@ -1976,8 +1976,6 @@
 		<expiration-cache>0</expiration-cache>
 		<supports>
 			<mime-type>text/html</mime-type>
-			<portlet-mode>edit</portlet-mode>
-			<portlet-mode>help</portlet-mode>
 		</supports>
 		<portlet-info>
 			<title>WSRP Consumer Admin</title>

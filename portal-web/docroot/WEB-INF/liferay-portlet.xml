@@ -1054,7 +1054,6 @@
 	</portlet>
 	<portlet>
 		<portlet-name>123</portlet-name>
-		<header-portlet-css>/html/portlet/wsrp_consumer_admin/css.jsp</header-portlet-css>
 	</portlet>
 	<role-mapper>
 		<role-name>administrator</role-name>
