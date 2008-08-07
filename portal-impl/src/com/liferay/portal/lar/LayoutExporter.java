@@ -482,10 +482,12 @@ public class LayoutExporter {
 		}
 		else {
 			cssPath = new File(servletContext.getRealPath(theme.getCssPath()));
-			imagesPath = new File(servletContext.getRealPath(theme.getImagesPath()));
+			imagesPath = new File(
+				servletContext.getRealPath(theme.getImagesPath()));
 			javaScriptPath = new File(
 				servletContext.getRealPath(theme.getJavaScriptPath()));
-			templatesPath = new File(servletContext.getRealPath(theme.getTemplatesPath()));
+			templatesPath = new File(
+				servletContext.getRealPath(theme.getTemplatesPath()));
 		}
 
 		exportThemeFiles("css", cssPath, zipWriter);

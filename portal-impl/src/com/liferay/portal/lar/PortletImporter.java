@@ -440,7 +440,8 @@ public class PortletImporter {
 					throw new SystemException(de);
 				}
 
-				long ownerId = GetterUtil.getLong(el.attributeValue("owner-id"));
+				long ownerId = GetterUtil.getLong(
+					el.attributeValue("owner-id"));
 				int ownerType = GetterUtil.getInteger(
 					el.attributeValue("owner-type"));
 
@@ -599,7 +600,8 @@ public class PortletImporter {
 					}
 				}
 
-				context.addRatingsEntries(className, new Long(classPK), ratings);
+				context.addRatingsEntries(
+					className, new Long(classPK), ratings);
 			}
 		}
 		catch (Exception e) {

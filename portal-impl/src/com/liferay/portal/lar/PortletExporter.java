@@ -656,7 +656,8 @@ public class PortletExporter {
 			String path = getPortletPreferencesPath(
 				context, portletId, ownerId, ownerType, plid);
 
-			parentEl.addElement("portlet-preference").addAttribute("path", path);
+			parentEl.addElement(
+				"portlet-preference").addAttribute("path", path);
 
 			if (context.isPathNotProcessed(path)) {
 				context.addZipEntry(
