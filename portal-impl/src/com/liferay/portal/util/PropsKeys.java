@@ -855,6 +855,12 @@ public class PropsKeys {
 
 	public static final String PORTLET_CSS_ENABLED = "portlet.css.enabled";
 
+	public static final String PORTLET_EVENT_DISTRIBUTION = "portlet.event.distribution";
+
+	public static final String PORTLET_MAX_EVENT_GENERATION = "portlet.max.event.generation";
+
+	public static final String PORTLET_PUBLIC_RENDER_PARAMETER_DISTRIBUTION = "portlet.public.render.parameter.distribution";
+
 	public static final String PORTLET_URL_ANCHOR_ENABLE = "portlet.url.anchor.enable";
 
 	public static final String PORTLET_URL_APPEND_PARAMETERS = "portlet.url.append.parameters";

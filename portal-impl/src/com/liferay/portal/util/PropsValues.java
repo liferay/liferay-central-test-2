@@ -840,6 +840,16 @@ public class PropsValues {
 	public static final boolean PORTLET_CSS_ENABLED = GetterUtil.getBoolean(
 		PropsUtil.get(PropsKeys.PORTLET_CSS_ENABLED));
 
+	public static final String PORTLET_EVENT_DISTRIBUTION =
+		PropsUtil.get(PropsKeys.PORTLET_EVENT_DISTRIBUTION);
+
+	public static final int PORTLET_MAX_EVENT_GENERATION =
+		GetterUtil.getInteger(
+			PropsUtil.get(PropsKeys.PORTLET_MAX_EVENT_GENERATION));
+
+	public static final String PORTLET_PUBLIC_RENDER_PARAMETER_DISTRIBUTION =
+		PropsUtil.get(PropsKeys.PORTLET_PUBLIC_RENDER_PARAMETER_DISTRIBUTION);
+
 	public static final boolean PORTLET_URL_ANCHOR_ENABLE =
 		GetterUtil.getBoolean(
 			PropsUtil.get(PropsKeys.PORTLET_URL_ANCHOR_ENABLE));

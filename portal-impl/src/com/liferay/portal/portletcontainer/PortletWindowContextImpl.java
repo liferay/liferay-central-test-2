@@ -52,6 +52,7 @@ import com.liferay.portal.model.LayoutConstants;
 import com.liferay.portal.model.LayoutTypePortlet;
 import com.liferay.portal.model.Portlet;
 import com.liferay.portal.model.PortletPreferencesIds;
+import com.liferay.portal.service.PortletLocalServiceUtil;
 import com.liferay.portal.service.PortletPreferencesLocalServiceUtil;
 import com.liferay.portal.util.WebKeys;
 import com.liferay.portlet.PortletPreferencesFactoryUtil;
@@ -434,7 +435,19 @@ public class PortletWindowContextImpl implements PortletWindowContext {
 	protected List<Portlet> getAllPortletWindows(PortletType portletType)
 		throws PortletWindowContextException {
 
-		return getVisiblePortletWindows(portletType);
+		List<Portlet> portlets = null;
+
+		List<Portlet> allPortlets = PortletLocalServiceUtil.getPortlets();
+		if (allPortlets != null) {
+			portlets = new ArrayList<Portlet>();
+			for(Portlet portlet : allPortlets) {
+				if (portlet.getPortletApp().isWARFile() || portlet.isRemote()) {
+					portlets.add(portlet);
+				}
+			}
+		}
+
+		return portlets;
 	}
 
 	protected List<Portlet> getAvailablePortletWindows(PortletType portletType)
