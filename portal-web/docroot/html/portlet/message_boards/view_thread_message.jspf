@@ -168,7 +168,7 @@
 
 						<%
 						if (!message.isRoot()) {
-							MBMessage rootMessage = MBMessageLocalServiceUtil.getMBMessage(thread.getRootMessageId());
+							MBMessage rootMessage = MBMessageLocalServiceUtil.getMessage(thread.getRootMessageId());
 
 							if (MBMessagePermission.contains(permissionChecker, rootMessage, ActionKeys.UPDATE) &&
 								!MBMessageFlagLocalServiceUtil.hasAnswerFlag(message.getMessageId()) &&
