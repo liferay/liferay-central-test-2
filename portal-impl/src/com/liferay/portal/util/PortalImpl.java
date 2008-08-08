@@ -249,6 +249,14 @@ public class PortalImpl implements Portal {
 			_portalLibDir = _portalLibDir.substring(5, _portalLibDir.length());
 		}
 
+		String pLibDir = System.getProperty("liferay.portal.lib.dir");
+		if ( pLibDir != null ) {
+			if ( !pLibDir.endsWith("/")) {
+				pLibDir += "/";
+			}
+			_portalLibDir = pLibDir;
+		}
+		
 		if (_log.isInfoEnabled()) {
 			_log.info("Portal lib directory " + _portalLibDir);
 		}
