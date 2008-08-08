@@ -36,7 +36,7 @@ public class ReleaseInfo {
 
 	static String name = "Liferay Portal";
 
-	static String version = "5.1.0";
+	static String version = "5.1.1";
 
 	static String codeName = "Calvin";
 
