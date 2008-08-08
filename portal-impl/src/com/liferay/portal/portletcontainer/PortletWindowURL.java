@@ -41,6 +41,7 @@
 
 package com.liferay.portal.portletcontainer;
 
+import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.Portlet;
 import com.liferay.portlet.PortletURLImpl;
 
@@ -138,6 +139,9 @@ public class PortletWindowURL implements ChannelURL, Serializable {
 	}
 
 	public void setParameter(String name, String value) {
+		if(value == null) {
+			value = StringPool.NULL;
+		}
 		_portletURLImpl.setParameter(name, value);
 	}
 
