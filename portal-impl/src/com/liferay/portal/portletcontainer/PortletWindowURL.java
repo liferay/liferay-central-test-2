@@ -139,9 +139,10 @@ public class PortletWindowURL implements ChannelURL, Serializable {
 	}
 
 	public void setParameter(String name, String value) {
-		if(value == null) {
+		if (value == null) {
 			value = StringPool.NULL;
 		}
+
 		_portletURLImpl.setParameter(name, value);
 	}
 
