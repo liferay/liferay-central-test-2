@@ -282,34 +282,33 @@ if (message != null) {
 <c:if test="<%= parentMessageId <= 0 %>">
 
 	<%
-	boolean questionFlag = MBMessageFlagLocalServiceUtil.hasQuestionFlag(messageId);
-	boolean answerFlag = MBMessageFlagLocalServiceUtil.hasAnswerFlag(messageId);
+	boolean question = false;
+
+	if (message != null) {
+		boolean questionFlag = MBMessageFlagLocalServiceUtil.hasQuestionFlag(messageId);
+		boolean answerFlag = MBMessageFlagLocalServiceUtil.hasAnswerFlag(messageId);
+
+		if (questionFlag || answerFlag) {
+			question = true;
+		}
+	}
 	%>
 
-	<c:if test="<%= (message == null) || ((message != null) && questionFlag || answerFlag) %>">
-		<tr>
-			<td colspan="2">
-				<br />
-			</td>
-		</tr>
-		<tr>
-			<td>
-				<liferay-ui:message key="mark-as-a-question" />
-			</td>
-			<td>
-				<c:choose>
-					<c:when test="<%= message == null %>">
-						<liferay-ui:input-checkbox param="question" />
+	<tr>
+		<td colspan="2">
+			<br />
+		</td>
+	</tr>
+	<tr>
+		<td>
+			<liferay-ui:message key="mark-as-a-question" />
+		</td>
+		<td>
+			<liferay-ui:input-checkbox param="question" defaultValue="<%= question %>" />
 
-						<liferay-ui:icon-help message="message-boards-message-question-help" />
-					</c:when>
-					<c:otherwise>
-						<%= LanguageUtil.get(pageContext, answerFlag ? "resolved" : "not-resolved") %>
-					</c:otherwise>
-				</c:choose>
-			</td>
-		</tr>
-	</c:if>
+			<liferay-ui:icon-help message="message-boards-message-question-help" />
+		</td>
+	</tr>
 </c:if>
 
 <c:if test="<%= (message == null) && themeDisplay.isSignedIn() && allowAnonymousPosting %>">

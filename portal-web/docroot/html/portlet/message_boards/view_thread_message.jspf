@@ -122,11 +122,11 @@
 					</div>
 
 					<c:choose>
-						<c:when test="<%= MBMessageFlagLocalServiceUtil.hasAnswerFlag(message.getMessageId()) %>">
+						<c:when test="<%= !message.isRoot() && MBMessageFlagLocalServiceUtil.hasAnswerFlag(message.getMessageId()) %>">
 							<div class="question">
 								<liferay-ui:icon
 									image="checked"
-									message='<%= message.isRoot() ? "resolved" : "answer" %>'
+									message="answer"
 									label="<%= true %>"
 								/>
 							</div>

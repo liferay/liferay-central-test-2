@@ -59,17 +59,23 @@ public class MBMessageFlagServiceImpl extends MBMessageFlagServiceBaseImpl {
 			getPermissionChecker(), rootMessage.getMessageId(),
 			ActionKeys.UPDATE);
 
-		MBMessageFlag messageFlag = mbMessageFlagPersistence.fetchByU_M_F(
-			rootMessage.getUserId(), rootMessage.getMessageId(),
-			MBMessageFlagImpl.QUESTION_FLAG);
+		MBMessageFlag questionMessageFlag =
+			mbMessageFlagPersistence.fetchByU_M_F(
+				rootMessage.getUserId(), rootMessage.getMessageId(),
+				MBMessageFlagImpl.QUESTION_FLAG);
 
-		if (messageFlag != null) {
-			messageFlag.setFlag(MBMessageFlagImpl.ANSWER_FLAG);
+		MBMessageFlag answerMessageFlag =
+			mbMessageFlagPersistence.fetchByU_M_F(
+				rootMessage.getUserId(), rootMessage.getMessageId(),
+				MBMessageFlagImpl.ANSWER_FLAG);
 
-			mbMessageFlagPersistence.update(messageFlag, false);
+		if ((questionMessageFlag != null) && (answerMessageFlag == null)) {
+			questionMessageFlag.setFlag(MBMessageFlagImpl.ANSWER_FLAG);
+
+			mbMessageFlagPersistence.update(questionMessageFlag, false);
 		}
 
-		messageFlag = mbMessageFlagPersistence.fetchByU_M_F(
+		MBMessageFlag messageFlag = mbMessageFlagPersistence.fetchByU_M_F(
 			message.getUserId(), message.getMessageId(),
 			MBMessageFlagImpl.ANSWER_FLAG);
 

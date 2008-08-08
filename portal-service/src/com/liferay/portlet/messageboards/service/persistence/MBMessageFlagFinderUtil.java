@@ -29,9 +29,14 @@ package com.liferay.portlet.messageboards.service.persistence;
  *
  */
 public class MBMessageFlagFinderUtil {
-	public static int countByU_T(long threadId, long userId)
+	public static int countByU_T(long userId, long threadId)
 		throws com.liferay.portal.SystemException {
-		return getFinder().countByU_T(threadId, userId);
+		return getFinder().countByU_T(userId, threadId);
+	}
+
+	public static int countByU_T_F(long userId, long threadId, int flag)
+		throws com.liferay.portal.SystemException {
+		return getFinder().countByU_T_F(userId, threadId, flag);
 	}
 
 	public static MBMessageFlagFinder getFinder() {

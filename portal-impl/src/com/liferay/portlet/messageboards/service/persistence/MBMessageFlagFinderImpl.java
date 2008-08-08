@@ -41,16 +41,19 @@ import java.util.Iterator;
 public class MBMessageFlagFinderImpl
 	extends BasePersistenceImpl implements MBMessageFlagFinder {
 
-	public static String COUNT_BY_T_U =
+	public static String COUNT_BY_U_T =
 		MBMessageFlagFinder.class.getName() + ".countByU_T";
 
-	public int countByU_T(long threadId, long userId) throws SystemException {
+	public static String COUNT_BY_U_T_F =
+		MBMessageFlagFinder.class.getName() + ".countByU_T_F";
+
+	public int countByU_T(long userId, long threadId) throws SystemException {
 		Session session = null;
 
 		try {
 			session = openSession();
 
-			String sql = CustomSQLUtil.get(COUNT_BY_T_U);
+			String sql = CustomSQLUtil.get(COUNT_BY_U_T);
 
 			SQLQuery q = session.createSQLQuery(sql);
 
@@ -58,8 +61,48 @@ public class MBMessageFlagFinderImpl
 
 			QueryPos qPos = QueryPos.getInstance(q);
 
-			qPos.add(threadId);
 			qPos.add(userId);
+			qPos.add(threadId);
+
+			Iterator<Long> itr = q.list().iterator();
+
+			if (itr.hasNext()) {
+				Long count = itr.next();
+
+				if (count != null) {
+					return count.intValue();
+				}
+			}
+
+			return 0;
+		}
+		catch (Exception e) {
+			throw new SystemException(e);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
+
+	public int countByU_T_F(long userId, long threadId, int flag)
+		throws SystemException {
+
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			String sql = CustomSQLUtil.get(COUNT_BY_U_T_F);
+
+			SQLQuery q = session.createSQLQuery(sql);
+
+			q.addScalar(COUNT_COLUMN_NAME, Type.LONG);
+
+			QueryPos qPos = QueryPos.getInstance(q);
+
+			qPos.add(userId);
+			qPos.add(threadId);
+			qPos.add(flag);
 
 			Iterator<Long> itr = q.list().iterator();
 

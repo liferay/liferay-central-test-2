@@ -37,6 +37,7 @@ import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portlet.messageboards.model.MBCategory;
 import com.liferay.portlet.messageboards.model.MBMessage;
 import com.liferay.portlet.messageboards.model.MBThread;
+import com.liferay.portlet.messageboards.model.impl.MBMessageFlagImpl;
 import com.liferay.portlet.messageboards.model.impl.MBThreadImpl;
 import com.liferay.portlet.messageboards.service.base.MBThreadLocalServiceBaseImpl;
 import com.liferay.portlet.messageboards.util.Indexer;
@@ -243,7 +244,8 @@ public class MBThreadLocalServiceImpl extends MBThreadLocalServiceBaseImpl {
 		}
 
 		int total = mbMessagePersistence.countByThreadId(threadId);
-		int read = mbMessageFlagFinder.countByU_T(userId, threadId);
+		int read = mbMessageFlagFinder.countByU_T_F(
+			userId, threadId, MBMessageFlagImpl.READ_FLAG);
 
 		if (total != read) {
 			return false;

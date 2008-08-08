@@ -74,20 +74,31 @@ public class MBMessageFlagLocalServiceImpl
 
 		MBMessage message = mbMessagePersistence.findByPrimaryKey(messageId);
 
-		MBMessageFlag messageFlag = mbMessageFlagPersistence.fetchByU_M_F(
-			message.getUserId(), message.getMessageId(),
-			MBMessageFlagImpl.QUESTION_FLAG);
+		if (!message.isRoot()) {
+			return;
+		}
 
-		if (messageFlag == null) {
+		MBMessageFlag questionMessageFlag =
+			mbMessageFlagPersistence.fetchByU_M_F(
+				message.getUserId(), message.getMessageId(),
+				MBMessageFlagImpl.QUESTION_FLAG);
+
+		MBMessageFlag answerMessageFlag =
+			mbMessageFlagPersistence.fetchByU_M_F(
+				message.getUserId(), message.getMessageId(),
+				MBMessageFlagImpl.ANSWER_FLAG);
+
+		if ((questionMessageFlag == null) && (answerMessageFlag == null)) {
 			long messageFlagId = counterLocalService.increment();
 
-			messageFlag = mbMessageFlagPersistence.create(messageFlagId);
+			questionMessageFlag = mbMessageFlagPersistence.create(
+				messageFlagId);
 
-			messageFlag.setUserId(message.getUserId());
-			messageFlag.setMessageId(message.getMessageId());
-			messageFlag.setFlag(MBMessageFlagImpl.QUESTION_FLAG);
+			questionMessageFlag.setUserId(message.getUserId());
+			questionMessageFlag.setMessageId(message.getMessageId());
+			questionMessageFlag.setFlag(MBMessageFlagImpl.QUESTION_FLAG);
 
-			mbMessageFlagPersistence.update(messageFlag, false);
+			mbMessageFlagPersistence.update(questionMessageFlag, false);
 		}
 	}
 

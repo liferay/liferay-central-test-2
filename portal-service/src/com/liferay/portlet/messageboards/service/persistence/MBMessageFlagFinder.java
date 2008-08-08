@@ -29,6 +29,9 @@ package com.liferay.portlet.messageboards.service.persistence;
  *
  */
 public interface MBMessageFlagFinder {
-	public int countByU_T(long threadId, long userId)
+	public int countByU_T(long userId, long threadId)
+		throws com.liferay.portal.SystemException;
+
+	public int countByU_T_F(long userId, long threadId, int flag)
 		throws com.liferay.portal.SystemException;
 }

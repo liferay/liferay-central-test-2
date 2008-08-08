@@ -162,6 +162,21 @@
 				(MBMessage.threadId = ?)
 		]]>
 	</sql>
+	<sql id="com.liferay.portlet.messageboards.service.persistence.MBMessageFlagFinder.countByU_T_F">
+		<![CDATA[
+			SELECT
+				COUNT(*) AS COUNT_VALUE
+			FROM
+				MBMessageFlag
+			INNER JOIN
+				MBMessage ON
+					(MBMessage.messageId = MBMessageFlag.messageId)
+			WHERE
+				(MBMessageFlag.userId = ?) AND
+				(MBMessage.threadId = ?) AND
+				(MBMessageFlag.flag = ?)
+		]]>
+	</sql>
 	<sql id="com.liferay.portlet.messageboards.service.persistence.MBThreadFinder.countByCategoryIds">
 		<![CDATA[
 			SELECT

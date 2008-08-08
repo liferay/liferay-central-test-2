@@ -217,6 +217,7 @@ public class EditMessageAction extends PortletAction {
 			}
 		}
 
+		boolean question = ParamUtil.getBoolean(actionRequest, "question");
 		boolean anonymous = ParamUtil.getBoolean(actionRequest, "anonymous");
 		double priority = ParamUtil.getDouble(actionRequest, "priority");
 
@@ -243,9 +244,6 @@ public class EditMessageAction extends PortletAction {
 					categoryId, subject, body, files, anonymous, priority,
 					tagsEntries, prefs, communityPermissions, guestPermissions,
 					themeDisplay);
-
-				boolean question = ParamUtil.getBoolean(
-					actionRequest, "question");
 
 				if (question) {
 					MBMessageFlagLocalServiceUtil.addQuestionFlag(
@@ -279,6 +277,16 @@ public class EditMessageAction extends PortletAction {
 			message = MBMessageServiceUtil.updateMessage(
 				messageId, subject, body, files, existingFiles, priority,
 				tagsEntries, prefs, themeDisplay);
+
+			if (message.isRoot()) {
+				if (question) {
+					MBMessageFlagLocalServiceUtil.addQuestionFlag(messageId);
+				}
+				else {
+					MBMessageFlagLocalServiceUtil.deleteQuestionAndAnswerFlags(
+						message.getThreadId());
+				}
+			}
 		}
 
 		PortletURL portletURL =
