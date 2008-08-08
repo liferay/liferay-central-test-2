@@ -142,6 +142,7 @@ allow-strangers-to-create-accounts=Yabancılara kullanıcı ekleme hakkı?
 allow-users-to-add-x-to-any-website=Allow users to add <b>{0}</b> to any website.
 allow-users-to-add-x-to-facebook=Allow users to add <b>{0}</b> to Facebook.
 allow-users-to-automatically-login=Kullanıcıların otomatik bağlanması?
+allow-users-to-share-x-with-friends=Allow users to share <b>{0}</b> with friends.
 already-registered=Kayıt Yapılmış
 an-unexpected-error-occurred-while-connecting-to-google=Google'e bağlanırken beklenmeyen bir hata oluştu.
 an-unexpected-error-occurred-while-finding-directions-between-the-following-addresses=Bu adreslerin tarifini araştırırken beklenmeyen hata oluştu:

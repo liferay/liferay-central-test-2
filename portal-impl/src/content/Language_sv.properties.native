@@ -500,6 +500,7 @@ allow-users-to-add-x-to-any-website=Tillåt användare att lägga till <b>{0}</b
 allow-users-to-add-x-to-facebook=Tillåt användare att lägga till <b>{0}</b> till Facebook.
 allow-users-to-automatically-login=Tillåt användarna automatisk inloggning?
 allow-users-to-request-forgotten-passwords=Tillåt användarna att begära glömda lösenord?
+allow-users-to-share-x-with-friends=Allow users to share <b>{0}</b> with friends.
 alpha=Alfa
 already-registered=Befintlig användare
 alternative-shipping-calculation=Alternativ leverans beräkning

@@ -274,6 +274,7 @@ allow-strangers-to-create-accounts=Позволить посторонним с�
 allow-users-to-add-x-to-any-website=Allow users to add <b>{0}</b> to any website.
 allow-users-to-add-x-to-facebook=Allow users to add <b>{0}</b> to Facebook.
 allow-users-to-automatically-login=Позволить пользователям входить автоматически?
+allow-users-to-share-x-with-friends=Allow users to share <b>{0}</b> with friends.
 alpha=Альфа
 already-registered=Уже зарегистрирован
 alternative-shipping-calculation=Калькуляция альтернативной пересылки

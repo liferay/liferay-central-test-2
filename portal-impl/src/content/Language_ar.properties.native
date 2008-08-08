@@ -381,6 +381,7 @@ allow-users-to-add-x-to-any-website=Allow users to add <b>{0}</b> to any website
 allow-users-to-add-x-to-facebook=Allow users to add <b>{0}</b> to Facebook.
 allow-users-to-automatically-login=إسمح للمستخدمين بالدخول تلقائيا؟
 allow-users-to-request-forgotten-passwords=إسمح للمستخدمين بطلب كلمات السر المنسية؟
+allow-users-to-share-x-with-friends=Allow users to share <b>{0}</b> with friends.
 alpha=ألفا
 already-registered=مسجل مسبقا
 alternative-shipping-calculation=حسبة طريقة الإرسال الأخرى

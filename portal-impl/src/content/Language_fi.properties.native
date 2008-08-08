@@ -499,6 +499,7 @@ allow-users-to-add-x-to-any-website=Salli käyttäjien lisätä <b>{0}</b> mihin
 allow-users-to-add-x-to-facebook=Salli käyttäjien lisätä <b>{0}</b> Facebookiin.
 allow-users-to-automatically-login=Salli käyttäjien kirjautua automaattisesti?
 allow-users-to-request-forgotten-passwords=Salli käyttäjien pyytää unohtunut salasana?
+allow-users-to-share-x-with-friends=Allow users to share <b>{0}</b> with friends.
 alpha=Alpha
 already-registered=Rekisteröityneet
 alternative-shipping-calculation=Vaihtoehtoinen toimituslaskelma
