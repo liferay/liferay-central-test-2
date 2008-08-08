@@ -1410,12 +1410,6 @@
 			<mime-type>text/html</mime-type>
 		</supports>
 		<resource-bundle>com.liferay.portlet.StrutsResourceBundle</resource-bundle>
-		<security-role-ref>
-			<role-name>power-user</role-name>
-		</security-role-ref>
-		<security-role-ref>
-			<role-name>user</role-name>
-		</security-role-ref>
 	</portlet>
 	<portlet>
 		<portlet-name>93</portlet-name>
@@ -1985,6 +1979,16 @@
 		<security-role-ref>
 			<role-name>administrator</role-name>
 		</security-role-ref>
+	</portlet>
+	<portlet>
+		<portlet-name>124</portlet-name>
+		<display-name>Social</display-name>
+		<portlet-class>com.liferay.portlet.StrutsPortlet</portlet-class>
+		<expiration-cache>0</expiration-cache>
+		<supports>
+			<mime-type>text/html</mime-type>
+		</supports>
+		<resource-bundle>com.liferay.portlet.StrutsResourceBundle</resource-bundle>
 	</portlet>
 	<public-render-parameter>
 		<identifier>tag</identifier>

@@ -428,6 +428,21 @@
 		<struts-path>requests</struts-path>
 		<include>true</include>
 	</portlet>
+	<portlet>
+		<portlet-name>122</portlet-name>
+		<struts-path>tags_navigation</struts-path>
+		<include>true</include>
+	</portlet>
+	<portlet>
+		<portlet-name>123</portlet-name>
+		<struts-path>wsrp_consumer_admin</struts-path>
+		<include>true</include>
+	</portlet>
+	<portlet>
+		<portlet-name>124</portlet-name>
+		<struts-path>social</struts-path>
+		<include>true</include>
+	</portlet>
 	-->
 
 	<role-mapper>

@@ -748,11 +748,6 @@
 		<portlet-name>90</portlet-name>
 		<icon>/html/portlet/portal/icon.png</icon>
 		<struts-path>portal</struts-path>
-		<use-default-template>false</use-default-template>
-		<restore-current-view>false</restore-current-view>
-		<private-request-attributes>false</private-request-attributes>
-		<private-session-attributes>false</private-session-attributes>
-		<render-weight>1</render-weight>
 		<system>true</system>
 	</portlet>
 	<portlet>
@@ -1054,6 +1049,15 @@
 	</portlet>
 	<portlet>
 		<portlet-name>123</portlet-name>
+		<struts-path>wsrp_consumer_admin</struts-path>
+	</portlet>
+	<portlet>
+		<portlet-name>124</portlet-name>
+		<icon>/html/portlet/social/icon.png</icon>
+		<struts-path>social</struts-path>
+		<social-activity-interpreter-class>com.liferay.portlet.social.util.PortalActivityInterpreter</social-activity-interpreter-class>
+		<social-request-interpreter-class>com.liferay.portlet.social.util.PortalRequestInterpreter</social-request-interpreter-class>
+		<system>true</system>
 	</portlet>
 	<role-mapper>
 		<role-name>administrator</role-name>
