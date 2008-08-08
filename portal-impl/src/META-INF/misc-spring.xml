@@ -2,6 +2,7 @@
 <!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN" "http://www.springframework.org/dtd/spring-beans.dtd">
 
 <beans>
+	<bean id="logInterceptor" class="com.liferay.portal.spring.aop.LogInterceptor" lazy-init="true" />
 	<bean id="velocityServiceInterceptor" class="com.liferay.portal.spring.aop.ServiceInterceptor" lazy-init="true">
 		<property name="exceptionSafe">
 			<value>true</value>
