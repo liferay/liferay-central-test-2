@@ -40,6 +40,7 @@ public class JournalArticleLocalServiceInterceptor extends MirageInterceptor {
 
 	protected Object doInvoke(MethodInvocation invocation) throws Throwable {
 		String methodName = invocation.getMethod().getName();
+		Object[] arguments = invocation.getArguments();
 
 		if (methodName.equals("addArticle") ||
 			methodName.equals("deleteArticle") ||
@@ -98,8 +99,8 @@ public class JournalArticleLocalServiceInterceptor extends MirageInterceptor {
 				 methodName.equals("getStructureArticlesCount") ||
 				 methodName.equals("getTemplateArticles") ||
 				 methodName.equals("getTemplateArticlesCount") ||
-				 methodName.equals("search") ||
-				 methodName.equals("searchCount")) {
+				 methodName.equals("searchCount") ||
+				 (methodName.equals("search") && (arguments.length > 6))) {
 
 			SearchCriteriaInvoker searchCriteriaInvoker =
 				new SearchCriteriaInvoker(invocation);
