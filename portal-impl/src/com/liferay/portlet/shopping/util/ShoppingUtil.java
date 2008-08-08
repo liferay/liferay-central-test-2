@@ -1061,10 +1061,16 @@ public class ShoppingUtil {
 			int maxQty = temp.getMaxQuantity();
 
 			if ((temp.getStatus() !=
-					ShoppingItemPriceImpl.STATUS_INACTIVE) &&
-				(count >= minQty) && (count < maxQty || maxQty == 0)) {
+					ShoppingItemPriceImpl.STATUS_INACTIVE)) {
+				if ((count >= minQty) && (count <= maxQty || maxQty == 0)) {
+					return temp;
+				}
 
-				itemPrice = temp;
+				if ((count > maxQty) &&
+						((itemPrice == null) ||
+							(itemPrice.getMaxQuantity() < maxQty))) {
+					itemPrice = temp;
+				}
 			}
 		}
 
