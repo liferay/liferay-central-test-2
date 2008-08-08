@@ -123,12 +123,14 @@
 
 					<c:choose>
 						<c:when test="<%= !message.isRoot() && MBMessageFlagLocalServiceUtil.hasAnswerFlag(message.getMessageId()) %>">
-							<div class="question">
+							<div class="answer" id="<portlet:namespace />deleteAnswerFlag_<%= message.getMessageId() %>">
 								<liferay-ui:icon
 									image="checked"
 									message="answer"
 									label="<%= true %>"
 								/>
+
+								(<a href="javascript: <portlet:namespace />deleteAnswerFlag('<%= message.getMessageId() %>');"><liferay-ui:message key="unmark" /></a>)
 							</div>
 						</c:when>
 					</c:choose>
@@ -173,11 +175,11 @@
 								(MBMessageFlagLocalServiceUtil.hasQuestionFlag(rootMessage.getMessageId()) || MBMessageFlagLocalServiceUtil.hasAnswerFlag(rootMessage.getMessageId()))) {
 						%>
 
-								<li id="<portlet:namespace />markAsAnAnswer_<%= message.getMessageId() %>">
+								<li id="<portlet:namespace />addAnswerFlag_<%= message.getMessageId() %>">
 									<liferay-ui:icon
 										image="checked"
 										message="mark-as-an-answer"
-										url='<%= "javascript: " + renderResponse.getNamespace() + "markAsAnAnswer('" + message.getMessageId() + "');" %>'
+										url='<%= "javascript: " + renderResponse.getNamespace() + "addAnswerFlag('" + message.getMessageId() + "');" %>'
 										label="<%= true %>"
 									/>
 								</li>

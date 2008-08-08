@@ -25,6 +25,7 @@ package com.liferay.portlet.messageboards.service.impl;
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.security.permission.ActionKeys;
+import com.liferay.portlet.messageboards.NoSuchMessageFlagException;
 import com.liferay.portlet.messageboards.model.MBMessage;
 import com.liferay.portlet.messageboards.model.MBMessageFlag;
 import com.liferay.portlet.messageboards.model.MBThread;
@@ -89,6 +90,52 @@ public class MBMessageFlagServiceImpl extends MBMessageFlagServiceBaseImpl {
 			messageFlag.setFlag(MBMessageFlagImpl.ANSWER_FLAG);
 
 			mbMessageFlagPersistence.update(messageFlag, false);
+		}
+	}
+
+	public void deleteAnswerFlag(long messageId)
+		throws PortalException, SystemException {
+
+		MBMessage message = mbMessagePersistence.findByPrimaryKey(messageId);
+
+		if (message.isRoot()) {
+			return;
+		}
+
+		MBThread thread = mbThreadPersistence.findByPrimaryKey(
+			message.getThreadId());
+
+		MBMessage rootMessage = mbMessagePersistence.findByPrimaryKey(
+			thread.getRootMessageId());
+
+		MBMessagePermission.check(
+			getPermissionChecker(), rootMessage.getMessageId(),
+			ActionKeys.UPDATE);
+
+		try {
+			mbMessageFlagPersistence.removeByU_M_F(
+				message.getUserId(), message.getMessageId(),
+				MBMessageFlagImpl.ANSWER_FLAG);
+		}
+		catch (NoSuchMessageFlagException nsmfe) {
+		}
+
+		MBMessageFlag answerMessageFlag =
+			mbMessageFlagPersistence.fetchByU_M_F(
+				rootMessage.getUserId(), rootMessage.getMessageId(),
+				MBMessageFlagImpl.ANSWER_FLAG);
+
+		if (answerMessageFlag == null) {
+			return;
+		}
+
+		int answerFlagsCount = mbMessageFlagFinder.countByT_F(
+			message.getThreadId(), MBMessageFlagImpl.ANSWER_FLAG);
+
+		if (answerFlagsCount == 0) {
+			answerMessageFlag.setFlag(MBMessageFlagImpl.QUESTION_FLAG);
+
+			mbMessageFlagPersistence.update(answerMessageFlag, false);
 		}
 	}
 

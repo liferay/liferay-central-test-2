@@ -66,18 +66,42 @@ else {
 %>
 
 <script type="text/javascript">
-	function <portlet:namespace />markAsAnAnswer(messageId) {
+	function <portlet:namespace />addAnswerFlag(messageId) {
 		Liferay.Service.MB.MBMessageFlag.addAnswerFlag(
 			{
 				messageId: messageId
 			}
 		);
 
-		var answerDiv = jQuery('#<portlet:namespace />answerDiv').clone();
+		var addAnswerFlagDiv = jQuery('#<portlet:namespace />addAnswerFlagDiv').clone();
 
-		jQuery('#<portlet:namespace />message_' + messageId).find('div.tags:first').html(answerDiv.html());
+		var html = addAnswerFlagDiv.html();
 
-		jQuery('#<portlet:namespace />markAsAnAnswer_' + messageId).hide();
+		html = '<div class="answer" id="<portlet:namespace />deleteAnswerFlag_' + messageId + '">' + html + '</div>';
+		html = html.replace(/@MESSAGE_ID@/g, messageId);
+
+		jQuery('#<portlet:namespace />message_' + messageId).find('div.tags:first').html(html);
+
+		jQuery('#<portlet:namespace />addAnswerFlag_' + messageId).remove();
+	}
+
+	function <portlet:namespace />deleteAnswerFlag(messageId) {
+		Liferay.Service.MB.MBMessageFlag.deleteAnswerFlag(
+			{
+				messageId: messageId
+			}
+		);
+
+		var deleteAnswerFlagDiv = jQuery('#<portlet:namespace />deleteAnswerFlagDiv').clone();
+
+		var html = deleteAnswerFlagDiv.html();
+
+		html = '<li id="<portlet:namespace />addAnswerFlag_' + messageId + '">' + html + '</li>';
+		html = html.replace(/@MESSAGE_ID@/g, messageId);
+
+		jQuery('#<portlet:namespace />message_' + messageId).find('ul.edit-controls:first').prepend(html);
+
+		jQuery('#<portlet:namespace />deleteAnswerFlag_' + messageId).remove();
 	}
 
 	<c:if test="<%= thread.getRootMessageId() != message.getMessageId() %>">
@@ -89,8 +113,23 @@ else {
 	</c:if>
 </script>
 
-<div id="<portlet:namespace />answerDiv" style="display: none;">
-	<liferay-ui:icon image="checked" message="answer" label="<%= true %>" />
+<div id="<portlet:namespace />addAnswerFlagDiv" style="display: none;">
+	<liferay-ui:icon
+		image="checked"
+		message="answer"
+		label="<%= true %>"
+	/>
+
+	(<a href="javascript: <portlet:namespace />deleteAnswerFlag('@MESSAGE_ID@');"><liferay-ui:message key="unmark" /></a>)
+</div>
+
+<div id="<portlet:namespace />deleteAnswerFlagDiv" style="display: none;">
+	<liferay-ui:icon
+		image="checked"
+		message="mark-as-an-answer"
+		url='<%= "javascript: " + renderResponse.getNamespace() + "addAnswerFlag('@MESSAGE_ID@');" %>'
+		label="<%= true %>"
+	/>
 </div>
 
 <form>

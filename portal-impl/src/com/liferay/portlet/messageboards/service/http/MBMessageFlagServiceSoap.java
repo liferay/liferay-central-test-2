@@ -92,5 +92,17 @@ public class MBMessageFlagServiceSoap {
 		}
 	}
 
+	public static void deleteAnswerFlag(long messageId)
+		throws RemoteException {
+		try {
+			MBMessageFlagServiceUtil.deleteAnswerFlag(messageId);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
 	private static Log _log = LogFactoryUtil.getLog(MBMessageFlagServiceSoap.class);
 }

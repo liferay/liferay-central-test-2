@@ -32,6 +32,9 @@ public interface MBMessageFlagFinder {
 	public int countByU_T(long userId, long threadId)
 		throws com.liferay.portal.SystemException;
 
+	public int countByT_F(long threadId, int flag)
+		throws com.liferay.portal.SystemException;
+
 	public int countByU_T_F(long userId, long threadId, int flag)
 		throws com.liferay.portal.SystemException;
 }

@@ -51,6 +51,12 @@ public class MBMessageFlagServiceUtil {
 		_service.addAnswerFlag(messageId);
 	}
 
+	public static void deleteAnswerFlag(long messageId)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException, java.rmi.RemoteException {
+		_service.deleteAnswerFlag(messageId);
+	}
+
 	public static MBMessageFlagService getService() {
 		return _service;
 	}

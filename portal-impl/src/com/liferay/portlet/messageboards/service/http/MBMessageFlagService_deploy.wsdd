@@ -11,6 +11,9 @@
 		<operation xmlns:operNS="urn:http.service.messageboards.portlet.liferay.com" name="addAnswerFlag" qname="operNS:addAnswerFlag" soapAction="">
 			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="messageId" type="tns:long"></parameter>
 		</operation>
-		<parameter name="allowedMethods" value="addAnswerFlag"/>
+		<operation xmlns:operNS="urn:http.service.messageboards.portlet.liferay.com" name="deleteAnswerFlag" qname="operNS:deleteAnswerFlag" soapAction="">
+			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="messageId" type="tns:long"></parameter>
+		</operation>
+		<parameter name="allowedMethods" value="addAnswerFlag deleteAnswerFlag"/>
 	</service>
 </deployment>

@@ -102,5 +102,37 @@ public class MBMessageFlagServiceHttp {
 		}
 	}
 
+	public static void deleteAnswerFlag(HttpPrincipal httpPrincipal,
+		long messageId)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
+		try {
+			Object paramObj0 = new LongWrapper(messageId);
+
+			MethodWrapper methodWrapper = new MethodWrapper(MBMessageFlagServiceUtil.class.getName(),
+					"deleteAnswerFlag", new Object[] { paramObj0 });
+
+			try {
+				TunnelUtil.invoke(httpPrincipal, methodWrapper);
+			}
+			catch (Exception e) {
+				if (e instanceof com.liferay.portal.PortalException) {
+					throw (com.liferay.portal.PortalException)e;
+				}
+
+				if (e instanceof com.liferay.portal.SystemException) {
+					throw (com.liferay.portal.SystemException)e;
+				}
+
+				throw new com.liferay.portal.SystemException(e);
+			}
+		}
+		catch (com.liferay.portal.SystemException se) {
+			_log.error(se, se);
+
+			throw se;
+		}
+	}
+
 	private static Log _log = LogFactoryUtil.getLog(MBMessageFlagServiceHttp.class);
 }

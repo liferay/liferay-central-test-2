@@ -2039,6 +2039,13 @@ Liferay.Service.MB.MBMessageFlag = {
 		params.serviceMethodName = "addAnswerFlag";
 
 		return Liferay.Service.ajax(params, callback);
+	},
+
+	deleteAnswerFlag: function(params, callback) {
+		params.serviceClassName = this.serviceClassName;
+		params.serviceMethodName = "deleteAnswerFlag";
+
+		return Liferay.Service.ajax(params, callback);
 	}
 };
 

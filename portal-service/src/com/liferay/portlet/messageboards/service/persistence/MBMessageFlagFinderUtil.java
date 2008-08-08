@@ -34,6 +34,11 @@ public class MBMessageFlagFinderUtil {
 		return getFinder().countByU_T(userId, threadId);
 	}
 
+	public static int countByT_F(long threadId, int flag)
+		throws com.liferay.portal.SystemException {
+		return getFinder().countByT_F(threadId, flag);
+	}
+
 	public static int countByU_T_F(long userId, long threadId, int flag)
 		throws com.liferay.portal.SystemException {
 		return getFinder().countByU_T_F(userId, threadId, flag);
