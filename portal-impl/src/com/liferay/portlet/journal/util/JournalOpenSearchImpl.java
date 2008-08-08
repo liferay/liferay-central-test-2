@@ -23,6 +23,7 @@
 package com.liferay.portlet.journal.util;
 
 import com.liferay.portal.kernel.search.Document;
+import com.liferay.portal.kernel.search.Field;
 import com.liferay.portal.kernel.search.Hits;
 import com.liferay.portal.model.Layout;
 import com.liferay.portal.search.HitsOpenSearchImpl;
@@ -71,7 +72,7 @@ public class JournalOpenSearchImpl extends HitsOpenSearchImpl {
 
 		Layout layout = themeDisplay.getLayout();
 
-		String articleId = result.get("articleId");
+		String articleId = result.get(Field.ENTRY_CLASS_PK);
 		String version = result.get("version");
 
 		List<Long> hitLayoutIds =

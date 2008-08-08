@@ -160,7 +160,7 @@ public class PortalOpenSearchImpl extends BaseOpenSearchImpl {
 
 		Layout layout = themeDisplay.getLayout();
 
-		String articleId = result.get("articleId");
+		String articleId = result.get(Field.ENTRY_CLASS_PK);
 		String version = result.get("version");
 
 		List<Long> hitLayoutIds =
