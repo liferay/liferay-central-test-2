@@ -53,7 +53,7 @@ String widgetURL = PortalUtil.getWidgetURL(portlet, themeDisplay);
 </liferay-util:include>
 
 <liferay-ui:tabs
-	names="any-website,facebook"
+	names="any-website,facebook,friends"
 	param="tabs2"
 	url="<%= portletURL.toString() %>"
 />
@@ -165,6 +165,14 @@ Liferay.Widget({ url: &#x27;<%= widgetURL %>&#x27;});
 				<%= LanguageUtil.format(pageContext, "allow-users-to-add-x-to-facebook", portletDisplay.getTitle()) %> <liferay-ui:input-checkbox param="facebookShowAddAppLink" defaultValue="<%= facebookShowAddAppLink %>" />
 			</div>
 		</c:if>
+	</c:when>
+	<c:when test='<%= tabs2.equals("friends") %>'>
+
+		<%
+		boolean appShowShareWithFriendsLink = PrefsParamUtil.getBoolean(prefs, request, "lfr-app-show-share-with-friends-link");
+		%>
+
+		<%= LanguageUtil.format(pageContext, "allow-users-to-share-x-with-friends", portletDisplay.getTitle()) %> <liferay-ui:input-checkbox param="appShowShareWithFriendsLink" defaultValue="<%= appShowShareWithFriendsLink %>" />
 	</c:when>
 </c:choose>
 

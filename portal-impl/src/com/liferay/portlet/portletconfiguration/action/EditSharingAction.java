@@ -84,6 +84,9 @@ public class EditSharingAction extends EditConfigurationAction {
 		else if (tabs2.equals("facebook")) {
 			updateFacebook(actionRequest, prefs);
 		}
+		else if (tabs2.equals("friends")) {
+			updateFriends(actionRequest, prefs);
+		}
 
 		prefs.store();
 
@@ -141,6 +144,18 @@ public class EditSharingAction extends EditConfigurationAction {
 		prefs.setValue(
 			"lfr-facebook-show-add-app-link",
 			String.valueOf(facebookShowAddAppLink));
+	}
+
+	protected void updateFriends(
+			ActionRequest actionRequest, PortletPreferences prefs)
+		throws Exception {
+
+		boolean appShowShareWithFriendsLink = ParamUtil.getBoolean(
+			actionRequest, "appShowShareWithFriendsLink");
+
+		prefs.setValue(
+			"lfr-app-show-share-with-friends-link",
+			String.valueOf(appShowShareWithFriendsLink));
 	}
 
 }

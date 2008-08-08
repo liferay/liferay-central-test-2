@@ -47,6 +47,7 @@ public class PortalActivityInterpreter extends BaseSocialActivityInterpreter {
 	}
 
 	private static final String[] _CLASS_NAMES = new String[] {
+		PortalActivityInterpreter.class.getName()
 	};
 
 }

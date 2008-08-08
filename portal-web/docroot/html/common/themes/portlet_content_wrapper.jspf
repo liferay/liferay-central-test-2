@@ -48,9 +48,11 @@
 						if (Validator.isNull(facebookCanvasPageURL) || Validator.isNull(facebookAPIKey)) {
 							facebookShowAddAppLink = false;
 						}
+
+						boolean appShowShareWithFriendsLink = GetterUtil.getBoolean(portletSetup.getValue("lfr-app-show-share-with-friends-link", StringPool.BLANK));
 						%>
 
-						<c:if test="<%= widgetShowAddAppLink || facebookShowAddAppLink %>">
+						<c:if test="<%= widgetShowAddAppLink || facebookShowAddAppLink || appShowShareWithFriendsLink %>">
 							<div class="lfr-widget-bar">
 								<liferay-ui:icon-menu
 									message="sharing"
@@ -71,6 +73,16 @@
 											image="../social_bookmarks/facebook"
 											message="add-to-facebook"
 											url='<%= "http://www.facebook.com/add.php?api_key=" + facebookAPIKey + "&ref=pd" %>'
+											method="get"
+											label="<%= true %>"
+										/>
+									</c:if>
+
+									<c:if test="<%= appShowShareWithFriendsLink %>">
+										<liferay-ui:icon
+											image="share"
+											message="share-this-application-with-friends"
+											url="javascript: ;"
 											method="get"
 											label="<%= true %>"
 										/>

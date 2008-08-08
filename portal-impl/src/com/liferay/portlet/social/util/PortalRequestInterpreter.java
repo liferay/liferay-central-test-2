@@ -53,6 +53,7 @@ public class PortalRequestInterpreter extends BaseSocialRequestInterpreter {
 	}
 
 	private static final String[] _CLASS_NAMES = new String[] {
+		PortalRequestInterpreter.class.getName()
 	};
 
 }
