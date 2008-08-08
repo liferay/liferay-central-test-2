@@ -216,13 +216,13 @@ public class WSRPPersistenceHelper {
 				FileInputStream fis = null;
 
 				try {
-					File file = new File(_wsrpFileName);
+					File wsrpPortletsFile = new File(_wsrpPortletsFileName);
 
-					if (file.length() == 0) {
+					if (wsrpPortletsFile.length() == 0) {
 						return _objectFactory.createWSRPPortlets();
 					}
 					else {
-						fis = new FileInputStream(_wsrpFileName);
+						fis = new FileInputStream(_wsrpPortletsFileName);
 
 						JAXBElement<WSRPPortlets> rootElement =
 							(JAXBElement<WSRPPortlets>)_unmarshaller.unmarshal(
@@ -258,7 +258,7 @@ public class WSRPPersistenceHelper {
 
 		try {
 			synchronized (this) {
-				fos = new FileOutputStream(_wsrpFileName);
+				fos = new FileOutputStream(_wsrpPortletsFileName);
 
 				JAXBElement<WSRPPortlets> rootElement =
 					_objectFactory.createWSRPPortlets(wsrpPortlets);
@@ -346,12 +346,12 @@ public class WSRPPersistenceHelper {
 						"com/liferay/portal/wsrp/consumer/data/consumer.xml"));
 			}
 
-			_wsrpFileName = wsrpDataDir + "/wsrpportlets.xml";
+			_wsrpPortletsFileName = wsrpDataDir + "/wsrpportlets.xml";
 
-			File file = new File(_wsrpFileName);
+			File wsrpPortletsFile = new File(_wsrpPortletsFileName);
 
-			if (!file.exists()) {
-				file.createNewFile();
+			if (!wsrpPortletsFile.exists()) {
+				wsrpPortletsFile.createNewFile();
 			}
 		}
 		catch (Exception e) {
@@ -368,7 +368,7 @@ public class WSRPPersistenceHelper {
 	private Marshaller _marshaller;
 	private Unmarshaller _unmarshaller;
 	private ObjectFactory _objectFactory;
-	private String _wsrpFileName;
+	private String _wsrpPortletsFileName;
 	private boolean _dirty;
 	private WSRPPortlets _wsrpPortlets;
 
