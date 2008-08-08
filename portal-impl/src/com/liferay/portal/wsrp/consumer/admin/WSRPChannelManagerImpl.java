@@ -185,28 +185,40 @@ public class WSRPChannelManagerImpl implements WSRPChannelManagerMBean {
 
 		portlet.setPortletModes(portletModes);
 
-		LocalizedString displayName = portletDescription.getDisplayName();
+		LocalizedString localizedDisplayName =
+			portletDescription.getDisplayName();
 
-		if (displayName != null) {
-			String display = displayName.getValue();
+		if (localizedDisplayName != null) {
+			String displayName = localizedDisplayName.getValue();
 
-			if (display == null) {
+			if (displayName == null) {
 				portlet.setDisplayName(portletHandle);
 			}
 			else {
-				portlet.setDisplayName(display);
+				portlet.setDisplayName(displayName);
 			}
 		}
 
-		String title = portletDescription.getTitle().getValue();
+		String title = null;
 
-		if (title == null) {
+		LocalizedString localizedTitle = portletDescription.getTitle();
+
+		if (localizedTitle != null) {
+			title = localizedTitle.getValue();
+		}
+		else {
 			title = portletHandle;
 		}
 
-		String shortTitle = portletDescription.getShortTitle().getValue();
+		String shortTitle = null;
 
-		if (shortTitle == null) {
+		LocalizedString localizedShortTitle =
+			portletDescription.getShortTitle();
+
+		if (localizedShortTitle != null) {
+			shortTitle = localizedShortTitle.getValue();
+		}
+		else {
 			shortTitle = portletHandle;
 		}
 

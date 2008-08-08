@@ -336,11 +336,15 @@ public class WSRPPersistenceHelper {
 
 			FileUtil.mkdirs(wsrpDataDir);
 
-			FileUtil.write(
-				wsrpDataDir + "/consumer.xml",
-				StringUtil.read(
-					classLoader,
-					"com/liferay/portal/wsrp/consumer/data/consumer.xml"));
+			File wsrpConsumerFile = new File(wsrpDataDir + "/consumer.xml");
+
+			if (!wsrpConsumerFile.exists()) {
+				FileUtil.write(
+					wsrpConsumerFile,
+					StringUtil.read(
+						classLoader,
+						"com/liferay/portal/wsrp/consumer/data/consumer.xml"));
+			}
 
 			_wsrpFileName = wsrpDataDir + "/wsrpportlets.xml";
 
