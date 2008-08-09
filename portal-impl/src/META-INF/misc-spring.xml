@@ -3,7 +3,7 @@
 
 <beans>
 	<bean id="logInterceptor" class="com.liferay.portal.spring.aop.LogInterceptor" lazy-init="true" />
-	<bean id="velocityServiceInterceptor" class="com.liferay.portal.spring.aop.ServiceInterceptor" lazy-init="true">
+	<bean id="velocityServiceInterceptor" class="com.liferay.portal.spring.aop.BeanInterceptor" lazy-init="true">
 		<property name="exceptionSafe">
 			<value>true</value>
 		</property>
