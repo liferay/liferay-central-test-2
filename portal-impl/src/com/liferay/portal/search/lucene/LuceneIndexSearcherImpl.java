@@ -28,6 +28,7 @@ import com.liferay.portal.kernel.search.Field;
 import com.liferay.portal.kernel.search.Hits;
 import com.liferay.portal.kernel.search.HitsImpl;
 import com.liferay.portal.kernel.search.IndexSearcher;
+import com.liferay.portal.kernel.search.Query;
 import com.liferay.portal.kernel.search.SearchEngineUtil;
 import com.liferay.portal.kernel.search.SearchException;
 import com.liferay.portal.kernel.search.Sort;
@@ -66,6 +67,70 @@ public class LuceneIndexSearcherImpl implements IndexSearcher {
 			long companyId, String query, Sort sort, int start, int end)
 		throws SearchException {
 
+		Query queryModel = null;
+
+		return search(companyId, query, queryModel, sort, start, end);
+	}
+
+	public Hits search(long companyId, Query queryModel, int start, int end)
+		throws SearchException {
+
+		Sort sort = null;
+
+		return search(companyId, queryModel, sort, start, end);
+	}
+
+	public Hits search(
+			long companyId, Query queryModel, Sort sort, int start, int end)
+		throws SearchException {
+
+		String query = null;
+
+		return search(companyId, query, queryModel, sort, start, end);
+	}
+
+	protected DocumentImpl getDocument(
+		org.apache.lucene.document.Document oldDoc) {
+
+		DocumentImpl newDoc = new DocumentImpl();
+
+		List<org.apache.lucene.document.Field> oldFields = oldDoc.getFields();
+
+		for (org.apache.lucene.document.Field oldField : oldFields) {
+			String[] values = oldDoc.getValues(oldField.name());
+
+			if ((values != null) && (values.length > 1)) {
+				Field newField = new Field(
+					oldField.name(), values, oldField.isTokenized());
+
+				newDoc.add(newField);
+			}
+			else {
+				Field newField = new Field(
+					oldField.name(), oldField.stringValue(),
+					oldField.isTokenized());
+
+				newDoc.add(newField);
+			}
+		}
+
+		return newDoc;
+	}
+
+	protected Hits search(
+			long companyId, String query, Query queryModel, Sort sort,
+			int start, int end)
+		throws SearchException {
+
+		if (_log.isDebugEnabled()) {
+			if (queryModel != null) {
+				_log.debug("Query model: " + queryModel);
+			}
+			else {
+				_log.debug("Query: " + query);
+			}
+		}
+
 		Hits hits = null;
 
 		org.apache.lucene.search.IndexSearcher searcher = null;
@@ -80,11 +145,20 @@ public class LuceneIndexSearcherImpl implements IndexSearcher {
 					new SortField(sort.getFieldName(), sort.isReverse()));
 			}
 
-			QueryParser parser = new QueryParser(
-				StringPool.BLANK, LuceneUtil.getAnalyzer());
+			org.apache.lucene.search.Query luceneQuery = null;
 
-			org.apache.lucene.search.Hits luceneHits =
-				searcher.search(parser.parse(query), luceneSort);
+			if (queryModel != null) {
+				luceneQuery = QueryTranslator.translate(queryModel);
+			}
+			else {
+				QueryParser parser = new QueryParser(
+					StringPool.BLANK, LuceneUtil.getAnalyzer());
+
+				luceneQuery = parser.parse(query);
+			}
+
+			org.apache.lucene.search.Hits luceneHits = searcher.search(
+				luceneQuery, luceneSort);
 
 			hits = subset(luceneHits, start, end);
 		}
@@ -123,34 +197,6 @@ public class LuceneIndexSearcherImpl implements IndexSearcher {
 		}
 
 		return hits;
-	}
-
-	protected DocumentImpl getDocument(
-		org.apache.lucene.document.Document oldDoc) {
-
-		DocumentImpl newDoc = new DocumentImpl();
-
-		List<org.apache.lucene.document.Field> oldFields = oldDoc.getFields();
-
-		for (org.apache.lucene.document.Field oldField : oldFields) {
-			String[] values = oldDoc.getValues(oldField.name());
-
-			if ((values != null) && (values.length > 1)) {
-				Field newField = new Field(
-					oldField.name(), values, oldField.isTokenized());
-
-				newDoc.add(newField);
-			}
-			else {
-				Field newField = new Field(
-					oldField.name(), oldField.stringValue(),
-					oldField.isTokenized());
-
-				newDoc.add(newField);
-			}
-		}
-
-		return newDoc;
 	}
 
 	protected Hits subset(

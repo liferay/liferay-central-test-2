@@ -1247,7 +1247,7 @@ public class PluginPackageUtil {
 			}
 
 			return SearchEngineUtil.search(
-				CompanyConstants.SYSTEM, fullQuery.toString(), start, end);
+				CompanyConstants.SYSTEM, fullQuery, start, end);
 		}
 		catch (Exception e) {
 			throw new SystemException(e);

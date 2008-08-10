@@ -184,6 +184,10 @@
 		<priority value="ERROR" />
 	</category>
 
+	<category name="com.liferay.portal.search.lucene.LuceneIndexSearcherImpl">
+		<priority value="ERROR" />
+	</category>
+
 	<category name="com.liferay.portal.security.auth.LDAPAuth">
 		<priority value="ERROR" />
 	</category>

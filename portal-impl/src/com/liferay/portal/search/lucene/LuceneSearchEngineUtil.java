@@ -29,6 +29,7 @@ import com.liferay.portal.kernel.messaging.ParallelDestination;
 import com.liferay.portal.kernel.messaging.SerialDestination;
 import com.liferay.portal.kernel.search.Document;
 import com.liferay.portal.kernel.search.Hits;
+import com.liferay.portal.kernel.search.Query;
 import com.liferay.portal.kernel.search.SearchEngine;
 import com.liferay.portal.kernel.search.SearchException;
 import com.liferay.portal.kernel.search.Sort;
@@ -99,6 +100,19 @@ public class LuceneSearchEngineUtil {
 
 	public static Hits search(
 			long companyId, String query, Sort sort, int start, int end)
+		throws SearchException {
+
+		return _engine.getSearcher().search(companyId, query, sort, start, end);
+	}
+
+	public static Hits search(long companyId, Query query, int start, int end)
+		throws SearchException {
+
+		return _engine.getSearcher().search(companyId, query, start, end);
+	}
+
+	public static Hits search(
+			long companyId, Query query, Sort sort, int start, int end)
 		throws SearchException {
 
 		return _engine.getSearcher().search(companyId, query, sort, start, end);

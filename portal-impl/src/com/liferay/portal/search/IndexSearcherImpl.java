@@ -27,6 +27,7 @@ import com.liferay.portal.kernel.messaging.Message;
 import com.liferay.portal.kernel.messaging.MessageBusUtil;
 import com.liferay.portal.kernel.search.Hits;
 import com.liferay.portal.kernel.search.IndexSearcher;
+import com.liferay.portal.kernel.search.Query;
 import com.liferay.portal.kernel.search.SearchException;
 import com.liferay.portal.kernel.search.Sort;
 import com.liferay.portal.kernel.search.messaging.SearchRequest;
@@ -50,9 +51,44 @@ public class IndexSearcherImpl implements IndexSearcher {
 		throws SearchException {
 
 		try {
-			SearchRequest searchRequest = new SearchRequest(
-				SearchRequest.COMMAND_SEARCH, companyId, query, sort,
-				start, end);
+			SearchRequest searchRequest = new SearchRequest();
+
+			searchRequest.setCommand(SearchRequest.COMMAND_SEARCH);
+			searchRequest.setCompanyId(companyId);
+			searchRequest.setQuery(query);
+			searchRequest.setSort(sort);
+			searchRequest.setStart(start);
+			searchRequest.setEnd(end);
+
+			Hits hits = (Hits)MessageBusUtil.sendSynchronizedMessage(
+				DestinationNames.SEARCH_READER, new Message(searchRequest));
+
+			return hits;
+		}
+		catch (Exception e) {
+			throw new SearchException(e);
+		}
+	}
+
+	public Hits search(long companyId, Query query, int start, int end)
+		throws SearchException {
+
+		return search(companyId, query, null, start, end);
+	}
+
+	public Hits search(
+			long companyId, Query query, Sort sort, int start, int end)
+		throws SearchException {
+
+		try {
+			SearchRequest searchRequest = new SearchRequest();
+
+			searchRequest.setCommand(SearchRequest.COMMAND_SEARCH);
+			searchRequest.setCompanyId(companyId);
+			searchRequest.setQueryModel(query);
+			searchRequest.setSort(sort);
+			searchRequest.setStart(start);
+			searchRequest.setEnd(end);
 
 			Hits hits = (Hits)MessageBusUtil.sendSynchronizedMessage(
 				DestinationNames.SEARCH_READER, new Message(searchRequest));

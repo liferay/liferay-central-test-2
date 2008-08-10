@@ -83,7 +83,7 @@ public class Indexer implements com.liferay.portal.kernel.search.Indexer {
 		booleanQuery.addRequiredTerm("nodeId", nodeId);
 
 		Hits hits = SearchEngineUtil.search(
-			companyId, booleanQuery.toString(), SearchEngineUtil.ALL_POS,
+			companyId, booleanQuery, SearchEngineUtil.ALL_POS,
 			SearchEngineUtil.ALL_POS);
 
 		for (int i = 0; i < hits.getLength(); i++) {

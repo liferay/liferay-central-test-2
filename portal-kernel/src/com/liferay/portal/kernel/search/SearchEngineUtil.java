@@ -81,6 +81,19 @@ public class SearchEngineUtil {
 		return _instance._search(companyId, query, sort, start, end);
 	}
 
+	public static Hits search(long companyId, Query query, int start, int end)
+		throws SearchException {
+
+		return _instance._search(companyId, query, start, end);
+	}
+
+	public static Hits search(
+			long companyId, Query query, Sort sort, int start, int end)
+		throws SearchException {
+
+		return _instance._search(companyId, query, sort, start, end);
+	}
+
 	public static void updateDocument(long companyId, String uid, Document doc)
 		throws SearchException {
 
@@ -122,11 +135,12 @@ public class SearchEngineUtil {
 		}
 
 		try {
-			Message message = new Message(
-				new SearchRequest(SearchRequest.COMMAND_INDEX_ONLY));
+			SearchRequest searchRequest = new SearchRequest();
+
+			searchRequest.setCommand(SearchRequest.COMMAND_INDEX_ONLY);
 
 			_indexReadOnly = (Boolean)MessageBusUtil.sendSynchronizedMessage(
-				DestinationNames.SEARCH_READER, message);
+				DestinationNames.SEARCH_READER, new Message(searchRequest));
 
 			if (_indexReadOnly == null) {
 				_indexReadOnly = Boolean.FALSE;
@@ -151,6 +165,20 @@ public class SearchEngineUtil {
 
 	private Hits _search(
 			long companyId, String query, Sort sort, int start, int end)
+		throws SearchException {
+
+		return _messageBusIndexSearcher.search(
+			companyId, query, sort, start, end);
+	}
+
+	private Hits _search(long companyId, Query query, int start, int end)
+		throws SearchException {
+
+		return _messageBusIndexSearcher.search(companyId, query, start, end);
+	}
+
+	private Hits _search(
+			long companyId, Query query, Sort sort, int start, int end)
 		throws SearchException {
 
 		return _messageBusIndexSearcher.search(

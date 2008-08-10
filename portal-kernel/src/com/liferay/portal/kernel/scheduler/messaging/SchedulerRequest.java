@@ -55,13 +55,15 @@ public class SchedulerRequest implements Serializable {
 	}
 
 	public SchedulerRequest(String command) {
-		this(command, null, null, null, null, null, null, null, null);
+		_command = command;
 	}
 
 	public SchedulerRequest(
 		String command, String jobName, String groupName) {
 
-		this(command, jobName, groupName, null, null, null, null, null, null);
+		_command = command;
+		_jobName = jobName;
+		_groupName = groupName;
 	}
 
 	public SchedulerRequest(

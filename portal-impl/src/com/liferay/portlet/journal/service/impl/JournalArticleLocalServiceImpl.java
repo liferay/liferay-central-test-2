@@ -1542,7 +1542,7 @@ public class JournalArticleLocalServiceImpl
 			Sort sort = new Sort(sortField, true);
 
 			return SearchEngineUtil.search(
-				companyId, fullQuery.toString(), sort, start, end);
+				companyId, fullQuery, sort, start, end);
 		}
 		catch (Exception e) {
 			throw new SystemException(e);

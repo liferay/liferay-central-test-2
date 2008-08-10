@@ -23,6 +23,7 @@
 package com.liferay.portal.kernel.search.messaging;
 
 import com.liferay.portal.kernel.search.Document;
+import com.liferay.portal.kernel.search.Query;
 import com.liferay.portal.kernel.search.Sort;
 
 /**
@@ -47,45 +48,6 @@ public class SearchRequest {
 	public static final String COMMAND_UPDATE = "UPDATE";
 
 	public SearchRequest() {
-	}
-
-	public SearchRequest(String command) {
-		this(command, 0, (String)null);
-	}
-
-	public SearchRequest(String command, long companyId, String id) {
-		this(command, companyId, id, null);
-	}
-
-	public SearchRequest(String command, long companyId, Document doc) {
-		this(command, companyId, null, doc);
-	}
-
-	public SearchRequest(
-		String command, long companyId, String id, Document doc) {
-
-		this(command, companyId, id, doc, null, null, 0, 0);
-	}
-
-	public SearchRequest(
-		String command, long companyId, String query, Sort sort, int start,
-		int end) {
-
-		this(command, companyId, null, null, query, sort, start, end);
-	}
-
-	public SearchRequest(
-		String command, long companyId, String id, Document doc, String query,
-		Sort sort, int start, int end) {
-
-		_command = command;
-		_companyId = companyId;
-		_id = id;
-		_doc = doc;
-		_query = query;
-		_sort = sort;
-		_start = start;
-		_end = end;
 	}
 
 	public String getCommand() {
@@ -128,6 +90,14 @@ public class SearchRequest {
 		_query = query;
 	}
 
+	public Query getQueryModel() {
+		return _queryModel;
+	}
+
+	public void setQueryModel(Query queryModel) {
+		_queryModel = queryModel;
+	}
+
 	public Sort getSort() {
 		return _sort;
 	}
@@ -157,6 +127,7 @@ public class SearchRequest {
 	private String _id;
 	private Document _doc;
 	private String _query;
+	private Query _queryModel;
 	private Sort _sort;
 	private int _start;
 	private int _end;

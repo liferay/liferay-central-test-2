@@ -609,8 +609,7 @@ public class BlogsEntryLocalServiceImpl extends BlogsEntryLocalServiceBaseImpl {
 				fullQuery.add(searchQuery, BooleanClauseOccur.MUST);
 			}
 
-			return SearchEngineUtil.search(
-				companyId, fullQuery.toString(), start, end);
+			return SearchEngineUtil.search(companyId, fullQuery, start, end);
 		}
 		catch (Exception e) {
 			throw new SystemException(e);
