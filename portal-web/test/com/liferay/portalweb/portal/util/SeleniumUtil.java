@@ -92,6 +92,7 @@ public class SeleniumUtil {
 
 	private static SeleniumUtil _instance = new SeleniumUtil();
 
+	private String _timestamp;
 	private Selenium _selenium;
 
 }

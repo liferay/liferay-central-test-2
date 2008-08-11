@@ -24,6 +24,7 @@ package com.liferay.portalweb.portal;
 
 import com.liferay.portalweb.portal.login.LoginTests;
 import com.liferay.portalweb.portal.theme.ThemeTests;
+import com.liferay.portalweb.portal.util.ThemeIds;
 
 /**
  * <a href="ThemeTestSuite.java.html"><b><i>View Source</i></b></a>

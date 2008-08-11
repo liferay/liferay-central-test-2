@@ -30,7 +30,7 @@ package com.liferay.portalweb.portal.util;
  */
 public class ThemeIds {
 
-	public static String getCount() {
+	public static int getCount() {
 		return _instance._getCount();
 	}
 
@@ -53,7 +53,7 @@ public class ThemeIds {
 		return TestPropsValues.THEME_IDS[_pos];
 	}
 
-	private void iterate() {
+	private void _iterate() {
 		_pos++;
 	}
 
