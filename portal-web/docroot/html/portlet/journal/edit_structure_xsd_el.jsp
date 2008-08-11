@@ -27,10 +27,10 @@
 <%
 Element el = (Element)request.getAttribute(WebKeys.JOURNAL_STRUCTURE_EL);
 
-String elName = el.attributeValue("name", StringPool.BLANK);
-String elType = el.attributeValue("type", StringPool.BLANK);
+String elName = java.net.URLDecoder.decode(el.attributeValue("name", StringPool.BLANK));
+String elType = java.net.URLDecoder.decode(el.attributeValue("type", StringPool.BLANK));
 
-String parentElType = el.getParent().attributeValue("type", StringPool.BLANK);
+String parentElType = java.net.URLDecoder.decode(el.getParent().attributeValue("type", StringPool.BLANK));
 
 IntegerWrapper count = (IntegerWrapper)request.getAttribute(WebKeys.JOURNAL_STRUCTURE_EL_COUNT);
 Integer depth = (Integer)request.getAttribute(WebKeys.JOURNAL_STRUCTURE_EL_DEPTH);
