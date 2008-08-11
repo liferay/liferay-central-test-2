@@ -712,6 +712,10 @@
 		<priority value="ERROR" />
 	</category>
 
+	<category name="com.sun">
+		<priority value="ERROR" />
+	</category>
+
 	<root>
 		<priority value="INFO" />
 		<appender-ref ref="CONSOLE" />
