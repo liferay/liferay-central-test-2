@@ -162,6 +162,12 @@ public class SeleneseToJavaBuilder {
 			System.out.println(testName + " has an invalid test name");
 		}
 
+		if (xml.indexOf("&quot;") != -1) {
+			xml = StringUtil.replace(xml, "&quot;", "\"");
+
+			_fileUtil.write(basedir + "/" + file, xml);
+		}
+
 		x = xml.indexOf("<tbody>");
 		y = xml.indexOf("</tbody>");
 
