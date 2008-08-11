@@ -22,6 +22,8 @@
 
 package com.liferay.portalweb.portal.theme;
 
+import com.liferay.portal.kernel.util.FileUtil;
+
 import com.liferay.portalweb.portal.BaseTestCase;
 
 /**
@@ -51,6 +53,8 @@ public class ScreengrabTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
+		FileUtil.mkdirs(
+			"L:\\portal\\build\\portal-web\\test-output\\brochure\\");
 		selenium.captureEntirePageScreenshot("L:\\portal\\build\\portal-web\\test-output\\brochure\\ScreengrabTest.jpg",
 			"");
 		selenium.click("//div[@id='navigation']/ul/li[1]/a/span");
@@ -73,6 +77,8 @@ public class ScreengrabTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
+		FileUtil.mkdirs(
+			"L:\\portal\\build\\portal-web\\test-output\\brochure\\");
 		selenium.captureEntirePageScreenshot("L:\\portal\\build\\portal-web\\test-output\\brochure\\ScreengrabTest2.jpg",
 			"");
 	}

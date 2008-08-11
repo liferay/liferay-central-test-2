@@ -22,6 +22,8 @@
 
 package com.liferay.portalweb.portal.theme;
 
+import com.liferay.portal.kernel.util.FileUtil;
+
 import com.liferay.portalweb.portal.BaseTestCase;
 
 /**
@@ -72,6 +74,8 @@ public class AddCalendarTest extends BaseTestCase {
 
 		selenium.click("link=23");
 		selenium.waitForPageToLoad("30000");
+		FileUtil.mkdirs(
+			"L:\\portal\\build\\portal-web\\test-output\\brochure\\");
 		selenium.captureEntirePageScreenshot("L:\\portal\\build\\portal-web\\test-output\\brochure\\AddCalendarTest.jpg",
 			"");
 		selenium.click("link=Return to Full Page");

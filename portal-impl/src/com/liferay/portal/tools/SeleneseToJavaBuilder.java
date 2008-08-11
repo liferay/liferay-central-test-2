@@ -145,6 +145,7 @@ public class SeleneseToJavaBuilder {
 
 		sb.append("package " + testPackagePath + ";\n\n");
 
+		sb.append("import com.liferay.portal.kernel.util.FileUtil;\n");
 		sb.append("import com.liferay.portal.kernel.util.StringPool;\n");
 		sb.append("import com.liferay.portalweb.portal.BaseTestCase;\n\n");
 		sb.append(
@@ -217,6 +218,13 @@ public class SeleneseToJavaBuilder {
 				sb.append("\"));");
 			}
 			else if (param1.equals("captureEntirePageScreenshot")) {
+				int pos = param2.lastIndexOf("\\");
+
+				String dirName = param2.substring(0, pos + 1);
+
+				sb.append("FileUtil.mkdirs(\"");
+				sb.append(dirName);
+				sb.append("\");");
 				sb.append("selenium.captureEntirePageScreenshot(\"");
 				sb.append(param2);
 				sb.append("\", \"\");");

@@ -22,6 +22,8 @@
 
 package com.liferay.portalweb.portal.theme;
 
+import com.liferay.portal.kernel.util.FileUtil;
+
 import com.liferay.portalweb.portal.BaseTestCase;
 import com.liferay.portalweb.portal.util.RuntimeVariables;
 
@@ -82,6 +84,8 @@ public class AddDocumentLibraryTest extends BaseTestCase {
 		selenium.click("//input[@value='Add Document']");
 		selenium.waitForPageToLoad("30000");
 		selenium.click("link=Use the classic uploader.");
+		FileUtil.mkdirs(
+			"L:\\portal\\build\\portal-web\\test-output\\brochure\\");
 		selenium.captureEntirePageScreenshot("L:\\portal\\build\\portal-web\\test-output\\brochure\\AddDocumentLibraryTest.jpg",
 			"");
 		selenium.click("link=Return to Full Page");

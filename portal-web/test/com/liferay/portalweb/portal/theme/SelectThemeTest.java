@@ -22,6 +22,8 @@
 
 package com.liferay.portalweb.portal.theme;
 
+import com.liferay.portal.kernel.util.FileUtil;
+
 import com.liferay.portalweb.portal.BaseTestCase;
 
 /**
@@ -38,6 +40,8 @@ public class SelectThemeTest extends BaseTestCase {
 		selenium.waitForPageToLoad("30000");
 		selenium.click("//input[@name='_88_themeId' and @value='brochure']");
 		selenium.waitForPageToLoad("30000");
+		FileUtil.mkdirs(
+			"L:\\portal\\build\\portal-web\\test-output\\brochure\\");
 		selenium.captureEntirePageScreenshot("L:\\portal\\build\\portal-web\\test-output\\brochure\\SelectThemeTest.jpg",
 			"");
 		selenium.click("link=Return to Full Page");
