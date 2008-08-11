@@ -909,6 +909,8 @@ public class PropsKeys {
 
 	public static final String SESSION_ENABLE_PHISHING_PROTECTION = "session.enable.phishing.protection";
 
+	public static final String SESSION_ENABLE_URL_WITH_SESSION_ID = "session.enable.url.with.session.id";
+
 	public static final String SESSION_SHARED_ATTRIBUTES = "session.shared.attributes";
 
 	public static final String SESSION_TEST_COOKIE_SUPPORT = "session.test.cookie.support";

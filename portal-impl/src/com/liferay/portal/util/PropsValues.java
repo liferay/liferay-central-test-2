@@ -906,6 +906,10 @@ public class PropsValues {
 		GetterUtil.getBoolean(
 			PropsUtil.get(PropsKeys.SESSION_ENABLE_PHISHING_PROTECTION));
 
+	public static final boolean SESSION_ENABLE_URL_WITH_SESSION_ID =
+		GetterUtil.getBoolean(
+			PropsUtil.get(PropsKeys.SESSION_ENABLE_URL_WITH_SESSION_ID));
+
 	public static final boolean SESSION_TEST_COOKIE_SUPPORT =
 		GetterUtil.getBoolean(
 			PropsUtil.get(PropsKeys.SESSION_TEST_COOKIE_SUPPORT));

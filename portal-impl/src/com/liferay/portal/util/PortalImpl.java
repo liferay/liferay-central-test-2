@@ -1820,6 +1820,9 @@ public class PortalImpl implements Portal {
 	}
 
 	public String getURLWithSessionId(String url, String sessionId) {
+		if (!PropsValues.SESSION_ENABLE_URL_WITH_SESSION_ID) {
+			return url;
+		}
 
 		// LEP-4787
 
@@ -1842,8 +1845,8 @@ public class PortalImpl implements Portal {
 			return sb.toString();
 		}
 
-		// In IE6, http://www.abc.com;jsessionid=XYZ does not work,
-		// but http://www.abc.com/;jsessionid=XYZ does work.
+		// In IE6, http://www.abc.com;jsessionid=XYZ does not work, but
+		// http://www.abc.com/;jsessionid=XYZ does work.
 
 		x = url.indexOf(StringPool.DOUBLE_SLASH);
 
