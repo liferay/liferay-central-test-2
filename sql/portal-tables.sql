@@ -623,7 +623,7 @@ create table MBCategory (
 	createDate DATE null,
 	modifiedDate DATE null,
 	parentCategoryId LONG,
-	name VARCHAR(75) null,
+	name VARCHAR(101) null,
 	description STRING null,
 	lastPostDate DATE null
 );
@@ -633,6 +633,34 @@ create table MBDiscussion (
 	classNameId LONG,
 	classPK LONG,
 	threadId LONG
+);
+
+create table MBMailing (
+	uuid_ VARCHAR(75) null,
+	mailingId LONG not null primary key,
+	groupId LONG,
+	companyId LONG,
+	userId LONG,
+	userName VARCHAR(75) null,
+	createDate DATE null,
+	modifiedDate DATE null,
+	categoryId LONG,
+	mailingListAddress VARCHAR(75) null,
+	mailAddress VARCHAR(75) null,
+	mailInProtocol VARCHAR(75) null,
+	mailInServerName VARCHAR(75) null,
+	mailInUseSSL BOOLEAN,
+	mailInServerPort INTEGER,
+	mailInUserName VARCHAR(75) null,
+	mailInPassword VARCHAR(75) null,
+	mailInReadInterval INTEGER,
+	mailOutConfigured BOOLEAN,
+	mailOutServerName VARCHAR(75) null,
+	mailOutUseSSL BOOLEAN,
+	mailOutServerPort INTEGER,
+	mailOutUserName VARCHAR(75) null,
+	mailOutPassword VARCHAR(75) null,
+	active_ BOOLEAN
 );
 
 create table MBMessage (

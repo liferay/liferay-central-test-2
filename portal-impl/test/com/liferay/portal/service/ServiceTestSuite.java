@@ -27,8 +27,11 @@ import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
 import com.liferay.portal.kernel.messaging.MessageBus;
 import com.liferay.portal.kernel.messaging.MessageBusUtil;
 import com.liferay.portal.kernel.messaging.MessageSender;
+import com.liferay.portal.kernel.scheduler.SchedulerEngineUtil;
 import com.liferay.portal.kernel.search.SearchEngineUtil;
 import com.liferay.portal.kernel.util.FileUtil;
+import com.liferay.portal.scheduler.SchedulerEngineImpl;
+import com.liferay.portal.scheduler.quartz.QuartzSchedulerEngineUtil;
 import com.liferay.portal.search.IndexSearcherImpl;
 import com.liferay.portal.search.IndexWriterImpl;
 import com.liferay.portal.search.lucene.LuceneSearchEngineUtil;
@@ -42,6 +45,7 @@ import com.liferay.portlet.bookmarks.service.BookmarksEntryServiceTest;
 import com.liferay.portlet.bookmarks.service.BookmarksFolderServiceTest;
 import com.liferay.portlet.documentlibrary.service.DLFileEntryServiceTest;
 import com.liferay.portlet.imagegallery.service.IGImageServiceTest;
+import com.liferay.portlet.messageboards.service.MBCategoryServiceTest;
 import com.liferay.portlet.messageboards.service.MBMessageServiceTest;
 import com.liferay.portlet.social.service.SocialRelationLocalServiceTest;
 
@@ -92,6 +96,17 @@ public class ServiceTestSuite extends TestSuite {
 
 		MessageBusUtil.init(messageBus, messageSender);
 
+		// Scheduler
+
+		try {
+			QuartzSchedulerEngineUtil.init();
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		SchedulerEngineUtil.init(new SchedulerEngineImpl());
+
 		// Search engines
 
 		LuceneSearchEngineUtil.init();
@@ -103,6 +118,7 @@ public class ServiceTestSuite extends TestSuite {
 		addTestSuite(DLFileEntryServiceTest.class);
 		addTestSuite(IGImageServiceTest.class);
 		addTestSuite(MBMessageServiceTest.class);
+		addTestSuite(MBCategoryServiceTest.class);
 		addTestSuite(SocialRelationLocalServiceTest.class);
 
 		// Company

@@ -77,6 +77,177 @@ public class MBCategoryServiceHttp {
 	public static com.liferay.portlet.messageboards.model.MBCategory addCategory(
 		HttpPrincipal httpPrincipal, long plid, long parentCategoryId,
 		java.lang.String name, java.lang.String description,
+		java.lang.String mailingListAddress, java.lang.String mailAddress,
+		java.lang.String mailInProtocol, java.lang.String mailInServerName,
+		java.lang.Boolean mailInUseSSL, java.lang.Integer mailInServerPort,
+		java.lang.String mailInUserName, java.lang.String mailInPassword,
+		java.lang.Integer mailInReadInterval,
+		java.lang.Boolean mailOutConfigured,
+		java.lang.String mailOutServerName, java.lang.Boolean mailOutUseSSL,
+		java.lang.Integer mailOutServerPort, java.lang.String mailOutUserName,
+		java.lang.String mailOutPassword,
+		java.lang.String[] communityPermissions,
+		java.lang.String[] guestPermissions)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
+		try {
+			Object paramObj0 = new LongWrapper(plid);
+
+			Object paramObj1 = new LongWrapper(parentCategoryId);
+
+			Object paramObj2 = name;
+
+			if (name == null) {
+				paramObj2 = new NullWrapper("java.lang.String");
+			}
+
+			Object paramObj3 = description;
+
+			if (description == null) {
+				paramObj3 = new NullWrapper("java.lang.String");
+			}
+
+			Object paramObj4 = mailingListAddress;
+
+			if (mailingListAddress == null) {
+				paramObj4 = new NullWrapper("java.lang.String");
+			}
+
+			Object paramObj5 = mailAddress;
+
+			if (mailAddress == null) {
+				paramObj5 = new NullWrapper("java.lang.String");
+			}
+
+			Object paramObj6 = mailInProtocol;
+
+			if (mailInProtocol == null) {
+				paramObj6 = new NullWrapper("java.lang.String");
+			}
+
+			Object paramObj7 = mailInServerName;
+
+			if (mailInServerName == null) {
+				paramObj7 = new NullWrapper("java.lang.String");
+			}
+
+			Object paramObj8 = mailInUseSSL;
+
+			if (mailInUseSSL == null) {
+				paramObj8 = new NullWrapper("java.lang.Boolean");
+			}
+
+			Object paramObj9 = mailInServerPort;
+
+			if (mailInServerPort == null) {
+				paramObj9 = new NullWrapper("java.lang.Integer");
+			}
+
+			Object paramObj10 = mailInUserName;
+
+			if (mailInUserName == null) {
+				paramObj10 = new NullWrapper("java.lang.String");
+			}
+
+			Object paramObj11 = mailInPassword;
+
+			if (mailInPassword == null) {
+				paramObj11 = new NullWrapper("java.lang.String");
+			}
+
+			Object paramObj12 = mailInReadInterval;
+
+			if (mailInReadInterval == null) {
+				paramObj12 = new NullWrapper("java.lang.Integer");
+			}
+
+			Object paramObj13 = mailOutConfigured;
+
+			if (mailOutConfigured == null) {
+				paramObj13 = new NullWrapper("java.lang.Boolean");
+			}
+
+			Object paramObj14 = mailOutServerName;
+
+			if (mailOutServerName == null) {
+				paramObj14 = new NullWrapper("java.lang.String");
+			}
+
+			Object paramObj15 = mailOutUseSSL;
+
+			if (mailOutUseSSL == null) {
+				paramObj15 = new NullWrapper("java.lang.Boolean");
+			}
+
+			Object paramObj16 = mailOutServerPort;
+
+			if (mailOutServerPort == null) {
+				paramObj16 = new NullWrapper("java.lang.Integer");
+			}
+
+			Object paramObj17 = mailOutUserName;
+
+			if (mailOutUserName == null) {
+				paramObj17 = new NullWrapper("java.lang.String");
+			}
+
+			Object paramObj18 = mailOutPassword;
+
+			if (mailOutPassword == null) {
+				paramObj18 = new NullWrapper("java.lang.String");
+			}
+
+			Object paramObj19 = communityPermissions;
+
+			if (communityPermissions == null) {
+				paramObj19 = new NullWrapper("[Ljava.lang.String;");
+			}
+
+			Object paramObj20 = guestPermissions;
+
+			if (guestPermissions == null) {
+				paramObj20 = new NullWrapper("[Ljava.lang.String;");
+			}
+
+			MethodWrapper methodWrapper = new MethodWrapper(MBCategoryServiceUtil.class.getName(),
+					"addCategory",
+					new Object[] {
+						paramObj0, paramObj1, paramObj2, paramObj3, paramObj4,
+						paramObj5, paramObj6, paramObj7, paramObj8, paramObj9,
+						paramObj10, paramObj11, paramObj12, paramObj13,
+						paramObj14, paramObj15, paramObj16, paramObj17,
+						paramObj18, paramObj19, paramObj20
+					});
+
+			Object returnObj = null;
+
+			try {
+				returnObj = TunnelUtil.invoke(httpPrincipal, methodWrapper);
+			}
+			catch (Exception e) {
+				if (e instanceof com.liferay.portal.PortalException) {
+					throw (com.liferay.portal.PortalException)e;
+				}
+
+				if (e instanceof com.liferay.portal.SystemException) {
+					throw (com.liferay.portal.SystemException)e;
+				}
+
+				throw new com.liferay.portal.SystemException(e);
+			}
+
+			return (com.liferay.portlet.messageboards.model.MBCategory)returnObj;
+		}
+		catch (com.liferay.portal.SystemException se) {
+			_log.error(se, se);
+
+			throw se;
+		}
+	}
+
+	public static com.liferay.portlet.messageboards.model.MBCategory addCategory(
+		HttpPrincipal httpPrincipal, long plid, long parentCategoryId,
+		java.lang.String name, java.lang.String description,
 		boolean addCommunityPermissions, boolean addGuestPermissions)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
@@ -415,7 +586,15 @@ public class MBCategoryServiceHttp {
 	public static com.liferay.portlet.messageboards.model.MBCategory updateCategory(
 		HttpPrincipal httpPrincipal, long categoryId, long parentCategoryId,
 		java.lang.String name, java.lang.String description,
-		boolean mergeWithParentCategory)
+		boolean mergeWithParentCategory, java.lang.String mailingListAddress,
+		java.lang.String mailAddress, java.lang.String mailInProtocol,
+		java.lang.String mailInServerName, java.lang.Boolean mailInUseSSL,
+		java.lang.Integer mailInServerPort, java.lang.String mailInUserName,
+		java.lang.String mailInPassword, java.lang.Integer mailInReadInterval,
+		java.lang.Boolean mailOutConfigured,
+		java.lang.String mailOutServerName, java.lang.Boolean mailOutUseSSL,
+		java.lang.Integer mailOutServerPort, java.lang.String mailOutUserName,
+		java.lang.String mailOutPassword)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		try {
@@ -437,10 +616,104 @@ public class MBCategoryServiceHttp {
 
 			Object paramObj4 = new BooleanWrapper(mergeWithParentCategory);
 
+			Object paramObj5 = mailingListAddress;
+
+			if (mailingListAddress == null) {
+				paramObj5 = new NullWrapper("java.lang.String");
+			}
+
+			Object paramObj6 = mailAddress;
+
+			if (mailAddress == null) {
+				paramObj6 = new NullWrapper("java.lang.String");
+			}
+
+			Object paramObj7 = mailInProtocol;
+
+			if (mailInProtocol == null) {
+				paramObj7 = new NullWrapper("java.lang.String");
+			}
+
+			Object paramObj8 = mailInServerName;
+
+			if (mailInServerName == null) {
+				paramObj8 = new NullWrapper("java.lang.String");
+			}
+
+			Object paramObj9 = mailInUseSSL;
+
+			if (mailInUseSSL == null) {
+				paramObj9 = new NullWrapper("java.lang.Boolean");
+			}
+
+			Object paramObj10 = mailInServerPort;
+
+			if (mailInServerPort == null) {
+				paramObj10 = new NullWrapper("java.lang.Integer");
+			}
+
+			Object paramObj11 = mailInUserName;
+
+			if (mailInUserName == null) {
+				paramObj11 = new NullWrapper("java.lang.String");
+			}
+
+			Object paramObj12 = mailInPassword;
+
+			if (mailInPassword == null) {
+				paramObj12 = new NullWrapper("java.lang.String");
+			}
+
+			Object paramObj13 = mailInReadInterval;
+
+			if (mailInReadInterval == null) {
+				paramObj13 = new NullWrapper("java.lang.Integer");
+			}
+
+			Object paramObj14 = mailOutConfigured;
+
+			if (mailOutConfigured == null) {
+				paramObj14 = new NullWrapper("java.lang.Boolean");
+			}
+
+			Object paramObj15 = mailOutServerName;
+
+			if (mailOutServerName == null) {
+				paramObj15 = new NullWrapper("java.lang.String");
+			}
+
+			Object paramObj16 = mailOutUseSSL;
+
+			if (mailOutUseSSL == null) {
+				paramObj16 = new NullWrapper("java.lang.Boolean");
+			}
+
+			Object paramObj17 = mailOutServerPort;
+
+			if (mailOutServerPort == null) {
+				paramObj17 = new NullWrapper("java.lang.Integer");
+			}
+
+			Object paramObj18 = mailOutUserName;
+
+			if (mailOutUserName == null) {
+				paramObj18 = new NullWrapper("java.lang.String");
+			}
+
+			Object paramObj19 = mailOutPassword;
+
+			if (mailOutPassword == null) {
+				paramObj19 = new NullWrapper("java.lang.String");
+			}
+
 			MethodWrapper methodWrapper = new MethodWrapper(MBCategoryServiceUtil.class.getName(),
 					"updateCategory",
 					new Object[] {
-						paramObj0, paramObj1, paramObj2, paramObj3, paramObj4
+						paramObj0, paramObj1, paramObj2, paramObj3, paramObj4,
+						paramObj5, paramObj6, paramObj7, paramObj8, paramObj9,
+						paramObj10, paramObj11, paramObj12, paramObj13,
+						paramObj14, paramObj15, paramObj16, paramObj17,
+						paramObj18, paramObj19
 					});
 
 			Object returnObj = null;

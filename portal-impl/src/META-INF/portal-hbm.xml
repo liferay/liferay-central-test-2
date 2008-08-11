@@ -957,6 +957,36 @@
 		<property name="description" type="com.liferay.portal.dao.orm.hibernate.StringType" />
 		<property name="lastPostDate" type="org.hibernate.type.TimestampType" />
 	</class>
+	<class name="com.liferay.portlet.messageboards.model.impl.MBMailingImpl" table="MBMailing">
+		<cache usage="read-write" />
+		<id name="mailingId" type="long">
+			<generator class="assigned" />
+		</id>
+		<property name="uuid" column="uuid_" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="groupId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="companyId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="userId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="userName" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="createDate" type="org.hibernate.type.TimestampType" />
+		<property name="modifiedDate" type="org.hibernate.type.TimestampType" />
+		<property name="categoryId" type="com.liferay.portal.dao.orm.hibernate.LongType" />
+		<property name="mailingListAddress" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="mailAddress" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="mailInProtocol" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="mailInServerName" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="mailInUseSSL" type="com.liferay.portal.dao.orm.hibernate.BooleanType" />
+		<property name="mailInServerPort" type="com.liferay.portal.dao.orm.hibernate.IntegerType" />
+		<property name="mailInUserName" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="mailInPassword" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="mailInReadInterval" type="com.liferay.portal.dao.orm.hibernate.IntegerType" />
+		<property name="mailOutConfigured" type="com.liferay.portal.dao.orm.hibernate.BooleanType" />
+		<property name="mailOutServerName" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="mailOutUseSSL" type="com.liferay.portal.dao.orm.hibernate.BooleanType" />
+		<property name="mailOutServerPort" type="com.liferay.portal.dao.orm.hibernate.IntegerType" />
+		<property name="mailOutUserName" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="mailOutPassword" type="com.liferay.portal.dao.orm.hibernate.StringType" />
+		<property name="active" column="active_" type="com.liferay.portal.dao.orm.hibernate.BooleanType" />
+	</class>
 	<class name="com.liferay.portlet.messageboards.model.impl.MBDiscussionImpl" table="MBDiscussion">
 		<cache usage="read-write" />
 		<id name="discussionId" type="long">

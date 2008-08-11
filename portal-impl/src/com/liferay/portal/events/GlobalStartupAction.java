@@ -38,13 +38,10 @@ import com.liferay.portal.kernel.messaging.DestinationNames;
 import com.liferay.portal.kernel.messaging.MessageBusUtil;
 import com.liferay.portal.kernel.messaging.ParallelDestination;
 import com.liferay.portal.kernel.messaging.SerialDestination;
-import com.liferay.portal.kernel.scheduler.SchedulerEngineUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.ServerDetector;
 import com.liferay.portal.liveusers.messaging.LiveUsersMessageListener;
 import com.liferay.portal.pop.POPServerUtil;
-import com.liferay.portal.scheduler.SchedulerEngineImpl;
-import com.liferay.portal.scheduler.quartz.QuartzSchedulerEngineUtil;
 import com.liferay.portal.util.PrefsPropsUtil;
 import com.liferay.portal.util.PropsKeys;
 import com.liferay.portal.util.PropsUtil;
@@ -218,17 +215,6 @@ public class GlobalStartupAction extends SimpleAction {
 		if (PropsValues.POP_SERVER_NOTIFICATIONS_ENABLED) {
 			POPServerUtil.start();
 		}
-
-		// Scheduler
-
-		try {
-			QuartzSchedulerEngineUtil.init();
-		}
-		catch (Exception e) {
-			_log.error(e, e);
-		}
-
-		SchedulerEngineUtil.init(new SchedulerEngineImpl());
 
 		// Message bus
 

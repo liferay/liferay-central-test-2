@@ -40,10 +40,12 @@ import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.DocumentUtil;
 import com.liferay.portal.util.PortletKeys;
 import com.liferay.portlet.messageboards.NoSuchCategoryException;
+import com.liferay.portlet.messageboards.NoSuchMailingException;
 import com.liferay.portlet.messageboards.NoSuchMessageException;
 import com.liferay.portlet.messageboards.NoSuchThreadException;
 import com.liferay.portlet.messageboards.model.MBBan;
 import com.liferay.portlet.messageboards.model.MBCategory;
+import com.liferay.portlet.messageboards.model.MBMailing;
 import com.liferay.portlet.messageboards.model.MBMessage;
 import com.liferay.portlet.messageboards.model.MBMessageFlag;
 import com.liferay.portlet.messageboards.model.MBThread;
@@ -51,6 +53,7 @@ import com.liferay.portlet.messageboards.model.impl.MBCategoryImpl;
 import com.liferay.portlet.messageboards.model.impl.MBMessageImpl;
 import com.liferay.portlet.messageboards.service.MBBanLocalServiceUtil;
 import com.liferay.portlet.messageboards.service.MBCategoryLocalServiceUtil;
+import com.liferay.portlet.messageboards.service.MBMailingLocalServiceUtil;
 import com.liferay.portlet.messageboards.service.MBMessageFlagLocalServiceUtil;
 import com.liferay.portlet.messageboards.service.MBMessageLocalServiceUtil;
 import com.liferay.portlet.messageboards.service.persistence.MBBanUtil;
@@ -481,11 +484,42 @@ public class MBPortletDataHandlerImpl implements PortletDataHandler {
 						addCommunityPermissions, addGuestPermissions);
 				}
 				else {
-					existingCategory =
-						MBCategoryLocalServiceUtil.updateCategory(
-							existingCategory.getCategoryId(), parentCategoryId,
-							category.getName(), category.getDescription(),
-							false);
+					MBMailing mailing= null;
+
+					try {
+						mailing= MBMailingLocalServiceUtil.getMailingByCategory(
+								existingCategory.getCategoryId());
+					} catch (NoSuchMailingException e) {
+					}
+
+					if (mailing != null) {
+						existingCategory =
+							MBCategoryLocalServiceUtil.updateCategory(
+								userId,	existingCategory.getCategoryId(),
+								parentCategoryId, category.getName(),
+								category.getDescription(), false,
+								mailing.getMailingListAddress(),
+								mailing.getMailAddress(),
+								mailing.getMailInProtocol(),
+								mailing.getMailInServerName(),
+								mailing.getMailInUseSSL(),
+								mailing.getMailInServerPort(),
+								mailing.getMailInServerName(),
+								mailing.getMailInPassword(),
+								mailing.getMailInReadInterval(),
+								mailing.getMailOutConfigured(),
+								mailing.getMailOutServerName(),
+								mailing.getMailOutUseSSL(),
+								mailing.getMailOutServerPort(),
+								mailing.getMailOutUserName(),
+								mailing.getMailOutPassword());
+					} else {
+						existingCategory =
+							MBCategoryLocalServiceUtil.updateCategory(
+								userId, existingCategory.getCategoryId(),
+								parentCategoryId, category.getName(),
+								category.getDescription(), false);
+					}
 				}
 			}
 			else {

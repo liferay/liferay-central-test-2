@@ -554,6 +554,18 @@
 		<property name="service" ref="com.liferay.portlet.messageboards.service.MBCategoryService.transaction" />
 		<property name="serviceInterface" value="com.liferay.portlet.messageboards.service.MBCategoryService" />
 	</bean>
+	<bean name="/com_liferay_portlet_messageboards_service_spring_MBMailingService-burlap" class="org.springframework.remoting.caucho.BurlapServiceExporter">
+		<property name="service" ref="com.liferay.portlet.messageboards.service.MBMailingService.transaction" />
+		<property name="serviceInterface" value="com.liferay.portlet.messageboards.service.MBMailingService" />
+	</bean>
+	<bean name="/com_liferay_portlet_messageboards_service_spring_MBMailingService-hessian" class="org.springframework.remoting.caucho.HessianServiceExporter">
+		<property name="service" ref="com.liferay.portlet.messageboards.service.MBMailingService.transaction" />
+		<property name="serviceInterface" value="com.liferay.portlet.messageboards.service.MBMailingService" />
+	</bean>
+	<bean name="/com_liferay_portlet_messageboards_service_spring_MBMailingService-http" class="org.springframework.remoting.httpinvoker.HttpInvokerServiceExporter">
+		<property name="service" ref="com.liferay.portlet.messageboards.service.MBMailingService.transaction" />
+		<property name="serviceInterface" value="com.liferay.portlet.messageboards.service.MBMailingService" />
+	</bean>
 	<bean name="/com_liferay_portlet_messageboards_service_spring_MBMessageService-burlap" class="org.springframework.remoting.caucho.BurlapServiceExporter">
 		<property name="service" ref="com.liferay.portlet.messageboards.service.MBMessageService.transaction" />
 		<property name="serviceInterface" value="com.liferay.portlet.messageboards.service.MBMessageService" />

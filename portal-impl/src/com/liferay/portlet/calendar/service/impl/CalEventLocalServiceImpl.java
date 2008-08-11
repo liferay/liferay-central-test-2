@@ -1222,7 +1222,7 @@ public class CalEventLocalServiceImpl extends CalEventLocalServiceBaseImpl {
 
 		int recurrenceType = recurrence.getFrequency();
 
-		int interval = recurrence.getInterval();
+		int interval = (int)recurrence.getInterval();
 
 		if (recurrenceType == Recurrence.DAILY) {
 			recur = new Recur(Recur.DAILY, -1);
@@ -1450,7 +1450,7 @@ public class CalEventLocalServiceImpl extends CalEventLocalServiceBaseImpl {
 				addField = Calendar.YEAR;
 			}
 
-			int addAmount = recurrence.getInterval() * recur.getCount();
+			int addAmount = (int)recurrence.getInterval() * recur.getCount();
 
 			until.add(addField, addAmount);
 			until.add(Calendar.DAY_OF_YEAR, -1);

@@ -69,6 +69,11 @@ import java.util.TimeZone;
 public class Recurrence implements Serializable {
 
 	/**
+	 * Field MINUTES
+	 */
+	public final static int MINUTES = 2;
+
+	/**
 	 * Field DAILY
 	 */
 	public final static int DAILY = 3;
@@ -111,7 +116,7 @@ public class Recurrence implements Serializable {
 	/**
 	 * Field interval
 	 */
-	protected int interval;
+	protected long interval;
 
 	/**
 	 * Field interval
@@ -162,11 +167,41 @@ public class Recurrence implements Serializable {
 	 *
 	 *
 	 * @param	start
+	 * @param	freq
+	 *
+	 */
+	public Recurrence(Calendar start, int freq, long interval) {
+		this(start, (Calendar)null, freq);
+		setInterval(interval);
+	}
+
+	/**
+	 * Constructor Recurrence
+	 *
+	 *
+	 * @param	start
 	 * @param	dur
 	 *
 	 */
 	public Recurrence(Calendar start, Duration dur) {
 		this(start, dur, NO_RECURRENCE);
+	}
+
+	/**
+	 * Constructor Recurrence
+	 *
+	 *
+	 * @param	start
+	 * @param	end
+	 * @param	freq
+	 *
+	 */
+	public Recurrence(Calendar start, Calendar end, int freq) {
+		setDtStart(start);
+		setUntil(end);
+		duration = new Duration();
+		frequency = freq;
+		interval = 1;
 	}
 
 	/**
@@ -313,9 +348,9 @@ public class Recurrence implements Serializable {
 	 *
 	 */
 	public void setFrequency(int freq) {
-		if ((frequency != DAILY) && (frequency != WEEKLY)
-			&& (frequency != MONTHLY) && (frequency != YEARLY)
-			&& (frequency != NO_RECURRENCE)) {
+		if ((frequency != MINUTES) && (frequency != DAILY)
+			&& (frequency != WEEKLY) && (frequency != MONTHLY)
+			&& (frequency != YEARLY) && (frequency != NO_RECURRENCE)) {
 			throw new IllegalArgumentException("Invalid frequency");
 		}
 
@@ -326,10 +361,10 @@ public class Recurrence implements Serializable {
 	 * Method getInterval
 	 *
 	 *
-	 * @return	int
+	 * @return	long
 	 *
 	 */
-	public int getInterval() {
+	public long getInterval() {
 		return interval;
 	}
 
@@ -340,7 +375,7 @@ public class Recurrence implements Serializable {
 	 * @param	intr
 	 *
 	 */
-	public void setInterval(int intr) {
+	public void setInterval(long intr) {
 		interval = (intr > 0) ? intr : 1;
 	}
 

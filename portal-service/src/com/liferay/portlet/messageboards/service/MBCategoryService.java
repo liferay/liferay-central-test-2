@@ -50,6 +50,22 @@ package com.liferay.portlet.messageboards.service;
 public interface MBCategoryService {
 	public com.liferay.portlet.messageboards.model.MBCategory addCategory(
 		long plid, long parentCategoryId, java.lang.String name,
+		java.lang.String description, java.lang.String mailingListAddress,
+		java.lang.String mailAddress, java.lang.String mailInProtocol,
+		java.lang.String mailInServerName, java.lang.Boolean mailInUseSSL,
+		java.lang.Integer mailInServerPort, java.lang.String mailInUserName,
+		java.lang.String mailInPassword, java.lang.Integer mailInReadInterval,
+		java.lang.Boolean mailOutConfigured,
+		java.lang.String mailOutServerName, java.lang.Boolean mailOutUseSSL,
+		java.lang.Integer mailOutServerPort, java.lang.String mailOutUserName,
+		java.lang.String mailOutPassword,
+		java.lang.String[] communityPermissions,
+		java.lang.String[] guestPermissions)
+		throws java.rmi.RemoteException, com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException;
+
+	public com.liferay.portlet.messageboards.model.MBCategory addCategory(
+		long plid, long parentCategoryId, java.lang.String name,
 		java.lang.String description, boolean addCommunityPermissions,
 		boolean addGuestPermissions)
 		throws java.rmi.RemoteException, com.liferay.portal.PortalException,
@@ -89,7 +105,16 @@ public interface MBCategoryService {
 
 	public com.liferay.portlet.messageboards.model.MBCategory updateCategory(
 		long categoryId, long parentCategoryId, java.lang.String name,
-		java.lang.String description, boolean mergeWithParentCategory)
+		java.lang.String description, boolean mergeWithParentCategory,
+		java.lang.String mailingListAddress, java.lang.String mailAddress,
+		java.lang.String mailInProtocol, java.lang.String mailInServerName,
+		java.lang.Boolean mailInUseSSL, java.lang.Integer mailInServerPort,
+		java.lang.String mailInUserName, java.lang.String mailInPassword,
+		java.lang.Integer mailInReadInterval,
+		java.lang.Boolean mailOutConfigured,
+		java.lang.String mailOutServerName, java.lang.Boolean mailOutUseSSL,
+		java.lang.Integer mailOutServerPort, java.lang.String mailOutUserName,
+		java.lang.String mailOutPassword)
 		throws java.rmi.RemoteException, com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;
 }

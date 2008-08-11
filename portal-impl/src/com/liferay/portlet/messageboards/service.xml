@@ -99,6 +99,66 @@
 		<reference package-path="com.liferay.portal" entity="User" />
 		<reference package-path="com.liferay.portlet.tags" entity="TagsEntry" />
 	</entity>
+	<entity name="MBMailing" uuid="true" local-service="true" remote-service="true">
+
+		<!-- PK fields -->
+
+		<column name="mailingId" type="long" primary="true" />
+
+		<!-- Group instance -->
+
+		<column name="groupId" type="long" />
+		
+		<!-- Audit fields -->
+
+		<column name="companyId" type="long" />
+		<column name="userId" type="long" />
+		<column name="userName" type="String" />
+		<column name="createDate" type="Date" />
+		<column name="modifiedDate" type="Date" />
+
+		<!-- Other fields -->
+
+		<column name="categoryId" type="long" />
+		<column name="mailingListAddress" type="String" />
+		<column name="mailAddress" type="String" />
+		<column name="mailInProtocol" type="String" />
+		<column name="mailInServerName" type="String" />
+		<column name="mailInUseSSL" type="boolean" />
+		<column name="mailInServerPort" type="int" />
+		<column name="mailInUserName" type="String" />
+		<column name="mailInPassword" type="String" />
+		<column name="mailInReadInterval" type="int" />
+		<column name="mailOutConfigured" type="boolean" />
+		<column name="mailOutServerName" type="String" />
+		<column name="mailOutUseSSL" type="boolean" />
+		<column name="mailOutServerPort" type="int" />
+		<column name="mailOutUserName" type="String" />
+		<column name="mailOutPassword" type="String" />
+		<column name="active" type="boolean" />
+
+		<!-- Order -->
+
+		<order by="asc">
+			<order-column name="categoryId" />
+			<order-column name="mailingListAddress" case-sensitive="false" />
+		</order>
+
+		<!-- Finder methods -->
+
+		<finder name="CategoryId" return-type="MBMailing">
+			<finder-column name="categoryId" />
+		</finder>
+		<finder name="Active" return-type="Collection">
+			<finder-column name="active" />
+		</finder>
+
+		<!-- References -->
+
+		<reference package-path="com.liferay.counter" entity="Counter" />
+		<reference package-path="com.liferay.portal" entity="Resource" />
+		<reference package-path="com.liferay.portal" entity="User" />
+	</entity>
 	<entity name="MBDiscussion" local-service="false" remote-service="false">
 
 		<!-- PK fields -->
@@ -316,6 +376,13 @@
 		<exception>BannedUser</exception>
 		<exception>CategoryName</exception>
 		<exception>MessageBody</exception>
+		<exception>MessageSubject</exception>
+		<exception>MailingListAddress</exception>
+		<exception>MailAddress</exception>
+		<exception>MailInServerName</exception>
+		<exception>MailInUserName</exception>
+		<exception>MailOutServerName</exception>
+		<exception>MailOutUserName</exception>
 		<exception>MessageSubject</exception>
 		<exception>RequiredMessage</exception>
 	</exceptions>

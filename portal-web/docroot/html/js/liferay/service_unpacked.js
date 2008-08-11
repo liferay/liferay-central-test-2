@@ -1950,6 +1950,31 @@ Liferay.Service.MB.MBCategory = {
 	}
 };
 
+Liferay.Service.MB.MBMailing = {
+	serviceClassName: Liferay.Service.MB.servicePackage + "MBMailing" + Liferay.Service.classNameSuffix,
+
+	getMailingByCategory: function(params, callback) {
+		params.serviceClassName = this.serviceClassName;
+		params.serviceMethodName = "getMailingByCategory";
+
+		return Liferay.Service.ajax(params, callback);
+	},
+
+	updateActive: function(params, callback) {
+		params.serviceClassName = this.serviceClassName;
+		params.serviceMethodName = "updateActive";
+
+		return Liferay.Service.ajax(params, callback);
+	},
+
+	updateMailOutUseDefault: function(params, callback) {
+		params.serviceClassName = this.serviceClassName;
+		params.serviceMethodName = "updateMailOutUseDefault";
+
+		return Liferay.Service.ajax(params, callback);
+	}
+};
+
 Liferay.Service.MB.MBMessage = {
 	serviceClassName: Liferay.Service.MB.servicePackage + "MBMessage" + Liferay.Service.classNameSuffix,
 
