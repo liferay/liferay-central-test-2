@@ -185,7 +185,7 @@
 			}
 			
 			// add treeview class to activate styles
-			this.addClass("treeview");
+			this.addClass("ui-tree");
 			
 			// prepare branches and find all tree items with child lists
 			var branches = this.find("li").prepareBranches(settings);
@@ -229,12 +229,12 @@
 		closed: "closed",
 		expandable: "expandable",
 		expandableHitarea: "expandable-hitarea",
-		lastExpandableHitarea: "lastExpandable-hitarea",
+		lastExpandableHitarea: "last-expandable-hitarea",
 		collapsable: "collapsable",
 		collapsableHitarea: "collapsable-hitarea",
-		lastCollapsableHitarea: "lastCollapsable-hitarea",
-		lastCollapsable: "lastCollapsable",
-		lastExpandable: "lastExpandable",
+		lastCollapsableHitarea: "last-collapsable-hitarea",
+		lastCollapsable: "last-collapsable",
+		lastExpandable: "last-expandable",
 		last: "last",
 		hitarea: "hitarea"
 	});
