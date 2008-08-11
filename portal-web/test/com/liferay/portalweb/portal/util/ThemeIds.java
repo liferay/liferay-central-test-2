@@ -22,27 +22,43 @@
 
 package com.liferay.portalweb.portal.util;
 
-import com.liferay.portal.kernel.util.GetterUtil;
-
 /**
- * <a href="TestPropsValues.java.html"><b><i>View Source</i></b></a>
+ * <a href="ThemeIds.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *
  */
-public class TestPropsValues {
+public class ThemeIds {
 
-	public static final String BROWSER_TYPE = TestPropsUtil.get("browser.type");
+	public static String getCount() {
+		return _instance._getCount();
+	}
 
-	public static final String PORTAL_URL = TestPropsUtil.get("portal.url");
+	public static String getThemeId() {
+		return _instance._getThemeId();
+	}
 
-	public static final String SELENIUM_HOST =
-		TestPropsUtil.get("selenium.host");
+	public static void iterate() {
+		_instance._iterate();
+	}
 
-	public static final int SELENIUM_PORT = GetterUtil.getInteger(
-		TestPropsUtil.get("selenium.port"));
+	private ThemeIds() {
+	}
 
-	public static final String[] THEME_IDS = TestPropsUtil.getArray(
-		"theme.ids");
+	private int _getCount() {
+		return TestPropsValues.THEME_IDS.length;
+	}
+
+	private String _getThemeId() {
+		return TestPropsValues.THEME_IDS[_pos];
+	}
+
+	private void iterate() {
+		_pos++;
+	}
+
+	private static ThemeIds _instance = new ThemeIds();
+
+	private int _pos;
 
 }

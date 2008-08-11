@@ -68,7 +68,24 @@ public class RuntimeVariables {
 	}
 
 	private String _replace(String text) {
+
+		// Root directory
+
 		text = StringUtil.replace(text, "L:\\portal\\build\\", _sourceDir);
+
+		// Theme output directory
+
+		text = StringUtil.replace(
+			text, "\\test-output\\brochure\\",
+			"\\test-output\\" + SeleniumUtil.getTimestamp() + "\\" +
+				ThemeIds.getThemeId();
+
+		// Select theme
+
+		text = StringUtil.replace(
+			text, "//input[@name='_88_themeId' and @value='brochure']",
+			"//input[@name='_88_themeId' and @value='" + ThemeIds.getThemeId() +
+				"']");
 
 		if (_contextReplace == null) {
 			return text;

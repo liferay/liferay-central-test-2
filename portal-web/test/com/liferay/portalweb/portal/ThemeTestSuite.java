@@ -35,7 +35,10 @@ public class ThemeTestSuite extends BaseTests {
 
 	public ThemeTestSuite() {
 		addTestSuite(LoginTests.class);
-		addTestSuite(ThemeTests.class);
+
+		for (int i = 0; i < ThemeIds.getCount(); i++) {
+			addTestSuite(ThemeTests.class);
+		}
 
 		addTestSuite(StopSeleniumTest.class);
 	}

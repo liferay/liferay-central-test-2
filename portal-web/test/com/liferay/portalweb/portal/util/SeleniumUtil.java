@@ -22,6 +22,7 @@
 
 package com.liferay.portalweb.portal.util;
 
+import com.liferay.portal.kernel.util.Time;
 import com.liferay.portalweb.portal.util.TestPropsValues;
 
 import com.thoughtworks.selenium.DefaultSelenium;
@@ -39,6 +40,10 @@ public class SeleniumUtil {
 		return _instance._getSelenium();
 	}
 
+	public static String getTimestamp() {
+		return _instance._getTimestamp();
+	}
+
 	public static void startSelenium() {
 		_instance._startSelenium();
 	}
@@ -48,6 +53,7 @@ public class SeleniumUtil {
 	}
 
 	private SeleniumUtil() {
+		_timestamp = Time.getTimestamp();
 	}
 
 	private Selenium _getSelenium() {
@@ -56,6 +62,10 @@ public class SeleniumUtil {
 		}
 
 		return _selenium;
+	}
+
+	private String _getTimestamp() {
+		return _timestamp;
 	}
 
 	private void _startSelenium() {
