@@ -82,20 +82,12 @@ public class SearchRequest {
 		_doc = doc;
 	}
 
-	public String getQuery() {
+	public Query getQuery() {
 		return _query;
 	}
 
-	public void setQuery(String query) {
+	public void setQuery(Query query) {
 		_query = query;
-	}
-
-	public Query getQueryModel() {
-		return _queryModel;
-	}
-
-	public void setQueryModel(Query queryModel) {
-		_queryModel = queryModel;
 	}
 
 	public Sort getSort() {
@@ -126,8 +118,7 @@ public class SearchRequest {
 	private long _companyId;
 	private String _id;
 	private Document _doc;
-	private String _query;
-	private Query _queryModel;
+	private Query _query;
 	private Sort _sort;
 	private int _start;
 	private int _end;

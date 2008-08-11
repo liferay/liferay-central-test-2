@@ -92,19 +92,6 @@ public class LuceneSearchEngineUtil {
 		return _engine.isIndexReadOnly();
 	}
 
-	public static Hits search(long companyId, String query, int start, int end)
-		throws SearchException {
-
-		return _engine.getSearcher().search(companyId, query, start, end);
-	}
-
-	public static Hits search(
-			long companyId, String query, Sort sort, int start, int end)
-		throws SearchException {
-
-		return _engine.getSearcher().search(companyId, query, sort, start, end);
-	}
-
 	public static Hits search(long companyId, Query query, int start, int end)
 		throws SearchException {
 

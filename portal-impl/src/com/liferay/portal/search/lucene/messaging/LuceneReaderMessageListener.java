@@ -26,7 +26,6 @@ import com.liferay.portal.kernel.messaging.Message;
 import com.liferay.portal.kernel.messaging.MessageBusUtil;
 import com.liferay.portal.kernel.messaging.MessageListener;
 import com.liferay.portal.kernel.search.Hits;
-import com.liferay.portal.kernel.search.Query;
 import com.liferay.portal.kernel.search.messaging.SearchRequest;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.search.lucene.LuceneSearchEngineUtil;
@@ -90,22 +89,10 @@ public class LuceneReaderMessageListener implements MessageListener {
 	protected void doCommandSearch(Message message, SearchRequest searchRequest)
 		throws Exception {
 
-		Hits hits = null;
-
-		Query queryModel = searchRequest.getQueryModel();
-
-		if (queryModel != null) {
-			hits = LuceneSearchEngineUtil.search(
-				searchRequest.getCompanyId(), queryModel,
-				searchRequest.getSort(), searchRequest.getStart(),
-				searchRequest.getEnd());
-		}
-		else {
-			hits = LuceneSearchEngineUtil.search(
-				searchRequest.getCompanyId(), searchRequest.getQuery(),
-				searchRequest.getSort(), searchRequest.getStart(),
-				searchRequest.getEnd());
-		}
+		Hits hits = LuceneSearchEngineUtil.search(
+			searchRequest.getCompanyId(), searchRequest.getQuery(),
+			searchRequest.getSort(), searchRequest.getStart(),
+			searchRequest.getEnd());
 
 		message.setResponseValue(hits);
 

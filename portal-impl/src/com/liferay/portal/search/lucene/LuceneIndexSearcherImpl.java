@@ -33,7 +33,6 @@ import com.liferay.portal.kernel.search.SearchEngineUtil;
 import com.liferay.portal.kernel.search.SearchException;
 import com.liferay.portal.kernel.search.Sort;
 import com.liferay.portal.kernel.util.GetterUtil;
-import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Time;
 
 import java.io.IOException;
@@ -43,7 +42,6 @@ import java.util.List;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.apache.lucene.queryParser.ParseException;
-import org.apache.lucene.queryParser.QueryParser;
 import org.apache.lucene.search.BooleanQuery;
 import org.apache.lucene.search.SortField;
 
@@ -55,38 +53,74 @@ import org.apache.lucene.search.SortField;
  */
 public class LuceneIndexSearcherImpl implements IndexSearcher {
 
-	public Hits search(long companyId, String query, int start, int end)
+	public Hits search(long companyId, Query query, int start, int end)
 		throws SearchException {
 
-		Sort sort = null;
-
-		return search(companyId, query, sort, start, end);
+		return search(companyId, query, null, start, end);
 	}
 
 	public Hits search(
-			long companyId, String query, Sort sort, int start, int end)
+			long companyId, Query query, Sort sort, int start, int end)
 		throws SearchException {
 
-		Query queryModel = null;
+		if (_log.isDebugEnabled()) {
+			_log.debug("Query: " + query);
+		}
 
-		return search(companyId, query, queryModel, sort, start, end);
-	}
+		Hits hits = null;
 
-	public Hits search(long companyId, Query queryModel, int start, int end)
-		throws SearchException {
+		org.apache.lucene.search.IndexSearcher searcher = null;
 
-		Sort sort = null;
+		try {
+			searcher = LuceneUtil.getSearcher(companyId);
 
-		return search(companyId, queryModel, sort, start, end);
-	}
+			org.apache.lucene.search.Sort luceneSort = null;
 
-	public Hits search(
-			long companyId, Query queryModel, Sort sort, int start, int end)
-		throws SearchException {
+			if (sort != null) {
+				luceneSort = new org.apache.lucene.search.Sort(
+					new SortField(sort.getFieldName(), sort.isReverse()));
+			}
 
-		String query = null;
+			org.apache.lucene.search.Hits luceneHits = searcher.search(
+				QueryTranslator.translate(query), luceneSort);
 
-		return search(companyId, query, queryModel, sort, start, end);
+			hits = subset(luceneHits, start, end);
+		}
+		catch (RuntimeException re) {
+
+			// Trying to sort on a field when there are no results throws a
+			// RuntimeException that should not be rethrown
+
+			String msg = GetterUtil.getString(re.getMessage());
+
+			if (!msg.endsWith("does not appear to be indexed")) {
+				throw re;
+			}
+		}
+		catch (Exception e) {
+			if (e instanceof BooleanQuery.TooManyClauses ||
+				e instanceof ParseException) {
+
+				_log.error("Query: " + query, e);
+
+				return new HitsImpl();
+			}
+			else {
+				throw new SearchException(e);
+			}
+		}
+		finally {
+			try {
+				if (searcher != null) {
+					searcher.close();
+				}
+			}
+			catch (IOException ioe) {
+				throw new SearchException(ioe);
+			}
+		}
+
+		return hits;
 	}
 
 	protected DocumentImpl getDocument(
@@ -115,88 +149,6 @@ public class LuceneIndexSearcherImpl implements IndexSearcher {
 		}
 
 		return newDoc;
-	}
-
-	protected Hits search(
-			long companyId, String query, Query queryModel, Sort sort,
-			int start, int end)
-		throws SearchException {
-
-		if (_log.isDebugEnabled()) {
-			if (queryModel != null) {
-				_log.debug("Query model: " + queryModel);
-			}
-			else {
-				_log.debug("Query: " + query);
-			}
-		}
-
-		Hits hits = null;
-
-		org.apache.lucene.search.IndexSearcher searcher = null;
-
-		try {
-			searcher = LuceneUtil.getSearcher(companyId);
-
-			org.apache.lucene.search.Sort luceneSort = null;
-
-			if (sort != null) {
-				luceneSort = new org.apache.lucene.search.Sort(
-					new SortField(sort.getFieldName(), sort.isReverse()));
-			}
-
-			org.apache.lucene.search.Query luceneQuery = null;
-
-			if (queryModel != null) {
-				luceneQuery = QueryTranslator.translate(queryModel);
-			}
-			else {
-				QueryParser parser = new QueryParser(
-					StringPool.BLANK, LuceneUtil.getAnalyzer());
-
-				luceneQuery = parser.parse(query);
-			}
-
-			org.apache.lucene.search.Hits luceneHits = searcher.search(
-				luceneQuery, luceneSort);
-
-			hits = subset(luceneHits, start, end);
-		}
-		catch (RuntimeException re) {
-
-			// Trying to sort on a field when there are no results throws a
-			// RuntimeException that should not be rethrown
-
-			String msg = GetterUtil.getString(re.getMessage());
-
-			if (!msg.endsWith("does not appear to be indexed")) {
-				throw re;
-			}
-		}
-		catch (Exception e) {
-			if (e instanceof BooleanQuery.TooManyClauses ||
-				e instanceof ParseException) {
-
-				_log.error("Parsing keywords " + query, e);
-
-				return new HitsImpl();
-			}
-			else {
-				throw new SearchException(e);
-			}
-		}
-		finally {
-			try {
-				if (searcher != null) {
-					searcher.close();
-				}
-			}
-			catch (IOException ioe) {
-				throw new SearchException(ioe);
-			}
-		}
-
-		return hits;
 	}
 
 	protected Hits subset(

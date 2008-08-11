@@ -40,36 +40,6 @@ import com.liferay.portal.kernel.search.messaging.SearchRequest;
  */
 public class IndexSearcherImpl implements IndexSearcher {
 
-	public Hits search(long companyId, String query, int start, int end)
-		throws SearchException {
-
-		return search(companyId, query, null, start, end);
-	}
-
-	public Hits search(
-			long companyId, String query, Sort sort, int start, int end)
-		throws SearchException {
-
-		try {
-			SearchRequest searchRequest = new SearchRequest();
-
-			searchRequest.setCommand(SearchRequest.COMMAND_SEARCH);
-			searchRequest.setCompanyId(companyId);
-			searchRequest.setQuery(query);
-			searchRequest.setSort(sort);
-			searchRequest.setStart(start);
-			searchRequest.setEnd(end);
-
-			Hits hits = (Hits)MessageBusUtil.sendSynchronizedMessage(
-				DestinationNames.SEARCH_READER, new Message(searchRequest));
-
-			return hits;
-		}
-		catch (Exception e) {
-			throw new SearchException(e);
-		}
-	}
-
 	public Hits search(long companyId, Query query, int start, int end)
 		throws SearchException {
 
@@ -85,7 +55,7 @@ public class IndexSearcherImpl implements IndexSearcher {
 
 			searchRequest.setCommand(SearchRequest.COMMAND_SEARCH);
 			searchRequest.setCompanyId(companyId);
-			searchRequest.setQueryModel(query);
+			searchRequest.setQuery(query);
 			searchRequest.setSort(sort);
 			searchRequest.setStart(start);
 			searchRequest.setEnd(end);
