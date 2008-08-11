@@ -869,7 +869,7 @@ img.ui-datepicker-trigger {
 	border: 1px #D3D7DB solid;
 	border-left: 0;
 	border-right: 0;
-	padding: 10px 20px 10px 20px;
+	padding: 10px 20px;
 }
 
 .ui-tags-toolbar {
@@ -887,7 +887,7 @@ img.ui-datepicker-trigger {
 	text-align: right;
 }
 
-.ui-tags-actions input,   .ui-tags-actions div,   .ui-tags-actions select {
+.ui-tags-actions input, .ui-tags-actions div, .ui-tags-actions select {
 	margin-left: 5px;
 }
 
