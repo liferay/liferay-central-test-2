@@ -85,8 +85,8 @@ int tabIndex = 1;
 
 			if ((elDepth != null) && (elName != null) && (elType != null)) {
 				var elDepthValue = elDepth.value;
-				var elNameValue = escape(elName.value);
-				var elTypeValue = escape(elType.value);
+				var elNameValue = encodeURIComponent(elName.value);
+				var elTypeValue = encodeURIComponent(elType.value);
 
 				if ((cmd == "add") || ((cmd == "remove") && (elCount != i))) {
 					for (var j = 0; j <= elDepthValue; j++) {

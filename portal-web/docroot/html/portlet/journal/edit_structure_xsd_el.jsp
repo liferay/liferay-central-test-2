@@ -27,8 +27,8 @@
 <%
 Element el = (Element)request.getAttribute(WebKeys.JOURNAL_STRUCTURE_EL);
 
-String elName = java.net.URLDecoder.decode(el.attributeValue("name", StringPool.BLANK));
-String elType = java.net.URLDecoder.decode(el.attributeValue("type", StringPool.BLANK));
+String elName = JS.decodeURIComponent(el.attributeValue("name", StringPool.BLANK));
+String elType = JS.decodeURIComponent(el.attributeValue("type", StringPool.BLANK));
 
 String parentElType = java.net.URLDecoder.decode(el.getParent().attributeValue("type", StringPool.BLANK));
 
