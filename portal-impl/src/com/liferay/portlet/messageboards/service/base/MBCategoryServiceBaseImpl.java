@@ -43,8 +43,6 @@ import com.liferay.portlet.messageboards.service.MBBanLocalService;
 import com.liferay.portlet.messageboards.service.MBBanService;
 import com.liferay.portlet.messageboards.service.MBCategoryLocalService;
 import com.liferay.portlet.messageboards.service.MBCategoryService;
-import com.liferay.portlet.messageboards.service.MBMailingLocalService;
-import com.liferay.portlet.messageboards.service.MBMailingService;
 import com.liferay.portlet.messageboards.service.MBMessageFlagLocalService;
 import com.liferay.portlet.messageboards.service.MBMessageFlagService;
 import com.liferay.portlet.messageboards.service.MBMessageLocalService;
@@ -56,7 +54,6 @@ import com.liferay.portlet.messageboards.service.persistence.MBBanPersistence;
 import com.liferay.portlet.messageboards.service.persistence.MBCategoryFinder;
 import com.liferay.portlet.messageboards.service.persistence.MBCategoryPersistence;
 import com.liferay.portlet.messageboards.service.persistence.MBDiscussionPersistence;
-import com.liferay.portlet.messageboards.service.persistence.MBMailingPersistence;
 import com.liferay.portlet.messageboards.service.persistence.MBMessageFinder;
 import com.liferay.portlet.messageboards.service.persistence.MBMessageFlagFinder;
 import com.liferay.portlet.messageboards.service.persistence.MBMessageFlagPersistence;
@@ -125,32 +122,6 @@ public abstract class MBCategoryServiceBaseImpl extends PrincipalBean
 
 	public void setMBCategoryFinder(MBCategoryFinder mbCategoryFinder) {
 		this.mbCategoryFinder = mbCategoryFinder;
-	}
-
-	public MBMailingLocalService getMBMailingLocalService() {
-		return mbMailingLocalService;
-	}
-
-	public void setMBMailingLocalService(
-		MBMailingLocalService mbMailingLocalService) {
-		this.mbMailingLocalService = mbMailingLocalService;
-	}
-
-	public MBMailingService getMBMailingService() {
-		return mbMailingService;
-	}
-
-	public void setMBMailingService(MBMailingService mbMailingService) {
-		this.mbMailingService = mbMailingService;
-	}
-
-	public MBMailingPersistence getMBMailingPersistence() {
-		return mbMailingPersistence;
-	}
-
-	public void setMBMailingPersistence(
-		MBMailingPersistence mbMailingPersistence) {
-		this.mbMailingPersistence = mbMailingPersistence;
 	}
 
 	public MBDiscussionPersistence getMBDiscussionPersistence() {
@@ -446,21 +417,6 @@ public abstract class MBCategoryServiceBaseImpl extends PrincipalBean
 					".impl");
 		}
 
-		if (mbMailingLocalService == null) {
-			mbMailingLocalService = (MBMailingLocalService)PortalBeanLocatorUtil.locate(MBMailingLocalService.class.getName() +
-					".impl");
-		}
-
-		if (mbMailingService == null) {
-			mbMailingService = (MBMailingService)PortalBeanLocatorUtil.locate(MBMailingService.class.getName() +
-					".impl");
-		}
-
-		if (mbMailingPersistence == null) {
-			mbMailingPersistence = (MBMailingPersistence)PortalBeanLocatorUtil.locate(MBMailingPersistence.class.getName() +
-					".impl");
-		}
-
 		if (mbDiscussionPersistence == null) {
 			mbDiscussionPersistence = (MBDiscussionPersistence)PortalBeanLocatorUtil.locate(MBDiscussionPersistence.class.getName() +
 					".impl");
@@ -623,9 +579,6 @@ public abstract class MBCategoryServiceBaseImpl extends PrincipalBean
 	protected MBCategoryLocalService mbCategoryLocalService;
 	protected MBCategoryPersistence mbCategoryPersistence;
 	protected MBCategoryFinder mbCategoryFinder;
-	protected MBMailingLocalService mbMailingLocalService;
-	protected MBMailingService mbMailingService;
-	protected MBMailingPersistence mbMailingPersistence;
 	protected MBDiscussionPersistence mbDiscussionPersistence;
 	protected MBMessageLocalService mbMessageLocalService;
 	protected MBMessageService mbMessageService;

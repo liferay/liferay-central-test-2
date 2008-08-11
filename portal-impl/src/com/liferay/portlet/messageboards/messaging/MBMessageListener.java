@@ -27,7 +27,6 @@ import com.liferay.portal.NoSuchUserException;
 import com.liferay.portal.kernel.json.JSONFactoryUtil;
 import com.liferay.portal.kernel.json.JSONObject;
 import com.liferay.portal.kernel.mail.MailMessage;
-import com.liferay.portal.kernel.mail.SMTPAccount;
 import com.liferay.portal.kernel.messaging.MessageListener;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.StringUtil;
@@ -35,15 +34,11 @@ import com.liferay.portal.model.Subscription;
 import com.liferay.portal.model.User;
 import com.liferay.portal.service.SubscriptionLocalServiceUtil;
 import com.liferay.portal.service.UserLocalServiceUtil;
-import com.liferay.portlet.messageboards.NoSuchMailingException;
 import com.liferay.portlet.messageboards.model.MBCategory;
-import com.liferay.portlet.messageboards.model.MBMailing;
 import com.liferay.portlet.messageboards.model.MBThread;
-import com.liferay.portlet.messageboards.service.MBMailingLocalServiceUtil;
 import com.liferay.portlet.messageboards.util.BBCodeUtil;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -105,8 +100,9 @@ public class MBMessageListener implements MessageListener {
 				companyId, MBThread.class.getName(),
 				GetterUtil.getLong(threadId));
 
-		List<InternetAddress> addresses=
-			getAddressFromSubscriptions(subscriptions, sent);
+		sendEmail(
+			userId, fromName, fromAddress, subject, body, subscriptions, sent,
+			replyToAddress, mailId, inReplyTo, htmlFormat);
 
 		// Categories
 
@@ -116,57 +112,23 @@ public class MBMessageListener implements MessageListener {
 			subscriptions = SubscriptionLocalServiceUtil.getSubscriptions(
 				companyId, MBCategory.class.getName(), categoryId);
 
-			addresses.addAll(getAddressFromSubscriptions(subscriptions, sent));
-
-			try {
-				MBMailing mailing=
-					MBMailingLocalServiceUtil.getMailingByCategory(categoryId);
-
-				if (mailing.isActive()) {
-
-					InternetAddress mailingListAddress = new InternetAddress(
-							mailing.getMailingListAddress());
-
-					SMTPAccount smtpAccount= null;
-					if (!mailing.isMailOutConfigured()) {
-
-						smtpAccount= new SMTPAccount();
-						smtpAccount.setServerName(
-							mailing.getMailOutServerName());
-						smtpAccount.setUseSSL(
-							mailing.isMailOutUseSSL());
-						smtpAccount.setServerPort(
-							mailing.getMailOutServerPort());
-						smtpAccount.setUserName(
-							mailing.getMailOutUserName());
-						smtpAccount.setPassword(
-							mailing.getMailOutPassword());
-
-					}
-
-					sendEmail(userId, fromName, mailing.getMailAddress(),
-							subject, body,
-							Collections.singletonList(mailingListAddress),
-							replyToAddress, mailId, inReplyTo,
-							htmlFormat, smtpAccount) ;
-				}
-
-			} catch (NoSuchMailingException e) {
-			}
-
+			sendEmail(
+				userId, fromName, fromAddress, subject, body, subscriptions,
+				sent, replyToAddress, mailId, inReplyTo, htmlFormat);
 		}
-
-		sendEmail(userId, fromName, fromAddress, subject, body, addresses,
-				replyToAddress, mailId, inReplyTo, htmlFormat);
 
 		if (_log.isInfoEnabled()) {
 			_log.info("Finished sending notifications");
 		}
 	}
 
-	protected List<InternetAddress> getAddressFromSubscriptions(
-			List<Subscription> subscriptions, Set<Long> sent)
+	protected void sendEmail(
+			long userId, String fromName, String fromAddress, String subject,
+			String body, List<Subscription> subscriptions, Set<Long> sent,
+			String replyToAddress, String mailId, String inReplyTo,
+			boolean htmlFormat)
 		throws Exception {
+
 		List<InternetAddress> addresses =
 			new ArrayList<InternetAddress>();
 
@@ -216,27 +178,6 @@ public class MBMessageListener implements MessageListener {
 
 			addresses.add(userAddress);
 		}
-
-		return addresses;
-	}
-
-	protected void sendEmail(
-			long userId, String fromName, String fromAddress, String subject,
-			String body, List<InternetAddress> addresses,
-			String replyToAddress, String mailId, String inReplyTo,
-			boolean htmlFormat)
-		throws Exception {
-
-		sendEmail(userId, fromName, fromAddress, subject, body, addresses,
-			replyToAddress, mailId, inReplyTo, htmlFormat, null);
-	}
-
-	protected void sendEmail(
-			long userId, String fromName, String fromAddress, String subject,
-			String body, List<InternetAddress> addresses,
-			String replyToAddress, String mailId, String inReplyTo,
-			boolean htmlFormat, SMTPAccount smtpAccount)
-		throws Exception {
 
 		try {
 			InternetAddress[] bulkAddresses = addresses.toArray(
@@ -289,7 +230,7 @@ public class MBMessageListener implements MessageListener {
 
 			MailMessage message = new MailMessage(
 				from, to, null, null, bulkAddresses, curSubject, curBody,
-				htmlFormat, smtpAccount);
+				htmlFormat);
 
 			message.setMessageId(mailId);
 			message.setInReplyTo(inReplyTo);

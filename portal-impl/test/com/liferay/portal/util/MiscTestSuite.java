@@ -23,7 +23,6 @@
 package com.liferay.portal.util;
 
 import com.liferay.portal.image.ImageProcessorImplTest;
-import com.liferay.portlet.messageboards.service.MBUtilTest;
 
 import junit.framework.TestSuite;
 
@@ -37,7 +36,6 @@ public class MiscTestSuite extends TestSuite {
 
 	public MiscTestSuite() {
 		addTestSuite(ImageProcessorImplTest.class);
-		addTestSuite(MBUtilTest.class);
 	}
 
 	public void test() {

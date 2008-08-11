@@ -58,12 +58,10 @@ import com.liferay.portlet.blogs.social.BlogsActivityKeys;
 import com.liferay.portlet.messageboards.MessageBodyException;
 import com.liferay.portlet.messageboards.MessageSubjectException;
 import com.liferay.portlet.messageboards.NoSuchDiscussionException;
-import com.liferay.portlet.messageboards.NoSuchMailingException;
 import com.liferay.portlet.messageboards.NoSuchThreadException;
 import com.liferay.portlet.messageboards.RequiredMessageException;
 import com.liferay.portlet.messageboards.model.MBCategory;
 import com.liferay.portlet.messageboards.model.MBDiscussion;
-import com.liferay.portlet.messageboards.model.MBMailing;
 import com.liferay.portlet.messageboards.model.MBMessage;
 import com.liferay.portlet.messageboards.model.MBMessageDisplay;
 import com.liferay.portlet.messageboards.model.MBStatsUser;
@@ -512,9 +510,7 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 
 		// Subscriptions
 
-		if (!MBUtil.isEmailReceivedByMailing(message.getBody())) {
-			notifySubscribers(category, message, prefs, themeDisplay, false);
-		}
+		notifySubscribers(category, message, prefs, themeDisplay, false);
 
 		logAddMessage(messageId, stopWatch, 8);
 
@@ -1235,9 +1231,7 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 
 		// Subscriptions
 
-		if (!MBUtil.isEmailReceivedByMailing(message.getBody())) {
-			notifySubscribers(category, message, prefs, themeDisplay, true);
-		}
+		notifySubscribers(category, message, prefs, themeDisplay, true);
 
 		// Tags
 
@@ -1418,13 +1412,6 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 			mailingListAddress = MBUtil.getMailingListAddress(
 				message.getCategoryId(), message.getMessageId(),
 				company.getMx());
-		} else {
-			try {
-				MBMailing mailing= mbMailingLocalService.getMailingByCategory(
-					category.getCategoryId());
-				mailingListAddress= mailing.getMailingListAddress();
-			} catch (NoSuchMailingException e) {
-			}
 		}
 
 		String replyToAddress = mailingListAddress;

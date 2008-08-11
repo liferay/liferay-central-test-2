@@ -33,15 +33,8 @@ import com.liferay.portal.struts.PortletAction;
 import com.liferay.portal.util.PropsValues;
 import com.liferay.portal.util.WebKeys;
 import com.liferay.portlet.messageboards.CategoryNameException;
-import com.liferay.portlet.messageboards.MailAddressException;
-import com.liferay.portlet.messageboards.MailInServerNameException;
-import com.liferay.portlet.messageboards.MailInUserNameException;
-import com.liferay.portlet.messageboards.MailOutServerNameException;
-import com.liferay.portlet.messageboards.MailOutUserNameException;
-import com.liferay.portlet.messageboards.MailingListAddressException;
 import com.liferay.portlet.messageboards.NoSuchCategoryException;
 import com.liferay.portlet.messageboards.service.MBCategoryServiceUtil;
-import com.liferay.portlet.messageboards.service.MBMailingServiceUtil;
 
 import javax.portlet.ActionRequest;
 import javax.portlet.ActionResponse;
@@ -81,12 +74,6 @@ public class EditCategoryAction extends PortletAction {
 			else if (cmd.equals(Constants.UNSUBSCRIBE)) {
 				unsubscribeCategory(actionRequest);
 			}
-			else if (cmd.equals(Constants.ACTIVATE)) {
-				activeMailing(actionRequest);
-			}
-			else if (cmd.equals(Constants.DEACTIVATE)) {
-				deactiveMailing(actionRequest);
-			}
 
 			sendRedirect(actionRequest, actionResponse);
 		}
@@ -99,13 +86,7 @@ public class EditCategoryAction extends PortletAction {
 				setForward(actionRequest, "portlet.message_boards.error");
 			}
 			else if (e instanceof CaptchaTextException ||
-					 e instanceof CategoryNameException ||
-					 e instanceof MailingListAddressException ||
-					 e instanceof MailAddressException ||
-					 e instanceof MailInServerNameException ||
-					 e instanceof MailInUserNameException ||
-					 e instanceof MailOutServerNameException ||
-					 e instanceof MailOutUserNameException) {
+					 e instanceof CategoryNameException) {
 
 				SessionErrors.add(actionRequest, e.getClass().getName());
 			}
@@ -164,28 +145,13 @@ public class EditCategoryAction extends PortletAction {
 		MBCategoryServiceUtil.unsubscribeCategory(categoryId);
 	}
 
-	protected void activeMailing(ActionRequest actionRequest)
-		throws Exception {
-
-		long mailingId = ParamUtil.getLong(actionRequest, "mailingId");
-
-		MBMailingServiceUtil.updateActive(mailingId, true);
-	}
-
-	protected void deactiveMailing(ActionRequest actionRequest)
-			throws Exception {
-
-		long mailingId = ParamUtil.getLong(actionRequest, "mailingId");
-
-		MBMailingServiceUtil.updateActive(mailingId, false);
-	}
-
 	protected void updateCategory(ActionRequest actionRequest)
 		throws Exception {
 
 		Layout layout = (Layout)actionRequest.getAttribute(WebKeys.LAYOUT);
 
 		long categoryId = ParamUtil.getLong(actionRequest, "categoryId");
+
 		long parentCategoryId = ParamUtil.getLong(
 			actionRequest, "parentCategoryId");
 		String name = ParamUtil.getString(actionRequest, "name");
@@ -199,41 +165,6 @@ public class EditCategoryAction extends PortletAction {
 		String[] guestPermissions = actionRequest.getParameterValues(
 			"guestPermissions");
 
-		//mailing list
-		String mailingListAddress = ParamUtil.getString(
-			actionRequest, "mailingListAddress");
-		String mailAddress = ParamUtil.getString(actionRequest, "mailAddress");
-
-		//incoming server
-		String mailInProtocol = ParamUtil.getString(
-			actionRequest, "mailInProtocol");
-		String mailInServerName = ParamUtil.getString(
-			actionRequest, "mailInServerName");
-		Boolean mailInUseSSL = Boolean.valueOf(
-			ParamUtil.getBoolean(actionRequest, "mailInUseSSL"));
-		Integer mailInServerPort = new Integer(
-			ParamUtil.getInteger(actionRequest, "mailInServerPort"));
-		String mailInUserName = ParamUtil.getString(
-			actionRequest, "mailInUserName");
-		String mailInPassword = ParamUtil.getString(
-			actionRequest, "mailInPassword");
-		Integer mailInReadInterval = ParamUtil.getInteger(
-			actionRequest, "mailInReadInterval");
-
-		//outgoing server
-		Boolean mailOutConfigured = Boolean.valueOf(
-			ParamUtil.getBoolean(actionRequest, "mailOutConfigured"));
-		String mailOutServerName = ParamUtil.getString(
-			actionRequest, "mailOutServerName");
-		Boolean mailOutUseSSL = Boolean.valueOf(
-			ParamUtil.getBoolean(actionRequest, "mailOutUseSSL"));
-		Integer mailOutServerPort = new Integer(
-			ParamUtil.getInteger(actionRequest, "mailOutServerPort"));
-		String mailOutUserName = ParamUtil.getString(
-			actionRequest, "mailOutUserName");
-		String mailOutPassword = ParamUtil.getString(
-			actionRequest, "mailOutPassword");
-
 		if (categoryId <= 0) {
 			if (PropsValues.
 					CAPTCHA_CHECK_PORTLET_MESSAGE_BOARDS_EDIT_CATEGORY) {
@@ -245,11 +176,6 @@ public class EditCategoryAction extends PortletAction {
 
 			MBCategoryServiceUtil.addCategory(
 				layout.getPlid(), parentCategoryId, name, description,
-				mailingListAddress, mailAddress, mailInProtocol,
-				mailInServerName, mailInUseSSL, mailInServerPort,
-				mailInUserName, mailInPassword, mailInReadInterval,
-				mailOutConfigured, mailOutServerName, mailOutUseSSL,
-				mailOutServerPort, mailOutUserName, mailOutPassword,
 				communityPermissions, guestPermissions);
 		}
 		else {
@@ -258,12 +184,7 @@ public class EditCategoryAction extends PortletAction {
 
 			MBCategoryServiceUtil.updateCategory(
 				categoryId, parentCategoryId, name, description,
-				mergeWithParentCategory, mailingListAddress, mailAddress,
-				mailInProtocol, mailInServerName, mailInUseSSL,
-				mailInServerPort, mailInUserName, mailInPassword,
-				mailInReadInterval, mailOutConfigured, mailOutServerName,
-				mailOutUseSSL, mailOutServerPort, mailOutUserName,
-				mailOutPassword);
+				mergeWithParentCategory);
 		}
 	}
 

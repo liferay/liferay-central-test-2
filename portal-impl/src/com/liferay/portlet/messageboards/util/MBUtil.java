@@ -55,8 +55,6 @@ import com.liferay.util.LocalizationUtil;
 
 import java.util.Calendar;
 import java.util.Date;
-import java.util.HashSet;
-import java.util.Set;
 
 import javax.portlet.PortletPreferences;
 import javax.portlet.PortletURL;
@@ -73,14 +71,15 @@ import org.apache.commons.logging.LogFactory;
  * <a href="MBUtil.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
+ *
  */
 public class MBUtil {
 
 	public static final String POP_PORTLET_PREFIX = "mb.";
 
 	public static String getBreadcrumbs(
-		long categoryId, long messageId, PageContext pageContext,
-		RenderRequest renderRequest, RenderResponse renderResponse)
+			long categoryId, long messageId, PageContext pageContext,
+			RenderRequest renderRequest, RenderResponse renderResponse)
 		throws Exception {
 
 		if (messageId > 0) {
@@ -96,8 +95,8 @@ public class MBUtil {
 				if ((categoryId > 0) &&
 					(categoryId != MBCategoryImpl.DEFAULT_PARENT_CATEGORY_ID)) {
 
-					category =
-						MBCategoryLocalServiceUtil.getCategory(categoryId);
+					category = MBCategoryLocalServiceUtil.getCategory(
+						categoryId);
 				}
 			}
 			catch (Exception e) {
@@ -109,15 +108,15 @@ public class MBUtil {
 	}
 
 	public static String getBreadcrumbs(
-		MBCategory category, MBMessage message, PageContext pageContext,
-		RenderRequest renderRequest, RenderResponse renderResponse)
+			MBCategory category, MBMessage message, PageContext pageContext,
+			RenderRequest renderRequest, RenderResponse renderResponse)
 		throws Exception {
 
-		String strutsAction =
-			ParamUtil.getString(renderRequest, "struts_action");
+		String strutsAction = ParamUtil.getString(
+			renderRequest, "struts_action");
 
-		boolean selectCategory =
-			strutsAction.equals("/message_boards/select_category");
+		boolean selectCategory = strutsAction.equals(
+			"/message_boards/select_category");
 
 		if ((message != null) && (category == null)) {
 			category = message.getCategory();
@@ -188,9 +187,8 @@ public class MBUtil {
 					break;
 				}
 
-				category =
-					MBCategoryLocalServiceUtil.getCategory(
-						category.getParentCategoryId());
+				category = MBCategoryLocalServiceUtil.getCategory(
+					category.getParentCategoryId());
 			}
 		}
 
@@ -219,23 +217,20 @@ public class MBUtil {
 	}
 
 	public static String getEmailFromAddress(PortletPreferences prefs) {
-
 		String emailFromAddress = PropsValues.MESSAGE_BOARDS_EMAIL_FROM_ADDRESS;
 
 		return prefs.getValue("email-from-address", emailFromAddress);
 	}
 
 	public static String getEmailFromName(PortletPreferences prefs) {
-
 		String emailFromName = PropsValues.MESSAGE_BOARDS_EMAIL_FROM_NAME;
 
 		return prefs.getValue("email-from-name", emailFromName);
 	}
 
 	public static boolean getEmailHtmlFormat(PortletPreferences prefs) {
-
-		String emailHtmlFormat =
-			prefs.getValue("email-html-format", StringPool.BLANK);
+		String emailHtmlFormat = prefs.getValue(
+			"email-html-format", StringPool.BLANK);
 
 		if (Validator.isNotNull(emailHtmlFormat)) {
 			return GetterUtil.getBoolean(emailHtmlFormat);
@@ -248,8 +243,8 @@ public class MBUtil {
 	public static boolean getEmailMessageAddedEnabled(
 		PortletPreferences prefs) {
 
-		String emailMessageAddedEnabled =
-			prefs.getValue("email-message-added-enabled", StringPool.BLANK);
+		String emailMessageAddedEnabled = prefs.getValue(
+			"email-message-added-enabled", StringPool.BLANK);
 
 		if (Validator.isNotNull(emailMessageAddedEnabled)) {
 			return GetterUtil.getBoolean(emailMessageAddedEnabled);
@@ -260,9 +255,8 @@ public class MBUtil {
 	}
 
 	public static String getEmailMessageAddedBody(PortletPreferences prefs) {
-
-		String emailMessageAddedBody =
-			prefs.getValue("email-message-added-body", StringPool.BLANK);
+		String emailMessageAddedBody = prefs.getValue(
+			"email-message-added-body", StringPool.BLANK);
 
 		if (Validator.isNotNull(emailMessageAddedBody)) {
 			return emailMessageAddedBody;
@@ -276,8 +270,8 @@ public class MBUtil {
 	public static String getEmailMessageAddedSignature(
 		PortletPreferences prefs) {
 
-		String emailMessageAddedSignature =
-			prefs.getValue("email-message-added-signature", StringPool.BLANK);
+		String emailMessageAddedSignature = prefs.getValue(
+			"email-message-added-signature", StringPool.BLANK);
 
 		if (Validator.isNotNull(emailMessageAddedSignature)) {
 			return emailMessageAddedSignature;
@@ -291,9 +285,8 @@ public class MBUtil {
 	public static String getEmailMessageAddedSubjectPrefix(
 		PortletPreferences prefs) {
 
-		String emailMessageAddedSubjectPrefix =
-			prefs.getValue(
-				"email-message-added-subject-prefix", StringPool.BLANK);
+		String emailMessageAddedSubjectPrefix = prefs.getValue(
+			"email-message-added-subject-prefix", StringPool.BLANK);
 
 		if (Validator.isNotNull(emailMessageAddedSubjectPrefix)) {
 			return emailMessageAddedSubjectPrefix;
@@ -307,8 +300,8 @@ public class MBUtil {
 	public static boolean getEmailMessageUpdatedEnabled(
 		PortletPreferences prefs) {
 
-		String emailMessageUpdatedEnabled =
-			prefs.getValue("email-message-updated-enabled", StringPool.BLANK);
+		String emailMessageUpdatedEnabled = prefs.getValue(
+			"email-message-updated-enabled", StringPool.BLANK);
 
 		if (Validator.isNotNull(emailMessageUpdatedEnabled)) {
 			return GetterUtil.getBoolean(emailMessageUpdatedEnabled);
@@ -319,9 +312,8 @@ public class MBUtil {
 	}
 
 	public static String getEmailMessageUpdatedBody(PortletPreferences prefs) {
-
-		String emailMessageUpdatedBody =
-			prefs.getValue("email-message-updated-body", StringPool.BLANK);
+		String emailMessageUpdatedBody = prefs.getValue(
+			"email-message-updated-body", StringPool.BLANK);
 
 		if (Validator.isNotNull(emailMessageUpdatedBody)) {
 			return emailMessageUpdatedBody;
@@ -335,8 +327,8 @@ public class MBUtil {
 	public static String getEmailMessageUpdatedSignature(
 		PortletPreferences prefs) {
 
-		String emailMessageUpdatedSignature =
-			prefs.getValue("email-message-updated-signature", StringPool.BLANK);
+		String emailMessageUpdatedSignature = prefs.getValue(
+			"email-message-updated-signature", StringPool.BLANK);
 
 		if (Validator.isNotNull(emailMessageUpdatedSignature)) {
 			return emailMessageUpdatedSignature;
@@ -350,9 +342,8 @@ public class MBUtil {
 	public static String getEmailMessageUpdatedSubjectPrefix(
 		PortletPreferences prefs) {
 
-		String emailMessageUpdatedSubject =
-			prefs.getValue(
-				"email-message-updated-subject-prefix", StringPool.BLANK);
+		String emailMessageUpdatedSubject = prefs.getValue(
+			"email-message-updated-subject-prefix", StringPool.BLANK);
 
 		if (Validator.isNotNull(emailMessageUpdatedSubject)) {
 			return emailMessageUpdatedSubject;
@@ -360,12 +351,11 @@ public class MBUtil {
 		else {
 			return ContentUtil.get(
 				PropsValues.
-				MESSAGE_BOARDS_EMAIL_MESSAGE_UPDATED_SUBJECT_PREFIX);
+					MESSAGE_BOARDS_EMAIL_MESSAGE_UPDATED_SUBJECT_PREFIX);
 		}
 	}
 
 	public static String getMailId(String mx, long categoryId, long messageId) {
-
 		StringBuilder sb = new StringBuilder();
 
 		sb.append(StringPool.LESS_THAN);
@@ -400,36 +390,41 @@ public class MBUtil {
 	}
 
 	public static long getMessageId(String mailId) {
+		int x = mailId.indexOf(StringPool.LESS_THAN) + 1;
+		int y = mailId.indexOf(StringPool.AT);
 
-		int pos = mailId.indexOf(StringPool.AT);
+		long messageId = 0;
 
-		String messageId = mailId.substring(0, pos);
+		if ((x > 0 ) && (y != -1)) {
+			String temp = mailId.substring(x, y);
 
-		pos = messageId.lastIndexOf(StringPool.PERIOD) + 1;
+			int z = temp.indexOf(StringPool.PERIOD);
 
-		messageId = messageId.substring(pos);
+			if (z != -1) {
+				messageId = GetterUtil.getLong(temp.substring(z));
+			}
+		}
 
-		return GetterUtil.getLong(messageId);
+		return messageId;
 	}
 
 	public static String[] getThreadPriority(
-		PortletPreferences prefs, String languageId, double value,
-		ThemeDisplay themeDisplay)
+			PortletPreferences prefs, String languageId, double value,
+			ThemeDisplay themeDisplay)
 		throws Exception {
 
-		String[] priorities =
-			LocalizationUtil.getPrefsValues(prefs, "priorities", languageId);
+		String[] priorities = LocalizationUtil.getPrefsValues(
+			prefs, "priorities", languageId);
 
-		String[] priorityPair =
-			_findThreadPriority(value, themeDisplay, priorities);
+		String[] priorityPair = _findThreadPriority(
+			value, themeDisplay, priorities);
 
 		if (priorityPair == null) {
-			String defaultLanguageId =
-				LocaleUtil.toLanguageId(LocaleUtil.getDefault());
+			String defaultLanguageId = LocaleUtil.toLanguageId(
+				LocaleUtil.getDefault());
 
-			priorities =
-				LocalizationUtil.getPrefsValues(
-					prefs, "priorities", defaultLanguageId);
+			priorities = LocalizationUtil.getPrefsValues(
+				prefs, "priorities", defaultLanguageId);
 
 			priorityPair = _findThreadPriority(value, themeDisplay, priorities);
 		}
@@ -438,7 +433,6 @@ public class MBUtil {
 	}
 
 	public static Date getUnbanDate(MBBan ban, int expireInterval) {
-
 		Date banDate = ban.getCreateDate();
 
 		Calendar cal = Calendar.getInstance();
@@ -451,13 +445,13 @@ public class MBUtil {
 	}
 
 	public static String getUserRank(
-		PortletPreferences prefs, String languageId, int posts)
+			PortletPreferences prefs, String languageId, int posts)
 		throws Exception {
 
 		String rank = StringPool.BLANK;
 
-		String[] ranks =
-			LocalizationUtil.getPrefsValues(prefs, "ranks", languageId);
+		String[] ranks = LocalizationUtil.getPrefsValues(
+			prefs, "ranks", languageId);
 
 		for (int i = 0; i < ranks.length; i++) {
 			String[] kvp = StringUtil.split(ranks[i], StringPool.EQUAL);
@@ -477,17 +471,18 @@ public class MBUtil {
 	}
 
 	public static String getUserRank(
-		PortletPreferences prefs, String languageId, MBStatsUser statsUser)
+			PortletPreferences prefs, String languageId, MBStatsUser statsUser)
 		throws Exception {
 
 		String rank = StringPool.BLANK;
 
-		Group group = GroupLocalServiceUtil.getGroup(statsUser.getGroupId());
+		Group group = GroupLocalServiceUtil.getGroup(
+			statsUser.getGroupId());
 
 		long companyId = group.getCompanyId();
 
-		String[] ranks =
-			LocalizationUtil.getPrefsValues(prefs, "ranks", languageId);
+		String[] ranks = LocalizationUtil.getPrefsValues(
+			prefs, "ranks", languageId);
 
 		for (int i = 0; i < ranks.length; i++) {
 			String[] kvp = StringUtil.split(ranks[i], StringPool.EQUAL);
@@ -495,8 +490,8 @@ public class MBUtil {
 			String curRank = kvp[0];
 			String curRankValue = kvp[1];
 
-			String[] curRankValueKvp =
-				StringUtil.split(curRankValue, StringPool.COLON);
+			String[] curRankValueKvp = StringUtil.split(
+				curRankValue, StringPool.COLON);
 
 			if (curRankValueKvp.length <= 1) {
 				int kvpPosts = GetterUtil.getInteger(curRankValue);
@@ -513,7 +508,7 @@ public class MBUtil {
 
 			try {
 				if (_isEntityRank(
-					companyId, statsUser, entityType, entityValue)) {
+						companyId, statsUser, entityType, entityValue)) {
 
 					return curRank;
 				}
@@ -529,9 +524,8 @@ public class MBUtil {
 	}
 
 	public static boolean isAllowAnonymousPosting(PortletPreferences prefs) {
-
-		String allowAnonymousPosting =
-			prefs.getValue("allow-anonymous-posting", StringPool.BLANK);
+		String allowAnonymousPosting = prefs.getValue(
+			"allow-anonymous-posting", StringPool.BLANK);
 
 		if (Validator.isNotNull(allowAnonymousPosting)) {
 			return GetterUtil.getBoolean(allowAnonymousPosting);
@@ -558,9 +552,7 @@ public class MBUtil {
 							themeDisplay.getPathThemeImages() + priorityImage;
 					}
 
-					return new String[] {
-						priorityName, priorityImage
-					};
+					return new String[] {priorityName, priorityImage};
 				}
 			}
 			catch (Exception e) {
@@ -571,8 +563,8 @@ public class MBUtil {
 	}
 
 	private static boolean _isEntityRank(
-		long companyId, MBStatsUser statsUser, String entityType,
-		String entityValue)
+			long companyId, MBStatsUser statsUser, String entityType,
+			String entityValue)
 		throws Exception {
 
 		long groupId = statsUser.getGroupId();
@@ -584,7 +576,7 @@ public class MBUtil {
 			Role role = RoleLocalServiceUtil.getRole(companyId, entityValue);
 
 			if (UserGroupRoleLocalServiceUtil.hasUserGroupRole(
-				userId, groupId, role.getRoleId())) {
+					userId, groupId, role.getRoleId())) {
 
 				return true;
 			}
@@ -595,24 +587,24 @@ public class MBUtil {
 					companyId, entityValue);
 
 			if (OrganizationLocalServiceUtil.hasUserOrganization(
-				userId, organization.getOrganizationId())) {
+					userId, organization.getOrganizationId())) {
 
 				return true;
 			}
 		}
 		else if (entityType.equals("regular-role")) {
 			if (RoleLocalServiceUtil.hasUserRole(
-				userId, companyId, entityValue, true)) {
+					userId, companyId, entityValue, true)) {
 
 				return true;
 			}
 		}
 		else if (entityType.equals("user-group")) {
-			UserGroup userGroup =
-				UserGroupLocalServiceUtil.getUserGroup(companyId, entityValue);
+			UserGroup userGroup = UserGroupLocalServiceUtil.getUserGroup(
+				companyId, entityValue);
 
 			if (UserLocalServiceUtil.hasUserGroupUser(
-				userGroup.getUserGroupId(), userId)) {
+					userGroup.getUserGroupId(), userId)) {
 
 				return true;
 			}
@@ -620,27 +612,6 @@ public class MBUtil {
 
 		return false;
 	}
-
-	public static void addEmailReceivedByMailing(String messageBody) {
-
-		if (messageBody == null) {
-			throw new IllegalArgumentException(
-				"The message body must not be null.");
-		}
-		_mailsReceivedOnMailing.add(messageBody.hashCode());
-	}
-
-	public static boolean isEmailReceivedByMailing(String messageBody) {
-
-		if (messageBody == null) {
-			throw new IllegalArgumentException(
-				"The message body must not be null.");
-		}
-		return _mailsReceivedOnMailing.remove(messageBody.hashCode());
-	}
-
-	private static Set<Integer> _mailsReceivedOnMailing =
-		new HashSet<Integer>();
 
 	private static Log _log = LogFactory.getLog(MBUtil.class);
 

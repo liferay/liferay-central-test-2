@@ -31,15 +31,12 @@ import com.liferay.portal.kernel.events.SimpleAction;
 import com.liferay.portal.kernel.messaging.MessageBus;
 import com.liferay.portal.kernel.messaging.MessageBusUtil;
 import com.liferay.portal.kernel.messaging.MessageSender;
-import com.liferay.portal.kernel.scheduler.SchedulerEngineUtil;
 import com.liferay.portal.kernel.search.SearchEngineUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.InstancePool;
 import com.liferay.portal.kernel.util.ReleaseInfo;
 import com.liferay.portal.model.CompanyConstants;
 import com.liferay.portal.model.Release;
-import com.liferay.portal.scheduler.SchedulerEngineImpl;
-import com.liferay.portal.scheduler.quartz.QuartzSchedulerEngineUtil;
 import com.liferay.portal.search.IndexSearcherImpl;
 import com.liferay.portal.search.IndexWriterImpl;
 import com.liferay.portal.search.lucene.LuceneSearchEngineUtil;
@@ -248,17 +245,6 @@ public class StartupAction extends SimpleAction {
 				MessageSender.class.getName());
 
 		MessageBusUtil.init(messageBus, messageSender);
-
-		// Scheduler
-
-		try {
-			QuartzSchedulerEngineUtil.init();
-		}
-		catch (Exception e) {
-			_log.error(e, e);
-		}
-
-		SchedulerEngineUtil.init(new SchedulerEngineImpl());
 
 		// Search
 

@@ -35,8 +35,7 @@ import javax.mail.internet.InternetAddress;
  *
  * @author Brian Wing Shun Chan
  * @author Neil Griffin
- * @author Raymond Aug�
- * @author Thiago Moreira
+ * @author Raymond Augé
  *
  */
 public class MailMessage implements Serializable {
@@ -68,14 +67,6 @@ public class MailMessage implements Serializable {
 		InternetAddress[] bcc, InternetAddress[] bulkAddresses, String subject,
 		String body, boolean htmlFormat) {
 
-		this(from, to, cc, bcc, bulkAddresses, subject, body, htmlFormat, null);
-	}
-
-	public MailMessage(
-		InternetAddress from, InternetAddress[] to, InternetAddress[] cc,
-		InternetAddress[] bcc, InternetAddress[] bulkAddresses, String subject,
-		String body, boolean htmlFormat, SMTPAccount smtpAccount) {
-
 		_from = from;
 		_to = to;
 		_cc = cc;
@@ -84,7 +75,6 @@ public class MailMessage implements Serializable {
 		_subject = subject;
 		_body = body;
 		_htmlFormat = htmlFormat;
-		_smtpAccount= smtpAccount;
 		_attachments = new ArrayList<File>();
 	}
 
@@ -190,14 +180,6 @@ public class MailMessage implements Serializable {
 		return _attachments.toArray(new File[_attachments.size()]);
 	}
 
-	public SMTPAccount getSMTPAccount() {
-		return _smtpAccount;
-	}
-
-	public void setSMTPAccount(SMTPAccount account) {
-		_smtpAccount = account;
-	}
-
 	private InternetAddress _from;
 	private InternetAddress[] _to;
 	private InternetAddress[] _cc;
@@ -210,6 +192,5 @@ public class MailMessage implements Serializable {
 	private String _messageId;
 	private String _inReplyTo;
 	private List<File> _attachments;
-	private SMTPAccount _smtpAccount;
 
 }

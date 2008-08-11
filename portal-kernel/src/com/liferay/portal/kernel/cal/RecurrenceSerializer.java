@@ -38,7 +38,7 @@ public class RecurrenceSerializer {
 		Calendar dtStart = recurrence.getDtStart();
 
 		int frequency = recurrence.getFrequency();
-		long interval = recurrence.getInterval();
+		int interval = recurrence.getInterval();
 
 		DayAndPosition[] byDay = recurrence.getByDay();
 		int[] byMonthDay = recurrence.getByMonthDay();
@@ -53,7 +53,6 @@ public class RecurrenceSerializer {
 			startDateHour += 12;
 		}
 
-		String hour = String.valueOf(startDateHour);
 		String dayOfMonth = String.valueOf(dtStart.get(Calendar.DAY_OF_MONTH));
 		String month = String.valueOf(dtStart.get(Calendar.MONTH) + 1);
 		String dayOfWeek = String.valueOf(dtStart.get(Calendar.DAY_OF_WEEK));
@@ -61,14 +60,6 @@ public class RecurrenceSerializer {
 
 		if (frequency == Recurrence.NO_RECURRENCE) {
 			dayOfWeek = StringPool.QUESTION;
-		}
-		else if (frequency == Recurrence.MINUTES) {
-			startDateMinute += StringPool.FORWARD_SLASH + interval;
-			hour = StringPool.STAR;
-			dayOfMonth = StringPool.STAR;
-			month = StringPool.STAR;
-			dayOfWeek = StringPool.QUESTION;
-			year = StringPool.STAR;
 		}
 		else if (frequency == Recurrence.DAILY) {
 			dayOfMonth += StringPool.FORWARD_SLASH + interval;
@@ -160,7 +151,7 @@ public class RecurrenceSerializer {
 		sb.append(StringPool.SPACE);
 		sb.append(startDateMinute);
 		sb.append(StringPool.SPACE);
-		sb.append(hour);
+		sb.append(startDateHour);
 		sb.append(StringPool.SPACE);
 		sb.append(dayOfMonth);
 		sb.append(StringPool.SPACE);

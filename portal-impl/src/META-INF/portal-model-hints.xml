@@ -1046,40 +1046,11 @@
 		<field name="createDate" type="Date" />
 		<field name="modifiedDate" type="Date" />
 		<field name="parentCategoryId" type="long" />
-		<field name="name" type="String">
-			<hint name="max-length">101</hint>
-		</field>
+		<field name="name" type="String" />
 		<field name="description" type="String">
 			<hint-collection name="TEXTAREA" />
 		</field>
 		<field name="lastPostDate" type="Date" />
-	</model>
-	<model name="com.liferay.portlet.messageboards.model.MBMailing">
-		<field name="uuid" type="String" />
-		<field name="mailingId" type="long" />
-		<field name="groupId" type="long" />
-		<field name="companyId" type="long" />
-		<field name="userId" type="long" />
-		<field name="userName" type="String" />
-		<field name="createDate" type="Date" />
-		<field name="modifiedDate" type="Date" />
-		<field name="categoryId" type="long" />
-		<field name="mailingListAddress" type="String" />
-		<field name="mailAddress" type="String" />
-		<field name="mailInProtocol" type="String" />
-		<field name="mailInServerName" type="String" />
-		<field name="mailInUseSSL" type="boolean" />
-		<field name="mailInServerPort" type="int" />
-		<field name="mailInUserName" type="String" />
-		<field name="mailInPassword" type="String" />
-		<field name="mailInReadInterval" type="int" />
-		<field name="mailOutConfigured" type="boolean" />
-		<field name="mailOutServerName" type="String" />
-		<field name="mailOutUseSSL" type="boolean" />
-		<field name="mailOutServerPort" type="int" />
-		<field name="mailOutUserName" type="String" />
-		<field name="mailOutPassword" type="String" />
-		<field name="active" type="boolean" />
 	</model>
 	<model name="com.liferay.portlet.messageboards.model.MBDiscussion">
 		<field name="discussionId" type="long" />

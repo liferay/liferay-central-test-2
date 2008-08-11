@@ -28,14 +28,7 @@
 ResultRow row = (ResultRow)request.getAttribute(WebKeys.SEARCH_CONTAINER_RESULT_ROW);
 
 MBCategory category = (MBCategory)row.getObject();
-MBMailing mailing= null;
-try {
-	mailing= MBMailingLocalServiceUtil.getMailingByCategory(category.getCategoryId());
-} catch (NoSuchMailingException nsme) {
-}
 %>
-
-
 
 <liferay-ui:icon-menu>
 	<c:if test="<%= MBCategoryPermission.contains(permissionChecker, category, ActionKeys.UPDATE) %>">
@@ -46,31 +39,6 @@ try {
 		</portlet:renderURL>
 
 		<liferay-ui:icon image="edit" url="<%= editURL %>" />
-	</c:if>
-
-	<c:if test="<%= mailing != null && MBMailingPermission.contains(permissionChecker, mailing, ActionKeys.ACTIVATE)%>">
-		<c:choose>
-			<c:when test="<%=   mailing.isActive() %>">
-				<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="deactiveURL">
-					<portlet:param name="struts_action" value="/message_boards/edit_category" />
-					<portlet:param name="<%= Constants.CMD %>" value="<%= Constants.DEACTIVATE %>" />
-					<portlet:param name="redirect" value="<%= currentURL %>" />
-					<portlet:param name="mailingId" value="<%= String.valueOf(mailing.getMailingId()) %>" />
-				</portlet:actionURL>
-
-				<liferay-ui:icon image="deactivate" message="deactivate-mailing" url="<%= deactiveURL %>" />
-			</c:when>
-			<c:otherwise>
-				<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="activeURL">
-					<portlet:param name="struts_action" value="/message_boards/edit_category" />
-					<portlet:param name="<%= Constants.CMD %>" value="<%= Constants.ACTIVATE %>" />
-					<portlet:param name="redirect" value="<%= currentURL %>" />
-					<portlet:param name="mailingId" value="<%= String.valueOf(mailing.getMailingId()) %>" />
-				</portlet:actionURL>
-
-				<liferay-ui:icon image="activate" message="activate-mailing" url="<%= activeURL %>" />
-			</c:otherwise>
-		</c:choose>
 	</c:if>
 
 	<c:if test="<%= MBCategoryPermission.contains(permissionChecker, category, ActionKeys.PERMISSIONS) %>">

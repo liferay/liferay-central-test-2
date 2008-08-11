@@ -26,7 +26,6 @@ import com.liferay.portal.kernel.job.IntervalJob;
 import com.liferay.portal.kernel.job.JobSchedulerUtil;
 import com.liferay.portal.kernel.job.Scheduler;
 import com.liferay.portal.util.PropsValues;
-import com.liferay.portlet.messageboards.service.MBMailingLocalServiceUtil;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -50,22 +49,10 @@ public class MBScheduler implements Scheduler {
 		}
 
 		JobSchedulerUtil.schedule(_expireBanJob);
-
-		try {
-			MBMailingLocalServiceUtil.startMailReader();
-		} catch (Exception e) {
-			_log.error(e, e);
-		}
 	}
 
 	public void unschedule() {
 		JobSchedulerUtil.unschedule(_expireBanJob);
-
-		try {
-			MBMailingLocalServiceUtil.stopMailReader();
-		} catch (Exception e) {
-			_log.error(e, e);
-		}
 	}
 
 	private IntervalJob _expireBanJob = new ExpireBanJob();

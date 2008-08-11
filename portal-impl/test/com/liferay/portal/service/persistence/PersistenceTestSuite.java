@@ -51,7 +51,6 @@ import com.liferay.portlet.journal.service.persistence.JournalTemplatePersistenc
 import com.liferay.portlet.messageboards.service.persistence.MBBanPersistenceTest;
 import com.liferay.portlet.messageboards.service.persistence.MBCategoryPersistenceTest;
 import com.liferay.portlet.messageboards.service.persistence.MBDiscussionPersistenceTest;
-import com.liferay.portlet.messageboards.service.persistence.MBMailingPersistenceTest;
 import com.liferay.portlet.messageboards.service.persistence.MBMessageFlagPersistenceTest;
 import com.liferay.portlet.messageboards.service.persistence.MBMessagePersistenceTest;
 import com.liferay.portlet.messageboards.service.persistence.MBStatsUserPersistenceTest;
@@ -178,7 +177,6 @@ public class PersistenceTestSuite extends TestSuite {
 		addTestSuite(MBBanPersistenceTest.class);
 		addTestSuite(MBCategoryPersistenceTest.class);
 		addTestSuite(MBDiscussionPersistenceTest.class);
-		addTestSuite(MBMailingPersistenceTest.class);
 		addTestSuite(MBMessageFlagPersistenceTest.class);
 		addTestSuite(MBMessagePersistenceTest.class);
 		addTestSuite(MBStatsUserPersistenceTest.class);

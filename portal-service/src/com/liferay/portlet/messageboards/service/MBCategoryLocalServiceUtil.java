@@ -100,29 +100,6 @@ public class MBCategoryLocalServiceUtil {
 
 	public static com.liferay.portlet.messageboards.model.MBCategory addCategory(
 		long userId, long plid, long parentCategoryId, java.lang.String name,
-		java.lang.String description, java.lang.String mailingListAddress,
-		java.lang.String mailAddress, java.lang.String mailInProtocol,
-		java.lang.String mailInServerName, boolean mailInUseSSL,
-		int mailInServerPort, java.lang.String mailInUserName,
-		java.lang.String mailInPassword, int mailInReadInterval,
-		boolean mailOutConfigured, java.lang.String mailOutServerName,
-		boolean mailOutUseSSL, int mailOutServerPort,
-		java.lang.String mailOutUserName, java.lang.String mailOutPassword,
-		java.lang.String[] communityPermissions,
-		java.lang.String[] guestPermissions)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
-		return _service.addCategory(userId, plid, parentCategoryId, name,
-			description, mailingListAddress, mailAddress, mailInProtocol,
-			mailInServerName, mailInUseSSL, mailInServerPort, mailInUserName,
-			mailInPassword, mailInReadInterval, mailOutConfigured,
-			mailOutServerName, mailOutUseSSL, mailOutServerPort,
-			mailOutUserName, mailOutPassword, communityPermissions,
-			guestPermissions);
-	}
-
-	public static com.liferay.portlet.messageboards.model.MBCategory addCategory(
-		long userId, long plid, long parentCategoryId, java.lang.String name,
 		java.lang.String description, boolean addCommunityPermissions,
 		boolean addGuestPermissions)
 		throws com.liferay.portal.PortalException,
@@ -154,14 +131,6 @@ public class MBCategoryLocalServiceUtil {
 	public static com.liferay.portlet.messageboards.model.MBCategory addCategory(
 		java.lang.String uuid, long userId, long plid, long parentCategoryId,
 		java.lang.String name, java.lang.String description,
-		java.lang.String mailingListAddress, java.lang.String mailAddress,
-		java.lang.String mailInProtocol, java.lang.String mailInServerName,
-		boolean mailInUseSSL, int mailInServerPort,
-		java.lang.String mailInUserName, java.lang.String mailInPassword,
-		int mailInReadInterval, boolean mailOutConfigured,
-		java.lang.String mailOutServerName, boolean mailOutUseSSL,
-		int mailOutServerPort, java.lang.String mailOutUserName,
-		java.lang.String mailOutPassword,
 		java.lang.Boolean addCommunityPermissions,
 		java.lang.Boolean addGuestPermissions,
 		java.lang.String[] communityPermissions,
@@ -169,12 +138,8 @@ public class MBCategoryLocalServiceUtil {
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		return _service.addCategory(uuid, userId, plid, parentCategoryId, name,
-			description, mailingListAddress, mailAddress, mailInProtocol,
-			mailInServerName, mailInUseSSL, mailInServerPort, mailInUserName,
-			mailInPassword, mailInReadInterval, mailOutConfigured,
-			mailOutServerName, mailOutUseSSL, mailOutServerPort,
-			mailOutUserName, mailOutPassword, addCommunityPermissions,
-			addGuestPermissions, communityPermissions, guestPermissions);
+			description, addCommunityPermissions, addGuestPermissions,
+			communityPermissions, guestPermissions);
 	}
 
 	public static void addCategoryResources(long categoryId,
@@ -297,35 +262,12 @@ public class MBCategoryLocalServiceUtil {
 	}
 
 	public static com.liferay.portlet.messageboards.model.MBCategory updateCategory(
-		long userId, long categoryId, long parentCategoryId,
-		java.lang.String name, java.lang.String description,
-		boolean mergeWithParentCategory)
+		long categoryId, long parentCategoryId, java.lang.String name,
+		java.lang.String description, boolean mergeWithParentCategory)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		return _service.updateCategory(userId, categoryId, parentCategoryId,
-			name, description, mergeWithParentCategory);
-	}
-
-	public static com.liferay.portlet.messageboards.model.MBCategory updateCategory(
-		long userId, long categoryId, long parentCategoryId,
-		java.lang.String name, java.lang.String description,
-		boolean mergeWithParentCategory, java.lang.String mailingListAddress,
-		java.lang.String mailAddress, java.lang.String mailInProtocol,
-		java.lang.String mailInServerName, java.lang.Boolean mailInUseSSL,
-		java.lang.Integer mailInServerPort, java.lang.String mailInUserName,
-		java.lang.String mailInPassword, java.lang.Integer mailInReadInterval,
-		java.lang.Boolean mailOutConfigured,
-		java.lang.String mailOutServerName, java.lang.Boolean mailOutUseSSL,
-		java.lang.Integer mailOutServerPort, java.lang.String mailOutUserName,
-		java.lang.String mailOutPassword)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
-		return _service.updateCategory(userId, categoryId, parentCategoryId,
-			name, description, mergeWithParentCategory, mailingListAddress,
-			mailAddress, mailInProtocol, mailInServerName, mailInUseSSL,
-			mailInServerPort, mailInUserName, mailInPassword,
-			mailInReadInterval, mailOutConfigured, mailOutServerName,
-			mailOutUseSSL, mailOutServerPort, mailOutUserName, mailOutPassword);
+		return _service.updateCategory(categoryId, parentCategoryId, name,
+			description, mergeWithParentCategory);
 	}
 
 	public static void subscribeCategory(long userId, long categoryId)

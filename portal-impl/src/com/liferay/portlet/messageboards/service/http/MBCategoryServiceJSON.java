@@ -76,32 +76,6 @@ import com.liferay.portlet.messageboards.service.MBCategoryServiceUtil;
 public class MBCategoryServiceJSON {
 	public static JSONObject addCategory(long plid, long parentCategoryId,
 		java.lang.String name, java.lang.String description,
-		java.lang.String mailingListAddress, java.lang.String mailAddress,
-		java.lang.String mailInProtocol, java.lang.String mailInServerName,
-		java.lang.Boolean mailInUseSSL, java.lang.Integer mailInServerPort,
-		java.lang.String mailInUserName, java.lang.String mailInPassword,
-		java.lang.Integer mailInReadInterval,
-		java.lang.Boolean mailOutConfigured,
-		java.lang.String mailOutServerName, java.lang.Boolean mailOutUseSSL,
-		java.lang.Integer mailOutServerPort, java.lang.String mailOutUserName,
-		java.lang.String mailOutPassword,
-		java.lang.String[] communityPermissions,
-		java.lang.String[] guestPermissions)
-		throws java.rmi.RemoteException, com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
-		com.liferay.portlet.messageboards.model.MBCategory returnValue = MBCategoryServiceUtil.addCategory(plid,
-				parentCategoryId, name, description, mailingListAddress,
-				mailAddress, mailInProtocol, mailInServerName, mailInUseSSL,
-				mailInServerPort, mailInUserName, mailInPassword,
-				mailInReadInterval, mailOutConfigured, mailOutServerName,
-				mailOutUseSSL, mailOutServerPort, mailOutUserName,
-				mailOutPassword, communityPermissions, guestPermissions);
-
-		return MBCategoryJSONSerializer.toJSONObject(returnValue);
-	}
-
-	public static JSONObject addCategory(long plid, long parentCategoryId,
-		java.lang.String name, java.lang.String description,
 		boolean addCommunityPermissions, boolean addGuestPermissions)
 		throws java.rmi.RemoteException, com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
@@ -172,25 +146,11 @@ public class MBCategoryServiceJSON {
 
 	public static JSONObject updateCategory(long categoryId,
 		long parentCategoryId, java.lang.String name,
-		java.lang.String description, boolean mergeWithParentCategory,
-		java.lang.String mailingListAddress, java.lang.String mailAddress,
-		java.lang.String mailInProtocol, java.lang.String mailInServerName,
-		java.lang.Boolean mailInUseSSL, java.lang.Integer mailInServerPort,
-		java.lang.String mailInUserName, java.lang.String mailInPassword,
-		java.lang.Integer mailInReadInterval,
-		java.lang.Boolean mailOutConfigured,
-		java.lang.String mailOutServerName, java.lang.Boolean mailOutUseSSL,
-		java.lang.Integer mailOutServerPort, java.lang.String mailOutUserName,
-		java.lang.String mailOutPassword)
+		java.lang.String description, boolean mergeWithParentCategory)
 		throws java.rmi.RemoteException, com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		com.liferay.portlet.messageboards.model.MBCategory returnValue = MBCategoryServiceUtil.updateCategory(categoryId,
-				parentCategoryId, name, description, mergeWithParentCategory,
-				mailingListAddress, mailAddress, mailInProtocol,
-				mailInServerName, mailInUseSSL, mailInServerPort,
-				mailInUserName, mailInPassword, mailInReadInterval,
-				mailOutConfigured, mailOutServerName, mailOutUseSSL,
-				mailOutServerPort, mailOutUserName, mailOutPassword);
+				parentCategoryId, name, description, mergeWithParentCategory);
 
 		return MBCategoryJSONSerializer.toJSONObject(returnValue);
 	}

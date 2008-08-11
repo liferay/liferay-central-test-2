@@ -33,7 +33,6 @@ import com.liferay.portal.kernel.scheduler.SchedulerException;
 import com.liferay.portal.kernel.scheduler.messaging.SchedulerRequest;
 import com.liferay.portlet.communities.messaging.LayoutsLocalPublisherMessageListener;
 import com.liferay.portlet.communities.messaging.LayoutsRemotePublisherMessageListener;
-import com.liferay.portlet.messageboards.messaging.EmailReaderMessageListener;
 
 import java.util.Date;
 import java.util.List;
@@ -42,7 +41,6 @@ import java.util.List;
  * <a href="SchedulerEngineImpl.java.html"><b><i>View Source</i></b></a>
  *
  * @author Bruno Farache
- * @author Thiago Moreira
  *
  */
 public class SchedulerEngineImpl implements SchedulerEngine {
@@ -63,16 +61,6 @@ public class SchedulerEngineImpl implements SchedulerEngine {
 
 		layoutsRemotePublisherDestination.register(
 			new LayoutsRemotePublisherMessageListener());
-
-		Destination messageBoardsAccountReaderDestination =
-			new ParallelDestination(
-				DestinationNames.MESSAGE_BOARDS_ACCOUNT_READER);
-
-		MessageBusUtil.addDestination(messageBoardsAccountReaderDestination);
-
-		messageBoardsAccountReaderDestination.register(
-				new EmailReaderMessageListener());
-
 	}
 
 	public List<SchedulerRequest> getScheduledJobs(String groupName)
