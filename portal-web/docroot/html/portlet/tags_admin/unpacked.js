@@ -477,8 +477,8 @@ Liferay.Portlet.TagsAdmin = new Class({
 			{
 				groupId: themeDisplay.getGroupId(),
 				name: entryName,
-				properties: [],
-				vocabulary: vocabulary
+				vocabulary: vocabulary,
+				properties: []
 			},
 			function(message) {
 				var exception = message.exception;
@@ -782,9 +782,9 @@ Liferay.Portlet.TagsAdmin = new Class({
 	_getVocabularies: function(folksonomy, callback) {
 		var instance = this;
 
-		Liferay.Service.Tags.TagsVocabulary.getVocabularies(
+		Liferay.Service.Tags.TagsVocabulary.getGroupVocabularies(
 			{
-				companyId: themeDisplay.getCompanyId(),
+				groupId: themeDisplay.getGroupId(),
 				folksonomy: folksonomy
 			},
 			callback
@@ -802,9 +802,9 @@ Liferay.Portlet.TagsAdmin = new Class({
 
 		instance._showLoading(instance._entryScopeClass);
 
-		Liferay.Service.Tags.TagsEntry.getVocabularyEntries(
+		Liferay.Service.Tags.TagsEntry.getGroupVocabularyEntries(
 			{
-				companyId: themeDisplay.getCompanyId(),
+				groupId: themeDisplay.getGroupId(),
 				name: vocabulary
 			},
 			callback
@@ -1102,7 +1102,6 @@ Liferay.Portlet.TagsAdmin = new Class({
 
 		Liferay.Service.Tags.TagsEntry.updateEntry(
 			{
-				groupId: themeDisplay.getGroupId(),
 				entryId: entryId,
 				parentEntryName: parentEntryName,
 				name: name,
