@@ -48,6 +48,6 @@ public class UpgradeProcess_5_2_0 extends UpgradeProcess {
 		upgrade(UpgradeTags.class);
 	}
 
-	private static Log _log = LogFactory.getLog(UpgradeProcess_5_1_0.class);
+	private static Log _log = LogFactory.getLog(UpgradeProcess_5_2_0.class);
 
 }

@@ -2,6 +2,12 @@ alter table TagsEntry add groupId LONG;
 alter table TagsEntry add parentEntryId LONG;
 alter table TagsEntry add vocabularyId LONG;
 
+COMMIT_TRANSACTION;
+
+update TagsEntry set groupId = 0;
+update TagsEntry set parentEntryId = 0;
+update TagsEntry set vocabularyId = 0;
+
 create table TagsVocabulary (
 	vocabularyId LONG not null primary key,
 	groupId LONG,
@@ -16,3 +22,7 @@ create table TagsVocabulary (
 );
 
 alter table WikiPage add minorEdit BOOLEAN;
+
+COMMIT_TRANSACTION;
+
+update WikiPage set minorEdit = FALSE;
