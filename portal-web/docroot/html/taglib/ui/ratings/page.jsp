@@ -100,12 +100,14 @@ RatingsStats stats = RatingsStatsLocalServiceUtil.getStats(className, classPK);
 									},
 									dataType: 'json',
 									success: function(message) {
-										var averageRating = jQuery('#<%= randomNamespace %>averageRating');
 										var totalEntries = jQuery('#<%= randomNamespace %>totalEntries');
 
-										var entriesHtml = (message.totalEntries == 1) ? Liferay.Language.get('average') + ' (' + message.totalEntries + ' ' + Liferay.Language.get('vote') + ')' : Liferay.Language.get('average') + ' (' + message.totalEntries + ' ' + Liferay.Language.get('votes') + ')';
+										var entriesHtml = (message.totalEntries == 1) ? '<liferay-ui:message key="average" /> (' + message.totalEntries + ' <liferay-ui:message key="vote" />)' : '<liferay-ui:message key="average" /> (' + message.totalEntries + ' <liferay-ui:message key="votes" />)';
 
 										totalEntries.html(entriesHtml);
+
+										var averageRating = jQuery('#<%= randomNamespace %>averageRating');
+
 										averageRating.removeAttr('onmousemove');
 
 										<%= randomNamespace %>averageRatingObj.display(message.averageScore);
