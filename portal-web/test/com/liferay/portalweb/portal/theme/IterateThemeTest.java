@@ -22,24 +22,22 @@
 
 package com.liferay.portalweb.portal.theme;
 
-import com.liferay.portalweb.portal.BaseTests;
+import com.liferay.portalweb.portal.BaseTestCase;
+import com.liferay.portalweb.portal.util.ThemeIds;
 
 /**
- * <a href="ThemeTests.java.html"><b><i>View Source</i></b></a>
+ * <a href="IterateThemeTest.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *
  */
-public class ThemeTests extends BaseTests {
+public class IterateThemeTest extends BaseTestCase {
 
-	public ThemeTests() {
-		addTestSuite(AddPageTest.class);
-		addTestSuite(SelectThemeTest.class);
-		addTestSuite(AddDocumentLibraryTest.class);
-		addTestSuite(AddCalendarTest.class);
-		addTestSuite(ScreengrabTest.class);
-		addTestSuite(CleanUpTest.class);
-		addTestSuite(IterateThemeTest.class);
+	public void testIterate() throws Exception {
+	}
+
+	public void tearDown() throws Exception {
+		ThemeIds.iterate();
 	}
 
 }
