@@ -1141,10 +1141,9 @@ Liferay.Portlet.TagsAdmin = new Class({
 	_updateVocabulary: function(vocabularyId, vocabularyName, folksonomy, callback) {
 		Liferay.Service.Tags.TagsVocabulary.updateVocabulary(
 			{
-				groupId: themeDisplay.getGroupId(),
-				folksonomy: folksonomy,
+				vocabularyId: vocabularyId,
 				name: vocabularyName,
-				vocabularyId: vocabularyId
+				folksonomy: folksonomy
 			},
 			callback
 		);
