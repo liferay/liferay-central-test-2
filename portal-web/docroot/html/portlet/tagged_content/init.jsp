@@ -67,6 +67,7 @@
 <%@ page import="com.liferay.portlet.messageboards.model.MBMessage" %>
 <%@ page import="com.liferay.portlet.messageboards.service.MBMessageLocalServiceUtil" %>
 <%@ page import="com.liferay.portlet.taggedcontent.util.AssetPublisherUtil" %>
+<%@ page import="com.liferay.portlet.tags.NoSuchAssetException" %>
 <%@ page import="com.liferay.portlet.tags.NoSuchEntryException" %>
 <%@ page import="com.liferay.portlet.tags.NoSuchPropertyException" %>
 <%@ page import="com.liferay.portlet.tags.model.TagsAsset" %>

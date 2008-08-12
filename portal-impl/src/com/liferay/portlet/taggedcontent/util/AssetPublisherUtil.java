@@ -23,6 +23,8 @@
 package com.liferay.portlet.taggedcontent.util;
 
 import com.liferay.portal.kernel.util.ArrayUtil;
+import com.liferay.portal.kernel.util.GetterUtil;
+import com.liferay.portal.kernel.util.ListUtil;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;
@@ -35,8 +37,11 @@ import com.liferay.portlet.tags.service.TagsAssetLocalServiceUtil;
 import com.liferay.util.xml.XMLFormatter;
 
 import java.io.IOException;
+import java.io.StringReader;
 
 import java.util.HashMap;
+import java.util.Iterator;
+import java.util.List;
 import java.util.Map;
 
 import javax.portlet.ActionRequest;
@@ -52,6 +57,7 @@ import org.apache.commons.logging.LogFactory;
 import org.dom4j.Document;
 import org.dom4j.DocumentFactory;
 import org.dom4j.Element;
+import org.dom4j.io.SAXReader;
 
 /**
  * <a href="AssetPublisherUtil.java.html"><b><i>View Source</i></b></a>
@@ -133,6 +139,44 @@ public class AssetPublisherUtil {
 		else {
 			return classPK.longValue();
 		}
+	}
+
+	public static void removeAndStoreSelection(
+		List<Long> assetIds, PortletPreferences prefs) throws Exception {
+
+		if (assetIds.size() == 0) {
+			return;
+		}
+
+		String[] manualEntries = prefs.getValues(
+			"manual-entries", new String[0]);
+
+		List<String> manualEntriesList = ListUtil.fromArray(manualEntries);
+
+		Iterator<String> itr = manualEntriesList.iterator();
+
+		while (itr.hasNext()) {
+			String assetEntry = itr.next();
+
+			SAXReader reader = new SAXReader();
+
+			Document doc = reader.read(new StringReader(assetEntry));
+
+			Element root = doc.getRootElement();
+
+			long assetId = GetterUtil.getLong(
+				root.element("asset-id").getText());
+
+			if (assetIds.contains(assetId)) {
+				itr.remove();
+			}
+		}
+
+		prefs.setValues(
+			"manual-entries",
+			manualEntriesList.toArray(new String[manualEntriesList.size()]));
+
+		prefs.store();
 	}
 
 	private static String _assetConfiguration(String assetType, long assetId) {

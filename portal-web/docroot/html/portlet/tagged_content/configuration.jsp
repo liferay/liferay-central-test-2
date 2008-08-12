@@ -141,6 +141,8 @@ configurationActionURL.setParameter("portletResource", portletResource);
 						<br /><br />
 
 						<%
+						List<Long> deletedAssets = new ArrayList<Long>();
+
 						List<String> headerNames = new ArrayList<String>();
 
 						headerNames.add("type");
@@ -186,7 +188,16 @@ configurationActionURL.setParameter("portletResource", portletResource);
 							String assetType = root.element("asset-type").getText();
 							long assetId = GetterUtil.getLong(root.element("asset-id").getText());
 
-							TagsAsset asset = TagsAssetLocalServiceUtil.getAsset(assetId);
+							TagsAsset asset = null;
+
+							try {
+								asset = TagsAssetLocalServiceUtil.getAsset(assetId);
+							}
+							catch (NoSuchAssetException nsae) {
+								deletedAssets.add(assetId);
+
+								continue;
+							}
 
 							ResultRow row = new ResultRow(doc, null, assetOrder);
 
@@ -235,6 +246,8 @@ configurationActionURL.setParameter("portletResource", portletResource);
 
 							resultRows.add(row);
 						}
+
+						AssetPublisherUtil.removeAndStoreSelection(deletedAssets, prefs);
 						%>
 
 						<liferay-ui:search-iterator searchContainer="<%= searchContainer %>" />
