@@ -310,7 +310,7 @@ public class ViewAction extends PortletAction {
 			InternetAddress toAddress = new InternetAddress(emailAddress);
 
 			MailMessage mailMessage = new MailMessage(
-				fromAddress, toAddress, subject, body);
+				fromAddress, toAddress, subject, body, false);
 
 			MailServiceUtil.sendEmail(mailMessage);
 

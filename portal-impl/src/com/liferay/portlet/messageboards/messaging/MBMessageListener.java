@@ -189,8 +189,8 @@ public class MBMessageListener implements MessageListener {
 
 			InternetAddress from = new InternetAddress(fromAddress, fromName);
 
-			InternetAddress[] to = new InternetAddress[] {
-				new InternetAddress(replyToAddress, replyToAddress)};
+			InternetAddress to = new InternetAddress(
+				replyToAddress, replyToAddress);
 
 			String curSubject = StringUtil.replace(
 				subject,
@@ -229,9 +229,9 @@ public class MBMessageListener implements MessageListener {
 			}
 
 			MailMessage message = new MailMessage(
-				from, to, null, null, bulkAddresses, curSubject, curBody,
-				htmlFormat);
+				from, to, curSubject, curBody, htmlFormat);
 
+			message.setBulkAddresses(bulkAddresses);
 			message.setMessageId(mailId);
 			message.setInReplyTo(inReplyTo);
 			message.setReplyTo(new InternetAddress[] {replyTo});

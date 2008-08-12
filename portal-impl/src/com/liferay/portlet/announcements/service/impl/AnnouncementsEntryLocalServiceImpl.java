@@ -506,14 +506,15 @@ public class AnnouncementsEntryLocalServiceImpl
 
 		InternetAddress from = new InternetAddress(fromAddress, fromName);
 
-		InternetAddress[] to = new InternetAddress[] {
-			new InternetAddress(toAddress, toName)};
+		InternetAddress to = new InternetAddress(toAddress, toName);
 
 		InternetAddress[] bulkAddressesArray = bulkAddresses.toArray(
 			new InternetAddress[bulkAddresses.size()]);
 
 		MailMessage message = new MailMessage(
-			from, to, null, null, bulkAddressesArray, subject, body, true);
+			from, to, subject, body, true);
+
+		message.setBulkAddresses(bulkAddressesArray);
 
 		mailService.sendEmail(message);
 	}

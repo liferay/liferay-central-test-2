@@ -42,7 +42,7 @@ public class SMTPAccount implements Serializable {
 		return _serverName;
 	}
 
-	public Integer getServerPort() {
+	public int getServerPort() {
 		return _serverPort;
 	}
 
@@ -50,7 +50,18 @@ public class SMTPAccount implements Serializable {
 		return _userName;
 	}
 
-	public Boolean isUseSSL() {
+	public boolean isRequiresAuthentication() {
+		if (Validator.isNotNull(_userName) &&
+			Validator.isNotNull(_password)) {
+
+			return true;
+		}
+		else {
+			return false;
+		}
+	}
+
+	public boolean isUseSSL() {
 		return _useSSL;
 	}
 
@@ -62,7 +73,7 @@ public class SMTPAccount implements Serializable {
 		_serverName = serverName;
 	}
 
-	public void setServerPort(Integer serverPort) {
+	public void setServerPort(int serverPort) {
 		_serverPort = serverPort;
 	}
 
@@ -74,14 +85,10 @@ public class SMTPAccount implements Serializable {
 		_useSSL = useSSL;
 	}
 
-	public boolean requiresAuthentication() {
-		return Validator.isNotNull(_userName) && _password != null;
-	}
-
 	private String _password;
 	private String _serverName;
-	private Integer _serverPort;
+	private int _serverPort;
 	private String _userName;
-	private Boolean _useSSL;
+	private boolean _useSSL;
 
 }

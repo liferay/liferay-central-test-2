@@ -35,149 +35,24 @@ import javax.mail.internet.InternetAddress;
  *
  * @author Brian Wing Shun Chan
  * @author Neil Griffin
- * @author Raymond Augé
+ * @author Raymond AugÃ©
  * @author Thiago Moreira
  *
  */
 public class MailMessage implements Serializable {
 
-	public MailMessage(
-		InternetAddress from, InternetAddress to, String subject, String body) {
-
-		this(from, to, subject, body, false);
+	public MailMessage() {
 	}
 
 	public MailMessage(
 		InternetAddress from, InternetAddress to, String subject, String body,
 		boolean htmlFormat) {
 
-		this(
-			from, new InternetAddress[] {to}, null, null, null, subject, body,
-			htmlFormat);
-	}
-
-	public MailMessage(
-		InternetAddress from, InternetAddress[] to, InternetAddress[] cc,
-		InternetAddress[] bcc, String subject, String body) {
-
-		this(from, to, cc, bcc, null, subject, body, false);
-	}
-
-	public MailMessage(
-		InternetAddress from, InternetAddress[] to, InternetAddress[] cc,
-		InternetAddress[] bcc, InternetAddress[] bulkAddresses, String subject,
-		String body, boolean htmlFormat) {
-
-		this(from, to, cc, bcc, bulkAddresses, subject, body, htmlFormat, null);
-	}
-
-	public MailMessage(
-		InternetAddress from, InternetAddress[] to, InternetAddress[] cc,
-		InternetAddress[] bcc, InternetAddress[] bulkAddresses, String subject,
-		String body, boolean htmlFormat, SMTPAccount smtpAccount) {
-
 		_from = from;
-		_to = to;
-		_cc = cc;
-		_bcc = bcc;
-		_bulkAddresses = bulkAddresses;
+		_to = new InternetAddress[] {to};
 		_subject = subject;
 		_body = body;
 		_htmlFormat = htmlFormat;
-		_smtpAccount= smtpAccount;
-		_attachments = new ArrayList<File>();
-	}
-
-	public InternetAddress getFrom() {
-		return _from;
-	}
-
-	public void setFrom(InternetAddress from) {
-		_from = from;
-	}
-
-	public InternetAddress[] getTo() {
-		return _to;
-	}
-
-	public void setTo(InternetAddress[] to) {
-		_to = to;
-	}
-
-	public InternetAddress[] getCC() {
-		return _cc;
-	}
-
-	public void setCC(InternetAddress[] cc) {
-		_cc = cc;
-	}
-
-	public InternetAddress[] getBCC() {
-		return _bcc;
-	}
-
-	public void setBCC(InternetAddress[] bcc) {
-		_bcc = bcc;
-	}
-
-	public InternetAddress[] getBulkAddresses() {
-		return _bulkAddresses;
-	}
-
-	public void setBulkAddresses(InternetAddress[] bulkAddresses) {
-		_bulkAddresses = bulkAddresses;
-	}
-
-	public String getSubject() {
-		return _subject;
-	}
-
-	public void setSubject(String subject) {
-		_subject = subject;
-	}
-
-	public String getBody() {
-		return _body;
-	}
-
-	public void setBody(String body) {
-		_body = body;
-	}
-
-	public boolean getHTMLFormat() {
-		return _htmlFormat;
-	}
-
-	public boolean isHTMLFormat() {
-		return _htmlFormat;
-	}
-
-	public void setHTMLFormat(boolean htmlFormat) {
-		_htmlFormat = htmlFormat;
-	}
-
-	public InternetAddress[] getReplyTo() {
-		return _replyTo;
-	}
-
-	public void setReplyTo(InternetAddress[] replyTo) {
-		_replyTo = replyTo;
-	}
-
-	public String getMessageId() {
-		return _messageId;
-	}
-
-	public void setMessageId(String messageId) {
-		_messageId = messageId;
-	}
-
-	public String getInReplyTo() {
-		return _inReplyTo;
-	}
-
-	public void setInReplyTo(String inReplyTo) {
-		_inReplyTo = inReplyTo;
 	}
 
 	public void addAttachment(File attachment) {
@@ -190,12 +65,104 @@ public class MailMessage implements Serializable {
 		return _attachments.toArray(new File[_attachments.size()]);
 	}
 
+	public InternetAddress[] getBCC() {
+		return _bcc;
+	}
+
+	public String getBody() {
+		return _body;
+	}
+
+	public InternetAddress[] getBulkAddresses() {
+		return _bulkAddresses;
+	}
+
+	public InternetAddress[] getCC() {
+		return _cc;
+	}
+
+	public InternetAddress getFrom() {
+		return _from;
+	}
+
+	public boolean getHTMLFormat() {
+		return _htmlFormat;
+	}
+
+	public String getInReplyTo() {
+		return _inReplyTo;
+	}
+
+	public String getMessageId() {
+		return _messageId;
+	}
+
+	public InternetAddress[] getReplyTo() {
+		return _replyTo;
+	}
+
 	public SMTPAccount getSMTPAccount() {
 		return _smtpAccount;
 	}
 
+	public String getSubject() {
+		return _subject;
+	}
+
+	public InternetAddress[] getTo() {
+		return _to;
+	}
+
+	public boolean isHTMLFormat() {
+		return _htmlFormat;
+	}
+
+	public void setBCC(InternetAddress[] bcc) {
+		_bcc = bcc;
+	}
+
+	public void setBody(String body) {
+		_body = body;
+	}
+
+	public void setBulkAddresses(InternetAddress[] bulkAddresses) {
+		_bulkAddresses = bulkAddresses;
+	}
+
+	public void setCC(InternetAddress[] cc) {
+		_cc = cc;
+	}
+
+	public void setFrom(InternetAddress from) {
+		_from = from;
+	}
+
+	public void setHTMLFormat(boolean htmlFormat) {
+		_htmlFormat = htmlFormat;
+	}
+
+	public void setInReplyTo(String inReplyTo) {
+		_inReplyTo = inReplyTo;
+	}
+
+	public void setMessageId(String messageId) {
+		_messageId = messageId;
+	}
+
+	public void setReplyTo(InternetAddress[] replyTo) {
+		_replyTo = replyTo;
+	}
+
 	public void setSMTPAccount(SMTPAccount account) {
 		_smtpAccount = account;
+	}
+
+	public void setSubject(String subject) {
+		_subject = subject;
+	}
+
+	public void setTo(InternetAddress[] to) {
+		_to = to;
 	}
 
 	private InternetAddress _from;
@@ -209,7 +176,7 @@ public class MailMessage implements Serializable {
 	private InternetAddress[] _replyTo;
 	private String _messageId;
 	private String _inReplyTo;
-	private List<File> _attachments;
+	private List<File> _attachments = new ArrayList<File>();
 	private SMTPAccount _smtpAccount;
 
 }

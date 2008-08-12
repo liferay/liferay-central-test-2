@@ -71,7 +71,7 @@ public class SMSPortlet extends JSPPortlet {
 					MailServiceUtil.sendEmail(new MailMessage(
 						new InternetAddress(
 							user.getEmailAddress(), user.getFullName()),
-						new InternetAddress(to), subject, message));
+						new InternetAddress(to), subject, message, false));
 
 					actionResponse.setRenderParameter("to", StringPool.BLANK);
 					actionResponse.setRenderParameter(
