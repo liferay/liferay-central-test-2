@@ -423,32 +423,76 @@ img.ui-datepicker-trigger {
 
 /* ---------- Tags ---------- */
 
-.ui-tags {
+span.ui-tags-delete {
 }
 
-.ui-tags:after {
+/* ---------- Treeview ---------- */
+
+.treeview {
 }
 
-.ie .ui-tags {
+.treeview, .treeview ul {
 }
 
-.ui-tags.empty {
+.treeview ul {
 }
 
-.ui-tags .ui-tag {
+.treeview li {
 }
 
-.ui-tags .ui-tag:hover {
+.treeview .hitarea {
 }
 
-.ui-tags .ui-tag-delete {
+.ie6 .hitarea {
 }
 
-.ui-tags .ui-tag-delete span {
+.treeview li {
 }
 
-.ui-tags .ui-tag-delete:hover span {
+.treeview a.selected {
 }
 
-.ui-tags-input {
+.treeview-control {
+}
+
+.treeview .hover {
+}
+
+.treeview li.collapsable, .treeview li.expandable {
+}
+
+.treeview .expandable-hitarea {
+}
+
+.treeview li.last {
+}
+
+.treeview li.lastCollapsable, .treeview li.lastExpandable {
+}
+
+.treeview li.lastCollapsable {
+}
+
+.treeview li.lastExpandable {
+}
+
+.treeview div.lastCollapsable-hitarea, .treeview div.lastExpandable-hitarea {
+}
+
+.treeview .placeholder {
+}
+
+.filetree li {
+}
+
+.filetree span.folder, .filetree span.file {
+}
+
+.filetree span.folder {
+}
+
+.filetree li.expandable span.folder {
+}
+
+.filetree span.file {
 }

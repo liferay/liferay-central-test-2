@@ -767,188 +767,6 @@ img.ui-datepicker-trigger {
 
 /* ---------- Tags ---------- */
 
-.ui-tags-container {
-	width: 100%;
-}
-
-.ui-tags-content td {
-	vertical-align: top;
-}
-
-.ui-tags-content li.ui-tags-vocabulary, li.ui-tags-item {
-	border-bottom: 1px #D3D7DB solid;
-	font-size: 13px;
-	font-weight: bold;
-	height: 35px;
-	line-height: 35px;
-	list-style: none;
-}
-
-.ui-tags-content ul {
-	margin: 0;
-	padding: 0;
-}
-
-.ui-tags-vocabulary-list a {
-	color: #369;
-	display: block;
-	padding-left: 20px;
-	text-decoration: none;
-	zoom: 1;
-}
-
-.ui-tags-vocabulary-edit {
-	background: #F0F2F4;
-	display: none;
-}
-
-.ui-tags-vocabulary-entries li.ui-tags-item {
-	background: #fff;
-	cursor: pointer;
-}
-
-.ui-tags-item a {
-	color: #369;
-	font-size: 11px;
-	padding: 0;
-	text-decoration: underline;
-}
-
-.ui-tags-item span {
-	padding-left: 20px;
-}
-
-.ui-tags-vocabulary-list a:hover, .ui-tags-vocabulary-list .selected, .ui-tags-item.selected {
-	background: #6F7D83 !important;
-	color: #fff;
-}
-
-.ui-tags-vocabulary-entries .ui-tags-item.odd {
-	background: #F0F2F4;
-}
-
-.ui-tags-vocabulary-list .selected a, .ui-tags-item.selected a {
-	color: #fff;
-}
-
-.ui-tags-category-item.selected > span {
-	font-weight: bold;
-}
-
-.ui-tags-vocabulary-entries .active-area {
-	background: #FFC !important;
-}
-
-.ui-tags-vocabulary-entries {
-	border-right: 1px #D3D7DB solid;
-	height: 300px;
-	min-width: 200px;
-	overflow: auto;
-}
-
-.ui-tags-vocabulary-list {
-	border-left: 1px #D3D7DB solid;
-	border-right: 1px #D3D7DB solid;
-	height: 300px;
-	overflow: auto;
-	overflow-x: hidden;
-}
-
-.ui-tags-properties {
-	width: 300px;
-}
-
-.ui-tags .nowrap {
-	empty-cells: show;
-	overflow: hidden;
-	white-space: nowrap;
-}
-
-.ui-tags-search-bar {
-	background: #F0F2F4;
-	border: 1px #D3D7DB solid;
-	border-left: 0;
-	border-right: 0;
-	padding: 10px 20px;
-}
-
-.ui-tags-toolbar {
-	background: #F6F8FB;
-	border-bottom: 1px #848B95 solid;
-}
-
-.ui-tags-buttons {
-	float: left;
-	padding: 5px 0px 5px 20px;
-}
-
-.ui-tags-actions {
-	padding: 5px;
-	text-align: right;
-}
-
-.ui-tags-actions input, .ui-tags-actions div, .ui-tags-actions select {
-	margin-left: 5px;
-}
-
-.ui-tags-buttons .button {
-	background: transparent url(../images/common/page.png) no-repeat scroll 0pt 50%;
-	color: #9EA8AD;
-	cursor: pointer;
-	display: block;
-	float: left;
-	margin-right: 5px;
-	min-width: 70px;
-	padding: 3px 3px 3px 20px;
-}
-
-.ui-tags-buttons .selected {
-	background: #CFD5D7 url(../images/common/page.png) no-repeat scroll 0pt 50%;
-	color: #0F0F0F;
-	font-weight: bold;
-}
-
-.ui-tags-vocabulary-edit {
-	padding: 5px 5px 20px 20px;
-}
-
-.ui-tags-vocabulary-edit .ui-tags-close {
-	text-align: right;
-}
-
-.ui-tags-vocabulary-edit .ui-tags-close span {
-	cursor: pointer;
-}
-
-.ui-tags-property-line {
-	display: none;
-}
-
-.ui-tags-footer {
-	border-top: 1px #848B95 solid;
-	margin-top: 5px;
-	padding: 10px 0 0 20px;
-}
-
-.ui-tags-vocabulary-name {
-	display: none;
-}
-
-#ui-tags-entry-messages {
-	margin: 10px;
-}
-
-.ui-tags-treeview-container {
-	padding: 5px;
-}
-
-.ui-tags-treeview-container ul, .ui-tags-treeview-container li {
-	list-style: none;
-}
-
-.ui-tags-edit-vocabulary input {
-}
-
 span.ui-tags-delete {
 	background: url(../images/application/close_small.png) no-repeat 0 0;
 	cursor: pointer;
@@ -963,7 +781,6 @@ span.ui-tags-delete {
 
 .treeview {
 	cursor: pointer;
-	font-size: 13px;
 }
 
 .treeview, .treeview ul {
@@ -973,35 +790,38 @@ span.ui-tags-delete {
 }
 
 .treeview ul {
-	background-color: white;
 	margin-top: 4px;
 }
 
+.treeview li {
+	list-style-type: none;
+}
+
 .treeview .hitarea {
+	background: url(../images/trees/treeview_bg.png) -64px -25px no-repeat;
 	cursor: pointer;
 	float: left;
-	height: 1px;
+	height: 16px;
 	margin-left: -16px;
 	width: 16px;
 }
 
-/* fix for IE6 */
-
-* html .hitarea {
+.ie6 .hitarea {
 	display: inline;
-	float: none;
+	float:none;
 }
 
 .treeview li {
+	background: url(../images/trees/treeview_line.png) 0 0 no-repeat;
 	margin: 0;
-	padding: 4px 0 5px 16px;
+	padding: 3px 0 3px 16px;
 }
 
 .treeview a.selected {
 	background-color: #eee;
 }
 
-#treecontrol {
+.treeview-control {
 	display: none;
 	margin: 1em 0;
 }
@@ -1019,18 +839,19 @@ span.ui-tags-delete {
 }
 
 .treeview li.last {
-	background-position: 0 -1766px;
+	background-position: 0 -1766px
 }
 
 .treeview li.lastCollapsable, .treeview li.lastExpandable {
+	background-image: url(../images/trees/treeview_bg.png);
 }
 
 .treeview li.lastCollapsable {
-	background-position: 0 -111px;
+	background-position: 0 -111px
 }
 
 .treeview li.lastExpandable {
-	background-position: -32px -67px;
+	background-position: -32px -67px
 }
 
 .treeview div.lastCollapsable-hitarea, .treeview div.lastExpandable-hitarea {
@@ -1038,14 +859,14 @@ span.ui-tags-delete {
 }
 
 .treeview .placeholder {
-	background: url(../images/trees/ajax_loader.gif) 0 0 no-repeat;
+	background: url(../images/application/loading_indicator.gif) 0 0 no-repeat;
 	display: block;
 	height: 16px;
 	width: 16px;
 }
 
 .filetree li {
-	padding: 4px 0 5px 16px;
+	padding: 3px 0 2px 16px;
 }
 
 .filetree span.folder, .filetree span.file {
@@ -1054,25 +875,13 @@ span.ui-tags-delete {
 }
 
 .filetree span.folder {
-	background: url(../images/trees/folder.png) 0 0 no-repeat;
+	background: url(../images/trees/minus.png) 0 0 no-repeat;
 }
 
 .filetree li.expandable span.folder {
-	background: url(../images/trees/folder_closed.png) 0 0 no-repeat;
+	background: url(../images/trees/plus.png) 0 0 no-repeat;
 }
 
 .filetree span.file {
-	background: url(../images/trees/file.gif) 0 0 no-repeat;
-}
-
-.treeview .hover-up {
-	border-bottom: 2px solid black;
-}
-
-.treeview .hover-down {
-	border-top: 2px solid black;
-}
-
-.treeview .hover-folder {
-	background: #FFC url(../images/trees/folder.png) no-repeat scroll 0 0 !important;
+	background: url(../images/trees/page.png) 0 0 no-repeat;
 }
