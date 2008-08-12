@@ -67,8 +67,6 @@ for (int i = 0; i < results.size(); i++) {
 
 	TagsAsset asset = TagsAssetLocalServiceUtil.getAsset(JournalArticle.class.getName(), articleResourceId);
 
-	String assetTitle = HtmlUtil.escape(asset.getTitle());
-
 	StringBuilder sb = new StringBuilder();
 
 	sb.append("javascript: ");
@@ -78,7 +76,7 @@ for (int i = 0; i < results.size(); i++) {
 	sb.append("', '");
 	sb.append(asset.getAssetId());
 	sb.append("', '");
-	sb.append(StringUtil.replace(assetTitle, "&#039;", "\\&#039;"));
+	sb.append(asset.getTitle());
 	sb.append("', '");
 	sb.append(assetOrder);
 	sb.append("');");
@@ -91,7 +89,7 @@ for (int i = 0; i < results.size(); i++) {
 
 	// Title
 
-	row.addText(assetTitle, rowHREF);
+	row.addText(article.getTitle(), rowHREF);
 
 	// Version
 

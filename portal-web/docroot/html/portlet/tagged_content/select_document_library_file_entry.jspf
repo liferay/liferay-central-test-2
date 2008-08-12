@@ -126,7 +126,7 @@ portletURL.setParameter("assetParentId", String.valueOf(folderId));
 				sb.append("', '");
 				sb.append(asset.getAssetId());
 				sb.append("', '");
-				sb.append(StringUtil.replace(HtmlUtil.escape(asset.getTitle()), "&#039;", "\\&#039;"));
+				sb.append(asset.getTitle());
 				sb.append("', '");
 				sb.append(assetOrder);
 				sb.append("');");
@@ -137,8 +137,8 @@ portletURL.setParameter("assetParentId", String.valueOf(folderId));
 
 				DLFolder entryFolder = DLFolderLocalServiceUtil.getFolder(entryFolderId);
 
-				row.addText(HtmlUtil.escape(entryFolder.getName()), rowHREF);
-				row.addText(HtmlUtil.escape(fileEntry.getTitle()), rowHREF);
+				row.addText(entryFolder.getName(), rowHREF);
+				row.addText(fileEntry.getTitle(), rowHREF);
 
 				// Score
 
@@ -273,7 +273,7 @@ portletURL.setParameter("assetParentId", String.valueOf(folderId));
 				sb.append("', '");
 				sb.append(asset.getAssetId());
 				sb.append("', '");
-				sb.append(StringUtil.replace(HtmlUtil.escape(asset.getTitle()), "&#039;", "\\&#039;"));
+				sb.append(asset.getTitle());
 				sb.append("', '");
 				sb.append(assetOrder);
 				sb.append("');");
@@ -289,11 +289,11 @@ portletURL.setParameter("assetParentId", String.valueOf(folderId));
 				sb.append("/document_library/");
 				sb.append(DLUtil.getFileExtension(fileEntry.getName()));
 				sb.append(".png\">");
-				sb.append(HtmlUtil.escape(fileEntry.getTitle()));
+				sb.append(fileEntry.getTitle());
 
 				if (Validator.isNotNull(fileEntry.getDescription())) {
 					sb.append("<br />");
-					sb.append(HtmlUtil.escape(fileEntry.getDescription()));
+					sb.append(fileEntry.getDescription());
 				}
 
 				row.addText(sb.toString(), rowHREF);

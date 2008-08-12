@@ -170,7 +170,7 @@ for (int i = 0; i < results.size(); i++) {
 		sb.append("', '");
 		sb.append(asset.getAssetId());
 		sb.append("', '");
-		sb.append(StringUtil.replace(HtmlUtil.escape(asset.getTitle()), "&#039;", "\\&#039;"));
+		sb.append(asset.getTitle());
 		sb.append("', '");
 		sb.append(assetOrder);
 		sb.append("');");
@@ -188,7 +188,7 @@ for (int i = 0; i < results.size(); i++) {
 		sb.append("&t=");
 		sb.append(ImageServletTokenUtil.getToken(image.getSmallImageId()));
 		sb.append("\" title=\"");
-		sb.append(HtmlUtil.escape(image.getDescription()));
+		sb.append(image.getDescription());
 		sb.append("\" />");
 
 		row.addText(sb.toString(), rowHREF);

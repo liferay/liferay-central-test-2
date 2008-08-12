@@ -168,14 +168,14 @@ for (int i = 0; i < results.size(); i++) {
 		sb.append("', '");
 		sb.append(asset.getAssetId());
 		sb.append("', '");
-		sb.append(StringUtil.replace(HtmlUtil.escape(asset.getTitle()), "&#039;", "\\&#039;"));
+		sb.append(asset.getTitle());
 		sb.append("', '");
 		sb.append(assetOrder);
 		sb.append("');");
 
 		String rowHREF = sb.toString();
 
-		TextSearchEntry rowTextEntry = new TextSearchEntry(SearchEntry.DEFAULT_ALIGN, SearchEntry.DEFAULT_VALIGN, HtmlUtil.escape(entry.getName()), rowHREF);
+		TextSearchEntry rowTextEntry = new TextSearchEntry(SearchEntry.DEFAULT_ALIGN, SearchEntry.DEFAULT_VALIGN, entry.getName(), rowHREF);
 
 		// Name
 

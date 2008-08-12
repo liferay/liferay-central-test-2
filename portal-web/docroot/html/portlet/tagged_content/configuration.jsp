@@ -229,13 +229,13 @@ configurationActionURL.setParameter("portletResource", portletResource);
 								sb.append("&t=");
 								sb.append(ImageServletTokenUtil.getToken(image.getSmallImageId()));
 								sb.append("\" title=\"");
-								sb.append(HtmlUtil.escape(image.getDescription()));
+								sb.append(image.getDescription());
 								sb.append("\" />");
 
 								row.addText(sb.toString(), rowURL);
 							}
 							else {
-								row.addText(HtmlUtil.escape(asset.getTitle()), rowURL);
+								row.addText(asset.getTitle(), rowURL);
 							}
 
 							// Action
