@@ -43,6 +43,10 @@
 	min-width: 180px;
 }
 
+.ie .portlet-tags-admin .vocabulary-entries-container {
+	width: 300px;
+}
+
 .portlet-tags-admin .vocabulary-list-container .results-header {
 	background: #d3dadd;
 }
@@ -65,7 +69,7 @@
 	padding: 1px 0;
 }
 
-.portlet-tags-admin .vocabulary-content li.vocabulary-category, .portlet-tags-admin li.vocabulary-item {
+.portlet-tags-admin .vocabulary-content li.vocabulary-category, .portlet-tags-admin li.vocabulary-item, .vocabulary-item.portlet-tags-admin-helper {
 	border-bottom: 1px solid #D3D7DB;
 	font-weight: bold;
 	list-style: none;
@@ -75,7 +79,7 @@
 	background: #F0F2F4;
 }
 
-.portlet-tags-admin .vocabulary-container .results-row a {
+.portlet-tags-admin .vocabulary-container .results-row a, .vocabulary-item.results-row a {
 	padding: 8px 0 8px 10px;
 }
 
@@ -88,12 +92,12 @@
 	zoom: 1;
 }
 
-.portlet-tags-admin .vocabulary-item a {
+.portlet-tags-admin .vocabulary-item a, .vocabulary-item.portlet-tags-admin-helper a {
 	display: block;
 	padding-left: 20px;
 }
 
-.portlet-tags-admin .vocabulary-item.selected {
+.portlet-tags-admin .vocabulary-item.selected, .vocabulary-item.portlet-tags-admin-helper.selected {
 	background: #aeb9be;
 }
 

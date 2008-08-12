@@ -280,12 +280,15 @@ Liferay.Portlet.TagsAdmin = new Class({
 				helper: function(event, ui) {
 					var drag = jQuery(this);
 					var width = drag.width();
+					var helper = drag.clone();
 
-					return drag.clone().css(
+					helper.css(
 						{
 							width: width
 						}
 					);
+					helper.addClass('portlet-tags-admin-helper');
+					return helper;
 				},
 				opacity: 0.7,
 				scope: 'vocabulary-item-scope',
