@@ -59,9 +59,7 @@ public class ScreengrabTest extends BaseTestCase {
 		selenium.captureEntirePageScreenshot(RuntimeVariables.replace(
 				"L:\\portal\\build\\portal-web\\test-output\\brochure\\ScreengrabTest.jpg"),
 			"");
-		selenium.click(RuntimeVariables.replace(
-				"//div[@id='navigation']/ul/li[1]/a/span"));
-		selenium.waitForPageToLoad("30000");
+		selenium.open("/user/joebloggs/home");
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {

@@ -39,6 +39,7 @@ public class ThemeTests extends BaseTests {
 		addTestSuite(AddDocumentLibraryTest.class);
 		addTestSuite(AddCalendarTest.class);
 		addTestSuite(ScreengrabTest.class);
+		addTestSuite(CleanUpTest.class);
 	}
 
 	public void tearDown() throws Exception {
