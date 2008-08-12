@@ -23,6 +23,7 @@
 package com.liferay.portalweb.portlet.admin;
 
 import com.liferay.portalweb.portal.BaseTestCase;
+import com.liferay.portalweb.portal.util.RuntimeVariables;
 
 /**
  * <a href="BrowseInstanceTest.java.html"><b><i>View Source</i></b></a>
@@ -32,7 +33,7 @@ import com.liferay.portalweb.portal.BaseTestCase;
  */
 public class BrowseInstanceTest extends BaseTestCase {
 	public void testBrowseInstance() throws Exception {
-		selenium.click("link=Instances");
+		selenium.click(RuntimeVariables.replace("link=Instances"));
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {
@@ -51,7 +52,7 @@ public class BrowseInstanceTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click("link=Return to Full Page");
+		selenium.click(RuntimeVariables.replace("link=Return to Full Page"));
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {

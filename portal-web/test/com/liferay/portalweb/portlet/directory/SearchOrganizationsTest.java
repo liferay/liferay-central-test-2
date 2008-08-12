@@ -33,7 +33,7 @@ import com.liferay.portalweb.portal.util.RuntimeVariables;
  */
 public class SearchOrganizationsTest extends BaseTestCase {
 	public void testSearchOrganizations() throws Exception {
-		selenium.click("link=Organizations");
+		selenium.click(RuntimeVariables.replace("link=Organizations"));
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {
@@ -55,7 +55,8 @@ public class SearchOrganizationsTest extends BaseTestCase {
 
 		selenium.type("toggle_id_enterprise_admin_organization_searchkeywords",
 			RuntimeVariables.replace("Liferay"));
-		selenium.click("//input[@value='Search Organizations']");
+		selenium.click(RuntimeVariables.replace(
+				"//input[@value='Search Organizations']"));
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {
@@ -108,7 +109,7 @@ public class SearchOrganizationsTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click("link=Return to Full Page");
+		selenium.click(RuntimeVariables.replace("link=Return to Full Page"));
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {

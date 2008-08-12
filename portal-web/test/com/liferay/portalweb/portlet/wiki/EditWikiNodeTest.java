@@ -66,8 +66,8 @@ public class EditWikiNodeTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click(
-			"//div[@id=\"portlet-wrapper-36\"]/div[2]/div/div/form/div[3]/table/tbody/tr[3]/td[4]/ul/li/ul/li/nobr/a");
+		selenium.click(RuntimeVariables.replace(
+				"//div[@id=\"portlet-wrapper-36\"]/div[2]/div/div/form/div[3]/table/tbody/tr[3]/td[4]/ul/li/ul/li/nobr/a"));
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {
@@ -90,7 +90,7 @@ public class EditWikiNodeTest extends BaseTestCase {
 			RuntimeVariables.replace("Second Edited Wiki Test"));
 		selenium.type("_36_description",
 			RuntimeVariables.replace("This is a second edited test wiki!"));
-		selenium.click("//input[@value='Save']");
+		selenium.click(RuntimeVariables.replace("//input[@value='Save']"));
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {

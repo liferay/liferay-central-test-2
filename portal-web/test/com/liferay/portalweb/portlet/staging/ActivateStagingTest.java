@@ -23,6 +23,7 @@
 package com.liferay.portalweb.portlet.staging;
 
 import com.liferay.portalweb.portal.BaseTestCase;
+import com.liferay.portalweb.portal.util.RuntimeVariables;
 
 /**
  * <a href="ActivateStagingTest.java.html"><b><i>View Source</i></b></a>
@@ -49,9 +50,10 @@ public class ActivateStagingTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click("//a[@id=\"my-community-private-pages\"]");
+		selenium.click(RuntimeVariables.replace(
+				"//a[@id=\"my-community-private-pages\"]"));
 		selenium.waitForPageToLoad("30000");
-		selenium.click("link=Staging Test Page");
+		selenium.click(RuntimeVariables.replace("link=Staging Test Page"));
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {
@@ -70,7 +72,7 @@ public class ActivateStagingTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click("link=Available Communities");
+		selenium.click(RuntimeVariables.replace("link=Available Communities"));
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {
@@ -90,8 +92,8 @@ public class ActivateStagingTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click(
-			"//div[@id=\"portlet-wrapper-29\"]/div[2]/div/div/form/div[5]/table/tbody/tr[2]/td[5]/ul/li/ul/li[3]/nobr/a");
+		selenium.click(RuntimeVariables.replace(
+				"//div[@id=\"portlet-wrapper-29\"]/div[2]/div/div/form/div[5]/table/tbody/tr[2]/td[5]/ul/li/ul/li[3]/nobr/a"));
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {
@@ -110,7 +112,7 @@ public class ActivateStagingTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click("link=Settings");
+		selenium.click(RuntimeVariables.replace("link=Settings"));
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {
@@ -129,7 +131,7 @@ public class ActivateStagingTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click("_29_stagingEnabled");
+		selenium.click(RuntimeVariables.replace("_29_stagingEnabled"));
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {
@@ -149,7 +151,7 @@ public class ActivateStagingTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click("link=\u00ab Back");
+		selenium.click(RuntimeVariables.replace("link=\u00ab Back"));
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {
@@ -168,7 +170,7 @@ public class ActivateStagingTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click("link=Return to Full Page");
+		selenium.click(RuntimeVariables.replace("link=Return to Full Page"));
 		selenium.waitForPageToLoad("30000");
 	}
 }

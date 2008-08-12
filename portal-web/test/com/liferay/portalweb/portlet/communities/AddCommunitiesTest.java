@@ -49,7 +49,8 @@ public class AddCommunitiesTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click("//input[@value='Add Community']");
+		selenium.click(RuntimeVariables.replace(
+				"//input[@value='Add Community']"));
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {
@@ -74,7 +75,7 @@ public class AddCommunitiesTest extends BaseTestCase {
 			RuntimeVariables.replace("This is a test communit!"));
 		selenium.type("_29_description",
 			RuntimeVariables.replace("This is a test community!"));
-		selenium.click("//input[@value='Save']");
+		selenium.click(RuntimeVariables.replace("//input[@value='Save']"));
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {
@@ -95,7 +96,8 @@ public class AddCommunitiesTest extends BaseTestCase {
 
 		selenium.typeKeys("_29_name", RuntimeVariables.replace("Test Communit"));
 		selenium.type("_29_name", RuntimeVariables.replace("Test Community"));
-		selenium.click("//input[@value='Search Communities']");
+		selenium.click(RuntimeVariables.replace(
+				"//input[@value='Search Communities']"));
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {
@@ -114,18 +116,20 @@ public class AddCommunitiesTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click("link=Assign Members");
+		selenium.click(RuntimeVariables.replace("link=Assign Members"));
 		selenium.waitForPageToLoad("30000");
-		selenium.click("link=Available");
+		selenium.click(RuntimeVariables.replace("link=Available"));
 		selenium.waitForPageToLoad("30000");
 		selenium.type("toggle_id_enterprise_admin_user_searchkeywords",
 			RuntimeVariables.replace("selen"));
-		selenium.click("//input[@value='Search Users']");
+		selenium.click(RuntimeVariables.replace(
+				"//input[@value='Search Users']"));
 		selenium.waitForPageToLoad("30000");
 		selenium.click("_29_allRowIds");
-		selenium.click("//input[@value='Update Associations']");
+		selenium.click(RuntimeVariables.replace(
+				"//input[@value='Update Associations']"));
 		selenium.waitForPageToLoad("30000");
-		selenium.click("link=Current");
+		selenium.click(RuntimeVariables.replace("link=Current"));
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {
@@ -160,18 +164,20 @@ public class AddCommunitiesTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click("link=Organizations");
+		selenium.click(RuntimeVariables.replace("link=Organizations"));
 		selenium.waitForPageToLoad("30000");
-		selenium.click("link=Available");
+		selenium.click(RuntimeVariables.replace("link=Available"));
 		selenium.waitForPageToLoad("30000");
 		selenium.type("toggle_id_enterprise_admin_organization_searchkeywords",
 			RuntimeVariables.replace("selenium"));
-		selenium.click("//input[@value='Search Organizations']");
+		selenium.click(RuntimeVariables.replace(
+				"//input[@value='Search Organizations']"));
 		selenium.waitForPageToLoad("30000");
 		selenium.click("_29_rowIds");
-		selenium.click("//input[@value='Update Associations']");
+		selenium.click(RuntimeVariables.replace(
+				"//input[@value='Update Associations']"));
 		selenium.waitForPageToLoad("30000");
-		selenium.click("link=Current");
+		selenium.click(RuntimeVariables.replace("link=Current"));
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {
@@ -190,7 +196,7 @@ public class AddCommunitiesTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click("link=Return to Full Page");
+		selenium.click(RuntimeVariables.replace("link=Return to Full Page"));
 		selenium.waitForPageToLoad("30000");
 	}
 }

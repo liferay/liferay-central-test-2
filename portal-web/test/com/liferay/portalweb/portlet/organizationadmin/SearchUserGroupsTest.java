@@ -33,13 +33,14 @@ import com.liferay.portalweb.portal.util.RuntimeVariables;
  */
 public class SearchUserGroupsTest extends BaseTestCase {
 	public void testSearchUserGroups() throws Exception {
-		selenium.click("link=User Groups");
+		selenium.click(RuntimeVariables.replace("link=User Groups"));
 		selenium.waitForPageToLoad("30000");
 		selenium.type("_80_name", RuntimeVariables.replace("selenium"));
-		selenium.click("//input[@value='Search User Groups']");
+		selenium.click(RuntimeVariables.replace(
+				"//input[@value='Search User Groups']"));
 		selenium.waitForPageToLoad("30000");
 		verifyTrue(selenium.isTextPresent("Selenium"));
-		selenium.click("link=Return to Full Page");
+		selenium.click(RuntimeVariables.replace("link=Return to Full Page"));
 		selenium.waitForPageToLoad("30000");
 	}
 }

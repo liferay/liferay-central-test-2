@@ -49,7 +49,7 @@ public class DeleteUserTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click("link=Users");
+		selenium.click(RuntimeVariables.replace("link=Users"));
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {
@@ -71,7 +71,8 @@ public class DeleteUserTest extends BaseTestCase {
 		selenium.click("link=Advanced \u00bb");
 		selenium.type("_79_firstName", RuntimeVariables.replace("n03"));
 		selenium.select("_79_active", RuntimeVariables.replace("label=No"));
-		selenium.click("//input[@value='Search Users']");
+		selenium.click(RuntimeVariables.replace(
+				"//input[@value='Search Users']"));
 		selenium.waitForPageToLoad("30000");
 		selenium.click("_79_allRowIds");
 

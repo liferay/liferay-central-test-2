@@ -49,7 +49,7 @@ public class SearchTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click("link=Folders");
+		selenium.click(RuntimeVariables.replace("link=Folders"));
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {
@@ -68,7 +68,7 @@ public class SearchTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click("link=Return to Full Page");
+		selenium.click(RuntimeVariables.replace("link=Return to Full Page"));
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {
@@ -90,7 +90,8 @@ public class SearchTest extends BaseTestCase {
 		selenium.typeKeys("_20_keywords1",
 			RuntimeVariables.replace("Test Document"));
 		selenium.type("_20_keywords1", RuntimeVariables.replace("Test Document"));
-		selenium.click("//input[@value='Search File Entries']");
+		selenium.click(RuntimeVariables.replace(
+				"//input[@value='Search File Entries']"));
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {
@@ -109,7 +110,7 @@ public class SearchTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click("link=Return to Full Page");
+		selenium.click(RuntimeVariables.replace("link=Return to Full Page"));
 		selenium.waitForPageToLoad("30000");
 	}
 }

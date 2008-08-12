@@ -49,11 +49,12 @@ public class AddPasswordPoliciesTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click("link=\u00bb");
+		selenium.click(RuntimeVariables.replace("link=\u00bb"));
 		selenium.waitForPageToLoad("30000");
-		selenium.click("link=Password Policies");
+		selenium.click(RuntimeVariables.replace("link=Password Policies"));
 		selenium.waitForPageToLoad("30000");
-		selenium.click("//input[@value='Add Password Policy']");
+		selenium.click(RuntimeVariables.replace(
+				"//input[@value='Add Password Policy']"));
 		selenium.waitForPageToLoad("30000");
 		selenium.typeKeys("_79_name", RuntimeVariables.replace("Test"));
 		selenium.type("_79_name", RuntimeVariables.replace("Test"));
@@ -66,11 +67,12 @@ public class AddPasswordPoliciesTest extends BaseTestCase {
 		selenium.select("_79_warningTime",
 			RuntimeVariables.replace("label=2 Days"));
 		selenium.type("_79_graceLimit", RuntimeVariables.replace("7"));
-		selenium.click("//input[@value='Save']");
+		selenium.click(RuntimeVariables.replace("//input[@value='Save']"));
 		selenium.waitForPageToLoad("30000");
 		selenium.typeKeys("_79_name", RuntimeVariables.replace("test"));
 		selenium.type("_79_name", RuntimeVariables.replace("test"));
-		selenium.click("//input[@value='Search Password Policies']");
+		selenium.click(RuntimeVariables.replace(
+				"//input[@value='Search Password Policies']"));
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {
@@ -89,7 +91,7 @@ public class AddPasswordPoliciesTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click("link=Return to Full Page");
+		selenium.click(RuntimeVariables.replace("link=Return to Full Page"));
 		selenium.waitForPageToLoad("30000");
 	}
 }

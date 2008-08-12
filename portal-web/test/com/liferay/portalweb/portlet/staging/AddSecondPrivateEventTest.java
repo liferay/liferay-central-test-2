@@ -49,7 +49,7 @@ public class AddSecondPrivateEventTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click("//input[@value='Add Event']");
+		selenium.click(RuntimeVariables.replace("//input[@value='Add Event']"));
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {
@@ -97,7 +97,7 @@ public class AddSecondPrivateEventTest extends BaseTestCase {
 			RuntimeVariables.replace(
 				"This Star Wars Marathon event should be listed on the calendar on the LIVE and PRIVATE portion of this community. Next week: A Lord of the Rings Marathon!"));
 		selenium.select("_8_type", RuntimeVariables.replace("label=Movie"));
-		selenium.click("//input[@value='Save']");
+		selenium.click(RuntimeVariables.replace("//input[@value='Save']"));
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {

@@ -66,7 +66,7 @@ public class CreateRemoteTestCommunityTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click("link=Sign Out");
+		selenium.click(RuntimeVariables.replace("link=Sign Out"));
 		selenium.waitForPageToLoad("30000");
 		selenium.open("http://5.227.126.113:8080/web/guest/home");
 
@@ -88,9 +88,9 @@ public class CreateRemoteTestCommunityTest extends BaseTestCase {
 
 		selenium.type("_58_login", RuntimeVariables.replace("test@liferay.com"));
 		selenium.type("_58_password", RuntimeVariables.replace("test"));
-		selenium.click("//input[@value='Sign In']");
+		selenium.click(RuntimeVariables.replace("//input[@value='Sign In']"));
 		selenium.waitForPageToLoad("30000");
-		selenium.click("//input[@value='I Agree']");
+		selenium.click(RuntimeVariables.replace("//input[@value='I Agree']"));
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {
@@ -110,7 +110,8 @@ public class CreateRemoteTestCommunityTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click("//a[@id='my-community-private-pages']");
+		selenium.click(RuntimeVariables.replace(
+				"//a[@id='my-community-private-pages']"));
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {
@@ -129,7 +130,8 @@ public class CreateRemoteTestCommunityTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click("//input[@value='Add Community']");
+		selenium.click(RuntimeVariables.replace(
+				"//input[@value='Add Community']"));
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {
@@ -153,7 +155,7 @@ public class CreateRemoteTestCommunityTest extends BaseTestCase {
 		selenium.type("_29_description",
 			RuntimeVariables.replace(
 				"This community will be published to remotely."));
-		selenium.click("//input[@value='Save']");
+		selenium.click(RuntimeVariables.replace("//input[@value='Save']"));
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {

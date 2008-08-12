@@ -33,7 +33,7 @@ import com.liferay.portalweb.portal.util.RuntimeVariables;
  */
 public class AddSecondEntryTest extends BaseTestCase {
 	public void testAddSecondEntry() throws Exception {
-		selenium.click("link=Blogs Test Page");
+		selenium.click(RuntimeVariables.replace("link=Blogs Test Page"));
 		selenium.waitForPageToLoad("30000");
 		selenium.click("//input[@value='Add Blog Entry']");
 
@@ -128,7 +128,7 @@ public class AddSecondEntryTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click("_33_saveButton");
+		selenium.click(RuntimeVariables.replace("_33_saveButton"));
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {

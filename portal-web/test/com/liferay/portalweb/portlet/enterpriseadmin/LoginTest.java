@@ -33,18 +33,20 @@ import com.liferay.portalweb.portal.util.RuntimeVariables;
  */
 public class LoginTest extends BaseTestCase {
 	public void testLogin() throws Exception {
-		selenium.click("link=Sign Out");
+		selenium.click(RuntimeVariables.replace("link=Sign Out"));
 		selenium.waitForPageToLoad("30000");
-		selenium.click("link=Sign In");
+		selenium.click(RuntimeVariables.replace("link=Sign In"));
 		selenium.waitForPageToLoad("30000");
 		selenium.type("login", RuntimeVariables.replace("test@liferay.com"));
 		selenium.type("password", RuntimeVariables.replace("test"));
 		selenium.click("rememberMeCheckbox");
-		selenium.click("//input[@value='Sign In']");
+		selenium.click(RuntimeVariables.replace("//input[@value='Sign In']"));
 		selenium.waitForPageToLoad("30000");
-		selenium.click("//a[@id=\"my-community-private-pages\"]");
+		selenium.click(RuntimeVariables.replace(
+				"//a[@id=\"my-community-private-pages\"]"));
 		selenium.waitForPageToLoad("30000");
-		selenium.click("link=Enterprise Admin Test Page");
+		selenium.click(RuntimeVariables.replace(
+				"link=Enterprise Admin Test Page"));
 		selenium.waitForPageToLoad("30000");
 	}
 }

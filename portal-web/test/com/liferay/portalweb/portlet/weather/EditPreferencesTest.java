@@ -33,7 +33,7 @@ import com.liferay.portalweb.portal.util.RuntimeVariables;
  */
 public class EditPreferencesTest extends BaseTestCase {
 	public void testEditPreferences() throws Exception {
-		selenium.click("//img[@title='Preferences']");
+		selenium.click(RuntimeVariables.replace("//img[@title='Preferences']"));
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {
@@ -55,9 +55,9 @@ public class EditPreferencesTest extends BaseTestCase {
 		selenium.type("_1_WAR_weatherportlet_zips",
 			RuntimeVariables.replace(
 				"Chicago\nFrankfurt/Main\nRome, Italy\nDiamond Bar, California"));
-		selenium.click("//input[@value='Save']");
+		selenium.click(RuntimeVariables.replace("//input[@value='Save']"));
 		selenium.waitForPageToLoad("30000");
-		selenium.click("link=Return to Full Page");
+		selenium.click(RuntimeVariables.replace("link=Return to Full Page"));
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {

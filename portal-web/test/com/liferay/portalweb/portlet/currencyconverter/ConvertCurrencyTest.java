@@ -34,7 +34,7 @@ import com.liferay.portalweb.portal.util.RuntimeVariables;
 public class ConvertCurrencyTest extends BaseTestCase {
 	public void testConvertCurrency() throws Exception {
 		selenium.select("_16_to", RuntimeVariables.replace("label=BHD"));
-		selenium.click("//input[@value='Convert']");
+		selenium.click(RuntimeVariables.replace("//input[@value='Convert']"));
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {

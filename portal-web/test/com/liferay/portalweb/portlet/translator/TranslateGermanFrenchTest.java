@@ -35,7 +35,7 @@ public class TranslateGermanFrenchTest extends BaseTestCase {
 	public void testTranslateGermanFrench() throws Exception {
 		selenium.select("_26_id",
 			RuntimeVariables.replace("label=German to French"));
-		selenium.click("//input[@value='Translate']");
+		selenium.click(RuntimeVariables.replace("//input[@value='Translate']"));
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {

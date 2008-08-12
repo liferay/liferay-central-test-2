@@ -49,7 +49,7 @@ public class AddTemporaryArticleTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click("link=Add Child Page");
+		selenium.click(RuntimeVariables.replace("link=Add Child Page"));
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {
@@ -106,7 +106,7 @@ public class AddTemporaryArticleTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click("//input[@value='Save']");
+		selenium.click(RuntimeVariables.replace("//input[@value='Save']"));
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {
@@ -125,7 +125,7 @@ public class AddTemporaryArticleTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click("link=Delete Me!");
+		selenium.click(RuntimeVariables.replace("link=Delete Me!"));
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {

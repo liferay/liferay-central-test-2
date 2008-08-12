@@ -23,6 +23,7 @@
 package com.liferay.portalweb.portlet.staging;
 
 import com.liferay.portalweb.portal.BaseTestCase;
+import com.liferay.portalweb.portal.util.RuntimeVariables;
 
 /**
  * <a href="AssertNoSampleDataOnRemoteTest.java.html"><b><i>View Source</i></b></a>
@@ -32,10 +33,10 @@ import com.liferay.portalweb.portal.BaseTestCase;
  */
 public class AssertNoSampleDataOnRemoteTest extends BaseTestCase {
 	public void testAssertNoSampleDataOnRemote() throws Exception {
-		selenium.click(
-			"//div[@id='banner']/div/div/ul/li[8]/ul/li[5]/ul/li[1]/a[2]");
+		selenium.click(RuntimeVariables.replace(
+				"//div[@id='banner']/div/div/ul/li[8]/ul/li[5]/ul/li[1]/a[2]"));
 		selenium.waitForPageToLoad("30000");
-		selenium.click("link=New Page");
+		selenium.click(RuntimeVariables.replace("link=New Page"));
 		selenium.waitForPageToLoad("30000");
 		assertFalse(selenium.isElementPresent("//div[@id='portlet-wrapper-8']"));
 		assertFalse(selenium.isElementPresent("//div[@id='portlet-wrapper-33']"));
@@ -56,7 +57,7 @@ public class AssertNoSampleDataOnRemoteTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click("link=Sign Out");
+		selenium.click(RuntimeVariables.replace("link=Sign Out"));
 		selenium.waitForPageToLoad("30000");
 	}
 }

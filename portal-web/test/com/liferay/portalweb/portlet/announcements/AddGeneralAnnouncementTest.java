@@ -49,7 +49,7 @@ public class AddGeneralAnnouncementTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click("link=Manage Entries");
+		selenium.click(RuntimeVariables.replace("link=Manage Entries"));
 		selenium.waitForPageToLoad("30000");
 		selenium.select("_84_distributionScope", "label=General");
 		selenium.waitForPageToLoad("30000");
@@ -70,7 +70,7 @@ public class AddGeneralAnnouncementTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click("//input[@value='Add Entry']");
+		selenium.click(RuntimeVariables.replace("//input[@value='Add Entry']"));
 		selenium.waitForPageToLoad("30000");
 		selenium.type("_84_title",
 			RuntimeVariables.replace("Test General Announcement"));
@@ -78,9 +78,9 @@ public class AddGeneralAnnouncementTest extends BaseTestCase {
 		selenium.type("_84_content",
 			RuntimeVariables.replace(
 				"Hello Everyone! This is a test general announcement for everyone! Yay."));
-		selenium.click("//input[@value='Save']");
+		selenium.click(RuntimeVariables.replace("//input[@value='Save']"));
 		selenium.waitForPageToLoad("30000");
-		selenium.click("link=Entries");
+		selenium.click(RuntimeVariables.replace("link=Entries"));
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {

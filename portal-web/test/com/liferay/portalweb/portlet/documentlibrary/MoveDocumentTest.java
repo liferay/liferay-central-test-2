@@ -49,7 +49,7 @@ public class MoveDocumentTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click("link=Test Folder");
+		selenium.click(RuntimeVariables.replace("link=Test Folder"));
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {
@@ -68,7 +68,7 @@ public class MoveDocumentTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click("link=Test Subfolder");
+		selenium.click(RuntimeVariables.replace("link=Test Subfolder"));
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {
@@ -87,7 +87,7 @@ public class MoveDocumentTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click("link=Edit");
+		selenium.click(RuntimeVariables.replace("link=Edit"));
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {
@@ -126,7 +126,7 @@ public class MoveDocumentTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click("link=Folders");
+		selenium.click(RuntimeVariables.replace("link=Folders"));
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {
@@ -145,7 +145,7 @@ public class MoveDocumentTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click("link=Another");
+		selenium.click(RuntimeVariables.replace("link=Another"));
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {
@@ -199,7 +199,7 @@ public class MoveDocumentTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click("//input[@value='Save']");
+		selenium.click(RuntimeVariables.replace("//input[@value='Save']"));
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {
@@ -218,7 +218,7 @@ public class MoveDocumentTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click("link=Folders");
+		selenium.click(RuntimeVariables.replace("link=Folders"));
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {
@@ -237,11 +237,11 @@ public class MoveDocumentTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click("link=Return to Full Page");
+		selenium.click(RuntimeVariables.replace("link=Return to Full Page"));
 		selenium.waitForPageToLoad("30000");
-		selenium.click("link=Another");
+		selenium.click(RuntimeVariables.replace("link=Another"));
 		selenium.waitForPageToLoad("30000");
-		selenium.click("link=Another1");
+		selenium.click(RuntimeVariables.replace("link=Another1"));
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {
@@ -261,7 +261,7 @@ public class MoveDocumentTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click("link=Edit");
+		selenium.click(RuntimeVariables.replace("link=Edit"));
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {
@@ -296,7 +296,7 @@ public class MoveDocumentTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click("link=Return to Full Page");
+		selenium.click(RuntimeVariables.replace("link=Return to Full Page"));
 		selenium.waitForPageToLoad("30000");
 	}
 }

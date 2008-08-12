@@ -23,6 +23,7 @@
 package com.liferay.portalweb.portlet.calendar;
 
 import com.liferay.portalweb.portal.BaseTestCase;
+import com.liferay.portalweb.portal.util.RuntimeVariables;
 
 /**
  * <a href="AssertConfigurationTest.java.html"><b><i>View Source</i></b></a>
@@ -48,7 +49,7 @@ public class AssertConfigurationTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click("//img[@alt='Configuration']");
+		selenium.click(RuntimeVariables.replace("//img[@alt='Configuration']"));
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {
@@ -83,10 +84,10 @@ public class AssertConfigurationTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click("link=Archived");
+		selenium.click(RuntimeVariables.replace("link=Archived"));
 		selenium.waitForPageToLoad("30000");
 		assertFalse(selenium.isElementPresent("link=Test"));
-		selenium.click("link=Return to Full Page");
+		selenium.click(RuntimeVariables.replace("link=Return to Full Page"));
 		selenium.waitForPageToLoad("30000");
 	}
 }

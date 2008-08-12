@@ -23,6 +23,7 @@
 package com.liferay.portalweb.portal.session;
 
 import com.liferay.portalweb.portal.BaseTestCase;
+import com.liferay.portalweb.portal.util.RuntimeVariables;
 
 /**
  * <a href="ConfirmNoSessionExpireTest.java.html"><b><i>View Source</i></b></a>
@@ -53,7 +54,7 @@ public class ConfirmNoSessionExpireTest extends BaseTestCase {
 
 		Thread.sleep(30000);
 		Thread.sleep(30000);
-		selenium.click("link=Home");
+		selenium.click(RuntimeVariables.replace("link=Home"));
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {
@@ -73,7 +74,8 @@ public class ConfirmNoSessionExpireTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click("link=Session Expiration Test Page");
+		selenium.click(RuntimeVariables.replace(
+				"link=Session Expiration Test Page"));
 		selenium.waitForPageToLoad("30000");
 	}
 }

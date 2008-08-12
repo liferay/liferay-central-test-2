@@ -164,7 +164,8 @@ public class AddArticleTest extends BaseTestCase {
 			RuntimeVariables.replace("label=12"));
 		selenium.select("_15_reviewDateMinute",
 			RuntimeVariables.replace("label=:00"));
-		selenium.click("//input[@value='Save and Approve']");
+		selenium.click(RuntimeVariables.replace(
+				"//input[@value='Save and Approve']"));
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {

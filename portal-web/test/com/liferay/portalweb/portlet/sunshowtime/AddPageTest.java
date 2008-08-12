@@ -50,7 +50,8 @@ public class AddPageTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click("document.getElementById('my-community-private-pages')");
+		selenium.click(RuntimeVariables.replace(
+				"document.getElementById('my-community-private-pages')"));
 		selenium.waitForPageToLoad("30000");
 		selenium.click(
 			"document.getElementById('add-page').getElementsByTagName('a')[0].getElementsByTagName('span')[0]");
@@ -93,7 +94,7 @@ public class AddPageTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click("link=Sun Show Time Test Page");
+		selenium.click(RuntimeVariables.replace("link=Sun Show Time Test Page"));
 		selenium.waitForPageToLoad("30000");
 	}
 }

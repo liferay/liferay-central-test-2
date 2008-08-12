@@ -23,6 +23,7 @@
 package com.liferay.portalweb.portlet.imagegallery;
 
 import com.liferay.portalweb.portal.BaseTestCase;
+import com.liferay.portalweb.portal.util.RuntimeVariables;
 
 /**
  * <a href="BrowseImageTabsTest.java.html"><b><i>View Source</i></b></a>
@@ -48,7 +49,7 @@ public class BrowseImageTabsTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click("link=My Images");
+		selenium.click(RuntimeVariables.replace("link=My Images"));
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {
@@ -67,7 +68,7 @@ public class BrowseImageTabsTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click("link=Recent Images");
+		selenium.click(RuntimeVariables.replace("link=Recent Images"));
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {
@@ -86,7 +87,7 @@ public class BrowseImageTabsTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click("link=Folders");
+		selenium.click(RuntimeVariables.replace("link=Folders"));
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {

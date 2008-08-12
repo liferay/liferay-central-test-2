@@ -33,13 +33,13 @@ import com.liferay.portalweb.portal.util.RuntimeVariables;
  */
 public class AddChildTest extends BaseTestCase {
 	public void testAddChild() throws Exception {
-		selenium.click("link=Add Child Page");
+		selenium.click(RuntimeVariables.replace("link=Add Child Page"));
 		selenium.waitForPageToLoad("30000");
 		selenium.type("_36_title", RuntimeVariables.replace("Test"));
 		selenium.type("_36_content",
 			RuntimeVariables.replace(
 				"==Test Child Article==\n\n//this is italics//\n\n**bold**\n\n[[http://www.liferay.com|Link to website]]\n\n*this is a list item\n**this is a sub list item"));
-		selenium.click("//input[@value='Save']");
+		selenium.click(RuntimeVariables.replace("//input[@value='Save']"));
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {

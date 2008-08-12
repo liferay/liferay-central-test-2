@@ -23,6 +23,7 @@
 package com.liferay.portalweb.portlet.messageboards;
 
 import com.liferay.portalweb.portal.BaseTestCase;
+import com.liferay.portalweb.portal.util.RuntimeVariables;
 
 /**
  * <a href="RecentPostsTest.java.html"><b><i>View Source</i></b></a>
@@ -32,7 +33,7 @@ import com.liferay.portalweb.portal.BaseTestCase;
  */
 public class RecentPostsTest extends BaseTestCase {
 	public void testRecentPosts() throws Exception {
-		selenium.click("//div/nobr/a[2]");
+		selenium.click(RuntimeVariables.replace("//div/nobr/a[2]"));
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {
@@ -69,8 +70,8 @@ public class RecentPostsTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click(
-			"link=T\u00e9st M\u00e9ssag\u00e9 to b\u00e9 D\u00e9l\u00e9t\u00e9d");
+		selenium.click(RuntimeVariables.replace(
+				"link=T\u00e9st M\u00e9ssag\u00e9 to b\u00e9 D\u00e9l\u00e9t\u00e9d"));
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {

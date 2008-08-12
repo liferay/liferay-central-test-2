@@ -23,6 +23,7 @@
 package com.liferay.portalweb.portlet.bookmarks;
 
 import com.liferay.portalweb.portal.BaseTestCase;
+import com.liferay.portalweb.portal.util.RuntimeVariables;
 
 /**
  * <a href="DeleteAllTest.java.html"><b><i>View Source</i></b></a>
@@ -32,11 +33,11 @@ import com.liferay.portalweb.portal.BaseTestCase;
  */
 public class DeleteAllTest extends BaseTestCase {
 	public void testDeleteAll() throws Exception {
-		selenium.click("link=My Entries");
+		selenium.click(RuntimeVariables.replace("link=My Entries"));
 		selenium.waitForPageToLoad("30000");
-		selenium.click("link=Recent Entries");
+		selenium.click(RuntimeVariables.replace("link=Recent Entries"));
 		selenium.waitForPageToLoad("30000");
-		selenium.click("link=Folders");
+		selenium.click(RuntimeVariables.replace("link=Folders"));
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {
@@ -92,7 +93,7 @@ public class DeleteAllTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click("link=Return to Full Page");
+		selenium.click(RuntimeVariables.replace("link=Return to Full Page"));
 		selenium.waitForPageToLoad("30000");
 	}
 }

@@ -49,7 +49,7 @@ public class EditCouponTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click("link=Edit");
+		selenium.click(RuntimeVariables.replace("link=Edit"));
 		selenium.waitForPageToLoad("30000");
 		selenium.type("_34_name", RuntimeVariables.replace("Family Discount"));
 		selenium.type("_34_description",
@@ -71,7 +71,7 @@ public class EditCouponTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click("//input[@value='Save']");
+		selenium.click(RuntimeVariables.replace("//input[@value='Save']"));
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {

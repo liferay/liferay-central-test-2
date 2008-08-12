@@ -50,8 +50,8 @@ public class EditItemTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click(
-			"//div[@id=\"portlet-wrapper-34\"]/div[2]/div/div/form/div[3]/table/tbody/tr[2]/td[1]/a");
+		selenium.click(RuntimeVariables.replace(
+				"//div[@id=\"portlet-wrapper-34\"]/div[2]/div/div/form/div[3]/table/tbody/tr[2]/td[1]/a"));
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {
@@ -70,7 +70,7 @@ public class EditItemTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click("link=Edit");
+		selenium.click(RuntimeVariables.replace("link=Edit"));
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {
@@ -92,7 +92,7 @@ public class EditItemTest extends BaseTestCase {
 		selenium.type("_34_stockQuantity", RuntimeVariables.replace("250"));
 		selenium.type("_34_price0", RuntimeVariables.replace("$11.99"));
 		selenium.type("_34_shipping0", RuntimeVariables.replace("$2.50"));
-		selenium.click("//input[@value='Save']");
+		selenium.click(RuntimeVariables.replace("//input[@value='Save']"));
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {
@@ -111,8 +111,8 @@ public class EditItemTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click(
-			"//div[@id=\"portlet-wrapper-34\"]/div[2]/div/div/form[2]/div[3]/table/tbody/tr[2]/td[2]/a");
+		selenium.click(RuntimeVariables.replace(
+				"//div[@id=\"portlet-wrapper-34\"]/div[2]/div/div/form[2]/div[3]/table/tbody/tr[2]/td[2]/a"));
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {
@@ -131,7 +131,7 @@ public class EditItemTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click("link=Return to Full Page");
+		selenium.click(RuntimeVariables.replace("link=Return to Full Page"));
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {

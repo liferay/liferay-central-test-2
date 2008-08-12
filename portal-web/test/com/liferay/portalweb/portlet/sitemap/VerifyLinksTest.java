@@ -23,6 +23,7 @@
 package com.liferay.portalweb.portlet.sitemap;
 
 import com.liferay.portalweb.portal.BaseTestCase;
+import com.liferay.portalweb.portal.util.RuntimeVariables;
 
 /**
  * <a href="VerifyLinksTest.java.html"><b><i>View Source</i></b></a>
@@ -32,10 +33,10 @@ import com.liferay.portalweb.portal.BaseTestCase;
  */
 public class VerifyLinksTest extends BaseTestCase {
 	public void testVerifyLinks() throws Exception {
-		selenium.click("//div[2]/div/div/ul/li[1]/a");
+		selenium.click(RuntimeVariables.replace("//div[2]/div/div/ul/li[1]/a"));
 		selenium.waitForPageToLoad("30000");
 		verifyEquals("Liferay - Home", selenium.getTitle());
-		selenium.click("link=Site Map Test Page");
+		selenium.click(RuntimeVariables.replace("link=Site Map Test Page"));
 		selenium.waitForPageToLoad("30000");
 		verifyEquals("Liferay - Site Map Test Page", selenium.getTitle());
 	}

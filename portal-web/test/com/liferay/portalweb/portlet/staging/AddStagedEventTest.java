@@ -49,7 +49,7 @@ public class AddStagedEventTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click("//input[@value='Add Event']");
+		selenium.click(RuntimeVariables.replace("//input[@value='Add Event']"));
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {
@@ -91,7 +91,7 @@ public class AddStagedEventTest extends BaseTestCase {
 			RuntimeVariables.replace(
 				"All Jedi, Liferay Fans, Automated Robots are invited!"));
 		selenium.select("_8_type", RuntimeVariables.replace("label=Party"));
-		selenium.click("//input[@value='Save']");
+		selenium.click(RuntimeVariables.replace("//input[@value='Save']"));
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {

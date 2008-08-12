@@ -23,6 +23,7 @@
 package com.liferay.portalweb.portlet.staging;
 
 import com.liferay.portalweb.portal.BaseTestCase;
+import com.liferay.portalweb.portal.util.RuntimeVariables;
 
 /**
  * <a href="PublishNewPrivateSampleDataToLiveTest.java.html"><b><i>View Source</i></b></a>
@@ -123,7 +124,7 @@ public class PublishNewPrivateSampleDataToLiveTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click("publishBtn");
+		selenium.click(RuntimeVariables.replace("publishBtn"));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.getConfirmation()
 						   .matches("^Are you sure you want to publish these pages[\\s\\S]$"));

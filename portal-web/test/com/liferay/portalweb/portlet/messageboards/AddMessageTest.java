@@ -33,10 +33,11 @@ import com.liferay.portalweb.portal.util.RuntimeVariables;
  */
 public class AddMessageTest extends BaseTestCase {
 	public void testAddMessage() throws Exception {
-		selenium.click(
-			"//div[@id='portlet-wrapper-19']/div[2]/div/div/form[1]/div[4]/table/tbody/tr[2]/td[1]/a/b");
+		selenium.click(RuntimeVariables.replace(
+				"//div[@id='portlet-wrapper-19']/div[2]/div/div/form[1]/div[4]/table/tbody/tr[2]/td[1]/a/b"));
 		selenium.waitForPageToLoad("30000");
-		selenium.click("//input[@value='Post New Thread']");
+		selenium.click(RuntimeVariables.replace(
+				"//input[@value='Post New Thread']"));
 		selenium.waitForPageToLoad("30000");
 		selenium.typeKeys("_19_subject",
 			RuntimeVariables.replace("T\u00e9st M\u00e9ssag\u00e9"));
@@ -46,7 +47,7 @@ public class AddMessageTest extends BaseTestCase {
 			RuntimeVariables.replace("This is a t\u00e9st m\u00e9ssag\u00e9!"));
 		selenium.type("_19_textArea",
 			RuntimeVariables.replace("This is a t\u00e9st m\u00e9ssag\u00e9!"));
-		selenium.click("//input[@value='Save']");
+		selenium.click(RuntimeVariables.replace("//input[@value='Save']"));
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {

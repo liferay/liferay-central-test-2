@@ -23,6 +23,7 @@
 package com.liferay.portalweb.portlet.calendar;
 
 import com.liferay.portalweb.portal.BaseTestCase;
+import com.liferay.portalweb.portal.util.RuntimeVariables;
 
 /**
  * <a href="GetConcertEventsTest.java.html"><b><i>View Source</i></b></a>
@@ -32,7 +33,7 @@ import com.liferay.portalweb.portal.BaseTestCase;
  */
 public class GetConcertEventsTest extends BaseTestCase {
 	public void testGetConcertEvents() throws Exception {
-		selenium.click("link=Day");
+		selenium.click(RuntimeVariables.replace("link=Day"));
 		selenium.waitForPageToLoad("30000");
 		selenium.select("//div[@id='portlet-wrapper-8']/div[2]/div/div/form/table/tbody/tr/td[2]/select",
 			"label=Concert");
@@ -86,7 +87,7 @@ public class GetConcertEventsTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click("link=Week");
+		selenium.click(RuntimeVariables.replace("link=Week"));
 		selenium.waitForPageToLoad("30000");
 		selenium.select("//div[@id='portlet-wrapper-8']/div[2]/div/div/form/table/tbody/tr/td[2]/select",
 			"label=Concert");
@@ -124,7 +125,7 @@ public class GetConcertEventsTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click("link=Month");
+		selenium.click(RuntimeVariables.replace("link=Month"));
 		selenium.waitForPageToLoad("30000");
 		selenium.select("//div[@id='portlet-wrapper-8']/div[2]/div/div/form/table/tbody/tr/td[2]/select",
 			"label=Concert");
@@ -162,7 +163,7 @@ public class GetConcertEventsTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click("link=Events");
+		selenium.click(RuntimeVariables.replace("link=Events"));
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {
@@ -181,7 +182,7 @@ public class GetConcertEventsTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click("link=Return to Full Page");
+		selenium.click(RuntimeVariables.replace("link=Return to Full Page"));
 		selenium.waitForPageToLoad("30000");
 	}
 }

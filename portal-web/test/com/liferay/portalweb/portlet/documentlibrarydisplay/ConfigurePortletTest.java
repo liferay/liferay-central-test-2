@@ -23,6 +23,7 @@
 package com.liferay.portalweb.portlet.documentlibrarydisplay;
 
 import com.liferay.portalweb.portal.BaseTestCase;
+import com.liferay.portalweb.portal.util.RuntimeVariables;
 
 /**
  * <a href="ConfigurePortletTest.java.html"><b><i>View Source</i></b></a>
@@ -64,11 +65,11 @@ public class ConfigurePortletTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click("//img[@alt='Configuration']");
+		selenium.click(RuntimeVariables.replace("//img[@alt='Configuration']"));
 		selenium.waitForPageToLoad("30000");
 		selenium.click("_86_showBreadcrumbsCheckbox");
 		selenium.click("_86_showFoldersSearchCheckbox");
-		selenium.click("//input[@value='Save']");
+		selenium.click(RuntimeVariables.replace("//input[@value='Save']"));
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {
@@ -88,7 +89,7 @@ public class ConfigurePortletTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click("link=Return to Full Page");
+		selenium.click(RuntimeVariables.replace("link=Return to Full Page"));
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {

@@ -25,6 +25,7 @@ package com.liferay.portalweb.portal.theme;
 import com.liferay.portal.kernel.util.FileUtil;
 
 import com.liferay.portalweb.portal.BaseTestCase;
+import com.liferay.portalweb.portal.util.RuntimeVariables;
 
 /**
  * <a href="SelectThemeTest.java.html"><b><i>View Source</i></b></a>
@@ -34,17 +35,19 @@ import com.liferay.portalweb.portal.BaseTestCase;
  */
 public class SelectThemeTest extends BaseTestCase {
 	public void testSelectTheme() throws Exception {
-		selenium.click("link=Manage Pages");
+		selenium.click(RuntimeVariables.replace("link=Manage Pages"));
 		selenium.waitForPageToLoad("30000");
-		selenium.click("link=Look and Feel");
+		selenium.click(RuntimeVariables.replace("link=Look and Feel"));
 		selenium.waitForPageToLoad("30000");
-		selenium.click("//input[@name='_88_themeId' and @value='brochure']");
+		selenium.click(RuntimeVariables.replace(
+				"//input[@name='_88_themeId' and @value='brochure']"));
 		selenium.waitForPageToLoad("30000");
-		FileUtil.mkdirs(
-			"L:\\portal\\build\\portal-web\\test-output\\brochure\\");
-		selenium.captureEntirePageScreenshot("L:\\portal\\build\\portal-web\\test-output\\brochure\\SelectThemeTest.jpg",
+		FileUtil.mkdirs(RuntimeVariables.replace(
+				"L:\\portal\\build\\portal-web\\test-output\\brochure\\"));
+		selenium.captureEntirePageScreenshot(RuntimeVariables.replace(
+				"L:\\portal\\build\\portal-web\\test-output\\brochure\\SelectThemeTest.jpg"),
 			"");
-		selenium.click("link=Return to Full Page");
+		selenium.click(RuntimeVariables.replace("link=Return to Full Page"));
 		selenium.waitForPageToLoad("30000");
 	}
 }

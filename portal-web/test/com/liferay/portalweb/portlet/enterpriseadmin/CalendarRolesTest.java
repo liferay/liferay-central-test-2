@@ -33,15 +33,15 @@ import com.liferay.portalweb.portal.util.RuntimeVariables;
  */
 public class CalendarRolesTest extends BaseTestCase {
 	public void testCalendarRoles() throws Exception {
-		selenium.click("Link=Sign Out");
+		selenium.click(RuntimeVariables.replace("Link=Sign Out"));
 		selenium.waitForPageToLoad("30000");
-		selenium.click("link=Sign In");
+		selenium.click(RuntimeVariables.replace("link=Sign In"));
 		selenium.waitForPageToLoad("30000");
 		selenium.type("login", RuntimeVariables.replace("test02@selenium.com"));
 		selenium.type("password", RuntimeVariables.replace("test"));
-		selenium.click("//input[@value='Sign In']");
+		selenium.click(RuntimeVariables.replace("//input[@value='Sign In']"));
 		selenium.waitForPageToLoad("30000");
-		selenium.click("//input[@value='I Agree']");
+		selenium.click(RuntimeVariables.replace("//input[@value='I Agree']"));
 		selenium.waitForPageToLoad("30000");
 	}
 }

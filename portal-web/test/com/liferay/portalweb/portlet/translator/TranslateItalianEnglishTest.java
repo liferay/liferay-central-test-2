@@ -38,7 +38,7 @@ public class TranslateItalianEnglishTest extends BaseTestCase {
 		selenium.type("_26_text",
 			RuntimeVariables.replace(
 				"Il mio nome \u00e8 traduttore di Liferay, fluente dentro oltre 6 milione forme della comunicazione."));
-		selenium.click("//input[@value='Translate']");
+		selenium.click(RuntimeVariables.replace("//input[@value='Translate']"));
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {

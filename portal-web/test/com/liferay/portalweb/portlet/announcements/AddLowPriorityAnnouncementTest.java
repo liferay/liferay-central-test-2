@@ -49,11 +49,11 @@ public class AddLowPriorityAnnouncementTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click("link=Manage Entries");
+		selenium.click(RuntimeVariables.replace("link=Manage Entries"));
 		selenium.waitForPageToLoad("30000");
 		selenium.select("_84_distributionScope", "label=General");
 		selenium.waitForPageToLoad("30000");
-		selenium.click("//input[@value='Add Entry']");
+		selenium.click(RuntimeVariables.replace("//input[@value='Add Entry']"));
 		selenium.waitForPageToLoad("30000");
 		selenium.type("_84_title",
 			RuntimeVariables.replace("Low Priority Announcement"));
@@ -62,9 +62,9 @@ public class AddLowPriorityAnnouncementTest extends BaseTestCase {
 			RuntimeVariables.replace(
 				"Hi everyone. This is a low priority announcement."));
 		selenium.select("_84_priority", RuntimeVariables.replace("label=Low"));
-		selenium.click("//input[@value='Save']");
+		selenium.click(RuntimeVariables.replace("//input[@value='Save']"));
 		selenium.waitForPageToLoad("30000");
-		selenium.click("link=Entries");
+		selenium.click(RuntimeVariables.replace("link=Entries"));
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {

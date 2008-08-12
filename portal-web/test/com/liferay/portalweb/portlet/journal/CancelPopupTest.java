@@ -23,6 +23,7 @@
 package com.liferay.portalweb.portlet.journal;
 
 import com.liferay.portalweb.portal.BaseTestCase;
+import com.liferay.portalweb.portal.util.RuntimeVariables;
 
 /**
  * <a href="CancelPopupTest.java.html"><b><i>View Source</i></b></a>
@@ -32,9 +33,10 @@ import com.liferay.portalweb.portal.BaseTestCase;
  */
 public class CancelPopupTest extends BaseTestCase {
 	public void testCancelPopup() throws Exception {
-		selenium.click("link=Structures");
+		selenium.click(RuntimeVariables.replace("link=Structures"));
 		selenium.waitForPageToLoad("30000");
-		selenium.click("//input[@value='Add Structure']");
+		selenium.click(RuntimeVariables.replace(
+				"//input[@value='Add Structure']"));
 		selenium.waitForPageToLoad("30000");
 		selenium.click("_15_editorButton");
 
@@ -77,7 +79,7 @@ public class CancelPopupTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click("link=Return to Full Page");
+		selenium.click(RuntimeVariables.replace("link=Return to Full Page"));
 		selenium.waitForPageToLoad("30000");
 	}
 }

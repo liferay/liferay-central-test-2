@@ -23,6 +23,7 @@
 package com.liferay.portalweb.portlet.messageboards;
 
 import com.liferay.portalweb.portal.BaseTestCase;
+import com.liferay.portalweb.portal.util.RuntimeVariables;
 
 /**
  * <a href="DeleteMessageTest.java.html"><b><i>View Source</i></b></a>
@@ -104,8 +105,8 @@ public class DeleteMessageTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click(
-			"link=T\u00e9st M\u00e9ssag\u00e9 to b\u00e9 D\u00e9l\u00e9t\u00e9d");
+		selenium.click(RuntimeVariables.replace(
+				"link=T\u00e9st M\u00e9ssag\u00e9 to b\u00e9 D\u00e9l\u00e9t\u00e9d"));
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {

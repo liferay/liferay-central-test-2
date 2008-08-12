@@ -35,18 +35,19 @@ public class ApplyOrganizationTest extends BaseTestCase {
 	public void testApplyOrganization() throws Exception {
 		selenium.typeKeys("toggle_id_enterprise_admin_user_searchkeywords",
 			RuntimeVariables.replace("selenium"));
-		selenium.click("//input[@value='Search Users']");
+		selenium.click(RuntimeVariables.replace(
+				"//input[@value='Search Users']"));
 		selenium.waitForPageToLoad("30000");
-		selenium.click("link=Edit");
+		selenium.click(RuntimeVariables.replace("link=Edit"));
 		selenium.waitForPageToLoad("30000");
 		selenium.click("//input[@value='Select']");
 		selenium.waitForPopUp("organization", RuntimeVariables.replace("30000"));
 		selenium.selectWindow("organization");
 		selenium.click("link=Liferay, Inc.");
 		selenium.selectWindow("null");
-		selenium.click("//input[@value='Save']");
+		selenium.click(RuntimeVariables.replace("//input[@value='Save']"));
 		selenium.waitForPageToLoad("30000");
-		selenium.click("link=Return to Full Page");
+		selenium.click(RuntimeVariables.replace("link=Return to Full Page"));
 		selenium.waitForPageToLoad("30000");
 	}
 }

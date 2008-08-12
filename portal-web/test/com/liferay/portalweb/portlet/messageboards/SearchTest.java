@@ -49,7 +49,7 @@ public class SearchTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click("link=Return to Full Page");
+		selenium.click(RuntimeVariables.replace("link=Return to Full Page"));
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {
@@ -70,7 +70,8 @@ public class SearchTest extends BaseTestCase {
 
 		selenium.typeKeys("_19_keywords1", RuntimeVariables.replace("T\u00e9st"));
 		selenium.type("_19_keywords1", RuntimeVariables.replace("T\u00e9st"));
-		selenium.click("//input[@value='Search Messages']");
+		selenium.click(RuntimeVariables.replace(
+				"//input[@value='Search Messages']"));
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {
@@ -90,7 +91,8 @@ public class SearchTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click("link=T\u00e9st M\u00e9ssag\u00e9");
+		selenium.click(RuntimeVariables.replace(
+				"link=T\u00e9st M\u00e9ssag\u00e9"));
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {

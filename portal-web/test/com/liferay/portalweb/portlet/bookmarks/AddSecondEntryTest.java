@@ -49,7 +49,7 @@ public class AddSecondEntryTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click("//input[@value='Add Entry']");
+		selenium.click(RuntimeVariables.replace("//input[@value='Add Entry']"));
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {
@@ -74,7 +74,7 @@ public class AddSecondEntryTest extends BaseTestCase {
 		selenium.type("_28_comments",
 			RuntimeVariables.replace(
 				"This is a test bookmark that will be deleted!"));
-		selenium.click("//input[@value='Save']");
+		selenium.click(RuntimeVariables.replace("//input[@value='Save']"));
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {

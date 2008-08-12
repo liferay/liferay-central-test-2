@@ -49,7 +49,8 @@ public class AddJournalArticleTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click("//img[@title='Select Article']");
+		selenium.click(RuntimeVariables.replace(
+				"//img[@title='Select Article']"));
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {
@@ -71,7 +72,8 @@ public class AddJournalArticleTest extends BaseTestCase {
 
 		selenium.type("toggle_id_journal_article_searchkeywords",
 			RuntimeVariables.replace("Test"));
-		selenium.click("//input[@value='Search Articles']");
+		selenium.click(RuntimeVariables.replace(
+				"//input[@value='Search Articles']"));
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {
@@ -90,13 +92,13 @@ public class AddJournalArticleTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click("link=Test Journal Article 3");
+		selenium.click(RuntimeVariables.replace("link=Test Journal Article 3"));
 		selenium.waitForPageToLoad("30000");
 		selenium.click("_86_enableRatingsCheckbox");
 		selenium.click("_86_enableCommentsCheckbox");
-		selenium.click("link=Test Journal Article 3");
+		selenium.click(RuntimeVariables.replace("link=Test Journal Article 3"));
 		selenium.waitForPageToLoad("30000");
-		selenium.click("link=Return to Full Page");
+		selenium.click(RuntimeVariables.replace("link=Return to Full Page"));
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {

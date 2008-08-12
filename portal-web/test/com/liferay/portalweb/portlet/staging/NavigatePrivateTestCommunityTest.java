@@ -23,6 +23,7 @@
 package com.liferay.portalweb.portlet.staging;
 
 import com.liferay.portalweb.portal.BaseTestCase;
+import com.liferay.portalweb.portal.util.RuntimeVariables;
 
 /**
  * <a href="NavigatePrivateTestCommunityTest.java.html"><b><i>View Source</i></b></a>
@@ -49,8 +50,8 @@ public class NavigatePrivateTestCommunityTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click(
-			"//div[@id=\"banner\"]/div/div/ul/li[6]/ul/li[6]/ul/li[2]/a[1]");
+		selenium.click(RuntimeVariables.replace(
+				"//div[@id=\"banner\"]/div/div/ul/li[6]/ul/li[6]/ul/li[2]/a[1]"));
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {

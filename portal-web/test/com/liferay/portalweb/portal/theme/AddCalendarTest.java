@@ -25,6 +25,7 @@ package com.liferay.portalweb.portal.theme;
 import com.liferay.portal.kernel.util.FileUtil;
 
 import com.liferay.portalweb.portal.BaseTestCase;
+import com.liferay.portalweb.portal.util.RuntimeVariables;
 
 /**
  * <a href="AddCalendarTest.java.html"><b><i>View Source</i></b></a>
@@ -72,13 +73,14 @@ public class AddCalendarTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click("link=23");
+		selenium.click(RuntimeVariables.replace("link=23"));
 		selenium.waitForPageToLoad("30000");
-		FileUtil.mkdirs(
-			"L:\\portal\\build\\portal-web\\test-output\\brochure\\");
-		selenium.captureEntirePageScreenshot("L:\\portal\\build\\portal-web\\test-output\\brochure\\AddCalendarTest.jpg",
+		FileUtil.mkdirs(RuntimeVariables.replace(
+				"L:\\portal\\build\\portal-web\\test-output\\brochure\\"));
+		selenium.captureEntirePageScreenshot(RuntimeVariables.replace(
+				"L:\\portal\\build\\portal-web\\test-output\\brochure\\AddCalendarTest.jpg"),
 			"");
-		selenium.click("link=Return to Full Page");
+		selenium.click(RuntimeVariables.replace("link=Return to Full Page"));
 		selenium.waitForPageToLoad("30000");
 	}
 }

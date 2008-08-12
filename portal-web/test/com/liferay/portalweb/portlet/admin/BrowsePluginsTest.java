@@ -23,6 +23,7 @@
 package com.liferay.portalweb.portlet.admin;
 
 import com.liferay.portalweb.portal.BaseTestCase;
+import com.liferay.portalweb.portal.util.RuntimeVariables;
 
 /**
  * <a href="BrowsePluginsTest.java.html"><b><i>View Source</i></b></a>
@@ -32,7 +33,8 @@ import com.liferay.portalweb.portal.BaseTestCase;
  */
 public class BrowsePluginsTest extends BaseTestCase {
 	public void testBrowsePlugins() throws Exception {
-		selenium.click("//a[contains(text(),'Plugins')]");
+		selenium.click(RuntimeVariables.replace(
+				"//a[contains(text(),'Plugins')]"));
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {
@@ -56,7 +58,7 @@ public class BrowsePluginsTest extends BaseTestCase {
 			"label=4");
 		selenium.waitForPageToLoad("30000");
 		verifyTrue(selenium.isTextPresent("Workflow"));
-		selenium.click("link=Theme Plugins");
+		selenium.click(RuntimeVariables.replace("link=Theme Plugins"));
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {
@@ -76,7 +78,7 @@ public class BrowsePluginsTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click("link=Layout Template Plugins");
+		selenium.click(RuntimeVariables.replace("link=Layout Template Plugins"));
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {
@@ -96,9 +98,9 @@ public class BrowsePluginsTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click("link=Web Plugins");
+		selenium.click(RuntimeVariables.replace("link=Web Plugins"));
 		selenium.waitForPageToLoad("30000");
-		selenium.click("link=Return to Full Page");
+		selenium.click(RuntimeVariables.replace("link=Return to Full Page"));
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {

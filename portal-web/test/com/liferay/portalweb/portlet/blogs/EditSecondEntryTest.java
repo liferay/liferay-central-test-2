@@ -109,7 +109,7 @@ public class EditSecondEntryTest extends BaseTestCase {
 			RuntimeVariables.replace("This is an edited second test entry!"));
 		selenium.selectFrame("relative=top");
 		Thread.sleep(5000);
-		selenium.click("_33_saveButton");
+		selenium.click(RuntimeVariables.replace("_33_saveButton"));
 		selenium.waitForPageToLoad("30000");
 		verifyTrue(selenium.isTextPresent(
 				"This is an edited second test entry!"));
@@ -130,7 +130,7 @@ public class EditSecondEntryTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click("link=Blogs Test Page");
+		selenium.click(RuntimeVariables.replace("link=Blogs Test Page"));
 		selenium.waitForPageToLoad("30000");
 	}
 }

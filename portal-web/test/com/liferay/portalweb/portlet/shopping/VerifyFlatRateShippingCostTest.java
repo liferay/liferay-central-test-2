@@ -49,7 +49,7 @@ public class VerifyFlatRateShippingCostTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click("link=Cart");
+		selenium.click(RuntimeVariables.replace("link=Cart"));
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {
@@ -68,7 +68,7 @@ public class VerifyFlatRateShippingCostTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click("//input[@value='Checkout']");
+		selenium.click(RuntimeVariables.replace("//input[@value='Checkout']"));
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {
@@ -109,7 +109,7 @@ public class VerifyFlatRateShippingCostTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click("//input[@value='Continue']");
+		selenium.click(RuntimeVariables.replace("//input[@value='Continue']"));
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {
@@ -144,7 +144,7 @@ public class VerifyFlatRateShippingCostTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click("link=Return to Full Page");
+		selenium.click(RuntimeVariables.replace("link=Return to Full Page"));
 		selenium.waitForPageToLoad("30000");
 	}
 }

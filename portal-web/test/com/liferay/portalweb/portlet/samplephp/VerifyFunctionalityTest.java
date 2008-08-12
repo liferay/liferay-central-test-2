@@ -23,6 +23,7 @@
 package com.liferay.portalweb.portlet.samplephp;
 
 import com.liferay.portalweb.portal.BaseTestCase;
+import com.liferay.portalweb.portal.util.RuntimeVariables;
 
 /**
  * <a href="VerifyFunctionalityTest.java.html"><b><i>View Source</i></b></a>
@@ -48,7 +49,7 @@ public class VerifyFunctionalityTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click("link=Quercus");
+		selenium.click(RuntimeVariables.replace("link=Quercus"));
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {
@@ -68,7 +69,7 @@ public class VerifyFunctionalityTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click("link=PHP Info");
+		selenium.click(RuntimeVariables.replace("link=PHP Info"));
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {
@@ -87,8 +88,8 @@ public class VerifyFunctionalityTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click(
-			"//div[@id=\"portlet-wrapper-SamplePHP_WAR_samplephpportlet\"]//div[2]/div/div/div[2]/a[1]");
+		selenium.click(RuntimeVariables.replace(
+				"//div[@id=\"portlet-wrapper-SamplePHP_WAR_samplephpportlet\"]//div[2]/div/div/div[2]/a[1]"));
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {

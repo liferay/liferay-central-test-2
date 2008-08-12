@@ -50,7 +50,7 @@ public class EditSecondArticleTest extends BaseTestCase {
 		}
 
 		selenium.selectWindow("null");
-		selenium.click("//h1/div/nobr[1]/a/img");
+		selenium.click(RuntimeVariables.replace("//h1/div/nobr[1]/a/img"));
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {
@@ -89,7 +89,7 @@ public class EditSecondArticleTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click("//input[@value='Save']");
+		selenium.click(RuntimeVariables.replace("//input[@value='Save']"));
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {

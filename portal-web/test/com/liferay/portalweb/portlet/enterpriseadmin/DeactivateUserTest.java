@@ -52,7 +52,8 @@ public class DeactivateUserTest extends BaseTestCase {
 
 		selenium.type("toggle_id_enterprise_admin_user_searchkeywords",
 			RuntimeVariables.replace("n03"));
-		selenium.click("//input[@value='Search Users']");
+		selenium.click(RuntimeVariables.replace(
+				"//input[@value='Search Users']"));
 		selenium.waitForPageToLoad("30000");
 		selenium.click("link=Deactivate");
 		assertTrue(selenium.getConfirmation()
@@ -75,7 +76,7 @@ public class DeactivateUserTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click("link=Return to Full Page");
+		selenium.click(RuntimeVariables.replace("link=Return to Full Page"));
 		selenium.waitForPageToLoad("30000");
 	}
 }

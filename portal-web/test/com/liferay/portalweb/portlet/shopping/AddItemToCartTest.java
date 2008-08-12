@@ -23,6 +23,7 @@
 package com.liferay.portalweb.portlet.shopping;
 
 import com.liferay.portalweb.portal.BaseTestCase;
+import com.liferay.portalweb.portal.util.RuntimeVariables;
 
 /**
  * <a href="AddItemToCartTest.java.html"><b><i>View Source</i></b></a>
@@ -49,8 +50,8 @@ public class AddItemToCartTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click(
-			"//div[@id=\"portlet-wrapper-34\"]/div[2]/div/div/form/div[3]/table/tbody/tr[2]/td[1]/a");
+		selenium.click(RuntimeVariables.replace(
+				"//div[@id=\"portlet-wrapper-34\"]/div[2]/div/div/form/div[3]/table/tbody/tr[2]/td[1]/a"));
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {
@@ -69,8 +70,8 @@ public class AddItemToCartTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click(
-			"//div[@id=\"portlet-wrapper-34\"]/div[2]/div/div/form[2]/div[3]/table/tbody/tr[2]/td[2]/a");
+		selenium.click(RuntimeVariables.replace(
+				"//div[@id=\"portlet-wrapper-34\"]/div[2]/div/div/form[2]/div[3]/table/tbody/tr[2]/td[2]/a"));
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {
@@ -107,7 +108,8 @@ public class AddItemToCartTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click("//input[@value='Add to Shopping Cart']");
+		selenium.click(RuntimeVariables.replace(
+				"//input[@value='Add to Shopping Cart']"));
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {
@@ -143,7 +145,7 @@ public class AddItemToCartTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click("link=Return to Full Page");
+		selenium.click(RuntimeVariables.replace("link=Return to Full Page"));
 		selenium.waitForPageToLoad("30000");
 	}
 }

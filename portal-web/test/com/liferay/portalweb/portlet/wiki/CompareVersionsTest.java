@@ -23,6 +23,7 @@
 package com.liferay.portalweb.portlet.wiki;
 
 import com.liferay.portalweb.portal.BaseTestCase;
+import com.liferay.portalweb.portal.util.RuntimeVariables;
 
 /**
  * <a href="CompareVersionsTest.java.html"><b><i>View Source</i></b></a>
@@ -48,7 +49,7 @@ public class CompareVersionsTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click("//h1/div/nobr[3]/a/img");
+		selenium.click(RuntimeVariables.replace("//h1/div/nobr[3]/a/img"));
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {
@@ -67,7 +68,7 @@ public class CompareVersionsTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click("link=History");
+		selenium.click(RuntimeVariables.replace("link=History"));
 		selenium.waitForPageToLoad("30000");
 		selenium.click("_36_rowIds");
 		selenium.click("//input[@name='_36_rowIds' and @value='1.0']");
@@ -89,7 +90,8 @@ public class CompareVersionsTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click("//input[@value='Compare Versions']");
+		selenium.click(RuntimeVariables.replace(
+				"//input[@value='Compare Versions']"));
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {
@@ -125,9 +127,9 @@ public class CompareVersionsTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click("link=History");
+		selenium.click(RuntimeVariables.replace("link=History"));
 		selenium.waitForPageToLoad("30000");
-		selenium.click("link=Return to Full Page");
+		selenium.click(RuntimeVariables.replace("link=Return to Full Page"));
 		selenium.waitForPageToLoad("30000");
 	}
 }

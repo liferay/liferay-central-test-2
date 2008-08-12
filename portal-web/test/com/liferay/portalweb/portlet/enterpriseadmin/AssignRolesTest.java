@@ -33,20 +33,22 @@ import com.liferay.portalweb.portal.util.RuntimeVariables;
  */
 public class AssignRolesTest extends BaseTestCase {
 	public void testAssignRoles() throws Exception {
-		selenium.click("link=Roles");
+		selenium.click(RuntimeVariables.replace("link=Roles"));
 		selenium.waitForPageToLoad("30000");
-		selenium.click("link=Assign Members");
+		selenium.click(RuntimeVariables.replace("link=Assign Members"));
 		selenium.waitForPageToLoad("30000");
-		selenium.click("link=Available");
+		selenium.click(RuntimeVariables.replace("link=Available"));
 		selenium.waitForPageToLoad("30000");
 		selenium.typeKeys("toggle_id_enterprise_admin_user_searchkeywords",
 			RuntimeVariables.replace("Selenium"));
-		selenium.click("//input[@value='Search Users']");
+		selenium.click(RuntimeVariables.replace(
+				"//input[@value='Search Users']"));
 		selenium.waitForPageToLoad("30000");
 		selenium.click("_79_allRowIds");
-		selenium.click("//input[@value='Update Associations']");
+		selenium.click(RuntimeVariables.replace(
+				"//input[@value='Update Associations']"));
 		selenium.waitForPageToLoad("30000");
-		selenium.click("link=Return to Full Page");
+		selenium.click(RuntimeVariables.replace("link=Return to Full Page"));
 		selenium.waitForPageToLoad("30000");
 	}
 }

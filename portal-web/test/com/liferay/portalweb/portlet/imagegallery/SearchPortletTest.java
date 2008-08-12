@@ -49,7 +49,7 @@ public class SearchPortletTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click("link=Return to Full Page");
+		selenium.click(RuntimeVariables.replace("link=Return to Full Page"));
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {
@@ -69,7 +69,8 @@ public class SearchPortletTest extends BaseTestCase {
 		}
 
 		selenium.type("_31_keywords1", RuntimeVariables.replace("liferay"));
-		selenium.click("//input[@value='Search Images']");
+		selenium.click(RuntimeVariables.replace(
+				"//input[@value='Search Images']"));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isElementPresent("//img[@alt='Image']"));
 	}

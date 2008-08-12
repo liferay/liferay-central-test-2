@@ -23,6 +23,7 @@
 package com.liferay.portalweb.portlet.staging;
 
 import com.liferay.portalweb.portal.BaseTestCase;
+import com.liferay.portalweb.portal.util.RuntimeVariables;
 
 /**
  * <a href="VerifyNewPrivateSampleDataTest.java.html"><b><i>View Source</i></b></a>
@@ -48,17 +49,17 @@ public class VerifyNewPrivateSampleDataTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click("link=View Live Page");
+		selenium.click(RuntimeVariables.replace("link=View Live Page"));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isElementPresent("link=Superman or Batman?!"));
 		assertTrue(selenium.isElementPresent("link=Third Test Entry"));
 		assertTrue(selenium.isElementPresent("link=Read More"));
 		assertTrue(selenium.isElementPresent("link=Test Entry"));
 		assertFalse(selenium.isElementPresent("link=Second Test Entry"));
-		selenium.click("link=Articles");
+		selenium.click(RuntimeVariables.replace("link=Articles"));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isElementPresent("link=Article to be Published"));
-		selenium.click("link=Return to Full Page");
+		selenium.click(RuntimeVariables.replace("link=Return to Full Page"));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isElementPresent("link=View Staged Page"));
 	}

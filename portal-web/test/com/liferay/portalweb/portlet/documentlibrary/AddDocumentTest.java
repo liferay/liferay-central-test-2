@@ -33,9 +33,10 @@ import com.liferay.portalweb.portal.util.RuntimeVariables;
  */
 public class AddDocumentTest extends BaseTestCase {
 	public void testAddDocument() throws Exception {
-		selenium.click("link=Test Subfolder");
+		selenium.click(RuntimeVariables.replace("link=Test Subfolder"));
 		selenium.waitForPageToLoad("30000");
-		selenium.click("//input[@value='Add Document']");
+		selenium.click(RuntimeVariables.replace(
+				"//input[@value='Add Document']"));
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {
@@ -111,7 +112,7 @@ public class AddDocumentTest extends BaseTestCase {
 		selenium.type("_20_title", RuntimeVariables.replace("Test Document"));
 		selenium.type("_20_description",
 			RuntimeVariables.replace("This is a test document!"));
-		selenium.click("//input[@value='Save']");
+		selenium.click(RuntimeVariables.replace("//input[@value='Save']"));
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {

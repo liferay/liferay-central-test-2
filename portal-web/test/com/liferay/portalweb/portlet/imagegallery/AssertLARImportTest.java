@@ -23,6 +23,7 @@
 package com.liferay.portalweb.portlet.imagegallery;
 
 import com.liferay.portalweb.portal.BaseTestCase;
+import com.liferay.portalweb.portal.util.RuntimeVariables;
 
 /**
  * <a href="AssertLARImportTest.java.html"><b><i>View Source</i></b></a>
@@ -82,7 +83,7 @@ public class AssertLARImportTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click("link=Test Subfolder 2");
+		selenium.click(RuntimeVariables.replace("link=Test Subfolder 2"));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isElementPresent("//img[@alt='Image']"));
 
@@ -102,7 +103,7 @@ public class AssertLARImportTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click("link=Return to Full Page");
+		selenium.click(RuntimeVariables.replace("link=Return to Full Page"));
 		selenium.waitForPageToLoad("30000");
 	}
 }

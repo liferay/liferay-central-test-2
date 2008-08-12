@@ -66,8 +66,8 @@ public class AddItemTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click(
-			"//div[@id=\"portlet-wrapper-34\"]/div[2]/div/div/form/div[3]/table/tbody/tr[2]/td[1]/a");
+		selenium.click(RuntimeVariables.replace(
+				"//div[@id=\"portlet-wrapper-34\"]/div[2]/div/div/form/div[3]/table/tbody/tr[2]/td[1]/a"));
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {
@@ -86,7 +86,7 @@ public class AddItemTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click("//input[@value='Add Item']");
+		selenium.click(RuntimeVariables.replace("//input[@value='Add Item']"));
 		selenium.waitForPageToLoad("30000");
 		selenium.type("_34_sku", RuntimeVariables.replace("1111"));
 		selenium.type("_34_name", RuntimeVariables.replace("Jona Lyons - Wheel"));
@@ -115,7 +115,7 @@ public class AddItemTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click("//input[@value='Save']");
+		selenium.click(RuntimeVariables.replace("//input[@value='Save']"));
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {
@@ -134,7 +134,7 @@ public class AddItemTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click("link=Return to Full Page");
+		selenium.click(RuntimeVariables.replace("link=Return to Full Page"));
 		selenium.waitForPageToLoad("30000");
 	}
 }

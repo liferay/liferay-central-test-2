@@ -49,12 +49,12 @@ public class StoreCommunityIDTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click("link=All Communities");
+		selenium.click(RuntimeVariables.replace("link=All Communities"));
 		selenium.waitForPageToLoad("30000");
 		selenium.click(
 			"//div[@id='portlet-wrapper-29']/div[2]/div/div/form/div[5]/table/tbody/tr[3]/td[6]/ul/li/strong");
-		selenium.click(
-			"//div[@id='portlet-wrapper-29']/div[2]/div/div/form/div[5]/table/tbody/tr[3]/td[6]/ul/li/ul/li[1]/nobr/a");
+		selenium.click(RuntimeVariables.replace(
+				"//div[@id='portlet-wrapper-29']/div[2]/div/div/form/div[5]/table/tbody/tr[3]/td[6]/ul/li/ul/li[1]/nobr/a"));
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {
@@ -76,7 +76,7 @@ public class StoreCommunityIDTest extends BaseTestCase {
 		String GroupID = selenium.getText(
 				"//div[@id='portlet-wrapper-29']/div[2]/div/div/form/table/tbody/tr[1]/td[2]");
 		RuntimeVariables.setValue("GroupID", GroupID);
-		selenium.click("link=Return to Full Page");
+		selenium.click(RuntimeVariables.replace("link=Return to Full Page"));
 		selenium.waitForPageToLoad("30000");
 	}
 }

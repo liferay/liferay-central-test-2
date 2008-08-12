@@ -53,7 +53,7 @@ public class RemotePublishStagedPublicPagesTest extends BaseTestCase {
 
 		selenium.type("_58_login", RuntimeVariables.replace("test@liferay.com"));
 		selenium.type("_58_password", RuntimeVariables.replace("test"));
-		selenium.click("//input[@value='Sign In']");
+		selenium.click(RuntimeVariables.replace("//input[@value='Sign In']"));
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {
@@ -72,8 +72,8 @@ public class RemotePublishStagedPublicPagesTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click(
-			"//div[@id='banner']/div/div/ul/li[8]/ul/li[6]/ul/li[1]/a[1]");
+		selenium.click(RuntimeVariables.replace(
+				"//div[@id='banner']/div/div/ul/li[8]/ul/li[6]/ul/li[1]/a[1]"));
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {
@@ -92,7 +92,7 @@ public class RemotePublishStagedPublicPagesTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click("link=View Staged Page");
+		selenium.click(RuntimeVariables.replace("link=View Staged Page"));
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {
@@ -111,7 +111,7 @@ public class RemotePublishStagedPublicPagesTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click("link=Manage Pages");
+		selenium.click(RuntimeVariables.replace("link=Manage Pages"));
 		selenium.waitForPageToLoad("30000");
 		selenium.click("//input[@value='Publish to Remote']");
 
@@ -243,7 +243,7 @@ public class RemotePublishStagedPublicPagesTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click("publishBtn");
+		selenium.click(RuntimeVariables.replace("publishBtn"));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.getConfirmation()
 						   .matches("^Are you sure you want to publish these pages[\\s\\S]$"));

@@ -49,7 +49,7 @@ public class SearchEntriesTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click("link=Return to Full Page");
+		selenium.click(RuntimeVariables.replace("link=Return to Full Page"));
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {
@@ -89,7 +89,8 @@ public class SearchEntriesTest extends BaseTestCase {
 		}
 
 		Thread.sleep(10000);
-		selenium.click("//input[@value='Search Entries']");
+		selenium.click(RuntimeVariables.replace(
+				"//input[@value='Search Entries']"));
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {
@@ -124,7 +125,7 @@ public class SearchEntriesTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click("link=Edit");
+		selenium.click(RuntimeVariables.replace("link=Edit"));
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {
@@ -143,7 +144,7 @@ public class SearchEntriesTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click("link=Return to Full Page");
+		selenium.click(RuntimeVariables.replace("link=Return to Full Page"));
 		selenium.waitForPageToLoad("30000");
 	}
 }

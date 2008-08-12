@@ -23,6 +23,7 @@
 package com.liferay.portalweb.portlet.journal;
 
 import com.liferay.portalweb.portal.BaseTestCase;
+import com.liferay.portalweb.portal.util.RuntimeVariables;
 
 /**
  * <a href="AddBlankArticleTest.java.html"><b><i>View Source</i></b></a>
@@ -48,7 +49,7 @@ public class AddBlankArticleTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click("//input[@value='Add Article']");
+		selenium.click(RuntimeVariables.replace("//input[@value='Add Article']"));
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {
@@ -123,7 +124,7 @@ public class AddBlankArticleTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click("link=Return to Full Page");
+		selenium.click(RuntimeVariables.replace("link=Return to Full Page"));
 		selenium.waitForPageToLoad("30000");
 	}
 }

@@ -50,7 +50,8 @@ public class AddPageTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click("//a[@id=\"my-community-private-pages\"]");
+		selenium.click(RuntimeVariables.replace(
+				"//a[@id=\"my-community-private-pages\"]"));
 		selenium.waitForPageToLoad("30000");
 		selenium.click("//div/a/span");
 
@@ -95,7 +96,8 @@ public class AddPageTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click("link=Sample Icefaces JSF 1.2 Sun Facelets Test Page");
+		selenium.click(RuntimeVariables.replace(
+				"link=Sample Icefaces JSF 1.2 Sun Facelets Test Page"));
 		selenium.waitForPageToLoad("30000");
 	}
 }

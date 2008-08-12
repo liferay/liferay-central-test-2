@@ -33,9 +33,10 @@ import com.liferay.portalweb.portal.util.RuntimeVariables;
  */
 public class AddOrganizationTest extends BaseTestCase {
 	public void testAddOrganization() throws Exception {
-		selenium.click("link=Organizations");
+		selenium.click(RuntimeVariables.replace("link=Organizations"));
 		selenium.waitForPageToLoad("30000");
-		selenium.click("//input[@value='Add Organization']");
+		selenium.click(RuntimeVariables.replace(
+				"//input[@value='Add Organization']"));
 		selenium.waitForPageToLoad("30000");
 		selenium.typeKeys("_79_name", RuntimeVariables.replace("Selenium"));
 		selenium.type("_79_name", RuntimeVariables.replace("Selenium"));
@@ -94,21 +95,21 @@ public class AddOrganizationTest extends BaseTestCase {
 		Thread.sleep(5000);
 		selenium.select("_79_regionId",
 			RuntimeVariables.replace("label=California"));
-		selenium.click("//input[@value='Save']");
+		selenium.click(RuntimeVariables.replace("//input[@value='Save']"));
 		selenium.waitForPageToLoad("30000");
-		selenium.click("//input[@value='Add']");
+		selenium.click(RuntimeVariables.replace("//input[@value='Add']"));
 		selenium.waitForPageToLoad("30000");
 		selenium.type("_79_address",
 			RuntimeVariables.replace("Selenium@selenium.com"));
 		selenium.select("_79_typeId", RuntimeVariables.replace("label=E-mail"));
 		selenium.click("_79_primaryCheckbox");
-		selenium.click("//input[@value='Save']");
+		selenium.click(RuntimeVariables.replace("//input[@value='Save']"));
 		selenium.waitForPageToLoad("30000");
 		selenium.type("_79_comments",
 			RuntimeVariables.replace("This is a test comment!"));
-		selenium.click("//input[@value='Save']");
+		selenium.click(RuntimeVariables.replace("//input[@value='Save']"));
 		selenium.waitForPageToLoad("30000");
-		selenium.click("link=Return to Full Page");
+		selenium.click(RuntimeVariables.replace("link=Return to Full Page"));
 		selenium.waitForPageToLoad("30000");
 	}
 }

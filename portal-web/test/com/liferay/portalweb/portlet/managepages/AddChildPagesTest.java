@@ -33,11 +33,11 @@ import com.liferay.portalweb.portal.util.RuntimeVariables;
  */
 public class AddChildPagesTest extends BaseTestCase {
 	public void testAddChildPages() throws Exception {
-		selenium.click("link=Manage Pages Test Page");
+		selenium.click(RuntimeVariables.replace("link=Manage Pages Test Page"));
 		selenium.waitForPageToLoad("30000");
-		selenium.click("link=Manage Pages");
+		selenium.click(RuntimeVariables.replace("link=Manage Pages"));
 		selenium.waitForPageToLoad("30000");
-		selenium.click("link=Children");
+		selenium.click(RuntimeVariables.replace("link=Children"));
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {
@@ -60,7 +60,7 @@ public class AddChildPagesTest extends BaseTestCase {
 			RuntimeVariables.replace("Child Test Page"));
 		selenium.click("_88_inheritFromParentLayoutIdCheckbox");
 		selenium.click("_88_hiddenCheckbox");
-		selenium.click("//input[@value='Add Page']");
+		selenium.click(RuntimeVariables.replace("//input[@value='Add Page']"));
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {
@@ -83,9 +83,9 @@ public class AddChildPagesTest extends BaseTestCase {
 			RuntimeVariables.replace("Child Test Page 2"));
 		selenium.click("_88_hiddenCheckbox");
 		selenium.click("_88_inheritFromParentLayoutIdCheckbox");
-		selenium.click("//input[@value='Add Page']");
+		selenium.click(RuntimeVariables.replace("//input[@value='Add Page']"));
 		selenium.waitForPageToLoad("30000");
-		selenium.click("link=Display Order");
+		selenium.click(RuntimeVariables.replace("link=Display Order"));
 		selenium.waitForPageToLoad("30000");
 		selenium.select("_88_layoutIdsBox",
 			RuntimeVariables.replace("label=Child Test Page"));
@@ -122,7 +122,7 @@ public class AddChildPagesTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click("link=Return to Full Page");
+		selenium.click(RuntimeVariables.replace("link=Return to Full Page"));
 		selenium.waitForPageToLoad("30000");
 	}
 }

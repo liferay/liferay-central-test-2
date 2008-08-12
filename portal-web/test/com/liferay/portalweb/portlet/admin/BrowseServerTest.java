@@ -23,6 +23,7 @@
 package com.liferay.portalweb.portlet.admin;
 
 import com.liferay.portalweb.portal.BaseTestCase;
+import com.liferay.portalweb.portal.util.RuntimeVariables;
 
 /**
  * <a href="BrowseServerTest.java.html"><b><i>View Source</i></b></a>
@@ -48,7 +49,7 @@ public class BrowseServerTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click("link=More");
+		selenium.click(RuntimeVariables.replace("link=More"));
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {
@@ -67,9 +68,9 @@ public class BrowseServerTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click("//input[@value='Execute']");
+		selenium.click(RuntimeVariables.replace("//input[@value='Execute']"));
 		selenium.waitForPageToLoad("30000");
-		selenium.click("link=Log Levels");
+		selenium.click(RuntimeVariables.replace("link=Log Levels"));
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {
@@ -88,7 +89,7 @@ public class BrowseServerTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click("link=System Properties");
+		selenium.click(RuntimeVariables.replace("link=System Properties"));
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {
@@ -107,7 +108,7 @@ public class BrowseServerTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click("link=Portal Properties");
+		selenium.click(RuntimeVariables.replace("link=Portal Properties"));
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {
@@ -126,7 +127,7 @@ public class BrowseServerTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click("link=Shutdown");
+		selenium.click(RuntimeVariables.replace("link=Shutdown"));
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {
@@ -145,7 +146,7 @@ public class BrowseServerTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click("link=OpenOffice");
+		selenium.click(RuntimeVariables.replace("link=OpenOffice"));
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {
@@ -164,7 +165,7 @@ public class BrowseServerTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click("link=Return to Full Page");
+		selenium.click(RuntimeVariables.replace("link=Return to Full Page"));
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {

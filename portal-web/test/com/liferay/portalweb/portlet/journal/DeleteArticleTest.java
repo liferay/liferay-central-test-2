@@ -23,6 +23,7 @@
 package com.liferay.portalweb.portlet.journal;
 
 import com.liferay.portalweb.portal.BaseTestCase;
+import com.liferay.portalweb.portal.util.RuntimeVariables;
 
 /**
  * <a href="DeleteArticleTest.java.html"><b><i>View Source</i></b></a>
@@ -48,11 +49,11 @@ public class DeleteArticleTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click("link=Articles");
+		selenium.click(RuntimeVariables.replace("link=Articles"));
 		selenium.waitForPageToLoad("30000");
-		selenium.click("link=1.1");
+		selenium.click(RuntimeVariables.replace("link=1.1"));
 		selenium.waitForPageToLoad("30000");
-		selenium.click("//input[@value='Delete']");
+		selenium.click(RuntimeVariables.replace("//input[@value='Delete']"));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.getConfirmation()
 						   .matches("^Are you sure you want to deactivate this[\\s\\S]$"));

@@ -33,13 +33,13 @@ import com.liferay.portalweb.portal.util.RuntimeVariables;
  */
 public class DisplayStylesTest extends BaseTestCase {
 	public void testDisplayStyles() throws Exception {
-		selenium.click("//img[@title='Configuration']");
+		selenium.click(RuntimeVariables.replace("//img[@title='Configuration']"));
 		selenium.waitForPageToLoad("30000");
 		selenium.select("_86_displayStyle",
 			RuntimeVariables.replace("label=User Name"));
-		selenium.click("//input[@value='Save']");
+		selenium.click(RuntimeVariables.replace("//input[@value='Save']"));
 		selenium.waitForPageToLoad("30000");
-		selenium.click("link=Return to Full Page");
+		selenium.click(RuntimeVariables.replace("link=Return to Full Page"));
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {

@@ -23,6 +23,7 @@
 package com.liferay.portalweb.portlet.wiki;
 
 import com.liferay.portalweb.portal.BaseTestCase;
+import com.liferay.portalweb.portal.util.RuntimeVariables;
 
 /**
  * <a href="DeleteArticleTest.java.html"><b><i>View Source</i></b></a>
@@ -48,7 +49,7 @@ public class DeleteArticleTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click("//h1/div/nobr[3]/a/img");
+		selenium.click(RuntimeVariables.replace("//h1/div/nobr[3]/a/img"));
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {

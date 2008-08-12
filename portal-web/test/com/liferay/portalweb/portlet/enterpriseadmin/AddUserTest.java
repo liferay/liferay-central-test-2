@@ -33,9 +33,9 @@ import com.liferay.portalweb.portal.util.RuntimeVariables;
  */
 public class AddUserTest extends BaseTestCase {
 	public void testAddUser() throws Exception {
-		selenium.click("link=Users");
+		selenium.click(RuntimeVariables.replace("link=Users"));
 		selenium.waitForPageToLoad("30000");
-		selenium.click("//input[@value='Add User']");
+		selenium.click(RuntimeVariables.replace("//input[@value='Add User']"));
 		selenium.waitForPageToLoad("30000");
 		selenium.typeKeys("_79_screenName",
 			RuntimeVariables.replace("selenium01"));
@@ -60,24 +60,24 @@ public class AddUserTest extends BaseTestCase {
 			RuntimeVariables.replace("Selenium Test 01"));
 		selenium.type("_79_jobTitle",
 			RuntimeVariables.replace("Selenium Test 01"));
-		selenium.click("//input[@value='Save']");
+		selenium.click(RuntimeVariables.replace("//input[@value='Save']"));
 		selenium.waitForPageToLoad("30000");
-		selenium.click("//input[@value='Add']");
+		selenium.click(RuntimeVariables.replace("//input[@value='Add']"));
 		selenium.waitForPageToLoad("30000");
 		selenium.type("_79_address",
 			RuntimeVariables.replace("test01@selenium.com"));
 		selenium.select("_79_typeId", RuntimeVariables.replace("label=E-mail"));
 		selenium.click("_79_primaryCheckbox");
-		selenium.click("//input[@value='Save']");
+		selenium.click(RuntimeVariables.replace("//input[@value='Save']"));
 		selenium.waitForPageToLoad("30000");
 		selenium.type("_79_comments",
 			RuntimeVariables.replace("This is a test comment!"));
 		selenium.click("link=Password");
 		selenium.type("_79_password1", RuntimeVariables.replace("test"));
 		selenium.type("_79_password2", RuntimeVariables.replace("test"));
-		selenium.click("//input[@value='Save']");
+		selenium.click(RuntimeVariables.replace("//input[@value='Save']"));
 		selenium.waitForPageToLoad("30000");
-		selenium.click("link=Return to Full Page");
+		selenium.click(RuntimeVariables.replace("link=Return to Full Page"));
 		selenium.waitForPageToLoad("30000");
 	}
 }

@@ -49,9 +49,10 @@ public class AddSecondSubfolderTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click("link=Another");
+		selenium.click(RuntimeVariables.replace("link=Another"));
 		selenium.waitForPageToLoad("30000");
-		selenium.click("//input[@value='Add Subfolder']");
+		selenium.click(RuntimeVariables.replace(
+				"//input[@value='Add Subfolder']"));
 		selenium.waitForPageToLoad("30000");
 		selenium.type("_20_name", RuntimeVariables.replace("Another1"));
 		selenium.type("_20_description", RuntimeVariables.replace("Test1"));
@@ -72,12 +73,12 @@ public class AddSecondSubfolderTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click("//input[@value='Save']");
+		selenium.click(RuntimeVariables.replace("//input[@value='Save']"));
 		selenium.waitForPageToLoad("30000");
 		verifyTrue(selenium.isTextPresent(
 				"Your request processed successfully. "));
-		selenium.click(
-			"//div[@id='portlet-wrapper-20']/div[2]/div/div/form[1]/div[1]/a[1]");
+		selenium.click(RuntimeVariables.replace(
+				"//div[@id='portlet-wrapper-20']/div[2]/div/div/form[1]/div[1]/a[1]"));
 		selenium.waitForPageToLoad("30000");
 	}
 }

@@ -49,7 +49,7 @@ public class AddNewSamplePortletDataTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click("link=Sign Out");
+		selenium.click(RuntimeVariables.replace("link=Sign Out"));
 		selenium.waitForPageToLoad("30000");
 		selenium.open("http://localhost:8080/web/guest/home");
 
@@ -71,7 +71,7 @@ public class AddNewSamplePortletDataTest extends BaseTestCase {
 
 		selenium.type("_58_login", RuntimeVariables.replace("test@liferay.com"));
 		selenium.type("_58_password", RuntimeVariables.replace("test"));
-		selenium.click("//input[@value='Sign In']");
+		selenium.click(RuntimeVariables.replace("//input[@value='Sign In']"));
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {
@@ -90,10 +90,10 @@ public class AddNewSamplePortletDataTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click(
-			"//div[@id='banner']/div/div/ul/li[8]/ul/li[6]/ul/li[2]/a[1]");
+		selenium.click(RuntimeVariables.replace(
+				"//div[@id='banner']/div/div/ul/li[8]/ul/li[6]/ul/li[2]/a[1]"));
 		selenium.waitForPageToLoad("30000");
-		selenium.click("link=View Staged Page");
+		selenium.click(RuntimeVariables.replace("link=View Staged Page"));
 		selenium.waitForPageToLoad("30000");
 		selenium.click("//img[@alt='Remove']");
 		assertTrue(selenium.getConfirmation()
@@ -193,7 +193,8 @@ public class AddNewSamplePortletDataTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click("//input[@value='Add Question']");
+		selenium.click(RuntimeVariables.replace(
+				"//input[@value='Add Question']"));
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {
@@ -238,9 +239,10 @@ public class AddNewSamplePortletDataTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click("//input[@value='Save']");
+		selenium.click(RuntimeVariables.replace("//input[@value='Save']"));
 		selenium.waitForPageToLoad("30000");
-		selenium.click("link=exact:Superman or Batman?!");
+		selenium.click(RuntimeVariables.replace(
+				"link=exact:Superman or Batman?!"));
 		selenium.waitForPageToLoad("30000");
 		selenium.click("//input[@name='_25_choiceId' and @value='10911']");
 		selenium.click("//input[@value='Vote']");
@@ -262,7 +264,7 @@ public class AddNewSamplePortletDataTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click("link=Return to Full Page");
+		selenium.click(RuntimeVariables.replace("link=Return to Full Page"));
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {
@@ -283,8 +285,8 @@ public class AddNewSamplePortletDataTest extends BaseTestCase {
 
 		assertTrue(selenium.isElementPresent(
 				"//div[starts-with(@id,'portlet-wrapper-101')]/div[1]/span"));
-		selenium.click(
-			"//div[starts-with(@id, 'portlet-wrapper-101')]/div[1]/div[1]/nobr[2]/a");
+		selenium.click(RuntimeVariables.replace(
+				"//div[starts-with(@id, 'portlet-wrapper-101')]/div[1]/div[1]/nobr[2]/a"));
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {
@@ -324,7 +326,7 @@ public class AddNewSamplePortletDataTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click("link=Third Test Entry");
+		selenium.click(RuntimeVariables.replace("link=Third Test Entry"));
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {
@@ -362,7 +364,7 @@ public class AddNewSamplePortletDataTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click("link=Return to Full Page");
+		selenium.click(RuntimeVariables.replace("link=Return to Full Page"));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isElementPresent("link=Third Test Entry"));
 
@@ -383,10 +385,11 @@ public class AddNewSamplePortletDataTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click("//div[@id='portlet-small-icon-bar_33']/nobr[2]/a/img");
+		selenium.click(RuntimeVariables.replace(
+				"//div[@id='portlet-small-icon-bar_33']/nobr[2]/a/img"));
 		selenium.waitForPageToLoad("30000");
 		selenium.select("_86_pageDelta", RuntimeVariables.replace("label=1"));
-		selenium.click("//input[@value='Save']");
+		selenium.click(RuntimeVariables.replace("//input[@value='Save']"));
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {
@@ -406,7 +409,7 @@ public class AddNewSamplePortletDataTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click("link=Return to Full Page");
+		selenium.click(RuntimeVariables.replace("link=Return to Full Page"));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isElementPresent("link=Test Entry"));
 		assertFalse(selenium.isElementPresent("link=Second Test Entry"));
@@ -427,7 +430,7 @@ public class AddNewSamplePortletDataTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click("//input[@value='Add Article']");
+		selenium.click(RuntimeVariables.replace("//input[@value='Add Article']"));
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {
@@ -513,9 +516,10 @@ public class AddNewSamplePortletDataTest extends BaseTestCase {
 		selenium.type("_15_description",
 			RuntimeVariables.replace("Please publish me!"));
 		selenium.select("_15_type", RuntimeVariables.replace("label=Test"));
-		selenium.click("//input[@value='Save and Approve']");
+		selenium.click(RuntimeVariables.replace(
+				"//input[@value='Save and Approve']"));
 		selenium.waitForPageToLoad("30000");
-		selenium.click("link=Articles");
+		selenium.click(RuntimeVariables.replace("link=Articles"));
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {
@@ -534,7 +538,7 @@ public class AddNewSamplePortletDataTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click("link=Return to Full Page");
+		selenium.click(RuntimeVariables.replace("link=Return to Full Page"));
 		selenium.waitForPageToLoad("30000");
 	}
 }

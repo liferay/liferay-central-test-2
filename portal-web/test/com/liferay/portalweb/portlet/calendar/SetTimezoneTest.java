@@ -49,7 +49,7 @@ public class SetTimezoneTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click("link=My Account");
+		selenium.click(RuntimeVariables.replace("link=My Account"));
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {
@@ -87,9 +87,9 @@ public class SetTimezoneTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click("//input[@value='Save']");
+		selenium.click(RuntimeVariables.replace("//input[@value='Save']"));
 		selenium.waitForPageToLoad("30000");
-		selenium.click("link=Return to Full Page");
+		selenium.click(RuntimeVariables.replace("link=Return to Full Page"));
 		selenium.waitForPageToLoad("30000");
 	}
 }

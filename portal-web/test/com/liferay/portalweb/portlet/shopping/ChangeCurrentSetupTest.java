@@ -49,7 +49,7 @@ public class ChangeCurrentSetupTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click("//img[@title='Configuration']");
+		selenium.click(RuntimeVariables.replace("//img[@title='Configuration']"));
 		selenium.waitForPageToLoad("30000");
 		selenium.click("link=Archived");
 
@@ -69,9 +69,9 @@ public class ChangeCurrentSetupTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click("link=Current");
+		selenium.click(RuntimeVariables.replace("link=Current"));
 		selenium.waitForPageToLoad("30000");
-		selenium.click("link=Shipping Calculation");
+		selenium.click(RuntimeVariables.replace("link=Shipping Calculation"));
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {
@@ -94,7 +94,7 @@ public class ChangeCurrentSetupTest extends BaseTestCase {
 			RuntimeVariables.replace("label=Flat Amount"));
 		selenium.type("_86_shipping0", RuntimeVariables.replace("99999"));
 		selenium.type("_86_shipping1", RuntimeVariables.replace("10020"));
-		selenium.click("//input[@value='Save']");
+		selenium.click(RuntimeVariables.replace("//input[@value='Save']"));
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {
@@ -114,9 +114,9 @@ public class ChangeCurrentSetupTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click("link=Return to Full Page");
+		selenium.click(RuntimeVariables.replace("link=Return to Full Page"));
 		selenium.waitForPageToLoad("30000");
-		selenium.click("link=Cart");
+		selenium.click(RuntimeVariables.replace("link=Cart"));
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {
@@ -135,7 +135,7 @@ public class ChangeCurrentSetupTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click("link=Return to Full Page");
+		selenium.click(RuntimeVariables.replace("link=Return to Full Page"));
 		selenium.waitForPageToLoad("30000");
 	}
 }

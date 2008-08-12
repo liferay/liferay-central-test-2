@@ -49,9 +49,10 @@ public class AddSubfolderTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click("link=Test Folder");
+		selenium.click(RuntimeVariables.replace("link=Test Folder"));
 		selenium.waitForPageToLoad("30000");
-		selenium.click("//input[@value='Add Subfolder']");
+		selenium.click(RuntimeVariables.replace(
+				"//input[@value='Add Subfolder']"));
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {
@@ -76,7 +77,7 @@ public class AddSubfolderTest extends BaseTestCase {
 			RuntimeVariables.replace("This is a test subfolder!"));
 		selenium.type("_20_description",
 			RuntimeVariables.replace("This is a test subfolder!"));
-		selenium.click("//input[@value='Save']");
+		selenium.click(RuntimeVariables.replace("//input[@value='Save']"));
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {

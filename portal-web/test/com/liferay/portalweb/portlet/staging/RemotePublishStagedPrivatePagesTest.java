@@ -49,7 +49,7 @@ public class RemotePublishStagedPrivatePagesTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click("link=View Staged Page");
+		selenium.click(RuntimeVariables.replace("link=View Staged Page"));
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {
@@ -68,7 +68,7 @@ public class RemotePublishStagedPrivatePagesTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click("link=Manage Pages");
+		selenium.click(RuntimeVariables.replace("link=Manage Pages"));
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {
@@ -219,7 +219,7 @@ public class RemotePublishStagedPrivatePagesTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click("publishBtn");
+		selenium.click(RuntimeVariables.replace("publishBtn"));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.getConfirmation()
 						   .matches("^Are you sure you want to publish these pages[\\s\\S]$"));

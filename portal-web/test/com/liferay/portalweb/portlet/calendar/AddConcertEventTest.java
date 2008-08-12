@@ -33,7 +33,7 @@ import com.liferay.portalweb.portal.util.RuntimeVariables;
  */
 public class AddConcertEventTest extends BaseTestCase {
 	public void testAddConcertEvent() throws Exception {
-		selenium.click("//input[@value='Add Event']");
+		selenium.click(RuntimeVariables.replace("//input[@value='Add Event']"));
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {
@@ -59,7 +59,7 @@ public class AddConcertEventTest extends BaseTestCase {
 			RuntimeVariables.replace(
 				"I love this band guys! Everyone should see them! I've never seen them before. :("));
 		selenium.select("_8_type", RuntimeVariables.replace("label=Concert"));
-		selenium.click("//input[@value='Save']");
+		selenium.click(RuntimeVariables.replace("//input[@value='Save']"));
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {

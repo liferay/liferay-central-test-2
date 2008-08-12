@@ -49,20 +49,22 @@ public class ApplyUserGroupTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click("link=Assign Members");
+		selenium.click(RuntimeVariables.replace("link=Assign Members"));
 		selenium.waitForPageToLoad("30000");
-		selenium.click("link=Available");
+		selenium.click(RuntimeVariables.replace("link=Available"));
 		selenium.waitForPageToLoad("30000");
 		selenium.typeKeys("toggle_id_enterprise_admin_user_searchkeywords",
 			RuntimeVariables.replace("selenium"));
-		selenium.click("//input[@value='Search Users']");
+		selenium.click(RuntimeVariables.replace(
+				"//input[@value='Search Users']"));
 		selenium.waitForPageToLoad("30000");
 		selenium.click("document._79_fm._79_rowIds[1]");
-		selenium.click("//input[@value='Update Associations']");
+		selenium.click(RuntimeVariables.replace(
+				"//input[@value='Update Associations']"));
 		selenium.waitForPageToLoad("30000");
 		verifyTrue(selenium.isTextPresent(
 				"Your request processed successfully."));
-		selenium.click("link=Return to Full Page");
+		selenium.click(RuntimeVariables.replace("link=Return to Full Page"));
 		selenium.waitForPageToLoad("30000");
 	}
 }

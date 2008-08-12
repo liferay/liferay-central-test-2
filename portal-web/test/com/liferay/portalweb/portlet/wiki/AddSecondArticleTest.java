@@ -49,7 +49,7 @@ public class AddSecondArticleTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click("link=Second Edited Wiki Test");
+		selenium.click(RuntimeVariables.replace("link=Second Edited Wiki Test"));
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {
@@ -69,7 +69,8 @@ public class AddSecondArticleTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click("link=This page is empty. Edit it to add some text.");
+		selenium.click(RuntimeVariables.replace(
+				"link=This page is empty. Edit it to add some text."));
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {
@@ -108,7 +109,7 @@ public class AddSecondArticleTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click("//input[@value='Save']");
+		selenium.click(RuntimeVariables.replace("//input[@value='Save']"));
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {

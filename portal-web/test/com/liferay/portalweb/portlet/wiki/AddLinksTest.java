@@ -49,7 +49,7 @@ public class AddLinksTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click("//h1/div/nobr[1]/a/img");
+		selenium.click(RuntimeVariables.replace("//h1/div/nobr[1]/a/img"));
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {
@@ -88,7 +88,7 @@ public class AddLinksTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click("//input[@value='Save']");
+		selenium.click(RuntimeVariables.replace("//input[@value='Save']"));
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {
@@ -107,7 +107,7 @@ public class AddLinksTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click("link=Link Me 1");
+		selenium.click(RuntimeVariables.replace("link=Link Me 1"));
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {
@@ -126,7 +126,7 @@ public class AddLinksTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click("//h1/div/nobr[1]/a/img");
+		selenium.click(RuntimeVariables.replace("//h1/div/nobr[1]/a/img"));
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {
@@ -165,7 +165,7 @@ public class AddLinksTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click("//input[@value='Save']");
+		selenium.click(RuntimeVariables.replace("//input[@value='Save']"));
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {
@@ -201,7 +201,7 @@ public class AddLinksTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click("link=Link Me 2");
+		selenium.click(RuntimeVariables.replace("link=Link Me 2"));
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {
@@ -220,7 +220,7 @@ public class AddLinksTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click("//h1/div/nobr[1]/a/img");
+		selenium.click(RuntimeVariables.replace("//h1/div/nobr[1]/a/img"));
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {
@@ -259,7 +259,7 @@ public class AddLinksTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click("//input[@value='Save']");
+		selenium.click(RuntimeVariables.replace("//input[@value='Save']"));
 		selenium.waitForPageToLoad("30000");
 	}
 }

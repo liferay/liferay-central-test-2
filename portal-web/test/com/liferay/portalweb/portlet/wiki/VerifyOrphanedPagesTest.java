@@ -23,6 +23,7 @@
 package com.liferay.portalweb.portlet.wiki;
 
 import com.liferay.portalweb.portal.BaseTestCase;
+import com.liferay.portalweb.portal.util.RuntimeVariables;
 
 /**
  * <a href="VerifyOrphanedPagesTest.java.html"><b><i>View Source</i></b></a>
@@ -48,7 +49,7 @@ public class VerifyOrphanedPagesTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click("link=Orphan Pages");
+		selenium.click(RuntimeVariables.replace("link=Orphan Pages"));
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {
@@ -99,7 +100,7 @@ public class VerifyOrphanedPagesTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click("link=FrontPage");
+		selenium.click(RuntimeVariables.replace("link=FrontPage"));
 		selenium.waitForPageToLoad("30000");
 	}
 }

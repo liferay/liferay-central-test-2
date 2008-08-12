@@ -50,7 +50,8 @@ public class SearchItemsTest extends BaseTestCase {
 		}
 
 		selenium.type("_34_keywords1", RuntimeVariables.replace("Jona"));
-		selenium.click("//input[@value='Search Items']");
+		selenium.click(RuntimeVariables.replace(
+				"//input[@value='Search Items']"));
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {
@@ -69,7 +70,7 @@ public class SearchItemsTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click("link=Return to Full Page");
+		selenium.click(RuntimeVariables.replace("link=Return to Full Page"));
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {

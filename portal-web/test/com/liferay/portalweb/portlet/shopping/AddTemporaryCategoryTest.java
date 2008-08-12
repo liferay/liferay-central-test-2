@@ -49,7 +49,8 @@ public class AddTemporaryCategoryTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click("//input[@value='Add Category']");
+		selenium.click(RuntimeVariables.replace(
+				"//input[@value='Add Category']"));
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {
@@ -71,7 +72,7 @@ public class AddTemporaryCategoryTest extends BaseTestCase {
 		selenium.type("_34_name", RuntimeVariables.replace("Horses"));
 		selenium.type("_34_description",
 			RuntimeVariables.replace("Horses for sale here!"));
-		selenium.click("//input[@value='Save']");
+		selenium.click(RuntimeVariables.replace("//input[@value='Save']"));
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {

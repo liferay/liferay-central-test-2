@@ -23,6 +23,7 @@
 package com.liferay.portalweb.portlet.staging;
 
 import com.liferay.portalweb.portal.BaseTestCase;
+import com.liferay.portalweb.portal.util.RuntimeVariables;
 
 /**
  * <a href="ConfirmNoSecondBlogOnStagedTest.java.html"><b><i>View Source</i></b></a>
@@ -48,7 +49,7 @@ public class ConfirmNoSecondBlogOnStagedTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click("link=View Staged Page");
+		selenium.click(RuntimeVariables.replace("link=View Staged Page"));
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {

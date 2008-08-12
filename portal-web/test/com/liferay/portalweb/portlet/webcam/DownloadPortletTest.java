@@ -50,7 +50,8 @@ public class DownloadPortletTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click("//a[@id=\"my-community-private-pages\"]");
+		selenium.click(RuntimeVariables.replace(
+				"//a[@id=\"my-community-private-pages\"]"));
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {
@@ -69,10 +70,11 @@ public class DownloadPortletTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click("link=Plugins");
+		selenium.click(RuntimeVariables.replace("link=Plugins"));
 		selenium.waitForPageToLoad("30000");
 		selenium.type("_111_keywords", RuntimeVariables.replace("webcam"));
-		selenium.click("//input[@value='Search Plugins']");
+		selenium.click(RuntimeVariables.replace(
+				"//input[@value='Search Plugins']"));
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {
@@ -91,9 +93,9 @@ public class DownloadPortletTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click("link=Webcam 5.0.0.1");
+		selenium.click(RuntimeVariables.replace("link=Webcam 5.0.0.1"));
 		selenium.waitForPageToLoad("30000");
-		selenium.click("//input[@value='Install']");
+		selenium.click(RuntimeVariables.replace("//input[@value='Install']"));
 		selenium.waitForPageToLoad("30000");
 		Thread.sleep(20000);
 
@@ -114,7 +116,7 @@ public class DownloadPortletTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click("link=Return to Full Page");
+		selenium.click(RuntimeVariables.replace("link=Return to Full Page"));
 		selenium.waitForPageToLoad("30000");
 	}
 }

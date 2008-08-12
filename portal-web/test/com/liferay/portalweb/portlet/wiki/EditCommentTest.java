@@ -49,7 +49,7 @@ public class EditCommentTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click("link=FrontPage");
+		selenium.click(RuntimeVariables.replace("link=FrontPage"));
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {
@@ -123,7 +123,7 @@ public class EditCommentTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click("_36_updateReplyButton1");
+		selenium.click(RuntimeVariables.replace("_36_updateReplyButton1"));
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {

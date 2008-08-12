@@ -49,7 +49,7 @@ public class AddTemporaryCouponTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click("link=Coupons");
+		selenium.click(RuntimeVariables.replace("link=Coupons"));
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {
@@ -68,7 +68,7 @@ public class AddTemporaryCouponTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click("//input[@value='Add Coupon']");
+		selenium.click(RuntimeVariables.replace("//input[@value='Add Coupon']"));
 		selenium.waitForPageToLoad("30000");
 		selenium.click("_34_autoCodeCheckbox");
 		selenium.type("_34_name", RuntimeVariables.replace("Temporary Coupon"));
@@ -93,7 +93,7 @@ public class AddTemporaryCouponTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click("//input[@value='Save']");
+		selenium.click(RuntimeVariables.replace("//input[@value='Save']"));
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {

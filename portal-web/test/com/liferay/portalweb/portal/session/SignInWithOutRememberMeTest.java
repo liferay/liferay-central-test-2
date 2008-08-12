@@ -49,7 +49,7 @@ public class SignInWithOutRememberMeTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click("link=Sign Out");
+		selenium.click(RuntimeVariables.replace("link=Sign Out"));
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {
@@ -68,11 +68,11 @@ public class SignInWithOutRememberMeTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click("link=Sign In");
+		selenium.click(RuntimeVariables.replace("link=Sign In"));
 		selenium.waitForPageToLoad("30000");
 		selenium.type("login", RuntimeVariables.replace("test@liferay.com"));
 		selenium.type("password", RuntimeVariables.replace("test"));
-		selenium.click("//input[@value='Sign In']");
+		selenium.click(RuntimeVariables.replace("//input[@value='Sign In']"));
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {
@@ -92,7 +92,8 @@ public class SignInWithOutRememberMeTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click("//a[@id=\"my-community-private-pages\"]");
+		selenium.click(RuntimeVariables.replace(
+				"//a[@id=\"my-community-private-pages\"]"));
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {
@@ -112,7 +113,8 @@ public class SignInWithOutRememberMeTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click("link=Session Expiration Test Page");
+		selenium.click(RuntimeVariables.replace(
+				"link=Session Expiration Test Page"));
 		selenium.waitForPageToLoad("30000");
 	}
 }

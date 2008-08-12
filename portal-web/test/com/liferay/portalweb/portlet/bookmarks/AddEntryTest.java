@@ -33,9 +33,9 @@ import com.liferay.portalweb.portal.util.RuntimeVariables;
  */
 public class AddEntryTest extends BaseTestCase {
 	public void testAddEntry() throws Exception {
-		selenium.click("//b");
+		selenium.click(RuntimeVariables.replace("//b"));
 		selenium.waitForPageToLoad("30000");
-		selenium.click("//input[@value='Add Entry']");
+		selenium.click(RuntimeVariables.replace("//input[@value='Add Entry']"));
 		selenium.waitForPageToLoad("30000");
 		selenium.typeKeys("_28_name", RuntimeVariables.replace("Test Bookmark"));
 		selenium.type("_28_url",
@@ -44,7 +44,7 @@ public class AddEntryTest extends BaseTestCase {
 			RuntimeVariables.replace("This is a test bookmark!"));
 		selenium.type("_28_comments",
 			RuntimeVariables.replace("This is a test bookmark!"));
-		selenium.click("//input[@value='Save']");
+		selenium.click(RuntimeVariables.replace("//input[@value='Save']"));
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {

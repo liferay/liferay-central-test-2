@@ -23,6 +23,7 @@
 package com.liferay.portalweb.portlet.documentlibrary;
 
 import com.liferay.portalweb.portal.BaseTestCase;
+import com.liferay.portalweb.portal.util.RuntimeVariables;
 
 /**
  * <a href="GetDocumentsTest.java.html"><b><i>View Source</i></b></a>
@@ -48,7 +49,7 @@ public class GetDocumentsTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click("link=My Documents");
+		selenium.click(RuntimeVariables.replace("link=My Documents"));
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {
@@ -68,7 +69,7 @@ public class GetDocumentsTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click("link=Recent Documents");
+		selenium.click(RuntimeVariables.replace("link=Recent Documents"));
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {
@@ -88,7 +89,7 @@ public class GetDocumentsTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click("link=Return to Full Page");
+		selenium.click(RuntimeVariables.replace("link=Return to Full Page"));
 		selenium.waitForPageToLoad("30000");
 	}
 }

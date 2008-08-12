@@ -23,6 +23,7 @@
 package com.liferay.portalweb.portlet.blogs;
 
 import com.liferay.portalweb.portal.BaseTestCase;
+import com.liferay.portalweb.portal.util.RuntimeVariables;
 
 /**
  * <a href="AddIncorrectEntryTest.java.html"><b><i>View Source</i></b></a>
@@ -118,7 +119,7 @@ public class AddIncorrectEntryTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click("link=\u00ab Back");
+		selenium.click(RuntimeVariables.replace("link=\u00ab Back"));
 		selenium.waitForPageToLoad("30000");
 	}
 }

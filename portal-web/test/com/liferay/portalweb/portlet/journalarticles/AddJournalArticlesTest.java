@@ -33,7 +33,7 @@ import com.liferay.portalweb.portal.util.RuntimeVariables;
  */
 public class AddJournalArticlesTest extends BaseTestCase {
 	public void testAddJournalArticles() throws Exception {
-		selenium.click("//img[@title='Configuration']");
+		selenium.click(RuntimeVariables.replace("//img[@title='Configuration']"));
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {
@@ -72,9 +72,9 @@ public class AddJournalArticlesTest extends BaseTestCase {
 		selenium.select("_86_type", RuntimeVariables.replace("label=Blogs"));
 		selenium.select("_86_pageURL", RuntimeVariables.replace("label=Normal"));
 		selenium.select("_86_pageDelta", RuntimeVariables.replace("label=10"));
-		selenium.click("//input[@value='Save']");
+		selenium.click(RuntimeVariables.replace("//input[@value='Save']"));
 		selenium.waitForPageToLoad("30000");
-		selenium.click("link=Return to Full Page");
+		selenium.click(RuntimeVariables.replace("link=Return to Full Page"));
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {
@@ -94,8 +94,8 @@ public class AddJournalArticlesTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click(
-			"link=Infoworld's BOSSIE awards demonstrate open source's progress");
+		selenium.click(RuntimeVariables.replace(
+				"link=Infoworld's BOSSIE awards demonstrate open source's progress"));
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {

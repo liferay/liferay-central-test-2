@@ -33,19 +33,19 @@ import com.liferay.portalweb.portal.util.RuntimeVariables;
  */
 public class ReserveTest extends BaseTestCase {
 	public void testReserve() throws Exception {
-		selenium.click("link=\u00bb");
+		selenium.click(RuntimeVariables.replace("link=\u00bb"));
 		selenium.waitForPageToLoad("30000");
-		selenium.click("link=Settings");
+		selenium.click(RuntimeVariables.replace("link=Settings"));
 		selenium.waitForPageToLoad("30000");
-		selenium.click("link=Reserved Screen Names");
+		selenium.click(RuntimeVariables.replace("link=Reserved Screen Names"));
 		selenium.waitForPageToLoad("30000");
 		selenium.type("_79_reservedScreenNames",
 			RuntimeVariables.replace("reserve"));
 		selenium.type("_79_reservedEmailAddresses",
 			RuntimeVariables.replace("reserve@reserved.com"));
-		selenium.click("//input[@value='Save']");
+		selenium.click(RuntimeVariables.replace("//input[@value='Save']"));
 		selenium.waitForPageToLoad("30000");
-		selenium.click("link=Return to Full Page");
+		selenium.click(RuntimeVariables.replace("link=Return to Full Page"));
 		selenium.waitForPageToLoad("30000");
 	}
 }

@@ -33,7 +33,7 @@ import com.liferay.portalweb.portal.util.RuntimeVariables;
  */
 public class MoveThreadTest extends BaseTestCase {
 	public void testMoveThread() throws Exception {
-		selenium.click("link=Move Thread");
+		selenium.click(RuntimeVariables.replace("link=Move Thread"));
 		selenium.waitForPageToLoad("30000");
 		selenium.click("//input[@value='Select']");
 		selenium.waitForPopUp("category", RuntimeVariables.replace("30000"));
@@ -106,7 +106,7 @@ public class MoveThreadTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click("//input[@value='Move Thread']");
+		selenium.click(RuntimeVariables.replace("//input[@value='Move Thread']"));
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {
@@ -142,7 +142,7 @@ public class MoveThreadTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click("link=Move Thread");
+		selenium.click(RuntimeVariables.replace("link=Move Thread"));
 		selenium.waitForPageToLoad("30000");
 		selenium.click("//input[@value='Select']");
 		selenium.waitForPopUp("category", RuntimeVariables.replace("30000"));
@@ -194,7 +194,7 @@ public class MoveThreadTest extends BaseTestCase {
 		selenium.type("_19_textArea",
 			RuntimeVariables.replace(
 				"This thr\u00e9ad has b\u00e9\u00e9n mov\u00e9d back!"));
-		selenium.click("//input[@value='Move Thread']");
+		selenium.click(RuntimeVariables.replace("//input[@value='Move Thread']"));
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {

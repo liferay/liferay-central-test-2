@@ -23,6 +23,7 @@
 package com.liferay.portalweb.portlet.wsrpproxy;
 
 import com.liferay.portalweb.portal.BaseTestCase;
+import com.liferay.portalweb.portal.util.RuntimeVariables;
 
 /**
  * <a href="VerifyTest.java.html"><b><i>View Source</i></b></a>
@@ -32,9 +33,9 @@ import com.liferay.portalweb.portal.BaseTestCase;
  */
 public class VerifyTest extends BaseTestCase {
 	public void testVerify() throws Exception {
-		selenium.click("left");
+		selenium.click(RuntimeVariables.replace("left"));
 		selenium.waitForPageToLoad("30000");
-		selenium.click("right");
+		selenium.click(RuntimeVariables.replace("right"));
 		selenium.waitForPageToLoad("30000");
 		verifyTrue(selenium.isTextPresent("Press a button to alter the chart"));
 	}

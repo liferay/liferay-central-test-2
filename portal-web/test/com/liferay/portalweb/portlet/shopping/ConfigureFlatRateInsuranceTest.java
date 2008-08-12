@@ -49,7 +49,7 @@ public class ConfigureFlatRateInsuranceTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click("//img[@title='Configuration']");
+		selenium.click(RuntimeVariables.replace("//img[@title='Configuration']"));
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {
@@ -68,7 +68,7 @@ public class ConfigureFlatRateInsuranceTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click("link=Insurance Calculation");
+		selenium.click(RuntimeVariables.replace("link=Insurance Calculation"));
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {
@@ -92,7 +92,7 @@ public class ConfigureFlatRateInsuranceTest extends BaseTestCase {
 		selenium.type("_86_insurance2", RuntimeVariables.replace("5.00"));
 		selenium.type("_86_insurance3", RuntimeVariables.replace("10.00"));
 		selenium.type("_86_insurance4", RuntimeVariables.replace("20.00"));
-		selenium.click("//input[@value='Save']");
+		selenium.click(RuntimeVariables.replace("//input[@value='Save']"));
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {
@@ -112,7 +112,7 @@ public class ConfigureFlatRateInsuranceTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click("link=Return to Full Page");
+		selenium.click(RuntimeVariables.replace("link=Return to Full Page"));
 		selenium.waitForPageToLoad("30000");
 	}
 }

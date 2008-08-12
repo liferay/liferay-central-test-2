@@ -50,8 +50,8 @@ public class AddThirdReplyMessageTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click(
-			"//div[6]/table/tbody/tr[1]/td[2]/div[1]/ul/li[1]/nobr/a[2]");
+		selenium.click(RuntimeVariables.replace(
+				"//div[6]/table/tbody/tr[1]/td[2]/div[1]/ul/li[1]/nobr/a[2]"));
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {
@@ -74,7 +74,7 @@ public class AddThirdReplyMessageTest extends BaseTestCase {
 			RuntimeVariables.replace("This is a third repl message."));
 		selenium.type("_19_textArea",
 			RuntimeVariables.replace("This is a third reply message."));
-		selenium.click("//input[@value='Save']");
+		selenium.click(RuntimeVariables.replace("//input[@value='Save']"));
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {

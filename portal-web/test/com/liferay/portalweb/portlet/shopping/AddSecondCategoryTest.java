@@ -49,7 +49,8 @@ public class AddSecondCategoryTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click("//input[@value='Add Category']");
+		selenium.click(RuntimeVariables.replace(
+				"//input[@value='Add Category']"));
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {
@@ -72,7 +73,7 @@ public class AddSecondCategoryTest extends BaseTestCase {
 		selenium.type("_34_description",
 			RuntimeVariables.replace(
 				"VHS, DVD, BETA, LaserDisc, Bluray, HD-DVD. All in stock! All the time!"));
-		selenium.click("//input[@value='Save']");
+		selenium.click(RuntimeVariables.replace("//input[@value='Save']"));
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {

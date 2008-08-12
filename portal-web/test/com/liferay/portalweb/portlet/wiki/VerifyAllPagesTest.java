@@ -23,6 +23,7 @@
 package com.liferay.portalweb.portlet.wiki;
 
 import com.liferay.portalweb.portal.BaseTestCase;
+import com.liferay.portalweb.portal.util.RuntimeVariables;
 
 /**
  * <a href="VerifyAllPagesTest.java.html"><b><i>View Source</i></b></a>
@@ -48,7 +49,7 @@ public class VerifyAllPagesTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click("link=All Pages");
+		selenium.click(RuntimeVariables.replace("link=All Pages"));
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {
@@ -115,7 +116,7 @@ public class VerifyAllPagesTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click("link=Second Edited Wiki Test");
+		selenium.click(RuntimeVariables.replace("link=Second Edited Wiki Test"));
 		selenium.waitForPageToLoad("30000");
 	}
 }

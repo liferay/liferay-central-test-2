@@ -69,7 +69,7 @@ public class EditSecondCommentTest extends BaseTestCase {
 
 		selenium.type("_33_editBody1",
 			RuntimeVariables.replace("This is an edited second entry comment!"));
-		selenium.click("_33_updateReplyButton1");
+		selenium.click(RuntimeVariables.replace("_33_updateReplyButton1"));
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {

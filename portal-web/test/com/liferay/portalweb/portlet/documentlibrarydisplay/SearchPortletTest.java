@@ -52,7 +52,8 @@ public class SearchPortletTest extends BaseTestCase {
 
 		selenium.type("//div[@class=\"portlet-content-container\"]/div[1]/form[1]/div[1]/input[1]",
 			RuntimeVariables.replace("test"));
-		selenium.click("//input[@value='Search File Entries']");
+		selenium.click(RuntimeVariables.replace(
+				"//input[@value='Search File Entries']"));
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {
@@ -71,7 +72,7 @@ public class SearchPortletTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click("link=Return to Full Page");
+		selenium.click(RuntimeVariables.replace("link=Return to Full Page"));
 		selenium.waitForPageToLoad("30000");
 	}
 }

@@ -33,27 +33,30 @@ import com.liferay.portalweb.portal.util.RuntimeVariables;
  */
 public class PluginUpdateTest extends BaseTestCase {
 	public void testPluginUpdate() throws Exception {
-		selenium.click("link=Plugin Installer Test Page");
+		selenium.click(RuntimeVariables.replace(
+				"link=Plugin Installer Test Page"));
 		selenium.waitForPageToLoad("30000");
 		selenium.type("_111_keywords", RuntimeVariables.replace("google"));
-		selenium.click("//input[@value='Search Plugins']");
+		selenium.click(RuntimeVariables.replace(
+				"//input[@value='Search Plugins']"));
 		selenium.waitForPageToLoad("30000");
-		selenium.click("link=Google Gadget 4.4.0.1");
+		selenium.click(RuntimeVariables.replace("link=Google Gadget 4.4.0.1"));
 		selenium.waitForPageToLoad("30000");
-		selenium.click("//input[@value='Install']");
+		selenium.click(RuntimeVariables.replace("//input[@value='Install']"));
 		selenium.waitForPageToLoad("30000");
 		Thread.sleep(10000);
 		verifyTrue(selenium.isTextPresent(
 				"Your request processed successfully."));
-		selenium.click("link=Return to Full Page");
+		selenium.click(RuntimeVariables.replace("link=Return to Full Page"));
 		selenium.waitForPageToLoad("30000");
-		selenium.click("//input[@value='Refresh']");
+		selenium.click(RuntimeVariables.replace("//input[@value='Refresh']"));
 		selenium.waitForPageToLoad("30000");
-		selenium.click("//input[@value='Refresh']");
+		selenium.click(RuntimeVariables.replace("//input[@value='Refresh']"));
 		selenium.waitForPageToLoad("30000");
-		selenium.click("link=Plugins");
+		selenium.click(RuntimeVariables.replace("link=Plugins"));
 		selenium.waitForPageToLoad("30000");
-		selenium.click("link=Plugin Installer Test Page");
+		selenium.click(RuntimeVariables.replace(
+				"link=Plugin Installer Test Page"));
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {
@@ -73,16 +76,17 @@ public class PluginUpdateTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click(
-			"link=Updates are available for Liferay. Click here to open the Update Manager for details.");
+		selenium.click(RuntimeVariables.replace(
+				"link=Updates are available for Liferay. Click here to open the Update Manager for details."));
 		selenium.waitForPageToLoad("30000");
 		verifyTrue(selenium.isTextPresent("Update"));
-		selenium.click("Link=Update");
+		selenium.click(RuntimeVariables.replace("Link=Update"));
 		selenium.waitForPageToLoad("30000");
 		Thread.sleep(10000);
-		selenium.click("//input[@value='Refresh']");
+		selenium.click(RuntimeVariables.replace("//input[@value='Refresh']"));
 		selenium.waitForPageToLoad("30000");
-		selenium.click("link=Plugin Installer Test Page");
+		selenium.click(RuntimeVariables.replace(
+				"link=Plugin Installer Test Page"));
 		selenium.waitForPageToLoad("30000");
 		verifyFalse(selenium.isTextPresent(
 				"Updates are available for Liferay. Click here to open the Update Manager for details."));

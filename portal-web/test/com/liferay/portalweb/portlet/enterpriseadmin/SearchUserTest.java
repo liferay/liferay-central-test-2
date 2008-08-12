@@ -35,7 +35,8 @@ public class SearchUserTest extends BaseTestCase {
 	public void testSearchUser() throws Exception {
 		selenium.type("toggle_id_enterprise_admin_user_searchkeywords",
 			RuntimeVariables.replace("selenium"));
-		selenium.click("//input[@value='Search Users']");
+		selenium.click(RuntimeVariables.replace(
+				"//input[@value='Search Users']"));
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {
@@ -86,7 +87,7 @@ public class SearchUserTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click("link=Return to Full Page");
+		selenium.click(RuntimeVariables.replace("link=Return to Full Page"));
 		selenium.waitForPageToLoad("30000");
 	}
 }

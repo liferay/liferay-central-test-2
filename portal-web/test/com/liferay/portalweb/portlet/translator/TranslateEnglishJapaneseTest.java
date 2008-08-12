@@ -38,7 +38,7 @@ public class TranslateEnglishJapaneseTest extends BaseTestCase {
 		selenium.type("_26_text",
 			RuntimeVariables.replace(
 				"My name is JR Skywalker, fluent in over 6 million forms of communication."));
-		selenium.click("//input[@value='Translate']");
+		selenium.click(RuntimeVariables.replace("//input[@value='Translate']"));
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {

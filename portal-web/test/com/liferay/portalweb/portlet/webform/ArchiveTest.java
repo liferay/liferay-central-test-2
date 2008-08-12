@@ -33,12 +33,12 @@ import com.liferay.portalweb.portal.util.RuntimeVariables;
  */
 public class ArchiveTest extends BaseTestCase {
 	public void testArchive() throws Exception {
-		selenium.click("//img[@title='Configuration']");
+		selenium.click(RuntimeVariables.replace("//img[@title='Configuration']"));
 		selenium.waitForPageToLoad("30000");
-		selenium.click("link=Archived");
+		selenium.click(RuntimeVariables.replace("link=Archived"));
 		selenium.waitForPageToLoad("30000");
 		selenium.type("_86_name", RuntimeVariables.replace("test archive"));
-		selenium.click("//input[@value='Save']");
+		selenium.click(RuntimeVariables.replace("//input[@value='Save']"));
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {
@@ -57,7 +57,7 @@ public class ArchiveTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click("link=Return to Full Page");
+		selenium.click(RuntimeVariables.replace("link=Return to Full Page"));
 		selenium.waitForPageToLoad("30000");
 	}
 }

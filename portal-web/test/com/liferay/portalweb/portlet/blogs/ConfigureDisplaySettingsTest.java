@@ -50,7 +50,7 @@ public class ConfigureDisplaySettingsTest extends BaseTestCase {
 		}
 
 		assertTrue(selenium.isElementPresent("link=Test Entry"));
-		selenium.click("//img[@alt='Configuration']");
+		selenium.click(RuntimeVariables.replace("//img[@alt='Configuration']"));
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {
@@ -71,7 +71,7 @@ public class ConfigureDisplaySettingsTest extends BaseTestCase {
 
 		selenium.select("_86_pageDisplayStyle",
 			RuntimeVariables.replace("label=Title"));
-		selenium.click("//input[@value='Save']");
+		selenium.click(RuntimeVariables.replace("//input[@value='Save']"));
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {
@@ -91,7 +91,7 @@ public class ConfigureDisplaySettingsTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click("link=Return to Full Page");
+		selenium.click(RuntimeVariables.replace("link=Return to Full Page"));
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {

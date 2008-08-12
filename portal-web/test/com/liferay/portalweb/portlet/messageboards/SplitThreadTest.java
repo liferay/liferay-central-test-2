@@ -23,6 +23,7 @@
 package com.liferay.portalweb.portlet.messageboards;
 
 import com.liferay.portalweb.portal.BaseTestCase;
+import com.liferay.portalweb.portal.util.RuntimeVariables;
 
 /**
  * <a href="SplitThreadTest.java.html"><b><i>View Source</i></b></a>
@@ -48,7 +49,7 @@ public class SplitThreadTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click("link=Split Thread");
+		selenium.click(RuntimeVariables.replace("link=Split Thread"));
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {
@@ -68,7 +69,7 @@ public class SplitThreadTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click("//input[@value='OK']");
+		selenium.click(RuntimeVariables.replace("//input[@value='OK']"));
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {
@@ -153,7 +154,8 @@ public class SplitThreadTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click("link=T\u00e9st Subcat\u00e9gory");
+		selenium.click(RuntimeVariables.replace(
+				"link=T\u00e9st Subcat\u00e9gory"));
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {

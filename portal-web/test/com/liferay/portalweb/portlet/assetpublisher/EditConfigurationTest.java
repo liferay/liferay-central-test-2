@@ -23,6 +23,7 @@
 package com.liferay.portalweb.portlet.assetpublisher;
 
 import com.liferay.portalweb.portal.BaseTestCase;
+import com.liferay.portalweb.portal.util.RuntimeVariables;
 
 /**
  * <a href="EditConfigurationTest.java.html"><b><i>View Source</i></b></a>
@@ -32,7 +33,7 @@ import com.liferay.portalweb.portal.BaseTestCase;
  */
 public class EditConfigurationTest extends BaseTestCase {
 	public void testEditConfiguration() throws Exception {
-		selenium.click("//img[@title='Configuration']");
+		selenium.click(RuntimeVariables.replace("//img[@title='Configuration']"));
 		selenium.waitForPageToLoad("30000");
 		selenium.select("_86_selectionStyle", "label=Manual");
 		selenium.waitForPageToLoad("30000");
@@ -55,9 +56,9 @@ public class EditConfigurationTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click("link=Test Entry");
+		selenium.click(RuntimeVariables.replace("link=Test Entry"));
 		selenium.waitForPageToLoad("30000");
-		selenium.click("link=Return to Full Page");
+		selenium.click(RuntimeVariables.replace("link=Return to Full Page"));
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {

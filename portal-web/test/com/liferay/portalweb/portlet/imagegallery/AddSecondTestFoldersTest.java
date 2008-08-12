@@ -49,9 +49,9 @@ public class AddSecondTestFoldersTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click("link=Return to Full Page");
+		selenium.click(RuntimeVariables.replace("link=Return to Full Page"));
 		selenium.waitForPageToLoad("30000");
-		selenium.click("//input[@value='Add Folder']");
+		selenium.click(RuntimeVariables.replace("//input[@value='Add Folder']"));
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {
@@ -73,7 +73,7 @@ public class AddSecondTestFoldersTest extends BaseTestCase {
 		selenium.type("_31_name", RuntimeVariables.replace("Test Folder 2"));
 		selenium.type("_31_description",
 			RuntimeVariables.replace("This is a second test folder."));
-		selenium.click("//input[@value='Save']");
+		selenium.click(RuntimeVariables.replace("//input[@value='Save']"));
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {
@@ -93,10 +93,11 @@ public class AddSecondTestFoldersTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click(
-			"//div[@id='portlet-wrapper-31']/div[2]/div/div/form/div[3]/table/tbody/tr[3]/td[1]/a/b");
+		selenium.click(RuntimeVariables.replace(
+				"//div[@id='portlet-wrapper-31']/div[2]/div/div/form/div[3]/table/tbody/tr[3]/td[1]/a/b"));
 		selenium.waitForPageToLoad("30000");
-		selenium.click("//input[@value='Add Subfolder']");
+		selenium.click(RuntimeVariables.replace(
+				"//input[@value='Add Subfolder']"));
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {
@@ -118,7 +119,7 @@ public class AddSecondTestFoldersTest extends BaseTestCase {
 		selenium.type("_31_name", RuntimeVariables.replace("Test Subfolder 2"));
 		selenium.type("_31_description",
 			RuntimeVariables.replace("This is a second test subfolder."));
-		selenium.click("//input[@value='Save']");
+		selenium.click(RuntimeVariables.replace("//input[@value='Save']"));
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {
@@ -138,7 +139,7 @@ public class AddSecondTestFoldersTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click("link=Return to Full Page");
+		selenium.click(RuntimeVariables.replace("link=Return to Full Page"));
 		selenium.waitForPageToLoad("30000");
 	}
 }

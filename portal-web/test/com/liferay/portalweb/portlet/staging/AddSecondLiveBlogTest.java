@@ -49,7 +49,7 @@ public class AddSecondLiveBlogTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click("link=View Live Page");
+		selenium.click(RuntimeVariables.replace("link=View Live Page"));
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {
@@ -166,7 +166,7 @@ public class AddSecondLiveBlogTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click("_33_saveButton");
+		selenium.click(RuntimeVariables.replace("_33_saveButton"));
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {

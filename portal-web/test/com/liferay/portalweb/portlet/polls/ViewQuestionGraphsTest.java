@@ -33,7 +33,7 @@ import com.liferay.portalweb.portal.util.RuntimeVariables;
  */
 public class ViewQuestionGraphsTest extends BaseTestCase {
 	public void testViewQuestionGraphs() throws Exception {
-		selenium.click("link=Test Poll Question");
+		selenium.click(RuntimeVariables.replace("link=Test Poll Question"));
 		selenium.waitForPageToLoad("30000");
 		selenium.click("link=Area");
 		selenium.waitForPopUp("viewChart", RuntimeVariables.replace("30000"));
@@ -128,7 +128,7 @@ public class ViewQuestionGraphsTest extends BaseTestCase {
 		selenium.selectWindow("viewChartWindow");
 		selenium.close();
 		selenium.selectWindow("null");
-		selenium.click("link=Return to Full Page");
+		selenium.click(RuntimeVariables.replace("link=Return to Full Page"));
 		selenium.waitForPageToLoad("30000");
 	}
 }

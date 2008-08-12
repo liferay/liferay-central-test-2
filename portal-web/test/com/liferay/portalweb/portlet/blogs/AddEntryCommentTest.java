@@ -33,7 +33,7 @@ import com.liferay.portalweb.portal.util.RuntimeVariables;
  */
 public class AddEntryCommentTest extends BaseTestCase {
 	public void testAddEntryComment() throws Exception {
-		selenium.click("link=0 Comments");
+		selenium.click(RuntimeVariables.replace("link=0 Comments"));
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {
@@ -74,7 +74,7 @@ public class AddEntryCommentTest extends BaseTestCase {
 			RuntimeVariables.replace("This is a test entr comment!"));
 		selenium.type("_33_postReplyBody0",
 			RuntimeVariables.replace("This is a test entry comment!"));
-		selenium.click("_33_postReplyButton0");
+		selenium.click(RuntimeVariables.replace("_33_postReplyButton0"));
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {

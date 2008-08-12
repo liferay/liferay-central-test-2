@@ -149,7 +149,7 @@ public class AddThirdStagedBlogTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click("_33_saveButton");
+		selenium.click(RuntimeVariables.replace("_33_saveButton"));
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {

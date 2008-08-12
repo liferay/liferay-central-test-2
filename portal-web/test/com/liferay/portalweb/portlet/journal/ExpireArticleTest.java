@@ -23,6 +23,7 @@
 package com.liferay.portalweb.portlet.journal;
 
 import com.liferay.portalweb.portal.BaseTestCase;
+import com.liferay.portalweb.portal.util.RuntimeVariables;
 
 /**
  * <a href="ExpireArticleTest.java.html"><b><i>View Source</i></b></a>
@@ -48,7 +49,7 @@ public class ExpireArticleTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click("link=Articles");
+		selenium.click(RuntimeVariables.replace("link=Articles"));
 		selenium.waitForPageToLoad("30000");
 		selenium.click("link=1.1");
 		Thread.sleep(5000);

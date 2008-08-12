@@ -177,7 +177,7 @@ public class AddDraftEntryTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click("link=Blogs Test Page");
+		selenium.click(RuntimeVariables.replace("link=Blogs Test Page"));
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {

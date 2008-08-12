@@ -23,6 +23,7 @@
 package com.liferay.portalweb.portlet.messageboards;
 
 import com.liferay.portalweb.portal.BaseTestCase;
+import com.liferay.portalweb.portal.util.RuntimeVariables;
 
 /**
  * <a href="DeleteThreadTest.java.html"><b><i>View Source</i></b></a>
@@ -49,7 +50,8 @@ public class DeleteThreadTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click("link=S\u00e9cond T\u00e9st Subcat\u00e9gory");
+		selenium.click(RuntimeVariables.replace(
+				"link=S\u00e9cond T\u00e9st Subcat\u00e9gory"));
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {
@@ -85,7 +87,7 @@ public class DeleteThreadTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click("link=Delete");
+		selenium.click(RuntimeVariables.replace("link=Delete"));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.getConfirmation()
 						   .matches("^Are you sure you want to delete this[\\s\\S]$"));

@@ -49,11 +49,11 @@ public class UploadLARFileTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click("//img[@alt='Configuration']");
+		selenium.click(RuntimeVariables.replace("//img[@alt='Configuration']"));
 		selenium.waitForPageToLoad("30000");
-		selenium.click("link=Export / Import");
+		selenium.click(RuntimeVariables.replace("link=Export / Import"));
 		selenium.waitForPageToLoad("30000");
-		selenium.click("link=Import");
+		selenium.click(RuntimeVariables.replace("link=Import"));
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {
@@ -92,7 +92,7 @@ public class UploadLARFileTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click("//input[@value='Import']");
+		selenium.click(RuntimeVariables.replace("//input[@value='Import']"));
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {
@@ -112,7 +112,7 @@ public class UploadLARFileTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click("link=Return to Full Page");
+		selenium.click(RuntimeVariables.replace("link=Return to Full Page"));
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {

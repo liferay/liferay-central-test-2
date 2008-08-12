@@ -33,9 +33,9 @@ import com.liferay.portalweb.portal.util.RuntimeVariables;
  */
 public class AddImageTest extends BaseTestCase {
 	public void testAddImage() throws Exception {
-		selenium.click("//b");
+		selenium.click(RuntimeVariables.replace("//b"));
 		selenium.waitForPageToLoad("30000");
-		selenium.click("//input[@value='Add Image']");
+		selenium.click(RuntimeVariables.replace("//input[@value='Add Image']"));
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {
@@ -112,7 +112,7 @@ public class AddImageTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click("//input[@value='Save']");
+		selenium.click(RuntimeVariables.replace("//input[@value='Save']"));
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {

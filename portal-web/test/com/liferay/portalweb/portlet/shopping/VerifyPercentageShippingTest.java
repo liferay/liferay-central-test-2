@@ -49,7 +49,7 @@ public class VerifyPercentageShippingTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click("link=Cart");
+		selenium.click(RuntimeVariables.replace("link=Cart"));
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {
@@ -68,14 +68,14 @@ public class VerifyPercentageShippingTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click("//input[@value='Checkout']");
+		selenium.click(RuntimeVariables.replace("//input[@value='Checkout']"));
 		selenium.waitForPageToLoad("30000");
 		selenium.select("_34_ccType", RuntimeVariables.replace("label=Visa"));
 		selenium.type("_34_ccNumber",
 			RuntimeVariables.replace("4111111111111111"));
 		selenium.select("_34_ccExpYear", RuntimeVariables.replace("label=2011"));
 		selenium.type("_34_ccVerNumber", RuntimeVariables.replace("526"));
-		selenium.click("//input[@value='Continue']");
+		selenium.click(RuntimeVariables.replace("//input[@value='Continue']"));
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {
@@ -110,7 +110,7 @@ public class VerifyPercentageShippingTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click("link=Return to Full Page");
+		selenium.click(RuntimeVariables.replace("link=Return to Full Page"));
 		selenium.waitForPageToLoad("30000");
 	}
 }

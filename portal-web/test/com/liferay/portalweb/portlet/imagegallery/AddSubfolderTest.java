@@ -33,16 +33,17 @@ import com.liferay.portalweb.portal.util.RuntimeVariables;
  */
 public class AddSubfolderTest extends BaseTestCase {
 	public void testAddSubfolder() throws Exception {
-		selenium.click("//b");
+		selenium.click(RuntimeVariables.replace("//b"));
 		selenium.waitForPageToLoad("30000");
-		selenium.click("//input[@value='Add Subfolder']");
+		selenium.click(RuntimeVariables.replace(
+				"//input[@value='Add Subfolder']"));
 		selenium.waitForPageToLoad("30000");
 		selenium.type("_31_name", RuntimeVariables.replace("Test Subfolder"));
 		selenium.typeKeys("_31_description",
 			RuntimeVariables.replace("This is a test subfolder!"));
 		selenium.type("_31_description",
 			RuntimeVariables.replace("This is a test subfolder!"));
-		selenium.click("//input[@value='Save']");
+		selenium.click(RuntimeVariables.replace("//input[@value='Save']"));
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {

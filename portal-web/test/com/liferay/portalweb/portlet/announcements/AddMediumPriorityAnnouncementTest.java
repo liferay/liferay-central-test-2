@@ -49,20 +49,20 @@ public class AddMediumPriorityAnnouncementTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click("link=Manage Entries");
+		selenium.click(RuntimeVariables.replace("link=Manage Entries"));
 		selenium.waitForPageToLoad("30000");
 		selenium.select("_84_distributionScope", "label=General");
 		selenium.waitForPageToLoad("30000");
-		selenium.click("//input[@value='Add Entry']");
+		selenium.click(RuntimeVariables.replace("//input[@value='Add Entry']"));
 		selenium.waitForPageToLoad("30000");
 		selenium.type("_84_title",
 			RuntimeVariables.replace("Medium Priority Announcement"));
 		selenium.type("_84_url", RuntimeVariables.replace("www.Liferay.com"));
 		selenium.type("_84_content",
 			RuntimeVariables.replace("This is a medium priority announcement!"));
-		selenium.click("//input[@value='Save']");
+		selenium.click(RuntimeVariables.replace("//input[@value='Save']"));
 		selenium.waitForPageToLoad("30000");
-		selenium.click("link=Entries");
+		selenium.click(RuntimeVariables.replace("link=Entries"));
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {

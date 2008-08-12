@@ -49,7 +49,7 @@ public class VerifyStagedRemotePublishingTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click("link=Sign Out");
+		selenium.click(RuntimeVariables.replace("link=Sign Out"));
 		selenium.waitForPageToLoad("30000");
 		selenium.open("http://5.227.126.113:8080/web/guest/home");
 
@@ -71,7 +71,7 @@ public class VerifyStagedRemotePublishingTest extends BaseTestCase {
 
 		selenium.type("_58_login", RuntimeVariables.replace("test@liferay.com"));
 		selenium.type("_58_password", RuntimeVariables.replace("test"));
-		selenium.click("//input[@value='Sign In']");
+		selenium.click(RuntimeVariables.replace("//input[@value='Sign In']"));
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {
@@ -91,8 +91,8 @@ public class VerifyStagedRemotePublishingTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click(
-			"//div[@id='banner']/div/div/ul/li[8]/ul/li[5]/ul/li[1]/a[1]");
+		selenium.click(RuntimeVariables.replace(
+				"//div[@id='banner']/div/div/ul/li[8]/ul/li[5]/ul/li[1]/a[1]"));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isElementPresent("link=Test Entry"));
 		assertTrue(selenium.isElementPresent("link=Second Test Entry"));

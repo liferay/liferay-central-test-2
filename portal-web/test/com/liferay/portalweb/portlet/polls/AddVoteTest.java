@@ -23,6 +23,7 @@
 package com.liferay.portalweb.portlet.polls;
 
 import com.liferay.portalweb.portal.BaseTestCase;
+import com.liferay.portalweb.portal.util.RuntimeVariables;
 
 /**
  * <a href="AddVoteTest.java.html"><b><i>View Source</i></b></a>
@@ -32,13 +33,13 @@ import com.liferay.portalweb.portal.BaseTestCase;
  */
 public class AddVoteTest extends BaseTestCase {
 	public void testAddVote() throws Exception {
-		selenium.click("link=Test Poll Question");
+		selenium.click(RuntimeVariables.replace("link=Test Poll Question"));
 		selenium.waitForPageToLoad("30000");
 		selenium.click("document._25_fm._25_choiceId[2]");
-		selenium.click("//input[@value='Vote']");
+		selenium.click(RuntimeVariables.replace("//input[@value='Vote']"));
 		selenium.waitForPageToLoad("30000");
 		verifyTrue(selenium.isTextPresent("100%"));
-		selenium.click("link=Return to Full Page");
+		selenium.click(RuntimeVariables.replace("link=Return to Full Page"));
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {

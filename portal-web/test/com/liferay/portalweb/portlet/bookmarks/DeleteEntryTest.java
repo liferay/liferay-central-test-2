@@ -23,6 +23,7 @@
 package com.liferay.portalweb.portlet.bookmarks;
 
 import com.liferay.portalweb.portal.BaseTestCase;
+import com.liferay.portalweb.portal.util.RuntimeVariables;
 
 /**
  * <a href="DeleteEntryTest.java.html"><b><i>View Source</i></b></a>
@@ -32,7 +33,7 @@ import com.liferay.portalweb.portal.BaseTestCase;
  */
 public class DeleteEntryTest extends BaseTestCase {
 	public void testDeleteEntry() throws Exception {
-		selenium.click("link=Test Folder");
+		selenium.click(RuntimeVariables.replace("link=Test Folder"));
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {

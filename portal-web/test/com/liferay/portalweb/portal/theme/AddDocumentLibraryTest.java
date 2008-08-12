@@ -72,23 +72,25 @@ public class AddDocumentLibraryTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click("//input[@value='Add Folder']");
+		selenium.click(RuntimeVariables.replace("//input[@value='Add Folder']"));
 		selenium.waitForPageToLoad("30000");
 		selenium.type("_20_name", RuntimeVariables.replace("Theme Testing"));
 		selenium.type("_20_description",
 			RuntimeVariables.replace("Screengrab Me!"));
-		selenium.click("//input[@value='Save']");
+		selenium.click(RuntimeVariables.replace("//input[@value='Save']"));
 		selenium.waitForPageToLoad("30000");
-		selenium.click("link=Theme Testing");
+		selenium.click(RuntimeVariables.replace("link=Theme Testing"));
 		selenium.waitForPageToLoad("30000");
-		selenium.click("//input[@value='Add Document']");
+		selenium.click(RuntimeVariables.replace(
+				"//input[@value='Add Document']"));
 		selenium.waitForPageToLoad("30000");
 		selenium.click("link=Use the classic uploader.");
-		FileUtil.mkdirs(
-			"L:\\portal\\build\\portal-web\\test-output\\brochure\\");
-		selenium.captureEntirePageScreenshot("L:\\portal\\build\\portal-web\\test-output\\brochure\\AddDocumentLibraryTest.jpg",
+		FileUtil.mkdirs(RuntimeVariables.replace(
+				"L:\\portal\\build\\portal-web\\test-output\\brochure\\"));
+		selenium.captureEntirePageScreenshot(RuntimeVariables.replace(
+				"L:\\portal\\build\\portal-web\\test-output\\brochure\\AddDocumentLibraryTest.jpg"),
 			"");
-		selenium.click("link=Return to Full Page");
+		selenium.click(RuntimeVariables.replace("link=Return to Full Page"));
 		selenium.waitForPageToLoad("30000");
 	}
 }

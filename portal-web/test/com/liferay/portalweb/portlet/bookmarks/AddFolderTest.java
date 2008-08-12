@@ -33,7 +33,7 @@ import com.liferay.portalweb.portal.util.RuntimeVariables;
  */
 public class AddFolderTest extends BaseTestCase {
 	public void testAddFolder() throws Exception {
-		selenium.click("//input[@value='Add Folder']");
+		selenium.click(RuntimeVariables.replace("//input[@value='Add Folder']"));
 		selenium.waitForPageToLoad("30000");
 		selenium.typeKeys("_28_name", RuntimeVariables.replace("Test Folder"));
 		selenium.type("_28_name", RuntimeVariables.replace("Test Folder"));
@@ -41,7 +41,7 @@ public class AddFolderTest extends BaseTestCase {
 			RuntimeVariables.replace("This is a test folder!"));
 		selenium.type("_28_description",
 			RuntimeVariables.replace("This is a test folder!"));
-		selenium.click("//input[@value='Save']");
+		selenium.click(RuntimeVariables.replace("//input[@value='Save']"));
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {

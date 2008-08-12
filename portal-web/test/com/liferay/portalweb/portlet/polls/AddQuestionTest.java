@@ -33,7 +33,8 @@ import com.liferay.portalweb.portal.util.RuntimeVariables;
  */
 public class AddQuestionTest extends BaseTestCase {
 	public void testAddQuestion() throws Exception {
-		selenium.click("//input[@value='Add Question']");
+		selenium.click(RuntimeVariables.replace(
+				"//input[@value='Add Question']"));
 		selenium.waitForPageToLoad("30000");
 		selenium.typeKeys("_25_title",
 			RuntimeVariables.replace("Test Poll Question"));
@@ -43,7 +44,7 @@ public class AddQuestionTest extends BaseTestCase {
 			RuntimeVariables.replace("Test Choice A"));
 		selenium.typeKeys("_25_choiceDescriptionb",
 			RuntimeVariables.replace("Test Choice B"));
-		selenium.click("//input[@value='Add Choice']");
+		selenium.click(RuntimeVariables.replace("//input[@value='Add Choice']"));
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {
@@ -64,7 +65,7 @@ public class AddQuestionTest extends BaseTestCase {
 
 		selenium.typeKeys("_25_choiceDescriptionc",
 			RuntimeVariables.replace("Test Choice C"));
-		selenium.click("//input[@value='Save']");
+		selenium.click(RuntimeVariables.replace("//input[@value='Save']"));
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {

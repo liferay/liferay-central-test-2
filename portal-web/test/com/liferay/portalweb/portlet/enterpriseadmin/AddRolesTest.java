@@ -49,9 +49,9 @@ public class AddRolesTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click("link=Roles");
+		selenium.click(RuntimeVariables.replace("link=Roles"));
 		selenium.waitForPageToLoad("30000");
-		selenium.click("//input[@value='Add Role']");
+		selenium.click(RuntimeVariables.replace("//input[@value='Add Role']"));
 		selenium.waitForPageToLoad("30000");
 		selenium.type("_79_name",
 			RuntimeVariables.replace(
@@ -59,9 +59,9 @@ public class AddRolesTest extends BaseTestCase {
 		selenium.type("_79_description",
 			RuntimeVariables.replace(
 				"This is the Selenium Message Boards and Calendar Role for Deleting and Updating."));
-		selenium.click("//input[@value='Save']");
+		selenium.click(RuntimeVariables.replace("//input[@value='Save']"));
 		selenium.waitForPageToLoad("30000");
-		selenium.click("Link=Define Permissions");
+		selenium.click(RuntimeVariables.replace("Link=Define Permissions"));
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {
@@ -81,25 +81,27 @@ public class AddRolesTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click("//input[@value='Add Portlet Permissions']");
+		selenium.click(RuntimeVariables.replace(
+				"//input[@value='Add Portlet Permissions']"));
 		selenium.waitForPageToLoad("30000");
-		selenium.click("link=Calendar");
+		selenium.click(RuntimeVariables.replace("link=Calendar"));
 		selenium.waitForPageToLoad("30000");
 		selenium.select("_79_scopecom.liferay.portlet.calendar.model.CalEventDELETE",
 			RuntimeVariables.replace("label=Enterprise"));
 		selenium.select("_79_scopecom.liferay.portlet.calendar.model.CalEventUPDATE",
 			RuntimeVariables.replace("label=Enterprise"));
-		selenium.click("//input[@value='Save']");
+		selenium.click(RuntimeVariables.replace("//input[@value='Save']"));
 		selenium.waitForPageToLoad("30000");
-		selenium.click("link=Return to Full Page");
+		selenium.click(RuntimeVariables.replace("link=Return to Full Page"));
 		selenium.waitForPageToLoad("30000");
-		selenium.click("link=Roles");
+		selenium.click(RuntimeVariables.replace("link=Roles"));
 		selenium.waitForPageToLoad("30000");
-		selenium.click("link=Define Permissions");
+		selenium.click(RuntimeVariables.replace("link=Define Permissions"));
 		selenium.waitForPageToLoad("30000");
-		selenium.click("//input[@value='Add Portlet Permissions']");
+		selenium.click(RuntimeVariables.replace(
+				"//input[@value='Add Portlet Permissions']"));
 		selenium.waitForPageToLoad("30000");
-		selenium.click("link=Blogs");
+		selenium.click(RuntimeVariables.replace("link=Blogs"));
 		selenium.waitForPageToLoad("30000");
 		selenium.select("_79_scopecom.liferay.portlet.blogs.model.BlogsEntryUPDATE",
 			RuntimeVariables.replace("label=Enterprise"));
@@ -109,9 +111,9 @@ public class AddRolesTest extends BaseTestCase {
 			RuntimeVariables.replace("label=Enterprise"));
 		selenium.select("_79_scopecom.liferay.portlet.blogs.model.BlogsEntryDELETE_DISCUSSION",
 			RuntimeVariables.replace("label=Enterprise"));
-		selenium.click("//input[@value='Save']");
+		selenium.click(RuntimeVariables.replace("//input[@value='Save']"));
 		selenium.waitForPageToLoad("30000");
-		selenium.click("link=Return to Full Page");
+		selenium.click(RuntimeVariables.replace("link=Return to Full Page"));
 		selenium.waitForPageToLoad("30000");
 	}
 }

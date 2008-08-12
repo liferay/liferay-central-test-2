@@ -23,6 +23,7 @@
 package com.liferay.portalweb.portlet.bookmarks;
 
 import com.liferay.portalweb.portal.BaseTestCase;
+import com.liferay.portalweb.portal.util.RuntimeVariables;
 
 /**
  * <a href="VerifyEntriesTest.java.html"><b><i>View Source</i></b></a>
@@ -32,7 +33,7 @@ import com.liferay.portalweb.portal.BaseTestCase;
  */
 public class VerifyEntriesTest extends BaseTestCase {
 	public void testVerifyEntries() throws Exception {
-		selenium.click("link=My Entries");
+		selenium.click(RuntimeVariables.replace("link=My Entries"));
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {
@@ -68,7 +69,7 @@ public class VerifyEntriesTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click("link=Recent Entries");
+		selenium.click(RuntimeVariables.replace("link=Recent Entries"));
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {
@@ -104,7 +105,7 @@ public class VerifyEntriesTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click("link=Folders");
+		selenium.click(RuntimeVariables.replace("link=Folders"));
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {

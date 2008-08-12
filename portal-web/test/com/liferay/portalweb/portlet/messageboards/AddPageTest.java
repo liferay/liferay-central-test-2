@@ -50,7 +50,8 @@ public class AddPageTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click("//a[@id=\"my-community-private-pages\"]");
+		selenium.click(RuntimeVariables.replace(
+				"//a[@id=\"my-community-private-pages\"]"));
 		selenium.waitForPageToLoad("30000");
 		selenium.click("//div/a/span");
 
@@ -95,7 +96,8 @@ public class AddPageTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click("link=M\u00e9ssag\u00e9 Boards T\u00e9st Pag\u00e9");
+		selenium.click(RuntimeVariables.replace(
+				"link=M\u00e9ssag\u00e9 Boards T\u00e9st Pag\u00e9"));
 		selenium.waitForPageToLoad("30000");
 	}
 }

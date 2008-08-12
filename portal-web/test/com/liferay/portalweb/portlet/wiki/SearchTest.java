@@ -34,9 +34,9 @@ import com.liferay.portalweb.portal.util.RuntimeVariables;
 public class SearchTest extends BaseTestCase {
 	public void testSearch() throws Exception {
 		selenium.type("_36_keywords", RuntimeVariables.replace("test"));
-		selenium.click("//input[@value='Search']");
+		selenium.click(RuntimeVariables.replace("//input[@value='Search']"));
 		selenium.waitForPageToLoad("30000");
-		selenium.click("link=Main");
+		selenium.click(RuntimeVariables.replace("link=Main"));
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {

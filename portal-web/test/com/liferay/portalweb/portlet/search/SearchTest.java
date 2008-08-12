@@ -34,10 +34,10 @@ import com.liferay.portalweb.portal.util.RuntimeVariables;
 public class SearchTest extends BaseTestCase {
 	public void testSearch() throws Exception {
 		selenium.type("_3_keywords", RuntimeVariables.replace("Test"));
-		selenium.click("//input[@type='image']");
+		selenium.click(RuntimeVariables.replace("//input[@type='image']"));
 		selenium.waitForPageToLoad("30000");
 		verifyTrue(selenium.isTextPresent("Test Bookmark"));
-		selenium.click("link=Return to Full Page");
+		selenium.click(RuntimeVariables.replace("link=Return to Full Page"));
 		selenium.waitForPageToLoad("30000");
 	}
 }

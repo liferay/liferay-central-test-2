@@ -38,7 +38,7 @@ public class TranslateDutchEnglishTest extends BaseTestCase {
 		selenium.type("_26_text",
 			RuntimeVariables.replace(
 				"Mijn naam is Vertaler Liferay, vloeiend in meer dan 6 miljoen vormen van mededeling."));
-		selenium.click("//input[@value='Translate']");
+		selenium.click(RuntimeVariables.replace("//input[@value='Translate']"));
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {

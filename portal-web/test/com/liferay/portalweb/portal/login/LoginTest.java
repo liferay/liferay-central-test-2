@@ -34,17 +34,18 @@ import com.liferay.portalweb.portal.util.RuntimeVariables;
 public class LoginTest extends BaseTestCase {
 	public void testLogin() throws Exception {
 		selenium.open("/web/guest/home");
-		selenium.click("link=Sign In");
+		selenium.click(RuntimeVariables.replace("link=Sign In"));
 		selenium.waitForPageToLoad("30000");
 		selenium.type("login", RuntimeVariables.replace("test@liferay.com"));
 		selenium.type("password", RuntimeVariables.replace("test"));
 		selenium.click("rememberMeCheckbox");
-		selenium.click(
-			"document.getElementById('tabs1already-registeredTabsSection').getElementsByTagName('div')[0].getElementsByTagName('form')[0].getElementsByTagName('fieldset')[0].getElementsByTagName('div')[3].getElementsByTagName('input')[0]");
+		selenium.click(RuntimeVariables.replace(
+				"document.getElementById('tabs1already-registeredTabsSection').getElementsByTagName('div')[0].getElementsByTagName('form')[0].getElementsByTagName('fieldset')[0].getElementsByTagName('div')[3].getElementsByTagName('input')[0]"));
 		selenium.waitForPageToLoad("30000");
-		selenium.click("//input[@value='I Agree']");
+		selenium.click(RuntimeVariables.replace("//input[@value='I Agree']"));
 		selenium.waitForPageToLoad("30000");
-		selenium.click("document.getElementById('my-community-private-pages')");
+		selenium.click(RuntimeVariables.replace(
+				"document.getElementById('my-community-private-pages')"));
 		selenium.waitForPageToLoad("30000");
 	}
 }

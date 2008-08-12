@@ -78,7 +78,7 @@ public class RuntimeVariables {
 		text = StringUtil.replace(
 			text, "\\test-output\\brochure\\",
 			"\\test-output\\" + SeleniumUtil.getTimestamp() + "\\" +
-				ThemeIds.getThemeId());
+				ThemeIds.getThemeId() + "\\");
 
 		// Select theme
 

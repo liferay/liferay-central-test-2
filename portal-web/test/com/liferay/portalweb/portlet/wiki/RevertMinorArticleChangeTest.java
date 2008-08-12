@@ -23,6 +23,7 @@
 package com.liferay.portalweb.portlet.wiki;
 
 import com.liferay.portalweb.portal.BaseTestCase;
+import com.liferay.portalweb.portal.util.RuntimeVariables;
 
 /**
  * <a href="RevertMinorArticleChangeTest.java.html"><b><i>View Source</i></b></a>
@@ -48,7 +49,7 @@ public class RevertMinorArticleChangeTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click("link=Second Edited Wiki Test");
+		selenium.click(RuntimeVariables.replace("link=Second Edited Wiki Test"));
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {
@@ -67,7 +68,7 @@ public class RevertMinorArticleChangeTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click("//h1/div/nobr[3]/a/img");
+		selenium.click(RuntimeVariables.replace("//h1/div/nobr[3]/a/img"));
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {
@@ -86,7 +87,7 @@ public class RevertMinorArticleChangeTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click("link=History");
+		selenium.click(RuntimeVariables.replace("link=History"));
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {
@@ -121,7 +122,7 @@ public class RevertMinorArticleChangeTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click("link=Revert");
+		selenium.click(RuntimeVariables.replace("link=Revert"));
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {
@@ -141,7 +142,7 @@ public class RevertMinorArticleChangeTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click("link=FrontPage");
+		selenium.click(RuntimeVariables.replace("link=FrontPage"));
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {

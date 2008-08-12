@@ -33,11 +33,12 @@ import com.liferay.portalweb.portal.util.RuntimeVariables;
  */
 public class AddSecondSubcategoryTest extends BaseTestCase {
 	public void testAddSecondSubcategory() throws Exception {
-		selenium.click("link=Return to Full Page");
+		selenium.click(RuntimeVariables.replace("link=Return to Full Page"));
 		selenium.waitForPageToLoad("30000");
-		selenium.click("//b");
+		selenium.click(RuntimeVariables.replace("//b"));
 		selenium.waitForPageToLoad("30000");
-		selenium.click("//input[@value='Add Subcategory']");
+		selenium.click(RuntimeVariables.replace(
+				"//input[@value='Add Subcategory']"));
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {
@@ -66,7 +67,7 @@ public class AddSecondSubcategoryTest extends BaseTestCase {
 		selenium.type("_19_description",
 			RuntimeVariables.replace(
 				"This is a s\u00e9cond t\u00e9st subcat\u00e9gory!"));
-		selenium.click("//input[@value='Save']");
+		selenium.click(RuntimeVariables.replace("//input[@value='Save']"));
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {

@@ -33,7 +33,8 @@ import com.liferay.portalweb.portal.util.RuntimeVariables;
  */
 public class AddDeletableMessageTest extends BaseTestCase {
 	public void testAddDeletableMessage() throws Exception {
-		selenium.click("//input[@value='Post New Thread']");
+		selenium.click(RuntimeVariables.replace(
+				"//input[@value='Post New Thread']"));
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {
@@ -64,7 +65,7 @@ public class AddDeletableMessageTest extends BaseTestCase {
 		selenium.type("_19_textArea",
 			RuntimeVariables.replace(
 				"This m\u00e9ssag\u00e9 will b\u00e9 d\u00e9l\u00e9t\u00e9d!"));
-		selenium.click("//input[@value='Save']");
+		selenium.click(RuntimeVariables.replace("//input[@value='Save']"));
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {

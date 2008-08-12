@@ -23,6 +23,7 @@
 package com.liferay.portalweb.portlet.shopping;
 
 import com.liferay.portalweb.portal.BaseTestCase;
+import com.liferay.portalweb.portal.util.RuntimeVariables;
 
 /**
  * <a href="ViewInvoiceTest.java.html"><b><i>View Source</i></b></a>
@@ -48,7 +49,7 @@ public class ViewInvoiceTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click("link=Orders");
+		selenium.click(RuntimeVariables.replace("link=Orders"));
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {
@@ -83,7 +84,7 @@ public class ViewInvoiceTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click("link=Checkout");
+		selenium.click(RuntimeVariables.replace("link=Checkout"));
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {
@@ -139,7 +140,7 @@ public class ViewInvoiceTest extends BaseTestCase {
 
 		selenium.close();
 		selenium.selectWindow("null");
-		selenium.click("link=Return to Full Page");
+		selenium.click(RuntimeVariables.replace("link=Return to Full Page"));
 		selenium.waitForPageToLoad("30000");
 	}
 }

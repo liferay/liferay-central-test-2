@@ -49,7 +49,7 @@ public class EditCommunityTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click("link=All Communities");
+		selenium.click(RuntimeVariables.replace("link=All Communities"));
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {
@@ -85,8 +85,8 @@ public class EditCommunityTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click(
-			"//div[@id=\"portlet-wrapper-29\"]/div[2]/div/div/form/div[5]/table/tbody/tr[4]/td[6]/ul/li/ul/li/nobr/a");
+		selenium.click(RuntimeVariables.replace(
+				"//div[@id=\"portlet-wrapper-29\"]/div[2]/div/div/form/div[5]/table/tbody/tr[4]/td[6]/ul/li/ul/li/nobr/a"));
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {
@@ -115,7 +115,7 @@ public class EditCommunityTest extends BaseTestCase {
 		selenium.type("_29_description",
 			RuntimeVariables.replace(
 				"This is a second temporary Test Community! This community has been edited."));
-		selenium.click("//input[@value='Save']");
+		selenium.click(RuntimeVariables.replace("//input[@value='Save']"));
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {
@@ -134,7 +134,7 @@ public class EditCommunityTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click("link=Return to Full Page");
+		selenium.click(RuntimeVariables.replace("link=Return to Full Page"));
 		selenium.waitForPageToLoad("30000");
 	}
 }

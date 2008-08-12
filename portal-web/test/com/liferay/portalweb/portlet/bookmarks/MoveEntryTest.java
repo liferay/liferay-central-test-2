@@ -33,7 +33,7 @@ import com.liferay.portalweb.portal.util.RuntimeVariables;
  */
 public class MoveEntryTest extends BaseTestCase {
 	public void testMoveEntry() throws Exception {
-		selenium.click("link=Edit");
+		selenium.click(RuntimeVariables.replace("link=Edit"));
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {
@@ -55,7 +55,8 @@ public class MoveEntryTest extends BaseTestCase {
 		selenium.click("//input[@value='Select']");
 		selenium.waitForPopUp("folder", RuntimeVariables.replace("30000"));
 		selenium.selectWindow("folder");
-		selenium.click("//div[@id=\"p_p_id_28_\"]/div/form/div[1]/a[1]");
+		selenium.click(RuntimeVariables.replace(
+				"//div[@id=\"p_p_id_28_\"]/div/form/div[1]/a[1]"));
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {
@@ -93,7 +94,7 @@ public class MoveEntryTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click("//input[@value='Save']");
+		selenium.click(RuntimeVariables.replace("//input[@value='Save']"));
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {
@@ -113,7 +114,7 @@ public class MoveEntryTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click("link=Test Folder");
+		selenium.click(RuntimeVariables.replace("link=Test Folder"));
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {

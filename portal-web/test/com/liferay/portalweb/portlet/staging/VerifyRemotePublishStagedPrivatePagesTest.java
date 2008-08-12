@@ -50,7 +50,7 @@ public class VerifyRemotePublishStagedPrivatePagesTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click("my-community-private-pages");
+		selenium.click(RuntimeVariables.replace("my-community-private-pages"));
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {
@@ -69,7 +69,7 @@ public class VerifyRemotePublishStagedPrivatePagesTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click("link=Sign Out");
+		selenium.click(RuntimeVariables.replace("link=Sign Out"));
 		selenium.waitForPageToLoad("30000");
 		selenium.open("http://5.227.126.113:8080/web/guest/home");
 
@@ -110,8 +110,8 @@ public class VerifyRemotePublishStagedPrivatePagesTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click(
-			"//div[@id='banner']/div/div/ul/li[8]/ul/li[5]/ul/li[2]/a[1]");
+		selenium.click(RuntimeVariables.replace(
+				"//div[@id='banner']/div/div/ul/li[8]/ul/li[5]/ul/li[2]/a[1]"));
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {
@@ -152,7 +152,7 @@ public class VerifyRemotePublishStagedPrivatePagesTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click("link=Articles");
+		selenium.click(RuntimeVariables.replace("link=Articles"));
 		selenium.waitForPageToLoad("30000");
 		verifyTrue(selenium.isElementPresent("link=Article to be Published"));
 
@@ -172,7 +172,7 @@ public class VerifyRemotePublishStagedPrivatePagesTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click("link=Return to Full Page");
+		selenium.click(RuntimeVariables.replace("link=Return to Full Page"));
 		selenium.waitForPageToLoad("30000");
 		selenium.open("http://localhost:8080/web/guest/home");
 
@@ -194,9 +194,9 @@ public class VerifyRemotePublishStagedPrivatePagesTest extends BaseTestCase {
 
 		selenium.type("_58_login", RuntimeVariables.replace("test@liferay.com"));
 		selenium.type("_58_password", RuntimeVariables.replace("test"));
-		selenium.click("//input[@value='Sign In']");
+		selenium.click(RuntimeVariables.replace("//input[@value='Sign In']"));
 		selenium.waitForPageToLoad("30000");
-		selenium.click("my-community-private-pages");
+		selenium.click(RuntimeVariables.replace("my-community-private-pages"));
 		selenium.waitForPageToLoad("30000");
 	}
 }

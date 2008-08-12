@@ -23,6 +23,7 @@
 package com.liferay.portalweb.portlet.blogs;
 
 import com.liferay.portalweb.portal.BaseTestCase;
+import com.liferay.portalweb.portal.util.RuntimeVariables;
 
 /**
  * <a href="DeleteSecondCommentTest.java.html"><b><i>View Source</i></b></a>
@@ -32,7 +33,7 @@ import com.liferay.portalweb.portal.BaseTestCase;
  */
 public class DeleteSecondCommentTest extends BaseTestCase {
 	public void testDeleteSecondComment() throws Exception {
-		selenium.click("link=Second Test Entry");
+		selenium.click(RuntimeVariables.replace("link=Second Test Entry"));
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {
@@ -51,7 +52,7 @@ public class DeleteSecondCommentTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click("//td[5]/nobr/a[2]");
+		selenium.click(RuntimeVariables.replace("//td[5]/nobr/a[2]"));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.getConfirmation()
 						   .matches("^Are you sure you want to delete this[\\s\\S]$"));

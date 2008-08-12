@@ -33,7 +33,8 @@ import com.liferay.portalweb.portal.util.RuntimeVariables;
  */
 public class AddCategoryTest extends BaseTestCase {
 	public void testAddCategory() throws Exception {
-		selenium.click("//input[@value='Add Category']");
+		selenium.click(RuntimeVariables.replace(
+				"//input[@value='Add Category']"));
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {
@@ -60,7 +61,7 @@ public class AddCategoryTest extends BaseTestCase {
 			RuntimeVariables.replace("This is a t\u00e9st cat\u00e9gor!"));
 		selenium.type("_19_description",
 			RuntimeVariables.replace("This is a t\u00e9st cat\u00e9gory!"));
-		selenium.click("//input[@value='Save']");
+		selenium.click(RuntimeVariables.replace("//input[@value='Save']"));
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {

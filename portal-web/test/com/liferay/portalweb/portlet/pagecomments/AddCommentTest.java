@@ -71,7 +71,7 @@ public class AddCommentTest extends BaseTestCase {
 			RuntimeVariables.replace("This is a test page comment!"));
 		selenium.type("_107_postReplyBody0",
 			RuntimeVariables.replace("This is a test page comment!"));
-		selenium.click("_107_postReplyButton0");
+		selenium.click(RuntimeVariables.replace("_107_postReplyButton0"));
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {

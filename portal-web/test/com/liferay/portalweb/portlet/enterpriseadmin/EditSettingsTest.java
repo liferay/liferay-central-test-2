@@ -49,19 +49,19 @@ public class EditSettingsTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click("link=\u00bb");
+		selenium.click(RuntimeVariables.replace("link=\u00bb"));
 		selenium.waitForPageToLoad("30000");
-		selenium.click("link=Settings");
+		selenium.click(RuntimeVariables.replace("link=Settings"));
 		selenium.waitForPageToLoad("30000");
 		selenium.typeKeys("_79_tickerSymbol", RuntimeVariables.replace("LRP"));
 		selenium.typeKeys("_79_type", RuntimeVariables.replace("Open Source"));
-		selenium.click("//input[@value='Add']");
+		selenium.click(RuntimeVariables.replace("//input[@value='Add']"));
 		selenium.waitForPageToLoad("30000");
 		selenium.type("_79_address",
 			RuntimeVariables.replace("admin@liferay.com"));
 		selenium.select("_79_typeId", RuntimeVariables.replace("label=E-mail"));
 		selenium.click("_79_primaryCheckbox");
-		selenium.click("//input[@value='Save']");
+		selenium.click(RuntimeVariables.replace("//input[@value='Save']"));
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {
@@ -80,7 +80,7 @@ public class EditSettingsTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click("link=Return to Full Page");
+		selenium.click(RuntimeVariables.replace("link=Return to Full Page"));
 		selenium.waitForPageToLoad("30000");
 	}
 }

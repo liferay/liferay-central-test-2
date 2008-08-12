@@ -23,6 +23,7 @@
 package com.liferay.portalweb.portlet.currencyconverter;
 
 import com.liferay.portalweb.portal.BaseTestCase;
+import com.liferay.portalweb.portal.util.RuntimeVariables;
 
 /**
  * <a href="ViewGraphsTest.java.html"><b><i>View Source</i></b></a>
@@ -32,11 +33,11 @@ import com.liferay.portalweb.portal.BaseTestCase;
  */
 public class ViewGraphsTest extends BaseTestCase {
 	public void testViewGraphs() throws Exception {
-		selenium.click("link=1y");
+		selenium.click(RuntimeVariables.replace("link=1y"));
 		selenium.waitForPageToLoad("30000");
-		selenium.click("link=2y");
+		selenium.click(RuntimeVariables.replace("link=2y"));
 		selenium.waitForPageToLoad("30000");
-		selenium.click("link=3m");
+		selenium.click(RuntimeVariables.replace("link=3m"));
 		selenium.waitForPageToLoad("30000");
 	}
 }

@@ -23,6 +23,7 @@
 package com.liferay.portalweb.portlet.samplelar;
 
 import com.liferay.portalweb.portal.BaseTestCase;
+import com.liferay.portalweb.portal.util.RuntimeVariables;
 
 /**
  * <a href="ConfigurationTest.java.html"><b><i>View Source</i></b></a>
@@ -34,9 +35,9 @@ public class ConfigurationTest extends BaseTestCase {
 	public void testConfiguration() throws Exception {
 		verifyTrue(selenium.isTextPresent(
 				"This is the Sample LAR Portlet. This was made to demonstrate the portlet LAR plugin feature. "));
-		selenium.click("//img[@title='Configuration']");
+		selenium.click(RuntimeVariables.replace("//img[@title='Configuration']"));
 		selenium.waitForPageToLoad("30000");
-		selenium.click("link=Export / Import");
+		selenium.click(RuntimeVariables.replace("link=Export / Import"));
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {
@@ -71,7 +72,7 @@ public class ConfigurationTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click("link=Import");
+		selenium.click(RuntimeVariables.replace("link=Import"));
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {
@@ -106,7 +107,7 @@ public class ConfigurationTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click("link=Return to Full Page");
+		selenium.click(RuntimeVariables.replace("link=Return to Full Page"));
 		selenium.waitForPageToLoad("30000");
 	}
 }

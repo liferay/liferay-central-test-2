@@ -49,7 +49,7 @@ public class SearchCouponsTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click("link=Coupons");
+		selenium.click(RuntimeVariables.replace("link=Coupons"));
 		selenium.waitForPageToLoad("30000");
 		selenium.select("discountType",
 			RuntimeVariables.replace("label=Free Shipping"));
@@ -71,7 +71,8 @@ public class SearchCouponsTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click("//input[@value='Search Coupons']");
+		selenium.click(RuntimeVariables.replace(
+				"//input[@value='Search Coupons']"));
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {
@@ -92,7 +93,8 @@ public class SearchCouponsTest extends BaseTestCase {
 
 		selenium.select("discountType",
 			RuntimeVariables.replace("label=Percentage"));
-		selenium.click("//input[@value='Search Coupons']");
+		selenium.click(RuntimeVariables.replace(
+				"//input[@value='Search Coupons']"));
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {
@@ -111,7 +113,7 @@ public class SearchCouponsTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click("link=Return to Full Page");
+		selenium.click(RuntimeVariables.replace("link=Return to Full Page"));
 		selenium.waitForPageToLoad("30000");
 	}
 }

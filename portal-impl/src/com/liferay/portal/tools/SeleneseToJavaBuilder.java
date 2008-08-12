@@ -222,12 +222,13 @@ public class SeleneseToJavaBuilder {
 
 				String dirName = param2.substring(0, pos + 1);
 
-				sb.append("FileUtil.mkdirs(\"");
+				sb.append("FileUtil.mkdirs(RuntimeVariables.replace(\"");
 				sb.append(dirName);
-				sb.append("\");");
-				sb.append("selenium.captureEntirePageScreenshot(\"");
+				sb.append("\"));");
+				sb.append("selenium.captureEntirePageScreenshot(");
+				sb.append("RuntimeVariables.replace(\"");
 				sb.append(param2);
-				sb.append("\", \"\");");
+				sb.append("\"), \"\");");
 			}
 			else if (param1.equals("click") || param1.equals("mouseDown") ||
 					 param1.equals("mouseUp") || param1.equals("open") ||
@@ -241,9 +242,9 @@ public class SeleneseToJavaBuilder {
 				sb.append("\");");
 			}
 			else if (param1.equals("clickAndWait")) {
-				sb.append("selenium.click(\"");
+				sb.append("selenium.click(RuntimeVariables.replace(\"");
 				sb.append(param2);
-				sb.append("\");");
+				sb.append("\"));");
 				sb.append("selenium.waitForPageToLoad(\"30000\");");
 			}
 			else if (param1.equals("close")) {

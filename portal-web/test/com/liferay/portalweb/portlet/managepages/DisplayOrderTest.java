@@ -33,17 +33,18 @@ import com.liferay.portalweb.portal.util.RuntimeVariables;
  */
 public class DisplayOrderTest extends BaseTestCase {
 	public void testDisplayOrder() throws Exception {
-		selenium.click("link=Manage Pages");
+		selenium.click(RuntimeVariables.replace("link=Manage Pages"));
 		selenium.waitForPageToLoad("30000");
-		selenium.click("link=Children");
+		selenium.click(RuntimeVariables.replace("link=Children"));
 		selenium.waitForPageToLoad("30000");
-		selenium.click("link=Display Order");
+		selenium.click(RuntimeVariables.replace("link=Display Order"));
 		selenium.waitForPageToLoad("30000");
 		selenium.select("_88_layoutIdsBox",
 			RuntimeVariables.replace("label=Child Test Page 2"));
 		selenium.click("//td[2]/a[1]/img");
 		selenium.click("//a[3]/img");
-		selenium.click("//input[@value='Update Display Order']");
+		selenium.click(RuntimeVariables.replace(
+				"//input[@value='Update Display Order']"));
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {
@@ -62,7 +63,7 @@ public class DisplayOrderTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click("link=Return to Full Page");
+		selenium.click(RuntimeVariables.replace("link=Return to Full Page"));
 		selenium.waitForPageToLoad("30000");
 	}
 }

@@ -33,14 +33,15 @@ import com.liferay.portalweb.portal.util.RuntimeVariables;
  */
 public class AddUserGroupTest extends BaseTestCase {
 	public void testAddUserGroup() throws Exception {
-		selenium.click("link=User Groups");
+		selenium.click(RuntimeVariables.replace("link=User Groups"));
 		selenium.waitForPageToLoad("30000");
-		selenium.click("//input[@value='Add User Group']");
+		selenium.click(RuntimeVariables.replace(
+				"//input[@value='Add User Group']"));
 		selenium.waitForPageToLoad("30000");
 		selenium.typeKeys("_79_name", RuntimeVariables.replace("Selenium"));
 		selenium.type("_79_description",
 			RuntimeVariables.replace("This is a selenium user group."));
-		selenium.click("//input[@value='Save']");
+		selenium.click(RuntimeVariables.replace("//input[@value='Save']"));
 		selenium.waitForPageToLoad("30000");
 	}
 }

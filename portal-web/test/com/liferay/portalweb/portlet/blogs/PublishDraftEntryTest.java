@@ -23,6 +23,7 @@
 package com.liferay.portalweb.portlet.blogs;
 
 import com.liferay.portalweb.portal.BaseTestCase;
+import com.liferay.portalweb.portal.util.RuntimeVariables;
 
 /**
  * <a href="PublishDraftEntryTest.java.html"><b><i>View Source</i></b></a>
@@ -82,7 +83,7 @@ public class PublishDraftEntryTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click("_33_saveButton");
+		selenium.click(RuntimeVariables.replace("_33_saveButton"));
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {

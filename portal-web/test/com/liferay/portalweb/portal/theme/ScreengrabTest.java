@@ -25,6 +25,7 @@ package com.liferay.portalweb.portal.theme;
 import com.liferay.portal.kernel.util.FileUtil;
 
 import com.liferay.portalweb.portal.BaseTestCase;
+import com.liferay.portalweb.portal.util.RuntimeVariables;
 
 /**
  * <a href="ScreengrabTest.java.html"><b><i>View Source</i></b></a>
@@ -34,7 +35,7 @@ import com.liferay.portalweb.portal.BaseTestCase;
  */
 public class ScreengrabTest extends BaseTestCase {
 	public void testScreengrab() throws Exception {
-		selenium.click("link=Theme Test Page");
+		selenium.click(RuntimeVariables.replace("link=Theme Test Page"));
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {
@@ -53,11 +54,13 @@ public class ScreengrabTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		FileUtil.mkdirs(
-			"L:\\portal\\build\\portal-web\\test-output\\brochure\\");
-		selenium.captureEntirePageScreenshot("L:\\portal\\build\\portal-web\\test-output\\brochure\\ScreengrabTest.jpg",
+		FileUtil.mkdirs(RuntimeVariables.replace(
+				"L:\\portal\\build\\portal-web\\test-output\\brochure\\"));
+		selenium.captureEntirePageScreenshot(RuntimeVariables.replace(
+				"L:\\portal\\build\\portal-web\\test-output\\brochure\\ScreengrabTest.jpg"),
 			"");
-		selenium.click("//div[@id='navigation']/ul/li[1]/a/span");
+		selenium.click(RuntimeVariables.replace(
+				"//div[@id='navigation']/ul/li[1]/a/span"));
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {
@@ -77,9 +80,10 @@ public class ScreengrabTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		FileUtil.mkdirs(
-			"L:\\portal\\build\\portal-web\\test-output\\brochure\\");
-		selenium.captureEntirePageScreenshot("L:\\portal\\build\\portal-web\\test-output\\brochure\\ScreengrabTest2.jpg",
+		FileUtil.mkdirs(RuntimeVariables.replace(
+				"L:\\portal\\build\\portal-web\\test-output\\brochure\\"));
+		selenium.captureEntirePageScreenshot(RuntimeVariables.replace(
+				"L:\\portal\\build\\portal-web\\test-output\\brochure\\ScreengrabTest2.jpg"),
 			"");
 	}
 }

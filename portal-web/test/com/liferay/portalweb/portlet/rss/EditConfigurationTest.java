@@ -33,7 +33,7 @@ import com.liferay.portalweb.portal.util.RuntimeVariables;
  */
 public class EditConfigurationTest extends BaseTestCase {
 	public void testEditConfiguration() throws Exception {
-		selenium.click("//img[@title='Configuration']");
+		selenium.click(RuntimeVariables.replace("//img[@title='Configuration']"));
 		selenium.waitForPageToLoad("30000");
 		selenium.click("//a/img");
 
@@ -57,9 +57,9 @@ public class EditConfigurationTest extends BaseTestCase {
 			RuntimeVariables.replace("http://sitening.com/digg/rss/"));
 		selenium.select("_86_entriesPerFeed",
 			RuntimeVariables.replace("label=4"));
-		selenium.click("//input[@value='Save']");
+		selenium.click(RuntimeVariables.replace("//input[@value='Save']"));
 		selenium.waitForPageToLoad("30000");
-		selenium.click("link=Return to Full Page");
+		selenium.click(RuntimeVariables.replace("link=Return to Full Page"));
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {

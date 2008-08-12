@@ -49,7 +49,7 @@ public class AddSecondFolderTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click("//input[@value='Add Folder']");
+		selenium.click(RuntimeVariables.replace("//input[@value='Add Folder']"));
 		selenium.waitForPageToLoad("30000");
 		selenium.type("_20_name", RuntimeVariables.replace("Another"));
 		selenium.type("_20_description", RuntimeVariables.replace("Test"));
@@ -70,7 +70,7 @@ public class AddSecondFolderTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click("//input[@value='Save']");
+		selenium.click(RuntimeVariables.replace("//input[@value='Save']"));
 		selenium.waitForPageToLoad("30000");
 		verifyTrue(selenium.isTextPresent(
 				"Your request processed successfully. "));

@@ -23,6 +23,7 @@
 package com.liferay.portalweb.portlet.messageboards;
 
 import com.liferay.portalweb.portal.BaseTestCase;
+import com.liferay.portalweb.portal.util.RuntimeVariables;
 
 /**
  * <a href="AddIncorrectEntryTest.java.html"><b><i>View Source</i></b></a>
@@ -32,10 +33,11 @@ import com.liferay.portalweb.portal.BaseTestCase;
  */
 public class AddIncorrectEntryTest extends BaseTestCase {
 	public void testAddIncorrectEntry() throws Exception {
-		selenium.click(
-			"//div[@id='portlet-wrapper-19']/div[2]/div/div/form[1]/div[4]/table/tbody/tr[2]/td[1]/a/b");
+		selenium.click(RuntimeVariables.replace(
+				"//div[@id='portlet-wrapper-19']/div[2]/div/div/form[1]/div[4]/table/tbody/tr[2]/td[1]/a/b"));
 		selenium.waitForPageToLoad("30000");
-		selenium.click("//input[@value='Post New Thread']");
+		selenium.click(RuntimeVariables.replace(
+				"//input[@value='Post New Thread']"));
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {
@@ -54,7 +56,7 @@ public class AddIncorrectEntryTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click("//input[@value='Save']");
+		selenium.click(RuntimeVariables.replace("//input[@value='Save']"));
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {
@@ -74,7 +76,7 @@ public class AddIncorrectEntryTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click("link=\u00ab Back");
+		selenium.click(RuntimeVariables.replace("link=\u00ab Back"));
 		selenium.waitForPageToLoad("30000");
 	}
 }

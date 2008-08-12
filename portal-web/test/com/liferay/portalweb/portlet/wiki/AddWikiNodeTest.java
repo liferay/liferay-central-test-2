@@ -49,7 +49,7 @@ public class AddWikiNodeTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click("//td[1]/nobr/a/img");
+		selenium.click(RuntimeVariables.replace("//td[1]/nobr/a/img"));
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {
@@ -68,7 +68,7 @@ public class AddWikiNodeTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click("//input[@value='Add Wiki']");
+		selenium.click(RuntimeVariables.replace("//input[@value='Add Wiki']"));
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {
@@ -107,7 +107,7 @@ public class AddWikiNodeTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click("//input[@value='Save']");
+		selenium.click(RuntimeVariables.replace("//input[@value='Save']"));
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {

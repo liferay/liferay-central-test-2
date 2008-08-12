@@ -49,7 +49,7 @@ public class AddArticleThroughConfigurationTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click("link=Configuration");
+		selenium.click(RuntimeVariables.replace("link=Configuration"));
 		selenium.waitForPageToLoad("30000");
 		selenium.click("//input[@value='Add Article']");
 
@@ -147,7 +147,8 @@ public class AddArticleThroughConfigurationTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click("//input[@value='Save and Approve']");
+		selenium.click(RuntimeVariables.replace(
+				"//input[@value='Save and Approve']"));
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {
@@ -166,7 +167,7 @@ public class AddArticleThroughConfigurationTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click("link=Test Journal Article 3");
+		selenium.click(RuntimeVariables.replace("link=Test Journal Article 3"));
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {
@@ -217,7 +218,7 @@ public class AddArticleThroughConfigurationTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click("link=Return to Full Page");
+		selenium.click(RuntimeVariables.replace("link=Return to Full Page"));
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {
