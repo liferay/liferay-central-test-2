@@ -3,7 +3,7 @@
 <project name="portal-test" basedir="." default="test" xmlns:antelope="antlib:ise.antelope.tasks">
 	<import file="build.xml" />
 
-	<target name="deploy-portlet-plugins">
+	<target name="deploy-plugins">
 		<taskdef classname="com.liferay.portal.util.PropsUtilTask" classpathref="project.classpath" name="propsutil" />
 
 		<propsutil key="resource.repositories.root" result="propsutil.resource.repositories.root" />
@@ -21,7 +21,7 @@ auto.deploy.dir=${propsutil.resource.repositories.root}/deploy
 
 plugins.includes=${plugins.includes}</echo>
 
-		<ant dir="${lp.plugins.dir}/portlets" inheritAll="false">
+		<ant dir="${lp.plugins.dir}/${plugin.types}" inheritAll="false">
 			<target name="clean" />
 			<target name="deploy" />
 		</ant>
@@ -49,6 +49,21 @@ plugins.includes=${plugins.includes}</echo>
 		<antcall target="test-${app.server.type}" />
 	</target>
 
+	<target name="test-themes">
+		<exec dir="${lp.plugins.dir}" executable="cmd.exe" os="${os.windows}">
+			<arg line="/c svn update" />
+		</exec>
+
+		<java jar="lib/development/selenium-server.jar" fork="true" spawn="true" />
+
+		<antcall target="test-tomcat-runtime">
+			<param name="test.class" value="ThemesTestSuite" />
+			<param name="theme.plugins.includes" value="08-gulona-theme,liferay-jedi-theme" />
+		</antcall>
+
+		<antelope:post to="http://localhost:4444/selenium-server/driver/?cmd=shutDown" wantresponse="false" />
+	</target>
+
 	<target name="test-tomcat">
 		<replace
 			file="${app.server.tomcat.portal.dir}/WEB-INF/web.xml"
@@ -68,12 +83,12 @@ plugins.includes=${plugins.includes}</echo>
 
 		<antcall target="test-tomcat-runtime">
 			<param name="test.class" value="Plugins1TestSuite" />
-			<param name="plugins.includes" value="alfresco-content-portlet,analog-clock-portlet,application-builder-portlet,chat-portlet,flash-portlet,google-adsense-portlet,google-gadget-portlet,google-maps-portlet,google-search-portlet,ip-geocoder-portlet,mail-portlet,release-tools-portlet,ruby-console-portlet,sample-dao-portlet,sample-groovy-portlet,sample-hibernate-portlet,sample-icefaces-jsf-1.1-myfaces-jsp-portlet,sample-icefaces-jsf-1.1-sun-facelets-portlet,sample-icefaces-jsf-1.1-sun-jsp-portlet,sample-icefaces-jsf-1.2-sun-facelets-portlet,sample-javascript-portlet,sample-jsf-1.1-myfaces-facelets-portlet,sample-jsf-1.1-myfaces-jsp-portlet,sample-jsf-1.1-sun-facelets-portlet,sample-jsf-1.1-sun-jsp-portlet,sample-jsf-1.2-sun-facelets-portlet,sample-jsf-1.2-sun-jsp-portlet,sample-json-portlet,sample-jsp-portlet,sample-lar-portlet,sample-laszlo-portlet" />
+			<param name="portlet.plugins.includes" value="alfresco-content-portlet,analog-clock-portlet,application-builder-portlet,chat-portlet,flash-portlet,google-adsense-portlet,google-gadget-portlet,google-maps-portlet,google-search-portlet,ip-geocoder-portlet,mail-portlet,release-tools-portlet,ruby-console-portlet,sample-dao-portlet,sample-groovy-portlet,sample-hibernate-portlet,sample-icefaces-jsf-1.1-myfaces-jsp-portlet,sample-icefaces-jsf-1.1-sun-facelets-portlet,sample-icefaces-jsf-1.1-sun-jsp-portlet,sample-icefaces-jsf-1.2-sun-facelets-portlet,sample-javascript-portlet,sample-jsf-1.1-myfaces-facelets-portlet,sample-jsf-1.1-myfaces-jsp-portlet,sample-jsf-1.1-sun-facelets-portlet,sample-jsf-1.1-sun-jsp-portlet,sample-jsf-1.2-sun-facelets-portlet,sample-jsf-1.2-sun-jsp-portlet,sample-json-portlet,sample-jsp-portlet,sample-lar-portlet,sample-laszlo-portlet" />
 		</antcall>
 
 		<antcall target="test-tomcat-runtime">
 			<param name="test.class" value="Plugins2TestSuite" />
-			<param name="plugins.includes" value="sample-localized-portlet,sample-orbeon-forms-portlet,sample-permissions-portlet,sample-php-portlet,sample-portal-client-portlet,sample-portal-service-portlet,sample-python-portlet,sample-ruby-portlet,sample-service-builder-portlet,sample-sign-in-portlet,sample-spring-portlet,sample-struts-liferay-portlet,sample-struts-portlet,sample-tapestry-portlet,sample-test-portlet,sample-ui-taglibs-portlet,sample-wap-portlet,sshterm-portlet,sshvnc-portlet,sun-bookmark-portlet,sun-elluminate-portlet,sun-flickr-portlet,sun-iframe-portlet,sun-mashup-portlet,sun-notepad-portlet,sun-photoshow-ajax-portlet,sun-privacy-guard-portlet,sun-rss-portlet,sun-showtime-portlet,sun-tour-ipc-portlet,sun-video-portlet,sun-weather-portlet,twitter-portlet,weather-portlet,webcam-portlet,westminstercatechism-portlet" />
+			<param name="portlet.plugins.includes" value="sample-localized-portlet,sample-orbeon-forms-portlet,sample-permissions-portlet,sample-php-portlet,sample-portal-client-portlet,sample-portal-service-portlet,sample-python-portlet,sample-ruby-portlet,sample-service-builder-portlet,sample-sign-in-portlet,sample-spring-portlet,sample-struts-liferay-portlet,sample-struts-portlet,sample-tapestry-portlet,sample-test-portlet,sample-ui-taglibs-portlet,sample-wap-portlet,sshterm-portlet,sshvnc-portlet,sun-bookmark-portlet,sun-elluminate-portlet,sun-flickr-portlet,sun-iframe-portlet,sun-mashup-portlet,sun-notepad-portlet,sun-photoshow-ajax-portlet,sun-privacy-guard-portlet,sun-rss-portlet,sun-showtime-portlet,sun-tour-ipc-portlet,sun-video-portlet,sun-weather-portlet,twitter-portlet,weather-portlet,webcam-portlet,westminstercatechism-portlet" />
 		</antcall>
 
 		<antelope:post to="http://localhost:4444/selenium-server/driver/?cmd=shutDown" wantresponse="false" />
@@ -91,11 +106,24 @@ plugins.includes=${plugins.includes}</echo>
 
 		<if>
 			<not>
-				<equals arg1="${plugins.includes}" arg2="$${plugins.includes}" />
+				<equals arg1="${portlet.plugins.includes}" arg2="$${portlet.plugins.includes}" />
 			</not>
 			<then>
-				<antcall target="deploy-portlet-plugins">
-					<param name="plugins.includes" value="${plugins.includes}" />
+				<antcall target="deploy-plugins">
+					<param name="plugin.types" value="portlets" />
+					<param name="plugins.includes" value="${portlet.plugins.includes}" />
+				</antcall>
+			</then>
+		</if>
+
+		<if>
+			<not>
+				<equals arg1="${theme.plugins.includes}" arg2="$${theme.plugins.includes}" />
+			</not>
+			<then>
+				<antcall target="deploy-plugins">
+					<param name="plugin.types" value="themes" />
+					<param name="plugins.includes" value="${theme.plugins.includes}" />
 				</antcall>
 			</then>
 		</if>

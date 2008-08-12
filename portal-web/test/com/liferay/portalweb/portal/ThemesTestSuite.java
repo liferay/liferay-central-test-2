@@ -28,18 +28,18 @@ import com.liferay.portalweb.portal.theme.ThemeTests;
 import com.liferay.portalweb.portal.util.ThemeIds;
 
 /**
- * <a href="ThemeTestSuite.java.html"><b><i>View Source</i></b></a>
+ * <a href="ThemesTestSuite.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *
  */
-public class ThemeTestSuite extends BaseTests {
+public class ThemesTestSuite extends BaseTests {
 
 	static {
 		InitUtil.init();
 	}
 
-	public ThemeTestSuite() {
+	public ThemesTestSuite() {
 		addTestSuite(LoginTests.class);
 
 		for (int i = 0; i < ThemeIds.getCount(); i++) {
