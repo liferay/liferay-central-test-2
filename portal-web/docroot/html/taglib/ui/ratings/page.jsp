@@ -63,7 +63,7 @@ RatingsStats stats = RatingsStatsLocalServiceUtil.getStats(className, classPK);
 						</div>
 
 						<div id="<%= randomNamespace %>yourRating">
-							<img alt="<liferay-ui:message key="star-off" />"  src="<%= themeDisplay.getPathThemeImages() %>/ratings/star_off.png" /><img alt="<liferay-ui:message key="star-off" />" src="<%= themeDisplay.getPathThemeImages() %>/ratings/star_off.png" /><img alt="<liferay-ui:message key="star-off" />" src="<%= themeDisplay.getPathThemeImages() %>/ratings/star_off.png" /><img alt="<liferay-ui:message key="star-off" />" src="<%= themeDisplay.getPathThemeImages() %>/ratings/star_off.png" /><img alt="<liferay-ui:message key="star-off" />" src="<%= themeDisplay.getPathThemeImages() %>/ratings/star_off.png" />
+							<img src="<%= themeDisplay.getPathThemeImages() %>/ratings/star_off.png" /><img src="<%= themeDisplay.getPathThemeImages() %>/ratings/star_off.png" /><img src="<%= themeDisplay.getPathThemeImages() %>/ratings/star_off.png" /><img src="<%= themeDisplay.getPathThemeImages() %>/ratings/star_off.png" /><img src="<%= themeDisplay.getPathThemeImages() %>/ratings/star_off.png" />
 						</div>
 					</td>
 					<td style="padding-left: 30px;"></td>
@@ -75,7 +75,7 @@ RatingsStats stats = RatingsStatsLocalServiceUtil.getStats(className, classPK);
 					</div>
 
 					<div id="<%= randomNamespace %>averageRating" onmousemove="Liferay.Portal.ToolTip.show(event, this, '<%= stats.getAverageScore() %> <liferay-ui:message key="stars" />')">
-						<img alt="<liferay-ui:message key="star-off" />" src="<%= themeDisplay.getPathThemeImages() %>/ratings/star_off.png" /><img alt="<liferay-ui:message key="star-off" />" src="<%= themeDisplay.getPathThemeImages() %>/ratings/star_off.png" /><img alt="<liferay-ui:message key="star-off" />" src="<%= themeDisplay.getPathThemeImages() %>/ratings/star_off.png" /><img alt="<liferay-ui:message key="star-off" />" src="<%= themeDisplay.getPathThemeImages() %>/ratings/star_off.png" /><img alt="<liferay-ui:message key="star-off" />" src="<%= themeDisplay.getPathThemeImages() %>/ratings/star_off.png" />
+						<img src="<%= themeDisplay.getPathThemeImages() %>/ratings/star_off.png" /><img src="<%= themeDisplay.getPathThemeImages() %>/ratings/star_off.png" /><img src="<%= themeDisplay.getPathThemeImages() %>/ratings/star_off.png" /><img src="<%= themeDisplay.getPathThemeImages() %>/ratings/star_off.png" /><img src="<%= themeDisplay.getPathThemeImages() %>/ratings/star_off.png" />
 					</div>
 				</td>
 			</tr>
@@ -100,17 +100,13 @@ RatingsStats stats = RatingsStatsLocalServiceUtil.getStats(className, classPK);
 									},
 									dataType: 'json',
 									success: function(message) {
+										var averageRating = jQuery('#<%= randomNamespace %>averageRating');
 										var totalEntries = jQuery('#<%= randomNamespace %>totalEntries');
 
-										var entriesHtml = (message.totalEntries == 1) ? '<liferay-ui:message key="average" /> (' + message.totalEntries + ' <liferay-ui:message key="vote" />)' : '<liferay-ui:message key="average" /> (' + message.totalEntries + ' <liferay-ui:message key="votes" />)';
+										var entriesHtml = (message.totalEntries == 1) ? Liferay.Language.get('average') + ' (' + message.totalEntries + ' ' + Liferay.Language.get('vote') + ')' : Liferay.Language.get('average') + ' (' + message.totalEntries + ' ' + Liferay.Language.get('votes') + ')';
 
 										totalEntries.html(entriesHtml);
-
-										jQuery('#<%= randomNamespace %>averageRating').mousemove(
-											function(event) {
-												Liferay.Portal.Tooltip.show(event, this, message.averageScore.toFixed(1) + ' <liferay-ui:message key="stars" />');
-											}
-										);
+										averageRating.removeAttr('onmousemove');
 
 										<%= randomNamespace %>averageRatingObj.display(message.averageScore);
 									}
