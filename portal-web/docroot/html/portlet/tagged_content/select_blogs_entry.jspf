@@ -88,6 +88,8 @@ portletURL.setParameter("typeSelection", BlogsEntry.class.getName());
 
 				TagsAsset asset = TagsAssetLocalServiceUtil.getAsset(BlogsEntry.class.getName(), entry.getEntryId());
 
+				String assetTitle = HtmlUtil.escape(asset.getTitle());
+
 				StringBuilder sb = new StringBuilder();
 
 				sb.append("javascript: ");
@@ -97,7 +99,7 @@ portletURL.setParameter("typeSelection", BlogsEntry.class.getName());
 				sb.append("', '");
 				sb.append(asset.getAssetId());
 				sb.append("', '");
-				sb.append(asset.getTitle());
+				sb.append(StringUtil.replace(assetTitle, "&#039;", "\\&#039;"));
 				sb.append("', '");
 				sb.append(assetOrder);
 				sb.append("');");
@@ -106,7 +108,7 @@ portletURL.setParameter("typeSelection", BlogsEntry.class.getName());
 
 				// Title
 
-				row.addText(entry.getTitle(), rowHREF);
+				row.addText(assetTitle, rowHREF);
 
 				// User name
 
@@ -159,6 +161,8 @@ portletURL.setParameter("typeSelection", BlogsEntry.class.getName());
 
 			TagsAsset asset = TagsAssetLocalServiceUtil.getAsset(BlogsEntry.class.getName(), entry.getEntryId());
 
+			String assetTitle = HtmlUtil.escape(asset.getTitle());
+
 			StringBuilder sb = new StringBuilder();
 
 			sb.append("javascript: ");
@@ -168,7 +172,7 @@ portletURL.setParameter("typeSelection", BlogsEntry.class.getName());
 			sb.append("', '");
 			sb.append(asset.getAssetId());
 			sb.append("', '");
-			sb.append(asset.getTitle());
+			sb.append(StringUtil.replace(assetTitle, "&#039;", "\\&#039;"));
 			sb.append("', '");
 			sb.append(assetOrder);
 			sb.append("');");
@@ -177,7 +181,7 @@ portletURL.setParameter("typeSelection", BlogsEntry.class.getName());
 
 			// Title
 
-			row.addText(entry.getTitle(), rowHREF);
+			row.addText(assetTitle, rowHREF);
 
 			// User name
 
