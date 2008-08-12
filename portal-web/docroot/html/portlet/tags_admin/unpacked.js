@@ -287,7 +287,9 @@ Liferay.Portlet.TagsAdmin = new Class({
 							width: width
 						}
 					);
+
 					helper.addClass('portlet-tags-admin-helper');
+
 					return helper;
 				},
 				opacity: 0.7,
