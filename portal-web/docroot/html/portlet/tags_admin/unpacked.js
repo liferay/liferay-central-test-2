@@ -3,6 +3,7 @@ Liferay.Portlet.TagsAdmin = new Class({
 		var instance = this;
 
 		var childrenContainer = jQuery(instance._entryScopeClass);
+
 		instance._container = jQuery('.vocabulary-container');
 
 		jQuery('.vocabulary-close').click(
@@ -566,6 +567,7 @@ Liferay.Portlet.TagsAdmin = new Class({
 						folksonomy,
 						function() {
 							var vocabulary = instance._selectVocabulary(message.vocabularyId);
+
 							instance._displayVocabularyEntries(instance._selectedVocabularyName);
 
 							if (vocabulary.length) {
