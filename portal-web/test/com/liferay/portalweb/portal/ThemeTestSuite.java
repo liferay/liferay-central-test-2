@@ -22,11 +22,10 @@
 
 package com.liferay.portalweb.portal;
 
-import com.liferay.portal.spring.util.SpringUtil;
+import com.liferay.portal.util.InitUtil;
 import com.liferay.portalweb.portal.login.LoginTests;
 import com.liferay.portalweb.portal.theme.ThemeTests;
 import com.liferay.portalweb.portal.util.ThemeIds;
-import com.liferay.portal.util.InitUtil;
 
 /**
  * <a href="ThemeTestSuite.java.html"><b><i>View Source</i></b></a>
