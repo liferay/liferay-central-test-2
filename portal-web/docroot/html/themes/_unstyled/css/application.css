@@ -423,82 +423,32 @@ img.ui-datepicker-trigger {
 
 /* ---------- Tags ---------- */
 
-span.ui-tags-delete {
+.ui-tags {
 }
 
-/* ---------- Treeview ---------- */
-
-.ui-tree {
+.ui-tags:after {
 }
 
-.ui-tree, .ui-tree ul {
+.ie .ui-tags {
 }
 
-.ui-tree ul {
+.ui-tags.empty {
 }
 
-.ui-tree .hitarea {
+.ui-tags .ui-tag {
 }
 
-.ie6 .hitarea {
+.ui-tags .ui-tag:hover {
 }
 
-.ui-tree li {
+.ui-tags .ui-tag-delete {
 }
 
-.ui-tree a.selected {
+.ui-tags .ui-tag-delete span {
 }
 
-.ui-tree-control {
+.ui-tags .ui-tag-delete:hover span {
 }
 
-.ui-tree .hover {
-}
-
-.ui-tree li.collapsable, .ui-tree li.expandable {
-}
-
-.ui-tree .expandable-hitarea {
-}
-
-.ui-tree li.last {
-}
-
-.ui-tree li.last-collapsable, .ui-tree li.last-expandable {
-}
-
-.ui-tree li.last-collapsable {
-}
-
-.ui-tree li.last-expandable {
-}
-
-.ui-tree div.last-collapsable-hitarea, .ui-tree div.last-expandable-hitarea {
-}
-
-.ui-tree .placeholder {
-}
-
-.ui-tree.file li {
-}
-
-.ui-tree.file span.folder, .ui-tree.file span.file {
-}
-
-.ui-tree.file span.folder {
-}
-
-.ui-tree.file li.expandable span.folder {
-}
-
-.ui-tree.file span.file {
-}
-
-.ui-tree .hover-up {
-}
-
-.ui-tree .hover-down {
-}
-
-.ui-tree .hover-folder {
+.ui-tags-input {
 }

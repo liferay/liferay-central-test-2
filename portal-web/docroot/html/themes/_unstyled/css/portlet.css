@@ -291,67 +291,6 @@ body.portlet {
 .ie .taglib-calendar tr td.first a {
 }
 
-/* ---------- Tags Admin portlet ---------- */
-
-.portlet-tags-admin .vocabulary-container .results-header {
-}
-
-.portlet-tags-admin .vocabulary-list-container .results-header {
-}
-
-.portlet-tags-admin .vocabulary-entries-container .results-header {
-}
-
-.portlet-tags-admin .vocabulary-edit-entry .results-header {
-}
-
-.portlet-tags-admin .vocabulary-content li.vocabulary-category, .portlet-tags-admin li.vocabulary-item {
-}
-
-.portlet-tags-admin .vocabulary-item.alt {
-}
-
-.portlet-tags-admin .vocabulary-list .selected a {
-}
-
-.portlet-tags-admin .vocabulary-list .selected a:hover {
-}
-
-.portlet-tags-admin .vocabulary-list a:hover, .portlet-tags-admin .vocabulary-entries a:hover {
-}
-
-.portlet-tags-admin .vocabulary-item.selected {
-}
-.portlet-tags-admin .vocabulary-item.selected a {
-}
-
-.portlet-tags-admin .vocabulary-list .selected a {
-}
-
-.portlet-tags-admin .vocabulary-entries .active-area {
-}
-
-.portlet-tags-admin .vocabulary-entries {
-}
-
-.portlet-tags-admin .vocabulary-list {
-}
-
-.portlet-tags-admin .vocabulary-search-bar {
-}
-
-.portlet-tags-admin .vocabulary-toolbar {
-}
-
-.portlet-tags-admin .vocabulary-buttons .button {
-}
-
-.portlet-tags-admin .vocabulary-buttons .selected {
-}
-
-.portlet-tags-admin .vocabulary-footer {
-}
-
 /* ---------- Miscellaneous portlet styles ---------- */
 
 .journal-template-error .scroll-pane {
