@@ -106,7 +106,7 @@
 				<input class="vocabulary-save-properties" type="button" value="<liferay-ui:message key="save" />" />
 
 				<input class="vocabulary-close" type="button" value="<liferay-ui:message key="close" />" />
-				
+
 				<input class="vocabulary-delete-entries-button" type="button" value="<liferay-ui:message key="delete" />" />
 			</div>
 		</div>
