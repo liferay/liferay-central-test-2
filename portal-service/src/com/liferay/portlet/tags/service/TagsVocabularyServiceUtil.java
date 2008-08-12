@@ -46,17 +46,17 @@ package com.liferay.portlet.tags.service;
  */
 public class TagsVocabularyServiceUtil {
 	public static com.liferay.portlet.tags.model.TagsVocabulary addVocabulary(
-		java.lang.String name)
+		long groupId, java.lang.String name)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
-		return _service.addVocabulary(name);
+		return _service.addVocabulary(groupId, name);
 	}
 
 	public static com.liferay.portlet.tags.model.TagsVocabulary addVocabulary(
-		java.lang.String name, boolean folksonomy)
+		long groupId, java.lang.String name, boolean folksonomy)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
-		return _service.addVocabulary(name, folksonomy);
+		return _service.addVocabulary(groupId, name, folksonomy);
 	}
 
 	public static void deleteVocabulary(long vocabularyId)
@@ -65,16 +65,16 @@ public class TagsVocabularyServiceUtil {
 		_service.deleteVocabulary(vocabularyId);
 	}
 
-	public static java.util.List<com.liferay.portlet.tags.model.TagsVocabulary> getVocabularies(
-		long companyId)
-		throws com.liferay.portal.SystemException, java.rmi.RemoteException {
-		return _service.getVocabularies(companyId);
-	}
-
-	public static java.util.List<com.liferay.portlet.tags.model.TagsVocabulary> getVocabularies(
+	public static java.util.List<com.liferay.portlet.tags.model.TagsVocabulary> getCompanyVocabularies(
 		long companyId, boolean folksonomy)
 		throws com.liferay.portal.SystemException, java.rmi.RemoteException {
-		return _service.getVocabularies(companyId, folksonomy);
+		return _service.getCompanyVocabularies(companyId, folksonomy);
+	}
+
+	public static java.util.List<com.liferay.portlet.tags.model.TagsVocabulary> getGroupVocabularies(
+		long groupId, boolean folksonomy)
+		throws com.liferay.portal.SystemException, java.rmi.RemoteException {
+		return _service.getGroupVocabularies(groupId, folksonomy);
 	}
 
 	public static com.liferay.portlet.tags.model.TagsVocabulary getVocabulary(

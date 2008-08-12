@@ -156,15 +156,15 @@ public class TagsPropertyLocalServiceUtil {
 		return _service.getProperty(entryId, key);
 	}
 
-	public static java.lang.String[] getPropertyKeys(long companyId)
+	public static java.lang.String[] getPropertyKeys(long groupId)
 		throws com.liferay.portal.SystemException {
-		return _service.getPropertyKeys(companyId);
+		return _service.getPropertyKeys(groupId);
 	}
 
 	public static java.util.List<com.liferay.portlet.tags.model.TagsProperty> getPropertyValues(
-		long companyId, java.lang.String key)
+		long groupId, java.lang.String key)
 		throws com.liferay.portal.SystemException {
-		return _service.getPropertyValues(companyId, key);
+		return _service.getPropertyValues(groupId, key);
 	}
 
 	public static com.liferay.portlet.tags.model.TagsProperty updateProperty(

@@ -29,21 +29,21 @@ package com.liferay.portlet.tags.service.persistence;
  *
  */
 public class TagsPropertyFinderUtil {
-	public static int countByC_K(long companyId, java.lang.String key)
+	public static int countByG_K(long groupId, java.lang.String key)
 		throws com.liferay.portal.SystemException {
-		return getFinder().countByC_K(companyId, key);
+		return getFinder().countByG_K(groupId, key);
 	}
 
-	public static java.util.List<com.liferay.portlet.tags.model.TagsProperty> findByC_K(
-		long companyId, java.lang.String key)
+	public static java.util.List<com.liferay.portlet.tags.model.TagsProperty> findByG_K(
+		long groupId, java.lang.String key)
 		throws com.liferay.portal.SystemException {
-		return getFinder().findByC_K(companyId, key);
+		return getFinder().findByG_K(groupId, key);
 	}
 
-	public static java.util.List<com.liferay.portlet.tags.model.TagsProperty> findByC_K(
-		long companyId, java.lang.String key, int start, int end)
+	public static java.util.List<com.liferay.portlet.tags.model.TagsProperty> findByG_K(
+		long groupId, java.lang.String key, int start, int end)
 		throws com.liferay.portal.SystemException {
-		return getFinder().findByC_K(companyId, key, start, end);
+		return getFinder().findByG_K(groupId, key, start, end);
 	}
 
 	public static TagsPropertyFinder getFinder() {

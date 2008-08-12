@@ -123,11 +123,11 @@ public interface TagsPropertyLocalService {
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;
 
-	public java.lang.String[] getPropertyKeys(long companyId)
+	public java.lang.String[] getPropertyKeys(long groupId)
 		throws com.liferay.portal.SystemException;
 
 	public java.util.List<com.liferay.portlet.tags.model.TagsProperty> getPropertyValues(
-		long companyId, java.lang.String key)
+		long groupId, java.lang.String key)
 		throws com.liferay.portal.SystemException;
 
 	public com.liferay.portlet.tags.model.TagsProperty updateProperty(

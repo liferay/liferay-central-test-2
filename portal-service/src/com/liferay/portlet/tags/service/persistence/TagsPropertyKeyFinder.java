@@ -29,12 +29,12 @@ package com.liferay.portlet.tags.service.persistence;
  *
  */
 public interface TagsPropertyKeyFinder {
-	public int countByCompanyId(long companyId)
+	public int countByGroupId(long groupId)
 		throws com.liferay.portal.SystemException;
 
-	public java.lang.String[] findByCompanyId(long companyId)
+	public java.lang.String[] findByGroupId(long groupId)
 		throws com.liferay.portal.SystemException;
 
-	public java.lang.String[] findByCompanyId(long companyId, int start, int end)
+	public java.lang.String[] findByGroupId(long groupId, int start, int end)
 		throws com.liferay.portal.SystemException;
 }

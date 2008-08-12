@@ -23,8 +23,8 @@
 %>
 
 <%
-long[] entryIds = TagsEntryLocalServiceUtil.getEntryIds(company.getCompanyId(), entries);
-long[] notEntryIds = TagsEntryLocalServiceUtil.getEntryIds(company.getCompanyId(), notEntries);
+long[] entryIds = TagsEntryLocalServiceUtil.getEntryIds(portletGroupId.longValue(), entries);
+long[] notEntryIds = TagsEntryLocalServiceUtil.getEntryIds(portletGroupId.longValue(), notEntries);
 
 Date now = new Date();
 

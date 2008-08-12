@@ -29,30 +29,30 @@ package com.liferay.portlet.tags.service.persistence;
  *
  */
 public interface TagsEntryFinder {
-	public int countByC_N_P(long companyId, java.lang.String name,
+	public int countByG_N_P(long groupId, java.lang.String name,
 		java.lang.String[] properties)
 		throws com.liferay.portal.SystemException;
 
-	public int countByG_C_C_N(long groupId, long companyId, long classNameId,
+	public int countByG_C_N(long groupId, long classNameId,
 		java.lang.String name) throws com.liferay.portal.SystemException;
 
 	public java.util.List<com.liferay.portlet.tags.model.TagsEntry> findByA_F(
 		long assetId, boolean folksonomy)
 		throws com.liferay.portal.SystemException;
 
-	public java.util.List<com.liferay.portlet.tags.model.TagsEntry> findByC_N_P(
-		long companyId, java.lang.String name, java.lang.String[] properties)
+	public java.util.List<com.liferay.portlet.tags.model.TagsEntry> findByG_N_P(
+		long groupId, java.lang.String name, java.lang.String[] properties)
 		throws com.liferay.portal.SystemException;
 
-	public java.util.List<com.liferay.portlet.tags.model.TagsEntry> findByC_N_P(
-		long companyId, java.lang.String name, java.lang.String[] properties,
+	public java.util.List<com.liferay.portlet.tags.model.TagsEntry> findByG_N_P(
+		long groupId, java.lang.String name, java.lang.String[] properties,
 		int start, int end) throws com.liferay.portal.SystemException;
 
-	public java.util.List<com.liferay.portlet.tags.model.TagsEntry> findByG_C_C_N(
-		long groupId, long companyId, long classNameId, java.lang.String name)
+	public java.util.List<com.liferay.portlet.tags.model.TagsEntry> findByG_C_N(
+		long groupId, long classNameId, java.lang.String name)
 		throws com.liferay.portal.SystemException;
 
-	public java.util.List<com.liferay.portlet.tags.model.TagsEntry> findByG_C_C_N(
-		long groupId, long companyId, long classNameId, java.lang.String name,
-		int start, int end) throws com.liferay.portal.SystemException;
+	public java.util.List<com.liferay.portlet.tags.model.TagsEntry> findByG_C_N(
+		long groupId, long classNameId, java.lang.String name, int start,
+		int end) throws com.liferay.portal.SystemException;
 }

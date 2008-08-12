@@ -46,34 +46,34 @@ package com.liferay.portlet.tags.service;
  */
 public class TagsEntryServiceUtil {
 	public static com.liferay.portlet.tags.model.TagsEntry addEntry(
-		java.lang.String name)
+		long groupId, java.lang.String name)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
-		return _service.addEntry(name);
+		return _service.addEntry(groupId, name);
 	}
 
 	public static com.liferay.portlet.tags.model.TagsEntry addEntry(
-		java.lang.String name, java.lang.String[] properties)
+		long groupId, java.lang.String name, java.lang.String[] properties)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
-		return _service.addEntry(name, properties);
+		return _service.addEntry(groupId, name, properties);
 	}
 
 	public static com.liferay.portlet.tags.model.TagsEntry addEntry(
-		java.lang.String name, java.lang.String vocabularyName,
+		long groupId, java.lang.String name, java.lang.String vocabularyName,
 		java.lang.String[] properties)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
-		return _service.addEntry(name, vocabularyName, properties);
+		return _service.addEntry(groupId, name, vocabularyName, properties);
 	}
 
 	public static com.liferay.portlet.tags.model.TagsEntry addEntry(
-		java.lang.String parentEntryName, java.lang.String name,
+		long groupId, java.lang.String parentEntryName, java.lang.String name,
 		java.lang.String vocabularyName, java.lang.String[] properties)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
-		return _service.addEntry(parentEntryName, name, vocabularyName,
-			properties);
+		return _service.addEntry(groupId, parentEntryName, name,
+			vocabularyName, properties);
 	}
 
 	public static void deleteEntry(long entryId)
@@ -89,9 +89,9 @@ public class TagsEntryServiceUtil {
 	}
 
 	public static java.util.List<com.liferay.portlet.tags.model.TagsEntry> getEntries(
-		long groupId, long companyId, long classNameId, java.lang.String name)
+		long groupId, long classNameId, java.lang.String name)
 		throws com.liferay.portal.SystemException, java.rmi.RemoteException {
-		return _service.getEntries(groupId, companyId, classNameId, name);
+		return _service.getEntries(groupId, classNameId, name);
 	}
 
 	public static com.liferay.portlet.tags.model.TagsEntry getEntry(
@@ -101,27 +101,27 @@ public class TagsEntryServiceUtil {
 		return _service.getEntry(entryId);
 	}
 
-	public static java.util.List<com.liferay.portlet.tags.model.TagsEntry> getVocabularyEntries(
-		long companyId, java.lang.String vocabularyName)
+	public static java.util.List<com.liferay.portlet.tags.model.TagsEntry> getGroupVocabularyEntries(
+		long groupId, java.lang.String vocabularyName)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
-		return _service.getVocabularyEntries(companyId, vocabularyName);
+		return _service.getGroupVocabularyEntries(groupId, vocabularyName);
 	}
 
-	public static java.util.List<com.liferay.portlet.tags.model.TagsEntry> getVocabularyEntries(
-		long companyId, java.lang.String parentEntryName,
+	public static java.util.List<com.liferay.portlet.tags.model.TagsEntry> getGroupVocabularyEntries(
+		long groupId, java.lang.String parentEntryName,
 		java.lang.String vocabularyName)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
-		return _service.getVocabularyEntries(companyId, parentEntryName,
+		return _service.getGroupVocabularyEntries(groupId, parentEntryName,
 			vocabularyName);
 	}
 
-	public static java.util.List<com.liferay.portlet.tags.model.TagsEntry> getVocabularyRootEntries(
-		long companyId, java.lang.String vocabularyName)
+	public static java.util.List<com.liferay.portlet.tags.model.TagsEntry> getGroupVocabularyRootEntries(
+		long groupId, java.lang.String vocabularyName)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
-		return _service.getVocabularyRootEntries(companyId, vocabularyName);
+		return _service.getGroupVocabularyRootEntries(groupId, vocabularyName);
 	}
 
 	public static void mergeEntries(long fromEntryId, long toEntryId)
@@ -131,30 +131,29 @@ public class TagsEntryServiceUtil {
 	}
 
 	public static java.util.List<com.liferay.portlet.tags.model.TagsEntry> search(
-		long companyId, java.lang.String name, java.lang.String[] properties)
+		long groupId, java.lang.String name, java.lang.String[] properties)
 		throws com.liferay.portal.SystemException, java.rmi.RemoteException {
-		return _service.search(companyId, name, properties);
+		return _service.search(groupId, name, properties);
 	}
 
 	public static java.util.List<com.liferay.portlet.tags.model.TagsEntry> search(
-		long companyId, java.lang.String name, java.lang.String[] properties,
+		long groupId, java.lang.String name, java.lang.String[] properties,
 		int start, int end)
 		throws com.liferay.portal.SystemException, java.rmi.RemoteException {
-		return _service.search(companyId, name, properties, start, end);
+		return _service.search(groupId, name, properties, start, end);
 	}
 
 	public static com.liferay.portal.kernel.json.JSONArray searchAutocomplete(
-		long companyId, java.lang.String name, java.lang.String[] properties,
+		long groupId, java.lang.String name, java.lang.String[] properties,
 		int start, int end)
 		throws com.liferay.portal.SystemException, java.rmi.RemoteException {
-		return _service.searchAutocomplete(companyId, name, properties, start,
-			end);
+		return _service.searchAutocomplete(groupId, name, properties, start, end);
 	}
 
-	public static int searchCount(long companyId, java.lang.String name,
+	public static int searchCount(long groupId, java.lang.String name,
 		java.lang.String[] properties)
 		throws com.liferay.portal.SystemException, java.rmi.RemoteException {
-		return _service.searchCount(companyId, name, properties);
+		return _service.searchCount(groupId, name, properties);
 	}
 
 	public static com.liferay.portlet.tags.model.TagsEntry updateEntry(

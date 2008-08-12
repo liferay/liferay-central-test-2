@@ -42,21 +42,21 @@ import java.util.List;
 public class TagsVocabularyLocalServiceImpl
 	extends TagsVocabularyLocalServiceBaseImpl {
 
-	public TagsVocabulary addVocabulary(long userId, String name)
+	public TagsVocabulary addVocabulary(long userId, long groupId, String name)
 		throws PortalException, SystemException {
 
-		return addVocabulary(userId, name, false);
+		return addVocabulary(userId, groupId, name, false);
 	}
 
 	public TagsVocabulary addVocabulary(
-			long userId, String name, boolean folksonomy)
+			long userId, long groupId, String name, boolean folksonomy)
 		throws PortalException, SystemException {
 
 		User user = userPersistence.findByPrimaryKey(userId);
 		name = name.trim();
 		Date now = new Date();
 
-		if (hasVocabulary(user.getCompanyId(), name)) {
+		if (hasVocabulary(groupId, name)) {
 			throw new DuplicateVocabularyException(
 				"A vocabulary with the name " + name + " already exists");
 		}
@@ -66,6 +66,7 @@ public class TagsVocabularyLocalServiceImpl
 		TagsVocabulary vocabulary = tagsVocabularyPersistence.create(
 			vocabularyId);
 
+		vocabulary.setGroupId(groupId);
 		vocabulary.setCompanyId(user.getCompanyId());
 		vocabulary.setUserId(user.getUserId());
 		vocabulary.setUserName(user.getFullName());
@@ -80,39 +81,38 @@ public class TagsVocabularyLocalServiceImpl
 
 	}
 
-	public void deleteVocabulary(long userId, long vocabularyId)
+	public void deleteVocabulary(long vocabularyId)
 		throws PortalException, SystemException {
 
-		User user = userPersistence.findByPrimaryKey(userId);
-
-		tagsEntryLocalService.deleteEntries(user.getCompanyId(), vocabularyId);
+		tagsEntryLocalService.deleteVocabularyEntries(vocabularyId);
 
 		tagsVocabularyPersistence.remove(vocabularyId);
 	}
 
-	public List<TagsVocabulary> getVocabularies(long companyId)
-		throws SystemException {
-
-		return tagsVocabularyPersistence.findByCompanyId(companyId);
-	}
-
-	public List<TagsVocabulary> getVocabularies(
+	public List<TagsVocabulary> getCompanyVocabularies(
 			long companyId, boolean folksonomy)
 		throws SystemException {
 
 		return tagsVocabularyPersistence.findByC_F(companyId, folksonomy);
 	}
 
+	public List<TagsVocabulary> getGroupVocabularies(
+			long groupId, boolean folksonomy)
+		throws SystemException {
+
+		return tagsVocabularyPersistence.findByG_F(groupId, folksonomy);
+	}
+
+	public TagsVocabulary getGroupVocabulary(long groupId, String name)
+		throws PortalException, SystemException {
+
+		return tagsVocabularyPersistence.findByG_N(groupId, name);
+	}
+
 	public TagsVocabulary getVocabulary(long vocabularyId)
 		throws PortalException, SystemException {
 
 		return tagsVocabularyPersistence.findByPrimaryKey(vocabularyId);
-	}
-
-	public TagsVocabulary getVocabulary(long companyId, String name)
-		throws PortalException, SystemException {
-
-		return tagsVocabularyPersistence.findByC_N(companyId, name);
 	}
 
 	public TagsVocabulary updateVocabulary(
@@ -125,7 +125,7 @@ public class TagsVocabularyLocalServiceImpl
 			vocabularyId);
 
 		if (!vocabulary.getName().equals(name) &&
-			hasVocabulary(vocabulary.getCompanyId(), name)) {
+			hasVocabulary(vocabulary.getGroupId(), name)) {
 
 			throw new DuplicateVocabularyException(name);
 		}
@@ -139,10 +139,10 @@ public class TagsVocabularyLocalServiceImpl
 		return vocabulary;
 	}
 
-	protected boolean hasVocabulary(long companyId, String name)
+	protected boolean hasVocabulary(long groupId, String name)
 		throws SystemException {
 
-		if (tagsVocabularyPersistence.countByC_N(companyId, name) == 0) {
+		if (tagsVocabularyPersistence.countByG_N(groupId, name) == 0) {
 			return false;
 		}
 		else {

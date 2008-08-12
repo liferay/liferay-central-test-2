@@ -30,7 +30,7 @@ String tag = ParamUtil.getString(renderRequest, "tag");
 String description = null;
 
 try {
-	TagsEntry tagsEntry = TagsEntryLocalServiceUtil.getEntry(themeDisplay.getCompanyId(), tag);
+	TagsEntry tagsEntry = TagsEntryLocalServiceUtil.getEntry(portletGroupId.longValue(), tag);
 
 	TagsProperty tagsProperty = TagsPropertyLocalServiceUtil.getProperty(tagsEntry.getEntryId(), "description");
 

@@ -132,14 +132,14 @@ public class TagsPropertyLocalServiceImpl
 		return tagsPropertyPersistence.findByE_K(entryId, key);
 	}
 
-	public String[] getPropertyKeys(long companyId) throws SystemException {
-		return tagsPropertyKeyFinder.findByCompanyId(companyId);
+	public String[] getPropertyKeys(long groupId) throws SystemException {
+		return tagsPropertyKeyFinder.findByGroupId(groupId);
 	}
 
-	public List<TagsProperty> getPropertyValues(long companyId, String key)
+	public List<TagsProperty> getPropertyValues(long groupId, String key)
 		throws SystemException {
 
-		return tagsPropertyFinder.findByC_K(companyId, key);
+		return tagsPropertyFinder.findByG_K(groupId, key);
 	}
 
 	public TagsProperty updateProperty(

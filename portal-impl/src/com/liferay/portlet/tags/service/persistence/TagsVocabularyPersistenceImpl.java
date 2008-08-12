@@ -270,244 +270,16 @@ public class TagsVocabularyPersistenceImpl extends BasePersistenceImpl
 		}
 	}
 
-	public List<TagsVocabulary> findByCompanyId(long companyId)
-		throws SystemException {
-		boolean finderClassNameCacheEnabled = TagsVocabularyModelImpl.CACHE_ENABLED;
-		String finderClassName = TagsVocabulary.class.getName();
-		String finderMethodName = "findByCompanyId";
-		String[] finderParams = new String[] { Long.class.getName() };
-		Object[] finderArgs = new Object[] { new Long(companyId) };
-
-		Object result = null;
-
-		if (finderClassNameCacheEnabled) {
-			result = FinderCacheUtil.getResult(finderClassName,
-					finderMethodName, finderParams, finderArgs, this);
-		}
-
-		if (result == null) {
-			Session session = null;
-
-			try {
-				session = openSession();
-
-				StringBuilder query = new StringBuilder();
-
-				query.append(
-					"FROM com.liferay.portlet.tags.model.TagsVocabulary WHERE ");
-
-				query.append("companyId = ?");
-
-				query.append(" ");
-
-				Query q = session.createQuery(query.toString());
-
-				QueryPos qPos = QueryPos.getInstance(q);
-
-				qPos.add(companyId);
-
-				List<TagsVocabulary> list = q.list();
-
-				FinderCacheUtil.putResult(finderClassNameCacheEnabled,
-					finderClassName, finderMethodName, finderParams,
-					finderArgs, list);
-
-				return list;
-			}
-			catch (Exception e) {
-				throw processException(e);
-			}
-			finally {
-				closeSession(session);
-			}
-		}
-		else {
-			return (List<TagsVocabulary>)result;
-		}
-	}
-
-	public List<TagsVocabulary> findByCompanyId(long companyId, int start,
-		int end) throws SystemException {
-		return findByCompanyId(companyId, start, end, null);
-	}
-
-	public List<TagsVocabulary> findByCompanyId(long companyId, int start,
-		int end, OrderByComparator obc) throws SystemException {
-		boolean finderClassNameCacheEnabled = TagsVocabularyModelImpl.CACHE_ENABLED;
-		String finderClassName = TagsVocabulary.class.getName();
-		String finderMethodName = "findByCompanyId";
-		String[] finderParams = new String[] {
-				Long.class.getName(),
-				
-				"java.lang.Integer", "java.lang.Integer",
-				"com.liferay.portal.kernel.util.OrderByComparator"
-			};
-		Object[] finderArgs = new Object[] {
-				new Long(companyId),
-				
-				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
-			};
-
-		Object result = null;
-
-		if (finderClassNameCacheEnabled) {
-			result = FinderCacheUtil.getResult(finderClassName,
-					finderMethodName, finderParams, finderArgs, this);
-		}
-
-		if (result == null) {
-			Session session = null;
-
-			try {
-				session = openSession();
-
-				StringBuilder query = new StringBuilder();
-
-				query.append(
-					"FROM com.liferay.portlet.tags.model.TagsVocabulary WHERE ");
-
-				query.append("companyId = ?");
-
-				query.append(" ");
-
-				if (obc != null) {
-					query.append("ORDER BY ");
-					query.append(obc.getOrderBy());
-				}
-
-				Query q = session.createQuery(query.toString());
-
-				QueryPos qPos = QueryPos.getInstance(q);
-
-				qPos.add(companyId);
-
-				List<TagsVocabulary> list = (List<TagsVocabulary>)QueryUtil.list(q,
-						getDialect(), start, end);
-
-				FinderCacheUtil.putResult(finderClassNameCacheEnabled,
-					finderClassName, finderMethodName, finderParams,
-					finderArgs, list);
-
-				return list;
-			}
-			catch (Exception e) {
-				throw processException(e);
-			}
-			finally {
-				closeSession(session);
-			}
-		}
-		else {
-			return (List<TagsVocabulary>)result;
-		}
-	}
-
-	public TagsVocabulary findByCompanyId_First(long companyId,
-		OrderByComparator obc)
+	public TagsVocabulary findByG_N(long groupId, String name)
 		throws NoSuchVocabularyException, SystemException {
-		List<TagsVocabulary> list = findByCompanyId(companyId, 0, 1, obc);
-
-		if (list.size() == 0) {
-			StringBuilder msg = new StringBuilder();
-
-			msg.append("No TagsVocabulary exists with the key {");
-
-			msg.append("companyId=" + companyId);
-
-			msg.append(StringPool.CLOSE_CURLY_BRACE);
-
-			throw new NoSuchVocabularyException(msg.toString());
-		}
-		else {
-			return list.get(0);
-		}
-	}
-
-	public TagsVocabulary findByCompanyId_Last(long companyId,
-		OrderByComparator obc)
-		throws NoSuchVocabularyException, SystemException {
-		int count = countByCompanyId(companyId);
-
-		List<TagsVocabulary> list = findByCompanyId(companyId, count - 1,
-				count, obc);
-
-		if (list.size() == 0) {
-			StringBuilder msg = new StringBuilder();
-
-			msg.append("No TagsVocabulary exists with the key {");
-
-			msg.append("companyId=" + companyId);
-
-			msg.append(StringPool.CLOSE_CURLY_BRACE);
-
-			throw new NoSuchVocabularyException(msg.toString());
-		}
-		else {
-			return list.get(0);
-		}
-	}
-
-	public TagsVocabulary[] findByCompanyId_PrevAndNext(long vocabularyId,
-		long companyId, OrderByComparator obc)
-		throws NoSuchVocabularyException, SystemException {
-		TagsVocabulary tagsVocabulary = findByPrimaryKey(vocabularyId);
-
-		int count = countByCompanyId(companyId);
-
-		Session session = null;
-
-		try {
-			session = openSession();
-
-			StringBuilder query = new StringBuilder();
-
-			query.append(
-				"FROM com.liferay.portlet.tags.model.TagsVocabulary WHERE ");
-
-			query.append("companyId = ?");
-
-			query.append(" ");
-
-			if (obc != null) {
-				query.append("ORDER BY ");
-				query.append(obc.getOrderBy());
-			}
-
-			Query q = session.createQuery(query.toString());
-
-			QueryPos qPos = QueryPos.getInstance(q);
-
-			qPos.add(companyId);
-
-			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc,
-					tagsVocabulary);
-
-			TagsVocabulary[] array = new TagsVocabularyImpl[3];
-
-			array[0] = (TagsVocabulary)objArray[0];
-			array[1] = (TagsVocabulary)objArray[1];
-			array[2] = (TagsVocabulary)objArray[2];
-
-			return array;
-		}
-		catch (Exception e) {
-			throw processException(e);
-		}
-		finally {
-			closeSession(session);
-		}
-	}
-
-	public TagsVocabulary findByC_N(long companyId, String name)
-		throws NoSuchVocabularyException, SystemException {
-		TagsVocabulary tagsVocabulary = fetchByC_N(companyId, name);
+		TagsVocabulary tagsVocabulary = fetchByG_N(groupId, name);
 
 		if (tagsVocabulary == null) {
 			StringBuilder msg = new StringBuilder();
 
 			msg.append("No TagsVocabulary exists with the key {");
 
-			msg.append("companyId=" + companyId);
+			msg.append("groupId=" + groupId);
 
 			msg.append(", ");
 			msg.append("name=" + name);
@@ -524,15 +296,15 @@ public class TagsVocabularyPersistenceImpl extends BasePersistenceImpl
 		return tagsVocabulary;
 	}
 
-	public TagsVocabulary fetchByC_N(long companyId, String name)
+	public TagsVocabulary fetchByG_N(long groupId, String name)
 		throws SystemException {
 		boolean finderClassNameCacheEnabled = TagsVocabularyModelImpl.CACHE_ENABLED;
 		String finderClassName = TagsVocabulary.class.getName();
-		String finderMethodName = "fetchByC_N";
+		String finderMethodName = "fetchByG_N";
 		String[] finderParams = new String[] {
 				Long.class.getName(), String.class.getName()
 			};
-		Object[] finderArgs = new Object[] { new Long(companyId), name };
+		Object[] finderArgs = new Object[] { new Long(groupId), name };
 
 		Object result = null;
 
@@ -552,7 +324,7 @@ public class TagsVocabularyPersistenceImpl extends BasePersistenceImpl
 				query.append(
 					"FROM com.liferay.portlet.tags.model.TagsVocabulary WHERE ");
 
-				query.append("companyId = ?");
+				query.append("groupId = ?");
 
 				query.append(" AND ");
 
@@ -569,7 +341,7 @@ public class TagsVocabularyPersistenceImpl extends BasePersistenceImpl
 
 				QueryPos qPos = QueryPos.getInstance(q);
 
-				qPos.add(companyId);
+				qPos.add(groupId);
 
 				if (name != null) {
 					qPos.add(name);
@@ -604,6 +376,262 @@ public class TagsVocabularyPersistenceImpl extends BasePersistenceImpl
 			else {
 				return list.get(0);
 			}
+		}
+	}
+
+	public List<TagsVocabulary> findByG_F(long groupId, boolean folksonomy)
+		throws SystemException {
+		boolean finderClassNameCacheEnabled = TagsVocabularyModelImpl.CACHE_ENABLED;
+		String finderClassName = TagsVocabulary.class.getName();
+		String finderMethodName = "findByG_F";
+		String[] finderParams = new String[] {
+				Long.class.getName(), Boolean.class.getName()
+			};
+		Object[] finderArgs = new Object[] {
+				new Long(groupId), Boolean.valueOf(folksonomy)
+			};
+
+		Object result = null;
+
+		if (finderClassNameCacheEnabled) {
+			result = FinderCacheUtil.getResult(finderClassName,
+					finderMethodName, finderParams, finderArgs, this);
+		}
+
+		if (result == null) {
+			Session session = null;
+
+			try {
+				session = openSession();
+
+				StringBuilder query = new StringBuilder();
+
+				query.append(
+					"FROM com.liferay.portlet.tags.model.TagsVocabulary WHERE ");
+
+				query.append("groupId = ?");
+
+				query.append(" AND ");
+
+				query.append("folksonomy = ?");
+
+				query.append(" ");
+
+				Query q = session.createQuery(query.toString());
+
+				QueryPos qPos = QueryPos.getInstance(q);
+
+				qPos.add(groupId);
+
+				qPos.add(folksonomy);
+
+				List<TagsVocabulary> list = q.list();
+
+				FinderCacheUtil.putResult(finderClassNameCacheEnabled,
+					finderClassName, finderMethodName, finderParams,
+					finderArgs, list);
+
+				return list;
+			}
+			catch (Exception e) {
+				throw processException(e);
+			}
+			finally {
+				closeSession(session);
+			}
+		}
+		else {
+			return (List<TagsVocabulary>)result;
+		}
+	}
+
+	public List<TagsVocabulary> findByG_F(long groupId, boolean folksonomy,
+		int start, int end) throws SystemException {
+		return findByG_F(groupId, folksonomy, start, end, null);
+	}
+
+	public List<TagsVocabulary> findByG_F(long groupId, boolean folksonomy,
+		int start, int end, OrderByComparator obc) throws SystemException {
+		boolean finderClassNameCacheEnabled = TagsVocabularyModelImpl.CACHE_ENABLED;
+		String finderClassName = TagsVocabulary.class.getName();
+		String finderMethodName = "findByG_F";
+		String[] finderParams = new String[] {
+				Long.class.getName(), Boolean.class.getName(),
+				
+				"java.lang.Integer", "java.lang.Integer",
+				"com.liferay.portal.kernel.util.OrderByComparator"
+			};
+		Object[] finderArgs = new Object[] {
+				new Long(groupId), Boolean.valueOf(folksonomy),
+				
+				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
+			};
+
+		Object result = null;
+
+		if (finderClassNameCacheEnabled) {
+			result = FinderCacheUtil.getResult(finderClassName,
+					finderMethodName, finderParams, finderArgs, this);
+		}
+
+		if (result == null) {
+			Session session = null;
+
+			try {
+				session = openSession();
+
+				StringBuilder query = new StringBuilder();
+
+				query.append(
+					"FROM com.liferay.portlet.tags.model.TagsVocabulary WHERE ");
+
+				query.append("groupId = ?");
+
+				query.append(" AND ");
+
+				query.append("folksonomy = ?");
+
+				query.append(" ");
+
+				if (obc != null) {
+					query.append("ORDER BY ");
+					query.append(obc.getOrderBy());
+				}
+
+				Query q = session.createQuery(query.toString());
+
+				QueryPos qPos = QueryPos.getInstance(q);
+
+				qPos.add(groupId);
+
+				qPos.add(folksonomy);
+
+				List<TagsVocabulary> list = (List<TagsVocabulary>)QueryUtil.list(q,
+						getDialect(), start, end);
+
+				FinderCacheUtil.putResult(finderClassNameCacheEnabled,
+					finderClassName, finderMethodName, finderParams,
+					finderArgs, list);
+
+				return list;
+			}
+			catch (Exception e) {
+				throw processException(e);
+			}
+			finally {
+				closeSession(session);
+			}
+		}
+		else {
+			return (List<TagsVocabulary>)result;
+		}
+	}
+
+	public TagsVocabulary findByG_F_First(long groupId, boolean folksonomy,
+		OrderByComparator obc)
+		throws NoSuchVocabularyException, SystemException {
+		List<TagsVocabulary> list = findByG_F(groupId, folksonomy, 0, 1, obc);
+
+		if (list.size() == 0) {
+			StringBuilder msg = new StringBuilder();
+
+			msg.append("No TagsVocabulary exists with the key {");
+
+			msg.append("groupId=" + groupId);
+
+			msg.append(", ");
+			msg.append("folksonomy=" + folksonomy);
+
+			msg.append(StringPool.CLOSE_CURLY_BRACE);
+
+			throw new NoSuchVocabularyException(msg.toString());
+		}
+		else {
+			return list.get(0);
+		}
+	}
+
+	public TagsVocabulary findByG_F_Last(long groupId, boolean folksonomy,
+		OrderByComparator obc)
+		throws NoSuchVocabularyException, SystemException {
+		int count = countByG_F(groupId, folksonomy);
+
+		List<TagsVocabulary> list = findByG_F(groupId, folksonomy, count - 1,
+				count, obc);
+
+		if (list.size() == 0) {
+			StringBuilder msg = new StringBuilder();
+
+			msg.append("No TagsVocabulary exists with the key {");
+
+			msg.append("groupId=" + groupId);
+
+			msg.append(", ");
+			msg.append("folksonomy=" + folksonomy);
+
+			msg.append(StringPool.CLOSE_CURLY_BRACE);
+
+			throw new NoSuchVocabularyException(msg.toString());
+		}
+		else {
+			return list.get(0);
+		}
+	}
+
+	public TagsVocabulary[] findByG_F_PrevAndNext(long vocabularyId,
+		long groupId, boolean folksonomy, OrderByComparator obc)
+		throws NoSuchVocabularyException, SystemException {
+		TagsVocabulary tagsVocabulary = findByPrimaryKey(vocabularyId);
+
+		int count = countByG_F(groupId, folksonomy);
+
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			StringBuilder query = new StringBuilder();
+
+			query.append(
+				"FROM com.liferay.portlet.tags.model.TagsVocabulary WHERE ");
+
+			query.append("groupId = ?");
+
+			query.append(" AND ");
+
+			query.append("folksonomy = ?");
+
+			query.append(" ");
+
+			if (obc != null) {
+				query.append("ORDER BY ");
+				query.append(obc.getOrderBy());
+			}
+
+			Query q = session.createQuery(query.toString());
+
+			QueryPos qPos = QueryPos.getInstance(q);
+
+			qPos.add(groupId);
+
+			qPos.add(folksonomy);
+
+			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc,
+					tagsVocabulary);
+
+			TagsVocabulary[] array = new TagsVocabularyImpl[3];
+
+			array[0] = (TagsVocabulary)objArray[0];
+			array[1] = (TagsVocabulary)objArray[1];
+			array[2] = (TagsVocabulary)objArray[2];
+
+			return array;
+		}
+		catch (Exception e) {
+			throw processException(e);
+		}
+		finally {
+			closeSession(session);
 		}
 	}
 
@@ -975,17 +1003,18 @@ public class TagsVocabularyPersistenceImpl extends BasePersistenceImpl
 		}
 	}
 
-	public void removeByCompanyId(long companyId) throws SystemException {
-		for (TagsVocabulary tagsVocabulary : findByCompanyId(companyId)) {
-			remove(tagsVocabulary);
-		}
-	}
-
-	public void removeByC_N(long companyId, String name)
+	public void removeByG_N(long groupId, String name)
 		throws NoSuchVocabularyException, SystemException {
-		TagsVocabulary tagsVocabulary = findByC_N(companyId, name);
+		TagsVocabulary tagsVocabulary = findByG_N(groupId, name);
 
 		remove(tagsVocabulary);
+	}
+
+	public void removeByG_F(long groupId, boolean folksonomy)
+		throws SystemException {
+		for (TagsVocabulary tagsVocabulary : findByG_F(groupId, folksonomy)) {
+			remove(tagsVocabulary);
+		}
 	}
 
 	public void removeByC_F(long companyId, boolean folksonomy)
@@ -1001,12 +1030,14 @@ public class TagsVocabularyPersistenceImpl extends BasePersistenceImpl
 		}
 	}
 
-	public int countByCompanyId(long companyId) throws SystemException {
+	public int countByG_N(long groupId, String name) throws SystemException {
 		boolean finderClassNameCacheEnabled = TagsVocabularyModelImpl.CACHE_ENABLED;
 		String finderClassName = TagsVocabulary.class.getName();
-		String finderMethodName = "countByCompanyId";
-		String[] finderParams = new String[] { Long.class.getName() };
-		Object[] finderArgs = new Object[] { new Long(companyId) };
+		String finderMethodName = "countByG_N";
+		String[] finderParams = new String[] {
+				Long.class.getName(), String.class.getName()
+			};
+		Object[] finderArgs = new Object[] { new Long(groupId), name };
 
 		Object result = null;
 
@@ -1027,7 +1058,16 @@ public class TagsVocabularyPersistenceImpl extends BasePersistenceImpl
 				query.append(
 					"FROM com.liferay.portlet.tags.model.TagsVocabulary WHERE ");
 
-				query.append("companyId = ?");
+				query.append("groupId = ?");
+
+				query.append(" AND ");
+
+				if (name == null) {
+					query.append("name IS NULL");
+				}
+				else {
+					query.append("name = ?");
+				}
 
 				query.append(" ");
 
@@ -1035,7 +1075,11 @@ public class TagsVocabularyPersistenceImpl extends BasePersistenceImpl
 
 				QueryPos qPos = QueryPos.getInstance(q);
 
-				qPos.add(companyId);
+				qPos.add(groupId);
+
+				if (name != null) {
+					qPos.add(name);
+				}
 
 				Long count = null;
 
@@ -1067,15 +1111,17 @@ public class TagsVocabularyPersistenceImpl extends BasePersistenceImpl
 		}
 	}
 
-	public int countByC_N(long companyId, String name)
+	public int countByG_F(long groupId, boolean folksonomy)
 		throws SystemException {
 		boolean finderClassNameCacheEnabled = TagsVocabularyModelImpl.CACHE_ENABLED;
 		String finderClassName = TagsVocabulary.class.getName();
-		String finderMethodName = "countByC_N";
+		String finderMethodName = "countByG_F";
 		String[] finderParams = new String[] {
-				Long.class.getName(), String.class.getName()
+				Long.class.getName(), Boolean.class.getName()
 			};
-		Object[] finderArgs = new Object[] { new Long(companyId), name };
+		Object[] finderArgs = new Object[] {
+				new Long(groupId), Boolean.valueOf(folksonomy)
+			};
 
 		Object result = null;
 
@@ -1096,16 +1142,11 @@ public class TagsVocabularyPersistenceImpl extends BasePersistenceImpl
 				query.append(
 					"FROM com.liferay.portlet.tags.model.TagsVocabulary WHERE ");
 
-				query.append("companyId = ?");
+				query.append("groupId = ?");
 
 				query.append(" AND ");
 
-				if (name == null) {
-					query.append("name IS NULL");
-				}
-				else {
-					query.append("name = ?");
-				}
+				query.append("folksonomy = ?");
 
 				query.append(" ");
 
@@ -1113,11 +1154,9 @@ public class TagsVocabularyPersistenceImpl extends BasePersistenceImpl
 
 				QueryPos qPos = QueryPos.getInstance(q);
 
-				qPos.add(companyId);
+				qPos.add(groupId);
 
-				if (name != null) {
-					qPos.add(name);
-				}
+				qPos.add(folksonomy);
 
 				Long count = null;
 

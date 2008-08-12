@@ -206,7 +206,7 @@ else if (type.equals("recent_changes")) {
 }
 else if (type.equals("tagged_pages")) {
 	long classNameId = PortalUtil.getClassNameId(WikiPage.class.getName());
-	long[] entryIds = TagsEntryLocalServiceUtil.getEntryIds(company.getCompanyId(), new String[] {tag});
+	long[] entryIds = TagsEntryLocalServiceUtil.getEntryIds(portletGroupId.longValue(), new String[] {tag});
 	long[] notEntryIds = new long[0];
 	Date now = new Date();
 

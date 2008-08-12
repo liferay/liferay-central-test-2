@@ -49,7 +49,7 @@ entries = ArrayUtil.distinct(entries, new StringComparator());
 
 for (String entryName : entries) {
 	try {
-		TagsEntry entry = TagsEntryLocalServiceUtil.getEntry(company.getCompanyId(), entryName);
+		TagsEntry entry = TagsEntryLocalServiceUtil.getEntry(portletGroupId.longValue(), entryName);
 
 		TagsProperty journalTemplateIdProperty = TagsPropertyLocalServiceUtil.getProperty(entry.getEntryId(), "journal-template-id");
 

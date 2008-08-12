@@ -22,8 +22,6 @@
 
 package com.liferay.portal.upgrade.v5_2_0;
 
-import com.liferay.portal.PortalException;
-import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.dao.jdbc.DataAccess;
 import com.liferay.portal.kernel.util.ArrayUtil;
 import com.liferay.portal.kernel.util.StringPool;
@@ -56,7 +54,8 @@ public class UpgradeTags extends UpgradeProcess {
 		_log.info("Upgrading");
 
 		try {
-			upgradeCategoryProperty();
+			upgradeEntryGroupId();
+			upgradePropertyCategory();
 		}
 		catch (Exception e) {
 			throw new UpgradeException(e);
@@ -64,8 +63,8 @@ public class UpgradeTags extends UpgradeProcess {
 	}
 
 	protected long getVocabularyId(
-			long companyId, long userId, String vocabularyName)
-		throws PortalException, SystemException {
+			long userId, long groupId, String vocabularyName)
+		throws Exception {
 
 		vocabularyName = vocabularyName.trim();
 
@@ -76,18 +75,18 @@ public class UpgradeTags extends UpgradeProcess {
 			vocabularyName = PropsValues.TAGS_VOCABULARY_DEFAULT;
 		}
 
-		String key = companyId + StringPool.UNDERLINE + vocabularyName;
+		String key = groupId + StringPool.UNDERLINE + vocabularyName;
 
 		TagsVocabulary vocabulary = _vocabulariesMap.get(key);
 
 		if (vocabulary == null) {
 			try {
-				vocabulary = TagsVocabularyLocalServiceUtil.getVocabulary(
-					companyId, vocabularyName);
+				vocabulary = TagsVocabularyLocalServiceUtil.getGroupVocabulary(
+					groupId, vocabularyName);
 			}
 			catch (NoSuchVocabularyException nsve) {
 				vocabulary = TagsVocabularyLocalServiceUtil.addVocabulary(
-					userId, vocabularyName, true);
+					userId, groupId, vocabularyName, true);
 			}
 
 			_vocabulariesMap.put(key, vocabulary);
@@ -96,7 +95,7 @@ public class UpgradeTags extends UpgradeProcess {
 		return vocabulary.getVocabularyId();
 	}
 
-	protected void upgradeCategoryProperty() throws Exception {
+	protected void upgradePropertyCategory() throws Exception {
 		Connection con = null;
 		PreparedStatement ps = null;
 		ResultSet rs = null;
@@ -105,7 +104,7 @@ public class UpgradeTags extends UpgradeProcess {
 			con = DataAccess.getConnection();
 
 			ps = con.prepareStatement(
-				"select TE.entryId, TE.companyId, TE.userId, TP.propertyId, " +
+				"select TE.entryId, TE.groupId, TE.userId, TP.propertyId, " +
 					"TP.value from TagsEntry as TE, TagsProperty as TP where " +
 						"TE.entryId = TP.entryId and TE.vocabularyId <= 0 " +
 							"and TP.key_ = 'category'");
@@ -114,12 +113,12 @@ public class UpgradeTags extends UpgradeProcess {
 
 			while (rs.next()) {
 				long entryId = rs.getLong("TE.entryId");
-				long companyId = rs.getLong("TE.companyId");
+				long groupId = rs.getLong("TE.groupId");
 				long userId = rs.getLong("TE.userId");
 				long propertyId = rs.getLong("TP.propertyId");
 				String value = rs.getString("TP.value");
 
-				long vocabularyId = getVocabularyId(companyId, userId, value);
+				long vocabularyId = getVocabularyId(userId, groupId, value);
 
 				ps = con.prepareStatement(
 					"update TagsEntry set vocabularyId = ? where entryId = ?");
@@ -142,6 +141,9 @@ public class UpgradeTags extends UpgradeProcess {
 		finally {
 			DataAccess.cleanUp(con, ps, rs);
 		}
+	}
+
+	protected void upgradeEntryGroupId() throws Exception {
 	}
 
 	private String[] _DEFAULT_CATEGORY_PROPERTY_VALUES = new String[] {

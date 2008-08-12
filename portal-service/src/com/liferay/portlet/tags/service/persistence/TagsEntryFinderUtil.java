@@ -29,16 +29,15 @@ package com.liferay.portlet.tags.service.persistence;
  *
  */
 public class TagsEntryFinderUtil {
-	public static int countByC_N_P(long companyId, java.lang.String name,
+	public static int countByG_N_P(long groupId, java.lang.String name,
 		java.lang.String[] properties)
 		throws com.liferay.portal.SystemException {
-		return getFinder().countByC_N_P(companyId, name, properties);
+		return getFinder().countByG_N_P(groupId, name, properties);
 	}
 
-	public static int countByG_C_C_N(long groupId, long companyId,
-		long classNameId, java.lang.String name)
-		throws com.liferay.portal.SystemException {
-		return getFinder().countByG_C_C_N(groupId, companyId, classNameId, name);
+	public static int countByG_C_N(long groupId, long classNameId,
+		java.lang.String name) throws com.liferay.portal.SystemException {
+		return getFinder().countByG_C_N(groupId, classNameId, name);
 	}
 
 	public static java.util.List<com.liferay.portlet.tags.model.TagsEntry> findByA_F(
@@ -47,30 +46,28 @@ public class TagsEntryFinderUtil {
 		return getFinder().findByA_F(assetId, folksonomy);
 	}
 
-	public static java.util.List<com.liferay.portlet.tags.model.TagsEntry> findByC_N_P(
-		long companyId, java.lang.String name, java.lang.String[] properties)
+	public static java.util.List<com.liferay.portlet.tags.model.TagsEntry> findByG_N_P(
+		long groupId, java.lang.String name, java.lang.String[] properties)
 		throws com.liferay.portal.SystemException {
-		return getFinder().findByC_N_P(companyId, name, properties);
+		return getFinder().findByG_N_P(groupId, name, properties);
 	}
 
-	public static java.util.List<com.liferay.portlet.tags.model.TagsEntry> findByC_N_P(
-		long companyId, java.lang.String name, java.lang.String[] properties,
+	public static java.util.List<com.liferay.portlet.tags.model.TagsEntry> findByG_N_P(
+		long groupId, java.lang.String name, java.lang.String[] properties,
 		int start, int end) throws com.liferay.portal.SystemException {
-		return getFinder().findByC_N_P(companyId, name, properties, start, end);
+		return getFinder().findByG_N_P(groupId, name, properties, start, end);
 	}
 
-	public static java.util.List<com.liferay.portlet.tags.model.TagsEntry> findByG_C_C_N(
-		long groupId, long companyId, long classNameId, java.lang.String name)
+	public static java.util.List<com.liferay.portlet.tags.model.TagsEntry> findByG_C_N(
+		long groupId, long classNameId, java.lang.String name)
 		throws com.liferay.portal.SystemException {
-		return getFinder().findByG_C_C_N(groupId, companyId, classNameId, name);
+		return getFinder().findByG_C_N(groupId, classNameId, name);
 	}
 
-	public static java.util.List<com.liferay.portlet.tags.model.TagsEntry> findByG_C_C_N(
-		long groupId, long companyId, long classNameId, java.lang.String name,
-		int start, int end) throws com.liferay.portal.SystemException {
-		return getFinder()
-				   .findByG_C_C_N(groupId, companyId, classNameId, name, start,
-			end);
+	public static java.util.List<com.liferay.portlet.tags.model.TagsEntry> findByG_C_N(
+		long groupId, long classNameId, java.lang.String name, int start,
+		int end) throws com.liferay.portal.SystemException {
+		return getFinder().findByG_C_N(groupId, classNameId, name, start, end);
 	}
 
 	public static TagsEntryFinder getFinder() {

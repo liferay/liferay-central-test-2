@@ -514,7 +514,7 @@ public class MediaWikiImporter implements WikiImporter {
 				}
 				catch (NoSuchEntryException nsee) {
 					tagsEntry = TagsEntryLocalServiceUtil.addEntry(
-						userId, categoryName);
+						userId, node.getGroupId(), categoryName);
 				}
 
 				if (Validator.isNotNull(description)) {
@@ -609,7 +609,7 @@ public class MediaWikiImporter implements WikiImporter {
 			}
 			catch (NoSuchEntryException nsee) {
 				tagsEntry = TagsEntryLocalServiceUtil.addEntry(
-					userId, categoryName);
+					userId, node.getGroupId(), categoryName);
 			}
 
 			tagsEntries.add(tagsEntry.getName());

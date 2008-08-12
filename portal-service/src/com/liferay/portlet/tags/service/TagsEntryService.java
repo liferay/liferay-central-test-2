@@ -48,23 +48,23 @@ package com.liferay.portlet.tags.service;
  *
  */
 public interface TagsEntryService {
-	public com.liferay.portlet.tags.model.TagsEntry addEntry(
+	public com.liferay.portlet.tags.model.TagsEntry addEntry(long groupId,
 		java.lang.String name)
 		throws java.rmi.RemoteException, com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;
 
-	public com.liferay.portlet.tags.model.TagsEntry addEntry(
+	public com.liferay.portlet.tags.model.TagsEntry addEntry(long groupId,
 		java.lang.String name, java.lang.String[] properties)
 		throws java.rmi.RemoteException, com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;
 
-	public com.liferay.portlet.tags.model.TagsEntry addEntry(
+	public com.liferay.portlet.tags.model.TagsEntry addEntry(long groupId,
 		java.lang.String name, java.lang.String vocabularyName,
 		java.lang.String[] properties)
 		throws java.rmi.RemoteException, com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;
 
-	public com.liferay.portlet.tags.model.TagsEntry addEntry(
+	public com.liferay.portlet.tags.model.TagsEntry addEntry(long groupId,
 		java.lang.String parentEntryName, java.lang.String name,
 		java.lang.String vocabularyName, java.lang.String[] properties)
 		throws java.rmi.RemoteException, com.liferay.portal.PortalException,
@@ -79,26 +79,26 @@ public interface TagsEntryService {
 		throws java.rmi.RemoteException, com.liferay.portal.SystemException;
 
 	public java.util.List<com.liferay.portlet.tags.model.TagsEntry> getEntries(
-		long groupId, long companyId, long classNameId, java.lang.String name)
+		long groupId, long classNameId, java.lang.String name)
 		throws java.rmi.RemoteException, com.liferay.portal.SystemException;
 
 	public com.liferay.portlet.tags.model.TagsEntry getEntry(long entryId)
 		throws java.rmi.RemoteException, com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;
 
-	public java.util.List<com.liferay.portlet.tags.model.TagsEntry> getVocabularyEntries(
-		long companyId, java.lang.String vocabularyName)
+	public java.util.List<com.liferay.portlet.tags.model.TagsEntry> getGroupVocabularyEntries(
+		long groupId, java.lang.String vocabularyName)
 		throws java.rmi.RemoteException, com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;
 
-	public java.util.List<com.liferay.portlet.tags.model.TagsEntry> getVocabularyEntries(
-		long companyId, java.lang.String parentEntryName,
+	public java.util.List<com.liferay.portlet.tags.model.TagsEntry> getGroupVocabularyEntries(
+		long groupId, java.lang.String parentEntryName,
 		java.lang.String vocabularyName)
 		throws java.rmi.RemoteException, com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;
 
-	public java.util.List<com.liferay.portlet.tags.model.TagsEntry> getVocabularyRootEntries(
-		long companyId, java.lang.String vocabularyName)
+	public java.util.List<com.liferay.portlet.tags.model.TagsEntry> getGroupVocabularyRootEntries(
+		long groupId, java.lang.String vocabularyName)
 		throws java.rmi.RemoteException, com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;
 
@@ -107,20 +107,20 @@ public interface TagsEntryService {
 			com.liferay.portal.SystemException;
 
 	public java.util.List<com.liferay.portlet.tags.model.TagsEntry> search(
-		long companyId, java.lang.String name, java.lang.String[] properties)
+		long groupId, java.lang.String name, java.lang.String[] properties)
 		throws java.rmi.RemoteException, com.liferay.portal.SystemException;
 
 	public java.util.List<com.liferay.portlet.tags.model.TagsEntry> search(
-		long companyId, java.lang.String name, java.lang.String[] properties,
+		long groupId, java.lang.String name, java.lang.String[] properties,
 		int start, int end)
 		throws java.rmi.RemoteException, com.liferay.portal.SystemException;
 
 	public com.liferay.portal.kernel.json.JSONArray searchAutocomplete(
-		long companyId, java.lang.String name, java.lang.String[] properties,
+		long groupId, java.lang.String name, java.lang.String[] properties,
 		int start, int end)
 		throws java.rmi.RemoteException, com.liferay.portal.SystemException;
 
-	public int searchCount(long companyId, java.lang.String name,
+	public int searchCount(long groupId, java.lang.String name,
 		java.lang.String[] properties)
 		throws java.rmi.RemoteException, com.liferay.portal.SystemException;
 

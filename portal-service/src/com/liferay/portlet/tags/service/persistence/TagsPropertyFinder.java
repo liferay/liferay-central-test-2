@@ -29,14 +29,14 @@ package com.liferay.portlet.tags.service.persistence;
  *
  */
 public interface TagsPropertyFinder {
-	public int countByC_K(long companyId, java.lang.String key)
+	public int countByG_K(long groupId, java.lang.String key)
 		throws com.liferay.portal.SystemException;
 
-	public java.util.List<com.liferay.portlet.tags.model.TagsProperty> findByC_K(
-		long companyId, java.lang.String key)
+	public java.util.List<com.liferay.portlet.tags.model.TagsProperty> findByG_K(
+		long groupId, java.lang.String key)
 		throws com.liferay.portal.SystemException;
 
-	public java.util.List<com.liferay.portlet.tags.model.TagsProperty> findByC_K(
-		long companyId, java.lang.String key, int start, int end)
+	public java.util.List<com.liferay.portlet.tags.model.TagsProperty> findByG_K(
+		long groupId, java.lang.String key, int start, int end)
 		throws com.liferay.portal.SystemException;
 }

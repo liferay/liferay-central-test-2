@@ -46,19 +46,19 @@ import java.util.List;
 public class TagsPropertyFinderImpl
 	extends BasePersistenceImpl implements TagsPropertyFinder {
 
-	public static String COUNT_BY_C_K =
-		TagsPropertyFinder.class.getName() + ".countByC_K";
+	public static String COUNT_BY_G_K =
+		TagsPropertyFinder.class.getName() + ".countByG_K";
 
-	public static String FIND_BY_C_K =
-		TagsPropertyFinder.class.getName() + ".findByC_K";
+	public static String FIND_BY_G_K =
+		TagsPropertyFinder.class.getName() + ".findByG_K";
 
-	public int countByC_K(long companyId, String key) throws SystemException {
+	public int countByG_K(long groupId, String key) throws SystemException {
 		Session session = null;
 
 		try {
 			session = openSession();
 
-			String sql = CustomSQLUtil.get(COUNT_BY_C_K);
+			String sql = CustomSQLUtil.get(COUNT_BY_G_K);
 
 			SQLQuery q = session.createSQLQuery(sql);
 
@@ -66,7 +66,7 @@ public class TagsPropertyFinderImpl
 
 			QueryPos qPos = QueryPos.getInstance(q);
 
-			qPos.add(companyId);
+			qPos.add(groupId);
 			qPos.add(key);
 
 			Iterator<Long> itr = q.list().iterator();
@@ -89,14 +89,14 @@ public class TagsPropertyFinderImpl
 		}
 	}
 
-	public List<TagsProperty> findByC_K(long companyId, String key)
+	public List<TagsProperty> findByG_K(long groupId, String key)
 		throws SystemException {
 
-		return findByC_K(companyId, key, QueryUtil.ALL_POS, QueryUtil.ALL_POS);
+		return findByG_K(groupId, key, QueryUtil.ALL_POS, QueryUtil.ALL_POS);
 	}
 
-	public List<TagsProperty> findByC_K(
-			long companyId, String key, int start, int end)
+	public List<TagsProperty> findByG_K(
+			long groupId, String key, int start, int end)
 		throws SystemException {
 
 		Session session = null;
@@ -104,7 +104,7 @@ public class TagsPropertyFinderImpl
 		try {
 			session = openSession();
 
-			String sql = CustomSQLUtil.get(FIND_BY_C_K);
+			String sql = CustomSQLUtil.get(FIND_BY_G_K);
 
 			SQLQuery q = session.createSQLQuery(sql);
 
@@ -112,7 +112,7 @@ public class TagsPropertyFinderImpl
 
 			QueryPos qPos = QueryPos.getInstance(q);
 
-			qPos.add(companyId);
+			qPos.add(groupId);
 			qPos.add(key);
 
 			List<TagsProperty> properties = new ArrayList<TagsProperty>();

@@ -29,19 +29,19 @@ package com.liferay.portlet.tags.service.persistence;
  *
  */
 public class TagsPropertyKeyFinderUtil {
-	public static int countByCompanyId(long companyId)
+	public static int countByGroupId(long groupId)
 		throws com.liferay.portal.SystemException {
-		return getFinder().countByCompanyId(companyId);
+		return getFinder().countByGroupId(groupId);
 	}
 
-	public static java.lang.String[] findByCompanyId(long companyId)
+	public static java.lang.String[] findByGroupId(long groupId)
 		throws com.liferay.portal.SystemException {
-		return getFinder().findByCompanyId(companyId);
+		return getFinder().findByGroupId(groupId);
 	}
 
-	public static java.lang.String[] findByCompanyId(long companyId, int start,
+	public static java.lang.String[] findByGroupId(long groupId, int start,
 		int end) throws com.liferay.portal.SystemException {
-		return getFinder().findByCompanyId(companyId, start, end);
+		return getFinder().findByGroupId(groupId, start, end);
 	}
 
 	public static TagsPropertyKeyFinder getFinder() {

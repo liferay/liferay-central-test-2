@@ -104,17 +104,14 @@
 
 		<!-- Finder methods -->
 
-		<finder name="C_N" return-type="TagsEntry">
-			<finder-column name="companyId" />
-			<finder-column name="name" />
-		</finder>
-
-		<finder name="C_V" return-type="Collection">
-			<finder-column name="companyId" />
+		<finder name="VocabularyId" return-type="Collection">
 			<finder-column name="vocabularyId" />
 		</finder>
-		<finder name="C_P_V" return-type="Collection">
-			<finder-column name="companyId" />
+		<finder name="G_N" return-type="TagsEntry">
+			<finder-column name="groupId" />
+			<finder-column name="name" />
+		</finder>
+		<finder name="P_V" return-type="Collection">
 			<finder-column name="parentEntryId" />
 			<finder-column name="vocabularyId" />
 		</finder>
@@ -211,12 +208,13 @@
 
 		<!-- Finder methods -->
 
-		<finder name="CompanyId" return-type="Collection">
-			<finder-column name="companyId" />
-		</finder>
-		<finder name="C_N" return-type="TagsVocabulary">
-			<finder-column name="companyId" />
+		<finder name="G_N" return-type="TagsVocabulary">
+			<finder-column name="groupId" />
 			<finder-column name="name" />
+		</finder>
+		<finder name="G_F" return-type="Collection">
+			<finder-column name="groupId" />
+			<finder-column name="folksonomy" />
 		</finder>
 		<finder name="C_F" return-type="Collection">
 			<finder-column name="companyId" />

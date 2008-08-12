@@ -36,7 +36,7 @@ if (classPK > 0) {
 	assetEntries = SetUtil.fromList(TagsEntryLocalServiceUtil.getAssetEntries(asset.getAssetId(), false));
 }
 
-List<TagsVocabulary> vocabularies = TagsVocabularyLocalServiceUtil.getVocabularies(company.getCompanyId(), false);
+List<TagsVocabulary> vocabularies = TagsVocabularyLocalServiceUtil.getGroupVocabularies(portletGroupId.longValue(), false);
 %>
 
 <div>
@@ -56,7 +56,7 @@ List<TagsVocabulary> vocabularies = TagsVocabularyLocalServiceUtil.getVocabulari
 		sb.append(vocabulary.getVocabularyId());
 		sb.append("\"><option value=\"\"></option>");
 
-		List<TagsEntry> entries = TagsEntryLocalServiceUtil.getVocabularyRootEntries(company.getCompanyId(), vocabularyName);
+		List<TagsEntry> entries = TagsEntryLocalServiceUtil.getGroupVocabularyRootEntries(vocabulary.getGroupId(), vocabularyName);
 
 		for (TagsEntry entry : entries) {
 			_buildTree(entry, vocabularyName, assetEntries, StringPool.BLANK, sb);
@@ -91,7 +91,7 @@ private void _buildTree(TagsEntry entry, String vocabularyName, Set<TagsEntry> a
 	sb.append(entryName);
 	sb.append("</option>");
 
-	List<TagsEntry> entryChildren = TagsEntryLocalServiceUtil.getVocabularyEntries(entry.getCompanyId(), entryName, vocabularyName);
+	List<TagsEntry> entryChildren = TagsEntryLocalServiceUtil.getGroupVocabularyEntries(entry.getGroupId(), entryName, vocabularyName);
 
 	for (TagsEntry entryChild : entryChildren) {
 		_buildTree(entryChild, vocabularyName, assetEntries, level + StringPool.DASH, sb);

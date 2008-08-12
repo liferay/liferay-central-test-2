@@ -401,18 +401,18 @@ create index IX_54243AFD on Subscription (userId);
 create index IX_1AB6D6D2 on TagsAsset (classNameId, classPK);
 create index IX_AB3D8BCB on TagsAsset (companyId);
 
-create index IX_10563688 on TagsEntry (companyId, name);
-create index IX_9AFDBD3F on TagsEntry (companyId, parentEntryId, vocabularyId);
-create index IX_AB1B8C1E on TagsEntry (companyId, vocabularyId);
+create index IX_79F971CA on TagsEntry (groupId, name);
+create index IX_EE55ED49 on TagsEntry (parentEntryId, vocabularyId);
+create index IX_28E8954 on TagsEntry (vocabularyId);
 
 create index IX_C134234 on TagsProperty (companyId);
 create index IX_EB974D08 on TagsProperty (companyId, key_);
 create index IX_5200A629 on TagsProperty (entryId);
 create index IX_F505253D on TagsProperty (entryId, key_);
 
-create index IX_8760DD03 on TagsVocabulary (companyId);
 create index IX_E0D51848 on TagsVocabulary (companyId, folksonomy);
-create index IX_43D41E82 on TagsVocabulary (companyId, name);
+create index IX_9F26308A on TagsVocabulary (groupId, folksonomy);
+create index IX_F9E51044 on TagsVocabulary (groupId, name);
 
 create index IX_181A4A1B on TasksProposal (classNameId, classPK);
 create index IX_7FB27324 on TasksProposal (groupId);

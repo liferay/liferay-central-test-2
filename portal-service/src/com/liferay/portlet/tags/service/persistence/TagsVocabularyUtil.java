@@ -93,58 +93,61 @@ public class TagsVocabularyUtil {
 		return getPersistence().fetchByPrimaryKey(vocabularyId);
 	}
 
-	public static java.util.List<com.liferay.portlet.tags.model.TagsVocabulary> findByCompanyId(
-		long companyId) throws com.liferay.portal.SystemException {
-		return getPersistence().findByCompanyId(companyId);
+	public static com.liferay.portlet.tags.model.TagsVocabulary findByG_N(
+		long groupId, java.lang.String name)
+		throws com.liferay.portal.SystemException,
+			com.liferay.portlet.tags.NoSuchVocabularyException {
+		return getPersistence().findByG_N(groupId, name);
 	}
 
-	public static java.util.List<com.liferay.portlet.tags.model.TagsVocabulary> findByCompanyId(
-		long companyId, int start, int end)
+	public static com.liferay.portlet.tags.model.TagsVocabulary fetchByG_N(
+		long groupId, java.lang.String name)
 		throws com.liferay.portal.SystemException {
-		return getPersistence().findByCompanyId(companyId, start, end);
+		return getPersistence().fetchByG_N(groupId, name);
 	}
 
-	public static java.util.List<com.liferay.portlet.tags.model.TagsVocabulary> findByCompanyId(
-		long companyId, int start, int end,
+	public static java.util.List<com.liferay.portlet.tags.model.TagsVocabulary> findByG_F(
+		long groupId, boolean folksonomy)
+		throws com.liferay.portal.SystemException {
+		return getPersistence().findByG_F(groupId, folksonomy);
+	}
+
+	public static java.util.List<com.liferay.portlet.tags.model.TagsVocabulary> findByG_F(
+		long groupId, boolean folksonomy, int start, int end)
+		throws com.liferay.portal.SystemException {
+		return getPersistence().findByG_F(groupId, folksonomy, start, end);
+	}
+
+	public static java.util.List<com.liferay.portlet.tags.model.TagsVocabulary> findByG_F(
+		long groupId, boolean folksonomy, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException {
-		return getPersistence().findByCompanyId(companyId, start, end, obc);
+		return getPersistence().findByG_F(groupId, folksonomy, start, end, obc);
 	}
 
-	public static com.liferay.portlet.tags.model.TagsVocabulary findByCompanyId_First(
-		long companyId, com.liferay.portal.kernel.util.OrderByComparator obc)
+	public static com.liferay.portlet.tags.model.TagsVocabulary findByG_F_First(
+		long groupId, boolean folksonomy,
+		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.tags.NoSuchVocabularyException {
-		return getPersistence().findByCompanyId_First(companyId, obc);
+		return getPersistence().findByG_F_First(groupId, folksonomy, obc);
 	}
 
-	public static com.liferay.portlet.tags.model.TagsVocabulary findByCompanyId_Last(
-		long companyId, com.liferay.portal.kernel.util.OrderByComparator obc)
+	public static com.liferay.portlet.tags.model.TagsVocabulary findByG_F_Last(
+		long groupId, boolean folksonomy,
+		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.tags.NoSuchVocabularyException {
-		return getPersistence().findByCompanyId_Last(companyId, obc);
+		return getPersistence().findByG_F_Last(groupId, folksonomy, obc);
 	}
 
-	public static com.liferay.portlet.tags.model.TagsVocabulary[] findByCompanyId_PrevAndNext(
-		long vocabularyId, long companyId,
+	public static com.liferay.portlet.tags.model.TagsVocabulary[] findByG_F_PrevAndNext(
+		long vocabularyId, long groupId, boolean folksonomy,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.tags.NoSuchVocabularyException {
 		return getPersistence()
-				   .findByCompanyId_PrevAndNext(vocabularyId, companyId, obc);
-	}
-
-	public static com.liferay.portlet.tags.model.TagsVocabulary findByC_N(
-		long companyId, java.lang.String name)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portlet.tags.NoSuchVocabularyException {
-		return getPersistence().findByC_N(companyId, name);
-	}
-
-	public static com.liferay.portlet.tags.model.TagsVocabulary fetchByC_N(
-		long companyId, java.lang.String name)
-		throws com.liferay.portal.SystemException {
-		return getPersistence().fetchByC_N(companyId, name);
+				   .findByG_F_PrevAndNext(vocabularyId, groupId, folksonomy, obc);
 	}
 
 	public static java.util.List<com.liferay.portlet.tags.model.TagsVocabulary> findByC_F(
@@ -220,15 +223,15 @@ public class TagsVocabularyUtil {
 		return getPersistence().findAll(start, end, obc);
 	}
 
-	public static void removeByCompanyId(long companyId)
-		throws com.liferay.portal.SystemException {
-		getPersistence().removeByCompanyId(companyId);
-	}
-
-	public static void removeByC_N(long companyId, java.lang.String name)
+	public static void removeByG_N(long groupId, java.lang.String name)
 		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.tags.NoSuchVocabularyException {
-		getPersistence().removeByC_N(companyId, name);
+		getPersistence().removeByG_N(groupId, name);
+	}
+
+	public static void removeByG_F(long groupId, boolean folksonomy)
+		throws com.liferay.portal.SystemException {
+		getPersistence().removeByG_F(groupId, folksonomy);
 	}
 
 	public static void removeByC_F(long companyId, boolean folksonomy)
@@ -240,14 +243,14 @@ public class TagsVocabularyUtil {
 		getPersistence().removeAll();
 	}
 
-	public static int countByCompanyId(long companyId)
+	public static int countByG_N(long groupId, java.lang.String name)
 		throws com.liferay.portal.SystemException {
-		return getPersistence().countByCompanyId(companyId);
+		return getPersistence().countByG_N(groupId, name);
 	}
 
-	public static int countByC_N(long companyId, java.lang.String name)
+	public static int countByG_F(long groupId, boolean folksonomy)
 		throws com.liferay.portal.SystemException {
-		return getPersistence().countByC_N(companyId, name);
+		return getPersistence().countByG_F(groupId, folksonomy);
 	}
 
 	public static int countByC_F(long companyId, boolean folksonomy)

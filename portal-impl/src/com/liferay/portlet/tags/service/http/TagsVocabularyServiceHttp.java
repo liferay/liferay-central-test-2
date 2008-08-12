@@ -74,18 +74,20 @@ import com.liferay.portlet.tags.service.TagsVocabularyServiceUtil;
  */
 public class TagsVocabularyServiceHttp {
 	public static com.liferay.portlet.tags.model.TagsVocabulary addVocabulary(
-		HttpPrincipal httpPrincipal, java.lang.String name)
+		HttpPrincipal httpPrincipal, long groupId, java.lang.String name)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		try {
-			Object paramObj0 = name;
+			Object paramObj0 = new LongWrapper(groupId);
+
+			Object paramObj1 = name;
 
 			if (name == null) {
-				paramObj0 = new NullWrapper("java.lang.String");
+				paramObj1 = new NullWrapper("java.lang.String");
 			}
 
 			MethodWrapper methodWrapper = new MethodWrapper(TagsVocabularyServiceUtil.class.getName(),
-					"addVocabulary", new Object[] { paramObj0 });
+					"addVocabulary", new Object[] { paramObj0, paramObj1 });
 
 			Object returnObj = null;
 
@@ -114,20 +116,24 @@ public class TagsVocabularyServiceHttp {
 	}
 
 	public static com.liferay.portlet.tags.model.TagsVocabulary addVocabulary(
-		HttpPrincipal httpPrincipal, java.lang.String name, boolean folksonomy)
+		HttpPrincipal httpPrincipal, long groupId, java.lang.String name,
+		boolean folksonomy)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		try {
-			Object paramObj0 = name;
+			Object paramObj0 = new LongWrapper(groupId);
+
+			Object paramObj1 = name;
 
 			if (name == null) {
-				paramObj0 = new NullWrapper("java.lang.String");
+				paramObj1 = new NullWrapper("java.lang.String");
 			}
 
-			Object paramObj1 = new BooleanWrapper(folksonomy);
+			Object paramObj2 = new BooleanWrapper(folksonomy);
 
 			MethodWrapper methodWrapper = new MethodWrapper(TagsVocabularyServiceUtil.class.getName(),
-					"addVocabulary", new Object[] { paramObj0, paramObj1 });
+					"addVocabulary",
+					new Object[] { paramObj0, paramObj1, paramObj2 });
 
 			Object returnObj = null;
 
@@ -187,14 +193,17 @@ public class TagsVocabularyServiceHttp {
 		}
 	}
 
-	public static java.util.List<com.liferay.portlet.tags.model.TagsVocabulary> getVocabularies(
-		HttpPrincipal httpPrincipal, long companyId)
+	public static java.util.List<com.liferay.portlet.tags.model.TagsVocabulary> getCompanyVocabularies(
+		HttpPrincipal httpPrincipal, long companyId, boolean folksonomy)
 		throws com.liferay.portal.SystemException {
 		try {
 			Object paramObj0 = new LongWrapper(companyId);
 
+			Object paramObj1 = new BooleanWrapper(folksonomy);
+
 			MethodWrapper methodWrapper = new MethodWrapper(TagsVocabularyServiceUtil.class.getName(),
-					"getVocabularies", new Object[] { paramObj0 });
+					"getCompanyVocabularies",
+					new Object[] { paramObj0, paramObj1 });
 
 			Object returnObj = null;
 
@@ -218,16 +227,17 @@ public class TagsVocabularyServiceHttp {
 		}
 	}
 
-	public static java.util.List<com.liferay.portlet.tags.model.TagsVocabulary> getVocabularies(
-		HttpPrincipal httpPrincipal, long companyId, boolean folksonomy)
+	public static java.util.List<com.liferay.portlet.tags.model.TagsVocabulary> getGroupVocabularies(
+		HttpPrincipal httpPrincipal, long groupId, boolean folksonomy)
 		throws com.liferay.portal.SystemException {
 		try {
-			Object paramObj0 = new LongWrapper(companyId);
+			Object paramObj0 = new LongWrapper(groupId);
 
 			Object paramObj1 = new BooleanWrapper(folksonomy);
 
 			MethodWrapper methodWrapper = new MethodWrapper(TagsVocabularyServiceUtil.class.getName(),
-					"getVocabularies", new Object[] { paramObj0, paramObj1 });
+					"getGroupVocabularies",
+					new Object[] { paramObj0, paramObj1 });
 
 			Object returnObj = null;
 

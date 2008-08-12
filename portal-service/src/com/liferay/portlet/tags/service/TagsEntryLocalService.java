@@ -82,32 +82,28 @@ public interface TagsEntryLocalService {
 		throws com.liferay.portal.SystemException;
 
 	public com.liferay.portlet.tags.model.TagsEntry addEntry(long userId,
-		java.lang.String name)
+		long groupId, java.lang.String name)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;
 
 	public com.liferay.portlet.tags.model.TagsEntry addEntry(long userId,
-		java.lang.String name, java.lang.String[] properties)
+		long groupId, java.lang.String name, java.lang.String[] properties)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;
 
 	public com.liferay.portlet.tags.model.TagsEntry addEntry(long userId,
-		java.lang.String name, java.lang.String vocabularyName,
+		long groupId, java.lang.String name, java.lang.String vocabularyName,
 		java.lang.String[] properties)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;
 
 	public com.liferay.portlet.tags.model.TagsEntry addEntry(long userId,
-		java.lang.String parentEntryName, java.lang.String name,
+		long groupId, java.lang.String parentEntryName, java.lang.String name,
 		java.lang.String vocabularyName, java.lang.String[] properties)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;
 
-	public void checkEntries(long userId, java.lang.String[] names)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException;
-
-	public void deleteEntries(long companyId, long vocabularyId)
+	public void checkEntries(long userId, long groupId, java.lang.String[] names)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;
 
@@ -119,7 +115,11 @@ public interface TagsEntryLocalService {
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;
 
-	public boolean hasEntry(long companyId, java.lang.String name)
+	public void deleteVocabularyEntries(long vocabularyId)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException;
+
+	public boolean hasEntry(long groupId, java.lang.String name)
 		throws com.liferay.portal.SystemException;
 
 	public java.util.List<com.liferay.portlet.tags.model.TagsEntry> getAssetEntries(
@@ -145,26 +145,26 @@ public interface TagsEntryLocalService {
 		throws com.liferay.portal.SystemException;
 
 	public java.util.List<com.liferay.portlet.tags.model.TagsEntry> getEntries(
-		long groupId, long companyId, long classNameId, java.lang.String name)
+		long groupId, long classNameId, java.lang.String name)
 		throws com.liferay.portal.SystemException;
 
 	public java.util.List<com.liferay.portlet.tags.model.TagsEntry> getEntries(
-		long groupId, long companyId, long classNameId, java.lang.String name,
-		int start, int end) throws com.liferay.portal.SystemException;
+		long groupId, long classNameId, java.lang.String name, int start,
+		int end) throws com.liferay.portal.SystemException;
 
-	public int getEntriesSize(long groupId, long companyId, long classNameId,
+	public int getEntriesSize(long groupId, long classNameId,
 		java.lang.String name) throws com.liferay.portal.SystemException;
 
 	public com.liferay.portlet.tags.model.TagsEntry getEntry(long entryId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;
 
-	public com.liferay.portlet.tags.model.TagsEntry getEntry(long companyId,
+	public com.liferay.portlet.tags.model.TagsEntry getEntry(long groupId,
 		java.lang.String name)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;
 
-	public long[] getEntryIds(long companyId, java.lang.String[] names)
+	public long[] getEntryIds(long groupId, java.lang.String[] names)
 		throws com.liferay.portal.SystemException;
 
 	public java.lang.String[] getEntryNames()
@@ -176,19 +176,19 @@ public interface TagsEntryLocalService {
 	public java.lang.String[] getEntryNames(long classNameId, long classPK)
 		throws com.liferay.portal.SystemException;
 
-	public java.util.List<com.liferay.portlet.tags.model.TagsEntry> getVocabularyEntries(
-		long companyId, java.lang.String vocabularyName)
+	public java.util.List<com.liferay.portlet.tags.model.TagsEntry> getGroupVocabularyEntries(
+		long groupId, java.lang.String vocabularyName)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;
 
-	public java.util.List<com.liferay.portlet.tags.model.TagsEntry> getVocabularyEntries(
-		long companyId, java.lang.String parentEntryName,
+	public java.util.List<com.liferay.portlet.tags.model.TagsEntry> getGroupVocabularyEntries(
+		long groupId, java.lang.String parentEntryName,
 		java.lang.String vocabularyName)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;
 
-	public java.util.List<com.liferay.portlet.tags.model.TagsEntry> getVocabularyRootEntries(
-		long companyId, java.lang.String vocabularyName)
+	public java.util.List<com.liferay.portlet.tags.model.TagsEntry> getGroupVocabularyRootEntries(
+		long groupId, java.lang.String vocabularyName)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;
 
@@ -197,18 +197,18 @@ public interface TagsEntryLocalService {
 			com.liferay.portal.SystemException;
 
 	public java.util.List<com.liferay.portlet.tags.model.TagsEntry> search(
-		long companyId, java.lang.String name, java.lang.String[] properties)
+		long groupId, java.lang.String name, java.lang.String[] properties)
 		throws com.liferay.portal.SystemException;
 
 	public java.util.List<com.liferay.portlet.tags.model.TagsEntry> search(
-		long companyId, java.lang.String name, java.lang.String[] properties,
+		long groupId, java.lang.String name, java.lang.String[] properties,
 		int start, int end) throws com.liferay.portal.SystemException;
 
 	public com.liferay.portal.kernel.json.JSONArray searchAutocomplete(
-		long companyId, java.lang.String name, java.lang.String[] properties,
+		long groupId, java.lang.String name, java.lang.String[] properties,
 		int start, int end) throws com.liferay.portal.SystemException;
 
-	public int searchCount(long companyId, java.lang.String name,
+	public int searchCount(long groupId, java.lang.String name,
 		java.lang.String[] properties)
 		throws com.liferay.portal.SystemException;
 

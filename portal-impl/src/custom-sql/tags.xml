@@ -64,7 +64,7 @@
 				(TagsAsset.viewCount > 0)
 		]]>
 	</sql>
-	<sql id="com.liferay.portlet.tags.service.persistence.TagsEntryFinder.countByC_N_P">
+	<sql id="com.liferay.portlet.tags.service.persistence.TagsEntryFinder.countByG_N_P">
 		<![CDATA[
 			SELECT
 				COUNT(*) AS COUNT_VALUE
@@ -72,11 +72,11 @@
 				TagsEntry
 			[$JOIN$]
 			WHERE
-				(TagsEntry.companyId = ?) AND
+				(TagsEntry.groupId = ?) AND
 				(TagsEntry.name LIKE ? OR ? IS NULL)
 		]]>
 	</sql>
-	<sql id="com.liferay.portlet.tags.service.persistence.TagsEntryFinder.countByG_C_C_N">
+	<sql id="com.liferay.portlet.tags.service.persistence.TagsEntryFinder.countByG_C_N">
 		<![CDATA[
 			SELECT
 				COUNT(*) AS COUNT_VALUE
@@ -84,7 +84,7 @@
 				TagsEntry
 			INNER JOIN
 				TagsAssets_TagsEntries ON
-					(TagsEntry.entryId = TagsAssets_TagsEntries.entryId) AND
+					(TagsAssets_TagsEntries.entryId = TagsEntry.entryId) AND
 					(TagsAssets_TagsEntries.assetId IN (
 						SELECT
 							assetId
@@ -92,50 +92,10 @@
 							TagsAsset
 						WHERE
 							(TagsAsset.groupId = ?) AND
-							(TagsAsset.companyId = ?) AND
 							(TagsAsset.classNameId = ?)
 					))
 			WHERE
 				(TagsEntry.name LIKE ? OR ? IS NULL)
-		]]>
-	</sql>
-	<sql id="com.liferay.portlet.tags.service.persistence.TagsEntryFinder.findByC_N_P">
-		<![CDATA[
-			SELECT
-				{TagsEntry.*}
-			FROM
-				TagsEntry
-			[$JOIN$]
-			WHERE
-				(TagsEntry.companyId = ?) AND
-				(TagsEntry.name LIKE ? OR ? IS NULL)
-			ORDER BY
-				TagsEntry.name ASC
-		]]>
-	</sql>
-	<sql id="com.liferay.portlet.tags.service.persistence.TagsEntryFinder.findByG_C_C_N">
-		<![CDATA[
-			SELECT
-				{TagsEntry.*}
-			FROM
-				TagsEntry
-			INNER JOIN
-				TagsAssets_TagsEntries ON
-					(TagsEntry.entryId = TagsAssets_TagsEntries.entryId) AND
-					(TagsAssets_TagsEntries.assetId IN (
-						SELECT
-							assetId
-						FROM
-							TagsAsset
-						WHERE
-							(TagsAsset.groupId = ?) AND
-							(TagsAsset.companyId = ?) AND
-							(TagsAsset.classNameId = ?)
-					))
-			WHERE
-				(TagsEntry.name LIKE ? OR ? IS NULL)
-			ORDER BY
-				TagsEntry.name ASC
 		]]>
 	</sql>
 	<sql id="com.liferay.portlet.tags.service.persistence.TagsEntryFinder.findByA_F">
@@ -146,57 +106,107 @@
 				TagsEntry
 			INNER JOIN
 				TagsAssets_TagsEntries ON
-					(TagsEntry.entryId = TagsAssets_TagsEntries.entryId) AND
+					(TagsAssets_TagsEntries.entryId = TagsEntry.entryId) AND
 					(TagsAssets_TagsEntries.assetId = ?)
 			INNER JOIN
 				TagsVocabulary ON
-					(TagsEntry.vocabularyId = TagsVocabulary.vocabularyId)
+					(TagsVocabulary.vocabularyId = TagsEntry.vocabularyId)
 			WHERE
 				TagsVocabulary.folksonomy = ?
 		]]>
 	</sql>
-	<sql id="com.liferay.portlet.tags.service.persistence.TagsPropertyFinder.countByC_K">
+	<sql id="com.liferay.portlet.tags.service.persistence.TagsEntryFinder.findByG_N_P">
+		<![CDATA[
+			SELECT
+				{TagsEntry.*}
+			FROM
+				TagsEntry
+			[$JOIN$]
+			WHERE
+				(TagsEntry.groupId = ?) AND
+				(TagsEntry.name LIKE ? OR ? IS NULL)
+			ORDER BY
+				TagsEntry.name ASC
+		]]>
+	</sql>
+	<sql id="com.liferay.portlet.tags.service.persistence.TagsEntryFinder.findByG_C_N">
+		<![CDATA[
+			SELECT
+				{TagsEntry.*}
+			FROM
+				TagsEntry
+			INNER JOIN
+				TagsAssets_TagsEntries ON
+					(TagsAssets_TagsEntries.entryId = TagsEntry.entryId) AND
+					(TagsAssets_TagsEntries.assetId IN (
+						SELECT
+							assetId
+						FROM
+							TagsAsset
+						WHERE
+							(TagsAsset.groupId = ?) AND
+							(TagsAsset.classNameId = ?)
+					))
+			WHERE
+				(TagsEntry.name LIKE ? OR ? IS NULL)
+			ORDER BY
+				TagsEntry.name ASC
+		]]>
+	</sql>
+	<sql id="com.liferay.portlet.tags.service.persistence.TagsPropertyFinder.countByG_K">
 		<![CDATA[
 			SELECT
 				COUNT(DISTINCT TagsProperty.value) AS COUNT_VALUE
 			FROM
 				TagsProperty
+			INNER JOIN
+				TagsEntry ON
+					(TagsEntry.entryId = TagsProperty.entryId)
 			WHERE
-				(TagsProperty.companyId = ?) AND
+				(TagsEntry.groupId = ?) AND
 				(TagsProperty.key_ = ?)
 		]]>
 	</sql>
-	<sql id="com.liferay.portlet.tags.service.persistence.TagsPropertyFinder.findByC_K">
+	<sql id="com.liferay.portlet.tags.service.persistence.TagsPropertyFinder.findByG_K">
 		<![CDATA[
 			SELECT
 				DISTINCT TagsProperty.value AS propertyValue
 			FROM
 				TagsProperty
+			INNER JOIN
+				TagsEntry ON
+					(TagsEntry.entryId = TagsProperty.entryId)
 			WHERE
-				(TagsProperty.companyId = ?) AND
+				(TagsEntry.groupId = ?) AND
 				(TagsProperty.key_ = ?)
 			ORDER BY
 				TagsProperty.value ASC
 		]]>
 	</sql>
-	<sql id="com.liferay.portlet.tags.service.persistence.TagsPropertyKeyFinder.countByCompanyId">
+	<sql id="com.liferay.portlet.tags.service.persistence.TagsPropertyKeyFinder.countByGroupId">
 		<![CDATA[
 			SELECT
 				COUNT(DISTINCT TagsProperty.key_) AS COUNT_VALUE
 			FROM
 				TagsProperty
+			INNER JOIN
+				TagsEntry ON
+					(TagsEntry.entryId = TagsProperty.entryId)
 			WHERE
-				(TagsProperty.companyId = ?)
+				(TagsEntry.groupId = ?) AND
 		]]>
 	</sql>
-	<sql id="com.liferay.portlet.tags.service.persistence.TagsPropertyKeyFinder.findByCompanyId">
+	<sql id="com.liferay.portlet.tags.service.persistence.TagsPropertyKeyFinder.findByGroupId">
 		<![CDATA[
 			SELECT
 				DISTINCT TagsProperty.key_ AS propertyKey
 			FROM
 				TagsProperty
+			INNER JOIN
+				TagsEntry ON
+					(TagsEntry.entryId = TagsProperty.entryId)
 			WHERE
-				(TagsProperty.companyId = ?)
+				(TagsEntry.groupId = ?) AND
 			ORDER BY
 				propertyKey ASC
 		]]>

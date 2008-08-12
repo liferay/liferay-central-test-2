@@ -2544,16 +2544,16 @@ Liferay.Service.Tags.TagsEntry = {
 		return Liferay.Service.ajax(params, callback);
 	},
 
-	getVocabularyEntries: function(params, callback) {
+	getGroupVocabularyEntries: function(params, callback) {
 		params.serviceClassName = this.serviceClassName;
-		params.serviceMethodName = "getVocabularyEntries";
+		params.serviceMethodName = "getGroupVocabularyEntries";
 
 		return Liferay.Service.ajax(params, callback);
 	},
 
-	getVocabularyRootEntries: function(params, callback) {
+	getGroupVocabularyRootEntries: function(params, callback) {
 		params.serviceClassName = this.serviceClassName;
-		params.serviceMethodName = "getVocabularyRootEntries";
+		params.serviceMethodName = "getGroupVocabularyRootEntries";
 
 		return Liferay.Service.ajax(params, callback);
 	},
@@ -2650,9 +2650,16 @@ Liferay.Service.Tags.TagsVocabulary = {
 		return Liferay.Service.ajax(params, callback);
 	},
 
-	getVocabularies: function(params, callback) {
+	getCompanyVocabularies: function(params, callback) {
 		params.serviceClassName = this.serviceClassName;
-		params.serviceMethodName = "getVocabularies";
+		params.serviceMethodName = "getCompanyVocabularies";
+
+		return Liferay.Service.ajax(params, callback);
+	},
+
+	getGroupVocabularies: function(params, callback) {
+		params.serviceClassName = this.serviceClassName;
+		params.serviceMethodName = "getGroupVocabularies";
 
 		return Liferay.Service.ajax(params, callback);
 	},

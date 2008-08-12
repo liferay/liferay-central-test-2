@@ -64,29 +64,32 @@ public class TagsEntryLocalServiceImpl extends TagsEntryLocalServiceBaseImpl {
 	public static String[] DEFAULT_PROPERTIES =
 		PropsValues.TAGS_PROPERTIES_DEFAULT;
 
-	public TagsEntry addEntry(long userId, String name)
+	public TagsEntry addEntry(long userId, long groupId, String name)
 		throws PortalException, SystemException {
 
-		return addEntry(userId, name, new String[0]);
+		return addEntry(userId, groupId, name, new String[0]);
 	}
 
-	public TagsEntry addEntry(long userId, String name, String[] properties)
+	public TagsEntry addEntry(
+			long userId, long groupId, String name, String[] properties)
 		throws PortalException, SystemException {
 
 		return addEntry(
-			userId, name, PropsValues.TAGS_VOCABULARY_DEFAULT, properties);
+			userId, groupId, name, PropsValues.TAGS_VOCABULARY_DEFAULT,
+			properties);
 	}
 
 	public TagsEntry addEntry(
-			long userId, String name, String vocabularyName,
+			long userId, long groupId, String name, String vocabularyName,
 			String[] properties)
 		throws PortalException, SystemException {
 
-		return addEntry(userId, null, name, vocabularyName, properties);
+		return addEntry(
+			userId, groupId, null, name, vocabularyName, properties);
 	}
 
 	public TagsEntry addEntry(
-			long userId, String parentEntryName, String name,
+			long userId, long groupId, String parentEntryName, String name,
 			String vocabularyName, String[] properties)
 		throws PortalException, SystemException {
 
@@ -105,6 +108,7 @@ public class TagsEntryLocalServiceImpl extends TagsEntryLocalServiceBaseImpl {
 
 		TagsEntry entry = tagsEntryPersistence.create(entryId);
 
+		entry.setGroupId(groupId);
 		entry.setCompanyId(user.getCompanyId());
 		entry.setUserId(user.getUserId());
 		entry.setUserName(user.getFullName());
@@ -119,13 +123,13 @@ public class TagsEntryLocalServiceImpl extends TagsEntryLocalServiceBaseImpl {
 		TagsVocabulary vocabulary = null;
 
 		try {
-			vocabulary = tagsVocabularyPersistence.findByC_N(
-				user.getCompanyId(), vocabularyName);
+			vocabulary = tagsVocabularyPersistence.findByG_N(
+				groupId, vocabularyName);
 		}
 		catch (NoSuchVocabularyException nsve) {
 			if (vocabularyName.equals(PropsValues.TAGS_VOCABULARY_DEFAULT)) {
 				vocabulary = tagsVocabularyLocalService.addVocabulary(
-					userId, vocabularyName, true);
+					userId, groupId, vocabularyName, true);
 			}
 			else {
 				throw nsve;
@@ -135,8 +139,8 @@ public class TagsEntryLocalServiceImpl extends TagsEntryLocalServiceBaseImpl {
 		entry.setVocabularyId(vocabulary.getVocabularyId());
 
 		if (Validator.isNotNull(parentEntryName)) {
-			TagsEntry parentEntry = tagsEntryPersistence.findByC_N(
-				user.getCompanyId(), parentEntryName);
+			TagsEntry parentEntry = tagsEntryPersistence.findByG_N(
+				groupId, parentEntryName);
 
 			entry.setParentEntryId(parentEntry.getEntryId());
 		}
@@ -169,34 +173,19 @@ public class TagsEntryLocalServiceImpl extends TagsEntryLocalServiceBaseImpl {
 		}
 
 		return entry;
-
 	}
 
-	public void checkEntries(long userId, String[] names)
+	public void checkEntries(long userId, long groupId, String[] names)
 		throws PortalException, SystemException {
 
-		User user = userPersistence.findByPrimaryKey(userId);
+		for (String name : names) {
+			name = name.trim().toLowerCase();
 
-		for (int i = 0; i < names.length; i++) {
-			String name = names[i].trim().toLowerCase();
-
-			TagsEntry entry = tagsEntryPersistence.fetchByC_N(
-				user.getCompanyId(), name);
+			TagsEntry entry = tagsEntryPersistence.fetchByG_N(groupId, name);
 
 			if (entry == null) {
-				addEntry(userId, names[i], DEFAULT_PROPERTIES);
+				addEntry(userId, groupId, name, DEFAULT_PROPERTIES);
 			}
-		}
-	}
-
-	public void deleteEntries(long companyId, long vocabularyId)
-		throws PortalException, SystemException {
-
-		List<TagsEntry> entries = tagsEntryPersistence.findByC_V(
-			companyId, vocabularyId);
-
-		for (TagsEntry entry : entries) {
-			deleteEntry(entry);
 		}
 	}
 
@@ -220,10 +209,21 @@ public class TagsEntryLocalServiceImpl extends TagsEntryLocalServiceBaseImpl {
 		tagsEntryPersistence.remove(entry.getEntryId());
 	}
 
-	public boolean hasEntry(long companyId, String name)
+	public void deleteVocabularyEntries(long vocabularyId)
+		throws PortalException, SystemException {
+
+		List<TagsEntry> entries = tagsEntryPersistence.findByVocabularyId(
+			vocabularyId);
+
+		for (TagsEntry entry : entries) {
+			deleteEntry(entry);
+		}
+	}
+
+	public boolean hasEntry(long groupId, String name)
 		throws SystemException {
 
-		if (tagsEntryPersistence.fetchByC_N(companyId, name) == null) {
+		if (tagsEntryPersistence.fetchByG_N(groupId, name) == null) {
 			return false;
 		}
 		else {
@@ -285,28 +285,24 @@ public class TagsEntryLocalServiceImpl extends TagsEntryLocalServiceBaseImpl {
 	}
 
 	public List<TagsEntry> getEntries(
-			long groupId, long companyId, long classNameId, String name)
+			long groupId, long classNameId, String name)
 		throws SystemException {
 
-		return tagsEntryFinder.findByG_C_C_N(
-			groupId, companyId, classNameId, name);
+		return tagsEntryFinder.findByG_C_N(groupId, classNameId, name);
 	}
 
 	public List<TagsEntry> getEntries(
-			long groupId, long companyId, long classNameId, String name,
-			int start, int end)
+			long groupId, long classNameId, String name, int start, int end)
 		throws SystemException {
 
-		return tagsEntryFinder.findByG_C_C_N(
-			groupId, companyId, classNameId, name, start, end);
+		return tagsEntryFinder.findByG_C_N(
+			groupId, classNameId, name, start, end);
 	}
 
-	public int getEntriesSize(
-			long groupId, long companyId, long classNameId, String name)
+	public int getEntriesSize(long groupId, long classNameId, String name)
 		throws SystemException {
 
-		return tagsEntryFinder.countByG_C_C_N(
-			groupId, companyId, classNameId, name);
+		return tagsEntryFinder.countByG_C_N(groupId, classNameId, name);
 	}
 
 	public TagsEntry getEntry(long entryId)
@@ -315,19 +311,19 @@ public class TagsEntryLocalServiceImpl extends TagsEntryLocalServiceBaseImpl {
 		return tagsEntryPersistence.findByPrimaryKey(entryId);
 	}
 
-	public TagsEntry getEntry(long companyId, String name)
+	public TagsEntry getEntry(long groupId, String name)
 		throws PortalException, SystemException {
 
-		return tagsEntryPersistence.findByC_N(companyId, name);
+		return tagsEntryPersistence.findByG_N(groupId, name);
 	}
 
-	public long[] getEntryIds(long companyId, String[] names)
+	public long[] getEntryIds(long groupId, String[] names)
 		throws SystemException {
 
 		List<TagsEntry> list = new ArrayList<TagsEntry>(names.length);
 
 		for (String name : names) {
-			TagsEntry entry = tagsEntryPersistence.fetchByC_N(companyId, name);
+			TagsEntry entry = tagsEntryPersistence.fetchByG_N(groupId, name);
 
 			if (entry != null) {
 				list.add(entry);
@@ -361,39 +357,42 @@ public class TagsEntryLocalServiceImpl extends TagsEntryLocalServiceBaseImpl {
 		return getEntryNames(getEntries(classNameId, classPK));
 	}
 
-	public List<TagsEntry> getVocabularyEntries(
-			long companyId, String vocabularyName)
+	public List<TagsEntry> getGroupVocabularyEntries(
+			long groupId, String vocabularyName)
 		throws PortalException, SystemException {
 
-		TagsVocabulary vocabulary = tagsVocabularyLocalService.getVocabulary(
-			companyId, vocabularyName);
+		TagsVocabulary vocabulary =
+			tagsVocabularyLocalService.getGroupVocabulary(
+				groupId, vocabularyName);
 
-		return tagsEntryPersistence.findByC_V(
-			companyId, vocabulary.getVocabularyId());
+		return tagsEntryPersistence.findByVocabularyId(
+			vocabulary.getVocabularyId());
 	}
 
-	public List<TagsEntry> getVocabularyEntries(
-			long companyId, String parentEntryName, String vocabularyName)
+	public List<TagsEntry> getGroupVocabularyEntries(
+			long groupId, String parentEntryName, String vocabularyName)
 		throws PortalException, SystemException {
 
-		TagsVocabulary vocabulary = tagsVocabularyLocalService.getVocabulary(
-			companyId, vocabularyName);
+		TagsVocabulary vocabulary =
+			tagsVocabularyLocalService.getGroupVocabulary(
+				groupId, vocabularyName);
 
-		TagsEntry entry = getEntry(companyId, parentEntryName);
+		TagsEntry entry = getEntry(groupId, parentEntryName);
 
-		return tagsEntryPersistence.findByC_P_V(
-			companyId, entry.getEntryId(), vocabulary.getVocabularyId());
+		return tagsEntryPersistence.findByP_V(
+			entry.getEntryId(), vocabulary.getVocabularyId());
 	}
 
-	public List<TagsEntry> getVocabularyRootEntries(
-			long companyId, String vocabularyName)
+	public List<TagsEntry> getGroupVocabularyRootEntries(
+			long groupId, String vocabularyName)
 		throws PortalException, SystemException {
 
-		TagsVocabulary vocabulary = tagsVocabularyLocalService.getVocabulary(
-			companyId, vocabularyName);
+		TagsVocabulary vocabulary =
+			tagsVocabularyLocalService.getGroupVocabulary(
+				groupId, vocabularyName);
 
-		return tagsEntryPersistence.findByC_P_V(
-			companyId, TagsEntryConstants.DEFAULT_PARENT_ENTRY_ID,
+		return tagsEntryPersistence.findByP_V(
+			TagsEntryConstants.DEFAULT_PARENT_ENTRY_ID,
 			vocabulary.getVocabularyId());
 	}
 
@@ -423,36 +422,34 @@ public class TagsEntryLocalServiceImpl extends TagsEntryLocalServiceBaseImpl {
 	}
 
 	public List<TagsEntry> search(
-			long companyId, String name, String[] properties)
+			long groupId, String name, String[] properties)
 		throws SystemException {
 
-		return tagsEntryFinder.findByC_N_P(companyId, name, properties);
+		return tagsEntryFinder.findByG_N_P(groupId, name, properties);
 	}
 
 	public List<TagsEntry> search(
-			long companyId, String name, String[] properties, int start,
-			int end)
+			long groupId, String name, String[] properties, int start, int end)
 		throws SystemException {
 
-		return tagsEntryFinder.findByC_N_P(
-			companyId, name, properties, start, end);
+		return tagsEntryFinder.findByG_N_P(
+			groupId, name, properties, start, end);
 	}
 
 	public JSONArray searchAutocomplete(
-			long companyId, String name, String[] properties, int start,
-			int end)
+			long groupId, String name, String[] properties, int start, int end)
 		throws SystemException {
 
-		List<TagsEntry> list = tagsEntryFinder.findByC_N_P(
-			companyId, name, properties, start, end);
+		List<TagsEntry> list = tagsEntryFinder.findByG_N_P(
+			groupId, name, properties, start, end);
 
 		return Autocomplete.listToJson(list, "name", "name");
 	}
 
-	public int searchCount(long companyId, String name, String[] properties)
+	public int searchCount(long groupId, String name, String[] properties)
 		throws SystemException {
 
-		return tagsEntryFinder.countByC_N_P(companyId, name, properties);
+		return tagsEntryFinder.countByG_N_P(groupId, name, properties);
 	}
 
 	public TagsEntry updateEntry(long entryId, String name)
@@ -474,7 +471,7 @@ public class TagsEntryLocalServiceImpl extends TagsEntryLocalServiceBaseImpl {
 		TagsEntry entry = tagsEntryPersistence.findByPrimaryKey(entryId);
 
 		if (!entry.getName().equals(name)) {
-			if (hasEntry(entry.getCompanyId(), name)) {
+			if (hasEntry(entry.getGroupId(), name)) {
 				throw new DuplicateEntryException();
 			}
 		}
@@ -489,13 +486,14 @@ public class TagsEntryLocalServiceImpl extends TagsEntryLocalServiceBaseImpl {
 		TagsVocabulary vocabulary = null;
 
 		try {
-			vocabulary = tagsVocabularyPersistence.findByC_N(
-				entry.getCompanyId(), vocabularyName);
+			vocabulary = tagsVocabularyPersistence.findByG_N(
+				entry.getGroupId(), vocabularyName);
 		}
 		catch (NoSuchVocabularyException nsve) {
 			if (vocabularyName.equals(PropsValues.TAGS_VOCABULARY_DEFAULT)) {
 				vocabulary = tagsVocabularyLocalService.addVocabulary(
-					entry.getUserId(), vocabularyName, true);
+					entry.getUserId(), entry.getGroupId(), vocabularyName,
+					true);
 			}
 			else {
 				throw nsve;
@@ -505,7 +503,7 @@ public class TagsEntryLocalServiceImpl extends TagsEntryLocalServiceBaseImpl {
 		entry.setVocabularyId(vocabulary.getVocabularyId());
 
 		if (Validator.isNotNull(parentEntryName)) {
-			TagsEntry parent = getEntry(entry.getCompanyId(), parentEntryName);
+			TagsEntry parent = getEntry(entry.getGroupId(), parentEntryName);
 
 			entry.setParentEntryId(parent.getEntryId());
 		}

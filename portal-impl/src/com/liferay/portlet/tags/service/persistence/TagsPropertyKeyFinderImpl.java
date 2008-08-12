@@ -43,19 +43,19 @@ import java.util.List;
 public class TagsPropertyKeyFinderImpl
 	extends BasePersistenceImpl implements TagsPropertyKeyFinder {
 
-	public static String COUNT_BY_COMPANYID =
-		TagsPropertyKeyFinder.class.getName() + ".countByCompanyId";
+	public static String COUNT_BY_GROUP_ID =
+		TagsPropertyKeyFinder.class.getName() + ".countByGroupId";
 
-	public static String FIND_BY_COMPANYID =
-		TagsPropertyKeyFinder.class.getName() + ".findByCompanyId";
+	public static String FIND_BY_GROUP_ID =
+		TagsPropertyKeyFinder.class.getName() + ".findByGroupId";
 
-	public int countByCompanyId(long companyId) throws SystemException {
+	public int countByGroupId(long groupId) throws SystemException {
 		Session session = null;
 
 		try {
 			session = openSession();
 
-			String sql = CustomSQLUtil.get(COUNT_BY_COMPANYID);
+			String sql = CustomSQLUtil.get(COUNT_BY_GROUP_ID);
 
 			SQLQuery q = session.createSQLQuery(sql);
 
@@ -63,7 +63,7 @@ public class TagsPropertyKeyFinderImpl
 
 			QueryPos qPos = QueryPos.getInstance(q);
 
-			qPos.add(companyId);
+			qPos.add(groupId);
 
 			Iterator<Long> itr = q.list().iterator();
 
@@ -85,11 +85,11 @@ public class TagsPropertyKeyFinderImpl
 		}
 	}
 
-	public String[] findByCompanyId(long companyId) throws SystemException {
-		return findByCompanyId(companyId, QueryUtil.ALL_POS, QueryUtil.ALL_POS);
+	public String[] findByGroupId(long groupId) throws SystemException {
+		return findByGroupId(groupId, QueryUtil.ALL_POS, QueryUtil.ALL_POS);
 	}
 
-	public String[] findByCompanyId(long companyId, int start, int end)
+	public String[] findByGroupId(long groupId, int start, int end)
 		throws SystemException {
 
 		Session session = null;
@@ -97,7 +97,7 @@ public class TagsPropertyKeyFinderImpl
 		try {
 			session = openSession();
 
-			String sql = CustomSQLUtil.get(FIND_BY_COMPANYID);
+			String sql = CustomSQLUtil.get(FIND_BY_GROUP_ID);
 
 			SQLQuery q = session.createSQLQuery(sql);
 
@@ -105,7 +105,7 @@ public class TagsPropertyKeyFinderImpl
 
 			QueryPos qPos = QueryPos.getInstance(q);
 
-			qPos.add(companyId);
+			qPos.add(groupId);
 
 			List<String> list = (List<String>)QueryUtil.list(
 				q, getDialect(), start, end);

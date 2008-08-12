@@ -74,20 +74,21 @@ import com.liferay.portlet.tags.service.TagsVocabularyServiceUtil;
  *
  */
 public class TagsVocabularyServiceJSON {
-	public static JSONObject addVocabulary(java.lang.String name)
+	public static JSONObject addVocabulary(long groupId, java.lang.String name)
 		throws java.rmi.RemoteException, com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		com.liferay.portlet.tags.model.TagsVocabulary returnValue = TagsVocabularyServiceUtil.addVocabulary(name);
+		com.liferay.portlet.tags.model.TagsVocabulary returnValue = TagsVocabularyServiceUtil.addVocabulary(groupId,
+				name);
 
 		return TagsVocabularyJSONSerializer.toJSONObject(returnValue);
 	}
 
-	public static JSONObject addVocabulary(java.lang.String name,
+	public static JSONObject addVocabulary(long groupId, java.lang.String name,
 		boolean folksonomy)
 		throws java.rmi.RemoteException, com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		com.liferay.portlet.tags.model.TagsVocabulary returnValue = TagsVocabularyServiceUtil.addVocabulary(name,
-				folksonomy);
+		com.liferay.portlet.tags.model.TagsVocabulary returnValue = TagsVocabularyServiceUtil.addVocabulary(groupId,
+				name, folksonomy);
 
 		return TagsVocabularyJSONSerializer.toJSONObject(returnValue);
 	}
@@ -98,18 +99,21 @@ public class TagsVocabularyServiceJSON {
 		TagsVocabularyServiceUtil.deleteVocabulary(vocabularyId);
 	}
 
-	public static JSONArray getVocabularies(long companyId)
+	public static JSONArray getCompanyVocabularies(long companyId,
+		boolean folksonomy)
 		throws java.rmi.RemoteException, com.liferay.portal.SystemException {
 		java.util.List<com.liferay.portlet.tags.model.TagsVocabulary> returnValue =
-			TagsVocabularyServiceUtil.getVocabularies(companyId);
+			TagsVocabularyServiceUtil.getCompanyVocabularies(companyId,
+				folksonomy);
 
 		return TagsVocabularyJSONSerializer.toJSONArray(returnValue);
 	}
 
-	public static JSONArray getVocabularies(long companyId, boolean folksonomy)
+	public static JSONArray getGroupVocabularies(long groupId,
+		boolean folksonomy)
 		throws java.rmi.RemoteException, com.liferay.portal.SystemException {
 		java.util.List<com.liferay.portlet.tags.model.TagsVocabulary> returnValue =
-			TagsVocabularyServiceUtil.getVocabularies(companyId, folksonomy);
+			TagsVocabularyServiceUtil.getGroupVocabularies(groupId, folksonomy);
 
 		return TagsVocabularyJSONSerializer.toJSONArray(returnValue);
 	}

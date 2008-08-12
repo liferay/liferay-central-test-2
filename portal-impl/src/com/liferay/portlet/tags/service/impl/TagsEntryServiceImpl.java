@@ -39,33 +39,36 @@ import java.util.List;
  */
 public class TagsEntryServiceImpl extends TagsEntryServiceBaseImpl {
 
-	public TagsEntry addEntry(String name)
+	public TagsEntry addEntry(long groupId, String name)
 		throws PortalException, SystemException {
 
-		return tagsEntryLocalService.addEntry(getUserId(), name);
+		return tagsEntryLocalService.addEntry(getUserId(), groupId, name);
 	}
 
-	public TagsEntry addEntry(String name, String[] properties)
-		throws PortalException, SystemException {
-
-		return tagsEntryLocalService.addEntry(getUserId(), name, properties);
-	}
-
-	public TagsEntry addEntry(
-			String name, String vocabularyName, String[] properties)
+	public TagsEntry addEntry(long groupId, String name, String[] properties)
 		throws PortalException, SystemException {
 
 		return tagsEntryLocalService.addEntry(
-			getUserId(), name, vocabularyName, properties);
+			getUserId(), groupId, name, properties);
 	}
 
 	public TagsEntry addEntry(
-			String parentEntryName, String name, String vocabularyName,
+			long groupId, String name, String vocabularyName,
 			String[] properties)
 		throws PortalException, SystemException {
 
 		return tagsEntryLocalService.addEntry(
-			getUserId(), parentEntryName, name, vocabularyName, properties);
+			getUserId(), groupId, name, vocabularyName, properties);
+	}
+
+	public TagsEntry addEntry(
+			long groupId, String parentEntryName, String name,
+			String vocabularyName, String[] properties)
+		throws PortalException, SystemException {
+
+		return tagsEntryLocalService.addEntry(
+			getUserId(), groupId, parentEntryName, name, vocabularyName,
+			properties);
 	}
 
 	public void deleteEntry(long entryId)
@@ -81,11 +84,10 @@ public class TagsEntryServiceImpl extends TagsEntryServiceBaseImpl {
 	}
 
 	public List<TagsEntry> getEntries(
-			long groupId, long companyId, long classNameId, String name)
+			long groupId, long classNameId, String name)
 		throws SystemException {
 
-		return tagsEntryLocalService.getEntries(
-			groupId, companyId, classNameId, name);
+		return tagsEntryLocalService.getEntries(groupId, classNameId, name);
 	}
 
 	public TagsEntry getEntry(long entryId)
@@ -94,28 +96,28 @@ public class TagsEntryServiceImpl extends TagsEntryServiceBaseImpl {
 		return tagsEntryLocalService.getEntry(entryId);
 	}
 
-	public List<TagsEntry> getVocabularyEntries(
-			long companyId, String vocabularyName)
+	public List<TagsEntry> getGroupVocabularyEntries(
+			long groupId, String vocabularyName)
 		throws PortalException, SystemException {
 
-		return tagsEntryLocalService.getVocabularyEntries(
-			companyId, vocabularyName);
+		return tagsEntryLocalService.getGroupVocabularyEntries(
+			groupId, vocabularyName);
 	}
 
-	public List<TagsEntry> getVocabularyEntries(
-			long companyId, String parentEntryName, String vocabularyName)
+	public List<TagsEntry> getGroupVocabularyEntries(
+			long groupId, String parentEntryName, String vocabularyName)
 		throws PortalException, SystemException {
 
-		return tagsEntryLocalService.getVocabularyEntries(
-			companyId, parentEntryName, vocabularyName);
+		return tagsEntryLocalService.getGroupVocabularyEntries(
+			groupId, parentEntryName, vocabularyName);
 	}
 
-	public List<TagsEntry> getVocabularyRootEntries(
-			long companyId, String vocabularyName)
+	public List<TagsEntry> getGroupVocabularyRootEntries(
+			long groupId, String vocabularyName)
 		throws PortalException, SystemException {
 
-		return tagsEntryLocalService.getVocabularyRootEntries(
-			companyId, vocabularyName);
+		return tagsEntryLocalService.getGroupVocabularyRootEntries(
+			groupId, vocabularyName);
 	}
 
 	public void mergeEntries(long fromEntryId, long toEntryId)
@@ -125,33 +127,32 @@ public class TagsEntryServiceImpl extends TagsEntryServiceBaseImpl {
 	}
 
 	public List<TagsEntry> search(
-			long companyId, String name, String[] properties)
+			long groupId, String name, String[] properties)
 		throws SystemException {
 
-		return tagsEntryLocalService.search(companyId, name, properties);
+		return tagsEntryLocalService.search(groupId, name, properties);
 	}
 
 	public List<TagsEntry> search(
-		long companyId, String name, String[] properties, int start, int end)
+		long groupId, String name, String[] properties, int start, int end)
 		throws SystemException {
 
 		return tagsEntryLocalService.search(
-			companyId, name, properties, start, end);
+			groupId, name, properties, start, end);
 	}
 
 	public JSONArray searchAutocomplete(
-			long companyId, String name, String[] properties, int start,
-			int end)
+			long groupId, String name, String[] properties, int start, int end)
 		throws SystemException {
 
 		return tagsEntryLocalService.searchAutocomplete(
-			companyId, name, properties, start, end);
+			groupId, name, properties, start, end);
 	}
 
-	public int searchCount(long companyId, String name, String[] properties)
+	public int searchCount(long groupId, String name, String[] properties)
 		throws SystemException {
 
-		return tagsEntryLocalService.searchCount(companyId, name, properties);
+		return tagsEntryLocalService.searchCount(groupId, name, properties);
 	}
 
 	public TagsEntry updateEntry(long entryId, String name)

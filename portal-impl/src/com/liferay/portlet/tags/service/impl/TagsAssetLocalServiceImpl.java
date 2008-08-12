@@ -523,12 +523,11 @@ public class TagsAssetLocalServiceImpl extends TagsAssetLocalServiceBaseImpl {
 		for (int i = 0; i < entryNames.length; i++) {
 			String name = entryNames[i].trim().toLowerCase();
 
-			TagsEntry entry = tagsEntryPersistence.fetchByC_N(
-				user.getCompanyId(), name);
+			TagsEntry entry = tagsEntryPersistence.fetchByG_N(groupId, name);
 
 			if (entry == null) {
 				entry = tagsEntryLocalService.addEntry(
-					user.getUserId(), entryNames[i],
+					user.getUserId(), groupId, entryNames[i],
 					TagsEntryLocalServiceImpl.DEFAULT_PROPERTIES);
 			}
 

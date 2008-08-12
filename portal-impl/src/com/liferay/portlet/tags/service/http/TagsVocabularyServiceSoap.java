@@ -82,9 +82,10 @@ import java.rmi.RemoteException;
  */
 public class TagsVocabularyServiceSoap {
 	public static com.liferay.portlet.tags.model.TagsVocabularySoap addVocabulary(
-		java.lang.String name) throws RemoteException {
+		long groupId, java.lang.String name) throws RemoteException {
 		try {
-			com.liferay.portlet.tags.model.TagsVocabulary returnValue = TagsVocabularyServiceUtil.addVocabulary(name);
+			com.liferay.portlet.tags.model.TagsVocabulary returnValue = TagsVocabularyServiceUtil.addVocabulary(groupId,
+					name);
 
 			return com.liferay.portlet.tags.model.TagsVocabularySoap.toSoapModel(returnValue);
 		}
@@ -96,10 +97,11 @@ public class TagsVocabularyServiceSoap {
 	}
 
 	public static com.liferay.portlet.tags.model.TagsVocabularySoap addVocabulary(
-		java.lang.String name, boolean folksonomy) throws RemoteException {
+		long groupId, java.lang.String name, boolean folksonomy)
+		throws RemoteException {
 		try {
-			com.liferay.portlet.tags.model.TagsVocabulary returnValue = TagsVocabularyServiceUtil.addVocabulary(name,
-					folksonomy);
+			com.liferay.portlet.tags.model.TagsVocabulary returnValue = TagsVocabularyServiceUtil.addVocabulary(groupId,
+					name, folksonomy);
 
 			return com.liferay.portlet.tags.model.TagsVocabularySoap.toSoapModel(returnValue);
 		}
@@ -122,11 +124,12 @@ public class TagsVocabularyServiceSoap {
 		}
 	}
 
-	public static com.liferay.portlet.tags.model.TagsVocabularySoap[] getVocabularies(
-		long companyId) throws RemoteException {
+	public static com.liferay.portlet.tags.model.TagsVocabularySoap[] getCompanyVocabularies(
+		long companyId, boolean folksonomy) throws RemoteException {
 		try {
 			java.util.List<com.liferay.portlet.tags.model.TagsVocabulary> returnValue =
-				TagsVocabularyServiceUtil.getVocabularies(companyId);
+				TagsVocabularyServiceUtil.getCompanyVocabularies(companyId,
+					folksonomy);
 
 			return com.liferay.portlet.tags.model.TagsVocabularySoap.toSoapModels(returnValue);
 		}
@@ -137,11 +140,12 @@ public class TagsVocabularyServiceSoap {
 		}
 	}
 
-	public static com.liferay.portlet.tags.model.TagsVocabularySoap[] getVocabularies(
-		long companyId, boolean folksonomy) throws RemoteException {
+	public static com.liferay.portlet.tags.model.TagsVocabularySoap[] getGroupVocabularies(
+		long groupId, boolean folksonomy) throws RemoteException {
 		try {
 			java.util.List<com.liferay.portlet.tags.model.TagsVocabulary> returnValue =
-				TagsVocabularyServiceUtil.getVocabularies(companyId, folksonomy);
+				TagsVocabularyServiceUtil.getGroupVocabularies(groupId,
+					folksonomy);
 
 			return com.liferay.portlet.tags.model.TagsVocabularySoap.toSoapModels(returnValue);
 		}

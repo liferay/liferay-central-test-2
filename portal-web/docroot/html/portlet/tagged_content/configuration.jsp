@@ -302,10 +302,9 @@ configurationActionURL.setParameter("portletResource", portletResource);
 							<option value=""><liferay-ui:message key="none" /></option>
 
 							<%
-							List categories = TagsPropertyLocalServiceUtil.getPropertyValues(company.getCompanyId(), "category");
+							List<TagsProperty> categories = TagsPropertyLocalServiceUtil.getPropertyValues(portletGroupId.longValue(), "category");
 
-							for (int i = 0; i < categories.size(); i++) {
-								TagsProperty property = (TagsProperty) categories.get(i);
+							for (TagsProperty property : categories) {
 							%>
 
 								<option <%= category.equals(property.getValue()) ? "selected" : "" %> value="<%= property.getValue() %>"><%= property.getValue() %></option>

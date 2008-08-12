@@ -27,7 +27,7 @@
 <%
 String tag = ParamUtil.getString(renderRequest, "tag");
 
-List<TagsVocabulary> vocabularies = TagsVocabularyLocalServiceUtil.getVocabularies(company.getCompanyId(), false);
+List<TagsVocabulary> vocabularies = TagsVocabularyLocalServiceUtil.getGroupVocabularies(portletGroupId.longValue(), false);
 
 PortletURL portletURL = renderResponse.createRenderURL();
 %>
@@ -46,7 +46,7 @@ PortletURL portletURL = renderResponse.createRenderURL();
 		sb.append(vocabularyName);
 		sb.append("<ul>");
 
-		List<TagsEntry> entries = TagsEntryServiceUtil.getVocabularyRootEntries(company.getCompanyId(), vocabularyName);
+		List<TagsEntry> entries = TagsEntryLocalServiceUtil.getGroupVocabularyRootEntries(vocabulary.getGroupId(), vocabularyName);
 
 		for (TagsEntry entry : entries) {
 			_buildNavigation(entry, vocabularyName, tag, portletURL, sb);
@@ -86,7 +86,7 @@ private void _buildNavigation(TagsEntry entry, String vocabularyName, String tag
 
 	sb.append("<ul>");
 
-	List<TagsEntry> entryChildren = TagsEntryServiceUtil.getVocabularyEntries(entry.getCompanyId(), entryName, vocabularyName);
+	List<TagsEntry> entryChildren = TagsEntryLocalServiceUtil.getGroupVocabularyEntries(entry.getGroupId(), entryName, vocabularyName);
 
 	for (TagsEntry entryChild : entryChildren) {
 		_buildNavigation(entryChild, vocabularyName, tag, portletURL, sb);

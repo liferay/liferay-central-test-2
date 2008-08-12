@@ -48,22 +48,22 @@ import java.util.List;
 public class TagsEntryFinderImpl
 	extends BasePersistenceImpl implements TagsEntryFinder {
 
-	public static String COUNT_BY_C_N_P =
-		TagsEntryFinder.class.getName() + ".countByC_N_P";
+	public static String COUNT_BY_G_N_P =
+		TagsEntryFinder.class.getName() + ".countByG_N_P";
 
-	public static String COUNT_BY_G_C_C_N =
-		TagsEntryFinder.class.getName() + ".countByG_C_C_N";
+	public static String COUNT_BY_G_C_N =
+		TagsEntryFinder.class.getName() + ".countByG_C_N";
 
 	public static String FIND_BY_A_F =
 		TagsEntryFinder.class.getName() + ".findByA_F";
 
-	public static String FIND_BY_C_N_P =
-		TagsEntryFinder.class.getName() + ".findByC_N_P";
+	public static String FIND_BY_G_N_P =
+		TagsEntryFinder.class.getName() + ".findByG_N_P";
 
-	public static String FIND_BY_G_C_C_N =
-		TagsEntryFinder.class.getName() + ".findByG_C_C_N";
+	public static String FIND_BY_G_C_N =
+		TagsEntryFinder.class.getName() + ".findByG_C_N";
 
-	public int countByC_N_P(long companyId, String name, String[] properties)
+	public int countByG_N_P(long groupId, String name, String[] properties)
 		throws SystemException {
 
 		Session session = null;
@@ -71,7 +71,7 @@ public class TagsEntryFinderImpl
 		try {
 			session = openSession();
 
-			String sql = CustomSQLUtil.get(COUNT_BY_C_N_P);
+			String sql = CustomSQLUtil.get(COUNT_BY_G_N_P);
 
 			sql = StringUtil.replace(sql, "[$JOIN$]", getJoin(properties));
 
@@ -82,7 +82,7 @@ public class TagsEntryFinderImpl
 			QueryPos qPos = QueryPos.getInstance(q);
 
 			setJoin(qPos, properties);
-			qPos.add(companyId);
+			qPos.add(groupId);
 			qPos.add(name);
 			qPos.add(name);
 
@@ -106,8 +106,7 @@ public class TagsEntryFinderImpl
 		}
 	}
 
-	public int countByG_C_C_N(
-			long groupId, long companyId, long classNameId, String name)
+	public int countByG_C_N(long groupId, long classNameId, String name)
 		throws SystemException {
 
 		Session session = null;
@@ -115,7 +114,7 @@ public class TagsEntryFinderImpl
 		try {
 			session = openSession();
 
-			String sql = CustomSQLUtil.get(COUNT_BY_G_C_C_N);
+			String sql = CustomSQLUtil.get(COUNT_BY_G_C_N);
 
 			SQLQuery q = session.createSQLQuery(sql);
 
@@ -124,7 +123,6 @@ public class TagsEntryFinderImpl
 			QueryPos qPos = QueryPos.getInstance(q);
 
 			qPos.add(groupId);
-			qPos.add(companyId);
 			qPos.add(classNameId);
 			qPos.add(name);
 			qPos.add(name);
@@ -179,16 +177,16 @@ public class TagsEntryFinderImpl
 		}
 	}
 
-	public List<TagsEntry> findByC_N_P(
-			long companyId, String name, String[] properties)
+	public List<TagsEntry> findByG_N_P(
+			long groupId, String name, String[] properties)
 		throws SystemException {
 
-		return findByC_N_P(
-			companyId, name, properties, QueryUtil.ALL_POS, QueryUtil.ALL_POS);
+		return findByG_N_P(
+			groupId, name, properties, QueryUtil.ALL_POS, QueryUtil.ALL_POS);
 	}
 
-	public List<TagsEntry> findByC_N_P(
-			long companyId, String name, String[] properties, int start,
+	public List<TagsEntry> findByG_N_P(
+			long groupId, String name, String[] properties, int start,
 			int end)
 		throws SystemException {
 
@@ -197,7 +195,7 @@ public class TagsEntryFinderImpl
 		try {
 			session = openSession();
 
-			String sql = CustomSQLUtil.get(FIND_BY_C_N_P);
+			String sql = CustomSQLUtil.get(FIND_BY_G_N_P);
 
 			sql = StringUtil.replace(sql, "[$JOIN$]", getJoin(properties));
 
@@ -208,7 +206,7 @@ public class TagsEntryFinderImpl
 			QueryPos qPos = QueryPos.getInstance(q);
 
 			setJoin(qPos, properties);
-			qPos.add(companyId);
+			qPos.add(groupId);
 			qPos.add(name);
 			qPos.add(name);
 
@@ -222,18 +220,16 @@ public class TagsEntryFinderImpl
 		}
 	}
 
-	public List<TagsEntry> findByG_C_C_N(
-			long groupId, long companyId, long classNameId, String name)
+	public List<TagsEntry> findByG_C_N(
+			long groupId, long classNameId, String name)
 		throws SystemException {
 
-		return findByG_C_C_N(
-			groupId, companyId, classNameId, name, QueryUtil.ALL_POS,
-			QueryUtil.ALL_POS);
+		return findByG_C_N(
+			groupId, classNameId, name, QueryUtil.ALL_POS, QueryUtil.ALL_POS);
 	}
 
-	public List<TagsEntry> findByG_C_C_N(
-			long groupId, long companyId, long classNameId, String name,
-			int start, int end)
+	public List<TagsEntry> findByG_C_N(
+			long groupId, long classNameId, String name, int start, int end)
 		throws SystemException {
 
 		Session session = null;
@@ -241,7 +237,7 @@ public class TagsEntryFinderImpl
 		try {
 			session = openSession();
 
-			String sql = CustomSQLUtil.get(FIND_BY_G_C_C_N);
+			String sql = CustomSQLUtil.get(FIND_BY_G_C_N);
 
 			SQLQuery q = session.createSQLQuery(sql);
 
@@ -250,7 +246,6 @@ public class TagsEntryFinderImpl
 			QueryPos qPos = QueryPos.getInstance(q);
 
 			qPos.add(groupId);
-			qPos.add(companyId);
 			qPos.add(classNameId);
 			qPos.add(name);
 			qPos.add(name);

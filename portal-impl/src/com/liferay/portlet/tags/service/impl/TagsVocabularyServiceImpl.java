@@ -37,38 +37,41 @@ import java.util.List;
  */
 public class TagsVocabularyServiceImpl extends TagsVocabularyServiceBaseImpl {
 
-	public TagsVocabulary addVocabulary(String name)
+	public TagsVocabulary addVocabulary(long groupId, String name)
 		throws PortalException, SystemException {
 
 		return tagsVocabularyLocalService.addVocabulary(
-			getUserId(), name, false);
+			getUserId(), groupId, name, false);
 	}
 
-	public TagsVocabulary addVocabulary(String name, boolean folksonomy)
+	public TagsVocabulary addVocabulary(
+			long groupId, String name, boolean folksonomy)
 		throws PortalException, SystemException {
 
 		return tagsVocabularyLocalService.addVocabulary(
-			getUserId(), name, folksonomy);
+			getUserId(), groupId, name, folksonomy);
 	}
 
 	public void deleteVocabulary(long vocabularyId)
 		throws PortalException, SystemException {
 
-		tagsVocabularyLocalService.deleteVocabulary(getUserId(), vocabularyId);
+		tagsVocabularyLocalService.deleteVocabulary(vocabularyId);
 	}
 
-	public List<TagsVocabulary> getVocabularies(long companyId)
-		throws SystemException {
-
-		return tagsVocabularyLocalService.getVocabularies(companyId);
-	}
-
-	public List<TagsVocabulary> getVocabularies(
+	public List<TagsVocabulary> getCompanyVocabularies(
 			long companyId, boolean folksonomy)
 		throws SystemException {
 
-		return tagsVocabularyLocalService.getVocabularies(
+		return tagsVocabularyLocalService.getCompanyVocabularies(
 			companyId, folksonomy);
+	}
+
+	public List<TagsVocabulary> getGroupVocabularies(
+			long groupId, boolean folksonomy)
+		throws SystemException {
+
+		return tagsVocabularyLocalService.getGroupVocabularies(
+			groupId, folksonomy);
 	}
 
 	public TagsVocabulary getVocabulary(long vocabularyId)

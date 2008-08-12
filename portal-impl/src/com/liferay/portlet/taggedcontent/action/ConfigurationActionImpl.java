@@ -207,6 +207,7 @@ public class ConfigurationActionImpl implements ConfigurationAction {
 			WebKeys.THEME_DISPLAY);
 
 		long userId = themeDisplay.getUserId();
+		long groupId = themeDisplay.getPortletGroupId();
 
 		String[] entries = StringUtil.split(
 			ParamUtil.getString(actionRequest, "entries"));
@@ -272,8 +273,8 @@ public class ConfigurationActionImpl implements ConfigurationAction {
 			"enable-comment-ratings", String.valueOf(enableCommentRatings));
 		prefs.setValue("metadata-fields", medatadaFields);
 
-		TagsEntryLocalServiceUtil.checkEntries(userId, entries);
-		TagsEntryLocalServiceUtil.checkEntries(userId, notEntries);
+		TagsEntryLocalServiceUtil.checkEntries(userId, groupId, entries);
+		TagsEntryLocalServiceUtil.checkEntries(userId, groupId, notEntries);
 	}
 
 	protected void updateManualSettings(

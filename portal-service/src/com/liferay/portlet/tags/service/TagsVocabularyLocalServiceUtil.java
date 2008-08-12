@@ -99,34 +99,42 @@ public class TagsVocabularyLocalServiceUtil {
 	}
 
 	public static com.liferay.portlet.tags.model.TagsVocabulary addVocabulary(
-		long userId, java.lang.String name)
+		long userId, long groupId, java.lang.String name)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		return _service.addVocabulary(userId, name);
+		return _service.addVocabulary(userId, groupId, name);
 	}
 
 	public static com.liferay.portlet.tags.model.TagsVocabulary addVocabulary(
-		long userId, java.lang.String name, boolean folksonomy)
+		long userId, long groupId, java.lang.String name, boolean folksonomy)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		return _service.addVocabulary(userId, name, folksonomy);
+		return _service.addVocabulary(userId, groupId, name, folksonomy);
 	}
 
-	public static void deleteVocabulary(long userId, long vocabularyId)
+	public static void deleteVocabulary(long vocabularyId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		_service.deleteVocabulary(userId, vocabularyId);
+		_service.deleteVocabulary(vocabularyId);
 	}
 
-	public static java.util.List<com.liferay.portlet.tags.model.TagsVocabulary> getVocabularies(
-		long companyId) throws com.liferay.portal.SystemException {
-		return _service.getVocabularies(companyId);
-	}
-
-	public static java.util.List<com.liferay.portlet.tags.model.TagsVocabulary> getVocabularies(
+	public static java.util.List<com.liferay.portlet.tags.model.TagsVocabulary> getCompanyVocabularies(
 		long companyId, boolean folksonomy)
 		throws com.liferay.portal.SystemException {
-		return _service.getVocabularies(companyId, folksonomy);
+		return _service.getCompanyVocabularies(companyId, folksonomy);
+	}
+
+	public static java.util.List<com.liferay.portlet.tags.model.TagsVocabulary> getGroupVocabularies(
+		long groupId, boolean folksonomy)
+		throws com.liferay.portal.SystemException {
+		return _service.getGroupVocabularies(groupId, folksonomy);
+	}
+
+	public static com.liferay.portlet.tags.model.TagsVocabulary getGroupVocabulary(
+		long groupId, java.lang.String name)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
+		return _service.getGroupVocabulary(groupId, name);
 	}
 
 	public static com.liferay.portlet.tags.model.TagsVocabulary getVocabulary(
@@ -134,13 +142,6 @@ public class TagsVocabularyLocalServiceUtil {
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		return _service.getVocabulary(vocabularyId);
-	}
-
-	public static com.liferay.portlet.tags.model.TagsVocabulary getVocabulary(
-		long companyId, java.lang.String name)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
-		return _service.getVocabulary(companyId, name);
 	}
 
 	public static com.liferay.portlet.tags.model.TagsVocabulary updateVocabulary(
