@@ -26,107 +26,107 @@
 
 <form id="<portlet:namespace />fm">
 
-<div class="lfr-message-response" id="ui-tags-messages" style="display: none;"></div>
+<table class="vocabulary-container">
+<tr>
+	<td colspan="3">
+		<div id="vocabulary-search-bar">
+			<input id="vocabulary-search-input" type="text" value="" />
 
-<div class="ui-tags">
-	<table class="ui-tags-container">
-	<tr>
-		<td colspan="3">
-			<div class="ui-tags-search-bar">
-				<input id="ui-tags-search-input" size="50" type="text" value="" />
+			<select class="vocabulary-select-search" id="vocabulary-select-search">
+				<option value="vocabularies"><liferay-ui:message key="sets" /></option>
+				<option value="entries"><liferay-ui:message key="entries" /></option>
+			</select>
 
-				<select class="ui-tags-select-search" id="ui-tags-select-search">
-					<option value="vocabularies"><liferay-ui:message key="vocabularies" /></option>
-					<option value="entries"><liferay-ui:message key="entries" /></option>
-				</select>
-
-				<input id="ui-tags-search-button" type="button" value="<liferay-ui:message key="search" />" />
-			</div>
-		</td>
-	</tr>
-	<tr class="ui-tags-toolbar">
-		<td>
-			<div class="ui-tags-buttons">
-				<span class="button selected tags-sets"><liferay-ui:message key="tags-sets" /></span>
+			<input id="vocabulary-search-button" type="button" value="<liferay-ui:message key="search" />" />
+		</div>
+	</td>
+</tr>
+<tr>
+	<td colspan="3">
+		<div class="vocabulary-toolbar">
+			<div class="vocabulary-buttons">
+				<span class="button selected tags-sets"><liferay-ui:message key="tag-sets" /></span>
 
 				<span class="button categories"><liferay-ui:message key="categories" /></span>
 			</div>
-		</td>
-		<td colspan="2">
-			<div class="ui-tags-actions">
-				<b class="ui-tags-label"><liferay-ui:message key="add-tag" /></b>
 
-				<input class="ui-tags-entry-name" name="ui-tags-entry-name" type="text" value="" />
+			<div class="vocabulary-actions">
+				<strong class="vocabulary-label"><liferay-ui:message key="add-tag" /></strong>
 
-				<select class="ui-tags-select-list" name="ui-tags-select-list">
+				<input class="vocabulary-entry-name" name="vocabulary-entry-name" type="text" value="" />
+
+				<select class="vocabulary-select-list" name="vocabulary-select-list">
 					<option value="new">(new)</option>
 				</select>
 
-				<input class="ui-tags-vocabulary-name" name="ui-tags-vocabulary-name" type="text" value="" />
+				<input class="vocabulary-name" name="vocabulary-name" type="text" value="" />
 
-				<input class="ui-tags-save-entry" type="button" value="<liferay-ui:message key="save" />" />
+				<input class="vocabulary-save-entry" type="button" value="<liferay-ui:message key="save" />" />
 			</div>
-		</td>
-	</tr>
-	<tr class="ui-tags-content">
-		<td>
-			<div class="ui-tags-vocabulary-list"></div>
-		</td>
-		<td>
-			<div class="lfr-message-response" id="ui-tags-entry-messages" style="display: none;"></div>
+		</div>
+	</td>
+</tr>
+<tr class="vocabulary-content">
+	<td class="vocabulary-list-container">
+		<div class="results-header"><liferay-ui:message key="sets" /></div>
+		<div class="vocabulary-list lfr-component"></div>
+	</td>
+	<td class="vocabulary-entries-container">
+		<div class="results-header"><liferay-ui:message key="entries" /></div>
+		<div class="lfr-message-response" id="vocabulary-entry-messages" style="display: none;"></div>
 
-			<div class="ui-tags-vocabulary-entries"></div>
-		</td>
-		<td>
-			<div class="ui-tags-vocabulary-edit">
-				<div class="ui-tags-close"><span><liferay-ui:icon image="close" /></span></div>
+		<div class="vocabulary-entries lfr-component"></div>
+	</td>
+	<td class="vocabulary-edit-entry">
+		<div class="results-header"><liferay-ui:message key="edit-entry" /></div>
+		<div class="vocabulary-edit">
+			<div class="vocabulary-close"><span><liferay-ui:icon image="close" /></span></div>
 
-				<div class="ui-tags-label"><liferay-ui:message key="tag-name" />:</div>
+			<div class="vocabulary-label"><liferay-ui:message key="tag-name" />:</div>
 
-				<input class="entry-name" name="entry-name" size="40" type="text" />
+			<input class="entry-name" name="entry-name" type="text" />
 
-				<input class="ui-tags-delete-entries-button" type="button" value="<liferay-ui:message key="delete" />" />
+			<br /><br />
 
-				<br /><br />
+			<div class="vocabulary-properties">
+				<liferay-ui:message key="properties" />:
 
-				<div class="ui-tags-properties">
-					<liferay-ui:message key="properties" />:
+				<div class="vocabulary-property-row">
+					<input class="property-key" type="text" />
 
-					<div class="ui-tags-property-line">
-						<input class="property-key" type="text" />
+					<input class="property-value" type="text" />
 
-						<input class="property-value" type="text" />
+					<span class="add-property"><liferay-ui:icon image="add" /></span>
 
-						<liferay-ui:icon image="add" />
-
-						<liferay-ui:icon image="delete" />
-					</div>
-
-					<br />
-
-					<input class="ui-tags-save-properties" type="button" value="<liferay-ui:message key="save" />" />
-
-					<input class="ui-tags-close" type="button" value="<liferay-ui:message key="close" />" />
+					<span class="delete-property"><liferay-ui:icon image="delete" /></span>
 				</div>
+
+				<br />
+
+				<input class="vocabulary-save-properties" type="button" value="<liferay-ui:message key="save" />" />
+
+				<input class="vocabulary-close" type="button" value="<liferay-ui:message key="close" />" />
+				
+				<input class="vocabulary-delete-entries-button" type="button" value="<liferay-ui:message key="delete" />" />
 			</div>
-		</td>
-	</tr>
-	<tr>
-		<td colspan="3">
-			<div class="ui-tags-footer">
-				<input class="ui-tags-delete-list-button" type="button" value="<liferay-ui:message key="delete-vocabulary" />" />
-			</div>
-		</td>
-	</tr>
-	</table>
-</div>
+		</div>
+	</td>
+</tr>
+<tr>
+	<td colspan="3">
+		<div class="vocabulary-footer">
+			<input class="vocabulary-delete-list-button" type="button" value="<liferay-ui:message key="delete-vocabulary" />" />
+		</div>
+	</td>
+</tr>
+</table>
 
 </form>
 
 <script>
 	jQuery(
 		function() {
-			new Liferay.Portlet.TagsAdmin({});
+			new Liferay.Portlet.TagsAdmin();
 		}
 	);
 </script>
