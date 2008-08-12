@@ -235,84 +235,7 @@ body.portlet {
 .portlet-menu-caption {
 }
 
-/* ---------- Calendar portlet ---------- */
-
-.portlet-calendar .calendar-container {
-}
-
-.ie .portlet-calendar .calendar-container {
-}
-
-.portlet-calendar .calendar-day {
-}
-
-.portlet-calendar .calendar-day .day-text {
-}
-
-.portlet-calendar .calendar-day .day-number {
-}
-
-.portlet-calendar .calendar-container .taglib-calendar {
-}
-
-.taglib-calendar tr.portlet-section-header th, .taglib-calendar tr td {
-}
-
-.taglib-calendar tr td a {
-}
-
-.taglib-calendar table td {
-}
-
-.taglib-calendar tr td a:hover {
-}
-
-.taglib-calendar .calendar-current-day, .taglib-calendar .calendar-current-day a {
-}
-
-.taglib-calendar .calendar-current-day a {
-}
-
-.portlet-calendar .taglib-calendar tr td.calendar-current-day a:hover, .portlet-calendar .taglib-calendar tr td.calendar-current-day a:focus {
-}
-
-.portlet-calendar .taglib-calendar td.calendar-current-day a span {
-}
-
-.taglib-calendar tr td.calendar-inactive {
-}
-
-.taglib-calendar tr th {
-}
-
-.taglib-calendar tr.portlet-section-header th, .taglib-calendar tr td {
-}
-
-.ie .taglib-calendar tr td.first a {
-}
-
 /* ---------- Miscellaneous portlet styles ---------- */
-
-.journal-template-error .scroll-pane {
-}
-
-.journal-template-error .scroll-pane .inner-scroll-pane {
-}
-
-.journal-template-error .scroll-pane .error-line {
-}
-
-.journal-template-error .scroll-pane pre {
-}
-
-.journal-template-error .scroll-pane pre span {
-}
-
-.message-board-code {
-}
-
-.message-board-code-lines {
-}
 
 .restricted, .restricted td {
 }
@@ -363,4 +286,36 @@ body.portlet {
 }
 
 .lfr-actions .lfr-trigger li.last {
+}
+
+/* ---------- Calendar taglib ---------- */
+
+.taglib-calendar tr.portlet-section-header th, .taglib-calendar tr td {
+}
+
+.taglib-calendar tr td a {
+}
+
+.taglib-calendar table td {
+}
+
+.taglib-calendar tr td a:hover {
+}
+
+.taglib-calendar .calendar-current-day, .taglib-calendar .calendar-current-day a {
+}
+
+.taglib-calendar .calendar-current-day a {
+}
+
+.taglib-calendar tr td.calendar-inactive {
+}
+
+.taglib-calendar tr th {
+}
+
+.taglib-calendar tr.portlet-section-header th, .taglib-calendar tr td {
+}
+
+.ie .taglib-calendar tr td.first a {
 }

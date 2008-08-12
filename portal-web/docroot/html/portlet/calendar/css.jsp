@@ -25,9 +25,13 @@
 <%@ include file="/html/portlet/css_init.jsp" %>
 
 .portlet-calendar .calendar-container {
-	background: url(<%= themeImagesPath %>/calendar/calendar_day_drop_shadow.png) no-repeat 0 100%;
-	border: 1px solid #999;
+	background: url(<%= themeImagesPath %>/calendar/calendar_day_drop_shadow.png) repeat-x 0 99%;
+	border: 1px solid #D7D7D7;
 	width: 400px;
+}
+
+.ie .portlet-calendar .calendar-container {
+	background-position: 0 98%;
 }
 
 .ie6 .portlet-calendar .calendar-container {
@@ -37,7 +41,7 @@
 .portlet-calendar .calendar-day {
 	float:left;
 	text-align: center;
-	width: 210px;
+	width: 209px;
 }
 
 .portlet-calendar .calendar-day h2 {
@@ -52,6 +56,20 @@
 	line-height: 1.2;
 	margin: 0;
 	vertical-align: middle;
+}
+
+.portlet-calendar .calendar-day .day-text {
+	background: #727C81;
+	color: #fff;
+	font-size: 1.6em;
+}
+
+.portlet-calendar .calendar-day .day-number {
+	border: 1px solid #fff;
+	border-bottom: none;
+	font-size: 110px;
+	font-weight: normal;
+	padding-bottom: 12px;
 }
 
 .portlet-calendar .taglib-calendar {
@@ -75,6 +93,13 @@
 	margin-left: 0;
 	padding-left: 0;
 	width: 189px;
+}
+
+.portlet-calendar .calendar-container .taglib-calendar {
+	background: #fff;
+	border-left: 1px solid #D7D7D7;
+	margin-left: -1px;
+	padding-left: 0;
 }
 
 .portlet-calendar .taglib-calendar table {
@@ -103,7 +128,13 @@
 }
 
 .portlet-calendar .taglib-calendar tr td.calendar-current-day a:hover, .taglib-calendar tr td.calendar-current-day a:focus {
-	background-color: #5881B5;
+	background-color: #DFF4FF;
+	border-color: #AEB8BC;
+	color: #06c;
+}
+
+.portlet-calendar .taglib-calendar td.calendar-current-day a span {
+	border: none;
 }
 
 .portlet-calendar .has-events a span {

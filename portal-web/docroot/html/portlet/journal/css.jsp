@@ -44,3 +44,35 @@
 .portlet-journal .journal-article-status-not-approved {
 	color: orange;
 }
+
+.journal-template-error .scroll-pane {
+	border: 1px solid #BFBFBF;
+	max-height: 200px;
+	min-height: 50px;
+	overflow: auto;
+	width: 100%;
+}
+
+.journal-template-error .scroll-pane .inner-scroll-pane {
+	min-width: 104%;
+}
+
+.journal-template-error .scroll-pane .error-line {
+	background: #fdd;
+}
+
+.journal-template-error .scroll-pane pre {
+	margin: 0px;
+	white-space: pre;
+}
+
+.journal-template-error .scroll-pane pre span {
+	background: #B5BFC4;
+	border-right: 1px solid #BFBFBF;
+	display: block;
+	float: left;
+	margin-right: 4px;
+	padding-right: 4px;
+	text-align: right;
+	width: 40px;
+}
