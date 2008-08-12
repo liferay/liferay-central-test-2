@@ -30,8 +30,6 @@ import com.liferay.portal.kernel.util.Validator;
 
 import java.io.ByteArrayInputStream;
 import java.io.File;
-import java.io.PrintWriter;
-import java.io.StringWriter;
 
 import java.net.SocketException;
 
@@ -79,9 +77,9 @@ public class MailEngine {
 	public static Session getSession(boolean cache) throws NamingException {
 		Session session = PortalJNDIUtil.getMailSession();
 
-		session.setDebug(_log.isDebugEnabled());
-
 		if (_log.isDebugEnabled()) {
+			session.setDebug(true);
+
 			session.getProperties().list(System.out);
 		}
 
@@ -91,59 +89,51 @@ public class MailEngine {
 	public static Session getSession(SMTPAccount smtpAccount)
 		throws NamingException {
 
-		Properties properties = new Properties();
+		Session session = null;
 
-		Session session= null;
-
-		String protocol= "smtp";
-		String port= DEFAULT_SMTP_PORT;;
-		if (smtpAccount != null && smtpAccount.isRequiresAuthentication()) {
+		if (smtpAccount.isRequiresAuthentication()) {
+			String protocol = _SMTP_PROTOCOL;
 
 			if (smtpAccount.isUseSSL()) {
-
-				protocol= "smtps";
-
-				if (Validator.isNotNull(smtpAccount.getServerPort())) {
-					port= String.valueOf(smtpAccount.getServerPort());
-				} else {
-					port= DEFAULT_SMTPS_PORT;
-				}
-
-				properties.put("mail."+protocol+".socketFactory.port", port);
-				properties.put(
-					"mail."+protocol+".socketFactory.class",
-					"javax.net.ssl.SSLSocketFactory");
-				properties.put(
-					"mail."+protocol+".socketFactory.fallback", "false");
-
+				protocol = _SMTPS_PROTOCOL;
 			}
+
+			int port = _SMTP_PORT;
+
+			if (smtpAccount.getServerPort() > 0) {
+				port = smtpAccount.getServerPort();
+			}
+
+			Properties properties = new Properties();
 
 			properties.put("mail.transport.protocol", protocol);
-			properties.put("mail."+protocol+".auth", "true");
+			properties.put("mail." + protocol + ".auth", "true");
 			properties.put(
-				"mail."+protocol+".host", smtpAccount.getServerName());
-
-			if (Validator.isNotNull(smtpAccount.getServerPort())) {
-				port= String.valueOf(smtpAccount.getServerPort());
-			}
-
-			properties.put("mail."+protocol+".port", port);
+				"mail." + protocol + ".host", smtpAccount.getServerName());
+			properties.put("mail." + protocol + ".port", port);
 			properties.put(
-				"mail."+protocol+".user", smtpAccount.getUserName());
+				"mail." + protocol + ".user", smtpAccount.getUserName());
 			properties.put(
-				"mail."+protocol+".password", smtpAccount.getPassword());
+				"mail." + protocol + ".password", smtpAccount.getPassword());
+			properties.put(
+				"mail." + protocol + ".socketFactory.class",
+				"javax.net.ssl.SSLSocketFactory");
+			properties.put(
+				"mail." + protocol + ".socketFactory.fallback", "false");
 
 			session = Session.getInstance(properties);
-		} else {
-			session= getSession();
+		}
+		else {
+			session = getSession();
 		}
 
 		if (_log.isDebugEnabled()) {
 			session.setDebug(true);
+
+			session.getProperties().list(System.out);
 		}
 
 		return session;
-
 	}
 
 	public static void send(MailMessage mailMessage)
@@ -263,7 +253,8 @@ public class MailEngine {
 			File[] attachments)
 		throws MailEngineException {
 
-		send(from, to, cc, bcc, bulkAddresses, subject, body, htmlFormat,
+		send(
+			from, to, cc, bcc, bulkAddresses, subject, body, htmlFormat,
 			replyTo, messageId, inReplyTo, null, null);
 	}
 
@@ -311,9 +302,10 @@ public class MailEngine {
 			Session session = null;
 
 			if (smtpAccount == null) {
-				session= getSession();
-			} else {
-				session= getSession(smtpAccount);
+				session = getSession();
+			}
+			else {
+				session = getSession(smtpAccount);
 			}
 
 			Message msg = new LiferayMimeMessage(session);
@@ -431,62 +423,40 @@ public class MailEngine {
 		}
 	}
 
-	private static String _getSMTPProperty(
-		Session session, String propertySuffix) {
+	private static String _getSMTPProperty(Session session, String suffix) {
+		String value = session.getProperty("mail.smtp." + suffix);
 
-		String property= session.getProperty("mail.smtp."+propertySuffix);
-		if (property == null) {
-			property= session.getProperty("mail.smtps."+propertySuffix);
+		if (value == null) {
+			value = session.getProperty("mail.smtps." + suffix);
 		}
-		return property;
+
+		return value;
 	}
 
 	private static void _send(
-			Session session, Message msg, InternetAddress[] bulkAddresses) {
+		Session session, Message msg, InternetAddress[] bulkAddresses) {
 
 		try {
-
-			if (_log.isDebugEnabled()) {
-				_log.debug(
-					"Trying to send a email using the following properties:");
-
-				StringWriter sw= new StringWriter();
-				PrintWriter pw= new PrintWriter(sw);
-				session.getProperties().list(pw);
-				pw.flush();
-				_log.debug(sw.toString());
-			}
-
 			boolean smtpAuth = GetterUtil.getBoolean(
 				_getSMTPProperty(session, "auth"), false);
 			String smtpHost = _getSMTPProperty(session, "host");
-			String smtpPort = _getSMTPProperty(session, "port");
+			int smtpPort = GetterUtil.getInteger(
+				_getSMTPProperty(session, "port"), _SMTP_PORT);
 			String user = _getSMTPProperty(session, "user");
 			String password = _getSMTPProperty(session, "password");
 
-			if (smtpAuth &&
-				Validator.isNotNull(user) &&
+			if (smtpAuth && Validator.isNotNull(user) &&
 				Validator.isNotNull(password)) {
 
-				String protocol= session.getProperty("mail.transport.protocol");
-				if (Validator.isNull(protocol)) {
-					protocol= "smtp";
-				}
+				String protocol = GetterUtil.getString(
+					session.getProperty("mail.transport.protocol"),
+					_SMTP_PROTOCOL);
 
 				Transport transport = session.getTransport(protocol);
 
-				if (Validator.isNotNull(smtpPort)
-					&& Validator.isNumber(smtpPort)) {
+				transport.connect(smtpHost, smtpPort, user, password);
 
-					transport.connect(
-							smtpHost, Integer.parseInt(smtpPort), user,
-							password);
-
-				} else {
-					transport.connect(smtpHost, user, password);
-				}
-
-				if (bulkAddresses != null && bulkAddresses.length > 0) {
+				if ((bulkAddresses != null) && (bulkAddresses.length > 0)) {
 					transport.sendMessage(msg, bulkAddresses);
 				}
 				else {
@@ -516,13 +486,17 @@ public class MailEngine {
 		}
 	}
 
-	public static final String DEFAULT_SMTP_PORT = "25";
-
-	public static final String DEFAULT_SMTPS_PORT = "465";
-
 	private static final String _MULTIPART_TYPE_ALTERNATIVE = "alternative";
 
 	private static final String _MULTIPART_TYPE_MIXED = "mixed";
+
+	private static final String _SMTP_PROTOCOL = "smtp";
+
+	private static final int _SMTP_PORT = 25;
+
+	private static final String _SMTPS_PROTOCOL = "smtps";
+
+	private static final int _SMTPS_PORT = 465;
 
 	private static final String _TEXT_HTML = "text/html;charset=\"UTF-8\"";
 
