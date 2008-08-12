@@ -155,6 +155,8 @@ for (int i = 0; i < results.size(); i++) {
 	for (int i = 0; i < results.size(); i++) {
 		IGImage image = (IGImage)results.get(i);
 
+		image = image.toEscapedModel();
+
 		Image largeImage = ImageLocalServiceUtil.getImage(image.getLargeImageId());
 
 		ResultRow row = new ResultRow(image, image.getImageId(), i);
@@ -170,7 +172,7 @@ for (int i = 0; i < results.size(); i++) {
 		sb.append("', '");
 		sb.append(asset.getAssetId());
 		sb.append("', '");
-		sb.append(asset.getTitle());
+		sb.append(UnicodeFormatter.toString(asset.getTitle()));
 		sb.append("', '");
 		sb.append(assetOrder);
 		sb.append("');");

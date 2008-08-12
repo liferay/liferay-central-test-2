@@ -192,6 +192,8 @@ configurationActionURL.setParameter("portletResource", portletResource);
 
 							try {
 								asset = TagsAssetLocalServiceUtil.getAsset(assetId);
+
+								asset = asset.toEscapedModel();
 							}
 							catch (NoSuchAssetException nsae) {
 								deletedAssets.add(assetId);
@@ -219,6 +221,8 @@ configurationActionURL.setParameter("portletResource", portletResource);
 
 							if (assetType.equals(IGImage.class.getName())) {
 								IGImage image = IGImageLocalServiceUtil.getImage(asset.getClassPK());
+
+								image = image.toEscapedModel();
 
 								StringBuilder sb = new StringBuilder();
 

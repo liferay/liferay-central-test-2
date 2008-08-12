@@ -155,6 +155,8 @@ for (int i = 0; i < results.size(); i++) {
 	for (int i = 0; i < results.size(); i++) {
 		BookmarksEntry entry = (BookmarksEntry)results.get(i);
 
+		entry = entry.toEscapedModel();
+
 		ResultRow row = new ResultRow(entry, entry.getEntryId(), i);
 
 		TagsAsset asset = TagsAssetLocalServiceUtil.getAsset(BookmarksEntry.class.getName(), entry.getEntryId());
@@ -168,7 +170,7 @@ for (int i = 0; i < results.size(); i++) {
 		sb.append("', '");
 		sb.append(asset.getAssetId());
 		sb.append("', '");
-		sb.append(asset.getTitle());
+		sb.append(UnicodeFormatter.toString(asset.getTitle()));
 		sb.append("', '");
 		sb.append(assetOrder);
 		sb.append("');");
