@@ -22,7 +22,7 @@
 
 package com.liferay.portlet.wiki.translators;
 
-import junit.framework.TestCase;
+import com.liferay.portal.util.BaseTestCase;
 
 /**
  * <a href="ClassicToCreoleTranslatorTest.java.html"><b><i>View Source</i></b>
@@ -31,7 +31,7 @@ import junit.framework.TestCase;
  * @author Jorge Ferrer
  *
  */
-public class ClassicToCreoleTranslatorTest extends TestCase {
+public class ClassicToCreoleTranslatorTest extends BaseTestCase {
 
 	public ClassicToCreoleTranslatorTest() {
 		_translator = new ClassicToCreoleTranslator();

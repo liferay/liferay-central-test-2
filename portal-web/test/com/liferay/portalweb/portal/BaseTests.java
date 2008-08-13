@@ -22,6 +22,8 @@
 
 package com.liferay.portalweb.portal;
 
+import com.liferay.portal.util.InitUtil;
+
 import junit.framework.TestSuite;
 
 /**
@@ -31,6 +33,10 @@ import junit.framework.TestSuite;
  *
  */
 public class BaseTests extends TestSuite {
+
+	static {
+		InitUtil.init();
+	}
 
 	public void test() {
 	}

@@ -22,9 +22,7 @@
 
 package com.liferay.portlet.wiki.translators;
 
-import com.liferay.portal.util.InitUtil;
-
-import junit.framework.TestCase;
+import com.liferay.portal.util.BaseTestCase;
 
 /**
  * <a href="MediaWikiToCreoleTranslatorTest.java.html"><b><i>View Source</i></b>
@@ -33,11 +31,7 @@ import junit.framework.TestCase;
  * @author Jorge Ferrer
  *
  */
-public class MediaWikiToCreoleTranslatorTest extends TestCase {
-
-	static {
-		InitUtil.init();
-	}
+public class MediaWikiToCreoleTranslatorTest extends BaseTestCase {
 
 	public MediaWikiToCreoleTranslatorTest() {
 		_translator = new MediaWikiToCreoleTranslator();
