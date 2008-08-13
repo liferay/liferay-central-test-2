@@ -2403,7 +2403,7 @@ public class ServiceBuilder {
 
 		JavaClass javaClass = _getJavaClass(
 			_serviceOutputPath + "/service/" + entity.getName() +
-				(sessionType != _SESSION_TYPE_REMOTE ? "Local" : "") + "Service.java");
+				_getSessionTypeName(sessionType) + "Service.java");
 
 		Map<String, Object> context = _getContext();
 
@@ -3304,7 +3304,14 @@ public class ServiceBuilder {
 	}
 
 	private JavaClass _getJavaClass(String fileName) throws IOException {
-		int pos = fileName.indexOf(_implDir + "/") + _implDir.length();
+		int pos = fileName.indexOf(_implDir + "/");
+
+		if (pos != -1) {
+			pos += _implDir.length();
+		}
+		else {
+			pos = fileName.indexOf(_apiDir + "/") + _apiDir.length();
+		}
 
 		String srcFile = fileName.substring(pos + 1, fileName.length());
 		String className = StringUtil.replace(
