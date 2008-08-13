@@ -24,6 +24,7 @@ package com.liferay.portlet.tags.service.impl;
 
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
+import com.liferay.portal.kernel.dao.orm.QueryUtil;
 import com.liferay.portal.kernel.search.BooleanClauseOccur;
 import com.liferay.portal.kernel.search.BooleanQuery;
 import com.liferay.portal.kernel.search.BooleanQueryFactoryUtil;
@@ -421,8 +422,8 @@ public class TagsAssetLocalServiceImpl extends TagsAssetLocalServiceBaseImpl {
 		throws SystemException {
 
 		Hits hits = search(
-			companyId, portletId, keywords, SearchEngineUtil.ALL_POS,
-			SearchEngineUtil.ALL_POS);
+			companyId, portletId, keywords, QueryUtil.ALL_POS,
+			QueryUtil.ALL_POS);
 
 		return hits.getLength();
 	}

@@ -155,7 +155,7 @@ try {
 	searchContainer.setOrderByCol(orderByCol);
 	searchContainer.setOrderByType(orderByType);
 
-	List results = PluginPackageUtil.search(keywords, pluginType, tag, license, searchRepositoryURL, installStatus, searchContainer.getStart(), searchContainer.getEnd()).toList();
+	List results = PluginPackageUtil.search(keywords, pluginType, tag, license, searchRepositoryURL, installStatus, QueryUtil.ALL_POS, QueryUtil.ALL_POS).toList();
 
 	DocumentComparator docComparator = null;
 
@@ -179,6 +179,10 @@ try {
 	int total = results.size();
 
 	searchContainer.setTotal(total);
+
+	results = ListUtil.subList(results, searchContainer.getStart(), searchContainer.getEnd());
+
+	searchContainer.setResults(results);
 
 	List resultRows = searchContainer.getResultRows();
 

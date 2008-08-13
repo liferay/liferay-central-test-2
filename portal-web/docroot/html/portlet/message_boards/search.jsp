@@ -95,11 +95,11 @@ SearchContainer searchContainer = new SearchContainer(renderRequest, null, null,
 
 try {
 
-	// We must use SearchEngine.ALL_POS or else pagination will break. We need
-	// to filter the results with ThreadHits first and then make a subset of the
+	// We must use QueryUtil.ALL_POS or else pagination will break. We need to
+	// filter the results with ThreadHits first and then make a subset of the
 	// filtered results.
 
-	Hits results = MBCategoryLocalServiceUtil.search(company.getCompanyId(), portletGroupId.longValue(), categoryIdsArray, threadId, keywords, SearchEngineUtil.ALL_POS, SearchEngineUtil.ALL_POS);
+	Hits results = MBCategoryLocalServiceUtil.search(company.getCompanyId(), portletGroupId.longValue(), categoryIdsArray, threadId, keywords, QueryUtil.ALL_POS, QueryUtil.ALL_POS);
 
 	ThreadHits threadHits = new ThreadHits();
 

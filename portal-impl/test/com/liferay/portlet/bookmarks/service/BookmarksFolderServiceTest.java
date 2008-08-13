@@ -22,10 +22,10 @@
 
 package com.liferay.portlet.bookmarks.service;
 
+import com.liferay.portal.kernel.dao.orm.QueryUtil;
 import com.liferay.portal.kernel.search.Document;
 import com.liferay.portal.kernel.search.Field;
 import com.liferay.portal.kernel.search.Hits;
-import com.liferay.portal.kernel.search.SearchEngineUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portlet.bookmarks.model.BookmarksEntry;
 import com.liferay.portlet.bookmarks.model.BookmarksFolder;
@@ -75,7 +75,7 @@ public class BookmarksFolderServiceTest extends BaseBookmarksServiceTestCase {
 
 		Hits hits = BookmarksFolderLocalServiceUtil.search(
 			companyId, groupId, new long[] {folderId}, keywords,
-			SearchEngineUtil.ALL_POS, SearchEngineUtil.ALL_POS);
+			QueryUtil.ALL_POS, QueryUtil.ALL_POS);
 
 		assertEquals(1, hits.getLength());
 
@@ -104,7 +104,7 @@ public class BookmarksFolderServiceTest extends BaseBookmarksServiceTestCase {
 
 		hits = BookmarksFolderLocalServiceUtil.search(
 			companyId, groupId, new long[] {folderId}, keywords,
-			SearchEngineUtil.ALL_POS, SearchEngineUtil.ALL_POS);
+			QueryUtil.ALL_POS, QueryUtil.ALL_POS);
 
 		assertEquals(0, hits.getLength());
 

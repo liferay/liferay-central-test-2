@@ -30,7 +30,6 @@
 <%@ page import="com.liferay.portal.kernel.search.Document" %>
 <%@ page import="com.liferay.portal.kernel.search.Field" %>
 <%@ page import="com.liferay.portal.kernel.search.Hits" %>
-<%@ page import="com.liferay.portal.kernel.search.SearchEngineUtil" %>
 <%@ page import="com.liferay.portlet.messageboards.BannedUserException" %>
 <%@ page import="com.liferay.portlet.messageboards.CategoryNameException" %>
 <%@ page import="com.liferay.portlet.messageboards.MessageBodyException" %>

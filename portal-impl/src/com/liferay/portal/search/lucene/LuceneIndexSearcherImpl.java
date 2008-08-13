@@ -22,6 +22,7 @@
 
 package com.liferay.portal.search.lucene;
 
+import com.liferay.portal.kernel.dao.orm.QueryUtil;
 import com.liferay.portal.kernel.search.Document;
 import com.liferay.portal.kernel.search.DocumentImpl;
 import com.liferay.portal.kernel.search.Field;
@@ -29,7 +30,6 @@ import com.liferay.portal.kernel.search.Hits;
 import com.liferay.portal.kernel.search.HitsImpl;
 import com.liferay.portal.kernel.search.IndexSearcher;
 import com.liferay.portal.kernel.search.Query;
-import com.liferay.portal.kernel.search.SearchEngineUtil;
 import com.liferay.portal.kernel.search.SearchException;
 import com.liferay.portal.kernel.search.Sort;
 import com.liferay.portal.kernel.util.GetterUtil;
@@ -157,9 +157,7 @@ public class LuceneIndexSearcherImpl implements IndexSearcher {
 
 		int length = luceneHits.length();
 
-		if ((start == SearchEngineUtil.ALL_POS) &&
-			(end == SearchEngineUtil.ALL_POS)) {
-
+		if ((start == QueryUtil.ALL_POS) && (end == QueryUtil.ALL_POS)) {
 			start = 0;
 			end = length;
 		}
