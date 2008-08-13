@@ -77,12 +77,12 @@ public class PluginsEnvironmentBuilder {
 
 			ds.scan();
 
-			String path = dir.getCanonicalPath();
+			String dirName = dir.getCanonicalPath();
 
 			String[] fileNames = ds.getIncludedFiles();
 
 			for (String fileName : fileNames) {
-				File propsFile = new File(path + "/" + fileName);
+				File propsFile = new File(dirName + "/" + fileName);
 				File libDir = new File(propsFile.getParent() + "/lib");
 				File projectDir = new File(propsFile.getParent() + "/../..");
 
@@ -122,9 +122,9 @@ public class PluginsEnvironmentBuilder {
 			File libDir, File projectDir, List<String> dependencyJars)
 		throws Exception {
 
-		String projectPath = projectDir.getCanonicalPath();
+		String projectDirName = projectDir.getCanonicalPath();
 		String projectName = StringUtil.extractLast(
-			projectPath, File.separator);
+			projectDirName, File.separator);
 
 		// .project
 
@@ -146,7 +146,7 @@ public class PluginsEnvironmentBuilder {
 		sb.append("\t</natures>\n");
 		sb.append("</projectDescription>");
 
-		File projectFile = new File(projectPath + "/.project");
+		File projectFile = new File(projectDirName + "/.project");
 
 		System.out.println("Updating " + projectFile);
 
@@ -174,6 +174,7 @@ public class PluginsEnvironmentBuilder {
 				customJars.remove(jar);
 			}
 
+			customJars.remove(projectName + "-service.jar");
 			customJars.remove("util-bridges.jar");
 			customJars.remove("util-java.jar");
 			customJars.remove("util-taglib.jar");
@@ -186,6 +187,12 @@ public class PluginsEnvironmentBuilder {
 
 		sb.append("<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n\n");
 		sb.append("<classpath>\n");
+
+		if (_fileUtil.exists(projectDirName + "/docroot/WEB-INF/service")) {
+			sb.append("\t<classpathentry excluding=\"**/.svn/**|.svn/\" ");
+			sb.append("kind=\"src\" path=\"docroot/WEB-INF/service\" />\n");
+		}
+
 		sb.append("\t<classpathentry excluding=\"**/.svn/**|.svn/\" ");
 		sb.append("kind=\"src\" path=\"docroot/WEB-INF/src\" />\n");
 		sb.append("\t<classpathentry kind=\"src\" path=\"/portal\" />\n");
@@ -216,7 +223,7 @@ public class PluginsEnvironmentBuilder {
 		sb.append("\t<classpathentry kind=\"output\" path=\"bin\" />\n");
 		sb.append("</classpath>");
 
-		File classpathFile = new File(projectPath + "/.classpath");
+		File classpathFile = new File(projectDirName + "/.classpath");
 
 		System.out.println("Updating " + classpathFile);
 
@@ -225,21 +232,25 @@ public class PluginsEnvironmentBuilder {
 		// SVN
 
 		if (_svn) {
-			try {
-				_exec(_SVN_INFO + projectFile);
-			}
-			catch (Exception e) {
-				_exec(_SVN_ADD + projectFile);
-			}
+			String projectFileName = "\"" + projectFile + "\"";
 
 			try {
-				_exec(_SVN_INFO + classpathFile);
+				_exec(_SVN_INFO + projectFileName);
 			}
 			catch (Exception e) {
-				_exec(_SVN_ADD + classpathFile);
+				_exec(_SVN_ADD + projectFileName);
 			}
 
-			_exec(_SVN_SET_IGNORES + "bin " + projectPath);
+			String classpathFileName = "\"" + classpathFile + "\"";
+
+			try {
+				_exec(_SVN_INFO + classpathFileName);
+			}
+			catch (Exception e) {
+				_exec(_SVN_ADD + classpathFileName);
+			}
+
+			_exec(_SVN_SET_IGNORES + "bin \"" + projectDirName + "\"");
 		}
 	}
 
@@ -251,9 +262,9 @@ public class PluginsEnvironmentBuilder {
 		File tempFile = null;
 
 		try {
-			String libPath = libDir.getCanonicalPath();
+			String libDirName = "\"" + libDir.getCanonicalPath() + "\"";
 
-			String[] oldIgnores = _exec(_SVN_GET_IGNORES + libPath);
+			String[] oldIgnores = _exec(_SVN_GET_IGNORES + libDirName);
 
 			Arrays.sort(oldIgnores);
 
@@ -263,7 +274,7 @@ public class PluginsEnvironmentBuilder {
 
 			tempFile = File.createTempFile("svn-ignores-", null, null);
 
-			_exec(_SVN_DEL_IGNORES + libPath);
+			_exec(_SVN_DEL_IGNORES + libDirName);
 
 			StringBuilder sb = new StringBuilder();
 
@@ -274,10 +285,10 @@ public class PluginsEnvironmentBuilder {
 			_fileUtil.write(tempFile, sb.toString());
 
 			_exec(
-				_SVN_SET_IGNORES + "-F " + tempFile.getCanonicalPath() + " " +
-					libPath);
+				_SVN_SET_IGNORES + "-F \"" + tempFile.getCanonicalPath() +
+					"\" " + libDirName);
 
-			String[] newIgnores = _exec(_SVN_GET_IGNORES + libPath);
+			String[] newIgnores = _exec(_SVN_GET_IGNORES + libDirName);
 
 			if (newIgnores.length > 0) {
 				Arrays.sort(newIgnores);
@@ -358,7 +369,7 @@ public class PluginsEnvironmentBuilder {
 		}
 
 		try {
-			_exec(_SVN_INFO + libDir);
+			_exec(_SVN_INFO + "\"" + libDir + "\"");
 		}
 		catch (Exception e) {
 			return false;
