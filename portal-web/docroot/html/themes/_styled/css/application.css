@@ -767,7 +767,51 @@ img.ui-datepicker-trigger {
 
 /* ---------- Tags ---------- */
 
-span.ui-tags-delete {
+.ui-tags {
+	display: block;
+	padding: 5px 0 2px;
+}
+
+.ui-tags:after {
+	clear: both;
+	content: ".";
+	display: block;
+	height: 0;
+	visibility: hidden;
+}
+
+.ie .ui-tags {
+	height: 1%;
+}
+
+.ui-tags.empty {
+	display: none;
+}
+
+.ui-tags .ui-tag {
+	background: #DFF4FF;
+	border: 1px solid #A7CEDF;
+	float: left;
+	margin-bottom: 3px;
+	margin-right: 3px;
+	padding: 3px 20px 3px 6px;
+	padding-right: 20px;
+	position: relative;
+}
+
+.ui-tags .ui-tag:hover {
+	border-color: #AEB8BC;
+}
+
+.ui-tags .ui-tag-delete {
+	display: block;
+	padding: 6px;
+	position: absolute;
+	right: 0;
+	top: 3px;
+}
+
+.ui-tags .ui-tag-delete span {
 	background: url(../images/application/close_small.png) no-repeat 0 0;
 	cursor: pointer;
 	display: block;
@@ -775,6 +819,14 @@ span.ui-tags-delete {
 	height: 7px;
 	text-indent: -9999em;
 	width: 7px;
+}
+
+.ui-tags .ui-tag-delete:hover span {
+	background-position: 0 100%;
+}
+
+.ui-tags-input {
+	width: 200px;
 }
 
 /* ---------- Treeview ---------- */

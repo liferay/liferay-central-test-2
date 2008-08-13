@@ -423,7 +423,34 @@ img.ui-datepicker-trigger {
 
 /* ---------- Tags ---------- */
 
-span.ui-tags-delete {
+.ui-tags {
+}
+
+.ui-tags:after {
+}
+
+.ie .ui-tags {
+}
+
+.ui-tags.empty {
+}
+
+.ui-tags .ui-tag {
+}
+
+.ui-tags .ui-tag:hover {
+}
+
+.ui-tags .ui-tag-delete {
+}
+
+.ui-tags .ui-tag-delete span {
+}
+
+.ui-tags .ui-tag-delete:hover span {
+}
+
+.ui-tags-input {
 }
 
 /* ---------- Treeview ---------- */
