@@ -1461,6 +1461,17 @@ public class ServiceBuilder {
 
 				FileUtil.write(exceptionFile, content);
 			}
+
+			if (!_serviceOutputPath.equals(_outputPath)) {
+				exceptionFile = new File(
+					_outputPath + "/" + exception + "Exception.java");
+
+				if (exceptionFile.exists()) {
+					System.out.println("Relocating " + exceptionFile);
+
+					exceptionFile.delete();
+				}
+			}
 		}
 	}
 
@@ -1487,6 +1498,17 @@ public class ServiceBuilder {
 		jalopySettings.put("keepJavadoc", Boolean.TRUE);
 
 		writeFile(modelFile, content, _author, jalopySettings);
+
+		if (!_serviceOutputPath.equals(_outputPath)) {
+			modelFile = new File(
+				_outputPath + "/model/" + entity.getName() + ".java");
+
+			if (modelFile.exists()) {
+				System.out.println("Relocating " + modelFile);
+
+				modelFile.delete();
+			}
+		}
 	}
 
 	private void _createExtendedModelImpl(Entity entity) throws Exception {
@@ -1533,6 +1555,18 @@ public class ServiceBuilder {
 				"Finder.java");
 
 		writeFile(ejbFile, content, _author);
+
+		if (!_serviceOutputPath.equals(_outputPath)) {
+			ejbFile = new File(
+				_outputPath + "/service/persistence/" + entity.getName() +
+					"Finder.java");
+
+			if (ejbFile.exists()) {
+				System.out.println("Relocating " + ejbFile);
+
+				ejbFile.delete();
+			}
+		}
 	}
 
 	private void _createFinderUtil(Entity entity) throws Exception {
@@ -1560,6 +1594,18 @@ public class ServiceBuilder {
 				"FinderUtil.java");
 
 		writeFile(ejbFile, content, _author);
+
+		if (!_serviceOutputPath.equals(_outputPath)) {
+			ejbFile = new File(
+				_outputPath + "/service/persistence/" + entity.getName() +
+					"FinderUtil.java");
+
+			if (ejbFile.exists()) {
+				System.out.println("Relocating " + ejbFile);
+
+				ejbFile.delete();
+			}
+		}
 	}
 
 	private void _createHBM(Entity entity) {
@@ -1738,6 +1784,17 @@ public class ServiceBuilder {
 		jalopySettings.put("keepJavadoc", Boolean.TRUE);
 
 		writeFile(modelFile, content, _author, jalopySettings);
+
+		if (!_serviceOutputPath.equals(_outputPath)) {
+			modelFile = new File(
+				_outputPath + "/model/" + entity.getName() + "Model.java");
+
+			if (modelFile.exists()) {
+				System.out.println("Relocating " + modelFile);
+
+				modelFile.delete();
+			}
+		}
 	}
 
 	private void _createModelHintsXML() throws Exception {
@@ -1832,6 +1889,17 @@ public class ServiceBuilder {
 		jalopySettings.put("keepJavadoc", Boolean.TRUE);
 
 		writeFile(modelFile, content, _author, jalopySettings);
+
+		if (!_serviceOutputPath.equals(_outputPath)) {
+			modelFile = new File(
+				_outputPath + "/model/" + entity.getName() + "Soap.java");
+
+			if (modelFile.exists()) {
+				System.out.println("Relocating " + modelFile);
+
+				modelFile.delete();
+			}
+		}
 	}
 
 	private void _createPersistence(Entity entity) throws Exception {
@@ -2117,6 +2185,18 @@ public class ServiceBuilder {
 		jalopySettings.put("keepJavadoc", Boolean.TRUE);
 
 		writeFile(ejbFile, content, _author, jalopySettings);
+
+		if (!_serviceOutputPath.equals(_outputPath)) {
+			ejbFile = new File(
+				_outputPath + "/service/" + entity.getName() +
+					_getSessionTypeName(sessionType) + "Service.java");
+
+			if (ejbFile.exists()) {
+				System.out.println("Relocating " + ejbFile);
+
+				ejbFile.delete();
+			}
+		}
 	}
 
 	private void _createServiceBaseImpl(Entity entity, int sessionType)
@@ -2145,6 +2225,18 @@ public class ServiceBuilder {
 	private void _createServiceFactory(Entity entity, int sessionType)
 		throws Exception {
 
+		if (!_propsUtil.equals("com.liferay.portal.util.PropsUtil")) {
+			FileUtil.delete(
+				_serviceOutputPath + "/service/" + entity.getName() +
+					_getSessionTypeName(sessionType) + "ServiceFactory.java");
+
+			FileUtil.delete(
+				_outputPath + "/service/" + entity.getName() +
+					_getSessionTypeName(sessionType) + "ServiceFactory.java");
+
+			return;
+		}
+
 		Map<String, Object> context = _getContext();
 
 		context.put("entity", entity);
@@ -2165,6 +2257,18 @@ public class ServiceBuilder {
 		jalopySettings.put("keepJavadoc", Boolean.TRUE);
 
 		writeFile(ejbFile, content, _author, jalopySettings);
+
+		if (!_serviceOutputPath.equals(_outputPath)) {
+			ejbFile = new File(
+				_outputPath + "/service/" + entity.getName() +
+					_getSessionTypeName(sessionType) + "ServiceFactory.java");
+
+			if (ejbFile.exists()) {
+				System.out.println("Relocating " + ejbFile);
+
+				ejbFile.delete();
+			}
+		}
 	}
 
 	private void _createServiceHttp(Entity entity) throws Exception {
@@ -2322,6 +2426,18 @@ public class ServiceBuilder {
 		jalopySettings.put("keepJavadoc", Boolean.TRUE);
 
 		writeFile(ejbFile, content, _author, jalopySettings);
+
+		if (!_serviceOutputPath.equals(_outputPath)) {
+			ejbFile = new File(
+				_outputPath + "/service/" + entity.getName() +
+					_getSessionTypeName(sessionType) + "ServiceUtil.java");
+
+			if (ejbFile.exists()) {
+				System.out.println("Relocating " + ejbFile);
+
+				ejbFile.delete();
+			}
+		}
 	}
 
 	private void _createSpringDataSourceXML() throws Exception {
