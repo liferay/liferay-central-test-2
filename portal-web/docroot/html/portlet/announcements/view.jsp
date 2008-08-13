@@ -31,9 +31,7 @@ String tabs1 = ParamUtil.getString(request, "tabs1", "entries");
 
 String tabs1Names = "entries,old-entries";
 
-boolean hasAddEntry = PortletPermissionUtil.contains(permissionChecker, plid.longValue(), PortletKeys.ANNOUNCEMENTS, ActionKeys.ADD_ENTRY);
-
-if (hasAddEntry) {
+if (PortletPermissionUtil.contains(permissionChecker, plid.longValue(), PortletKeys.ANNOUNCEMENTS, ActionKeys.ADD_ENTRY)) {
 	tabs1Names += ",manage-entries";
 }
 
@@ -45,7 +43,7 @@ portletURL.setParameter("struts_action", "/announcements/view");
 portletURL.setParameter("tabs1", tabs1);
 %>
 
-<c:if test="<%= !portletName.equals(PortletKeys.ALERTS) || (portletName.equals(PortletKeys.ALERTS) && hasAddEntry) %>">
+<c:if test="<%= !portletName.equals(PortletKeys.ALERTS) || (portletName.equals(PortletKeys.ALERTS) && PortletPermissionUtil.contains(permissionChecker, plid.longValue(), PortletKeys.ANNOUNCEMENTS, ActionKeys.ADD_ENTRY)) %>">
 	<liferay-ui:tabs
 		names="<%= tabs1Names %>"
 		url="<%= portletURL.toString() %>"
@@ -176,7 +174,7 @@ portletURL.setParameter("tabs1", tabs1);
 
 		<c:if test="<%= results.size() == 0 %>">
 			<c:choose>
-				<c:when test="<%= portletName.equals(PortletKeys.ALERTS) && !hasAddEntry %>">
+				<c:when test="<%= portletName.equals(PortletKeys.ALERTS) && !PortletPermissionUtil.contains(permissionChecker, plid.longValue(), PortletKeys.ANNOUNCEMENTS, ActionKeys.ADD_ENTRY) %>">
 					<script>
 						jQuery(document).ready(
 							function() {
