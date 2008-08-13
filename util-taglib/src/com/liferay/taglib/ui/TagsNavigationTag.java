@@ -22,15 +22,30 @@
 
 package com.liferay.taglib.ui;
 
+import javax.servlet.http.HttpServletRequest;
 import com.liferay.taglib.util.IncludeTag;
 
 /**
  * <a href="TagsNavigationTag.java.html"><b><i>View Source</i></b></a>
  *
  * @author Alvaro del Castillo
+ * @author Eduardo Lundgren
  *
  */
 public class TagsNavigationTag extends IncludeTag {
+
+	public int doStartTag() {
+		HttpServletRequest request =
+			(HttpServletRequest)pageContext.getRequest();
+
+		request.setAttribute("liferay-ui:tags-navigation:showCompanyCategories", _showCompanyCategories);
+
+		return EVAL_BODY_BUFFERED;
+	}
+	
+	public void setShowCompanyCategories(boolean showCompanyCategories) {
+		_showCompanyCategories = showCompanyCategories;
+	}
 
 	protected String getDefaultPage() {
 		return _PAGE;
@@ -38,5 +53,7 @@ public class TagsNavigationTag extends IncludeTag {
 
 	private static final String _PAGE =
 		"/html/taglib/ui/tags_navigation/page.jsp";
+
+	private boolean _showCompanyCategories;
 
 }

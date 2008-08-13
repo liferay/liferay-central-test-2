@@ -23,3 +23,15 @@
 %>
 
 <%@ include file="/html/portlet/init.jsp" %>
+
+<%
+PortletPreferences prefs = renderRequest.getPreferences();
+
+String portletResource = ParamUtil.getString(request, "portletResource");
+
+if (Validator.isNotNull(portletResource)) {
+	prefs = PortletPreferencesFactoryUtil.getPortletSetup(request, portletResource);
+}
+
+boolean showCompanyCategories = GetterUtil.getBoolean(prefs.getValue("show-company-categories", Boolean.FALSE.toString()));
+%>

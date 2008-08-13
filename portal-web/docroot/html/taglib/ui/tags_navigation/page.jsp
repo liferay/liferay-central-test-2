@@ -26,8 +26,16 @@
 
 <%
 String tag = ParamUtil.getString(renderRequest, "tag");
+Boolean showCompanyCategories = (Boolean)request.getAttribute("liferay-ui:tags-navigation:showCompanyCategories");
 
-List<TagsVocabulary> vocabularies = TagsVocabularyLocalServiceUtil.getGroupVocabularies(portletGroupId.longValue(), false);
+List<TagsVocabulary> vocabularies = null;
+
+if (showCompanyCategories.booleanValue()) {
+	vocabularies = TagsVocabularyLocalServiceUtil.getCompanyVocabularies(company.getCompanyId(), false);
+}
+else {
+	vocabularies = TagsVocabularyLocalServiceUtil.getGroupVocabularies(portletGroupId.longValue(), false);
+}
 
 PortletURL portletURL = renderResponse.createRenderURL();
 %>
