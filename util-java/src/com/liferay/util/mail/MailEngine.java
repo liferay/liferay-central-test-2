@@ -93,14 +93,12 @@ public class MailEngine {
 
 		if (smtpAccount.isRequiresAuthentication()) {
 			String protocol = _SMTP_PROTOCOL;
-
 			int port = _SMTP_PORT;
-			
+
 			if (smtpAccount.isUseSSL()) {
 				protocol = _SMTPS_PROTOCOL;
-				port= _SMTPS_PORT;
+				port = _SMTPS_PORT;
 			}
-
 
 			if (smtpAccount.getServerPort() > 0) {
 				port = smtpAccount.getServerPort();
