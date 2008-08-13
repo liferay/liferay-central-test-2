@@ -33,5 +33,5 @@ if (Validator.isNotNull(portletResource)) {
 	prefs = PortletPreferencesFactoryUtil.getPortletSetup(request, portletResource);
 }
 
-boolean showCompanyCategories = GetterUtil.getBoolean(prefs.getValue("show-company-categories", Boolean.FALSE.toString()));
+boolean showCompanyCategories = GetterUtil.getBoolean(prefs.getValue("show-company-categories", null));
 %>

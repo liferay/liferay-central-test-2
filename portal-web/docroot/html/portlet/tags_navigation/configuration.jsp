@@ -33,7 +33,7 @@
 		<liferay-ui:input-checkbox param="showCompanyCategories" defaultValue="<%= showCompanyCategories %>" />
 	</td>
 	<td>
-		<label for="<portlet:namespace />showCompanyCategoriesCheckbox"><liferay-ui:message key="show-all-categories" /></label>
+		<liferay-ui:message key="show-all-categories" />
 	</td>
 </tr>
 </table>

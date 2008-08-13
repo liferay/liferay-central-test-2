@@ -23,11 +23,9 @@
 package com.liferay.portlet.tagsnavigation.action;
 
 import com.liferay.portal.kernel.portlet.ConfigurationAction;
-import com.liferay.portal.kernel.servlet.SessionErrors;
 import com.liferay.portal.kernel.servlet.SessionMessages;
 import com.liferay.portal.kernel.util.Constants;
 import com.liferay.portal.kernel.util.ParamUtil;
-import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portlet.PortletPreferencesFactoryUtil;
 
 import javax.portlet.ActionRequest;
@@ -56,21 +54,23 @@ public class ConfigurationActionImpl implements ConfigurationAction {
 			return;
 		}
 
+		boolean showCompanyCategories = ParamUtil.getBoolean(
+			actionRequest, "showCompanyCategories");
+
 		String portletResource = ParamUtil.getString(
-				actionRequest, "portletResource");
+			actionRequest, "portletResource");
 
 		PortletPreferences prefs =
 			PortletPreferencesFactoryUtil.getPortletSetup(
-					actionRequest, portletResource);
+				actionRequest, portletResource);
 
-		updateDisplaySettings(actionRequest, prefs);
+		prefs.setValue(
+			"show-company-categories", String.valueOf(showCompanyCategories));
 
-		if (SessionErrors.isEmpty(actionRequest)) {
-			prefs.store();
+		prefs.store();
 
-			SessionMessages.add(
-				actionRequest, portletConfig.getPortletName() + ".doConfigure");
-		}
+		SessionMessages.add(
+			actionRequest, portletConfig.getPortletName() + ".doConfigure");
 	}
 
 	public String render(
@@ -81,19 +81,4 @@ public class ConfigurationActionImpl implements ConfigurationAction {
 		return "/html/portlet/tags_navigation/configuration.jsp";
 	}
 
-	protected void updateDisplaySettings(
-			ActionRequest actionRequest, PortletPreferences prefs)
-		throws Exception {
-
-		boolean showCompanyCategories = ParamUtil.getBoolean(
-			actionRequest, "showCompanyCategories");
-
-		if (Validator.isNull(showCompanyCategories)) {
-			SessionErrors.add(actionRequest, "showCompanyCategories");
-		}
-		else {
-			prefs.setValue(
-				"show-company-categories", String.valueOf(showCompanyCategories));
-		}
-	}
 }

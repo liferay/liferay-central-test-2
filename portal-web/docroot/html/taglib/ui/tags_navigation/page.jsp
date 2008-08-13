@@ -25,8 +25,9 @@
 <%@ include file="/html/taglib/ui/tags_navigation/init.jsp"%>
 
 <%
-String tag = ParamUtil.getString(renderRequest, "tag");
 Boolean showCompanyCategories = (Boolean)request.getAttribute("liferay-ui:tags-navigation:showCompanyCategories");
+
+String tag = ParamUtil.getString(renderRequest, "tag");
 
 List<TagsVocabulary> vocabularies = null;
 
