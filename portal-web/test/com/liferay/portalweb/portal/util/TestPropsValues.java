@@ -23,7 +23,6 @@
 package com.liferay.portalweb.portal.util;
 
 import com.liferay.portal.kernel.util.GetterUtil;
-import com.liferay.portal.kernel.util.StringUtil;
 
 /**
  * <a href="TestPropsValues.java.html"><b><i>View Source</i></b></a>
@@ -35,6 +34,9 @@ public class TestPropsValues {
 
 	public static final String BROWSER_TYPE = TestPropsUtil.get("browser.type");
 
+	public static final long COMPANY_ID = GetterUtil.getLong(
+		TestPropsUtil.get("company.id"));
+
 	public static final String PORTAL_URL = TestPropsUtil.get("portal.url");
 
 	public static final String SELENIUM_HOST =
@@ -42,8 +44,5 @@ public class TestPropsValues {
 
 	public static final int SELENIUM_PORT = GetterUtil.getInteger(
 		TestPropsUtil.get("selenium.port"));
-
-	public static final String[] THEME_IDS = StringUtil.split(
-		TestPropsUtil.get("theme.ids"));
 
 }

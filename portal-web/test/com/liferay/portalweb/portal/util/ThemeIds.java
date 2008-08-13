@@ -22,6 +22,14 @@
 
 package com.liferay.portalweb.portal.util;
 
+import com.liferay.portal.model.Theme;
+import com.liferay.portal.security.auth.HttpPrincipal;
+import com.liferay.portal.service.http.ThemeServiceHttp;
+import com.liferay.portalweb.portal.util.TestPropsValues;
+
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * <a href="ThemeIds.java.html"><b><i>View Source</i></b></a>
  *
@@ -43,14 +51,34 @@ public class ThemeIds {
 	}
 
 	private ThemeIds() {
+		try {
+			HttpPrincipal httpPrincipal = new HttpPrincipal(
+				TestPropsValues.PORTAL_URL);
+
+			List<String> themeIds = new ArrayList<String>();
+
+			List<Theme> themes = ThemeServiceHttp.getThemes(
+				httpPrincipal, TestPropsValues.COMPANY_ID);
+
+			for (Theme theme : themes) {
+				if (!theme.isWapTheme()) {
+					themeIds.add(theme.getThemeId());
+				}
+			}
+
+			_themeIds = themeIds.toArray(new String[themeIds.size()]);
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 
 	private int _getCount() {
-		return TestPropsValues.THEME_IDS.length;
+		return _themeIds.length;
 	}
 
 	private String _getThemeId() {
-		return TestPropsValues.THEME_IDS[_pos];
+		return _themeIds[_pos];
 	}
 
 	private void _iterate() {
@@ -59,6 +87,7 @@ public class ThemeIds {
 
 	private static ThemeIds _instance = new ThemeIds();
 
+	private String[] _themeIds = new String[0];
 	private int _pos;
 
 }

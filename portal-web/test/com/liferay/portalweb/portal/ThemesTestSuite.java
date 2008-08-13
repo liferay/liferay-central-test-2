@@ -41,7 +41,7 @@ public class ThemesTestSuite extends BaseTests {
 
 	public ThemesTestSuite() {
 		addTestSuite(LoginTests.class);
-
+System.out.println("## here " + ThemeIds.getCount());
 		for (int i = 0; i < ThemeIds.getCount(); i++) {
 			addTestSuite(ThemeTests.class);
 		}
