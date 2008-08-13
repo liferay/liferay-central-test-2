@@ -37,6 +37,7 @@ import javax.servlet.ServletContextListener;
  * </i></b></a>
  *
  * @author Brian Wing Shun Chan
+ * @author Sandeep Soni
  *
  */
 public abstract class PortalClassLoaderServletContextListener
@@ -62,15 +63,16 @@ public abstract class PortalClassLoaderServletContextListener
 
 	public void contextInitialized(ServletContextEvent event) {
 		_event = event;
+		_portletClassLoader = Thread.currentThread().getContextClassLoader();
 
 		PortalInitableUtil.init(this);
 	}
 
 	public void portalInit() {
+		PortletClassLoaderUtil.setClassLoader(_portletClassLoader);
+
 		ClassLoader contextClassLoader =
 			Thread.currentThread().getContextClassLoader();
-
-		PortletClassLoaderUtil.setClassLoader(contextClassLoader);
 
 		try {
 			Thread.currentThread().setContextClassLoader(
@@ -96,5 +98,6 @@ public abstract class PortalClassLoaderServletContextListener
 
 	private ServletContextEvent _event;
 	private ServletContextListener _servletContextListener;
+	private ClassLoader _portletClassLoader;
 
 }
