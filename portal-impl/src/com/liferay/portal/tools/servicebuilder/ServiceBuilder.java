@@ -1999,9 +1999,24 @@ public class ServiceBuilder {
 			if (beanId.endsWith("ServiceFactory") &&
 				!beanId.endsWith("LocalServiceFactory")) {
 
+				String entityName = beanId;
+
+				entityName = StringUtil.replace(entityName, ".service.", ".");
+
+				int pos = entityName.indexOf("LocalServiceFactory");
+
+				if (pos == -1) {
+					pos = entityName.indexOf("ServiceFactory");
+				}
+
+				entityName = entityName.substring(0, pos);
+
+				Entity entity = getEntity(entityName);
+
 				String serviceName = beanId.substring(0, beanId.length() - 7);
 
 				String serviceMapping = serviceName;
+
 				serviceMapping = StringUtil.replace(
 					serviceMapping, ".service.", ".service.spring.");
 				serviceMapping = StringUtil.replace(
@@ -2009,6 +2024,7 @@ public class ServiceBuilder {
 
 				Map<String, Object> context = _getContext();
 
+				context.put("entity", entity);
 				context.put("serviceName", serviceName);
 				context.put("serviceMapping", serviceMapping);
 
