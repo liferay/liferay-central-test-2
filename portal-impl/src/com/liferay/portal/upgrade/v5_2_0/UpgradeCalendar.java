@@ -20,36 +20,49 @@
  * SOFTWARE.
  */
 
-package com.liferay.portal.upgrade;
+package com.liferay.portal.upgrade.v5_2_0;
 
-import com.liferay.portal.kernel.util.ReleaseInfo;
-import com.liferay.portal.upgrade.v5_2_0.UpgradeCalendar;
-import com.liferay.portal.upgrade.v5_2_0.UpgradeSchema;
-import com.liferay.portal.upgrade.v5_2_0.UpgradeTags;
+import com.liferay.portal.upgrade.UpgradeException;
+import com.liferay.portal.upgrade.UpgradeProcess;
+import com.liferay.portal.upgrade.util.DefaultUpgradeTableImpl;
+import com.liferay.portal.upgrade.util.UpgradeColumn;
+import com.liferay.portal.upgrade.util.UpgradeTable;
+import com.liferay.portal.upgrade.v5_2_0.util.CalEventRecurrenceUpgradeColumnImpl;
+import com.liferay.portlet.calendar.model.impl.CalEventImpl;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
 /**
- * <a href="UpgradeProcess_5_2_0.java.html"><b><i>View Source</i></b></a>
+ * <a href="UpgradeCalendar.java.html"><b><i>View Source</i></b></a>
  *
- * @author Jorge Ferrer
+ * @author Samuel Kong
  *
  */
-public class UpgradeProcess_5_2_0 extends UpgradeProcess {
-
-	public int getThreshold() {
-		return ReleaseInfo.RELEASE_5_2_0_BUILD_NUMBER;
-	}
+public class UpgradeCalendar extends UpgradeProcess {
 
 	public void upgrade() throws UpgradeException {
 		_log.info("Upgrading");
 
-		upgrade(UpgradeSchema.class);
-		upgrade(UpgradeCalendar.class);
-		upgrade(UpgradeTags.class);
+		try {
+			doUpgrade();
+		}
+		catch (Exception e) {
+			throw new UpgradeException(e);
+		}
 	}
 
-	private static Log _log = LogFactory.getLog(UpgradeProcess_5_2_0.class);
+	protected void doUpgrade() throws Exception {
+		UpgradeColumn recurrenceColumn =
+			new CalEventRecurrenceUpgradeColumnImpl("recurrence");
+
+		UpgradeTable upgradeTable = new DefaultUpgradeTableImpl(
+			CalEventImpl.TABLE_NAME, CalEventImpl.TABLE_COLUMNS,
+			recurrenceColumn);
+
+		upgradeTable.updateTable();
+	}
+
+	private static Log _log = LogFactory.getLog(UpgradeCalendar.class);
 
 }

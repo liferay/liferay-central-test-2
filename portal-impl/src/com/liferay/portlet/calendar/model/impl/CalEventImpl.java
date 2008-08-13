@@ -23,12 +23,9 @@
 package com.liferay.portlet.calendar.model.impl;
 
 import com.liferay.portal.SystemException;
-import com.liferay.portal.kernel.cal.DayAndPosition;
-import com.liferay.portal.kernel.cal.Duration;
 import com.liferay.portal.kernel.cal.Recurrence;
-import com.liferay.portal.kernel.util.Base64;
+import com.liferay.portal.kernel.json.JSONFactoryUtil;
 import com.liferay.portal.kernel.util.Time;
-import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PropsKeys;
 import com.liferay.portal.util.PropsUtil;
@@ -86,61 +83,12 @@ public class CalEventImpl extends CalEventModelImpl implements CalEvent {
 		super.setRecurrence(recurrence);
 	}
 
-	/**
-	 * @deprecated
-	 */
 	public Recurrence getRecurrenceObj() {
 		if (_recurrenceObj == null) {
 			String recurrence = getRecurrence();
 
-			if (Validator.isNotNull(recurrence)) {
-				Object obj = Base64.stringToObject(recurrence);
-
-				if (obj instanceof Recurrence) {
-					_recurrenceObj = (Recurrence)obj;
-				}
-				else if (obj instanceof com.liferay.util.cal.Recurrence) {
-					com.liferay.util.cal.Recurrence oldRecurrence =
-						(com.liferay.util.cal.Recurrence)obj;
-
-					com.liferay.util.cal.Duration oldDuration =
-						oldRecurrence.getDuration();
-
-					Duration duration = new Duration(
-						oldDuration.getDays(), oldDuration.getHours(),
-						oldDuration.getMinutes(), oldDuration.getSeconds());
-
-					duration.setWeeks(oldDuration.getWeeks());
-					duration.setInterval(oldDuration.getInterval());
-
-					_recurrenceObj = new Recurrence(
-						oldRecurrence.getDtStart(), duration,
-						oldRecurrence.getFrequency());
-
-					com.liferay.util.cal.DayAndPosition[] oldDayPos =
-						oldRecurrence.getByDay();
-
-					DayAndPosition[] dayPos = null;
-
-					if (oldDayPos != null) {
-						dayPos = new DayAndPosition[oldDayPos.length];
-
-						for (int i = 0; i < oldDayPos.length; i++) {
-							dayPos[i] = new DayAndPosition(
-								oldDayPos[i].getDayOfWeek(),
-								oldDayPos[i].getDayPosition());
-						}
-					}
-
-					_recurrenceObj.setByDay(dayPos);
-					_recurrenceObj.setByMonth(oldRecurrence.getByMonth());
-					_recurrenceObj.setByMonthDay(oldRecurrence.getByMonthDay());
-					_recurrenceObj.setInterval(oldRecurrence.getInterval());
-					_recurrenceObj.setOccurrence(oldRecurrence.getOccurrence());
-					_recurrenceObj.setWeekStart(oldRecurrence.getWeekStart());
-					_recurrenceObj.setUntil(oldRecurrence.getUntil());
-				}
-			}
+			_recurrenceObj = (Recurrence)JSONFactoryUtil.deserialize(
+				recurrence);
 		}
 
 		return _recurrenceObj;
@@ -149,7 +97,7 @@ public class CalEventImpl extends CalEventModelImpl implements CalEvent {
 	public void setRecurrenceObj(Recurrence recurrenceObj) {
 		_recurrenceObj = recurrenceObj;
 
-		super.setRecurrence(Base64.objectToString(recurrenceObj));
+		super.setRecurrence(JSONFactoryUtil.serialize(recurrenceObj));
 	}
 
 	private String _userUuid;

@@ -32,7 +32,6 @@ import com.liferay.portal.kernel.cal.DayAndPosition;
 import com.liferay.portal.kernel.cal.Recurrence;
 import com.liferay.portal.kernel.mail.MailMessage;
 import com.liferay.portal.kernel.util.ArrayUtil;
-import com.liferay.portal.kernel.util.Base64;
 import com.liferay.portal.kernel.util.CalendarFactoryUtil;
 import com.liferay.portal.kernel.util.CalendarUtil;
 import com.liferay.portal.kernel.util.DateFormats;
@@ -268,7 +267,7 @@ public class CalEventLocalServiceImpl extends CalEventLocalServiceBaseImpl {
 		event.setTimeZoneSensitive(timeZoneSensitive);
 		event.setType(type);
 		event.setRepeating(repeating);
-		event.setRecurrence(Base64.objectToString(recurrence));
+		event.setRecurrenceObj(recurrence);
 		event.setRemindBy(remindBy);
 		event.setFirstReminder(firstReminder);
 		event.setSecondReminder(secondReminder);
@@ -533,7 +532,7 @@ public class CalEventLocalServiceImpl extends CalEventLocalServiceBaseImpl {
 
 						recurrence.setInterval(1);
 
-						event.setRecurrence(Base64.objectToString(recurrence));
+						event.setRecurrenceObj(recurrence);
 
 						event = calEventPersistence.update(event, false);
 
@@ -726,7 +725,7 @@ public class CalEventLocalServiceImpl extends CalEventLocalServiceBaseImpl {
 		event.setTimeZoneSensitive(timeZoneSensitive);
 		event.setType(type);
 		event.setRepeating(repeating);
-		event.setRecurrence(Base64.objectToString(recurrence));
+		event.setRecurrenceObj(recurrence);
 		event.setRemindBy(remindBy);
 		event.setFirstReminder(firstReminder);
 		event.setSecondReminder(secondReminder);
