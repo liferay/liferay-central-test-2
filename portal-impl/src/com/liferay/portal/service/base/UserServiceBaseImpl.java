@@ -83,6 +83,7 @@ import com.liferay.portal.service.RoleService;
 import com.liferay.portal.service.ServiceComponentLocalService;
 import com.liferay.portal.service.SubscriptionLocalService;
 import com.liferay.portal.service.ThemeLocalService;
+import com.liferay.portal.service.ThemeService;
 import com.liferay.portal.service.UserGroupLocalService;
 import com.liferay.portal.service.UserGroupRoleLocalService;
 import com.liferay.portal.service.UserGroupRoleService;
@@ -164,6 +165,7 @@ import com.liferay.portlet.expando.service.persistence.ExpandoValuePersistence;
 import com.liferay.portlet.messageboards.service.MBBanLocalService;
 import com.liferay.portlet.messageboards.service.MBBanService;
 import com.liferay.portlet.messageboards.service.MBMessageFlagLocalService;
+import com.liferay.portlet.messageboards.service.MBMessageFlagService;
 import com.liferay.portlet.messageboards.service.MBStatsUserLocalService;
 import com.liferay.portlet.messageboards.service.persistence.MBBanPersistence;
 import com.liferay.portlet.messageboards.service.persistence.MBMessageFlagFinder;
@@ -1004,6 +1006,14 @@ public abstract class UserServiceBaseImpl extends PrincipalBean
 		this.themeLocalService = themeLocalService;
 	}
 
+	public ThemeService getThemeService() {
+		return themeService;
+	}
+
+	public void setThemeService(ThemeService themeService) {
+		this.themeService = themeService;
+	}
+
 	public UserLocalService getUserLocalService() {
 		return userLocalService;
 	}
@@ -1346,6 +1356,15 @@ public abstract class UserServiceBaseImpl extends PrincipalBean
 	public void setMBMessageFlagLocalService(
 		MBMessageFlagLocalService mbMessageFlagLocalService) {
 		this.mbMessageFlagLocalService = mbMessageFlagLocalService;
+	}
+
+	public MBMessageFlagService getMBMessageFlagService() {
+		return mbMessageFlagService;
+	}
+
+	public void setMBMessageFlagService(
+		MBMessageFlagService mbMessageFlagService) {
+		this.mbMessageFlagService = mbMessageFlagService;
 	}
 
 	public MBMessageFlagPersistence getMBMessageFlagPersistence() {
@@ -1932,6 +1951,11 @@ public abstract class UserServiceBaseImpl extends PrincipalBean
 					".impl");
 		}
 
+		if (themeService == null) {
+			themeService = (ThemeService)PortalBeanLocatorUtil.locate(ThemeService.class.getName() +
+					".impl");
+		}
+
 		if (userLocalService == null) {
 			userLocalService = (UserLocalService)PortalBeanLocatorUtil.locate(UserLocalService.class.getName() +
 					".impl");
@@ -2132,6 +2156,11 @@ public abstract class UserServiceBaseImpl extends PrincipalBean
 					".impl");
 		}
 
+		if (mbMessageFlagService == null) {
+			mbMessageFlagService = (MBMessageFlagService)PortalBeanLocatorUtil.locate(MBMessageFlagService.class.getName() +
+					".impl");
+		}
+
 		if (mbMessageFlagPersistence == null) {
 			mbMessageFlagPersistence = (MBMessageFlagPersistence)PortalBeanLocatorUtil.locate(MBMessageFlagPersistence.class.getName() +
 					".impl");
@@ -2285,6 +2314,7 @@ public abstract class UserServiceBaseImpl extends PrincipalBean
 	protected SubscriptionLocalService subscriptionLocalService;
 	protected SubscriptionPersistence subscriptionPersistence;
 	protected ThemeLocalService themeLocalService;
+	protected ThemeService themeService;
 	protected UserLocalService userLocalService;
 	protected UserPersistence userPersistence;
 	protected UserFinder userFinder;
@@ -2325,6 +2355,7 @@ public abstract class UserServiceBaseImpl extends PrincipalBean
 	protected MBBanService mbBanService;
 	protected MBBanPersistence mbBanPersistence;
 	protected MBMessageFlagLocalService mbMessageFlagLocalService;
+	protected MBMessageFlagService mbMessageFlagService;
 	protected MBMessageFlagPersistence mbMessageFlagPersistence;
 	protected MBMessageFlagFinder mbMessageFlagFinder;
 	protected MBStatsUserLocalService mbStatsUserLocalService;

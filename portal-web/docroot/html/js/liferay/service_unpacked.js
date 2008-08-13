@@ -888,6 +888,17 @@ Liferay.Service.Portal.Role = {
 	}
 };
 
+Liferay.Service.Portal.Theme = {
+	serviceClassName: Liferay.Service.Portal.servicePackage + "Theme" + Liferay.Service.classNameSuffix,
+
+	getThemes: function(params, callback) {
+		params.serviceClassName = this.serviceClassName;
+		params.serviceMethodName = "getThemes";
+
+		return Liferay.Service.ajax(params, callback);
+	}
+};
+
 Liferay.Service.Portal.User = {
 	serviceClassName: Liferay.Service.Portal.servicePackage + "User" + Liferay.Service.classNameSuffix,
 

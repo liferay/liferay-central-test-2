@@ -1329,7 +1329,7 @@
 
 		<reference package-path="com.liferay.counter" entity="Counter" />
 	</entity>
-	<entity name="Theme" local-service="true" remote-service="false" tx-manager="none" />
+	<entity name="Theme" local-service="true" remote-service="true" tx-manager="none" />
 	<entity name="User" uuid="true" local-service="true" remote-service="true">
 
 		<!-- PK fields -->

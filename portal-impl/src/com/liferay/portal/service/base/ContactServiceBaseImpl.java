@@ -78,6 +78,7 @@ import com.liferay.portal.service.RoleService;
 import com.liferay.portal.service.ServiceComponentLocalService;
 import com.liferay.portal.service.SubscriptionLocalService;
 import com.liferay.portal.service.ThemeLocalService;
+import com.liferay.portal.service.ThemeService;
 import com.liferay.portal.service.UserGroupLocalService;
 import com.liferay.portal.service.UserGroupRoleLocalService;
 import com.liferay.portal.service.UserGroupRoleService;
@@ -963,6 +964,14 @@ public abstract class ContactServiceBaseImpl extends PrincipalBean
 		this.themeLocalService = themeLocalService;
 	}
 
+	public ThemeService getThemeService() {
+		return themeService;
+	}
+
+	public void setThemeService(ThemeService themeService) {
+		this.themeService = themeService;
+	}
+
 	public UserLocalService getUserLocalService() {
 		return userLocalService;
 	}
@@ -1633,6 +1642,11 @@ public abstract class ContactServiceBaseImpl extends PrincipalBean
 					".impl");
 		}
 
+		if (themeService == null) {
+			themeService = (ThemeService)PortalBeanLocatorUtil.locate(ThemeService.class.getName() +
+					".impl");
+		}
+
 		if (userLocalService == null) {
 			userLocalService = (UserLocalService)PortalBeanLocatorUtil.locate(UserLocalService.class.getName() +
 					".impl");
@@ -1840,6 +1854,7 @@ public abstract class ContactServiceBaseImpl extends PrincipalBean
 	protected SubscriptionLocalService subscriptionLocalService;
 	protected SubscriptionPersistence subscriptionPersistence;
 	protected ThemeLocalService themeLocalService;
+	protected ThemeService themeService;
 	protected UserLocalService userLocalService;
 	protected UserService userService;
 	protected UserPersistence userPersistence;

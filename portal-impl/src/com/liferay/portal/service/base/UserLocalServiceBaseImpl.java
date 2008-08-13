@@ -87,6 +87,7 @@ import com.liferay.portal.service.RoleService;
 import com.liferay.portal.service.ServiceComponentLocalService;
 import com.liferay.portal.service.SubscriptionLocalService;
 import com.liferay.portal.service.ThemeLocalService;
+import com.liferay.portal.service.ThemeService;
 import com.liferay.portal.service.UserGroupLocalService;
 import com.liferay.portal.service.UserGroupRoleLocalService;
 import com.liferay.portal.service.UserGroupRoleService;
@@ -167,6 +168,7 @@ import com.liferay.portlet.expando.service.persistence.ExpandoValuePersistence;
 import com.liferay.portlet.messageboards.service.MBBanLocalService;
 import com.liferay.portlet.messageboards.service.MBBanService;
 import com.liferay.portlet.messageboards.service.MBMessageFlagLocalService;
+import com.liferay.portlet.messageboards.service.MBMessageFlagService;
 import com.liferay.portlet.messageboards.service.MBStatsUserLocalService;
 import com.liferay.portlet.messageboards.service.persistence.MBBanPersistence;
 import com.liferay.portlet.messageboards.service.persistence.MBMessageFlagFinder;
@@ -1051,6 +1053,14 @@ public abstract class UserLocalServiceBaseImpl implements UserLocalService,
 		this.themeLocalService = themeLocalService;
 	}
 
+	public ThemeService getThemeService() {
+		return themeService;
+	}
+
+	public void setThemeService(ThemeService themeService) {
+		this.themeService = themeService;
+	}
+
 	public UserPersistence getUserPersistence() {
 		return userPersistence;
 	}
@@ -1385,6 +1395,15 @@ public abstract class UserLocalServiceBaseImpl implements UserLocalService,
 	public void setMBMessageFlagLocalService(
 		MBMessageFlagLocalService mbMessageFlagLocalService) {
 		this.mbMessageFlagLocalService = mbMessageFlagLocalService;
+	}
+
+	public MBMessageFlagService getMBMessageFlagService() {
+		return mbMessageFlagService;
+	}
+
+	public void setMBMessageFlagService(
+		MBMessageFlagService mbMessageFlagService) {
+		this.mbMessageFlagService = mbMessageFlagService;
 	}
 
 	public MBMessageFlagPersistence getMBMessageFlagPersistence() {
@@ -1971,6 +1990,11 @@ public abstract class UserLocalServiceBaseImpl implements UserLocalService,
 					".impl");
 		}
 
+		if (themeService == null) {
+			themeService = (ThemeService)PortalBeanLocatorUtil.locate(ThemeService.class.getName() +
+					".impl");
+		}
+
 		if (userPersistence == null) {
 			userPersistence = (UserPersistence)PortalBeanLocatorUtil.locate(UserPersistence.class.getName() +
 					".impl");
@@ -2166,6 +2190,11 @@ public abstract class UserLocalServiceBaseImpl implements UserLocalService,
 					".impl");
 		}
 
+		if (mbMessageFlagService == null) {
+			mbMessageFlagService = (MBMessageFlagService)PortalBeanLocatorUtil.locate(MBMessageFlagService.class.getName() +
+					".impl");
+		}
+
 		if (mbMessageFlagPersistence == null) {
 			mbMessageFlagPersistence = (MBMessageFlagPersistence)PortalBeanLocatorUtil.locate(MBMessageFlagPersistence.class.getName() +
 					".impl");
@@ -2319,6 +2348,7 @@ public abstract class UserLocalServiceBaseImpl implements UserLocalService,
 	protected SubscriptionLocalService subscriptionLocalService;
 	protected SubscriptionPersistence subscriptionPersistence;
 	protected ThemeLocalService themeLocalService;
+	protected ThemeService themeService;
 	protected UserPersistence userPersistence;
 	protected UserFinder userFinder;
 	protected UserGroupLocalService userGroupLocalService;
@@ -2358,6 +2388,7 @@ public abstract class UserLocalServiceBaseImpl implements UserLocalService,
 	protected MBBanService mbBanService;
 	protected MBBanPersistence mbBanPersistence;
 	protected MBMessageFlagLocalService mbMessageFlagLocalService;
+	protected MBMessageFlagService mbMessageFlagService;
 	protected MBMessageFlagPersistence mbMessageFlagPersistence;
 	protected MBMessageFlagFinder mbMessageFlagFinder;
 	protected MBStatsUserLocalService mbStatsUserLocalService;
