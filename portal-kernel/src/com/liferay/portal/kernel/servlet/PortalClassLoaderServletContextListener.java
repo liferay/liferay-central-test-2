@@ -62,6 +62,7 @@ public abstract class PortalClassLoaderServletContextListener
 
 	public void contextInitialized(ServletContextEvent event) {
 		_event = event;
+		_classLoader = Thread.currentThread().getContextClassLoader();
 
 		PortalInitableUtil.init(this);
 	}
@@ -72,10 +73,13 @@ public abstract class PortalClassLoaderServletContextListener
 
 		PortletClassLoaderUtil.setClassLoader(contextClassLoader);
 
+		ComboClassLoader cbl = new ComboClassLoader(
+				_classLoader,PortalClassLoaderUtil.getClassLoader());
 		try {
-			Thread.currentThread().setContextClassLoader(
-				PortalClassLoaderUtil.getClassLoader());
-
+			PortletClassLoaderUtil.setClassLoader(cbl);
+			
+			Thread.currentThread().setContextClassLoader(cbl);			
+			
 			_servletContextListener = getInstance();
 
 			_servletContextListener.contextInitialized(_event);
@@ -89,11 +93,35 @@ public abstract class PortalClassLoaderServletContextListener
 		}
 	}
 
+	public class ComboClassLoader extends ClassLoader {
+
+		public ComboClassLoader(
+			ClassLoader portletClassLoader, ClassLoader portalClassLoader) {
+
+			super(portletClassLoader);
+
+			_portalClassLoader = portalClassLoader;
+		}
+
+		public Class loadClass(String name) throws ClassNotFoundException {
+			try {
+				return super.loadClass(name);
+			}
+			catch (ClassNotFoundException cnfe) {
+				return _portalClassLoader.loadClass(name);
+			}
+		}
+
+		private ClassLoader _portalClassLoader;
+
+	}
+
 	protected abstract ServletContextListener getInstance() throws Exception;
 
 	private static Log _log =
 		LogFactoryUtil.getLog(PortalClassLoaderServletContextListener.class);
 
+	private ClassLoader _classLoader;
 	private ServletContextEvent _event;
 	private ServletContextListener _servletContextListener;
 
