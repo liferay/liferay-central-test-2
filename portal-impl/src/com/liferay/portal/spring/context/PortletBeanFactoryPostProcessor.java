@@ -23,6 +23,7 @@
 package com.liferay.portal.spring.context;
 
 import com.liferay.portal.kernel.portlet.PortletClassLoaderUtil;
+import com.liferay.portal.kernel.util.AggregateClassLoader;
 import com.liferay.portal.kernel.util.PortalClassLoaderUtil;
 
 import org.springframework.beans.factory.config.BeanFactoryPostProcessor;
@@ -42,7 +43,7 @@ public class PortletBeanFactoryPostProcessor
 		ConfigurableListableBeanFactory beanFactory) {
 
 		beanFactory.setBeanClassLoader(
-			new PortletBeanClassLoader(
+			new AggregateClassLoader(
 				PortletClassLoaderUtil.getClassLoader(),
 				PortalClassLoaderUtil.getClassLoader()));
 	}

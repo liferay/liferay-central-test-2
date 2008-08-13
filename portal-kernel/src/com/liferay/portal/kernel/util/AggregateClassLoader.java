@@ -20,22 +20,22 @@
  * SOFTWARE.
  */
 
-package com.liferay.portal.spring.context;
+package com.liferay.portal.kernel.util;
 
 /**
- * <a href="PortletBeanClassLoader.java.html"><b><i>View Source</i></b></a>
+ * <a href="AggregateClassLoader.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *
  */
-public class PortletBeanClassLoader extends ClassLoader {
+public class AggregateClassLoader extends ClassLoader {
 
-	public PortletBeanClassLoader(
-		ClassLoader portletClassLoader, ClassLoader portalClassLoader) {
+	public AggregateClassLoader(
+		ClassLoader defaultClassLoader, ClassLoader backupClassLoader) {
 
-		super(portletClassLoader);
+		super(defaultClassLoader);
 
-		_portalClassLoader = portalClassLoader;
+		_backupClassLoader = backupClassLoader;
 	}
 
 	public Class loadClass(String name) throws ClassNotFoundException {
@@ -43,10 +43,10 @@ public class PortletBeanClassLoader extends ClassLoader {
 			return super.loadClass(name);
 		}
 		catch (ClassNotFoundException cnfe) {
-			return _portalClassLoader.loadClass(name);
+			return _backupClassLoader.loadClass(name);
 		}
 	}
 
-	private ClassLoader _portalClassLoader;
+	private ClassLoader _backupClassLoader;
 
 }
