@@ -101,8 +101,9 @@ public class CalEventRecurrenceUpgradeColumnImpl extends BaseUpgradeColumnImpl {
 
 			return JSONFactoryUtil.serialize(recurrenceObj);
 		}
-
-		return StringPool.BLANK;
+		else {
+			return StringPool.BLANK;
+		}
 	}
 
 }
