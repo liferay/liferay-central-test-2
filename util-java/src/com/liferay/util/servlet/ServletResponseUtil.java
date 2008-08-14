@@ -34,9 +34,11 @@ import java.io.BufferedOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.net.SocketException;
 
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.catalina.connector.ClientAbortException;
 import org.apache.commons.codec.net.URLCodec;
 import org.apache.commons.lang.CharUtils;
 import org.apache.commons.logging.Log;
@@ -161,6 +163,16 @@ public class ServletResponseUtil {
 				os = new BufferedOutputStream(response.getOutputStream());
 
 				os.write(bytes, 0, contentLength);
+			}
+		}
+		catch ( SocketException e ){
+			if (_log.isWarnEnabled()) {
+				_log.warn(e);
+			}
+		}
+		catch ( ClientAbortException e ){
+			if (_log.isWarnEnabled()) {
+				_log.warn(e);
 			}
 		}
 		finally {
