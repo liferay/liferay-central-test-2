@@ -187,6 +187,10 @@ public class ThemeUtil {
 
 		VelocityVariables.insertVariables(velocityContext, request);
 
+		// Theme servlet context
+
+		ServletContext themeServletContext = VelocityContextPool.get(ctxName);
+
 		// liferay:include tag library
 
 		StringServletResponse stringResponse = new StringServletResponse(
@@ -197,7 +201,7 @@ public class ThemeUtil {
 
 		request.setAttribute(WebKeys.VELOCITY_TAGLIB, velocityTaglib);
 
-		velocityContext.put("servletContext", servletContext);
+		velocityContext.put("themeServletContext", themeServletContext);
 		velocityContext.put("taglibLiferay", velocityTaglib);
 		velocityContext.put("theme", velocityTaglib);
 
