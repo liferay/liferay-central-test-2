@@ -30,6 +30,7 @@ import com.liferay.portal.im.MSNConnector;
 import com.liferay.portal.im.YMConnector;
 import com.liferay.portal.kernel.cal.DayAndPosition;
 import com.liferay.portal.kernel.cal.Recurrence;
+import com.liferay.portal.kernel.cal.TZSRecurrence;
 import com.liferay.portal.kernel.mail.MailMessage;
 import com.liferay.portal.kernel.util.ArrayUtil;
 import com.liferay.portal.kernel.util.CalendarFactoryUtil;
@@ -129,7 +130,7 @@ public class CalEventLocalServiceImpl extends CalEventLocalServiceBaseImpl {
 			int startDateHour, int startDateMinute, int endDateMonth,
 			int endDateDay, int endDateYear, int durationHour,
 			int durationMinute, boolean allDay, boolean timeZoneSensitive,
-			String type, boolean repeating, Recurrence recurrence,
+			String type, boolean repeating, TZSRecurrence recurrence,
 			String remindBy, int firstReminder, int secondReminder,
 			boolean addCommunityPermissions, boolean addGuestPermissions)
 		throws PortalException, SystemException {
@@ -150,7 +151,7 @@ public class CalEventLocalServiceImpl extends CalEventLocalServiceBaseImpl {
 			int startDateYear, int startDateHour, int startDateMinute,
 			int endDateMonth, int endDateDay, int endDateYear, int durationHour,
 			int durationMinute, boolean allDay, boolean timeZoneSensitive,
-			String type, boolean repeating, Recurrence recurrence,
+			String type, boolean repeating, TZSRecurrence recurrence,
 			String remindBy, int firstReminder, int secondReminder,
 			boolean addCommunityPermissions, boolean addGuestPermissions)
 		throws PortalException, SystemException {
@@ -170,7 +171,7 @@ public class CalEventLocalServiceImpl extends CalEventLocalServiceBaseImpl {
 			int startDateHour, int startDateMinute, int endDateMonth,
 			int endDateDay, int endDateYear, int durationHour,
 			int durationMinute, boolean allDay, boolean timeZoneSensitive,
-			String type, boolean repeating, Recurrence recurrence,
+			String type, boolean repeating, TZSRecurrence recurrence,
 			String remindBy, int firstReminder, int secondReminder,
 			String[] communityPermissions, String[] guestPermissions)
 		throws PortalException, SystemException {
@@ -190,7 +191,7 @@ public class CalEventLocalServiceImpl extends CalEventLocalServiceBaseImpl {
 			int startDateYear, int startDateHour, int startDateMinute,
 			int endDateMonth, int endDateDay, int endDateYear, int durationHour,
 			int durationMinute, boolean allDay, boolean timeZoneSensitive,
-			String type, boolean repeating, Recurrence recurrence,
+			String type, boolean repeating, TZSRecurrence recurrence,
 			String remindBy, int firstReminder, int secondReminder,
 			Boolean addCommunityPermissions, Boolean addGuestPermissions,
 			String[] communityPermissions, String[] guestPermissions)
@@ -520,7 +521,7 @@ public class CalEventLocalServiceImpl extends CalEventLocalServiceBaseImpl {
 			while (itr.hasNext()) {
 				CalEvent event = itr.next();
 
-				Recurrence recurrence = event.getRecurrenceObj();
+				TZSRecurrence recurrence = event.getRecurrenceObj();
 
 				try {
 
@@ -660,7 +661,7 @@ public class CalEventLocalServiceImpl extends CalEventLocalServiceBaseImpl {
 			int startDateHour, int startDateMinute, int endDateMonth,
 			int endDateDay, int endDateYear, int durationHour,
 			int durationMinute, boolean allDay, boolean timeZoneSensitive,
-			String type, boolean repeating, Recurrence recurrence,
+			String type, boolean repeating, TZSRecurrence recurrence,
 			String remindBy, int firstReminder, int secondReminder)
 		throws PortalException, SystemException {
 
@@ -945,7 +946,7 @@ public class CalEventLocalServiceImpl extends CalEventLocalServiceBaseImpl {
 		// Recurrence
 
 		boolean repeating = false;
-		Recurrence recurrence = null;
+		TZSRecurrence recurrence = null;
 
 		if (multiDayEvent) {
 			repeating = true;
@@ -957,7 +958,7 @@ public class CalEventLocalServiceImpl extends CalEventLocalServiceBaseImpl {
 			com.liferay.portal.kernel.cal.Duration duration =
 				new com.liferay.portal.kernel.cal.Duration(1, 0, 0, 0);
 
-			recurrence = new Recurrence(
+			recurrence = new TZSRecurrence(
 				recStartCal, duration, Recurrence.DAILY);
 
 			Calendar until = (Calendar) startDate.clone();
@@ -1216,7 +1217,7 @@ public class CalEventLocalServiceImpl extends CalEventLocalServiceBaseImpl {
 		return iCal;
 	}
 
-	protected Recur toICalRecurrence(Recurrence recurrence) {
+	protected Recur toICalRecurrence(TZSRecurrence recurrence) {
 		Recur recur = null;
 
 		int recurrenceType = recurrence.getFrequency();
@@ -1403,7 +1404,7 @@ public class CalEventLocalServiceImpl extends CalEventLocalServiceBaseImpl {
 		return weekDay;
 	}
 
-	protected Recurrence toRecurrence(
+	protected TZSRecurrence toRecurrence(
 		RRule rRule, TimeZone timeZone, Calendar startDate) {
 
 		Recur recur = rRule.getRecur();
@@ -1412,7 +1413,7 @@ public class CalEventLocalServiceImpl extends CalEventLocalServiceBaseImpl {
 
 		recStartCal.setTime(startDate.getTime());
 
-		Recurrence recurrence = new Recurrence(
+		TZSRecurrence recurrence = new TZSRecurrence(
 			recStartCal,
 			new com.liferay.portal.kernel.cal.Duration(1, 0, 0, 0));
 

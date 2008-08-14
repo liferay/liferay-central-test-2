@@ -56,8 +56,8 @@ public interface CalEvent extends CalEventModel {
 
 	public void setRecurrence(java.lang.String recurrence);
 
-	public com.liferay.portal.kernel.cal.Recurrence getRecurrenceObj();
+	public com.liferay.portal.kernel.cal.TZSRecurrence getRecurrenceObj();
 
 	public void setRecurrenceObj(
-		com.liferay.portal.kernel.cal.Recurrence recurrenceObj);
+		com.liferay.portal.kernel.cal.TZSRecurrence recurrenceObj);
 }

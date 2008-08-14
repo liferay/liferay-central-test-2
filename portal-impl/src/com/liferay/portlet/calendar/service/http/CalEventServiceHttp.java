@@ -81,7 +81,7 @@ public class CalEventServiceHttp {
 		int endDateMonth, int endDateDay, int endDateYear, int durationHour,
 		int durationMinute, boolean allDay, boolean timeZoneSensitive,
 		java.lang.String type, boolean repeating,
-		com.liferay.portal.kernel.cal.Recurrence recurrence,
+		com.liferay.portal.kernel.cal.TZSRecurrence recurrence,
 		java.lang.String remindBy, int firstReminder, int secondReminder,
 		boolean addCommunityPermissions, boolean addGuestPermissions)
 		throws com.liferay.portal.PortalException,
@@ -137,7 +137,7 @@ public class CalEventServiceHttp {
 
 			if (recurrence == null) {
 				paramObj17 = new NullWrapper(
-						"com.liferay.portal.kernel.cal.Recurrence");
+						"com.liferay.portal.kernel.cal.TZSRecurrence");
 			}
 
 			Object paramObj18 = remindBy;
@@ -198,7 +198,7 @@ public class CalEventServiceHttp {
 		int endDateMonth, int endDateDay, int endDateYear, int durationHour,
 		int durationMinute, boolean allDay, boolean timeZoneSensitive,
 		java.lang.String type, boolean repeating,
-		com.liferay.portal.kernel.cal.Recurrence recurrence,
+		com.liferay.portal.kernel.cal.TZSRecurrence recurrence,
 		java.lang.String remindBy, int firstReminder, int secondReminder,
 		java.lang.String[] communityPermissions,
 		java.lang.String[] guestPermissions)
@@ -255,7 +255,7 @@ public class CalEventServiceHttp {
 
 			if (recurrence == null) {
 				paramObj17 = new NullWrapper(
-						"com.liferay.portal.kernel.cal.Recurrence");
+						"com.liferay.portal.kernel.cal.TZSRecurrence");
 			}
 
 			Object paramObj18 = remindBy;
@@ -507,7 +507,7 @@ public class CalEventServiceHttp {
 		int endDateMonth, int endDateDay, int endDateYear, int durationHour,
 		int durationMinute, boolean allDay, boolean timeZoneSensitive,
 		java.lang.String type, boolean repeating,
-		com.liferay.portal.kernel.cal.Recurrence recurrence,
+		com.liferay.portal.kernel.cal.TZSRecurrence recurrence,
 		java.lang.String remindBy, int firstReminder, int secondReminder)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
@@ -562,7 +562,7 @@ public class CalEventServiceHttp {
 
 			if (recurrence == null) {
 				paramObj17 = new NullWrapper(
-						"com.liferay.portal.kernel.cal.Recurrence");
+						"com.liferay.portal.kernel.cal.TZSRecurrence");
 			}
 
 			Object paramObj18 = remindBy;

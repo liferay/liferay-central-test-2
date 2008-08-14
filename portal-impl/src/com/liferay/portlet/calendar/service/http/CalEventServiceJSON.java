@@ -79,7 +79,7 @@ public class CalEventServiceJSON {
 		int endDateMonth, int endDateDay, int endDateYear, int durationHour,
 		int durationMinute, boolean allDay, boolean timeZoneSensitive,
 		java.lang.String type, boolean repeating,
-		com.liferay.portal.kernel.cal.Recurrence recurrence,
+		com.liferay.portal.kernel.cal.TZSRecurrence recurrence,
 		java.lang.String remindBy, int firstReminder, int secondReminder,
 		boolean addCommunityPermissions, boolean addGuestPermissions)
 		throws java.rmi.RemoteException, com.liferay.portal.PortalException,
@@ -101,7 +101,7 @@ public class CalEventServiceJSON {
 		int endDateMonth, int endDateDay, int endDateYear, int durationHour,
 		int durationMinute, boolean allDay, boolean timeZoneSensitive,
 		java.lang.String type, boolean repeating,
-		com.liferay.portal.kernel.cal.Recurrence recurrence,
+		com.liferay.portal.kernel.cal.TZSRecurrence recurrence,
 		java.lang.String remindBy, int firstReminder, int secondReminder,
 		java.lang.String[] communityPermissions,
 		java.lang.String[] guestPermissions)
@@ -138,7 +138,7 @@ public class CalEventServiceJSON {
 		int endDateMonth, int endDateDay, int endDateYear, int durationHour,
 		int durationMinute, boolean allDay, boolean timeZoneSensitive,
 		java.lang.String type, boolean repeating,
-		com.liferay.portal.kernel.cal.Recurrence recurrence,
+		com.liferay.portal.kernel.cal.TZSRecurrence recurrence,
 		java.lang.String remindBy, int firstReminder, int secondReminder)
 		throws java.rmi.RemoteException, com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {

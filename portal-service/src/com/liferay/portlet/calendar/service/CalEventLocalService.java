@@ -87,7 +87,8 @@ public interface CalEventLocalService {
 		int startDateHour, int startDateMinute, int endDateMonth,
 		int endDateDay, int endDateYear, int durationHour, int durationMinute,
 		boolean allDay, boolean timeZoneSensitive, java.lang.String type,
-		boolean repeating, com.liferay.portal.kernel.cal.Recurrence recurrence,
+		boolean repeating,
+		com.liferay.portal.kernel.cal.TZSRecurrence recurrence,
 		java.lang.String remindBy, int firstReminder, int secondReminder,
 		boolean addCommunityPermissions, boolean addGuestPermissions)
 		throws com.liferay.portal.PortalException,
@@ -100,7 +101,7 @@ public interface CalEventLocalService {
 		int endDateMonth, int endDateDay, int endDateYear, int durationHour,
 		int durationMinute, boolean allDay, boolean timeZoneSensitive,
 		java.lang.String type, boolean repeating,
-		com.liferay.portal.kernel.cal.Recurrence recurrence,
+		com.liferay.portal.kernel.cal.TZSRecurrence recurrence,
 		java.lang.String remindBy, int firstReminder, int secondReminder,
 		boolean addCommunityPermissions, boolean addGuestPermissions)
 		throws com.liferay.portal.PortalException,
@@ -112,7 +113,8 @@ public interface CalEventLocalService {
 		int startDateHour, int startDateMinute, int endDateMonth,
 		int endDateDay, int endDateYear, int durationHour, int durationMinute,
 		boolean allDay, boolean timeZoneSensitive, java.lang.String type,
-		boolean repeating, com.liferay.portal.kernel.cal.Recurrence recurrence,
+		boolean repeating,
+		com.liferay.portal.kernel.cal.TZSRecurrence recurrence,
 		java.lang.String remindBy, int firstReminder, int secondReminder,
 		java.lang.String[] communityPermissions,
 		java.lang.String[] guestPermissions)
@@ -126,7 +128,7 @@ public interface CalEventLocalService {
 		int endDateMonth, int endDateDay, int endDateYear, int durationHour,
 		int durationMinute, boolean allDay, boolean timeZoneSensitive,
 		java.lang.String type, boolean repeating,
-		com.liferay.portal.kernel.cal.Recurrence recurrence,
+		com.liferay.portal.kernel.cal.TZSRecurrence recurrence,
 		java.lang.String remindBy, int firstReminder, int secondReminder,
 		java.lang.Boolean addCommunityPermissions,
 		java.lang.Boolean addGuestPermissions,
@@ -223,7 +225,7 @@ public interface CalEventLocalService {
 		int endDateMonth, int endDateDay, int endDateYear, int durationHour,
 		int durationMinute, boolean allDay, boolean timeZoneSensitive,
 		java.lang.String type, boolean repeating,
-		com.liferay.portal.kernel.cal.Recurrence recurrence,
+		com.liferay.portal.kernel.cal.TZSRecurrence recurrence,
 		java.lang.String remindBy, int firstReminder, int secondReminder)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;

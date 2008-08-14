@@ -25,11 +25,16 @@ package com.liferay.portal.upgrade.v5_2_0.util;
 import com.liferay.portal.kernel.cal.DayAndPosition;
 import com.liferay.portal.kernel.cal.Duration;
 import com.liferay.portal.kernel.cal.Recurrence;
+import com.liferay.portal.kernel.cal.TZSRecurrence;
+import com.liferay.portal.kernel.json.JSONException;
 import com.liferay.portal.kernel.json.JSONFactoryUtil;
+import com.liferay.portal.kernel.json.JSONObject;
 import com.liferay.portal.kernel.util.Base64;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.upgrade.util.BaseUpgradeColumnImpl;
+
+import java.util.TimeZone;
 
 /**
  * <a href="CalEventRecurrenceUpgradeColumnImpl.java.html"><b><i>View Source</i>
@@ -56,7 +61,7 @@ public class CalEventRecurrenceUpgradeColumnImpl extends BaseUpgradeColumnImpl {
 		if (obj instanceof Recurrence) {
 			Recurrence recurrenceObj = (Recurrence)obj;
 
-			return JSONFactoryUtil.serialize(recurrenceObj);
+			return serialize(recurrenceObj);
 		}
 		else if (obj instanceof com.liferay.util.cal.Recurrence) {
 			com.liferay.util.cal.Recurrence oldRecurrence =
@@ -99,11 +104,31 @@ public class CalEventRecurrenceUpgradeColumnImpl extends BaseUpgradeColumnImpl {
 			recurrenceObj.setWeekStart(oldRecurrence.getWeekStart());
 			recurrenceObj.setUntil(oldRecurrence.getUntil());
 
-			return JSONFactoryUtil.serialize(recurrenceObj);
+			return serialize(recurrenceObj);
 		}
 		else {
 			return StringPool.BLANK;
 		}
+	}
+
+	protected String serialize(Recurrence recurrence) throws JSONException {
+		String recurrenceJSON = JSONFactoryUtil.serialize(recurrence);
+
+		JSONObject recurrenceJSONObj = JSONFactoryUtil.createJSONObject(
+			recurrenceJSON);
+
+		recurrenceJSONObj.put("javaClass", TZSRecurrence.class.getName());
+
+		TimeZone timeZone = TimeZone.getTimeZone("GMT");
+
+		String timeZoneJSON = JSONFactoryUtil.serialize(timeZone);
+
+		JSONObject timeZoneJSONObj = JSONFactoryUtil.createJSONObject(
+			timeZoneJSON);
+
+		recurrenceJSONObj.put("timeZone", timeZoneJSONObj);
+
+		return recurrenceJSONObj.toString();
 	}
 
 }

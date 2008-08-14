@@ -24,7 +24,7 @@ package com.liferay.portlet.calendar.service.impl;
 
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
-import com.liferay.portal.kernel.cal.Recurrence;
+import com.liferay.portal.kernel.cal.TZSRecurrence;
 import com.liferay.portal.security.permission.ActionKeys;
 import com.liferay.portal.service.permission.PortletPermissionUtil;
 import com.liferay.portal.util.PortletKeys;
@@ -48,7 +48,7 @@ public class CalEventServiceImpl extends CalEventServiceBaseImpl {
 			int startDateMinute, int endDateMonth, int endDateDay,
 			int endDateYear, int durationHour, int durationMinute,
 			boolean allDay, boolean timeZoneSensitive, String type,
-			boolean repeating, Recurrence recurrence, String remindBy,
+			boolean repeating, TZSRecurrence recurrence, String remindBy,
 			int firstReminder, int secondReminder,
 			boolean addCommunityPermissions, boolean addGuestPermissions)
 		throws PortalException, SystemException {
@@ -72,7 +72,7 @@ public class CalEventServiceImpl extends CalEventServiceBaseImpl {
 			int startDateMinute, int endDateMonth, int endDateDay,
 			int endDateYear, int durationHour, int durationMinute,
 			boolean allDay, boolean timeZoneSensitive, String type,
-			boolean repeating, Recurrence recurrence, String remindBy,
+			boolean repeating, TZSRecurrence recurrence, String remindBy,
 			int firstReminder, int secondReminder,
 			String[] communityPermissions, String[] guestPermissions)
 		throws PortalException, SystemException {
@@ -144,7 +144,7 @@ public class CalEventServiceImpl extends CalEventServiceBaseImpl {
 			int startDateHour, int startDateMinute, int endDateMonth,
 			int endDateDay, int endDateYear, int durationHour,
 			int durationMinute, boolean allDay, boolean timeZoneSensitive,
-			String type, boolean repeating, Recurrence recurrence,
+			String type, boolean repeating, TZSRecurrence recurrence,
 			String remindBy, int firstReminder, int secondReminder)
 		throws PortalException, SystemException {
 

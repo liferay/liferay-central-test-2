@@ -25,6 +25,7 @@ package com.liferay.portlet.calendar.action;
 import com.liferay.portal.kernel.cal.DayAndPosition;
 import com.liferay.portal.kernel.cal.Duration;
 import com.liferay.portal.kernel.cal.Recurrence;
+import com.liferay.portal.kernel.cal.TZSRecurrence;
 import com.liferay.portal.kernel.servlet.SessionErrors;
 import com.liferay.portal.kernel.util.CalendarFactoryUtil;
 import com.liferay.portal.kernel.util.Constants;
@@ -224,7 +225,7 @@ public class EditEventAction extends PortletAction {
 			durationMinute = 0;
 		}
 
-		Recurrence recurrence = null;
+		TZSRecurrence recurrence = null;
 
 		if (repeating) {
 			Calendar recStartCal = null;
@@ -238,8 +239,10 @@ public class EditEventAction extends PortletAction {
 				recStartCal = (Calendar)startDate.clone();
 			}
 
-			recurrence = new Recurrence(
+			recurrence = new TZSRecurrence(
 				recStartCal, new Duration(1, 0, 0, 0), recurrenceType);
+
+			recurrence.setTimeZone(timeZone);
 
 			recurrence.setWeekStart(Calendar.SUNDAY);
 
