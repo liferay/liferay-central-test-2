@@ -57,7 +57,6 @@ import org.apache.velocity.app.Velocity;
 import org.apache.velocity.exception.ParseErrorException;
 import org.apache.velocity.exception.VelocityException;
 
-
 /**
  * <a href="JournalVmUtil.java.html"><b><i>View Source</i></b></a>
  *
