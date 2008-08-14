@@ -37,9 +37,13 @@ import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.ObjectValuePair;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;
+import com.liferay.portal.kernel.xml.Document;
+import com.liferay.portal.kernel.xml.Element;
+import com.liferay.portal.kernel.xml.Node;
+import com.liferay.portal.kernel.xml.SAXReaderUtil;
+import com.liferay.portal.kernel.xml.XPath;
 import com.liferay.portal.model.Image;
 import com.liferay.portal.service.persistence.ImageUtil;
-import com.liferay.portal.util.DocumentUtil;
 import com.liferay.portal.util.PortletKeys;
 import com.liferay.portlet.documentlibrary.lar.DLPortletDataHandlerImpl;
 import com.liferay.portlet.documentlibrary.model.DLFileEntry;
@@ -66,10 +70,8 @@ import com.liferay.portlet.journal.service.persistence.JournalFeedUtil;
 import com.liferay.portlet.journal.service.persistence.JournalStructureUtil;
 import com.liferay.portlet.journal.service.persistence.JournalTemplateUtil;
 import com.liferay.util.MapUtil;
-import com.liferay.util.xml.XMLFormatter;
 
 import java.io.File;
-import java.io.StringReader;
 
 import java.util.Calendar;
 import java.util.Date;
@@ -83,12 +85,6 @@ import javax.portlet.PortletPreferences;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-
-import org.dom4j.Document;
-import org.dom4j.DocumentHelper;
-import org.dom4j.Element;
-import org.dom4j.XPath;
-import org.dom4j.io.SAXReader;
 
 /**
  * <a href="JournalPortletDataHandlerImpl.java.html"><b><i>View Source</i></b>
@@ -192,9 +188,7 @@ public class JournalPortletDataHandlerImpl implements PortletDataHandler {
 		}
 
 		try {
-			SAXReader reader = new SAXReader();
-
-			Document doc = reader.read(new StringReader(article.getContent()));
+			Document doc = SAXReaderUtil.read(article.getContent());
 
 			Element root = doc.getRootElement();
 
@@ -213,13 +207,13 @@ public class JournalPortletDataHandlerImpl implements PortletDataHandler {
 					contentEl.setText(text);
 				}
 
-				XPath xpathSelector = DocumentHelper.createXPath(
+				XPath xpathSelector = SAXReaderUtil.createXPath(
 					"//dynamic-content");
 
-				contentEls = xpathSelector.selectNodes(doc);
+				List<Node> contentNodes = xpathSelector.selectNodes(doc);
 
-				for (Element contentEl : contentEls) {
-					String text = contentEl.getText();
+				for (Node contentNode : contentNodes) {
+					String text = contentNode.getText();
 
 					text = exportDLFileEntries(
 						context, dlFoldersEl, dlFileEntriesEl, dlFileRanks,
@@ -227,12 +221,12 @@ public class JournalPortletDataHandlerImpl implements PortletDataHandler {
 					text = exportIGImages(
 						context, igFoldersEl, igImagesEl, text);
 
-					contentEl.setText(text);
+					contentNode.setText(text);
 				}
 
 			}
 
-			article.setContent(XMLFormatter.toString(doc));
+			article.setContent(doc.formattedString());
 		}
 		catch (Exception e) {
 			if (_log.isWarnEnabled()) {
@@ -1065,7 +1059,7 @@ public class JournalPortletDataHandlerImpl implements PortletDataHandler {
 		throws PortletDataException {
 
 		try {
-			Document doc = DocumentHelper.createDocument();
+			Document doc = SAXReaderUtil.createDocument();
 
 			Element root = doc.addElement("journal-data");
 
@@ -1120,7 +1114,7 @@ public class JournalPortletDataHandlerImpl implements PortletDataHandler {
 				}
 			}
 
-			return XMLFormatter.toString(doc);
+			return doc.formattedString();
 		}
 		catch (Exception e) {
 			throw new PortletDataException(e);
@@ -1147,7 +1141,7 @@ public class JournalPortletDataHandlerImpl implements PortletDataHandler {
 		throws PortletDataException {
 
 		try {
-			Document doc = DocumentUtil.readDocumentFromXML(data);
+			Document doc = SAXReaderUtil.read(data);
 
 			Element root = doc.getRootElement();
 

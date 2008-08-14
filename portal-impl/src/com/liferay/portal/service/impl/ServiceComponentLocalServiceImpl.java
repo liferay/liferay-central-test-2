@@ -28,6 +28,10 @@ import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.util.HttpUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
+import com.liferay.portal.kernel.xml.Document;
+import com.liferay.portal.kernel.xml.DocumentException;
+import com.liferay.portal.kernel.xml.Element;
+import com.liferay.portal.kernel.xml.SAXReaderUtil;
 import com.liferay.portal.model.ModelHintsUtil;
 import com.liferay.portal.model.ServiceComponent;
 import com.liferay.portal.service.base.ServiceComponentLocalServiceBaseImpl;
@@ -35,10 +39,8 @@ import com.liferay.portal.tools.servicebuilder.Entity;
 import com.liferay.portal.tools.sql.DBUtil;
 import com.liferay.portal.upgrade.util.DefaultUpgradeTableImpl;
 import com.liferay.portal.upgrade.util.UpgradeTable;
-import com.liferay.util.xml.XMLFormatter;
 
 import java.io.IOException;
-import java.io.StringReader;
 
 import java.lang.reflect.Field;
 
@@ -50,12 +52,6 @@ import javax.servlet.ServletContext;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-
-import org.dom4j.Document;
-import org.dom4j.DocumentException;
-import org.dom4j.DocumentFactory;
-import org.dom4j.Element;
-import org.dom4j.io.SAXReader;
 
 /**
  * <a href="ServiceComponentLocalServiceImpl.java.html"><b><i>View Source</i>
@@ -124,9 +120,7 @@ public class ServiceComponentLocalServiceImpl
 		}
 
 		try {
-			DocumentFactory docFactory = DocumentFactory.getInstance();
-
-			Document doc = docFactory.createDocument(StringPool.UTF8);
+			Document doc = SAXReaderUtil.createDocument(StringPool.UTF8);
 
 			Element data = doc.addElement("data");
 
@@ -145,7 +139,7 @@ public class ServiceComponentLocalServiceImpl
 
 			data.addElement("indexes-sql").addCDATA(indexesSQL);
 
-			String dataXML = XMLFormatter.toString(doc);
+			String dataXML = doc.formattedString();
 
 			serviceComponent.setData(dataXML);
 
@@ -172,9 +166,7 @@ public class ServiceComponentLocalServiceImpl
 		String xml = StringUtil.read(
 			classLoader, "META-INF/portlet-model-hints.xml");
 
-		SAXReader reader = new SAXReader();
-
-		Document doc = reader.read(new StringReader(xml));
+		Document doc = SAXReaderUtil.read(xml);
 
 		Element root = doc.getRootElement();
 

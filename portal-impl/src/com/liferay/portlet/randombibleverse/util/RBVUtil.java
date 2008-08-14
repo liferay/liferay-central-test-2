@@ -26,6 +26,9 @@ import com.liferay.portal.kernel.util.Randomizer;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.webcache.WebCacheItem;
 import com.liferay.portal.kernel.webcache.WebCachePoolUtil;
+import com.liferay.portal.kernel.xml.Document;
+import com.liferay.portal.kernel.xml.Element;
+import com.liferay.portal.kernel.xml.SAXReaderUtil;
 import com.liferay.portlet.randombibleverse.model.Bible;
 import com.liferay.portlet.randombibleverse.model.Verse;
 
@@ -43,11 +46,6 @@ import javax.portlet.PortletPreferences;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-
-import org.dom4j.Document;
-import org.dom4j.DocumentException;
-import org.dom4j.Element;
-import org.dom4j.io.SAXReader;
 
 /**
  * <a href="RBVUtil.java.html"><b><i>View Source</i></b></a>
@@ -73,18 +71,16 @@ public class RBVUtil {
 		Document doc = null;
 
 		try {
-			SAXReader reader = new SAXReader();
-
 			ClassLoader classLoader = getClass().getClassLoader();
 
 			URL url = classLoader.getResource(
 				"com/liferay/portlet/randombibleverse/dependencies/" +
 					"random_bible_verse.xml");
 
-			doc = reader.read(url);
+			doc = SAXReaderUtil.read(url);
 		}
-		catch (DocumentException de) {
-			_log.error(de);
+		catch (Exception e) {
+			_log.error(e, e);
 		}
 
 		_bibles = new LinkedHashMap<String, Bible>();

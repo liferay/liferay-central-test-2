@@ -26,6 +26,9 @@ import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
+import com.liferay.portal.kernel.xml.Document;
+import com.liferay.portal.kernel.xml.Element;
+import com.liferay.portal.kernel.xml.SAXReaderUtil;
 import com.liferay.portal.upgrade.util.BaseUpgradeColumnImpl;
 import com.liferay.portal.upgrade.util.BaseUpgradeTableImpl;
 import com.liferay.portal.upgrade.util.IdReplacer;
@@ -36,16 +39,10 @@ import com.liferay.portlet.journal.service.JournalArticleImageLocalServiceUtil;
 import com.liferay.portlet.journal.util.JournalUtil;
 import com.liferay.util.PKParser;
 
-import java.io.StringReader;
-
 import java.util.Iterator;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-
-import org.dom4j.Document;
-import org.dom4j.Element;
-import org.dom4j.io.SAXReader;
 
 /**
  * <a href="JournalArticleContentUpgradeColumnImpl.java.html"><b><i>View Source
@@ -109,9 +106,7 @@ public class JournalArticleContentUpgradeColumnImpl
 		Double version = (Double)_versionColumn.getNewValue();
 
 		try {
-			SAXReader reader = new SAXReader();
-
-			Document doc = reader.read(new StringReader(content));
+			Document doc = SAXReaderUtil.read(content);
 
 			Element root = doc.getRootElement();
 

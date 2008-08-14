@@ -25,19 +25,18 @@ package com.liferay.portal.tools;
 import com.liferay.portal.kernel.util.FileUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.Html;
-import com.liferay.portal.util.DocumentUtil;
+import com.liferay.portal.kernel.xml.Document;
+import com.liferay.portal.kernel.xml.DocumentException;
+import com.liferay.portal.kernel.xml.Element;
+import com.liferay.portal.kernel.xml.SAXReaderUtil;
 import com.liferay.portal.util.HtmlImpl;
 import com.liferay.portal.util.InitUtil;
-import com.liferay.util.xml.XMLFormatter;
+import com.liferay.portal.xml.DocumentImpl;
 import com.liferay.util.xml.XMLMerger;
 import com.liferay.util.xml.descriptor.WebXML23Descriptor;
 import com.liferay.util.xml.descriptor.WebXML24Descriptor;
 
 import java.io.IOException;
-
-import org.dom4j.Document;
-import org.dom4j.DocumentException;
-import org.dom4j.Element;
 
 /**
  * <a href="WebXMLBuilder.java.html"><b><i>View Source</i></b></a>
@@ -71,7 +70,7 @@ public class WebXMLBuilder {
 
 		double version = 2.3;
 
-		Document doc = DocumentUtil.readDocumentFromXML(webXML);
+		Document doc = SAXReaderUtil.read(webXML);
 
 		Element root = doc.getRootElement();
 
@@ -86,9 +85,11 @@ public class WebXMLBuilder {
 			merger = new XMLMerger(new WebXML24Descriptor());
 		}
 
-		merger.organizeXML(doc);
+		DocumentImpl docImpl = (DocumentImpl)doc;
 
-		webXML = XMLFormatter.toString(doc);
+		merger.organizeXML(docImpl.getWrappedDocument());
+
+		webXML = doc.formattedString();
 
 		return webXML;
 	}

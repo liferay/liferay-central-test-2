@@ -20,34 +20,41 @@
  * SOFTWARE.
  */
 
-package com.liferay.portal.util;
+package com.liferay.portal.kernel.xml;
 
-import com.liferay.util.xml.XMLSafeReader;
-
-import org.dom4j.Document;
-import org.dom4j.DocumentException;
-import org.dom4j.io.SAXReader;
+import java.util.List;
 
 /**
- * <a href="DocumentUtil.java.html"><b><i>View Source</i></b></a>
+ * <a href="XPath.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *
  */
-public class DocumentUtil {
+public interface XPath {
 
-	public static Document readDocumentFromXML(String xml)
-		throws DocumentException {
+	public boolean booleanValueOf(Object context);
 
-		return readDocumentFromXML(xml, false);
-	}
+	public Object evaluate(Object context);
 
-	public static Document readDocumentFromXML(String xml, boolean validate)
-		throws DocumentException {
+	public String getText();
 
-		SAXReader reader = SAXReaderFactory.getInstance(validate);
+	public boolean matches(Node node);
 
-		return reader.read(new XMLSafeReader(xml));
-	}
+	public Number numberValueOf(Object context);
+
+	public List<Node> selectNodes(Object context);
+
+	public List<Node> selectNodes(Object context, XPath sortXPath);
+
+	public List<Node> selectNodes(
+		Object context, XPath sortXPath, boolean distinct);
+
+	public Node selectSingleNode(Object context);
+
+	public void sort(List<Node> nodes);
+
+	public void sort(List<Node> nodes, boolean distinct);
+
+	public String valueOf(Object context);
 
 }

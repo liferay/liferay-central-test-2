@@ -38,6 +38,9 @@ import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Time;
 import com.liferay.portal.kernel.util.Validator;
+import com.liferay.portal.kernel.xml.Document;
+import com.liferay.portal.kernel.xml.Element;
+import com.liferay.portal.kernel.xml.SAXReaderUtil;
 import com.liferay.portal.model.ResourceConstants;
 import com.liferay.portal.model.User;
 import com.liferay.portal.plugin.ModuleId;
@@ -71,10 +74,6 @@ import java.util.Properties;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-
-import org.dom4j.Document;
-import org.dom4j.DocumentHelper;
-import org.dom4j.Element;
 
 /**
  * <a href="SCProductEntryLocalServiceImpl.java.html"><b><i>View Source</i></b>
@@ -378,7 +377,7 @@ public class SCProductEntryLocalServiceImpl
 			int maxNumOfVersions, Properties repoSettings)
 		throws PortalException, SystemException {
 
-		Document doc = DocumentHelper.createDocument();
+		Document doc = SAXReaderUtil.createDocument();
 
 		doc.setXMLEncoding(StringPool.UTF8);
 

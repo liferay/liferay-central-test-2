@@ -31,6 +31,9 @@ import com.liferay.portal.kernel.util.ReleaseInfo;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Time;
+import com.liferay.portal.kernel.xml.Document;
+import com.liferay.portal.kernel.xml.Element;
+import com.liferay.portal.kernel.xml.SAXReaderUtil;
 import com.liferay.portal.kernel.zip.ZipWriter;
 import com.liferay.portal.model.Group;
 import com.liferay.portal.model.Image;
@@ -54,7 +57,6 @@ import com.liferay.portal.util.ContentUtil;
 import com.liferay.portal.util.PortletKeys;
 import com.liferay.portal.velocity.VelocityContextPool;
 import com.liferay.util.MapUtil;
-import com.liferay.util.xml.XMLFormatter;
 
 import java.io.File;
 import java.io.IOException;
@@ -70,10 +72,6 @@ import javax.servlet.ServletContext;
 import org.apache.commons.lang.time.StopWatch;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-
-import org.dom4j.Document;
-import org.dom4j.DocumentHelper;
-import org.dom4j.Element;
 
 /**
  * <a href="LayoutExporter.java.html"><b><i>View Source</i></b></a>
@@ -149,7 +147,7 @@ public class LayoutExporter {
 
 		// Build compatibility
 
-		Document doc = DocumentHelper.createDocument();
+		Document doc = SAXReaderUtil.createDocument();
 
 		Element root = doc.addElement("root");
 
@@ -197,7 +195,7 @@ public class LayoutExporter {
 		for (Layout layout : layouts) {
 			context.setPlid(layout.getPlid());
 
-			Document layoutDoc = DocumentHelper.createDocument();
+			Document layoutDoc = SAXReaderUtil.createDocument();
 
 			Element layoutEl = layoutDoc.addElement("layout");
 
@@ -275,8 +273,7 @@ public class LayoutExporter {
 				context, layoutConfigurationPortlet, null, layoutEl);
 
 			try {
-				context.addZipEntry(
-					layoutPath, XMLFormatter.toString(layoutDoc));
+				context.addZipEntry(layoutPath, layoutDoc.formattedString());
 			}
 			catch (IOException ioe) {
 			}
@@ -343,8 +340,7 @@ public class LayoutExporter {
 		// Zip
 
 		try {
-			context.addZipEntry(
-				"/manifest.xml", XMLFormatter.toString(doc));
+			context.addZipEntry("/manifest.xml", doc.formattedString());
 
 			if (themeZip != null) {
 				context.addZipEntry("/theme.zip", themeZip);

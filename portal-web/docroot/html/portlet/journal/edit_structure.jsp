@@ -372,9 +372,7 @@ int tabIndex = 1;
 <table border="0" cellpadding="0" cellspacing="0">
 
 <%
-SAXReader reader = new SAXReader();
-
-Document doc = reader.read(new StringReader(xsd));
+Document doc = SAXReaderUtil.read(xsd);
 
 Element root = doc.getRootElement();
 

@@ -33,6 +33,11 @@ import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Time;
 import com.liferay.portal.kernel.util.Validator;
+import com.liferay.portal.kernel.xml.Document;
+import com.liferay.portal.kernel.xml.Element;
+import com.liferay.portal.kernel.xml.Node;
+import com.liferay.portal.kernel.xml.SAXReaderUtil;
+import com.liferay.portal.kernel.xml.XPath;
 import com.liferay.portal.model.Contact;
 import com.liferay.portal.model.User;
 import com.liferay.portal.service.ImageLocalServiceUtil;
@@ -59,7 +64,6 @@ import com.liferay.util.LocalizationUtil;
 import com.liferay.util.xml.XMLFormatter;
 
 import java.io.IOException;
-import java.io.StringReader;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -75,15 +79,6 @@ import javax.portlet.PortletSession;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-
-import org.dom4j.Document;
-import org.dom4j.DocumentException;
-import org.dom4j.DocumentFactory;
-import org.dom4j.DocumentHelper;
-import org.dom4j.Element;
-import org.dom4j.Node;
-import org.dom4j.XPath;
-import org.dom4j.io.SAXReader;
 
 /**
  * <a href="JournalUtil.java.html"><b><i>View Source</i></b></a>
@@ -146,16 +141,15 @@ public class JournalUtil {
 		// XML
 
 		if (root != null) {
-			DocumentFactory docFactory = DocumentFactory.getInstance();
+			Element dynamicEl = SAXReaderUtil.createElement("dynamic-element");
 
-			Element dynamicEl = docFactory.createElement("dynamic-element");
-
-			dynamicEl.add(docFactory.createAttribute(dynamicEl, "name", name));
 			dynamicEl.add(
-				docFactory.createAttribute(dynamicEl, "type", "text"));
+				SAXReaderUtil.createAttribute(dynamicEl, "name", name));
+			dynamicEl.add(
+				SAXReaderUtil.createAttribute(dynamicEl, "type", "text"));
 
-			Element dynamicContent =
-				docFactory.createElement("dynamic-content");
+			Element dynamicContent = SAXReaderUtil.createElement(
+				"dynamic-content");
 
 			//dynamicContent.setText("<![CDATA[" + value + "]]>");
 			dynamicContent.setText(value);
@@ -269,7 +263,7 @@ public class JournalUtil {
 	}
 
 	public static String formatXML(String xml)
-		throws DocumentException, IOException {
+		throws org.dom4j.DocumentException, IOException {
 
 		// This is only supposed to format your xml, however, it will also
 		// unwantingly change &#169; and other characters like it into their
@@ -284,14 +278,8 @@ public class JournalUtil {
 		return xml;
 	}
 
-	public static String formatXML(com.liferay.portal.kernel.xml.Document doc)
-		throws IOException {
-
-		return doc.formattedString(XML_INDENT);
-	}
-
 	public static String formatXML(Document doc) throws IOException {
-		return XMLFormatter.toString(doc, XML_INDENT);
+		return doc.formattedString(XML_INDENT);
 	}
 
 	public static OrderByComparator getArticleOrderByComparator(
@@ -685,11 +673,9 @@ public class JournalUtil {
 		String curContent, String newContent, String xsd) {
 
 		try {
-			SAXReader reader = new SAXReader();
-
-			Document curContentDoc = reader.read(new StringReader(curContent));
-			Document newContentDoc = reader.read(new StringReader(newContent));
-			Document xsdDoc = reader.read(new StringReader(xsd));
+			Document curContentDoc = SAXReaderUtil.read(curContent);
+			Document newContentDoc = SAXReaderUtil.read(newContent);
+			Document xsdDoc = SAXReaderUtil.read(xsd);
 
 			Element curContentRoot = curContentDoc.getRootElement();
 			Element newContentRoot = newContentDoc.getRootElement();
@@ -723,9 +709,7 @@ public class JournalUtil {
 		String content, String languageId) {
 
 		try {
-			SAXReader reader = new SAXReader();
-
-			Document doc = reader.read(new StringReader(content));
+			Document doc = SAXReaderUtil.read(content);
 
 			Element root = doc.getRootElement();
 
@@ -758,11 +742,9 @@ public class JournalUtil {
 	public static void removeArticleLocale(Element el, String languageId)
 		throws PortalException, SystemException {
 
-		for (Element dynamicEl :
-				(List<Element>)el.elements("dynamic-element")) {
-
+		for (Element dynamicEl : el.elements("dynamic-element")) {
 			for (Element dynamicContentEl :
-					(List<Element>)dynamicEl.elements("dynamic-content")) {
+					dynamicEl.elements("dynamic-content")) {
 
 				String curLanguageId = GetterUtil.getString(
 					dynamicContentEl.attributeValue("language-id"));
@@ -785,10 +767,8 @@ public class JournalUtil {
 
 	public static String removeOldContent(String content, String xsd) {
 		try {
-			SAXReader reader = new SAXReader();
-
-			Document contentDoc = reader.read(new StringReader(content));
-			Document xsdDoc = reader.read(new StringReader(xsd));
+			Document contentDoc = SAXReaderUtil.read(content);
+			Document xsdDoc = SAXReaderUtil.read(xsd);
 
 			Element contentRoot = contentDoc.getRootElement();
 
@@ -1014,14 +994,14 @@ public class JournalUtil {
 
 		String fullPath = elPath + "/" + localPath;
 
-		XPath xPathSelector = DocumentHelper.createXPath(fullPath);
+		XPath xPathSelector = SAXReaderUtil.createXPath(fullPath);
 
-		List<Element> curElements = xPathSelector.selectNodes(curDoc);
+		List<Node> curNodes = xPathSelector.selectNodes(curDoc);
 
 		Element newEl = (Element)xPathSelector.selectNodes(newDoc).get(0);
 
-		if (curElements.size() > 0) {
-			Element curEl = curElements.get(0);
+		if (curNodes.size() > 0) {
+			Element curEl = (Element)curNodes.get(0);
 
 			List<Element> curDynamicContents = curEl.elements(
 				"dynamic-content");
@@ -1084,7 +1064,7 @@ public class JournalUtil {
 			}
 		}
 		else {
-			xPathSelector = DocumentHelper.createXPath(elPath);
+			xPathSelector = SAXReaderUtil.createXPath(elPath);
 
 			Element parentEl =
 				(Element)xPathSelector.selectNodes(curDoc).get(0);
@@ -1137,11 +1117,11 @@ public class JournalUtil {
 
 		String fullPath = elPath + "/" + localPath;
 
-		XPath xPathSelector = DocumentHelper.createXPath(fullPath);
+		XPath xPathSelector = SAXReaderUtil.createXPath(fullPath);
 
-		List<Element> curElements = xPathSelector.selectNodes(xsdDoc);
+		List<Node> curNodes = xPathSelector.selectNodes(xsdDoc);
 
-		if (curElements.size() == 0) {
+		if (curNodes.size() == 0) {
 			contentEl.detach();
 		}
 

@@ -25,8 +25,10 @@ package com.liferay.portal.tools;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.PropertiesUtil;
 import com.liferay.portal.kernel.util.StringPool;
-import com.liferay.portal.util.DocumentUtil;
+import com.liferay.portal.kernel.xml.Document;
+import com.liferay.portal.kernel.xml.Element;
 import com.liferay.portal.util.FileImpl;
+import com.liferay.portal.xml.SAXReaderImpl;
 
 import java.io.File;
 
@@ -37,9 +39,6 @@ import java.util.Set;
 import java.util.TreeSet;
 
 import org.apache.tools.ant.DirectoryScanner;
-
-import org.dom4j.Document;
-import org.dom4j.Element;
 
 /**
  * <a href="PluginsSummaryBuilder.java.html"><b><i>View Source</i></b></a>
@@ -144,7 +143,7 @@ public class PluginsSummaryBuilder {
 			licenses = _readProperty(props, "licenses");
 		}
 		else {
-			Document doc = DocumentUtil.readDocumentFromXML(content);
+			Document doc = _saxReaderUtil.read(content);
 
 			Element root = doc.getRootElement();
 
@@ -218,6 +217,7 @@ public class PluginsSummaryBuilder {
 	}
 
 	private static FileImpl _fileUtil = FileImpl.getInstance();
+	private static SAXReaderImpl _saxReaderUtil = SAXReaderImpl.getInstance();
 
 	private Set<String> _distinctAuthors = new TreeSet<String>();
 	private Set<String> _distinctLicenses = new TreeSet<String>();

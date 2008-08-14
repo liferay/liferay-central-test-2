@@ -44,6 +44,10 @@ import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Time;
 import com.liferay.portal.kernel.util.UnicodeProperties;
 import com.liferay.portal.kernel.util.Validator;
+import com.liferay.portal.kernel.xml.Document;
+import com.liferay.portal.kernel.xml.DocumentException;
+import com.liferay.portal.kernel.xml.Element;
+import com.liferay.portal.kernel.xml.SAXReaderUtil;
 import com.liferay.portal.kernel.zip.ZipReader;
 import com.liferay.portal.model.Group;
 import com.liferay.portal.model.Layout;
@@ -72,7 +76,6 @@ import com.liferay.portal.service.persistence.LayoutUtil;
 import com.liferay.portal.service.persistence.UserUtil;
 import com.liferay.portal.theme.ThemeLoader;
 import com.liferay.portal.theme.ThemeLoaderFactory;
-import com.liferay.portal.util.DocumentUtil;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PortletKeys;
 import com.liferay.portal.util.PropsValues;
@@ -95,11 +98,6 @@ import java.util.Set;
 import org.apache.commons.lang.time.StopWatch;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-
-import org.dom4j.Document;
-import org.dom4j.DocumentException;
-import org.dom4j.DocumentHelper;
-import org.dom4j.Element;
 
 /**
  * <a href="LayoutImporter.java.html"><b><i>View Source</i></b></a>
@@ -205,7 +203,7 @@ public class LayoutImporter {
 		}
 
 		try {
-			Document doc = DocumentUtil.readDocumentFromXML(xml);
+			Document doc = SAXReaderUtil.read(xml);
 
 			root = doc.getRootElement();
 		}
@@ -321,7 +319,7 @@ public class LayoutImporter {
 			Element layoutEl = null;
 
 			try {
-				Document layoutDoc = DocumentUtil.readDocumentFromXML(
+				Document layoutDoc = SAXReaderUtil.read(
 					context.getZipEntryAsString(layoutPath));
 
 				layoutEl = layoutDoc.getRootElement();
@@ -545,7 +543,7 @@ public class LayoutImporter {
 			Element portletEl = null;
 
 			try {
-				Document portletDoc = DocumentUtil.readDocumentFromXML(
+				Document portletDoc = SAXReaderUtil.read(
 					context.getZipEntryAsString(portletPath));
 
 				portletEl = portletDoc.getRootElement();
@@ -776,7 +774,7 @@ public class LayoutImporter {
 						" with name " + name);
 			}
 			else {
-				Element parentEl = DocumentHelper.createElement("parent");
+				Element parentEl = SAXReaderUtil.createElement("parent");
 
 				parentEl.add(actionEl.createCopy());
 

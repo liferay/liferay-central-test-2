@@ -31,18 +31,15 @@ import com.liferay.portal.kernel.search.SearchException;
 import com.liferay.portal.kernel.util.HtmlUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
+import com.liferay.portal.kernel.xml.Element;
+import com.liferay.portal.kernel.xml.SAXReaderUtil;
 import com.liferay.portal.util.PortletKeys;
 import com.liferay.portlet.journal.service.JournalArticleLocalServiceUtil;
-
-import java.io.StringReader;
 
 import java.util.Date;
 import java.util.List;
 
 import javax.portlet.PortletURL;
-
-import org.dom4j.Element;
-import org.dom4j.io.SAXReader;
 
 /**
  * <a href="Indexer.java.html"><b><i>View Source</i></b></a>
@@ -182,9 +179,8 @@ public class Indexer implements com.liferay.portal.kernel.search.Indexer {
 		try {
 			StringBuilder sb = new StringBuilder();
 
-			SAXReader reader = new SAXReader();
-
-			org.dom4j.Document doc = reader.read(new StringReader(content));
+			com.liferay.portal.kernel.xml.Document doc = SAXReaderUtil.read(
+				content);
 
 			Element root = doc.getRootElement();
 

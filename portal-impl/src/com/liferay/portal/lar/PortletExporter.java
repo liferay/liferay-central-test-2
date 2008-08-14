@@ -34,6 +34,9 @@ import com.liferay.portal.kernel.util.ReleaseInfo;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Time;
+import com.liferay.portal.kernel.xml.Document;
+import com.liferay.portal.kernel.xml.Element;
+import com.liferay.portal.kernel.xml.SAXReaderUtil;
 import com.liferay.portal.kernel.zip.ZipWriter;
 import com.liferay.portal.model.Group;
 import com.liferay.portal.model.Layout;
@@ -58,14 +61,12 @@ import com.liferay.portal.service.PortletPreferencesLocalServiceUtil;
 import com.liferay.portal.service.RoleLocalServiceUtil;
 import com.liferay.portal.service.UserLocalServiceUtil;
 import com.liferay.portal.service.permission.PortletPermissionUtil;
-import com.liferay.portal.util.DocumentUtil;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PortletKeys;
 import com.liferay.portlet.PortletPreferencesFactoryUtil;
 import com.liferay.portlet.messageboards.model.MBMessage;
 import com.liferay.portlet.ratings.model.RatingsEntry;
 import com.liferay.util.MapUtil;
-import com.liferay.util.xml.XMLFormatter;
 
 import java.io.IOException;
 
@@ -78,10 +79,6 @@ import java.util.Map;
 import org.apache.commons.lang.time.StopWatch;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-
-import org.dom4j.Document;
-import org.dom4j.DocumentHelper;
-import org.dom4j.Element;
 
 /**
  * <a href="PortletExporter.java.html"><b><i>View Source</i></b></a>
@@ -164,7 +161,7 @@ public class PortletExporter {
 
 		// Build compatibility
 
-		Document doc = DocumentHelper.createDocument();
+		Document doc = SAXReaderUtil.createDocument();
 
 		Element root = doc.addElement("root");
 
@@ -217,8 +214,7 @@ public class PortletExporter {
 		// Zip
 
 		try {
-			context.addZipEntry(
-				"/manifest.xml", XMLFormatter.toString(doc));
+			context.addZipEntry("/manifest.xml", doc.formattedString());
 
 			return zipWriter.finish();
 		}
@@ -231,7 +227,7 @@ public class PortletExporter {
 		throws SystemException {
 
 		try {
-			Document doc = DocumentHelper.createDocument();
+			Document doc = SAXReaderUtil.createDocument();
 
 			Element root = doc.addElement("comments");
 
@@ -258,8 +254,7 @@ public class PortletExporter {
 			}
 
 			context.addZipEntry(
-				context.getRootPath() + "/comments.xml",
-				XMLFormatter.toString(doc));
+				context.getRootPath() + "/comments.xml", doc.formattedString());
 		}
 		catch (IOException ioe) {
 			throw new SystemException(ioe);
@@ -312,7 +307,7 @@ public class PortletExporter {
 			String resourcePrimKey, Element parentEl, String entityName)
 		throws SystemException {
 
-		Element entityPermissionsEl = DocumentHelper.createElement(
+		Element entityPermissionsEl = SAXReaderUtil.createElement(
 			entityName + "-permissions");
 
 		Map<String, Long> entityMap = layoutCache.getEntityMap(
@@ -349,7 +344,7 @@ public class PortletExporter {
 			String resourceName, String entityName, Element parentEl)
 		throws PortalException, SystemException {
 
-		Element entityRolesEl = DocumentHelper.createElement(
+		Element entityRolesEl = SAXReaderUtil.createElement(
 			entityName + "-roles");
 
 		Map<String, Long> entityMap = layoutCache.getEntityMap(
@@ -409,7 +404,7 @@ public class PortletExporter {
 			return;
 		}
 
-		Document portletDoc = DocumentHelper.createDocument();
+		Document portletDoc = SAXReaderUtil.createDocument();
 
 		Element portletEl = portletDoc.addElement("portlet");
 
@@ -514,7 +509,7 @@ public class PortletExporter {
 		el.addAttribute("path", portletPath);
 
 		try {
-			context.addZipEntry(portletPath, XMLFormatter.toString(portletDoc));
+			context.addZipEntry(portletPath, portletDoc.formattedString());
 		}
 		catch (IOException ioe) {
 			throw new SystemException(ioe);
@@ -631,7 +626,7 @@ public class PortletExporter {
 		throws SystemException {
 
 		try {
-			Document prefsDoc = DocumentUtil.readDocumentFromXML(
+			Document prefsDoc = SAXReaderUtil.read(
 				portletPreferences.getPreferences());
 
 			Element root = prefsDoc.getRootElement();
@@ -660,8 +655,7 @@ public class PortletExporter {
 				"portlet-preference").addAttribute("path", path);
 
 			if (context.isPathNotProcessed(path)) {
-				context.addZipEntry(
-					path, XMLFormatter.toString(prefsDoc));
+				context.addZipEntry(path, prefsDoc.formattedString());
 			}
 		}
 		catch (Exception e) {
@@ -753,7 +747,7 @@ public class PortletExporter {
 		throws SystemException {
 
 		try {
-			Document doc = DocumentHelper.createDocument();
+			Document doc = SAXReaderUtil.createDocument();
 
 			Element root = doc.addElement("ratings");
 
@@ -781,8 +775,7 @@ public class PortletExporter {
 			}
 
 			context.addZipEntry(
-				context.getRootPath() + "/ratings.xml",
-				XMLFormatter.toString(doc));
+				context.getRootPath() + "/ratings.xml", doc.formattedString());
 		}
 		catch (Exception e) {
 			throw new SystemException(e);
@@ -834,7 +827,7 @@ public class PortletExporter {
 		throws SystemException {
 
 		try {
-			Document doc = DocumentHelper.createDocument();
+			Document doc = SAXReaderUtil.createDocument();
 
 			Element root = doc.addElement("tags");
 
@@ -851,8 +844,7 @@ public class PortletExporter {
 			}
 
 			context.addZipEntry(
-				context.getRootPath() + "/tags.xml",
-				XMLFormatter.toString(doc));
+				context.getRootPath() + "/tags.xml", doc.formattedString());
 		}
 		catch (Exception e) {
 			throw new SystemException(e);
@@ -872,7 +864,7 @@ public class PortletExporter {
 			stopWatch.start();
 		}
 
-		Element userPermissionsEl = DocumentHelper.createElement(
+		Element userPermissionsEl = SAXReaderUtil.createElement(
 			"user-permissions");
 
 		List<User> users = layoutCache.getGroupUsers(groupId);
@@ -880,8 +872,7 @@ public class PortletExporter {
 		for (User user : users) {
 			String emailAddress = user.getEmailAddress();
 
-			Element userActionsEl =
-				DocumentHelper.createElement("user-actions");
+			Element userActionsEl = SAXReaderUtil.createElement("user-actions");
 
 			List<Permission> permissions =
 				PermissionLocalServiceUtil.getUserPermissions(
@@ -919,7 +910,7 @@ public class PortletExporter {
 			String resourceName, Element parentEl)
 		throws PortalException, SystemException {
 
-		Element userRolesEl = DocumentHelper.createElement("user-roles");
+		Element userRolesEl = SAXReaderUtil.createElement("user-roles");
 
 		List<User> users = layoutCache.getGroupUsers(groupId);
 

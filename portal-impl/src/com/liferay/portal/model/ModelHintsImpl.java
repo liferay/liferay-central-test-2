@@ -25,12 +25,12 @@ package com.liferay.portal.model;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.ListUtil;
 import com.liferay.portal.kernel.util.StringUtil;
+import com.liferay.portal.kernel.xml.Document;
+import com.liferay.portal.kernel.xml.Element;
+import com.liferay.portal.kernel.xml.SAXReaderUtil;
 import com.liferay.portal.service.ClassNameLocalServiceUtil;
 import com.liferay.portal.util.PropsKeys;
 import com.liferay.portal.util.PropsUtil;
-import com.liferay.portal.xml.ElementImpl;
-
-import java.io.StringReader;
 
 import java.util.HashMap;
 import java.util.Iterator;
@@ -41,10 +41,6 @@ import java.util.TreeSet;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-
-import org.dom4j.Document;
-import org.dom4j.Element;
-import org.dom4j.io.SAXReader;
 
 /**
  * <a href="ModelHintsImpl.java.html"><b><i>View Source</i></b></a>
@@ -94,7 +90,7 @@ public class ModelHintsImpl implements ModelHints {
 				return null;
 			}
 			else {
-				return new ElementImpl(fieldsEl);
+				return fieldsEl;
 			}
 		}
 	}
@@ -143,9 +139,7 @@ public class ModelHintsImpl implements ModelHints {
 			_log.debug("Loading " + source);
 		}
 
-		SAXReader reader = new SAXReader();
-
-		Document doc = reader.read(new StringReader(xml));
+		Document doc = SAXReaderUtil.read(xml);
 
 		Element root = doc.getRootElement();
 

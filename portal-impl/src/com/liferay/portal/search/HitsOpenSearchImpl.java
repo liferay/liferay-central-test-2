@@ -31,6 +31,7 @@ import com.liferay.portal.kernel.search.SearchException;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.InstancePool;
 import com.liferay.portal.kernel.util.Validator;
+import com.liferay.portal.kernel.xml.Element;
 import com.liferay.portal.model.Portlet;
 import com.liferay.portal.service.PortletLocalServiceUtil;
 import com.liferay.portal.theme.ThemeDisplay;
@@ -46,8 +47,6 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-
-import org.dom4j.Element;
 
 /**
  * <a href="HitsOpenSearchImpl.java.html"><b><i>View Source</i></b></a>
@@ -87,7 +86,8 @@ public abstract class HitsOpenSearchImpl extends BaseOpenSearchImpl {
 				keywords, startPage, itemsPerPage, total, start,
 				getTitle(keywords), getSearchPath(), themeDisplay);
 
-			org.dom4j.Document doc = (org.dom4j.Document)values[0];
+			com.liferay.portal.kernel.xml.Document doc =
+				(com.liferay.portal.kernel.xml.Document)values[0];
 			Element root = (Element)values[1];
 
 			for (int i = 0; i < results.getDocs().length; i++) {

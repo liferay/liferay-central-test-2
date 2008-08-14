@@ -173,13 +173,11 @@ else {
 
 Document contentDoc = null;
 
-SAXReader reader = new SAXReader();
-
 String[] availableLocales = null;
 
 if (Validator.isNotNull(content)) {
 	try {
-		contentDoc = reader.read(new StringReader(content));
+		contentDoc = SAXReaderUtil.read(content);
 
 		Element contentEl = contentDoc.getRootElement();
 
@@ -738,7 +736,7 @@ String smallImageURL = BeanParamUtil.getString(article, request, "smallImageURL"
 				<input name="<portlet:namespace />available_locales" type="hidden" value="" />
 
 				<%
-				Document xsdDoc = reader.read(new StringReader(structure.getXsd()));
+				Document xsdDoc = SAXReaderUtil.read(structure.getXsd());
 
 				if (contentDoc != null) {
 				%>
@@ -790,9 +788,7 @@ String smallImageURL = BeanParamUtil.getString(article, request, "smallImageURL"
 					}
 				}
 				else {
-					DocumentFactory docFactory = DocumentFactory.getInstance();
-
-					contentDoc = docFactory.createDocument(docFactory.createElement("root"));
+					contentDoc = SAXReaderUtil.createDocument(SAXReaderUtil.createElement("root"));
 				%>
 
 					<input name="<portlet:namespace />available_locales" type="hidden" value="<%= HtmlUtil.escape(defaultLanguageId) %>" />

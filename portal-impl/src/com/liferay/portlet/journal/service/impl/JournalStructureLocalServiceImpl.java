@@ -29,6 +29,9 @@ import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
+import com.liferay.portal.kernel.xml.Document;
+import com.liferay.portal.kernel.xml.Element;
+import com.liferay.portal.kernel.xml.SAXReaderUtil;
 import com.liferay.portal.model.ResourceConstants;
 import com.liferay.portal.model.User;
 import com.liferay.portal.util.PortalUtil;
@@ -44,9 +47,6 @@ import com.liferay.portlet.journal.model.impl.JournalStructureImpl;
 import com.liferay.portlet.journal.service.base.JournalStructureLocalServiceBaseImpl;
 import com.liferay.portlet.journal.util.JournalUtil;
 
-import java.io.IOException;
-import java.io.StringReader;
-
 import java.util.Date;
 import java.util.HashSet;
 import java.util.List;
@@ -54,11 +54,6 @@ import java.util.Set;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-
-import org.dom4j.Document;
-import org.dom4j.DocumentException;
-import org.dom4j.Element;
-import org.dom4j.io.SAXReader;
 
 /**
  * <a href="JournalStructureLocalServiceImpl.java.html"><b><i>View Source</i>
@@ -139,10 +134,7 @@ public class JournalStructureLocalServiceImpl
 		try {
 			xsd = JournalUtil.formatXML(xsd);
 		}
-		catch (DocumentException de) {
-			throw new StructureXsdException();
-		}
-		catch (IOException ioe) {
+		catch (Exception e) {
 			throw new StructureXsdException();
 		}
 
@@ -461,10 +453,7 @@ public class JournalStructureLocalServiceImpl
 		try {
 			xsd = JournalUtil.formatXML(xsd);
 		}
-		catch (DocumentException de) {
-			throw new StructureXsdException();
-		}
-		catch (IOException ioe) {
+		catch (Exception e) {
 			throw new StructureXsdException();
 		}
 
@@ -527,9 +516,7 @@ public class JournalStructureLocalServiceImpl
 		}
 		else {
 			try {
-				SAXReader reader = new SAXReader();
-
-				Document doc = reader.read(new StringReader(xsd));
+				Document doc = SAXReaderUtil.read(xsd);
 
 				Element root = doc.getRootElement();
 

@@ -23,10 +23,10 @@
 package com.liferay.util.xml;
 
 import com.liferay.portal.kernel.util.GetterUtil;
-
-import org.dom4j.Element;
-import org.dom4j.Namespace;
-import org.dom4j.QName;
+import com.liferay.portal.kernel.xml.Element;
+import com.liferay.portal.kernel.xml.Namespace;
+import com.liferay.portal.kernel.xml.QName;
+import com.liferay.portal.kernel.xml.SAXReaderUtil;
 
 /**
  * <a href="DocUtil.java.html"><b><i>View Source</i></b></a>
@@ -36,74 +36,259 @@ import org.dom4j.QName;
  */
 public class DocUtil {
 
-	public static void add(Element el, String name, boolean text) {
-		add(el, name, String.valueOf(text));
+	public static void add(Element element, String name, boolean text) {
+		add(element, name, String.valueOf(text));
 	}
 
-	public static void add(Element el, String name, double text) {
-		add(el, name, String.valueOf(text));
+	public static void add(Element element, String name, double text) {
+		add(element, name, String.valueOf(text));
 	}
 
-	public static void add(Element el, String name, float text) {
-		add(el, name, String.valueOf(text));
+	public static void add(Element element, String name, float text) {
+		add(element, name, String.valueOf(text));
 	}
 
-	public static void add(Element el, String name, int text) {
-		add(el, name, String.valueOf(text));
+	public static void add(Element element, String name, int text) {
+		add(element, name, String.valueOf(text));
 	}
 
-	public static void add(Element el, String name, long text) {
-		add(el, name, String.valueOf(text));
+	public static void add(Element element, String name, long text) {
+		add(element, name, String.valueOf(text));
 	}
 
-	public static void add(Element el, String name, short text) {
-		add(el, name, String.valueOf(text));
+	public static void add(Element element, String name, short text) {
+		add(element, name, String.valueOf(text));
 	}
 
-	public static void add(Element el, String name, Object text) {
-		add(el, name, String.valueOf(text));
+	public static void add(Element element, String name, Object text) {
+		add(element, name, String.valueOf(text));
 	}
 
-	public static void add(Element el, String name, String text) {
-		el.addElement(name).addText(GetterUtil.getString(text));
+	public static void add(Element element, String name, String text) {
+		Element childElement = element.addElement(name);
+
+		childElement.addText(GetterUtil.getString(text));
 	}
 
-	public static Element add(Element el, String name, Namespace ns) {
-		return el.addElement(new QName(name, ns));
+	public static Element add(
+		Element element, String name, Namespace namespace) {
+
+		QName qName = SAXReaderUtil.createQName(name, namespace);
+
+		return element.addElement(qName);
 	}
 
 	public static void add(
-		Element el, String name, Namespace ns, boolean text) {
+		Element element, String name, Namespace namespace, boolean text) {
 
-		add(el, name, ns, String.valueOf(text));
+		add(element, name, namespace, String.valueOf(text));
 	}
 
-	public static void add(Element el, String name, Namespace ns, double text) {
-		add(el, name, ns, String.valueOf(text));
+	public static void add(
+		Element element, String name, Namespace namespace, double text) {
+
+		add(element, name, namespace, String.valueOf(text));
 	}
 
-	public static void add(Element el, String name, Namespace ns, float text) {
-		add(el, name, ns, String.valueOf(text));
+	public static void add(
+		Element element, String name, Namespace namespace, float text) {
+
+		add(element, name, namespace, String.valueOf(text));
 	}
 
-	public static void add(Element el, String name, Namespace ns, int text) {
-		add(el, name, ns, String.valueOf(text));
+	public static void add(
+		Element element, String name, Namespace namespace, int text) {
+
+		add(element, name, namespace, String.valueOf(text));
 	}
 
-	public static void add(Element el, String name, Namespace ns, long text) {
-		add(el, name, ns, String.valueOf(text));
+	public static void add(
+		Element element, String name, Namespace namespace, long text) {
+
+		add(element, name, namespace, String.valueOf(text));
 	}
 
-	public static void add(Element el, String name, Namespace ns, short text) {
-		add(el, name, ns, String.valueOf(text));
+	public static void add(
+		Element element, String name, Namespace namespace, short text) {
+
+		add(element, name, namespace, String.valueOf(text));
 	}
 
-	public static void add(Element el, String name, Namespace ns, Object text) {
-		add(el, name, ns, String.valueOf(text));
+	public static void add(
+		Element element, String name, Namespace namespace, Object text) {
+
+		add(element, name, namespace, String.valueOf(text));
 	}
 
-	public static void add(Element el, String name, Namespace ns, String text) {
-		el.addElement(new QName(name, ns)).addText(GetterUtil.getString(text));
+	public static void add(
+		Element element, String name, Namespace namespace, String text) {
+
+		QName qName = SAXReaderUtil.createQName(name, namespace);
+
+		Element childElement = element.addElement(qName);
+
+		childElement.addText(GetterUtil.getString(text));
+	}
+
+	/**
+	 * @deprecated
+	 */
+	public static void add(
+		org.dom4j.Element element, String name, boolean text) {
+
+		add(element, name, String.valueOf(text));
+	}
+
+	/**
+	 * @deprecated
+	 */
+	public static void add(
+		org.dom4j.Element element, String name, double text) {
+
+		add(element, name, String.valueOf(text));
+	}
+
+	/**
+	 * @deprecated
+	 */
+	public static void add(org.dom4j.Element element, String name, float text) {
+		add(element, name, String.valueOf(text));
+	}
+
+	/**
+	 * @deprecated
+	 */
+	public static void add(org.dom4j.Element element, String name, int text) {
+		add(element, name, String.valueOf(text));
+	}
+
+	/**
+	 * @deprecated
+	 */
+	public static void add(org.dom4j.Element element, String name, long text) {
+		add(element, name, String.valueOf(text));
+	}
+
+	/**
+	 * @deprecated
+	 */
+	public static void add(org.dom4j.Element element, String name, short text) {
+		add(element, name, String.valueOf(text));
+	}
+
+	/**
+	 * @deprecated
+	 */
+	public static void add(
+		org.dom4j.Element element, String name, Object text) {
+
+		add(element, name, String.valueOf(text));
+	}
+
+	/**
+	 * @deprecated
+	 */
+	public static void add(
+		org.dom4j.Element element, String name, String text) {
+
+		org.dom4j.Element childElement = element.addElement(name);
+
+		childElement.addText(GetterUtil.getString(text));
+	}
+
+	/**
+	 * @deprecated
+	 */
+	public static org.dom4j.Element add(
+		org.dom4j.Element element, String name, org.dom4j.Namespace namespace) {
+
+		org.dom4j.QName qName = new org.dom4j.QName(name, namespace);
+
+		return element.addElement(qName);
+	}
+
+	/**
+	 * @deprecated
+	 */
+	public static void add(
+		org.dom4j.Element element, String name, org.dom4j.Namespace namespace,
+		boolean text) {
+
+		add(element, name, namespace, String.valueOf(text));
+	}
+
+	/**
+	 * @deprecated
+	 */
+	public static void add(
+		org.dom4j.Element element, String name, org.dom4j.Namespace namespace,
+		double text) {
+
+		add(element, name, namespace, String.valueOf(text));
+	}
+
+	/**
+	 * @deprecated
+	 */
+	public static void add(
+		org.dom4j.Element element, String name, org.dom4j.Namespace namespace,
+		float text) {
+
+		add(element, name, namespace, String.valueOf(text));
+	}
+
+	/**
+	 * @deprecated
+	 */
+	public static void add(
+		org.dom4j.Element element, String name, org.dom4j.Namespace namespace,
+		int text) {
+
+		add(element, name, namespace, String.valueOf(text));
+	}
+
+	/**
+	 * @deprecated
+	 */
+	public static void add(
+		org.dom4j.Element element, String name, org.dom4j.Namespace namespace,
+		long text) {
+
+		add(element, name, namespace, String.valueOf(text));
+	}
+
+	/**
+	 * @deprecated
+	 */
+	public static void add(
+		org.dom4j.Element element, String name, org.dom4j.Namespace namespace,
+		short text) {
+
+		add(element, name, namespace, String.valueOf(text));
+	}
+
+	/**
+	 * @deprecated
+	 */
+	public static void add(
+		org.dom4j.Element element, String name, org.dom4j.Namespace namespace,
+		Object text) {
+
+		add(element, name, namespace, String.valueOf(text));
+	}
+
+	/**
+	 * @deprecated
+	 */
+	public static void add(
+		org.dom4j.Element element, String name, org.dom4j.Namespace namespace,
+		String text) {
+
+		org.dom4j.QName qName = new org.dom4j.QName(name, namespace);
+
+		org.dom4j.Element childElement = element.addElement(qName);
+
+		childElement.addText(GetterUtil.getString(text));
 	}
 
 }

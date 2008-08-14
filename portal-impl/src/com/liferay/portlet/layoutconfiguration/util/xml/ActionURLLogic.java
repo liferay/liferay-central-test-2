@@ -23,17 +23,14 @@
 package com.liferay.portlet.layoutconfiguration.util.xml;
 
 import com.liferay.portal.kernel.portlet.LiferayPortletURL;
+import com.liferay.portal.kernel.xml.Document;
+import com.liferay.portal.kernel.xml.Element;
+import com.liferay.portal.kernel.xml.SAXReaderUtil;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portlet.RenderResponseImpl;
 
-import java.io.StringReader;
-
 import javax.portlet.PortletRequest;
 import javax.portlet.RenderResponse;
-
-import org.dom4j.Document;
-import org.dom4j.Element;
-import org.dom4j.io.SAXReader;
 
 /**
  * <a href="ActionURLLogic.java.html"><b><i>View Source</i></b></a>
@@ -62,9 +59,7 @@ public class ActionURLLogic extends RuntimeLogic {
 	}
 
 	public void processXML(StringBuilder sb, String xml) throws Exception {
-		SAXReader reader = new SAXReader();
-
-		Document doc = reader.read(new StringReader(xml));
+		Document doc = SAXReaderUtil.read(xml);
 
 		Element root = doc.getRootElement();
 

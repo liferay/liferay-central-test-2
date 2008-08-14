@@ -27,14 +27,16 @@ import com.liferay.portal.kernel.util.FileUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Tuple;
 import com.liferay.portal.kernel.util.Validator;
+import com.liferay.portal.kernel.xml.Document;
+import com.liferay.portal.kernel.xml.Element;
+import com.liferay.portal.kernel.xml.Namespace;
+import com.liferay.portal.kernel.xml.SAXReaderUtil;
 import com.liferay.portal.webdav.InvalidRequestException;
 import com.liferay.portal.webdav.WebDAVException;
 import com.liferay.portal.webdav.WebDAVRequest;
 import com.liferay.portal.webdav.WebDAVUtil;
 import com.liferay.util.servlet.ServletResponseUtil;
 import com.liferay.util.xml.XMLFormatter;
-
-import java.io.StringReader;
 
 import java.util.HashSet;
 import java.util.Iterator;
@@ -45,11 +47,6 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-
-import org.dom4j.Document;
-import org.dom4j.Element;
-import org.dom4j.Namespace;
-import org.dom4j.io.SAXReader;
 
 /**
  * <a href="PropfindMethodImpl.java.html"><b><i>View Source</i></b></a>
@@ -116,9 +113,7 @@ public class PropfindMethodImpl extends BasePropMethodImpl implements Method {
 						XMLFormatter.toString(xml, StringPool.FOUR_SPACES));
 			}
 
-			SAXReader reader = new SAXReader();
-
-			Document doc = reader.read(new StringReader(xml));
+			Document doc = SAXReaderUtil.read(xml);
 
 			Element root = doc.getRootElement();
 
@@ -145,10 +140,10 @@ public class PropfindMethodImpl extends BasePropMethodImpl implements Method {
 					namespace = WebDAVUtil.DAV_URI;
 				}
 				else if (Validator.isNull(prefix)) {
-					namespace = Namespace.get(uri);
+					namespace = SAXReaderUtil.createNamespace(uri);
 				}
 				else {
-					namespace = Namespace.get(prefix, uri);
+					namespace = SAXReaderUtil.createNamespace(prefix, uri);
 				}
 
 				props.add(new Tuple(el.getName(), namespace));

@@ -27,9 +27,12 @@ import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;
+import com.liferay.portal.kernel.xml.Document;
+import com.liferay.portal.kernel.xml.Element;
+import com.liferay.portal.kernel.xml.SAXReaderUtil;
+import com.liferay.portal.kernel.xml.XPath;
 import com.liferay.portal.model.ResourceConstants;
 import com.liferay.portal.model.User;
-import com.liferay.portal.util.DocumentUtil;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portlet.journal.DuplicateFeedIdException;
 import com.liferay.portlet.journal.FeedContentFieldException;
@@ -47,15 +50,10 @@ import com.liferay.util.RSSUtil;
 import java.util.Date;
 import java.util.List;
 
-import org.dom4j.Document;
-import org.dom4j.DocumentHelper;
-import org.dom4j.Element;
-import org.dom4j.XPath;
-
 /**
  * <a href="JournalFeedLocalServiceImpl.java.html"><b><i>View Source</i></b></a>
  *
- * @author Raymond Aug�
+ * @author Raymond Augé
  *
  */
 public class JournalFeedLocalServiceImpl
@@ -427,10 +425,9 @@ public class JournalFeedLocalServiceImpl
 				JournalStructure structure =
 					journalStructurePersistence.findByG_S(groupId, structureId);
 
-				Document doc = DocumentUtil.readDocumentFromXML(
-					structure.getXsd());
+				Document doc = SAXReaderUtil.read(structure.getXsd());
 
-				XPath xpathSelector = DocumentHelper.createXPath(
+				XPath xpathSelector = SAXReaderUtil.createXPath(
 					"//dynamic-element[@name='"+ contentField + "']");
 
 				Element el = (Element)xpathSelector.selectSingleNode(doc);

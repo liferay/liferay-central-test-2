@@ -24,6 +24,7 @@ package com.liferay.util.xml;
 
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
+import com.liferay.portal.kernel.xml.Element;
 import com.liferay.util.TextFormatter;
 
 import java.lang.reflect.Method;
@@ -32,8 +33,6 @@ import java.util.List;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-
-import org.dom4j.Element;
 
 /**
  * <a href="BeanToXMLUtil.java.html"><b><i>View Source</i></b></a>

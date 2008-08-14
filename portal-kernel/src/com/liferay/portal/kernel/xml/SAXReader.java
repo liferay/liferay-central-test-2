@@ -23,7 +23,13 @@
 package com.liferay.portal.kernel.xml;
 
 import java.io.File;
+import java.io.InputStream;
 import java.io.Reader;
+
+import java.net.URL;
+
+import java.util.List;
+import java.util.Map;
 
 /**
  * <a href="SAXReader.java.html"><b><i>View Source</i></b></a>
@@ -33,13 +39,50 @@ import java.io.Reader;
  */
 public interface SAXReader {
 
+	public Attribute createAttribute(
+		Element element, QName qName, String value);
+
+	public Attribute createAttribute(
+		Element element, String name, String value);
+
 	public Document createDocument();
 
+	public Document createDocument(Element rootElement);
+
+	public Document createDocument(String encoding);
+
+	public Element createElement(QName qName);
+
 	public Element createElement(String name);
+
+	public Entity createEntity(String name, String text);
+
+	public ProcessingInstruction createProcessingInstruction(
+		String target, Map<String, String> data);
+
+	public ProcessingInstruction createProcessingInstruction(
+		String target, String data);
+
+	public Namespace createNamespace(String uri);
+
+	public Namespace createNamespace(String prefix, String uri);
+
+	public QName createQName(String localName);
+
+	public QName createQName(String localName, Namespace namespace);
+
+	public Text createText(String text);
+
+	public XPath createXPath(String xpathExpression);
 
 	public Document read(File file) throws DocumentException;
 
 	public Document read(File file, boolean validate)
+		throws DocumentException;
+
+	public Document read(InputStream is) throws DocumentException;
+
+	public Document read(InputStream is, boolean validate)
 		throws DocumentException;
 
 	public Document read(Reader reader) throws DocumentException;
@@ -51,5 +94,19 @@ public interface SAXReader {
 
 	public Document read(String xml, boolean validate)
 		throws DocumentException;
+
+	public Document read(URL url) throws DocumentException;
+
+	public Document read(URL url, boolean validate) throws DocumentException;
+
+	public List<Node> selectNodes(
+		String xpathFilterExpression, List<Node> nodes);
+
+	public List<Node> selectNodes(String xpathFilterExpression, Node node);
+
+	public void sort(List<Node> nodes, String xpathExpression);
+
+	public void sort(
+		List<Node> nodes, String xpathExpression, boolean distinct);
 
 }

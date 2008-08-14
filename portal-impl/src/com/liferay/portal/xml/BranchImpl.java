@@ -26,6 +26,7 @@ import com.liferay.portal.kernel.xml.Branch;
 import com.liferay.portal.kernel.xml.Comment;
 import com.liferay.portal.kernel.xml.Element;
 import com.liferay.portal.kernel.xml.Node;
+import com.liferay.portal.kernel.xml.ProcessingInstruction;
 import com.liferay.portal.kernel.xml.QName;
 
 import java.util.Iterator;
@@ -63,6 +64,14 @@ public class BranchImpl extends NodeImpl implements Branch {
 		_branch.add(nodeImpl.getWrappedNode());
 	}
 
+	public void add(ProcessingInstruction processingInstruction) {
+		ProcessingInstructionImpl processingInstructionImpl =
+			(ProcessingInstructionImpl)processingInstruction;
+
+		_branch.add(
+			processingInstructionImpl.getWrappedProcessingInstruction());
+	}
+
 	public Element addElement(QName qName) {
 		QNameImpl qNameImpl = (QNameImpl)qName;
 
@@ -88,7 +97,7 @@ public class BranchImpl extends NodeImpl implements Branch {
 	}
 
 	public List<Node> content() {
-		return toNewNodes(_branch.content());
+		return SAXReaderImpl.toNewNodes(_branch.content());
 	}
 
 	public Element elementByID(String elementID) {
@@ -128,6 +137,28 @@ public class BranchImpl extends NodeImpl implements Branch {
 		_branch.normalize();
 	}
 
+	public ProcessingInstruction processingInstruction(String target) {
+		org.dom4j.ProcessingInstruction processingInstruction =
+			_branch.processingInstruction(target);
+
+		if (processingInstruction == null) {
+			return null;
+		}
+		else {
+			return new ProcessingInstructionImpl(processingInstruction);
+		}
+	}
+
+	public List<ProcessingInstruction> processingInstructions() {
+		return SAXReaderImpl.toNewProcessingInstructions(
+			_branch.processingInstructions());
+	}
+
+	public List<ProcessingInstruction> processingInstructions(String target) {
+		return SAXReaderImpl.toNewProcessingInstructions(
+			_branch.processingInstructions(target));
+	}
+
 	public boolean remove(Comment comment) {
 		CommentImpl commentImpl = (CommentImpl)comment;
 
@@ -146,8 +177,27 @@ public class BranchImpl extends NodeImpl implements Branch {
 		return _branch.remove(nodeImpl.getWrappedNode());
 	}
 
+	public boolean remove(ProcessingInstruction processingInstruction) {
+		ProcessingInstructionImpl processingInstructionImpl =
+			(ProcessingInstructionImpl)processingInstruction;
+
+		return _branch.remove(
+			processingInstructionImpl.getWrappedProcessingInstruction());
+	}
+
+	public boolean removeProcessingInstruction(String target) {
+		return _branch.removeProcessingInstruction(target);
+	}
+
 	public void setContent(List<Node> content) {
-		_branch.setContent(toOldNodes(content));
+		_branch.setContent(SAXReaderImpl.toOldNodes(content));
+	}
+
+	public void setProcessingInstructions(
+		List<ProcessingInstruction> processingInstructions) {
+
+		_branch.setProcessingInstructions(
+			SAXReaderImpl.toOldProcessingInstructions(processingInstructions));
 	}
 
 	private org.dom4j.Branch _branch;

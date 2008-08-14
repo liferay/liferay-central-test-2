@@ -125,9 +125,7 @@ for (int i = 0; i < portlets.size(); i++) {
 	try {
 		String xml = openSearch.search(request, keywords, searchContainer.getCurValue(), searchContainer.getDelta());
 
-		SAXReader reader = SAXReaderFactory.getInstance();
-
-		Document doc = reader.read(new StringReader(xml));
+		Document doc = SAXReaderUtil.read(xml);
 
 		Element root = doc.getRootElement();
 

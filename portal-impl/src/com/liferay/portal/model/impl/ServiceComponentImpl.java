@@ -23,17 +23,14 @@
 package com.liferay.portal.model.impl;
 
 import com.liferay.portal.kernel.util.StringPool;
+import com.liferay.portal.kernel.xml.Document;
+import com.liferay.portal.kernel.xml.DocumentException;
+import com.liferay.portal.kernel.xml.Element;
+import com.liferay.portal.kernel.xml.SAXReaderUtil;
 import com.liferay.portal.model.ServiceComponent;
-
-import java.io.StringReader;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-
-import org.dom4j.Document;
-import org.dom4j.DocumentException;
-import org.dom4j.Element;
-import org.dom4j.io.SAXReader;
 
 /**
  * <a href="ServiceComponentImpl.java.html"><b><i>View Source</i></b></a>
@@ -78,9 +75,7 @@ public class ServiceComponentImpl
 
 	private Element _getDataEl() throws DocumentException {
 		if (_dataEl == null) {
-			SAXReader reader = new SAXReader();
-
-			Document doc = reader.read(new StringReader(getData()));
+			Document doc = SAXReaderUtil.read(getData());
 
 			_dataEl = doc.getRootElement();
 		}

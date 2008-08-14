@@ -168,9 +168,7 @@ configurationActionURL.setParameter("portletResource", portletResource);
 						for (int i = 0; i < results.size(); i++) {
 							String assetEntry = (String)results.get(i);
 
-							SAXReader reader = new SAXReader();
-
-							Document doc = reader.read(new StringReader(assetEntry));
+							Document doc = SAXReaderUtil.read(assetEntry);
 
 							Element root = doc.getRootElement();
 

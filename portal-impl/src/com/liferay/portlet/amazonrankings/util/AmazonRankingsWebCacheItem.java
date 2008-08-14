@@ -26,6 +26,9 @@ import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.Time;
 import com.liferay.portal.kernel.webcache.WebCacheException;
 import com.liferay.portal.kernel.webcache.WebCacheItem;
+import com.liferay.portal.kernel.xml.Document;
+import com.liferay.portal.kernel.xml.Element;
+import com.liferay.portal.kernel.xml.SAXReaderUtil;
 import com.liferay.portlet.amazonrankings.model.AmazonRankings;
 
 import java.net.URL;
@@ -36,10 +39,6 @@ import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Locale;
-
-import org.dom4j.Document;
-import org.dom4j.Element;
-import org.dom4j.io.SAXReader;
 
 /**
  * <a href="AmazonRankingsWebCacheItem.java.html"><b><i>View Source</i></b></a>
@@ -64,9 +63,7 @@ public class AmazonRankingsWebCacheItem implements WebCacheItem {
 					AmazonRankingsUtil.getAmazonKey() + "&AsinSearch=" + isbn +
 						"&type=heavy&f=xml");
 
-			SAXReader reader = new SAXReader();
-
-			Document doc = reader.read(url);
+			Document doc = SAXReaderUtil.read(url);
 
 			Iterator<Element> itr = doc.getRootElement().elements(
 				"ErrorMsg").iterator();
@@ -79,7 +76,7 @@ public class AmazonRankingsWebCacheItem implements WebCacheItem {
 				throw new WebCacheException(isbn + " " + errorMsg);
 			}
 
-			Element details = (Element)doc.getRootElement().elements(
+			Element details = doc.getRootElement().elements(
 				"Details").iterator().next();
 
 			String productName = details.elementText("ProductName");

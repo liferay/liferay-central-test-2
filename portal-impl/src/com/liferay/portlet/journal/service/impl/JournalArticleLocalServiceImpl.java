@@ -45,6 +45,12 @@ import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
+import com.liferay.portal.kernel.xml.Document;
+import com.liferay.portal.kernel.xml.DocumentException;
+import com.liferay.portal.kernel.xml.Element;
+import com.liferay.portal.kernel.xml.Node;
+import com.liferay.portal.kernel.xml.SAXReaderUtil;
+import com.liferay.portal.kernel.xml.XPath;
 import com.liferay.portal.model.Company;
 import com.liferay.portal.model.Image;
 import com.liferay.portal.model.ResourceConstants;
@@ -52,7 +58,6 @@ import com.liferay.portal.model.User;
 import com.liferay.portal.service.ImageLocalServiceUtil;
 import com.liferay.portal.servlet.filters.layoutcache.LayoutCacheUtil;
 import com.liferay.portal.theme.ThemeDisplay;
-import com.liferay.portal.util.DocumentUtil;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PortletKeys;
 import com.liferay.portal.util.PropsKeys;
@@ -84,11 +89,9 @@ import com.liferay.portlet.journal.util.JournalUtil;
 import com.liferay.portlet.journalcontent.util.JournalContentUtil;
 import com.liferay.util.LocalizationUtil;
 import com.liferay.util.MathUtil;
-import com.liferay.util.xml.XMLFormatter;
 
 import java.io.File;
 import java.io.IOException;
-import java.io.StringReader;
 
 import java.util.Date;
 import java.util.HashSet;
@@ -102,14 +105,6 @@ import javax.portlet.PortletPreferences;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-
-import org.dom4j.Document;
-import org.dom4j.DocumentException;
-import org.dom4j.DocumentFactory;
-import org.dom4j.DocumentHelper;
-import org.dom4j.Element;
-import org.dom4j.XPath;
-import org.dom4j.io.SAXReader;
 
 /**
  * <a href="JournalArticleLocalServiceImpl.java.html"><b><i>View Source</i></b>
@@ -1090,16 +1085,14 @@ public class JournalArticleLocalServiceImpl
 			Element root = null;
 
 			if (article.isTemplateDriven()) {
-				SAXReader reader = new SAXReader();
-
-				doc = reader.read(new StringReader(xml));
+				doc = SAXReaderUtil.read(xml);
 
 				root = doc.getRootElement();
 
 				Document request = null;
 
 				if (Validator.isNotNull(xmlRequest)) {
-					request = reader.read(new StringReader(xmlRequest));
+					request = SAXReaderUtil.read(xmlRequest);
 				}
 
 				List<Element> pages = root.elements("page");
@@ -1114,16 +1107,14 @@ public class JournalArticleLocalServiceImpl
 					Element pageEl = null;
 
 					if (Validator.isNotNull(targetPage)) {
-						XPath xpathSelector = DocumentHelper.createXPath(
+						XPath xpathSelector = SAXReaderUtil.createXPath(
 							"/root/page[@id = '" + targetPage + "']");
 
 						pageEl = (Element)xpathSelector.selectSingleNode(doc);
 					}
 
-					DocumentFactory docFactory = DocumentFactory.getInstance();
-
 					if (pageEl != null) {
-						doc = docFactory.createDocument(pageEl);
+						doc = SAXReaderUtil.createDocument(pageEl);
 
 						root = doc.getRootElement();
 
@@ -1136,7 +1127,7 @@ public class JournalArticleLocalServiceImpl
 
 						pageEl = pages.get(page - 1);
 
-						doc = docFactory.createDocument(pageEl);
+						doc = SAXReaderUtil.createDocument(pageEl);
 
 						root = doc.getRootElement();
 
@@ -1846,10 +1837,8 @@ public class JournalArticleLocalServiceImpl
 
 		String content = GetterUtil.getString(article.getContent());
 
-		SAXReader reader = new SAXReader();
-
-		Document contentDoc = reader.read(new StringReader(content));
-		Document xsdDoc = reader.read(new StringReader(structure.getXsd()));
+		Document contentDoc = SAXReaderUtil.read(content);
+		Document xsdDoc = SAXReaderUtil.read(structure.getXsd());
 
 		try {
 			checkStructure(contentDoc, xsdDoc.getRootElement());
@@ -1872,7 +1861,7 @@ public class JournalArticleLocalServiceImpl
 	protected void checkStructure(Document contentDoc, Element root)
 		throws PortalException {
 
-		for (Element el : (List<Element>)root.elements()) {
+		for (Element el : root.elements()) {
 			checkStructureField(el, contentDoc);
 
 			checkStructure(contentDoc, el);
@@ -1908,7 +1897,7 @@ public class JournalArticleLocalServiceImpl
 		for (int i = 0; i < elPathNames.length; i++) {
 			boolean foundEl = false;
 
-			for (Element tempEl : (List<Element>)contentEl.elements()) {
+			for (Element tempEl : contentEl.elements()) {
 				if (elPathNames[i].equals(
 						tempEl.attributeValue("name", StringPool.BLANK))) {
 
@@ -1936,15 +1925,16 @@ public class JournalArticleLocalServiceImpl
 			JournalArticle oldArticle, JournalArticle newArticle)
 		throws Exception {
 
-		Document contentDoc = DocumentUtil.readDocumentFromXML(
-			oldArticle.getContent());
+		Document contentDoc = SAXReaderUtil.read(oldArticle.getContent());
 
-		XPath xpathSelector = DocumentHelper.createXPath(
+		XPath xpathSelector = SAXReaderUtil.createXPath(
 			"//dynamic-element[@type='image']");
 
-		List<Element> imageEls = xpathSelector.selectNodes(contentDoc);
+		List<Node> imageNodes = xpathSelector.selectNodes(contentDoc);
 
-		for (Element imageEl : imageEls) {
+		for (Node imageNode : imageNodes) {
+			Element imageEl = (Element)imageNode;
+
 			String name = imageEl.attributeValue("name");
 
 			List<Element> dynamicContentEls = imageEl.elements(
@@ -1981,7 +1971,7 @@ public class JournalArticleLocalServiceImpl
 			}
 		}
 
-		newArticle.setContent(XMLFormatter.toString(contentDoc));
+		newArticle.setContent(contentDoc.formattedString());
 	}
 
 	protected String format(
@@ -1991,12 +1981,10 @@ public class JournalArticleLocalServiceImpl
 		throws PortalException, SystemException {
 
 		if (Validator.isNotNull(structureId)) {
-			SAXReader reader = new SAXReader();
-
 			Document doc = null;
 
 			try {
-				doc = reader.read(new StringReader(content));
+				doc = SAXReaderUtil.read(content);
 
 				Element root = doc.getRootElement();
 
@@ -2024,7 +2012,7 @@ public class JournalArticleLocalServiceImpl
 			boolean incrementVersion, Element root, Map<String, byte[]> images)
 		throws PortalException, SystemException {
 
-		for (Element el : (List<Element>)root.elements()) {
+		for (Element el : root.elements()) {
 			String elName = el.attributeValue("name", StringPool.BLANK);
 			String elType = el.attributeValue("type", StringPool.BLANK);
 

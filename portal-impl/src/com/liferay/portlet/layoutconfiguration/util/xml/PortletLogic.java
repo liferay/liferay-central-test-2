@@ -23,10 +23,11 @@
 package com.liferay.portlet.layoutconfiguration.util.xml;
 
 import com.liferay.portal.kernel.util.Validator;
+import com.liferay.portal.kernel.xml.Document;
+import com.liferay.portal.kernel.xml.Element;
+import com.liferay.portal.kernel.xml.SAXReaderUtil;
 import com.liferay.portal.model.PortletConstants;
 import com.liferay.portlet.layoutconfiguration.util.RuntimePortletUtil;
-
-import java.io.StringReader;
 
 import javax.portlet.RenderRequest;
 import javax.portlet.RenderResponse;
@@ -34,10 +35,6 @@ import javax.portlet.RenderResponse;
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
-import org.dom4j.Document;
-import org.dom4j.Element;
-import org.dom4j.io.SAXReader;
 
 /**
  * <a href="PortletLogic.java.html"><b><i>View Source</i></b></a>
@@ -74,9 +71,7 @@ public class PortletLogic extends RuntimeLogic {
 	}
 
 	public void processXML(StringBuilder sb, String xml) throws Exception {
-		SAXReader reader = new SAXReader();
-
-		Document doc = reader.read(new StringReader(xml));
+		Document doc = SAXReaderUtil.read(xml);
 
 		Element root = doc.getRootElement();
 

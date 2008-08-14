@@ -25,6 +25,9 @@
 <%@ include file="/html/portlet/init.jsp" %>
 
 <%@ page import="com.liferay.portal.kernel.search.Hits" %>
+<%@ page import="com.liferay.portal.kernel.xml.Document" %>
+<%@ page import="com.liferay.portal.kernel.xml.Element" %>
+<%@ page import="com.liferay.portal.kernel.xml.SAXReaderUtil" %>
 <%@ page import="com.liferay.portlet.PortalPreferences" %>
 <%@ page import="com.liferay.portlet.blogs.model.BlogsEntry" %>
 <%@ page import="com.liferay.portlet.blogs.service.BlogsEntryLocalServiceUtil" %>
@@ -90,10 +93,6 @@
 <%@ page import="com.liferay.portlet.wiki.util.WikiCacheUtil" %>
 <%@ page import="com.liferay.portlet.wiki.util.WikiUtil" %>
 <%@ page import="com.liferay.util.xml.DocUtil" %>
-
-<%@ page import="org.dom4j.io.SAXReader" %>
-<%@ page import="org.dom4j.Document" %>
-<%@ page import="org.dom4j.Element" %>
 
 <%@ page import="java.io.StringReader" %>
 

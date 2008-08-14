@@ -23,6 +23,8 @@
 package com.liferay.portlet.directory.util;
 
 import com.liferay.portal.kernel.search.SearchException;
+import com.liferay.portal.kernel.xml.Document;
+import com.liferay.portal.kernel.xml.Element;
 import com.liferay.portal.model.User;
 import com.liferay.portal.search.BaseOpenSearchImpl;
 import com.liferay.portal.service.UserLocalServiceUtil;
@@ -40,8 +42,6 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-
-import org.dom4j.Element;
 
 /**
  * <a href="DirectoryOpenSearchImpl.java.html"><b><i>View Source</i></b></a>
@@ -88,7 +88,7 @@ public class DirectoryOpenSearchImpl extends BaseOpenSearchImpl {
 			keywords, startPage, itemsPerPage, total, start,
 			"Liferay Directory Search: " + keywords, SEARCH_PATH, themeDisplay);
 
-		org.dom4j.Document doc = (org.dom4j.Document)values[0];
+		Document doc = (Document)values[0];
 		Element root = (Element)values[1];
 
 		for (User user : results) {

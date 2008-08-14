@@ -40,9 +40,7 @@ request.setAttribute("view.jsp-results", results);
 for (int assetIndex = 0; assetIndex < results.size(); assetIndex++) {
 	String assetEntry = (String)results.get(assetIndex);
 
-	SAXReader reader = new SAXReader();
-
-	Document assetDoc = reader.read(new StringReader(assetEntry));
+	Document assetDoc = SAXReaderUtil.read(assetEntry);
 
 	Element root = assetDoc.getRootElement();
 

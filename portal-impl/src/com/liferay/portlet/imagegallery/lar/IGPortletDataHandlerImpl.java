@@ -32,9 +32,11 @@ import com.liferay.portal.kernel.lar.PortletDataHandlerControl;
 import com.liferay.portal.kernel.lar.PortletDataHandlerKeys;
 import com.liferay.portal.kernel.util.FileUtil;
 import com.liferay.portal.kernel.util.StringPool;
+import com.liferay.portal.kernel.xml.Document;
+import com.liferay.portal.kernel.xml.Element;
+import com.liferay.portal.kernel.xml.SAXReaderUtil;
 import com.liferay.portal.model.Image;
 import com.liferay.portal.service.persistence.ImageUtil;
-import com.liferay.portal.util.DocumentUtil;
 import com.liferay.portal.util.PortletKeys;
 import com.liferay.portlet.imagegallery.NoSuchFolderException;
 import com.liferay.portlet.imagegallery.NoSuchImageException;
@@ -47,7 +49,6 @@ import com.liferay.portlet.imagegallery.service.persistence.IGFolderUtil;
 import com.liferay.portlet.imagegallery.service.persistence.IGImageFinderUtil;
 import com.liferay.portlet.imagegallery.service.persistence.IGImageUtil;
 import com.liferay.util.MapUtil;
-import com.liferay.util.xml.XMLFormatter;
 
 import java.io.File;
 
@@ -59,10 +60,6 @@ import javax.portlet.PortletPreferences;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-
-import org.dom4j.Document;
-import org.dom4j.DocumentHelper;
-import org.dom4j.Element;
 
 /**
  * <a href="IGPortletDataHandlerImpl.java.html"><b><i>View Source</i></b></a>
@@ -274,7 +271,7 @@ public class IGPortletDataHandlerImpl implements PortletDataHandler {
 		throws PortletDataException {
 
 		try {
-			Document doc = DocumentHelper.createDocument();
+			Document doc = SAXReaderUtil.createDocument();
 
 			Element root = doc.addElement("image-gallery");
 
@@ -290,7 +287,7 @@ public class IGPortletDataHandlerImpl implements PortletDataHandler {
 				exportFolder(context, foldersEl, imagesEl, folder);
 			}
 
-			return XMLFormatter.toString(doc);
+			return doc.formattedString();
 		}
 		catch (Exception e) {
 			throw new PortletDataException(e);
@@ -311,7 +308,7 @@ public class IGPortletDataHandlerImpl implements PortletDataHandler {
 		throws PortletDataException {
 
 		try {
-			Document doc = DocumentUtil.readDocumentFromXML(data);
+			Document doc = SAXReaderUtil.read(data);
 
 			Element root = doc.getRootElement();
 

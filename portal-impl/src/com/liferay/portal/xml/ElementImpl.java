@@ -31,9 +31,9 @@ import com.liferay.portal.kernel.xml.Node;
 import com.liferay.portal.kernel.xml.QName;
 import com.liferay.portal.kernel.xml.Text;
 
-import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 
 /**
  * <a href="ElementImpl.java.html"><b><i>View Source</i></b></a>
@@ -106,12 +106,22 @@ public class ElementImpl extends BranchImpl implements Element {
 		return new ElementImpl(_element.addNamespace(prefix, uri));
 	}
 
+	public Element addProcessingInstruction(
+		String target, Map<String, String> data) {
+
+		return new ElementImpl(_element.addProcessingInstruction(target, data));
+	}
+
+	public Element addProcessingInstruction(String target, String data) {
+		return new ElementImpl(_element.addProcessingInstruction(target, data));
+	}
+
 	public Element addText(String text) {
 		return new ElementImpl(_element.addText(text));
 	}
 
 	public List<Namespace> additionalNamespaces() {
-		return toNewNamespaces(_element.additionalNamespaces());
+		return SAXReaderImpl.toNewNamespaces(_element.additionalNamespaces());
 	}
 
 	public void appendAttributes(Element element) {
@@ -186,7 +196,7 @@ public class ElementImpl extends BranchImpl implements Element {
 	}
 
 	public List<Attribute> attributes() {
-		return toNewAttributes(_element.attributes());
+		return SAXReaderImpl.toNewAttributes(_element.attributes());
 	}
 
 	public Element createCopy() {
@@ -205,17 +215,32 @@ public class ElementImpl extends BranchImpl implements Element {
 	}
 
 	public List<Namespace> declaredNamespaces() {
-		return toNewNamespaces(_element.declaredNamespaces());
+		return SAXReaderImpl.toNewNamespaces(_element.declaredNamespaces());
 	}
 
 	public Element element(QName qName) {
 		QNameImpl qNameImpl = (QNameImpl)qName;
 
-		return new ElementImpl(_element.element(qNameImpl.getWrappedQName()));
+		org.dom4j.Element element = _element.element(
+			qNameImpl.getWrappedQName());
+
+		if (element == null) {
+			return null;
+		}
+		else {
+			return new ElementImpl(element);
+		}
 	}
 
 	public Element element(String name) {
-		return new ElementImpl(_element.element(name));
+		org.dom4j.Element element = _element.element(name);
+
+		if (element == null) {
+			return null;
+		}
+		else {
+			return new ElementImpl(element);
+		}
 	}
 
 	public Iterator<Element> elementIterator() {
@@ -251,17 +276,18 @@ public class ElementImpl extends BranchImpl implements Element {
 	}
 
 	public List<Element> elements() {
-		return toNewElements(_element.elements());
+		return SAXReaderImpl.toNewElements(_element.elements());
 	}
 
 	public List<Element> elements(QName qName) {
 		QNameImpl qNameImpl = (QNameImpl)qName;
 
-		return toNewElements(_element.elements(qNameImpl.getWrappedQName()));
+		return SAXReaderImpl.toNewElements(
+			_element.elements(qNameImpl.getWrappedQName()));
 	}
 
 	public List<Element> elements(String name) {
-		return toNewElements(_element.elements(name));
+		return SAXReaderImpl.toNewElements(_element.elements(name));
 	}
 
 	public Object getData() {
@@ -310,7 +336,7 @@ public class ElementImpl extends BranchImpl implements Element {
 	}
 
 	public List<Namespace> getNamespacesForURI(String uri) {
-		return toNewNamespaces(_element.getNamespacesForURI(uri));
+		return SAXReaderImpl.toNewNamespaces(_element.getNamespacesForURI(uri));
 	}
 
 	public QName getQName() {
@@ -401,7 +427,7 @@ public class ElementImpl extends BranchImpl implements Element {
 	}
 
 	public void setAttributes(List<Attribute> attributes) {
-		_element.setAttributes(toOldAttributes(attributes));
+		_element.setAttributes(SAXReaderImpl.toOldAttributes(attributes));
 	}
 
 	public void setData(Object data) {
@@ -412,57 +438,6 @@ public class ElementImpl extends BranchImpl implements Element {
 		QNameImpl qNameImpl = (QNameImpl)qName;
 
 		_element.setQName(qNameImpl.getWrappedQName());
-	}
-
-	protected List<Attribute> toNewAttributes(
-		List<org.dom4j.Attribute> oldAttributes) {
-
-		List<Attribute> newAttributes = new ArrayList<Attribute>(
-			oldAttributes.size());
-
-		for (org.dom4j.Attribute oldAttribute : oldAttributes) {
-			newAttributes.add(new AttributeImpl(oldAttribute));
-		}
-
-		return newAttributes;
-	}
-
-	protected List<Element> toNewElements(List<org.dom4j.Element> oldElements) {
-		List<Element> newElements = new ArrayList<Element>(oldElements.size());
-
-		for (org.dom4j.Element oldElement : oldElements) {
-			newElements.add(new ElementImpl(oldElement));
-		}
-
-		return newElements;
-	}
-
-	protected List<Namespace> toNewNamespaces(
-		List<org.dom4j.Namespace> oldNamespaces) {
-
-		List<Namespace> newNamespaces = new ArrayList<Namespace>(
-			oldNamespaces.size());
-
-		for (org.dom4j.Namespace oldNamespace : oldNamespaces) {
-			newNamespaces.add(new NamespaceImpl(oldNamespace));
-		}
-
-		return newNamespaces;
-	}
-
-	protected List<org.dom4j.Attribute> toOldAttributes(
-		List<Attribute> newAttributes) {
-
-		List<org.dom4j.Attribute> oldAttributes =
-			new ArrayList<org.dom4j.Attribute>(newAttributes.size());
-
-		for (Attribute newAttribute : newAttributes) {
-			AttributeImpl newAttributeImpl = (AttributeImpl)newAttribute;
-
-			oldAttributes.add(newAttributeImpl.getWrappedAttribute());
-		}
-
-		return oldAttributes;
 	}
 
 	private org.dom4j.Element _element;

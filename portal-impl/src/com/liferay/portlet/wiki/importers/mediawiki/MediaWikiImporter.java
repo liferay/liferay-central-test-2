@@ -33,6 +33,10 @@ import com.liferay.portal.kernel.util.ProgressTrackerThreadLocal;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
+import com.liferay.portal.kernel.xml.Document;
+import com.liferay.portal.kernel.xml.DocumentException;
+import com.liferay.portal.kernel.xml.Element;
+import com.liferay.portal.kernel.xml.SAXReaderUtil;
 import com.liferay.portal.kernel.zip.ZipReader;
 import com.liferay.portal.model.User;
 import com.liferay.portal.service.UserLocalServiceUtil;
@@ -70,11 +74,6 @@ import java.util.regex.Pattern;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
-import org.dom4j.Document;
-import org.dom4j.DocumentException;
-import org.dom4j.Element;
-import org.dom4j.io.SAXReader;
-
 /**
  * <a href="MediaWikiImporter.java.html"><b><i>View Source</i></b></a>
  *
@@ -102,9 +101,7 @@ public class MediaWikiImporter implements WikiImporter {
 		File imagesFile = files[2];
 
 		try {
-			SAXReader saxReader = new SAXReader();
-
-			Document doc = saxReader.read(pagesFile);
+			Document doc = SAXReaderUtil.read(pagesFile);
 
 			Map<String, String> usersMap = readUsersFile(usersFile);
 

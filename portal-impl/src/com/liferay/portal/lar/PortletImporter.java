@@ -38,6 +38,10 @@ import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.ObjectValuePair;
 import com.liferay.portal.kernel.util.ReleaseInfo;
 import com.liferay.portal.kernel.util.StringUtil;
+import com.liferay.portal.kernel.xml.Document;
+import com.liferay.portal.kernel.xml.DocumentException;
+import com.liferay.portal.kernel.xml.Element;
+import com.liferay.portal.kernel.xml.SAXReaderUtil;
 import com.liferay.portal.kernel.zip.ZipReader;
 import com.liferay.portal.model.Layout;
 import com.liferay.portal.model.Portlet;
@@ -52,7 +56,6 @@ import com.liferay.portal.service.PortletPreferencesLocalServiceUtil;
 import com.liferay.portal.service.UserLocalServiceUtil;
 import com.liferay.portal.service.persistence.PortletPreferencesUtil;
 import com.liferay.portal.service.persistence.UserUtil;
-import com.liferay.portal.util.DocumentUtil;
 import com.liferay.portal.util.PortletKeys;
 import com.liferay.portlet.PortletPreferencesImpl;
 import com.liferay.portlet.PortletPreferencesSerializer;
@@ -70,10 +73,6 @@ import java.util.Map;
 import org.apache.commons.lang.time.StopWatch;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-
-import org.dom4j.Document;
-import org.dom4j.DocumentException;
-import org.dom4j.Element;
 
 /**
  * <a href="PortletImporter.java.html"><b><i>View Source</i></b></a>
@@ -139,7 +138,7 @@ public class PortletImporter {
 		String xml = context.getZipEntryAsString("/manifest.xml");
 
 		try {
-			Document doc = DocumentUtil.readDocumentFromXML(xml);
+			Document doc = SAXReaderUtil.read(xml);
 
 			root = doc.getRootElement();
 		}
@@ -210,7 +209,7 @@ public class PortletImporter {
 		Element portletEl = null;
 
 		try {
-			Document portletDoc = DocumentUtil.readDocumentFromXML(
+			Document portletDoc = SAXReaderUtil.read(
 				context.getZipEntryAsString(
 					portletRefEl.attributeValue("path")));
 
@@ -431,8 +430,7 @@ public class PortletImporter {
 				try {
 					preferences = context.getZipEntryAsString(path);
 
-					Document prefsDoc = DocumentUtil.readDocumentFromXML(
-						preferences);
+					Document prefsDoc = SAXReaderUtil.read(preferences);
 
 					el = prefsDoc.getRootElement();
 				}
@@ -533,7 +531,7 @@ public class PortletImporter {
 			String xml = context.getZipEntryAsString(
 				context.getImportRootPath() + "/comments.xml");
 
-			Document doc = DocumentUtil.readDocumentFromXML(xml);
+			Document doc = SAXReaderUtil.read(xml);
 
 			Element root = doc.getRootElement();
 
@@ -574,7 +572,7 @@ public class PortletImporter {
 			String xml = context.getZipEntryAsString(
 				context.getImportRootPath() + "/ratings.xml");
 
-			Document doc = DocumentUtil.readDocumentFromXML(xml);
+			Document doc = SAXReaderUtil.read(xml);
 
 			Element root = doc.getRootElement();
 
@@ -616,7 +614,7 @@ public class PortletImporter {
 			String xml = context.getZipEntryAsString(
 				context.getImportRootPath() + "/tags.xml");
 
-			Document doc = DocumentUtil.readDocumentFromXML(xml);
+			Document doc = SAXReaderUtil.read(xml);
 
 			Element root = doc.getRootElement();
 

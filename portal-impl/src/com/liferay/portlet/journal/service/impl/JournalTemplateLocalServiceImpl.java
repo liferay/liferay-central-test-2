@@ -59,8 +59,6 @@ import java.util.List;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
-import org.dom4j.DocumentException;
-
 /**
  * <a href="JournalTemplateLocalServiceImpl.java.html"><b><i>View Source</i></b>
  * </a>
@@ -159,10 +157,7 @@ public class JournalTemplateLocalServiceImpl
 				}
 			}
 		}
-		catch (DocumentException de) {
-			throw new TemplateXslException();
-		}
-		catch (IOException ioe) {
+		catch (Exception e) {
 			throw new TemplateXslException();
 		}
 
@@ -573,10 +568,7 @@ public class JournalTemplateLocalServiceImpl
 				}
 			}
 		}
-		catch (DocumentException de) {
-			throw new TemplateXslException();
-		}
-		catch (IOException ioe) {
+		catch (Exception e) {
 			throw new TemplateXslException();
 		}
 

@@ -28,16 +28,17 @@ import com.liferay.portal.kernel.util.ListUtil;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;
+import com.liferay.portal.kernel.xml.Document;
+import com.liferay.portal.kernel.xml.Element;
+import com.liferay.portal.kernel.xml.SAXReaderUtil;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.WebKeys;
 import com.liferay.portlet.PortletPreferencesFactoryUtil;
 import com.liferay.portlet.tags.model.TagsAsset;
 import com.liferay.portlet.tags.service.TagsAssetLocalServiceUtil;
-import com.liferay.util.xml.XMLFormatter;
 
 import java.io.IOException;
-import java.io.StringReader;
 
 import java.util.HashMap;
 import java.util.Iterator;
@@ -53,11 +54,6 @@ import javax.servlet.http.HttpSession;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-
-import org.dom4j.Document;
-import org.dom4j.DocumentFactory;
-import org.dom4j.Element;
-import org.dom4j.io.SAXReader;
 
 /**
  * <a href="AssetPublisherUtil.java.html"><b><i>View Source</i></b></a>
@@ -158,9 +154,7 @@ public class AssetPublisherUtil {
 		while (itr.hasNext()) {
 			String assetEntry = itr.next();
 
-			SAXReader reader = new SAXReader();
-
-			Document doc = reader.read(new StringReader(assetEntry));
+			Document doc = SAXReaderUtil.read(assetEntry);
 
 			Element root = doc.getRootElement();
 
@@ -183,16 +177,14 @@ public class AssetPublisherUtil {
 		String xml = null;
 
 		try {
-			DocumentFactory docFactory = DocumentFactory.getInstance();
-
-			Document doc = docFactory.createDocument(StringPool.UTF8);
+			Document doc = SAXReaderUtil.createDocument(StringPool.UTF8);
 
 			Element asset = doc.addElement("asset");
 
 			asset.addElement("asset-type").addText(assetType);
 			asset.addElement("asset-id").addText(String.valueOf(assetId));
 
-			xml = XMLFormatter.toString(doc, StringPool.BLANK);
+			xml = doc.formattedString(StringPool.BLANK);
 		}
 		catch (IOException ioe) {
 			if (_log.isWarnEnabled()) {

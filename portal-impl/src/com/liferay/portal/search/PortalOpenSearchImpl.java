@@ -32,6 +32,7 @@ import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.InstancePool;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;
+import com.liferay.portal.kernel.xml.Element;
 import com.liferay.portal.model.Layout;
 import com.liferay.portal.model.Portlet;
 import com.liferay.portal.service.CompanyLocalServiceUtil;
@@ -52,8 +53,6 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-
-import org.dom4j.Element;
 
 /**
  * <a href="PortalOpenSearchImpl.java.html"><b><i>View Source</i></b></a>
@@ -88,7 +87,8 @@ public class PortalOpenSearchImpl extends BaseOpenSearchImpl {
 				"Liferay Portal Search: " + keywords, SEARCH_PATH,
 				themeDisplay);
 
-			org.dom4j.Document doc = (org.dom4j.Document)values[0];
+			com.liferay.portal.kernel.xml.Document doc =
+				(com.liferay.portal.kernel.xml.Document)values[0];
 			Element root = (Element)values[1];
 
 			for (int i = 0; i < results.getDocs().length; i++) {

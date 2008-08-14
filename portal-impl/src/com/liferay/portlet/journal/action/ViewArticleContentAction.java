@@ -30,6 +30,9 @@ import com.liferay.portal.kernel.util.FileUtil;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;
+import com.liferay.portal.kernel.xml.Document;
+import com.liferay.portal.kernel.xml.Element;
+import com.liferay.portal.kernel.xml.SAXReaderUtil;
 import com.liferay.portal.model.User;
 import com.liferay.portal.service.ImageLocalServiceUtil;
 import com.liferay.portal.theme.ThemeDisplay;
@@ -46,7 +49,6 @@ import com.liferay.portlet.journal.util.JournalUtil;
 import com.liferay.util.PwdGenerator;
 
 import java.io.File;
-import java.io.StringReader;
 
 import java.util.Date;
 import java.util.Iterator;
@@ -59,10 +61,6 @@ import org.apache.struts.action.Action;
 import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
-
-import org.dom4j.Document;
-import org.dom4j.Element;
-import org.dom4j.io.SAXReader;
 
 /**
  * <a href="ViewArticleContentAction.java.html"><b><i>View Source</i></b></a>
@@ -112,9 +110,7 @@ public class ViewArticleContentAction extends Action {
 
 				String xml = ParamUtil.getString(uploadRequest, "xml");
 
-				SAXReader reader = new SAXReader();
-
-				Document doc = reader.read(new StringReader(xml));
+				Document doc = SAXReaderUtil.read(xml);
 
 				Element root = doc.getRootElement();
 

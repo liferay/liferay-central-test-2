@@ -23,14 +23,12 @@
 package com.liferay.portlet;
 
 import com.liferay.portal.SystemException;
-import com.liferay.portal.kernel.util.ByteArrayMaker;
 import com.liferay.portal.kernel.util.GetterUtil;
-import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;
-import com.liferay.portal.xml.ElementImpl;
-
-import java.io.IOException;
-import java.io.StringReader;
+import com.liferay.portal.kernel.xml.Document;
+import com.liferay.portal.kernel.xml.DocumentException;
+import com.liferay.portal.kernel.xml.Element;
+import com.liferay.portal.kernel.xml.SAXReaderUtil;
 
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -38,14 +36,6 @@ import java.util.List;
 import java.util.Map;
 
 import javax.portlet.PortletPreferences;
-
-import org.dom4j.Document;
-import org.dom4j.DocumentException;
-import org.dom4j.DocumentFactory;
-import org.dom4j.Element;
-import org.dom4j.io.OutputFormat;
-import org.dom4j.io.SAXReader;
-import org.dom4j.io.XMLWriter;
 
 /**
  * <a href="PortletPreferencesSerializer.java.html"><b><i>View Source</i></b>
@@ -70,7 +60,7 @@ public class PortletPreferencesSerializer {
 		Map<String, Preference> preferences = prefs.getPreferences();
 
 		try {
-			Document doc = new SAXReader().read(new StringReader(xml));
+			Document doc = SAXReaderUtil.read(xml);
 
 			Element root = doc.getRootElement();
 
@@ -134,69 +124,50 @@ public class PortletPreferencesSerializer {
 		}
 	}
 
-	public static String toXML(PortletPreferencesImpl prefs)
-		throws SystemException {
+	public static String toXML(PortletPreferencesImpl prefs) {
+		Map<String, Preference> preferences = prefs.getPreferences();
 
-		try {
-			Map<String, Preference> preferences = prefs.getPreferences();
+		Element portletPreferences = SAXReaderUtil.createElement(
+			"portlet-preferences");
 
-			DocumentFactory docFactory = DocumentFactory.getInstance();
+		Iterator<Map.Entry<String, Preference>> itr =
+			preferences.entrySet().iterator();
 
-			Element portletPreferences =
-				docFactory.createElement("portlet-preferences");
+		while (itr.hasNext()) {
+			Map.Entry<String, Preference> entry = itr.next();
 
-			Iterator<Map.Entry<String, Preference>> itr =
-				preferences.entrySet().iterator();
+			Preference preference = entry.getValue();
 
-			while (itr.hasNext()) {
-				Map.Entry<String, Preference> entry = itr.next();
+			Element prefEl = SAXReaderUtil.createElement("preference");
 
-				Preference preference = entry.getValue();
+			Element nameEl = SAXReaderUtil.createElement("name");
 
-				Element prefEl = docFactory.createElement("preference");
+			nameEl.addText(preference.getName());
 
-				Element nameEl = docFactory.createElement("name");
+			prefEl.add(nameEl);
 
-				nameEl.addText(preference.getName());
+			String[] values = preference.getValues();
 
-				prefEl.add(nameEl);
+			for (int i = 0; i < values.length; i++) {
+				Element valueEl = SAXReaderUtil.createElement("value");
 
-				String[] values = preference.getValues();
+				valueEl.addText(values[i]);
 
-				for (int i = 0; i < values.length; i++) {
-					Element valueEl = docFactory.createElement("value");
-
-					valueEl.addText(values[i]);
-
-					prefEl.add(valueEl);
-				}
-
-				if (preference.isReadOnly()) {
-					Element valueEl = docFactory.createElement("read-only");
-
-					valueEl.addText("true");
-
-					prefEl.add(valueEl);
-				}
-
-				portletPreferences.add(prefEl);
+				prefEl.add(valueEl);
 			}
 
-			ByteArrayMaker bam = new ByteArrayMaker();
+			if (preference.isReadOnly()) {
+				Element valueEl = SAXReaderUtil.createElement("read-only");
 
-			XMLWriter writer = new XMLWriter(
-				bam, OutputFormat.createCompactFormat());
+				valueEl.addText("true");
 
-			ElementImpl portletPreferencesImpl =
-				(ElementImpl)portletPreferences;
+				prefEl.add(valueEl);
+			}
 
-			writer.write(portletPreferencesImpl.getWrappedElement());
-
-			return bam.toString(StringPool.UTF8);
+			portletPreferences.add(prefEl);
 		}
-		catch (IOException ioe) {
-			throw new SystemException(ioe);
-		}
+
+		return portletPreferences.asXML();
 	}
 
 }

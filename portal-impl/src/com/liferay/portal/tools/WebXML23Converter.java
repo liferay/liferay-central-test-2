@@ -25,14 +25,13 @@ package com.liferay.portal.tools;
 import com.liferay.portal.kernel.util.FileUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.StringUtil;
-import com.liferay.portal.util.DocumentUtil;
+import com.liferay.portal.kernel.xml.Document;
+import com.liferay.portal.kernel.xml.Element;
+import com.liferay.portal.kernel.xml.SAXReaderUtil;
 import com.liferay.portal.util.InitUtil;
 import com.liferay.util.xml.XMLFormatter;
 
 import java.util.Iterator;
-
-import org.dom4j.Document;
-import org.dom4j.Element;
 
 /**
  * <a href="WebXML23Converter.java.html"><b><i>View Source</i></b></a>
@@ -59,7 +58,7 @@ public class WebXML23Converter {
 		try {
 			String webXML24 = FileUtil.read(input);
 
-			Document doc = DocumentUtil.readDocumentFromXML(webXML24);
+			Document doc = SAXReaderUtil.read(webXML24);
 
 			Element root = doc.getRootElement();
 
@@ -92,7 +91,7 @@ public class WebXML23Converter {
 				}
 			}
 
-			String webXML23 = XMLFormatter.toString(doc);
+			String webXML23 = doc.formattedString();
 
 			int x = webXML23.indexOf("<web-app");
 			int y = webXML23.indexOf(">", x);

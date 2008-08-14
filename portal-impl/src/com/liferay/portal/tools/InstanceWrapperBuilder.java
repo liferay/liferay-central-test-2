@@ -39,10 +39,14 @@ import java.util.Iterator;
 import java.util.LinkedHashSet;
 import java.util.Set;
 
-import org.dom4j.Document;
-import org.dom4j.DocumentException;
-import org.dom4j.Element;
-import org.dom4j.io.SAXReader;
+
+import com.liferay.portal.kernel.xml.Document;
+import com.liferay.portal.kernel.xml.DocumentException;
+import com.liferay.portal.kernel.xml.Element;
+import com.liferay.portal.kernel.xml.SAXReaderUtil;
+import com.liferay.portal.kernel.xml.XPath;
+import com.liferay.portal.kernel.xml.QName;
+import com.liferay.portal.kernel.xml.Namespace;
 
 /**
  * <a href="InstanceWrapperBuilder.java.html"><b><i>View Source</i></b></a>
@@ -69,12 +73,10 @@ public class InstanceWrapperBuilder {
 		try {
 			File file = new File(xml);
 
-			SAXReader reader = new SAXReader();
-
 			Document doc = null;
 
 			try {
-				doc = reader.read(file);
+				doc = SAXReaderUtil.read(file);
 			}
 			catch (DocumentException de) {
 				de.printStackTrace();

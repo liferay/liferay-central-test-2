@@ -29,15 +29,14 @@ import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.UnicodeProperties;
 import com.liferay.portal.kernel.util.Validator;
+import com.liferay.portal.kernel.xml.Document;
+import com.liferay.portal.kernel.xml.Element;
+import com.liferay.portal.kernel.xml.SAXReaderUtil;
 import com.liferay.portal.model.Layout;
 import com.liferay.portal.service.LayoutLocalServiceUtil;
 import com.liferay.portal.theme.ThemeDisplay;
 
 import java.util.List;
-
-import org.dom4j.Document;
-import org.dom4j.DocumentHelper;
-import org.dom4j.Element;
 
 /**
  * <a href="SitemapUtil.java.html"><b><i>View Source</i></b></a>
@@ -51,7 +50,7 @@ public class SitemapUtil {
 			long groupId, boolean privateLayout, ThemeDisplay themeDisplay)
 		throws PortalException, SystemException {
 
-		Document doc = DocumentHelper.createDocument();
+		Document doc = SAXReaderUtil.createDocument();
 
 		doc.setXMLEncoding(StringPool.UTF8);
 

@@ -29,7 +29,6 @@ import com.liferay.portal.kernel.xml.Node;
 import java.io.IOException;
 import java.io.Writer;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -88,6 +87,17 @@ public class NodeImpl implements Node {
 		return _node.getName();
 	}
 
+	public Element getParent() {
+		org.dom4j.Element element = _node.getParent();
+
+		if (element == null) {
+			return null;
+		}
+		else {
+			return new ElementImpl(element);
+		}
+	}
+
 	public String getPath() {
 		return _node.getPath();
 	}
@@ -137,13 +147,13 @@ public class NodeImpl implements Node {
 	}
 
 	public List<Node> selectNodes(String xpathExpression) {
-		return toNewNodes(_node.selectNodes(xpathExpression));
+		return SAXReaderImpl.toNewNodes(_node.selectNodes(xpathExpression));
 	}
 
 	public List<Node> selectNodes(
 		String xpathExpression, String comparisonXPathExpression) {
 
-		return toNewNodes(
+		return SAXReaderImpl.toNewNodes(
 			_node.selectNodes(xpathExpression, comparisonXPathExpression));
 	}
 
@@ -151,7 +161,7 @@ public class NodeImpl implements Node {
 		String xpathExpression, String comparisonXPathExpression,
 		boolean removeDuplicates) {
 
-		return toNewNodes(
+		return SAXReaderImpl.toNewNodes(
 			_node.selectNodes(
 				xpathExpression, comparisonXPathExpression, removeDuplicates));
 	}
@@ -163,7 +173,7 @@ public class NodeImpl implements Node {
 			return null;
 		}
 		else if (obj instanceof List) {
-			return toNewNodes((List<org.dom4j.Node>)obj);
+			return SAXReaderImpl.toNewNodes((List<org.dom4j.Node>)obj);
 		}
 		else {
 			return obj;
@@ -199,29 +209,6 @@ public class NodeImpl implements Node {
 
 	public void write(Writer writer) throws IOException {
 		_node.write(writer);
-	}
-
-	protected List<Node> toNewNodes(List<org.dom4j.Node> oldNodes) {
-		List<Node> newNodes = new ArrayList<Node>(oldNodes.size());
-
-		for (org.dom4j.Node oldNode : oldNodes) {
-			newNodes.add(new NodeImpl(oldNode));
-		}
-
-		return newNodes;
-	}
-
-	protected List<org.dom4j.Node> toOldNodes(List<Node> newNodes) {
-		List<org.dom4j.Node> oldNodes = new ArrayList<org.dom4j.Node>(
-			newNodes.size());
-
-		for (Node newNode : newNodes) {
-			NodeImpl newNodeImpl = (NodeImpl)newNode;
-
-			oldNodes.add(newNodeImpl.getWrappedNode());
-		}
-
-		return oldNodes;
 	}
 
 	private org.dom4j.Node _node;

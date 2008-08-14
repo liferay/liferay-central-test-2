@@ -1,4 +1,3 @@
-<%
 /**
  * Copyright (c) 2000-2008 Liferay, Inc. All rights reserved.
  *
@@ -20,20 +19,33 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-%>
 
-<%@ include file="/html/portlet/init.jsp" %>
+package com.liferay.portal.kernel.xml;
 
-<%@ page import="com.liferay.portal.kernel.search.OpenSearch" %>
-<%@ page import="com.liferay.portal.kernel.search.SearchException" %>
-<%@ page import="com.liferay.portal.kernel.util.InstancePool" %>
-<%@ page import="com.liferay.portal.kernel.xml.Document" %>
-<%@ page import="com.liferay.portal.kernel.xml.Element" %>
-<%@ page import="com.liferay.portal.kernel.xml.SAXReaderUtil" %>
-<%@ page import="com.liferay.portal.search.OpenSearchUtil" %>
-<%@ page import="com.liferay.portlet.documentlibrary.model.DLFileEntry" %>
-<%@ page import="com.liferay.portlet.documentlibrary.service.DLFileEntryLocalServiceUtil" %>
+import java.util.Map;
 
-<%
-PortalPreferences portalPrefs = PortletPreferencesFactoryUtil.getPortalPreferences(request);
-%>
+/**
+ * <a href="ProcessingInstruction.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Brian Wing Shun Chan
+ *
+ */
+public interface ProcessingInstruction extends Node {
+
+	public String getTarget();
+
+	public String getText();
+
+	public String getValue(String name);
+
+	public Map<String, String> getValues();
+
+	public boolean removeValue(String name);
+
+	public void setTarget(String target);
+
+	public void setValue(String name, String value);
+
+	public void setValues(Map<String, String> data);
+
+}

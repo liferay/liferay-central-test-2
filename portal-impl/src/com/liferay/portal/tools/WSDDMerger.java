@@ -23,8 +23,11 @@
 package com.liferay.portal.tools;
 
 import com.liferay.portal.kernel.util.FileUtil;
+import com.liferay.portal.kernel.xml.Document;
+import com.liferay.portal.kernel.xml.DocumentException;
+import com.liferay.portal.kernel.xml.Element;
+import com.liferay.portal.kernel.xml.SAXReaderUtil;
 import com.liferay.portal.util.InitUtil;
-import com.liferay.util.xml.XMLFormatter;
 
 import java.io.File;
 import java.io.IOException;
@@ -33,11 +36,6 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
-
-import org.dom4j.Document;
-import org.dom4j.DocumentException;
-import org.dom4j.Element;
-import org.dom4j.io.SAXReader;
 
 /**
  * <a href="WSDDMerger.java.html"><b><i>View Source</i></b></a>
@@ -62,9 +60,7 @@ public class WSDDMerger {
 
 		File sourceFile = new File(source);
 
-		SAXReader reader = new SAXReader();
-
-		Document doc = reader.read(sourceFile);
+		Document doc = SAXReaderUtil.read(sourceFile);
 
 		Element root = doc.getRootElement();
 
@@ -78,9 +74,7 @@ public class WSDDMerger {
 
 		File destinationFile = new File(destination);
 
-		reader = new SAXReader();
-
-		doc = reader.read(destinationFile);
+		doc = SAXReaderUtil.read(destinationFile);
 
 		root = doc.getRootElement();
 
@@ -116,7 +110,7 @@ public class WSDDMerger {
 			root.add(service);
 		}
 
-		FileUtil.write(destination, XMLFormatter.toString(doc), true);
+		FileUtil.write(destination, doc.formattedString(), true);
 	}
 
 	public WSDDMerger(String source, String destination) {

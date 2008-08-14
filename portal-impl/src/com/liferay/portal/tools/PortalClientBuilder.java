@@ -22,15 +22,15 @@
 
 package com.liferay.portal.tools;
 
+import com.liferay.portal.kernel.xml.Document;
+import com.liferay.portal.kernel.xml.Element;
+import com.liferay.portal.kernel.xml.SAXReaderUtil;
+import com.liferay.portal.util.InitUtil;
 import com.liferay.util.ant.Wsdl2JavaTask;
 
 import java.io.File;
 
 import java.util.Iterator;
-
-import org.dom4j.Document;
-import org.dom4j.Element;
-import org.dom4j.io.SAXReader;
 
 /**
  * <a href="PortalClientBuilder.java.html"><b><i>View Source</i></b></a>
@@ -39,6 +39,10 @@ import org.dom4j.io.SAXReader;
  *
  */
 public class PortalClientBuilder {
+
+	static {
+		InitUtil.init();
+	}
 
 	public static void main(String[] args) {
 		if (args.length == 4) {
@@ -53,9 +57,7 @@ public class PortalClientBuilder {
 		String fileName, String outputDir, String mappingFile, String url) {
 
 		try {
-			SAXReader reader = new SAXReader();
-
-			Document doc = reader.read(new File(fileName));
+			Document doc = SAXReaderUtil.read(new File(fileName));
 
 			Element root = doc.getRootElement();
 

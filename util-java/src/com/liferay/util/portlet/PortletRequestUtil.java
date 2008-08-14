@@ -25,8 +25,10 @@ package com.liferay.util.portlet;
 import com.liferay.portal.kernel.portlet.LiferayWindowState;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;
+import com.liferay.portal.kernel.xml.Document;
+import com.liferay.portal.kernel.xml.Element;
+import com.liferay.portal.kernel.xml.SAXReaderUtil;
 import com.liferay.util.xml.DocUtil;
-import com.liferay.util.xml.XMLFormatter;
 
 import java.io.IOException;
 
@@ -43,10 +45,6 @@ import javax.portlet.RenderRequest;
 import javax.portlet.RenderResponse;
 import javax.portlet.WindowStateException;
 
-import org.dom4j.Document;
-import org.dom4j.DocumentHelper;
-import org.dom4j.Element;
-
 /**
  * <a href="PortletRequestUtil.java.html"><b><i>View Source</i></b></a>
  *
@@ -61,7 +59,7 @@ public class PortletRequestUtil {
 
 		String xml = null;
 
-		Document doc = DocumentHelper.createDocument();
+		Document doc = SAXReaderUtil.createDocument();
 
 		Element reqEl = doc.addElement("request");
 
@@ -190,7 +188,7 @@ public class PortletRequestUtil {
 		}
 
 		try {
-			xml = XMLFormatter.toString(doc);
+			xml = doc.formattedString();
 		}
 		catch (IOException ioe) {
 		}

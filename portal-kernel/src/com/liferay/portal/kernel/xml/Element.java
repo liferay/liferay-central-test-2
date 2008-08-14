@@ -24,6 +24,7 @@ package com.liferay.portal.kernel.xml;
 
 import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 
 /**
  * <a href="Element.java.html"><b><i>View Source</i></b></a>
@@ -56,6 +57,11 @@ public interface Element extends Branch {
 	public List<Namespace> additionalNamespaces();
 
 	public Element addNamespace(String prefix, String uri);
+
+	public Element addProcessingInstruction(
+		String target, Map<String, String> data);
+
+	public Element addProcessingInstruction(String target, String data);
 
 	public Element addText(String text);
 

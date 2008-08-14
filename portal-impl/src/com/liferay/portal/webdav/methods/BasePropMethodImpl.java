@@ -24,6 +24,10 @@ package com.liferay.portal.webdav.methods;
 
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Tuple;
+import com.liferay.portal.kernel.xml.Document;
+import com.liferay.portal.kernel.xml.Element;
+import com.liferay.portal.kernel.xml.Namespace;
+import com.liferay.portal.kernel.xml.SAXReaderUtil;
 import com.liferay.portal.model.WebDAVProps;
 import com.liferay.portal.service.WebDAVPropsLocalServiceUtil;
 import com.liferay.portal.webdav.Resource;
@@ -31,7 +35,6 @@ import com.liferay.portal.webdav.WebDAVRequest;
 import com.liferay.portal.webdav.WebDAVStorage;
 import com.liferay.portal.webdav.WebDAVUtil;
 import com.liferay.util.xml.DocUtil;
-import com.liferay.util.xml.XMLFormatter;
 
 import java.util.Arrays;
 import java.util.HashSet;
@@ -41,12 +44,6 @@ import java.util.Set;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-
-import org.dom4j.Document;
-import org.dom4j.DocumentFactory;
-import org.dom4j.Element;
-import org.dom4j.Namespace;
-import org.dom4j.QName;
 
 /**
  * <a href="BasePropMethodImpl.java.html"><b><i>View Source</i></b></a>
@@ -266,12 +263,10 @@ public abstract class BasePropMethodImpl implements Method {
 
 		long depth = WebDAVUtil.getDepth(webDavRequest.getHttpServletRequest());
 
-		DocumentFactory docFactory = DocumentFactory.getInstance();
+		Document doc = SAXReaderUtil.createDocument();
 
-		Document doc = docFactory.createDocument();
-
-		Element multistatus = docFactory.createElement(
-			new QName("multistatus", WebDAVUtil.DAV_URI));
+		Element multistatus = SAXReaderUtil.createElement(
+			SAXReaderUtil.createQName("multistatus", WebDAVUtil.DAV_URI));
 
 		doc.setRootElement(multistatus);
 
@@ -295,7 +290,7 @@ public abstract class BasePropMethodImpl implements Method {
 	}
 
 	protected String getResponseXML(Document doc) throws Exception {
-		String xml = XMLFormatter.toString(doc, StringPool.FOUR_SPACES);
+		String xml = doc.formattedString(StringPool.FOUR_SPACES);
 
 		if (_log.isDebugEnabled()) {
 			_log.debug("Response XML\n" + xml);

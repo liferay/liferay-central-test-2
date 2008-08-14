@@ -39,6 +39,8 @@ public interface Branch extends Node {
 
 	public void add(Node node);
 
+	public void add(ProcessingInstruction processingInstruction);
+
 	public Element addElement(QName qName);
 
 	public Element addElement(String name);
@@ -63,12 +65,25 @@ public interface Branch extends Node {
 
 	public void normalize();
 
+	public ProcessingInstruction processingInstruction(String target);
+
+	public List<ProcessingInstruction> processingInstructions();
+
+	public List<ProcessingInstruction> processingInstructions(String target);
+
 	public boolean remove(Comment comment);
 
 	public boolean remove(Element element);
 
 	public boolean remove(Node node);
 
+	public boolean remove(ProcessingInstruction processingInstruction);
+
+	public boolean removeProcessingInstruction(String target);
+
 	public void setContent(List<Node> content);
+
+	public void setProcessingInstructions(
+		List<ProcessingInstruction> processingInstructions);
 
 }

@@ -25,17 +25,14 @@ package com.liferay.portlet.journal.util;
 import com.liferay.portal.kernel.util.LocaleUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
-
-import java.io.StringReader;
+import com.liferay.portal.kernel.xml.Document;
+import com.liferay.portal.kernel.xml.Element;
+import com.liferay.portal.kernel.xml.SAXReaderUtil;
 
 import java.util.List;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-
-import org.dom4j.Document;
-import org.dom4j.Element;
-import org.dom4j.io.SAXReader;
 
 /**
  * <a href="LocaleTransformerListener.java.html"><b><i>View Source</i></b></a>
@@ -81,9 +78,7 @@ public class LocaleTransformerListener extends TransformerListener {
 		_requestedLocale = getLanguageId();
 
 		try {
-			SAXReader reader = new SAXReader();
-
-			Document doc = reader.read(new StringReader(xml));
+			Document doc = SAXReaderUtil.read(xml);
 
 			Element root = doc.getRootElement();
 

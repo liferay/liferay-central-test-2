@@ -26,6 +26,11 @@ import com.liferay.portal.kernel.language.LanguageUtil;
 import com.liferay.portal.kernel.util.ContentTypes;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.Validator;
+import com.liferay.portal.kernel.xml.Document;
+import com.liferay.portal.kernel.xml.Element;
+import com.liferay.portal.kernel.xml.Node;
+import com.liferay.portal.kernel.xml.ProcessingInstruction;
+import com.liferay.portal.kernel.xml.SAXReaderUtil;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.WebKeys;
@@ -36,8 +41,6 @@ import com.liferay.portlet.journal.service.JournalArticleLocalServiceUtil;
 import com.liferay.portlet.journal.service.JournalTemplateLocalServiceUtil;
 import com.liferay.portlet.journal.util.JournalUtil;
 import com.liferay.util.servlet.ServletResponseUtil;
-
-import java.io.StringReader;
 
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -50,12 +53,6 @@ import org.apache.struts.action.Action;
 import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
-
-import org.dom4j.Document;
-import org.dom4j.DocumentFactory;
-import org.dom4j.Element;
-import org.dom4j.ProcessingInstruction;
-import org.dom4j.io.SAXReader;
 
 /**
  * <a href="GetArticleAction.java.html"><b><i>View Source</i></b></a>
@@ -88,9 +85,7 @@ public class GetArticleAction extends Action {
 
 			String xml = article.getContentByLocale(languageId);
 
-			SAXReader reader = new SAXReader();
-
-			Document doc = reader.read(new StringReader(xml));
+			Document doc = SAXReaderUtil.read(xml);
 
 			Element root = doc.getRootElement();
 
@@ -193,13 +188,13 @@ public class GetArticleAction extends Action {
 	protected void addStyleSheet(
 		Document doc, String url, Map<String, String> arguments) {
 
-		List<Object> content = doc.content();
+		List<Node> content = doc.content();
 
-		ProcessingInstruction pi =
-			DocumentFactory.getInstance().createProcessingInstruction(
+		ProcessingInstruction processingInstruction =
+			SAXReaderUtil.createProcessingInstruction(
 				"xml-stylesheet", arguments);
 
-		content.add(0, pi);
+		content.add(0, processingInstruction);
 	}
 
 }

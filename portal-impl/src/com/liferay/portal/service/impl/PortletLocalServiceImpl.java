@@ -58,12 +58,9 @@ import com.liferay.portal.util.QNameUtil;
 import com.liferay.portal.util.WebAppPool;
 import com.liferay.portal.util.WebKeys;
 import com.liferay.portal.wsrp.consumer.admin.WSRPPersistenceHelper;
-import com.liferay.portal.xml.ElementImpl;
 import com.liferay.portlet.PortletPreferencesSerializer;
 
 import com.sun.portal.wsrp.consumer.common.WSRPConsumerException;
-
-import java.io.StringWriter;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -83,14 +80,11 @@ import javax.xml.namespace.QName;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
-import org.dom4j.io.OutputFormat;
-import org.dom4j.io.XMLWriter;
-
 /**
  * <a href="PortletLocalServiceImpl.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
- * @author Raymond Aug�
+ * @author Raymond Augé
  *
  */
 public class PortletLocalServiceImpl extends PortletLocalServiceBaseImpl {
@@ -1392,17 +1386,7 @@ public class PortletLocalServiceImpl extends PortletLocalServiceBaseImpl {
 					portletPreferences.remove(prefsValidatorEl);
 				}
 
-				StringWriter sw = new StringWriter();
-
-				XMLWriter writer = new XMLWriter(
-					sw, OutputFormat.createCompactFormat());
-
-				ElementImpl portletPreferencesImpl =
-					(ElementImpl)portletPreferences;
-
-				writer.write(portletPreferencesImpl.getWrappedElement());
-
-				defaultPreferences = sw.toString();
+				defaultPreferences = portletPreferences.asXML();
 			}
 
 			portletModel.setDefaultPreferences(defaultPreferences);

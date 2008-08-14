@@ -24,7 +24,11 @@
 
 <%@ include file="/html/portlet/init.jsp" %>
 
-<%@ page import="com.liferay.portal.util.DocumentUtil" %>
+<%@ page import="com.liferay.portal.kernel.xml.Document" %>
+<%@ page import="com.liferay.portal.kernel.xml.Element" %>
+<%@ page import="com.liferay.portal.kernel.xml.Node" %>
+<%@ page import="com.liferay.portal.kernel.xml.SAXReaderUtil" %>
+<%@ page import="com.liferay.portal.kernel.xml.XPath" %>
 <%@ page import="com.liferay.portal.util.LayoutLister" %>
 <%@ page import="com.liferay.portal.util.LayoutView" %>
 <%@ page import="com.liferay.portal.webdav.WebDAVUtil" %>
@@ -94,13 +98,6 @@
 <%@ page import="com.liferay.portlet.journal.webdav.JournalWebDAVStorageImpl" %>
 
 <%@ page import="com.liferay.util.RSSUtil" %>
-
-<%@ page import="org.dom4j.Document" %>
-<%@ page import="org.dom4j.DocumentFactory" %>
-<%@ page import="org.dom4j.DocumentHelper" %>
-<%@ page import="org.dom4j.Element" %>
-<%@ page import="org.dom4j.XPath" %>
-<%@ page import="org.dom4j.io.SAXReader" %>
 
 <%
 PortalPreferences portalPrefs = PortletPreferencesFactoryUtil.getPortalPreferences(request);

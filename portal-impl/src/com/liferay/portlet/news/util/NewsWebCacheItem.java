@@ -26,6 +26,9 @@ import com.liferay.portal.kernel.util.HttpUtil;
 import com.liferay.portal.kernel.util.Time;
 import com.liferay.portal.kernel.webcache.WebCacheException;
 import com.liferay.portal.kernel.webcache.WebCacheItem;
+import com.liferay.portal.kernel.xml.Document;
+import com.liferay.portal.kernel.xml.Element;
+import com.liferay.portal.kernel.xml.SAXReaderUtil;
 import com.liferay.portlet.news.model.Article;
 import com.liferay.portlet.news.model.News;
 
@@ -37,10 +40,6 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
-
-import org.dom4j.Document;
-import org.dom4j.Element;
-import org.dom4j.io.SAXReader;
 
 /**
  * <a href="NewsWebCacheItem.java.html"><b><i>View Source</i></b></a>
@@ -59,10 +58,10 @@ public class NewsWebCacheItem implements WebCacheItem {
 			String xml = HttpUtil.URLtoString(
 				"http://p.moreover.com/cgi-local/page?" + feedURL + "&o=xml");
 
-			ByteArrayInputStream bais =
-				new ByteArrayInputStream(xml.getBytes());
+			ByteArrayInputStream bais = new ByteArrayInputStream(
+				xml.getBytes());
 
-			Document doc = new SAXReader().read(bais);
+			Document doc = SAXReaderUtil.read(bais);
 
 			List<Article> articles = new ArrayList<Article>();
 

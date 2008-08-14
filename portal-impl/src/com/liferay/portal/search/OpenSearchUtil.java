@@ -23,14 +23,14 @@
 package com.liferay.portal.search;
 
 import com.liferay.portal.kernel.util.HttpUtil;
+import com.liferay.portal.kernel.xml.Element;
+import com.liferay.portal.kernel.xml.Namespace;
+import com.liferay.portal.kernel.xml.QName;
+import com.liferay.portal.kernel.xml.SAXReaderUtil;
 
 import java.text.SimpleDateFormat;
 
 import java.util.Date;
-
-import org.dom4j.Element;
-import org.dom4j.Namespace;
-import org.dom4j.QName;
 
 /**
  * <a href="OpenSearchUtil.java.html"><b><i>View Source</i></b></a>
@@ -102,14 +102,15 @@ public class OpenSearchUtil {
 		Namespace namespace = null;
 
 		if (namespaceType == DEFAULT_NAMESPACE) {
-			namespace = new Namespace("", "http://www.w3.org/2005/Atom");
+			namespace = SAXReaderUtil.createNamespace(
+				"", "http://www.w3.org/2005/Atom");
 		}
 		else if (namespaceType == OS_NAMESPACE) {
-			namespace = new Namespace(
+			namespace = SAXReaderUtil.createNamespace(
 				"opensearch", "http://a9.com/-/spec/opensearch/1.1/");
 		}
 		else if (namespaceType == RELEVANCE_NAMESPACE) {
-			namespace = new Namespace(
+			namespace = SAXReaderUtil.createNamespace(
 				"relevance",
 				"http://a9.com/-/opensearch/extensions/relevance/1.0/");
 		}
@@ -118,7 +119,7 @@ public class OpenSearchUtil {
 	}
 
 	public static QName getQName(String name, int namespaceType) {
-		return new QName(name, getNamespace(namespaceType));
+		return SAXReaderUtil.createQName(name, getNamespace(namespaceType));
 	}
 
 }

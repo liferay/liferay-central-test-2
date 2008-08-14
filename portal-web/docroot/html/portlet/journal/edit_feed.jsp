@@ -435,13 +435,15 @@ if (feed != null) {
 				<optgroup label="<liferay-ui:message key="structure-fields" />">
 
 					<%
-					Document doc = DocumentUtil.readDocumentFromXML(structure.getXsd());
+					Document doc = SAXReaderUtil.read(structure.getXsd());
 
-					XPath xpathSelector = DocumentHelper.createXPath("//dynamic-element");
+					XPath xpathSelector = SAXReaderUtil.createXPath("//dynamic-element");
 
-					List<Element> els = xpathSelector.selectNodes(doc);
+					List<Node> nodes = xpathSelector.selectNodes(doc);
 
-					for (Element el : els) {
+					for (Node node : nodes) {
+						Element el = (Element)node;
+
 						String elName = el.attributeValue("name");
 						String elType = StringUtil.replace(el.attributeValue("type"), StringPool.UNDERLINE, StringPool.DASH);
 

@@ -28,6 +28,8 @@ import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
+import com.liferay.portal.kernel.xml.Namespace;
+import com.liferay.portal.kernel.xml.SAXReaderUtil;
 import com.liferay.portal.model.Company;
 import com.liferay.portal.model.Group;
 import com.liferay.portal.model.User;
@@ -48,8 +50,6 @@ import javax.servlet.http.HttpServletRequest;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
-import org.dom4j.Namespace;
-
 /**
  * <a href="WebDAVUtil.java.html"><b><i>View Source</i></b></a>
  *
@@ -59,7 +59,8 @@ import org.dom4j.Namespace;
  */
 public class WebDAVUtil {
 
-	public static final Namespace DAV_URI = Namespace.get("D", "DAV:");
+	public static final Namespace DAV_URI = SAXReaderUtil.createNamespace(
+		"D", "DAV:");
 
 	public static final int SC_MULTI_STATUS = 207;
 

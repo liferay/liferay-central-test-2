@@ -26,6 +26,9 @@ import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.language.LanguageUtil;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
+import com.liferay.portal.kernel.xml.Document;
+import com.liferay.portal.kernel.xml.Element;
+import com.liferay.portal.kernel.xml.SAXReaderUtil;
 import com.liferay.portal.model.Location;
 import com.liferay.portal.model.Organization;
 import com.liferay.portal.model.PasswordPolicy;
@@ -43,8 +46,6 @@ import com.liferay.portal.util.PropsUtil;
 import com.liferay.portlet.PortletResourceBundles;
 import com.liferay.util.UniqueList;
 
-import java.io.StringReader;
-
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
@@ -59,10 +60,6 @@ import javax.servlet.jsp.PageContext;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-
-import org.dom4j.Document;
-import org.dom4j.Element;
-import org.dom4j.io.SAXReader;
 
 /**
  * <a href="ResourceActionsUtil.java.html"><b><i>View Source</i></b></a>
@@ -608,9 +605,7 @@ public class ResourceActionsUtil {
 			_log.debug("Loading " + source);
 		}
 
-		SAXReader reader = new SAXReader();
-
-		Document doc = reader.read(new StringReader(xml));
+		Document doc = SAXReaderUtil.read(xml);
 
 		Element root = doc.getRootElement();
 

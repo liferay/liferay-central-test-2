@@ -92,10 +92,6 @@
 <%@ page import="com.liferay.portlet.tasks.service.permission.TasksProposalPermission" %>
 <%@ page import="com.liferay.portlet.tasks.util.comparator.ReviewUserNameComparator" %>
 
-<%@ page import="org.dom4j.Document" %>
-<%@ page import="org.dom4j.Element" %>
-<%@ page import="org.dom4j.io.SAXReader" %>
-
 <%
 DateFormat dateFormatDate = DateFormats.getDate(locale, timeZone);
 DateFormat dateFormatDateTime = DateFormats.getDateTime(locale, timeZone);

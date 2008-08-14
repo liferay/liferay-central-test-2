@@ -45,6 +45,8 @@ public interface Node {
 
 	public String getName();
 
+	public Element getParent();
+
 	public String getPath();
 
 	public String getPath(Element context);

@@ -27,6 +27,11 @@ import com.liferay.portal.kernel.util.HtmlUtil;
 import com.liferay.portal.kernel.util.LocaleUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
+import com.liferay.portal.kernel.xml.Document;
+import com.liferay.portal.kernel.xml.DocumentException;
+import com.liferay.portal.kernel.xml.Element;
+import com.liferay.portal.kernel.xml.Node;
+import com.liferay.portal.kernel.xml.SAXReaderUtil;
 import com.liferay.portal.model.Company;
 import com.liferay.portal.service.CompanyLocalServiceUtil;
 import com.liferay.portal.util.ContentUtil;
@@ -40,7 +45,6 @@ import com.liferay.util.PwdGenerator;
 import com.liferay.util.xml.CDATAUtil;
 
 import java.io.IOException;
-import java.io.StringReader;
 import java.io.StringWriter;
 
 import java.util.ArrayList;
@@ -53,10 +57,6 @@ import org.apache.velocity.app.Velocity;
 import org.apache.velocity.exception.ParseErrorException;
 import org.apache.velocity.exception.VelocityException;
 
-import org.dom4j.Document;
-import org.dom4j.DocumentException;
-import org.dom4j.Element;
-import org.dom4j.io.SAXReader;
 
 /**
  * <a href="JournalVmUtil.java.html"><b><i>View Source</i></b></a>
@@ -84,9 +84,7 @@ public class JournalVmUtil {
 		try {
 			VelocityContext context = new VelocityContext();
 
-			SAXReader reader = new SAXReader();
-
-			Document doc = reader.read(new StringReader(xml));
+			Document doc = SAXReaderUtil.read(xml);
 
 			Element root = doc.getRootElement();
 
@@ -181,7 +179,7 @@ public class JournalVmUtil {
 
 		List<TemplateNode> nodes = new ArrayList<TemplateNode>();
 
-		for (Element el : (List<Element>)parent.elements("dynamic-element")) {
+		for (Element el : parent.elements("dynamic-element")) {
 			Element content = el.element("dynamic-content");
 
 			if (content == null) {
@@ -205,9 +203,7 @@ public class JournalVmUtil {
 				node.appendChildren(_extractDynamicContents(el));
 			}
 			else if (content.element("option") != null) {
-				for (Element option :
-						(List<Element>)content.elements("option")) {
-
+				for (Element option : content.elements("option")) {
 					node.appendOption(CDATAUtil.strip(option.getText()));
 				}
 			}
@@ -221,12 +217,12 @@ public class JournalVmUtil {
 	private static String _injectEditInPlace(String xml, String script)
 		throws DocumentException {
 
-		SAXReader reader = new SAXReader();
+		Document doc = SAXReaderUtil.read(xml);
 
-		Document doc = reader.read(new StringReader(xml));
+		List<Node> nodes = doc.selectNodes("//dynamic-element");
 
-		for (Element el :
-				(List<Element>)doc.selectNodes("//dynamic-element")) {
+		for (Node node : nodes) {
+			Element el = (Element)node;
 
 			String name = GetterUtil.getString(el.attributeValue("name"));
 			String type = GetterUtil.getString(el.attributeValue("type"));
@@ -252,7 +248,7 @@ public class JournalVmUtil {
 			return map;
 		}
 
-		for (Element el : (List<Element>)parent.elements()) {
+		for (Element el : parent.elements()) {
 			String name = el.getName();
 
 			if (name.equals("attribute")) {

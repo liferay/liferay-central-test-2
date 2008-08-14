@@ -32,6 +32,9 @@ import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
+import com.liferay.portal.kernel.xml.Document;
+import com.liferay.portal.kernel.xml.Element;
+import com.liferay.portal.kernel.xml.SAXReaderUtil;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.WebKeys;
@@ -41,8 +44,6 @@ import com.liferay.portlet.journal.util.JournalUtil;
 import com.liferay.portlet.journal.util.comparator.ArticleDisplayDateComparator;
 import com.liferay.portlet.journal.util.comparator.ArticleModifiedDateComparator;
 import com.liferay.util.servlet.ServletResponseUtil;
-
-import java.io.StringReader;
 
 import java.text.DateFormat;
 
@@ -59,11 +60,6 @@ import org.apache.struts.action.Action;
 import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
-
-import org.dom4j.Document;
-import org.dom4j.DocumentFactory;
-import org.dom4j.Element;
-import org.dom4j.io.SAXReader;
 
 /**
  * <a href="GetArticlesAction.java.html"><b><i>View Source</i></b></a>
@@ -188,18 +184,15 @@ public class GetArticlesAction extends Action {
 		Map<String, String> tokens = JournalUtil.getTokens(
 			groupId, themeDisplay);
 
-		Document resultsDoc =
-			DocumentFactory.getInstance().createDocument(StringPool.UTF8);
+		Document resultsDoc = SAXReaderUtil.createDocument(StringPool.UTF8);
 
 		Element resultSetEl = resultsDoc.addElement("result-set");
-
-		SAXReader reader = new SAXReader();
 
 		for (JournalArticle article : articles) {
 			Element resultEl = resultSetEl.addElement("result");
 
-			Document articleDoc = reader.read(new StringReader(
-				article.getContentByLocale(languageId)));
+			Document articleDoc = SAXReaderUtil.read(
+				article.getContentByLocale(languageId));
 
 			resultEl.content().add(
 				articleDoc.getRootElement().createCopy());

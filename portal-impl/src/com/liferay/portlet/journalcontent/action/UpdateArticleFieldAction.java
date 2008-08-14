@@ -26,14 +26,15 @@ import com.liferay.portal.kernel.language.LanguageUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.Validator;
+import com.liferay.portal.kernel.xml.Document;
+import com.liferay.portal.kernel.xml.Node;
+import com.liferay.portal.kernel.xml.SAXReaderUtil;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portlet.journal.model.JournalArticle;
 import com.liferay.portlet.journal.service.JournalArticleLocalServiceUtil;
 import com.liferay.portlet.journal.service.JournalArticleServiceUtil;
 import com.liferay.portlet.journal.util.JournalUtil;
 import com.liferay.util.servlet.ServletResponseUtil;
-
-import java.io.StringReader;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -44,10 +45,6 @@ import org.apache.struts.action.Action;
 import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
-
-import org.dom4j.Document;
-import org.dom4j.Node;
-import org.dom4j.io.SAXReader;
 
 /**
  * <a href="UpdateArticleFieldAction.java.html"><b><i>View Source</i></b></a>
@@ -110,9 +107,7 @@ public class UpdateArticleFieldAction extends Action {
 
 		String content = article.getContent();
 
-		SAXReader reader = new SAXReader();
-
-		Document doc = reader.read(new StringReader(content));
+		Document doc = SAXReaderUtil.read(content);
 
 		if (_log.isDebugEnabled()) {
 			_log.debug("Before\n" + content);
