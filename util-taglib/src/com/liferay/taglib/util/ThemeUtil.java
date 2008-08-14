@@ -197,6 +197,7 @@ public class ThemeUtil {
 
 		request.setAttribute(WebKeys.VELOCITY_TAGLIB, velocityTaglib);
 
+		velocityContext.put("servletContext", servletContext);
 		velocityContext.put("taglibLiferay", velocityTaglib);
 		velocityContext.put("theme", velocityTaglib);
 
