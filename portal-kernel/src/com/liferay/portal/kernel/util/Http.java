@@ -135,6 +135,10 @@ public interface Http {
 		throws IOException;
 
 	public void submit(
+			String location, Cookie[] cookies, Http.Body body, boolean post)
+		throws IOException;
+
+	public void submit(
 			String location, Cookie[] cookies, Map<String, String> parts,
 			boolean post)
 		throws IOException;
@@ -152,6 +156,10 @@ public interface Http {
 		throws IOException;
 
 	public byte[] URLtoByteArray(
+			String location, Cookie[] cookies, Http.Body body, boolean post)
+		throws IOException;
+
+	public byte[] URLtoByteArray(
 			String location, Cookie[] cookies, Map<String, String> parts,
 			boolean post)
 		throws IOException;
@@ -165,6 +173,10 @@ public interface Http {
 
 	public String URLtoString(
 			String location, Cookie[] cookies, boolean post)
+		throws IOException;
+
+	public String URLtoString(
+			String location, Cookie[] cookies, Http.Body body, boolean post)
 		throws IOException;
 
 	public String URLtoString(
@@ -189,5 +201,31 @@ public interface Http {
 	 * @throws		IOException
 	 */
 	public String URLtoString(URL url) throws IOException;
+
+	public class Body {
+
+		public Body(String content, String contentType, String charset) {
+			_content = content;
+			_contentType = contentType;
+			_charset = charset;
+		}
+
+		public String getContent() {
+			return _content;
+		}
+
+		public String getContentType() {
+			return _contentType;
+		}
+
+		public String getCharset() {
+			return _charset;
+		}
+
+		private String _content;
+		private String _contentType;
+		private String _charset;
+
+	}
 
 }

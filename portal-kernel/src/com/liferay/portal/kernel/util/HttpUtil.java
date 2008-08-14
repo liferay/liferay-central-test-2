@@ -215,6 +215,13 @@ public class HttpUtil {
 	}
 
 	public static void submit(
+			String location, Cookie[] cookies, Http.Body body, boolean post)
+		throws IOException {
+
+		getHttp().submit(location, cookies, body, post);
+	}
+
+	public static void submit(
 			String location, Cookie[] cookies, Map<String, String> parts,
 			boolean post)
 		throws IOException {
@@ -246,6 +253,13 @@ public class HttpUtil {
 	}
 
 	public static byte[] URLtoByteArray(
+			String location, Cookie[] cookies, Http.Body body, boolean post)
+		throws IOException {
+
+		return getHttp().URLtoByteArray(location, cookies, body, post);
+	}
+
+	public static byte[] URLtoByteArray(
 			String location, Cookie[] cookies, Map<String, String> parts,
 			boolean post)
 		throws IOException {
@@ -274,6 +288,13 @@ public class HttpUtil {
 		throws IOException {
 
 		return getHttp().URLtoString(location, cookies, post);
+	}
+
+	public static String URLtoString(
+			String location, Cookie[] cookies, Http.Body body, boolean post)
+		throws IOException {
+
+		return getHttp().URLtoString(location, cookies, body, post);
 	}
 
 	public static String URLtoString(

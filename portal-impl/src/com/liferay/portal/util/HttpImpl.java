@@ -69,6 +69,8 @@ import org.apache.commons.httpclient.auth.AuthScope;
 import org.apache.commons.httpclient.cookie.CookiePolicy;
 import org.apache.commons.httpclient.methods.GetMethod;
 import org.apache.commons.httpclient.methods.PostMethod;
+import org.apache.commons.httpclient.methods.RequestEntity;
+import org.apache.commons.httpclient.methods.StringRequestEntity;
 import org.apache.commons.httpclient.params.HttpConnectionParams;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -584,6 +586,13 @@ public class HttpImpl implements Http {
 	}
 
 	public void submit(
+			String location, Cookie[] cookies, Http.Body body, boolean post)
+		throws IOException {
+
+		URLtoByteArray(location, cookies, body, post);
+	}
+
+	public void submit(
 			String location, Cookie[] cookies, Map<String, String> parts,
 			boolean post)
 		throws IOException {
@@ -611,7 +620,14 @@ public class HttpImpl implements Http {
 			String location, Cookie[] cookies, boolean post)
 		throws IOException {
 
-		return URLtoByteArray(location, cookies, null, post);
+		return URLtoByteArray(location, cookies, null, null, post);
+	}
+
+	public byte[] URLtoByteArray(
+			String location, Cookie[] cookies, Http.Body body, boolean post)
+		throws IOException {
+
+		return URLtoByteArray(location, cookies, body, null, post);
 	}
 
 	public byte[] URLtoByteArray(
@@ -619,113 +635,7 @@ public class HttpImpl implements Http {
 			boolean post)
 		throws IOException {
 
-		byte[] bytes = null;
-
-		HttpMethod method = null;
-
-		try {
-			if (location == null) {
-				return bytes;
-			}
-			else if (!location.startsWith(Http.HTTP_WITH_SLASH) &&
-					 !location.startsWith(Http.HTTPS_WITH_SLASH)) {
-
-				location = Http.HTTP_WITH_SLASH + location;
-			}
-
-			HostConfiguration hostConfig = getHostConfig(location);
-
-			HttpClient client = getClient(hostConfig);
-
-			if (post) {
-				method = new PostMethod(location);
-
-				if ((parts != null) && (parts.size() > 0)) {
-					List<NameValuePair> nvpList =
-						new ArrayList<NameValuePair>();
-
-					for (Map.Entry<String, String> entry : parts.entrySet()) {
-						String key = entry.getKey();
-						String value = entry.getValue();
-
-						if (value != null) {
-							nvpList.add(new NameValuePair(key, value));
-						}
-					}
-
-					NameValuePair[] nvpArray = nvpList.toArray(
-						new NameValuePair[nvpList.size()]);
-
-					PostMethod postMethod = (PostMethod)method;
-
-					postMethod.setRequestBody(nvpArray);
-				}
-			}
-			else {
-				method = new GetMethod(location);
-			}
-
-			method.addRequestHeader(
-				"Content-Type", "application/x-www-form-urlencoded");
-
-			method.addRequestHeader(
-				"User-agent",
-				"Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1)");
-
-			//method.setFollowRedirects(true);
-
-			HttpState state = new HttpState();
-
-			if ((cookies != null) && (cookies.length > 0)) {
-				org.apache.commons.httpclient.Cookie[] commonsCookies =
-					new org.apache.commons.httpclient.Cookie[0];
-
-				for (int i = 0; i < cookies.length; i++) {
-					Cookie cookie = cookies[i];
-
-					commonsCookies[i] =
-						new org.apache.commons.httpclient.Cookie(
-							cookie.getDomain(), cookie.getName(),
-							cookie.getValue(), cookie.getPath(),
-							cookie.getMaxAge(), cookie.getSecure());
-				}
-
-				state.addCookies(commonsCookies);
-
-				method.getParams().setCookiePolicy(
-					CookiePolicy.BROWSER_COMPATIBILITY);
-			}
-
-			proxifyState(state, hostConfig);
-
-			client.executeMethod(hostConfig, method, state);
-
-			Header locationHeader = method.getResponseHeader("location");
-
-			if (locationHeader != null) {
-				return URLtoByteArray(locationHeader.getValue(), cookies, post);
-			}
-
-			InputStream is = method.getResponseBodyAsStream();
-
-			if (is != null) {
-				bytes = FileUtil.getBytes(is);
-
-				is.close();
-			}
-
-			return bytes;
-		}
-		finally {
-			try {
-				if (method != null) {
-					method.releaseConnection();
-				}
-			}
-			catch (Exception e) {
-				_log.error(e, e);
-			}
-		}
+		return URLtoByteArray(location, cookies, null, parts, post);
 	}
 
 	public String URLtoString(String location) throws IOException {
@@ -748,6 +658,13 @@ public class HttpImpl implements Http {
 		throws IOException {
 
 		return new String(URLtoByteArray(location, cookies, post));
+	}
+
+	public String URLtoString(
+			String location, Cookie[] cookies, Http.Body body, boolean post)
+		throws IOException {
+
+		return new String(URLtoByteArray(location, cookies, body, post));
 	}
 
 	public String URLtoString(
@@ -843,6 +760,129 @@ public class HttpImpl implements Http {
 			AuthScope scope = new AuthScope(_PROXY_HOST, _PROXY_PORT, null);
 
 			state.setProxyCredentials(scope, proxyCredentials);
+		}
+	}
+
+	protected byte[] URLtoByteArray(
+			String location, Cookie[] cookies, Http.Body body,
+			Map<String, String> parts, boolean post)
+		throws IOException {
+
+		byte[] bytes = null;
+
+		HttpMethod method = null;
+
+		try {
+			if (location == null) {
+				return bytes;
+			}
+			else if (!location.startsWith(Http.HTTP_WITH_SLASH) &&
+					 !location.startsWith(Http.HTTPS_WITH_SLASH)) {
+
+				location = Http.HTTP_WITH_SLASH + location;
+			}
+
+			HostConfiguration hostConfig = getHostConfig(location);
+
+			HttpClient client = getClient(hostConfig);
+
+			if (post) {
+				method = new PostMethod(location);
+
+				if (body != null) {
+					RequestEntity requestEntity = new StringRequestEntity(
+						body.getContent(), body.getContentType(),
+						body.getCharset());
+
+					PostMethod postMethod = (PostMethod)method;
+
+					postMethod.setRequestEntity(requestEntity);
+				}
+				else if ((parts != null) && (parts.size() > 0)) {
+					List<NameValuePair> nvpList =
+						new ArrayList<NameValuePair>();
+
+					for (Map.Entry<String, String> entry : parts.entrySet()) {
+						String key = entry.getKey();
+						String value = entry.getValue();
+
+						if (value != null) {
+							nvpList.add(new NameValuePair(key, value));
+						}
+					}
+
+					NameValuePair[] nvpArray = nvpList.toArray(
+						new NameValuePair[nvpList.size()]);
+
+					PostMethod postMethod = (PostMethod)method;
+
+					postMethod.setRequestBody(nvpArray);
+				}
+			}
+			else {
+				method = new GetMethod(location);
+			}
+
+			method.addRequestHeader(
+				"Content-Type", "application/x-www-form-urlencoded");
+
+			method.addRequestHeader(
+				"User-agent",
+				"Mozilla/4.0 (compatible; MSIE 6.0; Windows NT 5.1)");
+
+			//method.setFollowRedirects(true);
+
+			HttpState state = new HttpState();
+
+			if ((cookies != null) && (cookies.length > 0)) {
+				org.apache.commons.httpclient.Cookie[] commonsCookies =
+					new org.apache.commons.httpclient.Cookie[0];
+
+				for (int i = 0; i < cookies.length; i++) {
+					Cookie cookie = cookies[i];
+
+					commonsCookies[i] =
+						new org.apache.commons.httpclient.Cookie(
+							cookie.getDomain(), cookie.getName(),
+							cookie.getValue(), cookie.getPath(),
+							cookie.getMaxAge(), cookie.getSecure());
+				}
+
+				state.addCookies(commonsCookies);
+
+				method.getParams().setCookiePolicy(
+					CookiePolicy.BROWSER_COMPATIBILITY);
+			}
+
+			proxifyState(state, hostConfig);
+
+			client.executeMethod(hostConfig, method, state);
+
+			Header locationHeader = method.getResponseHeader("location");
+
+			if (locationHeader != null) {
+				return URLtoByteArray(locationHeader.getValue(), cookies, post);
+			}
+
+			InputStream is = method.getResponseBodyAsStream();
+
+			if (is != null) {
+				bytes = FileUtil.getBytes(is);
+
+				is.close();
+			}
+
+			return bytes;
+		}
+		finally {
+			try {
+				if (method != null) {
+					method.releaseConnection();
+				}
+			}
+			catch (Exception e) {
+				_log.error(e, e);
+			}
 		}
 	}
 
