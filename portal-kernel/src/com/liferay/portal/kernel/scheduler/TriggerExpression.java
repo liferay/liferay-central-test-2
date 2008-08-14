@@ -27,112 +27,70 @@ import com.liferay.portal.kernel.util.StringPool;
 import java.util.Calendar;
 
 /**
- * <a href="SchedulerTriggerExpression.java.html"><b><i>View Source</i></b></a>
- * 
+ * <a href="TriggerExpression.java.html"><b><i>View Source</i></b></a>
+ *
  * @author Thiago Moreira
+ *
  */
-public class SchedulerTriggerExpression {
+public class TriggerExpression {
 
-	/**
-	 * Field MINUTES_FREQUENCY
-	 */
-	public final static int MINUTES_FREQUENCY = 2;
-
-	/**
-	 * Field DAILY_FREQUENCY
-	 */
 	public final static int DAILY_FREQUENCY = 3;
 
-	/**
-	 * Field WEEKLY_FREQUENCY
-	 */
-	public final static int WEEKLY_FREQUENCY = 4;
+	public final static int MINUTELY_FREQUENCY = 2;
 
-	/**
-	 * Field MONTHLY_FREQUENCY
-	 */
-	public final static int MONTHLY_FREQUENCY = 5;
+	public final static int MONTHLY_FREQUENCY = 4;
 
-	/**
-	 * Field YEARLY_FREQUENCY
-	 */
+	public final static int NO_FREQUENCY = 1;
+
+	public final static int WEEKLY_FREQUENCY = 5;
+
 	public final static int YEARLY_FREQUENCY = 6;
 
-	/**
-	 * Field NO_FREQUENCY
-	 */
-	public final static int NO_FREQUENCY = 7;
-
-	/**
-	 * Field dtStart
-	 */
-	protected Calendar _startDate;
-
-	/**
-	 * Field frequency
-	 */
-	protected int _frequency;
-
-	/**
-	 * Field interval
-	 */
-	protected int _interval;
-
-	public SchedulerTriggerExpression(Calendar startDate) {
-
-		this(startDate, SchedulerTriggerExpression.NO_FREQUENCY, 0);
+	public TriggerExpression(Calendar startDate) {
+		this(startDate, TriggerExpression.NO_FREQUENCY, 0);
 	}
 
-	public SchedulerTriggerExpression(
-		Calendar startDate, int frequency, int interval) {
-
+	public TriggerExpression(Calendar startDate, int frequency, int interval) {
 		_startDate = startDate;
-		_interval = interval;
-		
 		setFrequency(frequency);
+		_interval = interval;
 	}
 
 	public int getFrequency() {
-
 		return _frequency;
 	}
 
-	public void setFrequency(int frequency) {
+	public int getInterval() {
+		return _interval;
+	}
 
-		if (frequency != SchedulerTriggerExpression.DAILY_FREQUENCY &&
-			frequency != SchedulerTriggerExpression.MINUTES_FREQUENCY &&
-			frequency != SchedulerTriggerExpression.MONTHLY_FREQUENCY &&
-			frequency != SchedulerTriggerExpression.NO_FREQUENCY &&
-			frequency != SchedulerTriggerExpression.WEEKLY_FREQUENCY &&
-			frequency != SchedulerTriggerExpression.YEARLY_FREQUENCY) {
+	public Calendar getStartDate() {
+		return _startDate;
+	}
+
+	public void setFrequency(int frequency) {
+		if ((frequency != TriggerExpression.DAILY_FREQUENCY) &&
+			(frequency != TriggerExpression.MINUTELY_FREQUENCY) &&
+			(frequency != TriggerExpression.MONTHLY_FREQUENCY) &&
+			(frequency != TriggerExpression.NO_FREQUENCY) &&
+			(frequency != TriggerExpression.WEEKLY_FREQUENCY) &&
+			(frequency != TriggerExpression.YEARLY_FREQUENCY)) {
+
 			throw new IllegalArgumentException(String.valueOf(frequency));
 		}
 
 		_frequency = frequency;
 	}
 
-	public int getInterval() {
-
-		return _interval;
-	}
-
 	public void setInterval(int interval) {
-
 		_interval = interval;
 	}
 
-	public Calendar getStartDate() {
-
-		return _startDate;
-	}
-
 	public void setStartDate(Calendar startDate) {
-
 		_startDate = startDate;
 	}
 
 	public String toCronText() {
-
 		String second = String.valueOf(_startDate.get(Calendar.SECOND));
 		String minute = String.valueOf(_startDate.get(Calendar.MINUTE));
 		String hour = String.valueOf(_startDate.get(Calendar.HOUR_OF_DAY));
@@ -142,10 +100,10 @@ public class SchedulerTriggerExpression {
 		String dayOfWeek = String.valueOf(_startDate.get(Calendar.DAY_OF_WEEK));
 		String year = String.valueOf(_startDate.get(Calendar.YEAR));
 
-		if (_frequency == SchedulerTriggerExpression.NO_FREQUENCY) {
+		if (_frequency == TriggerExpression.NO_FREQUENCY) {
 			dayOfWeek = StringPool.QUESTION;
 		}
-		else if (_frequency == SchedulerTriggerExpression.MINUTES_FREQUENCY) {
+		else if (_frequency == TriggerExpression.MINUTELY_FREQUENCY) {
 			minute += StringPool.FORWARD_SLASH + _interval;
 			hour = StringPool.STAR;
 			dayOfMonth = StringPool.STAR;
@@ -153,24 +111,24 @@ public class SchedulerTriggerExpression {
 			dayOfWeek = StringPool.QUESTION;
 			year = StringPool.STAR;
 		}
-		else if (_frequency == SchedulerTriggerExpression.DAILY_FREQUENCY) {
+		else if (_frequency == TriggerExpression.DAILY_FREQUENCY) {
 			dayOfMonth += StringPool.FORWARD_SLASH + _interval;
 			month = StringPool.STAR;
 			dayOfWeek = StringPool.QUESTION;
 			year = StringPool.STAR;
 		}
-		else if (_frequency == SchedulerTriggerExpression.WEEKLY_FREQUENCY) {
+		else if (_frequency == TriggerExpression.WEEKLY_FREQUENCY) {
 			dayOfMonth += StringPool.FORWARD_SLASH + (_interval * 7);
 			month = StringPool.STAR;
 			dayOfWeek = StringPool.QUESTION;
 			year = StringPool.STAR;
 		}
-		else if (_frequency == SchedulerTriggerExpression.MONTHLY_FREQUENCY) {
+		else if (_frequency == TriggerExpression.MONTHLY_FREQUENCY) {
 			month += StringPool.FORWARD_SLASH + _interval;
 			dayOfWeek = StringPool.QUESTION;
 			year = StringPool.STAR;
 		}
-		else if (_frequency == SchedulerTriggerExpression.YEARLY_FREQUENCY) {
+		else if (_frequency == TriggerExpression.YEARLY_FREQUENCY) {
 			dayOfWeek = StringPool.QUESTION;
 			year += StringPool.FORWARD_SLASH + _interval;
 		}
@@ -193,5 +151,9 @@ public class SchedulerTriggerExpression {
 
 		return sb.toString();
 	}
+
+	private Calendar _startDate;
+	private int _frequency;
+	private int _interval;
 
 }
