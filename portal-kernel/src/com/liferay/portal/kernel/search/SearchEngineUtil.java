@@ -38,6 +38,12 @@ import com.liferay.portal.kernel.search.messaging.SearchRequest;
  */
 public class SearchEngineUtil {
 
+	/**
+	 * @deprecated Use
+	 * <code>com.liferay.portal.kernel.dao.orm.QueryUtil.ALL_POS</code>.
+	 */
+	public static final int ALL_POS = -1;
+
 	public static void addDocument(long companyId, Document doc)
 		throws SearchException {
 
