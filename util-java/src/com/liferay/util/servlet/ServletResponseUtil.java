@@ -34,11 +34,11 @@ import java.io.BufferedOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+
 import java.net.SocketException;
 
 import javax.servlet.http.HttpServletResponse;
 
-import org.apache.catalina.connector.ClientAbortException;
 import org.apache.commons.codec.net.URLCodec;
 import org.apache.commons.lang.CharUtils;
 import org.apache.commons.logging.Log;
@@ -165,14 +165,16 @@ public class ServletResponseUtil {
 				os.write(bytes, 0, contentLength);
 			}
 		}
-		catch ( SocketException e ){
-			if (_log.isWarnEnabled()) {
-				_log.warn(e);
+		catch (IOException ioe) {
+			if (ioe instanceof SocketException ||
+				ioe.getClass().getName().equals(_CLIENT_ABORT_EXCEPTION)) {
+
+				if (_log.isWarnEnabled()) {
+					_log.warn(ioe);
+				}
 			}
-		}
-		catch ( ClientAbortException e ){
-			if (_log.isWarnEnabled()) {
-				_log.warn(e);
+			else {
+				throw ioe;
 			}
 		}
 		finally {
@@ -265,6 +267,9 @@ public class ServletResponseUtil {
 				HttpHeaders.CONTENT_DISPOSITION, contentDisposition);
 		}
 	}
+
+	private static final String _CLIENT_ABORT_EXCEPTION =
+		"org.apache.catalina.connector.ClientAbortException";
 
 	private static Log _log = LogFactory.getLog(ServletResponseUtil.class);
 
