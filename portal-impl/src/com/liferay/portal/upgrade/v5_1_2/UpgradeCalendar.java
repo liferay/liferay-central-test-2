@@ -20,14 +20,14 @@
  * SOFTWARE.
  */
 
-package com.liferay.portal.upgrade.v5_2_0;
+package com.liferay.portal.upgrade.v5_1_2;
 
 import com.liferay.portal.upgrade.UpgradeException;
 import com.liferay.portal.upgrade.UpgradeProcess;
 import com.liferay.portal.upgrade.util.DefaultUpgradeTableImpl;
 import com.liferay.portal.upgrade.util.UpgradeColumn;
 import com.liferay.portal.upgrade.util.UpgradeTable;
-import com.liferay.portal.upgrade.v5_2_0.util.CalEventRecurrenceUpgradeColumnImpl;
+import com.liferay.portal.upgrade.v5_1_2.util.CalEventRecurrenceUpgradeColumnImpl;
 import com.liferay.portlet.calendar.model.impl.CalEventImpl;
 
 import org.apache.commons.logging.Log;

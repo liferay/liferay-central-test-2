@@ -3,7 +3,7 @@
 
 <plugin-package>
 	<name>Liferay Core Plugins</name>
-	<module-id>liferay/core-plugins/5.1.1/war</module-id>
+	<module-id>liferay/core-plugins/5.1.2/war</module-id>
 	<types>
 		<type>layout-template</type>
 		<type>portlet</type>
@@ -21,6 +21,6 @@
 		<license osi-approved="true">MIT</license>
 	</licenses>
 	<liferay-versions>
-		<liferay-version>5.1.1</liferay-version>
+		<liferay-version>5.1.2</liferay-version>
 	</liferay-versions>
 </plugin-package>
