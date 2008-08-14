@@ -112,23 +112,19 @@ public class CalEventRecurrenceUpgradeColumnImpl extends BaseUpgradeColumnImpl {
 	}
 
 	protected String serialize(Recurrence recurrence) throws JSONException {
-		String recurrenceJSON = JSONFactoryUtil.serialize(recurrence);
+		JSONObject recurrenceJSON = JSONFactoryUtil.createJSONObject(
+			JSONFactoryUtil.serialize(recurrence));
 
-		JSONObject recurrenceJSONObj = JSONFactoryUtil.createJSONObject(
-			recurrenceJSON);
-
-		recurrenceJSONObj.put("javaClass", TZSRecurrence.class.getName());
+		recurrenceJSON.put("javaClass", TZSRecurrence.class.getName());
 
 		TimeZone timeZone = TimeZone.getTimeZone("GMT");
 
-		String timeZoneJSON = JSONFactoryUtil.serialize(timeZone);
+		JSONObject timeZoneJSON = JSONFactoryUtil.createJSONObject(
+			JSONFactoryUtil.serialize(timeZone));
 
-		JSONObject timeZoneJSONObj = JSONFactoryUtil.createJSONObject(
-			timeZoneJSON);
+		recurrenceJSON.put("timeZone", timeZoneJSON);
 
-		recurrenceJSONObj.put("timeZone", timeZoneJSONObj);
-
-		return recurrenceJSONObj.toString();
+		return recurrenceJSON.toString();
 	}
 
 }

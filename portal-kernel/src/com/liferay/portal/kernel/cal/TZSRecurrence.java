@@ -39,47 +39,49 @@ public class TZSRecurrence extends Recurrence {
 	public TZSRecurrence() {
 	}
 
-	public TZSRecurrence(Calendar start, Duration dur) {
-		super(start, dur);
+	public TZSRecurrence(Calendar start, Duration duration) {
+		super(start, duration);
 	}
 
-	public TZSRecurrence(Calendar start, Duration dur, int freq) {
-		super(start, dur, freq);
+	public TZSRecurrence(Calendar start, Duration duration, int frequency) {
+		super(start, duration, frequency);
 	}
 
 	public TimeZone getTimeZone() {
 		return _timeZone;
 	}
 
-	public void setTimeZone(TimeZone tz) {
-		_timeZone = tz;
+	public void setTimeZone(TimeZone timeZone) {
+		_timeZone = timeZone;
 	}
 
 	protected boolean matchesByField(
 		int[] array, int field, Calendar candidate, boolean allowNegative,
 		TimeZone timeZone) {
 
-		Calendar date = candidate;
+		Calendar adjustedCandidate = candidate;
 
 		if (Validator.isNotNull(timeZone)) {
-			date = CalendarFactoryUtil.getCalendar(timeZone);
-			date.setTime(candidate.getTime());
+			adjustedCandidate = CalendarFactoryUtil.getCalendar(timeZone);
+
+			adjustedCandidate.setTime(candidate.getTime());
 		}
 
-		return matchesByField(array, field, date, allowNegative);
+		return matchesByField(array, field, adjustedCandidate, allowNegative);
 	}
 
 	protected boolean matchesIndividualByDay(
 		Calendar candidate, DayAndPosition pos) {
 
-		Calendar date = candidate;
+		Calendar adjustedCandidate = candidate;
 
 		if (Validator.isNotNull(_timeZone)) {
-			date = CalendarFactoryUtil.getCalendar(_timeZone);
-			date.setTime(candidate.getTime());
+			adjustedCandidate = CalendarFactoryUtil.getCalendar(_timeZone);
+
+			adjustedCandidate.setTime(candidate.getTime());
 		}
 
-		return super.matchesIndividualByDay(date, pos);
+		return super.matchesIndividualByDay(adjustedCandidate, pos);
 	}
 
 	protected boolean matchesByMonthDay(Calendar candidate) {
