@@ -379,17 +379,35 @@ public class CalEventLocalServiceImpl extends CalEventLocalServiceBaseImpl {
 				startDate = CalendarFactoryUtil.getCalendar();
 			}
 
-			startDate.setTime(event.getStartDate());
+			if (event.isRepeating()) {
+				double daysToCheck = Math.ceil(
+					CalEventImpl.REMINDERS[CalEventImpl.REMINDERS.length - 1] /
+					Time.DAY);
 
-			long diff =
-				(startDate.getTime().getTime() - now.getTime().getTime()) /
-				CheckEventJob.INTERVAL;
+				Calendar cal = (Calendar)now.clone();
 
-			if ((diff == (event.getFirstReminder() / CheckEventJob.INTERVAL)) ||
-				(diff ==
-					(event.getSecondReminder() / CheckEventJob.INTERVAL))) {
+				for (int i = 0; i <= daysToCheck; i++) {
+					Recurrence recurrence = event.getRecurrenceObj();
 
-				remindUser(event, user);
+					Calendar tzICal = CalendarFactoryUtil.getCalendar(
+						cal.get(Calendar.YEAR),
+						cal.get(Calendar.MONTH),
+						cal.get(Calendar.DATE));
+
+					Calendar recurrenceCal = getRecurrenceCal(
+						cal, tzICal, event);
+
+					if (recurrence.isInRecurrence(recurrenceCal)) {
+						remindUser(event, user, recurrenceCal, now);
+					}
+
+					cal.add(Calendar.DAY_OF_YEAR, 1);
+				}
+			}
+			else {
+				startDate.setTime(event.getStartDate());
+
+				remindUser(event, user, startDate, now);
 			}
 		}
 	}
@@ -1135,6 +1153,21 @@ public class CalEventLocalServiceImpl extends CalEventLocalServiceBaseImpl {
 		}
 		catch (Exception e) {
 			_log.error(e);
+		}
+	}
+
+	protected void remindUser(
+		CalEvent event, User user, Calendar startDate, Calendar now) {
+
+		long diff =
+			(startDate.getTime().getTime() - now.getTime().getTime()) /
+			CheckEventJob.INTERVAL;
+
+		if ((diff == (event.getFirstReminder() / CheckEventJob.INTERVAL)) ||
+			(diff ==
+				(event.getSecondReminder() / CheckEventJob.INTERVAL))) {
+
+			remindUser(event, user);
 		}
 	}
 
