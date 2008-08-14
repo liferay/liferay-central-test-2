@@ -24,6 +24,7 @@ package com.liferay.portal.deploy.hot;
 
 import com.liferay.portal.kernel.deploy.hot.HotDeployEvent;
 import com.liferay.portal.kernel.deploy.hot.HotDeployException;
+import com.liferay.portal.kernel.servlet.PortletServlet;
 import com.liferay.portal.kernel.util.HttpUtil;
 import com.liferay.portal.kernel.util.PortalClassLoaderUtil;
 import com.liferay.portal.lastmodified.LastModifiedCSS;
@@ -91,6 +92,11 @@ public class ThemeHotDeployListener extends BaseHotDeployListener {
 		if (_log.isInfoEnabled()) {
 			_log.info("Registering themes for " + servletContextName);
 		}
+
+		ClassLoader portletClassLoader = event.getContextClassLoader();
+
+		servletContext.setAttribute(
+			PortletServlet.PORTLET_CLASS_LOADER, portletClassLoader);
 
 		List<String> themeIds = ThemeLocalServiceUtil.init(
 			servletContextName, servletContext, null, true, xmls,

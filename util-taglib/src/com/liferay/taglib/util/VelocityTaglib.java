@@ -22,6 +22,7 @@
 
 package com.liferay.taglib.util;
 
+import com.liferay.portal.kernel.servlet.PortletServlet;
 import com.liferay.portal.kernel.servlet.StringServletResponse;
 import com.liferay.portal.kernel.util.HttpUtil;
 import com.liferay.portal.model.Layout;
@@ -360,6 +361,34 @@ public class VelocityTaglib {
 			_servletContext.getRequestDispatcher(page);
 
 		requestDispatcher.include(_request, _stringResponse);
+
+		return _stringResponse.getString();
+	}
+
+	public String include(ServletContext servletContext, String page)
+		throws Exception {
+
+		_stringResponse.recycle();
+
+		RequestDispatcher requestDispatcher =
+			servletContext.getRequestDispatcher(page);
+
+		ClassLoader contextClassLoader =
+			Thread.currentThread().getContextClassLoader();
+
+		ClassLoader portletClassLoader =
+			(ClassLoader)servletContext.getAttribute(
+				PortletServlet.PORTLET_CLASS_LOADER);
+
+		try {
+			Thread.currentThread().setContextClassLoader(
+				portletClassLoader);
+
+			requestDispatcher.include(_request, _stringResponse);
+		}
+		finally {
+			Thread.currentThread().setContextClassLoader(contextClassLoader);
+		}
 
 		return _stringResponse.getString();
 	}
