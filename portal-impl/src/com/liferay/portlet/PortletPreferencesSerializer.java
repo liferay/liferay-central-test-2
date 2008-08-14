@@ -28,6 +28,7 @@ import com.liferay.portal.kernel.util.ByteArrayMaker;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;
+import com.liferay.portal.xml.ElementImpl;
 
 import java.io.IOException;
 import java.io.StringReader;
@@ -190,7 +191,10 @@ public class PortletPreferencesSerializer {
 			XMLWriter writer = new XMLWriter(
 				bam, OutputFormat.createCompactFormat());
 
-			writer.write(portletPreferences);
+			ElementImpl portletPreferencesImpl =
+				(ElementImpl)portletPreferences;
+
+			writer.write(portletPreferencesImpl.getElement());
 
 			return bam.toString(StringPool.UTF8);
 		}

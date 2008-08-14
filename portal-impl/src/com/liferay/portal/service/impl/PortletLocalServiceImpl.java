@@ -58,6 +58,7 @@ import com.liferay.portal.util.QNameUtil;
 import com.liferay.portal.util.WebAppPool;
 import com.liferay.portal.util.WebKeys;
 import com.liferay.portal.wsrp.consumer.admin.WSRPPersistenceHelper;
+import com.liferay.portal.xml.ElementImpl;
 import com.liferay.portlet.PortletPreferencesSerializer;
 
 import com.sun.portal.wsrp.consumer.common.WSRPConsumerException;
@@ -1396,7 +1397,10 @@ public class PortletLocalServiceImpl extends PortletLocalServiceBaseImpl {
 				XMLWriter writer = new XMLWriter(
 					sw, OutputFormat.createCompactFormat());
 
-				writer.write(portletPreferences);
+				ElementImpl portletPreferencesImpl =
+					(ElementImpl)portletPreferences;
+
+				writer.write(portletPreferencesImpl.getElement());
 
 				defaultPreferences = sw.toString();
 			}
