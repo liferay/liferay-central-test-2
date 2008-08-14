@@ -67,7 +67,14 @@ public class ElementImpl implements Element {
 	}
 
 	public Attribute attribute(String name) {
-		return new AttributeImpl(_el.attribute(name));
+		org.dom4j.Attribute attribute = _el.attribute(name);
+
+		if (attribute == null) {
+			return null;
+		}
+		else {
+			return new AttributeImpl(attribute);
+		}
 	}
 
 	public String attributeValue(String name) {
@@ -95,15 +102,36 @@ public class ElementImpl implements Element {
 	}
 
 	public Namespace getNamespace() {
-		return new NamespaceImpl(_el.getNamespace());
+		org.dom4j.Namespace namespace = _el.getNamespace();
+
+		if (namespace == null) {
+			return null;
+		}
+		else {
+			return new NamespaceImpl(namespace);
+		}
 	}
 
 	public Namespace getNamespaceForPrefix(String prefix) {
-		return new NamespaceImpl(_el.getNamespaceForPrefix(prefix));
+		org.dom4j.Namespace namespace = _el.getNamespaceForPrefix(prefix);
+
+		if (namespace == null) {
+			return null;
+		}
+		else {
+			return new NamespaceImpl(namespace);
+		}
 	}
 
 	public Namespace getNamespaceForURI(String uri) {
-		return new NamespaceImpl(_el.getNamespaceForURI(uri));
+		org.dom4j.Namespace namespace = _el.getNamespaceForURI(uri);
+
+		if (namespace == null) {
+			return null;
+		}
+		else {
+			return new NamespaceImpl(namespace);
+		}
 	}
 
 	public String getNamespacePrefix() {
