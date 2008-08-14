@@ -136,6 +136,8 @@ public class StringPool {
 
 	public static final String STAR = "*";
 
+	public static final String TAB = "\t";
+
 	public static final String TILDE = "~";
 
 	public static final String TRUE = "true";

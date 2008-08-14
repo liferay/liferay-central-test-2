@@ -30,14 +30,15 @@ import com.liferay.portal.kernel.util.ListUtil;
 import com.liferay.portal.kernel.util.ObjectValuePair;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;
+import com.liferay.portal.kernel.xml.Document;
+import com.liferay.portal.kernel.xml.Element;
+import com.liferay.portal.kernel.xml.SAXReaderUtil;
 import com.liferay.portal.model.LayoutTemplate;
 import com.liferay.portal.model.PluginSetting;
 import com.liferay.portal.model.impl.LayoutTemplateImpl;
 import com.liferay.portal.service.PluginSettingLocalServiceUtil;
 import com.liferay.portal.service.base.LayoutTemplateLocalServiceBaseImpl;
-import com.liferay.portal.util.DocumentUtil;
 import com.liferay.portal.util.PropsValues;
-import com.liferay.portal.xml.ElementImpl;
 import com.liferay.portlet.layoutconfiguration.util.velocity.InitColumnProcessor;
 
 import java.io.IOException;
@@ -59,10 +60,6 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.apache.velocity.VelocityContext;
 import org.apache.velocity.app.Velocity;
-
-import org.dom4j.Document;
-import org.dom4j.DocumentException;
-import org.dom4j.Element;
 
 /**
  * <a href="LayoutTemplateLocalServiceImpl.java.html"><b><i>View Source</i></b>
@@ -305,7 +302,7 @@ public class LayoutTemplateLocalServiceImpl
 			}
 		}
 		catch (Exception e) {
-			e.printStackTrace();
+			_log.error(e, e);
 		}
 
 		return layoutTemplateIds;
@@ -509,7 +506,7 @@ public class LayoutTemplateLocalServiceImpl
 	private Set<ObjectValuePair<String, Boolean>> _readLayoutTemplates(
 			String servletContextName, ServletContext servletContext,
 			String xml, PluginPackage pluginPackage)
-		throws DocumentException {
+		throws Exception {
 
 		Set<ObjectValuePair<String, Boolean>> layoutTemplateIds =
 			new HashSet<ObjectValuePair<String, Boolean>>();
@@ -518,7 +515,7 @@ public class LayoutTemplateLocalServiceImpl
 			return layoutTemplateIds;
 		}
 
-		Document doc = DocumentUtil.readDocumentFromXML(xml, true);
+		Document doc = SAXReaderUtil.read(xml, true);
 
 		Element root = doc.getRootElement();
 
@@ -527,7 +524,7 @@ public class LayoutTemplateLocalServiceImpl
 		if (standardEl != null) {
 			readLayoutTemplate(
 				servletContextName, servletContext, layoutTemplateIds,
-				new ElementImpl(standardEl), true, null, pluginPackage);
+				standardEl, true, null, pluginPackage);
 		}
 
 		Element customEl = root.element("custom");
@@ -535,7 +532,7 @@ public class LayoutTemplateLocalServiceImpl
 		if (customEl != null) {
 			readLayoutTemplate(
 				servletContextName, servletContext, layoutTemplateIds,
-				new ElementImpl(customEl), false, null, pluginPackage);
+				customEl, false, null, pluginPackage);
 		}
 
 		return layoutTemplateIds;

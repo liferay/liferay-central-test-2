@@ -33,6 +33,7 @@ import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.HttpUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;
+import com.liferay.portal.kernel.xml.DocumentException;
 import com.liferay.portal.plugin.PluginPackageImpl;
 import com.liferay.portal.plugin.PluginPackageUtil;
 import com.liferay.portal.service.ServiceComponentLocalServiceUtil;
@@ -49,8 +50,6 @@ import javax.servlet.ServletContext;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-
-import org.dom4j.DocumentException;
 
 /**
  * <a href="PluginPackageHotDeployListener.java.html"><b><i>View Source</i></b>

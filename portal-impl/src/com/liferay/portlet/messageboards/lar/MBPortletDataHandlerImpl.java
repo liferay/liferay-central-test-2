@@ -33,11 +33,13 @@ import com.liferay.portal.kernel.lar.PortletDataHandlerControl;
 import com.liferay.portal.kernel.lar.PortletDataHandlerKeys;
 import com.liferay.portal.kernel.util.ObjectValuePair;
 import com.liferay.portal.kernel.util.StringPool;
+import com.liferay.portal.kernel.xml.Document;
+import com.liferay.portal.kernel.xml.Element;
+import com.liferay.portal.kernel.xml.SAXReaderUtil;
 import com.liferay.portal.model.CompanyConstants;
 import com.liferay.portal.model.User;
 import com.liferay.portal.service.persistence.UserUtil;
 import com.liferay.portal.theme.ThemeDisplay;
-import com.liferay.portal.util.DocumentUtil;
 import com.liferay.portal.util.PortletKeys;
 import com.liferay.portlet.messageboards.NoSuchCategoryException;
 import com.liferay.portlet.messageboards.NoSuchMessageException;
@@ -60,7 +62,6 @@ import com.liferay.portlet.messageboards.service.persistence.MBMessageFlagUtil;
 import com.liferay.portlet.messageboards.service.persistence.MBMessageUtil;
 import com.liferay.portlet.messageboards.service.persistence.MBThreadUtil;
 import com.liferay.util.MapUtil;
-import com.liferay.util.xml.XMLFormatter;
 
 import java.rmi.RemoteException;
 
@@ -73,10 +74,6 @@ import javax.portlet.PortletPreferences;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-
-import org.dom4j.Document;
-import org.dom4j.DocumentHelper;
-import org.dom4j.Element;
 
 /**
  * <a href="MBPortletDataHandlerImpl.java.html"><b><i>View Source</i></b></a>
@@ -113,7 +110,7 @@ public class MBPortletDataHandlerImpl implements PortletDataHandler {
 		throws PortletDataException {
 
 		try {
-			Document doc = DocumentHelper.createDocument();
+			Document doc = SAXReaderUtil.createDocument();
 
 			Element root = doc.addElement("message-boards-data");
 
@@ -142,7 +139,7 @@ public class MBPortletDataHandlerImpl implements PortletDataHandler {
 				}
 			}
 
-			return XMLFormatter.toString(doc);
+			return doc.formattedString();
 		}
 		catch (Exception e) {
 			throw new PortletDataException(e);
@@ -169,7 +166,7 @@ public class MBPortletDataHandlerImpl implements PortletDataHandler {
 		throws PortletDataException {
 
 		try {
-			Document doc = DocumentUtil.readDocumentFromXML(data);
+			Document doc = SAXReaderUtil.read(data);
 
 			Element root = doc.getRootElement();
 

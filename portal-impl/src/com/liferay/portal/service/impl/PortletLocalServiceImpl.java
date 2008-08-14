@@ -29,6 +29,9 @@ import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.ListUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;
+import com.liferay.portal.kernel.xml.Document;
+import com.liferay.portal.kernel.xml.Element;
+import com.liferay.portal.kernel.xml.SAXReaderUtil;
 import com.liferay.portal.model.CompanyConstants;
 import com.liferay.portal.model.EventDefinition;
 import com.liferay.portal.model.Portlet;
@@ -47,7 +50,6 @@ import com.liferay.portal.model.impl.PortletURLListenerImpl;
 import com.liferay.portal.model.impl.PublicRenderParameterImpl;
 import com.liferay.portal.service.base.PortletLocalServiceBaseImpl;
 import com.liferay.portal.util.ContentUtil;
-import com.liferay.portal.util.DocumentUtil;
 import com.liferay.portal.util.PortalInstances;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PortletKeys;
@@ -60,7 +62,6 @@ import com.liferay.portlet.PortletPreferencesSerializer;
 
 import com.sun.portal.wsrp.consumer.common.WSRPConsumerException;
 
-import java.io.IOException;
 import java.io.StringWriter;
 
 import java.util.ArrayList;
@@ -81,9 +82,6 @@ import javax.xml.namespace.QName;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
-import org.dom4j.Document;
-import org.dom4j.DocumentException;
-import org.dom4j.Element;
 import org.dom4j.io.OutputFormat;
 import org.dom4j.io.XMLWriter;
 
@@ -150,8 +148,8 @@ public class PortletLocalServiceImpl extends PortletLocalServiceBaseImpl {
 		try {
 			return _readLiferayDisplayXML(xml);
 		}
-		catch (DocumentException de) {
-			throw new SystemException(de);
+		catch (Exception e) {
+			throw new SystemException(e);
 		}
 	}
 
@@ -161,8 +159,8 @@ public class PortletLocalServiceImpl extends PortletLocalServiceBaseImpl {
 		try {
 			return _readLiferayDisplayXML(servletContextName, xml);
 		}
-		catch (DocumentException de) {
-			throw new SystemException(de);
+		catch (Exception e) {
+			throw new SystemException(e);
 		}
 	}
 
@@ -734,14 +732,14 @@ public class PortletLocalServiceImpl extends PortletLocalServiceBaseImpl {
 	}
 
 	private PortletCategory _readLiferayDisplayXML(String xml)
-		throws DocumentException {
+		throws Exception {
 
 		return _readLiferayDisplayXML(null, xml);
 	}
 
 	private PortletCategory _readLiferayDisplayXML(
 			String servletContextName, String xml)
-		throws DocumentException {
+		throws Exception {
 
 		PortletCategory portletCategory = new PortletCategory();
 
@@ -750,7 +748,7 @@ public class PortletLocalServiceImpl extends PortletLocalServiceBaseImpl {
 				"com/liferay/portal/deploy/dependencies/liferay-display.xml");
 		}
 
-		Document doc = DocumentUtil.readDocumentFromXML(xml, true);
+		Document doc = SAXReaderUtil.read(xml, true);
 
 		Element root = doc.getRootElement();
 
@@ -811,7 +809,7 @@ public class PortletLocalServiceImpl extends PortletLocalServiceBaseImpl {
 
 	private Set<String> _readLiferayPortletXML(
 			String xml, Map<String, Portlet> portletsPool)
-		throws DocumentException {
+		throws Exception {
 
 		return _readLiferayPortletXML(StringPool.BLANK, xml, portletsPool);
 	}
@@ -819,7 +817,7 @@ public class PortletLocalServiceImpl extends PortletLocalServiceBaseImpl {
 	private Set<String> _readLiferayPortletXML(
 			String servletContextName, String xml,
 			Map<String, Portlet> portletsPool)
-		throws DocumentException {
+		throws Exception {
 
 		Set<String> liferayPortletIds = new HashSet<String>();
 
@@ -827,7 +825,7 @@ public class PortletLocalServiceImpl extends PortletLocalServiceBaseImpl {
 			return liferayPortletIds;
 		}
 
-		Document doc = DocumentUtil.readDocumentFromXML(xml, true);
+		Document doc = SAXReaderUtil.read(xml, true);
 
 		Element root = doc.getRootElement();
 
@@ -1157,7 +1155,7 @@ public class PortletLocalServiceImpl extends PortletLocalServiceBaseImpl {
 	private Set<String> _readPortletXML(
 			String xml, Map<String, Portlet> portletsPool,
 			List<String> servletURLPatterns, PluginPackage pluginPackage)
-		throws DocumentException, IOException {
+		throws Exception {
 
 		return _readPortletXML(
 			StringPool.BLANK, xml, portletsPool, servletURLPatterns,
@@ -1168,7 +1166,7 @@ public class PortletLocalServiceImpl extends PortletLocalServiceBaseImpl {
 			String servletContextName, String xml,
 			Map<String, Portlet> portletsPool, List<String> servletURLPatterns,
 			PluginPackage pluginPackage)
-		throws DocumentException, IOException {
+		throws Exception {
 
 		Set<String> portletIds = new HashSet<String>();
 
@@ -1176,7 +1174,7 @@ public class PortletLocalServiceImpl extends PortletLocalServiceBaseImpl {
 			return portletIds;
 		}
 
-		Document doc = DocumentUtil.readDocumentFromXML(xml);
+		Document doc = SAXReaderUtil.read(xml);
 
 		Element root = doc.getRootElement();
 
@@ -1248,9 +1246,7 @@ public class PortletLocalServiceImpl extends PortletLocalServiceBaseImpl {
 
 			List<String> values = new ArrayList<String>();
 
-			for (Element value :
-					(List<Element>)containerRuntimeOption.elements("value")) {
-
+			for (Element value : containerRuntimeOption.elements("value")) {
 				values.add(value.getTextTrim());
 			}
 
@@ -1604,14 +1600,14 @@ public class PortletLocalServiceImpl extends PortletLocalServiceBaseImpl {
 		portletCategory.merge(newPortletCategory);
 	}
 
-	private List<String> _readWebXML(String xml) throws DocumentException {
+	private List<String> _readWebXML(String xml) throws Exception {
 		List<String> servletURLPatterns = new ArrayList<String>();
 
 		if (xml == null) {
 			return servletURLPatterns;
 		}
 
-		Document doc = DocumentUtil.readDocumentFromXML(xml);
+		Document doc = SAXReaderUtil.read(xml);
 
 		Element root = doc.getRootElement();
 

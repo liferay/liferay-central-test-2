@@ -45,8 +45,6 @@ import org.dom4j.io.XMLWriter;
  */
 public class XMLFormatter {
 
-	public static final String INDENT = "\t";
-
 	public static String fixProlog(String xml) {
 
 		// LEP-1921
@@ -79,7 +77,7 @@ public class XMLFormatter {
 	public static String toString(String xml)
 		throws DocumentException, IOException {
 
-		return toString(xml, INDENT);
+		return toString(xml, StringPool.TAB);
 	}
 
 	public static String toString(String xml, String indent)
@@ -93,13 +91,13 @@ public class XMLFormatter {
 	}
 
 	public static String toString(Branch branch) throws IOException {
-		return toString(branch, INDENT);
+		return toString(branch, StringPool.TAB);
 	}
 
 	public static String toString(Branch branch, String indent)
 		throws IOException {
 
-		return toString(branch, INDENT, false);
+		return toString(branch, StringPool.TAB, false);
 	}
 
 	public static String toString(

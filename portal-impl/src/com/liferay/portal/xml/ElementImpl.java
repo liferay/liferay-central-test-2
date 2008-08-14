@@ -22,7 +22,10 @@
 
 package com.liferay.portal.xml;
 
+import com.liferay.portal.kernel.xml.Attribute;
 import com.liferay.portal.kernel.xml.Element;
+import com.liferay.portal.kernel.xml.Namespace;
+import com.liferay.portal.kernel.xml.Node;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -39,16 +42,88 @@ public class ElementImpl implements Element {
 		_el = el;
 	}
 
+	public Element addAttribute(String name, String value) {
+		return new ElementImpl(_el.addAttribute(name, value));
+	}
+
+	public Element addCDATA(String cdata) {
+		return new ElementImpl(_el.addCDATA(cdata));
+	}
+
+	public Element addComment(String comment) {
+		return new ElementImpl(_el.addComment(comment));
+	}
+
+	public Element addEntity(String name, String text) {
+		return new ElementImpl(_el.addEntity(name, text));
+	}
+
+	public Element addElement(String name) {
+		return new ElementImpl(_el.addElement(name));
+	}
+
+	public Element addText(String text) {
+		return new ElementImpl(_el.addText(text));
+	}
+
+	public Attribute attribute(String name) {
+		return new AttributeImpl(_el.attribute(name));
+	}
+
 	public String attributeValue(String name) {
 		return _el.attributeValue(name);
+	}
+
+	public String attributeValue(String name, String defaultValue) {
+		return _el.attributeValue(name, defaultValue);
+	}
+
+	public void clearContent() {
+		_el.clearContent();
+	}
+
+	public Node detach() {
+		return new NodeImpl(_el.detach());
+	}
+
+	public org.dom4j.Element getElement() {
+		return _el;
 	}
 
 	public String getName() {
 		return _el.getName();
 	}
 
+	public Namespace getNamespace() {
+		return new NamespaceImpl(_el.getNamespace());
+	}
+
+	public Namespace getNamespaceForPrefix(String prefix) {
+		return new NamespaceImpl(_el.getNamespaceForPrefix(prefix));
+	}
+
+	public Namespace getNamespaceForURI(String uri) {
+		return new NamespaceImpl(_el.getNamespaceForURI(uri));
+	}
+
+	public String getNamespacePrefix() {
+		return _el.getNamespacePrefix();
+	}
+
+	public List<Namespace> getNamespacesForURI(String uri) {
+		return toNewNamespaces(_el.getNamespacesForURI(uri));
+	}
+
+	public String getNamespaceURI() {
+		return _el.getNamespaceURI();
+	}
+
 	public String getText() {
 		return _el.getText();
+	}
+
+	public String getTextTrim() {
+		return _el.getTextTrim();
 	}
 
 	public Element element(String name) {
@@ -74,7 +149,17 @@ public class ElementImpl implements Element {
 		return _el.elementText(name);
 	}
 
-	private List<Element> toNewElements(List<org.dom4j.Element> oldElements) {
+	public boolean remove(Element el) {
+		ElementImpl elImpl = (ElementImpl)el;
+
+		return _el.remove(elImpl.getElement());
+	}
+
+	public void setText(String text) {
+		_el.setText(text);
+	}
+
+	protected List<Element> toNewElements(List<org.dom4j.Element> oldElements) {
 		List<Element> newElements = new ArrayList<Element>(oldElements.size());
 
 		for (org.dom4j.Element oldEl : oldElements) {
@@ -82,6 +167,19 @@ public class ElementImpl implements Element {
 		}
 
 		return newElements;
+	}
+
+	protected List<Namespace> toNewNamespaces(
+		List<org.dom4j.Namespace> oldNamespaces) {
+
+		List<Namespace> newNamespaces = new ArrayList<Namespace>(
+			oldNamespaces.size());
+
+		for (org.dom4j.Namespace oldNamespace : oldNamespaces) {
+			newNamespaces.add(new NamespaceImpl(oldNamespace));
+		}
+
+		return newNamespaces;
 	}
 
 	private org.dom4j.Element _el;

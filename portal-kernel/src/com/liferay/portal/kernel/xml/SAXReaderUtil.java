@@ -24,6 +24,7 @@ package com.liferay.portal.kernel.xml;
 
 import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
 
+import java.io.File;
 import java.io.Reader;
 
 /**
@@ -34,12 +35,46 @@ import java.io.Reader;
  */
 public class SAXReaderUtil {
 
+	public static Document createDocument() {
+		return getSAXReader().createDocument();
+	}
+
+	public static Element createElement(String name) {
+		return getSAXReader().createElement(name);
+	}
+
 	public static SAXReader getSAXReader() {
 		return _getUtil()._saxReader;
 	}
 
+	public static Document read(File file) throws DocumentException {
+		return getSAXReader().read(file);
+	}
+
+	public static Document read(File file, boolean validate)
+		throws DocumentException {
+
+		return getSAXReader().read(file, validate);
+	}
+
 	public static Document read(Reader reader) throws DocumentException {
 		return getSAXReader().read(reader);
+	}
+
+	public static Document read(Reader reader, boolean validate)
+		throws DocumentException {
+
+		return getSAXReader().read(reader, validate);
+	}
+
+	public static Document read(String xml) throws DocumentException {
+		return getSAXReader().read(xml);
+	}
+
+	public static Document read(String xml, boolean validate)
+		throws DocumentException {
+
+		return getSAXReader().read(xml, validate);
 	}
 
 	public void setSAXReader(SAXReader saxReader) {

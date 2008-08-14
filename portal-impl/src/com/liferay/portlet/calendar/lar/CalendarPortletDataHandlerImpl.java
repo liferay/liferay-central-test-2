@@ -30,22 +30,19 @@ import com.liferay.portal.kernel.lar.PortletDataHandlerBoolean;
 import com.liferay.portal.kernel.lar.PortletDataHandlerControl;
 import com.liferay.portal.kernel.lar.PortletDataHandlerKeys;
 import com.liferay.portal.kernel.util.CalendarFactoryUtil;
-import com.liferay.portal.util.DocumentUtil;
+import com.liferay.portal.kernel.xml.Document;
+import com.liferay.portal.kernel.xml.Element;
+import com.liferay.portal.kernel.xml.SAXReaderUtil;
 import com.liferay.portal.util.PortletKeys;
 import com.liferay.portlet.calendar.model.CalEvent;
 import com.liferay.portlet.calendar.service.CalEventLocalServiceUtil;
 import com.liferay.portlet.calendar.service.persistence.CalEventUtil;
-import com.liferay.util.xml.XMLFormatter;
 
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
 import javax.portlet.PortletPreferences;
-
-import org.dom4j.Document;
-import org.dom4j.DocumentHelper;
-import org.dom4j.Element;
 
 /**
  * <a href="CalendarPortletDataHandlerImpl.java.html"><b><i>View Source</i></b>
@@ -81,7 +78,7 @@ public class CalendarPortletDataHandlerImpl implements PortletDataHandler {
 		throws PortletDataException {
 
 		try {
-			Document doc = DocumentHelper.createDocument();
+			Document doc = SAXReaderUtil.createDocument();
 
 			Element root = doc.addElement("calendar-data");
 
@@ -94,7 +91,7 @@ public class CalendarPortletDataHandlerImpl implements PortletDataHandler {
 				exportEvent(context, root, event);
 			}
 
-			return XMLFormatter.toString(doc);
+			return doc.formattedString();
 		}
 		catch (Exception e) {
 			throw new PortletDataException(e);
@@ -115,7 +112,7 @@ public class CalendarPortletDataHandlerImpl implements PortletDataHandler {
 		throws PortletDataException {
 
 		try {
-			Document doc = DocumentUtil.readDocumentFromXML(data);
+			Document doc = SAXReaderUtil.read(data);
 
 			Element root = doc.getRootElement();
 

@@ -34,11 +34,13 @@ import com.liferay.portal.kernel.util.StringUtil_IW;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.ModelHintsUtil;
 import com.liferay.portal.tools.SourceFormatter;
-import com.liferay.portal.util.DocumentUtil;
 import com.liferay.portal.util.InitUtil;
 import com.liferay.util.SetUtil;
 import com.liferay.util.TextFormatter;
 import com.liferay.portal.kernel.util.Time;
+import com.liferay.portal.kernel.xml.Document;
+import com.liferay.portal.kernel.xml.Element;
+import com.liferay.portal.kernel.xml.SAXReaderUtil;
 import com.liferay.util.log4j.Log4JUtil;
 import com.liferay.util.xml.XMLFormatter;
 
@@ -77,10 +79,7 @@ import java.util.Set;
 import java.util.TreeMap;
 import java.util.TreeSet;
 
-import org.dom4j.Document;
 import org.dom4j.DocumentException;
-import org.dom4j.DocumentHelper;
-import org.dom4j.Element;
 
 /**
  * <a href="ServiceBuilder.java.html"><b><i>View Source</i></b></a>
@@ -479,8 +478,7 @@ public class ServiceBuilder {
 			_propsUtil = propsUtil;
 			_testDir = testDir;
 
-			Document doc = DocumentUtil.readDocumentFromFile(
-				new File(fileName), true);
+			Document doc = SAXReaderUtil.read(new File(fileName), true);
 
 			Element root = doc.getRootElement();
 
@@ -605,7 +603,7 @@ public class ServiceBuilder {
 				List<Element> columns = entityEl.elements("column");
 
 				if (uuid) {
-					Element column = DocumentHelper.createElement("column");
+					Element column = SAXReaderUtil.createElement("column");
 
 					column.addAttribute("name", "uuid");
 					column.addAttribute("type", "String");
@@ -738,7 +736,7 @@ public class ServiceBuilder {
 				List<Element> finders = entityEl.elements("finder");
 
 				if (uuid) {
-					Element finderEl = DocumentHelper.createElement("finder");
+					Element finderEl = SAXReaderUtil.createElement("finder");
 
 					finderEl.addAttribute("name", "Uuid");
 					finderEl.addAttribute("return-type", "Collection");
@@ -750,7 +748,7 @@ public class ServiceBuilder {
 					finders.add(0, finderEl);
 
 					if (columnList.contains(new EntityColumn("groupId"))) {
-						finderEl = DocumentHelper.createElement("finder");
+						finderEl = SAXReaderUtil.createElement("finder");
 
 						finderEl.addAttribute("name", "UUID_G");
 						finderEl.addAttribute("return-type", ejbName);
@@ -2053,8 +2051,7 @@ public class ServiceBuilder {
 	private void _createRemotingXML() throws Exception {
 		StringBuilder sb = new StringBuilder();
 
-		Document doc = DocumentUtil.readDocumentFromFile(
-			new File(_springFileName), true);
+		Document doc = SAXReaderUtil.read(new File(_springFileName), true);
 
 		Iterator<Element> itr = doc.getRootElement().elements(
 			"bean").iterator();

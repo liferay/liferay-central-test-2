@@ -32,22 +32,19 @@ import com.liferay.portal.kernel.lar.PortletDataHandlerControl;
 import com.liferay.portal.kernel.lar.PortletDataHandlerKeys;
 import com.liferay.portal.kernel.util.CalendarFactoryUtil;
 import com.liferay.portal.kernel.util.StringUtil;
+import com.liferay.portal.kernel.xml.Document;
+import com.liferay.portal.kernel.xml.Element;
+import com.liferay.portal.kernel.xml.SAXReaderUtil;
 import com.liferay.portal.theme.ThemeDisplay;
-import com.liferay.portal.util.DocumentUtil;
 import com.liferay.portal.util.PortletKeys;
 import com.liferay.portlet.blogs.model.BlogsEntry;
 import com.liferay.portlet.blogs.service.BlogsEntryLocalServiceUtil;
 import com.liferay.portlet.blogs.service.persistence.BlogsEntryUtil;
-import com.liferay.util.xml.XMLFormatter;
 
 import java.util.Calendar;
 import java.util.List;
 
 import javax.portlet.PortletPreferences;
-
-import org.dom4j.Document;
-import org.dom4j.DocumentHelper;
-import org.dom4j.Element;
 
 /**
  * <a href="BlogsPortletDataHandlerImpl.java.html"><b><i>View Source</i></b></a>
@@ -83,7 +80,7 @@ public class BlogsPortletDataHandlerImpl implements PortletDataHandler {
 		throws PortletDataException {
 
 		try {
-			Document doc = DocumentHelper.createDocument();
+			Document doc = SAXReaderUtil.createDocument();
 
 			Element root = doc.addElement("blogs-data");
 
@@ -96,7 +93,7 @@ public class BlogsPortletDataHandlerImpl implements PortletDataHandler {
 				exportEntry(context, root, entry);
 			}
 
-			return XMLFormatter.toString(doc);
+			return doc.formattedString();
 		}
 		catch (Exception e) {
 			throw new PortletDataException(e);
@@ -121,7 +118,7 @@ public class BlogsPortletDataHandlerImpl implements PortletDataHandler {
 		throws PortletDataException {
 
 		try {
-			Document doc = DocumentUtil.readDocumentFromXML(data);
+			Document doc = SAXReaderUtil.read(data);
 
 			Element root = doc.getRootElement();
 

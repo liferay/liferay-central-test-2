@@ -37,10 +37,12 @@ import com.liferay.portal.kernel.util.HttpUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
+import com.liferay.portal.kernel.xml.Document;
+import com.liferay.portal.kernel.xml.Element;
+import com.liferay.portal.kernel.xml.SAXReaderUtil;
 import com.liferay.portal.model.ModelListener;
 import com.liferay.portal.service.persistence.impl.BasePersistenceImpl;
 import com.liferay.portal.servlet.filters.layoutcache.LayoutCacheUtil;
-import com.liferay.portal.util.DocumentUtil;
 import com.liferay.portal.util.PortalInstances;
 import com.liferay.portal.util.PropsKeys;
 import com.liferay.portal.util.PropsUtil;
@@ -58,9 +60,6 @@ import javax.servlet.ServletContext;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-
-import org.dom4j.Document;
-import org.dom4j.Element;
 
 /**
  * <a href="HookHotDeployListener.java.html"><b><i>View Source</i></b></a>
@@ -140,7 +139,7 @@ public class HookHotDeployListener extends BaseHotDeployListener {
 
 		ClassLoader portletClassLoader = event.getContextClassLoader();
 
-		Document doc = DocumentUtil.readDocumentFromXML(xml, true);
+		Document doc = SAXReaderUtil.read(xml, true);
 
 		Element root = doc.getRootElement();
 

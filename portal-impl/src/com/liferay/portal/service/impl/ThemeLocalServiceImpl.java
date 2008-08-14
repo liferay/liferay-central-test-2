@@ -30,6 +30,9 @@ import com.liferay.portal.kernel.util.ListUtil;
 import com.liferay.portal.kernel.util.ReleaseInfo;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
+import com.liferay.portal.kernel.xml.Document;
+import com.liferay.portal.kernel.xml.Element;
+import com.liferay.portal.kernel.xml.SAXReaderUtil;
 import com.liferay.portal.model.ColorScheme;
 import com.liferay.portal.model.PluginSetting;
 import com.liferay.portal.model.PortletConstants;
@@ -44,9 +47,7 @@ import com.liferay.portal.theme.ThemeCompanyId;
 import com.liferay.portal.theme.ThemeCompanyLimit;
 import com.liferay.portal.theme.ThemeGroupId;
 import com.liferay.portal.theme.ThemeGroupLimit;
-import com.liferay.portal.util.DocumentUtil;
 import com.liferay.portal.util.PortalUtil;
-import com.liferay.portal.xml.ElementImpl;
 import com.liferay.util.ContextReplace;
 import com.liferay.util.Version;
 
@@ -63,10 +64,6 @@ import javax.servlet.ServletContext;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-
-import org.dom4j.Document;
-import org.dom4j.DocumentException;
-import org.dom4j.Element;
 
 /**
  * <a href="ThemeLocalServiceImpl.java.html"><b><i>View Source</i></b></a>
@@ -411,7 +408,7 @@ public class ThemeLocalServiceImpl extends ThemeLocalServiceBaseImpl {
 			String servletContextName, ServletContext servletContext,
 			String themesPath, boolean loadFromServletContext, String xml,
 			PluginPackage pluginPackage)
-		throws DocumentException {
+		throws Exception {
 
 		Set<String> themeIds = new HashSet<String>();
 
@@ -419,7 +416,7 @@ public class ThemeLocalServiceImpl extends ThemeLocalServiceBaseImpl {
 			return themeIds;
 		}
 
-		Document doc = DocumentUtil.readDocumentFromXML(xml, true);
+		Document doc = SAXReaderUtil.read(xml, true);
 
 		Element root = doc.getRootElement();
 
@@ -653,8 +650,7 @@ public class ThemeLocalServiceImpl extends ThemeLocalServiceBaseImpl {
 				if (standardEl != null) {
 					LayoutTemplateLocalServiceUtil.readLayoutTemplate(
 						servletContextName, servletContext, null,
-						new ElementImpl(standardEl), true, themeId,
-						pluginPackage);
+						standardEl, true, themeId, pluginPackage);
 				}
 
 				Element customEl = layoutTemplatesEl.element("custom");
@@ -662,8 +658,7 @@ public class ThemeLocalServiceImpl extends ThemeLocalServiceBaseImpl {
 				if (customEl != null) {
 					LayoutTemplateLocalServiceUtil.readLayoutTemplate(
 						servletContextName, servletContext, null,
-						new ElementImpl(customEl), false, themeId,
-						pluginPackage);
+						customEl, false, themeId, pluginPackage);
 				}
 			}
 		}

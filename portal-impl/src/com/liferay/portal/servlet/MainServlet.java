@@ -43,6 +43,10 @@ import com.liferay.portal.kernel.util.PortalInitableUtil;
 import com.liferay.portal.kernel.util.ReleaseInfo;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;
+import com.liferay.portal.kernel.xml.Document;
+import com.liferay.portal.kernel.xml.DocumentException;
+import com.liferay.portal.kernel.xml.Element;
+import com.liferay.portal.kernel.xml.SAXReaderUtil;
 import com.liferay.portal.lastmodified.LastModifiedAction;
 import com.liferay.portal.model.Company;
 import com.liferay.portal.model.Portlet;
@@ -61,7 +65,6 @@ import com.liferay.portal.service.UserLocalServiceUtil;
 import com.liferay.portal.struts.PortletRequestProcessor;
 import com.liferay.portal.struts.StrutsUtil;
 import com.liferay.portal.util.ContentUtil;
-import com.liferay.portal.util.DocumentUtil;
 import com.liferay.portal.util.Portal;
 import com.liferay.portal.util.PortalInstances;
 import com.liferay.portal.util.PortalUtil;
@@ -109,10 +112,6 @@ import org.apache.struts.action.ActionMapping;
 import org.apache.struts.action.ActionServlet;
 import org.apache.struts.config.ModuleConfig;
 import org.apache.struts.tiles.TilesUtilImpl;
-
-import org.dom4j.Document;
-import org.dom4j.DocumentException;
-import org.dom4j.Element;
 
 /**
  * <a href="MainServlet.java.html"><b><i>View Source</i></b></a>
@@ -814,7 +813,7 @@ public class MainServlet extends ActionServlet {
 	}
 
 	protected void checkWebSettings(String xml) throws DocumentException {
-		Document doc = DocumentUtil.readDocumentFromXML(xml);
+		Document doc = SAXReaderUtil.read(xml);
 
 		Element root = doc.getRootElement();
 

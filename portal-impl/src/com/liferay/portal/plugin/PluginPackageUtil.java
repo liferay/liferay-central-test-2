@@ -45,9 +45,13 @@ import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Time;
 import com.liferay.portal.kernel.util.Validator;
+import com.liferay.portal.kernel.xml.Attribute;
+import com.liferay.portal.kernel.xml.Document;
+import com.liferay.portal.kernel.xml.DocumentException;
+import com.liferay.portal.kernel.xml.Element;
+import com.liferay.portal.kernel.xml.SAXReaderUtil;
 import com.liferay.portal.model.CompanyConstants;
 import com.liferay.portal.model.Plugin;
-import com.liferay.portal.util.DocumentUtil;
 import com.liferay.portal.util.HttpImpl;
 import com.liferay.portal.util.PrefsPropsUtil;
 import com.liferay.portal.util.PropsKeys;
@@ -80,11 +84,6 @@ import org.apache.commons.httpclient.HostConfiguration;
 import org.apache.commons.httpclient.HttpClient;
 import org.apache.commons.httpclient.methods.GetMethod;
 import org.apache.commons.lang.time.StopWatch;
-
-import org.dom4j.Attribute;
-import org.dom4j.Document;
-import org.dom4j.DocumentException;
-import org.dom4j.Element;
 
 /**
  * <a href="PluginPackageUtil.java.html"><b><i>View Source</i></b></a>
@@ -732,7 +731,7 @@ public class PluginPackageUtil {
 			return pluginPackageRepository;
 		}
 
-		Document doc = DocumentUtil.readDocumentFromXML(xml);
+		Document doc = SAXReaderUtil.read(xml);
 
 		Element root = doc.getRootElement();
 
@@ -968,7 +967,7 @@ public class PluginPackageUtil {
 	private PluginPackage _readPluginPackageXml(String xml)
 		throws DocumentException {
 
-		Document doc = DocumentUtil.readDocumentFromXML(xml);
+		Document doc = SAXReaderUtil.read(xml);
 
 		Element root = doc.getRootElement();
 

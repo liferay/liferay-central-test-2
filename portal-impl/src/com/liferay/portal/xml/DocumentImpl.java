@@ -24,6 +24,9 @@ package com.liferay.portal.xml;
 
 import com.liferay.portal.kernel.xml.Document;
 import com.liferay.portal.kernel.xml.Element;
+import com.liferay.util.xml.XMLFormatter;
+
+import java.io.IOException;
 
 /**
  * <a href="DocumentImpl.java.html"><b><i>View Source</i></b></a>
@@ -35,6 +38,32 @@ public class DocumentImpl implements Document {
 
 	public DocumentImpl(org.dom4j.Document doc) {
 		_doc = doc;
+	}
+
+	public Element addElement(String name) {
+		return new ElementImpl(_doc.addElement(name));
+	}
+
+	public String asXML() {
+		return _doc.asXML();
+	}
+
+	public String formattedString() throws IOException {
+		return XMLFormatter.toString(_doc);
+	}
+
+	public String formattedString(String indent) throws IOException {
+		return XMLFormatter.toString(_doc, indent);
+	}
+
+	public String formattedString(String indent, boolean expandEmptyElements)
+		throws IOException {
+
+		return XMLFormatter.toString(_doc, indent, expandEmptyElements);
+	}
+
+	public org.dom4j.Document getDocument() {
+		return _doc;
 	}
 
 	public Element getRootElement() {

@@ -22,6 +22,7 @@
 
 package com.liferay.portal.kernel.xml;
 
+import java.io.File;
 import java.io.Reader;
 
 /**
@@ -32,6 +33,23 @@ import java.io.Reader;
  */
 public interface SAXReader {
 
+	public Document createDocument();
+
+	public Element createElement(String name);
+
+	public Document read(File file) throws DocumentException;
+
+	public Document read(File file, boolean validate)
+		throws DocumentException;
+
 	public Document read(Reader reader) throws DocumentException;
+
+	public Document read(Reader reader, boolean validate)
+		throws DocumentException;
+
+	public Document read(String xml) throws DocumentException;
+
+	public Document read(String xml, boolean validate)
+		throws DocumentException;
 
 }

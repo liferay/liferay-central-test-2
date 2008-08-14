@@ -24,6 +24,7 @@ package com.liferay.portlet.workflow.service.impl;
 
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
+import com.liferay.portal.kernel.xml.DocumentException;
 import com.liferay.portlet.workflow.jbi.WorkflowXMLUtil;
 import com.liferay.portlet.workflow.model.WorkflowInstance;
 import com.liferay.portlet.workflow.service.base.WorkflowInstanceServiceBaseImpl;
@@ -31,8 +32,6 @@ import com.liferay.portlet.workflow.service.base.WorkflowInstanceServiceBaseImpl
 import java.rmi.RemoteException;
 
 import java.text.ParseException;
-
-import org.dom4j.DocumentException;
 
 /**
  * <a href="WorkflowInstanceServiceImpl.java.html"><b><i>View Source</i></b></a>

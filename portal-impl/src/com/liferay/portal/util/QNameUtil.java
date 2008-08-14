@@ -23,6 +23,8 @@
 package com.liferay.portal.util;
 
 import com.liferay.portal.kernel.util.StringPool;
+import com.liferay.portal.kernel.xml.Element;
+import com.liferay.portal.kernel.xml.Namespace;
 
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
@@ -31,9 +33,6 @@ import javax.xml.namespace.QName;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-
-import org.dom4j.Element;
-import org.dom4j.Namespace;
 
 /**
  * <a href="QNameUtil.java.html"><b><i>View Source</i></b></a>

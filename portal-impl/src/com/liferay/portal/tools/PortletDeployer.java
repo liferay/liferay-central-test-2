@@ -26,15 +26,17 @@ import com.liferay.portal.kernel.plugin.PluginPackage;
 import com.liferay.portal.kernel.util.FileUtil;
 import com.liferay.portal.kernel.util.ServerDetector;
 import com.liferay.portal.kernel.util.Validator;
+import com.liferay.portal.kernel.xml.Document;
+import com.liferay.portal.kernel.xml.Element;
+import com.liferay.portal.kernel.xml.SAXReaderUtil;
 import com.liferay.portal.model.Plugin;
-import com.liferay.portal.util.DocumentUtil;
 import com.liferay.portal.util.Portal;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PrefsPropsUtil;
 import com.liferay.portal.util.PropsKeys;
 import com.liferay.portal.util.PropsValues;
+import com.liferay.portal.xml.DocumentImpl;
 import com.liferay.util.TextFormatter;
-import com.liferay.util.xml.XMLFormatter;
 import com.liferay.util.xml.XMLMerger;
 import com.liferay.util.xml.descriptor.FacesXMLDescriptor;
 
@@ -46,9 +48,6 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Properties;
-
-import org.dom4j.Document;
-import org.dom4j.Element;
 
 /**
  * <a href="PortletDeployer.java.html"><b><i>View Source</i></b></a>
@@ -149,7 +148,7 @@ public class PortletDeployer extends BaseDeployer {
 
 		// Add wrappers for portlets
 
-		Document doc = DocumentUtil.readDocumentFromFile(portletXML);
+		Document doc = SAXReaderUtil.read(portletXML);
 
 		Element root = doc.getRootElement();
 
@@ -190,7 +189,7 @@ public class PortletDeployer extends BaseDeployer {
 
 		// Make sure there is a company id specified
 
-		doc = DocumentUtil.readDocumentFromFile(webXML);
+		doc = SAXReaderUtil.read(webXML);
 
 		root = doc.getRootElement();
 
@@ -415,7 +414,7 @@ public class PortletDeployer extends BaseDeployer {
 
 		// portlet.xml
 
-		Document doc = DocumentUtil.readDocumentFromFile(portletXML, true);
+		Document doc = SAXReaderUtil.read(portletXML, true);
 
 		Element root = doc.getRootElement();
 
@@ -442,7 +441,7 @@ public class PortletDeployer extends BaseDeployer {
 
 		// faces-config.xml
 
-		doc = DocumentUtil.readDocumentFromFile(facesXML, true);
+		doc = SAXReaderUtil.read(facesXML, true);
 
 		root = doc.getRootElement();
 
@@ -478,9 +477,11 @@ public class PortletDeployer extends BaseDeployer {
 
 		XMLMerger merger = new XMLMerger(new FacesXMLDescriptor());
 
-		merger.organizeXML(doc);
+		DocumentImpl docImpl = (DocumentImpl)doc;
 
-		FileUtil.write(facesXML, XMLFormatter.toString(doc), true);
+		merger.organizeXML(docImpl.getDocument());
+
+		FileUtil.write(facesXML, doc.formattedString(), true);
 	}
 
 	protected void updateDeployDirectory(File srcFile) throws Exception {

@@ -32,11 +32,45 @@ import java.util.List;
  */
 public interface Element {
 
+	public Element addAttribute(String name, String value);
+
+	public Element addCDATA(String cdata);
+
+	public Element addComment(String comment);
+
+	public Element addEntity(String name, String text);
+
+	public Element addElement(String name);
+
+	public Element addText(String text);
+
+	public Attribute attribute(String name);
+
 	public String attributeValue(String name);
+
+	public String attributeValue(String name, String defaultValue);
+
+	public void clearContent();
+
+	public Node detach();
 
 	public String getName();
 
+	public Namespace getNamespace();
+
+	public Namespace getNamespaceForPrefix(String prefix);
+
+	public Namespace getNamespaceForURI(String uri);
+
+	public String getNamespacePrefix();
+
+	public List<Namespace> getNamespacesForURI(String uri);
+
+	public String getNamespaceURI();
+
 	public String getText();
+
+	public String getTextTrim();
 
 	public Element element(String name);
 
@@ -45,5 +79,9 @@ public interface Element {
 	public List<Element> elements(String name);
 
 	public String elementText(String name);
+
+	public boolean remove(Element el);
+
+	public void setText(String text);
 
 }

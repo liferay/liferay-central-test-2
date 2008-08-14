@@ -34,8 +34,10 @@ import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Time;
 import com.liferay.portal.kernel.util.Validator;
+import com.liferay.portal.kernel.xml.Document;
+import com.liferay.portal.kernel.xml.Element;
+import com.liferay.portal.kernel.xml.SAXReaderUtil;
 import com.liferay.portal.plugin.PluginPackageUtil;
-import com.liferay.portal.util.DocumentUtil;
 import com.liferay.portal.util.InitUtil;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PrefsPropsUtil;
@@ -68,9 +70,6 @@ import java.util.zip.ZipFile;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.apache.oro.io.GlobFilenameFilter;
-
-import org.dom4j.Document;
-import org.dom4j.Element;
 
 /**
  * <a href="BaseDeployer.java.html"><b><i>View Source</i></b></a>
@@ -1143,10 +1142,9 @@ public class BaseDeployer {
 			File file = new File(srcDir + "/WEB-INF/" + files[i]);
 
 			try {
-				Document doc = DocumentUtil.readDocumentFromFile(file);
+				Document doc = SAXReaderUtil.read(file);
 
-				String content = XMLFormatter.toString(
-					doc, XMLFormatter.INDENT, true);
+				String content = doc.formattedString(StringPool.TAB, true);
 
 				FileUtil.write(file, content);
 			}
@@ -1172,7 +1170,7 @@ public class BaseDeployer {
 
 		File geronimoWebXml = new File(srcFile + "/WEB-INF/geronimo-web.xml");
 
-		Document doc = DocumentUtil.readDocumentFromFile(geronimoWebXml);
+		Document doc = SAXReaderUtil.read(geronimoWebXml);
 
 		Element root = doc.getRootElement();
 
@@ -1187,7 +1185,7 @@ public class BaseDeployer {
 		if (!artifactIdText.equals(displayName)) {
 			artifactIdEl.setText(displayName);
 
-			String content = XMLFormatter.toString(doc);
+			String content = doc.formattedString();
 
 			FileUtil.write(geronimoWebXml, content);
 
@@ -1216,7 +1214,7 @@ public class BaseDeployer {
 
 		double webXmlVersion = 2.3;
 
-		Document webXmlDoc = DocumentUtil.readDocumentFromXML(content);
+		Document webXmlDoc = SAXReaderUtil.read(content);
 
 		Element webXmlRoot = webXmlDoc.getRootElement();
 

@@ -26,18 +26,16 @@ import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.HtmlUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;
-import com.liferay.portal.util.DocumentUtil;
+import com.liferay.portal.kernel.xml.Document;
+import com.liferay.portal.kernel.xml.Element;
+import com.liferay.portal.kernel.xml.SAXReaderUtil;
 import com.liferay.portlet.journal.model.JournalArticle;
 import com.liferay.portlet.journal.service.JournalArticleLocalServiceUtil;
 
-import java.util.List;
 import java.util.Map;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-
-import org.dom4j.Document;
-import org.dom4j.Element;
 
 /**
  * <a href="ContentTransformerListener.java.html"><b><i>View Source</i></b></a>
@@ -82,7 +80,7 @@ public class ContentTransformerListener extends TransformerListener {
 	 */
 	protected String replace(String xml) {
 		try {
-			Document doc = DocumentUtil.readDocumentFromXML(xml);
+			Document doc = SAXReaderUtil.read(xml);
 
 			Element root = doc.getRootElement();
 
@@ -102,7 +100,7 @@ public class ContentTransformerListener extends TransformerListener {
 
 		long groupId = GetterUtil.getLong(tokens.get("group_id"));
 
-		for (Element el : (List<Element>)root.elements()) {
+		for (Element el : root.elements()) {
 			Element dynamicContent = el.element("dynamic-content");
 
 			if (dynamicContent != null) {
@@ -154,11 +152,11 @@ public class ContentTransformerListener extends TransformerListener {
 		String content = null;
 
 		try {
-			Document doc = DocumentUtil.readDocumentFromXML(xml);
+			Document doc = SAXReaderUtil.read(xml);
 
 			Element root = doc.getRootElement();
 
-			for (Element el : (List<Element>)root.elements()) {
+			for (Element el : root.elements()) {
 				String elName = el.attributeValue("name", StringPool.BLANK);
 
 				if (elName.equals(elementName)) {

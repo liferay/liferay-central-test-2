@@ -20,29 +20,30 @@
  * SOFTWARE.
  */
 
-package com.liferay.portal.kernel.xml;
+package com.liferay.portal.xml;
 
-import java.io.IOException;
+import com.liferay.portal.kernel.xml.Namespace;
 
 /**
- * <a href="Document.java.html"><b><i>View Source</i></b></a>
+ * <a href="NamespaceImpl.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *
  */
-public interface Document {
+public class NamespaceImpl implements Namespace {
 
-	public Element addElement(String name);
+	public NamespaceImpl(org.dom4j.Namespace namespace) {
+		_namespace = namespace;
+	}
 
-	public String asXML();
+	public org.dom4j.Namespace getNamespace() {
+		return _namespace;
+	}
 
-	public String formattedString() throws IOException;
+	public String getURI() {
+		return _namespace.getURI();
+	}
 
-	public String formattedString(String indent) throws IOException;
-
-	public String formattedString(String indent, boolean expandEmptyElements)
-		throws IOException;
-
-	public Element getRootElement();
+	private org.dom4j.Namespace _namespace;
 
 }

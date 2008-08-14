@@ -20,29 +20,26 @@
  * SOFTWARE.
  */
 
-package com.liferay.portal.kernel.xml;
+package com.liferay.portal.xml;
 
-import java.io.IOException;
+import com.liferay.portal.kernel.xml.Node;
 
 /**
- * <a href="Document.java.html"><b><i>View Source</i></b></a>
+ * <a href="NodeImpl.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *
  */
-public interface Document {
+public class NodeImpl implements Node {
 
-	public Element addElement(String name);
+	public NodeImpl(org.dom4j.Node node) {
+		_node = node;
+	}
 
-	public String asXML();
+	public org.dom4j.Node getNode() {
+		return _node;
+	}
 
-	public String formattedString() throws IOException;
-
-	public String formattedString(String indent) throws IOException;
-
-	public String formattedString(String indent, boolean expandEmptyElements)
-		throws IOException;
-
-	public Element getRootElement();
+	private org.dom4j.Node _node;
 
 }

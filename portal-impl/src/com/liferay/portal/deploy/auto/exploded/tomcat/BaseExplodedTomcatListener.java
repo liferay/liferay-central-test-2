@@ -26,7 +26,9 @@ import com.liferay.portal.kernel.deploy.auto.AutoDeployException;
 import com.liferay.portal.kernel.deploy.auto.AutoDeployListener;
 import com.liferay.portal.kernel.util.FileUtil;
 import com.liferay.portal.kernel.util.Validator;
-import com.liferay.portal.util.DocumentUtil;
+import com.liferay.portal.kernel.xml.Document;
+import com.liferay.portal.kernel.xml.Element;
+import com.liferay.portal.kernel.xml.SAXReaderUtil;
 import com.liferay.portal.util.PrefsPropsUtil;
 import com.liferay.portal.util.PropsKeys;
 import com.liferay.portal.util.PropsValues;
@@ -35,9 +37,6 @@ import java.io.File;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-
-import org.dom4j.Document;
-import org.dom4j.Element;
 
 /**
  * <a href="BaseExplodedTomcatListener.java.html"><b><i>View Source</i></b></a>
@@ -79,7 +78,7 @@ public abstract class BaseExplodedTomcatListener implements AutoDeployListener {
 		try {
 			String content = FileUtil.read(file);
 
-			Document doc = DocumentUtil.readDocumentFromXML(content);
+			Document doc = SAXReaderUtil.read(content);
 
 			Element root = doc.getRootElement();
 

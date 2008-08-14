@@ -22,27 +22,14 @@
 
 package com.liferay.portal.kernel.xml;
 
-import java.io.IOException;
-
 /**
- * <a href="Document.java.html"><b><i>View Source</i></b></a>
+ * <a href="Namespace.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *
  */
-public interface Document {
+public interface Namespace {
 
-	public Element addElement(String name);
-
-	public String asXML();
-
-	public String formattedString() throws IOException;
-
-	public String formattedString(String indent) throws IOException;
-
-	public String formattedString(String indent, boolean expandEmptyElements)
-		throws IOException;
-
-	public Element getRootElement();
+	public String getURI();
 
 }

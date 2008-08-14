@@ -284,6 +284,12 @@ public class JournalUtil {
 		return xml;
 	}
 
+	public static String formatXML(com.liferay.portal.kernel.xml.Document doc)
+		throws IOException {
+
+		return doc.formattedString(XML_INDENT);
+	}
+
 	public static String formatXML(Document doc) throws IOException {
 		return XMLFormatter.toString(doc, XML_INDENT);
 	}

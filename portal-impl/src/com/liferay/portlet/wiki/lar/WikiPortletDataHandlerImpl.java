@@ -33,9 +33,11 @@ import com.liferay.portal.kernel.lar.PortletDataHandlerControl;
 import com.liferay.portal.kernel.lar.PortletDataHandlerKeys;
 import com.liferay.portal.kernel.util.ObjectValuePair;
 import com.liferay.portal.kernel.util.StringPool;
+import com.liferay.portal.kernel.xml.Document;
+import com.liferay.portal.kernel.xml.Element;
+import com.liferay.portal.kernel.xml.SAXReaderUtil;
 import com.liferay.portal.model.CompanyConstants;
 import com.liferay.portal.theme.ThemeDisplay;
-import com.liferay.portal.util.DocumentUtil;
 import com.liferay.portal.util.PortletKeys;
 import com.liferay.portal.util.PropsKeys;
 import com.liferay.portal.util.PropsUtil;
@@ -49,7 +51,6 @@ import com.liferay.portlet.wiki.service.persistence.WikiNodeUtil;
 import com.liferay.portlet.wiki.service.persistence.WikiPageFinderUtil;
 import com.liferay.portlet.wiki.service.persistence.WikiPageUtil;
 import com.liferay.util.MapUtil;
-import com.liferay.util.xml.XMLFormatter;
 
 import java.rmi.RemoteException;
 
@@ -61,10 +62,6 @@ import javax.portlet.PortletPreferences;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-
-import org.dom4j.Document;
-import org.dom4j.DocumentHelper;
-import org.dom4j.Element;
 
 /**
  * <a href="WikiPortletDataHandlerImpl.java.html"><b><i>View Source</i></b></a>
@@ -99,7 +96,7 @@ public class WikiPortletDataHandlerImpl implements PortletDataHandler {
 		throws PortletDataException {
 
 		try {
-			Document doc = DocumentHelper.createDocument();
+			Document doc = SAXReaderUtil.createDocument();
 
 			Element root = doc.addElement("wiki-data");
 
@@ -115,7 +112,7 @@ public class WikiPortletDataHandlerImpl implements PortletDataHandler {
 				exportNode(context, nodesEl, pagesEl, node);
 			}
 
-			return XMLFormatter.toString(doc);
+			return doc.formattedString();
 		}
 		catch (Exception e) {
 			throw new PortletDataException(e);
@@ -140,7 +137,7 @@ public class WikiPortletDataHandlerImpl implements PortletDataHandler {
 		throws PortletDataException {
 
 		try {
-			Document doc = DocumentUtil.readDocumentFromXML(data);
+			Document doc = SAXReaderUtil.read(data);
 
 			Element root = doc.getRootElement();
 

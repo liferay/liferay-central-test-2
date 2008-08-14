@@ -25,7 +25,9 @@ package com.liferay.portal.tools;
 import com.liferay.portal.kernel.util.FileUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.StringUtil;
-import com.liferay.portal.util.DocumentUtil;
+import com.liferay.portal.kernel.xml.Document;
+import com.liferay.portal.kernel.xml.Element;
+import com.liferay.portal.kernel.xml.SAXReaderUtil;
 import com.liferay.portal.util.InitUtil;
 import com.liferay.util.ant.Java2WsddTask;
 
@@ -34,9 +36,6 @@ import java.io.IOException;
 
 import java.util.Iterator;
 import java.util.List;
-
-import org.dom4j.Document;
-import org.dom4j.Element;
 
 /**
  * <a href="WSDDBuilder.java.html"><b><i>View Source</i></b></a>
@@ -63,8 +62,7 @@ public class WSDDBuilder {
 		try {
 			_serverConfigFileName = serverConfigFileName;
 
-			Document doc = DocumentUtil.readDocumentFromFile(
-				new File(fileName), true);
+			Document doc = SAXReaderUtil.read(new File(fileName), true);
 
 			Element root = doc.getRootElement();
 

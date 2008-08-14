@@ -20,29 +20,34 @@
  * SOFTWARE.
  */
 
-package com.liferay.portal.kernel.xml;
+package com.liferay.portal.xml;
 
-import java.io.IOException;
+import com.liferay.portal.kernel.xml.Attribute;
 
 /**
- * <a href="Document.java.html"><b><i>View Source</i></b></a>
+ * <a href="AttributeImpl.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *
  */
-public interface Document {
+public class AttributeImpl implements Attribute {
 
-	public Element addElement(String name);
+	public AttributeImpl(org.dom4j.Attribute attribute) {
+		_attribute = attribute;
+	}
 
-	public String asXML();
+	public org.dom4j.Attribute getAttribute() {
+		return _attribute;
+	}
 
-	public String formattedString() throws IOException;
+	public String getText() {
+		return _attribute.getText();
+	}
 
-	public String formattedString(String indent) throws IOException;
+	public String getValue() {
+		return _attribute.getValue();
+	}
 
-	public String formattedString(String indent, boolean expandEmptyElements)
-		throws IOException;
-
-	public Element getRootElement();
+	private org.dom4j.Attribute _attribute;
 
 }

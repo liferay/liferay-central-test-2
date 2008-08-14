@@ -25,8 +25,10 @@ package com.liferay.portal.theme;
 import com.liferay.portal.kernel.util.FileUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.Validator;
+import com.liferay.portal.kernel.xml.Document;
+import com.liferay.portal.kernel.xml.Element;
+import com.liferay.portal.kernel.xml.SAXReaderUtil;
 import com.liferay.portal.service.ThemeLocalServiceUtil;
-import com.liferay.portal.util.DocumentUtil;
 import com.liferay.portal.util.PropsValues;
 
 import java.io.File;
@@ -38,9 +40,6 @@ import javax.servlet.ServletContext;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-
-import org.dom4j.Document;
-import org.dom4j.Element;
 
 /**
  * <a href="ThemeLoader.java.html"><b><i>View Source</i></b></a>
@@ -124,7 +123,7 @@ public class ThemeLoader {
 		_servletContext = servletContext;
 
 		try {
-			Document doc = DocumentUtil.readDocumentFromXML(xmls[0], true);
+			Document doc = SAXReaderUtil.read(xmls[0], true);
 
 			Element root = doc.getRootElement();
 
