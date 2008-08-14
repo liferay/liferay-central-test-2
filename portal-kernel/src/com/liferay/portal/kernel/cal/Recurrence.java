@@ -313,9 +313,9 @@ public class Recurrence implements Serializable {
 	 *
 	 */
 	public void setFrequency(int freq) {
-		if ((freq != DAILY) && (freq != WEEKLY)	&& (freq != MONTHLY) &&
-			(freq != YEARLY) && (freq != NO_RECURRENCE)) {
-			
+		if ((frequency != DAILY) && (frequency != WEEKLY)
+			&& (frequency != MONTHLY) && (frequency != YEARLY)
+			&& (frequency != NO_RECURRENCE)) {
 			throw new IllegalArgumentException("Invalid frequency");
 		}
 
