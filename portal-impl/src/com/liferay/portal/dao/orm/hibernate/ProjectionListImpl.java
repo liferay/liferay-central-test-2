@@ -45,7 +45,7 @@ public class ProjectionListImpl
 	public ProjectionList add(Projection projection, String alias) {
 		ProjectionImpl projectionImpl = (ProjectionImpl)projection;
 
-		getProjectionList().add(projectionImpl.getProjection(), alias);
+		_projectionList.add(projectionImpl.getWrappedProjection(), alias);
 
 		return this;
 	}
@@ -53,12 +53,12 @@ public class ProjectionListImpl
 	public ProjectionList add(Projection projection) {
 		ProjectionImpl projectionImpl = (ProjectionImpl)projection;
 
-		getProjectionList().add(projectionImpl.getProjection());
+		_projectionList.add(projectionImpl.getWrappedProjection());
 
 		return this;
 	}
 
-	public org.hibernate.criterion.ProjectionList getProjectionList() {
+	public org.hibernate.criterion.ProjectionList getWrappedProjectionList() {
 		return _projectionList;
 	}
 

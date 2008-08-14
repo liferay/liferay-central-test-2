@@ -20,26 +20,55 @@
  * SOFTWARE.
  */
 
-package com.liferay.portal.dao.orm.hibernate;
+package com.liferay.portal.kernel.xml;
 
-import com.liferay.portal.kernel.dao.orm.Projection;
+import java.util.Iterator;
+import java.util.List;
 
 /**
- * <a href="ProjectionImpl.java.html"><b><i>View Source</i></b></a>
+ * <a href="Branch.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *
  */
-public class ProjectionImpl implements Projection {
+public interface Branch extends Node {
 
-	public ProjectionImpl(org.hibernate.criterion.Projection projection) {
-		_projection = projection;
-	}
+	public void add(Comment comment);
 
-	public org.hibernate.criterion.Projection getWrappedProjection() {
-		return _projection;
-	}
+	public void add(Element element);
 
-	private org.hibernate.criterion.Projection _projection;
+	public void add(Node node);
+
+	public Element addElement(QName qName);
+
+	public Element addElement(String name);
+
+	public Element addElement(String qualifiedName, String namespaceURI);
+
+	public void appendContent(Branch branch);
+
+	public void clearContent();
+
+	public List<Node> content();
+
+	public Element elementByID(String elementID);
+
+	public int indexOf(Node node);
+
+	public Node node(int index);
+
+	public int nodeCount();
+
+	public Iterator<Node> nodeIterator();
+
+	public void normalize();
+
+	public boolean remove(Comment comment);
+
+	public boolean remove(Element element);
+
+	public boolean remove(Node node);
+
+	public void setContent(List<Node> content);
 
 }

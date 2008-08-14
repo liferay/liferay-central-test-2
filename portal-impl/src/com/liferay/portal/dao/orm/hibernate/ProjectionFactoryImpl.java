@@ -37,10 +37,10 @@ import org.hibernate.criterion.Projections;
 public class ProjectionFactoryImpl implements ProjectionFactory {
 
 	public Projection alias(Projection projection, String alias) {
-		ProjectionImpl impl = (ProjectionImpl)projection;
+		ProjectionImpl projectionImpl = (ProjectionImpl)projection;
 
 		return new ProjectionImpl(
-			Projections.alias(impl.getProjection(), alias));
+			Projections.alias(projectionImpl.getWrappedProjection(), alias));
 	}
 
 	public Projection avg(String propertyName) {
@@ -56,9 +56,10 @@ public class ProjectionFactoryImpl implements ProjectionFactory {
 	}
 
 	public Projection distinct(Projection projection) {
-		ProjectionImpl impl = (ProjectionImpl)projection;
+		ProjectionImpl projectionImpl = (ProjectionImpl)projection;
 
-		return new ProjectionImpl(Projections.distinct(impl.getProjection()));
+		return new ProjectionImpl(
+			Projections.distinct(projectionImpl.getWrappedProjection()));
 	}
 
 	public Projection groupProperty(String propertyName) {

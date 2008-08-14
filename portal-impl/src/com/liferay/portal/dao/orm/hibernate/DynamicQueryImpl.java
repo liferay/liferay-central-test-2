@@ -48,7 +48,7 @@ public class DynamicQueryImpl implements DynamicQuery {
 	public DynamicQuery add(Criterion criterion) {
 		CriterionImpl criterionImpl = (CriterionImpl)criterion;
 
-		_detachedCriteria.add(criterionImpl.getCriterion());
+		_detachedCriteria.add(criterionImpl.getWrappedCriterion());
 
 		return this;
 	}
@@ -56,7 +56,7 @@ public class DynamicQueryImpl implements DynamicQuery {
 	public DynamicQuery addOrder(Order order) {
 		OrderImpl orderImpl = (OrderImpl)order;
 
-		_detachedCriteria.addOrder(orderImpl.getOrder());
+		_detachedCriteria.addOrder(orderImpl.getWrappedOrder());
 
 		return this;
 	}
@@ -64,7 +64,8 @@ public class DynamicQueryImpl implements DynamicQuery {
 	public void compile(Session session) {
 		SessionImpl sessionImpl = (SessionImpl)session;
 
-		org.hibernate.Session hibernateSession = sessionImpl.getSession();
+		org.hibernate.Session hibernateSession =
+			sessionImpl.getWrappedSession();
 
 		if (hibernateSession instanceof LiferaySession) {
 			hibernateSession =
@@ -96,7 +97,7 @@ public class DynamicQueryImpl implements DynamicQuery {
 	public DynamicQuery setProjection(Projection projection) {
 		ProjectionImpl projectionImpl = (ProjectionImpl)projection;
 
-		_detachedCriteria.setProjection(projectionImpl.getProjection());
+		_detachedCriteria.setProjection(projectionImpl.getWrappedProjection());
 
 		return this;
 	}

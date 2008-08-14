@@ -30,18 +30,32 @@ import com.liferay.portal.kernel.xml.Namespace;
  * @author Brian Wing Shun Chan
  *
  */
-public class NamespaceImpl implements Namespace {
+public class NamespaceImpl extends NodeImpl implements Namespace {
 
 	public NamespaceImpl(org.dom4j.Namespace namespace) {
+		super(namespace);
+
 		_namespace = namespace;
 	}
 
-	public org.dom4j.Namespace getNamespace() {
-		return _namespace;
+	public short getNodeType() {
+		return _namespace.getNodeType();
+	}
+
+	public String getPrefix() {
+		return _namespace.getPrefix();
 	}
 
 	public String getURI() {
 		return _namespace.getURI();
+	}
+
+	public org.dom4j.Namespace getWrappedNamespace() {
+		return _namespace;
+	}
+
+	public String getXPathNameStep() {
+		return _namespace.getXPathNameStep();
 	}
 
 	private org.dom4j.Namespace _namespace;

@@ -22,7 +22,6 @@
 
 package com.liferay.portlet;
 
-import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.util.ByteArrayMaker;
 import com.liferay.portal.kernel.util.GetterUtil;
@@ -60,7 +59,7 @@ import org.dom4j.io.XMLWriter;
 public class PortletPreferencesSerializer {
 
 	public static PortletPreferences fromDefaultXML(String xml)
-		throws PortalException, SystemException {
+		throws SystemException {
 
 		PortletPreferencesImpl prefs = new PortletPreferencesImpl();
 
@@ -118,7 +117,7 @@ public class PortletPreferencesSerializer {
 	public static PortletPreferencesImpl fromXML(
 			long companyId, long ownerId, int ownerType, long plid,
 			String portletId, String xml)
-		throws PortalException, SystemException {
+		throws SystemException {
 
 		try {
 			PortletPreferencesImpl prefs =
@@ -129,9 +128,6 @@ public class PortletPreferencesSerializer {
 				prefs.getPreferences());
 
 			return prefs;
-		}
-		catch (PortalException pe) {
-			throw pe;
 		}
 		catch (SystemException se) {
 			throw se;
@@ -194,7 +190,7 @@ public class PortletPreferencesSerializer {
 			ElementImpl portletPreferencesImpl =
 				(ElementImpl)portletPreferences;
 
-			writer.write(portletPreferencesImpl.getElement());
+			writer.write(portletPreferencesImpl.getWrappedElement());
 
 			return bam.toString(StringPool.UTF8);
 		}

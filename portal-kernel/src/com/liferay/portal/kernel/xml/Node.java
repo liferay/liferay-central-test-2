@@ -22,6 +22,11 @@
 
 package com.liferay.portal.kernel.xml;
 
+import java.io.IOException;
+import java.io.Writer;
+
+import java.util.List;
+
 /**
  * <a href="Node.java.html"><b><i>View Source</i></b></a>
  *
@@ -29,4 +34,58 @@ package com.liferay.portal.kernel.xml;
  *
  */
 public interface Node {
+
+	public String asXML();
+
+	public Node asXPathResult(Element parent);
+
+	public Node detach();
+
+	public Document getDocument();
+
+	public String getName();
+
+	public String getPath();
+
+	public String getPath(Element context);
+
+	public String getStringValue();
+
+	public String getText();
+
+	public String getUniquePath();
+
+	public String getUniquePath(Element context);
+
+	public boolean hasContent();
+
+	public boolean isReadOnly();
+
+	public boolean matches(String xpathExpression);
+
+	public Number numberValueOf(String xpathExpression);
+
+	public List<Node> selectNodes(String xpathExpression);
+
+	public List<Node> selectNodes(
+		String xpathExpression, String comparisonXPathExpression);
+
+	public List<Node> selectNodes(
+		String xpathExpression, String comparisonXPathExpression,
+		boolean removeDuplicates);
+
+	public Object selectObject(String xpathExpression);
+
+	public Node selectSingleNode(String xpathExpression);
+
+	public void setName(String name);
+
+	public void setText(String text);
+
+	public boolean supportsParent();
+
+	public String valueOf(String xpathExpression);
+
+	public void write(Writer writer) throws IOException;
+
 }

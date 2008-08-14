@@ -23,11 +23,16 @@
 package com.liferay.portal.xml;
 
 import com.liferay.portal.kernel.xml.Attribute;
+import com.liferay.portal.kernel.xml.CDATA;
 import com.liferay.portal.kernel.xml.Element;
+import com.liferay.portal.kernel.xml.Entity;
 import com.liferay.portal.kernel.xml.Namespace;
 import com.liferay.portal.kernel.xml.Node;
+import com.liferay.portal.kernel.xml.QName;
+import com.liferay.portal.kernel.xml.Text;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 /**
@@ -36,38 +41,87 @@ import java.util.List;
  * @author Brian Wing Shun Chan
  *
  */
-public class ElementImpl implements Element {
+public class ElementImpl extends BranchImpl implements Element {
 
-	public ElementImpl(org.dom4j.Element el) {
-		_el = el;
+	public ElementImpl(org.dom4j.Element element) {
+		super(element);
+
+		_element = element;
+	}
+
+	public void add(Attribute attribute) {
+		AttributeImpl attributeImpl = (AttributeImpl)attribute;
+
+		_element.add(attributeImpl.getWrappedAttribute());
+	}
+
+	public void add(CDATA cdata) {
+		CDATAImpl cdataImpl = (CDATAImpl)cdata;
+
+		_element.add(cdataImpl.getWrappedCDATA());
+	}
+
+	public void add(Entity entity) {
+		EntityImpl entityImpl = (EntityImpl)entity;
+
+		_element.add(entityImpl.getWrappedEntity());
+	}
+
+	public void add(Namespace namespace) {
+		NamespaceImpl namespaceImpl = (NamespaceImpl)namespace;
+
+		_element.add(namespaceImpl.getWrappedNamespace());
+	}
+
+	public void add(Text text) {
+		TextImpl textImpl = (TextImpl)text;
+
+		_element.add(textImpl.getWrappedText());
+	}
+
+	public Element addAttribute(QName qName, String value) {
+		QNameImpl qNameImpl = (QNameImpl)qName;
+
+		return new ElementImpl(
+			_element.addAttribute(qNameImpl.getWrappedQName(), value));
 	}
 
 	public Element addAttribute(String name, String value) {
-		return new ElementImpl(_el.addAttribute(name, value));
+		return new ElementImpl(_element.addAttribute(name, value));
 	}
 
 	public Element addCDATA(String cdata) {
-		return new ElementImpl(_el.addCDATA(cdata));
+		return new ElementImpl(_element.addCDATA(cdata));
 	}
 
 	public Element addComment(String comment) {
-		return new ElementImpl(_el.addComment(comment));
+		return new ElementImpl(_element.addComment(comment));
 	}
 
 	public Element addEntity(String name, String text) {
-		return new ElementImpl(_el.addEntity(name, text));
+		return new ElementImpl(_element.addEntity(name, text));
 	}
 
-	public Element addElement(String name) {
-		return new ElementImpl(_el.addElement(name));
+	public Element addNamespace(String prefix, String uri) {
+		return new ElementImpl(_element.addNamespace(prefix, uri));
 	}
 
 	public Element addText(String text) {
-		return new ElementImpl(_el.addText(text));
+		return new ElementImpl(_element.addText(text));
 	}
 
-	public Attribute attribute(String name) {
-		org.dom4j.Attribute attribute = _el.attribute(name);
+	public List<Namespace> additionalNamespaces() {
+		return toNewNamespaces(_element.additionalNamespaces());
+	}
+
+	public void appendAttributes(Element element) {
+		ElementImpl elementImpl = (ElementImpl)element;
+
+		_element.appendAttributes(elementImpl.getWrappedElement());
+	}
+
+	public Attribute attribute(int index) {
+		org.dom4j.Attribute attribute = _element.attribute(index);
 
 		if (attribute == null) {
 			return null;
@@ -77,32 +131,145 @@ public class ElementImpl implements Element {
 		}
 	}
 
+	public Attribute attribute(QName qName) {
+		QNameImpl qNameImpl = (QNameImpl)qName;
+
+		org.dom4j.Attribute attribute = _element.attribute(
+			qNameImpl.getWrappedQName());
+
+		if (attribute == null) {
+			return null;
+		}
+		else {
+			return new AttributeImpl(attribute);
+		}
+	}
+
+	public Attribute attribute(String name) {
+		org.dom4j.Attribute attribute = _element.attribute(name);
+
+		if (attribute == null) {
+			return null;
+		}
+		else {
+			return new AttributeImpl(attribute);
+		}
+	}
+
+	public int attributeCount() {
+		return _element.attributeCount();
+	}
+
+	public Iterator<Attribute> attributeIterator() {
+		return attributes().iterator();
+	}
+
+	public String attributeValue(QName qName) {
+		QNameImpl qNameImpl = (QNameImpl)qName;
+
+		return _element.attributeValue(qNameImpl.getWrappedQName());
+	}
+
+	public String attributeValue(QName qName, String defaultValue) {
+		QNameImpl qNameImpl = (QNameImpl)qName;
+
+		return _element.attributeValue(
+			qNameImpl.getWrappedQName(), defaultValue);
+	}
+
 	public String attributeValue(String name) {
-		return _el.attributeValue(name);
+		return _element.attributeValue(name);
 	}
 
 	public String attributeValue(String name, String defaultValue) {
-		return _el.attributeValue(name, defaultValue);
+		return _element.attributeValue(name, defaultValue);
 	}
 
-	public void clearContent() {
-		_el.clearContent();
+	public List<Attribute> attributes() {
+		return toNewAttributes(_element.attributes());
 	}
 
-	public Node detach() {
-		return new NodeImpl(_el.detach());
+	public Element createCopy() {
+		return new ElementImpl(_element.createCopy());
 	}
 
-	public org.dom4j.Element getElement() {
-		return _el;
+	public Element createCopy(QName qName) {
+		QNameImpl qNameImpl = (QNameImpl)qName;
+
+		return new ElementImpl(
+			_element.createCopy(qNameImpl.getWrappedQName()));
 	}
 
-	public String getName() {
-		return _el.getName();
+	public Element createCopy(String name) {
+		return new ElementImpl(_element.createCopy(name));
+	}
+
+	public List<Namespace> declaredNamespaces() {
+		return toNewNamespaces(_element.declaredNamespaces());
+	}
+
+	public Element element(QName qName) {
+		QNameImpl qNameImpl = (QNameImpl)qName;
+
+		return new ElementImpl(_element.element(qNameImpl.getWrappedQName()));
+	}
+
+	public Element element(String name) {
+		return new ElementImpl(_element.element(name));
+	}
+
+	public Iterator<Element> elementIterator() {
+		return elements().iterator();
+	}
+
+	public Iterator<Element> elementIterator(QName qName) {
+		return elements(qName).iterator();
+	}
+
+	public Iterator<Element> elementIterator(String name) {
+		return elements(name).iterator();
+	}
+
+	public String elementText(QName qName) {
+		QNameImpl qNameImpl = (QNameImpl)qName;
+
+		return _element.elementText(qNameImpl.getWrappedQName());
+	}
+
+	public String elementText(String name) {
+		return _element.elementText(name);
+	}
+
+	public String elementTextTrim(QName qName) {
+		QNameImpl qNameImpl = (QNameImpl)qName;
+
+		return _element.elementTextTrim(qNameImpl.getWrappedQName());
+	}
+
+	public String elementTextTrim(String name) {
+		return _element.elementTextTrim(name);
+	}
+
+	public List<Element> elements() {
+		return toNewElements(_element.elements());
+	}
+
+	public List<Element> elements(QName qName) {
+		QNameImpl qNameImpl = (QNameImpl)qName;
+
+		return toNewElements(_element.elements(qNameImpl.getWrappedQName()));
+	}
+
+	public List<Element> elements(String name) {
+		return toNewElements(_element.elements(name));
+	}
+
+	public Object getData() {
+		return _element.getData();
 	}
 
 	public Namespace getNamespace() {
-		org.dom4j.Namespace namespace = _el.getNamespace();
+		org.dom4j.Namespace namespace = _element.getNamespace();
 
 		if (namespace == null) {
 			return null;
@@ -113,7 +280,7 @@ public class ElementImpl implements Element {
 	}
 
 	public Namespace getNamespaceForPrefix(String prefix) {
-		org.dom4j.Namespace namespace = _el.getNamespaceForPrefix(prefix);
+		org.dom4j.Namespace namespace = _element.getNamespaceForPrefix(prefix);
 
 		if (namespace == null) {
 			return null;
@@ -124,7 +291,7 @@ public class ElementImpl implements Element {
 	}
 
 	public Namespace getNamespaceForURI(String uri) {
-		org.dom4j.Namespace namespace = _el.getNamespaceForURI(uri);
+		org.dom4j.Namespace namespace = _element.getNamespaceForURI(uri);
 
 		if (namespace == null) {
 			return null;
@@ -135,63 +302,136 @@ public class ElementImpl implements Element {
 	}
 
 	public String getNamespacePrefix() {
-		return _el.getNamespacePrefix();
-	}
-
-	public List<Namespace> getNamespacesForURI(String uri) {
-		return toNewNamespaces(_el.getNamespacesForURI(uri));
+		return _element.getNamespacePrefix();
 	}
 
 	public String getNamespaceURI() {
-		return _el.getNamespaceURI();
+		return _element.getNamespaceURI();
 	}
 
-	public String getText() {
-		return _el.getText();
+	public List<Namespace> getNamespacesForURI(String uri) {
+		return toNewNamespaces(_element.getNamespacesForURI(uri));
 	}
 
-	public String getTextTrim() {
-		return _el.getTextTrim();
-	}
+	public QName getQName() {
+		org.dom4j.QName qName = _element.getQName();
 
-	public Element element(String name) {
-		org.dom4j.Element el = _el.element(name);
-
-		if (el == null) {
+		if (qName == null) {
 			return null;
 		}
 		else {
-			return new ElementImpl(el);
+			return new QNameImpl(qName);
 		}
 	}
 
-	public List<Element> elements() {
-		return toNewElements(_el.elements());
+	public QName getQName(String qualifiedName) {
+		org.dom4j.QName qName = _element.getQName(qualifiedName);
+
+		if (qName == null) {
+			return null;
+		}
+		else {
+			return new QNameImpl(qName);
+		}
 	}
 
-	public List<Element> elements(String name) {
-		return toNewElements(_el.elements(name));
+	public String getQualifiedName() {
+		return _element.getQualifiedName();
 	}
 
-	public String elementText(String name) {
-		return _el.elementText(name);
+	public String getTextTrim() {
+		return _element.getTextTrim();
 	}
 
-	public boolean remove(Element el) {
-		ElementImpl elImpl = (ElementImpl)el;
-
-		return _el.remove(elImpl.getElement());
+	public org.dom4j.Element getWrappedElement() {
+		return _element;
 	}
 
-	public void setText(String text) {
-		_el.setText(text);
+	public Node getXPathResult(int index) {
+		org.dom4j.Node node = _element.getXPathResult(index);
+
+		if (node == null) {
+			return null;
+		}
+		else {
+			return new NodeImpl(node);
+		}
+	}
+
+	public boolean hasMixedContent() {
+		return _element.hasMixedContent();
+	}
+
+	public boolean isRootElement() {
+		return _element.isRootElement();
+	}
+
+	public boolean isTextOnly() {
+		return _element.isTextOnly();
+	}
+
+	public boolean remove(Attribute attribute) {
+		AttributeImpl attributeImpl = (AttributeImpl)attribute;
+
+		return _element.remove(attributeImpl.getWrappedAttribute());
+	}
+
+	public boolean remove(CDATA cdata) {
+		CDATAImpl cdataImpl = (CDATAImpl)cdata;
+
+		return _element.remove(cdataImpl.getWrappedCDATA());
+	}
+
+	public boolean remove(Entity entity) {
+		EntityImpl entityImpl = (EntityImpl)entity;
+
+		return _element.remove(entityImpl.getWrappedEntity());
+	}
+
+	public boolean remove(Namespace namespace) {
+		NamespaceImpl namespaceImpl = (NamespaceImpl)namespace;
+
+		return _element.remove(namespaceImpl.getWrappedNamespace());
+	}
+
+	public boolean remove(Text text) {
+		TextImpl textImpl = (TextImpl)text;
+
+		return _element.remove(textImpl.getWrappedText());
+	}
+
+	public void setAttributes(List<Attribute> attributes) {
+		_element.setAttributes(toOldAttributes(attributes));
+	}
+
+	public void setData(Object data) {
+		_element.setData(data);
+	}
+
+	public void setQName(QName qName) {
+		QNameImpl qNameImpl = (QNameImpl)qName;
+
+		_element.setQName(qNameImpl.getWrappedQName());
+	}
+
+	protected List<Attribute> toNewAttributes(
+		List<org.dom4j.Attribute> oldAttributes) {
+
+		List<Attribute> newAttributes = new ArrayList<Attribute>(
+			oldAttributes.size());
+
+		for (org.dom4j.Attribute oldAttribute : oldAttributes) {
+			newAttributes.add(new AttributeImpl(oldAttribute));
+		}
+
+		return newAttributes;
 	}
 
 	protected List<Element> toNewElements(List<org.dom4j.Element> oldElements) {
 		List<Element> newElements = new ArrayList<Element>(oldElements.size());
 
-		for (org.dom4j.Element oldEl : oldElements) {
-			newElements.add(new ElementImpl(oldEl));
+		for (org.dom4j.Element oldElement : oldElements) {
+			newElements.add(new ElementImpl(oldElement));
 		}
 
 		return newElements;
@@ -210,6 +450,21 @@ public class ElementImpl implements Element {
 		return newNamespaces;
 	}
 
-	private org.dom4j.Element _el;
+	protected List<org.dom4j.Attribute> toOldAttributes(
+		List<Attribute> newAttributes) {
+
+		List<org.dom4j.Attribute> oldAttributes =
+			new ArrayList<org.dom4j.Attribute>(newAttributes.size());
+
+		for (Attribute newAttribute : newAttributes) {
+			AttributeImpl newAttributeImpl = (AttributeImpl)newAttribute;
+
+			oldAttributes.add(newAttributeImpl.getWrappedAttribute());
+		}
+
+		return oldAttributes;
+	}
+
+	private org.dom4j.Element _element;
 
 }

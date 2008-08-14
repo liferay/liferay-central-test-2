@@ -1400,7 +1400,7 @@ public class PortletLocalServiceImpl extends PortletLocalServiceBaseImpl {
 				ElementImpl portletPreferencesImpl =
 					(ElementImpl)portletPreferences;
 
-				writer.write(portletPreferencesImpl.getElement());
+				writer.write(portletPreferencesImpl.getWrappedElement());
 
 				defaultPreferences = sw.toString();
 			}

@@ -20,26 +20,28 @@
  * SOFTWARE.
  */
 
-package com.liferay.portal.dao.orm.hibernate;
+package com.liferay.portal.xml;
 
-import com.liferay.portal.kernel.dao.orm.Projection;
+import com.liferay.portal.kernel.xml.Entity;
 
 /**
- * <a href="ProjectionImpl.java.html"><b><i>View Source</i></b></a>
+ * <a href="EntityImpl.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *
  */
-public class ProjectionImpl implements Projection {
+public class EntityImpl extends NodeImpl implements Entity {
 
-	public ProjectionImpl(org.hibernate.criterion.Projection projection) {
-		_projection = projection;
+	public EntityImpl(org.dom4j.Entity entity) {
+		super(entity);
+
+		_entity = entity;
 	}
 
-	public org.hibernate.criterion.Projection getWrappedProjection() {
-		return _projection;
+	public org.dom4j.Entity getWrappedEntity() {
+		return _entity;
 	}
 
-	private org.hibernate.criterion.Projection _projection;
+	private org.dom4j.Entity _entity;
 
 }

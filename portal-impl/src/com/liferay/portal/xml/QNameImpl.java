@@ -20,26 +20,54 @@
  * SOFTWARE.
  */
 
-package com.liferay.portal.dao.orm.hibernate;
+package com.liferay.portal.xml;
 
-import com.liferay.portal.kernel.dao.orm.Projection;
+import com.liferay.portal.kernel.xml.Namespace;
+import com.liferay.portal.kernel.xml.QName;
 
 /**
- * <a href="ProjectionImpl.java.html"><b><i>View Source</i></b></a>
+ * <a href="QNameImpl.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *
  */
-public class ProjectionImpl implements Projection {
+public class QNameImpl implements QName {
 
-	public ProjectionImpl(org.hibernate.criterion.Projection projection) {
-		_projection = projection;
+	public QNameImpl(org.dom4j.QName qName) {
+		_qName = qName;
 	}
 
-	public org.hibernate.criterion.Projection getWrappedProjection() {
-		return _projection;
+	public String getName() {
+		return _qName.getName();
 	}
 
-	private org.hibernate.criterion.Projection _projection;
+	public Namespace getNamespace() {
+		org.dom4j.Namespace namespace = _qName.getNamespace();
+
+		if (namespace == null) {
+			return null;
+		}
+		else {
+			return new NamespaceImpl(namespace);
+		}
+	}
+
+	public String getNamespacePrefix() {
+		return _qName.getNamespacePrefix();
+	}
+
+	public String getNamespaceURI() {
+		return _qName.getNamespaceURI();
+	}
+
+	public String getQualifiedName() {
+		return _qName.getQualifiedName();
+	}
+
+	public org.dom4j.QName getWrappedQName() {
+		return _qName;
+	}
+
+	private org.dom4j.QName _qName;
 
 }

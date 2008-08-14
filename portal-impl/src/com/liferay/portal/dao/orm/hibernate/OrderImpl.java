@@ -36,7 +36,7 @@ public class OrderImpl implements Order {
 		_criterion = criterion;
 	}
 
-	public org.hibernate.criterion.Order getOrder() {
+	public org.hibernate.criterion.Order getWrappedOrder() {
 		return _criterion;
 	}
 

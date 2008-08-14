@@ -28,8 +28,14 @@ package com.liferay.portal.kernel.xml;
  * @author Brian Wing Shun Chan
  *
  */
-public interface Namespace {
+public interface Namespace extends Node {
+
+	public short getNodeType();
+
+	public String getPrefix();
 
 	public String getURI();
+
+	public String getXPathNameStep();
 
 }

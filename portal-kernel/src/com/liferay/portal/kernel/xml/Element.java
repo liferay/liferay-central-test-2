@@ -22,6 +22,7 @@
 
 package com.liferay.portal.kernel.xml;
 
+import java.util.Iterator;
 import java.util.List;
 
 /**
@@ -30,7 +31,19 @@ import java.util.List;
  * @author Brian Wing Shun Chan
  *
  */
-public interface Element {
+public interface Element extends Branch {
+
+	public void add(Attribute attribute);
+
+	public void add(CDATA cdata);
+
+	public void add(Entity entity);
+
+	public void add(Namespace namespace);
+
+	public void add(Text text);
+
+	public Element addAttribute(QName qName, String value);
 
 	public Element addAttribute(String name, String value);
 
@@ -40,21 +53,67 @@ public interface Element {
 
 	public Element addEntity(String name, String text);
 
-	public Element addElement(String name);
+	public List<Namespace> additionalNamespaces();
+
+	public Element addNamespace(String prefix, String uri);
 
 	public Element addText(String text);
 
+	public void appendAttributes(Element element);
+
+	public Attribute attribute(int index);
+
+	public Attribute attribute(QName qName);
+
 	public Attribute attribute(String name);
+
+	public int attributeCount();
+
+	public Iterator<Attribute> attributeIterator();
+
+	public List<Attribute> attributes();
+
+	public String attributeValue(QName qName);
+
+	public String attributeValue(QName qName, String defaultValue);
 
 	public String attributeValue(String name);
 
 	public String attributeValue(String name, String defaultValue);
 
-	public void clearContent();
+	public Element createCopy();
 
-	public Node detach();
+	public Element createCopy(QName qName);
 
-	public String getName();
+	public Element createCopy(String name);
+
+	public List<Namespace> declaredNamespaces();
+
+	public Element element(QName qName);
+
+	public Element element(String name);
+
+	public Iterator<Element> elementIterator();
+
+	public Iterator<Element> elementIterator(QName qName);
+
+	public Iterator<Element> elementIterator(String name);
+
+	public List<Element> elements();
+
+	public List<Element> elements(QName qName);
+
+	public List<Element> elements(String name);
+
+	public String elementText(QName qName);
+
+	public String elementText(String name);
+
+	public String elementTextTrim(QName qName);
+
+	public String elementTextTrim(String name);
+
+	public Object getData();
 
 	public Namespace getNamespace();
 
@@ -68,20 +127,40 @@ public interface Element {
 
 	public String getNamespaceURI();
 
+	public QName getQName();
+
+	public QName getQName(String qualifiedName);
+
+	public String getQualifiedName();
+
+	public String getStringValue();
+
 	public String getText();
 
 	public String getTextTrim();
 
-	public Element element(String name);
+	public Node getXPathResult(int index);
 
-	public List<Element> elements();
+	public boolean hasMixedContent();
 
-	public List<Element> elements(String name);
+	public boolean isRootElement();
 
-	public String elementText(String name);
+	public boolean isTextOnly();
 
-	public boolean remove(Element el);
+	public boolean remove(Attribute attribute);
 
-	public void setText(String text);
+	public boolean remove(CDATA cdata);
+
+	public boolean remove(Entity entity);
+
+	public boolean remove(Namespace namespace);
+
+	public boolean remove(Text text);
+
+	public void setAttributes(List<Attribute> attributes);
+
+	public void setData(Object data);
+
+	public void setQName(QName qName);
 
 }

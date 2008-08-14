@@ -34,42 +34,62 @@ import java.io.IOException;
  * @author Brian Wing Shun Chan
  *
  */
-public class DocumentImpl implements Document {
+public class DocumentImpl extends BranchImpl implements Document {
 
-	public DocumentImpl(org.dom4j.Document doc) {
-		_doc = doc;
+	public DocumentImpl(org.dom4j.Document document) {
+		super(document);
+
+		_document = document;
 	}
 
-	public Element addElement(String name) {
-		return new ElementImpl(_doc.addElement(name));
+	public Document addComment(String comment) {
+		_document.addComment(comment);
+
+		return this;
 	}
 
-	public String asXML() {
-		return _doc.asXML();
+	public Document addDocType(String name, String publicId, String systemId) {
+		_document.addDocType(name, publicId, systemId);
+
+		return this;
+	}
+
+	public String getXMLEncoding() {
+		return _document.getXMLEncoding();
 	}
 
 	public String formattedString() throws IOException {
-		return XMLFormatter.toString(_doc);
+		return XMLFormatter.toString(_document);
 	}
 
 	public String formattedString(String indent) throws IOException {
-		return XMLFormatter.toString(_doc, indent);
+		return XMLFormatter.toString(_document, indent);
 	}
 
 	public String formattedString(String indent, boolean expandEmptyElements)
 		throws IOException {
 
-		return XMLFormatter.toString(_doc, indent, expandEmptyElements);
-	}
-
-	public org.dom4j.Document getDocument() {
-		return _doc;
+		return XMLFormatter.toString(_document, indent, expandEmptyElements);
 	}
 
 	public Element getRootElement() {
-		return new ElementImpl(_doc.getRootElement());
+		return new ElementImpl(_document.getRootElement());
 	}
 
-	private org.dom4j.Document _doc;
+	public org.dom4j.Document getWrappedDocument() {
+		return _document;
+	}
+
+	public void setRootElement(Element rootElement) {
+		ElementImpl rootElementImpl = (ElementImpl)rootElement;
+
+		_document.setRootElement(rootElementImpl.getWrappedElement());
+	}
+
+	public void setXMLEncoding(String encoding) {
+		_document.setXMLEncoding(encoding);
+	}
+
+	private org.dom4j.Document _document;
 
 }

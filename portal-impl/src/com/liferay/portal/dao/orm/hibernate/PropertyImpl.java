@@ -86,19 +86,19 @@ public class PropertyImpl extends ProjectionImpl implements Property {
 		PropertyImpl propertyImpl = (PropertyImpl)other;
 
 		return new CriterionImpl(
-			_property.eqProperty(propertyImpl.getProperty()));
+			_property.eqProperty(propertyImpl.getWrappedProperty()));
 	}
 
 	public Criterion eqProperty(String other) {
 		return new CriterionImpl(_property.eqProperty(other));
 	}
 
-	public org.hibernate.criterion.Property getProperty() {
-		return _property;
-	}
-
 	public Property getProperty(String propertyName) {
 		return new PropertyImpl(_property.getProperty(propertyName));
+	}
+
+	public org.hibernate.criterion.Property getWrappedProperty() {
+		return _property;
 	}
 
 	public Projection group() {
@@ -127,7 +127,7 @@ public class PropertyImpl extends ProjectionImpl implements Property {
 		PropertyImpl propertyImpl = (PropertyImpl)other;
 
 		return new CriterionImpl(
-			_property.geProperty(propertyImpl.getProperty()));
+			_property.geProperty(propertyImpl.getWrappedProperty()));
 	}
 
 	public Criterion geProperty(String other) {
@@ -163,7 +163,7 @@ public class PropertyImpl extends ProjectionImpl implements Property {
 		PropertyImpl propertyImpl = (PropertyImpl)other;
 
 		return new CriterionImpl(
-			_property.gtProperty(propertyImpl.getProperty()));
+			_property.gtProperty(propertyImpl.getWrappedProperty()));
 	}
 
 	public Criterion gtProperty(String other) {
@@ -230,7 +230,7 @@ public class PropertyImpl extends ProjectionImpl implements Property {
 		PropertyImpl propertyImpl = (PropertyImpl)other;
 
 		return new CriterionImpl(
-			_property.leProperty(propertyImpl.getProperty()));
+			_property.leProperty(propertyImpl.getWrappedProperty()));
 	}
 
 	public Criterion leProperty(String other) {
@@ -270,7 +270,7 @@ public class PropertyImpl extends ProjectionImpl implements Property {
 		PropertyImpl propertyImpl = (PropertyImpl)other;
 
 		return new CriterionImpl(
-			_property.ltProperty(propertyImpl.getProperty()));
+			_property.ltProperty(propertyImpl.getWrappedProperty()));
 	}
 
 	public Criterion ltProperty(String other) {
@@ -307,7 +307,7 @@ public class PropertyImpl extends ProjectionImpl implements Property {
 		PropertyImpl propertyImpl = (PropertyImpl)other;
 
 		return new CriterionImpl(
-			_property.neProperty(propertyImpl.getProperty()));
+			_property.neProperty(propertyImpl.getWrappedProperty()));
 	}
 
 	public Criterion neProperty(String other) {

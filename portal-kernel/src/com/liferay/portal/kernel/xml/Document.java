@@ -30,11 +30,11 @@ import java.io.IOException;
  * @author Brian Wing Shun Chan
  *
  */
-public interface Document {
+public interface Document extends Branch {
 
-	public Element addElement(String name);
+	public Document addComment(String comment);
 
-	public String asXML();
+	public Document addDocType(String name, String publicId, String systemId);
 
 	public String formattedString() throws IOException;
 
@@ -44,5 +44,11 @@ public interface Document {
 		throws IOException;
 
 	public Element getRootElement();
+
+	public String getXMLEncoding();
+
+	public void setRootElement(Element rootElement);
+
+	public void setXMLEncoding(String encoding);
 
 }

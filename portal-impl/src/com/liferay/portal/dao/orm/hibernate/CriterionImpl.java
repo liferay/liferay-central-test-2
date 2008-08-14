@@ -36,7 +36,7 @@ public class CriterionImpl implements Criterion {
 		_criterion = criterion;
 	}
 
-	public org.hibernate.criterion.Criterion getCriterion() {
+	public org.hibernate.criterion.Criterion getWrappedCriterion() {
 		return _criterion;
 	}
 

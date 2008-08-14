@@ -479,7 +479,7 @@ public class PortletDeployer extends BaseDeployer {
 
 		DocumentImpl docImpl = (DocumentImpl)doc;
 
-		merger.organizeXML(docImpl.getDocument());
+		merger.organizeXML(docImpl.getWrappedDocument());
 
 		FileUtil.write(facesXML, doc.formattedString(), true);
 	}

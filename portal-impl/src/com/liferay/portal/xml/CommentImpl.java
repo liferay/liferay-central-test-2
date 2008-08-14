@@ -20,26 +20,28 @@
  * SOFTWARE.
  */
 
-package com.liferay.portal.dao.orm.hibernate;
+package com.liferay.portal.xml;
 
-import com.liferay.portal.kernel.dao.orm.Projection;
+import com.liferay.portal.kernel.xml.Comment;
 
 /**
- * <a href="ProjectionImpl.java.html"><b><i>View Source</i></b></a>
+ * <a href="CommentImpl.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *
  */
-public class ProjectionImpl implements Projection {
+public class CommentImpl extends NodeImpl implements Comment {
 
-	public ProjectionImpl(org.hibernate.criterion.Projection projection) {
-		_projection = projection;
+	public CommentImpl(org.dom4j.Comment comment) {
+		super(comment);
+
+		_comment = comment;
 	}
 
-	public org.hibernate.criterion.Projection getWrappedProjection() {
-		return _projection;
+	public org.dom4j.Comment getWrappedComment() {
+		return _comment;
 	}
 
-	private org.hibernate.criterion.Projection _projection;
+	private org.dom4j.Comment _comment;
 
 }

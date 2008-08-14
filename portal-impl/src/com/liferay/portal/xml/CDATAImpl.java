@@ -20,26 +20,28 @@
  * SOFTWARE.
  */
 
-package com.liferay.portal.dao.orm.hibernate;
+package com.liferay.portal.xml;
 
-import com.liferay.portal.kernel.dao.orm.Projection;
+import com.liferay.portal.kernel.xml.CDATA;
 
 /**
- * <a href="ProjectionImpl.java.html"><b><i>View Source</i></b></a>
+ * <a href="CDATAImpl.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *
  */
-public class ProjectionImpl implements Projection {
+public class CDATAImpl extends NodeImpl implements CDATA {
 
-	public ProjectionImpl(org.hibernate.criterion.Projection projection) {
-		_projection = projection;
+	public CDATAImpl(org.dom4j.CDATA cdata) {
+		super(cdata);
+
+		_cdata = cdata;
 	}
 
-	public org.hibernate.criterion.Projection getWrappedProjection() {
-		return _projection;
+	public org.dom4j.CDATA getWrappedCDATA() {
+		return _cdata;
 	}
 
-	private org.hibernate.criterion.Projection _projection;
+	private org.dom4j.CDATA _cdata;
 
 }
