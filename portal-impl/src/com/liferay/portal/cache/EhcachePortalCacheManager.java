@@ -30,6 +30,7 @@ import java.net.URL;
 
 import net.sf.ehcache.Cache;
 import net.sf.ehcache.CacheManager;
+import net.sf.ehcache.ObjectExistsException;
 
 import org.springframework.beans.factory.DisposableBean;
 import org.springframework.beans.factory.InitializingBean;
@@ -62,7 +63,14 @@ public class EhcachePortalCacheManager
 		Cache cache = _cacheManager.getCache(name);
 
 		if (cache == null) {
-			_cacheManager.addCache(name);
+			try {
+				_cacheManager.addCache(name);
+			}
+			catch( ObjectExistsException oee ) {
+				// This typically occurs at boot on high traffic servers when
+				// the cache is uninitialized and the server is hit by a large 
+				// number of simultaneous requests.
+			}
 
 			cache = _cacheManager.getCache(name);
 		}
