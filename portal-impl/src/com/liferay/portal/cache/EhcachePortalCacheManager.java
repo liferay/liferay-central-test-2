@@ -66,10 +66,10 @@ public class EhcachePortalCacheManager
 			try {
 				_cacheManager.addCache(name);
 			}
-			catch( ObjectExistsException oee ) {
-				// This typically occurs at boot on high traffic servers when
-				// the cache is uninitialized and the server is hit by a large 
-				// number of simultaneous requests.
+			catch (ObjectExistsException oee) {
+
+				// LEP-7122
+
 			}
 
 			cache = _cacheManager.getCache(name);
