@@ -51,6 +51,7 @@ import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PortletKeys;
 import com.liferay.portal.util.PropsValues;
+import com.liferay.portlet.tags.service.TagsEntryLocalServiceUtil;
 import com.liferay.portlet.wiki.DuplicatePageException;
 import com.liferay.portlet.wiki.NoSuchPageException;
 import com.liferay.portlet.wiki.PageContentException;
@@ -321,7 +322,8 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 		boolean minorEdit = false;
 		String format = page.getFormat();
 		String redirectTitle = page.getRedirectTitle();
-		String[] tagsEntries = null;
+		String[] tagsEntries = TagsEntryLocalServiceUtil.getEntryNames(
+			WikiPage.class.getName(), page.getResourcePrimKey());
 
 		updatePage(
 			userId, nodeId, title, version, content, summary, minorEdit,
@@ -787,11 +789,10 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 			StringPool.DOUBLE_OPEN_BRACKET + redirectTitle +
 				StringPool.DOUBLE_CLOSE_BRACKET;
 		String summary = WikiPageImpl.MOVED + " to " + title;
-		String[] tagsEntries = null;
 
 		addPage(
 			uuid, userId, nodeId, title, version, content, summary, false,
-			format, head, parentTitle, redirectTitle, tagsEntries, prefs,
+			format, head, parentTitle, redirectTitle, null, prefs,
 			themeDisplay);
 
 		// Move redirects to point to the page with the new title
@@ -806,6 +807,9 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 		}
 
 		// Tags
+
+		String[] tagsEntries = TagsEntryLocalServiceUtil.getEntryNames(
+				WikiPage.class.getName(), page.getResourcePrimKey());
 
 		updateTagsAsset(userId, page, tagsEntries);
 

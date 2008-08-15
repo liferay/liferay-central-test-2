@@ -341,6 +341,9 @@ if (Validator.isNull(redirect)) {
 			if (!newPage) {
 				classPK = wikiPage.getResourcePrimKey();
 			}
+			else if (Validator.isNotNull(templatePage)) {
+				classPK = templatePage.getResourcePrimKey();
+			}
 			%>
 
 			<liferay-ui:tags-selector
