@@ -50,7 +50,9 @@ boolean editTitle = ParamUtil.getBoolean(request, "editTitle");
 
 String content = BeanParamUtil.getString(wikiPage, request, "content");
 String format = BeanParamUtil.getString(wikiPage, request, "format", WikiPageImpl.DEFAULT_FORMAT);
+boolean minorEdit = BeanParamUtil.getBoolean(wikiPage, request, "minorEdit");
 String parentTitle = BeanParamUtil.getString(wikiPage, request, "parentTitle");
+String summary = BeanParamUtil.getString(wikiPage, request, "summary");
 
 String[] attachments = new String[0];
 
@@ -358,7 +360,7 @@ if (Validator.isNull(redirect)) {
 			<liferay-ui:message key="summary" />
 		</td>
 		<td>
-			<input name="<portlet:namespace />summary" size="75" type="text" />
+			<input name="<portlet:namespace />summary" size="75" type="text" value="<%= summary %>" />
 		</td>
 	</tr>
 	<tr>
@@ -368,7 +370,7 @@ if (Validator.isNull(redirect)) {
 	</tr>
 	<tr>
 		<td colspan="2">
-			<input name="<portlet:namespace />minorEdit" type="checkbox" />
+			<input <%= minorEdit ? "checked" : "" %> name="<portlet:namespace />minorEdit" type="checkbox" />
 
 			<liferay-ui:message key="this-is-a-minor-edit" />
 		</td>
