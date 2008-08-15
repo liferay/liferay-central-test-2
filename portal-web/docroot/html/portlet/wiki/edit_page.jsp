@@ -48,11 +48,11 @@ String title = BeanParamUtil.getString(wikiPage, request, "title");
 
 boolean editTitle = ParamUtil.getBoolean(request, "editTitle");
 
-String content = BeanParamUtil.getString(wikiPage, request, "content");
-String format = BeanParamUtil.getString(wikiPage, request, "format", WikiPageImpl.DEFAULT_FORMAT);
 boolean minorEdit = BeanParamUtil.getBoolean(wikiPage, request, "minorEdit");
-String parentTitle = BeanParamUtil.getString(wikiPage, request, "parentTitle");
+String content = BeanParamUtil.getString(wikiPage, request, "content");
 String summary = BeanParamUtil.getString(wikiPage, request, "summary");
+String format = BeanParamUtil.getString(wikiPage, request, "format", WikiPageImpl.DEFAULT_FORMAT);
+String parentTitle = BeanParamUtil.getString(wikiPage, request, "parentTitle");
 
 String[] attachments = new String[0];
 
