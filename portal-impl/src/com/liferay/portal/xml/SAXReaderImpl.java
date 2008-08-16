@@ -107,7 +107,12 @@ public class SAXReaderImpl implements SAXReader {
 		List<Node> newNodes = new ArrayList<Node>(oldNodes.size());
 
 		for (org.dom4j.Node oldNode : oldNodes) {
-			newNodes.add(new NodeImpl(oldNode));
+			if (oldNode instanceof org.dom4j.Element) {
+				newNodes.add(new ElementImpl((org.dom4j.Element)oldNode));
+			}
+			else {
+				newNodes.add(new NodeImpl(oldNode));
+			}
 		}
 
 		return newNodes;
