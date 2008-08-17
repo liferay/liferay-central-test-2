@@ -1049,15 +1049,15 @@ portletURL.setParameter("resourcePrimKey", resourcePrimKey);
 					for (int i = 0; i < actions1.size(); i++) {
 						String actionId = (String)actions1.get(i);
 
-						if (isGuestRole) {
-							if (!guestUnsupportedActions.contains(actionId)) {
-								if (!actions2.contains(actionId)) {
+						if (!actions2.contains(actionId)) {
+							if (isGuestRole) {
+								if (!guestUnsupportedActions.contains(actionId)) {
 									rightList.add(new KeyValuePair(actionId, ResourceActionsUtil.getAction(pageContext, actionId)));
 								}
 							}
-						}
-						else {
-							rightList.add(new KeyValuePair(actionId, ResourceActionsUtil.getAction(pageContext, actionId)));
+							else {
+								rightList.add(new KeyValuePair(actionId, ResourceActionsUtil.getAction(pageContext, actionId)));
+							}
 						}
 					}
 
