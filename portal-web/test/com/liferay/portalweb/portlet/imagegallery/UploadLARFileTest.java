@@ -74,7 +74,7 @@ public class UploadLARFileTest extends BaseTestCase {
 
 		selenium.type("_86_importFileName",
 			RuntimeVariables.replace(
-				"D:\\trunk\\portal\\build\\portal-web\\test\\com\\liferay\\portalweb\\portlet\\imagegallery\\ImageGallery-Selenium.portlet.lar"));
+				"L:\\portal\\build\\portal-web\\test\\com\\liferay\\portalweb\\portlet\\imagegallery\\ImageGallery-Selenium.portlet.lar"));
 		selenium.click(RuntimeVariables.replace("//input[@value='Import']"));
 		selenium.waitForPageToLoad("30000");
 
