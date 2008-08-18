@@ -47,6 +47,8 @@ public interface SingleVMPool {
 
 	public void put(PortalCache portalCache, String key, Object obj);
 
+	public void put(PortalCache portalCache, String key, Object obj, int timeToLives);
+
 	public void put(String name, String key, Serializable obj);
 
 	public void put(PortalCache portalCache, String key, Serializable obj);
