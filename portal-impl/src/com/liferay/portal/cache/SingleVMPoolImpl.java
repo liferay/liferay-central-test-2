@@ -71,7 +71,9 @@ public class SingleVMPoolImpl implements SingleVMPool {
 		portalCache.put(key, obj);
 	}
 
-	public void put(PortalCache portalCache, String key, Object obj, int timeToLive) {
+	public void put(
+		PortalCache portalCache, String key, Object obj, int timeToLive) {
+
 		portalCache.put(key, obj, timeToLive);
 	}
 
@@ -83,6 +85,12 @@ public class SingleVMPoolImpl implements SingleVMPool {
 
 	public void put(PortalCache portalCache, String key, Serializable obj) {
 		portalCache.put(key, obj);
+	}
+
+	public void put(
+		PortalCache portalCache, String key, Serializable obj, int timeToLive) {
+
+		portalCache.put(key, obj, timeToLive);
 	}
 
 	public void remove(String name, String key) {

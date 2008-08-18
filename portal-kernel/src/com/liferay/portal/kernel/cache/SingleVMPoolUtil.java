@@ -67,7 +67,9 @@ public class SingleVMPoolUtil {
 		getSingleVMPool().put(portalCache, key, obj);
 	}
 
-	public static void put(PortalCache portalCache, String key, Object obj, int timeToLive) {
+	public static void put(
+		PortalCache portalCache, String key, Object obj, int timeToLive) {
+
 		getSingleVMPool().put(portalCache, key, obj, timeToLive);
 	}
 
@@ -79,6 +81,12 @@ public class SingleVMPoolUtil {
 		PortalCache portalCache, String key, Serializable obj) {
 
 		getSingleVMPool().put(portalCache, key, obj);
+	}
+
+	public static void put(
+		PortalCache portalCache, String key, Serializable obj, int timeToLive) {
+
+		getSingleVMPool().put(portalCache, key, obj, timeToLive);
 	}
 
 	public static void remove(String name, String key) {
