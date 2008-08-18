@@ -20,7 +20,7 @@
  * SOFTWARE.
  */
 
-package com.liferay.util.diff;
+package com.liferay.portal.util;
 
 import com.liferay.portal.kernel.util.DiffResult;
 import com.liferay.portal.kernel.util.FileUtil;
