@@ -238,7 +238,7 @@
 			<ref bean="com.liferay.portal.util.CalendarFactoryImpl" />
 		</property>
 	</bean>
-	<bean id="com.liferay.portal.util.DiffImpl" class="com.liferay.util.diff.DiffImpl" lazy-init="true" />
+	<bean id="com.liferay.portal.util.DiffImpl" class="com.liferay.portal.util.DiffImpl" lazy-init="true" />
 	<bean id="com.liferay.portal.kernel.util.DiffUtil" class="com.liferay.portal.kernel.util.DiffUtil" lazy-init="true">
 		<property name="diff">
 			<ref bean="com.liferay.portal.util.DiffImpl" />
