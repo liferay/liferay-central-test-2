@@ -20,54 +20,35 @@
  * SOFTWARE.
  */
 
-package com.liferay.taglib.ui;
+package com.liferay.portal.kernel.util;
 
-import com.liferay.portal.kernel.util.DiffResult;
-import com.liferay.taglib.util.IncludeTag;
+import java.io.Reader;
 
 import java.util.List;
 
-import javax.servlet.http.HttpServletRequest;
-
 /**
- * <a href="DiffTag.java.html"><b><i>View Source</i></b></a>
+ * <a href="Diff.java.html"><b><i>View Source</i></b></a>
  *
  * @author Bruno Farache
  *
  */
-public class DiffTag extends IncludeTag {
+public interface Diff {
 
-	public int doStartTag() {
-		HttpServletRequest request =
-			(HttpServletRequest)pageContext.getRequest();
+	public final String OPEN_INS = "<ins>";
 
-		request.setAttribute("liferay-ui:diff:sourceName", _sourceName);
-		request.setAttribute("liferay-ui:diff:targetName", _targetName);
-		request.setAttribute("liferay-ui:diff:diffResults", _diffResults);
+	public final String CLOSE_INS = "</ins>";
 
-		return EVAL_BODY_BUFFERED;
-	}
+	public final String OPEN_DEL = "<del>";
 
-	public void setSourceName(String sourceName) {
-		_sourceName = sourceName;
-	}
+	public final String CLOSE_DEL = "</del>";
 
-	public void setTargetName(String targetName) {
-		_targetName = targetName;
-	}
+	public final String CONTEXT_LINE = "#context#line#";
 
-	public void setDiffResults(List<DiffResult>[] diffResults) {
-		_diffResults = diffResults;
-	}
+	public List<DiffResult>[] diff(Reader source, Reader target);
 
-	protected String getDefaultPage() {
-		return _PAGE;
-	}
-
-	private static final String _PAGE = "/html/taglib/ui/diff/page.jsp";
-
-	private String _sourceName;
-	private String _targetName;
-	private List<DiffResult>[] _diffResults;
+	public List<DiffResult>[] diff(
+		Reader source, Reader target, String addedMarkerStart,
+		String addedMarkerEnd, String deletedMarkerStart,
+		String deletedMarkerEnd, int margin);
 
 }

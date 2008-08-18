@@ -22,9 +22,10 @@
 
 package com.liferay.util.diff;
 
+import com.liferay.portal.kernel.util.Diff;
+import com.liferay.portal.kernel.util.DiffResult;
+import com.liferay.portal.kernel.util.DiffUtil;
 import com.liferay.util.BaseTestCase;
-import com.liferay.util.diff.DiffResult;
-import com.liferay.util.diff.DiffUtil;
 
 import java.io.StringReader;
 
@@ -62,16 +63,16 @@ public class DiffTest extends BaseTestCase {
 		List<String> changedLines = new ArrayList<String>();
 
 		changedLines.add(
-			DiffUtil.OPEN_DEL + "l" + DiffUtil.CLOSE_DEL + "ife" +
-				DiffUtil.OPEN_DEL + "r" + DiffUtil.CLOSE_DEL + "ay");
+			Diff.OPEN_DEL + "l" + Diff.CLOSE_DEL + "ife" + Diff.OPEN_DEL + "r" +
+				Diff.CLOSE_DEL + "ay");
 
 		expectedSource.add(new DiffResult(0, changedLines));
 
 		changedLines = new ArrayList<String>();
 
 		changedLines.add(
-			DiffUtil.OPEN_INS + "L" + DiffUtil.CLOSE_INS + "ife" +
-				DiffUtil.OPEN_INS + "R" + DiffUtil.CLOSE_INS + "ay");
+			Diff.OPEN_INS + "L" + Diff.CLOSE_INS + "ife" + Diff.OPEN_INS + "R" +
+				Diff.CLOSE_INS + "ay");
 
 		expectedTarget.add(new DiffResult(0, changedLines));
 
@@ -88,15 +89,15 @@ public class DiffTest extends BaseTestCase {
 		List<DiffResult> expectedSource = new ArrayList<DiffResult>();
 		List<DiffResult> expectedTarget = new ArrayList<DiffResult>();
 
-		expectedSource.add(new DiffResult(0, DiffUtil.CONTEXT_LINE));
+		expectedSource.add(new DiffResult(0, Diff.CONTEXT_LINE));
 
 		expectedTarget.add(
-			new DiffResult(0, DiffUtil.OPEN_INS + "bbb" + DiffUtil.CLOSE_INS));
+			new DiffResult(0, Diff.OPEN_INS + "bbb" + Diff.CLOSE_INS));
 
 		expectedSource.add(
-			new DiffResult(0, DiffUtil.OPEN_DEL + "aaa" + DiffUtil.CLOSE_DEL));
+			new DiffResult(0, Diff.OPEN_DEL + "aaa" + Diff.CLOSE_DEL));
 
-		expectedTarget.add(new DiffResult(0, DiffUtil.CONTEXT_LINE));
+		expectedTarget.add(new DiffResult(0, Diff.CONTEXT_LINE));
 
 		List<DiffResult>[] actual = DiffUtil.diff(reader1, reader2);
 
@@ -111,16 +112,15 @@ public class DiffTest extends BaseTestCase {
 		List<DiffResult> expectedSource = new ArrayList<DiffResult>();
 		List<DiffResult> expectedTarget = new ArrayList<DiffResult>();
 
-		expectedSource.add(new DiffResult(0, DiffUtil.CONTEXT_LINE));
+		expectedSource.add(new DiffResult(0, Diff.CONTEXT_LINE));
 
 		expectedTarget.add(
-			new DiffResult(0, DiffUtil.OPEN_INS + "boaz" + DiffUtil.CLOSE_INS));
+			new DiffResult(0, Diff.OPEN_INS + "boaz" + Diff.CLOSE_INS));
 
 		expectedSource.add(
-			new DiffResult(
-				0, DiffUtil.OPEN_DEL + "rahab" + DiffUtil.CLOSE_DEL));
+			new DiffResult(0, Diff.OPEN_DEL + "rahab" + Diff.CLOSE_DEL));
 
-		expectedTarget.add(new DiffResult(0, DiffUtil.CONTEXT_LINE));
+		expectedTarget.add(new DiffResult(0, Diff.CONTEXT_LINE));
 
 		List<DiffResult>[] actual = DiffUtil.diff(reader1, reader2);
 
@@ -135,22 +135,22 @@ public class DiffTest extends BaseTestCase {
 		List<DiffResult> expectedSource = new ArrayList<DiffResult>();
 		List<DiffResult> expectedTarget = new ArrayList<DiffResult>();
 
-		expectedSource.add(new DiffResult(0, DiffUtil.CONTEXT_LINE));
+		expectedSource.add(new DiffResult(0, Diff.CONTEXT_LINE));
 
 		expectedTarget.add(
-			new DiffResult(0, DiffUtil.OPEN_INS + "ccc" + DiffUtil.CLOSE_INS));
+			new DiffResult(0, Diff.OPEN_INS + "ccc" + Diff.CLOSE_INS));
 
 		List<String> changedLines = new ArrayList<String>();
 
 		changedLines.add("aaa");
-		changedLines.add(DiffUtil.OPEN_DEL + "bbb" + DiffUtil.CLOSE_DEL);
+		changedLines.add(Diff.OPEN_DEL + "bbb" + Diff.CLOSE_DEL);
 
 		expectedSource.add(new DiffResult(1, changedLines));
 
 		changedLines = new ArrayList<String>();
 
 		changedLines.add("aaa");
-		changedLines.add(DiffUtil.CONTEXT_LINE);
+		changedLines.add(Diff.CONTEXT_LINE);
 
 		expectedTarget.add(new DiffResult(1, changedLines));
 
@@ -168,21 +168,21 @@ public class DiffTest extends BaseTestCase {
 		List<DiffResult> expectedTarget = new ArrayList<DiffResult>();
 
 		expectedSource.add(
-			new DiffResult(0, DiffUtil.OPEN_DEL + "ccc" + DiffUtil.CLOSE_DEL));
+			new DiffResult(0, Diff.OPEN_DEL + "ccc" + Diff.CLOSE_DEL));
 
-		expectedTarget.add(new DiffResult(0, DiffUtil.CONTEXT_LINE));
+		expectedTarget.add(new DiffResult(0, Diff.CONTEXT_LINE));
 
 		List<String> changedLines = new ArrayList<String>();
 
 		changedLines.add("aaa");
-		changedLines.add(DiffUtil.CONTEXT_LINE);
+		changedLines.add(Diff.CONTEXT_LINE);
 
 		expectedSource.add(new DiffResult(1, changedLines));
 
 		changedLines = new ArrayList<String>();
 
 		changedLines.add("aaa");
-		changedLines.add(DiffUtil.OPEN_INS + "bbb" + DiffUtil.CLOSE_INS);
+		changedLines.add(Diff.OPEN_INS + "bbb" + Diff.CLOSE_INS);
 
 		expectedTarget.add(new DiffResult(1, changedLines));
 
@@ -202,18 +202,18 @@ public class DiffTest extends BaseTestCase {
 		List<String> changedLines = new ArrayList<String>();
 
 		expectedSource.add(
-			new DiffResult(0, DiffUtil.OPEN_DEL + "ccc" + DiffUtil.CLOSE_DEL));
+			new DiffResult(0, Diff.OPEN_DEL + "ccc" + Diff.CLOSE_DEL));
 
-		expectedTarget.add(new DiffResult(0, DiffUtil.CONTEXT_LINE));
+		expectedTarget.add(new DiffResult(0, Diff.CONTEXT_LINE));
 
 		changedLines = new ArrayList<String>();
 
-		changedLines.add("bb" + DiffUtil.OPEN_DEL + "e" + DiffUtil.CLOSE_DEL);
+		changedLines.add("bb" + Diff.OPEN_DEL + "e" + Diff.CLOSE_DEL);
 		expectedSource.add(new DiffResult(2, changedLines));
 
 		changedLines = new ArrayList<String>();
 
-		changedLines.add("bb" + DiffUtil.OPEN_INS + "b" + DiffUtil.CLOSE_INS);
+		changedLines.add("bb" + Diff.OPEN_INS + "b" + Diff.CLOSE_INS);
 		expectedTarget.add(new DiffResult(1, changedLines));
 
 		List<DiffResult>[] actual = DiffUtil.diff(reader1, reader2);
@@ -230,22 +230,22 @@ public class DiffTest extends BaseTestCase {
 		List<DiffResult> expectedTarget = new ArrayList<DiffResult>();
 
 		expectedSource.add(
-			new DiffResult(0, DiffUtil.OPEN_DEL + "add" + DiffUtil.CLOSE_DEL));
+			new DiffResult(0, Diff.OPEN_DEL + "add" + Diff.CLOSE_DEL));
 
-		expectedTarget.add(new DiffResult(0, DiffUtil.CONTEXT_LINE));
+		expectedTarget.add(new DiffResult(0, Diff.CONTEXT_LINE));
 
 		List<String> changedLines = new ArrayList<String>();
 
 		changedLines.add("bbb");
 		changedLines.add("ccc");
-		changedLines.add(DiffUtil.CONTEXT_LINE);
+		changedLines.add(Diff.CONTEXT_LINE);
 		expectedSource.add(new DiffResult(2, changedLines));
 
 		changedLines = new ArrayList<String>();
 
 		changedLines.add("bbb");
 		changedLines.add("ccc");
-		changedLines.add(DiffUtil.OPEN_INS + "aee" + DiffUtil.CLOSE_INS);
+		changedLines.add(Diff.OPEN_INS + "aee" + Diff.CLOSE_INS);
 		expectedTarget.add(new DiffResult(2, changedLines));
 
 		List<DiffResult>[] actual = DiffUtil.diff(reader1, reader2);
@@ -265,7 +265,7 @@ public class DiffTest extends BaseTestCase {
 
 		expectedTarget.add(
 			new DiffResult(
-				0, "abcd" + DiffUtil.OPEN_INS + "ee" + DiffUtil.CLOSE_INS));
+				0, "abcd" + Diff.OPEN_INS + "ee" + Diff.CLOSE_INS));
 
 		List<DiffResult>[] actual = DiffUtil.diff(reader1, reader2);
 
@@ -280,16 +280,15 @@ public class DiffTest extends BaseTestCase {
 		List<DiffResult> expectedSource = new ArrayList<DiffResult>();
 		List<DiffResult> expectedTarget = new ArrayList<DiffResult>();
 
-		expectedSource.add(new DiffResult(0, DiffUtil.CONTEXT_LINE));
+		expectedSource.add(new DiffResult(0, Diff.CONTEXT_LINE));
 
 		expectedTarget.add(
-			new DiffResult(
-				0, DiffUtil.OPEN_INS + "abcdeee" + DiffUtil.CLOSE_INS));
+			new DiffResult(0, Diff.OPEN_INS + "abcdeee" + Diff.CLOSE_INS));
 
 		expectedSource.add(
-			new DiffResult(0, DiffUtil.OPEN_DEL + "abcd" + DiffUtil.CLOSE_DEL));
+			new DiffResult(0, Diff.OPEN_DEL + "abcd" + Diff.CLOSE_DEL));
 
-		expectedTarget.add(new DiffResult(0, DiffUtil.CONTEXT_LINE));
+		expectedTarget.add(new DiffResult(0, Diff.CONTEXT_LINE));
 
 		List<DiffResult>[] actual = DiffUtil.diff(reader1, reader2);
 
@@ -304,32 +303,31 @@ public class DiffTest extends BaseTestCase {
 		List<DiffResult> expectedSource = new ArrayList<DiffResult>();
 		List<DiffResult> expectedTarget = new ArrayList<DiffResult>();
 
-		expectedSource.add(new DiffResult(0, DiffUtil.CONTEXT_LINE));
+		expectedSource.add(new DiffResult(0, Diff.CONTEXT_LINE));
 
 		expectedTarget.add(
-			new DiffResult(
-				0, DiffUtil.OPEN_INS + "ccc" + DiffUtil.CLOSE_INS));
+			new DiffResult(0, Diff.OPEN_INS + "ccc" + Diff.CLOSE_INS));
 
 		expectedSource.add(
 			new DiffResult(
-				0, "a" + DiffUtil.OPEN_DEL + "a" + DiffUtil.CLOSE_DEL + "a"));
+				0, "a" + Diff.OPEN_DEL + "a" + Diff.CLOSE_DEL + "a"));
 
 		expectedTarget.add(
 			new DiffResult(
-				1, "a" + DiffUtil.OPEN_INS + "d" + DiffUtil.CLOSE_INS + "a"));
+				1, "a" + Diff.OPEN_INS + "d" + Diff.CLOSE_INS + "a"));
 
 		expectedSource.add(
 			new DiffResult(
-				1, "b" + DiffUtil.OPEN_DEL + "b" + DiffUtil.CLOSE_DEL + "b"));
+				1, "b" + Diff.OPEN_DEL + "b" + Diff.CLOSE_DEL + "b"));
 
 		expectedTarget.add(
 			new DiffResult(
-				2, "b" + DiffUtil.OPEN_INS + "e" + DiffUtil.CLOSE_INS + "b"));
+				2, "b" + Diff.OPEN_INS + "e" + Diff.CLOSE_INS + "b"));
 
 		expectedSource.add(
-			new DiffResult(2, DiffUtil.OPEN_DEL + "fff" + DiffUtil.CLOSE_DEL));
+			new DiffResult(2, Diff.OPEN_DEL + "fff" + Diff.CLOSE_DEL));
 
-		expectedTarget.add(new DiffResult(2, DiffUtil.CONTEXT_LINE));
+		expectedTarget.add(new DiffResult(2, Diff.CONTEXT_LINE));
 
 		List<DiffResult>[] actual = DiffUtil.diff(reader1, reader2);
 
@@ -346,16 +344,16 @@ public class DiffTest extends BaseTestCase {
 
 		expectedSource.add(
 			new DiffResult(
-				0, "a" + DiffUtil.OPEN_DEL + "d" + DiffUtil.CLOSE_DEL + "a"));
+				0, "a" + Diff.OPEN_DEL + "d" + Diff.CLOSE_DEL + "a"));
 
 		expectedTarget.add(
 			new DiffResult(
-				0, "a" + DiffUtil.OPEN_INS + "a" + DiffUtil.CLOSE_INS + "a"));
+				0, "a" + Diff.OPEN_INS + "a" + Diff.CLOSE_INS + "a"));
 
-		expectedSource.add(new DiffResult(1, DiffUtil.CONTEXT_LINE));
+		expectedSource.add(new DiffResult(1, Diff.CONTEXT_LINE));
 
 		expectedTarget.add(
-			new DiffResult(1, DiffUtil.OPEN_INS + "ccc" + DiffUtil.CLOSE_INS));
+			new DiffResult(1, Diff.OPEN_INS + "ccc" + Diff.CLOSE_INS));
 
 		List<DiffResult>[] actual = DiffUtil.diff(reader1, reader2);
 

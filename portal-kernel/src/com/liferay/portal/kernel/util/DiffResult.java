@@ -20,7 +20,7 @@
  * SOFTWARE.
  */
 
-package com.liferay.util.diff;
+package com.liferay.portal.kernel.util;
 
 import java.util.ArrayList;
 import java.util.Iterator;

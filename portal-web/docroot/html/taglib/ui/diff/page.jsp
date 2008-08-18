@@ -24,8 +24,9 @@
 
 <%@ include file="/html/taglib/init.jsp" %>
 
-<%@ page import="com.liferay.util.diff.DiffResult" %>
-<%@ page import="com.liferay.util.diff.DiffUtil" %>
+<%@ page import="com.liferay.portal.kernel.util.Diff" %>
+<%@ page import="com.liferay.portal.kernel.util.DiffResult" %>
+<%@ page import="com.liferay.portal.kernel.util.DiffUtil" %>
 
 <%
 String sourceName = (String)request.getAttribute("liferay-ui:diff:sourceName");
@@ -129,13 +130,13 @@ private static String _processColumn(String changedLine) {
 	if (changedLine.equals(StringPool.BLANK)) {
 		return "<td>&nbsp;</td>";
 	}
-	else if (changedLine.equals(DiffUtil.CONTEXT_LINE)) {
+	else if (changedLine.equals(Diff.CONTEXT_LINE)) {
 		return "<td class=\"taglib-diff-context\">&nbsp;</td>";
 	}
-	else if (changedLine.equals(DiffUtil.OPEN_INS + DiffUtil.CLOSE_INS)) {
+	else if (changedLine.equals(Diff.OPEN_INS + Diff.CLOSE_INS)) {
 		return "<td class=\"taglib-diff-addedline\">&nbsp;</td>";
 	}
-	else if (changedLine.equals(DiffUtil.OPEN_DEL + DiffUtil.CLOSE_DEL)) {
+	else if (changedLine.equals(Diff.OPEN_DEL + Diff.CLOSE_DEL)) {
 		return "<td class=\"taglib-diff-deletedline\">&nbsp;</td>";
 	}
 

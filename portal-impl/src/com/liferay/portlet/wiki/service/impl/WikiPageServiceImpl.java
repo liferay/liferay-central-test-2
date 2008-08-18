@@ -25,6 +25,9 @@ package com.liferay.portlet.wiki.service.impl;
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.language.LanguageUtil;
+import com.liferay.portal.kernel.util.Diff;
+import com.liferay.portal.kernel.util.DiffResult;
+import com.liferay.portal.kernel.util.DiffUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.HtmlUtil;
 import com.liferay.portal.kernel.util.ObjectValuePair;
@@ -46,8 +49,6 @@ import com.liferay.portlet.wiki.service.permission.WikiPagePermission;
 import com.liferay.portlet.wiki.util.WikiUtil;
 import com.liferay.portlet.wiki.util.comparator.PageCreateDateComparator;
 import com.liferay.util.RSSUtil;
-import com.liferay.util.diff.DiffResult;
-import com.liferay.util.diff.DiffUtil;
 
 import com.sun.syndication.feed.synd.SyndContent;
 import com.sun.syndication.feed.synd.SyndContentImpl;
@@ -406,7 +407,7 @@ public class WikiPageServiceImpl extends WikiPageServiceBaseImpl {
 		Map<String, Object> variables = new HashMap<String, Object>();
 
 		variables.put("companyId", companyId);
-		variables.put("contextLine", DiffUtil.CONTEXT_LINE);
+		variables.put("contextLine", Diff.CONTEXT_LINE);
 		variables.put("diffUtil", new DiffUtil());
 		variables.put("languageUtil", LanguageUtil.getLanguage());
 		variables.put("locale", locale);

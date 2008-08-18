@@ -22,6 +22,7 @@
 
 package com.liferay.util.diff;
 
+import com.liferay.portal.kernel.util.DiffResult;
 import com.liferay.portal.kernel.util.FileUtil;
 import com.liferay.portal.kernel.util.StringPool;
 
@@ -35,7 +36,7 @@ import org.incava.util.diff.Diff;
 import org.incava.util.diff.Difference;
 
 /**
- * <a href="DiffUtil.java.html"><b><i>View Source</i></b></a>
+ * <a href="DiffImpl.java.html"><b><i>View Source</i></b></a>
  *
  * <p>
  * This class can compare two different versions of a text. Source refers to
@@ -49,17 +50,7 @@ import org.incava.util.diff.Difference;
  * @author Bruno Farache
  *
  */
-public class DiffUtil {
-
-	public static final String OPEN_INS = "<ins>";
-
-	public static final String CLOSE_INS = "</ins>";
-
-	public static final String OPEN_DEL = "<del>";
-
-	public static final String CLOSE_DEL = "</del>";
-
-	public static final String CONTEXT_LINE = "#context#line#";
+public class DiffImpl implements com.liferay.portal.kernel.util.Diff {
 
 	/**
 	 * This is a diff method with default values.
@@ -70,7 +61,7 @@ public class DiffUtil {
 	 * 				the first element contains DiffResults related to changes
 	 * 				in source and the second element to changes in target
 	 */
-	public static List<DiffResult>[] diff(Reader source, Reader target) {
+	public List<DiffResult>[] diff(Reader source, Reader target) {
 		int margin = 2;
 
 		return diff(
@@ -97,7 +88,7 @@ public class DiffUtil {
 	 * 				the first element contains DiffResults related to changes
 	 * 				in source and the second element to changes in target
 	 */
-	public static List<DiffResult>[] diff(
+	public List<DiffResult>[] diff(
 		Reader source, Reader target, String addedMarkerStart,
 		String addedMarkerEnd, String deletedMarkerStart,
 		String deletedMarkerEnd, int margin) {

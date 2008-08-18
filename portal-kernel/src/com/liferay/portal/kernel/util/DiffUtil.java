@@ -20,54 +20,56 @@
  * SOFTWARE.
  */
 
-package com.liferay.taglib.ui;
+package com.liferay.portal.kernel.util;
 
-import com.liferay.portal.kernel.util.DiffResult;
-import com.liferay.taglib.util.IncludeTag;
+import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
+
+import java.io.Reader;
 
 import java.util.List;
 
-import javax.servlet.http.HttpServletRequest;
-
 /**
- * <a href="DiffTag.java.html"><b><i>View Source</i></b></a>
+ * <a href="DiffUtil.java.html"><b><i>View Source</i></b></a>
  *
  * @author Bruno Farache
  *
  */
-public class DiffTag extends IncludeTag {
+public class DiffUtil {
 
-	public int doStartTag() {
-		HttpServletRequest request =
-			(HttpServletRequest)pageContext.getRequest();
-
-		request.setAttribute("liferay-ui:diff:sourceName", _sourceName);
-		request.setAttribute("liferay-ui:diff:targetName", _targetName);
-		request.setAttribute("liferay-ui:diff:diffResults", _diffResults);
-
-		return EVAL_BODY_BUFFERED;
+	public static List<DiffResult>[] diff(Reader source, Reader target) {
+		return getDiff().diff(source, target);
 	}
 
-	public void setSourceName(String sourceName) {
-		_sourceName = sourceName;
+	public List<DiffResult>[] diff(
+		Reader source, Reader target, String addedMarkerStart,
+		String addedMarkerEnd, String deletedMarkerStart,
+		String deletedMarkerEnd, int margin) {
+
+		return getDiff().diff(
+			source, target, addedMarkerStart, addedMarkerEnd,
+			deletedMarkerStart, deletedMarkerEnd, margin);
 	}
 
-	public void setTargetName(String targetName) {
-		_targetName = targetName;
+	public static Diff getDiff() {
+		return _getUtil()._diff;
 	}
 
-	public void setDiffResults(List<DiffResult>[] diffResults) {
-		_diffResults = diffResults;
+	public void setDiff(Diff diff) {
+		_diff = diff;
 	}
 
-	protected String getDefaultPage() {
-		return _PAGE;
+	private static DiffUtil _getUtil() {
+		if (_util == null) {
+			_util = (DiffUtil)PortalBeanLocatorUtil.locate(_UTIL);
+		}
+
+		return _util;
 	}
 
-	private static final String _PAGE = "/html/taglib/ui/diff/page.jsp";
+	private static final String _UTIL = DiffUtil.class.getName();
 
-	private String _sourceName;
-	private String _targetName;
-	private List<DiffResult>[] _diffResults;
+	private static DiffUtil _util;
+
+	private Diff _diff;
 
 }
