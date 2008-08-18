@@ -96,7 +96,7 @@ public class RevertMinorArticleChangeTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("link=1.3")) {
+				if (selenium.isElementPresent("link=1.3 (minor-edit)")) {
 					break;
 				}
 			}

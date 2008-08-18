@@ -33,7 +33,8 @@ import com.liferay.portalweb.portal.util.RuntimeVariables;
  */
 public class RecentPostsTest extends BaseTestCase {
 	public void testRecentPosts() throws Exception {
-		selenium.click(RuntimeVariables.replace("//div/nobr/a[2]"));
+		selenium.click(RuntimeVariables.replace(
+				"//div[@class='user-details']/nobr/a"));
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {
