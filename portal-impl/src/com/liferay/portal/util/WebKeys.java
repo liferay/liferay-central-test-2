@@ -99,24 +99,6 @@ public class WebKeys implements com.liferay.portal.kernel.util.WebKeys {
 
 	public static final String IMAGE_GALLERY_IMAGE = "IMAGE_GALLERY_IMAGE";
 
-	public static final String LAYOUT = "LAYOUT";
-
-	public static final String LAYOUT_CONTENT = "LAYOUT_CONTENT";
-
-	public static final String LAYOUT_DEFAULT = "LAYOUT_DEFAULT";
-
-	public static final String LAYOUT_LISTER_LIST = "LAYOUT_LISTER_LIST";
-
-	public static final String LAYOUT_TEMPLATE_CONTENT = "LAYOUT_TEMPLATE_CONTENT";
-
-	public static final String LAYOUTS = "LAYOUTS";
-
-	public static final String LIVE_SESSION_USERS = "LIVE_SESSION_USERS";
-
-	public static final String LIVE_USER_TRACKERS = "LIVE_USER_TRACKERS";
-
-	public static final String LIVE_USERS = "LIVE_USERS";
-
 	public static final String JOURNAL_ARTICLE = "JOURNAL_ARTICLE";
 
 	public static final String JOURNAL_ARTICLE_CONTENT = "JOURNAL_ARTICLE_CONTENT";
@@ -150,6 +132,24 @@ public class WebKeys implements com.liferay.portal.kernel.util.WebKeys {
 	public static final String JOURNAL_TEMPLATE_ID = "JOURNAL_TEMPLATE_ID";
 
 	public static final String LAST_PATH = "LAST_PATH";
+
+	public static final String LAYOUT = "LAYOUT";
+
+	public static final String LAYOUT_CONTENT = "LAYOUT_CONTENT";
+
+	public static final String LAYOUT_DEFAULT = "LAYOUT_DEFAULT";
+
+	public static final String LAYOUT_LISTER_LIST = "LAYOUT_LISTER_LIST";
+
+	public static final String LAYOUT_TEMPLATE_CONTENT = "LAYOUT_TEMPLATE_CONTENT";
+
+	public static final String LAYOUTS = "LAYOUTS";
+
+	public static final String LIVE_SESSION_USERS = "LIVE_SESSION_USERS";
+
+	public static final String LIVE_USER_TRACKERS = "LIVE_USER_TRACKERS";
+
+	public static final String LIVE_USERS = "LIVE_USERS";
 
 	public static final String MAIL_CURRENT_ACCOUNT = "MAIL_CURRENT_ACCOUNT";
 
@@ -309,9 +309,9 @@ public class WebKeys implements com.liferay.portal.kernel.util.WebKeys {
 
 	public static final String TARGET_NAME = "TARGET_NAME";
 
-	public static final String TASKS_PROPOSAL = "TASKS_PROPOSAL";
-
 	public static final String TASK_LIST = "TASK_LIST";
+
+	public static final String TASKS_PROPOSAL = "TASKS_PROPOSAL";
 
 	public static final String THEME = "THEME";
 
