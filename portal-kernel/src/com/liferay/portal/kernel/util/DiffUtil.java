@@ -40,7 +40,7 @@ public class DiffUtil {
 		return getDiff().diff(source, target);
 	}
 
-	public List<DiffResult>[] diff(
+	public static List<DiffResult>[] diff(
 		Reader source, Reader target, String addedMarkerStart,
 		String addedMarkerEnd, String deletedMarkerStart,
 		String deletedMarkerEnd, int margin) {

@@ -20,12 +20,9 @@
  * SOFTWARE.
  */
 
-package com.liferay.util.diff;
+package com.liferay.portal.kernel.util;
 
-import com.liferay.portal.kernel.util.Diff;
-import com.liferay.portal.kernel.util.DiffResult;
-import com.liferay.portal.kernel.util.DiffUtil;
-import com.liferay.util.BaseTestCase;
+import com.liferay.portal.kernel.util.BaseTestCase;
 
 import java.io.StringReader;
 

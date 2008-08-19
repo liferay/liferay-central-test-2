@@ -26,12 +26,11 @@
 
 <%@ page import="com.liferay.portal.kernel.util.Diff" %>
 <%@ page import="com.liferay.portal.kernel.util.DiffResult" %>
-<%@ page import="com.liferay.portal.kernel.util.DiffUtil" %>
 
 <%
 String sourceName = (String)request.getAttribute("liferay-ui:diff:sourceName");
 String targetName = (String)request.getAttribute("liferay-ui:diff:targetName");
-List[] diffResults = (List[])request.getAttribute("liferay-ui:diff:diffResults");
+List<DiffResult>[] diffResults = (List<DiffResult>[])request.getAttribute("liferay-ui:diff:diffResults");
 
 List sourceResults = diffResults[0];
 List targetResults = diffResults[1];
@@ -50,12 +49,12 @@ List targetResults = diffResults[1];
 		</tr>
 
 		<%
-		Iterator sourceItr = sourceResults.iterator();
-		Iterator targetItr = targetResults.iterator();
+		Iterator<DiffResult> sourceItr = sourceResults.iterator();
+		Iterator<DiffResult> targetItr = targetResults.iterator();
 
 		while (sourceItr.hasNext()) {
-			DiffResult sourceResult = (DiffResult)sourceItr.next();
-			DiffResult targetResult = (DiffResult)targetItr.next();
+			DiffResult sourceResult = sourceItr.next();
+			DiffResult targetResult = targetItr.next();
 		%>
 
 			<tr class="portlet-section-header results-header">
@@ -71,10 +70,10 @@ List targetResults = diffResults[1];
 					<table class="taglib-diff-table">
 
 					<%
-					Iterator itr = sourceResult.getChangedLines().iterator();
+					Iterator<String> itr = sourceResult.getChangedLines().iterator();
 
 					while (itr.hasNext()) {
-						String changedLine = (String)itr.next();
+						String changedLine = itr.next();
 					%>
 
 						<tr valign="top">
@@ -94,7 +93,7 @@ List targetResults = diffResults[1];
 					itr = targetResult.getChangedLines().iterator();
 
 					while (itr.hasNext()) {
-						String changedLine = (String)itr.next();
+						String changedLine = itr.next();
 					%>
 
 						<tr valign="top">
