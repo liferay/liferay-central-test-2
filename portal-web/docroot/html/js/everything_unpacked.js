@@ -16799,11 +16799,7 @@ Liferay.Portlet = {
 		var content = jQuery('.portlet-content-container', portlet);
 		var restore = content.is(':hidden');
 
-		content.toggle(
-			'blind',
-			{
-				direction: 'vertical'
-			},
+		content.slideToggle(
 			'fast',
 			function() {
 				var action = (restore) ? 'removeClass' : 'addClass';
