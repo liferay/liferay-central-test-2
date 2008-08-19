@@ -101,7 +101,6 @@ public class MBMailingListLocalServiceImpl
 		mailingList.setInReadInterval(inReadInterval);
 		mailingList.setOutEmailAddress(outEmailAddress);
 		mailingList.setOutCustom(outCustom);
-		mailingList.setOutEmailAddress(outEmailAddress);
 		mailingList.setOutServerName(outServerName);
 		mailingList.setOutServerPort(outServerPort);
 		mailingList.setOutUseSSL(outUseSSL);
@@ -177,7 +176,6 @@ public class MBMailingListLocalServiceImpl
 		mailingList.setInReadInterval(inReadInterval);
 		mailingList.setOutEmailAddress(outEmailAddress);
 		mailingList.setOutCustom(outCustom);
-		mailingList.setOutEmailAddress(outEmailAddress);
 		mailingList.setOutServerName(outServerName);
 		mailingList.setOutServerPort(outServerPort);
 		mailingList.setOutUseSSL(outUseSSL);
