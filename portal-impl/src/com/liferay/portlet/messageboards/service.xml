@@ -121,7 +121,7 @@
 			<finder-column name="classPK" />
 		</finder>
 	</entity>
-	<entity name="MBMailingList" uuid="true" local-service="true" remote-service="true">
+	<entity name="MBMailingList" uuid="true" local-service="true" remote-service="false">
 
 		<!-- PK fields -->
 
@@ -171,7 +171,6 @@
 		<!-- References -->
 
 		<reference package-path="com.liferay.counter" entity="Counter" />
-		<reference package-path="com.liferay.portal" entity="Resource" />
 		<reference package-path="com.liferay.portal" entity="User" />
 	</entity>
 	<entity name="MBMessage" uuid="true" local-service="true" remote-service="true">

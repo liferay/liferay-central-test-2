@@ -1961,31 +1961,6 @@ Liferay.Service.MB.MBCategory = {
 	}
 };
 
-Liferay.Service.MB.MBMailingList = {
-	serviceClassName: Liferay.Service.MB.servicePackage + "MBMailingList" + Liferay.Service.classNameSuffix,
-
-	getMailingListByCategory: function(params, callback) {
-		params.serviceClassName = this.serviceClassName;
-		params.serviceMethodName = "getMailingListByCategory";
-
-		return Liferay.Service.ajax(params, callback);
-	},
-
-	updateActive: function(params, callback) {
-		params.serviceClassName = this.serviceClassName;
-		params.serviceMethodName = "updateActive";
-
-		return Liferay.Service.ajax(params, callback);
-	},
-
-	updateOutCustom: function(params, callback) {
-		params.serviceClassName = this.serviceClassName;
-		params.serviceMethodName = "updateOutCustom";
-
-		return Liferay.Service.ajax(params, callback);
-	}
-};
-
 Liferay.Service.MB.MBMessage = {
 	serviceClassName: Liferay.Service.MB.servicePackage + "MBMessage" + Liferay.Service.classNameSuffix,
 

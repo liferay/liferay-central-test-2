@@ -41,7 +41,6 @@ import com.liferay.portlet.messageboards.service.MBBanService;
 import com.liferay.portlet.messageboards.service.MBCategoryLocalService;
 import com.liferay.portlet.messageboards.service.MBCategoryService;
 import com.liferay.portlet.messageboards.service.MBMailingListLocalService;
-import com.liferay.portlet.messageboards.service.MBMailingListService;
 import com.liferay.portlet.messageboards.service.MBMessageFlagLocalService;
 import com.liferay.portlet.messageboards.service.MBMessageLocalService;
 import com.liferay.portlet.messageboards.service.MBMessageService;
@@ -194,15 +193,6 @@ public abstract class MBMessageFlagLocalServiceBaseImpl
 	public void setMBMailingListLocalService(
 		MBMailingListLocalService mbMailingListLocalService) {
 		this.mbMailingListLocalService = mbMailingListLocalService;
-	}
-
-	public MBMailingListService getMBMailingListService() {
-		return mbMailingListService;
-	}
-
-	public void setMBMailingListService(
-		MBMailingListService mbMailingListService) {
-		this.mbMailingListService = mbMailingListService;
 	}
 
 	public MBMailingListPersistence getMBMailingListPersistence() {
@@ -410,11 +400,6 @@ public abstract class MBMessageFlagLocalServiceBaseImpl
 					".impl");
 		}
 
-		if (mbMailingListService == null) {
-			mbMailingListService = (MBMailingListService)PortalBeanLocatorUtil.locate(MBMailingListService.class.getName() +
-					".impl");
-		}
-
 		if (mbMailingListPersistence == null) {
 			mbMailingListPersistence = (MBMailingListPersistence)PortalBeanLocatorUtil.locate(MBMailingListPersistence.class.getName() +
 					".impl");
@@ -520,7 +505,6 @@ public abstract class MBMessageFlagLocalServiceBaseImpl
 	protected MBCategoryFinder mbCategoryFinder;
 	protected MBDiscussionPersistence mbDiscussionPersistence;
 	protected MBMailingListLocalService mbMailingListLocalService;
-	protected MBMailingListService mbMailingListService;
 	protected MBMailingListPersistence mbMailingListPersistence;
 	protected MBMessageLocalService mbMessageLocalService;
 	protected MBMessageService mbMessageService;

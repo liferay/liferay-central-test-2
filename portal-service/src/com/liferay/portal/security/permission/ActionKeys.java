@@ -31,8 +31,6 @@ package com.liferay.portal.security.permission;
  */
 public class ActionKeys {
 
-	public static final String ACTIVATE = "ACTIVATE";
-
 	public static final String ADD_ARTICLE = "ADD_ARTICLE";
 
 	public static final String ADD_ATTACHMENT = "ADD_ATTACHMENT";
@@ -68,8 +66,6 @@ public class ActionKeys {
 	public static final String ADD_INSTANCE = "ADD_INSTANCE";
 
 	public static final String ADD_LICENSE = "ADD_LICENSE";
-
-	public static final String ADD_MAILING = "ADD_MAILING";
 
 	public static final String ADD_MESSAGE = "ADD_MESSAGE";
 
