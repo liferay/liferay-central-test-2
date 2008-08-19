@@ -204,7 +204,7 @@ public class MBMailingListLocalServiceImpl
 
 		sb.append(DestinationNames.MESSAGE_BOARDS_MAILING_LIST);
 		sb.append(StringPool.SLASH);
-		sb.append(mailingList.getGroupId());
+		sb.append(mailingList.getMailingListId());
 
 		return sb.toString();
 	}
@@ -216,13 +216,13 @@ public class MBMailingListLocalServiceImpl
 
 		String groupName = getSchedulerGroupName(mailingList);
 
+		Calendar startDate = CalendarFactoryUtil.getCalendar();
+
 		TriggerExpression triggerExpression = new TriggerExpression(
 			startDate, TriggerExpression.MINUTELY_FREQUENCY,
 			mailingList.getInReadInterval());
 
 		String cronText = triggerExpression.toCronText();
-
-		Calendar startDate = CalendarFactoryUtil.getCalendar();
 
 		MailingListRequest mailingListRequest = new MailingListRequest();
 
