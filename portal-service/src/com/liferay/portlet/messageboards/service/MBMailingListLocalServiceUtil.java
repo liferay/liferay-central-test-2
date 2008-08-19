@@ -98,6 +98,92 @@ public class MBMailingListLocalServiceUtil {
 		return _service.updateMBMailingList(mbMailingList);
 	}
 
+	public static com.liferay.portlet.messageboards.model.MBMailingList addMailing(
+		long userId, long groupId, long categoryId,
+		java.lang.String emailAddress, java.lang.String inProtocol,
+		java.lang.String inServerName, boolean inUseSSL, int inServerPort,
+		java.lang.String inUserName, java.lang.String inPassword,
+		int inReadInterval, boolean outCustom,
+		java.lang.String outEmailAddress, java.lang.String outServerName,
+		boolean outUseSSL, int outServerPort, java.lang.String outUserName,
+		java.lang.String outPassword)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
+		return _service.addMailing(userId, groupId, categoryId, emailAddress,
+			inProtocol, inServerName, inUseSSL, inServerPort, inUserName,
+			inPassword, inReadInterval, outCustom, outEmailAddress,
+			outServerName, outUseSSL, outServerPort, outUserName, outPassword);
+	}
+
+	public static void deleteMailingList(long mailingListId)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
+		_service.deleteMailingList(mailingListId);
+	}
+
+	public static void deleteMailingList(
+		com.liferay.portlet.messageboards.model.MBMailingList mailingList)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
+		_service.deleteMailingList(mailingList);
+	}
+
+	public static com.liferay.portlet.messageboards.model.MBMailingList getMailingListByCategory(
+		long categoryId)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
+		return _service.getMailingListByCategory(categoryId);
+	}
+
+	public static java.util.List<com.liferay.portlet.messageboards.model.MBMailingList> getMailingLists()
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
+		return _service.getMailingLists();
+	}
+
+	public static void startMailReader()
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
+		_service.startMailReader();
+	}
+
+	public static void stopMailReader()
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
+		_service.stopMailReader();
+	}
+
+	public static com.liferay.portlet.messageboards.model.MBMailingList updateActive(
+		long mailingListId, boolean active)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
+		return _service.updateActive(mailingListId, active);
+	}
+
+	public static com.liferay.portlet.messageboards.model.MBMailingList updateMailingList(
+		long userId, long groupId, long categoryId,
+		java.lang.String emailAddress, java.lang.String inProtocol,
+		java.lang.String inServerName, boolean inUseSSL, int inServerPort,
+		java.lang.String inUserName, java.lang.String inPassword,
+		int inReadInterval, java.lang.String outEmailAddress,
+		boolean outCustom, java.lang.String outServerName, boolean outUseSSL,
+		int outServerPort, java.lang.String outUserName,
+		java.lang.String outPassword)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
+		return _service.updateMailingList(userId, groupId, categoryId,
+			emailAddress, inProtocol, inServerName, inUseSSL, inServerPort,
+			inUserName, inPassword, inReadInterval, outEmailAddress, outCustom,
+			outServerName, outUseSSL, outServerPort, outUserName, outPassword);
+	}
+
+	public static com.liferay.portlet.messageboards.model.MBMailingList updateOutCustom(
+		long mailingListId, boolean outCustom)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
+		return _service.updateOutCustom(mailingListId, outCustom);
+	}
+
 	public static MBMailingListLocalService getService() {
 		return _service;
 	}
