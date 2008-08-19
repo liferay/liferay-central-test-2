@@ -2333,7 +2333,8 @@
 			</license>
 		</licenses>
 		<comments>
-			Removed javax.mail.* because it conflicts with mail.jar.
+			Removed javax.* because it conflicts with activation.jar and
+			mail.jar.
 		</comments>
 	</library>
 	<library>
