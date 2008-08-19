@@ -25,26 +25,24 @@ package com.liferay.portlet.messageboards.service.base;
 import com.liferay.counter.service.CounterLocalService;
 import com.liferay.counter.service.CounterService;
 
-import com.liferay.portal.PortalException;
-import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.bean.InitializingBean;
 import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
-import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 import com.liferay.portal.service.ResourceLocalService;
 import com.liferay.portal.service.ResourceService;
 import com.liferay.portal.service.UserLocalService;
 import com.liferay.portal.service.UserService;
+import com.liferay.portal.service.base.PrincipalBean;
 import com.liferay.portal.service.persistence.ResourceFinder;
 import com.liferay.portal.service.persistence.ResourcePersistence;
 import com.liferay.portal.service.persistence.UserFinder;
 import com.liferay.portal.service.persistence.UserPersistence;
 
-import com.liferay.portlet.messageboards.model.MBMailingList;
 import com.liferay.portlet.messageboards.service.MBBanLocalService;
 import com.liferay.portlet.messageboards.service.MBBanService;
 import com.liferay.portlet.messageboards.service.MBCategoryLocalService;
 import com.liferay.portlet.messageboards.service.MBCategoryService;
 import com.liferay.portlet.messageboards.service.MBMailingListLocalService;
+import com.liferay.portlet.messageboards.service.MBMailingListService;
 import com.liferay.portlet.messageboards.service.MBMessageFlagLocalService;
 import com.liferay.portlet.messageboards.service.MBMessageFlagService;
 import com.liferay.portlet.messageboards.service.MBMessageLocalService;
@@ -65,65 +63,14 @@ import com.liferay.portlet.messageboards.service.persistence.MBStatsUserPersiste
 import com.liferay.portlet.messageboards.service.persistence.MBThreadFinder;
 import com.liferay.portlet.messageboards.service.persistence.MBThreadPersistence;
 
-import java.util.List;
-
 /**
- * <a href="MBMailingListLocalServiceBaseImpl.java.html"><b><i>View Source</i></b></a>
+ * <a href="MBMailingListServiceBaseImpl.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *
  */
-public abstract class MBMailingListLocalServiceBaseImpl
-	implements MBMailingListLocalService, InitializingBean {
-	public MBMailingList addMBMailingList(MBMailingList mbMailingList)
-		throws SystemException {
-		mbMailingList.setNew(true);
-
-		return mbMailingListPersistence.update(mbMailingList, false);
-	}
-
-	public void deleteMBMailingList(long mailingListId)
-		throws PortalException, SystemException {
-		mbMailingListPersistence.remove(mailingListId);
-	}
-
-	public void deleteMBMailingList(MBMailingList mbMailingList)
-		throws SystemException {
-		mbMailingListPersistence.remove(mbMailingList);
-	}
-
-	public List<Object> dynamicQuery(DynamicQuery dynamicQuery)
-		throws SystemException {
-		return mbMailingListPersistence.findWithDynamicQuery(dynamicQuery);
-	}
-
-	public List<Object> dynamicQuery(DynamicQuery dynamicQuery, int start,
-		int end) throws SystemException {
-		return mbMailingListPersistence.findWithDynamicQuery(dynamicQuery,
-			start, end);
-	}
-
-	public MBMailingList getMBMailingList(long mailingListId)
-		throws PortalException, SystemException {
-		return mbMailingListPersistence.findByPrimaryKey(mailingListId);
-	}
-
-	public List<MBMailingList> getMBMailingLists(int start, int end)
-		throws SystemException {
-		return mbMailingListPersistence.findAll(start, end);
-	}
-
-	public int getMBMailingListsCount() throws SystemException {
-		return mbMailingListPersistence.countAll();
-	}
-
-	public MBMailingList updateMBMailingList(MBMailingList mbMailingList)
-		throws SystemException {
-		mbMailingList.setNew(false);
-
-		return mbMailingListPersistence.update(mbMailingList, true);
-	}
-
+public abstract class MBMailingListServiceBaseImpl extends PrincipalBean
+	implements MBMailingListService, InitializingBean {
 	public MBBanLocalService getMBBanLocalService() {
 		return mbBanLocalService;
 	}
@@ -189,6 +136,15 @@ public abstract class MBMailingListLocalServiceBaseImpl
 	public void setMBDiscussionPersistence(
 		MBDiscussionPersistence mbDiscussionPersistence) {
 		this.mbDiscussionPersistence = mbDiscussionPersistence;
+	}
+
+	public MBMailingListLocalService getMBMailingListLocalService() {
+		return mbMailingListLocalService;
+	}
+
+	public void setMBMailingListLocalService(
+		MBMailingListLocalService mbMailingListLocalService) {
+		this.mbMailingListLocalService = mbMailingListLocalService;
 	}
 
 	public MBMailingListPersistence getMBMailingListPersistence() {
@@ -442,6 +398,11 @@ public abstract class MBMailingListLocalServiceBaseImpl
 					".impl");
 		}
 
+		if (mbMailingListLocalService == null) {
+			mbMailingListLocalService = (MBMailingListLocalService)PortalBeanLocatorUtil.locate(MBMailingListLocalService.class.getName() +
+					".impl");
+		}
+
 		if (mbMailingListPersistence == null) {
 			mbMailingListPersistence = (MBMailingListPersistence)PortalBeanLocatorUtil.locate(MBMailingListPersistence.class.getName() +
 					".impl");
@@ -576,6 +537,7 @@ public abstract class MBMailingListLocalServiceBaseImpl
 	protected MBCategoryPersistence mbCategoryPersistence;
 	protected MBCategoryFinder mbCategoryFinder;
 	protected MBDiscussionPersistence mbDiscussionPersistence;
+	protected MBMailingListLocalService mbMailingListLocalService;
 	protected MBMailingListPersistence mbMailingListPersistence;
 	protected MBMessageLocalService mbMessageLocalService;
 	protected MBMessageService mbMessageService;
