@@ -6887,6 +6887,75 @@
 			<ref bean="com.liferay.portlet.messageboards.service.persistence.MBDiscussionPersistence.impl" />
 		</property>
 	</bean>
+	<bean id="com.liferay.portlet.messageboards.service.MBMailingListLocalService.impl" class="com.liferay.portlet.messageboards.service.impl.MBMailingListLocalServiceImpl" lazy-init="true" />
+	<bean id="com.liferay.portlet.messageboards.service.MBMailingListLocalService.transaction" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean" lazy-init="true">
+		<property name="transactionManager">
+			<ref bean="liferayTransactionManager" />
+		</property>
+		<property name="target">
+			<ref bean="com.liferay.portlet.messageboards.service.MBMailingListLocalService.impl" />
+		</property>
+		<property name="transactionAttributes">
+			<props>
+				<prop key="add*">PROPAGATION_REQUIRED,-com.liferay.portal.PortalException,-com.liferay.portal.SystemException</prop>
+				<prop key="check*">PROPAGATION_REQUIRED,-com.liferay.portal.PortalException,-com.liferay.portal.SystemException</prop>
+				<prop key="clear*">PROPAGATION_REQUIRED,-com.liferay.portal.PortalException,-com.liferay.portal.SystemException</prop>
+				<prop key="delete*">PROPAGATION_REQUIRED,-com.liferay.portal.PortalException,-com.liferay.portal.SystemException</prop>
+				<prop key="set*">PROPAGATION_REQUIRED,-com.liferay.portal.PortalException,-com.liferay.portal.SystemException</prop>
+				<prop key="update*">PROPAGATION_REQUIRED,-com.liferay.portal.PortalException,-com.liferay.portal.SystemException</prop>
+				<prop key="*">PROPAGATION_SUPPORTS,readOnly</prop>
+			</props>
+		</property>
+	</bean>
+	<bean id="com.liferay.portlet.messageboards.service.MBMailingListLocalService.velocity" class="org.springframework.aop.framework.ProxyFactoryBean" lazy-init="true">
+		<property name="interceptorNames">
+			<list>
+				<value>velocityServiceInterceptor</value>
+			</list>
+		</property>
+		<property name="target">
+			<ref bean="com.liferay.portlet.messageboards.service.MBMailingListLocalService.transaction" />
+		</property>
+	</bean>
+	<bean id="com.liferay.portlet.messageboards.service.MBMailingListLocalServiceFactory" class="com.liferay.portlet.messageboards.service.MBMailingListLocalServiceFactory" lazy-init="true">
+		<property name="service">
+			<ref bean="com.liferay.portlet.messageboards.service.MBMailingListLocalService.transaction" />
+		</property>
+	</bean>
+	<bean id="com.liferay.portlet.messageboards.service.MBMailingListLocalServiceUtil" class="com.liferay.portlet.messageboards.service.MBMailingListLocalServiceUtil" lazy-init="true">
+		<property name="service">
+			<ref bean="com.liferay.portlet.messageboards.service.MBMailingListLocalService.transaction" />
+		</property>
+	</bean>
+	<bean id="com.liferay.portlet.messageboards.service.persistence.MBMailingListPersistence.impl" class="com.liferay.portlet.messageboards.service.persistence.MBMailingListPersistenceImpl" lazy-init="true">
+		<property name="dataSource">
+			<ref bean="liferayDataSource" />
+		</property>
+		<property name="sessionFactory">
+			<ref bean="liferaySessionFactory" />
+		</property>
+	</bean>
+	<bean id="com.liferay.portlet.messageboards.service.persistence.MBMailingListPersistence.transaction" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean" lazy-init="true">
+		<property name="transactionManager">
+			<ref bean="liferayTransactionManager" />
+		</property>
+		<property name="target">
+			<ref bean="com.liferay.portlet.messageboards.service.persistence.MBMailingListPersistence.impl" />
+		</property>
+		<property name="transactionAttributes">
+			<props>
+				<prop key="remove*">PROPAGATION_REQUIRED,-com.liferay.portal.PortalException,-com.liferay.portal.SystemException</prop>
+				<prop key="set*">PROPAGATION_REQUIRED,-com.liferay.portal.PortalException,-com.liferay.portal.SystemException</prop>
+				<prop key="update*">PROPAGATION_REQUIRED,-com.liferay.portal.PortalException,-com.liferay.portal.SystemException</prop>
+				<prop key="*">PROPAGATION_SUPPORTS,readOnly</prop>
+			</props>
+		</property>
+	</bean>
+	<bean id="com.liferay.portlet.messageboards.service.persistence.MBMailingListUtil" class="com.liferay.portlet.messageboards.service.persistence.MBMailingListUtil" lazy-init="true">
+		<property name="persistence">
+			<ref bean="com.liferay.portlet.messageboards.service.persistence.MBMailingListPersistence.impl" />
+		</property>
+	</bean>
 	<bean id="com.liferay.portlet.messageboards.service.MBMessageLocalService.impl" class="com.liferay.portlet.messageboards.service.impl.MBMessageLocalServiceImpl" lazy-init="true" />
 	<bean id="com.liferay.portlet.messageboards.service.MBMessageLocalService.transaction" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean" lazy-init="true">
 		<property name="transactionManager">

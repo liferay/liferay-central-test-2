@@ -121,6 +121,58 @@
 			<finder-column name="classPK" />
 		</finder>
 	</entity>
+	<entity name="MBMailingList" uuid="true" local-service="true" remote-service="false">
+
+		<!-- PK fields -->
+
+		<column name="mailingListId" type="long" primary="true" />
+
+		<!-- Group instance -->
+
+		<column name="groupId" type="long" />
+
+		<!-- Audit fields -->
+
+		<column name="companyId" type="long" />
+		<column name="userId" type="long" />
+		<column name="userName" type="String" />
+		<column name="createDate" type="Date" />
+		<column name="modifiedDate" type="Date" />
+
+		<!-- Other fields -->
+
+		<column name="categoryId" type="long" />
+		<column name="emailAddress" type="String" />
+		<column name="inProtocol" type="String" />
+		<column name="inServerName" type="String" />
+		<column name="inServerPort" type="int" />
+		<column name="inUseSSL" type="boolean" />
+		<column name="inUserName" type="String" />
+		<column name="inPassword" type="String" />
+		<column name="inReadInterval" type="int" />
+		<column name="outEmailAddress" type="String" />
+		<column name="outCustom" type="boolean" />
+		<column name="outServerName" type="String" />
+		<column name="outServerPort" type="int" />
+		<column name="outUseSSL" type="boolean" />
+		<column name="outUserName" type="String" />
+		<column name="outPassword" type="String" />
+		<column name="active" type="boolean" />
+
+		<!-- Finder methods -->
+
+		<finder name="CategoryId" return-type="MBMailingList">
+			<finder-column name="categoryId" />
+		</finder>
+		<finder name="Active" return-type="Collection">
+			<finder-column name="active" />
+		</finder>
+
+		<!-- References -->
+
+		<reference package-path="com.liferay.counter" entity="Counter" />
+		<reference package-path="com.liferay.portal" entity="User" />
+	</entity>
 	<entity name="MBMessage" uuid="true" local-service="true" remote-service="true">
 
 		<!-- PK fields -->
@@ -316,6 +368,13 @@
 		<exception>BannedUser</exception>
 		<exception>CategoryName</exception>
 		<exception>MessageBody</exception>
+		<exception>MessageSubject</exception>
+		<exception>MailingListEmailAddress</exception>
+		<exception>MailingListInServerName</exception>
+		<exception>MailingListInUserName</exception>
+		<exception>MailingListOutEmailAddress</exception>
+		<exception>MailingListOutServerName</exception>
+		<exception>MailingListOutUserName</exception>
 		<exception>MessageSubject</exception>
 		<exception>RequiredMessage</exception>
 	</exceptions>

@@ -47,6 +47,7 @@ import com.liferay.portlet.messageboards.service.MBBanLocalService;
 import com.liferay.portlet.messageboards.service.MBBanService;
 import com.liferay.portlet.messageboards.service.MBCategoryLocalService;
 import com.liferay.portlet.messageboards.service.MBCategoryService;
+import com.liferay.portlet.messageboards.service.MBMailingListLocalService;
 import com.liferay.portlet.messageboards.service.MBMessageFlagLocalService;
 import com.liferay.portlet.messageboards.service.MBMessageFlagService;
 import com.liferay.portlet.messageboards.service.MBMessageLocalService;
@@ -57,6 +58,7 @@ import com.liferay.portlet.messageboards.service.persistence.MBBanPersistence;
 import com.liferay.portlet.messageboards.service.persistence.MBCategoryFinder;
 import com.liferay.portlet.messageboards.service.persistence.MBCategoryPersistence;
 import com.liferay.portlet.messageboards.service.persistence.MBDiscussionPersistence;
+import com.liferay.portlet.messageboards.service.persistence.MBMailingListPersistence;
 import com.liferay.portlet.messageboards.service.persistence.MBMessageFinder;
 import com.liferay.portlet.messageboards.service.persistence.MBMessageFlagFinder;
 import com.liferay.portlet.messageboards.service.persistence.MBMessageFlagPersistence;
@@ -194,6 +196,24 @@ public abstract class MBThreadLocalServiceBaseImpl
 	public void setMBDiscussionPersistence(
 		MBDiscussionPersistence mbDiscussionPersistence) {
 		this.mbDiscussionPersistence = mbDiscussionPersistence;
+	}
+
+	public MBMailingListLocalService getMBMailingListLocalService() {
+		return mbMailingListLocalService;
+	}
+
+	public void setMBMailingListLocalService(
+		MBMailingListLocalService mbMailingListLocalService) {
+		this.mbMailingListLocalService = mbMailingListLocalService;
+	}
+
+	public MBMailingListPersistence getMBMailingListPersistence() {
+		return mbMailingListPersistence;
+	}
+
+	public void setMBMailingListPersistence(
+		MBMailingListPersistence mbMailingListPersistence) {
+		this.mbMailingListPersistence = mbMailingListPersistence;
 	}
 
 	public MBMessageLocalService getMBMessageLocalService() {
@@ -516,6 +536,16 @@ public abstract class MBThreadLocalServiceBaseImpl
 					".impl");
 		}
 
+		if (mbMailingListLocalService == null) {
+			mbMailingListLocalService = (MBMailingListLocalService)PortalBeanLocatorUtil.locate(MBMailingListLocalService.class.getName() +
+					".impl");
+		}
+
+		if (mbMailingListPersistence == null) {
+			mbMailingListPersistence = (MBMailingListPersistence)PortalBeanLocatorUtil.locate(MBMailingListPersistence.class.getName() +
+					".impl");
+		}
+
 		if (mbMessageLocalService == null) {
 			mbMessageLocalService = (MBMessageLocalService)PortalBeanLocatorUtil.locate(MBMessageLocalService.class.getName() +
 					".impl");
@@ -690,6 +720,8 @@ public abstract class MBThreadLocalServiceBaseImpl
 	protected MBCategoryPersistence mbCategoryPersistence;
 	protected MBCategoryFinder mbCategoryFinder;
 	protected MBDiscussionPersistence mbDiscussionPersistence;
+	protected MBMailingListLocalService mbMailingListLocalService;
+	protected MBMailingListPersistence mbMailingListPersistence;
 	protected MBMessageLocalService mbMessageLocalService;
 	protected MBMessageService mbMessageService;
 	protected MBMessagePersistence mbMessagePersistence;

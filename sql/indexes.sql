@@ -209,6 +209,11 @@ create index IX_F7D28C2F on MBCategory (uuid_, groupId);
 create index IX_79D0120B on MBDiscussion (classNameId);
 create index IX_33A4DE38 on MBDiscussion (classNameId, classPK);
 
+create index IX_BFEB984F on MBMailingList (active_);
+create index IX_ADA16FE7 on MBMailingList (categoryId);
+create index IX_4115EC7A on MBMailingList (uuid_);
+create index IX_E858F170 on MBMailingList (uuid_, groupId);
+
 create index IX_3C865EE5 on MBMessage (categoryId);
 create index IX_138C7F1E on MBMessage (categoryId, threadId);
 create index IX_B1432D30 on MBMessage (companyId);

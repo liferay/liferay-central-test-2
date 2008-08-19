@@ -35,8 +35,9 @@ import com.liferay.portal.service.UserService;
 import com.liferay.portal.service.persistence.UserFinder;
 import com.liferay.portal.service.persistence.UserPersistence;
 
-import com.liferay.portlet.messageboards.model.MBBan;
+import com.liferay.portlet.messageboards.model.MBMailingList;
 import com.liferay.portlet.messageboards.service.MBBanLocalService;
+import com.liferay.portlet.messageboards.service.MBBanService;
 import com.liferay.portlet.messageboards.service.MBCategoryLocalService;
 import com.liferay.portlet.messageboards.service.MBCategoryService;
 import com.liferay.portlet.messageboards.service.MBMailingListLocalService;
@@ -63,53 +64,76 @@ import com.liferay.portlet.messageboards.service.persistence.MBThreadPersistence
 import java.util.List;
 
 /**
- * <a href="MBBanLocalServiceBaseImpl.java.html"><b><i>View Source</i></b></a>
+ * <a href="MBMailingListLocalServiceBaseImpl.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *
  */
-public abstract class MBBanLocalServiceBaseImpl implements MBBanLocalService,
-	InitializingBean {
-	public MBBan addMBBan(MBBan mbBan) throws SystemException {
-		mbBan.setNew(true);
+public abstract class MBMailingListLocalServiceBaseImpl
+	implements MBMailingListLocalService, InitializingBean {
+	public MBMailingList addMBMailingList(MBMailingList mbMailingList)
+		throws SystemException {
+		mbMailingList.setNew(true);
 
-		return mbBanPersistence.update(mbBan, false);
+		return mbMailingListPersistence.update(mbMailingList, false);
 	}
 
-	public void deleteMBBan(long banId) throws PortalException, SystemException {
-		mbBanPersistence.remove(banId);
+	public void deleteMBMailingList(long mailingListId)
+		throws PortalException, SystemException {
+		mbMailingListPersistence.remove(mailingListId);
 	}
 
-	public void deleteMBBan(MBBan mbBan) throws SystemException {
-		mbBanPersistence.remove(mbBan);
+	public void deleteMBMailingList(MBMailingList mbMailingList)
+		throws SystemException {
+		mbMailingListPersistence.remove(mbMailingList);
 	}
 
 	public List<Object> dynamicQuery(DynamicQuery dynamicQuery)
 		throws SystemException {
-		return mbBanPersistence.findWithDynamicQuery(dynamicQuery);
+		return mbMailingListPersistence.findWithDynamicQuery(dynamicQuery);
 	}
 
 	public List<Object> dynamicQuery(DynamicQuery dynamicQuery, int start,
 		int end) throws SystemException {
-		return mbBanPersistence.findWithDynamicQuery(dynamicQuery, start, end);
+		return mbMailingListPersistence.findWithDynamicQuery(dynamicQuery,
+			start, end);
 	}
 
-	public MBBan getMBBan(long banId) throws PortalException, SystemException {
-		return mbBanPersistence.findByPrimaryKey(banId);
+	public MBMailingList getMBMailingList(long mailingListId)
+		throws PortalException, SystemException {
+		return mbMailingListPersistence.findByPrimaryKey(mailingListId);
 	}
 
-	public List<MBBan> getMBBans(int start, int end) throws SystemException {
-		return mbBanPersistence.findAll(start, end);
+	public List<MBMailingList> getMBMailingLists(int start, int end)
+		throws SystemException {
+		return mbMailingListPersistence.findAll(start, end);
 	}
 
-	public int getMBBansCount() throws SystemException {
-		return mbBanPersistence.countAll();
+	public int getMBMailingListsCount() throws SystemException {
+		return mbMailingListPersistence.countAll();
 	}
 
-	public MBBan updateMBBan(MBBan mbBan) throws SystemException {
-		mbBan.setNew(false);
+	public MBMailingList updateMBMailingList(MBMailingList mbMailingList)
+		throws SystemException {
+		mbMailingList.setNew(false);
 
-		return mbBanPersistence.update(mbBan, true);
+		return mbMailingListPersistence.update(mbMailingList, true);
+	}
+
+	public MBBanLocalService getMBBanLocalService() {
+		return mbBanLocalService;
+	}
+
+	public void setMBBanLocalService(MBBanLocalService mbBanLocalService) {
+		this.mbBanLocalService = mbBanLocalService;
+	}
+
+	public MBBanService getMBBanService() {
+		return mbBanService;
+	}
+
+	public void setMBBanService(MBBanService mbBanService) {
+		this.mbBanService = mbBanService;
 	}
 
 	public MBBanPersistence getMBBanPersistence() {
@@ -161,15 +185,6 @@ public abstract class MBBanLocalServiceBaseImpl implements MBBanLocalService,
 	public void setMBDiscussionPersistence(
 		MBDiscussionPersistence mbDiscussionPersistence) {
 		this.mbDiscussionPersistence = mbDiscussionPersistence;
-	}
-
-	public MBMailingListLocalService getMBMailingListLocalService() {
-		return mbMailingListLocalService;
-	}
-
-	public void setMBMailingListLocalService(
-		MBMailingListLocalService mbMailingListLocalService) {
-		this.mbMailingListLocalService = mbMailingListLocalService;
 	}
 
 	public MBMailingListPersistence getMBMailingListPersistence() {
@@ -350,6 +365,16 @@ public abstract class MBBanLocalServiceBaseImpl implements MBBanLocalService,
 	}
 
 	public void afterPropertiesSet() {
+		if (mbBanLocalService == null) {
+			mbBanLocalService = (MBBanLocalService)PortalBeanLocatorUtil.locate(MBBanLocalService.class.getName() +
+					".impl");
+		}
+
+		if (mbBanService == null) {
+			mbBanService = (MBBanService)PortalBeanLocatorUtil.locate(MBBanService.class.getName() +
+					".impl");
+		}
+
 		if (mbBanPersistence == null) {
 			mbBanPersistence = (MBBanPersistence)PortalBeanLocatorUtil.locate(MBBanPersistence.class.getName() +
 					".impl");
@@ -377,11 +402,6 @@ public abstract class MBBanLocalServiceBaseImpl implements MBBanLocalService,
 
 		if (mbDiscussionPersistence == null) {
 			mbDiscussionPersistence = (MBDiscussionPersistence)PortalBeanLocatorUtil.locate(MBDiscussionPersistence.class.getName() +
-					".impl");
-		}
-
-		if (mbMailingListLocalService == null) {
-			mbMailingListLocalService = (MBMailingListLocalService)PortalBeanLocatorUtil.locate(MBMailingListLocalService.class.getName() +
 					".impl");
 		}
 
@@ -491,13 +511,14 @@ public abstract class MBBanLocalServiceBaseImpl implements MBBanLocalService,
 		}
 	}
 
+	protected MBBanLocalService mbBanLocalService;
+	protected MBBanService mbBanService;
 	protected MBBanPersistence mbBanPersistence;
 	protected MBCategoryLocalService mbCategoryLocalService;
 	protected MBCategoryService mbCategoryService;
 	protected MBCategoryPersistence mbCategoryPersistence;
 	protected MBCategoryFinder mbCategoryFinder;
 	protected MBDiscussionPersistence mbDiscussionPersistence;
-	protected MBMailingListLocalService mbMailingListLocalService;
 	protected MBMailingListPersistence mbMailingListPersistence;
 	protected MBMessageLocalService mbMessageLocalService;
 	protected MBMessageService mbMessageService;
