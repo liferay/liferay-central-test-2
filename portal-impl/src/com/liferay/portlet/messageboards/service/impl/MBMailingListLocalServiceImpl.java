@@ -39,8 +39,8 @@ import com.liferay.portlet.messageboards.MailingListInUserNameException;
 import com.liferay.portlet.messageboards.MailingListOutEmailAddressException;
 import com.liferay.portlet.messageboards.MailingListOutServerNameException;
 import com.liferay.portlet.messageboards.MailingListOutUserNameException;
-import com.liferay.portlet.messageboards.NoSuchMailingListException;
 import com.liferay.portlet.messageboards.messaging.MailingListRequest;
+import com.liferay.portlet.messageboards.model.MBCategory;
 import com.liferay.portlet.messageboards.model.MBMailingList;
 import com.liferay.portlet.messageboards.service.base.MBMailingListLocalServiceBaseImpl;
 
@@ -49,37 +49,43 @@ import java.util.Date;
 import java.util.List;
 
 /**
- * <a href="MBMailingListLocalServiceImpl.java.html"><b><i>View
- * Source</i></b></a>
+ * <a href="MBMailingListLocalServiceImpl.java.html"><b><i>View Source</i></b>
+ * </a>
  *
  * @author Thiago Moreira
+ *
  */
 public class MBMailingListLocalServiceImpl
 	extends MBMailingListLocalServiceBaseImpl {
 
-	public MBMailingList addMailing(
-		long userId, long groupId, long categoryId, String emailAddress,
-		String inProtocol, String inServerName, boolean inUseSSL,
-		int inServerPort, String inUserName, String inPassword,
-		int inReadInterval, boolean outCustom, String outEmailAddress,
-		String outServerName, boolean outUseSSL, int outServerPort,
-		String outUserName, String outPassword)
+	public MBMailingList addMailingList(
+			String uuid, long userId, long categoryId, String emailAddress,
+			String inProtocol, String inServerName, int inServerPort,
+			boolean inUseSSL, String inUserName, String inPassword,
+			int inReadInterval, String outEmailAddress, boolean outCustom,
+			String outServerName, int outServerPort, boolean outUseSSL,
+			String outUserName, String outPassword, boolean active)
 		throws PortalException, SystemException {
 
-		// Mailing
-
-		_validate(
-			emailAddress, inServerName, inUserName, outCustom, outEmailAddress,
-			outServerName, outUserName);
+		// Mailing list
 
 		User user = userPersistence.findByPrimaryKey(userId);
+		MBCategory category = mbCategoryPersistence.findByPrimaryKey(
+			categoryId);
 		Date now = new Date();
+
+		validate(
+			emailAddress, inServerName, inUserName, outEmailAddress, outCustom,
+			outServerName, outUserName);
+
 		long mailingListId = counterLocalService.increment();
+
 		MBMailingList mailingList = mbMailingListPersistence.create(
 			mailingListId);
 
+		mailingList.setUuid(uuid);
+		mailingList.setGroupId(category.getGroupId());
 		mailingList.setCompanyId(user.getCompanyId());
-		mailingList.setGroupId(groupId);
 		mailingList.setUserId(user.getUserId());
 		mailingList.setUserName(user.getFullName());
 		mailingList.setCreateDate(now);
@@ -88,43 +94,46 @@ public class MBMailingListLocalServiceImpl
 		mailingList.setEmailAddress(emailAddress);
 		mailingList.setInProtocol(inProtocol);
 		mailingList.setInServerName(inServerName);
-		mailingList.setInUseSSL(inUseSSL);
 		mailingList.setInServerPort(inServerPort);
+		mailingList.setInUseSSL(inUseSSL);
 		mailingList.setInUserName(inUserName);
 		mailingList.setInPassword(inPassword);
 		mailingList.setInReadInterval(inReadInterval);
-
-		// outgoing
-
-		if (outCustom) {
-			mailingList.setOutCustom(true);
-			mailingList.setOutEmailAddress(outEmailAddress);
-			mailingList.setOutServerName(outServerName);
-			mailingList.setOutUseSSL(outUseSSL);
-			mailingList.setOutServerPort(outServerPort);
-			mailingList.setOutUserName(outUserName);
-			mailingList.setOutPassword(outPassword);
-		}
-		else {
-			mailingList.setOutCustom(false);
-		}
-
-		mailingList.setActive(true);
+		mailingList.setOutEmailAddress(outEmailAddress);
+		mailingList.setOutCustom(outCustom);
+		mailingList.setOutEmailAddress(outEmailAddress);
+		mailingList.setOutServerName(outServerName);
+		mailingList.setOutServerPort(outServerPort);
+		mailingList.setOutUseSSL(outUseSSL);
+		mailingList.setOutUserName(outUserName);
+		mailingList.setOutPassword(outPassword);
+		mailingList.setActive(active);
 
 		mbMailingListPersistence.update(mailingList, false);
 
-		// Adding a listener to the account
+		// Scheduler
 
-		_scheduleEmailReader(mailingList);
+		if (active) {
+			scheduleMailingList(mailingList);
+		}
 
 		return mailingList;
+	}
+
+	public void deleteCategoryMailingList(long categoryId)
+		throws PortalException, SystemException {
+
+		MBMailingList mailingList = mbMailingListPersistence.findByCategoryId(
+			categoryId);
+
+		deleteMailingList(mailingList);
 	}
 
 	public void deleteMailingList(long mailingListId)
 		throws PortalException, SystemException {
 
 		MBMailingList mailingList = mbMailingListPersistence.findByPrimaryKey(
-				mailingListId);
+			mailingListId);
 
 		deleteMailingList(mailingList);
 	}
@@ -132,247 +141,144 @@ public class MBMailingListLocalServiceImpl
 	public void deleteMailingList(MBMailingList mailingList)
 		throws PortalException, SystemException {
 
-		// Unscheduling
+		unscheduleMailingList(mailingList);
 
-		_unscheduleEmailReader(mailingList);
-
-		deleteMBMailingList(mailingList);
+		mbMailingListPersistence.remove(mailingList);
 	}
 
-	public MBMailingList getMailingListByCategory(long categoryId)
+	public MBMailingList getCategoryMailingList(long categoryId)
 		throws PortalException, SystemException {
 
 		return mbMailingListPersistence.findByCategoryId(categoryId);
 	}
 
-	public List<MBMailingList> getMailingLists()
+	public MBMailingList updateMailingList(
+			long mailingListId, String emailAddress, String inProtocol,
+			String inServerName, int inServerPort, boolean inUseSSL,
+			String inUserName, String inPassword, int inReadInterval,
+			String outEmailAddress, boolean outCustom, String outServerName,
+			int outServerPort, boolean outUseSSL, String outUserName,
+			String outPassword, boolean active)
 		throws PortalException, SystemException {
 
-		return mbMailingListPersistence.findAll();
-	}
-
-	public void startMailReader()
-		throws PortalException, SystemException {
-
-		List<MBMailingList> list = mbMailingListPersistence.findByActive(true);
-		for (MBMailingList mailingList : list) {
-			_scheduleEmailReader(mailingList);
-		}
-	}
-
-	public void stopMailReader()
-		throws PortalException, SystemException {
-
-		List<MBMailingList> list = mbMailingListPersistence.findByActive(true);
-		for (MBMailingList mailingList : list) {
-			_unscheduleEmailReader(mailingList);
-		}
-	}
-
-	public MBMailingList updateActive(long mailingListId, boolean active)
-		throws PortalException, SystemException {
+		// Mailing list
 
 		MBMailingList mailingList = mbMailingListPersistence.findByPrimaryKey(
 			mailingListId);
 
+		mailingList.setModifiedDate(new Date());
+		mailingList.setEmailAddress(emailAddress);
+		mailingList.setInProtocol(inProtocol);
+		mailingList.setInServerName(inServerName);
+		mailingList.setInServerPort(inServerPort);
+		mailingList.setInUseSSL(inUseSSL);
+		mailingList.setInUserName(inUserName);
+		mailingList.setInPassword(inPassword);
+		mailingList.setInReadInterval(inReadInterval);
+		mailingList.setOutEmailAddress(outEmailAddress);
+		mailingList.setOutCustom(outCustom);
+		mailingList.setOutEmailAddress(outEmailAddress);
+		mailingList.setOutServerName(outServerName);
+		mailingList.setOutServerPort(outServerPort);
+		mailingList.setOutUseSSL(outUseSSL);
+		mailingList.setOutUserName(outUserName);
+		mailingList.setOutPassword(outPassword);
 		mailingList.setActive(active);
 
 		mbMailingListPersistence.update(mailingList, false);
 
+		// Scheduler
+
 		if (active) {
-			_scheduleEmailReader(mailingList);
+			scheduleMailingList(mailingList);
 		}
 		else {
-			_unscheduleEmailReader(mailingList);
+			unscheduleMailingList(mailingList);
 		}
 
 		return mailingList;
 	}
 
-	public MBMailingList updateMailingList(
-		long userId, long groupId, long categoryId, String emailAddress,
-		String inProtocol, String inServerName, boolean inUseSSL,
-		int inServerPort, String inUserName, String inPassword,
-		int inReadInterval, String outEmailAddress, boolean outCustom,
-		String outServerName, boolean outUseSSL, int outServerPort,
-		String outUserName, String outPassword)
-		throws PortalException, SystemException {
+	protected String getSchedulerGroupName(MBMailingList mailingList) {
+		StringBuilder sb = new StringBuilder();
 
-		// MailingList
+		sb.append(DestinationNames.MESSAGE_BOARDS_MAILING_LIST);
+		sb.append(StringPool.SLASH);
+		sb.append(mailingList.getGroupId());
 
-		_validate(
-			emailAddress, inServerName, inUserName, outCustom, outEmailAddress,
-			outServerName, outUserName);
-
-		Date now = new Date();
-
-		MBMailingList mailingList;
-		try {
-
-			mailingList = getMailingListByCategory(categoryId);
-
-		}
-		catch (NoSuchMailingListException e) {
-			User user = userPersistence.findByPrimaryKey(userId);
-			long mailingListId = counterLocalService.increment();
-			mailingList = mbMailingListPersistence.create(mailingListId);
-
-			mailingList.setCompanyId(user.getCompanyId());
-			mailingList.setGroupId(groupId);
-			mailingList.setUserId(user.getUserId());
-			mailingList.setUserName(user.getFullName());
-			mailingList.setCreateDate(now);
-			mailingList.setCategoryId(categoryId);
-		}
-
-		mailingList.setModifiedDate(now);
-		mailingList.setEmailAddress(emailAddress);
-		mailingList.setInProtocol(inProtocol);
-		mailingList.setInServerName(inServerName);
-		mailingList.setInUseSSL(inUseSSL);
-		mailingList.setInServerPort(inServerPort);
-		mailingList.setInUserName(inUserName);
-		mailingList.setInPassword(inPassword);
-		mailingList.setInReadInterval(inReadInterval);
-
-		// outgoing
-
-		if (outCustom) {
-			mailingList.setOutCustom(true);
-			mailingList.setOutEmailAddress(outEmailAddress);
-			mailingList.setOutServerName(outServerName);
-			mailingList.setOutUseSSL(outUseSSL);
-			mailingList.setOutServerPort(outServerPort);
-			mailingList.setOutUserName(outUserName);
-			mailingList.setOutPassword(outPassword);
-		}
-		else {
-			mailingList.setOutCustom(false);
-		}
-
-		mailingList.setActive(true);
-
-		mbMailingListPersistence.update(mailingList, false);
-
-		// adding a listener to the account
-
-		_scheduleEmailReader(mailingList);
-
-		return mailingList;
+		return sb.toString();
 	}
 
-	public MBMailingList updateOutCustom(long mailingListId, boolean outCustom)
-		throws PortalException, SystemException {
+	protected void scheduleMailingList(MBMailingList mailingList)
+		throws PortalException {
 
-		MBMailingList mailingList = mbMailingListPersistence.findByPrimaryKey(
-			mailingListId);
+		unscheduleMailingList(mailingList);
 
-		mailingList.setOutCustom(outCustom);
+		String groupName = getSchedulerGroupName(mailingList);
 
-		mbMailingListPersistence.update(mailingList, false);
-
-		if (mailingList.isActive()) {
-			_scheduleEmailReader(mailingList);
-		}
-		else {
-			_unscheduleEmailReader(mailingList);
-		}
-
-		return mailingList;
-	}
-
-	private String _buildGroupName(MBMailingList mailingList) {
-
-		return mailingList.getMailingListId() + StringPool.AT +
-			mailingList.getCategoryId();
-	}
-
-	private SchedulerRequest _getSchedulerRequest(MBMailingList mailingList)
-		throws PortalException, SystemException {
-
-		String groupName = _buildGroupName(mailingList);
-
-		List<SchedulerRequest> list =
-			SchedulerEngineUtil.getScheduledJobs(groupName);
-
-		SchedulerRequest request = null;
-		if (list.size() == 1) {
-			request = list.get(0);
-		}
-
-		return request;
-	}
-
-	private void _scheduleEmailReader(MBMailingList mailingList)
-		throws PortalException, SystemException {
-
-		_unscheduleEmailReader(mailingList);
-
-		String groupName = _buildGroupName(mailingList);
-		Calendar startDate = CalendarFactoryUtil.getCalendar();
-		TriggerExpression expression = new TriggerExpression(
+		TriggerExpression triggerExpression = new TriggerExpression(
 			startDate, TriggerExpression.MINUTELY_FREQUENCY,
 			mailingList.getInReadInterval());
-		String cronText = expression.toCronText();
-		MailingListRequest request = new MailingListRequest();
 
-		request.setCompanyId(mailingList.getCompanyId());
-		request.setCategoryId(mailingList.getCategoryId());
-		request.setUserId(mailingList.getUserId());
-		request.setInProtocol(mailingList.getInProtocol());
-		request.setInServerName(mailingList.getInServerName());
-		request.setInUseSSL(mailingList.getInUseSSL());
-		request.setInServerPort(mailingList.getInServerPort());
-		request.setInUserName(mailingList.getInUserName());
-		request.setInPassword(mailingList.getInPassword());
+		String cronText = triggerExpression.toCronText();
+
+		Calendar startDate = CalendarFactoryUtil.getCalendar();
+
+		MailingListRequest mailingListRequest = new MailingListRequest();
+
+		mailingListRequest.setCompanyId(mailingList.getCompanyId());
+		mailingListRequest.setUserId(mailingList.getUserId());
+		mailingListRequest.setCategoryId(mailingList.getCategoryId());
+		mailingListRequest.setInProtocol(mailingList.getInProtocol());
+		mailingListRequest.setInServerName(mailingList.getInServerName());
+		mailingListRequest.setInServerPort(mailingList.getInServerPort());
+		mailingListRequest.setInUseSSL(mailingList.getInUseSSL());
+		mailingListRequest.setInUserName(mailingList.getInUserName());
+		mailingListRequest.setInPassword(mailingList.getInPassword());
 
 		SchedulerEngineUtil.schedule(
 			groupName, cronText, startDate.getTime(), null, null,
-			DestinationNames.MESSAGE_BOARDS_MAILING_LIST_READER,
-			JSONFactoryUtil.serialize(request));
+			DestinationNames.MESSAGE_BOARDS_MAILING_LIST,
+			JSONFactoryUtil.serialize(mailingListRequest));
 	}
 
-	private void _unscheduleEmailReader(MBMailingList mailingList)
-		throws PortalException, SystemException {
+	protected void unscheduleMailingList(MBMailingList mailingList)
+		throws PortalException {
 
-		SchedulerRequest request = _getSchedulerRequest(mailingList);
-		if (request != null) {
+		String groupName = getSchedulerGroupName(mailingList);
+
+		List<SchedulerRequest> schedulerRequests =
+			SchedulerEngineUtil.getScheduledJobs(groupName);
+
+		for (SchedulerRequest schedulerRequest : schedulerRequests) {
 			SchedulerEngineUtil.unschedule(
-				request.getJobName(), request.getGroupName());
+				schedulerRequest.getJobName(), schedulerRequest.getGroupName());
 		}
 	}
 
-	private void _validate(
-		String emailAddress, String inServerName, String inUserName,
-		boolean outCustom, String outEmailAddress, String outServerName,
-		String outUserName)
+	protected void validate(
+			String emailAddress, String inServerName, String inUserName,
+			String outEmailAddress, boolean outCustom, String outServerName,
+			String outUserName)
 		throws PortalException {
 
-		if (Validator.isNull(emailAddress) ||
-			!Validator.isEmailAddress(emailAddress)) {
-
+		if (!Validator.isEmailAddress(emailAddress)) {
 			throw new MailingListEmailAddressException();
 		}
 		else if (Validator.isNull(inServerName)) {
-
 			throw new MailingListInServerNameException();
 		}
 		else if (Validator.isNull(inUserName)) {
-
 			throw new MailingListInUserNameException();
 		}
+		else if (Validator.isNull(outEmailAddress)) {
+			throw new MailingListOutEmailAddressException();
+		}
 		else if (outCustom) {
-
-			if (Validator.isNull(outEmailAddress)) {
-
-				throw new MailingListOutEmailAddressException();
-			}
 			if (Validator.isNull(outServerName)) {
-
 				throw new MailingListOutServerNameException();
 			}
 			else if (Validator.isNull(outUserName)) {
-
 				throw new MailingListOutUserNameException();
 			}
 		}

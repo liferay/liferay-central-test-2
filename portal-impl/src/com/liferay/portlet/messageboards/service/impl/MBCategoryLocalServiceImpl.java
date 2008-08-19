@@ -41,6 +41,7 @@ import com.liferay.portal.model.ResourceConstants;
 import com.liferay.portal.model.User;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portlet.messageboards.CategoryNameException;
+import com.liferay.portlet.messageboards.NoSuchMailingListException;
 import com.liferay.portlet.messageboards.model.MBCategory;
 import com.liferay.portlet.messageboards.model.MBMessage;
 import com.liferay.portlet.messageboards.model.MBThread;
@@ -239,6 +240,15 @@ public class MBCategoryLocalServiceImpl extends MBCategoryLocalServiceBaseImpl {
 		// Threads
 
 		mbThreadLocalService.deleteThreads(category.getCategoryId());
+
+		// Mailing list
+
+		try {
+			mbMailingListLocalService.deleteCategoryMailingList(
+				category.getCategoryId());
+		}
+		catch (NoSuchMailingListException nsmle) {
+		}
 
 		// Resources
 

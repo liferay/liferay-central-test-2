@@ -26,96 +26,79 @@ package com.liferay.portlet.messageboards.messaging;
  * <a href="MailingListRequest.java.html"><b><i>View Source</i></b></a>
  *
  * @author Thiago Moreira
+ *
  */
 public class MailingListRequest {
 
 	public long getCategoryId() {
-
 		return _categoryId;
 	}
 
 	public long getCompanyId() {
-
 		return _companyId;
 	}
 
 	public String getInPassword() {
-
 		return _inPassword;
 	}
 
 	public String getInProtocol() {
-
 		return _inProtocol;
 	}
 
 	public String getInServerName() {
-
 		return _inServerName;
 	}
 
 	public int getInServerPort() {
-
 		return _inServerPort;
 	}
 
 	public String getInUserName() {
-
 		return _inUserName;
 	}
 
 	public boolean getInUseSSL() {
-
 		return _inUseSSL;
 	}
 
 	public long getUserId() {
-
 		return _userId;
 	}
 
 	public void setCategoryId(long id) {
-
 		_categoryId = id;
 	}
 
 	public void setCompanyId(long id) {
-
 		_companyId = id;
 	}
 
 	public void setInPassword(String inPassword) {
-
 		_inPassword = inPassword;
 	}
 
 	public void setInProtocol(String inProtocol) {
-
 		_inProtocol = inProtocol;
 	}
 
 	public void setInServerName(String inServerName) {
-
 		_inServerName = inServerName;
 	}
 
 	public void setInServerPort(int inServerPort) {
-
 		_inServerPort = inServerPort;
 	}
 
 	public void setInUserName(String inUserName) {
-
 		_inUserName = inUserName;
 	}
 
 	public void setInUseSSL(boolean inUseSSL) {
-
 		_inUseSSL = inUseSSL;
 	}
 
 	public void setUserId(long id) {
-
 		_userId = id;
 	}
 
