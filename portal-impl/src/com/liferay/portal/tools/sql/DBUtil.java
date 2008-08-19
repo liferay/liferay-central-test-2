@@ -24,6 +24,7 @@ package com.liferay.portal.tools.sql;
 
 import com.liferay.portal.kernel.dao.jdbc.DataAccess;
 import com.liferay.portal.kernel.util.FileUtil;
+import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.util.PropsValues;
@@ -417,7 +418,12 @@ public abstract class DBUtil {
 								throw sqle;
 							}
 							else if (_log.isWarnEnabled()) {
-								_log.warn(sqle.getMessage());
+								String message = GetterUtil.getString(
+									sqle.getMessage());
+
+								if (!message.startsWith("Duplicate key name")) {
+									_log.warn(sqle.getMessage());
+								}
 							}
 						}
 					}
