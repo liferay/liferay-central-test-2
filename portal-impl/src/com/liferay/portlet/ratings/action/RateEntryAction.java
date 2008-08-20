@@ -29,6 +29,7 @@ import com.liferay.portal.struts.JSONAction;
 import com.liferay.portlet.ratings.model.RatingsStats;
 import com.liferay.portlet.ratings.service.RatingsEntryServiceUtil;
 import com.liferay.portlet.ratings.service.RatingsStatsLocalServiceUtil;
+import com.liferay.util.MathUtil;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -63,11 +64,13 @@ public class RateEntryAction extends JSONAction {
 		RatingsStats stats = RatingsStatsLocalServiceUtil.getStats(
 			className, classPK);
 
+		double averageScore = MathUtil.format(stats.getAverageScore(), 1, 1);
+
 		JSONObject jsonObj = JSONFactoryUtil.createJSONObject();
 
 		jsonObj.put("totalEntries", stats.getTotalEntries());
 		jsonObj.put("totalScore", stats.getTotalScore());
-		jsonObj.put("averageScore", stats.getAverageScore());
+		jsonObj.put("averageScore", averageScore);
 
 		return jsonObj.toString();
 	}
