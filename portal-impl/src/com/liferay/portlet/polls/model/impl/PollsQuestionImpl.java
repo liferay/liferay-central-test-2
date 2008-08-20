@@ -63,12 +63,12 @@ public class PollsQuestionImpl
 		}
 	}
 
-	public int getTotalVotes() throws SystemException {
-		return PollsVoteLocalServiceUtil.getQuestionVotesCount(getQuestionId());
+	public List<PollsChoice> getChoices() throws SystemException {
+		return PollsChoiceLocalServiceUtil.getChoices(getQuestionId());
 	}
 
-	public List<PollsChoice> getPollsChoices() throws SystemException {
-		return PollsChoiceLocalServiceUtil.getChoices(getQuestionId());
+	public int getVotesCount() throws SystemException {
+		return PollsVoteLocalServiceUtil.getQuestionVotesCount(getQuestionId());
 	}
 
 	private String _userUuid;

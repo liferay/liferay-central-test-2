@@ -31,7 +31,7 @@ PollsQuestion question = (PollsQuestion)request.getAttribute(WebKeys.POLLS_QUEST
 
 question = question.toEscapedModel();
 
-List<PollsChoice> choices = question.getPollsChoices();
+List<PollsChoice> choices = question.getChoices();
 
 boolean hasVoted = PollsUtil.hasVoted(request, question.getQuestionId());
 
@@ -81,7 +81,6 @@ if (!question.isExpired() && !hasVoted && PollsQuestionPermission.contains(permi
 
 		<%
 		for (PollsChoice choice : choices) {
-
 			choice = choice.toEscapedModel();
 		%>
 

@@ -38,7 +38,7 @@ public class PollsChoiceImpl
 	public PollsChoiceImpl() {
 	}
 
-	public int getChoiceVotes() throws SystemException {
+	public int getVotesCount() throws SystemException {
 		return PollsVoteLocalServiceUtil.getChoiceVotesCount(getChoiceId());
 	}
 

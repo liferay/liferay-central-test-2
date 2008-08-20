@@ -56,8 +56,8 @@ public interface PollsQuestion extends PollsQuestionModel {
 
 	public boolean isExpired();
 
-	public int getTotalVotes() throws com.liferay.portal.SystemException;
-
-	public java.util.List<com.liferay.portlet.polls.model.PollsChoice> getPollsChoices()
+	public java.util.List<com.liferay.portlet.polls.model.PollsChoice> getChoices()
 		throws com.liferay.portal.SystemException;
+
+	public int getVotesCount() throws com.liferay.portal.SystemException;
 }
