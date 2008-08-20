@@ -48,27 +48,30 @@ public class SCProductVersionServiceUtil {
 	public static com.liferay.portlet.softwarecatalog.model.SCProductVersion addProductVersion(
 		long productEntryId, java.lang.String version,
 		java.lang.String changeLog, java.lang.String downloadPageURL,
-		java.lang.String directDownloadURL, boolean repoStoreArtifact,
-		long[] frameworkVersionIds, boolean addCommunityPermissions,
-		boolean addGuestPermissions)
+		java.lang.String directDownloadURL, boolean testDirectDownloadURL,
+		boolean repoStoreArtifact, long[] frameworkVersionIds,
+		boolean addCommunityPermissions, boolean addGuestPermissions)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		return _service.addProductVersion(productEntryId, version, changeLog,
-			downloadPageURL, directDownloadURL, repoStoreArtifact,
-			frameworkVersionIds, addCommunityPermissions, addGuestPermissions);
+			downloadPageURL, directDownloadURL, testDirectDownloadURL,
+			repoStoreArtifact, frameworkVersionIds, addCommunityPermissions,
+			addGuestPermissions);
 	}
 
 	public static com.liferay.portlet.softwarecatalog.model.SCProductVersion addProductVersion(
 		long productEntryId, java.lang.String version,
 		java.lang.String changeLog, java.lang.String downloadPageURL,
-		java.lang.String directDownloadURL, boolean repoStoreArtifact,
-		long[] frameworkVersionIds, java.lang.String[] communityPermissions,
+		java.lang.String directDownloadURL, boolean testDirectDownloadURL,
+		boolean repoStoreArtifact, long[] frameworkVersionIds,
+		java.lang.String[] communityPermissions,
 		java.lang.String[] guestPermissions)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		return _service.addProductVersion(productEntryId, version, changeLog,
-			downloadPageURL, directDownloadURL, repoStoreArtifact,
-			frameworkVersionIds, communityPermissions, guestPermissions);
+			downloadPageURL, directDownloadURL, testDirectDownloadURL,
+			repoStoreArtifact, frameworkVersionIds, communityPermissions,
+			guestPermissions);
 	}
 
 	public static void deleteProductVersion(long productVersionId)
@@ -100,13 +103,13 @@ public class SCProductVersionServiceUtil {
 	public static com.liferay.portlet.softwarecatalog.model.SCProductVersion updateProductVersion(
 		long productVersionId, java.lang.String version,
 		java.lang.String changeLog, java.lang.String downloadPageURL,
-		java.lang.String directDownloadURL, boolean repoStoreArtifact,
-		long[] frameworkVersionIds)
+		java.lang.String directDownloadURL, boolean testDirectDownloadURL,
+		boolean repoStoreArtifact, long[] frameworkVersionIds)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		return _service.updateProductVersion(productVersionId, version,
-			changeLog, downloadPageURL, directDownloadURL, repoStoreArtifact,
-			frameworkVersionIds);
+			changeLog, downloadPageURL, directDownloadURL,
+			testDirectDownloadURL, repoStoreArtifact, frameworkVersionIds);
 	}
 
 	public static SCProductVersionService getService() {

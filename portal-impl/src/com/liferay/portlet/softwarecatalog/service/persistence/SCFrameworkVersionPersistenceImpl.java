@@ -324,8 +324,7 @@ public class SCFrameworkVersionPersistenceImpl extends BasePersistenceImpl
 
 				query.append("ORDER BY ");
 
-				query.append("priority ASC, ");
-				query.append("name ASC");
+				query.append("name DESC");
 
 				Query q = session.createQuery(query.toString());
 
@@ -405,8 +404,7 @@ public class SCFrameworkVersionPersistenceImpl extends BasePersistenceImpl
 				else {
 					query.append("ORDER BY ");
 
-					query.append("priority ASC, ");
-					query.append("name ASC");
+					query.append("name DESC");
 				}
 
 				Query q = session.createQuery(query.toString());
@@ -510,8 +508,7 @@ public class SCFrameworkVersionPersistenceImpl extends BasePersistenceImpl
 			else {
 				query.append("ORDER BY ");
 
-				query.append("priority ASC, ");
-				query.append("name ASC");
+				query.append("name DESC");
 			}
 
 			Query q = session.createQuery(query.toString());
@@ -571,8 +568,7 @@ public class SCFrameworkVersionPersistenceImpl extends BasePersistenceImpl
 
 				query.append("ORDER BY ");
 
-				query.append("priority ASC, ");
-				query.append("name ASC");
+				query.append("name DESC");
 
 				Query q = session.createQuery(query.toString());
 
@@ -652,8 +648,7 @@ public class SCFrameworkVersionPersistenceImpl extends BasePersistenceImpl
 				else {
 					query.append("ORDER BY ");
 
-					query.append("priority ASC, ");
-					query.append("name ASC");
+					query.append("name DESC");
 				}
 
 				Query q = session.createQuery(query.toString());
@@ -757,8 +752,7 @@ public class SCFrameworkVersionPersistenceImpl extends BasePersistenceImpl
 			else {
 				query.append("ORDER BY ");
 
-				query.append("priority ASC, ");
-				query.append("name ASC");
+				query.append("name DESC");
 			}
 
 			Query q = session.createQuery(query.toString());
@@ -826,8 +820,7 @@ public class SCFrameworkVersionPersistenceImpl extends BasePersistenceImpl
 
 				query.append("ORDER BY ");
 
-				query.append("priority ASC, ");
-				query.append("name ASC");
+				query.append("name DESC");
 
 				Query q = session.createQuery(query.toString());
 
@@ -913,8 +906,7 @@ public class SCFrameworkVersionPersistenceImpl extends BasePersistenceImpl
 				else {
 					query.append("ORDER BY ");
 
-					query.append("priority ASC, ");
-					query.append("name ASC");
+					query.append("name DESC");
 				}
 
 				Query q = session.createQuery(query.toString());
@@ -1030,8 +1022,7 @@ public class SCFrameworkVersionPersistenceImpl extends BasePersistenceImpl
 			else {
 				query.append("ORDER BY ");
 
-				query.append("priority ASC, ");
-				query.append("name ASC");
+				query.append("name DESC");
 			}
 
 			Query q = session.createQuery(query.toString());
@@ -1149,8 +1140,7 @@ public class SCFrameworkVersionPersistenceImpl extends BasePersistenceImpl
 				else {
 					query.append("ORDER BY ");
 
-					query.append("priority ASC, ");
-					query.append("name ASC");
+					query.append("name DESC");
 				}
 
 				Query q = session.createQuery(query.toString());

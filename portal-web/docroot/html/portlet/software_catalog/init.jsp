@@ -51,6 +51,7 @@
 <%@ page import="com.liferay.portlet.softwarecatalog.NoSuchLicenseException" %>
 <%@ page import="com.liferay.portlet.softwarecatalog.NoSuchProductEntryException" %>
 <%@ page import="com.liferay.portlet.softwarecatalog.NoSuchProductVersionException" %>
+<%@ page import="com.liferay.portlet.softwarecatalog.UnavailableProductVersionDirectDownloadURLException" %>
 <%@ page import="com.liferay.portlet.softwarecatalog.model.SCFrameworkVersion" %>
 <%@ page import="com.liferay.portlet.softwarecatalog.model.SCLicense" %>
 <%@ page import="com.liferay.portlet.softwarecatalog.model.SCProductEntry" %>

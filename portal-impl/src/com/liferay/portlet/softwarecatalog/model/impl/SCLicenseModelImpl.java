@@ -54,9 +54,9 @@ import java.util.List;
  *
  * @author Brian Wing Shun Chan
  *
- * @see com.liferay.portlet.softwarecatalog.service.model.SCLicense
- * @see com.liferay.portlet.softwarecatalog.service.model.SCLicenseModel
- * @see com.liferay.portlet.softwarecatalog.service.model.impl.SCLicenseImpl
+ * @see com.liferay.portlet.softwarecatalog.model.SCLicense
+ * @see com.liferay.portlet.softwarecatalog.model.SCLicenseModel
+ * @see com.liferay.portlet.softwarecatalog.model.impl.SCLicenseImpl
  *
  */
 public class SCLicenseModelImpl extends BaseModelImpl {

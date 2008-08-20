@@ -37,15 +37,15 @@ package com.liferay.portlet.softwarecatalog.model;
  * </p>
  *
  * <p>
- * Customize <code>com.liferay.portlet.softwarecatalog.service.model.impl.SCProductScreenshotImpl</code>
+ * Customize <code>com.liferay.portlet.softwarecatalog.model.impl.SCProductScreenshotImpl</code>
  * and rerun the ServiceBuilder to generate the new methods.
  * </p>
  *
  * @author Brian Wing Shun Chan
  *
- * @see com.liferay.portlet.softwarecatalog.service.model.SCProductScreenshotModel
- * @see com.liferay.portlet.softwarecatalog.service.model.impl.SCProductScreenshotImpl
- * @see com.liferay.portlet.softwarecatalog.service.model.impl.SCProductScreenshotModelImpl
+ * @see com.liferay.portlet.softwarecatalog.model.SCProductScreenshotModel
+ * @see com.liferay.portlet.softwarecatalog.model.impl.SCProductScreenshotImpl
+ * @see com.liferay.portlet.softwarecatalog.model.impl.SCProductScreenshotModelImpl
  *
  */
 public interface SCProductScreenshot extends SCProductScreenshotModel {

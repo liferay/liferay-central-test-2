@@ -37,15 +37,15 @@ package com.liferay.portlet.softwarecatalog.model;
  * </p>
  *
  * <p>
- * Customize <code>com.liferay.portlet.softwarecatalog.service.model.impl.SCProductEntryImpl</code>
+ * Customize <code>com.liferay.portlet.softwarecatalog.model.impl.SCProductEntryImpl</code>
  * and rerun the ServiceBuilder to generate the new methods.
  * </p>
  *
  * @author Brian Wing Shun Chan
  *
- * @see com.liferay.portlet.softwarecatalog.service.model.SCProductEntryModel
- * @see com.liferay.portlet.softwarecatalog.service.model.impl.SCProductEntryImpl
- * @see com.liferay.portlet.softwarecatalog.service.model.impl.SCProductEntryModelImpl
+ * @see com.liferay.portlet.softwarecatalog.model.SCProductEntryModel
+ * @see com.liferay.portlet.softwarecatalog.model.impl.SCProductEntryImpl
+ * @see com.liferay.portlet.softwarecatalog.model.impl.SCProductEntryModelImpl
  *
  */
 public interface SCProductEntry extends SCProductEntryModel {

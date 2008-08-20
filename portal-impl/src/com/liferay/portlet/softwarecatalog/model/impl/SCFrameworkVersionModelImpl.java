@@ -55,9 +55,9 @@ import java.util.List;
  *
  * @author Brian Wing Shun Chan
  *
- * @see com.liferay.portlet.softwarecatalog.service.model.SCFrameworkVersion
- * @see com.liferay.portlet.softwarecatalog.service.model.SCFrameworkVersionModel
- * @see com.liferay.portlet.softwarecatalog.service.model.impl.SCFrameworkVersionImpl
+ * @see com.liferay.portlet.softwarecatalog.model.SCFrameworkVersion
+ * @see com.liferay.portlet.softwarecatalog.model.SCFrameworkVersionModel
+ * @see com.liferay.portlet.softwarecatalog.model.impl.SCFrameworkVersionImpl
  *
  */
 public class SCFrameworkVersionModelImpl extends BaseModelImpl {
@@ -337,21 +337,9 @@ public class SCFrameworkVersionModelImpl extends BaseModelImpl {
 
 		int value = 0;
 
-		if (getPriority() < scFrameworkVersion.getPriority()) {
-			value = -1;
-		}
-		else if (getPriority() > scFrameworkVersion.getPriority()) {
-			value = 1;
-		}
-		else {
-			value = 0;
-		}
-
-		if (value != 0) {
-			return value;
-		}
-
 		value = getName().compareTo(scFrameworkVersion.getName());
+
+		value = value * -1;
 
 		if (value != 0) {
 			return value;

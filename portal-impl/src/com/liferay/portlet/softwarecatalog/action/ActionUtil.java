@@ -23,6 +23,7 @@
 package com.liferay.portlet.softwarecatalog.action;
 
 import com.liferay.portal.kernel.util.ParamUtil;
+import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.WebKeys;
 import com.liferay.portlet.softwarecatalog.model.SCFrameworkVersion;
@@ -33,6 +34,7 @@ import com.liferay.portlet.softwarecatalog.service.SCFrameworkVersionServiceUtil
 import com.liferay.portlet.softwarecatalog.service.SCLicenseServiceUtil;
 import com.liferay.portlet.softwarecatalog.service.SCProductEntryServiceUtil;
 import com.liferay.portlet.softwarecatalog.service.SCProductVersionServiceUtil;
+import com.liferay.util.Version;
 
 import javax.portlet.ActionRequest;
 import javax.portlet.RenderRequest;
@@ -194,6 +196,23 @@ public class ActionUtil {
 
 			productEntry = SCProductEntryServiceUtil.getProductEntry(
 				productVersion.getProductEntryId());
+
+			String oldVersion = productVersion.getVersion();
+
+			Version version = Version.getInstance(oldVersion);
+
+			version = Version.incrementBuildNumber(version);
+
+			String newVersion = version.toString();
+
+			productVersion.setVersion(newVersion);
+
+			String directDownloadURL = productVersion.getDirectDownloadURL();
+
+			directDownloadURL = StringUtil.replace(
+				directDownloadURL, oldVersion, newVersion);
+
+			productVersion.setDirectDownloadURL(directDownloadURL);
 
 			request.setAttribute(
 				WebKeys.SOFTWARE_CATALOG_PRODUCT_VERSION, productVersion);

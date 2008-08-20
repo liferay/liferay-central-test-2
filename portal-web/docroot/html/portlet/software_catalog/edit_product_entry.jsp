@@ -27,7 +27,7 @@
 <%
 String redirect = ParamUtil.getString(request, "redirect");
 
-SCProductEntry productEntry = (SCProductEntry) request.getAttribute(WebKeys.SOFTWARE_CATALOG_PRODUCT_ENTRY);
+SCProductEntry productEntry = (SCProductEntry)request.getAttribute(WebKeys.SOFTWARE_CATALOG_PRODUCT_ENTRY);
 
 long productEntryId = BeanParamUtil.getLong(productEntry, request, "productEntryId");
 

@@ -63,7 +63,7 @@
 
 						<strong style="padding-left: 5px;"><liferay-ui:message key="to-vocabulary" /></strong> <select class="vocabulary-select-list" name="vocabulary-select-list"></select>
 
-						<br/><br/>
+						<br /><br />
 
 						<input class="vocabulary-save-entry" type="button" value="<liferay-ui:message key="save" />" />
 

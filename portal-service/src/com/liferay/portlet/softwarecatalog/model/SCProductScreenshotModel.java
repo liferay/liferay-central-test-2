@@ -39,9 +39,9 @@ import com.liferay.portal.model.BaseModel;
  *
  * @author Brian Wing Shun Chan
  *
- * @see com.liferay.portlet.softwarecatalog.service.model.SCProductScreenshot
- * @see com.liferay.portlet.softwarecatalog.service.model.impl.SCProductScreenshotImpl
- * @see com.liferay.portlet.softwarecatalog.service.model.impl.SCProductScreenshotModelImpl
+ * @see com.liferay.portlet.softwarecatalog.model.SCProductScreenshot
+ * @see com.liferay.portlet.softwarecatalog.model.impl.SCProductScreenshotImpl
+ * @see com.liferay.portlet.softwarecatalog.model.impl.SCProductScreenshotModelImpl
  *
  */
 public interface SCProductScreenshotModel extends BaseModel {

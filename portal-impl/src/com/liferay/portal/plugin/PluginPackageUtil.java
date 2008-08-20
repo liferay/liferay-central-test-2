@@ -80,6 +80,8 @@ import java.util.Properties;
 import java.util.Set;
 import java.util.TreeSet;
 
+import javax.servlet.http.HttpServletResponse;
+
 import org.apache.commons.httpclient.HostConfiguration;
 import org.apache.commons.httpclient.HttpClient;
 import org.apache.commons.httpclient.methods.GetMethod;
@@ -639,7 +641,7 @@ public class PluginPackageUtil {
 				int responseCode = client.executeMethod(
 					hostConfig, getFileMethod);
 
-				if (responseCode != 200) {
+				if (responseCode != HttpServletResponse.SC_OK) {
 					if (_log.isDebugEnabled()) {
 						_log.debug(
 							"A repository for version " +
@@ -662,7 +664,7 @@ public class PluginPackageUtil {
 					responseCode = client.executeMethod(
 						hostConfig, getFileMethod);
 
-					if (responseCode != 200) {
+					if (responseCode != HttpServletResponse.SC_OK) {
 						throw new PluginPackageException(
 							"Unable to download file " + pluginsXmlURL +
 								" because of response code " + responseCode);

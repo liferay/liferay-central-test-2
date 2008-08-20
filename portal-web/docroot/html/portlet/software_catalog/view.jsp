@@ -463,7 +463,7 @@ portletURL.setParameter("tabs1", tabs1);
 		List resultRows = searchContainer.getResultRows();
 
 		for (int i = 0; i < results.size(); i++) {
-			SCFrameworkVersion frameworkVersion = (SCFrameworkVersion) results.get(i);
+			SCFrameworkVersion frameworkVersion = (SCFrameworkVersion)results.get(i);
 
 			frameworkVersion = frameworkVersion.toEscapedModel();
 

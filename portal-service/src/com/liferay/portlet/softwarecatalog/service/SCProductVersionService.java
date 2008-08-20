@@ -51,17 +51,18 @@ public interface SCProductVersionService {
 	public com.liferay.portlet.softwarecatalog.model.SCProductVersion addProductVersion(
 		long productEntryId, java.lang.String version,
 		java.lang.String changeLog, java.lang.String downloadPageURL,
-		java.lang.String directDownloadURL, boolean repoStoreArtifact,
-		long[] frameworkVersionIds, boolean addCommunityPermissions,
-		boolean addGuestPermissions)
+		java.lang.String directDownloadURL, boolean testDirectDownloadURL,
+		boolean repoStoreArtifact, long[] frameworkVersionIds,
+		boolean addCommunityPermissions, boolean addGuestPermissions)
 		throws java.rmi.RemoteException, com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;
 
 	public com.liferay.portlet.softwarecatalog.model.SCProductVersion addProductVersion(
 		long productEntryId, java.lang.String version,
 		java.lang.String changeLog, java.lang.String downloadPageURL,
-		java.lang.String directDownloadURL, boolean repoStoreArtifact,
-		long[] frameworkVersionIds, java.lang.String[] communityPermissions,
+		java.lang.String directDownloadURL, boolean testDirectDownloadURL,
+		boolean repoStoreArtifact, long[] frameworkVersionIds,
+		java.lang.String[] communityPermissions,
 		java.lang.String[] guestPermissions)
 		throws java.rmi.RemoteException, com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;
@@ -87,8 +88,8 @@ public interface SCProductVersionService {
 	public com.liferay.portlet.softwarecatalog.model.SCProductVersion updateProductVersion(
 		long productVersionId, java.lang.String version,
 		java.lang.String changeLog, java.lang.String downloadPageURL,
-		java.lang.String directDownloadURL, boolean repoStoreArtifact,
-		long[] frameworkVersionIds)
+		java.lang.String directDownloadURL, boolean testDirectDownloadURL,
+		boolean repoStoreArtifact, long[] frameworkVersionIds)
 		throws java.rmi.RemoteException, com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;
 }

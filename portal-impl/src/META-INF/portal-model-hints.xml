@@ -1505,7 +1505,7 @@
 		<field name="modifiedDate" type="Date" />
 		<field name="productEntryId" type="long" />
 		<field name="version" type="String">
-			<hint name="display-width">30</hint>
+			<hint name="display-width">50</hint>
 		</field>
 		<field name="changeLog" type="String">
 			<hint-collection name="TEXTAREA" />

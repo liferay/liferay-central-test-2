@@ -72,8 +72,7 @@
 
 		<!-- Order -->
 
-		<order by="asc">
-			<order-column name="priority" />
+		<order by="desc">
 			<order-column name="name" />
 		</order>
 
@@ -278,5 +277,6 @@
 		<exception>ProductVersionDownloadURL</exception>
 		<exception>ProductVersionFrameworkVersion</exception>
 		<exception>ProductVersionName</exception>
+		<exception>UnavailableProductVersionDirectDownloadURL</exception>
 	</exceptions>
 </service-builder>

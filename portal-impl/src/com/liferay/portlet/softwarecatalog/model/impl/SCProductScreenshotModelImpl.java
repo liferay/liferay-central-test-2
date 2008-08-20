@@ -53,9 +53,9 @@ import java.util.List;
  *
  * @author Brian Wing Shun Chan
  *
- * @see com.liferay.portlet.softwarecatalog.service.model.SCProductScreenshot
- * @see com.liferay.portlet.softwarecatalog.service.model.SCProductScreenshotModel
- * @see com.liferay.portlet.softwarecatalog.service.model.impl.SCProductScreenshotImpl
+ * @see com.liferay.portlet.softwarecatalog.model.SCProductScreenshot
+ * @see com.liferay.portlet.softwarecatalog.model.SCProductScreenshotModel
+ * @see com.liferay.portlet.softwarecatalog.model.impl.SCProductScreenshotImpl
  *
  */
 public class SCProductScreenshotModelImpl extends BaseModelImpl {

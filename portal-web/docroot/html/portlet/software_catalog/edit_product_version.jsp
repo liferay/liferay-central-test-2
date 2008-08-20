@@ -57,6 +57,8 @@ else {
 	}
 }
 
+boolean testDirectDownloadURL = ParamUtil.getBoolean(request, "testDirectDownloadURL", true);
+
 PortletURL editProductEntryURL = renderResponse.createRenderURL();
 
 editProductEntryURL.setWindowState(WindowState.MAXIMIZED);
@@ -88,6 +90,7 @@ editProductEntryURL.setParameter("productEntryId", String.valueOf(productEntryId
 <liferay-ui:error exception="<%= ProductVersionChangeLogException.class %>" message="please-enter-a-valid-change-log" />
 <liferay-ui:error exception="<%= ProductVersionDownloadURLException.class %>" message="please-enter-a-download-page-url-or-a-direct-download-url" />
 <liferay-ui:error exception="<%= ProductVersionFrameworkVersionException.class %>" message="please-select-at-least-one-framework-version" />
+<liferay-ui:error exception="<%= UnavailableProductVersionDirectDownloadURLException.class %>" message="please-enter-a-valid-direct-download-url" />
 
 <h3><%= productEntry.getName() %></h3>
 
@@ -149,33 +152,46 @@ editProductEntryURL.setParameter("productEntryId", String.valueOf(productEntryId
 			<liferay-ui:input-field model="<%= SCProductVersion.class %>" bean="<%= productVersion %>" field="downloadPageURL" />
 		</td>
 	</tr>
-		<tr>
-			<td>
-				<liferay-ui:message key="direct-download-url" /> (<liferay-ui:message key="recommended" />)
-			</td>
-			<td>
-				<liferay-ui:input-field model="<%= SCProductVersion.class %>" bean="<%= productVersion %>" field="directDownloadURL" />
-			</td>
-		</tr>
+	<tr>
+		<td>
+			<liferay-ui:message key="direct-download-url" /> (<liferay-ui:message key="recommended" />)
+		</td>
+		<td>
+			<liferay-ui:input-field model="<%= SCProductVersion.class %>" bean="<%= productVersion %>" field="directDownloadURL" />
+		</td>
+	</tr>
+	<tr>
+		<td>
+			<liferay-ui:message key="test-direct-download-url" />
+		</td>
+		<td>
+			<select name="<portlet:namespace/>testDirectDownloadURL">
+				<option <%= testDirectDownloadURL ? "selected" : "" %> value="1"><liferay-ui:message key="yes" /></option>
+				<option <%= !testDirectDownloadURL ? "selected" : "" %> value="0"><liferay-ui:message key="no" /></option>
+			</select>
+		</td>
+	</tr>
 	<tr>
 		<td>
 			<liferay-ui:message key="include-artifact-in-repository" />
 		</td>
 
-		<% if (Validator.isNotNull(productEntry.getRepoArtifactId()) && Validator.isNotNull(productEntry.getRepoArtifactId())) { %>
-			<td>
-				<select name="<portlet:namespace/>repoStoreArtifact" size="1">
-					<option <%= ((productVersion != null) && (!productVersion.getRepoStoreArtifact())) ? "selected" : "" %> value="false"><liferay-ui:message key="no" /></option>
-					<option <%= ((productVersion != null) && (productVersion.getRepoStoreArtifact())) ? "selected" : "" %> value="true"><liferay-ui:message key="yes" /></option>
-				</select>
-			</td>
-		<% } else { %>
-			<td>
-				<a href="<%= editProductEntryURL %>"><liferay-ui:message key="you-must-specify-a-group-id-and-artifact-id-before-you-can-add-a-product-version" /></a>
-			</td>
-		<% } %>
+		<c:choose>
+			<c:when test="<%= Validator.isNotNull(productEntry.getRepoArtifactId()) && Validator.isNotNull(productEntry.getRepoArtifactId()) %>">
+				<td>
+					<select name="<portlet:namespace/>repoStoreArtifact">
+						<option <%= ((productVersion != null) && productVersion.getRepoStoreArtifact()) ? "selected" : "" %> value="1"><liferay-ui:message key="yes" /></option>
+						<option <%= ((productVersion != null) && !productVersion.getRepoStoreArtifact()) ? "selected" : "" %> value="0"><liferay-ui:message key="no" /></option>
+					</select>
+				</td>
+			</c:when>
+			<c:otherwise>
+				<td>
+					<a href="<%= editProductEntryURL %>"><liferay-ui:message key="you-must-specify-a-group-id-and-artifact-id-before-you-can-add-a-product-version" /></a>
+				</td>
+			</c:otherwise>
+		</c:choose>
 	</tr>
-
 	</table>
 </fieldset>
 
@@ -188,7 +204,7 @@ editProductEntryURL.setParameter("productEntryId", String.valueOf(productEntryId
 </form>
 
 <script type="text/javascript">
-	function <portlet:namespace />showRepoStoreArtifact() {
+	function <portlet:namespace />toggleSelectBoxes() {
 		if (document.<portlet:namespace />fm.<portlet:namespace />repoStoreArtifact) {
 			if (document.<portlet:namespace />fm.<portlet:namespace />directDownloadURL.value == '') {
 				document.<portlet:namespace />fm.<portlet:namespace />repoStoreArtifact.disabled = true;
@@ -198,13 +214,23 @@ editProductEntryURL.setParameter("productEntryId", String.valueOf(productEntryId
 				document.<portlet:namespace />fm.<portlet:namespace />repoStoreArtifact.disabled = false;
 			}
 		}
+
+		if (document.<portlet:namespace />fm.<portlet:namespace />testDirectDownloadURL) {
+			if (document.<portlet:namespace />fm.<portlet:namespace />directDownloadURL.value == '') {
+				document.<portlet:namespace />fm.<portlet:namespace />testDirectDownloadURL.disabled = true;
+				document.<portlet:namespace />fm.<portlet:namespace />testDirectDownloadURL.options[0].selected = true;
+			}
+			else {
+				document.<portlet:namespace />fm.<portlet:namespace />testDirectDownloadURL.disabled = false;
+			}
+		}
 	}
 
 	<c:if test="<%= windowState.equals(WindowState.MAXIMIZED) %>">
 		Liferay.Util.focusFormField(document.<portlet:namespace />fm.<portlet:namespace />version);
 	</c:if>
 
-	document.<portlet:namespace />fm.<portlet:namespace />directDownloadURL.onkeyup = <portlet:namespace />showRepoStoreArtifact;
+	document.<portlet:namespace />fm.<portlet:namespace />directDownloadURL.onkeyup = <portlet:namespace />toggleSelectBoxes;
 
-	<portlet:namespace />showRepoStoreArtifact();
+	<portlet:namespace />toggleSelectBoxes();
 </script>

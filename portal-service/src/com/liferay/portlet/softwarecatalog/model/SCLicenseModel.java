@@ -39,9 +39,9 @@ import com.liferay.portal.model.BaseModel;
  *
  * @author Brian Wing Shun Chan
  *
- * @see com.liferay.portlet.softwarecatalog.service.model.SCLicense
- * @see com.liferay.portlet.softwarecatalog.service.model.impl.SCLicenseImpl
- * @see com.liferay.portlet.softwarecatalog.service.model.impl.SCLicenseModelImpl
+ * @see com.liferay.portlet.softwarecatalog.model.SCLicense
+ * @see com.liferay.portlet.softwarecatalog.model.impl.SCLicenseImpl
+ * @see com.liferay.portlet.softwarecatalog.model.impl.SCLicenseModelImpl
  *
  */
 public interface SCLicenseModel extends BaseModel {

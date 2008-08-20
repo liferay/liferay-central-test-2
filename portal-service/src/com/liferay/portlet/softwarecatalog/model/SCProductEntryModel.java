@@ -41,9 +41,9 @@ import java.util.Date;
  *
  * @author Brian Wing Shun Chan
  *
- * @see com.liferay.portlet.softwarecatalog.service.model.SCProductEntry
- * @see com.liferay.portlet.softwarecatalog.service.model.impl.SCProductEntryImpl
- * @see com.liferay.portlet.softwarecatalog.service.model.impl.SCProductEntryModelImpl
+ * @see com.liferay.portlet.softwarecatalog.model.SCProductEntry
+ * @see com.liferay.portlet.softwarecatalog.model.impl.SCProductEntryImpl
+ * @see com.liferay.portlet.softwarecatalog.model.impl.SCProductEntryModelImpl
  *
  */
 public interface SCProductEntryModel extends BaseModel {

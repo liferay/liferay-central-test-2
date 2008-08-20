@@ -75,9 +75,9 @@ import java.rmi.RemoteException;
  *
  * @author Brian Wing Shun Chan
  *
+ * @see com.liferay.portlet.softwarecatalog.model.SCFrameworkVersionSoap
  * @see com.liferay.portlet.softwarecatalog.service.SCFrameworkVersionServiceUtil
  * @see com.liferay.portlet.softwarecatalog.service.http.SCFrameworkVersionServiceHttp
- * @see com.liferay.portlet.softwarecatalog.service.model.SCFrameworkVersionSoap
  *
  */
 public class SCFrameworkVersionServiceSoap {

@@ -77,13 +77,14 @@ public class SCProductVersionServiceJSON {
 	public static JSONObject addProductVersion(long productEntryId,
 		java.lang.String version, java.lang.String changeLog,
 		java.lang.String downloadPageURL, java.lang.String directDownloadURL,
-		boolean repoStoreArtifact, long[] frameworkVersionIds,
-		boolean addCommunityPermissions, boolean addGuestPermissions)
+		boolean testDirectDownloadURL, boolean repoStoreArtifact,
+		long[] frameworkVersionIds, boolean addCommunityPermissions,
+		boolean addGuestPermissions)
 		throws java.rmi.RemoteException, com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		com.liferay.portlet.softwarecatalog.model.SCProductVersion returnValue = SCProductVersionServiceUtil.addProductVersion(productEntryId,
 				version, changeLog, downloadPageURL, directDownloadURL,
-				repoStoreArtifact, frameworkVersionIds,
+				testDirectDownloadURL, repoStoreArtifact, frameworkVersionIds,
 				addCommunityPermissions, addGuestPermissions);
 
 		return SCProductVersionJSONSerializer.toJSONObject(returnValue);
@@ -92,15 +93,15 @@ public class SCProductVersionServiceJSON {
 	public static JSONObject addProductVersion(long productEntryId,
 		java.lang.String version, java.lang.String changeLog,
 		java.lang.String downloadPageURL, java.lang.String directDownloadURL,
-		boolean repoStoreArtifact, long[] frameworkVersionIds,
-		java.lang.String[] communityPermissions,
+		boolean testDirectDownloadURL, boolean repoStoreArtifact,
+		long[] frameworkVersionIds, java.lang.String[] communityPermissions,
 		java.lang.String[] guestPermissions)
 		throws java.rmi.RemoteException, com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		com.liferay.portlet.softwarecatalog.model.SCProductVersion returnValue = SCProductVersionServiceUtil.addProductVersion(productEntryId,
 				version, changeLog, downloadPageURL, directDownloadURL,
-				repoStoreArtifact, frameworkVersionIds, communityPermissions,
-				guestPermissions);
+				testDirectDownloadURL, repoStoreArtifact, frameworkVersionIds,
+				communityPermissions, guestPermissions);
 
 		return SCProductVersionJSONSerializer.toJSONObject(returnValue);
 	}
@@ -141,12 +142,13 @@ public class SCProductVersionServiceJSON {
 	public static JSONObject updateProductVersion(long productVersionId,
 		java.lang.String version, java.lang.String changeLog,
 		java.lang.String downloadPageURL, java.lang.String directDownloadURL,
-		boolean repoStoreArtifact, long[] frameworkVersionIds)
+		boolean testDirectDownloadURL, boolean repoStoreArtifact,
+		long[] frameworkVersionIds)
 		throws java.rmi.RemoteException, com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		com.liferay.portlet.softwarecatalog.model.SCProductVersion returnValue = SCProductVersionServiceUtil.updateProductVersion(productVersionId,
 				version, changeLog, downloadPageURL, directDownloadURL,
-				repoStoreArtifact, frameworkVersionIds);
+				testDirectDownloadURL, repoStoreArtifact, frameworkVersionIds);
 
 		return SCProductVersionJSONSerializer.toJSONObject(returnValue);
 	}

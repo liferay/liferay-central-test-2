@@ -37,15 +37,15 @@ package com.liferay.portlet.softwarecatalog.model;
  * </p>
  *
  * <p>
- * Customize <code>com.liferay.portlet.softwarecatalog.service.model.impl.SCLicenseImpl</code>
+ * Customize <code>com.liferay.portlet.softwarecatalog.model.impl.SCLicenseImpl</code>
  * and rerun the ServiceBuilder to generate the new methods.
  * </p>
  *
  * @author Brian Wing Shun Chan
  *
- * @see com.liferay.portlet.softwarecatalog.service.model.SCLicenseModel
- * @see com.liferay.portlet.softwarecatalog.service.model.impl.SCLicenseImpl
- * @see com.liferay.portlet.softwarecatalog.service.model.impl.SCLicenseModelImpl
+ * @see com.liferay.portlet.softwarecatalog.model.SCLicenseModel
+ * @see com.liferay.portlet.softwarecatalog.model.impl.SCLicenseImpl
+ * @see com.liferay.portlet.softwarecatalog.model.impl.SCLicenseModelImpl
  *
  */
 public interface SCLicense extends SCLicenseModel {

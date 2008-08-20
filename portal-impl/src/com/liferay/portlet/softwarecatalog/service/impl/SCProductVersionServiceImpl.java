@@ -44,8 +44,9 @@ public class SCProductVersionServiceImpl
 	public SCProductVersion addProductVersion(
 			long productEntryId, String version, String changeLog,
 			String downloadPageURL, String directDownloadURL,
-			boolean repoStoreArtifact, long[] frameworkVersionIds,
-			boolean addCommunityPermissions, boolean addGuestPermissions)
+			boolean testDirectDownloadURL, boolean repoStoreArtifact,
+			long[] frameworkVersionIds, boolean addCommunityPermissions,
+			boolean addGuestPermissions)
 		throws PortalException, SystemException {
 
 		SCProductEntryPermission.check(
@@ -53,15 +54,16 @@ public class SCProductVersionServiceImpl
 
 		return scProductVersionLocalService.addProductVersion(
 			getUserId(), productEntryId, version, changeLog, downloadPageURL,
-			directDownloadURL, repoStoreArtifact, frameworkVersionIds,
-			addCommunityPermissions, addGuestPermissions);
+			directDownloadURL, testDirectDownloadURL, repoStoreArtifact,
+			frameworkVersionIds, addCommunityPermissions, addGuestPermissions);
 	}
 
 	public SCProductVersion addProductVersion(
 			long productEntryId, String version, String changeLog,
 			String downloadPageURL, String directDownloadURL,
-			boolean repoStoreArtifact, long[] frameworkVersionIds,
-			String[] communityPermissions, String[] guestPermissions)
+			boolean testDirectDownloadURL, boolean repoStoreArtifact,
+			long[] frameworkVersionIds, String[] communityPermissions,
+			String[] guestPermissions)
 		throws PortalException, SystemException {
 
 		SCProductEntryPermission.check(
@@ -69,8 +71,8 @@ public class SCProductVersionServiceImpl
 
 		return scProductVersionLocalService.addProductVersion(
 			getUserId(), productEntryId, version, changeLog, downloadPageURL,
-			directDownloadURL, repoStoreArtifact, frameworkVersionIds,
-			communityPermissions, guestPermissions);
+			directDownloadURL, testDirectDownloadURL, repoStoreArtifact,
+			frameworkVersionIds, communityPermissions, guestPermissions);
 	}
 
 	public void deleteProductVersion(long productVersionId)
@@ -123,7 +125,8 @@ public class SCProductVersionServiceImpl
 	public SCProductVersion updateProductVersion(
 			long productVersionId, String version, String changeLog,
 			String downloadPageURL, String directDownloadURL,
-			boolean repoStoreArtifact, long[] frameworkVersionIds)
+			boolean testDirectDownloadURL, boolean repoStoreArtifact,
+			long[] frameworkVersionIds)
 		throws PortalException, SystemException {
 
 		SCProductVersion productVersion =
@@ -135,7 +138,8 @@ public class SCProductVersionServiceImpl
 
 		return scProductVersionLocalService.updateProductVersion(
 			productVersionId, version, changeLog, downloadPageURL,
-			directDownloadURL, repoStoreArtifact, frameworkVersionIds);
+			directDownloadURL, testDirectDownloadURL, repoStoreArtifact,
+			frameworkVersionIds);
 	}
 
 }

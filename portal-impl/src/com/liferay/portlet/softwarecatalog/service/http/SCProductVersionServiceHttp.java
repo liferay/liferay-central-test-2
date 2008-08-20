@@ -78,8 +78,9 @@ public class SCProductVersionServiceHttp {
 		HttpPrincipal httpPrincipal, long productEntryId,
 		java.lang.String version, java.lang.String changeLog,
 		java.lang.String downloadPageURL, java.lang.String directDownloadURL,
-		boolean repoStoreArtifact, long[] frameworkVersionIds,
-		boolean addCommunityPermissions, boolean addGuestPermissions)
+		boolean testDirectDownloadURL, boolean repoStoreArtifact,
+		long[] frameworkVersionIds, boolean addCommunityPermissions,
+		boolean addGuestPermissions)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		try {
@@ -109,23 +110,25 @@ public class SCProductVersionServiceHttp {
 				paramObj4 = new NullWrapper("java.lang.String");
 			}
 
-			Object paramObj5 = new BooleanWrapper(repoStoreArtifact);
+			Object paramObj5 = new BooleanWrapper(testDirectDownloadURL);
 
-			Object paramObj6 = frameworkVersionIds;
+			Object paramObj6 = new BooleanWrapper(repoStoreArtifact);
+
+			Object paramObj7 = frameworkVersionIds;
 
 			if (frameworkVersionIds == null) {
-				paramObj6 = new NullWrapper("[J");
+				paramObj7 = new NullWrapper("[J");
 			}
 
-			Object paramObj7 = new BooleanWrapper(addCommunityPermissions);
+			Object paramObj8 = new BooleanWrapper(addCommunityPermissions);
 
-			Object paramObj8 = new BooleanWrapper(addGuestPermissions);
+			Object paramObj9 = new BooleanWrapper(addGuestPermissions);
 
 			MethodWrapper methodWrapper = new MethodWrapper(SCProductVersionServiceUtil.class.getName(),
 					"addProductVersion",
 					new Object[] {
 						paramObj0, paramObj1, paramObj2, paramObj3, paramObj4,
-						paramObj5, paramObj6, paramObj7, paramObj8
+						paramObj5, paramObj6, paramObj7, paramObj8, paramObj9
 					});
 
 			Object returnObj = null;
@@ -158,8 +161,8 @@ public class SCProductVersionServiceHttp {
 		HttpPrincipal httpPrincipal, long productEntryId,
 		java.lang.String version, java.lang.String changeLog,
 		java.lang.String downloadPageURL, java.lang.String directDownloadURL,
-		boolean repoStoreArtifact, long[] frameworkVersionIds,
-		java.lang.String[] communityPermissions,
+		boolean testDirectDownloadURL, boolean repoStoreArtifact,
+		long[] frameworkVersionIds, java.lang.String[] communityPermissions,
 		java.lang.String[] guestPermissions)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
@@ -190,31 +193,33 @@ public class SCProductVersionServiceHttp {
 				paramObj4 = new NullWrapper("java.lang.String");
 			}
 
-			Object paramObj5 = new BooleanWrapper(repoStoreArtifact);
+			Object paramObj5 = new BooleanWrapper(testDirectDownloadURL);
 
-			Object paramObj6 = frameworkVersionIds;
+			Object paramObj6 = new BooleanWrapper(repoStoreArtifact);
+
+			Object paramObj7 = frameworkVersionIds;
 
 			if (frameworkVersionIds == null) {
-				paramObj6 = new NullWrapper("[J");
+				paramObj7 = new NullWrapper("[J");
 			}
 
-			Object paramObj7 = communityPermissions;
+			Object paramObj8 = communityPermissions;
 
 			if (communityPermissions == null) {
-				paramObj7 = new NullWrapper("[Ljava.lang.String;");
+				paramObj8 = new NullWrapper("[Ljava.lang.String;");
 			}
 
-			Object paramObj8 = guestPermissions;
+			Object paramObj9 = guestPermissions;
 
 			if (guestPermissions == null) {
-				paramObj8 = new NullWrapper("[Ljava.lang.String;");
+				paramObj9 = new NullWrapper("[Ljava.lang.String;");
 			}
 
 			MethodWrapper methodWrapper = new MethodWrapper(SCProductVersionServiceUtil.class.getName(),
 					"addProductVersion",
 					new Object[] {
 						paramObj0, paramObj1, paramObj2, paramObj3, paramObj4,
-						paramObj5, paramObj6, paramObj7, paramObj8
+						paramObj5, paramObj6, paramObj7, paramObj8, paramObj9
 					});
 
 			Object returnObj = null;
@@ -392,7 +397,8 @@ public class SCProductVersionServiceHttp {
 		HttpPrincipal httpPrincipal, long productVersionId,
 		java.lang.String version, java.lang.String changeLog,
 		java.lang.String downloadPageURL, java.lang.String directDownloadURL,
-		boolean repoStoreArtifact, long[] frameworkVersionIds)
+		boolean testDirectDownloadURL, boolean repoStoreArtifact,
+		long[] frameworkVersionIds)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		try {
@@ -422,19 +428,21 @@ public class SCProductVersionServiceHttp {
 				paramObj4 = new NullWrapper("java.lang.String");
 			}
 
-			Object paramObj5 = new BooleanWrapper(repoStoreArtifact);
+			Object paramObj5 = new BooleanWrapper(testDirectDownloadURL);
 
-			Object paramObj6 = frameworkVersionIds;
+			Object paramObj6 = new BooleanWrapper(repoStoreArtifact);
+
+			Object paramObj7 = frameworkVersionIds;
 
 			if (frameworkVersionIds == null) {
-				paramObj6 = new NullWrapper("[J");
+				paramObj7 = new NullWrapper("[J");
 			}
 
 			MethodWrapper methodWrapper = new MethodWrapper(SCProductVersionServiceUtil.class.getName(),
 					"updateProductVersion",
 					new Object[] {
 						paramObj0, paramObj1, paramObj2, paramObj3, paramObj4,
-						paramObj5, paramObj6
+						paramObj5, paramObj6, paramObj7
 					});
 
 			Object returnObj = null;

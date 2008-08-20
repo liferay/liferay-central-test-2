@@ -20,38 +20,38 @@
  * SOFTWARE.
  */
 
-package com.liferay.portlet.softwarecatalog.model;
+package com.liferay.portlet.softwarecatalog;
 
+import com.liferay.portal.PortalException;
 
 /**
- * <a href="SCProductVersion.java.html"><b><i>View Source</i></b></a>
- *
- * <p>
- * ServiceBuilder generated this class. Modifications in this class will be
- * overwritten the next time is generated.
- * </p>
- *
- * <p>
- * This interface is a model that represents the <code>SCProductVersion</code> table
- * in the database.
- * </p>
- *
- * <p>
- * Customize <code>com.liferay.portlet.softwarecatalog.model.impl.SCProductVersionImpl</code>
- * and rerun the ServiceBuilder to generate the new methods.
- * </p>
+ * <a href="UnavailableProductVersionDirectDownloadURLException.java.html"><b>
+ * <i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *
- * @see com.liferay.portlet.softwarecatalog.model.SCProductVersionModel
- * @see com.liferay.portlet.softwarecatalog.model.impl.SCProductVersionImpl
- * @see com.liferay.portlet.softwarecatalog.model.impl.SCProductVersionModelImpl
- *
  */
-public interface SCProductVersion extends SCProductVersionModel {
-	public com.liferay.portlet.softwarecatalog.model.SCProductEntry getProductEntry();
+public class UnavailableProductVersionDirectDownloadURLException
+	extends PortalException {
 
-	public java.util.List<com.liferay.portlet.softwarecatalog.model.SCFrameworkVersion> getFrameworkVersions()
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException;
+	public UnavailableProductVersionDirectDownloadURLException() {
+		super();
+	}
+
+	public UnavailableProductVersionDirectDownloadURLException(String msg) {
+		super(msg);
+	}
+
+	public UnavailableProductVersionDirectDownloadURLException(
+		String msg, Throwable cause) {
+
+		super(msg, cause);
+	}
+
+	public UnavailableProductVersionDirectDownloadURLException(
+		Throwable cause) {
+
+		super(cause);
+	}
+
 }

@@ -1024,8 +1024,7 @@ public class SCProductVersionPersistenceImpl extends BasePersistenceImpl
 				else {
 					sb.append("ORDER BY ");
 
-					sb.append("SCFrameworkVersion.priority ASC, ");
-					sb.append("SCFrameworkVersion.name ASC");
+					sb.append("SCFrameworkVersion.name DESC");
 				}
 
 				String sql = sb.toString();

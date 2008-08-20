@@ -297,7 +297,7 @@ List productScreenshots = SCProductScreenshotLocalServiceUtil.getProductScreensh
 		List resultRows = searchContainer.getResultRows();
 
 		for (int i = 0; i < results.size(); i++) {
-			SCProductVersion curProductVersion = (SCProductVersion) results.get(i);
+			SCProductVersion curProductVersion = (SCProductVersion)results.get(i);
 
 			curProductVersion = curProductVersion.toEscapedModel();
 

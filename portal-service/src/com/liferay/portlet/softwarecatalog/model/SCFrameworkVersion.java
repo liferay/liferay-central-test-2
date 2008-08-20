@@ -37,15 +37,15 @@ package com.liferay.portlet.softwarecatalog.model;
  * </p>
  *
  * <p>
- * Customize <code>com.liferay.portlet.softwarecatalog.service.model.impl.SCFrameworkVersionImpl</code>
+ * Customize <code>com.liferay.portlet.softwarecatalog.model.impl.SCFrameworkVersionImpl</code>
  * and rerun the ServiceBuilder to generate the new methods.
  * </p>
  *
  * @author Brian Wing Shun Chan
  *
- * @see com.liferay.portlet.softwarecatalog.service.model.SCFrameworkVersionModel
- * @see com.liferay.portlet.softwarecatalog.service.model.impl.SCFrameworkVersionImpl
- * @see com.liferay.portlet.softwarecatalog.service.model.impl.SCFrameworkVersionModelImpl
+ * @see com.liferay.portlet.softwarecatalog.model.SCFrameworkVersionModel
+ * @see com.liferay.portlet.softwarecatalog.model.impl.SCFrameworkVersionImpl
+ * @see com.liferay.portlet.softwarecatalog.model.impl.SCFrameworkVersionModelImpl
  *
  */
 public interface SCFrameworkVersion extends SCFrameworkVersionModel {

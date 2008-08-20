@@ -22,6 +22,7 @@
 
 package com.liferay.util;
 
+import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;
 
@@ -43,7 +44,7 @@ public class Version implements Comparable<Version> {
 		Version versionObj = _versions.get(version);
 
 		if (versionObj == null) {
-			versionObj =  new Version(version);
+			versionObj = new Version(version);
 
 			_versions.put(version, versionObj);
 		}
@@ -51,100 +52,90 @@ public class Version implements Comparable<Version> {
 		return versionObj;
 	}
 
-	public String getMajor() {
-		if (_major == null) {
-			return "0";
+	public static Version incrementBugFix(Version version) {
+		String bugFix = version.getBugFix();
+
+		int bugFixInt = GetterUtil.getInteger(bugFix);
+
+		if (bugFixInt > 0) {
+			bugFix = String.valueOf(bugFixInt + 1);
 		}
 
-		return _major;
+		return getInstance(
+			_toString(
+				version.getMajor(), version.getMinor(), bugFix,
+				version.getBuildNumber()));
 	}
 
-	public String getMinor() {
-		if (_minor == null) {
-			return "0";
+	public static Version incrementBuildNumber(Version version) {
+		String buildNumber = version.getBuildNumber();
+
+		int buildNumberInt = GetterUtil.getInteger(buildNumber);
+
+		if (buildNumberInt > 0) {
+			buildNumber = String.valueOf(buildNumberInt + 1);
 		}
 
-		return _minor;
+		return getInstance(
+			_toString(
+				version.getMajor(), version.getMinor(), version.getBugFix(),
+				buildNumber));
 	}
 
-	public String getBugFix() {
-		if (_bugFix == null) {
-			return "0";
+	public static Version incrementMajor(Version version) {
+		String major = version.getMajor();
+
+		int majorInt = GetterUtil.getInteger(major);
+
+		if (majorInt > 0) {
+			major = String.valueOf(majorInt + 1);
 		}
 
-		return _bugFix;
+		return getInstance(
+			_toString(
+				major, version.getMinor(), version.getBugFix(),
+				version.getBuildNumber()));
 	}
 
-	public String getBuildNumber() {
-		return _buildNumber;
+	public static Version incrementMinor(Version version) {
+		String minor = version.getMinor();
+
+		int minorInt = GetterUtil.getInteger(minor);
+
+		if (minorInt > 0) {
+			minor = String.valueOf(minorInt + 1);
+		}
+
+		return getInstance(
+			_toString(
+				version.getMajor(), minor, version.getBugFix(),
+				version.getBuildNumber()));
 	}
 
-	public boolean isLaterVersionThan(String version) {
-		if (compareTo(getInstance(version)) > 0) {
-			return true;
-		}
-		else {
-			return false;
-		}
-	}
+	protected Version(String version) {
+		StringTokenizer st = new StringTokenizer(version, _SEPARATOR);
 
-	public boolean isPreviousVersionThan(String version) {
-		if (compareTo(getInstance(version)) < 0) {
-			return true;
-		}
-		else {
-			return false;
-		}
-	}
+		_major = st.nextToken();
 
-	public boolean isSameVersionAs(String version) {
-		if (compareTo(getInstance(version)) == 0) {
-			return true;
-		}
-		else {
-			return false;
-		}
-	}
-
-	public boolean includes(Version version) {
-		if (equals(version)) {
-			return true;
+		if (st.hasMoreTokens()) {
+			_minor = st.nextToken();
 		}
 
-		if (getMajor().equals(StringPool.STAR)) {
-			return true;
+		if (st.hasMoreTokens()) {
+			_bugFix = st.nextToken();
 		}
 
-		if (getMajor().equals(version.getMajor())) {
-			if (getMinor().equals(StringPool.STAR)) {
-				return true;
-			}
+		StringBuilder sb = new StringBuilder();
 
-			if (getMinor().equals(version.getMinor())) {
-				if (getBugFix().equals(StringPool.STAR)) {
-					return true;
-				}
+		while (st.hasMoreTokens()) {
+			sb.append(st.nextToken());
 
-				if (getBugFix().equals(version.getBugFix())) {
-					if (getBuildNumber().equals(StringPool.STAR) ||
-						getBuildNumber().equals(version.getBuildNumber())) {
-
-						return true;
-					}
-				}
-				else if (_contains(getBugFix(), version.getBugFix())) {
-					return true;
-				}
-			}
-			else if (_contains(getMinor(), version.getMinor())) {
-				return true;
+			if (st.hasMoreTokens()) {
+				sb.append(_SEPARATOR);
 			}
 		}
-		else if (_contains(getMajor(), version.getMajor())) {
-			return true;
-		}
 
-		return false;
+		_buildNumber = sb.toString();
 	}
 
 	public int compareTo(Version version) {
@@ -200,74 +191,154 @@ public class Version implements Comparable<Version> {
 		return versionString1.equals(versionString2);
 	}
 
+	public String getBugFix() {
+		if (_bugFix == null) {
+			return "0";
+		}
+
+		return _bugFix;
+	}
+
+	public String getBuildNumber() {
+		return _buildNumber;
+	}
+
+	public String getMajor() {
+		if (_major == null) {
+			return "0";
+		}
+
+		return _major;
+	}
+
+	public String getMinor() {
+		if (_minor == null) {
+			return "0";
+		}
+
+		return _minor;
+	}
+
 	public int hashCode() {
 		return toString().hashCode();
 	}
 
+	public boolean includes(Version version) {
+		if (equals(version)) {
+			return true;
+		}
+
+		if (getMajor().equals(StringPool.STAR)) {
+			return true;
+		}
+
+		if (getMajor().equals(version.getMajor())) {
+			if (getMinor().equals(StringPool.STAR)) {
+				return true;
+			}
+
+			if (getMinor().equals(version.getMinor())) {
+				if (getBugFix().equals(StringPool.STAR)) {
+					return true;
+				}
+
+				if (getBugFix().equals(version.getBugFix())) {
+					if (getBuildNumber().equals(StringPool.STAR) ||
+						getBuildNumber().equals(version.getBuildNumber())) {
+
+						return true;
+					}
+				}
+				else if (_contains(getBugFix(), version.getBugFix())) {
+					return true;
+				}
+			}
+			else if (_contains(getMinor(), version.getMinor())) {
+				return true;
+			}
+		}
+		else if (_contains(getMajor(), version.getMajor())) {
+			return true;
+		}
+
+		return false;
+	}
+
+	public boolean isLaterVersionThan(String version) {
+		if (compareTo(getInstance(version)) > 0) {
+			return true;
+		}
+		else {
+			return false;
+		}
+	}
+
+	public boolean isPreviousVersionThan(String version) {
+		if (compareTo(getInstance(version)) < 0) {
+			return true;
+		}
+		else {
+			return false;
+		}
+	}
+
+	public boolean isSameVersionAs(String version) {
+		if (compareTo(getInstance(version)) == 0) {
+			return true;
+		}
+		else {
+			return false;
+		}
+	}
+
 	public String toString() {
+		return _toString(_major, _minor, _bugFix, _buildNumber);
+	}
+
+	private static boolean _contains(
+		String containerString, String numberString) {
+
+		if (containerString.endsWith(StringPool.PLUS)) {
+			String containerNumberString = containerString.substring(
+				0, containerString.length() - 1);
+
+			try {
+				int containerNumber = Integer.parseInt(containerNumberString);
+				int number = Integer.parseInt(numberString);
+
+				return containerNumber <= number;
+			}
+			catch (NumberFormatException nfe) {
+				return false;
+			}
+		}
+
+		return false;
+	}
+
+	public static String _toString(
+		String major, String minor, String bugFix, String buildNumber) {
+
 		StringBuilder sb = new StringBuilder();
 
-		sb.append(_major);
+		sb.append(major);
 
-		if (Validator.isNotNull(_minor)) {
+		if (Validator.isNotNull(minor)) {
 			sb.append(_SEPARATOR);
-			sb.append(_minor);
+			sb.append(minor);
 
-			if (Validator.isNotNull(_bugFix)) {
+			if (Validator.isNotNull(bugFix)) {
 				sb.append(_SEPARATOR);
-				sb.append(_bugFix);
+				sb.append(bugFix);
 
-				if (Validator.isNotNull(_buildNumber)) {
+				if (Validator.isNotNull(buildNumber)) {
 					sb.append(_SEPARATOR);
-					sb.append(_buildNumber);
+					sb.append(buildNumber);
 				}
 			}
 		}
 
 		return sb.toString();
-	}
-
-	protected Version(String version) {
-		StringTokenizer st = new StringTokenizer(version, _SEPARATOR);
-
-		_major = st.nextToken();
-
-		if (st.hasMoreTokens()) {
-			_minor = st.nextToken();
-		}
-
-		if (st.hasMoreTokens()) {
-			_bugFix = st.nextToken();
-		}
-
-		StringBuilder sb = new StringBuilder();
-
-		while (st.hasMoreTokens()) {
-			sb.append(st.nextToken());
-
-			if (st.hasMoreTokens()) {
-				sb.append(_SEPARATOR);
-			}
-		}
-
-		_buildNumber = sb.toString();
-	}
-
-	private boolean _contains(String containerStr, String numberStr) {
-		if (containerStr.endsWith(StringPool.PLUS)) {
-			String containerNumberStr =
-					containerStr.substring(0, containerStr.length() - 1);
-
-			try {
-				int containerNumber = Integer.parseInt(containerNumberStr);
-				int number = Integer.parseInt(numberStr);
-
-				return containerNumber <= number;
-			} catch (NumberFormatException nfe) {
-				return false;
-			}
-		}
-		return false;
 	}
 
 	private static final String _SEPARATOR = StringPool.PERIOD;

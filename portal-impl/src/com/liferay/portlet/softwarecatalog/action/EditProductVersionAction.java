@@ -33,6 +33,7 @@ import com.liferay.portlet.softwarecatalog.ProductVersionChangeLogException;
 import com.liferay.portlet.softwarecatalog.ProductVersionDownloadURLException;
 import com.liferay.portlet.softwarecatalog.ProductVersionFrameworkVersionException;
 import com.liferay.portlet.softwarecatalog.ProductVersionNameException;
+import com.liferay.portlet.softwarecatalog.UnavailableProductVersionDirectDownloadURLException;
 import com.liferay.portlet.softwarecatalog.service.SCProductVersionServiceUtil;
 
 import javax.portlet.ActionRequest;
@@ -83,7 +84,9 @@ public class EditProductVersionAction extends PortletAction {
 					 e instanceof ProductVersionChangeLogException ||
 					 e instanceof ProductVersionDownloadURLException ||
 					 e instanceof ProductVersionFrameworkVersionException ||
-					 e instanceof ProductVersionNameException) {
+					 e instanceof ProductVersionNameException ||
+					 e instanceof
+						UnavailableProductVersionDirectDownloadURLException) {
 
 				SessionErrors.add(actionRequest, e.getClass().getName());
 			}
@@ -141,6 +144,8 @@ public class EditProductVersionAction extends PortletAction {
 			actionRequest, "downloadPageURL");
 		String directDownloadURL = ParamUtil.getString(
 			actionRequest, "directDownloadURL");
+		boolean testDirectDownloadURL = ParamUtil.getBoolean(
+			actionRequest, "testDirectDownloadURL");
 		boolean repoStoreArtifact = ParamUtil.getBoolean(
 			actionRequest, "repoStoreArtifact");
 
@@ -158,8 +163,8 @@ public class EditProductVersionAction extends PortletAction {
 
 			SCProductVersionServiceUtil.addProductVersion(
 				productEntryId, version, changeLog, downloadPageURL,
-				directDownloadURL, repoStoreArtifact, frameworkVersionIds,
-				communityPermissions, guestPermissions);
+				directDownloadURL, testDirectDownloadURL, repoStoreArtifact,
+				frameworkVersionIds, communityPermissions, guestPermissions);
 		}
 		else {
 
@@ -167,7 +172,8 @@ public class EditProductVersionAction extends PortletAction {
 
 			SCProductVersionServiceUtil.updateProductVersion(
 				productVersionId, version, changeLog, downloadPageURL,
-				directDownloadURL, repoStoreArtifact, frameworkVersionIds);
+				directDownloadURL, testDirectDownloadURL, repoStoreArtifact,
+				frameworkVersionIds);
 		}
 	}
 

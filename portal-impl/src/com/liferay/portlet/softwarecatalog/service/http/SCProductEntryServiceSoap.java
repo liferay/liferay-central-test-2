@@ -75,9 +75,9 @@ import java.rmi.RemoteException;
  *
  * @author Brian Wing Shun Chan
  *
+ * @see com.liferay.portlet.softwarecatalog.model.SCProductEntrySoap
  * @see com.liferay.portlet.softwarecatalog.service.SCProductEntryServiceUtil
  * @see com.liferay.portlet.softwarecatalog.service.http.SCProductEntryServiceHttp
- * @see com.liferay.portlet.softwarecatalog.service.model.SCProductEntrySoap
  *
  */
 public class SCProductEntryServiceSoap {

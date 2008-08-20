@@ -25,14 +25,17 @@ package com.liferay.portlet.softwarecatalog.service.impl;
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.search.SearchException;
+import com.liferay.portal.kernel.util.HttpUtil;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.User;
+import com.liferay.portal.util.HttpImpl;
 import com.liferay.portlet.softwarecatalog.DuplicateProductVersionDirectDownloadURLException;
 import com.liferay.portlet.softwarecatalog.NoSuchProductVersionException;
 import com.liferay.portlet.softwarecatalog.ProductVersionChangeLogException;
 import com.liferay.portlet.softwarecatalog.ProductVersionDownloadURLException;
 import com.liferay.portlet.softwarecatalog.ProductVersionFrameworkVersionException;
 import com.liferay.portlet.softwarecatalog.ProductVersionNameException;
+import com.liferay.portlet.softwarecatalog.UnavailableProductVersionDirectDownloadURLException;
 import com.liferay.portlet.softwarecatalog.model.SCProductEntry;
 import com.liferay.portlet.softwarecatalog.model.SCProductVersion;
 import com.liferay.portlet.softwarecatalog.service.base.SCProductVersionLocalServiceBaseImpl;
@@ -41,6 +44,11 @@ import com.liferay.portlet.softwarecatalog.util.Indexer;
 import java.util.Date;
 import java.util.List;
 
+import javax.servlet.http.HttpServletResponse;
+
+import org.apache.commons.httpclient.HostConfiguration;
+import org.apache.commons.httpclient.HttpClient;
+import org.apache.commons.httpclient.methods.GetMethod;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
@@ -58,36 +66,40 @@ public class SCProductVersionLocalServiceImpl
 	public SCProductVersion addProductVersion(
 			long userId, long productEntryId, String version, String changeLog,
 			String downloadPageURL, String directDownloadURL,
-			boolean repoStoreArtifact, long[] frameworkVersionIds,
-			boolean addCommunityPermissions, boolean addGuestPermissions)
+			boolean testDirectDownloadURL, boolean repoStoreArtifact,
+			long[] frameworkVersionIds, boolean addCommunityPermissions,
+			boolean addGuestPermissions)
 		throws PortalException, SystemException {
 
 		return addProductVersion(
 			userId, productEntryId, version, changeLog, downloadPageURL,
-			directDownloadURL, repoStoreArtifact, frameworkVersionIds,
-			Boolean.valueOf(addCommunityPermissions),
+			directDownloadURL, testDirectDownloadURL, repoStoreArtifact,
+			frameworkVersionIds, Boolean.valueOf(addCommunityPermissions),
 			Boolean.valueOf(addGuestPermissions), null, null);
 	}
 
 	public SCProductVersion addProductVersion(
 			long userId, long productEntryId, String version, String changeLog,
 			String downloadPageURL, String directDownloadURL,
-			boolean repoStoreArtifact, long[] frameworkVersionIds,
-			String[] communityPermissions, String[] guestPermissions)
+			boolean testDirectDownloadURL, boolean repoStoreArtifact,
+			long[] frameworkVersionIds, String[] communityPermissions,
+			String[] guestPermissions)
 		throws PortalException, SystemException {
 
 		return addProductVersion(
 			userId, productEntryId, version, changeLog, downloadPageURL,
-			directDownloadURL, repoStoreArtifact, frameworkVersionIds, null,
-			null, communityPermissions, guestPermissions);
+			directDownloadURL, testDirectDownloadURL, repoStoreArtifact,
+			frameworkVersionIds, null, null, communityPermissions,
+			guestPermissions);
 	}
 
 	public SCProductVersion addProductVersion(
 			long userId, long productEntryId, String version, String changeLog,
 			String downloadPageURL, String directDownloadURL,
-			boolean repoStoreArtifact, long[] frameworkVersionIds,
-			Boolean addCommunityPermissions, Boolean addGuestPermissions,
-			String[] communityPermissions, String[] guestPermissions)
+			boolean testDirectDownloadURL, boolean repoStoreArtifact,
+			long[] frameworkVersionIds, Boolean addCommunityPermissions,
+			Boolean addGuestPermissions, String[] communityPermissions,
+			String[] guestPermissions)
 		throws PortalException, SystemException {
 
 		// Product version
@@ -100,7 +112,7 @@ public class SCProductVersionLocalServiceImpl
 
 		validate(
 			0, version, changeLog, downloadPageURL, directDownloadURL,
-			frameworkVersionIds);
+			testDirectDownloadURL, frameworkVersionIds);
 
 		long productVersionId = counterLocalService.increment();
 
@@ -210,7 +222,8 @@ public class SCProductVersionLocalServiceImpl
 	public SCProductVersion updateProductVersion(
 			long productVersionId, String version, String changeLog,
 			String downloadPageURL, String directDownloadURL,
-			boolean repoStoreArtifact, long[] frameworkVersionIds)
+			boolean testDirectDownloadURL, boolean repoStoreArtifact,
+			long[] frameworkVersionIds)
 		throws PortalException, SystemException {
 
 		// Product version
@@ -220,7 +233,7 @@ public class SCProductVersionLocalServiceImpl
 
 		validate(
 			productVersionId, version, changeLog, downloadPageURL,
-			directDownloadURL, frameworkVersionIds);
+			directDownloadURL, testDirectDownloadURL, frameworkVersionIds);
 
 		SCProductVersion productVersion =
 			scProductVersionPersistence.findByPrimaryKey(productVersionId);
@@ -272,7 +285,7 @@ public class SCProductVersionLocalServiceImpl
 	protected void validate(
 			long productVersionId, String version, String changeLog,
 			String downloadPageURL, String directDownloadURL,
-			long[] frameworkVersionIds)
+			boolean testDirectDownloadURL, long[] frameworkVersionIds)
 		throws PortalException, SystemException {
 
 		if (Validator.isNull(version)) {
@@ -299,9 +312,38 @@ public class SCProductVersionLocalServiceImpl
 			}
 			catch (NoSuchProductVersionException nspve) {
 			}
+
+			if (testDirectDownloadURL) {
+				testDirectDownloadURL(directDownloadURL);
+			}
 		}
 		else if (frameworkVersionIds.length == 0) {
 			throw new ProductVersionFrameworkVersionException();
+		}
+	}
+
+	protected void testDirectDownloadURL(String directDownloadURL)
+		throws PortalException {
+
+		try {
+			HttpImpl httpImpl = (HttpImpl)HttpUtil.getHttp();
+
+			HostConfiguration hostConfig = httpImpl.getHostConfig(
+				directDownloadURL);
+
+			HttpClient client = httpImpl.getClient(hostConfig);
+
+			GetMethod getFileMethod = new GetMethod(directDownloadURL);
+
+			int responseCode = client.executeMethod(
+				hostConfig, getFileMethod);
+
+			if (responseCode != HttpServletResponse.SC_OK) {
+				throw new UnavailableProductVersionDirectDownloadURLException();
+			}
+		}
+		catch (Exception e) {
+			throw new UnavailableProductVersionDirectDownloadURLException();
 		}
 	}
 
