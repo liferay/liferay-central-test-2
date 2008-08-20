@@ -157,22 +157,29 @@ public class EditCategoryAction extends PortletAction {
 		String name = ParamUtil.getString(actionRequest, "name");
 		String description = ParamUtil.getString(actionRequest, "description");
 
-		String emailAddress = null;
-		String inProtocol = null;
-		String inServerName = null;
-		int inServerPort = 0;
-		boolean inUseSSL = false;
-		String inUserName = null;
-		String inPassword = null;
-		int inReadInterval = 0;
-		String outEmailAddress = null;
-		boolean outCustom = false;
-		String outServerName = null;
-		int outServerPort = 0;
-		boolean outUseSSL = false;
-		String outUserName = null;
-		String outPassword = null;
-		boolean mailingListActive = false;
+		String emailAddress = ParamUtil.getString(
+			actionRequest, "emailAddress");
+		String inProtocol = ParamUtil.getString(actionRequest, "inProtocol");
+		String inServerName = ParamUtil.getString(
+			actionRequest, "inServerName");
+		int inServerPort = ParamUtil.getInteger(actionRequest, "inServerPort");
+		boolean inUseSSL = ParamUtil.getBoolean(actionRequest, "inUseSSL");
+		String inUserName = ParamUtil.getString(actionRequest, "inUserName");
+		String inPassword = ParamUtil.getString(actionRequest, "inPassword");
+		int inReadInterval = ParamUtil.getInteger(
+			actionRequest, "inReadInterval");
+		String outEmailAddress = ParamUtil.getString(
+			actionRequest, "outEmailAddress");
+		boolean outCustom = ParamUtil.getBoolean(actionRequest, "outCustom");
+		String outServerName = ParamUtil.getString(
+			actionRequest, "outServerName");
+		int outServerPort = ParamUtil.getInteger(
+			actionRequest, "outServerPort");
+		boolean outUseSSL = ParamUtil.getBoolean(actionRequest, "outUseSSL");
+		String outUserName = ParamUtil.getString(actionRequest, "outUserName");
+		String outPassword = ParamUtil.getString(actionRequest, "outPassword");
+		boolean mailingListActive = ParamUtil.getBoolean(
+			actionRequest, "mailingListActive");
 
 		boolean mergeWithParentCategory = ParamUtil.getBoolean(
 			actionRequest, "mergeWithParentCategory");
