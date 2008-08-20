@@ -22,7 +22,9 @@
 
 package com.liferay.portlet.polls.model.impl;
 
+import com.liferay.portal.SystemException;
 import com.liferay.portlet.polls.model.PollsChoice;
+import com.liferay.portlet.polls.service.PollsVoteLocalServiceUtil;
 
 /**
  * <a href="PollsChoiceImpl.java.html"><b><i>View Source</i></b></a>
@@ -34,6 +36,10 @@ public class PollsChoiceImpl
 	extends PollsChoiceModelImpl implements PollsChoice {
 
 	public PollsChoiceImpl() {
+	}
+
+	public int getChoiceVotes() throws SystemException {
+		return PollsVoteLocalServiceUtil.getChoiceVotesCount(getChoiceId());
 	}
 
 }

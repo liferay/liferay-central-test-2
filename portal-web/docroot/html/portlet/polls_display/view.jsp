@@ -31,7 +31,7 @@ PollsQuestion question = (PollsQuestion)request.getAttribute(WebKeys.POLLS_QUEST
 
 question = question.toEscapedModel();
 
-List choices = PollsChoiceLocalServiceUtil.getChoices(question.getQuestionId());
+List<PollsChoice> choices = question.getPollsChoices();
 
 boolean hasVoted = PollsUtil.hasVoted(request, question.getQuestionId());
 
@@ -80,10 +80,7 @@ if (!question.isExpired() && !hasVoted && PollsQuestionPermission.contains(permi
 		<table class="lfr-table">
 
 		<%
-		Iterator itr = choices.iterator();
-
-		while (itr.hasNext()) {
-			PollsChoice choice = (PollsChoice)itr.next();
+		for (PollsChoice choice : choices) {
 
 			choice = choice.toEscapedModel();
 		%>

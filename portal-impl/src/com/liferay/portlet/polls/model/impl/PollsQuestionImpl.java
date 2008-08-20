@@ -24,9 +24,13 @@ package com.liferay.portlet.polls.model.impl;
 
 import com.liferay.portal.SystemException;
 import com.liferay.portal.util.PortalUtil;
+import com.liferay.portlet.polls.model.PollsChoice;
 import com.liferay.portlet.polls.model.PollsQuestion;
+import com.liferay.portlet.polls.service.PollsChoiceLocalServiceUtil;
+import com.liferay.portlet.polls.service.PollsVoteLocalServiceUtil;
 
 import java.util.Date;
+import java.util.List;
 
 /**
  * <a href="PollsQuestionImpl.java.html"><b><i>View Source</i></b></a>
@@ -57,6 +61,14 @@ public class PollsQuestionImpl
 		else {
 			return false;
 		}
+	}
+
+	public int getTotalVotes() throws SystemException {
+		return PollsVoteLocalServiceUtil.getQuestionVotesCount(getQuestionId());
+	}
+
+	public List<PollsChoice> getPollsChoices() throws SystemException {
+		return PollsChoiceLocalServiceUtil.getChoices(getQuestionId());
 	}
 
 	private String _userUuid;

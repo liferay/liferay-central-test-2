@@ -41,12 +41,12 @@ NumberFormat percentFormat = NumberFormat.getPercentInstance(locale);
 		</tr>
 
 		<%
-		int totalVotes = PollsVoteLocalServiceUtil.getQuestionVotesCount(question.getQuestionId());
+		int totalVotes = question.getTotalVotes();
 
 		for (int i = 0; i < choices.size(); i++) {
 			PollsChoice choice = (PollsChoice)choices.get(i);
 
-			int choiceVotes = PollsVoteLocalServiceUtil.getChoiceVotesCount(choice.getChoiceId());
+			int choiceVotes = choice.getChoiceVotes();
 
 			String className = "portlet-section-body results-row";
 			String classHoverName = "portlet-section-body-hover results-row hover";

@@ -62,9 +62,7 @@ public class PollsUtil {
 		for (PollsChoice choice :
 				PollsChoiceLocalServiceUtil.getChoices(questionId)) {
 
-			Integer number = new Integer(
-				PollsVoteLocalServiceUtil.getChoiceVotesCount(
-					choice.getChoiceId()));
+			Integer number = choice.getChoiceVotes();
 
 			dataset.addValue(number, seriesName, choice.getName());
 		}

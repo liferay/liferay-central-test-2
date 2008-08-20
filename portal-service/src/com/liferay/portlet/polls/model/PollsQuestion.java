@@ -55,4 +55,9 @@ public interface PollsQuestion extends PollsQuestionModel {
 	public void setUserUuid(java.lang.String userUuid);
 
 	public boolean isExpired();
+
+	public int getTotalVotes() throws com.liferay.portal.SystemException;
+
+	public java.util.List<com.liferay.portlet.polls.model.PollsChoice> getPollsChoices()
+		throws com.liferay.portal.SystemException;
 }
