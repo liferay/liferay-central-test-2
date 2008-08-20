@@ -33,7 +33,7 @@
 			<input id="vocabulary-search-input" type="text" value="" />
 
 			<select class="vocabulary-select-search" id="vocabulary-select-search">
-				<option value="vocabularies"><liferay-ui:message key="sets" /></option>
+				<option value="vocabularies"><liferay-ui:message key="tag-sets" /></option>
 				<option value="entries"><liferay-ui:message key="entries" /></option>
 			</select>
 
@@ -51,24 +51,45 @@
 			</div>
 
 			<div class="vocabulary-actions">
-				<strong class="vocabulary-label"><liferay-ui:message key="add-tag" /></strong>
+				<input type="button" class="add-vocabulary-btn" name="add-vocabulary-btn" value="<liferay-ui:message key="add-tag-set" />" id="add-vocabulary-btn">
+				<input type="button" class="add-entry-btn" name="add-entry-btn" value="<liferay-ui:message key="add-tag" />" id="add-entry-btn">
 
-				<input class="vocabulary-entry-name" name="vocabulary-entry-name" type="text" value="" />
+				<span class="entry-toolbar-section">
+					<div class="arrow-toolbar-section-box"></div>
+					<div class="content">
+						<strong class="vocabulary-label"><liferay-ui:message key="tag-name" /></strong>
 
-				<select class="vocabulary-select-list" name="vocabulary-select-list">
-					<option value="new">(new)</option>
-				</select>
+						<input class="vocabulary-entry-name" name="vocabulary-entry-name" type="text" value="" />
 
-				<input class="vocabulary-name" name="vocabulary-name" type="text" value="" />
+						<strong style="padding-left: 5px;"><liferay-ui:message key="to-vocabulary" /></strong> <select class="vocabulary-select-list" name="vocabulary-select-list"></select>
 
-				<input class="vocabulary-save-entry" type="button" value="<liferay-ui:message key="save" />" />
+						<br/><br/>
+
+						<input class="vocabulary-save-entry" type="button" value="<liferay-ui:message key="save" />" />
+
+						<input class="close-entry-toolbar-section" type="button" value="<liferay-ui:message key="close" />" />
+					</div>
+				</span>
+
+				<span class="vocabulary-toolbar-section">
+					<div class="arrow-toolbar-section-box"></div>
+					<div class="content">
+						<strong><liferay-ui:message key="add-tag-set" /></strong>
+
+						<input class="vocabulary-name" name="vocabulary-name" type="text" value="" />
+
+						<input class="vocabulary-save-entry" type="button" value="<liferay-ui:message key="save" />" />
+
+						<input class="close-entry-toolbar-section" type="button" value="<liferay-ui:message key="close" />" />
+					</div>
+				</span>
 			</div>
 		</div>
 	</td>
 </tr>
 <tr class="vocabulary-content">
 	<td class="vocabulary-list-container">
-		<div class="results-header"><liferay-ui:message key="sets" /></div>
+		<div class="results-header"><liferay-ui:message key="tag-sets" /></div>
 		<div class="vocabulary-list lfr-component"></div>
 	</td>
 	<td class="vocabulary-entries-container">
@@ -90,6 +111,8 @@
 
 			<div class="vocabulary-properties">
 				<liferay-ui:message key="properties" />:
+
+				<liferay-ui:icon-help message="properties-are-a-way-to-add-more-detailed-information-to-a-specific-tag-or-category-they-are-separated-into-key-value-pairs-and-let-you-associate-detailed-information-to-an-entry" />
 
 				<div class="vocabulary-property-row">
 					<input class="property-key" type="text" />
@@ -115,7 +138,7 @@
 <tr>
 	<td colspan="3">
 		<div class="vocabulary-footer">
-			<input class="vocabulary-delete-list-button" type="button" value="<liferay-ui:message key="delete-vocabulary" />" />
+			<input class="vocabulary-delete-list-button" type="button" value="<liferay-ui:message key="delete-tag-set" />" />
 		</div>
 	</td>
 </tr>

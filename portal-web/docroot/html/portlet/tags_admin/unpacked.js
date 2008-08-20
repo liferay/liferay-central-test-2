@@ -34,7 +34,33 @@ Liferay.Portlet.TagsAdmin = new Class({
 		var changeAddLabel = function(label) {
 			label = Liferay.Language.get(label);
 			toolbar.find('.vocabulary-label').html(label);
-		}
+			toolbar.find('.add-entry-btn').val(label);
+		};
+
+		var changeVocaularyAddLabel = function(label) {
+			label = Liferay.Language.get(label);
+			toolbar.find('.add-vocabulary-btn').val(label);
+		};
+
+		var changeVocabularyDeleteBtnLabel = function(label){
+			label = Liferay.Language.get(label);
+			jQuery('.vocabulary-delete-list-button').val(label);
+		};
+
+		var changeSearchSelectLabels = function(label) {
+			label = Liferay.Language.get(label);
+			jQuery('#vocabulary-select-search option[value=vocabularies]').html(label);
+		};
+
+		var changeToolbarSectionLabels = function(label) {
+			label = Liferay.Language.get(label);
+			jQuery('.vocabulary-toolbar-section .content strong:first').html(label);
+		};
+
+		var changeVocabularyHeaderLabel = function(label){
+			label = Liferay.Language.get(label);
+			jQuery('.vocabulary-list-container .results-header').html(label);
+		};
 
 		var selectButton = function(button) {
 			buttons.find('.button').removeClass('selected');
@@ -45,8 +71,14 @@ Liferay.Portlet.TagsAdmin = new Class({
 			function() {
 				instance._selectedVocabulary = 'tag';
 				changeAddLabel('add-tag');
+				changeSearchSelectLabels('tag-sets');
+				changeToolbarSectionLabels('add-tag-set');
+				changeVocaularyAddLabel('add-tag-set');
+				changeVocabularyDeleteBtnLabel('delete-tag-set');
+				changeVocabularyHeaderLabel('tag-sets');
 				selectButton(this);
 				instance._loadData();
+				instance._hideToolbarSections();
 			}
 		);
 
@@ -54,26 +86,24 @@ Liferay.Portlet.TagsAdmin = new Class({
 			function() {
 				instance._selectedVocabulary = 'category';
 				changeAddLabel('add-category');
+				changeSearchSelectLabels('categories');
+				changeToolbarSectionLabels('add-vocabulary');
+				changeVocaularyAddLabel('add-vocabulary');
+				changeVocabularyDeleteBtnLabel('delete-vocabulary');
+				changeVocabularyHeaderLabel('Vocabulary');
 				selectButton(this);
 				instance._loadData();
+				instance._hideToolbarSections();
 			}
 		);
 
-		jQuery('select.vocabulary-select-list').change(
-			function() {
-				var actionScope = jQuery('.vocabulary-actions');
-				var vocabularyId = jQuery(this).val();
-				var vocabularyName = jQuery(this).find('option:selected').text();
-				var inputVocabularyName = actionScope.find('.vocabulary-name');
+		toolbar.find('.add-vocabulary-btn').click(function () {
+			instance._showToolBarVocabularySection();
+		});
 
-				if (vocabularyName == "(new)") {
-					inputVocabularyName.show().focus();
-				}
-				else {
-					instance._resetActionValues();
-				}
-			}
-		);
+		toolbar.find('.add-entry-btn').click(function () {
+			instance._showToolBarEntrySection();
+		});
 
 		jQuery('#vocabulary-search-bar').change(
 			function() {
@@ -94,12 +124,7 @@ Liferay.Portlet.TagsAdmin = new Class({
 			var newVocabulary = inputVocabularyName.val();
 
 			if (newVocabulary) {
-				instance._addVocabulary(
-					newVocabulary,
-					function() {
-						instance._addEntry(entryName, newVocabulary);
-					}
-				);
+				instance._addVocabulary(newVocabulary);
 
 				return;
 			}
@@ -126,6 +151,7 @@ Liferay.Portlet.TagsAdmin = new Class({
 						instance._selectedEntryId,
 						function() {
 							instance._closeEditSection();
+							instance._hideToolbarSections();
 							instance._displayVocabularyEntries(instance._selectedVocabularyName);
 						}
 					);
@@ -140,12 +166,17 @@ Liferay.Portlet.TagsAdmin = new Class({
 						instance._selectedVocabularyId,
 						function() {
 							instance._closeEditSection();
+							instance._hideToolbarSections();
 							instance._loadData();
 						}
 					);
 				}
 			}
 		);
+
+		jQuery('.close-entry-toolbar-section').click(function () {
+			instance._hideToolbarSections();
+		});
 
 		instance._loadData();
 	},
@@ -158,6 +189,7 @@ Liferay.Portlet.TagsAdmin = new Class({
 
 		var treeOptions = {
 			sortOn: 'li',
+			distance: 3,
 			dropOn: 'span.folder',
 			dropHoverClass: 'hover-folder',
 			drop: function(event, ui) {
@@ -507,6 +539,7 @@ Liferay.Portlet.TagsAdmin = new Class({
 					);
 
 					instance._resetActionValues();
+					instance._hideToolbarSections();
 
 					if (callback) {
 						callback(entryName, vocabulary);
@@ -581,7 +614,7 @@ Liferay.Portlet.TagsAdmin = new Class({
 						}
 					);
 
-					jQuery('.vocabulary-actions .vocabulary-name').hide();
+					instance._resetActionValues();
 
 					if (callback) {
 						callback(vocabulary);
@@ -724,7 +757,7 @@ Liferay.Portlet.TagsAdmin = new Class({
 		var instance = this;
 
 		var select = jQuery('select.vocabulary-select-list');
-		var buffer = ['<option value="0"></option>', '<option value="0">(new)</option>'];
+		var buffer = [];
 
 		jQuery.each(
 			vocabularies,
@@ -844,6 +877,10 @@ Liferay.Portlet.TagsAdmin = new Class({
 		var instance = this;
 
 		jQuery(exp).parent().removeClass('vocabulary-editing-tag');
+	},
+
+	_hideToolbarSections: function(){
+		jQuery('.vocabulary-toolbar-section, .entry-toolbar-section').hide();
 	},
 
 	_loadData: function() {
@@ -977,7 +1014,7 @@ Liferay.Portlet.TagsAdmin = new Class({
 		var instance = this;
 
 		jQuery('.vocabulary-actions input:text').val('');
-		jQuery('.vocabulary-actions .vocabulary-name').hide();
+		jQuery('.vocabulary-actions .vocabulary-toolbar-section').hide();
 	},
 
 	_saveProperties: function() {
@@ -1087,6 +1124,54 @@ Liferay.Portlet.TagsAdmin = new Class({
 			element.parent().addClass('vocabulary-editing-tag');
 			element.find('input:first').focus();
 		}
+	},
+
+	_showToolBarEntrySection: function(){
+		var instance = this;
+		var toolbar = jQuery('.vocabulary-toolbar');
+		var entryToolbarSection = toolbar.find('.entry-toolbar-section');
+		var entryToolbarButton = jQuery('.add-entry-btn');
+		var vocabularyToolbarSection = toolbar.find('.vocabulary-toolbar-section');
+
+		if (!instance._selectedVocabularyName) {
+			instance._resetActionValues();
+			jQuery('.entry-toolbar-section').hide();
+			instance._sendMessage("info", Liferay.Language.get('you-must-add-a-vocabulary-first'));
+			instance._positionToolbarSection(entryToolbarButton, entryToolbarSection);
+			instance._showToolBarVocabularySection();
+			return;
+		}
+
+		instance._positionToolbarSection(entryToolbarButton, entryToolbarSection);
+		entryToolbarSection.show().find('.vocabulary-entry-name').focus();
+		vocabularyToolbarSection.hide();
+	},
+
+	_showToolBarVocabularySection: function(){
+		var instance = this;
+		var toolbar = jQuery('.vocabulary-toolbar');
+		var entryToolbarSection = toolbar.find('.entry-toolbar-section');
+		var vocabularyToolbarButton = jQuery('.add-vocabulary-btn');
+		var vocabularyToolbarSection = toolbar.find('.vocabulary-toolbar-section');
+		instance._positionToolbarSection(vocabularyToolbarButton, vocabularyToolbarSection);
+		vocabularyToolbarSection.show().find('.vocabulary-name').focus();
+		entryToolbarSection.hide();
+	},
+
+	_positionToolbarSection: function(referenceElement, section){
+		var btnOffset = referenceElement.offset();
+		var vocabularyContainer = jQuery('.vocabulary-container');
+		section.css(
+			{
+				top: btnOffset.top + referenceElement.outerHeight() + 25,
+				left: btnOffset.left + referenceElement.outerWidth() - section.outerWidth()
+			}
+		);
+		section.find('.arrow-toolbar-section-box').css(
+			{
+				left: section.outerWidth() - referenceElement.outerWidth()
+			}
+		);
 	},
 
 	_unselectAllEntries: function() {

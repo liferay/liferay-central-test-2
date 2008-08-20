@@ -225,8 +225,27 @@
 	padding: 10px 0 0;
 }
 
-.portlet-tags-admin .vocabulary-name {
-	display: none;
+.portlet-tags-admin .vocabulary-toolbar-section, .portlet-tags-admin .entry-toolbar-section {
+	display:none;
+	position:absolute;
+}
+
+.portlet-tags-admin .vocabulary-toolbar-section .content, .portlet-tags-admin .entry-toolbar-section .content {
+	background:#FFFFFF none repeat scroll 0 0;
+	border:2px solid #727C81;
+	padding:20px;
+	text-align:left;
+}
+
+.portlet-tags-admin .arrow-toolbar-section-box {
+	background: url(<%= themeImagesPath %>/common/arrow_up_white_box.png) no-repeat scroll;
+	height:26px;
+	left:230px;
+	margin-bottom:-10px;
+	position:absolute;
+	top:-19px;
+	width:36px;
+	z-index:550;
 }
 
 .portlet-tags-admin #vocabulary-entry-messages {
