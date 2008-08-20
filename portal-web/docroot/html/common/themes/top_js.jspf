@@ -107,19 +107,16 @@
 
 <c:choose>
 	<c:when test="<%= themeDisplay.isThemeJsFastLoad() %>">
-		<script src="<%= themeDisplay.getPathJavaScript() %>/<%= themeDisplay.isThemeJsBarebone() ? "barebone" : "everything" %>_packed.js?bn=<%= ReleaseInfo.getBuildNumber() %>" type="text/javascript"></script>
+		<script src="<%= themeDisplay.getPathJavaScript() %>/barebone_packed.js?bn=<%= ReleaseInfo.getBuildNumber() %>" type="text/javascript"></script>
+
+		<c:if test="<%= !themeDisplay.isThemeJsBarebone() %>">
+			<script src="<%= themeDisplay.getPathJavaScript() %>/everything_packed.js?bn=<%= ReleaseInfo.getBuildNumber() %>" type="text/javascript"></script>
+		</c:if>
 	</c:when>
 	<c:otherwise>
 
 		<%
-		String[] javaScriptFiles = null;
-
-		if (themeDisplay.isThemeJsBarebone()) {
-			javaScriptFiles = PropsValues.JAVASCRIPT_BAREBONE_FILES;
-		}
-		else {
-			javaScriptFiles = PropsValues.JAVASCRIPT_EVERYTHING_FILES;
-		}
+		String[] javaScriptFiles = PropsValues.JAVASCRIPT_BAREBONE_FILES;
 
 		for (String javaScriptFile : javaScriptFiles) {
 		%>
@@ -127,6 +124,18 @@
 			<script src="<%= themeDisplay.getPathJavaScript() %>/<%= javaScriptFile %>?bn=<%= ReleaseInfo.getBuildNumber() %>" type="text/javascript"></script>
 
 		<%
+		}
+
+		if (!themeDisplay.isThemeJsBarebone()) {
+			javaScriptFiles = PropsValues.JAVASCRIPT_EVERYTHING_FILES;
+
+			for (String javaScriptFile : javaScriptFiles) {
+		%>
+
+				<script src="<%= themeDisplay.getPathJavaScript() %>/<%= javaScriptFile %>?bn=<%= ReleaseInfo.getBuildNumber() %>" type="text/javascript"></script>
+
+		<%
+			}
 		}
 		%>
 
