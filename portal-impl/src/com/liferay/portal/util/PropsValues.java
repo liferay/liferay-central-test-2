@@ -86,9 +86,8 @@ public class PropsValues {
 	public static final String[] APPLICATION_STARTUP_EVENTS =
 		PropsUtil.getArray(PropsKeys.APPLICATION_STARTUP_EVENTS);
 
-	public static final boolean AUTH_FORWARD_BY_LAST_PATH =
-		GetterUtil.getBoolean(
-			PropsUtil.get(PropsKeys.AUTH_FORWARD_BY_LAST_PATH));
+	public static boolean AUTH_FORWARD_BY_LAST_PATH = GetterUtil.getBoolean(
+		PropsUtil.get(PropsKeys.AUTH_FORWARD_BY_LAST_PATH));
 
 	public static final boolean AUTH_FORWARD_BY_REDIRECT =
 		GetterUtil.getBoolean(
@@ -967,7 +966,7 @@ public class PropsValues {
 	public static final boolean TCK_URL = GetterUtil.getBoolean(
 		PropsUtil.get(PropsKeys.TCK_URL));
 
-	public static final boolean TERMS_OF_USE_REQUIRED = GetterUtil.getBoolean(
+	public static boolean TERMS_OF_USE_REQUIRED = GetterUtil.getBoolean(
 		PropsUtil.get(PropsKeys.TERMS_OF_USE_REQUIRED));
 
 	public static boolean THEME_CSS_FAST_LOAD = GetterUtil.getBoolean(

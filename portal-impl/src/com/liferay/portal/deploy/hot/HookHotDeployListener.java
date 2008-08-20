@@ -465,6 +465,7 @@ public class HookHotDeployListener extends BaseHotDeployListener {
 	}
 
 	private static final String[] _PROPS_KEYS_BOOLEAN = new String[] {
+		"AUTH_FORWARD_BY_LAST_PATH",
 		"JAVASCRIPT_FAST_LOAD",
 		"LAYOUT_TEMPLATE_CACHE_ENABLED",
 		"LAYOUT_USER_PRIVATE_LAYOUTS_AUTO_CREATE",
@@ -480,6 +481,7 @@ public class HookHotDeployListener extends BaseHotDeployListener {
 		"MY_PLACES_SHOW_USER_PRIVATE_SITES_WITH_NO_LAYOUTS",
 		"MY_PLACES_SHOW_USER_PUBLIC_SITES_WITH_NO_LAYOUTS",
 		"ORGANIZATIONS_COUNTRY_REQUIRED",
+		"TERMS_OF_USE_REQUIRED",
 		"THEME_CSS_FAST_LOAD"
 	};
 
