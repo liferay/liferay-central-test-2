@@ -45,6 +45,12 @@ public class BooleanQueryFactoryUtil {
 		return _booleanQueryFactory;
 	}
 
+	public void setBooleanQueryFactory(
+		BooleanQueryFactory booleanQueryFactory) {
+
+		_booleanQueryFactory = booleanQueryFactory;
+	}
+
 	private static BooleanQueryFactory _booleanQueryFactory;
 
 }
