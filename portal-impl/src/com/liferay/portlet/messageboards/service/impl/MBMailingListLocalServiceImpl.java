@@ -76,7 +76,7 @@ public class MBMailingListLocalServiceImpl
 
 		validate(
 			emailAddress, inServerName, inUserName, outEmailAddress, outCustom,
-			outServerName, outUserName);
+			outServerName, outUserName, active);
 
 		long mailingListId = counterLocalService.increment();
 
@@ -257,8 +257,12 @@ public class MBMailingListLocalServiceImpl
 	protected void validate(
 			String emailAddress, String inServerName, String inUserName,
 			String outEmailAddress, boolean outCustom, String outServerName,
-			String outUserName)
+			String outUserName, boolean active)
 		throws PortalException {
+
+		if (!active) {
+			return;
+		}
 
 		if (!Validator.isEmailAddress(emailAddress)) {
 			throw new MailingListEmailAddressException();
