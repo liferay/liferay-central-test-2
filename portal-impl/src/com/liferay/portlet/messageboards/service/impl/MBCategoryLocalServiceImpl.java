@@ -43,6 +43,7 @@ import com.liferay.portal.util.PortalUtil;
 import com.liferay.portlet.messageboards.CategoryNameException;
 import com.liferay.portlet.messageboards.NoSuchMailingListException;
 import com.liferay.portlet.messageboards.model.MBCategory;
+import com.liferay.portlet.messageboards.model.MBMailingList;
 import com.liferay.portlet.messageboards.model.MBMessage;
 import com.liferay.portlet.messageboards.model.MBThread;
 import com.liferay.portlet.messageboards.model.impl.MBCategoryImpl;
@@ -177,7 +178,7 @@ public class MBCategoryLocalServiceImpl extends MBCategoryLocalServiceBaseImpl {
 				category, communityPermissions, guestPermissions);
 		}
 
-		// Mailing
+		// Mailing list
 
 		mbMailingListLocalService.addMailingList(
 			null, userId, category.getCategoryId(), emailAddress, inProtocol,
@@ -518,13 +519,27 @@ public class MBCategoryLocalServiceImpl extends MBCategoryLocalServiceBaseImpl {
 			mergeCategories(category, parentCategoryId);
 		}
 
-		// Mailing
+		// Mailing list
 
-		/*mbMailingListLocalService.updateMailingList(mailingListId,
-			emailAddress, inProtocol, inServerName, inServerPort, inUseSSL,
-			inUserName, inPassword, inReadInterval, outEmailAddress,
-			outCustom, outServerName, outServerPort, outUseSSL, outUserName,
-			outPassword, mailingListActive);*/
+		MBMailingList mailingList = mbMailingListPersistence.fetchByCategoryId(
+			category.getCategoryId());
+
+		if (mailingList != null) {
+			mbMailingListLocalService.updateMailingList(
+				mailingList.getMailingListId(), emailAddress, inProtocol,
+				inServerName, inServerPort, inUseSSL, inUserName, inPassword,
+				inReadInterval, outEmailAddress, outCustom, outServerName,
+				outServerPort, outUseSSL, outUserName, outPassword,
+				mailingListActive);
+		}
+		else {
+			mbMailingListLocalService.addMailingList(
+				null, category.getUserId(), category.getCategoryId(),
+				emailAddress, inProtocol, inServerName, inServerPort, inUseSSL,
+				inUserName, inPassword, inReadInterval, outEmailAddress,
+				outCustom, outServerName, outServerPort, outUseSSL, outUserName,
+				outPassword, mailingListActive);
+		}
 
 		return category;
 	}
@@ -636,7 +651,7 @@ public class MBCategoryLocalServiceImpl extends MBCategoryLocalServiceBaseImpl {
 			}
 		}
 
-		mbCategoryPersistence.remove(fromCategory.getCategoryId());
+		deleteCategory(fromCategory);
 	}
 
 	public void subscribeCategory(long userId, long categoryId)
