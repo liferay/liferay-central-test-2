@@ -112,7 +112,7 @@
 			<div class="vocabulary-properties">
 				<liferay-ui:message key="properties" />:
 
-				<liferay-ui:icon-help message="properties-are-a-way-to-add-more-detailed-information-to-a-specific-tag-or-category-they-are-separated-into-key-value-pairs-and-let-you-associate-detailed-information-to-an-entry" />
+				<liferay-ui:icon-help message="properties-are-a-way-to-add-more-detailed-information-to-a-specific-tag-or-category" />
 
 				<div class="vocabulary-property-row">
 					<input class="property-key" type="text" />
