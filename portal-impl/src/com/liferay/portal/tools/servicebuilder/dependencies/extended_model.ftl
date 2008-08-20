@@ -14,15 +14,15 @@ package ${packagePath}.model;
  * </p>
  *
  * <p>
- * Customize <code>${packagePath}.service.model.impl.${entity.name}Impl</code>
+ * Customize <code>${packagePath}.model.impl.${entity.name}Impl</code>
  * and rerun the ServiceBuilder to generate the new methods.
  * </p>
  *
  * @author Brian Wing Shun Chan
  *
- * @see ${packagePath}.service.model.${entity.name}Model
- * @see ${packagePath}.service.model.impl.${entity.name}Impl
- * @see ${packagePath}.service.model.impl.${entity.name}ModelImpl
+ * @see ${packagePath}.model.${entity.name}Model
+ * @see ${packagePath}.model.impl.${entity.name}Impl
+ * @see ${packagePath}.model.impl.${entity.name}ModelImpl
  *
  */
  public interface ${entity.name} extends ${entity.name}Model {

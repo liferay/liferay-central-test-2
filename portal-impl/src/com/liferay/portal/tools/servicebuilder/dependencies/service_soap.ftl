@@ -54,9 +54,9 @@ import java.rmi.RemoteException;
  *
  * @author Brian Wing Shun Chan
  *
+ * @see ${packagePath}.model.${entity.name}Soap
  * @see ${packagePath}.service.${entity.name}ServiceUtil
  * @see ${packagePath}.service.http.${entity.name}ServiceHttp
- * @see ${packagePath}.service.model.${entity.name}Soap
  *
  */
 public class ${entity.name}ServiceSoap {

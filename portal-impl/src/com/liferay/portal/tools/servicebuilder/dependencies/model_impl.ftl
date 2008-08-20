@@ -39,9 +39,9 @@ import java.util.List;
  *
  * @author Brian Wing Shun Chan
  *
- * @see ${packagePath}.service.model.${entity.name}
- * @see ${packagePath}.service.model.${entity.name}Model
- * @see ${packagePath}.service.model.impl.${entity.name}Impl
+ * @see ${packagePath}.model.${entity.name}
+ * @see ${packagePath}.model.${entity.name}Model
+ * @see ${packagePath}.model.impl.${entity.name}Impl
  *
  */
 public class ${entity.name}ModelImpl extends BaseModelImpl {

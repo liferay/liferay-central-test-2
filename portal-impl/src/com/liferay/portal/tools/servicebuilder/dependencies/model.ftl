@@ -23,9 +23,9 @@ import java.util.Date;
  *
  * @author Brian Wing Shun Chan
  *
- * @see ${packagePath}.service.model.${entity.name}
- * @see ${packagePath}.service.model.impl.${entity.name}Impl
- * @see ${packagePath}.service.model.impl.${entity.name}ModelImpl
+ * @see ${packagePath}.model.${entity.name}
+ * @see ${packagePath}.model.impl.${entity.name}Impl
+ * @see ${packagePath}.model.impl.${entity.name}ModelImpl
  *
  */
 public interface ${entity.name}Model extends BaseModel {
