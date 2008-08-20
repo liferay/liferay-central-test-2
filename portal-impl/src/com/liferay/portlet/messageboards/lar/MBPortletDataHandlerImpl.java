@@ -455,6 +455,23 @@ public class MBPortletDataHandlerImpl implements PortletDataHandler {
 			categoryPKs, category.getParentCategoryId(),
 			category.getParentCategoryId());
 
+		String emailAddress = null;
+		String inProtocol = null;
+		String inServerName = null;
+		int inServerPort = 0;
+		boolean inUseSSL = false;
+		String inUserName = null;
+		String inPassword = null;
+		int inReadInterval = 0;
+		String outEmailAddress = null;
+		boolean outCustom = false;
+		String outServerName = null;
+		int outServerPort = 0;
+		boolean outUseSSL = false;
+		String outUserName = null;
+		String outPassword = null;
+		boolean mailingListActive = false;
+
 		boolean addCommunityPermissions = true;
 		boolean addGuestPermissions = true;
 
@@ -475,20 +492,33 @@ public class MBPortletDataHandlerImpl implements PortletDataHandler {
 					existingCategory = MBCategoryLocalServiceUtil.addCategory(
 						category.getUuid(), userId, plid, parentCategoryId,
 						category.getName(), category.getDescription(),
-						addCommunityPermissions, addGuestPermissions);
+						emailAddress, inProtocol, inServerName, inServerPort,
+						inUseSSL, inUserName, inPassword, inReadInterval,
+						outEmailAddress, outCustom, outServerName,
+						outServerPort, outUseSSL, outUserName, outPassword,
+						mailingListActive, addCommunityPermissions,
+						addGuestPermissions);
 				}
 				else {
 					existingCategory =
 						MBCategoryLocalServiceUtil.updateCategory(
 							existingCategory.getCategoryId(), parentCategoryId,
 							category.getName(), category.getDescription(),
-							false);
+							emailAddress, inProtocol, inServerName,
+							inServerPort, inUseSSL, inUserName, inPassword,
+							inReadInterval, outEmailAddress, outCustom,
+							outServerName, outServerPort, outUseSSL,
+							outUserName, outPassword, mailingListActive, false);
 				}
 			}
 			else {
 				existingCategory = MBCategoryLocalServiceUtil.addCategory(
 					userId, plid, parentCategoryId, category.getName(),
-					category.getDescription(), addCommunityPermissions,
+					category.getDescription(), emailAddress, inProtocol,
+					inServerName, inServerPort, inUseSSL, inUserName,
+					inPassword, inReadInterval, outEmailAddress, outCustom,
+					outServerName, outServerPort, outUseSSL, outUserName,
+					outPassword, mailingListActive, addCommunityPermissions,
 					addGuestPermissions);
 			}
 

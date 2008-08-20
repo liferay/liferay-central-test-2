@@ -81,6 +81,22 @@ public class MBMessageServiceTest extends BaseServiceTestCase {
 
 		String name = "Test Category";
 		String description = "This is a test category.";
+		String emailAddress = null;
+		String inProtocol = null;
+		String inServerName = null;
+		int inServerPort = 0;
+		boolean inUseSSL = false;
+		String inUserName = null;
+		String inPassword = null;
+		int inReadInterval = 0;
+		String outEmailAddress = null;
+		boolean outCustom = false;
+		String outServerName = null;
+		int outServerPort = 0;
+		boolean outUseSSL = false;
+		String outUserName = null;
+		String outPassword = null;
+		boolean mailingListActive = false;
 
 		boolean addCommunityPermissions = true;
 		boolean addGuestPermissions = true;
@@ -88,7 +104,10 @@ public class MBMessageServiceTest extends BaseServiceTestCase {
 		_category = MBCategoryServiceUtil.addCategory(
 			TestPropsValues.LAYOUT_PLID,
 			MBCategoryImpl.DEFAULT_PARENT_CATEGORY_ID, name, description,
-			addCommunityPermissions, addGuestPermissions);
+			emailAddress, inProtocol, inServerName, inServerPort, inUseSSL,
+			inUserName, inPassword, inReadInterval, outEmailAddress, outCustom,
+			outServerName, outServerPort, outUseSSL, outUserName, outPassword,
+			mailingListActive, addCommunityPermissions, addGuestPermissions);
 	}
 
 	protected void tearDown() throws Exception {
