@@ -26,15 +26,12 @@ import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.WebKeys;
-import com.liferay.portlet.messageboards.NoSuchMailingListException;
 import com.liferay.portlet.messageboards.model.MBCategory;
-import com.liferay.portlet.messageboards.model.MBMailingList;
 import com.liferay.portlet.messageboards.model.MBMessage;
 import com.liferay.portlet.messageboards.model.MBThread;
 import com.liferay.portlet.messageboards.model.impl.MBCategoryImpl;
 import com.liferay.portlet.messageboards.service.MBBanLocalServiceUtil;
 import com.liferay.portlet.messageboards.service.MBCategoryServiceUtil;
-import com.liferay.portlet.messageboards.service.MBMailingListLocalServiceUtil;
 import com.liferay.portlet.messageboards.service.MBMessageServiceUtil;
 import com.liferay.portlet.messageboards.service.MBThreadLocalServiceUtil;
 
@@ -89,27 +86,9 @@ public class ActionUtil {
 			(categoryId != MBCategoryImpl.DEFAULT_PARENT_CATEGORY_ID)) {
 
 			category = MBCategoryServiceUtil.getCategory(categoryId);
-
-			getMailingList(request, categoryId);
 		}
 
 		request.setAttribute(WebKeys.MESSAGE_BOARDS_CATEGORY, category);
-	}
-
-	public static void getMailingList(
-			HttpServletRequest request, long categoryId)
-		throws Exception {
-
-		MBMailingList mailingList = null;
-
-		try {
-			mailingList = MBMailingListLocalServiceUtil.getCategoryMailingList(
-				categoryId);
-
-			request.setAttribute(
-				WebKeys.MESSAGE_BOARDS_MAILING_LIST, mailingList);
-		} catch (NoSuchMailingListException e) {
-		}
 	}
 
 	public static void getMessage(ActionRequest actionRequest)
