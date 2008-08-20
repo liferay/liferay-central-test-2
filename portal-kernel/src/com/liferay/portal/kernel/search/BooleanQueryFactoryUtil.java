@@ -37,28 +37,14 @@ public class BooleanQueryFactoryUtil {
 	}
 
 	public static BooleanQueryFactory getBooleanQueryFactory() {
-		return _getUtil()._booleanQueryFactory;
-	}
-
-	public void setBooleanQueryFactory(
-		BooleanQueryFactory booleanQueryFactory) {
-
-		_booleanQueryFactory = booleanQueryFactory;
-	}
-
-	private static BooleanQueryFactoryUtil _getUtil() {
-		if (_util == null) {
-			_util = (BooleanQueryFactoryUtil)PortalBeanLocatorUtil.locate(
-				_UTIL);
+		if (_booleanQueryFactory == null) {
+			PortalBeanLocatorUtil.locate(
+				BooleanQueryFactoryUtil.class.getName());
 		}
 
-		return _util;
+		return _booleanQueryFactory;
 	}
 
-	private static final String _UTIL = BooleanQueryFactoryUtil.class.getName();
-
-	private static BooleanQueryFactoryUtil _util;
-
-	private BooleanQueryFactory _booleanQueryFactory;
+	private static BooleanQueryFactory _booleanQueryFactory;
 
 }

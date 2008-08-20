@@ -41,7 +41,11 @@ public class TermQueryFactoryUtil {
 	}
 
 	public static TermQueryFactory getTermQueryFactory() {
-		return _getUtil()._termQueryFactory;
+		if (_termQueryFactory == null) {
+			PortalBeanLocatorUtil.locate(TermQueryFactoryUtil.class.getName());
+		}
+
+		return _termQueryFactory;
 	}
 
 	public void setTermQueryFactory(
@@ -50,18 +54,6 @@ public class TermQueryFactoryUtil {
 		_termQueryFactory = termQueryFactory;
 	}
 
-	private static TermQueryFactoryUtil _getUtil() {
-		if (_util == null) {
-			_util = (TermQueryFactoryUtil)PortalBeanLocatorUtil.locate(_UTIL);
-		}
-
-		return _util;
-	}
-
-	private static final String _UTIL = TermQueryFactoryUtil.class.getName();
-
-	private static TermQueryFactoryUtil _util;
-
-	private TermQueryFactory _termQueryFactory;
+	private static TermQueryFactory _termQueryFactory;
 
 }

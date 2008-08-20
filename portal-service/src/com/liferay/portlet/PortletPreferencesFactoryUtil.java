@@ -85,7 +85,12 @@ public class PortletPreferencesFactoryUtil {
 	}
 
 	public static PortletPreferencesFactory getPortletPreferencesFactory() {
-		return _getUtil()._portletPreferencesFactory;
+		if (_portletPreferencesFactory == null) {
+			PortalBeanLocatorUtil.locate(
+				PortletPreferencesFactoryUtil.class.getName());
+		}
+
+		return _portletPreferencesFactory;
 	}
 
 	public static PortletPreferencesIds getPortletPreferencesIds(
@@ -177,21 +182,6 @@ public class PortletPreferencesFactoryUtil {
 		_portletPreferencesFactory = portletPreferencesFactory;
 	}
 
-	private static PortletPreferencesFactoryUtil _getUtil() {
-		if (_util == null) {
-			_util =
-				(PortletPreferencesFactoryUtil)PortalBeanLocatorUtil.locate(
-					_UTIL);
-		}
-
-		return _util;
-	}
-
-	private static final String _UTIL =
-		PortletPreferencesFactoryUtil.class.getName();
-
-	private static PortletPreferencesFactoryUtil _util;
-
-	private PortletPreferencesFactory _portletPreferencesFactory;
+	private static PortletPreferencesFactory _portletPreferencesFactory;
 
 }

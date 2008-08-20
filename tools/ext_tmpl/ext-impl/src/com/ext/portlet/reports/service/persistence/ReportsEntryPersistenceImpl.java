@@ -6,6 +6,7 @@ import com.ext.portlet.reports.model.impl.ReportsEntryImpl;
 import com.ext.portlet.reports.model.impl.ReportsEntryModelImpl;
 
 import com.liferay.portal.SystemException;
+import com.liferay.portal.kernel.bean.InitializingBean;
 import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 import com.liferay.portal.kernel.dao.orm.FinderCacheUtil;
 import com.liferay.portal.kernel.dao.orm.Query;
@@ -30,7 +31,7 @@ import java.util.List;
 
 
 public class ReportsEntryPersistenceImpl extends BasePersistenceImpl
-    implements ReportsEntryPersistence {
+    implements ReportsEntryPersistence, InitializingBean {
     private static Log _log = LogFactory.getLog(ReportsEntryPersistenceImpl.class);
     private ModelListener[] _listeners = new ModelListener[0];
 
@@ -725,12 +726,14 @@ public class ReportsEntryPersistenceImpl extends BasePersistenceImpl
         }
     }
 
-    public List<ReportsEntry> findWithDynamicQuery(DynamicQuery dynamicQuery)
+    public List<Object> findWithDynamicQuery(DynamicQuery dynamicQuery)
         throws SystemException {
         Session session = null;
 
         try {
             session = openSession();
+
+            dynamicQuery.compile(session);
 
             return dynamicQuery.list();
         } catch (Exception e) {
@@ -740,7 +743,7 @@ public class ReportsEntryPersistenceImpl extends BasePersistenceImpl
         }
     }
 
-    public List<ReportsEntry> findWithDynamicQuery(DynamicQuery dynamicQuery,
+    public List<Object> findWithDynamicQuery(DynamicQuery dynamicQuery,
         int start, int end) throws SystemException {
         Session session = null;
 
@@ -748,6 +751,8 @@ public class ReportsEntryPersistenceImpl extends BasePersistenceImpl
             session = openSession();
 
             dynamicQuery.setLimit(start, end);
+
+            dynamicQuery.compile(session);
 
             return dynamicQuery.list();
         } catch (Exception e) {
@@ -1052,7 +1057,7 @@ public class ReportsEntryPersistenceImpl extends BasePersistenceImpl
         _listeners = listeners.toArray(new ModelListener[listeners.size()]);
     }
 
-    protected void init() {
+    public void afterPropertiesSet() {
         String[] listenerClassNames = StringUtil.split(GetterUtil.getString(
                     com.liferay.portal.util.PropsUtil.get(
                         "value.object.listener.com.ext.portlet.reports.model.ReportsEntry")));

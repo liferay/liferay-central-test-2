@@ -54,25 +54,17 @@ public class CommonPermissionUtil {
 	}
 
 	public static CommonPermission getCommonPermission() {
-		return _getUtil()._commonPermission;
+		if (_commonPermission == null) {
+			PortalBeanLocatorUtil.locate(CommonPermissionUtil.class.getName());
+		}
+
+		return _commonPermission;
 	}
 
 	public void setCommonPermission(CommonPermission commonPermission) {
 		_commonPermission = commonPermission;
 	}
 
-	private static CommonPermissionUtil _getUtil() {
-		if (_util == null) {
-			_util = (CommonPermissionUtil)PortalBeanLocatorUtil.locate(_UTIL);
-		}
-
-		return _util;
-	}
-
-	private static final String _UTIL = CommonPermissionUtil.class.getName();
-
-	private static CommonPermissionUtil _util;
-
-	private CommonPermission _commonPermission;
+	private static CommonPermission _commonPermission;
 
 }

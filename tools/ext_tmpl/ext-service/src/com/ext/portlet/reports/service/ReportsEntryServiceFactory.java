@@ -1,5 +1,7 @@
 package com.ext.portlet.reports.service;
 
+import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
+
 
 /**
  * <a href="ReportsEntryServiceFactory.java.html"><b><i>View Source</i></b></a>
@@ -39,33 +41,45 @@ public class ReportsEntryServiceFactory {
     private static ReportsEntryService _txImpl;
     private ReportsEntryService _service;
 
+    /**
+     * @deprecated
+     */
     public static ReportsEntryService getService() {
         return _getFactory()._service;
     }
 
+    /**
+     * @deprecated
+     */
     public static ReportsEntryService getImpl() {
         if (_impl == null) {
-            _impl = (ReportsEntryService) com.liferay.portal.kernel.bean.PortalBeanLocatorUtil.locate(_IMPL);
+            _impl = (ReportsEntryService) PortalBeanLocatorUtil.locate(_IMPL);
         }
 
         return _impl;
     }
 
+    /**
+     * @deprecated
+     */
     public static ReportsEntryService getTxImpl() {
         if (_txImpl == null) {
-            _txImpl = (ReportsEntryService) com.liferay.portal.kernel.bean.PortalBeanLocatorUtil.locate(_TX_IMPL);
+            _txImpl = (ReportsEntryService) PortalBeanLocatorUtil.locate(_TX_IMPL);
         }
 
         return _txImpl;
     }
 
+    /**
+     * @deprecated
+     */
     public void setService(ReportsEntryService service) {
         _service = service;
     }
 
     private static ReportsEntryServiceFactory _getFactory() {
         if (_factory == null) {
-            _factory = (ReportsEntryServiceFactory) com.liferay.portal.kernel.bean.PortalBeanLocatorUtil.locate(_FACTORY);
+            _factory = (ReportsEntryServiceFactory) PortalBeanLocatorUtil.locate(_FACTORY);
         }
 
         return _factory;

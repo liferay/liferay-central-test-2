@@ -53,7 +53,11 @@ public class ProjectionFactoryUtil {
 	}
 
 	public static ProjectionFactory getProjectionFactory() {
-		return _getUtil()._projectionFactory;
+		if (_projectionFactory == null) {
+			PortalBeanLocatorUtil.locate(ProjectionFactoryUtil.class.getName());
+		}
+
+		return _projectionFactory;
 	}
 
 	public static Projection groupProperty(String propertyName) {
@@ -88,18 +92,6 @@ public class ProjectionFactoryUtil {
 		_projectionFactory = projectionFactory;
 	}
 
-	private static ProjectionFactoryUtil _getUtil() {
-		if (_util == null) {
-			_util = (ProjectionFactoryUtil)PortalBeanLocatorUtil.locate(_UTIL);
-		}
-
-		return _util;
-	}
-
-	private static final String _UTIL = ProjectionFactoryUtil.class.getName();
-
-	private static ProjectionFactoryUtil _util;
-
-	private ProjectionFactory _projectionFactory;
+	private static ProjectionFactory _projectionFactory;
 
 }

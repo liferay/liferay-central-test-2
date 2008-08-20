@@ -45,7 +45,11 @@ public class ModelHintsUtil {
 	}
 
 	public static ModelHints getModelHints() {
-		return _getUtil()._modelHints;
+		if (_modelHints == null) {
+			PortalBeanLocatorUtil.locate(ModelHintsUtil.class.getName());
+		}
+
+		return _modelHints;
 	}
 
 	public static List<String> getModels() {
@@ -74,18 +78,6 @@ public class ModelHintsUtil {
 		_modelHints = modelHints;
 	}
 
-	private static ModelHintsUtil _getUtil() {
-		if (_util == null) {
-			_util = (ModelHintsUtil)PortalBeanLocatorUtil.locate(_UTIL);
-		}
-
-		return _util;
-	}
-
-	private static final String _UTIL = ModelHintsUtil.class.getName();
-
-	private static ModelHintsUtil _util;
-
-	private ModelHints _modelHints;
+	private static ModelHints _modelHints;
 
 }

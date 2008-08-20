@@ -41,7 +41,11 @@ public class FinderCacheUtil {
 	}
 
 	public static FinderCache getFinderCache() {
-		return _getUtil()._finderCache;
+		if (_finderCache == null) {
+			PortalBeanLocatorUtil.locate(FinderCacheUtil.class.getName());
+		}
+
+		return _finderCache;
 	}
 
 	public static Object getResult(
@@ -85,18 +89,6 @@ public class FinderCacheUtil {
 		_finderCache = finderCache;
 	}
 
-	private static FinderCacheUtil _getUtil() {
-		if (_util == null) {
-			_util = (FinderCacheUtil)PortalBeanLocatorUtil.locate(_UTIL);
-		}
-
-		return _util;
-	}
-
-	private static final String _UTIL = FinderCacheUtil.class.getName();
-
-	private static FinderCacheUtil _util;
-
-	private FinderCache _finderCache;
+	private static FinderCache _finderCache;
 
 }

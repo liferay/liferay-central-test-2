@@ -157,25 +157,17 @@ public class UnicodeLanguageUtil {
 	}
 
 	public static UnicodeLanguage getUnicodeLanguage() {
-		return _getUtil()._unicodeLanguage;
+		if (_unicodeLanguage == null) {
+			PortalBeanLocatorUtil.locate(UnicodeLanguageUtil.class.getName());
+		}
+
+		return _unicodeLanguage;
 	}
 
 	public void setUnicodeLanguage(UnicodeLanguage unicodeLanguage) {
 		_unicodeLanguage = unicodeLanguage;
 	}
 
-	private static UnicodeLanguageUtil _getUtil() {
-		if (_util == null) {
-			_util = (UnicodeLanguageUtil)PortalBeanLocatorUtil.locate(_UTIL);
-		}
-
-		return _util;
-	}
-
-	private static final String _UTIL = UnicodeLanguageUtil.class.getName();
-
-	private static UnicodeLanguageUtil _util;
-
-	private UnicodeLanguage _unicodeLanguage;
+	private static UnicodeLanguage _unicodeLanguage;
 
 }

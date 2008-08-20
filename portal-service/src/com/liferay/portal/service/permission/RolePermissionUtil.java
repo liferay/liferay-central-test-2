@@ -49,25 +49,17 @@ public class RolePermissionUtil {
 	}
 
 	public static RolePermission getRolePermission() {
-		return _getUtil()._rolePermission;
+		if (_rolePermission == null) {
+			PortalBeanLocatorUtil.locate(RolePermissionUtil.class.getName());
+		}
+
+		return _rolePermission;
 	}
 
 	public void setRolePermission(RolePermission rolePermission) {
 		_rolePermission = rolePermission;
 	}
 
-	private static RolePermissionUtil _getUtil() {
-		if (_util == null) {
-			_util = (RolePermissionUtil)PortalBeanLocatorUtil.locate(_UTIL);
-		}
-
-		return _util;
-	}
-
-	private static final String _UTIL = RolePermissionUtil.class.getName();
-
-	private static RolePermissionUtil _util;
-
-	private RolePermission _rolePermission;
+	private static RolePermission _rolePermission;
 
 }

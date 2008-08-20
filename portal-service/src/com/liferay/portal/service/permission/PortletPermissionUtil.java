@@ -108,7 +108,11 @@ public class PortletPermissionUtil {
 	}
 
 	public static PortletPermission getPortletPermission() {
-		return _getUtil()._portletPermission;
+		if (_portletPermission == null) {
+			PortalBeanLocatorUtil.locate(PortletPermissionUtil.class.getName());
+		}
+
+		return _portletPermission;
 	}
 
 	public static String getPrimaryKey(long plid, String portletId) {
@@ -126,18 +130,6 @@ public class PortletPermissionUtil {
 		_portletPermission = portletPermission;
 	}
 
-	private static PortletPermissionUtil _getUtil() {
-		if (_util == null) {
-			_util = (PortletPermissionUtil)PortalBeanLocatorUtil.locate(_UTIL);
-		}
-
-		return _util;
-	}
-
-	private static final String _UTIL = PortletPermissionUtil.class.getName();
-
-	private static PortletPermissionUtil _util;
-
-	private PortletPermission _portletPermission;
+	private static PortletPermission _portletPermission;
 
 }

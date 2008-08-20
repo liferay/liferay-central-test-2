@@ -129,7 +129,11 @@ public class FileUtil {
 	}
 
 	public static com.liferay.portal.kernel.util.File getFile() {
-		return _getUtil()._file;
+		if (_file == null) {
+			PortalBeanLocatorUtil.locate(FileUtil.class.getName());
+		}
+
+		return _file;
 	}
 
 	public static String getPath(String fullFileName) {
@@ -290,18 +294,6 @@ public class FileUtil {
 		_file = file;
 	}
 
-	private static FileUtil _getUtil() {
-		if (_util == null) {
-			_util = (FileUtil)PortalBeanLocatorUtil.locate(_UTIL);
-		}
-
-		return _util;
-	}
-
-	private static final String _UTIL = FileUtil.class.getName();
-
-	private static FileUtil _util;
-
-	private com.liferay.portal.kernel.util.File _file;
+	private static com.liferay.portal.kernel.util.File _file;
 
 }

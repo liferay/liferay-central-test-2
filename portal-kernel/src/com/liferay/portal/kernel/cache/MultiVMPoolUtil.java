@@ -62,7 +62,11 @@ public class MultiVMPoolUtil {
 	}
 
 	public static MultiVMPool getMultiVMPool() {
-		return _getUtil()._multiVMPool;
+		if (_multiVMPool == null) {
+			PortalBeanLocatorUtil.locate(MultiVMPoolUtil.class.getName());
+		}
+
+		return _multiVMPool;
 	}
 
 	public static PortalCache getCache(String name) {
@@ -119,18 +123,6 @@ public class MultiVMPoolUtil {
 		_multiVMPool = multiVMPool;
 	}
 
-	private static MultiVMPoolUtil _getUtil() {
-		if (_util == null) {
-			_util = (MultiVMPoolUtil)PortalBeanLocatorUtil.locate(_UTIL);
-		}
-
-		return _util;
-	}
-
-	private static final String _UTIL = MultiVMPoolUtil.class.getName();
-
-	private static MultiVMPoolUtil _util;
-
-	private MultiVMPool _multiVMPool;
+	private static MultiVMPool _multiVMPool;
 
 }

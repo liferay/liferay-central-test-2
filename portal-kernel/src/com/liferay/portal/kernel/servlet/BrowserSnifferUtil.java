@@ -41,7 +41,11 @@ public class BrowserSnifferUtil {
 	}
 
 	public static BrowserSniffer getBrowserSniffer() {
-		return _getUtil()._browserSniffer;
+		if (_browserSniffer == null) {
+			PortalBeanLocatorUtil.locate(BrowserSnifferUtil.class.getName());
+		}
+
+		return _browserSniffer;
 	}
 
 	public static boolean is_ie(HttpServletRequest request) {
@@ -120,18 +124,6 @@ public class BrowserSnifferUtil {
 		_browserSniffer = browserSniffer;
 	}
 
-	private static BrowserSnifferUtil _getUtil() {
-		if (_util == null) {
-			_util = (BrowserSnifferUtil)PortalBeanLocatorUtil.locate(_UTIL);
-		}
-
-		return _util;
-	}
-
-	private static final String _UTIL = BrowserSnifferUtil.class.getName();
-
-	private static BrowserSnifferUtil _util;
-
-	private BrowserSniffer _browserSniffer;
+	private static BrowserSniffer _browserSniffer;
 
 }

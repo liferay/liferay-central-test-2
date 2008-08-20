@@ -93,7 +93,11 @@ public class HttpUtil {
 	}
 
 	public static Http getHttp() {
-		return _getUtil()._http;
+		if (_http == null) {
+			PortalBeanLocatorUtil.locate(HttpUtil.class.getName());
+		}
+
+		return _http;
 	}
 
 	public static String getParameter(String url, String name) {
@@ -333,18 +337,6 @@ public class HttpUtil {
 		_http = http;
 	}
 
-	private static HttpUtil _getUtil() {
-		if (_util == null) {
-			_util = (HttpUtil)PortalBeanLocatorUtil.locate(_UTIL);
-		}
-
-		return _util;
-	}
-
-	private static final String _UTIL = HttpUtil.class.getName();
-
-	private static HttpUtil _util;
-
-	private Http _http;
+	private static Http _http;
 
 }

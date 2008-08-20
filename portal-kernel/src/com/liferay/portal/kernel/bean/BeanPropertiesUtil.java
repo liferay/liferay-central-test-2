@@ -31,7 +31,11 @@ package com.liferay.portal.kernel.bean;
 public class BeanPropertiesUtil {
 
 	public static BeanProperties getBeanProperties() {
-		return _getUtil()._beanProperties;
+		if (_beanProperties == null) {
+			PortalBeanLocatorUtil.locate(BeanPropertiesUtil.class.getName());
+		}
+
+		return _beanProperties;
 	}
 
 	public static boolean getBoolean(Object bean, String param) {
@@ -98,18 +102,6 @@ public class BeanPropertiesUtil {
 		_beanProperties = beanProperties;
 	}
 
-	private static BeanPropertiesUtil _getUtil() {
-		if (_util == null) {
-			_util = (BeanPropertiesUtil)PortalBeanLocatorUtil.locate(_UTIL);
-		}
-
-		return _util;
-	}
-
-	private static final String _UTIL = BeanPropertiesUtil.class.getName();
-
-	private static BeanPropertiesUtil _util;
-
-	private BeanProperties _beanProperties;
+	private static BeanProperties _beanProperties;
 
 }

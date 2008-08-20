@@ -350,7 +350,11 @@ public class PortalUtil {
 	}
 
 	public static Portal getPortal() {
-		return _getUtil()._portal;
+		if (_portal == null) {
+			PortalBeanLocatorUtil.locate(PortalUtil.class.getName());
+		}
+
+		return _portal;
 	}
 
 	public static String getPortalLibDir() {
@@ -846,18 +850,6 @@ public class PortalUtil {
 		_portal = portal;
 	}
 
-	private static PortalUtil _getUtil() {
-		if (_util == null) {
-			_util = (PortalUtil)PortalBeanLocatorUtil.locate(_UTIL);
-		}
-
-		return _util;
-	}
-
-	private static final String _UTIL = PortalUtil.class.getName();
-
-	private static PortalUtil _util;
-
-	private Portal _portal;
+	private static Portal _portal;
 
 }

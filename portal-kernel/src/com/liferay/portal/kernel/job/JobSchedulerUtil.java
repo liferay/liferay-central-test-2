@@ -33,7 +33,11 @@ import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
 public class JobSchedulerUtil {
 
 	public static JobScheduler getJobScheduler() {
-		return _getUtil()._jobScheduler;
+		if (_jobScheduler == null) {
+			PortalBeanLocatorUtil.locate(JobSchedulerUtil.class.getName());
+		}
+
+		return _jobScheduler;
 	}
 
 	public static void schedule(IntervalJob intervalJob) {
@@ -52,18 +56,6 @@ public class JobSchedulerUtil {
 		_jobScheduler = jobScheduler;
 	}
 
-	private static JobSchedulerUtil _getUtil() {
-		if (_util == null) {
-			_util = (JobSchedulerUtil)PortalBeanLocatorUtil.locate(_UTIL);
-		}
-
-		return _util;
-	}
-
-	private static final String _UTIL = JobSchedulerUtil.class.getName();
-
-	private static JobSchedulerUtil _util;
-
-	private JobScheduler _jobScheduler;
+	private static JobScheduler _jobScheduler;
 
 }

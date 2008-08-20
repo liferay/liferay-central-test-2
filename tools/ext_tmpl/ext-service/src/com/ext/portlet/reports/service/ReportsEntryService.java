@@ -22,7 +22,6 @@ package com.ext.portlet.reports.service;
  *
  * @author Brian Wing Shun Chan
  *
- * @see com.ext.portlet.reports.service.ReportsEntryServiceFactory
  * @see com.ext.portlet.reports.service.ReportsEntryServiceUtil
  *
  */

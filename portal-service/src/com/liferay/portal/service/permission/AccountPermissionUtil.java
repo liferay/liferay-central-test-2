@@ -71,25 +71,17 @@ public class AccountPermissionUtil {
 	}
 
 	public static AccountPermission getAccountPermission() {
-		return _getUtil()._accountPermission;
+		if (_accountPermission == null) {
+			PortalBeanLocatorUtil.locate(AccountPermissionUtil.class.getName());
+		}
+
+		return _accountPermission;
 	}
 
 	public void setAccountPermission(AccountPermission accountPermission) {
 		_accountPermission = accountPermission;
 	}
 
-	private static AccountPermissionUtil _getUtil() {
-		if (_util == null) {
-			_util = (AccountPermissionUtil)PortalBeanLocatorUtil.locate(_UTIL);
-		}
-
-		return _util;
-	}
-
-	private static final String _UTIL = AccountPermissionUtil.class.getName();
-
-	private static AccountPermissionUtil _util;
-
-	private AccountPermission _accountPermission;
+	private static AccountPermission _accountPermission;
 
 }

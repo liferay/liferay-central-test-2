@@ -37,25 +37,17 @@ public class PortalUUIDUtil {
 	}
 
 	public static PortalUUID getPortalUUID() {
-		return _getUtil()._portalJNDI;
+		if (_portalJNDI == null) {
+			PortalBeanLocatorUtil.locate(PortalUUIDUtil.class.getName());
+		}
+
+		return _portalJNDI;
 	}
 
 	public void setPortalUUID(PortalUUID portalJNDI) {
 		_portalJNDI = portalJNDI;
 	}
 
-	private static PortalUUIDUtil _getUtil() {
-		if (_util == null) {
-			_util = (PortalUUIDUtil)PortalBeanLocatorUtil.locate(_UTIL);
-		}
-
-		return _util;
-	}
-
-	private static final String _UTIL = PortalUUIDUtil.class.getName();
-
-	private static PortalUUIDUtil _util;
-
-	private PortalUUID _portalJNDI;
+	private static PortalUUID _portalJNDI;
 
 }

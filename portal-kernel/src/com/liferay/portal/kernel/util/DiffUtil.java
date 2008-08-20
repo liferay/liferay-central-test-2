@@ -62,25 +62,17 @@ public class DiffUtil {
 	}
 
 	public static Diff getDiff() {
-		return _getUtil()._diff;
+		if (_diff == null) {
+			PortalBeanLocatorUtil.locate(DiffUtil.class.getName());
+		}
+
+		return _diff;
 	}
 
 	public void setDiff(Diff diff) {
 		_diff = diff;
 	}
 
-	private static DiffUtil _getUtil() {
-		if (_util == null) {
-			_util = (DiffUtil)PortalBeanLocatorUtil.locate(_UTIL);
-		}
-
-		return _util;
-	}
-
-	private static final String _UTIL = DiffUtil.class.getName();
-
-	private static DiffUtil _util;
-
-	private Diff _diff;
+	private static Diff _diff;
 
 }

@@ -47,25 +47,17 @@ public class PortalJNDIUtil {
 	}
 
 	public static PortalJNDI getPortalJNDI() {
-		return _getUtil()._portalJNDI;
+		if (_portalJNDI == null) {
+			PortalBeanLocatorUtil.locate(PortalJNDIUtil.class.getName());
+		}
+
+		return _portalJNDI;
 	}
 
 	public void setPortalJNDI(PortalJNDI portalJNDI) {
 		_portalJNDI = portalJNDI;
 	}
 
-	private static PortalJNDIUtil _getUtil() {
-		if (_util == null) {
-			_util = (PortalJNDIUtil)PortalBeanLocatorUtil.locate(_UTIL);
-		}
-
-		return _util;
-	}
-
-	private static final String _UTIL = PortalJNDIUtil.class.getName();
-
-	private static PortalJNDIUtil _util;
-
-	private PortalJNDI _portalJNDI;
+	private static PortalJNDI _portalJNDI;
 
 }

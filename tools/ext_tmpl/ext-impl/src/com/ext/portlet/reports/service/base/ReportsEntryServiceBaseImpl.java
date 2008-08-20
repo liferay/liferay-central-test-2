@@ -2,13 +2,14 @@ package com.ext.portlet.reports.service.base;
 
 import com.ext.portlet.reports.service.ReportsEntryService;
 import com.ext.portlet.reports.service.persistence.ReportsEntryPersistence;
-import com.ext.portlet.reports.service.persistence.ReportsEntryUtil;
 
+import com.liferay.portal.kernel.bean.InitializingBean;
+import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
 import com.liferay.portal.service.base.PrincipalBean;
 
 
 public abstract class ReportsEntryServiceBaseImpl extends PrincipalBean
-    implements ReportsEntryService {
+    implements ReportsEntryService, InitializingBean {
     protected ReportsEntryPersistence reportsEntryPersistence;
 
     public ReportsEntryPersistence getReportsEntryPersistence() {
@@ -20,9 +21,10 @@ public abstract class ReportsEntryServiceBaseImpl extends PrincipalBean
         this.reportsEntryPersistence = reportsEntryPersistence;
     }
 
-    protected void init() {
+    public void afterPropertiesSet() {
         if (reportsEntryPersistence == null) {
-            reportsEntryPersistence = ReportsEntryUtil.getPersistence();
+            reportsEntryPersistence = (ReportsEntryPersistence) PortalBeanLocatorUtil.locate(ReportsEntryPersistence.class.getName() +
+                    ".impl");
         }
     }
 }

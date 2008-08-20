@@ -23,7 +23,6 @@
 package com.liferay.counter.service.persistence;
 
 import com.liferay.portal.SystemException;
-import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
 
 import java.util.List;
 
@@ -68,25 +67,13 @@ public class CounterUtil {
 	}
 
 	public static CounterPersistence getPersistence() {
-		return _getUtil()._persistence;
+		return _persistence;
 	}
 
 	public void setPersistence(CounterPersistence persistence) {
 		_persistence = persistence;
 	}
 
-	private static CounterUtil _getUtil() {
-		if (_util == null) {
-			_util = (CounterUtil)PortalBeanLocatorUtil.locate(_UTIL);
-		}
-
-		return _util;
-	}
-
-	private static final String _UTIL = CounterUtil.class.getName();
-
-	private static CounterUtil _util;
-
-	private CounterPersistence _persistence;
+	private static CounterPersistence _persistence;
 
 }

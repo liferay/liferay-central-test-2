@@ -52,7 +52,12 @@ public class UserGroupPermissionUtil {
 	}
 
 	public static UserGroupPermission getUserGroupPermission() {
-		return _getUtil()._userGroupPermission;
+		if (_userGroupPermission == null) {
+			PortalBeanLocatorUtil.locate(
+				UserGroupPermissionUtil.class.getName());
+		}
+
+		return _userGroupPermission;
 	}
 
 	public void setUserGroupPermission(
@@ -61,19 +66,6 @@ public class UserGroupPermissionUtil {
 		_userGroupPermission = userGroupPermission;
 	}
 
-	private static UserGroupPermissionUtil _getUtil() {
-		if (_util == null) {
-			_util = (UserGroupPermissionUtil)PortalBeanLocatorUtil.locate(
-				_UTIL);
-		}
-
-		return _util;
-	}
-
-	private static final String _UTIL = UserGroupPermissionUtil.class.getName();
-
-	private static UserGroupPermissionUtil _util;
-
-	private UserGroupPermission _userGroupPermission;
+	private static UserGroupPermission _userGroupPermission;
 
 }

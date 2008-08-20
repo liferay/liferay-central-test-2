@@ -41,7 +41,12 @@ public class DynamicQueryFactoryUtil {
 	}
 
 	public static DynamicQueryFactory getDynamicQueryFactory() {
-		return _getUtil()._dynamicQueryFactory;
+		if (_dynamicQueryFactory == null) {
+			PortalBeanLocatorUtil.locate(
+				DynamicQueryFactoryUtil.class.getName());
+		}
+
+		return _dynamicQueryFactory;
 	}
 
 	public void setDynamicQueryFactory(
@@ -50,19 +55,6 @@ public class DynamicQueryFactoryUtil {
 		_dynamicQueryFactory = dynamicQueryFactory;
 	}
 
-	private static DynamicQueryFactoryUtil _getUtil() {
-		if (_util == null) {
-			_util = (DynamicQueryFactoryUtil)PortalBeanLocatorUtil.locate(
-				_UTIL);
-		}
-
-		return _util;
-	}
-
-	private static final String _UTIL = DynamicQueryFactoryUtil.class.getName();
-
-	private static DynamicQueryFactoryUtil _util;
-
-	private DynamicQueryFactory _dynamicQueryFactory;
+	private static DynamicQueryFactory _dynamicQueryFactory;
 
 }

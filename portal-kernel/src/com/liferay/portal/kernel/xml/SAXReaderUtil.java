@@ -114,7 +114,11 @@ public class SAXReaderUtil {
 	}
 
 	public static SAXReader getSAXReader() {
-		return _getUtil()._saxReader;
+		if (_saxReader == null) {
+			PortalBeanLocatorUtil.locate(SAXReaderUtil.class.getName());
+		}
+
+		return _saxReader;
 	}
 
 	public static Document read(File file) throws DocumentException {
@@ -194,12 +198,6 @@ public class SAXReaderUtil {
 		_saxReader = saxReader;
 	}
 
-	private static SAXReaderUtil _getUtil() {
-		return (SAXReaderUtil)PortalBeanLocatorUtil.locate(_UTIL);
-	}
-
-	private static final String _UTIL = SAXReaderUtil.class.getName();
-
-	private SAXReader _saxReader;
+	private static SAXReader _saxReader;
 
 }

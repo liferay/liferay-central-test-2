@@ -59,7 +59,11 @@ public class JSONFactoryUtil {
 	}
 
 	public static JSONFactory getJSONFactory() {
-		return _getUtil()._jsonFactory;
+		if (_jsonFactory == null) {
+			PortalBeanLocatorUtil.locate(JSONFactoryUtil.class.getName());
+		}
+
+		return _jsonFactory;
 	}
 
 	public static String serialize(Object obj) {
@@ -70,18 +74,6 @@ public class JSONFactoryUtil {
 		_jsonFactory = jsonFactory;
 	}
 
-	private static JSONFactoryUtil _getUtil() {
-		if (_util == null) {
-			_util = (JSONFactoryUtil)PortalBeanLocatorUtil.locate(_UTIL);
-		}
-
-		return _util;
-	}
-
-	private static final String _UTIL = JSONFactoryUtil.class.getName();
-
-	private static JSONFactoryUtil _util;
-
-	private JSONFactory _jsonFactory;
+	private static JSONFactory _jsonFactory;
 
 }

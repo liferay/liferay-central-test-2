@@ -42,29 +42,20 @@ public class MappingSqlQueryFactoryUtil {
 	}
 
 	public static MappingSqlQueryFactory getMappingSqlQueryFactory() {
-		return _getUtil()._sqlUpdateFactory;
+		if (_mappingSqlUpdateFactory == null) {
+			PortalBeanLocatorUtil.locate(
+				MappingSqlQueryFactoryUtil.class.getName());
+		}
+
+		return _mappingSqlUpdateFactory;
 	}
 
 	public void setMappingSqlQueryFactory(
-		MappingSqlQueryFactory sqlUpdateFactory) {
+		MappingSqlQueryFactory mappingSqlUpdateFactory) {
 
-		_sqlUpdateFactory = sqlUpdateFactory;
+		_mappingSqlUpdateFactory = mappingSqlUpdateFactory;
 	}
 
-	private static MappingSqlQueryFactoryUtil _getUtil() {
-		if (_util == null) {
-			_util = (MappingSqlQueryFactoryUtil)PortalBeanLocatorUtil.locate(
-				_UTIL);
-		}
-
-		return _util;
-	}
-
-	private static final String _UTIL =
-		MappingSqlQueryFactoryUtil.class.getName();
-
-	private static MappingSqlQueryFactoryUtil _util;
-
-	private MappingSqlQueryFactory _sqlUpdateFactory;
+	private static MappingSqlQueryFactory _mappingSqlUpdateFactory;
 
 }

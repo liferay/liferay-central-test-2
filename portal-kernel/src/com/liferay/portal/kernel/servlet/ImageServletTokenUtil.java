@@ -33,7 +33,11 @@ import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
 public class ImageServletTokenUtil {
 
 	public static ImageServletToken getImageServletToken() {
-		return _getUtil()._imageServletToken;
+		if (_imageServletToken == null) {
+			PortalBeanLocatorUtil.locate(ImageServletTokenUtil.class.getName());
+		}
+
+		return _imageServletToken;
 	}
 
 	public static String getToken(long imageId) {
@@ -48,18 +52,6 @@ public class ImageServletTokenUtil {
 		_imageServletToken = imageServletToken;
 	}
 
-	private static ImageServletTokenUtil _getUtil() {
-		if (_util == null) {
-			_util = (ImageServletTokenUtil)PortalBeanLocatorUtil.locate(_UTIL);
-		}
-
-		return _util;
-	}
-
-	private static final String _UTIL = ImageServletTokenUtil.class.getName();
-
-	private static ImageServletTokenUtil _util;
-
-	private ImageServletToken _imageServletToken;
+	private static ImageServletToken _imageServletToken;
 
 }

@@ -53,7 +53,12 @@ public class PasswordPolicyPermissionUtil {
 	}
 
 	public static PasswordPolicyPermission getPasswordPolicyPermission() {
-		return _getUtil()._passwordPolicyPermission;
+		if (_passwordPolicyPermission == null) {
+			PortalBeanLocatorUtil.locate(
+				PasswordPolicyPermissionUtil.class.getName());
+		}
+
+		return _passwordPolicyPermission;
 	}
 
 	public void setPasswordPolicyPermission(
@@ -62,20 +67,6 @@ public class PasswordPolicyPermissionUtil {
 		_passwordPolicyPermission = passwordPolicyPermission;
 	}
 
-	private static PasswordPolicyPermissionUtil _getUtil() {
-		if (_util == null) {
-			_util = (PasswordPolicyPermissionUtil)PortalBeanLocatorUtil.locate(
-				_UTIL);
-		}
-
-		return _util;
-	}
-
-	private static final String _UTIL =
-		PasswordPolicyPermissionUtil.class.getName();
-
-	private static PasswordPolicyPermissionUtil _util;
-
-	private PasswordPolicyPermission _passwordPolicyPermission;
+	private static PasswordPolicyPermission _passwordPolicyPermission;
 
 }

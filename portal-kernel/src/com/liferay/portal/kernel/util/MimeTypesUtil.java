@@ -44,25 +44,17 @@ public class MimeTypesUtil {
 	}
 
 	public static MimeTypes getMimeTypes() {
-		return _getUtil()._mimeTypes;
+		if (_mimeTypes == null) {
+			PortalBeanLocatorUtil.locate(MimeTypesUtil.class.getName());
+		}
+
+		return _mimeTypes;
 	}
 
 	public void setMimeTypes(MimeTypes mimeTypes) {
 		_mimeTypes = mimeTypes;
 	}
 
-	private static MimeTypesUtil _getUtil() {
-		if (_util == null) {
-			_util = (MimeTypesUtil)PortalBeanLocatorUtil.locate(_UTIL);
-		}
-
-		return _util;
-	}
-
-	private static final String _UTIL = MimeTypesUtil.class.getName();
-
-	private static MimeTypesUtil _util;
-
-	private MimeTypes _mimeTypes;
+	private static MimeTypes _mimeTypes;
 
 }

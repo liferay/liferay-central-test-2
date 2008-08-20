@@ -62,7 +62,11 @@ public class ImageProcessorUtil {
 	}
 
 	public static ImageProcessor getImageProcessor() {
-		return _getUtil()._imageProcessor;
+		if (_imageProcessor == null) {
+			PortalBeanLocatorUtil.locate(ImageProcessorUtil.class.getName());
+		}
+
+		return _imageProcessor;
 	}
 
 	public static ImageBag read(File file) throws IOException {
@@ -83,18 +87,6 @@ public class ImageProcessorUtil {
 		_imageProcessor = imageProcessor;
 	}
 
-	private static ImageProcessorUtil _getUtil() {
-		if (_util == null) {
-			_util = (ImageProcessorUtil)PortalBeanLocatorUtil.locate(_UTIL);
-		}
-
-		return _util;
-	}
-
-	private static final String _UTIL = ImageProcessorUtil.class.getName();
-
-	private static ImageProcessorUtil _util;
-
-	private ImageProcessor _imageProcessor;
+	private static ImageProcessor _imageProcessor;
 
 }

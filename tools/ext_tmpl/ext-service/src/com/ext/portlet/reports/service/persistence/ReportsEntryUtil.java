@@ -1,9 +1,7 @@
 package com.ext.portlet.reports.service.persistence;
 
 public class ReportsEntryUtil {
-    private static final String _UTIL = ReportsEntryUtil.class.getName();
-    private static ReportsEntryUtil _util;
-    private ReportsEntryPersistence _persistence;
+    private static ReportsEntryPersistence _persistence;
 
     public static com.ext.portlet.reports.model.ReportsEntry create(
         java.lang.String entryId) {
@@ -154,13 +152,13 @@ public class ReportsEntryUtil {
         return getPersistence().findByUserId_PrevAndNext(entryId, userId, obc);
     }
 
-    public static java.util.List<com.ext.portlet.reports.model.ReportsEntry> findWithDynamicQuery(
+    public static java.util.List<Object> findWithDynamicQuery(
         com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery)
         throws com.liferay.portal.SystemException {
         return getPersistence().findWithDynamicQuery(dynamicQuery);
     }
 
-    public static java.util.List<com.ext.portlet.reports.model.ReportsEntry> findWithDynamicQuery(
+    public static java.util.List<Object> findWithDynamicQuery(
         com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery, int start,
         int end) throws com.liferay.portal.SystemException {
         return getPersistence().findWithDynamicQuery(dynamicQuery, start, end);
@@ -221,18 +219,10 @@ public class ReportsEntryUtil {
     }
 
     public static ReportsEntryPersistence getPersistence() {
-        return _getUtil()._persistence;
+        return _persistence;
     }
 
     public void setPersistence(ReportsEntryPersistence persistence) {
         _persistence = persistence;
-    }
-
-    private static ReportsEntryUtil _getUtil() {
-        if (_util == null) {
-            _util = (ReportsEntryUtil) com.liferay.portal.kernel.bean.PortalBeanLocatorUtil.locate(_UTIL);
-        }
-
-        return _util;
     }
 }

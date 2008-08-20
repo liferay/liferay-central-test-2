@@ -47,7 +47,11 @@ public class HtmlUtil {
 	}
 
 	public static Html getHtml() {
-		return _getUtil()._html;
+		if (_html == null) {
+			PortalBeanLocatorUtil.locate(HtmlUtil.class.getName());
+		}
+
+		return _html;
 	}
 
 	public static String replaceMsWordCharacters(String html) {
@@ -78,18 +82,6 @@ public class HtmlUtil {
 		_html = html;
 	}
 
-	private static HtmlUtil _getUtil() {
-		if (_util == null) {
-			_util = (HtmlUtil)PortalBeanLocatorUtil.locate(_UTIL);
-		}
-
-		return _util;
-	}
-
-	private static final String _UTIL = HtmlUtil.class.getName();
-
-	private static HtmlUtil _util;
-
-	private Html _html;
+	private static Html _html;
 
 }

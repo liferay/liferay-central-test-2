@@ -85,25 +85,17 @@ public class LayoutPermissionUtil {
 	}
 
 	public static LayoutPermission getLayoutPermission() {
-		return _getUtil()._layoutPermission;
+		if (_layoutPermission == null) {
+			PortalBeanLocatorUtil.locate(LayoutPermissionUtil.class.getName());
+		}
+
+		return _layoutPermission;
 	}
 
 	public void setLayoutPermission(LayoutPermission layoutPermission) {
 		_layoutPermission = layoutPermission;
 	}
 
-	private static LayoutPermissionUtil _getUtil() {
-		if (_util == null) {
-			_util = (LayoutPermissionUtil)PortalBeanLocatorUtil.locate(_UTIL);
-		}
-
-		return _util;
-	}
-
-	private static final String _UTIL = LayoutPermissionUtil.class.getName();
-
-	private static LayoutPermissionUtil _util;
-
-	private LayoutPermission _layoutPermission;
+	private static LayoutPermission _layoutPermission;
 
 }

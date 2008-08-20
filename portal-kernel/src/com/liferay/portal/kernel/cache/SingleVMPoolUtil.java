@@ -56,7 +56,11 @@ public class SingleVMPoolUtil {
 	}
 
 	public static SingleVMPool getSingleVMPool() {
-		return _getUtil()._singleVMPool;
+		if (_singleVMPool == null) {
+			PortalBeanLocatorUtil.locate(SingleVMPoolUtil.class.getName());
+		}
+
+		return _singleVMPool;
 	}
 
 	public static void put(String name, String key, Object obj) {
@@ -101,18 +105,6 @@ public class SingleVMPoolUtil {
 		_singleVMPool = singleVMPool;
 	}
 
-	private static SingleVMPoolUtil _getUtil() {
-		if (_util == null) {
-			_util = (SingleVMPoolUtil)PortalBeanLocatorUtil.locate(_UTIL);
-		}
-
-		return _util;
-	}
-
-	private static final String _UTIL = SingleVMPoolUtil.class.getName();
-
-	private static SingleVMPoolUtil _util;
-
-	private SingleVMPool _singleVMPool;
+	private static SingleVMPool _singleVMPool;
 
 }

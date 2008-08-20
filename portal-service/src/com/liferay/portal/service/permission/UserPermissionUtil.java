@@ -91,25 +91,17 @@ public class UserPermissionUtil {
 	}
 
 	public static UserPermission getUserPermission() {
-		return _getUtil()._userPermission;
+		if (_userPermission == null) {
+			PortalBeanLocatorUtil.locate(UserPermissionUtil.class.getName());
+		}
+
+		return _userPermission;
 	}
 
 	public void setUserPermission(UserPermission userPermission) {
 		_userPermission = userPermission;
 	}
 
-	private static UserPermissionUtil _getUtil() {
-		if (_util == null) {
-			_util = (UserPermissionUtil)PortalBeanLocatorUtil.locate(_UTIL);
-		}
-
-		return _util;
-	}
-
-	private static final String _UTIL = UserPermissionUtil.class.getName();
-
-	private static UserPermissionUtil _util;
-
-	private UserPermission _userPermission;
+	private static UserPermission _userPermission;
 
 }

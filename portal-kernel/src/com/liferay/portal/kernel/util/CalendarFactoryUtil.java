@@ -71,25 +71,17 @@ public class CalendarFactoryUtil {
 	}
 
 	public static CalendarFactory getCalendarFactory() {
-		return _getUtil()._calendarFactory;
+		if (_calendarFactory == null) {
+			PortalBeanLocatorUtil.locate(CalendarFactoryUtil.class.getName());
+		}
+
+		return _calendarFactory;
 	}
 
 	public void setCalendarFactory(CalendarFactory calendarFactory) {
 		_calendarFactory = calendarFactory;
 	}
 
-	private static CalendarFactoryUtil _getUtil() {
-		if (_util == null) {
-			_util = (CalendarFactoryUtil)PortalBeanLocatorUtil.locate(_UTIL);
-		}
-
-		return _util;
-	}
-
-	private static final String _UTIL = CalendarFactoryUtil.class.getName();
-
-	private static CalendarFactoryUtil _util;
-
-	private CalendarFactory _calendarFactory;
+	private static CalendarFactory _calendarFactory;
 
 }

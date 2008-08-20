@@ -41,25 +41,17 @@ public class DigesterUtil {
 	}
 
 	public static Digester getDigester() {
-		return _getUtil()._digester;
+		if (_digester == null) {
+			PortalBeanLocatorUtil.locate(DigesterUtil.class.getName());
+		}
+
+		return _digester;
 	}
 
 	public void setDigester(Digester digester) {
 		_digester = digester;
 	}
 
-	private static DigesterUtil _getUtil() {
-		if (_util == null) {
-			_util = (DigesterUtil)PortalBeanLocatorUtil.locate(_UTIL);
-		}
-
-		return _util;
-	}
-
-	private static final String _UTIL = DigesterUtil.class.getName();
-
-	private static DigesterUtil _util;
-
-	private Digester _digester;
+	private static Digester _digester;
 
 }

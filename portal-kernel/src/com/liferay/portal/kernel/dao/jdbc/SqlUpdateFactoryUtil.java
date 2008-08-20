@@ -41,25 +41,17 @@ public class SqlUpdateFactoryUtil {
 	}
 
 	public static SqlUpdateFactory getSqlUpdateFactory() {
-		return _getUtil()._sqlUpdateFactory;
+		if (_sqlUpdateFactory == null) {
+			PortalBeanLocatorUtil.locate(SqlUpdateFactoryUtil.class.getName());
+		}
+
+		return _sqlUpdateFactory;
 	}
 
 	public void setSqlUpdateFactory(SqlUpdateFactory sqlUpdateFactory) {
 		_sqlUpdateFactory = sqlUpdateFactory;
 	}
 
-	private static SqlUpdateFactoryUtil _getUtil() {
-		if (_util == null) {
-			_util = (SqlUpdateFactoryUtil)PortalBeanLocatorUtil.locate(_UTIL);
-		}
-
-		return _util;
-	}
-
-	private static final String _UTIL = SqlUpdateFactoryUtil.class.getName();
-
-	private static SqlUpdateFactoryUtil _util;
-
-	private SqlUpdateFactory _sqlUpdateFactory;
+	private static SqlUpdateFactory _sqlUpdateFactory;
 
 }

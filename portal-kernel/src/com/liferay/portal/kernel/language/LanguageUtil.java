@@ -157,7 +157,11 @@ public class LanguageUtil {
 	}
 
 	public static Language getLanguage() {
-		return _getUtil()._language;
+		if (_language == null) {
+			PortalBeanLocatorUtil.locate(LanguageUtil.class.getName());
+		}
+
+		return _language;
 	}
 
 	public static String getLanguageId(PortletRequest portletRequest) {
@@ -198,18 +202,6 @@ public class LanguageUtil {
 		_language = language;
 	}
 
-	private static LanguageUtil _getUtil() {
-		if (_util == null) {
-			_util = (LanguageUtil)PortalBeanLocatorUtil.locate(_UTIL);
-		}
-
-		return _util;
-	}
-
-	private static final String _UTIL = LanguageUtil.class.getName();
-
-	private static LanguageUtil _util;
-
-	private Language _language;
+	private static Language _language;
 
 }

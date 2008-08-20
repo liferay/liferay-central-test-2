@@ -48,25 +48,17 @@ public class PortalPermissionUtil {
 	}
 
 	public static PortalPermission getPortalPermission() {
-		return _getUtil()._portalPermission;
+		if (_portalPermission == null) {
+			PortalBeanLocatorUtil.locate(PortalPermissionUtil.class.getName());
+		}
+
+		return _portalPermission;
 	}
 
 	public void setPortalPermission(PortalPermission portalPermission) {
 		_portalPermission = portalPermission;
 	}
 
-	private static PortalPermissionUtil _getUtil() {
-		if (_util == null) {
-			_util = (PortalPermissionUtil)PortalBeanLocatorUtil.locate(_UTIL);
-		}
-
-		return _util;
-	}
-
-	private static final String _UTIL = PortalPermissionUtil.class.getName();
-
-	private static PortalPermissionUtil _util;
-
-	private PortalPermission _portalPermission;
+	private static PortalPermission _portalPermission;
 
 }

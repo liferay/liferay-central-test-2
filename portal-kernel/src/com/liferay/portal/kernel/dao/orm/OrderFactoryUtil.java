@@ -41,25 +41,17 @@ public class OrderFactoryUtil {
 	}
 
 	public static OrderFactory getOrderFactory() {
-		return _getUtil()._orderFactory;
+		if (_orderFactory == null) {
+			PortalBeanLocatorUtil.locate(OrderFactoryUtil.class.getName());
+		}
+
+		return _orderFactory;
 	}
 
 	public void setOrderFactory(OrderFactory orderFactory) {
 		_orderFactory = orderFactory;
 	}
 
-	private static OrderFactoryUtil _getUtil() {
-		if (_util == null) {
-			_util = (OrderFactoryUtil)PortalBeanLocatorUtil.locate(_UTIL);
-		}
-
-		return _util;
-	}
-
-	private static final String _UTIL = OrderFactoryUtil.class.getName();
-
-	private static OrderFactoryUtil _util;
-
-	private OrderFactory _orderFactory;
+	private static OrderFactory _orderFactory;
 
 }

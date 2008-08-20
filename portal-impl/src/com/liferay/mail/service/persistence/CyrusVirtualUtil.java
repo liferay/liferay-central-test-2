@@ -25,7 +25,6 @@ package com.liferay.mail.service.persistence;
 import com.liferay.mail.NoSuchCyrusVirtualException;
 import com.liferay.mail.model.CyrusVirtual;
 import com.liferay.portal.SystemException;
-import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
 
 import java.util.List;
 
@@ -64,25 +63,13 @@ public class CyrusVirtualUtil {
 	}
 
 	public static CyrusVirtualPersistence getPersistence() {
-		return _getUtil()._persistence;
+		return _persistence;
 	}
 
 	public void setPersistence(CyrusVirtualPersistence persistence) {
 		_persistence = persistence;
 	}
 
-	private static CyrusVirtualUtil _getUtil() {
-		if (_util == null) {
-			_util = (CyrusVirtualUtil)PortalBeanLocatorUtil.locate(_UTIL);
-		}
-
-		return _util;
-	}
-
-	private static final String _UTIL = CyrusVirtualUtil.class.getName();
-
-	private static CyrusVirtualUtil _util;
-
-	private CyrusVirtualPersistence _persistence;
+	private static CyrusVirtualPersistence _persistence;
 
 }

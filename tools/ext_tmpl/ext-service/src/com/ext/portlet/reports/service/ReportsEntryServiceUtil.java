@@ -17,16 +17,19 @@ package com.ext.portlet.reports.service;
  * on a bean instead of writing a lookup call and a method call.
  * </p>
  *
- * <p>
- * <code>com.ext.portlet.reports.service.ReportsEntryServiceFactory</code>
- * is responsible for the lookup of the bean.
- * </p>
- *
  * @author Brian Wing Shun Chan
  *
  * @see com.ext.portlet.reports.service.ReportsEntryService
- * @see com.ext.portlet.reports.service.ReportsEntryServiceFactory
  *
  */
 public class ReportsEntryServiceUtil {
+    private static ReportsEntryService _service;
+
+    public static ReportsEntryService getService() {
+        return _service;
+    }
+
+    public void setService(ReportsEntryService service) {
+        _service = service;
+    }
 }

@@ -41,7 +41,11 @@ public class WebCachePoolUtil {
 	}
 
 	public static WebCachePool getWebCachePool() {
-		return _getUtil()._webCachePool;
+		if (_webCachePool == null) {
+			PortalBeanLocatorUtil.locate(WebCachePoolUtil.class.getName());
+		}
+
+		return _webCachePool;
 	}
 
 	public static void remove(String key) {
@@ -52,18 +56,6 @@ public class WebCachePoolUtil {
 		_webCachePool = webCachePool;
 	}
 
-	private static WebCachePoolUtil _getUtil() {
-		if (_util == null) {
-			_util = (WebCachePoolUtil)PortalBeanLocatorUtil.locate(_UTIL);
-		}
-
-		return _util;
-	}
-
-	private static final String _UTIL = WebCachePoolUtil.class.getName();
-
-	private static WebCachePoolUtil _util;
-
-	private WebCachePool _webCachePool;
+	private static WebCachePool _webCachePool;
 
 }

@@ -54,7 +54,12 @@ public class OrganizationPermissionUtil {
 	}
 
 	public static OrganizationPermission getOrganizationPermission() {
-		return _getUtil()._organizationPermission;
+		if (_organizationPermission == null) {
+			PortalBeanLocatorUtil.locate(
+				OrganizationPermissionUtil.class.getName());
+		}
+
+		return _organizationPermission;
 	}
 
 	public void setOrganizationPermission(
@@ -63,20 +68,6 @@ public class OrganizationPermissionUtil {
 		_organizationPermission = organizationPermission;
 	}
 
-	private static OrganizationPermissionUtil _getUtil() {
-		if (_util == null) {
-			_util = (OrganizationPermissionUtil)PortalBeanLocatorUtil.locate(
-				_UTIL);
-		}
-
-		return _util;
-	}
-
-	private static final String _UTIL =
-		OrganizationPermissionUtil.class.getName();
-
-	private static OrganizationPermissionUtil _util;
-
-	private OrganizationPermission _organizationPermission;
+	private static OrganizationPermission _organizationPermission;
 
 }

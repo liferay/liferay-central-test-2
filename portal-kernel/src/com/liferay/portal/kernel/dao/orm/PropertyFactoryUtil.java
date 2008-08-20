@@ -37,25 +37,17 @@ public class PropertyFactoryUtil {
 	}
 
 	public static PropertyFactory getPropertyFactory() {
-		return _getUtil()._projectionFactory;
+		if (_projectionFactory == null) {
+			PortalBeanLocatorUtil.locate(PropertyFactoryUtil.class.getName());
+		}
+
+		return _projectionFactory;
 	}
 
 	public void setPropertyFactory(PropertyFactory projectionFactory) {
 		_projectionFactory = projectionFactory;
 	}
 
-	private static PropertyFactoryUtil _getUtil() {
-		if (_util == null) {
-			_util = (PropertyFactoryUtil)PortalBeanLocatorUtil.locate(_UTIL);
-		}
-
-		return _util;
-	}
-
-	private static final String _UTIL = PropertyFactoryUtil.class.getName();
-
-	private static PropertyFactoryUtil _util;
-
-	private PropertyFactory _projectionFactory;
+	private static PropertyFactory _projectionFactory;
 
 }
