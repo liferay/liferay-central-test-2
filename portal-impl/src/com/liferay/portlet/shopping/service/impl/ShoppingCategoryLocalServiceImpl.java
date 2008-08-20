@@ -416,7 +416,7 @@ public class ShoppingCategoryLocalServiceImpl
 			shoppingItemPersistence.update(item, false);
 		}
 
-		shoppingCategoryPersistence.remove(fromCategory.getCategoryId());
+		deleteCategory(fromCategory);
 	}
 
 	protected void validate(String name) throws PortalException {

@@ -497,7 +497,7 @@ public class IGFolderLocalServiceImpl extends IGFolderLocalServiceBaseImpl {
 			igImagePersistence.update(image, false);
 		}
 
-		igFolderPersistence.remove(fromFolder.getFolderId());
+		deleteFolder(fromFolder);
 	}
 
 	protected void validate(long groupId, long parentFolderId, String name)

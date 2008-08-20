@@ -473,7 +473,7 @@ public class BookmarksFolderLocalServiceImpl
 			bookmarksEntryPersistence.update(entry, false);
 		}
 
-		bookmarksFolderPersistence.remove(fromFolder.getFolderId());
+		deleteFolder(fromFolder);
 	}
 
 	protected void validate(String name) throws PortalException {
