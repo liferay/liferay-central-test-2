@@ -33,6 +33,12 @@ import com.liferay.portal.struts.PortletAction;
 import com.liferay.portal.util.PropsValues;
 import com.liferay.portal.util.WebKeys;
 import com.liferay.portlet.messageboards.CategoryNameException;
+import com.liferay.portlet.messageboards.MailingListEmailAddressException;
+import com.liferay.portlet.messageboards.MailingListInServerNameException;
+import com.liferay.portlet.messageboards.MailingListInUserNameException;
+import com.liferay.portlet.messageboards.MailingListOutEmailAddressException;
+import com.liferay.portlet.messageboards.MailingListOutServerNameException;
+import com.liferay.portlet.messageboards.MailingListOutUserNameException;
 import com.liferay.portlet.messageboards.NoSuchCategoryException;
 import com.liferay.portlet.messageboards.service.MBCategoryServiceUtil;
 
@@ -86,7 +92,13 @@ public class EditCategoryAction extends PortletAction {
 				setForward(actionRequest, "portlet.message_boards.error");
 			}
 			else if (e instanceof CaptchaTextException ||
-					 e instanceof CategoryNameException) {
+					 e instanceof CategoryNameException ||
+					 e instanceof MailingListEmailAddressException ||
+					 e instanceof MailingListInServerNameException ||
+					 e instanceof MailingListInUserNameException ||
+					 e instanceof MailingListOutEmailAddressException ||
+					 e instanceof MailingListOutServerNameException ||
+					 e instanceof MailingListOutUserNameException) {
 
 				SessionErrors.add(actionRequest, e.getClass().getName());
 			}
