@@ -37,6 +37,11 @@ Liferay.Portlet.TagsAdmin = new Class({
 			toolbar.find('.add-entry-btn').val(label);
 		};
 
+		var changeToLabel = function(label) {
+			label = Liferay.Language.get(label);
+			toolbar.find('.vocabulary-parent-label').html(label);
+		};
+
 		var changeVocaularyAddLabel = function(label) {
 			label = Liferay.Language.get(label);
 			toolbar.find('.add-vocabulary-btn').val(label);
@@ -71,6 +76,7 @@ Liferay.Portlet.TagsAdmin = new Class({
 			function() {
 				instance._selectedVocabulary = 'tag';
 				changeAddLabel('add-tag');
+				changeToLabel('to-tag-set');
 				changeSearchSelectLabels('tag-sets');
 				changeToolbarSectionLabels('add-tag-set');
 				changeVocaularyAddLabel('add-tag-set');
@@ -86,6 +92,7 @@ Liferay.Portlet.TagsAdmin = new Class({
 			function() {
 				instance._selectedVocabulary = 'category';
 				changeAddLabel('add-category');
+				changeToLabel('to-vocabulary');
 				changeSearchSelectLabels('categories');
 				changeToolbarSectionLabels('add-vocabulary');
 				changeVocaularyAddLabel('add-vocabulary');

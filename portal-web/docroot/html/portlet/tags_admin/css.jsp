@@ -280,7 +280,7 @@
 }
 
 .portlet-tags-admin .treeview li, .portlet-tags-admin .treeview li.lastCollapsable, .treeview li.lastExpandable {
-	background-image: none;
+	background-image: none !important;
 }
 
 .portlet-tags-admin .treeview .placeholder {
