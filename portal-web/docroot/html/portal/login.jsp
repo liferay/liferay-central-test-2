@@ -48,8 +48,8 @@ PortletURL createAccountURL = themeDisplay.getURLCreateAccount();
 
 <c:if test="<%= SessionErrors.contains(request, PrincipalException.class.getName()) %>">
 	<span class="portlet-msg-error">
-	<liferay-ui:message key="you-have-attempted-to-access-a-section-of-the-site-that-requires-authentication" />
-	<liferay-ui:message key="please-sign-in-to-continue" />
+		<liferay-ui:message key="you-have-attempted-to-access-a-section-of-the-site-that-requires-authentication" />
+		<liferay-ui:message key="please-sign-in-to-continue" />
 	</span>
 </c:if>
 

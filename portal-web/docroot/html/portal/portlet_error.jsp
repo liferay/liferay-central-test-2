@@ -37,5 +37,5 @@ if (portletTitle == null) {
 %>
 
 <span class="portlet-msg-error">
-<%= LanguageUtil.format(pageContext, "is-temporarily-unavailable", portletTitle, false) %>
+	<%= LanguageUtil.format(pageContext, "is-temporarily-unavailable", portletTitle, false) %>
 </span>

@@ -35,7 +35,7 @@ PasswordPolicy passwordPolicy = user.getPasswordPolicy();
 <input name="passwordReset" type="hidden" value="false" />
 
 <span class="portlet-msg-error">
-<liferay-ui:message key="please-change-your-password" />
+	<liferay-ui:message key="please-change-your-password" />
 </span>
 
 <c:if test="<%= SessionErrors.contains(request, UserPasswordException.class.getName()) %>">
@@ -45,39 +45,37 @@ PasswordPolicy passwordPolicy = user.getPasswordPolicy();
 	%>
 
 	<span class="portlet-msg-error">
+		<c:if test="<%= upe.getType() == UserPasswordException.PASSWORD_ALREADY_USED %>">
+			<liferay-ui:message key="that-password-has-already-been-used-please-enter-in-a-different-password" />
+		</c:if>
 
-	<c:if test="<%= upe.getType() == UserPasswordException.PASSWORD_ALREADY_USED %>">
-		<liferay-ui:message key="that-password-has-already-been-used-please-enter-in-a-different-password" />
-	</c:if>
+		<c:if test="<%= upe.getType() == UserPasswordException.PASSWORD_CONTAINS_TRIVIAL_WORDS %>">
+			<liferay-ui:message key="that-password-uses-common-words-please-enter-in-a-password-that-is-harder-to-guess-i-e-contains-a-mix-of-numbers-and-letters" />
+		</c:if>
 
-	<c:if test="<%= upe.getType() == UserPasswordException.PASSWORD_CONTAINS_TRIVIAL_WORDS %>">
-		<liferay-ui:message key="that-password-uses-common-words-please-enter-in-a-password-that-is-harder-to-guess-i-e-contains-a-mix-of-numbers-and-letters" />
-	</c:if>
+		<c:if test="<%= upe.getType() == UserPasswordException.PASSWORD_INVALID %>">
+			<liferay-ui:message key="that-password-is-invalid-please-enter-in-a-different-password" />
+		</c:if>
 
-	<c:if test="<%= upe.getType() == UserPasswordException.PASSWORD_INVALID %>">
-		<liferay-ui:message key="that-password-is-invalid-please-enter-in-a-different-password" />
-	</c:if>
+		<c:if test="<%= upe.getType() == UserPasswordException.PASSWORD_LENGTH %>">
+			<%= LanguageUtil.format(pageContext, "that-password-is-too-short-or-too-long-please-make-sure-your-password-is-between-x-and-512-characters", String.valueOf(passwordPolicy.getMinLength()), false) %>
+		</c:if>
 
-	<c:if test="<%= upe.getType() == UserPasswordException.PASSWORD_LENGTH %>">
-		<%= LanguageUtil.format(pageContext, "that-password-is-too-short-or-too-long-please-make-sure-your-password-is-between-x-and-512-characters", String.valueOf(passwordPolicy.getMinLength()), false) %>
-	</c:if>
+		<c:if test="<%= upe.getType() == UserPasswordException.PASSWORD_NOT_CHANGEABLE %>">
+			<liferay-ui:message key="your-password-cannot-be-changed" />
+		</c:if>
 
-	<c:if test="<%= upe.getType() == UserPasswordException.PASSWORD_NOT_CHANGEABLE %>">
-		<liferay-ui:message key="your-password-cannot-be-changed" />
-	</c:if>
+		<c:if test="<%= upe.getType() == UserPasswordException.PASSWORD_SAME_AS_CURRENT %>">
+			<liferay-ui:message key="your-new-password-cannot-be-the-same-as-your-old-password-please-enter-in-a-different-password" />
+		</c:if>
 
-	<c:if test="<%= upe.getType() == UserPasswordException.PASSWORD_SAME_AS_CURRENT %>">
-		<liferay-ui:message key="your-new-password-cannot-be-the-same-as-your-old-password-please-enter-in-a-different-password" />
-	</c:if>
+		<c:if test="<%= upe.getType() == UserPasswordException.PASSWORD_TOO_YOUNG %>">
+			<%= LanguageUtil.format(pageContext, "you-cannot-change-your-password-yet-please-wait-at-least-x-before-changing-your-password-again", LanguageUtil.getTimeDescription(pageContext, passwordPolicy.getMinAge() * 1000), false) %>
+		</c:if>
 
-	<c:if test="<%= upe.getType() == UserPasswordException.PASSWORD_TOO_YOUNG %>">
-		<%= LanguageUtil.format(pageContext, "you-cannot-change-your-password-yet-please-wait-at-least-x-before-changing-your-password-again", LanguageUtil.getTimeDescription(pageContext, passwordPolicy.getMinAge() * 1000), false) %>
-	</c:if>
-
-	<c:if test="<%= upe.getType() == UserPasswordException.PASSWORDS_DO_NOT_MATCH %>">
-		<liferay-ui:message key="the-passwords-you-entered-do-not-match-each-other-please-re-enter-your-password" />
-	</c:if>
-
+		<c:if test="<%= upe.getType() == UserPasswordException.PASSWORDS_DO_NOT_MATCH %>">
+			<liferay-ui:message key="the-passwords-you-entered-do-not-match-each-other-please-re-enter-your-password" />
+		</c:if>
 	</span>
 </c:if>
 
