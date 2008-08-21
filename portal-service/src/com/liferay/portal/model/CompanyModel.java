@@ -38,9 +38,9 @@ package com.liferay.portal.model;
  *
  * @author Brian Wing Shun Chan
  *
- * @see com.liferay.portal.service.model.Company
- * @see com.liferay.portal.service.model.impl.CompanyImpl
- * @see com.liferay.portal.service.model.impl.CompanyModelImpl
+ * @see com.liferay.portal.model.Company
+ * @see com.liferay.portal.model.impl.CompanyImpl
+ * @see com.liferay.portal.model.impl.CompanyModelImpl
  *
  */
 public interface CompanyModel extends BaseModel {

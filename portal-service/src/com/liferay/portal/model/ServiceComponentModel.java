@@ -38,9 +38,9 @@ package com.liferay.portal.model;
  *
  * @author Brian Wing Shun Chan
  *
- * @see com.liferay.portal.service.model.ServiceComponent
- * @see com.liferay.portal.service.model.impl.ServiceComponentImpl
- * @see com.liferay.portal.service.model.impl.ServiceComponentModelImpl
+ * @see com.liferay.portal.model.ServiceComponent
+ * @see com.liferay.portal.model.impl.ServiceComponentImpl
+ * @see com.liferay.portal.model.impl.ServiceComponentModelImpl
  *
  */
 public interface ServiceComponentModel extends BaseModel {

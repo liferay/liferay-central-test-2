@@ -41,9 +41,9 @@ import java.util.Date;
  *
  * @author Brian Wing Shun Chan
  *
- * @see com.liferay.portlet.wiki.service.model.WikiNode
- * @see com.liferay.portlet.wiki.service.model.impl.WikiNodeImpl
- * @see com.liferay.portlet.wiki.service.model.impl.WikiNodeModelImpl
+ * @see com.liferay.portlet.wiki.model.WikiNode
+ * @see com.liferay.portlet.wiki.model.impl.WikiNodeImpl
+ * @see com.liferay.portlet.wiki.model.impl.WikiNodeModelImpl
  *
  */
 public interface WikiNodeModel extends BaseModel {

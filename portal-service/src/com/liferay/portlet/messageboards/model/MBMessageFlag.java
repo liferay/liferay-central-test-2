@@ -37,15 +37,15 @@ package com.liferay.portlet.messageboards.model;
  * </p>
  *
  * <p>
- * Customize <code>com.liferay.portlet.messageboards.service.model.impl.MBMessageFlagImpl</code>
+ * Customize <code>com.liferay.portlet.messageboards.model.impl.MBMessageFlagImpl</code>
  * and rerun the ServiceBuilder to generate the new methods.
  * </p>
  *
  * @author Brian Wing Shun Chan
  *
- * @see com.liferay.portlet.messageboards.service.model.MBMessageFlagModel
- * @see com.liferay.portlet.messageboards.service.model.impl.MBMessageFlagImpl
- * @see com.liferay.portlet.messageboards.service.model.impl.MBMessageFlagModelImpl
+ * @see com.liferay.portlet.messageboards.model.MBMessageFlagModel
+ * @see com.liferay.portlet.messageboards.model.impl.MBMessageFlagImpl
+ * @see com.liferay.portlet.messageboards.model.impl.MBMessageFlagModelImpl
  *
  */
 public interface MBMessageFlag extends MBMessageFlagModel {

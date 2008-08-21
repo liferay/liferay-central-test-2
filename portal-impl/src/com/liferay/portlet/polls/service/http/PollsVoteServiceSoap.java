@@ -75,9 +75,9 @@ import java.rmi.RemoteException;
  *
  * @author Brian Wing Shun Chan
  *
+ * @see com.liferay.portlet.polls.model.PollsVoteSoap
  * @see com.liferay.portlet.polls.service.PollsVoteServiceUtil
  * @see com.liferay.portlet.polls.service.http.PollsVoteServiceHttp
- * @see com.liferay.portlet.polls.service.model.PollsVoteSoap
  *
  */
 public class PollsVoteServiceSoap {

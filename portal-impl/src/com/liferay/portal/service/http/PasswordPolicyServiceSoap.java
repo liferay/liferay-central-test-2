@@ -74,9 +74,9 @@ import java.rmi.RemoteException;
  *
  * @author Brian Wing Shun Chan
  *
+ * @see com.liferay.portal.model.PasswordPolicySoap
  * @see com.liferay.portal.service.PasswordPolicyServiceUtil
  * @see com.liferay.portal.service.http.PasswordPolicyServiceHttp
- * @see com.liferay.portal.service.model.PasswordPolicySoap
  *
  */
 public class PasswordPolicyServiceSoap {

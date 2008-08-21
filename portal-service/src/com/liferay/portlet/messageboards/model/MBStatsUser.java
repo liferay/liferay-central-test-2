@@ -37,15 +37,15 @@ package com.liferay.portlet.messageboards.model;
  * </p>
  *
  * <p>
- * Customize <code>com.liferay.portlet.messageboards.service.model.impl.MBStatsUserImpl</code>
+ * Customize <code>com.liferay.portlet.messageboards.model.impl.MBStatsUserImpl</code>
  * and rerun the ServiceBuilder to generate the new methods.
  * </p>
  *
  * @author Brian Wing Shun Chan
  *
- * @see com.liferay.portlet.messageboards.service.model.MBStatsUserModel
- * @see com.liferay.portlet.messageboards.service.model.impl.MBStatsUserImpl
- * @see com.liferay.portlet.messageboards.service.model.impl.MBStatsUserModelImpl
+ * @see com.liferay.portlet.messageboards.model.MBStatsUserModel
+ * @see com.liferay.portlet.messageboards.model.impl.MBStatsUserImpl
+ * @see com.liferay.portlet.messageboards.model.impl.MBStatsUserModelImpl
  *
  */
 public interface MBStatsUser extends MBStatsUserModel {

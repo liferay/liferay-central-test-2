@@ -41,9 +41,9 @@ import java.util.Date;
  *
  * @author Brian Wing Shun Chan
  *
- * @see com.liferay.portlet.documentlibrary.service.model.DLFileVersion
- * @see com.liferay.portlet.documentlibrary.service.model.impl.DLFileVersionImpl
- * @see com.liferay.portlet.documentlibrary.service.model.impl.DLFileVersionModelImpl
+ * @see com.liferay.portlet.documentlibrary.model.DLFileVersion
+ * @see com.liferay.portlet.documentlibrary.model.impl.DLFileVersionImpl
+ * @see com.liferay.portlet.documentlibrary.model.impl.DLFileVersionModelImpl
  *
  */
 public interface DLFileVersionModel extends BaseModel {

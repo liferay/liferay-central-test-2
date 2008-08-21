@@ -41,9 +41,9 @@ import java.util.Date;
  *
  * @author Brian Wing Shun Chan
  *
- * @see com.liferay.portlet.shopping.service.model.ShoppingOrder
- * @see com.liferay.portlet.shopping.service.model.impl.ShoppingOrderImpl
- * @see com.liferay.portlet.shopping.service.model.impl.ShoppingOrderModelImpl
+ * @see com.liferay.portlet.shopping.model.ShoppingOrder
+ * @see com.liferay.portlet.shopping.model.impl.ShoppingOrderImpl
+ * @see com.liferay.portlet.shopping.model.impl.ShoppingOrderModelImpl
  *
  */
 public interface ShoppingOrderModel extends BaseModel {

@@ -39,9 +39,9 @@ import java.util.Date;
  *
  * @author Brian Wing Shun Chan
  *
- * @see com.liferay.portal.service.model.PortletItem
- * @see com.liferay.portal.service.model.impl.PortletItemImpl
- * @see com.liferay.portal.service.model.impl.PortletItemModelImpl
+ * @see com.liferay.portal.model.PortletItem
+ * @see com.liferay.portal.model.impl.PortletItemImpl
+ * @see com.liferay.portal.model.impl.PortletItemModelImpl
  *
  */
 public interface PortletItemModel extends BaseModel {

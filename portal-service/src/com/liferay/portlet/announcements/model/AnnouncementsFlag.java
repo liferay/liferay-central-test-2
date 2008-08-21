@@ -37,15 +37,15 @@ package com.liferay.portlet.announcements.model;
  * </p>
  *
  * <p>
- * Customize <code>com.liferay.portlet.announcements.service.model.impl.AnnouncementsFlagImpl</code>
+ * Customize <code>com.liferay.portlet.announcements.model.impl.AnnouncementsFlagImpl</code>
  * and rerun the ServiceBuilder to generate the new methods.
  * </p>
  *
  * @author Brian Wing Shun Chan
  *
- * @see com.liferay.portlet.announcements.service.model.AnnouncementsFlagModel
- * @see com.liferay.portlet.announcements.service.model.impl.AnnouncementsFlagImpl
- * @see com.liferay.portlet.announcements.service.model.impl.AnnouncementsFlagModelImpl
+ * @see com.liferay.portlet.announcements.model.AnnouncementsFlagModel
+ * @see com.liferay.portlet.announcements.model.impl.AnnouncementsFlagImpl
+ * @see com.liferay.portlet.announcements.model.impl.AnnouncementsFlagModelImpl
  *
  */
 public interface AnnouncementsFlag extends AnnouncementsFlagModel {

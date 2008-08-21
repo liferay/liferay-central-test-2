@@ -37,15 +37,15 @@ package com.liferay.portlet.blogs.model;
  * </p>
  *
  * <p>
- * Customize <code>com.liferay.portlet.blogs.service.model.impl.BlogsEntryImpl</code>
+ * Customize <code>com.liferay.portlet.blogs.model.impl.BlogsEntryImpl</code>
  * and rerun the ServiceBuilder to generate the new methods.
  * </p>
  *
  * @author Brian Wing Shun Chan
  *
- * @see com.liferay.portlet.blogs.service.model.BlogsEntryModel
- * @see com.liferay.portlet.blogs.service.model.impl.BlogsEntryImpl
- * @see com.liferay.portlet.blogs.service.model.impl.BlogsEntryModelImpl
+ * @see com.liferay.portlet.blogs.model.BlogsEntryModel
+ * @see com.liferay.portlet.blogs.model.impl.BlogsEntryImpl
+ * @see com.liferay.portlet.blogs.model.impl.BlogsEntryModelImpl
  *
  */
 public interface BlogsEntry extends BlogsEntryModel {

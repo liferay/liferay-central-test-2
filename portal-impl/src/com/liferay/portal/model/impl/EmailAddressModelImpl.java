@@ -55,9 +55,9 @@ import java.util.List;
  *
  * @author Brian Wing Shun Chan
  *
- * @see com.liferay.portal.service.model.EmailAddress
- * @see com.liferay.portal.service.model.EmailAddressModel
- * @see com.liferay.portal.service.model.impl.EmailAddressImpl
+ * @see com.liferay.portal.model.EmailAddress
+ * @see com.liferay.portal.model.EmailAddressModel
+ * @see com.liferay.portal.model.impl.EmailAddressImpl
  *
  */
 public class EmailAddressModelImpl extends BaseModelImpl {

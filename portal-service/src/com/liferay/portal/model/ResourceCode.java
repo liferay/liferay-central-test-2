@@ -37,15 +37,15 @@ package com.liferay.portal.model;
  * </p>
  *
  * <p>
- * Customize <code>com.liferay.portal.service.model.impl.ResourceCodeImpl</code>
+ * Customize <code>com.liferay.portal.model.impl.ResourceCodeImpl</code>
  * and rerun the ServiceBuilder to generate the new methods.
  * </p>
  *
  * @author Brian Wing Shun Chan
  *
- * @see com.liferay.portal.service.model.ResourceCodeModel
- * @see com.liferay.portal.service.model.impl.ResourceCodeImpl
- * @see com.liferay.portal.service.model.impl.ResourceCodeModelImpl
+ * @see com.liferay.portal.model.ResourceCodeModel
+ * @see com.liferay.portal.model.impl.ResourceCodeImpl
+ * @see com.liferay.portal.model.impl.ResourceCodeModelImpl
  *
  */
 public interface ResourceCode extends ResourceCodeModel {

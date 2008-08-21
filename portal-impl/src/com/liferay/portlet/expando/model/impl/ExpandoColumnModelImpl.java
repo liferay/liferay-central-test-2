@@ -54,9 +54,9 @@ import java.util.List;
  *
  * @author Brian Wing Shun Chan
  *
- * @see com.liferay.portlet.expando.service.model.ExpandoColumn
- * @see com.liferay.portlet.expando.service.model.ExpandoColumnModel
- * @see com.liferay.portlet.expando.service.model.impl.ExpandoColumnImpl
+ * @see com.liferay.portlet.expando.model.ExpandoColumn
+ * @see com.liferay.portlet.expando.model.ExpandoColumnModel
+ * @see com.liferay.portlet.expando.model.impl.ExpandoColumnImpl
  *
  */
 public class ExpandoColumnModelImpl extends BaseModelImpl {

@@ -37,15 +37,15 @@ package com.liferay.portlet.messageboards.model;
  * </p>
  *
  * <p>
- * Customize <code>com.liferay.portlet.messageboards.service.model.impl.MBCategoryImpl</code>
+ * Customize <code>com.liferay.portlet.messageboards.model.impl.MBCategoryImpl</code>
  * and rerun the ServiceBuilder to generate the new methods.
  * </p>
  *
  * @author Brian Wing Shun Chan
  *
- * @see com.liferay.portlet.messageboards.service.model.MBCategoryModel
- * @see com.liferay.portlet.messageboards.service.model.impl.MBCategoryImpl
- * @see com.liferay.portlet.messageboards.service.model.impl.MBCategoryModelImpl
+ * @see com.liferay.portlet.messageboards.model.MBCategoryModel
+ * @see com.liferay.portlet.messageboards.model.impl.MBCategoryImpl
+ * @see com.liferay.portlet.messageboards.model.impl.MBCategoryModelImpl
  *
  */
 public interface MBCategory extends MBCategoryModel {

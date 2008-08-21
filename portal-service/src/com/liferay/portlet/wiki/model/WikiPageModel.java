@@ -41,9 +41,9 @@ import java.util.Date;
  *
  * @author Brian Wing Shun Chan
  *
- * @see com.liferay.portlet.wiki.service.model.WikiPage
- * @see com.liferay.portlet.wiki.service.model.impl.WikiPageImpl
- * @see com.liferay.portlet.wiki.service.model.impl.WikiPageModelImpl
+ * @see com.liferay.portlet.wiki.model.WikiPage
+ * @see com.liferay.portlet.wiki.model.impl.WikiPageImpl
+ * @see com.liferay.portlet.wiki.model.impl.WikiPageModelImpl
  *
  */
 public interface WikiPageModel extends BaseModel {

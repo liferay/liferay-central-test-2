@@ -53,9 +53,9 @@ import java.util.List;
  *
  * @author Brian Wing Shun Chan
  *
- * @see com.liferay.portal.service.model.UserTracker
- * @see com.liferay.portal.service.model.UserTrackerModel
- * @see com.liferay.portal.service.model.impl.UserTrackerImpl
+ * @see com.liferay.portal.model.UserTracker
+ * @see com.liferay.portal.model.UserTrackerModel
+ * @see com.liferay.portal.model.impl.UserTrackerImpl
  *
  */
 public class UserTrackerModelImpl extends BaseModelImpl {

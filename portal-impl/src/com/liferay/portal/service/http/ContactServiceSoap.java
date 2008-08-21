@@ -69,9 +69,9 @@ package com.liferay.portal.service.http;
  *
  * @author Brian Wing Shun Chan
  *
+ * @see com.liferay.portal.model.ContactSoap
  * @see com.liferay.portal.service.ContactServiceUtil
  * @see com.liferay.portal.service.http.ContactServiceHttp
- * @see com.liferay.portal.service.model.ContactSoap
  *
  */
 public class ContactServiceSoap {

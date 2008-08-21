@@ -52,9 +52,9 @@ import java.util.List;
  *
  * @author Brian Wing Shun Chan
  *
- * @see com.liferay.portal.service.model.UserIdMapper
- * @see com.liferay.portal.service.model.UserIdMapperModel
- * @see com.liferay.portal.service.model.impl.UserIdMapperImpl
+ * @see com.liferay.portal.model.UserIdMapper
+ * @see com.liferay.portal.model.UserIdMapperModel
+ * @see com.liferay.portal.model.impl.UserIdMapperImpl
  *
  */
 public class UserIdMapperModelImpl extends BaseModelImpl {

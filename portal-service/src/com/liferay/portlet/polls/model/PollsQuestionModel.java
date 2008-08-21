@@ -41,9 +41,9 @@ import java.util.Date;
  *
  * @author Brian Wing Shun Chan
  *
- * @see com.liferay.portlet.polls.service.model.PollsQuestion
- * @see com.liferay.portlet.polls.service.model.impl.PollsQuestionImpl
- * @see com.liferay.portlet.polls.service.model.impl.PollsQuestionModelImpl
+ * @see com.liferay.portlet.polls.model.PollsQuestion
+ * @see com.liferay.portlet.polls.model.impl.PollsQuestionImpl
+ * @see com.liferay.portlet.polls.model.impl.PollsQuestionModelImpl
  *
  */
 public interface PollsQuestionModel extends BaseModel {

@@ -38,9 +38,9 @@ package com.liferay.portal.model;
  *
  * @author Brian Wing Shun Chan
  *
- * @see com.liferay.portal.service.model.Resource
- * @see com.liferay.portal.service.model.impl.ResourceImpl
- * @see com.liferay.portal.service.model.impl.ResourceModelImpl
+ * @see com.liferay.portal.model.Resource
+ * @see com.liferay.portal.model.impl.ResourceImpl
+ * @see com.liferay.portal.model.impl.ResourceModelImpl
  *
  */
 public interface ResourceModel extends BaseModel {

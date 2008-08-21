@@ -55,9 +55,9 @@ import java.util.List;
  *
  * @author Brian Wing Shun Chan
  *
- * @see com.liferay.portal.service.model.Website
- * @see com.liferay.portal.service.model.WebsiteModel
- * @see com.liferay.portal.service.model.impl.WebsiteImpl
+ * @see com.liferay.portal.model.Website
+ * @see com.liferay.portal.model.WebsiteModel
+ * @see com.liferay.portal.model.impl.WebsiteImpl
  *
  */
 public class WebsiteModelImpl extends BaseModelImpl {

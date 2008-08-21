@@ -37,15 +37,15 @@ package com.liferay.portal.model;
  * </p>
  *
  * <p>
- * Customize <code>com.liferay.portal.service.model.impl.GroupImpl</code>
+ * Customize <code>com.liferay.portal.model.impl.GroupImpl</code>
  * and rerun the ServiceBuilder to generate the new methods.
  * </p>
  *
  * @author Brian Wing Shun Chan
  *
- * @see com.liferay.portal.service.model.GroupModel
- * @see com.liferay.portal.service.model.impl.GroupImpl
- * @see com.liferay.portal.service.model.impl.GroupModelImpl
+ * @see com.liferay.portal.model.GroupModel
+ * @see com.liferay.portal.model.impl.GroupImpl
+ * @see com.liferay.portal.model.impl.GroupModelImpl
  *
  */
 public interface Group extends GroupModel {

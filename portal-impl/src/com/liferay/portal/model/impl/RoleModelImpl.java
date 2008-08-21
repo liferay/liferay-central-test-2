@@ -53,9 +53,9 @@ import java.util.List;
  *
  * @author Brian Wing Shun Chan
  *
- * @see com.liferay.portal.service.model.Role
- * @see com.liferay.portal.service.model.RoleModel
- * @see com.liferay.portal.service.model.impl.RoleImpl
+ * @see com.liferay.portal.model.Role
+ * @see com.liferay.portal.model.RoleModel
+ * @see com.liferay.portal.model.impl.RoleImpl
  *
  */
 public class RoleModelImpl extends BaseModelImpl {

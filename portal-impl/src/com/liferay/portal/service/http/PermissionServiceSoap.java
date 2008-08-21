@@ -74,9 +74,9 @@ import java.rmi.RemoteException;
  *
  * @author Brian Wing Shun Chan
  *
+ * @see com.liferay.portal.model.PermissionSoap
  * @see com.liferay.portal.service.PermissionServiceUtil
  * @see com.liferay.portal.service.http.PermissionServiceHttp
- * @see com.liferay.portal.service.model.PermissionSoap
  *
  */
 public class PermissionServiceSoap {

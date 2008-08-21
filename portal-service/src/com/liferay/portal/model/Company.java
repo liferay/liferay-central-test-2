@@ -37,15 +37,15 @@ package com.liferay.portal.model;
  * </p>
  *
  * <p>
- * Customize <code>com.liferay.portal.service.model.impl.CompanyImpl</code>
+ * Customize <code>com.liferay.portal.model.impl.CompanyImpl</code>
  * and rerun the ServiceBuilder to generate the new methods.
  * </p>
  *
  * @author Brian Wing Shun Chan
  *
- * @see com.liferay.portal.service.model.CompanyModel
- * @see com.liferay.portal.service.model.impl.CompanyImpl
- * @see com.liferay.portal.service.model.impl.CompanyModelImpl
+ * @see com.liferay.portal.model.CompanyModel
+ * @see com.liferay.portal.model.impl.CompanyImpl
+ * @see com.liferay.portal.model.impl.CompanyModelImpl
  *
  */
 public interface Company extends CompanyModel {

@@ -39,9 +39,9 @@ import com.liferay.portal.model.BaseModel;
  *
  * @author Brian Wing Shun Chan
  *
- * @see com.liferay.portlet.announcements.service.model.AnnouncementsDelivery
- * @see com.liferay.portlet.announcements.service.model.impl.AnnouncementsDeliveryImpl
- * @see com.liferay.portlet.announcements.service.model.impl.AnnouncementsDeliveryModelImpl
+ * @see com.liferay.portlet.announcements.model.AnnouncementsDelivery
+ * @see com.liferay.portlet.announcements.model.impl.AnnouncementsDeliveryImpl
+ * @see com.liferay.portlet.announcements.model.impl.AnnouncementsDeliveryModelImpl
  *
  */
 public interface AnnouncementsDeliveryModel extends BaseModel {

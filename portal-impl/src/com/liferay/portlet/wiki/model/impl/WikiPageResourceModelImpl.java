@@ -54,9 +54,9 @@ import java.util.List;
  *
  * @author Brian Wing Shun Chan
  *
- * @see com.liferay.portlet.wiki.service.model.WikiPageResource
- * @see com.liferay.portlet.wiki.service.model.WikiPageResourceModel
- * @see com.liferay.portlet.wiki.service.model.impl.WikiPageResourceImpl
+ * @see com.liferay.portlet.wiki.model.WikiPageResource
+ * @see com.liferay.portlet.wiki.model.WikiPageResourceModel
+ * @see com.liferay.portlet.wiki.model.impl.WikiPageResourceImpl
  *
  */
 public class WikiPageResourceModelImpl extends BaseModelImpl {

@@ -37,15 +37,15 @@ package com.liferay.portal.model;
  * </p>
  *
  * <p>
- * Customize <code>com.liferay.portal.service.model.impl.PasswordPolicyRelImpl</code>
+ * Customize <code>com.liferay.portal.model.impl.PasswordPolicyRelImpl</code>
  * and rerun the ServiceBuilder to generate the new methods.
  * </p>
  *
  * @author Brian Wing Shun Chan
  *
- * @see com.liferay.portal.service.model.PasswordPolicyRelModel
- * @see com.liferay.portal.service.model.impl.PasswordPolicyRelImpl
- * @see com.liferay.portal.service.model.impl.PasswordPolicyRelModelImpl
+ * @see com.liferay.portal.model.PasswordPolicyRelModel
+ * @see com.liferay.portal.model.impl.PasswordPolicyRelImpl
+ * @see com.liferay.portal.model.impl.PasswordPolicyRelModelImpl
  *
  */
 public interface PasswordPolicyRel extends PasswordPolicyRelModel {

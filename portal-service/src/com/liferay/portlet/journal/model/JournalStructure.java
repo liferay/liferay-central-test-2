@@ -37,15 +37,15 @@ package com.liferay.portlet.journal.model;
  * </p>
  *
  * <p>
- * Customize <code>com.liferay.portlet.journal.service.model.impl.JournalStructureImpl</code>
+ * Customize <code>com.liferay.portlet.journal.model.impl.JournalStructureImpl</code>
  * and rerun the ServiceBuilder to generate the new methods.
  * </p>
  *
  * @author Brian Wing Shun Chan
  *
- * @see com.liferay.portlet.journal.service.model.JournalStructureModel
- * @see com.liferay.portlet.journal.service.model.impl.JournalStructureImpl
- * @see com.liferay.portlet.journal.service.model.impl.JournalStructureModelImpl
+ * @see com.liferay.portlet.journal.model.JournalStructureModel
+ * @see com.liferay.portlet.journal.model.impl.JournalStructureImpl
+ * @see com.liferay.portlet.journal.model.impl.JournalStructureModelImpl
  *
  */
 public interface JournalStructure extends JournalStructureModel {

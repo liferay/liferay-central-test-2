@@ -39,9 +39,9 @@ import com.liferay.portal.model.BaseModel;
  *
  * @author Brian Wing Shun Chan
  *
- * @see com.liferay.portlet.ratings.service.model.RatingsStats
- * @see com.liferay.portlet.ratings.service.model.impl.RatingsStatsImpl
- * @see com.liferay.portlet.ratings.service.model.impl.RatingsStatsModelImpl
+ * @see com.liferay.portlet.ratings.model.RatingsStats
+ * @see com.liferay.portlet.ratings.model.impl.RatingsStatsImpl
+ * @see com.liferay.portlet.ratings.model.impl.RatingsStatsModelImpl
  *
  */
 public interface RatingsStatsModel extends BaseModel {

@@ -53,9 +53,9 @@ import java.util.List;
  *
  * @author Brian Wing Shun Chan
  *
- * @see com.liferay.portal.service.model.User
- * @see com.liferay.portal.service.model.UserModel
- * @see com.liferay.portal.service.model.impl.UserImpl
+ * @see com.liferay.portal.model.User
+ * @see com.liferay.portal.model.UserModel
+ * @see com.liferay.portal.model.impl.UserImpl
  *
  */
 public class UserModelImpl extends BaseModelImpl {

@@ -37,15 +37,15 @@ package com.liferay.portlet.shopping.model;
  * </p>
  *
  * <p>
- * Customize <code>com.liferay.portlet.shopping.service.model.impl.ShoppingCouponImpl</code>
+ * Customize <code>com.liferay.portlet.shopping.model.impl.ShoppingCouponImpl</code>
  * and rerun the ServiceBuilder to generate the new methods.
  * </p>
  *
  * @author Brian Wing Shun Chan
  *
- * @see com.liferay.portlet.shopping.service.model.ShoppingCouponModel
- * @see com.liferay.portlet.shopping.service.model.impl.ShoppingCouponImpl
- * @see com.liferay.portlet.shopping.service.model.impl.ShoppingCouponModelImpl
+ * @see com.liferay.portlet.shopping.model.ShoppingCouponModel
+ * @see com.liferay.portlet.shopping.model.impl.ShoppingCouponImpl
+ * @see com.liferay.portlet.shopping.model.impl.ShoppingCouponModelImpl
  *
  */
 public interface ShoppingCoupon extends ShoppingCouponModel {

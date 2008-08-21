@@ -52,9 +52,9 @@ import java.util.List;
  *
  * @author Brian Wing Shun Chan
  *
- * @see com.liferay.portal.service.model.PluginSetting
- * @see com.liferay.portal.service.model.PluginSettingModel
- * @see com.liferay.portal.service.model.impl.PluginSettingImpl
+ * @see com.liferay.portal.model.PluginSetting
+ * @see com.liferay.portal.model.PluginSettingModel
+ * @see com.liferay.portal.model.impl.PluginSettingImpl
  *
  */
 public class PluginSettingModelImpl extends BaseModelImpl {

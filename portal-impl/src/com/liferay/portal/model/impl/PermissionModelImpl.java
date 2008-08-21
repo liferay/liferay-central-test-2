@@ -52,9 +52,9 @@ import java.util.List;
  *
  * @author Brian Wing Shun Chan
  *
- * @see com.liferay.portal.service.model.Permission
- * @see com.liferay.portal.service.model.PermissionModel
- * @see com.liferay.portal.service.model.impl.PermissionImpl
+ * @see com.liferay.portal.model.Permission
+ * @see com.liferay.portal.model.PermissionModel
+ * @see com.liferay.portal.model.impl.PermissionImpl
  *
  */
 public class PermissionModelImpl extends BaseModelImpl {

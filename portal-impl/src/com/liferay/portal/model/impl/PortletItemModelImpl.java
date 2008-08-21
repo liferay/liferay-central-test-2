@@ -54,9 +54,9 @@ import java.util.List;
  *
  * @author Brian Wing Shun Chan
  *
- * @see com.liferay.portal.service.model.PortletItem
- * @see com.liferay.portal.service.model.PortletItemModel
- * @see com.liferay.portal.service.model.impl.PortletItemImpl
+ * @see com.liferay.portal.model.PortletItem
+ * @see com.liferay.portal.model.PortletItemModel
+ * @see com.liferay.portal.model.impl.PortletItemImpl
  *
  */
 public class PortletItemModelImpl extends BaseModelImpl {

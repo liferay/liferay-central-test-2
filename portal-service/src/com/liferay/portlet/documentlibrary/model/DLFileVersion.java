@@ -37,15 +37,15 @@ package com.liferay.portlet.documentlibrary.model;
  * </p>
  *
  * <p>
- * Customize <code>com.liferay.portlet.documentlibrary.service.model.impl.DLFileVersionImpl</code>
+ * Customize <code>com.liferay.portlet.documentlibrary.model.impl.DLFileVersionImpl</code>
  * and rerun the ServiceBuilder to generate the new methods.
  * </p>
  *
  * @author Brian Wing Shun Chan
  *
- * @see com.liferay.portlet.documentlibrary.service.model.DLFileVersionModel
- * @see com.liferay.portlet.documentlibrary.service.model.impl.DLFileVersionImpl
- * @see com.liferay.portlet.documentlibrary.service.model.impl.DLFileVersionModelImpl
+ * @see com.liferay.portlet.documentlibrary.model.DLFileVersionModel
+ * @see com.liferay.portlet.documentlibrary.model.impl.DLFileVersionImpl
+ * @see com.liferay.portlet.documentlibrary.model.impl.DLFileVersionModelImpl
  *
  */
 public interface DLFileVersion extends DLFileVersionModel {

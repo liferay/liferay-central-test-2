@@ -55,9 +55,9 @@ import java.util.List;
  *
  * @author Brian Wing Shun Chan
  *
- * @see com.liferay.portlet.journal.service.model.JournalStructure
- * @see com.liferay.portlet.journal.service.model.JournalStructureModel
- * @see com.liferay.portlet.journal.service.model.impl.JournalStructureImpl
+ * @see com.liferay.portlet.journal.model.JournalStructure
+ * @see com.liferay.portlet.journal.model.JournalStructureModel
+ * @see com.liferay.portlet.journal.model.impl.JournalStructureImpl
  *
  */
 public class JournalStructureModelImpl extends BaseModelImpl {

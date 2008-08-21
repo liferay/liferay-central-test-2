@@ -37,15 +37,15 @@ package com.liferay.portlet.documentlibrary.model;
  * </p>
  *
  * <p>
- * Customize <code>com.liferay.portlet.documentlibrary.service.model.impl.DLFileEntryImpl</code>
+ * Customize <code>com.liferay.portlet.documentlibrary.model.impl.DLFileEntryImpl</code>
  * and rerun the ServiceBuilder to generate the new methods.
  * </p>
  *
  * @author Brian Wing Shun Chan
  *
- * @see com.liferay.portlet.documentlibrary.service.model.DLFileEntryModel
- * @see com.liferay.portlet.documentlibrary.service.model.impl.DLFileEntryImpl
- * @see com.liferay.portlet.documentlibrary.service.model.impl.DLFileEntryModelImpl
+ * @see com.liferay.portlet.documentlibrary.model.DLFileEntryModel
+ * @see com.liferay.portlet.documentlibrary.model.impl.DLFileEntryImpl
+ * @see com.liferay.portlet.documentlibrary.model.impl.DLFileEntryModelImpl
  *
  */
 public interface DLFileEntry extends DLFileEntryModel {

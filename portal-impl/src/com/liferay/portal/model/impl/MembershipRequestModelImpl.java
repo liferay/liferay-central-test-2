@@ -54,9 +54,9 @@ import java.util.List;
  *
  * @author Brian Wing Shun Chan
  *
- * @see com.liferay.portal.service.model.MembershipRequest
- * @see com.liferay.portal.service.model.MembershipRequestModel
- * @see com.liferay.portal.service.model.impl.MembershipRequestImpl
+ * @see com.liferay.portal.model.MembershipRequest
+ * @see com.liferay.portal.model.MembershipRequestModel
+ * @see com.liferay.portal.model.impl.MembershipRequestImpl
  *
  */
 public class MembershipRequestModelImpl extends BaseModelImpl {

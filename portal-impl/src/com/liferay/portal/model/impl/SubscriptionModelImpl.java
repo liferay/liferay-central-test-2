@@ -54,9 +54,9 @@ import java.util.List;
  *
  * @author Brian Wing Shun Chan
  *
- * @see com.liferay.portal.service.model.Subscription
- * @see com.liferay.portal.service.model.SubscriptionModel
- * @see com.liferay.portal.service.model.impl.SubscriptionImpl
+ * @see com.liferay.portal.model.Subscription
+ * @see com.liferay.portal.model.SubscriptionModel
+ * @see com.liferay.portal.model.impl.SubscriptionImpl
  *
  */
 public class SubscriptionModelImpl extends BaseModelImpl {

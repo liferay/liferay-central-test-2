@@ -37,15 +37,15 @@ package com.liferay.portal.model;
  * </p>
  *
  * <p>
- * Customize <code>com.liferay.portal.service.model.impl.OrgLaborImpl</code>
+ * Customize <code>com.liferay.portal.model.impl.OrgLaborImpl</code>
  * and rerun the ServiceBuilder to generate the new methods.
  * </p>
  *
  * @author Brian Wing Shun Chan
  *
- * @see com.liferay.portal.service.model.OrgLaborModel
- * @see com.liferay.portal.service.model.impl.OrgLaborImpl
- * @see com.liferay.portal.service.model.impl.OrgLaborModelImpl
+ * @see com.liferay.portal.model.OrgLaborModel
+ * @see com.liferay.portal.model.impl.OrgLaborImpl
+ * @see com.liferay.portal.model.impl.OrgLaborModelImpl
  *
  */
 public interface OrgLabor extends OrgLaborModel {

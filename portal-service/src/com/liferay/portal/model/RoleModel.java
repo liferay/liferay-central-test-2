@@ -38,9 +38,9 @@ package com.liferay.portal.model;
  *
  * @author Brian Wing Shun Chan
  *
- * @see com.liferay.portal.service.model.Role
- * @see com.liferay.portal.service.model.impl.RoleImpl
- * @see com.liferay.portal.service.model.impl.RoleModelImpl
+ * @see com.liferay.portal.model.Role
+ * @see com.liferay.portal.model.impl.RoleImpl
+ * @see com.liferay.portal.model.impl.RoleModelImpl
  *
  */
 public interface RoleModel extends BaseModel {

@@ -69,9 +69,9 @@ package com.liferay.portlet.workflow.service.http;
  *
  * @author Brian Wing Shun Chan
  *
+ * @see com.liferay.portlet.workflow.model.WorkflowTaskSoap
  * @see com.liferay.portlet.workflow.service.WorkflowTaskServiceUtil
  * @see com.liferay.portlet.workflow.service.http.WorkflowTaskServiceHttp
- * @see com.liferay.portlet.workflow.service.model.WorkflowTaskSoap
  *
  */
 public class WorkflowTaskServiceSoap {

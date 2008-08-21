@@ -75,9 +75,9 @@ import java.rmi.RemoteException;
  *
  * @author Brian Wing Shun Chan
  *
+ * @see com.liferay.portlet.messageboards.model.MBMessageFlagSoap
  * @see com.liferay.portlet.messageboards.service.MBMessageFlagServiceUtil
  * @see com.liferay.portlet.messageboards.service.http.MBMessageFlagServiceHttp
- * @see com.liferay.portlet.messageboards.service.model.MBMessageFlagSoap
  *
  */
 public class MBMessageFlagServiceSoap {

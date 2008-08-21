@@ -53,9 +53,9 @@ import java.util.List;
  *
  * @author Brian Wing Shun Chan
  *
- * @see com.liferay.portal.service.model.Image
- * @see com.liferay.portal.service.model.ImageModel
- * @see com.liferay.portal.service.model.impl.ImageImpl
+ * @see com.liferay.portal.model.Image
+ * @see com.liferay.portal.model.ImageModel
+ * @see com.liferay.portal.model.impl.ImageImpl
  *
  */
 public class ImageModelImpl extends BaseModelImpl {

@@ -39,9 +39,9 @@ import com.liferay.portal.model.BaseModel;
  *
  * @author Brian Wing Shun Chan
  *
- * @see com.liferay.portlet.messageboards.service.model.MBMessageFlag
- * @see com.liferay.portlet.messageboards.service.model.impl.MBMessageFlagImpl
- * @see com.liferay.portlet.messageboards.service.model.impl.MBMessageFlagModelImpl
+ * @see com.liferay.portlet.messageboards.model.MBMessageFlag
+ * @see com.liferay.portlet.messageboards.model.impl.MBMessageFlagImpl
+ * @see com.liferay.portlet.messageboards.model.impl.MBMessageFlagModelImpl
  *
  */
 public interface MBMessageFlagModel extends BaseModel {

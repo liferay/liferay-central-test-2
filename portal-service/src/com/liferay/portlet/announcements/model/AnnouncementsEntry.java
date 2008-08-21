@@ -37,15 +37,15 @@ package com.liferay.portlet.announcements.model;
  * </p>
  *
  * <p>
- * Customize <code>com.liferay.portlet.announcements.service.model.impl.AnnouncementsEntryImpl</code>
+ * Customize <code>com.liferay.portlet.announcements.model.impl.AnnouncementsEntryImpl</code>
  * and rerun the ServiceBuilder to generate the new methods.
  * </p>
  *
  * @author Brian Wing Shun Chan
  *
- * @see com.liferay.portlet.announcements.service.model.AnnouncementsEntryModel
- * @see com.liferay.portlet.announcements.service.model.impl.AnnouncementsEntryImpl
- * @see com.liferay.portlet.announcements.service.model.impl.AnnouncementsEntryModelImpl
+ * @see com.liferay.portlet.announcements.model.AnnouncementsEntryModel
+ * @see com.liferay.portlet.announcements.model.impl.AnnouncementsEntryImpl
+ * @see com.liferay.portlet.announcements.model.impl.AnnouncementsEntryModelImpl
  *
  */
 public interface AnnouncementsEntry extends AnnouncementsEntryModel {

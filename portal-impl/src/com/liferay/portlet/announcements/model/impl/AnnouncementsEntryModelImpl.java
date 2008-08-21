@@ -57,9 +57,9 @@ import java.util.List;
  *
  * @author Brian Wing Shun Chan
  *
- * @see com.liferay.portlet.announcements.service.model.AnnouncementsEntry
- * @see com.liferay.portlet.announcements.service.model.AnnouncementsEntryModel
- * @see com.liferay.portlet.announcements.service.model.impl.AnnouncementsEntryImpl
+ * @see com.liferay.portlet.announcements.model.AnnouncementsEntry
+ * @see com.liferay.portlet.announcements.model.AnnouncementsEntryModel
+ * @see com.liferay.portlet.announcements.model.impl.AnnouncementsEntryImpl
  *
  */
 public class AnnouncementsEntryModelImpl extends BaseModelImpl {

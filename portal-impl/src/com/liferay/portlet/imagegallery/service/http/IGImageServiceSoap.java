@@ -75,9 +75,9 @@ import java.rmi.RemoteException;
  *
  * @author Brian Wing Shun Chan
  *
+ * @see com.liferay.portlet.imagegallery.model.IGImageSoap
  * @see com.liferay.portlet.imagegallery.service.IGImageServiceUtil
  * @see com.liferay.portlet.imagegallery.service.http.IGImageServiceHttp
- * @see com.liferay.portlet.imagegallery.service.model.IGImageSoap
  *
  */
 public class IGImageServiceSoap {

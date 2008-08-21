@@ -37,15 +37,15 @@ package com.liferay.portal.model;
  * </p>
  *
  * <p>
- * Customize <code>com.liferay.portal.service.model.impl.EmailAddressImpl</code>
+ * Customize <code>com.liferay.portal.model.impl.EmailAddressImpl</code>
  * and rerun the ServiceBuilder to generate the new methods.
  * </p>
  *
  * @author Brian Wing Shun Chan
  *
- * @see com.liferay.portal.service.model.EmailAddressModel
- * @see com.liferay.portal.service.model.impl.EmailAddressImpl
- * @see com.liferay.portal.service.model.impl.EmailAddressModelImpl
+ * @see com.liferay.portal.model.EmailAddressModel
+ * @see com.liferay.portal.model.impl.EmailAddressImpl
+ * @see com.liferay.portal.model.impl.EmailAddressModelImpl
  *
  */
 public interface EmailAddress extends EmailAddressModel {

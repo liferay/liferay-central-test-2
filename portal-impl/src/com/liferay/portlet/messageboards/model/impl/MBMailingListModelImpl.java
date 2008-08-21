@@ -55,9 +55,9 @@ import java.util.List;
  *
  * @author Brian Wing Shun Chan
  *
- * @see com.liferay.portlet.messageboards.service.model.MBMailingList
- * @see com.liferay.portlet.messageboards.service.model.MBMailingListModel
- * @see com.liferay.portlet.messageboards.service.model.impl.MBMailingListImpl
+ * @see com.liferay.portlet.messageboards.model.MBMailingList
+ * @see com.liferay.portlet.messageboards.model.MBMailingListModel
+ * @see com.liferay.portlet.messageboards.model.impl.MBMailingListImpl
  *
  */
 public class MBMailingListModelImpl extends BaseModelImpl {

@@ -51,9 +51,9 @@ import java.util.List;
  *
  * @author Brian Wing Shun Chan
  *
- * @see com.liferay.portal.service.model.OrgLabor
- * @see com.liferay.portal.service.model.OrgLaborModel
- * @see com.liferay.portal.service.model.impl.OrgLaborImpl
+ * @see com.liferay.portal.model.OrgLabor
+ * @see com.liferay.portal.model.OrgLaborModel
+ * @see com.liferay.portal.model.impl.OrgLaborImpl
  *
  */
 public class OrgLaborModelImpl extends BaseModelImpl {

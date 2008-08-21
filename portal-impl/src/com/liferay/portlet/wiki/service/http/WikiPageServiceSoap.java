@@ -75,9 +75,9 @@ import java.rmi.RemoteException;
  *
  * @author Brian Wing Shun Chan
  *
+ * @see com.liferay.portlet.wiki.model.WikiPageSoap
  * @see com.liferay.portlet.wiki.service.WikiPageServiceUtil
  * @see com.liferay.portlet.wiki.service.http.WikiPageServiceHttp
- * @see com.liferay.portlet.wiki.service.model.WikiPageSoap
  *
  */
 public class WikiPageServiceSoap {

@@ -37,15 +37,15 @@ package com.liferay.portal.model;
  * </p>
  *
  * <p>
- * Customize <code>com.liferay.portal.service.model.impl.WebDAVPropsImpl</code>
+ * Customize <code>com.liferay.portal.model.impl.WebDAVPropsImpl</code>
  * and rerun the ServiceBuilder to generate the new methods.
  * </p>
  *
  * @author Brian Wing Shun Chan
  *
- * @see com.liferay.portal.service.model.WebDAVPropsModel
- * @see com.liferay.portal.service.model.impl.WebDAVPropsImpl
- * @see com.liferay.portal.service.model.impl.WebDAVPropsModelImpl
+ * @see com.liferay.portal.model.WebDAVPropsModel
+ * @see com.liferay.portal.model.impl.WebDAVPropsImpl
+ * @see com.liferay.portal.model.impl.WebDAVPropsModelImpl
  *
  */
 public interface WebDAVProps extends WebDAVPropsModel {

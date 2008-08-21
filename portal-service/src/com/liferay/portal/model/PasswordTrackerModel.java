@@ -39,9 +39,9 @@ import java.util.Date;
  *
  * @author Brian Wing Shun Chan
  *
- * @see com.liferay.portal.service.model.PasswordTracker
- * @see com.liferay.portal.service.model.impl.PasswordTrackerImpl
- * @see com.liferay.portal.service.model.impl.PasswordTrackerModelImpl
+ * @see com.liferay.portal.model.PasswordTracker
+ * @see com.liferay.portal.model.impl.PasswordTrackerImpl
+ * @see com.liferay.portal.model.impl.PasswordTrackerModelImpl
  *
  */
 public interface PasswordTrackerModel extends BaseModel {

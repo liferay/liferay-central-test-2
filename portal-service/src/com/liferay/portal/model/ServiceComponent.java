@@ -37,15 +37,15 @@ package com.liferay.portal.model;
  * </p>
  *
  * <p>
- * Customize <code>com.liferay.portal.service.model.impl.ServiceComponentImpl</code>
+ * Customize <code>com.liferay.portal.model.impl.ServiceComponentImpl</code>
  * and rerun the ServiceBuilder to generate the new methods.
  * </p>
  *
  * @author Brian Wing Shun Chan
  *
- * @see com.liferay.portal.service.model.ServiceComponentModel
- * @see com.liferay.portal.service.model.impl.ServiceComponentImpl
- * @see com.liferay.portal.service.model.impl.ServiceComponentModelImpl
+ * @see com.liferay.portal.model.ServiceComponentModel
+ * @see com.liferay.portal.model.impl.ServiceComponentImpl
+ * @see com.liferay.portal.model.impl.ServiceComponentModelImpl
  *
  */
 public interface ServiceComponent extends ServiceComponentModel {

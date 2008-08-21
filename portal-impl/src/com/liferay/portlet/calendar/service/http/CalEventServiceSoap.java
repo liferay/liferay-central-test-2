@@ -75,9 +75,9 @@ import java.rmi.RemoteException;
  *
  * @author Brian Wing Shun Chan
  *
+ * @see com.liferay.portlet.calendar.model.CalEventSoap
  * @see com.liferay.portlet.calendar.service.CalEventServiceUtil
  * @see com.liferay.portlet.calendar.service.http.CalEventServiceHttp
- * @see com.liferay.portlet.calendar.service.model.CalEventSoap
  *
  */
 public class CalEventServiceSoap {

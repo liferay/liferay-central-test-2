@@ -39,9 +39,9 @@ import com.liferay.portal.service.persistence.OrgGroupPermissionPK;
  *
  * @author Brian Wing Shun Chan
  *
- * @see com.liferay.portal.service.model.OrgGroupPermission
- * @see com.liferay.portal.service.model.impl.OrgGroupPermissionImpl
- * @see com.liferay.portal.service.model.impl.OrgGroupPermissionModelImpl
+ * @see com.liferay.portal.model.OrgGroupPermission
+ * @see com.liferay.portal.model.impl.OrgGroupPermissionImpl
+ * @see com.liferay.portal.model.impl.OrgGroupPermissionModelImpl
  *
  */
 public interface OrgGroupPermissionModel extends BaseModel {

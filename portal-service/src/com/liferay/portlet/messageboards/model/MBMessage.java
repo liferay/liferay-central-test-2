@@ -37,15 +37,15 @@ package com.liferay.portlet.messageboards.model;
  * </p>
  *
  * <p>
- * Customize <code>com.liferay.portlet.messageboards.service.model.impl.MBMessageImpl</code>
+ * Customize <code>com.liferay.portlet.messageboards.model.impl.MBMessageImpl</code>
  * and rerun the ServiceBuilder to generate the new methods.
  * </p>
  *
  * @author Brian Wing Shun Chan
  *
- * @see com.liferay.portlet.messageboards.service.model.MBMessageModel
- * @see com.liferay.portlet.messageboards.service.model.impl.MBMessageImpl
- * @see com.liferay.portlet.messageboards.service.model.impl.MBMessageModelImpl
+ * @see com.liferay.portlet.messageboards.model.MBMessageModel
+ * @see com.liferay.portlet.messageboards.model.impl.MBMessageImpl
+ * @see com.liferay.portlet.messageboards.model.impl.MBMessageModelImpl
  *
  */
 public interface MBMessage extends MBMessageModel {

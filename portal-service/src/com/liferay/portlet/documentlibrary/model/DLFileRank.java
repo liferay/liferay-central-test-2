@@ -37,15 +37,15 @@ package com.liferay.portlet.documentlibrary.model;
  * </p>
  *
  * <p>
- * Customize <code>com.liferay.portlet.documentlibrary.service.model.impl.DLFileRankImpl</code>
+ * Customize <code>com.liferay.portlet.documentlibrary.model.impl.DLFileRankImpl</code>
  * and rerun the ServiceBuilder to generate the new methods.
  * </p>
  *
  * @author Brian Wing Shun Chan
  *
- * @see com.liferay.portlet.documentlibrary.service.model.DLFileRankModel
- * @see com.liferay.portlet.documentlibrary.service.model.impl.DLFileRankImpl
- * @see com.liferay.portlet.documentlibrary.service.model.impl.DLFileRankModelImpl
+ * @see com.liferay.portlet.documentlibrary.model.DLFileRankModel
+ * @see com.liferay.portlet.documentlibrary.model.impl.DLFileRankImpl
+ * @see com.liferay.portlet.documentlibrary.model.impl.DLFileRankModelImpl
  *
  */
 public interface DLFileRank extends DLFileRankModel {

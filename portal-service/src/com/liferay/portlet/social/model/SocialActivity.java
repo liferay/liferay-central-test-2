@@ -37,15 +37,15 @@ package com.liferay.portlet.social.model;
  * </p>
  *
  * <p>
- * Customize <code>com.liferay.portlet.social.service.model.impl.SocialActivityImpl</code>
+ * Customize <code>com.liferay.portlet.social.model.impl.SocialActivityImpl</code>
  * and rerun the ServiceBuilder to generate the new methods.
  * </p>
  *
  * @author Brian Wing Shun Chan
  *
- * @see com.liferay.portlet.social.service.model.SocialActivityModel
- * @see com.liferay.portlet.social.service.model.impl.SocialActivityImpl
- * @see com.liferay.portlet.social.service.model.impl.SocialActivityModelImpl
+ * @see com.liferay.portlet.social.model.SocialActivityModel
+ * @see com.liferay.portlet.social.model.impl.SocialActivityImpl
+ * @see com.liferay.portlet.social.model.impl.SocialActivityModelImpl
  *
  */
 public interface SocialActivity extends SocialActivityModel {

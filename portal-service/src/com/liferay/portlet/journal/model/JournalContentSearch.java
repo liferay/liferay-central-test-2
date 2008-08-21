@@ -37,15 +37,15 @@ package com.liferay.portlet.journal.model;
  * </p>
  *
  * <p>
- * Customize <code>com.liferay.portlet.journal.service.model.impl.JournalContentSearchImpl</code>
+ * Customize <code>com.liferay.portlet.journal.model.impl.JournalContentSearchImpl</code>
  * and rerun the ServiceBuilder to generate the new methods.
  * </p>
  *
  * @author Brian Wing Shun Chan
  *
- * @see com.liferay.portlet.journal.service.model.JournalContentSearchModel
- * @see com.liferay.portlet.journal.service.model.impl.JournalContentSearchImpl
- * @see com.liferay.portlet.journal.service.model.impl.JournalContentSearchModelImpl
+ * @see com.liferay.portlet.journal.model.JournalContentSearchModel
+ * @see com.liferay.portlet.journal.model.impl.JournalContentSearchImpl
+ * @see com.liferay.portlet.journal.model.impl.JournalContentSearchModelImpl
  *
  */
 public interface JournalContentSearch extends JournalContentSearchModel {

@@ -52,9 +52,9 @@ import java.util.List;
  *
  * @author Brian Wing Shun Chan
  *
- * @see com.liferay.portal.service.model.Organization
- * @see com.liferay.portal.service.model.OrganizationModel
- * @see com.liferay.portal.service.model.impl.OrganizationImpl
+ * @see com.liferay.portal.model.Organization
+ * @see com.liferay.portal.model.OrganizationModel
+ * @see com.liferay.portal.model.impl.OrganizationImpl
  *
  */
 public class OrganizationModelImpl extends BaseModelImpl {

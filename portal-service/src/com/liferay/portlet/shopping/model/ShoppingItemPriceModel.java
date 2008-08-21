@@ -39,9 +39,9 @@ import com.liferay.portal.model.BaseModel;
  *
  * @author Brian Wing Shun Chan
  *
- * @see com.liferay.portlet.shopping.service.model.ShoppingItemPrice
- * @see com.liferay.portlet.shopping.service.model.impl.ShoppingItemPriceImpl
- * @see com.liferay.portlet.shopping.service.model.impl.ShoppingItemPriceModelImpl
+ * @see com.liferay.portlet.shopping.model.ShoppingItemPrice
+ * @see com.liferay.portlet.shopping.model.impl.ShoppingItemPriceImpl
+ * @see com.liferay.portlet.shopping.model.impl.ShoppingItemPriceModelImpl
  *
  */
 public interface ShoppingItemPriceModel extends BaseModel {

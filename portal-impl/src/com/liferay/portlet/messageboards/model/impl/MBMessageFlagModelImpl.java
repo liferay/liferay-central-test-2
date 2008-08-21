@@ -53,9 +53,9 @@ import java.util.List;
  *
  * @author Brian Wing Shun Chan
  *
- * @see com.liferay.portlet.messageboards.service.model.MBMessageFlag
- * @see com.liferay.portlet.messageboards.service.model.MBMessageFlagModel
- * @see com.liferay.portlet.messageboards.service.model.impl.MBMessageFlagImpl
+ * @see com.liferay.portlet.messageboards.model.MBMessageFlag
+ * @see com.liferay.portlet.messageboards.model.MBMessageFlagModel
+ * @see com.liferay.portlet.messageboards.model.impl.MBMessageFlagImpl
  *
  */
 public class MBMessageFlagModelImpl extends BaseModelImpl {

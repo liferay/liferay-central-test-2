@@ -75,9 +75,9 @@ import java.rmi.RemoteException;
  *
  * @author Brian Wing Shun Chan
  *
+ * @see com.liferay.portlet.messageboards.model.MBCategorySoap
  * @see com.liferay.portlet.messageboards.service.MBCategoryServiceUtil
  * @see com.liferay.portlet.messageboards.service.http.MBCategoryServiceHttp
- * @see com.liferay.portlet.messageboards.service.model.MBCategorySoap
  *
  */
 public class MBCategoryServiceSoap {

@@ -53,9 +53,9 @@ import java.util.List;
  *
  * @author Brian Wing Shun Chan
  *
- * @see com.liferay.portal.service.model.PasswordPolicy
- * @see com.liferay.portal.service.model.PasswordPolicyModel
- * @see com.liferay.portal.service.model.impl.PasswordPolicyImpl
+ * @see com.liferay.portal.model.PasswordPolicy
+ * @see com.liferay.portal.model.PasswordPolicyModel
+ * @see com.liferay.portal.model.impl.PasswordPolicyImpl
  *
  */
 public class PasswordPolicyModelImpl extends BaseModelImpl {

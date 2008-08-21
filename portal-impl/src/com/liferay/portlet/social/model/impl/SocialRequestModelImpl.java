@@ -56,9 +56,9 @@ import java.util.List;
  *
  * @author Brian Wing Shun Chan
  *
- * @see com.liferay.portlet.social.service.model.SocialRequest
- * @see com.liferay.portlet.social.service.model.SocialRequestModel
- * @see com.liferay.portlet.social.service.model.impl.SocialRequestImpl
+ * @see com.liferay.portlet.social.model.SocialRequest
+ * @see com.liferay.portlet.social.model.SocialRequestModel
+ * @see com.liferay.portlet.social.model.impl.SocialRequestImpl
  *
  */
 public class SocialRequestModelImpl extends BaseModelImpl {

@@ -41,9 +41,9 @@ import java.util.Date;
  *
  * @author Brian Wing Shun Chan
  *
- * @see com.liferay.portlet.announcements.service.model.AnnouncementsFlag
- * @see com.liferay.portlet.announcements.service.model.impl.AnnouncementsFlagImpl
- * @see com.liferay.portlet.announcements.service.model.impl.AnnouncementsFlagModelImpl
+ * @see com.liferay.portlet.announcements.model.AnnouncementsFlag
+ * @see com.liferay.portlet.announcements.model.impl.AnnouncementsFlagImpl
+ * @see com.liferay.portlet.announcements.model.impl.AnnouncementsFlagModelImpl
  *
  */
 public interface AnnouncementsFlagModel extends BaseModel {

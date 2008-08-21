@@ -37,15 +37,15 @@ package com.liferay.portal.model;
  * </p>
  *
  * <p>
- * Customize <code>com.liferay.portal.service.model.impl.LayoutSetImpl</code>
+ * Customize <code>com.liferay.portal.model.impl.LayoutSetImpl</code>
  * and rerun the ServiceBuilder to generate the new methods.
  * </p>
  *
  * @author Brian Wing Shun Chan
  *
- * @see com.liferay.portal.service.model.LayoutSetModel
- * @see com.liferay.portal.service.model.impl.LayoutSetImpl
- * @see com.liferay.portal.service.model.impl.LayoutSetModelImpl
+ * @see com.liferay.portal.model.LayoutSetModel
+ * @see com.liferay.portal.model.impl.LayoutSetImpl
+ * @see com.liferay.portal.model.impl.LayoutSetModelImpl
  *
  */
 public interface LayoutSet extends LayoutSetModel {

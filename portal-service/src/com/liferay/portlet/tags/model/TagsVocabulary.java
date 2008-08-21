@@ -37,15 +37,15 @@ package com.liferay.portlet.tags.model;
  * </p>
  *
  * <p>
- * Customize <code>com.liferay.portlet.tags.service.model.impl.TagsVocabularyImpl</code>
+ * Customize <code>com.liferay.portlet.tags.model.impl.TagsVocabularyImpl</code>
  * and rerun the ServiceBuilder to generate the new methods.
  * </p>
  *
  * @author Brian Wing Shun Chan
  *
- * @see com.liferay.portlet.tags.service.model.TagsVocabularyModel
- * @see com.liferay.portlet.tags.service.model.impl.TagsVocabularyImpl
- * @see com.liferay.portlet.tags.service.model.impl.TagsVocabularyModelImpl
+ * @see com.liferay.portlet.tags.model.TagsVocabularyModel
+ * @see com.liferay.portlet.tags.model.impl.TagsVocabularyImpl
+ * @see com.liferay.portlet.tags.model.impl.TagsVocabularyModelImpl
  *
  */
 public interface TagsVocabulary extends TagsVocabularyModel {

@@ -75,9 +75,9 @@ import java.rmi.RemoteException;
  *
  * @author Brian Wing Shun Chan
  *
+ * @see com.liferay.portlet.tags.model.TagsPropertySoap
  * @see com.liferay.portlet.tags.service.TagsPropertyServiceUtil
  * @see com.liferay.portlet.tags.service.http.TagsPropertyServiceHttp
- * @see com.liferay.portlet.tags.service.model.TagsPropertySoap
  *
  */
 public class TagsPropertyServiceSoap {

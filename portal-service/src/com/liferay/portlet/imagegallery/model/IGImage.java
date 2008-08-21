@@ -37,15 +37,15 @@ package com.liferay.portlet.imagegallery.model;
  * </p>
  *
  * <p>
- * Customize <code>com.liferay.portlet.imagegallery.service.model.impl.IGImageImpl</code>
+ * Customize <code>com.liferay.portlet.imagegallery.model.impl.IGImageImpl</code>
  * and rerun the ServiceBuilder to generate the new methods.
  * </p>
  *
  * @author Brian Wing Shun Chan
  *
- * @see com.liferay.portlet.imagegallery.service.model.IGImageModel
- * @see com.liferay.portlet.imagegallery.service.model.impl.IGImageImpl
- * @see com.liferay.portlet.imagegallery.service.model.impl.IGImageModelImpl
+ * @see com.liferay.portlet.imagegallery.model.IGImageModel
+ * @see com.liferay.portlet.imagegallery.model.impl.IGImageImpl
+ * @see com.liferay.portlet.imagegallery.model.impl.IGImageModelImpl
  *
  */
 public interface IGImage extends IGImageModel {

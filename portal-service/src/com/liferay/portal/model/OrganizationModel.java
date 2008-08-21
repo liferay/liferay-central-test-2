@@ -38,9 +38,9 @@ package com.liferay.portal.model;
  *
  * @author Brian Wing Shun Chan
  *
- * @see com.liferay.portal.service.model.Organization
- * @see com.liferay.portal.service.model.impl.OrganizationImpl
- * @see com.liferay.portal.service.model.impl.OrganizationModelImpl
+ * @see com.liferay.portal.model.Organization
+ * @see com.liferay.portal.model.impl.OrganizationImpl
+ * @see com.liferay.portal.model.impl.OrganizationModelImpl
  *
  */
 public interface OrganizationModel extends BaseModel {

@@ -41,9 +41,9 @@ import java.util.Date;
  *
  * @author Brian Wing Shun Chan
  *
- * @see com.liferay.portlet.calendar.service.model.CalEvent
- * @see com.liferay.portlet.calendar.service.model.impl.CalEventImpl
- * @see com.liferay.portlet.calendar.service.model.impl.CalEventModelImpl
+ * @see com.liferay.portlet.calendar.model.CalEvent
+ * @see com.liferay.portlet.calendar.model.impl.CalEventImpl
+ * @see com.liferay.portlet.calendar.model.impl.CalEventModelImpl
  *
  */
 public interface CalEventModel extends BaseModel {

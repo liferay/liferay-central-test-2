@@ -54,9 +54,9 @@ import java.util.List;
  *
  * @author Brian Wing Shun Chan
  *
- * @see com.liferay.portlet.polls.service.model.PollsChoice
- * @see com.liferay.portlet.polls.service.model.PollsChoiceModel
- * @see com.liferay.portlet.polls.service.model.impl.PollsChoiceImpl
+ * @see com.liferay.portlet.polls.model.PollsChoice
+ * @see com.liferay.portlet.polls.model.PollsChoiceModel
+ * @see com.liferay.portlet.polls.model.impl.PollsChoiceImpl
  *
  */
 public class PollsChoiceModelImpl extends BaseModelImpl {

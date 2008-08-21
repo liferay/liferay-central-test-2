@@ -37,15 +37,15 @@ package com.liferay.portal.model;
  * </p>
  *
  * <p>
- * Customize <code>com.liferay.portal.service.model.impl.UserTrackerImpl</code>
+ * Customize <code>com.liferay.portal.model.impl.UserTrackerImpl</code>
  * and rerun the ServiceBuilder to generate the new methods.
  * </p>
  *
  * @author Brian Wing Shun Chan
  *
- * @see com.liferay.portal.service.model.UserTrackerModel
- * @see com.liferay.portal.service.model.impl.UserTrackerImpl
- * @see com.liferay.portal.service.model.impl.UserTrackerModelImpl
+ * @see com.liferay.portal.model.UserTrackerModel
+ * @see com.liferay.portal.model.impl.UserTrackerImpl
+ * @see com.liferay.portal.model.impl.UserTrackerModelImpl
  *
  */
 public interface UserTracker extends UserTrackerModel {

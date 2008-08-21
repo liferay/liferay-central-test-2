@@ -39,9 +39,9 @@ import com.liferay.portal.model.BaseModel;
  *
  * @author Brian Wing Shun Chan
  *
- * @see com.liferay.portlet.journal.service.model.JournalArticleImage
- * @see com.liferay.portlet.journal.service.model.impl.JournalArticleImageImpl
- * @see com.liferay.portlet.journal.service.model.impl.JournalArticleImageModelImpl
+ * @see com.liferay.portlet.journal.model.JournalArticleImage
+ * @see com.liferay.portlet.journal.model.impl.JournalArticleImageImpl
+ * @see com.liferay.portlet.journal.model.impl.JournalArticleImageModelImpl
  *
  */
 public interface JournalArticleImageModel extends BaseModel {

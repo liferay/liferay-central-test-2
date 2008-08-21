@@ -37,15 +37,15 @@ package com.liferay.portal.model;
  * </p>
  *
  * <p>
- * Customize <code>com.liferay.portal.service.model.impl.ContactImpl</code>
+ * Customize <code>com.liferay.portal.model.impl.ContactImpl</code>
  * and rerun the ServiceBuilder to generate the new methods.
  * </p>
  *
  * @author Brian Wing Shun Chan
  *
- * @see com.liferay.portal.service.model.ContactModel
- * @see com.liferay.portal.service.model.impl.ContactImpl
- * @see com.liferay.portal.service.model.impl.ContactModelImpl
+ * @see com.liferay.portal.model.ContactModel
+ * @see com.liferay.portal.model.impl.ContactImpl
+ * @see com.liferay.portal.model.impl.ContactModelImpl
  *
  */
 public interface Contact extends ContactModel {

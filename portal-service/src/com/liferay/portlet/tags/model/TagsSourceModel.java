@@ -39,9 +39,9 @@ import com.liferay.portal.model.BaseModel;
  *
  * @author Brian Wing Shun Chan
  *
- * @see com.liferay.portlet.tags.service.model.TagsSource
- * @see com.liferay.portlet.tags.service.model.impl.TagsSourceImpl
- * @see com.liferay.portlet.tags.service.model.impl.TagsSourceModelImpl
+ * @see com.liferay.portlet.tags.model.TagsSource
+ * @see com.liferay.portlet.tags.model.impl.TagsSourceImpl
+ * @see com.liferay.portlet.tags.model.impl.TagsSourceModelImpl
  *
  */
 public interface TagsSourceModel extends BaseModel {

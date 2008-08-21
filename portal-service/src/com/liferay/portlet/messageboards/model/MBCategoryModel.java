@@ -41,9 +41,9 @@ import java.util.Date;
  *
  * @author Brian Wing Shun Chan
  *
- * @see com.liferay.portlet.messageboards.service.model.MBCategory
- * @see com.liferay.portlet.messageboards.service.model.impl.MBCategoryImpl
- * @see com.liferay.portlet.messageboards.service.model.impl.MBCategoryModelImpl
+ * @see com.liferay.portlet.messageboards.model.MBCategory
+ * @see com.liferay.portlet.messageboards.model.impl.MBCategoryImpl
+ * @see com.liferay.portlet.messageboards.model.impl.MBCategoryModelImpl
  *
  */
 public interface MBCategoryModel extends BaseModel {

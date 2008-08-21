@@ -41,9 +41,9 @@ import java.util.Date;
  *
  * @author Brian Wing Shun Chan
  *
- * @see com.liferay.portlet.tags.service.model.TagsProperty
- * @see com.liferay.portlet.tags.service.model.impl.TagsPropertyImpl
- * @see com.liferay.portlet.tags.service.model.impl.TagsPropertyModelImpl
+ * @see com.liferay.portlet.tags.model.TagsProperty
+ * @see com.liferay.portlet.tags.model.impl.TagsPropertyImpl
+ * @see com.liferay.portlet.tags.model.impl.TagsPropertyModelImpl
  *
  */
 public interface TagsPropertyModel extends BaseModel {

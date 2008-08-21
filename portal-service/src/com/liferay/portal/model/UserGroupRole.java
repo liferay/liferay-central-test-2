@@ -37,15 +37,15 @@ package com.liferay.portal.model;
  * </p>
  *
  * <p>
- * Customize <code>com.liferay.portal.service.model.impl.UserGroupRoleImpl</code>
+ * Customize <code>com.liferay.portal.model.impl.UserGroupRoleImpl</code>
  * and rerun the ServiceBuilder to generate the new methods.
  * </p>
  *
  * @author Brian Wing Shun Chan
  *
- * @see com.liferay.portal.service.model.UserGroupRoleModel
- * @see com.liferay.portal.service.model.impl.UserGroupRoleImpl
- * @see com.liferay.portal.service.model.impl.UserGroupRoleModelImpl
+ * @see com.liferay.portal.model.UserGroupRoleModel
+ * @see com.liferay.portal.model.impl.UserGroupRoleImpl
+ * @see com.liferay.portal.model.impl.UserGroupRoleModelImpl
  *
  */
 public interface UserGroupRole extends UserGroupRoleModel {

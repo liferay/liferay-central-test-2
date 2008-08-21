@@ -74,9 +74,9 @@ import java.rmi.RemoteException;
  *
  * @author Brian Wing Shun Chan
  *
+ * @see com.liferay.portal.model.AddressSoap
  * @see com.liferay.portal.service.AddressServiceUtil
  * @see com.liferay.portal.service.http.AddressServiceHttp
- * @see com.liferay.portal.service.model.AddressSoap
  *
  */
 public class AddressServiceSoap {

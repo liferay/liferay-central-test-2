@@ -41,9 +41,9 @@ import java.util.Date;
  *
  * @author Brian Wing Shun Chan
  *
- * @see com.liferay.portlet.blogs.service.model.BlogsEntry
- * @see com.liferay.portlet.blogs.service.model.impl.BlogsEntryImpl
- * @see com.liferay.portlet.blogs.service.model.impl.BlogsEntryModelImpl
+ * @see com.liferay.portlet.blogs.model.BlogsEntry
+ * @see com.liferay.portlet.blogs.model.impl.BlogsEntryImpl
+ * @see com.liferay.portlet.blogs.model.impl.BlogsEntryModelImpl
  *
  */
 public interface BlogsEntryModel extends BaseModel {

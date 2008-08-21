@@ -41,9 +41,9 @@ import java.util.Date;
  *
  * @author Brian Wing Shun Chan
  *
- * @see com.liferay.portlet.bookmarks.service.model.BookmarksEntry
- * @see com.liferay.portlet.bookmarks.service.model.impl.BookmarksEntryImpl
- * @see com.liferay.portlet.bookmarks.service.model.impl.BookmarksEntryModelImpl
+ * @see com.liferay.portlet.bookmarks.model.BookmarksEntry
+ * @see com.liferay.portlet.bookmarks.model.impl.BookmarksEntryImpl
+ * @see com.liferay.portlet.bookmarks.model.impl.BookmarksEntryModelImpl
  *
  */
 public interface BookmarksEntryModel extends BaseModel {

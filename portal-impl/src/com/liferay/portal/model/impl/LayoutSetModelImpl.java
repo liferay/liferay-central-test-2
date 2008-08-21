@@ -52,9 +52,9 @@ import java.util.List;
  *
  * @author Brian Wing Shun Chan
  *
- * @see com.liferay.portal.service.model.LayoutSet
- * @see com.liferay.portal.service.model.LayoutSetModel
- * @see com.liferay.portal.service.model.impl.LayoutSetImpl
+ * @see com.liferay.portal.model.LayoutSet
+ * @see com.liferay.portal.model.LayoutSetModel
+ * @see com.liferay.portal.model.impl.LayoutSetImpl
  *
  */
 public class LayoutSetModelImpl extends BaseModelImpl {

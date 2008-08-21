@@ -52,9 +52,9 @@ import java.util.List;
  *
  * @author Brian Wing Shun Chan
  *
- * @see com.liferay.portal.service.model.OrgGroupPermission
- * @see com.liferay.portal.service.model.OrgGroupPermissionModel
- * @see com.liferay.portal.service.model.impl.OrgGroupPermissionImpl
+ * @see com.liferay.portal.model.OrgGroupPermission
+ * @see com.liferay.portal.model.OrgGroupPermissionModel
+ * @see com.liferay.portal.model.impl.OrgGroupPermissionImpl
  *
  */
 public class OrgGroupPermissionModelImpl extends BaseModelImpl {

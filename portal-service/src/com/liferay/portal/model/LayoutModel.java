@@ -38,9 +38,9 @@ package com.liferay.portal.model;
  *
  * @author Brian Wing Shun Chan
  *
- * @see com.liferay.portal.service.model.Layout
- * @see com.liferay.portal.service.model.impl.LayoutImpl
- * @see com.liferay.portal.service.model.impl.LayoutModelImpl
+ * @see com.liferay.portal.model.Layout
+ * @see com.liferay.portal.model.impl.LayoutImpl
+ * @see com.liferay.portal.model.impl.LayoutModelImpl
  *
  */
 public interface LayoutModel extends BaseModel {

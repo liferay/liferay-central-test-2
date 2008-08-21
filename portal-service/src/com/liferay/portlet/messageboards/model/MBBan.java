@@ -37,15 +37,15 @@ package com.liferay.portlet.messageboards.model;
  * </p>
  *
  * <p>
- * Customize <code>com.liferay.portlet.messageboards.service.model.impl.MBBanImpl</code>
+ * Customize <code>com.liferay.portlet.messageboards.model.impl.MBBanImpl</code>
  * and rerun the ServiceBuilder to generate the new methods.
  * </p>
  *
  * @author Brian Wing Shun Chan
  *
- * @see com.liferay.portlet.messageboards.service.model.MBBanModel
- * @see com.liferay.portlet.messageboards.service.model.impl.MBBanImpl
- * @see com.liferay.portlet.messageboards.service.model.impl.MBBanModelImpl
+ * @see com.liferay.portlet.messageboards.model.MBBanModel
+ * @see com.liferay.portlet.messageboards.model.impl.MBBanImpl
+ * @see com.liferay.portlet.messageboards.model.impl.MBBanModelImpl
  *
  */
 public interface MBBan extends MBBanModel {

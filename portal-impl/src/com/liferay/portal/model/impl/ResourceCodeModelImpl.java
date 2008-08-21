@@ -52,9 +52,9 @@ import java.util.List;
  *
  * @author Brian Wing Shun Chan
  *
- * @see com.liferay.portal.service.model.ResourceCode
- * @see com.liferay.portal.service.model.ResourceCodeModel
- * @see com.liferay.portal.service.model.impl.ResourceCodeImpl
+ * @see com.liferay.portal.model.ResourceCode
+ * @see com.liferay.portal.model.ResourceCodeModel
+ * @see com.liferay.portal.model.impl.ResourceCodeImpl
  *
  */
 public class ResourceCodeModelImpl extends BaseModelImpl {

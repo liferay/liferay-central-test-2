@@ -37,15 +37,15 @@ package com.liferay.portal.model;
  * </p>
  *
  * <p>
- * Customize <code>com.liferay.portal.service.model.impl.PasswordTrackerImpl</code>
+ * Customize <code>com.liferay.portal.model.impl.PasswordTrackerImpl</code>
  * and rerun the ServiceBuilder to generate the new methods.
  * </p>
  *
  * @author Brian Wing Shun Chan
  *
- * @see com.liferay.portal.service.model.PasswordTrackerModel
- * @see com.liferay.portal.service.model.impl.PasswordTrackerImpl
- * @see com.liferay.portal.service.model.impl.PasswordTrackerModelImpl
+ * @see com.liferay.portal.model.PasswordTrackerModel
+ * @see com.liferay.portal.model.impl.PasswordTrackerImpl
+ * @see com.liferay.portal.model.impl.PasswordTrackerModelImpl
  *
  */
 public interface PasswordTracker extends PasswordTrackerModel {

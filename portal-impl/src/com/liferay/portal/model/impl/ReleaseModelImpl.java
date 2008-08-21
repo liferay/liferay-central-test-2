@@ -52,9 +52,9 @@ import java.util.List;
  *
  * @author Brian Wing Shun Chan
  *
- * @see com.liferay.portal.service.model.Release
- * @see com.liferay.portal.service.model.ReleaseModel
- * @see com.liferay.portal.service.model.impl.ReleaseImpl
+ * @see com.liferay.portal.model.Release
+ * @see com.liferay.portal.model.ReleaseModel
+ * @see com.liferay.portal.model.impl.ReleaseImpl
  *
  */
 public class ReleaseModelImpl extends BaseModelImpl {

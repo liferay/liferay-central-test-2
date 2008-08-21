@@ -55,9 +55,9 @@ import java.util.List;
  *
  * @author Brian Wing Shun Chan
  *
- * @see com.liferay.portlet.tags.service.model.TagsEntry
- * @see com.liferay.portlet.tags.service.model.TagsEntryModel
- * @see com.liferay.portlet.tags.service.model.impl.TagsEntryImpl
+ * @see com.liferay.portlet.tags.model.TagsEntry
+ * @see com.liferay.portlet.tags.model.TagsEntryModel
+ * @see com.liferay.portlet.tags.model.impl.TagsEntryImpl
  *
  */
 public class TagsEntryModelImpl extends BaseModelImpl {

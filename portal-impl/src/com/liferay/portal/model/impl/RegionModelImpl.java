@@ -52,9 +52,9 @@ import java.util.List;
  *
  * @author Brian Wing Shun Chan
  *
- * @see com.liferay.portal.service.model.Region
- * @see com.liferay.portal.service.model.RegionModel
- * @see com.liferay.portal.service.model.impl.RegionImpl
+ * @see com.liferay.portal.model.Region
+ * @see com.liferay.portal.model.RegionModel
+ * @see com.liferay.portal.model.impl.RegionImpl
  *
  */
 public class RegionModelImpl extends BaseModelImpl {

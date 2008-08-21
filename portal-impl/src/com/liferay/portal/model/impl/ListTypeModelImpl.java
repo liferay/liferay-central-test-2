@@ -52,9 +52,9 @@ import java.util.List;
  *
  * @author Brian Wing Shun Chan
  *
- * @see com.liferay.portal.service.model.ListType
- * @see com.liferay.portal.service.model.ListTypeModel
- * @see com.liferay.portal.service.model.impl.ListTypeImpl
+ * @see com.liferay.portal.model.ListType
+ * @see com.liferay.portal.model.ListTypeModel
+ * @see com.liferay.portal.model.impl.ListTypeImpl
  *
  */
 public class ListTypeModelImpl extends BaseModelImpl {

@@ -39,9 +39,9 @@ import com.liferay.portal.model.BaseModel;
  *
  * @author Brian Wing Shun Chan
  *
- * @see com.liferay.portlet.wiki.service.model.WikiPageResource
- * @see com.liferay.portlet.wiki.service.model.impl.WikiPageResourceImpl
- * @see com.liferay.portlet.wiki.service.model.impl.WikiPageResourceModelImpl
+ * @see com.liferay.portlet.wiki.model.WikiPageResource
+ * @see com.liferay.portlet.wiki.model.impl.WikiPageResourceImpl
+ * @see com.liferay.portlet.wiki.model.impl.WikiPageResourceModelImpl
  *
  */
 public interface WikiPageResourceModel extends BaseModel {

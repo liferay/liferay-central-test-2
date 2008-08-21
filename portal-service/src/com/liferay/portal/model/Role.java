@@ -37,15 +37,15 @@ package com.liferay.portal.model;
  * </p>
  *
  * <p>
- * Customize <code>com.liferay.portal.service.model.impl.RoleImpl</code>
+ * Customize <code>com.liferay.portal.model.impl.RoleImpl</code>
  * and rerun the ServiceBuilder to generate the new methods.
  * </p>
  *
  * @author Brian Wing Shun Chan
  *
- * @see com.liferay.portal.service.model.RoleModel
- * @see com.liferay.portal.service.model.impl.RoleImpl
- * @see com.liferay.portal.service.model.impl.RoleModelImpl
+ * @see com.liferay.portal.model.RoleModel
+ * @see com.liferay.portal.model.impl.RoleImpl
+ * @see com.liferay.portal.model.impl.RoleModelImpl
  *
  */
 public interface Role extends RoleModel {

@@ -37,15 +37,15 @@ package com.liferay.portlet.tags.model;
  * </p>
  *
  * <p>
- * Customize <code>com.liferay.portlet.tags.service.model.impl.TagsAssetImpl</code>
+ * Customize <code>com.liferay.portlet.tags.model.impl.TagsAssetImpl</code>
  * and rerun the ServiceBuilder to generate the new methods.
  * </p>
  *
  * @author Brian Wing Shun Chan
  *
- * @see com.liferay.portlet.tags.service.model.TagsAssetModel
- * @see com.liferay.portlet.tags.service.model.impl.TagsAssetImpl
- * @see com.liferay.portlet.tags.service.model.impl.TagsAssetModelImpl
+ * @see com.liferay.portlet.tags.model.TagsAssetModel
+ * @see com.liferay.portlet.tags.model.impl.TagsAssetImpl
+ * @see com.liferay.portlet.tags.model.impl.TagsAssetModelImpl
  *
  */
 public interface TagsAsset extends TagsAssetModel {

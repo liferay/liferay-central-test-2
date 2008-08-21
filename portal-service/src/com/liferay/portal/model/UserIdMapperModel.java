@@ -38,9 +38,9 @@ package com.liferay.portal.model;
  *
  * @author Brian Wing Shun Chan
  *
- * @see com.liferay.portal.service.model.UserIdMapper
- * @see com.liferay.portal.service.model.impl.UserIdMapperImpl
- * @see com.liferay.portal.service.model.impl.UserIdMapperModelImpl
+ * @see com.liferay.portal.model.UserIdMapper
+ * @see com.liferay.portal.model.impl.UserIdMapperImpl
+ * @see com.liferay.portal.model.impl.UserIdMapperModelImpl
  *
  */
 public interface UserIdMapperModel extends BaseModel {

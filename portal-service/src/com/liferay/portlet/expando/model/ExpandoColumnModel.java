@@ -39,9 +39,9 @@ import com.liferay.portal.model.BaseModel;
  *
  * @author Brian Wing Shun Chan
  *
- * @see com.liferay.portlet.expando.service.model.ExpandoColumn
- * @see com.liferay.portlet.expando.service.model.impl.ExpandoColumnImpl
- * @see com.liferay.portlet.expando.service.model.impl.ExpandoColumnModelImpl
+ * @see com.liferay.portlet.expando.model.ExpandoColumn
+ * @see com.liferay.portlet.expando.model.impl.ExpandoColumnImpl
+ * @see com.liferay.portlet.expando.model.impl.ExpandoColumnModelImpl
  *
  */
 public interface ExpandoColumnModel extends BaseModel {

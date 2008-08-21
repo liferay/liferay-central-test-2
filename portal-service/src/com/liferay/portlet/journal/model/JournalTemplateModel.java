@@ -41,9 +41,9 @@ import java.util.Date;
  *
  * @author Brian Wing Shun Chan
  *
- * @see com.liferay.portlet.journal.service.model.JournalTemplate
- * @see com.liferay.portlet.journal.service.model.impl.JournalTemplateImpl
- * @see com.liferay.portlet.journal.service.model.impl.JournalTemplateModelImpl
+ * @see com.liferay.portlet.journal.model.JournalTemplate
+ * @see com.liferay.portlet.journal.model.impl.JournalTemplateImpl
+ * @see com.liferay.portlet.journal.model.impl.JournalTemplateModelImpl
  *
  */
 public interface JournalTemplateModel extends BaseModel {

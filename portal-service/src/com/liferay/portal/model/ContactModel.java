@@ -39,9 +39,9 @@ import java.util.Date;
  *
  * @author Brian Wing Shun Chan
  *
- * @see com.liferay.portal.service.model.Contact
- * @see com.liferay.portal.service.model.impl.ContactImpl
- * @see com.liferay.portal.service.model.impl.ContactModelImpl
+ * @see com.liferay.portal.model.Contact
+ * @see com.liferay.portal.model.impl.ContactImpl
+ * @see com.liferay.portal.model.impl.ContactModelImpl
  *
  */
 public interface ContactModel extends BaseModel {

@@ -39,9 +39,9 @@ import java.util.Date;
  *
  * @author Brian Wing Shun Chan
  *
- * @see com.liferay.portal.service.model.PasswordPolicy
- * @see com.liferay.portal.service.model.impl.PasswordPolicyImpl
- * @see com.liferay.portal.service.model.impl.PasswordPolicyModelImpl
+ * @see com.liferay.portal.model.PasswordPolicy
+ * @see com.liferay.portal.model.impl.PasswordPolicyImpl
+ * @see com.liferay.portal.model.impl.PasswordPolicyModelImpl
  *
  */
 public interface PasswordPolicyModel extends BaseModel {

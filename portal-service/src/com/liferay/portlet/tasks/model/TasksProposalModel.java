@@ -41,9 +41,9 @@ import java.util.Date;
  *
  * @author Brian Wing Shun Chan
  *
- * @see com.liferay.portlet.tasks.service.model.TasksProposal
- * @see com.liferay.portlet.tasks.service.model.impl.TasksProposalImpl
- * @see com.liferay.portlet.tasks.service.model.impl.TasksProposalModelImpl
+ * @see com.liferay.portlet.tasks.model.TasksProposal
+ * @see com.liferay.portlet.tasks.model.impl.TasksProposalImpl
+ * @see com.liferay.portlet.tasks.model.impl.TasksProposalModelImpl
  *
  */
 public interface TasksProposalModel extends BaseModel {

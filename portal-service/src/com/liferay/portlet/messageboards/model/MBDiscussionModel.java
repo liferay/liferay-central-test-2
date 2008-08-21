@@ -39,9 +39,9 @@ import com.liferay.portal.model.BaseModel;
  *
  * @author Brian Wing Shun Chan
  *
- * @see com.liferay.portlet.messageboards.service.model.MBDiscussion
- * @see com.liferay.portlet.messageboards.service.model.impl.MBDiscussionImpl
- * @see com.liferay.portlet.messageboards.service.model.impl.MBDiscussionModelImpl
+ * @see com.liferay.portlet.messageboards.model.MBDiscussion
+ * @see com.liferay.portlet.messageboards.model.impl.MBDiscussionImpl
+ * @see com.liferay.portlet.messageboards.model.impl.MBDiscussionModelImpl
  *
  */
 public interface MBDiscussionModel extends BaseModel {

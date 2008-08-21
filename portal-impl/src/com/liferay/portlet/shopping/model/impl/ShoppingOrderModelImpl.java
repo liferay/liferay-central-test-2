@@ -56,9 +56,9 @@ import java.util.List;
  *
  * @author Brian Wing Shun Chan
  *
- * @see com.liferay.portlet.shopping.service.model.ShoppingOrder
- * @see com.liferay.portlet.shopping.service.model.ShoppingOrderModel
- * @see com.liferay.portlet.shopping.service.model.impl.ShoppingOrderImpl
+ * @see com.liferay.portlet.shopping.model.ShoppingOrder
+ * @see com.liferay.portlet.shopping.model.ShoppingOrderModel
+ * @see com.liferay.portlet.shopping.model.impl.ShoppingOrderImpl
  *
  */
 public class ShoppingOrderModelImpl extends BaseModelImpl {

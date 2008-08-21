@@ -56,9 +56,9 @@ import java.util.List;
  *
  * @author Brian Wing Shun Chan
  *
- * @see com.liferay.portlet.documentlibrary.service.model.DLFileRank
- * @see com.liferay.portlet.documentlibrary.service.model.DLFileRankModel
- * @see com.liferay.portlet.documentlibrary.service.model.impl.DLFileRankImpl
+ * @see com.liferay.portlet.documentlibrary.model.DLFileRank
+ * @see com.liferay.portlet.documentlibrary.model.DLFileRankModel
+ * @see com.liferay.portlet.documentlibrary.model.impl.DLFileRankImpl
  *
  */
 public class DLFileRankModelImpl extends BaseModelImpl {

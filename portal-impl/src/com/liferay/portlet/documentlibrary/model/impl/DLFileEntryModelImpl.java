@@ -55,9 +55,9 @@ import java.util.List;
  *
  * @author Brian Wing Shun Chan
  *
- * @see com.liferay.portlet.documentlibrary.service.model.DLFileEntry
- * @see com.liferay.portlet.documentlibrary.service.model.DLFileEntryModel
- * @see com.liferay.portlet.documentlibrary.service.model.impl.DLFileEntryImpl
+ * @see com.liferay.portlet.documentlibrary.model.DLFileEntry
+ * @see com.liferay.portlet.documentlibrary.model.DLFileEntryModel
+ * @see com.liferay.portlet.documentlibrary.model.impl.DLFileEntryImpl
  *
  */
 public class DLFileEntryModelImpl extends BaseModelImpl {

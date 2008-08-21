@@ -37,15 +37,15 @@ package com.liferay.portal.model;
  * </p>
  *
  * <p>
- * Customize <code>com.liferay.portal.service.model.impl.AddressImpl</code>
+ * Customize <code>com.liferay.portal.model.impl.AddressImpl</code>
  * and rerun the ServiceBuilder to generate the new methods.
  * </p>
  *
  * @author Brian Wing Shun Chan
  *
- * @see com.liferay.portal.service.model.AddressModel
- * @see com.liferay.portal.service.model.impl.AddressImpl
- * @see com.liferay.portal.service.model.impl.AddressModelImpl
+ * @see com.liferay.portal.model.AddressModel
+ * @see com.liferay.portal.model.impl.AddressImpl
+ * @see com.liferay.portal.model.impl.AddressModelImpl
  *
  */
 public interface Address extends AddressModel {

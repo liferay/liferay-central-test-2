@@ -55,9 +55,9 @@ import java.util.List;
  *
  * @author Brian Wing Shun Chan
  *
- * @see com.liferay.portal.service.model.Address
- * @see com.liferay.portal.service.model.AddressModel
- * @see com.liferay.portal.service.model.impl.AddressImpl
+ * @see com.liferay.portal.model.Address
+ * @see com.liferay.portal.model.AddressModel
+ * @see com.liferay.portal.model.impl.AddressImpl
  *
  */
 public class AddressModelImpl extends BaseModelImpl {

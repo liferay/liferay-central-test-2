@@ -38,9 +38,9 @@ package com.liferay.portal.model;
  *
  * @author Brian Wing Shun Chan
  *
- * @see com.liferay.portal.service.model.Permission
- * @see com.liferay.portal.service.model.impl.PermissionImpl
- * @see com.liferay.portal.service.model.impl.PermissionModelImpl
+ * @see com.liferay.portal.model.Permission
+ * @see com.liferay.portal.model.impl.PermissionImpl
+ * @see com.liferay.portal.model.impl.PermissionModelImpl
  *
  */
 public interface PermissionModel extends BaseModel {

@@ -75,9 +75,9 @@ import java.rmi.RemoteException;
  *
  * @author Brian Wing Shun Chan
  *
+ * @see com.liferay.portlet.documentlibrary.model.DLFileEntrySoap
  * @see com.liferay.portlet.documentlibrary.service.DLFileEntryServiceUtil
  * @see com.liferay.portlet.documentlibrary.service.http.DLFileEntryServiceHttp
- * @see com.liferay.portlet.documentlibrary.service.model.DLFileEntrySoap
  *
  */
 public class DLFileEntryServiceSoap {

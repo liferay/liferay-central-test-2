@@ -41,9 +41,9 @@ import java.util.Date;
  *
  * @author Brian Wing Shun Chan
  *
- * @see com.liferay.portlet.tags.service.model.TagsVocabulary
- * @see com.liferay.portlet.tags.service.model.impl.TagsVocabularyImpl
- * @see com.liferay.portlet.tags.service.model.impl.TagsVocabularyModelImpl
+ * @see com.liferay.portlet.tags.model.TagsVocabulary
+ * @see com.liferay.portlet.tags.model.impl.TagsVocabularyImpl
+ * @see com.liferay.portlet.tags.model.impl.TagsVocabularyModelImpl
  *
  */
 public interface TagsVocabularyModel extends BaseModel {

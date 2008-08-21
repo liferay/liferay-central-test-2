@@ -37,15 +37,15 @@ package com.liferay.portal.model;
  * </p>
  *
  * <p>
- * Customize <code>com.liferay.portal.service.model.impl.SubscriptionImpl</code>
+ * Customize <code>com.liferay.portal.model.impl.SubscriptionImpl</code>
  * and rerun the ServiceBuilder to generate the new methods.
  * </p>
  *
  * @author Brian Wing Shun Chan
  *
- * @see com.liferay.portal.service.model.SubscriptionModel
- * @see com.liferay.portal.service.model.impl.SubscriptionImpl
- * @see com.liferay.portal.service.model.impl.SubscriptionModelImpl
+ * @see com.liferay.portal.model.SubscriptionModel
+ * @see com.liferay.portal.model.impl.SubscriptionImpl
+ * @see com.liferay.portal.model.impl.SubscriptionModelImpl
  *
  */
 public interface Subscription extends SubscriptionModel {

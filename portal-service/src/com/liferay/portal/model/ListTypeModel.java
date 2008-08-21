@@ -38,9 +38,9 @@ package com.liferay.portal.model;
  *
  * @author Brian Wing Shun Chan
  *
- * @see com.liferay.portal.service.model.ListType
- * @see com.liferay.portal.service.model.impl.ListTypeImpl
- * @see com.liferay.portal.service.model.impl.ListTypeModelImpl
+ * @see com.liferay.portal.model.ListType
+ * @see com.liferay.portal.model.impl.ListTypeImpl
+ * @see com.liferay.portal.model.impl.ListTypeModelImpl
  *
  */
 public interface ListTypeModel extends BaseModel {

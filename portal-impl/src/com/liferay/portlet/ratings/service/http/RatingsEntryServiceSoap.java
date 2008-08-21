@@ -75,9 +75,9 @@ import java.rmi.RemoteException;
  *
  * @author Brian Wing Shun Chan
  *
+ * @see com.liferay.portlet.ratings.model.RatingsEntrySoap
  * @see com.liferay.portlet.ratings.service.RatingsEntryServiceUtil
  * @see com.liferay.portlet.ratings.service.http.RatingsEntryServiceHttp
- * @see com.liferay.portlet.ratings.service.model.RatingsEntrySoap
  *
  */
 public class RatingsEntryServiceSoap {

@@ -39,9 +39,9 @@ import java.util.Date;
  *
  * @author Brian Wing Shun Chan
  *
- * @see com.liferay.portal.service.model.UserTrackerPath
- * @see com.liferay.portal.service.model.impl.UserTrackerPathImpl
- * @see com.liferay.portal.service.model.impl.UserTrackerPathModelImpl
+ * @see com.liferay.portal.model.UserTrackerPath
+ * @see com.liferay.portal.model.impl.UserTrackerPathImpl
+ * @see com.liferay.portal.model.impl.UserTrackerPathModelImpl
  *
  */
 public interface UserTrackerPathModel extends BaseModel {

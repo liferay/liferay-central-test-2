@@ -55,9 +55,9 @@ import java.util.List;
  *
  * @author Brian Wing Shun Chan
  *
- * @see com.liferay.portlet.messageboards.service.model.MBThread
- * @see com.liferay.portlet.messageboards.service.model.MBThreadModel
- * @see com.liferay.portlet.messageboards.service.model.impl.MBThreadImpl
+ * @see com.liferay.portlet.messageboards.model.MBThread
+ * @see com.liferay.portlet.messageboards.model.MBThreadModel
+ * @see com.liferay.portlet.messageboards.model.impl.MBThreadImpl
  *
  */
 public class MBThreadModelImpl extends BaseModelImpl {

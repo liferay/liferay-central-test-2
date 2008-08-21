@@ -69,9 +69,9 @@ package com.liferay.portal.service.http;
  *
  * @author Brian Wing Shun Chan
  *
+ * @see com.liferay.portal.model.AccountSoap
  * @see com.liferay.portal.service.AccountServiceUtil
  * @see com.liferay.portal.service.http.AccountServiceHttp
- * @see com.liferay.portal.service.model.AccountSoap
  *
  */
 public class AccountServiceSoap {

@@ -39,9 +39,9 @@ import java.util.Date;
  *
  * @author Brian Wing Shun Chan
  *
- * @see com.liferay.portal.service.model.WebDAVProps
- * @see com.liferay.portal.service.model.impl.WebDAVPropsImpl
- * @see com.liferay.portal.service.model.impl.WebDAVPropsModelImpl
+ * @see com.liferay.portal.model.WebDAVProps
+ * @see com.liferay.portal.model.impl.WebDAVPropsImpl
+ * @see com.liferay.portal.model.impl.WebDAVPropsModelImpl
  *
  */
 public interface WebDAVPropsModel extends BaseModel {

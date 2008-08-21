@@ -41,9 +41,9 @@ import java.util.Date;
  *
  * @author Brian Wing Shun Chan
  *
- * @see com.liferay.portlet.documentlibrary.service.model.DLFileRank
- * @see com.liferay.portlet.documentlibrary.service.model.impl.DLFileRankImpl
- * @see com.liferay.portlet.documentlibrary.service.model.impl.DLFileRankModelImpl
+ * @see com.liferay.portlet.documentlibrary.model.DLFileRank
+ * @see com.liferay.portlet.documentlibrary.model.impl.DLFileRankImpl
+ * @see com.liferay.portlet.documentlibrary.model.impl.DLFileRankModelImpl
  *
  */
 public interface DLFileRankModel extends BaseModel {

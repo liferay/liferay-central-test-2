@@ -75,9 +75,9 @@ import java.rmi.RemoteException;
  *
  * @author Brian Wing Shun Chan
  *
+ * @see com.liferay.portlet.messageboards.model.MBBanSoap
  * @see com.liferay.portlet.messageboards.service.MBBanServiceUtil
  * @see com.liferay.portlet.messageboards.service.http.MBBanServiceHttp
- * @see com.liferay.portlet.messageboards.service.model.MBBanSoap
  *
  */
 public class MBBanServiceSoap {

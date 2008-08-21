@@ -75,9 +75,9 @@ import java.rmi.RemoteException;
  *
  * @author Brian Wing Shun Chan
  *
+ * @see com.liferay.portlet.journal.model.JournalStructureSoap
  * @see com.liferay.portlet.journal.service.JournalStructureServiceUtil
  * @see com.liferay.portlet.journal.service.http.JournalStructureServiceHttp
- * @see com.liferay.portlet.journal.service.model.JournalStructureSoap
  *
  */
 public class JournalStructureServiceSoap {

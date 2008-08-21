@@ -54,9 +54,9 @@ import java.util.List;
  *
  * @author Brian Wing Shun Chan
  *
- * @see com.liferay.portlet.shopping.service.model.ShoppingItemField
- * @see com.liferay.portlet.shopping.service.model.ShoppingItemFieldModel
- * @see com.liferay.portlet.shopping.service.model.impl.ShoppingItemFieldImpl
+ * @see com.liferay.portlet.shopping.model.ShoppingItemField
+ * @see com.liferay.portlet.shopping.model.ShoppingItemFieldModel
+ * @see com.liferay.portlet.shopping.model.impl.ShoppingItemFieldImpl
  *
  */
 public class ShoppingItemFieldModelImpl extends BaseModelImpl {

@@ -41,9 +41,9 @@ import java.util.Date;
  *
  * @author Brian Wing Shun Chan
  *
- * @see com.liferay.portlet.documentlibrary.service.model.DLFolder
- * @see com.liferay.portlet.documentlibrary.service.model.impl.DLFolderImpl
- * @see com.liferay.portlet.documentlibrary.service.model.impl.DLFolderModelImpl
+ * @see com.liferay.portlet.documentlibrary.model.DLFolder
+ * @see com.liferay.portlet.documentlibrary.model.impl.DLFolderImpl
+ * @see com.liferay.portlet.documentlibrary.model.impl.DLFolderModelImpl
  *
  */
 public interface DLFolderModel extends BaseModel {

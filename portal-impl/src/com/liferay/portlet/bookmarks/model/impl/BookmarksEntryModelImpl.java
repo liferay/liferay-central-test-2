@@ -55,9 +55,9 @@ import java.util.List;
  *
  * @author Brian Wing Shun Chan
  *
- * @see com.liferay.portlet.bookmarks.service.model.BookmarksEntry
- * @see com.liferay.portlet.bookmarks.service.model.BookmarksEntryModel
- * @see com.liferay.portlet.bookmarks.service.model.impl.BookmarksEntryImpl
+ * @see com.liferay.portlet.bookmarks.model.BookmarksEntry
+ * @see com.liferay.portlet.bookmarks.model.BookmarksEntryModel
+ * @see com.liferay.portlet.bookmarks.model.impl.BookmarksEntryImpl
  *
  */
 public class BookmarksEntryModelImpl extends BaseModelImpl {

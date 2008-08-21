@@ -56,9 +56,9 @@ import java.util.List;
  *
  * @author Brian Wing Shun Chan
  *
- * @see com.liferay.portlet.blogs.service.model.BlogsEntry
- * @see com.liferay.portlet.blogs.service.model.BlogsEntryModel
- * @see com.liferay.portlet.blogs.service.model.impl.BlogsEntryImpl
+ * @see com.liferay.portlet.blogs.model.BlogsEntry
+ * @see com.liferay.portlet.blogs.model.BlogsEntryModel
+ * @see com.liferay.portlet.blogs.model.impl.BlogsEntryImpl
  *
  */
 public class BlogsEntryModelImpl extends BaseModelImpl {

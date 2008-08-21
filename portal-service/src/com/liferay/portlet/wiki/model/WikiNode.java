@@ -37,15 +37,15 @@ package com.liferay.portlet.wiki.model;
  * </p>
  *
  * <p>
- * Customize <code>com.liferay.portlet.wiki.service.model.impl.WikiNodeImpl</code>
+ * Customize <code>com.liferay.portlet.wiki.model.impl.WikiNodeImpl</code>
  * and rerun the ServiceBuilder to generate the new methods.
  * </p>
  *
  * @author Brian Wing Shun Chan
  *
- * @see com.liferay.portlet.wiki.service.model.WikiNodeModel
- * @see com.liferay.portlet.wiki.service.model.impl.WikiNodeImpl
- * @see com.liferay.portlet.wiki.service.model.impl.WikiNodeModelImpl
+ * @see com.liferay.portlet.wiki.model.WikiNodeModel
+ * @see com.liferay.portlet.wiki.model.impl.WikiNodeImpl
+ * @see com.liferay.portlet.wiki.model.impl.WikiNodeModelImpl
  *
  */
 public interface WikiNode extends WikiNodeModel {

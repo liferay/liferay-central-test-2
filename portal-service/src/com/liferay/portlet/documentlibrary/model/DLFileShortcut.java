@@ -37,15 +37,15 @@ package com.liferay.portlet.documentlibrary.model;
  * </p>
  *
  * <p>
- * Customize <code>com.liferay.portlet.documentlibrary.service.model.impl.DLFileShortcutImpl</code>
+ * Customize <code>com.liferay.portlet.documentlibrary.model.impl.DLFileShortcutImpl</code>
  * and rerun the ServiceBuilder to generate the new methods.
  * </p>
  *
  * @author Brian Wing Shun Chan
  *
- * @see com.liferay.portlet.documentlibrary.service.model.DLFileShortcutModel
- * @see com.liferay.portlet.documentlibrary.service.model.impl.DLFileShortcutImpl
- * @see com.liferay.portlet.documentlibrary.service.model.impl.DLFileShortcutModelImpl
+ * @see com.liferay.portlet.documentlibrary.model.DLFileShortcutModel
+ * @see com.liferay.portlet.documentlibrary.model.impl.DLFileShortcutImpl
+ * @see com.liferay.portlet.documentlibrary.model.impl.DLFileShortcutModelImpl
  *
  */
 public interface DLFileShortcut extends DLFileShortcutModel {

@@ -41,9 +41,9 @@ import java.util.Date;
  *
  * @author Brian Wing Shun Chan
  *
- * @see com.liferay.portlet.messageboards.service.model.MBMessage
- * @see com.liferay.portlet.messageboards.service.model.impl.MBMessageImpl
- * @see com.liferay.portlet.messageboards.service.model.impl.MBMessageModelImpl
+ * @see com.liferay.portlet.messageboards.model.MBMessage
+ * @see com.liferay.portlet.messageboards.model.impl.MBMessageImpl
+ * @see com.liferay.portlet.messageboards.model.impl.MBMessageModelImpl
  *
  */
 public interface MBMessageModel extends BaseModel {

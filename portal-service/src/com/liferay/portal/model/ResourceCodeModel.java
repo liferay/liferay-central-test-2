@@ -38,9 +38,9 @@ package com.liferay.portal.model;
  *
  * @author Brian Wing Shun Chan
  *
- * @see com.liferay.portal.service.model.ResourceCode
- * @see com.liferay.portal.service.model.impl.ResourceCodeImpl
- * @see com.liferay.portal.service.model.impl.ResourceCodeModelImpl
+ * @see com.liferay.portal.model.ResourceCode
+ * @see com.liferay.portal.model.impl.ResourceCodeImpl
+ * @see com.liferay.portal.model.impl.ResourceCodeModelImpl
  *
  */
 public interface ResourceCodeModel extends BaseModel {

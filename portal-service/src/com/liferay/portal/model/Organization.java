@@ -37,15 +37,15 @@ package com.liferay.portal.model;
  * </p>
  *
  * <p>
- * Customize <code>com.liferay.portal.service.model.impl.OrganizationImpl</code>
+ * Customize <code>com.liferay.portal.model.impl.OrganizationImpl</code>
  * and rerun the ServiceBuilder to generate the new methods.
  * </p>
  *
  * @author Brian Wing Shun Chan
  *
- * @see com.liferay.portal.service.model.OrganizationModel
- * @see com.liferay.portal.service.model.impl.OrganizationImpl
- * @see com.liferay.portal.service.model.impl.OrganizationModelImpl
+ * @see com.liferay.portal.model.OrganizationModel
+ * @see com.liferay.portal.model.impl.OrganizationImpl
+ * @see com.liferay.portal.model.impl.OrganizationModelImpl
  *
  */
 public interface Organization extends OrganizationModel {

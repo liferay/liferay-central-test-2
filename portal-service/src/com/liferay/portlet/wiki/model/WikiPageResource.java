@@ -37,15 +37,15 @@ package com.liferay.portlet.wiki.model;
  * </p>
  *
  * <p>
- * Customize <code>com.liferay.portlet.wiki.service.model.impl.WikiPageResourceImpl</code>
+ * Customize <code>com.liferay.portlet.wiki.model.impl.WikiPageResourceImpl</code>
  * and rerun the ServiceBuilder to generate the new methods.
  * </p>
  *
  * @author Brian Wing Shun Chan
  *
- * @see com.liferay.portlet.wiki.service.model.WikiPageResourceModel
- * @see com.liferay.portlet.wiki.service.model.impl.WikiPageResourceImpl
- * @see com.liferay.portlet.wiki.service.model.impl.WikiPageResourceModelImpl
+ * @see com.liferay.portlet.wiki.model.WikiPageResourceModel
+ * @see com.liferay.portlet.wiki.model.impl.WikiPageResourceImpl
+ * @see com.liferay.portlet.wiki.model.impl.WikiPageResourceModelImpl
  *
  */
 public interface WikiPageResource extends WikiPageResourceModel {

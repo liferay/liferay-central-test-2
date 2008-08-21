@@ -69,9 +69,9 @@ package com.liferay.portlet.tags.service.http;
  *
  * @author Brian Wing Shun Chan
  *
+ * @see com.liferay.portlet.tags.model.TagsSourceSoap
  * @see com.liferay.portlet.tags.service.TagsSourceServiceUtil
  * @see com.liferay.portlet.tags.service.http.TagsSourceServiceHttp
- * @see com.liferay.portlet.tags.service.model.TagsSourceSoap
  *
  */
 public class TagsSourceServiceSoap {

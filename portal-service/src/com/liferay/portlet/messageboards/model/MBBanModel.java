@@ -41,9 +41,9 @@ import java.util.Date;
  *
  * @author Brian Wing Shun Chan
  *
- * @see com.liferay.portlet.messageboards.service.model.MBBan
- * @see com.liferay.portlet.messageboards.service.model.impl.MBBanImpl
- * @see com.liferay.portlet.messageboards.service.model.impl.MBBanModelImpl
+ * @see com.liferay.portlet.messageboards.model.MBBan
+ * @see com.liferay.portlet.messageboards.model.impl.MBBanImpl
+ * @see com.liferay.portlet.messageboards.model.impl.MBBanModelImpl
  *
  */
 public interface MBBanModel extends BaseModel {

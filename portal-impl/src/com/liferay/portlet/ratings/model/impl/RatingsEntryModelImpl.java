@@ -56,9 +56,9 @@ import java.util.List;
  *
  * @author Brian Wing Shun Chan
  *
- * @see com.liferay.portlet.ratings.service.model.RatingsEntry
- * @see com.liferay.portlet.ratings.service.model.RatingsEntryModel
- * @see com.liferay.portlet.ratings.service.model.impl.RatingsEntryImpl
+ * @see com.liferay.portlet.ratings.model.RatingsEntry
+ * @see com.liferay.portlet.ratings.model.RatingsEntryModel
+ * @see com.liferay.portlet.ratings.model.impl.RatingsEntryImpl
  *
  */
 public class RatingsEntryModelImpl extends BaseModelImpl {

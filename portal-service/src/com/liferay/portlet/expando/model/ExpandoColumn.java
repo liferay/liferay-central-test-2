@@ -37,15 +37,15 @@ package com.liferay.portlet.expando.model;
  * </p>
  *
  * <p>
- * Customize <code>com.liferay.portlet.expando.service.model.impl.ExpandoColumnImpl</code>
+ * Customize <code>com.liferay.portlet.expando.model.impl.ExpandoColumnImpl</code>
  * and rerun the ServiceBuilder to generate the new methods.
  * </p>
  *
  * @author Brian Wing Shun Chan
  *
- * @see com.liferay.portlet.expando.service.model.ExpandoColumnModel
- * @see com.liferay.portlet.expando.service.model.impl.ExpandoColumnImpl
- * @see com.liferay.portlet.expando.service.model.impl.ExpandoColumnModelImpl
+ * @see com.liferay.portlet.expando.model.ExpandoColumnModel
+ * @see com.liferay.portlet.expando.model.impl.ExpandoColumnImpl
+ * @see com.liferay.portlet.expando.model.impl.ExpandoColumnModelImpl
  *
  */
 public interface ExpandoColumn extends ExpandoColumnModel {

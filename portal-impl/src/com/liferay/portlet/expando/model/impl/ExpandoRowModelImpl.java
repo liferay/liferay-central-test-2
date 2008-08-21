@@ -53,9 +53,9 @@ import java.util.List;
  *
  * @author Brian Wing Shun Chan
  *
- * @see com.liferay.portlet.expando.service.model.ExpandoRow
- * @see com.liferay.portlet.expando.service.model.ExpandoRowModel
- * @see com.liferay.portlet.expando.service.model.impl.ExpandoRowImpl
+ * @see com.liferay.portlet.expando.model.ExpandoRow
+ * @see com.liferay.portlet.expando.model.ExpandoRowModel
+ * @see com.liferay.portlet.expando.model.impl.ExpandoRowImpl
  *
  */
 public class ExpandoRowModelImpl extends BaseModelImpl {

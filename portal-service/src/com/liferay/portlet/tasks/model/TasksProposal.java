@@ -37,15 +37,15 @@ package com.liferay.portlet.tasks.model;
  * </p>
  *
  * <p>
- * Customize <code>com.liferay.portlet.tasks.service.model.impl.TasksProposalImpl</code>
+ * Customize <code>com.liferay.portlet.tasks.model.impl.TasksProposalImpl</code>
  * and rerun the ServiceBuilder to generate the new methods.
  * </p>
  *
  * @author Brian Wing Shun Chan
  *
- * @see com.liferay.portlet.tasks.service.model.TasksProposalModel
- * @see com.liferay.portlet.tasks.service.model.impl.TasksProposalImpl
- * @see com.liferay.portlet.tasks.service.model.impl.TasksProposalModelImpl
+ * @see com.liferay.portlet.tasks.model.TasksProposalModel
+ * @see com.liferay.portlet.tasks.model.impl.TasksProposalImpl
+ * @see com.liferay.portlet.tasks.model.impl.TasksProposalModelImpl
  *
  */
 public interface TasksProposal extends TasksProposalModel {

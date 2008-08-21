@@ -37,15 +37,15 @@ package com.liferay.portal.model;
  * </p>
  *
  * <p>
- * Customize <code>com.liferay.portal.service.model.impl.OrgGroupPermissionImpl</code>
+ * Customize <code>com.liferay.portal.model.impl.OrgGroupPermissionImpl</code>
  * and rerun the ServiceBuilder to generate the new methods.
  * </p>
  *
  * @author Brian Wing Shun Chan
  *
- * @see com.liferay.portal.service.model.OrgGroupPermissionModel
- * @see com.liferay.portal.service.model.impl.OrgGroupPermissionImpl
- * @see com.liferay.portal.service.model.impl.OrgGroupPermissionModelImpl
+ * @see com.liferay.portal.model.OrgGroupPermissionModel
+ * @see com.liferay.portal.model.impl.OrgGroupPermissionImpl
+ * @see com.liferay.portal.model.impl.OrgGroupPermissionModelImpl
  *
  */
 public interface OrgGroupPermission extends OrgGroupPermissionModel {

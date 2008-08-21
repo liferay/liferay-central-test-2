@@ -39,9 +39,9 @@ import java.util.Date;
  *
  * @author Brian Wing Shun Chan
  *
- * @see com.liferay.portal.service.model.User
- * @see com.liferay.portal.service.model.impl.UserImpl
- * @see com.liferay.portal.service.model.impl.UserModelImpl
+ * @see com.liferay.portal.model.User
+ * @see com.liferay.portal.model.impl.UserImpl
+ * @see com.liferay.portal.model.impl.UserModelImpl
  *
  */
 public interface UserModel extends BaseModel {

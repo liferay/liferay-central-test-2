@@ -37,15 +37,15 @@ package com.liferay.portal.model;
  * </p>
  *
  * <p>
- * Customize <code>com.liferay.portal.service.model.impl.MembershipRequestImpl</code>
+ * Customize <code>com.liferay.portal.model.impl.MembershipRequestImpl</code>
  * and rerun the ServiceBuilder to generate the new methods.
  * </p>
  *
  * @author Brian Wing Shun Chan
  *
- * @see com.liferay.portal.service.model.MembershipRequestModel
- * @see com.liferay.portal.service.model.impl.MembershipRequestImpl
- * @see com.liferay.portal.service.model.impl.MembershipRequestModelImpl
+ * @see com.liferay.portal.model.MembershipRequestModel
+ * @see com.liferay.portal.model.impl.MembershipRequestImpl
+ * @see com.liferay.portal.model.impl.MembershipRequestModelImpl
  *
  */
 public interface MembershipRequest extends MembershipRequestModel {

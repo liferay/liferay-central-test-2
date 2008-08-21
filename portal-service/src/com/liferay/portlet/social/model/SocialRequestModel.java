@@ -41,9 +41,9 @@ import java.util.Date;
  *
  * @author Brian Wing Shun Chan
  *
- * @see com.liferay.portlet.social.service.model.SocialRequest
- * @see com.liferay.portlet.social.service.model.impl.SocialRequestImpl
- * @see com.liferay.portlet.social.service.model.impl.SocialRequestModelImpl
+ * @see com.liferay.portlet.social.model.SocialRequest
+ * @see com.liferay.portlet.social.model.impl.SocialRequestImpl
+ * @see com.liferay.portlet.social.model.impl.SocialRequestModelImpl
  *
  */
 public interface SocialRequestModel extends BaseModel {

@@ -39,9 +39,9 @@ import java.util.Date;
  *
  * @author Brian Wing Shun Chan
  *
- * @see com.liferay.portal.service.model.Address
- * @see com.liferay.portal.service.model.impl.AddressImpl
- * @see com.liferay.portal.service.model.impl.AddressModelImpl
+ * @see com.liferay.portal.model.Address
+ * @see com.liferay.portal.model.impl.AddressImpl
+ * @see com.liferay.portal.model.impl.AddressModelImpl
  *
  */
 public interface AddressModel extends BaseModel {

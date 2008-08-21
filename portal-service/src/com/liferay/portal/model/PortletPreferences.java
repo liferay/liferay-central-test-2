@@ -37,15 +37,15 @@ package com.liferay.portal.model;
  * </p>
  *
  * <p>
- * Customize <code>com.liferay.portal.service.model.impl.PortletPreferencesImpl</code>
+ * Customize <code>com.liferay.portal.model.impl.PortletPreferencesImpl</code>
  * and rerun the ServiceBuilder to generate the new methods.
  * </p>
  *
  * @author Brian Wing Shun Chan
  *
- * @see com.liferay.portal.service.model.PortletPreferencesModel
- * @see com.liferay.portal.service.model.impl.PortletPreferencesImpl
- * @see com.liferay.portal.service.model.impl.PortletPreferencesModelImpl
+ * @see com.liferay.portal.model.PortletPreferencesModel
+ * @see com.liferay.portal.model.impl.PortletPreferencesImpl
+ * @see com.liferay.portal.model.impl.PortletPreferencesModelImpl
  *
  */
 public interface PortletPreferences extends PortletPreferencesModel {

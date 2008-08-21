@@ -74,9 +74,9 @@ import java.rmi.RemoteException;
  *
  * @author Brian Wing Shun Chan
  *
+ * @see com.liferay.portal.model.UserGroupSoap
  * @see com.liferay.portal.service.UserGroupServiceUtil
  * @see com.liferay.portal.service.http.UserGroupServiceHttp
- * @see com.liferay.portal.service.model.UserGroupSoap
  *
  */
 public class UserGroupServiceSoap {

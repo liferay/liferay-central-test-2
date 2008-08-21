@@ -75,9 +75,9 @@ import java.rmi.RemoteException;
  *
  * @author Brian Wing Shun Chan
  *
+ * @see com.liferay.portlet.workflow.model.WorkflowComponentSoap
  * @see com.liferay.portlet.workflow.service.WorkflowComponentServiceUtil
  * @see com.liferay.portlet.workflow.service.http.WorkflowComponentServiceHttp
- * @see com.liferay.portlet.workflow.service.model.WorkflowComponentSoap
  *
  */
 public class WorkflowComponentServiceSoap {

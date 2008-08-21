@@ -39,9 +39,9 @@ import com.liferay.portal.service.persistence.OrgGroupRolePK;
  *
  * @author Brian Wing Shun Chan
  *
- * @see com.liferay.portal.service.model.OrgGroupRole
- * @see com.liferay.portal.service.model.impl.OrgGroupRoleImpl
- * @see com.liferay.portal.service.model.impl.OrgGroupRoleModelImpl
+ * @see com.liferay.portal.model.OrgGroupRole
+ * @see com.liferay.portal.model.impl.OrgGroupRoleImpl
+ * @see com.liferay.portal.model.impl.OrgGroupRoleModelImpl
  *
  */
 public interface OrgGroupRoleModel extends BaseModel {

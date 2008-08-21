@@ -75,9 +75,9 @@ import java.rmi.RemoteException;
  *
  * @author Brian Wing Shun Chan
  *
+ * @see com.liferay.portlet.shopping.model.ShoppingCategorySoap
  * @see com.liferay.portlet.shopping.service.ShoppingCategoryServiceUtil
  * @see com.liferay.portlet.shopping.service.http.ShoppingCategoryServiceHttp
- * @see com.liferay.portlet.shopping.service.model.ShoppingCategorySoap
  *
  */
 public class ShoppingCategoryServiceSoap {

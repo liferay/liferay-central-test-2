@@ -52,9 +52,9 @@ import java.util.List;
  *
  * @author Brian Wing Shun Chan
  *
- * @see com.liferay.portal.service.model.PasswordPolicyRel
- * @see com.liferay.portal.service.model.PasswordPolicyRelModel
- * @see com.liferay.portal.service.model.impl.PasswordPolicyRelImpl
+ * @see com.liferay.portal.model.PasswordPolicyRel
+ * @see com.liferay.portal.model.PasswordPolicyRelModel
+ * @see com.liferay.portal.model.impl.PasswordPolicyRelImpl
  *
  */
 public class PasswordPolicyRelModelImpl extends BaseModelImpl {

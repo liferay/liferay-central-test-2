@@ -56,9 +56,9 @@ import java.util.List;
  *
  * @author Brian Wing Shun Chan
  *
- * @see com.liferay.portlet.calendar.service.model.CalEvent
- * @see com.liferay.portlet.calendar.service.model.CalEventModel
- * @see com.liferay.portlet.calendar.service.model.impl.CalEventImpl
+ * @see com.liferay.portlet.calendar.model.CalEvent
+ * @see com.liferay.portlet.calendar.model.CalEventModel
+ * @see com.liferay.portlet.calendar.model.impl.CalEventImpl
  *
  */
 public class CalEventModelImpl extends BaseModelImpl {

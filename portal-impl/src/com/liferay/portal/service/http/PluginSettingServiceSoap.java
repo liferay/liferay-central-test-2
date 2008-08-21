@@ -74,9 +74,9 @@ import java.rmi.RemoteException;
  *
  * @author Brian Wing Shun Chan
  *
+ * @see com.liferay.portal.model.PluginSettingSoap
  * @see com.liferay.portal.service.PluginSettingServiceUtil
  * @see com.liferay.portal.service.http.PluginSettingServiceHttp
- * @see com.liferay.portal.service.model.PluginSettingSoap
  *
  */
 public class PluginSettingServiceSoap {

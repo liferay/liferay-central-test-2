@@ -41,9 +41,9 @@ import java.util.Date;
  *
  * @author Brian Wing Shun Chan
  *
- * @see com.liferay.portlet.documentlibrary.service.model.DLFileEntry
- * @see com.liferay.portlet.documentlibrary.service.model.impl.DLFileEntryImpl
- * @see com.liferay.portlet.documentlibrary.service.model.impl.DLFileEntryModelImpl
+ * @see com.liferay.portlet.documentlibrary.model.DLFileEntry
+ * @see com.liferay.portlet.documentlibrary.model.impl.DLFileEntryImpl
+ * @see com.liferay.portlet.documentlibrary.model.impl.DLFileEntryModelImpl
  *
  */
 public interface DLFileEntryModel extends BaseModel {

@@ -38,9 +38,9 @@ package com.liferay.portal.model;
  *
  * @author Brian Wing Shun Chan
  *
- * @see com.liferay.portal.service.model.Portlet
- * @see com.liferay.portal.service.model.impl.PortletImpl
- * @see com.liferay.portal.service.model.impl.PortletModelImpl
+ * @see com.liferay.portal.model.Portlet
+ * @see com.liferay.portal.model.impl.PortletImpl
+ * @see com.liferay.portal.model.impl.PortletModelImpl
  *
  */
 public interface PortletModel extends BaseModel {

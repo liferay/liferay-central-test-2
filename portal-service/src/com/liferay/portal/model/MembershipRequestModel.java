@@ -39,9 +39,9 @@ import java.util.Date;
  *
  * @author Brian Wing Shun Chan
  *
- * @see com.liferay.portal.service.model.MembershipRequest
- * @see com.liferay.portal.service.model.impl.MembershipRequestImpl
- * @see com.liferay.portal.service.model.impl.MembershipRequestModelImpl
+ * @see com.liferay.portal.model.MembershipRequest
+ * @see com.liferay.portal.model.impl.MembershipRequestImpl
+ * @see com.liferay.portal.model.impl.MembershipRequestModelImpl
  *
  */
 public interface MembershipRequestModel extends BaseModel {

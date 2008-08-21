@@ -55,9 +55,9 @@ import java.util.List;
  *
  * @author Brian Wing Shun Chan
  *
- * @see com.liferay.portlet.messageboards.service.model.MBBan
- * @see com.liferay.portlet.messageboards.service.model.MBBanModel
- * @see com.liferay.portlet.messageboards.service.model.impl.MBBanImpl
+ * @see com.liferay.portlet.messageboards.model.MBBan
+ * @see com.liferay.portlet.messageboards.model.MBBanModel
+ * @see com.liferay.portlet.messageboards.model.impl.MBBanImpl
  *
  */
 public class MBBanModelImpl extends BaseModelImpl {

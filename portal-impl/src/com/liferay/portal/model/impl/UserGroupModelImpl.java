@@ -52,9 +52,9 @@ import java.util.List;
  *
  * @author Brian Wing Shun Chan
  *
- * @see com.liferay.portal.service.model.UserGroup
- * @see com.liferay.portal.service.model.UserGroupModel
- * @see com.liferay.portal.service.model.impl.UserGroupImpl
+ * @see com.liferay.portal.model.UserGroup
+ * @see com.liferay.portal.model.UserGroupModel
+ * @see com.liferay.portal.model.impl.UserGroupImpl
  *
  */
 public class UserGroupModelImpl extends BaseModelImpl {

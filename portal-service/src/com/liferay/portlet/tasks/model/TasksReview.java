@@ -37,15 +37,15 @@ package com.liferay.portlet.tasks.model;
  * </p>
  *
  * <p>
- * Customize <code>com.liferay.portlet.tasks.service.model.impl.TasksReviewImpl</code>
+ * Customize <code>com.liferay.portlet.tasks.model.impl.TasksReviewImpl</code>
  * and rerun the ServiceBuilder to generate the new methods.
  * </p>
  *
  * @author Brian Wing Shun Chan
  *
- * @see com.liferay.portlet.tasks.service.model.TasksReviewModel
- * @see com.liferay.portlet.tasks.service.model.impl.TasksReviewImpl
- * @see com.liferay.portlet.tasks.service.model.impl.TasksReviewModelImpl
+ * @see com.liferay.portlet.tasks.model.TasksReviewModel
+ * @see com.liferay.portlet.tasks.model.impl.TasksReviewImpl
+ * @see com.liferay.portlet.tasks.model.impl.TasksReviewModelImpl
  *
  */
 public interface TasksReview extends TasksReviewModel {

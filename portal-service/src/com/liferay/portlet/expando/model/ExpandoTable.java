@@ -37,15 +37,15 @@ package com.liferay.portlet.expando.model;
  * </p>
  *
  * <p>
- * Customize <code>com.liferay.portlet.expando.service.model.impl.ExpandoTableImpl</code>
+ * Customize <code>com.liferay.portlet.expando.model.impl.ExpandoTableImpl</code>
  * and rerun the ServiceBuilder to generate the new methods.
  * </p>
  *
  * @author Brian Wing Shun Chan
  *
- * @see com.liferay.portlet.expando.service.model.ExpandoTableModel
- * @see com.liferay.portlet.expando.service.model.impl.ExpandoTableImpl
- * @see com.liferay.portlet.expando.service.model.impl.ExpandoTableModelImpl
+ * @see com.liferay.portlet.expando.model.ExpandoTableModel
+ * @see com.liferay.portlet.expando.model.impl.ExpandoTableImpl
+ * @see com.liferay.portlet.expando.model.impl.ExpandoTableModelImpl
  *
  */
 public interface ExpandoTable extends ExpandoTableModel {

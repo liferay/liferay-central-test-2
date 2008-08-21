@@ -37,15 +37,15 @@ package com.liferay.portal.model;
  * </p>
  *
  * <p>
- * Customize <code>com.liferay.portal.service.model.impl.PhoneImpl</code>
+ * Customize <code>com.liferay.portal.model.impl.PhoneImpl</code>
  * and rerun the ServiceBuilder to generate the new methods.
  * </p>
  *
  * @author Brian Wing Shun Chan
  *
- * @see com.liferay.portal.service.model.PhoneModel
- * @see com.liferay.portal.service.model.impl.PhoneImpl
- * @see com.liferay.portal.service.model.impl.PhoneModelImpl
+ * @see com.liferay.portal.model.PhoneModel
+ * @see com.liferay.portal.model.impl.PhoneImpl
+ * @see com.liferay.portal.model.impl.PhoneModelImpl
  *
  */
 public interface Phone extends PhoneModel {

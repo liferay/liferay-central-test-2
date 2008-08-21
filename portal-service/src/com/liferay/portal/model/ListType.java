@@ -37,15 +37,15 @@ package com.liferay.portal.model;
  * </p>
  *
  * <p>
- * Customize <code>com.liferay.portal.service.model.impl.ListTypeImpl</code>
+ * Customize <code>com.liferay.portal.model.impl.ListTypeImpl</code>
  * and rerun the ServiceBuilder to generate the new methods.
  * </p>
  *
  * @author Brian Wing Shun Chan
  *
- * @see com.liferay.portal.service.model.ListTypeModel
- * @see com.liferay.portal.service.model.impl.ListTypeImpl
- * @see com.liferay.portal.service.model.impl.ListTypeModelImpl
+ * @see com.liferay.portal.model.ListTypeModel
+ * @see com.liferay.portal.model.impl.ListTypeImpl
+ * @see com.liferay.portal.model.impl.ListTypeModelImpl
  *
  */
 public interface ListType extends ListTypeModel {

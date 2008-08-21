@@ -41,9 +41,9 @@ import java.util.Date;
  *
  * @author Brian Wing Shun Chan
  *
- * @see com.liferay.portlet.imagegallery.service.model.IGImage
- * @see com.liferay.portlet.imagegallery.service.model.impl.IGImageImpl
- * @see com.liferay.portlet.imagegallery.service.model.impl.IGImageModelImpl
+ * @see com.liferay.portlet.imagegallery.model.IGImage
+ * @see com.liferay.portlet.imagegallery.model.impl.IGImageImpl
+ * @see com.liferay.portlet.imagegallery.model.impl.IGImageModelImpl
  *
  */
 public interface IGImageModel extends BaseModel {

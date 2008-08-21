@@ -52,9 +52,9 @@ import java.util.List;
  *
  * @author Brian Wing Shun Chan
  *
- * @see com.liferay.portal.service.model.Company
- * @see com.liferay.portal.service.model.CompanyModel
- * @see com.liferay.portal.service.model.impl.CompanyImpl
+ * @see com.liferay.portal.model.Company
+ * @see com.liferay.portal.model.CompanyModel
+ * @see com.liferay.portal.model.impl.CompanyImpl
  *
  */
 public class CompanyModelImpl extends BaseModelImpl {

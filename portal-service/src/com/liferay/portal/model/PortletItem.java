@@ -37,15 +37,15 @@ package com.liferay.portal.model;
  * </p>
  *
  * <p>
- * Customize <code>com.liferay.portal.service.model.impl.PortletItemImpl</code>
+ * Customize <code>com.liferay.portal.model.impl.PortletItemImpl</code>
  * and rerun the ServiceBuilder to generate the new methods.
  * </p>
  *
  * @author Brian Wing Shun Chan
  *
- * @see com.liferay.portal.service.model.PortletItemModel
- * @see com.liferay.portal.service.model.impl.PortletItemImpl
- * @see com.liferay.portal.service.model.impl.PortletItemModelImpl
+ * @see com.liferay.portal.model.PortletItemModel
+ * @see com.liferay.portal.model.impl.PortletItemImpl
+ * @see com.liferay.portal.model.impl.PortletItemModelImpl
  *
  */
 public interface PortletItem extends PortletItemModel {

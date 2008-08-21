@@ -53,9 +53,9 @@ import java.util.List;
  *
  * @author Brian Wing Shun Chan
  *
- * @see com.liferay.portal.service.model.Group
- * @see com.liferay.portal.service.model.GroupModel
- * @see com.liferay.portal.service.model.impl.GroupImpl
+ * @see com.liferay.portal.model.Group
+ * @see com.liferay.portal.model.GroupModel
+ * @see com.liferay.portal.model.impl.GroupImpl
  *
  */
 public class GroupModelImpl extends BaseModelImpl {

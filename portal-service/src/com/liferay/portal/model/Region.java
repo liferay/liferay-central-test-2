@@ -37,15 +37,15 @@ package com.liferay.portal.model;
  * </p>
  *
  * <p>
- * Customize <code>com.liferay.portal.service.model.impl.RegionImpl</code>
+ * Customize <code>com.liferay.portal.model.impl.RegionImpl</code>
  * and rerun the ServiceBuilder to generate the new methods.
  * </p>
  *
  * @author Brian Wing Shun Chan
  *
- * @see com.liferay.portal.service.model.RegionModel
- * @see com.liferay.portal.service.model.impl.RegionImpl
- * @see com.liferay.portal.service.model.impl.RegionModelImpl
+ * @see com.liferay.portal.model.RegionModel
+ * @see com.liferay.portal.model.impl.RegionImpl
+ * @see com.liferay.portal.model.impl.RegionModelImpl
  *
  */
 public interface Region extends RegionModel {

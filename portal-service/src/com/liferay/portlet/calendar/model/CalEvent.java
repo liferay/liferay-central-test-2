@@ -37,15 +37,15 @@ package com.liferay.portlet.calendar.model;
  * </p>
  *
  * <p>
- * Customize <code>com.liferay.portlet.calendar.service.model.impl.CalEventImpl</code>
+ * Customize <code>com.liferay.portlet.calendar.model.impl.CalEventImpl</code>
  * and rerun the ServiceBuilder to generate the new methods.
  * </p>
  *
  * @author Brian Wing Shun Chan
  *
- * @see com.liferay.portlet.calendar.service.model.CalEventModel
- * @see com.liferay.portlet.calendar.service.model.impl.CalEventImpl
- * @see com.liferay.portlet.calendar.service.model.impl.CalEventModelImpl
+ * @see com.liferay.portlet.calendar.model.CalEventModel
+ * @see com.liferay.portlet.calendar.model.impl.CalEventImpl
+ * @see com.liferay.portlet.calendar.model.impl.CalEventModelImpl
  *
  */
 public interface CalEvent extends CalEventModel {

@@ -37,15 +37,15 @@ package com.liferay.portlet.social.model;
  * </p>
  *
  * <p>
- * Customize <code>com.liferay.portlet.social.service.model.impl.SocialRequestImpl</code>
+ * Customize <code>com.liferay.portlet.social.model.impl.SocialRequestImpl</code>
  * and rerun the ServiceBuilder to generate the new methods.
  * </p>
  *
  * @author Brian Wing Shun Chan
  *
- * @see com.liferay.portlet.social.service.model.SocialRequestModel
- * @see com.liferay.portlet.social.service.model.impl.SocialRequestImpl
- * @see com.liferay.portlet.social.service.model.impl.SocialRequestModelImpl
+ * @see com.liferay.portlet.social.model.SocialRequestModel
+ * @see com.liferay.portlet.social.model.impl.SocialRequestImpl
+ * @see com.liferay.portlet.social.model.impl.SocialRequestModelImpl
  *
  */
 public interface SocialRequest extends SocialRequestModel {

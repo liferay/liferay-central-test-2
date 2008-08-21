@@ -54,9 +54,9 @@ import java.util.List;
  *
  * @author Brian Wing Shun Chan
  *
- * @see com.liferay.portal.service.model.PasswordTracker
- * @see com.liferay.portal.service.model.PasswordTrackerModel
- * @see com.liferay.portal.service.model.impl.PasswordTrackerImpl
+ * @see com.liferay.portal.model.PasswordTracker
+ * @see com.liferay.portal.model.PasswordTrackerModel
+ * @see com.liferay.portal.model.impl.PasswordTrackerImpl
  *
  */
 public class PasswordTrackerModelImpl extends BaseModelImpl {

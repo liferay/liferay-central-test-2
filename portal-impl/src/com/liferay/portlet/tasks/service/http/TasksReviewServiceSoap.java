@@ -75,9 +75,9 @@ import java.rmi.RemoteException;
  *
  * @author Brian Wing Shun Chan
  *
+ * @see com.liferay.portlet.tasks.model.TasksReviewSoap
  * @see com.liferay.portlet.tasks.service.TasksReviewServiceUtil
  * @see com.liferay.portlet.tasks.service.http.TasksReviewServiceHttp
- * @see com.liferay.portlet.tasks.service.model.TasksReviewSoap
  *
  */
 public class TasksReviewServiceSoap {

@@ -74,9 +74,9 @@ import java.rmi.RemoteException;
  *
  * @author Brian Wing Shun Chan
  *
+ * @see com.liferay.portal.model.OrgLaborSoap
  * @see com.liferay.portal.service.OrgLaborServiceUtil
  * @see com.liferay.portal.service.http.OrgLaborServiceHttp
- * @see com.liferay.portal.service.model.OrgLaborSoap
  *
  */
 public class OrgLaborServiceSoap {

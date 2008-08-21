@@ -37,15 +37,15 @@ package com.liferay.portal.model;
  * </p>
  *
  * <p>
- * Customize <code>com.liferay.portal.service.model.impl.AccountImpl</code>
+ * Customize <code>com.liferay.portal.model.impl.AccountImpl</code>
  * and rerun the ServiceBuilder to generate the new methods.
  * </p>
  *
  * @author Brian Wing Shun Chan
  *
- * @see com.liferay.portal.service.model.AccountModel
- * @see com.liferay.portal.service.model.impl.AccountImpl
- * @see com.liferay.portal.service.model.impl.AccountModelImpl
+ * @see com.liferay.portal.model.AccountModel
+ * @see com.liferay.portal.model.impl.AccountImpl
+ * @see com.liferay.portal.model.impl.AccountModelImpl
  *
  */
 public interface Account extends AccountModel {

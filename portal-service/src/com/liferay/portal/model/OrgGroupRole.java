@@ -37,15 +37,15 @@ package com.liferay.portal.model;
  * </p>
  *
  * <p>
- * Customize <code>com.liferay.portal.service.model.impl.OrgGroupRoleImpl</code>
+ * Customize <code>com.liferay.portal.model.impl.OrgGroupRoleImpl</code>
  * and rerun the ServiceBuilder to generate the new methods.
  * </p>
  *
  * @author Brian Wing Shun Chan
  *
- * @see com.liferay.portal.service.model.OrgGroupRoleModel
- * @see com.liferay.portal.service.model.impl.OrgGroupRoleImpl
- * @see com.liferay.portal.service.model.impl.OrgGroupRoleModelImpl
+ * @see com.liferay.portal.model.OrgGroupRoleModel
+ * @see com.liferay.portal.model.impl.OrgGroupRoleImpl
+ * @see com.liferay.portal.model.impl.OrgGroupRoleModelImpl
  *
  */
 public interface OrgGroupRole extends OrgGroupRoleModel {

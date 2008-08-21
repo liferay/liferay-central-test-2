@@ -74,9 +74,9 @@ import java.rmi.RemoteException;
  *
  * @author Brian Wing Shun Chan
  *
+ * @see com.liferay.portal.model.CountrySoap
  * @see com.liferay.portal.service.CountryServiceUtil
  * @see com.liferay.portal.service.http.CountryServiceHttp
- * @see com.liferay.portal.service.model.CountrySoap
  *
  */
 public class CountryServiceSoap {

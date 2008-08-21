@@ -52,9 +52,9 @@ import java.util.List;
  *
  * @author Brian Wing Shun Chan
  *
- * @see com.liferay.portal.service.model.PortletPreferences
- * @see com.liferay.portal.service.model.PortletPreferencesModel
- * @see com.liferay.portal.service.model.impl.PortletPreferencesImpl
+ * @see com.liferay.portal.model.PortletPreferences
+ * @see com.liferay.portal.model.PortletPreferencesModel
+ * @see com.liferay.portal.model.impl.PortletPreferencesImpl
  *
  */
 public class PortletPreferencesModelImpl extends BaseModelImpl {

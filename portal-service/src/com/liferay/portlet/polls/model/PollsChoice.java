@@ -37,15 +37,15 @@ package com.liferay.portlet.polls.model;
  * </p>
  *
  * <p>
- * Customize <code>com.liferay.portlet.polls.service.model.impl.PollsChoiceImpl</code>
+ * Customize <code>com.liferay.portlet.polls.model.impl.PollsChoiceImpl</code>
  * and rerun the ServiceBuilder to generate the new methods.
  * </p>
  *
  * @author Brian Wing Shun Chan
  *
- * @see com.liferay.portlet.polls.service.model.PollsChoiceModel
- * @see com.liferay.portlet.polls.service.model.impl.PollsChoiceImpl
- * @see com.liferay.portlet.polls.service.model.impl.PollsChoiceModelImpl
+ * @see com.liferay.portlet.polls.model.PollsChoiceModel
+ * @see com.liferay.portlet.polls.model.impl.PollsChoiceImpl
+ * @see com.liferay.portlet.polls.model.impl.PollsChoiceModelImpl
  *
  */
 public interface PollsChoice extends PollsChoiceModel {

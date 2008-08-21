@@ -41,9 +41,9 @@ import java.util.Date;
  *
  * @author Brian Wing Shun Chan
  *
- * @see com.liferay.portlet.shopping.service.model.ShoppingCoupon
- * @see com.liferay.portlet.shopping.service.model.impl.ShoppingCouponImpl
- * @see com.liferay.portlet.shopping.service.model.impl.ShoppingCouponModelImpl
+ * @see com.liferay.portlet.shopping.model.ShoppingCoupon
+ * @see com.liferay.portlet.shopping.model.impl.ShoppingCouponImpl
+ * @see com.liferay.portlet.shopping.model.impl.ShoppingCouponModelImpl
  *
  */
 public interface ShoppingCouponModel extends BaseModel {

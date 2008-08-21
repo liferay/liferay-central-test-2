@@ -75,9 +75,9 @@ import java.rmi.RemoteException;
  *
  * @author Brian Wing Shun Chan
  *
+ * @see com.liferay.portlet.bookmarks.model.BookmarksFolderSoap
  * @see com.liferay.portlet.bookmarks.service.BookmarksFolderServiceUtil
  * @see com.liferay.portlet.bookmarks.service.http.BookmarksFolderServiceHttp
- * @see com.liferay.portlet.bookmarks.service.model.BookmarksFolderSoap
  *
  */
 public class BookmarksFolderServiceSoap {

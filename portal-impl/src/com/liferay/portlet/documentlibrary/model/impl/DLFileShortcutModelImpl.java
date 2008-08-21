@@ -55,9 +55,9 @@ import java.util.List;
  *
  * @author Brian Wing Shun Chan
  *
- * @see com.liferay.portlet.documentlibrary.service.model.DLFileShortcut
- * @see com.liferay.portlet.documentlibrary.service.model.DLFileShortcutModel
- * @see com.liferay.portlet.documentlibrary.service.model.impl.DLFileShortcutImpl
+ * @see com.liferay.portlet.documentlibrary.model.DLFileShortcut
+ * @see com.liferay.portlet.documentlibrary.model.DLFileShortcutModel
+ * @see com.liferay.portlet.documentlibrary.model.impl.DLFileShortcutImpl
  *
  */
 public class DLFileShortcutModelImpl extends BaseModelImpl {

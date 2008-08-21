@@ -37,15 +37,15 @@ package com.liferay.portal.model;
  * </p>
  *
  * <p>
- * Customize <code>com.liferay.portal.service.model.impl.UserIdMapperImpl</code>
+ * Customize <code>com.liferay.portal.model.impl.UserIdMapperImpl</code>
  * and rerun the ServiceBuilder to generate the new methods.
  * </p>
  *
  * @author Brian Wing Shun Chan
  *
- * @see com.liferay.portal.service.model.UserIdMapperModel
- * @see com.liferay.portal.service.model.impl.UserIdMapperImpl
- * @see com.liferay.portal.service.model.impl.UserIdMapperModelImpl
+ * @see com.liferay.portal.model.UserIdMapperModel
+ * @see com.liferay.portal.model.impl.UserIdMapperImpl
+ * @see com.liferay.portal.model.impl.UserIdMapperModelImpl
  *
  */
 public interface UserIdMapper extends UserIdMapperModel {

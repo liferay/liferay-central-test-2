@@ -37,15 +37,15 @@ package com.liferay.portlet.announcements.model;
  * </p>
  *
  * <p>
- * Customize <code>com.liferay.portlet.announcements.service.model.impl.AnnouncementsDeliveryImpl</code>
+ * Customize <code>com.liferay.portlet.announcements.model.impl.AnnouncementsDeliveryImpl</code>
  * and rerun the ServiceBuilder to generate the new methods.
  * </p>
  *
  * @author Brian Wing Shun Chan
  *
- * @see com.liferay.portlet.announcements.service.model.AnnouncementsDeliveryModel
- * @see com.liferay.portlet.announcements.service.model.impl.AnnouncementsDeliveryImpl
- * @see com.liferay.portlet.announcements.service.model.impl.AnnouncementsDeliveryModelImpl
+ * @see com.liferay.portlet.announcements.model.AnnouncementsDeliveryModel
+ * @see com.liferay.portlet.announcements.model.impl.AnnouncementsDeliveryImpl
+ * @see com.liferay.portlet.announcements.model.impl.AnnouncementsDeliveryModelImpl
  *
  */
 public interface AnnouncementsDelivery extends AnnouncementsDeliveryModel {

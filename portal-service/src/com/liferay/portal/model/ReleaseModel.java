@@ -39,9 +39,9 @@ import java.util.Date;
  *
  * @author Brian Wing Shun Chan
  *
- * @see com.liferay.portal.service.model.Release
- * @see com.liferay.portal.service.model.impl.ReleaseImpl
- * @see com.liferay.portal.service.model.impl.ReleaseModelImpl
+ * @see com.liferay.portal.model.Release
+ * @see com.liferay.portal.model.impl.ReleaseImpl
+ * @see com.liferay.portal.model.impl.ReleaseModelImpl
  *
  */
 public interface ReleaseModel extends BaseModel {

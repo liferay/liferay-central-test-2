@@ -75,9 +75,9 @@ import java.rmi.RemoteException;
  *
  * @author Brian Wing Shun Chan
  *
+ * @see com.liferay.portlet.imagegallery.model.IGFolderSoap
  * @see com.liferay.portlet.imagegallery.service.IGFolderServiceUtil
  * @see com.liferay.portlet.imagegallery.service.http.IGFolderServiceHttp
- * @see com.liferay.portlet.imagegallery.service.model.IGFolderSoap
  *
  */
 public class IGFolderServiceSoap {

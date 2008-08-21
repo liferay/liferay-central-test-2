@@ -38,9 +38,9 @@ package com.liferay.portal.model;
  *
  * @author Brian Wing Shun Chan
  *
- * @see com.liferay.portal.service.model.Country
- * @see com.liferay.portal.service.model.impl.CountryImpl
- * @see com.liferay.portal.service.model.impl.CountryModelImpl
+ * @see com.liferay.portal.model.Country
+ * @see com.liferay.portal.model.impl.CountryImpl
+ * @see com.liferay.portal.model.impl.CountryModelImpl
  *
  */
 public interface CountryModel extends BaseModel {

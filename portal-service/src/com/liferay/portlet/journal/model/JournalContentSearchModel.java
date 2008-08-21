@@ -39,9 +39,9 @@ import com.liferay.portal.model.BaseModel;
  *
  * @author Brian Wing Shun Chan
  *
- * @see com.liferay.portlet.journal.service.model.JournalContentSearch
- * @see com.liferay.portlet.journal.service.model.impl.JournalContentSearchImpl
- * @see com.liferay.portlet.journal.service.model.impl.JournalContentSearchModelImpl
+ * @see com.liferay.portlet.journal.model.JournalContentSearch
+ * @see com.liferay.portlet.journal.model.impl.JournalContentSearchImpl
+ * @see com.liferay.portlet.journal.model.impl.JournalContentSearchModelImpl
  *
  */
 public interface JournalContentSearchModel extends BaseModel {

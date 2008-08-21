@@ -74,9 +74,9 @@ import java.rmi.RemoteException;
  *
  * @author Brian Wing Shun Chan
  *
+ * @see com.liferay.portal.model.LayoutSetSoap
  * @see com.liferay.portal.service.LayoutSetServiceUtil
  * @see com.liferay.portal.service.http.LayoutSetServiceHttp
- * @see com.liferay.portal.service.model.LayoutSetSoap
  *
  */
 public class LayoutSetServiceSoap {

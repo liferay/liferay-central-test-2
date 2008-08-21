@@ -56,9 +56,9 @@ import java.util.List;
  *
  * @author Brian Wing Shun Chan
  *
- * @see com.liferay.portlet.tasks.service.model.TasksReview
- * @see com.liferay.portlet.tasks.service.model.TasksReviewModel
- * @see com.liferay.portlet.tasks.service.model.impl.TasksReviewImpl
+ * @see com.liferay.portlet.tasks.model.TasksReview
+ * @see com.liferay.portlet.tasks.model.TasksReviewModel
+ * @see com.liferay.portlet.tasks.model.impl.TasksReviewImpl
  *
  */
 public class TasksReviewModelImpl extends BaseModelImpl {

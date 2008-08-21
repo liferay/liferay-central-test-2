@@ -37,15 +37,15 @@ package com.liferay.portal.model;
  * </p>
  *
  * <p>
- * Customize <code>com.liferay.portal.service.model.impl.PluginSettingImpl</code>
+ * Customize <code>com.liferay.portal.model.impl.PluginSettingImpl</code>
  * and rerun the ServiceBuilder to generate the new methods.
  * </p>
  *
  * @author Brian Wing Shun Chan
  *
- * @see com.liferay.portal.service.model.PluginSettingModel
- * @see com.liferay.portal.service.model.impl.PluginSettingImpl
- * @see com.liferay.portal.service.model.impl.PluginSettingModelImpl
+ * @see com.liferay.portal.model.PluginSettingModel
+ * @see com.liferay.portal.model.impl.PluginSettingImpl
+ * @see com.liferay.portal.model.impl.PluginSettingModelImpl
  *
  */
 public interface PluginSetting extends PluginSettingModel {

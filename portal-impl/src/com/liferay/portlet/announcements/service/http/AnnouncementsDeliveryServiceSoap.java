@@ -75,9 +75,9 @@ import java.rmi.RemoteException;
  *
  * @author Brian Wing Shun Chan
  *
+ * @see com.liferay.portlet.announcements.model.AnnouncementsDeliverySoap
  * @see com.liferay.portlet.announcements.service.AnnouncementsDeliveryServiceUtil
  * @see com.liferay.portlet.announcements.service.http.AnnouncementsDeliveryServiceHttp
- * @see com.liferay.portlet.announcements.service.model.AnnouncementsDeliverySoap
  *
  */
 public class AnnouncementsDeliveryServiceSoap {

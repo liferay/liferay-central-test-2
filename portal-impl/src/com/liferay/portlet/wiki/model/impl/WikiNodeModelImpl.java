@@ -55,9 +55,9 @@ import java.util.List;
  *
  * @author Brian Wing Shun Chan
  *
- * @see com.liferay.portlet.wiki.service.model.WikiNode
- * @see com.liferay.portlet.wiki.service.model.WikiNodeModel
- * @see com.liferay.portlet.wiki.service.model.impl.WikiNodeImpl
+ * @see com.liferay.portlet.wiki.model.WikiNode
+ * @see com.liferay.portlet.wiki.model.WikiNodeModel
+ * @see com.liferay.portlet.wiki.model.impl.WikiNodeImpl
  *
  */
 public class WikiNodeModelImpl extends BaseModelImpl {

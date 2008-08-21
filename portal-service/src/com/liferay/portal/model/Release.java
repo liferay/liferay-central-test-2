@@ -37,15 +37,15 @@ package com.liferay.portal.model;
  * </p>
  *
  * <p>
- * Customize <code>com.liferay.portal.service.model.impl.ReleaseImpl</code>
+ * Customize <code>com.liferay.portal.model.impl.ReleaseImpl</code>
  * and rerun the ServiceBuilder to generate the new methods.
  * </p>
  *
  * @author Brian Wing Shun Chan
  *
- * @see com.liferay.portal.service.model.ReleaseModel
- * @see com.liferay.portal.service.model.impl.ReleaseImpl
- * @see com.liferay.portal.service.model.impl.ReleaseModelImpl
+ * @see com.liferay.portal.model.ReleaseModel
+ * @see com.liferay.portal.model.impl.ReleaseImpl
+ * @see com.liferay.portal.model.impl.ReleaseModelImpl
  *
  */
 public interface Release extends ReleaseModel {

@@ -55,9 +55,9 @@ import java.util.List;
  *
  * @author Brian Wing Shun Chan
  *
- * @see com.liferay.portlet.imagegallery.service.model.IGFolder
- * @see com.liferay.portlet.imagegallery.service.model.IGFolderModel
- * @see com.liferay.portlet.imagegallery.service.model.impl.IGFolderImpl
+ * @see com.liferay.portlet.imagegallery.model.IGFolder
+ * @see com.liferay.portlet.imagegallery.model.IGFolderModel
+ * @see com.liferay.portlet.imagegallery.model.impl.IGFolderImpl
  *
  */
 public class IGFolderModelImpl extends BaseModelImpl {

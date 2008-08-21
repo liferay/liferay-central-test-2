@@ -55,9 +55,9 @@ import java.util.List;
  *
  * @author Brian Wing Shun Chan
  *
- * @see com.liferay.portal.service.model.Phone
- * @see com.liferay.portal.service.model.PhoneModel
- * @see com.liferay.portal.service.model.impl.PhoneImpl
+ * @see com.liferay.portal.model.Phone
+ * @see com.liferay.portal.model.PhoneModel
+ * @see com.liferay.portal.model.impl.PhoneImpl
  *
  */
 public class PhoneModelImpl extends BaseModelImpl {

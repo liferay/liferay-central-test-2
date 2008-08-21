@@ -37,15 +37,15 @@ package com.liferay.portlet.imagegallery.model;
  * </p>
  *
  * <p>
- * Customize <code>com.liferay.portlet.imagegallery.service.model.impl.IGFolderImpl</code>
+ * Customize <code>com.liferay.portlet.imagegallery.model.impl.IGFolderImpl</code>
  * and rerun the ServiceBuilder to generate the new methods.
  * </p>
  *
  * @author Brian Wing Shun Chan
  *
- * @see com.liferay.portlet.imagegallery.service.model.IGFolderModel
- * @see com.liferay.portlet.imagegallery.service.model.impl.IGFolderImpl
- * @see com.liferay.portlet.imagegallery.service.model.impl.IGFolderModelImpl
+ * @see com.liferay.portlet.imagegallery.model.IGFolderModel
+ * @see com.liferay.portlet.imagegallery.model.impl.IGFolderImpl
+ * @see com.liferay.portlet.imagegallery.model.impl.IGFolderModelImpl
  *
  */
 public interface IGFolder extends IGFolderModel {

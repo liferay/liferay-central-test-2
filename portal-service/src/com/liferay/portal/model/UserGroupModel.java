@@ -38,9 +38,9 @@ package com.liferay.portal.model;
  *
  * @author Brian Wing Shun Chan
  *
- * @see com.liferay.portal.service.model.UserGroup
- * @see com.liferay.portal.service.model.impl.UserGroupImpl
- * @see com.liferay.portal.service.model.impl.UserGroupModelImpl
+ * @see com.liferay.portal.model.UserGroup
+ * @see com.liferay.portal.model.impl.UserGroupImpl
+ * @see com.liferay.portal.model.impl.UserGroupModelImpl
  *
  */
 public interface UserGroupModel extends BaseModel {

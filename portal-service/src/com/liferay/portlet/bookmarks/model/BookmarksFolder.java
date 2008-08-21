@@ -37,15 +37,15 @@ package com.liferay.portlet.bookmarks.model;
  * </p>
  *
  * <p>
- * Customize <code>com.liferay.portlet.bookmarks.service.model.impl.BookmarksFolderImpl</code>
+ * Customize <code>com.liferay.portlet.bookmarks.model.impl.BookmarksFolderImpl</code>
  * and rerun the ServiceBuilder to generate the new methods.
  * </p>
  *
  * @author Brian Wing Shun Chan
  *
- * @see com.liferay.portlet.bookmarks.service.model.BookmarksFolderModel
- * @see com.liferay.portlet.bookmarks.service.model.impl.BookmarksFolderImpl
- * @see com.liferay.portlet.bookmarks.service.model.impl.BookmarksFolderModelImpl
+ * @see com.liferay.portlet.bookmarks.model.BookmarksFolderModel
+ * @see com.liferay.portlet.bookmarks.model.impl.BookmarksFolderImpl
+ * @see com.liferay.portlet.bookmarks.model.impl.BookmarksFolderModelImpl
  *
  */
 public interface BookmarksFolder extends BookmarksFolderModel {

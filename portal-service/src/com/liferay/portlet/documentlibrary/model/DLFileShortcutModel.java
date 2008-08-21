@@ -41,9 +41,9 @@ import java.util.Date;
  *
  * @author Brian Wing Shun Chan
  *
- * @see com.liferay.portlet.documentlibrary.service.model.DLFileShortcut
- * @see com.liferay.portlet.documentlibrary.service.model.impl.DLFileShortcutImpl
- * @see com.liferay.portlet.documentlibrary.service.model.impl.DLFileShortcutModelImpl
+ * @see com.liferay.portlet.documentlibrary.model.DLFileShortcut
+ * @see com.liferay.portlet.documentlibrary.model.impl.DLFileShortcutImpl
+ * @see com.liferay.portlet.documentlibrary.model.impl.DLFileShortcutModelImpl
  *
  */
 public interface DLFileShortcutModel extends BaseModel {

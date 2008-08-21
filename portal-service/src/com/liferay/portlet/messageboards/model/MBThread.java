@@ -37,15 +37,15 @@ package com.liferay.portlet.messageboards.model;
  * </p>
  *
  * <p>
- * Customize <code>com.liferay.portlet.messageboards.service.model.impl.MBThreadImpl</code>
+ * Customize <code>com.liferay.portlet.messageboards.model.impl.MBThreadImpl</code>
  * and rerun the ServiceBuilder to generate the new methods.
  * </p>
  *
  * @author Brian Wing Shun Chan
  *
- * @see com.liferay.portlet.messageboards.service.model.MBThreadModel
- * @see com.liferay.portlet.messageboards.service.model.impl.MBThreadImpl
- * @see com.liferay.portlet.messageboards.service.model.impl.MBThreadModelImpl
+ * @see com.liferay.portlet.messageboards.model.MBThreadModel
+ * @see com.liferay.portlet.messageboards.model.impl.MBThreadImpl
+ * @see com.liferay.portlet.messageboards.model.impl.MBThreadModelImpl
  *
  */
 public interface MBThread extends MBThreadModel {

@@ -38,9 +38,9 @@ package com.liferay.portal.model;
  *
  * @author Brian Wing Shun Chan
  *
- * @see com.liferay.portal.service.model.PasswordPolicyRel
- * @see com.liferay.portal.service.model.impl.PasswordPolicyRelImpl
- * @see com.liferay.portal.service.model.impl.PasswordPolicyRelModelImpl
+ * @see com.liferay.portal.model.PasswordPolicyRel
+ * @see com.liferay.portal.model.impl.PasswordPolicyRelImpl
+ * @see com.liferay.portal.model.impl.PasswordPolicyRelModelImpl
  *
  */
 public interface PasswordPolicyRelModel extends BaseModel {
