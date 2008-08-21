@@ -21,7 +21,7 @@
 	</bean>
 	<bean id="com.liferay.portal.service.AccountServiceFactory" class="com.liferay.portal.service.AccountServiceFactory" parent="com.liferay.portal.service.AccountService.base" />
 	<bean id="com.liferay.portal.service.AccountServiceUtil" class="com.liferay.portal.service.AccountServiceUtil" parent="com.liferay.portal.service.AccountService.base" />
-	<bean id="com.liferay.portal.service.persistence.AccountPersistence.impl" class="com.liferay.portal.service.persistence.AccountPersistenceImpl" parent="dataAccessBase" />
+	<bean id="com.liferay.portal.service.persistence.AccountPersistence.impl" class="com.liferay.portal.service.persistence.AccountPersistenceImpl" parent="basePersistence" />
 	<bean id="com.liferay.portal.service.persistence.AccountPersistence.transaction" parent="com.liferay.portal.service.persistence.AccountPersistence.impl" />
 	<bean id="com.liferay.portal.service.persistence.AccountUtil" class="com.liferay.portal.service.persistence.AccountUtil">
 		<property name="persistence" ref="com.liferay.portal.service.persistence.AccountPersistence.impl" />
@@ -46,7 +46,7 @@
 	</bean>
 	<bean id="com.liferay.portal.service.AddressServiceFactory" class="com.liferay.portal.service.AddressServiceFactory" parent="com.liferay.portal.service.AddressService.base" />
 	<bean id="com.liferay.portal.service.AddressServiceUtil" class="com.liferay.portal.service.AddressServiceUtil" parent="com.liferay.portal.service.AddressService.base" />
-	<bean id="com.liferay.portal.service.persistence.AddressPersistence.impl" class="com.liferay.portal.service.persistence.AddressPersistenceImpl2" parent="dataAccessBase" />
+	<bean id="com.liferay.portal.service.persistence.AddressPersistence.impl" class="com.liferay.portal.service.persistence.AddressPersistenceImpl2" parent="basePersistence" />
 	<bean id="com.liferay.portal.service.persistence.AddressPersistence.transaction" parent="com.liferay.portal.service.persistence.AddressPersistence.impl" />
 	<bean id="com.liferay.portal.service.persistence.AddressUtil" class="com.liferay.portal.service.persistence.AddressUtil">
 		<property name="persistence" ref="com.liferay.portal.service.persistence.AddressPersistence.impl" />
@@ -71,7 +71,7 @@
 	</bean>
 	<bean id="com.liferay.portal.service.ClassNameServiceFactory" class="com.liferay.portal.service.ClassNameServiceFactory" parent="com.liferay.portal.service.ClassNameService.base" />
 	<bean id="com.liferay.portal.service.ClassNameServiceUtil" class="com.liferay.portal.service.ClassNameServiceUtil" parent="com.liferay.portal.service.ClassNameService.base" />
-	<bean id="com.liferay.portal.service.persistence.ClassNamePersistence.impl" class="com.liferay.portal.service.persistence.ClassNamePersistenceImpl" parent="dataAccessBase" />
+	<bean id="com.liferay.portal.service.persistence.ClassNamePersistence.impl" class="com.liferay.portal.service.persistence.ClassNamePersistenceImpl" parent="basePersistence" />
 	<bean id="com.liferay.portal.service.persistence.ClassNamePersistence.transaction" parent="com.liferay.portal.service.persistence.ClassNamePersistence.impl" />
 	<bean id="com.liferay.portal.service.persistence.ClassNameUtil" class="com.liferay.portal.service.persistence.ClassNameUtil">
 		<property name="persistence" ref="com.liferay.portal.service.persistence.ClassNamePersistence.impl" />
@@ -96,7 +96,7 @@
 	</bean>
 	<bean id="com.liferay.portal.service.CompanyServiceFactory" class="com.liferay.portal.service.CompanyServiceFactory" parent="com.liferay.portal.service.CompanyService.base" />
 	<bean id="com.liferay.portal.service.CompanyServiceUtil" class="com.liferay.portal.service.CompanyServiceUtil" parent="com.liferay.portal.service.CompanyService.base" />
-	<bean id="com.liferay.portal.service.persistence.CompanyPersistence.impl" class="com.liferay.portal.service.persistence.CompanyPersistenceImpl" parent="dataAccessBase" />
+	<bean id="com.liferay.portal.service.persistence.CompanyPersistence.impl" class="com.liferay.portal.service.persistence.CompanyPersistenceImpl" parent="basePersistence" />
 	<bean id="com.liferay.portal.service.persistence.CompanyPersistence.transaction" parent="com.liferay.portal.service.persistence.CompanyPersistence.impl" />
 	<bean id="com.liferay.portal.service.persistence.CompanyUtil" class="com.liferay.portal.service.persistence.CompanyUtil">
 		<property name="persistence" ref="com.liferay.portal.service.persistence.CompanyPersistence.impl" />
@@ -121,7 +121,7 @@
 	</bean>
 	<bean id="com.liferay.portal.service.ContactServiceFactory" class="com.liferay.portal.service.ContactServiceFactory" parent="com.liferay.portal.service.ContactService.base" />
 	<bean id="com.liferay.portal.service.ContactServiceUtil" class="com.liferay.portal.service.ContactServiceUtil" parent="com.liferay.portal.service.ContactService.base" />
-	<bean id="com.liferay.portal.service.persistence.ContactPersistence.impl" class="com.liferay.portal.service.persistence.ContactPersistenceImpl" parent="dataAccessBase" />
+	<bean id="com.liferay.portal.service.persistence.ContactPersistence.impl" class="com.liferay.portal.service.persistence.ContactPersistenceImpl" parent="basePersistence" />
 	<bean id="com.liferay.portal.service.persistence.ContactPersistence.transaction" parent="com.liferay.portal.service.persistence.ContactPersistence.impl" />
 	<bean id="com.liferay.portal.service.persistence.ContactUtil" class="com.liferay.portal.service.persistence.ContactUtil">
 		<property name="persistence" ref="com.liferay.portal.service.persistence.ContactPersistence.impl" />
@@ -136,7 +136,7 @@
 	</bean>
 	<bean id="com.liferay.portal.service.CountryServiceFactory" class="com.liferay.portal.service.CountryServiceFactory" parent="com.liferay.portal.service.CountryService.base" />
 	<bean id="com.liferay.portal.service.CountryServiceUtil" class="com.liferay.portal.service.CountryServiceUtil" parent="com.liferay.portal.service.CountryService.base" />
-	<bean id="com.liferay.portal.service.persistence.CountryPersistence.impl" class="com.liferay.portal.service.persistence.CountryPersistenceImpl" parent="dataAccessBase" />
+	<bean id="com.liferay.portal.service.persistence.CountryPersistence.impl" class="com.liferay.portal.service.persistence.CountryPersistenceImpl" parent="basePersistence" />
 	<bean id="com.liferay.portal.service.persistence.CountryPersistence.transaction" parent="com.liferay.portal.service.persistence.CountryPersistence.impl" />
 	<bean id="com.liferay.portal.service.persistence.CountryUtil" class="com.liferay.portal.service.persistence.CountryUtil">
 		<property name="persistence" ref="com.liferay.portal.service.persistence.CountryPersistence.impl" />
@@ -161,7 +161,7 @@
 	</bean>
 	<bean id="com.liferay.portal.service.EmailAddressServiceFactory" class="com.liferay.portal.service.EmailAddressServiceFactory" parent="com.liferay.portal.service.EmailAddressService.base" />
 	<bean id="com.liferay.portal.service.EmailAddressServiceUtil" class="com.liferay.portal.service.EmailAddressServiceUtil" parent="com.liferay.portal.service.EmailAddressService.base" />
-	<bean id="com.liferay.portal.service.persistence.EmailAddressPersistence.impl" class="com.liferay.portal.service.persistence.EmailAddressPersistenceImpl" parent="dataAccessBase" />
+	<bean id="com.liferay.portal.service.persistence.EmailAddressPersistence.impl" class="com.liferay.portal.service.persistence.EmailAddressPersistenceImpl" parent="basePersistence" />
 	<bean id="com.liferay.portal.service.persistence.EmailAddressPersistence.transaction" parent="com.liferay.portal.service.persistence.EmailAddressPersistence.impl" />
 	<bean id="com.liferay.portal.service.persistence.EmailAddressUtil" class="com.liferay.portal.service.persistence.EmailAddressUtil">
 		<property name="persistence" ref="com.liferay.portal.service.persistence.EmailAddressPersistence.impl" />
@@ -186,12 +186,12 @@
 	</bean>
 	<bean id="com.liferay.portal.service.GroupServiceFactory" class="com.liferay.portal.service.GroupServiceFactory" parent="com.liferay.portal.service.GroupService.base" />
 	<bean id="com.liferay.portal.service.GroupServiceUtil" class="com.liferay.portal.service.GroupServiceUtil" parent="com.liferay.portal.service.GroupService.base" />
-	<bean id="com.liferay.portal.service.persistence.GroupPersistence.impl" class="com.liferay.portal.service.persistence.GroupPersistenceImpl" parent="dataAccessBase" />
+	<bean id="com.liferay.portal.service.persistence.GroupPersistence.impl" class="com.liferay.portal.service.persistence.GroupPersistenceImpl" parent="basePersistence" />
 	<bean id="com.liferay.portal.service.persistence.GroupPersistence.transaction" parent="com.liferay.portal.service.persistence.GroupPersistence.impl" />
 	<bean id="com.liferay.portal.service.persistence.GroupUtil" class="com.liferay.portal.service.persistence.GroupUtil">
 		<property name="persistence" ref="com.liferay.portal.service.persistence.GroupPersistence.impl" />
 	</bean>
-	<bean id="com.liferay.portal.service.persistence.GroupFinder.impl" class="com.liferay.portal.service.persistence.GroupFinderImpl" parent="dataAccessBase" />
+	<bean id="com.liferay.portal.service.persistence.GroupFinder.impl" class="com.liferay.portal.service.persistence.GroupFinderImpl" parent="basePersistence" />
 	<bean id="com.liferay.portal.service.persistence.GroupFinderUtil" class="com.liferay.portal.service.persistence.GroupFinderUtil">
 		<property name="finder" ref="com.liferay.portal.service.persistence.GroupFinder.impl" />
 	</bean>
@@ -205,7 +205,7 @@
 	</bean>
 	<bean id="com.liferay.portal.service.ImageLocalServiceFactory" class="com.liferay.portal.service.ImageLocalServiceFactory" parent="com.liferay.portal.service.ImageLocalService.base" />
 	<bean id="com.liferay.portal.service.ImageLocalServiceUtil" class="com.liferay.portal.service.ImageLocalServiceUtil" parent="com.liferay.portal.service.ImageLocalService.base" />
-	<bean id="com.liferay.portal.service.persistence.ImagePersistence.impl" class="com.liferay.portal.service.persistence.ImagePersistenceImpl" parent="dataAccessBase" />
+	<bean id="com.liferay.portal.service.persistence.ImagePersistence.impl" class="com.liferay.portal.service.persistence.ImagePersistenceImpl" parent="basePersistence" />
 	<bean id="com.liferay.portal.service.persistence.ImagePersistence.transaction" parent="com.liferay.portal.service.persistence.ImagePersistence.impl" />
 	<bean id="com.liferay.portal.service.persistence.ImageUtil" class="com.liferay.portal.service.persistence.ImageUtil">
 		<property name="persistence" ref="com.liferay.portal.service.persistence.ImagePersistence.impl" />
@@ -230,12 +230,12 @@
 	</bean>
 	<bean id="com.liferay.portal.service.LayoutServiceFactory" class="com.liferay.portal.service.LayoutServiceFactory" parent="com.liferay.portal.service.LayoutService.base" />
 	<bean id="com.liferay.portal.service.LayoutServiceUtil" class="com.liferay.portal.service.LayoutServiceUtil" parent="com.liferay.portal.service.LayoutService.base" />
-	<bean id="com.liferay.portal.service.persistence.LayoutPersistence.impl" class="com.liferay.portal.service.persistence.LayoutPersistenceImpl" parent="dataAccessBase" />
+	<bean id="com.liferay.portal.service.persistence.LayoutPersistence.impl" class="com.liferay.portal.service.persistence.LayoutPersistenceImpl" parent="basePersistence" />
 	<bean id="com.liferay.portal.service.persistence.LayoutPersistence.transaction" parent="com.liferay.portal.service.persistence.LayoutPersistence.impl" />
 	<bean id="com.liferay.portal.service.persistence.LayoutUtil" class="com.liferay.portal.service.persistence.LayoutUtil">
 		<property name="persistence" ref="com.liferay.portal.service.persistence.LayoutPersistence.impl" />
 	</bean>
-	<bean id="com.liferay.portal.service.persistence.LayoutFinder.impl" class="com.liferay.portal.service.persistence.LayoutFinderImpl" parent="dataAccessBase" />
+	<bean id="com.liferay.portal.service.persistence.LayoutFinder.impl" class="com.liferay.portal.service.persistence.LayoutFinderImpl" parent="basePersistence" />
 	<bean id="com.liferay.portal.service.persistence.LayoutFinderUtil" class="com.liferay.portal.service.persistence.LayoutFinderUtil">
 		<property name="finder" ref="com.liferay.portal.service.persistence.LayoutFinder.impl" />
 	</bean>
@@ -259,7 +259,7 @@
 	</bean>
 	<bean id="com.liferay.portal.service.LayoutSetServiceFactory" class="com.liferay.portal.service.LayoutSetServiceFactory" parent="com.liferay.portal.service.LayoutSetService.base" />
 	<bean id="com.liferay.portal.service.LayoutSetServiceUtil" class="com.liferay.portal.service.LayoutSetServiceUtil" parent="com.liferay.portal.service.LayoutSetService.base" />
-	<bean id="com.liferay.portal.service.persistence.LayoutSetPersistence.impl" class="com.liferay.portal.service.persistence.LayoutSetPersistenceImpl" parent="dataAccessBase" />
+	<bean id="com.liferay.portal.service.persistence.LayoutSetPersistence.impl" class="com.liferay.portal.service.persistence.LayoutSetPersistenceImpl" parent="basePersistence" />
 	<bean id="com.liferay.portal.service.persistence.LayoutSetPersistence.transaction" parent="com.liferay.portal.service.persistence.LayoutSetPersistence.impl" />
 	<bean id="com.liferay.portal.service.persistence.LayoutSetUtil" class="com.liferay.portal.service.persistence.LayoutSetUtil">
 		<property name="persistence" ref="com.liferay.portal.service.persistence.LayoutSetPersistence.impl" />
@@ -283,7 +283,7 @@
 	</bean>
 	<bean id="com.liferay.portal.service.ListTypeServiceFactory" class="com.liferay.portal.service.ListTypeServiceFactory" parent="com.liferay.portal.service.ListTypeService.base" />
 	<bean id="com.liferay.portal.service.ListTypeServiceUtil" class="com.liferay.portal.service.ListTypeServiceUtil" parent="com.liferay.portal.service.ListTypeService.base" />
-	<bean id="com.liferay.portal.service.persistence.ListTypePersistence.impl" class="com.liferay.portal.service.persistence.ListTypePersistenceImpl" parent="dataAccessBase" />
+	<bean id="com.liferay.portal.service.persistence.ListTypePersistence.impl" class="com.liferay.portal.service.persistence.ListTypePersistenceImpl" parent="basePersistence" />
 	<bean id="com.liferay.portal.service.persistence.ListTypePersistence.transaction" parent="com.liferay.portal.service.persistence.ListTypePersistence.impl" />
 	<bean id="com.liferay.portal.service.persistence.ListTypeUtil" class="com.liferay.portal.service.persistence.ListTypeUtil">
 		<property name="persistence" ref="com.liferay.portal.service.persistence.ListTypePersistence.impl" />
@@ -308,7 +308,7 @@
 	</bean>
 	<bean id="com.liferay.portal.service.MembershipRequestServiceFactory" class="com.liferay.portal.service.MembershipRequestServiceFactory" parent="com.liferay.portal.service.MembershipRequestService.base" />
 	<bean id="com.liferay.portal.service.MembershipRequestServiceUtil" class="com.liferay.portal.service.MembershipRequestServiceUtil" parent="com.liferay.portal.service.MembershipRequestService.base" />
-	<bean id="com.liferay.portal.service.persistence.MembershipRequestPersistence.impl" class="com.liferay.portal.service.persistence.MembershipRequestPersistenceImpl" parent="dataAccessBase" />
+	<bean id="com.liferay.portal.service.persistence.MembershipRequestPersistence.impl" class="com.liferay.portal.service.persistence.MembershipRequestPersistenceImpl" parent="basePersistence" />
 	<bean id="com.liferay.portal.service.persistence.MembershipRequestPersistence.transaction" parent="com.liferay.portal.service.persistence.MembershipRequestPersistence.impl" />
 	<bean id="com.liferay.portal.service.persistence.MembershipRequestUtil" class="com.liferay.portal.service.persistence.MembershipRequestUtil">
 		<property name="persistence" ref="com.liferay.portal.service.persistence.MembershipRequestPersistence.impl" />
@@ -333,25 +333,25 @@
 	</bean>
 	<bean id="com.liferay.portal.service.OrganizationServiceFactory" class="com.liferay.portal.service.OrganizationServiceFactory" parent="com.liferay.portal.service.OrganizationService.base" />
 	<bean id="com.liferay.portal.service.OrganizationServiceUtil" class="com.liferay.portal.service.OrganizationServiceUtil" parent="com.liferay.portal.service.OrganizationService.base" />
-	<bean id="com.liferay.portal.service.persistence.OrganizationPersistence.impl" class="com.liferay.portal.service.persistence.OrganizationPersistenceImpl" parent="dataAccessBase" />
+	<bean id="com.liferay.portal.service.persistence.OrganizationPersistence.impl" class="com.liferay.portal.service.persistence.OrganizationPersistenceImpl" parent="basePersistence" />
 	<bean id="com.liferay.portal.service.persistence.OrganizationPersistence.transaction" parent="com.liferay.portal.service.persistence.OrganizationPersistence.impl" />
 	<bean id="com.liferay.portal.service.persistence.OrganizationUtil" class="com.liferay.portal.service.persistence.OrganizationUtil">
 		<property name="persistence" ref="com.liferay.portal.service.persistence.OrganizationPersistence.impl" />
 	</bean>
-	<bean id="com.liferay.portal.service.persistence.OrganizationFinder.impl" class="com.liferay.portal.service.persistence.OrganizationFinderImpl" parent="dataAccessBase" />
+	<bean id="com.liferay.portal.service.persistence.OrganizationFinder.impl" class="com.liferay.portal.service.persistence.OrganizationFinderImpl" parent="basePersistence" />
 	<bean id="com.liferay.portal.service.persistence.OrganizationFinderUtil" class="com.liferay.portal.service.persistence.OrganizationFinderUtil">
 		<property name="finder" ref="com.liferay.portal.service.persistence.OrganizationFinder.impl" />
 	</bean>
-	<bean id="com.liferay.portal.service.persistence.OrgGroupPermissionPersistence.impl" class="com.liferay.portal.service.persistence.OrgGroupPermissionPersistenceImpl" parent="dataAccessBase" />
+	<bean id="com.liferay.portal.service.persistence.OrgGroupPermissionPersistence.impl" class="com.liferay.portal.service.persistence.OrgGroupPermissionPersistenceImpl" parent="basePersistence" />
 	<bean id="com.liferay.portal.service.persistence.OrgGroupPermissionPersistence.transaction" parent="com.liferay.portal.service.persistence.OrgGroupPermissionPersistence.impl" />
 	<bean id="com.liferay.portal.service.persistence.OrgGroupPermissionUtil" class="com.liferay.portal.service.persistence.OrgGroupPermissionUtil">
 		<property name="persistence" ref="com.liferay.portal.service.persistence.OrgGroupPermissionPersistence.impl" />
 	</bean>
-	<bean id="com.liferay.portal.service.persistence.OrgGroupPermissionFinder.impl" class="com.liferay.portal.service.persistence.OrgGroupPermissionFinderImpl" parent="dataAccessBase" />
+	<bean id="com.liferay.portal.service.persistence.OrgGroupPermissionFinder.impl" class="com.liferay.portal.service.persistence.OrgGroupPermissionFinderImpl" parent="basePersistence" />
 	<bean id="com.liferay.portal.service.persistence.OrgGroupPermissionFinderUtil" class="com.liferay.portal.service.persistence.OrgGroupPermissionFinderUtil">
 		<property name="finder" ref="com.liferay.portal.service.persistence.OrgGroupPermissionFinder.impl" />
 	</bean>
-	<bean id="com.liferay.portal.service.persistence.OrgGroupRolePersistence.impl" class="com.liferay.portal.service.persistence.OrgGroupRolePersistenceImpl" parent="dataAccessBase" />
+	<bean id="com.liferay.portal.service.persistence.OrgGroupRolePersistence.impl" class="com.liferay.portal.service.persistence.OrgGroupRolePersistenceImpl" parent="basePersistence" />
 	<bean id="com.liferay.portal.service.persistence.OrgGroupRolePersistence.transaction" parent="com.liferay.portal.service.persistence.OrgGroupRolePersistence.impl" />
 	<bean id="com.liferay.portal.service.persistence.OrgGroupRoleUtil" class="com.liferay.portal.service.persistence.OrgGroupRoleUtil">
 		<property name="persistence" ref="com.liferay.portal.service.persistence.OrgGroupRolePersistence.impl" />
@@ -376,7 +376,7 @@
 	</bean>
 	<bean id="com.liferay.portal.service.OrgLaborServiceFactory" class="com.liferay.portal.service.OrgLaborServiceFactory" parent="com.liferay.portal.service.OrgLaborService.base" />
 	<bean id="com.liferay.portal.service.OrgLaborServiceUtil" class="com.liferay.portal.service.OrgLaborServiceUtil" parent="com.liferay.portal.service.OrgLaborService.base" />
-	<bean id="com.liferay.portal.service.persistence.OrgLaborPersistence.impl" class="com.liferay.portal.service.persistence.OrgLaborPersistenceImpl" parent="dataAccessBase" />
+	<bean id="com.liferay.portal.service.persistence.OrgLaborPersistence.impl" class="com.liferay.portal.service.persistence.OrgLaborPersistenceImpl" parent="basePersistence" />
 	<bean id="com.liferay.portal.service.persistence.OrgLaborPersistence.transaction" parent="com.liferay.portal.service.persistence.OrgLaborPersistence.impl" />
 	<bean id="com.liferay.portal.service.persistence.OrgLaborUtil" class="com.liferay.portal.service.persistence.OrgLaborUtil">
 		<property name="persistence" ref="com.liferay.portal.service.persistence.OrgLaborPersistence.impl" />
@@ -401,12 +401,12 @@
 	</bean>
 	<bean id="com.liferay.portal.service.PasswordPolicyServiceFactory" class="com.liferay.portal.service.PasswordPolicyServiceFactory" parent="com.liferay.portal.service.PasswordPolicyService.base" />
 	<bean id="com.liferay.portal.service.PasswordPolicyServiceUtil" class="com.liferay.portal.service.PasswordPolicyServiceUtil" parent="com.liferay.portal.service.PasswordPolicyService.base" />
-	<bean id="com.liferay.portal.service.persistence.PasswordPolicyPersistence.impl" class="com.liferay.portal.service.persistence.PasswordPolicyPersistenceImpl" parent="dataAccessBase" />
+	<bean id="com.liferay.portal.service.persistence.PasswordPolicyPersistence.impl" class="com.liferay.portal.service.persistence.PasswordPolicyPersistenceImpl" parent="basePersistence" />
 	<bean id="com.liferay.portal.service.persistence.PasswordPolicyPersistence.transaction" parent="com.liferay.portal.service.persistence.PasswordPolicyPersistence.impl" />
 	<bean id="com.liferay.portal.service.persistence.PasswordPolicyUtil" class="com.liferay.portal.service.persistence.PasswordPolicyUtil">
 		<property name="persistence" ref="com.liferay.portal.service.persistence.PasswordPolicyPersistence.impl" />
 	</bean>
-	<bean id="com.liferay.portal.service.persistence.PasswordPolicyFinder.impl" class="com.liferay.portal.service.persistence.PasswordPolicyFinderImpl" parent="dataAccessBase" />
+	<bean id="com.liferay.portal.service.persistence.PasswordPolicyFinder.impl" class="com.liferay.portal.service.persistence.PasswordPolicyFinderImpl" parent="basePersistence" />
 	<bean id="com.liferay.portal.service.persistence.PasswordPolicyFinderUtil" class="com.liferay.portal.service.persistence.PasswordPolicyFinderUtil">
 		<property name="finder" ref="com.liferay.portal.service.persistence.PasswordPolicyFinder.impl" />
 	</bean>
@@ -420,7 +420,7 @@
 	</bean>
 	<bean id="com.liferay.portal.service.PasswordPolicyRelLocalServiceFactory" class="com.liferay.portal.service.PasswordPolicyRelLocalServiceFactory" parent="com.liferay.portal.service.PasswordPolicyRelLocalService.base" />
 	<bean id="com.liferay.portal.service.PasswordPolicyRelLocalServiceUtil" class="com.liferay.portal.service.PasswordPolicyRelLocalServiceUtil" parent="com.liferay.portal.service.PasswordPolicyRelLocalService.base" />
-	<bean id="com.liferay.portal.service.persistence.PasswordPolicyRelPersistence.impl" class="com.liferay.portal.service.persistence.PasswordPolicyRelPersistenceImpl" parent="dataAccessBase" />
+	<bean id="com.liferay.portal.service.persistence.PasswordPolicyRelPersistence.impl" class="com.liferay.portal.service.persistence.PasswordPolicyRelPersistenceImpl" parent="basePersistence" />
 	<bean id="com.liferay.portal.service.persistence.PasswordPolicyRelPersistence.transaction" parent="com.liferay.portal.service.persistence.PasswordPolicyRelPersistence.impl" />
 	<bean id="com.liferay.portal.service.persistence.PasswordPolicyRelUtil" class="com.liferay.portal.service.persistence.PasswordPolicyRelUtil">
 		<property name="persistence" ref="com.liferay.portal.service.persistence.PasswordPolicyRelPersistence.impl" />
@@ -435,7 +435,7 @@
 	</bean>
 	<bean id="com.liferay.portal.service.PasswordTrackerLocalServiceFactory" class="com.liferay.portal.service.PasswordTrackerLocalServiceFactory" parent="com.liferay.portal.service.PasswordTrackerLocalService.base" />
 	<bean id="com.liferay.portal.service.PasswordTrackerLocalServiceUtil" class="com.liferay.portal.service.PasswordTrackerLocalServiceUtil" parent="com.liferay.portal.service.PasswordTrackerLocalService.base" />
-	<bean id="com.liferay.portal.service.persistence.PasswordTrackerPersistence.impl" class="com.liferay.portal.service.persistence.PasswordTrackerPersistenceImpl" parent="dataAccessBase" />
+	<bean id="com.liferay.portal.service.persistence.PasswordTrackerPersistence.impl" class="com.liferay.portal.service.persistence.PasswordTrackerPersistenceImpl" parent="basePersistence" />
 	<bean id="com.liferay.portal.service.persistence.PasswordTrackerPersistence.transaction" parent="com.liferay.portal.service.persistence.PasswordTrackerPersistence.impl" />
 	<bean id="com.liferay.portal.service.persistence.PasswordTrackerUtil" class="com.liferay.portal.service.persistence.PasswordTrackerUtil">
 		<property name="persistence" ref="com.liferay.portal.service.persistence.PasswordTrackerPersistence.impl" />
@@ -460,16 +460,16 @@
 	</bean>
 	<bean id="com.liferay.portal.service.PermissionServiceFactory" class="com.liferay.portal.service.PermissionServiceFactory" parent="com.liferay.portal.service.PermissionService.base" />
 	<bean id="com.liferay.portal.service.PermissionServiceUtil" class="com.liferay.portal.service.PermissionServiceUtil" parent="com.liferay.portal.service.PermissionService.base" />
-	<bean id="com.liferay.portal.service.persistence.PermissionPersistence.impl" class="com.liferay.portal.service.persistence.PermissionPersistenceImpl" parent="dataAccessBase" />
+	<bean id="com.liferay.portal.service.persistence.PermissionPersistence.impl" class="com.liferay.portal.service.persistence.PermissionPersistenceImpl" parent="basePersistence" />
 	<bean id="com.liferay.portal.service.persistence.PermissionPersistence.transaction" parent="com.liferay.portal.service.persistence.PermissionPersistence.impl" />
 	<bean id="com.liferay.portal.service.persistence.PermissionUtil" class="com.liferay.portal.service.persistence.PermissionUtil">
 		<property name="persistence" ref="com.liferay.portal.service.persistence.PermissionPersistence.impl" />
 	</bean>
-	<bean id="com.liferay.portal.service.persistence.PermissionFinder.impl" class="com.liferay.portal.service.persistence.PermissionFinderImpl" parent="dataAccessBase" />
+	<bean id="com.liferay.portal.service.persistence.PermissionFinder.impl" class="com.liferay.portal.service.persistence.PermissionFinderImpl" parent="basePersistence" />
 	<bean id="com.liferay.portal.service.persistence.PermissionFinderUtil" class="com.liferay.portal.service.persistence.PermissionFinderUtil">
 		<property name="finder" ref="com.liferay.portal.service.persistence.PermissionFinder.impl" />
 	</bean>
-	<bean id="com.liferay.portal.service.persistence.PermissionUserFinder.impl" class="com.liferay.portal.service.persistence.PermissionUserFinderImpl" parent="dataAccessBase" />
+	<bean id="com.liferay.portal.service.persistence.PermissionUserFinder.impl" class="com.liferay.portal.service.persistence.PermissionUserFinderImpl" parent="basePersistence" />
 	<bean id="com.liferay.portal.service.persistence.PermissionUserFinderUtil" class="com.liferay.portal.service.persistence.PermissionUserFinderUtil">
 		<property name="finder" ref="com.liferay.portal.service.persistence.PermissionUserFinder.impl" />
 	</bean>
@@ -493,7 +493,7 @@
 	</bean>
 	<bean id="com.liferay.portal.service.PhoneServiceFactory" class="com.liferay.portal.service.PhoneServiceFactory" parent="com.liferay.portal.service.PhoneService.base" />
 	<bean id="com.liferay.portal.service.PhoneServiceUtil" class="com.liferay.portal.service.PhoneServiceUtil" parent="com.liferay.portal.service.PhoneService.base" />
-	<bean id="com.liferay.portal.service.persistence.PhonePersistence.impl" class="com.liferay.portal.service.persistence.PhonePersistenceImpl" parent="dataAccessBase" />
+	<bean id="com.liferay.portal.service.persistence.PhonePersistence.impl" class="com.liferay.portal.service.persistence.PhonePersistenceImpl" parent="basePersistence" />
 	<bean id="com.liferay.portal.service.persistence.PhonePersistence.transaction" parent="com.liferay.portal.service.persistence.PhonePersistence.impl" />
 	<bean id="com.liferay.portal.service.persistence.PhoneUtil" class="com.liferay.portal.service.persistence.PhoneUtil">
 		<property name="persistence" ref="com.liferay.portal.service.persistence.PhonePersistence.impl" />
@@ -528,7 +528,7 @@
 	</bean>
 	<bean id="com.liferay.portal.service.PluginSettingServiceFactory" class="com.liferay.portal.service.PluginSettingServiceFactory" parent="com.liferay.portal.service.PluginSettingService.base" />
 	<bean id="com.liferay.portal.service.PluginSettingServiceUtil" class="com.liferay.portal.service.PluginSettingServiceUtil" parent="com.liferay.portal.service.PluginSettingService.base" />
-	<bean id="com.liferay.portal.service.persistence.PluginSettingPersistence.impl" class="com.liferay.portal.service.persistence.PluginSettingPersistenceImpl" parent="dataAccessBase" />
+	<bean id="com.liferay.portal.service.persistence.PluginSettingPersistence.impl" class="com.liferay.portal.service.persistence.PluginSettingPersistenceImpl" parent="basePersistence" />
 	<bean id="com.liferay.portal.service.persistence.PluginSettingPersistence.transaction" parent="com.liferay.portal.service.persistence.PluginSettingPersistence.impl" />
 	<bean id="com.liferay.portal.service.persistence.PluginSettingUtil" class="com.liferay.portal.service.persistence.PluginSettingUtil">
 		<property name="persistence" ref="com.liferay.portal.service.persistence.PluginSettingPersistence.impl" />
@@ -553,7 +553,7 @@
 	</bean>
 	<bean id="com.liferay.portal.service.PortletServiceFactory" class="com.liferay.portal.service.PortletServiceFactory" parent="com.liferay.portal.service.PortletService.base" />
 	<bean id="com.liferay.portal.service.PortletServiceUtil" class="com.liferay.portal.service.PortletServiceUtil" parent="com.liferay.portal.service.PortletService.base" />
-	<bean id="com.liferay.portal.service.persistence.PortletPersistence.impl" class="com.liferay.portal.service.persistence.PortletPersistenceImpl" parent="dataAccessBase" />
+	<bean id="com.liferay.portal.service.persistence.PortletPersistence.impl" class="com.liferay.portal.service.persistence.PortletPersistenceImpl" parent="basePersistence" />
 	<bean id="com.liferay.portal.service.persistence.PortletPersistence.transaction" parent="com.liferay.portal.service.persistence.PortletPersistence.impl" />
 	<bean id="com.liferay.portal.service.persistence.PortletUtil" class="com.liferay.portal.service.persistence.PortletUtil">
 		<property name="persistence" ref="com.liferay.portal.service.persistence.PortletPersistence.impl" />
@@ -578,12 +578,12 @@
 	</bean>
 	<bean id="com.liferay.portal.service.PortletPreferencesServiceFactory" class="com.liferay.portal.service.PortletPreferencesServiceFactory" parent="com.liferay.portal.service.PortletPreferencesService.base" />
 	<bean id="com.liferay.portal.service.PortletPreferencesServiceUtil" class="com.liferay.portal.service.PortletPreferencesServiceUtil" parent="com.liferay.portal.service.PortletPreferencesService.base" />
-	<bean id="com.liferay.portal.service.persistence.PortletPreferencesPersistence.impl" class="com.liferay.portal.service.persistence.PortletPreferencesPersistenceImpl" parent="dataAccessBase" />
+	<bean id="com.liferay.portal.service.persistence.PortletPreferencesPersistence.impl" class="com.liferay.portal.service.persistence.PortletPreferencesPersistenceImpl" parent="basePersistence" />
 	<bean id="com.liferay.portal.service.persistence.PortletPreferencesPersistence.transaction" parent="com.liferay.portal.service.persistence.PortletPreferencesPersistence.impl" />
 	<bean id="com.liferay.portal.service.persistence.PortletPreferencesUtil" class="com.liferay.portal.service.persistence.PortletPreferencesUtil">
 		<property name="persistence" ref="com.liferay.portal.service.persistence.PortletPreferencesPersistence.impl" />
 	</bean>
-	<bean id="com.liferay.portal.service.persistence.PortletPreferencesFinder.impl" class="com.liferay.portal.service.persistence.PortletPreferencesFinderImpl" parent="dataAccessBase" />
+	<bean id="com.liferay.portal.service.persistence.PortletPreferencesFinder.impl" class="com.liferay.portal.service.persistence.PortletPreferencesFinderImpl" parent="basePersistence" />
 	<bean id="com.liferay.portal.service.persistence.PortletPreferencesFinderUtil" class="com.liferay.portal.service.persistence.PortletPreferencesFinderUtil">
 		<property name="finder" ref="com.liferay.portal.service.persistence.PortletPreferencesFinder.impl" />
 	</bean>
@@ -597,7 +597,7 @@
 	</bean>
 	<bean id="com.liferay.portal.service.RegionServiceFactory" class="com.liferay.portal.service.RegionServiceFactory" parent="com.liferay.portal.service.RegionService.base" />
 	<bean id="com.liferay.portal.service.RegionServiceUtil" class="com.liferay.portal.service.RegionServiceUtil" parent="com.liferay.portal.service.RegionService.base" />
-	<bean id="com.liferay.portal.service.persistence.RegionPersistence.impl" class="com.liferay.portal.service.persistence.RegionPersistenceImpl" parent="dataAccessBase" />
+	<bean id="com.liferay.portal.service.persistence.RegionPersistence.impl" class="com.liferay.portal.service.persistence.RegionPersistenceImpl" parent="basePersistence" />
 	<bean id="com.liferay.portal.service.persistence.RegionPersistence.transaction" parent="com.liferay.portal.service.persistence.RegionPersistence.impl" />
 	<bean id="com.liferay.portal.service.persistence.RegionUtil" class="com.liferay.portal.service.persistence.RegionUtil">
 		<property name="persistence" ref="com.liferay.portal.service.persistence.RegionPersistence.impl" />
@@ -612,7 +612,7 @@
 	</bean>
 	<bean id="com.liferay.portal.service.ReleaseLocalServiceFactory" class="com.liferay.portal.service.ReleaseLocalServiceFactory" parent="com.liferay.portal.service.ReleaseLocalService.base" />
 	<bean id="com.liferay.portal.service.ReleaseLocalServiceUtil" class="com.liferay.portal.service.ReleaseLocalServiceUtil" parent="com.liferay.portal.service.ReleaseLocalService.base" />
-	<bean id="com.liferay.portal.service.persistence.ReleasePersistence.impl" class="com.liferay.portal.service.persistence.ReleasePersistenceImpl" parent="dataAccessBase" />
+	<bean id="com.liferay.portal.service.persistence.ReleasePersistence.impl" class="com.liferay.portal.service.persistence.ReleasePersistenceImpl" parent="basePersistence" />
 	<bean id="com.liferay.portal.service.persistence.ReleasePersistence.transaction" parent="com.liferay.portal.service.persistence.ReleasePersistence.impl" />
 	<bean id="com.liferay.portal.service.persistence.ReleaseUtil" class="com.liferay.portal.service.persistence.ReleaseUtil">
 		<property name="persistence" ref="com.liferay.portal.service.persistence.ReleasePersistence.impl" />
@@ -637,12 +637,12 @@
 	</bean>
 	<bean id="com.liferay.portal.service.ResourceServiceFactory" class="com.liferay.portal.service.ResourceServiceFactory" parent="com.liferay.portal.service.ResourceService.base" />
 	<bean id="com.liferay.portal.service.ResourceServiceUtil" class="com.liferay.portal.service.ResourceServiceUtil" parent="com.liferay.portal.service.ResourceService.base" />
-	<bean id="com.liferay.portal.service.persistence.ResourcePersistence.impl" class="com.liferay.portal.service.persistence.ResourcePersistenceImpl" parent="dataAccessBase" />
+	<bean id="com.liferay.portal.service.persistence.ResourcePersistence.impl" class="com.liferay.portal.service.persistence.ResourcePersistenceImpl" parent="basePersistence" />
 	<bean id="com.liferay.portal.service.persistence.ResourcePersistence.transaction" parent="com.liferay.portal.service.persistence.ResourcePersistence.impl" />
 	<bean id="com.liferay.portal.service.persistence.ResourceUtil" class="com.liferay.portal.service.persistence.ResourceUtil">
 		<property name="persistence" ref="com.liferay.portal.service.persistence.ResourcePersistence.impl" />
 	</bean>
-	<bean id="com.liferay.portal.service.persistence.ResourceFinder.impl" class="com.liferay.portal.service.persistence.ResourceFinderImpl" parent="dataAccessBase" />
+	<bean id="com.liferay.portal.service.persistence.ResourceFinder.impl" class="com.liferay.portal.service.persistence.ResourceFinderImpl" parent="basePersistence" />
 	<bean id="com.liferay.portal.service.persistence.ResourceFinderUtil" class="com.liferay.portal.service.persistence.ResourceFinderUtil">
 		<property name="finder" ref="com.liferay.portal.service.persistence.ResourceFinder.impl" />
 	</bean>
@@ -656,7 +656,7 @@
 	</bean>
 	<bean id="com.liferay.portal.service.ResourceCodeLocalServiceFactory" class="com.liferay.portal.service.ResourceCodeLocalServiceFactory" parent="com.liferay.portal.service.ResourceCodeLocalService.base" />
 	<bean id="com.liferay.portal.service.ResourceCodeLocalServiceUtil" class="com.liferay.portal.service.ResourceCodeLocalServiceUtil" parent="com.liferay.portal.service.ResourceCodeLocalService.base" />
-	<bean id="com.liferay.portal.service.persistence.ResourceCodePersistence.impl" class="com.liferay.portal.service.persistence.ResourceCodePersistenceImpl" parent="dataAccessBase" />
+	<bean id="com.liferay.portal.service.persistence.ResourceCodePersistence.impl" class="com.liferay.portal.service.persistence.ResourceCodePersistenceImpl" parent="basePersistence" />
 	<bean id="com.liferay.portal.service.persistence.ResourceCodePersistence.transaction" parent="com.liferay.portal.service.persistence.ResourceCodePersistence.impl" />
 	<bean id="com.liferay.portal.service.persistence.ResourceCodeUtil" class="com.liferay.portal.service.persistence.ResourceCodeUtil">
 		<property name="persistence" ref="com.liferay.portal.service.persistence.ResourceCodePersistence.impl" />
@@ -681,12 +681,12 @@
 	</bean>
 	<bean id="com.liferay.portal.service.RoleServiceFactory" class="com.liferay.portal.service.RoleServiceFactory" parent="com.liferay.portal.service.RoleService.base" />
 	<bean id="com.liferay.portal.service.RoleServiceUtil" class="com.liferay.portal.service.RoleServiceUtil" parent="com.liferay.portal.service.RoleService.base" />
-	<bean id="com.liferay.portal.service.persistence.RolePersistence.impl" class="com.liferay.portal.service.persistence.RolePersistenceImpl" parent="dataAccessBase" />
+	<bean id="com.liferay.portal.service.persistence.RolePersistence.impl" class="com.liferay.portal.service.persistence.RolePersistenceImpl" parent="basePersistence" />
 	<bean id="com.liferay.portal.service.persistence.RolePersistence.transaction" parent="com.liferay.portal.service.persistence.RolePersistence.impl" />
 	<bean id="com.liferay.portal.service.persistence.RoleUtil" class="com.liferay.portal.service.persistence.RoleUtil">
 		<property name="persistence" ref="com.liferay.portal.service.persistence.RolePersistence.impl" />
 	</bean>
-	<bean id="com.liferay.portal.service.persistence.RoleFinder.impl" class="com.liferay.portal.service.persistence.RoleFinderImpl" parent="dataAccessBase" />
+	<bean id="com.liferay.portal.service.persistence.RoleFinder.impl" class="com.liferay.portal.service.persistence.RoleFinderImpl" parent="basePersistence" />
 	<bean id="com.liferay.portal.service.persistence.RoleFinderUtil" class="com.liferay.portal.service.persistence.RoleFinderUtil">
 		<property name="finder" ref="com.liferay.portal.service.persistence.RoleFinder.impl" />
 	</bean>
@@ -700,7 +700,7 @@
 	</bean>
 	<bean id="com.liferay.portal.service.ServiceComponentLocalServiceFactory" class="com.liferay.portal.service.ServiceComponentLocalServiceFactory" parent="com.liferay.portal.service.ServiceComponentLocalService.base" />
 	<bean id="com.liferay.portal.service.ServiceComponentLocalServiceUtil" class="com.liferay.portal.service.ServiceComponentLocalServiceUtil" parent="com.liferay.portal.service.ServiceComponentLocalService.base" />
-	<bean id="com.liferay.portal.service.persistence.ServiceComponentPersistence.impl" class="com.liferay.portal.service.persistence.ServiceComponentPersistenceImpl" parent="dataAccessBase" />
+	<bean id="com.liferay.portal.service.persistence.ServiceComponentPersistence.impl" class="com.liferay.portal.service.persistence.ServiceComponentPersistenceImpl" parent="basePersistence" />
 	<bean id="com.liferay.portal.service.persistence.ServiceComponentPersistence.transaction" parent="com.liferay.portal.service.persistence.ServiceComponentPersistence.impl" />
 	<bean id="com.liferay.portal.service.persistence.ServiceComponentUtil" class="com.liferay.portal.service.persistence.ServiceComponentUtil">
 		<property name="persistence" ref="com.liferay.portal.service.persistence.ServiceComponentPersistence.impl" />
@@ -715,7 +715,7 @@
 	</bean>
 	<bean id="com.liferay.portal.service.PortletItemLocalServiceFactory" class="com.liferay.portal.service.PortletItemLocalServiceFactory" parent="com.liferay.portal.service.PortletItemLocalService.base" />
 	<bean id="com.liferay.portal.service.PortletItemLocalServiceUtil" class="com.liferay.portal.service.PortletItemLocalServiceUtil" parent="com.liferay.portal.service.PortletItemLocalService.base" />
-	<bean id="com.liferay.portal.service.persistence.PortletItemPersistence.impl" class="com.liferay.portal.service.persistence.PortletItemPersistenceImpl" parent="dataAccessBase" />
+	<bean id="com.liferay.portal.service.persistence.PortletItemPersistence.impl" class="com.liferay.portal.service.persistence.PortletItemPersistenceImpl" parent="basePersistence" />
 	<bean id="com.liferay.portal.service.persistence.PortletItemPersistence.transaction" parent="com.liferay.portal.service.persistence.PortletItemPersistence.impl" />
 	<bean id="com.liferay.portal.service.persistence.PortletItemUtil" class="com.liferay.portal.service.persistence.PortletItemUtil">
 		<property name="persistence" ref="com.liferay.portal.service.persistence.PortletItemPersistence.impl" />
@@ -730,7 +730,7 @@
 	</bean>
 	<bean id="com.liferay.portal.service.SubscriptionLocalServiceFactory" class="com.liferay.portal.service.SubscriptionLocalServiceFactory" parent="com.liferay.portal.service.SubscriptionLocalService.base" />
 	<bean id="com.liferay.portal.service.SubscriptionLocalServiceUtil" class="com.liferay.portal.service.SubscriptionLocalServiceUtil" parent="com.liferay.portal.service.SubscriptionLocalService.base" />
-	<bean id="com.liferay.portal.service.persistence.SubscriptionPersistence.impl" class="com.liferay.portal.service.persistence.SubscriptionPersistenceImpl" parent="dataAccessBase" />
+	<bean id="com.liferay.portal.service.persistence.SubscriptionPersistence.impl" class="com.liferay.portal.service.persistence.SubscriptionPersistenceImpl" parent="basePersistence" />
 	<bean id="com.liferay.portal.service.persistence.SubscriptionPersistence.transaction" parent="com.liferay.portal.service.persistence.SubscriptionPersistence.impl" />
 	<bean id="com.liferay.portal.service.persistence.SubscriptionUtil" class="com.liferay.portal.service.persistence.SubscriptionUtil">
 		<property name="persistence" ref="com.liferay.portal.service.persistence.SubscriptionPersistence.impl" />
@@ -773,12 +773,12 @@
 	</bean>
 	<bean id="com.liferay.portal.service.UserServiceFactory" class="com.liferay.portal.service.UserServiceFactory" parent="com.liferay.portal.service.UserService.base" />
 	<bean id="com.liferay.portal.service.UserServiceUtil" class="com.liferay.portal.service.UserServiceUtil" parent="com.liferay.portal.service.UserService.base" />
-	<bean id="com.liferay.portal.service.persistence.UserPersistence.impl" class="com.liferay.portal.service.persistence.UserPersistenceImpl" parent="dataAccessBase" />
+	<bean id="com.liferay.portal.service.persistence.UserPersistence.impl" class="com.liferay.portal.service.persistence.UserPersistenceImpl" parent="basePersistence" />
 	<bean id="com.liferay.portal.service.persistence.UserPersistence.transaction" parent="com.liferay.portal.service.persistence.UserPersistence.impl" />
 	<bean id="com.liferay.portal.service.persistence.UserUtil" class="com.liferay.portal.service.persistence.UserUtil">
 		<property name="persistence" ref="com.liferay.portal.service.persistence.UserPersistence.impl" />
 	</bean>
-	<bean id="com.liferay.portal.service.persistence.UserFinder.impl" class="com.liferay.portal.service.persistence.UserFinderImpl" parent="dataAccessBase" />
+	<bean id="com.liferay.portal.service.persistence.UserFinder.impl" class="com.liferay.portal.service.persistence.UserFinderImpl" parent="basePersistence" />
 	<bean id="com.liferay.portal.service.persistence.UserFinderUtil" class="com.liferay.portal.service.persistence.UserFinderUtil">
 		<property name="finder" ref="com.liferay.portal.service.persistence.UserFinder.impl" />
 	</bean>
@@ -802,12 +802,12 @@
 	</bean>
 	<bean id="com.liferay.portal.service.UserGroupServiceFactory" class="com.liferay.portal.service.UserGroupServiceFactory" parent="com.liferay.portal.service.UserGroupService.base" />
 	<bean id="com.liferay.portal.service.UserGroupServiceUtil" class="com.liferay.portal.service.UserGroupServiceUtil" parent="com.liferay.portal.service.UserGroupService.base" />
-	<bean id="com.liferay.portal.service.persistence.UserGroupPersistence.impl" class="com.liferay.portal.service.persistence.UserGroupPersistenceImpl" parent="dataAccessBase" />
+	<bean id="com.liferay.portal.service.persistence.UserGroupPersistence.impl" class="com.liferay.portal.service.persistence.UserGroupPersistenceImpl" parent="basePersistence" />
 	<bean id="com.liferay.portal.service.persistence.UserGroupPersistence.transaction" parent="com.liferay.portal.service.persistence.UserGroupPersistence.impl" />
 	<bean id="com.liferay.portal.service.persistence.UserGroupUtil" class="com.liferay.portal.service.persistence.UserGroupUtil">
 		<property name="persistence" ref="com.liferay.portal.service.persistence.UserGroupPersistence.impl" />
 	</bean>
-	<bean id="com.liferay.portal.service.persistence.UserGroupFinder.impl" class="com.liferay.portal.service.persistence.UserGroupFinderImpl" parent="dataAccessBase" />
+	<bean id="com.liferay.portal.service.persistence.UserGroupFinder.impl" class="com.liferay.portal.service.persistence.UserGroupFinderImpl" parent="basePersistence" />
 	<bean id="com.liferay.portal.service.persistence.UserGroupFinderUtil" class="com.liferay.portal.service.persistence.UserGroupFinderUtil">
 		<property name="finder" ref="com.liferay.portal.service.persistence.UserGroupFinder.impl" />
 	</bean>
@@ -831,7 +831,7 @@
 	</bean>
 	<bean id="com.liferay.portal.service.UserGroupRoleServiceFactory" class="com.liferay.portal.service.UserGroupRoleServiceFactory" parent="com.liferay.portal.service.UserGroupRoleService.base" />
 	<bean id="com.liferay.portal.service.UserGroupRoleServiceUtil" class="com.liferay.portal.service.UserGroupRoleServiceUtil" parent="com.liferay.portal.service.UserGroupRoleService.base" />
-	<bean id="com.liferay.portal.service.persistence.UserGroupRolePersistence.impl" class="com.liferay.portal.service.persistence.UserGroupRolePersistenceImpl" parent="dataAccessBase" />
+	<bean id="com.liferay.portal.service.persistence.UserGroupRolePersistence.impl" class="com.liferay.portal.service.persistence.UserGroupRolePersistenceImpl" parent="basePersistence" />
 	<bean id="com.liferay.portal.service.persistence.UserGroupRolePersistence.transaction" parent="com.liferay.portal.service.persistence.UserGroupRolePersistence.impl" />
 	<bean id="com.liferay.portal.service.persistence.UserGroupRoleUtil" class="com.liferay.portal.service.persistence.UserGroupRoleUtil">
 		<property name="persistence" ref="com.liferay.portal.service.persistence.UserGroupRolePersistence.impl" />
@@ -846,7 +846,7 @@
 	</bean>
 	<bean id="com.liferay.portal.service.UserIdMapperLocalServiceFactory" class="com.liferay.portal.service.UserIdMapperLocalServiceFactory" parent="com.liferay.portal.service.UserIdMapperLocalService.base" />
 	<bean id="com.liferay.portal.service.UserIdMapperLocalServiceUtil" class="com.liferay.portal.service.UserIdMapperLocalServiceUtil" parent="com.liferay.portal.service.UserIdMapperLocalService.base" />
-	<bean id="com.liferay.portal.service.persistence.UserIdMapperPersistence.impl" class="com.liferay.portal.service.persistence.UserIdMapperPersistenceImpl" parent="dataAccessBase" />
+	<bean id="com.liferay.portal.service.persistence.UserIdMapperPersistence.impl" class="com.liferay.portal.service.persistence.UserIdMapperPersistenceImpl" parent="basePersistence" />
 	<bean id="com.liferay.portal.service.persistence.UserIdMapperPersistence.transaction" parent="com.liferay.portal.service.persistence.UserIdMapperPersistence.impl" />
 	<bean id="com.liferay.portal.service.persistence.UserIdMapperUtil" class="com.liferay.portal.service.persistence.UserIdMapperUtil">
 		<property name="persistence" ref="com.liferay.portal.service.persistence.UserIdMapperPersistence.impl" />
@@ -861,7 +861,7 @@
 	</bean>
 	<bean id="com.liferay.portal.service.UserTrackerLocalServiceFactory" class="com.liferay.portal.service.UserTrackerLocalServiceFactory" parent="com.liferay.portal.service.UserTrackerLocalService.base" />
 	<bean id="com.liferay.portal.service.UserTrackerLocalServiceUtil" class="com.liferay.portal.service.UserTrackerLocalServiceUtil" parent="com.liferay.portal.service.UserTrackerLocalService.base" />
-	<bean id="com.liferay.portal.service.persistence.UserTrackerPersistence.impl" class="com.liferay.portal.service.persistence.UserTrackerPersistenceImpl" parent="dataAccessBase" />
+	<bean id="com.liferay.portal.service.persistence.UserTrackerPersistence.impl" class="com.liferay.portal.service.persistence.UserTrackerPersistenceImpl" parent="basePersistence" />
 	<bean id="com.liferay.portal.service.persistence.UserTrackerPersistence.transaction" parent="com.liferay.portal.service.persistence.UserTrackerPersistence.impl" />
 	<bean id="com.liferay.portal.service.persistence.UserTrackerUtil" class="com.liferay.portal.service.persistence.UserTrackerUtil">
 		<property name="persistence" ref="com.liferay.portal.service.persistence.UserTrackerPersistence.impl" />
@@ -876,7 +876,7 @@
 	</bean>
 	<bean id="com.liferay.portal.service.UserTrackerPathLocalServiceFactory" class="com.liferay.portal.service.UserTrackerPathLocalServiceFactory" parent="com.liferay.portal.service.UserTrackerPathLocalService.base" />
 	<bean id="com.liferay.portal.service.UserTrackerPathLocalServiceUtil" class="com.liferay.portal.service.UserTrackerPathLocalServiceUtil" parent="com.liferay.portal.service.UserTrackerPathLocalService.base" />
-	<bean id="com.liferay.portal.service.persistence.UserTrackerPathPersistence.impl" class="com.liferay.portal.service.persistence.UserTrackerPathPersistenceImpl" parent="dataAccessBase" />
+	<bean id="com.liferay.portal.service.persistence.UserTrackerPathPersistence.impl" class="com.liferay.portal.service.persistence.UserTrackerPathPersistenceImpl" parent="basePersistence" />
 	<bean id="com.liferay.portal.service.persistence.UserTrackerPathPersistence.transaction" parent="com.liferay.portal.service.persistence.UserTrackerPathPersistence.impl" />
 	<bean id="com.liferay.portal.service.persistence.UserTrackerPathUtil" class="com.liferay.portal.service.persistence.UserTrackerPathUtil">
 		<property name="persistence" ref="com.liferay.portal.service.persistence.UserTrackerPathPersistence.impl" />
@@ -891,7 +891,7 @@
 	</bean>
 	<bean id="com.liferay.portal.service.WebDAVPropsLocalServiceFactory" class="com.liferay.portal.service.WebDAVPropsLocalServiceFactory" parent="com.liferay.portal.service.WebDAVPropsLocalService.base" />
 	<bean id="com.liferay.portal.service.WebDAVPropsLocalServiceUtil" class="com.liferay.portal.service.WebDAVPropsLocalServiceUtil" parent="com.liferay.portal.service.WebDAVPropsLocalService.base" />
-	<bean id="com.liferay.portal.service.persistence.WebDAVPropsPersistence.impl" class="com.liferay.portal.service.persistence.WebDAVPropsPersistenceImpl" parent="dataAccessBase" />
+	<bean id="com.liferay.portal.service.persistence.WebDAVPropsPersistence.impl" class="com.liferay.portal.service.persistence.WebDAVPropsPersistenceImpl" parent="basePersistence" />
 	<bean id="com.liferay.portal.service.persistence.WebDAVPropsPersistence.transaction" parent="com.liferay.portal.service.persistence.WebDAVPropsPersistence.impl" />
 	<bean id="com.liferay.portal.service.persistence.WebDAVPropsUtil" class="com.liferay.portal.service.persistence.WebDAVPropsUtil">
 		<property name="persistence" ref="com.liferay.portal.service.persistence.WebDAVPropsPersistence.impl" />
@@ -916,7 +916,7 @@
 	</bean>
 	<bean id="com.liferay.portal.service.WebsiteServiceFactory" class="com.liferay.portal.service.WebsiteServiceFactory" parent="com.liferay.portal.service.WebsiteService.base" />
 	<bean id="com.liferay.portal.service.WebsiteServiceUtil" class="com.liferay.portal.service.WebsiteServiceUtil" parent="com.liferay.portal.service.WebsiteService.base" />
-	<bean id="com.liferay.portal.service.persistence.WebsitePersistence.impl" class="com.liferay.portal.service.persistence.WebsitePersistenceImpl" parent="dataAccessBase" />
+	<bean id="com.liferay.portal.service.persistence.WebsitePersistence.impl" class="com.liferay.portal.service.persistence.WebsitePersistenceImpl" parent="basePersistence" />
 	<bean id="com.liferay.portal.service.persistence.WebsitePersistence.transaction" parent="com.liferay.portal.service.persistence.WebsitePersistence.impl" />
 	<bean id="com.liferay.portal.service.persistence.WebsiteUtil" class="com.liferay.portal.service.persistence.WebsiteUtil">
 		<property name="persistence" ref="com.liferay.portal.service.persistence.WebsitePersistence.impl" />
@@ -941,7 +941,7 @@
 	</bean>
 	<bean id="com.liferay.portlet.announcements.service.AnnouncementsDeliveryServiceFactory" class="com.liferay.portlet.announcements.service.AnnouncementsDeliveryServiceFactory" parent="com.liferay.portlet.announcements.service.AnnouncementsDeliveryService.base" />
 	<bean id="com.liferay.portlet.announcements.service.AnnouncementsDeliveryServiceUtil" class="com.liferay.portlet.announcements.service.AnnouncementsDeliveryServiceUtil" parent="com.liferay.portlet.announcements.service.AnnouncementsDeliveryService.base" />
-	<bean id="com.liferay.portlet.announcements.service.persistence.AnnouncementsDeliveryPersistence.impl" class="com.liferay.portlet.announcements.service.persistence.AnnouncementsDeliveryPersistenceImpl" parent="dataAccessBase" />
+	<bean id="com.liferay.portlet.announcements.service.persistence.AnnouncementsDeliveryPersistence.impl" class="com.liferay.portlet.announcements.service.persistence.AnnouncementsDeliveryPersistenceImpl" parent="basePersistence" />
 	<bean id="com.liferay.portlet.announcements.service.persistence.AnnouncementsDeliveryPersistence.transaction" parent="com.liferay.portlet.announcements.service.persistence.AnnouncementsDeliveryPersistence.impl" />
 	<bean id="com.liferay.portlet.announcements.service.persistence.AnnouncementsDeliveryUtil" class="com.liferay.portlet.announcements.service.persistence.AnnouncementsDeliveryUtil">
 		<property name="persistence" ref="com.liferay.portlet.announcements.service.persistence.AnnouncementsDeliveryPersistence.impl" />
@@ -966,12 +966,12 @@
 	</bean>
 	<bean id="com.liferay.portlet.announcements.service.AnnouncementsEntryServiceFactory" class="com.liferay.portlet.announcements.service.AnnouncementsEntryServiceFactory" parent="com.liferay.portlet.announcements.service.AnnouncementsEntryService.base" />
 	<bean id="com.liferay.portlet.announcements.service.AnnouncementsEntryServiceUtil" class="com.liferay.portlet.announcements.service.AnnouncementsEntryServiceUtil" parent="com.liferay.portlet.announcements.service.AnnouncementsEntryService.base" />
-	<bean id="com.liferay.portlet.announcements.service.persistence.AnnouncementsEntryPersistence.impl" class="com.liferay.portlet.announcements.service.persistence.AnnouncementsEntryPersistenceImpl" parent="dataAccessBase" />
+	<bean id="com.liferay.portlet.announcements.service.persistence.AnnouncementsEntryPersistence.impl" class="com.liferay.portlet.announcements.service.persistence.AnnouncementsEntryPersistenceImpl" parent="basePersistence" />
 	<bean id="com.liferay.portlet.announcements.service.persistence.AnnouncementsEntryPersistence.transaction" parent="com.liferay.portlet.announcements.service.persistence.AnnouncementsEntryPersistence.impl" />
 	<bean id="com.liferay.portlet.announcements.service.persistence.AnnouncementsEntryUtil" class="com.liferay.portlet.announcements.service.persistence.AnnouncementsEntryUtil">
 		<property name="persistence" ref="com.liferay.portlet.announcements.service.persistence.AnnouncementsEntryPersistence.impl" />
 	</bean>
-	<bean id="com.liferay.portlet.announcements.service.persistence.AnnouncementsEntryFinder.impl" class="com.liferay.portlet.announcements.service.persistence.AnnouncementsEntryFinderImpl" parent="dataAccessBase" />
+	<bean id="com.liferay.portlet.announcements.service.persistence.AnnouncementsEntryFinder.impl" class="com.liferay.portlet.announcements.service.persistence.AnnouncementsEntryFinderImpl" parent="basePersistence" />
 	<bean id="com.liferay.portlet.announcements.service.persistence.AnnouncementsEntryFinderUtil" class="com.liferay.portlet.announcements.service.persistence.AnnouncementsEntryFinderUtil">
 		<property name="finder" ref="com.liferay.portlet.announcements.service.persistence.AnnouncementsEntryFinder.impl" />
 	</bean>
@@ -995,7 +995,7 @@
 	</bean>
 	<bean id="com.liferay.portlet.announcements.service.AnnouncementsFlagServiceFactory" class="com.liferay.portlet.announcements.service.AnnouncementsFlagServiceFactory" parent="com.liferay.portlet.announcements.service.AnnouncementsFlagService.base" />
 	<bean id="com.liferay.portlet.announcements.service.AnnouncementsFlagServiceUtil" class="com.liferay.portlet.announcements.service.AnnouncementsFlagServiceUtil" parent="com.liferay.portlet.announcements.service.AnnouncementsFlagService.base" />
-	<bean id="com.liferay.portlet.announcements.service.persistence.AnnouncementsFlagPersistence.impl" class="com.liferay.portlet.announcements.service.persistence.AnnouncementsFlagPersistenceImpl" parent="dataAccessBase" />
+	<bean id="com.liferay.portlet.announcements.service.persistence.AnnouncementsFlagPersistence.impl" class="com.liferay.portlet.announcements.service.persistence.AnnouncementsFlagPersistenceImpl" parent="basePersistence" />
 	<bean id="com.liferay.portlet.announcements.service.persistence.AnnouncementsFlagPersistence.transaction" parent="com.liferay.portlet.announcements.service.persistence.AnnouncementsFlagPersistence.impl" />
 	<bean id="com.liferay.portlet.announcements.service.persistence.AnnouncementsFlagUtil" class="com.liferay.portlet.announcements.service.persistence.AnnouncementsFlagUtil">
 		<property name="persistence" ref="com.liferay.portlet.announcements.service.persistence.AnnouncementsFlagPersistence.impl" />
@@ -1020,12 +1020,12 @@
 	</bean>
 	<bean id="com.liferay.portlet.blogs.service.BlogsEntryServiceFactory" class="com.liferay.portlet.blogs.service.BlogsEntryServiceFactory" parent="com.liferay.portlet.blogs.service.BlogsEntryService.base" />
 	<bean id="com.liferay.portlet.blogs.service.BlogsEntryServiceUtil" class="com.liferay.portlet.blogs.service.BlogsEntryServiceUtil" parent="com.liferay.portlet.blogs.service.BlogsEntryService.base" />
-	<bean id="com.liferay.portlet.blogs.service.persistence.BlogsEntryPersistence.impl" class="com.liferay.portlet.blogs.service.persistence.BlogsEntryPersistenceImpl" parent="dataAccessBase" />
+	<bean id="com.liferay.portlet.blogs.service.persistence.BlogsEntryPersistence.impl" class="com.liferay.portlet.blogs.service.persistence.BlogsEntryPersistenceImpl" parent="basePersistence" />
 	<bean id="com.liferay.portlet.blogs.service.persistence.BlogsEntryPersistence.transaction" parent="com.liferay.portlet.blogs.service.persistence.BlogsEntryPersistence.impl" />
 	<bean id="com.liferay.portlet.blogs.service.persistence.BlogsEntryUtil" class="com.liferay.portlet.blogs.service.persistence.BlogsEntryUtil">
 		<property name="persistence" ref="com.liferay.portlet.blogs.service.persistence.BlogsEntryPersistence.impl" />
 	</bean>
-	<bean id="com.liferay.portlet.blogs.service.persistence.BlogsEntryFinder.impl" class="com.liferay.portlet.blogs.service.persistence.BlogsEntryFinderImpl" parent="dataAccessBase" />
+	<bean id="com.liferay.portlet.blogs.service.persistence.BlogsEntryFinder.impl" class="com.liferay.portlet.blogs.service.persistence.BlogsEntryFinderImpl" parent="basePersistence" />
 	<bean id="com.liferay.portlet.blogs.service.persistence.BlogsEntryFinderUtil" class="com.liferay.portlet.blogs.service.persistence.BlogsEntryFinderUtil">
 		<property name="finder" ref="com.liferay.portlet.blogs.service.persistence.BlogsEntryFinder.impl" />
 	</bean>
@@ -1039,12 +1039,12 @@
 	</bean>
 	<bean id="com.liferay.portlet.blogs.service.BlogsStatsUserLocalServiceFactory" class="com.liferay.portlet.blogs.service.BlogsStatsUserLocalServiceFactory" parent="com.liferay.portlet.blogs.service.BlogsStatsUserLocalService.base" />
 	<bean id="com.liferay.portlet.blogs.service.BlogsStatsUserLocalServiceUtil" class="com.liferay.portlet.blogs.service.BlogsStatsUserLocalServiceUtil" parent="com.liferay.portlet.blogs.service.BlogsStatsUserLocalService.base" />
-	<bean id="com.liferay.portlet.blogs.service.persistence.BlogsStatsUserPersistence.impl" class="com.liferay.portlet.blogs.service.persistence.BlogsStatsUserPersistenceImpl" parent="dataAccessBase" />
+	<bean id="com.liferay.portlet.blogs.service.persistence.BlogsStatsUserPersistence.impl" class="com.liferay.portlet.blogs.service.persistence.BlogsStatsUserPersistenceImpl" parent="basePersistence" />
 	<bean id="com.liferay.portlet.blogs.service.persistence.BlogsStatsUserPersistence.transaction" parent="com.liferay.portlet.blogs.service.persistence.BlogsStatsUserPersistence.impl" />
 	<bean id="com.liferay.portlet.blogs.service.persistence.BlogsStatsUserUtil" class="com.liferay.portlet.blogs.service.persistence.BlogsStatsUserUtil">
 		<property name="persistence" ref="com.liferay.portlet.blogs.service.persistence.BlogsStatsUserPersistence.impl" />
 	</bean>
-	<bean id="com.liferay.portlet.blogs.service.persistence.BlogsStatsUserFinder.impl" class="com.liferay.portlet.blogs.service.persistence.BlogsStatsUserFinderImpl" parent="dataAccessBase" />
+	<bean id="com.liferay.portlet.blogs.service.persistence.BlogsStatsUserFinder.impl" class="com.liferay.portlet.blogs.service.persistence.BlogsStatsUserFinderImpl" parent="basePersistence" />
 	<bean id="com.liferay.portlet.blogs.service.persistence.BlogsStatsUserFinderUtil" class="com.liferay.portlet.blogs.service.persistence.BlogsStatsUserFinderUtil">
 		<property name="finder" ref="com.liferay.portlet.blogs.service.persistence.BlogsStatsUserFinder.impl" />
 	</bean>
@@ -1068,12 +1068,12 @@
 	</bean>
 	<bean id="com.liferay.portlet.bookmarks.service.BookmarksEntryServiceFactory" class="com.liferay.portlet.bookmarks.service.BookmarksEntryServiceFactory" parent="com.liferay.portlet.bookmarks.service.BookmarksEntryService.base" />
 	<bean id="com.liferay.portlet.bookmarks.service.BookmarksEntryServiceUtil" class="com.liferay.portlet.bookmarks.service.BookmarksEntryServiceUtil" parent="com.liferay.portlet.bookmarks.service.BookmarksEntryService.base" />
-	<bean id="com.liferay.portlet.bookmarks.service.persistence.BookmarksEntryPersistence.impl" class="com.liferay.portlet.bookmarks.service.persistence.BookmarksEntryPersistenceImpl" parent="dataAccessBase" />
+	<bean id="com.liferay.portlet.bookmarks.service.persistence.BookmarksEntryPersistence.impl" class="com.liferay.portlet.bookmarks.service.persistence.BookmarksEntryPersistenceImpl" parent="basePersistence" />
 	<bean id="com.liferay.portlet.bookmarks.service.persistence.BookmarksEntryPersistence.transaction" parent="com.liferay.portlet.bookmarks.service.persistence.BookmarksEntryPersistence.impl" />
 	<bean id="com.liferay.portlet.bookmarks.service.persistence.BookmarksEntryUtil" class="com.liferay.portlet.bookmarks.service.persistence.BookmarksEntryUtil">
 		<property name="persistence" ref="com.liferay.portlet.bookmarks.service.persistence.BookmarksEntryPersistence.impl" />
 	</bean>
-	<bean id="com.liferay.portlet.bookmarks.service.persistence.BookmarksEntryFinder.impl" class="com.liferay.portlet.bookmarks.service.persistence.BookmarksEntryFinderImpl" parent="dataAccessBase" />
+	<bean id="com.liferay.portlet.bookmarks.service.persistence.BookmarksEntryFinder.impl" class="com.liferay.portlet.bookmarks.service.persistence.BookmarksEntryFinderImpl" parent="basePersistence" />
 	<bean id="com.liferay.portlet.bookmarks.service.persistence.BookmarksEntryFinderUtil" class="com.liferay.portlet.bookmarks.service.persistence.BookmarksEntryFinderUtil">
 		<property name="finder" ref="com.liferay.portlet.bookmarks.service.persistence.BookmarksEntryFinder.impl" />
 	</bean>
@@ -1097,7 +1097,7 @@
 	</bean>
 	<bean id="com.liferay.portlet.bookmarks.service.BookmarksFolderServiceFactory" class="com.liferay.portlet.bookmarks.service.BookmarksFolderServiceFactory" parent="com.liferay.portlet.bookmarks.service.BookmarksFolderService.base" />
 	<bean id="com.liferay.portlet.bookmarks.service.BookmarksFolderServiceUtil" class="com.liferay.portlet.bookmarks.service.BookmarksFolderServiceUtil" parent="com.liferay.portlet.bookmarks.service.BookmarksFolderService.base" />
-	<bean id="com.liferay.portlet.bookmarks.service.persistence.BookmarksFolderPersistence.impl" class="com.liferay.portlet.bookmarks.service.persistence.BookmarksFolderPersistenceImpl" parent="dataAccessBase" />
+	<bean id="com.liferay.portlet.bookmarks.service.persistence.BookmarksFolderPersistence.impl" class="com.liferay.portlet.bookmarks.service.persistence.BookmarksFolderPersistenceImpl" parent="basePersistence" />
 	<bean id="com.liferay.portlet.bookmarks.service.persistence.BookmarksFolderPersistence.transaction" parent="com.liferay.portlet.bookmarks.service.persistence.BookmarksFolderPersistence.impl" />
 	<bean id="com.liferay.portlet.bookmarks.service.persistence.BookmarksFolderUtil" class="com.liferay.portlet.bookmarks.service.persistence.BookmarksFolderUtil">
 		<property name="persistence" ref="com.liferay.portlet.bookmarks.service.persistence.BookmarksFolderPersistence.impl" />
@@ -1122,12 +1122,12 @@
 	</bean>
 	<bean id="com.liferay.portlet.calendar.service.CalEventServiceFactory" class="com.liferay.portlet.calendar.service.CalEventServiceFactory" parent="com.liferay.portlet.calendar.service.CalEventService.base" />
 	<bean id="com.liferay.portlet.calendar.service.CalEventServiceUtil" class="com.liferay.portlet.calendar.service.CalEventServiceUtil" parent="com.liferay.portlet.calendar.service.CalEventService.base" />
-	<bean id="com.liferay.portlet.calendar.service.persistence.CalEventPersistence.impl" class="com.liferay.portlet.calendar.service.persistence.CalEventPersistenceImpl" parent="dataAccessBase" />
+	<bean id="com.liferay.portlet.calendar.service.persistence.CalEventPersistence.impl" class="com.liferay.portlet.calendar.service.persistence.CalEventPersistenceImpl" parent="basePersistence" />
 	<bean id="com.liferay.portlet.calendar.service.persistence.CalEventPersistence.transaction" parent="com.liferay.portlet.calendar.service.persistence.CalEventPersistence.impl" />
 	<bean id="com.liferay.portlet.calendar.service.persistence.CalEventUtil" class="com.liferay.portlet.calendar.service.persistence.CalEventUtil">
 		<property name="persistence" ref="com.liferay.portlet.calendar.service.persistence.CalEventPersistence.impl" />
 	</bean>
-	<bean id="com.liferay.portlet.calendar.service.persistence.CalEventFinder.impl" class="com.liferay.portlet.calendar.service.persistence.CalEventFinderImpl" parent="dataAccessBase" />
+	<bean id="com.liferay.portlet.calendar.service.persistence.CalEventFinder.impl" class="com.liferay.portlet.calendar.service.persistence.CalEventFinderImpl" parent="basePersistence" />
 	<bean id="com.liferay.portlet.calendar.service.persistence.CalEventFinderUtil" class="com.liferay.portlet.calendar.service.persistence.CalEventFinderUtil">
 		<property name="finder" ref="com.liferay.portlet.calendar.service.persistence.CalEventFinder.impl" />
 	</bean>
@@ -1151,16 +1151,16 @@
 	</bean>
 	<bean id="com.liferay.portlet.documentlibrary.service.DLFileEntryServiceFactory" class="com.liferay.portlet.documentlibrary.service.DLFileEntryServiceFactory" parent="com.liferay.portlet.documentlibrary.service.DLFileEntryService.base" />
 	<bean id="com.liferay.portlet.documentlibrary.service.DLFileEntryServiceUtil" class="com.liferay.portlet.documentlibrary.service.DLFileEntryServiceUtil" parent="com.liferay.portlet.documentlibrary.service.DLFileEntryService.base" />
-	<bean id="com.liferay.portlet.documentlibrary.service.persistence.DLFileEntryPersistence.impl" class="com.liferay.portlet.documentlibrary.service.persistence.DLFileEntryPersistenceImpl" parent="dataAccessBase" />
+	<bean id="com.liferay.portlet.documentlibrary.service.persistence.DLFileEntryPersistence.impl" class="com.liferay.portlet.documentlibrary.service.persistence.DLFileEntryPersistenceImpl" parent="basePersistence" />
 	<bean id="com.liferay.portlet.documentlibrary.service.persistence.DLFileEntryPersistence.transaction" parent="com.liferay.portlet.documentlibrary.service.persistence.DLFileEntryPersistence.impl" />
 	<bean id="com.liferay.portlet.documentlibrary.service.persistence.DLFileEntryUtil" class="com.liferay.portlet.documentlibrary.service.persistence.DLFileEntryUtil">
 		<property name="persistence" ref="com.liferay.portlet.documentlibrary.service.persistence.DLFileEntryPersistence.impl" />
 	</bean>
-	<bean id="com.liferay.portlet.documentlibrary.service.persistence.DLFileEntryFinder.impl" class="com.liferay.portlet.documentlibrary.service.persistence.DLFileEntryFinderImpl" parent="dataAccessBase" />
+	<bean id="com.liferay.portlet.documentlibrary.service.persistence.DLFileEntryFinder.impl" class="com.liferay.portlet.documentlibrary.service.persistence.DLFileEntryFinderImpl" parent="basePersistence" />
 	<bean id="com.liferay.portlet.documentlibrary.service.persistence.DLFileEntryFinderUtil" class="com.liferay.portlet.documentlibrary.service.persistence.DLFileEntryFinderUtil">
 		<property name="finder" ref="com.liferay.portlet.documentlibrary.service.persistence.DLFileEntryFinder.impl" />
 	</bean>
-	<bean id="com.liferay.portlet.documentlibrary.service.persistence.DLFileEntryAndShortcutFinder.impl" class="com.liferay.portlet.documentlibrary.service.persistence.DLFileEntryAndShortcutFinderImpl" parent="dataAccessBase" />
+	<bean id="com.liferay.portlet.documentlibrary.service.persistence.DLFileEntryAndShortcutFinder.impl" class="com.liferay.portlet.documentlibrary.service.persistence.DLFileEntryAndShortcutFinderImpl" parent="basePersistence" />
 	<bean id="com.liferay.portlet.documentlibrary.service.persistence.DLFileEntryAndShortcutFinderUtil" class="com.liferay.portlet.documentlibrary.service.persistence.DLFileEntryAndShortcutFinderUtil">
 		<property name="finder" ref="com.liferay.portlet.documentlibrary.service.persistence.DLFileEntryAndShortcutFinder.impl" />
 	</bean>
@@ -1174,12 +1174,12 @@
 	</bean>
 	<bean id="com.liferay.portlet.documentlibrary.service.DLFileRankLocalServiceFactory" class="com.liferay.portlet.documentlibrary.service.DLFileRankLocalServiceFactory" parent="com.liferay.portlet.documentlibrary.service.DLFileRankLocalService.base" />
 	<bean id="com.liferay.portlet.documentlibrary.service.DLFileRankLocalServiceUtil" class="com.liferay.portlet.documentlibrary.service.DLFileRankLocalServiceUtil" parent="com.liferay.portlet.documentlibrary.service.DLFileRankLocalService.base" />
-	<bean id="com.liferay.portlet.documentlibrary.service.persistence.DLFileRankPersistence.impl" class="com.liferay.portlet.documentlibrary.service.persistence.DLFileRankPersistenceImpl" parent="dataAccessBase" />
+	<bean id="com.liferay.portlet.documentlibrary.service.persistence.DLFileRankPersistence.impl" class="com.liferay.portlet.documentlibrary.service.persistence.DLFileRankPersistenceImpl" parent="basePersistence" />
 	<bean id="com.liferay.portlet.documentlibrary.service.persistence.DLFileRankPersistence.transaction" parent="com.liferay.portlet.documentlibrary.service.persistence.DLFileRankPersistence.impl" />
 	<bean id="com.liferay.portlet.documentlibrary.service.persistence.DLFileRankUtil" class="com.liferay.portlet.documentlibrary.service.persistence.DLFileRankUtil">
 		<property name="persistence" ref="com.liferay.portlet.documentlibrary.service.persistence.DLFileRankPersistence.impl" />
 	</bean>
-	<bean id="com.liferay.portlet.documentlibrary.service.persistence.DLFileRankFinder.impl" class="com.liferay.portlet.documentlibrary.service.persistence.DLFileRankFinderImpl" parent="dataAccessBase" />
+	<bean id="com.liferay.portlet.documentlibrary.service.persistence.DLFileRankFinder.impl" class="com.liferay.portlet.documentlibrary.service.persistence.DLFileRankFinderImpl" parent="basePersistence" />
 	<bean id="com.liferay.portlet.documentlibrary.service.persistence.DLFileRankFinderUtil" class="com.liferay.portlet.documentlibrary.service.persistence.DLFileRankFinderUtil">
 		<property name="finder" ref="com.liferay.portlet.documentlibrary.service.persistence.DLFileRankFinder.impl" />
 	</bean>
@@ -1203,12 +1203,12 @@
 	</bean>
 	<bean id="com.liferay.portlet.documentlibrary.service.DLFileShortcutServiceFactory" class="com.liferay.portlet.documentlibrary.service.DLFileShortcutServiceFactory" parent="com.liferay.portlet.documentlibrary.service.DLFileShortcutService.base" />
 	<bean id="com.liferay.portlet.documentlibrary.service.DLFileShortcutServiceUtil" class="com.liferay.portlet.documentlibrary.service.DLFileShortcutServiceUtil" parent="com.liferay.portlet.documentlibrary.service.DLFileShortcutService.base" />
-	<bean id="com.liferay.portlet.documentlibrary.service.persistence.DLFileShortcutPersistence.impl" class="com.liferay.portlet.documentlibrary.service.persistence.DLFileShortcutPersistenceImpl" parent="dataAccessBase" />
+	<bean id="com.liferay.portlet.documentlibrary.service.persistence.DLFileShortcutPersistence.impl" class="com.liferay.portlet.documentlibrary.service.persistence.DLFileShortcutPersistenceImpl" parent="basePersistence" />
 	<bean id="com.liferay.portlet.documentlibrary.service.persistence.DLFileShortcutPersistence.transaction" parent="com.liferay.portlet.documentlibrary.service.persistence.DLFileShortcutPersistence.impl" />
 	<bean id="com.liferay.portlet.documentlibrary.service.persistence.DLFileShortcutUtil" class="com.liferay.portlet.documentlibrary.service.persistence.DLFileShortcutUtil">
 		<property name="persistence" ref="com.liferay.portlet.documentlibrary.service.persistence.DLFileShortcutPersistence.impl" />
 	</bean>
-	<bean id="com.liferay.portlet.documentlibrary.service.persistence.DLFileShortcutFinder.impl" class="com.liferay.portlet.documentlibrary.service.persistence.DLFileShortcutFinderImpl" parent="dataAccessBase" />
+	<bean id="com.liferay.portlet.documentlibrary.service.persistence.DLFileShortcutFinder.impl" class="com.liferay.portlet.documentlibrary.service.persistence.DLFileShortcutFinderImpl" parent="basePersistence" />
 	<bean id="com.liferay.portlet.documentlibrary.service.persistence.DLFileShortcutFinderUtil" class="com.liferay.portlet.documentlibrary.service.persistence.DLFileShortcutFinderUtil">
 		<property name="finder" ref="com.liferay.portlet.documentlibrary.service.persistence.DLFileShortcutFinder.impl" />
 	</bean>
@@ -1222,7 +1222,7 @@
 	</bean>
 	<bean id="com.liferay.portlet.documentlibrary.service.DLFileVersionLocalServiceFactory" class="com.liferay.portlet.documentlibrary.service.DLFileVersionLocalServiceFactory" parent="com.liferay.portlet.documentlibrary.service.DLFileVersionLocalService.base" />
 	<bean id="com.liferay.portlet.documentlibrary.service.DLFileVersionLocalServiceUtil" class="com.liferay.portlet.documentlibrary.service.DLFileVersionLocalServiceUtil" parent="com.liferay.portlet.documentlibrary.service.DLFileVersionLocalService.base" />
-	<bean id="com.liferay.portlet.documentlibrary.service.persistence.DLFileVersionPersistence.impl" class="com.liferay.portlet.documentlibrary.service.persistence.DLFileVersionPersistenceImpl" parent="dataAccessBase" />
+	<bean id="com.liferay.portlet.documentlibrary.service.persistence.DLFileVersionPersistence.impl" class="com.liferay.portlet.documentlibrary.service.persistence.DLFileVersionPersistenceImpl" parent="basePersistence" />
 	<bean id="com.liferay.portlet.documentlibrary.service.persistence.DLFileVersionPersistence.transaction" parent="com.liferay.portlet.documentlibrary.service.persistence.DLFileVersionPersistence.impl" />
 	<bean id="com.liferay.portlet.documentlibrary.service.persistence.DLFileVersionUtil" class="com.liferay.portlet.documentlibrary.service.persistence.DLFileVersionUtil">
 		<property name="persistence" ref="com.liferay.portlet.documentlibrary.service.persistence.DLFileVersionPersistence.impl" />
@@ -1247,7 +1247,7 @@
 	</bean>
 	<bean id="com.liferay.portlet.documentlibrary.service.DLFolderServiceFactory" class="com.liferay.portlet.documentlibrary.service.DLFolderServiceFactory" parent="com.liferay.portlet.documentlibrary.service.DLFolderService.base" />
 	<bean id="com.liferay.portlet.documentlibrary.service.DLFolderServiceUtil" class="com.liferay.portlet.documentlibrary.service.DLFolderServiceUtil" parent="com.liferay.portlet.documentlibrary.service.DLFolderService.base" />
-	<bean id="com.liferay.portlet.documentlibrary.service.persistence.DLFolderPersistence.impl" class="com.liferay.portlet.documentlibrary.service.persistence.DLFolderPersistenceImpl" parent="dataAccessBase" />
+	<bean id="com.liferay.portlet.documentlibrary.service.persistence.DLFolderPersistence.impl" class="com.liferay.portlet.documentlibrary.service.persistence.DLFolderPersistenceImpl" parent="basePersistence" />
 	<bean id="com.liferay.portlet.documentlibrary.service.persistence.DLFolderPersistence.transaction" parent="com.liferay.portlet.documentlibrary.service.persistence.DLFolderPersistence.impl" />
 	<bean id="com.liferay.portlet.documentlibrary.service.persistence.DLFolderUtil" class="com.liferay.portlet.documentlibrary.service.persistence.DLFolderUtil">
 		<property name="persistence" ref="com.liferay.portlet.documentlibrary.service.persistence.DLFolderPersistence.impl" />
@@ -1262,12 +1262,12 @@
 	</bean>
 	<bean id="com.liferay.portlet.expando.service.ExpandoColumnLocalServiceFactory" class="com.liferay.portlet.expando.service.ExpandoColumnLocalServiceFactory" parent="com.liferay.portlet.expando.service.ExpandoColumnLocalService.base" />
 	<bean id="com.liferay.portlet.expando.service.ExpandoColumnLocalServiceUtil" class="com.liferay.portlet.expando.service.ExpandoColumnLocalServiceUtil" parent="com.liferay.portlet.expando.service.ExpandoColumnLocalService.base" />
-	<bean id="com.liferay.portlet.expando.service.persistence.ExpandoColumnPersistence.impl" class="com.liferay.portlet.expando.service.persistence.ExpandoColumnPersistenceImpl" parent="dataAccessBase" />
+	<bean id="com.liferay.portlet.expando.service.persistence.ExpandoColumnPersistence.impl" class="com.liferay.portlet.expando.service.persistence.ExpandoColumnPersistenceImpl" parent="basePersistence" />
 	<bean id="com.liferay.portlet.expando.service.persistence.ExpandoColumnPersistence.transaction" parent="com.liferay.portlet.expando.service.persistence.ExpandoColumnPersistence.impl" />
 	<bean id="com.liferay.portlet.expando.service.persistence.ExpandoColumnUtil" class="com.liferay.portlet.expando.service.persistence.ExpandoColumnUtil">
 		<property name="persistence" ref="com.liferay.portlet.expando.service.persistence.ExpandoColumnPersistence.impl" />
 	</bean>
-	<bean id="com.liferay.portlet.expando.service.persistence.ExpandoColumnFinder.impl" class="com.liferay.portlet.expando.service.persistence.ExpandoColumnFinderImpl" parent="dataAccessBase" />
+	<bean id="com.liferay.portlet.expando.service.persistence.ExpandoColumnFinder.impl" class="com.liferay.portlet.expando.service.persistence.ExpandoColumnFinderImpl" parent="basePersistence" />
 	<bean id="com.liferay.portlet.expando.service.persistence.ExpandoColumnFinderUtil" class="com.liferay.portlet.expando.service.persistence.ExpandoColumnFinderUtil">
 		<property name="finder" ref="com.liferay.portlet.expando.service.persistence.ExpandoColumnFinder.impl" />
 	</bean>
@@ -1281,12 +1281,12 @@
 	</bean>
 	<bean id="com.liferay.portlet.expando.service.ExpandoRowLocalServiceFactory" class="com.liferay.portlet.expando.service.ExpandoRowLocalServiceFactory" parent="com.liferay.portlet.expando.service.ExpandoRowLocalService.base" />
 	<bean id="com.liferay.portlet.expando.service.ExpandoRowLocalServiceUtil" class="com.liferay.portlet.expando.service.ExpandoRowLocalServiceUtil" parent="com.liferay.portlet.expando.service.ExpandoRowLocalService.base" />
-	<bean id="com.liferay.portlet.expando.service.persistence.ExpandoRowPersistence.impl" class="com.liferay.portlet.expando.service.persistence.ExpandoRowPersistenceImpl" parent="dataAccessBase" />
+	<bean id="com.liferay.portlet.expando.service.persistence.ExpandoRowPersistence.impl" class="com.liferay.portlet.expando.service.persistence.ExpandoRowPersistenceImpl" parent="basePersistence" />
 	<bean id="com.liferay.portlet.expando.service.persistence.ExpandoRowPersistence.transaction" parent="com.liferay.portlet.expando.service.persistence.ExpandoRowPersistence.impl" />
 	<bean id="com.liferay.portlet.expando.service.persistence.ExpandoRowUtil" class="com.liferay.portlet.expando.service.persistence.ExpandoRowUtil">
 		<property name="persistence" ref="com.liferay.portlet.expando.service.persistence.ExpandoRowPersistence.impl" />
 	</bean>
-	<bean id="com.liferay.portlet.expando.service.persistence.ExpandoRowFinder.impl" class="com.liferay.portlet.expando.service.persistence.ExpandoRowFinderImpl" parent="dataAccessBase" />
+	<bean id="com.liferay.portlet.expando.service.persistence.ExpandoRowFinder.impl" class="com.liferay.portlet.expando.service.persistence.ExpandoRowFinderImpl" parent="basePersistence" />
 	<bean id="com.liferay.portlet.expando.service.persistence.ExpandoRowFinderUtil" class="com.liferay.portlet.expando.service.persistence.ExpandoRowFinderUtil">
 		<property name="finder" ref="com.liferay.portlet.expando.service.persistence.ExpandoRowFinder.impl" />
 	</bean>
@@ -1300,7 +1300,7 @@
 	</bean>
 	<bean id="com.liferay.portlet.expando.service.ExpandoTableLocalServiceFactory" class="com.liferay.portlet.expando.service.ExpandoTableLocalServiceFactory" parent="com.liferay.portlet.expando.service.ExpandoTableLocalService.base" />
 	<bean id="com.liferay.portlet.expando.service.ExpandoTableLocalServiceUtil" class="com.liferay.portlet.expando.service.ExpandoTableLocalServiceUtil" parent="com.liferay.portlet.expando.service.ExpandoTableLocalService.base" />
-	<bean id="com.liferay.portlet.expando.service.persistence.ExpandoTablePersistence.impl" class="com.liferay.portlet.expando.service.persistence.ExpandoTablePersistenceImpl" parent="dataAccessBase" />
+	<bean id="com.liferay.portlet.expando.service.persistence.ExpandoTablePersistence.impl" class="com.liferay.portlet.expando.service.persistence.ExpandoTablePersistenceImpl" parent="basePersistence" />
 	<bean id="com.liferay.portlet.expando.service.persistence.ExpandoTablePersistence.transaction" parent="com.liferay.portlet.expando.service.persistence.ExpandoTablePersistence.impl" />
 	<bean id="com.liferay.portlet.expando.service.persistence.ExpandoTableUtil" class="com.liferay.portlet.expando.service.persistence.ExpandoTableUtil">
 		<property name="persistence" ref="com.liferay.portlet.expando.service.persistence.ExpandoTablePersistence.impl" />
@@ -1315,12 +1315,12 @@
 	</bean>
 	<bean id="com.liferay.portlet.expando.service.ExpandoValueLocalServiceFactory" class="com.liferay.portlet.expando.service.ExpandoValueLocalServiceFactory" parent="com.liferay.portlet.expando.service.ExpandoValueLocalService.base" />
 	<bean id="com.liferay.portlet.expando.service.ExpandoValueLocalServiceUtil" class="com.liferay.portlet.expando.service.ExpandoValueLocalServiceUtil" parent="com.liferay.portlet.expando.service.ExpandoValueLocalService.base" />
-	<bean id="com.liferay.portlet.expando.service.persistence.ExpandoValuePersistence.impl" class="com.liferay.portlet.expando.service.persistence.ExpandoValuePersistenceImpl" parent="dataAccessBase" />
+	<bean id="com.liferay.portlet.expando.service.persistence.ExpandoValuePersistence.impl" class="com.liferay.portlet.expando.service.persistence.ExpandoValuePersistenceImpl" parent="basePersistence" />
 	<bean id="com.liferay.portlet.expando.service.persistence.ExpandoValuePersistence.transaction" parent="com.liferay.portlet.expando.service.persistence.ExpandoValuePersistence.impl" />
 	<bean id="com.liferay.portlet.expando.service.persistence.ExpandoValueUtil" class="com.liferay.portlet.expando.service.persistence.ExpandoValueUtil">
 		<property name="persistence" ref="com.liferay.portlet.expando.service.persistence.ExpandoValuePersistence.impl" />
 	</bean>
-	<bean id="com.liferay.portlet.expando.service.persistence.ExpandoValueFinder.impl" class="com.liferay.portlet.expando.service.persistence.ExpandoValueFinderImpl" parent="dataAccessBase" />
+	<bean id="com.liferay.portlet.expando.service.persistence.ExpandoValueFinder.impl" class="com.liferay.portlet.expando.service.persistence.ExpandoValueFinderImpl" parent="basePersistence" />
 	<bean id="com.liferay.portlet.expando.service.persistence.ExpandoValueFinderUtil" class="com.liferay.portlet.expando.service.persistence.ExpandoValueFinderUtil">
 		<property name="finder" ref="com.liferay.portlet.expando.service.persistence.ExpandoValueFinder.impl" />
 	</bean>
@@ -1344,7 +1344,7 @@
 	</bean>
 	<bean id="com.liferay.portlet.imagegallery.service.IGFolderServiceFactory" class="com.liferay.portlet.imagegallery.service.IGFolderServiceFactory" parent="com.liferay.portlet.imagegallery.service.IGFolderService.base" />
 	<bean id="com.liferay.portlet.imagegallery.service.IGFolderServiceUtil" class="com.liferay.portlet.imagegallery.service.IGFolderServiceUtil" parent="com.liferay.portlet.imagegallery.service.IGFolderService.base" />
-	<bean id="com.liferay.portlet.imagegallery.service.persistence.IGFolderPersistence.impl" class="com.liferay.portlet.imagegallery.service.persistence.IGFolderPersistenceImpl" parent="dataAccessBase" />
+	<bean id="com.liferay.portlet.imagegallery.service.persistence.IGFolderPersistence.impl" class="com.liferay.portlet.imagegallery.service.persistence.IGFolderPersistenceImpl" parent="basePersistence" />
 	<bean id="com.liferay.portlet.imagegallery.service.persistence.IGFolderPersistence.transaction" parent="com.liferay.portlet.imagegallery.service.persistence.IGFolderPersistence.impl" />
 	<bean id="com.liferay.portlet.imagegallery.service.persistence.IGFolderUtil" class="com.liferay.portlet.imagegallery.service.persistence.IGFolderUtil">
 		<property name="persistence" ref="com.liferay.portlet.imagegallery.service.persistence.IGFolderPersistence.impl" />
@@ -1369,12 +1369,12 @@
 	</bean>
 	<bean id="com.liferay.portlet.imagegallery.service.IGImageServiceFactory" class="com.liferay.portlet.imagegallery.service.IGImageServiceFactory" parent="com.liferay.portlet.imagegallery.service.IGImageService.base" />
 	<bean id="com.liferay.portlet.imagegallery.service.IGImageServiceUtil" class="com.liferay.portlet.imagegallery.service.IGImageServiceUtil" parent="com.liferay.portlet.imagegallery.service.IGImageService.base" />
-	<bean id="com.liferay.portlet.imagegallery.service.persistence.IGImagePersistence.impl" class="com.liferay.portlet.imagegallery.service.persistence.IGImagePersistenceImpl" parent="dataAccessBase" />
+	<bean id="com.liferay.portlet.imagegallery.service.persistence.IGImagePersistence.impl" class="com.liferay.portlet.imagegallery.service.persistence.IGImagePersistenceImpl" parent="basePersistence" />
 	<bean id="com.liferay.portlet.imagegallery.service.persistence.IGImagePersistence.transaction" parent="com.liferay.portlet.imagegallery.service.persistence.IGImagePersistence.impl" />
 	<bean id="com.liferay.portlet.imagegallery.service.persistence.IGImageUtil" class="com.liferay.portlet.imagegallery.service.persistence.IGImageUtil">
 		<property name="persistence" ref="com.liferay.portlet.imagegallery.service.persistence.IGImagePersistence.impl" />
 	</bean>
-	<bean id="com.liferay.portlet.imagegallery.service.persistence.IGImageFinder.impl" class="com.liferay.portlet.imagegallery.service.persistence.IGImageFinderImpl" parent="dataAccessBase" />
+	<bean id="com.liferay.portlet.imagegallery.service.persistence.IGImageFinder.impl" class="com.liferay.portlet.imagegallery.service.persistence.IGImageFinderImpl" parent="basePersistence" />
 	<bean id="com.liferay.portlet.imagegallery.service.persistence.IGImageFinderUtil" class="com.liferay.portlet.imagegallery.service.persistence.IGImageFinderUtil">
 		<property name="finder" ref="com.liferay.portlet.imagegallery.service.persistence.IGImageFinder.impl" />
 	</bean>
@@ -1398,12 +1398,12 @@
 	</bean>
 	<bean id="com.liferay.portlet.journal.service.JournalArticleServiceFactory" class="com.liferay.portlet.journal.service.JournalArticleServiceFactory" parent="com.liferay.portlet.journal.service.JournalArticleService.base" />
 	<bean id="com.liferay.portlet.journal.service.JournalArticleServiceUtil" class="com.liferay.portlet.journal.service.JournalArticleServiceUtil" parent="com.liferay.portlet.journal.service.JournalArticleService.base" />
-	<bean id="com.liferay.portlet.journal.service.persistence.JournalArticlePersistence.impl" class="com.liferay.portlet.journal.service.persistence.JournalArticlePersistenceImpl" parent="dataAccessBase" />
+	<bean id="com.liferay.portlet.journal.service.persistence.JournalArticlePersistence.impl" class="com.liferay.portlet.journal.service.persistence.JournalArticlePersistenceImpl" parent="basePersistence" />
 	<bean id="com.liferay.portlet.journal.service.persistence.JournalArticlePersistence.transaction" parent="com.liferay.portlet.journal.service.persistence.JournalArticlePersistence.impl" />
 	<bean id="com.liferay.portlet.journal.service.persistence.JournalArticleUtil" class="com.liferay.portlet.journal.service.persistence.JournalArticleUtil">
 		<property name="persistence" ref="com.liferay.portlet.journal.service.persistence.JournalArticlePersistence.impl" />
 	</bean>
-	<bean id="com.liferay.portlet.journal.service.persistence.JournalArticleFinder.impl" class="com.liferay.portlet.journal.service.persistence.JournalArticleFinderImpl" parent="dataAccessBase" />
+	<bean id="com.liferay.portlet.journal.service.persistence.JournalArticleFinder.impl" class="com.liferay.portlet.journal.service.persistence.JournalArticleFinderImpl" parent="basePersistence" />
 	<bean id="com.liferay.portlet.journal.service.persistence.JournalArticleFinderUtil" class="com.liferay.portlet.journal.service.persistence.JournalArticleFinderUtil">
 		<property name="finder" ref="com.liferay.portlet.journal.service.persistence.JournalArticleFinder.impl" />
 	</bean>
@@ -1417,7 +1417,7 @@
 	</bean>
 	<bean id="com.liferay.portlet.journal.service.JournalArticleImageLocalServiceFactory" class="com.liferay.portlet.journal.service.JournalArticleImageLocalServiceFactory" parent="com.liferay.portlet.journal.service.JournalArticleImageLocalService.base" />
 	<bean id="com.liferay.portlet.journal.service.JournalArticleImageLocalServiceUtil" class="com.liferay.portlet.journal.service.JournalArticleImageLocalServiceUtil" parent="com.liferay.portlet.journal.service.JournalArticleImageLocalService.base" />
-	<bean id="com.liferay.portlet.journal.service.persistence.JournalArticleImagePersistence.impl" class="com.liferay.portlet.journal.service.persistence.JournalArticleImagePersistenceImpl" parent="dataAccessBase" />
+	<bean id="com.liferay.portlet.journal.service.persistence.JournalArticleImagePersistence.impl" class="com.liferay.portlet.journal.service.persistence.JournalArticleImagePersistenceImpl" parent="basePersistence" />
 	<bean id="com.liferay.portlet.journal.service.persistence.JournalArticleImagePersistence.transaction" parent="com.liferay.portlet.journal.service.persistence.JournalArticleImagePersistence.impl" />
 	<bean id="com.liferay.portlet.journal.service.persistence.JournalArticleImageUtil" class="com.liferay.portlet.journal.service.persistence.JournalArticleImageUtil">
 		<property name="persistence" ref="com.liferay.portlet.journal.service.persistence.JournalArticleImagePersistence.impl" />
@@ -1432,7 +1432,7 @@
 	</bean>
 	<bean id="com.liferay.portlet.journal.service.JournalArticleResourceLocalServiceFactory" class="com.liferay.portlet.journal.service.JournalArticleResourceLocalServiceFactory" parent="com.liferay.portlet.journal.service.JournalArticleResourceLocalService.base" />
 	<bean id="com.liferay.portlet.journal.service.JournalArticleResourceLocalServiceUtil" class="com.liferay.portlet.journal.service.JournalArticleResourceLocalServiceUtil" parent="com.liferay.portlet.journal.service.JournalArticleResourceLocalService.base" />
-	<bean id="com.liferay.portlet.journal.service.persistence.JournalArticleResourcePersistence.impl" class="com.liferay.portlet.journal.service.persistence.JournalArticleResourcePersistenceImpl" parent="dataAccessBase" />
+	<bean id="com.liferay.portlet.journal.service.persistence.JournalArticleResourcePersistence.impl" class="com.liferay.portlet.journal.service.persistence.JournalArticleResourcePersistenceImpl" parent="basePersistence" />
 	<bean id="com.liferay.portlet.journal.service.persistence.JournalArticleResourcePersistence.transaction" parent="com.liferay.portlet.journal.service.persistence.JournalArticleResourcePersistence.impl" />
 	<bean id="com.liferay.portlet.journal.service.persistence.JournalArticleResourceUtil" class="com.liferay.portlet.journal.service.persistence.JournalArticleResourceUtil">
 		<property name="persistence" ref="com.liferay.portlet.journal.service.persistence.JournalArticleResourcePersistence.impl" />
@@ -1447,7 +1447,7 @@
 	</bean>
 	<bean id="com.liferay.portlet.journal.service.JournalContentSearchLocalServiceFactory" class="com.liferay.portlet.journal.service.JournalContentSearchLocalServiceFactory" parent="com.liferay.portlet.journal.service.JournalContentSearchLocalService.base" />
 	<bean id="com.liferay.portlet.journal.service.JournalContentSearchLocalServiceUtil" class="com.liferay.portlet.journal.service.JournalContentSearchLocalServiceUtil" parent="com.liferay.portlet.journal.service.JournalContentSearchLocalService.base" />
-	<bean id="com.liferay.portlet.journal.service.persistence.JournalContentSearchPersistence.impl" class="com.liferay.portlet.journal.service.persistence.JournalContentSearchPersistenceImpl" parent="dataAccessBase" />
+	<bean id="com.liferay.portlet.journal.service.persistence.JournalContentSearchPersistence.impl" class="com.liferay.portlet.journal.service.persistence.JournalContentSearchPersistenceImpl" parent="basePersistence" />
 	<bean id="com.liferay.portlet.journal.service.persistence.JournalContentSearchPersistence.transaction" parent="com.liferay.portlet.journal.service.persistence.JournalContentSearchPersistence.impl" />
 	<bean id="com.liferay.portlet.journal.service.persistence.JournalContentSearchUtil" class="com.liferay.portlet.journal.service.persistence.JournalContentSearchUtil">
 		<property name="persistence" ref="com.liferay.portlet.journal.service.persistence.JournalContentSearchPersistence.impl" />
@@ -1472,12 +1472,12 @@
 	</bean>
 	<bean id="com.liferay.portlet.journal.service.JournalFeedServiceFactory" class="com.liferay.portlet.journal.service.JournalFeedServiceFactory" parent="com.liferay.portlet.journal.service.JournalFeedService.base" />
 	<bean id="com.liferay.portlet.journal.service.JournalFeedServiceUtil" class="com.liferay.portlet.journal.service.JournalFeedServiceUtil" parent="com.liferay.portlet.journal.service.JournalFeedService.base" />
-	<bean id="com.liferay.portlet.journal.service.persistence.JournalFeedPersistence.impl" class="com.liferay.portlet.journal.service.persistence.JournalFeedPersistenceImpl" parent="dataAccessBase" />
+	<bean id="com.liferay.portlet.journal.service.persistence.JournalFeedPersistence.impl" class="com.liferay.portlet.journal.service.persistence.JournalFeedPersistenceImpl" parent="basePersistence" />
 	<bean id="com.liferay.portlet.journal.service.persistence.JournalFeedPersistence.transaction" parent="com.liferay.portlet.journal.service.persistence.JournalFeedPersistence.impl" />
 	<bean id="com.liferay.portlet.journal.service.persistence.JournalFeedUtil" class="com.liferay.portlet.journal.service.persistence.JournalFeedUtil">
 		<property name="persistence" ref="com.liferay.portlet.journal.service.persistence.JournalFeedPersistence.impl" />
 	</bean>
-	<bean id="com.liferay.portlet.journal.service.persistence.JournalFeedFinder.impl" class="com.liferay.portlet.journal.service.persistence.JournalFeedFinderImpl" parent="dataAccessBase" />
+	<bean id="com.liferay.portlet.journal.service.persistence.JournalFeedFinder.impl" class="com.liferay.portlet.journal.service.persistence.JournalFeedFinderImpl" parent="basePersistence" />
 	<bean id="com.liferay.portlet.journal.service.persistence.JournalFeedFinderUtil" class="com.liferay.portlet.journal.service.persistence.JournalFeedFinderUtil">
 		<property name="finder" ref="com.liferay.portlet.journal.service.persistence.JournalFeedFinder.impl" />
 	</bean>
@@ -1501,12 +1501,12 @@
 	</bean>
 	<bean id="com.liferay.portlet.journal.service.JournalStructureServiceFactory" class="com.liferay.portlet.journal.service.JournalStructureServiceFactory" parent="com.liferay.portlet.journal.service.JournalStructureService.base" />
 	<bean id="com.liferay.portlet.journal.service.JournalStructureServiceUtil" class="com.liferay.portlet.journal.service.JournalStructureServiceUtil" parent="com.liferay.portlet.journal.service.JournalStructureService.base" />
-	<bean id="com.liferay.portlet.journal.service.persistence.JournalStructurePersistence.impl" class="com.liferay.portlet.journal.service.persistence.JournalStructurePersistenceImpl" parent="dataAccessBase" />
+	<bean id="com.liferay.portlet.journal.service.persistence.JournalStructurePersistence.impl" class="com.liferay.portlet.journal.service.persistence.JournalStructurePersistenceImpl" parent="basePersistence" />
 	<bean id="com.liferay.portlet.journal.service.persistence.JournalStructurePersistence.transaction" parent="com.liferay.portlet.journal.service.persistence.JournalStructurePersistence.impl" />
 	<bean id="com.liferay.portlet.journal.service.persistence.JournalStructureUtil" class="com.liferay.portlet.journal.service.persistence.JournalStructureUtil">
 		<property name="persistence" ref="com.liferay.portlet.journal.service.persistence.JournalStructurePersistence.impl" />
 	</bean>
-	<bean id="com.liferay.portlet.journal.service.persistence.JournalStructureFinder.impl" class="com.liferay.portlet.journal.service.persistence.JournalStructureFinderImpl" parent="dataAccessBase" />
+	<bean id="com.liferay.portlet.journal.service.persistence.JournalStructureFinder.impl" class="com.liferay.portlet.journal.service.persistence.JournalStructureFinderImpl" parent="basePersistence" />
 	<bean id="com.liferay.portlet.journal.service.persistence.JournalStructureFinderUtil" class="com.liferay.portlet.journal.service.persistence.JournalStructureFinderUtil">
 		<property name="finder" ref="com.liferay.portlet.journal.service.persistence.JournalStructureFinder.impl" />
 	</bean>
@@ -1530,12 +1530,12 @@
 	</bean>
 	<bean id="com.liferay.portlet.journal.service.JournalTemplateServiceFactory" class="com.liferay.portlet.journal.service.JournalTemplateServiceFactory" parent="com.liferay.portlet.journal.service.JournalTemplateService.base" />
 	<bean id="com.liferay.portlet.journal.service.JournalTemplateServiceUtil" class="com.liferay.portlet.journal.service.JournalTemplateServiceUtil" parent="com.liferay.portlet.journal.service.JournalTemplateService.base" />
-	<bean id="com.liferay.portlet.journal.service.persistence.JournalTemplatePersistence.impl" class="com.liferay.portlet.journal.service.persistence.JournalTemplatePersistenceImpl" parent="dataAccessBase" />
+	<bean id="com.liferay.portlet.journal.service.persistence.JournalTemplatePersistence.impl" class="com.liferay.portlet.journal.service.persistence.JournalTemplatePersistenceImpl" parent="basePersistence" />
 	<bean id="com.liferay.portlet.journal.service.persistence.JournalTemplatePersistence.transaction" parent="com.liferay.portlet.journal.service.persistence.JournalTemplatePersistence.impl" />
 	<bean id="com.liferay.portlet.journal.service.persistence.JournalTemplateUtil" class="com.liferay.portlet.journal.service.persistence.JournalTemplateUtil">
 		<property name="persistence" ref="com.liferay.portlet.journal.service.persistence.JournalTemplatePersistence.impl" />
 	</bean>
-	<bean id="com.liferay.portlet.journal.service.persistence.JournalTemplateFinder.impl" class="com.liferay.portlet.journal.service.persistence.JournalTemplateFinderImpl" parent="dataAccessBase" />
+	<bean id="com.liferay.portlet.journal.service.persistence.JournalTemplateFinder.impl" class="com.liferay.portlet.journal.service.persistence.JournalTemplateFinderImpl" parent="basePersistence" />
 	<bean id="com.liferay.portlet.journal.service.persistence.JournalTemplateFinderUtil" class="com.liferay.portlet.journal.service.persistence.JournalTemplateFinderUtil">
 		<property name="finder" ref="com.liferay.portlet.journal.service.persistence.JournalTemplateFinder.impl" />
 	</bean>
@@ -1559,7 +1559,7 @@
 	</bean>
 	<bean id="com.liferay.portlet.messageboards.service.MBBanServiceFactory" class="com.liferay.portlet.messageboards.service.MBBanServiceFactory" parent="com.liferay.portlet.messageboards.service.MBBanService.base" />
 	<bean id="com.liferay.portlet.messageboards.service.MBBanServiceUtil" class="com.liferay.portlet.messageboards.service.MBBanServiceUtil" parent="com.liferay.portlet.messageboards.service.MBBanService.base" />
-	<bean id="com.liferay.portlet.messageboards.service.persistence.MBBanPersistence.impl" class="com.liferay.portlet.messageboards.service.persistence.MBBanPersistenceImpl" parent="dataAccessBase" />
+	<bean id="com.liferay.portlet.messageboards.service.persistence.MBBanPersistence.impl" class="com.liferay.portlet.messageboards.service.persistence.MBBanPersistenceImpl" parent="basePersistence" />
 	<bean id="com.liferay.portlet.messageboards.service.persistence.MBBanPersistence.transaction" parent="com.liferay.portlet.messageboards.service.persistence.MBBanPersistence.impl" />
 	<bean id="com.liferay.portlet.messageboards.service.persistence.MBBanUtil" class="com.liferay.portlet.messageboards.service.persistence.MBBanUtil">
 		<property name="persistence" ref="com.liferay.portlet.messageboards.service.persistence.MBBanPersistence.impl" />
@@ -1584,16 +1584,16 @@
 	</bean>
 	<bean id="com.liferay.portlet.messageboards.service.MBCategoryServiceFactory" class="com.liferay.portlet.messageboards.service.MBCategoryServiceFactory" parent="com.liferay.portlet.messageboards.service.MBCategoryService.base" />
 	<bean id="com.liferay.portlet.messageboards.service.MBCategoryServiceUtil" class="com.liferay.portlet.messageboards.service.MBCategoryServiceUtil" parent="com.liferay.portlet.messageboards.service.MBCategoryService.base" />
-	<bean id="com.liferay.portlet.messageboards.service.persistence.MBCategoryPersistence.impl" class="com.liferay.portlet.messageboards.service.persistence.MBCategoryPersistenceImpl" parent="dataAccessBase" />
+	<bean id="com.liferay.portlet.messageboards.service.persistence.MBCategoryPersistence.impl" class="com.liferay.portlet.messageboards.service.persistence.MBCategoryPersistenceImpl" parent="basePersistence" />
 	<bean id="com.liferay.portlet.messageboards.service.persistence.MBCategoryPersistence.transaction" parent="com.liferay.portlet.messageboards.service.persistence.MBCategoryPersistence.impl" />
 	<bean id="com.liferay.portlet.messageboards.service.persistence.MBCategoryUtil" class="com.liferay.portlet.messageboards.service.persistence.MBCategoryUtil">
 		<property name="persistence" ref="com.liferay.portlet.messageboards.service.persistence.MBCategoryPersistence.impl" />
 	</bean>
-	<bean id="com.liferay.portlet.messageboards.service.persistence.MBCategoryFinder.impl" class="com.liferay.portlet.messageboards.service.persistence.MBCategoryFinderImpl" parent="dataAccessBase" />
+	<bean id="com.liferay.portlet.messageboards.service.persistence.MBCategoryFinder.impl" class="com.liferay.portlet.messageboards.service.persistence.MBCategoryFinderImpl" parent="basePersistence" />
 	<bean id="com.liferay.portlet.messageboards.service.persistence.MBCategoryFinderUtil" class="com.liferay.portlet.messageboards.service.persistence.MBCategoryFinderUtil">
 		<property name="finder" ref="com.liferay.portlet.messageboards.service.persistence.MBCategoryFinder.impl" />
 	</bean>
-	<bean id="com.liferay.portlet.messageboards.service.persistence.MBDiscussionPersistence.impl" class="com.liferay.portlet.messageboards.service.persistence.MBDiscussionPersistenceImpl" parent="dataAccessBase" />
+	<bean id="com.liferay.portlet.messageboards.service.persistence.MBDiscussionPersistence.impl" class="com.liferay.portlet.messageboards.service.persistence.MBDiscussionPersistenceImpl" parent="basePersistence" />
 	<bean id="com.liferay.portlet.messageboards.service.persistence.MBDiscussionPersistence.transaction" parent="com.liferay.portlet.messageboards.service.persistence.MBDiscussionPersistence.impl" />
 	<bean id="com.liferay.portlet.messageboards.service.persistence.MBDiscussionUtil" class="com.liferay.portlet.messageboards.service.persistence.MBDiscussionUtil">
 		<property name="persistence" ref="com.liferay.portlet.messageboards.service.persistence.MBDiscussionPersistence.impl" />
@@ -1608,7 +1608,7 @@
 	</bean>
 	<bean id="com.liferay.portlet.messageboards.service.MBMailingListLocalServiceFactory" class="com.liferay.portlet.messageboards.service.MBMailingListLocalServiceFactory" parent="com.liferay.portlet.messageboards.service.MBMailingListLocalService.base" />
 	<bean id="com.liferay.portlet.messageboards.service.MBMailingListLocalServiceUtil" class="com.liferay.portlet.messageboards.service.MBMailingListLocalServiceUtil" parent="com.liferay.portlet.messageboards.service.MBMailingListLocalService.base" />
-	<bean id="com.liferay.portlet.messageboards.service.persistence.MBMailingListPersistence.impl" class="com.liferay.portlet.messageboards.service.persistence.MBMailingListPersistenceImpl" parent="dataAccessBase" />
+	<bean id="com.liferay.portlet.messageboards.service.persistence.MBMailingListPersistence.impl" class="com.liferay.portlet.messageboards.service.persistence.MBMailingListPersistenceImpl" parent="basePersistence" />
 	<bean id="com.liferay.portlet.messageboards.service.persistence.MBMailingListPersistence.transaction" parent="com.liferay.portlet.messageboards.service.persistence.MBMailingListPersistence.impl" />
 	<bean id="com.liferay.portlet.messageboards.service.persistence.MBMailingListUtil" class="com.liferay.portlet.messageboards.service.persistence.MBMailingListUtil">
 		<property name="persistence" ref="com.liferay.portlet.messageboards.service.persistence.MBMailingListPersistence.impl" />
@@ -1633,12 +1633,12 @@
 	</bean>
 	<bean id="com.liferay.portlet.messageboards.service.MBMessageServiceFactory" class="com.liferay.portlet.messageboards.service.MBMessageServiceFactory" parent="com.liferay.portlet.messageboards.service.MBMessageService.base" />
 	<bean id="com.liferay.portlet.messageboards.service.MBMessageServiceUtil" class="com.liferay.portlet.messageboards.service.MBMessageServiceUtil" parent="com.liferay.portlet.messageboards.service.MBMessageService.base" />
-	<bean id="com.liferay.portlet.messageboards.service.persistence.MBMessagePersistence.impl" class="com.liferay.portlet.messageboards.service.persistence.MBMessagePersistenceImpl" parent="dataAccessBase" />
+	<bean id="com.liferay.portlet.messageboards.service.persistence.MBMessagePersistence.impl" class="com.liferay.portlet.messageboards.service.persistence.MBMessagePersistenceImpl" parent="basePersistence" />
 	<bean id="com.liferay.portlet.messageboards.service.persistence.MBMessagePersistence.transaction" parent="com.liferay.portlet.messageboards.service.persistence.MBMessagePersistence.impl" />
 	<bean id="com.liferay.portlet.messageboards.service.persistence.MBMessageUtil" class="com.liferay.portlet.messageboards.service.persistence.MBMessageUtil">
 		<property name="persistence" ref="com.liferay.portlet.messageboards.service.persistence.MBMessagePersistence.impl" />
 	</bean>
-	<bean id="com.liferay.portlet.messageboards.service.persistence.MBMessageFinder.impl" class="com.liferay.portlet.messageboards.service.persistence.MBMessageFinderImpl" parent="dataAccessBase" />
+	<bean id="com.liferay.portlet.messageboards.service.persistence.MBMessageFinder.impl" class="com.liferay.portlet.messageboards.service.persistence.MBMessageFinderImpl" parent="basePersistence" />
 	<bean id="com.liferay.portlet.messageboards.service.persistence.MBMessageFinderUtil" class="com.liferay.portlet.messageboards.service.persistence.MBMessageFinderUtil">
 		<property name="finder" ref="com.liferay.portlet.messageboards.service.persistence.MBMessageFinder.impl" />
 	</bean>
@@ -1662,12 +1662,12 @@
 	</bean>
 	<bean id="com.liferay.portlet.messageboards.service.MBMessageFlagServiceFactory" class="com.liferay.portlet.messageboards.service.MBMessageFlagServiceFactory" parent="com.liferay.portlet.messageboards.service.MBMessageFlagService.base" />
 	<bean id="com.liferay.portlet.messageboards.service.MBMessageFlagServiceUtil" class="com.liferay.portlet.messageboards.service.MBMessageFlagServiceUtil" parent="com.liferay.portlet.messageboards.service.MBMessageFlagService.base" />
-	<bean id="com.liferay.portlet.messageboards.service.persistence.MBMessageFlagPersistence.impl" class="com.liferay.portlet.messageboards.service.persistence.MBMessageFlagPersistenceImpl" parent="dataAccessBase" />
+	<bean id="com.liferay.portlet.messageboards.service.persistence.MBMessageFlagPersistence.impl" class="com.liferay.portlet.messageboards.service.persistence.MBMessageFlagPersistenceImpl" parent="basePersistence" />
 	<bean id="com.liferay.portlet.messageboards.service.persistence.MBMessageFlagPersistence.transaction" parent="com.liferay.portlet.messageboards.service.persistence.MBMessageFlagPersistence.impl" />
 	<bean id="com.liferay.portlet.messageboards.service.persistence.MBMessageFlagUtil" class="com.liferay.portlet.messageboards.service.persistence.MBMessageFlagUtil">
 		<property name="persistence" ref="com.liferay.portlet.messageboards.service.persistence.MBMessageFlagPersistence.impl" />
 	</bean>
-	<bean id="com.liferay.portlet.messageboards.service.persistence.MBMessageFlagFinder.impl" class="com.liferay.portlet.messageboards.service.persistence.MBMessageFlagFinderImpl" parent="dataAccessBase" />
+	<bean id="com.liferay.portlet.messageboards.service.persistence.MBMessageFlagFinder.impl" class="com.liferay.portlet.messageboards.service.persistence.MBMessageFlagFinderImpl" parent="basePersistence" />
 	<bean id="com.liferay.portlet.messageboards.service.persistence.MBMessageFlagFinderUtil" class="com.liferay.portlet.messageboards.service.persistence.MBMessageFlagFinderUtil">
 		<property name="finder" ref="com.liferay.portlet.messageboards.service.persistence.MBMessageFlagFinder.impl" />
 	</bean>
@@ -1681,7 +1681,7 @@
 	</bean>
 	<bean id="com.liferay.portlet.messageboards.service.MBStatsUserLocalServiceFactory" class="com.liferay.portlet.messageboards.service.MBStatsUserLocalServiceFactory" parent="com.liferay.portlet.messageboards.service.MBStatsUserLocalService.base" />
 	<bean id="com.liferay.portlet.messageboards.service.MBStatsUserLocalServiceUtil" class="com.liferay.portlet.messageboards.service.MBStatsUserLocalServiceUtil" parent="com.liferay.portlet.messageboards.service.MBStatsUserLocalService.base" />
-	<bean id="com.liferay.portlet.messageboards.service.persistence.MBStatsUserPersistence.impl" class="com.liferay.portlet.messageboards.service.persistence.MBStatsUserPersistenceImpl" parent="dataAccessBase" />
+	<bean id="com.liferay.portlet.messageboards.service.persistence.MBStatsUserPersistence.impl" class="com.liferay.portlet.messageboards.service.persistence.MBStatsUserPersistenceImpl" parent="basePersistence" />
 	<bean id="com.liferay.portlet.messageboards.service.persistence.MBStatsUserPersistence.transaction" parent="com.liferay.portlet.messageboards.service.persistence.MBStatsUserPersistence.impl" />
 	<bean id="com.liferay.portlet.messageboards.service.persistence.MBStatsUserUtil" class="com.liferay.portlet.messageboards.service.persistence.MBStatsUserUtil">
 		<property name="persistence" ref="com.liferay.portlet.messageboards.service.persistence.MBStatsUserPersistence.impl" />
@@ -1706,12 +1706,12 @@
 	</bean>
 	<bean id="com.liferay.portlet.messageboards.service.MBThreadServiceFactory" class="com.liferay.portlet.messageboards.service.MBThreadServiceFactory" parent="com.liferay.portlet.messageboards.service.MBThreadService.base" />
 	<bean id="com.liferay.portlet.messageboards.service.MBThreadServiceUtil" class="com.liferay.portlet.messageboards.service.MBThreadServiceUtil" parent="com.liferay.portlet.messageboards.service.MBThreadService.base" />
-	<bean id="com.liferay.portlet.messageboards.service.persistence.MBThreadPersistence.impl" class="com.liferay.portlet.messageboards.service.persistence.MBThreadPersistenceImpl" parent="dataAccessBase" />
+	<bean id="com.liferay.portlet.messageboards.service.persistence.MBThreadPersistence.impl" class="com.liferay.portlet.messageboards.service.persistence.MBThreadPersistenceImpl" parent="basePersistence" />
 	<bean id="com.liferay.portlet.messageboards.service.persistence.MBThreadPersistence.transaction" parent="com.liferay.portlet.messageboards.service.persistence.MBThreadPersistence.impl" />
 	<bean id="com.liferay.portlet.messageboards.service.persistence.MBThreadUtil" class="com.liferay.portlet.messageboards.service.persistence.MBThreadUtil">
 		<property name="persistence" ref="com.liferay.portlet.messageboards.service.persistence.MBThreadPersistence.impl" />
 	</bean>
-	<bean id="com.liferay.portlet.messageboards.service.persistence.MBThreadFinder.impl" class="com.liferay.portlet.messageboards.service.persistence.MBThreadFinderImpl" parent="dataAccessBase" />
+	<bean id="com.liferay.portlet.messageboards.service.persistence.MBThreadFinder.impl" class="com.liferay.portlet.messageboards.service.persistence.MBThreadFinderImpl" parent="basePersistence" />
 	<bean id="com.liferay.portlet.messageboards.service.persistence.MBThreadFinderUtil" class="com.liferay.portlet.messageboards.service.persistence.MBThreadFinderUtil">
 		<property name="finder" ref="com.liferay.portlet.messageboards.service.persistence.MBThreadFinder.impl" />
 	</bean>
@@ -1725,12 +1725,12 @@
 	</bean>
 	<bean id="com.liferay.portlet.polls.service.PollsChoiceLocalServiceFactory" class="com.liferay.portlet.polls.service.PollsChoiceLocalServiceFactory" parent="com.liferay.portlet.polls.service.PollsChoiceLocalService.base" />
 	<bean id="com.liferay.portlet.polls.service.PollsChoiceLocalServiceUtil" class="com.liferay.portlet.polls.service.PollsChoiceLocalServiceUtil" parent="com.liferay.portlet.polls.service.PollsChoiceLocalService.base" />
-	<bean id="com.liferay.portlet.polls.service.persistence.PollsChoicePersistence.impl" class="com.liferay.portlet.polls.service.persistence.PollsChoicePersistenceImpl" parent="dataAccessBase" />
+	<bean id="com.liferay.portlet.polls.service.persistence.PollsChoicePersistence.impl" class="com.liferay.portlet.polls.service.persistence.PollsChoicePersistenceImpl" parent="basePersistence" />
 	<bean id="com.liferay.portlet.polls.service.persistence.PollsChoicePersistence.transaction" parent="com.liferay.portlet.polls.service.persistence.PollsChoicePersistence.impl" />
 	<bean id="com.liferay.portlet.polls.service.persistence.PollsChoiceUtil" class="com.liferay.portlet.polls.service.persistence.PollsChoiceUtil">
 		<property name="persistence" ref="com.liferay.portlet.polls.service.persistence.PollsChoicePersistence.impl" />
 	</bean>
-	<bean id="com.liferay.portlet.polls.service.persistence.PollsChoiceFinder.impl" class="com.liferay.portlet.polls.service.persistence.PollsChoiceFinderImpl" parent="dataAccessBase" />
+	<bean id="com.liferay.portlet.polls.service.persistence.PollsChoiceFinder.impl" class="com.liferay.portlet.polls.service.persistence.PollsChoiceFinderImpl" parent="basePersistence" />
 	<bean id="com.liferay.portlet.polls.service.persistence.PollsChoiceFinderUtil" class="com.liferay.portlet.polls.service.persistence.PollsChoiceFinderUtil">
 		<property name="finder" ref="com.liferay.portlet.polls.service.persistence.PollsChoiceFinder.impl" />
 	</bean>
@@ -1754,7 +1754,7 @@
 	</bean>
 	<bean id="com.liferay.portlet.polls.service.PollsQuestionServiceFactory" class="com.liferay.portlet.polls.service.PollsQuestionServiceFactory" parent="com.liferay.portlet.polls.service.PollsQuestionService.base" />
 	<bean id="com.liferay.portlet.polls.service.PollsQuestionServiceUtil" class="com.liferay.portlet.polls.service.PollsQuestionServiceUtil" parent="com.liferay.portlet.polls.service.PollsQuestionService.base" />
-	<bean id="com.liferay.portlet.polls.service.persistence.PollsQuestionPersistence.impl" class="com.liferay.portlet.polls.service.persistence.PollsQuestionPersistenceImpl" parent="dataAccessBase" />
+	<bean id="com.liferay.portlet.polls.service.persistence.PollsQuestionPersistence.impl" class="com.liferay.portlet.polls.service.persistence.PollsQuestionPersistenceImpl" parent="basePersistence" />
 	<bean id="com.liferay.portlet.polls.service.persistence.PollsQuestionPersistence.transaction" parent="com.liferay.portlet.polls.service.persistence.PollsQuestionPersistence.impl" />
 	<bean id="com.liferay.portlet.polls.service.persistence.PollsQuestionUtil" class="com.liferay.portlet.polls.service.persistence.PollsQuestionUtil">
 		<property name="persistence" ref="com.liferay.portlet.polls.service.persistence.PollsQuestionPersistence.impl" />
@@ -1779,7 +1779,7 @@
 	</bean>
 	<bean id="com.liferay.portlet.polls.service.PollsVoteServiceFactory" class="com.liferay.portlet.polls.service.PollsVoteServiceFactory" parent="com.liferay.portlet.polls.service.PollsVoteService.base" />
 	<bean id="com.liferay.portlet.polls.service.PollsVoteServiceUtil" class="com.liferay.portlet.polls.service.PollsVoteServiceUtil" parent="com.liferay.portlet.polls.service.PollsVoteService.base" />
-	<bean id="com.liferay.portlet.polls.service.persistence.PollsVotePersistence.impl" class="com.liferay.portlet.polls.service.persistence.PollsVotePersistenceImpl" parent="dataAccessBase" />
+	<bean id="com.liferay.portlet.polls.service.persistence.PollsVotePersistence.impl" class="com.liferay.portlet.polls.service.persistence.PollsVotePersistenceImpl" parent="basePersistence" />
 	<bean id="com.liferay.portlet.polls.service.persistence.PollsVotePersistence.transaction" parent="com.liferay.portlet.polls.service.persistence.PollsVotePersistence.impl" />
 	<bean id="com.liferay.portlet.polls.service.persistence.PollsVoteUtil" class="com.liferay.portlet.polls.service.persistence.PollsVoteUtil">
 		<property name="persistence" ref="com.liferay.portlet.polls.service.persistence.PollsVotePersistence.impl" />
@@ -1804,7 +1804,7 @@
 	</bean>
 	<bean id="com.liferay.portlet.ratings.service.RatingsEntryServiceFactory" class="com.liferay.portlet.ratings.service.RatingsEntryServiceFactory" parent="com.liferay.portlet.ratings.service.RatingsEntryService.base" />
 	<bean id="com.liferay.portlet.ratings.service.RatingsEntryServiceUtil" class="com.liferay.portlet.ratings.service.RatingsEntryServiceUtil" parent="com.liferay.portlet.ratings.service.RatingsEntryService.base" />
-	<bean id="com.liferay.portlet.ratings.service.persistence.RatingsEntryPersistence.impl" class="com.liferay.portlet.ratings.service.persistence.RatingsEntryPersistenceImpl" parent="dataAccessBase" />
+	<bean id="com.liferay.portlet.ratings.service.persistence.RatingsEntryPersistence.impl" class="com.liferay.portlet.ratings.service.persistence.RatingsEntryPersistenceImpl" parent="basePersistence" />
 	<bean id="com.liferay.portlet.ratings.service.persistence.RatingsEntryPersistence.transaction" parent="com.liferay.portlet.ratings.service.persistence.RatingsEntryPersistence.impl" />
 	<bean id="com.liferay.portlet.ratings.service.persistence.RatingsEntryUtil" class="com.liferay.portlet.ratings.service.persistence.RatingsEntryUtil">
 		<property name="persistence" ref="com.liferay.portlet.ratings.service.persistence.RatingsEntryPersistence.impl" />
@@ -1819,7 +1819,7 @@
 	</bean>
 	<bean id="com.liferay.portlet.ratings.service.RatingsStatsLocalServiceFactory" class="com.liferay.portlet.ratings.service.RatingsStatsLocalServiceFactory" parent="com.liferay.portlet.ratings.service.RatingsStatsLocalService.base" />
 	<bean id="com.liferay.portlet.ratings.service.RatingsStatsLocalServiceUtil" class="com.liferay.portlet.ratings.service.RatingsStatsLocalServiceUtil" parent="com.liferay.portlet.ratings.service.RatingsStatsLocalService.base" />
-	<bean id="com.liferay.portlet.ratings.service.persistence.RatingsStatsPersistence.impl" class="com.liferay.portlet.ratings.service.persistence.RatingsStatsPersistenceImpl" parent="dataAccessBase" />
+	<bean id="com.liferay.portlet.ratings.service.persistence.RatingsStatsPersistence.impl" class="com.liferay.portlet.ratings.service.persistence.RatingsStatsPersistenceImpl" parent="basePersistence" />
 	<bean id="com.liferay.portlet.ratings.service.persistence.RatingsStatsPersistence.transaction" parent="com.liferay.portlet.ratings.service.persistence.RatingsStatsPersistence.impl" />
 	<bean id="com.liferay.portlet.ratings.service.persistence.RatingsStatsUtil" class="com.liferay.portlet.ratings.service.persistence.RatingsStatsUtil">
 		<property name="persistence" ref="com.liferay.portlet.ratings.service.persistence.RatingsStatsPersistence.impl" />
@@ -1834,7 +1834,7 @@
 	</bean>
 	<bean id="com.liferay.portlet.shopping.service.ShoppingCartLocalServiceFactory" class="com.liferay.portlet.shopping.service.ShoppingCartLocalServiceFactory" parent="com.liferay.portlet.shopping.service.ShoppingCartLocalService.base" />
 	<bean id="com.liferay.portlet.shopping.service.ShoppingCartLocalServiceUtil" class="com.liferay.portlet.shopping.service.ShoppingCartLocalServiceUtil" parent="com.liferay.portlet.shopping.service.ShoppingCartLocalService.base" />
-	<bean id="com.liferay.portlet.shopping.service.persistence.ShoppingCartPersistence.impl" class="com.liferay.portlet.shopping.service.persistence.ShoppingCartPersistenceImpl" parent="dataAccessBase" />
+	<bean id="com.liferay.portlet.shopping.service.persistence.ShoppingCartPersistence.impl" class="com.liferay.portlet.shopping.service.persistence.ShoppingCartPersistenceImpl" parent="basePersistence" />
 	<bean id="com.liferay.portlet.shopping.service.persistence.ShoppingCartPersistence.transaction" parent="com.liferay.portlet.shopping.service.persistence.ShoppingCartPersistence.impl" />
 	<bean id="com.liferay.portlet.shopping.service.persistence.ShoppingCartUtil" class="com.liferay.portlet.shopping.service.persistence.ShoppingCartUtil">
 		<property name="persistence" ref="com.liferay.portlet.shopping.service.persistence.ShoppingCartPersistence.impl" />
@@ -1859,7 +1859,7 @@
 	</bean>
 	<bean id="com.liferay.portlet.shopping.service.ShoppingCategoryServiceFactory" class="com.liferay.portlet.shopping.service.ShoppingCategoryServiceFactory" parent="com.liferay.portlet.shopping.service.ShoppingCategoryService.base" />
 	<bean id="com.liferay.portlet.shopping.service.ShoppingCategoryServiceUtil" class="com.liferay.portlet.shopping.service.ShoppingCategoryServiceUtil" parent="com.liferay.portlet.shopping.service.ShoppingCategoryService.base" />
-	<bean id="com.liferay.portlet.shopping.service.persistence.ShoppingCategoryPersistence.impl" class="com.liferay.portlet.shopping.service.persistence.ShoppingCategoryPersistenceImpl" parent="dataAccessBase" />
+	<bean id="com.liferay.portlet.shopping.service.persistence.ShoppingCategoryPersistence.impl" class="com.liferay.portlet.shopping.service.persistence.ShoppingCategoryPersistenceImpl" parent="basePersistence" />
 	<bean id="com.liferay.portlet.shopping.service.persistence.ShoppingCategoryPersistence.transaction" parent="com.liferay.portlet.shopping.service.persistence.ShoppingCategoryPersistence.impl" />
 	<bean id="com.liferay.portlet.shopping.service.persistence.ShoppingCategoryUtil" class="com.liferay.portlet.shopping.service.persistence.ShoppingCategoryUtil">
 		<property name="persistence" ref="com.liferay.portlet.shopping.service.persistence.ShoppingCategoryPersistence.impl" />
@@ -1884,12 +1884,12 @@
 	</bean>
 	<bean id="com.liferay.portlet.shopping.service.ShoppingCouponServiceFactory" class="com.liferay.portlet.shopping.service.ShoppingCouponServiceFactory" parent="com.liferay.portlet.shopping.service.ShoppingCouponService.base" />
 	<bean id="com.liferay.portlet.shopping.service.ShoppingCouponServiceUtil" class="com.liferay.portlet.shopping.service.ShoppingCouponServiceUtil" parent="com.liferay.portlet.shopping.service.ShoppingCouponService.base" />
-	<bean id="com.liferay.portlet.shopping.service.persistence.ShoppingCouponPersistence.impl" class="com.liferay.portlet.shopping.service.persistence.ShoppingCouponPersistenceImpl" parent="dataAccessBase" />
+	<bean id="com.liferay.portlet.shopping.service.persistence.ShoppingCouponPersistence.impl" class="com.liferay.portlet.shopping.service.persistence.ShoppingCouponPersistenceImpl" parent="basePersistence" />
 	<bean id="com.liferay.portlet.shopping.service.persistence.ShoppingCouponPersistence.transaction" parent="com.liferay.portlet.shopping.service.persistence.ShoppingCouponPersistence.impl" />
 	<bean id="com.liferay.portlet.shopping.service.persistence.ShoppingCouponUtil" class="com.liferay.portlet.shopping.service.persistence.ShoppingCouponUtil">
 		<property name="persistence" ref="com.liferay.portlet.shopping.service.persistence.ShoppingCouponPersistence.impl" />
 	</bean>
-	<bean id="com.liferay.portlet.shopping.service.persistence.ShoppingCouponFinder.impl" class="com.liferay.portlet.shopping.service.persistence.ShoppingCouponFinderImpl" parent="dataAccessBase" />
+	<bean id="com.liferay.portlet.shopping.service.persistence.ShoppingCouponFinder.impl" class="com.liferay.portlet.shopping.service.persistence.ShoppingCouponFinderImpl" parent="basePersistence" />
 	<bean id="com.liferay.portlet.shopping.service.persistence.ShoppingCouponFinderUtil" class="com.liferay.portlet.shopping.service.persistence.ShoppingCouponFinderUtil">
 		<property name="finder" ref="com.liferay.portlet.shopping.service.persistence.ShoppingCouponFinder.impl" />
 	</bean>
@@ -1913,12 +1913,12 @@
 	</bean>
 	<bean id="com.liferay.portlet.shopping.service.ShoppingItemServiceFactory" class="com.liferay.portlet.shopping.service.ShoppingItemServiceFactory" parent="com.liferay.portlet.shopping.service.ShoppingItemService.base" />
 	<bean id="com.liferay.portlet.shopping.service.ShoppingItemServiceUtil" class="com.liferay.portlet.shopping.service.ShoppingItemServiceUtil" parent="com.liferay.portlet.shopping.service.ShoppingItemService.base" />
-	<bean id="com.liferay.portlet.shopping.service.persistence.ShoppingItemPersistence.impl" class="com.liferay.portlet.shopping.service.persistence.ShoppingItemPersistenceImpl" parent="dataAccessBase" />
+	<bean id="com.liferay.portlet.shopping.service.persistence.ShoppingItemPersistence.impl" class="com.liferay.portlet.shopping.service.persistence.ShoppingItemPersistenceImpl" parent="basePersistence" />
 	<bean id="com.liferay.portlet.shopping.service.persistence.ShoppingItemPersistence.transaction" parent="com.liferay.portlet.shopping.service.persistence.ShoppingItemPersistence.impl" />
 	<bean id="com.liferay.portlet.shopping.service.persistence.ShoppingItemUtil" class="com.liferay.portlet.shopping.service.persistence.ShoppingItemUtil">
 		<property name="persistence" ref="com.liferay.portlet.shopping.service.persistence.ShoppingItemPersistence.impl" />
 	</bean>
-	<bean id="com.liferay.portlet.shopping.service.persistence.ShoppingItemFinder.impl" class="com.liferay.portlet.shopping.service.persistence.ShoppingItemFinderImpl" parent="dataAccessBase" />
+	<bean id="com.liferay.portlet.shopping.service.persistence.ShoppingItemFinder.impl" class="com.liferay.portlet.shopping.service.persistence.ShoppingItemFinderImpl" parent="basePersistence" />
 	<bean id="com.liferay.portlet.shopping.service.persistence.ShoppingItemFinderUtil" class="com.liferay.portlet.shopping.service.persistence.ShoppingItemFinderUtil">
 		<property name="finder" ref="com.liferay.portlet.shopping.service.persistence.ShoppingItemFinder.impl" />
 	</bean>
@@ -1932,7 +1932,7 @@
 	</bean>
 	<bean id="com.liferay.portlet.shopping.service.ShoppingItemFieldLocalServiceFactory" class="com.liferay.portlet.shopping.service.ShoppingItemFieldLocalServiceFactory" parent="com.liferay.portlet.shopping.service.ShoppingItemFieldLocalService.base" />
 	<bean id="com.liferay.portlet.shopping.service.ShoppingItemFieldLocalServiceUtil" class="com.liferay.portlet.shopping.service.ShoppingItemFieldLocalServiceUtil" parent="com.liferay.portlet.shopping.service.ShoppingItemFieldLocalService.base" />
-	<bean id="com.liferay.portlet.shopping.service.persistence.ShoppingItemFieldPersistence.impl" class="com.liferay.portlet.shopping.service.persistence.ShoppingItemFieldPersistenceImpl" parent="dataAccessBase" />
+	<bean id="com.liferay.portlet.shopping.service.persistence.ShoppingItemFieldPersistence.impl" class="com.liferay.portlet.shopping.service.persistence.ShoppingItemFieldPersistenceImpl" parent="basePersistence" />
 	<bean id="com.liferay.portlet.shopping.service.persistence.ShoppingItemFieldPersistence.transaction" parent="com.liferay.portlet.shopping.service.persistence.ShoppingItemFieldPersistence.impl" />
 	<bean id="com.liferay.portlet.shopping.service.persistence.ShoppingItemFieldUtil" class="com.liferay.portlet.shopping.service.persistence.ShoppingItemFieldUtil">
 		<property name="persistence" ref="com.liferay.portlet.shopping.service.persistence.ShoppingItemFieldPersistence.impl" />
@@ -1947,7 +1947,7 @@
 	</bean>
 	<bean id="com.liferay.portlet.shopping.service.ShoppingItemPriceLocalServiceFactory" class="com.liferay.portlet.shopping.service.ShoppingItemPriceLocalServiceFactory" parent="com.liferay.portlet.shopping.service.ShoppingItemPriceLocalService.base" />
 	<bean id="com.liferay.portlet.shopping.service.ShoppingItemPriceLocalServiceUtil" class="com.liferay.portlet.shopping.service.ShoppingItemPriceLocalServiceUtil" parent="com.liferay.portlet.shopping.service.ShoppingItemPriceLocalService.base" />
-	<bean id="com.liferay.portlet.shopping.service.persistence.ShoppingItemPricePersistence.impl" class="com.liferay.portlet.shopping.service.persistence.ShoppingItemPricePersistenceImpl" parent="dataAccessBase" />
+	<bean id="com.liferay.portlet.shopping.service.persistence.ShoppingItemPricePersistence.impl" class="com.liferay.portlet.shopping.service.persistence.ShoppingItemPricePersistenceImpl" parent="basePersistence" />
 	<bean id="com.liferay.portlet.shopping.service.persistence.ShoppingItemPricePersistence.transaction" parent="com.liferay.portlet.shopping.service.persistence.ShoppingItemPricePersistence.impl" />
 	<bean id="com.liferay.portlet.shopping.service.persistence.ShoppingItemPriceUtil" class="com.liferay.portlet.shopping.service.persistence.ShoppingItemPriceUtil">
 		<property name="persistence" ref="com.liferay.portlet.shopping.service.persistence.ShoppingItemPricePersistence.impl" />
@@ -1972,12 +1972,12 @@
 	</bean>
 	<bean id="com.liferay.portlet.shopping.service.ShoppingOrderServiceFactory" class="com.liferay.portlet.shopping.service.ShoppingOrderServiceFactory" parent="com.liferay.portlet.shopping.service.ShoppingOrderService.base" />
 	<bean id="com.liferay.portlet.shopping.service.ShoppingOrderServiceUtil" class="com.liferay.portlet.shopping.service.ShoppingOrderServiceUtil" parent="com.liferay.portlet.shopping.service.ShoppingOrderService.base" />
-	<bean id="com.liferay.portlet.shopping.service.persistence.ShoppingOrderPersistence.impl" class="com.liferay.portlet.shopping.service.persistence.ShoppingOrderPersistenceImpl" parent="dataAccessBase" />
+	<bean id="com.liferay.portlet.shopping.service.persistence.ShoppingOrderPersistence.impl" class="com.liferay.portlet.shopping.service.persistence.ShoppingOrderPersistenceImpl" parent="basePersistence" />
 	<bean id="com.liferay.portlet.shopping.service.persistence.ShoppingOrderPersistence.transaction" parent="com.liferay.portlet.shopping.service.persistence.ShoppingOrderPersistence.impl" />
 	<bean id="com.liferay.portlet.shopping.service.persistence.ShoppingOrderUtil" class="com.liferay.portlet.shopping.service.persistence.ShoppingOrderUtil">
 		<property name="persistence" ref="com.liferay.portlet.shopping.service.persistence.ShoppingOrderPersistence.impl" />
 	</bean>
-	<bean id="com.liferay.portlet.shopping.service.persistence.ShoppingOrderFinder.impl" class="com.liferay.portlet.shopping.service.persistence.ShoppingOrderFinderImpl" parent="dataAccessBase" />
+	<bean id="com.liferay.portlet.shopping.service.persistence.ShoppingOrderFinder.impl" class="com.liferay.portlet.shopping.service.persistence.ShoppingOrderFinderImpl" parent="basePersistence" />
 	<bean id="com.liferay.portlet.shopping.service.persistence.ShoppingOrderFinderUtil" class="com.liferay.portlet.shopping.service.persistence.ShoppingOrderFinderUtil">
 		<property name="finder" ref="com.liferay.portlet.shopping.service.persistence.ShoppingOrderFinder.impl" />
 	</bean>
@@ -1991,7 +1991,7 @@
 	</bean>
 	<bean id="com.liferay.portlet.shopping.service.ShoppingOrderItemLocalServiceFactory" class="com.liferay.portlet.shopping.service.ShoppingOrderItemLocalServiceFactory" parent="com.liferay.portlet.shopping.service.ShoppingOrderItemLocalService.base" />
 	<bean id="com.liferay.portlet.shopping.service.ShoppingOrderItemLocalServiceUtil" class="com.liferay.portlet.shopping.service.ShoppingOrderItemLocalServiceUtil" parent="com.liferay.portlet.shopping.service.ShoppingOrderItemLocalService.base" />
-	<bean id="com.liferay.portlet.shopping.service.persistence.ShoppingOrderItemPersistence.impl" class="com.liferay.portlet.shopping.service.persistence.ShoppingOrderItemPersistenceImpl" parent="dataAccessBase" />
+	<bean id="com.liferay.portlet.shopping.service.persistence.ShoppingOrderItemPersistence.impl" class="com.liferay.portlet.shopping.service.persistence.ShoppingOrderItemPersistenceImpl" parent="basePersistence" />
 	<bean id="com.liferay.portlet.shopping.service.persistence.ShoppingOrderItemPersistence.transaction" parent="com.liferay.portlet.shopping.service.persistence.ShoppingOrderItemPersistence.impl" />
 	<bean id="com.liferay.portlet.shopping.service.persistence.ShoppingOrderItemUtil" class="com.liferay.portlet.shopping.service.persistence.ShoppingOrderItemUtil">
 		<property name="persistence" ref="com.liferay.portlet.shopping.service.persistence.ShoppingOrderItemPersistence.impl" />
@@ -2006,12 +2006,12 @@
 	</bean>
 	<bean id="com.liferay.portlet.social.service.SocialActivityLocalServiceFactory" class="com.liferay.portlet.social.service.SocialActivityLocalServiceFactory" parent="com.liferay.portlet.social.service.SocialActivityLocalService.base" />
 	<bean id="com.liferay.portlet.social.service.SocialActivityLocalServiceUtil" class="com.liferay.portlet.social.service.SocialActivityLocalServiceUtil" parent="com.liferay.portlet.social.service.SocialActivityLocalService.base" />
-	<bean id="com.liferay.portlet.social.service.persistence.SocialActivityPersistence.impl" class="com.liferay.portlet.social.service.persistence.SocialActivityPersistenceImpl" parent="dataAccessBase" />
+	<bean id="com.liferay.portlet.social.service.persistence.SocialActivityPersistence.impl" class="com.liferay.portlet.social.service.persistence.SocialActivityPersistenceImpl" parent="basePersistence" />
 	<bean id="com.liferay.portlet.social.service.persistence.SocialActivityPersistence.transaction" parent="com.liferay.portlet.social.service.persistence.SocialActivityPersistence.impl" />
 	<bean id="com.liferay.portlet.social.service.persistence.SocialActivityUtil" class="com.liferay.portlet.social.service.persistence.SocialActivityUtil">
 		<property name="persistence" ref="com.liferay.portlet.social.service.persistence.SocialActivityPersistence.impl" />
 	</bean>
-	<bean id="com.liferay.portlet.social.service.persistence.SocialActivityFinder.impl" class="com.liferay.portlet.social.service.persistence.SocialActivityFinderImpl" parent="dataAccessBase" />
+	<bean id="com.liferay.portlet.social.service.persistence.SocialActivityFinder.impl" class="com.liferay.portlet.social.service.persistence.SocialActivityFinderImpl" parent="basePersistence" />
 	<bean id="com.liferay.portlet.social.service.persistence.SocialActivityFinderUtil" class="com.liferay.portlet.social.service.persistence.SocialActivityFinderUtil">
 		<property name="finder" ref="com.liferay.portlet.social.service.persistence.SocialActivityFinder.impl" />
 	</bean>
@@ -2034,7 +2034,7 @@
 	</bean>
 	<bean id="com.liferay.portlet.social.service.SocialRelationLocalServiceFactory" class="com.liferay.portlet.social.service.SocialRelationLocalServiceFactory" parent="com.liferay.portlet.social.service.SocialRelationLocalService.base" />
 	<bean id="com.liferay.portlet.social.service.SocialRelationLocalServiceUtil" class="com.liferay.portlet.social.service.SocialRelationLocalServiceUtil" parent="com.liferay.portlet.social.service.SocialRelationLocalService.base" />
-	<bean id="com.liferay.portlet.social.service.persistence.SocialRelationPersistence.impl" class="com.liferay.portlet.social.service.persistence.SocialRelationPersistenceImpl" parent="dataAccessBase" />
+	<bean id="com.liferay.portlet.social.service.persistence.SocialRelationPersistence.impl" class="com.liferay.portlet.social.service.persistence.SocialRelationPersistenceImpl" parent="basePersistence" />
 	<bean id="com.liferay.portlet.social.service.persistence.SocialRelationPersistence.transaction" parent="com.liferay.portlet.social.service.persistence.SocialRelationPersistence.impl" />
 	<bean id="com.liferay.portlet.social.service.persistence.SocialRelationUtil" class="com.liferay.portlet.social.service.persistence.SocialRelationUtil">
 		<property name="persistence" ref="com.liferay.portlet.social.service.persistence.SocialRelationPersistence.impl" />
@@ -2049,7 +2049,7 @@
 	</bean>
 	<bean id="com.liferay.portlet.social.service.SocialRequestLocalServiceFactory" class="com.liferay.portlet.social.service.SocialRequestLocalServiceFactory" parent="com.liferay.portlet.social.service.SocialRequestLocalService.base" />
 	<bean id="com.liferay.portlet.social.service.SocialRequestLocalServiceUtil" class="com.liferay.portlet.social.service.SocialRequestLocalServiceUtil" parent="com.liferay.portlet.social.service.SocialRequestLocalService.base" />
-	<bean id="com.liferay.portlet.social.service.persistence.SocialRequestPersistence.impl" class="com.liferay.portlet.social.service.persistence.SocialRequestPersistenceImpl" parent="dataAccessBase" />
+	<bean id="com.liferay.portlet.social.service.persistence.SocialRequestPersistence.impl" class="com.liferay.portlet.social.service.persistence.SocialRequestPersistenceImpl" parent="basePersistence" />
 	<bean id="com.liferay.portlet.social.service.persistence.SocialRequestPersistence.transaction" parent="com.liferay.portlet.social.service.persistence.SocialRequestPersistence.impl" />
 	<bean id="com.liferay.portlet.social.service.persistence.SocialRequestUtil" class="com.liferay.portlet.social.service.persistence.SocialRequestUtil">
 		<property name="persistence" ref="com.liferay.portlet.social.service.persistence.SocialRequestPersistence.impl" />
@@ -2083,7 +2083,7 @@
 	</bean>
 	<bean id="com.liferay.portlet.softwarecatalog.service.SCLicenseServiceFactory" class="com.liferay.portlet.softwarecatalog.service.SCLicenseServiceFactory" parent="com.liferay.portlet.softwarecatalog.service.SCLicenseService.base" />
 	<bean id="com.liferay.portlet.softwarecatalog.service.SCLicenseServiceUtil" class="com.liferay.portlet.softwarecatalog.service.SCLicenseServiceUtil" parent="com.liferay.portlet.softwarecatalog.service.SCLicenseService.base" />
-	<bean id="com.liferay.portlet.softwarecatalog.service.persistence.SCLicensePersistence.impl" class="com.liferay.portlet.softwarecatalog.service.persistence.SCLicensePersistenceImpl" parent="dataAccessBase" />
+	<bean id="com.liferay.portlet.softwarecatalog.service.persistence.SCLicensePersistence.impl" class="com.liferay.portlet.softwarecatalog.service.persistence.SCLicensePersistenceImpl" parent="basePersistence" />
 	<bean id="com.liferay.portlet.softwarecatalog.service.persistence.SCLicensePersistence.transaction" parent="com.liferay.portlet.softwarecatalog.service.persistence.SCLicensePersistence.impl" />
 	<bean id="com.liferay.portlet.softwarecatalog.service.persistence.SCLicenseUtil" class="com.liferay.portlet.softwarecatalog.service.persistence.SCLicenseUtil">
 		<property name="persistence" ref="com.liferay.portlet.softwarecatalog.service.persistence.SCLicensePersistence.impl" />
@@ -2108,7 +2108,7 @@
 	</bean>
 	<bean id="com.liferay.portlet.softwarecatalog.service.SCFrameworkVersionServiceFactory" class="com.liferay.portlet.softwarecatalog.service.SCFrameworkVersionServiceFactory" parent="com.liferay.portlet.softwarecatalog.service.SCFrameworkVersionService.base" />
 	<bean id="com.liferay.portlet.softwarecatalog.service.SCFrameworkVersionServiceUtil" class="com.liferay.portlet.softwarecatalog.service.SCFrameworkVersionServiceUtil" parent="com.liferay.portlet.softwarecatalog.service.SCFrameworkVersionService.base" />
-	<bean id="com.liferay.portlet.softwarecatalog.service.persistence.SCFrameworkVersionPersistence.impl" class="com.liferay.portlet.softwarecatalog.service.persistence.SCFrameworkVersionPersistenceImpl" parent="dataAccessBase" />
+	<bean id="com.liferay.portlet.softwarecatalog.service.persistence.SCFrameworkVersionPersistence.impl" class="com.liferay.portlet.softwarecatalog.service.persistence.SCFrameworkVersionPersistenceImpl" parent="basePersistence" />
 	<bean id="com.liferay.portlet.softwarecatalog.service.persistence.SCFrameworkVersionPersistence.transaction" parent="com.liferay.portlet.softwarecatalog.service.persistence.SCFrameworkVersionPersistence.impl" />
 	<bean id="com.liferay.portlet.softwarecatalog.service.persistence.SCFrameworkVersionUtil" class="com.liferay.portlet.softwarecatalog.service.persistence.SCFrameworkVersionUtil">
 		<property name="persistence" ref="com.liferay.portlet.softwarecatalog.service.persistence.SCFrameworkVersionPersistence.impl" />
@@ -2133,7 +2133,7 @@
 	</bean>
 	<bean id="com.liferay.portlet.softwarecatalog.service.SCProductEntryServiceFactory" class="com.liferay.portlet.softwarecatalog.service.SCProductEntryServiceFactory" parent="com.liferay.portlet.softwarecatalog.service.SCProductEntryService.base" />
 	<bean id="com.liferay.portlet.softwarecatalog.service.SCProductEntryServiceUtil" class="com.liferay.portlet.softwarecatalog.service.SCProductEntryServiceUtil" parent="com.liferay.portlet.softwarecatalog.service.SCProductEntryService.base" />
-	<bean id="com.liferay.portlet.softwarecatalog.service.persistence.SCProductEntryPersistence.impl" class="com.liferay.portlet.softwarecatalog.service.persistence.SCProductEntryPersistenceImpl" parent="dataAccessBase" />
+	<bean id="com.liferay.portlet.softwarecatalog.service.persistence.SCProductEntryPersistence.impl" class="com.liferay.portlet.softwarecatalog.service.persistence.SCProductEntryPersistenceImpl" parent="basePersistence" />
 	<bean id="com.liferay.portlet.softwarecatalog.service.persistence.SCProductEntryPersistence.transaction" parent="com.liferay.portlet.softwarecatalog.service.persistence.SCProductEntryPersistence.impl" />
 	<bean id="com.liferay.portlet.softwarecatalog.service.persistence.SCProductEntryUtil" class="com.liferay.portlet.softwarecatalog.service.persistence.SCProductEntryUtil">
 		<property name="persistence" ref="com.liferay.portlet.softwarecatalog.service.persistence.SCProductEntryPersistence.impl" />
@@ -2148,7 +2148,7 @@
 	</bean>
 	<bean id="com.liferay.portlet.softwarecatalog.service.SCProductScreenshotLocalServiceFactory" class="com.liferay.portlet.softwarecatalog.service.SCProductScreenshotLocalServiceFactory" parent="com.liferay.portlet.softwarecatalog.service.SCProductScreenshotLocalService.base" />
 	<bean id="com.liferay.portlet.softwarecatalog.service.SCProductScreenshotLocalServiceUtil" class="com.liferay.portlet.softwarecatalog.service.SCProductScreenshotLocalServiceUtil" parent="com.liferay.portlet.softwarecatalog.service.SCProductScreenshotLocalService.base" />
-	<bean id="com.liferay.portlet.softwarecatalog.service.persistence.SCProductScreenshotPersistence.impl" class="com.liferay.portlet.softwarecatalog.service.persistence.SCProductScreenshotPersistenceImpl" parent="dataAccessBase" />
+	<bean id="com.liferay.portlet.softwarecatalog.service.persistence.SCProductScreenshotPersistence.impl" class="com.liferay.portlet.softwarecatalog.service.persistence.SCProductScreenshotPersistenceImpl" parent="basePersistence" />
 	<bean id="com.liferay.portlet.softwarecatalog.service.persistence.SCProductScreenshotPersistence.transaction" parent="com.liferay.portlet.softwarecatalog.service.persistence.SCProductScreenshotPersistence.impl" />
 	<bean id="com.liferay.portlet.softwarecatalog.service.persistence.SCProductScreenshotUtil" class="com.liferay.portlet.softwarecatalog.service.persistence.SCProductScreenshotUtil">
 		<property name="persistence" ref="com.liferay.portlet.softwarecatalog.service.persistence.SCProductScreenshotPersistence.impl" />
@@ -2173,7 +2173,7 @@
 	</bean>
 	<bean id="com.liferay.portlet.softwarecatalog.service.SCProductVersionServiceFactory" class="com.liferay.portlet.softwarecatalog.service.SCProductVersionServiceFactory" parent="com.liferay.portlet.softwarecatalog.service.SCProductVersionService.base" />
 	<bean id="com.liferay.portlet.softwarecatalog.service.SCProductVersionServiceUtil" class="com.liferay.portlet.softwarecatalog.service.SCProductVersionServiceUtil" parent="com.liferay.portlet.softwarecatalog.service.SCProductVersionService.base" />
-	<bean id="com.liferay.portlet.softwarecatalog.service.persistence.SCProductVersionPersistence.impl" class="com.liferay.portlet.softwarecatalog.service.persistence.SCProductVersionPersistenceImpl" parent="dataAccessBase" />
+	<bean id="com.liferay.portlet.softwarecatalog.service.persistence.SCProductVersionPersistence.impl" class="com.liferay.portlet.softwarecatalog.service.persistence.SCProductVersionPersistenceImpl" parent="basePersistence" />
 	<bean id="com.liferay.portlet.softwarecatalog.service.persistence.SCProductVersionPersistence.transaction" parent="com.liferay.portlet.softwarecatalog.service.persistence.SCProductVersionPersistence.impl" />
 	<bean id="com.liferay.portlet.softwarecatalog.service.persistence.SCProductVersionUtil" class="com.liferay.portlet.softwarecatalog.service.persistence.SCProductVersionUtil">
 		<property name="persistence" ref="com.liferay.portlet.softwarecatalog.service.persistence.SCProductVersionPersistence.impl" />
@@ -2198,12 +2198,12 @@
 	</bean>
 	<bean id="com.liferay.portlet.tags.service.TagsAssetServiceFactory" class="com.liferay.portlet.tags.service.TagsAssetServiceFactory" parent="com.liferay.portlet.tags.service.TagsAssetService.base" />
 	<bean id="com.liferay.portlet.tags.service.TagsAssetServiceUtil" class="com.liferay.portlet.tags.service.TagsAssetServiceUtil" parent="com.liferay.portlet.tags.service.TagsAssetService.base" />
-	<bean id="com.liferay.portlet.tags.service.persistence.TagsAssetPersistence.impl" class="com.liferay.portlet.tags.service.persistence.TagsAssetPersistenceImpl" parent="dataAccessBase" />
+	<bean id="com.liferay.portlet.tags.service.persistence.TagsAssetPersistence.impl" class="com.liferay.portlet.tags.service.persistence.TagsAssetPersistenceImpl" parent="basePersistence" />
 	<bean id="com.liferay.portlet.tags.service.persistence.TagsAssetPersistence.transaction" parent="com.liferay.portlet.tags.service.persistence.TagsAssetPersistence.impl" />
 	<bean id="com.liferay.portlet.tags.service.persistence.TagsAssetUtil" class="com.liferay.portlet.tags.service.persistence.TagsAssetUtil">
 		<property name="persistence" ref="com.liferay.portlet.tags.service.persistence.TagsAssetPersistence.impl" />
 	</bean>
-	<bean id="com.liferay.portlet.tags.service.persistence.TagsAssetFinder.impl" class="com.liferay.portlet.tags.service.persistence.TagsAssetFinderImpl" parent="dataAccessBase" />
+	<bean id="com.liferay.portlet.tags.service.persistence.TagsAssetFinder.impl" class="com.liferay.portlet.tags.service.persistence.TagsAssetFinderImpl" parent="basePersistence" />
 	<bean id="com.liferay.portlet.tags.service.persistence.TagsAssetFinderUtil" class="com.liferay.portlet.tags.service.persistence.TagsAssetFinderUtil">
 		<property name="finder" ref="com.liferay.portlet.tags.service.persistence.TagsAssetFinder.impl" />
 	</bean>
@@ -2227,12 +2227,12 @@
 	</bean>
 	<bean id="com.liferay.portlet.tags.service.TagsEntryServiceFactory" class="com.liferay.portlet.tags.service.TagsEntryServiceFactory" parent="com.liferay.portlet.tags.service.TagsEntryService.base" />
 	<bean id="com.liferay.portlet.tags.service.TagsEntryServiceUtil" class="com.liferay.portlet.tags.service.TagsEntryServiceUtil" parent="com.liferay.portlet.tags.service.TagsEntryService.base" />
-	<bean id="com.liferay.portlet.tags.service.persistence.TagsEntryPersistence.impl" class="com.liferay.portlet.tags.service.persistence.TagsEntryPersistenceImpl" parent="dataAccessBase" />
+	<bean id="com.liferay.portlet.tags.service.persistence.TagsEntryPersistence.impl" class="com.liferay.portlet.tags.service.persistence.TagsEntryPersistenceImpl" parent="basePersistence" />
 	<bean id="com.liferay.portlet.tags.service.persistence.TagsEntryPersistence.transaction" parent="com.liferay.portlet.tags.service.persistence.TagsEntryPersistence.impl" />
 	<bean id="com.liferay.portlet.tags.service.persistence.TagsEntryUtil" class="com.liferay.portlet.tags.service.persistence.TagsEntryUtil">
 		<property name="persistence" ref="com.liferay.portlet.tags.service.persistence.TagsEntryPersistence.impl" />
 	</bean>
-	<bean id="com.liferay.portlet.tags.service.persistence.TagsEntryFinder.impl" class="com.liferay.portlet.tags.service.persistence.TagsEntryFinderImpl" parent="dataAccessBase" />
+	<bean id="com.liferay.portlet.tags.service.persistence.TagsEntryFinder.impl" class="com.liferay.portlet.tags.service.persistence.TagsEntryFinderImpl" parent="basePersistence" />
 	<bean id="com.liferay.portlet.tags.service.persistence.TagsEntryFinderUtil" class="com.liferay.portlet.tags.service.persistence.TagsEntryFinderUtil">
 		<property name="finder" ref="com.liferay.portlet.tags.service.persistence.TagsEntryFinder.impl" />
 	</bean>
@@ -2256,16 +2256,16 @@
 	</bean>
 	<bean id="com.liferay.portlet.tags.service.TagsPropertyServiceFactory" class="com.liferay.portlet.tags.service.TagsPropertyServiceFactory" parent="com.liferay.portlet.tags.service.TagsPropertyService.base" />
 	<bean id="com.liferay.portlet.tags.service.TagsPropertyServiceUtil" class="com.liferay.portlet.tags.service.TagsPropertyServiceUtil" parent="com.liferay.portlet.tags.service.TagsPropertyService.base" />
-	<bean id="com.liferay.portlet.tags.service.persistence.TagsPropertyPersistence.impl" class="com.liferay.portlet.tags.service.persistence.TagsPropertyPersistenceImpl" parent="dataAccessBase" />
+	<bean id="com.liferay.portlet.tags.service.persistence.TagsPropertyPersistence.impl" class="com.liferay.portlet.tags.service.persistence.TagsPropertyPersistenceImpl" parent="basePersistence" />
 	<bean id="com.liferay.portlet.tags.service.persistence.TagsPropertyPersistence.transaction" parent="com.liferay.portlet.tags.service.persistence.TagsPropertyPersistence.impl" />
 	<bean id="com.liferay.portlet.tags.service.persistence.TagsPropertyUtil" class="com.liferay.portlet.tags.service.persistence.TagsPropertyUtil">
 		<property name="persistence" ref="com.liferay.portlet.tags.service.persistence.TagsPropertyPersistence.impl" />
 	</bean>
-	<bean id="com.liferay.portlet.tags.service.persistence.TagsPropertyFinder.impl" class="com.liferay.portlet.tags.service.persistence.TagsPropertyFinderImpl" parent="dataAccessBase" />
+	<bean id="com.liferay.portlet.tags.service.persistence.TagsPropertyFinder.impl" class="com.liferay.portlet.tags.service.persistence.TagsPropertyFinderImpl" parent="basePersistence" />
 	<bean id="com.liferay.portlet.tags.service.persistence.TagsPropertyFinderUtil" class="com.liferay.portlet.tags.service.persistence.TagsPropertyFinderUtil">
 		<property name="finder" ref="com.liferay.portlet.tags.service.persistence.TagsPropertyFinder.impl" />
 	</bean>
-	<bean id="com.liferay.portlet.tags.service.persistence.TagsPropertyKeyFinder.impl" class="com.liferay.portlet.tags.service.persistence.TagsPropertyKeyFinderImpl" parent="dataAccessBase" />
+	<bean id="com.liferay.portlet.tags.service.persistence.TagsPropertyKeyFinder.impl" class="com.liferay.portlet.tags.service.persistence.TagsPropertyKeyFinderImpl" parent="basePersistence" />
 	<bean id="com.liferay.portlet.tags.service.persistence.TagsPropertyKeyFinderUtil" class="com.liferay.portlet.tags.service.persistence.TagsPropertyKeyFinderUtil">
 		<property name="finder" ref="com.liferay.portlet.tags.service.persistence.TagsPropertyKeyFinder.impl" />
 	</bean>
@@ -2289,7 +2289,7 @@
 	</bean>
 	<bean id="com.liferay.portlet.tags.service.TagsSourceServiceFactory" class="com.liferay.portlet.tags.service.TagsSourceServiceFactory" parent="com.liferay.portlet.tags.service.TagsSourceService.base" />
 	<bean id="com.liferay.portlet.tags.service.TagsSourceServiceUtil" class="com.liferay.portlet.tags.service.TagsSourceServiceUtil" parent="com.liferay.portlet.tags.service.TagsSourceService.base" />
-	<bean id="com.liferay.portlet.tags.service.persistence.TagsSourcePersistence.impl" class="com.liferay.portlet.tags.service.persistence.TagsSourcePersistenceImpl" parent="dataAccessBase" />
+	<bean id="com.liferay.portlet.tags.service.persistence.TagsSourcePersistence.impl" class="com.liferay.portlet.tags.service.persistence.TagsSourcePersistenceImpl" parent="basePersistence" />
 	<bean id="com.liferay.portlet.tags.service.persistence.TagsSourcePersistence.transaction" parent="com.liferay.portlet.tags.service.persistence.TagsSourcePersistence.impl" />
 	<bean id="com.liferay.portlet.tags.service.persistence.TagsSourceUtil" class="com.liferay.portlet.tags.service.persistence.TagsSourceUtil">
 		<property name="persistence" ref="com.liferay.portlet.tags.service.persistence.TagsSourcePersistence.impl" />
@@ -2314,7 +2314,7 @@
 	</bean>
 	<bean id="com.liferay.portlet.tags.service.TagsVocabularyServiceFactory" class="com.liferay.portlet.tags.service.TagsVocabularyServiceFactory" parent="com.liferay.portlet.tags.service.TagsVocabularyService.base" />
 	<bean id="com.liferay.portlet.tags.service.TagsVocabularyServiceUtil" class="com.liferay.portlet.tags.service.TagsVocabularyServiceUtil" parent="com.liferay.portlet.tags.service.TagsVocabularyService.base" />
-	<bean id="com.liferay.portlet.tags.service.persistence.TagsVocabularyPersistence.impl" class="com.liferay.portlet.tags.service.persistence.TagsVocabularyPersistenceImpl" parent="dataAccessBase" />
+	<bean id="com.liferay.portlet.tags.service.persistence.TagsVocabularyPersistence.impl" class="com.liferay.portlet.tags.service.persistence.TagsVocabularyPersistenceImpl" parent="basePersistence" />
 	<bean id="com.liferay.portlet.tags.service.persistence.TagsVocabularyPersistence.transaction" parent="com.liferay.portlet.tags.service.persistence.TagsVocabularyPersistence.impl" />
 	<bean id="com.liferay.portlet.tags.service.persistence.TagsVocabularyUtil" class="com.liferay.portlet.tags.service.persistence.TagsVocabularyUtil">
 		<property name="persistence" ref="com.liferay.portlet.tags.service.persistence.TagsVocabularyPersistence.impl" />
@@ -2339,7 +2339,7 @@
 	</bean>
 	<bean id="com.liferay.portlet.tasks.service.TasksReviewServiceFactory" class="com.liferay.portlet.tasks.service.TasksReviewServiceFactory" parent="com.liferay.portlet.tasks.service.TasksReviewService.base" />
 	<bean id="com.liferay.portlet.tasks.service.TasksReviewServiceUtil" class="com.liferay.portlet.tasks.service.TasksReviewServiceUtil" parent="com.liferay.portlet.tasks.service.TasksReviewService.base" />
-	<bean id="com.liferay.portlet.tasks.service.persistence.TasksReviewPersistence.impl" class="com.liferay.portlet.tasks.service.persistence.TasksReviewPersistenceImpl" parent="dataAccessBase" />
+	<bean id="com.liferay.portlet.tasks.service.persistence.TasksReviewPersistence.impl" class="com.liferay.portlet.tasks.service.persistence.TasksReviewPersistenceImpl" parent="basePersistence" />
 	<bean id="com.liferay.portlet.tasks.service.persistence.TasksReviewPersistence.transaction" parent="com.liferay.portlet.tasks.service.persistence.TasksReviewPersistence.impl" />
 	<bean id="com.liferay.portlet.tasks.service.persistence.TasksReviewUtil" class="com.liferay.portlet.tasks.service.persistence.TasksReviewUtil">
 		<property name="persistence" ref="com.liferay.portlet.tasks.service.persistence.TasksReviewPersistence.impl" />
@@ -2364,12 +2364,12 @@
 	</bean>
 	<bean id="com.liferay.portlet.tasks.service.TasksProposalServiceFactory" class="com.liferay.portlet.tasks.service.TasksProposalServiceFactory" parent="com.liferay.portlet.tasks.service.TasksProposalService.base" />
 	<bean id="com.liferay.portlet.tasks.service.TasksProposalServiceUtil" class="com.liferay.portlet.tasks.service.TasksProposalServiceUtil" parent="com.liferay.portlet.tasks.service.TasksProposalService.base" />
-	<bean id="com.liferay.portlet.tasks.service.persistence.TasksProposalPersistence.impl" class="com.liferay.portlet.tasks.service.persistence.TasksProposalPersistenceImpl" parent="dataAccessBase" />
+	<bean id="com.liferay.portlet.tasks.service.persistence.TasksProposalPersistence.impl" class="com.liferay.portlet.tasks.service.persistence.TasksProposalPersistenceImpl" parent="basePersistence" />
 	<bean id="com.liferay.portlet.tasks.service.persistence.TasksProposalPersistence.transaction" parent="com.liferay.portlet.tasks.service.persistence.TasksProposalPersistence.impl" />
 	<bean id="com.liferay.portlet.tasks.service.persistence.TasksProposalUtil" class="com.liferay.portlet.tasks.service.persistence.TasksProposalUtil">
 		<property name="persistence" ref="com.liferay.portlet.tasks.service.persistence.TasksProposalPersistence.impl" />
 	</bean>
-	<bean id="com.liferay.portlet.tasks.service.persistence.TasksProposalFinder.impl" class="com.liferay.portlet.tasks.service.persistence.TasksProposalFinderImpl" parent="dataAccessBase" />
+	<bean id="com.liferay.portlet.tasks.service.persistence.TasksProposalFinder.impl" class="com.liferay.portlet.tasks.service.persistence.TasksProposalFinderImpl" parent="basePersistence" />
 	<bean id="com.liferay.portlet.tasks.service.persistence.TasksProposalFinderUtil" class="com.liferay.portlet.tasks.service.persistence.TasksProposalFinderUtil">
 		<property name="finder" ref="com.liferay.portlet.tasks.service.persistence.TasksProposalFinder.impl" />
 	</bean>
@@ -2393,7 +2393,7 @@
 	</bean>
 	<bean id="com.liferay.portlet.wiki.service.WikiNodeServiceFactory" class="com.liferay.portlet.wiki.service.WikiNodeServiceFactory" parent="com.liferay.portlet.wiki.service.WikiNodeService.base" />
 	<bean id="com.liferay.portlet.wiki.service.WikiNodeServiceUtil" class="com.liferay.portlet.wiki.service.WikiNodeServiceUtil" parent="com.liferay.portlet.wiki.service.WikiNodeService.base" />
-	<bean id="com.liferay.portlet.wiki.service.persistence.WikiNodePersistence.impl" class="com.liferay.portlet.wiki.service.persistence.WikiNodePersistenceImpl" parent="dataAccessBase" />
+	<bean id="com.liferay.portlet.wiki.service.persistence.WikiNodePersistence.impl" class="com.liferay.portlet.wiki.service.persistence.WikiNodePersistenceImpl" parent="basePersistence" />
 	<bean id="com.liferay.portlet.wiki.service.persistence.WikiNodePersistence.transaction" parent="com.liferay.portlet.wiki.service.persistence.WikiNodePersistence.impl" />
 	<bean id="com.liferay.portlet.wiki.service.persistence.WikiNodeUtil" class="com.liferay.portlet.wiki.service.persistence.WikiNodeUtil">
 		<property name="persistence" ref="com.liferay.portlet.wiki.service.persistence.WikiNodePersistence.impl" />
@@ -2418,12 +2418,12 @@
 	</bean>
 	<bean id="com.liferay.portlet.wiki.service.WikiPageServiceFactory" class="com.liferay.portlet.wiki.service.WikiPageServiceFactory" parent="com.liferay.portlet.wiki.service.WikiPageService.base" />
 	<bean id="com.liferay.portlet.wiki.service.WikiPageServiceUtil" class="com.liferay.portlet.wiki.service.WikiPageServiceUtil" parent="com.liferay.portlet.wiki.service.WikiPageService.base" />
-	<bean id="com.liferay.portlet.wiki.service.persistence.WikiPagePersistence.impl" class="com.liferay.portlet.wiki.service.persistence.WikiPagePersistenceImpl" parent="dataAccessBase" />
+	<bean id="com.liferay.portlet.wiki.service.persistence.WikiPagePersistence.impl" class="com.liferay.portlet.wiki.service.persistence.WikiPagePersistenceImpl" parent="basePersistence" />
 	<bean id="com.liferay.portlet.wiki.service.persistence.WikiPagePersistence.transaction" parent="com.liferay.portlet.wiki.service.persistence.WikiPagePersistence.impl" />
 	<bean id="com.liferay.portlet.wiki.service.persistence.WikiPageUtil" class="com.liferay.portlet.wiki.service.persistence.WikiPageUtil">
 		<property name="persistence" ref="com.liferay.portlet.wiki.service.persistence.WikiPagePersistence.impl" />
 	</bean>
-	<bean id="com.liferay.portlet.wiki.service.persistence.WikiPageFinder.impl" class="com.liferay.portlet.wiki.service.persistence.WikiPageFinderImpl" parent="dataAccessBase" />
+	<bean id="com.liferay.portlet.wiki.service.persistence.WikiPageFinder.impl" class="com.liferay.portlet.wiki.service.persistence.WikiPageFinderImpl" parent="basePersistence" />
 	<bean id="com.liferay.portlet.wiki.service.persistence.WikiPageFinderUtil" class="com.liferay.portlet.wiki.service.persistence.WikiPageFinderUtil">
 		<property name="finder" ref="com.liferay.portlet.wiki.service.persistence.WikiPageFinder.impl" />
 	</bean>
@@ -2437,7 +2437,7 @@
 	</bean>
 	<bean id="com.liferay.portlet.wiki.service.WikiPageResourceLocalServiceFactory" class="com.liferay.portlet.wiki.service.WikiPageResourceLocalServiceFactory" parent="com.liferay.portlet.wiki.service.WikiPageResourceLocalService.base" />
 	<bean id="com.liferay.portlet.wiki.service.WikiPageResourceLocalServiceUtil" class="com.liferay.portlet.wiki.service.WikiPageResourceLocalServiceUtil" parent="com.liferay.portlet.wiki.service.WikiPageResourceLocalService.base" />
-	<bean id="com.liferay.portlet.wiki.service.persistence.WikiPageResourcePersistence.impl" class="com.liferay.portlet.wiki.service.persistence.WikiPageResourcePersistenceImpl" parent="dataAccessBase" />
+	<bean id="com.liferay.portlet.wiki.service.persistence.WikiPageResourcePersistence.impl" class="com.liferay.portlet.wiki.service.persistence.WikiPageResourcePersistenceImpl" parent="basePersistence" />
 	<bean id="com.liferay.portlet.wiki.service.persistence.WikiPageResourcePersistence.transaction" parent="com.liferay.portlet.wiki.service.persistence.WikiPageResourcePersistence.impl" />
 	<bean id="com.liferay.portlet.wiki.service.persistence.WikiPageResourceUtil" class="com.liferay.portlet.wiki.service.persistence.WikiPageResourceUtil">
 		<property name="persistence" ref="com.liferay.portlet.wiki.service.persistence.WikiPageResourcePersistence.impl" />

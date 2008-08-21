@@ -42,10 +42,10 @@ public class TunnelApplicationContext extends XmlWebApplicationContext {
 
 	public void setParent(ApplicationContext parent) {
 		if (parent == null) {
-			BeanLocatorImpl beanLocator = 
+			BeanLocatorImpl beanLocatorImpl =
 				(BeanLocatorImpl)PortalBeanLocatorUtil.getBeanLocator();
 
-			parent = beanLocator.getContext();
+			parent = beanLocatorImpl.getApplicationContext();
 		}
 
 		super.setParent(parent);

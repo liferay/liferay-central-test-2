@@ -58,11 +58,12 @@ public class SpringUtil {
 			applicationContext.getBeanDefinitionNames();
 
 		for (String beanDefinitionName : beanDefinitionNames) {
-			if (beanDefinitionName.endsWith("Base") || 
+			if (beanDefinitionName.endsWith("Base") ||
 				beanDefinitionName.endsWith(".base") ) {
+
 				continue;
 			}
-			
+
 			Object obj = applicationContext.getBean(beanDefinitionName);
 
 			if (obj instanceof InitializingBean) {
@@ -74,15 +75,16 @@ public class SpringUtil {
 	}
 
 	public static void loadContext() {
-		AbstractApplicationContext applicationContext = 
+		AbstractApplicationContext applicationContext =
 			new ArrayApplicationContext(
-					PropsUtil.getArray(PropsKeys.SPRING_CONFIGS));
+				PropsUtil.getArray(PropsKeys.SPRING_CONFIGS));
 
 		applicationContext.registerShutdownHook();
-	
+
 		BeanLocator beanLocator = new BeanLocatorImpl(
 			PortalClassLoaderUtil.getClassLoader(), applicationContext);
-	
+
 		PortalBeanLocatorUtil.setBeanLocator(beanLocator);
 	}
+
 }

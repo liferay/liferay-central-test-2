@@ -35,6 +35,7 @@ import java.io.File;
  *
  */
 public class NewsCategoriesBuilder {
+
 	public static void main(String[] args) {
 		InitUtil.initWithSpring();
 

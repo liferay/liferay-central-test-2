@@ -27,10 +27,11 @@ import com.liferay.portal.kernel.bean.BeanLocatorException;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+
 import org.springframework.context.ApplicationContext;
 
 /**
- * <a href="PortalBeanLocatorImpl.java.html"><b><i>View Source</i></b></a>
+ * <a href="BeanLocatorImpl.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *
@@ -44,14 +45,14 @@ public class BeanLocatorImpl implements BeanLocator {
 		_applicationContext = applicationContext;
 	}
 
+	public ApplicationContext getApplicationContext() {
+		return _applicationContext;
+	}
+
 	public ClassLoader getClassLoader() {
 		return _classLoader;
 	}
 
-	public ApplicationContext getContext() {
-		return _applicationContext;
-	}
-	
 	public Object locate(String name) throws BeanLocatorException {
 		if (_log.isDebugEnabled()) {
 			_log.debug("Locating " + name);
@@ -64,4 +65,5 @@ public class BeanLocatorImpl implements BeanLocator {
 
 	private ClassLoader _classLoader;
 	private ApplicationContext _applicationContext;
+
 }

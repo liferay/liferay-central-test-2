@@ -23,7 +23,6 @@
 package com.liferay.portal.util;
 
 import com.liferay.counter.service.CounterLocalServiceUtil;
-import com.liferay.portal.spring.util.SpringUtil;
 import com.liferay.portal.util.InitUtil;
 import com.liferay.util.PwdGenerator;
 
@@ -40,6 +39,10 @@ import junit.framework.TestCase;
  *
  */
 public class BaseTestCase extends TestCase {
+
+	public BaseTestCase() {
+		InitUtil.initWithSpring();
+	}
 
 	protected void assertEquals(double expected, double actual)
 		throws Exception {
@@ -69,10 +72,6 @@ public class BaseTestCase extends TestCase {
 
 	protected String randomString() throws Exception {
 		return PwdGenerator.getPassword();
-	}
-
-	protected void setUp() throws Exception {
-		InitUtil.initWithSpring();
 	}
 
 	private Random _random = new Random();

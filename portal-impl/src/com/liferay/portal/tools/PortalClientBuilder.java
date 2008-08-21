@@ -40,11 +40,9 @@ import java.util.Iterator;
  */
 public class PortalClientBuilder {
 
-	static {
-		InitUtil.init();
-	}
-
 	public static void main(String[] args) {
+		InitUtil.initWithSpring();
+
 		if (args.length == 4) {
 			new PortalClientBuilder(args[0], args[1], args[2], args[3]);
 		}

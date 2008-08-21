@@ -816,9 +816,9 @@
 		</licenses>
 	</library>
 	<library>
-		<file-name>portal/aspectjrt.jar</file-name>
+		<file-name>portal/aspectj-rt.jar</file-name>
 		<version>1.6.0</version>
-		<project-name>aspectj</project-name>
+		<project-name>AspectJ</project-name>
 		<project-url>http://www.aspectj.org</project-url>
 		<licenses>
 			<license>
@@ -827,9 +827,9 @@
 		</licenses>
 	</library>
 	<library>
-		<file-name>portal/aspectjweaver.jar</file-name>
+		<file-name>portal/aspectj-weaver.jar</file-name>
 		<version>1.6.0</version>
-		<project-name>aspectj</project-name>
+		<project-name>AspectJ</project-name>
 		<project-url>http://www.aspectj.org</project-url>
 		<licenses>
 			<license>
@@ -2046,7 +2046,7 @@
 	</library>
 	<library>
 		<file-name>portal/quartz.jar</file-name>
-		<version>1.6.1 RC1</version>
+		<version>1.6.0</version>
 		<project-name>Quartz</project-name>
 		<project-url>http://www.opensymphony.com/quartz/wikidocs/Quartz%201.6.0.html</project-url>
 		<licenses>

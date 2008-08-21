@@ -115,18 +115,7 @@ public class SAXReaderUtil {
 	}
 
 	public static SAXReader getSAXReader() {
-		SAXReader saxReader = null; 
-
-		try {
-			saxReader = _saxReaderClass.newInstance(); 
-		}
-		catch (Exception e) {
-			if (_log.isWarnEnabled()) {
-				_log.warn(e, e);
-			}
-		}
-		
-		return saxReader; 
+		return _saxReader;
 	}
 
 	public static Document read(File file) throws DocumentException {
@@ -202,12 +191,12 @@ public class SAXReaderUtil {
 		getSAXReader().sort(nodes, xpathExpression, distinct);
 	}
 
-	public void setSAXReaderClass(Class<SAXReader> saxReaderClass) {
-		_saxReaderClass = saxReaderClass;
+	public void setSAXReader(SAXReader saxReader) {
+		_saxReader = saxReader;
 	}
 
 	private static Log _log = LogFactoryUtil.getLog(SAXReaderUtil.class);
 
-	private static Class<SAXReader> _saxReaderClass;
+	private static SAXReader _saxReader;
 
 }

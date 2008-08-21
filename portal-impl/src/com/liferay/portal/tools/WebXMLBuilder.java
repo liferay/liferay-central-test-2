@@ -92,8 +92,9 @@ public class WebXMLBuilder {
 		return webXML;
 	}
 
-	public WebXMLBuilder(String originalWebXML, String customWebXML,
-						 String mergedWebXML) {
+	public WebXMLBuilder(
+		String originalWebXML, String customWebXML, String mergedWebXML) {
+
 		try {
 			String customContent = FileUtil.read(customWebXML);
 

@@ -62,7 +62,7 @@ public class PortalHibernateConfiguration
 		Connection con = null;
 
 		try {
-			con = DataAccess.getConnection();
+			con = getDataSource().getConnection();
 
 			DatabaseMetaData metaData = con.getMetaData();
 

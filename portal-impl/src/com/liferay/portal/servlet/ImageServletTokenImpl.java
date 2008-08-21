@@ -35,8 +35,7 @@ import com.liferay.portlet.journalcontent.util.JournalContentUtil;
  * @author Brian Wing Shun Chan
  *
  */
-public class ImageServletTokenImpl
-	implements ImageServletToken {
+public class ImageServletTokenImpl implements ImageServletToken {
 
 	public static final String CACHE_NAME = ImageServletToken.class.getName();
 

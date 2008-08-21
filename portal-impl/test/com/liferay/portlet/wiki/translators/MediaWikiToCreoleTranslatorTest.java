@@ -23,7 +23,6 @@
 package com.liferay.portlet.wiki.translators;
 
 import com.liferay.portal.util.BaseTestCase;
-import com.liferay.portal.util.InitUtil;
 
 /**
  * <a href="MediaWikiToCreoleTranslatorTest.java.html"><b><i>View Source</i></b>
@@ -33,12 +32,6 @@ import com.liferay.portal.util.InitUtil;
  *
  */
 public class MediaWikiToCreoleTranslatorTest extends BaseTestCase {
-
-	protected void setUp() throws Exception {
-		InitUtil.initWithSpring();
-
-		_translator = new MediaWikiToCreoleTranslator();
-	}
 
 	public void testCleanUnnecessaryHeaderEmphasis1() throws Exception {
 		String content = "== '''title''' ==";
@@ -408,6 +401,10 @@ public class MediaWikiToCreoleTranslatorTest extends BaseTestCase {
 
 	public String _translate(String content) {
 		return _translator.runRegexps(content);
+	}
+
+	protected void setUp() throws Exception {
+		_translator = new MediaWikiToCreoleTranslator();
 	}
 
 	private MediaWikiToCreoleTranslator _translator;

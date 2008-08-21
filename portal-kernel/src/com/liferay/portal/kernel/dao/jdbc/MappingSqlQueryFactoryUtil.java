@@ -40,15 +40,15 @@ public class MappingSqlQueryFactoryUtil {
 	}
 
 	public static MappingSqlQueryFactory getMappingSqlQueryFactory() {
-		return _sqlUpdateFactory;
+		return _mappingSqlUpdateFactory;
 	}
 
 	public void setMappingSqlQueryFactory(
-		MappingSqlQueryFactory sqlUpdateFactory) {
+		MappingSqlQueryFactory mappingSqlUpdateFactory) {
 
-		_sqlUpdateFactory = sqlUpdateFactory;
+		_mappingSqlUpdateFactory = mappingSqlUpdateFactory;
 	}
 
-	private static MappingSqlQueryFactory _sqlUpdateFactory;
+	private static MappingSqlQueryFactory _mappingSqlUpdateFactory;
 
 }

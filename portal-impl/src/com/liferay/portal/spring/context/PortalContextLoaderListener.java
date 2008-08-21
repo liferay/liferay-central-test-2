@@ -45,9 +45,8 @@ import org.springframework.web.context.support.WebApplicationContextUtils;
 public class PortalContextLoaderListener extends ContextLoaderListener {
 
 	public void contextInitialized(ServletContextEvent event) {
-
 		InitUtil.init();
-		
+
 		super.contextInitialized(event);
 
 		ServletContext servletContext = event.getServletContext();

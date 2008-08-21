@@ -37,10 +37,6 @@ import java.util.Properties;
  */
 public class PropsUtil {
 
-	/*static {
-		InitUtil.init();
-	}*/
-
 	public static void addProperties(Properties properties) {
 		_instance._addProperties(properties);
 	}

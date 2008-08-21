@@ -73,6 +73,8 @@
 	<classpathentry kind="lib" path="lib/portal/aopalliance.jar"/>
 	<classpathentry kind="lib" path="lib/portal/asm.jar"/>
 	<classpathentry kind="lib" path="lib/portal/asm-attrs.jar"/>
+	<classpathentry kind="lib" path="lib/portal/aspectj-rt.jar"/>
+	<classpathentry kind="lib" path="lib/portal/aspectj-weaver.jar"/>
 	<classpathentry kind="lib" path="lib/portal/axis.jar"/>
 	<classpathentry kind="lib" path="lib/portal/axis-ant.jar"/>
 	<classpathentry kind="lib" path="lib/portal/backport-concurrent.jar"/>

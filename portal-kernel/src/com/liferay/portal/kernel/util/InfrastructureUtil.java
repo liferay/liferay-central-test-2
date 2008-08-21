@@ -46,12 +46,12 @@ public class InfrastructureUtil {
 	public void setDataSource(DataSource dataSource) {
 		_dataSource = dataSource;
 	}
-	
+
 	public void setMailSession(Session mailSession) {
 		_mailSession = mailSession;
 	}
 
 	private static Session _mailSession;
-	
 	private static DataSource _dataSource;
+
 }

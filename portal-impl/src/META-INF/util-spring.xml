@@ -1,22 +1,22 @@
-<?xml version="1.0"?>
+<?xml version="1.0" encoding="UTF-8"?>
 
 <beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd">
 	<bean id="logInterceptor" class="com.liferay.portal.spring.aop.LogInterceptor" />
-	<bean id="velocityServiceInterceptor" class="com.liferay.portal.spring.aop.BeanInterceptor" >
+	<bean id="velocityServiceInterceptor" class="com.liferay.portal.spring.aop.BeanInterceptor">
 		<property name="exceptionSafe" value="true" />
 	</bean>
-	<bean id="com.liferay.portal.kernel.bean.BeanPropertiesUtil" class="com.liferay.portal.kernel.bean.BeanPropertiesUtil" >
+	<bean id="com.liferay.portal.kernel.bean.BeanPropertiesUtil" class="com.liferay.portal.kernel.bean.BeanPropertiesUtil">
 		<property name="beanProperties">
 			<bean class="com.liferay.portal.bean.BeanPropertiesImpl" />
 		</property>
 	</bean>
-	<bean id="com.liferay.portal.cache.MultiVMPortalCacheManager" class="com.liferay.portal.cache.EhcachePortalCacheManager" >
+	<bean id="com.liferay.portal.cache.MultiVMPortalCacheManager" class="com.liferay.portal.cache.EhcachePortalCacheManager">
 		<property name="configPropertyKey" value="ehcache.multi.vm.config.location" />
 	</bean>
-	<bean id="com.liferay.portal.cache.MultiVMPoolImpl" class="com.liferay.portal.cache.MultiVMPoolImpl" >
+	<bean id="com.liferay.portal.cache.MultiVMPoolImpl" class="com.liferay.portal.cache.MultiVMPoolImpl">
 		<property name="portalCacheManager" ref="com.liferay.portal.cache.MultiVMPortalCacheManager" />
 	</bean>
-	<bean id="com.liferay.portal.kernel.cache.MultiVMPoolUtil" class="com.liferay.portal.kernel.cache.MultiVMPoolUtil" >
+	<bean id="com.liferay.portal.kernel.cache.MultiVMPoolUtil" class="com.liferay.portal.kernel.cache.MultiVMPoolUtil">
 		<property name="multiVMPool" ref="com.liferay.portal.cache.MultiVMPoolImpl" />
 	</bean>
 	<bean id="com.liferay.portal.cache.SingleVMPortalCacheManager" class="com.liferay.portal.cache.EhcachePortalCacheManager">
@@ -26,7 +26,7 @@
 		<property name="portalCacheManager" ref="com.liferay.portal.cache.SingleVMPortalCacheManager" />
 	</bean>
 	<bean id="com.liferay.portal.kernel.cache.SingleVMPoolUtil" class="com.liferay.portal.kernel.cache.SingleVMPoolUtil">
-		<property name="singleVMPool" ref="com.liferay.portal.cache.SingleVMPoolImpl"/>
+		<property name="singleVMPool" ref="com.liferay.portal.cache.SingleVMPoolImpl" />
 	</bean>
 	<bean id="com.liferay.portal.kernel.dao.jdbc.SqlUpdateFactoryUtil" class="com.liferay.portal.kernel.dao.jdbc.SqlUpdateFactoryUtil">
 		<property name="sqlUpdateFactory">
@@ -98,9 +98,7 @@
 	<bean id="com.liferay.portal.model.ModelHintsUtil" class="com.liferay.portal.model.ModelHintsUtil">
 		<property name="modelHints">
 			<bean class="com.liferay.portal.model.ModelHintsImpl" init-method="afterPropertiesSet">
-				<property name="SAXReader">
-					<bean class="com.liferay.portal.xml.SAXReaderImpl" scope="prototype" />
-				</property>
+				<property name="SAXReader" ref="com.liferay.portal.xml.SAXReaderImpl" />
 			</bean>
 		</property>
 	</bean>
@@ -233,8 +231,9 @@
 			</bean>
 		</property>
 	</bean>
+	<bean id="com.liferay.portal.xml.SAXReaderImpl" class="com.liferay.portal.xml.SAXReaderImpl" />
 	<bean id="com.liferay.portal.kernel.xml.SAXReaderUtil" class="com.liferay.portal.kernel.xml.SAXReaderUtil">
-		<property name="SAXReaderClass" value="com.liferay.portal.xml.SAXReaderImpl" />
+		<property name="SAXReader" ref="com.liferay.portal.xml.SAXReaderImpl" />
 	</bean>
 	<bean id="com.liferay.portlet.PortletPreferencesFactoryUtil" class="com.liferay.portlet.PortletPreferencesFactoryUtil">
 		<property name="portletPreferencesFactory">

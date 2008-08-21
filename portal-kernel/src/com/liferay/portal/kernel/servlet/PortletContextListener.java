@@ -113,7 +113,8 @@ public class PortletContextListener
 
 			ctx.createSubcontext(_JNDI_JDBC);
 
-			ctx.bind(_JNDI_JDBC_LIFERAY_POOL, InfrastructureUtil.getDataSource());
+			ctx.bind(
+				_JNDI_JDBC_LIFERAY_POOL, InfrastructureUtil.getDataSource());
 
 			_bindLiferayPool = true;
 		}

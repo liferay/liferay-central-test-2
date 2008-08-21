@@ -83,7 +83,7 @@ public class BaseDeployer {
 
 	public static void main(String[] args) {
 		InitUtil.initWithSpring();
-		
+
 		List<String> wars = new ArrayList<String>();
 		List<String> jars = new ArrayList<String>();
 

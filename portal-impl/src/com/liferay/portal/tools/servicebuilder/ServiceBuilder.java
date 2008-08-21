@@ -93,6 +93,7 @@ import org.dom4j.DocumentException;
  *
  */
 public class ServiceBuilder {
+
 	public static void main(String[] args) {
 		InitUtil.initWithSpring();
 
@@ -1633,7 +1634,7 @@ public class ServiceBuilder {
 
 		if (!xmlFile.exists()) {
 			String xml =
-				"<?xml version=\"1.0\"?>\n" +
+				"<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n" +
 				"<!DOCTYPE hibernate-mapping PUBLIC \"-//Hibernate/Hibernate Mapping DTD 3.0//EN\" \"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd\">\n" +
 				"\n" +
 				"<hibernate-mapping default-lazy=\"false\" auto-import=\"false\">\n" +
@@ -1798,7 +1799,7 @@ public class ServiceBuilder {
 
 		if (!xmlFile.exists()) {
 			String xml =
-				"<?xml version=\"1.0\"?>\n" +
+				"<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n" +
 				"\n" +
 				"<model-hints>\n" +
 				"</model-hints>";
@@ -2472,7 +2473,7 @@ public class ServiceBuilder {
 
 		if (!xmlFile.exists()) {
 			String xml =
-				"<?xml version=\"1.0\"?>\n" +
+				"<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n" +
 				"\n" +
 				"<beans xmlns=\"http://www.springframework.org/schema/beans\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xmlns:aop=\"http://www.springframework.org/schema/aop\" xmlns:tx=\"http://www.springframework.org/schema/tx\" xsi:schemaLocation=\"http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-2.5.xsd http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-2.5.xsd\">\n" +
 				"</beans>";

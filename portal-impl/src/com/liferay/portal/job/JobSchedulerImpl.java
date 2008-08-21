@@ -37,7 +37,6 @@ import org.quartz.JobDetail;
 import org.quartz.Scheduler;
 import org.quartz.SimpleTrigger;
 import org.quartz.Trigger;
-import org.quartz.impl.StdSchedulerFactory;
 
 /**
  * <a href="JobSchedulerImpl.java.html"><b><i>View Source</i></b></a>

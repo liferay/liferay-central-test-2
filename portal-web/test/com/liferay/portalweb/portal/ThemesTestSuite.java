@@ -36,8 +36,6 @@ import com.liferay.portalweb.portal.util.ThemeIds;
 public class ThemesTestSuite extends BaseTests {
 
 	public ThemesTestSuite() {
-		InitUtil.initWithSpring();
-		
 		addTestSuite(LoginTests.class);
 
 		for (int i = 0; i < ThemeIds.getCount(); i++) {

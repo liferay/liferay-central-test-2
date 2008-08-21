@@ -34,8 +34,8 @@ import junit.framework.TestSuite;
  */
 public class BaseTests extends TestSuite {
 
-	static {
-		InitUtil.init();
+	public BaseTests() {
+		InitUtil.initWithSpring();
 	}
 
 	public void test() {

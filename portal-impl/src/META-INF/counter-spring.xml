@@ -1,4 +1,4 @@
-<?xml version="1.0"?>
+<?xml version="1.0" encoding="UTF-8"?>
 
 <beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd">
 	<bean id="com.liferay.counter.service.CounterLocalService.impl" class="com.liferay.counter.service.impl.CounterLocalServiceImpl" lazy-init="true" />
@@ -11,7 +11,7 @@
 	<bean id="com.liferay.counter.service.CounterServiceFactory" class="com.liferay.counter.service.CounterServiceFactory" lazy-init="true">
 		<property name="service" ref="com.liferay.counter.service.CounterService.transaction" />
 	</bean>
-	<bean id="com.liferay.counter.service.persistence.CounterPersistence" class="com.liferay.counter.service.persistence.CounterPersistence" parent="dataAccessBase" lazy-init="true" />
+	<bean id="com.liferay.counter.service.persistence.CounterPersistence" class="com.liferay.counter.service.persistence.CounterPersistence" parent="basePersistence" lazy-init="true" />
 	<bean id="com.liferay.counter.service.persistence.CounterUtil" class="com.liferay.counter.service.persistence.CounterUtil" lazy-init="true">
 		<property name="persistence" ref="com.liferay.counter.service.persistence.CounterPersistence" />
 	</bean>
