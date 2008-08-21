@@ -100,7 +100,9 @@ public class UpdateLayoutAction extends Action {
 			String columnId = ParamUtil.getString(request, "p_p_col_id");
 			int columnPos = ParamUtil.getInteger(request, "p_p_col_pos");
 
-			if (Validator.isNotNull(columnId)) {
+			if (Validator.isNotNull(columnId) &&
+				Validator.isNotNull(portletId)) {
+
 				layoutTypePortlet.movePortletId(
 					userId, portletId, columnId, columnPos);
 			}
