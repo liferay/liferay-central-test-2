@@ -55,8 +55,6 @@ import com.liferay.util.LocalizationUtil;
 
 import java.util.Calendar;
 import java.util.Date;
-import java.util.HashSet;
-import java.util.Set;
 
 import javax.portlet.PortletPreferences;
 import javax.portlet.PortletURL;
@@ -78,15 +76,6 @@ import org.apache.commons.logging.LogFactory;
 public class MBUtil {
 
 	public static final String POP_PORTLET_PREFIX = "mb.";
-
-	public static void addEmailReceivedByMailing(String messageBody) {
-
-		if (messageBody == null) {
-			throw new IllegalArgumentException(
-					"The message body must not be null.");
-		}
-		_mailsReceivedOnMailing.add(messageBody.hashCode());
-	}
 
 	public static String getBreadcrumbs(
 			long categoryId, long messageId, PageContext pageContext,
@@ -623,9 +612,6 @@ public class MBUtil {
 
 		return false;
 	}
-
-	private static Set<Integer> _mailsReceivedOnMailing =
-		new HashSet<Integer>();
 
 	private static Log _log = LogFactory.getLog(MBUtil.class);
 

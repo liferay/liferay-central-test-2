@@ -58,7 +58,7 @@ public class MailingListRequest {
 		return _inUserName;
 	}
 
-	public boolean getInUseSSL() {
+	public boolean isInUseSSL() {
 		return _inUseSSL;
 	}
 
