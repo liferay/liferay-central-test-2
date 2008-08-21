@@ -60,6 +60,11 @@ import org.hibernate.sql.JoinFragment;
  * @author Brian Wing Shun Chan
  * @author Bruno Farache
  *
+ * @deprecated This class is no longer used because
+ * <code>com.liferay.portal.spring.hibernate.PortalHibernateConfiguration
+ * </code> injects the dialect dynamically.
+ *
+ *
  */
 public class DynamicDialect extends Dialect {
 

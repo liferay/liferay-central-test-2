@@ -22,17 +22,29 @@
 
 package com.liferay.portal.spring.hibernate;
 
+import com.liferay.portal.dao.orm.hibernate.DB2Dialect;
+import com.liferay.portal.kernel.dao.jdbc.DataAccess;
+import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.Validator;
+import com.liferay.portal.tools.sql.DBUtil;
 import com.liferay.portal.util.PropsKeys;
 import com.liferay.portal.util.PropsUtil;
+import com.liferay.portal.util.PropsValues;
 
 import java.io.InputStream;
+
+import java.sql.Connection;
+import java.sql.DatabaseMetaData;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
 import org.hibernate.cfg.Configuration;
 import org.hibernate.cfg.Environment;
+import org.hibernate.dialect.DB2400Dialect;
+import org.hibernate.dialect.Dialect;
+import org.hibernate.dialect.DialectFactory;
+import org.hibernate.dialect.SybaseDialect;
 
 /**
  * <a href="PortalHibernateConfiguration.java.html"><b><i>View Source</i></b>
@@ -43,6 +55,79 @@ import org.hibernate.cfg.Environment;
  */
 public class PortalHibernateConfiguration
 	extends TransactionAwareConfiguration {
+
+	protected String determineDialect() {
+		Dialect dialect = null;
+
+		Connection con = null;
+
+		try {
+			con = DataAccess.getConnection();
+
+			DatabaseMetaData metaData = con.getMetaData();
+
+			String dbName = metaData.getDatabaseProductName();
+			int dbMajorVersion = metaData.getDatabaseMajorVersion();
+
+			if (_log.isInfoEnabled()) {
+				_log.info(
+					"Determining dialect for " + dbName + " " + dbMajorVersion);
+			}
+
+			if (dbName.startsWith("HSQL")) {
+				if (_log.isWarnEnabled()) {
+					_log.warn(
+						"Liferay is configured to use Hypersonic as its " +
+							"database. Do NOT use Hypersonic in production. " +
+								"Hypersonic is an embedded database useful " +
+									"for development and demo'ing purposes.");
+				}
+			}
+
+			if (dbName.equals("ASE") && (dbMajorVersion == 15)) {
+				dialect = new SybaseDialect();
+			}
+			else if (dbName.startsWith("DB2") && (dbMajorVersion == 9)) {
+				dialect = new DB2Dialect();
+			}
+			else {
+				dialect = DialectFactory.determineDialect(
+					dbName, dbMajorVersion);
+			}
+
+			DBUtil.setInstance(dialect);
+
+			if (_log.isInfoEnabled()) {
+				_log.info("Using dialect " + dialect.getClass().getName());
+			}
+		}
+		catch (Exception e) {
+			String msg = GetterUtil.getString(e.getMessage());
+
+			if (msg.indexOf("explicitly set for database: DB2") != -1) {
+				dialect = new DB2400Dialect();
+
+				if (_log.isWarnEnabled()) {
+					_log.warn(
+						"DB2400Dialect was dynamically chosen as the " +
+							"Hibernate dialect for DB2. This can be " +
+								"overriden in portal.properties");
+				}
+			}
+			else {
+				_log.error(e, e);
+			}
+		}
+		finally {
+			DataAccess.cleanUp(con);
+		}
+
+		if (dialect == null) {
+			throw new RuntimeException("No dialect found");
+		}
+
+		return dialect.getClass().getName();
+	}
 
 	protected ClassLoader getConfigurationClassLoader() {
 		return getClass().getClassLoader();
@@ -75,6 +160,12 @@ public class PortalHibernateConfiguration
 						_log.warn(e1);
 					}
 				}
+			}
+
+			if (Validator.isNull(PropsValues.HIBERNATE_DIALECT)) {
+				String dialect = determineDialect();
+
+				configuration.setProperty("hibernate.dialect", dialect);
 			}
 
 			configuration.setProperties(PropsUtil.getProperties());
