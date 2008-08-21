@@ -537,7 +537,7 @@ public class PropsValues {
 		GetterUtil.getBoolean(
 			PropsUtil.get(PropsKeys.LAYOUT_SHOW_PORTLET_INACTIVE));
 
-	public static final String[] LAYOUT_STATIC_PORTLETS_ALL =
+	public static String[] LAYOUT_STATIC_PORTLETS_ALL =
 		PropsUtil.getArray(PropsKeys.LAYOUT_STATIC_PORTLETS_ALL);
 
 	public static boolean LAYOUT_TEMPLATE_CACHE_ENABLED = GetterUtil.getBoolean(

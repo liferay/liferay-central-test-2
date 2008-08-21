@@ -455,6 +455,28 @@ public class HookHotDeployListener extends BaseHotDeployListener {
 			}
 		}
 
+		for (String fieldName : _PROPS_KEYS_STRING_ARRAY) {
+			String key = StringUtil.replace(
+				fieldName.toLowerCase(), StringPool.UNDERLINE,
+				StringPool.PERIOD);
+
+			if (!containsKey(portalProperties, key)) {
+				continue;
+			}
+
+			try {
+				Field field = PropsValues.class.getField(fieldName);
+
+				String[] value = PropsUtil.getArray(key);
+
+				field.set(null, value);
+			}
+			catch (Exception e) {
+				_log.error(
+					"Error setting field " + fieldName + ": " + e.getMessage());
+			}
+		}
+
 		if (containsKey(portalProperties, PropsKeys.LOCALES)) {
 			PropsValues.LOCALES = PropsUtil.getArray(PropsKeys.LOCALES);
 
@@ -494,6 +516,10 @@ public class HookHotDeployListener extends BaseHotDeployListener {
 	private static final String[] _PROPS_KEYS_STRING = new String[] {
 		"PASSWORDS_PASSWORDPOLICYTOOLKIT_GENERATOR",
 		"PASSWORDS_PASSWORDPOLICYTOOLKIT_STATIC"
+	};
+
+	private static final String[] _PROPS_KEYS_STRING_ARRAY = new String[] {
+		"LAYOUT_STATIC_PORTLETS_ALL"
 	};
 
 	private static Log _log = LogFactory.getLog(HookHotDeployListener.class);
