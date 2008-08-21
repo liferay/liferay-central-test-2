@@ -31,14 +31,19 @@ MBCategory category = (MBCategory)request.getAttribute(WebKeys.MESSAGE_BOARDS_CA
 
 long categoryId = BeanParamUtil.getLong(category, request, "categoryId");
 
+long parentCategoryId = BeanParamUtil.getLong(category, request, "parentCategoryId", MBCategoryImpl.DEFAULT_PARENT_CATEGORY_ID);
+
 MBMailingList mailingList = null;
 
 try {
-	mailingList = MBMailingListLocalServiceUtil.getCategoryMailingList(categoryId);
-} catch (NoSuchMailingListException nsmle) {
+	if (categoryId > 0) {
+		mailingList = MBMailingListLocalServiceUtil.getCategoryMailingList(categoryId);
+	}
+}
+catch (NoSuchMailingListException nsmle) {
 }
 
-long parentCategoryId = BeanParamUtil.getLong(category, request, "parentCategoryId", MBCategoryImpl.DEFAULT_PARENT_CATEGORY_ID);
+boolean mailingListActive = BeanParamUtil.getBoolean(mailingList, request, "active");
 %>
 
 <script type="text/javascript">
@@ -155,170 +160,6 @@ long parentCategoryId = BeanParamUtil.getLong(category, request, "parentCategory
 		<liferay-ui:input-field model="<%= MBCategory.class %>" bean="<%= category %>" field="description" />
 	</td>
 </tr>
-<tr>
-	<td colspan="2">
-		<br />
-	</td>
-</tr>
-<tr>
-	<td>
-		<liferay-ui:message key="mailing-list" />
-	</td>
-	<td>
-		<table class="lfr-table" >
-			<tr>
-				<td>
-					<liferay-ui:message key="activate" />
-				</td>
-				<td>
-					<liferay-ui:input-checkbox param="mailingListActive" defaultValue="<%= BeanParamUtil.getBoolean(mailingList, request, "active") %>" />
-				</td>
-			</tr>
-			<tr>
-				<td>
-					<liferay-ui:message key="email-address" />
-				</td>
-				<td>
-					<liferay-ui:input-field model="<%= MBMailingList.class %>" bean="<%= mailingList %>" field="emailAddress" />
-				</td>
-			</tr>
-		</table>
-		<liferay-ui:tabs param="inOutServer" names="incoming,outgoing" refresh="<%= false %>" >
-			<liferay-ui:section>
-			<table class="lfr-table" >
-				<tr>
-					<td>
-						<liferay-ui:message key="protocol" />
-					</td>
-					<td>
-						<table class="lfr-table">
-						<tr>
-							<%
-							String protocol = BeanParamUtil.getString(mailingList, request, "inProtocol", "pop3");
-							%>
-							<td>
-								<input name="<portlet:namespace />inProtocol" type="radio" value="pop3" <c:if test='<%= protocol.equals("pop3") %>'>checked="checked"</c:if> > <liferay-ui:message key="pop" />
-							</td>
-							<td>
-								<input name="<portlet:namespace />inProtocol" type="radio" value="imap" <c:if test='<%=  protocol.equals("imap") %>'>checked="checked"</c:if> > <liferay-ui:message key="imap" />
-							</td>
-						</tr>
-						</table>
-					</td>
-				</tr>
-				<tr>
-					<td>
-						<liferay-ui:message key="server-name" />
-					</td>
-					<td>
-						<liferay-ui:input-field model="<%= MBMailingList.class %>" bean="<%= mailingList %>" field="inServerName" />
-					</td>
-				</tr>
-				<tr>
-					<td>
-						<liferay-ui:message key="server-port" />
-					</td>
-					<td>
-						<liferay-ui:input-field model="<%= MBMailingList.class %>" bean="<%= mailingList %>" field="inServerPort" defaultValue="110"/>
-					</td>
-				</tr>
-				<tr>
-					<td>
-						<liferay-ui:message key="use-a-secure-network-connection" />
-					</td>
-					<td>
-						<liferay-ui:input-field model="<%= MBMailingList.class %>" bean="<%= mailingList %>" field="inUseSSL" />
-					</td>
-				</tr>
-				<tr>
-					<td>
-						<liferay-ui:message key="user-name" />
-					</td>
-					<td>
-						<liferay-ui:input-field model="<%= MBMailingList.class %>" bean="<%= mailingList %>" field="inUserName" />
-					</td>
-				</tr>
-				<tr>
-					<td>
-						<liferay-ui:message key="password" />
-					</td>
-					<td>
-						<liferay-ui:input-field model="<%= MBMailingList.class %>" bean="<%= mailingList %>" field="inPassword" />
-					</td>
-				</tr>
-				<tr>
-					<td>
-						<liferay-ui:message key="read-interval-minutes" />
-					</td>
-					<td>
-					<liferay-ui:input-field model="<%= MBMailingList.class %>" bean="<%= mailingList %>" field="inReadInterval" defaultValue="5" />
-				</td>
-				</tr>
-			</table>
-			</liferay-ui:section>
-			<liferay-ui:section>
-			<table class="lfr-table" >
-				<tr>
-					<td>
-						<liferay-ui:message key="email-address" />
-					</td>
-					<td>
-						<liferay-ui:input-field model="<%= MBMailingList.class %>" bean="<%= mailingList %>" field="outEmailAddress" />
-					</td>
-				</tr>
-				<tr>
-					<td>
-						<liferay-ui:message key="use-custom-outgoing-server" />
-					</td>
-					<td>
-						<liferay-ui:input-field model="<%= MBMailingList.class %>" bean="<%= mailingList %>" field="outCustom" />
-					</td>
-				</tr>
-				<tr>
-					<td>
-						<liferay-ui:message key="server-name" />
-					</td>
-					<td>
-						<liferay-ui:input-field model="<%= MBMailingList.class %>" bean="<%= mailingList %>" field="outServerName" />
-					</td>
-				</tr>
-				<tr>
-					<td>
-						<liferay-ui:message key="server-port" />
-					</td>
-					<td>
-						<liferay-ui:input-field model="<%= MBMailingList.class %>" bean="<%= mailingList %>" field="outServerPort" defaultValue="25" />
-					</td>
-				</tr>
-				<tr>
-					<td>
-						<liferay-ui:message key="use-a-secure-network-connection" />
-					</td>
-					<td>
-						<liferay-ui:input-field model="<%= MBMailingList.class %>" bean="<%= mailingList %>" field="outUseSSL" />
-					</td>
-				</tr>
-				<tr>
-					<td>
-						<liferay-ui:message key="user-name" />
-					</td>
-					<td>
-						<liferay-ui:input-field model="<%= MBMailingList.class %>" bean="<%= mailingList %>" field="outUserName" />
-					</td>
-				</tr>
-				<tr>
-					<td>
-						<liferay-ui:message key="password" />
-					</td>
-					<td>
-						<liferay-ui:input-field model="<%= MBMailingList.class %>" bean="<%= mailingList %>" field="outPassword" />
-					</td>
-				</tr>
-			</table>
-			</liferay-ui:section>
-		</liferay-ui:tabs>
-	</td>
-</tr>
 
 <c:if test="<%= category == null %>">
 	<tr>
@@ -342,6 +183,176 @@ long parentCategoryId = BeanParamUtil.getLong(category, request, "parentCategory
 
 <br />
 
+<liferay-ui:tabs names="mailing-list" />
+
+<table class="lfr-table" >
+<tr>
+	<td>
+		<liferay-ui:message key="active" />
+	</td>
+	<td>
+		<liferay-ui:input-checkbox param="mailingListActive" defaultValue="<%= mailingListActive %>" />
+	</td>
+</tr>
+<tbody id="<portlet:namespace />mailingListSettings">
+	<tr>
+		<td>
+			<liferay-ui:message key="email-address" />
+		</td>
+		<td>
+			<liferay-ui:input-field model="<%= MBMailingList.class %>" bean="<%= mailingList %>" field="emailAddress" />
+		</td>
+	</tr>
+	<tr>
+		<td colspan="2">
+			<br />
+
+			<liferay-ui:tabs
+				names="incoming,outgoing"
+				refresh="<%= false %>"
+			>
+				<liferay-ui:section>
+					<table class="lfr-table">
+					<tr>
+						<td>
+							<liferay-ui:message key="protocol" />
+						</td>
+						<td>
+							<table class="lfr-table">
+							<tr>
+								<%
+								String protocol = BeanParamUtil.getString(mailingList, request, "inProtocol", "pop3");
+								%>
+								<td>
+									<input name="<portlet:namespace />inProtocol" type="radio" value="pop3" <c:if test='<%= protocol.equals("pop3") %>'>checked="checked"</c:if> > <liferay-ui:message key="pop" />
+								</td>
+								<td>
+									<input name="<portlet:namespace />inProtocol" type="radio" value="imap" <c:if test='<%=  protocol.equals("imap") %>'>checked="checked"</c:if> > <liferay-ui:message key="imap" />
+								</td>
+							</tr>
+							</table>
+						</td>
+					</tr>
+					<tr>
+						<td>
+							<liferay-ui:message key="server-name" />
+						</td>
+						<td>
+							<liferay-ui:input-field model="<%= MBMailingList.class %>" bean="<%= mailingList %>" field="inServerName" />
+						</td>
+					</tr>
+					<tr>
+						<td>
+							<liferay-ui:message key="server-port" />
+						</td>
+						<td>
+							<liferay-ui:input-field model="<%= MBMailingList.class %>" bean="<%= mailingList %>" field="inServerPort" defaultValue="110" />
+						</td>
+					</tr>
+					<tr>
+						<td>
+							<liferay-ui:message key="use-a-secure-network-connection" />
+						</td>
+						<td>
+							<liferay-ui:input-field model="<%= MBMailingList.class %>" bean="<%= mailingList %>" field="inUseSSL" />
+						</td>
+					</tr>
+					<tr>
+						<td>
+							<liferay-ui:message key="user-name" />
+						</td>
+						<td>
+							<liferay-ui:input-field model="<%= MBMailingList.class %>" bean="<%= mailingList %>" field="inUserName" />
+						</td>
+					</tr>
+					<tr>
+						<td>
+							<liferay-ui:message key="password" />
+						</td>
+						<td>
+							<liferay-ui:input-field model="<%= MBMailingList.class %>" bean="<%= mailingList %>" field="inPassword" />
+						</td>
+					</tr>
+					<tr>
+						<td>
+							<liferay-ui:message key="read-interval-minutes" />
+						</td>
+						<td>
+						<liferay-ui:input-field model="<%= MBMailingList.class %>" bean="<%= mailingList %>" field="inReadInterval" defaultValue="5" />
+					</td>
+					</tr>
+					</table>
+				</liferay-ui:section>
+				<liferay-ui:section>
+					<table class="lfr-table">
+					<tr>
+						<td>
+							<liferay-ui:message key="email-address" />
+						</td>
+						<td>
+							<liferay-ui:input-field model="<%= MBMailingList.class %>" bean="<%= mailingList %>" field="outEmailAddress" />
+						</td>
+					</tr>
+					<tr>
+						<td>
+							<liferay-ui:message key="use-custom-outgoing-server" />
+						</td>
+						<td>
+							<liferay-ui:input-field model="<%= MBMailingList.class %>" bean="<%= mailingList %>" field="outCustom" />
+						</td>
+					</tr>
+					<tbody id="<portlet:namespace />outCustomSettings">
+						<tr>
+							<td>
+								<liferay-ui:message key="server-name" />
+							</td>
+							<td>
+								<liferay-ui:input-field model="<%= MBMailingList.class %>" bean="<%= mailingList %>" field="outServerName" />
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<liferay-ui:message key="server-port" />
+							</td>
+							<td>
+								<liferay-ui:input-field model="<%= MBMailingList.class %>" bean="<%= mailingList %>" field="outServerPort" defaultValue="25" />
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<liferay-ui:message key="use-a-secure-network-connection" />
+							</td>
+							<td>
+								<liferay-ui:input-field model="<%= MBMailingList.class %>" bean="<%= mailingList %>" field="outUseSSL" />
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<liferay-ui:message key="user-name" />
+							</td>
+							<td>
+								<liferay-ui:input-field model="<%= MBMailingList.class %>" bean="<%= mailingList %>" field="outUserName" />
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<liferay-ui:message key="password" />
+							</td>
+							<td>
+								<liferay-ui:input-field model="<%= MBMailingList.class %>" bean="<%= mailingList %>" field="outPassword" />
+							</td>
+						</tr>
+					</tbody>
+					</table>
+				</liferay-ui:section>
+			</liferay-ui:tabs>
+		</td>
+	</tr>
+</tbody>
+</table>
+
+<br />
+
 <c:if test="<%= (category == null) && PropsValues.CAPTCHA_CHECK_PORTLET_MESSAGE_BOARDS_EDIT_CATEGORY %>">
 	<portlet:actionURL windowState="<%= LiferayWindowState.EXCLUSIVE.toString() %>" var="captchaURL">
 		<portlet:param name="struts_action" value="/message_boards/captcha" />
@@ -356,8 +367,11 @@ long parentCategoryId = BeanParamUtil.getLong(category, request, "parentCategory
 
 </form>
 
-<c:if test="<%= windowState.equals(WindowState.MAXIMIZED) && !themeDisplay.isFacebook() %>">
-	<script type="text/javascript">
+<script type="text/javascript">
+	<c:if test="<%= windowState.equals(WindowState.MAXIMIZED) %>">
 		Liferay.Util.focusFormField(document.<portlet:namespace />fm.<portlet:namespace />name);
-	</script>
-</c:if>
+	</c:if>
+
+	Liferay.Util.toggleBoxes('<portlet:namespace />mailingListActiveCheckbox', '<portlet:namespace />mailingListSettings');
+	Liferay.Util.toggleBoxes('<portlet:namespace />outCustomCheckbox', '<portlet:namespace />outCustomSettings');
+</script>
