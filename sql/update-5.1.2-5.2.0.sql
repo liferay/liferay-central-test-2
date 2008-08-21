@@ -48,9 +48,3 @@ create table TagsVocabulary (
 	description VARCHAR(75) null,
 	folksonomy BOOLEAN
 );
-
-alter table WikiPage add minorEdit BOOLEAN;
-
-COMMIT_TRANSACTION;
-
-update WikiPage set minorEdit = FALSE;

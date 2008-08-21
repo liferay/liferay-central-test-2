@@ -20,34 +20,20 @@
  * SOFTWARE.
  */
 
-package com.liferay.portal.upgrade;
+package com.liferay.portal.upgrade.v5_1_2;
 
-import com.liferay.portal.kernel.util.ReleaseInfo;
-import com.liferay.portal.upgrade.v5_1_2.UpgradeCalendar;
-import com.liferay.portal.upgrade.v5_1_2.UpgradeSchema;
-
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import com.liferay.portal.upgrade.SmartUpgradeSchema;
 
 /**
- * <a href="UpgradeProcess_5_1_2.java.html"><b><i>View Source</i></b></a>
+ * <a href="UpgradeSchema.java.html"><b><i>View Source</i></b></a>
  *
- * @author Jorge Ferrer
+ * @author Brian Wing Shun Chan
  *
  */
-public class UpgradeProcess_5_1_2 extends UpgradeProcess {
+public class UpgradeSchema extends SmartUpgradeSchema {
 
-	public int getThreshold() {
-		return ReleaseInfo.RELEASE_5_1_2_BUILD_NUMBER;
+	protected void upgradeOnce() throws Exception {
+		runSQLTemplate("update-5.1.1-5.1.2.sql", false);
 	}
-
-	public void upgrade() throws UpgradeException {
-		_log.info("Upgrading");
-
-		upgrade(UpgradeSchema.class);
-		upgrade(UpgradeCalendar.class);
-	}
-
-	private static Log _log = LogFactory.getLog(UpgradeProcess_5_1_2.class);
 
 }
