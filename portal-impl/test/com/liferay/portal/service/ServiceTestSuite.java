@@ -27,8 +27,11 @@ import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
 import com.liferay.portal.kernel.messaging.MessageBus;
 import com.liferay.portal.kernel.messaging.MessageBusUtil;
 import com.liferay.portal.kernel.messaging.MessageSender;
+import com.liferay.portal.kernel.scheduler.SchedulerEngineUtil;
 import com.liferay.portal.kernel.search.SearchEngineUtil;
 import com.liferay.portal.kernel.util.FileUtil;
+import com.liferay.portal.scheduler.SchedulerEngineImpl;
+import com.liferay.portal.scheduler.quartz.QuartzSchedulerEngineUtil;
 import com.liferay.portal.search.IndexSearcherImpl;
 import com.liferay.portal.search.IndexWriterImpl;
 import com.liferay.portal.search.lucene.LuceneSearchEngineUtil;
@@ -92,11 +95,24 @@ public class ServiceTestSuite extends TestSuite {
 
 		MessageBusUtil.init(messageBus, messageSender);
 
-		// Search engines
+		// Scheduler
+
+		try {
+			QuartzSchedulerEngineUtil.init();
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		SchedulerEngineUtil.init(new SchedulerEngineImpl());
+
+		// Search
 
 		LuceneSearchEngineUtil.init();
 
 		SearchEngineUtil.init(new IndexSearcherImpl(), new IndexWriterImpl());
+
+		// Tests
 
 		addTestSuite(BookmarksFolderServiceTest.class);
 		addTestSuite(BookmarksEntryServiceTest.class);
