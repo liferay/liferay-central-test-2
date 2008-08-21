@@ -33,7 +33,7 @@ List[] diffResults = (List[])renderRequest.getAttribute(WebKeys.DIFF_RESULTS);
 %>
 
 <liferay-ui:tabs
-	names="diff"
+	names="compare-versions"
 	backURL="<%= backURL %>"
 />
 

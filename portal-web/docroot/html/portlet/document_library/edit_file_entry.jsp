@@ -100,60 +100,41 @@ portletURL.setParameter("name", name);
 		submitForm(document.<portlet:namespace />fm);
 	}
 
-	function <portlet:namespace />inactivateRowIds(element) {
-  		var rowIds = jQuery('input[@name=<portlet:namespace />rowIds]');
+	function <portlet:namespace />initRowsChecked() {
+		var rowIds = jQuery('input[@name=<portlet:namespace />rowIds]');
 
-  		var found = 0;
-  		var totalChecked = jQuery('input[@name=<portlet:namespace />rowIds]:checked').length;
+		var found = 0;
 
-  		for (i = 0; i < rowIds.length; i++) {
-  			if (rowIds[i].checked && (found < 2)) {
-  				found++;
-  			}
-  			else if (totalChecked == 0) {
-
-				// Enable everything
-
-				rowIds[i].checked = false;
-	  			rowIds[i].disabled = false;
+		for (i = 0; i < rowIds.length; i++) {
+			if (rowIds[i].checked && (found < 2)) {
+				found++;
 			}
-			else if ((found == 0) && (totalChecked == 1)) {
-
-				// Disable everything up to the first one
-
+			else {
 				rowIds[i].checked = false;
-	  			rowIds[i].disabled = true;
-			}
-			else if ((found == 1) && (totalChecked >= 1)) {
-
-				// Unselect everything after the first one
-
-				rowIds[i].checked = false;
-	  			rowIds[i].disabled = false;
-			}
-			else if ((found == 2) && (totalChecked >= 2)) {
-
-				// Disable elements after the second one
-
-				rowIds[i].checked = false;
-	  			rowIds[i].disabled = true;
 			}
 		}
 	}
 
-	function <portlet:namespace />lock() {
-		submitForm(document.hrefFm, "<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/document_library/edit_file_entry" /><portlet:param name="<%= Constants.CMD %>" value="<%= Constants.LOCK %>" /><portlet:param name="redirect" value="<%= redirect %>" /><portlet:param name="folderId" value="<%= String.valueOf(folderId) %>" /><portlet:param name="name" value="<%= name %>" /></portlet:actionURL>");
-	}
+	function <portlet:namespace />updateRowsChecked(element) {
+		var rowsChecked = jQuery('input[@name=<portlet:namespace />rowIds]:checked');
 
-	function <portlet:namespace />unlock() {
-		submitForm(document.hrefFm, "<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/document_library/edit_file_entry" /><portlet:param name="<%= Constants.CMD %>" value="<%= Constants.UNLOCK %>" /><portlet:param name="redirect" value="<%= redirect %>" /><portlet:param name="folderId" value="<%= String.valueOf(folderId) %>" /><portlet:param name="name" value="<%= name %>" /></portlet:actionURL>");
+		if (rowsChecked.length > 2) {
+			if (rowsChecked[2] == element) {
+				rowsChecked[1].checked = false;
+			}
+			else {
+				rowsChecked[2].checked = false;
+			}
+		}
 	}
 
 	jQuery(document).ready(
 		function() {
+			<portlet:namespace />initRowsChecked();
+
 			jQuery('input[@name=<portlet:namespace />rowIds]').click(
 				function() {
-					<portlet:namespace />inactivateRowIds(this);
+					<portlet:namespace />updateRowsChecked(this);
 				}
 			);
 		}
@@ -169,12 +150,12 @@ portletURL.setParameter("name", name);
 			%>
 
 			<span class="portlet-msg-success">
-			<%= LanguageUtil.format(pageContext, "you-now-have-a-lock-on-this-document", lockExpirationTime, false) %>
+				<%= LanguageUtil.format(pageContext, "you-now-have-a-lock-on-this-document", lockExpirationTime, false) %>
 			</span>
 		</c:when>
 		<c:otherwise>
 			<span class="portlet-msg-error">
-			<%= LanguageUtil.format(pageContext, "you-cannot-modify-this-document-because-it-was-locked-by-x-on-x", new Object[] {PortalUtil.getUserName(lock.getUserId(), String.valueOf(lock.getUserId())), dateFormatDateTime.format(lock.getDate())}, false) %>
+				<%= LanguageUtil.format(pageContext, "you-cannot-modify-this-document-because-it-was-locked-by-x-on-x", new Object[] {PortalUtil.getUserName(lock.getUserId(), String.valueOf(lock.getUserId())), dateFormatDateTime.format(lock.getDate())}, false) %>
 			</span>
 		</c:otherwise>
 	</c:choose>
