@@ -42,11 +42,9 @@ import java.util.Set;
  */
 public class ReverendFunBuilder {
 
-	static {
-		InitUtil.init();
-	}
-
 	public static void main(String[] args) {
+		InitUtil.initWithSpring();
+
 		new ReverendFunBuilder();
 	}
 

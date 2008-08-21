@@ -93,18 +93,8 @@ import org.dom4j.DocumentException;
  *
  */
 public class ServiceBuilder {
-
-	static {
-		InitUtil.init();
-	}
-
 	public static void main(String[] args) {
-		ClassLoader classLoader = ClassLoader.getSystemClassLoader();
-
-		Log4JUtil.configureLog4J(
-			classLoader.getResource("META-INF/portal-log4j.xml"));
-		Log4JUtil.configureLog4J(
-			classLoader.getResource("META-INF/portal-log4j-ext.xml"));
+		InitUtil.initWithSpring();
 
 		ServiceBuilder serviceBuilder = null;
 
@@ -2483,9 +2473,8 @@ public class ServiceBuilder {
 		if (!xmlFile.exists()) {
 			String xml =
 				"<?xml version=\"1.0\"?>\n" +
-				"<!DOCTYPE beans PUBLIC \"-//SPRING//DTD BEAN//EN\" \"http://www.springframework.org/dtd/spring-beans.dtd\">\n" +
 				"\n" +
-				"<beans>\n" +
+				"<beans xmlns=\"http://www.springframework.org/schema/beans\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xmlns:aop=\"http://www.springframework.org/schema/aop\" xmlns:tx=\"http://www.springframework.org/schema/tx\" xsi:schemaLocation=\"http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-2.5.xsd http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-2.5.xsd\">\n" +
 				"</beans>";
 
 			FileUtil.write(xmlFile, xml);
@@ -2494,7 +2483,7 @@ public class ServiceBuilder {
 		String oldContent = FileUtil.read(xmlFile);
 		String newContent = _fixSpringXML(oldContent);
 
-		int x = oldContent.indexOf("<beans>");
+		int x = oldContent.indexOf("<beans xmlns=\"http://www.springframework.org/schema/beans\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xmlns:aop=\"http://www.springframework.org/schema/aop\" xmlns:tx=\"http://www.springframework.org/schema/tx\" xsi:schemaLocation=\"http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-2.5.xsd http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-2.5.xsd\">\n");
 		int y = oldContent.lastIndexOf("</beans>");
 
 		int firstSession = newContent.indexOf(

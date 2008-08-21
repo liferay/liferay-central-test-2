@@ -22,8 +22,6 @@
 
 package com.liferay.portal.kernel.util;
 
-import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
-
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -129,10 +127,6 @@ public class FileUtil {
 	}
 
 	public static com.liferay.portal.kernel.util.File getFile() {
-		if (_file == null) {
-			PortalBeanLocatorUtil.locate(FileUtil.class.getName());
-		}
-
 		return _file;
 	}
 

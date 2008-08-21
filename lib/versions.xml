@@ -816,6 +816,28 @@
 		</licenses>
 	</library>
 	<library>
+		<file-name>portal/aspectjrt.jar</file-name>
+		<version>1.6.0</version>
+		<project-name>aspectj</project-name>
+		<project-url>http://www.aspectj.org</project-url>
+		<licenses>
+			<license>
+				<license-name>Eclipse Public License Version 1.0</license-name>
+			</license>
+		</licenses>
+	</library>
+	<library>
+		<file-name>portal/aspectjweaver.jar</file-name>
+		<version>1.6.0</version>
+		<project-name>aspectj</project-name>
+		<project-url>http://www.aspectj.org</project-url>
+		<licenses>
+			<license>
+				<license-name>Eclipse Public License Version 1.0</license-name>
+			</license>
+		</licenses>
+	</library>
+	<library>
 		<file-name>portal/axis.jar</file-name>
 		<version>1.4</version>
 		<project-name>Axis</project-name>
@@ -2024,7 +2046,7 @@
 	</library>
 	<library>
 		<file-name>portal/quartz.jar</file-name>
-		<version>1.6.0</version>
+		<version>1.6.1 RC1</version>
 		<project-name>Quartz</project-name>
 		<project-url>http://www.opensymphony.com/quartz/wikidocs/Quartz%201.6.0.html</project-url>
 		<licenses>

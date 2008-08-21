@@ -22,8 +22,6 @@
 
 package com.liferay.portal.kernel.util;
 
-import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
-
 /**
  * <a href="DigesterUtil.java.html"><b><i>View Source</i></b></a>
  *
@@ -41,10 +39,6 @@ public class DigesterUtil {
 	}
 
 	public static Digester getDigester() {
-		if (_digester == null) {
-			PortalBeanLocatorUtil.locate(DigesterUtil.class.getName());
-		}
-
 		return _digester;
 	}
 

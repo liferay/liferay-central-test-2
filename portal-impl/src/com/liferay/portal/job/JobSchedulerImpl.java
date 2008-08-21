@@ -47,19 +47,6 @@ import org.quartz.impl.StdSchedulerFactory;
  */
 public class JobSchedulerImpl implements JobScheduler {
 
-	public JobSchedulerImpl() {
-		StdSchedulerFactory schedulerFactory = new StdSchedulerFactory();
-
-		try {
-			_scheduler = schedulerFactory.getScheduler();
-
-			_scheduler.start();
-		}
-		catch (Exception e) {
-			_log.error(e);
-		}
-	}
-
 	public void schedule(IntervalJob intervalJob) {
 		if (intervalJob == null) {
 			return;
@@ -95,6 +82,10 @@ public class JobSchedulerImpl implements JobScheduler {
 		catch (Exception e) {
 			_log.error(e, e);
 		}
+	}
+
+	public void setScheduler(Scheduler scheduler) {
+		_scheduler = scheduler;
 	}
 
 	public void shutdown() {

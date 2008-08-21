@@ -22,10 +22,10 @@
 
 package com.liferay.util.mail;
 
-import com.liferay.portal.kernel.jndi.PortalJNDIUtil;
 import com.liferay.portal.kernel.mail.MailMessage;
 import com.liferay.portal.kernel.mail.SMTPAccount;
 import com.liferay.portal.kernel.util.GetterUtil;
+import com.liferay.portal.kernel.util.InfrastructureUtil;
 import com.liferay.portal.kernel.util.Validator;
 
 import java.io.ByteArrayInputStream;
@@ -75,7 +75,7 @@ public class MailEngine {
 	}
 
 	public static Session getSession(boolean cache) throws NamingException {
-		Session session = PortalJNDIUtil.getMailSession();
+		Session session = InfrastructureUtil.getMailSession();
 
 		if (_log.isDebugEnabled()) {
 			session.setDebug(true);

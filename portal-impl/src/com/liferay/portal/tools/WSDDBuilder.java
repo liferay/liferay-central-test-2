@@ -45,11 +45,9 @@ import java.util.List;
  */
 public class WSDDBuilder {
 
-	static {
-		InitUtil.init();
-	}
-
 	public static void main(String[] args) {
+		InitUtil.initWithSpring();
+
 		if (args.length == 2) {
 			new WSDDBuilder(args[0], args[1]);
 		}

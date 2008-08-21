@@ -22,8 +22,6 @@
 
 package com.liferay.portal.kernel.util;
 
-import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
-
 import java.io.File;
 
 /**
@@ -44,10 +42,6 @@ public class MimeTypesUtil {
 	}
 
 	public static MimeTypes getMimeTypes() {
-		if (_mimeTypes == null) {
-			PortalBeanLocatorUtil.locate(MimeTypesUtil.class.getName());
-		}
-
 		return _mimeTypes;
 	}
 

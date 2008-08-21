@@ -22,8 +22,6 @@
 
 package com.liferay.portal.kernel.dao.orm;
 
-import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
-
 /**
  * <a href="FinderCacheUtil.java.html"><b><i>View Source</i></b></a>
  *
@@ -41,10 +39,6 @@ public class FinderCacheUtil {
 	}
 
 	public static FinderCache getFinderCache() {
-		if (_finderCache == null) {
-			PortalBeanLocatorUtil.locate(FinderCacheUtil.class.getName());
-		}
-
 		return _finderCache;
 	}
 

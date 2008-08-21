@@ -22,8 +22,6 @@
 
 package com.liferay.portal.kernel.dao.orm;
 
-import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
-
 /**
  * <a href="DynamicQueryFactoryUtil.java.html"><b><i>View Source</i></b></a>
  *
@@ -32,20 +30,15 @@ import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
  */
 public class DynamicQueryFactoryUtil {
 
-	public static DynamicQuery forClass(Class clazz) {
+	public static DynamicQuery forClass(Class<?> clazz) {
 		return getDynamicQueryFactory().forClass(clazz);
 	}
 
-	public static DynamicQuery forClass(Class clazz, String alias) {
+	public static DynamicQuery forClass(Class<?> clazz, String alias) {
 		return getDynamicQueryFactory().forClass(clazz, alias);
 	}
 
 	public static DynamicQueryFactory getDynamicQueryFactory() {
-		if (_dynamicQueryFactory == null) {
-			PortalBeanLocatorUtil.locate(
-				DynamicQueryFactoryUtil.class.getName());
-		}
-
 		return _dynamicQueryFactory;
 	}
 

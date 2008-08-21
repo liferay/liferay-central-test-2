@@ -34,7 +34,7 @@ import junit.framework.TestCase;
  */
 public class BaseTestCase extends TestCase {
 
-	static {
+	protected void setUp() throws Exception {
 		InitUtil.init();
 	}
 

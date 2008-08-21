@@ -24,6 +24,7 @@ package com.liferay.portal.tools;
 
 import com.liferay.portal.kernel.util.FileUtil;
 import com.liferay.portal.kernel.util.StringUtil;
+import com.liferay.portal.spring.util.SpringUtil;
 import com.liferay.portal.tools.sql.DBUtil;
 import com.liferay.portal.util.InitUtil;
 
@@ -39,11 +40,9 @@ import java.io.IOException;
  */
 public class DBBuilder {
 
-	static {
-		InitUtil.init();
-	}
+	public static void main(String[] args) {		
+		InitUtil.initWithSpring();
 
-	public static void main(String[] args) {
 		if (args.length == 1) {
 			new DBBuilder(args[0], DBUtil.DB_TYPE_ALL);
 		}

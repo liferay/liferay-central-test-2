@@ -23,9 +23,9 @@
 package com.liferay.portal.search.lucene;
 
 import com.liferay.portal.kernel.dao.jdbc.DataAccess;
-import com.liferay.portal.kernel.jndi.PortalJNDIUtil;
 import com.liferay.portal.kernel.search.Field;
 import com.liferay.portal.kernel.util.FileUtil;
+import com.liferay.portal.kernel.util.InfrastructureUtil;
 import com.liferay.portal.kernel.util.PortalClassLoaderUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;
@@ -521,7 +521,7 @@ public class LuceneUtil {
 			}
 
 			try {
-				DataSource ds = PortalJNDIUtil.getDataSource();
+				DataSource ds = InfrastructureUtil.getDataSource();
 
 				directory = new JdbcDirectory(ds, _dialect, tableName);
 
@@ -533,9 +533,6 @@ public class LuceneUtil {
 			}
 			catch (IOException ioe) {
 				throw new RuntimeException(ioe);
-			}
-			catch (NamingException ne) {
-				throw new RuntimeException(ne);
 			}
 			catch (UnsupportedOperationException uoe) {
 				if (_log.isWarnEnabled()) {

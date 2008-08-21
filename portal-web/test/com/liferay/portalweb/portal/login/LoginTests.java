@@ -33,7 +33,7 @@ import com.liferay.portalweb.portal.BaseTests;
 public class LoginTests extends BaseTests {
 
 	public LoginTests() {
-		addTestSuite(LoginTest.class);;
+		addTestSuite(LoginTest.class);
 	}
 
 }

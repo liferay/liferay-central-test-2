@@ -50,11 +50,9 @@ import java.util.TreeSet;
  */
 public class LangBuilder {
 
-	static {
-		InitUtil.init();
-	}
-
 	public static void main(String[] args) {
+		InitUtil.initWithSpring();
+
 		if (args.length == 2) {
 			new LangBuilder(args[0], args[1]);
 		}

@@ -22,8 +22,6 @@
 
 package com.liferay.portal.kernel.uuid;
 
-import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
-
 /**
  * <a href="PortalUUIDUtil.java.html"><b><i>View Source</i></b></a>
  *
@@ -37,10 +35,6 @@ public class PortalUUIDUtil {
 	}
 
 	public static PortalUUID getPortalUUID() {
-		if (_portalJNDI == null) {
-			PortalBeanLocatorUtil.locate(PortalUUIDUtil.class.getName());
-		}
-
 		return _portalJNDI;
 	}
 

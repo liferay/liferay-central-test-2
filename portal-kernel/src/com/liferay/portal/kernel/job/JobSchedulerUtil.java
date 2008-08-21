@@ -22,8 +22,6 @@
 
 package com.liferay.portal.kernel.job;
 
-import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
-
 /**
  * <a href="JobSchedulerUtil.java.html"><b><i>View Source</i></b></a>
  *
@@ -33,10 +31,6 @@ import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
 public class JobSchedulerUtil {
 
 	public static JobScheduler getJobScheduler() {
-		if (_jobScheduler == null) {
-			PortalBeanLocatorUtil.locate(JobSchedulerUtil.class.getName());
-		}
-
 		return _jobScheduler;
 	}
 

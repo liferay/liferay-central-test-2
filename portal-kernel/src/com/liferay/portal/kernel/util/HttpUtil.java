@@ -22,8 +22,6 @@
 
 package com.liferay.portal.kernel.util;
 
-import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
-
 import java.io.IOException;
 
 import java.net.URL;
@@ -93,10 +91,6 @@ public class HttpUtil {
 	}
 
 	public static Http getHttp() {
-		if (_http == null) {
-			PortalBeanLocatorUtil.locate(HttpUtil.class.getName());
-		}
-
 		return _http;
 	}
 

@@ -22,7 +22,6 @@
 
 package com.liferay.portal.service.permission;
 
-import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
 import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.security.permission.PermissionChecker;
 
@@ -49,10 +48,6 @@ public class RolePermissionUtil {
 	}
 
 	public static RolePermission getRolePermission() {
-		if (_rolePermission == null) {
-			PortalBeanLocatorUtil.locate(RolePermissionUtil.class.getName());
-		}
-
 		return _rolePermission;
 	}
 

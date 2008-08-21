@@ -22,8 +22,6 @@
 
 package com.liferay.portal.kernel.dao.orm;
 
-import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
-
 /**
  * <a href="ProjectionFactoryUtil.java.html"><b><i>View Source</i></b></a>
  *
@@ -53,10 +51,6 @@ public class ProjectionFactoryUtil {
 	}
 
 	public static ProjectionFactory getProjectionFactory() {
-		if (_projectionFactory == null) {
-			PortalBeanLocatorUtil.locate(ProjectionFactoryUtil.class.getName());
-		}
-
 		return _projectionFactory;
 	}
 

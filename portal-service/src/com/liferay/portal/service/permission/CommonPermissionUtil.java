@@ -24,7 +24,6 @@ package com.liferay.portal.service.permission;
 
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
-import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
 import com.liferay.portal.security.permission.PermissionChecker;
 
 /**
@@ -54,10 +53,6 @@ public class CommonPermissionUtil {
 	}
 
 	public static CommonPermission getCommonPermission() {
-		if (_commonPermission == null) {
-			PortalBeanLocatorUtil.locate(CommonPermissionUtil.class.getName());
-		}
-
 		return _commonPermission;
 	}
 

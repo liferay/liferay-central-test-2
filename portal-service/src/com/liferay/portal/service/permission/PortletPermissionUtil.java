@@ -24,7 +24,6 @@ package com.liferay.portal.service.permission;
 
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
-import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
 import com.liferay.portal.model.Portlet;
 import com.liferay.portal.security.permission.PermissionChecker;
 
@@ -108,10 +107,6 @@ public class PortletPermissionUtil {
 	}
 
 	public static PortletPermission getPortletPermission() {
-		if (_portletPermission == null) {
-			PortalBeanLocatorUtil.locate(PortletPermissionUtil.class.getName());
-		}
-
 		return _portletPermission;
 	}
 

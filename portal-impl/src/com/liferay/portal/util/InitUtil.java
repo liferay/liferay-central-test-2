@@ -22,7 +22,20 @@
 
 package com.liferay.portal.util;
 
-import com.liferay.portal.events.InitAction;
+import com.liferay.portal.configuration.ConfigurationFactoryImpl;
+import com.liferay.portal.kernel.configuration.ConfigurationFactoryUtil;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.kernel.util.GetterUtil;
+import com.liferay.portal.kernel.util.JavaProps;
+import com.liferay.portal.kernel.util.LocaleUtil;
+import com.liferay.portal.kernel.util.PortalClassLoaderUtil;
+import com.liferay.portal.kernel.util.TimeZoneUtil;
+import com.liferay.portal.log.CommonsLogFactoryImpl;
+import com.liferay.portal.spring.util.SpringUtil;
+import com.liferay.util.SystemProperties;
+import com.liferay.util.log4j.Log4JUtil;
+
+import org.apache.commons.lang.time.StopWatch;
 
 /**
  * <a href="InitUtil.java.html"><b><i>View Source</i></b></a>
@@ -32,12 +45,82 @@ import com.liferay.portal.events.InitAction;
  */
 public class InitUtil {
 
-	public static void init() {
+	public synchronized static void init() {
+		if (_initialized) {
+			return;
+		}
+		
 		try {
-			if (_initAction == null) {
-				_initAction = new InitAction();
+			StopWatch stopWatch = null;
 
-				_initAction.run(null);
+			if (_PRINT_TIME) {
+				stopWatch = new StopWatch();
+
+				stopWatch.start();
+			}
+
+			// Set the default locale used by Liferay. This locale is no longer 
+			// set at the VM level. See LEP-2584.
+
+			String userLanguage = SystemProperties.get("user.language");
+			String userCountry = SystemProperties.get("user.country");
+			String userVariant = SystemProperties.get("user.variant");
+
+			LocaleUtil.setDefault(userLanguage, userCountry, userVariant);
+
+			// Set the default time zone used by Liferay. This time zone is no
+			// longer set at the VM level. See LEP-2584.
+
+			String userTimeZone = SystemProperties.get("user.timezone");
+
+			TimeZoneUtil.setDefault(userTimeZone);
+
+			// Shared class loader
+
+			try {
+				PortalClassLoaderUtil.setClassLoader(
+					Thread.currentThread().getContextClassLoader());
+			}
+			catch (Exception e) {
+				e.printStackTrace();
+			}
+
+			// Log4J
+
+			if (GetterUtil.getBoolean(SystemProperties.get(
+					"log4j.configure.on.startup"), true)) {
+
+				ClassLoader classLoader = InitUtil.class.getClassLoader();
+
+				Log4JUtil.configureLog4J(
+					classLoader.getResource("META-INF/portal-log4j.xml"));
+				Log4JUtil.configureLog4J(
+					classLoader.getResource("META-INF/portal-log4j-ext.xml"));
+			}
+
+			// Shared log
+
+			try {
+				LogFactoryUtil.setLogFactory(new CommonsLogFactoryImpl());
+			}
+			catch (Exception e) {
+				e.printStackTrace();
+			}
+
+			// Configuration factory
+
+			ConfigurationFactoryUtil.setConfigurationFactory(
+				new ConfigurationFactoryImpl());
+
+			// Java properties
+
+			JavaProps.isJDK5();
+
+			_initialized = true;
+
+			if (_PRINT_TIME) {
+				System.out.println(
+					"InitAction takes " + stopWatch.getTime() + " ms");
 			}
 		}
 		catch (Exception e) {
@@ -45,6 +128,20 @@ public class InitUtil {
 		}
 	}
 
-	private static InitAction _initAction;
+	public synchronized static void initWithSpring() {
+		if (_initialized) {
+			return;
+		}
+		
+		init();
+		
+		SpringUtil.loadContext();
+		
+		_initialized = true;
+	}
+
+	private static boolean _initialized;
+
+	private static final boolean _PRINT_TIME = false;
 
 }

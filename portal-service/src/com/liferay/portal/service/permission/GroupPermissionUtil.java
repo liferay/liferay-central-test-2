@@ -24,7 +24,6 @@ package com.liferay.portal.service.permission;
 
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
-import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
 import com.liferay.portal.security.permission.PermissionChecker;
 
 /**
@@ -51,10 +50,6 @@ public class GroupPermissionUtil {
 	}
 
 	public static GroupPermission getGroupPermission() {
-		if (_groupPermission == null) {
-			PortalBeanLocatorUtil.locate(GroupPermissionUtil.class.getName());
-		}
-
 		return _groupPermission;
 	}
 

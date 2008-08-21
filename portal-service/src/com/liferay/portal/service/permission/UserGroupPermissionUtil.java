@@ -52,11 +52,6 @@ public class UserGroupPermissionUtil {
 	}
 
 	public static UserGroupPermission getUserGroupPermission() {
-		if (_userGroupPermission == null) {
-			PortalBeanLocatorUtil.locate(
-				UserGroupPermissionUtil.class.getName());
-		}
-
 		return _userGroupPermission;
 	}
 

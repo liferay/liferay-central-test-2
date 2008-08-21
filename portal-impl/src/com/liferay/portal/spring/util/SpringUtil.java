@@ -22,12 +22,17 @@
 
 package com.liferay.portal.spring.util;
 
+import com.liferay.portal.bean.BeanLocatorImpl;
+import com.liferay.portal.kernel.bean.BeanLocator;
 import com.liferay.portal.kernel.bean.InitializingBean;
+import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
+import com.liferay.portal.kernel.util.PortalClassLoaderUtil;
 import com.liferay.portal.spring.context.ArrayApplicationContext;
 import com.liferay.portal.util.PropsKeys;
 import com.liferay.portal.util.PropsUtil;
 
 import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.AbstractApplicationContext;
 
 /**
  * <a href="SpringUtil.java.html"><b><i>View Source</i></b></a>
@@ -45,25 +50,6 @@ import org.springframework.context.ApplicationContext;
  */
 public class SpringUtil {
 
-	public static ApplicationContext getContext() {
-		if (_applicationContext == null) {
-			System.out.println("Manually loading Spring context");
-
-			_applicationContext = new ArrayApplicationContext(
-				PropsUtil.getArray(PropsKeys.SPRING_CONFIGS));
-		}
-
-		return _applicationContext;
-	}
-
-	public static void initContext() {
-		if (_applicationContext == null) {
-			getContext();
-		}
-
-		initContext(_applicationContext);
-	}
-
 	public static void initContext(ApplicationContext applicationContext) {
 
 		// Preinitialize Spring beans. See LEP-4734.
@@ -72,10 +58,11 @@ public class SpringUtil {
 			applicationContext.getBeanDefinitionNames();
 
 		for (String beanDefinitionName : beanDefinitionNames) {
-			applicationContext.getBean(beanDefinitionName);
-		}
-
-		for (String beanDefinitionName : beanDefinitionNames) {
+			if (beanDefinitionName.endsWith("Base") || 
+				beanDefinitionName.endsWith(".base") ) {
+				continue;
+			}
+			
 			Object obj = applicationContext.getBean(beanDefinitionName);
 
 			if (obj instanceof InitializingBean) {
@@ -86,12 +73,16 @@ public class SpringUtil {
 		}
 	}
 
-	public static void setContext(ApplicationContext applicationContext) {
-		_applicationContext = applicationContext;
+	public static void loadContext() {
+		AbstractApplicationContext applicationContext = 
+			new ArrayApplicationContext(
+					PropsUtil.getArray(PropsKeys.SPRING_CONFIGS));
 
-		initContext(applicationContext);
+		applicationContext.registerShutdownHook();
+	
+		BeanLocator beanLocator = new BeanLocatorImpl(
+			PortalClassLoaderUtil.getClassLoader(), applicationContext);
+	
+		PortalBeanLocatorUtil.setBeanLocator(beanLocator);
 	}
-
-	private static ApplicationContext _applicationContext = null;
-
 }

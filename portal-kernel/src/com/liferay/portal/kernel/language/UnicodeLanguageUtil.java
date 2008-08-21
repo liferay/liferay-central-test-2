@@ -22,8 +22,6 @@
 
 package com.liferay.portal.kernel.language;
 
-import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
-
 import java.util.Locale;
 
 import javax.servlet.jsp.PageContext;
@@ -157,10 +155,6 @@ public class UnicodeLanguageUtil {
 	}
 
 	public static UnicodeLanguage getUnicodeLanguage() {
-		if (_unicodeLanguage == null) {
-			PortalBeanLocatorUtil.locate(UnicodeLanguageUtil.class.getName());
-		}
-
 		return _unicodeLanguage;
 	}
 

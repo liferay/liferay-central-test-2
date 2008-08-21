@@ -22,7 +22,6 @@
 
 package com.liferay.portal.dao.orm.hibernate;
 
-import com.liferay.portal.kernel.bean.InitializingBean;
 import com.liferay.portal.kernel.cache.CacheKVP;
 import com.liferay.portal.kernel.cache.CacheRegistry;
 import com.liferay.portal.kernel.cache.CacheRegistryItem;
@@ -53,7 +52,7 @@ import java.util.concurrent.ConcurrentHashMap;
  *
  */
 public class FinderCacheImpl
-	implements CacheRegistryItem, FinderCache, InitializingBean {
+	implements CacheRegistryItem, FinderCache {
 
 	public static final boolean CACHE_ENABLED = GetterUtil.getBoolean(
 		PropsUtil.get(PropsKeys.VALUE_OBJECT_FINDER_CACHE_ENABLED), true);

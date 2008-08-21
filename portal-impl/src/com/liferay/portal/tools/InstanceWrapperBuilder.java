@@ -56,11 +56,9 @@ import com.liferay.portal.kernel.xml.Namespace;
  */
 public class InstanceWrapperBuilder {
 
-	static {
-		InitUtil.init();
-	}
-
 	public static void main(String[] args) {
+		InitUtil.initWithSpring();
+
 		if (args.length == 1) {
 			new InstanceWrapperBuilder(args[0]);
 		}

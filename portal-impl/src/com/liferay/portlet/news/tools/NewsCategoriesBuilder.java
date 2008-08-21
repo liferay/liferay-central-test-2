@@ -35,12 +35,9 @@ import java.io.File;
  *
  */
 public class NewsCategoriesBuilder {
-
-	static {
-		InitUtil.init();
-	}
-
 	public static void main(String[] args) {
+		InitUtil.initWithSpring();
+
 		new NewsCategoriesBuilder();
 	}
 

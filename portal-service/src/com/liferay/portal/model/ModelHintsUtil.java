@@ -22,7 +22,6 @@
 
 package com.liferay.portal.model;
 
-import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
 import com.liferay.portal.kernel.xml.Element;
 
 import java.util.List;
@@ -45,10 +44,6 @@ public class ModelHintsUtil {
 	}
 
 	public static ModelHints getModelHints() {
-		if (_modelHints == null) {
-			PortalBeanLocatorUtil.locate(ModelHintsUtil.class.getName());
-		}
-
 		return _modelHints;
 	}
 

@@ -244,6 +244,7 @@ ${exception.message}
 			fork="true"
 			newenvironment="true"
 		>
+			<jvmarg value="-Dexternal-properties=com/liferay/portal/tools/dependencies/portal-tools.properties" />
 			<arg value="src/com/liferay/portal/tools/instance_wrappers.xml" />
 		</java>
 	</target>
@@ -268,6 +269,7 @@ ${exception.message}
 			fork="true"
 			newenvironment="true"
 		>
+			<jvmarg value="-Dexternal-properties=com/liferay/portal/tools/dependencies/portal-tools.properties" />
 			<jvmarg value="-Dfile.encoding=UTF-8" />
 			<jvmarg value="-Duser.country=US" />
 			<jvmarg value="-Duser.language=en" />
@@ -393,6 +395,7 @@ ${exception.message}
 			fork="true"
 			newenvironment="true"
 		>
+			<jvmarg value="-Dexternal-properties=com/liferay/portal/tools/dependencies/portal-tools.properties" />
 			<arg value="${project.dir}/lib/versions.xml" />
 			<arg value="${project.dir}/lib/versions.xsl" />
 			<arg value="${project.dir}/lib/versions.html" />
@@ -406,6 +409,7 @@ ${exception.message}
 			fork="true"
 			newenvironment="true"
 		>
+			<jvmarg value="-Dexternal-properties=com/liferay/portal/tools/dependencies/portal-tools.properties" />
 			<jvmarg value="-Dorg.apache.commons.logging.Log=org.apache.commons.logging.impl.Log4JLogger" />
 		</java>
 	</target>
@@ -416,7 +420,9 @@ ${exception.message}
 			classpathref="project.classpath"
 			fork="true"
 			newenvironment="true"
-		/>
+		>
+			<jvmarg value="-Dexternal-properties=com/liferay/portal/tools/dependencies/portal-tools.properties" />			
+		</java>
 	</target>
 
 	<target name="build-reverendfun" if="release.info">
@@ -426,6 +432,7 @@ ${exception.message}
 			fork="true"
 			newenvironment="true"
 		>
+			<jvmarg value="-Dexternal-properties=com/liferay/portal/tools/dependencies/portal-tools.properties" />
 			<jvmarg value="-Dorg.apache.commons.logging.Log=org.apache.commons.logging.impl.Log4JLogger" />
 		</java>
 	</target>
@@ -451,6 +458,7 @@ ${exception.message}
 			<arg value="${project.dir}/portal-service/src" />
 			<arg value="${project.dir}/portal-web/docroot/html/js/liferay/service_unpacked.js" />-->
 
+			<jvmarg value="-Dexternal-properties=com/liferay/portal/tools/dependencies/portal-tools.properties" />
 			<jvmarg value="-Dorg.apache.commons.logging.Log=org.apache.commons.logging.impl.Log4JLogger" />
 			<jvmarg value="-Dservice.input.file=${service.file}" />
 			<jvmarg value="-Dservice.hbm.file=src/META-INF/portal-hbm.xml" />
@@ -633,6 +641,7 @@ ${exception.message}
 			maxmemory="256m"
 			newenvironment="true"
 		>
+			<jvmarg value="-Dexternal-properties=com/liferay/portal/tools/dependencies/portal-tools.properties" />
 			<jvmarg value="-Dorg.apache.commons.logging.Log=org.apache.commons.logging.impl.Log4JLogger" />
 			<arg value="${service.file}" />
 			<arg value="../tunnel-web/docroot/WEB-INF/server-config.wsdd" />

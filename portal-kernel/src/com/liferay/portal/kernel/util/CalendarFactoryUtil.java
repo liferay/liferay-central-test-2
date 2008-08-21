@@ -22,8 +22,6 @@
 
 package com.liferay.portal.kernel.util;
 
-import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
-
 import java.util.Calendar;
 import java.util.Locale;
 import java.util.TimeZone;
@@ -71,10 +69,6 @@ public class CalendarFactoryUtil {
 	}
 
 	public static CalendarFactory getCalendarFactory() {
-		if (_calendarFactory == null) {
-			PortalBeanLocatorUtil.locate(CalendarFactoryUtil.class.getName());
-		}
-
 		return _calendarFactory;
 	}
 

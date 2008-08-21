@@ -41,10 +41,6 @@ import junit.framework.TestCase;
  */
 public class BaseTestCase extends TestCase {
 
-	static {
-		InitUtil.init();
-	}
-
 	protected void assertEquals(double expected, double actual)
 		throws Exception {
 
@@ -76,7 +72,7 @@ public class BaseTestCase extends TestCase {
 	}
 
 	protected void setUp() throws Exception {
-		SpringUtil.initContext();
+		InitUtil.initWithSpring();
 	}
 
 	private Random _random = new Random();

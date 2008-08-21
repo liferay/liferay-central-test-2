@@ -22,8 +22,6 @@
 
 package com.liferay.portal.kernel.search;
 
-import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
-
 /**
  * <a href="BooleanQueryFactoryUtil.java.html"><b><i>View Source</i></b></a>
  *
@@ -37,11 +35,6 @@ public class BooleanQueryFactoryUtil {
 	}
 
 	public static BooleanQueryFactory getBooleanQueryFactory() {
-		if (_booleanQueryFactory == null) {
-			PortalBeanLocatorUtil.locate(
-				BooleanQueryFactoryUtil.class.getName());
-		}
-
 		return _booleanQueryFactory;
 	}
 

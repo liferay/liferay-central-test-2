@@ -22,8 +22,6 @@
 
 package com.liferay.portal.kernel.util;
 
-import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
-
 /**
  * <a href="HtmlUtil.java.html"><b><i>View Source</i></b></a>
  *
@@ -47,10 +45,6 @@ public class HtmlUtil {
 	}
 
 	public static Html getHtml() {
-		if (_html == null) {
-			PortalBeanLocatorUtil.locate(HtmlUtil.class.getName());
-		}
-
 		return _html;
 	}
 

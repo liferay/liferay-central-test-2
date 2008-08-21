@@ -26,16 +26,12 @@ import com.liferay.portal.bean.BeanLocatorImpl;
 import com.liferay.portal.kernel.bean.BeanLocator;
 import com.liferay.portal.kernel.bean.PortletBeanLocatorUtil;
 import com.liferay.portal.kernel.portlet.PortletClassLoaderUtil;
-import com.liferay.portal.spring.util.SpringUtil;
-
-import java.lang.reflect.Method;
 
 import javax.servlet.ServletContext;
 import javax.servlet.ServletContextEvent;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-
 import org.springframework.context.ApplicationContext;
 import org.springframework.web.context.ContextLoaderListener;
 import org.springframework.web.context.support.WebApplicationContextUtils;
@@ -64,23 +60,6 @@ public class PortletContextLoaderListener extends ContextLoaderListener {
 
 		PortletBeanLocatorUtil.setBeanLocator(
 			servletContext.getServletContextName(), beanLocator);
-
-		try {
-			Class<?> beanLocatorUtilClass = Class.forName(
-				"com.liferay.util.bean.PortletBeanLocatorUtil", true,
-				classLoader);
-
-			Method setBeanLocatorMethod = beanLocatorUtilClass.getMethod(
-				"setBeanLocator", new Class[] {BeanLocator.class});
-
-			setBeanLocatorMethod.invoke(
-				beanLocatorUtilClass, new Object[] {beanLocator});
-		}
-		catch (Exception e) {
-			_log.error(e, e);
-		}
-
-		SpringUtil.initContext(applicationContext);
 	}
 
 	private static Log _log =

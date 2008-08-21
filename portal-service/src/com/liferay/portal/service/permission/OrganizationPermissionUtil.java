@@ -24,7 +24,6 @@ package com.liferay.portal.service.permission;
 
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
-import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
 import com.liferay.portal.security.permission.PermissionChecker;
 
 /**
@@ -54,11 +53,6 @@ public class OrganizationPermissionUtil {
 	}
 
 	public static OrganizationPermission getOrganizationPermission() {
-		if (_organizationPermission == null) {
-			PortalBeanLocatorUtil.locate(
-				OrganizationPermissionUtil.class.getName());
-		}
-
 		return _organizationPermission;
 	}
 

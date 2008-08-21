@@ -22,8 +22,6 @@
 
 package com.liferay.portal.kernel.dao.jdbc;
 
-import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
-
 import javax.sql.DataSource;
 
 /**
@@ -41,10 +39,6 @@ public class SqlUpdateFactoryUtil {
 	}
 
 	public static SqlUpdateFactory getSqlUpdateFactory() {
-		if (_sqlUpdateFactory == null) {
-			PortalBeanLocatorUtil.locate(SqlUpdateFactoryUtil.class.getName());
-		}
-
 		return _sqlUpdateFactory;
 	}
 

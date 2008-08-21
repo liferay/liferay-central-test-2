@@ -24,24 +24,18 @@ package com.liferay.portal.bean;
 
 import com.liferay.portal.kernel.bean.BeanLocator;
 import com.liferay.portal.kernel.bean.BeanLocatorException;
-import com.liferay.portal.spring.util.SpringUtil;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-
 import org.springframework.context.ApplicationContext;
 
 /**
- * <a href="BeanLocatorImpl.java.html"><b><i>View Source</i></b></a>
+ * <a href="PortalBeanLocatorImpl.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *
  */
 public class BeanLocatorImpl implements BeanLocator {
-
-	public BeanLocatorImpl() {
-		this(BeanLocatorImpl.class.getClassLoader(), null);
-	}
 
 	public BeanLocatorImpl(
 		ClassLoader classLoader, ApplicationContext applicationContext) {
@@ -54,11 +48,11 @@ public class BeanLocatorImpl implements BeanLocator {
 		return _classLoader;
 	}
 
+	public ApplicationContext getContext() {
+		return _applicationContext;
+	}
+	
 	public Object locate(String name) throws BeanLocatorException {
-		if (_applicationContext == null) {
-			_applicationContext = SpringUtil.getContext();
-		}
-
 		if (_log.isDebugEnabled()) {
 			_log.debug("Locating " + name);
 		}
@@ -70,5 +64,4 @@ public class BeanLocatorImpl implements BeanLocator {
 
 	private ClassLoader _classLoader;
 	private ApplicationContext _applicationContext;
-
 }

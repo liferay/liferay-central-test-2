@@ -22,7 +22,6 @@
 
 package com.liferay.portal.webcache;
 
-import com.liferay.portal.kernel.bean.InitializingBean;
 import com.liferay.portal.kernel.cache.PortalCache;
 import com.liferay.portal.kernel.cache.SingleVMPool;
 import com.liferay.portal.kernel.util.Time;
@@ -39,7 +38,7 @@ import org.apache.commons.logging.LogFactory;
  * @author Brian Wing Shun Chan
  *
  */
-public class WebCachePoolImpl implements InitializingBean, WebCachePool {
+public class WebCachePoolImpl implements WebCachePool {
 
 	public static final String CACHE_NAME = WebCachePool.class.getName();
 

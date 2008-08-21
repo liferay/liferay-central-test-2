@@ -22,8 +22,6 @@
 
 package com.liferay.portal.kernel.cache;
 
-import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
-
 import java.io.Serializable;
 
 import java.util.Map;
@@ -62,10 +60,6 @@ public class MultiVMPoolUtil {
 	}
 
 	public static MultiVMPool getMultiVMPool() {
-		if (_multiVMPool == null) {
-			PortalBeanLocatorUtil.locate(MultiVMPoolUtil.class.getName());
-		}
-
 		return _multiVMPool;
 	}
 

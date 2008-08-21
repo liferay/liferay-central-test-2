@@ -1,311 +1,244 @@
 <?xml version="1.0"?>
-<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN" "http://www.springframework.org/dtd/spring-beans.dtd">
 
-<beans>
-	<bean id="logInterceptor" class="com.liferay.portal.spring.aop.LogInterceptor" lazy-init="true" />
-	<bean id="velocityServiceInterceptor" class="com.liferay.portal.spring.aop.BeanInterceptor" lazy-init="true">
-		<property name="exceptionSafe">
-			<value>true</value>
-		</property>
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd">
+	<bean id="logInterceptor" class="com.liferay.portal.spring.aop.LogInterceptor" />
+	<bean id="velocityServiceInterceptor" class="com.liferay.portal.spring.aop.BeanInterceptor" >
+		<property name="exceptionSafe" value="true" />
 	</bean>
-	<bean id="com.liferay.portal.bean.BeanPropertiesImpl" class="com.liferay.portal.bean.BeanPropertiesImpl" lazy-init="true" />
-	<bean id="com.liferay.portal.kernel.bean.BeanPropertiesUtil" class="com.liferay.portal.kernel.bean.BeanPropertiesUtil" lazy-init="true">
+	<bean id="com.liferay.portal.kernel.bean.BeanPropertiesUtil" class="com.liferay.portal.kernel.bean.BeanPropertiesUtil" >
 		<property name="beanProperties">
-			<ref bean="com.liferay.portal.bean.BeanPropertiesImpl" />
+			<bean class="com.liferay.portal.bean.BeanPropertiesImpl" />
 		</property>
 	</bean>
-	<bean id="com.liferay.portal.cache.MultiVMPortalCacheManager" class="com.liferay.portal.cache.EhcachePortalCacheManager" lazy-init="true">
+	<bean id="com.liferay.portal.cache.MultiVMPortalCacheManager" class="com.liferay.portal.cache.EhcachePortalCacheManager" >
 		<property name="configPropertyKey" value="ehcache.multi.vm.config.location" />
 	</bean>
-	<bean id="com.liferay.portal.cache.MultiVMPoolImpl" class="com.liferay.portal.cache.MultiVMPoolImpl" lazy-init="true">
-		<property name="portalCacheManager">
-			<ref bean="com.liferay.portal.cache.MultiVMPortalCacheManager" />
-		</property>
+	<bean id="com.liferay.portal.cache.MultiVMPoolImpl" class="com.liferay.portal.cache.MultiVMPoolImpl" >
+		<property name="portalCacheManager" ref="com.liferay.portal.cache.MultiVMPortalCacheManager" />
 	</bean>
-	<bean id="com.liferay.portal.kernel.cache.MultiVMPoolUtil" class="com.liferay.portal.kernel.cache.MultiVMPoolUtil" lazy-init="true">
-		<property name="multiVMPool">
-			<ref bean="com.liferay.portal.cache.MultiVMPoolImpl" />
-		</property>
+	<bean id="com.liferay.portal.kernel.cache.MultiVMPoolUtil" class="com.liferay.portal.kernel.cache.MultiVMPoolUtil" >
+		<property name="multiVMPool" ref="com.liferay.portal.cache.MultiVMPoolImpl" />
 	</bean>
-	<bean id="com.liferay.portal.cache.SingleVMPortalCacheManager" class="com.liferay.portal.cache.EhcachePortalCacheManager" lazy-init="true">
+	<bean id="com.liferay.portal.cache.SingleVMPortalCacheManager" class="com.liferay.portal.cache.EhcachePortalCacheManager">
 		<property name="configPropertyKey" value="ehcache.single.vm.config.location" />
 	</bean>
-	<bean id="com.liferay.portal.cache.SingleVMPoolImpl" class="com.liferay.portal.cache.SingleVMPoolImpl" lazy-init="true">
-		<property name="portalCacheManager">
-			<ref bean="com.liferay.portal.cache.SingleVMPortalCacheManager" />
-		</property>
+	<bean id="com.liferay.portal.cache.SingleVMPoolImpl" class="com.liferay.portal.cache.SingleVMPoolImpl">
+		<property name="portalCacheManager" ref="com.liferay.portal.cache.SingleVMPortalCacheManager" />
 	</bean>
-	<bean id="com.liferay.portal.kernel.cache.SingleVMPoolUtil" class="com.liferay.portal.kernel.cache.SingleVMPoolUtil" lazy-init="true">
-		<property name="singleVMPool">
-			<ref bean="com.liferay.portal.cache.SingleVMPoolImpl" />
-		</property>
+	<bean id="com.liferay.portal.kernel.cache.SingleVMPoolUtil" class="com.liferay.portal.kernel.cache.SingleVMPoolUtil">
+		<property name="singleVMPool" ref="com.liferay.portal.cache.SingleVMPoolImpl"/>
 	</bean>
-	<bean id="com.liferay.portal.dao.jdbc.spring.SqlUpdateFactoryImpl" class="com.liferay.portal.dao.jdbc.spring.SqlUpdateFactoryImpl" lazy-init="true" />
-	<bean id="com.liferay.portal.kernel.dao.jdbc.SqlUpdateFactoryUtil" class="com.liferay.portal.kernel.dao.jdbc.SqlUpdateFactoryUtil" lazy-init="true">
+	<bean id="com.liferay.portal.kernel.dao.jdbc.SqlUpdateFactoryUtil" class="com.liferay.portal.kernel.dao.jdbc.SqlUpdateFactoryUtil">
 		<property name="sqlUpdateFactory">
-			<ref bean="com.liferay.portal.dao.jdbc.spring.SqlUpdateFactoryImpl" />
+			<bean class="com.liferay.portal.dao.jdbc.spring.SqlUpdateFactoryImpl" />
 		</property>
 	</bean>
-	<bean id="com.liferay.portal.dao.jdbc.spring.MappingSqlQueryFactoryImpl" class="com.liferay.portal.dao.jdbc.spring.MappingSqlQueryFactoryImpl" lazy-init="true" />
-	<bean id="com.liferay.portal.kernel.dao.jdbc.MappingSqlQueryFactoryUtil" class="com.liferay.portal.kernel.dao.jdbc.MappingSqlQueryFactoryUtil" lazy-init="true">
+	<bean id="com.liferay.portal.kernel.dao.jdbc.MappingSqlQueryFactoryUtil" class="com.liferay.portal.kernel.dao.jdbc.MappingSqlQueryFactoryUtil">
 		<property name="mappingSqlQueryFactory">
-			<ref bean="com.liferay.portal.dao.jdbc.spring.MappingSqlQueryFactoryImpl" />
+			<bean class="com.liferay.portal.dao.jdbc.spring.MappingSqlQueryFactoryImpl" />
 		</property>
 	</bean>
-	<bean id="com.liferay.portal.dao.orm.hibernate.DynamicQueryFactoryImpl" class="com.liferay.portal.dao.orm.hibernate.DynamicQueryFactoryImpl" lazy-init="true" />
-	<bean id="com.liferay.portal.kernel.dao.orm.DynamicQueryFactoryUtil" class="com.liferay.portal.kernel.dao.orm.DynamicQueryFactoryUtil" lazy-init="true">
+	<bean id="com.liferay.portal.kernel.dao.orm.DynamicQueryFactoryUtil" class="com.liferay.portal.kernel.dao.orm.DynamicQueryFactoryUtil">
 		<property name="dynamicQueryFactory">
-			<ref bean="com.liferay.portal.dao.orm.hibernate.DynamicQueryFactoryImpl" />
+			<bean class="com.liferay.portal.dao.orm.hibernate.DynamicQueryFactoryImpl" />
 		</property>
 	</bean>
-	<bean id="com.liferay.portal.dao.orm.hibernate.FinderCacheImpl" class="com.liferay.portal.dao.orm.hibernate.FinderCacheImpl" lazy-init="true">
-		<property name="multiVMPool">
-			<ref bean="com.liferay.portal.cache.MultiVMPoolImpl" />
-		</property>
-	</bean>
-	<bean id="com.liferay.portal.kernel.dao.orm.FinderCacheUtil" class="com.liferay.portal.kernel.dao.orm.FinderCacheUtil" lazy-init="true">
+	<bean id="com.liferay.portal.kernel.dao.orm.FinderCacheUtil" class="com.liferay.portal.kernel.dao.orm.FinderCacheUtil">
 		<property name="finderCache">
-			<ref bean="com.liferay.portal.dao.orm.hibernate.FinderCacheImpl" />
+			<bean class="com.liferay.portal.dao.orm.hibernate.FinderCacheImpl" init-method="afterPropertiesSet">
+				<property name="multiVMPool" ref="com.liferay.portal.cache.MultiVMPoolImpl" />
+			</bean>
 		</property>
 	</bean>
-	<bean id="com.liferay.portal.dao.orm.hibernate.OrderFactoryImpl" class="com.liferay.portal.dao.orm.hibernate.OrderFactoryImpl" lazy-init="true" />
-	<bean id="com.liferay.portal.kernel.dao.orm.OrderFactoryUtil" class="com.liferay.portal.kernel.dao.orm.OrderFactoryUtil" lazy-init="true">
+	<bean id="com.liferay.portal.kernel.dao.orm.OrderFactoryUtil" class="com.liferay.portal.kernel.dao.orm.OrderFactoryUtil">
 		<property name="orderFactory">
-			<ref bean="com.liferay.portal.dao.orm.hibernate.OrderFactoryImpl" />
+			<bean class="com.liferay.portal.dao.orm.hibernate.OrderFactoryImpl" />
 		</property>
 	</bean>
-	<bean id="com.liferay.portal.dao.orm.hibernate.ProjectionFactoryImpl" class="com.liferay.portal.dao.orm.hibernate.ProjectionFactoryImpl" lazy-init="true" />
-	<bean id="com.liferay.portal.kernel.dao.orm.ProjectionFactoryUtil" class="com.liferay.portal.kernel.dao.orm.ProjectionFactoryUtil" lazy-init="true">
+	<bean id="com.liferay.portal.kernel.dao.orm.ProjectionFactoryUtil" class="com.liferay.portal.kernel.dao.orm.ProjectionFactoryUtil">
 		<property name="projectionFactory">
-			<ref bean="com.liferay.portal.dao.orm.hibernate.ProjectionFactoryImpl" />
+			<bean class="com.liferay.portal.dao.orm.hibernate.ProjectionFactoryImpl" />
 		</property>
 	</bean>
-	<bean id="com.liferay.portal.dao.orm.hibernate.PropertyFactoryImpl" class="com.liferay.portal.dao.orm.hibernate.PropertyFactoryImpl" lazy-init="true" />
-	<bean id="com.liferay.portal.kernel.dao.orm.PropertyFactoryUtil" class="com.liferay.portal.kernel.dao.orm.PropertyFactoryUtil" lazy-init="true">
+	<bean id="com.liferay.portal.kernel.dao.orm.PropertyFactoryUtil" class="com.liferay.portal.kernel.dao.orm.PropertyFactoryUtil">
 		<property name="propertyFactory">
-			<ref bean="com.liferay.portal.dao.orm.hibernate.PropertyFactoryImpl" />
+			<bean class="com.liferay.portal.dao.orm.hibernate.PropertyFactoryImpl" />
 		</property>
 	</bean>
-	<bean id="com.liferay.portal.image.ImageProcessorImpl" class="com.liferay.portal.image.ImageProcessorImpl" lazy-init="true" />
-	<bean id="com.liferay.portal.kernel.image.ImageProcessorUtil" class="com.liferay.portal.kernel.image.ImageProcessorUtil" lazy-init="true">
+	<bean id="com.liferay.portal.kernel.image.ImageProcessorUtil" class="com.liferay.portal.kernel.image.ImageProcessorUtil">
 		<property name="imageProcessor">
-			<ref bean="com.liferay.portal.image.ImageProcessorImpl" />
+			<bean class="com.liferay.portal.image.ImageProcessorImpl" />
 		</property>
 	</bean>
-	<bean id="com.liferay.portal.job.JobSchedulerImpl" class="com.liferay.portal.job.JobSchedulerImpl" lazy-init="true" />
-	<bean id="com.liferay.portal.kernel.job.JobSchedulerUtil" class="com.liferay.portal.kernel.job.JobSchedulerUtil" lazy-init="true">
-		<property name="jobScheduler">
-			<ref bean="com.liferay.portal.job.JobSchedulerImpl" />
-		</property>
-	</bean>
-	<bean id="com.liferay.portal.jndi.PortalJNDIImpl" class="com.liferay.portal.jndi.PortalJNDIImpl" lazy-init="true" />
-	<bean id="com.liferay.portal.kernel.jndi.PortalJNDIUtil" class="com.liferay.portal.kernel.jndi.PortalJNDIUtil" lazy-init="true">
-		<property name="portalJNDI">
-			<ref bean="com.liferay.portal.jndi.PortalJNDIImpl" />
-		</property>
-	</bean>
-	<bean id="com.liferay.portal.json.JSONFactoryImpl" class="com.liferay.portal.json.JSONFactoryImpl" lazy-init="true" />
-	<bean id="com.liferay.portal.kernel.json.JSONFactoryUtil" class="com.liferay.portal.kernel.json.JSONFactoryUtil" lazy-init="true">
+	<bean id="com.liferay.portal.kernel.json.JSONFactoryUtil" class="com.liferay.portal.kernel.json.JSONFactoryUtil">
 		<property name="JSONFactory">
-			<ref bean="com.liferay.portal.json.JSONFactoryImpl" />
+			<bean class="com.liferay.portal.json.JSONFactoryImpl" />
 		</property>
 	</bean>
-	<bean id="com.liferay.portal.language.LanguageImpl" class="com.liferay.portal.language.LanguageImpl" lazy-init="true" />
-	<bean id="com.liferay.portal.kernel.language.LanguageUtil" class="com.liferay.portal.kernel.language.LanguageUtil" lazy-init="true">
+	<bean id="com.liferay.portal.kernel.language.LanguageUtil" class="com.liferay.portal.kernel.language.LanguageUtil">
 		<property name="language">
-			<ref bean="com.liferay.portal.language.LanguageImpl" />
+			<bean class="com.liferay.portal.language.LanguageImpl" />
 		</property>
 	</bean>
-	<bean id="com.liferay.portal.language.UnicodeLanguageImpl" class="com.liferay.portal.language.UnicodeLanguageImpl" lazy-init="true" />
-	<bean id="com.liferay.portal.kernel.language.UnicodeLanguageUtil" class="com.liferay.portal.kernel.language.UnicodeLanguageUtil" lazy-init="true">
+	<bean id="com.liferay.portal.kernel.language.UnicodeLanguageUtil" class="com.liferay.portal.kernel.language.UnicodeLanguageUtil">
 		<property name="unicodeLanguage">
-			<ref bean="com.liferay.portal.language.UnicodeLanguageImpl" />
+			<bean class="com.liferay.portal.language.UnicodeLanguageImpl" />
 		</property>
 	</bean>
-	<bean id="com.liferay.portal.kernel.messaging.MessageBus" class="com.liferay.portal.messaging.PortalMessageBus" lazy-init="true">
+	<bean id="com.liferay.portal.kernel.messaging.MessageBus" class="com.liferay.portal.messaging.PortalMessageBus">
 		<property name="messageBus">
-			<bean class="com.liferay.portal.kernel.messaging.DefaultMessageBus" lazy-init="true" />
+			<bean class="com.liferay.portal.kernel.messaging.DefaultMessageBus" />
 		</property>
 	</bean>
-	<bean id="com.liferay.portal.kernel.messaging.MessageSender" class="com.liferay.portal.kernel.messaging.DefaultMessageSender" lazy-init="true">
+	<bean id="com.liferay.portal.kernel.messaging.MessageSender" class="com.liferay.portal.kernel.messaging.DefaultMessageSender">
 		<property name="messageBus">
 			<ref bean="com.liferay.portal.kernel.messaging.MessageBus" />
 		</property>
 	</bean>
-	<bean id="com.liferay.portal.model.ModelHintsImpl" class="com.liferay.portal.model.ModelHintsImpl" lazy-init="true" />
-	<bean id="com.liferay.portal.model.ModelHintsUtil" class="com.liferay.portal.model.ModelHintsUtil" lazy-init="true">
+	<bean id="com.liferay.portal.model.ModelHintsUtil" class="com.liferay.portal.model.ModelHintsUtil">
 		<property name="modelHints">
-			<ref bean="com.liferay.portal.model.ModelHintsImpl" />
+			<bean class="com.liferay.portal.model.ModelHintsImpl" init-method="afterPropertiesSet">
+				<property name="SAXReader">
+					<bean class="com.liferay.portal.xml.SAXReaderImpl" scope="prototype" />
+				</property>
+			</bean>
 		</property>
 	</bean>
-	<bean id="com.liferay.portal.search.lucene.BooleanQueryFactoryImpl" class="com.liferay.portal.search.lucene.BooleanQueryFactoryImpl" lazy-init="true" />
-	<bean id="com.liferay.portal.kernel.search.BooleanQueryFactoryUtil" class="com.liferay.portal.kernel.search.BooleanQueryFactoryUtil" lazy-init="true">
+	<bean id="com.liferay.portal.kernel.search.BooleanQueryFactoryUtil" class="com.liferay.portal.kernel.search.BooleanQueryFactoryUtil">
 		<property name="booleanQueryFactory">
-			<ref bean="com.liferay.portal.search.lucene.BooleanQueryFactoryImpl" />
+			<bean class="com.liferay.portal.search.lucene.BooleanQueryFactoryImpl" />
 		</property>
 	</bean>
-	<bean id="com.liferay.portal.search.lucene.TermQueryFactoryImpl" class="com.liferay.portal.search.lucene.TermQueryFactoryImpl" lazy-init="true" />
-	<bean id="com.liferay.portal.kernel.search.TermQueryFactoryUtil" class="com.liferay.portal.kernel.search.TermQueryFactoryUtil" lazy-init="true">
+	<bean id="com.liferay.portal.kernel.search.TermQueryFactoryUtil" class="com.liferay.portal.kernel.search.TermQueryFactoryUtil">
 		<property name="termQueryFactory">
-			<ref bean="com.liferay.portal.search.lucene.TermQueryFactoryImpl" />
+			<bean class="com.liferay.portal.search.lucene.TermQueryFactoryImpl" />
 		</property>
 	</bean>
-	<bean id="com.liferay.portal.service.permission.AccountPermissionImpl" class="com.liferay.portal.service.permission.AccountPermissionImpl" lazy-init="true" />
-	<bean id="com.liferay.portal.service.permission.AccountPermissionUtil" class="com.liferay.portal.service.permission.AccountPermissionUtil" lazy-init="true">
+	<bean id="com.liferay.portal.service.permission.AccountPermissionUtil" class="com.liferay.portal.service.permission.AccountPermissionUtil">
 		<property name="accountPermission">
-			<ref bean="com.liferay.portal.service.permission.AccountPermissionImpl" />
+			<bean class="com.liferay.portal.service.permission.AccountPermissionImpl" />
 		</property>
 	</bean>
-	<bean id="com.liferay.portal.service.permission.CommonPermissionImpl" class="com.liferay.portal.service.permission.CommonPermissionImpl" lazy-init="true" />
-	<bean id="com.liferay.portal.service.permission.CommonPermissionUtil" class="com.liferay.portal.service.permission.CommonPermissionUtil" lazy-init="true">
+	<bean id="com.liferay.portal.service.permission.CommonPermissionUtil" class="com.liferay.portal.service.permission.CommonPermissionUtil">
 		<property name="commonPermission">
-			<ref bean="com.liferay.portal.service.permission.CommonPermissionImpl" />
+			<bean class="com.liferay.portal.service.permission.CommonPermissionImpl" />
 		</property>
 	</bean>
-	<bean id="com.liferay.portal.service.permission.GroupPermissionImpl" class="com.liferay.portal.service.permission.GroupPermissionImpl" lazy-init="true" />
-	<bean id="com.liferay.portal.service.permission.GroupPermissionUtil" class="com.liferay.portal.service.permission.GroupPermissionUtil" lazy-init="true">
+	<bean id="com.liferay.portal.service.permission.GroupPermissionUtil" class="com.liferay.portal.service.permission.GroupPermissionUtil">
 		<property name="groupPermission">
-			<ref bean="com.liferay.portal.service.permission.GroupPermissionImpl" />
+			<bean class="com.liferay.portal.service.permission.GroupPermissionImpl" />
 		</property>
 	</bean>
-	<bean id="com.liferay.portal.service.permission.LayoutPermissionImpl" class="com.liferay.portal.service.permission.LayoutPermissionImpl" lazy-init="true" />
-	<bean id="com.liferay.portal.service.permission.LayoutPermissionUtil" class="com.liferay.portal.service.permission.LayoutPermissionUtil" lazy-init="true">
+	<bean id="com.liferay.portal.service.permission.LayoutPermissionUtil" class="com.liferay.portal.service.permission.LayoutPermissionUtil">
 		<property name="layoutPermission">
-			<ref bean="com.liferay.portal.service.permission.LayoutPermissionImpl" />
+			<bean class="com.liferay.portal.service.permission.LayoutPermissionImpl" />
 		</property>
 	</bean>
-	<bean id="com.liferay.portal.service.permission.OrganizationPermissionImpl" class="com.liferay.portal.service.permission.OrganizationPermissionImpl" lazy-init="true" />
-	<bean id="com.liferay.portal.service.permission.OrganizationPermissionUtil" class="com.liferay.portal.service.permission.OrganizationPermissionUtil" lazy-init="true">
+	<bean id="com.liferay.portal.service.permission.OrganizationPermissionUtil" class="com.liferay.portal.service.permission.OrganizationPermissionUtil">
 		<property name="organizationPermission">
-			<ref bean="com.liferay.portal.service.permission.OrganizationPermissionImpl" />
+			<bean class="com.liferay.portal.service.permission.OrganizationPermissionImpl" />
 		</property>
 	</bean>
-	<bean id="com.liferay.portal.service.permission.PasswordPolicyPermissionImpl" class="com.liferay.portal.service.permission.PasswordPolicyPermissionImpl" lazy-init="true" />
-	<bean id="com.liferay.portal.service.permission.PasswordPolicyPermissionUtil" class="com.liferay.portal.service.permission.PasswordPolicyPermissionUtil" lazy-init="true">
+	<bean id="com.liferay.portal.service.permission.PasswordPolicyPermissionUtil" class="com.liferay.portal.service.permission.PasswordPolicyPermissionUtil">
 		<property name="passwordPolicyPermission">
-			<ref bean="com.liferay.portal.service.permission.PasswordPolicyPermissionImpl" />
+			<bean class="com.liferay.portal.service.permission.PasswordPolicyPermissionImpl" />
 		</property>
 	</bean>
-	<bean id="com.liferay.portal.service.permission.PortalPermissionImpl" class="com.liferay.portal.service.permission.PortalPermissionImpl" lazy-init="true" />
-	<bean id="com.liferay.portal.service.permission.PortalPermissionUtil" class="com.liferay.portal.service.permission.PortalPermissionUtil" lazy-init="true">
+	<bean id="com.liferay.portal.service.permission.PortalPermissionUtil" class="com.liferay.portal.service.permission.PortalPermissionUtil">
 		<property name="portalPermission">
-			<ref bean="com.liferay.portal.service.permission.PortalPermissionImpl" />
+			<bean class="com.liferay.portal.service.permission.PortalPermissionImpl" />
 		</property>
 	</bean>
-	<bean id="com.liferay.portal.service.permission.PortletPermissionImpl" class="com.liferay.portal.service.permission.PortletPermissionImpl" lazy-init="true" />
-	<bean id="com.liferay.portal.service.permission.PortletPermissionUtil" class="com.liferay.portal.service.permission.PortletPermissionUtil" lazy-init="true">
+	<bean id="com.liferay.portal.service.permission.PortletPermissionUtil" class="com.liferay.portal.service.permission.PortletPermissionUtil">
 		<property name="portletPermission">
-			<ref bean="com.liferay.portal.service.permission.PortletPermissionImpl" />
+			<bean class="com.liferay.portal.service.permission.PortletPermissionImpl" />
 		</property>
 	</bean>
-	<bean id="com.liferay.portal.service.permission.RolePermissionImpl" class="com.liferay.portal.service.permission.RolePermissionImpl" lazy-init="true" />
-	<bean id="com.liferay.portal.service.permission.RolePermissionUtil" class="com.liferay.portal.service.permission.RolePermissionUtil" lazy-init="true">
+	<bean id="com.liferay.portal.service.permission.RolePermissionUtil" class="com.liferay.portal.service.permission.RolePermissionUtil">
 		<property name="rolePermission">
-			<ref bean="com.liferay.portal.service.permission.RolePermissionImpl" />
+			<bean class="com.liferay.portal.service.permission.RolePermissionImpl" />
 		</property>
 	</bean>
-	<bean id="com.liferay.portal.service.permission.UserGroupPermissionImpl" class="com.liferay.portal.service.permission.UserGroupPermissionImpl" lazy-init="true" />
-	<bean id="com.liferay.portal.service.permission.UserGroupPermissionUtil" class="com.liferay.portal.service.permission.UserGroupPermissionUtil" lazy-init="true">
+	<bean id="com.liferay.portal.service.permission.UserGroupPermissionUtil" class="com.liferay.portal.service.permission.UserGroupPermissionUtil">
 		<property name="userGroupPermission">
-			<ref bean="com.liferay.portal.service.permission.UserGroupPermissionImpl" />
+			<bean class="com.liferay.portal.service.permission.UserGroupPermissionImpl" />
 		</property>
 	</bean>
-	<bean id="com.liferay.portal.service.permission.UserPermissionImpl" class="com.liferay.portal.service.permission.UserPermissionImpl" lazy-init="true" />
-	<bean id="com.liferay.portal.service.permission.UserPermissionUtil" class="com.liferay.portal.service.permission.UserPermissionUtil" lazy-init="true">
+	<bean id="com.liferay.portal.service.permission.UserPermissionUtil" class="com.liferay.portal.service.permission.UserPermissionUtil">
 		<property name="userPermission">
-			<ref bean="com.liferay.portal.service.permission.UserPermissionImpl" />
+			<bean class="com.liferay.portal.service.permission.UserPermissionImpl" />
 		</property>
 	</bean>
-	<bean id="com.liferay.portal.servlet.BrowserSnifferImpl" class="com.liferay.portal.servlet.BrowserSnifferImpl" lazy-init="true" />
-	<bean id="com.liferay.portal.kernel.servlet.BrowserSnifferUtil" class="com.liferay.portal.kernel.servlet.BrowserSnifferUtil" lazy-init="true">
+	<bean id="com.liferay.portal.kernel.servlet.BrowserSnifferUtil" class="com.liferay.portal.kernel.servlet.BrowserSnifferUtil">
 		<property name="browserSniffer">
-			<ref bean="com.liferay.portal.servlet.BrowserSnifferImpl" />
+			<bean class="com.liferay.portal.servlet.BrowserSnifferImpl" />
 		</property>
 	</bean>
-	<bean id="com.liferay.portal.servlet.ImageServletTokenImpl" class="com.liferay.portal.servlet.ImageServletTokenImpl" lazy-init="true">
-		<property name="multiVMPool">
-			<ref bean="com.liferay.portal.cache.MultiVMPoolImpl" />
-		</property>
-	</bean>
-	<bean id="com.liferay.portal.kernel.servlet.ImageServletTokenUtil" class="com.liferay.portal.kernel.servlet.ImageServletTokenUtil" lazy-init="true">
+	<bean id="com.liferay.portal.kernel.servlet.ImageServletTokenUtil" class="com.liferay.portal.kernel.servlet.ImageServletTokenUtil">
 		<property name="imageServletToken">
-			<ref bean="com.liferay.portal.servlet.ImageServletTokenImpl" />
+			<bean class="com.liferay.portal.servlet.ImageServletTokenImpl" init-method="afterPropertiesSet">
+				<property name="multiVMPool" ref="com.liferay.portal.cache.MultiVMPoolImpl" />
+			</bean>
 		</property>
 	</bean>
-	<bean id="com.liferay.portal.util.CalendarFactoryImpl" class="com.liferay.portal.util.CalendarFactoryImpl" lazy-init="true" />
-	<bean id="com.liferay.portal.kernel.util.CalendarFactoryUtil" class="com.liferay.portal.kernel.util.CalendarFactoryUtil" lazy-init="true">
+	<bean id="com.liferay.portal.kernel.util.CalendarFactoryUtil" class="com.liferay.portal.kernel.util.CalendarFactoryUtil">
 		<property name="calendarFactory">
-			<ref bean="com.liferay.portal.util.CalendarFactoryImpl" />
+			<bean class="com.liferay.portal.util.CalendarFactoryImpl" />
 		</property>
 	</bean>
-	<bean id="com.liferay.portal.util.DiffImpl" class="com.liferay.portal.util.DiffImpl" lazy-init="true" />
-	<bean id="com.liferay.portal.kernel.util.DiffUtil" class="com.liferay.portal.kernel.util.DiffUtil" lazy-init="true">
+	<bean id="com.liferay.portal.kernel.util.DiffUtil" class="com.liferay.portal.kernel.util.DiffUtil">
 		<property name="diff">
-			<ref bean="com.liferay.portal.util.DiffImpl" />
+			<bean class="com.liferay.portal.util.DiffImpl" />
 		</property>
 	</bean>
-	<bean id="com.liferay.portal.util.DigesterImpl" class="com.liferay.portal.util.DigesterImpl" lazy-init="true" />
-	<bean id="com.liferay.portal.kernel.util.DigesterUtil" class="com.liferay.portal.kernel.util.DigesterUtil" lazy-init="true">
+	<bean id="com.liferay.portal.kernel.util.DigesterUtil" class="com.liferay.portal.kernel.util.DigesterUtil">
 		<property name="digester">
-			<ref bean="com.liferay.portal.util.DigesterImpl" />
+			<bean class="com.liferay.portal.util.DigesterImpl" />
 		</property>
 	</bean>
-	<bean id="com.liferay.portal.util.FileImpl" class="com.liferay.portal.util.FileImpl" lazy-init="true" />
-	<bean id="com.liferay.portal.kernel.util.FileUtil" class="com.liferay.portal.kernel.util.FileUtil" lazy-init="true">
+	<bean id="com.liferay.portal.kernel.util.FileUtil" class="com.liferay.portal.kernel.util.FileUtil">
 		<property name="file">
-			<ref bean="com.liferay.portal.util.FileImpl" />
+			<bean class="com.liferay.portal.util.FileImpl" />
 		</property>
 	</bean>
-	<bean id="com.liferay.portal.util.HtmlImpl" class="com.liferay.portal.util.HtmlImpl" lazy-init="true" />
-	<bean id="com.liferay.portal.kernel.util.HtmlUtil" class="com.liferay.portal.kernel.util.HtmlUtil" lazy-init="true">
+	<bean id="com.liferay.portal.kernel.util.HtmlUtil" class="com.liferay.portal.kernel.util.HtmlUtil">
 		<property name="html">
-			<ref bean="com.liferay.portal.util.HtmlImpl" />
+			<bean class="com.liferay.portal.util.HtmlImpl" />
 		</property>
 	</bean>
-	<bean id="com.liferay.portal.util.HttpImpl" class="com.liferay.portal.util.HttpImpl" lazy-init="true" />
-	<bean id="com.liferay.portal.kernel.util.HttpUtil" class="com.liferay.portal.kernel.util.HttpUtil" lazy-init="true">
+	<bean id="com.liferay.portal.kernel.util.HttpUtil" class="com.liferay.portal.kernel.util.HttpUtil">
 		<property name="http">
-			<ref bean="com.liferay.portal.util.HttpImpl" />
+			<bean class="com.liferay.portal.util.HttpImpl" />
 		</property>
 	</bean>
-	<bean id="com.liferay.portal.util.MimeTypesImpl" class="com.liferay.portal.util.MimeTypesImpl" lazy-init="true" />
-	<bean id="com.liferay.portal.kernel.util.MimeTypesUtil" class="com.liferay.portal.kernel.util.MimeTypesUtil" lazy-init="true">
+	<bean id="com.liferay.portal.kernel.util.MimeTypesUtil" class="com.liferay.portal.kernel.util.MimeTypesUtil">
 		<property name="mimeTypes">
-			<ref bean="com.liferay.portal.util.MimeTypesImpl" />
+			<bean class="com.liferay.portal.util.MimeTypesImpl" />
 		</property>
 	</bean>
-	<bean id="com.liferay.portal.util.PortalImpl" class="com.liferay.portal.util.PortalImpl" lazy-init="true" />
-	<bean id="com.liferay.portal.util.PortalUtil" class="com.liferay.portal.util.PortalUtil" lazy-init="true">
+	<bean id="com.liferay.portal.util.PortalUtil" class="com.liferay.portal.util.PortalUtil">
 		<property name="portal">
-			<ref bean="com.liferay.portal.util.PortalImpl" />
+			<bean class="com.liferay.portal.util.PortalImpl" />
 		</property>
 	</bean>
-	<bean id="com.liferay.portal.uuid.PortalUUIDImpl" class="com.liferay.portal.uuid.PortalUUIDImpl" lazy-init="true" />
-	<bean id="com.liferay.portal.kernel.uuid.PortalUUIDUtil" class="com.liferay.portal.kernel.uuid.PortalUUIDUtil" lazy-init="true">
+	<bean id="com.liferay.portal.kernel.uuid.PortalUUIDUtil" class="com.liferay.portal.kernel.uuid.PortalUUIDUtil">
 		<property name="portalUUID">
-			<ref bean="com.liferay.portal.uuid.PortalUUIDImpl" />
+			<bean class="com.liferay.portal.uuid.PortalUUIDImpl" />
 		</property>
 	</bean>
-	<bean id="com.liferay.portal.webcache.WebCachePoolImpl" class="com.liferay.portal.webcache.WebCachePoolImpl" lazy-init="true">
-		<property name="singleVMPool">
-			<ref bean="com.liferay.portal.cache.SingleVMPoolImpl" />
-		</property>
-	</bean>
-	<bean id="com.liferay.portal.kernel.webcache.WebCachePoolUtil" class="com.liferay.portal.kernel.webcache.WebCachePoolUtil" lazy-init="true">
+	<bean id="com.liferay.portal.kernel.webcache.WebCachePoolUtil" class="com.liferay.portal.kernel.webcache.WebCachePoolUtil">
 		<property name="webCachePool">
-			<ref bean="com.liferay.portal.webcache.WebCachePoolImpl" />
+			<bean class="com.liferay.portal.webcache.WebCachePoolImpl" init-method="afterPropertiesSet">
+				<property name="singleVMPool" ref="com.liferay.portal.cache.SingleVMPoolImpl" />
+			</bean>
 		</property>
 	</bean>
-	<bean id="com.liferay.portal.xml.SAXReaderImpl" class="com.liferay.portal.xml.SAXReaderImpl" singleton="false" lazy-init="true" />
-	<bean id="com.liferay.portal.kernel.xml.SAXReaderUtil" class="com.liferay.portal.kernel.xml.SAXReaderUtil" singleton="false" lazy-init="true">
-		<property name="SAXReader">
-			<ref bean="com.liferay.portal.xml.SAXReaderImpl" />
-		</property>
+	<bean id="com.liferay.portal.kernel.xml.SAXReaderUtil" class="com.liferay.portal.kernel.xml.SAXReaderUtil">
+		<property name="SAXReaderClass" value="com.liferay.portal.xml.SAXReaderImpl" />
 	</bean>
-	<bean id="com.liferay.portlet.PortletPreferencesFactoryImpl" class="com.liferay.portlet.PortletPreferencesFactoryImpl" lazy-init="true" />
-	<bean id="com.liferay.portlet.PortletPreferencesFactoryUtil" class="com.liferay.portlet.PortletPreferencesFactoryUtil" lazy-init="true">
+	<bean id="com.liferay.portlet.PortletPreferencesFactoryUtil" class="com.liferay.portlet.PortletPreferencesFactoryUtil">
 		<property name="portletPreferencesFactory">
-			<ref bean="com.liferay.portlet.PortletPreferencesFactoryImpl" />
+			<bean class="com.liferay.portlet.PortletPreferencesFactoryImpl" />
 		</property>
 	</bean>
 </beans>

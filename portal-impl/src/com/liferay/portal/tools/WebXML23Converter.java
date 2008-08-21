@@ -41,11 +41,9 @@ import java.util.Iterator;
  */
 public class WebXML23Converter {
 
-	static {
-		InitUtil.init();
-	}
-
 	public static void main(String[] args) {
+		InitUtil.initWithSpring();
+
 		if (args.length == 2) {
 			new WebXML23Converter(args[0], args[1]);
 		}

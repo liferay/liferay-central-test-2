@@ -22,8 +22,6 @@
 
 package com.liferay.portal.kernel.servlet;
 
-import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
-
 /**
  * <a href="ImageServletTokenUtil.java.html"><b><i>View Source</i></b></a>
  *
@@ -33,10 +31,6 @@ import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
 public class ImageServletTokenUtil {
 
 	public static ImageServletToken getImageServletToken() {
-		if (_imageServletToken == null) {
-			PortalBeanLocatorUtil.locate(ImageServletTokenUtil.class.getName());
-		}
-
 		return _imageServletToken;
 	}
 

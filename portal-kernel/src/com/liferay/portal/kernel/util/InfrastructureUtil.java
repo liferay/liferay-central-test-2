@@ -20,44 +20,38 @@
  * SOFTWARE.
  */
 
-package com.liferay.portal.kernel.jndi;
-
-import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
+package com.liferay.portal.kernel.util;
 
 import javax.mail.Session;
-
-import javax.naming.NamingException;
 
 import javax.sql.DataSource;
 
 /**
- * <a href="PortalJNDIUtil.java.html"><b><i>View Source</i></b></a>
+ * <a href="InfrastructureUtil.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
+ * @author Michael Young
  *
  */
-public class PortalJNDIUtil {
+public class InfrastructureUtil {
 
-	public static DataSource getDataSource() throws NamingException {
-		return getPortalJNDI().getDataSource();
+	public static DataSource getDataSource() {
+		return _dataSource;
 	}
 
-	public static Session getMailSession() throws NamingException {
-		return getPortalJNDI().getMailSession();
+	public static Session getMailSession() {
+		return _mailSession;
 	}
 
-	public static PortalJNDI getPortalJNDI() {
-		if (_portalJNDI == null) {
-			PortalBeanLocatorUtil.locate(PortalJNDIUtil.class.getName());
-		}
-
-		return _portalJNDI;
+	public void setDataSource(DataSource dataSource) {
+		_dataSource = dataSource;
+	}
+	
+	public void setMailSession(Session mailSession) {
+		_mailSession = mailSession;
 	}
 
-	public void setPortalJNDI(PortalJNDI portalJNDI) {
-		_portalJNDI = portalJNDI;
-	}
-
-	private static PortalJNDI _portalJNDI;
-
+	private static Session _mailSession;
+	
+	private static DataSource _dataSource;
 }

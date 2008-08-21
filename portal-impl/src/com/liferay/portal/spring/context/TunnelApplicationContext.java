@@ -22,7 +22,8 @@
 
 package com.liferay.portal.spring.context;
 
-import com.liferay.portal.spring.util.SpringUtil;
+import com.liferay.portal.bean.BeanLocatorImpl;
+import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -41,7 +42,10 @@ public class TunnelApplicationContext extends XmlWebApplicationContext {
 
 	public void setParent(ApplicationContext parent) {
 		if (parent == null) {
-			parent = SpringUtil.getContext();
+			BeanLocatorImpl beanLocator = 
+				(BeanLocatorImpl)PortalBeanLocatorUtil.getBeanLocator();
+
+			parent = beanLocator.getContext();
 		}
 
 		super.setParent(parent);

@@ -44,12 +44,9 @@ import java.util.TreeMap;
  *
  */
 public class WSDDMerger {
-
-	static {
-		InitUtil.init();
-	}
-
 	public static void main(String[] args) {
+		InitUtil.initWithSpring();
+
 		new WSDDMerger(args[0], args[1]);
 	}
 

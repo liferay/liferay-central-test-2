@@ -31,10 +31,6 @@ package com.liferay.portal.kernel.bean;
 public class BeanPropertiesUtil {
 
 	public static BeanProperties getBeanProperties() {
-		if (_beanProperties == null) {
-			PortalBeanLocatorUtil.locate(BeanPropertiesUtil.class.getName());
-		}
-
 		return _beanProperties;
 	}
 

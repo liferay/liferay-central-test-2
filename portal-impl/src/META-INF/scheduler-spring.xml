@@ -1,0 +1,13 @@
+<?xml version="1.0"?>
+
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd">
+	<bean id="com.liferay.portal.kernel.job.JobSchedulerUtil" class="com.liferay.portal.kernel.job.JobSchedulerUtil">
+		<property name="jobScheduler">
+			<bean class="com.liferay.portal.job.JobSchedulerImpl">
+				<property name="scheduler">
+					<bean class="org.springframework.scheduling.quartz.SchedulerFactoryBean" />
+				</property>
+			</bean>
+		</property>
+	</bean>
+</beans>	

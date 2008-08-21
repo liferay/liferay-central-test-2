@@ -22,7 +22,6 @@
 
 package com.liferay.portal.servlet;
 
-import com.liferay.portal.kernel.bean.InitializingBean;
 import com.liferay.portal.kernel.cache.MultiVMPool;
 import com.liferay.portal.kernel.cache.PortalCache;
 import com.liferay.portal.kernel.servlet.ImageServletToken;
@@ -37,7 +36,7 @@ import com.liferay.portlet.journalcontent.util.JournalContentUtil;
  *
  */
 public class ImageServletTokenImpl
-	implements ImageServletToken, InitializingBean {
+	implements ImageServletToken {
 
 	public static final String CACHE_NAME = ImageServletToken.class.getName();
 

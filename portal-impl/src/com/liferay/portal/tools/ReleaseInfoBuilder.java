@@ -41,11 +41,9 @@ import java.util.Properties;
  */
 public class ReleaseInfoBuilder {
 
-	static {
-		InitUtil.init();
-	}
-
 	public static void main(String[] args) {
+		InitUtil.initWithSpring();
+
 		new ReleaseInfoBuilder();
 	}
 

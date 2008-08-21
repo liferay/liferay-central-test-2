@@ -22,7 +22,8 @@
 
 package com.liferay.portal.kernel.xml;
 
-import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
 
 import java.io.File;
 import java.io.InputStream;
@@ -114,11 +115,18 @@ public class SAXReaderUtil {
 	}
 
 	public static SAXReader getSAXReader() {
-		if (_saxReader == null) {
-			PortalBeanLocatorUtil.locate(SAXReaderUtil.class.getName());
-		}
+		SAXReader saxReader = null; 
 
-		return _saxReader;
+		try {
+			saxReader = _saxReaderClass.newInstance(); 
+		}
+		catch (Exception e) {
+			if (_log.isWarnEnabled()) {
+				_log.warn(e, e);
+			}
+		}
+		
+		return saxReader; 
 	}
 
 	public static Document read(File file) throws DocumentException {
@@ -194,10 +202,12 @@ public class SAXReaderUtil {
 		getSAXReader().sort(nodes, xpathExpression, distinct);
 	}
 
-	public void setSAXReader(SAXReader saxReader) {
-		_saxReader = saxReader;
+	public void setSAXReaderClass(Class<SAXReader> saxReaderClass) {
+		_saxReaderClass = saxReaderClass;
 	}
 
-	private static SAXReader _saxReader;
+	private static Log _log = LogFactoryUtil.getLog(SAXReaderUtil.class);
+
+	private static Class<SAXReader> _saxReaderClass;
 
 }

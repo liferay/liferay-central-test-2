@@ -27,6 +27,7 @@ import com.liferay.portal.kernel.util.ListUtil;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.xml.Document;
 import com.liferay.portal.kernel.xml.Element;
+import com.liferay.portal.kernel.xml.SAXReader;
 import com.liferay.portal.kernel.xml.SAXReaderUtil;
 import com.liferay.portal.service.ClassNameLocalServiceUtil;
 import com.liferay.portal.util.PropsKeys;
@@ -50,7 +51,7 @@ import org.apache.commons.logging.LogFactory;
  */
 public class ModelHintsImpl implements ModelHints {
 
-	public ModelHintsImpl() {
+	public void afterPropertiesSet() {
 		_hintCollections = new HashMap<String, Map<String, String>>();
 		_defaultHints = new HashMap<String, Map<String, String>>();
 		_modelFields = new HashMap();
@@ -139,7 +140,7 @@ public class ModelHintsImpl implements ModelHints {
 			_log.debug("Loading " + source);
 		}
 
-		Document doc = SAXReaderUtil.read(xml);
+		Document doc = _saxReader.read(xml);
 
 		Element root = doc.getRootElement();
 
@@ -253,6 +254,10 @@ public class ModelHintsImpl implements ModelHints {
 		}
 	}
 
+	public void setSAXReader(SAXReader saxReader) {
+		_saxReader = saxReader;
+	}
+
 	public String trimString(String model, String field, String value) {
 		if (value == null) {
 			return value;
@@ -289,5 +294,6 @@ public class ModelHintsImpl implements ModelHints {
 	private Map<String, Map<String, String>> _defaultHints;
 	private Map _modelFields;
 	private Set<String> _models;
+	private SAXReader _saxReader;
 
 }

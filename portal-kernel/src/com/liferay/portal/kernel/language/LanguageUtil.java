@@ -22,8 +22,6 @@
 
 package com.liferay.portal.kernel.language;
 
-import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
-
 import java.util.Locale;
 
 import javax.portlet.PortletRequest;
@@ -157,10 +155,6 @@ public class LanguageUtil {
 	}
 
 	public static Language getLanguage() {
-		if (_language == null) {
-			PortalBeanLocatorUtil.locate(LanguageUtil.class.getName());
-		}
-
 		return _language;
 	}
 

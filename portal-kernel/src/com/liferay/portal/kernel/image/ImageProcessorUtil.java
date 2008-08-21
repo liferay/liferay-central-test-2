@@ -22,8 +22,6 @@
 
 package com.liferay.portal.kernel.image;
 
-import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
-
 import java.awt.image.BufferedImage;
 import java.awt.image.RenderedImage;
 
@@ -62,10 +60,6 @@ public class ImageProcessorUtil {
 	}
 
 	public static ImageProcessor getImageProcessor() {
-		if (_imageProcessor == null) {
-			PortalBeanLocatorUtil.locate(ImageProcessorUtil.class.getName());
-		}
-
 		return _imageProcessor;
 	}
 

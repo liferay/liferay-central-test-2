@@ -62,10 +62,6 @@ public class DiffUtil {
 	}
 
 	public static Diff getDiff() {
-		if (_diff == null) {
-			PortalBeanLocatorUtil.locate(DiffUtil.class.getName());
-		}
-
 		return _diff;
 	}
 

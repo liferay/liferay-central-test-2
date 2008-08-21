@@ -58,16 +58,9 @@ import junit.framework.TestSuite;
  */
 public class ServiceTestSuite extends TestSuite {
 
-	static {
-		InitUtil.init();
-	}
-
 	public ServiceTestSuite() {
-
-		// Spring
-
-		SpringUtil.initContext();
-
+		InitUtil.initWithSpring();
+		
 		// Resource repositories root
 
 		FileUtil.deltree(PropsValues.RESOURCE_REPOSITORIES_ROOT);

@@ -22,8 +22,6 @@
 
 package com.liferay.portal.kernel.servlet;
 
-import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
-
 import javax.servlet.http.HttpServletRequest;
 
 /**
@@ -41,10 +39,6 @@ public class BrowserSnifferUtil {
 	}
 
 	public static BrowserSniffer getBrowserSniffer() {
-		if (_browserSniffer == null) {
-			PortalBeanLocatorUtil.locate(BrowserSnifferUtil.class.getName());
-		}
-
 		return _browserSniffer;
 	}
 

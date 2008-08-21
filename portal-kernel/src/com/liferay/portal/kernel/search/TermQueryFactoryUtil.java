@@ -22,8 +22,6 @@
 
 package com.liferay.portal.kernel.search;
 
-import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
-
 /**
  * <a href="TermQueryFactoryUtil.java.html"><b><i>View Source</i></b></a>
  *
@@ -41,10 +39,6 @@ public class TermQueryFactoryUtil {
 	}
 
 	public static TermQueryFactory getTermQueryFactory() {
-		if (_termQueryFactory == null) {
-			PortalBeanLocatorUtil.locate(TermQueryFactoryUtil.class.getName());
-		}
-
 		return _termQueryFactory;
 	}
 

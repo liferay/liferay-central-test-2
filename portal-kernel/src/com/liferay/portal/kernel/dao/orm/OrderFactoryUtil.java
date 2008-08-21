@@ -22,8 +22,6 @@
 
 package com.liferay.portal.kernel.dao.orm;
 
-import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
-
 /**
  * <a href="OrderFactoryUtil.java.html"><b><i>View Source</i></b></a>
  *
@@ -41,10 +39,6 @@ public class OrderFactoryUtil {
 	}
 
 	public static OrderFactory getOrderFactory() {
-		if (_orderFactory == null) {
-			PortalBeanLocatorUtil.locate(OrderFactoryUtil.class.getName());
-		}
-
 		return _orderFactory;
 	}
 

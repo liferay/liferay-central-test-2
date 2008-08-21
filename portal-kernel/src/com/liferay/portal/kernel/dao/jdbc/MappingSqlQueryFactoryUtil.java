@@ -22,8 +22,6 @@
 
 package com.liferay.portal.kernel.dao.jdbc;
 
-import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
-
 import javax.sql.DataSource;
 
 /**
@@ -42,20 +40,15 @@ public class MappingSqlQueryFactoryUtil {
 	}
 
 	public static MappingSqlQueryFactory getMappingSqlQueryFactory() {
-		if (_mappingSqlUpdateFactory == null) {
-			PortalBeanLocatorUtil.locate(
-				MappingSqlQueryFactoryUtil.class.getName());
-		}
-
-		return _mappingSqlUpdateFactory;
+		return _sqlUpdateFactory;
 	}
 
 	public void setMappingSqlQueryFactory(
-		MappingSqlQueryFactory mappingSqlUpdateFactory) {
+		MappingSqlQueryFactory sqlUpdateFactory) {
 
-		_mappingSqlUpdateFactory = mappingSqlUpdateFactory;
+		_sqlUpdateFactory = sqlUpdateFactory;
 	}
 
-	private static MappingSqlQueryFactory _mappingSqlUpdateFactory;
+	private static MappingSqlQueryFactory _sqlUpdateFactory;
 
 }
