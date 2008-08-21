@@ -87,7 +87,13 @@ int priority = BeanParamUtil.getInteger(entry, request, "priority");
 			<c:when test="<%= entry != null %>">
 
 				<%
-				String className = BeanParamUtil.getString(entry, request, "className");
+				long classNameId = BeanParamUtil.getLong(entry, request, "classNameId");
+
+				String className = StringPool.BLANK;
+
+				if (classNameId > 0) {
+					className = PortalUtil.getClassName(classNameId);
+				}
 				%>
 
 				<c:choose>
