@@ -65,10 +65,6 @@ else {
 
 	<%
 	for (String portletId : PropsValues.LAYOUT_STATIC_PORTLETS_ALL) {
-		if (portletId.equals(PortletKeys.CHAT) && !themeDisplay.isSignedIn()) {
-			continue;
-		}
-
 		if (PortletLocalServiceUtil.hasPortlet(company.getCompanyId(), portletId)) {
 	%>
 
