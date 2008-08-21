@@ -150,24 +150,6 @@ public class MBMailingListLocalServiceImpl
 
 		return mbMailingListPersistence.findByCategoryId(categoryId);
 	}
-	
-	public void startMailingListReader()
-		throws PortalException,	SystemException {
-		
-		List<MBMailingList> list = mbMailingListPersistence.findByActive(true);
-		for (MBMailingList mailingList : list) {
-			scheduleMailingList(mailingList);
-		}
-	}
-
-	public void stopMailingListReader()
-		throws PortalException, SystemException {
-
-		List<MBMailingList> list = mbMailingListPersistence.findByActive(true);
-		for (MBMailingList mailingList : list) {
-			unscheduleMailingList(mailingList);
-		}
-	}
 
 	public MBMailingList updateMailingList(
 			long mailingListId, String emailAddress, String inProtocol,

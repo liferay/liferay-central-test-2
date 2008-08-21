@@ -142,18 +142,6 @@ public class MBMailingListLocalServiceUtil {
 		return _service.getCategoryMailingList(categoryId);
 	}
 
-	public static void startMailingListReader()
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
-		_service.startMailingListReader();
-	}
-
-	public static void stopMailingListReader()
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
-		_service.stopMailingListReader();
-	}
-
 	public static com.liferay.portlet.messageboards.model.MBMailingList updateMailingList(
 		long mailingListId, java.lang.String emailAddress,
 		java.lang.String inProtocol, java.lang.String inServerName,

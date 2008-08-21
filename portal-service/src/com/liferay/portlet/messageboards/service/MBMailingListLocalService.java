@@ -113,14 +113,6 @@ public interface MBMailingListLocalService {
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;
 
-	public void startMailingListReader()
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException;
-
-	public void stopMailingListReader()
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException;
-
 	public com.liferay.portlet.messageboards.model.MBMailingList updateMailingList(
 		long mailingListId, java.lang.String emailAddress,
 		java.lang.String inProtocol, java.lang.String inServerName,
