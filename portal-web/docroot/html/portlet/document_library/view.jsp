@@ -96,7 +96,7 @@ portletURL.setParameter("folderId", String.valueOf(folderId));
 						headerNames.add(folderColumn);
 					}
 
-					SearchContainer searchContainer = new SearchContainer(renderRequest, null, null, "cur1", SearchContainer.DEFAULT_DELTA, portletURL, headerNames, null);
+					SearchContainer searchContainer = new SearchContainer(renderRequest, null, null, "cur1", foldersPerPage, portletURL, headerNames, null);
 
 					int total = DLFolderLocalServiceUtil.getFoldersCount(portletGroupId.longValue(), folderId);
 
