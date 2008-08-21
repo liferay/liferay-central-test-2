@@ -162,12 +162,12 @@ public class MBMailingListLocalServiceImpl
 
 		// Mailing list
 
-		MBMailingList mailingList = mbMailingListPersistence.findByPrimaryKey(
-			mailingListId);
-
 		validate(
 			emailAddress, inServerName, inUserName, outEmailAddress, outCustom,
 			outServerName, outUserName, active);
+
+		MBMailingList mailingList = mbMailingListPersistence.findByPrimaryKey(
+			mailingListId);
 
 		mailingList.setModifiedDate(new Date());
 		mailingList.setEmailAddress(emailAddress);
