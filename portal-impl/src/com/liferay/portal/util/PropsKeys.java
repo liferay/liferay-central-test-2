@@ -541,6 +541,8 @@ public class PropsKeys {
 
 	public static final String LAYOUT_SITEMAPABLE = "layout.sitemapable";
 
+	public static final String LAYOUT_STATIC_PORTLETS_ALL = "layout.static.portlets.all";
+
 	public static final String LAYOUT_STATIC_PORTLETS_END = "layout.static.portlets.end.";
 
 	public static final String LAYOUT_STATIC_PORTLETS_START = "layout.static.portlets.start.";

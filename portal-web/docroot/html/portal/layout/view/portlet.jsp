@@ -62,7 +62,21 @@ else {
 %>
 
 <c:if test="<%= !themeDisplay.isFacebook() && !themeDisplay.isStateExclusive() && !themeDisplay.isStatePopUp() && !themeDisplay.isWidget() %>">
-	<c:if test="<%= themeDisplay.isSignedIn() && PortletLocalServiceUtil.hasPortlet(company.getCompanyId(), PortletKeys.CHAT) %>">
-		<liferay-portlet:runtime portletName="<%= PortletKeys.CHAT %>" />
-	</c:if>
+
+	<%
+	for (String portletId : PropsValues.LAYOUT_STATIC_PORTLETS_ALL) {
+		if (portletId.equals(PortletKeys.CHAT) && !themeDisplay.isSignedIn()) {
+			continue;
+		}
+
+		if (PortletLocalServiceUtil.hasPortlet(company.getCompanyId(), portletId)) {
+	%>
+
+			<liferay-portlet:runtime portletName="<%= portletId %>" />
+
+	<%
+		}
+	}
+	%>
+
 </c:if>
