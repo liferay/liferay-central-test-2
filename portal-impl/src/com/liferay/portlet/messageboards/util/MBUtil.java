@@ -56,6 +56,8 @@ import com.liferay.util.LocalizationUtil;
 import java.util.Calendar;
 import java.util.Date;
 
+import javax.mail.Message;
+
 import javax.portlet.PortletPreferences;
 import javax.portlet.PortletURL;
 import javax.portlet.RenderRequest;
@@ -406,6 +408,50 @@ public class MBUtil {
 		}
 
 		return messageId;
+	}
+
+	public static long getParentMessageId(Message message) throws Exception {
+		long parentMessageId = -1;
+
+		// If the previous block failed, try to get the parent message ID from
+		// the "References" header as explained in
+		// http://cr.yp.to/immhf/thread.html. Some mail clients such as Yahoo!
+		// Mail use the "In-Reply-To" header, so we check that as well.
+
+		String parentHeader = null;
+
+		String[] references = message.getHeader("References");
+
+		if ((references != null) && (references.length > 0)) {
+			parentHeader = references[0].substring(
+				references[0].lastIndexOf("<"));
+		}
+
+		if (parentHeader == null) {
+			String[] inReplyToHeaders = message.getHeader("In-Reply-To");
+
+			if ((inReplyToHeaders != null) &&
+				(inReplyToHeaders.length > 0)) {
+
+				parentHeader = inReplyToHeaders[0];
+			}
+		}
+
+		if (parentHeader != null) {
+			if (_log.isDebugEnabled()) {
+				_log.debug("Parent header " + parentHeader);
+			}
+
+			if (parentMessageId == -1) {
+				parentMessageId = MBUtil.getMessageId(parentHeader);
+			}
+
+			if (_log.isDebugEnabled()) {
+				_log.debug("Previous message id " + parentMessageId);
+			}
+		}
+
+		return parentMessageId;
 	}
 
 	public static String[] getThreadPriority(

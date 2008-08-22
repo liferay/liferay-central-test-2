@@ -270,7 +270,7 @@ public class MessageListenerImpl implements MessageListener {
 	}
 
 	protected long getParentMessageId(String recipient, Message message)
-		throws MessagingException {
+		throws Exception {
 
 		// Get the parent message ID from the recipient address
 
@@ -290,46 +290,9 @@ public class MessageListenerImpl implements MessageListener {
 		if (parentMessageId > 0) {
 			return parentMessageId;
 		}
-
-		// If the previous block failed, try to get the parent message ID from
-		// the "References" header as explained in
-		// http://cr.yp.to/immhf/thread.html. Some mail clients such as Yahoo!
-		// Mail use the "In-Reply-To" header, so we check that as well.
-
-		String parentHeader = null;
-
-		String[] references = message.getHeader("References");
-
-		if ((references != null) && (references.length > 0)) {
-			parentHeader = references[0].substring(
-				references[0].lastIndexOf("<"));
+		else {
+			return MBUtil.getParentMessageId(message);
 		}
-
-		if (parentHeader == null) {
-			String[] inReplyToHeaders = message.getHeader("In-Reply-To");
-
-			if ((inReplyToHeaders != null) &&
-				(inReplyToHeaders.length > 0)) {
-
-				parentHeader = inReplyToHeaders[0];
-			}
-		}
-
-		if (parentHeader != null) {
-			if (_log.isDebugEnabled()) {
-				_log.debug("Parent header " + parentHeader);
-			}
-
-			if (parentMessageId == -1) {
-				parentMessageId = MBUtil.getMessageId(parentHeader);
-			}
-
-			if (_log.isDebugEnabled()) {
-				_log.debug("Previous message id " + parentMessageId);
-			}
-		}
-
-		return parentMessageId;
 	}
 
 	private static Log _log = LogFactory.getLog(MessageListenerImpl.class);

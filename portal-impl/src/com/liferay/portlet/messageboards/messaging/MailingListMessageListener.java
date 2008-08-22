@@ -57,15 +57,14 @@ public class MailingListMessageListener implements MessageListener {
 
 		Folder folder = null;
 
-		Message[] mailMessages = null;
+		Message[] messages = null;
 
 		try {
-			folder = openInbox(mailingListRequest);
+			folder = getFolder(mailingListRequest);
 
-			mailMessages = folder.getMessages();
+			messages = folder.getMessages();
 
-			for (Message mailMessage : mailMessages) {
-			}
+			processMessages(messages);
 		}
 		catch (Exception e) {
 			_log.error(e, e);
@@ -74,7 +73,7 @@ public class MailingListMessageListener implements MessageListener {
 			if ((folder != null) && folder.isOpen()) {
 				try {
 					folder.setFlags(
-						mailMessages, new Flags(Flags.Flag.DELETED), true);
+						messages, new Flags(Flags.Flag.DELETED), true);
 				}
 				catch (Exception e) {
 				}
@@ -88,7 +87,7 @@ public class MailingListMessageListener implements MessageListener {
 		}
 	}
 
-	protected Folder openInbox(MailingListRequest mailingListRequest)
+	protected Folder getFolder(MailingListRequest mailingListRequest)
 		throws Exception {
 
 		String protocol = mailingListRequest.getInProtocol();
@@ -97,7 +96,7 @@ public class MailingListMessageListener implements MessageListener {
 		String user = mailingListRequest.getInUserName();
 		String password = mailingListRequest.getInPassword();
 
-		Account account= Account.getInstance(protocol, port);
+		Account account = Account.getInstance(protocol, port);
 
 		account.setHost(host);
 		account.setPort(port);
@@ -114,17 +113,27 @@ public class MailingListMessageListener implements MessageListener {
 		store.connect();
 
 		Folder defaultFolder = store.getDefaultFolder();
+
 		Folder[] folders = defaultFolder.list();
 
-		if (folders != null && folders.length == 0) {
+		if ((folders != null) && (folders.length == 0)) {
 			throw new MessagingException("Inbox not found");
 		}
 
-		Folder inboxFolder = folders[0];
+		Folder folder = folders[0];
 
-		inboxFolder.open(Folder.READ_WRITE);
+		folder.open(Folder.READ_WRITE);
 
-		return inboxFolder;
+		return folder;
+	}
+
+	protected void processMessage(Message message) throws Exception {
+	}
+
+	protected void processMessages(Message[] messages) throws Exception {
+		for (Message message : messages) {
+			processMessage(message);
+		}
 	}
 
 	private static Log _log =
