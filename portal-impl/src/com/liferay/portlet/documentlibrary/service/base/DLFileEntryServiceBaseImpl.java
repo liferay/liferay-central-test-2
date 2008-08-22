@@ -63,6 +63,7 @@ import com.liferay.portlet.documentlibrary.service.persistence.DLFileVersionPers
 import com.liferay.portlet.documentlibrary.service.persistence.DLFolderPersistence;
 import com.liferay.portlet.messageboards.service.MBMessageLocalService;
 import com.liferay.portlet.messageboards.service.MBMessageService;
+import com.liferay.portlet.messageboards.service.persistence.MBDiscussionPersistence;
 import com.liferay.portlet.messageboards.service.persistence.MBMessageFinder;
 import com.liferay.portlet.messageboards.service.persistence.MBMessagePersistence;
 import com.liferay.portlet.ratings.service.RatingsStatsLocalService;
@@ -343,6 +344,15 @@ public abstract class DLFileEntryServiceBaseImpl extends PrincipalBean
 		this.webDAVPropsPersistence = webDAVPropsPersistence;
 	}
 
+	public MBDiscussionPersistence getMBDiscussionPersistence() {
+		return mbDiscussionPersistence;
+	}
+
+	public void setMBDiscussionPersistence(
+		MBDiscussionPersistence mbDiscussionPersistence) {
+		this.mbDiscussionPersistence = mbDiscussionPersistence;
+	}
+
 	public MBMessageLocalService getMBMessageLocalService() {
 		return mbMessageLocalService;
 	}
@@ -585,6 +595,11 @@ public abstract class DLFileEntryServiceBaseImpl extends PrincipalBean
 					".impl");
 		}
 
+		if (mbDiscussionPersistence == null) {
+			mbDiscussionPersistence = (MBDiscussionPersistence)PortalBeanLocatorUtil.locate(MBDiscussionPersistence.class.getName() +
+					".impl");
+		}
+
 		if (mbMessageLocalService == null) {
 			mbMessageLocalService = (MBMessageLocalService)PortalBeanLocatorUtil.locate(MBMessageLocalService.class.getName() +
 					".impl");
@@ -667,6 +682,7 @@ public abstract class DLFileEntryServiceBaseImpl extends PrincipalBean
 	protected UserFinder userFinder;
 	protected WebDAVPropsLocalService webDAVPropsLocalService;
 	protected WebDAVPropsPersistence webDAVPropsPersistence;
+	protected MBDiscussionPersistence mbDiscussionPersistence;
 	protected MBMessageLocalService mbMessageLocalService;
 	protected MBMessageService mbMessageService;
 	protected MBMessagePersistence mbMessagePersistence;

@@ -35,6 +35,7 @@ import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.ResourceConstants;
 import com.liferay.portal.model.User;
+import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PortletKeys;
 import com.liferay.portal.util.PropsValues;
 import com.liferay.portlet.documentlibrary.DuplicateFolderNameException;
@@ -46,6 +47,7 @@ import com.liferay.portlet.documentlibrary.model.DLFolder;
 import com.liferay.portlet.documentlibrary.model.impl.DLFileEntryImpl;
 import com.liferay.portlet.documentlibrary.model.impl.DLFolderImpl;
 import com.liferay.portlet.documentlibrary.service.base.DLFileEntryLocalServiceBaseImpl;
+import com.liferay.portlet.messageboards.model.MBDiscussion;
 import com.liferay.util.MathUtil;
 
 import java.io.BufferedInputStream;
@@ -818,6 +820,7 @@ public class DLFileEntryLocalServiceImpl
 				throw new DuplicateFileException(name);
 			}
 
+			long oldFileEntryId = fileEntry.getFileEntryId();
 			long newFileEntryId = counterLocalService.increment();
 
 			DLFileEntry newFileEntry = dlFileEntryPersistence.create(
@@ -882,6 +885,16 @@ public class DLFileEntryLocalServiceImpl
 
 			folderId = newFolderId;
 			folder = newFolder;
+
+			// Discussion
+
+			MBDiscussion discussion = mbDiscussionPersistence.findByC_C(
+				PortalUtil.getClassNameId(DLFileEntry.class.getName()),
+				oldFileEntryId);
+
+			discussion.setClassPK(newFileEntryId);
+
+			mbDiscussionPersistence.update(discussion, false);
 		}
 
 		// Tags
