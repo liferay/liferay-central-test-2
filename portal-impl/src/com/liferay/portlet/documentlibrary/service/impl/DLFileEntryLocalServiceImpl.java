@@ -807,6 +807,8 @@ public class DLFileEntryLocalServiceImpl
 		// Move file entry
 
 		if ((newFolderId > 0) && (folderId != newFolderId)) {
+			long oldFileEntryId = fileEntry.getFileEntryId();
+
 			DLFolder newFolder = dlFolderPersistence.findByPrimaryKey(
 				newFolderId);
 
@@ -820,7 +822,6 @@ public class DLFileEntryLocalServiceImpl
 				throw new DuplicateFileException(name);
 			}
 
-			long oldFileEntryId = fileEntry.getFileEntryId();
 			long newFileEntryId = counterLocalService.increment();
 
 			DLFileEntry newFileEntry = dlFileEntryPersistence.create(
@@ -886,7 +887,7 @@ public class DLFileEntryLocalServiceImpl
 			folderId = newFolderId;
 			folder = newFolder;
 
-			// Discussion
+			// Message boards
 
 			MBDiscussion discussion = mbDiscussionPersistence.findByC_C(
 				PortalUtil.getClassNameId(DLFileEntry.class.getName()),
