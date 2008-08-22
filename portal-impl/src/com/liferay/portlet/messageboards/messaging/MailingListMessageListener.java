@@ -23,11 +23,18 @@
 package com.liferay.portlet.messageboards.messaging;
 
 import com.liferay.portal.kernel.json.JSONFactoryUtil;
+import com.liferay.portal.kernel.mail.Account;
 import com.liferay.portal.kernel.messaging.MessageListener;
+import com.liferay.portal.kernel.util.StringPool;
+import com.liferay.util.mail.MailEngine;
 
 import javax.mail.Flags;
 import javax.mail.Folder;
 import javax.mail.Message;
+import javax.mail.MessagingException;
+import javax.mail.Session;
+import javax.mail.Store;
+import javax.mail.URLName;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -81,8 +88,43 @@ public class MailingListMessageListener implements MessageListener {
 		}
 	}
 
-	protected Folder openInbox(MailingListRequest mailingListRequest) {
-		return null;
+	protected Folder openInbox(MailingListRequest mailingListRequest)
+		throws Exception {
+
+		String protocol = mailingListRequest.getInProtocol();
+		String host = mailingListRequest.getInServerName();
+		int port = mailingListRequest.getInServerPort();
+		String user = mailingListRequest.getInUserName();
+		String password = mailingListRequest.getInPassword();
+
+		Account account= Account.getInstance(protocol, port);
+
+		account.setHost(host);
+		account.setPort(port);
+		account.setUser(user);
+		account.setPassword(password);
+
+		Session session = MailEngine.getSession(account);
+
+		URLName urlName = new URLName(
+			protocol, host, port, StringPool.BLANK, user, password);
+
+		Store store = session.getStore(urlName);
+
+		store.connect();
+
+		Folder defaultFolder = store.getDefaultFolder();
+		Folder[] folders = defaultFolder.list();
+
+		if (folders != null && folders.length == 0) {
+			throw new MessagingException("Inbox not found");
+		}
+
+		Folder inboxFolder = folders[0];
+
+		inboxFolder.open(Folder.READ_WRITE);
+
+		return inboxFolder;
 	}
 
 	private static Log _log =
