@@ -52,11 +52,18 @@ import com.liferay.portlet.messageboards.model.impl.MBCategoryImpl;
 import com.liferay.portlet.messageboards.service.MBCategoryLocalServiceUtil;
 import com.liferay.portlet.messageboards.service.MBMessageLocalServiceUtil;
 import com.liferay.util.LocalizationUtil;
+import com.liferay.util.mail.JavaMailUtil;
+
+import java.io.InputStream;
 
 import java.util.Calendar;
 import java.util.Date;
 
+import javax.mail.BodyPart;
 import javax.mail.Message;
+import javax.mail.Part;
+import javax.mail.internet.MimeMessage;
+import javax.mail.internet.MimeMultipart;
 
 import javax.portlet.PortletPreferences;
 import javax.portlet.PortletURL;
@@ -78,6 +85,57 @@ import org.apache.commons.logging.LogFactory;
 public class MBUtil {
 
 	public static final String POP_PORTLET_PREFIX = "mb.";
+
+	public static void collectMultipartContent(
+			MimeMultipart multipart, MBMailMessage collector)
+		throws Exception {
+
+		for (int i = 0; i < multipart.getCount(); i++) {
+			BodyPart part = multipart.getBodyPart(i);
+
+			collectPartContent(part, collector);
+		}
+	}
+
+	public static void collectPartContent(Part part, MBMailMessage collector)
+		throws Exception {
+
+		Object partContent = part.getContent();
+
+		String contentType = part.getContentType().toLowerCase();
+
+		if ((part.getDisposition() != null) &&
+			 (part.getDisposition().equalsIgnoreCase(MimeMessage.ATTACHMENT))) {
+
+			if (_log.isDebugEnabled()) {
+				_log.debug("Processing attachment");
+			}
+
+			byte[] bytes = null;
+
+			if (partContent instanceof String) {
+				bytes = ((String)partContent).getBytes();
+			}
+			else if (partContent instanceof InputStream) {
+				bytes = JavaMailUtil.getBytes(part);
+			}
+
+			collector.addFile(part.getFileName(), bytes);
+		}
+		else {
+			if (partContent instanceof MimeMultipart) {
+				collectMultipartContent((MimeMultipart)partContent, collector);
+			}
+			else if (partContent instanceof String) {
+				if (contentType.startsWith("text/html")) {
+					collector.setHtmlBody((String)partContent);
+				}
+				else {
+					collector.setPlainBody((String)partContent);
+				}
+			}
+		}
+	}
 
 	public static String getBreadcrumbs(
 			long categoryId, long messageId, PageContext pageContext,

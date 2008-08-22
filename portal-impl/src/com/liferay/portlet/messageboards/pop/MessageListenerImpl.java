@@ -42,18 +42,10 @@ import com.liferay.portlet.messageboards.model.MBMessage;
 import com.liferay.portlet.messageboards.service.MBCategoryLocalServiceUtil;
 import com.liferay.portlet.messageboards.service.MBMessageLocalServiceUtil;
 import com.liferay.portlet.messageboards.service.MBMessageServiceUtil;
+import com.liferay.portlet.messageboards.util.MBMailMessage;
 import com.liferay.portlet.messageboards.util.MBUtil;
-import com.liferay.util.mail.JavaMailUtil;
 
-import java.io.IOException;
-import java.io.InputStream;
-
-import javax.mail.BodyPart;
 import javax.mail.Message;
-import javax.mail.MessagingException;
-import javax.mail.Part;
-import javax.mail.internet.MimeMessage;
-import javax.mail.internet.MimeMultipart;
 
 import org.apache.commons.lang.time.StopWatch;
 import org.apache.commons.logging.Log;
@@ -154,7 +146,7 @@ public class MessageListenerImpl implements MessageListener {
 
 			MBMailMessage collector = new MBMailMessage();
 
-			collectPartContent(message, collector);
+			MBUtil.collectPartContent(message, collector);
 
 			PermissionCheckerUtil.setThreadValues(user);
 
@@ -192,57 +184,6 @@ public class MessageListenerImpl implements MessageListener {
 
 	public String getId() {
 		return MessageListenerImpl.class.getName();
-	}
-
-	protected void collectMultipartContent(
-			MimeMultipart multipart, MBMailMessage collector)
-		throws IOException, MessagingException {
-
-		for (int i = 0; i < multipart.getCount(); i++) {
-			BodyPart part = multipart.getBodyPart(i);
-
-			collectPartContent(part, collector);
-		}
-	}
-
-	protected void collectPartContent(Part part, MBMailMessage collector)
-		throws IOException, MessagingException {
-
-		Object partContent = part.getContent();
-
-		String contentType = part.getContentType().toLowerCase();
-
-		if ((part.getDisposition() != null) &&
-			 (part.getDisposition().equalsIgnoreCase(MimeMessage.ATTACHMENT))) {
-
-			if (_log.isDebugEnabled()) {
-				_log.debug("Processing attachment");
-			}
-
-			byte[] bytes = null;
-
-			if (partContent instanceof String) {
-				bytes = ((String)partContent).getBytes();
-			}
-			else if (partContent instanceof InputStream) {
-				bytes = JavaMailUtil.getBytes(part);
-			}
-
-			collector.addFile(part.getFileName(), bytes);
-		}
-		else {
-			if (partContent instanceof MimeMultipart) {
-				collectMultipartContent((MimeMultipart)partContent, collector);
-			}
-			else if (partContent instanceof String) {
-				if (contentType.startsWith("text/html")) {
-					collector.setHtmlBody((String)partContent);
-				}
-				else {
-					collector.setPlainBody((String)partContent);
-				}
-			}
-		}
 	}
 
 	protected long getCategoryId(String recipient) {
