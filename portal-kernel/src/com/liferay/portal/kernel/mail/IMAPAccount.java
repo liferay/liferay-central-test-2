@@ -30,8 +30,8 @@ package com.liferay.portal.kernel.mail;
  */
 public class IMAPAccount extends Account {
 
-	IMAPAccount(String protocol,  boolean useSSl) {
-		super(protocol, useSSl);
+	protected IMAPAccount(String protocol, boolean secure, int port) {
+		super(protocol, secure, port);
 	}
 
 }

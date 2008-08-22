@@ -30,8 +30,8 @@ package com.liferay.portal.kernel.mail;
  */
 public class SMTPAccount extends Account {
 
-	SMTPAccount(String protocol,  boolean useSSl) {
-		super(protocol, useSSl);
+	protected SMTPAccount(String protocol, boolean secure, int port) {
+		super(protocol, secure, port);
 	}
 
 }

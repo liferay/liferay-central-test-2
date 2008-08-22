@@ -23,15 +23,15 @@
 package com.liferay.portal.kernel.mail;
 
 /**
- * <a href="POP3Account.java.html"><b><i>View Source</i></b></a>
+ * <a href="POPAccount.java.html"><b><i>View Source</i></b></a>
  *
  * @author Thiago Moreira
  *
  */
-public class POP3Account extends Account {
+public class POPAccount extends Account {
 
-	POP3Account(String protocol,  boolean useSSl) {
-		super(protocol, useSSl);
+	protected POPAccount(String protocol, boolean secure, int port) {
+		super(protocol, secure, port);
 	}
 
 }

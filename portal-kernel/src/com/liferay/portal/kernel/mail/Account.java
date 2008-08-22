@@ -34,61 +34,108 @@ import java.io.Serializable;
  */
 public abstract class Account implements Serializable {
 
-	public static Account getInstance(String protocol, boolean useSSL) {
+	public static final String PROTOCOL_IMAP = "imap";
 
+	public static final String PROTOCOL_IMAPS = "imaps";
+
+	public static final String PROTOCOL_POP = "pop3";
+
+	public static final String PROTOCOL_POPS = "pop3s";
+
+	public static final String PROTOCOL_SMTP = "smtp";
+
+	public static final String PROTOCOL_SMTPS = "smtps";
+
+	public static final int PORT_IMAP = 143;
+
+	public static final int PORT_IMAPS = 993;
+
+	public static final int PORT_POP = 110;
+
+	public static final int PORT_POPS = 995;
+
+	public static final int PORT_SMTP = 25;
+
+	public static final int PORT_SMTPS = 465;
+
+	public static Account getInstance(String protocol) {
+		return getInstance(protocol, 0);
+	}
+
+	public static Account getInstance(String protocol, int port) {
 		Account account = null;
 
-		if (protocol.equals(Account.IMAP_PROTOCOL) ||
-				protocol.equals(Account.IMAPS_PROTOCOL)) {
+		if (protocol.startsWith(PROTOCOL_IMAP)) {
+			boolean secure = false;
+			int defaultPort = PORT_IMAP;
 
-			account = new IMAPAccount(protocol, useSSL);
+			if (protocol.endsWith("s")) {
+				secure = true;
+				defaultPort = PORT_IMAPS;
+			}
+
+			if (port <= 0) {
+				port = defaultPort;
+			}
+
+			account = new IMAPAccount(protocol, secure, port);
 		}
-		else if (protocol.equals(Account.POP3_PROTOCOL) ||
-				protocol.equals(Account.POP3S_PROTOCOL)) {
+		else if (protocol.startsWith(PROTOCOL_POP)) {
+			boolean secure = false;
+			int defaultPort = PORT_POP;
 
-			account = new POP3Account(protocol, useSSL);
-		}
-		else if (protocol.equals(Account.SMTP_PROTOCOL) ||
-				protocol.equals(Account.SMTPS_PROTOCOL)) {
+			if (protocol.endsWith("s")) {
+				secure = true;
+				defaultPort = PORT_POPS;
+			}
 
-			account = new SMTPAccount(protocol, useSSL);
+			if (port <= 0) {
+				port = defaultPort;
+			}
+
+			account = new POPAccount(protocol, secure, port);
 		}
 		else {
-			throw new IllegalArgumentException(
-				"Mail protocol not recognized: " + protocol);
+			boolean secure = false;
+			int defaultPort = PORT_SMTP;
+
+			if (protocol.endsWith("s")) {
+				secure = true;
+				defaultPort = PORT_SMTPS;
+			}
+
+			if (port <= 0) {
+				port = defaultPort;
+			}
+
+			account = new SMTPAccount(protocol, secure, port);
 		}
 
 		return account;
 	}
 
-	Account(String protocol, boolean useSSL) {
-
-		_protocol = protocol;
-		_useSSL = useSSL;
+	public String getHost() {
+		return _host;
 	}
 
 	public String getPassword() {
 		return _password;
 	}
 
+	public int getPort() {
+		return _port;
+	}
+
 	public String getProtocol() {
 		return _protocol;
 	}
 
-	public String getServerName() {
-		return _serverName;
-	}
-
-	public int getServerPort() {
-		return _serverPort;
-	}
-
-	public String getUserName() {
-		return _userName;
+	public String getUser() {
+		return _user;
 	}
 
 	public boolean isRequiresAuthentication() {
-		if (Validator.isNotNull(_userName) &&
+		if (Validator.isNotNull(_user) &&
 			Validator.isNotNull(_password)) {
 
 			return true;
@@ -98,43 +145,37 @@ public abstract class Account implements Serializable {
 		}
 	}
 
-	public boolean isUseSSL() {
-		return _useSSL;
+	public boolean isSecure() {
+		return _secure;
+	}
+
+	public void setHost(String host) {
+		_host = host;
 	}
 
 	public void setPassword(String password) {
 		_password = password;
 	}
 
-	public void setServerName(String serverName) {
-		_serverName = serverName;
+	public void setPort(int port) {
+		_port = port;
 	}
 
-	public void setServerPort(int serverPort) {
-		_serverPort = serverPort;
+	public void setUser(String user) {
+		_user = user;
 	}
 
-	public void setUserName(String userName) {
-		_userName = userName;
+	protected Account(String protocol, boolean secure, int port) {
+		_protocol = protocol;
+		_secure = secure;
+		_port = port;
 	}
 
-	public static final String IMAP_PROTOCOL = "imap";
-
-	public static final String IMAPS_PROTOCOL = "imaps";
-
-	public static final String POP3_PROTOCOL = "pop3";
-
-	public static final String POP3S_PROTOCOL = "pop3s";
-
-	public static final String SMTP_PROTOCOL = "smtp";
-
-	public static final String SMTPS_PROTOCOL = "smtps";
-
+	private String _host;
 	private String _password;
+	private int _port;
 	private String _protocol;
-	private String _serverName;
-	private int _serverPort;
-	private String _userName;
-	private boolean _useSSL;
+	private boolean _secure;
+	private String _user;
 
 }
