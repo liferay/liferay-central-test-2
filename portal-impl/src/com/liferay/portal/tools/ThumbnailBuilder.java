@@ -22,9 +22,8 @@
 
 package com.liferay.portal.tools;
 
-import com.liferay.portal.image.ImageProcessorImpl;
 import com.liferay.portal.kernel.image.ImageBag;
-import com.liferay.portal.kernel.image.ImageProcessor;
+import com.liferay.portal.kernel.image.ImageProcessorUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 
 import java.awt.image.RenderedImage;
@@ -74,11 +73,9 @@ public class ThumbnailBuilder {
 				}
 			}
 
-			ImageProcessor imageProcessor = new ImageProcessorImpl();
+			ImageBag imageBag = ImageProcessorUtil.read(originalFile);
 
-			ImageBag imageBag = imageProcessor.read(originalFile);
-
-			RenderedImage thumbnail = imageProcessor.scale(
+			RenderedImage thumbnail = ImageProcessorUtil.scale(
 				imageBag.getRenderedImage(), height, width);
 
 			ImageIO.write(thumbnail, imageBag.getType(), thumbnailFile);

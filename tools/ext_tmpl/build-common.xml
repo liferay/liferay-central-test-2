@@ -282,6 +282,7 @@ ECJ was automatically installed. Please rerun your task.
 							maxmemory="256m"
 							newenvironment="true"
 						>
+							<jvmarg value="-Dexternal-properties=com/liferay/portal/tools/dependencies/portal-tools.properties" />
 							<arg value="${project.dir}/ext-web/docroot/WEB-INF/server-config.wsdd" />
 							<arg value="${tstamp.value}/WEB-INF/server-config.wsdd" />
 						</java>
@@ -302,6 +303,7 @@ ECJ was automatically installed. Please rerun your task.
 							maxmemory="256m"
 							newenvironment="true"
 						>
+							<jvmarg value="-Dexternal-properties=com/liferay/portal/tools/dependencies/portal-tools.properties" />
 							<arg value="${project.dir}/ext-web/docroot/WEB-INF/server-config.wsdd" />
 							<arg value="${war.file.dest}/WEB-INF/server-config.wsdd" />
 						</java>

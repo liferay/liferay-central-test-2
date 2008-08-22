@@ -22,11 +22,12 @@
 
 package com.liferay.portal.tools;
 
+import com.liferay.portal.kernel.util.FileUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.ListUtil;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
-import com.liferay.portal.util.FileImpl;
+import com.liferay.portal.util.InitUtil;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -54,6 +55,8 @@ import org.apache.tools.ant.DirectoryScanner;
 public class PluginsEnvironmentBuilder {
 
 	public static void main(String[] args) throws Exception {
+		InitUtil.initWithSpring();
+
 		File dir = new File(System.getProperty("plugins.env.dir"));
 		boolean svn = GetterUtil.getBoolean(
 			System.getProperty("plugins.env.svn"));
@@ -150,7 +153,7 @@ public class PluginsEnvironmentBuilder {
 
 		System.out.println("Updating " + projectFile);
 
-		_fileUtil.write(projectFile, sb.toString());
+		FileUtil.write(projectFile, sb.toString());
 
 		// .classpath
 
@@ -188,7 +191,7 @@ public class PluginsEnvironmentBuilder {
 		sb.append("<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n\n");
 		sb.append("<classpath>\n");
 
-		if (_fileUtil.exists(projectDirName + "/docroot/WEB-INF/service")) {
+		if (FileUtil.exists(projectDirName + "/docroot/WEB-INF/service")) {
 			sb.append("\t<classpathentry excluding=\"**/.svn/**|.svn/\" ");
 			sb.append("kind=\"src\" path=\"docroot/WEB-INF/service\" />\n");
 		}
@@ -227,7 +230,7 @@ public class PluginsEnvironmentBuilder {
 
 		System.out.println("Updating " + classpathFile);
 
-		_fileUtil.write(classpathFile, sb.toString());
+		FileUtil.write(classpathFile, sb.toString());
 
 		// SVN
 
@@ -282,7 +285,7 @@ public class PluginsEnvironmentBuilder {
 				sb.append(jar + "\n");
 			}
 
-			_fileUtil.write(tempFile, sb.toString());
+			FileUtil.write(tempFile, sb.toString());
 
 			_exec(
 				_SVN_SET_IGNORES + "-F \"" + tempFile.getCanonicalPath() +
@@ -387,8 +390,6 @@ public class PluginsEnvironmentBuilder {
 	private static final String _SVN_INFO = "svn info ";
 
 	private static final String _SVN_SET_IGNORES = "svn propset svn:ignore ";
-
-	private static FileImpl _fileUtil = FileImpl.getInstance();
 
 	private boolean _svn;
 

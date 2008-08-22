@@ -22,9 +22,10 @@
 
 package com.liferay.portal.tools;
 
+import com.liferay.portal.kernel.util.FileUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
-import com.liferay.portal.util.FileImpl;
+import com.liferay.portal.util.InitUtil;
 
 import java.io.File;
 
@@ -37,6 +38,8 @@ import java.io.File;
 public class CSSFormatter {
 
 	public static void main(String[] args) {
+		InitUtil.initWithSpring();
+
 		if (args.length == 1) {
 			new CSSFormatter(new File(args[0]));
 		}
@@ -47,7 +50,7 @@ public class CSSFormatter {
 
 	public CSSFormatter(File file) {
 		try {
-			String content = _fileUtil.read(file);
+			String content = FileUtil.read(file);
 
 			content = StringUtil.replace(
 				content,
@@ -58,13 +61,11 @@ public class CSSFormatter {
 					"*/\n\n", "*/\n\n/*", "*/\n\n/*"
 				});
 
-			_fileUtil.write(file, content, true);
+			FileUtil.write(file, content, true);
 		}
 		catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
-
-	private static FileImpl _fileUtil = FileImpl.getInstance();
 
 }

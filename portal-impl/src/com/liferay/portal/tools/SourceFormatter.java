@@ -23,11 +23,12 @@
 package com.liferay.portal.tools;
 
 import com.liferay.portal.kernel.util.ClassUtil;
+import com.liferay.portal.kernel.util.FileUtil;
 import com.liferay.portal.kernel.util.ListUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.util.ContentUtil;
-import com.liferay.portal.util.FileImpl;
+import com.liferay.portal.util.InitUtil;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -55,6 +56,8 @@ import org.apache.tools.ant.DirectoryScanner;
 public class SourceFormatter {
 
 	public static void main(String[] args) {
+		InitUtil.initWithSpring();
+
 		try {
 			_readExclusions();
 
@@ -144,7 +147,7 @@ public class SourceFormatter {
 	public static void _checkPersistenceTestSuite() throws IOException {
 		String basedir = "./portal-impl/test";
 
-		if (!_fileUtil.exists(basedir)) {
+		if (!FileUtil.exists(basedir)) {
 			return;
 		}
 
@@ -169,7 +172,7 @@ public class SourceFormatter {
 			persistenceTests.add(persistenceTest);
 		}
 
-		String persistenceTestSuite = _fileUtil.read(
+		String persistenceTestSuite = FileUtil.read(
 			basedir + "/com/liferay/portal/service/persistence/" +
 				"PersistenceTestSuite.java");
 
@@ -183,7 +186,7 @@ public class SourceFormatter {
 	private static void _checkWebXML() throws IOException {
 		String basedir = "./";
 
-		if (_fileUtil.exists(basedir + "portal-impl")) {
+		if (FileUtil.exists(basedir + "portal-impl")) {
 			return;
 		}
 
@@ -200,7 +203,7 @@ public class SourceFormatter {
 		String[] files = ds.getIncludedFiles();
 
 		for (String file : files) {
-			String content = _fileUtil.read(basedir + file);
+			String content = FileUtil.read(basedir + file);
 
 			if (content.equals(webXML)) {
 				System.out.println(file);
@@ -321,7 +324,7 @@ public class SourceFormatter {
 
 		String[] files = null;
 
-		if (_fileUtil.exists(basedir + "portal-impl")) {
+		if (FileUtil.exists(basedir + "portal-impl")) {
 			files = _getPortalJavaFiles();
 		}
 		else {
@@ -331,7 +334,7 @@ public class SourceFormatter {
 		for (int i = 0; i < files.length; i++) {
 			File file = new File(basedir + files[i]);
 
-			String content = _fileUtil.read(file);
+			String content = FileUtil.read(file);
 
 			String className = file.getName();
 
@@ -433,7 +436,7 @@ public class SourceFormatter {
 			}
 
 			if ((newContent != null) && !content.equals(newContent)) {
-				_fileUtil.write(file, newContent);
+				FileUtil.write(file, newContent);
 
 				System.out.println(file);
 			}
@@ -509,7 +512,7 @@ public class SourceFormatter {
 		for (int i = 0; i < files.length; i++) {
 			File file = new File(basedir + files[i]);
 
-			String content = _fileUtil.read(file, true);
+			String content = FileUtil.read(file, true);
 			String newContent = _formatJSPContent(files[i], content);
 
 			newContent = StringUtil.replace(
@@ -556,7 +559,7 @@ public class SourceFormatter {
 			_checkXSS(files[i], content);
 
 			if ((newContent != null) && !content.equals(newContent)) {
-				_fileUtil.write(file, newContent);
+				FileUtil.write(file, newContent);
 
 				System.out.println(file);
 			}
@@ -628,14 +631,14 @@ public class SourceFormatter {
 
 	private static String _getCopyright() throws IOException {
 		try {
-			return _fileUtil.read("copyright.txt");
+			return FileUtil.read("copyright.txt");
 		}
 		catch (Exception e1) {
 			try {
-				return _fileUtil.read("../copyright.txt");
+				return FileUtil.read("../copyright.txt");
 			}
 			catch (Exception e2) {
-				return _fileUtil.read("../../copyright.txt");
+				return FileUtil.read("../../copyright.txt");
 			}
 		}
 	}
@@ -763,7 +766,6 @@ public class SourceFormatter {
 		"tiles"
 	};
 
-	private static FileImpl _fileUtil = FileImpl.getInstance();
 	private static Properties _exclusions;
 	private static Pattern _xssPattern = Pattern.compile(
 		"String\\s+([^\\s]+)\\s*=\\s*ParamUtil\\.getString\\(");

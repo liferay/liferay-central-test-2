@@ -76,10 +76,6 @@ import org.mozilla.intl.chardet.nsPSMDetector;
  */
 public class FileImpl implements com.liferay.portal.kernel.util.File {
 
-	public static FileImpl getInstance() {
-		return _instance;
-	}
-
 	public void copyDirectory(String sourceDirName, String destinationDirName) {
 		copyDirectory(new File(sourceDirName), new File(destinationDirName));
 	}

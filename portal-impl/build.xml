@@ -214,6 +214,7 @@ ${exception.message}
 			fork="true"
 			newenvironment="true"
 		>
+			<jvmarg value="-Dexternal-properties=com/liferay/portal/tools/dependencies/portal-tools.properties" />
 			<arg value="E:/Temp/SRC/jdk-1.4.2" />
 			<arg value="javax/naming/Context.java" />
 		</java>
@@ -224,6 +225,7 @@ ${exception.message}
 			fork="true"
 			newenvironment="true"
 		>
+			<jvmarg value="-Dexternal-properties=com/liferay/portal/tools/dependencies/portal-tools.properties" />
 			<arg value="E:/Temp/SRC/jdk-1.4.2" />
 			<arg value="javax/naming/directory/DirContext.java" />
 		</java>
@@ -421,7 +423,7 @@ ${exception.message}
 			fork="true"
 			newenvironment="true"
 		>
-			<jvmarg value="-Dexternal-properties=com/liferay/portal/tools/dependencies/portal-tools.properties" />			
+			<jvmarg value="-Dexternal-properties=com/liferay/portal/tools/dependencies/portal-tools.properties" />
 		</java>
 	</target>
 
@@ -449,15 +451,6 @@ ${exception.message}
 			maxmemory="256m"
 			newenvironment="true"
 		>
-			<!--<jvmarg value="-Dorg.apache.commons.logging.Log=org.apache.commons.logging.impl.Log4JLogger" />
-			<arg value="${service.file}" />
-			<arg value="src/META-INF/portal-hbm.xml" />
-			<arg value="src/META-INF/portal-model-hints.xml" />
-			<arg value="src/META-INF/portal-spring.xml" />
-			<arg value="com.liferay.portal.kernel.bean.PortalBeanLocatorUtil" />
-			<arg value="${project.dir}/portal-service/src" />
-			<arg value="${project.dir}/portal-web/docroot/html/js/liferay/service_unpacked.js" />-->
-
 			<jvmarg value="-Dexternal-properties=com/liferay/portal/tools/dependencies/portal-tools.properties" />
 			<jvmarg value="-Dorg.apache.commons.logging.Log=org.apache.commons.logging.impl.Log4JLogger" />
 			<jvmarg value="-Dservice.input.file=${service.file}" />
@@ -798,7 +791,9 @@ ${exception.message}
 			dir="${project.dir}"
 			fork="true"
 			newenvironment="true"
-		/>
+		>
+			<jvmarg value="-Dexternal-properties=com/liferay/portal/tools/dependencies/portal-tools.properties" />
+		</java>
 
 		<delete file="ServiceBuilder.temp" />
 	</target>

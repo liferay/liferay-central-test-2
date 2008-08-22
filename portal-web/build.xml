@@ -292,6 +292,7 @@
 			maxmemory="512m"
 			newenvironment="true"
 		>
+			<jvmarg value="-Dexternal-properties=com/liferay/portal/tools/dependencies/portal-tools.properties" />
 			<arg line="docroot ${jspc.classes.dir}" />
 		</java>
 
@@ -606,6 +607,7 @@
 			fork="true"
 			newenvironment="true"
 		>
+			<jvmarg value="-Dexternal-properties=com/liferay/portal/tools/dependencies/portal-tools.properties" />
 			<arg line="${css.file}" />
 		</java>
 	</target>
@@ -652,6 +654,7 @@
 			fork="true"
 			newenvironment="true"
 		>
+			<jvmarg value="-Dexternal-properties=com/liferay/portal/tools/dependencies/portal-tools.properties" />
 			<arg value="javascript.barebone.files" />
 			<arg value="docroot/html/js/" />
 			<arg value="docroot/html/js/barebone_unpacked.js" />
@@ -668,6 +671,7 @@
 			fork="true"
 			newenvironment="true"
 		>
+			<jvmarg value="-Dexternal-properties=com/liferay/portal/tools/dependencies/portal-tools.properties" />
 			<arg value="javascript.everything.files" />
 			<arg value="docroot/html/js/" />
 			<arg value="docroot/html/js/everything_unpacked.js" />
@@ -722,6 +726,7 @@
 			fork="true"
 			newenvironment="true"
 		>
+			<jvmarg value="-Dexternal-properties=com/liferay/portal/tools/dependencies/portal-tools.properties" />
 			<arg line="test" />
 		</java>
 	</target>
@@ -738,6 +743,7 @@
 					fork="true"
 					newenvironment="true"
 				>
+					<jvmarg value="-Dexternal-properties=com/liferay/portal/tools/dependencies/portal-tools.properties" />
 					<jvmarg value="-Dthumbnail.original.file=@{module.name}/_diffs/images/screenshot.png" />
 					<jvmarg value="-Dthumbnail.thumbnail.file=@{module.name}/_diffs/images/thumbnail.png" />
 					<jvmarg value="-Dthumbnail.height=120" />
@@ -775,6 +781,7 @@
 					fork="true"
 					newenvironment="true"
 				>
+					<jvmarg value="-Dexternal-properties=com/liferay/portal/tools/dependencies/portal-tools.properties" />
 					<arg line="@{module.name}/css @{module.name}/css/everything_unpacked.css" />
 				</java>
 

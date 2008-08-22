@@ -61,10 +61,6 @@ import org.dom4j.DocumentHelper;
  */
 public class SAXReaderImpl implements SAXReader {
 
-	public static SAXReaderImpl getInstance() {
-		return _instance;
-	}
-
 	public static List<Attribute> toNewAttributes(
 		List<org.dom4j.Attribute> oldAttributes) {
 

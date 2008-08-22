@@ -251,6 +251,7 @@
 			maxmemory="512m"
 			newenvironment="true"
 		>
+			<jvmarg value="-Dexternal-properties=com/liferay/portal/tools/dependencies/portal-tools.properties" />
 			<arg line="tmp ${jspc.classes.dir}" />
 		</java>
 

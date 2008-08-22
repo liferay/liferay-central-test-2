@@ -27,10 +27,10 @@ import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.image.ImageBag;
 import com.liferay.portal.kernel.image.ImageProcessorUtil;
 import com.liferay.portal.kernel.servlet.ImageServletTokenUtil;
+import com.liferay.portal.kernel.util.FileUtil;
 import com.liferay.portal.model.Image;
 import com.liferay.portal.model.impl.ImageImpl;
 import com.liferay.portal.service.base.ImageLocalServiceBaseImpl;
-import com.liferay.portal.util.FileImpl;
 import com.liferay.portal.util.PropsKeys;
 import com.liferay.portal.util.PropsUtil;
 
@@ -295,7 +295,7 @@ public class ImageLocalServiceImpl extends ImageLocalServiceBaseImpl {
 	protected Image getImage(InputStream is, byte[] bytes) throws IOException {
 		try {
 			if (is != null) {
-				bytes = _fileUtil.getBytes(is);
+				bytes = FileUtil.getBytes(is);
 			}
 
 			ImageBag imageBag = ImageProcessorUtil.read(bytes);
@@ -338,8 +338,6 @@ public class ImageLocalServiceImpl extends ImageLocalServiceBaseImpl {
 	}
 
 	private static Log _log = LogFactory.getLog(ImageLocalServiceImpl.class);
-
-	private static FileImpl _fileUtil = FileImpl.getInstance();
 
 	private Image _defaultSpacer;
 	private Image _defaultCompanyLogo;

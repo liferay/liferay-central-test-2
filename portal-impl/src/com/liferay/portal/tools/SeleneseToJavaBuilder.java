@@ -23,11 +23,12 @@
 package com.liferay.portal.tools;
 
 import com.liferay.portal.kernel.util.CharPool;
+import com.liferay.portal.kernel.util.FileUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.UnicodeFormatter;
 import com.liferay.portal.tools.servicebuilder.ServiceBuilder;
-import com.liferay.portal.util.FileImpl;
+import com.liferay.portal.util.InitUtil;
 
 import java.io.File;
 
@@ -42,6 +43,8 @@ import org.apache.tools.ant.DirectoryScanner;
 public class SeleneseToJavaBuilder {
 
 	public static void main(String[] args) throws Exception {
+		InitUtil.initWithSpring();
+
 		if (args.length == 1) {
 			new SeleneseToJavaBuilder(args[0]);
 		}
@@ -155,7 +158,7 @@ public class SeleneseToJavaBuilder {
 
 		sb.append("public void " + testMethodName + "() throws Exception {");
 
-		String xml = _fileUtil.read(basedir + "/" + file);
+		String xml = FileUtil.read(basedir + "/" + file);
 
 		if ((xml.indexOf("<title>" + testName + "</title>") == -1) ||
 			(xml.indexOf("colspan=\"3\">" + testName + "</td>") == -1)) {
@@ -166,7 +169,7 @@ public class SeleneseToJavaBuilder {
 		if (xml.indexOf("&quot;") != -1) {
 			xml = StringUtil.replace(xml, "&quot;", "\"");
 
-			_fileUtil.write(basedir + "/" + file, xml);
+			FileUtil.write(basedir + "/" + file, xml);
 		}
 
 		x = xml.indexOf("<tbody>");
@@ -406,7 +409,5 @@ public class SeleneseToJavaBuilder {
 	private static final String[] _FIX_PARAM_NEW_SUBS = new String[] {
 		"\\n", "\\n"
 	};
-
-	private static FileImpl _fileUtil = FileImpl.getInstance();
 
 }
