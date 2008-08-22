@@ -7,6 +7,17 @@
 	<short-name>liferay-util</short-name>
 	<uri>http://liferay.com/tld/util</uri>
 	<tag>
+		<name>buffer</name>
+		<tag-class>com.liferay.taglib.util.BufferTag</tag-class>
+		<tei-class>com.liferay.taglib.util.BufferTei</tei-class>
+		<body-content>JSP</body-content>
+		<attribute>
+			<name>var</name>
+			<required>true</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+	</tag>
+	<tag>
 		<name>include</name>
 		<tag-class>com.liferay.taglib.util.IncludeTag</tag-class>
 		<body-content>JSP</body-content>

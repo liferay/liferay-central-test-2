@@ -20,34 +20,41 @@
  * SOFTWARE.
  */
 
-package com.liferay.taglib.security;
+package com.liferay.taglib.util;
 
-import com.liferay.portal.kernel.util.Validator;
+import com.liferay.portal.kernel.util.StringPool;
 
-import javax.servlet.jsp.tagext.TagData;
-import javax.servlet.jsp.tagext.TagExtraInfo;
-import javax.servlet.jsp.tagext.VariableInfo;
+import javax.servlet.jsp.tagext.BodyTagSupport;
 
 /**
- * <a href="DoAsURLTei.java.html"><b><i>View Source</i></b></a>
+ * <a href="BufferTag.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *
  */
-public class DoAsURLTei extends TagExtraInfo {
+public class BufferTag extends BodyTagSupport {
 
-	public VariableInfo[] getVariableInfo(TagData data) {
-		String var = data.getAttributeString("var");
-
-		if (Validator.isNotNull(var)) {
-			return new VariableInfo[] {
-				new VariableInfo(
-					var, String.class.getName(), true, VariableInfo.AT_END)
-			};
-		}
-		else {
-			return null;
-		}
+	public int doStartTag() {
+		return EVAL_BODY_BUFFERED;
 	}
+
+	public int doAfterBody() {
+		_bodyContentString = getBodyContent().getString();
+
+		return SKIP_BODY;
+	}
+
+	public int doEndTag() {
+		pageContext.setAttribute(_var, _bodyContentString);
+
+		return EVAL_PAGE;
+	}
+
+	public void setVar(String var) {
+		_var = var;
+	}
+
+	private String _var;
+	private String _bodyContentString = StringPool.BLANK;
 
 }
