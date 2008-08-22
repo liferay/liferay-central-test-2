@@ -23,14 +23,14 @@
 package com.liferay.portal.kernel.mail;
 
 /**
- * <a href="SMTPAccount.java.html"><b><i>View Source</i></b></a>
+ * <a href="IMAPAccount.java.html"><b><i>View Source</i></b></a>
  *
  * @author Thiago Moreira
  *
  */
-public class SMTPAccount extends Account {
+public class IMAPAccount extends Account {
 
-	SMTPAccount(String protocol,  boolean useSSl) {
+	IMAPAccount(String protocol,  boolean useSSl) {
 		super(protocol, useSSl);
 	}
 
