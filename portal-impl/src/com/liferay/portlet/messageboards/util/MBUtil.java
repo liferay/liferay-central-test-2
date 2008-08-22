@@ -501,7 +501,7 @@ public class MBUtil {
 			}
 
 			if (parentMessageId == -1) {
-				parentMessageId = MBUtil.getMessageId(parentHeader);
+				parentMessageId = getMessageId(parentHeader);
 			}
 
 			if (_log.isDebugEnabled()) {
