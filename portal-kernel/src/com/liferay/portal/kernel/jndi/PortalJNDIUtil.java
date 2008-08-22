@@ -22,6 +22,8 @@
 
 package com.liferay.portal.kernel.jndi;
 
+import com.liferay.portal.kernel.util.InfrastructureUtil;
+
 import javax.mail.Session;
 
 import javax.naming.NamingException;
@@ -29,15 +31,22 @@ import javax.naming.NamingException;
 import javax.sql.DataSource;
 
 /**
- * <a href="PortalJNDI.java.html"><b><i>View Source</i></b></a>
+ * <a href="PortalJNDIUtil.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *
+ * @deprecated This class has been renamed to
+ * <code>com.liferay.portal.kernel.util.InfrastructureUtil</code>.
+ *
  */
-public interface PortalJNDI {
+public class PortalJNDIUtil {
 
-	public DataSource getDataSource() throws NamingException;
+	public static DataSource getDataSource() throws NamingException {
+		return InfrastructureUtil.getDataSource();
+	}
 
-	public Session getMailSession() throws NamingException;
+	public static Session getMailSession() throws NamingException {
+		return InfrastructureUtil.getMailSession();
+	}
 
 }
