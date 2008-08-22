@@ -61,6 +61,7 @@ import java.util.Date;
 
 import javax.mail.BodyPart;
 import javax.mail.Message;
+import javax.mail.MessagingException;
 import javax.mail.Part;
 import javax.mail.internet.MimeMessage;
 import javax.mail.internet.MimeMultipart;
@@ -625,6 +626,21 @@ public class MBUtil {
 		}
 
 		return rank;
+	}
+
+	public static boolean hasMailIDHeader(Message mailMessage)
+		throws MessagingException {
+
+		String[] messageIds = mailMessage.getHeader("Message-ID");
+		if (Validator.isNotNull(messageIds)) {
+			for (String messageId : messageIds) {
+				if (messageId.contains(PropsValues.POP_SERVER_SUBDOMAIN)) {
+					return true;
+				}
+			}
+		}
+
+		return false;
 	}
 
 	public static boolean isAllowAnonymousPosting(PortletPreferences prefs) {

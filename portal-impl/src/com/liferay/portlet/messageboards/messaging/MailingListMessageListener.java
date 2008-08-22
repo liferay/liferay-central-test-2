@@ -22,12 +22,26 @@
 
 package com.liferay.portlet.messageboards.messaging;
 
+import com.liferay.portal.NoSuchUserException;
 import com.liferay.portal.kernel.json.JSONFactoryUtil;
 import com.liferay.portal.kernel.mail.Account;
 import com.liferay.portal.kernel.messaging.MessageListener;
 import com.liferay.portal.kernel.util.StringPool;
+import com.liferay.portal.kernel.util.Validator;
+import com.liferay.portal.model.Company;
+import com.liferay.portal.model.User;
+import com.liferay.portal.security.permission.PermissionCheckerUtil;
+import com.liferay.portal.service.CompanyLocalServiceUtil;
+import com.liferay.portal.service.UserLocalServiceUtil;
+import com.liferay.portlet.messageboards.NoSuchMessageException;
+import com.liferay.portlet.messageboards.model.MBMessage;
+import com.liferay.portlet.messageboards.service.MBMessageLocalServiceUtil;
+import com.liferay.portlet.messageboards.service.MBMessageServiceUtil;
+import com.liferay.portlet.messageboards.util.MBMailMessage;
+import com.liferay.portlet.messageboards.util.MBUtil;
 import com.liferay.util.mail.MailEngine;
 
+import javax.mail.Address;
 import javax.mail.Flags;
 import javax.mail.Folder;
 import javax.mail.Message;
@@ -64,7 +78,7 @@ public class MailingListMessageListener implements MessageListener {
 
 			messages = folder.getMessages();
 
-			processMessages(messages);
+			processMessages(mailingListRequest, messages);
 		}
 		catch (Exception e) {
 			_log.error(e, e);
@@ -127,12 +141,91 @@ public class MailingListMessageListener implements MessageListener {
 		return folder;
 	}
 
-	protected void processMessage(Message message) throws Exception {
+	protected void processMessage(
+			MailingListRequest mailingListRequest, Message mailMessage) 
+		throws Exception {
+		
+		if (MBUtil.hasMailIDHeader(mailMessage)) {
+			return;
+		}
+		
+		String from = null;
+		Address[] addresses = mailMessage.getFrom();
+
+		if (Validator.isNotNull(addresses)) {
+			from = addresses[0].toString();
+		}
+
+		Company company = CompanyLocalServiceUtil.getCompany(
+			mailingListRequest.getCompanyId());
+
+		long categoryId = mailingListRequest.getCategoryId();
+
+		if (_log.isDebugEnabled()) {
+			_log.debug("Category id " + categoryId);
+		}
+		
+		boolean anonymous = false;
+		
+		User user = UserLocalServiceUtil.getUserById(
+			company.getCompanyId(), mailingListRequest.getUserId());
+
+		try {
+			user = UserLocalServiceUtil.getUserByEmailAddress(
+				company.getCompanyId(), from);
+		}
+		catch (NoSuchUserException nsue) {
+			anonymous = true;
+		}
+
+		long parentMessageId = MBUtil.getParentMessageId(mailMessage);
+
+		if (_log.isDebugEnabled()) {
+			_log.debug("Parent message id " + parentMessageId);
+		}
+		
+		MBMessage parentMessage = null;
+
+		try {
+			if (parentMessageId > 0) {
+				parentMessage = MBMessageLocalServiceUtil.getMessage(
+					parentMessageId);
+			}
+		}
+		catch (NoSuchMessageException nsme) {
+		}
+
+		if (_log.isDebugEnabled()) {
+			_log.debug("Parent message " + parentMessage);
+		}
+
+		MBMailMessage collector = new MBMailMessage();
+
+		MBUtil.collectPartContent(mailMessage, collector);
+
+		PermissionCheckerUtil.setThreadValues(user);
+
+		if (parentMessage == null) {
+			MBMessageServiceUtil.addMessage(
+				categoryId, mailMessage.getSubject(), collector.getBody(),
+				collector.getFiles(), anonymous, 0.0, null, true, true);
+		}
+		else {
+			MBMessageServiceUtil.addMessage(
+				categoryId, parentMessage.getThreadId(),
+				parentMessage.getMessageId(), mailMessage.getSubject(),
+				collector.getBody(), collector.getFiles(), anonymous, 0.0,
+				null, true, true);
+		}
+
 	}
 
-	protected void processMessages(Message[] messages) throws Exception {
+	protected void processMessages(
+			MailingListRequest mailingListRequest, Message[] messages)
+		throws Exception {
+		
 		for (Message message : messages) {
-			processMessage(message);
+			processMessage(mailingListRequest, message);
 		}
 	}
 
