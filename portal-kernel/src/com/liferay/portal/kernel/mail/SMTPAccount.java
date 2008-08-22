@@ -27,19 +27,15 @@ import com.liferay.portal.kernel.util.Validator;
 import java.io.Serializable;
 
 /**
- * <a href="Account.java.html"><b><i>View Source</i></b></a>
+ * <a href="SMTPAccount.java.html"><b><i>View Source</i></b></a>
  *
  * @author Thiago Moreira
  *
  */
-public class Account implements Serializable {
+public class SMTPAccount implements Serializable {
 
 	public String getPassword() {
 		return _password;
-	}
-
-	public String getProtocol() {
-		return _protocol;
 	}
 
 	public String getServerName() {
@@ -73,10 +69,6 @@ public class Account implements Serializable {
 		_password = password;
 	}
 
-	public void setProtocol(String protocol) {
-		_protocol = protocol;
-	}
-
 	public void setServerName(String serverName) {
 		_serverName = serverName;
 	}
@@ -94,7 +86,6 @@ public class Account implements Serializable {
 	}
 
 	private String _password;
-	private String _protocol;
 	private String _serverName;
 	private int _serverPort;
 	private String _userName;

@@ -35,7 +35,7 @@ import javax.mail.internet.InternetAddress;
  *
  * @author Brian Wing Shun Chan
  * @author Neil Griffin
- * @author Raymond Auge
+ * @author Raymond Augé
  * @author Thiago Moreira
  *
  */
@@ -101,7 +101,7 @@ public class MailMessage implements Serializable {
 		return _replyTo;
 	}
 
-	public Account getSMTPAccount() {
+	public SMTPAccount getSMTPAccount() {
 		return _smtpAccount;
 	}
 
@@ -153,8 +153,8 @@ public class MailMessage implements Serializable {
 		_replyTo = replyTo;
 	}
 
-	public void setSMTPAccount(Account smtpAccount) {
-		_smtpAccount = smtpAccount;
+	public void setSMTPAccount(SMTPAccount account) {
+		_smtpAccount = account;
 	}
 
 	public void setSubject(String subject) {
@@ -177,6 +177,6 @@ public class MailMessage implements Serializable {
 	private String _messageId;
 	private String _inReplyTo;
 	private List<File> _attachments = new ArrayList<File>();
-	private Account _smtpAccount;
+	private SMTPAccount _smtpAccount;
 
 }

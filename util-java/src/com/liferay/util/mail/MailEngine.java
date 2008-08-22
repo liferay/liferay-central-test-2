@@ -22,8 +22,8 @@
 
 package com.liferay.util.mail;
 
-import com.liferay.portal.kernel.mail.Account;
 import com.liferay.portal.kernel.mail.MailMessage;
+import com.liferay.portal.kernel.mail.SMTPAccount;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.InfrastructureUtil;
 import com.liferay.portal.kernel.util.Validator;
@@ -86,43 +86,44 @@ public class MailEngine {
 		return session;
 	}
 
-	public static Session getSession(Account account) throws NamingException {
+	public static Session getSession(SMTPAccount smtpAccount)
+		throws NamingException {
 
 		Session session = null;
-		Properties properties = null;
-		String protocol = account.getProtocol();
 
-		if (protocol.equals(_IMAP_PROTOCOL) ||
-			protocol.equals(_IMAPS_PROTOCOL)) {
+		if (smtpAccount.isRequiresAuthentication()) {
+			String protocol = _SMTP_PROTOCOL;
+			int port = _SMTP_PORT;
 
-			properties= _getMailProperties(account, _IMAP_PORT, _IMAPS_PORT);
-		}
-		else if (protocol.equals(_POP3_PROTOCOL) ||
-			protocol.equals(_POP3S_PROTOCOL)) {
-
-			properties= _getMailProperties(account, _POP3_PORT, _POP3S_PORT);
-		}
-		else if (protocol.equals(_SMTP_PROTOCOL) ||
-			protocol.equals(_SMTPS_PROTOCOL)) {
-
-			properties= _getMailProperties(account, _SMTP_PORT, _SMTPS_PORT);
-
-			if (account.isRequiresAuthentication()) {
-
-				properties.put("mail.transport.protocol", protocol);
-				properties.put("mail." + protocol + ".auth", "true");
-				properties.put(
-					"mail." + protocol + ".user", account.getUserName());
-				properties.put(
-					"mail." + protocol + ".password", account.getPassword());
+			if (smtpAccount.isUseSSL()) {
+				protocol = _SMTPS_PROTOCOL;
+				port = _SMTPS_PORT;
 			}
-		}
 
-		if (properties != null) {
+			if (smtpAccount.getServerPort() > 0) {
+				port = smtpAccount.getServerPort();
+			}
+
+			Properties properties = new Properties();
+
+			properties.put("mail.transport.protocol", protocol);
+			properties.put("mail." + protocol + ".auth", "true");
+			properties.put(
+				"mail." + protocol + ".host", smtpAccount.getServerName());
+			properties.put("mail." + protocol + ".port", port);
+			properties.put(
+				"mail." + protocol + ".user", smtpAccount.getUserName());
+			properties.put(
+				"mail." + protocol + ".password", smtpAccount.getPassword());
+			properties.put(
+				"mail." + protocol + ".socketFactory.class",
+				"javax.net.ssl.SSLSocketFactory");
+			properties.put(
+				"mail." + protocol + ".socketFactory.fallback", "false");
+
 			session = Session.getInstance(properties);
 		}
 		else {
-			_log.warn("Mail protocol not recognized: " + protocol);
 			session = getSession();
 		}
 
@@ -262,7 +263,7 @@ public class MailEngine {
 			InternetAddress[] bcc, InternetAddress[] bulkAddresses,
 			String subject, String body, boolean htmlFormat,
 			InternetAddress[] replyTo, String messageId, String inReplyTo,
-			File[] attachments, Account smtpAccount)
+			File[] attachments, SMTPAccount smtpAccount)
 		throws MailEngineException {
 
 		StopWatch stopWatch = null;
@@ -422,32 +423,6 @@ public class MailEngine {
 		}
 	}
 
-	private static Properties _getMailProperties(
-		Account account, int defaultPort, int secutiryPort) {
-
-		Properties properties = new Properties();
-		String protocol = account.getProtocol();
-		int port = defaultPort;
-
-		if (account.isUseSSL()) {
-			port = secutiryPort;
-		}
-
-		if (account.getServerPort() > 0) {
-			port = account.getServerPort();
-		}
-
-		properties.put("mail." + protocol + ".host", account.getServerName());
-		properties.put("mail." + protocol + ".port", port);
-		properties.put(
-			"mail." + protocol + ".socketFactory.class",
-			"javax.net.ssl.SSLSocketFactory");
-		properties.put("mail." + protocol + ".socketFactory.fallback", "false");
-		properties.put("mail." + protocol + ".socketFactory.port", port);
-
-		return properties;
-	}
-
 	private static String _getSMTPProperty(Session session, String suffix) {
 		String value = session.getProperty("mail.smtp." + suffix);
 
@@ -514,22 +489,6 @@ public class MailEngine {
 	private static final String _MULTIPART_TYPE_ALTERNATIVE = "alternative";
 
 	private static final String _MULTIPART_TYPE_MIXED = "mixed";
-
-	private static final String _IMAP_PROTOCOL = "imap";
-
-	private static final int _IMAP_PORT = 143;
-
-	private static final String _IMAPS_PROTOCOL = "imaps";
-
-	private static final int _IMAPS_PORT = 993;
-
-	private static final String _POP3_PROTOCOL = "pop3";
-
-	private static final int _POP3_PORT = 110;
-
-	private static final String _POP3S_PROTOCOL = "pop3s";
-
-	private static final int _POP3S_PORT = 995;
 
 	private static final String _SMTP_PROTOCOL = "smtp";
 
