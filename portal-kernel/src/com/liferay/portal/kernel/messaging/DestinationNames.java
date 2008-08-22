@@ -30,6 +30,12 @@ package com.liferay.portal.kernel.messaging;
  */
 public interface DestinationNames {
 
+	/**
+	 * This is a special destination. Binding a message listener to this
+	 * destination will allow it to listen to messages sent to all destinations.
+	 */
+	public static final String GLOBAL = "liferay/global";
+
 	public static final String IP_GEOCODER = "liferay/ip_geocoder";
 
 	public static final String LAYOUTS_LOCAL_PUBLISHER =

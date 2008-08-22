@@ -43,6 +43,10 @@ public class DefaultMessageBus implements MessageBus {
 		Destination responseDestination = getResponseDestination(destination);
 
 		_destinations.put(responseDestination.getName(), responseDestination);
+
+		if (destination.equals(DestinationNames.GLOBAL)) {
+			_globalDestinationsCount++;
+		}
 	}
 
 	public synchronized void registerMessageListener(
@@ -64,9 +68,19 @@ public class DefaultMessageBus implements MessageBus {
 		String responseDestination = getResponseDestination(destination);
 
 		_destinations.remove(responseDestination);
+
+		if (destination.equals(DestinationNames.GLOBAL)) {
+			_globalDestinationsCount--;
+		}
 	}
 
 	public void sendMessage(String destination, Object message) {
+		if ((_globalDestinationsCount > 0) &&
+			(!destination.equals(DestinationNames.GLOBAL))) {
+
+			sendMessage(DestinationNames.GLOBAL, message);
+		}
+
 		Destination destinationModel = _destinations.get(destination);
 
 		if (destinationModel == null) {
@@ -81,6 +95,12 @@ public class DefaultMessageBus implements MessageBus {
 	}
 
 	public void sendMessage(String destination, String message) {
+		if ((_globalDestinationsCount > 0) &&
+			(!destination.equals(DestinationNames.GLOBAL))) {
+
+			sendMessage(DestinationNames.GLOBAL, message);
+		}
+
 		Destination destinationModel = _destinations.get(destination);
 
 		if (destinationModel == null) {
@@ -97,6 +117,12 @@ public class DefaultMessageBus implements MessageBus {
 	public Object sendSynchronizedMessage(
 			String destination, Message message, long timeout)
 		throws MessageBusException {
+
+		if ((_globalDestinationsCount > 0) &&
+			(!destination.equals(DestinationNames.GLOBAL))) {
+
+			sendMessage(DestinationNames.GLOBAL, message);
+		}
 
 		Destination destinationModel = _destinations.get(destination);
 
@@ -126,7 +152,15 @@ public class DefaultMessageBus implements MessageBus {
 		responseDestinationModel.register(responseMessageListener);
 
 		try {
-			return responseMessageListener.send(message);
+			Object responseValue = responseMessageListener.send(message);
+
+			if ((_globalDestinationsCount > 0) &&
+				(!destination.equals(DestinationNames.GLOBAL))) {
+
+				sendMessage(DestinationNames.GLOBAL, responseValue);
+			}
+
+			return responseValue;
 		}
 		finally {
 			responseDestinationModel.unregister(responseMessageListener);
@@ -136,6 +170,12 @@ public class DefaultMessageBus implements MessageBus {
 	public String sendSynchronizedMessage(
 			String destination, String message, long timeout)
 		throws MessageBusException {
+
+		if ((_globalDestinationsCount > 0) &&
+			(!destination.equals(DestinationNames.GLOBAL))) {
+
+			sendMessage(DestinationNames.GLOBAL, message);
+		}
 
 		Destination destinationModel = _destinations.get(destination);
 
@@ -165,7 +205,15 @@ public class DefaultMessageBus implements MessageBus {
 		responseDestinationModel.register(responseMessageListener);
 
 		try {
-			return responseMessageListener.send(message);
+			String responseValue = responseMessageListener.send(message);
+
+			if ((_globalDestinationsCount > 0) &&
+				(!destination.equals(DestinationNames.GLOBAL))) {
+
+				sendMessage(DestinationNames.GLOBAL, responseValue);
+			}
+
+			return responseValue;
 		}
 		finally {
 			responseDestinationModel.unregister(responseMessageListener);
@@ -213,5 +261,6 @@ public class DefaultMessageBus implements MessageBus {
 
 	private Map<String, Destination> _destinations =
 		new HashMap<String, Destination>();
+	private int _globalDestinationsCount;
 
 }
