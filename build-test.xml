@@ -44,6 +44,8 @@ plugins.includes=${plugins.includes}</echo>
 			<property name="class" value="MiscTestSuite" />
 		</ant>
 
+		<ant dir="portal-kernel" target="test" inheritAll="false" />
+
 		<ant dir="util-java" target="test" inheritAll="false" />
 
 		<antcall target="test-${app.server.type}" />

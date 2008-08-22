@@ -22,7 +22,6 @@
 
 package com.liferay.portalweb.portal;
 
-import com.liferay.portal.util.InitUtil;
 import com.liferay.portalweb.portal.login.LoginTests;
 import com.liferay.portalweb.portal.theme.ThemeTests;
 import com.liferay.portalweb.portal.util.ThemeIds;

@@ -6,10 +6,14 @@
 			<value>classpath:test-jdbc.properties</value>
 		</property>
 	</bean>
-	<bean id="liferayDataSourceTarget" class="org.apache.commons.dbcp.BasicDataSource" lazy-init="true" destroy-method="close">
+	<bean id="liferayDataSourceTarget" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close">
 		<property name="driverClassName" value="${jdbc.driver}" />
 		<property name="url" value="${jdbc.url}" />
 		<property name="username" value="${jdbc.username}" />
 		<property name="password" value="${jdbc.password}" />
 	</bean>
+	<bean id="mailSession" class="javax.mail.Session" factory-method="getInstance">
+		<constructor-arg ref="mailSessionProperties" />
+	</bean>
+	<bean id="mailSessionProperties" class="java.util.Properties" />
 </beans>

@@ -6,7 +6,7 @@
 	<bean id="com.liferay.portal.service.AccountLocalService.base" abstract="true">
 		<property name="service" ref="com.liferay.portal.service.AccountLocalService.transaction" />
 	</bean>
-	<bean id="com.liferay.portal.service.AccountLocalService.velocity" class="org.springframework.aop.framework.ProxyFactoryBean" parent="velocityBase" lazy-init="true">
+	<bean id="com.liferay.portal.service.AccountLocalService.velocity" class="org.springframework.aop.framework.ProxyFactoryBean" parent="baseVelocityService" lazy-init="true">
 		<property name="target" ref="com.liferay.portal.service.AccountLocalService.transaction" />
 	</bean>
 	<bean id="com.liferay.portal.service.AccountLocalServiceFactory" class="com.liferay.portal.service.AccountLocalServiceFactory" parent="com.liferay.portal.service.AccountLocalService.base" />
@@ -16,7 +16,7 @@
 	<bean id="com.liferay.portal.service.AccountService.base" abstract="true">
 		<property name="service" ref="com.liferay.portal.service.AccountService.transaction" />
 	</bean>
-	<bean id="com.liferay.portal.service.AccountService.velocity" class="org.springframework.aop.framework.ProxyFactoryBean" parent="velocityBase" lazy-init="true">
+	<bean id="com.liferay.portal.service.AccountService.velocity" class="org.springframework.aop.framework.ProxyFactoryBean" parent="baseVelocityService" lazy-init="true">
 		<property name="target" ref="com.liferay.portal.service.AccountService.transaction" />
 	</bean>
 	<bean id="com.liferay.portal.service.AccountServiceFactory" class="com.liferay.portal.service.AccountServiceFactory" parent="com.liferay.portal.service.AccountService.base" />
@@ -31,7 +31,7 @@
 	<bean id="com.liferay.portal.service.AddressLocalService.base" abstract="true">
 		<property name="service" ref="com.liferay.portal.service.AddressLocalService.transaction" />
 	</bean>
-	<bean id="com.liferay.portal.service.AddressLocalService.velocity" class="org.springframework.aop.framework.ProxyFactoryBean" parent="velocityBase" lazy-init="true">
+	<bean id="com.liferay.portal.service.AddressLocalService.velocity" class="org.springframework.aop.framework.ProxyFactoryBean" parent="baseVelocityService" lazy-init="true">
 		<property name="target" ref="com.liferay.portal.service.AddressLocalService.transaction" />
 	</bean>
 	<bean id="com.liferay.portal.service.AddressLocalServiceFactory" class="com.liferay.portal.service.AddressLocalServiceFactory" parent="com.liferay.portal.service.AddressLocalService.base" />
@@ -41,7 +41,7 @@
 	<bean id="com.liferay.portal.service.AddressService.base" abstract="true">
 		<property name="service" ref="com.liferay.portal.service.AddressService.transaction" />
 	</bean>
-	<bean id="com.liferay.portal.service.AddressService.velocity" class="org.springframework.aop.framework.ProxyFactoryBean" parent="velocityBase" lazy-init="true">
+	<bean id="com.liferay.portal.service.AddressService.velocity" class="org.springframework.aop.framework.ProxyFactoryBean" parent="baseVelocityService" lazy-init="true">
 		<property name="target" ref="com.liferay.portal.service.AddressService.transaction" />
 	</bean>
 	<bean id="com.liferay.portal.service.AddressServiceFactory" class="com.liferay.portal.service.AddressServiceFactory" parent="com.liferay.portal.service.AddressService.base" />
@@ -56,7 +56,7 @@
 	<bean id="com.liferay.portal.service.ClassNameLocalService.base" abstract="true">
 		<property name="service" ref="com.liferay.portal.service.ClassNameLocalService.transaction" />
 	</bean>
-	<bean id="com.liferay.portal.service.ClassNameLocalService.velocity" class="org.springframework.aop.framework.ProxyFactoryBean" parent="velocityBase" lazy-init="true">
+	<bean id="com.liferay.portal.service.ClassNameLocalService.velocity" class="org.springframework.aop.framework.ProxyFactoryBean" parent="baseVelocityService" lazy-init="true">
 		<property name="target" ref="com.liferay.portal.service.ClassNameLocalService.transaction" />
 	</bean>
 	<bean id="com.liferay.portal.service.ClassNameLocalServiceFactory" class="com.liferay.portal.service.ClassNameLocalServiceFactory" parent="com.liferay.portal.service.ClassNameLocalService.base" />
@@ -66,7 +66,7 @@
 	<bean id="com.liferay.portal.service.ClassNameService.base" abstract="true">
 		<property name="service" ref="com.liferay.portal.service.ClassNameService.transaction" />
 	</bean>
-	<bean id="com.liferay.portal.service.ClassNameService.velocity" class="org.springframework.aop.framework.ProxyFactoryBean" parent="velocityBase" lazy-init="true">
+	<bean id="com.liferay.portal.service.ClassNameService.velocity" class="org.springframework.aop.framework.ProxyFactoryBean" parent="baseVelocityService" lazy-init="true">
 		<property name="target" ref="com.liferay.portal.service.ClassNameService.transaction" />
 	</bean>
 	<bean id="com.liferay.portal.service.ClassNameServiceFactory" class="com.liferay.portal.service.ClassNameServiceFactory" parent="com.liferay.portal.service.ClassNameService.base" />
@@ -81,7 +81,7 @@
 	<bean id="com.liferay.portal.service.CompanyLocalService.base" abstract="true">
 		<property name="service" ref="com.liferay.portal.service.CompanyLocalService.transaction" />
 	</bean>
-	<bean id="com.liferay.portal.service.CompanyLocalService.velocity" class="org.springframework.aop.framework.ProxyFactoryBean" parent="velocityBase" lazy-init="true">
+	<bean id="com.liferay.portal.service.CompanyLocalService.velocity" class="org.springframework.aop.framework.ProxyFactoryBean" parent="baseVelocityService" lazy-init="true">
 		<property name="target" ref="com.liferay.portal.service.CompanyLocalService.transaction" />
 	</bean>
 	<bean id="com.liferay.portal.service.CompanyLocalServiceFactory" class="com.liferay.portal.service.CompanyLocalServiceFactory" parent="com.liferay.portal.service.CompanyLocalService.base" />
@@ -91,7 +91,7 @@
 	<bean id="com.liferay.portal.service.CompanyService.base" abstract="true">
 		<property name="service" ref="com.liferay.portal.service.CompanyService.transaction" />
 	</bean>
-	<bean id="com.liferay.portal.service.CompanyService.velocity" class="org.springframework.aop.framework.ProxyFactoryBean" parent="velocityBase" lazy-init="true">
+	<bean id="com.liferay.portal.service.CompanyService.velocity" class="org.springframework.aop.framework.ProxyFactoryBean" parent="baseVelocityService" lazy-init="true">
 		<property name="target" ref="com.liferay.portal.service.CompanyService.transaction" />
 	</bean>
 	<bean id="com.liferay.portal.service.CompanyServiceFactory" class="com.liferay.portal.service.CompanyServiceFactory" parent="com.liferay.portal.service.CompanyService.base" />
@@ -106,7 +106,7 @@
 	<bean id="com.liferay.portal.service.ContactLocalService.base" abstract="true">
 		<property name="service" ref="com.liferay.portal.service.ContactLocalService.transaction" />
 	</bean>
-	<bean id="com.liferay.portal.service.ContactLocalService.velocity" class="org.springframework.aop.framework.ProxyFactoryBean" parent="velocityBase" lazy-init="true">
+	<bean id="com.liferay.portal.service.ContactLocalService.velocity" class="org.springframework.aop.framework.ProxyFactoryBean" parent="baseVelocityService" lazy-init="true">
 		<property name="target" ref="com.liferay.portal.service.ContactLocalService.transaction" />
 	</bean>
 	<bean id="com.liferay.portal.service.ContactLocalServiceFactory" class="com.liferay.portal.service.ContactLocalServiceFactory" parent="com.liferay.portal.service.ContactLocalService.base" />
@@ -116,7 +116,7 @@
 	<bean id="com.liferay.portal.service.ContactService.base" abstract="true">
 		<property name="service" ref="com.liferay.portal.service.ContactService.transaction" />
 	</bean>
-	<bean id="com.liferay.portal.service.ContactService.velocity" class="org.springframework.aop.framework.ProxyFactoryBean" parent="velocityBase" lazy-init="true">
+	<bean id="com.liferay.portal.service.ContactService.velocity" class="org.springframework.aop.framework.ProxyFactoryBean" parent="baseVelocityService" lazy-init="true">
 		<property name="target" ref="com.liferay.portal.service.ContactService.transaction" />
 	</bean>
 	<bean id="com.liferay.portal.service.ContactServiceFactory" class="com.liferay.portal.service.ContactServiceFactory" parent="com.liferay.portal.service.ContactService.base" />
@@ -131,7 +131,7 @@
 	<bean id="com.liferay.portal.service.CountryService.base" abstract="true">
 		<property name="service" ref="com.liferay.portal.service.CountryService.transaction" />
 	</bean>
-	<bean id="com.liferay.portal.service.CountryService.velocity" class="org.springframework.aop.framework.ProxyFactoryBean" parent="velocityBase" lazy-init="true">
+	<bean id="com.liferay.portal.service.CountryService.velocity" class="org.springframework.aop.framework.ProxyFactoryBean" parent="baseVelocityService" lazy-init="true">
 		<property name="target" ref="com.liferay.portal.service.CountryService.transaction" />
 	</bean>
 	<bean id="com.liferay.portal.service.CountryServiceFactory" class="com.liferay.portal.service.CountryServiceFactory" parent="com.liferay.portal.service.CountryService.base" />
@@ -146,7 +146,7 @@
 	<bean id="com.liferay.portal.service.EmailAddressLocalService.base" abstract="true">
 		<property name="service" ref="com.liferay.portal.service.EmailAddressLocalService.transaction" />
 	</bean>
-	<bean id="com.liferay.portal.service.EmailAddressLocalService.velocity" class="org.springframework.aop.framework.ProxyFactoryBean" parent="velocityBase" lazy-init="true">
+	<bean id="com.liferay.portal.service.EmailAddressLocalService.velocity" class="org.springframework.aop.framework.ProxyFactoryBean" parent="baseVelocityService" lazy-init="true">
 		<property name="target" ref="com.liferay.portal.service.EmailAddressLocalService.transaction" />
 	</bean>
 	<bean id="com.liferay.portal.service.EmailAddressLocalServiceFactory" class="com.liferay.portal.service.EmailAddressLocalServiceFactory" parent="com.liferay.portal.service.EmailAddressLocalService.base" />
@@ -156,7 +156,7 @@
 	<bean id="com.liferay.portal.service.EmailAddressService.base" abstract="true">
 		<property name="service" ref="com.liferay.portal.service.EmailAddressService.transaction" />
 	</bean>
-	<bean id="com.liferay.portal.service.EmailAddressService.velocity" class="org.springframework.aop.framework.ProxyFactoryBean" parent="velocityBase" lazy-init="true">
+	<bean id="com.liferay.portal.service.EmailAddressService.velocity" class="org.springframework.aop.framework.ProxyFactoryBean" parent="baseVelocityService" lazy-init="true">
 		<property name="target" ref="com.liferay.portal.service.EmailAddressService.transaction" />
 	</bean>
 	<bean id="com.liferay.portal.service.EmailAddressServiceFactory" class="com.liferay.portal.service.EmailAddressServiceFactory" parent="com.liferay.portal.service.EmailAddressService.base" />
@@ -171,7 +171,7 @@
 	<bean id="com.liferay.portal.service.GroupLocalService.base" abstract="true">
 		<property name="service" ref="com.liferay.portal.service.GroupLocalService.transaction" />
 	</bean>
-	<bean id="com.liferay.portal.service.GroupLocalService.velocity" class="org.springframework.aop.framework.ProxyFactoryBean" parent="velocityBase" lazy-init="true">
+	<bean id="com.liferay.portal.service.GroupLocalService.velocity" class="org.springframework.aop.framework.ProxyFactoryBean" parent="baseVelocityService" lazy-init="true">
 		<property name="target" ref="com.liferay.portal.service.GroupLocalService.transaction" />
 	</bean>
 	<bean id="com.liferay.portal.service.GroupLocalServiceFactory" class="com.liferay.portal.service.GroupLocalServiceFactory" parent="com.liferay.portal.service.GroupLocalService.base" />
@@ -181,7 +181,7 @@
 	<bean id="com.liferay.portal.service.GroupService.base" abstract="true">
 		<property name="service" ref="com.liferay.portal.service.GroupService.transaction" />
 	</bean>
-	<bean id="com.liferay.portal.service.GroupService.velocity" class="org.springframework.aop.framework.ProxyFactoryBean" parent="velocityBase" lazy-init="true">
+	<bean id="com.liferay.portal.service.GroupService.velocity" class="org.springframework.aop.framework.ProxyFactoryBean" parent="baseVelocityService" lazy-init="true">
 		<property name="target" ref="com.liferay.portal.service.GroupService.transaction" />
 	</bean>
 	<bean id="com.liferay.portal.service.GroupServiceFactory" class="com.liferay.portal.service.GroupServiceFactory" parent="com.liferay.portal.service.GroupService.base" />
@@ -200,7 +200,7 @@
 	<bean id="com.liferay.portal.service.ImageLocalService.base" abstract="true">
 		<property name="service" ref="com.liferay.portal.service.ImageLocalService.transaction" />
 	</bean>
-	<bean id="com.liferay.portal.service.ImageLocalService.velocity" class="org.springframework.aop.framework.ProxyFactoryBean" parent="velocityBase" lazy-init="true">
+	<bean id="com.liferay.portal.service.ImageLocalService.velocity" class="org.springframework.aop.framework.ProxyFactoryBean" parent="baseVelocityService" lazy-init="true">
 		<property name="target" ref="com.liferay.portal.service.ImageLocalService.transaction" />
 	</bean>
 	<bean id="com.liferay.portal.service.ImageLocalServiceFactory" class="com.liferay.portal.service.ImageLocalServiceFactory" parent="com.liferay.portal.service.ImageLocalService.base" />
@@ -215,7 +215,7 @@
 	<bean id="com.liferay.portal.service.LayoutLocalService.base" abstract="true">
 		<property name="service" ref="com.liferay.portal.service.LayoutLocalService.transaction" />
 	</bean>
-	<bean id="com.liferay.portal.service.LayoutLocalService.velocity" class="org.springframework.aop.framework.ProxyFactoryBean" parent="velocityBase" lazy-init="true">
+	<bean id="com.liferay.portal.service.LayoutLocalService.velocity" class="org.springframework.aop.framework.ProxyFactoryBean" parent="baseVelocityService" lazy-init="true">
 		<property name="target" ref="com.liferay.portal.service.LayoutLocalService.transaction" />
 	</bean>
 	<bean id="com.liferay.portal.service.LayoutLocalServiceFactory" class="com.liferay.portal.service.LayoutLocalServiceFactory" parent="com.liferay.portal.service.LayoutLocalService.base" />
@@ -225,7 +225,7 @@
 	<bean id="com.liferay.portal.service.LayoutService.base" abstract="true">
 		<property name="service" ref="com.liferay.portal.service.LayoutService.transaction" />
 	</bean>
-	<bean id="com.liferay.portal.service.LayoutService.velocity" class="org.springframework.aop.framework.ProxyFactoryBean" parent="velocityBase" lazy-init="true">
+	<bean id="com.liferay.portal.service.LayoutService.velocity" class="org.springframework.aop.framework.ProxyFactoryBean" parent="baseVelocityService" lazy-init="true">
 		<property name="target" ref="com.liferay.portal.service.LayoutService.transaction" />
 	</bean>
 	<bean id="com.liferay.portal.service.LayoutServiceFactory" class="com.liferay.portal.service.LayoutServiceFactory" parent="com.liferay.portal.service.LayoutService.base" />
@@ -244,7 +244,7 @@
 	<bean id="com.liferay.portal.service.LayoutSetLocalService.base" abstract="true">
 		<property name="service" ref="com.liferay.portal.service.LayoutSetLocalService.transaction" />
 	</bean>
-	<bean id="com.liferay.portal.service.LayoutSetLocalService.velocity" class="org.springframework.aop.framework.ProxyFactoryBean" parent="velocityBase" lazy-init="true">
+	<bean id="com.liferay.portal.service.LayoutSetLocalService.velocity" class="org.springframework.aop.framework.ProxyFactoryBean" parent="baseVelocityService" lazy-init="true">
 		<property name="target" ref="com.liferay.portal.service.LayoutSetLocalService.transaction" />
 	</bean>
 	<bean id="com.liferay.portal.service.LayoutSetLocalServiceFactory" class="com.liferay.portal.service.LayoutSetLocalServiceFactory" parent="com.liferay.portal.service.LayoutSetLocalService.base" />
@@ -254,7 +254,7 @@
 	<bean id="com.liferay.portal.service.LayoutSetService.base" abstract="true">
 		<property name="service" ref="com.liferay.portal.service.LayoutSetService.transaction" />
 	</bean>
-	<bean id="com.liferay.portal.service.LayoutSetService.velocity" class="org.springframework.aop.framework.ProxyFactoryBean" parent="velocityBase" lazy-init="true">
+	<bean id="com.liferay.portal.service.LayoutSetService.velocity" class="org.springframework.aop.framework.ProxyFactoryBean" parent="baseVelocityService" lazy-init="true">
 		<property name="target" ref="com.liferay.portal.service.LayoutSetService.transaction" />
 	</bean>
 	<bean id="com.liferay.portal.service.LayoutSetServiceFactory" class="com.liferay.portal.service.LayoutSetServiceFactory" parent="com.liferay.portal.service.LayoutSetService.base" />
@@ -268,7 +268,7 @@
 	<bean id="com.liferay.portal.service.LayoutTemplateLocalService.base" abstract="true">
 		<property name="service" ref="com.liferay.portal.service.LayoutTemplateLocalService.impl" />
 	</bean>
-	<bean id="com.liferay.portal.service.LayoutTemplateLocalService.velocity" class="org.springframework.aop.framework.ProxyFactoryBean" parent="velocityBase" lazy-init="true">
+	<bean id="com.liferay.portal.service.LayoutTemplateLocalService.velocity" class="org.springframework.aop.framework.ProxyFactoryBean" parent="baseVelocityService" lazy-init="true">
 		<property name="target" ref="com.liferay.portal.service.LayoutTemplateLocalService.impl" />
 	</bean>
 	<bean id="com.liferay.portal.service.LayoutTemplateLocalServiceFactory" class="com.liferay.portal.service.LayoutTemplateLocalServiceFactory" parent="com.liferay.portal.service.LayoutTemplateLocalService.base" />
@@ -278,7 +278,7 @@
 	<bean id="com.liferay.portal.service.ListTypeService.base" abstract="true">
 		<property name="service" ref="com.liferay.portal.service.ListTypeService.transaction" />
 	</bean>
-	<bean id="com.liferay.portal.service.ListTypeService.velocity" class="org.springframework.aop.framework.ProxyFactoryBean" parent="velocityBase" lazy-init="true">
+	<bean id="com.liferay.portal.service.ListTypeService.velocity" class="org.springframework.aop.framework.ProxyFactoryBean" parent="baseVelocityService" lazy-init="true">
 		<property name="target" ref="com.liferay.portal.service.ListTypeService.transaction" />
 	</bean>
 	<bean id="com.liferay.portal.service.ListTypeServiceFactory" class="com.liferay.portal.service.ListTypeServiceFactory" parent="com.liferay.portal.service.ListTypeService.base" />
@@ -293,7 +293,7 @@
 	<bean id="com.liferay.portal.service.MembershipRequestLocalService.base" abstract="true">
 		<property name="service" ref="com.liferay.portal.service.MembershipRequestLocalService.transaction" />
 	</bean>
-	<bean id="com.liferay.portal.service.MembershipRequestLocalService.velocity" class="org.springframework.aop.framework.ProxyFactoryBean" parent="velocityBase" lazy-init="true">
+	<bean id="com.liferay.portal.service.MembershipRequestLocalService.velocity" class="org.springframework.aop.framework.ProxyFactoryBean" parent="baseVelocityService" lazy-init="true">
 		<property name="target" ref="com.liferay.portal.service.MembershipRequestLocalService.transaction" />
 	</bean>
 	<bean id="com.liferay.portal.service.MembershipRequestLocalServiceFactory" class="com.liferay.portal.service.MembershipRequestLocalServiceFactory" parent="com.liferay.portal.service.MembershipRequestLocalService.base" />
@@ -303,7 +303,7 @@
 	<bean id="com.liferay.portal.service.MembershipRequestService.base" abstract="true">
 		<property name="service" ref="com.liferay.portal.service.MembershipRequestService.transaction" />
 	</bean>
-	<bean id="com.liferay.portal.service.MembershipRequestService.velocity" class="org.springframework.aop.framework.ProxyFactoryBean" parent="velocityBase" lazy-init="true">
+	<bean id="com.liferay.portal.service.MembershipRequestService.velocity" class="org.springframework.aop.framework.ProxyFactoryBean" parent="baseVelocityService" lazy-init="true">
 		<property name="target" ref="com.liferay.portal.service.MembershipRequestService.transaction" />
 	</bean>
 	<bean id="com.liferay.portal.service.MembershipRequestServiceFactory" class="com.liferay.portal.service.MembershipRequestServiceFactory" parent="com.liferay.portal.service.MembershipRequestService.base" />
@@ -318,7 +318,7 @@
 	<bean id="com.liferay.portal.service.OrganizationLocalService.base" abstract="true">
 		<property name="service" ref="com.liferay.portal.service.OrganizationLocalService.transaction" />
 	</bean>
-	<bean id="com.liferay.portal.service.OrganizationLocalService.velocity" class="org.springframework.aop.framework.ProxyFactoryBean" parent="velocityBase" lazy-init="true">
+	<bean id="com.liferay.portal.service.OrganizationLocalService.velocity" class="org.springframework.aop.framework.ProxyFactoryBean" parent="baseVelocityService" lazy-init="true">
 		<property name="target" ref="com.liferay.portal.service.OrganizationLocalService.transaction" />
 	</bean>
 	<bean id="com.liferay.portal.service.OrganizationLocalServiceFactory" class="com.liferay.portal.service.OrganizationLocalServiceFactory" parent="com.liferay.portal.service.OrganizationLocalService.base" />
@@ -328,7 +328,7 @@
 	<bean id="com.liferay.portal.service.OrganizationService.base" abstract="true">
 		<property name="service" ref="com.liferay.portal.service.OrganizationService.transaction" />
 	</bean>
-	<bean id="com.liferay.portal.service.OrganizationService.velocity" class="org.springframework.aop.framework.ProxyFactoryBean" parent="velocityBase" lazy-init="true">
+	<bean id="com.liferay.portal.service.OrganizationService.velocity" class="org.springframework.aop.framework.ProxyFactoryBean" parent="baseVelocityService" lazy-init="true">
 		<property name="target" ref="com.liferay.portal.service.OrganizationService.transaction" />
 	</bean>
 	<bean id="com.liferay.portal.service.OrganizationServiceFactory" class="com.liferay.portal.service.OrganizationServiceFactory" parent="com.liferay.portal.service.OrganizationService.base" />
@@ -361,7 +361,7 @@
 	<bean id="com.liferay.portal.service.OrgLaborLocalService.base" abstract="true">
 		<property name="service" ref="com.liferay.portal.service.OrgLaborLocalService.transaction" />
 	</bean>
-	<bean id="com.liferay.portal.service.OrgLaborLocalService.velocity" class="org.springframework.aop.framework.ProxyFactoryBean" parent="velocityBase" lazy-init="true">
+	<bean id="com.liferay.portal.service.OrgLaborLocalService.velocity" class="org.springframework.aop.framework.ProxyFactoryBean" parent="baseVelocityService" lazy-init="true">
 		<property name="target" ref="com.liferay.portal.service.OrgLaborLocalService.transaction" />
 	</bean>
 	<bean id="com.liferay.portal.service.OrgLaborLocalServiceFactory" class="com.liferay.portal.service.OrgLaborLocalServiceFactory" parent="com.liferay.portal.service.OrgLaborLocalService.base" />
@@ -371,7 +371,7 @@
 	<bean id="com.liferay.portal.service.OrgLaborService.base" abstract="true">
 		<property name="service" ref="com.liferay.portal.service.OrgLaborService.transaction" />
 	</bean>
-	<bean id="com.liferay.portal.service.OrgLaborService.velocity" class="org.springframework.aop.framework.ProxyFactoryBean" parent="velocityBase" lazy-init="true">
+	<bean id="com.liferay.portal.service.OrgLaborService.velocity" class="org.springframework.aop.framework.ProxyFactoryBean" parent="baseVelocityService" lazy-init="true">
 		<property name="target" ref="com.liferay.portal.service.OrgLaborService.transaction" />
 	</bean>
 	<bean id="com.liferay.portal.service.OrgLaborServiceFactory" class="com.liferay.portal.service.OrgLaborServiceFactory" parent="com.liferay.portal.service.OrgLaborService.base" />
@@ -386,7 +386,7 @@
 	<bean id="com.liferay.portal.service.PasswordPolicyLocalService.base" abstract="true">
 		<property name="service" ref="com.liferay.portal.service.PasswordPolicyLocalService.transaction" />
 	</bean>
-	<bean id="com.liferay.portal.service.PasswordPolicyLocalService.velocity" class="org.springframework.aop.framework.ProxyFactoryBean" parent="velocityBase" lazy-init="true">
+	<bean id="com.liferay.portal.service.PasswordPolicyLocalService.velocity" class="org.springframework.aop.framework.ProxyFactoryBean" parent="baseVelocityService" lazy-init="true">
 		<property name="target" ref="com.liferay.portal.service.PasswordPolicyLocalService.transaction" />
 	</bean>
 	<bean id="com.liferay.portal.service.PasswordPolicyLocalServiceFactory" class="com.liferay.portal.service.PasswordPolicyLocalServiceFactory" parent="com.liferay.portal.service.PasswordPolicyLocalService.base" />
@@ -396,7 +396,7 @@
 	<bean id="com.liferay.portal.service.PasswordPolicyService.base" abstract="true">
 		<property name="service" ref="com.liferay.portal.service.PasswordPolicyService.transaction" />
 	</bean>
-	<bean id="com.liferay.portal.service.PasswordPolicyService.velocity" class="org.springframework.aop.framework.ProxyFactoryBean" parent="velocityBase" lazy-init="true">
+	<bean id="com.liferay.portal.service.PasswordPolicyService.velocity" class="org.springframework.aop.framework.ProxyFactoryBean" parent="baseVelocityService" lazy-init="true">
 		<property name="target" ref="com.liferay.portal.service.PasswordPolicyService.transaction" />
 	</bean>
 	<bean id="com.liferay.portal.service.PasswordPolicyServiceFactory" class="com.liferay.portal.service.PasswordPolicyServiceFactory" parent="com.liferay.portal.service.PasswordPolicyService.base" />
@@ -415,7 +415,7 @@
 	<bean id="com.liferay.portal.service.PasswordPolicyRelLocalService.base" abstract="true">
 		<property name="service" ref="com.liferay.portal.service.PasswordPolicyRelLocalService.transaction" />
 	</bean>
-	<bean id="com.liferay.portal.service.PasswordPolicyRelLocalService.velocity" class="org.springframework.aop.framework.ProxyFactoryBean" parent="velocityBase" lazy-init="true">
+	<bean id="com.liferay.portal.service.PasswordPolicyRelLocalService.velocity" class="org.springframework.aop.framework.ProxyFactoryBean" parent="baseVelocityService" lazy-init="true">
 		<property name="target" ref="com.liferay.portal.service.PasswordPolicyRelLocalService.transaction" />
 	</bean>
 	<bean id="com.liferay.portal.service.PasswordPolicyRelLocalServiceFactory" class="com.liferay.portal.service.PasswordPolicyRelLocalServiceFactory" parent="com.liferay.portal.service.PasswordPolicyRelLocalService.base" />
@@ -430,7 +430,7 @@
 	<bean id="com.liferay.portal.service.PasswordTrackerLocalService.base" abstract="true">
 		<property name="service" ref="com.liferay.portal.service.PasswordTrackerLocalService.transaction" />
 	</bean>
-	<bean id="com.liferay.portal.service.PasswordTrackerLocalService.velocity" class="org.springframework.aop.framework.ProxyFactoryBean" parent="velocityBase" lazy-init="true">
+	<bean id="com.liferay.portal.service.PasswordTrackerLocalService.velocity" class="org.springframework.aop.framework.ProxyFactoryBean" parent="baseVelocityService" lazy-init="true">
 		<property name="target" ref="com.liferay.portal.service.PasswordTrackerLocalService.transaction" />
 	</bean>
 	<bean id="com.liferay.portal.service.PasswordTrackerLocalServiceFactory" class="com.liferay.portal.service.PasswordTrackerLocalServiceFactory" parent="com.liferay.portal.service.PasswordTrackerLocalService.base" />
@@ -445,7 +445,7 @@
 	<bean id="com.liferay.portal.service.PermissionLocalService.base" abstract="true">
 		<property name="service" ref="com.liferay.portal.service.PermissionLocalService.transaction" />
 	</bean>
-	<bean id="com.liferay.portal.service.PermissionLocalService.velocity" class="org.springframework.aop.framework.ProxyFactoryBean" parent="velocityBase" lazy-init="true">
+	<bean id="com.liferay.portal.service.PermissionLocalService.velocity" class="org.springframework.aop.framework.ProxyFactoryBean" parent="baseVelocityService" lazy-init="true">
 		<property name="target" ref="com.liferay.portal.service.PermissionLocalService.transaction" />
 	</bean>
 	<bean id="com.liferay.portal.service.PermissionLocalServiceFactory" class="com.liferay.portal.service.PermissionLocalServiceFactory" parent="com.liferay.portal.service.PermissionLocalService.base" />
@@ -455,7 +455,7 @@
 	<bean id="com.liferay.portal.service.PermissionService.base" abstract="true">
 		<property name="service" ref="com.liferay.portal.service.PermissionService.transaction" />
 	</bean>
-	<bean id="com.liferay.portal.service.PermissionService.velocity" class="org.springframework.aop.framework.ProxyFactoryBean" parent="velocityBase" lazy-init="true">
+	<bean id="com.liferay.portal.service.PermissionService.velocity" class="org.springframework.aop.framework.ProxyFactoryBean" parent="baseVelocityService" lazy-init="true">
 		<property name="target" ref="com.liferay.portal.service.PermissionService.transaction" />
 	</bean>
 	<bean id="com.liferay.portal.service.PermissionServiceFactory" class="com.liferay.portal.service.PermissionServiceFactory" parent="com.liferay.portal.service.PermissionService.base" />
@@ -478,7 +478,7 @@
 	<bean id="com.liferay.portal.service.PhoneLocalService.base" abstract="true">
 		<property name="service" ref="com.liferay.portal.service.PhoneLocalService.transaction" />
 	</bean>
-	<bean id="com.liferay.portal.service.PhoneLocalService.velocity" class="org.springframework.aop.framework.ProxyFactoryBean" parent="velocityBase" lazy-init="true">
+	<bean id="com.liferay.portal.service.PhoneLocalService.velocity" class="org.springframework.aop.framework.ProxyFactoryBean" parent="baseVelocityService" lazy-init="true">
 		<property name="target" ref="com.liferay.portal.service.PhoneLocalService.transaction" />
 	</bean>
 	<bean id="com.liferay.portal.service.PhoneLocalServiceFactory" class="com.liferay.portal.service.PhoneLocalServiceFactory" parent="com.liferay.portal.service.PhoneLocalService.base" />
@@ -488,7 +488,7 @@
 	<bean id="com.liferay.portal.service.PhoneService.base" abstract="true">
 		<property name="service" ref="com.liferay.portal.service.PhoneService.transaction" />
 	</bean>
-	<bean id="com.liferay.portal.service.PhoneService.velocity" class="org.springframework.aop.framework.ProxyFactoryBean" parent="velocityBase" lazy-init="true">
+	<bean id="com.liferay.portal.service.PhoneService.velocity" class="org.springframework.aop.framework.ProxyFactoryBean" parent="baseVelocityService" lazy-init="true">
 		<property name="target" ref="com.liferay.portal.service.PhoneService.transaction" />
 	</bean>
 	<bean id="com.liferay.portal.service.PhoneServiceFactory" class="com.liferay.portal.service.PhoneServiceFactory" parent="com.liferay.portal.service.PhoneService.base" />
@@ -503,7 +503,7 @@
 	<bean id="com.liferay.portal.service.PortalService.base" abstract="true">
 		<property name="service" ref="com.liferay.portal.service.PortalService.transaction" />
 	</bean>
-	<bean id="com.liferay.portal.service.PortalService.velocity" class="org.springframework.aop.framework.ProxyFactoryBean" parent="velocityBase" lazy-init="true">
+	<bean id="com.liferay.portal.service.PortalService.velocity" class="org.springframework.aop.framework.ProxyFactoryBean" parent="baseVelocityService" lazy-init="true">
 		<property name="target" ref="com.liferay.portal.service.PortalService.transaction" />
 	</bean>
 	<bean id="com.liferay.portal.service.PortalServiceFactory" class="com.liferay.portal.service.PortalServiceFactory" parent="com.liferay.portal.service.PortalService.base" />
@@ -513,7 +513,7 @@
 	<bean id="com.liferay.portal.service.PluginSettingLocalService.base" abstract="true">
 		<property name="service" ref="com.liferay.portal.service.PluginSettingLocalService.transaction" />
 	</bean>
-	<bean id="com.liferay.portal.service.PluginSettingLocalService.velocity" class="org.springframework.aop.framework.ProxyFactoryBean" parent="velocityBase" lazy-init="true">
+	<bean id="com.liferay.portal.service.PluginSettingLocalService.velocity" class="org.springframework.aop.framework.ProxyFactoryBean" parent="baseVelocityService" lazy-init="true">
 		<property name="target" ref="com.liferay.portal.service.PluginSettingLocalService.transaction" />
 	</bean>
 	<bean id="com.liferay.portal.service.PluginSettingLocalServiceFactory" class="com.liferay.portal.service.PluginSettingLocalServiceFactory" parent="com.liferay.portal.service.PluginSettingLocalService.base" />
@@ -523,7 +523,7 @@
 	<bean id="com.liferay.portal.service.PluginSettingService.base" abstract="true">
 		<property name="service" ref="com.liferay.portal.service.PluginSettingService.transaction" />
 	</bean>
-	<bean id="com.liferay.portal.service.PluginSettingService.velocity" class="org.springframework.aop.framework.ProxyFactoryBean" parent="velocityBase" lazy-init="true">
+	<bean id="com.liferay.portal.service.PluginSettingService.velocity" class="org.springframework.aop.framework.ProxyFactoryBean" parent="baseVelocityService" lazy-init="true">
 		<property name="target" ref="com.liferay.portal.service.PluginSettingService.transaction" />
 	</bean>
 	<bean id="com.liferay.portal.service.PluginSettingServiceFactory" class="com.liferay.portal.service.PluginSettingServiceFactory" parent="com.liferay.portal.service.PluginSettingService.base" />
@@ -538,7 +538,7 @@
 	<bean id="com.liferay.portal.service.PortletLocalService.base" abstract="true">
 		<property name="service" ref="com.liferay.portal.service.PortletLocalService.transaction" />
 	</bean>
-	<bean id="com.liferay.portal.service.PortletLocalService.velocity" class="org.springframework.aop.framework.ProxyFactoryBean" parent="velocityBase" lazy-init="true">
+	<bean id="com.liferay.portal.service.PortletLocalService.velocity" class="org.springframework.aop.framework.ProxyFactoryBean" parent="baseVelocityService" lazy-init="true">
 		<property name="target" ref="com.liferay.portal.service.PortletLocalService.transaction" />
 	</bean>
 	<bean id="com.liferay.portal.service.PortletLocalServiceFactory" class="com.liferay.portal.service.PortletLocalServiceFactory" parent="com.liferay.portal.service.PortletLocalService.base" />
@@ -548,7 +548,7 @@
 	<bean id="com.liferay.portal.service.PortletService.base" abstract="true">
 		<property name="service" ref="com.liferay.portal.service.PortletService.transaction" />
 	</bean>
-	<bean id="com.liferay.portal.service.PortletService.velocity" class="org.springframework.aop.framework.ProxyFactoryBean" parent="velocityBase" lazy-init="true">
+	<bean id="com.liferay.portal.service.PortletService.velocity" class="org.springframework.aop.framework.ProxyFactoryBean" parent="baseVelocityService" lazy-init="true">
 		<property name="target" ref="com.liferay.portal.service.PortletService.transaction" />
 	</bean>
 	<bean id="com.liferay.portal.service.PortletServiceFactory" class="com.liferay.portal.service.PortletServiceFactory" parent="com.liferay.portal.service.PortletService.base" />
@@ -563,7 +563,7 @@
 	<bean id="com.liferay.portal.service.PortletPreferencesLocalService.base" abstract="true">
 		<property name="service" ref="com.liferay.portal.service.PortletPreferencesLocalService.transaction" />
 	</bean>
-	<bean id="com.liferay.portal.service.PortletPreferencesLocalService.velocity" class="org.springframework.aop.framework.ProxyFactoryBean" parent="velocityBase" lazy-init="true">
+	<bean id="com.liferay.portal.service.PortletPreferencesLocalService.velocity" class="org.springframework.aop.framework.ProxyFactoryBean" parent="baseVelocityService" lazy-init="true">
 		<property name="target" ref="com.liferay.portal.service.PortletPreferencesLocalService.transaction" />
 	</bean>
 	<bean id="com.liferay.portal.service.PortletPreferencesLocalServiceFactory" class="com.liferay.portal.service.PortletPreferencesLocalServiceFactory" parent="com.liferay.portal.service.PortletPreferencesLocalService.base" />
@@ -573,7 +573,7 @@
 	<bean id="com.liferay.portal.service.PortletPreferencesService.base" abstract="true">
 		<property name="service" ref="com.liferay.portal.service.PortletPreferencesService.transaction" />
 	</bean>
-	<bean id="com.liferay.portal.service.PortletPreferencesService.velocity" class="org.springframework.aop.framework.ProxyFactoryBean" parent="velocityBase" lazy-init="true">
+	<bean id="com.liferay.portal.service.PortletPreferencesService.velocity" class="org.springframework.aop.framework.ProxyFactoryBean" parent="baseVelocityService" lazy-init="true">
 		<property name="target" ref="com.liferay.portal.service.PortletPreferencesService.transaction" />
 	</bean>
 	<bean id="com.liferay.portal.service.PortletPreferencesServiceFactory" class="com.liferay.portal.service.PortletPreferencesServiceFactory" parent="com.liferay.portal.service.PortletPreferencesService.base" />
@@ -592,7 +592,7 @@
 	<bean id="com.liferay.portal.service.RegionService.base" abstract="true">
 		<property name="service" ref="com.liferay.portal.service.RegionService.transaction" />
 	</bean>
-	<bean id="com.liferay.portal.service.RegionService.velocity" class="org.springframework.aop.framework.ProxyFactoryBean" parent="velocityBase" lazy-init="true">
+	<bean id="com.liferay.portal.service.RegionService.velocity" class="org.springframework.aop.framework.ProxyFactoryBean" parent="baseVelocityService" lazy-init="true">
 		<property name="target" ref="com.liferay.portal.service.RegionService.transaction" />
 	</bean>
 	<bean id="com.liferay.portal.service.RegionServiceFactory" class="com.liferay.portal.service.RegionServiceFactory" parent="com.liferay.portal.service.RegionService.base" />
@@ -607,7 +607,7 @@
 	<bean id="com.liferay.portal.service.ReleaseLocalService.base" abstract="true">
 		<property name="service" ref="com.liferay.portal.service.ReleaseLocalService.transaction" />
 	</bean>
-	<bean id="com.liferay.portal.service.ReleaseLocalService.velocity" class="org.springframework.aop.framework.ProxyFactoryBean" parent="velocityBase" lazy-init="true">
+	<bean id="com.liferay.portal.service.ReleaseLocalService.velocity" class="org.springframework.aop.framework.ProxyFactoryBean" parent="baseVelocityService" lazy-init="true">
 		<property name="target" ref="com.liferay.portal.service.ReleaseLocalService.transaction" />
 	</bean>
 	<bean id="com.liferay.portal.service.ReleaseLocalServiceFactory" class="com.liferay.portal.service.ReleaseLocalServiceFactory" parent="com.liferay.portal.service.ReleaseLocalService.base" />
@@ -622,7 +622,7 @@
 	<bean id="com.liferay.portal.service.ResourceLocalService.base" abstract="true">
 		<property name="service" ref="com.liferay.portal.service.ResourceLocalService.transaction" />
 	</bean>
-	<bean id="com.liferay.portal.service.ResourceLocalService.velocity" class="org.springframework.aop.framework.ProxyFactoryBean" parent="velocityBase" lazy-init="true">
+	<bean id="com.liferay.portal.service.ResourceLocalService.velocity" class="org.springframework.aop.framework.ProxyFactoryBean" parent="baseVelocityService" lazy-init="true">
 		<property name="target" ref="com.liferay.portal.service.ResourceLocalService.transaction" />
 	</bean>
 	<bean id="com.liferay.portal.service.ResourceLocalServiceFactory" class="com.liferay.portal.service.ResourceLocalServiceFactory" parent="com.liferay.portal.service.ResourceLocalService.base" />
@@ -632,7 +632,7 @@
 	<bean id="com.liferay.portal.service.ResourceService.base" abstract="true">
 		<property name="service" ref="com.liferay.portal.service.ResourceService.transaction" />
 	</bean>
-	<bean id="com.liferay.portal.service.ResourceService.velocity" class="org.springframework.aop.framework.ProxyFactoryBean" parent="velocityBase" lazy-init="true">
+	<bean id="com.liferay.portal.service.ResourceService.velocity" class="org.springframework.aop.framework.ProxyFactoryBean" parent="baseVelocityService" lazy-init="true">
 		<property name="target" ref="com.liferay.portal.service.ResourceService.transaction" />
 	</bean>
 	<bean id="com.liferay.portal.service.ResourceServiceFactory" class="com.liferay.portal.service.ResourceServiceFactory" parent="com.liferay.portal.service.ResourceService.base" />
@@ -651,7 +651,7 @@
 	<bean id="com.liferay.portal.service.ResourceCodeLocalService.base" abstract="true">
 		<property name="service" ref="com.liferay.portal.service.ResourceCodeLocalService.transaction" />
 	</bean>
-	<bean id="com.liferay.portal.service.ResourceCodeLocalService.velocity" class="org.springframework.aop.framework.ProxyFactoryBean" parent="velocityBase" lazy-init="true">
+	<bean id="com.liferay.portal.service.ResourceCodeLocalService.velocity" class="org.springframework.aop.framework.ProxyFactoryBean" parent="baseVelocityService" lazy-init="true">
 		<property name="target" ref="com.liferay.portal.service.ResourceCodeLocalService.transaction" />
 	</bean>
 	<bean id="com.liferay.portal.service.ResourceCodeLocalServiceFactory" class="com.liferay.portal.service.ResourceCodeLocalServiceFactory" parent="com.liferay.portal.service.ResourceCodeLocalService.base" />
@@ -666,7 +666,7 @@
 	<bean id="com.liferay.portal.service.RoleLocalService.base" abstract="true">
 		<property name="service" ref="com.liferay.portal.service.RoleLocalService.transaction" />
 	</bean>
-	<bean id="com.liferay.portal.service.RoleLocalService.velocity" class="org.springframework.aop.framework.ProxyFactoryBean" parent="velocityBase" lazy-init="true">
+	<bean id="com.liferay.portal.service.RoleLocalService.velocity" class="org.springframework.aop.framework.ProxyFactoryBean" parent="baseVelocityService" lazy-init="true">
 		<property name="target" ref="com.liferay.portal.service.RoleLocalService.transaction" />
 	</bean>
 	<bean id="com.liferay.portal.service.RoleLocalServiceFactory" class="com.liferay.portal.service.RoleLocalServiceFactory" parent="com.liferay.portal.service.RoleLocalService.base" />
@@ -676,7 +676,7 @@
 	<bean id="com.liferay.portal.service.RoleService.base" abstract="true">
 		<property name="service" ref="com.liferay.portal.service.RoleService.transaction" />
 	</bean>
-	<bean id="com.liferay.portal.service.RoleService.velocity" class="org.springframework.aop.framework.ProxyFactoryBean" parent="velocityBase" lazy-init="true">
+	<bean id="com.liferay.portal.service.RoleService.velocity" class="org.springframework.aop.framework.ProxyFactoryBean" parent="baseVelocityService" lazy-init="true">
 		<property name="target" ref="com.liferay.portal.service.RoleService.transaction" />
 	</bean>
 	<bean id="com.liferay.portal.service.RoleServiceFactory" class="com.liferay.portal.service.RoleServiceFactory" parent="com.liferay.portal.service.RoleService.base" />
@@ -695,7 +695,7 @@
 	<bean id="com.liferay.portal.service.ServiceComponentLocalService.base" abstract="true">
 		<property name="service" ref="com.liferay.portal.service.ServiceComponentLocalService.transaction" />
 	</bean>
-	<bean id="com.liferay.portal.service.ServiceComponentLocalService.velocity" class="org.springframework.aop.framework.ProxyFactoryBean" parent="velocityBase" lazy-init="true">
+	<bean id="com.liferay.portal.service.ServiceComponentLocalService.velocity" class="org.springframework.aop.framework.ProxyFactoryBean" parent="baseVelocityService" lazy-init="true">
 		<property name="target" ref="com.liferay.portal.service.ServiceComponentLocalService.transaction" />
 	</bean>
 	<bean id="com.liferay.portal.service.ServiceComponentLocalServiceFactory" class="com.liferay.portal.service.ServiceComponentLocalServiceFactory" parent="com.liferay.portal.service.ServiceComponentLocalService.base" />
@@ -710,7 +710,7 @@
 	<bean id="com.liferay.portal.service.PortletItemLocalService.base" abstract="true">
 		<property name="service" ref="com.liferay.portal.service.PortletItemLocalService.transaction" />
 	</bean>
-	<bean id="com.liferay.portal.service.PortletItemLocalService.velocity" class="org.springframework.aop.framework.ProxyFactoryBean" parent="velocityBase" lazy-init="true">
+	<bean id="com.liferay.portal.service.PortletItemLocalService.velocity" class="org.springframework.aop.framework.ProxyFactoryBean" parent="baseVelocityService" lazy-init="true">
 		<property name="target" ref="com.liferay.portal.service.PortletItemLocalService.transaction" />
 	</bean>
 	<bean id="com.liferay.portal.service.PortletItemLocalServiceFactory" class="com.liferay.portal.service.PortletItemLocalServiceFactory" parent="com.liferay.portal.service.PortletItemLocalService.base" />
@@ -725,7 +725,7 @@
 	<bean id="com.liferay.portal.service.SubscriptionLocalService.base" abstract="true">
 		<property name="service" ref="com.liferay.portal.service.SubscriptionLocalService.transaction" />
 	</bean>
-	<bean id="com.liferay.portal.service.SubscriptionLocalService.velocity" class="org.springframework.aop.framework.ProxyFactoryBean" parent="velocityBase" lazy-init="true">
+	<bean id="com.liferay.portal.service.SubscriptionLocalService.velocity" class="org.springframework.aop.framework.ProxyFactoryBean" parent="baseVelocityService" lazy-init="true">
 		<property name="target" ref="com.liferay.portal.service.SubscriptionLocalService.transaction" />
 	</bean>
 	<bean id="com.liferay.portal.service.SubscriptionLocalServiceFactory" class="com.liferay.portal.service.SubscriptionLocalServiceFactory" parent="com.liferay.portal.service.SubscriptionLocalService.base" />
@@ -739,7 +739,7 @@
 	<bean id="com.liferay.portal.service.ThemeLocalService.base" abstract="true">
 		<property name="service" ref="com.liferay.portal.service.ThemeLocalService.impl" />
 	</bean>
-	<bean id="com.liferay.portal.service.ThemeLocalService.velocity" class="org.springframework.aop.framework.ProxyFactoryBean" parent="velocityBase" lazy-init="true">
+	<bean id="com.liferay.portal.service.ThemeLocalService.velocity" class="org.springframework.aop.framework.ProxyFactoryBean" parent="baseVelocityService" lazy-init="true">
 		<property name="target" ref="com.liferay.portal.service.ThemeLocalService.impl" />
 	</bean>
 	<bean id="com.liferay.portal.service.ThemeLocalServiceFactory" class="com.liferay.portal.service.ThemeLocalServiceFactory" parent="com.liferay.portal.service.ThemeLocalService.base" />
@@ -748,7 +748,7 @@
 	<bean id="com.liferay.portal.service.ThemeService.base" abstract="true">
 		<property name="service" ref="com.liferay.portal.service.ThemeService.impl" />
 	</bean>
-	<bean id="com.liferay.portal.service.ThemeService.velocity" class="org.springframework.aop.framework.ProxyFactoryBean" parent="velocityBase" lazy-init="true">
+	<bean id="com.liferay.portal.service.ThemeService.velocity" class="org.springframework.aop.framework.ProxyFactoryBean" parent="baseVelocityService" lazy-init="true">
 		<property name="target" ref="com.liferay.portal.service.ThemeService.impl" />
 	</bean>
 	<bean id="com.liferay.portal.service.ThemeServiceFactory" class="com.liferay.portal.service.ThemeServiceFactory" parent="com.liferay.portal.service.ThemeService.base" />
@@ -758,7 +758,7 @@
 	<bean id="com.liferay.portal.service.UserLocalService.base" abstract="true">
 		<property name="service" ref="com.liferay.portal.service.UserLocalService.transaction" />
 	</bean>
-	<bean id="com.liferay.portal.service.UserLocalService.velocity" class="org.springframework.aop.framework.ProxyFactoryBean" parent="velocityBase" lazy-init="true">
+	<bean id="com.liferay.portal.service.UserLocalService.velocity" class="org.springframework.aop.framework.ProxyFactoryBean" parent="baseVelocityService" lazy-init="true">
 		<property name="target" ref="com.liferay.portal.service.UserLocalService.transaction" />
 	</bean>
 	<bean id="com.liferay.portal.service.UserLocalServiceFactory" class="com.liferay.portal.service.UserLocalServiceFactory" parent="com.liferay.portal.service.UserLocalService.base" />
@@ -768,7 +768,7 @@
 	<bean id="com.liferay.portal.service.UserService.base" abstract="true">
 		<property name="service" ref="com.liferay.portal.service.UserService.transaction" />
 	</bean>
-	<bean id="com.liferay.portal.service.UserService.velocity" class="org.springframework.aop.framework.ProxyFactoryBean" parent="velocityBase" lazy-init="true">
+	<bean id="com.liferay.portal.service.UserService.velocity" class="org.springframework.aop.framework.ProxyFactoryBean" parent="baseVelocityService" lazy-init="true">
 		<property name="target" ref="com.liferay.portal.service.UserService.transaction" />
 	</bean>
 	<bean id="com.liferay.portal.service.UserServiceFactory" class="com.liferay.portal.service.UserServiceFactory" parent="com.liferay.portal.service.UserService.base" />
@@ -787,7 +787,7 @@
 	<bean id="com.liferay.portal.service.UserGroupLocalService.base" abstract="true">
 		<property name="service" ref="com.liferay.portal.service.UserGroupLocalService.transaction" />
 	</bean>
-	<bean id="com.liferay.portal.service.UserGroupLocalService.velocity" class="org.springframework.aop.framework.ProxyFactoryBean" parent="velocityBase" lazy-init="true">
+	<bean id="com.liferay.portal.service.UserGroupLocalService.velocity" class="org.springframework.aop.framework.ProxyFactoryBean" parent="baseVelocityService" lazy-init="true">
 		<property name="target" ref="com.liferay.portal.service.UserGroupLocalService.transaction" />
 	</bean>
 	<bean id="com.liferay.portal.service.UserGroupLocalServiceFactory" class="com.liferay.portal.service.UserGroupLocalServiceFactory" parent="com.liferay.portal.service.UserGroupLocalService.base" />
@@ -797,7 +797,7 @@
 	<bean id="com.liferay.portal.service.UserGroupService.base" abstract="true">
 		<property name="service" ref="com.liferay.portal.service.UserGroupService.transaction" />
 	</bean>
-	<bean id="com.liferay.portal.service.UserGroupService.velocity" class="org.springframework.aop.framework.ProxyFactoryBean" parent="velocityBase" lazy-init="true">
+	<bean id="com.liferay.portal.service.UserGroupService.velocity" class="org.springframework.aop.framework.ProxyFactoryBean" parent="baseVelocityService" lazy-init="true">
 		<property name="target" ref="com.liferay.portal.service.UserGroupService.transaction" />
 	</bean>
 	<bean id="com.liferay.portal.service.UserGroupServiceFactory" class="com.liferay.portal.service.UserGroupServiceFactory" parent="com.liferay.portal.service.UserGroupService.base" />
@@ -816,7 +816,7 @@
 	<bean id="com.liferay.portal.service.UserGroupRoleLocalService.base" abstract="true">
 		<property name="service" ref="com.liferay.portal.service.UserGroupRoleLocalService.transaction" />
 	</bean>
-	<bean id="com.liferay.portal.service.UserGroupRoleLocalService.velocity" class="org.springframework.aop.framework.ProxyFactoryBean" parent="velocityBase" lazy-init="true">
+	<bean id="com.liferay.portal.service.UserGroupRoleLocalService.velocity" class="org.springframework.aop.framework.ProxyFactoryBean" parent="baseVelocityService" lazy-init="true">
 		<property name="target" ref="com.liferay.portal.service.UserGroupRoleLocalService.transaction" />
 	</bean>
 	<bean id="com.liferay.portal.service.UserGroupRoleLocalServiceFactory" class="com.liferay.portal.service.UserGroupRoleLocalServiceFactory" parent="com.liferay.portal.service.UserGroupRoleLocalService.base" />
@@ -826,7 +826,7 @@
 	<bean id="com.liferay.portal.service.UserGroupRoleService.base" abstract="true">
 		<property name="service" ref="com.liferay.portal.service.UserGroupRoleService.transaction" />
 	</bean>
-	<bean id="com.liferay.portal.service.UserGroupRoleService.velocity" class="org.springframework.aop.framework.ProxyFactoryBean" parent="velocityBase" lazy-init="true">
+	<bean id="com.liferay.portal.service.UserGroupRoleService.velocity" class="org.springframework.aop.framework.ProxyFactoryBean" parent="baseVelocityService" lazy-init="true">
 		<property name="target" ref="com.liferay.portal.service.UserGroupRoleService.transaction" />
 	</bean>
 	<bean id="com.liferay.portal.service.UserGroupRoleServiceFactory" class="com.liferay.portal.service.UserGroupRoleServiceFactory" parent="com.liferay.portal.service.UserGroupRoleService.base" />
@@ -841,7 +841,7 @@
 	<bean id="com.liferay.portal.service.UserIdMapperLocalService.base" abstract="true">
 		<property name="service" ref="com.liferay.portal.service.UserIdMapperLocalService.transaction" />
 	</bean>
-	<bean id="com.liferay.portal.service.UserIdMapperLocalService.velocity" class="org.springframework.aop.framework.ProxyFactoryBean" parent="velocityBase" lazy-init="true">
+	<bean id="com.liferay.portal.service.UserIdMapperLocalService.velocity" class="org.springframework.aop.framework.ProxyFactoryBean" parent="baseVelocityService" lazy-init="true">
 		<property name="target" ref="com.liferay.portal.service.UserIdMapperLocalService.transaction" />
 	</bean>
 	<bean id="com.liferay.portal.service.UserIdMapperLocalServiceFactory" class="com.liferay.portal.service.UserIdMapperLocalServiceFactory" parent="com.liferay.portal.service.UserIdMapperLocalService.base" />
@@ -856,7 +856,7 @@
 	<bean id="com.liferay.portal.service.UserTrackerLocalService.base" abstract="true">
 		<property name="service" ref="com.liferay.portal.service.UserTrackerLocalService.transaction" />
 	</bean>
-	<bean id="com.liferay.portal.service.UserTrackerLocalService.velocity" class="org.springframework.aop.framework.ProxyFactoryBean" parent="velocityBase" lazy-init="true">
+	<bean id="com.liferay.portal.service.UserTrackerLocalService.velocity" class="org.springframework.aop.framework.ProxyFactoryBean" parent="baseVelocityService" lazy-init="true">
 		<property name="target" ref="com.liferay.portal.service.UserTrackerLocalService.transaction" />
 	</bean>
 	<bean id="com.liferay.portal.service.UserTrackerLocalServiceFactory" class="com.liferay.portal.service.UserTrackerLocalServiceFactory" parent="com.liferay.portal.service.UserTrackerLocalService.base" />
@@ -871,7 +871,7 @@
 	<bean id="com.liferay.portal.service.UserTrackerPathLocalService.base" abstract="true">
 		<property name="service" ref="com.liferay.portal.service.UserTrackerPathLocalService.transaction" />
 	</bean>
-	<bean id="com.liferay.portal.service.UserTrackerPathLocalService.velocity" class="org.springframework.aop.framework.ProxyFactoryBean" parent="velocityBase" lazy-init="true">
+	<bean id="com.liferay.portal.service.UserTrackerPathLocalService.velocity" class="org.springframework.aop.framework.ProxyFactoryBean" parent="baseVelocityService" lazy-init="true">
 		<property name="target" ref="com.liferay.portal.service.UserTrackerPathLocalService.transaction" />
 	</bean>
 	<bean id="com.liferay.portal.service.UserTrackerPathLocalServiceFactory" class="com.liferay.portal.service.UserTrackerPathLocalServiceFactory" parent="com.liferay.portal.service.UserTrackerPathLocalService.base" />
@@ -886,7 +886,7 @@
 	<bean id="com.liferay.portal.service.WebDAVPropsLocalService.base" abstract="true">
 		<property name="service" ref="com.liferay.portal.service.WebDAVPropsLocalService.transaction" />
 	</bean>
-	<bean id="com.liferay.portal.service.WebDAVPropsLocalService.velocity" class="org.springframework.aop.framework.ProxyFactoryBean" parent="velocityBase" lazy-init="true">
+	<bean id="com.liferay.portal.service.WebDAVPropsLocalService.velocity" class="org.springframework.aop.framework.ProxyFactoryBean" parent="baseVelocityService" lazy-init="true">
 		<property name="target" ref="com.liferay.portal.service.WebDAVPropsLocalService.transaction" />
 	</bean>
 	<bean id="com.liferay.portal.service.WebDAVPropsLocalServiceFactory" class="com.liferay.portal.service.WebDAVPropsLocalServiceFactory" parent="com.liferay.portal.service.WebDAVPropsLocalService.base" />
@@ -901,7 +901,7 @@
 	<bean id="com.liferay.portal.service.WebsiteLocalService.base" abstract="true">
 		<property name="service" ref="com.liferay.portal.service.WebsiteLocalService.transaction" />
 	</bean>
-	<bean id="com.liferay.portal.service.WebsiteLocalService.velocity" class="org.springframework.aop.framework.ProxyFactoryBean" parent="velocityBase" lazy-init="true">
+	<bean id="com.liferay.portal.service.WebsiteLocalService.velocity" class="org.springframework.aop.framework.ProxyFactoryBean" parent="baseVelocityService" lazy-init="true">
 		<property name="target" ref="com.liferay.portal.service.WebsiteLocalService.transaction" />
 	</bean>
 	<bean id="com.liferay.portal.service.WebsiteLocalServiceFactory" class="com.liferay.portal.service.WebsiteLocalServiceFactory" parent="com.liferay.portal.service.WebsiteLocalService.base" />
@@ -911,7 +911,7 @@
 	<bean id="com.liferay.portal.service.WebsiteService.base" abstract="true">
 		<property name="service" ref="com.liferay.portal.service.WebsiteService.transaction" />
 	</bean>
-	<bean id="com.liferay.portal.service.WebsiteService.velocity" class="org.springframework.aop.framework.ProxyFactoryBean" parent="velocityBase" lazy-init="true">
+	<bean id="com.liferay.portal.service.WebsiteService.velocity" class="org.springframework.aop.framework.ProxyFactoryBean" parent="baseVelocityService" lazy-init="true">
 		<property name="target" ref="com.liferay.portal.service.WebsiteService.transaction" />
 	</bean>
 	<bean id="com.liferay.portal.service.WebsiteServiceFactory" class="com.liferay.portal.service.WebsiteServiceFactory" parent="com.liferay.portal.service.WebsiteService.base" />
@@ -926,7 +926,7 @@
 	<bean id="com.liferay.portlet.announcements.service.AnnouncementsDeliveryLocalService.base" abstract="true">
 		<property name="service" ref="com.liferay.portlet.announcements.service.AnnouncementsDeliveryLocalService.transaction" />
 	</bean>
-	<bean id="com.liferay.portlet.announcements.service.AnnouncementsDeliveryLocalService.velocity" class="org.springframework.aop.framework.ProxyFactoryBean" parent="velocityBase" lazy-init="true">
+	<bean id="com.liferay.portlet.announcements.service.AnnouncementsDeliveryLocalService.velocity" class="org.springframework.aop.framework.ProxyFactoryBean" parent="baseVelocityService" lazy-init="true">
 		<property name="target" ref="com.liferay.portlet.announcements.service.AnnouncementsDeliveryLocalService.transaction" />
 	</bean>
 	<bean id="com.liferay.portlet.announcements.service.AnnouncementsDeliveryLocalServiceFactory" class="com.liferay.portlet.announcements.service.AnnouncementsDeliveryLocalServiceFactory" parent="com.liferay.portlet.announcements.service.AnnouncementsDeliveryLocalService.base" />
@@ -936,7 +936,7 @@
 	<bean id="com.liferay.portlet.announcements.service.AnnouncementsDeliveryService.base" abstract="true">
 		<property name="service" ref="com.liferay.portlet.announcements.service.AnnouncementsDeliveryService.transaction" />
 	</bean>
-	<bean id="com.liferay.portlet.announcements.service.AnnouncementsDeliveryService.velocity" class="org.springframework.aop.framework.ProxyFactoryBean" parent="velocityBase" lazy-init="true">
+	<bean id="com.liferay.portlet.announcements.service.AnnouncementsDeliveryService.velocity" class="org.springframework.aop.framework.ProxyFactoryBean" parent="baseVelocityService" lazy-init="true">
 		<property name="target" ref="com.liferay.portlet.announcements.service.AnnouncementsDeliveryService.transaction" />
 	</bean>
 	<bean id="com.liferay.portlet.announcements.service.AnnouncementsDeliveryServiceFactory" class="com.liferay.portlet.announcements.service.AnnouncementsDeliveryServiceFactory" parent="com.liferay.portlet.announcements.service.AnnouncementsDeliveryService.base" />
@@ -951,7 +951,7 @@
 	<bean id="com.liferay.portlet.announcements.service.AnnouncementsEntryLocalService.base" abstract="true">
 		<property name="service" ref="com.liferay.portlet.announcements.service.AnnouncementsEntryLocalService.transaction" />
 	</bean>
-	<bean id="com.liferay.portlet.announcements.service.AnnouncementsEntryLocalService.velocity" class="org.springframework.aop.framework.ProxyFactoryBean" parent="velocityBase" lazy-init="true">
+	<bean id="com.liferay.portlet.announcements.service.AnnouncementsEntryLocalService.velocity" class="org.springframework.aop.framework.ProxyFactoryBean" parent="baseVelocityService" lazy-init="true">
 		<property name="target" ref="com.liferay.portlet.announcements.service.AnnouncementsEntryLocalService.transaction" />
 	</bean>
 	<bean id="com.liferay.portlet.announcements.service.AnnouncementsEntryLocalServiceFactory" class="com.liferay.portlet.announcements.service.AnnouncementsEntryLocalServiceFactory" parent="com.liferay.portlet.announcements.service.AnnouncementsEntryLocalService.base" />
@@ -961,7 +961,7 @@
 	<bean id="com.liferay.portlet.announcements.service.AnnouncementsEntryService.base" abstract="true">
 		<property name="service" ref="com.liferay.portlet.announcements.service.AnnouncementsEntryService.transaction" />
 	</bean>
-	<bean id="com.liferay.portlet.announcements.service.AnnouncementsEntryService.velocity" class="org.springframework.aop.framework.ProxyFactoryBean" parent="velocityBase" lazy-init="true">
+	<bean id="com.liferay.portlet.announcements.service.AnnouncementsEntryService.velocity" class="org.springframework.aop.framework.ProxyFactoryBean" parent="baseVelocityService" lazy-init="true">
 		<property name="target" ref="com.liferay.portlet.announcements.service.AnnouncementsEntryService.transaction" />
 	</bean>
 	<bean id="com.liferay.portlet.announcements.service.AnnouncementsEntryServiceFactory" class="com.liferay.portlet.announcements.service.AnnouncementsEntryServiceFactory" parent="com.liferay.portlet.announcements.service.AnnouncementsEntryService.base" />
@@ -980,7 +980,7 @@
 	<bean id="com.liferay.portlet.announcements.service.AnnouncementsFlagLocalService.base" abstract="true">
 		<property name="service" ref="com.liferay.portlet.announcements.service.AnnouncementsFlagLocalService.transaction" />
 	</bean>
-	<bean id="com.liferay.portlet.announcements.service.AnnouncementsFlagLocalService.velocity" class="org.springframework.aop.framework.ProxyFactoryBean" parent="velocityBase" lazy-init="true">
+	<bean id="com.liferay.portlet.announcements.service.AnnouncementsFlagLocalService.velocity" class="org.springframework.aop.framework.ProxyFactoryBean" parent="baseVelocityService" lazy-init="true">
 		<property name="target" ref="com.liferay.portlet.announcements.service.AnnouncementsFlagLocalService.transaction" />
 	</bean>
 	<bean id="com.liferay.portlet.announcements.service.AnnouncementsFlagLocalServiceFactory" class="com.liferay.portlet.announcements.service.AnnouncementsFlagLocalServiceFactory" parent="com.liferay.portlet.announcements.service.AnnouncementsFlagLocalService.base" />
@@ -990,7 +990,7 @@
 	<bean id="com.liferay.portlet.announcements.service.AnnouncementsFlagService.base" abstract="true">
 		<property name="service" ref="com.liferay.portlet.announcements.service.AnnouncementsFlagService.transaction" />
 	</bean>
-	<bean id="com.liferay.portlet.announcements.service.AnnouncementsFlagService.velocity" class="org.springframework.aop.framework.ProxyFactoryBean" parent="velocityBase" lazy-init="true">
+	<bean id="com.liferay.portlet.announcements.service.AnnouncementsFlagService.velocity" class="org.springframework.aop.framework.ProxyFactoryBean" parent="baseVelocityService" lazy-init="true">
 		<property name="target" ref="com.liferay.portlet.announcements.service.AnnouncementsFlagService.transaction" />
 	</bean>
 	<bean id="com.liferay.portlet.announcements.service.AnnouncementsFlagServiceFactory" class="com.liferay.portlet.announcements.service.AnnouncementsFlagServiceFactory" parent="com.liferay.portlet.announcements.service.AnnouncementsFlagService.base" />
@@ -1005,7 +1005,7 @@
 	<bean id="com.liferay.portlet.blogs.service.BlogsEntryLocalService.base" abstract="true">
 		<property name="service" ref="com.liferay.portlet.blogs.service.BlogsEntryLocalService.transaction" />
 	</bean>
-	<bean id="com.liferay.portlet.blogs.service.BlogsEntryLocalService.velocity" class="org.springframework.aop.framework.ProxyFactoryBean" parent="velocityBase" lazy-init="true">
+	<bean id="com.liferay.portlet.blogs.service.BlogsEntryLocalService.velocity" class="org.springframework.aop.framework.ProxyFactoryBean" parent="baseVelocityService" lazy-init="true">
 		<property name="target" ref="com.liferay.portlet.blogs.service.BlogsEntryLocalService.transaction" />
 	</bean>
 	<bean id="com.liferay.portlet.blogs.service.BlogsEntryLocalServiceFactory" class="com.liferay.portlet.blogs.service.BlogsEntryLocalServiceFactory" parent="com.liferay.portlet.blogs.service.BlogsEntryLocalService.base" />
@@ -1015,7 +1015,7 @@
 	<bean id="com.liferay.portlet.blogs.service.BlogsEntryService.base" abstract="true">
 		<property name="service" ref="com.liferay.portlet.blogs.service.BlogsEntryService.transaction" />
 	</bean>
-	<bean id="com.liferay.portlet.blogs.service.BlogsEntryService.velocity" class="org.springframework.aop.framework.ProxyFactoryBean" parent="velocityBase" lazy-init="true">
+	<bean id="com.liferay.portlet.blogs.service.BlogsEntryService.velocity" class="org.springframework.aop.framework.ProxyFactoryBean" parent="baseVelocityService" lazy-init="true">
 		<property name="target" ref="com.liferay.portlet.blogs.service.BlogsEntryService.transaction" />
 	</bean>
 	<bean id="com.liferay.portlet.blogs.service.BlogsEntryServiceFactory" class="com.liferay.portlet.blogs.service.BlogsEntryServiceFactory" parent="com.liferay.portlet.blogs.service.BlogsEntryService.base" />
@@ -1034,7 +1034,7 @@
 	<bean id="com.liferay.portlet.blogs.service.BlogsStatsUserLocalService.base" abstract="true">
 		<property name="service" ref="com.liferay.portlet.blogs.service.BlogsStatsUserLocalService.transaction" />
 	</bean>
-	<bean id="com.liferay.portlet.blogs.service.BlogsStatsUserLocalService.velocity" class="org.springframework.aop.framework.ProxyFactoryBean" parent="velocityBase" lazy-init="true">
+	<bean id="com.liferay.portlet.blogs.service.BlogsStatsUserLocalService.velocity" class="org.springframework.aop.framework.ProxyFactoryBean" parent="baseVelocityService" lazy-init="true">
 		<property name="target" ref="com.liferay.portlet.blogs.service.BlogsStatsUserLocalService.transaction" />
 	</bean>
 	<bean id="com.liferay.portlet.blogs.service.BlogsStatsUserLocalServiceFactory" class="com.liferay.portlet.blogs.service.BlogsStatsUserLocalServiceFactory" parent="com.liferay.portlet.blogs.service.BlogsStatsUserLocalService.base" />
@@ -1053,7 +1053,7 @@
 	<bean id="com.liferay.portlet.bookmarks.service.BookmarksEntryLocalService.base" abstract="true">
 		<property name="service" ref="com.liferay.portlet.bookmarks.service.BookmarksEntryLocalService.transaction" />
 	</bean>
-	<bean id="com.liferay.portlet.bookmarks.service.BookmarksEntryLocalService.velocity" class="org.springframework.aop.framework.ProxyFactoryBean" parent="velocityBase" lazy-init="true">
+	<bean id="com.liferay.portlet.bookmarks.service.BookmarksEntryLocalService.velocity" class="org.springframework.aop.framework.ProxyFactoryBean" parent="baseVelocityService" lazy-init="true">
 		<property name="target" ref="com.liferay.portlet.bookmarks.service.BookmarksEntryLocalService.transaction" />
 	</bean>
 	<bean id="com.liferay.portlet.bookmarks.service.BookmarksEntryLocalServiceFactory" class="com.liferay.portlet.bookmarks.service.BookmarksEntryLocalServiceFactory" parent="com.liferay.portlet.bookmarks.service.BookmarksEntryLocalService.base" />
@@ -1063,7 +1063,7 @@
 	<bean id="com.liferay.portlet.bookmarks.service.BookmarksEntryService.base" abstract="true">
 		<property name="service" ref="com.liferay.portlet.bookmarks.service.BookmarksEntryService.transaction" />
 	</bean>
-	<bean id="com.liferay.portlet.bookmarks.service.BookmarksEntryService.velocity" class="org.springframework.aop.framework.ProxyFactoryBean" parent="velocityBase" lazy-init="true">
+	<bean id="com.liferay.portlet.bookmarks.service.BookmarksEntryService.velocity" class="org.springframework.aop.framework.ProxyFactoryBean" parent="baseVelocityService" lazy-init="true">
 		<property name="target" ref="com.liferay.portlet.bookmarks.service.BookmarksEntryService.transaction" />
 	</bean>
 	<bean id="com.liferay.portlet.bookmarks.service.BookmarksEntryServiceFactory" class="com.liferay.portlet.bookmarks.service.BookmarksEntryServiceFactory" parent="com.liferay.portlet.bookmarks.service.BookmarksEntryService.base" />
@@ -1082,7 +1082,7 @@
 	<bean id="com.liferay.portlet.bookmarks.service.BookmarksFolderLocalService.base" abstract="true">
 		<property name="service" ref="com.liferay.portlet.bookmarks.service.BookmarksFolderLocalService.transaction" />
 	</bean>
-	<bean id="com.liferay.portlet.bookmarks.service.BookmarksFolderLocalService.velocity" class="org.springframework.aop.framework.ProxyFactoryBean" parent="velocityBase" lazy-init="true">
+	<bean id="com.liferay.portlet.bookmarks.service.BookmarksFolderLocalService.velocity" class="org.springframework.aop.framework.ProxyFactoryBean" parent="baseVelocityService" lazy-init="true">
 		<property name="target" ref="com.liferay.portlet.bookmarks.service.BookmarksFolderLocalService.transaction" />
 	</bean>
 	<bean id="com.liferay.portlet.bookmarks.service.BookmarksFolderLocalServiceFactory" class="com.liferay.portlet.bookmarks.service.BookmarksFolderLocalServiceFactory" parent="com.liferay.portlet.bookmarks.service.BookmarksFolderLocalService.base" />
@@ -1092,7 +1092,7 @@
 	<bean id="com.liferay.portlet.bookmarks.service.BookmarksFolderService.base" abstract="true">
 		<property name="service" ref="com.liferay.portlet.bookmarks.service.BookmarksFolderService.transaction" />
 	</bean>
-	<bean id="com.liferay.portlet.bookmarks.service.BookmarksFolderService.velocity" class="org.springframework.aop.framework.ProxyFactoryBean" parent="velocityBase" lazy-init="true">
+	<bean id="com.liferay.portlet.bookmarks.service.BookmarksFolderService.velocity" class="org.springframework.aop.framework.ProxyFactoryBean" parent="baseVelocityService" lazy-init="true">
 		<property name="target" ref="com.liferay.portlet.bookmarks.service.BookmarksFolderService.transaction" />
 	</bean>
 	<bean id="com.liferay.portlet.bookmarks.service.BookmarksFolderServiceFactory" class="com.liferay.portlet.bookmarks.service.BookmarksFolderServiceFactory" parent="com.liferay.portlet.bookmarks.service.BookmarksFolderService.base" />
@@ -1107,7 +1107,7 @@
 	<bean id="com.liferay.portlet.calendar.service.CalEventLocalService.base" abstract="true">
 		<property name="service" ref="com.liferay.portlet.calendar.service.CalEventLocalService.transaction" />
 	</bean>
-	<bean id="com.liferay.portlet.calendar.service.CalEventLocalService.velocity" class="org.springframework.aop.framework.ProxyFactoryBean" parent="velocityBase" lazy-init="true">
+	<bean id="com.liferay.portlet.calendar.service.CalEventLocalService.velocity" class="org.springframework.aop.framework.ProxyFactoryBean" parent="baseVelocityService" lazy-init="true">
 		<property name="target" ref="com.liferay.portlet.calendar.service.CalEventLocalService.transaction" />
 	</bean>
 	<bean id="com.liferay.portlet.calendar.service.CalEventLocalServiceFactory" class="com.liferay.portlet.calendar.service.CalEventLocalServiceFactory" parent="com.liferay.portlet.calendar.service.CalEventLocalService.base" />
@@ -1117,7 +1117,7 @@
 	<bean id="com.liferay.portlet.calendar.service.CalEventService.base" abstract="true">
 		<property name="service" ref="com.liferay.portlet.calendar.service.CalEventService.transaction" />
 	</bean>
-	<bean id="com.liferay.portlet.calendar.service.CalEventService.velocity" class="org.springframework.aop.framework.ProxyFactoryBean" parent="velocityBase" lazy-init="true">
+	<bean id="com.liferay.portlet.calendar.service.CalEventService.velocity" class="org.springframework.aop.framework.ProxyFactoryBean" parent="baseVelocityService" lazy-init="true">
 		<property name="target" ref="com.liferay.portlet.calendar.service.CalEventService.transaction" />
 	</bean>
 	<bean id="com.liferay.portlet.calendar.service.CalEventServiceFactory" class="com.liferay.portlet.calendar.service.CalEventServiceFactory" parent="com.liferay.portlet.calendar.service.CalEventService.base" />
@@ -1136,7 +1136,7 @@
 	<bean id="com.liferay.portlet.documentlibrary.service.DLFileEntryLocalService.base" abstract="true">
 		<property name="service" ref="com.liferay.portlet.documentlibrary.service.DLFileEntryLocalService.transaction" />
 	</bean>
-	<bean id="com.liferay.portlet.documentlibrary.service.DLFileEntryLocalService.velocity" class="org.springframework.aop.framework.ProxyFactoryBean" parent="velocityBase" lazy-init="true">
+	<bean id="com.liferay.portlet.documentlibrary.service.DLFileEntryLocalService.velocity" class="org.springframework.aop.framework.ProxyFactoryBean" parent="baseVelocityService" lazy-init="true">
 		<property name="target" ref="com.liferay.portlet.documentlibrary.service.DLFileEntryLocalService.transaction" />
 	</bean>
 	<bean id="com.liferay.portlet.documentlibrary.service.DLFileEntryLocalServiceFactory" class="com.liferay.portlet.documentlibrary.service.DLFileEntryLocalServiceFactory" parent="com.liferay.portlet.documentlibrary.service.DLFileEntryLocalService.base" />
@@ -1146,7 +1146,7 @@
 	<bean id="com.liferay.portlet.documentlibrary.service.DLFileEntryService.base" abstract="true">
 		<property name="service" ref="com.liferay.portlet.documentlibrary.service.DLFileEntryService.transaction" />
 	</bean>
-	<bean id="com.liferay.portlet.documentlibrary.service.DLFileEntryService.velocity" class="org.springframework.aop.framework.ProxyFactoryBean" parent="velocityBase" lazy-init="true">
+	<bean id="com.liferay.portlet.documentlibrary.service.DLFileEntryService.velocity" class="org.springframework.aop.framework.ProxyFactoryBean" parent="baseVelocityService" lazy-init="true">
 		<property name="target" ref="com.liferay.portlet.documentlibrary.service.DLFileEntryService.transaction" />
 	</bean>
 	<bean id="com.liferay.portlet.documentlibrary.service.DLFileEntryServiceFactory" class="com.liferay.portlet.documentlibrary.service.DLFileEntryServiceFactory" parent="com.liferay.portlet.documentlibrary.service.DLFileEntryService.base" />
@@ -1169,7 +1169,7 @@
 	<bean id="com.liferay.portlet.documentlibrary.service.DLFileRankLocalService.base" abstract="true">
 		<property name="service" ref="com.liferay.portlet.documentlibrary.service.DLFileRankLocalService.transaction" />
 	</bean>
-	<bean id="com.liferay.portlet.documentlibrary.service.DLFileRankLocalService.velocity" class="org.springframework.aop.framework.ProxyFactoryBean" parent="velocityBase" lazy-init="true">
+	<bean id="com.liferay.portlet.documentlibrary.service.DLFileRankLocalService.velocity" class="org.springframework.aop.framework.ProxyFactoryBean" parent="baseVelocityService" lazy-init="true">
 		<property name="target" ref="com.liferay.portlet.documentlibrary.service.DLFileRankLocalService.transaction" />
 	</bean>
 	<bean id="com.liferay.portlet.documentlibrary.service.DLFileRankLocalServiceFactory" class="com.liferay.portlet.documentlibrary.service.DLFileRankLocalServiceFactory" parent="com.liferay.portlet.documentlibrary.service.DLFileRankLocalService.base" />
@@ -1188,7 +1188,7 @@
 	<bean id="com.liferay.portlet.documentlibrary.service.DLFileShortcutLocalService.base" abstract="true">
 		<property name="service" ref="com.liferay.portlet.documentlibrary.service.DLFileShortcutLocalService.transaction" />
 	</bean>
-	<bean id="com.liferay.portlet.documentlibrary.service.DLFileShortcutLocalService.velocity" class="org.springframework.aop.framework.ProxyFactoryBean" parent="velocityBase" lazy-init="true">
+	<bean id="com.liferay.portlet.documentlibrary.service.DLFileShortcutLocalService.velocity" class="org.springframework.aop.framework.ProxyFactoryBean" parent="baseVelocityService" lazy-init="true">
 		<property name="target" ref="com.liferay.portlet.documentlibrary.service.DLFileShortcutLocalService.transaction" />
 	</bean>
 	<bean id="com.liferay.portlet.documentlibrary.service.DLFileShortcutLocalServiceFactory" class="com.liferay.portlet.documentlibrary.service.DLFileShortcutLocalServiceFactory" parent="com.liferay.portlet.documentlibrary.service.DLFileShortcutLocalService.base" />
@@ -1198,7 +1198,7 @@
 	<bean id="com.liferay.portlet.documentlibrary.service.DLFileShortcutService.base" abstract="true">
 		<property name="service" ref="com.liferay.portlet.documentlibrary.service.DLFileShortcutService.transaction" />
 	</bean>
-	<bean id="com.liferay.portlet.documentlibrary.service.DLFileShortcutService.velocity" class="org.springframework.aop.framework.ProxyFactoryBean" parent="velocityBase" lazy-init="true">
+	<bean id="com.liferay.portlet.documentlibrary.service.DLFileShortcutService.velocity" class="org.springframework.aop.framework.ProxyFactoryBean" parent="baseVelocityService" lazy-init="true">
 		<property name="target" ref="com.liferay.portlet.documentlibrary.service.DLFileShortcutService.transaction" />
 	</bean>
 	<bean id="com.liferay.portlet.documentlibrary.service.DLFileShortcutServiceFactory" class="com.liferay.portlet.documentlibrary.service.DLFileShortcutServiceFactory" parent="com.liferay.portlet.documentlibrary.service.DLFileShortcutService.base" />
@@ -1217,7 +1217,7 @@
 	<bean id="com.liferay.portlet.documentlibrary.service.DLFileVersionLocalService.base" abstract="true">
 		<property name="service" ref="com.liferay.portlet.documentlibrary.service.DLFileVersionLocalService.transaction" />
 	</bean>
-	<bean id="com.liferay.portlet.documentlibrary.service.DLFileVersionLocalService.velocity" class="org.springframework.aop.framework.ProxyFactoryBean" parent="velocityBase" lazy-init="true">
+	<bean id="com.liferay.portlet.documentlibrary.service.DLFileVersionLocalService.velocity" class="org.springframework.aop.framework.ProxyFactoryBean" parent="baseVelocityService" lazy-init="true">
 		<property name="target" ref="com.liferay.portlet.documentlibrary.service.DLFileVersionLocalService.transaction" />
 	</bean>
 	<bean id="com.liferay.portlet.documentlibrary.service.DLFileVersionLocalServiceFactory" class="com.liferay.portlet.documentlibrary.service.DLFileVersionLocalServiceFactory" parent="com.liferay.portlet.documentlibrary.service.DLFileVersionLocalService.base" />
@@ -1232,7 +1232,7 @@
 	<bean id="com.liferay.portlet.documentlibrary.service.DLFolderLocalService.base" abstract="true">
 		<property name="service" ref="com.liferay.portlet.documentlibrary.service.DLFolderLocalService.transaction" />
 	</bean>
-	<bean id="com.liferay.portlet.documentlibrary.service.DLFolderLocalService.velocity" class="org.springframework.aop.framework.ProxyFactoryBean" parent="velocityBase" lazy-init="true">
+	<bean id="com.liferay.portlet.documentlibrary.service.DLFolderLocalService.velocity" class="org.springframework.aop.framework.ProxyFactoryBean" parent="baseVelocityService" lazy-init="true">
 		<property name="target" ref="com.liferay.portlet.documentlibrary.service.DLFolderLocalService.transaction" />
 	</bean>
 	<bean id="com.liferay.portlet.documentlibrary.service.DLFolderLocalServiceFactory" class="com.liferay.portlet.documentlibrary.service.DLFolderLocalServiceFactory" parent="com.liferay.portlet.documentlibrary.service.DLFolderLocalService.base" />
@@ -1242,7 +1242,7 @@
 	<bean id="com.liferay.portlet.documentlibrary.service.DLFolderService.base" abstract="true">
 		<property name="service" ref="com.liferay.portlet.documentlibrary.service.DLFolderService.transaction" />
 	</bean>
-	<bean id="com.liferay.portlet.documentlibrary.service.DLFolderService.velocity" class="org.springframework.aop.framework.ProxyFactoryBean" parent="velocityBase" lazy-init="true">
+	<bean id="com.liferay.portlet.documentlibrary.service.DLFolderService.velocity" class="org.springframework.aop.framework.ProxyFactoryBean" parent="baseVelocityService" lazy-init="true">
 		<property name="target" ref="com.liferay.portlet.documentlibrary.service.DLFolderService.transaction" />
 	</bean>
 	<bean id="com.liferay.portlet.documentlibrary.service.DLFolderServiceFactory" class="com.liferay.portlet.documentlibrary.service.DLFolderServiceFactory" parent="com.liferay.portlet.documentlibrary.service.DLFolderService.base" />
@@ -1257,7 +1257,7 @@
 	<bean id="com.liferay.portlet.expando.service.ExpandoColumnLocalService.base" abstract="true">
 		<property name="service" ref="com.liferay.portlet.expando.service.ExpandoColumnLocalService.transaction" />
 	</bean>
-	<bean id="com.liferay.portlet.expando.service.ExpandoColumnLocalService.velocity" class="org.springframework.aop.framework.ProxyFactoryBean" parent="velocityBase" lazy-init="true">
+	<bean id="com.liferay.portlet.expando.service.ExpandoColumnLocalService.velocity" class="org.springframework.aop.framework.ProxyFactoryBean" parent="baseVelocityService" lazy-init="true">
 		<property name="target" ref="com.liferay.portlet.expando.service.ExpandoColumnLocalService.transaction" />
 	</bean>
 	<bean id="com.liferay.portlet.expando.service.ExpandoColumnLocalServiceFactory" class="com.liferay.portlet.expando.service.ExpandoColumnLocalServiceFactory" parent="com.liferay.portlet.expando.service.ExpandoColumnLocalService.base" />
@@ -1276,7 +1276,7 @@
 	<bean id="com.liferay.portlet.expando.service.ExpandoRowLocalService.base" abstract="true">
 		<property name="service" ref="com.liferay.portlet.expando.service.ExpandoRowLocalService.transaction" />
 	</bean>
-	<bean id="com.liferay.portlet.expando.service.ExpandoRowLocalService.velocity" class="org.springframework.aop.framework.ProxyFactoryBean" parent="velocityBase" lazy-init="true">
+	<bean id="com.liferay.portlet.expando.service.ExpandoRowLocalService.velocity" class="org.springframework.aop.framework.ProxyFactoryBean" parent="baseVelocityService" lazy-init="true">
 		<property name="target" ref="com.liferay.portlet.expando.service.ExpandoRowLocalService.transaction" />
 	</bean>
 	<bean id="com.liferay.portlet.expando.service.ExpandoRowLocalServiceFactory" class="com.liferay.portlet.expando.service.ExpandoRowLocalServiceFactory" parent="com.liferay.portlet.expando.service.ExpandoRowLocalService.base" />
@@ -1295,7 +1295,7 @@
 	<bean id="com.liferay.portlet.expando.service.ExpandoTableLocalService.base" abstract="true">
 		<property name="service" ref="com.liferay.portlet.expando.service.ExpandoTableLocalService.transaction" />
 	</bean>
-	<bean id="com.liferay.portlet.expando.service.ExpandoTableLocalService.velocity" class="org.springframework.aop.framework.ProxyFactoryBean" parent="velocityBase" lazy-init="true">
+	<bean id="com.liferay.portlet.expando.service.ExpandoTableLocalService.velocity" class="org.springframework.aop.framework.ProxyFactoryBean" parent="baseVelocityService" lazy-init="true">
 		<property name="target" ref="com.liferay.portlet.expando.service.ExpandoTableLocalService.transaction" />
 	</bean>
 	<bean id="com.liferay.portlet.expando.service.ExpandoTableLocalServiceFactory" class="com.liferay.portlet.expando.service.ExpandoTableLocalServiceFactory" parent="com.liferay.portlet.expando.service.ExpandoTableLocalService.base" />
@@ -1310,7 +1310,7 @@
 	<bean id="com.liferay.portlet.expando.service.ExpandoValueLocalService.base" abstract="true">
 		<property name="service" ref="com.liferay.portlet.expando.service.ExpandoValueLocalService.transaction" />
 	</bean>
-	<bean id="com.liferay.portlet.expando.service.ExpandoValueLocalService.velocity" class="org.springframework.aop.framework.ProxyFactoryBean" parent="velocityBase" lazy-init="true">
+	<bean id="com.liferay.portlet.expando.service.ExpandoValueLocalService.velocity" class="org.springframework.aop.framework.ProxyFactoryBean" parent="baseVelocityService" lazy-init="true">
 		<property name="target" ref="com.liferay.portlet.expando.service.ExpandoValueLocalService.transaction" />
 	</bean>
 	<bean id="com.liferay.portlet.expando.service.ExpandoValueLocalServiceFactory" class="com.liferay.portlet.expando.service.ExpandoValueLocalServiceFactory" parent="com.liferay.portlet.expando.service.ExpandoValueLocalService.base" />
@@ -1329,7 +1329,7 @@
 	<bean id="com.liferay.portlet.imagegallery.service.IGFolderLocalService.base" abstract="true">
 		<property name="service" ref="com.liferay.portlet.imagegallery.service.IGFolderLocalService.transaction" />
 	</bean>
-	<bean id="com.liferay.portlet.imagegallery.service.IGFolderLocalService.velocity" class="org.springframework.aop.framework.ProxyFactoryBean" parent="velocityBase" lazy-init="true">
+	<bean id="com.liferay.portlet.imagegallery.service.IGFolderLocalService.velocity" class="org.springframework.aop.framework.ProxyFactoryBean" parent="baseVelocityService" lazy-init="true">
 		<property name="target" ref="com.liferay.portlet.imagegallery.service.IGFolderLocalService.transaction" />
 	</bean>
 	<bean id="com.liferay.portlet.imagegallery.service.IGFolderLocalServiceFactory" class="com.liferay.portlet.imagegallery.service.IGFolderLocalServiceFactory" parent="com.liferay.portlet.imagegallery.service.IGFolderLocalService.base" />
@@ -1339,7 +1339,7 @@
 	<bean id="com.liferay.portlet.imagegallery.service.IGFolderService.base" abstract="true">
 		<property name="service" ref="com.liferay.portlet.imagegallery.service.IGFolderService.transaction" />
 	</bean>
-	<bean id="com.liferay.portlet.imagegallery.service.IGFolderService.velocity" class="org.springframework.aop.framework.ProxyFactoryBean" parent="velocityBase" lazy-init="true">
+	<bean id="com.liferay.portlet.imagegallery.service.IGFolderService.velocity" class="org.springframework.aop.framework.ProxyFactoryBean" parent="baseVelocityService" lazy-init="true">
 		<property name="target" ref="com.liferay.portlet.imagegallery.service.IGFolderService.transaction" />
 	</bean>
 	<bean id="com.liferay.portlet.imagegallery.service.IGFolderServiceFactory" class="com.liferay.portlet.imagegallery.service.IGFolderServiceFactory" parent="com.liferay.portlet.imagegallery.service.IGFolderService.base" />
@@ -1354,7 +1354,7 @@
 	<bean id="com.liferay.portlet.imagegallery.service.IGImageLocalService.base" abstract="true">
 		<property name="service" ref="com.liferay.portlet.imagegallery.service.IGImageLocalService.transaction" />
 	</bean>
-	<bean id="com.liferay.portlet.imagegallery.service.IGImageLocalService.velocity" class="org.springframework.aop.framework.ProxyFactoryBean" parent="velocityBase" lazy-init="true">
+	<bean id="com.liferay.portlet.imagegallery.service.IGImageLocalService.velocity" class="org.springframework.aop.framework.ProxyFactoryBean" parent="baseVelocityService" lazy-init="true">
 		<property name="target" ref="com.liferay.portlet.imagegallery.service.IGImageLocalService.transaction" />
 	</bean>
 	<bean id="com.liferay.portlet.imagegallery.service.IGImageLocalServiceFactory" class="com.liferay.portlet.imagegallery.service.IGImageLocalServiceFactory" parent="com.liferay.portlet.imagegallery.service.IGImageLocalService.base" />
@@ -1364,7 +1364,7 @@
 	<bean id="com.liferay.portlet.imagegallery.service.IGImageService.base" abstract="true">
 		<property name="service" ref="com.liferay.portlet.imagegallery.service.IGImageService.transaction" />
 	</bean>
-	<bean id="com.liferay.portlet.imagegallery.service.IGImageService.velocity" class="org.springframework.aop.framework.ProxyFactoryBean" parent="velocityBase" lazy-init="true">
+	<bean id="com.liferay.portlet.imagegallery.service.IGImageService.velocity" class="org.springframework.aop.framework.ProxyFactoryBean" parent="baseVelocityService" lazy-init="true">
 		<property name="target" ref="com.liferay.portlet.imagegallery.service.IGImageService.transaction" />
 	</bean>
 	<bean id="com.liferay.portlet.imagegallery.service.IGImageServiceFactory" class="com.liferay.portlet.imagegallery.service.IGImageServiceFactory" parent="com.liferay.portlet.imagegallery.service.IGImageService.base" />
@@ -1383,7 +1383,7 @@
 	<bean id="com.liferay.portlet.journal.service.JournalArticleLocalService.base" abstract="true">
 		<property name="service" ref="com.liferay.portlet.journal.service.JournalArticleLocalService.transaction" />
 	</bean>
-	<bean id="com.liferay.portlet.journal.service.JournalArticleLocalService.velocity" class="org.springframework.aop.framework.ProxyFactoryBean" parent="velocityBase" lazy-init="true">
+	<bean id="com.liferay.portlet.journal.service.JournalArticleLocalService.velocity" class="org.springframework.aop.framework.ProxyFactoryBean" parent="baseVelocityService" lazy-init="true">
 		<property name="target" ref="com.liferay.portlet.journal.service.JournalArticleLocalService.transaction" />
 	</bean>
 	<bean id="com.liferay.portlet.journal.service.JournalArticleLocalServiceFactory" class="com.liferay.portlet.journal.service.JournalArticleLocalServiceFactory" parent="com.liferay.portlet.journal.service.JournalArticleLocalService.base" />
@@ -1393,7 +1393,7 @@
 	<bean id="com.liferay.portlet.journal.service.JournalArticleService.base" abstract="true">
 		<property name="service" ref="com.liferay.portlet.journal.service.JournalArticleService.transaction" />
 	</bean>
-	<bean id="com.liferay.portlet.journal.service.JournalArticleService.velocity" class="org.springframework.aop.framework.ProxyFactoryBean" parent="velocityBase" lazy-init="true">
+	<bean id="com.liferay.portlet.journal.service.JournalArticleService.velocity" class="org.springframework.aop.framework.ProxyFactoryBean" parent="baseVelocityService" lazy-init="true">
 		<property name="target" ref="com.liferay.portlet.journal.service.JournalArticleService.transaction" />
 	</bean>
 	<bean id="com.liferay.portlet.journal.service.JournalArticleServiceFactory" class="com.liferay.portlet.journal.service.JournalArticleServiceFactory" parent="com.liferay.portlet.journal.service.JournalArticleService.base" />
@@ -1412,7 +1412,7 @@
 	<bean id="com.liferay.portlet.journal.service.JournalArticleImageLocalService.base" abstract="true">
 		<property name="service" ref="com.liferay.portlet.journal.service.JournalArticleImageLocalService.transaction" />
 	</bean>
-	<bean id="com.liferay.portlet.journal.service.JournalArticleImageLocalService.velocity" class="org.springframework.aop.framework.ProxyFactoryBean" parent="velocityBase" lazy-init="true">
+	<bean id="com.liferay.portlet.journal.service.JournalArticleImageLocalService.velocity" class="org.springframework.aop.framework.ProxyFactoryBean" parent="baseVelocityService" lazy-init="true">
 		<property name="target" ref="com.liferay.portlet.journal.service.JournalArticleImageLocalService.transaction" />
 	</bean>
 	<bean id="com.liferay.portlet.journal.service.JournalArticleImageLocalServiceFactory" class="com.liferay.portlet.journal.service.JournalArticleImageLocalServiceFactory" parent="com.liferay.portlet.journal.service.JournalArticleImageLocalService.base" />
@@ -1427,7 +1427,7 @@
 	<bean id="com.liferay.portlet.journal.service.JournalArticleResourceLocalService.base" abstract="true">
 		<property name="service" ref="com.liferay.portlet.journal.service.JournalArticleResourceLocalService.transaction" />
 	</bean>
-	<bean id="com.liferay.portlet.journal.service.JournalArticleResourceLocalService.velocity" class="org.springframework.aop.framework.ProxyFactoryBean" parent="velocityBase" lazy-init="true">
+	<bean id="com.liferay.portlet.journal.service.JournalArticleResourceLocalService.velocity" class="org.springframework.aop.framework.ProxyFactoryBean" parent="baseVelocityService" lazy-init="true">
 		<property name="target" ref="com.liferay.portlet.journal.service.JournalArticleResourceLocalService.transaction" />
 	</bean>
 	<bean id="com.liferay.portlet.journal.service.JournalArticleResourceLocalServiceFactory" class="com.liferay.portlet.journal.service.JournalArticleResourceLocalServiceFactory" parent="com.liferay.portlet.journal.service.JournalArticleResourceLocalService.base" />
@@ -1442,7 +1442,7 @@
 	<bean id="com.liferay.portlet.journal.service.JournalContentSearchLocalService.base" abstract="true">
 		<property name="service" ref="com.liferay.portlet.journal.service.JournalContentSearchLocalService.transaction" />
 	</bean>
-	<bean id="com.liferay.portlet.journal.service.JournalContentSearchLocalService.velocity" class="org.springframework.aop.framework.ProxyFactoryBean" parent="velocityBase" lazy-init="true">
+	<bean id="com.liferay.portlet.journal.service.JournalContentSearchLocalService.velocity" class="org.springframework.aop.framework.ProxyFactoryBean" parent="baseVelocityService" lazy-init="true">
 		<property name="target" ref="com.liferay.portlet.journal.service.JournalContentSearchLocalService.transaction" />
 	</bean>
 	<bean id="com.liferay.portlet.journal.service.JournalContentSearchLocalServiceFactory" class="com.liferay.portlet.journal.service.JournalContentSearchLocalServiceFactory" parent="com.liferay.portlet.journal.service.JournalContentSearchLocalService.base" />
@@ -1457,7 +1457,7 @@
 	<bean id="com.liferay.portlet.journal.service.JournalFeedLocalService.base" abstract="true">
 		<property name="service" ref="com.liferay.portlet.journal.service.JournalFeedLocalService.transaction" />
 	</bean>
-	<bean id="com.liferay.portlet.journal.service.JournalFeedLocalService.velocity" class="org.springframework.aop.framework.ProxyFactoryBean" parent="velocityBase" lazy-init="true">
+	<bean id="com.liferay.portlet.journal.service.JournalFeedLocalService.velocity" class="org.springframework.aop.framework.ProxyFactoryBean" parent="baseVelocityService" lazy-init="true">
 		<property name="target" ref="com.liferay.portlet.journal.service.JournalFeedLocalService.transaction" />
 	</bean>
 	<bean id="com.liferay.portlet.journal.service.JournalFeedLocalServiceFactory" class="com.liferay.portlet.journal.service.JournalFeedLocalServiceFactory" parent="com.liferay.portlet.journal.service.JournalFeedLocalService.base" />
@@ -1467,7 +1467,7 @@
 	<bean id="com.liferay.portlet.journal.service.JournalFeedService.base" abstract="true">
 		<property name="service" ref="com.liferay.portlet.journal.service.JournalFeedService.transaction" />
 	</bean>
-	<bean id="com.liferay.portlet.journal.service.JournalFeedService.velocity" class="org.springframework.aop.framework.ProxyFactoryBean" parent="velocityBase" lazy-init="true">
+	<bean id="com.liferay.portlet.journal.service.JournalFeedService.velocity" class="org.springframework.aop.framework.ProxyFactoryBean" parent="baseVelocityService" lazy-init="true">
 		<property name="target" ref="com.liferay.portlet.journal.service.JournalFeedService.transaction" />
 	</bean>
 	<bean id="com.liferay.portlet.journal.service.JournalFeedServiceFactory" class="com.liferay.portlet.journal.service.JournalFeedServiceFactory" parent="com.liferay.portlet.journal.service.JournalFeedService.base" />
@@ -1486,7 +1486,7 @@
 	<bean id="com.liferay.portlet.journal.service.JournalStructureLocalService.base" abstract="true">
 		<property name="service" ref="com.liferay.portlet.journal.service.JournalStructureLocalService.transaction" />
 	</bean>
-	<bean id="com.liferay.portlet.journal.service.JournalStructureLocalService.velocity" class="org.springframework.aop.framework.ProxyFactoryBean" parent="velocityBase" lazy-init="true">
+	<bean id="com.liferay.portlet.journal.service.JournalStructureLocalService.velocity" class="org.springframework.aop.framework.ProxyFactoryBean" parent="baseVelocityService" lazy-init="true">
 		<property name="target" ref="com.liferay.portlet.journal.service.JournalStructureLocalService.transaction" />
 	</bean>
 	<bean id="com.liferay.portlet.journal.service.JournalStructureLocalServiceFactory" class="com.liferay.portlet.journal.service.JournalStructureLocalServiceFactory" parent="com.liferay.portlet.journal.service.JournalStructureLocalService.base" />
@@ -1496,7 +1496,7 @@
 	<bean id="com.liferay.portlet.journal.service.JournalStructureService.base" abstract="true">
 		<property name="service" ref="com.liferay.portlet.journal.service.JournalStructureService.transaction" />
 	</bean>
-	<bean id="com.liferay.portlet.journal.service.JournalStructureService.velocity" class="org.springframework.aop.framework.ProxyFactoryBean" parent="velocityBase" lazy-init="true">
+	<bean id="com.liferay.portlet.journal.service.JournalStructureService.velocity" class="org.springframework.aop.framework.ProxyFactoryBean" parent="baseVelocityService" lazy-init="true">
 		<property name="target" ref="com.liferay.portlet.journal.service.JournalStructureService.transaction" />
 	</bean>
 	<bean id="com.liferay.portlet.journal.service.JournalStructureServiceFactory" class="com.liferay.portlet.journal.service.JournalStructureServiceFactory" parent="com.liferay.portlet.journal.service.JournalStructureService.base" />
@@ -1515,7 +1515,7 @@
 	<bean id="com.liferay.portlet.journal.service.JournalTemplateLocalService.base" abstract="true">
 		<property name="service" ref="com.liferay.portlet.journal.service.JournalTemplateLocalService.transaction" />
 	</bean>
-	<bean id="com.liferay.portlet.journal.service.JournalTemplateLocalService.velocity" class="org.springframework.aop.framework.ProxyFactoryBean" parent="velocityBase" lazy-init="true">
+	<bean id="com.liferay.portlet.journal.service.JournalTemplateLocalService.velocity" class="org.springframework.aop.framework.ProxyFactoryBean" parent="baseVelocityService" lazy-init="true">
 		<property name="target" ref="com.liferay.portlet.journal.service.JournalTemplateLocalService.transaction" />
 	</bean>
 	<bean id="com.liferay.portlet.journal.service.JournalTemplateLocalServiceFactory" class="com.liferay.portlet.journal.service.JournalTemplateLocalServiceFactory" parent="com.liferay.portlet.journal.service.JournalTemplateLocalService.base" />
@@ -1525,7 +1525,7 @@
 	<bean id="com.liferay.portlet.journal.service.JournalTemplateService.base" abstract="true">
 		<property name="service" ref="com.liferay.portlet.journal.service.JournalTemplateService.transaction" />
 	</bean>
-	<bean id="com.liferay.portlet.journal.service.JournalTemplateService.velocity" class="org.springframework.aop.framework.ProxyFactoryBean" parent="velocityBase" lazy-init="true">
+	<bean id="com.liferay.portlet.journal.service.JournalTemplateService.velocity" class="org.springframework.aop.framework.ProxyFactoryBean" parent="baseVelocityService" lazy-init="true">
 		<property name="target" ref="com.liferay.portlet.journal.service.JournalTemplateService.transaction" />
 	</bean>
 	<bean id="com.liferay.portlet.journal.service.JournalTemplateServiceFactory" class="com.liferay.portlet.journal.service.JournalTemplateServiceFactory" parent="com.liferay.portlet.journal.service.JournalTemplateService.base" />
@@ -1544,7 +1544,7 @@
 	<bean id="com.liferay.portlet.messageboards.service.MBBanLocalService.base" abstract="true">
 		<property name="service" ref="com.liferay.portlet.messageboards.service.MBBanLocalService.transaction" />
 	</bean>
-	<bean id="com.liferay.portlet.messageboards.service.MBBanLocalService.velocity" class="org.springframework.aop.framework.ProxyFactoryBean" parent="velocityBase" lazy-init="true">
+	<bean id="com.liferay.portlet.messageboards.service.MBBanLocalService.velocity" class="org.springframework.aop.framework.ProxyFactoryBean" parent="baseVelocityService" lazy-init="true">
 		<property name="target" ref="com.liferay.portlet.messageboards.service.MBBanLocalService.transaction" />
 	</bean>
 	<bean id="com.liferay.portlet.messageboards.service.MBBanLocalServiceFactory" class="com.liferay.portlet.messageboards.service.MBBanLocalServiceFactory" parent="com.liferay.portlet.messageboards.service.MBBanLocalService.base" />
@@ -1554,7 +1554,7 @@
 	<bean id="com.liferay.portlet.messageboards.service.MBBanService.base" abstract="true">
 		<property name="service" ref="com.liferay.portlet.messageboards.service.MBBanService.transaction" />
 	</bean>
-	<bean id="com.liferay.portlet.messageboards.service.MBBanService.velocity" class="org.springframework.aop.framework.ProxyFactoryBean" parent="velocityBase" lazy-init="true">
+	<bean id="com.liferay.portlet.messageboards.service.MBBanService.velocity" class="org.springframework.aop.framework.ProxyFactoryBean" parent="baseVelocityService" lazy-init="true">
 		<property name="target" ref="com.liferay.portlet.messageboards.service.MBBanService.transaction" />
 	</bean>
 	<bean id="com.liferay.portlet.messageboards.service.MBBanServiceFactory" class="com.liferay.portlet.messageboards.service.MBBanServiceFactory" parent="com.liferay.portlet.messageboards.service.MBBanService.base" />
@@ -1569,7 +1569,7 @@
 	<bean id="com.liferay.portlet.messageboards.service.MBCategoryLocalService.base" abstract="true">
 		<property name="service" ref="com.liferay.portlet.messageboards.service.MBCategoryLocalService.transaction" />
 	</bean>
-	<bean id="com.liferay.portlet.messageboards.service.MBCategoryLocalService.velocity" class="org.springframework.aop.framework.ProxyFactoryBean" parent="velocityBase" lazy-init="true">
+	<bean id="com.liferay.portlet.messageboards.service.MBCategoryLocalService.velocity" class="org.springframework.aop.framework.ProxyFactoryBean" parent="baseVelocityService" lazy-init="true">
 		<property name="target" ref="com.liferay.portlet.messageboards.service.MBCategoryLocalService.transaction" />
 	</bean>
 	<bean id="com.liferay.portlet.messageboards.service.MBCategoryLocalServiceFactory" class="com.liferay.portlet.messageboards.service.MBCategoryLocalServiceFactory" parent="com.liferay.portlet.messageboards.service.MBCategoryLocalService.base" />
@@ -1579,7 +1579,7 @@
 	<bean id="com.liferay.portlet.messageboards.service.MBCategoryService.base" abstract="true">
 		<property name="service" ref="com.liferay.portlet.messageboards.service.MBCategoryService.transaction" />
 	</bean>
-	<bean id="com.liferay.portlet.messageboards.service.MBCategoryService.velocity" class="org.springframework.aop.framework.ProxyFactoryBean" parent="velocityBase" lazy-init="true">
+	<bean id="com.liferay.portlet.messageboards.service.MBCategoryService.velocity" class="org.springframework.aop.framework.ProxyFactoryBean" parent="baseVelocityService" lazy-init="true">
 		<property name="target" ref="com.liferay.portlet.messageboards.service.MBCategoryService.transaction" />
 	</bean>
 	<bean id="com.liferay.portlet.messageboards.service.MBCategoryServiceFactory" class="com.liferay.portlet.messageboards.service.MBCategoryServiceFactory" parent="com.liferay.portlet.messageboards.service.MBCategoryService.base" />
@@ -1603,7 +1603,7 @@
 	<bean id="com.liferay.portlet.messageboards.service.MBMailingListLocalService.base" abstract="true">
 		<property name="service" ref="com.liferay.portlet.messageboards.service.MBMailingListLocalService.transaction" />
 	</bean>
-	<bean id="com.liferay.portlet.messageboards.service.MBMailingListLocalService.velocity" class="org.springframework.aop.framework.ProxyFactoryBean" parent="velocityBase" lazy-init="true">
+	<bean id="com.liferay.portlet.messageboards.service.MBMailingListLocalService.velocity" class="org.springframework.aop.framework.ProxyFactoryBean" parent="baseVelocityService" lazy-init="true">
 		<property name="target" ref="com.liferay.portlet.messageboards.service.MBMailingListLocalService.transaction" />
 	</bean>
 	<bean id="com.liferay.portlet.messageboards.service.MBMailingListLocalServiceFactory" class="com.liferay.portlet.messageboards.service.MBMailingListLocalServiceFactory" parent="com.liferay.portlet.messageboards.service.MBMailingListLocalService.base" />
@@ -1618,7 +1618,7 @@
 	<bean id="com.liferay.portlet.messageboards.service.MBMessageLocalService.base" abstract="true">
 		<property name="service" ref="com.liferay.portlet.messageboards.service.MBMessageLocalService.transaction" />
 	</bean>
-	<bean id="com.liferay.portlet.messageboards.service.MBMessageLocalService.velocity" class="org.springframework.aop.framework.ProxyFactoryBean" parent="velocityBase" lazy-init="true">
+	<bean id="com.liferay.portlet.messageboards.service.MBMessageLocalService.velocity" class="org.springframework.aop.framework.ProxyFactoryBean" parent="baseVelocityService" lazy-init="true">
 		<property name="target" ref="com.liferay.portlet.messageboards.service.MBMessageLocalService.transaction" />
 	</bean>
 	<bean id="com.liferay.portlet.messageboards.service.MBMessageLocalServiceFactory" class="com.liferay.portlet.messageboards.service.MBMessageLocalServiceFactory" parent="com.liferay.portlet.messageboards.service.MBMessageLocalService.base" />
@@ -1628,7 +1628,7 @@
 	<bean id="com.liferay.portlet.messageboards.service.MBMessageService.base" abstract="true">
 		<property name="service" ref="com.liferay.portlet.messageboards.service.MBMessageService.transaction" />
 	</bean>
-	<bean id="com.liferay.portlet.messageboards.service.MBMessageService.velocity" class="org.springframework.aop.framework.ProxyFactoryBean" parent="velocityBase" lazy-init="true">
+	<bean id="com.liferay.portlet.messageboards.service.MBMessageService.velocity" class="org.springframework.aop.framework.ProxyFactoryBean" parent="baseVelocityService" lazy-init="true">
 		<property name="target" ref="com.liferay.portlet.messageboards.service.MBMessageService.transaction" />
 	</bean>
 	<bean id="com.liferay.portlet.messageboards.service.MBMessageServiceFactory" class="com.liferay.portlet.messageboards.service.MBMessageServiceFactory" parent="com.liferay.portlet.messageboards.service.MBMessageService.base" />
@@ -1647,7 +1647,7 @@
 	<bean id="com.liferay.portlet.messageboards.service.MBMessageFlagLocalService.base" abstract="true">
 		<property name="service" ref="com.liferay.portlet.messageboards.service.MBMessageFlagLocalService.transaction" />
 	</bean>
-	<bean id="com.liferay.portlet.messageboards.service.MBMessageFlagLocalService.velocity" class="org.springframework.aop.framework.ProxyFactoryBean" parent="velocityBase" lazy-init="true">
+	<bean id="com.liferay.portlet.messageboards.service.MBMessageFlagLocalService.velocity" class="org.springframework.aop.framework.ProxyFactoryBean" parent="baseVelocityService" lazy-init="true">
 		<property name="target" ref="com.liferay.portlet.messageboards.service.MBMessageFlagLocalService.transaction" />
 	</bean>
 	<bean id="com.liferay.portlet.messageboards.service.MBMessageFlagLocalServiceFactory" class="com.liferay.portlet.messageboards.service.MBMessageFlagLocalServiceFactory" parent="com.liferay.portlet.messageboards.service.MBMessageFlagLocalService.base" />
@@ -1657,7 +1657,7 @@
 	<bean id="com.liferay.portlet.messageboards.service.MBMessageFlagService.base" abstract="true">
 		<property name="service" ref="com.liferay.portlet.messageboards.service.MBMessageFlagService.transaction" />
 	</bean>
-	<bean id="com.liferay.portlet.messageboards.service.MBMessageFlagService.velocity" class="org.springframework.aop.framework.ProxyFactoryBean" parent="velocityBase" lazy-init="true">
+	<bean id="com.liferay.portlet.messageboards.service.MBMessageFlagService.velocity" class="org.springframework.aop.framework.ProxyFactoryBean" parent="baseVelocityService" lazy-init="true">
 		<property name="target" ref="com.liferay.portlet.messageboards.service.MBMessageFlagService.transaction" />
 	</bean>
 	<bean id="com.liferay.portlet.messageboards.service.MBMessageFlagServiceFactory" class="com.liferay.portlet.messageboards.service.MBMessageFlagServiceFactory" parent="com.liferay.portlet.messageboards.service.MBMessageFlagService.base" />
@@ -1676,7 +1676,7 @@
 	<bean id="com.liferay.portlet.messageboards.service.MBStatsUserLocalService.base" abstract="true">
 		<property name="service" ref="com.liferay.portlet.messageboards.service.MBStatsUserLocalService.transaction" />
 	</bean>
-	<bean id="com.liferay.portlet.messageboards.service.MBStatsUserLocalService.velocity" class="org.springframework.aop.framework.ProxyFactoryBean" parent="velocityBase" lazy-init="true">
+	<bean id="com.liferay.portlet.messageboards.service.MBStatsUserLocalService.velocity" class="org.springframework.aop.framework.ProxyFactoryBean" parent="baseVelocityService" lazy-init="true">
 		<property name="target" ref="com.liferay.portlet.messageboards.service.MBStatsUserLocalService.transaction" />
 	</bean>
 	<bean id="com.liferay.portlet.messageboards.service.MBStatsUserLocalServiceFactory" class="com.liferay.portlet.messageboards.service.MBStatsUserLocalServiceFactory" parent="com.liferay.portlet.messageboards.service.MBStatsUserLocalService.base" />
@@ -1691,7 +1691,7 @@
 	<bean id="com.liferay.portlet.messageboards.service.MBThreadLocalService.base" abstract="true">
 		<property name="service" ref="com.liferay.portlet.messageboards.service.MBThreadLocalService.transaction" />
 	</bean>
-	<bean id="com.liferay.portlet.messageboards.service.MBThreadLocalService.velocity" class="org.springframework.aop.framework.ProxyFactoryBean" parent="velocityBase" lazy-init="true">
+	<bean id="com.liferay.portlet.messageboards.service.MBThreadLocalService.velocity" class="org.springframework.aop.framework.ProxyFactoryBean" parent="baseVelocityService" lazy-init="true">
 		<property name="target" ref="com.liferay.portlet.messageboards.service.MBThreadLocalService.transaction" />
 	</bean>
 	<bean id="com.liferay.portlet.messageboards.service.MBThreadLocalServiceFactory" class="com.liferay.portlet.messageboards.service.MBThreadLocalServiceFactory" parent="com.liferay.portlet.messageboards.service.MBThreadLocalService.base" />
@@ -1701,7 +1701,7 @@
 	<bean id="com.liferay.portlet.messageboards.service.MBThreadService.base" abstract="true">
 		<property name="service" ref="com.liferay.portlet.messageboards.service.MBThreadService.transaction" />
 	</bean>
-	<bean id="com.liferay.portlet.messageboards.service.MBThreadService.velocity" class="org.springframework.aop.framework.ProxyFactoryBean" parent="velocityBase" lazy-init="true">
+	<bean id="com.liferay.portlet.messageboards.service.MBThreadService.velocity" class="org.springframework.aop.framework.ProxyFactoryBean" parent="baseVelocityService" lazy-init="true">
 		<property name="target" ref="com.liferay.portlet.messageboards.service.MBThreadService.transaction" />
 	</bean>
 	<bean id="com.liferay.portlet.messageboards.service.MBThreadServiceFactory" class="com.liferay.portlet.messageboards.service.MBThreadServiceFactory" parent="com.liferay.portlet.messageboards.service.MBThreadService.base" />
@@ -1720,7 +1720,7 @@
 	<bean id="com.liferay.portlet.polls.service.PollsChoiceLocalService.base" abstract="true">
 		<property name="service" ref="com.liferay.portlet.polls.service.PollsChoiceLocalService.transaction" />
 	</bean>
-	<bean id="com.liferay.portlet.polls.service.PollsChoiceLocalService.velocity" class="org.springframework.aop.framework.ProxyFactoryBean" parent="velocityBase" lazy-init="true">
+	<bean id="com.liferay.portlet.polls.service.PollsChoiceLocalService.velocity" class="org.springframework.aop.framework.ProxyFactoryBean" parent="baseVelocityService" lazy-init="true">
 		<property name="target" ref="com.liferay.portlet.polls.service.PollsChoiceLocalService.transaction" />
 	</bean>
 	<bean id="com.liferay.portlet.polls.service.PollsChoiceLocalServiceFactory" class="com.liferay.portlet.polls.service.PollsChoiceLocalServiceFactory" parent="com.liferay.portlet.polls.service.PollsChoiceLocalService.base" />
@@ -1739,7 +1739,7 @@
 	<bean id="com.liferay.portlet.polls.service.PollsQuestionLocalService.base" abstract="true">
 		<property name="service" ref="com.liferay.portlet.polls.service.PollsQuestionLocalService.transaction" />
 	</bean>
-	<bean id="com.liferay.portlet.polls.service.PollsQuestionLocalService.velocity" class="org.springframework.aop.framework.ProxyFactoryBean" parent="velocityBase" lazy-init="true">
+	<bean id="com.liferay.portlet.polls.service.PollsQuestionLocalService.velocity" class="org.springframework.aop.framework.ProxyFactoryBean" parent="baseVelocityService" lazy-init="true">
 		<property name="target" ref="com.liferay.portlet.polls.service.PollsQuestionLocalService.transaction" />
 	</bean>
 	<bean id="com.liferay.portlet.polls.service.PollsQuestionLocalServiceFactory" class="com.liferay.portlet.polls.service.PollsQuestionLocalServiceFactory" parent="com.liferay.portlet.polls.service.PollsQuestionLocalService.base" />
@@ -1749,7 +1749,7 @@
 	<bean id="com.liferay.portlet.polls.service.PollsQuestionService.base" abstract="true">
 		<property name="service" ref="com.liferay.portlet.polls.service.PollsQuestionService.transaction" />
 	</bean>
-	<bean id="com.liferay.portlet.polls.service.PollsQuestionService.velocity" class="org.springframework.aop.framework.ProxyFactoryBean" parent="velocityBase" lazy-init="true">
+	<bean id="com.liferay.portlet.polls.service.PollsQuestionService.velocity" class="org.springframework.aop.framework.ProxyFactoryBean" parent="baseVelocityService" lazy-init="true">
 		<property name="target" ref="com.liferay.portlet.polls.service.PollsQuestionService.transaction" />
 	</bean>
 	<bean id="com.liferay.portlet.polls.service.PollsQuestionServiceFactory" class="com.liferay.portlet.polls.service.PollsQuestionServiceFactory" parent="com.liferay.portlet.polls.service.PollsQuestionService.base" />
@@ -1764,7 +1764,7 @@
 	<bean id="com.liferay.portlet.polls.service.PollsVoteLocalService.base" abstract="true">
 		<property name="service" ref="com.liferay.portlet.polls.service.PollsVoteLocalService.transaction" />
 	</bean>
-	<bean id="com.liferay.portlet.polls.service.PollsVoteLocalService.velocity" class="org.springframework.aop.framework.ProxyFactoryBean" parent="velocityBase" lazy-init="true">
+	<bean id="com.liferay.portlet.polls.service.PollsVoteLocalService.velocity" class="org.springframework.aop.framework.ProxyFactoryBean" parent="baseVelocityService" lazy-init="true">
 		<property name="target" ref="com.liferay.portlet.polls.service.PollsVoteLocalService.transaction" />
 	</bean>
 	<bean id="com.liferay.portlet.polls.service.PollsVoteLocalServiceFactory" class="com.liferay.portlet.polls.service.PollsVoteLocalServiceFactory" parent="com.liferay.portlet.polls.service.PollsVoteLocalService.base" />
@@ -1774,7 +1774,7 @@
 	<bean id="com.liferay.portlet.polls.service.PollsVoteService.base" abstract="true">
 		<property name="service" ref="com.liferay.portlet.polls.service.PollsVoteService.transaction" />
 	</bean>
-	<bean id="com.liferay.portlet.polls.service.PollsVoteService.velocity" class="org.springframework.aop.framework.ProxyFactoryBean" parent="velocityBase" lazy-init="true">
+	<bean id="com.liferay.portlet.polls.service.PollsVoteService.velocity" class="org.springframework.aop.framework.ProxyFactoryBean" parent="baseVelocityService" lazy-init="true">
 		<property name="target" ref="com.liferay.portlet.polls.service.PollsVoteService.transaction" />
 	</bean>
 	<bean id="com.liferay.portlet.polls.service.PollsVoteServiceFactory" class="com.liferay.portlet.polls.service.PollsVoteServiceFactory" parent="com.liferay.portlet.polls.service.PollsVoteService.base" />
@@ -1789,7 +1789,7 @@
 	<bean id="com.liferay.portlet.ratings.service.RatingsEntryLocalService.base" abstract="true">
 		<property name="service" ref="com.liferay.portlet.ratings.service.RatingsEntryLocalService.transaction" />
 	</bean>
-	<bean id="com.liferay.portlet.ratings.service.RatingsEntryLocalService.velocity" class="org.springframework.aop.framework.ProxyFactoryBean" parent="velocityBase" lazy-init="true">
+	<bean id="com.liferay.portlet.ratings.service.RatingsEntryLocalService.velocity" class="org.springframework.aop.framework.ProxyFactoryBean" parent="baseVelocityService" lazy-init="true">
 		<property name="target" ref="com.liferay.portlet.ratings.service.RatingsEntryLocalService.transaction" />
 	</bean>
 	<bean id="com.liferay.portlet.ratings.service.RatingsEntryLocalServiceFactory" class="com.liferay.portlet.ratings.service.RatingsEntryLocalServiceFactory" parent="com.liferay.portlet.ratings.service.RatingsEntryLocalService.base" />
@@ -1799,7 +1799,7 @@
 	<bean id="com.liferay.portlet.ratings.service.RatingsEntryService.base" abstract="true">
 		<property name="service" ref="com.liferay.portlet.ratings.service.RatingsEntryService.transaction" />
 	</bean>
-	<bean id="com.liferay.portlet.ratings.service.RatingsEntryService.velocity" class="org.springframework.aop.framework.ProxyFactoryBean" parent="velocityBase" lazy-init="true">
+	<bean id="com.liferay.portlet.ratings.service.RatingsEntryService.velocity" class="org.springframework.aop.framework.ProxyFactoryBean" parent="baseVelocityService" lazy-init="true">
 		<property name="target" ref="com.liferay.portlet.ratings.service.RatingsEntryService.transaction" />
 	</bean>
 	<bean id="com.liferay.portlet.ratings.service.RatingsEntryServiceFactory" class="com.liferay.portlet.ratings.service.RatingsEntryServiceFactory" parent="com.liferay.portlet.ratings.service.RatingsEntryService.base" />
@@ -1814,7 +1814,7 @@
 	<bean id="com.liferay.portlet.ratings.service.RatingsStatsLocalService.base" abstract="true">
 		<property name="service" ref="com.liferay.portlet.ratings.service.RatingsStatsLocalService.transaction" />
 	</bean>
-	<bean id="com.liferay.portlet.ratings.service.RatingsStatsLocalService.velocity" class="org.springframework.aop.framework.ProxyFactoryBean" parent="velocityBase" lazy-init="true">
+	<bean id="com.liferay.portlet.ratings.service.RatingsStatsLocalService.velocity" class="org.springframework.aop.framework.ProxyFactoryBean" parent="baseVelocityService" lazy-init="true">
 		<property name="target" ref="com.liferay.portlet.ratings.service.RatingsStatsLocalService.transaction" />
 	</bean>
 	<bean id="com.liferay.portlet.ratings.service.RatingsStatsLocalServiceFactory" class="com.liferay.portlet.ratings.service.RatingsStatsLocalServiceFactory" parent="com.liferay.portlet.ratings.service.RatingsStatsLocalService.base" />
@@ -1829,7 +1829,7 @@
 	<bean id="com.liferay.portlet.shopping.service.ShoppingCartLocalService.base" abstract="true">
 		<property name="service" ref="com.liferay.portlet.shopping.service.ShoppingCartLocalService.transaction" />
 	</bean>
-	<bean id="com.liferay.portlet.shopping.service.ShoppingCartLocalService.velocity" class="org.springframework.aop.framework.ProxyFactoryBean" parent="velocityBase" lazy-init="true">
+	<bean id="com.liferay.portlet.shopping.service.ShoppingCartLocalService.velocity" class="org.springframework.aop.framework.ProxyFactoryBean" parent="baseVelocityService" lazy-init="true">
 		<property name="target" ref="com.liferay.portlet.shopping.service.ShoppingCartLocalService.transaction" />
 	</bean>
 	<bean id="com.liferay.portlet.shopping.service.ShoppingCartLocalServiceFactory" class="com.liferay.portlet.shopping.service.ShoppingCartLocalServiceFactory" parent="com.liferay.portlet.shopping.service.ShoppingCartLocalService.base" />
@@ -1844,7 +1844,7 @@
 	<bean id="com.liferay.portlet.shopping.service.ShoppingCategoryLocalService.base" abstract="true">
 		<property name="service" ref="com.liferay.portlet.shopping.service.ShoppingCategoryLocalService.transaction" />
 	</bean>
-	<bean id="com.liferay.portlet.shopping.service.ShoppingCategoryLocalService.velocity" class="org.springframework.aop.framework.ProxyFactoryBean" parent="velocityBase" lazy-init="true">
+	<bean id="com.liferay.portlet.shopping.service.ShoppingCategoryLocalService.velocity" class="org.springframework.aop.framework.ProxyFactoryBean" parent="baseVelocityService" lazy-init="true">
 		<property name="target" ref="com.liferay.portlet.shopping.service.ShoppingCategoryLocalService.transaction" />
 	</bean>
 	<bean id="com.liferay.portlet.shopping.service.ShoppingCategoryLocalServiceFactory" class="com.liferay.portlet.shopping.service.ShoppingCategoryLocalServiceFactory" parent="com.liferay.portlet.shopping.service.ShoppingCategoryLocalService.base" />
@@ -1854,7 +1854,7 @@
 	<bean id="com.liferay.portlet.shopping.service.ShoppingCategoryService.base" abstract="true">
 		<property name="service" ref="com.liferay.portlet.shopping.service.ShoppingCategoryService.transaction" />
 	</bean>
-	<bean id="com.liferay.portlet.shopping.service.ShoppingCategoryService.velocity" class="org.springframework.aop.framework.ProxyFactoryBean" parent="velocityBase" lazy-init="true">
+	<bean id="com.liferay.portlet.shopping.service.ShoppingCategoryService.velocity" class="org.springframework.aop.framework.ProxyFactoryBean" parent="baseVelocityService" lazy-init="true">
 		<property name="target" ref="com.liferay.portlet.shopping.service.ShoppingCategoryService.transaction" />
 	</bean>
 	<bean id="com.liferay.portlet.shopping.service.ShoppingCategoryServiceFactory" class="com.liferay.portlet.shopping.service.ShoppingCategoryServiceFactory" parent="com.liferay.portlet.shopping.service.ShoppingCategoryService.base" />
@@ -1869,7 +1869,7 @@
 	<bean id="com.liferay.portlet.shopping.service.ShoppingCouponLocalService.base" abstract="true">
 		<property name="service" ref="com.liferay.portlet.shopping.service.ShoppingCouponLocalService.transaction" />
 	</bean>
-	<bean id="com.liferay.portlet.shopping.service.ShoppingCouponLocalService.velocity" class="org.springframework.aop.framework.ProxyFactoryBean" parent="velocityBase" lazy-init="true">
+	<bean id="com.liferay.portlet.shopping.service.ShoppingCouponLocalService.velocity" class="org.springframework.aop.framework.ProxyFactoryBean" parent="baseVelocityService" lazy-init="true">
 		<property name="target" ref="com.liferay.portlet.shopping.service.ShoppingCouponLocalService.transaction" />
 	</bean>
 	<bean id="com.liferay.portlet.shopping.service.ShoppingCouponLocalServiceFactory" class="com.liferay.portlet.shopping.service.ShoppingCouponLocalServiceFactory" parent="com.liferay.portlet.shopping.service.ShoppingCouponLocalService.base" />
@@ -1879,7 +1879,7 @@
 	<bean id="com.liferay.portlet.shopping.service.ShoppingCouponService.base" abstract="true">
 		<property name="service" ref="com.liferay.portlet.shopping.service.ShoppingCouponService.transaction" />
 	</bean>
-	<bean id="com.liferay.portlet.shopping.service.ShoppingCouponService.velocity" class="org.springframework.aop.framework.ProxyFactoryBean" parent="velocityBase" lazy-init="true">
+	<bean id="com.liferay.portlet.shopping.service.ShoppingCouponService.velocity" class="org.springframework.aop.framework.ProxyFactoryBean" parent="baseVelocityService" lazy-init="true">
 		<property name="target" ref="com.liferay.portlet.shopping.service.ShoppingCouponService.transaction" />
 	</bean>
 	<bean id="com.liferay.portlet.shopping.service.ShoppingCouponServiceFactory" class="com.liferay.portlet.shopping.service.ShoppingCouponServiceFactory" parent="com.liferay.portlet.shopping.service.ShoppingCouponService.base" />
@@ -1898,7 +1898,7 @@
 	<bean id="com.liferay.portlet.shopping.service.ShoppingItemLocalService.base" abstract="true">
 		<property name="service" ref="com.liferay.portlet.shopping.service.ShoppingItemLocalService.transaction" />
 	</bean>
-	<bean id="com.liferay.portlet.shopping.service.ShoppingItemLocalService.velocity" class="org.springframework.aop.framework.ProxyFactoryBean" parent="velocityBase" lazy-init="true">
+	<bean id="com.liferay.portlet.shopping.service.ShoppingItemLocalService.velocity" class="org.springframework.aop.framework.ProxyFactoryBean" parent="baseVelocityService" lazy-init="true">
 		<property name="target" ref="com.liferay.portlet.shopping.service.ShoppingItemLocalService.transaction" />
 	</bean>
 	<bean id="com.liferay.portlet.shopping.service.ShoppingItemLocalServiceFactory" class="com.liferay.portlet.shopping.service.ShoppingItemLocalServiceFactory" parent="com.liferay.portlet.shopping.service.ShoppingItemLocalService.base" />
@@ -1908,7 +1908,7 @@
 	<bean id="com.liferay.portlet.shopping.service.ShoppingItemService.base" abstract="true">
 		<property name="service" ref="com.liferay.portlet.shopping.service.ShoppingItemService.transaction" />
 	</bean>
-	<bean id="com.liferay.portlet.shopping.service.ShoppingItemService.velocity" class="org.springframework.aop.framework.ProxyFactoryBean" parent="velocityBase" lazy-init="true">
+	<bean id="com.liferay.portlet.shopping.service.ShoppingItemService.velocity" class="org.springframework.aop.framework.ProxyFactoryBean" parent="baseVelocityService" lazy-init="true">
 		<property name="target" ref="com.liferay.portlet.shopping.service.ShoppingItemService.transaction" />
 	</bean>
 	<bean id="com.liferay.portlet.shopping.service.ShoppingItemServiceFactory" class="com.liferay.portlet.shopping.service.ShoppingItemServiceFactory" parent="com.liferay.portlet.shopping.service.ShoppingItemService.base" />
@@ -1927,7 +1927,7 @@
 	<bean id="com.liferay.portlet.shopping.service.ShoppingItemFieldLocalService.base" abstract="true">
 		<property name="service" ref="com.liferay.portlet.shopping.service.ShoppingItemFieldLocalService.transaction" />
 	</bean>
-	<bean id="com.liferay.portlet.shopping.service.ShoppingItemFieldLocalService.velocity" class="org.springframework.aop.framework.ProxyFactoryBean" parent="velocityBase" lazy-init="true">
+	<bean id="com.liferay.portlet.shopping.service.ShoppingItemFieldLocalService.velocity" class="org.springframework.aop.framework.ProxyFactoryBean" parent="baseVelocityService" lazy-init="true">
 		<property name="target" ref="com.liferay.portlet.shopping.service.ShoppingItemFieldLocalService.transaction" />
 	</bean>
 	<bean id="com.liferay.portlet.shopping.service.ShoppingItemFieldLocalServiceFactory" class="com.liferay.portlet.shopping.service.ShoppingItemFieldLocalServiceFactory" parent="com.liferay.portlet.shopping.service.ShoppingItemFieldLocalService.base" />
@@ -1942,7 +1942,7 @@
 	<bean id="com.liferay.portlet.shopping.service.ShoppingItemPriceLocalService.base" abstract="true">
 		<property name="service" ref="com.liferay.portlet.shopping.service.ShoppingItemPriceLocalService.transaction" />
 	</bean>
-	<bean id="com.liferay.portlet.shopping.service.ShoppingItemPriceLocalService.velocity" class="org.springframework.aop.framework.ProxyFactoryBean" parent="velocityBase" lazy-init="true">
+	<bean id="com.liferay.portlet.shopping.service.ShoppingItemPriceLocalService.velocity" class="org.springframework.aop.framework.ProxyFactoryBean" parent="baseVelocityService" lazy-init="true">
 		<property name="target" ref="com.liferay.portlet.shopping.service.ShoppingItemPriceLocalService.transaction" />
 	</bean>
 	<bean id="com.liferay.portlet.shopping.service.ShoppingItemPriceLocalServiceFactory" class="com.liferay.portlet.shopping.service.ShoppingItemPriceLocalServiceFactory" parent="com.liferay.portlet.shopping.service.ShoppingItemPriceLocalService.base" />
@@ -1957,7 +1957,7 @@
 	<bean id="com.liferay.portlet.shopping.service.ShoppingOrderLocalService.base" abstract="true">
 		<property name="service" ref="com.liferay.portlet.shopping.service.ShoppingOrderLocalService.transaction" />
 	</bean>
-	<bean id="com.liferay.portlet.shopping.service.ShoppingOrderLocalService.velocity" class="org.springframework.aop.framework.ProxyFactoryBean" parent="velocityBase" lazy-init="true">
+	<bean id="com.liferay.portlet.shopping.service.ShoppingOrderLocalService.velocity" class="org.springframework.aop.framework.ProxyFactoryBean" parent="baseVelocityService" lazy-init="true">
 		<property name="target" ref="com.liferay.portlet.shopping.service.ShoppingOrderLocalService.transaction" />
 	</bean>
 	<bean id="com.liferay.portlet.shopping.service.ShoppingOrderLocalServiceFactory" class="com.liferay.portlet.shopping.service.ShoppingOrderLocalServiceFactory" parent="com.liferay.portlet.shopping.service.ShoppingOrderLocalService.base" />
@@ -1967,7 +1967,7 @@
 	<bean id="com.liferay.portlet.shopping.service.ShoppingOrderService.base" abstract="true">
 		<property name="service" ref="com.liferay.portlet.shopping.service.ShoppingOrderService.transaction" />
 	</bean>
-	<bean id="com.liferay.portlet.shopping.service.ShoppingOrderService.velocity" class="org.springframework.aop.framework.ProxyFactoryBean" parent="velocityBase" lazy-init="true">
+	<bean id="com.liferay.portlet.shopping.service.ShoppingOrderService.velocity" class="org.springframework.aop.framework.ProxyFactoryBean" parent="baseVelocityService" lazy-init="true">
 		<property name="target" ref="com.liferay.portlet.shopping.service.ShoppingOrderService.transaction" />
 	</bean>
 	<bean id="com.liferay.portlet.shopping.service.ShoppingOrderServiceFactory" class="com.liferay.portlet.shopping.service.ShoppingOrderServiceFactory" parent="com.liferay.portlet.shopping.service.ShoppingOrderService.base" />
@@ -1986,7 +1986,7 @@
 	<bean id="com.liferay.portlet.shopping.service.ShoppingOrderItemLocalService.base" abstract="true">
 		<property name="service" ref="com.liferay.portlet.shopping.service.ShoppingOrderItemLocalService.transaction" />
 	</bean>
-	<bean id="com.liferay.portlet.shopping.service.ShoppingOrderItemLocalService.velocity" class="org.springframework.aop.framework.ProxyFactoryBean" parent="velocityBase" lazy-init="true">
+	<bean id="com.liferay.portlet.shopping.service.ShoppingOrderItemLocalService.velocity" class="org.springframework.aop.framework.ProxyFactoryBean" parent="baseVelocityService" lazy-init="true">
 		<property name="target" ref="com.liferay.portlet.shopping.service.ShoppingOrderItemLocalService.transaction" />
 	</bean>
 	<bean id="com.liferay.portlet.shopping.service.ShoppingOrderItemLocalServiceFactory" class="com.liferay.portlet.shopping.service.ShoppingOrderItemLocalServiceFactory" parent="com.liferay.portlet.shopping.service.ShoppingOrderItemLocalService.base" />
@@ -2001,7 +2001,7 @@
 	<bean id="com.liferay.portlet.social.service.SocialActivityLocalService.base" abstract="true">
 		<property name="service" ref="com.liferay.portlet.social.service.SocialActivityLocalService.transaction" />
 	</bean>
-	<bean id="com.liferay.portlet.social.service.SocialActivityLocalService.velocity" class="org.springframework.aop.framework.ProxyFactoryBean" parent="velocityBase" lazy-init="true">
+	<bean id="com.liferay.portlet.social.service.SocialActivityLocalService.velocity" class="org.springframework.aop.framework.ProxyFactoryBean" parent="baseVelocityService" lazy-init="true">
 		<property name="target" ref="com.liferay.portlet.social.service.SocialActivityLocalService.transaction" />
 	</bean>
 	<bean id="com.liferay.portlet.social.service.SocialActivityLocalServiceFactory" class="com.liferay.portlet.social.service.SocialActivityLocalServiceFactory" parent="com.liferay.portlet.social.service.SocialActivityLocalService.base" />
@@ -2019,7 +2019,7 @@
 	<bean id="com.liferay.portlet.social.service.SocialActivityInterpreterLocalService.base" abstract="true">
 		<property name="service" ref="com.liferay.portlet.social.service.SocialActivityInterpreterLocalService.impl" />
 	</bean>
-	<bean id="com.liferay.portlet.social.service.SocialActivityInterpreterLocalService.velocity" class="org.springframework.aop.framework.ProxyFactoryBean" parent="velocityBase" lazy-init="true">
+	<bean id="com.liferay.portlet.social.service.SocialActivityInterpreterLocalService.velocity" class="org.springframework.aop.framework.ProxyFactoryBean" parent="baseVelocityService" lazy-init="true">
 		<property name="target" ref="com.liferay.portlet.social.service.SocialActivityInterpreterLocalService.impl" />
 	</bean>
 	<bean id="com.liferay.portlet.social.service.SocialActivityInterpreterLocalServiceFactory" class="com.liferay.portlet.social.service.SocialActivityInterpreterLocalServiceFactory" parent="com.liferay.portlet.social.service.SocialActivityInterpreterLocalService.base" />
@@ -2029,7 +2029,7 @@
 	<bean id="com.liferay.portlet.social.service.SocialRelationLocalService.base" abstract="true">
 		<property name="service" ref="com.liferay.portlet.social.service.SocialRelationLocalService.transaction" />
 	</bean>
-	<bean id="com.liferay.portlet.social.service.SocialRelationLocalService.velocity" class="org.springframework.aop.framework.ProxyFactoryBean" parent="velocityBase" lazy-init="true">
+	<bean id="com.liferay.portlet.social.service.SocialRelationLocalService.velocity" class="org.springframework.aop.framework.ProxyFactoryBean" parent="baseVelocityService" lazy-init="true">
 		<property name="target" ref="com.liferay.portlet.social.service.SocialRelationLocalService.transaction" />
 	</bean>
 	<bean id="com.liferay.portlet.social.service.SocialRelationLocalServiceFactory" class="com.liferay.portlet.social.service.SocialRelationLocalServiceFactory" parent="com.liferay.portlet.social.service.SocialRelationLocalService.base" />
@@ -2044,7 +2044,7 @@
 	<bean id="com.liferay.portlet.social.service.SocialRequestLocalService.base" abstract="true">
 		<property name="service" ref="com.liferay.portlet.social.service.SocialRequestLocalService.transaction" />
 	</bean>
-	<bean id="com.liferay.portlet.social.service.SocialRequestLocalService.velocity" class="org.springframework.aop.framework.ProxyFactoryBean" parent="velocityBase" lazy-init="true">
+	<bean id="com.liferay.portlet.social.service.SocialRequestLocalService.velocity" class="org.springframework.aop.framework.ProxyFactoryBean" parent="baseVelocityService" lazy-init="true">
 		<property name="target" ref="com.liferay.portlet.social.service.SocialRequestLocalService.transaction" />
 	</bean>
 	<bean id="com.liferay.portlet.social.service.SocialRequestLocalServiceFactory" class="com.liferay.portlet.social.service.SocialRequestLocalServiceFactory" parent="com.liferay.portlet.social.service.SocialRequestLocalService.base" />
@@ -2058,7 +2058,7 @@
 	<bean id="com.liferay.portlet.social.service.SocialRequestInterpreterLocalService.base" abstract="true">
 		<property name="service" ref="com.liferay.portlet.social.service.SocialRequestInterpreterLocalService.impl" />
 	</bean>
-	<bean id="com.liferay.portlet.social.service.SocialRequestInterpreterLocalService.velocity" class="org.springframework.aop.framework.ProxyFactoryBean" parent="velocityBase" lazy-init="true">
+	<bean id="com.liferay.portlet.social.service.SocialRequestInterpreterLocalService.velocity" class="org.springframework.aop.framework.ProxyFactoryBean" parent="baseVelocityService" lazy-init="true">
 		<property name="target" ref="com.liferay.portlet.social.service.SocialRequestInterpreterLocalService.impl" />
 	</bean>
 	<bean id="com.liferay.portlet.social.service.SocialRequestInterpreterLocalServiceFactory" class="com.liferay.portlet.social.service.SocialRequestInterpreterLocalServiceFactory" parent="com.liferay.portlet.social.service.SocialRequestInterpreterLocalService.base" />
@@ -2068,7 +2068,7 @@
 	<bean id="com.liferay.portlet.softwarecatalog.service.SCLicenseLocalService.base" abstract="true">
 		<property name="service" ref="com.liferay.portlet.softwarecatalog.service.SCLicenseLocalService.transaction" />
 	</bean>
-	<bean id="com.liferay.portlet.softwarecatalog.service.SCLicenseLocalService.velocity" class="org.springframework.aop.framework.ProxyFactoryBean" parent="velocityBase" lazy-init="true">
+	<bean id="com.liferay.portlet.softwarecatalog.service.SCLicenseLocalService.velocity" class="org.springframework.aop.framework.ProxyFactoryBean" parent="baseVelocityService" lazy-init="true">
 		<property name="target" ref="com.liferay.portlet.softwarecatalog.service.SCLicenseLocalService.transaction" />
 	</bean>
 	<bean id="com.liferay.portlet.softwarecatalog.service.SCLicenseLocalServiceFactory" class="com.liferay.portlet.softwarecatalog.service.SCLicenseLocalServiceFactory" parent="com.liferay.portlet.softwarecatalog.service.SCLicenseLocalService.base" />
@@ -2078,7 +2078,7 @@
 	<bean id="com.liferay.portlet.softwarecatalog.service.SCLicenseService.base" abstract="true">
 		<property name="service" ref="com.liferay.portlet.softwarecatalog.service.SCLicenseService.transaction" />
 	</bean>
-	<bean id="com.liferay.portlet.softwarecatalog.service.SCLicenseService.velocity" class="org.springframework.aop.framework.ProxyFactoryBean" parent="velocityBase" lazy-init="true">
+	<bean id="com.liferay.portlet.softwarecatalog.service.SCLicenseService.velocity" class="org.springframework.aop.framework.ProxyFactoryBean" parent="baseVelocityService" lazy-init="true">
 		<property name="target" ref="com.liferay.portlet.softwarecatalog.service.SCLicenseService.transaction" />
 	</bean>
 	<bean id="com.liferay.portlet.softwarecatalog.service.SCLicenseServiceFactory" class="com.liferay.portlet.softwarecatalog.service.SCLicenseServiceFactory" parent="com.liferay.portlet.softwarecatalog.service.SCLicenseService.base" />
@@ -2093,7 +2093,7 @@
 	<bean id="com.liferay.portlet.softwarecatalog.service.SCFrameworkVersionLocalService.base" abstract="true">
 		<property name="service" ref="com.liferay.portlet.softwarecatalog.service.SCFrameworkVersionLocalService.transaction" />
 	</bean>
-	<bean id="com.liferay.portlet.softwarecatalog.service.SCFrameworkVersionLocalService.velocity" class="org.springframework.aop.framework.ProxyFactoryBean" parent="velocityBase" lazy-init="true">
+	<bean id="com.liferay.portlet.softwarecatalog.service.SCFrameworkVersionLocalService.velocity" class="org.springframework.aop.framework.ProxyFactoryBean" parent="baseVelocityService" lazy-init="true">
 		<property name="target" ref="com.liferay.portlet.softwarecatalog.service.SCFrameworkVersionLocalService.transaction" />
 	</bean>
 	<bean id="com.liferay.portlet.softwarecatalog.service.SCFrameworkVersionLocalServiceFactory" class="com.liferay.portlet.softwarecatalog.service.SCFrameworkVersionLocalServiceFactory" parent="com.liferay.portlet.softwarecatalog.service.SCFrameworkVersionLocalService.base" />
@@ -2103,7 +2103,7 @@
 	<bean id="com.liferay.portlet.softwarecatalog.service.SCFrameworkVersionService.base" abstract="true">
 		<property name="service" ref="com.liferay.portlet.softwarecatalog.service.SCFrameworkVersionService.transaction" />
 	</bean>
-	<bean id="com.liferay.portlet.softwarecatalog.service.SCFrameworkVersionService.velocity" class="org.springframework.aop.framework.ProxyFactoryBean" parent="velocityBase" lazy-init="true">
+	<bean id="com.liferay.portlet.softwarecatalog.service.SCFrameworkVersionService.velocity" class="org.springframework.aop.framework.ProxyFactoryBean" parent="baseVelocityService" lazy-init="true">
 		<property name="target" ref="com.liferay.portlet.softwarecatalog.service.SCFrameworkVersionService.transaction" />
 	</bean>
 	<bean id="com.liferay.portlet.softwarecatalog.service.SCFrameworkVersionServiceFactory" class="com.liferay.portlet.softwarecatalog.service.SCFrameworkVersionServiceFactory" parent="com.liferay.portlet.softwarecatalog.service.SCFrameworkVersionService.base" />
@@ -2118,7 +2118,7 @@
 	<bean id="com.liferay.portlet.softwarecatalog.service.SCProductEntryLocalService.base" abstract="true">
 		<property name="service" ref="com.liferay.portlet.softwarecatalog.service.SCProductEntryLocalService.transaction" />
 	</bean>
-	<bean id="com.liferay.portlet.softwarecatalog.service.SCProductEntryLocalService.velocity" class="org.springframework.aop.framework.ProxyFactoryBean" parent="velocityBase" lazy-init="true">
+	<bean id="com.liferay.portlet.softwarecatalog.service.SCProductEntryLocalService.velocity" class="org.springframework.aop.framework.ProxyFactoryBean" parent="baseVelocityService" lazy-init="true">
 		<property name="target" ref="com.liferay.portlet.softwarecatalog.service.SCProductEntryLocalService.transaction" />
 	</bean>
 	<bean id="com.liferay.portlet.softwarecatalog.service.SCProductEntryLocalServiceFactory" class="com.liferay.portlet.softwarecatalog.service.SCProductEntryLocalServiceFactory" parent="com.liferay.portlet.softwarecatalog.service.SCProductEntryLocalService.base" />
@@ -2128,7 +2128,7 @@
 	<bean id="com.liferay.portlet.softwarecatalog.service.SCProductEntryService.base" abstract="true">
 		<property name="service" ref="com.liferay.portlet.softwarecatalog.service.SCProductEntryService.transaction" />
 	</bean>
-	<bean id="com.liferay.portlet.softwarecatalog.service.SCProductEntryService.velocity" class="org.springframework.aop.framework.ProxyFactoryBean" parent="velocityBase" lazy-init="true">
+	<bean id="com.liferay.portlet.softwarecatalog.service.SCProductEntryService.velocity" class="org.springframework.aop.framework.ProxyFactoryBean" parent="baseVelocityService" lazy-init="true">
 		<property name="target" ref="com.liferay.portlet.softwarecatalog.service.SCProductEntryService.transaction" />
 	</bean>
 	<bean id="com.liferay.portlet.softwarecatalog.service.SCProductEntryServiceFactory" class="com.liferay.portlet.softwarecatalog.service.SCProductEntryServiceFactory" parent="com.liferay.portlet.softwarecatalog.service.SCProductEntryService.base" />
@@ -2143,7 +2143,7 @@
 	<bean id="com.liferay.portlet.softwarecatalog.service.SCProductScreenshotLocalService.base" abstract="true">
 		<property name="service" ref="com.liferay.portlet.softwarecatalog.service.SCProductScreenshotLocalService.transaction" />
 	</bean>
-	<bean id="com.liferay.portlet.softwarecatalog.service.SCProductScreenshotLocalService.velocity" class="org.springframework.aop.framework.ProxyFactoryBean" parent="velocityBase" lazy-init="true">
+	<bean id="com.liferay.portlet.softwarecatalog.service.SCProductScreenshotLocalService.velocity" class="org.springframework.aop.framework.ProxyFactoryBean" parent="baseVelocityService" lazy-init="true">
 		<property name="target" ref="com.liferay.portlet.softwarecatalog.service.SCProductScreenshotLocalService.transaction" />
 	</bean>
 	<bean id="com.liferay.portlet.softwarecatalog.service.SCProductScreenshotLocalServiceFactory" class="com.liferay.portlet.softwarecatalog.service.SCProductScreenshotLocalServiceFactory" parent="com.liferay.portlet.softwarecatalog.service.SCProductScreenshotLocalService.base" />
@@ -2158,7 +2158,7 @@
 	<bean id="com.liferay.portlet.softwarecatalog.service.SCProductVersionLocalService.base" abstract="true">
 		<property name="service" ref="com.liferay.portlet.softwarecatalog.service.SCProductVersionLocalService.transaction" />
 	</bean>
-	<bean id="com.liferay.portlet.softwarecatalog.service.SCProductVersionLocalService.velocity" class="org.springframework.aop.framework.ProxyFactoryBean" parent="velocityBase" lazy-init="true">
+	<bean id="com.liferay.portlet.softwarecatalog.service.SCProductVersionLocalService.velocity" class="org.springframework.aop.framework.ProxyFactoryBean" parent="baseVelocityService" lazy-init="true">
 		<property name="target" ref="com.liferay.portlet.softwarecatalog.service.SCProductVersionLocalService.transaction" />
 	</bean>
 	<bean id="com.liferay.portlet.softwarecatalog.service.SCProductVersionLocalServiceFactory" class="com.liferay.portlet.softwarecatalog.service.SCProductVersionLocalServiceFactory" parent="com.liferay.portlet.softwarecatalog.service.SCProductVersionLocalService.base" />
@@ -2168,7 +2168,7 @@
 	<bean id="com.liferay.portlet.softwarecatalog.service.SCProductVersionService.base" abstract="true">
 		<property name="service" ref="com.liferay.portlet.softwarecatalog.service.SCProductVersionService.transaction" />
 	</bean>
-	<bean id="com.liferay.portlet.softwarecatalog.service.SCProductVersionService.velocity" class="org.springframework.aop.framework.ProxyFactoryBean" parent="velocityBase" lazy-init="true">
+	<bean id="com.liferay.portlet.softwarecatalog.service.SCProductVersionService.velocity" class="org.springframework.aop.framework.ProxyFactoryBean" parent="baseVelocityService" lazy-init="true">
 		<property name="target" ref="com.liferay.portlet.softwarecatalog.service.SCProductVersionService.transaction" />
 	</bean>
 	<bean id="com.liferay.portlet.softwarecatalog.service.SCProductVersionServiceFactory" class="com.liferay.portlet.softwarecatalog.service.SCProductVersionServiceFactory" parent="com.liferay.portlet.softwarecatalog.service.SCProductVersionService.base" />
@@ -2183,7 +2183,7 @@
 	<bean id="com.liferay.portlet.tags.service.TagsAssetLocalService.base" abstract="true">
 		<property name="service" ref="com.liferay.portlet.tags.service.TagsAssetLocalService.transaction" />
 	</bean>
-	<bean id="com.liferay.portlet.tags.service.TagsAssetLocalService.velocity" class="org.springframework.aop.framework.ProxyFactoryBean" parent="velocityBase" lazy-init="true">
+	<bean id="com.liferay.portlet.tags.service.TagsAssetLocalService.velocity" class="org.springframework.aop.framework.ProxyFactoryBean" parent="baseVelocityService" lazy-init="true">
 		<property name="target" ref="com.liferay.portlet.tags.service.TagsAssetLocalService.transaction" />
 	</bean>
 	<bean id="com.liferay.portlet.tags.service.TagsAssetLocalServiceFactory" class="com.liferay.portlet.tags.service.TagsAssetLocalServiceFactory" parent="com.liferay.portlet.tags.service.TagsAssetLocalService.base" />
@@ -2193,7 +2193,7 @@
 	<bean id="com.liferay.portlet.tags.service.TagsAssetService.base" abstract="true">
 		<property name="service" ref="com.liferay.portlet.tags.service.TagsAssetService.transaction" />
 	</bean>
-	<bean id="com.liferay.portlet.tags.service.TagsAssetService.velocity" class="org.springframework.aop.framework.ProxyFactoryBean" parent="velocityBase" lazy-init="true">
+	<bean id="com.liferay.portlet.tags.service.TagsAssetService.velocity" class="org.springframework.aop.framework.ProxyFactoryBean" parent="baseVelocityService" lazy-init="true">
 		<property name="target" ref="com.liferay.portlet.tags.service.TagsAssetService.transaction" />
 	</bean>
 	<bean id="com.liferay.portlet.tags.service.TagsAssetServiceFactory" class="com.liferay.portlet.tags.service.TagsAssetServiceFactory" parent="com.liferay.portlet.tags.service.TagsAssetService.base" />
@@ -2212,7 +2212,7 @@
 	<bean id="com.liferay.portlet.tags.service.TagsEntryLocalService.base" abstract="true">
 		<property name="service" ref="com.liferay.portlet.tags.service.TagsEntryLocalService.transaction" />
 	</bean>
-	<bean id="com.liferay.portlet.tags.service.TagsEntryLocalService.velocity" class="org.springframework.aop.framework.ProxyFactoryBean" parent="velocityBase" lazy-init="true">
+	<bean id="com.liferay.portlet.tags.service.TagsEntryLocalService.velocity" class="org.springframework.aop.framework.ProxyFactoryBean" parent="baseVelocityService" lazy-init="true">
 		<property name="target" ref="com.liferay.portlet.tags.service.TagsEntryLocalService.transaction" />
 	</bean>
 	<bean id="com.liferay.portlet.tags.service.TagsEntryLocalServiceFactory" class="com.liferay.portlet.tags.service.TagsEntryLocalServiceFactory" parent="com.liferay.portlet.tags.service.TagsEntryLocalService.base" />
@@ -2222,7 +2222,7 @@
 	<bean id="com.liferay.portlet.tags.service.TagsEntryService.base" abstract="true">
 		<property name="service" ref="com.liferay.portlet.tags.service.TagsEntryService.transaction" />
 	</bean>
-	<bean id="com.liferay.portlet.tags.service.TagsEntryService.velocity" class="org.springframework.aop.framework.ProxyFactoryBean" parent="velocityBase" lazy-init="true">
+	<bean id="com.liferay.portlet.tags.service.TagsEntryService.velocity" class="org.springframework.aop.framework.ProxyFactoryBean" parent="baseVelocityService" lazy-init="true">
 		<property name="target" ref="com.liferay.portlet.tags.service.TagsEntryService.transaction" />
 	</bean>
 	<bean id="com.liferay.portlet.tags.service.TagsEntryServiceFactory" class="com.liferay.portlet.tags.service.TagsEntryServiceFactory" parent="com.liferay.portlet.tags.service.TagsEntryService.base" />
@@ -2241,7 +2241,7 @@
 	<bean id="com.liferay.portlet.tags.service.TagsPropertyLocalService.base" abstract="true">
 		<property name="service" ref="com.liferay.portlet.tags.service.TagsPropertyLocalService.transaction" />
 	</bean>
-	<bean id="com.liferay.portlet.tags.service.TagsPropertyLocalService.velocity" class="org.springframework.aop.framework.ProxyFactoryBean" parent="velocityBase" lazy-init="true">
+	<bean id="com.liferay.portlet.tags.service.TagsPropertyLocalService.velocity" class="org.springframework.aop.framework.ProxyFactoryBean" parent="baseVelocityService" lazy-init="true">
 		<property name="target" ref="com.liferay.portlet.tags.service.TagsPropertyLocalService.transaction" />
 	</bean>
 	<bean id="com.liferay.portlet.tags.service.TagsPropertyLocalServiceFactory" class="com.liferay.portlet.tags.service.TagsPropertyLocalServiceFactory" parent="com.liferay.portlet.tags.service.TagsPropertyLocalService.base" />
@@ -2251,7 +2251,7 @@
 	<bean id="com.liferay.portlet.tags.service.TagsPropertyService.base" abstract="true">
 		<property name="service" ref="com.liferay.portlet.tags.service.TagsPropertyService.transaction" />
 	</bean>
-	<bean id="com.liferay.portlet.tags.service.TagsPropertyService.velocity" class="org.springframework.aop.framework.ProxyFactoryBean" parent="velocityBase" lazy-init="true">
+	<bean id="com.liferay.portlet.tags.service.TagsPropertyService.velocity" class="org.springframework.aop.framework.ProxyFactoryBean" parent="baseVelocityService" lazy-init="true">
 		<property name="target" ref="com.liferay.portlet.tags.service.TagsPropertyService.transaction" />
 	</bean>
 	<bean id="com.liferay.portlet.tags.service.TagsPropertyServiceFactory" class="com.liferay.portlet.tags.service.TagsPropertyServiceFactory" parent="com.liferay.portlet.tags.service.TagsPropertyService.base" />
@@ -2274,7 +2274,7 @@
 	<bean id="com.liferay.portlet.tags.service.TagsSourceLocalService.base" abstract="true">
 		<property name="service" ref="com.liferay.portlet.tags.service.TagsSourceLocalService.transaction" />
 	</bean>
-	<bean id="com.liferay.portlet.tags.service.TagsSourceLocalService.velocity" class="org.springframework.aop.framework.ProxyFactoryBean" parent="velocityBase" lazy-init="true">
+	<bean id="com.liferay.portlet.tags.service.TagsSourceLocalService.velocity" class="org.springframework.aop.framework.ProxyFactoryBean" parent="baseVelocityService" lazy-init="true">
 		<property name="target" ref="com.liferay.portlet.tags.service.TagsSourceLocalService.transaction" />
 	</bean>
 	<bean id="com.liferay.portlet.tags.service.TagsSourceLocalServiceFactory" class="com.liferay.portlet.tags.service.TagsSourceLocalServiceFactory" parent="com.liferay.portlet.tags.service.TagsSourceLocalService.base" />
@@ -2284,7 +2284,7 @@
 	<bean id="com.liferay.portlet.tags.service.TagsSourceService.base" abstract="true">
 		<property name="service" ref="com.liferay.portlet.tags.service.TagsSourceService.transaction" />
 	</bean>
-	<bean id="com.liferay.portlet.tags.service.TagsSourceService.velocity" class="org.springframework.aop.framework.ProxyFactoryBean" parent="velocityBase" lazy-init="true">
+	<bean id="com.liferay.portlet.tags.service.TagsSourceService.velocity" class="org.springframework.aop.framework.ProxyFactoryBean" parent="baseVelocityService" lazy-init="true">
 		<property name="target" ref="com.liferay.portlet.tags.service.TagsSourceService.transaction" />
 	</bean>
 	<bean id="com.liferay.portlet.tags.service.TagsSourceServiceFactory" class="com.liferay.portlet.tags.service.TagsSourceServiceFactory" parent="com.liferay.portlet.tags.service.TagsSourceService.base" />
@@ -2299,7 +2299,7 @@
 	<bean id="com.liferay.portlet.tags.service.TagsVocabularyLocalService.base" abstract="true">
 		<property name="service" ref="com.liferay.portlet.tags.service.TagsVocabularyLocalService.transaction" />
 	</bean>
-	<bean id="com.liferay.portlet.tags.service.TagsVocabularyLocalService.velocity" class="org.springframework.aop.framework.ProxyFactoryBean" parent="velocityBase" lazy-init="true">
+	<bean id="com.liferay.portlet.tags.service.TagsVocabularyLocalService.velocity" class="org.springframework.aop.framework.ProxyFactoryBean" parent="baseVelocityService" lazy-init="true">
 		<property name="target" ref="com.liferay.portlet.tags.service.TagsVocabularyLocalService.transaction" />
 	</bean>
 	<bean id="com.liferay.portlet.tags.service.TagsVocabularyLocalServiceFactory" class="com.liferay.portlet.tags.service.TagsVocabularyLocalServiceFactory" parent="com.liferay.portlet.tags.service.TagsVocabularyLocalService.base" />
@@ -2309,7 +2309,7 @@
 	<bean id="com.liferay.portlet.tags.service.TagsVocabularyService.base" abstract="true">
 		<property name="service" ref="com.liferay.portlet.tags.service.TagsVocabularyService.transaction" />
 	</bean>
-	<bean id="com.liferay.portlet.tags.service.TagsVocabularyService.velocity" class="org.springframework.aop.framework.ProxyFactoryBean" parent="velocityBase" lazy-init="true">
+	<bean id="com.liferay.portlet.tags.service.TagsVocabularyService.velocity" class="org.springframework.aop.framework.ProxyFactoryBean" parent="baseVelocityService" lazy-init="true">
 		<property name="target" ref="com.liferay.portlet.tags.service.TagsVocabularyService.transaction" />
 	</bean>
 	<bean id="com.liferay.portlet.tags.service.TagsVocabularyServiceFactory" class="com.liferay.portlet.tags.service.TagsVocabularyServiceFactory" parent="com.liferay.portlet.tags.service.TagsVocabularyService.base" />
@@ -2324,7 +2324,7 @@
 	<bean id="com.liferay.portlet.tasks.service.TasksReviewLocalService.base" abstract="true">
 		<property name="service" ref="com.liferay.portlet.tasks.service.TasksReviewLocalService.transaction" />
 	</bean>
-	<bean id="com.liferay.portlet.tasks.service.TasksReviewLocalService.velocity" class="org.springframework.aop.framework.ProxyFactoryBean" parent="velocityBase" lazy-init="true">
+	<bean id="com.liferay.portlet.tasks.service.TasksReviewLocalService.velocity" class="org.springframework.aop.framework.ProxyFactoryBean" parent="baseVelocityService" lazy-init="true">
 		<property name="target" ref="com.liferay.portlet.tasks.service.TasksReviewLocalService.transaction" />
 	</bean>
 	<bean id="com.liferay.portlet.tasks.service.TasksReviewLocalServiceFactory" class="com.liferay.portlet.tasks.service.TasksReviewLocalServiceFactory" parent="com.liferay.portlet.tasks.service.TasksReviewLocalService.base" />
@@ -2334,7 +2334,7 @@
 	<bean id="com.liferay.portlet.tasks.service.TasksReviewService.base" abstract="true">
 		<property name="service" ref="com.liferay.portlet.tasks.service.TasksReviewService.transaction" />
 	</bean>
-	<bean id="com.liferay.portlet.tasks.service.TasksReviewService.velocity" class="org.springframework.aop.framework.ProxyFactoryBean" parent="velocityBase" lazy-init="true">
+	<bean id="com.liferay.portlet.tasks.service.TasksReviewService.velocity" class="org.springframework.aop.framework.ProxyFactoryBean" parent="baseVelocityService" lazy-init="true">
 		<property name="target" ref="com.liferay.portlet.tasks.service.TasksReviewService.transaction" />
 	</bean>
 	<bean id="com.liferay.portlet.tasks.service.TasksReviewServiceFactory" class="com.liferay.portlet.tasks.service.TasksReviewServiceFactory" parent="com.liferay.portlet.tasks.service.TasksReviewService.base" />
@@ -2349,7 +2349,7 @@
 	<bean id="com.liferay.portlet.tasks.service.TasksProposalLocalService.base" abstract="true">
 		<property name="service" ref="com.liferay.portlet.tasks.service.TasksProposalLocalService.transaction" />
 	</bean>
-	<bean id="com.liferay.portlet.tasks.service.TasksProposalLocalService.velocity" class="org.springframework.aop.framework.ProxyFactoryBean" parent="velocityBase" lazy-init="true">
+	<bean id="com.liferay.portlet.tasks.service.TasksProposalLocalService.velocity" class="org.springframework.aop.framework.ProxyFactoryBean" parent="baseVelocityService" lazy-init="true">
 		<property name="target" ref="com.liferay.portlet.tasks.service.TasksProposalLocalService.transaction" />
 	</bean>
 	<bean id="com.liferay.portlet.tasks.service.TasksProposalLocalServiceFactory" class="com.liferay.portlet.tasks.service.TasksProposalLocalServiceFactory" parent="com.liferay.portlet.tasks.service.TasksProposalLocalService.base" />
@@ -2359,7 +2359,7 @@
 	<bean id="com.liferay.portlet.tasks.service.TasksProposalService.base" abstract="true">
 		<property name="service" ref="com.liferay.portlet.tasks.service.TasksProposalService.transaction" />
 	</bean>
-	<bean id="com.liferay.portlet.tasks.service.TasksProposalService.velocity" class="org.springframework.aop.framework.ProxyFactoryBean" parent="velocityBase" lazy-init="true">
+	<bean id="com.liferay.portlet.tasks.service.TasksProposalService.velocity" class="org.springframework.aop.framework.ProxyFactoryBean" parent="baseVelocityService" lazy-init="true">
 		<property name="target" ref="com.liferay.portlet.tasks.service.TasksProposalService.transaction" />
 	</bean>
 	<bean id="com.liferay.portlet.tasks.service.TasksProposalServiceFactory" class="com.liferay.portlet.tasks.service.TasksProposalServiceFactory" parent="com.liferay.portlet.tasks.service.TasksProposalService.base" />
@@ -2378,7 +2378,7 @@
 	<bean id="com.liferay.portlet.wiki.service.WikiNodeLocalService.base" abstract="true">
 		<property name="service" ref="com.liferay.portlet.wiki.service.WikiNodeLocalService.transaction" />
 	</bean>
-	<bean id="com.liferay.portlet.wiki.service.WikiNodeLocalService.velocity" class="org.springframework.aop.framework.ProxyFactoryBean" parent="velocityBase" lazy-init="true">
+	<bean id="com.liferay.portlet.wiki.service.WikiNodeLocalService.velocity" class="org.springframework.aop.framework.ProxyFactoryBean" parent="baseVelocityService" lazy-init="true">
 		<property name="target" ref="com.liferay.portlet.wiki.service.WikiNodeLocalService.transaction" />
 	</bean>
 	<bean id="com.liferay.portlet.wiki.service.WikiNodeLocalServiceFactory" class="com.liferay.portlet.wiki.service.WikiNodeLocalServiceFactory" parent="com.liferay.portlet.wiki.service.WikiNodeLocalService.base" />
@@ -2388,7 +2388,7 @@
 	<bean id="com.liferay.portlet.wiki.service.WikiNodeService.base" abstract="true">
 		<property name="service" ref="com.liferay.portlet.wiki.service.WikiNodeService.transaction" />
 	</bean>
-	<bean id="com.liferay.portlet.wiki.service.WikiNodeService.velocity" class="org.springframework.aop.framework.ProxyFactoryBean" parent="velocityBase" lazy-init="true">
+	<bean id="com.liferay.portlet.wiki.service.WikiNodeService.velocity" class="org.springframework.aop.framework.ProxyFactoryBean" parent="baseVelocityService" lazy-init="true">
 		<property name="target" ref="com.liferay.portlet.wiki.service.WikiNodeService.transaction" />
 	</bean>
 	<bean id="com.liferay.portlet.wiki.service.WikiNodeServiceFactory" class="com.liferay.portlet.wiki.service.WikiNodeServiceFactory" parent="com.liferay.portlet.wiki.service.WikiNodeService.base" />
@@ -2403,7 +2403,7 @@
 	<bean id="com.liferay.portlet.wiki.service.WikiPageLocalService.base" abstract="true">
 		<property name="service" ref="com.liferay.portlet.wiki.service.WikiPageLocalService.transaction" />
 	</bean>
-	<bean id="com.liferay.portlet.wiki.service.WikiPageLocalService.velocity" class="org.springframework.aop.framework.ProxyFactoryBean" parent="velocityBase" lazy-init="true">
+	<bean id="com.liferay.portlet.wiki.service.WikiPageLocalService.velocity" class="org.springframework.aop.framework.ProxyFactoryBean" parent="baseVelocityService" lazy-init="true">
 		<property name="target" ref="com.liferay.portlet.wiki.service.WikiPageLocalService.transaction" />
 	</bean>
 	<bean id="com.liferay.portlet.wiki.service.WikiPageLocalServiceFactory" class="com.liferay.portlet.wiki.service.WikiPageLocalServiceFactory" parent="com.liferay.portlet.wiki.service.WikiPageLocalService.base" />
@@ -2413,7 +2413,7 @@
 	<bean id="com.liferay.portlet.wiki.service.WikiPageService.base" abstract="true">
 		<property name="service" ref="com.liferay.portlet.wiki.service.WikiPageService.transaction" />
 	</bean>
-	<bean id="com.liferay.portlet.wiki.service.WikiPageService.velocity" class="org.springframework.aop.framework.ProxyFactoryBean" parent="velocityBase" lazy-init="true">
+	<bean id="com.liferay.portlet.wiki.service.WikiPageService.velocity" class="org.springframework.aop.framework.ProxyFactoryBean" parent="baseVelocityService" lazy-init="true">
 		<property name="target" ref="com.liferay.portlet.wiki.service.WikiPageService.transaction" />
 	</bean>
 	<bean id="com.liferay.portlet.wiki.service.WikiPageServiceFactory" class="com.liferay.portlet.wiki.service.WikiPageServiceFactory" parent="com.liferay.portlet.wiki.service.WikiPageService.base" />
@@ -2432,7 +2432,7 @@
 	<bean id="com.liferay.portlet.wiki.service.WikiPageResourceLocalService.base" abstract="true">
 		<property name="service" ref="com.liferay.portlet.wiki.service.WikiPageResourceLocalService.transaction" />
 	</bean>
-	<bean id="com.liferay.portlet.wiki.service.WikiPageResourceLocalService.velocity" class="org.springframework.aop.framework.ProxyFactoryBean" parent="velocityBase" lazy-init="true">
+	<bean id="com.liferay.portlet.wiki.service.WikiPageResourceLocalService.velocity" class="org.springframework.aop.framework.ProxyFactoryBean" parent="baseVelocityService" lazy-init="true">
 		<property name="target" ref="com.liferay.portlet.wiki.service.WikiPageResourceLocalService.transaction" />
 	</bean>
 	<bean id="com.liferay.portlet.wiki.service.WikiPageResourceLocalServiceFactory" class="com.liferay.portlet.wiki.service.WikiPageResourceLocalServiceFactory" parent="com.liferay.portlet.wiki.service.WikiPageResourceLocalService.base" />
@@ -2447,7 +2447,7 @@
 	<bean id="com.liferay.portlet.workflow.service.WorkflowComponentService.base" abstract="true">
 		<property name="service" ref="com.liferay.portlet.workflow.service.WorkflowComponentService.transaction" />
 	</bean>
-	<bean id="com.liferay.portlet.workflow.service.WorkflowComponentService.velocity" class="org.springframework.aop.framework.ProxyFactoryBean" parent="velocityBase" lazy-init="true">
+	<bean id="com.liferay.portlet.workflow.service.WorkflowComponentService.velocity" class="org.springframework.aop.framework.ProxyFactoryBean" parent="baseVelocityService" lazy-init="true">
 		<property name="target" ref="com.liferay.portlet.workflow.service.WorkflowComponentService.transaction" />
 	</bean>
 	<bean id="com.liferay.portlet.workflow.service.WorkflowComponentServiceFactory" class="com.liferay.portlet.workflow.service.WorkflowComponentServiceFactory" parent="com.liferay.portlet.workflow.service.WorkflowComponentService.base" />
@@ -2457,7 +2457,7 @@
 	<bean id="com.liferay.portlet.workflow.service.WorkflowDefinitionService.base" abstract="true">
 		<property name="service" ref="com.liferay.portlet.workflow.service.WorkflowDefinitionService.transaction" />
 	</bean>
-	<bean id="com.liferay.portlet.workflow.service.WorkflowDefinitionService.velocity" class="org.springframework.aop.framework.ProxyFactoryBean" parent="velocityBase" lazy-init="true">
+	<bean id="com.liferay.portlet.workflow.service.WorkflowDefinitionService.velocity" class="org.springframework.aop.framework.ProxyFactoryBean" parent="baseVelocityService" lazy-init="true">
 		<property name="target" ref="com.liferay.portlet.workflow.service.WorkflowDefinitionService.transaction" />
 	</bean>
 	<bean id="com.liferay.portlet.workflow.service.WorkflowDefinitionServiceFactory" class="com.liferay.portlet.workflow.service.WorkflowDefinitionServiceFactory" parent="com.liferay.portlet.workflow.service.WorkflowDefinitionService.base" />
@@ -2467,7 +2467,7 @@
 	<bean id="com.liferay.portlet.workflow.service.WorkflowInstanceService.base" abstract="true">
 		<property name="service" ref="com.liferay.portlet.workflow.service.WorkflowInstanceService.transaction" />
 	</bean>
-	<bean id="com.liferay.portlet.workflow.service.WorkflowInstanceService.velocity" class="org.springframework.aop.framework.ProxyFactoryBean" parent="velocityBase" lazy-init="true">
+	<bean id="com.liferay.portlet.workflow.service.WorkflowInstanceService.velocity" class="org.springframework.aop.framework.ProxyFactoryBean" parent="baseVelocityService" lazy-init="true">
 		<property name="target" ref="com.liferay.portlet.workflow.service.WorkflowInstanceService.transaction" />
 	</bean>
 	<bean id="com.liferay.portlet.workflow.service.WorkflowInstanceServiceFactory" class="com.liferay.portlet.workflow.service.WorkflowInstanceServiceFactory" parent="com.liferay.portlet.workflow.service.WorkflowInstanceService.base" />
@@ -2477,7 +2477,7 @@
 	<bean id="com.liferay.portlet.workflow.service.WorkflowTaskService.base" abstract="true">
 		<property name="service" ref="com.liferay.portlet.workflow.service.WorkflowTaskService.transaction" />
 	</bean>
-	<bean id="com.liferay.portlet.workflow.service.WorkflowTaskService.velocity" class="org.springframework.aop.framework.ProxyFactoryBean" parent="velocityBase" lazy-init="true">
+	<bean id="com.liferay.portlet.workflow.service.WorkflowTaskService.velocity" class="org.springframework.aop.framework.ProxyFactoryBean" parent="baseVelocityService" lazy-init="true">
 		<property name="target" ref="com.liferay.portlet.workflow.service.WorkflowTaskService.transaction" />
 	</bean>
 	<bean id="com.liferay.portlet.workflow.service.WorkflowTaskServiceFactory" class="com.liferay.portlet.workflow.service.WorkflowTaskServiceFactory" parent="com.liferay.portlet.workflow.service.WorkflowTaskService.base" />

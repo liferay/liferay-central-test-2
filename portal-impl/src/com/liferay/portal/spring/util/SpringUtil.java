@@ -58,7 +58,7 @@ public class SpringUtil {
 			applicationContext.getBeanDefinitionNames();
 
 		for (String beanDefinitionName : beanDefinitionNames) {
-			if (beanDefinitionName.endsWith("Base") ||
+			if (beanDefinitionName.startsWith("base") ||
 				beanDefinitionName.endsWith(".base") ) {
 
 				continue;
@@ -85,6 +85,8 @@ public class SpringUtil {
 			PortalClassLoaderUtil.getClassLoader(), applicationContext);
 
 		PortalBeanLocatorUtil.setBeanLocator(beanLocator);
+
+		initContext(applicationContext);
 	}
 
 }
