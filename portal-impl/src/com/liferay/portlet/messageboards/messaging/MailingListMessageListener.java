@@ -27,7 +27,6 @@ import com.liferay.portal.kernel.json.JSONFactoryUtil;
 import com.liferay.portal.kernel.mail.Account;
 import com.liferay.portal.kernel.messaging.MessageListener;
 import com.liferay.portal.kernel.util.StringPool;
-import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.Company;
 import com.liferay.portal.model.User;
 import com.liferay.portal.security.permission.PermissionCheckerUtil;
@@ -142,17 +141,18 @@ public class MailingListMessageListener implements MessageListener {
 	}
 
 	protected void processMessage(
-			MailingListRequest mailingListRequest, Message mailMessage) 
+			MailingListRequest mailingListRequest, Message mailMessage)
 		throws Exception {
-		
-		if (MBUtil.hasMailIDHeader(mailMessage)) {
+
+		if (MBUtil.hasMailIdHeader(mailMessage)) {
 			return;
 		}
-		
+
 		String from = null;
+
 		Address[] addresses = mailMessage.getFrom();
 
-		if (Validator.isNotNull(addresses)) {
+		if ((addresses != null) && (addresses.length > 0)) {
 			from = addresses[0].toString();
 		}
 
@@ -164,9 +164,9 @@ public class MailingListMessageListener implements MessageListener {
 		if (_log.isDebugEnabled()) {
 			_log.debug("Category id " + categoryId);
 		}
-		
+
 		boolean anonymous = false;
-		
+
 		User user = UserLocalServiceUtil.getUserById(
 			company.getCompanyId(), mailingListRequest.getUserId());
 
@@ -183,7 +183,7 @@ public class MailingListMessageListener implements MessageListener {
 		if (_log.isDebugEnabled()) {
 			_log.debug("Parent message id " + parentMessageId);
 		}
-		
+
 		MBMessage parentMessage = null;
 
 		try {
@@ -217,13 +217,12 @@ public class MailingListMessageListener implements MessageListener {
 				collector.getBody(), collector.getFiles(), anonymous, 0.0,
 				null, true, true);
 		}
-
 	}
 
 	protected void processMessages(
 			MailingListRequest mailingListRequest, Message[] messages)
 		throws Exception {
-		
+
 		for (Message message : messages) {
 			processMessage(mailingListRequest, message);
 		}

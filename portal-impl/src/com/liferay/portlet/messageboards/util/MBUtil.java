@@ -628,15 +628,16 @@ public class MBUtil {
 		return rank;
 	}
 
-	public static boolean hasMailIDHeader(Message mailMessage)
-		throws MessagingException {
+	public static boolean hasMailIdHeader(Message message) throws Exception {
+		String[] messageIds = message.getHeader("Message-ID");
 
-		String[] messageIds = mailMessage.getHeader("Message-ID");
-		if (Validator.isNotNull(messageIds)) {
-			for (String messageId : messageIds) {
-				if (messageId.contains(PropsValues.POP_SERVER_SUBDOMAIN)) {
-					return true;
-				}
+		if (messageIds == null) {
+			return false;
+		}
+
+		for (String messageId : messageIds) {
+			if (messageId.contains(PropsValues.POP_SERVER_SUBDOMAIN)) {
+				return true;
 			}
 		}
 
