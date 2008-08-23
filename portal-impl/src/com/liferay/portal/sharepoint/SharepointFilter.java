@@ -267,8 +267,9 @@ public class SharepointFilter extends BasePortalFilter {
 		response.setHeader("Accept-Ranges", "none");
 		response.setHeader("Cache-Control", "no-cache");
 		response.setHeader(
-			"ALLOW", "GET, POST, OPTIONS, HEAD, MKCOL, PUT, PROPFIND, " +
-				"PROPPATCH, DELETE, MOVE, COPY, GETLIB, LOCK, UNLOCK");
+			"Allow",
+			"COPY, DELETE, GET, GETLIB, HEAD, LOCK, MKCOL, MOVE, OPTIONS, " +
+				"POST, PROPFIND, PROPPATCH, PUT, UNLOCK");
 	}
 
 	protected void setPostHeaders(HttpServletResponse response) {
