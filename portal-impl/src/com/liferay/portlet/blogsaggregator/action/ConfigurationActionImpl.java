@@ -57,10 +57,10 @@ public class ConfigurationActionImpl implements ConfigurationAction {
 		String organizationId = ParamUtil.getString(
 			actionRequest, "organizationId");
 		String displayStyle = ParamUtil.getString(
-				actionRequest, "displayStyle");
+			actionRequest, "displayStyle");
 		int max = ParamUtil.getInteger(actionRequest, "max");
 		boolean enableRssSubscription = ParamUtil.getBoolean(
-				actionRequest, "enableRssSubscription");
+			actionRequest, "enableRssSubscription");
 
 		String portletResource = ParamUtil.getString(
 			actionRequest, "portletResource");
