@@ -111,7 +111,7 @@ public class SAXReaderImpl implements SAXReader {
 			}
 		}
 
-		return newNodes;
+		return new NodeList<Node, org.dom4j.Node>(newNodes, oldNodes);
 	}
 
 	public static List<ProcessingInstruction> toNewProcessingInstructions(
@@ -446,7 +446,5 @@ public class SAXReaderImpl implements SAXReader {
 		"http://apache.org/xml/features/validation/dynamic";
 
 	private static Log _log = LogFactory.getLog(SAXReaderImpl.class);
-
-	private static SAXReaderImpl _instance = new SAXReaderImpl();
 
 }

@@ -121,7 +121,12 @@ public class BranchImpl extends NodeImpl implements Branch {
 			return null;
 		}
 		else {
-			return new NodeImpl(node);
+			if (node instanceof org.dom4j.Element) {
+				return new ElementImpl((org.dom4j.Element)node);
+			}
+			else {
+				return new NodeImpl(node);
+			}
 		}
 	}
 

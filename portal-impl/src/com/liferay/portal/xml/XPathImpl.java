@@ -116,6 +116,11 @@ public class XPathImpl implements XPath {
 		if (context == null) {
 			return null;
 		}
+		else if (context instanceof org.dom4j.Document) {
+			org.dom4j.Document document = (org.dom4j.Document)context;
+
+			return new DocumentImpl(document);
+		}
 		else if (context instanceof org.dom4j.Node) {
 			org.dom4j.Node node = (org.dom4j.Node)context;
 
@@ -132,6 +137,11 @@ public class XPathImpl implements XPath {
 	protected Object toOldContext(Object context) {
 		if (context == null) {
 			return null;
+		}
+		else if (context instanceof DocumentImpl) {
+			DocumentImpl documentImpl = (DocumentImpl)context;
+
+			return documentImpl.getWrappedDocument();
 		}
 		else if (context instanceof NodeImpl) {
 			NodeImpl nodeImpl = (NodeImpl)context;

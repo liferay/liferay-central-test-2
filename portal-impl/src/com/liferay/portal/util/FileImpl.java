@@ -761,6 +761,4 @@ public class FileImpl implements com.liferay.portal.kernel.util.File {
 
 	private static Log _log = LogFactory.getLog(FileImpl.class);
 
-	private static FileImpl _instance = new FileImpl();
-
 }
