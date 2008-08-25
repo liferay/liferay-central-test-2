@@ -27,9 +27,10 @@
 <%
 String message = (String)request.getAttribute("liferay-ui:icon-menu:message");
 String align = (String)request.getAttribute("liferay-ui:icon-menu:align");
+String cssClass = GetterUtil.getString((String)request.getAttribute("liferay-ui:icon-menu:cssClass"));
 %>
 
-<ul class="lfr-component lfr-actions <%= align %>">
+<ul class="lfr-component lfr-actions <%= align %> <%= cssClass %>">
 	<li class="lfr-trigger">
 		<strong><span><liferay-ui:message key="<%= message %>" /></span></strong>
 			<ul>
