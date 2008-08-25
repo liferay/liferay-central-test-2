@@ -1,10 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd">
-	<bean id="logInterceptor" class="com.liferay.portal.spring.aop.LogInterceptor" />
-	<bean id="velocityServiceInterceptor" class="com.liferay.portal.spring.aop.BeanInterceptor">
-		<property name="exceptionSafe" value="true" />
-	</bean>
 	<bean id="com.liferay.portal.kernel.bean.BeanPropertiesUtil" class="com.liferay.portal.kernel.bean.BeanPropertiesUtil">
 		<property name="beanProperties">
 			<bean class="com.liferay.portal.bean.BeanPropertiesImpl" />
