@@ -241,6 +241,8 @@ public interface Portal {
 	public String getPortalURL(
 		String serverName, int serverPort, boolean secure);
 
+	public String getPortalWebDir();
+
 	public Object[] getPortletFriendlyURLMapper(
 			long groupId, boolean privateLayout, String url)
 		throws PortalException, SystemException;

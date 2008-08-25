@@ -106,14 +106,12 @@ import com.liferay.portlet.social.util.FacebookUtil;
 import com.liferay.portlet.wiki.model.WikiPage;
 import com.liferay.util.Encryptor;
 import com.liferay.util.JS;
+import com.liferay.util.WebDirDetector;
 import com.liferay.util.servlet.DynamicServletRequest;
 
 import java.io.IOException;
 
 import java.net.InetAddress;
-import java.net.URI;
-import java.net.URISyntaxException;
-import java.net.URL;
 import java.net.UnknownHostException;
 
 import java.rmi.RemoteException;
@@ -212,48 +210,13 @@ public class PortalImpl implements Portal {
 
 		ClassLoader classLoader = getClass().getClassLoader();
 
-		URL url = classLoader.getResource(
-			"com/liferay/portal/util/PortalImpl.class");
-
-		String file = null;
-
-		try {
-			file = new URI(url.getPath()).getPath();
-		}
-		catch (URISyntaxException urise) {
-			file = url.getFile();
-		}
-
-		if (_log.isInfoEnabled()) {
-			_log.info("Portal lib url " + file);
-		}
-
-		int pos = file.indexOf("/com/liferay/portal/util/");
-
-		_portalLibDir =	file.substring(0, pos + 1);
-
-		if (_portalLibDir.endsWith("/WEB-INF/classes/")) {
-			_portalLibDir = _portalLibDir.substring(
-				0, _portalLibDir.length() - 8) + "lib/";
-		}
-		else {
-			pos = _portalLibDir.indexOf("/WEB-INF/lib/");
-
-			if (pos != -1) {
-				_portalLibDir =
-					_portalLibDir.substring(0, pos) + "/WEB-INF/lib/";
-			}
-		}
-
-		if (_portalLibDir.startsWith("file:/")) {
-			_portalLibDir = _portalLibDir.substring(5, _portalLibDir.length());
-		}
+		_portalLibDir = WebDirDetector.getLibDir(classLoader);
 
 		String portalLibDir = System.getProperty("liferay.lib.portal.dir");
 
 		if (portalLibDir != null) {
-			if (!portalLibDir.endsWith("/")) {
-				portalLibDir += "/";
+			if (!portalLibDir.endsWith(StringPool.SLASH)) {
+				portalLibDir += StringPool.SLASH;
 			}
 
 			_portalLibDir = portalLibDir;
@@ -261,6 +224,12 @@ public class PortalImpl implements Portal {
 
 		if (_log.isInfoEnabled()) {
 			_log.info("Portal lib directory " + _portalLibDir);
+		}
+
+		_portalWebDir = WebDirDetector.getRootDir(_portalLibDir);
+
+		if (_log.isDebugEnabled()) {
+			_log.debug("Portal web directory " + _portalWebDir);
 		}
 
 		// CDN host
@@ -1347,6 +1316,10 @@ public class PortalImpl implements Portal {
 		}
 
 		return sb.toString();
+	}
+
+	public String getPortalWebDir() {
+		return _portalWebDir;
 	}
 
 	public Object[] getPortletFriendlyURLMapper(
@@ -2916,6 +2889,7 @@ public class PortalImpl implements Portal {
 	private String _computerAddress;
 	private String _computerName;
 	private String _portalLibDir;
+	private String _portalWebDir;
 	private String _cdnHost;
 	private String _pathContext;
 	private String _pathFriendlyURLPrivateGroup;

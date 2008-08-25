@@ -356,6 +356,14 @@ public class PortalUtil {
 		return getPortal().getPortalLibDir();
 	}
 
+	public static int getPortalPort() {
+		return getPortal().getPortalPort();
+	}
+
+	public static Properties getPortalProperties() {
+		return getPortal().getPortalProperties();
+	}
+
 	public static String getPortalURL(ThemeDisplay themeDisplay) {
 		return getPortal().getPortalURL(themeDisplay);
 	}
@@ -386,12 +394,8 @@ public class PortalUtil {
 		return getPortal().getPortalURL(serverName, serverPort, secure);
 	}
 
-	public static int getPortalPort() {
-		return getPortal().getPortalPort();
-	}
-
-	public static Properties getPortalProperties() {
-		return getPortal().getPortalProperties();
+	public static String getPortalWebDir() {
+		return getPortal().getPortalWebDir();
 	}
 
 	public static Object[] getPortletFriendlyURLMapper(
