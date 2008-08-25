@@ -15,14 +15,7 @@
 			#if ($portlet_display.isShowBackIcon())
 				<a href="$portlet_back_url" class="portlet-icon-back">#language ("return-to-full-page")</a>
 			#else
-				$theme.iconRefresh()
-				$theme.iconPortletCss()
-				$theme.iconConfiguration()
-				$theme.iconEdit()
-				$theme.iconEditDefaults()
-				$theme.iconEditGuest()
-				$theme.iconHelp()
-				$theme.iconPrint()
+				$theme.iconOptions()
 				$theme.iconMinimize()
 				$theme.iconMaximize()
 				$theme.iconClose()

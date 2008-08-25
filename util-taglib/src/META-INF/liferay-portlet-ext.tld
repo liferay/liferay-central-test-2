@@ -192,6 +192,16 @@
 		</attribute>
 	</tag>
 	<tag>
+		<name>icon-options</name>
+		<tag-class>com.liferay.taglib.portletext.IconOptionsTag</tag-class>
+		<body-content>JSP</body-content>
+		<attribute>
+			<name>page</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+	</tag>
+	<tag>
 		<name>icon-portlet</name>
 		<tag-class>com.liferay.taglib.portletext.IconPortletTag</tag-class>
 		<body-content>JSP</body-content>

@@ -381,6 +381,35 @@ body.portlet {
 	border-bottom: none;
 }
 
+.lfr-actions.portlet-options {
+	background: none;
+	border: none;
+	float: left;
+}
+
+.lfr-actions.portlet-options .lfr-trigger {
+	padding: 0;
+}
+
+.lfr-actions.portlet-options .lfr-trigger strong {
+	min-width: 0;
+	padding: 1px 3px;
+}
+
+.lfr-actions.portlet-options .lfr-trigger strong span {
+	background-image: url(../images/portlet/options.png);
+	background-position: 0 0;
+	padding: 0;
+	text-indent: -9999em;
+	display: block;
+	height: 16px;
+	width: 16px;
+}
+
+.portlet-options.visible .lfr-trigger strong span {
+	background-image: url(../images/portlet/options_selected.png);
+}
+
 /* ---------- Calendar taglib ---------- */
 
 .taglib-calendar tr.portlet-section-header th, .taglib-calendar tr td {

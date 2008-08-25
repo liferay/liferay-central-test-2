@@ -288,6 +288,21 @@ body.portlet {
 .lfr-actions .lfr-trigger li.last {
 }
 
+.lfr-actions.portlet-options {
+}
+
+.lfr-actions.portlet-options .lfr-trigger {
+}
+
+.lfr-actions.portlet-options .lfr-trigger strong {
+}
+
+.lfr-actions.portlet-options .lfr-trigger strong span {
+}
+
+.portlet-options.visible .lfr-trigger strong span {
+}
+
 /* ---------- Calendar taglib ---------- */
 
 .taglib-calendar tr.portlet-section-header th, .taglib-calendar tr td {
