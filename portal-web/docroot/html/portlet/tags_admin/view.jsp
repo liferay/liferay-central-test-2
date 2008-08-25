@@ -54,35 +54,36 @@
 				<input type="button" class="add-vocabulary-btn" name="add-vocabulary-btn" value="<liferay-ui:message key="add-tag-set" />" id="add-vocabulary-btn">
 				<input type="button" class="add-entry-btn" name="add-entry-btn" value="<liferay-ui:message key="add-tag" />" id="add-entry-btn">
 
-				<span class="entry-toolbar-section">
-					<div class="arrow-toolbar-section-box"></div>
-					<div class="content">
+				<div class="lfr-floating-panel entry-toolbar-section">
+					<div class="direction-indicator"></div>
+					<div class="panel-content">
 						<strong class="vocabulary-label"><liferay-ui:message key="tag-name" /></strong>
 
 						<input class="vocabulary-entry-name" name="vocabulary-entry-name" type="text" value="" />
 
-						<strong style="padding-left: 5px;"><liferay-ui:message key="to-vocabulary" /></strong> <select class="vocabulary-select-list" name="vocabulary-select-list"></select>
+						<strong><liferay-ui:message key="to-vocabulary" /></strong>
+						<select class="vocabulary-select-list" name="vocabulary-select-list"></select>
 
 						<br /><br />
 
 						<input class="vocabulary-save-entry" type="button" value="<liferay-ui:message key="save" />" />
 
-						<input class="close-entry-toolbar-section" type="button" value="<liferay-ui:message key="close" />" />
+						<input class="close-panel" type="button" value="<liferay-ui:message key="close" />" />
 					</div>
-				</span>
+				</div>
 
-				<span class="vocabulary-toolbar-section">
-					<div class="arrow-toolbar-section-box"></div>
-					<div class="content">
+				<div class="lfr-floating-panel vocabulary-toolbar-section">
+					<div class="direction-indicator"></div>
+					<div class="panel-content">
 						<strong><liferay-ui:message key="add-tag-set" /></strong>
 
 						<input class="vocabulary-name" name="vocabulary-name" type="text" value="" />
 
 						<input class="vocabulary-save-entry" type="button" value="<liferay-ui:message key="save" />" />
 
-						<input class="close-entry-toolbar-section" type="button" value="<liferay-ui:message key="close" />" />
+						<input class="close-panel" type="button" value="<liferay-ui:message key="close" />" />
 					</div>
-				</span>
+				</div>
 			</div>
 		</div>
 	</td>
