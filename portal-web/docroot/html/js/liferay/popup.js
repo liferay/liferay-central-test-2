@@ -121,11 +121,13 @@ Liferay.Popup = function(options) {
 		open: function(e, ui) {
 			if (!options.dragHelper) {
 				var dialog = jQuery(this).parents('.ui-dialog:first'), target = jQuery(this);
-				
-				dialog.click(function() {
-					checkExternalClick(target);
-				});
-				
+
+				dialog.click(
+					function(event) {
+						checkExternalClick(target);
+					}
+				);
+
 				cacheDialogHelper(dialog);
 			}
 		}
@@ -216,7 +218,7 @@ Liferay.Popup = function(options) {
 			resizeHelper: resizeHelper,
 			stack: stack,
 			width: width,
-			zIndex: Liferay.zIndex.ALERT, // compensate for UI's dialog
+			zIndex: Liferay.zIndex.ALERT,
 			dragHelper: dragHelper,
 			dragStart: dragStart,
 			dragStop: dragStop,
