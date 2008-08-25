@@ -48,54 +48,48 @@ public class CreateURLDirectoriesMethodImpl extends BaseMethodImpl {
 		return _METHOD_NAME;
 	}
 
-	public List<ResponseElement> getElements(
+	protected List<ResponseElement> getElements(
 			SharepointRequest sharepointRequest)
-		throws SharepointException {
+		throws Exception {
 
 		List<ResponseElement> elements = new ArrayList<ResponseElement>();
 
-		try {
-			String urlDirs = ParamUtil.getString(
-				sharepointRequest.getHttpRequest(), "urldirs");
+		String urlDirs = ParamUtil.getString(
+			sharepointRequest.getHttpRequest(), "urldirs");
 
-			urlDirs = urlDirs.substring(2, urlDirs.length() - 2);
+		urlDirs = urlDirs.substring(2, urlDirs.length() - 2);
 
-			String urls[] = urlDirs.split(StringPool.SEMICOLON);
+		String urls[] = urlDirs.split(StringPool.SEMICOLON);
 
-			String folderName = urls[0].substring(4);
+		String folderName = urls[0].substring(4);
 
-			String uuid = PortalUUIDUtil.generate();
+		String uuid = PortalUUIDUtil.generate();
 
-			long userId = sharepointRequest.getUserId();
+		long userId = sharepointRequest.getUserId();
 
-			int pos = folderName.lastIndexOf(StringPool.FORWARD_SLASH);
+		int pos = folderName.lastIndexOf(StringPool.FORWARD_SLASH);
 
-			String parentFolderName = folderName.substring(0, pos);
+		String parentFolderName = folderName.substring(0, pos);
 
-			folderName = folderName.substring(pos + 1);
+		folderName = folderName.substring(pos + 1);
 
-			long ids[] = SharepointUtil.getIds(parentFolderName);
+		long ids[] = SharepointUtil.getIds(parentFolderName);
 
-			long groupId = ids[0];
-			long parentFolderId = ids[1];
+		long groupId = ids[0];
+		long parentFolderId = ids[1];
 
-			String description = StringPool.BLANK;
+		String description = StringPool.BLANK;
 
-			Boolean addCommunityPermissions = null;
-			Boolean addGuestPermissions = null;
+		Boolean addCommunityPermissions = null;
+		Boolean addGuestPermissions = null;
 
-			String[] communityPermissions = null;
-			String[] guestPermissions = null;
+		String[] communityPermissions = null;
+		String[] guestPermissions = null;
 
-			DLFolderLocalServiceUtil.addFolderToGroup(
-				uuid, userId, groupId, parentFolderId, folderName, description,
-				addCommunityPermissions, addGuestPermissions,
-				communityPermissions, guestPermissions);
-
-		}
-		catch (Exception e){
-			new SharepointException();
-		}
+		DLFolderLocalServiceUtil.addFolderToGroup(
+			uuid, userId, groupId, parentFolderId, folderName, description,
+			addCommunityPermissions, addGuestPermissions, communityPermissions,
+			guestPermissions);
 
 		elements.add(new Property("message", StringPool.BLANK));
 

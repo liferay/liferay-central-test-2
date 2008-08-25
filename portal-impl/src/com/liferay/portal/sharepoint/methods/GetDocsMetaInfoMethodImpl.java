@@ -67,13 +67,13 @@ public class GetDocsMetaInfoMethodImpl extends BaseMethodImpl {
 			documentListTree.addChild(
 				SharepointUtil.getDocumentTree(documentName));
 		}
-		catch (Exception e) {
-			if (e instanceof NoSuchFileEntryException) {
+		catch (Exception e1) {
+			if (e1 instanceof NoSuchFileEntryException) {
 				try {
 					documentListTree.addChild(
 						SharepointUtil.getDLFolderTree(urlList));
 				}
-				catch (Exception e1) {
+				catch (Exception e2) {
 				}
 			}
 		}
