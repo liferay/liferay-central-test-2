@@ -43,7 +43,7 @@
 	min-width: 180px;
 }
 
-.ie .portlet-tags-admin .vocabulary-entries-container {
+.ie6 .portlet-tags-admin .vocabulary-entries-container {
 	width: 300px;
 }
 
@@ -176,10 +176,6 @@
 	text-align: right;
 }
 
-.portlet-tags-admin .vocabulary-actions input, .portlet-tags-admin .vocabulary-actions div, .portlet-tags-admin .vocabulary-actions select {
-	margin-left: 5px;
-}
-
 .portlet-tags-admin .vocabulary-buttons .button {
 	background: url(<%= themeImagesPath %>/common/page.png) no-repeat scroll 10px 50%;
 	color: #9EA8AD;
@@ -233,12 +229,29 @@
 .portlet-tags-admin .panel-content {
 	background: #FFFFFF none repeat scroll 0 0;
 	border: 2px solid #727C81;
-	padding: 20px;
+	padding: 10px;
 	text-align: left;
 }
 
-.portlet-tags-admin .panel-content strong {
-	display: blocks;
+.portlet-tags-admin .panel-content .ctrl-holder {
+	margin-bottom: 10px;
+}
+
+.portlet-tags-admin .panel-content label {
+	display: block;
+	font-weight: bold;
+}
+
+.portlet-tags-admin .panel-content .ctrl-holder input, .portlet-tags-admin .panel-content .ctrl-holder select {
+	min-width: 200px;
+}
+
+.ie6 .portlet-tags-admin .panel-content .ctrl-holder input, .ie6 .portlet-tags-admin .panel-content .ctrl-holder select {
+	width: 200px;
+}
+
+.portlet-tags-admin .panel-content .button-holder {
+	margin-top: 5px;
 }
 
 .portlet-tags-admin .lfr-floating-panel .direction-indicator {
@@ -261,7 +274,7 @@
 }
 
 .portlet-tags-admin .vocabulary-container .entry-name {
-	width: 100%;
+	width: 99%;
 }
 
 .portlet-tags-admin #vocabulary-search-input {

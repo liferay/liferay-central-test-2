@@ -57,31 +57,46 @@
 				<div class="lfr-floating-panel entry-toolbar-section">
 					<div class="direction-indicator"></div>
 					<div class="panel-content">
-						<strong class="vocabulary-label"><liferay-ui:message key="tag-name" /></strong>
+						<div class="ctrl-holder">
+							<label class="vocabulary-label" for="vocabulary-entry-name">
+								<liferay-ui:message key="tag-name" />
+							</label>
 
-						<input class="vocabulary-entry-name" name="vocabulary-entry-name" type="text" value="" />
+							<input class="vocabulary-entry-name" name="vocabulary-entry-name" type="text" value="" />
+						</div>
 
-						<strong><liferay-ui:message key="to-vocabulary" /></strong>
-						<select class="vocabulary-select-list" name="vocabulary-select-list"></select>
+						<div class="ctrl-holder">
+							<label for="vocabulary-select-list">
+								<liferay-ui:message key="to-vocabulary" />
+							</label>
 
-						<br /><br />
+							<select class="vocabulary-select-list" name="vocabulary-select-list"></select>
+						</div>
 
-						<input class="vocabulary-save-entry" type="button" value="<liferay-ui:message key="save" />" />
+						<div class="button-holder">
+							<input class="vocabulary-save-entry" type="button" value="<liferay-ui:message key="save" />" />
 
-						<input class="close-panel" type="button" value="<liferay-ui:message key="close" />" />
+							<input class="close-panel" type="button" value="<liferay-ui:message key="close" />" />
+						</div>
 					</div>
 				</div>
 
 				<div class="lfr-floating-panel vocabulary-toolbar-section">
 					<div class="direction-indicator"></div>
 					<div class="panel-content">
-						<strong><liferay-ui:message key="add-tag-set" /></strong>
+						<div class="ctrl-holder">
+							<label for="vocabulary-name">
+								<liferay-ui:message key="add-tag-set" />
+							</label>
 
-						<input class="vocabulary-name" name="vocabulary-name" type="text" value="" />
+							<input class="vocabulary-name" name="vocabulary-name" type="text" value="" />
+						</div>
 
-						<input class="vocabulary-save-entry" type="button" value="<liferay-ui:message key="save" />" />
+						<div class="button-holder">
+							<input class="vocabulary-save-entry" type="button" value="<liferay-ui:message key="save" />" />
 
-						<input class="close-panel" type="button" value="<liferay-ui:message key="close" />" />
+							<input class="close-panel" type="button" value="<liferay-ui:message key="close" />" />
+						</div>
 					</div>
 				</div>
 			</div>
@@ -94,7 +109,10 @@
 		<div class="vocabulary-list lfr-component"></div>
 	</td>
 	<td class="vocabulary-entries-container">
-		<div class="results-header"><liferay-ui:message key="entries" /></div>
+		<div class="results-header">
+			<liferay-ui:message key="entries" />
+		</div>
+		
 		<div class="lfr-message-response" id="vocabulary-entry-messages" style="display: none;"></div>
 
 		<div class="vocabulary-entries lfr-component"></div>
@@ -102,9 +120,15 @@
 	<td class="vocabulary-edit-entry">
 		<div class="results-header"><liferay-ui:message key="edit-entry" /></div>
 		<div class="vocabulary-edit">
-			<div class="vocabulary-close"><span><liferay-ui:icon image="close" /></span></div>
+			<div class="vocabulary-close">
+				<span>
+					<liferay-ui:icon image="close" />
+				</span>
+			</div>
 
-			<div class="vocabulary-label"><liferay-ui:message key="tag-name" />:</div>
+			<div class="vocabulary-label">
+				<liferay-ui:message key="tag-name" />:
+			</div>
 
 			<input class="entry-name" name="entry-name" type="text" />
 
