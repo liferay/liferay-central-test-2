@@ -47,6 +47,7 @@ import com.liferay.portlet.documentlibrary.model.DLFolder;
 import com.liferay.portlet.documentlibrary.model.impl.DLFileEntryImpl;
 import com.liferay.portlet.documentlibrary.model.impl.DLFolderImpl;
 import com.liferay.portlet.documentlibrary.service.base.DLFileEntryLocalServiceBaseImpl;
+import com.liferay.portlet.messageboards.NoSuchDiscussionException;
 import com.liferay.portlet.messageboards.model.MBDiscussion;
 import com.liferay.util.MathUtil;
 
@@ -889,13 +890,17 @@ public class DLFileEntryLocalServiceImpl
 
 			// Message boards
 
-			MBDiscussion discussion = mbDiscussionPersistence.findByC_C(
-				PortalUtil.getClassNameId(DLFileEntry.class.getName()),
-				oldFileEntryId);
+			try {
+				MBDiscussion discussion = mbDiscussionPersistence.findByC_C(
+					PortalUtil.getClassNameId(DLFileEntry.class.getName()),
+					oldFileEntryId);
 
-			discussion.setClassPK(newFileEntryId);
+				discussion.setClassPK(newFileEntryId);
 
-			mbDiscussionPersistence.update(discussion, false);
+				mbDiscussionPersistence.update(discussion, false);
+			}
+			catch (NoSuchDiscussionException nsde) {
+			}
 		}
 
 		// Tags
