@@ -3,7 +3,9 @@ Liferay.Events = {
 		var instance = this;
 
 		event = event + '.liferay-events';
-		jQuery(document).bind(event,
+
+		jQuery(document).bind(
+			event,
 			function() {
 				func.apply(scope || this, arguments);
 			}
@@ -14,6 +16,7 @@ Liferay.Events = {
 		var instance = this;
 
 		event = event + '.liferay-events';
+
 		jQuery(document).trigger(event, data);
 	},
 
@@ -21,6 +24,7 @@ Liferay.Events = {
 		var instance = this;
 
 		event = event + '.liferay-events';
+
 		jQuery(document).unbind(event, func);
 	}
 };

@@ -323,11 +323,7 @@ portletURL.setParameter("folderId", String.valueOf(folderId));
 												);
 
 												jQuery('#span-' + json[i].folderId).load(
-													actionMenuURL +
-													'&<portlet:namespace />folderId=' +
-													json[i].folderId +
-													'&<portlet:namespace />ajaxRedirect=' +
-													folderURL
+													actionMenuURL + '&<portlet:namespace />folderId=' + json[i].folderId + '&<portlet:namespace />ajaxRedirect=' + folderURL
 												);
 											}
 										}

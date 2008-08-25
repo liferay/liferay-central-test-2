@@ -112,7 +112,7 @@
 		<div class="results-header">
 			<liferay-ui:message key="entries" />
 		</div>
-		
+
 		<div class="lfr-message-response" id="vocabulary-entry-messages" style="display: none;"></div>
 
 		<div class="vocabulary-entries lfr-component"></div>
