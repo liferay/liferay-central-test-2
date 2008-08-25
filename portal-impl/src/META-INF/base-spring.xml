@@ -33,6 +33,14 @@
 			<tx:method name="*" propagation="SUPPORTS" read-only="true" />
   		</tx:attributes>
 	</tx:advice>
+	<bean id="logInterceptor" class="com.liferay.portal.spring.aop.LogInterceptor" />
+	<bean id="baseLogService" abstract="true">
+		<property name="interceptorNames">
+			<list>
+				<value>logInterceptor</value>
+			</list>
+		</property>
+	</bean>
 	<bean id="velocityServiceInterceptor" class="com.liferay.portal.spring.aop.BeanInterceptor">
 		<property name="exceptionSafe" value="true" />
 	</bean>
@@ -40,14 +48,6 @@
 		<property name="interceptorNames">
 			<list>
 				<value>velocityServiceInterceptor</value>
-			</list>
-		</property>
-	</bean>
-	<bean id="logInterceptor" class="com.liferay.portal.spring.aop.LogInterceptor" />
-	<bean id="baseLogService" abstract="true">
-		<property name="interceptorNames">
-			<list>
-				<value>logInterceptor</value>
 			</list>
 		</property>
 	</bean>
