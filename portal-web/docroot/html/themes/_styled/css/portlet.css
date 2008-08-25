@@ -399,10 +399,10 @@ body.portlet {
 .lfr-actions.portlet-options .lfr-trigger strong span {
 	background-image: url(../images/portlet/options.png);
 	background-position: 0 0;
-	padding: 0;
-	text-indent: -9999em;
 	display: block;
 	height: 16px;
+	padding: 0;
+	text-indent: -9999em;
 	width: 16px;
 }
 
