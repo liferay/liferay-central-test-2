@@ -28,12 +28,8 @@ import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.Group;
 import com.liferay.portal.model.Organization;
-import com.liferay.portal.model.User;
 import com.liferay.portal.service.GroupLocalServiceUtil;
-import com.liferay.portal.service.GroupServiceUtil;
 import com.liferay.portal.service.OrganizationLocalServiceUtil;
-import com.liferay.portal.service.UserLocalServiceUtil;
-import com.liferay.portal.sharepoint.Leaf;
 import com.liferay.portal.sharepoint.Property;
 import com.liferay.portal.sharepoint.ResponseElement;
 import com.liferay.portal.sharepoint.SharepointRequest;
@@ -44,7 +40,6 @@ import com.liferay.portlet.documentlibrary.model.DLFolder;
 import com.liferay.portlet.documentlibrary.model.impl.DLFolderImpl;
 import com.liferay.portlet.documentlibrary.service.DLFileEntryLocalServiceUtil;
 import com.liferay.portlet.documentlibrary.service.DLFolderLocalServiceUtil;
-import com.liferay.portlet.documentlibrary.service.DLFolderServiceUtil;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -72,7 +67,7 @@ public class ListDocumentsMethodImpl extends BaseMethodImpl {
 		long groupId = ids[0];
 		long parentFolderId = ids[1];
 
-		String rootFolderPath = getGroupPath(groupId);
+		String rootFolderPath = SharepointUtil.getGroupPath(groupId);
 
 		Date rootCreateDate = new Date();
 		Date rootModifiedDate = rootCreateDate;
@@ -88,7 +83,7 @@ public class ListDocumentsMethodImpl extends BaseMethodImpl {
 			rootModifiedDate = folder.getModifiedDate();
 			rootLastPostDate = folder.getLastPostDate();
 
-			rootFolderPath = getDLFolderPath(parentFolderId);
+			rootFolderPath = SharepointUtil.getDLFolderPath(parentFolderId);
 
 			entries = DLFileEntryLocalServiceUtil.getFileEntries(
 				parentFolderId);
@@ -103,19 +98,10 @@ public class ListDocumentsMethodImpl extends BaseMethodImpl {
 			groupId, parentFolderId);
 
 		for (DLFolder folder : folders) {
-			String folderPath = getDLFolderPath(folder.getFolderId());
-
-			Date createDate = folder.getCreateDate();
-			Date modifiedDate = folder.getModifiedDate();
-			Date lastPostDate = folder.getLastPostDate();
-
-			Tree folderTree = getFolderTree(
-				folderPath, createDate, modifiedDate, lastPostDate);
-
-			urlDirsTree.addChild(folderTree);
+			urlDirsTree.addChild(SharepointUtil.getDLFolderTree(folder));
 		}
 
-		Tree rootFolderTree = getFolderTree(
+		Tree rootFolderTree = SharepointUtil.getFolderTree(
 			rootFolderPath, rootCreateDate, rootModifiedDate, rootLastPostDate);
 
 		urlDirsTree.addChild(rootFolderTree);
@@ -123,56 +109,14 @@ public class ListDocumentsMethodImpl extends BaseMethodImpl {
 
 	protected void addFileEntries(
 			List<ResponseElement> elements, List<DLFileEntry> entries,
-			String folderPath) {
+			String folderPath)
+		throws Exception {
 
 		Tree documentListTree = new Tree();
 
 		for (DLFileEntry fileEntry : entries) {
-			Tree metaInfoTree = new Tree();
-
-			Date createDate = fileEntry.getCreateDate();
-			Date modifiedDate = fileEntry.getModifiedDate();
-
-			metaInfoTree.addChild(
-				new Leaf(
-					"vti_timecreated", SharepointUtil.getDate(createDate),
-					false));
-
-			metaInfoTree.addChild(
-				new Leaf(
-					"vti_timelastmodified",
-					SharepointUtil.getDate(modifiedDate), false));
-
-			metaInfoTree.addChild(
-				new Leaf(
-					"vti_timelastwritten", SharepointUtil.getDate(modifiedDate),
-					false));
-
-			metaInfoTree.addChild(
-				new Leaf(
-					"vti_title", "SR|" + fileEntry.getTitle(), false));
-
-			metaInfoTree.addChild(
-				new Leaf(
-					"vti_filesize", "IR|" + fileEntry.getSize(), false));
-
-			metaInfoTree.addChild(
-				new Leaf(
-					"vti_sourcecontrolversion", "SR|V" + fileEntry.getVersion(),
-					false));
-
-			Tree fileEntryTree = new Tree();
-
-			fileEntryTree.addChild(
-				new Leaf(
-					"document_name",
-					folderPath + StringPool.FORWARD_SLASH +
-					fileEntry.getTitleWithExtension(),
-					true));
-
-			fileEntryTree.addChild(new Leaf("meta_info", metaInfoTree));
-
-			documentListTree.addChild(fileEntryTree);
+			documentListTree.addChild(
+				SharepointUtil.getDocumentTree(fileEntry));
 		}
 
 		Property documentListProperty =
@@ -214,23 +158,13 @@ public class ListDocumentsMethodImpl extends BaseMethodImpl {
 		}
 
 		for (Group group : groups) {
-			String groupPath = getGroupPath(group.getGroupId());
-
-			urlDirsTree.addChild(getFolderTree(groupPath));
+			urlDirsTree.addChild(SharepointUtil.getGroupTree(group));
 		}
 
-		urlDirsTree.addChild(getFolderTree(StringPool.BLANK));
-	}
+		Date now = new Date();
 
-	protected String getDLFolderPath(long folderId) throws Exception {
-		StringBuilder sb = new StringBuilder();
-
-		DLFolder folder = DLFolderServiceUtil.getFolder(folderId);
-
-		sb.append(getGroupPath(folder.getGroupId()));
-		sb.append(folder.getPath());
-
-		return sb.toString();
+		urlDirsTree.addChild(
+			SharepointUtil.getFolderTree(StringPool.BLANK, now, now, now));
 	}
 
 	protected List<ResponseElement> getElements(
@@ -256,71 +190,6 @@ public class ListDocumentsMethodImpl extends BaseMethodImpl {
 		elements.add(urlDirsProperty);
 
 		return elements;
-	}
-
-	protected Tree getFolderTree(String name) {
-		Date now = new Date();
-
-		return getFolderTree(name, now, now, now);
-	}
-
-	protected Tree getFolderTree(
-		String name, Date createDate, Date modifiedDate, Date lastPostDate) {
-
-		Tree folderTree = new Tree();
-
-		Tree metaInfoTree = new Tree();
-
-		metaInfoTree.addChild(
-			new Leaf(
-				"vti_timecreated", SharepointUtil.getDate(createDate), false));
-		metaInfoTree.addChild(
-			new Leaf(
-				"vti_timelastmodified", SharepointUtil.getDate(modifiedDate),
-				false));
-		metaInfoTree.addChild(
-			new Leaf(
-				"vti_timelastwritten", SharepointUtil.getDate(lastPostDate),
-				false));
-		metaInfoTree.addChild(new Leaf("vti_hassubdirs", "BR|true", false));
-		metaInfoTree.addChild(new Leaf("vti_isbrowsable", "BR|true", false));
-		metaInfoTree.addChild(new Leaf("vti_isexecutable", "BR|false", false));
-		metaInfoTree.addChild(new Leaf("vti_isscriptable", "BR|false", false));
-
-		folderTree.addChild(new Leaf("url", name, true));
-		folderTree.addChild(new Leaf("meta_info", metaInfoTree));
-
-		return folderTree;
-	}
-
-	protected String getGroupPath(long groupId) throws Exception {
-		StringBuilder sb = new StringBuilder();
-
-		Group group = GroupServiceUtil.getGroup(groupId);
-
-		String name = group.getName();
-
-		long classPK = group.getClassPK();
-
-		if (group.isUser()) {
-			User user = UserLocalServiceUtil.getUserById(classPK);
-
-			name = user.getFullName();
-		}
-		else if (group.isOrganization()) {
-			Organization organization =
-				OrganizationLocalServiceUtil.getOrganization(classPK);
-
-			name= organization.getName();
-		}
-
-		sb.append(name);
-		sb.append(StringPool.SPACE);
-		sb.append(StringPool.OPEN_BRACKET);
-		sb.append(group.getGroupId());
-		sb.append(StringPool.CLOSE_BRACKET);
-
-		return sb.toString();
 	}
 
 	private static final String _METHOD_NAME = "list documents";

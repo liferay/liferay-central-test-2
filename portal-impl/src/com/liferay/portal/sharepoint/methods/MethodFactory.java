@@ -70,6 +70,10 @@ public class MethodFactory {
 
 		_methods.put(method.getMethodName(), method);
 
+		method = (Method)InstancePool.get(_REMOVE_DOCUMENTS_METHOD_IMPL);
+
+		_methods.put(method.getMethodName(), method);
+
 		method = (Method)InstancePool.get(_SERVER_VERSION_METHOD_IMPL);
 
 		_methods.put(method.getMethodName(), method);
@@ -137,6 +141,11 @@ public class MethodFactory {
 		GetterUtil.getString(
 			PropsUtil.get(MethodFactory.class.getName() + ".OPEN_SERVICE"),
 			OpenServiceMethodImpl.class.getName());
+
+	private static final String _REMOVE_DOCUMENTS_METHOD_IMPL =
+		GetterUtil.getString(
+			PropsUtil.get(MethodFactory.class.getName() + ".REMOVE_DOCUMENTS"),
+			RemoveDocumentsMethodImpl.class.getName());
 
 	private static final String _SERVER_VERSION_METHOD_IMPL =
 		GetterUtil.getString(

@@ -25,7 +25,14 @@ package com.liferay.portal.sharepoint;
 import com.liferay.portal.kernel.util.DateUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.StringPool;
+import com.liferay.portal.model.Group;
+import com.liferay.portal.model.Organization;
+import com.liferay.portal.model.User;
+import com.liferay.portal.service.GroupServiceUtil;
+import com.liferay.portal.service.OrganizationLocalServiceUtil;
+import com.liferay.portal.service.UserLocalServiceUtil;
 import com.liferay.portlet.documentlibrary.model.DLFileEntry;
+import com.liferay.portlet.documentlibrary.model.DLFolder;
 import com.liferay.portlet.documentlibrary.model.impl.DLFolderImpl;
 import com.liferay.portlet.documentlibrary.service.DLFileEntryServiceUtil;
 import com.liferay.portlet.documentlibrary.service.DLFolderServiceUtil;
@@ -63,6 +70,10 @@ public class SharepointUtil {
 	}
 
 	public static String getDate(Date date) {
+		if (date == null) {
+			return StringPool.BLANK;
+		}
+
 		StringBuilder sb = new StringBuilder();
 
 		sb.append("TR|");
@@ -89,8 +100,33 @@ public class SharepointUtil {
 		return fileEntry;
 	}
 
+	public static String getDLFolderPath(long folderId) throws Exception {
+		StringBuilder sb = new StringBuilder();
+
+		DLFolder folder = DLFolderServiceUtil.getFolder(folderId);
+
+		sb.append(getGroupPath(folder.getGroupId()));
+		sb.append(folder.getPath());
+
+		return sb.toString();
+	}
+
 	public static Tree getDocumentTree(String documentName) throws Exception {
 		DLFileEntry fileEntry = getDLFileEntry(documentName);
+
+		return getDocumentTree(documentName, fileEntry);
+	}
+
+	public static Tree getDocumentTree(DLFileEntry fileEntry) throws Exception {
+		String documentName = getDLFolderPath(fileEntry.getFolderId()) +
+			StringPool.FORWARD_SLASH + fileEntry.getTitleWithExtension();
+
+		return getDocumentTree(documentName, fileEntry);
+	}
+
+	public static Tree getDocumentTree(
+			String documentName, DLFileEntry fileEntry)
+		throws Exception {
 
 		Tree documentTree = new Tree();
 
@@ -124,6 +160,97 @@ public class SharepointUtil {
 		documentTree.addChild(new Leaf("meta_info", metaInfoTree));
 
 		return documentTree;
+	}
+
+	public static Tree getGroupTree(Group group) throws Exception {
+		String groupPath = getGroupPath(group.getGroupId());
+
+		Date now = new Date();
+
+		return getFolderTree(groupPath, now, now, now);
+	}
+
+	public static Tree getDLFolderTree(String documentName) throws Exception {
+		long ids[] = getIds(documentName);
+
+		return getDLFolderTree(DLFolderServiceUtil.getFolder(ids[1]));
+	}
+
+	public static Tree getDLFolderTree(DLFolder folder) throws Exception {
+		String folderPath = getDLFolderPath(folder.getFolderId());
+
+		Date createDate = folder.getCreateDate();
+		Date modifiedDate = folder.getModifiedDate();
+		Date lastPostDate = folder.getLastPostDate();
+
+		return getFolderTree(
+			folderPath, createDate, modifiedDate, lastPostDate);
+	}
+
+	public static Tree getFolderTree(
+			String name, Date createDate, Date modifiedDate, Date lastPostDate)
+		{
+
+		Tree folderTree = new Tree();
+
+		Tree metaInfoTree = new Tree();
+
+		metaInfoTree.addChild(
+			new Leaf("vti_timecreated", getDate(createDate), false));
+
+		metaInfoTree.addChild(
+			new Leaf("vti_timelastmodified", getDate(modifiedDate), false));
+
+		metaInfoTree.addChild(
+			new Leaf(
+				"vti_timelastwritten", getDate(lastPostDate), false));
+
+		metaInfoTree.addChild(
+			new Leaf("vti_hassubdirs", "BR|true", false));
+
+		metaInfoTree.addChild(
+			new Leaf("vti_isbrowsable", "BR|true", false));
+
+		metaInfoTree.addChild(
+			new Leaf("vti_isexecutable", "BR|false", false));
+
+		metaInfoTree.addChild(
+			new Leaf("vti_isscriptable", "BR|false", false));
+
+		folderTree.addChild(new Leaf("url", name, true));
+		folderTree.addChild(new Leaf("meta_info", metaInfoTree));
+
+		return folderTree;
+	}
+
+	public static String getGroupPath(long groupId) throws Exception {
+		StringBuilder sb = new StringBuilder();
+
+		Group group = GroupServiceUtil.getGroup(groupId);
+
+		String name = group.getName();
+
+		long classPK = group.getClassPK();
+
+		if (group.isUser()) {
+			User user = UserLocalServiceUtil.getUserById(classPK);
+
+			name = user.getFullName();
+		}
+		else if (group.isOrganization()) {
+			Organization organization =
+				OrganizationLocalServiceUtil.getOrganization(classPK);
+
+			name= organization.getName();
+		}
+
+		sb.append(name);
+		sb.append(StringPool.SPACE);
+		sb.append(StringPool.OPEN_BRACKET);
+		sb.append(group.getGroupId());
+		sb.append(StringPool.CLOSE_BRACKET);
+
+		return sb.toString();
 	}
 
 	public static long[] getIds(String initialURL) throws Exception {
