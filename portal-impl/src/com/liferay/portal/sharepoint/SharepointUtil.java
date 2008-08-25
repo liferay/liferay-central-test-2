@@ -111,6 +111,23 @@ public class SharepointUtil {
 		return sb.toString();
 	}
 
+	public static Tree getDLFolderTree(String documentName) throws Exception {
+		long ids[] = getIds(documentName);
+
+		return getDLFolderTree(DLFolderServiceUtil.getFolder(ids[1]));
+	}
+
+	public static Tree getDLFolderTree(DLFolder folder) throws Exception {
+		String folderPath = getDLFolderPath(folder.getFolderId());
+
+		Date createDate = folder.getCreateDate();
+		Date modifiedDate = folder.getModifiedDate();
+		Date lastPostDate = folder.getLastPostDate();
+
+		return getFolderTree(
+			folderPath, createDate, modifiedDate, lastPostDate);
+	}
+
 	public static Tree getDocumentTree(String documentName) throws Exception {
 		DLFileEntry fileEntry = getDLFileEntry(documentName);
 
@@ -118,10 +135,13 @@ public class SharepointUtil {
 	}
 
 	public static Tree getDocumentTree(DLFileEntry fileEntry) throws Exception {
-		String documentName = getDLFolderPath(fileEntry.getFolderId()) +
-			StringPool.FORWARD_SLASH + fileEntry.getTitleWithExtension();
+		StringBuilder sb = new StringBuilder();
 
-		return getDocumentTree(documentName, fileEntry);
+		sb.append(getDLFolderPath(fileEntry.getFolderId()));
+		sb.append(StringPool.FORWARD_SLASH);
+		sb.append(fileEntry.getTitleWithExtension());
+
+		return getDocumentTree(sb.toString(), fileEntry);
 	}
 
 	public static Tree getDocumentTree(
@@ -162,34 +182,8 @@ public class SharepointUtil {
 		return documentTree;
 	}
 
-	public static Tree getGroupTree(Group group) throws Exception {
-		String groupPath = getGroupPath(group.getGroupId());
-
-		Date now = new Date();
-
-		return getFolderTree(groupPath, now, now, now);
-	}
-
-	public static Tree getDLFolderTree(String documentName) throws Exception {
-		long ids[] = getIds(documentName);
-
-		return getDLFolderTree(DLFolderServiceUtil.getFolder(ids[1]));
-	}
-
-	public static Tree getDLFolderTree(DLFolder folder) throws Exception {
-		String folderPath = getDLFolderPath(folder.getFolderId());
-
-		Date createDate = folder.getCreateDate();
-		Date modifiedDate = folder.getModifiedDate();
-		Date lastPostDate = folder.getLastPostDate();
-
-		return getFolderTree(
-			folderPath, createDate, modifiedDate, lastPostDate);
-	}
-
 	public static Tree getFolderTree(
-			String name, Date createDate, Date modifiedDate, Date lastPostDate)
-		{
+		String name, Date createDate, Date modifiedDate, Date lastPostDate) {
 
 		Tree folderTree = new Tree();
 
@@ -197,25 +191,14 @@ public class SharepointUtil {
 
 		metaInfoTree.addChild(
 			new Leaf("vti_timecreated", getDate(createDate), false));
-
 		metaInfoTree.addChild(
 			new Leaf("vti_timelastmodified", getDate(modifiedDate), false));
-
 		metaInfoTree.addChild(
-			new Leaf(
-				"vti_timelastwritten", getDate(lastPostDate), false));
-
-		metaInfoTree.addChild(
-			new Leaf("vti_hassubdirs", "BR|true", false));
-
-		metaInfoTree.addChild(
-			new Leaf("vti_isbrowsable", "BR|true", false));
-
-		metaInfoTree.addChild(
-			new Leaf("vti_isexecutable", "BR|false", false));
-
-		metaInfoTree.addChild(
-			new Leaf("vti_isscriptable", "BR|false", false));
+			new Leaf("vti_timelastwritten", getDate(lastPostDate), false));
+		metaInfoTree.addChild(new Leaf("vti_hassubdirs", "BR|true", false));
+		metaInfoTree.addChild(new Leaf("vti_isbrowsable", "BR|true", false));
+		metaInfoTree.addChild(new Leaf("vti_isexecutable", "BR|false", false));
+		metaInfoTree.addChild(new Leaf("vti_isscriptable", "BR|false", false));
 
 		folderTree.addChild(new Leaf("url", name, true));
 		folderTree.addChild(new Leaf("meta_info", metaInfoTree));
@@ -251,6 +234,14 @@ public class SharepointUtil {
 		sb.append(StringPool.CLOSE_BRACKET);
 
 		return sb.toString();
+	}
+
+	public static Tree getGroupTree(Group group) throws Exception {
+		String groupPath = getGroupPath(group.getGroupId());
+
+		Date now = new Date();
+
+		return getFolderTree(groupPath, now, now, now);
 	}
 
 	public static long[] getIds(String initialURL) throws Exception {

@@ -26,7 +26,6 @@ import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.sharepoint.Property;
 import com.liferay.portal.sharepoint.ResponseElement;
-import com.liferay.portal.sharepoint.SharepointException;
 import com.liferay.portal.sharepoint.SharepointRequest;
 import com.liferay.portal.sharepoint.SharepointUtil;
 import com.liferay.portal.sharepoint.Tree;
@@ -51,13 +50,13 @@ public class RemoveDocumentsMethodImpl extends BaseMethodImpl {
 		return _METHOD_NAME;
 	}
 
-	public List<ResponseElement> getElements(SharepointRequest request)
-		throws SharepointException {
+	protected List<ResponseElement> getElements(
+		SharepointRequest sharepointRequest) {
 
 		List<ResponseElement> elements = new ArrayList<ResponseElement>();
 
 		String urlList = ParamUtil.getString(
-			request.getHttpRequest(), "url_list");
+			sharepointRequest.getHttpRequest(), "url_list");
 
 		urlList = urlList.substring(1, urlList.length() - 1);
 
@@ -65,7 +64,7 @@ public class RemoveDocumentsMethodImpl extends BaseMethodImpl {
 
 		List<DLFolder> folders = new ArrayList<DLFolder>();
 
-		List<DLFileEntry> entries = new ArrayList<DLFileEntry>();
+		List<DLFileEntry> fileEntries = new ArrayList<DLFileEntry>();
 
 		for (String documentName : documentNames) {
 			try {
@@ -73,10 +72,10 @@ public class RemoveDocumentsMethodImpl extends BaseMethodImpl {
 
 				folders.add(DLFolderServiceUtil.getFolder(ids[1]));
 			}
-			catch (Exception e) {
-				if (e instanceof NoSuchFolderException) {
+			catch (Exception e1) {
+				if (e1 instanceof NoSuchFolderException) {
 					try {
-						entries.add(
+						fileEntries.add(
 							SharepointUtil.getDLFileEntry(documentName));
 					}
 					catch (Exception e2) {
@@ -90,16 +89,16 @@ public class RemoveDocumentsMethodImpl extends BaseMethodImpl {
 		Tree removedDocsTree = new Tree();
 		Tree failedDocsTree = new Tree();
 
-		for (DLFileEntry entry : entries) {
+		for (DLFileEntry fileEntry : fileEntries) {
 			try {
-				documentTree = SharepointUtil.getDocumentTree(entry);
+				documentTree = SharepointUtil.getDocumentTree(fileEntry);
 
 				DLFileEntryServiceUtil.deleteFileEntry(
-					entry.getFolderId(), entry.getName());
+					fileEntry.getFolderId(), fileEntry.getName());
 
 				removedDocsTree.addChild(documentTree);
 			}
-			catch (Exception e) {
+			catch (Exception e1) {
 				try {
 					failedDocsTree.addChild(documentTree);
 				}
@@ -121,7 +120,7 @@ public class RemoveDocumentsMethodImpl extends BaseMethodImpl {
 
 				removedDirsTree.addChild(folderTree);
 			}
-			catch (Exception e) {
+			catch (Exception e1) {
 				try {
 					failedDirsTree.addChild(folderTree);
 				}
