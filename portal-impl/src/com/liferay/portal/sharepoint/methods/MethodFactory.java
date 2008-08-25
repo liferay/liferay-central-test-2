@@ -54,7 +54,11 @@ public class MethodFactory {
 		_methods = new HashMap<String, Object>();
 
 		Method method = (Method)InstancePool.get(
-			_GET_DOCS_META_INFO_METHOD_IMPL);
+			_CREATE_URL_DIRECTORIES_METHOD_IMPL);
+
+		_methods.put(method.getMethodName(), method);
+
+		method = (Method)InstancePool.get(_GET_DOCS_META_INFO_METHOD_IMPL);
 
 		_methods.put(method.getMethodName(), method);
 
@@ -120,6 +124,12 @@ public class MethodFactory {
 
 		return methodImpl;
 	}
+
+	private static final String _CREATE_URL_DIRECTORIES_METHOD_IMPL =
+		GetterUtil.getString(
+			PropsUtil.get(
+				MethodFactory.class.getName() + ".CREATE_URL_DIRECTORIES"),
+			CreateURLDirectoriesMethodImpl.class.getName());
 
 	private static final String _GET_DOCS_META_INFO_METHOD_IMPL =
 		GetterUtil.getString(

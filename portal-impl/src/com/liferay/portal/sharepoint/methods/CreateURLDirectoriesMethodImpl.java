@@ -23,71 +23,85 @@
 package com.liferay.portal.sharepoint.methods;
 
 import com.liferay.portal.kernel.util.ParamUtil;
+import com.liferay.portal.kernel.util.StringPool;
+import com.liferay.portal.kernel.uuid.PortalUUIDUtil;
 import com.liferay.portal.sharepoint.Property;
 import com.liferay.portal.sharepoint.ResponseElement;
+import com.liferay.portal.sharepoint.SharepointException;
 import com.liferay.portal.sharepoint.SharepointRequest;
 import com.liferay.portal.sharepoint.SharepointUtil;
-import com.liferay.portal.sharepoint.Tree;
-import com.liferay.portlet.documentlibrary.NoSuchFileEntryException;
+import com.liferay.portlet.documentlibrary.service.DLFolderLocalServiceUtil;
 
 import java.util.ArrayList;
 import java.util.List;
 
 /**
- * <a href="GetDocsMetaInfoMethodImpl.java.html"><b><i>View Source</i></b></a>
+ * <a href="CreateURLDirectoriesMethodImpl.java.html"><b><i>View Source</i></b>
+ * </a>
  *
  * @author Bruno Farache
  *
  */
-public class GetDocsMetaInfoMethodImpl extends BaseMethodImpl {
+public class CreateURLDirectoriesMethodImpl extends BaseMethodImpl {
 
 	public String getMethodName() {
 		return _METHOD_NAME;
 	}
 
-	protected List<ResponseElement> getElements(
+	public List<ResponseElement> getElements(
 			SharepointRequest sharepointRequest)
-		throws Exception {
+		throws SharepointException {
 
 		List<ResponseElement> elements = new ArrayList<ResponseElement>();
 
-		String urlList = ParamUtil.getString(
-			sharepointRequest.getHttpRequest(), "url_list");
-
-		urlList = urlList.substring(1);
-		urlList = urlList.substring(0, urlList.length() - 1);
-
-		int pos = urlList.lastIndexOf("sharepoint/") + 11;
-
-		String documentName = urlList.substring(pos);
-
-		Tree documentListTree = new Tree();
-
 		try {
-			documentListTree.addChild(
-				SharepointUtil.getDocumentTree(documentName));
+			String urlDirs = ParamUtil.getString(
+				sharepointRequest.getHttpRequest(), "urldirs");
+
+			urlDirs = urlDirs.substring(2, urlDirs.length() - 2);
+
+			String urls[] = urlDirs.split(StringPool.SEMICOLON);
+
+			String folderName = urls[0].substring(4);
+
+			String uuid = PortalUUIDUtil.generate();
+
+			long userId = sharepointRequest.getUserId();
+
+			int pos = folderName.lastIndexOf(StringPool.FORWARD_SLASH);
+
+			String parentFolderName = folderName.substring(0, pos);
+
+			folderName = folderName.substring(pos + 1);
+
+			long ids[] = SharepointUtil.getIds(parentFolderName);
+
+			long groupId = ids[0];
+			long parentFolderId = ids[1];
+
+			String description = StringPool.BLANK;
+
+			Boolean addCommunityPermissions = null;
+			Boolean addGuestPermissions = null;
+
+			String[] communityPermissions = null;
+			String[] guestPermissions = null;
+
+			DLFolderLocalServiceUtil.addFolderToGroup(
+				uuid, userId, groupId, parentFolderId, folderName, description,
+				addCommunityPermissions, addGuestPermissions,
+				communityPermissions, guestPermissions);
+
 		}
-		catch (Exception e) {
-			if (e instanceof NoSuchFileEntryException) {
-				try {
-					documentListTree.addChild(
-						SharepointUtil.getDLFolderTree(urlList));
-				}
-				catch (Exception e1) {
-				}
-			}
+		catch (Exception e){
+			new SharepointException();
 		}
 
-		Property documentProperty = new Property(
-			"document_list", documentListTree);
-
-		elements.add(documentProperty);
-
-		elements.add(new Property("urldirs", new Tree()));
+		elements.add(new Property("message", StringPool.BLANK));
 
 		return elements;
 	}
 
-	private static final String _METHOD_NAME = "getDocsMetaInfo";
+	private static final String _METHOD_NAME = "create url-directories";
 
 }
