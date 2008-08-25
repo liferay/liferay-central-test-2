@@ -315,12 +315,7 @@
 				}
 
 				if (Liferay.Menu) {
-					new Liferay.Menu(
-						{
-							trigger: '.lfr-trigger',
-							button: '.lfr-actions'
-						}
-					);
+					new Liferay.Menu();
 				}
 
 				if (Liferay.Notice) {

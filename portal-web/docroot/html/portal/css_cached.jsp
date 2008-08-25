@@ -960,13 +960,6 @@ fieldset:last-child, .uni-form fieldset:last-child {
 	float: left;
 }
 
-.lfr-actions.right {
-}
-
-.lfr-actions.visible {
-	position: relative;
-}
-
 .lfr-actions ul {
 	display: none;
 	bottom: 0%;
@@ -1029,31 +1022,40 @@ fieldset:last-child, .uni-form fieldset:last-child {
 	padding: 2px 35px 2px 10px;
 }
 
-.lfr-actions .lfr-trigger li {
-	background: #fff;
-	border-bottom: 1px solid #99b6db;
-	padding: 5px;
+.lfr-menu-list ul {
+	background: #fff url(<%= themeDisplay.getPathThemeImages() %>/forms/button.png) repeat-x 0 100%;
+	border: 1px solid;
+	border-color: #DEDEDE #BFBFBF #BFBFBF #DEDEDE;
 }
 
-.lfr-actions .lfr-trigger li.last {
-	border-bottom: none;
+.lfr-menu-list li {
+	background: transparent;
+	border-bottom: 1px solid #DEDEDE;
+	padding: 2px;
 }
 
-.lfr-actions .lfr-trigger li a {
+.lfr-menu-list li nobr {
+	display: block;
+}
+
+.lfr-menu-list li a {
+	padding: 5px 10px 5px 0;
 	display: block;
 	font-weight: normal;
-	position: relative;
-	padding-left: 20px;
 	text-decoration: none;
 }
 
-.lfr-actions .lfr-trigger li a img {
-	position: absolute;
-	left: 0;
+.lfr-menu-list li a:hover {
+	background-color: #828F95;
+	color: #fff;
 }
 
-.ie6 .lfr-actions .lfr-trigger li a img {
-	left: -20px;
+.lfr-menu-list li a img {
+	padding: 0 3px;
+}
+
+.lfr-menu-list li.last {
+	border-bottom: none;
 }
 
 /* ---------- Taglib calendar ---------- */

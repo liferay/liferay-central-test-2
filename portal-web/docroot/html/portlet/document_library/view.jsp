@@ -323,15 +323,11 @@ portletURL.setParameter("folderId", String.valueOf(folderId));
 												);
 
 												jQuery('#span-' + json[i].folderId).load(
-													actionMenuURL + '&<portlet:namespace />folderId=' + json[i].folderId + '&<portlet:namespace />ajaxRedirect=' + folderURL,
-													function() {
-														new Liferay.Menu(
-															{
-																trigger: '.lfr-trigger',
-																button: '.lfr-actions'
-															}
-														);
-													}
+													actionMenuURL +
+													'&<portlet:namespace />folderId=' +
+													json[i].folderId +
+													'&<portlet:namespace />ajaxRedirect=' +
+													folderURL
 												);
 											}
 										}
