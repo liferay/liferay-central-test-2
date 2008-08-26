@@ -57,6 +57,36 @@ public class JournalArticleServiceImpl extends JournalArticleServiceBaseImpl {
 			int expirationDateMinute, boolean neverExpire, int reviewDateMonth,
 			int reviewDateDay, int reviewDateYear, int reviewDateHour,
 			int reviewDateMinute, boolean neverReview, boolean indexable,
+			String articleURL, String[] tagsEntries,
+			boolean addCommunityPermissions, boolean addGuestPermissions)
+		throws PortalException, SystemException {
+
+		PortletPermissionUtil.check(
+			getPermissionChecker(), plid, PortletKeys.JOURNAL,
+			ActionKeys.ADD_ARTICLE);
+
+		return journalArticleLocalService.addArticle(
+			getUserId(), articleId, autoArticleId, plid, title, description,
+			content, type, structureId, templateId, displayDateMonth,
+			displayDateDay, displayDateYear, displayDateHour, displayDateMinute,
+			expirationDateMonth, expirationDateDay, expirationDateYear,
+			expirationDateHour, expirationDateMinute, neverExpire,
+			reviewDateMonth, reviewDateDay, reviewDateYear, reviewDateHour,
+			reviewDateMinute, neverReview, indexable, false, null,
+			null, null, articleURL, null, tagsEntries,
+			addCommunityPermissions, addGuestPermissions);
+	}
+
+	public JournalArticle addArticle(
+			String articleId, boolean autoArticleId, long plid, String title,
+			String description, String content, String type, String structureId,
+			String templateId, int displayDateMonth, int displayDateDay,
+			int displayDateYear, int displayDateHour, int displayDateMinute,
+			int expirationDateMonth, int expirationDateDay,
+			int expirationDateYear, int expirationDateHour,
+			int expirationDateMinute, boolean neverExpire, int reviewDateMonth,
+			int reviewDateDay, int reviewDateYear, int reviewDateHour,
+			int reviewDateMinute, boolean neverReview, boolean indexable,
 			boolean smallImage, String smallImageURL, File smallFile,
 			Map<String, byte[]> images, String articleURL,
 			PortletPreferences prefs, String[] tagsEntries,
@@ -77,6 +107,36 @@ public class JournalArticleServiceImpl extends JournalArticleServiceBaseImpl {
 			reviewDateMinute, neverReview, indexable, smallImage, smallImageURL,
 			smallFile, images, articleURL, prefs, tagsEntries,
 			addCommunityPermissions, addGuestPermissions);
+	}
+
+	public JournalArticle addArticle(
+			String articleId, boolean autoArticleId, long plid, String title,
+			String description, String content, String type, String structureId,
+			String templateId, int displayDateMonth, int displayDateDay,
+			int displayDateYear, int displayDateHour, int displayDateMinute,
+			int expirationDateMonth, int expirationDateDay,
+			int expirationDateYear, int expirationDateHour,
+			int expirationDateMinute, boolean neverExpire, int reviewDateMonth,
+			int reviewDateDay, int reviewDateYear, int reviewDateHour,
+			int reviewDateMinute, boolean neverReview, boolean indexable,
+			String articleURL, String[] tagsEntries,
+			String[] communityPermissions, String[] guestPermissions)
+		throws PortalException, SystemException {
+
+		PortletPermissionUtil.check(
+			getPermissionChecker(), plid, PortletKeys.JOURNAL,
+			ActionKeys.ADD_ARTICLE);
+
+		return journalArticleLocalService.addArticle(
+			getUserId(), articleId, autoArticleId, plid, title, description,
+			content, type, structureId, templateId, displayDateMonth,
+			displayDateDay, displayDateYear, displayDateHour, displayDateMinute,
+			expirationDateMonth, expirationDateDay, expirationDateYear,
+			expirationDateHour, expirationDateMinute, neverExpire,
+			reviewDateMonth, reviewDateDay, reviewDateYear, reviewDateHour,
+			reviewDateMinute, neverReview, indexable, false, null, null, null,
+			articleURL, null, tagsEntries, communityPermissions,
+			guestPermissions);
 	}
 
 	public JournalArticle addArticle(

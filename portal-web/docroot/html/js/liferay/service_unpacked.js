@@ -1733,6 +1733,13 @@ Liferay.Service.Journal = {
 Liferay.Service.Journal.JournalArticle = {
 	serviceClassName: Liferay.Service.Journal.servicePackage + "JournalArticle" + Liferay.Service.classNameSuffix,
 
+	addArticle: function(params, callback) {
+		params.serviceClassName = this.serviceClassName;
+		params.serviceMethodName = "addArticle";
+
+		return Liferay.Service.ajax(params, callback);
+	},
+
 	copyArticle: function(params, callback) {
 		params.serviceClassName = this.serviceClassName;
 		params.serviceMethodName = "copyArticle";
