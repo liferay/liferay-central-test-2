@@ -28,17 +28,24 @@ import com.liferay.portal.model.Layout;
 import com.liferay.portal.model.LayoutConstants;
 import com.liferay.portal.model.LayoutTypePortlet;
 import com.liferay.portal.model.PortletConstants;
+import com.liferay.portal.model.User;
 import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.service.LayoutLocalServiceUtil;
+import com.liferay.portal.service.UserLocalServiceUtil;
 import com.liferay.portal.struts.ActionConstants;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PropsValues;
 import com.liferay.portal.util.WebKeys;
 
+import java.util.Calendar;
+import java.util.Locale;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.apache.struts.action.Action;
 import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
@@ -59,8 +66,11 @@ public class TCKAction extends Action {
 
 		try {
 			if (!PropsValues.TCK_URL) {
-				throw new PrincipalException();
+				throw new PrincipalException(
+					"The property tck.url is not set to true");
 			}
+
+			User user = _getUser(request);
 
 			ThemeDisplay themeDisplay = (ThemeDisplay)request.getAttribute(
 				WebKeys.THEME_DISPLAY);
@@ -79,13 +89,9 @@ public class TCKAction extends Action {
 						nameAndWar[0]);
 			}
 
-			// Default admin
+			long userId = user.getUserId();
 
-			long userId = 2;
-
-			// Guest group
-
-			long groupId = 14;
+			long groupId = user.getGroup().getGroupId();
 
 			Layout layout = LayoutLocalServiceUtil.addLayout(
 				userId, groupId, false,
@@ -112,10 +118,60 @@ public class TCKAction extends Action {
 			return mapping.findForward(ActionConstants.COMMON_FORWARD_JSP);
 		}
 		catch (Exception e) {
+			if (_log.isWarnEnabled()) {
+				_log.warn(e.getMessage(), e);
+			}
 			PortalUtil.sendError(e, request, response);
 
 			return null;
 		}
 	}
+
+	private User _getUser(HttpServletRequest request) throws Exception {
+
+		Long companyIdObj = (Long)request.getAttribute(WebKeys.COMPANY_ID);
+		long companyId = 0;
+		if (companyIdObj != null) {
+			companyId = companyIdObj.longValue();
+		}
+
+		try {
+			return UserLocalServiceUtil.getUserByScreenName(
+				companyId, _TCK_USER_NAME);
+		}
+		catch (Exception e) {
+			long creatorUserId = 0;
+			boolean autoPassword = false;
+			String password1 = "tck";
+			String password2 = password1;
+			boolean autoScreenName = false;
+			String screenName = _TCK_USER_NAME;
+			String emailAddress = "tck@liferay.com";
+			Locale locale = Locale.US;
+			String firstName = "TCK";
+			String middleName = StringPool.BLANK;
+			String lastName = "User";
+			int prefixId = 0;
+			int suffixId = 0;
+			boolean male = true;
+			int birthdayMonth = Calendar.JANUARY;
+			int birthdayDay = 1;
+			int birthdayYear = 1970;
+			String jobTitle = StringPool.BLANK;
+			long[] organizationIds = new long[0];
+			boolean sendEmail = false;
+
+			return UserLocalServiceUtil.addUser(
+				creatorUserId, companyId, autoPassword, password1, password2,
+				autoScreenName, screenName, emailAddress, locale, firstName,
+				middleName, lastName, prefixId, suffixId, male, birthdayMonth,
+				birthdayDay, birthdayYear, jobTitle, organizationIds,
+				sendEmail);
+		}
+	}
+
+	private static final String _TCK_USER_NAME = "tck";
+
+	private static Log _log = LogFactory.getLog(TCKAction.class);
 
 }
