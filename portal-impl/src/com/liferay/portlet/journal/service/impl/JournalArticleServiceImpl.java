@@ -72,9 +72,9 @@ public class JournalArticleServiceImpl extends JournalArticleServiceBaseImpl {
 			expirationDateMonth, expirationDateDay, expirationDateYear,
 			expirationDateHour, expirationDateMinute, neverExpire,
 			reviewDateMonth, reviewDateDay, reviewDateYear, reviewDateHour,
-			reviewDateMinute, neverReview, indexable, false, null,
-			null, null, articleURL, null, tagsEntries,
-			addCommunityPermissions, addGuestPermissions);
+			reviewDateMinute, neverReview, indexable, false, null, null, null,
+			articleURL, null, tagsEntries, addCommunityPermissions,
+			addGuestPermissions);
 	}
 
 	public JournalArticle addArticle(
