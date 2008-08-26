@@ -1990,10 +1990,6 @@
 		</supports>
 		<resource-bundle>com.liferay.portlet.StrutsResourceBundle</resource-bundle>
 	</portlet>
-	<public-render-parameter>
-		<identifier>entryId</identifier>
-		<qname xmlns:x="http://www.liferay.com/public-render-parameters">x:entryId</qname>
-	</public-render-parameter>
 	<custom-window-state>
 		<window-state>exclusive</window-state>
 	</custom-window-state>
@@ -2207,6 +2203,10 @@
 	<user-attribute>
 		<name>user.business-info.online.uri</name>
 	</user-attribute>
+	<public-render-parameter>
+		<identifier>entryId</identifier>
+		<qname xmlns:x="http://www.liferay.com/public-render-parameters">x:entryId</qname>
+	</public-render-parameter>
 	<container-runtime-option>
 		<name>javax.portlet.escapeXml</name>
 		<value>false</value>
