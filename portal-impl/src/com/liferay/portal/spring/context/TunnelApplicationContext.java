@@ -25,6 +25,8 @@ package com.liferay.portal.spring.context;
 import com.liferay.portal.bean.BeanLocatorImpl;
 import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
 
+import java.io.FileNotFoundException;
+
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
@@ -63,8 +65,15 @@ public class TunnelApplicationContext extends XmlWebApplicationContext {
 				reader.loadBeanDefinitions(configLocation);
 			}
 			catch (Exception e) {
-				if (_log.isWarnEnabled()) {
-					_log.warn(e);
+				Throwable cause = e.getCause();
+
+				if (cause instanceof FileNotFoundException) {
+					if (_log.isWarnEnabled()) {
+						_log.warn(cause.getMessage());
+					}
+				}
+				else {
+					_log.error(e, e);
 				}
 			}
 		}

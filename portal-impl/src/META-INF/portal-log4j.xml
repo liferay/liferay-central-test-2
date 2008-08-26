@@ -332,6 +332,22 @@
 		<priority value="ERROR" />
 	</category>
 
+	<category name="com.liferay.portal.spring.context.ArrayApplicationContext">
+		<priority value="ERROR" />
+	</category>
+
+	<category name="com.liferay.portal.spring.context.PortalApplicationContext">
+		<priority value="ERROR" />
+	</category>
+
+	<category name="com.liferay.portal.spring.context.PortletApplicationContext">
+		<priority value="ERROR" />
+	</category>
+
+	<category name="com.liferay.portal.spring.context.TunnelApplicationContext">
+		<priority value="ERROR" />
+	</category>
+
 	<category name="com.liferay.portal.spring.hibernate.PortalHibernateConfiguration">
 		<priority value="ERROR" />
 	</category>

@@ -104,8 +104,9 @@ public class ServiceBuilder {
 			String hbmFileName = args[1];
 			String modelHintsFileName = args[2];
 			String springFileName = args[3];
-			String springDataSourceFileName = "";
-			String springMiscFileName = "";
+			String springBaseFileName = "";
+			String springHibernateFileName = "";
+			String springInfrastructureFileName = "";
 			String apiDir = args[5];
 			String implDir = "src";
 			String jsonFileName = args[6];
@@ -122,19 +123,20 @@ public class ServiceBuilder {
 
 			serviceBuilder = new ServiceBuilder(
 				fileName, hbmFileName, modelHintsFileName, springFileName,
-				springDataSourceFileName, springMiscFileName, apiDir, implDir,
-				jsonFileName, remotingFileName, sqlDir, sqlFileName,
-				sqlIndexesFileName, sqlIndexesPropertiesFileName,
-				sqlSequencesFileName, autoNamespaceTables, beanLocatorUtil,
-				propsUtil, testDir);
+				springBaseFileName, springHibernateFileName,
+				springInfrastructureFileName, apiDir, implDir, jsonFileName,
+				remotingFileName, sqlDir, sqlFileName, sqlIndexesFileName,
+				sqlIndexesPropertiesFileName, sqlSequencesFileName,
+				autoNamespaceTables, beanLocatorUtil, propsUtil, testDir);
 		}
 		else if (args.length == 0) {
 			String fileName = System.getProperty("service.input.file");
 			String hbmFileName = System.getProperty("service.hbm.file");
 			String modelHintsFileName = System.getProperty("service.model.hints.file");
 			String springFileName = System.getProperty("service.spring.file");
-			String springDataSourceFileName = System.getProperty("service.spring.data.source.file");
-			String springMiscFileName = System.getProperty("service.spring.misc.file");
+			String springBaseFileName = System.getProperty("service.spring.base.file");
+			String springHibernateFileName = System.getProperty("service.spring.hibernate.file");
+			String springInfrastructureFileName = System.getProperty("service.spring.infrastructure.file");
 			String apiDir = System.getProperty("service.api.dir");
 			String implDir = System.getProperty("service.impl.dir");
 			String jsonFileName = System.getProperty("service.json.file");
@@ -151,11 +153,11 @@ public class ServiceBuilder {
 
 			serviceBuilder = new ServiceBuilder(
 				fileName, hbmFileName, modelHintsFileName, springFileName,
-				springDataSourceFileName, springMiscFileName, apiDir, implDir,
-				jsonFileName, remotingFileName, sqlDir, sqlFileName,
-				sqlIndexesFileName, sqlIndexesPropertiesFileName,
-				sqlSequencesFileName, autoNamespaceTables, beanLocatorUtil,
-				propsUtil, testDir);
+				springBaseFileName, springHibernateFileName,
+				springInfrastructureFileName, apiDir, implDir, jsonFileName,
+				remotingFileName, sqlDir, sqlFileName, sqlIndexesFileName,
+				sqlIndexesPropertiesFileName, sqlSequencesFileName,
+				autoNamespaceTables, beanLocatorUtil, propsUtil, testDir);
 		}
 
 		if (serviceBuilder == null) {
@@ -211,8 +213,9 @@ public class ServiceBuilder {
 				"\t-Dservice.tpl.service_json_serializer=" + _TPL_ROOT + "service_json_serializer.ftl\n"+
 				"\t-Dservice.tpl.service_soap=" + _TPL_ROOT + "service_soap.ftl\n"+
 				"\t-Dservice.tpl.service_util=" + _TPL_ROOT + "service_util.ftl\n"+
-				"\t-Dservice.tpl.spring_data_source_xml=" + _TPL_ROOT + "spring_data_source_xml.ftl\n"+
-				"\t-Dservice.tpl.spring_misc_xml=" + _TPL_ROOT + "spring_misc_xml.ftl\n"+
+				"\t-Dservice.tpl.spring_base_xml=" + _TPL_ROOT + "spring_base_xml.ftl\n"+
+				"\t-Dservice.tpl.spring_hibernate_xml=" + _TPL_ROOT + "spring_hibernate_xml.ftl\n"+
+				"\t-Dservice.tpl.spring_infrastructure_xml=" + _TPL_ROOT + "spring_infrastructure_xml.ftl\n"+
 				"\t-Dservice.tpl.spring_xml=" + _TPL_ROOT + "spring_xml.ftl\n"+
 				"\t-Dservice.tpl.spring_xml_session=" + _TPL_ROOT + "spring_xml_session.ftl");
 		}
@@ -371,32 +374,33 @@ public class ServiceBuilder {
 
 	public ServiceBuilder(
 		String fileName, String hbmFileName, String modelHintsFileName,
-		String springFileName, String springDataSourceFileName,
-		String springMiscFileName, String apiDir, String implDir,
-		String jsonFileName, String remotingFileName, String sqlDir,
-		String sqlFileName, String sqlIndexesFileName,
-		String sqlIndexesPropertiesFileName, String sqlSequencesFileName,
-		boolean autoNamespaceTables, String beanLocatorUtil, String propsUtil,
-		String testDir) {
+		String springFileName, String springBaseFileName,
+		String springHibernateFileName, String springInfrastructureFileName,
+		String apiDir, String implDir, String jsonFileName,
+		String remotingFileName, String sqlDir, String sqlFileName,
+		String sqlIndexesFileName, String sqlIndexesPropertiesFileName,
+		String sqlSequencesFileName, boolean autoNamespaceTables,
+		String beanLocatorUtil, String propsUtil, String testDir) {
 
 		new ServiceBuilder(
 			fileName, hbmFileName, modelHintsFileName, springFileName,
-			springDataSourceFileName, springMiscFileName, apiDir, implDir,
-			jsonFileName, remotingFileName, sqlDir, sqlFileName,
-			sqlIndexesFileName, sqlIndexesPropertiesFileName,
-			sqlSequencesFileName, autoNamespaceTables, beanLocatorUtil,
-			propsUtil, testDir, true);
+			springBaseFileName, springHibernateFileName,
+			springInfrastructureFileName, apiDir, implDir, jsonFileName,
+			remotingFileName, sqlDir, sqlFileName, sqlIndexesFileName,
+			sqlIndexesPropertiesFileName, sqlSequencesFileName,
+			autoNamespaceTables, beanLocatorUtil, propsUtil, testDir, true);
 	}
 
 	public ServiceBuilder(
 		String fileName, String hbmFileName, String modelHintsFileName,
-		String springFileName, String springDataSourceFileName,
-		String springMiscFileName, String apiDir, String implDir,
-		String jsonFileName, String remotingFileName, String sqlDir,
-		String sqlFileName, String sqlIndexesFileName,
-		String sqlIndexesPropertiesFileName, String sqlSequencesFileName,
-		boolean autoNamespaceTables, String beanLocatorUtil, String propsUtil,
-		String testDir, boolean build) {
+		String springFileName, String springBaseFileName,
+		String springHibernateFileName, String springInfrastructureFileName,
+		String apiDir, String implDir, String jsonFileName,
+		String remotingFileName, String sqlDir, String sqlFileName,
+		String sqlIndexesFileName, String sqlIndexesPropertiesFileName,
+		String sqlSequencesFileName, boolean autoNamespaceTables,
+		String beanLocatorUtil, String propsUtil, String testDir,
+		boolean build) {
 
 		_tplBadColumnNames = _getTplProperty(
 			"bad_column_names", _tplBadColumnNames);
@@ -437,10 +441,12 @@ public class ServiceBuilder {
 			"service_json_serializer", _tplServiceJsonSerializer);
 		_tplServiceSoap = _getTplProperty("service_soap", _tplServiceSoap);
 		_tplServiceUtil = _getTplProperty("service_util", _tplServiceUtil);
-		_tplSpringDataSourceXml = _getTplProperty(
-			"spring_data_source_xml", _tplSpringDataSourceXml);
-		_tplSpringMiscXml = _getTplProperty(
-			"spring_misc_xml", _tplSpringMiscXml);
+		_tplSpringBaseXml = _getTplProperty(
+			"spring_base_xml", _tplSpringBaseXml);
+		_tplSpringHibernateXml = _getTplProperty(
+			"spring_hibernate_xml", _tplSpringHibernateXml);
+		_tplSpringInfrastructureXml = _getTplProperty(
+			"spring_infrastructure_xml", _tplSpringInfrastructureXml);
 		_tplSpringXml = _getTplProperty("spring_xml", _tplSpringXml);
 
 		try {
@@ -451,8 +457,9 @@ public class ServiceBuilder {
 			_hbmFileName = hbmFileName;
 			_modelHintsFileName = modelHintsFileName;
 			_springFileName = springFileName;
-			_springDataSourceFileName = springDataSourceFileName;
-			_springMiscFileName = springMiscFileName;
+			_springBaseFileName = springBaseFileName;
+			_springHibernateFileName = springHibernateFileName;
+			_springInfrastructureFileName = springInfrastructureFileName;
 			_apiDir = apiDir;
 			_implDir = implDir;
 			_jsonFileName = jsonFileName;
@@ -952,8 +959,9 @@ public class ServiceBuilder {
 				_createExceptions(exceptionList);
 
 				_createProps();
-				_createSpringDataSourceXML();
-				_createSpringMiscXML();
+				_createSpringBaseXML();
+				_createSpringHibernateXML();
+				_createSpringInfrastructureXML();
 			}
 		}
 		catch (Exception e) {
@@ -1074,9 +1082,9 @@ public class ServiceBuilder {
 
 			ServiceBuilder serviceBuilder = new ServiceBuilder(
 				refFileName, _hbmFileName, _modelHintsFileName, _springFileName,
-				_springDataSourceFileName, _springMiscFileName, _apiDir,
-				_implDir, _jsonFileName, _remotingFileName, _sqlDir,
-				_sqlFileName, _sqlIndexesFileName,
+				_springBaseFileName, _springHibernateFileName,
+				_springInfrastructureFileName, _apiDir, _implDir, _jsonFileName,
+				_remotingFileName, _sqlDir, _sqlFileName, _sqlIndexesFileName,
 				_sqlIndexesPropertiesFileName, _sqlSequencesFileName,
 				_autoNamespaceTables, _beanLocatorUtil, _propsUtil, _testDir,
 				false);
@@ -2428,34 +2436,50 @@ public class ServiceBuilder {
 		}
 	}
 
-	private void _createSpringDataSourceXML() throws Exception {
-		if (Validator.isNull(_springDataSourceFileName)) {
+	private void _createSpringBaseXML() throws Exception {
+		if (Validator.isNull(_springBaseFileName)) {
 			return;
 		}
 
 		// Content
 
-		String content = _processTemplate(_tplSpringDataSourceXml);
+		String content = _processTemplate(_tplSpringBaseXml);
 
 		// Write file
 
-		File ejbFile = new File(_springDataSourceFileName);
+		File ejbFile = new File(_springBaseFileName);
 
 		FileUtil.write(ejbFile, content, true);
 	}
 
-	private void _createSpringMiscXML() throws Exception {
-		if (Validator.isNull(_springMiscFileName)) {
+	private void _createSpringHibernateXML() throws Exception {
+		if (Validator.isNull(_springHibernateFileName)) {
 			return;
 		}
 
 		// Content
 
-		String content = _processTemplate(_tplSpringMiscXml);
+		String content = _processTemplate(_tplSpringHibernateXml);
 
 		// Write file
 
-		File ejbFile = new File(_springMiscFileName);
+		File ejbFile = new File(_springHibernateFileName);
+
+		FileUtil.write(ejbFile, content, true);
+	}
+
+	private void _createSpringInfrastructureXML() throws Exception {
+		if (Validator.isNull(_springInfrastructureFileName)) {
+			return;
+		}
+
+		// Content
+
+		String content = _processTemplate(_tplSpringInfrastructureXml);
+
+		// Write file
+
+		File ejbFile = new File(_springInfrastructureFileName);
 
 		FileUtil.write(ejbFile, content, true);
 	}
@@ -2475,7 +2499,7 @@ public class ServiceBuilder {
 			String xml =
 				"<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n" +
 				"\n" +
-				"<beans xmlns=\"http://www.springframework.org/schema/beans\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xmlns:aop=\"http://www.springframework.org/schema/aop\" xmlns:tx=\"http://www.springframework.org/schema/tx\" xsi:schemaLocation=\"http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-2.5.xsd http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-2.5.xsd\">\n" +
+				"<beans xmlns=\"http://www.springframework.org/schema/beans\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xsi:schemaLocation=\"http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd\">\n" +
 				"</beans>";
 
 			FileUtil.write(xmlFile, xml);
@@ -2484,7 +2508,7 @@ public class ServiceBuilder {
 		String oldContent = FileUtil.read(xmlFile);
 		String newContent = _fixSpringXML(oldContent);
 
-		int x = oldContent.indexOf("<beans xmlns=\"http://www.springframework.org/schema/beans\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xmlns:aop=\"http://www.springframework.org/schema/aop\" xmlns:tx=\"http://www.springframework.org/schema/tx\" xsi:schemaLocation=\"http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-2.5.xsd http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-2.5.xsd\">\n");
+		int x = oldContent.indexOf("<beans xmlns=\"http://www.springframework.org/schema/beans\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xsi:schemaLocation=\"http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd\">\n");
 		int y = oldContent.lastIndexOf("</beans>");
 
 		int firstSession = newContent.indexOf(
@@ -2493,8 +2517,9 @@ public class ServiceBuilder {
 		int lastSession = newContent.lastIndexOf(
 			"<bean id=\"" + _packagePath + ".service.", y);
 
-		if (firstSession == -1 || firstSession > y) {
+		if ((firstSession == -1) || (firstSession > y)) {
 			x = newContent.indexOf("</beans>");
+
 			newContent =
 				newContent.substring(0, x) + content +
 				newContent.substring(x, newContent.length());
@@ -3026,8 +3051,9 @@ public class ServiceBuilder {
 		context.put("hbmFileName", _hbmFileName);
 		context.put("modelHintsFileName", _modelHintsFileName);
 		context.put("springFileName", _springFileName);
-		context.put("springDataSourceFileName", _springDataSourceFileName);
-		context.put("springMiscFileName", _springMiscFileName);
+		context.put("springBaseFileName", _springBaseFileName);
+		context.put("springHibernateFileName", _springHibernateFileName);
+		context.put("springInfrastructureFileName", _springInfrastructureFileName);
 		context.put("apiDir", _apiDir);
 		context.put("implDir", _implDir);
 		context.put("jsonFileName", _jsonFileName);
@@ -3419,17 +3445,20 @@ public class ServiceBuilder {
 		_TPL_ROOT + "service_json_serializer.ftl";
 	private String _tplServiceSoap = _TPL_ROOT + "service_soap.ftl";
 	private String _tplServiceUtil = _TPL_ROOT + "service_util.ftl";
-	private String _tplSpringDataSourceXml =
-		_TPL_ROOT + "spring_data_source_xml.ftl";
-	private String _tplSpringMiscXml = _TPL_ROOT + "spring_misc_xml.ftl";
+	private String _tplSpringBaseXml = _TPL_ROOT + "spring_base_xml.ftl";
+	private String _tplSpringHibernateXml =
+		_TPL_ROOT + "spring_hibernate_xml.ftl";
+	private String _tplSpringInfrastructureXml =
+		_TPL_ROOT + "spring_infrastructure_xml.ftl";
 	private String _tplSpringXml = _TPL_ROOT + "spring_xml.ftl";
 	private Set<String> _badTableNames;
 	private Set<String> _badColumnNames;
 	private String _hbmFileName;
 	private String _modelHintsFileName;
 	private String _springFileName;
-	private String _springDataSourceFileName;
-	private String _springMiscFileName;
+	private String _springBaseFileName;
+	private String _springHibernateFileName;
+	private String _springInfrastructureFileName;
 	private String _apiDir;
 	private String _implDir;
 	private String _jsonFileName;

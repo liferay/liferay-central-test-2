@@ -22,6 +22,8 @@
 
 package com.liferay.portal.spring.context;
 
+import java.io.FileNotFoundException;
+
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
@@ -48,8 +50,15 @@ public class PortletApplicationContext extends XmlWebApplicationContext {
 				reader.loadBeanDefinitions(configLocation);
 			}
 			catch (Exception e) {
-				if (_log.isWarnEnabled()) {
-					_log.warn(e, e);
+				Throwable cause = e.getCause();
+
+				if (cause instanceof FileNotFoundException) {
+					if (_log.isWarnEnabled()) {
+						_log.warn(cause.getMessage());
+					}
+				}
+				else {
+					_log.error(e, e);
 				}
 			}
 		}
