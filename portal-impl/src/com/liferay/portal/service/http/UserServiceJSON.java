@@ -22,7 +22,6 @@
 
 package com.liferay.portal.service.http;
 
-import com.liferay.portal.kernel.json.JSONArray;
 import com.liferay.portal.kernel.json.JSONObject;
 import com.liferay.portal.service.UserServiceUtil;
 
@@ -141,20 +140,6 @@ public class UserServiceJSON {
 		long returnValue = UserServiceUtil.getDefaultUserId(companyId);
 
 		return returnValue;
-	}
-
-	public static JSONArray getGroupUsers(long groupId)
-		throws java.rmi.RemoteException, com.liferay.portal.SystemException {
-		java.util.List<com.liferay.portal.model.User> returnValue = UserServiceUtil.getGroupUsers(groupId);
-
-		return UserJSONSerializer.toJSONArray(returnValue);
-	}
-
-	public static JSONArray getRoleUsers(long roleId)
-		throws java.rmi.RemoteException, com.liferay.portal.SystemException {
-		java.util.List<com.liferay.portal.model.User> returnValue = UserServiceUtil.getRoleUsers(roleId);
-
-		return UserJSONSerializer.toJSONArray(returnValue);
 	}
 
 	public static JSONObject getUserByEmailAddress(long companyId,

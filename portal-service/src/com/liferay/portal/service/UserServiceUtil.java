@@ -111,18 +111,6 @@ public class UserServiceUtil {
 		return _service.getDefaultUserId(companyId);
 	}
 
-	public static java.util.List<com.liferay.portal.model.User> getGroupUsers(
-		long groupId)
-		throws com.liferay.portal.SystemException, java.rmi.RemoteException {
-		return _service.getGroupUsers(groupId);
-	}
-
-	public static java.util.List<com.liferay.portal.model.User> getRoleUsers(
-		long roleId)
-		throws com.liferay.portal.SystemException, java.rmi.RemoteException {
-		return _service.getRoleUsers(roleId);
-	}
-
 	public static com.liferay.portal.model.User getUserByEmailAddress(
 		long companyId, java.lang.String emailAddress)
 		throws com.liferay.portal.PortalException,

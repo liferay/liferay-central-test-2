@@ -493,68 +493,6 @@ public class UserServiceHttp {
 		}
 	}
 
-	public static java.util.List<com.liferay.portal.model.User> getGroupUsers(
-		HttpPrincipal httpPrincipal, long groupId)
-		throws com.liferay.portal.SystemException {
-		try {
-			Object paramObj0 = new LongWrapper(groupId);
-
-			MethodWrapper methodWrapper = new MethodWrapper(UserServiceUtil.class.getName(),
-					"getGroupUsers", new Object[] { paramObj0 });
-
-			Object returnObj = null;
-
-			try {
-				returnObj = TunnelUtil.invoke(httpPrincipal, methodWrapper);
-			}
-			catch (Exception e) {
-				if (e instanceof com.liferay.portal.SystemException) {
-					throw (com.liferay.portal.SystemException)e;
-				}
-
-				throw new com.liferay.portal.SystemException(e);
-			}
-
-			return (java.util.List<com.liferay.portal.model.User>)returnObj;
-		}
-		catch (com.liferay.portal.SystemException se) {
-			_log.error(se, se);
-
-			throw se;
-		}
-	}
-
-	public static java.util.List<com.liferay.portal.model.User> getRoleUsers(
-		HttpPrincipal httpPrincipal, long roleId)
-		throws com.liferay.portal.SystemException {
-		try {
-			Object paramObj0 = new LongWrapper(roleId);
-
-			MethodWrapper methodWrapper = new MethodWrapper(UserServiceUtil.class.getName(),
-					"getRoleUsers", new Object[] { paramObj0 });
-
-			Object returnObj = null;
-
-			try {
-				returnObj = TunnelUtil.invoke(httpPrincipal, methodWrapper);
-			}
-			catch (Exception e) {
-				if (e instanceof com.liferay.portal.SystemException) {
-					throw (com.liferay.portal.SystemException)e;
-				}
-
-				throw new com.liferay.portal.SystemException(e);
-			}
-
-			return (java.util.List<com.liferay.portal.model.User>)returnObj;
-		}
-		catch (com.liferay.portal.SystemException se) {
-			_log.error(se, se);
-
-			throw se;
-		}
-	}
-
 	public static com.liferay.portal.model.User getUserByEmailAddress(
 		HttpPrincipal httpPrincipal, long companyId,
 		java.lang.String emailAddress)
