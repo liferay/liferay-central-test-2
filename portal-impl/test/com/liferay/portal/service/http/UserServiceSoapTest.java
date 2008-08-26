@@ -22,9 +22,9 @@
 
 package com.liferay.portal.service.http;
 
-import com.liferay.client.portal.model.UserSoap;
-import com.liferay.client.portal.service.http.UserServiceSoap;
-import com.liferay.client.portal.service.http.UserServiceSoapServiceLocator;
+import com.liferay.client.soap.portal.model.UserSoap;
+import com.liferay.client.soap.portal.service.http.UserServiceSoap;
+import com.liferay.client.soap.portal.service.http.UserServiceSoapServiceLocator;
 import com.liferay.portal.kernel.util.LocaleUtil;
 import com.liferay.portal.util.TestPropsValues;
 
