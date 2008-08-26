@@ -75,7 +75,7 @@
 				/>
 			</c:if>
 
-			<%--<c:if test="<%= facebookShowAddAppLink %>">
+			<c:if test="<%= facebookShowAddAppLink %>">
 				<liferay-ui:icon
 					image="../social_bookmarks/facebook"
 					message="add-to-facebook"
@@ -93,7 +93,7 @@
 					method="get"
 					label="<%= true %>"
 				/>
-			</c:if>--%>
+			</c:if>
 
 			<c:if test="<%= widgetShowAddAppLink %>">
 				<div class="lfr-widget-information" id="<portlet:namespace />widgetInformation">
