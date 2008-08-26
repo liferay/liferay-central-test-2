@@ -139,7 +139,7 @@ public class AnnouncementsEntryServiceImpl
 			getPermissionChecker(), entryId, ActionKeys.UPDATE);
 
 		return announcementsEntryLocalService.updateEntry(
-			entryId, title, content, url, type, displayDateMonth,
+			getUserId(), entryId, title, content, url, type, displayDateMonth,
 			displayDateDay, displayDateYear, displayDateHour, displayDateMinute,
 			expirationDateMonth, expirationDateDay, expirationDateYear,
 			expirationDateHour, expirationDateMinute, priority);

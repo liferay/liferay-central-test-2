@@ -164,11 +164,11 @@ public interface AnnouncementsEntryLocalService {
 		throws com.liferay.portal.SystemException;
 
 	public com.liferay.portlet.announcements.model.AnnouncementsEntry updateEntry(
-		long entryId, java.lang.String title, java.lang.String content,
-		java.lang.String url, java.lang.String type, int displayDateMonth,
-		int displayDateDay, int displayDateYear, int displayDateHour,
-		int displayDateMinute, int expirationDateMonth, int expirationDateDay,
-		int expirationDateYear, int expirationDateHour,
+		long userId, long entryId, java.lang.String title,
+		java.lang.String content, java.lang.String url, java.lang.String type,
+		int displayDateMonth, int displayDateDay, int displayDateYear,
+		int displayDateHour, int displayDateMinute, int expirationDateMonth,
+		int expirationDateDay, int expirationDateYear, int expirationDateHour,
 		int expirationDateMinute, int priority)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;

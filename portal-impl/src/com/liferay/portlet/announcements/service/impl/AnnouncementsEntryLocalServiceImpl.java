@@ -86,11 +86,12 @@ public class AnnouncementsEntryLocalServiceImpl
 
 		Date displayDate = PortalUtil.getDate(
 			displayDateMonth, displayDateDay, displayDateYear, displayDateHour,
-			displayDateMinute, new EntryDisplayDateException());
+			displayDateMinute, user.getTimeZone(),
+			new EntryDisplayDateException());
 
 		Date expirationDate = PortalUtil.getDate(
 			expirationDateMonth, expirationDateDay, expirationDateYear,
-			expirationDateHour, expirationDateMinute,
+			expirationDateHour, expirationDateMinute, user.getTimeZone(),
 			new EntryExpirationDateException());
 
 		Date now = new Date();
@@ -290,25 +291,28 @@ public class AnnouncementsEntryLocalServiceImpl
 	}
 
 	public AnnouncementsEntry updateEntry(
-			long entryId, String title, String content, String url, String type,
-			int displayDateMonth, int displayDateDay, int displayDateYear,
-			int displayDateHour, int displayDateMinute, int expirationDateMonth,
-			int expirationDateDay, int expirationDateYear,
-			int expirationDateHour, int expirationDateMinute,
-			int priority)
+			long userId, long entryId, String title, String content, String url,
+			String type, int displayDateMonth, int displayDateDay,
+			int displayDateYear, int displayDateHour, int displayDateMinute,
+			int expirationDateMonth, int expirationDateDay,
+			int expirationDateYear, int expirationDateHour,
+			int expirationDateMinute, int priority)
 		throws PortalException, SystemException {
 
 		// Entry
 
 		validate(title, content);
 
+		User user = userPersistence.findByPrimaryKey(userId);
+
 		Date displayDate = PortalUtil.getDate(
 			displayDateMonth, displayDateDay, displayDateYear, displayDateHour,
-			displayDateMinute, new EntryDisplayDateException());
+			displayDateMinute, user.getTimeZone(),
+			new EntryDisplayDateException());
 
 		Date expirationDate = PortalUtil.getDate(
 			expirationDateMonth, expirationDateDay, expirationDateYear,
-			expirationDateHour, expirationDateMinute,
+			expirationDateHour, expirationDateMinute, user.getTimeZone(),
 			new EntryExpirationDateException());
 
 		AnnouncementsEntry entry =

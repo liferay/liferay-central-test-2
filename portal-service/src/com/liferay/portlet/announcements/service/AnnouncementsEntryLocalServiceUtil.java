@@ -231,15 +231,15 @@ public class AnnouncementsEntryLocalServiceUtil {
 	}
 
 	public static com.liferay.portlet.announcements.model.AnnouncementsEntry updateEntry(
-		long entryId, java.lang.String title, java.lang.String content,
-		java.lang.String url, java.lang.String type, int displayDateMonth,
-		int displayDateDay, int displayDateYear, int displayDateHour,
-		int displayDateMinute, int expirationDateMonth, int expirationDateDay,
-		int expirationDateYear, int expirationDateHour,
+		long userId, long entryId, java.lang.String title,
+		java.lang.String content, java.lang.String url, java.lang.String type,
+		int displayDateMonth, int displayDateDay, int displayDateYear,
+		int displayDateHour, int displayDateMinute, int expirationDateMonth,
+		int expirationDateDay, int expirationDateYear, int expirationDateHour,
 		int expirationDateMinute, int priority)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		return _service.updateEntry(entryId, title, content, url, type,
+		return _service.updateEntry(userId, entryId, title, content, url, type,
 			displayDateMonth, displayDateDay, displayDateYear, displayDateHour,
 			displayDateMinute, expirationDateMonth, expirationDateDay,
 			expirationDateYear, expirationDateHour, expirationDateMinute,
