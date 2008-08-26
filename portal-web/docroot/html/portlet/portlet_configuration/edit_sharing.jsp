@@ -68,7 +68,7 @@ String widgetURL = PortalUtil.getWidgetURL(portlet, themeDisplay);
 	<c:when test='<%= tabs2.equals("any-website") %>'>
 
 		<%
-		boolean widgetShowAddAppLink = PrefsParamUtil.getBoolean(prefs, request, "lfr-widget-show-add-app-link");
+		boolean widgetShowAddAppLink = PrefsParamUtil.getBoolean(prefs, request, "lfr-widget-show-add-app-link", true);
 		%>
 
 		<div class="portlet-msg-info">
@@ -91,7 +91,7 @@ Liferay.Widget({ url: &#x27;<%= widgetURL %>&#x27;});
 		<%
 		String facebookAPIKey = PrefsParamUtil.getString(prefs, request, "lfr-facebook-api-key");
 		String facebookCanvasPageURL = PrefsParamUtil.getString(prefs, request, "lfr-facebook-canvas-page-url");
-		boolean facebookShowAddAppLink = PrefsParamUtil.getBoolean(prefs, request, "lfr-facebook-show-add-app-link");
+		boolean facebookShowAddAppLink = PrefsParamUtil.getBoolean(prefs, request, "lfr-facebook-show-add-app-link", true);
 
 		String callbackURL = widgetURL;
 

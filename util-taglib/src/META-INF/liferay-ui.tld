@@ -456,6 +456,11 @@
 			<required>false</required>
 			<rtexprvalue>true</rtexprvalue>
 		</attribute>
+		<attribute>
+			<name>showWhenSingleIcon</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
 	</tag>
 	<tag>
 		<name>icon-menu</name>
@@ -473,6 +478,11 @@
 		</attribute>
 		<attribute>
 			<name>message</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			<name>showWhenSingleIcon</name>
 			<required>false</required>
 			<rtexprvalue>true</rtexprvalue>
 		</attribute>
@@ -1719,12 +1729,12 @@
 		<tag-class>com.liferay.taglib.ui.TagsNavigationTag</tag-class>
 		<body-content>JSP</body-content>
 		<attribute>
-			<name>showCompanyCategories</name>
+			<name>page</name>
 			<required>false</required>
 			<rtexprvalue>true</rtexprvalue>
 		</attribute>
 		<attribute>
-			<name>page</name>
+			<name>showCompanyCategories</name>
 			<required>false</required>
 			<rtexprvalue>true</rtexprvalue>
 		</attribute>

@@ -31,6 +31,8 @@ if (iconListIconCount != null) {
 	iconListIconCount.increment();
 }
 
+boolean iconListShowWhenSingleIcon = GetterUtil.getBoolean((String)request.getAttribute("liferay-ui:icon-list:showWhenSingleIcon"));
+
 Boolean iconListSingleIcon = (Boolean)request.getAttribute("liferay-ui:icon-list:single-icon");
 
 IntegerWrapper iconMenuIconCount = (IntegerWrapper)request.getAttribute("liferay-ui:icon-menu:icon-count");
@@ -40,6 +42,8 @@ if (iconMenuIconCount != null) {
 }
 
 Boolean iconMenuSingleIcon = (Boolean)request.getAttribute("liferay-ui:icon-menu:single-icon");
+
+boolean iconMenuShowWhenSingleIcon = GetterUtil.getBoolean((String)request.getAttribute("liferay-ui:icon-menu:showWhenSingleIcon"));
 
 String image = (String)request.getAttribute("liferay-ui:icon:image");
 
@@ -68,7 +72,7 @@ boolean label = GetterUtil.getBoolean((String)request.getAttribute("liferay-ui:i
 boolean toolTip = GetterUtil.getBoolean((String)request.getAttribute("liferay-ui:icon:toolTip"));
 String cssClass = GetterUtil.getString((String)request.getAttribute("liferay-ui:icon:cssClass"));
 
-if (iconListSingleIcon != null) {
+if ((iconListIconCount != null) || (iconListSingleIcon != null)) {
 	label = true;
 }
 

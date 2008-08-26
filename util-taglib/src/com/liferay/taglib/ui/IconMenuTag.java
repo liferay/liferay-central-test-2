@@ -45,6 +45,9 @@ public class IconMenuTag extends BodyTagSupport {
 			(HttpServletRequest)pageContext.getRequest();
 
 		request.setAttribute("liferay-ui:icon-menu:message", _message);
+		request.setAttribute(
+			"liferay-ui:icon-menu:showWhenSingleIcon",
+			String.valueOf(_showWhenSingleIcon));
 		request.setAttribute("liferay-ui:icon-menu:align", _align);
 		request.setAttribute("liferay-ui:icon-menu:cssClass", _cssClass);
 		request.setAttribute(
@@ -97,16 +100,16 @@ public class IconMenuTag extends BodyTagSupport {
 
 			request.removeAttribute("liferay-ui:icon-menu:single-icon");
 
-			if ((iconCount != null) && (iconCount.getValue() > 1) &&
-				(singleIcon == null)) {
+			if ((iconCount != null) && (iconCount.getValue() >= 1) &&
+				((singleIcon == null) || _showWhenSingleIcon)) {
 
 				PortalIncludeUtil.include(pageContext, getStartPage());
 			}
 
 			pageContext.getOut().print(_bodyContentString);
 
-			if ((iconCount != null) && (iconCount.getValue() > 1) &&
-				(singleIcon == null)) {
+			if ((iconCount != null) && (iconCount.getValue() >= 1) &&
+				((singleIcon == null) || _showWhenSingleIcon)) {
 
 				PortalIncludeUtil.include(pageContext, getEndPage());
 			}
@@ -148,6 +151,10 @@ public class IconMenuTag extends BodyTagSupport {
 		_message = message;
 	}
 
+	public void setShowWhenSingleIcon(boolean showWhenSingleIcon) {
+		_showWhenSingleIcon = showWhenSingleIcon;
+	}
+
 	public void setAlign(String align) {
 		_align = align;
 	}
@@ -164,6 +171,7 @@ public class IconMenuTag extends BodyTagSupport {
 	private String _startPage;
 	private String _endPage;
 	private String _message = "actions";
+	private boolean _showWhenSingleIcon = false;
 	private String _align = "right";
 	private String _cssClass;
 	private String _bodyContentString = StringPool.BLANK;

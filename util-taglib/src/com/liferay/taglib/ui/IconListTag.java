@@ -45,6 +45,9 @@ public class IconListTag extends BodyTagSupport {
 			(HttpServletRequest)pageContext.getRequest();
 
 		request.setAttribute(
+			"liferay-ui:icon-list:showWhenSingleIcon",
+			String.valueOf(_showWhenSingleIcon));
+		request.setAttribute(
 			"liferay-ui:icon-list:icon-count", new IntegerWrapper());
 
 		return EVAL_BODY_BUFFERED;
@@ -95,7 +98,7 @@ public class IconListTag extends BodyTagSupport {
 			request.removeAttribute("liferay-ui:icon-list:single-icon");
 
 			if ((iconCount != null) && (iconCount.getValue() > 1) &&
-				(singleIcon == null)) {
+				((singleIcon == null) || _showWhenSingleIcon)) {
 
 				PortalIncludeUtil.include(pageContext, getStartPage());
 			}
@@ -103,7 +106,7 @@ public class IconListTag extends BodyTagSupport {
 			pageContext.getOut().print(_bodyContentString);
 
 			if ((iconCount != null) && (iconCount.getValue() > 1) &&
-				(singleIcon == null)) {
+				((singleIcon == null) || _showWhenSingleIcon)) {
 
 				PortalIncludeUtil.include(pageContext, getEndPage());
 			}
@@ -141,6 +144,10 @@ public class IconListTag extends BodyTagSupport {
 		_endPage = endPage;
 	}
 
+	public void setShowWhenSingleIcon(boolean showWhenSingleIcon) {
+		_showWhenSingleIcon = showWhenSingleIcon;
+	}
+
 	private static final String _START_PAGE =
 		"/html/taglib/ui/icon_list/start.jsp";
 
@@ -148,6 +155,7 @@ public class IconListTag extends BodyTagSupport {
 
 	private String _startPage;
 	private String _endPage;
+	private boolean _showWhenSingleIcon = false;
 	private String _bodyContentString = StringPool.BLANK;
 
 }

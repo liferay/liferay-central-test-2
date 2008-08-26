@@ -43,10 +43,10 @@ if (!target.equals("_self")) {
 %>
 
 <c:choose>
-	<c:when test="<%= (iconListIconCount != null) && (iconListSingleIcon == null) %>">
+	<c:when test="<%= (iconListIconCount != null) && ((iconListSingleIcon == null) || iconListShowWhenSingleIcon) %>">
 		<li <%= cssClassHtml %>><nobr><c:if test="<%= Validator.isNotNull(url) %>"><a href="<%= url %>" <%= targetHtml %>></c:if><img class="icon" src="<%= src %>" <%= details %> /><c:if test="<%= Validator.isNotNull(url) %>"></a></c:if> <c:if test="<%= Validator.isNotNull(url) %>"><a href="<%= url %>" <%= targetHtml %>></c:if><liferay-ui:message key="<%= message %>" /><c:if test="<%= Validator.isNotNull(url) %>"></a></c:if></nobr></li>
 	</c:when>
-	<c:when test="<%= (iconMenuIconCount != null) && (iconMenuSingleIcon == null) %>">
+	<c:when test="<%= (iconMenuIconCount != null) && ((iconMenuSingleIcon == null) || iconMenuShowWhenSingleIcon) %>">
 		<li <%= cssClassHtml %>><nobr><c:if test="<%= Validator.isNotNull(url) %>"><a href="<%= url %>" <%= targetHtml %>></c:if><img class="icon" src="<%= src %>" <%= details %> /> <liferay-ui:message key="<%= message %>" /><c:if test="<%= Validator.isNotNull(url) %>"></a></c:if></nobr></li>
 	</c:when>
 	<c:otherwise>
