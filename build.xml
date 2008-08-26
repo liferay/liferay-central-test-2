@@ -562,7 +562,7 @@
 					</not>
 					<then>
 						<copy
-							file="tools/servers/tomcat/conf/Catalina/localhost/${app.server.tomcat.portal.context}.xml"
+							file="tools/servers/tomcat/conf/Catalina/localhost/ROOT.xml"
 							tofile="${app.server.dir}/conf/Catalina/localhost/${app.server.tomcat.portal.context}.xml"
 							overwrite="yes"
 						/>
