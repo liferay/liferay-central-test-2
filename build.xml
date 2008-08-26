@@ -558,12 +558,12 @@
 
 				<if>
 					<not>
-						<available file="${app.server.dir}/conf/Catalina/localhost/ROOT.xml" />
+						<available file="${app.server.dir}/conf/Catalina/localhost/${app.server.tomcat.portal.context}.xml" />
 					</not>
 					<then>
 						<copy
-							file="tools/servers/tomcat/conf/Catalina/localhost/ROOT.xml"
-							tofile="${app.server.dir}/conf/Catalina/localhost/ROOT.xml"
+							file="tools/servers/tomcat/conf/Catalina/localhost/${app.server.tomcat.portal.context}.xml"
+							tofile="${app.server.dir}/conf/Catalina/localhost/${app.server.tomcat.portal.context}.xml"
 							overwrite="yes"
 						/>
 					</then>
@@ -795,6 +795,7 @@
 	</target>
 
 	<target name="validate-xml">
+		<!--
 		<xmlvalidate failonerror="no">
 			<fileset dir="${project.dir}"
 				excludes="**/dependencies/**,**/ehcache/**"
@@ -802,5 +803,19 @@
 			/>
 			<xmlcatalog refid="dtd.catalog" />
 		</xmlvalidate>
+ 		-->
+
+		<schemavalidate failonerror="no">
+			<fileset dir="${project.dir}"
+				excludes="**/dependencies/**,**/ehcache/**"
+				includes="**/portal-spring.xml"
+			/>
+			<schema namespace="http://www.springframework.org/schema/beans"
+				file="${definitions.dir}/spring-beans-2.5.xsd" />
+			<schema namespace="http://www.springframework.org/schema/tx"
+				file="${definitions.dir}/spring-tx-2.5.xsd" />
+			<schema namespace="http://www.springframework.org/schema/aop"
+				file="${definitions.dir}/spring-aop-2.5.xsd" />
+		</schemavalidate>
 	</target>
 </project>
