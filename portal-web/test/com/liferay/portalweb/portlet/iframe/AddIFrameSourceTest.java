@@ -33,7 +33,7 @@ import com.liferay.portalweb.portal.util.RuntimeVariables;
  */
 public class AddIFrameSourceTest extends BaseTestCase {
 	public void testAddIFrameSource() throws Exception {
-		selenium.click(RuntimeVariables.replace("//img[@title='Configuration']"));
+		selenium.click(RuntimeVariables.replace("//img[@alt='Configuration']"));
 		selenium.waitForPageToLoad("30000");
 		selenium.type("_86_src", RuntimeVariables.replace("www.liferay.com"));
 		selenium.click(RuntimeVariables.replace("//input[@value='Save']"));

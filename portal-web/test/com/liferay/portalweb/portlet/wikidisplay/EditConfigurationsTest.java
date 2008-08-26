@@ -33,7 +33,7 @@ import com.liferay.portalweb.portal.util.RuntimeVariables;
  */
 public class EditConfigurationsTest extends BaseTestCase {
 	public void testEditConfigurations() throws Exception {
-		selenium.click(RuntimeVariables.replace("//img[@title='Configuration']"));
+		selenium.click(RuntimeVariables.replace("//img[@alt='Configuration']"));
 		selenium.waitForPageToLoad("30000");
 		selenium.select("_86_nodeId", RuntimeVariables.replace("label=Main"));
 		selenium.click(RuntimeVariables.replace("//input[@value='Save']"));

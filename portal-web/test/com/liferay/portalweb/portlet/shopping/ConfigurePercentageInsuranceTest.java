@@ -39,7 +39,7 @@ public class ConfigurePercentageInsuranceTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("//img[@title='Configuration']")) {
+				if (selenium.isElementPresent("//img[@alt='Configuration']")) {
 					break;
 				}
 			}
@@ -49,7 +49,7 @@ public class ConfigurePercentageInsuranceTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click(RuntimeVariables.replace("//img[@title='Configuration']"));
+		selenium.click(RuntimeVariables.replace("//img[@alt='Configuration']"));
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {

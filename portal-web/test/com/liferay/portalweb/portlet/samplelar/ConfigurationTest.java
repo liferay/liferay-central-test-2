@@ -35,7 +35,7 @@ public class ConfigurationTest extends BaseTestCase {
 	public void testConfiguration() throws Exception {
 		verifyTrue(selenium.isTextPresent(
 				"This is the Sample LAR Portlet. This was made to demonstrate the portlet LAR plugin feature. "));
-		selenium.click(RuntimeVariables.replace("//img[@title='Configuration']"));
+		selenium.click(RuntimeVariables.replace("//img[@alt='Configuration']"));
 		selenium.waitForPageToLoad("30000");
 		selenium.click(RuntimeVariables.replace("link=Export / Import"));
 		selenium.waitForPageToLoad("30000");

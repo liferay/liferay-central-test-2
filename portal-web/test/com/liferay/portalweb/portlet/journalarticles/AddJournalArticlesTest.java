@@ -33,7 +33,7 @@ import com.liferay.portalweb.portal.util.RuntimeVariables;
  */
 public class AddJournalArticlesTest extends BaseTestCase {
 	public void testAddJournalArticles() throws Exception {
-		selenium.click(RuntimeVariables.replace("//img[@title='Configuration']"));
+		selenium.click(RuntimeVariables.replace("//img[@alt='Configuration']"));
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {

@@ -33,7 +33,7 @@ import com.liferay.portalweb.portal.util.RuntimeVariables;
  */
 public class EditPreferencesTest extends BaseTestCase {
 	public void testEditPreferences() throws Exception {
-		selenium.click(RuntimeVariables.replace("//img[@title='Configuration']"));
+		selenium.click(RuntimeVariables.replace("//img[@alt='Configuration']"));
 		selenium.waitForPageToLoad("30000");
 		selenium.select("_86_questionId",
 			RuntimeVariables.replace("label=Test Poll Question"));

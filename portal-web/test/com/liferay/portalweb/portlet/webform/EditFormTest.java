@@ -33,7 +33,7 @@ import com.liferay.portalweb.portal.util.RuntimeVariables;
  */
 public class EditFormTest extends BaseTestCase {
 	public void testEditForm() throws Exception {
-		selenium.click(RuntimeVariables.replace("//img[@title='Configuration']"));
+		selenium.click(RuntimeVariables.replace("//img[@alt='Configuration']"));
 		selenium.waitForPageToLoad("30000");
 		selenium.type("_86_title", RuntimeVariables.replace("Feed Back"));
 		selenium.type("_86_description",

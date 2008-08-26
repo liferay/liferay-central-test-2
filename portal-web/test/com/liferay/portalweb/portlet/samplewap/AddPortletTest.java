@@ -59,7 +59,7 @@ public class AddPortletTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("//img[@title='Configuration']")) {
+				if (selenium.isElementPresent("//img[@alt='Configuration']")) {
 					break;
 				}
 			}
@@ -96,7 +96,7 @@ public class AddPortletTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("//img[@title='Configuration']")) {
+				if (selenium.isElementPresent("//img[@alt='Configuration']")) {
 					break;
 				}
 			}

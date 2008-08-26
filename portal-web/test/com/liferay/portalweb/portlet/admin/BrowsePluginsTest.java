@@ -109,7 +109,7 @@ public class BrowsePluginsTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("//img[@title='Configuration']")) {
+				if (selenium.isElementPresent("//img[@alt='Configuration']")) {
 					break;
 				}
 			}
