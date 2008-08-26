@@ -66,8 +66,7 @@ public class TCKAction extends Action {
 
 		try {
 			if (!PropsValues.TCK_URL) {
-				throw new PrincipalException(
-					"The property tck.url is not set to true");
+				throw new PrincipalException("TCK testing is disabled");
 			}
 
 			User user = _getUser(request);
@@ -90,7 +89,6 @@ public class TCKAction extends Action {
 			}
 
 			long userId = user.getUserId();
-
 			long groupId = user.getGroup().getGroupId();
 
 			Layout layout = LayoutLocalServiceUtil.addLayout(
@@ -119,8 +117,9 @@ public class TCKAction extends Action {
 		}
 		catch (Exception e) {
 			if (_log.isWarnEnabled()) {
-				_log.warn(e.getMessage(), e);
+				_log.warn(e, e);
 			}
+
 			PortalUtil.sendError(e, request, response);
 
 			return null;
@@ -128,24 +127,18 @@ public class TCKAction extends Action {
 	}
 
 	private User _getUser(HttpServletRequest request) throws Exception {
-
-		Long companyIdObj = (Long)request.getAttribute(WebKeys.COMPANY_ID);
-		long companyId = 0;
-		if (companyIdObj != null) {
-			companyId = companyIdObj.longValue();
-		}
-
 		try {
-			return UserLocalServiceUtil.getUserByScreenName(
-				companyId, _TCK_USER_NAME);
+			long companyId = PortalUtil.getCompanyId(request);
+
+			return UserLocalServiceUtil.getUserByScreenName(companyId, "tck");
 		}
 		catch (Exception e) {
 			long creatorUserId = 0;
 			boolean autoPassword = false;
-			String password1 = "tck";
+			String password1 = "password";
 			String password2 = password1;
 			boolean autoScreenName = false;
-			String screenName = _TCK_USER_NAME;
+			String screenName = "tck";
 			String emailAddress = "tck@liferay.com";
 			Locale locale = Locale.US;
 			String firstName = "TCK";
@@ -169,8 +162,6 @@ public class TCKAction extends Action {
 				sendEmail);
 		}
 	}
-
-	private static final String _TCK_USER_NAME = "tck";
 
 	private static Log _log = LogFactory.getLog(TCKAction.class);
 
