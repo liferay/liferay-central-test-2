@@ -48,23 +48,27 @@
 
 	<%
 	Portlet portlet = (Portlet)request.getAttribute(WebKeys.RENDER_PORTLET);
-
-	PortletPreferences portletSetup = PortletPreferencesFactoryUtil.getLayoutPortletSetup(layout, portletDisplay.getId());
-
-	boolean widgetShowAddAppLink = GetterUtil.getBoolean(portletSetup.getValue("lfr-widget-show-add-app-link", null), true);
-
-	String facebookAPIKey = portletSetup.getValue("lfr-facebook-api-key", StringPool.BLANK);
-	String facebookCanvasPageURL = portletSetup.getValue("lfr-facebook-canvas-page-url", StringPool.BLANK);
-	boolean facebookShowAddAppLink = GetterUtil.getBoolean(portletSetup.getValue("lfr-facebook-show-add-app-link", null), true);
-
-	if (Validator.isNull(facebookCanvasPageURL) || Validator.isNull(facebookAPIKey)) {
-		facebookShowAddAppLink = false;
-	}
-
-	boolean appShowShareWithFriendsLink = GetterUtil.getBoolean(portletSetup.getValue("lfr-app-show-share-with-friends-link", StringPool.BLANK));
 	%>
 
-	<c:if test="<%= widgetShowAddAppLink || facebookShowAddAppLink || appShowShareWithFriendsLink %>">
+	<c:if test="<%= portlet != null %>">
+
+		<%
+		PortletPreferences portletSetup = PortletPreferencesFactoryUtil.getLayoutPortletSetup(layout, portletDisplay.getId());
+
+		boolean widgetShowAddAppLink = GetterUtil.getBoolean(portletSetup.getValue("lfr-widget-show-add-app-link", null), true);
+
+		String facebookAPIKey = portletSetup.getValue("lfr-facebook-api-key", StringPool.BLANK);
+		String facebookCanvasPageURL = portletSetup.getValue("lfr-facebook-canvas-page-url", StringPool.BLANK);
+		boolean facebookShowAddAppLink = GetterUtil.getBoolean(portletSetup.getValue("lfr-facebook-show-add-app-link", null), true);
+
+		if (Validator.isNull(facebookCanvasPageURL) || Validator.isNull(facebookAPIKey)) {
+			facebookShowAddAppLink = false;
+		}
+
+		boolean appShowShareWithFriendsLink = GetterUtil.getBoolean(portletSetup.getValue("lfr-app-show-share-with-friends-link", StringPool.BLANK));
+		%>
+
+		<c:if test="<%= widgetShowAddAppLink || facebookShowAddAppLink || appShowShareWithFriendsLink %>">
 			<c:if test="<%= widgetShowAddAppLink %>">
 				<liferay-ui:icon
 					image="../dock/add_content"
@@ -138,5 +142,6 @@ Liferay.Widget({ url: &#x27;<%= PortalUtil.getWidgetURL(portlet, themeDisplay) %
 					);
 				</script>
 			</c:if>
+		</c:if>
 	</c:if>
 </liferay-ui:icon-menu>
