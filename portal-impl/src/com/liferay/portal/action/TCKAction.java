@@ -127,9 +127,9 @@ public class TCKAction extends Action {
 	}
 
 	private User _getUser(HttpServletRequest request) throws Exception {
-		try {
-			long companyId = PortalUtil.getCompanyId(request);
+		long companyId = PortalUtil.getCompanyId(request);
 
+		try {
 			return UserLocalServiceUtil.getUserByScreenName(companyId, "tck");
 		}
 		catch (Exception e) {
