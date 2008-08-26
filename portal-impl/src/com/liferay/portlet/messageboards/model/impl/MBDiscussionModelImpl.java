@@ -24,6 +24,7 @@ package com.liferay.portlet.messageboards.model.impl;
 
 import com.liferay.portal.kernel.bean.ReadOnlyBeanHandler;
 import com.liferay.portal.kernel.util.GetterUtil;
+import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.impl.BaseModelImpl;
 import com.liferay.portal.util.PortalUtil;
 
@@ -132,6 +133,10 @@ public class MBDiscussionModelImpl extends BaseModelImpl {
 	}
 
 	public String getClassName() {
+		if (getClassNameId() <= 0) {
+			return StringPool.BLANK;
+		}
+
 		return PortalUtil.getClassName(getClassNameId());
 	}
 

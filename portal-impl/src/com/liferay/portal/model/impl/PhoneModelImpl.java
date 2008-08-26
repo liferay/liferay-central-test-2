@@ -26,6 +26,7 @@ import com.liferay.portal.kernel.bean.ReadOnlyBeanHandler;
 import com.liferay.portal.kernel.util.DateUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.HtmlUtil;
+import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.Phone;
 import com.liferay.portal.model.PhoneSoap;
 import com.liferay.portal.util.PortalUtil;
@@ -224,6 +225,10 @@ public class PhoneModelImpl extends BaseModelImpl {
 	}
 
 	public String getClassName() {
+		if (getClassNameId() <= 0) {
+			return StringPool.BLANK;
+		}
+
 		return PortalUtil.getClassName(getClassNameId());
 	}
 
