@@ -301,8 +301,6 @@ public class AnnouncementsEntryLocalServiceImpl
 
 		// Entry
 
-		validate(title, content);
-
 		User user = userPersistence.findByPrimaryKey(userId);
 
 		Date displayDate = PortalUtil.getDate(
@@ -314,6 +312,8 @@ public class AnnouncementsEntryLocalServiceImpl
 			expirationDateMonth, expirationDateDay, expirationDateYear,
 			expirationDateHour, expirationDateMinute, user.getTimeZone(),
 			new EntryExpirationDateException());
+
+		validate(title, content);
 
 		AnnouncementsEntry entry =
 			announcementsEntryPersistence.findByPrimaryKey(entryId);
