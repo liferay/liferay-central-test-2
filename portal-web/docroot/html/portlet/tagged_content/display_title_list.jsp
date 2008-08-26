@@ -135,6 +135,16 @@ else if (className.equals(JournalArticle.class.getName())) {
 		show = false;
 	}
 }
+else if (className.equals(MBMessage.class.getName())) {
+	MBMessage message = MBMessageLocalServiceUtil.getMBMessage(classPK);
+
+	PortletURL pageURL = renderResponse.createRenderURL();
+
+	pageURL.setParameter("struts_action", "/message_boards/view_message");
+	pageURL.setParameter("messageId", String.valueOf(message.getMessageId()));
+
+	viewURL = pageURL.toString();
+}
 else if (className.equals(WikiPage.class.getName())) {
 	WikiPageResource pageResource = WikiPageResourceLocalServiceUtil.getPageResource(classPK);
 
