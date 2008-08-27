@@ -22,9 +22,6 @@
 
 package com.liferay.portal.kernel.xml;
 
-import com.liferay.portal.kernel.log.Log;
-import com.liferay.portal.kernel.log.LogFactoryUtil;
-
 import java.io.File;
 import java.io.InputStream;
 import java.io.Reader;
@@ -194,8 +191,6 @@ public class SAXReaderUtil {
 	public void setSAXReader(SAXReader saxReader) {
 		_saxReader = saxReader;
 	}
-
-	private static Log _log = LogFactoryUtil.getLog(SAXReaderUtil.class);
 
 	private static SAXReader _saxReader;
 
