@@ -1122,6 +1122,189 @@ Liferay.Util = {
 	}
 };
 
+Liferay.Util.PortletURL = new Class({
+	initialize: function(lifecycle, params){
+		var instance = this;
+		var	dictionary = {
+			action: Liferay.Util.PortletURL.PortletRequest.ACTION_PHASE,
+			render: Liferay.Util.PortletURL.PortletRequest.RENDER_PHASE,
+			resource: Liferay.Util.PortletURL.PortletRequest.RESOURCE_PHASE
+		};
+
+		if (lifecycle) {
+			if (/^(render|action|resource)$/i.test(lifecycle)) {
+				lifecycle = dictionary[lifecycle];
+			}
+		}
+		else {
+			lifecycle = Liferay.Util.PortletURL.PortletRequest.RENDER_PHASE;
+		}
+
+		if (!params) {
+			params = {};
+		}
+
+		this.options = {
+			anchor: null,
+			copyCurrentRenderParameters: null,
+			doAsUserId: null,
+			encrypt: null,
+			escapeXML: null,
+			lifecycle: lifecycle,
+			name: null,
+			portletConfiguration: false,
+			portletId: null,
+			portletMode: null,
+			resourceId: null,
+			secure: null,
+			windowState: null
+		};
+
+		this.params = params;
+		this._paramModel = { javaClass: "java.util.HashMap", map: {} };
+	},
+	toString: function(){
+		var instance = this;
+
+		instance._forceStringValues(instance.params);
+		instance._forceStringValues(instance.options);
+
+		jQuery.extend(
+			instance._paramModel.map,
+			instance.params
+		);
+
+		var data = instance._buildRequestData();
+		var generatedURL = "";
+		var url = themeDisplay.getPathContext() + '/c/portal/portlet_url';
+
+		var xHR = jQuery.ajax(
+			{
+				async: false,
+				data: data,
+				type: 'GET',
+				url: url
+			}
+		);
+		generatedURL = xHR.responseText;
+
+		return generatedURL;
+	},
+	setLifecycle: function(lifecycle){
+		this.options.lifecycle = lifecycle;
+	},
+	setAnchor: function(anchor){
+		this.options.anchor = anchor;
+	},
+	setCopyCurrentRenderParameters: function(copyCurrentRenderParameters){
+		this.options.copyCurrentRenderParameters = copyCurrentRenderParameters;
+	},
+	setDoAsUserId: function(doAsUserId){
+		this.options.doAsUserId = doAsUserId;
+	},
+	setEncrypt: function(encrypt){
+		this.options.encrypt = encrypt;
+	},
+	setEscapeXML: function(escapeXML){
+		this.options.escapeXML = escapeXML;
+	},
+	setName: function(name){
+		this.options.name = name;
+	},
+	setPortletConfiguration: function(portletConfiguration){
+		this.options.portletConfiguration = portletConfiguration;
+	},
+	setPortletId: function(portletId){
+		this.options.portletId = portletId;
+	},
+	setPortletMode: function(portletMode){
+		this.options.portletMode = portletMode;
+	},
+	setResourceId: function(resourceId){
+		this.options.resourceId = resourceId;
+	},
+	setSecure: function(secure){
+		this.options.secure = secure;
+	},
+	setWindowState: function(windowState){
+		this.options.windowState = windowState;
+	},
+	setParameter: function(key, value){
+		this.params[key] = value;
+	},
+	_buildRequestData: function(){
+		var data = {};
+		var instance = this;
+		var jsonParam = jQuery.toJSON(instance._paramModel);
+
+		jQuery.each(
+			instance.options,
+			function (key, value) {
+				if (value !== null) {
+					data[key] = [value].join('');
+				}
+			}
+		);
+		data.param = jsonParam;
+		return data;
+	},
+	_forceStringValues: function(obj){
+		jQuery.each(
+			obj,
+			function (key, value) {
+				if (value !== null) {
+					obj[key] = [value].join('');
+				}
+			}
+		);
+		return obj;
+	}
+});
+
+jQuery.extend(Liferay.Util.PortletURL, {
+	createRenderURL: function(){
+		return new Liferay.Util.PortletURL(
+			Liferay.Util.PortletURL.PortletRequest.RENDER_PHASE);
+	},
+	createActionURL: function(){
+		return new Liferay.Util.PortletURL(
+			Liferay.Util.PortletURL.PortletRequest.ACTION_PHASE);
+	},
+	createResourceURL: function(){
+		return new Liferay.Util.PortletURL(
+			Liferay.Util.PortletURL.PortletRequest.RESOURCE_PHASE);
+	},
+	createPermissionURL: function(portletResource, modelResource,
+		modelResourceDescription, resourcePrimKey) {
+
+		var portletURL = Liferay.Util.PortletURL.createRenderURL();
+		var redirect = window.location.href;
+
+		portletURL.setParameter(
+			'struts_action', '/portlet_configuration/edit_permissions');
+
+		portletURL.setParameter('redirect', redirect);
+		if (!themeDisplay.isStateMaximized()) {
+			portletURL.setParameter('returnToFullPageURL', redirect);
+		}
+		portletURL.setParameter('portletResource', portletResource);
+		portletURL.setParameter('modelResource', modelResource);
+		portletURL.setParameter(
+			'modelResourceDescription', modelResourceDescription);
+
+		portletURL.setParameter('resourcePrimKey', resourcePrimKey);
+		portletURL.setPortletId(86);
+		portletURL.setWindowState('MAXIMIZED');
+
+		return portletURL;
+	},
+	PortletRequest: {
+		ACTION_PHASE: 'ACTION_PHASE',
+		RENDER_PHASE: 'RENDER_PHASE',
+		RESOURCE_PHASE: 'RESOURCE_PHASE'
+	}
+});
+
 function submitForm(form, action, singleSubmit) {
 	if (Liferay.Util.submitCountdown == 0) {
 		Liferay.Util.submitCountdown = 10;

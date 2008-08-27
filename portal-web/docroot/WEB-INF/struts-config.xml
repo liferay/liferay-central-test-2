@@ -107,6 +107,8 @@
 			<forward name="portal.test_redirect" path="/c/portal/test" redirect="true" />
 		</action>-->
 
+		<action path="/portal/portlet_url" type="com.liferay.portal.action.PortletURLAction" />
+
 		<action path="/portal/touch_protected" forward="/portal/touch_protected.jsp" />
 
 		<action path="/portal/update_layout" type="com.liferay.portal.action.UpdateLayoutAction" />
