@@ -96,24 +96,25 @@ boolean allowTrackbacks = BeanParamUtil.getBoolean(entry, request, "allowTrackba
 
 			var url = document.<portlet:namespace />fm.action;
 
-			url += '&<portlet:namespace /><%= Constants.CMD %>=<%= Constants.ADD %>';
-			url += '&<portlet:namespace />redirect=' + document.<portlet:namespace />fm.<portlet:namespace />redirect.value;
-			url += '&<portlet:namespace />referringPortletResource=' + document.<portlet:namespace />fm.<portlet:namespace />referringPortletResource.value;
-			url += '&<portlet:namespace />entryId=' + document.<portlet:namespace />fm.<portlet:namespace />entryId.value;
-			url += '&<portlet:namespace />title=' + encodeURIComponent(title);
-			url += '&<portlet:namespace />content=' + encodeURIComponent(content);
-			url += '&<portlet:namespace />displayDateMonth=' + document.<portlet:namespace />fm.<portlet:namespace />displayDateMonth.value;
-			url += '&<portlet:namespace />displayDateDay=' + document.<portlet:namespace />fm.<portlet:namespace />displayDateDay.value;
-			url += '&<portlet:namespace />displayDateYear=' + document.<portlet:namespace />fm.<portlet:namespace />displayDateYear.value;
-			url += '&<portlet:namespace />displayDateHour=' + document.<portlet:namespace />fm.<portlet:namespace />displayDateHour.value;
-			url += '&<portlet:namespace />displayDateMinute=' + document.<portlet:namespace />fm.<portlet:namespace />displayDateMinute.value;
-			url += '&<portlet:namespace />displayDateAmPm=' + document.<portlet:namespace />fm.<portlet:namespace />displayDateAmPm.value;
-			url += '&<portlet:namespace />draft=1';
-			url += '&<portlet:namespace />tagsEntries=' + encodeURIComponent(document.<portlet:namespace />fm.<portlet:namespace />tagsEntries.value);
-
 			jQuery.ajax(
 				{
 					url: url,
+					data: {
+						<portlet:namespace /><%= Constants.CMD %>: '<%= Constants.ADD %>',
+						<portlet:namespace />redirect: document.<portlet:namespace />fm.<portlet:namespace />redirect.value,
+						<portlet:namespace />referringPortletResource: document.<portlet:namespace />fm.<portlet:namespace />referringPortletResource.value,
+						<portlet:namespace />entryId: document.<portlet:namespace />fm.<portlet:namespace />entryId.value,
+						<portlet:namespace />title: title,
+						<portlet:namespace />content: content,
+						<portlet:namespace />displayDateMonth: document.<portlet:namespace />fm.<portlet:namespace />displayDateMonth.value,
+						<portlet:namespace />displayDateDay: document.<portlet:namespace />fm.<portlet:namespace />displayDateDay.value,
+						<portlet:namespace />displayDateYear: document.<portlet:namespace />fm.<portlet:namespace />displayDateYear.value,
+						<portlet:namespace />displayDateHour: document.<portlet:namespace />fm.<portlet:namespace />displayDateHour.value,
+						<portlet:namespace />displayDateMinute: document.<portlet:namespace />fm.<portlet:namespace />displayDateMinute.value,
+						<portlet:namespace />displayDateAmPm: document.<portlet:namespace />fm.<portlet:namespace />displayDateAmPm.value,
+						<portlet:namespace />draft: 1,
+						<portlet:namespace />tagsEntries: document.<portlet:namespace />fm.<portlet:namespace />tagsEntries.value
+					},
 					dataType: 'json',
 					beforeSend: function() {
 						saveButton.attr('disabled', true);
