@@ -25,6 +25,7 @@ var LayoutConfiguration = {
 						list: instance.portlets,
 						data: function() {
 							var value = jQuery(this).attr('id');
+
 							return uncamelize(value).toLowerCase();
 						},
 						show: function() {
@@ -36,6 +37,7 @@ var LayoutConfiguration = {
 						},
 						hide: function() {
 							var portlet = jQuery(this);
+
 							portlet.hide();
 						}
 					}
