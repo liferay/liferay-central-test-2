@@ -458,10 +458,10 @@ public class MBUtil {
 		if ((x > 0 ) && (y != -1)) {
 			String temp = mailId.substring(x, y);
 
-			int z = temp.indexOf(StringPool.PERIOD);
+			int z = temp.lastIndexOf(StringPool.PERIOD);
 
 			if (z != -1) {
-				messageId = GetterUtil.getLong(temp.substring(z));
+				messageId = GetterUtil.getLong(temp.substring(z) + 1);
 			}
 		}
 
@@ -488,8 +488,7 @@ public class MBUtil {
 		if (parentHeader == null) {
 			String[] inReplyToHeaders = message.getHeader("In-Reply-To");
 
-			if ((inReplyToHeaders != null) &&
-				(inReplyToHeaders.length > 0)) {
+			if ((inReplyToHeaders != null) && (inReplyToHeaders.length > 0)) {
 
 				parentHeader = inReplyToHeaders[0];
 			}
