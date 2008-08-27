@@ -630,8 +630,22 @@ public class ServiceBuilder {
 						column.attributeValue("primary"), false);
 					String collectionEntity = column.attributeValue("entity");
 					String mappingKey = column.attributeValue("mapping-key");
+
 					String mappingTable = column.attributeValue(
 						"mapping-table");
+
+					if (Validator.isNotNull(mappingTable)) {
+						if (_badTableNames.contains(mappingTable)) {
+							mappingTable += StringPool.UNDERLINE;
+						}
+
+						if (_autoNamespaceTables) {
+							mappingTable =
+								_portletShortName + StringPool.UNDERLINE +
+									mappingTable;
+						}
+					}
+
 					String idType = column.attributeValue("id-type");
 					String idParam = column.attributeValue("id-param");
 					boolean convertNull = GetterUtil.getBoolean(
@@ -664,10 +678,13 @@ public class ServiceBuilder {
 						int ejbNameWeight = StringUtil.startsWithWeight(
 							mappingTable, ejbName);
 						int collectionEntityWeight =
-							StringUtil.startsWithWeight(mappingTable,
-								collectionEntity);
+							StringUtil.startsWithWeight(
+								mappingTable, collectionEntity);
 
-						if (ejbNameWeight > collectionEntityWeight) {
+						if ((ejbNameWeight > collectionEntityWeight) ||
+							((ejbNameWeight == collectionEntityWeight) &&
+							 (ejbName.compareTo(collectionEntity) > 0))) {
+
 							_entityMappings.put(mappingTable, entityMapping);
 						}
 					}
