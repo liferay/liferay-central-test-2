@@ -9182,7 +9182,7 @@ Liferay.Popup = function(options) {
 		handles: 'e,se,s,sw,w',
 		resizeHelper: 'ui-resizable-proxy',
 		message: '<div class="loading-animation"></div>',
-		position: [5,5],
+		position: 'center',
 		height: 'auto',
 		stack: false,
 		dragHelper: function() {
@@ -9263,7 +9263,7 @@ Liferay.Popup = function(options) {
 
 	var modal = config.modal;
 	var draggable = config.draggable;
-	var position = config.noCenter ? defaults.position : 'center';
+	var position = config.noCenter ? [5, 5] : defaults.position;
 
 	position = config.position || position;
 
