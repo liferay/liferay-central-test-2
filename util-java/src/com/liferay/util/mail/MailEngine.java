@@ -355,7 +355,7 @@ public class MailEngine {
 				msg.setHeader("Message-ID", messageId);
 			}
 
-			if (inReplyTo!= null) {
+			if (inReplyTo != null) {
 				msg.setHeader("In-Reply-To", inReplyTo);
 				msg.setHeader("References", inReplyTo);
 			}
@@ -394,19 +394,23 @@ public class MailEngine {
 		String protocol = account.getProtocol();
 
 		if (account.isRequiresAuthentication()) {
-			properties.put("mail." + protocol + ".auth", "true");
+			properties.setProperty("mail." + protocol + ".auth", "true");
 		}
 
-		properties.put("mail." + protocol + ".host", account.getHost());
-		properties.put("mail." + protocol + ".port", account.getPort());
-		properties.put("mail." + protocol + ".user", account.getUser());
-		properties.put("mail." + protocol + ".password", account.getPassword());
-		properties.put(
+		properties.setProperty("mail." + protocol + ".host", account.getHost());
+		properties.setProperty(
+			"mail." + protocol + ".port", String.valueOf(account.getPort()));
+		properties.setProperty("mail." + protocol + ".user", account.getUser());
+		properties.setProperty(
+			"mail." + protocol + ".password", account.getPassword());
+		properties.setProperty(
 			"mail." + protocol + ".socketFactory.class",
 			"javax.net.ssl.SSLSocketFactory");
-		properties.put("mail." + protocol + ".socketFactory.fallback", "false");
-		properties.put(
-			"mail." + protocol + ".socketFactory.port", account.getPort());
+		properties.setProperty(
+			"mail." + protocol + ".socketFactory.fallback", "false");
+		properties.setProperty(
+			"mail." + protocol + ".socketFactory.port",
+			String.valueOf(account.getPort()));
 
 		return properties;
 	}
