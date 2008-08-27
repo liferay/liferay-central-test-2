@@ -1158,7 +1158,7 @@ Liferay.Portlet.TagsAdmin = new Class({
 
 			jQuery('.entry-toolbar-section').hide();
 
-			instance._sendMessage("info", Liferay.Language.get('you-must-add-a-vocabulary-first'));
+			instance._sendMessage("info", Liferay.Language.get('you-must-first-add-a-vocabulary'));
 			instance._positionToolbarSection(entryToolbarButton, entryToolbarSection);
 			instance._showToolBarVocabularySection();
 
