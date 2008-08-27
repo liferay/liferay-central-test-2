@@ -461,7 +461,7 @@ public class MBUtil {
 			int z = temp.lastIndexOf(StringPool.PERIOD);
 
 			if (z != -1) {
-				messageId = GetterUtil.getLong(temp.substring(z) + 1);
+				messageId = GetterUtil.getLong(temp.substring(z + 1));
 			}
 		}
 
