@@ -23,12 +23,14 @@
 %>
 <%@ include file="/html/portal/init.jsp" %>
 
+<c:if test="<%= !themeDisplay.isStateExclusive() && !themeDisplay.isStatePopUp() %>">
 <table class="lfr-panel <%= (!layoutTypePortlet.hasStateMax()) ? "panel-frontpage" : "panel-application" %>" width="100%">
 <tr>
 	<td class="panel-menu" valign="top" width="200">
 		<liferay-portlet:runtime portletName="87" />
 	</td>
 	<td class="panel-content" valign="top">
+</c:if>
 
 		<%
 		if (themeDisplay.isStateExclusive() || themeDisplay.isStatePopUp() || layoutTypePortlet.hasStateMax()) {
@@ -73,6 +75,8 @@
 		}
 		%>
 
+<c:if test="<%= !themeDisplay.isStateExclusive() && !themeDisplay.isStatePopUp() %>">
 	</td>
 </tr>
 </table>
+</c:if>
