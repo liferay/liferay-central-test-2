@@ -365,6 +365,7 @@ public class ThemeDisplay implements Serializable {
 			setPathThemeJavaScript(
 				host + themeContextPath + theme.getJavaScriptPath());
 			setPathThemeRoot(themeContextPath + theme.getRootPath());
+			setPathThemeTemplates(host + themeContextPath + theme.getTemplatesPath());
 		}
 	}
 
@@ -664,6 +665,14 @@ public class ThemeDisplay implements Serializable {
 
 	public void setPathThemeRoot(String pathThemeRoot) {
 		_pathThemeRoot = pathThemeRoot;
+	}
+	
+	public String getPathThemeTemplates() {
+		return _pathThemeTemplates;
+	}
+
+	public void setPathThemeTemplates(String pathThemeTemplates) {
+		_pathThemeTemplates = pathThemeTemplates;
 	}
 
 	public boolean isShowAddContentIcon() {
@@ -980,6 +989,7 @@ public class ThemeDisplay implements Serializable {
 		_pathThemeImages = StringPool.BLANK;
 		_pathThemeJavaScript = StringPool.BLANK;
 		_pathThemeRoot = StringPool.BLANK;
+		_pathThemeTemplates = StringPool.BLANK;
 		_showAddContentIcon = false;
 		_showHomeIcon = false;
 		_showLayoutTemplatesIcon = false;
@@ -1075,6 +1085,7 @@ public class ThemeDisplay implements Serializable {
 	private String _pathThemeImages = StringPool.BLANK;
 	private String _pathThemeJavaScript = StringPool.BLANK;
 	private String _pathThemeRoot = StringPool.BLANK;
+	private String _pathThemeTemplates = StringPool.BLANK;
 	private boolean _showAddContentIcon;
 	private boolean _showHomeIcon;
 	private boolean _showLayoutTemplatesIcon;
