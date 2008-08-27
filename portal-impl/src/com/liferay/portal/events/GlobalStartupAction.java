@@ -47,6 +47,7 @@ import com.liferay.portal.util.PropsKeys;
 import com.liferay.portal.util.PropsUtil;
 import com.liferay.portal.util.PropsValues;
 import com.liferay.portlet.messageboards.messaging.MBMessageListener;
+import com.liferay.portlet.messageboards.messaging.MailingListMessageListener;
 import com.liferay.portlet.wiki.messaging.WikiMessageListener;
 
 import java.io.File;
@@ -252,6 +253,18 @@ public class GlobalStartupAction extends SimpleAction {
 
 		MessageBusUtil.registerMessageListener(
 			messageBoardsDestination.getName(), new MBMessageListener());
+
+		// Message boards mailing list
+
+		Destination messageBoardMailingListReaderDestination =
+			new ParallelDestination(
+				DestinationNames.MESSAGE_BOARDS_MAILING_LIST);
+
+		MessageBusUtil.addDestination(messageBoardMailingListReaderDestination);
+
+		MessageBusUtil.registerMessageListener(
+			messageBoardMailingListReaderDestination.getName(),
+			new MailingListMessageListener());
 
 		// Wiki
 
