@@ -75,7 +75,7 @@ if (organizations != null) {
 		organizationsHTML.append("<span>");
 		organizationsHTML.append(curOrganization.getName());
 
-		if ((portletName.equals(PortletKeys.ENTERPRISE_ADMIN) || portletName.equals(PortletKeys.ORGANIZATION_ADMIN)) && editable) {
+		if ((portletName.equals(PortletKeys.ENTERPRISE_ADMIN) || portletName.equals(PortletKeys.ORGANIZATION_ADMIN) || portletName.equals(PortletKeys.ENTERPRISE_USERS_ADMIN) || portletName.equals(PortletKeys.ENTERPRISE_ORGANIZATIONS_ADMIN)) && editable) {
 			organizationsHTML.append("&nbsp;[<a href='javascript: ");
 			organizationsHTML.append(renderResponse.getNamespace());
 			organizationsHTML.append("removeOrganization(");
@@ -332,7 +332,7 @@ if (organizations != null) {
 					<%= organizationsHTML.toString() %>
 				</span>
 
-				<c:if test="<%= (portletName.equals(PortletKeys.ENTERPRISE_ADMIN) || portletName.equals(PortletKeys.ORGANIZATION_ADMIN)) && editable %>">
+				<c:if test="<%= (portletName.equals(PortletKeys.ENTERPRISE_ADMIN) || portletName.equals(PortletKeys.ORGANIZATION_ADMIN) || portletName.equals(PortletKeys.ENTERPRISE_USERS_ADMIN) || portletName.equals(PortletKeys.ENTERPRISE_ORGANIZATIONS_ADMIN)) && editable %>">
 					<input type="button" value="<liferay-ui:message key="select" />" onClick="var organizationWindow = window.open('<portlet:renderURL windowState="<%= LiferayWindowState.POP_UP.toString() %>"><portlet:param name="struts_action" value="/enterprise_admin/select_organization" /><portlet:param name="tabs1" value="organizations" /></portlet:renderURL>', 'organization', 'directories=no,height=640,location=no,menubar=no,resizable=yes,scrollbars=no,status=no,toolbar=no,width=680'); void(''); organizationWindow.focus();" />
 				</c:if>
 			</td>

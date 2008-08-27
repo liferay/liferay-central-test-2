@@ -35,7 +35,7 @@ UserGroup userGroup = (UserGroup)row.getObject();
 %>
 
 <liferay-ui:icon-menu>
-	<c:if test="<%= portletName.equals(PortletKeys.ENTERPRISE_ADMIN) || portletName.equals(PortletKeys.ORGANIZATION_ADMIN) %>">
+	<c:if test="<%= portletName.equals(PortletKeys.ENTERPRISE_ADMIN) || portletName.equals(PortletKeys.ORGANIZATION_ADMIN) || portletName.equals(PortletKeys.ENTERPRISE_USER_GROUPS_ADMIN) %>">
 		<c:if test="<%= UserGroupPermissionUtil.contains(permissionChecker, userGroup.getUserGroupId(), ActionKeys.UPDATE) %>">
 			<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="editURL">
 				<portlet:param name="struts_action" value="/enterprise_admin/edit_user_group" />
@@ -91,7 +91,7 @@ UserGroup userGroup = (UserGroup)row.getObject();
 
 	<liferay-ui:icon image="view_users" message="view-users" url="<%= viewUsersURL %>" />
 
-	<c:if test="<%= portletName.equals(PortletKeys.ENTERPRISE_ADMIN) || portletName.equals(PortletKeys.ORGANIZATION_ADMIN) %>">
+	<c:if test="<%= portletName.equals(PortletKeys.ENTERPRISE_ADMIN) || portletName.equals(PortletKeys.ORGANIZATION_ADMIN) || portletName.equals(PortletKeys.ENTERPRISE_USER_GROUPS_ADMIN) %>">
 		<c:if test="<%= UserGroupPermissionUtil.contains(permissionChecker, userGroup.getUserGroupId(), ActionKeys.DELETE) %>">
 
 			<%

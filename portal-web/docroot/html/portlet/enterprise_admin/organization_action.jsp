@@ -39,7 +39,7 @@ long organizationGroupId = organization.getGroup().getGroupId();
 %>
 
 <liferay-ui:icon-menu>
-	<c:if test="<%= portletName.equals(PortletKeys.ENTERPRISE_ADMIN) || portletName.equals(PortletKeys.ORGANIZATION_ADMIN) %>">
+	<c:if test="<%= portletName.equals(PortletKeys.ENTERPRISE_ADMIN) || portletName.equals(PortletKeys.ORGANIZATION_ADMIN) || portletName.equals(PortletKeys.ENTERPRISE_ORGANIZATIONS_ADMIN) %>">
 		<c:if test="<%= OrganizationPermissionUtil.contains(permissionChecker, organizationId, ActionKeys.UPDATE) %>">
 			<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="editOrganizationURL">
 				<portlet:param name="struts_action" value="/enterprise_admin/edit_organization" />
@@ -111,7 +111,7 @@ long organizationGroupId = organization.getGroup().getGroupId();
 	<liferay-ui:icon image="view_users" message="view-users" url="<%= viewUsersURL %>" />
 
 	<c:if test="<%= organization.isRegular() %>">
-		<c:if test="<%= (portletName.equals(PortletKeys.ENTERPRISE_ADMIN) || portletName.equals(PortletKeys.ORGANIZATION_ADMIN)) && OrganizationPermissionUtil.contains(permissionChecker, organizationId, ActionKeys.MANAGE_SUBORGANIZATIONS) %>">
+		<c:if test="<%= (portletName.equals(PortletKeys.ENTERPRISE_ADMIN) || portletName.equals(PortletKeys.ORGANIZATION_ADMIN) || portletName.equals(PortletKeys.ENTERPRISE_ORGANIZATIONS_ADMIN)) && OrganizationPermissionUtil.contains(permissionChecker, organizationId, ActionKeys.MANAGE_SUBORGANIZATIONS) %>">
 			<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="addSuborganizationURL">
 				<portlet:param name="struts_action" value="/enterprise_admin/edit_organization" />
 				<portlet:param name="redirect" value="<%= redirect %>" />

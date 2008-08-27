@@ -104,7 +104,7 @@ OrganizationDisplayTerms displayTerms = (OrganizationDisplayTerms)searchContaine
 	<%
 	boolean showButtons = false;
 
-	if (portletName.equals(PortletKeys.ENTERPRISE_ADMIN) && !windowState.equals(LiferayWindowState.POP_UP)) {
+	if ((portletName.equals(PortletKeys.ENTERPRISE_ADMIN) || portletName.equals(PortletKeys.ENTERPRISE_ADMIN)) && !windowState.equals(LiferayWindowState.POP_UP)) {
 		showButtons = true;
 	}
 	%>

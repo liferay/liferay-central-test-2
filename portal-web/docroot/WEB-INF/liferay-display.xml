@@ -1,8 +1,18 @@
 <?xml version="1.0"?>
-<!DOCTYPE display PUBLIC "-//Liferay//DTD Display 5.1.0//EN" "http://www.liferay.com/dtd/liferay-display_5_1_0.dtd">
+<!DOCTYPE display PUBLIC "-//Liferay//DTD Display75.1.0//EN" "http://www.liferay.com/dtd/liferay-display_5_1_0.dtd">
 
 <display>
 	<category name="category.admin">
+		<category name="category.enterprise.admin.tools">
+			<portlet id="125" />
+			<portlet id="126" />
+			<portlet id="127" />
+			<portlet id="128" />
+			<portlet id="129" />
+			<portlet id="130" />
+			<portlet id="131" />
+			<portlet id="132" />
+		</category>
 		<portlet id="9" />
 		<portlet id="79" />
 		<portlet id="80" />

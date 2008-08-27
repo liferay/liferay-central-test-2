@@ -24,7 +24,7 @@
 
 <%@ include file="/html/portlet/enterprise_admin/init.jsp" %>
 
-<c:if test="<%= portletName.equals(PortletKeys.ENTERPRISE_ADMIN) || portletName.equals(PortletKeys.ORGANIZATION_ADMIN) %>">
+<c:if test="<%= portletName.equals(PortletKeys.ENTERPRISE_ADMIN) || portletName.equals(PortletKeys.ORGANIZATION_ADMIN) || portletName.equals(PortletKeys.ENTERPRISE_USERS_ADMIN) || portletName.equals(PortletKeys.ENTERPRISE_ORGANIZATIONS_ADMIN) %>">
 
 	<%
 	UserSearch searchContainer = (UserSearch)request.getAttribute("liferay-ui:search:searchContainer");
@@ -72,7 +72,7 @@
 			<liferay-ui:icon image="pages" message="manage-pages" url="<%= managePagesURL %>" />
 		</c:if>
 
-		<c:if test="<%= portletName.equals(PortletKeys.ENTERPRISE_ADMIN) || portletName.equals(PortletKeys.ORGANIZATION_ADMIN) %>">
+		<c:if test="<%= portletName.equals(PortletKeys.ENTERPRISE_ADMIN) || portletName.equals(PortletKeys.ORGANIZATION_ADMIN) || portletName.equals(PortletKeys.ENTERPRISE_USERS_ADMIN) || portletName.equals(PortletKeys.ENTERPRISE_ORGANIZATIONS_ADMIN) %>">
 			<c:if test="<%= !PropsValues.PORTAL_JAAS_ENABLE && PropsValues.PORTAL_IMPERSONATION_ENABLE && (userId != user.getUserId()) && !themeDisplay.isImpersonated() && UserPermissionUtil.contains(permissionChecker, userId, ActionKeys.IMPERSONATE) %>">
 				<liferay-security:doAsURL
 					doAsUserId="<%= userId %>"

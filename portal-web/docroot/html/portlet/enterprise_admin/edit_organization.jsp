@@ -36,7 +36,7 @@ long parentOrganizationId = ParamUtil.getLong(request, "parentOrganizationId");
 
 boolean editable = false;
 
-if (portletName.equals(PortletKeys.ENTERPRISE_ADMIN) || portletName.equals(PortletKeys.ORGANIZATION_ADMIN)) {
+if (portletName.equals(PortletKeys.ENTERPRISE_ADMIN) || portletName.equals(PortletKeys.ORGANIZATION_ADMIN) || portletName.equals(PortletKeys.ENTERPRISE_USERS_ADMIN) || portletName.equals(PortletKeys.ENTERPRISE_ORGANIZATIONS_ADMIN)) {
 	editable = true;
 
 	if (!OrganizationPermissionUtil.contains(permissionChecker, organizationId, ActionKeys.UPDATE)) {
