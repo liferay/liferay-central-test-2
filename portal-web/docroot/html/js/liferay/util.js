@@ -269,11 +269,6 @@ Liferay.Util = {
 		);
 	},
 
-	uncamelize: function(value, separator) {
-		separator = separator || " ";
-		return value.replace(/(([a-zA-Z])([A-Z])([a-z]))/g, ["$2", separator, "$3$4"].join("")).replace(/(([a-z])([A-Z]))/g, ["$2", separator, "$3"].join(""));
-	},
-
 	disableElements: function(obj) {
 		var el = jQuery(obj);
 		var children = el.find('*');
@@ -1085,6 +1080,15 @@ Liferay.Util = {
 				);
 			}
 		);
+	},
+
+	uncamelize: function(value, separator) {
+		separator = separator || ' ';
+
+		value = value.replace(/([a-zA-Z])([A-Z])([a-z])/g, '$1' + separator + '$2$3');
+		value = value.replace(/([a-z])([A-Z])/g, '$1' + separator + '$2');
+
+		return value;
 	},
 
 	viewport: {
