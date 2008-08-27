@@ -262,7 +262,7 @@
 	position: absolute;
 	top: -19px;
 	width: 36px;
-	z-index: 550;
+	z-index: 430;
 }
 
 .portlet-tags-admin #vocabulary-entry-messages {
@@ -296,7 +296,7 @@
 	cursor: pointer;
 }
 
-.portlet-tags-admin .treeview li, .portlet-tags-admin .treeview li.lastCollapsable, .treeview li.lastExpandable {
+.portlet-tags-admin .treeview li, .portlet-tags-admin .treeview li.lastCollapsable, .portlet-tags-admin .treeview li.lastExpandable {
 	background-image: none !important;
 }
 
