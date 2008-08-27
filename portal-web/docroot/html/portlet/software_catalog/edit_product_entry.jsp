@@ -39,7 +39,7 @@ if ((productEntry != null) && (request.getParameterValues("licenses") == null)) 
 	Iterator itr = productEntry.getLicenses().iterator();
 
 	while (itr.hasNext()) {
-		SCLicense license = (SCLicense) itr.next();
+		SCLicense license = (SCLicense)itr.next();
 
 		licenseIds.add(new Long(license.getLicenseId()));
 	}
@@ -135,7 +135,7 @@ int screenshotsCount = ParamUtil.getInteger(request, "screenshotsCount", product
 				Iterator itr = SCLicenseLocalServiceUtil.getLicenses(true, true).iterator();
 
 				while (itr.hasNext()) {
-					SCLicense license = (SCLicense) itr.next();
+					SCLicense license = (SCLicense)itr.next();
 				%>
 
 					<option <%= licenseIds.contains(new Long(license.getLicenseId())) ? "selected" : "" %> value="<%= license.getLicenseId() %>"><%= license.getName() %></option>
@@ -152,7 +152,7 @@ int screenshotsCount = ParamUtil.getInteger(request, "screenshotsCount", product
 				itr = SCLicenseLocalServiceUtil.getLicenses(true, false).iterator();
 
 				while (itr.hasNext()) {
-					SCLicense license = (SCLicense) itr.next();
+					SCLicense license = (SCLicense)itr.next();
 				%>
 
 					<option <%= licenseIds.contains(new Long(license.getLicenseId())) ? "selected" : "" %> value="<%= license.getLicenseId() %>"><%= license.getName() %></option>

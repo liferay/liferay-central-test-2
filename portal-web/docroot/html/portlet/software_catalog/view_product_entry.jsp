@@ -92,7 +92,7 @@ viewProductEntryURL.setParameter("productEntryId", String.valueOf(productEntryId
 		Iterator itr = productEntry.getLicenses().iterator();
 
 		while (itr.hasNext()) {
-			SCLicense license = (SCLicense) itr.next();
+			SCLicense license = (SCLicense)itr.next();
 		%>
 
 			<a href="<%= license.getUrl() %>" target="_blank"><%= license.getName() %></a><c:if test="<%= itr.hasNext() %>">, </c:if>
