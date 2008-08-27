@@ -15,12 +15,17 @@ var LayoutConfiguration = {
 			instance.categories = menu.find('.lfr-content-category');
 			instance.categoryContainers = menu.find('.lfr-add-content');
 
+			var uncamelize = function(value) {
+				return value.replace(/(([a-zA-Z])([A-Z])([a-z]))/g, "$2 $3$4").replace(/(([a-z])([A-Z]))/g, "$2 $3");
+			};
+
 			var searchField = jQuery('#layout_configuration_content');
 				searchField.liveSearch(
 					{
 						list: instance.portlets,
 						data: function() {
-							return jQuery(this).attr('id').toLowerCase();
+							var value = jQuery(this).attr('id');
+							return uncamelize(value).toLowerCase();
 						},
 						show: function() {
 							var portlet = jQuery(this);
@@ -40,7 +45,8 @@ var LayoutConfiguration = {
 					{
 						list: instance.categoryContainers,
 						data: function() {
-							return jQuery(this).attr('id').toLowerCase();
+							var value = jQuery(this).attr('id');
+							return uncamelize(value).toLowerCase();
 						},
 						after: function() {
 							if (!this.term) {
