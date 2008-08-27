@@ -39,9 +39,16 @@ if (!request.isRequestedSessionIdFromCookie()) {
 }
 %>
 
+<%
+response.setStatus(HttpServletResponse.SC_MOVED_PERMANENTLY);
+response.setHeader( "Location", mainPath );
+response.setHeader( "Connection", "close" );
+%>
+
 <html>
 <head>
 	<title></title>
+
 	<meta content="1; url=<%= PortalUtil.getPathMain() %>" http-equiv="refresh" />
 </head>
 
