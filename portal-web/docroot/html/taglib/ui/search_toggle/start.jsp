@@ -46,7 +46,7 @@
 
 		jQuery.ajax(
 			{
-				url: 'portal/session_click',
+				url: '<%= themeDisplay.getPathMain() %>/portal/session_click',
 				data: {
 					'<%= id %>': <%= id %>curClickValue
 				}
