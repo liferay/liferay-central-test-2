@@ -54,6 +54,12 @@ Liferay.Menu = new Class({
 							menu.appendTo('body');
 							menu.hide();
 
+							Liferay.Util.createFlyouts(
+								{
+									container: menu[0]
+								}
+							);
+
 							trigger.data('lfr-menu-list', menu);
 						}
 
