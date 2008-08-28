@@ -7042,7 +7042,7 @@ Liferay.PortletURL = new Class({
 	setPlid: function(plid) {
 		var instance = this;
 
-		instance.options.plid = plid;
+		instance.options.p_l_id = plid;
 	},
 
 	setPortletConfiguration: function(portletConfiguration) {
