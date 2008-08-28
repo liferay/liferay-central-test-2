@@ -24,59 +24,59 @@
 <%@ include file="/html/portal/init.jsp" %>
 
 <c:if test="<%= !themeDisplay.isStateExclusive() && !themeDisplay.isStatePopUp() %>">
-<table class="lfr-panel <%= (!layoutTypePortlet.hasStateMax()) ? "panel-frontpage" : "panel-application" %>" width="100%">
-<tr>
-	<td class="panel-menu" valign="top" width="200">
-		<liferay-portlet:runtime portletName="87" />
-	</td>
-	<td class="panel-content" valign="top">
+	<table class="lfr-panel <%= (!layoutTypePortlet.hasStateMax()) ? "panel-frontpage" : "panel-application" %>" width="100%">
+	<tr>
+		<td class="panel-menu" valign="top" width="200">
+			<liferay-portlet:runtime portletName="87" />
+		</td>
+		<td class="panel-content" valign="top">
 </c:if>
 
-		<%
-		if (themeDisplay.isStateExclusive() || themeDisplay.isStatePopUp() || layoutTypePortlet.hasStateMax()) {
-			String ppid = ParamUtil.getString(request, "p_p_id");
+<%
+if (themeDisplay.isStateExclusive() || themeDisplay.isStatePopUp() || layoutTypePortlet.hasStateMax()) {
+	String ppid = ParamUtil.getString(request, "p_p_id");
 
-			String content = null;
+	String content = null;
 
-			if (themeDisplay.isStateExclusive()) {
-				content = LayoutTemplateLocalServiceUtil.getContent("exclusive", true, theme.getThemeId());
-			}
-			else if (themeDisplay.isStatePopUp()) {
-				content = LayoutTemplateLocalServiceUtil.getContent("pop_up", true, theme.getThemeId());
-			}
-			else {
-				ppid = StringUtil.split(layoutTypePortlet.getStateMax())[0];
+	if (themeDisplay.isStateExclusive()) {
+		content = LayoutTemplateLocalServiceUtil.getContent("exclusive", true, theme.getThemeId());
+	}
+	else if (themeDisplay.isStatePopUp()) {
+		content = LayoutTemplateLocalServiceUtil.getContent("pop_up", true, theme.getThemeId());
+	}
+	else {
+		ppid = StringUtil.split(layoutTypePortlet.getStateMax())[0];
 
-				content = LayoutTemplateLocalServiceUtil.getContent("max", true, theme.getThemeId());
-			}
-		%>
+		content = LayoutTemplateLocalServiceUtil.getContent("max", true, theme.getThemeId());
+	}
+%>
 
-			<%= RuntimePortletUtil.processTemplate(application, request, response, pageContext, ppid, content) %>
+	<%= RuntimePortletUtil.processTemplate(application, request, response, pageContext, ppid, content) %>
 
-		<%
-		}
-		else {
-			String description = layout.getTypeSettingsProperties().getProperty("description");
+<%
+}
+else {
+	String description = layout.getTypeSettingsProperties().getProperty("description");
 
-			if (Validator.isNull(description)) {
-				description = LanguageUtil.get(pageContext, "please-select-a-tool-from-the-left-menu");
-			}
-		%>
+	if (Validator.isNull(description)) {
+		description = LanguageUtil.get(pageContext, "please-select-a-tool-from-the-left-menu");
+	}
+%>
 
-			<h2>
-				<%= layout.getName(locale) %>
-			</h2>
+	<h2>
+		<%= layout.getName(locale) %>
+	</h2>
 
-			<div class="portlet-msg-info">
-				<%= description %>
-			</div>
+	<div class="portlet-msg-info">
+		<%= description %>
+	</div>
 
-		<%
-		}
-		%>
+<%
+}
+%>
 
 <c:if test="<%= !themeDisplay.isStateExclusive() && !themeDisplay.isStatePopUp() %>">
-	</td>
-</tr>
-</table>
+		</td>
+	</tr>
+	</table>
 </c:if>
