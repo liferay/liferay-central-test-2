@@ -53,8 +53,8 @@ import com.liferay.portal.model.LayoutTypePortlet;
 import com.liferay.portal.model.Portlet;
 import com.liferay.portal.model.PortletApp;
 import com.liferay.portal.model.PortletPreferencesIds;
-import com.liferay.portal.service.PortletLocalServiceUtil;
 import com.liferay.portal.service.PortletPreferencesLocalServiceUtil;
+import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.WebKeys;
 import com.liferay.portlet.PortletPreferencesFactoryUtil;
 import com.liferay.portlet.PortletPreferencesWrapper;
@@ -437,13 +437,26 @@ public class PortletWindowContextImpl implements PortletWindowContext {
 		throws PortletWindowContextException {
 
 		List<Portlet> portlets = new ArrayList<Portlet>();
+		ThemeDisplay themeDisplay = (ThemeDisplay)_request.getAttribute(
+			WebKeys.THEME_DISPLAY);
 
-		for (Portlet portlet : PortletLocalServiceUtil.getPortlets()) {
-			PortletApp portletApp = portlet.getPortletApp();
+		try {
+			List<Layout> layouts = themeDisplay.getLayouts();
 
-			if (portletApp.isWARFile() || portlet.isRemote()) {
-				portlets.add(portlet);
+			for(Layout layout : layouts) {
+				LayoutTypePortlet layoutTypePortlet =
+					(LayoutTypePortlet)layout.getLayoutType();
+
+					for (Portlet portlet : layoutTypePortlet.getAllPortlets()) {
+						PortletApp portletApp = portlet.getPortletApp();
+
+						if (portletApp.isWARFile() || portlet.isRemote()) {
+							portlets.add(portlet);
+						}
+					}
 			}
+		} catch (SystemException se) {
+			throw new PortletWindowContextException(se);
 		}
 
 		return portlets;
