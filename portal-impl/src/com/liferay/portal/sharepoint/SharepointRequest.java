@@ -47,8 +47,8 @@ public class SharepointRequest {
 		_user = user;
 	}
 
-	public SharepointStorage getSharepointStorage() {
-		return _storage;
+	public long getCompanyId() {
+		return _user.getCompanyId();
 	}
 
 	public HttpServletRequest getHttpServletRequest() {
@@ -59,12 +59,16 @@ public class SharepointRequest {
 		return _response;
 	}
 
+	public String getParameter(String name) {
+		return _request.getParameter(name);
+	}
+
 	public String getRootPath() {
 		return _rootPath;
 	}
 
-	public long getCompanyId() {
-		return _user.getCompanyId();
+	public SharepointStorage getSharepointStorage() {
+		return _storage;
 	}
 
 	public User getUser() {
@@ -73,10 +77,6 @@ public class SharepointRequest {
 
 	public long getUserId() {
 		return _user.getUserId();
-	}
-
-	public String getParameter(String name) {
-		return _request.getParameter(name);
 	}
 
 	private SharepointStorage _storage;

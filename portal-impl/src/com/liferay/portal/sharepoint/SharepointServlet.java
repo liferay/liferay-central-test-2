@@ -30,9 +30,6 @@ import com.liferay.portal.sharepoint.methods.MethodFactory;
 import com.liferay.portal.util.WebKeys;
 import com.liferay.util.servlet.ServletResponseUtil;
 
-import java.io.IOException;
-
-import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -49,8 +46,7 @@ import org.apache.commons.logging.LogFactory;
 public class SharepointServlet extends HttpServlet {
 
 	protected void doGet(
-			HttpServletRequest request,	HttpServletResponse response)
-		throws IOException, ServletException {
+		HttpServletRequest request,	HttpServletResponse response) {
 
 		try {
 			String uri = request.getRequestURI();
@@ -65,8 +61,7 @@ public class SharepointServlet extends HttpServlet {
 	}
 
 	protected void doPost(
-			HttpServletRequest request, HttpServletResponse response)
-		throws IOException, ServletException {
+		HttpServletRequest request, HttpServletResponse response) {
 
 		try {
 			String uri = request.getRequestURI();
@@ -94,9 +89,7 @@ public class SharepointServlet extends HttpServlet {
 		}
 	}
 
-	protected SharepointStorage getStorage(String path)
-		throws SharepointException {
-
+	protected SharepointStorage getStorage(String path) {
 		String storageClass = null;
 
 		if (path == null) {

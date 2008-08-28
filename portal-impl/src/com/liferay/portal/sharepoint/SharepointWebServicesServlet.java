@@ -25,9 +25,6 @@ package com.liferay.portal.sharepoint;
 import com.liferay.portal.kernel.util.ContentTypes;
 import com.liferay.util.servlet.ServletResponseUtil;
 
-import java.io.IOException;
-
-import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -45,8 +42,7 @@ import org.apache.commons.logging.LogFactory;
 public class SharepointWebServicesServlet extends HttpServlet {
 
 	protected void doPost(
-			HttpServletRequest request, HttpServletResponse response)
-		throws IOException, ServletException {
+		HttpServletRequest request, HttpServletResponse response) {
 
 		try {
 			String uri = request.getRequestURI();
