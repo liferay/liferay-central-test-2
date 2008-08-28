@@ -173,8 +173,6 @@ Liferay.PortletURL = new Class({
 	}
 });
 
-// Static methods
-
 jQuery.extend(
 	Liferay.PortletURL,
 	{
