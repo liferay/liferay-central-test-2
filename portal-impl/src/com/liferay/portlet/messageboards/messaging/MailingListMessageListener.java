@@ -38,6 +38,7 @@ import com.liferay.portlet.messageboards.service.MBMessageLocalServiceUtil;
 import com.liferay.portlet.messageboards.service.MBMessageServiceUtil;
 import com.liferay.portlet.messageboards.util.MBMailMessage;
 import com.liferay.portlet.messageboards.util.MBUtil;
+import com.liferay.portlet.messageboards.util.MailingListThreadLocal;
 import com.liferay.util.mail.MailEngine;
 
 import javax.mail.Address;
@@ -204,6 +205,8 @@ public class MailingListMessageListener implements MessageListener {
 		MBUtil.collectPartContent(mailMessage, collector);
 
 		PermissionCheckerUtil.setThreadValues(user);
+
+		MailingListThreadLocal.setSourceMailingList(true);
 
 		if (parentMessage == null) {
 			MBMessageServiceUtil.addMessage(
