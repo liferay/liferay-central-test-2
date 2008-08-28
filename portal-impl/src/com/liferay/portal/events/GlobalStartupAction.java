@@ -256,14 +256,14 @@ public class GlobalStartupAction extends SimpleAction {
 
 		// Message boards mailing list
 
-		Destination messageBoardMailingListReaderDestination =
+		Destination messageBoardsMailingListDestination =
 			new ParallelDestination(
 				DestinationNames.MESSAGE_BOARDS_MAILING_LIST);
 
-		MessageBusUtil.addDestination(messageBoardMailingListReaderDestination);
+		MessageBusUtil.addDestination(messageBoardsMailingListDestination);
 
 		MessageBusUtil.registerMessageListener(
-			messageBoardMailingListReaderDestination.getName(),
+			messageBoardsMailingListDestination.getName(),
 			new MailingListMessageListener());
 
 		// Wiki
