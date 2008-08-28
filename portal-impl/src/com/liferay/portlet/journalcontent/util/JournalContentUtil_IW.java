@@ -44,9 +44,23 @@ public class JournalContentUtil_IW {
 
 	public java.lang.String getContent(long groupId,
 		java.lang.String articleId, java.lang.String languageId,
+		java.lang.String xmlRequest) {
+		return JournalContentUtil.getContent(groupId, articleId, languageId,
+			xmlRequest);
+	}
+
+	public java.lang.String getContent(long groupId,
+		java.lang.String articleId, java.lang.String languageId,
 		com.liferay.portal.theme.ThemeDisplay themeDisplay) {
 		return JournalContentUtil.getContent(groupId, articleId, languageId,
 			themeDisplay);
+	}
+
+	public java.lang.String getContent(long groupId,
+		java.lang.String articleId, java.lang.String templateId,
+		java.lang.String languageId, java.lang.String xmlRequest) {
+		return JournalContentUtil.getContent(groupId, articleId, templateId,
+			languageId, xmlRequest);
 	}
 
 	public java.lang.String getContent(long groupId,
@@ -64,6 +78,27 @@ public class JournalContentUtil_IW {
 		java.lang.String xmlRequest) {
 		return JournalContentUtil.getContent(groupId, articleId, templateId,
 			languageId, themeDisplay, xmlRequest);
+	}
+
+	public com.liferay.portlet.journal.model.JournalArticleDisplay getDisplay(
+		long groupId, java.lang.String articleId, java.lang.String languageId,
+		java.lang.String xmlRequest) {
+		return JournalContentUtil.getDisplay(groupId, articleId, languageId,
+			xmlRequest);
+	}
+
+	public com.liferay.portlet.journal.model.JournalArticleDisplay getDisplay(
+		long groupId, java.lang.String articleId, java.lang.String languageId,
+		com.liferay.portal.theme.ThemeDisplay themeDisplay) {
+		return JournalContentUtil.getDisplay(groupId, articleId, languageId,
+			themeDisplay);
+	}
+
+	public com.liferay.portlet.journal.model.JournalArticleDisplay getDisplay(
+		long groupId, java.lang.String articleId, java.lang.String templateId,
+		java.lang.String languageId, java.lang.String xmlRequest) {
+		return JournalContentUtil.getDisplay(groupId, articleId, templateId,
+			languageId, xmlRequest);
 	}
 
 	public com.liferay.portlet.journal.model.JournalArticleDisplay getDisplay(

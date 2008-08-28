@@ -75,10 +75,25 @@ public class JournalContentUtil {
 	}
 
 	public static String getContent(
+		long groupId, String articleId, String languageId, String xmlRequest) {
+
+		return getContent(
+			groupId, articleId, null, languageId, null, xmlRequest);
+	}
+
+	public static String getContent(
 		long groupId, String articleId, String languageId,
 		ThemeDisplay themeDisplay) {
 
 		return getContent(groupId, articleId, null, languageId, themeDisplay);
+	}
+
+	public static String getContent(
+		long groupId, String articleId, String templateId, String languageId,
+		String xmlRequest) {
+
+		return getContent(
+			groupId, articleId, templateId, languageId, null, xmlRequest);
 	}
 
 	public static String getContent(
@@ -102,6 +117,29 @@ public class JournalContentUtil {
 		else {
 			return null;
 		}
+	}
+
+	public static JournalArticleDisplay getDisplay(
+		long groupId, String articleId, String languageId, String xmlRequest) {
+
+		return getDisplay(
+			groupId, articleId, null, languageId, null, 1, xmlRequest);
+	}
+
+	public static JournalArticleDisplay getDisplay(
+		long groupId, String articleId, String languageId,
+		ThemeDisplay themeDisplay) {
+
+		return getDisplay(
+			groupId, articleId, null, languageId, themeDisplay, 1, null);
+	}
+
+	public static JournalArticleDisplay getDisplay(
+		long groupId, String articleId, String templateId, String languageId,
+		String xmlRequest) {
+
+		return getDisplay(
+			groupId, articleId, templateId, languageId, null, 1, xmlRequest);
 	}
 
 	public static JournalArticleDisplay getDisplay(
