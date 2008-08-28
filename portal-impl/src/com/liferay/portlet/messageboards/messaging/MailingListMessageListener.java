@@ -49,6 +49,7 @@ import javax.mail.MessagingException;
 import javax.mail.Session;
 import javax.mail.Store;
 import javax.mail.URLName;
+import javax.mail.internet.InternetAddress;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -154,7 +155,12 @@ public class MailingListMessageListener implements MessageListener {
 		Address[] addresses = mailMessage.getFrom();
 
 		if ((addresses != null) && (addresses.length > 0)) {
-			from = addresses[0].toString();
+			Address address = addresses[0];
+			if (address instanceof InternetAddress) {
+				from = ((InternetAddress)address).getAddress();
+			} else {
+				from = address.toString();
+			}
 		}
 
 		Company company = CompanyLocalServiceUtil.getCompany(
