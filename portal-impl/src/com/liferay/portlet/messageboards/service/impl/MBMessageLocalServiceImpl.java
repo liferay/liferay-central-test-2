@@ -75,7 +75,6 @@ import com.liferay.portlet.messageboards.service.base.MBMessageLocalServiceBaseI
 import com.liferay.portlet.messageboards.social.MBActivityKeys;
 import com.liferay.portlet.messageboards.util.Indexer;
 import com.liferay.portlet.messageboards.util.MBUtil;
-import com.liferay.portlet.messageboards.util.MailingListThreadLocal;
 import com.liferay.portlet.messageboards.util.comparator.MessageThreadComparator;
 import com.liferay.portlet.messageboards.util.comparator.ThreadLastPostDateComparator;
 
@@ -1591,8 +1590,6 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 		jsonObj.put("mailId", mailId);
 		jsonObj.put("inReplyTo", inReplyTo);
 		jsonObj.put("htmlFormat", htmlFormat);
-		jsonObj.put(
-			"mailingListSource", MailingListThreadLocal.isSourceMailingList());
 
 		MessageBusUtil.sendMessage(
 			DestinationNames.MESSAGE_BOARDS, jsonObj.toString());
