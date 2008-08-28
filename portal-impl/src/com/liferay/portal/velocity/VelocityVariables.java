@@ -71,6 +71,9 @@ import com.liferay.portlet.expando.service.ExpandoColumnLocalService;
 import com.liferay.portlet.expando.service.ExpandoRowLocalService;
 import com.liferay.portlet.expando.service.ExpandoTableLocalService;
 import com.liferay.portlet.expando.service.ExpandoValueLocalService;
+import com.liferay.portlet.journalcontent.util.JournalContentUtil_IW;
+
+import com.liferay.util.portlet.PortletRequestUtil;
 
 import java.util.List;
 import java.util.Map;
@@ -178,6 +181,11 @@ public class VelocityVariables {
 		// Iterator tool
 
 		velocityContext.put("iteratorTool", new IteratorTool());
+
+		// Journal Content util
+
+		velocityContext.put(
+			"journalContentUtil", JournalContentUtil_IW.getInstance());
 
 		// Language util
 
@@ -348,6 +356,13 @@ public class VelocityVariables {
 			if (portletResponse instanceof RenderResponse) {
 				velocityContext.put("renderResponse", portletResponse);
 			}
+		}
+
+		if ((portletRequest != null) && (portletResponse != null)) {
+			String xmlRequest = PortletRequestUtil.toXML(
+				portletRequest, portletResponse);
+
+			velocityContext.put("xmlRequest", xmlRequest);
 		}
 
 		// Theme display

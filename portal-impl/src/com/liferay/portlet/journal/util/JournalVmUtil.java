@@ -93,6 +93,7 @@ public class JournalVmUtil {
 				context.put(node.getName(), node);
 			}
 
+			context.put("xmlRequest", root.element("request").asXML());
 			context.put(
 				"request", _insertRequestVariables(root.element("request")));
 

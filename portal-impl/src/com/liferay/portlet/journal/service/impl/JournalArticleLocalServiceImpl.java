@@ -1071,7 +1071,7 @@ public class JournalArticleLocalServiceImpl
 		boolean cacheable = true;
 
 		Map<String, String> tokens = JournalUtil.getTokens(
-			groupId, themeDisplay);
+			groupId, themeDisplay, xmlRequest);
 
 		tokens.put(
 			"article_resource_pk",

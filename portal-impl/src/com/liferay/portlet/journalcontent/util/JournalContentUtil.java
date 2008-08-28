@@ -85,6 +85,14 @@ public class JournalContentUtil {
 		long groupId, String articleId, String templateId, String languageId,
 		ThemeDisplay themeDisplay) {
 
+		return getContent(
+			groupId, articleId, templateId, languageId, themeDisplay, null);
+	}
+
+	public static String getContent(
+		long groupId, String articleId, String templateId, String languageId,
+		ThemeDisplay themeDisplay, String xmlRequest) {
+
 		JournalArticleDisplay articleDisplay = getDisplay(
 			groupId, articleId, templateId, languageId, themeDisplay);
 

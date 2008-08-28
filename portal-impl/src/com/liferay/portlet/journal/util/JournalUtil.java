@@ -34,6 +34,7 @@ import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Time;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.kernel.xml.Document;
+import com.liferay.portal.kernel.xml.DocumentException;
 import com.liferay.portal.kernel.xml.Element;
 import com.liferay.portal.kernel.xml.Node;
 import com.liferay.portal.kernel.xml.SAXReaderUtil;
@@ -632,39 +633,90 @@ public class JournalUtil {
 	public static Map<String, String> getTokens(
 		long groupId, ThemeDisplay themeDisplay) {
 
+		return getTokens(groupId, themeDisplay, null);
+	}
+
+	public static Map<String, String> getTokens(
+		long groupId, ThemeDisplay themeDisplay, String xmlRequest) {
+
 		Map<String, String> tokens = new HashMap<String, String>();
 
-		if (themeDisplay == null) {
-			return tokens;
+		if (themeDisplay != null) {
+			tokens.put("cdn_host", themeDisplay.getCDNHost());
+			tokens.put("company_id", String.valueOf(themeDisplay.getCompanyId()));
+			tokens.put("group_id", String.valueOf(groupId));
+			tokens.put("cms_url", themeDisplay.getPathContext() + "/cms/servlet");
+			tokens.put("image_path", themeDisplay.getPathImage());
+			tokens.put(
+				"friendly_url_private_group",
+				themeDisplay.getPathFriendlyURLPrivateGroup());
+			tokens.put(
+				"friendly_url_private_user",
+				themeDisplay.getPathFriendlyURLPrivateUser());
+			tokens.put(
+				"friendly_url_public", themeDisplay.getPathFriendlyURLPublic());
+			tokens.put("main_path", themeDisplay.getPathMain());
+			tokens.put("portal_ctx", themeDisplay.getPathContext());
+			tokens.put(
+				"portal_url", HttpUtil.removeProtocol(themeDisplay.getURLPortal()));
+			tokens.put("root_path", themeDisplay.getPathContext());
+			tokens.put("theme_image_path", themeDisplay.getPathThemeImages());
+
+			// Deprecated tokens
+
+			tokens.put("friendly_url", themeDisplay.getPathFriendlyURLPublic());
+			tokens.put(
+				"friendly_url_private",
+				themeDisplay.getPathFriendlyURLPrivateGroup());
+			tokens.put("page_url", themeDisplay.getPathFriendlyURLPublic());
 		}
+		else if (Validator.isNotNull(xmlRequest)) {
+			try {
+				Document request = SAXReaderUtil.read(xmlRequest);
 
-		tokens.put("cdn_host", themeDisplay.getCDNHost());
-		tokens.put("company_id", String.valueOf(themeDisplay.getCompanyId()));
-		tokens.put("group_id", String.valueOf(groupId));
-		tokens.put("cms_url", themeDisplay.getPathContext() + "/cms/servlet");
-		tokens.put("image_path", themeDisplay.getPathImage());
-		tokens.put(
-			"friendly_url_private_group",
-			themeDisplay.getPathFriendlyURLPrivateGroup());
-		tokens.put(
-			"friendly_url_private_user",
-			themeDisplay.getPathFriendlyURLPrivateUser());
-		tokens.put(
-			"friendly_url_public", themeDisplay.getPathFriendlyURLPublic());
-		tokens.put("main_path", themeDisplay.getPathMain());
-		tokens.put("portal_ctx", themeDisplay.getPathContext());
-		tokens.put(
-			"portal_url", HttpUtil.removeProtocol(themeDisplay.getURLPortal()));
-		tokens.put("root_path", themeDisplay.getPathContext());
-		tokens.put("theme_image_path", themeDisplay.getPathThemeImages());
+				Element themeDisplayEl = request.getRootElement().element(
+					"theme-display");
 
-		// Deprecated tokens
+				tokens.put("cdn_host", themeDisplayEl.elementText("cdn-host"));
+				tokens.put(
+					"company_id", themeDisplayEl.elementText("company-id"));
+				tokens.put("group_id", themeDisplayEl.elementText("group-id"));
+				tokens.put("cms_url", themeDisplayEl.elementText("cms-url"));
+				tokens.put(
+					"image_path", themeDisplayEl.elementText("image-path"));
+				tokens.put(
+					"friendly_url_private_group",
+					themeDisplayEl.elementText("friendly-url-private-group"));
+				tokens.put(
+					"friendly_url_private_user",
+					themeDisplayEl.elementText("friendly-url-private-user"));
+				tokens.put(
+					"friendly_url_public",
+					themeDisplayEl.elementText("friendly-url-public"));
+				tokens.put(
+					"main_path", themeDisplayEl.elementText("main-path"));
+				tokens.put(
+					"portal_ctx", themeDisplayEl.elementText("portal-ctx"));
+				tokens.put(
+					"portal_url", themeDisplayEl.elementText("portal-url"));
+				tokens.put(
+					"root_path", themeDisplayEl.elementText("root-path"));
+				tokens.put(
+					"theme_image_path",
+					themeDisplayEl.elementText("theme-image-path"));
 
-		tokens.put("friendly_url", themeDisplay.getPathFriendlyURLPublic());
-		tokens.put(
-			"friendly_url_private",
-			themeDisplay.getPathFriendlyURLPrivateGroup());
-		tokens.put("page_url", themeDisplay.getPathFriendlyURLPublic());
+				// Deprecated tokens
+
+				tokens.put(
+					"friendly_url", themeDisplayEl.elementText("friendly-url"));
+				tokens.put(
+					"friendly_url_private",
+					themeDisplayEl.elementText("friendly-url-private"));
+				tokens.put("page_url", themeDisplayEl.elementText("page-url"));
+			}
+			catch (DocumentException de) {
+			}
+		}
 
 		return tokens;
 	}

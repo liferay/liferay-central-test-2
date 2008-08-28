@@ -23,11 +23,14 @@
 package com.liferay.util.portlet;
 
 import com.liferay.portal.kernel.portlet.LiferayWindowState;
+import com.liferay.portal.kernel.util.HttpUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;
+import com.liferay.portal.kernel.util.WebKeys;
 import com.liferay.portal.kernel.xml.Document;
 import com.liferay.portal.kernel.xml.Element;
 import com.liferay.portal.kernel.xml.SAXReaderUtil;
+import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.util.xml.DocUtil;
 
 import java.io.IOException;
@@ -91,6 +94,15 @@ public class PortletRequestUtil {
 
 		if (portletResponse instanceof RenderResponse) {
 			_renderResponseToXML((RenderResponse)portletResponse, reqEl);
+		}
+		
+		ThemeDisplay themeDisplay = (ThemeDisplay)portletRequest.getAttribute(
+			WebKeys.THEME_DISPLAY);
+		
+		if (themeDisplay != null) {
+			Element themeDisplayEl = reqEl.addElement("theme-display");
+			
+			_themeDisplayToXML(themeDisplay, themeDisplayEl);
 		}
 
 		Element parametersEl = reqEl.addElement("parameters");
@@ -244,6 +256,58 @@ public class PortletRequestUtil {
 		}
 		catch (WindowStateException wse) {
 		}
+	}
+	
+	private static void _themeDisplayToXML(
+		ThemeDisplay themeDisplay, Element themeDisplayEl) {
+		
+		DocUtil.add(themeDisplayEl, "cdn-host", themeDisplay.getCDNHost());
+		DocUtil.add(
+			themeDisplayEl, "company-id", 
+			String.valueOf(themeDisplay.getCompanyId()));
+		
+		if (themeDisplay.getLayout() != null) {
+			DocUtil.add(
+				themeDisplayEl, "group-id", 
+				String.valueOf(themeDisplay.getLayout().getGroupId()));
+		}
+		DocUtil.add(
+			themeDisplayEl, "cms-url", 
+			themeDisplay.getPathContext() + "/cms/servlet");
+		DocUtil.add(
+			themeDisplayEl, "image-path", themeDisplay.getPathImage());
+		DocUtil.add(
+			themeDisplayEl, "friendly-url-private-group", 
+			themeDisplay.getPathFriendlyURLPrivateGroup());
+		DocUtil.add(
+			themeDisplayEl, "friendly-url-private_user", 
+			themeDisplay.getPathFriendlyURLPrivateUser());
+		DocUtil.add(
+			themeDisplayEl, "friendly-url-public", 
+			themeDisplay.getPathFriendlyURLPublic());
+		DocUtil.add(
+			themeDisplayEl, "main-path", themeDisplay.getPathMain());
+		DocUtil.add(
+			themeDisplayEl, "portal-url", 
+			HttpUtil.removeProtocol(themeDisplay.getURLPortal()));
+		DocUtil.add(
+			themeDisplayEl, "root-path", themeDisplay.getPathContext());
+		DocUtil.add(
+			themeDisplayEl, "theme-image-path", 
+			themeDisplay.getPathThemeImages());
+		DocUtil.add(themeDisplayEl, "cdn-host", themeDisplay.getCDNHost());
+
+		// Deprecated tokens
+
+		DocUtil.add(
+			themeDisplayEl, "friendly-url", 
+			themeDisplay.getPathFriendlyURLPublic());
+		DocUtil.add(themeDisplayEl, 
+			"friendly-url-private",
+			themeDisplay.getPathFriendlyURLPrivateGroup());
+		DocUtil.add(
+			themeDisplayEl, "page-url", 
+			themeDisplay.getPathFriendlyURLPublic());		
 	}
 
 	private static boolean _isValidAttributeName(String name) {
