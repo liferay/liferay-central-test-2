@@ -72,7 +72,6 @@ import com.liferay.portlet.expando.service.ExpandoRowLocalService;
 import com.liferay.portlet.expando.service.ExpandoTableLocalService;
 import com.liferay.portlet.expando.service.ExpandoValueLocalService;
 import com.liferay.portlet.journalcontent.util.JournalContentUtil_IW;
-
 import com.liferay.util.portlet.PortletRequestUtil;
 
 import java.util.List;
@@ -173,7 +172,7 @@ public class VelocityVariables {
 
 		velocityContext.put("httpUtil", HttpUtil.getHttp());
 
-		// ImageServletToken
+		// Image servlet token
 
 		velocityContext.put(
 			"imageToken", ImageServletTokenUtil.getImageServletToken());
@@ -182,7 +181,7 @@ public class VelocityVariables {
 
 		velocityContext.put("iteratorTool", new IteratorTool());
 
-		// Journal Content util
+		// Journal content util
 
 		velocityContext.put(
 			"journalContentUtil", JournalContentUtil_IW.getInstance());
@@ -357,6 +356,8 @@ public class VelocityVariables {
 				velocityContext.put("renderResponse", portletResponse);
 			}
 		}
+
+		// XML request
 
 		if ((portletRequest != null) && (portletResponse != null)) {
 			String xmlRequest = PortletRequestUtil.toXML(

@@ -95,13 +95,13 @@ public class PortletRequestUtil {
 		if (portletResponse instanceof RenderResponse) {
 			_renderResponseToXML((RenderResponse)portletResponse, reqEl);
 		}
-		
+
 		ThemeDisplay themeDisplay = (ThemeDisplay)portletRequest.getAttribute(
 			WebKeys.THEME_DISPLAY);
-		
+
 		if (themeDisplay != null) {
 			Element themeDisplayEl = reqEl.addElement("theme-display");
-			
+
 			_themeDisplayToXML(themeDisplay, themeDisplayEl);
 		}
 
@@ -257,57 +257,31 @@ public class PortletRequestUtil {
 		catch (WindowStateException wse) {
 		}
 	}
-	
+
 	private static void _themeDisplayToXML(
 		ThemeDisplay themeDisplay, Element themeDisplayEl) {
-		
+
 		DocUtil.add(themeDisplayEl, "cdn-host", themeDisplay.getCDNHost());
+		DocUtil.add(themeDisplayEl, "company-id", themeDisplay.getCompanyId());
 		DocUtil.add(
-			themeDisplayEl, "company-id", 
-			String.valueOf(themeDisplay.getCompanyId()));
-		
-		if (themeDisplay.getLayout() != null) {
-			DocUtil.add(
-				themeDisplayEl, "group-id", 
-				String.valueOf(themeDisplay.getLayout().getGroupId()));
-		}
+			themeDisplayEl, "path-context", themeDisplay.getPathContext());
 		DocUtil.add(
-			themeDisplayEl, "cms-url", 
-			themeDisplay.getPathContext() + "/cms/servlet");
-		DocUtil.add(
-			themeDisplayEl, "image-path", themeDisplay.getPathImage());
-		DocUtil.add(
-			themeDisplayEl, "friendly-url-private-group", 
+			themeDisplayEl, "path-friendly-url-private-group",
 			themeDisplay.getPathFriendlyURLPrivateGroup());
 		DocUtil.add(
-			themeDisplayEl, "friendly-url-private_user", 
+			themeDisplayEl, "path-friendly-url-private-user",
 			themeDisplay.getPathFriendlyURLPrivateUser());
 		DocUtil.add(
-			themeDisplayEl, "friendly-url-public", 
+			themeDisplayEl, "path-friendly-url-public",
 			themeDisplay.getPathFriendlyURLPublic());
+		DocUtil.add(themeDisplayEl, "path-image", themeDisplay.getPathImage());
+		DocUtil.add(themeDisplayEl, "path-main", themeDisplay.getPathMain());
 		DocUtil.add(
-			themeDisplayEl, "main-path", themeDisplay.getPathMain());
-		DocUtil.add(
-			themeDisplayEl, "portal-url", 
-			HttpUtil.removeProtocol(themeDisplay.getURLPortal()));
-		DocUtil.add(
-			themeDisplayEl, "root-path", themeDisplay.getPathContext());
-		DocUtil.add(
-			themeDisplayEl, "theme-image-path", 
+			themeDisplayEl, "path-theme-images",
 			themeDisplay.getPathThemeImages());
-		DocUtil.add(themeDisplayEl, "cdn-host", themeDisplay.getCDNHost());
-
-		// Deprecated tokens
-
 		DocUtil.add(
-			themeDisplayEl, "friendly-url", 
-			themeDisplay.getPathFriendlyURLPublic());
-		DocUtil.add(themeDisplayEl, 
-			"friendly-url-private",
-			themeDisplay.getPathFriendlyURLPrivateGroup());
-		DocUtil.add(
-			themeDisplayEl, "page-url", 
-			themeDisplay.getPathFriendlyURLPublic());		
+			themeDisplayEl, "url-portal",
+			HttpUtil.removeProtocol(themeDisplay.getURLPortal()));
 	}
 
 	private static boolean _isValidAttributeName(String name) {
