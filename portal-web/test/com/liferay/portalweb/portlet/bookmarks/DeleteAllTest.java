@@ -39,6 +39,7 @@ public class DeleteAllTest extends BaseTestCase {
 		selenium.waitForPageToLoad("30000");
 		selenium.click(RuntimeVariables.replace("link=Folders"));
 		selenium.waitForPageToLoad("30000");
+		selenium.click("//strong/span");
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -46,7 +47,7 @@ public class DeleteAllTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("link=Delete")) {
+				if (selenium.isElementPresent("//li[3]/nobr/a")) {
 					break;
 				}
 			}
@@ -56,7 +57,7 @@ public class DeleteAllTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click("link=Delete");
+		selenium.click("//li[3]/nobr/a");
 		assertTrue(selenium.getConfirmation()
 						   .matches("^Are you sure you want to delete this[\\s\\S]$"));
 

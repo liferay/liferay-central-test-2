@@ -125,6 +125,7 @@ public class SearchEntriesTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
+		selenium.click("//strong/span");
 		selenium.click(RuntimeVariables.replace("link=Edit"));
 		selenium.waitForPageToLoad("30000");
 
