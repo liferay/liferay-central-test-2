@@ -49,7 +49,24 @@ public class EditEventTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click("link=Edit");
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isElementPresent("//td[4]/ul/li/strong/span")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
+		selenium.click("//td[4]/ul/li/strong/span");
+		selenium.click("//div[2]/ul/li[1]/nobr/a");
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {

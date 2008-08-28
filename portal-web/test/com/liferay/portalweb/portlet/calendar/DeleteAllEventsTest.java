@@ -23,6 +23,7 @@
 package com.liferay.portalweb.portlet.calendar;
 
 import com.liferay.portalweb.portal.BaseTestCase;
+import com.liferay.portalweb.portal.util.RuntimeVariables;
 
 /**
  * <a href="DeleteAllEventsTest.java.html"><b><i>View Source</i></b></a>
@@ -86,7 +87,7 @@ public class DeleteAllEventsTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("link=Delete")) {
+				if (selenium.isElementPresent("//td[4]/ul/li/strong/span")) {
 					break;
 				}
 			}
@@ -96,7 +97,9 @@ public class DeleteAllEventsTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click("link=Delete");
+		selenium.click("//td[4]/ul/li/strong/span");
+		selenium.click(RuntimeVariables.replace("//div[2]/ul/li[4]/nobr/a"));
+		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.getConfirmation()
 						   .matches("^Are you sure you want to delete this[\\s\\S]$"));
 
@@ -107,7 +110,7 @@ public class DeleteAllEventsTest extends BaseTestCase {
 
 			try {
 				if (selenium.isTextPresent(
-							"Your request processed successfully. ")) {
+							"Your request processed successfully.")) {
 					break;
 				}
 			}
@@ -139,7 +142,7 @@ public class DeleteAllEventsTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("link=Delete")) {
+				if (selenium.isElementPresent("//td[4]/ul/li/strong/span")) {
 					break;
 				}
 			}
@@ -149,7 +152,9 @@ public class DeleteAllEventsTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click("link=Delete");
+		selenium.click("//td[4]/ul/li/strong/span");
+		selenium.click(RuntimeVariables.replace("//div[2]/ul/li[4]/nobr/a"));
+		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.getConfirmation()
 						   .matches("^Are you sure you want to delete this[\\s\\S]$"));
 
@@ -160,7 +165,7 @@ public class DeleteAllEventsTest extends BaseTestCase {
 
 			try {
 				if (selenium.isTextPresent(
-							"Your request processed successfully. ")) {
+							"Your request processed successfully.")) {
 					break;
 				}
 			}
@@ -192,7 +197,7 @@ public class DeleteAllEventsTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("link=Delete")) {
+				if (selenium.isElementPresent("//td[4]/ul/li/strong/span")) {
 					break;
 				}
 			}
@@ -202,7 +207,9 @@ public class DeleteAllEventsTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click("link=Delete");
+		selenium.click("//td[4]/ul/li/strong/span");
+		selenium.click(RuntimeVariables.replace("//div[2]/ul/li[4]/nobr/a"));
+		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.getConfirmation()
 						   .matches("^Are you sure you want to delete this[\\s\\S]$"));
 
@@ -213,7 +220,7 @@ public class DeleteAllEventsTest extends BaseTestCase {
 
 			try {
 				if (selenium.isTextPresent(
-							"Your request processed successfully. ")) {
+							"Your request processed successfully.")) {
 					break;
 				}
 			}

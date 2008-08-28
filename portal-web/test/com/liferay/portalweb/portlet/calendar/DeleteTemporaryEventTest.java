@@ -54,8 +54,7 @@ public class DeleteTemporaryEventTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent(
-							"//div[@id='portlet-wrapper-8']/div[2]/div/div/form/table/tbody/tr/td[2]/div[2]/table/tbody/tr[4]/td[4]/ul/li/ul/li[4]/nobr/a")) {
+				if (selenium.isElementPresent("//tr[4]/td[4]/ul/li/strong/span")) {
 					break;
 				}
 			}
@@ -65,8 +64,8 @@ public class DeleteTemporaryEventTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click(
-			"//div[@id='portlet-wrapper-8']/div[2]/div/div/form/table/tbody/tr/td[2]/div[2]/table/tbody/tr[4]/td[4]/ul/li/ul/li[4]/nobr/a");
+		selenium.click("//tr[4]/td[4]/ul/li/strong/span");
+		selenium.click("//div[2]/ul/li[4]/nobr/a");
 		assertTrue(selenium.getConfirmation()
 						   .matches("^Are you sure you want to delete this[\\s\\S]$"));
 

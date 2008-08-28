@@ -77,7 +77,7 @@ public class MoveDocumentTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("link=Edit")) {
+				if (selenium.isElementPresent("//td[5]/ul/li/strong/span")) {
 					break;
 				}
 			}
@@ -87,8 +87,8 @@ public class MoveDocumentTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click(RuntimeVariables.replace("link=Edit"));
-		selenium.waitForPageToLoad("30000");
+		selenium.click("//td[5]/ul/li/strong/span");
+		selenium.click("//div[2]/ul/li[2]/nobr/a");
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
