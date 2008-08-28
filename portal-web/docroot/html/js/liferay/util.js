@@ -1153,6 +1153,7 @@ Liferay.Util.PortletURL = new Class({
 			escapeXML: null,
 			lifecycle: lifecycle,
 			name: null,
+			plid: null,
 			portletConfiguration: false,
 			portletId: null,
 			portletMode: null,
@@ -1195,6 +1196,10 @@ Liferay.Util.PortletURL = new Class({
 
 	setName: function(name) {
 		this.options.name = name;
+	},
+
+	setPlid: function(plid) {
+		this.options.plid = plid;
 	},
 
 	setParameter: function(key, value) {

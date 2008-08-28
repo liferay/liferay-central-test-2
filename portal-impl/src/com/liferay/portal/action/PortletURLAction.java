@@ -85,6 +85,7 @@ public class PortletURLAction extends Action {
 		boolean copyCurrentRenderParameters = ParamUtil.getBoolean(
 			request, "copyCurrentRenderParameters");
 		long doAsUserId = ParamUtil.getLong(request, "doAsUserId");
+		long plid = ParamUtil.getLong(request, "plid", layout.getPlid());
 		boolean encrypt = ParamUtil.getBoolean(request, "encrypt");
 		boolean escapeXml = ParamUtil.getBoolean(request, "escapeXml");
 		String lifecycle = ParamUtil.getString(request, "lifecycle");
@@ -98,7 +99,7 @@ public class PortletURLAction extends Action {
 		String windowState = ParamUtil.getString(request, "windowState");
 
 		PortletURLImpl portletURL = new PortletURLImpl(
-			request, portletId, layout.getPlid(), lifecycle);
+			request, portletId, plid, lifecycle);
 
 		if (Validator.isNotNull(cacheability)) {
 			portletURL.setCacheability(cacheability);
