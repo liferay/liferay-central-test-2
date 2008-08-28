@@ -36,6 +36,8 @@ public class CommunitiesTests extends BaseTests {
 		addTestSuite(AddPageTest.class);
 		addTestSuite(AddPortletTest.class);
 		addTestSuite(AddCommunitiesTest.class);
+		addTestSuite(AssignCommunitiesTest.class);
+		addTestSuite(AssignOrganizationsTest.class);
 		addTestSuite(AddTemporaryCommunityTest.class);
 		addTestSuite(EditCommunityTest.class);
 		addTestSuite(DeleteCommunityTest.class);

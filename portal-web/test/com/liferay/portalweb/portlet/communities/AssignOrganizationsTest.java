@@ -26,31 +26,27 @@ import com.liferay.portalweb.portal.BaseTestCase;
 import com.liferay.portalweb.portal.util.RuntimeVariables;
 
 /**
- * <a href="AddCommunitiesTest.java.html"><b><i>View Source</i></b></a>
+ * <a href="AssignOrganizationsTest.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *
  */
-public class AddCommunitiesTest extends BaseTestCase {
-	public void testAddCommunities() throws Exception {
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isElementPresent("//input[@value='Add Community']")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
+public class AssignOrganizationsTest extends BaseTestCase {
+	public void testAssignOrganizations() throws Exception {
+		selenium.click(RuntimeVariables.replace("link=Organizations"));
+		selenium.waitForPageToLoad("30000");
+		selenium.click(RuntimeVariables.replace("link=Available"));
+		selenium.waitForPageToLoad("30000");
+		selenium.type("toggle_id_enterprise_admin_organization_searchkeywords",
+			RuntimeVariables.replace("selenium"));
 		selenium.click(RuntimeVariables.replace(
-				"//input[@value='Add Community']"));
+				"//input[@value='Search Organizations']"));
+		selenium.waitForPageToLoad("30000");
+		selenium.click("_29_rowIds");
+		selenium.click(RuntimeVariables.replace(
+				"//input[@value='Update Associations']"));
+		selenium.waitForPageToLoad("30000");
+		selenium.click(RuntimeVariables.replace("link=Current"));
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {
@@ -59,7 +55,7 @@ public class AddCommunitiesTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("_29_name")) {
+				if (selenium.isTextPresent("Selenium")) {
 					break;
 				}
 			}
@@ -69,29 +65,7 @@ public class AddCommunitiesTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.typeKeys("_29_name", RuntimeVariables.replace("Test Communit"));
-		selenium.type("_29_name", RuntimeVariables.replace("Test Community"));
-		selenium.typeKeys("_29_description",
-			RuntimeVariables.replace("This is a test communit!"));
-		selenium.type("_29_description",
-			RuntimeVariables.replace("This is a test community!"));
-		selenium.click(RuntimeVariables.replace("//input[@value='Save']"));
+		selenium.click(RuntimeVariables.replace("link=Return to Full Page"));
 		selenium.waitForPageToLoad("30000");
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isTextPresent("Test Community ")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
 	}
 }

@@ -26,85 +26,13 @@ import com.liferay.portalweb.portal.BaseTestCase;
 import com.liferay.portalweb.portal.util.RuntimeVariables;
 
 /**
- * <a href="EditCommunityTest.java.html"><b><i>View Source</i></b></a>
+ * <a href="AssignCommunitiesTest.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *
  */
-public class EditCommunityTest extends BaseTestCase {
-	public void testEditCommunity() throws Exception {
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isElementPresent("link=All Communities")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
-		selenium.click(RuntimeVariables.replace("link=All Communities"));
-		selenium.waitForPageToLoad("30000");
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isTextPresent("Test Community 2")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isElementPresent("//tr[4]/td[6]/ul/li/strong/span")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
-		selenium.click("//tr[4]/td[6]/ul/li/strong/span");
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isElementPresent("//div[2]/ul/li[1]/nobr/a")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
-		selenium.click(RuntimeVariables.replace("//div[2]/ul/li[1]/nobr/a"));
-		selenium.waitForPageToLoad("30000");
-
+public class AssignCommunitiesTest extends BaseTestCase {
+	public void testAssignCommunities() throws Exception {
 		for (int second = 0;; second++) {
 			if (second >= 60) {
 				fail("timeout");
@@ -121,17 +49,10 @@ public class EditCommunityTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.typeKeys("_29_name",
-			RuntimeVariables.replace("Test Communit 2 Edited"));
-		selenium.type("_29_name",
-			RuntimeVariables.replace("Test Community 2 Edited"));
-		selenium.typeKeys("_29_description",
-			RuntimeVariables.replace(
-				"This is a second temporar Test Communit! This communit has been edited."));
-		selenium.type("_29_description",
-			RuntimeVariables.replace(
-				"This is a second temporary Test Community! This community has been edited."));
-		selenium.click(RuntimeVariables.replace("//input[@value='Save']"));
+		selenium.typeKeys("_29_name", RuntimeVariables.replace("Test Communit"));
+		selenium.type("_29_name", RuntimeVariables.replace("Test Community"));
+		selenium.click(RuntimeVariables.replace(
+				"//input[@value='Search Communities']"));
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {
@@ -140,7 +61,7 @@ public class EditCommunityTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isTextPresent("Test Community 2 Edited")) {
+				if (selenium.isElementPresent("link=Assign Members")) {
 					break;
 				}
 			}
@@ -150,7 +71,86 @@ public class EditCommunityTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click(RuntimeVariables.replace("link=Return to Full Page"));
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isElementPresent("//strong/span")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
+		selenium.click("//strong/span");
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isElementPresent("//li[5]/nobr/a")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
+		selenium.click(RuntimeVariables.replace("//li[5]/nobr/a"));
 		selenium.waitForPageToLoad("30000");
+		selenium.click(RuntimeVariables.replace("link=Available"));
+		selenium.waitForPageToLoad("30000");
+		selenium.type("toggle_id_enterprise_admin_user_searchkeywords",
+			RuntimeVariables.replace("selen"));
+		selenium.click(RuntimeVariables.replace(
+				"//input[@value='Search Users']"));
+		selenium.waitForPageToLoad("30000");
+		selenium.click("_29_allRowIds");
+		selenium.click(RuntimeVariables.replace(
+				"//input[@value='Update Associations']"));
+		selenium.waitForPageToLoad("30000");
+		selenium.click(RuntimeVariables.replace("link=Current"));
+		selenium.waitForPageToLoad("30000");
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isTextPresent("selen01")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isTextPresent("selen02")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
 	}
 }

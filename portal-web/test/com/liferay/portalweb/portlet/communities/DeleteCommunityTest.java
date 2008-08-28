@@ -74,8 +74,7 @@ public class DeleteCommunityTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent(
-							"//div[@id=\"portlet-wrapper-29\"]/div[2]/div/div/form/div[5]/table/tbody/tr[4]/td[6]/ul/li/ul/li[7]/nobr/a")) {
+				if (selenium.isElementPresent("//tr[4]/td[6]/ul/li/strong/span")) {
 					break;
 				}
 			}
@@ -85,8 +84,9 @@ public class DeleteCommunityTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click(
-			"//div[@id=\"portlet-wrapper-29\"]/div[2]/div/div/form/div[5]/table/tbody/tr[4]/td[6]/ul/li/ul/li[7]/nobr/a");
+		selenium.click("//tr[4]/td[6]/ul/li/strong/span");
+		selenium.click(RuntimeVariables.replace("//div[2]/ul/li[7]/nobr/a"));
+		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.getConfirmation()
 						   .matches("^Are you sure you want to delete this[\\s\\S]$"));
 
