@@ -666,7 +666,7 @@ public class ThemeDisplay implements Serializable {
 	public void setPathThemeRoot(String pathThemeRoot) {
 		_pathThemeRoot = pathThemeRoot;
 	}
-	
+
 	public String getPathThemeTemplates() {
 		return _pathThemeTemplates;
 	}
