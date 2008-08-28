@@ -34,9 +34,7 @@
 			<action-key>ADD_DISCUSSION</action-key>
 			<action-key>VIEW</action-key>
 		</community-defaults>
-		<guest-defaults>
-			<action-key>VIEW</action-key>
-		</guest-defaults>
+		<guest-defaults/>
 		<guest-unsupported>
 			<action-key>ADD_DISCUSSION</action-key>
 			<action-key>UPDATE</action-key>
@@ -58,9 +56,7 @@
 			<action-key>ADD_DISCUSSION</action-key>
 			<action-key>VIEW</action-key>
 		</community-defaults>
-		<guest-defaults>
-			<action-key>VIEW</action-key>
-		</guest-defaults>
+		<guest-defaults/>
 		<guest-unsupported>
 			<action-key>ADD_DISCUSSION</action-key>
 			<action-key>UPDATE</action-key>
@@ -86,9 +82,7 @@
 			<action-key>ADD_SUBFOLDER</action-key>
 			<action-key>VIEW</action-key>
 		</community-defaults>
-		<guest-defaults>
-			<action-key>VIEW</action-key>
-		</guest-defaults>
+		<guest-defaults/>
 		<guest-unsupported>
 			<action-key>ADD_DOCUMENT</action-key>
 			<action-key>ADD_SHORTCUT</action-key>
