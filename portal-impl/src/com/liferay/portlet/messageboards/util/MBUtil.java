@@ -489,7 +489,6 @@ public class MBUtil {
 			String[] inReplyToHeaders = message.getHeader("In-Reply-To");
 
 			if ((inReplyToHeaders != null) && (inReplyToHeaders.length > 0)) {
-
 				parentHeader = inReplyToHeaders[0];
 			}
 		}
