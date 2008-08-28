@@ -676,6 +676,10 @@ if (portlet.isActive() && access && supportsMimeType) {
 <c:if test="<%= !themeDisplay.isFacebook() && !themeDisplay.isStateExclusive() && !themeDisplay.isWapTheme() %>">
 
 	<%
+	if (themeDisplay.isStatePopUp() || themeDisplay.isWidget()) {
+		PortalUtil.setPageTitle(portletDisplay.getTitle(), request);
+	}
+
 	String freeformStyles = StringPool.BLANK;
 
 	if (themeDisplay.isFreeformLayout() && !runtimePortlet && !layoutTypePortlet.hasStateMax()) {
