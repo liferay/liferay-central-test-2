@@ -7422,63 +7422,59 @@ var LayoutConfiguration = {
 			instance.categories = menu.find('.lfr-content-category');
 			instance.categoryContainers = menu.find('.lfr-add-content');
 
-			var uncamelize = function(value) {
-				return value.replace(/(([a-zA-Z])([A-Z])([a-z]))/g, "$2 $3$4").replace(/(([a-z])([A-Z]))/g, "$2 $3");
+			var data = function() {
+				var value = jQuery(this).attr('id');
+
+				return Liferay.Util.uncamelize(value).toLowerCase();
 			};
 
 			var searchField = jQuery('#layout_configuration_content');
-				searchField.liveSearch(
-					{
-						list: instance.portlets,
-						data: function() {
-							var value = jQuery(this).attr('id');
 
-							return uncamelize(value).toLowerCase();
-						},
-						show: function() {
-							var portlet = jQuery(this);
+			searchField.liveSearch(
+				{
+					list: instance.portlets,
+					data: data,
+					show: function() {
+						var portlet = jQuery(this);
 
-							portlet.show();
-							portlet.parents('.lfr-content-category').addClass('visible').removeClass('hidden').show();
-							portlet.parents('.lfr-add-content').addClass('expanded').removeClass('collapsed').show();
-						},
-						hide: function() {
-							var portlet = jQuery(this);
+						portlet.show();
+						portlet.parents('.lfr-content-category').addClass('visible').removeClass('hidden').show();
+						portlet.parents('.lfr-add-content').addClass('expanded').removeClass('collapsed').show();
+					},
+					hide: function() {
+						var portlet = jQuery(this);
 
-							portlet.hide();
-						}
+						portlet.hide();
 					}
-				);
+				}
+			);
 
-				searchField.liveSearch(
-					{
-						list: instance.categoryContainers,
-						data: function() {
-							var value = jQuery(this).attr('id');
-							return uncamelize(value).toLowerCase();
-						},
-						after: function() {
-							if (!this.term) {
-								instance.categories.addClass('hidden').removeClass('visible').css('display', '');
-								instance.categoryContainers.addClass('collapsed').removeClass('expanded').css('display', '');
-								instance.portlets.css('display', '');
-							}
-
-							if (this.term == "*") {
-								instance.categories.addClass('visible').removeClass('hidden');
-								instance.categoryContainers.addClass('expanded').removeClass('collapsed');
-								instance.portlets.show();
-							}
-						},
-						exclude: function() {
-							var categoryContent = jQuery('.lfr-content-category', this);
-
-							var totalVisibleChildren = categoryContent.find('> div:visible').length;
-
-							return totalVisibleChildren > 0;
+			searchField.liveSearch(
+				{
+					list: instance.categoryContainers,
+					data: data,
+					after: function() {
+						if (!this.term) {
+							instance.categories.addClass('hidden').removeClass('visible').css('display', '');
+							instance.categoryContainers.addClass('collapsed').removeClass('expanded').css('display', '');
+							instance.portlets.css('display', '');
 						}
+
+						if (this.term == "*") {
+							instance.categories.addClass('visible').removeClass('hidden');
+							instance.categoryContainers.addClass('expanded').removeClass('collapsed');
+							instance.portlets.show();
+						}
+					},
+					exclude: function() {
+						var categoryContent = jQuery('.lfr-content-category', this);
+
+						var totalVisibleChildren = categoryContent.find('> div:visible').length;
+
+						return totalVisibleChildren > 0;
 					}
-				);
+				}
+			);
 		}
 	},
 
