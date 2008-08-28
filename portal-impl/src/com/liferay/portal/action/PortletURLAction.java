@@ -95,6 +95,8 @@ public class PortletURLAction extends Action {
 		String portletId = ParamUtil.getString(request, "portletId");
 		String portletMode = ParamUtil.getString(request, "portletMode");
 		String resourceId = ParamUtil.getString(request, "resourceId");
+		String returnToFullPageURL = ParamUtil.getString(
+			request, "returnToFullPageURL");
 		boolean secure = ParamUtil.getBoolean(request, "secure");
 		String windowState = ParamUtil.getString(request, "windowState");
 
@@ -123,17 +125,15 @@ public class PortletURLAction extends Action {
 		portletURL.setPortletId(portletId);
 
 		if (portletConfiguration) {
-			String returnToFullPageURL = ParamUtil.getString(
-				request, "returnToFullPageURL");
 			String portletResource = ParamUtil.getString(
 				request, "portletResource");
 			String previewWidth = ParamUtil.getString(request, "previewWidth");
 
 			portletURL.setParameter(
 				"struts_action", "/portlet_configuration/edit_configuration");
-			portletURL.setParameter("returnToFullPageURL", returnToFullPageURL);
 			portletURL.setParameter("portletResource", portletResource);
 			portletURL.setParameter("previewWidth", previewWidth);
+			portletURL.setParameter("returnToFullPageURL", returnToFullPageURL);
 		}
 
 		if (Validator.isNotNull(portletMode)) {
@@ -143,6 +143,13 @@ public class PortletURLAction extends Action {
 
 		if (Validator.isNotNull(resourceId)) {
 			portletURL.setResourceID(resourceId);
+		}
+
+		if (!themeDisplay.isStateMaximized()) {
+			if (Validator.isNotNull(returnToFullPageURL)) {
+				portletURL.setParameter(
+					"returnToFullPageURL", returnToFullPageURL);
+			}
 		}
 
 		portletURL.setSecure(secure);
