@@ -63,7 +63,7 @@ public class ApplyOrganizationTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("link=Edit")) {
+				if (selenium.isElementPresent("//div[2]/ul/li[1]/nobr/a")) {
 					break;
 				}
 			}
