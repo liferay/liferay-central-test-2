@@ -1123,8 +1123,9 @@ Liferay.Util = {
 };
 
 Liferay.Util.PortletURL = new Class({
-	initialize: function(lifecycle, params){
+	initialize: function(lifecycle, params) {
 		var instance = this;
+
 		var	dictionary = {
 			action: Liferay.Util.PortletURL.PortletRequest.ACTION_PHASE,
 			render: Liferay.Util.PortletURL.PortletRequest.RENDER_PHASE,
@@ -1161,81 +1162,96 @@ Liferay.Util.PortletURL = new Class({
 		};
 
 		this.params = params;
-		this._paramModel = { javaClass: "java.util.HashMap", map: {} };
+
+		this._parameterMap = {
+			javaClass: "java.util.HashMap",
+			map: {}
+		};
 	},
-	toString: function(){
+
+	setAnchor: function(anchor) {
+		this.options.anchor = anchor;
+	},
+
+	setCopyCurrentRenderParameters: function(copyCurrentRenderParameters) {
+		this.options.copyCurrentRenderParameters = copyCurrentRenderParameters;
+	},
+
+	setDoAsUserId: function(doAsUserId) {
+		this.options.doAsUserId = doAsUserId;
+	},
+
+	setEncrypt: function(encrypt) {
+		this.options.encrypt = encrypt;
+	},
+
+	setEscapeXML: function(escapeXML) {
+		this.options.escapeXML = escapeXML;
+	},
+
+	setLifecycle: function(lifecycle) {
+		this.options.lifecycle = lifecycle;
+	},
+
+	setName: function(name) {
+		this.options.name = name;
+	},
+
+	setParameter: function(key, value) {
+		this.params[key] = value;
+	},
+
+	setPortletConfiguration: function(portletConfiguration) {
+		this.options.portletConfiguration = portletConfiguration;
+	},
+
+	setPortletId: function(portletId) {
+		this.options.portletId = portletId;
+	},
+
+	setPortletMode: function(portletMode) {
+		this.options.portletMode = portletMode;
+	},
+
+	setResourceId: function(resourceId) {
+		this.options.resourceId = resourceId;
+	},
+
+	setSecure: function(secure) {
+		this.options.secure = secure;
+	},
+
+	setWindowState: function(windowState) {
+		this.options.windowState = windowState;
+	},
+
+	toString: function() {
 		var instance = this;
 
 		instance._forceStringValues(instance.params);
 		instance._forceStringValues(instance.options);
 
 		jQuery.extend(
-			instance._paramModel.map,
+			instance._parameterMap.map,
 			instance.params
 		);
-
-		var data = instance._buildRequestData();
-		var generatedURL = "";
-		var url = themeDisplay.getPathContext() + '/c/portal/portlet_url';
 
 		var xHR = jQuery.ajax(
 			{
 				async: false,
-				data: data,
+				data: instance._buildRequestData(),
 				type: 'GET',
-				url: url
+				url: themeDisplay.getPathContext() + '/c/portal/portlet_url'
 			}
 		);
-		generatedURL = xHR.responseText;
 
-		return generatedURL;
+		return xHR.responseText;
 	},
-	setLifecycle: function(lifecycle){
-		this.options.lifecycle = lifecycle;
-	},
-	setAnchor: function(anchor){
-		this.options.anchor = anchor;
-	},
-	setCopyCurrentRenderParameters: function(copyCurrentRenderParameters){
-		this.options.copyCurrentRenderParameters = copyCurrentRenderParameters;
-	},
-	setDoAsUserId: function(doAsUserId){
-		this.options.doAsUserId = doAsUserId;
-	},
-	setEncrypt: function(encrypt){
-		this.options.encrypt = encrypt;
-	},
-	setEscapeXML: function(escapeXML){
-		this.options.escapeXML = escapeXML;
-	},
-	setName: function(name){
-		this.options.name = name;
-	},
-	setPortletConfiguration: function(portletConfiguration){
-		this.options.portletConfiguration = portletConfiguration;
-	},
-	setPortletId: function(portletId){
-		this.options.portletId = portletId;
-	},
-	setPortletMode: function(portletMode){
-		this.options.portletMode = portletMode;
-	},
-	setResourceId: function(resourceId){
-		this.options.resourceId = resourceId;
-	},
-	setSecure: function(secure){
-		this.options.secure = secure;
-	},
-	setWindowState: function(windowState){
-		this.options.windowState = windowState;
-	},
-	setParameter: function(key, value){
-		this.params[key] = value;
-	},
-	_buildRequestData: function(){
-		var data = {};
+
+	_buildRequestData: function() {
 		var instance = this;
-		var jsonParam = jQuery.toJSON(instance._paramModel);
+
+		var data = {};
 
 		jQuery.each(
 			instance.options,
@@ -1245,10 +1261,13 @@ Liferay.Util.PortletURL = new Class({
 				}
 			}
 		);
-		data.param = jsonParam;
+
+		data.parameterMap = jQuery.toJSON(instance._parameterMap);
+
 		return data;
 	},
-	_forceStringValues: function(obj){
+
+	_forceStringValues: function(obj) {
 		jQuery.each(
 			obj,
 			function (key, value) {
@@ -1257,53 +1276,57 @@ Liferay.Util.PortletURL = new Class({
 				}
 			}
 		);
+
 		return obj;
 	}
 });
 
-jQuery.extend(Liferay.Util.PortletURL, {
-	createRenderURL: function(){
-		return new Liferay.Util.PortletURL(
-			Liferay.Util.PortletURL.PortletRequest.RENDER_PHASE);
-	},
-	createActionURL: function(){
-		return new Liferay.Util.PortletURL(
-			Liferay.Util.PortletURL.PortletRequest.ACTION_PHASE);
-	},
-	createResourceURL: function(){
-		return new Liferay.Util.PortletURL(
-			Liferay.Util.PortletURL.PortletRequest.RESOURCE_PHASE);
-	},
-	createPermissionURL: function(portletResource, modelResource,
-		modelResourceDescription, resourcePrimKey) {
+jQuery.extend(
+	Liferay.Util.PortletURL,
+	{
+		createRenderURL: function() {
+			return new Liferay.Util.PortletURL(Liferay.Util.PortletURL.PortletRequest.RENDER_PHASE);
+		},
 
-		var portletURL = Liferay.Util.PortletURL.createRenderURL();
-		var redirect = window.location.href;
+		createActionURL: function() {
+			return new Liferay.Util.PortletURL(Liferay.Util.PortletURL.PortletRequest.ACTION_PHASE);
+		},
 
-		portletURL.setParameter(
-			'struts_action', '/portlet_configuration/edit_permissions');
+		createPermissionURL: function(portletResource, modelResource, modelResourceDescription, resourcePrimKey) {
+			var redirect = window.location.href;
 
-		portletURL.setParameter('redirect', redirect);
-		if (!themeDisplay.isStateMaximized()) {
-			portletURL.setParameter('returnToFullPageURL', redirect);
+			var portletURL = Liferay.Util.PortletURL.createRenderURL();
+
+			portletURL.setPortletId(86);
+
+			portletURL.setWindowState('MAXIMIZED');
+
+			portletURL.setParameter('struts_action', '/portlet_configuration/edit_permissions');
+			portletURL.setParameter('redirect', redirect);
+
+			if (!themeDisplay.isStateMaximized()) {
+				portletURL.setParameter('returnToFullPageURL', redirect);
+			}
+
+			portletURL.setParameter('portletResource', portletResource);
+			portletURL.setParameter('modelResource', modelResource);
+			portletURL.setParameter('modelResourceDescription', modelResourceDescription);
+			portletURL.setParameter('resourcePrimKey', resourcePrimKey);
+
+			return portletURL;
+		},
+
+		createResourceURL: function() {
+			return new Liferay.Util.PortletURL(Liferay.Util.PortletURL.PortletRequest.RESOURCE_PHASE);
+		},
+
+		PortletRequest: {
+			ACTION_PHASE: 'ACTION_PHASE',
+			RENDER_PHASE: 'RENDER_PHASE',
+			RESOURCE_PHASE: 'RESOURCE_PHASE'
 		}
-		portletURL.setParameter('portletResource', portletResource);
-		portletURL.setParameter('modelResource', modelResource);
-		portletURL.setParameter(
-			'modelResourceDescription', modelResourceDescription);
-
-		portletURL.setParameter('resourcePrimKey', resourcePrimKey);
-		portletURL.setPortletId(86);
-		portletURL.setWindowState('MAXIMIZED');
-
-		return portletURL;
-	},
-	PortletRequest: {
-		ACTION_PHASE: 'ACTION_PHASE',
-		RENDER_PHASE: 'RENDER_PHASE',
-		RESOURCE_PHASE: 'RESOURCE_PHASE'
 	}
-});
+);
 
 function submitForm(form, action, singleSubmit) {
 	if (Liferay.Util.submitCountdown == 0) {

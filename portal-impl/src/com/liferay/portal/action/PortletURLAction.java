@@ -28,7 +28,6 @@ import com.liferay.portal.kernel.portlet.WindowStateFactory;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.Layout;
-import com.liferay.portal.struts.ActionConstants;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.WebKeys;
@@ -63,149 +62,115 @@ public class PortletURLAction extends Action {
 		throws Exception {
 
 		try {
-			ThemeDisplay themeDisplay = (ThemeDisplay)request.getAttribute(
-				WebKeys.THEME_DISPLAY);
+			String portletURL = getPortletURL(request);
 
-			Layout layout = themeDisplay.getLayout();
-
-			String cacheability = ParamUtil.getString(
-				request, "cacheability");
-
-			boolean copyCurrentRenderParameters = ParamUtil.getBoolean(
-				request, "copyCurrentRenderParameters");
-
-			long doAsUserId = ParamUtil.getLong(
-				request, "doAsUserId");
-
-			boolean encrypt = ParamUtil.getBoolean(
-				request, "encrypt");
-
-			boolean escapeXml = ParamUtil.getBoolean(
-				request, "escapeXml");
-
-			String lifecycle = ParamUtil.getString(
-				request, "lifecycle");
-
-			String name = ParamUtil.getString(
-				request, "name");
-
-			String param = ParamUtil.getString(
-				request, "param");
-
-			boolean portletConfiguration = ParamUtil.getBoolean(
-				request, "portletConfiguration");
-
-			String portletMode = ParamUtil.getString(
-				request, "portletMode");
-
-			String portletId = ParamUtil.getString(
-				request, "portletId");
-
-			String resourceId = ParamUtil.getString(
-				request, "resourceId");
-
-			boolean secure = ParamUtil.getBoolean(
-				request, "secure");
-
-			String windowState = ParamUtil.getString(
-				request, "windowState");
-
-			PortletURLImpl portletURL = new PortletURLImpl(
-				request, portletId, layout.getPlid(), lifecycle);
-
-			if (Validator.isNotNull(cacheability)) {
-				portletURL.setCacheability(cacheability);
-			}
-
-			if (Validator.isNotNull(encrypt)) {
-				portletURL.setCopyCurrentRenderParameters(
-						copyCurrentRenderParameters);
-			}
-
-			if (Validator.isNotNull(doAsUserId)) {
-				if (doAsUserId > 0) {
-					portletURL.setDoAsUserId(doAsUserId);
-				}
-			}
-
-			if (Validator.isNotNull(encrypt)) {
-				portletURL.setEncrypt(encrypt);
-			}
-
-			if (Validator.isNotNull(escapeXml)) {
-				portletURL.setEscapeXml(escapeXml);
-			}
-
-			if (lifecycle.equals(PortletRequest.ACTION_PHASE) &&
-				Validator.isNotNull(name)) {
-
-				portletURL.setParameter(ActionRequest.ACTION_NAME, name);
-			}
-
-			if (Validator.isNotNull(portletId)) {
-				portletURL.setPortletId(portletId);
-			}
-
-			if (Validator.isNotNull(portletConfiguration) &&
-				portletConfiguration) {
-
-				String returnToFullPageURL = ParamUtil.getString(
-					request, "returnToFullPageURL");
-				String portletResource = ParamUtil.getString(
-					request, "portletResource");
-				String previewWidth = ParamUtil.getString(
-					request, "previewWidth");
-
-				portletURL.setParameter(
-					"struts_action",
-					"/portlet_configuration/edit_configuration");
-				portletURL.setParameter(
-					"returnToFullPageURL", returnToFullPageURL);
-				portletURL.setParameter("portletResource", portletResource);
-				portletURL.setParameter("previewWidth", previewWidth);
-			}
-
-			if (Validator.isNotNull(portletMode)) {
-				portletURL.setPortletMode(
-					PortletModeFactory.getPortletMode(portletMode));
-			}
-
-			if (Validator.isNotNull(resourceId)) {
-				portletURL.setResourceID(resourceId);
-			}
-
-			if (Validator.isNotNull(secure)) {
-				portletURL.setSecure(secure);
-			}
-			else {
-				portletURL.setSecure(request.isSecure());
-			}
-
-			if (Validator.isNotNull(windowState)) {
-				portletURL.setWindowState(
-					WindowStateFactory.getWindowState(windowState));
-			}
-
-			if (Validator.isNotNull(param)) {
-				Map<String, String> params =
-					(Map<String, String>)JSONFactoryUtil.deserialize(param);
-
-				Iterator<String> itr = params.keySet().iterator();
-
-				while (itr.hasNext()) {
-					String paramKey = (String)itr.next();
-					String paramValue = (String)params.get(paramKey);
-
-					portletURL.setParameter(paramKey, paramValue);
-				}
-			}
-
-			ServletResponseUtil.write(response, portletURL.toString());
+			ServletResponseUtil.write(response, portletURL);
 		}
 		catch (Exception e) {
 			PortalUtil.sendError(e, request, response);
 		}
 
-		return mapping.findForward(ActionConstants.COMMON_NULL);
+		return null;
 	}
+
+	protected String getPortletURL(HttpServletRequest request)
+		throws Exception {
+
+		ThemeDisplay themeDisplay = (ThemeDisplay)request.getAttribute(
+			WebKeys.THEME_DISPLAY);
+
+		Layout layout = themeDisplay.getLayout();
+
+		String cacheability = ParamUtil.getString(request, "cacheability");
+		boolean copyCurrentRenderParameters = ParamUtil.getBoolean(
+			request, "copyCurrentRenderParameters");
+		long doAsUserId = ParamUtil.getLong(request, "doAsUserId");
+		boolean encrypt = ParamUtil.getBoolean(request, "encrypt");
+		boolean escapeXml = ParamUtil.getBoolean(request, "escapeXml");
+		String lifecycle = ParamUtil.getString(request, "lifecycle");
+		String name = ParamUtil.getString(request, "name");
+		boolean portletConfiguration = ParamUtil.getBoolean(
+			request, "portletConfiguration");
+		String portletId = ParamUtil.getString(request, "portletId");
+		String portletMode = ParamUtil.getString(request, "portletMode");
+		String resourceId = ParamUtil.getString(request, "resourceId");
+		boolean secure = ParamUtil.getBoolean(request, "secure");
+		String windowState = ParamUtil.getString(request, "windowState");
+
+		PortletURLImpl portletURL = new PortletURLImpl(
+			request, portletId, layout.getPlid(), lifecycle);
+
+		if (Validator.isNotNull(cacheability)) {
+			portletURL.setCacheability(cacheability);
+		}
+
+		portletURL.setCopyCurrentRenderParameters(copyCurrentRenderParameters);
+
+		if (doAsUserId > 0) {
+			portletURL.setDoAsUserId(doAsUserId);
+		}
+
+		portletURL.setEncrypt(encrypt);
+		portletURL.setEscapeXml(escapeXml);
+
+		if (lifecycle.equals(PortletRequest.ACTION_PHASE) &&
+			Validator.isNotNull(name)) {
+
+			portletURL.setParameter(ActionRequest.ACTION_NAME, name);
+		}
+
+		portletURL.setPortletId(portletId);
+
+		if (portletConfiguration) {
+			String returnToFullPageURL = ParamUtil.getString(
+				request, "returnToFullPageURL");
+			String portletResource = ParamUtil.getString(
+				request, "portletResource");
+			String previewWidth = ParamUtil.getString(request, "previewWidth");
+
+			portletURL.setParameter(
+				"struts_action", "/portlet_configuration/edit_configuration");
+			portletURL.setParameter("returnToFullPageURL", returnToFullPageURL);
+			portletURL.setParameter("portletResource", portletResource);
+			portletURL.setParameter("previewWidth", previewWidth);
+		}
+
+		if (Validator.isNotNull(portletMode)) {
+			portletURL.setPortletMode(
+				PortletModeFactory.getPortletMode(portletMode));
+		}
+
+		if (Validator.isNotNull(resourceId)) {
+			portletURL.setResourceID(resourceId);
+		}
+
+		portletURL.setSecure(secure);
+
+		if (Validator.isNotNull(windowState)) {
+			portletURL.setWindowState(
+				WindowStateFactory.getWindowState(windowState));
+		}
+
+		String parameterMapString = ParamUtil.getString(
+			request, "parameterMap");
+
+		if (Validator.isNotNull(parameterMapString)) {
+			Map<String, String> parameterMap =
+				(Map<String, String>)JSONFactoryUtil.deserialize(
+					parameterMapString);
+
+			Iterator<String> itr = parameterMap.keySet().iterator();
+
+			while (itr.hasNext()) {
+				String paramName = itr.next();
+
+				String paramValue = parameterMap.get(paramName);
+
+				portletURL.setParameter(paramName, paramValue);
+			}
+		}
+
+		return portletURL.toString();
+	}
+
 }

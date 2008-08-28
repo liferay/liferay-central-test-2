@@ -83,6 +83,8 @@
 			<forward name="portal.login" path="portal.login" />
 		</action>
 
+		<action path="/portal/portlet_url" type="com.liferay.portal.action.PortletURLAction" />
+
 		<action path="/portal/render_portlet" type="com.liferay.portal.action.RenderPortletAction">
 			<forward name="/portal/render_portlet" path="/portal/render_portlet.jsp" />
 		</action>
@@ -106,8 +108,6 @@
 		<action path="/portal/test_redirect" type="com.liferay.portal.action.TestRedirectAction">
 			<forward name="portal.test_redirect" path="/c/portal/test" redirect="true" />
 		</action>-->
-
-		<action path="/portal/portlet_url" type="com.liferay.portal.action.PortletURLAction" />
 
 		<action path="/portal/touch_protected" forward="/portal/touch_protected.jsp" />
 
