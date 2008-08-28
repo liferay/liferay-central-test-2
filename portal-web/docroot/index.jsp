@@ -22,6 +22,7 @@
  */
 %>
 
+<%@ page import="com.liferay.portal.kernel.servlet.HttpHeaders" %>
 <%@ page import="com.liferay.portal.util.PortalUtil" %>
 
 <%
@@ -37,18 +38,16 @@ String mainPath = PortalUtil.getPathMain();
 if (!request.isRequestedSessionIdFromCookie()) {
 	mainPath = PortalUtil.getURLWithSessionId(mainPath, session.getId());
 }
-%>
 
-<%
+response.setHeader(HttpHeaders.LOCATION, mainPath);
+response.setHeader(HttpHeaders.CONNECTION, HttpHeaders.CLOSE);
+
 response.setStatus(HttpServletResponse.SC_MOVED_PERMANENTLY);
-response.setHeader( "Location", mainPath );
-response.setHeader( "Connection", "close" );
 %>
 
 <html>
 <head>
 	<title></title>
-
 	<meta content="1; url=<%= PortalUtil.getPathMain() %>" http-equiv="refresh" />
 </head>
 

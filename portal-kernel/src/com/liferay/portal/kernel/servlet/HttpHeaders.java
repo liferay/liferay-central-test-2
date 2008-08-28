@@ -38,6 +38,8 @@ public interface HttpHeaders {
 
 	public static final String CACHE_CONTROL = "Cache-Control";
 
+	public static final String CLOSE = "close";
+
 	public static final String CONNECTION = "Connection";
 
 	public static final String CONTENT_DISPOSITION = "Content-Disposition";

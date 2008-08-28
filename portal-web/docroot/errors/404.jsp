@@ -22,6 +22,7 @@
  */
 %>
 
+<%@ page import="com.liferay.portal.kernel.servlet.HttpHeaders" %>
 <%@ page import="com.liferay.portal.util.PortalUtil" %>
 
 <%
@@ -37,12 +38,11 @@ String mainPath = PortalUtil.getPathMain();
 if (!request.isRequestedSessionIdFromCookie()) {
 	mainPath = PortalUtil.getURLWithSessionId(mainPath, session.getId());
 }
-%>
 
-<%
+response.setHeader(HttpHeaders.LOCATION, mainPath);
+response.setHeader(HttpHeaders.CONNECTION, HttpHeaders.CLOSE);
+
 response.setStatus(HttpServletResponse.SC_MOVED_PERMANENTLY);
-response.setHeader( "Location", mainPath );
-response.setHeader( "Connection", "close" );
 %>
 
 <html>
@@ -52,6 +52,16 @@ response.setHeader( "Connection", "close" );
 </head>
 
 <body onload="javascript: location.replace('<%= mainPath %>')">
+
+<!--
+The numbers below are used to fill up space so that this works properly in IE.
+See http://support.microsoft.com/default.aspx?scid=kb;en-us;Q294807 for more
+information on why this is necessary.
+
+12345678901234567890123456789012345678901234567890123456789012345678901234567890
+12345678901234567890123456789012345678901234567890123456789012345678901234567890
+12345678901234567890123456789012345678901234567890123456789012345678901234567890
+-->
 
 </body>
 
