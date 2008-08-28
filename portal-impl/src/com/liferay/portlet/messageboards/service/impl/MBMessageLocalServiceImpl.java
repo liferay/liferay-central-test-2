@@ -1592,7 +1592,7 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 		jsonObj.put("inReplyTo", inReplyTo);
 		jsonObj.put("htmlFormat", htmlFormat);
 		jsonObj.put(
-			"mailingListSource", MailingListThreadLocal.isSourceMailingList());
+			"sourceMailingList", MailingListThreadLocal.isSourceMailingList());
 
 		MessageBusUtil.sendMessage(
 			DestinationNames.MESSAGE_BOARDS, jsonObj.toString());

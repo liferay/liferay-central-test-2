@@ -126,40 +126,15 @@ public class MBMessageListener implements MessageListener {
 
 		// Mailing list
 
-		for (long categoryId : categoryIdsArray) {
-
-			try {
-				MBMailingList mailingList =
-					MBMailingListLocalServiceUtil.getCategoryMailingList(
-						categoryId);
-
-				if (mailingList.isActive() && !sourceMailingList) {
-
-					String mailingListAddress = mailingList.getEmailAddress();
-					SMTPAccount account = null;
-
-					fromAddress = mailingList.getOutEmailAddress();
-
-					if (mailingList.isOutCustom()) {
-						String protocol = Account.PROTOCOL_SMTP;
-
-						if (mailingList.isOutUseSSL()) {
-							protocol = Account.PROTOCOL_SMTPS;
-						}
-
-						account = (SMTPAccount)Account.getInstance(
-							protocol, mailingList.getOutServerPort());
-						account.setHost(mailingList.getOutServerName());
-						account.setUser(mailingList.getOutUserName());
-						account.setPassword(mailingList.getOutPassword());
-					}
-
-					sendEmail(
-						fromAddress, subject, body, mailingListAddress,
-						replyToAddress, mailId, inReplyTo, htmlFormat, account);
+		if (!sourceMailingList) {
+			for (long categoryId : categoryIdsArray) {
+				try {
+					notifyMailingList(
+						subject, body, replyToAddress, mailId, inReplyTo,
+						htmlFormat, categoryId);
 				}
-			}
-			catch (NoSuchMailingListException nsmle) {
+				catch (NoSuchMailingListException nsmle) {
+				}
 			}
 		}
 
@@ -168,17 +143,44 @@ public class MBMessageListener implements MessageListener {
 		}
 	}
 
-	protected void sendEmail(
-			String fromAddress, String subject, String body,
-			String mailingListAddress, String replyToAddress, String mailId,
-			String inReplyTo, boolean htmlFormat, SMTPAccount account)
+	protected void notifyMailingList(
+			String subject, String body, String replyToAddress, String mailId,
+			String inReplyTo, boolean htmlFormat, long categoryId)
 		throws Exception {
 
-		InternetAddress address = new InternetAddress(mailingListAddress);
-		InternetAddress[] bulkAddresses = new InternetAddress[]{address};
+		MBMailingList mailingList =
+			MBMailingListLocalServiceUtil.getCategoryMailingList(categoryId);
 
-		sendMail(bulkAddresses, fromAddress, null, subject, body,
-			replyToAddress, mailId, inReplyTo, htmlFormat, account);
+		if (!mailingList.isActive()) {
+			return;
+		}
+
+		String fromAddress = mailingList.getOutEmailAddress();
+
+		InternetAddress[] bulkAddresses = new InternetAddress[] {
+			new InternetAddress(mailingList.getEmailAddress())
+		};
+
+		SMTPAccount account = null;
+
+		if (mailingList.isOutCustom()) {
+			String protocol = Account.PROTOCOL_SMTP;
+
+			if (mailingList.isOutUseSSL()) {
+				protocol = Account.PROTOCOL_SMTPS;
+			}
+
+			account = (SMTPAccount)Account.getInstance(
+				protocol, mailingList.getOutServerPort());
+
+			account.setHost(mailingList.getOutServerName());
+			account.setUser(mailingList.getOutUserName());
+			account.setPassword(mailingList.getOutPassword());
+		}
+
+		sendMail(
+			fromAddress, null, bulkAddresses, subject, body, replyToAddress,
+			mailId, inReplyTo, htmlFormat, account);
 	}
 
 	protected void sendEmail(
@@ -188,8 +190,7 @@ public class MBMessageListener implements MessageListener {
 			boolean htmlFormat)
 		throws Exception {
 
-		List<InternetAddress> addresses =
-			new ArrayList<InternetAddress>();
+		List<InternetAddress> addresses = new ArrayList<InternetAddress>();
 
 		for (Subscription subscription : subscriptions) {
 			long subscribedUserId = subscription.getUserId();
@@ -239,19 +240,19 @@ public class MBMessageListener implements MessageListener {
 		}
 
 		InternetAddress[] bulkAddresses = addresses.toArray(
-				new InternetAddress[addresses.size()]);
+			new InternetAddress[addresses.size()]);
 
-		sendMail(bulkAddresses, fromAddress, fromName, subject, body,
-			replyToAddress, mailId, inReplyTo, htmlFormat, null);
+		sendMail(
+			fromAddress, fromName, bulkAddresses, subject, body, replyToAddress,
+			mailId, inReplyTo, htmlFormat, null);
 	}
 
-	protected void sendMail(InternetAddress[] bulkAddresses, String fromAddress,
-			String fromName, String subject, String body, String replyToAddress,
-			String mailId, String inReplyTo, boolean htmlFormat,
-			SMTPAccount account) {
+	protected void sendMail(
+		String fromAddress, String fromName, InternetAddress[] bulkAddresses,
+		String subject, String body, String replyToAddress, String mailId,
+		String inReplyTo, boolean htmlFormat, SMTPAccount account) {
 
 		try {
-
 			if (bulkAddresses.length == 0) {
 				return;
 			}

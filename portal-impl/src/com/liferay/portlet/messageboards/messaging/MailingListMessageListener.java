@@ -156,9 +156,11 @@ public class MailingListMessageListener implements MessageListener {
 
 		if ((addresses != null) && (addresses.length > 0)) {
 			Address address = addresses[0];
+
 			if (address instanceof InternetAddress) {
 				from = ((InternetAddress)address).getAddress();
-			} else {
+			}
+			else {
 				from = address.toString();
 			}
 		}
