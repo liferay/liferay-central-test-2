@@ -45,9 +45,25 @@ Group group = GroupLocalServiceUtil.getGroup(groupId);
 String structureId = BeanParamUtil.getString(structure, request, "structureId");
 String newStructureId = ParamUtil.getString(request, "newStructureId");
 
-String xsd = request.getParameter("xsd");
+JournalStructure parentStructure = null;
 
-if ((xsd == null) || (xsd.equals(StringPool.NULL))) {
+String parentStructureId = BeanParamUtil.getString(structure, request, "parentStructureId");
+
+String parentStructureName = StringPool.BLANK;
+
+if (Validator.isNotNull(parentStructureId)) {
+	try {
+		parentStructure = JournalStructureLocalServiceUtil.getStructure(structure.getGroupId(), parentStructureId);
+
+		parentStructureName = parentStructure.getName();
+	}
+	catch(NoSuchStructureException nsse) {
+	}
+}
+
+String xsd = ParamUtil.getString(request, "xsd");
+
+if (Validator.isNull(xsd)) {
 	xsd = "<root></root>";
 
 	if (structure != null) {
@@ -63,6 +79,7 @@ xsd = StringUtil.replace(xsd, "  ", "");
 
 int tabIndex = 1;
 %>
+
 
 <script type="text/javascript">
 	var xmlIndent = "  ";
@@ -185,9 +202,23 @@ int tabIndex = 1;
 		submitForm(document.<portlet:namespace />fm);
 	}
 
+	function <portlet:namespace />removeStructure() {
+		if (confirm('<%= UnicodeLanguageUtil.get(pageContext, "removing-the-parent-structure-will-affect-every-article-and-template-related-to-this-structure") %>')) {
+			document.<portlet:namespace />fm.<portlet:namespace />parentStructureId.value = "";
+			<portlet:namespace />saveAndContinueStructure();
+		}
+	}
+
 	function <portlet:namespace />saveAndContinueStructure() {
 		document.<portlet:namespace />fm.<portlet:namespace />saveAndContinue.value = "1";
 		<portlet:namespace />saveStructure();
+	}
+
+	function <portlet:namespace />selectStructure(parentStructureId) {
+		if (document.<portlet:namespace />fm.<portlet:namespace />parentStructureId.value != parentStructureId && '<%= structureId %>' != parentStructureId) {
+			document.<portlet:namespace />fm.<portlet:namespace />parentStructureId.value = parentStructureId;
+			<portlet:namespace />saveAndContinueStructure();
+		}
 	}
 
 	function <portlet:namespace />saveStructure(addAnother) {
@@ -221,6 +252,7 @@ int tabIndex = 1;
 <liferay-ui:error exception="<%= DuplicateStructureIdException.class %>" message="please-enter-a-unique-id" />
 <liferay-ui:error exception="<%= StructureDescriptionException.class %>" message="please-enter-a-valid-description" />
 <liferay-ui:error exception="<%= StructureIdException.class %>" message="please-enter-a-valid-id" />
+<liferay-ui:error exception="<%= StructureInheritanceException.class %>" message="this-structure-is-already-within-the-inheritance-path-of-the-selected-parent-please-select-another-parent-structure" />
 <liferay-ui:error exception="<%= StructureNameException.class %>" message="please-enter-a-valid-name" />
 
 <table class="lfr-table">
@@ -293,6 +325,32 @@ int tabIndex = 1;
 </tr>
 
 <c:if test="<%= structure != null %>">
+	<tr>
+		<td colspan="2">
+			<br />
+		</td>
+	</tr>
+	<tr>
+		<td>
+			<liferay-ui:message key="parent-structure" />
+
+			<input name="<portlet:namespace />parentStructureId" type="hidden" value="<%= parentStructureId %>" />
+
+			<a href="<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/journal/edit_structure" /><portlet:param name="redirect" value="<%= currentURL %>" /><portlet:param name="groupId" value="<%= String.valueOf(groupId) %>" /><portlet:param name="structureId" value="<%= parentStructureId %>" /></portlet:renderURL>" id="<portlet:namespace />parentStructureName">
+			<%= parentStructureName %></a>
+
+			<input type="button" value="<liferay-ui:message key="select" />"
+				onClick="
+					if (confirm('<%= UnicodeLanguageUtil.get(pageContext, "selecting-a-new-parent-structure-will-affect-every-article-and-template-related-to-this-structure") %>')) {
+						var structureWindow = window.open('<portlet:renderURL windowState="<%= LiferayWindowState.POP_UP.toString() %>"><portlet:param name="struts_action" value="/journal/select_structure" /><portlet:param name="groupId" value="<%= String.valueOf(groupId) %>" /></portlet:renderURL>', 'structure', 'directories=no,height=640,location=no,menubar=no,resizable=yes,scrollbars=no,status=no,toolbar=no,width=680');
+						void('');
+						structureWindow.focus();
+					}"
+			/>
+
+			<input <%= Validator.isNull(parentStructureId) ? "disabled" : "" %> id="<portlet:namespace />removeStructureButton" type="button" value="<liferay-ui:message key="remove" />" onClick="<portlet:namespace />removeStructure();" />
+		</td>
+	</tr>
 	<tr>
 		<td colspan="2">
 			<br />

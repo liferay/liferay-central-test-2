@@ -82,6 +82,7 @@ public class JournalStructureJSONSerializer {
 
 		jsonObj.put("modifiedDate", modifiedDateJSON);
 		jsonObj.put("structureId", model.getStructureId());
+		jsonObj.put("parentStructureId", model.getParentStructureId());
 		jsonObj.put("name", model.getName());
 		jsonObj.put("description", model.getDescription());
 		jsonObj.put("xsd", model.getXsd());

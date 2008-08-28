@@ -40,6 +40,7 @@ import com.liferay.portlet.journal.NoSuchStructureException;
 import com.liferay.portlet.journal.RequiredStructureException;
 import com.liferay.portlet.journal.StructureDescriptionException;
 import com.liferay.portlet.journal.StructureIdException;
+import com.liferay.portlet.journal.StructureInheritanceException;
 import com.liferay.portlet.journal.StructureNameException;
 import com.liferay.portlet.journal.StructureXsdException;
 import com.liferay.portlet.journal.model.JournalStructure;
@@ -68,61 +69,64 @@ public class JournalStructureLocalServiceImpl
 	public JournalStructure addStructure(
 			long userId, String structureId, boolean autoStructureId, long plid,
 			String name, String description, String xsd,
-			boolean addCommunityPermissions, boolean addGuestPermissions)
+			String parentStructureId, boolean addCommunityPermissions,
+			boolean addGuestPermissions)
 		throws PortalException, SystemException {
 
 		return addStructure(
 			null, userId, structureId, autoStructureId, plid, name, description,
-			xsd, Boolean.valueOf(addCommunityPermissions),
+			xsd, parentStructureId, Boolean.valueOf(addCommunityPermissions),
 			Boolean.valueOf(addGuestPermissions), null, null);
 	}
 
 	public JournalStructure addStructure(
 			String uuid, long userId, String structureId,
 			boolean autoStructureId, long plid, String name, String description,
-			String xsd, boolean addCommunityPermissions,
-			boolean addGuestPermissions)
+			String xsd, String parentStructureId,
+			boolean addCommunityPermissions, boolean addGuestPermissions)
 		throws PortalException, SystemException {
 
 		return addStructure(
 			uuid, userId, structureId, autoStructureId, plid, name, description,
-			xsd, Boolean.valueOf(addCommunityPermissions),
+			xsd, parentStructureId, Boolean.valueOf(addCommunityPermissions),
 			Boolean.valueOf(addGuestPermissions), null, null);
 	}
 
 	public JournalStructure addStructure(
 			long userId, String structureId, boolean autoStructureId, long plid,
 			String name, String description, String xsd,
-			String[] communityPermissions, String[] guestPermissions)
+			String parentStructureId, String[] communityPermissions,
+			String[] guestPermissions)
 		throws PortalException, SystemException {
 
 		return addStructure(
 			null, userId, structureId, autoStructureId, plid, name, description,
-			xsd, null, null, communityPermissions, guestPermissions);
+			xsd, parentStructureId, null, null, communityPermissions,
+			guestPermissions);
 	}
 
 	public JournalStructure addStructure(
 			String uuid, long userId, String structureId,
 			boolean autoStructureId, long plid, String name,
-			String description, String xsd, Boolean addCommunityPermissions,
-			Boolean addGuestPermissions, String[] communityPermissions,
-			String[] guestPermissions)
+			String description, String xsd, String parentStructureId,
+			Boolean addCommunityPermissions, Boolean addGuestPermissions,
+			String[] communityPermissions, String[] guestPermissions)
 		throws PortalException, SystemException {
 
 		long groupId = PortalUtil.getPortletGroupId(plid);
 
 		return addStructureToGroup(
 			uuid, userId, structureId, autoStructureId, groupId, name,
-			description, xsd, addCommunityPermissions, addGuestPermissions,
-			communityPermissions, guestPermissions);
+			description, xsd, parentStructureId, addCommunityPermissions,
+			addGuestPermissions, communityPermissions, guestPermissions);
 	}
 
 	public JournalStructure addStructureToGroup(
 			String uuid, long userId, String structureId,
 			boolean autoStructureId, long groupId, String name,
-			String description, String xsd, Boolean addCommunityPermissions,
-			Boolean addGuestPermissions, String[] communityPermissions,
-			String[] guestPermissions)
+			String description, String xsd, String parentStructureId,
+			Boolean addCommunityPermissions, Boolean addGuestPermissions,
+			String[] communityPermissions, String[] guestPermissions)
 		throws PortalException, SystemException {
 
 		// Structure
@@ -139,7 +143,8 @@ public class JournalStructureLocalServiceImpl
 		}
 
 		validate(
-			groupId, structureId, autoStructureId, name, description, xsd);
+			groupId, structureId, autoStructureId, name, description, xsd,
+			parentStructureId);
 
 		if (autoStructureId) {
 			structureId = String.valueOf(counterLocalService.increment());
@@ -160,6 +165,7 @@ public class JournalStructureLocalServiceImpl
 		structure.setName(name);
 		structure.setDescription(description);
 		structure.setXsd(xsd);
+		structure.setParentStructureId(parentStructureId);
 
 		journalStructurePersistence.update(structure, false);
 
@@ -445,7 +451,7 @@ public class JournalStructureLocalServiceImpl
 
 	public JournalStructure updateStructure(
 			long groupId, String structureId, String name, String description,
-			String xsd)
+			String xsd, String parentStructureId)
 		throws PortalException, SystemException {
 
 		structureId = structureId.trim().toUpperCase();
@@ -457,6 +463,7 @@ public class JournalStructureLocalServiceImpl
 			throw new StructureXsdException();
 		}
 
+		validate(groupId, structureId, parentStructureId);
 		validate(name, description, xsd);
 
 		JournalStructure structure = journalStructurePersistence.findByG_S(
@@ -466,6 +473,7 @@ public class JournalStructureLocalServiceImpl
 		structure.setName(name);
 		structure.setDescription(description);
 		structure.setXsd(xsd);
+		structure.setParentStructureId(parentStructureId);
 
 		journalStructurePersistence.update(structure, false);
 
@@ -482,8 +490,37 @@ public class JournalStructureLocalServiceImpl
 	}
 
 	protected void validate(
+			long groupId, String structureId, String parentStructureId)
+		throws PortalException, SystemException {
+
+		if (Validator.isNotNull(parentStructureId)) {
+			if (parentStructureId.equals(structureId)) {
+				throw new StructureInheritanceException();
+			}
+
+			JournalStructure parentStructure =
+				journalStructurePersistence.fetchByG_S(
+					groupId, parentStructureId);
+
+			while (parentStructure != null) {
+				if ((parentStructure != null) &&
+					(parentStructure.getStructureId().equals(structureId)) ||
+					(parentStructure.getParentStructureId().equals(
+						structureId))) {
+
+					throw new StructureInheritanceException();
+				}
+
+				parentStructure = journalStructurePersistence.fetchByG_S(
+					groupId, parentStructure.getParentStructureId());
+			}
+		}
+	}
+
+	protected void validate(
 			long groupId, String structureId, boolean autoStructureId,
-			String name, String description, String xsd)
+			String name, String description, String xsd,
+			String parentStructureId)
 		throws PortalException, SystemException {
 
 		if (!autoStructureId) {
@@ -498,6 +535,7 @@ public class JournalStructureLocalServiceImpl
 			}
 		}
 
+		validate(groupId, structureId, parentStructureId);
 		validate(name, description, xsd);
 	}
 

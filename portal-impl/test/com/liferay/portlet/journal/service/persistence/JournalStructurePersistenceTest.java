@@ -78,6 +78,7 @@ public class JournalStructurePersistenceTest extends BasePersistenceTestCase {
 		newJournalStructure.setCreateDate(nextDate());
 		newJournalStructure.setModifiedDate(nextDate());
 		newJournalStructure.setStructureId(randomString());
+		newJournalStructure.setParentStructureId(randomString());
 		newJournalStructure.setName(randomString());
 		newJournalStructure.setDescription(randomString());
 		newJournalStructure.setXsd(randomString());
@@ -104,6 +105,8 @@ public class JournalStructurePersistenceTest extends BasePersistenceTestCase {
 			newJournalStructure.getModifiedDate());
 		assertEquals(existingJournalStructure.getStructureId(),
 			newJournalStructure.getStructureId());
+		assertEquals(existingJournalStructure.getParentStructureId(),
+			newJournalStructure.getParentStructureId());
 		assertEquals(existingJournalStructure.getName(),
 			newJournalStructure.getName());
 		assertEquals(existingJournalStructure.getDescription(),
@@ -161,6 +164,7 @@ public class JournalStructurePersistenceTest extends BasePersistenceTestCase {
 		journalStructure.setCreateDate(nextDate());
 		journalStructure.setModifiedDate(nextDate());
 		journalStructure.setStructureId(randomString());
+		journalStructure.setParentStructureId(randomString());
 		journalStructure.setName(randomString());
 		journalStructure.setDescription(randomString());
 		journalStructure.setXsd(randomString());

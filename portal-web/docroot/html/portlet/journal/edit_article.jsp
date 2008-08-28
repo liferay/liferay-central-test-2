@@ -736,7 +736,7 @@ String smallImageURL = BeanParamUtil.getString(article, request, "smallImageURL"
 				<input name="<portlet:namespace />available_locales" type="hidden" value="" />
 
 				<%
-				Document xsdDoc = SAXReaderUtil.read(structure.getXsd());
+				Document xsdDoc = SAXReaderUtil.read(structure.getMergedXsd());
 
 				if (contentDoc != null) {
 				%>

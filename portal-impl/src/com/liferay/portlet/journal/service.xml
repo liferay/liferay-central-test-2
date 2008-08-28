@@ -313,6 +313,7 @@
 		<!-- Other fields -->
 
 		<column name="structureId" type="String" />
+		<column name="parentStructureId" type="String" />
 		<column name="name" type="String" />
 		<column name="description" type="String" />
 		<column name="xsd" type="String" />
@@ -433,6 +434,7 @@
 		<exception>RequiredTemplate</exception>
 		<exception>StructureDescription</exception>
 		<exception>StructureId</exception>
+		<exception>StructureInheritance</exception>
 		<exception>StructureName</exception>
 		<exception>StructureXsd</exception>
 		<exception>TemplateDescription</exception>

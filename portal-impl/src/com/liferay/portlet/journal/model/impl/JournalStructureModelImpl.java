@@ -90,6 +90,9 @@ public class JournalStructureModelImpl extends BaseModelImpl {
 			{ "structureId", new Integer(Types.VARCHAR) },
 			
 
+			{ "parentStructureId", new Integer(Types.VARCHAR) },
+			
+
 			{ "name", new Integer(Types.VARCHAR) },
 			
 
@@ -98,7 +101,7 @@ public class JournalStructureModelImpl extends BaseModelImpl {
 
 			{ "xsd", new Integer(Types.CLOB) }
 		};
-	public static final String TABLE_SQL_CREATE = "create table JournalStructure (uuid_ VARCHAR(75) null,id_ LONG not null primary key,groupId LONG,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,structureId VARCHAR(75) null,name VARCHAR(75) null,description STRING null,xsd TEXT null)";
+	public static final String TABLE_SQL_CREATE = "create table JournalStructure (uuid_ VARCHAR(75) null,id_ LONG not null primary key,groupId LONG,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,structureId VARCHAR(75) null,parentStructureId VARCHAR(75) null,name VARCHAR(75) null,description STRING null,xsd TEXT null)";
 	public static final String TABLE_SQL_DROP = "drop table JournalStructure";
 	public static final String DATA_SOURCE = "liferayDataSource";
 	public static final String SESSION_FACTORY = "liferaySessionFactory";
@@ -119,6 +122,7 @@ public class JournalStructureModelImpl extends BaseModelImpl {
 		model.setCreateDate(soapModel.getCreateDate());
 		model.setModifiedDate(soapModel.getModifiedDate());
 		model.setStructureId(soapModel.getStructureId());
+		model.setParentStructureId(soapModel.getParentStructureId());
 		model.setName(soapModel.getName());
 		model.setDescription(soapModel.getDescription());
 		model.setXsd(soapModel.getXsd());
@@ -257,6 +261,19 @@ public class JournalStructureModelImpl extends BaseModelImpl {
 		}
 	}
 
+	public String getParentStructureId() {
+		return GetterUtil.getString(_parentStructureId);
+	}
+
+	public void setParentStructureId(String parentStructureId) {
+		if (((parentStructureId == null) && (_parentStructureId != null)) ||
+				((parentStructureId != null) && (_parentStructureId == null)) ||
+				((parentStructureId != null) && (_parentStructureId != null) &&
+				!parentStructureId.equals(_parentStructureId))) {
+			_parentStructureId = parentStructureId;
+		}
+	}
+
 	public String getName() {
 		return GetterUtil.getString(_name);
 	}
@@ -312,6 +329,7 @@ public class JournalStructureModelImpl extends BaseModelImpl {
 			model.setCreateDate(getCreateDate());
 			model.setModifiedDate(getModifiedDate());
 			model.setStructureId(getStructureId());
+			model.setParentStructureId(HtmlUtil.escape(getParentStructureId()));
 			model.setName(HtmlUtil.escape(getName()));
 			model.setDescription(HtmlUtil.escape(getDescription()));
 			model.setXsd(HtmlUtil.escape(getXsd()));
@@ -336,6 +354,7 @@ public class JournalStructureModelImpl extends BaseModelImpl {
 		clone.setCreateDate(getCreateDate());
 		clone.setModifiedDate(getModifiedDate());
 		clone.setStructureId(getStructureId());
+		clone.setParentStructureId(getParentStructureId());
 		clone.setName(getName());
 		clone.setDescription(getDescription());
 		clone.setXsd(getXsd());
@@ -398,6 +417,7 @@ public class JournalStructureModelImpl extends BaseModelImpl {
 	private Date _createDate;
 	private Date _modifiedDate;
 	private String _structureId;
+	private String _parentStructureId;
 	private String _name;
 	private String _description;
 	private String _xsd;

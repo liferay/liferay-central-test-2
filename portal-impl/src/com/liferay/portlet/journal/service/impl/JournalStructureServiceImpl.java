@@ -42,8 +42,8 @@ public class JournalStructureServiceImpl
 
 	public JournalStructure addStructure(
 			String structureId, boolean autoStructureId, long plid, String name,
-			String description, String xsd, boolean addCommunityPermissions,
-			boolean addGuestPermissions)
+			String description, String xsd, String parentStructureId,
+			boolean addCommunityPermissions, boolean addGuestPermissions)
 		throws PortalException, SystemException {
 
 		PortletPermissionUtil.check(
@@ -52,13 +52,14 @@ public class JournalStructureServiceImpl
 
 		return journalStructureLocalService.addStructure(
 			getUserId(), structureId, autoStructureId, plid, name, description,
-			xsd, addCommunityPermissions, addGuestPermissions);
+			xsd, parentStructureId, addCommunityPermissions,
+			addGuestPermissions);
 	}
 
 	public JournalStructure addStructure(
 			String structureId, boolean autoStructureId, long plid, String name,
-			String description, String xsd, String[] communityPermissions,
-			String[] guestPermissions)
+			String description, String xsd, String parentStructureId,
+			String[] communityPermissions, String[] guestPermissions)
 		throws PortalException, SystemException {
 
 		PortletPermissionUtil.check(
@@ -67,7 +68,7 @@ public class JournalStructureServiceImpl
 
 		return journalStructureLocalService.addStructure(
 			getUserId(), structureId, autoStructureId, plid, name, description,
-			xsd, communityPermissions, guestPermissions);
+			xsd, parentStructureId, communityPermissions, guestPermissions);
 	}
 
 	public JournalStructure copyStructure(
@@ -104,14 +105,14 @@ public class JournalStructureServiceImpl
 
 	public JournalStructure updateStructure(
 			long groupId, String structureId, String name, String description,
-			String xsd)
+			String xsd, String parentStructureId)
 		throws PortalException, SystemException {
 
 		JournalStructurePermission.check(
 			getPermissionChecker(), groupId, structureId, ActionKeys.UPDATE);
 
 		return journalStructureLocalService.updateStructure(
-			groupId, structureId, name, description, xsd);
+			groupId, structureId, name, description, xsd, parentStructureId);
 	}
 
 }

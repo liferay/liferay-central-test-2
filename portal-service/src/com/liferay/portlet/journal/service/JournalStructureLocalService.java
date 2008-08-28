@@ -86,8 +86,8 @@ public interface JournalStructureLocalService {
 	public com.liferay.portlet.journal.model.JournalStructure addStructure(
 		long userId, java.lang.String structureId, boolean autoStructureId,
 		long plid, java.lang.String name, java.lang.String description,
-		java.lang.String xsd, boolean addCommunityPermissions,
-		boolean addGuestPermissions)
+		java.lang.String xsd, java.lang.String parentStructureId,
+		boolean addCommunityPermissions, boolean addGuestPermissions)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;
 
@@ -95,14 +95,16 @@ public interface JournalStructureLocalService {
 		java.lang.String uuid, long userId, java.lang.String structureId,
 		boolean autoStructureId, long plid, java.lang.String name,
 		java.lang.String description, java.lang.String xsd,
-		boolean addCommunityPermissions, boolean addGuestPermissions)
+		java.lang.String parentStructureId, boolean addCommunityPermissions,
+		boolean addGuestPermissions)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;
 
 	public com.liferay.portlet.journal.model.JournalStructure addStructure(
 		long userId, java.lang.String structureId, boolean autoStructureId,
 		long plid, java.lang.String name, java.lang.String description,
-		java.lang.String xsd, java.lang.String[] communityPermissions,
+		java.lang.String xsd, java.lang.String parentStructureId,
+		java.lang.String[] communityPermissions,
 		java.lang.String[] guestPermissions)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;
@@ -111,6 +113,7 @@ public interface JournalStructureLocalService {
 		java.lang.String uuid, long userId, java.lang.String structureId,
 		boolean autoStructureId, long plid, java.lang.String name,
 		java.lang.String description, java.lang.String xsd,
+		java.lang.String parentStructureId,
 		java.lang.Boolean addCommunityPermissions,
 		java.lang.Boolean addGuestPermissions,
 		java.lang.String[] communityPermissions,
@@ -122,6 +125,7 @@ public interface JournalStructureLocalService {
 		java.lang.String uuid, long userId, java.lang.String structureId,
 		boolean autoStructureId, long groupId, java.lang.String name,
 		java.lang.String description, java.lang.String xsd,
+		java.lang.String parentStructureId,
 		java.lang.Boolean addCommunityPermissions,
 		java.lang.Boolean addGuestPermissions,
 		java.lang.String[] communityPermissions,
@@ -222,7 +226,8 @@ public interface JournalStructureLocalService {
 
 	public com.liferay.portlet.journal.model.JournalStructure updateStructure(
 		long groupId, java.lang.String structureId, java.lang.String name,
-		java.lang.String description, java.lang.String xsd)
+		java.lang.String description, java.lang.String xsd,
+		java.lang.String parentStructureId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;
 }

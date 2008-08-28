@@ -76,12 +76,13 @@ public class JournalStructureServiceJSON {
 	public static JSONObject addStructure(java.lang.String structureId,
 		boolean autoStructureId, long plid, java.lang.String name,
 		java.lang.String description, java.lang.String xsd,
-		boolean addCommunityPermissions, boolean addGuestPermissions)
+		java.lang.String parentStructureId, boolean addCommunityPermissions,
+		boolean addGuestPermissions)
 		throws java.rmi.RemoteException, com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		com.liferay.portlet.journal.model.JournalStructure returnValue = JournalStructureServiceUtil.addStructure(structureId,
 				autoStructureId, plid, name, description, xsd,
-				addCommunityPermissions, addGuestPermissions);
+				parentStructureId, addCommunityPermissions, addGuestPermissions);
 
 		return JournalStructureJSONSerializer.toJSONObject(returnValue);
 	}
@@ -89,13 +90,14 @@ public class JournalStructureServiceJSON {
 	public static JSONObject addStructure(java.lang.String structureId,
 		boolean autoStructureId, long plid, java.lang.String name,
 		java.lang.String description, java.lang.String xsd,
+		java.lang.String parentStructureId,
 		java.lang.String[] communityPermissions,
 		java.lang.String[] guestPermissions)
 		throws java.rmi.RemoteException, com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		com.liferay.portlet.journal.model.JournalStructure returnValue = JournalStructureServiceUtil.addStructure(structureId,
 				autoStructureId, plid, name, description, xsd,
-				communityPermissions, guestPermissions);
+				parentStructureId, communityPermissions, guestPermissions);
 
 		return JournalStructureJSONSerializer.toJSONObject(returnValue);
 	}
@@ -130,11 +132,12 @@ public class JournalStructureServiceJSON {
 
 	public static JSONObject updateStructure(long groupId,
 		java.lang.String structureId, java.lang.String name,
-		java.lang.String description, java.lang.String xsd)
+		java.lang.String description, java.lang.String xsd,
+		java.lang.String parentStructureId)
 		throws java.rmi.RemoteException, com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		com.liferay.portlet.journal.model.JournalStructure returnValue = JournalStructureServiceUtil.updateStructure(groupId,
-				structureId, name, description, xsd);
+				structureId, name, description, xsd, parentStructureId);
 
 		return JournalStructureJSONSerializer.toJSONObject(returnValue);
 	}

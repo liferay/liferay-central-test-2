@@ -84,12 +84,14 @@ public class JournalStructureServiceSoap {
 	public static com.liferay.portlet.journal.model.JournalStructureSoap addStructure(
 		java.lang.String structureId, boolean autoStructureId, long plid,
 		java.lang.String name, java.lang.String description,
-		java.lang.String xsd, boolean addCommunityPermissions,
-		boolean addGuestPermissions) throws RemoteException {
+		java.lang.String xsd, java.lang.String parentStructureId,
+		boolean addCommunityPermissions, boolean addGuestPermissions)
+		throws RemoteException {
 		try {
 			com.liferay.portlet.journal.model.JournalStructure returnValue = JournalStructureServiceUtil.addStructure(structureId,
 					autoStructureId, plid, name, description, xsd,
-					addCommunityPermissions, addGuestPermissions);
+					parentStructureId, addCommunityPermissions,
+					addGuestPermissions);
 
 			return com.liferay.portlet.journal.model.JournalStructureSoap.toSoapModel(returnValue);
 		}
@@ -103,12 +105,13 @@ public class JournalStructureServiceSoap {
 	public static com.liferay.portlet.journal.model.JournalStructureSoap addStructure(
 		java.lang.String structureId, boolean autoStructureId, long plid,
 		java.lang.String name, java.lang.String description,
-		java.lang.String xsd, java.lang.String[] communityPermissions,
+		java.lang.String xsd, java.lang.String parentStructureId,
+		java.lang.String[] communityPermissions,
 		java.lang.String[] guestPermissions) throws RemoteException {
 		try {
 			com.liferay.portlet.journal.model.JournalStructure returnValue = JournalStructureServiceUtil.addStructure(structureId,
 					autoStructureId, plid, name, description, xsd,
-					communityPermissions, guestPermissions);
+					parentStructureId, communityPermissions, guestPermissions);
 
 			return com.liferay.portlet.journal.model.JournalStructureSoap.toSoapModel(returnValue);
 		}
@@ -165,11 +168,11 @@ public class JournalStructureServiceSoap {
 
 	public static com.liferay.portlet.journal.model.JournalStructureSoap updateStructure(
 		long groupId, java.lang.String structureId, java.lang.String name,
-		java.lang.String description, java.lang.String xsd)
-		throws RemoteException {
+		java.lang.String description, java.lang.String xsd,
+		java.lang.String parentStructureId) throws RemoteException {
 		try {
 			com.liferay.portlet.journal.model.JournalStructure returnValue = JournalStructureServiceUtil.updateStructure(groupId,
-					structureId, name, description, xsd);
+					structureId, name, description, xsd, parentStructureId);
 
 			return com.liferay.portlet.journal.model.JournalStructureSoap.toSoapModel(returnValue);
 		}

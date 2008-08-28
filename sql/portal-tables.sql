@@ -529,6 +529,7 @@ create table JournalStructure (
 	createDate DATE null,
 	modifiedDate DATE null,
 	structureId VARCHAR(75) null,
+	parentStructureId VARCHAR(75) null,
 	name VARCHAR(75) null,
 	description STRING null,
 	xsd TEXT null

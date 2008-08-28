@@ -59,6 +59,7 @@ public class JournalStructureSoap implements Serializable {
 		soapModel.setCreateDate(model.getCreateDate());
 		soapModel.setModifiedDate(model.getModifiedDate());
 		soapModel.setStructureId(model.getStructureId());
+		soapModel.setParentStructureId(model.getParentStructureId());
 		soapModel.setName(model.getName());
 		soapModel.setDescription(model.getDescription());
 		soapModel.setXsd(model.getXsd());
@@ -160,6 +161,14 @@ public class JournalStructureSoap implements Serializable {
 		_structureId = structureId;
 	}
 
+	public String getParentStructureId() {
+		return _parentStructureId;
+	}
+
+	public void setParentStructureId(String parentStructureId) {
+		_parentStructureId = parentStructureId;
+	}
+
 	public String getName() {
 		return _name;
 	}
@@ -193,6 +202,7 @@ public class JournalStructureSoap implements Serializable {
 	private Date _createDate;
 	private Date _modifiedDate;
 	private String _structureId;
+	private String _parentStructureId;
 	private String _name;
 	private String _description;
 	private String _xsd;

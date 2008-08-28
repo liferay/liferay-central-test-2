@@ -1,3 +1,5 @@
+alter table JournalStructure add parentStructureId VARCHAR(75);
+
 create table MBMailingList (
 	uuid_ VARCHAR(75) null,
 	mailingListId LONG not null primary key,

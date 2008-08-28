@@ -58,6 +58,7 @@
 <%@ page import="com.liferay.portlet.journal.RequiredTemplateException" %>
 <%@ page import="com.liferay.portlet.journal.StructureDescriptionException" %>
 <%@ page import="com.liferay.portlet.journal.StructureIdException" %>
+<%@ page import="com.liferay.portlet.journal.StructureInheritanceException" %>
 <%@ page import="com.liferay.portlet.journal.StructureNameException" %>
 <%@ page import="com.liferay.portlet.journal.StructureXsdException" %>
 <%@ page import="com.liferay.portlet.journal.TemplateDescriptionException" %>

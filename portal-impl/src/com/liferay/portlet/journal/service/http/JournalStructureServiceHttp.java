@@ -77,7 +77,8 @@ public class JournalStructureServiceHttp {
 		HttpPrincipal httpPrincipal, java.lang.String structureId,
 		boolean autoStructureId, long plid, java.lang.String name,
 		java.lang.String description, java.lang.String xsd,
-		boolean addCommunityPermissions, boolean addGuestPermissions)
+		java.lang.String parentStructureId, boolean addCommunityPermissions,
+		boolean addGuestPermissions)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		try {
@@ -109,15 +110,21 @@ public class JournalStructureServiceHttp {
 				paramObj5 = new NullWrapper("java.lang.String");
 			}
 
-			Object paramObj6 = new BooleanWrapper(addCommunityPermissions);
+			Object paramObj6 = parentStructureId;
 
-			Object paramObj7 = new BooleanWrapper(addGuestPermissions);
+			if (parentStructureId == null) {
+				paramObj6 = new NullWrapper("java.lang.String");
+			}
+
+			Object paramObj7 = new BooleanWrapper(addCommunityPermissions);
+
+			Object paramObj8 = new BooleanWrapper(addGuestPermissions);
 
 			MethodWrapper methodWrapper = new MethodWrapper(JournalStructureServiceUtil.class.getName(),
 					"addStructure",
 					new Object[] {
 						paramObj0, paramObj1, paramObj2, paramObj3, paramObj4,
-						paramObj5, paramObj6, paramObj7
+						paramObj5, paramObj6, paramObj7, paramObj8
 					});
 
 			Object returnObj = null;
@@ -150,6 +157,7 @@ public class JournalStructureServiceHttp {
 		HttpPrincipal httpPrincipal, java.lang.String structureId,
 		boolean autoStructureId, long plid, java.lang.String name,
 		java.lang.String description, java.lang.String xsd,
+		java.lang.String parentStructureId,
 		java.lang.String[] communityPermissions,
 		java.lang.String[] guestPermissions)
 		throws com.liferay.portal.PortalException,
@@ -183,23 +191,29 @@ public class JournalStructureServiceHttp {
 				paramObj5 = new NullWrapper("java.lang.String");
 			}
 
-			Object paramObj6 = communityPermissions;
+			Object paramObj6 = parentStructureId;
 
-			if (communityPermissions == null) {
-				paramObj6 = new NullWrapper("[Ljava.lang.String;");
+			if (parentStructureId == null) {
+				paramObj6 = new NullWrapper("java.lang.String");
 			}
 
-			Object paramObj7 = guestPermissions;
+			Object paramObj7 = communityPermissions;
+
+			if (communityPermissions == null) {
+				paramObj7 = new NullWrapper("[Ljava.lang.String;");
+			}
+
+			Object paramObj8 = guestPermissions;
 
 			if (guestPermissions == null) {
-				paramObj7 = new NullWrapper("[Ljava.lang.String;");
+				paramObj8 = new NullWrapper("[Ljava.lang.String;");
 			}
 
 			MethodWrapper methodWrapper = new MethodWrapper(JournalStructureServiceUtil.class.getName(),
 					"addStructure",
 					new Object[] {
 						paramObj0, paramObj1, paramObj2, paramObj3, paramObj4,
-						paramObj5, paramObj6, paramObj7
+						paramObj5, paramObj6, paramObj7, paramObj8
 					});
 
 			Object returnObj = null;
@@ -364,7 +378,8 @@ public class JournalStructureServiceHttp {
 	public static com.liferay.portlet.journal.model.JournalStructure updateStructure(
 		HttpPrincipal httpPrincipal, long groupId,
 		java.lang.String structureId, java.lang.String name,
-		java.lang.String description, java.lang.String xsd)
+		java.lang.String description, java.lang.String xsd,
+		java.lang.String parentStructureId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		try {
@@ -394,10 +409,17 @@ public class JournalStructureServiceHttp {
 				paramObj4 = new NullWrapper("java.lang.String");
 			}
 
+			Object paramObj5 = parentStructureId;
+
+			if (parentStructureId == null) {
+				paramObj5 = new NullWrapper("java.lang.String");
+			}
+
 			MethodWrapper methodWrapper = new MethodWrapper(JournalStructureServiceUtil.class.getName(),
 					"updateStructure",
 					new Object[] {
-						paramObj0, paramObj1, paramObj2, paramObj3, paramObj4
+						paramObj0, paramObj1, paramObj2, paramObj3, paramObj4,
+						paramObj5
 					});
 
 			Object returnObj = null;

@@ -888,6 +888,7 @@ public class JournalPortletDataHandlerImpl implements PortletDataHandler {
 						structure.getUuid(), userId, structureId,
 						autoStructureId, plid, structure.getName(),
 						structure.getDescription(), structure.getXsd(),
+						structure.getParentStructureId(),
 						addCommunityPermissions, addGuestPermissions);
 			}
 			else {
@@ -895,14 +896,16 @@ public class JournalPortletDataHandlerImpl implements PortletDataHandler {
 					JournalStructureLocalServiceUtil.updateStructure(
 						existingStructure.getGroupId(),
 						existingStructure.getStructureId(), structure.getName(),
-						structure.getDescription(), structure.getXsd());
+						structure.getDescription(), structure.getXsd(),
+						structure.getParentStructureId());
 			}
 		}
 		else {
 			existingStructure = JournalStructureLocalServiceUtil.addStructure(
 				userId, structureId, autoStructureId, plid, structure.getName(),
 				structure.getDescription(), structure.getXsd(),
-				addCommunityPermissions, addGuestPermissions);
+				structure.getParentStructureId(), addCommunityPermissions,
+				addGuestPermissions);
 		}
 
 		structureIds.put(structureId, existingStructure.getStructureId());

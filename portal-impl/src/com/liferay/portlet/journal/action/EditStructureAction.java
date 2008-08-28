@@ -39,6 +39,7 @@ import com.liferay.portlet.journal.NoSuchStructureException;
 import com.liferay.portlet.journal.RequiredStructureException;
 import com.liferay.portlet.journal.StructureDescriptionException;
 import com.liferay.portlet.journal.StructureIdException;
+import com.liferay.portlet.journal.StructureInheritanceException;
 import com.liferay.portlet.journal.StructureNameException;
 import com.liferay.portlet.journal.StructureXsdException;
 import com.liferay.portlet.journal.model.JournalStructure;
@@ -111,6 +112,7 @@ public class EditStructureAction extends PortletAction {
 					 e instanceof RequiredStructureException ||
 					 e instanceof StructureDescriptionException ||
 					 e instanceof StructureIdException ||
+					 e instanceof StructureInheritanceException ||
 					 e instanceof StructureNameException ||
 					 e instanceof StructureXsdException) {
 
@@ -224,6 +226,8 @@ public class EditStructureAction extends PortletAction {
 		String name = ParamUtil.getString(actionRequest, "name");
 		String description = ParamUtil.getString(actionRequest, "description");
 		String xsd = ParamUtil.getString(actionRequest, "xsd");
+		String parentStructureId = ParamUtil.getString(
+			actionRequest, "parentStructureId");
 
 		String[] communityPermissions = actionRequest.getParameterValues(
 			"communityPermissions");
@@ -238,14 +242,16 @@ public class EditStructureAction extends PortletAction {
 
 			structure = JournalStructureServiceUtil.addStructure(
 				structureId, autoStructureId, layout.getPlid(), name,
-				description, xsd, communityPermissions, guestPermissions);
+				description, xsd, parentStructureId, communityPermissions,
+				guestPermissions);
 		}
 		else {
 
 			// Update structure
 
 			structure = JournalStructureServiceUtil.updateStructure(
-				groupId, structureId, name, description, xsd);
+				groupId, structureId, name, description, xsd,
+				parentStructureId);
 		}
 
 		// Recent structures
