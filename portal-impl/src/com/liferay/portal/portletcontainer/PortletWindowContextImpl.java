@@ -437,25 +437,27 @@ public class PortletWindowContextImpl implements PortletWindowContext {
 		throws PortletWindowContextException {
 
 		List<Portlet> portlets = new ArrayList<Portlet>();
-		ThemeDisplay themeDisplay = (ThemeDisplay)_request.getAttribute(
-			WebKeys.THEME_DISPLAY);
 
 		try {
+			ThemeDisplay themeDisplay = (ThemeDisplay)_request.getAttribute(
+				WebKeys.THEME_DISPLAY);
+
 			List<Layout> layouts = themeDisplay.getLayouts();
 
-			for(Layout layout : layouts) {
+			for (Layout layout : layouts) {
 				LayoutTypePortlet layoutTypePortlet =
 					(LayoutTypePortlet)layout.getLayoutType();
 
-					for (Portlet portlet : layoutTypePortlet.getAllPortlets()) {
-						PortletApp portletApp = portlet.getPortletApp();
+				for (Portlet portlet : layoutTypePortlet.getAllPortlets()) {
+					PortletApp portletApp = portlet.getPortletApp();
 
-						if (portletApp.isWARFile() || portlet.isRemote()) {
-							portlets.add(portlet);
-						}
+					if (portletApp.isWARFile() || portlet.isRemote()) {
+						portlets.add(portlet);
 					}
+				}
 			}
-		} catch (SystemException se) {
+		}
+		catch (SystemException se) {
 			throw new PortletWindowContextException(se);
 		}
 
