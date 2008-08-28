@@ -55,7 +55,26 @@ public class DeactivateUserTest extends BaseTestCase {
 		selenium.click(RuntimeVariables.replace(
 				"//input[@value='Search Users']"));
 		selenium.waitForPageToLoad("30000");
-		selenium.click("link=Deactivate");
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isElementPresent("//strong/span")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
+		selenium.click("//strong/span");
+		selenium.click(RuntimeVariables.replace("//li[5]/nobr/a"));
+		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.getConfirmation()
 						   .matches("^Are you sure you want to deactivate this[\\s\\S]$"));
 

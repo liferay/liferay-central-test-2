@@ -61,8 +61,6 @@ public class AddRolesTest extends BaseTestCase {
 				"This is the Selenium Message Boards and Calendar Role for Deleting and Updating."));
 		selenium.click(RuntimeVariables.replace("//input[@value='Save']"));
 		selenium.waitForPageToLoad("30000");
-		selenium.click(RuntimeVariables.replace("Link=Define Permissions"));
-		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -70,8 +68,27 @@ public class AddRolesTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isTextPresent(
-							"1 Selenium Message Boards Role and Calendar Role")) {
+				if (selenium.isElementPresent("//strong/span")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
+		selenium.click("//strong/span");
+		selenium.click("//div[2]/ul/li[3]/nobr/a");
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isElementPresent(
+							"//input[@value='Add Portlet Permissions']")) {
 					break;
 				}
 			}
@@ -96,8 +113,43 @@ public class AddRolesTest extends BaseTestCase {
 		selenium.waitForPageToLoad("30000");
 		selenium.click(RuntimeVariables.replace("link=Roles"));
 		selenium.waitForPageToLoad("30000");
-		selenium.click(RuntimeVariables.replace("link=Define Permissions"));
-		selenium.waitForPageToLoad("30000");
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isElementPresent("//strong/span")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
+		selenium.click("//strong/span");
+		selenium.click("//div[2]/ul/li[3]/nobr/a");
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isElementPresent(
+							"//input[@value='Add Portlet Permissions']")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
 		selenium.click(RuntimeVariables.replace(
 				"//input[@value='Add Portlet Permissions']"));
 		selenium.waitForPageToLoad("30000");

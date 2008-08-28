@@ -39,7 +39,7 @@ public class ApplyUserGroupTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("link=Assign Members")) {
+				if (selenium.isElementPresent("//strong/span")) {
 					break;
 				}
 			}
@@ -49,16 +49,15 @@ public class ApplyUserGroupTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click(RuntimeVariables.replace("link=Assign Members"));
+		selenium.click("//strong/span");
+		selenium.click(RuntimeVariables.replace("//li[4]/nobr/a"));
 		selenium.waitForPageToLoad("30000");
 		selenium.click(RuntimeVariables.replace("link=Available"));
 		selenium.waitForPageToLoad("30000");
-		selenium.typeKeys("toggle_id_enterprise_admin_user_searchkeywords",
-			RuntimeVariables.replace("selenium"));
 		selenium.click(RuntimeVariables.replace(
 				"//input[@value='Search Users']"));
 		selenium.waitForPageToLoad("30000");
-		selenium.click("document._79_fm._79_rowIds[1]");
+		selenium.click("_79_rowIds");
 		selenium.click(RuntimeVariables.replace(
 				"//input[@value='Update Associations']"));
 		selenium.waitForPageToLoad("30000");
