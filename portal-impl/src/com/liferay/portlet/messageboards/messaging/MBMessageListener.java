@@ -26,7 +26,9 @@ import com.liferay.mail.service.MailServiceUtil;
 import com.liferay.portal.NoSuchUserException;
 import com.liferay.portal.kernel.json.JSONFactoryUtil;
 import com.liferay.portal.kernel.json.JSONObject;
+import com.liferay.portal.kernel.mail.Account;
 import com.liferay.portal.kernel.mail.MailMessage;
+import com.liferay.portal.kernel.mail.SMTPAccount;
 import com.liferay.portal.kernel.messaging.MessageListener;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.StringUtil;
@@ -34,8 +36,11 @@ import com.liferay.portal.model.Subscription;
 import com.liferay.portal.model.User;
 import com.liferay.portal.service.SubscriptionLocalServiceUtil;
 import com.liferay.portal.service.UserLocalServiceUtil;
+import com.liferay.portlet.messageboards.NoSuchMailingListException;
 import com.liferay.portlet.messageboards.model.MBCategory;
+import com.liferay.portlet.messageboards.model.MBMailingList;
 import com.liferay.portlet.messageboards.model.MBThread;
+import com.liferay.portlet.messageboards.service.MBMailingListLocalServiceUtil;
 import com.liferay.portlet.messageboards.util.BBCodeUtil;
 
 import java.util.ArrayList;
@@ -52,6 +57,7 @@ import org.apache.commons.logging.LogFactory;
  * <a href="MBMessageListener.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
+ * @author Thiago Moreira
  *
  */
 public class MBMessageListener implements MessageListener {
@@ -84,6 +90,7 @@ public class MBMessageListener implements MessageListener {
 		String mailId = jsonObj.getString("mailId");
 		String inReplyTo = jsonObj.getString("inReplyTo");
 		boolean htmlFormat = jsonObj.getBoolean("htmlFormat");
+		boolean sourceMailingList = jsonObj.getBoolean("sourceMailingList");
 
 		Set<Long> sent = new HashSet<Long>();
 
@@ -117,9 +124,61 @@ public class MBMessageListener implements MessageListener {
 				sent, replyToAddress, mailId, inReplyTo, htmlFormat);
 		}
 
+		// Mailing list
+
+		for (long categoryId : categoryIdsArray) {
+
+			try {
+				MBMailingList mailingList =
+					MBMailingListLocalServiceUtil.getCategoryMailingList(
+						categoryId);
+
+				if (mailingList.isActive() && !sourceMailingList) {
+
+					String mailingListAddress = mailingList.getEmailAddress();
+					SMTPAccount account = null;
+
+					fromAddress = mailingList.getOutEmailAddress();
+
+					if (mailingList.isOutCustom()) {
+						String protocol = Account.PROTOCOL_SMTP;
+
+						if (mailingList.isOutUseSSL()) {
+							protocol = Account.PROTOCOL_SMTPS;
+						}
+
+						account = (SMTPAccount)Account.getInstance(
+							protocol, mailingList.getOutServerPort());
+						account.setHost(mailingList.getOutServerName());
+						account.setUser(mailingList.getOutUserName());
+						account.setPassword(mailingList.getOutPassword());
+					}
+
+					sendEmail(
+						fromAddress, subject, body, mailingListAddress,
+						replyToAddress, mailId, inReplyTo, htmlFormat, account);
+				}
+			}
+			catch (NoSuchMailingListException nsmle) {
+			}
+		}
+
 		if (_log.isInfoEnabled()) {
 			_log.info("Finished sending notifications");
 		}
+	}
+
+	protected void sendEmail(
+			String fromAddress, String subject, String body,
+			String mailingListAddress, String replyToAddress, String mailId,
+			String inReplyTo, boolean htmlFormat, SMTPAccount account)
+		throws Exception {
+
+		InternetAddress address = new InternetAddress(mailingListAddress);
+		InternetAddress[] bulkAddresses = new InternetAddress[]{address};
+
+		sendMail(bulkAddresses, fromAddress, null, subject, body,
+			replyToAddress, mailId, inReplyTo, htmlFormat, account);
 	}
 
 	protected void sendEmail(
@@ -179,9 +238,19 @@ public class MBMessageListener implements MessageListener {
 			addresses.add(userAddress);
 		}
 
-		try {
-			InternetAddress[] bulkAddresses = addresses.toArray(
+		InternetAddress[] bulkAddresses = addresses.toArray(
 				new InternetAddress[addresses.size()]);
+
+		sendMail(bulkAddresses, fromAddress, fromName, subject, body,
+			replyToAddress, mailId, inReplyTo, htmlFormat, null);
+	}
+
+	protected void sendMail(InternetAddress[] bulkAddresses, String fromAddress,
+			String fromName, String subject, String body, String replyToAddress,
+			String mailId, String inReplyTo, boolean htmlFormat,
+			SMTPAccount account) {
+
+		try {
 
 			if (bulkAddresses.length == 0) {
 				return;
@@ -235,6 +304,7 @@ public class MBMessageListener implements MessageListener {
 			message.setMessageId(mailId);
 			message.setInReplyTo(inReplyTo);
 			message.setReplyTo(new InternetAddress[] {replyTo});
+			message.setSMTPAccount(account);
 
 			MailServiceUtil.sendEmail(message);
 		}
