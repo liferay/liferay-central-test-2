@@ -27,16 +27,13 @@ import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.sharepoint.Property;
 import com.liferay.portal.sharepoint.ResponseElement;
 import com.liferay.portal.sharepoint.SharepointRequest;
-import com.liferay.portal.sharepoint.SharepointUtil;
+import com.liferay.portal.sharepoint.SharepointStorage;
 import com.liferay.portal.sharepoint.Tree;
-import com.liferay.portlet.documentlibrary.NoSuchFolderException;
-import com.liferay.portlet.documentlibrary.model.DLFileEntry;
-import com.liferay.portlet.documentlibrary.model.DLFolder;
-import com.liferay.portlet.documentlibrary.service.DLFileEntryServiceUtil;
-import com.liferay.portlet.documentlibrary.service.DLFolderServiceUtil;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import javax.servlet.http.HttpServletRequest;
 
 /**
  * <a href="RemoveDocumentsMethodImpl.java.html"><b><i>View Source</i></b></a>
@@ -50,89 +47,28 @@ public class RemoveDocumentsMethodImpl extends BaseMethodImpl {
 		return _METHOD_NAME;
 	}
 
-	protected List<ResponseElement> getElements(
-		SharepointRequest sharepointRequest) {
-
-		List<ResponseElement> elements = new ArrayList<ResponseElement>();
-
-		String urlList = ParamUtil.getString(
-			sharepointRequest.getHttpRequest(), "url_list");
+	public String getRootPath(HttpServletRequest request) {
+		String urlList = ParamUtil.getString(request, "url_list");
 
 		urlList = urlList.substring(1, urlList.length() - 1);
 
-		String documentNames[] = urlList.split(StringPool.SEMICOLON);
+		return urlList.split(StringPool.SEMICOLON)[0];
+	}
 
-		List<DLFolder> folders = new ArrayList<DLFolder>();
+	protected List<ResponseElement> getElements(
+			SharepointRequest sharepointRequest)
+		throws Exception {
 
-		List<DLFileEntry> fileEntries = new ArrayList<DLFileEntry>();
+		List<ResponseElement> elements = new ArrayList<ResponseElement>();
 
-		for (String documentName : documentNames) {
-			try {
-				long ids[] = SharepointUtil.getIds(documentName);
+		SharepointStorage storage = sharepointRequest.getSharepointStorage();
 
-				folders.add(DLFolderServiceUtil.getFolder(ids[1]));
-			}
-			catch (Exception e1) {
-				if (e1 instanceof NoSuchFolderException) {
-					try {
-						fileEntries.add(
-							SharepointUtil.getDLFileEntry(documentName));
-					}
-					catch (Exception e2) {
-					}
-				}
-			}
-		}
+		Tree[] results = storage.removeDocument(sharepointRequest);
 
-		Tree documentTree = new Tree();
-
-		Tree removedDocsTree = new Tree();
-		Tree failedDocsTree = new Tree();
-
-		for (DLFileEntry fileEntry : fileEntries) {
-			try {
-				documentTree = SharepointUtil.getDocumentTree(fileEntry);
-
-				DLFileEntryServiceUtil.deleteFileEntry(
-					fileEntry.getFolderId(), fileEntry.getName());
-
-				removedDocsTree.addChild(documentTree);
-			}
-			catch (Exception e1) {
-				try {
-					failedDocsTree.addChild(documentTree);
-				}
-				catch (Exception e2) {
-				}
-			}
-		}
-
-		Tree folderTree = new Tree();
-
-		Tree removedDirsTree = new Tree();
-		Tree failedDirsTree = new Tree();
-
-		for (DLFolder folder : folders) {
-			try {
-				folderTree = SharepointUtil.getDLFolderTree(folder);
-
-				DLFolderServiceUtil.deleteFolder(folder.getFolderId());
-
-				removedDirsTree.addChild(folderTree);
-			}
-			catch (Exception e1) {
-				try {
-					failedDirsTree.addChild(folderTree);
-				}
-				catch (Exception e2) {
-				}
-			}
-		}
-
-		elements.add(new Property("removed_docs", removedDocsTree));
-		elements.add(new Property("removed_dirs", removedDirsTree));
-		elements.add(new Property("failed_docs", failedDocsTree));
-		elements.add(new Property("failed_dirs", failedDirsTree));
+		elements.add(new Property("removed_docs", results[0]));
+		elements.add(new Property("removed_dirs", results[1]));
+		elements.add(new Property("failed_docs", results[2]));
+		elements.add(new Property("failed_dirs", results[3]));
 
 		return elements;
 	}

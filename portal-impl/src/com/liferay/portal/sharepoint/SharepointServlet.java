@@ -22,6 +22,7 @@
 
 package com.liferay.portal.sharepoint;
 
+import com.liferay.portal.kernel.util.InstancePool;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.User;
 import com.liferay.portal.sharepoint.methods.Method;
@@ -78,8 +79,12 @@ public class SharepointServlet extends HttpServlet {
 
 				Method method = MethodFactory.create(request);
 
+				String rootPath = method.getRootPath(request);
+
+				SharepointStorage storage = getStorage(rootPath);
+
 				SharepointRequest sharepointRequest = new SharepointRequest(
-					request, response, user);
+					storage, request, response, rootPath, user);
 
 				method.process(sharepointRequest);
 			}
@@ -87,6 +92,30 @@ public class SharepointServlet extends HttpServlet {
 		catch (SharepointException se) {
 			_log.error(se, se);
 		}
+	}
+
+	protected SharepointStorage getStorage(String path)
+		throws SharepointException {
+
+		String storageClass = null;
+
+		if (path == null) {
+			return null;
+		}
+
+		String[] pathArray = SharepointUtil.getPathArray(path);
+
+		if (pathArray.length == 0) {
+			storageClass = CompanySharepointStorageImpl.class.getName();
+		}
+		else if (pathArray.length == 1) {
+			storageClass = GroupSharepointStorageImpl.class.getName();
+		}
+		else if (pathArray.length >= 2) {
+			storageClass = SharepointUtil.getStorageClass(pathArray[1]);
+		}
+
+		return (SharepointStorage)InstancePool.get(storageClass);
 	}
 
 	protected void vtiInfHtml(HttpServletResponse response) throws Exception {

@@ -24,15 +24,15 @@ package com.liferay.portal.sharepoint.methods;
 
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.StringPool;
-import com.liferay.portal.kernel.uuid.PortalUUIDUtil;
 import com.liferay.portal.sharepoint.Property;
 import com.liferay.portal.sharepoint.ResponseElement;
 import com.liferay.portal.sharepoint.SharepointRequest;
-import com.liferay.portal.sharepoint.SharepointUtil;
-import com.liferay.portlet.documentlibrary.service.DLFolderLocalServiceUtil;
+import com.liferay.portal.sharepoint.SharepointStorage;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import javax.servlet.http.HttpServletRequest;
 
 /**
  * <a href="CreateURLDirectoriesMethodImpl.java.html"><b><i>View Source</i></b>
@@ -47,48 +47,25 @@ public class CreateURLDirectoriesMethodImpl extends BaseMethodImpl {
 		return _METHOD_NAME;
 	}
 
+	public String getRootPath(HttpServletRequest request) {
+		String urlDirs = ParamUtil.getString(request, "urldirs");
+
+		urlDirs = urlDirs.substring(2, urlDirs.length() - 2);
+
+		String urls[] = urlDirs.split(StringPool.SEMICOLON);
+
+		return urls[0].substring(4);
+	}
+
 	protected List<ResponseElement> getElements(
 			SharepointRequest sharepointRequest)
 		throws Exception {
 
 		List<ResponseElement> elements = new ArrayList<ResponseElement>();
 
-		String urlDirs = ParamUtil.getString(
-			sharepointRequest.getHttpRequest(), "urldirs");
+		SharepointStorage storage = sharepointRequest.getSharepointStorage();
 
-		urlDirs = urlDirs.substring(2, urlDirs.length() - 2);
-
-		String urls[] = urlDirs.split(StringPool.SEMICOLON);
-
-		String folderName = urls[0].substring(4);
-
-		String uuid = PortalUUIDUtil.generate();
-
-		long userId = sharepointRequest.getUserId();
-
-		int pos = folderName.lastIndexOf(StringPool.FORWARD_SLASH);
-
-		String parentFolderName = folderName.substring(0, pos);
-
-		folderName = folderName.substring(pos + 1);
-
-		long ids[] = SharepointUtil.getIds(parentFolderName);
-
-		long groupId = ids[0];
-		long parentFolderId = ids[1];
-
-		String description = StringPool.BLANK;
-
-		Boolean addCommunityPermissions = null;
-		Boolean addGuestPermissions = null;
-
-		String[] communityPermissions = null;
-		String[] guestPermissions = null;
-
-		DLFolderLocalServiceUtil.addFolderToGroup(
-			uuid, userId, groupId, parentFolderId, folderName, description,
-			addCommunityPermissions, addGuestPermissions, communityPermissions,
-			guestPermissions);
+		storage.createFolder(sharepointRequest);
 
 		elements.add(new Property("message", StringPool.BLANK));
 

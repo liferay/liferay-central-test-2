@@ -29,16 +29,16 @@ import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.sharepoint.Property;
 import com.liferay.portal.sharepoint.ResponseElement;
 import com.liferay.portal.sharepoint.SharepointRequest;
-import com.liferay.portal.sharepoint.SharepointUtil;
+import com.liferay.portal.sharepoint.SharepointStorage;
 import com.liferay.portal.sharepoint.Tree;
-import com.liferay.portlet.documentlibrary.model.DLFileEntry;
-import com.liferay.portlet.documentlibrary.service.DLFileEntryLocalServiceUtil;
 import com.liferay.util.servlet.ServletResponseUtil;
 
 import java.io.InputStream;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import javax.servlet.http.HttpServletRequest;
 
 /**
  * <a href="GetDocumentMethodImpl.java.html"><b><i>View Source</i></b></a>
@@ -52,27 +52,26 @@ public class GetDocumentMethodImpl extends BaseMethodImpl {
 		return _METHOD_NAME;
 	}
 
+	public String getRootPath(HttpServletRequest request) {
+		return ParamUtil.getString(request, "document_name");
+	}
+
 	protected void doProcess(SharepointRequest sharepointRequest)
 		throws Exception {
+
+		SharepointStorage storage = sharepointRequest.getSharepointStorage();
 
 		StringBuilder sb = getResponseBuffer(sharepointRequest);
 
 		sb.append(StringPool.NEW_LINE);
 
-		String documentName = ParamUtil.getString(
-			sharepointRequest.getHttpRequest(), "document_name");
-
-		DLFileEntry fileEntry = SharepointUtil.getDLFileEntry(documentName);
-
-		InputStream is = DLFileEntryLocalServiceUtil.getFileAsStream(
-			sharepointRequest.getCompanyId(), sharepointRequest.getUserId(),
-			fileEntry.getFolderId(), fileEntry.getName());
+		InputStream is = storage.getDocumentInputStream(sharepointRequest);
 
 		byte[] bytes = ArrayUtil.append(
 			sb.toString().getBytes(), FileUtil.getBytes(is));
 
 		ServletResponseUtil.write(
-			sharepointRequest.getHttpResponse(), bytes);
+			sharepointRequest.getHttpServletResponse(), bytes);
 	}
 
 	protected List<ResponseElement> getElements(
@@ -81,16 +80,11 @@ public class GetDocumentMethodImpl extends BaseMethodImpl {
 
 		List<ResponseElement> elements = new ArrayList<ResponseElement>();
 
-		String documentName = ParamUtil.getString(
-			sharepointRequest.getHttpRequest(), "document_name");
+		SharepointStorage storage = sharepointRequest.getSharepointStorage();
 
-		elements.add(
-			new Property(
-				"message",
-				"successfully retrieved document '" + documentName +
-					"' from '" + documentName + "'"));
+		elements.add(new Property("message", StringPool.BLANK));
 
-		Tree documentTree = SharepointUtil.getDocumentTree(documentName);
+		Tree documentTree = storage.getDocumentTree(sharepointRequest);
 
 		Property documentProperty = new Property("document", documentTree);
 

@@ -22,29 +22,16 @@
 
 package com.liferay.portal.sharepoint.methods;
 
-import com.liferay.portal.kernel.dao.orm.QueryUtil;
 import com.liferay.portal.kernel.util.ParamUtil;
-import com.liferay.portal.kernel.util.StringPool;
-import com.liferay.portal.kernel.util.Validator;
-import com.liferay.portal.model.Group;
-import com.liferay.portal.model.Organization;
-import com.liferay.portal.service.GroupLocalServiceUtil;
-import com.liferay.portal.service.OrganizationLocalServiceUtil;
 import com.liferay.portal.sharepoint.Property;
 import com.liferay.portal.sharepoint.ResponseElement;
 import com.liferay.portal.sharepoint.SharepointRequest;
-import com.liferay.portal.sharepoint.SharepointUtil;
-import com.liferay.portal.sharepoint.Tree;
-import com.liferay.portlet.documentlibrary.model.DLFileEntry;
-import com.liferay.portlet.documentlibrary.model.DLFolder;
-import com.liferay.portlet.documentlibrary.model.impl.DLFolderImpl;
-import com.liferay.portlet.documentlibrary.service.DLFileEntryLocalServiceUtil;
-import com.liferay.portlet.documentlibrary.service.DLFolderLocalServiceUtil;
+import com.liferay.portal.sharepoint.SharepointStorage;
 
 import java.util.ArrayList;
-import java.util.Date;
-import java.util.LinkedHashMap;
 import java.util.List;
+
+import javax.servlet.http.HttpServletRequest;
 
 /**
  * <a href="ListDocumentsMethodImpl.java.html"><b><i>View Source</i></b></a>
@@ -58,113 +45,8 @@ public class ListDocumentsMethodImpl extends BaseMethodImpl {
 		return _METHOD_NAME;
 	}
 
-	protected void addDLFolders(
-			String initialURL, List<ResponseElement> elements, Tree urlDirsTree)
-		throws Exception {
-
-		long[] ids = SharepointUtil.getIds(initialURL);
-
-		long groupId = ids[0];
-		long parentFolderId = ids[1];
-
-		String rootFolderPath = SharepointUtil.getGroupPath(groupId);
-
-		Date rootCreateDate = new Date();
-		Date rootModifiedDate = rootCreateDate;
-		Date rootLastPostDate = rootCreateDate;
-
-		List<DLFileEntry> entries = new ArrayList<DLFileEntry>();
-
-		if (parentFolderId != DLFolderImpl.DEFAULT_PARENT_FOLDER_ID) {
-			DLFolder folder = DLFolderLocalServiceUtil.getDLFolder(
-				parentFolderId);
-
-			rootCreateDate = folder.getCreateDate();
-			rootModifiedDate = folder.getModifiedDate();
-			rootLastPostDate = folder.getLastPostDate();
-
-			rootFolderPath = SharepointUtil.getDLFolderPath(parentFolderId);
-
-			entries = DLFileEntryLocalServiceUtil.getFileEntries(
-				parentFolderId);
-
-			addFileEntries(elements, entries, rootFolderPath);
-		}
-		else {
-			addFileEntries(elements, entries, null);
-		}
-
-		List<DLFolder> folders = DLFolderLocalServiceUtil.getFolders(
-			groupId, parentFolderId);
-
-		for (DLFolder folder : folders) {
-			urlDirsTree.addChild(SharepointUtil.getDLFolderTree(folder));
-		}
-
-		Tree rootFolderTree = SharepointUtil.getFolderTree(
-			rootFolderPath, rootCreateDate, rootModifiedDate, rootLastPostDate);
-
-		urlDirsTree.addChild(rootFolderTree);
-	}
-
-	protected void addFileEntries(
-			List<ResponseElement> elements, List<DLFileEntry> entries,
-			String folderPath)
-		throws Exception {
-
-		Tree documentListTree = new Tree();
-
-		for (DLFileEntry fileEntry : entries) {
-			documentListTree.addChild(
-				SharepointUtil.getDocumentTree(fileEntry));
-		}
-
-		Property documentListProperty =
-			new Property("document_list", documentListTree);
-
-		elements.add(documentListProperty);
-	}
-
-	protected void addGroups(
-			SharepointRequest sharepointRequest, List<ResponseElement> elements,
-			Tree urlDirsTree)
-		throws Exception {
-
-		List<DLFileEntry> fileEntries = new ArrayList<DLFileEntry>();
-
-		addFileEntries(elements, fileEntries, null);
-
-		LinkedHashMap<String, Object> groupParams =
-			new LinkedHashMap<String, Object>();
-
-		groupParams.put(
-			"usersGroups", new Long(sharepointRequest.getUserId()));
-
-		List<Group> groups = GroupLocalServiceUtil.search(
-			sharepointRequest.getCompanyId(), null, null, groupParams,
-			QueryUtil.ALL_POS, QueryUtil.ALL_POS);
-
-		Group userGroup = GroupLocalServiceUtil.getUserGroup(
-			sharepointRequest.getCompanyId(), sharepointRequest.getUserId());
-
-		groups.add(userGroup);
-
-		List<Organization> organizations =
-			OrganizationLocalServiceUtil.getUserOrganizations(
-				sharepointRequest.getUserId());
-
-		for (Organization organization : organizations) {
-			groups.add(organization.getGroup());
-		}
-
-		for (Group group : groups) {
-			urlDirsTree.addChild(SharepointUtil.getGroupTree(group));
-		}
-
-		Date now = new Date();
-
-		urlDirsTree.addChild(
-			SharepointUtil.getFolderTree(StringPool.BLANK, now, now, now));
+	public String getRootPath(HttpServletRequest request) {
+		return ParamUtil.getString(request, "initialUrl");
 	}
 
 	protected List<ResponseElement> getElements(
@@ -173,19 +55,15 @@ public class ListDocumentsMethodImpl extends BaseMethodImpl {
 
 		List<ResponseElement> elements = new ArrayList<ResponseElement>();
 
-		String initialURL = ParamUtil.getString(
-			sharepointRequest.getHttpRequest(), "initialUrl");
+		SharepointStorage storage = sharepointRequest.getSharepointStorage();
 
-		Tree urlDirsTree = new Tree();
+		Property documentListProperty = new Property(
+			"document_list", storage.getDocumentsTree(sharepointRequest));
 
-		if (Validator.isNull(initialURL)) {
-			addGroups(sharepointRequest, elements, urlDirsTree);
-		}
-		else {
-			addDLFolders(initialURL, elements, urlDirsTree);
-		}
+		elements.add(documentListProperty);
 
-		Property urlDirsProperty = new Property("urldirs", urlDirsTree);
+		Property urlDirsProperty = new Property(
+			"urldirs", storage.getFoldersTree(sharepointRequest));
 
 		elements.add(urlDirsProperty);
 

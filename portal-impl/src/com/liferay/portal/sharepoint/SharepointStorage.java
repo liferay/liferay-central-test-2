@@ -20,48 +20,44 @@
  * SOFTWARE.
  */
 
-package com.liferay.portal.sharepoint.methods;
+package com.liferay.portal.sharepoint;
 
-import com.liferay.portal.kernel.util.ParamUtil;
-import com.liferay.portal.sharepoint.ResponseElement;
-import com.liferay.portal.sharepoint.SharepointRequest;
-import com.liferay.portal.sharepoint.SharepointStorage;
+import java.io.InputStream;
 
-import java.util.ArrayList;
 import java.util.List;
 
-import javax.servlet.http.HttpServletRequest;
-
 /**
- * <a href="UncheckoutDocumentMethodImpl.java.html"><b><i>View Source</i></b>
- * </a>
+ * <a href="SharepointStorage.java.html"><b><i>View Source</i></b></a>
  *
  * @author Bruno Farache
  *
  */
-public class UncheckoutDocumentMethodImpl extends BaseMethodImpl {
+public interface SharepointStorage {
 
-	public String getMethodName() {
-		return _METHOD_NAME;
-	}
+	public void createFolder(SharepointRequest sharepointRequest)
+		throws Exception;
 
-	public String getRootPath(HttpServletRequest request) {
-		return ParamUtil.getString(request, "document_name");
-	}
-
-	protected List<ResponseElement> getElements(
+	public InputStream getDocumentInputStream(
 			SharepointRequest sharepointRequest)
-		throws Exception {
+		throws Exception;
 
-		List<ResponseElement> elements = new ArrayList<ResponseElement>();
+	public Tree getDocumentTree(SharepointRequest sharepointRequest)
+		throws Exception;
 
-		SharepointStorage storage = sharepointRequest.getSharepointStorage();
+	public Tree getDocumentsTree(SharepointRequest sharepointRequest)
+		throws Exception;
 
-		elements.add(storage.getDocumentTree(sharepointRequest));
+	public Tree getFolderTree(SharepointRequest sharepointRequest)
+		throws Exception;
 
-		return elements;
-	}
+	public Tree getFoldersTree(SharepointRequest sharepointRequest)
+		throws Exception;
 
-	private static final String _METHOD_NAME = "uncheckout document";
+	public void getParentFolderIds(
+			long groupId, String path, List<Long> folderIds)
+		throws Exception;
+
+	public Tree[] removeDocument(SharepointRequest sharepointRequest)
+		throws Exception;
 
 }

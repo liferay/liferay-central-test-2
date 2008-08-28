@@ -22,6 +22,7 @@
 
 package com.liferay.portal.sharepoint.methods;
 
+import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.sharepoint.ResponseElement;
 import com.liferay.portal.sharepoint.SharepointException;
 import com.liferay.portal.sharepoint.SharepointRequest;
@@ -30,6 +31,8 @@ import com.liferay.util.servlet.ServletResponseUtil;
 
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+
 /**
  * <a href="BaseMethodImpl.java.html"><b><i>View Source</i></b></a>
  *
@@ -37,6 +40,10 @@ import java.util.List;
  *
  */
 public abstract class BaseMethodImpl implements Method {
+
+	public String getRootPath(HttpServletRequest request) {
+		return StringPool.BLANK;
+	}
 
 	public void process(SharepointRequest sharepointRequest)
 		throws SharepointException {
@@ -57,7 +64,7 @@ public abstract class BaseMethodImpl implements Method {
 		throws Exception {
 
 		ServletResponseUtil.write(
-			sharepointRequest.getHttpResponse(),
+			sharepointRequest.getHttpServletResponse(),
 			getResponseBuffer(sharepointRequest).toString());
 	}
 

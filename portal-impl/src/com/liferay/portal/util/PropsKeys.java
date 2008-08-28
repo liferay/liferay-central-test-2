@@ -933,6 +933,10 @@ public class PropsKeys {
 
 	public static final String SESSION_TRACKER_PERSISTENCE_ENABLED = "session.tracker.persistence.enabled";
 
+	public static final String SHAREPOINT_STORAGE_CLASS = "sharepoint.storage.class";
+
+	public static final String SHAREPOINT_STORAGE_TOKENS = "sharepoint.storage.tokens";
+
 	public static final String SHOPPING_CART_MIN_QTY_MULTIPLE = "shopping.cart.min.qty.multiple";
 
 	public static final String SHOPPING_CATEGORY_FORWARD_TO_CART = "shopping.category.forward.to.cart";

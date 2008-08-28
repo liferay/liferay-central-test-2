@@ -22,6 +22,7 @@
 
 package com.liferay.portal.sharepoint;
 
+import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.User;
 
 import javax.servlet.http.HttpServletRequest;
@@ -36,27 +37,34 @@ import javax.servlet.http.HttpServletResponse;
 public class SharepointRequest {
 
 	public SharepointRequest(
-		HttpServletRequest request, HttpServletResponse response, User user) {
+		SharepointStorage storage, HttpServletRequest request,
+		HttpServletResponse response, String rootPath, User user) {
 
+		_storage = storage;
 		_request = request;
 		_response = response;
+		_rootPath = rootPath.replaceAll("\\\\", StringPool.BLANK);
 		_user = user;
+	}
+
+	public SharepointStorage getSharepointStorage() {
+		return _storage;
+	}
+
+	public HttpServletRequest getHttpServletRequest() {
+		return _request;
+	}
+
+	public HttpServletResponse getHttpServletResponse() {
+		return _response;
+	}
+
+	public String getRootPath() {
+		return _rootPath;
 	}
 
 	public long getCompanyId() {
 		return _user.getCompanyId();
-	}
-
-	public HttpServletRequest getHttpRequest() {
-		return _request;
-	}
-
-	public HttpServletResponse getHttpResponse() {
-		return _response;
-	}
-
-	public String getParameter(String name) {
-		return _request.getParameter(name);
 	}
 
 	public User getUser() {
@@ -67,8 +75,14 @@ public class SharepointRequest {
 		return _user.getUserId();
 	}
 
+	public String getParameter(String name) {
+		return _request.getParameter(name);
+	}
+
+	private SharepointStorage _storage;
 	private HttpServletRequest _request;
 	private HttpServletResponse _response;
+	private String _rootPath = StringPool.BLANK;
 	private User _user;
 
 }

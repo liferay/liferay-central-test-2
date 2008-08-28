@@ -26,12 +26,14 @@ import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.sharepoint.Property;
 import com.liferay.portal.sharepoint.ResponseElement;
 import com.liferay.portal.sharepoint.SharepointRequest;
-import com.liferay.portal.sharepoint.SharepointUtil;
+import com.liferay.portal.sharepoint.SharepointStorage;
 import com.liferay.portal.sharepoint.Tree;
 import com.liferay.portlet.documentlibrary.NoSuchFileEntryException;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import javax.servlet.http.HttpServletRequest;
 
 /**
  * <a href="GetDocsMetaInfoMethodImpl.java.html"><b><i>View Source</i></b></a>
@@ -45,33 +47,39 @@ public class GetDocsMetaInfoMethodImpl extends BaseMethodImpl {
 		return _METHOD_NAME;
 	}
 
+	public String getRootPath(HttpServletRequest request) {
+		String urlList = ParamUtil.getString(request, "url_list");
+
+		urlList = urlList.substring(1, urlList.length() - 1);
+
+		int pos = urlList.lastIndexOf("sharepoint/");
+
+		if (pos != -1) {
+			urlList = urlList.substring(pos + 11);
+		}
+
+		return urlList;
+	}
+
 	protected List<ResponseElement> getElements(
 			SharepointRequest sharepointRequest)
 		throws Exception {
 
 		List<ResponseElement> elements = new ArrayList<ResponseElement>();
 
-		String urlList = ParamUtil.getString(
-			sharepointRequest.getHttpRequest(), "url_list");
-
-		urlList = urlList.substring(1);
-		urlList = urlList.substring(0, urlList.length() - 1);
-
-		int pos = urlList.lastIndexOf("sharepoint/") + 11;
-
-		String documentName = urlList.substring(pos);
+		SharepointStorage storage = sharepointRequest.getSharepointStorage();
 
 		Tree documentListTree = new Tree();
 
 		try {
 			documentListTree.addChild(
-				SharepointUtil.getDocumentTree(documentName));
+				storage.getDocumentTree(sharepointRequest));
 		}
 		catch (Exception e1) {
 			if (e1 instanceof NoSuchFileEntryException) {
 				try {
 					documentListTree.addChild(
-						SharepointUtil.getDLFolderTree(urlList));
+						storage.getFolderTree(sharepointRequest));
 				}
 				catch (Exception e2) {
 				}
