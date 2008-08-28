@@ -1146,7 +1146,6 @@ Liferay.Util.PortletURL = new Class({
 		}
 
 		this.options = {
-			anchor: null,
 			copyCurrentRenderParameters: null,
 			doAsUserId: null,
 			encrypt: null,
@@ -1168,10 +1167,6 @@ Liferay.Util.PortletURL = new Class({
 			javaClass: "java.util.HashMap",
 			map: {}
 		};
-	},
-
-	setAnchor: function(anchor) {
-		this.options.anchor = anchor;
 	},
 
 	setCopyCurrentRenderParameters: function(copyCurrentRenderParameters) {
