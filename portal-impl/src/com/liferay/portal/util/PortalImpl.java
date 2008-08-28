@@ -2033,9 +2033,12 @@ public class PortalImpl implements Portal {
 	}
 
 	public String getWidgetURL(Portlet portlet, ThemeDisplay themeDisplay) {
+		String layoutURLNoCtx = getLayoutURL(themeDisplay).replace(
+			PortalUtil.getPathContext(), StringPool.BLANK);
+
 		String widgetURL =
-			themeDisplay.getPortalURL() + "/widget" +
-				getLayoutURL(themeDisplay) + "/-/";
+			themeDisplay.getPortalURL() + PortalUtil.getPathContext() +
+				"/widget" + layoutURLNoCtx + "/-/";
 
 		FriendlyURLMapper friendlyURLMapper =
 			portlet.getFriendlyURLMapperInstance();
