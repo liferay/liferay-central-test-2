@@ -226,7 +226,7 @@ portletURL.setParameter("fileShortcutId", String.valueOf(fileShortcutId));
 		</span>
 
 		<c:if test='<%= strutsAction.equals("/document_library/edit_file_shortcut") && ((fileShortcut == null) || DLFileShortcutPermission.contains(permissionChecker, fileShortcut, ActionKeys.UPDATE)) %>'>
-			<input type="button" value="<liferay-ui:message key="select" />" onClick="var toGroupWindow = window.open('<portlet:renderURL windowState="<%= LiferayWindowState.POP_UP.toString() %>"><portlet:param name="struts_action" value="/document_library/select_group" /></portlet:renderURL>', 'toGroup', 'directories=no,height=640,location=no,menubar=no,resizable=yes,scrollbars=no,status=no,toolbar=no,width=680'); void(''); toGroupWindow.focus();" />
+			<input type="button" value="<liferay-ui:message key="select" />" onClick="var toGroupWindow = window.open('<portlet:renderURL windowState="<%= LiferayWindowState.POP_UP.toString() %>"><portlet:param name="struts_action" value="/document_library/select_group" /></portlet:renderURL>', 'toGroup', 'directories=no,height=640,location=no,menubar=no,resizable=yes,scrollbars=yes,status=no,toolbar=no,width=680'); void(''); toGroupWindow.focus();" />
 		</c:if>
 	</td>
 </tr>
@@ -245,7 +245,7 @@ portletURL.setParameter("fileShortcutId", String.valueOf(fileShortcutId));
 		</span>
 
 		<c:if test='<%= strutsAction.equals("/document_library/edit_file_shortcut") && ((fileShortcut == null) || DLFileShortcutPermission.contains(permissionChecker, fileShortcut, ActionKeys.UPDATE)) %>'>
-			<input <%= (toGroup == null) ? "disabled" : "" %> id="<portlet:namespace />selectToFileEntryButton" type="button" value="<liferay-ui:message key="select" />" onClick="var toFileEntryWindow = window.open('<portlet:renderURL windowState="<%= LiferayWindowState.POP_UP.toString() %>"><portlet:param name="struts_action" value="/document_library/select_file_entry" /></portlet:renderURL>&<portlet:namespace />groupId=' + document.<portlet:namespace />fm.<portlet:namespace />toGroupId.value + '&<portlet:namespace />folderId=' + document.<portlet:namespace />fm.<portlet:namespace />toFolderId.value + '&<portlet:namespace />name=' + document.<portlet:namespace />fm.<portlet:namespace />toName.value, 'toFileEntry', 'directories=no,height=640,location=no,menubar=no,resizable=yes,scrollbars=no,status=no,toolbar=no,width=680'); void(''); toFileEntryWindow.focus();">
+			<input <%= (toGroup == null) ? "disabled" : "" %> id="<portlet:namespace />selectToFileEntryButton" type="button" value="<liferay-ui:message key="select" />" onClick="var toFileEntryWindow = window.open('<portlet:renderURL windowState="<%= LiferayWindowState.POP_UP.toString() %>"><portlet:param name="struts_action" value="/document_library/select_file_entry" /></portlet:renderURL>&<portlet:namespace />groupId=' + document.<portlet:namespace />fm.<portlet:namespace />toGroupId.value + '&<portlet:namespace />folderId=' + document.<portlet:namespace />fm.<portlet:namespace />toFolderId.value + '&<portlet:namespace />name=' + document.<portlet:namespace />fm.<portlet:namespace />toName.value, 'toFileEntry', 'directories=no,height=640,location=no,menubar=no,resizable=yes,scrollbars=yes,status=no,toolbar=no,width=680'); void(''); toFileEntryWindow.focus();">
 		</c:if>
 	</td>
 </tr>

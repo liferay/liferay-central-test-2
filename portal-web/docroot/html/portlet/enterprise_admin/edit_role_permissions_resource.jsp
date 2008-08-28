@@ -190,7 +190,7 @@ for (int i = 0; i < curActions.size(); i++) {
 					<%= groupsHTML.toString() %>
 				</span>
 
-				<input type="button" value='<liferay-ui:message key="select" />' onclick="var groupWindow = window.open('<portlet:renderURL windowState="<%= LiferayWindowState.POP_UP.toString() %>"><portlet:param name="struts_action" value="/enterprise_admin/select_community" /><portlet:param name="target" value="<%= target %>" /></portlet:renderURL>', 'community', 'directories=no,height=640,location=no,menubar=no,resizable=yes,scrollbars=no,status=no,toolbar=no,width=680'); void(''); groupWindow.focus();" />
+				<input type="button" value='<liferay-ui:message key="select" />' onclick="var groupWindow = window.open('<portlet:renderURL windowState="<%= LiferayWindowState.POP_UP.toString() %>"><portlet:param name="struts_action" value="/enterprise_admin/select_community" /><portlet:param name="target" value="<%= target %>" /></portlet:renderURL>', 'community', 'directories=no,height=640,location=no,menubar=no,resizable=yes,scrollbars=yes,status=no,toolbar=no,width=680'); void(''); groupWindow.focus();" />
 			</div>
 		</td>
 	</tr>

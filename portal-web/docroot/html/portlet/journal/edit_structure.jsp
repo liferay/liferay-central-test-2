@@ -342,7 +342,7 @@ int tabIndex = 1;
 			<input type="button" value="<liferay-ui:message key="select" />"
 				onClick="
 					if (confirm('<%= UnicodeLanguageUtil.get(pageContext, "selecting-a-new-parent-structure-will-affect-every-article-and-template-related-to-this-structure") %>')) {
-						var structureWindow = window.open('<portlet:renderURL windowState="<%= LiferayWindowState.POP_UP.toString() %>"><portlet:param name="struts_action" value="/journal/select_structure" /><portlet:param name="groupId" value="<%= String.valueOf(groupId) %>" /></portlet:renderURL>', 'structure', 'directories=no,height=640,location=no,menubar=no,resizable=yes,scrollbars=no,status=no,toolbar=no,width=680');
+						var structureWindow = window.open('<portlet:renderURL windowState="<%= LiferayWindowState.POP_UP.toString() %>"><portlet:param name="struts_action" value="/journal/select_structure" /><portlet:param name="groupId" value="<%= String.valueOf(groupId) %>" /></portlet:renderURL>', 'structure', 'directories=no,height=640,location=no,menubar=no,resizable=yes,scrollbars=yes,status=no,toolbar=no,width=680');
 						void('');
 						structureWindow.focus();
 					}"
