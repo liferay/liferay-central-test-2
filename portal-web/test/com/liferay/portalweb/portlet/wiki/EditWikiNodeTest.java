@@ -55,8 +55,7 @@ public class EditWikiNodeTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent(
-							"//div[@id=\"portlet-wrapper-36\"]/div[2]/div/div/form/div[3]/table/tbody/tr[3]/td[4]/ul/li/ul/li/nobr/a")) {
+				if (selenium.isElementPresent("//tr[3]/td[4]/ul/li/strong/span")) {
 					break;
 				}
 			}
@@ -66,8 +65,8 @@ public class EditWikiNodeTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click(RuntimeVariables.replace(
-				"//div[@id=\"portlet-wrapper-36\"]/div[2]/div/div/form/div[3]/table/tbody/tr[3]/td[4]/ul/li/ul/li/nobr/a"));
+		selenium.click("//tr[3]/td[4]/ul/li/strong/span");
+		selenium.click(RuntimeVariables.replace("//div[2]/ul/li[1]/nobr/a/img"));
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {

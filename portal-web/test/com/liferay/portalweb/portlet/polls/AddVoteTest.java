@@ -35,7 +35,7 @@ public class AddVoteTest extends BaseTestCase {
 	public void testAddVote() throws Exception {
 		selenium.click(RuntimeVariables.replace("link=Test Poll Question"));
 		selenium.waitForPageToLoad("30000");
-		selenium.click("document._25_fm._25_choiceId[2]");
+		selenium.click("document.forms[0].elements[4]");
 		selenium.click(RuntimeVariables.replace("//input[@value='Vote']"));
 		selenium.waitForPageToLoad("30000");
 		verifyTrue(selenium.isTextPresent("100%"));

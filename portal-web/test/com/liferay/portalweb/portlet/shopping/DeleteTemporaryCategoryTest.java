@@ -49,7 +49,8 @@ public class DeleteTemporaryCategoryTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click(RuntimeVariables.replace("link=Delete"));
+		selenium.click("//td[4]/ul/li/strong/span");
+		selenium.click(RuntimeVariables.replace("//div[2]/ul/li[3]/nobr/a/img"));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.getConfirmation()
 						   .matches("^Are you sure you want to delete this[\\s\\S]$"));

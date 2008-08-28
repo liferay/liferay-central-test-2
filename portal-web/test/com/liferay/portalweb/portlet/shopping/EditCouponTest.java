@@ -33,23 +33,8 @@ import com.liferay.portalweb.portal.util.RuntimeVariables;
  */
 public class EditCouponTest extends BaseTestCase {
 	public void testEditCoupon() throws Exception {
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isElementPresent("link=Edit")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
-		selenium.click(RuntimeVariables.replace("link=Edit"));
+		selenium.click("//strong/span");
+		selenium.click(RuntimeVariables.replace("//img[@alt='Edit']"));
 		selenium.waitForPageToLoad("30000");
 		selenium.type("_34_name", RuntimeVariables.replace("Family Discount"));
 		selenium.type("_34_description",

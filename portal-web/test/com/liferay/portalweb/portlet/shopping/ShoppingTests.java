@@ -77,7 +77,7 @@ public class ShoppingTests extends BaseTests {
 		addTestSuite(VerifyPercentageInsuranceTest.class);
 		addTestSuite(SaveCurrentSetupTest.class);
 		addTestSuite(ChangeCurrentSetupTest.class);
-		//addTestSuite(RestoreArchivedSetupTest.class);
+		addTestSuite(RestoreArchivedSetupTest.class);
 		addTestSuite(DeletePageTest.class);
 	}
 

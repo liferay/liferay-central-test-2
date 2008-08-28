@@ -23,6 +23,7 @@
 package com.liferay.portalweb.portlet.shopping;
 
 import com.liferay.portalweb.portal.BaseTestCase;
+import com.liferay.portalweb.portal.util.RuntimeVariables;
 
 /**
  * <a href="DeleteTemporaryItemTest.java.html"><b><i>View Source</i></b></a>
@@ -38,8 +39,7 @@ public class DeleteTemporaryItemTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent(
-							"//div[@id=\"portlet-wrapper-34\"]/div[2]/div/div/form[2]/div[3]/table/tbody/tr[3]/td[5]/ul/li/ul/li[3]/nobr/a")) {
+				if (selenium.isElementPresent("//tr[3]/td[5]/ul/li/strong/span")) {
 					break;
 				}
 			}
@@ -49,8 +49,9 @@ public class DeleteTemporaryItemTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click(
-			"//div[@id=\"portlet-wrapper-34\"]/div[2]/div/div/form[2]/div[3]/table/tbody/tr[3]/td[5]/ul/li/ul/li[3]/nobr/a");
+		selenium.click("//tr[3]/td[5]/ul/li/strong/span");
+		selenium.click(RuntimeVariables.replace("//div[2]/ul/li[3]/nobr/a"));
+		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.getConfirmation()
 						   .matches("^Are you sure you want to delete this[\\s\\S]$"));
 
