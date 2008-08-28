@@ -22,6 +22,7 @@ var LayoutConfiguration = {
 			};
 
 			var searchField = jQuery('#layout_configuration_content');
+
 			searchField.liveSearch(
 				{
 					list: instance.portlets,
