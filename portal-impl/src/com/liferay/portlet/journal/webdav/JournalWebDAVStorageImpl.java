@@ -197,7 +197,8 @@ public class JournalWebDAVStorageImpl extends BaseWebDAVStorageImpl {
 
 				JournalStructureServiceUtil.updateStructure(
 					structure.getGroupId(), structure.getStructureId(),
-					structure.getName(), structure.getDescription(), xsd);
+					structure.getName(), structure.getDescription(), xsd,
+					structure.getParentStructureId());
 
 				return HttpServletResponse.SC_CREATED;
 			}
