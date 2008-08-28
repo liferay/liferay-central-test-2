@@ -51,7 +51,7 @@ List headerNames = searchContainer.getHeaderNames();
 
 headerNames.add(StringPool.BLANK);
 
-if (portletName.equals(PortletKeys.ENTERPRISE_ADMIN) || portletName.equals(PortletKeys.ORGANIZATION_ADMIN) || portletName.equals(PortletKeys.ENTERPRISE_USERS_ADMIN) || portletName.equals(PortletKeys.ENTERPRISE_ORGANIZATIONS_ADMIN)) {
+if (portletName.equals(PortletKeys.ENTERPRISE_ADMIN) || portletName.equals(PortletKeys.ORGANIZATION_ADMIN)) {
 	RowChecker rowChecker = new RowChecker(renderResponse);
 	//RowChecker rowChecker = new RowChecker(renderResponse, RowChecker.FORM_NAME, null, RowChecker.ROW_IDS);
 
@@ -155,7 +155,7 @@ portletURL.setParameter(searchContainer.getCurParam(), String.valueOf(searchCont
 
 	<div class="separator"><!-- --></div>
 
-	<c:if test="<%= portletName.equals(PortletKeys.ENTERPRISE_ADMIN) || portletName.equals(PortletKeys.ORGANIZATION_ADMIN) || portletName.equals(PortletKeys.ENTERPRISE_USERS_ADMIN) || portletName.equals(PortletKeys.ENTERPRISE_ORGANIZATIONS_ADMIN) %>">
+	<c:if test="<%= portletName.equals(PortletKeys.ENTERPRISE_ADMIN) || portletName.equals(PortletKeys.ORGANIZATION_ADMIN) %>">
 		<c:if test="<%= searchTerms.isActive() || (!searchTerms.isActive() && PropsValues.USERS_DELETE) %>">
 			<input type="button" value='<%= LanguageUtil.get(pageContext, (searchTerms.isActive() ? Constants.DEACTIVATE : Constants.DELETE)) %>' onClick="<portlet:namespace />deleteUsers('<%= searchTerms.isActive() ? Constants.DEACTIVATE : Constants.DELETE %>');" />
 		</c:if>
@@ -185,17 +185,13 @@ portletURL.setParameter(searchContainer.getCurParam(), String.valueOf(searchCont
 
 		ResultRow row = new ResultRow(user2, user2.getUserId(), i);
 
-		PortletURL rowURL = null;
+		PortletURL rowURL = renderResponse.createRenderURL();
 
-		if (portletName.equals(PortletKeys.ENTERPRISE_ADMIN) || portletName.equals(PortletKeys.ORGANIZATION_ADMIN) || portletName.equals(PortletKeys.ENTERPRISE_USERS_ADMIN) || portletName.equals(PortletKeys.ENTERPRISE_ORGANIZATIONS_ADMIN)) {
-			rowURL = renderResponse.createRenderURL();
+		rowURL.setWindowState(WindowState.MAXIMIZED);
 
-			rowURL.setWindowState(WindowState.MAXIMIZED);
-
-			rowURL.setParameter("struts_action", "/enterprise_admin/edit_user");
-			rowURL.setParameter("redirect", searchContainer.getIteratorURL().toString());
-			rowURL.setParameter("p_u_i_d", String.valueOf(user2.getUserId()));
-		}
+		rowURL.setParameter("struts_action", "/enterprise_admin/edit_user");
+		rowURL.setParameter("redirect", searchContainer.getIteratorURL().toString());
+		rowURL.setParameter("p_u_i_d", String.valueOf(user2.getUserId()));
 
 		// First name
 

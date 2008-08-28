@@ -240,7 +240,7 @@ request.setAttribute("view.jsp-portletURLString", portletURLString);
 
 		headerNames.add(StringPool.BLANK);
 
-		if ((portletName.equals(PortletKeys.ENTERPRISE_ADMIN) || portletName.equals(PortletKeys.ENTERPRISE_USER_GROUPS_ADMIN)) && PortalPermissionUtil.contains(permissionChecker, ActionKeys.ADD_USER_GROUP)) {
+		if (portletName.equals(PortletKeys.ENTERPRISE_ADMIN) && PortalPermissionUtil.contains(permissionChecker, ActionKeys.ADD_USER_GROUP)) {
 			RowChecker rowChecker = new RowChecker(renderResponse);
 
 			searchContainer.setRowChecker(rowChecker);
@@ -272,7 +272,7 @@ request.setAttribute("view.jsp-portletURLString", portletURLString);
 
 			<div class="separator"><!-- --></div>
 
-			<c:if test="<%= (portletName.equals(PortletKeys.ENTERPRISE_ADMIN) || portletName.equals(PortletKeys.ENTERPRISE_USER_GROUPS_ADMIN)) && PortalPermissionUtil.contains(permissionChecker, ActionKeys.ADD_USER_GROUP) %>">
+			<c:if test="<%= portletName.equals(PortletKeys.ENTERPRISE_ADMIN) && PortalPermissionUtil.contains(permissionChecker, ActionKeys.ADD_USER_GROUP) %>">
 				<input type="button" value="<liferay-ui:message key="delete" />" onClick="<portlet:namespace />deleteUserGroups();" />
 
 				<br /><br />

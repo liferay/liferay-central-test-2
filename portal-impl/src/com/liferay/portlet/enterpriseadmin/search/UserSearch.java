@@ -88,9 +88,7 @@ public class UserSearch extends SearchContainer<User> {
 		String portletName = portletConfig.getPortletName();
 
 		if (!portletName.equals(PortletKeys.ENTERPRISE_ADMIN) &&
-			!portletName.equals(PortletKeys.ORGANIZATION_ADMIN) &&
-			!portletName.equals(PortletKeys.ENTERPRISE_USERS_ADMIN) &&
-			!portletName.equals(PortletKeys.ENTERPRISE_ORGANIZATIONS_ADMIN)) {
+			!portletName.equals(PortletKeys.ORGANIZATION_ADMIN)) {
 
 			displayTerms.setActive(true);
 			searchTerms.setActive(true);

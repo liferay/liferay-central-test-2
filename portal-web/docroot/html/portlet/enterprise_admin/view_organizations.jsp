@@ -35,7 +35,7 @@ PortletURL portletURL = (PortletURL)request.getAttribute("view.jsp-portletURL");
 <%
 boolean showButtons = false;
 
-if (portletName.equals(PortletKeys.ENTERPRISE_ADMIN) || portletName.equals(PortletKeys.ENTERPRISE_ORGANIZATIONS_ADMIN)) {
+if (portletName.equals(PortletKeys.ENTERPRISE_ADMIN)) {
 	showButtons = true;
 }
 
