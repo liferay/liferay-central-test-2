@@ -85,11 +85,11 @@ public class PortletURLAction extends Action {
 		boolean copyCurrentRenderParameters = ParamUtil.getBoolean(
 			request, "copyCurrentRenderParameters");
 		long doAsUserId = ParamUtil.getLong(request, "doAsUserId");
-		long plid = ParamUtil.getLong(request, "plid", layout.getPlid());
 		boolean encrypt = ParamUtil.getBoolean(request, "encrypt");
 		boolean escapeXml = ParamUtil.getBoolean(request, "escapeXml");
 		String lifecycle = ParamUtil.getString(request, "lifecycle");
 		String name = ParamUtil.getString(request, "name");
+		long plid = ParamUtil.getLong(request, "plid", layout.getPlid());
 		boolean portletConfiguration = ParamUtil.getBoolean(
 			request, "portletConfiguration");
 		String portletId = ParamUtil.getString(request, "portletId");
@@ -131,9 +131,9 @@ public class PortletURLAction extends Action {
 
 			portletURL.setParameter(
 				"struts_action", "/portlet_configuration/edit_configuration");
+			portletURL.setParameter("returnToFullPageURL", returnToFullPageURL);
 			portletURL.setParameter("portletResource", portletResource);
 			portletURL.setParameter("previewWidth", previewWidth);
-			portletURL.setParameter("returnToFullPageURL", returnToFullPageURL);
 		}
 
 		if (Validator.isNotNull(portletMode)) {
