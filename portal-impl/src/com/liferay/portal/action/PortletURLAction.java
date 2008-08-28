@@ -27,7 +27,6 @@ import com.liferay.portal.kernel.portlet.PortletModeFactory;
 import com.liferay.portal.kernel.portlet.WindowStateFactory;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.Validator;
-import com.liferay.portal.model.Layout;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.WebKeys;
@@ -79,8 +78,6 @@ public class PortletURLAction extends Action {
 		ThemeDisplay themeDisplay = (ThemeDisplay)request.getAttribute(
 			WebKeys.THEME_DISPLAY);
 
-		Layout layout = themeDisplay.getLayout();
-
 		String cacheability = ParamUtil.getString(request, "cacheability");
 		boolean copyCurrentRenderParameters = ParamUtil.getBoolean(
 			request, "copyCurrentRenderParameters");
@@ -89,7 +86,6 @@ public class PortletURLAction extends Action {
 		boolean escapeXml = ParamUtil.getBoolean(request, "escapeXml");
 		String lifecycle = ParamUtil.getString(request, "lifecycle");
 		String name = ParamUtil.getString(request, "name");
-		long plid = ParamUtil.getLong(request, "plid", layout.getPlid());
 		boolean portletConfiguration = ParamUtil.getBoolean(
 			request, "portletConfiguration");
 		String portletId = ParamUtil.getString(request, "portletId");
@@ -101,7 +97,7 @@ public class PortletURLAction extends Action {
 		String windowState = ParamUtil.getString(request, "windowState");
 
 		PortletURLImpl portletURL = new PortletURLImpl(
-			request, portletId, plid, lifecycle);
+			request, portletId, themeDisplay.getPlid(), lifecycle);
 
 		if (Validator.isNotNull(cacheability)) {
 			portletURL.setCacheability(cacheability);
