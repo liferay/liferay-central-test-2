@@ -88,7 +88,8 @@ public class MoveDocumentTest extends BaseTestCase {
 		}
 
 		selenium.click("//td[5]/ul/li/strong/span");
-		selenium.click("//div[2]/ul/li[2]/nobr/a");
+		selenium.click(RuntimeVariables.replace("//div[2]/ul/li[2]/nobr/a"));
+		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -108,7 +109,7 @@ public class MoveDocumentTest extends BaseTestCase {
 
 		selenium.click("//input[@value='Select']");
 		selenium.waitForPopUp("folder", RuntimeVariables.replace("30000"));
-		selenium.selectWindow("title=Document Library Test Page");
+		selenium.selectWindow("folder");
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -261,7 +262,24 @@ public class MoveDocumentTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click(RuntimeVariables.replace("link=Edit"));
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isElementPresent("//td[5]/ul/li/strong/span")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
+		selenium.click("//td[5]/ul/li/strong/span");
+		selenium.click(RuntimeVariables.replace("//div[2]/ul/li[2]/nobr/a"));
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {

@@ -123,7 +123,7 @@ public class MoveImageTest extends BaseTestCase {
 
 		selenium.click("//input[@value='Select']");
 		selenium.waitForPopUp("folder", RuntimeVariables.replace("30000"));
-		selenium.selectWindow("title=Image Gallery Test Page");
+		selenium.selectWindow("folder");
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {

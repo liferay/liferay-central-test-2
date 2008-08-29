@@ -116,8 +116,6 @@ public class MoveItemTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.selectWindow("null");
-
 		for (int second = 0;; second++) {
 			if (second >= 60) {
 				fail("timeout");

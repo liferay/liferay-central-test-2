@@ -37,7 +37,7 @@ public class ViewQuestionGraphsTest extends BaseTestCase {
 		selenium.waitForPageToLoad("30000");
 		selenium.click("link=Area");
 		selenium.waitForPopUp("viewChart", RuntimeVariables.replace("30000"));
-		selenium.selectWindow("viewChartWindow");
+		selenium.selectWindow("viewChart");
 		selenium.close();
 		selenium.selectWindow("null");
 
@@ -59,7 +59,7 @@ public class ViewQuestionGraphsTest extends BaseTestCase {
 
 		selenium.click("link=Horizontal Bar");
 		selenium.waitForPopUp("viewChart", RuntimeVariables.replace("30000"));
-		selenium.selectWindow("viewChartWindow");
+		selenium.selectWindow("viewChart");
 		selenium.close();
 		selenium.selectWindow("null");
 
@@ -81,7 +81,7 @@ public class ViewQuestionGraphsTest extends BaseTestCase {
 
 		selenium.click("link=Line");
 		selenium.waitForPopUp("viewChart", RuntimeVariables.replace("30000"));
-		selenium.selectWindow("viewChartWindow");
+		selenium.selectWindow("viewChart");
 		selenium.close();
 		selenium.selectWindow("null");
 
@@ -103,7 +103,7 @@ public class ViewQuestionGraphsTest extends BaseTestCase {
 
 		selenium.click("link=Pie");
 		selenium.waitForPopUp("viewChart", RuntimeVariables.replace("30000"));
-		selenium.selectWindow("viewChartWindow");
+		selenium.selectWindow("viewChart");
 		selenium.close();
 		selenium.selectWindow("null");
 
@@ -125,7 +125,7 @@ public class ViewQuestionGraphsTest extends BaseTestCase {
 
 		selenium.click("link=Vertical Bar");
 		selenium.waitForPopUp("viewChart", RuntimeVariables.replace("30000"));
-		selenium.selectWindow("viewChartWindow");
+		selenium.selectWindow("viewChart");
 		selenium.close();
 		selenium.selectWindow("null");
 		selenium.click(RuntimeVariables.replace("link=Return to Full Page"));
