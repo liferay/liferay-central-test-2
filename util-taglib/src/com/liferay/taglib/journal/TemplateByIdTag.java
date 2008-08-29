@@ -41,8 +41,6 @@
 
 package com.liferay.taglib.journal;
 
-import com.liferay.portal.PortalException;
-import com.liferay.portal.SystemException;
 import com.liferay.portlet.journal.model.JournalTemplate;
 import com.liferay.portlet.journal.service.JournalTemplateLocalServiceUtil;
 
@@ -51,8 +49,6 @@ import javax.servlet.jsp.tagext.TagSupport;
 
 /**
  * <a href="TemplateByIdTag.java.html"><b><i>View Source</i></b></a>
- * This class provides the implementation for the tag that retrieves a template
- * of a structure by group Id and template Id.
  *
  * @author Prakash Reddy
  *
@@ -60,22 +56,18 @@ import javax.servlet.jsp.tagext.TagSupport;
 public class TemplateByIdTag extends TagSupport {
 
 	public int doStartTag()	throws JspException {
-		JournalTemplate template;
-
 		try {
-			template = JournalTemplateLocalServiceUtil.getTemplate(
-				_groupId, _templateId);
-		}
-		catch (PortalException pe) {
-			throw new JspException(pe);
-		}
-		catch (SystemException se) {
-			throw new JspException(se);
-		}
+			JournalTemplate template =
+				JournalTemplateLocalServiceUtil.getTemplate(
+					_groupId, _templateId);
 
-		pageContext.setAttribute(_var, template);
+			pageContext.setAttribute(_var, template);
 
-		return SKIP_BODY;
+			return SKIP_BODY;
+		}
+		catch (Exception e) {
+			throw new JspException(e);
+		}
 	}
 
 	public void setGroupId(long groupId) {

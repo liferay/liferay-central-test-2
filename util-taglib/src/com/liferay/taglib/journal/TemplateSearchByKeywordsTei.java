@@ -42,6 +42,7 @@
 package com.liferay.taglib.journal;
 
 import com.liferay.portal.kernel.util.Validator;
+import com.liferay.portlet.journal.model.JournalTemplate;
 
 import javax.servlet.jsp.tagext.TagData;
 import javax.servlet.jsp.tagext.TagExtraInfo;
@@ -56,18 +57,19 @@ import javax.servlet.jsp.tagext.VariableInfo;
 public class TemplateSearchByKeywordsTei extends TagExtraInfo {
 
 	public VariableInfo[] getVariableInfo(TagData data) {
-		String varName = data.getAttributeString("var");
+		String var = data.getAttributeString("var");
 
-		VariableInfo[] vInfos = null;
-
-		if (Validator.isNotNull(varName)) {
-			vInfos = new VariableInfo[1];
-			vInfos[0] = new VariableInfo(
-					varName, JournalTaglibConstants.TEMPLATE_LIST_CLASS,
-					true, VariableInfo.AT_END);
+		if (Validator.isNotNull(var)) {
+			return new VariableInfo[] {
+				new VariableInfo(var, _CLASS_NAME, true, VariableInfo.AT_END)
+			};
 		}
-
-		return vInfos;
+		else {
+			return null;
+		}
 	}
+
+	private String _CLASS_NAME =
+		"java.util.List<" + JournalTemplate.class.getName() + ">";
 
 }

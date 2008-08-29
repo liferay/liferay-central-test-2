@@ -41,7 +41,6 @@
 
 package com.liferay.taglib.journal;
 
-import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portlet.journal.model.JournalArticle;
 import com.liferay.portlet.journal.service.JournalArticleLocalServiceUtil;
@@ -54,8 +53,6 @@ import javax.servlet.jsp.tagext.TagSupport;
 
 /**
  * <a href="ArticleSearchByKeywordsTag.java.html"><b><i>View Source</i></b></a>
- * This class provides the implementation for the tag that searches for journal
- * articles by keywords.
  *
  * @author Prakash Reddy
  *
@@ -63,21 +60,20 @@ import javax.servlet.jsp.tagext.TagSupport;
 public class ArticleSearchByKeywordsTag extends TagSupport {
 
 	public int doStartTag()	throws JspException {
-		List<JournalArticle> articles;
-
 		try {
-			articles = JournalArticleLocalServiceUtil.search(
+			List<JournalArticle> articles =
+				JournalArticleLocalServiceUtil.search(
 				_companyId, _groupId, _keywords, _version, _type, _structureId,
 				_templateId, _displayDateGT, _displayDateLT, _approved,
 				_expired, _reviewDate, _start, _end, _obc);
-		}
-		catch (SystemException se) {
-			throw new JspException(se);
-		}
 
-		pageContext.setAttribute(_var, articles);
+			pageContext.setAttribute(_var, articles);
 
-		return SKIP_BODY;
+			return SKIP_BODY;
+		}
+		catch (Exception e) {
+			throw new JspException(e);
+		}
 	}
 
 	public void setApproved(Boolean approved) {

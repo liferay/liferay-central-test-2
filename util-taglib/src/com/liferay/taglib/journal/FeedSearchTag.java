@@ -41,7 +41,6 @@
 
 package com.liferay.taglib.journal;
 
-import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portlet.journal.model.JournalFeed;
 import com.liferay.portlet.journal.service.JournalFeedLocalServiceUtil;
@@ -53,8 +52,6 @@ import javax.servlet.jsp.tagext.TagSupport;
 
 /**
  * <a href="FeedSearchTag.java.html"><b><i>View Source</i></b></a>
- * This class provides the implementation for the tag that searches for journal
- * feeds.
  *
  * @author Prakash Reddy
  *
@@ -62,20 +59,18 @@ import javax.servlet.jsp.tagext.TagSupport;
 public class FeedSearchTag extends TagSupport {
 
 	public int doStartTag()	throws JspException {
-		List<JournalFeed> feeds;
-
 		try {
-			feeds = JournalFeedLocalServiceUtil.search(
+			List<JournalFeed> feeds = JournalFeedLocalServiceUtil.search(
 				_companyId, _groupId, _feedId, _name, _description,
 				_andOperator, _start, _end, _obc);
-		}
-		catch (SystemException se) {
-			throw new JspException(se);
-		}
 
-		pageContext.setAttribute(_var, feeds);
+			pageContext.setAttribute(_var, feeds);
 
-		return SKIP_BODY;
+			return SKIP_BODY;
+		}
+		catch (Exception e) {
+			throw new JspException(e);
+		}
 	}
 
 	public void setAndOperator(boolean andOperator) {

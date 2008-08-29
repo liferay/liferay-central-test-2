@@ -41,7 +41,6 @@
 
 package com.liferay.taglib.journal;
 
-import com.liferay.portal.SystemException;
 import com.liferay.portlet.journal.service.JournalArticleLocalServiceUtil;
 
 import java.util.Date;
@@ -50,8 +49,8 @@ import javax.servlet.jsp.JspException;
 import javax.servlet.jsp.tagext.TagSupport;
 
 /**
- * <a href="ArticleSearchCountByKeywordsTag.java.html"><b><i>View Source</i>
- * </b></a>
+ * <a href="ArticleSearchCountByKeywordsTag.java.html"><b><i>View Source</i></b>
+ * </a>
  *
  * @author Prakash Reddy
  *
@@ -59,21 +58,19 @@ import javax.servlet.jsp.tagext.TagSupport;
 public class ArticleSearchCountByKeywordsTag extends TagSupport {
 
 	public int doStartTag()	throws JspException {
-		int count;
-
 		try {
-			count = JournalArticleLocalServiceUtil.searchCount(
+			int count = JournalArticleLocalServiceUtil.searchCount(
 				_companyId, _groupId, _keywords, _version, _type, _structureId,
 				_templateId, _displayDateGT, _displayDateLT, _approved,
 				_expired, _reviewDate);
-		}
-		catch (SystemException se) {
-			throw new JspException(se);
-		}
 
-		pageContext.setAttribute(_var, count);
+			pageContext.setAttribute(_var, count);
 
-		return SKIP_BODY;
+			return SKIP_BODY;
+		}
+		catch (Exception e) {
+			throw new JspException(e);
+		}
 	}
 
 	public void setApproved(Boolean approved) {

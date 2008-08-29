@@ -41,8 +41,6 @@
 
 package com.liferay.taglib.journal;
 
-import com.liferay.portal.PortalException;
-import com.liferay.portal.SystemException;
 import com.liferay.portlet.journal.model.JournalArticleResource;
 import com.liferay.portlet.journal.service.JournalArticleResourceLocalServiceUtil;
 
@@ -51,8 +49,6 @@ import javax.servlet.jsp.tagext.TagSupport;
 
 /**
  * <a href="ArticleResourceByPKTag.java.html"><b><i>View Source</i></b></a>
- * This class provides the implementation for the tag that retrieves a article
- * resource by the resource primary key.
  *
  * @author Prakash Reddy
  *
@@ -60,23 +56,18 @@ import javax.servlet.jsp.tagext.TagSupport;
 public class ArticleResourceByPKTag extends TagSupport {
 
 	public int doStartTag()	throws JspException {
-		JournalArticleResource articleResource;
-
 		try {
-			articleResource =
+			JournalArticleResource articleResource =
 				JournalArticleResourceLocalServiceUtil.getArticleResource(
 					_articleResourcePrimKey);
-		}
-		catch (PortalException pe) {
-			throw new JspException(pe);
-		}
-		catch (SystemException se) {
-			throw new JspException(se);
-		}
 
-		pageContext.setAttribute(_var, articleResource);
+			pageContext.setAttribute(_var, articleResource);
 
-		return SKIP_BODY;
+			return SKIP_BODY;
+		}
+		catch (Exception e) {
+			throw new JspException(e);
+		}
 	}
 
 	public void setArticleResourcePrimKey(long articleResourcePrimKey) {

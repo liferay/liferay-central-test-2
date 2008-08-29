@@ -41,8 +41,6 @@
 
 package com.liferay.taglib.journal;
 
-import com.liferay.portal.PortalException;
-import com.liferay.portal.SystemException;
 import com.liferay.portlet.journal.model.JournalArticle;
 import com.liferay.portlet.journal.service.JournalArticleLocalServiceUtil;
 
@@ -51,8 +49,6 @@ import javax.servlet.jsp.tagext.TagSupport;
 
 /**
  * <a href="LatestArticleByIdTag.java.html"><b><i>View Source</i></b></a>
- * This class provides the implementation for the tag that retrieves the latest
- * article by article Id and group Id.
  *
  * @author Prakash Reddy
  *
@@ -60,22 +56,18 @@ import javax.servlet.jsp.tagext.TagSupport;
 public class LatestArticleByIdTag extends TagSupport {
 
 	public int doStartTag()	throws JspException {
-		JournalArticle latestArticle;
-
 		try {
-			latestArticle = JournalArticleLocalServiceUtil.getLatestArticle(
-				_groupId, _articleId);
-		}
-		catch (PortalException pe) {
-			throw new JspException(pe);
-		}
-		catch (SystemException se) {
-			throw new JspException(se);
-		}
+			JournalArticle latestArticle =
+				JournalArticleLocalServiceUtil.getLatestArticle(
+					_groupId, _articleId);
 
-		pageContext.setAttribute(_var, latestArticle);
+			pageContext.setAttribute(_var, latestArticle);
 
-		return SKIP_BODY;
+			return SKIP_BODY;
+		}
+		catch (Exception e) {
+			throw new JspException(e);
+		}
 	}
 
 	public void setArticleId(String articleId) {

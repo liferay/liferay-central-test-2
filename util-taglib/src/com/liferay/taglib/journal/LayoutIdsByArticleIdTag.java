@@ -41,7 +41,6 @@
 
 package com.liferay.taglib.journal;
 
-import com.liferay.portal.SystemException;
 import com.liferay.portlet.journal.service.JournalContentSearchLocalServiceUtil;
 
 import java.util.List;
@@ -51,8 +50,6 @@ import javax.servlet.jsp.tagext.TagSupport;
 
 /**
  * <a href="LayoutIdsByArticleIdTag.java.html"><b><i>View Source</i></b></a>
- * This class provides the implementation for the tag that retrieves the list of
- * layout Ids by article Id and group Id.
  *
  * @author Prakash Reddy
  *
@@ -60,19 +57,18 @@ import javax.servlet.jsp.tagext.TagSupport;
 public class LayoutIdsByArticleIdTag extends TagSupport {
 
 	public int doStartTag()	throws JspException {
-		List<Long> layoutIds;
-
 		try {
-			layoutIds = JournalContentSearchLocalServiceUtil.getLayoutIds(
-				_groupId, _privateLayout, _articleId);
-		}
-		catch (SystemException se) {
-			throw new JspException(se);
-		}
+			List<Long> layoutIds =
+				JournalContentSearchLocalServiceUtil.getLayoutIds(
+					_groupId, _privateLayout, _articleId);
 
-		pageContext.setAttribute(_var, layoutIds);
+			pageContext.setAttribute(_var, layoutIds);
 
-		return SKIP_BODY;
+			return SKIP_BODY;
+		}
+		catch (Exception e) {
+			throw new JspException(e);
+		}
 	}
 
 	public void setArticleId(String articleId) {

@@ -41,7 +41,6 @@
 
 package com.liferay.taglib.journal;
 
-import com.liferay.portal.SystemException;
 import com.liferay.portlet.journal.service.JournalStructureLocalServiceUtil;
 
 import javax.servlet.jsp.JspException;
@@ -56,20 +55,18 @@ import javax.servlet.jsp.tagext.TagSupport;
 public class StructureSearchCountTag extends TagSupport {
 
 	public int doStartTag()	throws JspException {
-		int count;
-
 		try {
-			count = JournalStructureLocalServiceUtil.searchCount(
-				_companyId, _groupId, _structureId, _name,
-				_description, _andOperator);
-		}
-		catch (SystemException se) {
-			throw new JspException(se);
-		}
+			int count = JournalStructureLocalServiceUtil.searchCount(
+				_companyId, _groupId, _structureId, _name, _description,
+				_andOperator);
 
-		pageContext.setAttribute(_var, count);
+			pageContext.setAttribute(_var, count);
 
-		return SKIP_BODY;
+			return SKIP_BODY;
+		}
+		catch (Exception e) {
+			throw new JspException(e);
+		}
 	}
 
 	public void setAndOperator(boolean andOperator) {

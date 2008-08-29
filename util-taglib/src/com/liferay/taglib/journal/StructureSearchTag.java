@@ -41,7 +41,6 @@
 
 package com.liferay.taglib.journal;
 
-import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portlet.journal.model.JournalStructure;
 import com.liferay.portlet.journal.service.JournalStructureLocalServiceUtil;
@@ -53,8 +52,6 @@ import javax.servlet.jsp.tagext.TagSupport;
 
 /**
  * <a href="StructureSearchTag.java.html"><b><i>View Source</i></b></a>
- * This class provides the implementation for the tag that searches for journal
- * structures.
  *
  * @author Prakash Reddy
  *
@@ -62,20 +59,19 @@ import javax.servlet.jsp.tagext.TagSupport;
 public class StructureSearchTag extends TagSupport {
 
 	public int doStartTag()	throws JspException {
-		List<JournalStructure> structures;
-
 		try {
-			structures = JournalStructureLocalServiceUtil.search(
-				_companyId, _groupId, _structureId, _name,
-				_description, _andOperator, _start, _end, _obc);
-		}
-		catch (SystemException se) {
-			throw new JspException(se);
-		}
+			List<JournalStructure> structures =
+				JournalStructureLocalServiceUtil.search(
+					_companyId, _groupId, _structureId, _name, _description,
+					_andOperator, _start, _end, _obc);
 
-		pageContext.setAttribute(_var, structures);
+			pageContext.setAttribute(_var, structures);
 
-		return SKIP_BODY;
+			return SKIP_BODY;
+		}
+		catch (Exception e) {
+			throw new JspException(e);
+		}
 	}
 
 	public void setAndOperator(boolean andOperator) {

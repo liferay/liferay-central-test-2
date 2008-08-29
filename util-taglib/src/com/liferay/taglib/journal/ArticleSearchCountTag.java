@@ -41,7 +41,6 @@
 
 package com.liferay.taglib.journal;
 
-import com.liferay.portal.SystemException;
 import com.liferay.portlet.journal.service.JournalArticleLocalServiceUtil;
 
 import java.util.Date;
@@ -58,22 +57,20 @@ import javax.servlet.jsp.tagext.TagSupport;
 public class ArticleSearchCountTag extends TagSupport {
 
 	public int doStartTag()	throws JspException {
-		int count;
-
 		try {
-			count = JournalArticleLocalServiceUtil.searchCount(
+			int count = JournalArticleLocalServiceUtil.searchCount(
 				_companyId, _groupId, _articleId, _version, _title,
 				_description, _content, _type, _structureId, _templateId,
 				_displayDateGT, _displayDateLT, _approved, _expired,
 				_reviewDate, _andOperator);
-		}
-		catch (SystemException se) {
-			throw new JspException(se);
-		}
 
-		pageContext.setAttribute(_var, count);
+			pageContext.setAttribute(_var, count);
 
-		return SKIP_BODY;
+			return SKIP_BODY;
+		}
+		catch (Exception e) {
+			throw new JspException(e);
+		}
 	}
 
 	public void setAndOperator(boolean andOperator) {

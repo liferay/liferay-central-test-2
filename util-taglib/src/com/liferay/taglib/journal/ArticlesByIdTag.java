@@ -41,7 +41,6 @@
 
 package com.liferay.taglib.journal;
 
-import com.liferay.portal.SystemException;
 import com.liferay.portlet.journal.model.JournalArticle;
 import com.liferay.portlet.journal.service.JournalArticleLocalServiceUtil;
 
@@ -52,8 +51,6 @@ import javax.servlet.jsp.tagext.TagSupport;
 
 /**
  * <a href="ArticlesByIdTag.java.html"><b><i>View Source</i></b></a>
- * This class provides the implementation for the tag that retrieves articles
- * by article Id and group Id.
  *
  * @author Prakash Reddy
  *
@@ -61,19 +58,18 @@ import javax.servlet.jsp.tagext.TagSupport;
 public class ArticlesByIdTag extends TagSupport {
 
 	public int doStartTag()	throws JspException {
-		List<JournalArticle> articles;
-
 		try {
-			articles = JournalArticleLocalServiceUtil.getArticles(
-				_groupId, _articleId);
-		}
-		catch (SystemException se) {
-			throw new JspException(se);
-		}
+			List<JournalArticle> articles =
+				JournalArticleLocalServiceUtil.getArticles(
+					_groupId, _articleId);
 
-		pageContext.setAttribute(_var, articles);
+			pageContext.setAttribute(_var, articles);
 
-		return SKIP_BODY;
+			return SKIP_BODY;
+		}
+		catch (Exception e) {
+			throw new JspException(e);
+		}
 	}
 
 	public void setArticleId(String articleId) {

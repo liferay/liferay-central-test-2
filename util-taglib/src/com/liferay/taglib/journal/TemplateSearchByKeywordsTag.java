@@ -41,7 +41,6 @@
 
 package com.liferay.taglib.journal;
 
-import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portlet.journal.model.JournalTemplate;
 import com.liferay.portlet.journal.service.JournalTemplateLocalServiceUtil;
@@ -53,8 +52,6 @@ import javax.servlet.jsp.tagext.TagSupport;
 
 /**
  * <a href="TemplateSearchByKeywordsTag.java.html"><b><i>View Source</i></b></a>
- * This class provides the implementation for the tag that searches for journal
- * templates by keywords.
  *
  * @author Prakash Reddy
  *
@@ -62,20 +59,19 @@ import javax.servlet.jsp.tagext.TagSupport;
 public class TemplateSearchByKeywordsTag extends TagSupport {
 
 	public int doStartTag()	throws JspException {
-		List<JournalTemplate> templates;
-
 		try {
-			templates = JournalTemplateLocalServiceUtil.search(
-				_companyId, _groupId, _keywords, _structureId,
-				_structureIdComparator, _start, _end, _obc);
-		}
-		catch (SystemException se) {
-			throw new JspException(se);
-		}
+			List<JournalTemplate> templates =
+				JournalTemplateLocalServiceUtil.search(
+					_companyId, _groupId, _keywords, _structureId,
+					_structureIdComparator, _start, _end, _obc);
 
-		pageContext.setAttribute(_var, templates);
+			pageContext.setAttribute(_var, templates);
 
-		return SKIP_BODY;
+			return SKIP_BODY;
+		}
+		catch (Exception e) {
+			throw new JspException(e);
+		}
 	}
 
 	public void setCompanyId(long companyId) {

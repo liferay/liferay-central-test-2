@@ -41,7 +41,6 @@
 
 package com.liferay.taglib.journal;
 
-import com.liferay.portal.SystemException;
 import com.liferay.portlet.journal.service.JournalFeedLocalServiceUtil;
 
 import javax.servlet.jsp.JspException;
@@ -57,19 +56,17 @@ import javax.servlet.jsp.tagext.TagSupport;
 public class FeedSearchCountByKeywordsTag extends TagSupport {
 
 	public int doStartTag()	throws JspException {
-		int count;
-
 		try {
-			count = JournalFeedLocalServiceUtil.searchCount(
+			int count = JournalFeedLocalServiceUtil.searchCount(
 				_companyId, _groupId, _keywords);
-		}
-		catch (SystemException se) {
-			throw new JspException(se);
-		}
 
-		pageContext.setAttribute(_var, count);
+			pageContext.setAttribute(_var, count);
 
-		return SKIP_BODY;
+			return SKIP_BODY;
+		}
+		catch (Exception e) {
+			throw new JspException(e);
+		}
 	}
 
 	public void setCompanyId(long companyId) {

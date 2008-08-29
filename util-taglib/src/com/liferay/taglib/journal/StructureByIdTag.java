@@ -41,8 +41,6 @@
 
 package com.liferay.taglib.journal;
 
-import com.liferay.portal.PortalException;
-import com.liferay.portal.SystemException;
 import com.liferay.portlet.journal.model.JournalStructure;
 import com.liferay.portlet.journal.service.JournalStructureLocalServiceUtil;
 
@@ -51,8 +49,6 @@ import javax.servlet.jsp.tagext.*;
 
 /**
  * <a href="StructureByIdTag.java.html"><b><i>View Source</i></b></a>
- * This class provides the implementation for the tag that retrieves a structure
- * by structure Id and group Id.
  *
  * @author Prakash Reddy
  *
@@ -60,22 +56,18 @@ import javax.servlet.jsp.tagext.*;
 public class StructureByIdTag extends TagSupport {
 
 	public int doStartTag()	throws JspException {
-		JournalStructure structure;
-
 		try {
-			structure = JournalStructureLocalServiceUtil.getStructure(
-				_groupId, _structureId);
-		}
-		catch (PortalException pe) {
-			throw new JspException(pe);
-		}
-		catch (SystemException se) {
-			throw new JspException(se);
-		}
+			JournalStructure structure =
+				JournalStructureLocalServiceUtil.getStructure(
+					_groupId, _structureId);
 
-		pageContext.setAttribute(_var, structure);
+			pageContext.setAttribute(_var, structure);
 
-		return SKIP_BODY;
+			return SKIP_BODY;
+		}
+		catch (Exception e) {
+			throw new JspException(e);
+		}
 	}
 
 	public void setGroupId(long groupId) {

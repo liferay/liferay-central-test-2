@@ -56,18 +56,18 @@ import javax.servlet.jsp.tagext.VariableInfo;
 public class LayoutIdsByArticleIdTei extends TagExtraInfo {
 
 	public VariableInfo[] getVariableInfo(TagData data) {
-		String varName = data.getAttributeString("var");
+		String var = data.getAttributeString("var");
 
-		VariableInfo[] vInfos = null;
-
-		if (Validator.isNotNull(varName)) {
-			vInfos = new VariableInfo[1];
-			vInfos[0] = new VariableInfo(
-					varName, JournalTaglibConstants.LONG_LIST_CLASS,
-					true, VariableInfo.AT_END);
+		if (Validator.isNotNull(var)) {
+			return new VariableInfo[] {
+				new VariableInfo(var, _CLASS_NAME, true, VariableInfo.AT_END)
+			};
 		}
-
-		return vInfos;
+		else {
+			return null;
+		}
 	}
+
+	private String _CLASS_NAME = "java.util.List<java.lang.Long>";
 
 }
