@@ -30,7 +30,7 @@
 <%
 String className = (String)request.getAttribute("liferay-ui:tags_summary:className");
 long classPK = GetterUtil.getLong((String)request.getAttribute("liferay-ui:tags_summary:classPK"));
-boolean folksonomy = GetterUtil.getBoolean((String)request.getAttribute("liferay-ui:tags_summary:folksonomy"), true);
+boolean folksonomy = GetterUtil.getBoolean((String)request.getAttribute("liferay-ui:tags_summary:folksonomy"));
 String message = GetterUtil.getString((String)request.getAttribute("liferay-ui:tags_summary:message"), "tags");
 LiferayPortletURL portletURL = (LiferayPortletURL)request.getAttribute("liferay-ui:tags_summary:portletURL");
 

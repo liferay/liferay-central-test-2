@@ -83,7 +83,7 @@ public class TagsSummaryTag extends IncludeTag {
 
 	private String _className;
 	private long _classPK;
-	private boolean _folksonomy;
+	private boolean _folksonomy = true;
 	private String _message;
 	private PortletURL _portletURL;
 
