@@ -71,8 +71,8 @@ public class TagsUtil {
 		CharPool.AMPERSAND, CharPool.APOSTROPHE, CharPool.AT,
 		CharPool.BACK_SLASH, CharPool.CLOSE_BRACKET, CharPool.CLOSE_CURLY_BRACE,
 		CharPool.COLON, CharPool.COMMA, CharPool.EQUAL, CharPool.GREATER_THAN,
-		CharPool.FORWARD_SLASH, CharPool.LESS_THAN, CharPool.MINUS,
-		CharPool.NEW_LINE, CharPool.OPEN_BRACKET, CharPool.OPEN_CURLY_BRACE,
+		CharPool.FORWARD_SLASH, CharPool.LESS_THAN, CharPool.NEW_LINE,
+		CharPool.OPEN_BRACKET, CharPool.OPEN_CURLY_BRACE,
 		CharPool.PERCENT, CharPool.PIPE, CharPool.PLUS, CharPool.POUND,
 		CharPool.QUESTION, CharPool.QUOTE, CharPool.RETURN, CharPool.SEMICOLON,
 		CharPool.SLASH, CharPool.STAR, CharPool.TILDE
