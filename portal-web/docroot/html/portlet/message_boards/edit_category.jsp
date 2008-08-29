@@ -224,10 +224,10 @@ boolean mailingListActive = BeanParamUtil.getBoolean(mailingList, request, "acti
 								String protocol = BeanParamUtil.getString(mailingList, request, "inProtocol", "pop3");
 								%>
 								<td>
-									<input name="<portlet:namespace />inProtocol" type="radio" value="pop3" <c:if test='<%= protocol.equals("pop3") %>'>checked="checked"</c:if> > <liferay-ui:message key="pop" />
+									<input name="<portlet:namespace />inProtocol" type="radio" value="pop3" <c:if test='<%= protocol.startsWith("pop3") %>'>checked="checked"</c:if> > <liferay-ui:message key="pop" />
 								</td>
 								<td>
-									<input name="<portlet:namespace />inProtocol" type="radio" value="imap" <c:if test='<%=  protocol.equals("imap") %>'>checked="checked"</c:if> > <liferay-ui:message key="imap" />
+									<input name="<portlet:namespace />inProtocol" type="radio" value="imap" <c:if test='<%=  protocol.startsWith("imap") %>'>checked="checked"</c:if> > <liferay-ui:message key="imap" />
 								</td>
 							</tr>
 							</table>
