@@ -41,39 +41,56 @@
 
 package com.liferay.taglib.journal;
 
+import com.liferay.portal.SystemException;
+import com.liferay.portlet.journal.service.JournalFeedLocalServiceUtil;
+
+import javax.servlet.jsp.JspException;
+import javax.servlet.jsp.tagext.TagSupport;
+
 /**
- * <a href="JournalTaglibConstants.java.html"><b><i>View Source</i></b></a>
+ * <a href="FeedSearchCountByKeywordsTag.java.html"><b><i>View Source</i></b>
+ * </a>
  *
  * @author Prakash Reddy
  *
  */
-public interface JournalTaglibConstants {
+public class FeedSearchCountByKeywordsTag extends TagSupport {
 
-	public static final String ARTICLE_CLASS =
-		"com.liferay.portlet.journal.model.JournalArticle";
+	public int doStartTag()	throws JspException {
+		int count;
 
-	public static final String ARTICLE_LIST_CLASS =
-		"java.util.List<com.liferay.portlet.journal.model.JournalArticle>";
+		try {
+			count = JournalFeedLocalServiceUtil.searchCount(
+				_companyId, _groupId, _keywords);
+		}
+		catch (SystemException se) {
+			throw new JspException(se);
+		}
 
-	public static final String ARTICLE_RESOURCE_CLASS =
-		"com.liferay.portlet.journal.model.JournalArticleResource";
+		pageContext.setAttribute(_var, count);
 
-	public static final String FEED_LIST_CLASS =
-		"java.util.List<com.liferay.portlet.journal.model.JournalFeed>";
+		return SKIP_BODY;
+	}
 
-	public static final String LONG_LIST_CLASS =
-		"java.util.List<java.lang.Long>";
+	public void setCompanyId(long companyId) {
+		_companyId = companyId;
+	}
 
-	public static final String STRUCTURE_CLASS =
-		"com.liferay.portlet.journal.model.JournalStructure";
+	public void setGroupId(long groupId) {
+		_groupId = groupId;
+	}
 
-	public static final String STRUCTURE_LIST_CLASS =
-		"java.util.List<com.liferay.portlet.journal.model.JournalStructure>";
+	public void setKeywords(String keywords) {
+		_keywords = keywords;
+	}
 
-	public static final String TEMPLATE_CLASS =
-		"com.liferay.portlet.journal.model.JournalTemplate";
+	public void setVar(String var) {
+		_var = var;
+	}
 
-	public static final String TEMPLATE_LIST_CLASS =
-		"java.util.List<com.liferay.portlet.journal.model.JournalTemplate>";
+	private long _companyId;
+	private long _groupId;
+	private String _keywords;
+	private String _var;
 
 }

@@ -41,39 +41,57 @@
 
 package com.liferay.taglib.journal;
 
+import com.liferay.portal.PortalException;
+import com.liferay.portal.SystemException;
+import com.liferay.portlet.journal.model.JournalArticle;
+import com.liferay.portlet.journal.service.JournalArticleLocalServiceUtil;
+
+import javax.servlet.jsp.JspException;
+import javax.servlet.jsp.tagext.TagSupport;
+
 /**
- * <a href="JournalTaglibConstants.java.html"><b><i>View Source</i></b></a>
+ * <a href="LatestArticleByIdTag.java.html"><b><i>View Source</i></b></a>
+ * This class provides the implementation for the tag that retrieves the latest
+ * article by article Id and group Id.
  *
  * @author Prakash Reddy
  *
  */
-public interface JournalTaglibConstants {
+public class LatestArticleByIdTag extends TagSupport {
 
-	public static final String ARTICLE_CLASS =
-		"com.liferay.portlet.journal.model.JournalArticle";
+	public int doStartTag()	throws JspException {
+		JournalArticle latestArticle;
 
-	public static final String ARTICLE_LIST_CLASS =
-		"java.util.List<com.liferay.portlet.journal.model.JournalArticle>";
+		try {
+			latestArticle = JournalArticleLocalServiceUtil.getLatestArticle(
+				_groupId, _articleId);
+		}
+		catch (PortalException pe) {
+			throw new JspException(pe);
+		}
+		catch (SystemException se) {
+			throw new JspException(se);
+		}
 
-	public static final String ARTICLE_RESOURCE_CLASS =
-		"com.liferay.portlet.journal.model.JournalArticleResource";
+		pageContext.setAttribute(_var, latestArticle);
 
-	public static final String FEED_LIST_CLASS =
-		"java.util.List<com.liferay.portlet.journal.model.JournalFeed>";
+		return SKIP_BODY;
+	}
 
-	public static final String LONG_LIST_CLASS =
-		"java.util.List<java.lang.Long>";
+	public void setArticleId(String articleId) {
+		_articleId = articleId;
+	}
 
-	public static final String STRUCTURE_CLASS =
-		"com.liferay.portlet.journal.model.JournalStructure";
+	public void setGroupId(long groupId) {
+		_groupId = groupId;
+	}
 
-	public static final String STRUCTURE_LIST_CLASS =
-		"java.util.List<com.liferay.portlet.journal.model.JournalStructure>";
+	public void setVar(String var) {
+		_var = var;
+	}
 
-	public static final String TEMPLATE_CLASS =
-		"com.liferay.portlet.journal.model.JournalTemplate";
-
-	public static final String TEMPLATE_LIST_CLASS =
-		"java.util.List<com.liferay.portlet.journal.model.JournalTemplate>";
+	private String _articleId;
+	private long _groupId;
+	private String _var;
 
 }

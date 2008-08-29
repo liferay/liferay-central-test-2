@@ -41,39 +41,33 @@
 
 package com.liferay.taglib.journal;
 
+import com.liferay.portal.kernel.util.Validator;
+
+import javax.servlet.jsp.tagext.TagData;
+import javax.servlet.jsp.tagext.TagExtraInfo;
+import javax.servlet.jsp.tagext.VariableInfo;
+
 /**
- * <a href="JournalTaglibConstants.java.html"><b><i>View Source</i></b></a>
+ * <a href="FeedSearchTei.java.html"><b><i>View Source</i></b></a>
  *
  * @author Prakash Reddy
  *
  */
-public interface JournalTaglibConstants {
+public class FeedSearchTei extends TagExtraInfo {
 
-	public static final String ARTICLE_CLASS =
-		"com.liferay.portlet.journal.model.JournalArticle";
+	public VariableInfo[] getVariableInfo(TagData data) {
+		String varName = data.getAttributeString("var");
 
-	public static final String ARTICLE_LIST_CLASS =
-		"java.util.List<com.liferay.portlet.journal.model.JournalArticle>";
+		VariableInfo[] vInfos = null;
 
-	public static final String ARTICLE_RESOURCE_CLASS =
-		"com.liferay.portlet.journal.model.JournalArticleResource";
+		if (Validator.isNotNull(varName)) {
+			vInfos = new VariableInfo[1];
+			vInfos[0] = new VariableInfo(
+					varName, JournalTaglibConstants.FEED_LIST_CLASS,
+					true, VariableInfo.AT_END);
+		}
 
-	public static final String FEED_LIST_CLASS =
-		"java.util.List<com.liferay.portlet.journal.model.JournalFeed>";
-
-	public static final String LONG_LIST_CLASS =
-		"java.util.List<java.lang.Long>";
-
-	public static final String STRUCTURE_CLASS =
-		"com.liferay.portlet.journal.model.JournalStructure";
-
-	public static final String STRUCTURE_LIST_CLASS =
-		"java.util.List<com.liferay.portlet.journal.model.JournalStructure>";
-
-	public static final String TEMPLATE_CLASS =
-		"com.liferay.portlet.journal.model.JournalTemplate";
-
-	public static final String TEMPLATE_LIST_CLASS =
-		"java.util.List<com.liferay.portlet.journal.model.JournalTemplate>";
+		return vInfos;
+	}
 
 }

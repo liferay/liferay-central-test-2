@@ -41,39 +41,53 @@
 
 package com.liferay.taglib.journal;
 
+import com.liferay.portal.PortalException;
+import com.liferay.portal.SystemException;
+import com.liferay.portlet.journal.model.JournalArticleResource;
+import com.liferay.portlet.journal.service.JournalArticleResourceLocalServiceUtil;
+
+import javax.servlet.jsp.JspException;
+import javax.servlet.jsp.tagext.TagSupport;
+
 /**
- * <a href="JournalTaglibConstants.java.html"><b><i>View Source</i></b></a>
+ * <a href="ArticleResourceByPKTag.java.html"><b><i>View Source</i></b></a>
+ * This class provides the implementation for the tag that retrieves a article
+ * resource by the resource primary key.
  *
  * @author Prakash Reddy
  *
  */
-public interface JournalTaglibConstants {
+public class ArticleResourceByPKTag extends TagSupport {
 
-	public static final String ARTICLE_CLASS =
-		"com.liferay.portlet.journal.model.JournalArticle";
+	public int doStartTag()	throws JspException {
+		JournalArticleResource articleResource;
 
-	public static final String ARTICLE_LIST_CLASS =
-		"java.util.List<com.liferay.portlet.journal.model.JournalArticle>";
+		try {
+			articleResource =
+				JournalArticleResourceLocalServiceUtil.getArticleResource(
+					_articleResourcePrimKey);
+		}
+		catch (PortalException pe) {
+			throw new JspException(pe);
+		}
+		catch (SystemException se) {
+			throw new JspException(se);
+		}
 
-	public static final String ARTICLE_RESOURCE_CLASS =
-		"com.liferay.portlet.journal.model.JournalArticleResource";
+		pageContext.setAttribute(_var, articleResource);
 
-	public static final String FEED_LIST_CLASS =
-		"java.util.List<com.liferay.portlet.journal.model.JournalFeed>";
+		return SKIP_BODY;
+	}
 
-	public static final String LONG_LIST_CLASS =
-		"java.util.List<java.lang.Long>";
+	public void setArticleResourcePrimKey(long articleResourcePrimKey) {
+		_articleResourcePrimKey = articleResourcePrimKey;
+	}
 
-	public static final String STRUCTURE_CLASS =
-		"com.liferay.portlet.journal.model.JournalStructure";
+	public void setVar(String var) {
+		_var = var;
+	}
 
-	public static final String STRUCTURE_LIST_CLASS =
-		"java.util.List<com.liferay.portlet.journal.model.JournalStructure>";
-
-	public static final String TEMPLATE_CLASS =
-		"com.liferay.portlet.journal.model.JournalTemplate";
-
-	public static final String TEMPLATE_LIST_CLASS =
-		"java.util.List<com.liferay.portlet.journal.model.JournalTemplate>";
+	private long _articleResourcePrimKey;
+	private String _var;
 
 }

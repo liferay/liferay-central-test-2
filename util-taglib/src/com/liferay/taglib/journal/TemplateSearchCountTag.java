@@ -41,39 +41,81 @@
 
 package com.liferay.taglib.journal;
 
+import com.liferay.portal.SystemException;
+import com.liferay.portlet.journal.service.JournalTemplateLocalServiceUtil;
+
+import javax.servlet.jsp.JspException;
+import javax.servlet.jsp.tagext.TagSupport;
+
 /**
- * <a href="JournalTaglibConstants.java.html"><b><i>View Source</i></b></a>
+ * <a href="TemplateSearchCountTag.java.html"><b><i>View Source</i></b></a>
  *
  * @author Prakash Reddy
  *
  */
-public interface JournalTaglibConstants {
+public class TemplateSearchCountTag extends TagSupport {
 
-	public static final String ARTICLE_CLASS =
-		"com.liferay.portlet.journal.model.JournalArticle";
+	public int doStartTag()	throws JspException {
+		int count;
 
-	public static final String ARTICLE_LIST_CLASS =
-		"java.util.List<com.liferay.portlet.journal.model.JournalArticle>";
+		try {
+			count = JournalTemplateLocalServiceUtil.searchCount(
+				_companyId, _groupId, _templateId, _structureId,
+				_structureIdComparator, _name, _description, _andOperator);
+		}
+		catch (SystemException se) {
+			throw new JspException(se);
+		}
 
-	public static final String ARTICLE_RESOURCE_CLASS =
-		"com.liferay.portlet.journal.model.JournalArticleResource";
+		pageContext.setAttribute(_var, count);
 
-	public static final String FEED_LIST_CLASS =
-		"java.util.List<com.liferay.portlet.journal.model.JournalFeed>";
+		return SKIP_BODY;
+	}
 
-	public static final String LONG_LIST_CLASS =
-		"java.util.List<java.lang.Long>";
+	public void setAndOperator(boolean andOperator) {
+		_andOperator = andOperator;
+	}
 
-	public static final String STRUCTURE_CLASS =
-		"com.liferay.portlet.journal.model.JournalStructure";
+	public void setCompanyId(long companyId) {
+		_companyId = companyId;
+	}
 
-	public static final String STRUCTURE_LIST_CLASS =
-		"java.util.List<com.liferay.portlet.journal.model.JournalStructure>";
+	public void setDescription(String description) {
+		_description = description;
+	}
 
-	public static final String TEMPLATE_CLASS =
-		"com.liferay.portlet.journal.model.JournalTemplate";
+	public void setGroupId(long groupId) {
+		_groupId = groupId;
+	}
 
-	public static final String TEMPLATE_LIST_CLASS =
-		"java.util.List<com.liferay.portlet.journal.model.JournalTemplate>";
+	public void setName(String name) {
+		_name = name;
+	}
+
+	public void setStructureId(String structureId) {
+		_structureId = structureId;
+	}
+
+	public void setStructureIdComparator(String structureIdComparator) {
+		_structureIdComparator = structureIdComparator;
+	}
+
+	public void setTemplateId(String templateId) {
+		_templateId = templateId;
+	}
+
+	public void setVar(String var) {
+		_var = var;
+	}
+
+	private boolean _andOperator;
+	private long _companyId;
+	private String _description;
+	private long _groupId;
+	private String _name;
+	private String _structureId;
+	private String _structureIdComparator;
+	private String _templateId;
+	private String _var;
 
 }

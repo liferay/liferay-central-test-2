@@ -41,39 +41,87 @@
 
 package com.liferay.taglib.journal;
 
+import com.liferay.portal.SystemException;
+import com.liferay.portal.kernel.util.OrderByComparator;
+import com.liferay.portlet.journal.model.JournalTemplate;
+import com.liferay.portlet.journal.service.JournalTemplateLocalServiceUtil;
+
+import java.util.List;
+
+import javax.servlet.jsp.JspException;
+import javax.servlet.jsp.tagext.TagSupport;
+
 /**
- * <a href="JournalTaglibConstants.java.html"><b><i>View Source</i></b></a>
+ * <a href="TemplateSearchByKeywordsTag.java.html"><b><i>View Source</i></b></a>
+ * This class provides the implementation for the tag that searches for journal
+ * templates by keywords.
  *
  * @author Prakash Reddy
  *
  */
-public interface JournalTaglibConstants {
+public class TemplateSearchByKeywordsTag extends TagSupport {
 
-	public static final String ARTICLE_CLASS =
-		"com.liferay.portlet.journal.model.JournalArticle";
+	public int doStartTag()	throws JspException {
+		List<JournalTemplate> templates;
 
-	public static final String ARTICLE_LIST_CLASS =
-		"java.util.List<com.liferay.portlet.journal.model.JournalArticle>";
+		try {
+			templates = JournalTemplateLocalServiceUtil.search(
+				_companyId, _groupId, _keywords, _structureId,
+				_structureIdComparator, _start, _end, _obc);
+		}
+		catch (SystemException se) {
+			throw new JspException(se);
+		}
 
-	public static final String ARTICLE_RESOURCE_CLASS =
-		"com.liferay.portlet.journal.model.JournalArticleResource";
+		pageContext.setAttribute(_var, templates);
 
-	public static final String FEED_LIST_CLASS =
-		"java.util.List<com.liferay.portlet.journal.model.JournalFeed>";
+		return SKIP_BODY;
+	}
 
-	public static final String LONG_LIST_CLASS =
-		"java.util.List<java.lang.Long>";
+	public void setCompanyId(long companyId) {
+		_companyId = companyId;
+	}
 
-	public static final String STRUCTURE_CLASS =
-		"com.liferay.portlet.journal.model.JournalStructure";
+	public void setEnd(int end) {
+		_end = end;
+	}
 
-	public static final String STRUCTURE_LIST_CLASS =
-		"java.util.List<com.liferay.portlet.journal.model.JournalStructure>";
+	public void setGroupId(long groupId) {
+		_groupId = groupId;
+	}
 
-	public static final String TEMPLATE_CLASS =
-		"com.liferay.portlet.journal.model.JournalTemplate";
+	public void setKeywords(String keywords) {
+		_keywords = keywords;
+	}
 
-	public static final String TEMPLATE_LIST_CLASS =
-		"java.util.List<com.liferay.portlet.journal.model.JournalTemplate>";
+	public void setObc(OrderByComparator obc) {
+		_obc = obc;
+	}
+
+	public void setStart(int start) {
+		_start = start;
+	}
+
+	public void setStructureId(String structureId) {
+		_structureId = structureId;
+	}
+
+	public void setStructureIdComparator(String structureIdComparator) {
+		_structureIdComparator = structureIdComparator;
+	}
+
+	public void setVar(String var) {
+		_var = var;
+	}
+
+	private long _companyId;
+	private int _end;
+	private long _groupId;
+	private String _keywords;
+	private OrderByComparator _obc;
+	private int _start;
+	private String _structureId;
+	private String _structureIdComparator;
+	private String _var;
 
 }

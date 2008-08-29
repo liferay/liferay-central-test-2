@@ -41,39 +41,59 @@
 
 package com.liferay.taglib.journal;
 
+import com.liferay.portal.SystemException;
+import com.liferay.portlet.journal.service.JournalContentSearchLocalServiceUtil;
+
+import java.util.List;
+
+import javax.servlet.jsp.JspException;
+import javax.servlet.jsp.tagext.TagSupport;
+
 /**
- * <a href="JournalTaglibConstants.java.html"><b><i>View Source</i></b></a>
+ * <a href="LayoutIdsByArticleIdTag.java.html"><b><i>View Source</i></b></a>
+ * This class provides the implementation for the tag that retrieves the list of
+ * layout Ids by article Id and group Id.
  *
  * @author Prakash Reddy
  *
  */
-public interface JournalTaglibConstants {
+public class LayoutIdsByArticleIdTag extends TagSupport {
 
-	public static final String ARTICLE_CLASS =
-		"com.liferay.portlet.journal.model.JournalArticle";
+	public int doStartTag()	throws JspException {
+		List<Long> layoutIds;
 
-	public static final String ARTICLE_LIST_CLASS =
-		"java.util.List<com.liferay.portlet.journal.model.JournalArticle>";
+		try {
+			layoutIds = JournalContentSearchLocalServiceUtil.getLayoutIds(
+				_groupId, _privateLayout, _articleId);
+		}
+		catch (SystemException se) {
+			throw new JspException(se);
+		}
 
-	public static final String ARTICLE_RESOURCE_CLASS =
-		"com.liferay.portlet.journal.model.JournalArticleResource";
+		pageContext.setAttribute(_var, layoutIds);
 
-	public static final String FEED_LIST_CLASS =
-		"java.util.List<com.liferay.portlet.journal.model.JournalFeed>";
+		return SKIP_BODY;
+	}
 
-	public static final String LONG_LIST_CLASS =
-		"java.util.List<java.lang.Long>";
+	public void setArticleId(String articleId) {
+		_articleId = articleId;
+	}
 
-	public static final String STRUCTURE_CLASS =
-		"com.liferay.portlet.journal.model.JournalStructure";
+	public void setGroupId(long groupId) {
+		_groupId = groupId;
+	}
 
-	public static final String STRUCTURE_LIST_CLASS =
-		"java.util.List<com.liferay.portlet.journal.model.JournalStructure>";
+	public void setPrivateLayout(boolean privateLayout) {
+		_privateLayout = privateLayout;
+	}
 
-	public static final String TEMPLATE_CLASS =
-		"com.liferay.portlet.journal.model.JournalTemplate";
+	public void setVar(String var) {
+		_var = var;
+	}
 
-	public static final String TEMPLATE_LIST_CLASS =
-		"java.util.List<com.liferay.portlet.journal.model.JournalTemplate>";
+	private String _articleId;
+	private long _groupId;
+	private boolean _privateLayout;
+	private String _var;
 
 }
