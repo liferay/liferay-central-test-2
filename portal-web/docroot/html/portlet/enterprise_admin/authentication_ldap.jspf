@@ -115,7 +115,7 @@ for (int i = 0 ; i < groupMappingArray.length ; i++) {
 			}
 		);
 
-		var url = "";
+		var url = null;
 
 		var data = {};
 
@@ -144,12 +144,14 @@ for (int i = 0 ; i < groupMappingArray.length ; i++) {
 			data.<portlet:namespace />userMappingGroup = document.<portlet:namespace />fm.<portlet:namespace />userMappingGroup.value;
 		}
 
-		data.<portlet:namespace />baseProviderURL = document.<portlet:namespace />fm.<portlet:namespace />baseProviderURL.value;
-		data.<portlet:namespace />baseDN = document.<portlet:namespace />fm.<portlet:namespace />baseDN.value;
-		data.<portlet:namespace />principal = document.<portlet:namespace />fm.<portlet:namespace />principal.value;
-		data.<portlet:namespace />credentials = document.<portlet:namespace />fm.<portlet:namespace />credentials.value;
+		if (url != null) {
+			data.<portlet:namespace />baseProviderURL = document.<portlet:namespace />fm.<portlet:namespace />baseProviderURL.value;
+			data.<portlet:namespace />baseDN = document.<portlet:namespace />fm.<portlet:namespace />baseDN.value;
+			data.<portlet:namespace />principal = document.<portlet:namespace />fm.<portlet:namespace />principal.value;
+			data.<portlet:namespace />credentials = document.<portlet:namespace />fm.<portlet:namespace />credentials.value;
 
-		jQuery(popup).load(url, data);
+			jQuery(popup).load(url, data);
+		}
 	}
 
 	function <portlet:namespace />updateDefaultLdap() {
