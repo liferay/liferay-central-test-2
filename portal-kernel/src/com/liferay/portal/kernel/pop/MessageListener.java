@@ -32,7 +32,7 @@ import javax.mail.Message;
  */
 public interface MessageListener {
 
-    public boolean accept(String from, String recipient, Message message);
+	public boolean accept(String from, String recipient, Message message);
 
 	public void deliver(String from, String recipient, Message message)
 		throws MessageListenerException;

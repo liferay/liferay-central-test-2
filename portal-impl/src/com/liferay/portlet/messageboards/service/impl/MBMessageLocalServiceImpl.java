@@ -135,7 +135,7 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 			parentMessageId, subject, body, themeDisplay);
 
 		if (parentMessageId == MBMessageImpl.DEFAULT_PARENT_MESSAGE_ID) {
-			MBDiscussion discussion;
+			MBDiscussion discussion = null;
 
 			try {
 				long classNameId = PortalUtil.getClassNameId(className);
@@ -419,7 +419,7 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 		message.setParentMessageId(parentMessageId);
 		message.setSubject(subject);
 		message.setBody(body);
-		message.setAttachments((files.size() > 0));
+		message.setAttachments(!files.isEmpty());
 		message.setAnonymous(anonymous);
 
 		// Attachments
@@ -437,10 +437,10 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 						companyId, portletId, repositoryId, dirName);
 				}
 				catch (NoSuchDirectoryException nsde) {
-                    if (_log.isDebugEnabled()) {
-                        _log.debug("Unable to create delete directory", nsde);
-                    }
-                }
+					if (_log.isDebugEnabled()) {
+						_log.debug(nsde.getMessage());
+					}
+				}
 
 				dlService.addDirectory(companyId, repositoryId, dirName);
 
@@ -457,11 +457,10 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 							new String[0], bytes);
 					}
 					catch (DuplicateFileException dfe) {
-                        if (_log.isDebugEnabled()) {
-                            _log.debug("Unable to add file due to duplicate",
-                                       dfe);
-                        }
-                    }
+						if (_log.isDebugEnabled()) {
+							_log.debug(dfe.getMessage());
+						}
+					}
 				}
 			}
 			catch (RemoteException re) {
@@ -669,10 +668,10 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 			mbDiscussionPersistence.remove(discussion.getDiscussionId());
 		}
 		catch (NoSuchDiscussionException nsde) {
-            if (_log.isDebugEnabled()) {
-                _log.debug("No discussion messages to delete", nsde);
-            }
-        }
+			if (_log.isDebugEnabled()) {
+				_log.debug(nsde.getMessage());
+			}
+		}
 	}
 
 	public void deleteMessage(long messageId)
@@ -709,10 +708,10 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 					companyId, portletId, repositoryId, dirName);
 			}
 			catch (NoSuchDirectoryException nsde) {
-                if (_log.isDebugEnabled()) {
-                    _log.debug("No directory to delete: " + dirName, nsde);
-                }
-            }
+				if (_log.isDebugEnabled()) {
+					_log.debug(nsde.getMessage());
+				}
+			}
 			catch (RemoteException re) {
 				throw new SystemException(re);
 			}
@@ -743,9 +742,9 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 					companyId, portletId, repositoryId, dirName);
 			}
 			catch (NoSuchDirectoryException nsde) {
-                if (_log.isDebugEnabled()) {
-                    _log.debug("No directory to delete: " + dirName, nsde);
-                }
+				if (_log.isDebugEnabled()) {
+					_log.debug(nsde.getMessage());
+				}
 			}
 			catch (RemoteException re) {
 				throw new SystemException(re);
@@ -905,7 +904,7 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 
 		long classNameId = PortalUtil.getClassNameId(className);
 
-		MBMessage message;
+		MBMessage message = null;
 
 		try {
 			MBDiscussion discussion = mbDiscussionPersistence.findByC_C(
@@ -919,7 +918,7 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 		}
 		catch (NoSuchDiscussionException nsde) {
 			String subject = String.valueOf(classPK);
-			//String body = subject; - redundant and wastes memory
+			//String body = subject;
 
 			message = addDiscussionMessage(userId, null, subject, subject);
 
@@ -1481,9 +1480,9 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 				portletName
 			});
 
-		String subjectPrefix;
-		String body;
-		String signature;
+		String subjectPrefix = null;
+		String body = null;
+		String signature = null;
 		boolean htmlFormat = MBUtil.getEmailHtmlFormat(prefs);
 
 		if (update) {

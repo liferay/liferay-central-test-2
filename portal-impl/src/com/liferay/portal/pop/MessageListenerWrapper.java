@@ -42,8 +42,8 @@ public class MessageListenerWrapper implements MessageListener {
 		_listener = listener;
 	}
 
-    public boolean accept(String from, String recipient, Message message) {
-        if (_log.isDebugEnabled()) {
+	public boolean accept(String from, String recipient, Message message) {
+		if (_log.isDebugEnabled()) {
 			_log.debug("Listener " + _listener.getClass().getName());
 			_log.debug("From " + from);
 			_log.debug("Recipient " + recipient);
@@ -56,9 +56,9 @@ public class MessageListenerWrapper implements MessageListener {
 		}
 
 		return value;
-    }
+	}
 
-    public void deliver(String from, String recipient, Message message)
+	public void deliver(String from, String recipient, Message message)
 		throws MessageListenerException {
 
 		if (_log.isDebugEnabled()) {
@@ -80,7 +80,7 @@ public class MessageListenerWrapper implements MessageListener {
 			return false;
 		}
 
-		MessageListenerWrapper listener;
+		MessageListenerWrapper listener = null;
 
 		try {
 			listener = (MessageListenerWrapper)obj;
@@ -91,7 +91,7 @@ public class MessageListenerWrapper implements MessageListener {
 
 		String id = listener.getId();
 
-        return getId().equals(id);
+		return getId().equals(id);
 	}
 
 	private static Log _log = LogFactory.getLog(MessageListenerWrapper.class);
