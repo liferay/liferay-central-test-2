@@ -181,6 +181,37 @@ public interface JournalStructurePersistence {
 		long groupId, java.lang.String structureId)
 		throws com.liferay.portal.SystemException;
 
+	public java.util.List<com.liferay.portlet.journal.model.JournalStructure> findByG_P(
+		long groupId, java.lang.String parentStructureId)
+		throws com.liferay.portal.SystemException;
+
+	public java.util.List<com.liferay.portlet.journal.model.JournalStructure> findByG_P(
+		long groupId, java.lang.String parentStructureId, int start, int end)
+		throws com.liferay.portal.SystemException;
+
+	public java.util.List<com.liferay.portlet.journal.model.JournalStructure> findByG_P(
+		long groupId, java.lang.String parentStructureId, int start, int end,
+		com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException;
+
+	public com.liferay.portlet.journal.model.JournalStructure findByG_P_First(
+		long groupId, java.lang.String parentStructureId,
+		com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException,
+			com.liferay.portlet.journal.NoSuchStructureException;
+
+	public com.liferay.portlet.journal.model.JournalStructure findByG_P_Last(
+		long groupId, java.lang.String parentStructureId,
+		com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException,
+			com.liferay.portlet.journal.NoSuchStructureException;
+
+	public com.liferay.portlet.journal.model.JournalStructure[] findByG_P_PrevAndNext(
+		long id, long groupId, java.lang.String parentStructureId,
+		com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException,
+			com.liferay.portlet.journal.NoSuchStructureException;
+
 	public java.util.List<Object> findWithDynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery)
 		throws com.liferay.portal.SystemException;
@@ -216,6 +247,9 @@ public interface JournalStructurePersistence {
 		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.journal.NoSuchStructureException;
 
+	public void removeByG_P(long groupId, java.lang.String parentStructureId)
+		throws com.liferay.portal.SystemException;
+
 	public void removeAll() throws com.liferay.portal.SystemException;
 
 	public int countByUuid(java.lang.String uuid)
@@ -231,6 +265,9 @@ public interface JournalStructurePersistence {
 		throws com.liferay.portal.SystemException;
 
 	public int countByG_S(long groupId, java.lang.String structureId)
+		throws com.liferay.portal.SystemException;
+
+	public int countByG_P(long groupId, java.lang.String parentStructureId)
 		throws com.liferay.portal.SystemException;
 
 	public int countAll() throws com.liferay.portal.SystemException;

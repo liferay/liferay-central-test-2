@@ -1272,6 +1272,301 @@ public class JournalStructurePersistenceImpl extends BasePersistenceImpl
 		}
 	}
 
+	public List<JournalStructure> findByG_P(long groupId,
+		String parentStructureId) throws SystemException {
+		boolean finderClassNameCacheEnabled = JournalStructureModelImpl.CACHE_ENABLED;
+		String finderClassName = JournalStructure.class.getName();
+		String finderMethodName = "findByG_P";
+		String[] finderParams = new String[] {
+				Long.class.getName(), String.class.getName()
+			};
+		Object[] finderArgs = new Object[] { new Long(groupId), parentStructureId };
+
+		Object result = null;
+
+		if (finderClassNameCacheEnabled) {
+			result = FinderCacheUtil.getResult(finderClassName,
+					finderMethodName, finderParams, finderArgs, this);
+		}
+
+		if (result == null) {
+			Session session = null;
+
+			try {
+				session = openSession();
+
+				StringBuilder query = new StringBuilder();
+
+				query.append(
+					"FROM com.liferay.portlet.journal.model.JournalStructure WHERE ");
+
+				query.append("groupId = ?");
+
+				query.append(" AND ");
+
+				if (parentStructureId == null) {
+					query.append("parentStructureId IS NULL");
+				}
+				else {
+					query.append("parentStructureId = ?");
+				}
+
+				query.append(" ");
+
+				query.append("ORDER BY ");
+
+				query.append("structureId ASC");
+
+				Query q = session.createQuery(query.toString());
+
+				QueryPos qPos = QueryPos.getInstance(q);
+
+				qPos.add(groupId);
+
+				if (parentStructureId != null) {
+					qPos.add(parentStructureId);
+				}
+
+				List<JournalStructure> list = q.list();
+
+				FinderCacheUtil.putResult(finderClassNameCacheEnabled,
+					finderClassName, finderMethodName, finderParams,
+					finderArgs, list);
+
+				return list;
+			}
+			catch (Exception e) {
+				throw processException(e);
+			}
+			finally {
+				closeSession(session);
+			}
+		}
+		else {
+			return (List<JournalStructure>)result;
+		}
+	}
+
+	public List<JournalStructure> findByG_P(long groupId,
+		String parentStructureId, int start, int end) throws SystemException {
+		return findByG_P(groupId, parentStructureId, start, end, null);
+	}
+
+	public List<JournalStructure> findByG_P(long groupId,
+		String parentStructureId, int start, int end, OrderByComparator obc)
+		throws SystemException {
+		boolean finderClassNameCacheEnabled = JournalStructureModelImpl.CACHE_ENABLED;
+		String finderClassName = JournalStructure.class.getName();
+		String finderMethodName = "findByG_P";
+		String[] finderParams = new String[] {
+				Long.class.getName(), String.class.getName(),
+				
+				"java.lang.Integer", "java.lang.Integer",
+				"com.liferay.portal.kernel.util.OrderByComparator"
+			};
+		Object[] finderArgs = new Object[] {
+				new Long(groupId),
+				
+				parentStructureId,
+				
+				String.valueOf(start), String.valueOf(end), String.valueOf(obc)
+			};
+
+		Object result = null;
+
+		if (finderClassNameCacheEnabled) {
+			result = FinderCacheUtil.getResult(finderClassName,
+					finderMethodName, finderParams, finderArgs, this);
+		}
+
+		if (result == null) {
+			Session session = null;
+
+			try {
+				session = openSession();
+
+				StringBuilder query = new StringBuilder();
+
+				query.append(
+					"FROM com.liferay.portlet.journal.model.JournalStructure WHERE ");
+
+				query.append("groupId = ?");
+
+				query.append(" AND ");
+
+				if (parentStructureId == null) {
+					query.append("parentStructureId IS NULL");
+				}
+				else {
+					query.append("parentStructureId = ?");
+				}
+
+				query.append(" ");
+
+				if (obc != null) {
+					query.append("ORDER BY ");
+					query.append(obc.getOrderBy());
+				}
+
+				else {
+					query.append("ORDER BY ");
+
+					query.append("structureId ASC");
+				}
+
+				Query q = session.createQuery(query.toString());
+
+				QueryPos qPos = QueryPos.getInstance(q);
+
+				qPos.add(groupId);
+
+				if (parentStructureId != null) {
+					qPos.add(parentStructureId);
+				}
+
+				List<JournalStructure> list = (List<JournalStructure>)QueryUtil.list(q,
+						getDialect(), start, end);
+
+				FinderCacheUtil.putResult(finderClassNameCacheEnabled,
+					finderClassName, finderMethodName, finderParams,
+					finderArgs, list);
+
+				return list;
+			}
+			catch (Exception e) {
+				throw processException(e);
+			}
+			finally {
+				closeSession(session);
+			}
+		}
+		else {
+			return (List<JournalStructure>)result;
+		}
+	}
+
+	public JournalStructure findByG_P_First(long groupId,
+		String parentStructureId, OrderByComparator obc)
+		throws NoSuchStructureException, SystemException {
+		List<JournalStructure> list = findByG_P(groupId, parentStructureId, 0,
+				1, obc);
+
+		if (list.size() == 0) {
+			StringBuilder msg = new StringBuilder();
+
+			msg.append("No JournalStructure exists with the key {");
+
+			msg.append("groupId=" + groupId);
+
+			msg.append(", ");
+			msg.append("parentStructureId=" + parentStructureId);
+
+			msg.append(StringPool.CLOSE_CURLY_BRACE);
+
+			throw new NoSuchStructureException(msg.toString());
+		}
+		else {
+			return list.get(0);
+		}
+	}
+
+	public JournalStructure findByG_P_Last(long groupId,
+		String parentStructureId, OrderByComparator obc)
+		throws NoSuchStructureException, SystemException {
+		int count = countByG_P(groupId, parentStructureId);
+
+		List<JournalStructure> list = findByG_P(groupId, parentStructureId,
+				count - 1, count, obc);
+
+		if (list.size() == 0) {
+			StringBuilder msg = new StringBuilder();
+
+			msg.append("No JournalStructure exists with the key {");
+
+			msg.append("groupId=" + groupId);
+
+			msg.append(", ");
+			msg.append("parentStructureId=" + parentStructureId);
+
+			msg.append(StringPool.CLOSE_CURLY_BRACE);
+
+			throw new NoSuchStructureException(msg.toString());
+		}
+		else {
+			return list.get(0);
+		}
+	}
+
+	public JournalStructure[] findByG_P_PrevAndNext(long id, long groupId,
+		String parentStructureId, OrderByComparator obc)
+		throws NoSuchStructureException, SystemException {
+		JournalStructure journalStructure = findByPrimaryKey(id);
+
+		int count = countByG_P(groupId, parentStructureId);
+
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			StringBuilder query = new StringBuilder();
+
+			query.append(
+				"FROM com.liferay.portlet.journal.model.JournalStructure WHERE ");
+
+			query.append("groupId = ?");
+
+			query.append(" AND ");
+
+			if (parentStructureId == null) {
+				query.append("parentStructureId IS NULL");
+			}
+			else {
+				query.append("parentStructureId = ?");
+			}
+
+			query.append(" ");
+
+			if (obc != null) {
+				query.append("ORDER BY ");
+				query.append(obc.getOrderBy());
+			}
+
+			else {
+				query.append("ORDER BY ");
+
+				query.append("structureId ASC");
+			}
+
+			Query q = session.createQuery(query.toString());
+
+			QueryPos qPos = QueryPos.getInstance(q);
+
+			qPos.add(groupId);
+
+			if (parentStructureId != null) {
+				qPos.add(parentStructureId);
+			}
+
+			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc,
+					journalStructure);
+
+			JournalStructure[] array = new JournalStructureImpl[3];
+
+			array[0] = (JournalStructure)objArray[0];
+			array[1] = (JournalStructure)objArray[1];
+			array[2] = (JournalStructure)objArray[2];
+
+			return array;
+		}
+		catch (Exception e) {
+			throw processException(e);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
+
 	public List<Object> findWithDynamicQuery(DynamicQuery dynamicQuery)
 		throws SystemException {
 		Session session = null;
@@ -1421,6 +1716,14 @@ public class JournalStructurePersistenceImpl extends BasePersistenceImpl
 		JournalStructure journalStructure = findByG_S(groupId, structureId);
 
 		remove(journalStructure);
+	}
+
+	public void removeByG_P(long groupId, String parentStructureId)
+		throws SystemException {
+		for (JournalStructure journalStructure : findByG_P(groupId,
+				parentStructureId)) {
+			remove(journalStructure);
+		}
 	}
 
 	public void removeAll() throws SystemException {
@@ -1773,6 +2076,88 @@ public class JournalStructurePersistenceImpl extends BasePersistenceImpl
 
 				if (structureId != null) {
 					qPos.add(structureId);
+				}
+
+				Long count = null;
+
+				Iterator<Long> itr = q.list().iterator();
+
+				if (itr.hasNext()) {
+					count = itr.next();
+				}
+
+				if (count == null) {
+					count = new Long(0);
+				}
+
+				FinderCacheUtil.putResult(finderClassNameCacheEnabled,
+					finderClassName, finderMethodName, finderParams,
+					finderArgs, count);
+
+				return count.intValue();
+			}
+			catch (Exception e) {
+				throw processException(e);
+			}
+			finally {
+				closeSession(session);
+			}
+		}
+		else {
+			return ((Long)result).intValue();
+		}
+	}
+
+	public int countByG_P(long groupId, String parentStructureId)
+		throws SystemException {
+		boolean finderClassNameCacheEnabled = JournalStructureModelImpl.CACHE_ENABLED;
+		String finderClassName = JournalStructure.class.getName();
+		String finderMethodName = "countByG_P";
+		String[] finderParams = new String[] {
+				Long.class.getName(), String.class.getName()
+			};
+		Object[] finderArgs = new Object[] { new Long(groupId), parentStructureId };
+
+		Object result = null;
+
+		if (finderClassNameCacheEnabled) {
+			result = FinderCacheUtil.getResult(finderClassName,
+					finderMethodName, finderParams, finderArgs, this);
+		}
+
+		if (result == null) {
+			Session session = null;
+
+			try {
+				session = openSession();
+
+				StringBuilder query = new StringBuilder();
+
+				query.append("SELECT COUNT(*) ");
+				query.append(
+					"FROM com.liferay.portlet.journal.model.JournalStructure WHERE ");
+
+				query.append("groupId = ?");
+
+				query.append(" AND ");
+
+				if (parentStructureId == null) {
+					query.append("parentStructureId IS NULL");
+				}
+				else {
+					query.append("parentStructureId = ?");
+				}
+
+				query.append(" ");
+
+				Query q = session.createQuery(query.toString());
+
+				QueryPos qPos = QueryPos.getInstance(q);
+
+				qPos.add(groupId);
+
+				if (parentStructureId != null) {
+					qPos.add(parentStructureId);
 				}
 
 				Long count = null;

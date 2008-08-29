@@ -886,26 +886,26 @@ public class JournalPortletDataHandlerImpl implements PortletDataHandler {
 				existingStructure =
 					JournalStructureLocalServiceUtil.addStructure(
 						structure.getUuid(), userId, structureId,
-						autoStructureId, plid, structure.getName(),
-						structure.getDescription(), structure.getXsd(),
-						structure.getParentStructureId(),
-						addCommunityPermissions, addGuestPermissions);
+						autoStructureId, plid, structure.getParentStructureId(),
+						structure.getName(), structure.getDescription(),
+						structure.getXsd(), addCommunityPermissions,
+						addGuestPermissions);
 			}
 			else {
 				existingStructure =
 					JournalStructureLocalServiceUtil.updateStructure(
 						existingStructure.getGroupId(),
-						existingStructure.getStructureId(), structure.getName(),
-						structure.getDescription(), structure.getXsd(),
-						structure.getParentStructureId());
+						existingStructure.getStructureId(),
+						structure.getParentStructureId(), structure.getName(),
+						structure.getDescription(), structure.getXsd());
 			}
 		}
 		else {
 			existingStructure = JournalStructureLocalServiceUtil.addStructure(
-				userId, structureId, autoStructureId, plid, structure.getName(),
+				userId, structureId, autoStructureId, plid,
+				structure.getParentStructureId(), structure.getName(),
 				structure.getDescription(), structure.getXsd(),
-				structure.getParentStructureId(), addCommunityPermissions,
-				addGuestPermissions);
+				addCommunityPermissions, addGuestPermissions);
 		}
 
 		structureIds.put(structureId, existingStructure.getStructureId());

@@ -74,30 +74,29 @@ import com.liferay.portlet.journal.service.JournalStructureServiceUtil;
  */
 public class JournalStructureServiceJSON {
 	public static JSONObject addStructure(java.lang.String structureId,
-		boolean autoStructureId, long plid, java.lang.String name,
-		java.lang.String description, java.lang.String xsd,
-		java.lang.String parentStructureId, boolean addCommunityPermissions,
+		boolean autoStructureId, long plid, java.lang.String parentStructureId,
+		java.lang.String name, java.lang.String description,
+		java.lang.String xsd, boolean addCommunityPermissions,
 		boolean addGuestPermissions)
 		throws java.rmi.RemoteException, com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		com.liferay.portlet.journal.model.JournalStructure returnValue = JournalStructureServiceUtil.addStructure(structureId,
-				autoStructureId, plid, name, description, xsd,
-				parentStructureId, addCommunityPermissions, addGuestPermissions);
+				autoStructureId, plid, parentStructureId, name, description,
+				xsd, addCommunityPermissions, addGuestPermissions);
 
 		return JournalStructureJSONSerializer.toJSONObject(returnValue);
 	}
 
 	public static JSONObject addStructure(java.lang.String structureId,
-		boolean autoStructureId, long plid, java.lang.String name,
-		java.lang.String description, java.lang.String xsd,
-		java.lang.String parentStructureId,
-		java.lang.String[] communityPermissions,
+		boolean autoStructureId, long plid, java.lang.String parentStructureId,
+		java.lang.String name, java.lang.String description,
+		java.lang.String xsd, java.lang.String[] communityPermissions,
 		java.lang.String[] guestPermissions)
 		throws java.rmi.RemoteException, com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		com.liferay.portlet.journal.model.JournalStructure returnValue = JournalStructureServiceUtil.addStructure(structureId,
-				autoStructureId, plid, name, description, xsd,
-				parentStructureId, communityPermissions, guestPermissions);
+				autoStructureId, plid, parentStructureId, name, description,
+				xsd, communityPermissions, guestPermissions);
 
 		return JournalStructureJSONSerializer.toJSONObject(returnValue);
 	}
@@ -131,13 +130,13 @@ public class JournalStructureServiceJSON {
 	}
 
 	public static JSONObject updateStructure(long groupId,
-		java.lang.String structureId, java.lang.String name,
-		java.lang.String description, java.lang.String xsd,
-		java.lang.String parentStructureId)
+		java.lang.String structureId, java.lang.String parentStructureId,
+		java.lang.String name, java.lang.String description,
+		java.lang.String xsd)
 		throws java.rmi.RemoteException, com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		com.liferay.portlet.journal.model.JournalStructure returnValue = JournalStructureServiceUtil.updateStructure(groupId,
-				structureId, name, description, xsd, parentStructureId);
+				structureId, parentStructureId, name, description, xsd);
 
 		return JournalStructureJSONSerializer.toJSONObject(returnValue);
 	}

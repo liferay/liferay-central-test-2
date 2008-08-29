@@ -41,9 +41,10 @@ public class JournalStructureServiceImpl
 	extends JournalStructureServiceBaseImpl {
 
 	public JournalStructure addStructure(
-			String structureId, boolean autoStructureId, long plid, String name,
-			String description, String xsd, String parentStructureId,
-			boolean addCommunityPermissions, boolean addGuestPermissions)
+			String structureId, boolean autoStructureId, long plid,
+			String parentStructureId, String name, String description,
+			String xsd, boolean addCommunityPermissions,
+			boolean addGuestPermissions)
 		throws PortalException, SystemException {
 
 		PortletPermissionUtil.check(
@@ -51,15 +52,16 @@ public class JournalStructureServiceImpl
 			ActionKeys.ADD_STRUCTURE);
 
 		return journalStructureLocalService.addStructure(
-			getUserId(), structureId, autoStructureId, plid, name, description,
-			xsd, parentStructureId, addCommunityPermissions,
+			getUserId(), structureId, autoStructureId, plid, parentStructureId,
+			name, description, xsd, addCommunityPermissions,
 			addGuestPermissions);
 	}
 
 	public JournalStructure addStructure(
-			String structureId, boolean autoStructureId, long plid, String name,
-			String description, String xsd, String parentStructureId,
-			String[] communityPermissions, String[] guestPermissions)
+			String structureId, boolean autoStructureId, long plid,
+			String parentStructureId, String name, String description,
+			String xsd, String[] communityPermissions,
+			String[] guestPermissions)
 		throws PortalException, SystemException {
 
 		PortletPermissionUtil.check(
@@ -67,8 +69,8 @@ public class JournalStructureServiceImpl
 			ActionKeys.ADD_STRUCTURE);
 
 		return journalStructureLocalService.addStructure(
-			getUserId(), structureId, autoStructureId, plid, name, description,
-			xsd, parentStructureId, communityPermissions, guestPermissions);
+			getUserId(), structureId, autoStructureId, plid, parentStructureId,
+			name, description, xsd, communityPermissions, guestPermissions);
 	}
 
 	public JournalStructure copyStructure(
@@ -104,15 +106,15 @@ public class JournalStructureServiceImpl
 	}
 
 	public JournalStructure updateStructure(
-			long groupId, String structureId, String name, String description,
-			String xsd, String parentStructureId)
+			long groupId, String structureId, String parentStructureId,
+			String name, String description, String xsd)
 		throws PortalException, SystemException {
 
 		JournalStructurePermission.check(
 			getPermissionChecker(), groupId, structureId, ActionKeys.UPDATE);
 
 		return journalStructureLocalService.updateStructure(
-			groupId, structureId, name, description, xsd, parentStructureId);
+			groupId, structureId, parentStructureId, name, description, xsd);
 	}
 
 }

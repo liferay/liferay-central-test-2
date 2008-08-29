@@ -244,6 +244,51 @@ public class JournalStructureUtil {
 		return getPersistence().fetchByG_S(groupId, structureId);
 	}
 
+	public static java.util.List<com.liferay.portlet.journal.model.JournalStructure> findByG_P(
+		long groupId, java.lang.String parentStructureId)
+		throws com.liferay.portal.SystemException {
+		return getPersistence().findByG_P(groupId, parentStructureId);
+	}
+
+	public static java.util.List<com.liferay.portlet.journal.model.JournalStructure> findByG_P(
+		long groupId, java.lang.String parentStructureId, int start, int end)
+		throws com.liferay.portal.SystemException {
+		return getPersistence().findByG_P(groupId, parentStructureId, start, end);
+	}
+
+	public static java.util.List<com.liferay.portlet.journal.model.JournalStructure> findByG_P(
+		long groupId, java.lang.String parentStructureId, int start, int end,
+		com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException {
+		return getPersistence()
+				   .findByG_P(groupId, parentStructureId, start, end, obc);
+	}
+
+	public static com.liferay.portlet.journal.model.JournalStructure findByG_P_First(
+		long groupId, java.lang.String parentStructureId,
+		com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException,
+			com.liferay.portlet.journal.NoSuchStructureException {
+		return getPersistence().findByG_P_First(groupId, parentStructureId, obc);
+	}
+
+	public static com.liferay.portlet.journal.model.JournalStructure findByG_P_Last(
+		long groupId, java.lang.String parentStructureId,
+		com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException,
+			com.liferay.portlet.journal.NoSuchStructureException {
+		return getPersistence().findByG_P_Last(groupId, parentStructureId, obc);
+	}
+
+	public static com.liferay.portlet.journal.model.JournalStructure[] findByG_P_PrevAndNext(
+		long id, long groupId, java.lang.String parentStructureId,
+		com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException,
+			com.liferay.portlet.journal.NoSuchStructureException {
+		return getPersistence()
+				   .findByG_P_PrevAndNext(id, groupId, parentStructureId, obc);
+	}
+
 	public static java.util.List<Object> findWithDynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery)
 		throws com.liferay.portal.SystemException {
@@ -299,6 +344,12 @@ public class JournalStructureUtil {
 		getPersistence().removeByG_S(groupId, structureId);
 	}
 
+	public static void removeByG_P(long groupId,
+		java.lang.String parentStructureId)
+		throws com.liferay.portal.SystemException {
+		getPersistence().removeByG_P(groupId, parentStructureId);
+	}
+
 	public static void removeAll() throws com.liferay.portal.SystemException {
 		getPersistence().removeAll();
 	}
@@ -326,6 +377,12 @@ public class JournalStructureUtil {
 	public static int countByG_S(long groupId, java.lang.String structureId)
 		throws com.liferay.portal.SystemException {
 		return getPersistence().countByG_S(groupId, structureId);
+	}
+
+	public static int countByG_P(long groupId,
+		java.lang.String parentStructureId)
+		throws com.liferay.portal.SystemException {
+		return getPersistence().countByG_P(groupId, parentStructureId);
 	}
 
 	public static int countAll() throws com.liferay.portal.SystemException {

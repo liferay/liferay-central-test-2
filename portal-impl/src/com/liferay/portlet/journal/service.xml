@@ -336,6 +336,10 @@
 			<finder-column name="groupId" />
 			<finder-column name="structureId" />
 		</finder>
+		<finder name="G_P" return-type="Collection">
+			<finder-column name="groupId" />
+			<finder-column name="parentStructureId" />
+		</finder>
 
 		<!-- References -->
 

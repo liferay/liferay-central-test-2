@@ -49,10 +49,10 @@ package com.liferay.portlet.journal.model;
  *
  */
 public interface JournalStructure extends JournalStructureModel {
-	public java.lang.String getMergedXsd();
-
 	public java.lang.String getUserUuid()
 		throws com.liferay.portal.SystemException;
 
 	public void setUserUuid(java.lang.String userUuid);
+
+	public java.lang.String getMergedXsd();
 }

@@ -223,11 +223,11 @@ public class EditStructureAction extends PortletAction {
 		boolean autoStructureId = ParamUtil.getBoolean(
 			actionRequest, "autoStructureId");
 
+		String parentStructureId = ParamUtil.getString(
+			actionRequest, "parentStructureId");
 		String name = ParamUtil.getString(actionRequest, "name");
 		String description = ParamUtil.getString(actionRequest, "description");
 		String xsd = ParamUtil.getString(actionRequest, "xsd");
-		String parentStructureId = ParamUtil.getString(
-			actionRequest, "parentStructureId");
 
 		String[] communityPermissions = actionRequest.getParameterValues(
 			"communityPermissions");
@@ -241,8 +241,8 @@ public class EditStructureAction extends PortletAction {
 			// Add structure
 
 			structure = JournalStructureServiceUtil.addStructure(
-				structureId, autoStructureId, layout.getPlid(), name,
-				description, xsd, parentStructureId, communityPermissions,
+				structureId, autoStructureId, layout.getPlid(),
+				parentStructureId, name, description, xsd, communityPermissions,
 				guestPermissions);
 		}
 		else {
@@ -250,8 +250,8 @@ public class EditStructureAction extends PortletAction {
 			// Update structure
 
 			structure = JournalStructureServiceUtil.updateStructure(
-				groupId, structureId, name, description, xsd,
-				parentStructureId);
+				groupId, structureId, parentStructureId, name, description,
+				xsd);
 		}
 
 		// Recent structures

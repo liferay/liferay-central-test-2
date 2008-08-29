@@ -30,7 +30,6 @@ import com.liferay.portal.kernel.xml.SAXReaderUtil;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portlet.journal.model.JournalStructure;
 import com.liferay.portlet.journal.service.JournalStructureLocalServiceUtil;
-import com.liferay.util.xml.XMLFormatter;
 
 /**
  * <a href="JournalStructureImpl.java.html"><b><i>View Source</i></b></a>
@@ -93,42 +92,45 @@ public class JournalStructureImpl
 	public JournalStructureImpl() {
 	}
 
-	public String getMergedXsd() {
-		String parentStructureId = getParentStructureId();
-
-		String xsd = getXsd();
-
-		if (Validator.isNotNull(parentStructureId)) {
-			try {
-				JournalStructure parentStructure =
-					JournalStructureLocalServiceUtil.getStructure(
-						getGroupId(), parentStructureId);
-
-				Document contentDoc = SAXReaderUtil.read(getXsd());
-
-				Element root = contentDoc.getRootElement();
-
-				Document parentContentDoc = SAXReaderUtil.read(
-					parentStructure.getMergedXsd());
-
-				root.content().addAll(
-					0, parentContentDoc.getRootElement().content());
-
-				xsd = root.asXML();
-			}
-			catch (Exception e) {
-			}
-		}
-
-		return xsd;
-	}
-
 	public String getUserUuid() throws SystemException {
 		return PortalUtil.getUserValue(getUserId(), "uuid", _userUuid);
 	}
 
 	public void setUserUuid(String userUuid) {
 		_userUuid = userUuid;
+	}
+
+	public String getMergedXsd() {
+		String parentStructureId = getParentStructureId();
+
+		String xsd = getXsd();
+
+		if (Validator.isNull(parentStructureId)) {
+			return xsd;
+		}
+
+		try {
+			JournalStructure parentStructure =
+				JournalStructureLocalServiceUtil.getStructure(
+					getGroupId(), parentStructureId);
+
+			Document doc = SAXReaderUtil.read(getXsd());
+
+			Element rootEl = doc.getRootElement();
+
+			Document parentDoc = SAXReaderUtil.read(
+				parentStructure.getMergedXsd());
+
+			Element parentRootEl = parentDoc.getRootElement();
+
+			rootEl.content().addAll(0, parentRootEl.content());
+
+			xsd = rootEl.asXML();
+		}
+		catch (Exception e) {
+		}
+
+		return xsd;
 	}
 
 	private String _userUuid;

@@ -75,9 +75,9 @@ import com.liferay.portlet.journal.service.JournalStructureServiceUtil;
 public class JournalStructureServiceHttp {
 	public static com.liferay.portlet.journal.model.JournalStructure addStructure(
 		HttpPrincipal httpPrincipal, java.lang.String structureId,
-		boolean autoStructureId, long plid, java.lang.String name,
-		java.lang.String description, java.lang.String xsd,
-		java.lang.String parentStructureId, boolean addCommunityPermissions,
+		boolean autoStructureId, long plid, java.lang.String parentStructureId,
+		java.lang.String name, java.lang.String description,
+		java.lang.String xsd, boolean addCommunityPermissions,
 		boolean addGuestPermissions)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
@@ -92,27 +92,27 @@ public class JournalStructureServiceHttp {
 
 			Object paramObj2 = new LongWrapper(plid);
 
-			Object paramObj3 = name;
+			Object paramObj3 = parentStructureId;
 
-			if (name == null) {
+			if (parentStructureId == null) {
 				paramObj3 = new NullWrapper("java.lang.String");
 			}
 
-			Object paramObj4 = description;
+			Object paramObj4 = name;
 
-			if (description == null) {
+			if (name == null) {
 				paramObj4 = new NullWrapper("java.lang.String");
 			}
 
-			Object paramObj5 = xsd;
+			Object paramObj5 = description;
 
-			if (xsd == null) {
+			if (description == null) {
 				paramObj5 = new NullWrapper("java.lang.String");
 			}
 
-			Object paramObj6 = parentStructureId;
+			Object paramObj6 = xsd;
 
-			if (parentStructureId == null) {
+			if (xsd == null) {
 				paramObj6 = new NullWrapper("java.lang.String");
 			}
 
@@ -155,10 +155,9 @@ public class JournalStructureServiceHttp {
 
 	public static com.liferay.portlet.journal.model.JournalStructure addStructure(
 		HttpPrincipal httpPrincipal, java.lang.String structureId,
-		boolean autoStructureId, long plid, java.lang.String name,
-		java.lang.String description, java.lang.String xsd,
-		java.lang.String parentStructureId,
-		java.lang.String[] communityPermissions,
+		boolean autoStructureId, long plid, java.lang.String parentStructureId,
+		java.lang.String name, java.lang.String description,
+		java.lang.String xsd, java.lang.String[] communityPermissions,
 		java.lang.String[] guestPermissions)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
@@ -173,27 +172,27 @@ public class JournalStructureServiceHttp {
 
 			Object paramObj2 = new LongWrapper(plid);
 
-			Object paramObj3 = name;
+			Object paramObj3 = parentStructureId;
 
-			if (name == null) {
+			if (parentStructureId == null) {
 				paramObj3 = new NullWrapper("java.lang.String");
 			}
 
-			Object paramObj4 = description;
+			Object paramObj4 = name;
 
-			if (description == null) {
+			if (name == null) {
 				paramObj4 = new NullWrapper("java.lang.String");
 			}
 
-			Object paramObj5 = xsd;
+			Object paramObj5 = description;
 
-			if (xsd == null) {
+			if (description == null) {
 				paramObj5 = new NullWrapper("java.lang.String");
 			}
 
-			Object paramObj6 = parentStructureId;
+			Object paramObj6 = xsd;
 
-			if (parentStructureId == null) {
+			if (xsd == null) {
 				paramObj6 = new NullWrapper("java.lang.String");
 			}
 
@@ -377,9 +376,9 @@ public class JournalStructureServiceHttp {
 
 	public static com.liferay.portlet.journal.model.JournalStructure updateStructure(
 		HttpPrincipal httpPrincipal, long groupId,
-		java.lang.String structureId, java.lang.String name,
-		java.lang.String description, java.lang.String xsd,
-		java.lang.String parentStructureId)
+		java.lang.String structureId, java.lang.String parentStructureId,
+		java.lang.String name, java.lang.String description,
+		java.lang.String xsd)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		try {
@@ -391,27 +390,27 @@ public class JournalStructureServiceHttp {
 				paramObj1 = new NullWrapper("java.lang.String");
 			}
 
-			Object paramObj2 = name;
+			Object paramObj2 = parentStructureId;
 
-			if (name == null) {
+			if (parentStructureId == null) {
 				paramObj2 = new NullWrapper("java.lang.String");
 			}
 
-			Object paramObj3 = description;
+			Object paramObj3 = name;
 
-			if (description == null) {
+			if (name == null) {
 				paramObj3 = new NullWrapper("java.lang.String");
 			}
 
-			Object paramObj4 = xsd;
+			Object paramObj4 = description;
 
-			if (xsd == null) {
+			if (description == null) {
 				paramObj4 = new NullWrapper("java.lang.String");
 			}
 
-			Object paramObj5 = parentStructureId;
+			Object paramObj5 = xsd;
 
-			if (parentStructureId == null) {
+			if (xsd == null) {
 				paramObj5 = new NullWrapper("java.lang.String");
 			}
 
