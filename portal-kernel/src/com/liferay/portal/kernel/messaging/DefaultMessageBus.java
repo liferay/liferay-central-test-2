@@ -44,7 +44,7 @@ public class DefaultMessageBus implements MessageBus {
 
 		_destinations.put(responseDestination.getName(), responseDestination);
 
-		if (destination.equals(DestinationNames.GLOBAL)) {
+		if (destination.getName().equals(DestinationNames.GLOBAL)) {
 			_globalDestinationsCount++;
 		}
 	}
