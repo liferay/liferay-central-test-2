@@ -9858,6 +9858,7 @@ Liferay.Portlet = {
 			'fast',
 			function() {
 				var action = (restore) ? 'removeClass' : 'addClass';
+
 				jQuery(portlet)[action]('portlet-minimized');
 
 				if (el) {
@@ -9867,6 +9868,7 @@ Liferay.Portlet = {
 					var img = link.find('img');
 
 					var imgSrc = img.attr('src');
+
 					if (restore) {
 						imgSrc = imgSrc.replace(/restore.png$/, 'minimize.png');
 					}
@@ -9879,6 +9881,10 @@ Liferay.Portlet = {
 
 					link.attr('title', title);
 					img.attr('src', imgSrc);
+
+					if (restore && Liferay.Browser.is_ie) {
+						content.css('display', '');
+					}
 				}
 			}
 		);
