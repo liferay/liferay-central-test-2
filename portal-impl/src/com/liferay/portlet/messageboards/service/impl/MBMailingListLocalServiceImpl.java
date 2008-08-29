@@ -92,7 +92,7 @@ public class MBMailingListLocalServiceImpl
 		mailingList.setModifiedDate(now);
 		mailingList.setCategoryId(categoryId);
 		mailingList.setEmailAddress(emailAddress);
-		mailingList.setInProtocol((inUseSSL) ? inProtocol + "s" : inProtocol);
+		mailingList.setInProtocol(inUseSSL ? inProtocol + "s" : inProtocol);
 		mailingList.setInServerName(inServerName);
 		mailingList.setInServerPort(inServerPort);
 		mailingList.setInUseSSL(inUseSSL);
@@ -171,7 +171,7 @@ public class MBMailingListLocalServiceImpl
 
 		mailingList.setModifiedDate(new Date());
 		mailingList.setEmailAddress(emailAddress);
-		mailingList.setInProtocol((inUseSSL) ? inProtocol + "s" : inProtocol);
+		mailingList.setInProtocol(inUseSSL ? inProtocol + "s" : inProtocol);
 		mailingList.setInServerName(inServerName);
 		mailingList.setInServerPort(inServerPort);
 		mailingList.setInUseSSL(inUseSSL);
