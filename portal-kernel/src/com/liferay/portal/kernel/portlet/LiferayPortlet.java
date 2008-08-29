@@ -22,8 +22,17 @@
 
 package com.liferay.portal.kernel.portlet;
 
+import com.liferay.portal.kernel.util.MethodCache;
+import com.liferay.portal.kernel.util.ParamUtil;
+import com.liferay.portal.kernel.util.Validator;
+
 import java.io.IOException;
 
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
+
+import javax.portlet.ActionRequest;
+import javax.portlet.ActionResponse;
 import javax.portlet.GenericPortlet;
 import javax.portlet.PortletException;
 import javax.portlet.PortletMode;
@@ -38,6 +47,41 @@ import javax.portlet.WindowState;
  *
  */
 public class LiferayPortlet extends GenericPortlet {
+
+	protected boolean callActionMethod(
+			ActionRequest actionRequest, ActionResponse actionResponse)
+		throws IOException, PortletException {
+
+		String actionName = ParamUtil.getString(
+			actionRequest, ActionRequest.ACTION_NAME);
+
+		if (Validator.isNull(actionName)) {
+			return false;
+		}
+
+		try {
+			Method method = MethodCache.get(
+				getClass().getName(), actionName,
+				new Class[] {ActionRequest.class, ActionResponse.class});
+
+			method.invoke(this, actionRequest, actionResponse);
+
+			return true;
+		}
+		catch (InvocationTargetException ite) {
+			Throwable cause = ite.getCause();
+
+			if (cause != null) {
+				throw new PortletException(cause);
+			}
+			else {
+				throw new PortletException(ite);
+			}
+		}
+		catch (Exception e) {
+			throw new PortletException(e);
+		}
+	}
 
 	protected void doDispatch(
 			RenderRequest renderRequest, RenderResponse renderResponse)
