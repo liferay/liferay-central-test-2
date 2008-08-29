@@ -277,8 +277,7 @@ String smallImageURL = BeanParamUtil.getString(template, request, "smallImageURL
 		<c:choose>
 			<c:when test="<%= (template == null) || (Validator.isNotNull(structureId)) %>">
 				<a href="<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/journal/edit_structure" /><portlet:param name="redirect" value="<%= currentURL %>" /><portlet:param name="groupId" value="<%= String.valueOf(groupId) %>" /><portlet:param name="structureId" value="<%= structureId %>" /></portlet:renderURL>" id="<portlet:namespace />structureName">
-				<%= structureName %>
-				</a>
+				<%= structureName %></a>
 			</c:when>
 			<c:otherwise>
 				<a id="<portlet:namespace />structureName"></a>
