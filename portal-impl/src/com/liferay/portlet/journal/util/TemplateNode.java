@@ -23,7 +23,6 @@
 package com.liferay.portlet.journal.util;
 
 import com.liferay.portal.kernel.util.StringPool;
-import com.liferay.portal.util.PropsValues;
 
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
@@ -95,8 +94,7 @@ public class TemplateNode extends LinkedHashMap<String, Object> {
 		if (getType().equals("link_to_layout")) {
 			StringBuilder sb = new StringBuilder();
 
-			sb.append(
-				PropsValues.LAYOUT_FRIENDLY_URL_PRIVATE_GROUP_SERVLET_MAPPING);
+			sb.append("@friendly_url_current@");
 			sb.append(StringPool.SLASH);
 			sb.append("@group_id@");
 			sb.append(StringPool.SLASH);

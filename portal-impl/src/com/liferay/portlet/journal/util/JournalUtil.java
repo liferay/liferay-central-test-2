@@ -39,8 +39,11 @@ import com.liferay.portal.kernel.xml.Node;
 import com.liferay.portal.kernel.xml.SAXReaderUtil;
 import com.liferay.portal.kernel.xml.XPath;
 import com.liferay.portal.model.Contact;
+import com.liferay.portal.model.Group;
+import com.liferay.portal.model.Layout;
 import com.liferay.portal.model.User;
 import com.liferay.portal.service.ImageLocalServiceUtil;
+import com.liferay.portal.service.LayoutLocalServiceUtil;
 import com.liferay.portal.service.UserLocalServiceUtil;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.ContentUtil;
@@ -1081,10 +1084,31 @@ public class JournalUtil {
 
 		Element themeDisplayEl = rootEl.element("theme-display");
 
+		Layout layout = LayoutLocalServiceUtil.getLayout(
+			GetterUtil.getLong(themeDisplayEl.elementText("plid")));
+
+		Group group = layout.getGroup();
+
+		String friendlyUrlCurrent = null;
+
+		if (layout.isPublicLayout()) {
+			friendlyUrlCurrent = themeDisplayEl.elementText(
+				"path-friendly-url-public");
+		}
+		else if (group.isUserGroup()) {
+			friendlyUrlCurrent = themeDisplayEl.elementText(
+				"path-friendly-url-private-user");
+		}
+		else {
+			friendlyUrlCurrent = themeDisplayEl.elementText(
+				"path-friendly-url-private-group");
+		}
+
 		tokens.put("cdn_host", themeDisplayEl.elementText("cdn-host"));
 		tokens.put("company_id", themeDisplayEl.elementText("company-id"));
 		tokens.put("group_id", String.valueOf(groupId));
 		tokens.put("image_path", themeDisplayEl.elementText("path-image"));
+		tokens.put("friendly_url_current", friendlyUrlCurrent);
 		tokens.put(
 			"friendly_url_private_group",
 			themeDisplayEl.elementText("path-friendly-url-private-group"));
@@ -1117,10 +1141,27 @@ public class JournalUtil {
 	private static void _populateTokens(
 		Map<String, String> tokens, long groupId, ThemeDisplay themeDisplay) {
 
+		Layout layout = themeDisplay.getLayout();
+
+		Group group = layout.getGroup();
+
+		String friendlyUrlCurrent = null;
+
+		if (layout.isPublicLayout()) {
+			friendlyUrlCurrent = themeDisplay.getPathFriendlyURLPublic();
+		}
+		else if (group.isUserGroup()) {
+			friendlyUrlCurrent = themeDisplay.getPathFriendlyURLPrivateUser();
+		}
+		else {
+			friendlyUrlCurrent = themeDisplay.getPathFriendlyURLPrivateGroup();
+		}
+
 		tokens.put("cdn_host", themeDisplay.getCDNHost());
 		tokens.put("company_id", String.valueOf(themeDisplay.getCompanyId()));
 		tokens.put("group_id", String.valueOf(groupId));
 		tokens.put("image_path", themeDisplay.getPathImage());
+		tokens.put("friendly_url_current", friendlyUrlCurrent);
 		tokens.put(
 			"friendly_url_private_group",
 			themeDisplay.getPathFriendlyURLPrivateGroup());

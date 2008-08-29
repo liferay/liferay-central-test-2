@@ -279,6 +279,7 @@ public class PortletRequestUtil {
 		DocUtil.add(
 			themeDisplayEl, "path-theme-images",
 			themeDisplay.getPathThemeImages());
+		DocUtil.add(themeDisplayEl, "plid", themeDisplay.getPlid());
 		DocUtil.add(
 			themeDisplayEl, "url-portal",
 			HttpUtil.removeProtocol(themeDisplay.getURLPortal()));
