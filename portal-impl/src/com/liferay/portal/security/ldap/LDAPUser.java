@@ -77,6 +77,12 @@ public class LDAPUser extends DummyDirContext {
 		_attrs.put(userMappings.getProperty("firstName"), _user.getFirstName());
 		_attrs.put(userMappings.getProperty("lastName"), _user.getLastName());
 
+		String fullNameMapping = userMappings.getProperty("fullName");
+
+		if (Validator.isNotNull(fullNameMapping)) {
+			_attrs.put(fullNameMapping, _user.getFullName());
+		}
+
 		if (Validator.isNotNull(user.getPasswordUnencrypted())) {
 			_attrs.put(
 				userMappings.getProperty("password"),
@@ -85,6 +91,12 @@ public class LDAPUser extends DummyDirContext {
 
 		_attrs.put(
 			userMappings.getProperty("emailAddress"), _user.getEmailAddress());
+
+		String jobTitleMapping = userMappings.getProperty("jobTitle");
+
+		if (Validator.isNotNull(jobTitleMapping)) {
+			_attrs.put(jobTitleMapping, _user.getContact().getJobTitle());
+		}
 	}
 
 	public Attributes getAttributes() {

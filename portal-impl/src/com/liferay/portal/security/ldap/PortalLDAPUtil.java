@@ -142,6 +142,18 @@ public class PortalLDAPUtil {
 			mods.addItem(
 				userMappings.getProperty("lastName"), contact.getLastName());
 
+			String fullNameMapping = userMappings.getProperty("fullName");
+
+			if (Validator.isNotNull(fullNameMapping)) {
+				mods.addItem(fullNameMapping, contact.getFullName());
+			}
+
+			String jobTitleMapping = userMappings.getProperty("jobTitle");
+
+			if (Validator.isNotNull(jobTitleMapping)) {
+				mods.addItem(jobTitleMapping, contact.getJobTitle());
+			}
+
 			ModificationItem[] modItems = mods.getItems();
 
 			ctx.modifyAttributes(name, modItems);
@@ -198,6 +210,17 @@ public class PortalLDAPUtil {
 
 			Modifications mods = Modifications.getInstance();
 
+			mods.addItem(
+				userMappings.getProperty("firstName"), user.getFirstName());
+			mods.addItem(
+				userMappings.getProperty("lastName"), user.getLastName());
+
+			String fullNameMapping = userMappings.getProperty("fullName");
+
+			if (Validator.isNotNull(fullNameMapping)) {
+				mods.addItem(fullNameMapping, user.getFullName());
+			}
+
 			if (user.isPasswordModified() &&
 				Validator.isNotNull(user.getPasswordUnencrypted())) {
 
@@ -209,6 +232,12 @@ public class PortalLDAPUtil {
 			mods.addItem(
 				userMappings.getProperty("emailAddress"),
 				user.getEmailAddress());
+
+			String jobTitleMapping = userMappings.getProperty("jobTitle");
+
+			if (Validator.isNotNull(jobTitleMapping)) {
+				mods.addItem(jobTitleMapping, user.getContact().getJobTitle());
+			}
 
 			ModificationItem[] modItems = mods.getItems();
 
