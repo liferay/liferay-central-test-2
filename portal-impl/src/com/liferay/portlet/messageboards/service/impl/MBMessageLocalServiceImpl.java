@@ -135,7 +135,7 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 			parentMessageId, subject, body, themeDisplay);
 
 		if (parentMessageId == MBMessageImpl.DEFAULT_PARENT_MESSAGE_ID) {
-			MBDiscussion discussion = null;
+			MBDiscussion discussion;
 
 			try {
 				long classNameId = PortalUtil.getClassNameId(className);
@@ -419,7 +419,7 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 		message.setParentMessageId(parentMessageId);
 		message.setSubject(subject);
 		message.setBody(body);
-		message.setAttachments((files.size() > 0 ? true : false));
+		message.setAttachments((files.size() > 0));
 		message.setAnonymous(anonymous);
 
 		// Attachments
@@ -437,7 +437,10 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 						companyId, portletId, repositoryId, dirName);
 				}
 				catch (NoSuchDirectoryException nsde) {
-				}
+                    if (_log.isDebugEnabled()) {
+                        _log.debug("Unable to create delete directory", nsde);
+                    }
+                }
 
 				dlService.addDirectory(companyId, repositoryId, dirName);
 
@@ -454,7 +457,11 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 							new String[0], bytes);
 					}
 					catch (DuplicateFileException dfe) {
-					}
+                        if (_log.isDebugEnabled()) {
+                            _log.debug("Unable to add file due to duplicate",
+                                       dfe);
+                        }
+                    }
 				}
 			}
 			catch (RemoteException re) {
@@ -662,7 +669,10 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 			mbDiscussionPersistence.remove(discussion.getDiscussionId());
 		}
 		catch (NoSuchDiscussionException nsde) {
-		}
+            if (_log.isDebugEnabled()) {
+                _log.debug("No discussion messages to delete", nsde);
+            }
+        }
 	}
 
 	public void deleteMessage(long messageId)
@@ -699,7 +709,10 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 					companyId, portletId, repositoryId, dirName);
 			}
 			catch (NoSuchDirectoryException nsde) {
-			}
+                if (_log.isDebugEnabled()) {
+                    _log.debug("No directory to delete: " + dirName, nsde);
+                }
+            }
 			catch (RemoteException re) {
 				throw new SystemException(re);
 			}
@@ -730,6 +743,9 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 					companyId, portletId, repositoryId, dirName);
 			}
 			catch (NoSuchDirectoryException nsde) {
+                if (_log.isDebugEnabled()) {
+                    _log.debug("No directory to delete: " + dirName, nsde);
+                }
 			}
 			catch (RemoteException re) {
 				throw new SystemException(re);
@@ -889,7 +905,7 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 
 		long classNameId = PortalUtil.getClassNameId(className);
 
-		MBMessage message = null;
+		MBMessage message;
 
 		try {
 			MBDiscussion discussion = mbDiscussionPersistence.findByC_C(
@@ -903,9 +919,9 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 		}
 		catch (NoSuchDiscussionException nsde) {
 			String subject = String.valueOf(classPK);
-			String body = subject;
+			//String body = subject; - redundant and wastes memory
 
-			message = addDiscussionMessage(userId, null, subject, body);
+			message = addDiscussionMessage(userId, null, subject, subject);
 
 			long discussionId = counterLocalService.increment();
 
@@ -1412,7 +1428,7 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 		if (PropsValues.POP_SERVER_NOTIFICATIONS_ENABLED) {
 			mailingListAddress = MBUtil.getMailingListAddress(
 				message.getCategoryId(), message.getMessageId(),
-				company.getMx());
+				company.getMx(), fromAddress);
 		}
 
 		String replyToAddress = mailingListAddress;
@@ -1465,9 +1481,9 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 				portletName
 			});
 
-		String subjectPrefix = null;
-		String body = null;
-		String signature = null;
+		String subjectPrefix;
+		String body;
+		String signature;
 		boolean htmlFormat = MBUtil.getEmailHtmlFormat(prefs);
 
 		if (update) {

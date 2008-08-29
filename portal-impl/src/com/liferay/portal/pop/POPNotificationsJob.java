@@ -141,7 +141,7 @@ public class POPNotificationsJob implements IntervalJob {
 			MessageListener messageListener = itr.next();
 
 			try {
-				if (messageListener.accept(from, recipient)) {
+				if (messageListener.accept(from, recipient, message)) {
 					messageListener.deliver(from, recipient, message);
 				}
 			}

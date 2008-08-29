@@ -85,8 +85,10 @@ import org.apache.commons.logging.LogFactory;
 public class MBUtil {
 
 	public static final String POP_PORTLET_PREFIX = "mb.";
-
-	public static void collectMultipartContent(
+    public static final int POP_SERVER_SUBDOMAIN_LENGTH =
+            PropsValues.POP_SERVER_SUBDOMAIN.length();
+    
+    public static void collectMultipartContent(
 			MimeMultipart multipart, MBMailMessage collector)
 		throws Exception {
 
@@ -160,7 +162,10 @@ public class MBUtil {
 				}
 			}
 			catch (Exception e) {
-			}
+                if (_log.isErrorEnabled()) {
+                    _log.error("Unable to retrieve category: " + categoryId, e);
+                }
+            }
 
 			return getBreadcrumbs(
 				category, null, pageContext, renderRequest, renderResponse);
@@ -209,48 +214,46 @@ public class MBUtil {
 
 		String breadcrumbs = StringPool.BLANK;
 
-		if (category != null) {
-			for (int i = 0;; i++) {
-				category = category.toEscapedModel();
+        for (int i = 0;; i++) {
+            category = category.toEscapedModel();
 
-				PortletURL portletURL = renderResponse.createRenderURL();
+            PortletURL portletURL = renderResponse.createRenderURL();
 
-				if (selectCategory) {
-					portletURL.setWindowState(LiferayWindowState.POP_UP);
+            if (selectCategory) {
+                portletURL.setWindowState(LiferayWindowState.POP_UP);
 
-					portletURL.setParameter(
-						"struts_action", "/message_boards/select_category");
-					portletURL.setParameter(
-						"categoryId", String.valueOf(category.getCategoryId()));
-				}
-				else {
-					portletURL.setWindowState(WindowState.MAXIMIZED);
+                portletURL.setParameter(
+                    "struts_action", "/message_boards/select_category");
+                portletURL.setParameter(
+                    "categoryId", String.valueOf(category.getCategoryId()));
+            }
+            else {
+                portletURL.setWindowState(WindowState.MAXIMIZED);
 
-					portletURL.setParameter(
-						"struts_action", "/message_boards/view");
-					portletURL.setParameter(
-						"categoryId", String.valueOf(category.getCategoryId()));
-				}
+                portletURL.setParameter(
+                    "struts_action", "/message_boards/view");
+                portletURL.setParameter(
+                    "categoryId", String.valueOf(category.getCategoryId()));
+            }
 
-				String categoryLink =
-					"<a href=\"" + portletURL.toString() + "\">" +
-						category.getName() + "</a>";
+            String categoryLink =
+                "<a href=\"" + portletURL.toString() + "\">" +
+                    category.getName() + "</a>";
 
-				if (i == 0) {
-					breadcrumbs = categoryLink;
-				}
-				else {
-					breadcrumbs = categoryLink + " &raquo; " + breadcrumbs;
-				}
+            if (i == 0) {
+                breadcrumbs = categoryLink;
+            }
+            else {
+                breadcrumbs = categoryLink + " &raquo; " + breadcrumbs;
+            }
 
-				if (category.isRoot()) {
-					break;
-				}
+            if (category.isRoot()) {
+                break;
+            }
 
-				category = MBCategoryLocalServiceUtil.getCategory(
-					category.getParentCategoryId());
-			}
-		}
+            category = MBCategoryLocalServiceUtil.getCategory(
+                category.getParentCategoryId());
+        }
 
 		breadcrumbs = categoriesLink + " &raquo; " + breadcrumbs;
 
@@ -433,9 +436,12 @@ public class MBUtil {
 	}
 
 	public static String getMailingListAddress(
-		long categoryId, long messageId, String mx) {
+		long categoryId, long messageId, String mx, String defaultValue) {
 
-		StringBuilder sb = new StringBuilder();
+        if (POP_SERVER_SUBDOMAIN_LENGTH <= 0) {
+            return defaultValue;
+        }
+        StringBuilder sb = new StringBuilder();
 
 		sb.append(POP_PORTLET_PREFIX);
 		sb.append(categoryId);
@@ -468,39 +474,41 @@ public class MBUtil {
 		return messageId;
 	}
 
-	public static long getParentMessageId(Message message) throws Exception {
+    public static String getParentMessageIdStr(Message message)
+        throws Exception {
+        // If the previous block failed, try to get the parent message ID from
+        // the "References" header as explained in
+        // http://cr.yp.to/immhf/thread.html. Some mail clients such as Yahoo!
+        // Mail use the "In-Reply-To" header, so we check that as well.
+
+        String parentHeader = null;
+
+        String[] references = message.getHeader("References");
+
+        if ((references != null) && (references.length > 0)) {
+            parentHeader = references[0].substring(
+                references[0].lastIndexOf("<"));
+        }
+
+        if (parentHeader == null) {
+            String[] inReplyToHeaders = message.getHeader("In-Reply-To");
+
+            if ((inReplyToHeaders != null) && (inReplyToHeaders.length > 0)) {
+                parentHeader = inReplyToHeaders[0];
+            }
+        }
+        return parentHeader;
+    }
+
+    public static long getParentMessageId(Message message) throws Exception {
 		long parentMessageId = -1;
 
-		// If the previous block failed, try to get the parent message ID from
-		// the "References" header as explained in
-		// http://cr.yp.to/immhf/thread.html. Some mail clients such as Yahoo!
-		// Mail use the "In-Reply-To" header, so we check that as well.
-
-		String parentHeader = null;
-
-		String[] references = message.getHeader("References");
-
-		if ((references != null) && (references.length > 0)) {
-			parentHeader = references[0].substring(
-				references[0].lastIndexOf("<"));
-		}
-
-		if (parentHeader == null) {
-			String[] inReplyToHeaders = message.getHeader("In-Reply-To");
-
-			if ((inReplyToHeaders != null) && (inReplyToHeaders.length > 0)) {
-				parentHeader = inReplyToHeaders[0];
-			}
-		}
-
+        String parentHeader = getParentMessageIdStr(message);
 		if (parentHeader != null) {
 			if (_log.isDebugEnabled()) {
 				_log.debug("Parent header " + parentHeader);
 			}
-
-			if (parentMessageId == -1) {
-				parentMessageId = getMessageId(parentHeader);
-			}
+            parentMessageId = getMessageId(parentHeader);
 
 			if (_log.isDebugEnabled()) {
 				_log.debug("Previous message id " + parentMessageId);
@@ -674,7 +682,10 @@ public class MBUtil {
 				}
 			}
 			catch (Exception e) {
-			}
+                if (_log.isErrorEnabled()) {
+                    _log.error("Trouble determining thread priority", e);
+                }
+            }
 		}
 
 		return null;
