@@ -53,8 +53,6 @@ import javax.mail.internet.MimeBodyPart;
 import javax.mail.internet.MimeMessage;
 import javax.mail.internet.MimeMultipart;
 
-import javax.naming.NamingException;
-
 import org.apache.commons.lang.time.StopWatch;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -71,11 +69,11 @@ import org.apache.commons.logging.LogFactory;
  */
 public class MailEngine {
 
-	public static Session getSession() throws NamingException {
+	public static Session getSession() {
 		return getSession(false);
 	}
 
-	public static Session getSession(boolean cache) throws NamingException {
+	public static Session getSession(boolean cache) {
 		Session session = InfrastructureUtil.getMailSession();
 
 		if (_log.isDebugEnabled()) {
@@ -87,7 +85,7 @@ public class MailEngine {
 		return session;
 	}
 
-	public static Session getSession(Account account) throws NamingException {
+	public static Session getSession(Account account) {
 		Properties properties = _getProperties(account);
 
 		Session session = Session.getInstance(properties);
