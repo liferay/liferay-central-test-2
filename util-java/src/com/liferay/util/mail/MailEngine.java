@@ -393,20 +393,20 @@ public class MailEngine {
 
 		String protocol = account.getProtocol();
 
-		if (account.isRequiresAuthentication()) {
-			properties.setProperty("mail." + protocol + ".auth", "true");
-		}
-
 		properties.setProperty("mail.transport.protocol", protocol);
 		properties.setProperty("mail." + protocol + ".host", account.getHost());
 		properties.setProperty(
 			"mail." + protocol + ".port", String.valueOf(account.getPort()));
-		properties.setProperty("mail." + protocol + ".user", account.getUser());
-		properties.setProperty(
-			"mail." + protocol + ".password", account.getPassword());
-		
+
+		if (account.isRequiresAuthentication()) {
+			properties.setProperty("mail." + protocol + ".auth", "true");
+			properties.setProperty(
+				"mail." + protocol + ".user", account.getUser());
+			properties.setProperty(
+				"mail." + protocol + ".password", account.getPassword());
+		}
+
 		if (account.isSecure()) {
-			
 			properties.setProperty(
 				"mail." + protocol + ".socketFactory.class",
 				"javax.net.ssl.SSLSocketFactory");
