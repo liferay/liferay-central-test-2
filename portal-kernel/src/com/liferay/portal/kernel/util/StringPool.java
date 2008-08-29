@@ -120,8 +120,6 @@ public class StringPool {
 
 	public static final String POUND = "#";
 
-	public static final String PROTOCOL_SEPARATOR = "://";
-
 	public static final String QUESTION = "?";
 
 	public static final String QUOTE = "\"";

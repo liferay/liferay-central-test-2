@@ -1032,9 +1032,6 @@ public class PropsValues {
 	public static final boolean WEBDAV_LITMUS = GetterUtil.getBoolean(
 		PropsUtil.get(PropsKeys.WEBDAV_LITMUS));
 
-	public static final String WIDGET_SERVLET_MAPPING = PropsUtil.get(
-		PropsKeys.WIDGET_SERVLET_MAPPING);
-
 	public static final String[] WIKI_IMPORTERS =
 		PropsUtil.getArray(PropsKeys.WIKI_IMPORTERS);
 

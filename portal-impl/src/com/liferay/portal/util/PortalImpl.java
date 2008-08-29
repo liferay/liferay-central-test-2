@@ -255,7 +255,6 @@ public class PortalImpl implements Portal {
 				PropsValues.LAYOUT_FRIENDLY_URL_PUBLIC_SERVLET_MAPPING;
 		_pathImage = _cdnHost + _pathContext + PATH_IMAGE;
 		_pathMain = _pathContext + PATH_MAIN;
-		_pathWidget = _pathContext + PropsValues.WIDGET_SERVLET_MAPPING;
 
 		// Groups
 
@@ -943,15 +942,6 @@ public class PortalImpl implements Portal {
 			long curLayoutSetId =
 				themeDisplay.getLayout().getLayoutSet().getLayoutSetId();
 
-			if (themeDisplay.isWidget()) {
-				layoutFriendlyURL = _pathWidget + layoutFriendlyURL;
-			}
-
-			if (themeDisplay.isI18n()) {
-				layoutFriendlyURL = "/" + themeDisplay.getLanguageId() +
-					layoutFriendlyURL;
-			}
-
 			if ((layoutSet.getLayoutSetId() != curLayoutSetId) ||
 					(portalURL.startsWith(themeDisplay.getURLPortal()))) {
 
@@ -1107,10 +1097,6 @@ public class PortalImpl implements Portal {
 
 	public String getPathMain() {
 		return _pathMain;
-	}
-
-	public String getPathWidget() {
-		return _pathWidget;
 	}
 
 	public long getPlidFromFriendlyURL(long companyId, String friendlyURL) {
@@ -2047,62 +2033,21 @@ public class PortalImpl implements Portal {
 	}
 
 	public String getWidgetURL(Portlet portlet, ThemeDisplay themeDisplay) {
-		String layoutURL = getLayoutURL(themeDisplay);
-
-		StringBuilder sb = new StringBuilder();
-
-		if (Validator.isNull(_pathContext)) {
-			if (_hasDomain(layoutURL)) {
-				String protocol = HttpUtil.getProtocol(layoutURL);
-				layoutURL = HttpUtil.removeProtocol(layoutURL);
-				String[] parts = layoutURL.split("/", 2);
-
-				sb.append(protocol);
-				sb.append(StringPool.PROTOCOL_SEPARATOR);
-				sb.append(parts[0]);   // domain
-				sb.append("/widget/"); // add trailing / because it got removed
-				sb.append(parts[1]);   // path
-			}
-			else {
-				sb.append(themeDisplay.getPortalURL());
-				sb.append("/widget");
-				sb.append(layoutURL);
-			}
-		}
-		else {
-			if (_hasDomain(layoutURL)) {
-				String protocol = HttpUtil.getProtocol(layoutURL);
-				layoutURL = HttpUtil.removeProtocol(layoutURL);
-				String[] parts = layoutURL.split("/", 2);
-
-				sb.append(protocol);
-				sb.append(StringPool.PROTOCOL_SEPARATOR);
-				sb.append(parts[0]);   // domain
-				sb.append(_pathContext);
-				sb.append("/widget/"); // add trailing / because it got removed
-				sb.append(StringUtil.replace(
-					parts[1], _pathContext, StringPool.BLANK));   // path
-			}
-			else {
-				sb.append(themeDisplay.getPortalURL());
-				sb.append("/widget");
-				sb.append(layoutURL);
-			}
-		}
-
-		sb.append("/-/");
+		String widgetURL =
+			themeDisplay.getPortalURL() + "/widget" +
+				getLayoutURL(themeDisplay) + "/-/";
 
 		FriendlyURLMapper friendlyURLMapper =
 			portlet.getFriendlyURLMapperInstance();
 
 		if (friendlyURLMapper != null) {
-			sb.append(friendlyURLMapper.getMapping());
+			widgetURL += friendlyURLMapper.getMapping();
 		}
 		else {
-			sb.append(portlet.getPortletId());
+			widgetURL += portlet.getPortletId();
 		}
 
-		return sb.toString();
+		return widgetURL;
 	}
 
 	public boolean isMethodGet(PortletRequest portletRequest) {
@@ -2937,16 +2882,6 @@ public class PortalImpl implements Portal {
 		};
 	}
 
-	private boolean _hasDomain(String url) {
-		if ((url.indexOf("http://") != -1) ||
-			(url.indexOf("https://") != -1)) {
-
-			return true;
-		}
-
-		return false;
-	}
-
 	private static final String _JSESSIONID = ";jsessionid=";
 
 	private static Log _log = LogFactory.getLog(PortalImpl.class);
@@ -2962,7 +2897,6 @@ public class PortalImpl implements Portal {
 	private String _pathFriendlyURLPublic;
 	private String _pathImage;
 	private String _pathMain;
-	private String _pathWidget;
 	private Integer _portalPort = new Integer(-1);
 	private String[] _allSystemCommunityRoles;
 	private String[] _allSystemGroups;

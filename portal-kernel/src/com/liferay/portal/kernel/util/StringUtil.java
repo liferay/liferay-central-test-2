@@ -701,29 +701,6 @@ public class StringUtil {
 		return s;
 	}
 
-	public static String replaceFirst(String s, char oldSub, char newSub) {
-		return s.replaceFirst(
-			StringPool.BLANK + oldSub, StringPool.BLANK + newSub);
-	}
-
-	public static String replaceFirst(String s, char oldSub, String newSub) {
-		return s.replaceFirst(StringPool.BLANK + oldSub, newSub);
-	}
-
-	public static String replaceFirst(String s, String oldSub, String newSub) {
-		return s.replaceFirst(oldSub, newSub);
-	}
-
-	public static String replaceFirst(
-		String s, String[] oldSubs, String[] newSubs) {
-
-		for (int i = 0; i < oldSubs.length; i++) {
-			s = replaceFirst(s, oldSubs[i], newSubs[i]);
-		}
-
-		return s;
-	}
-
 	/**
 	 * Returns a string with replaced values. This method will replace all text
 	 * in the given string, between the beginning and ending delimiter, with new

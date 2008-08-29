@@ -27,7 +27,6 @@ import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.util.PortalUtil;
-import com.liferay.portal.util.PropsValues;
 import com.liferay.portal.util.WebKeys;
 
 import java.io.IOException;
@@ -49,8 +48,6 @@ import org.apache.commons.logging.LogFactory;
  *
  */
 public class WidgetServlet extends HttpServlet {
-
-	public static String MAPPING = PropsValues.WIDGET_SERVLET_MAPPING;
 
 	public void service(
 			HttpServletRequest request, HttpServletResponse response)

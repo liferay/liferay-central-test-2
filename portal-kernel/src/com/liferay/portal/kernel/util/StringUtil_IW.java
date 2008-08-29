@@ -224,26 +224,6 @@ public class StringUtil_IW {
 		return StringUtil.replace(s, oldSubs, newSubs, exactMatch);
 	}
 
-	public java.lang.String replaceFirst(java.lang.String s, char oldSub,
-		char newSub) {
-		return StringUtil.replaceFirst(s, oldSub, newSub);
-	}
-
-	public java.lang.String replaceFirst(java.lang.String s, char oldSub,
-		java.lang.String newSub) {
-		return StringUtil.replaceFirst(s, oldSub, newSub);
-	}
-
-	public java.lang.String replaceFirst(java.lang.String s,
-		java.lang.String oldSub, java.lang.String newSub) {
-		return StringUtil.replaceFirst(s, oldSub, newSub);
-	}
-
-	public java.lang.String replaceFirst(java.lang.String s,
-		java.lang.String[] oldSubs, java.lang.String[] newSubs) {
-		return StringUtil.replaceFirst(s, oldSubs, newSubs);
-	}
-
 	public java.lang.String replaceValues(java.lang.String s,
 		java.lang.String begin, java.lang.String end,
 		java.util.Map<String, String> values) {
