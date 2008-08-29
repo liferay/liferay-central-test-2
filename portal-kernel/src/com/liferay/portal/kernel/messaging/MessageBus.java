@@ -32,6 +32,8 @@ public interface MessageBus {
 
 	public void addDestination(Destination destination);
 
+	public boolean hasMessageListener(String destination);
+
 	public void registerMessageListener(
 		String destination, MessageListener listener);
 

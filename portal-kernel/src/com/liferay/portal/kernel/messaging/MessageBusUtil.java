@@ -42,6 +42,10 @@ public class MessageBusUtil {
 		return _instance._messageSender;
 	}
 
+	public static boolean hasMessageListener(String destination) {
+		return _instance._hasMessageListener(destination);
+	}
+
 	public static void init(
 		MessageBus messageBus, MessageSender messageSender) {
 
@@ -107,6 +111,10 @@ public class MessageBusUtil {
 
 	private void _addDestination(Destination destination) {
 		_messageBus.addDestination(destination);
+	}
+
+	private boolean _hasMessageListener(String destination) {
+		return _messageBus.hasMessageListener(destination);
 	}
 
 	private void _init(MessageBus messageBus, MessageSender messageSender) {

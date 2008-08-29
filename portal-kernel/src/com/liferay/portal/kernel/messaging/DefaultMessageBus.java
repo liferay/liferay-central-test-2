@@ -49,6 +49,17 @@ public class DefaultMessageBus implements MessageBus {
 		}
 	}
 
+	public boolean hasMessageListener(String destination) {
+		Destination destinationModel = _destinations.get(destination);
+
+		if ((destinationModel != null) && destinationModel.isRegistered()) {
+			return true;
+		}
+		else {
+			return false;
+		}
+	}
+
 	public synchronized void registerMessageListener(
 		String destination, MessageListener listener) {
 

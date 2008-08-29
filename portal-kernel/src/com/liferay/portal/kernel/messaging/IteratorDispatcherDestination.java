@@ -54,6 +54,8 @@ public abstract class IteratorDispatcherDestination extends BaseDestination {
 		listener = new InvokerMessageListener(listener);
 
 		_listeners.add(listener);
+
+		setListenersCount(_listeners.size());
 	}
 
 	public void send(Object message) {
@@ -99,7 +101,11 @@ public abstract class IteratorDispatcherDestination extends BaseDestination {
 	public boolean unregister(MessageListener listener) {
 		listener = new InvokerMessageListener(listener);
 
-		return _listeners.remove(listener);
+		boolean value = _listeners.remove(listener);
+
+		setListenersCount(_listeners.size());
+
+		return value;
 	}
 
 	protected abstract void dispatch(

@@ -36,6 +36,8 @@ public interface Destination {
 
 	public String getName();
 
+	public boolean isRegistered();
+
 	public void open();
 
 	public void register(MessageListener listener);

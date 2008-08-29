@@ -65,6 +65,15 @@ public abstract class BaseDestination implements Destination {
 		return _name;
 	}
 
+	public boolean isRegistered() {
+		if (_listenersCount > 0) {
+			return true;
+		}
+		else {
+			return false;
+		}
+	}
+
 	public synchronized void open() {
 		doOpen();
 	}
@@ -110,6 +119,10 @@ public abstract class BaseDestination implements Destination {
 		return _workersMaxSize;
 	}
 
+	protected void setListenersCount(int listenersCount) {
+		_listenersCount = listenersCount;
+	}
+
 	private static final int _WORKERS_CORE_SIZE = 5;
 
 	private static final int _WORKERS_MAX_SIZE = 10;
@@ -120,5 +133,6 @@ public abstract class BaseDestination implements Destination {
 	private ThreadPoolExecutor _threadPoolExecutor;
 	private int _workersCoreSize;
 	private int _workersMaxSize;
+	private int _listenersCount;
 
 }

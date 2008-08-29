@@ -47,6 +47,10 @@ public class PortalMessageBus implements DisposableBean, MessageBus {
 		shutdown(true);
 	}
 
+	public boolean hasMessageListener(String destination) {
+		return _messageBus.hasMessageListener(destination);
+	}
+
 	public void registerMessageListener(
 		String destination, MessageListener listener) {
 
