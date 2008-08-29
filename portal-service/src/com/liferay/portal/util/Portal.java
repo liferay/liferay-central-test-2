@@ -217,6 +217,8 @@ public interface Portal {
 
 	public String getPathMain();
 
+	public String getPathWidget();
+
 	public long getPlidFromFriendlyURL(long companyId, String friendlyURL);
 
 	public long getPlidFromPortletId(

@@ -1103,6 +1103,8 @@ public class PropsKeys {
 
 	public static final String WEBDAV_STORAGE_TOKENS = "webdav.storage.tokens";
 
+	public static final String WIDGET_SERVLET_MAPPING = "widget.servlet.mapping";
+
 	public static final String WIKI_EMAIL_FROM_ADDRESS = "wiki.email.from.address";
 
 	public static final String WIKI_EMAIL_FROM_NAME = "wiki.email.from.name";
