@@ -314,17 +314,23 @@ public class LanguageImpl implements Language {
 		ThemeDisplay themeDisplay = (ThemeDisplay)request.getAttribute(
 			WebKeys.THEME_DISPLAY);
 
+		String value = null;
+
 		if (themeDisplay != null) {
-			return get(
+			value = get(
 				themeDisplay.getCompanyId(), themeDisplay.getLocale(), key,
 				defaultValue);
+
+			// LEP-7292
+
+			if (value != defaultValue) {
+				return value;
+			}
 		}
 
 		if (key == null) {
 			return null;
 		}
-
-		String value = null;
 
 		try {
 			value = TagUtils.getInstance().message(
