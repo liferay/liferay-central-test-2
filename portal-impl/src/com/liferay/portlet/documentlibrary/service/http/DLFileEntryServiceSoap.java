@@ -204,10 +204,59 @@ public class DLFileEntryServiceSoap {
 		}
 	}
 
-	public static void lockFileEntry(long folderId, java.lang.String name)
+	public static com.liferay.lock.model.Lock getFileEntryLock(long folderId,
+		java.lang.String name) throws RemoteException {
+		try {
+			com.liferay.lock.model.Lock returnValue = DLFileEntryServiceUtil.getFileEntryLock(folderId,
+					name);
+
+			return returnValue;
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
+	public static com.liferay.lock.model.Lock refreshFileEntryLock(
+		java.lang.String uuid, long expirationTime) throws RemoteException {
+		try {
+			com.liferay.lock.model.Lock returnValue = DLFileEntryServiceUtil.refreshFileEntryLock(uuid,
+					expirationTime);
+
+			return returnValue;
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
+	public static com.liferay.lock.model.Lock lockFileEntry(long folderId,
+		java.lang.String name) throws RemoteException {
+		try {
+			com.liferay.lock.model.Lock returnValue = DLFileEntryServiceUtil.lockFileEntry(folderId,
+					name);
+
+			return returnValue;
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
+	public static com.liferay.lock.model.Lock lockFileEntry(long folderId,
+		java.lang.String name, long expirationTime, java.lang.String owner)
 		throws RemoteException {
 		try {
-			DLFileEntryServiceUtil.lockFileEntry(folderId, name);
+			com.liferay.lock.model.Lock returnValue = DLFileEntryServiceUtil.lockFileEntry(folderId,
+					name, expirationTime, owner);
+
+			return returnValue;
 		}
 		catch (Exception e) {
 			_log.error(e, e);
@@ -220,6 +269,18 @@ public class DLFileEntryServiceSoap {
 		throws RemoteException {
 		try {
 			DLFileEntryServiceUtil.unlockFileEntry(folderId, name);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
+	public static void unlockFileEntry(long folderId, java.lang.String name,
+		java.lang.String uuid) throws RemoteException {
+		try {
+			DLFileEntryServiceUtil.unlockFileEntry(folderId, name, uuid);
 		}
 		catch (Exception e) {
 			_log.error(e, e);

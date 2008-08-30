@@ -45,6 +45,7 @@ public class WebDAVRequest {
 		_storage = storage;
 		_request = request;
 		_response = response;
+		_lockUuid = WebDAVUtil.getLockUuid(request);
 		_path = WebDAVUtil.fixPath(_request.getPathInfo());
 		_companyId = WebDAVUtil.getCompanyId(_path);
 		_groupId = WebDAVUtil.getGroupId(_path);
@@ -88,6 +89,10 @@ public class WebDAVRequest {
 		return _userId;
 	}
 
+	public String getLockUuid() {
+		return _lockUuid;
+	}
+
 	public PermissionChecker getPermissionChecker() {
 		return _permissionChecker;
 	}
@@ -99,6 +104,7 @@ public class WebDAVRequest {
 	private long _companyId;
 	private long _groupId;
 	private long _userId;
+	private String _lockUuid;
 	private PermissionChecker _permissionChecker;
 
 }

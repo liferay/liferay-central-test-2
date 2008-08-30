@@ -68,11 +68,7 @@ public class WebDAVPropsImpl
 
 		Element root = doc.getRootElement();
 
-		Iterator<Element> itr = root.elements().iterator();
-
-		while (itr.hasNext()) {
-			Element el = itr.next();
-
+		for (Element el : root.elements()) {
 			String prefix = el.getNamespacePrefix();
 			String uri = el.getNamespaceURI();
 

@@ -23,8 +23,12 @@
 package com.liferay.portlet.documentlibrary.webdav;
 
 import com.liferay.documentlibrary.DuplicateFileException;
+import com.liferay.lock.DuplicateLockException;
+import com.liferay.lock.ExpiredLockException;
+import com.liferay.lock.InvalidLockException;
+import com.liferay.lock.NoSuchLockException;
+import com.liferay.lock.model.Lock;
 import com.liferay.portal.PortalException;
-import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.util.FileUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
@@ -32,6 +36,7 @@ import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.webdav.BaseResourceImpl;
 import com.liferay.portal.webdav.BaseWebDAVStorageImpl;
+import com.liferay.portal.webdav.LockException;
 import com.liferay.portal.webdav.Resource;
 import com.liferay.portal.webdav.Status;
 import com.liferay.portal.webdav.WebDAVException;
@@ -50,8 +55,6 @@ import com.liferay.portlet.tags.service.TagsEntryLocalServiceUtil;
 
 import java.io.File;
 import java.io.InputStream;
-
-import java.rmi.RemoteException;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -101,7 +104,10 @@ public class DLWebDAVStorageImpl extends BaseWebDAVStorageImpl {
 			int status = HttpServletResponse.SC_CREATED;
 
 			if (overwrite) {
-				if (deleteResource(groupId, parentFolderId, name)) {
+				if (deleteResource(
+						groupId, parentFolderId, name,
+						webDavRequest.getLockUuid())) {
+
 					status = HttpServletResponse.SC_NO_CONTENT;
 				}
 			}
@@ -175,7 +181,10 @@ public class DLWebDAVStorageImpl extends BaseWebDAVStorageImpl {
 			int status = HttpServletResponse.SC_CREATED;
 
 			if (overwrite) {
-				if (deleteResource(groupId, parentFolderId, title)) {
+				if (deleteResource(
+						groupId, parentFolderId, title,
+						webDavRequest.getLockUuid())) {
+
 					status = HttpServletResponse.SC_NO_CONTENT;
 				}
 			}
@@ -192,6 +201,9 @@ public class DLWebDAVStorageImpl extends BaseWebDAVStorageImpl {
 		}
 		catch (DuplicateFileException dfe) {
 			return HttpServletResponse.SC_PRECONDITION_FAILED;
+		}
+		catch (LockException le) {
+			return WebDAVUtil.SC_LOCKED;
 		}
 		catch (PrincipalException pe) {
 			return HttpServletResponse.SC_FORBIDDEN;
@@ -225,6 +237,10 @@ public class DLWebDAVStorageImpl extends BaseWebDAVStorageImpl {
 			}
 			else {
 				DLFileEntry fileEntry = (DLFileEntry)model;
+
+				if (isLocked(fileEntry, webDavRequest.getLockUuid())) {
+					return WebDAVUtil.SC_LOCKED;
+				}
 
 				DLFileEntryServiceUtil.deleteFileEntry(
 					fileEntry.getFolderId(), fileEntry.getName());
@@ -310,6 +326,59 @@ public class DLWebDAVStorageImpl extends BaseWebDAVStorageImpl {
 		}
 	}
 
+	public boolean isSupportsClassTwo() {
+		return true;
+	}
+
+	public Lock refreshResourceLock(
+			WebDAVRequest webDavRequest, String uuid, long timeout)
+		throws WebDAVException {
+
+		Resource resource = getResource(webDavRequest);
+
+		Lock lock = null;
+
+		if (resource instanceof DLFileEntryResourceImpl) {
+			DLFileEntry fileEntry = (DLFileEntry)resource.getModel();
+
+			try {
+				lock = DLFileEntryServiceUtil.refreshFileEntryLock(
+					uuid, timeout);
+			}
+			catch (Exception e) {
+				throw new WebDAVException(e);
+			}
+		}
+
+		return lock;
+	}
+
+	public Lock lockResource(
+			WebDAVRequest webDavRequest, long timeout, String owner)
+		throws WebDAVException {
+
+		Resource resource = getResource(webDavRequest);
+
+		Lock lock = null;
+
+		if (resource instanceof DLFileEntryResourceImpl) {
+			DLFileEntry fileEntry = (DLFileEntry)resource.getModel();
+
+			try {
+				lock = DLFileEntryServiceUtil.lockFileEntry(
+					fileEntry.getFolderId(), fileEntry.getName(), timeout,
+					owner);
+			}
+			catch (Exception e) { // DuplicateLock == 423 not 501
+				if (!(e instanceof DuplicateLockException)) {
+					throw new WebDAVException(e);
+				}
+			}
+		}
+
+		return lock;
+	}
+
 	public Status makeCollection(WebDAVRequest webDavRequest)
 		throws WebDAVException {
 
@@ -372,7 +441,10 @@ public class DLWebDAVStorageImpl extends BaseWebDAVStorageImpl {
 			int status = HttpServletResponse.SC_CREATED;
 
 			if (overwrite) {
-				if (deleteResource(groupId, parentFolderId, name)) {
+				if (deleteResource(
+						groupId, parentFolderId, name,
+						webDavRequest.getLockUuid())) {
+
 					status = HttpServletResponse.SC_NO_CONTENT;
 				}
 			}
@@ -404,6 +476,10 @@ public class DLWebDAVStorageImpl extends BaseWebDAVStorageImpl {
 
 			DLFileEntry fileEntry = (DLFileEntry)resource.getModel();
 
+			if (isLocked(fileEntry, webDavRequest.getLockUuid())) {
+				return WebDAVUtil.SC_LOCKED;
+			}
+
 			long groupId = WebDAVUtil.getGroupId(destinationArray);
 			long parentFolderId = getParentFolderId(destinationArray);
 			String name = fileEntry.getName();
@@ -417,7 +493,10 @@ public class DLWebDAVStorageImpl extends BaseWebDAVStorageImpl {
 			int status = HttpServletResponse.SC_CREATED;
 
 			if (overwrite) {
-				if (deleteResource(groupId, parentFolderId, title)) {
+				if (deleteResource(
+						groupId, parentFolderId, title,
+						webDavRequest.getLockUuid())) {
+
 					status = HttpServletResponse.SC_NO_CONTENT;
 				}
 			}
@@ -436,6 +515,9 @@ public class DLWebDAVStorageImpl extends BaseWebDAVStorageImpl {
 		}
 		catch (DuplicateFolderNameException dfne) {
 			return HttpServletResponse.SC_PRECONDITION_FAILED;
+		}
+		catch (LockException le) {
+			return WebDAVUtil.SC_LOCKED;
 		}
 		catch (Exception e) {
 			throw new WebDAVException(e);
@@ -462,6 +544,10 @@ public class DLWebDAVStorageImpl extends BaseWebDAVStorageImpl {
 			try {
 				DLFileEntry entry = DLFileEntryServiceUtil.getFileEntryByTitle(
 					parentFolderId, name);
+
+				if (isLocked(entry, webDavRequest.getLockUuid())) {
+					return WebDAVUtil.SC_LOCKED;
+				}
 
 				name = entry.getName();
 				description = entry.getDescription();
@@ -507,9 +593,36 @@ public class DLWebDAVStorageImpl extends BaseWebDAVStorageImpl {
 		}
 	}
 
+	public boolean unlockResource(WebDAVRequest webDavRequest, String token)
+		throws WebDAVException {
+
+		Resource resource = getResource(webDavRequest);
+
+		try {
+			if (resource instanceof DLFileEntryResourceImpl) {
+				DLFileEntry fileEntry = (DLFileEntry)resource.getModel();
+
+				DLFileEntryServiceUtil.unlockFileEntry(
+					fileEntry.getFolderId(), fileEntry.getName(), token);
+
+				return true;
+			}
+		}
+		catch (Exception e) {
+			if (e instanceof InvalidLockException) {
+				_log.warn(e.getMessage());
+			}
+			else {
+				_log.warn("Unable to unlock file entry", e);
+			}
+		}
+
+		return false;
+	}
+
 	protected boolean deleteResource(
-			long groupId, long parentFolderId, String name)
-		throws PortalException, SystemException, RemoteException {
+			long groupId, long parentFolderId, String name, String lockUuid)
+		throws Exception {
 
 		try {
 			DLFolder folder = DLFolderServiceUtil.getFolder(
@@ -521,6 +634,14 @@ public class DLWebDAVStorageImpl extends BaseWebDAVStorageImpl {
 		}
 		catch (NoSuchFolderException nsfe) {
 			try {
+				DLFileEntry fileEntry =
+					DLFileEntryServiceUtil.getFileEntryByTitle(
+						parentFolderId, name);
+
+				if (isLocked(fileEntry, lockUuid)) {
+					throw new LockException();
+				}
+
 				DLFileEntryServiceUtil.deleteFileEntryByTitle(
 					parentFolderId, name);
 
@@ -609,6 +730,39 @@ public class DLWebDAVStorageImpl extends BaseWebDAVStorageImpl {
 
 	protected long getParentFolderId(String[] pathArray) throws Exception {
 		return getFolderId(pathArray, true);
+	}
+
+	protected boolean isLocked(DLFileEntry fileEntry, String lockUuid)
+		throws Exception {
+
+		long parentFolderId = fileEntry.getFolderId();
+		String fileName = fileEntry.getName();
+
+		return isLocked(parentFolderId, fileName, lockUuid);
+	}
+
+	protected boolean isLocked(
+			long parentFolderId, String fileName, String lockUuid)
+		throws Exception {
+
+		boolean locked = false;
+
+		try {
+			Lock lock = DLFileEntryServiceUtil.getFileEntryLock(
+				parentFolderId, fileName);
+
+			if (!lock.getUuid().equals(lockUuid)) {
+				locked = true;
+			}
+		}
+		catch (PortalException pe) {
+			if (!(pe instanceof NoSuchLockException) &&
+				!(pe instanceof ExpiredLockException)) {
+				throw pe;
+			}
+		}
+
+		return locked;
 	}
 
 	protected Resource toResource(

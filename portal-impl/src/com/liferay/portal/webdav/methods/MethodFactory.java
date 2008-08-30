@@ -60,12 +60,14 @@ public class MethodFactory {
 		_methods.put("DELETE", InstancePool.get(_DELETE_METHOD_IMPL));
 		_methods.put("GET", InstancePool.get(_GET_METHOD_IMPL));
 		_methods.put("HEAD", InstancePool.get(_HEAD_METHOD_IMPL));
+		_methods.put("LOCK", InstancePool.get(_LOCK_METHOD_IMPL));
 		_methods.put("MKCOL", InstancePool.get(_MKCOL_METHOD_IMPL));
 		_methods.put("MOVE", InstancePool.get(_MOVE_METHOD_IMPL));
 		_methods.put("OPTIONS", InstancePool.get(_OPTIONS_METHOD_IMPL));
 		_methods.put("PROPFIND", InstancePool.get(_PROPFIND_METHOD_IMPL));
 		_methods.put("PROPPATCH", InstancePool.get(_PROPPATCH_METHOD_IMPL));
 		_methods.put("PUT", InstancePool.get(_PUT_METHOD_IMPL));
+		_methods.put("UNLOCK", InstancePool.get(_UNLOCK_METHOD_IMPL));
 	}
 
 	private Method _create(HttpServletRequest request) throws WebDAVException {
@@ -108,6 +110,10 @@ public class MethodFactory {
 		PropsUtil.get(MethodFactory.class.getName() + ".HEAD"),
 		HeadMethodImpl.class.getName());
 
+	private static final String _LOCK_METHOD_IMPL = GetterUtil.getString(
+		PropsUtil.get(MethodFactory.class.getName() + ".LOCK"),
+		LockMethodImpl.class.getName());
+
 	private static final String _MKCOL_METHOD_IMPL = GetterUtil.getString(
 		PropsUtil.get(MethodFactory.class.getName() + ".MKCOL"),
 		MkcolMethodImpl.class.getName());
@@ -131,6 +137,10 @@ public class MethodFactory {
 	private static final String _PUT_METHOD_IMPL = GetterUtil.getString(
 		PropsUtil.get(MethodFactory.class.getName() + ".PUT"),
 		PutMethodImpl.class.getName());
+
+	private static final String _UNLOCK_METHOD_IMPL = GetterUtil.getString(
+		PropsUtil.get(MethodFactory.class.getName() + ".UNLOCK"),
+		UnlockMethodImpl.class.getName());
 
 	private static Log _log = LogFactory.getLog(MethodFactory.class);
 

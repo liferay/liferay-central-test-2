@@ -151,15 +151,55 @@ public class DLFileEntryServiceJSON {
 		return DLFileEntryJSONSerializer.toJSONObject(returnValue);
 	}
 
-	public static void lockFileEntry(long folderId, java.lang.String name)
+	public static com.liferay.lock.model.Lock getFileEntryLock(long folderId,
+		java.lang.String name)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
-		DLFileEntryServiceUtil.lockFileEntry(folderId, name);
+		com.liferay.lock.model.Lock returnValue = DLFileEntryServiceUtil.getFileEntryLock(folderId,
+				name);
+
+		return returnValue;
+	}
+
+	public static com.liferay.lock.model.Lock refreshFileEntryLock(
+		java.lang.String uuid, long expirationTime)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException, java.rmi.RemoteException {
+		com.liferay.lock.model.Lock returnValue = DLFileEntryServiceUtil.refreshFileEntryLock(uuid,
+				expirationTime);
+
+		return returnValue;
+	}
+
+	public static com.liferay.lock.model.Lock lockFileEntry(long folderId,
+		java.lang.String name)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException, java.rmi.RemoteException {
+		com.liferay.lock.model.Lock returnValue = DLFileEntryServiceUtil.lockFileEntry(folderId,
+				name);
+
+		return returnValue;
+	}
+
+	public static com.liferay.lock.model.Lock lockFileEntry(long folderId,
+		java.lang.String name, long expirationTime, java.lang.String owner)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException, java.rmi.RemoteException {
+		com.liferay.lock.model.Lock returnValue = DLFileEntryServiceUtil.lockFileEntry(folderId,
+				name, expirationTime, owner);
+
+		return returnValue;
 	}
 
 	public static void unlockFileEntry(long folderId, java.lang.String name)
 		throws java.rmi.RemoteException {
 		DLFileEntryServiceUtil.unlockFileEntry(folderId, name);
+	}
+
+	public static void unlockFileEntry(long folderId, java.lang.String name,
+		java.lang.String uuid)
+		throws com.liferay.portal.PortalException, java.rmi.RemoteException {
+		DLFileEntryServiceUtil.unlockFileEntry(folderId, name, uuid);
 	}
 
 	public static JSONObject updateFileEntry(long folderId, long newFolderId,

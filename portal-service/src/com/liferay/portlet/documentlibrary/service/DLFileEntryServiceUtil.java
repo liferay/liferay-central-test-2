@@ -136,15 +136,43 @@ public class DLFileEntryServiceUtil {
 		return _service.getFileEntryByTitle(folderId, titleWithExtension);
 	}
 
-	public static void lockFileEntry(long folderId, java.lang.String name)
+	public static com.liferay.lock.model.Lock getFileEntryLock(long folderId,
+		java.lang.String name)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
-		_service.lockFileEntry(folderId, name);
+		return _service.getFileEntryLock(folderId, name);
+	}
+
+	public static com.liferay.lock.model.Lock refreshFileEntryLock(
+		java.lang.String uuid, long expirationTime)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException, java.rmi.RemoteException {
+		return _service.refreshFileEntryLock(uuid, expirationTime);
+	}
+
+	public static com.liferay.lock.model.Lock lockFileEntry(long folderId,
+		java.lang.String name)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException, java.rmi.RemoteException {
+		return _service.lockFileEntry(folderId, name);
+	}
+
+	public static com.liferay.lock.model.Lock lockFileEntry(long folderId,
+		java.lang.String name, long expirationTime, java.lang.String owner)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException, java.rmi.RemoteException {
+		return _service.lockFileEntry(folderId, name, expirationTime, owner);
 	}
 
 	public static void unlockFileEntry(long folderId, java.lang.String name)
 		throws java.rmi.RemoteException {
 		_service.unlockFileEntry(folderId, name);
+	}
+
+	public static void unlockFileEntry(long folderId, java.lang.String name,
+		java.lang.String uuid)
+		throws com.liferay.portal.PortalException, java.rmi.RemoteException {
+		_service.unlockFileEntry(folderId, name, uuid);
 	}
 
 	public static com.liferay.portlet.documentlibrary.model.DLFileEntry updateFileEntry(

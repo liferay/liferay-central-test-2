@@ -28,6 +28,7 @@ import com.liferay.portal.webdav.WebDAVException;
 import com.liferay.portal.webdav.WebDAVRequest;
 import com.liferay.portlet.documentlibrary.model.DLFileEntry;
 import com.liferay.portlet.documentlibrary.service.DLFileEntryLocalServiceUtil;
+import com.liferay.portlet.documentlibrary.service.DLFileEntryServiceUtil;
 
 import java.io.InputStream;
 
@@ -57,6 +58,19 @@ public class DLFileEntryResourceImpl extends BaseResourceImpl {
 	}
 
 	public boolean isCollection() {
+		return false;
+	}
+
+	public boolean isLocked() {
+		try {
+			DLFileEntryServiceUtil.getFileEntryLock(
+				_fileEntry.getFolderId(), _fileEntry.getName());
+
+			return true;
+		}
+		catch (Exception e) {
+		}
+
 		return false;
 	}
 

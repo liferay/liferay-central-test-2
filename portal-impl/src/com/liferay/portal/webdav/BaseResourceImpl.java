@@ -112,7 +112,11 @@ public class BaseResourceImpl implements Resource {
 		return true;
 	}
 
- 	public String getCreateDate() {
+	public boolean isLocked() {
+		return false;
+	}
+
+	public String getCreateDate() {
 		return _createDateFormatter.format(_createDate);
 	}
 

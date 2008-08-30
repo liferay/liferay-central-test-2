@@ -27,8 +27,6 @@ import com.liferay.lock.service.LockService;
 import com.liferay.lock.util.LockPool;
 import com.liferay.portal.PortalException;
 
-import java.util.Set;
-
 /**
  * <a href="LockServiceImpl.java.html"><b><i>View Source</i></b></a>
  *
@@ -47,14 +45,6 @@ public class LockServiceImpl implements LockService {
 		return LockPool.getLock(className, pk);
 	}
 
-	public Set<Lock> getLocksByCompanyId(long companyId) {
-		return LockPool.getLocksByCompanyId(companyId);
-	}
-
-	public Set<Lock> getLocksByUserId(long userId) {
-		return LockPool.getLocksByUserId(userId);
-	}
-
 	public boolean hasLock(String className, Comparable<?> pk, long userId) {
 		return LockPool.hasLock(className, pk, userId);
 	}
@@ -63,12 +53,18 @@ public class LockServiceImpl implements LockService {
 		return LockPool.isLocked(className, pk);
 	}
 
-	public void lock(
-			String className, Comparable<?> pk, long companyId, long userId,
+	public Lock lock(
+			String className, Comparable<?> pk, long userId, String owner,
 			long expirationTime)
 		throws PortalException {
 
-		LockPool.lock(className, pk, companyId, userId, expirationTime);
+		return LockPool.lock(className, pk, userId, owner, expirationTime);
+	}
+
+	public Lock refresh(String uuid, long expirationTime)
+		throws PortalException {
+
+		return LockPool.refresh(uuid, expirationTime);
 	}
 
 	public void unlock(String className, Comparable<?> pk) {

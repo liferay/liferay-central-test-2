@@ -248,7 +248,9 @@ if (fileEntry == null) {
 
 <br />
 
-<input <%= isLocked.booleanValue() && !hasLock.booleanValue() ? "disabled" : "" %> type="submit" value="<liferay-ui:message key="save" />">
+<c:if test="<%= !(isLocked.booleanValue() && !hasLock.booleanValue()) %>">
+	<input type="submit" value="<liferay-ui:message key="save" />">
+</c:if>
 
 <c:if test="<%= (fileEntry != null) && ((isLocked.booleanValue() && hasLock.booleanValue()) || !isLocked.booleanValue()) %>">
 	<c:choose>

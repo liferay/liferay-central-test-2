@@ -36,6 +36,7 @@ import com.liferay.portal.kernel.xml.SAXReaderUtil;
 import com.liferay.portal.model.WebDAVProps;
 import com.liferay.portal.service.WebDAVPropsLocalServiceUtil;
 import com.liferay.portal.webdav.InvalidRequestException;
+import com.liferay.portal.webdav.LockException;
 import com.liferay.portal.webdav.Resource;
 import com.liferay.portal.webdav.WebDAVException;
 import com.liferay.portal.webdav.WebDAVRequest;
@@ -95,6 +96,9 @@ public class ProppatchMethodImpl extends BasePropMethodImpl {
 
 			return HttpServletResponse.SC_BAD_REQUEST;
 		}
+		catch (LockException le) {
+			return WebDAVUtil.SC_LOCKED;
+		}
 		catch (Exception e) {
 			throw new WebDAVException(e);
 		}
@@ -116,6 +120,9 @@ public class ProppatchMethodImpl extends BasePropMethodImpl {
 
 			throw new InvalidRequestException();
 		}
+		else if (resource.isLocked()) {
+			throw new LockException();
+		}
 
 		webDavProps = WebDAVPropsLocalServiceUtil.getWebDAVProps(
 			webDavRequest.getCompanyId(), resource.getClassName(),
@@ -125,7 +132,7 @@ public class ProppatchMethodImpl extends BasePropMethodImpl {
 	}
 
 	protected Set<Tuple> processInstructions(WebDAVRequest webDavRequest)
-		throws InvalidRequestException {
+		throws InvalidRequestException, LockException {
 
 		try {
 			Set<Tuple> newProps = new HashSet<Tuple>();
@@ -223,6 +230,9 @@ public class ProppatchMethodImpl extends BasePropMethodImpl {
 			WebDAVPropsLocalServiceUtil.storeWebDAVProps(webDavProps);
 
 			return newProps;
+		}
+		catch (LockException le) {
+			throw le;
 		}
 		catch (Exception e) {
 			throw new InvalidRequestException(e);

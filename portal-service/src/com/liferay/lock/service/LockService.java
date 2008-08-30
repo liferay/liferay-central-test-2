@@ -27,8 +27,6 @@ import com.liferay.portal.PortalException;
 
 import java.rmi.RemoteException;
 
-import java.util.Set;
-
 /**
  * <a href="LockService.java.html"><b><i>View Source</i></b></a>
  *
@@ -42,20 +40,18 @@ public interface LockService {
 	public Lock getLock(String className, Comparable<?> pk)
 		throws PortalException, RemoteException;
 
-	public Set<Lock> getLocksByCompanyId(long companyId)
-		throws RemoteException;
-
-	public Set<Lock> getLocksByUserId(long userId) throws RemoteException;
-
 	public boolean hasLock(String className, Comparable<?> pk, long userId)
 		throws RemoteException;
 
 	public boolean isLocked(String className, Comparable<?> pk)
 		throws RemoteException;
 
-	public void lock(
-			String className, Comparable<?> pk, long companyId,
-			long userId, long expirationTime)
+	public Lock lock(
+			String className, Comparable<?> pk, long userId, String owner,
+			long expirationTime)
+		throws PortalException, RemoteException;
+
+	public Lock refresh(String uuid, long expirationTime)
 		throws PortalException, RemoteException;
 
 	public void unlock(String className, Comparable<?> pk)

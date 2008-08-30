@@ -27,17 +27,16 @@ import com.liferay.lock.ExpiredLockException;
 import com.liferay.lock.NoSuchLockException;
 import com.liferay.lock.model.Lock;
 import com.liferay.lock.model.impl.LockImpl;
-import com.liferay.portal.kernel.util.ConcurrentHashSet;
+import com.liferay.portal.kernel.uuid.PortalUUIDUtil;
 
-import java.util.Iterator;
 import java.util.Map;
-import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 
 /**
  * <a href="LockPool.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
+ * @author Alexander Chow
  *
  */
 public class LockPool {
@@ -52,47 +51,6 @@ public class LockPool {
 		return _instance._getLock(className, pk);
 	}
 
-	public static Set<Lock> getLocksByCompanyId(long companyId) {
-		Set<Lock> locksByCompanyId = _instance._getLocksByCompanyId(companyId);
-
-		Iterator<Lock> itr = locksByCompanyId.iterator();
-
-		while (itr.hasNext()) {
-			Lock lock = itr.next();
-
-			if (lock.isExpired()) {
-				itr.remove();
-
-				_instance._getLocks(
-					lock.getClassName(), lock.getPrimaryKey()).remove(lock);
-				_instance._getLocksByUserId(lock.getUserId()).remove(lock);
-			}
-		}
-
-		return locksByCompanyId;
-	}
-
-	public static Set<Lock> getLocksByUserId(long userId) {
-		Set<Lock> locksByUserId = _instance._getLocksByUserId(userId);
-
-		Iterator<Lock> itr = locksByUserId.iterator();
-
-		while (itr.hasNext()) {
-			Lock lock = itr.next();
-
-			if (lock.isExpired()) {
-				itr.remove();
-
-				_instance._getLocks(
-					lock.getClassName(), lock.getPrimaryKey()).remove(lock);
-				_instance._getLocksByCompanyId(
-					lock.getCompanyId()).remove(lock);
-			}
-		}
-
-		return locksByUserId;
-	}
-
 	public static boolean hasLock(
 		String className, Comparable<?> pk, long userId) {
 
@@ -103,12 +61,18 @@ public class LockPool {
 		return _instance._isLocked(className, pk);
 	}
 
-	public static void lock(
-			String className, Comparable<?> pk, long companyId, long userId,
+	public static Lock lock(
+			String className, Comparable<?> pk, long userId, String owner,
 			long expirationTime)
 		throws DuplicateLockException {
 
-		_instance._lock(className, pk, companyId, userId, expirationTime);
+		return _instance._lock(className, pk, userId, owner, expirationTime);
+	}
+
+	public static Lock refresh(String uuid, long expirationTime)
+		throws NoSuchLockException {
+
+		return _instance._refresh(uuid, expirationTime);
 	}
 
 	public static void unlock(String className, Comparable<?> pk) {
@@ -118,20 +82,18 @@ public class LockPool {
 	private LockPool() {
 		_locksByClassName =
 			new ConcurrentHashMap<String, Map<Comparable<?>, Lock>>();
-		_locksByCompanyId = new ConcurrentHashMap<Long, Set<Lock>>();
-		_locksByUserId = new ConcurrentHashMap<Long, Set<Lock>>();
+		_lockByUuid = new ConcurrentHashMap<String, Lock>();
 	}
 
 	private void _clear() {
 		_locksByClassName.clear();
-		_locksByCompanyId.clear();
-		_locksByUserId.clear();
+		_lockByUuid.clear();
 	}
 
 	private Lock _getLock(String className, Comparable<?> pk)
 		throws ExpiredLockException, NoSuchLockException {
 
-		Map<Comparable<?>, Lock> locksByPK = _getLocks(className, pk);
+		Map<Comparable<?>, Lock> locksByPK = _getLocks(className);
 
 		Lock lock = locksByPK.get(pk);
 
@@ -147,9 +109,7 @@ public class LockPool {
 		return lock;
 	}
 
-	private Map<Comparable<?>, Lock> _getLocks(
-		String className, Comparable<?> pk) {
-
+	private Map<Comparable<?>, Lock> _getLocks(String className) {
 		Map<Comparable<?>, Lock> locksByPK = _locksByClassName.get(className);
 
 		if (locksByPK == null) {
@@ -159,30 +119,6 @@ public class LockPool {
 		}
 
 		return locksByPK;
-	}
-
-	private Set<Lock> _getLocksByCompanyId(long companyId) {
-		Set<Lock> set = _locksByCompanyId.get(companyId);
-
-		if (set == null) {
-			set = new ConcurrentHashSet<Lock>();
-
-			_locksByCompanyId.put(companyId, set);
-		}
-
-		return set;
-	}
-
-	private Set<Lock> _getLocksByUserId(long userId) {
-		Set<Lock> set = _locksByUserId.get(userId);
-
-		if (set == null) {
-			set = new ConcurrentHashSet<Lock>();
-
-			_locksByUserId.put(userId, set);
-		}
-
-		return set;
 	}
 
 	private boolean _hasLock(String className, Comparable<?> pk, long userId) {
@@ -215,53 +151,70 @@ public class LockPool {
 		return false;
 	}
 
-	private void _lock(
-			String className, Comparable<?> pk, long companyId, long userId,
+	private Lock _refresh(String uuid, long expirationTime)
+		throws NoSuchLockException {
+
+		Lock lock = _lockByUuid.get(uuid);
+
+		if (lock != null) {
+			lock.setExpirationTime(expirationTime);
+
+			return lock;
+		}
+
+		throw new NoSuchLockException();
+	}
+
+	private Lock _lock(
+			String className, Comparable<?> pk, long userId, String owner,
 			long expirationTime)
 		throws DuplicateLockException {
 
-		Map<Comparable<?>, Lock> locksByPK = _getLocks(className, pk);
+		Map<Comparable<?>, Lock> locksByPK = _getLocks(className);
 
 		Lock lock = locksByPK.get(pk);
 
-		if (lock != null && lock.isExpired()) {
-			_unlock(className, pk);
+		if (lock != null) {
+			if (lock.isExpired()) {
+				_unlock(className, pk);
 
-			lock = null;
-		}
-		else if ((lock != null) && (lock.getUserId() != userId)) {
-			throw new DuplicateLockException(lock);
+				lock = null;
+			}
+			else if (lock.getOwner() != owner) {
+				throw new DuplicateLockException(lock);
+			}
 		}
 
 		if (lock == null) {
+			String uuid = PortalUUIDUtil.generate();
+
 			lock = new LockImpl(
-				className, pk, companyId, userId, expirationTime);
+				uuid, className, pk, userId, owner, expirationTime);
 
 			locksByPK.put(pk, lock);
 
-			_getLocksByCompanyId(companyId).add(lock);
-			_getLocksByUserId(userId).add(lock);
+			_lockByUuid.put(uuid, lock);
 		}
 		else {
 			lock.setExpirationTime(expirationTime);
 		}
+
+		return lock;
 	}
 
 	private void _unlock(String className, Comparable<?> pk) {
-		Map<Comparable<?>, Lock> locksByPK = _getLocks(className, pk);
+		Map<Comparable<?>, Lock> locksByPK = _getLocks(className);
 
 		Lock lock = locksByPK.remove(pk);
 
 		if (lock != null) {
-			_getLocksByCompanyId(lock.getCompanyId()).remove(lock);
-			_getLocksByUserId(lock.getUserId()).remove(lock);
+			_lockByUuid.remove(lock.getUuid());
 		}
 	}
 
 	private static LockPool _instance = new LockPool();
 
 	private Map<String, Map<Comparable<?>, Lock>> _locksByClassName;
-	private Map<Long, Set<Lock>> _locksByCompanyId;
-	private Map<Long, Set<Lock>> _locksByUserId;
+	private Map<String, Lock> _lockByUuid;
 
 }

@@ -111,12 +111,32 @@ public interface DLFileEntryService {
 		throws java.rmi.RemoteException, com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;
 
-	public void lockFileEntry(long folderId, java.lang.String name)
+	public com.liferay.lock.model.Lock getFileEntryLock(long folderId,
+		java.lang.String name)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException, java.rmi.RemoteException;
+
+	public com.liferay.lock.model.Lock refreshFileEntryLock(
+		java.lang.String uuid, long expirationTime)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException, java.rmi.RemoteException;
+
+	public com.liferay.lock.model.Lock lockFileEntry(long folderId,
+		java.lang.String name)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException, java.rmi.RemoteException;
+
+	public com.liferay.lock.model.Lock lockFileEntry(long folderId,
+		java.lang.String name, long expirationTime, java.lang.String owner)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException;
 
 	public void unlockFileEntry(long folderId, java.lang.String name)
 		throws java.rmi.RemoteException;
+
+	public void unlockFileEntry(long folderId, java.lang.String name,
+		java.lang.String uuid)
+		throws com.liferay.portal.PortalException, java.rmi.RemoteException;
 
 	public com.liferay.portlet.documentlibrary.model.DLFileEntry updateFileEntry(
 		long folderId, long newFolderId, java.lang.String name,

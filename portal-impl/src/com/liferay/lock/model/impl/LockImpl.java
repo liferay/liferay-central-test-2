@@ -23,6 +23,7 @@
 package com.liferay.lock.model.impl;
 
 import com.liferay.lock.model.Lock;
+import com.liferay.portal.kernel.util.Validator;
 
 import java.util.Date;
 
@@ -35,15 +36,24 @@ import java.util.Date;
 public class LockImpl implements Lock {
 
 	public LockImpl(
-		String className, Comparable<?> pk, long companyId, long userId,
-		long expirationTime) {
+		String uuid, String className, Comparable<?> pk, long userId,
+		String owner, long expirationTime) {
 
+		_uuid = uuid;
 		_className = className;
 		_pk = pk;
-		_companyId = companyId;
 		_userId = userId;
+		_owner = owner;
 		_expirationTime = expirationTime;
 		_date = new Date();
+	}
+
+	public String getUuid() {
+		return _uuid;
+	}
+
+	public void setUuid(String uuid) {
+		_uuid = uuid;
 	}
 
 	public String getClassName() {
@@ -52,14 +62,6 @@ public class LockImpl implements Lock {
 
 	public Comparable<?> getPrimaryKey() {
 		return _pk;
-	}
-
-	public long getCompanyId() {
-		return _companyId;
-	}
-
-	public long getUserId() {
-		return _userId;
 	}
 
 	public long getExpirationTime() {
@@ -87,6 +89,19 @@ public class LockImpl implements Lock {
 		}
 	}
 
+	public long getUserId() {
+		return _userId;
+	}
+
+	public String getOwner() {
+		if (Validator.isNull(_owner)) {
+			return String.valueOf(_userId);
+		}
+		else {
+			return _owner;
+		}
+	}
+
 	public Date getDate() {
 		return _date;
 	}
@@ -103,8 +118,20 @@ public class LockImpl implements Lock {
 			return value;
 		}
 
+		value = getUuid().compareTo(lock.getUuid());
+
+		if (value != 0) {
+			return value;
+		}
+
 		value = ((Comparable<Object>)getPrimaryKey()).compareTo(
 			lock.getPrimaryKey());
+
+		if (value != 0) {
+			return value;
+		}
+
+		value = getOwner().compareTo(lock.getOwner());
 
 		if (value != 0) {
 			return value;
@@ -140,8 +167,9 @@ public class LockImpl implements Lock {
 
 	private String _className;
 	private Comparable<?> _pk;
-	private long _companyId;
 	private long _userId;
+	private String _owner;
+	private String _uuid;
 	private long _expirationTime;
 	private Date _date;
 

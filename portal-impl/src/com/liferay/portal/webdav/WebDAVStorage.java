@@ -22,6 +22,8 @@
 
 package com.liferay.portal.webdav;
 
+import com.liferay.lock.model.Lock;
+
 import java.util.List;
 
 /**
@@ -57,6 +59,12 @@ public interface WebDAVStorage {
 	public boolean isAvailable(WebDAVRequest webDavRequest)
 		throws WebDAVException;
 
+	public boolean isSupportsClassTwo();
+
+	public Lock lockResource(
+			WebDAVRequest webDavRequest, long timeout, String owner)
+		throws WebDAVException;
+
 	public Status makeCollection(WebDAVRequest webDavRequest)
 		throws WebDAVException;
 
@@ -72,6 +80,13 @@ public interface WebDAVStorage {
 
 	public int putResource(WebDAVRequest webDavRequest) throws WebDAVException;
 
+	public Lock refreshResourceLock(
+			WebDAVRequest webDavRequest, String uuid, long timeout)
+		throws WebDAVException;
+
 	public void setRootPath(String rootPath);
+
+	public boolean unlockResource(WebDAVRequest webDavRequest, String token)
+		throws WebDAVException;
 
 }

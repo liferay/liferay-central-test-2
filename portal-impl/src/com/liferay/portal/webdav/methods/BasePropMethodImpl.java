@@ -195,11 +195,7 @@ public abstract class BasePropMethodImpl implements Method {
 
 		Set<Tuple> customProps = webDavProps.getPropsSet();
 
-		Iterator<Tuple> itr = props.iterator();
-
-		while (itr.hasNext()) {
-			Tuple tuple = itr.next();
-
+		for (Tuple tuple : props) {
 			String name = (String)tuple.getObject(0);
 			Namespace namespace = (Namespace)tuple.getObject(1);
 

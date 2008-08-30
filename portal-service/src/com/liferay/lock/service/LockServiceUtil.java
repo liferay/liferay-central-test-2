@@ -28,8 +28,6 @@ import com.liferay.portal.SystemException;
 
 import java.rmi.RemoteException;
 
-import java.util.Set;
-
 /**
  * <a href="LockServiceUtil.java.html"><b><i>View Source</i></b></a>
  *
@@ -52,22 +50,6 @@ public class LockServiceUtil {
 		return lockService.getLock(className, pk);
 	}
 
-	public static Set<Lock> getLocksByCompanyId(long companyId)
-		throws RemoteException, SystemException {
-
-		LockService lockService = LockServiceFactory.getService();
-
-		return lockService.getLocksByCompanyId(companyId);
-	}
-
-	public static Set<Lock> getLocksByUserId(long userId)
-		throws RemoteException, SystemException {
-
-		LockService lockService = LockServiceFactory.getService();
-
-		return lockService.getLocksByUserId(userId);
-	}
-
 	public static boolean hasLock(
 			String className, Comparable<?> pk, long userId)
 		throws RemoteException, SystemException {
@@ -85,14 +67,22 @@ public class LockServiceUtil {
 		return lockService.isLocked(className, pk);
 	}
 
-	public static void lock(
-			String className, Comparable<?> pk, long companyId, long userId,
+	public static Lock lock(
+			String className, Comparable<?> pk, long userId, String owner,
 			long expirationTime)
 		throws PortalException, RemoteException, SystemException {
 
 		LockService lockService = LockServiceFactory.getService();
 
-		lockService.lock(className, pk, companyId, userId, expirationTime);
+		return lockService.lock(className, pk, userId, owner, expirationTime);
+	}
+
+	public static Lock refresh(String uuid, long expirationTime)
+		throws PortalException, RemoteException, SystemException {
+
+		LockService lockService = LockServiceFactory.getService();
+
+		return lockService.refresh(uuid, expirationTime);
 	}
 
 	public static void unlock(String className, Comparable<?> pk)

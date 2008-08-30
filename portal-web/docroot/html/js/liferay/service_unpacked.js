@@ -1505,6 +1505,20 @@ Liferay.Service.DL.DLFileEntry = {
 		return Liferay.Service.ajax(params, callback);
 	},
 
+	getFileEntryLock: function(params, callback) {
+		params.serviceClassName = this.serviceClassName;
+		params.serviceMethodName = "getFileEntryLock";
+
+		return Liferay.Service.ajax(params, callback);
+	},
+
+	refreshFileEntryLock: function(params, callback) {
+		params.serviceClassName = this.serviceClassName;
+		params.serviceMethodName = "refreshFileEntryLock";
+
+		return Liferay.Service.ajax(params, callback);
+	},
+
 	lockFileEntry: function(params, callback) {
 		params.serviceClassName = this.serviceClassName;
 		params.serviceMethodName = "lockFileEntry";

@@ -39,6 +39,8 @@ public interface Resource {
 
 	public boolean isCollection();
 
+	public boolean isLocked();
+
  	public String getCreateDate();
 
  	public String getModifiedDate();

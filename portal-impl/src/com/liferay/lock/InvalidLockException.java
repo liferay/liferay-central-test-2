@@ -20,38 +20,32 @@
  * SOFTWARE.
  */
 
-package com.liferay.lock.model;
+package com.liferay.lock;
 
-import java.io.Serializable;
-
-import java.util.Date;
+import com.liferay.portal.PortalException;
 
 /**
- * <a href="Lock.java.html"><b><i>View Source</i></b></a>
+ * <a href="InvalidLockException.java.html"><b><i>View Source</i></b></a>
  *
- * @author Brian Wing Shun Chan
+ * @author Alexander Chow
  *
  */
-public interface Lock extends Comparable<Lock>, Serializable {
+public class InvalidLockException extends PortalException {
 
-	public String getClassName();
+	public InvalidLockException() {
+		super();
+	}
 
-	public Comparable<?> getPrimaryKey();
+	public InvalidLockException(String msg) {
+		super(msg);
+	}
 
-	public long getUserId();
+	public InvalidLockException(String msg, Throwable cause) {
+		super(msg, cause);
+	}
 
-	public String getOwner();
-
-	public String getUuid();
-
-	public void setUuid(String uuid);
-
-	public long getExpirationTime();
-
-	public void setExpirationTime(long expirationTime);
-
-	public boolean isExpired();
-
-	public Date getDate();
+	public InvalidLockException(Throwable cause) {
+		super(cause);
+	}
 
 }

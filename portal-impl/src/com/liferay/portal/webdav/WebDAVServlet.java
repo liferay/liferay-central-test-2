@@ -56,7 +56,7 @@ public class WebDAVServlet extends HttpServlet {
 
  		PermissionChecker permissionChecker = null;
 
-		int status = HttpServletResponse.SC_NOT_IMPLEMENTED;
+		int status = HttpServletResponse.SC_PRECONDITION_FAILED;
 
 		try {
 			if (isIgnoredResource(request)) {

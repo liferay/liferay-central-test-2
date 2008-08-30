@@ -22,6 +22,7 @@
 
 package com.liferay.portal.webdav;
 
+import com.liferay.lock.model.Lock;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.service.LayoutLocalServiceUtil;
 
@@ -76,6 +77,17 @@ public abstract class BaseWebDAVStorageImpl implements WebDAVStorage {
 		}
 	}
 
+	public boolean isSupportsClassTwo() {
+		return false;
+	}
+
+	public Lock lockResource(
+			WebDAVRequest webDavRequest, long timeout, String owner)
+		throws WebDAVException {
+
+		return null;
+	}
+
 	public Status makeCollection(WebDAVRequest webDavRequest)
 		throws WebDAVException {
 
@@ -102,8 +114,21 @@ public abstract class BaseWebDAVStorageImpl implements WebDAVStorage {
 		return HttpServletResponse.SC_FORBIDDEN;
 	}
 
+	public Lock refreshResourceLock(
+			WebDAVRequest webDavRequest, String uuid, long timeout)
+		throws WebDAVException {
+
+		return null;
+	}
+
 	public void setRootPath(String rootPath) {
 		_rootPath = rootPath;
+	}
+
+	public boolean unlockResource(WebDAVRequest webDavRequest, String token)
+		throws WebDAVException {
+
+		return false;
 	}
 
 	protected long getPlid(long groupId) throws SystemException {

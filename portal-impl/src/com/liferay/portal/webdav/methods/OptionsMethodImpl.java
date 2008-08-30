@@ -38,7 +38,13 @@ public class OptionsMethodImpl implements Method {
 	public int process(WebDAVRequest webDavRequest) {
 		HttpServletResponse response = webDavRequest.getHttpServletResponse();
 
-		response.addHeader("DAV", "1");
+		if (webDavRequest.getWebDAVStorage().isSupportsClassTwo()) {
+			response.addHeader("DAV", "1,2");
+		}
+		else {
+			response.addHeader("DAV", "1");
+		}
+
 		response.addHeader("Allow", Method.SUPPORTED_METHODS);
 		response.addHeader("MS-Author-Via", "DAV");
 
