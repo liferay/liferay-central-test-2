@@ -27,8 +27,6 @@ import com.liferay.portal.kernel.util.GetterUtil;
 
 import java.io.IOException;
 
-import javax.portlet.ActionRequest;
-import javax.portlet.ActionResponse;
 import javax.portlet.PortletException;
 import javax.portlet.PortletRequest;
 import javax.portlet.PortletRequestDispatcher;
@@ -140,11 +138,6 @@ public class JSPPortlet extends LiferayPortlet {
 		throws IOException, PortletException {
 
 		include(viewJSP, renderRequest, renderResponse);
-	}
-
-	public void processAction(
-			ActionRequest actionRequest, ActionResponse actionResponse)
-		throws IOException, PortletException {
 	}
 
 	public void serveResource(

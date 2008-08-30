@@ -22,6 +22,8 @@
 
 package com.liferay.portal.kernel.portlet;
 
+import com.liferay.portal.kernel.servlet.SessionErrors;
+import com.liferay.portal.kernel.servlet.SessionMessages;
 import com.liferay.portal.kernel.util.MethodCache;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.Validator;
@@ -47,6 +49,23 @@ import javax.portlet.WindowState;
  *
  */
 public class LiferayPortlet extends GenericPortlet {
+
+	public void processAction(
+			ActionRequest actionRequest, ActionResponse actionResponse)
+		throws IOException, PortletException {
+
+		if (!callActionMethod(actionRequest, actionResponse)) {
+			return;
+		}
+
+		if (SessionErrors.isEmpty(actionRequest)) {
+			SessionMessages.add(actionRequest, "request_processed");
+		}
+
+		String redirect = ParamUtil.getString(actionRequest, "redirect");
+
+		actionResponse.sendRedirect(redirect);
+	}
 
 	protected boolean callActionMethod(
 			ActionRequest actionRequest, ActionResponse actionResponse)
