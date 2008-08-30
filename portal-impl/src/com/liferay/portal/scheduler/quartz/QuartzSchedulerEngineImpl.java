@@ -28,6 +28,7 @@ import com.liferay.portal.kernel.scheduler.messaging.SchedulerRequest;
 import com.liferay.portal.kernel.uuid.PortalUUIDUtil;
 import com.liferay.portal.util.PropsUtil;
 import com.liferay.portal.util.PropsValues;
+import com.liferay.portal.scheduler.job.MessageSenderJob;
 
 import java.text.ParseException;
 

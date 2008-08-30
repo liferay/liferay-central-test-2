@@ -10,4 +10,7 @@
 			</bean>
 		</property>
 	</bean>
+
+    <bean id="com.liferay.portal.kernel.scheduler.SchedulerEngine" class="com.liferay.portal.scheduler.quartz.QuartzSchedulerEngineImpl">
+	</bean>
 </beans>

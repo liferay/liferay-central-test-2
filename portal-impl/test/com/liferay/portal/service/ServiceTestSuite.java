@@ -28,15 +28,15 @@ import com.liferay.portal.kernel.messaging.MessageBus;
 import com.liferay.portal.kernel.messaging.MessageBusUtil;
 import com.liferay.portal.kernel.messaging.MessageSender;
 import com.liferay.portal.kernel.scheduler.SchedulerEngineUtil;
+import com.liferay.portal.kernel.scheduler.SchedulerEngine;
+import com.liferay.portal.kernel.scheduler.SchedulerException;
 import com.liferay.portal.kernel.search.SearchEngineUtil;
 import com.liferay.portal.kernel.util.FileUtil;
 import com.liferay.portal.scheduler.SchedulerEngineImpl;
-import com.liferay.portal.scheduler.quartz.QuartzSchedulerEngineUtil;
 import com.liferay.portal.search.IndexSearcherImpl;
 import com.liferay.portal.search.IndexWriterImpl;
 import com.liferay.portal.search.lucene.LuceneSearchEngineUtil;
 import com.liferay.portal.search.lucene.LuceneUtil;
-import com.liferay.portal.service.CompanyLocalServiceUtil;
 import com.liferay.portal.util.InitUtil;
 import com.liferay.portal.util.PropsValues;
 import com.liferay.portal.util.TestPropsValues;
@@ -89,14 +89,16 @@ public class ServiceTestSuite extends TestSuite {
 
 		// Scheduler
 
-		try {
-			QuartzSchedulerEngineUtil.init();
-		}
-		catch (Exception e) {
-			e.printStackTrace();
-		}
+		SchedulerEngine engine =
+            (SchedulerEngine)PortalBeanLocatorUtil.locate(
+            SchedulerEngine.class.getName());
+        try {
+            engine.start();
+        } catch (SchedulerException e) {
+            e.printStackTrace();  
+        }
 
-		SchedulerEngineUtil.init(new SchedulerEngineImpl());
+        SchedulerEngineUtil.init(new SchedulerEngineImpl());
 
 		// Search
 
