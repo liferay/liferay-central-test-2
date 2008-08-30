@@ -32,7 +32,7 @@ import com.liferay.portal.kernel.scheduler.SchedulerEngine;
 import com.liferay.portal.kernel.scheduler.SchedulerException;
 import com.liferay.portal.kernel.search.SearchEngineUtil;
 import com.liferay.portal.kernel.util.FileUtil;
-import com.liferay.portal.scheduler.SchedulerEngineImpl;
+import com.liferay.portal.scheduler.SchedulerEngineProxy;
 import com.liferay.portal.search.IndexSearcherImpl;
 import com.liferay.portal.search.IndexWriterImpl;
 import com.liferay.portal.search.lucene.LuceneSearchEngineUtil;
@@ -98,7 +98,7 @@ public class ServiceTestSuite extends TestSuite {
             e.printStackTrace();  
         }
 
-        SchedulerEngineUtil.init(new SchedulerEngineImpl());
+        SchedulerEngineUtil.init(new SchedulerEngineProxy());
 
 		// Search
 

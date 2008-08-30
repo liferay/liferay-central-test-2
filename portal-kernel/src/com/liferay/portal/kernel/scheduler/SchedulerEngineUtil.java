@@ -59,7 +59,11 @@ public class SchedulerEngineUtil {
 		_instance._shutdown();
 	}
 
-	public static void unschedule(String jobName, String groupName)
+    public static void start() throws SchedulerException {
+		_instance._start();
+	}
+
+    public static void unschedule(String jobName, String groupName)
 		throws SchedulerException {
 
 		_instance._unschedule(jobName, groupName);
@@ -88,6 +92,10 @@ public class SchedulerEngineUtil {
 	private void _shutdown() throws SchedulerException {
 		_schedulerEngine.shutdown();
 	}
+
+    private void _start() throws SchedulerException {
+        _schedulerEngine.start();
+    }
 
 	private void _unschedule(String jobName, String groupName)
 		throws SchedulerException {

@@ -73,6 +73,9 @@ public class SchedulerMessageListener
 		else if (command.equals(SchedulerRequest.COMMAND_SHUTDOWN)) {
 			_engine.shutdown();
 		}
+        else if (command.equals(SchedulerRequest.COMMAND_STARTUP)) {
+            _engine.start();
+        }
 		else if (command.equals(SchedulerRequest.COMMAND_UNREGISTER)) {
 			_engine.unschedule(
 				schedulerRequest.getJobName(), schedulerRequest.getGroupName());

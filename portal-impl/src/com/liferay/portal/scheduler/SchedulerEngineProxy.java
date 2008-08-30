@@ -40,12 +40,16 @@ import java.util.List;
 /**
  * <a href="SchedulerEngineImpl.java.html"><b><i>View Source</i></b></a>
  *
+ * Proxy to interface with the underlying implementation of the scheduler.
+ * This proxy communicates over the messaging bus to the actual
+ * implementation of the SchedulerEngine
+ * 
  * @author Bruno Farache
  *
  */
-public class SchedulerEngineImpl implements SchedulerEngine {
+public class SchedulerEngineProxy implements SchedulerEngine {
 
-	public SchedulerEngineImpl() {
+	public SchedulerEngineProxy() {
 		Destination layoutsLocalPublisherDestination = new ParallelDestination(
 			DestinationNames.LAYOUTS_LOCAL_PUBLISHER);
 
@@ -106,7 +110,11 @@ public class SchedulerEngineImpl implements SchedulerEngine {
 	}
 
 	public void start() {
-	}
+        MessageBusUtil.sendMessage(
+			DestinationNames.SCHEDULER,
+			JSONFactoryUtil.serialize(
+				new SchedulerRequest(SchedulerRequest.COMMAND_STARTUP)));
+    }
 
 	public void unschedule(String jobName, String groupName) {
 		SchedulerRequest schedulerRequest = new SchedulerRequest(
