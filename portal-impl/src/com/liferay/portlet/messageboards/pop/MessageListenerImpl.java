@@ -204,15 +204,13 @@ public class MessageListenerImpl implements MessageListener {
 	}
 
 	protected Company getCompany(String recipient) throws Exception {
-		int pos = recipient.indexOf(StringPool.AT);
+		int pos = recipient.indexOf(StringPool.AT) +
+                MBUtil.POP_SERVER_SUBDOMAIN_LENGTH + 1;
+        if (MBUtil.POP_SERVER_SUBDOMAIN_LENGTH > 0) {
+            pos++;
+        }
 
-		int offset = MBUtil.POP_SERVER_SUBDOMAIN_LENGTH + 1;
-
-		if (MBUtil.POP_SERVER_SUBDOMAIN_LENGTH > 0) {
-			offset++;
-		}
-
-		String mx = recipient.substring(pos + offset);
+		String mx = recipient.substring(pos);
 
 		return CompanyLocalServiceUtil.getCompanyByMx(mx);
 	}
