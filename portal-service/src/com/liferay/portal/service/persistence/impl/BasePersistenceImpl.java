@@ -70,7 +70,9 @@ public class BasePersistenceImpl implements SessionFactory {
 			_log.error("Caught unexpected exception " + e.getClass().getName());
 		}
 
-		_log.error(e, e);
+		if (_log.isDebugEnabled()) {
+			_log.debug(e, e);
+		}
 
 		return new SystemException(e);
 	}

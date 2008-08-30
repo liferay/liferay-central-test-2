@@ -120,6 +120,8 @@ DateFormat timeFormatDate = DateFormats.getTime(locale, timeZone);
 		<div class="taglib-social-activities">
 
 			<%
+			boolean hasActivities = false;
+
 			boolean firstDaySeparator = true;
 
 			Date now = new Date();
@@ -131,6 +133,10 @@ DateFormat timeFormatDate = DateFormats.getTime(locale, timeZone);
 
 				if (activityFeedEntry == null) {
 					continue;
+				}
+
+				if (!hasActivities) {
+					hasActivities = true;
 				}
 
 				Portlet portlet = PortletLocalServiceUtil.getPortletById(company.getCompanyId(), activityFeedEntry.getPortletId());
@@ -188,6 +194,9 @@ DateFormat timeFormatDate = DateFormats.getTime(locale, timeZone);
 			}
 			%>
 
+			<c:if test="<%= !hasActivities %>">
+				<liferay-ui:message key="there-are-no-recent-activities" />
+			</c:if>
 		</div>
 
 		<c:if test="<%= feedEnabled && (activities.size() > 0) %>">
