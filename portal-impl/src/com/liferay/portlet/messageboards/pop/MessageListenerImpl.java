@@ -53,6 +53,8 @@ import org.apache.commons.logging.LogFactory;
  *
  * @author Brian Wing Shun Chan
  * @author Jorge Ferrer
+ * @author Michael C. Han
+ *
  */
 public class MessageListenerImpl implements MessageListener {
 
@@ -204,11 +206,13 @@ public class MessageListenerImpl implements MessageListener {
 	}
 
 	protected Company getCompany(String recipient) throws Exception {
-		int pos = recipient.indexOf(StringPool.AT) +
-                MBUtil.POP_SERVER_SUBDOMAIN_LENGTH + 1;
-        if (MBUtil.POP_SERVER_SUBDOMAIN_LENGTH > 0) {
-            pos++;
-        }
+		int pos =
+			recipient.indexOf(StringPool.AT) +
+				MBUtil.POP_SERVER_SUBDOMAIN_LENGTH + 1;
+
+		if (MBUtil.POP_SERVER_SUBDOMAIN_LENGTH > 0) {
+			pos++;
+		}
 
 		String mx = recipient.substring(pos);
 
