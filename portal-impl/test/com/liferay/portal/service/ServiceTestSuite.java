@@ -27,10 +27,49 @@ import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
 import com.liferay.portal.kernel.messaging.MessageBus;
 import com.liferay.portal.kernel.messaging.MessageBusUtil;
 import com.liferay.portal.kernel.messaging.MessageSender;
-import com.liferay.portal.kernel.scheduler.SchedulerEngineUtil;
 import com.liferay.portal.kernel.scheduler.SchedulerEngine;
-import com.liferay.portal.kernel.scheduler.SchedulerException;
+import com.liferay.portal.kernel.scheduler.SchedulerEngineUtil;
 import com.liferay.portal.kernel.search.SearchEngineUtil;
+import com.liferay.lock.service.LockServiceUtil;
+import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
+import com.liferay.portal.kernel.cache.CacheRegistry;
+import com.liferay.portal.kernel.cache.MultiVMPoolUtil;
+import com.liferay.portal.kernel.events.ActionException;
+import com.liferay.portal.kernel.events.SimpleAction;
+import com.liferay.portal.kernel.messaging.Destination;
+import com.liferay.portal.kernel.messaging.DestinationNames;
+import com.liferay.portal.kernel.messaging.MessageBus;
+import com.liferay.portal.kernel.messaging.MessageBusUtil;
+import com.liferay.portal.kernel.messaging.MessageSender;
+import com.liferay.portal.kernel.messaging.ParallelDestination;
+import com.liferay.portal.kernel.scheduler.SchedulerEngine;
+import com.liferay.portal.kernel.scheduler.SchedulerEngineUtil;
+import com.liferay.portal.kernel.search.SearchEngineUtil;
+import com.liferay.portal.kernel.util.GetterUtil;
+import com.liferay.portal.kernel.util.InstancePool;
+import com.liferay.portal.kernel.util.ReleaseInfo;
+import com.liferay.portal.model.CompanyConstants;
+import com.liferay.portal.model.Release;
+import com.liferay.portal.scheduler.SchedulerEngineProxy;
+import com.liferay.portal.scheduler.messaging.SchedulerMessageListener;
+import com.liferay.portal.search.IndexSearcherImpl;
+import com.liferay.portal.search.IndexWriterImpl;
+import com.liferay.portal.search.lucene.LuceneSearchEngineUtil;
+import com.liferay.portal.search.lucene.LuceneUtil;
+import com.liferay.portal.service.ClassNameLocalServiceUtil;
+import com.liferay.portal.service.ReleaseLocalServiceUtil;
+import com.liferay.portal.tools.sql.DBUtil;
+import com.liferay.portal.upgrade.UpgradeProcess;
+import com.liferay.portal.util.PropsKeys;
+import com.liferay.portal.util.PropsUtil;
+import com.liferay.portal.velocity.LiferayResourceLoader;
+import com.liferay.portal.verify.VerifyProcess;
+
+import org.apache.commons.collections.ExtendedProperties;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+import org.apache.velocity.app.Velocity;
+import org.apache.velocity.runtime.RuntimeConstants;
 import com.liferay.portal.kernel.util.FileUtil;
 import com.liferay.portal.scheduler.SchedulerEngineProxy;
 import com.liferay.portal.search.IndexSearcherImpl;
@@ -89,16 +128,26 @@ public class ServiceTestSuite extends TestSuite {
 
 		// Scheduler
 
-		SchedulerEngine engine =
-            (SchedulerEngine)PortalBeanLocatorUtil.locate(
-            SchedulerEngine.class.getName());
-        try {
-            engine.start();
-        } catch (SchedulerException e) {
-            e.printStackTrace();  
-        }
+		SchedulerEngine schedulerEngine =
+			(SchedulerEngine)PortalBeanLocatorUtil.locate(
+				SchedulerEngine.class.getName());
 
-        SchedulerEngineUtil.init(new SchedulerEngineProxy());
+		Destination schedulerDestination = new ParallelDestination(
+			DestinationNames.SCHEDULER);
+
+		messageBus.addDestination(schedulerDestination);
+
+		schedulerDestination.register(
+			new SchedulerMessageListener(schedulerEngine));
+
+		SchedulerEngineUtil.init(new SchedulerEngineProxy());
+
+		try {
+			SchedulerEngineUtil.start();
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+		}
 
 		// Search
 

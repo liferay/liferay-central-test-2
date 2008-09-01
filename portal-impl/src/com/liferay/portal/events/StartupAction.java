@@ -28,13 +28,14 @@ import com.liferay.portal.kernel.cache.CacheRegistry;
 import com.liferay.portal.kernel.cache.MultiVMPoolUtil;
 import com.liferay.portal.kernel.events.ActionException;
 import com.liferay.portal.kernel.events.SimpleAction;
+import com.liferay.portal.kernel.messaging.Destination;
+import com.liferay.portal.kernel.messaging.DestinationNames;
 import com.liferay.portal.kernel.messaging.MessageBus;
 import com.liferay.portal.kernel.messaging.MessageBusUtil;
 import com.liferay.portal.kernel.messaging.MessageSender;
 import com.liferay.portal.kernel.messaging.ParallelDestination;
-import com.liferay.portal.kernel.messaging.DestinationNames;
-import com.liferay.portal.kernel.scheduler.SchedulerEngineUtil;
 import com.liferay.portal.kernel.scheduler.SchedulerEngine;
+import com.liferay.portal.kernel.scheduler.SchedulerEngineUtil;
 import com.liferay.portal.kernel.search.SearchEngineUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.InstancePool;
@@ -254,15 +255,22 @@ public class StartupAction extends SimpleAction {
 
 		// Scheduler
 
-        SchedulerEngine engine =
-            (SchedulerEngine)PortalBeanLocatorUtil.locate(
-            SchedulerEngine.class.getName());
-        messageBus.addDestination(new ParallelDestination(DestinationNames.SCHEDULER));
-        messageBus.registerMessageListener(DestinationNames.SCHEDULER,
-                                           new SchedulerMessageListener(engine));
+		SchedulerEngine schedulerEngine =
+			(SchedulerEngine)PortalBeanLocatorUtil.locate(
+				SchedulerEngine.class.getName());
 
-        SchedulerEngineUtil.init(new SchedulerEngineProxy());
-        SchedulerEngineUtil.start();
+		Destination schedulerDestination = new ParallelDestination(
+			DestinationNames.SCHEDULER);
+
+		messageBus.addDestination(schedulerDestination);
+
+		schedulerDestination.register(
+			new SchedulerMessageListener(schedulerEngine));
+
+		SchedulerEngineUtil.init(new SchedulerEngineProxy());
+
+		SchedulerEngineUtil.start();
+
 		// Search
 
 		LuceneSearchEngineUtil.init();

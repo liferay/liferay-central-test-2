@@ -49,9 +49,9 @@ public class SchedulerRequest implements Serializable {
 
 	public static final String COMMAND_SHUTDOWN = "SHUTDOWN";
 
-    public static final String COMMAND_STARTUP = "STARTUP";
+	public static final String COMMAND_STARTUP = "STARTUP";
 
-    public static final String COMMAND_UNREGISTER = "UNREGISTER";
+	public static final String COMMAND_UNREGISTER = "UNREGISTER";
 
 	public SchedulerRequest() {
 	}
