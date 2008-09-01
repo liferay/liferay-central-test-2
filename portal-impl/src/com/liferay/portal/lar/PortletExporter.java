@@ -34,6 +34,7 @@ import com.liferay.portal.kernel.util.ReleaseInfo;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Time;
+import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.kernel.xml.Document;
 import com.liferay.portal.kernel.xml.Element;
 import com.liferay.portal.kernel.xml.SAXReaderUtil;
@@ -525,7 +526,7 @@ public class PortletExporter {
 		String portletDataHandlerClass =
 			portlet.getPortletDataHandlerClass();
 
-		if (portletDataHandlerClass == null) {
+		if (Validator.isNull(portletDataHandlerClass)) {
 			return;
 		}
 

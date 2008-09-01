@@ -45,7 +45,7 @@ import javax.portlet.PreferencesValidator;
 import javax.servlet.ServletContext;
 
 /**
- * <a href="PortletBag.java.html"><b><i>View Source</i></b></a>
+ * <a href="PortletBagImpl.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *

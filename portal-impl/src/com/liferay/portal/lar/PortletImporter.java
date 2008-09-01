@@ -38,6 +38,7 @@ import com.liferay.portal.kernel.util.ObjectValuePair;
 import com.liferay.portal.kernel.util.PortletClassInvoker;
 import com.liferay.portal.kernel.util.ReleaseInfo;
 import com.liferay.portal.kernel.util.StringUtil;
+import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.kernel.xml.Document;
 import com.liferay.portal.kernel.xml.DocumentException;
 import com.liferay.portal.kernel.xml.Element;
@@ -288,7 +289,7 @@ public class PortletImporter {
 		String portletDataHandlerClass =
 			portlet.getPortletDataHandlerClass();
 
-		if (portletDataHandlerClass == null) {
+		if (Validator.isNull(portletDataHandlerClass)) {
 			if (_log.isDebugEnabled()) {
 				_log.debug(
 					"Do not delete portlet data for " + portletId +
@@ -379,7 +380,7 @@ public class PortletImporter {
 		String portletDataHandlerClass =
 			portlet.getPortletDataHandlerClass();
 
-		if (portletDataHandlerClass == null) {
+		if (Validator.isNull(portletDataHandlerClass)) {
 			if (_log.isDebugEnabled()) {
 				_log.debug(
 					"Do not import portlet data for " + portletId +

@@ -819,10 +819,10 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 	public SocialActivityInterpreter getSocialActivityInterpreterInstance() {
 		if (Validator.isNotNull(getSocialActivityInterpreterClass())) {
 			if (_portletApp.isWARFile()) {
-				PortletBagImpl portletBag =
+				PortletBagImpl portletBagImpl =
 					(PortletBagImpl)PortletBagPool.get(getRootPortletId());
 
-				return portletBag.getSocialActivityInterpreterInstance();
+				return portletBagImpl.getSocialActivityInterpreterInstance();
 			}
 			else {
 				return (SocialActivityInterpreter)InstancePool.get(
