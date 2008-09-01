@@ -30,14 +30,19 @@ package com.liferay.portal.kernel.messaging;
  */
 public interface MessageBus {
 
+    public boolean hasDestination(String destinationName);
+
 	public void addDestination(Destination destination);
+
+	public void removeDestination(String destination);
 
 	public boolean hasMessageListener(String destination);
 
 	public void registerMessageListener(
 		String destination, MessageListener listener);
 
-	public void removeDestination(String destination);
+	public boolean unregisterMessageListener(
+		String destination, MessageListener listener);
 
 	public void sendMessage(String destination, Object message);
 
@@ -51,11 +56,12 @@ public interface MessageBus {
 			String destination, String message, long timeout)
 		throws MessageBusException;
 
+	public void addDestinationEventListener(DestinationEventListener listener);
+
+	public void removeDestinationEventListener(DestinationEventListener listener);
+
 	public void shutdown();
 
 	public void shutdown(boolean force);
-
-	public boolean unregisterMessageListener(
-		String destination, MessageListener listener);
 
 }

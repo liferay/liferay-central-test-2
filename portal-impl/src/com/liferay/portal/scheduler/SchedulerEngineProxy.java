@@ -24,44 +24,26 @@ package com.liferay.portal.scheduler;
 
 import com.liferay.portal.kernel.json.JSONFactoryUtil;
 import com.liferay.portal.kernel.json.JSONObject;
-import com.liferay.portal.kernel.messaging.Destination;
 import com.liferay.portal.kernel.messaging.DestinationNames;
 import com.liferay.portal.kernel.messaging.MessageBusUtil;
-import com.liferay.portal.kernel.messaging.ParallelDestination;
 import com.liferay.portal.kernel.scheduler.SchedulerEngine;
 import com.liferay.portal.kernel.scheduler.SchedulerException;
 import com.liferay.portal.kernel.scheduler.messaging.SchedulerRequest;
-import com.liferay.portlet.communities.messaging.LayoutsLocalPublisherMessageListener;
-import com.liferay.portlet.communities.messaging.LayoutsRemotePublisherMessageListener;
 
 import java.util.Date;
 import java.util.List;
 
 /**
- * <a href="SchedulerEngineProxy.java.html"><b><i>View Source</i></b></a>
+ * <a href="SchedulerEngineImpl.java.html"><b><i>View Source</i></b></a>
+ *
+ * Proxy to interface with the underlying implementation of the scheduler.
+ * This proxy communicates over the messaging bus to the actual
+ * implementation of the SchedulerEngine
  *
  * @author Bruno Farache
  *
  */
 public class SchedulerEngineProxy implements SchedulerEngine {
-
-	public SchedulerEngineProxy() {
-		Destination layoutsLocalPublisherDestination = new ParallelDestination(
-			DestinationNames.LAYOUTS_LOCAL_PUBLISHER);
-
-		MessageBusUtil.addDestination(layoutsLocalPublisherDestination);
-
-		layoutsLocalPublisherDestination.register(
-			new LayoutsLocalPublisherMessageListener());
-
-		Destination layoutsRemotePublisherDestination = new ParallelDestination(
-			DestinationNames.LAYOUTS_REMOTE_PUBLISHER);
-
-		MessageBusUtil.addDestination(layoutsRemotePublisherDestination);
-
-		layoutsRemotePublisherDestination.register(
-			new LayoutsRemotePublisherMessageListener());
-	}
 
 	public List<SchedulerRequest> getScheduledJobs(String groupName)
 		throws SchedulerException {
@@ -106,11 +88,11 @@ public class SchedulerEngineProxy implements SchedulerEngine {
 	}
 
 	public void start() {
-		MessageBusUtil.sendMessage(
+        MessageBusUtil.sendMessage(
 			DestinationNames.SCHEDULER,
 			JSONFactoryUtil.serialize(
 				new SchedulerRequest(SchedulerRequest.COMMAND_STARTUP)));
-	}
+    }
 
 	public void unschedule(String jobName, String groupName) {
 		SchedulerRequest schedulerRequest = new SchedulerRequest(

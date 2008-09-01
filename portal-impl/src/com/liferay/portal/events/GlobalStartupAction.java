@@ -22,7 +22,6 @@
 
 package com.liferay.portal.events;
 
-import com.liferay.mail.messaging.MailMessageListener;
 import com.liferay.portal.comm.CommLink;
 import com.liferay.portal.deploy.DeployUtil;
 import com.liferay.portal.jcr.JCRFactoryUtil;
@@ -32,23 +31,14 @@ import com.liferay.portal.kernel.deploy.auto.AutoDeployUtil;
 import com.liferay.portal.kernel.deploy.hot.HotDeployListener;
 import com.liferay.portal.kernel.deploy.hot.HotDeployUtil;
 import com.liferay.portal.kernel.events.SimpleAction;
-import com.liferay.portal.kernel.messaging.Destination;
-import com.liferay.portal.kernel.messaging.DestinationNames;
-import com.liferay.portal.kernel.messaging.MessageBusUtil;
-import com.liferay.portal.kernel.messaging.ParallelDestination;
-import com.liferay.portal.kernel.messaging.SerialDestination;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.InfrastructureUtil;
 import com.liferay.portal.kernel.util.ServerDetector;
-import com.liferay.portal.liveusers.messaging.LiveUsersMessageListener;
 import com.liferay.portal.pop.POPServerUtil;
 import com.liferay.portal.util.PrefsPropsUtil;
 import com.liferay.portal.util.PropsKeys;
 import com.liferay.portal.util.PropsUtil;
 import com.liferay.portal.util.PropsValues;
-import com.liferay.portlet.messageboards.messaging.MBMessageListener;
-import com.liferay.portlet.messageboards.messaging.MailingListMessageListener;
-import com.liferay.portlet.wiki.messaging.WikiMessageListener;
 
 import java.io.File;
 
@@ -217,64 +207,6 @@ public class GlobalStartupAction extends SimpleAction {
 			POPServerUtil.start();
 		}
 
-		// Message bus
-
-		populateMessageBus();
-	}
-
-	protected void populateMessageBus() {
-
-		// Live users
-
-		Destination liveUsersDestination = new SerialDestination(
-			DestinationNames.LIVE_USERS);
-
-		MessageBusUtil.addDestination(liveUsersDestination);
-
-		MessageBusUtil.registerMessageListener(
-			liveUsersDestination.getName(), new LiveUsersMessageListener());
-
-		// Mail
-
-		Destination mailDestination = new ParallelDestination(
-			DestinationNames.MAIL);
-
-		MessageBusUtil.addDestination(mailDestination);
-
-		MessageBusUtil.registerMessageListener(
-			mailDestination.getName(), new MailMessageListener());
-
-		// Message boards
-
-		Destination messageBoardsDestination = new ParallelDestination(
-			DestinationNames.MESSAGE_BOARDS);
-
-		MessageBusUtil.addDestination(messageBoardsDestination);
-
-		MessageBusUtil.registerMessageListener(
-			messageBoardsDestination.getName(), new MBMessageListener());
-
-		// Message boards mailing list
-
-		Destination messageBoardsMailingListDestination =
-			new ParallelDestination(
-				DestinationNames.MESSAGE_BOARDS_MAILING_LIST);
-
-		MessageBusUtil.addDestination(messageBoardsMailingListDestination);
-
-		MessageBusUtil.registerMessageListener(
-			messageBoardsMailingListDestination.getName(),
-			new MailingListMessageListener());
-
-		// Wiki
-
-		Destination wikiDestination = new ParallelDestination(
-			DestinationNames.WIKI);
-
-		MessageBusUtil.addDestination(wikiDestination);
-
-		MessageBusUtil.registerMessageListener(
-			wikiDestination.getName(), new WikiMessageListener());
 	}
 
 	private static Log _log = LogFactory.getLog(GlobalStartupAction.class);

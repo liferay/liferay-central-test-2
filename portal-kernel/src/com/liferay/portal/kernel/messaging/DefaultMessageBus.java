@@ -26,7 +26,9 @@ import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.uuid.PortalUUIDUtil;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -39,6 +41,7 @@ public class DefaultMessageBus implements MessageBus {
 
 	public synchronized void addDestination(Destination destination) {
 		_destinations.put(destination.getName(), destination);
+		_fireDestinationAddedEvent(destination);
 
 		Destination responseDestination = getResponseDestination(destination);
 
@@ -49,15 +52,14 @@ public class DefaultMessageBus implements MessageBus {
 		}
 	}
 
-	public boolean hasMessageListener(String destination) {
+    public boolean hasDestination(final String destinationName) {
+        return _destinations.containsKey(destinationName);
+    }
+
+    public boolean hasMessageListener(String destination) {
 		Destination destinationModel = _destinations.get(destination);
 
-		if ((destinationModel != null) && destinationModel.isRegistered()) {
-			return true;
-		}
-		else {
-			return false;
-		}
+		return (destinationModel != null) && destinationModel.isRegistered();
 	}
 
 	public synchronized void registerMessageListener(
@@ -74,7 +76,8 @@ public class DefaultMessageBus implements MessageBus {
 	}
 
 	public synchronized void removeDestination(String destination) {
-		_destinations.remove(destination);
+		Destination dest = _destinations.remove(destination);
+		_fireDestinationRemovedEvent(dest);
 
 		String responseDestination = getResponseDestination(destination);
 
@@ -246,11 +249,17 @@ public class DefaultMessageBus implements MessageBus {
 
 		Destination destinationModel = _destinations.get(destination);
 
-		if (destinationModel == null) {
-			return false;
-		}
+		return (destinationModel != null) &&
+			destinationModel.unregister(listener);
 
-		return destinationModel.unregister(listener);
+	}
+
+	public void addDestinationEventListener(DestinationEventListener listener) {
+		_destinationListeners.add(listener);
+	}
+
+	public void removeDestinationEventListener(DestinationEventListener listener) {
+		_destinationListeners.remove(listener);
 	}
 
 	protected String getNextResponseId() {
@@ -266,6 +275,18 @@ public class DefaultMessageBus implements MessageBus {
 			getResponseDestination(destination.getName()));
 	}
 
+	private void _fireDestinationAddedEvent(Destination destination) {
+		for (DestinationEventListener listener : _destinationListeners) {
+			listener.destinationAdded(destination);
+		}
+	}
+
+	private void _fireDestinationRemovedEvent(Destination destination) {
+		for (DestinationEventListener listener : _destinationListeners) {
+			listener.destinationRemoved(destination);
+		}
+	}
+
 	private static final String _RESPONSE_DESTINATION_SUFFIX = "/response";
 
 	private static Log _log = LogFactoryUtil.getLog(DefaultMessageBus.class);
@@ -274,4 +295,6 @@ public class DefaultMessageBus implements MessageBus {
 		new HashMap<String, Destination>();
 	private int _globalDestinationsCount;
 
+	private List<DestinationEventListener> _destinationListeners =
+		new ArrayList<DestinationEventListener>();
 }

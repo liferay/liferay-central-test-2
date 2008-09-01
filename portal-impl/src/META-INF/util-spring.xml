@@ -81,16 +81,7 @@
 			<bean class="com.liferay.portal.language.UnicodeLanguageImpl" />
 		</property>
 	</bean>
-	<bean id="com.liferay.portal.kernel.messaging.MessageBus" class="com.liferay.portal.messaging.PortalMessageBus">
-		<property name="messageBus">
-			<bean class="com.liferay.portal.kernel.messaging.DefaultMessageBus" />
-		</property>
-	</bean>
-	<bean id="com.liferay.portal.kernel.messaging.MessageSender" class="com.liferay.portal.kernel.messaging.DefaultMessageSender">
-		<property name="messageBus">
-			<ref bean="com.liferay.portal.kernel.messaging.MessageBus" />
-		</property>
-	</bean>
+	
 	<bean id="com.liferay.portal.model.ModelHintsUtil" class="com.liferay.portal.model.ModelHintsUtil">
 		<property name="modelHints">
 			<bean class="com.liferay.portal.model.ModelHintsImpl" init-method="afterPropertiesSet">

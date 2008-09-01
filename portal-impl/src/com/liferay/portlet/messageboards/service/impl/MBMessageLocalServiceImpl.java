@@ -933,8 +933,7 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 
 			mbDiscussionPersistence.update(discussion, false);
 		}
-
-		return getMessageDisplay(message);
+return getMessageDisplay(message);
 	}
 
 	public int getDiscussionMessagesCount(long classNameId, long classPK)
@@ -1385,13 +1384,17 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 				defaultPreferences);
 		}
 
-		if (!update && MBUtil.getEmailMessageAddedEnabled(prefs)) {
+		if (!(!update && MBUtil.getEmailMessageAddedEnabled(prefs)) &&
+			!(update && MBUtil.getEmailMessageUpdatedEnabled(prefs))) {
+			return;
+		}
+		/*if (!update && MBUtil.getEmailMessageAddedEnabled(prefs)) {
 		}
 		else if (update && MBUtil.getEmailMessageUpdatedEnabled(prefs)) {
 		}
 		else {
 			return;
-		}
+		}*/
 
 		Company company = companyPersistence.findByPrimaryKey(
 			message.getCompanyId());

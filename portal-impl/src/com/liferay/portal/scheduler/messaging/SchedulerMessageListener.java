@@ -1,33 +1,15 @@
-/**
- * Copyright (c) 2000-2008 Liferay, Inc. All rights reserved.
- *
- * Permission is hereby granted, free of charge, to any person obtaining a copy
- * of this software and associated documentation files (the "Software"), to deal
- * in the Software without restriction, including without limitation the rights
- * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
- * copies of the Software, and to permit persons to whom the Software is
- * furnished to do so, subject to the following conditions:
- *
- * The above copyright notice and this permission notice shall be included in
- * all copies or substantial portions of the Software.
- *
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
- * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
- * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
- * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
- * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
- * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
- * SOFTWARE.
+/*
+ * Copyright (c) 2008, Your Corporation. All Rights Reserved.
  */
 
 package com.liferay.portal.scheduler.messaging;
 
-import com.liferay.portal.kernel.json.JSONFactoryUtil;
-import com.liferay.portal.kernel.json.JSONObject;
-import com.liferay.portal.kernel.messaging.MessageBusUtil;
 import com.liferay.portal.kernel.messaging.MessageListener;
-import com.liferay.portal.kernel.scheduler.SchedulerEngine;
+import com.liferay.portal.kernel.messaging.MessageBusUtil;
+import com.liferay.portal.kernel.json.JSONObject;
+import com.liferay.portal.kernel.json.JSONFactoryUtil;
 import com.liferay.portal.kernel.scheduler.messaging.SchedulerRequest;
+import com.liferay.portal.kernel.scheduler.SchedulerEngine;
 
 import java.util.List;
 
@@ -39,19 +21,19 @@ import org.apache.commons.logging.LogFactory;
  *
  * @author Michael C. Han
  * @author Bruno Farache
- *
  */
-public class SchedulerMessageListener implements MessageListener {
+public class SchedulerMessageListener
+    implements MessageListener {
 
-	public SchedulerMessageListener(SchedulerEngine schedulerEngine) {
-		_schedulerEngine = schedulerEngine;
-	}
+    public SchedulerMessageListener(SchedulerEngine engine) {
+        _schedulerEngine = engine;
+    }
 
-	public void receive(Object message) {
+    public void receive(Object message) {
 		throw new UnsupportedOperationException();
 	}
 
-	public void receive(String message) {
+    public void receive(String message) {
 		try {
 			doReceive(message);
 		}
@@ -60,7 +42,7 @@ public class SchedulerMessageListener implements MessageListener {
 		}
 	}
 
-	protected void doReceive(String message) throws Exception {
+    protected void doReceive(String message) throws Exception {
 		JSONObject jsonObj = JSONFactoryUtil.createJSONObject(message);
 
 		String responseDestination = jsonObj.getString(
@@ -90,9 +72,9 @@ public class SchedulerMessageListener implements MessageListener {
 		else if (command.equals(SchedulerRequest.COMMAND_SHUTDOWN)) {
 			_schedulerEngine.shutdown();
 		}
-		else if (command.equals(SchedulerRequest.COMMAND_STARTUP)) {
-			_schedulerEngine.start();
-		}
+        else if (command.equals(SchedulerRequest.COMMAND_STARTUP)) {
+            _schedulerEngine.start();
+        }
 		else if (command.equals(SchedulerRequest.COMMAND_UNREGISTER)) {
 			_schedulerEngine.unschedule(
 				schedulerRequest.getJobName(), schedulerRequest.getGroupName());
@@ -105,7 +87,8 @@ public class SchedulerMessageListener implements MessageListener {
 		throws Exception {
 
 		List<SchedulerRequest> schedulerRequests =
-			_schedulerEngine.getScheduledJobs(schedulerRequest.getGroupName());
+			_schedulerEngine.getScheduledJobs(
+				schedulerRequest.getGroupName());
 
 		JSONObject jsonObj = JSONFactoryUtil.createJSONObject();
 
@@ -118,6 +101,5 @@ public class SchedulerMessageListener implements MessageListener {
 
 	private static Log _log = LogFactory.getLog(SchedulerMessageListener.class);
 
-	private SchedulerEngine _schedulerEngine;
-
+    private SchedulerEngine _schedulerEngine;
 }

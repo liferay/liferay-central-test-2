@@ -27,6 +27,7 @@ import com.liferay.portal.kernel.messaging.Message;
 import com.liferay.portal.kernel.messaging.MessageBus;
 import com.liferay.portal.kernel.messaging.MessageBusException;
 import com.liferay.portal.kernel.messaging.MessageListener;
+import com.liferay.portal.kernel.messaging.DestinationEventListener;
 
 import org.springframework.beans.factory.DisposableBean;
 
@@ -43,7 +44,11 @@ public class PortalMessageBus implements DisposableBean, MessageBus {
 		_messageBus.addDestination(destination);
 	}
 
-	public void destroy() throws Exception {
+    public boolean hasDestination(String destinationName) {
+        return _messageBus.hasDestination(destinationName);
+    }
+
+    public void destroy() throws Exception {
 		shutdown(true);
 	}
 
@@ -101,6 +106,15 @@ public class PortalMessageBus implements DisposableBean, MessageBus {
 
 	public void shutdown(boolean force) {
 		_messageBus.shutdown(force);
+	}
+
+	public void addDestinationEventListener(DestinationEventListener listener) {
+		_messageBus.addDestinationEventListener(listener);
+	}
+
+	public void removeDestinationEventListener(
+		DestinationEventListener listener) {
+		_messageBus.removeDestinationEventListener(listener);
 	}
 
 	private MessageBus _messageBus;

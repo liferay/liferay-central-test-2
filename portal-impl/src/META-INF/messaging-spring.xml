@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd">
+	<!-- Message Bus Instantiations -->
+	<bean id="com.liferay.portal.kernel.messaging.MessageBus" class="com.liferay.portal.messaging.PortalMessageBus">
+		<property name="messageBus">
+			<bean class="com.liferay.portal.kernel.messaging.DefaultMessageBus" />
+		</property>
+	</bean>
+	<bean id="com.liferay.portal.kernel.messaging.MessageSender" class="com.liferay.portal.kernel.messaging.DefaultMessageSender">
+		<property name="messageBus" ref="com.liferay.portal.kernel.messaging.MessageBus" />
+	</bean>
+
+    <!-- destinations -->
+    <bean id="dest.svc.live.users" class="com.liferay.portal.kernel.messaging.SerialDestination">
+        <constructor-arg type="java.lang.String" index="0" value="liferay/live_users"/>
+    </bean>
+    <bean id="dest.svc.mail" class="com.liferay.portal.kernel.messaging.ParallelDestination">
+        <constructor-arg type="java.lang.String" index="0" value="liferay/mail"/>
+        <!-- activate if you wish to tune the number of workers in the destination
+        <constructor-arg type="java.lang.Integer" index="1" value="10"/>
+        <constructor-arg type="java.lang.Integer" index="2" value="15"/>-->
+    </bean>
+    <bean id="dest.svc.mb" class="com.liferay.portal.kernel.messaging.ParallelDestination">
+        <constructor-arg type="java.lang.String" index="0" value="liferay/message_boards"/>
+        <!-- activate if you wish to tune the number of workers in the destination
+        <constructor-arg type="java.lang.Integer" index="1" value="10"/>
+        <constructor-arg type="java.lang.Integer" index="2" value="15"/>-->
+    </bean>
+    <bean id="dest.svc.mb.maillist" class="com.liferay.portal.kernel.messaging.ParallelDestination">
+        <constructor-arg type="java.lang.String" index="0" value="liferay/message_boards_mailing_list"/>
+        <!-- activate if you wish to tune the number of workers in the destination
+        <constructor-arg type="java.lang.Integer" index="1" value="10"/>
+        <constructor-arg type="java.lang.Integer" index="2" value="15"/>-->
+    </bean>
+    <bean id="dest.svc.wiki" class="com.liferay.portal.kernel.messaging.ParallelDestination">
+        <constructor-arg type="java.lang.String" index="0" value="liferay/wiki"/>
+        <!-- activate if you wish to tune the number of workers in the destination
+        <constructor-arg type="java.lang.Integer" index="1" value="10"/>
+        <constructor-arg type="java.lang.Integer" index="2" value="15"/>-->
+    </bean>
+    <bean id="dest.svc.scheduling" class="com.liferay.portal.kernel.messaging.ParallelDestination">
+        <constructor-arg type="java.lang.String" index="0" value="liferay/scheduler"/>
+        <!-- activate if you wish to tune the number of workers in the destination
+        <constructor-arg type="java.lang.Integer" index="1" value="10"/>
+        <constructor-arg type="java.lang.Integer" index="2" value="15"/>-->
+    </bean>
+    <bean id="dest.svc.pub.layout.local" class="com.liferay.portal.kernel.messaging.ParallelDestination">
+        <constructor-arg type="java.lang.String" index="0" value="liferay/layouts_local_publisher"/>
+        <!-- activate if you wish to tune the number of workers in the destination
+        <constructor-arg type="java.lang.Integer" index="1" value="10"/>
+        <constructor-arg type="java.lang.Integer" index="2" value="15"/>-->
+    </bean>
+    <bean id="dest.svc.pub.layout.remote" class="com.liferay.portal.kernel.messaging.ParallelDestination">
+        <constructor-arg type="java.lang.String" index="0" value="liferay/layouts_remote_publisher"/>
+        <!-- activate if you wish to tune the number of workers in the destination
+        <constructor-arg type="java.lang.Integer" index="1" value="10"/>
+        <constructor-arg type="java.lang.Integer" index="2" value="15"/>-->
+    </bean>
+    <bean id="dest.svc.search.reader" class="com.liferay.portal.kernel.messaging.ParallelDestination">
+        <constructor-arg type="java.lang.String" index="0" value="liferay/search_reader"/>
+        <!-- activate if you wish to tune the number of workers in the destination
+        <constructor-arg type="java.lang.Integer" index="1" value="10"/>
+        <constructor-arg type="java.lang.Integer" index="2" value="15"/>-->
+    </bean>
+    <bean id="dest.svc.search.writer" class="com.liferay.portal.kernel.messaging.SerialDestination">
+        <constructor-arg type="java.lang.String" index="0" value="liferay/search_writer"/>
+    </bean>
+
+    <!-- listeners -->
+    <bean id="lsnr.live.users" class="com.liferay.portal.liveusers.messaging.LiveUsersMessageListener"/>
+    <bean id="lsnr.mail" class="com.liferay.mail.messaging.MailMessageListener"/>
+    <bean id="lsnr.mb" class="com.liferay.portlet.messageboards.messaging.MBMessageListener"/>
+    <bean id="lsnr.mb.maillist" class="com.liferay.portlet.messageboards.messaging.MailingListMessageListener"/>
+    <bean id="lsnr.wiki" class="com.liferay.portlet.wiki.messaging.WikiMessageListener"/>
+    <bean id="lsnr.scheduler" class="com.liferay.portal.scheduler.messaging.SchedulerMessageListener">
+        <constructor-arg type="com.liferay.portal.kernel.scheduler.SchedulerEngine" ref="com.liferay.portal.kernel.scheduler.SchedulerEngine"/>
+    </bean>
+    <bean id="lsnr.pub.layout.local" class="com.liferay.portlet.communities.messaging.LayoutsLocalPublisherMessageListener"/>
+    <bean id="lsnr.pub.layout.remote" class="com.liferay.portlet.communities.messaging.LayoutsRemotePublisherMessageListener"/>
+    <bean id="lsnr.search.reader" class="com.liferay.portal.search.lucene.messaging.LuceneReaderMessageListener"/>
+    <bean id="lsnr.search.writer" class="com.liferay.portal.search.lucene.messaging.LuceneWriterMessageListener"/>
+
+    <!-- configurator -->
+    <bean id="com.liferay.portal.kernel.messaging.MessagingConfigurator" class="com.liferay.portal.kernel.messaging.DefaultMessagingConfigurator"
+        init-method="configure">
+        <property name="messagingDestinations">
+            <list>
+                <ref bean="dest.svc.live.users"/>
+                <ref bean="dest.svc.mail"/>
+                <ref bean="dest.svc.mb"/>
+                <ref bean="dest.svc.mb.maillist"/>
+                <ref bean="dest.svc.wiki"/>
+                <ref bean="dest.svc.scheduling"/>
+                <ref bean="dest.svc.pub.layout.local"/>
+                <ref bean="dest.svc.pub.layout.remote"/>
+                <ref bean="dest.svc.search.reader"/>
+                <ref bean="dest.svc.search.writer"/>
+            </list>
+        </property>   
+        <property name="messageListeners">
+            <map key-type="java.lang.String" value-type="java.util.List">
+				<entry key="liferay/live_users">
+					<list value-type="com.liferay.portal.kernel.messaging.MessageListener">
+						<ref bean="lsnr.live.users"/>
+					</list>
+				</entry>
+				<entry key="liferay/mail">
+					<list value-type="com.liferay.portal.kernel.messaging.MessageListener">
+						<ref bean="lsnr.mail"/>
+					</list>
+				</entry>
+				<entry key="liferay/message_boards">
+					<list value-type="com.liferay.portal.kernel.messaging.MessageListener">
+						<ref bean="lsnr.mb"/>
+					</list>
+				</entry>
+				<entry key="liferay/message_boards_mailing_list">
+					<list value-type="com.liferay.portal.kernel.messaging.MessageListener">
+						<ref bean="lsnr.mb.maillist"/>
+					</list>
+				</entry>
+				<entry key="liferay/wiki">
+					<list value-type="com.liferay.portal.kernel.messaging.MessageListener">
+						<ref bean="lsnr.wiki"/>
+					</list>
+				</entry>
+				<entry key="liferay/scheduler">
+					<list value-type="com.liferay.portal.kernel.messaging.MessageListener">
+						<ref bean="lsnr.scheduler"/>
+					</list>
+				</entry>
+				<entry key="liferay/layouts_local_publisher">
+					<list value-type="com.liferay.portal.kernel.messaging.MessageListener">
+						<ref bean="lsnr.pub.layout.local"/>
+					</list>
+				</entry>
+				<entry key="liferay/layouts_remote_publisher">
+					<list value-type="com.liferay.portal.kernel.messaging.MessageListener">
+						<ref bean="lsnr.pub.layout.remote"/>
+					</list>
+				</entry>
+				<entry key="liferay/search_reader">
+					<list value-type="com.liferay.portal.kernel.messaging.MessageListener">
+						<ref bean="lsnr.search.reader"/>
+					</list>
+				</entry>
+				<entry key="liferay/search_writer">
+					<list value-type="com.liferay.portal.kernel.messaging.MessageListener">
+						<ref bean="lsnr.search.writer"/>
+					</list>
+				</entry>
+            </map>
+        </property>
+		<property name="messageBus">
+            <ref bean="com.liferay.portal.kernel.messaging.MessageBus" />
+		</property>
+	</bean>
+</beans>
