@@ -36,7 +36,7 @@ import java.util.Date;
  */
 public class Lock implements Comparable<Lock>, Serializable {
 
-	public Lock() {	
+	public Lock() {
 	}
 
 	public Lock(
