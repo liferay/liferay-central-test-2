@@ -72,6 +72,12 @@ public class NodeImpl implements Node {
 		}
 	}
 
+	public boolean equals(Object obj) {
+		org.dom4j.Node node = ((NodeImpl)obj).getWrappedNode();
+
+		return _node.equals(node);
+	}
+
 	public Document getDocument() {
 		org.dom4j.Document document = _node.getDocument();
 
@@ -132,6 +138,10 @@ public class NodeImpl implements Node {
 
 	public boolean hasContent() {
 		return _node.hasContent();
+	}
+
+	public int hashCode() {
+		return _node.hashCode();
 	}
 
 	public boolean isReadOnly() {

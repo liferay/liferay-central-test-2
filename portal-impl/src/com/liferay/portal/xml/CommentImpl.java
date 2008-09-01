@@ -38,8 +38,18 @@ public class CommentImpl extends NodeImpl implements Comment {
 		_comment = comment;
 	}
 
+	public boolean equals(Object obj) {
+		org.dom4j.Comment comment = ((CommentImpl)obj).getWrappedComment();
+
+		return _comment.equals(comment);
+	}
+
 	public org.dom4j.Comment getWrappedComment() {
 		return _comment;
+	}
+
+	public int hashCode() {
+		return _comment.hashCode();
 	}
 
 	private org.dom4j.Comment _comment;

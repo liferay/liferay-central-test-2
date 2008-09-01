@@ -38,8 +38,18 @@ public class TextImpl extends NodeImpl implements Text {
 		_text = text;
 	}
 
+	public boolean equals(Object obj) {
+		org.dom4j.Text text = ((TextImpl)obj).getWrappedText();
+
+		return _text.equals(text);
+	}
+
 	public org.dom4j.Text getWrappedText() {
 		return _text;
+	}
+
+	public int hashCode() {
+		return _text.hashCode();
 	}
 
 	private org.dom4j.Text _text;

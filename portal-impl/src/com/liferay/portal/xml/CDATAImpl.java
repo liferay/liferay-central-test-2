@@ -38,8 +38,18 @@ public class CDATAImpl extends NodeImpl implements CDATA {
 		_cdata = cdata;
 	}
 
+	public boolean equals(Object obj) {
+		org.dom4j.CDATA cdata = ((CDATAImpl)obj).getWrappedCDATA();
+
+		return _cdata.equals(cdata);
+	}
+
 	public org.dom4j.CDATA getWrappedCDATA() {
 		return _cdata;
+	}
+
+	public int hashCode() {
+		return _cdata.hashCode();
 	}
 
 	private org.dom4j.CDATA _cdata;

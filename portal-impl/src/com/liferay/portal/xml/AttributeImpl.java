@@ -44,6 +44,13 @@ public class AttributeImpl extends NodeImpl implements Attribute {
 		return _attribute.getData();
 	}
 
+	public boolean equals(Object obj) {
+		org.dom4j.Attribute attribute =
+			((AttributeImpl)obj).getWrappedAttribute();
+
+		return _attribute.equals(attribute);
+	}
+
 	public Namespace getNamespace() {
 		org.dom4j.Namespace namespace = _attribute.getNamespace();
 
@@ -84,6 +91,10 @@ public class AttributeImpl extends NodeImpl implements Attribute {
 
 	public org.dom4j.Attribute getWrappedAttribute() {
 		return _attribute;
+	}
+
+	public int hashCode() {
+		return _attribute.hashCode();
 	}
 
 	public void setData(Object data) {

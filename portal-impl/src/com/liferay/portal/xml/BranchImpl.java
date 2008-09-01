@@ -104,8 +104,18 @@ public class BranchImpl extends NodeImpl implements Branch {
 		return new ElementImpl(_branch.elementByID(elementID));
 	}
 
+	public boolean equals(Object obj) {
+		org.dom4j.Branch branch = ((BranchImpl)obj).getWrappedBranch();
+
+		return _branch.equals(branch);
+	}
+
 	public org.dom4j.Branch getWrappedBranch() {
 		return _branch;
+	}
+
+	public int hashCode() {
+		return _branch.hashCode();
 	}
 
 	public int indexOf(Node node) {

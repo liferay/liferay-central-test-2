@@ -290,6 +290,12 @@ public class ElementImpl extends BranchImpl implements Element {
 		return SAXReaderImpl.toNewElements(_element.elements(name));
 	}
 
+	public boolean equals(Object obj) {
+		org.dom4j.Element element = ((ElementImpl)obj).getWrappedElement();
+
+		return _element.equals(element);
+	}
+
 	public Object getData() {
 		return _element.getData();
 	}
@@ -382,6 +388,10 @@ public class ElementImpl extends BranchImpl implements Element {
 		else {
 			return new NodeImpl(node);
 		}
+	}
+
+	public int hashCode() {
+		return _element.hashCode();
 	}
 
 	public boolean hasMixedContent() {

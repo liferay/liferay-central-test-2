@@ -54,8 +54,10 @@ public class DocumentImpl extends BranchImpl implements Document {
 		return this;
 	}
 
-	public String getXMLEncoding() {
-		return _document.getXMLEncoding();
+	public boolean equals(Object obj) {
+		org.dom4j.Document document = ((DocumentImpl)obj).getWrappedDocument();
+
+		return _document.equals(document);
 	}
 
 	public String formattedString() throws IOException {
@@ -78,6 +80,14 @@ public class DocumentImpl extends BranchImpl implements Document {
 
 	public org.dom4j.Document getWrappedDocument() {
 		return _document;
+	}
+
+	public String getXMLEncoding() {
+		return _document.getXMLEncoding();
+	}
+
+	public int hashCode() {
+		return _document.hashCode();
 	}
 
 	public void setRootElement(Element rootElement) {

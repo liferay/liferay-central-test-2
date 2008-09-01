@@ -38,8 +38,18 @@ public class EntityImpl extends NodeImpl implements Entity {
 		_entity = entity;
 	}
 
+	public boolean equals(Object obj) {
+		org.dom4j.Entity entity = ((EntityImpl)obj).getWrappedEntity();
+
+		return _entity.equals(entity);
+	}
+
 	public org.dom4j.Entity getWrappedEntity() {
 		return _entity;
+	}
+
+	public int hashCode() {
+		return _entity.hashCode();
 	}
 
 	private org.dom4j.Entity _entity;

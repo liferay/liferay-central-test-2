@@ -43,6 +43,13 @@ public class ProcessingInstructionImpl
 		_processingInstruction = processingInstruction;
 	}
 
+	public boolean equals(Object obj) {
+		org.dom4j.ProcessingInstruction processingInstruction =
+			((ProcessingInstructionImpl)obj).getWrappedProcessingInstruction();
+
+		return _processingInstruction.equals(processingInstruction);
+	}
+
 	public String getTarget() {
 		return _processingInstruction.getTarget();
 	}
@@ -61,6 +68,10 @@ public class ProcessingInstructionImpl
 
 	public org.dom4j.ProcessingInstruction getWrappedProcessingInstruction() {
 		return _processingInstruction;
+	}
+
+	public int hashCode() {
+		return _processingInstruction.hashCode();
 	}
 
 	public boolean removeValue(String name) {

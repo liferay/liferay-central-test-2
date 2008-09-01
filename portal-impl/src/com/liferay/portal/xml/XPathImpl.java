@@ -43,6 +43,12 @@ public class XPathImpl implements XPath {
 		return _xPath.booleanValueOf(toOldContext(context));
 	}
 
+	public boolean equals(Object obj) {
+		org.dom4j.XPath xPath = ((XPathImpl)obj).getWrappedXPath();
+
+		return _xPath.equals(xPath);
+	}
+
 	public Object evaluate(Object context) {
 		return toNewContext(_xPath.evaluate(toOldContext(context)));
 	}
@@ -53,6 +59,10 @@ public class XPathImpl implements XPath {
 
 	public org.dom4j.XPath getWrappedXPath() {
 		return _xPath;
+	}
+
+	public int hashCode() {
+		return _xPath.hashCode();
 	}
 
 	public boolean matches(Node node) {

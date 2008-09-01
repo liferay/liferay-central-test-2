@@ -37,6 +37,12 @@ public class QNameImpl implements QName {
 		_qName = qName;
 	}
 
+	public boolean equals(Object obj) {
+		org.dom4j.QName qName = ((QNameImpl)obj).getWrappedQName();
+
+		return _qName.equals(qName);
+	}
+
 	public String getName() {
 		return _qName.getName();
 	}
@@ -66,6 +72,10 @@ public class QNameImpl implements QName {
 
 	public org.dom4j.QName getWrappedQName() {
 		return _qName;
+	}
+
+	public int hashCode() {
+		return _qName.hashCode();
 	}
 
 	private org.dom4j.QName _qName;
