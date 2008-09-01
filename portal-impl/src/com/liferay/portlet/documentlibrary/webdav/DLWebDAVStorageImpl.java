@@ -330,31 +330,8 @@ public class DLWebDAVStorageImpl extends BaseWebDAVStorageImpl {
 		return true;
 	}
 
-	public Lock refreshResourceLock(
-			WebDAVRequest webDavRequest, String uuid, long timeout)
-		throws WebDAVException {
-
-		Resource resource = getResource(webDavRequest);
-
-		Lock lock = null;
-
-		if (resource instanceof DLFileEntryResourceImpl) {
-			DLFileEntry fileEntry = (DLFileEntry)resource.getModel();
-
-			try {
-				lock = DLFileEntryServiceUtil.refreshFileEntryLock(
-					uuid, timeout);
-			}
-			catch (Exception e) {
-				throw new WebDAVException(e);
-			}
-		}
-
-		return lock;
-	}
-
 	public Lock lockResource(
-			WebDAVRequest webDavRequest, long timeout, String owner)
+			WebDAVRequest webDavRequest, String owner, long timeout)
 		throws WebDAVException {
 
 		Resource resource = getResource(webDavRequest);
@@ -366,10 +343,13 @@ public class DLWebDAVStorageImpl extends BaseWebDAVStorageImpl {
 
 			try {
 				lock = DLFileEntryServiceUtil.lockFileEntry(
-					fileEntry.getFolderId(), fileEntry.getName(), timeout,
-					owner);
+					fileEntry.getFolderId(), fileEntry.getName(), owner,
+					timeout);
 			}
-			catch (Exception e) { // DuplicateLock == 423 not 501
+			catch (Exception e) {
+
+				 // DuplicateLock is 423 not 501
+
 				if (!(e instanceof DuplicateLockException)) {
 					throw new WebDAVException(e);
 				}
@@ -593,6 +573,27 @@ public class DLWebDAVStorageImpl extends BaseWebDAVStorageImpl {
 		}
 	}
 
+	public Lock refreshResourceLock(
+			WebDAVRequest webDavRequest, String uuid, long timeout)
+		throws WebDAVException {
+
+		Resource resource = getResource(webDavRequest);
+
+		Lock lock = null;
+
+		if (resource instanceof DLFileEntryResourceImpl) {
+			try {
+				lock = DLFileEntryServiceUtil.refreshFileEntryLock(
+					uuid, timeout);
+			}
+			catch (Exception e) {
+				throw new WebDAVException(e);
+			}
+		}
+
+		return lock;
+	}
+
 	public boolean unlockResource(WebDAVRequest webDavRequest, String token)
 		throws WebDAVException {
 
@@ -610,10 +611,14 @@ public class DLWebDAVStorageImpl extends BaseWebDAVStorageImpl {
 		}
 		catch (Exception e) {
 			if (e instanceof InvalidLockException) {
-				_log.warn(e.getMessage());
+				if (_log.isWarnEnabled()) {
+					_log.warn(e.getMessage());
+				}
 			}
 			else {
-				_log.warn("Unable to unlock file entry", e);
+				if (_log.isWarnEnabled()) {
+					_log.warn("Unable to unlock file entry", e);
+				}
 			}
 		}
 
@@ -756,8 +761,10 @@ public class DLWebDAVStorageImpl extends BaseWebDAVStorageImpl {
 			}
 		}
 		catch (PortalException pe) {
-			if (!(pe instanceof NoSuchLockException) &&
-				!(pe instanceof ExpiredLockException)) {
+			if (pe instanceof ExpiredLockException ||
+				pe instanceof NoSuchLockException) {
+			}
+			else {
 				throw pe;
 			}
 		}

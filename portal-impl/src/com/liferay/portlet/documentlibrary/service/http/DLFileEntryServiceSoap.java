@@ -219,21 +219,6 @@ public class DLFileEntryServiceSoap {
 		}
 	}
 
-	public static com.liferay.lock.model.Lock refreshFileEntryLock(
-		java.lang.String uuid, long expirationTime) throws RemoteException {
-		try {
-			com.liferay.lock.model.Lock returnValue = DLFileEntryServiceUtil.refreshFileEntryLock(uuid,
-					expirationTime);
-
-			return returnValue;
-		}
-		catch (Exception e) {
-			_log.error(e, e);
-
-			throw new RemoteException(e.getMessage());
-		}
-	}
-
 	public static com.liferay.lock.model.Lock lockFileEntry(long folderId,
 		java.lang.String name) throws RemoteException {
 		try {
@@ -250,11 +235,27 @@ public class DLFileEntryServiceSoap {
 	}
 
 	public static com.liferay.lock.model.Lock lockFileEntry(long folderId,
-		java.lang.String name, long expirationTime, java.lang.String owner)
+		java.lang.String name, java.lang.String owner, long expirationTime)
 		throws RemoteException {
 		try {
 			com.liferay.lock.model.Lock returnValue = DLFileEntryServiceUtil.lockFileEntry(folderId,
-					name, expirationTime, owner);
+					name, owner, expirationTime);
+
+			return returnValue;
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
+	public static com.liferay.lock.model.Lock refreshFileEntryLock(
+		java.lang.String lockUuid, long expirationTime)
+		throws RemoteException {
+		try {
+			com.liferay.lock.model.Lock returnValue = DLFileEntryServiceUtil.refreshFileEntryLock(lockUuid,
+					expirationTime);
 
 			return returnValue;
 		}
@@ -278,9 +279,9 @@ public class DLFileEntryServiceSoap {
 	}
 
 	public static void unlockFileEntry(long folderId, java.lang.String name,
-		java.lang.String uuid) throws RemoteException {
+		java.lang.String lockUuid) throws RemoteException {
 		try {
-			DLFileEntryServiceUtil.unlockFileEntry(folderId, name, uuid);
+			DLFileEntryServiceUtil.unlockFileEntry(folderId, name, lockUuid);
 		}
 		catch (Exception e) {
 			_log.error(e, e);

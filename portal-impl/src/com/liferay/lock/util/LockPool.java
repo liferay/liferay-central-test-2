@@ -26,7 +26,6 @@ import com.liferay.lock.DuplicateLockException;
 import com.liferay.lock.ExpiredLockException;
 import com.liferay.lock.NoSuchLockException;
 import com.liferay.lock.model.Lock;
-import com.liferay.lock.model.impl.LockImpl;
 import com.liferay.portal.kernel.uuid.PortalUUIDUtil;
 
 import java.util.Map;
@@ -151,20 +150,6 @@ public class LockPool {
 		return false;
 	}
 
-	private Lock _refresh(String uuid, long expirationTime)
-		throws NoSuchLockException {
-
-		Lock lock = _lockByUuid.get(uuid);
-
-		if (lock != null) {
-			lock.setExpirationTime(expirationTime);
-
-			return lock;
-		}
-
-		throw new NoSuchLockException();
-	}
-
 	private Lock _lock(
 			String className, Comparable<?> pk, long userId, String owner,
 			long expirationTime)
@@ -180,7 +165,7 @@ public class LockPool {
 
 				lock = null;
 			}
-			else if (lock.getOwner() != owner) {
+			else if (!lock.getOwner().equals(owner)) {
 				throw new DuplicateLockException(lock);
 			}
 		}
@@ -188,8 +173,7 @@ public class LockPool {
 		if (lock == null) {
 			String uuid = PortalUUIDUtil.generate();
 
-			lock = new LockImpl(
-				uuid, className, pk, userId, owner, expirationTime);
+			lock = new Lock(uuid, className, pk, userId, owner, expirationTime);
 
 			locksByPK.put(pk, lock);
 
@@ -200,6 +184,20 @@ public class LockPool {
 		}
 
 		return lock;
+	}
+
+	private Lock _refresh(String uuid, long expirationTime)
+		throws NoSuchLockException {
+
+		Lock lock = _lockByUuid.get(uuid);
+
+		if (lock != null) {
+			lock.setExpirationTime(expirationTime);
+
+			return lock;
+		}
+
+		throw new NoSuchLockException();
 	}
 
 	private void _unlock(String className, Comparable<?> pk) {

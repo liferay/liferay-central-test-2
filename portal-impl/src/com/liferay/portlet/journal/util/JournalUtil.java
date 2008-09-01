@@ -1080,9 +1080,9 @@ public class JournalUtil {
 
 		Document request = SAXReaderUtil.read(xmlRequest);
 
-		Element rootEl = request.getRootElement();
+		Element root = request.getRootElement();
 
-		Element themeDisplayEl = rootEl.element("theme-display");
+		Element themeDisplayEl = root.element("theme-display");
 
 		Layout layout = LayoutLocalServiceUtil.getLayout(
 			GetterUtil.getLong(themeDisplayEl.elementText("plid")));

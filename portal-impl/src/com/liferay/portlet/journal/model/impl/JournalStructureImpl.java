@@ -116,16 +116,16 @@ public class JournalStructureImpl
 
 			Document doc = SAXReaderUtil.read(getXsd());
 
-			Element rootEl = doc.getRootElement();
+			Element root = doc.getRootElement();
 
 			Document parentDoc = SAXReaderUtil.read(
 				parentStructure.getMergedXsd());
 
-			Element parentRootEl = parentDoc.getRootElement();
+			Element parentRoot = parentDoc.getRootElement();
 
-			rootEl.content().addAll(0, parentRootEl.content());
+			root.content().addAll(0, parentRoot.content());
 
-			xsd = rootEl.asXML();
+			xsd = root.asXML();
 		}
 		catch (Exception e) {
 		}

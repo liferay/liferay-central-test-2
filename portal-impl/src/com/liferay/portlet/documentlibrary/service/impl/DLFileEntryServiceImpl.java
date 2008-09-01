@@ -234,28 +234,22 @@ public class DLFileEntryServiceImpl extends DLFileEntryServiceBaseImpl {
 	}
 
 	public Lock getFileEntryLock(long folderId, String name)
-		throws PortalException, RemoteException, SystemException {
+		throws PortalException, RemoteException {
 
 		String lockId = DLUtil.getLockId(folderId, name);
 
 		return lockService.getLock(DLFileEntry.class.getName(), lockId);
 	}
 
-	public Lock refreshFileEntryLock(String uuid, long expirationTime)
-		throws PortalException, RemoteException, SystemException {
-
-		return lockService.refresh(uuid, expirationTime);
-	}
-
 	public Lock lockFileEntry(long folderId, String name)
 		throws PortalException, RemoteException, SystemException {
 
 		return lockFileEntry(
-			folderId, name, DLFileEntryImpl.LOCK_EXPIRATION_TIME, null);
+			folderId, name, null, DLFileEntryImpl.LOCK_EXPIRATION_TIME);
 	}
 
 	public Lock lockFileEntry(
-			long folderId, String name, long expirationTime, String owner)
+			long folderId, String name, String owner, long expirationTime)
 		throws PortalException, RemoteException, SystemException {
 
 		if ((expirationTime <= 0) ||
@@ -271,6 +265,12 @@ public class DLFileEntryServiceImpl extends DLFileEntryServiceBaseImpl {
 			expirationTime);
 	}
 
+	public Lock refreshFileEntryLock(String lockUuid, long expirationTime)
+		throws PortalException, RemoteException {
+
+		return lockService.refresh(lockUuid, expirationTime);
+	}
+
 	public void unlockFileEntry(long folderId, String name)
 		throws RemoteException {
 
@@ -279,23 +279,25 @@ public class DLFileEntryServiceImpl extends DLFileEntryServiceBaseImpl {
 		lockService.unlock(DLFileEntry.class.getName(), lockId);
 	}
 
-	public void unlockFileEntry(long folderId, String name, String uuid)
+	public void unlockFileEntry(long folderId, String name, String lockUuid)
 		throws PortalException, RemoteException {
 
 		String lockId = DLUtil.getLockId(folderId, name);
 
-		if (Validator.isNotNull(uuid)) {
+		if (Validator.isNotNull(lockUuid)) {
 			try {
-				Lock lock =
-					lockService.getLock(DLFileEntry.class.getName(), lockId);
+				Lock lock = lockService.getLock(
+					DLFileEntry.class.getName(), lockId);
 
-				if (!lock.getUuid().equals(uuid)) {
+				if (!lock.getUuid().equals(lockUuid)) {
 					throw new InvalidLockException("UUIDs do not match");
 				}
 			}
 			catch (PortalException pe) {
-				if (!(pe instanceof NoSuchLockException) &&
-					!(pe instanceof ExpiredLockException)) {
+				if (pe instanceof ExpiredLockException ||
+					pe instanceof NoSuchLockException) {
+				}
+				else {
 					throw pe;
 				}
 			}

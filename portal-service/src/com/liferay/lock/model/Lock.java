@@ -22,6 +22,8 @@
 
 package com.liferay.lock.model;
 
+import com.liferay.portal.kernel.util.Validator;
+
 import java.io.Serializable;
 
 import java.util.Date;
@@ -32,26 +34,147 @@ import java.util.Date;
  * @author Brian Wing Shun Chan
  *
  */
-public interface Lock extends Comparable<Lock>, Serializable {
+public class Lock implements Comparable<Lock>, Serializable {
 
-	public String getClassName();
+	public Lock() {	
+	}
 
-	public Comparable<?> getPrimaryKey();
+	public Lock(
+		String uuid, String className, Comparable<?> pk, long userId,
+		String owner, long expirationTime) {
 
-	public long getUserId();
+		_uuid = uuid;
+		_className = className;
+		_pk = pk;
+		_userId = userId;
+		_owner = owner;
+		_expirationTime = expirationTime;
+		_date = new Date();
+	}
 
-	public String getOwner();
+	public int compareTo(Lock lock) {
+		if (lock == null) {
+			return -1;
+		}
 
-	public String getUuid();
+		int value = 0;
+		value = getClassName().compareTo(lock.getClassName());
 
-	public void setUuid(String uuid);
+		if (value != 0) {
+			return value;
+		}
 
-	public long getExpirationTime();
+		value = getUuid().compareTo(lock.getUuid());
 
-	public void setExpirationTime(long expirationTime);
+		if (value != 0) {
+			return value;
+		}
 
-	public boolean isExpired();
+		value = ((Comparable<Object>)getPrimaryKey()).compareTo(
+			lock.getPrimaryKey());
 
-	public Date getDate();
+		if (value != 0) {
+			return value;
+		}
+
+		value = getOwner().compareTo(lock.getOwner());
+
+		if (value != 0) {
+			return value;
+		}
+
+		value = getDate().compareTo(lock.getDate());
+
+		if (value != 0) {
+			return value;
+		}
+
+		return 0;
+	}
+
+	public boolean equals(Lock lock) {
+		if (lock == null) {
+			return false;
+		}
+
+		if (getClassName().equals(lock.getClassName()) &&
+			getPrimaryKey().equals(lock.getPrimaryKey())) {
+
+			return true;
+		}
+		else {
+			return false;
+		}
+	}
+
+	public String getClassName() {
+		return _className;
+	}
+
+	public Date getDate() {
+		return _date;
+	}
+
+	public long getExpirationTime() {
+		return _expirationTime;
+	}
+
+	public String getOwner() {
+		if (Validator.isNull(_owner)) {
+			return String.valueOf(_userId);
+		}
+		else {
+			return _owner;
+		}
+	}
+
+	public Comparable<?> getPrimaryKey() {
+		return _pk;
+	}
+
+	public long getUserId() {
+		return _userId;
+	}
+
+	public String getUuid() {
+		return _uuid;
+	}
+
+	public int hashCode() {
+		return getClassName().hashCode() + getPrimaryKey().hashCode();
+	}
+
+	public boolean isExpired() {
+		if (_expirationTime <= 0) {
+			return false;
+		}
+		else {
+			Date now = new Date();
+
+			if (now.getTime() > (_date.getTime() + _expirationTime)) {
+				return true;
+			}
+			else {
+				return false;
+			}
+		}
+	}
+
+	public void setExpirationTime(long expirationTime) {
+		_expirationTime = expirationTime;
+		_date = new Date();
+	}
+
+	public void setUuid(String uuid) {
+		_uuid = uuid;
+	}
+
+	private String _className;
+	private Comparable<?> _pk;
+	private long _userId;
+	private String _owner;
+	private String _uuid;
+	private long _expirationTime;
+	private Date _date;
 
 }

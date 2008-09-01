@@ -66,8 +66,8 @@ public class PropfindMethodImpl extends BasePropMethodImpl implements Method {
 
 			String xml = getResponseXML(webDavRequest, props);
 
-			response.setStatus(WebDAVUtil.SC_MULTI_STATUS);
 			response.setContentType(ContentTypes.TEXT_XML_UTF8);
+			response.setStatus(WebDAVUtil.SC_MULTI_STATUS);
 
 			try {
 				ServletResponseUtil.write(response, xml);

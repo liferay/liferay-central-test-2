@@ -153,20 +153,9 @@ public class DLFileEntryServiceJSON {
 
 	public static com.liferay.lock.model.Lock getFileEntryLock(long folderId,
 		java.lang.String name)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException, java.rmi.RemoteException {
+		throws com.liferay.portal.PortalException, java.rmi.RemoteException {
 		com.liferay.lock.model.Lock returnValue = DLFileEntryServiceUtil.getFileEntryLock(folderId,
 				name);
-
-		return returnValue;
-	}
-
-	public static com.liferay.lock.model.Lock refreshFileEntryLock(
-		java.lang.String uuid, long expirationTime)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException, java.rmi.RemoteException {
-		com.liferay.lock.model.Lock returnValue = DLFileEntryServiceUtil.refreshFileEntryLock(uuid,
-				expirationTime);
 
 		return returnValue;
 	}
@@ -182,11 +171,20 @@ public class DLFileEntryServiceJSON {
 	}
 
 	public static com.liferay.lock.model.Lock lockFileEntry(long folderId,
-		java.lang.String name, long expirationTime, java.lang.String owner)
+		java.lang.String name, java.lang.String owner, long expirationTime)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		com.liferay.lock.model.Lock returnValue = DLFileEntryServiceUtil.lockFileEntry(folderId,
-				name, expirationTime, owner);
+				name, owner, expirationTime);
+
+		return returnValue;
+	}
+
+	public static com.liferay.lock.model.Lock refreshFileEntryLock(
+		java.lang.String lockUuid, long expirationTime)
+		throws com.liferay.portal.PortalException, java.rmi.RemoteException {
+		com.liferay.lock.model.Lock returnValue = DLFileEntryServiceUtil.refreshFileEntryLock(lockUuid,
+				expirationTime);
 
 		return returnValue;
 	}
@@ -197,9 +195,9 @@ public class DLFileEntryServiceJSON {
 	}
 
 	public static void unlockFileEntry(long folderId, java.lang.String name,
-		java.lang.String uuid)
+		java.lang.String lockUuid)
 		throws com.liferay.portal.PortalException, java.rmi.RemoteException {
-		DLFileEntryServiceUtil.unlockFileEntry(folderId, name, uuid);
+		DLFileEntryServiceUtil.unlockFileEntry(folderId, name, lockUuid);
 	}
 
 	public static JSONObject updateFileEntry(long folderId, long newFolderId,

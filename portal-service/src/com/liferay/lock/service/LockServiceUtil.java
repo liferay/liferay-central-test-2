@@ -24,7 +24,6 @@ package com.liferay.lock.service;
 
 import com.liferay.lock.model.Lock;
 import com.liferay.portal.PortalException;
-import com.liferay.portal.SystemException;
 
 import java.rmi.RemoteException;
 
@@ -36,14 +35,14 @@ import java.rmi.RemoteException;
  */
 public class LockServiceUtil {
 
-	public static void clear() throws RemoteException, SystemException {
+	public static void clear() throws RemoteException {
 		LockService lockService = LockServiceFactory.getService();
 
 		lockService.clear();
 	}
 
 	public static Lock getLock(String className, Comparable<?> pk)
-		throws PortalException, RemoteException, SystemException {
+		throws PortalException, RemoteException {
 
 		LockService lockService = LockServiceFactory.getService();
 
@@ -52,7 +51,7 @@ public class LockServiceUtil {
 
 	public static boolean hasLock(
 			String className, Comparable<?> pk, long userId)
-		throws RemoteException, SystemException {
+		throws RemoteException {
 
 		LockService lockService = LockServiceFactory.getService();
 
@@ -60,7 +59,7 @@ public class LockServiceUtil {
 	}
 
 	public static boolean isLocked(String className, Comparable<?> pk)
-		throws RemoteException, SystemException {
+		throws RemoteException {
 
 		LockService lockService = LockServiceFactory.getService();
 
@@ -70,7 +69,7 @@ public class LockServiceUtil {
 	public static Lock lock(
 			String className, Comparable<?> pk, long userId, String owner,
 			long expirationTime)
-		throws PortalException, RemoteException, SystemException {
+		throws PortalException, RemoteException {
 
 		LockService lockService = LockServiceFactory.getService();
 
@@ -78,7 +77,7 @@ public class LockServiceUtil {
 	}
 
 	public static Lock refresh(String uuid, long expirationTime)
-		throws PortalException, RemoteException, SystemException {
+		throws PortalException, RemoteException {
 
 		LockService lockService = LockServiceFactory.getService();
 
@@ -86,7 +85,7 @@ public class LockServiceUtil {
 	}
 
 	public static void unlock(String className, Comparable<?> pk)
-		throws RemoteException, SystemException {
+		throws RemoteException {
 
 		LockService lockService = LockServiceFactory.getService();
 

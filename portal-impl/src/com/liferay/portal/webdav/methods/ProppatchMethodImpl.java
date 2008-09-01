@@ -75,8 +75,8 @@ public class ProppatchMethodImpl extends BasePropMethodImpl {
 
 			// Must set the status prior to writing the XML
 
-			response.setStatus(WebDAVUtil.SC_MULTI_STATUS);
 			response.setContentType(ContentTypes.TEXT_XML_UTF8);
+			response.setStatus(WebDAVUtil.SC_MULTI_STATUS);
 
 			try {
 				ServletResponseUtil.write(response, xml);

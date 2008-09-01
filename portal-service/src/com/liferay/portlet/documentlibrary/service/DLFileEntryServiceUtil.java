@@ -138,16 +138,8 @@ public class DLFileEntryServiceUtil {
 
 	public static com.liferay.lock.model.Lock getFileEntryLock(long folderId,
 		java.lang.String name)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException, java.rmi.RemoteException {
+		throws com.liferay.portal.PortalException, java.rmi.RemoteException {
 		return _service.getFileEntryLock(folderId, name);
-	}
-
-	public static com.liferay.lock.model.Lock refreshFileEntryLock(
-		java.lang.String uuid, long expirationTime)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException, java.rmi.RemoteException {
-		return _service.refreshFileEntryLock(uuid, expirationTime);
 	}
 
 	public static com.liferay.lock.model.Lock lockFileEntry(long folderId,
@@ -158,10 +150,16 @@ public class DLFileEntryServiceUtil {
 	}
 
 	public static com.liferay.lock.model.Lock lockFileEntry(long folderId,
-		java.lang.String name, long expirationTime, java.lang.String owner)
+		java.lang.String name, java.lang.String owner, long expirationTime)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
-		return _service.lockFileEntry(folderId, name, expirationTime, owner);
+		return _service.lockFileEntry(folderId, name, owner, expirationTime);
+	}
+
+	public static com.liferay.lock.model.Lock refreshFileEntryLock(
+		java.lang.String lockUuid, long expirationTime)
+		throws com.liferay.portal.PortalException, java.rmi.RemoteException {
+		return _service.refreshFileEntryLock(lockUuid, expirationTime);
 	}
 
 	public static void unlockFileEntry(long folderId, java.lang.String name)
@@ -170,9 +168,9 @@ public class DLFileEntryServiceUtil {
 	}
 
 	public static void unlockFileEntry(long folderId, java.lang.String name,
-		java.lang.String uuid)
+		java.lang.String lockUuid)
 		throws com.liferay.portal.PortalException, java.rmi.RemoteException {
-		_service.unlockFileEntry(folderId, name, uuid);
+		_service.unlockFileEntry(folderId, name, lockUuid);
 	}
 
 	public static com.liferay.portlet.documentlibrary.model.DLFileEntry updateFileEntry(

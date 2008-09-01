@@ -58,6 +58,15 @@ import org.dom4j.io.SAXReader;
 public class LockMethodImpl implements Method {
 
 	public int process(WebDAVRequest webDavRequest) throws WebDAVException {
+		try {
+			return doProcess(webDavRequest);
+		}
+		catch (Exception e) {
+			throw new WebDAVException(e);
+		}
+	}
+
+	protected int doProcess(WebDAVRequest webDavRequest) throws Exception {
 		WebDAVStorage storage = webDavRequest.getWebDAVStorage();
 
 		if (!storage.isSupportsClassTwo()) {
@@ -69,109 +78,103 @@ public class LockMethodImpl implements Method {
 		HttpServletRequest request = webDavRequest.getHttpServletRequest();
 		HttpServletResponse response = webDavRequest.getHttpServletResponse();
 
-		long timeout = WebDAVUtil.getTimeout(request);
-		long depth = WebDAVUtil.getDepth(request);
-		String lockUuid = webDavRequest.getLockUuid();
-		boolean exclusive = false;
-		String owner = null;
 		Lock lock = null;
 
+		String lockUuid = webDavRequest.getLockUuid();
+		long timeout = WebDAVUtil.getTimeout(request);
+
 		if (Validator.isNull(lockUuid)) {
-			try {
-				String xml = new String(
-					FileUtil.getBytes(request.getInputStream()));
+			String owner = null;
 
-				if (Validator.isNull(xml)) {
-					_log.error("Empty request XML");
+			String xml = new String(
+				FileUtil.getBytes(request.getInputStream()));
 
-					return statusCode;
+			if (Validator.isNull(xml)) {
+				_log.error("Empty request XML");
+
+				return statusCode;
+			}
+			else {
+				if (_log.isDebugEnabled()) {
+					_log.debug(
+						"Request XML\n" + XMLFormatter.toString(xml));
 				}
-				else {
-					if (_log.isDebugEnabled()) {
-						_log.debug(
-							"Request XML\n" + XMLFormatter.toString(xml));
+
+				SAXReader reader = new SAXReader();
+
+				Document doc = reader.read(new StringReader(xml));
+
+				Element root = doc.getRootElement();
+
+				boolean exclusive = false;
+
+				List<Element> lockscopeEls = root.element(
+					"lockscope").elements();
+
+				for (Element scopeEl : lockscopeEls) {
+					String name = GetterUtil.getString(scopeEl.getName());
+
+					if (name.equals("exclusive")) {
+						exclusive = true;
 					}
+				}
 
-					// Parse XML Request
+				if (!exclusive) {
+					return HttpServletResponse.SC_BAD_REQUEST;
+				}
 
-					SAXReader reader = new SAXReader();
+				Element ownerEl = root.element("owner");
 
-					Document doc = reader.read(new StringReader(xml));
+				owner = ownerEl.getTextTrim();
 
-					Element root = doc.getRootElement();
+				if (Validator.isNull(owner)) {
+					List<Element> childEls = ownerEl.elements("href");
 
-					List<Element> lockscope =
-						root.element("lockscope").elements();
-
-					for (Element scope : lockscope) {
-						String name = GetterUtil.getString(scope.getName());
-
-						if (name.equals("exclusive")) {
-							exclusive = true;
-						}
-					}
-
-					if (!exclusive) {
-						return HttpServletResponse.SC_BAD_REQUEST;
-					}
-
-					Element ownerEl = root.element("owner");
-
-					owner = ownerEl.getTextTrim();
-
-					if (Validator.isNull(owner)) {
-						List<Element> childEls = ownerEl.elements("href");
-
-						for (Element childEl : childEls) {
-							owner = childEl.getTextTrim();
-							owner = "<D:href>" + owner + "</D:href>";
-						}
+					for (Element childEl : childEls) {
+						owner =
+							"<D:href>" + childEl.getTextTrim() + "</D:href>";
 					}
 				}
 			}
-			catch (Exception e) {
-				throw new WebDAVException(e);
-			}
 
-			lock = storage.lockResource(webDavRequest, timeout, owner);
+			lock = storage.lockResource(webDavRequest, owner, timeout);
 		}
 		else {
 			lock = storage.refreshResourceLock(
 				webDavRequest, lockUuid, timeout);
 		}
 
-		if (Validator.isNotNull(lock)) {
-			String xml = getResponseXML(lock, depth);
-
-			if (_log.isDebugEnabled()) {
-				_log.debug("Response XML\n" + xml);
-			}
-
-			response.setHeader(
-				"Lock-Token",
-				"<" + WebDAVUtil.TOKEN_PREFIX + lock.getUuid() + ">");
-			response.setStatus(HttpServletResponse.SC_OK);
-			response.setContentType(ContentTypes.TEXT_XML_UTF8);
-
-			try {
-				ServletResponseUtil.write(response, xml);
-			}
-			catch (Exception e) {
-				if (_log.isWarnEnabled()) {
-					_log.warn(e);
-				}
-			}
-
-			return -1;
-		}
-		else {
+		if (lock == null) {
 			return WebDAVUtil.SC_LOCKED;
 		}
+
+		long depth = WebDAVUtil.getDepth(request);
+
+		String xml = getResponseXML(lock, depth);
+
+		if (_log.isDebugEnabled()) {
+			_log.debug("Response XML\n" + xml);
+		}
+
+		response.setContentType(ContentTypes.TEXT_XML_UTF8);
+		response.setStatus(HttpServletResponse.SC_OK);
+
+		response.setHeader(
+			"Lock-Token", "<" + WebDAVUtil.TOKEN_PREFIX + lock.getUuid() + ">");
+
+		try {
+			ServletResponseUtil.write(response, xml);
+		}
+		catch (Exception e) {
+			if (_log.isWarnEnabled()) {
+				_log.warn(e);
+			}
+		}
+
+		return -1;
 	}
 
-	protected String getResponseXML(Lock lock, long depth)
-		throws WebDAVException {
-
+	protected String getResponseXML(Lock lock, long depth) throws Exception {
 		StringBuilder sb = new StringBuilder();
 
 		long timeoutSecs = lock.getExpirationTime() / Time.SECOND;
@@ -196,12 +199,7 @@ public class LockMethodImpl implements Method {
 		sb.append("</D:lockdiscovery>");
 		sb.append("</D:prop>");
 
-		try {
-			return XMLFormatter.toString(sb.toString());
-		}
-		catch (Exception e) {
-			throw new WebDAVException(e);
-		}
+		return XMLFormatter.toString(sb.toString());
 	}
 
 	private static Log _log = LogFactory.getLog(LockMethodImpl.class);

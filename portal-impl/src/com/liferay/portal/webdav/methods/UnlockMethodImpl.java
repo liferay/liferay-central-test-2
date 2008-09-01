@@ -63,8 +63,7 @@ public class UnlockMethodImpl implements Method {
 	protected String getToken(HttpServletRequest request) {
 		String token = StringPool.BLANK;
 
-		String value =
-			GetterUtil.getString(request.getHeader("Lock-Token"));
+		String value = GetterUtil.getString(request.getHeader("Lock-Token"));
 
 		if (_log.isInfoEnabled()) {
 			_log.info("\"Lock-Token\" header is " + value);

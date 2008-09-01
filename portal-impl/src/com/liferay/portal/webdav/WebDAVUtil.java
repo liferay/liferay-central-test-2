@@ -60,14 +60,14 @@ import org.apache.commons.logging.LogFactory;
  */
 public class WebDAVUtil {
 
-	public static final String TOKEN_PREFIX = "opaquelocktoken:";
-
 	public static final Namespace DAV_URI = SAXReaderUtil.createNamespace(
 		"D", "DAV:");
 
 	public static final int SC_MULTI_STATUS = 207;
 
 	public static final int SC_LOCKED = 423;
+
+	public static final String TOKEN_PREFIX = "opaquelocktoken:";
 
 	public static String fixPath(String path) {
 		if (path.endsWith(StringPool.SLASH)) {
@@ -171,6 +171,40 @@ public class WebDAVUtil {
 		}
 	}
 
+	public static String getLockUuid(HttpServletRequest request)
+		throws WebDAVException {
+
+		String token = StringPool.BLANK;
+
+		String value = GetterUtil.getString(request.getHeader("If"));
+
+		if (_log.isInfoEnabled()) {
+			_log.info("\"If\" header is " + value);
+		}
+
+		if (value.contains("(<DAV:no-lock>)")) {
+			if (_log.isWarnEnabled()) {
+				_log.warn("Lock tokens can never be <DAV:no-lock>");
+			}
+
+			throw new WebDAVException();
+		}
+
+		int beg = value.indexOf(TOKEN_PREFIX);
+
+		if (beg >= 0) {
+			beg += TOKEN_PREFIX.length();
+
+			if (beg < value.length()) {
+				int end = value.indexOf(">", beg);
+
+				token = GetterUtil.getString(value.substring(beg, end));
+			}
+		}
+
+		return token;
+	}
+
 	public static String[] getPathArray(String path) {
 		return getPathArray(path, false);
 	}
@@ -230,40 +264,6 @@ public class WebDAVUtil {
 		}
 
 		return timeout * Time.SECOND;
-	}
-
-	public static String getLockUuid(HttpServletRequest request)
-		throws WebDAVException {
-
-		String token = StringPool.BLANK;
-
-		String value = GetterUtil.getString(request.getHeader("If"));
-
-		if (_log.isInfoEnabled()) {
-			_log.info("\"If\" header is " + value);
-		}
-
-		if (value.contains("(<DAV:no-lock>)")) {
-			if (_log.isWarnEnabled()) {
-				_log.warn("Lock tokens can never be <DAV:no-lock>");
-			}
-
-			throw new WebDAVException();
-		}
-
-		int beg = value.indexOf(TOKEN_PREFIX);
-
-		if (beg >= 0) {
-			beg += TOKEN_PREFIX.length();
-
-			if (beg < value.length()) {
-				int end = value.indexOf(">", beg);
-
-				token = GetterUtil.getString(value.substring(beg, end));
-			}
-		}
-
-		return token;
 	}
 
 	public static String getWebId(String path) throws WebDAVException {
