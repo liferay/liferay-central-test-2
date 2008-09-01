@@ -148,7 +148,7 @@ public class PortletClassInvoker {
 		}
 
 		ClassLoader contextClassLoader =
-			PortalClassLoaderUtil.getClassLoader();
+			Thread.currentThread().getContextClassLoader();
 
 		try {
 			Thread.currentThread().setContextClassLoader(portletClassLoader);
