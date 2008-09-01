@@ -28,6 +28,8 @@ import com.liferay.portal.kernel.plugin.PluginPackage;
 import com.liferay.portal.kernel.pop.MessageListener;
 import com.liferay.portal.kernel.portlet.ConfigurationAction;
 import com.liferay.portal.kernel.portlet.FriendlyURLMapper;
+import com.liferay.portal.kernel.portlet.PortletBag;
+import com.liferay.portal.kernel.portlet.PortletBagPool;
 import com.liferay.portal.kernel.portlet.PortletLayoutListener;
 import com.liferay.portal.kernel.search.Indexer;
 import com.liferay.portal.kernel.servlet.URLEncoder;
@@ -50,8 +52,7 @@ import com.liferay.portal.service.UserLocalServiceUtil;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PropsValues;
 import com.liferay.portal.util.QNameUtil;
-import com.liferay.portlet.PortletBag;
-import com.liferay.portlet.PortletBagPool;
+import com.liferay.portlet.PortletBagImpl;
 import com.liferay.portlet.social.model.SocialActivityInterpreter;
 import com.liferay.portlet.social.model.SocialRequestInterpreter;
 
@@ -818,7 +819,8 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 	public SocialActivityInterpreter getSocialActivityInterpreterInstance() {
 		if (Validator.isNotNull(getSocialActivityInterpreterClass())) {
 			if (_portletApp.isWARFile()) {
-				PortletBag portletBag = PortletBagPool.get(getRootPortletId());
+				PortletBagImpl portletBag =
+					(PortletBagImpl)PortletBagPool.get(getRootPortletId());
 
 				return portletBag.getSocialActivityInterpreterInstance();
 			}
@@ -861,7 +863,8 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 	public SocialRequestInterpreter getSocialRequestInterpreterInstance() {
 		if (Validator.isNotNull(getSocialRequestInterpreterClass())) {
 			if (_portletApp.isWARFile()) {
-				PortletBag portletBag = PortletBagPool.get(getRootPortletId());
+				PortletBagImpl portletBag =
+					(PortletBagImpl)PortletBagPool.get(getRootPortletId());
 
 				return portletBag.getSocialRequestInterpreterInstance();
 			}

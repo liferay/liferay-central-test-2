@@ -33,6 +33,7 @@ import com.liferay.portal.kernel.lar.PortletDataHandler;
 import com.liferay.portal.kernel.pop.MessageListener;
 import com.liferay.portal.kernel.portlet.ConfigurationAction;
 import com.liferay.portal.kernel.portlet.FriendlyURLMapper;
+import com.liferay.portal.kernel.portlet.PortletBagPool;
 import com.liferay.portal.kernel.portlet.PortletLayoutListener;
 import com.liferay.portal.kernel.search.Indexer;
 import com.liferay.portal.kernel.servlet.PortletServlet;
@@ -59,8 +60,7 @@ import com.liferay.portal.util.PropsValues;
 import com.liferay.portal.util.WebAppPool;
 import com.liferay.portal.util.WebKeys;
 import com.liferay.portlet.CustomUserAttributes;
-import com.liferay.portlet.PortletBag;
-import com.liferay.portlet.PortletBagPool;
+import com.liferay.portlet.PortletBagImpl;
 import com.liferay.portlet.PortletConfigFactory;
 import com.liferay.portlet.PortletContextBag;
 import com.liferay.portlet.PortletContextBagPool;
@@ -511,7 +511,7 @@ public class PortletHotDeployListener extends BaseHotDeployListener {
 			}
 		}
 
-		PortletBag portletBag = new PortletBag(
+		PortletBagImpl portletBag = new PortletBagImpl(
 			portlet.getPortletId(), servletContext, portletInstance,
 			configurationActionInstance, indexerInstance, schedulerInstance,
 			friendlyURLMapperInstance, urlEncoderInstance,

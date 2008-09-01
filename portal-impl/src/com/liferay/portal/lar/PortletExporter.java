@@ -27,9 +27,9 @@ import com.liferay.portal.NoSuchPortletPreferencesException;
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.lar.PortletDataContext;
-import com.liferay.portal.kernel.lar.PortletDataHandler;
 import com.liferay.portal.kernel.lar.PortletDataHandlerKeys;
 import com.liferay.portal.kernel.util.CharPool;
+import com.liferay.portal.kernel.util.PortletClassInvoker;
 import com.liferay.portal.kernel.util.ReleaseInfo;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
@@ -522,10 +522,10 @@ public class PortletExporter {
 			Element parentEl)
 		throws PortalException, SystemException {
 
-		PortletDataHandler portletDataHandler =
-			portlet.getPortletDataHandlerInstance();
+		String portletDataHandlerClass =
+			portlet.getPortletDataHandlerClass();
 
-		if (portletDataHandler == null) {
+		if (portletDataHandlerClass == null) {
 			return;
 		}
 
@@ -559,8 +559,16 @@ public class PortletExporter {
 			return;
 		}
 
-		String data = portletDataHandler.exportData(
-			context, portletId, portletPreferences);
+		String data = null;
+
+		try {
+			data = (String)PortletClassInvoker.invoke(
+				portletId, portletDataHandlerClass, "exportData", context,
+				portletId, portletPreferences);
+		}
+		catch (Exception e) {
+			throw new SystemException(e);
+		}
 
 		if (data == null) {
 			if (_log.isDebugEnabled()) {

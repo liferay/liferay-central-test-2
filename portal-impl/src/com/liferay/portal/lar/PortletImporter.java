@@ -31,11 +31,11 @@ import com.liferay.portal.PortalException;
 import com.liferay.portal.PortletIdException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.lar.PortletDataContext;
-import com.liferay.portal.kernel.lar.PortletDataHandler;
 import com.liferay.portal.kernel.lar.PortletDataHandlerKeys;
 import com.liferay.portal.kernel.lar.UserIdStrategy;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.ObjectValuePair;
+import com.liferay.portal.kernel.util.PortletClassInvoker;
 import com.liferay.portal.kernel.util.ReleaseInfo;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.xml.Document;
@@ -285,10 +285,10 @@ public class PortletImporter {
 			return null;
 		}
 
-		PortletDataHandler portletDataHandler =
-			portlet.getPortletDataHandlerInstance();
+		String portletDataHandlerClass =
+			portlet.getPortletDataHandlerClass();
 
-		if (portletDataHandler == null) {
+		if (portletDataHandlerClass == null) {
 			if (_log.isDebugEnabled()) {
 				_log.debug(
 					"Do not delete portlet data for " + portletId +
@@ -307,8 +307,14 @@ public class PortletImporter {
 			(PortletPreferencesImpl)PortletPreferencesSerializer.fromDefaultXML(
 				portletPreferences.getPreferences());
 
-		prefsImpl = (PortletPreferencesImpl)portletDataHandler.deleteData(
-			context, portletId, prefsImpl);
+		try {
+			prefsImpl = (PortletPreferencesImpl)PortletClassInvoker.invoke(
+				portletId, portletDataHandlerClass, "deleteData", context,
+				portletId, prefsImpl);
+		}
+		catch (Exception e) {
+			throw new SystemException(e);
+		}
 
 		if (prefsImpl == null) {
 			return null;
@@ -370,10 +376,10 @@ public class PortletImporter {
 			return null;
 		}
 
-		PortletDataHandler portletDataHandler =
-			portlet.getPortletDataHandlerInstance();
+		String portletDataHandlerClass =
+			portlet.getPortletDataHandlerClass();
 
-		if (portletDataHandler == null) {
+		if (portletDataHandlerClass == null) {
 			if (_log.isDebugEnabled()) {
 				_log.debug(
 					"Do not import portlet data for " + portletId +
@@ -399,8 +405,14 @@ public class PortletImporter {
 		String portletData = context.getZipEntryAsString(
 			portletDataRefEl.attributeValue("path"));
 
-		prefsImpl = (PortletPreferencesImpl)portletDataHandler.importData(
-			context, portletId, prefsImpl, portletData);
+		try {
+			prefsImpl = (PortletPreferencesImpl)PortletClassInvoker.invoke(
+				portletId, portletDataHandlerClass, "importData", context,
+				portletId, prefsImpl, portletData);
+		}
+		catch (Exception e) {
+			throw new SystemException(e);
+		}
 
 		if (prefsImpl == null) {
 			return null;

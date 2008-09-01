@@ -27,6 +27,7 @@ import com.liferay.portal.kernel.lar.PortletDataHandler;
 import com.liferay.portal.kernel.pop.MessageListener;
 import com.liferay.portal.kernel.portlet.ConfigurationAction;
 import com.liferay.portal.kernel.portlet.FriendlyURLMapper;
+import com.liferay.portal.kernel.portlet.PortletBag;
 import com.liferay.portal.kernel.portlet.PortletLayoutListener;
 import com.liferay.portal.kernel.search.Indexer;
 import com.liferay.portal.kernel.servlet.URLEncoder;
@@ -49,9 +50,9 @@ import javax.servlet.ServletContext;
  * @author Brian Wing Shun Chan
  *
  */
-public class PortletBag {
+public class PortletBagImpl implements PortletBag {
 
-	public PortletBag(
+	public PortletBagImpl(
 		String portletName, ServletContext	servletContext,
 		Portlet portletInstance,
 		ConfigurationAction configurationActionInstance,
