@@ -275,6 +275,40 @@ public class SocialActivityLocalServiceUtil {
 		return _service.getUserActivitiesCount(userId);
 	}
 
+	public static java.util.List<com.liferay.portlet.social.model.SocialActivity> getUserGroupsActivities(
+		long userId, int start, int end)
+		throws com.liferay.portal.SystemException {
+		return _service.getUserGroupsActivities(userId, start, end);
+	}
+
+	public static int getUserGroupsActivitiesCount(long userId)
+		throws com.liferay.portal.SystemException {
+		return _service.getUserGroupsActivitiesCount(userId);
+	}
+
+	public static java.util.List<com.liferay.portlet.social.model.SocialActivity> getUserGroupsAndOrganizationsActivities(
+		long userId, int start, int end)
+		throws com.liferay.portal.SystemException {
+		return _service.getUserGroupsAndOrganizationsActivities(userId, start,
+			end);
+	}
+
+	public static int getUserGroupsAndOrganizationsActivitiesCount(long userId)
+		throws com.liferay.portal.SystemException {
+		return _service.getUserGroupsAndOrganizationsActivitiesCount(userId);
+	}
+
+	public static java.util.List<com.liferay.portlet.social.model.SocialActivity> getUserOrganizationsActivities(
+		long userId, int start, int end)
+		throws com.liferay.portal.SystemException {
+		return _service.getUserOrganizationsActivities(userId, start, end);
+	}
+
+	public static int getUserOrganizationsActivitiesCount(long userId)
+		throws com.liferay.portal.SystemException {
+		return _service.getUserOrganizationsActivitiesCount(userId);
+	}
+
 	public static SocialActivityLocalService getService() {
 		return _service;
 	}

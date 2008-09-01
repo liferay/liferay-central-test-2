@@ -33,7 +33,7 @@ int end = 10;
 List<SocialActivity> activities = null;
 
 if (group.isCommunity()) {
-	activities = SocialActivityLocalServiceUtil.getGroupActivities(group.getClassPK(), start, end);
+	activities = SocialActivityLocalServiceUtil.getGroupActivities(group.getGroupId(), start, end);
 }
 else if (group.isOrganization()) {
 	activities = SocialActivityLocalServiceUtil.getOrganizationActivities(group.getClassPK(), start, end);

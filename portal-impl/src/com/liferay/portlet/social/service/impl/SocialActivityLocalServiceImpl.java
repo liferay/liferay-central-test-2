@@ -320,4 +320,44 @@ public class SocialActivityLocalServiceImpl
 		return socialActivityPersistence.countByUserId(userId);
 	}
 
+	public List<SocialActivity> getUserGroupsActivities(
+			long userId, int start, int end)
+		throws SystemException {
+
+		return socialActivityFinder.findByUserGroups(userId, start, end);
+	}
+
+	public int getUserGroupsActivitiesCount(long userId)
+		throws SystemException {
+
+		return socialActivityFinder.countByUserGroups(userId);
+	}
+
+	public List<SocialActivity> getUserGroupsAndOrganizationsActivities(
+			long userId, int start, int end)
+		throws SystemException {
+
+		return socialActivityFinder.findByUserGroupsAndOrganizations(
+			userId, start, end);
+	}
+
+	public int getUserGroupsAndOrganizationsActivitiesCount(long userId)
+		throws SystemException {
+
+		return socialActivityFinder.countByUserGroupsAndOrganizations(userId);
+	}
+
+	public List<SocialActivity> getUserOrganizationsActivities(
+			long userId, int start, int end)
+		throws SystemException {
+
+		return socialActivityFinder.findByUserOrganizations(userId, start, end);
+	}
+
+	public int getUserOrganizationsActivitiesCount(long userId)
+		throws SystemException {
+
+		return socialActivityFinder.countByUserOrganizations(userId);
+	}
+
 }

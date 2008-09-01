@@ -41,6 +41,15 @@ public interface SocialActivityFinder {
 	public int countByRelationType(long userId, int type)
 		throws com.liferay.portal.SystemException;
 
+	public int countByUserGroups(long userId)
+		throws com.liferay.portal.SystemException;
+
+	public int countByUserGroupsAndOrganizations(long userId)
+		throws com.liferay.portal.SystemException;
+
+	public int countByUserOrganizations(long userId)
+		throws com.liferay.portal.SystemException;
+
 	public java.util.List<com.liferay.portlet.social.model.SocialActivity> findByGroupId(
 		long groupId, int start, int end)
 		throws com.liferay.portal.SystemException;
@@ -55,5 +64,17 @@ public interface SocialActivityFinder {
 
 	public java.util.List<com.liferay.portlet.social.model.SocialActivity> findByRelationType(
 		long userId, int type, int start, int end)
+		throws com.liferay.portal.SystemException;
+
+	public java.util.List<com.liferay.portlet.social.model.SocialActivity> findByUserGroups(
+		long userId, int start, int end)
+		throws com.liferay.portal.SystemException;
+
+	public java.util.List<com.liferay.portlet.social.model.SocialActivity> findByUserGroupsAndOrganizations(
+		long userId, int start, int end)
+		throws com.liferay.portal.SystemException;
+
+	public java.util.List<com.liferay.portlet.social.model.SocialActivity> findByUserOrganizations(
+		long userId, int start, int end)
 		throws com.liferay.portal.SystemException;
 }
