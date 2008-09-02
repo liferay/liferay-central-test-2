@@ -186,6 +186,7 @@ jQuery.extend(
 
 		createPermissionURL: function(portletResource, modelResource, modelResourceDescription, resourcePrimKey) {
 			var redirect = location.href;
+
 			var portletURL = Liferay.PortletURL.createRenderURL();
 
 			portletURL.setPlid(themeDisplay.getPlid());
