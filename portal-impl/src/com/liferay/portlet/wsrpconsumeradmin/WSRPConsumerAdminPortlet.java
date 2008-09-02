@@ -54,7 +54,8 @@ public class WSRPConsumerAdminPortlet
 		if ((action == AdminPortletAction.CREATE) ||
 			(action == AdminPortletAction.CREATE_CHANNEL) ||
 			(action == AdminPortletAction.DELETE) ||
-			(action == AdminPortletAction.DELETE_CHANNELS)) {
+			(action == AdminPortletAction.DELETE_CHANNELS) ||
+			(action == AdminPortletAction.UPDATE)) {
 
 			if (actionRequest.getAttribute("CONSUMER_ADMIN_ERROR") != null) {
 				setRenderParameters(actionRequest, actionResponse);

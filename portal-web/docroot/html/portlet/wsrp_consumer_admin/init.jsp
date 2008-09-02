@@ -25,4 +25,6 @@
 <%@ include file="/html/portlet/init.jsp" %>
 
 <%@ page import="com.sun.portal.wsrp.consumer.portlets.AdminPortletAction" %>
+<%@ page import="com.sun.portal.wsrp.consumer.portlets.beans.ConfiguredProducerBean" %>
 <%@ page import="com.sun.portal.wsrp.consumer.portlets.beans.ConfiguredProducerElementBean" %>
+<%@ page import="com.sun.portal.wsrp.consumer.portlets.handlers.ConsumerHandlerConstants" %>
