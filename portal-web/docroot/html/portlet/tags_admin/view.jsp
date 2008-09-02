@@ -73,6 +73,12 @@
 							<select class="vocabulary-select-list" name="vocabulary-select-list"></select>
 						</div>
 
+						<div class="entry-permissions-actions">
+							<liferay-ui:input-permissions
+								modelName="<%= TagsEntry.class.getName() %>"
+							/>
+						</div>
+
 						<div class="button-holder">
 							<input class="vocabulary-save-entry" type="button" value="<liferay-ui:message key="save" />" />
 
@@ -90,6 +96,12 @@
 							</label>
 
 							<input class="vocabulary-name" name="vocabulary-name" type="text" value="" />
+						</div>
+
+						<div class="vocabulary-permissions-actions">
+							<liferay-ui:input-permissions
+								modelName="<%= TagsVocabulary.class.getName() %>"
+							/>
 						</div>
 
 						<div class="button-holder">
@@ -156,6 +168,8 @@
 				<input class="vocabulary-close" type="button" value="<liferay-ui:message key="close" />" />
 
 				<input class="vocabulary-delete-entries-button" type="button" value="<liferay-ui:message key="delete" />" />
+
+				<input class="permissions-entries-button" type="button" value="<liferay-ui:message key="edit-entry-permissions" />" />
 			</div>
 		</div>
 	</td>
@@ -164,6 +178,7 @@
 	<td colspan="3">
 		<div class="vocabulary-footer">
 			<input class="vocabulary-delete-list-button" type="button" value="<liferay-ui:message key="delete-tag-set" />" />
+			<input class="permissions-vocabulary-button" type="button" value="<liferay-ui:message key="edit-vocabulary-permissions" />" />
 		</div>
 	</td>
 </tr>
@@ -174,7 +189,7 @@
 <script>
 	jQuery(
 		function() {
-			new Liferay.Portlet.TagsAdmin();
+			new Liferay.Portlet.TagsAdmin('<%= portletDisplay.getId() %>');
 		}
 	);
 </script>

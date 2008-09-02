@@ -1,9 +1,10 @@
 Liferay.Portlet.TagsAdmin = new Class({
-	initialize: function() {
+	initialize: function(portletId) {
 		var instance = this;
 
 		var childrenContainer = jQuery(instance._entryScopeClass);
 
+		instance.portletId = portletId;
 		instance._container = jQuery('.vocabulary-container');
 
 		jQuery('.vocabulary-close').click(
@@ -59,7 +60,7 @@ Liferay.Portlet.TagsAdmin = new Class({
 
 		var changeToolbarSectionLabels = function(label) {
 			label = Liferay.Language.get(label);
-			jQuery('.vocabulary-toolbar-section .panel-content strong:first').html(label);
+			jQuery('.vocabulary-toolbar-section .panel-content label:first').html(label);
 		};
 
 		var changeVocabularyHeaderLabel = function(label){
@@ -122,6 +123,24 @@ Liferay.Portlet.TagsAdmin = new Class({
 			}
 		);
 
+		jQuery('.permissions-entries-button').click(function() {
+			var portletURL = Liferay.PortletURL.createPermissionURL(
+				instance.portletId, "com.liferay.portlet.tags.model.TagsEntry",
+				instance._selectedEntryName, instance._selectedEntryId);
+			var url = portletURL.toString();
+
+			submitForm(document.hrefFm, url);
+		});
+
+		jQuery('.permissions-vocabulary-button').click(function() {
+			var portletURL = Liferay.PortletURL.createPermissionURL(
+				instance.portletId, "com.liferay.portlet.tags.model.TagsVocabulary",
+				instance._selectedVocabularyName, instance._selectedVocabularyId);
+			var url = portletURL.toString();
+
+			submitForm(document.hrefFm, url);
+		});
+
 		jQuery('#vocabulary-search-bar').change(
 			function(event) {
 				jQuery('#vocabulary-search-input').focus();
@@ -166,10 +185,19 @@ Liferay.Portlet.TagsAdmin = new Class({
 				if (confirm(Liferay.Language.get('are-you-sure-you-want-to-delete-this-entry'))) {
 					instance._deleteEntry(
 						instance._selectedEntryId,
-						function() {
-							instance._closeEditSection();
-							instance._hideToolbarSections();
-							instance._displayVocabularyEntries(instance._selectedVocabularyName);
+						function(message) {
+							var exception = message.exception;
+
+							if (!exception) {
+								instance._closeEditSection();
+								instance._hideToolbarSections();
+								instance._displayVocabularyEntries(instance._selectedVocabularyName);
+							}
+							else {
+								if (exception.indexOf('auth.PrincipalException') > -1) {
+									instance._sendMessage('error', 'you-do-not-have-permission-to-access-the-requested-resource');
+								}
+							}
 						}
 					);
 				}
@@ -181,10 +209,18 @@ Liferay.Portlet.TagsAdmin = new Class({
 				if (confirm(Liferay.Language.get('are-you-sure-you-want-to-delete-this-list'))) {
 					instance._deleteVocabulary(
 						instance._selectedVocabularyId,
-						function() {
-							instance._closeEditSection();
-							instance._hideToolbarSections();
-							instance._loadData();
+						function(message) {
+							var exception = message.exception;
+							if (!exception) {
+								instance._closeEditSection();
+								instance._hideToolbarSections();
+								instance._loadData();
+							}
+							else {
+								if (exception.indexOf('auth.PrincipalException') > -1) {
+									instance._sendMessage('error', 'you-do-not-have-permission-to-access-the-requested-resource');
+								}
+							}
 						}
 					);
 				}
@@ -194,6 +230,17 @@ Liferay.Portlet.TagsAdmin = new Class({
 		jQuery('.close-panel').click(
 			function() {
 				instance._hideToolbarSections();
+			}
+		);
+
+		jQuery('.lfr-floating-panel input:text').keyup(
+			function(event) {
+				var ESC_KEY_CODE = 27;
+				var keyCode = event.keyCode;
+
+				if (keyCode == ESC_KEY_CODE) {
+					instance._hideToolbarSections();
+				}
 			}
 		);
 
@@ -449,7 +496,15 @@ Liferay.Portlet.TagsAdmin = new Class({
 						var li = jQuery(this).parents('li:first');
 
 						li.attr('data-vocabulary', value);
-						instance._updateVocabulary(vocabularyId, vocabularyName, folksonomy);
+
+						instance._updateVocabulary(vocabularyId, vocabularyName, folksonomy, function(message) {
+							var exception = message.exception;
+							if (exception) {
+								if (exception.indexOf('auth.PrincipalException') > -1) {
+									instance._sendMessage('error', 'you-do-not-have-permission-to-access-the-requested-resource');
+								}
+							}
+						});
 
 						return value;
 					},
@@ -528,13 +583,18 @@ Liferay.Portlet.TagsAdmin = new Class({
 
 	_addEntry: function(entryName, vocabulary, callback) {
 		var instance = this;
+		var communityPermission = instance._getEntryPermissionsEnabled('community');
+		var guestPermission = instance._getEntryPermissionsEnabled('guest');
 
 		Liferay.Service.Tags.TagsEntry.addEntry(
 			{
+				plid: themeDisplay.getPlid(),
 				groupId: themeDisplay.getGroupId(),
 				name: entryName,
 				vocabulary: vocabulary,
-				properties: []
+				properties: [],
+				communityPermissions: communityPermission,
+				guestPermissions: guestPermission
 			},
 			function(message) {
 				var exception = message.exception;
@@ -576,7 +636,9 @@ Liferay.Portlet.TagsAdmin = new Class({
 					else if (exception.indexOf('NoSuchVocabularyException') > -1) {
 						errorKey = 'that-vocabulary-does-not-exists';
 					}
-
+					else if (exception.indexOf('auth.PrincipalException') > -1) {
+						errorKey = 'you-do-not-have-permission-to-access-the-requested-resource';
+					}
 					if (errorKey) {
 						instance._sendMessage('error', errorKey);
 					}
@@ -607,12 +669,17 @@ Liferay.Portlet.TagsAdmin = new Class({
 		var instance = this;
 
 		var folksonomy = (instance._selectedVocabulary == 'tag');
+		var communityPermission = instance._getVocabularyPermissionsEnabled('community');
+		var guestPermission = instance._getVocabularyPermissionsEnabled('guest');
 
 		Liferay.Service.Tags.TagsVocabulary.addVocabulary(
 			{
+				plid: themeDisplay.getPlid(),
 				groupId: themeDisplay.getGroupId(),
 				name: vocabulary,
-				folksonomy: folksonomy
+				folksonomy: folksonomy,
+				communityPermissions: communityPermission,
+				guestPermissions: guestPermission
 			},
 			function(message) {
 				var exception = message.exception;
@@ -650,6 +717,9 @@ Liferay.Portlet.TagsAdmin = new Class({
 					}
 					else if (exception.indexOf('NoSuchVocabularyException') > -1) {
 						errorKey = 'that-parent-vocabulary-does-not-exist';
+					}
+					else if (exception.indexOf('auth.PrincipalException') > -1) {
+						errorKey = 'you-do-not-have-permission-to-access-the-requested-resource';
 					}
 
 					if (errorKey) {
@@ -900,6 +970,36 @@ Liferay.Portlet.TagsAdmin = new Class({
 
 	_hideToolbarSections: function(){
 		jQuery('.vocabulary-toolbar-section, .entry-toolbar-section').hide();
+	},
+
+	_getEntryPermissionsEnabled: function(type) {
+		var buffer = [];
+	    var permissionsActions = jQuery('.entry-permissions-actions');
+	    var permission = permissionsActions.find('[name$='+type+'Permissions]:checked');
+
+	    permission.each(
+	        function() {
+	            var checkboxValue = jQuery(this).val();
+		    buffer.push(checkboxValue);
+	        }
+	    );
+	    buffer.join(',');
+	    return buffer.toString();
+	},
+
+	_getVocabularyPermissionsEnabled: function(type) {
+		var buffer = [];
+	    var permissionsActions = jQuery('.vocabulary-permissions-actions');
+	    var permission = permissionsActions.find('[name$='+type+'Permissions]:checked');
+
+	    permission.each(
+	        function() {
+	            var checkboxValue = jQuery(this).val();
+		    buffer.push(checkboxValue);
+	        }
+	    );
+	    buffer.join(',');
+	    return buffer.toString();
 	},
 
 	_loadData: function() {
@@ -1259,6 +1359,9 @@ Liferay.Portlet.TagsAdmin = new Class({
 					}
 					else if (exception.indexOf('NoSuchEntryException') > -1) {
 						instance._sendMessage('error', 'that-parent-category-does-not-exist');
+					}
+					else if (exception.indexOf('auth.PrincipalException') > -1) {
+						instance._sendMessage('error', 'you-do-not-have-permission-to-access-the-requested-resource');
 					}
 					else if (exception.indexOf('Exception') > -1) {
 						instance._sendMessage('error', 'one-of-your-fields-contain-invalid-characters');

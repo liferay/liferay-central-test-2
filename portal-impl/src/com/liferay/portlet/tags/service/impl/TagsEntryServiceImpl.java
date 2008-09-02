@@ -25,9 +25,16 @@ package com.liferay.portlet.tags.service.impl;
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.json.JSONArray;
+import com.liferay.portal.security.auth.PrincipalException;
+import com.liferay.portal.security.permission.ActionKeys;
+import com.liferay.portal.service.permission.PortletPermissionUtil;
+import com.liferay.portal.util.PortletKeys;
 import com.liferay.portlet.tags.model.TagsEntry;
+import com.liferay.portlet.tags.service.TagsEntryLocalServiceUtil;
 import com.liferay.portlet.tags.service.base.TagsEntryServiceBaseImpl;
+import com.liferay.portlet.tags.service.permission.TagsEntryPermission;
 
+import java.util.Iterator;
 import java.util.List;
 
 /**
@@ -36,62 +43,146 @@ import java.util.List;
  * @author Brian Wing Shun Chan
  * @author Jorge Ferrer
  * @author Alvaro del Castillo
+ * @author Eduardo Lundgren
  */
 public class TagsEntryServiceImpl extends TagsEntryServiceBaseImpl {
 
-	public TagsEntry addEntry(long groupId, String name)
+	public TagsEntry addEntry(long plid, long groupId, String name)
 		throws PortalException, SystemException {
+
+		PortletPermissionUtil.check(
+			getPermissionChecker(), plid, PortletKeys.TAGS_ADMIN,
+			ActionKeys.ADD_ENTRY);
 
 		return tagsEntryLocalService.addEntry(getUserId(), groupId, name);
 	}
 
-	public TagsEntry addEntry(long groupId, String name, String[] properties)
+	public TagsEntry addEntry(long plid, long groupId, String name,
+			String[] properties)
 		throws PortalException, SystemException {
+
+		PortletPermissionUtil.check(
+			getPermissionChecker(), plid, PortletKeys.TAGS_ADMIN,
+			ActionKeys.ADD_ENTRY);
 
 		return tagsEntryLocalService.addEntry(
 			getUserId(), groupId, name, properties);
 	}
 
 	public TagsEntry addEntry(
-			long groupId, String name, String vocabularyName,
+			long plid, long groupId, String name, String vocabularyName,
 			String[] properties)
 		throws PortalException, SystemException {
+
+		PortletPermissionUtil.check(
+				getPermissionChecker(), plid, PortletKeys.TAGS_ADMIN,
+				ActionKeys.ADD_ENTRY);
 
 		return tagsEntryLocalService.addEntry(
 			getUserId(), groupId, name, vocabularyName, properties);
 	}
 
 	public TagsEntry addEntry(
-			long groupId, String parentEntryName, String name,
+			long plid, long groupId, String name,
+			String vocabularyName, String[] properties,
+			String[] communityPermissions, String[] guestPermissions)
+		throws PortalException, SystemException {
+
+		PortletPermissionUtil.check(
+			getPermissionChecker(), plid, PortletKeys.TAGS_ADMIN,
+			ActionKeys.ADD_ENTRY);
+
+		return tagsEntryLocalService.addEntry(
+			getUserId(), groupId, name, vocabularyName, properties,
+			communityPermissions, guestPermissions);
+	}
+
+	public TagsEntry addEntry(
+			long plid, long groupId, String parentEntryName, String name,
 			String vocabularyName, String[] properties)
 		throws PortalException, SystemException {
+
+		PortletPermissionUtil.check(
+			getPermissionChecker(), plid, PortletKeys.TAGS_ADMIN,
+			ActionKeys.ADD_ENTRY);
 
 		return tagsEntryLocalService.addEntry(
 			getUserId(), groupId, parentEntryName, name, vocabularyName,
 			properties);
 	}
 
+	public TagsEntry addEntry(
+			long plid, long groupId, String parentEntryName, String name,
+			String vocabularyName, String[] properties,
+			String[] communityPermissions, String[] guestPermissions)
+		throws PortalException, SystemException {
+
+		PortletPermissionUtil.check(
+			getPermissionChecker(), plid, PortletKeys.TAGS_ADMIN,
+			ActionKeys.ADD_ENTRY);
+
+		return tagsEntryLocalService.addEntry(
+			getUserId(), groupId, parentEntryName, name, vocabularyName,
+			properties, communityPermissions, guestPermissions);
+	}
+
 	public void deleteEntry(long entryId)
 		throws PortalException, SystemException {
+
+		TagsEntryPermission.check(
+			getPermissionChecker(), entryId, ActionKeys.DELETE);
 
 		tagsEntryLocalService.deleteEntry(entryId);
 	}
 
 	public List<TagsEntry> getEntries(String className, long classPK)
-		throws SystemException {
+		throws SystemException, PrincipalException, PortalException {
 
-		return tagsEntryLocalService.getEntries(className, classPK);
+		List<TagsEntry> tagsEntries =
+			tagsEntryLocalService.getEntries(className, classPK);
+
+		Iterator<TagsEntry> itr = tagsEntries.iterator();
+
+		while (itr.hasNext()) {
+			TagsEntry tagEntry = itr.next();
+
+			if (!TagsEntryPermission.contains(
+					getPermissionChecker(), tagEntry, ActionKeys.VIEW)) {
+
+				itr.remove();
+			}
+		}
+
+		return tagsEntries;
 	}
 
 	public List<TagsEntry> getEntries(
 			long groupId, long classNameId, String name)
-		throws SystemException {
+		throws SystemException, PrincipalException, PortalException {
 
-		return tagsEntryLocalService.getEntries(groupId, classNameId, name);
+		List<TagsEntry> tagsEntries =
+			tagsEntryLocalService.getEntries(groupId, classNameId, name);
+
+		Iterator<TagsEntry> itr = tagsEntries.iterator();
+
+		while (itr.hasNext()) {
+			TagsEntry tagEntry = itr.next();
+
+			if (!TagsEntryPermission.contains(
+					getPermissionChecker(), tagEntry, ActionKeys.VIEW)) {
+
+				itr.remove();
+			}
+		}
+
+		return tagsEntries;
 	}
 
 	public TagsEntry getEntry(long entryId)
 		throws PortalException, SystemException {
+
+		TagsEntryPermission.check(
+			getPermissionChecker(), entryId, ActionKeys.VIEW);
 
 		return tagsEntryLocalService.getEntry(entryId);
 	}
@@ -100,28 +191,79 @@ public class TagsEntryServiceImpl extends TagsEntryServiceBaseImpl {
 			long groupId, String vocabularyName)
 		throws PortalException, SystemException {
 
-		return tagsEntryLocalService.getGroupVocabularyEntries(
-			groupId, vocabularyName);
+		List<TagsEntry> tagsEntries =
+			tagsEntryLocalService.getGroupVocabularyEntries(
+				groupId, vocabularyName);
+
+		Iterator<TagsEntry> itr = tagsEntries.iterator();
+
+		while (itr.hasNext()) {
+			TagsEntry tagEntry = itr.next();
+
+			if (!TagsEntryPermission.contains(
+					getPermissionChecker(), tagEntry, ActionKeys.VIEW)) {
+
+				itr.remove();
+			}
+		}
+
+		return tagsEntries;
 	}
 
 	public List<TagsEntry> getGroupVocabularyEntries(
 			long groupId, String parentEntryName, String vocabularyName)
 		throws PortalException, SystemException {
 
-		return tagsEntryLocalService.getGroupVocabularyEntries(
-			groupId, parentEntryName, vocabularyName);
+		List<TagsEntry> tagsEntries =
+			tagsEntryLocalService.getGroupVocabularyEntries(
+				groupId, parentEntryName, vocabularyName);
+
+		Iterator<TagsEntry> itr = tagsEntries.iterator();
+
+		while (itr.hasNext()) {
+			TagsEntry tagEntry = itr.next();
+
+			if (!TagsEntryPermission.contains(
+					getPermissionChecker(), tagEntry, ActionKeys.VIEW)) {
+
+				itr.remove();
+			}
+		}
+
+		return tagsEntries;
 	}
 
 	public List<TagsEntry> getGroupVocabularyRootEntries(
 			long groupId, String vocabularyName)
 		throws PortalException, SystemException {
 
-		return tagsEntryLocalService.getGroupVocabularyRootEntries(
-			groupId, vocabularyName);
+		List<TagsEntry> tagsEntries =
+			tagsEntryLocalService.getGroupVocabularyRootEntries(
+					groupId, vocabularyName);
+
+		Iterator<TagsEntry> itr = tagsEntries.iterator();
+
+		while (itr.hasNext()) {
+			TagsEntry tagEntry = itr.next();
+
+			if (!TagsEntryPermission.contains(
+					getPermissionChecker(), tagEntry, ActionKeys.VIEW)) {
+
+				itr.remove();
+			}
+		}
+
+		return tagsEntries;
 	}
 
 	public void mergeEntries(long fromEntryId, long toEntryId)
 		throws PortalException, SystemException {
+
+		TagsEntryPermission.check(
+			getPermissionChecker(), fromEntryId, ActionKeys.VIEW);
+
+		TagsEntryPermission.check(
+			getPermissionChecker(), toEntryId, ActionKeys.UPDATE);
 
 		tagsEntryLocalService.mergeEntries(fromEntryId, toEntryId);
 	}
@@ -158,6 +300,9 @@ public class TagsEntryServiceImpl extends TagsEntryServiceBaseImpl {
 	public TagsEntry updateEntry(long entryId, String name)
 		throws PortalException, SystemException {
 
+		TagsEntryPermission.check(
+			getPermissionChecker(), entryId, ActionKeys.UPDATE);
+
 		return tagsEntryLocalService.updateEntry(entryId, name);
 	}
 
@@ -166,12 +311,21 @@ public class TagsEntryServiceImpl extends TagsEntryServiceBaseImpl {
 			String vocabularyName)
 		throws PortalException, SystemException {
 
+		TagsEntry entry = TagsEntryLocalServiceUtil.getEntry(entryId);
+
+		TagsEntryPermission.check(
+			getPermissionChecker(), name, entry.getGroupId(),
+			ActionKeys.UPDATE);
+
 		return tagsEntryLocalService.updateEntry(
 			entryId, parentEntryName, name, vocabularyName);
 	}
 
 	public TagsEntry updateEntry(long entryId, String name, String[] properties)
 		throws PortalException, SystemException {
+
+		TagsEntryPermission.check(
+			getPermissionChecker(), entryId, ActionKeys.UPDATE);
 
 		return tagsEntryLocalService.updateEntry(
 			getUserId(), entryId, name, properties);
@@ -181,6 +335,11 @@ public class TagsEntryServiceImpl extends TagsEntryServiceBaseImpl {
 			long entryId, String parentEntryName, String name,
 			String vocabularyName, String[] properties)
 		throws PortalException, SystemException {
+
+		TagsEntry entry = TagsEntryLocalServiceUtil.getEntry(entryId);
+
+		TagsEntryPermission.check(
+			getPermissionChecker(), entry.getEntryId(), ActionKeys.UPDATE);
 
 		return tagsEntryLocalService.updateEntry(
 			getUserId(), entryId, parentEntryName, name, vocabularyName,

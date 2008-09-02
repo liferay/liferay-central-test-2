@@ -82,26 +82,11 @@ import java.rmi.RemoteException;
  */
 public class TagsEntryServiceSoap {
 	public static com.liferay.portlet.tags.model.TagsEntrySoap addEntry(
-		long groupId, java.lang.String name) throws RemoteException {
-		try {
-			com.liferay.portlet.tags.model.TagsEntry returnValue = TagsEntryServiceUtil.addEntry(groupId,
-					name);
-
-			return com.liferay.portlet.tags.model.TagsEntrySoap.toSoapModel(returnValue);
-		}
-		catch (Exception e) {
-			_log.error(e, e);
-
-			throw new RemoteException(e.getMessage());
-		}
-	}
-
-	public static com.liferay.portlet.tags.model.TagsEntrySoap addEntry(
-		long groupId, java.lang.String name, java.lang.String[] properties)
+		long plid, long groupId, java.lang.String name)
 		throws RemoteException {
 		try {
-			com.liferay.portlet.tags.model.TagsEntry returnValue = TagsEntryServiceUtil.addEntry(groupId,
-					name, properties);
+			com.liferay.portlet.tags.model.TagsEntry returnValue = TagsEntryServiceUtil.addEntry(plid,
+					groupId, name);
 
 			return com.liferay.portlet.tags.model.TagsEntrySoap.toSoapModel(returnValue);
 		}
@@ -113,11 +98,11 @@ public class TagsEntryServiceSoap {
 	}
 
 	public static com.liferay.portlet.tags.model.TagsEntrySoap addEntry(
-		long groupId, java.lang.String name, java.lang.String vocabularyName,
+		long plid, long groupId, java.lang.String name,
 		java.lang.String[] properties) throws RemoteException {
 		try {
-			com.liferay.portlet.tags.model.TagsEntry returnValue = TagsEntryServiceUtil.addEntry(groupId,
-					name, vocabularyName, properties);
+			com.liferay.portlet.tags.model.TagsEntry returnValue = TagsEntryServiceUtil.addEntry(plid,
+					groupId, name, properties);
 
 			return com.liferay.portlet.tags.model.TagsEntrySoap.toSoapModel(returnValue);
 		}
@@ -129,12 +114,67 @@ public class TagsEntryServiceSoap {
 	}
 
 	public static com.liferay.portlet.tags.model.TagsEntrySoap addEntry(
-		long groupId, java.lang.String parentEntryName, java.lang.String name,
+		long plid, long groupId, java.lang.String name,
 		java.lang.String vocabularyName, java.lang.String[] properties)
 		throws RemoteException {
 		try {
-			com.liferay.portlet.tags.model.TagsEntry returnValue = TagsEntryServiceUtil.addEntry(groupId,
-					parentEntryName, name, vocabularyName, properties);
+			com.liferay.portlet.tags.model.TagsEntry returnValue = TagsEntryServiceUtil.addEntry(plid,
+					groupId, name, vocabularyName, properties);
+
+			return com.liferay.portlet.tags.model.TagsEntrySoap.toSoapModel(returnValue);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
+	public static com.liferay.portlet.tags.model.TagsEntrySoap addEntry(
+		long plid, long groupId, java.lang.String name,
+		java.lang.String vocabularyName, java.lang.String[] properties,
+		java.lang.String[] communityPermissions,
+		java.lang.String[] guestPermissions) throws RemoteException {
+		try {
+			com.liferay.portlet.tags.model.TagsEntry returnValue = TagsEntryServiceUtil.addEntry(plid,
+					groupId, name, vocabularyName, properties,
+					communityPermissions, guestPermissions);
+
+			return com.liferay.portlet.tags.model.TagsEntrySoap.toSoapModel(returnValue);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
+	public static com.liferay.portlet.tags.model.TagsEntrySoap addEntry(
+		long plid, long groupId, java.lang.String parentEntryName,
+		java.lang.String name, java.lang.String vocabularyName,
+		java.lang.String[] properties) throws RemoteException {
+		try {
+			com.liferay.portlet.tags.model.TagsEntry returnValue = TagsEntryServiceUtil.addEntry(plid,
+					groupId, parentEntryName, name, vocabularyName, properties);
+
+			return com.liferay.portlet.tags.model.TagsEntrySoap.toSoapModel(returnValue);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
+	public static com.liferay.portlet.tags.model.TagsEntrySoap addEntry(
+		long plid, long groupId, java.lang.String parentEntryName,
+		java.lang.String name, java.lang.String vocabularyName,
+		java.lang.String[] properties, java.lang.String[] communityPermissions,
+		java.lang.String[] guestPermissions) throws RemoteException {
+		try {
+			com.liferay.portlet.tags.model.TagsEntry returnValue = TagsEntryServiceUtil.addEntry(plid,
+					groupId, parentEntryName, name, vocabularyName, properties,
+					communityPermissions, guestPermissions);
 
 			return com.liferay.portlet.tags.model.TagsEntrySoap.toSoapModel(returnValue);
 		}

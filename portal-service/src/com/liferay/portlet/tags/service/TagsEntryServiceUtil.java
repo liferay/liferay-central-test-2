@@ -45,35 +45,56 @@ package com.liferay.portlet.tags.service;
  *
  */
 public class TagsEntryServiceUtil {
-	public static com.liferay.portlet.tags.model.TagsEntry addEntry(
+	public static com.liferay.portlet.tags.model.TagsEntry addEntry(long plid,
 		long groupId, java.lang.String name)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
-		return _service.addEntry(groupId, name);
+		return _service.addEntry(plid, groupId, name);
 	}
 
-	public static com.liferay.portlet.tags.model.TagsEntry addEntry(
+	public static com.liferay.portlet.tags.model.TagsEntry addEntry(long plid,
 		long groupId, java.lang.String name, java.lang.String[] properties)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
-		return _service.addEntry(groupId, name, properties);
+		return _service.addEntry(plid, groupId, name, properties);
 	}
 
-	public static com.liferay.portlet.tags.model.TagsEntry addEntry(
+	public static com.liferay.portlet.tags.model.TagsEntry addEntry(long plid,
 		long groupId, java.lang.String name, java.lang.String vocabularyName,
 		java.lang.String[] properties)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
-		return _service.addEntry(groupId, name, vocabularyName, properties);
+		return _service.addEntry(plid, groupId, name, vocabularyName, properties);
 	}
 
-	public static com.liferay.portlet.tags.model.TagsEntry addEntry(
+	public static com.liferay.portlet.tags.model.TagsEntry addEntry(long plid,
+		long groupId, java.lang.String name, java.lang.String vocabularyName,
+		java.lang.String[] properties, java.lang.String[] communityPermissions,
+		java.lang.String[] guestPermissions)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException, java.rmi.RemoteException {
+		return _service.addEntry(plid, groupId, name, vocabularyName,
+			properties, communityPermissions, guestPermissions);
+	}
+
+	public static com.liferay.portlet.tags.model.TagsEntry addEntry(long plid,
 		long groupId, java.lang.String parentEntryName, java.lang.String name,
 		java.lang.String vocabularyName, java.lang.String[] properties)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
-		return _service.addEntry(groupId, parentEntryName, name,
+		return _service.addEntry(plid, groupId, parentEntryName, name,
 			vocabularyName, properties);
+	}
+
+	public static com.liferay.portlet.tags.model.TagsEntry addEntry(long plid,
+		long groupId, java.lang.String parentEntryName, java.lang.String name,
+		java.lang.String vocabularyName, java.lang.String[] properties,
+		java.lang.String[] communityPermissions,
+		java.lang.String[] guestPermissions)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException, java.rmi.RemoteException {
+		return _service.addEntry(plid, groupId, parentEntryName, name,
+			vocabularyName, properties, communityPermissions, guestPermissions);
 	}
 
 	public static void deleteEntry(long entryId)
@@ -84,13 +105,19 @@ public class TagsEntryServiceUtil {
 
 	public static java.util.List<com.liferay.portlet.tags.model.TagsEntry> getEntries(
 		java.lang.String className, long classPK)
-		throws com.liferay.portal.SystemException, java.rmi.RemoteException {
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException,
+			com.liferay.portal.security.auth.PrincipalException,
+			java.rmi.RemoteException {
 		return _service.getEntries(className, classPK);
 	}
 
 	public static java.util.List<com.liferay.portlet.tags.model.TagsEntry> getEntries(
 		long groupId, long classNameId, java.lang.String name)
-		throws com.liferay.portal.SystemException, java.rmi.RemoteException {
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException,
+			com.liferay.portal.security.auth.PrincipalException,
+			java.rmi.RemoteException {
 		return _service.getEntries(groupId, classNameId, name);
 	}
 
