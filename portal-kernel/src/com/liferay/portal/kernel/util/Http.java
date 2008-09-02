@@ -100,6 +100,8 @@ public interface Http {
 
 	public String getRequestURL(HttpServletRequest request);
 
+	public boolean hasDomain(String url);
+
 	public boolean hasProxyConfig();
 
 	public boolean isNonProxyHost(String host);

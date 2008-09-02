@@ -369,6 +369,10 @@ public class HttpImpl implements Http {
 		return request.getRequestURL().toString();
 	}
 
+	public boolean hasDomain(String url) {
+		return Validator.isNotNull(getDomain(url));
+	}
+
 	public boolean hasProxyConfig() {
 		if (Validator.isNotNull(_PROXY_HOST) && (_PROXY_PORT > 0)) {
 			return true;

@@ -136,6 +136,10 @@ public class HttpUtil {
 		return getHttp().getRequestURL(request);
 	}
 
+	public static boolean hasDomain(String url) {
+		return getHttp().hasDomain(url);
+	}
+
 	public static boolean hasProxyConfig() {
 		return getHttp().hasProxyConfig();
 	}
