@@ -27,8 +27,6 @@
 <%@ page import="com.liferay.portlet.tags.model.TagsEntry" %>
 <%@ page import="com.liferay.portlet.tags.model.TagsVocabulary" %>
 <%@ page import="com.liferay.portlet.tags.service.TagsEntryLocalServiceUtil" %>
-<%@page import="com.liferay.portlet.tags.service.TagsEntryServiceUtil"%>
 <%@ page import="com.liferay.portlet.tags.service.TagsVocabularyLocalServiceUtil" %>
-<%@ page import="com.liferay.portlet.tags.service.TagsVocabularyServiceUtil" %>
 
 <portlet:defineObjects />

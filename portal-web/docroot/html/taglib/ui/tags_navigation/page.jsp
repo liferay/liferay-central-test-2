@@ -32,10 +32,10 @@ long entryId = ParamUtil.getLong(renderRequest, "entryId");
 List<TagsVocabulary> vocabularies = null;
 
 if (showCompanyCategories.booleanValue()) {
-	vocabularies = TagsVocabularyServiceUtil.getCompanyVocabularies(company.getCompanyId(), false);
+	vocabularies = TagsVocabularyLocalServiceUtil.getCompanyVocabularies(company.getCompanyId(), false);
 }
 else {
-	vocabularies = TagsVocabularyServiceUtil.getGroupVocabularies(portletGroupId.longValue(), false);
+	vocabularies = TagsVocabularyLocalServiceUtil.getGroupVocabularies(portletGroupId.longValue(), false);
 }
 
 PortletURL portletURL = renderResponse.createRenderURL();
@@ -46,74 +46,62 @@ PortletURL portletURL = renderResponse.createRenderURL();
 	<%
 	StringBuilder sb = new StringBuilder();
 
-	sb.append("<ul class='categories-navigation-treeview'>");
+	sb.append("<ul>");
 
 	for (TagsVocabulary vocabulary : vocabularies) {
 		String vocabularyName = vocabulary.getName();
 
-		sb.append("<li class='tags-vocabulary-name'>");
-		sb.append("<span>");
+		sb.append("<li class=\"tags-vocabulary-name\">");
 		sb.append(vocabularyName);
-		sb.append("</span>");
+		sb.append("<ul>");
 
-		List<TagsEntry> rootEntries = TagsEntryServiceUtil.getGroupVocabularyRootEntries(vocabulary.getGroupId(), vocabularyName);
-		_buildNavigation(rootEntries, vocabularyName, entryId, portletURL, sb);
+		List<TagsEntry> entries = TagsEntryLocalServiceUtil.getGroupVocabularyRootEntries(vocabulary.getGroupId(), vocabularyName);
+
+		for (TagsEntry entry : entries) {
+			_buildNavigation(entry, vocabularyName, entryId, portletURL, sb);
+		}
+
+		sb.append("</ul>");
+		sb.append("</li>");
 	}
 
-	sb.append("</li>");
 	sb.append("</ul>");
+
 	out.print(sb.toString());
 	%>
 
 </div>
 
-<script type="text/javascript" charset="utf-8">
-	jQuery(document).ready(
-		function() {
-			var treeview = jQuery('.categories-navigation-treeview');
-
-			treeview.treeview(
-				{
-					animated: 'fast'
-				}
-			);
-
-			jQuery.ui.disableSelection(treeview);
-		}
-	);
-</script>
-
 <%!
-private void _buildNavigation(List<TagsEntry> entries, String vocabularyName, long entryId, PortletURL portletURL, StringBuilder sb) throws Exception {
-	for (TagsEntry entry : entries) {
-		String entryName = entry.getName();
-		List<TagsEntry> childrenEntries = TagsEntryServiceUtil.getGroupVocabularyEntries(entry.getGroupId(), entryName, vocabularyName);
+private void _buildNavigation(TagsEntry entry, String vocabularyName, long entryId, PortletURL portletURL, StringBuilder sb) throws Exception {
+	String entryName = entry.getName();
 
-		sb.append("<ul>");
-		sb.append("<li>");
-		sb.append("<span>");
+	sb.append("<li>");
 
-		if (entry.getEntryId() == entryId) {
-			sb.append("<b>");
-			sb.append(entryName);
-			sb.append("</b>");
-		}
-		else {
-			portletURL.setParameter("entryId", String.valueOf(entry.getEntryId()));
-
-			sb.append("<a href='");
-			sb.append(portletURL.toString());
-			sb.append("'>");
-			sb.append(entryName);
-			sb.append("</a>");
-		}
-
-		sb.append("</span>");
-
-		_buildNavigation(childrenEntries, vocabularyName, entryId, portletURL, sb);
-
-		sb.append("</li>");
-		sb.append("</ul>");
+	if (entry.getEntryId() == entryId) {
+		sb.append("<b>");
+		sb.append(entryName);
+		sb.append("</b>");
 	}
+	else {
+		portletURL.setParameter("entryId", String.valueOf(entry.getEntryId()));
+
+		sb.append("<a href=\"");
+		sb.append(portletURL.toString());
+		sb.append("\">");
+		sb.append(entryName);
+		sb.append("</a>");
+	}
+
+	sb.append("<ul>");
+
+	List<TagsEntry> entryChildren = TagsEntryLocalServiceUtil.getGroupVocabularyEntries(entry.getGroupId(), entryName, vocabularyName);
+
+	for (TagsEntry entryChild : entryChildren) {
+		_buildNavigation(entryChild, vocabularyName, entryId, portletURL, sb);
+	}
+
+	sb.append("</ul>");
+	sb.append("</li>");
 }
 %>
