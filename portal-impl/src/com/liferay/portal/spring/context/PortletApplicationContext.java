@@ -22,11 +22,16 @@
 
 package com.liferay.portal.spring.context;
 
+import com.liferay.portal.kernel.portlet.PortletClassLoaderUtil;
+import com.liferay.portal.kernel.util.AggregateClassLoader;
+import com.liferay.portal.kernel.util.PortalClassLoaderUtil;
+
 import java.io.FileNotFoundException;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
+import org.springframework.beans.factory.support.DefaultListableBeanFactory;
 import org.springframework.beans.factory.xml.XmlBeanDefinitionReader;
 import org.springframework.web.context.support.XmlWebApplicationContext;
 
@@ -62,6 +67,15 @@ public class PortletApplicationContext extends XmlWebApplicationContext {
 				}
 			}
 		}
+	}
+
+	protected void initBeanDefinitionReader(
+			XmlBeanDefinitionReader beanDefinitionReader) {
+
+		beanDefinitionReader.setBeanClassLoader(
+				new AggregateClassLoader(
+					PortletClassLoaderUtil.getClassLoader(),
+					PortalClassLoaderUtil.getClassLoader()));
 	}
 
 	private static Log _log =
