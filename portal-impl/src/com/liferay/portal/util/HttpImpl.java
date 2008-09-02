@@ -520,8 +520,8 @@ public class HttpImpl implements Http {
 
 		int pos = url.indexOf(StringPool.SLASH);
 
-		if (pos != -1 && pos != 0) {
-			return url.substring(pos, url.length());
+		if (pos > 0) {
+			return url.substring(pos);
 		}
 		else {
 			return url;
