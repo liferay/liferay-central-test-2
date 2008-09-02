@@ -33,7 +33,23 @@ import com.liferay.portalweb.portal.util.RuntimeVariables;
  */
 public class AddSecondSubcategoryTest extends BaseTestCase {
 	public void testAddSecondSubcategory() throws Exception {
-		selenium.click(RuntimeVariables.replace("link=Return to Full Page"));
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isElementPresent("//form[1]/div[1]/a[1]")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
+		selenium.click(RuntimeVariables.replace("//form[1]/div[1]/a[1]"));
 		selenium.waitForPageToLoad("30000");
 		selenium.click(RuntimeVariables.replace("//b"));
 		selenium.waitForPageToLoad("30000");

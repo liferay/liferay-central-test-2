@@ -39,7 +39,7 @@ public class SearchTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("link=Return to Full Page")) {
+				if (selenium.isElementPresent("//td[1]/div/a[1]")) {
 					break;
 				}
 			}
@@ -49,7 +49,7 @@ public class SearchTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click(RuntimeVariables.replace("link=Return to Full Page"));
+		selenium.click(RuntimeVariables.replace("//td[1]/div/a[1]"));
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {
