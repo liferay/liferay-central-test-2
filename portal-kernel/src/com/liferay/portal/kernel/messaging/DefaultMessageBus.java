@@ -47,7 +47,6 @@ public class DefaultMessageBus implements MessageBus {
 		Destination responseDestination = getResponseDestination(destination);
 
 		_destinations.put(responseDestination.getName(), responseDestination);
-
 	}
 
 	public void addDestinationEventListener(DestinationEventListener listener) {
