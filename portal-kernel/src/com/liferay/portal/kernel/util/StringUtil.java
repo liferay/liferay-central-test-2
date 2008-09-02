@@ -706,8 +706,7 @@ public class StringUtil {
 			return null;
 		}
 
-		return s.replaceFirst(
-			String.valueOf(oldSub), String.valueOf(newSub));
+		return s.replaceFirst(String.valueOf(oldSub), String.valueOf(newSub));
 	}
 
 	public static String replaceFirst(String s, char oldSub, String newSub) {
