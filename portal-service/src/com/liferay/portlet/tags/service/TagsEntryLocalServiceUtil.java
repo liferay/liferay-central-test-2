@@ -132,61 +132,6 @@ public class TagsEntryLocalServiceUtil {
 			vocabularyName, properties);
 	}
 
-	public static com.liferay.portlet.tags.model.TagsEntry addEntry(
-		long userId, long groupId, java.lang.String parentEntryName,
-		java.lang.String name, java.lang.String vocabularyName,
-		java.lang.String[] properties, java.lang.String[] communityPermissions,
-		java.lang.String[] guestPermissions)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
-		return _service.addEntry(userId, groupId, parentEntryName, name,
-			vocabularyName, properties, communityPermissions, guestPermissions);
-	}
-
-	public static com.liferay.portlet.tags.model.TagsEntry addEntry(
-		long userId, long groupId, java.lang.String name,
-		java.lang.String vocabularyName, java.lang.String[] properties,
-		java.lang.String[] communityPermissions,
-		java.lang.String[] guestPermissions)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
-		return _service.addEntry(userId, groupId, name, vocabularyName,
-			properties, communityPermissions, guestPermissions);
-	}
-
-	public static com.liferay.portlet.tags.model.TagsEntry addEntry(
-		long userId, long groupId, java.lang.String parentEntryName,
-		java.lang.String name, java.lang.String vocabularyName,
-		java.lang.String[] properties, java.lang.Boolean addGuestPermissions,
-		java.lang.Boolean addCommunityPermissions,
-		java.lang.String[] communityPermissions,
-		java.lang.String[] guestPermissions)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
-		return _service.addEntry(userId, groupId, parentEntryName, name,
-			vocabularyName, properties, addGuestPermissions,
-			addCommunityPermissions, communityPermissions, guestPermissions);
-	}
-
-	public static void addTagEntryResources(
-		com.liferay.portlet.tags.model.TagsEntry entry,
-		boolean addCommunityPermissions, boolean addGuestPermissions)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
-		_service.addTagEntryResources(entry, addCommunityPermissions,
-			addGuestPermissions);
-	}
-
-	public static void addTagEntryResources(
-		com.liferay.portlet.tags.model.TagsEntry entry,
-		java.lang.String[] communityPermissions,
-		java.lang.String[] guestPermissions)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
-		_service.addTagEntryResources(entry, communityPermissions,
-			guestPermissions);
-	}
-
 	public static void checkEntries(long userId, long groupId,
 		java.lang.String[] names)
 		throws com.liferay.portal.PortalException,

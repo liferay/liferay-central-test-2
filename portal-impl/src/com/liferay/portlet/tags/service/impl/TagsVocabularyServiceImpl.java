@@ -24,126 +24,58 @@ package com.liferay.portlet.tags.service.impl;
 
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
-import com.liferay.portal.security.auth.PrincipalException;
-import com.liferay.portal.security.permission.ActionKeys;
-import com.liferay.portal.service.permission.PortletPermissionUtil;
-import com.liferay.portal.util.PortletKeys;
 import com.liferay.portlet.tags.model.TagsVocabulary;
 import com.liferay.portlet.tags.service.base.TagsVocabularyServiceBaseImpl;
-import com.liferay.portlet.tags.service.permission.TagsVocabularyPermission;
 
-import java.util.Iterator;
 import java.util.List;
 
 /**
  * <a href="TagsVocabularyServiceImpl.java.html"><b><i>View Source</i></b></a>
  *
  * @author Alvaro del Castillo
- * @author Eduardo Lundgren
  *
  */
 public class TagsVocabularyServiceImpl extends TagsVocabularyServiceBaseImpl {
 
-	public TagsVocabulary addVocabulary(long plid, long groupId, String name)
+	public TagsVocabulary addVocabulary(long groupId, String name)
 		throws PortalException, SystemException {
-
-		PortletPermissionUtil.check(
-				getPermissionChecker(), plid, PortletKeys.TAGS_ADMIN,
-				ActionKeys.ADD_VOCABULARY);
 
 		return tagsVocabularyLocalService.addVocabulary(
 			getUserId(), groupId, name, false);
 	}
 
 	public TagsVocabulary addVocabulary(
-			long plid, long groupId, String name, boolean folksonomy)
+			long groupId, String name, boolean folksonomy)
 		throws PortalException, SystemException {
-
-		PortletPermissionUtil.check(
-			getPermissionChecker(), plid, PortletKeys.TAGS_ADMIN,
-			ActionKeys.ADD_VOCABULARY);
 
 		return tagsVocabularyLocalService.addVocabulary(
 			getUserId(), groupId, name, folksonomy);
 	}
 
-	public TagsVocabulary addVocabulary(
-			long plid, long groupId, String name, boolean folksonomy,
-			String[] communityPermissions, String[] guestPermissions)
-		throws PortalException, SystemException {
-
-		PortletPermissionUtil.check(
-			getPermissionChecker(), plid, PortletKeys.TAGS_ADMIN,
-			ActionKeys.ADD_VOCABULARY);
-
-		Boolean addGuestPermissions = null;
-		Boolean addCommunityPermissions = null;
-
-		return tagsVocabularyLocalService.addVocabulary(
-			getUserId(), groupId, name, folksonomy, addGuestPermissions,
-			addCommunityPermissions, communityPermissions, guestPermissions);
-	}
-
 	public void deleteVocabulary(long vocabularyId)
 		throws PortalException, SystemException {
-
-		TagsVocabularyPermission.check(
-			getPermissionChecker(), vocabularyId, ActionKeys.DELETE);
 
 		tagsVocabularyLocalService.deleteVocabulary(vocabularyId);
 	}
 
 	public List<TagsVocabulary> getCompanyVocabularies(
 			long companyId, boolean folksonomy)
-		throws SystemException, PrincipalException, PortalException {
+		throws SystemException {
 
-		List<TagsVocabulary> tagsVocabularies =
-			tagsVocabularyLocalService.getCompanyVocabularies(
+		return tagsVocabularyLocalService.getCompanyVocabularies(
 			companyId, folksonomy);
-
-		Iterator<TagsVocabulary> itr = tagsVocabularies.iterator();
-
-		while (itr.hasNext()) {
-			TagsVocabulary tagVocabulary = itr.next();
-
-			if (!TagsVocabularyPermission.contains(
-					getPermissionChecker(), tagVocabulary, ActionKeys.VIEW)) {
-
-				itr.remove();
-			}
-		}
-
-		return tagsVocabularies;
 	}
 
 	public List<TagsVocabulary> getGroupVocabularies(
 			long groupId, boolean folksonomy)
-		throws SystemException, PrincipalException, PortalException {
+		throws SystemException {
 
-		List<TagsVocabulary> tagsVocabularies =
-			tagsVocabularyLocalService.getGroupVocabularies(
+		return tagsVocabularyLocalService.getGroupVocabularies(
 			groupId, folksonomy);
-
-		Iterator<TagsVocabulary> itr = tagsVocabularies.iterator();
-
-		while (itr.hasNext()) {
-			TagsVocabulary tagVocabulary = itr.next();
-
-			if (!TagsVocabularyPermission.contains(
-					getPermissionChecker(), tagVocabulary, ActionKeys.VIEW)) {
-
-				itr.remove();
-			}
-		}
-
-		return tagsVocabularies;
 	}
 
 	public TagsVocabulary getVocabulary(long vocabularyId)
 		throws PortalException, SystemException {
-
-		TagsVocabularyPermission.check(
-			getPermissionChecker(), vocabularyId, ActionKeys.VIEW);
 
 		return tagsVocabularyLocalService.getVocabulary(vocabularyId);
 	}
@@ -151,9 +83,6 @@ public class TagsVocabularyServiceImpl extends TagsVocabularyServiceBaseImpl {
 	public TagsVocabulary updateVocabulary(
 			long vocabularyId, String name, boolean folksonomy)
 		throws PortalException, SystemException {
-
-		TagsVocabularyPermission.check(
-			getPermissionChecker(), vocabularyId, ActionKeys.UPDATE);
 
 		return tagsVocabularyLocalService.updateVocabulary(
 			vocabularyId, name, folksonomy);

@@ -119,7 +119,6 @@
 		<!-- References -->
 
 		<reference package-path="com.liferay.counter" entity="Counter" />
-		<reference package-path="com.liferay.portal" entity="Resource" />
 		<reference package-path="com.liferay.portal" entity="User" />
 	</entity>
 	<entity name="TagsProperty" local-service="true" remote-service="true">
@@ -225,7 +224,6 @@
 		<!-- References -->
 
 		<reference package-path="com.liferay.counter" entity="Counter" />
-		<reference package-path="com.liferay.portal" entity="Resource" />
 		<reference package-path="com.liferay.portal" entity="User" />
 	</entity>
 	<exceptions>

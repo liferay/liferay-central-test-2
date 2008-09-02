@@ -27,13 +27,9 @@ import com.liferay.counter.service.CounterService;
 
 import com.liferay.portal.kernel.bean.InitializingBean;
 import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
-import com.liferay.portal.service.ResourceLocalService;
-import com.liferay.portal.service.ResourceService;
 import com.liferay.portal.service.UserLocalService;
 import com.liferay.portal.service.UserService;
 import com.liferay.portal.service.base.PrincipalBean;
-import com.liferay.portal.service.persistence.ResourceFinder;
-import com.liferay.portal.service.persistence.ResourcePersistence;
 import com.liferay.portal.service.persistence.UserFinder;
 import com.liferay.portal.service.persistence.UserPersistence;
 
@@ -236,39 +232,6 @@ public abstract class TagsVocabularyServiceBaseImpl extends PrincipalBean
 		this.counterService = counterService;
 	}
 
-	public ResourceLocalService getResourceLocalService() {
-		return resourceLocalService;
-	}
-
-	public void setResourceLocalService(
-		ResourceLocalService resourceLocalService) {
-		this.resourceLocalService = resourceLocalService;
-	}
-
-	public ResourceService getResourceService() {
-		return resourceService;
-	}
-
-	public void setResourceService(ResourceService resourceService) {
-		this.resourceService = resourceService;
-	}
-
-	public ResourcePersistence getResourcePersistence() {
-		return resourcePersistence;
-	}
-
-	public void setResourcePersistence(ResourcePersistence resourcePersistence) {
-		this.resourcePersistence = resourcePersistence;
-	}
-
-	public ResourceFinder getResourceFinder() {
-		return resourceFinder;
-	}
-
-	public void setResourceFinder(ResourceFinder resourceFinder) {
-		this.resourceFinder = resourceFinder;
-	}
-
 	public UserLocalService getUserLocalService() {
 		return userLocalService;
 	}
@@ -402,26 +365,6 @@ public abstract class TagsVocabularyServiceBaseImpl extends PrincipalBean
 					".impl");
 		}
 
-		if (resourceLocalService == null) {
-			resourceLocalService = (ResourceLocalService)PortalBeanLocatorUtil.locate(ResourceLocalService.class.getName() +
-					".impl");
-		}
-
-		if (resourceService == null) {
-			resourceService = (ResourceService)PortalBeanLocatorUtil.locate(ResourceService.class.getName() +
-					".impl");
-		}
-
-		if (resourcePersistence == null) {
-			resourcePersistence = (ResourcePersistence)PortalBeanLocatorUtil.locate(ResourcePersistence.class.getName() +
-					".impl");
-		}
-
-		if (resourceFinder == null) {
-			resourceFinder = (ResourceFinder)PortalBeanLocatorUtil.locate(ResourceFinder.class.getName() +
-					".impl");
-		}
-
 		if (userLocalService == null) {
 			userLocalService = (UserLocalService)PortalBeanLocatorUtil.locate(UserLocalService.class.getName() +
 					".impl");
@@ -463,10 +406,6 @@ public abstract class TagsVocabularyServiceBaseImpl extends PrincipalBean
 	protected TagsVocabularyPersistence tagsVocabularyPersistence;
 	protected CounterLocalService counterLocalService;
 	protected CounterService counterService;
-	protected ResourceLocalService resourceLocalService;
-	protected ResourceService resourceService;
-	protected ResourcePersistence resourcePersistence;
-	protected ResourceFinder resourceFinder;
 	protected UserLocalService userLocalService;
 	protected UserService userService;
 	protected UserPersistence userPersistence;

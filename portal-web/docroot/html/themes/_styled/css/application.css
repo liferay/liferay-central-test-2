@@ -829,11 +829,6 @@ img.ui-datepicker-trigger {
 	width: 200px;
 }
 
-.tags-vocabulary-name span {
-	font-weight: bold;
-	padding-bottom: 3px;
-}
-
 /* ---------- Treeview ---------- */
 
 .treeview {
@@ -871,7 +866,7 @@ img.ui-datepicker-trigger {
 .treeview li {
 	background: url(../images/trees/treeview_line.png) 0 0 no-repeat;
 	margin: 0;
-	padding:0 0 3px 16px;
+	padding: 3px 0 3px 16px;
 }
 
 .treeview a.selected {
@@ -920,10 +915,6 @@ img.ui-datepicker-trigger {
 	display: block;
 	height: 16px;
 	width: 16px;
-}
-
-.treeview span {
-	padding-left: 3px;
 }
 
 .filetree li {

@@ -74,71 +74,42 @@ import com.liferay.portlet.tags.service.TagsEntryServiceUtil;
  *
  */
 public class TagsEntryServiceJSON {
-	public static JSONObject addEntry(long plid, long groupId,
-		java.lang.String name)
+	public static JSONObject addEntry(long groupId, java.lang.String name)
 		throws java.rmi.RemoteException, com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		com.liferay.portlet.tags.model.TagsEntry returnValue = TagsEntryServiceUtil.addEntry(plid,
-				groupId, name);
+		com.liferay.portlet.tags.model.TagsEntry returnValue = TagsEntryServiceUtil.addEntry(groupId,
+				name);
 
 		return TagsEntryJSONSerializer.toJSONObject(returnValue);
 	}
 
-	public static JSONObject addEntry(long plid, long groupId,
-		java.lang.String name, java.lang.String[] properties)
-		throws java.rmi.RemoteException, com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
-		com.liferay.portlet.tags.model.TagsEntry returnValue = TagsEntryServiceUtil.addEntry(plid,
-				groupId, name, properties);
-
-		return TagsEntryJSONSerializer.toJSONObject(returnValue);
-	}
-
-	public static JSONObject addEntry(long plid, long groupId,
-		java.lang.String name, java.lang.String vocabularyName,
+	public static JSONObject addEntry(long groupId, java.lang.String name,
 		java.lang.String[] properties)
 		throws java.rmi.RemoteException, com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		com.liferay.portlet.tags.model.TagsEntry returnValue = TagsEntryServiceUtil.addEntry(plid,
-				groupId, name, vocabularyName, properties);
+		com.liferay.portlet.tags.model.TagsEntry returnValue = TagsEntryServiceUtil.addEntry(groupId,
+				name, properties);
 
 		return TagsEntryJSONSerializer.toJSONObject(returnValue);
 	}
 
-	public static JSONObject addEntry(long plid, long groupId,
-		java.lang.String name, java.lang.String vocabularyName,
-		java.lang.String[] properties, java.lang.String[] communityPermissions,
-		java.lang.String[] guestPermissions)
+	public static JSONObject addEntry(long groupId, java.lang.String name,
+		java.lang.String vocabularyName, java.lang.String[] properties)
 		throws java.rmi.RemoteException, com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		com.liferay.portlet.tags.model.TagsEntry returnValue = TagsEntryServiceUtil.addEntry(plid,
-				groupId, name, vocabularyName, properties,
-				communityPermissions, guestPermissions);
+		com.liferay.portlet.tags.model.TagsEntry returnValue = TagsEntryServiceUtil.addEntry(groupId,
+				name, vocabularyName, properties);
 
 		return TagsEntryJSONSerializer.toJSONObject(returnValue);
 	}
 
-	public static JSONObject addEntry(long plid, long groupId,
+	public static JSONObject addEntry(long groupId,
 		java.lang.String parentEntryName, java.lang.String name,
 		java.lang.String vocabularyName, java.lang.String[] properties)
 		throws java.rmi.RemoteException, com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		com.liferay.portlet.tags.model.TagsEntry returnValue = TagsEntryServiceUtil.addEntry(plid,
-				groupId, parentEntryName, name, vocabularyName, properties);
-
-		return TagsEntryJSONSerializer.toJSONObject(returnValue);
-	}
-
-	public static JSONObject addEntry(long plid, long groupId,
-		java.lang.String parentEntryName, java.lang.String name,
-		java.lang.String vocabularyName, java.lang.String[] properties,
-		java.lang.String[] communityPermissions,
-		java.lang.String[] guestPermissions)
-		throws java.rmi.RemoteException, com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
-		com.liferay.portlet.tags.model.TagsEntry returnValue = TagsEntryServiceUtil.addEntry(plid,
-				groupId, parentEntryName, name, vocabularyName, properties,
-				communityPermissions, guestPermissions);
+		com.liferay.portlet.tags.model.TagsEntry returnValue = TagsEntryServiceUtil.addEntry(groupId,
+				parentEntryName, name, vocabularyName, properties);
 
 		return TagsEntryJSONSerializer.toJSONObject(returnValue);
 	}
@@ -150,9 +121,7 @@ public class TagsEntryServiceJSON {
 	}
 
 	public static JSONArray getEntries(java.lang.String className, long classPK)
-		throws java.rmi.RemoteException, com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException,
-			com.liferay.portal.security.auth.PrincipalException {
+		throws java.rmi.RemoteException, com.liferay.portal.SystemException {
 		java.util.List<com.liferay.portlet.tags.model.TagsEntry> returnValue = TagsEntryServiceUtil.getEntries(className,
 				classPK);
 
@@ -161,9 +130,7 @@ public class TagsEntryServiceJSON {
 
 	public static JSONArray getEntries(long groupId, long classNameId,
 		java.lang.String name)
-		throws java.rmi.RemoteException, com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException,
-			com.liferay.portal.security.auth.PrincipalException {
+		throws java.rmi.RemoteException, com.liferay.portal.SystemException {
 		java.util.List<com.liferay.portlet.tags.model.TagsEntry> returnValue = TagsEntryServiceUtil.getEntries(groupId,
 				classNameId, name);
 

@@ -49,19 +49,12 @@ package com.liferay.portlet.tags.service;
  */
 public interface TagsVocabularyService {
 	public com.liferay.portlet.tags.model.TagsVocabulary addVocabulary(
-		long plid, long groupId, java.lang.String name)
+		long groupId, java.lang.String name)
 		throws java.rmi.RemoteException, com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;
 
 	public com.liferay.portlet.tags.model.TagsVocabulary addVocabulary(
-		long plid, long groupId, java.lang.String name, boolean folksonomy)
-		throws java.rmi.RemoteException, com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException;
-
-	public com.liferay.portlet.tags.model.TagsVocabulary addVocabulary(
-		long plid, long groupId, java.lang.String name, boolean folksonomy,
-		java.lang.String[] communityPermissions,
-		java.lang.String[] guestPermissions)
+		long groupId, java.lang.String name, boolean folksonomy)
 		throws java.rmi.RemoteException, com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;
 
@@ -71,15 +64,11 @@ public interface TagsVocabularyService {
 
 	public java.util.List<com.liferay.portlet.tags.model.TagsVocabulary> getCompanyVocabularies(
 		long companyId, boolean folksonomy)
-		throws java.rmi.RemoteException, com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException,
-			com.liferay.portal.security.auth.PrincipalException;
+		throws java.rmi.RemoteException, com.liferay.portal.SystemException;
 
 	public java.util.List<com.liferay.portlet.tags.model.TagsVocabulary> getGroupVocabularies(
 		long groupId, boolean folksonomy)
-		throws java.rmi.RemoteException, com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException,
-			com.liferay.portal.security.auth.PrincipalException;
+		throws java.rmi.RemoteException, com.liferay.portal.SystemException;
 
 	public com.liferay.portlet.tags.model.TagsVocabulary getVocabulary(
 		long vocabularyId)
