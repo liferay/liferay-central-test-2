@@ -24,18 +24,14 @@ package com.liferay.portal.service;
 
 import com.liferay.portal.jcr.JCRFactoryUtil;
 import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
-import com.liferay.portal.kernel.messaging.Destination;
-import com.liferay.portal.kernel.messaging.DestinationNames;
 import com.liferay.portal.kernel.messaging.MessageBus;
 import com.liferay.portal.kernel.messaging.MessageBusUtil;
 import com.liferay.portal.kernel.messaging.MessageSender;
-import com.liferay.portal.kernel.messaging.ParallelDestination;
 import com.liferay.portal.kernel.scheduler.SchedulerEngine;
 import com.liferay.portal.kernel.scheduler.SchedulerEngineUtil;
 import com.liferay.portal.kernel.search.SearchEngineUtil;
 import com.liferay.portal.kernel.util.FileUtil;
 import com.liferay.portal.scheduler.SchedulerEngineProxy;
-import com.liferay.portal.scheduler.messaging.SchedulerMessageListener;
 import com.liferay.portal.search.IndexSearcherImpl;
 import com.liferay.portal.search.IndexWriterImpl;
 import com.liferay.portal.search.lucene.LuceneSearchEngineUtil;
@@ -96,24 +92,14 @@ public class ServiceTestSuite extends TestSuite {
 			(SchedulerEngine)PortalBeanLocatorUtil.locate(
 				SchedulerEngine.class.getName());
 
-		Destination schedulerDestination = new ParallelDestination(
-			DestinationNames.SCHEDULER);
-
-		messageBus.addDestination(schedulerDestination);
-
-		schedulerDestination.register(
-			new SchedulerMessageListener(schedulerEngine));
-
 		SchedulerEngineUtil.init(new SchedulerEngineProxy());
 
 		try {
-			SchedulerEngineUtil.start();
+			schedulerEngine.start();
 		}
 		catch (Exception e) {
 			e.printStackTrace();
 		}
-
-        SchedulerEngineUtil.init(new SchedulerEngineProxy());
 
 		// Search
 

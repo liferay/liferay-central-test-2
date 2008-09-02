@@ -206,7 +206,6 @@ public class GlobalStartupAction extends SimpleAction {
 		if (PropsValues.POP_SERVER_NOTIFICATIONS_ENABLED) {
 			POPServerUtil.start();
 		}
-
 	}
 
 	private static Log _log = LogFactory.getLog(GlobalStartupAction.class);

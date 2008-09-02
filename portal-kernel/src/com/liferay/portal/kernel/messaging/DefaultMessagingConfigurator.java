@@ -22,55 +22,61 @@
 
 package com.liferay.portal.kernel.messaging;
 
-import com.liferay.portal.SystemException;
-
 import java.util.List;
 import java.util.Map;
 
 /**
- * <a href="DefaultMessagingConfigurator.java.html"><b><i>View
- * Source</i></b></a>
+ * <a href="DefaultMessagingConfigurator.java.html"><b><i>View Source</i></b>
+ * </a>
  *
  * @author Michael C. Han
+ *
  */
 public class DefaultMessagingConfigurator implements MessagingConfigurator {
-	public void setMessagingDestinations(List<Destination> destinations) {
-		_destinations = destinations;
-	}
 
-	public void setDestinationEventListener(List<DestinationEventListener> listeners) {
-		_destinationEventListeners = listeners;
-	}
-
-	public void setMessageListeners(
-		Map<String, List<MessageListener>> listeners) {
-		_listeners = listeners;
-	}
-
-	public void setMessageBus(MessageBus bus) {
-		_bus = bus;
-	}
-
-	public void configure() throws SystemException {
+	public void configure() {
 		for (DestinationEventListener listener : _destinationEventListeners) {
-			_bus.addDestinationEventListener(listener);
+			_messageBus.addDestinationEventListener(listener);
 		}
-
 
 		for (Destination destination : _destinations) {
-			_bus.addDestination(destination);
+			_messageBus.addDestination(destination);
 		}
 
-		for (Map.Entry<String, List<MessageListener>> lsnrs : _listeners.entrySet()) {
-			String destinationName = lsnrs.getKey();
-			for (MessageListener listener : lsnrs.getValue()) {
-				_bus.registerMessageListener(destinationName, listener);
+		for (Map.Entry<String, List<MessageListener>> listeners :
+				_messageListeners.entrySet()) {
+
+			String destination = listeners.getKey();
+
+			for (MessageListener listener : listeners.getValue()) {
+				_messageBus.registerMessageListener(destination, listener);
 			}
 		}
 	}
 
-	private List<Destination> _destinations;
-	private Map<String, List<MessageListener>> _listeners;
-	private MessageBus _bus;
+	public void setDestinationEventListeners(
+		List<DestinationEventListener> destinationEventListeners) {
+
+		_destinationEventListeners = destinationEventListeners;
+	}
+
+	public void setDestinations(List<Destination> destinations) {
+		_destinations = destinations;
+	}
+
+	public void setMessageBus(MessageBus messageBus) {
+		_messageBus = messageBus;
+	}
+
+	public void setMessageListeners(
+		Map<String, List<MessageListener>> messageListeners) {
+
+		_messageListeners = messageListeners;
+	}
+
 	private List<DestinationEventListener> _destinationEventListeners;
+	private List<Destination> _destinations;
+	private MessageBus _messageBus;
+	private Map<String, List<MessageListener>> _messageListeners;
+
 }

@@ -23,28 +23,31 @@
 package com.liferay.portal.kernel.messaging;
 
 /**
- * <a href="DefaultSingleDestinationMessageSender.java.html"><b><i>View
- * Source</i></b></a>
+ * <a href="DefaultSingleDestinationMessageSender.java.html"><b><i>View Source
+ * </i></b></a>
  *
  * @author Michael C. Han
+ *
  */
 public class DefaultSingleDestinationMessageSender
 	implements SingleDestinationMessageSender {
 
-	public DefaultSingleDestinationMessageSender(String destination,
-												 MessageSender sender) {
-		_sender = sender;
-		_destination = destination;
-	}
+	public DefaultSingleDestinationMessageSender(
+		String destination, MessageSender messageSender) {
 
-	public void send(String message) {
-		_sender.send(_destination, message);
+		_destination = destination;
+		_messageSender = messageSender;
 	}
 
 	public void send(Object message) {
-		_sender.send(_destination, message);
+		_messageSender.send(_destination, message);
 	}
 
-	private MessageSender _sender;
+	public void send(String message) {
+		_messageSender.send(_destination, message);
+	}
+
 	private String _destination;
+	private MessageSender _messageSender;
+
 }

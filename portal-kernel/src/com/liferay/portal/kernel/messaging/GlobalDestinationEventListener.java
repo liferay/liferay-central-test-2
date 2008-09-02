@@ -27,43 +27,39 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * <a href="GlobalDestinationEventListener.java.html"><b><i>View
- * Source</i></b></a>
- *
- * A listener that will register a specified listener to all destinations
- * registered into the message bus
+ * <a href="GlobalDestinationEventListener.java.html"><b><i>View Source</i></b>
+ * </a>
  *
  * @author Michael C. Han
+ *
  */
 public class GlobalDestinationEventListener
 	implements DestinationEventListener {
 
-	/**
-	 *
-	 * @param listener to receive all messages
-	 * @param ignoredDestinations where listener where not receive events
-	 */
-	public GlobalDestinationEventListener(MessageListener listener,
-										  List<String> ignoredDestinations) {
+	public GlobalDestinationEventListener(
+		MessageListener listener, List<String> ignoredDestinations) {
+
 		_listener = listener;
 		_ignoredDestinations = new HashMap<String, String>();
+
 		for (String destination : ignoredDestinations) {
 			_ignoredDestinations.put(destination, destination);
 		}
 	}
 
-	public void destinationAdded(Destination dest) {
-		if (!_ignoredDestinations.containsKey(dest.getName())) {
-			dest.register(_listener);
+	public void destinationAdded(Destination destination) {
+		if (!_ignoredDestinations.containsKey(destination.getName())) {
+			destination.register(_listener);
 		}
 	}
 
-	public void destinationRemoved(Destination dest) {
-		if (!_ignoredDestinations.containsKey(dest.getName())) {
-			dest.unregister(_listener);
+	public void destinationRemoved(Destination destination) {
+		if (!_ignoredDestinations.containsKey(destination.getName())) {
+			destination.unregister(_listener);
 		}
 	}
 
 	private MessageListener _listener;
 	private Map<String, String> _ignoredDestinations;
+
 }

@@ -23,25 +23,28 @@
 package com.liferay.portal.kernel.messaging;
 
 /**
- * <a href="ForwardingMessageListener.java.html"><b><i>View Source</i></b></a>
+ * <a href="BridgingMessageListener.java.html"><b><i>View Source</i></b></a>
  * <p/>
- * Message listener that will bridge two destinations together by forwarding
- * a message received from one destination to another
  *
  * @author Michael C. Han
+ *
  */
 public class BridgingMessageListener implements MessageListener {
-	public BridgingMessageListener(SingleDestinationMessageSender sender) {
-		_sender = sender;
+
+	public BridgingMessageListener(
+		SingleDestinationMessageSender messageSender) {
+
+		_messageSender = messageSender;
 	}
 
 	public void receive(Object message) {
-		_sender.send(message);
+		_messageSender.send(message);
 	}
 
 	public void receive(String message) {
-		_sender.send(message);
+		_messageSender.send(message);
 	}
 
-	private SingleDestinationMessageSender _sender;
+	private SingleDestinationMessageSender _messageSender;
+
 }

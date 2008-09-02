@@ -30,7 +30,8 @@ package com.liferay.portal.kernel.messaging;
  */
 public interface MessageSender {
 
-	public void send(String destination, String message);
 	public void send(String destination, Object message);
+
+	public void send(String destination, String message);
 
 }

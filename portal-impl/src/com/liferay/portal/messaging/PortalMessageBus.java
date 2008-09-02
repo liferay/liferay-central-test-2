@@ -23,11 +23,11 @@
 package com.liferay.portal.messaging;
 
 import com.liferay.portal.kernel.messaging.Destination;
+import com.liferay.portal.kernel.messaging.DestinationEventListener;
 import com.liferay.portal.kernel.messaging.Message;
 import com.liferay.portal.kernel.messaging.MessageBus;
 import com.liferay.portal.kernel.messaging.MessageBusException;
 import com.liferay.portal.kernel.messaging.MessageListener;
-import com.liferay.portal.kernel.messaging.DestinationEventListener;
 
 import org.springframework.beans.factory.DisposableBean;
 
@@ -44,12 +44,16 @@ public class PortalMessageBus implements DisposableBean, MessageBus {
 		_messageBus.addDestination(destination);
 	}
 
-    public boolean hasDestination(String destinationName) {
-        return _messageBus.hasDestination(destinationName);
-    }
+	public void addDestinationEventListener(DestinationEventListener listener) {
+		_messageBus.addDestinationEventListener(listener);
+	}
 
-    public void destroy() throws Exception {
+	public void destroy() throws Exception {
 		shutdown(true);
+	}
+
+	public boolean hasDestination(String destination) {
+		return _messageBus.hasDestination(destination);
 	}
 
 	public boolean hasMessageListener(String destination) {
@@ -64,6 +68,11 @@ public class PortalMessageBus implements DisposableBean, MessageBus {
 
 	public void removeDestination(String destination) {
 		_messageBus.removeDestination(destination);
+	}
+
+	public void removeDestinationEventListener(
+		DestinationEventListener listener) {
+		_messageBus.removeDestinationEventListener(listener);
 	}
 
 	public void sendMessage(String destination, Object message) {
@@ -106,15 +115,6 @@ public class PortalMessageBus implements DisposableBean, MessageBus {
 
 	public void shutdown(boolean force) {
 		_messageBus.shutdown(force);
-	}
-
-	public void addDestinationEventListener(DestinationEventListener listener) {
-		_messageBus.addDestinationEventListener(listener);
-	}
-
-	public void removeDestinationEventListener(
-		DestinationEventListener listener) {
-		_messageBus.removeDestinationEventListener(listener);
 	}
 
 	private MessageBus _messageBus;

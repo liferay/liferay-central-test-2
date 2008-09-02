@@ -250,8 +250,10 @@ public class StartupAction extends SimpleAction {
 
 		// Scheduler
 
-        SchedulerEngineUtil.init(new SchedulerEngineProxy());
-        SchedulerEngineUtil.start();
+		SchedulerEngineUtil.init(new SchedulerEngineProxy());
+
+		SchedulerEngineUtil.start();
+
 		// Search
 
 		LuceneSearchEngineUtil.init();

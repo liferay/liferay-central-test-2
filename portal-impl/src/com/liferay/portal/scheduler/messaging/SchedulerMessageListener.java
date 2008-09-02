@@ -22,12 +22,12 @@
 
 package com.liferay.portal.scheduler.messaging;
 
-import com.liferay.portal.kernel.messaging.MessageListener;
-import com.liferay.portal.kernel.messaging.MessageBusUtil;
-import com.liferay.portal.kernel.json.JSONObject;
 import com.liferay.portal.kernel.json.JSONFactoryUtil;
-import com.liferay.portal.kernel.scheduler.messaging.SchedulerRequest;
+import com.liferay.portal.kernel.json.JSONObject;
+import com.liferay.portal.kernel.messaging.MessageBusUtil;
+import com.liferay.portal.kernel.messaging.MessageListener;
 import com.liferay.portal.kernel.scheduler.SchedulerEngine;
+import com.liferay.portal.kernel.scheduler.messaging.SchedulerRequest;
 
 import java.util.List;
 
@@ -39,19 +39,19 @@ import org.apache.commons.logging.LogFactory;
  *
  * @author Michael C. Han
  * @author Bruno Farache
+ *
  */
-public class SchedulerMessageListener
-    implements MessageListener {
+public class SchedulerMessageListener implements MessageListener {
 
-    public SchedulerMessageListener(SchedulerEngine engine) {
-        _schedulerEngine = engine;
-    }
+	public SchedulerMessageListener(SchedulerEngine schedulerEngine) {
+		_schedulerEngine = schedulerEngine;
+	}
 
-    public void receive(Object message) {
+	public void receive(Object message) {
 		throw new UnsupportedOperationException();
 	}
 
-    public void receive(String message) {
+	public void receive(String message) {
 		try {
 			doReceive(message);
 		}
@@ -60,7 +60,7 @@ public class SchedulerMessageListener
 		}
 	}
 
-    protected void doReceive(String message) throws Exception {
+	protected void doReceive(String message) throws Exception {
 		JSONObject jsonObj = JSONFactoryUtil.createJSONObject(message);
 
 		String responseDestination = jsonObj.getString(
@@ -90,9 +90,9 @@ public class SchedulerMessageListener
 		else if (command.equals(SchedulerRequest.COMMAND_SHUTDOWN)) {
 			_schedulerEngine.shutdown();
 		}
-        else if (command.equals(SchedulerRequest.COMMAND_STARTUP)) {
-            _schedulerEngine.start();
-        }
+		else if (command.equals(SchedulerRequest.COMMAND_STARTUP)) {
+			_schedulerEngine.start();
+		}
 		else if (command.equals(SchedulerRequest.COMMAND_UNREGISTER)) {
 			_schedulerEngine.unschedule(
 				schedulerRequest.getJobName(), schedulerRequest.getGroupName());
@@ -105,8 +105,7 @@ public class SchedulerMessageListener
 		throws Exception {
 
 		List<SchedulerRequest> schedulerRequests =
-			_schedulerEngine.getScheduledJobs(
-				schedulerRequest.getGroupName());
+			_schedulerEngine.getScheduledJobs(schedulerRequest.getGroupName());
 
 		JSONObject jsonObj = JSONFactoryUtil.createJSONObject();
 
@@ -119,5 +118,6 @@ public class SchedulerMessageListener
 
 	private static Log _log = LogFactory.getLog(SchedulerMessageListener.class);
 
-    private SchedulerEngine _schedulerEngine;
+	private SchedulerEngine _schedulerEngine;
+
 }
