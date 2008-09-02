@@ -197,22 +197,23 @@ public class WindowInvoker extends InvokerPortlet {
 			PortletMode currentPortletMode = actionRequestImpl.getPortletMode();
 
 			if (_remotePortlet) {
+				WindowRequestReader requestReader =
+					new WSRPWindowRequestReader();
 
-				WindowRequestReader reqReader = new WSRPWindowRequestReader();
-				ChannelState newChannelState = reqReader.readNewWindowState(
-							request);
+				ChannelState newChannelState = requestReader.readNewWindowState(
+					request);
 
 				if (newChannelState != null) {
 					currentWindowState = PortletAppEngineUtils.getWindowState(
-								newChannelState);
+						newChannelState);
 				}
 
-				ChannelMode newChannelMode = reqReader.readNewPortletWindowMode(
-						request);
+				ChannelMode newChannelMode =
+					requestReader.readNewPortletWindowMode(request);
 
 				if (newChannelMode != null) {
 					currentPortletMode = PortletAppEngineUtils.getPortletMode(
-							newChannelMode);
+						newChannelMode);
 				}
 			}
 
@@ -241,7 +242,6 @@ public class WindowInvoker extends InvokerPortlet {
 				actionResponseImpl.setRedirectLocation(redirectURL.toString());
 			}
 			else {
-
 				ChannelState newWindowState =
 					executeActionResponse.getNewWindowState();
 
