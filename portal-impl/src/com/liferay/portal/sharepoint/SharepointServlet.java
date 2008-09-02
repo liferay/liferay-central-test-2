@@ -22,7 +22,6 @@
 
 package com.liferay.portal.sharepoint;
 
-import com.liferay.portal.kernel.util.FileUtil;
 import com.liferay.portal.kernel.util.HttpUtil;
 import com.liferay.portal.kernel.util.InstancePool;
 import com.liferay.portal.kernel.util.StringPool;
@@ -32,10 +31,10 @@ import com.liferay.portal.sharepoint.methods.MethodFactory;
 import com.liferay.portal.util.WebKeys;
 import com.liferay.util.servlet.ServletResponseUtil;
 
+import java.io.BufferedInputStream;
+import java.io.BufferedOutputStream;
 import java.io.ByteArrayOutputStream;
-import java.io.InputStreamReader;
-
-import java.util.List;
+import java.io.InputStream;
 
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -113,41 +112,60 @@ public class SharepointServlet extends HttpServlet {
 		}
 
 		try {
-			List<String> linesList = FileUtil.toList(
-				new InputStreamReader((request.getInputStream())));
+			InputStream is = new BufferedInputStream(request.getInputStream());
 
-			String url = linesList.get(0);
+			ByteArrayOutputStream baos = new ByteArrayOutputStream();
+			BufferedOutputStream bos = new BufferedOutputStream(baos);
+
+			int c = is.read();
+
+			while (c != -1) {
+				bos.write(c);
+
+				// \n
+
+				if (c == 10) {
+					break;
+				}
+
+				c = is.read();
+			}
+
+			bos.flush();
+			bos.close();
+
+			String url = new String(baos.toByteArray());
 
 			String[] params = url.split(StringPool.AMPERSAND);
 
 			for (String param : params) {
 				String[] kvp = param.split(StringPool.EQUAL);
 
-				String name = HttpUtil.decodeURL(kvp[0]);
+				String key = HttpUtil.decodeURL(kvp[0]);
 				String value = StringPool.BLANK;
 
 				if (kvp.length > 1) {
 					value = HttpUtil.decodeURL(kvp[1]);
 				}
 
-				sharepointRequest.addParam(name, value);
+				sharepointRequest.addParam(key, value);
 			}
 
-			linesList.remove(0);
+			c = is.read();
 
-			ByteArrayOutputStream baos = new ByteArrayOutputStream();
+			baos = new ByteArrayOutputStream();
+			bos = new BufferedOutputStream(baos);
 
-			int i = 0;
+			while (c != -1) {
+				bos.write(c);
 
-			for (String line : linesList) {
-				baos.write(line.getBytes());
-
-				if (i < linesList.size()) {
-					baos.write(StringPool.RETURN_NEW_LINE.getBytes());
-				}
-
-				i++;
+				c = is.read();
 			}
+
+			is.close();
+
+			bos.flush();
+			bos.close();
 
 			sharepointRequest.setBytes(baos.toByteArray());
 		}
