@@ -12,7 +12,12 @@
 	</bean>
 
     <!-- destinations -->
-    <bean id="dest.svc.live.users" class="com.liferay.portal.kernel.messaging.SerialDestination">
+	<!-- If you wish to have a destination that receives all messages, e.g. for auditing, activate configurations below-->
+	<!--<bean id="dest.global" class="com.liferay.portal.kernel.messaging.ParallelDestination">
+        <constructor-arg type="java.lang.String" index="0" value="liferay/global"/>
+    </bean> -->
+	<!-- end global destination -->
+	<bean id="dest.svc.live.users" class="com.liferay.portal.kernel.messaging.SerialDestination">
         <constructor-arg type="java.lang.String" index="0" value="liferay/live_users"/>
     </bean>
     <bean id="dest.svc.mail" class="com.liferay.portal.kernel.messaging.ParallelDestination">
@@ -68,7 +73,18 @@
     </bean>
 
     <!-- listeners -->
-    <bean id="lsnr.live.users" class="com.liferay.portal.liveusers.messaging.LiveUsersMessageListener"/>
+	<!-- Activate the following to enable global destination -->
+	<!--<bean id="lsnr.global" class="com.liferay.portal.kernel.messaging.BridgingMessageListener">
+		<constructor-arg index="0" type="com.liferay.portal.kernel.messaging.SingleDestinationMessageSender">
+			<bean class="com.liferay.portal.kernel.messaging.DefaultSingleDestinationMessageSender">
+				<constructor-arg type="java.lang.String" index="0" value="liferay/global"/>
+				<constructor-arg type="com.liferay.portal.kernel.messaging.MessageSender"
+					index="1" ref="com.liferay.portal.kernel.messaging.MessageSender"/>
+			</bean>
+		</constructor-arg>
+	</bean>-->
+	<!-- end global listener -->
+	<bean id="lsnr.live.users" class="com.liferay.portal.liveusers.messaging.LiveUsersMessageListener"/>
     <bean id="lsnr.mail" class="com.liferay.mail.messaging.MailMessageListener"/>
     <bean id="lsnr.mb" class="com.liferay.portlet.messageboards.messaging.MBMessageListener"/>
     <bean id="lsnr.mb.maillist" class="com.liferay.portlet.messageboards.messaging.MailingListMessageListener"/>
@@ -84,7 +100,21 @@
     <!-- configurator -->
     <bean id="com.liferay.portal.kernel.messaging.MessagingConfigurator" class="com.liferay.portal.kernel.messaging.DefaultMessagingConfigurator"
         init-method="configure">
-        <property name="messagingDestinations">
+		<!-- Activate the following to enable global destination -->
+		<!--<property name="destinationEventListener">
+			<list>
+				<bean class="com.liferay.portal.kernel.messaging.GlobalDestinationEventListener">
+					<constructor-arg index="0" type="com.liferay.portal.kernel.messaging.MessageListener" ref="lsnr.global"/>
+					<constructor-arg index="1" type="java.util.List">
+						<list>
+							<value type="java.lang.String">liferay/global</value>
+						</list>
+					</constructor-arg>
+				</bean>
+			</list>
+		</property>-->
+		<!-- end global listener -->
+		<property name="messagingDestinations">
             <list>
                 <ref bean="dest.svc.live.users"/>
                 <ref bean="dest.svc.mail"/>
