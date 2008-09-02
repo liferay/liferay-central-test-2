@@ -58,6 +58,9 @@
 		else if (tabs2.equals("layout-template-plugins")) {
 			pluginType = Plugin.TYPE_LAYOUT_TEMPLATE;
 		}
+		else if (tabs2.equals("hook-plugins")) {
+			pluginType = Plugin.TYPE_HOOK;
+		}
 		else if (tabs2.equals("web-plugins")) {
 			pluginType = Plugin.TYPE_WEB;
 		}

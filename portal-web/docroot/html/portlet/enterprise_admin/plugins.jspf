@@ -23,7 +23,7 @@
 %>
 
 <liferay-ui:tabs
-	names="portlet-plugins,theme-plugins,layout-template-plugins,web-plugins"
+	names="portlet-plugins,theme-plugins,layout-template-plugins,hook-plugins,web-plugins"
 	param="tabs2"
 	url="<%= portletURL.toString() %>"
 />
@@ -34,6 +34,8 @@
 	</c:when>
 	<c:when test='<%= tabs2.equals("layout-template-plugins") %>'>
 		<%@ include file="/html/portlet/enterprise_admin/layout_templates.jspf" %>
+	</c:when>
+	<c:when test='<%= tabs2.equals("hook-plugins") %>'>
 	</c:when>
 	<c:when test='<%= tabs2.equals("web-plugins") %>'>
 	</c:when>
