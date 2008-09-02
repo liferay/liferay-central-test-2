@@ -80,8 +80,10 @@ import com.sun.portal.container.GetMarkupRequest;
 import com.sun.portal.container.GetMarkupResponse;
 import com.sun.portal.container.GetResourceRequest;
 import com.sun.portal.container.GetResourceResponse;
+import com.sun.portal.container.WindowRequestReader;
 import com.sun.portal.portletcontainer.appengine.PortletAppEngineUtils;
 import com.sun.portal.portletcontainer.portlet.impl.PortletRequestConstants;
+import com.sun.portal.wsrp.consumer.wsrpinvoker.WSRPWindowRequestReader;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -106,12 +108,14 @@ import javax.portlet.Portlet;
 import javax.portlet.PortletConfig;
 import javax.portlet.PortletContext;
 import javax.portlet.PortletException;
+import javax.portlet.PortletMode;
 import javax.portlet.PortletRequest;
 import javax.portlet.PortletResponse;
 import javax.portlet.RenderRequest;
 import javax.portlet.RenderResponse;
 import javax.portlet.ResourceRequest;
 import javax.portlet.ResourceResponse;
+import javax.portlet.WindowState;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -189,10 +193,33 @@ public class WindowInvoker extends InvokerPortlet {
 
 			_initUser(request, _portletModel);
 
+			WindowState currentWindowState = actionRequestImpl.getWindowState();
+			PortletMode currentPortletMode = actionRequestImpl.getPortletMode();
+
+			if (_remotePortlet) {
+
+				WindowRequestReader reqReader = new WSRPWindowRequestReader();
+				ChannelState newChannelState = reqReader.readNewWindowState(
+							request);
+
+				if (newChannelState != null) {
+					currentWindowState = PortletAppEngineUtils.getWindowState(
+								newChannelState);
+				}
+
+				ChannelMode newChannelMode = reqReader.readNewPortletWindowMode(
+						request);
+
+				if (newChannelMode != null) {
+					currentPortletMode = PortletAppEngineUtils.getPortletMode(
+							newChannelMode);
+				}
+			}
+
 			ExecuteActionRequest executeActionRequest =
 				ContainerRequestFactory.createExecuteActionRequest(
-					request, _portletModel, actionRequestImpl.getWindowState(),
-					actionRequestImpl.getPortletMode(), _getPlid(actionRequest),
+					request, _portletModel, currentWindowState,
+					currentPortletMode, _getPlid(actionRequest),
 					isFacesPortlet(), _remotePortlet);
 
 			_populateContainerRequest(
@@ -213,21 +240,29 @@ public class WindowInvoker extends InvokerPortlet {
 			if (redirectURL != null) {
 				actionResponseImpl.setRedirectLocation(redirectURL.toString());
 			}
+			else {
 
-			ChannelState newWindowState =
-				executeActionResponse.getNewWindowState();
+				ChannelState newWindowState =
+					executeActionResponse.getNewWindowState();
 
-			if (newWindowState != null) {
-				actionResponseImpl.setWindowState(
-					PortletAppEngineUtils.getWindowState(newWindowState));
-			}
+				if (newWindowState != null) {
+					actionResponseImpl.setWindowState(
+						PortletAppEngineUtils.getWindowState(newWindowState));
+				}
+				else {
+					actionResponseImpl.setWindowState(currentWindowState);
+				}
 
-			ChannelMode newPortletMode =
-				executeActionResponse.getNewChannelMode();
+				ChannelMode newPortletMode =
+					executeActionResponse.getNewChannelMode();
 
-			if (newPortletMode != null) {
-				actionResponseImpl.setPortletMode(
-					PortletAppEngineUtils.getPortletMode(newPortletMode));
+				if (newPortletMode != null) {
+					actionResponseImpl.setPortletMode(
+						PortletAppEngineUtils.getPortletMode(newPortletMode));
+				}
+				else {
+					actionResponseImpl.setPortletMode(currentPortletMode);
+				}
 			}
 		}
 		catch (Exception e) {
