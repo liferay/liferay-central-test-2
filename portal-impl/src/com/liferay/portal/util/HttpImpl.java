@@ -515,6 +515,19 @@ public class HttpImpl implements Http {
 		return protocolize(url, renderRequest.isSecure());
 	}
 
+	public String removeDomain(String url) {
+		url = removeProtocol(url);
+
+		int pos = url.indexOf(StringPool.SLASH);
+
+		if (pos != -1 && pos != 0) {
+			return url.substring(pos, url.length());
+		}
+		else {
+			return url;
+		}
+	}
+
 	public String removeParameter(String url, String name) {
 		int pos = url.indexOf(StringPool.QUESTION);
 

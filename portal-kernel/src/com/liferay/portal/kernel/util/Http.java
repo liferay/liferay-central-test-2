@@ -123,6 +123,8 @@ public interface Http {
 
 	public String protocolize(String url, RenderRequest renderRequest);
 
+	public String removeDomain(String url);
+
 	public String removeParameter(String url, String name);
 
 	public String removeProtocol(String url);

@@ -186,6 +186,10 @@ public class HttpUtil {
 		return getHttp().protocolize(url, renderRequest);
 	}
 
+	public static String removeDomain(String url) {
+		return getHttp().removeDomain(url);
+	}
+
 	public static String removeParameter(String url, String name) {
 		return getHttp().removeParameter(url, name);
 	}
