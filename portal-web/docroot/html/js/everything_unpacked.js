@@ -6982,7 +6982,7 @@ Liferay.PortletURL = new Class({
 			escapeXML: null,
 			lifecycle: lifecycle,
 			name: null,
-			plid: null,
+			p_l_id: null,
 			portletConfiguration: false,
 			portletId: null,
 			portletMode: null,
@@ -7153,6 +7153,7 @@ jQuery.extend(
 
 			var portletURL = Liferay.PortletURL.createRenderURL();
 
+			portletURL.setPlid(themeDisplay.getPlid());
 			portletURL.setPortletId(86);
 
 			portletURL.setWindowState('MAXIMIZED');
