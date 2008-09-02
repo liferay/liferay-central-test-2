@@ -22,6 +22,7 @@
 
 package com.liferay.portal.sharepoint;
 
+import com.liferay.portal.kernel.util.CharPool;
 import com.liferay.portal.kernel.util.HttpUtil;
 import com.liferay.portal.kernel.util.InstancePool;
 import com.liferay.portal.kernel.util.StringPool;
@@ -122,7 +123,7 @@ public class SharepointServlet extends HttpServlet {
 			while (c != -1) {
 				bos.write(c);
 
-				if (c == '\n') {
+				if (c == CharPool.NEW_LINE) {
 					break;
 				}
 
