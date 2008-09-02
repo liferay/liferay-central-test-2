@@ -379,6 +379,15 @@ public class BlogsEntryLocalServiceImpl extends BlogsEntryLocalServiceBaseImpl {
 		return blogsEntryPersistence.countByC_D(companyId, draft);
 	}
 
+	public BlogsEntry[] getEntriesPrevAndNext(long entryId)
+		throws PortalException, SystemException {
+
+		BlogsEntry entry = blogsEntryPersistence.findByPrimaryKey(entryId);
+
+		return blogsEntryPersistence.findByGroupId_PrevAndNext(
+			entry.getEntryId(), entry.getGroupId(), null);
+	}
+
 	public BlogsEntry getEntry(long entryId)
 		throws PortalException, SystemException {
 

@@ -257,6 +257,13 @@ public class BlogsEntryLocalServiceUtil {
 		return _service.getCompanyEntriesCount(companyId, draft);
 	}
 
+	public static com.liferay.portlet.blogs.model.BlogsEntry[] getEntriesPrevAndNext(
+		long entryId)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
+		return _service.getEntriesPrevAndNext(entryId);
+	}
+
 	public static com.liferay.portlet.blogs.model.BlogsEntry getEntry(
 		long entryId)
 		throws com.liferay.portal.PortalException,

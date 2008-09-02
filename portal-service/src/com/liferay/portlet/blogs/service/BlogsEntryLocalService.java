@@ -190,6 +190,11 @@ public interface BlogsEntryLocalService {
 	public int getCompanyEntriesCount(long companyId, boolean draft)
 		throws com.liferay.portal.SystemException;
 
+	public com.liferay.portlet.blogs.model.BlogsEntry[] getEntriesPrevAndNext(
+		long entryId)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException;
+
 	public com.liferay.portlet.blogs.model.BlogsEntry getEntry(long entryId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;
