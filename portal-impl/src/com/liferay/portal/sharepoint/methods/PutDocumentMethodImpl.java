@@ -58,9 +58,9 @@ public class PutDocumentMethodImpl extends BaseMethodImpl {
 
 		List<ResponseElement> elements = new ArrayList<ResponseElement>();
 
-		SharepointStorage storage = sharepointRequest.getSharepointStorage();
-
 		elements.add(new Property("message", StringPool.BLANK));
+
+		SharepointStorage storage = sharepointRequest.getSharepointStorage();
 
 		storage.putDocument(sharepointRequest);
 

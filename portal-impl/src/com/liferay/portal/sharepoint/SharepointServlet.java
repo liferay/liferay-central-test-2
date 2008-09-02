@@ -52,7 +52,7 @@ import org.apache.commons.logging.LogFactory;
  */
 public class SharepointServlet extends HttpServlet {
 
-	protected void doGet(
+	public void doGet(
 		HttpServletRequest request,	HttpServletResponse response) {
 
 		try {
@@ -67,7 +67,7 @@ public class SharepointServlet extends HttpServlet {
 		}
 	}
 
-	protected void doPost(
+	public void doPost(
 		HttpServletRequest request, HttpServletResponse response) {
 
 		try {
@@ -103,10 +103,10 @@ public class SharepointServlet extends HttpServlet {
 	}
 
 	protected void addParams(
-			HttpServletRequest httpRequest, SharepointRequest sharepointRequest)
+			HttpServletRequest request, SharepointRequest sharepointRequest)
 		throws SharepointException {
 
-		String contentType = httpRequest.getContentType();
+		String contentType = request.getContentType();
 
 		if (!contentType.equals(SharepointUtil.VEERMER_URLENCODED)) {
 			return;
@@ -114,7 +114,7 @@ public class SharepointServlet extends HttpServlet {
 
 		try {
 			List<String> linesList = FileUtil.toList(
-				new InputStreamReader((httpRequest.getInputStream())));
+				new InputStreamReader((request.getInputStream())));
 
 			String url = linesList.get(0);
 
@@ -123,15 +123,14 @@ public class SharepointServlet extends HttpServlet {
 			for (String param : params) {
 				String[] kvp = param.split(StringPool.EQUAL);
 
-				String key = HttpUtil.decodeURL(kvp[0]);
+				String name = HttpUtil.decodeURL(kvp[0]);
 				String value = StringPool.BLANK;
 
 				if (kvp.length > 1) {
 					value = HttpUtil.decodeURL(kvp[1]);
 				}
 
-				sharepointRequest.addParam(key, value);
-
+				sharepointRequest.addParam(name, value);
 			}
 
 			linesList.remove(0);
@@ -151,7 +150,6 @@ public class SharepointServlet extends HttpServlet {
 			}
 
 			sharepointRequest.setBytes(baos.toByteArray());
-
 		}
 		catch (Exception e) {
 			throw new SharepointException(e);

@@ -54,6 +54,10 @@ public class SharepointRequest {
 		_params.put(key, new String[] {value});
 	}
 
+	public byte[] getBytes() {
+		return _bytes;
+	}
+
 	public long getCompanyId() {
 		return _user.getCompanyId();
 	}
@@ -66,18 +70,10 @@ public class SharepointRequest {
 		return _response;
 	}
 
-	public byte[] getBytes() {
-		return _bytes;
-	}
-
-	public void setBytes(byte[] bytes) {
-		_bytes = bytes;
-	}
-
 	public String getParameterValue(String name) {
 		String[] values = _params.get(name);
 
-		if (values != null) {
+		if ((values != null) && (values.length > 0)) {
 			return GetterUtil.getString(_params.get(name)[0]);
 		}
 		else {
@@ -89,16 +85,8 @@ public class SharepointRequest {
 		return _rootPath;
 	}
 
-	public void setRootPath(String rootPath) {
-		_rootPath = rootPath.replaceAll("\\\\", StringPool.BLANK);
-	}
-
 	public SharepointStorage getSharepointStorage() {
 		return _storage;
-	}
-
-	public void setSharepointStorage(SharepointStorage storage) {
-		_storage = storage;
 	}
 
 	public User getUser() {
@@ -109,13 +97,24 @@ public class SharepointRequest {
 		return _user.getUserId();
 	}
 
+	public void setBytes(byte[] bytes) {
+		_bytes = bytes;
+	}
+
+	public void setRootPath(String rootPath) {
+		_rootPath = rootPath.replaceAll("\\\\", StringPool.BLANK);
+	}
+
+	public void setSharepointStorage(SharepointStorage storage) {
+		_storage = storage;
+	}
+
 	private SharepointStorage _storage;
 	private HttpServletRequest _request;
 	private HttpServletResponse _response;
-	private byte[] _bytes;
 	private String _rootPath = StringPool.BLANK;
 	private User _user;
-
-	private Map<String, String[]> _params= new HashMap<String, String[]>();
+	private byte[] _bytes;
+	private Map<String, String[]> _params = new HashMap<String, String[]>();
 
 }
