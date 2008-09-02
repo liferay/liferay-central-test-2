@@ -43,6 +43,7 @@ import com.liferay.portal.model.PortletConstants;
 import com.liferay.portal.service.GroupLocalServiceUtil;
 import com.liferay.portal.service.LayoutLocalServiceUtil;
 import com.liferay.portal.service.PortletLocalServiceUtil;
+import com.liferay.portal.servlet.I18nServlet;
 import com.liferay.portal.servlet.filters.BasePortalFilter;
 import com.liferay.portal.struts.LastPath;
 import com.liferay.portal.util.PortalInstances;
@@ -116,7 +117,15 @@ public class LayoutCacheFilter extends BasePortalFilter {
 		// Language
 
 		sb.append(StringPool.POUND);
-		sb.append(LanguageUtil.getLanguageId(request));
+
+		String languageId = (String)request.getAttribute(
+			WebKeys.I18N_LANGUAGE_ID);
+
+		if (Validator.isNull(languageId)) {
+			languageId = LanguageUtil.getLanguageId(request);
+		}
+
+		sb.append(languageId);
 
 		// Browser type
 
