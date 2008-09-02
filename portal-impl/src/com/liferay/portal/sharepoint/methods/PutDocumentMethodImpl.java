@@ -22,28 +22,34 @@
 
 package com.liferay.portal.sharepoint.methods;
 
+import com.liferay.portal.kernel.util.StringPool;
+import com.liferay.portal.sharepoint.Property;
 import com.liferay.portal.sharepoint.ResponseElement;
 import com.liferay.portal.sharepoint.SharepointRequest;
 import com.liferay.portal.sharepoint.SharepointStorage;
+import com.liferay.portal.sharepoint.Tree;
 
 import java.util.ArrayList;
 import java.util.List;
 
 /**
- * <a href="UncheckoutDocumentMethodImpl.java.html"><b><i>View Source</i></b>
- * </a>
+ * <a href="PutDocumentMethodImpl.java.html"><b><i>View Source</i></b></a>
  *
  * @author Bruno Farache
  *
  */
-public class UncheckoutDocumentMethodImpl extends BaseMethodImpl {
+public class PutDocumentMethodImpl extends BaseMethodImpl {
 
 	public String getMethodName() {
 		return _METHOD_NAME;
 	}
 
 	public String getRootPath(SharepointRequest sharepointRequest) {
-		return sharepointRequest.getParameterValue("document_name");
+		String rootPath = sharepointRequest.getParameterValue("document");
+
+		rootPath = rootPath.split(StringPool.SEMICOLON)[0];
+
+		return rootPath.substring(15);
 	}
 
 	protected List<ResponseElement> getElements(
@@ -54,11 +60,19 @@ public class UncheckoutDocumentMethodImpl extends BaseMethodImpl {
 
 		SharepointStorage storage = sharepointRequest.getSharepointStorage();
 
-		elements.add(storage.getDocumentTree(sharepointRequest));
+		elements.add(new Property("message", StringPool.BLANK));
+
+		storage.putDocument(sharepointRequest);
+
+		Tree documentTree = storage.getDocumentTree(sharepointRequest);
+
+		Property documentProperty = new Property("document", documentTree);
+
+		elements.add(documentProperty);
 
 		return elements;
 	}
 
-	private static final String _METHOD_NAME = "uncheckout document";
+	private static final String _METHOD_NAME = "put document";
 
 }

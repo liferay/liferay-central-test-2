@@ -48,7 +48,7 @@ public class UrlToWebUrlMethodImpl extends BaseMethodImpl {
 
 		List<ResponseElement> elements = new ArrayList<ResponseElement>();
 
-		String url = sharepointRequest.getParameter("url");
+		String url = sharepointRequest.getParameterValue("url");
 
 		if (Validator.isNotNull(url)) {
 			elements.add(new Property("webUrl", "/sharepoint"));

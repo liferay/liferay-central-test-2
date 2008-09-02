@@ -24,7 +24,6 @@ package com.liferay.portal.sharepoint.methods;
 
 import com.liferay.portal.kernel.util.ArrayUtil;
 import com.liferay.portal.kernel.util.FileUtil;
-import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.sharepoint.Property;
 import com.liferay.portal.sharepoint.ResponseElement;
@@ -38,8 +37,6 @@ import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.servlet.http.HttpServletRequest;
-
 /**
  * <a href="GetDocumentMethodImpl.java.html"><b><i>View Source</i></b></a>
  *
@@ -52,8 +49,8 @@ public class GetDocumentMethodImpl extends BaseMethodImpl {
 		return _METHOD_NAME;
 	}
 
-	public String getRootPath(HttpServletRequest request) {
-		return ParamUtil.getString(request, "document_name");
+	public String getRootPath(SharepointRequest sharepointRequest) {
+		return sharepointRequest.getParameterValue("document_name");
 	}
 
 	protected void doProcess(SharepointRequest sharepointRequest)

@@ -22,7 +22,6 @@
 
 package com.liferay.portal.sharepoint.methods;
 
-import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.sharepoint.Property;
 import com.liferay.portal.sharepoint.ResponseElement;
@@ -31,8 +30,6 @@ import com.liferay.portal.sharepoint.SharepointStorage;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import javax.servlet.http.HttpServletRequest;
 
 /**
  * <a href="CreateURLDirectoriesMethodImpl.java.html"><b><i>View Source</i></b>
@@ -47,8 +44,8 @@ public class CreateURLDirectoriesMethodImpl extends BaseMethodImpl {
 		return _METHOD_NAME;
 	}
 
-	public String getRootPath(HttpServletRequest request) {
-		String urlDirs = ParamUtil.getString(request, "urldirs");
+	public String getRootPath(SharepointRequest sharepointRequest) {
+		String urlDirs = sharepointRequest.getParameterValue("urldirs");
 
 		urlDirs = urlDirs.substring(2, urlDirs.length() - 2);
 

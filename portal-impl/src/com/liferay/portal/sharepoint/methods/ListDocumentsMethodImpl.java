@@ -22,7 +22,6 @@
 
 package com.liferay.portal.sharepoint.methods;
 
-import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.sharepoint.Property;
 import com.liferay.portal.sharepoint.ResponseElement;
 import com.liferay.portal.sharepoint.SharepointRequest;
@@ -30,8 +29,6 @@ import com.liferay.portal.sharepoint.SharepointStorage;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import javax.servlet.http.HttpServletRequest;
 
 /**
  * <a href="ListDocumentsMethodImpl.java.html"><b><i>View Source</i></b></a>
@@ -45,8 +42,8 @@ public class ListDocumentsMethodImpl extends BaseMethodImpl {
 		return _METHOD_NAME;
 	}
 
-	public String getRootPath(HttpServletRequest request) {
-		return ParamUtil.getString(request, "initialUrl");
+	public String getRootPath(SharepointRequest sharepointRequest) {
+		return sharepointRequest.getParameterValue("initialUrl");
 	}
 
 	protected List<ResponseElement> getElements(

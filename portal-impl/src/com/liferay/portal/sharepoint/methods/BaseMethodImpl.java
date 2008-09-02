@@ -31,8 +31,6 @@ import com.liferay.util.servlet.ServletResponseUtil;
 
 import java.util.List;
 
-import javax.servlet.http.HttpServletRequest;
-
 /**
  * <a href="BaseMethodImpl.java.html"><b><i>View Source</i></b></a>
  *
@@ -41,7 +39,7 @@ import javax.servlet.http.HttpServletRequest;
  */
 public abstract class BaseMethodImpl implements Method {
 
-	public String getRootPath(HttpServletRequest request) {
+	public String getRootPath(SharepointRequest sharepointRequest) {
 		return StringPool.BLANK;
 	}
 

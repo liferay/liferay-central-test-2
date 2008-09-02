@@ -22,7 +22,6 @@
 
 package com.liferay.portal.sharepoint.methods;
 
-import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.sharepoint.Property;
 import com.liferay.portal.sharepoint.ResponseElement;
 import com.liferay.portal.sharepoint.SharepointRequest;
@@ -32,8 +31,6 @@ import com.liferay.portlet.documentlibrary.NoSuchFileEntryException;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import javax.servlet.http.HttpServletRequest;
 
 /**
  * <a href="GetDocsMetaInfoMethodImpl.java.html"><b><i>View Source</i></b></a>
@@ -47,8 +44,8 @@ public class GetDocsMetaInfoMethodImpl extends BaseMethodImpl {
 		return _METHOD_NAME;
 	}
 
-	public String getRootPath(HttpServletRequest request) {
-		String urlList = ParamUtil.getString(request, "url_list");
+	public String getRootPath(SharepointRequest sharepointRequest) {
+		String urlList = sharepointRequest.getParameterValue("url_list");
 
 		urlList = urlList.substring(1, urlList.length() - 1);
 

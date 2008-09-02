@@ -22,6 +22,8 @@
 
 package com.liferay.portal.sharepoint;
 
+import com.liferay.portal.kernel.util.FileUtil;
+import com.liferay.portal.kernel.util.HttpUtil;
 import com.liferay.portal.kernel.util.InstancePool;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.User;
@@ -29,6 +31,11 @@ import com.liferay.portal.sharepoint.methods.Method;
 import com.liferay.portal.sharepoint.methods.MethodFactory;
 import com.liferay.portal.util.WebKeys;
 import com.liferay.util.servlet.ServletResponseUtil;
+
+import java.io.ByteArrayOutputStream;
+import java.io.InputStreamReader;
+
+import java.util.List;
 
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -72,20 +79,82 @@ public class SharepointServlet extends HttpServlet {
 				User user = (User)request.getSession().getAttribute(
 					WebKeys.USER);
 
-				Method method = MethodFactory.create(request);
+				SharepointRequest sharepointRequest = new SharepointRequest(
+					request, response, user);
 
-				String rootPath = method.getRootPath(request);
+				addParams(request, sharepointRequest);
+
+				Method method = MethodFactory.create(sharepointRequest);
+
+				String rootPath = method.getRootPath(sharepointRequest);
+
+				sharepointRequest.setRootPath(rootPath);
 
 				SharepointStorage storage = getStorage(rootPath);
 
-				SharepointRequest sharepointRequest = new SharepointRequest(
-					storage, request, response, rootPath, user);
+				sharepointRequest.setSharepointStorage(storage);
 
 				method.process(sharepointRequest);
 			}
 		}
 		catch (SharepointException se) {
 			_log.error(se, se);
+		}
+	}
+
+	protected void addParams(
+			HttpServletRequest httpRequest, SharepointRequest sharepointRequest)
+		throws SharepointException {
+
+		String contentType = httpRequest.getContentType();
+
+		if (!contentType.equals(SharepointUtil.VEERMER_URLENCODED)) {
+			return;
+		}
+
+		try {
+			List<String> linesList = FileUtil.toList(
+				new InputStreamReader((httpRequest.getInputStream())));
+
+			String url = linesList.get(0);
+
+			String[] params = url.split(StringPool.AMPERSAND);
+
+			for (String param : params) {
+				String[] kvp = param.split(StringPool.EQUAL);
+
+				String key = HttpUtil.decodeURL(kvp[0]);
+				String value = StringPool.BLANK;
+
+				if (kvp.length > 1) {
+					value = HttpUtil.decodeURL(kvp[1]);
+				}
+
+				sharepointRequest.addParam(key, value);
+
+			}
+
+			linesList.remove(0);
+
+			ByteArrayOutputStream baos = new ByteArrayOutputStream();
+
+			int i = 0;
+
+			for (String line : linesList) {
+				baos.write(line.getBytes());
+
+				if (i < linesList.size()) {
+					baos.write(StringPool.RETURN_NEW_LINE.getBytes());
+				}
+
+				i++;
+			}
+
+			sharepointRequest.setBytes(baos.toByteArray());
+
+		}
+		catch (Exception e) {
+			throw new SharepointException(e);
 		}
 	}
 

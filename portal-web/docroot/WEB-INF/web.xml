@@ -565,6 +565,10 @@
 		<servlet-class>com.liferay.portal.sharepoint.SharepointServlet</servlet-class>
 	</servlet>
 	<servlet>
+		<servlet-name>SharepointDocumentWorkspaceServlet</servlet-name>
+		<servlet-class>com.liferay.portal.sharepoint.SharepointDocumentWorkspaceServlet</servlet-class>
+	</servlet>
+	<servlet>
 		<servlet-name>SharepointWebServicesServlet</servlet-name>
 		<servlet-class>com.liferay.portal.sharepoint.SharepointWebServicesServlet</servlet-class>
 	</servlet>
@@ -669,6 +673,10 @@
 	<servlet-mapping>
 		<servlet-name>SharepointServlet</servlet-name>
 		<url-pattern>/sharepoint/_vti_bin/_vti_aut/author.dll</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>SharepointDocumentWorkspaceServlet</servlet-name>
+		<url-pattern>/sharepoint/_vti_bin/dws.asmx</url-pattern>
 	</servlet-mapping>
 	<servlet-mapping>
 		<servlet-name>SharepointServlet</servlet-name>

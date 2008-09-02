@@ -26,12 +26,11 @@ import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.InstancePool;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.sharepoint.SharepointException;
+import com.liferay.portal.sharepoint.SharepointRequest;
 import com.liferay.portal.util.PropsUtil;
 
 import java.util.HashMap;
 import java.util.Map;
-
-import javax.servlet.http.HttpServletRequest;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -44,10 +43,10 @@ import org.apache.commons.logging.LogFactory;
  */
 public class MethodFactory {
 
-	public static Method create(HttpServletRequest request)
+	public static Method create(SharepointRequest sharepointRequest)
 		throws SharepointException {
 
-		return _instance._create(request);
+		return _instance._create(sharepointRequest);
 	}
 
 	private MethodFactory() {
@@ -74,6 +73,10 @@ public class MethodFactory {
 
 		_methods.put(method.getMethodName(), method);
 
+		method = (Method)InstancePool.get(_PUT_DOCUMENT_METHOD_IMPL);
+
+		_methods.put(method.getMethodName(), method);
+
 		method = (Method)InstancePool.get(_REMOVE_DOCUMENTS_METHOD_IMPL);
 
 		_methods.put(method.getMethodName(), method);
@@ -91,18 +94,12 @@ public class MethodFactory {
 		_methods.put(method.getMethodName(), method);
 	}
 
-	private Method _create(HttpServletRequest request)
+	private Method _create(SharepointRequest sharepointRequest)
 		throws SharepointException {
 
-		String method = null;
+		String method = sharepointRequest.getParameterValue("method");
 
-		String requestMethod = request.getMethod().toUpperCase();
-
-		if (requestMethod.equals(Method.POST)) {
-			method = request.getParameter("method");
-
-			method = method.split(StringPool.COLON)[0];
-		}
+		method = method.split(StringPool.COLON)[0];
 
 		if (_log.isDebugEnabled()) {
 			_log.debug("Get method " + method);
@@ -151,6 +148,11 @@ public class MethodFactory {
 		GetterUtil.getString(
 			PropsUtil.get(MethodFactory.class.getName() + ".OPEN_SERVICE"),
 			OpenServiceMethodImpl.class.getName());
+
+	private static final String _PUT_DOCUMENT_METHOD_IMPL =
+		GetterUtil.getString(
+			PropsUtil.get(MethodFactory.class.getName() + ".PUT_DOCUMENT"),
+			PutDocumentMethodImpl.class.getName());
 
 	private static final String _REMOVE_DOCUMENTS_METHOD_IMPL =
 		GetterUtil.getString(

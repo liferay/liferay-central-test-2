@@ -31,6 +31,7 @@ import com.liferay.portal.model.Company;
 import com.liferay.portal.model.CompanyConstants;
 import com.liferay.portal.model.User;
 import com.liferay.portal.security.auth.Authenticator;
+import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.security.auth.PrincipalThreadLocal;
 import com.liferay.portal.security.permission.PermissionChecker;
 import com.liferay.portal.security.permission.PermissionCheckerFactory;
@@ -205,29 +206,37 @@ public class SharepointFilter extends BasePortalFilter {
 
 			User user = (User)session.getAttribute(WebKeys.USER);
 
-			if (user == null) {
-				user = login(request, response);
-
+			try {
 				if (user == null) {
-					throw new SharepointException("User is null");
+					user = login(request, response);
+
+					if (user == null) {
+						throw new PrincipalException("User is null");
+					}
+
+					session.setAttribute(WebKeys.USER, user);
 				}
 
-				session.setAttribute(WebKeys.USER, user);
+				PrincipalThreadLocal.setName(user.getUserId());
+
+				permissionChecker = PermissionCheckerFactory.create(
+					user, false);
+
+				PermissionThreadLocal.setPermissionChecker(permissionChecker);
+			}
+			catch (Exception e) {
+				sendUnauthorized(response);
+
+				return;
 			}
 
-			PrincipalThreadLocal.setName(user.getUserId());
-
-			permissionChecker = PermissionCheckerFactory.create(user, false);
-
-			PermissionThreadLocal.setPermissionChecker(permissionChecker);
-
-			processFilter(
-				SharepointFilter.class, request, response, filterChain);
-		}
-		catch (Exception e) {
-			sendUnauthorized(response);
-
-			return;
+			try {
+				processFilter(
+					SharepointFilter.class, request, response, filterChain);
+			}
+			catch (Exception e) {
+				_log.error(e, e);
+			}
 		}
 		finally {
 			try {

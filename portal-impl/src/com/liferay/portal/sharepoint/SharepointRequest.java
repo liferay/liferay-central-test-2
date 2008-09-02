@@ -22,8 +22,12 @@
 
 package com.liferay.portal.sharepoint;
 
+import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.User;
+
+import java.util.HashMap;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -37,14 +41,17 @@ import javax.servlet.http.HttpServletResponse;
 public class SharepointRequest {
 
 	public SharepointRequest(
-		SharepointStorage storage, HttpServletRequest request,
-		HttpServletResponse response, String rootPath, User user) {
+		HttpServletRequest request, HttpServletResponse response, User user) {
 
-		_storage = storage;
 		_request = request;
 		_response = response;
-		_rootPath = rootPath.replaceAll("\\\\", StringPool.BLANK);
 		_user = user;
+
+		_params.putAll(request.getParameterMap());
+	}
+
+	public void addParam(String key, String value) {
+		_params.put(key, new String[] {value});
 	}
 
 	public long getCompanyId() {
@@ -59,16 +66,39 @@ public class SharepointRequest {
 		return _response;
 	}
 
-	public String getParameter(String name) {
-		return _request.getParameter(name);
+	public byte[] getBytes() {
+		return _bytes;
+	}
+
+	public void setBytes(byte[] bytes) {
+		_bytes = bytes;
+	}
+
+	public String getParameterValue(String name) {
+		String[] values = _params.get(name);
+
+		if (values != null) {
+			return GetterUtil.getString(_params.get(name)[0]);
+		}
+		else {
+			return StringPool.BLANK;
+		}
 	}
 
 	public String getRootPath() {
 		return _rootPath;
 	}
 
+	public void setRootPath(String rootPath) {
+		_rootPath = rootPath.replaceAll("\\\\", StringPool.BLANK);
+	}
+
 	public SharepointStorage getSharepointStorage() {
 		return _storage;
+	}
+
+	public void setSharepointStorage(SharepointStorage storage) {
+		_storage = storage;
 	}
 
 	public User getUser() {
@@ -82,7 +112,10 @@ public class SharepointRequest {
 	private SharepointStorage _storage;
 	private HttpServletRequest _request;
 	private HttpServletResponse _response;
+	private byte[] _bytes;
 	private String _rootPath = StringPool.BLANK;
 	private User _user;
+
+	private Map<String, String[]> _params= new HashMap<String, String[]>();
 
 }

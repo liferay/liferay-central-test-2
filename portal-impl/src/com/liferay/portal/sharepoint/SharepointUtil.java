@@ -41,6 +41,9 @@ import java.util.Map;
  */
 public class SharepointUtil {
 
+	public static final String VEERMER_URLENCODED =
+		"application/x-vermeer-urlencoded";
+
 	public static final String VERSION = "6.0.2.8117";
 
 	public static void addBottom(StringBuilder sb) {

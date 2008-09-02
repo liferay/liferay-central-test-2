@@ -22,11 +22,13 @@
 
 package com.liferay.portlet.documentlibrary.sharepoint;
 
+import com.liferay.portal.kernel.util.FileUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.sharepoint.BaseSharepointStorageImpl;
 import com.liferay.portal.sharepoint.SharepointRequest;
 import com.liferay.portal.sharepoint.SharepointUtil;
 import com.liferay.portal.sharepoint.Tree;
+import com.liferay.portlet.documentlibrary.NoSuchFileEntryException;
 import com.liferay.portlet.documentlibrary.NoSuchFolderException;
 import com.liferay.portlet.documentlibrary.model.DLFileEntry;
 import com.liferay.portlet.documentlibrary.model.DLFolder;
@@ -34,7 +36,9 @@ import com.liferay.portlet.documentlibrary.model.impl.DLFolderImpl;
 import com.liferay.portlet.documentlibrary.service.DLFileEntryLocalServiceUtil;
 import com.liferay.portlet.documentlibrary.service.DLFileEntryServiceUtil;
 import com.liferay.portlet.documentlibrary.service.DLFolderServiceUtil;
+import com.liferay.portlet.tags.service.TagsEntryLocalServiceUtil;
 
+import java.io.File;
 import java.io.InputStream;
 
 import java.util.List;
@@ -169,6 +173,48 @@ public class DLSharepointStorageImpl extends BaseSharepointStorageImpl {
 			path = removeFoldersFromPath(path, 1);
 
 			getParentFolderIds(groupId, path, folderIds);
+		}
+	}
+
+	public void putDocument(SharepointRequest sharepointRequest)
+		throws Exception {
+
+		String parentFolderPath = getParentFolderPath(sharepointRequest);
+
+		long groupId = getGroupId(parentFolderPath);
+		long parentFolderId = getLastFolderId(
+			groupId, parentFolderPath, DLFolderImpl.DEFAULT_PARENT_FOLDER_ID);
+		String name = getResourceName(sharepointRequest);
+		String title = name;
+		String description = StringPool.BLANK;
+		String[] tagsEntries = null;
+		String extraSettings = StringPool.BLANK;
+		boolean addCommunityPermissions = true;
+		boolean addGuestPermissions = true;
+
+		try {
+			DLFileEntry entry = getFileEntry(sharepointRequest);
+
+			name = entry.getName();
+			description = entry.getDescription();
+			tagsEntries = TagsEntryLocalServiceUtil.getEntryNames(
+				DLFileEntry.class.getName(), entry.getFileEntryId());
+			extraSettings = entry.getExtraSettings();
+
+			DLFileEntryServiceUtil.updateFileEntry(
+				parentFolderId, parentFolderId, name, title, title,
+				description, tagsEntries, extraSettings,
+				sharepointRequest.getBytes());
+		}
+		catch (NoSuchFileEntryException nsfee) {
+			File file = FileUtil.createTempFile(FileUtil.getExtension(name));
+
+			FileUtil.write(file, sharepointRequest.getBytes());
+
+			DLFileEntryServiceUtil.addFileEntry(
+				parentFolderId, name, title, description, tagsEntries,
+				extraSettings, file, addCommunityPermissions,
+				addGuestPermissions);
 		}
 	}
 

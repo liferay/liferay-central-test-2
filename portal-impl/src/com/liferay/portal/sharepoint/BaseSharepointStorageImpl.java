@@ -83,6 +83,10 @@ public abstract class BaseSharepointStorageImpl implements SharepointStorage {
 		throws Exception {
 	}
 
+	public void putDocument(SharepointRequest sharepointRequest)
+		throws Exception {
+	}
+
 	public Tree[] removeDocument(SharepointRequest sharepointRequest)
 		throws Exception {
 

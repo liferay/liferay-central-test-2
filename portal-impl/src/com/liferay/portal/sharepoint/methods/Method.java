@@ -25,8 +25,6 @@ package com.liferay.portal.sharepoint.methods;
 import com.liferay.portal.sharepoint.SharepointException;
 import com.liferay.portal.sharepoint.SharepointRequest;
 
-import javax.servlet.http.HttpServletRequest;
-
 /**
  * <a href="Method.java.html"><b><i>View Source</i></b></a>
  *
@@ -41,7 +39,7 @@ public interface Method {
 
 	public String getMethodName();
 
-	public String getRootPath(HttpServletRequest request);
+	public String getRootPath(SharepointRequest sharepointRequest);
 
 	public void process(SharepointRequest sharepointRequest)
 		throws SharepointException;
