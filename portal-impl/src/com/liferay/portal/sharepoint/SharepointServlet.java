@@ -122,9 +122,7 @@ public class SharepointServlet extends HttpServlet {
 			while (c != -1) {
 				bos.write(c);
 
-				// \n
-
-				if (c == 10) {
+				if (c == '\n') {
 					break;
 				}
 
