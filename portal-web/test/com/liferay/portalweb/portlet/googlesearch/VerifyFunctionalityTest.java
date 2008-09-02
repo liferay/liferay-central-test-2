@@ -39,7 +39,7 @@ public class VerifyFunctionalityTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("//img[@title='Preferences']")) {
+				if (selenium.isElementPresent("//img[@alt='Preferences']")) {
 					break;
 				}
 			}
@@ -70,7 +70,7 @@ public class VerifyFunctionalityTest extends BaseTestCase {
 
 		selenium.click(RuntimeVariables.replace("link=Return to Full Page"));
 		selenium.waitForPageToLoad("30000");
-		selenium.click(RuntimeVariables.replace("//img[@title='Preferences']"));
+		selenium.click(RuntimeVariables.replace("//img[@alt='Preferences']"));
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {

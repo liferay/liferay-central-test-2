@@ -33,7 +33,24 @@ import com.liferay.portalweb.portal.util.RuntimeVariables;
  */
 public class EditPreferencesTest extends BaseTestCase {
 	public void testEditPreferences() throws Exception {
-		selenium.click(RuntimeVariables.replace("//img[@title='Preferences']"));
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isElementPresent("//strong/span")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
+		selenium.click("//strong/span");
+		selenium.click(RuntimeVariables.replace("//img[@alt='Preferences']"));
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {
@@ -53,8 +70,7 @@ public class EditPreferencesTest extends BaseTestCase {
 		}
 
 		selenium.type("_1_WAR_weatherportlet_zips",
-			RuntimeVariables.replace(
-				"Chicago\nFrankfurt/Main\nRome, Italy\nDiamond Bar, California"));
+			RuntimeVariables.replace("Diamond Bar, CA"));
 		selenium.click(RuntimeVariables.replace("//input[@value='Save']"));
 		selenium.waitForPageToLoad("30000");
 		selenium.click(RuntimeVariables.replace("link=Return to Full Page"));
@@ -66,7 +82,7 @@ public class EditPreferencesTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("link=Diamond Bar, California")) {
+				if (selenium.isElementPresent("link=Diamond Bar, CA")) {
 					break;
 				}
 			}

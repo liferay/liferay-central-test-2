@@ -60,7 +60,7 @@ public class AddPortletTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("//img[@title='Preferences']")) {
+				if (selenium.isElementPresent("//img[@alt='Preferences']")) {
 					break;
 				}
 			}
