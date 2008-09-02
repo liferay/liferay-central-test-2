@@ -31,7 +31,6 @@ import java.io.FileNotFoundException;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
-import org.springframework.beans.factory.support.DefaultListableBeanFactory;
 import org.springframework.beans.factory.xml.XmlBeanDefinitionReader;
 import org.springframework.web.context.support.XmlWebApplicationContext;
 
@@ -42,6 +41,13 @@ import org.springframework.web.context.support.XmlWebApplicationContext;
  *
  */
 public class PortletApplicationContext extends XmlWebApplicationContext {
+
+	protected void initBeanDefinitionReader(XmlBeanDefinitionReader reader) {
+		reader.setBeanClassLoader(
+			new AggregateClassLoader(
+				PortletClassLoaderUtil.getClassLoader(),
+				PortalClassLoaderUtil.getClassLoader()));
+	}
 
 	protected void loadBeanDefinitions(XmlBeanDefinitionReader reader) {
 		String[] configLocations = getConfigLocations();
@@ -67,15 +73,6 @@ public class PortletApplicationContext extends XmlWebApplicationContext {
 				}
 			}
 		}
-	}
-
-	protected void initBeanDefinitionReader(
-			XmlBeanDefinitionReader beanDefinitionReader) {
-
-		beanDefinitionReader.setBeanClassLoader(
-				new AggregateClassLoader(
-					PortletClassLoaderUtil.getClassLoader(),
-					PortalClassLoaderUtil.getClassLoader()));
 	}
 
 	private static Log _log =
