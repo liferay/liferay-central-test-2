@@ -91,7 +91,7 @@ public class IGUtil {
 				"struts_action", "/image_gallery/select_folder");
 		}
 		else {
-			foldersURL.setWindowState(WindowState.MAXIMIZED);
+			//foldersURL.setWindowState(WindowState.MAXIMIZED);
 
 			foldersURL.setParameter("struts_action", "/image_gallery/view");
 		}
@@ -121,7 +121,7 @@ public class IGUtil {
 						"folderId", String.valueOf(folder.getFolderId()));
 				}
 				else {
-					portletURL.setWindowState(WindowState.MAXIMIZED);
+					//portletURL.setWindowState(WindowState.MAXIMIZED);
 
 					portletURL.setParameter(
 						"struts_action", "/image_gallery/view");
@@ -156,7 +156,7 @@ public class IGUtil {
 
 			PortletURL imageURL = renderResponse.createRenderURL();
 
-			imageURL.setWindowState(WindowState.MAXIMIZED);
+			//imageURL.setWindowState(WindowState.MAXIMIZED);
 
 			imageURL.setParameter("struts_action", "/image_gallery/edit_image");
 			imageURL.setParameter(

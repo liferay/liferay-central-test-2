@@ -612,7 +612,7 @@ public class ShoppingUtil {
 				"struts_action", "/shopping/select_category");
 		}
 		else {
-			categoriesURL.setWindowState(WindowState.MAXIMIZED);
+			//categoriesURL.setWindowState(WindowState.MAXIMIZED);
 
 			categoriesURL.setParameter("struts_action", "/shopping/view");
 			categoriesURL.setParameter("tabs1", "categories");
@@ -643,7 +643,7 @@ public class ShoppingUtil {
 						"categoryId", String.valueOf(category.getCategoryId()));
 				}
 				else {
-					portletURL.setWindowState(WindowState.MAXIMIZED);
+					//portletURL.setWindowState(WindowState.MAXIMIZED);
 
 					portletURL.setParameter("struts_action", "/shopping/view");
 					portletURL.setParameter("tabs1", "categories");

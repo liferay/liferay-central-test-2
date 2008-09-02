@@ -133,7 +133,7 @@ public class DLUtil {
 						"folderId", String.valueOf(folder.getFolderId()));
 				}
 				else {
-					portletURL.setWindowState(WindowState.MAXIMIZED);
+					//portletURL.setWindowState(WindowState.MAXIMIZED);
 
 					portletURL.setParameter(
 						"struts_action", "/document_library/view");
@@ -168,7 +168,7 @@ public class DLUtil {
 
 			PortletURL fileEntryURL = renderResponse.createRenderURL();
 
-			fileEntryURL.setWindowState(WindowState.MAXIMIZED);
+			//fileEntryURL.setWindowState(WindowState.MAXIMIZED);
 
 			fileEntryURL.setParameter(
 				"struts_action", "/document_library/edit_file_entry");

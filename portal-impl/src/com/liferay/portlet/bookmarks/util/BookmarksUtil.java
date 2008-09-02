@@ -104,7 +104,7 @@ public class BookmarksUtil {
 				"struts_action", "/bookmarks/select_folder");
 		}
 		else {
-			foldersURL.setWindowState(WindowState.MAXIMIZED);
+			//foldersURL.setWindowState(WindowState.MAXIMIZED);
 
 			foldersURL.setParameter("struts_action", "/bookmarks/view");
 		}
@@ -134,7 +134,7 @@ public class BookmarksUtil {
 						"folderId", String.valueOf(folder.getFolderId()));
 				}
 				else {
-					portletURL.setWindowState(WindowState.MAXIMIZED);
+					//portletURL.setWindowState(WindowState.MAXIMIZED);
 
 					portletURL.setParameter("struts_action", "/bookmarks/view");
 					portletURL.setParameter(
@@ -168,7 +168,7 @@ public class BookmarksUtil {
 
 			PortletURL entryURL = renderResponse.createRenderURL();
 
-			entryURL.setWindowState(WindowState.MAXIMIZED);
+			//entryURL.setWindowState(WindowState.MAXIMIZED);
 
 			entryURL.setParameter("struts_action", "/bookmarks/edit_entry");
 			entryURL.setParameter(

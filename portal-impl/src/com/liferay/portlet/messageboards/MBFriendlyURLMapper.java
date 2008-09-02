@@ -132,7 +132,7 @@ public class MBFriendlyURLMapper extends BaseFriendlyURLMapper {
 
 		addParam(params, "p_p_id", _PORTLET_ID);
 		addParam(params, "p_p_lifecycle", "0");
-		addParam(params, "p_p_state", WindowState.MAXIMIZED);
+		//addParam(params, "p_p_state", WindowState.MAXIMIZED);
 		addParam(params, "p_p_mode", PortletMode.VIEW);
 
 		int x = friendlyURLPath.indexOf("/", 1);

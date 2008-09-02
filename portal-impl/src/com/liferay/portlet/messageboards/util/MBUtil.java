@@ -195,7 +195,7 @@ public class MBUtil {
 				"struts_action", "/message_boards/select_category");
 		}
 		else {
-			categoriesURL.setWindowState(WindowState.MAXIMIZED);
+			//categoriesURL.setWindowState(WindowState.MAXIMIZED);
 
 			categoriesURL.setParameter("struts_action", "/message_boards/view");
 			categoriesURL.setParameter(
@@ -227,7 +227,7 @@ public class MBUtil {
 					"categoryId", String.valueOf(category.getCategoryId()));
 			}
 			else {
-				portletURL.setWindowState(WindowState.MAXIMIZED);
+				//portletURL.setWindowState(WindowState.MAXIMIZED);
 
 				portletURL.setParameter(
 					"struts_action", "/message_boards/view");
@@ -261,7 +261,7 @@ public class MBUtil {
 
 			PortletURL messageURL = renderResponse.createRenderURL();
 
-			messageURL.setWindowState(WindowState.MAXIMIZED);
+			//messageURL.setWindowState(WindowState.MAXIMIZED);
 
 			messageURL.setParameter(
 				"struts_action", "/message_boards/view_message");
