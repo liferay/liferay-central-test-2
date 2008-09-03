@@ -33,6 +33,23 @@ import com.liferay.portalweb.portal.util.RuntimeVariables;
  */
 public class DisplayStylesTest extends BaseTestCase {
 	public void testDisplayStyles() throws Exception {
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isElementPresent("//img[@alt='Configuration']")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
+		selenium.click("//strong/span");
 		selenium.click(RuntimeVariables.replace("//img[@alt='Configuration']"));
 		selenium.waitForPageToLoad("30000");
 		selenium.select("_86_displayStyle",
