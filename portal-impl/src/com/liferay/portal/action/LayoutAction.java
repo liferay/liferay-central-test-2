@@ -191,7 +191,7 @@ public class LayoutAction extends Action {
 			try {
 				forwardLayout(request);
 
-				return mapping.findForward(ActionConstants.COMMON_FORWARD);
+				return mapping.findForward(ActionConstants.COMMON_FORWARD_JSP);
 			}
 			catch (Exception e) {
 				PortalUtil.sendError(e, request, response);
@@ -203,7 +203,9 @@ public class LayoutAction extends Action {
 
 	protected void forwardLayout(HttpServletRequest request) throws Exception {
 		Layout layout = (Layout)request.getAttribute(WebKeys.LAYOUT);
+
 		long plid = LayoutConstants.DEFAULT_PLID;
+
 		String layoutFriendlyURL = null;
 
 		ThemeDisplay themeDisplay = (ThemeDisplay)request.getAttribute(
@@ -211,8 +213,9 @@ public class LayoutAction extends Action {
 
 		if (layout != null) {
 			plid = layout.getPlid();
-			layoutFriendlyURL =
-				PortalUtil.getLayoutFriendlyURL(layout, themeDisplay);
+
+			layoutFriendlyURL = PortalUtil.getLayoutFriendlyURL(
+				layout, themeDisplay);
 		}
 
 		String forwardURL = layoutFriendlyURL;
