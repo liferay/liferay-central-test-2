@@ -99,6 +99,26 @@ public abstract class BaseUpgradeTableImpl {
 
 	public void setColumns(Object[][] columns) {
 		_columns = columns;
+
+		// LEP-7331
+		// Reorder the parameters so that all the CLOBs are at the
+		// end of the insert statement.
+
+		_insertionOrder = new int[_columns.length];
+
+		int clobCount = 0;
+
+		for (int i = 0; i < _columns.length; ++i) {
+			Integer type = (Integer) columns[i][1];
+
+			if (type.intValue() == Types.CLOB) {
+				++clobCount;
+				_insertionOrder[i] = _columns.length - clobCount;
+			}
+			else {
+				_insertionOrder[i] = i - clobCount;
+			}
+		}
 	}
 
 	public abstract String getExportedData(ResultSet rs) throws Exception;
@@ -163,8 +183,10 @@ public abstract class BaseUpgradeTableImpl {
 	public String getInsertSQL() throws Exception {
 		String sql = "INSERT INTO " + _tableName + " (";
 
-		for (int i = 0; i < _columns.length; i++) {
-			sql += _columns[i][0];
+		for (int i = 0; i < _insertionOrder.length; i++) {
+			int pos = _insertionOrder[i];
+
+			sql += _columns[pos][0];
 
 			if ((i + 1) < _columns.length) {
 				sql += ", ";
@@ -481,8 +503,9 @@ public abstract class BaseUpgradeTableImpl {
 					ps = con.prepareStatement(insertSQL);
 				}
 
-				for (int i = 0; i < _columns.length; i++) {
-					setColumn(ps, i, (Integer)_columns[i][1], values[i]);
+				for (int i = 0; i < _insertionOrder.length; i++) {
+					int pos = _insertionOrder[i];
+					setColumn(ps, i, (Integer)_columns[pos][1], values[pos]);
 				}
 
 				if (useBatch) {
@@ -545,5 +568,6 @@ public abstract class BaseUpgradeTableImpl {
 	private Object[][] _columns;
 	private String _createSQL;
 	private boolean _calledUpdateTable;
+	private int[] _insertionOrder;
 
 }
