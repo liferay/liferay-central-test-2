@@ -848,6 +848,20 @@ public class ServicePreAction extends Action {
 		String imagePath = PortalUtil.getPathImage();
 		String mainPath = PortalUtil.getPathMain();
 
+		String i18nLanguageId = (String)request.getAttribute(
+			WebKeys.I18N_LANGUAGE_ID);
+
+		if (Validator.isNotNull(i18nLanguageId)) {
+			if (Validator.isNotNull(contextPath)) {
+				mainPath = StringUtil.replaceFirst(
+					mainPath, contextPath,
+					contextPath + StringPool.SLASH + i18nLanguageId);
+			}
+			else {
+				mainPath = StringPool.SLASH + i18nLanguageId + mainPath;
+			}
+		}
+
 		// Company logo
 
 		String companyLogo =
@@ -898,9 +912,6 @@ public class ServicePreAction extends Action {
 		PermissionThreadLocal.setPermissionChecker(permissionChecker);
 
 		// Locale
-
-		String i18nLanguageId = (String)request.getAttribute(
-			WebKeys.I18N_LANGUAGE_ID);
 
 		Locale locale = (Locale)session.getAttribute(Globals.LOCALE_KEY);
 
@@ -1456,7 +1467,7 @@ public class ServicePreAction extends Action {
 
 		themeDisplay.setURLPortal(themeDisplay.getURLHome());
 
-		String urlSignIn = themeDisplay.getPathMain() + "/portal/login";
+		String urlSignIn = mainPath + "/portal/login";
 
 		if (layout != null) {
 			urlSignIn = HttpUtil.addParameter(
@@ -1465,8 +1476,7 @@ public class ServicePreAction extends Action {
 
 		themeDisplay.setURLSignIn(urlSignIn);
 
-		themeDisplay.setURLSignOut(
-			themeDisplay.getPathMain() + "/portal/logout");
+		themeDisplay.setURLSignOut(mainPath + "/portal/logout");
 
 		PortletURL updateManagerURL = new PortletURLImpl(
 			request, PortletKeys.UPDATE_MANAGER, plid,

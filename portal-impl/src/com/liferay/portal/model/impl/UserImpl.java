@@ -43,7 +43,6 @@ import com.liferay.portal.service.GroupLocalServiceUtil;
 import com.liferay.portal.service.OrganizationLocalServiceUtil;
 import com.liferay.portal.service.PasswordPolicyLocalServiceUtil;
 import com.liferay.portal.theme.ThemeDisplay;
-import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PropsValues;
 import com.liferay.portal.util.comparator.OrganizationNameComparator;
 
@@ -498,10 +497,15 @@ public class UserImpl extends UserModelImpl implements User {
 				int publicLayoutsPageCount = group.getPublicLayoutsPageCount();
 
 				if (publicLayoutsPageCount > 0) {
-					return themeDisplay.getPortalURL() +
-						themeDisplay.getPathMain() +
-							"/my_places/view?groupId=" + group.getGroupId() +
-								"&privateLayout=0";
+					StringBuilder sb = new StringBuilder();
+
+					sb.append(themeDisplay.getPortalURL());
+					sb.append(themeDisplay.getPathMain());
+					sb.append("/my_places/view?groupId=");
+					sb.append(group.getGroupId());
+					sb.append("&privateLayout=0");
+
+					return sb.toString();
 				}
 			}
 		}
