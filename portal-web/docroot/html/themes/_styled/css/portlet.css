@@ -2,15 +2,11 @@
 
 /* ---------- Portlet wrapper and icons ---------- */
 
-.portlet-border {
-	border: 1px solid;
-	border-color: #AAA;
-	margin: 0 0 10px;
-}
-
 .portlet {
-	background: #FFF;
-	border: 10px solid #D3DADD;
+	background: #fff;
+	border: 2px solid #828F95;
+	margin: 0 0 10px;
+	padding: 3px;
 	text-align: left;
 }
 
@@ -23,14 +19,13 @@ body.portlet {
 }
 
 .portlet-topper {
-	background: #333;
+	background: #D3DADD;
 	border-bottom: 1px solid #AEB8BC;
 	padding-right: 40px;
 	position: relative;
 }
 
 .portlet-title {
-	color: #FFF;
 	display: block;
 	font-weight: bold;
 	min-width: 50%;
@@ -48,7 +43,7 @@ body.portlet {
 .portlet-icons {
 	margin: 0;
 	position: absolute;
-	right: 6px;
+	right: 5px;
 	text-align: right;
 	top: 5px;
 }
@@ -63,13 +58,8 @@ body.portlet {
 
 .portlet-icon-back {
 	background: url(../images/arrows/01_left.png) no-repeat 0 50%;
-	color: #FFF;
 	font-weight: bold;
 	padding: 3px 0 3px 18px;
-}
-
-.portlet-icon-back:hover {
-	color: #FFF;
 }
 
 /* ---------- Panel Page ---------- */
@@ -133,8 +123,8 @@ body.portlet {
 /* ---------- Error messages ---------- */
 
 .portlet-msg-error {
-	background: #FDD url(../images/messages/error.png) no-repeat 6px 50%;
-	border: 1px solid #F00;
+	background: #fdd url(../images/messages/error.png) no-repeat 6px 50%;
+	border: 1px solid #f00;
 	display: block;
 	font-weight: bold;
 	margin: 2px auto 14px;
@@ -145,8 +135,8 @@ body.portlet {
 /* ---------- Warning messages ---------- */
 
 .portlet-msg-alert {
-	background: #FFC url(../images/messages/alert.png) no-repeat 6px 20%;
-	border: 1px solid #FC0;
+	background: #ffc url(../images/messages/alert.png) no-repeat 6px 20%;
+	border: 1px solid #fc0;
 	display: block;
 	font-weight: bold;
 	margin: 2px auto 14px;
@@ -206,7 +196,7 @@ body.portlet {
 
 .portlet-section-selected, .portlet-section-selected a {
 	background: #727C81;
-	color: #FFF;
+	color: #fff;
 	font-weight: bold;
 	text-decoration: none;
 }
@@ -317,7 +307,7 @@ body.portlet {
 /* ---------- Miscellaneous portlet styles ---------- */
 
 .restricted, .restricted td {
-	background: #FDD;
+	background: #fdd;
 	border: none;
 }
 
@@ -379,7 +369,7 @@ body.portlet {
 
 .lfr-actions .lfr-trigger li a:hover {
 	background-color: #828F95;
-	color: #FFF;
+	color: #fff;
 }
 
 .lfr-actions .lfr-trigger li a img {
@@ -393,9 +383,8 @@ body.portlet {
 
 .lfr-actions.portlet-options {
 	background: none;
-	border-color: transparent;
+	border: none;
 	float: left;
-	margin: 0 5px 0 0;
 }
 
 .lfr-actions.portlet-options .lfr-trigger {
@@ -404,25 +393,21 @@ body.portlet {
 
 .lfr-actions.portlet-options .lfr-trigger strong {
 	min-width: 0;
-	padding: 0;
+	padding: 1px 3px;
 }
 
 .lfr-actions.portlet-options .lfr-trigger strong span {
-	background-image: none;
-	color: #9EBAC8;
+	background-image: url(../images/portlet/options.png);
+	background-position: 0 0;
 	display: block;
-	padding: 0 3px;
-}
-
-.portlet-options.visible {
-	background: #FFF url(../images/forms/button.png) repeat-x 0 100%;
-	border-bottom-width: 2px;
-	border-color: #DEDEDE #DEDEDE #FFF #DEDEDE;
+	height: 16px;
+	padding: 0;
+	text-indent: -9999em;
+	width: 16px;
 }
 
 .portlet-options.visible .lfr-trigger strong span {
-	background-image: none;
-	color: #06C;
+	background-image: url(../images/portlet/options_selected.png);
 }
 
 /* ---------- Calendar taglib ---------- */
@@ -433,7 +418,7 @@ body.portlet {
 
 .taglib-calendar tr td a {
 	background-color: #F0F5F7;
-	border: 1px solid #FFF;
+	border: 1px solid #fff;
 	border-bottom: none;
 	border-left: none;
 	display: block;
@@ -447,11 +432,11 @@ body.portlet {
 
 .taglib-calendar tr td a:hover {
 	background-color: #727C81;
-	color: #FFF;
+	color: #fff;
 }
 
 .taglib-calendar .calendar-current-day, .taglib-calendar .calendar-current-day a {
-	background-color: #FFF;
+	background-color: #fff;
 }
 
 .taglib-calendar .calendar-current-day a {
@@ -461,7 +446,7 @@ body.portlet {
 }
 
 .taglib-calendar tr td.calendar-inactive {
-	background-color: #FFF;
+	background-color: #fff;
 	color: #B5BFC4;
 }
 

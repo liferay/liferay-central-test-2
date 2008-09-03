@@ -1,11 +1,5 @@
 /* This CSS sets the default styles for the base components. */
 
-/* ---------- Base ---------- */
-
-body.green {
-	background: #B8E19D;
-}
-
 /* ---------- Wrapper ---------- */
 
 .green #wrapper {
@@ -251,6 +245,15 @@ body.green {
 
 .green .portlet {
 	border-color: #8e9582;
+}
+
+.green .portlet-topper {
+	background-color: #d9ddd3;
+	border-bottom-color: #b7bcae;
+}
+
+.green .lfr-panel .portlet-topper {
+	border-bottom-color: #8e9582;
 }
 
 .green .portlet-section-selected, .green .portlet-section-selected a {
