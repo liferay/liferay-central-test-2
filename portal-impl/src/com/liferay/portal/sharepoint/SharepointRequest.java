@@ -102,7 +102,7 @@ public class SharepointRequest {
 	}
 
 	public void setRootPath(String rootPath) {
-		_rootPath = rootPath.replaceAll("\\\\", StringPool.BLANK);
+		_rootPath = SharepointUtil.replaceBackSlashes(rootPath);
 	}
 
 	public void setSharepointStorage(SharepointStorage storage) {

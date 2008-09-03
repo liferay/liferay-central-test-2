@@ -79,6 +79,10 @@ public class SharepointUtil {
 		return _instance._getStorageTokens();
 	}
 
+	public static String replaceBackSlashes(String value) {
+		return value.replaceAll("\\\\", StringPool.BLANK);
+	}
+
 	private SharepointUtil() {
 		_storageMap = new HashMap<String, String>();
 

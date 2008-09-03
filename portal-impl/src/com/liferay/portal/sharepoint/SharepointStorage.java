@@ -57,6 +57,9 @@ public interface SharepointStorage {
 			long groupId, String path, List<Long> folderIds)
 		throws Exception;
 
+	public Tree[] moveDocument(SharepointRequest sharepointRequest)
+		throws Exception;
+
 	public void putDocument(SharepointRequest sharepointRequest)
 		throws Exception;
 

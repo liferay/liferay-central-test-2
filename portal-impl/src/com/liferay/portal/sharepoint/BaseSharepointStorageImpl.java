@@ -83,6 +83,12 @@ public abstract class BaseSharepointStorageImpl implements SharepointStorage {
 		throws Exception {
 	}
 
+	public Tree[] moveDocument(SharepointRequest sharepointRequest)
+		throws Exception {
+
+		return null;
+	}
+
 	public void putDocument(SharepointRequest sharepointRequest)
 		throws Exception {
 	}
@@ -111,6 +117,8 @@ public abstract class BaseSharepointStorageImpl implements SharepointStorage {
 		String userName, double version) {
 
 		Tree documentTree = new Tree();
+
+		documentName = SharepointUtil.replaceBackSlashes(documentName);
 
 		documentTree.addChild(new Leaf("document_name", documentName, true));
 
@@ -154,6 +162,8 @@ public abstract class BaseSharepointStorageImpl implements SharepointStorage {
 		Tree folderTree = new Tree();
 
 		Tree metaInfoTree = new Tree();
+
+		name = SharepointUtil.replaceBackSlashes(name);
 
 		metaInfoTree.addChild(
 			new Leaf("vti_timecreated", getDate(createDate), false));
@@ -212,24 +222,20 @@ public abstract class BaseSharepointStorageImpl implements SharepointStorage {
 		return folderIds.get(folderIds.size() - 1);
 	}
 
-	protected String getParentFolderPath(SharepointRequest sharepointRequest) {
-		String rootPath = sharepointRequest.getRootPath();
+	protected String getParentFolderPath(String path) {
+		int pos = path.lastIndexOf(StringPool.FORWARD_SLASH);
 
-		int pos = rootPath.lastIndexOf(StringPool.FORWARD_SLASH);
-
-		return rootPath.substring(0, pos);
+		return path.substring(0, pos);
 	}
 
 	protected long getPlid(long groupId) throws SystemException {
 		return LayoutLocalServiceUtil.getDefaultPlid(groupId);
 	}
 
-	protected String getResourceName(SharepointRequest sharepointRequest) {
-		String rootPath = sharepointRequest.getRootPath();
+	protected String getResourceName(String path) {
+		int pos = path.lastIndexOf(StringPool.FORWARD_SLASH);
 
-		int pos = rootPath.lastIndexOf(StringPool.FORWARD_SLASH);
-
-		return rootPath.substring(pos + 1);
+		return path.substring(pos + 1);
 	}
 
 	protected String removeFoldersFromPath(String path, int index) {
