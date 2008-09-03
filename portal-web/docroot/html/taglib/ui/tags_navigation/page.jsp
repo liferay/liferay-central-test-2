@@ -41,36 +41,37 @@ else {
 PortletURL portletURL = renderResponse.createRenderURL();
 %>
 
-<div>
+<div class="taglib-tags-navigation" id="<%= namespace %>taglibTagsNavigation">
 
 	<%
 	StringBuilder sb = new StringBuilder();
 
-	sb.append("<ul class='categories-navigation-treeview'>");
+	sb.append("<ul class='treeview'>");
 
 	for (TagsVocabulary vocabulary : vocabularies) {
 		String vocabularyName = vocabulary.getName();
 
-		sb.append("<li class='tags-vocabulary-name'>");
+		sb.append("<li class='vocabulary-name'>");
 		sb.append("<span>");
 		sb.append(vocabularyName);
 		sb.append("</span>");
 
-		List<TagsEntry> rootEntries = TagsEntryServiceUtil.getGroupVocabularyRootEntries(vocabulary.getGroupId(), vocabularyName);
-		_buildNavigation(rootEntries, vocabularyName, entryId, portletURL, sb);
+		List<TagsEntry> entries = TagsEntryServiceUtil.getGroupVocabularyRootEntries(vocabulary.getGroupId(), vocabularyName);
+
+		_buildNavigation(entries, vocabularyName, entryId, portletURL, sb);
 	}
 
 	sb.append("</li>");
 	sb.append("</ul>");
-	out.print(sb.toString());
 	%>
 
+	<%= sb.toString() %>
 </div>
 
-<script type="text/javascript" charset="utf-8">
+<script type="text/javascript">
 	jQuery(document).ready(
 		function() {
-			var treeview = jQuery('.categories-navigation-treeview');
+			var treeview = jQuery('#<%= namespace %>taglibTagsNavigation .treeview');
 
 			treeview.treeview(
 				{
@@ -87,7 +88,8 @@ PortletURL portletURL = renderResponse.createRenderURL();
 private void _buildNavigation(List<TagsEntry> entries, String vocabularyName, long entryId, PortletURL portletURL, StringBuilder sb) throws Exception {
 	for (TagsEntry entry : entries) {
 		String entryName = entry.getName();
-		List<TagsEntry> childrenEntries = TagsEntryServiceUtil.getGroupVocabularyEntries(entry.getGroupId(), entryName, vocabularyName);
+
+		List<TagsEntry> entryChildren = TagsEntryServiceUtil.getGroupVocabularyEntries(entry.getGroupId(), entryName, vocabularyName);
 
 		sb.append("<ul>");
 		sb.append("<li>");
@@ -101,16 +103,16 @@ private void _buildNavigation(List<TagsEntry> entries, String vocabularyName, lo
 		else {
 			portletURL.setParameter("entryId", String.valueOf(entry.getEntryId()));
 
-			sb.append("<a href='");
+			sb.append("<a href=\"");
 			sb.append(portletURL.toString());
-			sb.append("'>");
+			sb.append("\">");
 			sb.append(entryName);
 			sb.append("</a>");
 		}
 
 		sb.append("</span>");
 
-		_buildNavigation(childrenEntries, vocabularyName, entryId, portletURL, sb);
+		_buildNavigation(entryChildren, vocabularyName, entryId, portletURL, sb);
 
 		sb.append("</li>");
 		sb.append("</ul>");

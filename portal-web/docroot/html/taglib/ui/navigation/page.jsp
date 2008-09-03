@@ -86,8 +86,11 @@
 			StringBuilder sb = new StringBuilder();
 
 			_buildNavigation(rootLayout, layout, selBranch, themeDisplay, 1, includedLayouts, sb);
+		%>
 
-			out.print(sb.toString());
+			<%= sb.toString() %>
+
+		<%
 		}
 		%>
 
