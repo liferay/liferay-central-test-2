@@ -43,10 +43,12 @@ import com.liferay.portal.util.WebKeys;
 import java.text.MessageFormat;
 
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Locale;
 import java.util.Map;
 import java.util.MissingResourceException;
 import java.util.ResourceBundle;
+import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 
 import javax.portlet.PortletConfig;
@@ -435,6 +437,10 @@ public class LanguageImpl implements Language {
 		return value;
 	}
 
+	public boolean isAvailableLocale(Locale locale) {
+		return _localesSet.contains(locale);
+	}
+
 	public void updateCookie(HttpServletResponse response, Locale locale) {
 		String languageId = LocaleUtil.toLanguageId(locale);
 
@@ -465,7 +471,8 @@ public class LanguageImpl implements Language {
 		String[] localesArray = PropsValues.LOCALES;
 
 		_locales = new Locale[localesArray.length];
-		_localesByLanguageCode = new HashMap<String, Locale>();
+		_localesSet = new HashSet<Locale>(localesArray.length);
+		_localesMap = new HashMap<String, Locale>(localesArray.length);
 		_charEncodings = new HashMap<String, String>();
 
 		for (int i = 0; i < localesArray.length; i++) {
@@ -479,7 +486,8 @@ public class LanguageImpl implements Language {
 			Locale locale = LocaleUtil.fromLanguageId(languageId);
 
 			_locales[i] = locale;
-			_localesByLanguageCode.put(language, locale);
+			_localesSet.add(locale);
+			_localesMap.put(language, locale);
 			_charEncodings.put(locale.toString(), StringPool.UTF8);
 		}
 	}
@@ -494,7 +502,7 @@ public class LanguageImpl implements Language {
 	}
 
 	private Locale _getLocale(String languageCode) {
-		return _localesByLanguageCode.get(languageCode);
+		return _localesMap.get(languageCode);
 	}
 
 	private static Log _log = LogFactory.getLog(LanguageImpl.class);
@@ -503,7 +511,8 @@ public class LanguageImpl implements Language {
 		new ConcurrentHashMap<Long, LanguageImpl>();
 
 	private Locale[] _locales;
-	private Map<String, Locale> _localesByLanguageCode;
+	private Set<Locale> _localesSet;
+	private Map<String, Locale> _localesMap;
 	private Map<String, String> _charEncodings;
 
 }

@@ -186,6 +186,10 @@ public class LanguageUtil {
 		return getLanguage().getTimeDescription(pageContext, milliseconds);
 	}
 
+	public static boolean isAvailableLocale(Locale locale) {
+		return getLanguage().isAvailableLocale(locale);
+	}
+
 	public static void updateCookie(
 		HttpServletResponse response, Locale locale) {
 

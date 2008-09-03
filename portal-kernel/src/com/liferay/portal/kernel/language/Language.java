@@ -107,6 +107,8 @@ public interface Language {
 	public String getTimeDescription(
 		PageContext pageContext, long milliseconds);
 
+	public boolean isAvailableLocale(Locale locale);
+
 	public void updateCookie(HttpServletResponse response, Locale locale);
 
 }

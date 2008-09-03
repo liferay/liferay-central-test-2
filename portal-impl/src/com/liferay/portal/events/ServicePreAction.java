@@ -38,7 +38,6 @@ import com.liferay.portal.kernel.servlet.ImageServletTokenUtil;
 import com.liferay.portal.kernel.servlet.SessionErrors;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.HttpUtil;
-import com.liferay.portal.kernel.util.ListUtil;
 import com.liferay.portal.kernel.util.LocaleUtil;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.StringPool;
@@ -952,10 +951,7 @@ public class ServicePreAction extends Action {
 					locale = LanguageUtil.getLocale(locale.getLanguage());
 				}
 
-				List<Locale> availableLocales = ListUtil.fromArray(
-					LanguageUtil.getAvailableLocales());
-
-				if (!availableLocales.contains(locale)) {
+				if (!LanguageUtil.isAvailableLocale(locale)) {
 					locale = user.getLocale();
 				}
 			}
