@@ -38,6 +38,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
 import java.util.TreeSet;
+import java.util.Arrays;
 
 /**
  * <a href="ListUtil.java.html"><b><i>View Source</i></b></a>
@@ -52,11 +53,7 @@ public class ListUtil {
 			return null;
 		}
 
-		List copy = new ArrayList(master.size());
-
-		copy(master, copy);
-
-		return copy;
+		return new ArrayList(master);
 	}
 
 	public static void copy(List master, List copy) {
@@ -65,14 +62,8 @@ public class ListUtil {
 		}
 
 		copy.clear();
+		copy.addAll(master);
 
-		Iterator itr = master.iterator();
-
-		while (itr.hasNext()) {
-			Object obj = itr.next();
-
-			copy.add(obj);
-		}
 	}
 
 	public static void distinct(List list) {
@@ -112,13 +103,7 @@ public class ListUtil {
 			return new ArrayList();
 		}
 
-		List list = new ArrayList(array.length);
-
-		for (int i = 0; i < array.length; i++) {
-			list.add(array[i]);
-		}
-
-		return list;
+		return Arrays.asList(array);
 	}
 
 	public static List fromCollection(Collection c) {
@@ -130,15 +115,7 @@ public class ListUtil {
 			return new ArrayList();
 		}
 
-		List list = new ArrayList(c.size());
-
-		Iterator itr = c.iterator();
-
-		while (itr.hasNext()) {
-			list.add(itr.next());
-		}
-
-		return list;
+		return new ArrayList(c);
 	}
 
 	public static List fromEnumeration(Enumeration enu) {
@@ -162,7 +139,7 @@ public class ListUtil {
 
 		BufferedReader br = new BufferedReader(new FileReader(file));
 
-		String s = StringPool.BLANK;
+		String s = null;
 
 		while ((s = br.readLine()) != null) {
 			list.add(s);
@@ -178,16 +155,16 @@ public class ListUtil {
 	}
 
 	public static List subList(List list, int start, int end) {
-		List newList = new ArrayList();
 
 		int normalizedSize = list.size() - 1;
 
 		if ((start < 0) || (start > normalizedSize) || (end < 0) ||
 			(start > end)) {
 
-			return newList;
+			return Collections.EMPTY_LIST;
 		}
 
+		List newList = new ArrayList(end - start + 1);
 		for (int i = start; i < end && i <= normalizedSize; i++) {
 			newList.add(list.get(i));
 		}
@@ -226,13 +203,7 @@ public class ListUtil {
 			return Collections.EMPTY_LIST;
 		}
 
-		List<Boolean> newList = new ArrayList<Boolean>(list.length);
-
-		for (Boolean value : list) {
-			newList.add(value);
-		}
-
-		return newList;
+		return Arrays.asList(list);
 	}
 
 	public static List<Double> toList(Double[] list) {
@@ -240,13 +211,7 @@ public class ListUtil {
 			return Collections.EMPTY_LIST;
 		}
 
-		List<Double> newList = new ArrayList<Double>(list.length);
-
-		for (Double value : list) {
-			newList.add(value);
-		}
-
-		return newList;
+		return Arrays.asList(list);
 	}
 
 	public static List<Float> toList(Float[] list) {
@@ -254,27 +219,14 @@ public class ListUtil {
 			return Collections.EMPTY_LIST;
 		}
 
-		List<Float> newList = new ArrayList<Float>(list.length);
-
-		for (Float value : list) {
-			newList.add(value);
-		}
-
-		return newList;
+		return Arrays.asList(list);
 	}
 
 	public static List<Integer> toList(Integer[] list) {
 		if ((list == null) || (list.length == 0)) {
 			return Collections.EMPTY_LIST;
 		}
-
-		List<Integer> newList = new ArrayList<Integer>(list.length);
-
-		for (Integer value : list) {
-			newList.add(value);
-		}
-
-		return newList;
+		return Arrays.asList(list);
 	}
 
 	public static List<Long> toList(Long[] list) {
@@ -282,13 +234,7 @@ public class ListUtil {
 			return Collections.EMPTY_LIST;
 		}
 
-		List<Long> newList = new ArrayList<Long>(list.length);
-
-		for (Long value : list) {
-			newList.add(value);
-		}
-
-		return newList;
+		return Arrays.asList(list);
 	}
 
 	public static List<Short> toList(Short[] list) {
@@ -296,13 +242,7 @@ public class ListUtil {
 			return Collections.EMPTY_LIST;
 		}
 
-		List<Short> newList = new ArrayList<Short>(list.length);
-
-		for (Short value : list) {
-			newList.add(value);
-		}
-
-		return newList;
+		return Arrays.asList(list);
 	}
 
 	public static List<String> toList(String[] list) {
@@ -310,13 +250,7 @@ public class ListUtil {
 			return Collections.EMPTY_LIST;
 		}
 
-		List<String> newList = new ArrayList<String>(list.length);
-
-		for (String value : list) {
-			newList.add(value);
-		}
-
-		return newList;
+		return Arrays.asList(list);
 	}
 
 }
