@@ -30,6 +30,7 @@ import java.io.FileReader;
 import java.io.IOException;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.Comparator;
@@ -38,7 +39,6 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
 import java.util.TreeSet;
-import java.util.Arrays;
 
 /**
  * <a href="ListUtil.java.html"><b><i>View Source</i></b></a>
@@ -62,8 +62,8 @@ public class ListUtil {
 		}
 
 		copy.clear();
-		copy.addAll(master);
 
+		copy.addAll(master);
 	}
 
 	public static void distinct(List list) {
@@ -155,7 +155,6 @@ public class ListUtil {
 	}
 
 	public static List subList(List list, int start, int end) {
-
 		int normalizedSize = list.size() - 1;
 
 		if ((start < 0) || (start > normalizedSize) || (end < 0) ||
@@ -165,7 +164,8 @@ public class ListUtil {
 		}
 
 		List newList = new ArrayList(end - start + 1);
-		for (int i = start; i < end && i <= normalizedSize; i++) {
+
+		for (int i = start; (i < end) && (i <= normalizedSize); i++) {
 			newList.add(list.get(i));
 		}
 
