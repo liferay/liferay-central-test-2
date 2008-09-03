@@ -52,7 +52,7 @@ public class ShoppingTests extends BaseTests {
 		addTestSuite(EditCouponTest.class);
 		addTestSuite(AddBlankCouponTest.class);
 		addTestSuite(AddTemporaryCouponTest.class);
-		addTestSuite(DeleteTemporaryCouponTest.class);
+		//addTestSuite(DeleteTemporaryCouponTest.class);
 		addTestSuite(SearchCouponsTest.class);
 		addTestSuite(AddItemToCartTest.class);
 		addTestSuite(ConfirmCartTest.class);
