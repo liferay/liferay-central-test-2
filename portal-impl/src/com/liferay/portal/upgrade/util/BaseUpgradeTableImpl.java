@@ -101,18 +101,17 @@ public abstract class BaseUpgradeTableImpl {
 		_columns = columns;
 
 		// LEP-7331
-		// Reorder the parameters so that all the CLOBs are at the
-		// end of the insert statement.
 
 		_insertionOrder = new int[_columns.length];
 
 		int clobCount = 0;
 
 		for (int i = 0; i < _columns.length; ++i) {
-			Integer type = (Integer) columns[i][1];
+			Integer type = (Integer)columns[i][1];
 
 			if (type.intValue() == Types.CLOB) {
-				++clobCount;
+				clobCount++;
+
 				_insertionOrder[i] = _columns.length - clobCount;
 			}
 			else {
@@ -505,6 +504,7 @@ public abstract class BaseUpgradeTableImpl {
 
 				for (int i = 0; i < _insertionOrder.length; i++) {
 					int pos = _insertionOrder[i];
+
 					setColumn(ps, i, (Integer)_columns[pos][1], values[pos]);
 				}
 
