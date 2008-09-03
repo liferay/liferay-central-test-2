@@ -77,7 +77,7 @@ public class ApplyOrganizationTest extends BaseTestCase {
 		selenium.waitForPageToLoad("30000");
 		selenium.click("//input[@value='Select']");
 		selenium.waitForPopUp("organization", RuntimeVariables.replace("30000"));
-		selenium.selectWindow("organization");
+		selenium.selectWindow("name=organization");
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -95,10 +95,29 @@ public class ApplyOrganizationTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
+		Thread.sleep(2000);
+		selenium.selectWindow("name=organization");
 		selenium.click("link=Liferay, Inc.");
 		selenium.selectWindow("null");
 		selenium.click(RuntimeVariables.replace("//input[@value='Save']"));
 		selenium.waitForPageToLoad("30000");
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isTextPresent("Liferay, Inc.")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
 		selenium.click(RuntimeVariables.replace("link=Return to Full Page"));
 		selenium.waitForPageToLoad("30000");
 	}

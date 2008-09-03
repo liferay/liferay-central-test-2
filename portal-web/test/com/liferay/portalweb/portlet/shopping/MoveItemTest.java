@@ -95,9 +95,7 @@ public class MoveItemTest extends BaseTestCase {
 
 		selenium.click(RuntimeVariables.replace("link=Categories"));
 		selenium.waitForPageToLoad("30000");
-		selenium.selectWindow("name=category");
-		selenium.click(RuntimeVariables.replace("document.forms[0].elements[2]"));
-		selenium.waitForPageToLoad("30000");
+		selenium.click("//tr[3]/td[4]/input");
 		selenium.selectWindow("null");
 
 		for (int second = 0;; second++) {
@@ -192,7 +190,22 @@ public class MoveItemTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.selectWindow("name=null");
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isElementPresent("//strong/span")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
 		selenium.click("//strong/span");
 		selenium.click(RuntimeVariables.replace("//div[2]/ul/li[1]/nobr/a"));
 		selenium.waitForPageToLoad("30000");

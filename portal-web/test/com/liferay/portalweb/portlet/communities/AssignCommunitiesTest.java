@@ -109,8 +109,7 @@ public class AssignCommunitiesTest extends BaseTestCase {
 		selenium.waitForPageToLoad("30000");
 		selenium.click(RuntimeVariables.replace("link=Available"));
 		selenium.waitForPageToLoad("30000");
-		selenium.type("toggle_id_enterprise_admin_user_searchkeywords",
-			RuntimeVariables.replace("selen"));
+		selenium.type("_29_firstName", RuntimeVariables.replace("selen"));
 		selenium.click(RuntimeVariables.replace(
 				"//input[@value='Search Users']"));
 		selenium.waitForPageToLoad("30000");

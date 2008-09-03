@@ -33,6 +33,11 @@ import com.liferay.portalweb.portal.util.RuntimeVariables;
  */
 public class DeleteTemporaryCouponTest extends BaseTestCase {
 	public void testDeleteTemporaryCoupon() throws Exception {
+		selenium.click(RuntimeVariables.replace("link=Return to Full Page"));
+		selenium.waitForPageToLoad("30000");
+		selenium.click(RuntimeVariables.replace("link=Coupons"));
+		selenium.waitForPageToLoad("30000");
+
 		for (int second = 0;; second++) {
 			if (second >= 60) {
 				fail("timeout");
@@ -50,8 +55,25 @@ public class DeleteTemporaryCouponTest extends BaseTestCase {
 		}
 
 		selenium.click("//tr[3]/td[7]/ul/li/strong/span");
-		selenium.click(RuntimeVariables.replace("//li[2]/nobr/a"));
-		selenium.waitForPageToLoad("30000");
+		Thread.sleep(1000);
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isElementPresent("//li[2]/nobr/a")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
+		selenium.click("//li[2]/nobr/a");
 		assertTrue(selenium.getConfirmation()
 						   .matches("^Are you sure you want to delete this[\\s\\S]$"));
 

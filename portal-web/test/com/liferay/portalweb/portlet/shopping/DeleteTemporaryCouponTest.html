@@ -12,6 +12,16 @@
 <tr><td rowspan="1" colspan="3">DeleteTemporaryCouponTest</td></tr>
 </thead><tbody>
 <tr>
+	<td>clickAndWait</td>
+	<td>link=Return to Full Page</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Coupons</td>
+	<td></td>
+</tr>
+<tr>
 	<td>waitForElementPresent</td>
 	<td>//tr[3]/td[7]/ul/li/strong/span</td>
 	<td></td>
@@ -22,7 +32,17 @@
 	<td></td>
 </tr>
 <tr>
-	<td>clickAndWait</td>
+	<td>pause</td>
+	<td>1000</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//li[2]/nobr/a</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
 	<td>//li[2]/nobr/a</td>
 	<td></td>
 </tr>
