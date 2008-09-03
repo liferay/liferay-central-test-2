@@ -27,6 +27,7 @@ import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.Http;
 import com.liferay.portal.kernel.util.StringPool;
+import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.Account;
 import com.liferay.portal.model.ColorScheme;
@@ -614,6 +615,17 @@ public class ThemeDisplay implements Serializable {
 	}
 
 	public String getPathMain() {
+		if (isI18n()) {
+			if (Validator.isNotNull(_pathContext)) {
+				return StringUtil.replaceFirst(
+					_pathMain, _pathContext,
+					_pathContext + StringPool.SLASH + _i18nLanguageId);
+			}
+			else {
+				return StringPool.SLASH + _i18nLanguageId + _pathMain;
+			}
+		}
+
 		return _pathMain;
 	}
 

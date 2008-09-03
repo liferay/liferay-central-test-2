@@ -34,7 +34,7 @@ if (userDisplay != null) {
 }
 
 if (Validator.isNull(url) && (userDisplay != null)) {
-	url = userDisplay.getDisplayURL(themeDisplay.getURLPortal());
+	url = userDisplay.getDisplayURL(themeDisplay);
 }
 %>
 

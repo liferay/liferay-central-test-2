@@ -42,6 +42,7 @@ import com.liferay.portal.service.ContactLocalServiceUtil;
 import com.liferay.portal.service.GroupLocalServiceUtil;
 import com.liferay.portal.service.OrganizationLocalServiceUtil;
 import com.liferay.portal.service.PasswordPolicyLocalServiceUtil;
+import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PropsValues;
 import com.liferay.portal.util.comparator.OrganizationNameComparator;
@@ -489,7 +490,7 @@ public class UserImpl extends UserModelImpl implements User {
 		return false;
 	}
 
-	public String getDisplayURL(String portalURL) {
+	public String getDisplayURL(ThemeDisplay themeDisplay) {
 		try {
 			Group group = getGroup();
 
@@ -497,9 +498,10 @@ public class UserImpl extends UserModelImpl implements User {
 				int publicLayoutsPageCount = group.getPublicLayoutsPageCount();
 
 				if (publicLayoutsPageCount > 0) {
-					return portalURL + PortalUtil.getPathMain() +
-						"/my_places/view?groupId=" + group.getGroupId() +
-							"&privateLayout=0";
+					return themeDisplay.getPortalURL() +
+						themeDisplay.getPathMain() +
+							"/my_places/view?groupId=" + group.getGroupId() +
+								"&privateLayout=0";
 				}
 			}
 		}

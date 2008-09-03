@@ -60,8 +60,7 @@ public abstract class BaseSocialRequestInterpreter
 				return userName;
 			}
 
-			String userDisplayURL = user.getDisplayURL(
-				themeDisplay.getURLPortal());
+			String userDisplayURL = user.getDisplayURL(themeDisplay);
 
 			userName =
 				"<a href=\"" + userDisplayURL + "\">" + userName + "</a>";

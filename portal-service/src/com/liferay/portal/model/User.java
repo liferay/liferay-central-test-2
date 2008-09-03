@@ -129,5 +129,6 @@ public interface User extends UserModel {
 
 	public boolean hasMyPlaces();
 
-	public java.lang.String getDisplayURL(java.lang.String portalURL);
+	public java.lang.String getDisplayURL(
+		com.liferay.portal.theme.ThemeDisplay themeDisplay);
 }
