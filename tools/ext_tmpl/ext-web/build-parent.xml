@@ -511,80 +511,8 @@
 
 		<antcall target="build-webxml" />
 
-		<antcall target="build-javascript" />
-
 		<touch>
 			<fileset dir="tmp" />
 		</touch>
-	</target>
-
-	<target name="build-javascript">
-		<java
-			classname="com.liferay.portal.tools.JavaScriptBuilder"
-			classpathref="project.classpath"
-			fork="true"
-			newenvironment="true"
-		>
-			<arg value="javascript.barebone.files" />
-			<arg value="tmp/html/js/" />
-			<arg value="tmp/html/js/barebone_unpacked.js" />
-		</java>
-
-		<antcall target="build-javascript-cmd">
-			<param name="js.from.file" value="tmp/html/js/barebone_unpacked.js" />
-			<param name="js.to.file" value="tmp/html/js/barebone_packed.js" />
-		</antcall>
-
-		<java
-			classname="com.liferay.portal.tools.JavaScriptBuilder"
-			classpathref="project.classpath"
-			fork="true"
-			newenvironment="true"
-		>
-			<arg value="javascript.everything.files" />
-			<arg value="tmp/html/js/" />
-			<arg value="tmp/html/js/everything_unpacked.js" />
-		</java>
-
-		<antcall target="build-javascript-cmd">
-			<param name="js.from.file" value="tmp/html/js/everything_unpacked.js" />
-			<param name="js.to.file" value="tmp/html/js/everything_packed.js" />
-		</antcall>
-
-		<antcall target="build-javascript-cmd">
-			<param name="js.from.file" value="tmp/html/js/liferay/service_unpacked.js" />
-			<param name="js.to.file" value="tmp/html/js/liferay/service_packed.js" />
-		</antcall>
-
-		<antcall target="build-javascript-cmd">
-			<param name="js.from.file" value="tmp/html/js/liferay/portlet_css_unpacked.js" />
-			<param name="js.to.file" value="tmp/html/js/liferay/portlet_css_packed.js" />
-		</antcall>
-
-		<antcall target="build-javascript-portlet-cmd">
-			<param name="portlet.name" value="message_boards" />
-		</antcall>
-
-		<antcall target="build-javascript-portlet-cmd">
-			<param name="portlet.name" value="tags_admin" />
-		</antcall>
-	</target>
-
-	<target name="build-javascript-cmd">
-		<java
-			classname="com.yahoo.platform.yui.compressor.YUICompressor"
-			classpathref="project.classpath"
-			fork="true"
-			newenvironment="true"
-		>
-			<arg line="--type js -o ${js.to.file} ${js.from.file}" />
-		</java>
-	</target>
-
-	<target name="build-javascript-portlet-cmd">
-		<antcall target="build-javascript-cmd">
-			<param name="js.from.file" value="tmp/html/portlet/${portlet.name}/unpacked.js" />
-			<param name="js.to.file" value="tmp/html/portlet/${portlet.name}/packed.js" />
-		</antcall>
 	</target>
 </project>
