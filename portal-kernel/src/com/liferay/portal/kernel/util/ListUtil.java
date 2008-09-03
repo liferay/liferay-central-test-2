@@ -103,7 +103,13 @@ public class ListUtil {
 			return new ArrayList();
 		}
 
-		return Arrays.asList(array);
+		List list = new ArrayList(array.length);
+
+		for (int i = 0; i < array.length; i++) {
+			list.add(array[i]);
+		}
+
+		return list;
 	}
 
 	public static List fromCollection(Collection c) {
