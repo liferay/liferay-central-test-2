@@ -1,5 +1,11 @@
 /* This CSS sets the default styles for the base components. */
 
+/* ---------- Base ---------- */
+
+body.orange {
+	background: #FBC97E;
+}
+
 /* ---------- Wrapper ---------- */
 
 .orange #wrapper {
@@ -245,15 +251,6 @@
 
 .orange .portlet {
 	border-color: #958782;
-}
-
-.orange .portlet-topper {
-	background-color: #ddd6d3;
-	border-bottom-color: #bcb1ae;
-}
-
-.orange .lfr-panel .portlet-topper {
-	border-bottom-color: #958782;
 }
 
 .orange .portlet-section-selected, .orange .portlet-section-selected a {

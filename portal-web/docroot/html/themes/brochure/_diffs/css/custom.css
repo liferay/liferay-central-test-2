@@ -1,6 +1,7 @@
 /* This file allows you to override default styles in one central location for easier upgrade and maintenance. */
 
 body {
+	background: #FFF;
 	font-family: 'Lucida Sans Unicode','Lucida Grande','Lucida Sans','Tahoma',Arial,Verdana,sans-serif;
 }
 
@@ -49,14 +50,6 @@ font {
 #banner-inner {
 	background: transparent url(../images/common/banner_bg.png) no-repeat 0 100%;
 	min-height: 7em;
-	padding: 1em 0.6em 0.5em;
-}
-
-#banner .logo {
-	background: transparent url(../images/common/logo_bg.png) no-repeat 0 0;
-	display: block;
-	float: none;
-	font-size: 0;
 	padding: 0;
 }
 
@@ -68,11 +61,13 @@ font {
 	position: relative;
 }
 
-#banner .logo a {
-	background: url(../images/common/logo_bg.png) no-repeat;
+#banner #banner-inner .logo a {
+	background: url(../images/common/logo.png) no-repeat;
 	display: block;
+	height: 100px;
 	text-decoration: none;
 	text-indent: -9999em;
+	width: 290px;
 }
 
 .js.ie #banner {
@@ -194,6 +189,10 @@ font {
 
 /* ---------- Portlet ---------- */
 
+.portlet-border {
+	border: none;
+}
+
 .portlet {
 	background: transparent;
 	border: none;
@@ -235,7 +234,7 @@ font {
 	position: absolute;
 	right: 3px;
 	text-align: right;
-	top: 0;
+	top: 5px;
 }
 
 .ie6 .portlet .portlet-topper {
@@ -251,6 +250,18 @@ font {
 	float: right;
 	margin-top: 1px;
 	position: static;
+}
+
+.portlet-icon-back {
+	color: #369;
+}
+
+.portlet-icon-back:hover {
+	color: #06C;
+}
+
+.lfr-actions.portlet-options .lfr-trigger strong span {
+	color: #000;
 }
 
 /* ---------- Page search ---------- */
