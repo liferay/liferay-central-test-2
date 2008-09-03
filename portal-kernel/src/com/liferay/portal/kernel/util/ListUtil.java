@@ -30,7 +30,6 @@ import java.io.FileReader;
 import java.io.IOException;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.Comparator;
@@ -53,7 +52,11 @@ public class ListUtil {
 			return null;
 		}
 
-		return new ArrayList(master);
+		List copy = new ArrayList(master.size());
+
+		copy(master, copy);
+
+		return copy;
 	}
 
 	public static void copy(List master, List copy) {
@@ -63,7 +66,13 @@ public class ListUtil {
 
 		copy.clear();
 
-		copy.addAll(master);
+		Iterator itr = master.iterator();
+
+		while (itr.hasNext()) {
+			Object obj = itr.next();
+
+			copy.add(obj);
+		}
 	}
 
 	public static void distinct(List list) {
@@ -121,7 +130,15 @@ public class ListUtil {
 			return new ArrayList();
 		}
 
-		return new ArrayList(c);
+		List list = new ArrayList(c.size());
+
+		Iterator itr = c.iterator();
+
+		while (itr.hasNext()) {
+			list.add(itr.next());
+		}
+
+		return list;
 	}
 
 	public static List fromEnumeration(Enumeration enu) {
@@ -145,7 +162,7 @@ public class ListUtil {
 
 		BufferedReader br = new BufferedReader(new FileReader(file));
 
-		String s = null;
+		String s = StringPool.BLANK;
 
 		while ((s = br.readLine()) != null) {
 			list.add(s);
@@ -161,17 +178,17 @@ public class ListUtil {
 	}
 
 	public static List subList(List list, int start, int end) {
+		List newList = new ArrayList();
+
 		int normalizedSize = list.size() - 1;
 
 		if ((start < 0) || (start > normalizedSize) || (end < 0) ||
 			(start > end)) {
 
-			return Collections.EMPTY_LIST;
+			return newList;
 		}
 
-		List newList = new ArrayList(end - start + 1);
-
-		for (int i = start; (i < end) && (i <= normalizedSize); i++) {
+		for (int i = start; i < end && i <= normalizedSize; i++) {
 			newList.add(list.get(i));
 		}
 
@@ -209,7 +226,13 @@ public class ListUtil {
 			return Collections.EMPTY_LIST;
 		}
 
-		return Arrays.asList(list);
+		List<Boolean> newList = new ArrayList<Boolean>(list.length);
+
+		for (Boolean value : list) {
+			newList.add(value);
+		}
+
+		return newList;
 	}
 
 	public static List<Double> toList(Double[] list) {
@@ -217,7 +240,13 @@ public class ListUtil {
 			return Collections.EMPTY_LIST;
 		}
 
-		return Arrays.asList(list);
+		List<Double> newList = new ArrayList<Double>(list.length);
+
+		for (Double value : list) {
+			newList.add(value);
+		}
+
+		return newList;
 	}
 
 	public static List<Float> toList(Float[] list) {
@@ -225,14 +254,27 @@ public class ListUtil {
 			return Collections.EMPTY_LIST;
 		}
 
-		return Arrays.asList(list);
+		List<Float> newList = new ArrayList<Float>(list.length);
+
+		for (Float value : list) {
+			newList.add(value);
+		}
+
+		return newList;
 	}
 
 	public static List<Integer> toList(Integer[] list) {
 		if ((list == null) || (list.length == 0)) {
 			return Collections.EMPTY_LIST;
 		}
-		return Arrays.asList(list);
+
+		List<Integer> newList = new ArrayList<Integer>(list.length);
+
+		for (Integer value : list) {
+			newList.add(value);
+		}
+
+		return newList;
 	}
 
 	public static List<Long> toList(Long[] list) {
@@ -240,7 +282,13 @@ public class ListUtil {
 			return Collections.EMPTY_LIST;
 		}
 
-		return Arrays.asList(list);
+		List<Long> newList = new ArrayList<Long>(list.length);
+
+		for (Long value : list) {
+			newList.add(value);
+		}
+
+		return newList;
 	}
 
 	public static List<Short> toList(Short[] list) {
@@ -248,7 +296,13 @@ public class ListUtil {
 			return Collections.EMPTY_LIST;
 		}
 
-		return Arrays.asList(list);
+		List<Short> newList = new ArrayList<Short>(list.length);
+
+		for (Short value : list) {
+			newList.add(value);
+		}
+
+		return newList;
 	}
 
 	public static List<String> toList(String[] list) {
@@ -256,7 +310,13 @@ public class ListUtil {
 			return Collections.EMPTY_LIST;
 		}
 
-		return Arrays.asList(list);
+		List<String> newList = new ArrayList<String>(list.length);
+
+		for (String value : list) {
+			newList.add(value);
+		}
+
+		return newList;
 	}
 
 }
