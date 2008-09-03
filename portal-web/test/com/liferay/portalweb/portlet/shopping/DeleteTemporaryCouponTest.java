@@ -74,8 +74,6 @@ public class DeleteTemporaryCouponTest extends BaseTestCase {
 		}
 
 		selenium.click("//li[2]/nobr/a");
-		assertTrue(selenium.getConfirmation()
-						   .matches("^Are you sure you want to delete this[\\s\\S]$"));
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
