@@ -1469,9 +1469,9 @@ create table Users_Roles (
 );
 
 create table Users_UserGroups (
-	userId LONG not null,
 	userGroupId LONG not null,
-	primary key (userId, userGroupId)
+	userId LONG not null,
+	primary key (userGroupId, userId)
 );
 
 create table UserTracker (
