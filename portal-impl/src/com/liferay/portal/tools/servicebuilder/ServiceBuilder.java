@@ -2466,6 +2466,12 @@ public class ServiceBuilder {
 		File ejbFile = new File(_springBaseFileName);
 
 		FileUtil.write(ejbFile, content, true);
+
+		if (!_propsUtil.equals("com.liferay.portal.util.PropsUtil")) {
+			FileUtil.delete(
+				"docroot/WEB-INF/src/META-INF/data-source-spring.xml");
+			FileUtil.delete("docroot/WEB-INF/src/META-INF/misc-spring.xml");
+		}
 	}
 
 	private void _createSpringHibernateXML() throws Exception {

@@ -631,9 +631,7 @@ public class PortletHotDeployListener extends BaseHotDeployListener {
 			if (_log.isDebugEnabled()) {
 				_log.debug("Unable to read portlet.properties");
 			}
-		}
 
-		if (portletPropertiesConfiguration == null) {
 			return;
 		}
 

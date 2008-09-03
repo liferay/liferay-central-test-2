@@ -22,9 +22,13 @@
 
 package com.liferay.portal.spring.context;
 
+import com.liferay.portal.kernel.configuration.Configuration;
+import com.liferay.portal.kernel.configuration.ConfigurationFactoryUtil;
 import com.liferay.portal.kernel.portlet.PortletClassLoaderUtil;
 import com.liferay.portal.kernel.util.AggregateClassLoader;
+import com.liferay.portal.kernel.util.ArrayUtil;
 import com.liferay.portal.kernel.util.PortalClassLoaderUtil;
+import com.liferay.portal.util.PropsKeys;
 
 import java.io.FileNotFoundException;
 
@@ -36,6 +40,12 @@ import org.springframework.web.context.support.XmlWebApplicationContext;
 
 /**
  * <a href="PortletApplicationContext.java.html"><b><i>View Source</i></b></a>
+ *
+ * <p>
+ * This web application context will first load bean definitions in the
+ * contextConfigLocation parameter in web.xml. Then, the context will load bean
+ * definitions specified by the property "spring.configs" in service.properties.
+ * </p>
  *
  * @author Brian Wing Shun Chan
  *
@@ -50,7 +60,7 @@ public class PortletApplicationContext extends XmlWebApplicationContext {
 	}
 
 	protected void loadBeanDefinitions(XmlBeanDefinitionReader reader) {
-		String[] configLocations = getConfigLocations();
+		String[] configLocations = getPortletConfigLocations();
 
 		if (configLocations == null) {
 			return;
@@ -73,6 +83,32 @@ public class PortletApplicationContext extends XmlWebApplicationContext {
 				}
 			}
 		}
+	}
+
+	protected String[] getPortletConfigLocations() {
+		String[] configLocations = getConfigLocations();
+
+		ClassLoader classLoader = PortletClassLoaderUtil.getClassLoader();
+
+		Configuration serviceBuilderPropertiesConfiguration = null;
+
+		try {
+			serviceBuilderPropertiesConfiguration =
+				ConfigurationFactoryUtil.getConfiguration(
+					classLoader, "service");
+		}
+		catch (Exception e) {
+			if (_log.isDebugEnabled()) {
+				_log.debug("Unable to read service.properties");
+			}
+
+			return configLocations;
+		}
+
+		return ArrayUtil.append(
+			configLocations,
+			serviceBuilderPropertiesConfiguration.getArray(
+				PropsKeys.SPRING_CONFIGS));
 	}
 
 	private static Log _log =

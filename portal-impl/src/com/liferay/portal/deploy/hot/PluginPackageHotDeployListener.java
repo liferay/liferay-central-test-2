@@ -270,9 +270,7 @@ public class PluginPackageHotDeployListener extends BaseHotDeployListener {
 			if (_log.isDebugEnabled()) {
 				_log.debug("Unable to read service.properties");
 			}
-		}
 
-		if (serviceBuilderPropertiesConfiguration == null) {
 			return;
 		}
 

@@ -30,7 +30,6 @@ import java.io.FileNotFoundException;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
-import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.xml.XmlBeanDefinitionReader;
 import org.springframework.core.io.DefaultResourceLoader;
 import org.springframework.web.context.support.XmlWebApplicationContext;
@@ -50,9 +49,7 @@ import org.springframework.web.context.support.XmlWebApplicationContext;
  */
 public class PortalApplicationContext extends XmlWebApplicationContext {
 
-	protected void loadBeanDefinitions(XmlBeanDefinitionReader reader)
-		throws BeansException {
-
+	protected void loadBeanDefinitions(XmlBeanDefinitionReader reader) {
 		try {
 			super.loadBeanDefinitions(reader);
 		}
