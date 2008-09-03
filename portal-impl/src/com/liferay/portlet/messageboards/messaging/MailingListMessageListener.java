@@ -62,13 +62,9 @@ import org.apache.commons.logging.LogFactory;
  */
 public class MailingListMessageListener implements MessageListener {
 
-	public void receive(Object message) {
-		throw new UnsupportedOperationException();
-	}
-
-	public void receive(String message) {
+	public void receive(com.liferay.portal.kernel.messaging.Message message) {
 		MailingListRequest mailingListRequest =
-			(MailingListRequest)JSONFactoryUtil.deserialize(message);
+			(MailingListRequest) JSONFactoryUtil.deserialize((String)message.getPayload());
 
 		Folder folder = null;
 

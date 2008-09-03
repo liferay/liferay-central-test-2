@@ -44,7 +44,9 @@ package com.liferay.taglib.ruon;
 import com.liferay.portal.kernel.json.JSONFactoryUtil;
 import com.liferay.portal.kernel.json.JSONObject;
 import com.liferay.portal.kernel.messaging.DestinationNames;
+import com.liferay.portal.kernel.messaging.Message;
 import com.liferay.portal.kernel.messaging.MessageBusUtil;
+import com.liferay.portal.kernel.messaging.MessageTypes;
 
 import javax.servlet.jsp.JspException;
 import javax.servlet.jsp.tagext.TagSupport;
@@ -72,10 +74,11 @@ public class UserCommunicationTag extends TagSupport{
 
 			ruonCommunicationJSON.put(
 				"communicationWaysRequest",communicationWaysRequestJSON);
-
+			Message message = new Message(MessageTypes.RUON_MESSAGE);
+			message.setPayload(ruonCommunicationJSON.toString());
 			String ruonCommunicationResponse =
-				MessageBusUtil.sendSynchronizedMessage(
-					DestinationNames.RUON, ruonCommunicationJSON.toString());
+				(String)MessageBusUtil.sendSynchronizedMessage(
+					DestinationNames.RUON, message);
 
 			if (ruonCommunicationResponse != null){
 

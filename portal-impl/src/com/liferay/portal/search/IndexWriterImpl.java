@@ -23,7 +23,9 @@
 package com.liferay.portal.search;
 
 import com.liferay.portal.kernel.messaging.DestinationNames;
+import com.liferay.portal.kernel.messaging.Message;
 import com.liferay.portal.kernel.messaging.MessageBusUtil;
+import com.liferay.portal.kernel.messaging.MessageTypes;
 import com.liferay.portal.kernel.search.Document;
 import com.liferay.portal.kernel.search.IndexWriter;
 import com.liferay.portal.kernel.search.messaging.SearchRequest;
@@ -43,8 +45,10 @@ public class IndexWriterImpl implements IndexWriter {
 		searchRequest.setCompanyId(companyId);
 		searchRequest.setDocument(doc);
 
+		Message message = new Message(MessageTypes.SCHEDULER_MESSAGE);
+		message.setPayload(searchRequest);
 		MessageBusUtil.sendMessage(
-			DestinationNames.SEARCH_WRITER, searchRequest);
+			DestinationNames.SEARCH_WRITER, message);
 	}
 
 	public void deleteDocument(long companyId, String uid) {
@@ -54,8 +58,10 @@ public class IndexWriterImpl implements IndexWriter {
 		searchRequest.setCompanyId(companyId);
 		searchRequest.setId(uid);
 
+		Message message = new Message(MessageTypes.SCHEDULER_MESSAGE);
+		message.setPayload(searchRequest);
 		MessageBusUtil.sendMessage(
-			DestinationNames.SEARCH_WRITER, searchRequest);
+			DestinationNames.SEARCH_WRITER, message);
 	}
 
 	public void deletePortletDocuments(long companyId, String portletId) {
@@ -65,8 +71,10 @@ public class IndexWriterImpl implements IndexWriter {
 		searchRequest.setCompanyId(companyId);
 		searchRequest.setId(portletId);
 
+		Message message = new Message(MessageTypes.SCHEDULER_MESSAGE);
+		message.setPayload(searchRequest);
 		MessageBusUtil.sendMessage(
-			DestinationNames.SEARCH_WRITER, searchRequest);
+			DestinationNames.SEARCH_WRITER, message);
 	}
 
 	public void updateDocument(long companyId, String uid, Document doc) {
@@ -77,8 +85,10 @@ public class IndexWriterImpl implements IndexWriter {
 		searchRequest.setId(uid);
 		searchRequest.setDocument(doc);
 
+		Message message = new Message(MessageTypes.SCHEDULER_MESSAGE);
+		message.setPayload(searchRequest);
 		MessageBusUtil.sendMessage(
-			DestinationNames.SEARCH_WRITER, searchRequest);
+			DestinationNames.SEARCH_WRITER, message);
 	}
 
 }

@@ -25,6 +25,7 @@ package com.liferay.portal.search;
 import com.liferay.portal.kernel.messaging.DestinationNames;
 import com.liferay.portal.kernel.messaging.Message;
 import com.liferay.portal.kernel.messaging.MessageBusUtil;
+import com.liferay.portal.kernel.messaging.MessageTypes;
 import com.liferay.portal.kernel.search.Hits;
 import com.liferay.portal.kernel.search.IndexSearcher;
 import com.liferay.portal.kernel.search.Query;
@@ -60,8 +61,10 @@ public class IndexSearcherImpl implements IndexSearcher {
 			searchRequest.setStart(start);
 			searchRequest.setEnd(end);
 
+			Message message = new Message(MessageTypes.SCHEDULER_MESSAGE);
+			message.setPayload(searchRequest);
 			Hits hits = (Hits)MessageBusUtil.sendSynchronizedMessage(
-				DestinationNames.SEARCH_READER, new Message(searchRequest));
+				DestinationNames.SEARCH_READER, message);
 
 			return hits;
 		}

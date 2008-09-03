@@ -37,11 +37,7 @@ public class BridgingMessageListener implements MessageListener {
 		_messageSender = messageSender;
 	}
 
-	public void receive(Object message) {
-		_messageSender.send(message);
-	}
-
-	public void receive(String message) {
+	public void receive(Message message) {
 		_messageSender.send(message);
 	}
 

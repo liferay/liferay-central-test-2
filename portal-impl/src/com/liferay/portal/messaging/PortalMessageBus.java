@@ -75,24 +75,12 @@ public class PortalMessageBus implements DisposableBean, MessageBus {
 		_messageBus.removeDestinationEventListener(listener);
 	}
 
-	public void sendMessage(String destination, Object message) {
-		_messageBus.sendMessage(destination, message);
-	}
-
-	public void sendMessage(String destination, String message) {
+	public void sendMessage(String destination, Message message) {
 		_messageBus.sendMessage(destination, message);
 	}
 
 	public Object sendSynchronizedMessage(
 			String destination, Message message, long timeout)
-		throws MessageBusException {
-
-		return _messageBus.sendSynchronizedMessage(
-			destination, message, timeout);
-	}
-
-	public String sendSynchronizedMessage(
-			String destination, String message, long timeout)
 		throws MessageBusException {
 
 		return _messageBus.sendSynchronizedMessage(

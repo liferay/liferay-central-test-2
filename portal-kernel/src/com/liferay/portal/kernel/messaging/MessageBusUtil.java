@@ -62,11 +62,7 @@ public class MessageBusUtil {
 		_instance._removeDestination(destination);
 	}
 
-	public static void sendMessage(String destination, Object message) {
-		_instance._sendMessage(destination, message);
-	}
-
-	public static void sendMessage(String destination, String message) {
+	public static void sendMessage(String destination, Message message) {
 		_instance._sendMessage(destination, message);
 	}
 
@@ -79,21 +75,6 @@ public class MessageBusUtil {
 
 	public static Object sendSynchronizedMessage(
 			String destination, Message message, long timeout)
-		throws MessageBusException {
-
-		return _instance._sendSynchronizedMessage(
-			destination, message, timeout);
-	}
-
-	public static String sendSynchronizedMessage(
-			String destination, String message)
-		throws MessageBusException {
-
-		return _instance._sendSynchronizedMessage(destination, message);
-	}
-
-	public static String sendSynchronizedMessage(
-			String destination, String message, long timeout)
 		throws MessageBusException {
 
 		return _instance._sendSynchronizedMessage(
@@ -132,11 +113,7 @@ public class MessageBusUtil {
 		_messageBus.removeDestination(destination);
 	}
 
-	private void _sendMessage(String destination, Object message) {
-		_messageBus.sendMessage(destination, message);
-	}
-
-	private void _sendMessage(String destination, String message) {
+	private void _sendMessage(String destination, Message message) {
 		_messageBus.sendMessage(destination, message);
 	}
 
@@ -149,21 +126,6 @@ public class MessageBusUtil {
 
 	private Object _sendSynchronizedMessage(
 			String destination, Message message, long timeout)
-		throws MessageBusException {
-
-		return _messageBus.sendSynchronizedMessage(
-			destination, message, timeout);
-	}
-
-	private String _sendSynchronizedMessage(String destination, String message)
-		throws MessageBusException {
-
-		return _messageBus.sendSynchronizedMessage(
-			destination, message, _DEFAULT_TIMEOUT);
-	}
-
-	private String _sendSynchronizedMessage(
-			String destination, String message, long timeout)
 		throws MessageBusException {
 
 		return _messageBus.sendSynchronizedMessage(

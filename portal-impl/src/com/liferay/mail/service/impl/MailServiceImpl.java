@@ -26,7 +26,9 @@ import com.liferay.mail.model.Filter;
 import com.liferay.mail.service.MailService;
 import com.liferay.portal.kernel.mail.MailMessage;
 import com.liferay.portal.kernel.messaging.DestinationNames;
+import com.liferay.portal.kernel.messaging.Message;
 import com.liferay.portal.kernel.messaging.MessageBusUtil;
+import com.liferay.portal.kernel.messaging.MessageTypes;
 import com.liferay.portal.kernel.util.BooleanWrapper;
 import com.liferay.portal.kernel.util.LongWrapper;
 import com.liferay.portal.kernel.util.MethodWrapper;
@@ -60,7 +62,9 @@ public class MailServiceImpl implements MailService {
 				new BooleanWrapper(leaveCopy)
 			});
 
-		MessageBusUtil.sendMessage(DestinationNames.MAIL, methodWrapper);
+		Message message = new Message(MessageTypes.MAIL_MESSAGE);
+		message.setPayload(methodWrapper);
+		MessageBusUtil.sendMessage(DestinationNames.MAIL, message);
 	}
 
 	public void addUser(
@@ -78,7 +82,9 @@ public class MailServiceImpl implements MailService {
 				lastName, emailAddress
 			});
 
-		MessageBusUtil.sendMessage(DestinationNames.MAIL, methodWrapper);
+		Message message = new Message(MessageTypes.MAIL_MESSAGE);
+		message.setPayload(methodWrapper);
+		MessageBusUtil.sendMessage(DestinationNames.MAIL, message);
 	}
 
 	public void addVacationMessage(
@@ -94,7 +100,9 @@ public class MailServiceImpl implements MailService {
 				new LongWrapper(userId), emailAddress, vacationMessage
 			});
 
-		MessageBusUtil.sendMessage(DestinationNames.MAIL, methodWrapper);
+		Message message = new Message(MessageTypes.MAIL_MESSAGE);
+		message.setPayload(methodWrapper);
+		MessageBusUtil.sendMessage(DestinationNames.MAIL, message);
 	}
 
 	public void deleteEmailAddress(long userId) {
@@ -106,7 +114,9 @@ public class MailServiceImpl implements MailService {
 			PropsValues.MAIL_HOOK_IMPL, "deleteEmailAddress",
 			new Object[] {new LongWrapper(userId)});
 
-		MessageBusUtil.sendMessage(DestinationNames.MAIL, methodWrapper);
+		Message message = new Message(MessageTypes.MAIL_MESSAGE);
+		message.setPayload(methodWrapper);
+		MessageBusUtil.sendMessage(DestinationNames.MAIL, message);
 	}
 
 	public void deleteUser(long userId) {
@@ -118,7 +128,9 @@ public class MailServiceImpl implements MailService {
 			PropsValues.MAIL_HOOK_IMPL, "deleteUser",
 			new Object[] {new LongWrapper(userId)});
 
-		MessageBusUtil.sendMessage(DestinationNames.MAIL, methodWrapper);
+		Message message = new Message(MessageTypes.MAIL_MESSAGE);
+		message.setPayload(methodWrapper);
+		MessageBusUtil.sendMessage(DestinationNames.MAIL, message);
 	}
 
 	public void sendEmail(MailMessage mailMessage) {
@@ -126,7 +138,9 @@ public class MailServiceImpl implements MailService {
 			_log.debug("sendEmail");
 		}
 
-		MessageBusUtil.sendMessage(DestinationNames.MAIL, mailMessage);
+		Message message = new Message(MessageTypes.MAIL_MESSAGE);
+		message.setPayload(mailMessage);
+		MessageBusUtil.sendMessage(DestinationNames.MAIL, message);
 	}
 
 	public void updateBlocked(long userId, List<String> blocked) {
@@ -138,7 +152,9 @@ public class MailServiceImpl implements MailService {
 			PropsValues.MAIL_HOOK_IMPL, "updateBlocked",
 			new Object[] {new LongWrapper(userId), blocked});
 
-		MessageBusUtil.sendMessage(DestinationNames.MAIL, methodWrapper);
+		Message message = new Message(MessageTypes.MAIL_MESSAGE);
+		message.setPayload(methodWrapper);
+		MessageBusUtil.sendMessage(DestinationNames.MAIL, message);
 	}
 
 	public void updateEmailAddress(long userId, String emailAddress) {
@@ -150,7 +166,9 @@ public class MailServiceImpl implements MailService {
 			PropsValues.MAIL_HOOK_IMPL, "updateEmailAddress",
 			new Object[] {new LongWrapper(userId), emailAddress});
 
-		MessageBusUtil.sendMessage(DestinationNames.MAIL, methodWrapper);
+		Message message = new Message(MessageTypes.MAIL_MESSAGE);
+		message.setPayload(methodWrapper);
+		MessageBusUtil.sendMessage(DestinationNames.MAIL, message);
 	}
 
 	public void updatePassword(long userId, String password) {
@@ -162,7 +180,9 @@ public class MailServiceImpl implements MailService {
 			PropsValues.MAIL_HOOK_IMPL, "updatePassword",
 			new Object[] {new LongWrapper(userId), password});
 
-		MessageBusUtil.sendMessage(DestinationNames.MAIL, methodWrapper);
+		Message message = new Message(MessageTypes.MAIL_MESSAGE);
+		message.setPayload(methodWrapper);
+		MessageBusUtil.sendMessage(DestinationNames.MAIL, message);
 	}
 
 	private static Log _log = LogFactory.getLog(MailServiceImpl.class);

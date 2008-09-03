@@ -23,6 +23,7 @@
 package com.liferay.portlet.communities.messaging;
 
 import com.liferay.portal.kernel.json.JSONFactoryUtil;
+import com.liferay.portal.kernel.messaging.Message;
 import com.liferay.portal.kernel.messaging.MessageListener;
 import com.liferay.portal.kernel.util.Time;
 import com.liferay.portal.model.User;
@@ -49,17 +50,13 @@ import org.apache.commons.logging.LogFactory;
  */
 public class LayoutsRemotePublisherMessageListener implements MessageListener {
 
-	public void receive(Object message) {
-		throw new UnsupportedOperationException();
-	}
-
-	public void receive(String message) {
+	public void receive(Message message) {
 		PermissionChecker permissionChecker = null;
 
 		try {
 			LayoutsRemotePublisherRequest publisherRequest =
-				(LayoutsRemotePublisherRequest)JSONFactoryUtil.deserialize(
-					message);
+				(LayoutsRemotePublisherRequest) JSONFactoryUtil.deserialize(
+					(String)message.getPayload());
 
 			long userId = publisherRequest.getUserId();
 			long sourceGroupId = publisherRequest.getSourceGroupId();

@@ -24,6 +24,7 @@ package com.liferay.portal.liveusers.messaging;
 
 import com.liferay.portal.kernel.json.JSONFactoryUtil;
 import com.liferay.portal.kernel.json.JSONObject;
+import com.liferay.portal.kernel.messaging.Message;
 import com.liferay.portal.kernel.messaging.MessageListener;
 import com.liferay.portal.liveusers.LiveUsers;
 
@@ -38,29 +39,21 @@ import org.apache.commons.logging.LogFactory;
  */
 public class LiveUsersMessageListener implements MessageListener {
 
-	public void receive(Object message) {
-		throw new UnsupportedOperationException();
-	}
-
-	public void receive(String message) {
+	public void receive(Message message) {
 		try {
-			doReceive(message);
+			JSONObject jsonObj =
+				JSONFactoryUtil.createJSONObject((String)message.getPayload());
+			String command = jsonObj.getString("command");
+
+			if (command.equals("signIn")) {
+				doCommandSignIn(jsonObj);
+			}
+			else if (command.equals("signOut")) {
+				doCommandSignOut(jsonObj);
+			}
 		}
 		catch (Exception e) {
 			_log.error("Unable to process message " + message, e);
-		}
-	}
-
-	public void doReceive(String message) throws Exception {
-		JSONObject jsonObj = JSONFactoryUtil.createJSONObject(message);
-
-		String command = jsonObj.getString("command");
-
-		if (command.equals("signIn")) {
-			doCommandSignIn(jsonObj);
-		}
-		else if (command.equals("signOut")) {
-			doCommandSignOut(jsonObj);
 		}
 	}
 
@@ -85,5 +78,4 @@ public class LiveUsersMessageListener implements MessageListener {
 	}
 
 	private static Log _log = LogFactory.getLog(LiveUsersMessageListener.class);
-
 }

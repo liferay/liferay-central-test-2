@@ -46,16 +46,10 @@ public interface MessageBus {
 	public void removeDestinationEventListener(
 		DestinationEventListener listener);
 
-	public void sendMessage(String destination, Object message);
-
-	public void sendMessage(String destination, String message);
+	public void sendMessage(String destination, Message message);
 
 	public Object sendSynchronizedMessage(
 			String destination, Message message, long timeout)
-		throws MessageBusException;
-
-	public String sendSynchronizedMessage(
-			String destination, String message, long timeout)
 		throws MessageBusException;
 
 	public boolean unregisterMessageListener(

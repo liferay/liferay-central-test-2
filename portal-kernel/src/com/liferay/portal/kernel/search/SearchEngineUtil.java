@@ -130,8 +130,10 @@ public class SearchEngineUtil {
 
 			searchRequest.setCommand(SearchRequest.COMMAND_INDEX_ONLY);
 
+			Message message = new Message(SCHEDULER_MESSAGE);
+			message.setPayload(searchRequest);
 			_indexReadOnly = (Boolean)MessageBusUtil.sendSynchronizedMessage(
-				DestinationNames.SEARCH_READER, new Message(searchRequest));
+				DestinationNames.SEARCH_READER, message);
 
 			if (_indexReadOnly == null) {
 				_indexReadOnly = Boolean.FALSE;
@@ -170,6 +172,7 @@ public class SearchEngineUtil {
 
 	private static Log _log = LogFactoryUtil.getLog(SearchEngineUtil.class);
 
+	private static final String SCHEDULER_MESSAGE = "msg.type.scheduler";
 	private static SearchEngineUtil _instance = new SearchEngineUtil();
 
 	private IndexSearcher _messageBusIndexSearcher;

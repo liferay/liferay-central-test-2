@@ -45,6 +45,8 @@ import com.liferay.portal.kernel.json.JSONFactoryUtil;
 import com.liferay.portal.kernel.json.JSONObject;
 import com.liferay.portal.kernel.messaging.DestinationNames;
 import com.liferay.portal.kernel.messaging.MessageBusUtil;
+import com.liferay.portal.kernel.messaging.Message;
+import com.liferay.portal.kernel.messaging.MessageTypes;
 
 import javax.servlet.jsp.JspException;
 import javax.servlet.jsp.tagext.TagSupport;
@@ -69,9 +71,11 @@ public class UserPresenceTag extends TagSupport{
 			ruonPresenceJSON.put(
 				"getPresenceStatusRequest", getPresenceStatusRequestJSON);
 
+			Message message = new Message(MessageTypes.RUON_MESSAGE);
+			message.setPayload(ruonPresenceJSON.toString());
 			String ruonPresenceResponse =
-				MessageBusUtil.sendSynchronizedMessage(
-					DestinationNames.RUON, ruonPresenceJSON.toString());
+				(String)MessageBusUtil.sendSynchronizedMessage(
+					DestinationNames.RUON, message);
 
 			String presenceStatus = "";
 

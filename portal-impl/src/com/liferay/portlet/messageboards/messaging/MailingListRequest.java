@@ -22,13 +22,15 @@
 
 package com.liferay.portlet.messageboards.messaging;
 
+import java.io.Serializable;
+
 /**
  * <a href="MailingListRequest.java.html"><b><i>View Source</i></b></a>
  *
  * @author Thiago Moreira
  *
  */
-public class MailingListRequest {
+public class MailingListRequest implements Serializable {
 
 	public long getCategoryId() {
 		return _categoryId;

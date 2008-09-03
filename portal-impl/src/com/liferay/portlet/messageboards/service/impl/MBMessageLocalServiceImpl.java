@@ -31,7 +31,9 @@ import com.liferay.portal.kernel.json.JSONFactoryUtil;
 import com.liferay.portal.kernel.json.JSONObject;
 import com.liferay.portal.kernel.mail.MailMessage;
 import com.liferay.portal.kernel.messaging.DestinationNames;
+import com.liferay.portal.kernel.messaging.Message;
 import com.liferay.portal.kernel.messaging.MessageBusUtil;
+import com.liferay.portal.kernel.messaging.MessageTypes;
 import com.liferay.portal.kernel.search.SearchException;
 import com.liferay.portal.kernel.util.ContentTypes;
 import com.liferay.portal.kernel.util.ObjectValuePair;
@@ -91,7 +93,6 @@ import java.util.Iterator;
 import java.util.List;
 
 import javax.mail.internet.InternetAddress;
-
 import javax.portlet.PortletPreferences;
 
 import org.apache.commons.lang.time.StopWatch;
@@ -1592,6 +1593,8 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 				message.getParentMessageId());
 		}
 
+		Message notifMesg = new Message(MessageTypes.MB_NOTIFICATION_MESSAGE);
+		notifMesg.setDestination(DestinationNames.MESSAGE_BOARDS);
 		JSONObject jsonObj = JSONFactoryUtil.createJSONObject();
 
 		jsonObj.put("companyId", message.getCompanyId());
@@ -1608,9 +1611,8 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 		jsonObj.put("htmlFormat", htmlFormat);
 		jsonObj.put(
 			"sourceMailingList", MailingListThreadLocal.isSourceMailingList());
-
-		MessageBusUtil.sendMessage(
-			DestinationNames.MESSAGE_BOARDS, jsonObj.toString());
+		notifMesg.setPayload(jsonObj.toString());
+		MessageBusUtil.sendMessage(DestinationNames.MESSAGE_BOARDS, notifMesg);
 	}
 
 	protected void sendBlogsCommentsEmail(

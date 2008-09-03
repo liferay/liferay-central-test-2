@@ -23,6 +23,7 @@
 package com.liferay.mail.messaging;
 
 import com.liferay.portal.kernel.mail.MailMessage;
+import com.liferay.portal.kernel.messaging.Message;
 import com.liferay.portal.kernel.messaging.MessageListener;
 import com.liferay.portal.kernel.util.ArrayUtil;
 import com.liferay.portal.kernel.util.MethodInvoker;
@@ -44,20 +45,22 @@ import org.apache.commons.logging.LogFactory;
  */
 public class MailMessageListener implements MessageListener {
 
-	public void receive(Object message) {
+	public void receive(Message message) {
 		try {
-			doReceive(message);
+			Object payload = message.getPayload();
+			if (payload instanceof MailMessage) {
+				doMailMessage((MailMessage)payload);
+			}
+			else if (payload instanceof MethodWrapper) {
+				doMethodWrapper((MethodWrapper)payload);
+			}
 		}
 		catch (Exception e) {
 			_log.error("Unable to process message " + message, e);
 		}
 	}
 
-	public void receive(String message) {
-		throw new UnsupportedOperationException();
-	}
-
-	public void doMailMessage(MailMessage mailMessage) throws Exception {
+	protected void doMailMessage(MailMessage mailMessage) throws Exception {
 		InternetAddress[] auditTrail = InternetAddress.parse(
 			PropsUtil.get(PropsKeys.MAIL_AUDIT_TRAIL));
 
@@ -80,17 +83,8 @@ public class MailMessageListener implements MessageListener {
 		MailEngine.send(mailMessage);
 	}
 
-	public void doMethodWrapper(MethodWrapper methodWrapper) throws Exception {
+	protected void doMethodWrapper(MethodWrapper methodWrapper) throws Exception {
 		MethodInvoker.invoke(methodWrapper);
-	}
-
-	public void doReceive(Object message) throws Exception {
-		if (message instanceof MailMessage) {
-			doMailMessage((MailMessage)message);
-		}
-		else if (message instanceof MethodWrapper) {
-			doMethodWrapper((MethodWrapper)message);
-		}
 	}
 
 	private static Log _log = LogFactory.getLog(MailMessageListener.class);

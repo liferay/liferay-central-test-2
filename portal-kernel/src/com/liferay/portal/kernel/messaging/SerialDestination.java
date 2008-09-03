@@ -35,14 +35,14 @@ import java.util.concurrent.ThreadPoolExecutor;
  * @author Michael C. Han
  *
  */
-public class SerialDestination extends ParallelDestination {
+public class SerialDestination extends ArrayDispatcherDestination {
 
 	public SerialDestination(String name) {
 		super(name, _WORKERS_CORE_SIZE, _WORKERS_MAX_SIZE);
 	}
 
 	protected void dispatch(
-		final MessageListener[] listeners, final String message) {
+		final MessageListener[] listeners, final Message message) {
 
 		ThreadPoolExecutor threadPoolExecutor = getThreadPoolExecutor();
 

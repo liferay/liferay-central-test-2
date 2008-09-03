@@ -26,15 +26,10 @@ package com.liferay.portal.kernel.messaging;
  * <a href="DefaultMessageSender.java.html"><b><i>View Source</i></b></a>
  *
  * @author Michael C. Han
- *
  */
 public class DefaultMessageSender implements MessageSender {
 
-	public void send(String destination, Object message) {
-		_messageBus.sendMessage(destination, message);
-	}
-
-	public void send(String destination, String message) {
+	public void send(String destination, Message message) {
 		_messageBus.sendMessage(destination, message);
 	}
 

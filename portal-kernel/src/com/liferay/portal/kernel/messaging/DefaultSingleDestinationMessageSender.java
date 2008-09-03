@@ -39,11 +39,7 @@ public class DefaultSingleDestinationMessageSender
 		_messageSender = messageSender;
 	}
 
-	public void send(Object message) {
-		_messageSender.send(_destination, message);
-	}
-
-	public void send(String message) {
+	public void send(Message message) {
 		_messageSender.send(_destination, message);
 	}
 

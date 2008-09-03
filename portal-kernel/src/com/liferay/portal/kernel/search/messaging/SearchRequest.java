@@ -114,6 +114,20 @@ public class SearchRequest {
 		_end = end;
 	}
 
+
+	public String toString() {
+		return "SearchRequest{" +
+			"_command='" + _command + '\'' +
+			", _companyId=" + _companyId +
+			", _id='" + _id + '\'' +
+			", _doc=" + _doc +
+			", _query=" + _query +
+			", _sort=" + _sort +
+			", _start=" + _start +
+			", _end=" + _end +
+			'}';
+	}
+
 	private String _command;
 	private long _companyId;
 	private String _id;

@@ -27,7 +27,9 @@ import com.liferay.portal.kernel.events.ActionException;
 import com.liferay.portal.kernel.json.JSONFactoryUtil;
 import com.liferay.portal.kernel.json.JSONObject;
 import com.liferay.portal.kernel.messaging.DestinationNames;
+import com.liferay.portal.kernel.messaging.Message;
 import com.liferay.portal.kernel.messaging.MessageBusUtil;
+import com.liferay.portal.kernel.messaging.MessageTypes;
 import com.liferay.portal.model.User;
 import com.liferay.portal.service.UserLocalServiceUtil;
 import com.liferay.portal.util.PortalInstances;
@@ -103,32 +105,30 @@ public class PortalSessionListener implements HttpSessionListener {
 				long companyId = getCompanyId(userId);
 				String sessionId = session.getId();
 
+				Message message = new Message(MessageTypes.LIVE_USER_MESSAGE);
 				JSONObject jsonObj = JSONFactoryUtil.createJSONObject();
-
 				jsonObj.put("command", "signOut");
 				jsonObj.put("companyId", companyId);
 				jsonObj.put("userId", userId);
 				jsonObj.put("sessionId", sessionId);
+				message.setPayload(jsonObj.toString());
 
-				MessageBusUtil.sendMessage(
-					DestinationNames.LIVE_USERS, jsonObj.toString());
+				MessageBusUtil.sendMessage(DestinationNames.LIVE_USERS, message);
 			}
 
 			// RUON
-
+			Message message = new Message(MessageTypes.RUON_MESSAGE);
+			message.setDestination(DestinationNames.RUON);
 			JSONObject ruonJSON = JSONFactoryUtil.createJSONObject();
-
 			JSONObject setPresenceStatusRequestJSON =
 				JSONFactoryUtil.createJSONObject();
-
 			setPresenceStatusRequestJSON.put("userId", userIdObj.toString());
 			setPresenceStatusRequestJSON.put("status", "offline");
-
 			ruonJSON.put(
 				"setPresenceStatusRequest", setPresenceStatusRequestJSON);
+			message.setPayload(ruonJSON.toString());
 
-			MessageBusUtil.sendMessage(
-				DestinationNames.RUON, ruonJSON.toString());
+			MessageBusUtil.sendMessage(DestinationNames.RUON, message);
 		}
 		catch (IllegalStateException ise) {
 			_log.warn("Please upgrade to a servlet 2.4 compliant container");

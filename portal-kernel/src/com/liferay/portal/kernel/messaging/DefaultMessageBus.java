@@ -35,13 +35,11 @@ import java.util.Map;
  * <a href="DefaultMessageBus.java.html"><b><i>View Source</i></b></a>
  *
  * @author Michael C. Han
- *
  */
 public class DefaultMessageBus implements MessageBus {
 
 	public synchronized void addDestination(Destination destination) {
 		_destinations.put(destination.getName(), destination);
-
 		fireDestinationAddedEvent(destination);
 
 		Destination responseDestination = getResponseDestination(destination);
@@ -53,8 +51,8 @@ public class DefaultMessageBus implements MessageBus {
 		_destinationEventListeners.add(listener);
 	}
 
-	public boolean hasDestination(String destination) {
-		return _destinations.containsKey(destination);
+	public boolean hasDestination(final String destinationName) {
+		return _destinations.containsKey(destinationName);
 	}
 
 	public boolean hasMessageListener(String destination) {
@@ -62,8 +60,7 @@ public class DefaultMessageBus implements MessageBus {
 
 		if ((destinationModel != null) && destinationModel.isRegistered()) {
 			return true;
-		}
-		else {
+		} else {
 			return false;
 		}
 	}
@@ -82,9 +79,9 @@ public class DefaultMessageBus implements MessageBus {
 	}
 
 	public synchronized void removeDestination(String destination) {
-		Destination destinationModel = _destinations.remove(destination);
+		Destination dest = _destinations.remove(destination);
 
-		fireDestinationRemovedEvent(destinationModel);
+		fireDestinationRemovedEvent(dest);
 
 		String responseDestination = getResponseDestination(destination);
 
@@ -97,9 +94,8 @@ public class DefaultMessageBus implements MessageBus {
 		_destinationEventListeners.remove(listener);
 	}
 
-	public void sendMessage(String destination, Object message) {
+	public void sendMessage(String destination, Message message) {
 		Destination destinationModel = _destinations.get(destination);
-
 		if (destinationModel == null) {
 			if (_log.isWarnEnabled()) {
 				_log.warn("Destination " + destination + " is not configured");
@@ -107,26 +103,13 @@ public class DefaultMessageBus implements MessageBus {
 
 			return;
 		}
-
-		destinationModel.send(message);
-	}
-
-	public void sendMessage(String destination, String message) {
-		Destination destinationModel = _destinations.get(destination);
-
-		if (destinationModel == null) {
-			if (_log.isWarnEnabled()) {
-				_log.warn("Destination " + destination + " is not configured");
-			}
-
-			return;
-		}
+		message.setDestination(destination);
 
 		destinationModel.send(message);
 	}
 
 	public Object sendSynchronizedMessage(
-			String destination, Message message, long timeout)
+		String destination, Message message, long timeout)
 		throws MessageBusException {
 
 		Destination destinationModel = _destinations.get(destination);
@@ -138,6 +121,7 @@ public class DefaultMessageBus implements MessageBus {
 
 			return null;
 		}
+		message.setDestination(destination);
 
 		Destination responseDestinationModel = _destinations.get(
 			getResponseDestination(destination));
@@ -149,10 +133,12 @@ public class DefaultMessageBus implements MessageBus {
 			return null;
 		}
 
+		message.setReplyTo(responseDestinationModel.getName());
+		String messageId = getNextResponseId();
+		message.setMessageId(messageId);
 		ObjectResponseMessageListener responseMessageListener =
-			new ObjectResponseMessageListener(
-				destinationModel, responseDestinationModel, getNextResponseId(),
-				timeout);
+			new ObjectResponseMessageListener(destinationModel, messageId,
+											  timeout);
 
 		responseDestinationModel.register(responseMessageListener);
 
@@ -166,47 +152,7 @@ public class DefaultMessageBus implements MessageBus {
 		}
 	}
 
-	public String sendSynchronizedMessage(
-			String destination, String message, long timeout)
-		throws MessageBusException {
-
-		Destination destinationModel = _destinations.get(destination);
-
-		if (destinationModel == null) {
-			if (_log.isWarnEnabled()) {
-				_log.warn("Destination " + destination + " is not configured");
-			}
-
-			return null;
-		}
-
-		Destination responseDestinationModel = _destinations.get(
-			getResponseDestination(destination));
-
-		if (responseDestinationModel == null) {
-			_log.error(
-				"Response destination " + destination + " is not configured");
-
-			return null;
-		}
-
-		StringResponseMessageListener responseMessageListener =
-			new StringResponseMessageListener(
-				destinationModel, responseDestinationModel, getNextResponseId(),
-				timeout);
-
-		responseDestinationModel.register(responseMessageListener);
-
-		try {
-			String responseValue = responseMessageListener.send(message);
-
-			return responseValue;
-		}
-		finally {
-			responseDestinationModel.unregister(responseMessageListener);
-		}
-	}
-
+	
 	public void shutdown() {
 		shutdown(false);
 	}

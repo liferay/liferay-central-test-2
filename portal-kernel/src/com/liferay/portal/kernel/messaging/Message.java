@@ -22,7 +22,10 @@
 
 package com.liferay.portal.kernel.messaging;
 
-import com.liferay.portal.kernel.util.StringPool;
+
+import java.io.Serializable;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * <a href="Message.java.html"><b><i>View Source</i></b></a>
@@ -30,43 +33,67 @@ import com.liferay.portal.kernel.util.StringPool;
  * @author Brian Wing Shun Chan
  *
  */
-public class Message {
-
-	public Message(Object requestValue) {
-		_requestValue = requestValue;
+public class Message implements Serializable {
+	public Message(String type) {
+		_messageType = type;
 	}
 
-	public String getResponseDestination() {
-		return _responseDestination;
+	public String getMessageType() {
+		return _messageType;
 	}
 
-	public void setResponseDestination(String responseDestination) {
-		_responseDestination = responseDestination;
+	public void setDestination(String destination) {
+		_messageValues.put(DESTINATION_KEY, destination);
 	}
 
-	public String getResponseId() {
-		return _responseId;
+	public String getDestination() {
+		return (String)_messageValues.get(DESTINATION_KEY);
 	}
 
-	public void setResponseId(String responseId) {
-		_responseId = responseId;
+	public void setReplyTo(String replyTo) {
+		_messageValues.put(REPLY_TO_KEY, replyTo);
 	}
 
-	public Object getRequestValue() {
-		return _requestValue;
+	public String getReplyTo() {
+		return (String)_messageValues.get(REPLY_TO_KEY);
 	}
 
-	public Object getResponseValue() {
-		return _responseValue;
+	public void setMessageId(String messageId) {
+		_messageValues.put(MESSAGE_ID_KEY, messageId);
 	}
 
-	public void setResponseValue(Object responseValue) {
-		_responseValue = responseValue;
+	public String getMessageId() {
+		return (String)_messageValues.get(MESSAGE_ID_KEY);
 	}
 
-	private String _responseDestination = StringPool.BLANK;
-	private String _responseId = StringPool.BLANK;
-	private Object _requestValue;
-	private Object _responseValue;
+	public Object getPayload() {
+		return _messageValues.get(PAYLOAD_KEY);
+	}
+	
+	public void setPayload(Object object) {
+		_messageValues.put(PAYLOAD_KEY, object);
+	}
 
+	public void put(String key, Object value) {
+		_messageValues.put(key, value);
+	}
+
+	public Object get(String key) {
+		return _messageValues.get(key);
+	}
+
+
+	public String toString() {
+		return "Message{" +
+			"_messageType='" + _messageType + '\'' +
+			", _messageValues=" + _messageValues +
+			'}';
+	}
+
+	private String _messageType;
+	private Map<String, Object> _messageValues = new HashMap<String, Object>();
+	private static final String DESTINATION_KEY = "destination";
+	private static final String REPLY_TO_KEY = "replyTo";
+	private static final String MESSAGE_ID_KEY = "messageId";
+	private static final String PAYLOAD_KEY = "payLoad";
 }

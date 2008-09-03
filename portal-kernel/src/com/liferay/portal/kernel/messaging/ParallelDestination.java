@@ -48,7 +48,7 @@ public class ParallelDestination extends ArrayDispatcherDestination {
 	}
 
 	protected void dispatch(
-		MessageListener[] listeners, final Object message) {
+		MessageListener[] listeners, final Message message) {
 
 		ThreadPoolExecutor threadPoolExecutor = getThreadPoolExecutor();
 
@@ -64,23 +64,4 @@ public class ParallelDestination extends ArrayDispatcherDestination {
 			threadPoolExecutor.execute(runnable);
 		}
 	}
-
-	protected void dispatch(
-		MessageListener[] listeners, final String message) {
-
-		ThreadPoolExecutor threadPoolExecutor = getThreadPoolExecutor();
-
-		for (final MessageListener listener : listeners) {
-			Runnable runnable = new Runnable() {
-
-				public void run() {
-					listener.receive(message);
-				}
-
-			};
-
-			threadPoolExecutor.execute(runnable);
-		}
-	}
-
 }

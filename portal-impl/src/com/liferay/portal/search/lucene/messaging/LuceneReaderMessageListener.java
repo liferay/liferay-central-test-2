@@ -25,7 +25,7 @@ package com.liferay.portal.search.lucene.messaging;
 import com.liferay.portal.kernel.messaging.Message;
 import com.liferay.portal.kernel.messaging.MessageBusUtil;
 import com.liferay.portal.kernel.messaging.MessageListener;
-import com.liferay.portal.kernel.search.Hits;
+import com.liferay.portal.kernel.messaging.MessageTypes;
 import com.liferay.portal.kernel.search.messaging.SearchRequest;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.search.lucene.LuceneSearchEngineUtil;
@@ -41,62 +41,55 @@ import org.apache.commons.logging.LogFactory;
  */
 public class LuceneReaderMessageListener implements MessageListener {
 
-	public void receive(Object message) {
+
+	public void receive(Message message) {
+		String replyTo = message.getReplyTo();
+		String messageId = message.getMessageId();
+		if (Validator.isNull(replyTo) || Validator.isNull(messageId)) {
+			return;
+		}
+		SearchRequest searchRequest = (SearchRequest)message.getPayload();
+		String command = searchRequest.getCommand();
+		if (!command.equals(SearchRequest.COMMAND_INDEX_ONLY) &&
+			!command.equals(SearchRequest.COMMAND_SEARCH)) {
+			return;
+		}
 		try {
-			doReceive((Message)message);
+			Object payload = null;
+			if (command.equals(SearchRequest.COMMAND_INDEX_ONLY)) {
+				payload = doCommandIndexOnly(searchRequest);
+			}
+			else if (command.equals(SearchRequest.COMMAND_SEARCH)) {
+				payload = doCommandSearch(searchRequest);
+			}
+			Message reply = new Message(MessageTypes.INDEX_READER_MESSAGE);
+			reply.setDestination(replyTo);
+			reply.setMessageId(messageId);
+			reply.setPayload(payload);
+			MessageBusUtil.sendMessage(replyTo, message);
+
 		}
 		catch (Exception e) {
 			_log.error("Unable to process message " + message, e);
 		}
 	}
 
-	public void receive(String message) {
-		throw new UnsupportedOperationException();
-	}
 
-	public void doReceive(Message message) throws Exception {
-		String responseDestination = message.getResponseDestination();
-		String responseId = message.getResponseId();
-
-		SearchRequest searchRequest = (SearchRequest)message.getRequestValue();
-
-		String command = searchRequest.getCommand();
-
-		if (command.equals(SearchRequest.COMMAND_INDEX_ONLY) &&
-			Validator.isNotNull(responseDestination) &&
-			Validator.isNotNull(responseId)) {
-
-			doCommandIndexOnly(message);
-		}
-		else if (command.equals(SearchRequest.COMMAND_SEARCH) &&
-				 Validator.isNotNull(responseDestination) &&
-				 Validator.isNotNull(responseId)) {
-
-			doCommandSearch(message, searchRequest);
-		}
-	}
-
-	protected void doCommandIndexOnly(Message message)
+	protected Object doCommandIndexOnly(SearchRequest searchRequest)
 		throws Exception {
 
-		boolean indexOnly = LuceneSearchEngineUtil.isIndexReadOnly();
+		return Boolean.valueOf(LuceneSearchEngineUtil.isIndexReadOnly());
 
-		message.setResponseValue(Boolean.valueOf(indexOnly));
-
-		MessageBusUtil.sendMessage(message.getResponseDestination(), message);
 	}
 
-	protected void doCommandSearch(Message message, SearchRequest searchRequest)
+	protected Object doCommandSearch(SearchRequest searchRequest)
 		throws Exception {
 
-		Hits hits = LuceneSearchEngineUtil.search(
+		return LuceneSearchEngineUtil.search(
 			searchRequest.getCompanyId(), searchRequest.getQuery(),
 			searchRequest.getSort(), searchRequest.getStart(),
 			searchRequest.getEnd());
 
-		message.setResponseValue(hits);
-
-		MessageBusUtil.sendMessage(message.getResponseDestination(), message);
 	}
 
 	private static Log _log =

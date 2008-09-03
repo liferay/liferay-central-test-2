@@ -62,13 +62,9 @@ import org.apache.commons.logging.LogFactory;
  */
 public class MBMessageListener implements MessageListener {
 
-	public void receive(Object message) {
-		throw new UnsupportedOperationException();
-	}
-
-	public void receive(String message) {
+	public void receive(com.liferay.portal.kernel.messaging.Message message) {
 		try {
-			doReceive(message);
+			doReceive((String)message.getPayload());
 		}
 		catch (Exception e) {
 			_log.error("Unable to process message " + message, e);

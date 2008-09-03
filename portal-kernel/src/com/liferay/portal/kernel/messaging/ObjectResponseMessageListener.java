@@ -31,60 +31,46 @@ package com.liferay.portal.kernel.messaging;
  */
 public class ObjectResponseMessageListener implements MessageListener {
 
-	public ObjectResponseMessageListener(
-		Destination destination, Destination responseDestination,
-		String responseId, long timeout) {
-
-		_destination = destination;
-		_responseDestination = responseDestination;
+	public ObjectResponseMessageListener(Destination destination,
+										 String responseId, long timeout) {
 		_responseId = responseId;
+		_destination = destination;
 		_timeout = timeout;
 	}
 
-	public synchronized Object send(Message message)
+	public Object send(Message message)
 		throws MessageBusException {
-
-		message.setResponseDestination(_responseDestination.getName());
-		message.setResponseId(_responseId);
-
 		_destination.send(message);
 
-		try {
-			wait(_timeout);
-		}
-		catch (InterruptedException ie) {
-			throw new MessageBusException(
-				"Unable to receive response for request", ie);
-		}
+		synchronized (this) {
+			try {
+				wait(_timeout);
+			}
+			catch (InterruptedException ie) {
+				throw new MessageBusException(
+					"Unable to receive response for request", ie);
+			}
 
-		if (_responseValue == null) {
-			throw new MessageBusException(
-				"No reply received for request: " + message);
-		}
+			if (_responseValue == null) {
+				throw new MessageBusException(
+					"No reply received for request: " + message);
+			}
 
-		return _responseValue;
+			return _responseValue;
+		}
 	}
 
-	public synchronized void receive(Object message) {
-		receive((Message)message);
-	}
-
-	public void receive(String message) {
-		throw new UnsupportedOperationException();
-	}
-
-	protected void receive(Message message) {
-		if (message.getResponseId().equals(_responseId)) {
-			_responseValue = message.getResponseValue();
-
-			notify();
+	public void receive(Message message) {
+		if (message.getMessageId().equals(_responseId)) {
+			synchronized (this) {
+				_responseValue = message.getPayload();
+				notify();
+			}
 		}
 	}
 
 	private Destination _destination;
-	private Destination _responseDestination;
+	private Object _responseValue;
 	private String _responseId;
 	private long _timeout;
-	private Object _responseValue;
-
 }

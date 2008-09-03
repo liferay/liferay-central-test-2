@@ -27,7 +27,9 @@ import com.liferay.portal.kernel.events.ActionException;
 import com.liferay.portal.kernel.json.JSONFactoryUtil;
 import com.liferay.portal.kernel.json.JSONObject;
 import com.liferay.portal.kernel.messaging.DestinationNames;
+import com.liferay.portal.kernel.messaging.Message;
 import com.liferay.portal.kernel.messaging.MessageBusUtil;
+import com.liferay.portal.kernel.messaging.MessageTypes;
 import com.liferay.portal.kernel.servlet.HttpHeaders;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PropsValues;
@@ -64,14 +66,16 @@ public class LoginPostAction extends Action {
 
 			// Live users
 
+			long userId = PortalUtil.getUserId(request);
 			if (PropsValues.LIVE_USERS_ENABLED) {
 				long companyId = PortalUtil.getCompanyId(request);
-				long userId = PortalUtil.getUserId(request);
 				String sessionId = session.getId();
 				String remoteAddr = request.getRemoteAddr();
 				String remoteHost = request.getRemoteHost();
 				String userAgent = request.getHeader(HttpHeaders.USER_AGENT);
 
+				Message message = new Message(MessageTypes.LIVE_USER_MESSAGE);
+				message.setDestination(DestinationNames.LIVE_USERS);
 				JSONObject jsonObj = JSONFactoryUtil.createJSONObject();
 
 				jsonObj.put("command", "signIn");
@@ -81,26 +85,24 @@ public class LoginPostAction extends Action {
 				jsonObj.put("remoteAddr", remoteAddr);
 				jsonObj.put("remoteHost", remoteHost);
 				jsonObj.put("userAgent", userAgent);
-
-				MessageBusUtil.sendMessage(
-					DestinationNames.LIVE_USERS, jsonObj.toString());
+				message.setPayload(jsonObj.toString());
+				MessageBusUtil.sendMessage(DestinationNames.LIVE_USERS, message);
 			}
 
 			// RUON
 
+			Message message = new Message(MessageTypes.RUON_MESSAGE);
+			message.setDestination(DestinationNames.RUON);
 			JSONObject ruonJSON = JSONFactoryUtil.createJSONObject();
-
 			JSONObject setPresenceStatusRequestJSON =
 				JSONFactoryUtil.createJSONObject();
-
-			setPresenceStatusRequestJSON.put("userId", request.getRemoteUser());
+			setPresenceStatusRequestJSON.put("userId", String.valueOf(userId));
 			setPresenceStatusRequestJSON.put("status", "online");
-
 			ruonJSON.put(
 				"setPresenceStatusRequest", setPresenceStatusRequestJSON);
-
-			MessageBusUtil.sendMessage(
-				DestinationNames.RUON, ruonJSON.toString());
+			message.setPayload(ruonJSON.toString());
+			
+			MessageBusUtil.sendMessage(DestinationNames.RUON, message);
 		}
 		catch (Exception e) {
 			throw new ActionException(e);

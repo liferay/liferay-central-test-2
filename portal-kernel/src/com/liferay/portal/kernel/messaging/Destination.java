@@ -42,9 +42,7 @@ public interface Destination {
 
 	public void register(MessageListener listener);
 
-	public void send(Object message);
-
-	public void send(String message);
+	public void send(Message message);
 
 	public boolean unregister(MessageListener listener);
 

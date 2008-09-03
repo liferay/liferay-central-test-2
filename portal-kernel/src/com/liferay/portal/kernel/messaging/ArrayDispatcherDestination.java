@@ -24,8 +24,8 @@ package com.liferay.portal.kernel.messaging;
 
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
-import com.liferay.portal.kernel.util.ListUtil;
 
+import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -53,8 +53,8 @@ public abstract class ArrayDispatcherDestination extends BaseDestination {
 	public synchronized void register(MessageListener listener) {
 		listener = new InvokerMessageListener(listener);
 
-		Set<MessageListener> listeners = new HashSet<MessageListener>(
-			ListUtil.fromArray(_listeners));
+		Set<MessageListener> listeners =
+			new HashSet<MessageListener>(Arrays.asList(_listeners));
 
 		listeners.add(listener);
 
@@ -64,27 +64,7 @@ public abstract class ArrayDispatcherDestination extends BaseDestination {
 		setListenersCount(listeners.size());
 	}
 
-	public void send(Object message) {
-		if (_listeners.length == 0) {
-			if (_log.isDebugEnabled()) {
-				_log.debug("No listeners for destination " + getName());
-			}
-
-			return;
-		}
-
-		ThreadPoolExecutor threadPoolExecutor = getThreadPoolExecutor();
-
-		if (threadPoolExecutor.isShutdown()) {
-			throw new IllegalStateException(
-				"Destination " + getName() + " is shutdown and cannot " +
-					"receive more messages");
-		}
-
-		dispatch(_listeners, message);
-	}
-
-	public void send(String message) {
+	public void send(Message message) {
 		if (_listeners.length == 0) {
 			if (_log.isDebugEnabled()) {
 				_log.debug("No listeners for destination " + getName());
@@ -107,7 +87,7 @@ public abstract class ArrayDispatcherDestination extends BaseDestination {
 	public synchronized boolean unregister(MessageListener listener) {
 		listener = new InvokerMessageListener(listener);
 
-		List<MessageListener> listeners = ListUtil.fromArray(_listeners);
+		List<MessageListener> listeners = Arrays.asList(_listeners);
 
 		boolean value = listeners.remove(listener);
 
@@ -122,10 +102,7 @@ public abstract class ArrayDispatcherDestination extends BaseDestination {
 	}
 
 	protected abstract void dispatch(
-		MessageListener[] listeners, Object message);
-
-	protected abstract void dispatch(
-		MessageListener[] listeners, String message);
+		MessageListener[] listeners, Message message);
 
 	private static Log _log = LogFactoryUtil.getLog(BaseDestination.class);
 

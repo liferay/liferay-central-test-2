@@ -27,6 +27,7 @@ import com.liferay.portal.NoSuchUserException;
 import com.liferay.portal.kernel.json.JSONFactoryUtil;
 import com.liferay.portal.kernel.json.JSONObject;
 import com.liferay.portal.kernel.mail.MailMessage;
+import com.liferay.portal.kernel.messaging.Message;
 import com.liferay.portal.kernel.messaging.MessageListener;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.model.Subscription;
@@ -49,24 +50,19 @@ import org.apache.commons.logging.LogFactory;
  * <a href="WikiMessageListener.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
- *
  */
 public class WikiMessageListener implements MessageListener {
 
-	public void receive(Object message) {
-		throw new UnsupportedOperationException();
-	}
-
-	public void receive(String message) {
+	public void receive(Message message) {
 		try {
-			doReceive(message);
+			doReceive((String)message.getPayload());
 		}
 		catch (Exception e) {
 			_log.error("Unable to process message " + message, e);
 		}
 	}
 
-	public void doReceive(String message) throws Exception {
+	protected void doReceive(String message) throws Exception {
 		JSONObject jsonObj = JSONFactoryUtil.createJSONObject(message);
 
 		long companyId = jsonObj.getLong("companyId");
@@ -86,7 +82,7 @@ public class WikiMessageListener implements MessageListener {
 			_log.info(
 				"Sending notifications for {mailId=" + mailId +
 					", pageResourcePrimKey=" + pageResourcePrimKey +
-						", nodeId=" + nodeId + "}");
+					", nodeId=" + nodeId + "}");
 		}
 
 		// Pages
@@ -114,9 +110,9 @@ public class WikiMessageListener implements MessageListener {
 	}
 
 	protected void sendEmail(
-			long userId, String fromName, String fromAddress, String subject,
-			String body, List<Subscription> subscriptions, Set<Long> sent,
-			String replyToAddress, String mailId)
+		long userId, String fromName, String fromAddress, String subject,
+		String body, List<Subscription> subscriptions, Set<Long> sent,
+		String replyToAddress, String mailId)
 		throws Exception {
 
 		for (Subscription subscription : subscriptions) {
@@ -130,8 +126,7 @@ public class WikiMessageListener implements MessageListener {
 				}
 
 				continue;
-			}
-			else {
+			} else {
 				if (_log.isDebugEnabled()) {
 					_log.debug(
 						"Add user " + subscribedUserId +
@@ -169,22 +164,22 @@ public class WikiMessageListener implements MessageListener {
 
 				String curSubject = StringUtil.replace(
 					subject,
-					new String[] {
+					new String[]{
 						"[$TO_ADDRESS$]",
 						"[$TO_NAME$]"
 					},
-					new String[] {
+					new String[]{
 						user.getFullName(),
 						user.getEmailAddress()
 					});
 
 				String curBody = StringUtil.replace(
 					body,
-					new String[] {
+					new String[]{
 						"[$TO_ADDRESS$]",
 						"[$TO_NAME$]"
 					},
-					new String[] {
+					new String[]{
 						user.getFullName(),
 						user.getEmailAddress()
 					});
@@ -195,7 +190,7 @@ public class WikiMessageListener implements MessageListener {
 				MailMessage message = new MailMessage(
 					from, to, curSubject, curBody, false);
 
-				message.setReplyTo(new InternetAddress[] {replyTo});
+				message.setReplyTo(new InternetAddress[]{replyTo});
 				message.setMessageId(mailId);
 
 				MailServiceUtil.sendEmail(message);
