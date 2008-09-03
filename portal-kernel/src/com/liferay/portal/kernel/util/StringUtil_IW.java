@@ -395,6 +395,10 @@ public class StringUtil_IW {
 		return StringUtil.upperCaseFirstLetter(s);
 	}
 
+	public java.lang.String valueOf(java.lang.Object obj) {
+		return StringUtil.valueOf(obj);
+	}
+
 	public java.lang.String wrap(java.lang.String text) {
 		return StringUtil.wrap(text);
 	}

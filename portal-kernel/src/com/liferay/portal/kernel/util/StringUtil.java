@@ -1279,6 +1279,10 @@ public class StringUtil {
 		return new String(chars);
 	}
 
+	public static String valueOf(Object obj) {
+		return String.valueOf(obj);
+	}
+
 	public static String wrap(String text) {
 		return wrap(text, 80, StringPool.NEW_LINE);
 	}
