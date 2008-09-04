@@ -28,9 +28,8 @@ import com.liferay.documentlibrary.NoSuchDirectoryException;
 import com.liferay.documentlibrary.NoSuchFileException;
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
-import com.liferay.portal.kernel.json.JSONFactoryUtil;
-import com.liferay.portal.kernel.json.JSONObject;
 import com.liferay.portal.kernel.messaging.DestinationNames;
+import com.liferay.portal.kernel.messaging.Message;
 import com.liferay.portal.kernel.messaging.MessageBusUtil;
 import com.liferay.portal.kernel.search.SearchException;
 import com.liferay.portal.kernel.util.CalendarFactoryUtil;
@@ -1240,20 +1239,20 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 			subject = subjectPrefix + subject;
 		}
 
-		JSONObject jsonObj = JSONFactoryUtil.createJSONObject();
+		Message message = new Message();
 
-		jsonObj.put("companyId", node.getCompanyId());
-		jsonObj.put("userId", node.getUserId());
-		jsonObj.put("nodeId", node.getNodeId());
-		jsonObj.put("pageResourcePrimKey", page.getResourcePrimKey());
-		jsonObj.put("fromName", fromName);
-		jsonObj.put("fromAddress", fromAddress);
-		jsonObj.put("subject", subject);
-		jsonObj.put("body", body);
-		jsonObj.put("replyToAddress", replyToAddress);
-		jsonObj.put("mailId", mailId);
+		message.put("companyId", node.getCompanyId());
+		message.put("userId", node.getUserId());
+		message.put("nodeId", node.getNodeId());
+		message.put("pageResourcePrimKey", page.getResourcePrimKey());
+		message.put("fromName", fromName);
+		message.put("fromAddress", fromAddress);
+		message.put("subject", subject);
+		message.put("body", body);
+		message.put("replyToAddress", replyToAddress);
+		message.put("mailId", mailId);
 
-		MessageBusUtil.sendMessage(DestinationNames.WIKI, jsonObj);
+		MessageBusUtil.sendMessage(DestinationNames.WIKI, message);
 	}
 
 	protected void validate(long nodeId, String content, String format)

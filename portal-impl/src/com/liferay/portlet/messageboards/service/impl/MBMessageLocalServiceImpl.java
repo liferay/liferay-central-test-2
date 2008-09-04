@@ -1592,25 +1592,26 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 				message.getParentMessageId());
 		}
 
-		JSONObject jsonObj = JSONFactoryUtil.createJSONObject();
+		com.liferay.portal.kernel.messaging.Message messagingObj =
+			new com.liferay.portal.kernel.messaging.Message();
 
-		jsonObj.put("companyId", message.getCompanyId());
-		jsonObj.put("userId", message.getUserId());
-		jsonObj.put("categoryIds", StringUtil.merge(categoryIds));
-		jsonObj.put("threadId", message.getThreadId());
-		jsonObj.put("fromName", fromName);
-		jsonObj.put("fromAddress", fromAddress);
-		jsonObj.put("subject", subject);
-		jsonObj.put("body", body);
-		jsonObj.put("replyToAddress", replyToAddress);
-		jsonObj.put("mailId", mailId);
-		jsonObj.put("inReplyTo", inReplyTo);
-		jsonObj.put("htmlFormat", htmlFormat);
-		jsonObj.put(
+		messagingObj.put("companyId", message.getCompanyId());
+		messagingObj.put("userId", message.getUserId());
+		messagingObj.put("categoryIds", StringUtil.merge(categoryIds));
+		messagingObj.put("threadId", message.getThreadId());
+		messagingObj.put("fromName", fromName);
+		messagingObj.put("fromAddress", fromAddress);
+		messagingObj.put("subject", subject);
+		messagingObj.put("body", body);
+		messagingObj.put("replyToAddress", replyToAddress);
+		messagingObj.put("mailId", mailId);
+		messagingObj.put("inReplyTo", inReplyTo);
+		messagingObj.put("htmlFormat", htmlFormat);
+		messagingObj.put(
 			"sourceMailingList", MailingListThreadLocal.isSourceMailingList());
 
 		MessageBusUtil.sendMessage(
-			DestinationNames.MESSAGE_BOARDS, jsonObj.toString());
+			DestinationNames.MESSAGE_BOARDS, messagingObj);
 	}
 
 	protected void sendBlogsCommentsEmail(

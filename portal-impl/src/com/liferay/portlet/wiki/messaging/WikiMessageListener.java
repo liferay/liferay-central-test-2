@@ -24,7 +24,6 @@ package com.liferay.portlet.wiki.messaging;
 
 import com.liferay.mail.service.MailServiceUtil;
 import com.liferay.portal.NoSuchUserException;
-import com.liferay.portal.kernel.json.JSONObject;
 import com.liferay.portal.kernel.mail.MailMessage;
 import com.liferay.portal.kernel.messaging.Message;
 import com.liferay.portal.kernel.messaging.MessageListener;
@@ -63,18 +62,16 @@ public class WikiMessageListener implements MessageListener {
 	}
 
 	public void doReceive(Message message) throws Exception {
-		JSONObject jsonObj = (JSONObject)message.getPayload();
-
-		long companyId = jsonObj.getLong("companyId");
-		long userId = jsonObj.getLong("userId");
-		long nodeId = jsonObj.getLong("nodeId");
-		long pageResourcePrimKey = jsonObj.getLong("pageResourcePrimKey");
-		String fromName = jsonObj.getString("fromName");
-		String fromAddress = jsonObj.getString("fromAddress");
-		String subject = jsonObj.getString("subject");
-		String body = jsonObj.getString("body");
-		String replyToAddress = jsonObj.getString("replyToAddress");
-		String mailId = jsonObj.getString("mailId");
+		long companyId = message.getLong("companyId");
+		long userId = message.getLong("userId");
+		long nodeId = message.getLong("nodeId");
+		long pageResourcePrimKey = message.getLong("pageResourcePrimKey");
+		String fromName = message.getString("fromName");
+		String fromAddress = message.getString("fromAddress");
+		String subject = message.getString("subject");
+		String body = message.getString("body");
+		String replyToAddress = message.getString("replyToAddress");
+		String mailId = message.getString("mailId");
 
 		Set<Long> sent = new HashSet<Long>();
 

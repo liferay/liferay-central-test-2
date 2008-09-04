@@ -22,6 +22,8 @@
 
 package com.liferay.portal.kernel.messaging;
 
+import com.liferay.portal.kernel.util.GetterUtil;
+
 import java.io.Serializable;
 
 import java.util.HashMap;
@@ -43,6 +45,26 @@ public class Message implements Serializable {
 		else {
 			return _values.get(key);
 		}
+	}
+
+	public boolean getBoolean(String key) {
+		return GetterUtil.getBoolean((String)get(key));
+	}
+
+	public double getDouble(String key) {
+		return GetterUtil.getDouble((String)get(key));
+	}
+
+	public long getLong(String key) {
+		return GetterUtil.getLong((String)get(key));
+	}
+
+	public int getInteger(String key) {
+		return GetterUtil.getInteger((String)get(key));
+	}
+
+	public String getString(String key) {
+		return GetterUtil.getString((String)get(key));
 	}
 
 	public Object getPayload() {

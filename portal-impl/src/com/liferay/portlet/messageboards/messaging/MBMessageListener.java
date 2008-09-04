@@ -24,8 +24,6 @@ package com.liferay.portlet.messageboards.messaging;
 
 import com.liferay.mail.service.MailServiceUtil;
 import com.liferay.portal.NoSuchUserException;
-import com.liferay.portal.kernel.json.JSONFactoryUtil;
-import com.liferay.portal.kernel.json.JSONObject;
 import com.liferay.portal.kernel.mail.Account;
 import com.liferay.portal.kernel.mail.MailMessage;
 import com.liferay.portal.kernel.mail.SMTPAccount;
@@ -64,29 +62,29 @@ public class MBMessageListener implements MessageListener {
 
 	public void receive(com.liferay.portal.kernel.messaging.Message message) {
 		try {
-			doReceive((String)message.getPayload());
+			doReceive(message);
 		}
 		catch (Exception e) {
 			_log.error("Unable to process message " + message, e);
 		}
 	}
 
-	public void doReceive(String message) throws Exception {
-		JSONObject jsonObj = JSONFactoryUtil.createJSONObject(message);
+	public void doReceive(com.liferay.portal.kernel.messaging.Message message)
+		throws Exception {
 
-		long companyId = jsonObj.getLong("companyId");
-		long userId = jsonObj.getLong("userId");
-		String categoryIds = jsonObj.getString("categoryIds");
-		String threadId = jsonObj.getString("threadId");
-		String fromName = jsonObj.getString("fromName");
-		String fromAddress = jsonObj.getString("fromAddress");
-		String subject = jsonObj.getString("subject");
-		String body = jsonObj.getString("body");
-		String replyToAddress = jsonObj.getString("replyToAddress");
-		String mailId = jsonObj.getString("mailId");
-		String inReplyTo = jsonObj.getString("inReplyTo");
-		boolean htmlFormat = jsonObj.getBoolean("htmlFormat");
-		boolean sourceMailingList = jsonObj.getBoolean("sourceMailingList");
+		long companyId = message.getLong("companyId");
+		long userId = message.getLong("userId");
+		String categoryIds = message.getString("categoryIds");
+		String threadId = message.getString("threadId");
+		String fromName = message.getString("fromName");
+		String fromAddress = message.getString("fromAddress");
+		String subject = message.getString("subject");
+		String body = message.getString("body");
+		String replyToAddress = message.getString("replyToAddress");
+		String mailId = message.getString("mailId");
+		String inReplyTo = message.getString("inReplyTo");
+		boolean htmlFormat = message.getBoolean("htmlFormat");
+		boolean sourceMailingList = message.getBoolean("sourceMailingList");
 
 		Set<Long> sent = new HashSet<Long>();
 
