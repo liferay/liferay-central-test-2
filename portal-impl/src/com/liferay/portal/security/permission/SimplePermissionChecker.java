@@ -54,6 +54,10 @@ public class SimplePermissionChecker extends BasePermissionChecker {
 		return signedIn;
 	}
 
+	public boolean isCompanyAdmin() {
+		return signedIn;
+	}
+
 	public boolean isCompanyAdmin(long companyId) {
 		return signedIn;
 	}

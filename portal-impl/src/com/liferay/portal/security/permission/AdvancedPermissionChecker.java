@@ -257,6 +257,17 @@ public class AdvancedPermissionChecker extends BasePermissionChecker {
 		}
 	}
 
+	public boolean isCompanyAdmin() {
+		try {
+			return isCompanyAdminImpl();
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			return false;
+		}
+	}
+
 	public boolean isCompanyAdmin(long companyId) {
 		try {
 			return isCompanyAdminImpl(companyId);
@@ -535,6 +546,10 @@ public class AdvancedPermissionChecker extends BasePermissionChecker {
 		logHasUserPermission(groupId, name, primKey, actionId, stopWatch, 3);
 
 		return value;
+	}
+
+	protected boolean isCompanyAdminImpl() throws Exception {
+		return isCompanyAdminImpl(user.getCompanyId());
 	}
 
 	protected boolean isCompanyAdminImpl(long companyId) throws Exception {

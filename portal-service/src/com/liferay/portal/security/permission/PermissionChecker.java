@@ -52,6 +52,8 @@ public interface PermissionChecker {
 
 	public boolean isCommunityOwner(long groupId);
 
+	public boolean isCompanyAdmin();
+
 	public boolean isCompanyAdmin(long companyId);
 
 	public boolean isOmniadmin();
