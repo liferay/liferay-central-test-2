@@ -20,17 +20,42 @@
  * SOFTWARE.
  */
 
+/**
+ * The contents of this file are subject to the terms of the Common Development
+ * and Distribution License (the License). You may not use this file except in
+ * compliance with the License.
+ *
+ * You can obtain a copy of the License at http://www.sun.com/cddl/cddl.html and
+ * legal/CDDLv1.0.txt. See the License for the specific language governing
+ * permission and limitations under the License.
+ *
+ * When distributing Covered Code, include this CDDL Header Notice in each file
+ * and include the License file at legal/CDDLv1.0.txt.
+ *
+ * If applicable, add the following below the CDDL Header, with the fields
+ * enclosed by brackets [] replaced by your own identifying information:
+ * "Portions Copyrighted [year] [name of copyright owner]"
+ *
+ * Copyright 2008 Sun Microsystems Inc. All rights reserved.
+ */
+
 package com.liferay.portlet.social.util;
 
+import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.theme.ThemeDisplay;
+import com.liferay.portal.util.PortalUtil;
 import com.liferay.portlet.social.model.BaseSocialRequestInterpreter;
 import com.liferay.portlet.social.model.SocialRequest;
 import com.liferay.portlet.social.model.SocialRequestFeedEntry;
+import com.liferay.portlet.social.service.SocialActivityLocalServiceUtil;
+
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 
 /**
  * <a href="PortalRequestInterpreter.java.html"><b><i>View Source</i></b></a>
  *
- * @author Brian Wing Shun Chan
+ * @author Neel Haldar
  *
  */
 public class PortalRequestInterpreter extends BaseSocialRequestInterpreter {
@@ -40,20 +65,48 @@ public class PortalRequestInterpreter extends BaseSocialRequestInterpreter {
 	}
 
 	protected SocialRequestFeedEntry doInterpret(
-			SocialRequest request, ThemeDisplay themeDisplay)
-		throws Exception {
+			SocialRequest request, ThemeDisplay themeDisplay) throws Exception {
 
+		String className = PortalUtil.getClassName(request.getClassNameId());
+		if (className != null) {
+			String[] extDataArray = StringUtil.split(
+					request.getExtraData(),
+					ShareRequestKeys.SHARE_EXTRA_DATA_DELIMETER);
+			String portletTitle = extDataArray[1];
+			String recieverName = PortalUtil.getUserName(
+					request.getUserId(), null);
+			String data = themeDisplay.translate(
+					"request-share-widget-message",
+					new Object[]{recieverName, portletTitle});
+			return new SocialRequestFeedEntry(data, null);
+		}
 		return null;
 	}
 
 	protected boolean doProcessConfirmation(
-		SocialRequest request, ThemeDisplay themeDisplay) {
+			SocialRequest request, ThemeDisplay themeDisplay) {
+
+		try {
+			String className = PortalActivityInterpreter.class.getName();
+
+			String extraData = request.getExtraData();
+			String[] extraDataArray = StringUtil.split(
+					extraData, ShareRequestKeys.SHARE_EXTRA_DATA_DELIMETER);
+			String portletTitle = extraDataArray[1];
+
+			SocialActivityLocalServiceUtil.addActivity(
+					request.getUserId(), 0, className,
+					request.getUserId(),
+					ShareRequestKeys.SHARE_REQUEST,
+					portletTitle, request.getReceiverUserId());
+		} catch (Exception e) {
+			_log.error(e, e);
+		}
 
 		return true;
 	}
-
-	private static final String[] _CLASS_NAMES = new String[] {
-		PortalRequestInterpreter.class.getName()
-	};
+	private static final String[] _CLASS_NAMES = new String[]{
+		PortalRequestInterpreter.class.getName()};
+	private static Log _log = LogFactory.getLog(PortalRequestInterpreter.class);
 
 }

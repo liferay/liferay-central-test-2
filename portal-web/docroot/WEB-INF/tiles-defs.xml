@@ -625,6 +625,14 @@
 	<definition name="portlet.layout_configuration.view" extends="portlet.layout_configuration">
 		<put name="portlet_content" value="/portlet/layout_configuration/view.jsp" />
 	</definition>
+	
+	<definition name="portlet.social" extends="portlet">
+		<put name="portlet_decorate" value="false" />
+	</definition>
+
+	<definition name="portlet.social.view" extends="portlet.social">
+		<put name="portlet_content" value="/portlet/social/view.jsp" />
+	</definition>	
 
 	<!-- Login -->
 

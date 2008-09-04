@@ -739,6 +739,8 @@
 
 		<action path="/layout_configuration/view" forward="portlet.layout_configuration.view" />
 
+		<action path="/social/view" forward="portlet.social.view" />
+		
 		<!-- Layout Management -->
 
 		<action path="/layout_management/edit_pages" type="com.liferay.portlet.communities.action.EditPagesAction">
