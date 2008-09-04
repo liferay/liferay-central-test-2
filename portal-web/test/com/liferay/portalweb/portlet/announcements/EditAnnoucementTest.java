@@ -22,26 +22,59 @@
 
 package com.liferay.portalweb.portlet.announcements;
 
-import com.liferay.portalweb.portal.BaseTests;
+import com.liferay.portalweb.portal.BaseTestCase;
+import com.liferay.portalweb.portal.util.RuntimeVariables;
 
 /**
- * <a href="AnnouncementsTests.java.html"><b><i>View Source</i></b></a>
+ * <a href="EditAnnoucementTest.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *
  */
-public class AnnouncementsTests extends BaseTests {
+public class EditAnnoucementTest extends BaseTestCase {
+	public void testEditAnnoucement() throws Exception {
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
 
-	public AnnouncementsTests() {
-		addTestSuite(AddPageTest.class);
-		addTestSuite(AddPortletTest.class);
-		addTestSuite(AddGeneralAnnouncementTest.class);
-		addTestSuite(EditAnnoucementTest.class);
-		addTestSuite(DeleteAnnouncementTest.class);
-		addTestSuite(AddLowPriorityAnnouncementTest.class);
-		addTestSuite(AddMediumPriorityAnnouncementTest.class);
-		addTestSuite(AddHighPriorityAnnouncementTest.class);
-		addTestSuite(DeletePageTest.class);
+			try {
+				if (selenium.isElementPresent("link=Edit")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
+		selenium.click(RuntimeVariables.replace("link=Edit"));
+		selenium.waitForPageToLoad("30000");
+		selenium.type("_84_title",
+			RuntimeVariables.replace(
+				"This Test General Annoucement has been edited."));
+		selenium.type("_84_content",
+			RuntimeVariables.replace(
+				"Hello Everyone! This is test has been edited."));
+		selenium.click(RuntimeVariables.replace("//input[@value='Save']"));
+		selenium.waitForPageToLoad("30000");
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isElementPresent(
+							"link=This Test General Annoucement has been edited.")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
 	}
-
 }
