@@ -50,7 +50,7 @@ public class SitemapServlet extends HttpServlet {
 
 		try {
 			String redirect =
-				PortalUtil.getPathMain() + "/layout_management/sitemap";
+				Portal.PATH_MAIN + "/layout_management/sitemap";
 
 			ServletContext servletContext = getServletContext();
 
