@@ -128,7 +128,7 @@ int statusId = BeanParamUtil.getInteger(organization, request, "statusId");
 				<liferay-ui:message key="type" />
 			</td>
 			<td>
-				<liferay-ui:message key="regular" />
+				<%= LanguageUtil.get(pageContext, organization.getTypeLabel(type)) %>
 			</td>
 		</tr>
 		<tr>
