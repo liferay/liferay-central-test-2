@@ -35,8 +35,12 @@ public class ThemeTests extends BaseTests {
 	public ThemeTests() {
 		addTestSuite(AddPageTest.class);
 		addTestSuite(SelectThemeTest.class);
-		addTestSuite(AddDocumentLibraryTest.class);
+		addTestSuite(VerifyDropDownItemsTest.class);
+        addTestSuite(AddDocumentLibraryTest.class);
 		addTestSuite(AddCalendarTest.class);
+		addTestSuite(LayoutTemplateTest.class);
+		addTestSuite(VerifyToggleEditControlsTest.class);
+		addTestSuite(VerifyPortletActionItemsTest.class);
 		addTestSuite(ScreengrabTest.class);
 		addTestSuite(CleanUpTest.class);
 		addTestSuite(IterateThemeTest.class);
