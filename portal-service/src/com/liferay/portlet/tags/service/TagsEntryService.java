@@ -48,25 +48,40 @@ package com.liferay.portlet.tags.service;
  *
  */
 public interface TagsEntryService {
-	public com.liferay.portlet.tags.model.TagsEntry addEntry(long groupId,
-		java.lang.String name)
+	public com.liferay.portlet.tags.model.TagsEntry addEntry(long plid,
+		long groupId, java.lang.String name)
 		throws java.rmi.RemoteException, com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;
 
-	public com.liferay.portlet.tags.model.TagsEntry addEntry(long groupId,
-		java.lang.String name, java.lang.String[] properties)
+	public com.liferay.portlet.tags.model.TagsEntry addEntry(long plid,
+		long groupId, java.lang.String name, java.lang.String[] properties)
 		throws java.rmi.RemoteException, com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;
 
-	public com.liferay.portlet.tags.model.TagsEntry addEntry(long groupId,
-		java.lang.String name, java.lang.String vocabularyName,
+	public com.liferay.portlet.tags.model.TagsEntry addEntry(long plid,
+		long groupId, java.lang.String name, java.lang.String vocabularyName,
 		java.lang.String[] properties)
 		throws java.rmi.RemoteException, com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;
 
-	public com.liferay.portlet.tags.model.TagsEntry addEntry(long groupId,
-		java.lang.String parentEntryName, java.lang.String name,
+	public com.liferay.portlet.tags.model.TagsEntry addEntry(long plid,
+		long groupId, java.lang.String name, java.lang.String vocabularyName,
+		java.lang.String[] properties, java.lang.String[] communityPermissions,
+		java.lang.String[] guestPermissions)
+		throws java.rmi.RemoteException, com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException;
+
+	public com.liferay.portlet.tags.model.TagsEntry addEntry(long plid,
+		long groupId, java.lang.String parentEntryName, java.lang.String name,
 		java.lang.String vocabularyName, java.lang.String[] properties)
+		throws java.rmi.RemoteException, com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException;
+
+	public com.liferay.portlet.tags.model.TagsEntry addEntry(long plid,
+		long groupId, java.lang.String parentEntryName, java.lang.String name,
+		java.lang.String vocabularyName, java.lang.String[] properties,
+		java.lang.String[] communityPermissions,
+		java.lang.String[] guestPermissions)
 		throws java.rmi.RemoteException, com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;
 
@@ -76,11 +91,15 @@ public interface TagsEntryService {
 
 	public java.util.List<com.liferay.portlet.tags.model.TagsEntry> getEntries(
 		java.lang.String className, long classPK)
-		throws java.rmi.RemoteException, com.liferay.portal.SystemException;
+		throws java.rmi.RemoteException, com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException,
+			com.liferay.portal.security.auth.PrincipalException;
 
 	public java.util.List<com.liferay.portlet.tags.model.TagsEntry> getEntries(
 		long groupId, long classNameId, java.lang.String name)
-		throws java.rmi.RemoteException, com.liferay.portal.SystemException;
+		throws java.rmi.RemoteException, com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException,
+			com.liferay.portal.security.auth.PrincipalException;
 
 	public com.liferay.portlet.tags.model.TagsEntry getEntry(long entryId)
 		throws java.rmi.RemoteException, com.liferay.portal.PortalException,

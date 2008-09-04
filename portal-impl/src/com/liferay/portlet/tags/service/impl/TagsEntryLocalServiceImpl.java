@@ -30,6 +30,7 @@ import com.liferay.portal.kernel.util.ListUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
+import com.liferay.portal.model.ResourceConstants;
 import com.liferay.portal.model.User;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PropsValues;
@@ -88,9 +89,56 @@ public class TagsEntryLocalServiceImpl extends TagsEntryLocalServiceBaseImpl {
 			userId, groupId, null, name, vocabularyName, properties);
 	}
 
+	public TagsEntry addEntry(long userId, long groupId,
+			String parentEntryName, String name, String vocabularyName,
+			String[] properties) throws PortalException, SystemException {
+
+		Boolean addGuestPermissions = true;
+		Boolean addCommunityPermissions = true;
+		String[] communityPermissions = null;
+		String[] guestPermissions = null;
+
+		return addEntry(
+			userId, groupId, parentEntryName, name, vocabularyName,
+			properties, addGuestPermissions, addCommunityPermissions,
+			communityPermissions, guestPermissions);
+	}
+
+	public TagsEntry addEntry(long userId, long groupId,
+			String parentEntryName, String name, String vocabularyName,
+			String[] properties, String[] communityPermissions,
+			String[] guestPermissions)
+		throws PortalException, SystemException {
+
+		Boolean addGuestPermissions = null;
+		Boolean addCommunityPermissions = null;
+
+		return addEntry(
+			userId, groupId, parentEntryName, name, vocabularyName,
+			properties, addGuestPermissions, addCommunityPermissions,
+			communityPermissions, guestPermissions);
+	}
+
+	public TagsEntry addEntry(
+			long userId, long groupId, String name, String vocabularyName,
+			String[] properties, String[] communityPermissions,
+			String[] guestPermissions)
+		throws PortalException, SystemException {
+
+		Boolean addGuestPermissions = null;
+		Boolean addCommunityPermissions = null;
+
+		return addEntry(
+			userId, groupId, null, name, vocabularyName, properties,
+			addGuestPermissions, addCommunityPermissions, communityPermissions,
+			guestPermissions);
+	}
+
 	public TagsEntry addEntry(
 			long userId, long groupId, String parentEntryName, String name,
-			String vocabularyName, String[] properties)
+			String vocabularyName, String[] properties,
+			Boolean addGuestPermissions, Boolean addCommunityPermissions,
+			String[] communityPermissions, String[] guestPermissions)
 		throws PortalException, SystemException {
 
 		User user = userPersistence.findByPrimaryKey(userId);
@@ -150,6 +198,20 @@ public class TagsEntryLocalServiceImpl extends TagsEntryLocalServiceBaseImpl {
 
 		tagsEntryPersistence.update(entry, false);
 
+		// Resources
+
+		if ((addCommunityPermissions != null) &&
+			(addGuestPermissions != null)) {
+
+			addTagEntryResources(
+				entry, addCommunityPermissions.booleanValue(),
+				addGuestPermissions.booleanValue());
+		}
+		else {
+			addTagEntryResources(
+				entry, communityPermissions, guestPermissions);
+		}
+
 		for (int i = 0; i < properties.length; i++) {
 			String[] property = StringUtil.split(
 				properties[i], StringPool.COLON);
@@ -173,6 +235,29 @@ public class TagsEntryLocalServiceImpl extends TagsEntryLocalServiceBaseImpl {
 		}
 
 		return entry;
+	}
+
+	public void addTagEntryResources(
+			TagsEntry entry, boolean addCommunityPermissions,
+			boolean addGuestPermissions)
+		throws PortalException, SystemException {
+
+		resourceLocalService.addResources(
+			entry.getCompanyId(), entry.getGroupId(),
+			entry.getUserId(), TagsEntry.class.getName(),
+			entry.getEntryId(), false, addCommunityPermissions,
+			addGuestPermissions);
+	}
+
+	public void addTagEntryResources(
+			TagsEntry entry, String[] communityPermissions,
+			String[] guestPermissions)
+		throws PortalException, SystemException {
+
+		resourceLocalService.addModelResources(
+			entry.getCompanyId(), entry.getGroupId(),
+			entry.getUserId(), TagsEntry.class.getName(),
+			entry.getEntryId(), communityPermissions, guestPermissions);
 	}
 
 	public void checkEntries(long userId, long groupId, String[] names)
@@ -203,6 +288,12 @@ public class TagsEntryLocalServiceImpl extends TagsEntryLocalServiceBaseImpl {
 		// Properties
 
 		tagsPropertyLocalService.deleteProperties(entry.getEntryId());
+
+		// Resources
+
+		resourceLocalService.deleteResource(
+			entry.getCompanyId(), TagsEntry.class.getName(),
+			ResourceConstants.SCOPE_INDIVIDUAL, entry.getEntryId());
 
 		// Entry
 
