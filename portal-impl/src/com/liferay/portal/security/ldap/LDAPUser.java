@@ -63,6 +63,8 @@ public class LDAPUser extends DummyDirContext {
 
 		_attrs = new BasicAttributes(true);
 
+		// Required attributes
+
 		Attribute objectClass = new BasicAttribute("objectclass");
 
 		String[] defaultObjectClasses = PropsUtil.getArray(
@@ -77,12 +79,6 @@ public class LDAPUser extends DummyDirContext {
 		_attrs.put(userMappings.getProperty("firstName"), _user.getFirstName());
 		_attrs.put(userMappings.getProperty("lastName"), _user.getLastName());
 
-		String fullNameMapping = userMappings.getProperty("fullName");
-
-		if (Validator.isNotNull(fullNameMapping)) {
-			_attrs.put(fullNameMapping, _user.getFullName());
-		}
-
 		if (Validator.isNotNull(user.getPasswordUnencrypted())) {
 			_attrs.put(
 				userMappings.getProperty("password"),
@@ -91,6 +87,14 @@ public class LDAPUser extends DummyDirContext {
 
 		_attrs.put(
 			userMappings.getProperty("emailAddress"), _user.getEmailAddress());
+
+		// Optional attributes
+
+		String fullNameMapping = userMappings.getProperty("fullName");
+
+		if (Validator.isNotNull(fullNameMapping)) {
+			_attrs.put(fullNameMapping, _user.getFullName());
+		}
 
 		String jobTitleMapping = userMappings.getProperty("jobTitle");
 

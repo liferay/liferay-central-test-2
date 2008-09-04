@@ -181,26 +181,8 @@ public class PortalLDAPUtil {
 
 		if (binding == null) {
 
-			// Generate full DN based on user DN
+			// User is not exported until contact is created
 
-			StringBuilder sb = new StringBuilder();
-
-			sb.append(userMappings.getProperty("screenName"));
-			sb.append(StringPool.EQUAL);
-			sb.append(user.getScreenName());
-			sb.append(StringPool.COMMA);
-			sb.append(getUsersDN(companyId));
-
-			name = sb.toString();
-
-			// Create new user in LDAP
-
-			LDAPUser ldapUser = (LDAPUser)Class.forName(
-				PropsValues.LDAP_USER_IMPL).newInstance();
-
-			ldapUser.setUser(user);
-
-			ctx.bind(name, ldapUser);
 		}
 		else {
 
