@@ -106,8 +106,16 @@ public class Message implements Serializable {
 		return sb.toString();
 	}
 
+	protected String getDestination() {
+		return _destination;
+	}
+
 	protected String getResponseId() {
 		return _responseId;
+	}
+
+	protected void setDestination(String destination) {
+		_destination = destination;
 	}
 
 	protected void setResponseDestination(String responseDestination) {
@@ -118,6 +126,7 @@ public class Message implements Serializable {
 		_responseId = responseId;
 	}
 
+	private String _destination;
 	private String _responseDestination;
 	private String _responseId;
 	private Object _payload;

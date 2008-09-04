@@ -107,6 +107,8 @@ public class DefaultMessageBus implements MessageBus {
 			return;
 		}
 
+		message.setDestination(destination);
+
 		destinationModel.send(message);
 	}
 
@@ -140,9 +142,8 @@ public class DefaultMessageBus implements MessageBus {
 
 		message.setResponseId(responseId);
 
-		ObjectResponseMessageListener responseMessageListener =
-			new ObjectResponseMessageListener(
-				destinationModel, responseId, timeout);
+		ResponseMessageListener responseMessageListener =
+			new ResponseMessageListener(destinationModel, responseId, timeout);
 
 		responseDestinationModel.register(responseMessageListener);
 

@@ -23,15 +23,14 @@
 package com.liferay.portal.kernel.messaging;
 
 /**
- * <a href="ObjectResponseMessageListener.java.html"><b><i>View Source</i></b>
- * </a>
+ * <a href="ResponseMessageListener.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *
  */
-public class ObjectResponseMessageListener implements MessageListener {
+public class ResponseMessageListener implements MessageListener {
 
-	public ObjectResponseMessageListener(
+	public ResponseMessageListener(
 		Destination destination, String responseId, long timeout) {
 
 		_destination = destination;
@@ -40,6 +39,8 @@ public class ObjectResponseMessageListener implements MessageListener {
 	}
 
 	public Object send(Message message) throws MessageBusException {
+		message.setDestination(_destination.getName());
+
 		_destination.send(message);
 
 		synchronized (this) {
