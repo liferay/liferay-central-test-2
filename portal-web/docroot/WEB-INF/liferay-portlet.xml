@@ -633,18 +633,6 @@
 		<css-class-wrapper>portlet-enterprise-admin</css-class-wrapper>
 	</portlet>
 	<portlet>
-		<portlet-name>80</portlet-name>
-		<icon>/html/portlet/enterprise_admin/icon.png</icon>
-		<struts-path>organization_admin</struts-path>
-		<portlet-url-class>com.liferay.portal.struts.StrutsActionPortletURL</portlet-url-class>
-		<use-default-template>false</use-default-template>
-		<restore-current-view>false</restore-current-view>
-		<private-request-attributes>false</private-request-attributes>
-		<private-session-attributes>false</private-session-attributes>
-		<render-weight>1</render-weight>
-		<css-class-wrapper>portlet-organization-admin</css-class-wrapper>
-	</portlet>
-	<portlet>
 		<portlet-name>82</portlet-name>
 		<icon>/html/portlet/language/icon.png</icon>
 		<struts-path>language</struts-path>

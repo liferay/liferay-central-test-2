@@ -269,11 +269,6 @@
 		<include>true</include>
 	</portlet>
 	<portlet>
-		<portlet-name>80</portlet-name>
-		<struts-path>organization_admin</struts-path>
-		<include>true</include>
-	</portlet>
-	<portlet>
 		<portlet-name>82</portlet-name>
 		<struts-path>language</struts-path>
 		<include>true</include>

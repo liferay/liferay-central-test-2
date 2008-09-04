@@ -33,7 +33,7 @@ List manageableOrganizations = null;
 
 Long[] manageableOrganizationIds = null;
 
-if (portletName.equals(PortletKeys.ORGANIZATION_ADMIN)) {
+if (!EnterpriseAdminUtil.hasFullAdministrationAccess(user)) {
 	manageableOrganizations = OrganizationLocalServiceUtil.getManageableOrganizations(user.getUserId());
 
 	manageableOrganizationIds = EnterpriseAdminUtil.getOrganizationIds(manageableOrganizations);
@@ -51,12 +51,10 @@ List headerNames = searchContainer.getHeaderNames();
 
 headerNames.add(StringPool.BLANK);
 
-if (portletName.equals(PortletKeys.ENTERPRISE_ADMIN) || portletName.equals(PortletKeys.ORGANIZATION_ADMIN)) {
-	RowChecker rowChecker = new RowChecker(renderResponse);
-	//RowChecker rowChecker = new RowChecker(renderResponse, RowChecker.FORM_NAME, null, RowChecker.ROW_IDS);
+RowChecker rowChecker = new RowChecker(renderResponse);
+//RowChecker rowChecker = new RowChecker(renderResponse, RowChecker.FORM_NAME, null, RowChecker.ROW_IDS);
 
-	searchContainer.setRowChecker(rowChecker);
-}
+searchContainer.setRowChecker(rowChecker);
 
 portletURL.setParameter(searchContainer.getCurParam(), String.valueOf(searchContainer.getCurValue()));
 %>
@@ -83,7 +81,7 @@ portletURL.setParameter(searchContainer.getCurParam(), String.valueOf(searchCont
 		userParams.put("usersOrgs", new Long(organizationId));
 	}
 	else {
-		if (portletName.equals(PortletKeys.ORGANIZATION_ADMIN)) {
+		if (!EnterpriseAdminUtil.hasFullAdministrationAccess(user)) {
 			userParams.put("usersOrgs", manageableOrganizationIds);
 		}
 	}
@@ -155,27 +153,25 @@ portletURL.setParameter(searchContainer.getCurParam(), String.valueOf(searchCont
 
 	<div class="separator"><!-- --></div>
 
-	<c:if test="<%= portletName.equals(PortletKeys.ENTERPRISE_ADMIN) || portletName.equals(PortletKeys.ORGANIZATION_ADMIN) %>">
-		<c:if test="<%= searchTerms.isActive() || (!searchTerms.isActive() && PropsValues.USERS_DELETE) %>">
-			<input type="button" value='<%= LanguageUtil.get(pageContext, (searchTerms.isActive() ? Constants.DEACTIVATE : Constants.DELETE)) %>' onClick="<portlet:namespace />deleteUsers('<%= searchTerms.isActive() ? Constants.DEACTIVATE : Constants.DELETE %>');" />
-		</c:if>
-
-		<c:if test="<%= !searchTerms.isActive() %>">
-			<input type="button" value="<liferay-ui:message key="restore" />" onClick="<portlet:namespace />deleteUsers('<%= Constants.RESTORE %>');" />
-		</c:if>
-
-		<c:if test="<%= RoleLocalServiceUtil.hasUserRole(user.getUserId(), user.getCompanyId(), RoleImpl.ADMINISTRATOR, true) %>">
-			<input type="button" value="<liferay-ui:message key="export" />" onClick="<%= exportProgressId %>.startProgress(); <portlet:namespace />exportUsers('<%= exportProgressId %>');" />
-
-			<liferay-ui:upload-progress
-				id="<%= exportProgressId %>"
-				message="exporting"
-				redirect="<%= HtmlUtil.escape(currentURL) %>"
-			/>
-		</c:if>
-
-		<br /><br />
+	<c:if test="<%= searchTerms.isActive() || (!searchTerms.isActive() && PropsValues.USERS_DELETE) %>">
+		<input type="button" value='<%= LanguageUtil.get(pageContext, (searchTerms.isActive() ? Constants.DEACTIVATE : Constants.DELETE)) %>' onClick="<portlet:namespace />deleteUsers('<%= searchTerms.isActive() ? Constants.DEACTIVATE : Constants.DELETE %>');" />
 	</c:if>
+
+	<c:if test="<%= !searchTerms.isActive() %>">
+		<input type="button" value="<liferay-ui:message key="restore" />" onClick="<portlet:namespace />deleteUsers('<%= Constants.RESTORE %>');" />
+	</c:if>
+
+	<c:if test="<%= RoleLocalServiceUtil.hasUserRole(user.getUserId(), user.getCompanyId(), RoleImpl.ADMINISTRATOR, true) %>">
+		<input type="button" value="<liferay-ui:message key="export" />" onClick="<%= exportProgressId %>.startProgress(); <portlet:namespace />exportUsers('<%= exportProgressId %>');" />
+
+		<liferay-ui:upload-progress
+			id="<%= exportProgressId %>"
+			message="exporting"
+			redirect="<%= HtmlUtil.escape(currentURL) %>"
+		/>
+	</c:if>
+
+	<br /><br />
 
 	<%
 	List resultRows = searchContainer.getResultRows();
@@ -219,7 +215,7 @@ portletURL.setParameter(searchContainer.getCurParam(), String.valueOf(searchCont
 
 		List organizations = user2.getOrganizations();
 
-		if (portletName.equals(PortletKeys.ORGANIZATION_ADMIN)) {
+		if (!EnterpriseAdminUtil.hasFullAdministrationAccess(user)) {
 			organizations = OrganizationLocalServiceUtil.getSubsetOrganizations(organizations, manageableOrganizations);
 		}
 

@@ -24,37 +24,34 @@
 
 <%@ include file="/html/portlet/enterprise_admin/init.jsp" %>
 
-<c:if test="<%= portletName.equals(PortletKeys.DIRECTORY) || portletName.equals(PortletKeys.ENTERPRISE_ADMIN) || portletName.equals(PortletKeys.ORGANIZATION_ADMIN) %>">
+<%
+PortletURL tabs1URL = renderResponse.createRenderURL();
 
-	<%
-	PortletURL tabs1URL = renderResponse.createRenderURL();
+tabs1URL.setWindowState(WindowState.MAXIMIZED);
 
-	tabs1URL.setWindowState(WindowState.MAXIMIZED);
+tabs1URL.setParameter("struts_action", "/enterprise_admin/view");
 
-	tabs1URL.setParameter("struts_action", "/enterprise_admin/view");
+String tabs1Names = "users,organizations,user-groups";
 
-	String tabs1Names = "users,organizations,user-groups";
+String tabs1Values = tabs1Names;
 
-	String tabs1Values = tabs1Names;
-
-	if (portletName.equals(PortletKeys.ENTERPRISE_ADMIN)) {
-		if (windowState.equals(WindowState.MAXIMIZED)) {
-			tabs1Names += ",roles,password-policies,settings,monitoring,plugins";
-		}
-		else {
-			tabs1Names += ",roles,&raquo;";
-		}
-
-		tabs1Values = tabs1Names;
+if (portletName.equals(PortletKeys.ENTERPRISE_ADMIN)) {
+	if (windowState.equals(WindowState.MAXIMIZED)) {
+		tabs1Names += ",roles,password-policies,settings,monitoring,plugins";
+	}
+	else {
+		tabs1Names += ",roles,&raquo;";
 	}
 
-	String backURL = ParamUtil.getString(request, "backURL");
-	%>
+	tabs1Values = tabs1Names;
+}
 
-	<liferay-ui:tabs
-		names="<%= tabs1Names %>"
-		tabsValues="<%= tabs1Values %>"
-		url="<%= tabs1URL.toString() %>"
-		backURL="<%= backURL %>"
-	/>
-</c:if>
+String backURL = ParamUtil.getString(request, "backURL");
+%>
+
+<liferay-ui:tabs
+	names="<%= tabs1Names %>"
+	tabsValues="<%= tabs1Values %>"
+	url="<%= tabs1URL.toString() %>"
+	backURL="<%= backURL %>"
+/>

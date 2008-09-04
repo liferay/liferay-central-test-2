@@ -1261,23 +1261,6 @@
 		</security-role-ref>
 	</portlet>
 	<portlet>
-		<portlet-name>80</portlet-name>
-		<display-name>Organization Admin</display-name>
-		<portlet-class>com.liferay.portlet.StrutsPortlet</portlet-class>
-		<init-param>
-			<name>view-action</name>
-			<value>/organization_admin/view</value>
-		</init-param>
-		<expiration-cache>0</expiration-cache>
-		<supports>
-			<mime-type>text/html</mime-type>
-		</supports>
-		<resource-bundle>com.liferay.portlet.StrutsResourceBundle</resource-bundle>
-		<security-role-ref>
-			<role-name>administrator</role-name>
-		</security-role-ref>
-	</portlet>
-	<portlet>
 		<portlet-name>82</portlet-name>
 		<display-name>Language</display-name>
 		<portlet-class>com.liferay.portlet.StrutsPortlet</portlet-class>

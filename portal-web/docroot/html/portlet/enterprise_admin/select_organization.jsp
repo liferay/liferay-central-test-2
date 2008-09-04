@@ -69,7 +69,7 @@ OrganizationSearchTerms searchTerms = (OrganizationSearchTerms)searchContainer.g
 
 LinkedHashMap orgParams = new LinkedHashMap();
 
-if (portletName.equals(PortletKeys.ORGANIZATION_ADMIN)) {
+if (!EnterpriseAdminUtil.hasFullAdministrationAccess(user)) {
 	List manageableOrganizations = OrganizationLocalServiceUtil.getManageableOrganizations(user.getUserId());
 
 	Long[] manageableOrganizationIds = EnterpriseAdminUtil.getOrganizationIds(manageableOrganizations);

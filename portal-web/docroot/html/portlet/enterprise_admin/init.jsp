@@ -122,11 +122,5 @@
 <%
 String tabs1 = ParamUtil.getString(request, "tabs1", "users");
 
-if (!portletName.equals(PortletKeys.ENTERPRISE_ADMIN)) {
-	if (tabs1.equals("roles") || tabs1.equals("password-policies") || tabs1.equals("settings") || tabs1.equals("monitoring") || tabs1.equals("plugins")) {
-		tabs1 = "users";
-	}
-}
-
 DateFormat dateFormatDateTime = DateFormats.getDateTime(locale, timeZone);
 %>

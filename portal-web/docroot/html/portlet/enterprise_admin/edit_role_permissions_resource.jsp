@@ -97,7 +97,7 @@ for (int i = 0; i < curActions.size(); i++) {
 						<option value=""></option>
 							<option <%= hasCompanyScope ? "selected" : "" %> value="<%= ResourceConstants.SCOPE_COMPANY %>"><liferay-ui:message key="enterprise" /></option>
 
-							<c:if test="<%= !portletResource.equals(PortletKeys.ENTERPRISE_ADMIN) && !portletResource.equals(PortletKeys.ORGANIZATION_ADMIN) && !portletResource.equals(PortletKeys.PORTAL) %>">
+							<c:if test="<%= !portletResource.equals(PortletKeys.ENTERPRISE_ADMIN) && !portletResource.equals(PortletKeys.PORTAL) %>">
 								<option <%= (hasGroupScope) ? "selected" : "" %> value="<%= ResourceConstants.SCOPE_GROUP %>"><liferay-ui:message key="communities" /></option>
 							</c:if>
 					</select>
@@ -105,7 +105,7 @@ for (int i = 0; i < curActions.size(); i++) {
 				<c:when test="<%= (role.getType() == RoleImpl.TYPE_COMMUNITY) || (role.getType() == RoleImpl.TYPE_ORGANIZATION) %>">
 
 					<%
-					boolean disabled = portletResource.equals(PortletKeys.ENTERPRISE_ADMIN) || portletResource.equals(PortletKeys.ORGANIZATION_ADMIN) || portletResource.equals(PortletKeys.PORTAL);
+					boolean disabled = portletResource.equals(PortletKeys.ENTERPRISE_ADMIN) || portletResource.equals(PortletKeys.PORTAL);
 
 					if ((role.getType() == RoleImpl.TYPE_ORGANIZATION) && Validator.isNotNull(curModelResource) && curModelResource.equals(Organization.class.getName())) {
 						disabled = false;

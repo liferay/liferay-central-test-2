@@ -40,13 +40,11 @@ User user2 = PortalUtil.getSelectedUser(request);
 
 boolean editable = false;
 
-if (portletName.equals(PortletKeys.ENTERPRISE_ADMIN) || portletName.equals(PortletKeys.ORGANIZATION_ADMIN) || portletName.equals(PortletKeys.MY_ACCOUNT)) {
-	if ((user2 == null) || user2.isActive()) {
-		editable = true;
+if ((user2 == null) || user2.isActive()) {
+	editable = true;
 
-		if ((user2 != null) && !UserPermissionUtil.contains(permissionChecker, user2.getUserId(), ActionKeys.UPDATE)) {
-			editable = false;
-		}
+	if ((user2 != null) && !UserPermissionUtil.contains(permissionChecker, user2.getUserId(), ActionKeys.UPDATE)) {
+		editable = false;
 	}
 }
 
@@ -104,7 +102,7 @@ request.setAttribute("edit_user.jsp-user2", user2);
 <input name="<portlet:namespace />backURL" type="hidden" value="<%= HtmlUtil.escape(backURL) %>" />
 <input name="<portlet:namespace />p_u_i_d" type="hidden" value='<%= (user2 != null) ? user2.getUserId() : 0 %>' />
 
-<c:if test="<%= portletName.equals(PortletKeys.DIRECTORY) || portletName.equals(PortletKeys.ENTERPRISE_ADMIN) || portletName.equals(PortletKeys.ORGANIZATION_ADMIN) %>">
+<c:if test="<%= !portletName.equals(PortletKeys.MY_ACCOUNT) %>">
 	<liferay-ui:tabs
 		names="user"
 		backURL="<%= backURL %>"

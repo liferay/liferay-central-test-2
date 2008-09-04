@@ -67,16 +67,9 @@ UserDisplayTerms displayTerms = (UserDisplayTerms)searchContainer.getDisplayTerm
 			<liferay-ui:message key="email-address" />
 		</td>
 
-		<c:choose>
-			<c:when test="<%= portletName.equals(PortletKeys.ENTERPRISE_ADMIN) || portletName.equals(PortletKeys.ORGANIZATION_ADMIN) %>">
-				<td>
-					<liferay-ui:message key="active" />
-				</td>
-			</c:when>
-			<c:otherwise>
-				<td></td>
-			</c:otherwise>
-		</c:choose>
+		<td>
+			<liferay-ui:message key="active" />
+		</td>
 	</tr>
 	<tr>
 		<td>
@@ -85,20 +78,12 @@ UserDisplayTerms displayTerms = (UserDisplayTerms)searchContainer.getDisplayTerm
 		<td>
 			<input name="<portlet:namespace /><%= displayTerms.EMAIL_ADDRESS %>" size="20" type="text" value="<%= HtmlUtil.escape(displayTerms.getEmailAddress()) %>" />
 		</td>
-
-		<c:choose>
-			<c:when test="<%= portletName.equals(PortletKeys.ENTERPRISE_ADMIN) || portletName.equals(PortletKeys.ORGANIZATION_ADMIN) %>">
-				<td>
-					<select name="<portlet:namespace /><%= displayTerms.ACTIVE %>">
-						<option <%= displayTerms.isActive() ? "selected" : "" %> value="1"><liferay-ui:message key="yes" /></option>
-						<option <%= !displayTerms.isActive() ? "selected" : "" %> value="0"><liferay-ui:message key="no" /></option>
-					</select>
-				</td>
-			</c:when>
-			<c:otherwise>
-				<td></td>
-			</c:otherwise>
-		</c:choose>
+		<td>
+			<select name="<portlet:namespace /><%= displayTerms.ACTIVE %>">
+				<option <%= displayTerms.isActive() ? "selected" : "" %> value="1"><liferay-ui:message key="yes" /></option>
+				<option <%= !displayTerms.isActive() ? "selected" : "" %> value="0"><liferay-ui:message key="no" /></option>
+			</select>
+		</td>
 	</tr>
 	</table>
 </liferay-ui:search-toggle>
@@ -108,11 +93,10 @@ UserDisplayTerms displayTerms = (UserDisplayTerms)searchContainer.getDisplayTerm
 <div>
 	<input type="submit" value="<liferay-ui:message key="search-users" />" />
 
-	<c:if test='<%= (portletName.equals(PortletKeys.ENTERPRISE_ADMIN) && (Validator.isNull(strutsAction) || strutsAction.equals("/enterprise_admin/view"))) ||
-					(portletName.equals(PortletKeys.ORGANIZATION_ADMIN) && (Validator.isNull(strutsAction) || strutsAction.equals("/organization_admin/view"))) %>'>
+	<c:if test='<%= Validator.isNull(strutsAction) || strutsAction.equals("/enterprise_admin/view") %>'>
 
-		<c:if test="<%= (portletName.equals(PortletKeys.ENTERPRISE_ADMIN) && PortalPermissionUtil.contains(permissionChecker, ActionKeys.ADD_USER)) ||
-						(portletName.equals(PortletKeys.ORGANIZATION_ADMIN) && OrganizationPermissionUtil.contains(permissionChecker, displayTerms.getOrganizationId(), ActionKeys.ADD_USER)) %>">
+		<c:if test="<%= PortalPermissionUtil.contains(permissionChecker, ActionKeys.ADD_USER) ||
+						OrganizationPermissionUtil.contains(permissionChecker, displayTerms.getOrganizationId(), ActionKeys.ADD_USER) %>">
 
 			<input type="button" value="<liferay-ui:message key="add-user" />" onClick="<portlet:namespace />addUser();" />
 		</c:if>

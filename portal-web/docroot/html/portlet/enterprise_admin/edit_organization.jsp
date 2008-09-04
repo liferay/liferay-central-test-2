@@ -34,18 +34,14 @@ long organizationId = BeanParamUtil.getLong(organization, request, "organization
 
 long parentOrganizationId = ParamUtil.getLong(request, "parentOrganizationId");
 
-boolean editable = false;
+boolean editable = true;
 
-if (portletName.equals(PortletKeys.ENTERPRISE_ADMIN) || portletName.equals(PortletKeys.ORGANIZATION_ADMIN)) {
+if (!OrganizationPermissionUtil.contains(permissionChecker, organizationId, ActionKeys.UPDATE)) {
+	editable = false;
+}
+
+if ((organizationId <= 0) && (PortalPermissionUtil.contains(permissionChecker, ActionKeys.ADD_ORGANIZATION) || OrganizationPermissionUtil.contains(permissionChecker, parentOrganizationId, ActionKeys.MANAGE_SUBORGANIZATIONS))) {
 	editable = true;
-
-	if (!OrganizationPermissionUtil.contains(permissionChecker, organizationId, ActionKeys.UPDATE)) {
-		editable = false;
-	}
-
-	if ((organizationId <= 0) && (PortalPermissionUtil.contains(permissionChecker, ActionKeys.ADD_ORGANIZATION) || OrganizationPermissionUtil.contains(permissionChecker, parentOrganizationId, ActionKeys.MANAGE_SUBORGANIZATIONS))) {
-		editable = true;
-	}
 }
 %>
 
