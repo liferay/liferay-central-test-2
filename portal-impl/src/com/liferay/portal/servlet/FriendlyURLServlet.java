@@ -33,7 +33,7 @@ import com.liferay.portal.model.User;
 import com.liferay.portal.service.GroupLocalServiceUtil;
 import com.liferay.portal.service.UserLocalServiceUtil;
 import com.liferay.portal.struts.LastPath;
-import com.liferay.portal.util.PortalImpl;
+import com.liferay.portal.util.Portal;
 import com.liferay.portal.util.PortalInstances;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.WebKeys;
@@ -80,7 +80,7 @@ public class FriendlyURLServlet extends HttpServlet {
 		// Do not set the entire full main path. See LEP-456.
 
 		//String mainPath = (String)ctx.getAttribute(WebKeys.MAIN_PATH);
-		String mainPath = PortalImpl.PATH_MAIN;
+		String mainPath = Portal.PATH_MAIN;
 
 		String friendlyURLPath = null;
 
