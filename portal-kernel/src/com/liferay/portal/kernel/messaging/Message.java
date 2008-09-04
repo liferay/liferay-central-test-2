@@ -48,23 +48,70 @@ public class Message implements Serializable {
 	}
 
 	public boolean getBoolean(String key) {
-		return GetterUtil.getBoolean((String)get(key));
+		boolean value; 
+		Object object = get(key);
+		
+		if (object instanceof Boolean) {
+			value = ((Boolean)object).booleanValue();
+		}
+		else {
+			value = GetterUtil.getBoolean((String)object);
+		}
+		
+		return value;
 	}
 
 	public double getDouble(String key) {
-		return GetterUtil.getDouble((String)get(key));
+		double value; 
+		Object object = get(key);
+		
+		if (object instanceof Double) {
+			value = ((Double)object).doubleValue();
+		}
+		else {
+			value = GetterUtil.getDouble((String)object);
+		}
+		
+		return value;
 	}
 
 	public long getLong(String key) {
-		return GetterUtil.getLong((String)get(key));
+		long value; 
+		Object object = get(key);
+		
+		if (object instanceof Long) {
+			value = ((Long)object).longValue();
+		}
+		else {
+			value = GetterUtil.getLong((String)object);
+		}
+		
+		return value;
 	}
 
 	public int getInteger(String key) {
-		return GetterUtil.getInteger((String)get(key));
+		int value; 
+		Object object = get(key);
+		
+		if (object instanceof Integer) {
+			value = ((Integer)object).intValue();
+		}
+		else {
+			value = GetterUtil.getInteger((String)object);
+		}
+		
+		return value;
 	}
 
 	public String getString(String key) {
-		return GetterUtil.getString((String)get(key));
+		String value = null;
+		Object object = get(key);
+		
+		if (object != null) {
+			value = GetterUtil.getString(object.toString());
+		}
+		
+		return value;
 	}
 
 	public Object getPayload() {
