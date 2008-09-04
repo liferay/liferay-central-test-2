@@ -22,8 +22,6 @@
 
 package com.liferay.portal.scheduler;
 
-import com.liferay.portal.kernel.json.JSONFactoryUtil;
-import com.liferay.portal.kernel.json.JSONObject;
 import com.liferay.portal.kernel.messaging.DestinationNames;
 import com.liferay.portal.kernel.messaging.MessageBusUtil;
 import com.liferay.portal.kernel.scheduler.SchedulerEngine;
@@ -49,14 +47,11 @@ public class SchedulerEngineProxy implements SchedulerEngine {
 				SchedulerRequest.COMMAND_RETRIEVE, null, groupName, null, null,
 				null, null, null, null);
 
-			String message = (String)MessageBusUtil.sendSynchronizedMessage(
-				DestinationNames.SCHEDULER,
-				JSONFactoryUtil.serialize(schedulerRequest));
+			List<SchedulerRequest> schedulerRequests =
+				(List<SchedulerRequest>)MessageBusUtil.sendSynchronizedMessage(
+					DestinationNames.SCHEDULER, schedulerRequest);
 
-			JSONObject jsonObj = JSONFactoryUtil.createJSONObject(message);
-
-			return (List<SchedulerRequest>)JSONFactoryUtil.deserialize(
-				jsonObj.getString("schedulerRequests"));
+			return schedulerRequests;
 		}
 		catch (Exception e) {
 			throw new SchedulerException(e);
@@ -72,22 +67,19 @@ public class SchedulerEngineProxy implements SchedulerEngine {
 			startDate, endDate, description, destinationName, messageBody);
 
 		MessageBusUtil.sendMessage(
-			DestinationNames.SCHEDULER,
-			JSONFactoryUtil.serialize(schedulerRequest));
+			DestinationNames.SCHEDULER, schedulerRequest);
 	}
 
 	public void shutdown() {
 		MessageBusUtil.sendMessage(
 			DestinationNames.SCHEDULER,
-			JSONFactoryUtil.serialize(
-				new SchedulerRequest(SchedulerRequest.COMMAND_SHUTDOWN)));
+			new SchedulerRequest(SchedulerRequest.COMMAND_SHUTDOWN));
 	}
 
 	public void start() {
 		MessageBusUtil.sendMessage(
 			DestinationNames.SCHEDULER,
-			JSONFactoryUtil.serialize(
-				new SchedulerRequest(SchedulerRequest.COMMAND_STARTUP)));
+			new SchedulerRequest(SchedulerRequest.COMMAND_STARTUP));
 	}
 
 	public void unschedule(String jobName, String groupName) {
@@ -95,8 +87,7 @@ public class SchedulerEngineProxy implements SchedulerEngine {
 			SchedulerRequest.COMMAND_UNREGISTER, jobName, groupName);
 
 		MessageBusUtil.sendMessage(
-			DestinationNames.SCHEDULER,
-			JSONFactoryUtil.serialize(schedulerRequest));
+			DestinationNames.SCHEDULER, schedulerRequest);
 	}
 
 }

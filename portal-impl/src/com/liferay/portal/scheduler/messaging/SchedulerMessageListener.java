@@ -22,8 +22,6 @@
 
 package com.liferay.portal.scheduler.messaging;
 
-import com.liferay.portal.kernel.json.JSONFactoryUtil;
-import com.liferay.portal.kernel.json.JSONObject;
 import com.liferay.portal.kernel.messaging.Message;
 import com.liferay.portal.kernel.messaging.MessageBusUtil;
 import com.liferay.portal.kernel.messaging.MessageListener;
@@ -58,11 +56,8 @@ public class SchedulerMessageListener implements MessageListener {
 	}
 
 	protected void doReceive(Message message) throws Exception {
-		JSONObject jsonObj = JSONFactoryUtil.createJSONObject(
-			(String)message.getPayload());
-
 		SchedulerRequest schedulerRequest =
-			(SchedulerRequest)JSONFactoryUtil.deserialize(jsonObj);
+			(SchedulerRequest)message.getPayload();
 
 		String command = schedulerRequest.getCommand();
 
@@ -96,7 +91,7 @@ public class SchedulerMessageListener implements MessageListener {
 		List<SchedulerRequest> schedulerRequests =
 			_schedulerEngine.getScheduledJobs(schedulerRequest.getGroupName());
 
-		message.setPayload(JSONFactoryUtil.serialize(schedulerRequests));
+		message.setPayload(schedulerRequests);
 
 		MessageBusUtil.sendMessage(message.getResponseDestination(), message);
 	}

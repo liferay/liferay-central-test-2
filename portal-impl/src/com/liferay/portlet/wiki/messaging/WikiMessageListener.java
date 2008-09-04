@@ -24,7 +24,6 @@ package com.liferay.portlet.wiki.messaging;
 
 import com.liferay.mail.service.MailServiceUtil;
 import com.liferay.portal.NoSuchUserException;
-import com.liferay.portal.kernel.json.JSONFactoryUtil;
 import com.liferay.portal.kernel.json.JSONObject;
 import com.liferay.portal.kernel.mail.MailMessage;
 import com.liferay.portal.kernel.messaging.Message;
@@ -64,8 +63,7 @@ public class WikiMessageListener implements MessageListener {
 	}
 
 	public void doReceive(Message message) throws Exception {
-		JSONObject jsonObj = JSONFactoryUtil.createJSONObject(
-			(String)message.getPayload());
+		JSONObject jsonObj = (JSONObject)message.getPayload();
 
 		long companyId = jsonObj.getLong("companyId");
 		long userId = jsonObj.getLong("userId");

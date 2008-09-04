@@ -1253,7 +1253,7 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 		jsonObj.put("replyToAddress", replyToAddress);
 		jsonObj.put("mailId", mailId);
 
-		MessageBusUtil.sendMessage(DestinationNames.WIKI, jsonObj.toString());
+		MessageBusUtil.sendMessage(DestinationNames.WIKI, jsonObj);
 	}
 
 	protected void validate(long nodeId, String content, String format)

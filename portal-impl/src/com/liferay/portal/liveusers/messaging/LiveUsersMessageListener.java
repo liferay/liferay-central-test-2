@@ -22,7 +22,6 @@
 
 package com.liferay.portal.liveusers.messaging;
 
-import com.liferay.portal.kernel.json.JSONFactoryUtil;
 import com.liferay.portal.kernel.json.JSONObject;
 import com.liferay.portal.kernel.messaging.Message;
 import com.liferay.portal.kernel.messaging.MessageListener;
@@ -49,8 +48,7 @@ public class LiveUsersMessageListener implements MessageListener {
 	}
 
 	public void doReceive(Message message) throws Exception {
-		JSONObject jsonObj = JSONFactoryUtil.createJSONObject(
-			(String)message.getPayload());
+		JSONObject jsonObj = (JSONObject)message.getPayload();
 
 		String command = jsonObj.getString("command");
 

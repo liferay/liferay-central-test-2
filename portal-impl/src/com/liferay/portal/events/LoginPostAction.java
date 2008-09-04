@@ -83,7 +83,7 @@ public class LoginPostAction extends Action {
 				jsonObj.put("userAgent", userAgent);
 
 				MessageBusUtil.sendMessage(
-					DestinationNames.LIVE_USERS, jsonObj.toString());
+					DestinationNames.LIVE_USERS, jsonObj);
 			}
 		}
 		catch (Exception e) {

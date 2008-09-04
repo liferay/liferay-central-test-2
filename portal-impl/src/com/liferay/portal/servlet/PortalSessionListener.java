@@ -111,7 +111,7 @@ public class PortalSessionListener implements HttpSessionListener {
 				jsonObj.put("sessionId", sessionId);
 
 				MessageBusUtil.sendMessage(
-					DestinationNames.LIVE_USERS, jsonObj.toString());
+					DestinationNames.LIVE_USERS, jsonObj);
 			}
 		}
 		catch (IllegalStateException ise) {
