@@ -54,7 +54,7 @@ public class ${entity.name}${sessionTypeName}ServiceUtil {
 					return
 				</#if>
 
-				_service.${method.name}(
+				getService().${method.name}(
 
 				<#list method.parameters as parameter>
 					${parameter.name}
@@ -70,6 +70,10 @@ public class ${entity.name}${sessionTypeName}ServiceUtil {
 	</#list>
 
 	public static ${entity.name}${sessionTypeName}Service getService() {
+		if (_service == null) {
+			System.out.println("### service is null");
+		}
+
 		return _service;
 	}
 
