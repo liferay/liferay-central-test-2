@@ -91,7 +91,7 @@ UserSearchTerms searchTerms = (UserSearchTerms)searchContainer.getSearchTerms();
 
 LinkedHashMap userParams = new LinkedHashMap();
 
-if (!EnterpriseAdminUtil.hasFullAdministrationAccess(user)) {
+if (!permissionChecker.isCompanyAdmin(user)) {
 	List manageableOrganizations = OrganizationLocalServiceUtil.getManageableOrganizations(user.getUserId());
 
 	Long[] manageableOrganizationIds = EnterpriseAdminUtil.getOrganizationIds(manageableOrganizations);

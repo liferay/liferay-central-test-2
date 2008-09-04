@@ -28,19 +28,6 @@
 		</guest-unsupported>
 	</portlet-resource>
 	<portlet-resource>
-		<portlet-name>80</portlet-name>
-		<supports>
-			<action-key>CONFIGURATION</action-key>
-			<action-key>VIEW</action-key>
-		</supports>
-		<community-defaults />
-		<guest-defaults />
-		<guest-unsupported>
-			<action-key>CONFIGURATION</action-key>
-			<action-key>VIEW</action-key>
-		</guest-unsupported>
-	</portlet-resource>
-	<portlet-resource>
 		<portlet-name>90</portlet-name>
 		<supports>
 			<action-key>ADD_COMMUNITY</action-key>
@@ -95,7 +82,6 @@
 		<portlet-ref>
 			<portlet-name>11</portlet-name>
 			<portlet-name>79</portlet-name>
-			<portlet-name>80</portlet-name>
 			<portlet-name>90</portlet-name>
 		</portlet-ref>
 		<supports>
@@ -126,7 +112,6 @@
 		<portlet-ref>
 			<portlet-name>11</portlet-name>
 			<portlet-name>79</portlet-name>
-			<portlet-name>80</portlet-name>
 			<portlet-name>90</portlet-name>
 		</portlet-ref>
 		<supports>
@@ -219,7 +204,6 @@
 		<portlet-ref>
 			<portlet-name>11</portlet-name>
 			<portlet-name>79</portlet-name>
-			<portlet-name>80</portlet-name>
 			<portlet-name>90</portlet-name>
 		</portlet-ref>
 		<supports>
@@ -244,7 +228,6 @@
 		<portlet-ref>
 			<portlet-name>11</portlet-name>
 			<portlet-name>79</portlet-name>
-			<portlet-name>80</portlet-name>
 			<portlet-name>90</portlet-name>
 		</portlet-ref>
 		<supports>

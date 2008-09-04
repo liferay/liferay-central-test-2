@@ -22,13 +22,8 @@
 
 package com.liferay.portlet.enterpriseadmin.util;
 
-import com.liferay.portal.PortalException;
-import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.model.Organization;
-import com.liferay.portal.model.User;
-import com.liferay.portal.model.impl.RoleImpl;
-import com.liferay.portal.service.RoleLocalServiceUtil;
 import com.liferay.portal.util.comparator.ContactFirstNameComparator;
 import com.liferay.portal.util.comparator.ContactJobTitleComparator;
 import com.liferay.portal.util.comparator.ContactLastNameComparator;
@@ -223,19 +218,6 @@ public class EnterpriseAdminUtil {
 		}
 
 		return orderByComparator;
-	}
-
-	public static boolean hasFullAdministrationAccess(User user)
-		throws PortalException, SystemException {
-
-		if (RoleLocalServiceUtil.hasUserRole(
-				user.getUserId(), user.getCompanyId(), RoleImpl.ADMINISTRATOR,
-				true)) {
-
-			return true;
-		}
-
-		return false;
 	}
 
 }

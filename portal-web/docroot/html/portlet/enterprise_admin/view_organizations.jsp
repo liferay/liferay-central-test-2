@@ -68,7 +68,7 @@ portletURL.setParameter(searchContainer.getCurParam(), String.valueOf(searchCont
 
 	LinkedHashMap orgParams = new LinkedHashMap();
 
-	if (!EnterpriseAdminUtil.hasFullAdministrationAccess(user)) {
+	if (!permissionChecker.isCompanyAdmin(user)) {
 		List manageableOrganizations = OrganizationLocalServiceUtil.getManageableOrganizations(user.getUserId());
 
 		Long[] manageableOrganizationIds = EnterpriseAdminUtil.getOrganizationIds(manageableOrganizations);

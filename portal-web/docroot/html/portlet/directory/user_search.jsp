@@ -66,8 +66,7 @@ UserDisplayTerms displayTerms = (UserDisplayTerms)searchContainer.getDisplayTerm
 		<td>
 			<liferay-ui:message key="email-address" />
 		</td>
-		<td>
-		</td>
+		<td></td>
 	</tr>
 	<tr>
 		<td>
@@ -76,8 +75,7 @@ UserDisplayTerms displayTerms = (UserDisplayTerms)searchContainer.getDisplayTerm
 		<td>
 			<input name="<portlet:namespace /><%= displayTerms.EMAIL_ADDRESS %>" size="20" type="text" value="<%= HtmlUtil.escape(displayTerms.getEmailAddress()) %>" />
 		</td>
-		<td>
-		</td>
+		<td></td>
 	</tr>
 	</table>
 </liferay-ui:search-toggle>

@@ -33,7 +33,7 @@ List manageableOrganizations = null;
 
 Long[] manageableOrganizationIds = null;
 
-if (!EnterpriseAdminUtil.hasFullAdministrationAccess(user)) {
+if (!permissionChecker.isCompanyAdmin(user)) {
 	manageableOrganizations = OrganizationLocalServiceUtil.getManageableOrganizations(user.getUserId());
 
 	manageableOrganizationIds = EnterpriseAdminUtil.getOrganizationIds(manageableOrganizations);
@@ -81,7 +81,7 @@ portletURL.setParameter(searchContainer.getCurParam(), String.valueOf(searchCont
 		userParams.put("usersOrgs", new Long(organizationId));
 	}
 	else {
-		if (!EnterpriseAdminUtil.hasFullAdministrationAccess(user)) {
+		if (!permissionChecker.isCompanyAdmin(user)) {
 			userParams.put("usersOrgs", manageableOrganizationIds);
 		}
 	}
@@ -215,7 +215,7 @@ portletURL.setParameter(searchContainer.getCurParam(), String.valueOf(searchCont
 
 		List organizations = user2.getOrganizations();
 
-		if (!EnterpriseAdminUtil.hasFullAdministrationAccess(user)) {
+		if (!permissionChecker.isCompanyAdmin(user)) {
 			organizations = OrganizationLocalServiceUtil.getSubsetOrganizations(organizations, manageableOrganizations);
 		}
 

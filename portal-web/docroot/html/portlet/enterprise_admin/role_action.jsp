@@ -80,7 +80,7 @@ Role role = (Role)row.getObject();
 		<portlet:param name="struts_action" value="/enterprise_admin/view" />
 		<portlet:param name="tabs1" value="users" />
 
-		<c:if test="<%= !EnterpriseAdminUtil.hasFullAdministrationAccess(user) %>">
+		<c:if test="<%= !permissionChecker.isCompanyAdmin(user) %>">
 			<portlet:param name="organizationId" value="<%= String.valueOf(user.getOrganization().getOrganizationId()) %>" />
 		</c:if>
 
