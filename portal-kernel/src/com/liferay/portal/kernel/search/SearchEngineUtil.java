@@ -25,7 +25,6 @@ package com.liferay.portal.kernel.search;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.messaging.DestinationNames;
-import com.liferay.portal.kernel.messaging.Message;
 import com.liferay.portal.kernel.messaging.MessageBusException;
 import com.liferay.portal.kernel.messaging.MessageBusUtil;
 import com.liferay.portal.kernel.search.messaging.SearchRequest;
@@ -130,10 +129,8 @@ public class SearchEngineUtil {
 
 			searchRequest.setCommand(SearchRequest.COMMAND_INDEX_ONLY);
 
-			Message message = new Message(SCHEDULER_MESSAGE);
-			message.setPayload(searchRequest);
 			_indexReadOnly = (Boolean)MessageBusUtil.sendSynchronizedMessage(
-				DestinationNames.SEARCH_READER, message);
+				DestinationNames.SEARCH_READER, searchRequest);
 
 			if (_indexReadOnly == null) {
 				_indexReadOnly = Boolean.FALSE;
@@ -172,7 +169,6 @@ public class SearchEngineUtil {
 
 	private static Log _log = LogFactoryUtil.getLog(SearchEngineUtil.class);
 
-	private static final String SCHEDULER_MESSAGE = "msg.type.scheduler";
 	private static SearchEngineUtil _instance = new SearchEngineUtil();
 
 	private IndexSearcher _messageBusIndexSearcher;

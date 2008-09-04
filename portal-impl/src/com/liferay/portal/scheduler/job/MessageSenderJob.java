@@ -24,9 +24,7 @@ package com.liferay.portal.scheduler.job;
 
 import com.liferay.portal.kernel.json.JSONFactoryUtil;
 import com.liferay.portal.kernel.json.JSONObject;
-import com.liferay.portal.kernel.messaging.Message;
 import com.liferay.portal.kernel.messaging.MessageBusUtil;
-import com.liferay.portal.kernel.messaging.MessageTypes;
 import com.liferay.portal.kernel.scheduler.SchedulerEngine;
 
 import java.util.Date;
@@ -67,9 +65,8 @@ public class MessageSenderJob implements Job {
 				"scheduledFireTime",
 				JSONFactoryUtil.createJSONObject(
 					JSONFactoryUtil.serialize(scheduledFireTime)));
-			Message message = new Message(MessageTypes.SCHEDULER_MESSAGE);
-			message.setPayload(jsonObj.toString());
-			MessageBusUtil.sendMessage(destination, message);
+
+			MessageBusUtil.sendMessage(destination, jsonObj.toString());
 		}
 		catch (Exception e) {
 			_log.error("Unable to execute job", e);

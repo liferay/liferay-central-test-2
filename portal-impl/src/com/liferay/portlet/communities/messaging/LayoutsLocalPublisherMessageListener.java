@@ -55,7 +55,7 @@ public class LayoutsLocalPublisherMessageListener implements MessageListener {
 
 		try {
 			LayoutsLocalPublisherRequest publisherRequest =
-				(LayoutsLocalPublisherRequest) JSONFactoryUtil.deserialize(
+				(LayoutsLocalPublisherRequest)JSONFactoryUtil.deserialize(
 					(String)message.getPayload());
 
 			String command = publisherRequest.getCommand();

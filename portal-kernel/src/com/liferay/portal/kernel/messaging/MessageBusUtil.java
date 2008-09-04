@@ -66,6 +66,10 @@ public class MessageBusUtil {
 		_instance._sendMessage(destination, message);
 	}
 
+	public static void sendMessage(String destination, Object payload) {
+		_instance._sendMessage(destination, payload);
+	}
+
 	public static Object sendSynchronizedMessage(
 			String destination, Message message)
 		throws MessageBusException {
@@ -79,6 +83,21 @@ public class MessageBusUtil {
 
 		return _instance._sendSynchronizedMessage(
 			destination, message, timeout);
+	}
+
+	public static Object sendSynchronizedMessage(
+			String destination, Object payload)
+		throws MessageBusException {
+
+		return _instance._sendSynchronizedMessage(destination, payload);
+	}
+
+	public static Object sendSynchronizedMessage(
+			String destination, Object payload, long timeout)
+		throws MessageBusException {
+
+		return _instance._sendSynchronizedMessage(
+			destination, payload, timeout);
 	}
 
 	public static boolean unregisterMessageListener(
@@ -117,6 +136,14 @@ public class MessageBusUtil {
 		_messageBus.sendMessage(destination, message);
 	}
 
+	private void _sendMessage(String destination, Object payload) {
+		Message message = new Message();
+
+		message.setPayload(payload);
+
+		_messageBus.sendMessage(destination, message);
+	}
+
 	private Object _sendSynchronizedMessage(String destination, Message message)
 		throws MessageBusException {
 
@@ -127,6 +154,29 @@ public class MessageBusUtil {
 	private Object _sendSynchronizedMessage(
 			String destination, Message message, long timeout)
 		throws MessageBusException {
+
+		return _messageBus.sendSynchronizedMessage(
+			destination, message, timeout);
+	}
+
+	private Object _sendSynchronizedMessage(String destination, Object payload)
+		throws MessageBusException {
+
+		Message message = new Message();
+
+		message.setPayload(payload);
+
+		return _messageBus.sendSynchronizedMessage(
+			destination, message, _DEFAULT_TIMEOUT);
+	}
+
+	private Object _sendSynchronizedMessage(
+			String destination, Object payload, long timeout)
+		throws MessageBusException {
+
+		Message message = new Message();
+
+		message.setPayload(payload);
 
 		return _messageBus.sendSynchronizedMessage(
 			destination, message, timeout);

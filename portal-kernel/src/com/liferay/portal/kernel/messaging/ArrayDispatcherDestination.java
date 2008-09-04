@@ -24,6 +24,7 @@ package com.liferay.portal.kernel.messaging;
 
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.kernel.util.ListUtil;
 
 import java.util.Arrays;
 import java.util.HashSet;
@@ -53,8 +54,8 @@ public abstract class ArrayDispatcherDestination extends BaseDestination {
 	public synchronized void register(MessageListener listener) {
 		listener = new InvokerMessageListener(listener);
 
-		Set<MessageListener> listeners =
-			new HashSet<MessageListener>(Arrays.asList(_listeners));
+		Set<MessageListener> listeners = new HashSet<MessageListener>(
+			Arrays.asList(_listeners));
 
 		listeners.add(listener);
 
@@ -87,7 +88,7 @@ public abstract class ArrayDispatcherDestination extends BaseDestination {
 	public synchronized boolean unregister(MessageListener listener) {
 		listener = new InvokerMessageListener(listener);
 
-		List<MessageListener> listeners = Arrays.asList(_listeners);
+		List<MessageListener> listeners = ListUtil.fromArray(_listeners);
 
 		boolean value = listeners.remove(listener);
 

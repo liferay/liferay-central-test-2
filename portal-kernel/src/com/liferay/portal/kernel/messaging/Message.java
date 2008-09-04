@@ -22,8 +22,8 @@
 
 package com.liferay.portal.kernel.messaging;
 
-
 import java.io.Serializable;
+
 import java.util.HashMap;
 import java.util.Map;
 
@@ -31,69 +31,74 @@ import java.util.Map;
  * <a href="Message.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
+ * @author Michael C. Han
  *
  */
 public class Message implements Serializable {
-	public Message(String type) {
-		_messageType = type;
-	}
 
-	public String getMessageType() {
-		return _messageType;
-	}
-
-	public void setDestination(String destination) {
-		_messageValues.put(DESTINATION_KEY, destination);
-	}
-
-	public String getDestination() {
-		return (String)_messageValues.get(DESTINATION_KEY);
-	}
-
-	public void setReplyTo(String replyTo) {
-		_messageValues.put(REPLY_TO_KEY, replyTo);
-	}
-
-	public String getReplyTo() {
-		return (String)_messageValues.get(REPLY_TO_KEY);
-	}
-
-	public void setMessageId(String messageId) {
-		_messageValues.put(MESSAGE_ID_KEY, messageId);
-	}
-
-	public String getMessageId() {
-		return (String)_messageValues.get(MESSAGE_ID_KEY);
+	public Object get(String key) {
+		if (_values == null) {
+			return null;
+		}
+		else {
+			return _values.get(key);
+		}
 	}
 
 	public Object getPayload() {
-		return _messageValues.get(PAYLOAD_KEY);
+		return _payload;
 	}
-	
-	public void setPayload(Object object) {
-		_messageValues.put(PAYLOAD_KEY, object);
+
+	public String getResponseDestination() {
+		return _responseDestination;
 	}
 
 	public void put(String key, Object value) {
-		_messageValues.put(key, value);
+		if (_values == null) {
+			 _values = new HashMap<String, Object>();
+		}
+
+		_values.put(key, value);
 	}
 
-	public Object get(String key) {
-		return _messageValues.get(key);
+	public void setPayload(Object payload) {
+		_payload = payload;
 	}
-
 
 	public String toString() {
-		return "Message{" +
-			"_messageType='" + _messageType + '\'' +
-			", _messageValues=" + _messageValues +
-			'}';
+		StringBuilder sb = new StringBuilder();
+
+		sb.append("{responseDestination=");
+		sb.append(_responseDestination);
+		sb.append(", ");
+		sb.append("responseId=");
+		sb.append(_responseId);
+		sb.append(", ");
+		sb.append("payload=");
+		sb.append(_payload);
+		sb.append(", ");
+		sb.append("values=");
+		sb.append(_values);
+		sb.append("}");
+
+		return sb.toString();
 	}
 
-	private String _messageType;
-	private Map<String, Object> _messageValues = new HashMap<String, Object>();
-	private static final String DESTINATION_KEY = "destination";
-	private static final String REPLY_TO_KEY = "replyTo";
-	private static final String MESSAGE_ID_KEY = "messageId";
-	private static final String PAYLOAD_KEY = "payLoad";
+	protected String getResponseId() {
+		return _responseId;
+	}
+
+	protected void setResponseDestination(String responseDestination) {
+		_responseDestination = responseDestination;
+	}
+
+	protected void setResponseId(String responseId) {
+		_responseId = responseId;
+	}
+
+	private String _responseDestination;
+	private String _responseId;
+	private Object _payload;
+	private Map<String, Object> _values;
+
 }

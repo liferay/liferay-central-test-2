@@ -64,7 +64,8 @@ public class MailingListMessageListener implements MessageListener {
 
 	public void receive(com.liferay.portal.kernel.messaging.Message message) {
 		MailingListRequest mailingListRequest =
-			(MailingListRequest) JSONFactoryUtil.deserialize((String)message.getPayload());
+			(MailingListRequest)JSONFactoryUtil.deserialize(
+				(String)message.getPayload());
 
 		Folder folder = null;
 

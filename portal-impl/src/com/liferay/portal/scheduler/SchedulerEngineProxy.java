@@ -22,14 +22,13 @@
 
 package com.liferay.portal.scheduler;
 
+import com.liferay.portal.kernel.json.JSONFactoryUtil;
+import com.liferay.portal.kernel.json.JSONObject;
 import com.liferay.portal.kernel.messaging.DestinationNames;
-import com.liferay.portal.kernel.messaging.Message;
 import com.liferay.portal.kernel.messaging.MessageBusUtil;
-import com.liferay.portal.kernel.messaging.MessageTypes;
 import com.liferay.portal.kernel.scheduler.SchedulerEngine;
 import com.liferay.portal.kernel.scheduler.SchedulerException;
 import com.liferay.portal.kernel.scheduler.messaging.SchedulerRequest;
-import com.liferay.portal.kernel.json.JSONFactoryUtil;
 
 import java.util.Date;
 import java.util.List;
@@ -50,13 +49,14 @@ public class SchedulerEngineProxy implements SchedulerEngine {
 				SchedulerRequest.COMMAND_RETRIEVE, null, groupName, null, null,
 				null, null, null, null);
 
-			Message message = new Message(MessageTypes.SCHEDULER_MESSAGE);
-			message.setPayload(JSONFactoryUtil.serialize(schedulerRequest));
-			String results =
-				(String)MessageBusUtil.sendSynchronizedMessage(
-				DestinationNames.SCHEDULER, message);
+			String message = (String)MessageBusUtil.sendSynchronizedMessage(
+				DestinationNames.SCHEDULER,
+				JSONFactoryUtil.serialize(schedulerRequest));
 
-			return (List<SchedulerRequest>)JSONFactoryUtil.deserialize(results);
+			JSONObject jsonObj = JSONFactoryUtil.createJSONObject(message);
+
+			return (List<SchedulerRequest>)JSONFactoryUtil.deserialize(
+				jsonObj.getString("schedulerRequests"));
 		}
 		catch (Exception e) {
 			throw new SchedulerException(e);
@@ -71,34 +71,32 @@ public class SchedulerEngineProxy implements SchedulerEngine {
 			SchedulerRequest.COMMAND_REGISTER, null, groupName, cronText,
 			startDate, endDate, description, destinationName, messageBody);
 
-		Message message = new Message(MessageTypes.SCHEDULER_MESSAGE);
-		message.setPayload(JSONFactoryUtil.serialize(schedulerRequest));
-		MessageBusUtil.sendMessage(DestinationNames.SCHEDULER, message);
+		MessageBusUtil.sendMessage(
+			DestinationNames.SCHEDULER,
+			JSONFactoryUtil.serialize(schedulerRequest));
 	}
 
 	public void shutdown() {
-		Message message = new Message(MessageTypes.SCHEDULER_MESSAGE);
-		message.setPayload(
+		MessageBusUtil.sendMessage(
+			DestinationNames.SCHEDULER,
 			JSONFactoryUtil.serialize(
 				new SchedulerRequest(SchedulerRequest.COMMAND_SHUTDOWN)));
-		MessageBusUtil.sendMessage(DestinationNames.SCHEDULER, message);
 	}
 
 	public void start() {
-		Message message = new Message(MessageTypes.SCHEDULER_MESSAGE);
-		message.setPayload(
+		MessageBusUtil.sendMessage(
+			DestinationNames.SCHEDULER,
 			JSONFactoryUtil.serialize(
 				new SchedulerRequest(SchedulerRequest.COMMAND_STARTUP)));
-		MessageBusUtil.sendMessage(DestinationNames.SCHEDULER, message);
 	}
 
 	public void unschedule(String jobName, String groupName) {
 		SchedulerRequest schedulerRequest = new SchedulerRequest(
 			SchedulerRequest.COMMAND_UNREGISTER, jobName, groupName);
 
-		Message message = new Message(MessageTypes.SCHEDULER_MESSAGE);
-		message.setPayload(JSONFactoryUtil.serialize(schedulerRequest));
-		MessageBusUtil.sendMessage(DestinationNames.SCHEDULER, message);
+		MessageBusUtil.sendMessage(
+			DestinationNames.SCHEDULER,
+			JSONFactoryUtil.serialize(schedulerRequest));
 	}
 
 }

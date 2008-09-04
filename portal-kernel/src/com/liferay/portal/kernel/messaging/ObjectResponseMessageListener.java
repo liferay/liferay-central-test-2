@@ -31,15 +31,15 @@ package com.liferay.portal.kernel.messaging;
  */
 public class ObjectResponseMessageListener implements MessageListener {
 
-	public ObjectResponseMessageListener(Destination destination,
-										 String responseId, long timeout) {
-		_responseId = responseId;
+	public ObjectResponseMessageListener(
+		Destination destination, String responseId, long timeout) {
+
 		_destination = destination;
+		_responseId = responseId;
 		_timeout = timeout;
 	}
 
-	public Object send(Message message)
-		throws MessageBusException {
+	public Object send(Message message) throws MessageBusException {
 		_destination.send(message);
 
 		synchronized (this) {
@@ -61,16 +61,18 @@ public class ObjectResponseMessageListener implements MessageListener {
 	}
 
 	public void receive(Message message) {
-		if (message.getMessageId().equals(_responseId)) {
+		if (message.getResponseId().equals(_responseId)) {
 			synchronized (this) {
 				_responseValue = message.getPayload();
+
 				notify();
 			}
 		}
 	}
 
 	private Destination _destination;
-	private Object _responseValue;
 	private String _responseId;
 	private long _timeout;
+	private Object _responseValue;
+
 }

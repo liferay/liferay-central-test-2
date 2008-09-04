@@ -41,19 +41,24 @@ public class LiveUsersMessageListener implements MessageListener {
 
 	public void receive(Message message) {
 		try {
-			JSONObject jsonObj =
-				JSONFactoryUtil.createJSONObject((String)message.getPayload());
-			String command = jsonObj.getString("command");
-
-			if (command.equals("signIn")) {
-				doCommandSignIn(jsonObj);
-			}
-			else if (command.equals("signOut")) {
-				doCommandSignOut(jsonObj);
-			}
+			doReceive(message);
 		}
 		catch (Exception e) {
 			_log.error("Unable to process message " + message, e);
+		}
+	}
+
+	public void doReceive(Message message) throws Exception {
+		JSONObject jsonObj = JSONFactoryUtil.createJSONObject(
+			(String)message.getPayload());
+
+		String command = jsonObj.getString("command");
+
+		if (command.equals("signIn")) {
+			doCommandSignIn(jsonObj);
+		}
+		else if (command.equals("signOut")) {
+			doCommandSignOut(jsonObj);
 		}
 	}
 
@@ -78,4 +83,5 @@ public class LiveUsersMessageListener implements MessageListener {
 	}
 
 	private static Log _log = LogFactory.getLog(LiveUsersMessageListener.class);
+
 }

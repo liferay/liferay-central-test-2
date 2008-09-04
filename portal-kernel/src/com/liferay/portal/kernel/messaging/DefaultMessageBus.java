@@ -35,6 +35,7 @@ import java.util.Map;
  * <a href="DefaultMessageBus.java.html"><b><i>View Source</i></b></a>
  *
  * @author Michael C. Han
+ *
  */
 public class DefaultMessageBus implements MessageBus {
 
@@ -51,7 +52,7 @@ public class DefaultMessageBus implements MessageBus {
 		_destinationEventListeners.add(listener);
 	}
 
-	public boolean hasDestination(final String destinationName) {
+	public boolean hasDestination(String destinationName) {
 		return _destinations.containsKey(destinationName);
 	}
 
@@ -60,7 +61,8 @@ public class DefaultMessageBus implements MessageBus {
 
 		if ((destinationModel != null) && destinationModel.isRegistered()) {
 			return true;
-		} else {
+		}
+		else {
 			return false;
 		}
 	}
@@ -79,9 +81,9 @@ public class DefaultMessageBus implements MessageBus {
 	}
 
 	public synchronized void removeDestination(String destination) {
-		Destination dest = _destinations.remove(destination);
+		Destination destinationModel = _destinations.remove(destination);
 
-		fireDestinationRemovedEvent(dest);
+		fireDestinationRemovedEvent(destinationModel);
 
 		String responseDestination = getResponseDestination(destination);
 
@@ -96,6 +98,7 @@ public class DefaultMessageBus implements MessageBus {
 
 	public void sendMessage(String destination, Message message) {
 		Destination destinationModel = _destinations.get(destination);
+
 		if (destinationModel == null) {
 			if (_log.isWarnEnabled()) {
 				_log.warn("Destination " + destination + " is not configured");
@@ -103,13 +106,12 @@ public class DefaultMessageBus implements MessageBus {
 
 			return;
 		}
-		message.setDestination(destination);
 
 		destinationModel.send(message);
 	}
 
 	public Object sendSynchronizedMessage(
-		String destination, Message message, long timeout)
+			String destination, Message message, long timeout)
 		throws MessageBusException {
 
 		Destination destinationModel = _destinations.get(destination);
@@ -121,7 +123,6 @@ public class DefaultMessageBus implements MessageBus {
 
 			return null;
 		}
-		message.setDestination(destination);
 
 		Destination responseDestinationModel = _destinations.get(
 			getResponseDestination(destination));
@@ -133,12 +134,15 @@ public class DefaultMessageBus implements MessageBus {
 			return null;
 		}
 
-		message.setReplyTo(responseDestinationModel.getName());
-		String messageId = getNextResponseId();
-		message.setMessageId(messageId);
+		message.setResponseDestination(responseDestinationModel.getName());
+
+		String responseId = getNextResponseId();
+
+		message.setResponseId(responseId);
+
 		ObjectResponseMessageListener responseMessageListener =
-			new ObjectResponseMessageListener(destinationModel, messageId,
-											  timeout);
+			new ObjectResponseMessageListener(
+				destinationModel, responseId, timeout);
 
 		responseDestinationModel.register(responseMessageListener);
 
@@ -152,7 +156,6 @@ public class DefaultMessageBus implements MessageBus {
 		}
 	}
 
-	
 	public void shutdown() {
 		shutdown(false);
 	}

@@ -31,9 +31,7 @@ import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.json.JSONFactoryUtil;
 import com.liferay.portal.kernel.json.JSONObject;
 import com.liferay.portal.kernel.messaging.DestinationNames;
-import com.liferay.portal.kernel.messaging.Message;
 import com.liferay.portal.kernel.messaging.MessageBusUtil;
-import com.liferay.portal.kernel.messaging.MessageTypes;
 import com.liferay.portal.kernel.search.SearchException;
 import com.liferay.portal.kernel.util.CalendarFactoryUtil;
 import com.liferay.portal.kernel.util.ContentTypes;
@@ -1242,8 +1240,6 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 			subject = subjectPrefix + subject;
 		}
 
-		Message notifMesg = new Message(MessageTypes.WIKI_NOTIFICATION_MESSAGE);
-		notifMesg.setDestination(DestinationNames.WIKI);
 		JSONObject jsonObj = JSONFactoryUtil.createJSONObject();
 
 		jsonObj.put("companyId", node.getCompanyId());
@@ -1256,9 +1252,8 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 		jsonObj.put("body", body);
 		jsonObj.put("replyToAddress", replyToAddress);
 		jsonObj.put("mailId", mailId);
-		notifMesg.setPayload(jsonObj.toString());
 
-		MessageBusUtil.sendMessage(DestinationNames.WIKI, notifMesg);
+		MessageBusUtil.sendMessage(DestinationNames.WIKI, jsonObj.toString());
 	}
 
 	protected void validate(long nodeId, String content, String format)

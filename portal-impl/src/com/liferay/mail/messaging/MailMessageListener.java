@@ -47,20 +47,14 @@ public class MailMessageListener implements MessageListener {
 
 	public void receive(Message message) {
 		try {
-			Object payload = message.getPayload();
-			if (payload instanceof MailMessage) {
-				doMailMessage((MailMessage)payload);
-			}
-			else if (payload instanceof MethodWrapper) {
-				doMethodWrapper((MethodWrapper)payload);
-			}
+			doReceive(message);
 		}
 		catch (Exception e) {
 			_log.error("Unable to process message " + message, e);
 		}
 	}
 
-	protected void doMailMessage(MailMessage mailMessage) throws Exception {
+	public void doMailMessage(MailMessage mailMessage) throws Exception {
 		InternetAddress[] auditTrail = InternetAddress.parse(
 			PropsUtil.get(PropsKeys.MAIL_AUDIT_TRAIL));
 
@@ -83,8 +77,19 @@ public class MailMessageListener implements MessageListener {
 		MailEngine.send(mailMessage);
 	}
 
-	protected void doMethodWrapper(MethodWrapper methodWrapper) throws Exception {
+	public void doMethodWrapper(MethodWrapper methodWrapper) throws Exception {
 		MethodInvoker.invoke(methodWrapper);
+	}
+
+	public void doReceive(Message message) throws Exception {
+		Object payload = message.getPayload();
+
+		if (payload instanceof MailMessage) {
+			doMailMessage((MailMessage)payload);
+		}
+		else if (payload instanceof MethodWrapper) {
+			doMethodWrapper((MethodWrapper)payload);
+		}
 	}
 
 	private static Log _log = LogFactory.getLog(MailMessageListener.class);

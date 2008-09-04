@@ -22,10 +22,9 @@
 
 package com.liferay.portal.search.lucene.messaging;
 
-import com.liferay.portal.kernel.messaging.MessageListener;
 import com.liferay.portal.kernel.messaging.Message;
+import com.liferay.portal.kernel.messaging.MessageListener;
 import com.liferay.portal.kernel.search.Document;
-import com.liferay.portal.kernel.search.SearchException;
 import com.liferay.portal.kernel.search.messaging.SearchRequest;
 import com.liferay.portal.search.lucene.LuceneSearchEngineUtil;
 
@@ -42,30 +41,33 @@ public class LuceneWriterMessageListener implements MessageListener {
 
 	public void receive(Message message) {
 		try {
-			SearchRequest searchRequest = (SearchRequest)message.getPayload();
+			doReceive(message);
+		}
+		catch (Exception e) {
+			_log.error("Unable to process message " + message, e);
+		}
+	}
 
-			String command = searchRequest.getCommand();
+	public void doReceive(Message message) throws Exception {
+		SearchRequest searchRequest = (SearchRequest)message.getPayload();
 
-			long companyId = searchRequest.getCompanyId();
-			String id = searchRequest.getId();
-			Document doc = searchRequest.getDocument();
+		String command = searchRequest.getCommand();
 
-			if (command.equals(SearchRequest.COMMAND_ADD)) {
-				LuceneSearchEngineUtil.addDocument(companyId, doc);
-			}
-			else if (command.equals(SearchRequest.COMMAND_DELETE)) {
-				LuceneSearchEngineUtil.deleteDocument(companyId, id);
-			}
-			else if (command.equals(SearchRequest.COMMAND_DELETE_PORTLET_DOCS)) {
-				LuceneSearchEngineUtil.deletePortletDocuments(companyId, id);
-			}
-			else if (command.equals(SearchRequest.COMMAND_UPDATE)) {
-				LuceneSearchEngineUtil.updateDocument(companyId, id, doc);
-			}
-		} catch (SearchException e) {
-			if (_log.isErrorEnabled()) {
-				_log.error("Unable to process request: " + message, e);
-			}
+		long companyId = searchRequest.getCompanyId();
+		String id = searchRequest.getId();
+		Document doc = searchRequest.getDocument();
+
+		if (command.equals(SearchRequest.COMMAND_ADD)) {
+			LuceneSearchEngineUtil.addDocument(companyId, doc);
+		}
+		else if (command.equals(SearchRequest.COMMAND_DELETE)) {
+			LuceneSearchEngineUtil.deleteDocument(companyId, id);
+		}
+		else if (command.equals(SearchRequest.COMMAND_DELETE_PORTLET_DOCS)) {
+			LuceneSearchEngineUtil.deletePortletDocuments(companyId, id);
+		}
+		else if (command.equals(SearchRequest.COMMAND_UPDATE)) {
+			LuceneSearchEngineUtil.updateDocument(companyId, id, doc);
 		}
 	}
 

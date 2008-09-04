@@ -55,7 +55,7 @@ public class LayoutsRemotePublisherMessageListener implements MessageListener {
 
 		try {
 			LayoutsRemotePublisherRequest publisherRequest =
-				(LayoutsRemotePublisherRequest) JSONFactoryUtil.deserialize(
+				(LayoutsRemotePublisherRequest)JSONFactoryUtil.deserialize(
 					(String)message.getPayload());
 
 			long userId = publisherRequest.getUserId();
