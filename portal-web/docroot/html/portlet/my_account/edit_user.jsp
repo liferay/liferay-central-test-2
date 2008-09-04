@@ -32,6 +32,8 @@ String tabs4 = ParamUtil.getString(request, "tabs4", "phone-numbers");
 String redirect = ParamUtil.getString(request, "redirect");
 String backURL = ParamUtil.getString(request, "backURL", redirect);
 
+portletDisplay.setURLBack(backURL);
+
 User user2 = PortalUtil.getSelectedUser(request);
 
 boolean editable = false;
@@ -98,12 +100,11 @@ request.setAttribute("edit_user.jsp-user2", user2);
 <input name="<portlet:namespace />backURL" type="hidden" value="<%= HtmlUtil.escape(backURL) %>" />
 <input name="<portlet:namespace />p_u_i_d" type="hidden" value='<%= (user2 != null) ? user2.getUserId() : 0 %>' />
 
-<liferay-ui:tabs
-	names="user"
-	backURL="<%= backURL %>"
-/>
+<liferay-util:include page="/html/portlet/my_account/tabs1.jsp">
+	<liferay-util:param name="tabs1" value="profile" />
+</liferay-util:include>
 
-<%@ include file="/html/portlet/enterprise_admin/edit_user_profile.jspf" %>
+<%@ include file="/html/portlet/my_account/edit_user_profile.jspf" %>
 
 <c:if test="<%= user2 != null %>">
 	<c:if test="<%= (passwordPolicy != null) && user2.getLockout() %>">

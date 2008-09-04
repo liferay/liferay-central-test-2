@@ -24,7 +24,7 @@
 
 <%@ include file="/html/portlet/my_account/init.jsp" %>
 
-<c:if test="<%= portletName.equals(PortletKeys.MY_ACCOUNT) && (PropsValues.LAYOUT_USER_PRIVATE_LAYOUTS_MODIFIABLE || PropsValues.LAYOUT_USER_PUBLIC_LAYOUTS_MODIFIABLE) %>">
+<c:if test="<%= PropsValues.LAYOUT_USER_PRIVATE_LAYOUTS_MODIFIABLE || PropsValues.LAYOUT_USER_PUBLIC_LAYOUTS_MODIFIABLE %>">
 
 	<%
 	String backURL = ParamUtil.getString(request, "backURL");

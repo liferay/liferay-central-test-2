@@ -1,0 +1,197 @@
+<%
+/**
+ * Copyright (c) 2000-2008 Liferay, Inc. All rights reserved.
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * of this software and associated documentation files (the "Software"), to deal
+ * in the Software without restriction, including without limitation the rights
+ * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ * copies of the Software, and to permit persons to whom the Software is
+ * furnished to do so, subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included in
+ * all copies or substantial portions of the Software.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+ * SOFTWARE.
+ */
+%>
+
+<%
+themeDisplay.setIncludeServiceJs(true);
+
+if (parentOrganizationId <= 0) {
+	parentOrganizationId = OrganizationConstants.DEFAULT_PARENT_ORGANIZATION_ID;
+
+	if (organization != null) {
+		parentOrganizationId = organization.getParentOrganizationId();
+	}
+}
+
+String parentOrganizationName = ParamUtil.getString(request, "parentOrganizationName");
+
+if (parentOrganizationId != OrganizationConstants.DEFAULT_PARENT_ORGANIZATION_ID) {
+	try {
+		Organization parentOrganization = OrganizationLocalServiceUtil.getOrganization(parentOrganizationId);
+
+		parentOrganizationName = parentOrganization.getName();
+	}
+	catch (NoSuchOrganizationException nsoe) {
+	}
+}
+
+int type = BeanParamUtil.getInteger(organization, request, "type");
+long regionId = BeanParamUtil.getLong(organization, request, "regionId");
+long countryId = BeanParamUtil.getLong(organization, request, "countryId");
+int statusId = BeanParamUtil.getInteger(organization, request, "statusId");
+%>
+
+<table class="lfr-table">
+<tr>
+	<td valign="top">
+		<table class="lfr-table">
+
+		<c:if test="<%= organization != null %>">
+			<tr>
+				<td>
+					<liferay-ui:message key="group-id" />
+				</td>
+				<td>
+					<%= organization.getGroup().getGroupId() %>
+				</td>
+			</tr>
+		</c:if>
+
+		<tr>
+			<td>
+				<liferay-ui:message key="name" />
+			</td>
+			<td>
+				<liferay-ui:input-field model="<%= Organization.class %>" bean="<%= organization %>" field="name" />
+			</td>
+		</tr>
+
+		<input name="<portlet:namespace />parentOrganizationId" type="hidden" value="<%= parentOrganizationId %>" />
+
+		<tr>
+			<td>
+				<liferay-ui:message key="parent-organization" />
+			</td>
+			<td>
+				<a href="<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/directory/edit_organization" /><portlet:param name="backURL" value="<%= backURL %>" /><portlet:param name="organizationId" value="<%= String.valueOf(parentOrganizationId) %>" /></portlet:renderURL>" id="<portlet:namespace />parentOrganizationName"><%= parentOrganizationName %></a>
+			</td>
+		</tr>
+
+		<c:choose>
+			<c:when test="<%= PropsValues.FIELD_ENABLE_COM_LIFERAY_PORTAL_MODEL_ORGANIZATION_STATUS %>">
+				<tr>
+					<td>
+						<liferay-ui:message key="status" />
+					</td>
+					<td>
+						<select name="<portlet:namespace />statusId">
+							<option value=""></option>
+
+							<%
+							List statuses = ListTypeServiceUtil.getListTypes(ListTypeImpl.ORGANIZATION_STATUS);
+
+							for (int i = 0; i < statuses.size(); i++) {
+								ListType status = (ListType)statuses.get(i);
+							%>
+
+								<option <%= status.getListTypeId() == statusId ? "selected" : "" %> value="<%= String.valueOf(status.getListTypeId()) %>"><%= LanguageUtil.get(pageContext, status.getName()) %></option>
+
+							<%
+							}
+							%>
+
+						</select>
+					</td>
+				</tr>
+			</c:when>
+			<c:otherwise>
+				<input name="<portlet:namespace />statusId" type="hidden" value="<%= (organization != null) ? organization.getStatusId() : ListTypeImpl.ORGANIZATION_STATUS_DEFAULT %>" />
+			</c:otherwise>
+		</c:choose>
+
+		</table>
+	</td>
+	<td valign="top">
+		<table class="lfr-table">
+		<tr>
+			<td>
+				<liferay-ui:message key="type" />
+			</td>
+			<td>
+				<liferay-ui:message key="regular" />
+			</td>
+		</tr>
+		<tr>
+			<td>
+				<liferay-ui:message key="country" />
+			</td>
+			<td>
+				<select id="<portlet:namespace />countryId" name="<portlet:namespace />countryId"></select>
+			</td>
+		</tr>
+		<tr>
+			<td>
+				<liferay-ui:message key="region" />
+			</td>
+			<td>
+				<select id="<portlet:namespace />regionId" name="<portlet:namespace />regionId"></select>
+			</td>
+		</tr>
+		</table>
+	</td>
+</tr>
+</table>
+
+<c:if test="<%= organization != null %>">
+	<br />
+</c:if>
+
+<script type="text/javascript">
+	<c:if test="<%= windowState.equals(WindowState.MAXIMIZED) %>">
+		Liferay.Util.focusFormField(document.<portlet:namespace />fm.<portlet:namespace />name);
+	</c:if>
+
+	new Liferay.DynamicSelect(
+		[
+			{
+				select: "<portlet:namespace />countryId",
+				selectId: "countryId",
+				selectDesc: "name",
+				selectVal: "<%= countryId %>",
+				selectData: function(callback) {
+					Liferay.Service.Portal.Country.getCountries(
+						{
+							active: true
+						},
+						callback
+					);
+				}
+			},
+			{
+				select: "<portlet:namespace />regionId",
+				selectId: "regionId",
+				selectDesc: "name",
+				selectVal: "<%= regionId %>",
+				selectData: function(callback, selectKey) {
+					Liferay.Service.Portal.Region.getRegions(
+						{
+							countryId: selectKey,
+							active: true
+						},
+						callback
+					);
+				}
+			}
+		]
+	);
+</script>

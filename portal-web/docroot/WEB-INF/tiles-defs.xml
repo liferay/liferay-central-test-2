@@ -284,6 +284,26 @@
 		<put name="portlet_content" value="/portlet/currency_converter/view.jsp" />
 	</definition>
 
+	<!-- Directory -->
+
+	<definition name="portlet.directory" extends="portlet" />
+
+	<definition name="portlet.directory.edit_organization" extends="portlet.directory">
+		<put name="portlet_content" value="/portlet/directory/edit_organization.jsp" />
+	</definition>
+
+	<definition name="portlet.directory.edit_user" extends="portlet.directory">
+		<put name="portlet_content" value="/portlet/directory/edit_user.jsp" />
+	</definition>
+
+	<definition name="portlet.directory.error" extends="portlet.directory">
+		<put name="portlet_content" value="/portlet/directory/error.jsp" />
+	</definition>
+
+	<definition name="portlet.directory.view" extends="portlet.directory">
+		<put name="portlet_content" value="/portlet/directory/view.jsp" />
+	</definition>
+
 	<!-- Document Library -->
 
 	<definition name="portlet.document_library" extends="portlet" />
@@ -688,6 +708,10 @@
 
 	<definition name="portlet.my_account.create_account" extends="portlet.my_account">
 		<put name="portlet_content" value="/portlet/my_account/create_account.jsp" />
+	</definition>
+
+	<definition name="portlet.my_account.edit_user" extends="portlet.my_account">
+		<put name="portlet_content" value="/portlet/my_account/edit_user.jsp" />
 	</definition>
 
 	<definition name="portlet.my_account.view" extends="portlet.my_account">

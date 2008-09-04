@@ -75,14 +75,6 @@ if (organizations != null) {
 		organizationsHTML.append("<span>");
 		organizationsHTML.append(curOrganization.getName());
 
-		if (editable) {
-			organizationsHTML.append("&nbsp;[<a href='javascript: ");
-			organizationsHTML.append(renderResponse.getNamespace());
-			organizationsHTML.append("removeOrganization(");
-			organizationsHTML.append(i);
-			organizationsHTML.append(");'>x</a>]");
-		}
-
 		organizationsHTML.append("</span>");
 
 		if (itr.hasNext()) {
@@ -91,77 +83,6 @@ if (organizations != null) {
 	}
 }
 %>
-
-<script type="text/javascript">
-	function <portlet:namespace />getSelectedOrganizationIds() {
-		return document.<portlet:namespace />fm.<portlet:namespace />organizationIds.value;
-	}
-
-	function <portlet:namespace />removeOrganization(pos) {
-		var selectedOrganizationIds = document.<portlet:namespace />fm.<portlet:namespace />organizationIds.value.split(",");
-		var selectedOrganizationNames = document.<portlet:namespace />fm.<portlet:namespace />organizationNames.value.split("@@");
-
-		selectedOrganizationIds.splice(pos, 1);
-		selectedOrganizationNames.splice(pos, 1);
-
-		<portlet:namespace />updateOrganizations(selectedOrganizationIds, selectedOrganizationNames);
-	}
-
-	function <portlet:namespace />selectOrganization(organizationId, name) {
-		var selectedOrgsIds = [];
-		var selectedOrgsIdsField = document.<portlet:namespace />fm.<portlet:namespace />organizationIds.value;
-
-		if (selectedOrgsIdsField != "") {
-			selectedOrgsIds = selectedOrgsIdsField.split(",");
-		}
-
-		var selectedOrgsNames = [];
-		var selectedOrgsNamesField = document.<portlet:namespace />fm.<portlet:namespace />organizationNames.value;
-
-		if (selectedOrgsNamesField != "") {
-			selectedOrgsNames = selectedOrgsNamesField.split("@@");
-		}
-
-		selectedOrgsIds.push(organizationId);
-		selectedOrgsNames.push(name);
-
-		<portlet:namespace />updateOrganizations(selectedOrgsIds, selectedOrgsNames);
-	}
-
-	function <portlet:namespace />updateOrganizations(selectedOrgsIds, selectedOrgsNames) {
-		document.<portlet:namespace />fm.<portlet:namespace />organizationIds.value = selectedOrgsIds.join(',');
-		document.<portlet:namespace />fm.<portlet:namespace />organizationNames.value = selectedOrgsNames.join('@@');
-
-		var nameEl = document.getElementById("<portlet:namespace />organizationHTML");
-
-		var organizationsHTML = '';
-
-		for (var i = 0; i < selectedOrgsIds.length; i++) {
-			var id = selectedOrgsIds[i];
-			var name = selectedOrgsNames[i];
-
-			organizationsHTML += '<span>' + name + '&nbsp;[<a href="javascript: <portlet:namespace />removeOrganization(' + i + ');">x</a>]</span>';
-
-			if (i < selectedOrgsIds.length) {
-				organizationsHTML += ',&nbsp;'
-			}
-		}
-
-		nameEl.innerHTML = organizationsHTML;
-	}
-</script>
-
-<liferay-ui:error exception="<%= ContactFirstNameException.class %>" message="please-enter-a-valid-first-name" />
-<liferay-ui:error exception="<%= ContactLastNameException.class %>" message="please-enter-a-valid-last-name" />
-<liferay-ui:error exception="<%= DuplicateUserEmailAddressException.class %>" message="the-email-address-you-requested-is-already-taken" />
-<liferay-ui:error exception="<%= DuplicateUserIdException.class %>" message="the-user-id-you-requested-is-already-taken" />
-<liferay-ui:error exception="<%= DuplicateUserScreenNameException.class %>" message="the-screen-name-you-requested-is-already-taken" />
-<liferay-ui:error exception="<%= ReservedUserEmailAddressException.class %>" message="the-email-address-you-requested-is-reserved" />
-<liferay-ui:error exception="<%= ReservedUserIdException.class %>" message="the-user-id-you-requested-is-reserved" />
-<liferay-ui:error exception="<%= ReservedUserScreenNameException.class %>" message="the-screen-name-you-requested-is-reserved" />
-<liferay-ui:error exception="<%= UserEmailAddressException.class %>" message="please-enter-a-valid-email-address" />
-<liferay-ui:error exception="<%= UserIdException.class %>" message="please-enter-a-valid-user-id" />
-<liferay-ui:error exception="<%= UserScreenNameException.class %>" message="please-enter-a-valid-screen-name" />
 
 <table class="lfr-table">
 <tr>
@@ -331,10 +252,6 @@ if (organizations != null) {
 				<span id="<portlet:namespace />organizationHTML">
 					<%= organizationsHTML.toString() %>
 				</span>
-
-				<c:if test="<%= editable %>">
-					<input type="button" value="<liferay-ui:message key="select" />" onClick="var organizationWindow = window.open('<portlet:renderURL windowState="<%= LiferayWindowState.POP_UP.toString() %>"><portlet:param name="struts_action" value="/enterprise_admin/select_organization" /><portlet:param name="tabs1" value="organizations" /></portlet:renderURL>', 'organization', 'directories=no,height=640,location=no,menubar=no,resizable=yes,scrollbars=yes,status=no,toolbar=no,width=680'); void(''); organizationWindow.focus();" />
-				</c:if>
 			</td>
 		</tr>
 
@@ -354,7 +271,7 @@ if (organizations != null) {
 			<img alt="<liferay-ui:message key="avatar" />" src='<%= themeDisplay.getPathImage() %>/user_<%= user2.isFemale() ? "female" : "male" %>_portrait?img_id=<%= user2.getPortraitId() %>&t=<%= ImageServletTokenUtil.getToken(user2.getPortraitId()) %>' width="100" /><br />
 
 			<c:if test="<%= editable %>">
-				<a href="<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/enterprise_admin/edit_user_portrait" /><portlet:param name="redirect" value="<%= currentURL %>" /><portlet:param name="p_u_i_d" value="<%= String.valueOf(user2.getUserId()) %>" /></portlet:renderURL>"><liferay-ui:message key="change" /></a>
+				<a href="<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/directory/edit_user_portrait" /><portlet:param name="redirect" value="<%= currentURL %>" /><portlet:param name="p_u_i_d" value="<%= String.valueOf(user2.getUserId()) %>" /></portlet:renderURL>"><liferay-ui:message key="change" /></a>
 			</c:if>
 		</td>
 	</c:if>

@@ -22,7 +22,7 @@
  */
 %>
 
-<%@ include file="/html/portlet/enterprise_admin/init.jsp" %>
+<%@ include file="/html/portlet/directory/init.jsp" %>
 
 <%
 String redirect = ParamUtil.getString(request, "redirect");
@@ -34,27 +34,12 @@ long organizationId = BeanParamUtil.getLong(organization, request, "organization
 
 long parentOrganizationId = ParamUtil.getLong(request, "parentOrganizationId");
 
-boolean editable = true;
-
-if (!OrganizationPermissionUtil.contains(permissionChecker, organizationId, ActionKeys.UPDATE)) {
-	editable = false;
-}
-
-if ((organizationId <= 0) && (PortalPermissionUtil.contains(permissionChecker, ActionKeys.ADD_ORGANIZATION) || OrganizationPermissionUtil.contains(permissionChecker, parentOrganizationId, ActionKeys.MANAGE_SUBORGANIZATIONS))) {
-	editable = true;
-}
+boolean editable = false;
 %>
 
-<script type="text/javascript">
-	function <portlet:namespace />saveOrganization(cmd) {
-		document.<portlet:namespace />fm.<portlet:namespace /><%= Constants.CMD %>.value = "<%= organization == null ? Constants.ADD : Constants.UPDATE %>";
-		submitForm(document.<portlet:namespace />fm);
-	}
-</script>
-
-<form action="<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/enterprise_admin/edit_organization" /></portlet:actionURL>" method="post" name="<portlet:namespace />fm" onSubmit="<portlet:namespace />saveOrganization(); return false;">
+<form action="<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/directory/edit_organization" /></portlet:actionURL>" method="post" name="<portlet:namespace />fm" onSubmit="<portlet:namespace />saveOrganization(); return false;">
 <input name="<portlet:namespace /><%= Constants.CMD %>" type="hidden" value="" />
-<input name="<portlet:namespace />redirect" type="hidden" value="<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/enterprise_admin/edit_organization" /><portlet:param name="backURL" value="<%= backURL %>" /></portlet:renderURL>&<portlet:namespace />organizationId=" />
+<input name="<portlet:namespace />redirect" type="hidden" value="<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/directory/edit_organization" /><portlet:param name="backURL" value="<%= backURL %>" /></portlet:renderURL>&<portlet:namespace />organizationId=" />
 <input name="<portlet:namespace />backURL" type="hidden" value="<%= HtmlUtil.escape(backURL) %>" />
 <input name="<portlet:namespace />organizationId" type="hidden" value="<%= organizationId %>" />
 
@@ -63,11 +48,7 @@ if ((organizationId <= 0) && (PortalPermissionUtil.contains(permissionChecker, A
 	backURL="<%= backURL %>"
 />
 
-<liferay-util:include page="/html/portlet/my_account/tabs1.jsp">
-	<liferay-util:param name="tabs1" value="profile" />
-</liferay-util:include>
-
-<%@ include file="/html/portlet/enterprise_admin/edit_organization_profile.jspf" %>
+<%@ include file="/html/portlet/directory/edit_organization_profile.jspf" %>
 
 <c:if test="<%= organization != null %>">
 	<liferay-ui:tabs
