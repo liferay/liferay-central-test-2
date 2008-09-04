@@ -84,7 +84,7 @@ public class AddDocumentLibraryTest extends BaseTestCase {
 		selenium.click(RuntimeVariables.replace(
 				"//input[@value='Add Document']"));
 		selenium.waitForPageToLoad("30000");
-		//selenium.click("link=Use the classic uploader.");
+		selenium.click("link=Use the classic uploader.");
 		FileUtil.mkdirs(RuntimeVariables.replace(
 				"L:\\portal\\build\\portal-web\\test-output\\brochure\\"));
 		selenium.captureEntirePageScreenshot(RuntimeVariables.replace(
