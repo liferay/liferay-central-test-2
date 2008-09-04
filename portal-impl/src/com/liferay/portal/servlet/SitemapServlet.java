@@ -22,6 +22,7 @@
 
 package com.liferay.portal.servlet;
 
+import com.liferay.portal.util.Portal;
 import com.liferay.portal.util.PortalUtil;
 
 import java.io.IOException;
