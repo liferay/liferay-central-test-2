@@ -159,6 +159,9 @@ else {
 	}
 }
 
+if (Validator.isNull(tabs1)) {
+	tabs1 = "users";
+}
 boolean showUserGroupRoleAction = true;
 boolean showUserRoleAction = true;
 
@@ -167,9 +170,13 @@ if (portletName.equals(PortletKeys.MY_ACCOUNT)) {
 	showUserRoleAction = false;
 }
 
-if (Validator.isNull(tabs1)) {
-	tabs1 = "users";
+boolean filterManageableOrganizations = true;
+
+if (permissionChecker.isCompanyAdmin()) {
+	filterManageableOrganizations = false;
 }
 
 DateFormat dateFormatDateTime = DateFormats.getDateTime(locale, timeZone);
 %>
+
+<%@ include file="/html/portlet/enterprise_admin/init-ext.jsp" %>

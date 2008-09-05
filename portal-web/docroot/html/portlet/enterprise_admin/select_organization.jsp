@@ -69,7 +69,7 @@ OrganizationSearchTerms searchTerms = (OrganizationSearchTerms)searchContainer.g
 
 LinkedHashMap orgParams = new LinkedHashMap();
 
-if (!permissionChecker.isCompanyAdmin()) {
+if (filterManageableOrganizations) {
 	List manageableOrganizations = OrganizationLocalServiceUtil.getManageableOrganizations(user.getUserId());
 
 	Long[] manageableOrganizationIds = EnterpriseAdminUtil.getOrganizationIds(manageableOrganizations);

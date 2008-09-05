@@ -21,37 +21,3 @@
  * SOFTWARE.
  */
 %>
-
-<%@ include file="/html/portlet/enterprise_admin/init.jsp" %>
-
-<%
-PortletURL tabs1URL = renderResponse.createRenderURL();
-
-tabs1URL.setWindowState(WindowState.MAXIMIZED);
-
-tabs1URL.setParameter("struts_action", "/enterprise_admin/view");
-
-String tabs1Names = "users,organizations,user-groups";
-
-String tabs1Values = tabs1Names;
-
-if (!filterManageableOrganizations) {
-	if (windowState.equals(WindowState.MAXIMIZED)) {
-		tabs1Names += ",roles,password-policies,settings,monitoring,plugins";
-	}
-	else {
-		tabs1Names += ",roles,&raquo;";
-	}
-
-	tabs1Values = tabs1Names;
-}
-
-String backURL = ParamUtil.getString(request, "backURL");
-%>
-
-<liferay-ui:tabs
-	names="<%= tabs1Names %>"
-	tabsValues="<%= tabs1Values %>"
-	url="<%= tabs1URL.toString() %>"
-	backURL="<%= backURL %>"
-/>
