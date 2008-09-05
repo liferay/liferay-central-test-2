@@ -155,6 +155,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletRequestWrapper;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import javax.servlet.jsp.PageContext;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -714,6 +715,23 @@ public class PortalImpl implements Portal {
 
 			return date;
 		}
+	}
+
+	public String getFirstPageTypes(PageContext pageContext) {
+		StringBuilder sb = new StringBuilder();
+
+		for (int i = 0; i < PropsValues.LAYOUT_TYPES.length; i++) {
+			String type = PropsValues.LAYOUT_TYPES[i];
+
+			if (PortalUtil.isLayoutFirstPageSupported(type)) {
+				sb.append(
+					LanguageUtil.get(pageContext, "layout.types." + type));
+				sb.append(StringPool.COMMA);
+				sb.append(StringPool.SPACE);
+			}
+		}
+
+		return sb.substring(0, sb.length() - 2);
 	}
 
 	public String getHost(HttpServletRequest request) {
@@ -2162,6 +2180,13 @@ public class PortalImpl implements Portal {
 		else {
 			return false;
 		}
+	}
+
+	public boolean isLayoutFirstPageSupported(String type) {
+		return GetterUtil.getBoolean(
+			PropsUtil.get(
+				PropsKeys.LAYOUT_FIRST_PAGE_SUPPORTED, new Filter(type)),
+			false);
 	}
 
 	public boolean isLayoutFriendliable(Layout layout) {

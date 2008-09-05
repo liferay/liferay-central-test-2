@@ -59,6 +59,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import javax.servlet.jsp.PageContext;
 
 /**
  * <a href="PortalUtil.java.html"><b><i>View Source</i></b></a>
@@ -200,6 +201,10 @@ public class PortalUtil {
 		throws PortalException {
 
 		return getPortal().getDate(month, day, year, hour, min, timeZone, pe);
+	}
+
+	public static String getFirstPageTypes(PageContext pageContext) {
+		return getPortal().getFirstPageTypes(pageContext);
 	}
 
 	public static String getHost(HttpServletRequest request) {
@@ -675,6 +680,10 @@ public class PortalUtil {
 
 	public static boolean isMethodPost(PortletRequest portletRequest) {
 		return getPortal().isMethodPost(portletRequest);
+	}
+
+	public static boolean isLayoutFirstPageSupported(String type) {
+		return getPortal().isLayoutFirstPageSupported(type);
 	}
 
 	public static boolean isLayoutFriendliable(Layout layout) {

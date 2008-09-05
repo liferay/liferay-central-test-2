@@ -59,6 +59,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import javax.servlet.jsp.PageContext;
 
 /**
  * <a href="Portal.java.html"><b><i>View Source</i></b></a>
@@ -149,6 +150,8 @@ public interface Portal {
 			int month, int day, int year, int hour, int min, TimeZone timeZone,
 			PortalException pe)
 		throws PortalException;
+
+	public String getFirstPageTypes(PageContext pageContext);
 
 	public String getHost(HttpServletRequest request);
 
@@ -381,6 +384,8 @@ public interface Portal {
 	public boolean isMethodGet(PortletRequest portletRequest);
 
 	public boolean isMethodPost(PortletRequest portletRequest);
+
+	public boolean isLayoutFirstPageSupported(String type);
 
 	public boolean isLayoutFriendliable(Layout layout);
 
