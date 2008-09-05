@@ -27,6 +27,7 @@ import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
+import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.Group;
 import com.liferay.portal.model.LayoutSet;
 import com.liferay.portal.model.impl.LayoutImpl;
@@ -37,6 +38,7 @@ import com.liferay.portal.servlet.filters.BasePortalFilter;
 import com.liferay.portal.struts.LastPath;
 import com.liferay.portal.util.PortalInstances;
 import com.liferay.portal.util.PortalUtil;
+import com.liferay.portal.util.PropsValues;
 import com.liferay.portal.util.WebKeys;
 
 import java.io.IOException;
@@ -152,11 +154,10 @@ public class VirtualHostFilter extends BasePortalFilter {
 
 		String friendlyURL = request.getRequestURI();
 
-		if ((!contextPath.equals(StringPool.SLASH)) &&
+		if ((Validator.isNotNull(contextPath)) &&
 			(friendlyURL.indexOf(contextPath) != -1)) {
 
-			friendlyURL = friendlyURL.substring(
-				contextPath.length(), friendlyURL.length());
+			friendlyURL = friendlyURL.substring(contextPath.length());
 		}
 
 		friendlyURL = StringUtil.replace(
@@ -198,22 +199,27 @@ public class VirtualHostFilter extends BasePortalFilter {
 		if (layoutSet != null) {
 			try {
 				LastPath lastPath = new LastPath(
-					StringPool.BLANK, friendlyURL,
+					contextPath, friendlyURL,
 					servletRequest.getParameterMap());
 
 				servletRequest.setAttribute(WebKeys.LAST_PATH, lastPath);
 
 				StringBuilder prefix = new StringBuilder();
 
-				if (layoutSet.isPrivateLayout()) {
-					prefix.append(PortalUtil.getPathFriendlyURLPrivateGroup());
-				}
-				else {
-					prefix.append(PortalUtil.getPathFriendlyURLPublic());
-				}
-
 				Group group = GroupLocalServiceUtil.getGroup(
 					layoutSet.getGroupId());
+
+				if (layoutSet.isPrivateLayout()) {
+					if (group.isUser()) {
+						prefix.append(_PRIVATE_USER_MAPPING);
+					}
+					else {
+						prefix.append(_PRIVATE_GROUP_MAPPING);
+					}
+				}
+				else {
+					prefix.append(_PUBLIC_GROUP_MAPPING);
+				}
 
 				prefix.append(group.getFriendlyURL());
 
@@ -223,7 +229,23 @@ public class VirtualHostFilter extends BasePortalFilter {
 					redirect.append(i18nLanguageId);
 				}
 
-				redirect.append(prefix);
+				if (friendlyURL.startsWith(
+						PropsValues.WIDGET_SERVLET_MAPPING)) {
+
+					redirect.append(PropsValues.WIDGET_SERVLET_MAPPING);
+
+					friendlyURL = StringUtil.replaceFirst(
+						friendlyURL, PropsValues.WIDGET_SERVLET_MAPPING,
+						StringPool.BLANK);
+				}
+
+				long plid = PortalUtil.getPlidFromFriendlyURL(
+					companyId, friendlyURL);
+
+				if (plid <= 0) {
+					redirect.append(prefix);
+				}
+
 				redirect.append(friendlyURL);
 
 				String query = request.getQueryString();
@@ -359,6 +381,15 @@ public class VirtualHostFilter extends BasePortalFilter {
 	private static String _PATH_WAP = "/wap/";
 
 	private static String _PATH_WSRP = "/wsrp/";
+
+	private static String _PRIVATE_GROUP_MAPPING =
+		PropsValues.LAYOUT_FRIENDLY_URL_PRIVATE_GROUP_SERVLET_MAPPING;
+
+	private static String _PRIVATE_USER_MAPPING =
+		PropsValues.LAYOUT_FRIENDLY_URL_PRIVATE_USER_SERVLET_MAPPING;
+
+	private static String _PUBLIC_GROUP_MAPPING =
+		PropsValues.LAYOUT_FRIENDLY_URL_PUBLIC_SERVLET_MAPPING;
 
 	private ServletContext _servletContext;
 

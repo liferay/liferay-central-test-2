@@ -166,6 +166,7 @@ import org.apache.struts.Globals;
  * @author Brian Wing Shun Chan
  * @author Brian Myunghun Kim
  * @author Jorge Ferrer
+ * @author Raymond Augé
  *
  */
 public class PortalImpl implements Portal {
@@ -245,15 +246,12 @@ public class PortalImpl implements Portal {
 			_pathContext = StringPool.BLANK;
 		}
 
-		_pathFriendlyURLPrivateGroup =
-			_pathContext +
-				PropsValues.LAYOUT_FRIENDLY_URL_PRIVATE_GROUP_SERVLET_MAPPING;
-		_pathFriendlyURLPrivateUser =
-			_pathContext +
-				PropsValues.LAYOUT_FRIENDLY_URL_PRIVATE_USER_SERVLET_MAPPING;
-		_pathFriendlyURLPublic =
-			_pathContext +
-				PropsValues.LAYOUT_FRIENDLY_URL_PUBLIC_SERVLET_MAPPING;
+		_pathFriendlyURLPrivateGroup = _pathContext + _PRIVATE_GROUP_MAPPING;
+
+		_pathFriendlyURLPrivateUser = _pathContext + _PRIVATE_USER_MAPPING;
+
+		_pathFriendlyURLPublic = _pathContext + _PUBLIC_GROUP_MAPPING;
+
 		_pathImage = _cdnHost + _pathContext + PATH_IMAGE;
 		_pathMain = _pathContext + PATH_MAIN;
 
@@ -953,7 +951,17 @@ public class PortalImpl implements Portal {
 				themeDisplay.getLayout().getLayoutSet().getLayoutSetId();
 
 			if ((layoutSet.getLayoutSetId() != curLayoutSetId) ||
-					(portalURL.startsWith(themeDisplay.getURLPortal()))) {
+				(portalURL.startsWith(themeDisplay.getPortalURL()))) {
+
+				if (themeDisplay.isWidget()) {
+					layoutFriendlyURL = _WIDGET_MAPPING + layoutFriendlyURL;
+				}
+
+				if (themeDisplay.isI18n()) {
+					layoutFriendlyURL =
+						StringPool.SLASH + themeDisplay.getI18nLanguageId() +
+							layoutFriendlyURL;
+				}
 
 				return portalURL + getPathContext() + layoutFriendlyURL;
 			}
@@ -965,18 +973,18 @@ public class PortalImpl implements Portal {
 
 		if (layout.isPrivateLayout()) {
 			if (group.isUser()) {
-				friendlyURL = getPathFriendlyURLPrivateUser();
+				friendlyURL = _PRIVATE_USER_MAPPING;
 			}
 			else {
-				friendlyURL = getPathFriendlyURLPrivateGroup();
+				friendlyURL = _PRIVATE_GROUP_MAPPING;
 			}
 		}
 		else {
-			friendlyURL = getPathFriendlyURLPublic();
+			friendlyURL = _PUBLIC_GROUP_MAPPING;
 		}
 
 		if (themeDisplay.isWidget()) {
-			friendlyURL = "/widget" + friendlyURL;
+			friendlyURL = _WIDGET_MAPPING + friendlyURL;
 		}
 
 		if (themeDisplay.isI18n()) {
@@ -985,7 +993,7 @@ public class PortalImpl implements Portal {
 					friendlyURL;
 		}
 
-		return friendlyURL + group.getFriendlyURL() + layoutFriendlyURL;
+		return getPathContext() + friendlyURL + group.getFriendlyURL() + layoutFriendlyURL;
 	}
 
 	public String getLayoutSetFriendlyURL(
@@ -1006,7 +1014,14 @@ public class PortalImpl implements Portal {
 			if ((layoutSet.getLayoutSetId() != curLayoutSetId) ||
 				(portalURL.startsWith(themeDisplay.getURLPortal()))) {
 
-				return portalURL + getPathContext();
+				String layoutSetFriendlyURL = StringPool.BLANK;
+
+				if (themeDisplay.isI18n()) {
+					layoutSetFriendlyURL =
+						StringPool.SLASH + themeDisplay.getI18nLanguageId();
+				}
+
+				return portalURL + getPathContext() + layoutSetFriendlyURL;
 			}
 		}
 
@@ -1016,17 +1031,23 @@ public class PortalImpl implements Portal {
 
 		if (layoutSet.isPrivateLayout()) {
 			if (group.isUser()) {
-				friendlyURL = getPathFriendlyURLPrivateUser();
+				friendlyURL = _PRIVATE_USER_MAPPING;
 			}
 			else {
-				friendlyURL = getPathFriendlyURLPrivateGroup();
+				friendlyURL = _PRIVATE_GROUP_MAPPING;
 			}
 		}
 		else {
-			friendlyURL = getPathFriendlyURLPublic();
+			friendlyURL = _PUBLIC_GROUP_MAPPING;
 		}
 
-		return friendlyURL + group.getFriendlyURL();
+		if (themeDisplay.isI18n()) {
+			friendlyURL =
+				StringPool.SLASH + themeDisplay.getI18nLanguageId() +
+					friendlyURL;
+		}
+
+		return getPathContext() + friendlyURL + group.getFriendlyURL();
 	}
 
 	public String getLayoutTarget(Layout layout) {
@@ -1126,11 +1147,11 @@ public class PortalImpl implements Portal {
 
 		String urlPrefix = StringPool.SLASH + urlParts[1];
 
-		if (getPathFriendlyURLPublic().equals(urlPrefix)) {
+		if (_PUBLIC_GROUP_MAPPING.equals(urlPrefix)) {
 			privateLayout = false;
 		}
-		else if (getPathFriendlyURLPrivateGroup().equals(urlPrefix) ||
-				 getPathFriendlyURLPrivateUser().equals(urlPrefix)) {
+		else if (_PRIVATE_GROUP_MAPPING.equals(urlPrefix) ||
+				 _PRIVATE_USER_MAPPING.equals(urlPrefix)) {
 
 			privateLayout = true;
 		}
@@ -2043,21 +2064,78 @@ public class PortalImpl implements Portal {
 	}
 
 	public String getWidgetURL(Portlet portlet, ThemeDisplay themeDisplay) {
-		String widgetURL =
-			themeDisplay.getPortalURL() + "/widget" +
-				getLayoutURL(themeDisplay) + "/-/";
+		String layoutURL = getLayoutURL(themeDisplay);
+
+		Layout layout = themeDisplay.getLayout();
+
+		StringBuilder sb = new StringBuilder();
+
+		if (HttpUtil.hasDomain(layoutURL)) {
+			String protocol = HttpUtil.getProtocol(layoutURL);
+			String domain = HttpUtil.getDomain(layoutURL);
+			String pathInfo = HttpUtil.removeDomain(layoutURL);
+
+			sb.append(protocol);
+			sb.append(Http.PROTOCOL_DELIMITER);
+			sb.append(domain);
+
+			if (Validator.isNotNull(_pathContext)) {
+				sb.append(_pathContext);
+			}
+
+			if (themeDisplay.isI18n()) {
+				sb.append(StringPool.SLASH);
+				sb.append(themeDisplay.getI18nLanguageId());
+			}
+
+			sb.append(_WIDGET_MAPPING);
+			sb.append(layout.getFriendlyURL());
+		}
+		else {
+			sb.append(themeDisplay.getPortalURL());
+
+			if (Validator.isNotNull(_pathContext)) {
+				sb.append(_pathContext);
+			}
+
+			if (themeDisplay.isI18n()) {
+				sb.append(StringPool.SLASH);
+				sb.append(themeDisplay.getI18nLanguageId());
+			}
+
+			sb.append(_WIDGET_MAPPING);
+
+			Group group = layout.getGroup();
+
+			if (layout.isPrivateLayout()) {
+				if (group.isUser()) {
+					sb.append(_PRIVATE_USER_MAPPING);
+				}
+				else {
+					sb.append(_PRIVATE_GROUP_MAPPING);
+				}
+			}
+			else {
+				sb.append(_PUBLIC_GROUP_MAPPING);
+			}
+
+			sb.append(group.getFriendlyURL());
+			sb.append(layout.getFriendlyURL());
+		}
+
+		sb.append("/-/");
 
 		FriendlyURLMapper friendlyURLMapper =
 			portlet.getFriendlyURLMapperInstance();
 
 		if (friendlyURLMapper != null) {
-			widgetURL += friendlyURLMapper.getMapping();
+			sb.append(friendlyURLMapper.getMapping());
 		}
 		else {
-			widgetURL += portlet.getPortletId();
+			sb.append(portlet.getPortletId());
 		}
 
-		return widgetURL;
+		return sb.toString();
 	}
 
 	public boolean isMethodGet(PortletRequest portletRequest) {
@@ -2893,6 +2971,17 @@ public class PortalImpl implements Portal {
 	}
 
 	private static final String _JSESSIONID = ";jsessionid=";
+
+	private static final String  _PRIVATE_GROUP_MAPPING =
+		PropsValues.LAYOUT_FRIENDLY_URL_PRIVATE_GROUP_SERVLET_MAPPING;
+
+	private static final String _PRIVATE_USER_MAPPING =
+		PropsValues.LAYOUT_FRIENDLY_URL_PRIVATE_USER_SERVLET_MAPPING;
+
+	private static final String _PUBLIC_GROUP_MAPPING =
+		PropsValues.LAYOUT_FRIENDLY_URL_PUBLIC_SERVLET_MAPPING;
+
+	private String _WIDGET_MAPPING = PropsValues.WIDGET_SERVLET_MAPPING;
 
 	private static Log _log = LogFactory.getLog(PortalImpl.class);
 
