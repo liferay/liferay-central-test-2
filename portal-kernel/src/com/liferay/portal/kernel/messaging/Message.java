@@ -48,69 +48,62 @@ public class Message implements Serializable {
 	}
 
 	public boolean getBoolean(String key) {
-		boolean value; 
+		boolean value;
+
 		Object object = get(key);
-		
+
 		if (object instanceof Boolean) {
 			value = ((Boolean)object).booleanValue();
 		}
 		else {
 			value = GetterUtil.getBoolean((String)object);
 		}
-		
+
 		return value;
 	}
 
 	public double getDouble(String key) {
-		double value; 
+		double value;
+
 		Object object = get(key);
-		
+
 		if (object instanceof Number) {
 			value = ((Number)object).doubleValue();
 		}
 		else {
 			value = GetterUtil.getDouble((String)object);
 		}
-		
-		return value;
-	}
 
-	public long getLong(String key) {
-		long value; 
-		Object object = get(key);
-		
-		if (object instanceof Number) {
-			value = ((Number)object).longValue();
-		}
-		else {
-			value = GetterUtil.getLong((String)object);
-		}
-		
 		return value;
 	}
 
 	public int getInteger(String key) {
-		int value; 
+		int value;
+
 		Object object = get(key);
-		
+
 		if (object instanceof Number) {
 			value = ((Number)object).intValue();
 		}
 		else {
 			value = GetterUtil.getInteger((String)object);
 		}
-		
+
 		return value;
 	}
 
-	public String getString(String key) {
-		String value = null;
+	public long getLong(String key) {
+		long value;
+
 		Object object = get(key);
-		
-		if (object != null) {
-			value = GetterUtil.getString(object.toString());
+
+		if (object instanceof Number) {
+			value = ((Number)object).longValue();
 		}
-		
+		else {
+			value = GetterUtil.getLong((String)object);
+		}
+
 		return value;
 	}
 
@@ -120,6 +113,10 @@ public class Message implements Serializable {
 
 	public String getResponseDestination() {
 		return _responseDestination;
+	}
+
+	public String getString(String key) {
+		return GetterUtil.getString(String.valueOf(get(key)));
 	}
 
 	public void put(String key, Object value) {
