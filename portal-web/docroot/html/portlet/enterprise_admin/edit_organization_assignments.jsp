@@ -94,13 +94,6 @@ LinkedHashMap userParams = new LinkedHashMap();
 if (tabs2.equals("current")) {
 	userParams.put("usersOrgs", new Long(organization.getOrganizationId()));
 }
-else {
-	/*if (portletName.equals(PortletKeys.ORGANIZATION_ADMIN)) {
-		long[] organizationIds = user.getOrganizationIds();
-
-		userParams.put("usersOrgs", ArrayUtil.toArray(organizationIds));
-	}*/
-}
 %>
 
 <%@ include file="/html/portlet/enterprise_admin/user_search_results.jspf" %>

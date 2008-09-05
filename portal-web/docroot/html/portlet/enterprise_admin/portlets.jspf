@@ -22,7 +22,7 @@
  */
 %>
 
-<c:if test="<%= portletName.equals(PortletKeys.ADMIN) %>">
+<c:if test="<%= showSearchIndex %>">
 	<script type="text/javascript">
 		function <portlet:namespace />reindexPortlet(portletId) {
 			document.<portlet:namespace />fm.<portlet:namespace />portletId.value = portletId;
@@ -143,7 +143,7 @@ for (int i = 0; i < results.size(); i++) {
 
 	sb = new StringBuilder();
 
-	if (portletName.equals(PortletKeys.ADMIN) && Validator.isNotNull(portlet.getIndexerClass())) {
+	if (showSearchIndex && Validator.isNotNull(portlet.getIndexerClass())) {
 		sb.append("<input onclick=\"");
 		sb.append(renderResponse.getNamespace());
 		sb.append("reindexPortlet('");

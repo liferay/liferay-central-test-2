@@ -156,6 +156,14 @@ else {
 	}
 }
 
+boolean showUserGroupRoleAction = true;
+boolean showUserRoleAction = true;
+
+if (portletName.equals(PortletKeys.MY_ACCOUNT)) {
+	showUserGroupRoleAction = false;
+	showUserRoleAction = false;
+}
+
 if (Validator.isNull(tabs1)) {
 	tabs1 = "users";
 }

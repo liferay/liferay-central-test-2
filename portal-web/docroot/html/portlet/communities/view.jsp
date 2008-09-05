@@ -54,6 +54,7 @@ GroupSearch searchContainer = new GroupSearch(renderRequest, portletURL);
 <liferay-ui:search-form
 	page="/html/portlet/enterprise_admin/group_search.jsp"
 	searchContainer="<%= searchContainer %>"
+	showAddButton="<%= true %>"	
 />
 
 <c:if test="<%= windowState.equals(WindowState.MAXIMIZED) %>">

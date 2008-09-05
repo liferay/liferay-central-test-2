@@ -35,7 +35,7 @@ String redirect = (String)objArray[2];
 %>
 
 <liferay-ui:icon-menu>
-	<c:if test="<%= !portletName.equals(PortletKeys.MY_ACCOUNT) %>">
+	<c:if test="<%= showUserRoleAction %>">
 		<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="portletURL">
 			<portlet:param name="struts_action" value="/enterprise_admin/edit_user" />
 			<portlet:param name="<%= Constants.CMD %>" value="deleteRole" />

@@ -26,6 +26,7 @@
 
 <%
 GroupSearch searchContainer = (GroupSearch)request.getAttribute("liferay-ui:search:searchContainer");
+boolean showAddButton = GetterUtil.getBoolean((String)request.getAttribute("liferay-ui:search:showAddButton"));
 
 GroupDisplayTerms displayTerms = (GroupDisplayTerms)searchContainer.getDisplayTerms();
 %>
@@ -41,10 +42,8 @@ GroupDisplayTerms displayTerms = (GroupDisplayTerms)searchContainer.getDisplayTe
 <div>
 	<input type="submit" value="<liferay-ui:message key="search-communities" />" />
 
-	<c:if test="<%= portletName.equals(PortletKeys.COMMUNITIES) %>">
-		<c:if test="<%= PortalPermissionUtil.contains(permissionChecker, ActionKeys.ADD_COMMUNITY) %>">
-			<input type="button" value="<liferay-ui:message key="add-community" />" onClick="<portlet:namespace />addGroup();" />
-		</c:if>
+	<c:if test="<%= showAddButton && PortalPermissionUtil.contains(permissionChecker, ActionKeys.ADD_COMMUNITY) %>">
+		<input type="button" value="<liferay-ui:message key="add-community" />" onClick="<portlet:namespace />addGroup();" />
 	</c:if>
 </div>
 
