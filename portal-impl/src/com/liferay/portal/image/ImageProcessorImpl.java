@@ -208,8 +208,8 @@ public class ImageProcessorImpl implements ImageProcessor {
 		double factor = Math.min(
 			(double)maxHeight / imageHeight, (double)maxWidth / imageWidth);
 
-		int scaledHeight = (int)(factor * imageHeight);
-		int scaledWidth = (int)(factor * imageWidth);
+		int scaledHeight = Math.max(1, (int)(factor * imageHeight));
+		int scaledWidth = Math.max(1, (int)(factor * imageWidth));
 
 		BufferedImage bufferedImage = getBufferedImage(renderedImage);
 
