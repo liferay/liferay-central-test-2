@@ -1042,10 +1042,10 @@
 	</portlet>
 	<portlet>
 		<portlet-name>124</portlet-name>
-		<icon>/html/portlet/social/icon.png</icon>
-		<struts-path>social</struts-path>
-		<social-activity-interpreter-class>com.liferay.portlet.social.util.PortalActivityInterpreter</social-activity-interpreter-class>
-		<social-request-interpreter-class>com.liferay.portlet.social.util.PortalRequestInterpreter</social-request-interpreter-class>
+		<icon>/html/portlet/portlet_sharing/icon.png</icon>
+		<struts-path>portlet_sharing</struts-path>
+		<social-activity-interpreter-class>com.liferay.portlet.portletsharing.util.PortalActivityInterpreter</social-activity-interpreter-class>
+		<social-request-interpreter-class>com.liferay.portlet.portletsharing.util.PortalRequestInterpreter</social-request-interpreter-class>
 		<system>true</system>
 	</portlet>
 	<role-mapper>

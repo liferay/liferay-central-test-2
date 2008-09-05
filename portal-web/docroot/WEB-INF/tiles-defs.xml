@@ -875,6 +875,16 @@
 	<definition name="portlet.portlet_css.view" extends="portlet.portlet_css">
 		<put name="portlet_content" value="/portlet/portlet_css/view.jsp" />
 	</definition>
+	
+	<!-- Portlet Sharing -->
+
+	<definition name="portlet.portlet_sharing" extends="portlet">
+		<put name="portlet_decorate" value="false" />
+	</definition>
+
+	<definition name="portlet.portlet_sharing.view" extends="portlet.portlet_sharing">
+		<put name="portlet_content" value="/portlet/portlet_sharing/view.jsp" />
+	</definition>
 
 	<!-- Quick Note -->
 
