@@ -33,7 +33,7 @@ import com.liferay.portalweb.portal.util.RuntimeVariables;
  */
 public class SearchUsersTest extends BaseTestCase {
 	public void testSearchUsers() throws Exception {
-		selenium.type("toggle_id_enterprise_admin_user_searchkeywords",
+		selenium.type("toggle_id_directory_user_searchkeywords",
 			RuntimeVariables.replace("Test"));
 		selenium.click(RuntimeVariables.replace(
 				"//input[@value='Search Users']"));

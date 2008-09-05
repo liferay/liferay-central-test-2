@@ -59,8 +59,7 @@ public class AddPortletTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent(
-							"toggle_id_enterprise_admin_user_searchkeywords")) {
+				if (selenium.isElementPresent("//input[@value='Search Users']")) {
 					break;
 				}
 			}

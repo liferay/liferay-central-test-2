@@ -43,7 +43,7 @@ public class SearchOrganizationsTest extends BaseTestCase {
 
 			try {
 				if (selenium.isElementPresent(
-							"toggle_id_enterprise_admin_organization_searchkeywords")) {
+							"toggle_id_directory_organization_searchkeywords")) {
 					break;
 				}
 			}
@@ -53,7 +53,7 @@ public class SearchOrganizationsTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.type("toggle_id_enterprise_admin_organization_searchkeywords",
+		selenium.type("toggle_id_directory_organization_searchkeywords",
 			RuntimeVariables.replace("Liferay"));
 		selenium.click(RuntimeVariables.replace(
 				"//input[@value='Search Organizations']"));
@@ -119,7 +119,7 @@ public class SearchOrganizationsTest extends BaseTestCase {
 
 			try {
 				if (selenium.isElementPresent(
-							"toggle_id_enterprise_admin_user_searchkeywords")) {
+							"toggle_id_directory_user_searchkeywords")) {
 					break;
 				}
 			}
