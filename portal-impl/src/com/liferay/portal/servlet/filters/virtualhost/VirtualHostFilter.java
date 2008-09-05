@@ -199,8 +199,7 @@ public class VirtualHostFilter extends BasePortalFilter {
 		if (layoutSet != null) {
 			try {
 				LastPath lastPath = new LastPath(
-					contextPath, friendlyURL,
-					servletRequest.getParameterMap());
+					contextPath, friendlyURL, servletRequest.getParameterMap());
 
 				servletRequest.setAttribute(WebKeys.LAST_PATH, lastPath);
 
@@ -211,14 +210,14 @@ public class VirtualHostFilter extends BasePortalFilter {
 
 				if (layoutSet.isPrivateLayout()) {
 					if (group.isUser()) {
-						prefix.append(_PRIVATE_USER_MAPPING);
+						prefix.append(_PRIVATE_USER_SERVLET_MAPPING);
 					}
 					else {
-						prefix.append(_PRIVATE_GROUP_MAPPING);
+						prefix.append(_PRIVATE_GROUP_SERVLET_MAPPING);
 					}
 				}
 				else {
-					prefix.append(_PUBLIC_GROUP_MAPPING);
+					prefix.append(_PUBLIC_GROUP_SERVLET_MAPPING);
 				}
 
 				prefix.append(group.getFriendlyURL());
@@ -382,13 +381,13 @@ public class VirtualHostFilter extends BasePortalFilter {
 
 	private static String _PATH_WSRP = "/wsrp/";
 
-	private static String _PRIVATE_GROUP_MAPPING =
+	private static String _PRIVATE_GROUP_SERVLET_MAPPING =
 		PropsValues.LAYOUT_FRIENDLY_URL_PRIVATE_GROUP_SERVLET_MAPPING;
 
-	private static String _PRIVATE_USER_MAPPING =
+	private static String _PRIVATE_USER_SERVLET_MAPPING =
 		PropsValues.LAYOUT_FRIENDLY_URL_PRIVATE_USER_SERVLET_MAPPING;
 
-	private static String _PUBLIC_GROUP_MAPPING =
+	private static String _PUBLIC_GROUP_SERVLET_MAPPING =
 		PropsValues.LAYOUT_FRIENDLY_URL_PUBLIC_SERVLET_MAPPING;
 
 	private ServletContext _servletContext;
