@@ -2,18 +2,15 @@
 
 /* ---------- Wrapper ---------- */
 
-#content-wrapper #layout-grid {
-}
-
-#layout-grid .lfr-column {
-}
-
 .lfr-grid {
+}
+
+.lfr-grid .lfr-column {
 }
 
 /* ---------- Column widths ---------- */
 
-#layout-grid.dragging .lfr-column {
+.lfr-grid.dragging .lfr-column {
 }
 
 .lfr-column.ten {

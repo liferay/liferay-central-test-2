@@ -35,10 +35,10 @@
 
 /* ---------- Dragging/sorting indicators ---------- */
 
-#content-wrapper #layout-grid.dragging {
+.lfr-grid.dragging {
 }
 
-#content-wrapper #layout-grid.dragging .lfr-column {
+.lfr-grid.dragging .lfr-column {
 }
 
 .drop-area {

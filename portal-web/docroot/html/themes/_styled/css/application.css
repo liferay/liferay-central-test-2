@@ -53,11 +53,11 @@
 
 /* ---------- Dragging/sorting indicators ---------- */
 
-#content-wrapper #layout-grid.dragging {
+.lfr-grid.dragging {
 	border-collapse: separate;
 }
 
-#content-wrapper #layout-grid.dragging .lfr-column {
+.lfr-grid.dragging .lfr-column {
 	border: 3px double #828F95;
 }
 

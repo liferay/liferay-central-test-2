@@ -2,22 +2,18 @@
 
 /* ---------- Wrapper ---------- */
 
-#content-wrapper #layout-grid {
+.lfr-grid {
 	border-collapse: collapse;
 	width: 100%;
 }
 
-#layout-grid .lfr-column {
+.lfr-grid .lfr-column {
 	padding: 5px;
-}
-
-.lfr-grid {
-	width: 100%;
 }
 
 /* ---------- Column widths ---------- */
 
-#layout-grid.dragging .lfr-column {
+.lfr-grid.dragging .lfr-column {
 	height: 100px;
 	min-height: 100px;
 }

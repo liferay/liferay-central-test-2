@@ -230,7 +230,7 @@
 								boxSelector: '.portlet-boundary:not([isStatic])',
 								columnSelector: 'div.lfr-portlet-column',
 								clonePortlet: false,
-								grid: '#layout-grid',
+								grid: '#layout-grid, .lfr-grid',
 								handleSelector: '.portlet-title, .portlet-title-default',
 								placeHolderClass: 'portlet-sort-helper'
 							};
