@@ -28,6 +28,7 @@
 String strutsAction = ParamUtil.getString(request, "struts_action");
 
 RoleSearch searchContainer = (RoleSearch)request.getAttribute("liferay-ui:search:searchContainer");
+boolean showAddButton = GetterUtil.getBoolean((String)request.getAttribute("liferay-ui:search:showAddButton"));
 
 RoleDisplayTerms displayTerms = (RoleDisplayTerms)searchContainer.getDisplayTerms();
 %>
@@ -43,7 +44,7 @@ RoleDisplayTerms displayTerms = (RoleDisplayTerms)searchContainer.getDisplayTerm
 <div>
 	<input type="submit" value="<liferay-ui:message key="search-roles" />" />
 
-	<c:if test='<%= portletName.equals(PortletKeys.ENTERPRISE_ADMIN) && (Validator.isNull(strutsAction) || strutsAction.equals("/enterprise_admin/view")) && PortalPermissionUtil.contains(permissionChecker, ActionKeys.ADD_ROLE) %>'>
+	<c:if test='<%= showAddButton && (Validator.isNull(strutsAction) || strutsAction.equals("/enterprise_admin/view")) && PortalPermissionUtil.contains(permissionChecker, ActionKeys.ADD_ROLE) %>'>
 		<input type="button" value="<liferay-ui:message key="add-role" />" onClick="<portlet:namespace />addRole();" />
 	</c:if>
 </div>

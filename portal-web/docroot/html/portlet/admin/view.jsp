@@ -92,6 +92,9 @@
 					installPluginsURL.setParameter("tabs1", tabs1);
 					installPluginsURL.setParameter("tabs2", tabs2);
 				}
+
+				boolean showEditPluginLink = false;
+				boolean showSearchIndex = true;
 				%>
 
 				<%@ include file="/html/portlet/enterprise_admin/plugins.jspf" %>

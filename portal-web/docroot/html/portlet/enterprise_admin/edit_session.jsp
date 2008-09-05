@@ -40,11 +40,10 @@ userTracker = userTracker.toEscapedModel();
 <input name="<portlet:namespace />redirect" type="hidden" value="<%= HtmlUtil.escape(redirect) %>" />
 <input name="<portlet:namespace />sessionId" type="hidden" value="<%= HtmlUtil.escape(sessionId) %>" />
 
-<liferay-util:include page="/html/portlet/enterprise_admin/tabs1.jsp">
-	<liferay-util:param name="tabs1" value="monitoring" />
-</liferay-util:include>
-
-<liferay-ui:tabs names="live-session" />
+<liferay-ui:tabs
+	names="live-session"
+	backURL="<%= redirect %>"
+/>
 
 <c:choose>
 	<c:when test="<%= userTracker == null %>">

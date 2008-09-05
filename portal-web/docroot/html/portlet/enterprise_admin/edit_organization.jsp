@@ -63,10 +63,6 @@ if ((organizationId <= 0) && (PortalPermissionUtil.contains(permissionChecker, A
 	backURL="<%= backURL %>"
 />
 
-<liferay-util:include page="/html/portlet/my_account/tabs1.jsp">
-	<liferay-util:param name="tabs1" value="profile" />
-</liferay-util:include>
-
 <%@ include file="/html/portlet/enterprise_admin/edit_organization_profile.jspf" %>
 
 <c:if test="<%= organization != null %>">

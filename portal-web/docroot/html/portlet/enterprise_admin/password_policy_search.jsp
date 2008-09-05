@@ -41,9 +41,7 @@ PasswordPolicyDisplayTerms displayTerms = (PasswordPolicyDisplayTerms)searchCont
 <div>
 	<input type="submit" value="<liferay-ui:message key="search-password-policies" />" />
 
-	<c:if test="<%= portletName.equals(PortletKeys.ENTERPRISE_ADMIN) %>">
-		<input type="button" value="<liferay-ui:message key="add-password-policy" />" onClick="<portlet:namespace />addPasswordPolicy();" />
-	</c:if>
+	<input type="button" value="<liferay-ui:message key="add-password-policy" />" onClick="<portlet:namespace />addPasswordPolicy();" />
 </div>
 
 <script type="text/javascript">

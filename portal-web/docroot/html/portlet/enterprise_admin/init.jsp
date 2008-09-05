@@ -120,7 +120,45 @@
 <%@ page import="javax.naming.ldap.LdapContext" %>
 
 <%
-String tabs1 = ParamUtil.getString(request, "tabs1", "users");
+String tabs1 = ParamUtil.getString(request, "tabs1");
+boolean showTabs = false;
+
+if (portletName.equals(PortletKeys.ENTERPRISE_USERS_ADMIN)) {
+	tabs1 = "users";
+}
+else if (portletName.equals(PortletKeys.ENTERPRISE_ORGANIZATIONS_ADMIN) && !tabs1.equals("users")) {
+	tabs1 = "organizations";
+}
+else if (portletName.equals(PortletKeys.ENTERPRISE_USER_GROUPS_ADMIN) && !tabs1.equals("users")) {
+	tabs1 = "user-groups";
+}
+else if (portletName.equals(PortletKeys.ENTERPRISE_ROLES_ADMIN) && !tabs1.equals("users")) {
+	tabs1 = "roles";
+}
+else if (portletName.equals(PortletKeys.ENTERPRISE_PASSWORD_POLICIES_ADMIN)) {
+	tabs1 = "password-policies";
+}
+else if (portletName.equals(PortletKeys.ENTERPRISE_SETTINGS)) {
+	tabs1 = "settings";
+}
+else if (portletName.equals(PortletKeys.ENTERPRISE_MONITORING)) {
+	tabs1 = "monitoring";
+}
+else if (portletName.equals(PortletKeys.ENTERPRISE_PLUGINS)) {
+	tabs1 = "plugins";
+}
+else if (portletName.equals(PortletKeys.ENTERPRISE_ADMIN)) {
+	showTabs = true;
+}
+else {
+	if (tabs1.equals("roles") || tabs1.equals("password-policies") || tabs1.equals("settings") || tabs1.equals("monitoring") || tabs1.equals("plugins")) {
+		tabs1 = "users";
+	}
+}
+
+if (Validator.isNull(tabs1)) {
+	tabs1 = "users";
+}
 
 DateFormat dateFormatDateTime = DateFormats.getDateTime(locale, timeZone);
 %>

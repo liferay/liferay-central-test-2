@@ -32,11 +32,10 @@ String redirect = ParamUtil.getString(request, "redirect");
 <form action="<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/enterprise_admin/edit_company_logo" /></portlet:actionURL>" enctype="multipart/form-data" method="post" name="<portlet:namespace />fm" onSubmit="submitForm(this); return false;">
 <input name="<portlet:namespace />redirect" type="hidden" value="<%= HtmlUtil.escape(redirect) %>" />
 
-<liferay-util:include page="/html/portlet/enterprise_admin/tabs1.jsp">
-	<liferay-util:param name="tabs1" value="settings" />
-</liferay-util:include>
-
-<liferay-ui:tabs names="enterprise-logo" />
+<liferay-ui:tabs
+	names="enterprise-logo"
+	backURL="<%= redirect %>"
+/>
 
 <liferay-ui:error exception="<%= UploadException.class %>" message="an-unexpected-error-occurred-while-uploading-your-file" />
 

@@ -41,6 +41,8 @@ public class SearchFormTag extends IncludeTag {
 
 		request.setAttribute(
 			"liferay-ui:search:searchContainer", _searchContainer);
+		request.setAttribute(
+			"liferay-ui:search:showAddButton", String.valueOf(_showAddButton));
 
 		return EVAL_BODY_BUFFERED;
 	}
@@ -49,6 +51,11 @@ public class SearchFormTag extends IncludeTag {
 		_searchContainer = searchContainer;
 	}
 
+	public void setShowAddButton(boolean showAddButton) {
+		_showAddButton = showAddButton;
+	}
+
 	private SearchContainer<?> _searchContainer;
+	private boolean _showAddButton = false;
 
 }

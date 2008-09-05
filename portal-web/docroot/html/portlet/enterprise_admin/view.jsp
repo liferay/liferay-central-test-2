@@ -219,7 +219,9 @@ request.setAttribute("view.jsp-portletURLString", portletURLString);
 <input name="<portlet:namespace />tabs3" type="hidden" value="<%= HtmlUtil.escape(tabs3) %>" />
 <input name="<portlet:namespace />redirect" type="hidden" value="<%= portletURLString %>" />
 
-<liferay-util:include page="/html/portlet/enterprise_admin/tabs1.jsp" />
+<c:if test="<%= showTabs %>">
+	<liferay-util:include page="/html/portlet/enterprise_admin/tabs1.jsp" />
+</c:if>
 
 <c:choose>
 	<c:when test='<%= tabs1.equals("users") %>'>
@@ -250,6 +252,7 @@ request.setAttribute("view.jsp-portletURLString", portletURLString);
 		<liferay-ui:search-form
 			page="/html/portlet/enterprise_admin/user_group_search.jsp"
 			searchContainer="<%= searchContainer %>"
+			showAddButton="<%= true %>"
 		/>
 
 		<c:if test="<%= windowState.equals(WindowState.MAXIMIZED) %>">
@@ -329,6 +332,7 @@ request.setAttribute("view.jsp-portletURLString", portletURLString);
 		<liferay-ui:search-form
 			page="/html/portlet/enterprise_admin/role_search.jsp"
 			searchContainer="<%= searchContainer %>"
+			showAddButton="<%= true %>"
 		/>
 
 		<c:if test="<%= windowState.equals(WindowState.MAXIMIZED) %>">
@@ -586,6 +590,9 @@ request.setAttribute("view.jsp-portletURLString", portletURLString);
 		boolean installable = false;
 
 		PortletURL installPluginsURL = null;
+
+		boolean showEditPluginLink = true;
+		boolean showSearchIndex = false;
 		%>
 
 		<%@ include file="/html/portlet/enterprise_admin/plugins.jspf" %>

@@ -360,6 +360,7 @@ portletURL.setParameter("roleId", String.valueOf(role.getRoleId()));
 		<liferay-ui:search-form
 			page="/html/portlet/enterprise_admin/user_group_search.jsp"
 			searchContainer="<%= searchContainer %>"
+			showAddButton="<%= true %>"
 		/>
 
 		<%

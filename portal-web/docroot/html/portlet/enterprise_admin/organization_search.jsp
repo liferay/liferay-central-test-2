@@ -28,6 +28,7 @@
 themeDisplay.setIncludeServiceJs(true);
 
 OrganizationSearch searchContainer = (OrganizationSearch)request.getAttribute("liferay-ui:search:searchContainer");
+boolean showAddButton = GetterUtil.getBoolean((String)request.getAttribute("liferay-ui:search:showAddButton"));
 
 OrganizationDisplayTerms displayTerms = (OrganizationDisplayTerms)searchContainer.getDisplayTerms();
 %>
@@ -101,15 +102,7 @@ OrganizationDisplayTerms displayTerms = (OrganizationDisplayTerms)searchContaine
 <div>
 	<input type="submit" value="<liferay-ui:message key="search-organizations" />" />
 
-	<%
-	boolean showButtons = false;
-
-	if (portletName.equals(PortletKeys.ENTERPRISE_ADMIN) && !windowState.equals(LiferayWindowState.POP_UP)) {
-		showButtons = true;
-	}
-	%>
-
-	<c:if test="<%= showButtons %>">
+	<c:if test="<%= showAddButton %>">
 		<c:if test="<%= PortalPermissionUtil.contains(permissionChecker, ActionKeys.ADD_ORGANIZATION) %>">
 			<input type="button" value="<liferay-ui:message key="add-organization" />" onClick="<portlet:namespace />addOrganization();" />
 		</c:if>

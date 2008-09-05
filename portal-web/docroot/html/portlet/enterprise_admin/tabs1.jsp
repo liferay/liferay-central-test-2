@@ -35,7 +35,7 @@ String tabs1Names = "users,organizations,user-groups";
 
 String tabs1Values = tabs1Names;
 
-if (portletName.equals(PortletKeys.ENTERPRISE_ADMIN)) {
+if (permissionChecker.isCompanyAdmin()) {
 	if (windowState.equals(WindowState.MAXIMIZED)) {
 		tabs1Names += ",roles,password-policies,settings,monitoring,plugins";
 	}

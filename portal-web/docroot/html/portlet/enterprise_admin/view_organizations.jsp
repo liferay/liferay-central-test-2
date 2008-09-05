@@ -33,23 +33,15 @@ PortletURL portletURL = (PortletURL)request.getAttribute("view.jsp-portletURL");
 <liferay-ui:error exception="<%= RequiredOrganizationException.class %>" message="you-cannot-delete-organizations-that-have-suborganizations-or-users" />
 
 <%
-boolean showButtons = false;
-
-if (portletName.equals(PortletKeys.ENTERPRISE_ADMIN)) {
-	showButtons = true;
-}
-
 OrganizationSearch searchContainer = new OrganizationSearch(renderRequest, portletURL);
 
 List headerNames = searchContainer.getHeaderNames();
 
 headerNames.add(StringPool.BLANK);
 
-if (showButtons) {
-	RowChecker rowChecker = new RowChecker(renderResponse);
+RowChecker rowChecker = new RowChecker(renderResponse);
 
-	searchContainer.setRowChecker(rowChecker);
-}
+searchContainer.setRowChecker(rowChecker);
 
 portletURL.setParameter(searchContainer.getCurParam(), String.valueOf(searchContainer.getCurValue()));
 %>
@@ -59,6 +51,7 @@ portletURL.setParameter(searchContainer.getCurParam(), String.valueOf(searchCont
 <liferay-ui:search-form
 		page="/html/portlet/enterprise_admin/organization_search.jsp"
 		searchContainer="<%= searchContainer %>"
+		showAddButton="<%= true %>"
 />
 
 <c:if test="<%= windowState.equals(WindowState.MAXIMIZED) %>">
@@ -107,11 +100,9 @@ portletURL.setParameter(searchContainer.getCurParam(), String.valueOf(searchCont
 
 	<div class="separator"><!-- --></div>
 
-	<c:if test="<%= showButtons %>">
-		<input type="button" value="<liferay-ui:message key="delete" />" onClick="<portlet:namespace />deleteOrganizations();" />
+	<input type="button" value="<liferay-ui:message key="delete" />" onClick="<portlet:namespace />deleteOrganizations();" />
 
-		<br /><br />
-	</c:if>
+	<br /><br />
 
 	<%
 	List resultRows = searchContainer.getResultRows();

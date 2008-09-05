@@ -75,7 +75,7 @@ for (int i = 0; i < results.size(); i++) {
 
 	StringBuilder sb = new StringBuilder();
 
-	if (portletName.equals(PortletKeys.ENTERPRISE_ADMIN)) {
+	if (showEditPluginLink) {
 		sb.append("<a href=\"");
 		sb.append(rowURL.toString());
 		sb.append("\">");
@@ -88,7 +88,7 @@ for (int i = 0; i < results.size(); i++) {
 	sb.append(theme2.getName());
 	sb.append("</b>");
 
-	if (portletName.equals(PortletKeys.ENTERPRISE_ADMIN)) {
+	if (showEditPluginLink) {
 		sb.append("</a>");
 	}
 
