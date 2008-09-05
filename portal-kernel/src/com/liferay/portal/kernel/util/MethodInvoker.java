@@ -125,7 +125,7 @@ public class MethodInvoker {
 		try {
 			MethodKey methodKey = new MethodKey(
 				methodWrapper.getClassName(), methodWrapper.getMethodName(),
-				parameterTypes.toArray(new Class[0]));
+				parameterTypes.toArray(new Class[parameterTypes.size()]));
 
 			method = MethodCache.get(methodKey);
 		}

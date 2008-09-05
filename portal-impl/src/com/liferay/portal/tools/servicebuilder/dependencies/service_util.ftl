@@ -1,5 +1,8 @@
 package ${packagePath}.service;
 
+import com.liferay.portal.kernel.bean.PortletBeanLocatorUtil;
+import com.liferay.portal.kernel.util.ClassLoaderProxy;
+
 /**
  * <a href="${entity.name}${sessionTypeName}ServiceUtil.java.html"><b><i>View Source</i></b></a>
  *
@@ -54,7 +57,7 @@ public class ${entity.name}${sessionTypeName}ServiceUtil {
 					return
 				</#if>
 
-				_service.${method.name}(
+				getService().${method.name}(
 
 				<#list method.parameters as parameter>
 					${parameter.name}
@@ -70,6 +73,19 @@ public class ${entity.name}${sessionTypeName}ServiceUtil {
 	</#list>
 
 	public static ${entity.name}${sessionTypeName}Service getService() {
+		if (_service == null) {
+			<#if pluginName != "">
+				Object obj = PortletBeanLocatorUtil.locate("${pluginName}", ${entity.name}${sessionTypeName}ServiceUtil.class.getName());
+				ClassLoader portletClassLoader = (ClassLoader)PortletBeanLocatorUtil.locate("chat-portlet", "portletClassLoader");
+
+				ClassLoaderProxy classLoaderProxy = new ClassLoaderProxy(obj, portletClassLoader);
+
+				_service = new ${entity.name}${sessionTypeName}ServiceClp(classLoaderProxy);
+			<#else>
+				throw new RuntimeException("${entity.name}${sessionTypeName}Service is not set");
+			</#if>
+		}
+
 		return _service;
 	}
 

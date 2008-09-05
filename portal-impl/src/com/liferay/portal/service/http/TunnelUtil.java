@@ -66,8 +66,8 @@ public class TunnelUtil {
 		Object returnObj = null;
 
 		try {
-			ObjectInputStream ois =
-				new ObjectInputStream(urlc.getInputStream());
+			ObjectInputStream ois = new ObjectInputStream(
+				urlc.getInputStream());
 
 			returnObj = ois.readObject();
 

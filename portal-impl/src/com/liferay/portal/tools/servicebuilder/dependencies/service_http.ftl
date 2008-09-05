@@ -149,7 +149,7 @@ public class ${entity.name}ServiceHttp {
 
 						TunnelUtil.invoke(httpPrincipal, methodWrapper);
 					}
-					catch(Exception e) {
+					catch (Exception e) {
 						<#list method.exceptions as exception>
 							if (e instanceof ${exception.value}) {
 								throw (${exception.value})e;

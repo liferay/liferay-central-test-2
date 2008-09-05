@@ -63,6 +63,10 @@ import ${beanLocatorUtil};
 		return ${entity.varName}Persistence.update(${entity.varName}, false);
 	}
 
+	public ${entity.name} create${entity.name}(${entity.PKClassName} ${entity.PKVarName}) {
+		return ${entity.varName}Persistence.create(${entity.PKVarName});
+	}
+
 	public void delete${entity.name}(${entity.PKClassName} ${entity.PKVarName}) throws PortalException, SystemException {
 		${entity.varName}Persistence.remove(${entity.PKVarName});
 	}

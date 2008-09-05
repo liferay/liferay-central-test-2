@@ -118,6 +118,7 @@ public class ServiceBuilder {
 			boolean autoNamespaceTables = false;
 			String beanLocatorUtil = "com.liferay.portal.kernel.bean.BeanLocatorUtil";
 			String propsUtil = "com.liferay.portal.util.PropsUtil";
+			String pluginName = "";
 			String testDir = "";
 
 			serviceBuilder = new ServiceBuilder(
@@ -126,7 +127,8 @@ public class ServiceBuilder {
 				springInfrastructureFileName, apiDir, implDir, jsonFileName,
 				remotingFileName, sqlDir, sqlFileName, sqlIndexesFileName,
 				sqlIndexesPropertiesFileName, sqlSequencesFileName,
-				autoNamespaceTables, beanLocatorUtil, propsUtil, testDir);
+				autoNamespaceTables, beanLocatorUtil, propsUtil, pluginName,
+				testDir);
 		}
 		else if (args.length == 0) {
 			String fileName = System.getProperty("service.input.file");
@@ -148,6 +150,7 @@ public class ServiceBuilder {
 			boolean autoNamespaceTables = GetterUtil.getBoolean(System.getProperty("service.auto.namespace.tables"));
 			String beanLocatorUtil = System.getProperty("service.bean.locator.util");
 			String propsUtil = System.getProperty("service.props.util");
+			String pluginName = System.getProperty("service.plugin.name");
 			String testDir = System.getProperty("service.test.dir");
 
 			serviceBuilder = new ServiceBuilder(
@@ -156,7 +159,8 @@ public class ServiceBuilder {
 				springInfrastructureFileName, apiDir, implDir, jsonFileName,
 				remotingFileName, sqlDir, sqlFileName, sqlIndexesFileName,
 				sqlIndexesPropertiesFileName, sqlSequencesFileName,
-				autoNamespaceTables, beanLocatorUtil, propsUtil, testDir);
+				autoNamespaceTables, beanLocatorUtil, propsUtil, pluginName,
+				testDir);
 		}
 
 		if (serviceBuilder == null) {
@@ -379,7 +383,8 @@ public class ServiceBuilder {
 		String remotingFileName, String sqlDir, String sqlFileName,
 		String sqlIndexesFileName, String sqlIndexesPropertiesFileName,
 		String sqlSequencesFileName, boolean autoNamespaceTables,
-		String beanLocatorUtil, String propsUtil, String testDir) {
+		String beanLocatorUtil, String propsUtil, String pluginName,
+		String testDir) {
 
 		new ServiceBuilder(
 			fileName, hbmFileName, modelHintsFileName, springFileName,
@@ -387,7 +392,8 @@ public class ServiceBuilder {
 			springInfrastructureFileName, apiDir, implDir, jsonFileName,
 			remotingFileName, sqlDir, sqlFileName, sqlIndexesFileName,
 			sqlIndexesPropertiesFileName, sqlSequencesFileName,
-			autoNamespaceTables, beanLocatorUtil, propsUtil, testDir, true);
+			autoNamespaceTables, beanLocatorUtil, propsUtil, pluginName,
+			testDir, true);
 	}
 
 	public ServiceBuilder(
@@ -398,8 +404,8 @@ public class ServiceBuilder {
 		String remotingFileName, String sqlDir, String sqlFileName,
 		String sqlIndexesFileName, String sqlIndexesPropertiesFileName,
 		String sqlSequencesFileName, boolean autoNamespaceTables,
-		String beanLocatorUtil, String propsUtil, String testDir,
-		boolean build) {
+		String beanLocatorUtil, String propsUtil, String pluginName,
+		String testDir, boolean build) {
 
 		_tplBadColumnNames = _getTplProperty(
 			"bad_column_names", _tplBadColumnNames);
@@ -417,6 +423,7 @@ public class ServiceBuilder {
 		_tplJsonJs = _getTplProperty("json_js", _tplJsonJs);
 		_tplJsonJsMethod = _getTplProperty("json_js_method", _tplJsonJsMethod);
 		_tplModel = _getTplProperty("model", _tplModel);
+		_tplModelClp = _getTplProperty("model", _tplModelClp);
 		_tplModelHintsXml = _getTplProperty(
 			"model_hints_xml", _tplModelHintsXml);
 		_tplModelImpl = _getTplProperty("model_impl", _tplModelImpl);
@@ -431,6 +438,7 @@ public class ServiceBuilder {
 		_tplService = _getTplProperty("service", _tplService);
 		_tplServiceBaseImpl = _getTplProperty(
 			"service_base_impl", _tplServiceBaseImpl);
+		_tplServiceClp = _getTplProperty("service_clp", _tplServiceClp);
 		_tplServiceFactory = _getTplProperty(
 			"service_factory", _tplServiceFactory);
 		_tplServiceHttp = _getTplProperty("service_http", _tplServiceHttp);
@@ -473,6 +481,7 @@ public class ServiceBuilder {
 			_beanLocatorUtilShortName = _beanLocatorUtil.substring(
 				_beanLocatorUtil.lastIndexOf(".") + 1);
 			_propsUtil = propsUtil;
+			_pluginName = GetterUtil.getString(pluginName);
 			_testDir = testDir;
 
 			Document doc = SAXReaderUtil.read(new File(fileName), true);
@@ -916,6 +925,8 @@ public class ServiceBuilder {
 
 							_createModelSoap(entity);
 
+							_createModelClp(entity);
+
 							_createPool(entity);
 
 							if (entity.getPKList().size() > 1) {
@@ -932,6 +943,8 @@ public class ServiceBuilder {
 							_createService(entity, _SESSION_TYPE_LOCAL);
 							_createServiceFactory(entity, _SESSION_TYPE_LOCAL);
 							_createServiceUtil(entity, _SESSION_TYPE_LOCAL);
+
+							_createServiceClp(entity, _SESSION_TYPE_LOCAL);
 						}
 
 						if (entity.hasRemoteService()) {
@@ -941,6 +954,8 @@ public class ServiceBuilder {
 							_createService(entity, _SESSION_TYPE_REMOTE);
 							_createServiceFactory(entity, _SESSION_TYPE_REMOTE);
 							_createServiceUtil(entity, _SESSION_TYPE_REMOTE);
+
+							_createServiceClp(entity, _SESSION_TYPE_REMOTE);
 
 							if (Validator.isNotNull(_jsonFileName)) {
 								_createServiceHttp(entity);
@@ -1102,8 +1117,8 @@ public class ServiceBuilder {
 				_springInfrastructureFileName, _apiDir, _implDir, _jsonFileName,
 				_remotingFileName, _sqlDir, _sqlFileName, _sqlIndexesFileName,
 				_sqlIndexesPropertiesFileName, _sqlSequencesFileName,
-				_autoNamespaceTables, _beanLocatorUtil, _propsUtil, _testDir,
-				false);
+				_autoNamespaceTables, _beanLocatorUtil, _propsUtil, _pluginName,
+				_testDir, false);
 
 			entity = serviceBuilder.getEntity(refEntity);
 
@@ -1810,6 +1825,27 @@ public class ServiceBuilder {
 		}
 	}
 
+	private void _createModelClp(Entity entity) throws Exception {
+		if (Validator.isNull(_pluginName)) {
+			return;
+		}
+
+		Map<String, Object> context = _getContext();
+
+		context.put("entity", entity);
+
+		// Content
+
+		String content = _processTemplate(_tplModelClp, context);
+
+		// Write file
+
+		File modelFile = new File(
+			_serviceOutputPath + "/model/" + entity.getName() + "Clp.java");
+
+		writeFile(modelFile, content, _author);
+	}
+
 	private void _createModelHintsXML() throws Exception {
 		Map<String, Object> context = _getContext();
 
@@ -2034,7 +2070,7 @@ public class ServiceBuilder {
 	}
 
 	private void _createProps() throws Exception {
-		if (_propsUtil.equals("com.liferay.portal.util.PropsUtil")) {
+		if (Validator.isNull(_pluginName)) {
 			return;
 		}
 
@@ -2234,10 +2270,40 @@ public class ServiceBuilder {
 		writeFile(ejbFile, content, _author);
 	}
 
+	private void _createServiceClp(Entity entity, int sessionType)
+		throws Exception {
+
+		if (Validator.isNull(_pluginName)) {
+			return;
+		}
+
+		JavaClass javaClass = _getJavaClass(
+			_serviceOutputPath + "/service/" + entity.getName() +
+				_getSessionTypeName(sessionType) + "Service.java");
+
+		Map<String, Object> context = _getContext();
+
+		context.put("entity", entity);
+		context.put("methods", _getMethods(javaClass));
+		context.put("sessionTypeName", _getSessionTypeName(sessionType));
+
+		// Content
+
+		String content = _processTemplate(_tplServiceClp, context);
+
+		// Write file
+
+		File ejbFile = new File(
+			_serviceOutputPath + "/service/" + entity.getName() +
+				_getSessionTypeName(sessionType) + "ServiceClp.java");
+
+		writeFile(ejbFile, content, _author);
+	}
+
 	private void _createServiceFactory(Entity entity, int sessionType)
 		throws Exception {
 
-		if (!_propsUtil.equals("com.liferay.portal.util.PropsUtil")) {
+		if (Validator.isNotNull(_pluginName)) {
 			FileUtil.delete(
 				_serviceOutputPath + "/service/" + entity.getName() +
 					_getSessionTypeName(sessionType) + "ServiceFactory.java");
@@ -2467,7 +2533,7 @@ public class ServiceBuilder {
 
 		FileUtil.write(ejbFile, content, true);
 
-		if (!_propsUtil.equals("com.liferay.portal.util.PropsUtil")) {
+		if (Validator.isNotNull(_pluginName)) {
 			FileUtil.delete(
 				"docroot/WEB-INF/src/META-INF/data-source-spring.xml");
 			FileUtil.delete("docroot/WEB-INF/src/META-INF/misc-spring.xml");
@@ -3090,6 +3156,7 @@ public class ServiceBuilder {
 		context.put("outputPath", _outputPath);
 		context.put("serviceOutputPath", _serviceOutputPath);
 		context.put("packagePath", _packagePath);
+		context.put("pluginName", _pluginName);
 		context.put("serviceBuilder", this);
 
 		context.put("arrayUtil", ArrayUtil_IW.getInstance());
@@ -3448,6 +3515,7 @@ public class ServiceBuilder {
 	private String _tplJsonJs = _TPL_ROOT + "json_js.ftl";
 	private String _tplJsonJsMethod = _TPL_ROOT + "json_js_method.ftl";
 	private String _tplModel = _TPL_ROOT + "model.ftl";
+	private String _tplModelClp = _TPL_ROOT + "model_clp.ftl";
 	private String _tplModelHintsXml = _TPL_ROOT + "model_hints_xml.ftl";
 	private String _tplModelImpl = _TPL_ROOT + "model_impl.ftl";
 	private String _tplModelSoap = _TPL_ROOT + "model_soap.ftl";
@@ -3459,6 +3527,7 @@ public class ServiceBuilder {
 	private String _tplRemotingXml = _TPL_ROOT + "remoting_xml.ftl";
 	private String _tplService = _TPL_ROOT + "service.ftl";
 	private String _tplServiceBaseImpl = _TPL_ROOT + "service_base_impl.ftl";
+	private String _tplServiceClp = _TPL_ROOT + "service_clp.ftl";
 	private String _tplServiceFactory = _TPL_ROOT + "service_factory.ftl";
 	private String _tplServiceHttp = _TPL_ROOT + "service_http.ftl";
 	private String _tplServiceImpl = _TPL_ROOT + "service_impl.ftl";
@@ -3494,6 +3563,7 @@ public class ServiceBuilder {
 	private String _beanLocatorUtil;
 	private String _beanLocatorUtilShortName;
 	private String _propsUtil;
+	private String _pluginName;
 	private String _testDir;
 	private String _author;
 	private String _portletName = StringPool.BLANK;
