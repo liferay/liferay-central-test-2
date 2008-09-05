@@ -510,6 +510,7 @@ public class PortalImpl implements Portal {
 		Company company = (Company)request.getAttribute(WebKeys.COMPANY);
 
 		if (company == null) {
+
 			// LEP-5994
 
 			try {
