@@ -110,12 +110,15 @@ for (int i = 0; i < curActions.size(); i++) {
 					if ((role.getType() == RoleImpl.TYPE_ORGANIZATION) && Validator.isNotNull(curModelResource) && curModelResource.equals(Organization.class.getName())) {
 						disabled = false;
 					}
+
+					// See LEP-7319
+					String onClickValue = "document.getElementById('" + renderResponse.getNamespace() + "scope" + target + "').value = (this.checked ? '" + ResourceConstants.SCOPE_GROUP + "' : '');";
 					%>
 
 					<liferay-ui:input-checkbox
 						param='<%= "scope" + target %>'
 						defaultValue="<%= hasGroupTemplateScope %>"
-						onClick='<%= "document.getElementById('" + renderResponse.getNamespace() + "scope" + target + "').value = (this.checked ? '" + ResourceConstants.SCOPE_GROUP + "' : '');" %>'
+						onClick='<%= onClickValue %>'
 						disabled="<%= disabled %>"
 					/>
 
