@@ -209,7 +209,7 @@ boolean allowTrackbacks = BeanParamUtil.getBoolean(entry, request, "allowTrackba
 
 <tr>
 	<td>
-		<liferay-ui:message key="title" />
+		<label><liferay-ui:message key="title" /></label>
 	</td>
 	<td>
 		<liferay-ui:input-field model="<%= BlogsEntry.class %>" bean="<%= entry %>" field="title" />
@@ -217,7 +217,7 @@ boolean allowTrackbacks = BeanParamUtil.getBoolean(entry, request, "allowTrackba
 </tr>
 <tr>
 	<td>
-		<liferay-ui:message key="display-date" />
+		<label><liferay-ui:message key="display-date" /></label>
 	</td>
 	<td>
 		<liferay-ui:input-field model="<%= BlogsEntry.class %>" bean="<%= entry %>" field="displayDate" defaultValue="<%= displayDate %>" />
@@ -230,7 +230,7 @@ boolean allowTrackbacks = BeanParamUtil.getBoolean(entry, request, "allowTrackba
 </tr>
 <tr>
 	<td>
-		<liferay-ui:message key="content" />
+		<label><liferay-ui:message key="content" /></label>
 	</td>
 	<td>
 		<liferay-ui:input-editor editorImpl="<%= EDITOR_WYSIWYG_IMPL_KEY %>" />
@@ -245,7 +245,7 @@ boolean allowTrackbacks = BeanParamUtil.getBoolean(entry, request, "allowTrackba
 </tr>
 <tr>
 	<td>
-		<liferay-ui:message key="allow-incoming-trackbacks" />
+		<label><liferay-ui:message key="allow-incoming-trackbacks" /></label>
 	</td>
 	<td>
 		<liferay-ui:input-checkbox param="allowTrackbacks" defaultValue="<%= allowTrackbacks %>" />
@@ -258,7 +258,7 @@ boolean allowTrackbacks = BeanParamUtil.getBoolean(entry, request, "allowTrackba
 </tr>
 <tr>
 	<td>
-		<liferay-ui:message key="trackbacks-to-send" />
+		<label><liferay-ui:message key="trackbacks-to-send" /></label>
 	</td>
 	<td>
 		<liferay-ui:input-field model="<%= BlogsEntry.class %>" bean="<%= entry %>" field="trackbacks" />
@@ -298,7 +298,7 @@ boolean allowTrackbacks = BeanParamUtil.getBoolean(entry, request, "allowTrackba
 </tr>
 <tr>
 	<td>
-		<liferay-ui:message key="tags" />
+		<label><liferay-ui:message key="tags" /></label>
 	</td>
 	<td>
 
@@ -327,7 +327,7 @@ boolean allowTrackbacks = BeanParamUtil.getBoolean(entry, request, "allowTrackba
 	</tr>
 	<tr>
 		<td>
-			<liferay-ui:message key="permissions" />
+			<label><liferay-ui:message key="permissions" /></label>
 		</td>
 		<td>
 			<liferay-ui:input-permissions

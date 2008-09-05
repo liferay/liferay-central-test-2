@@ -104,7 +104,7 @@ String emailPageUpdatedSignature = ParamUtil.getString(request, "emailPageUpdate
 		<table class="lfr-table">
 		<tr>
 			<td>
-				<liferay-ui:message key="name" />
+				<label><liferay-ui:message key="name" /></label>
 			</td>
 			<td>
 				<input class="lfr-input-text" name="<portlet:namespace />emailFromName" type="text" value="<%= emailFromName %>" />
@@ -112,7 +112,7 @@ String emailPageUpdatedSignature = ParamUtil.getString(request, "emailPageUpdate
 		</tr>
 		<tr>
 			<td>
-				<liferay-ui:message key="address" />
+				<label><liferay-ui:message key="address" /></label>
 			</td>
 			<td>
 				<input class="lfr-input-text" name="<portlet:namespace />emailFromAddress" type="text" value="<%= emailFromAddress %>" />
@@ -189,7 +189,7 @@ String emailPageUpdatedSignature = ParamUtil.getString(request, "emailPageUpdate
 		<table class="lfr-table">
 		<tr>
 			<td>
-				<liferay-ui:message key="enabled" />
+				<label><liferay-ui:message key="enabled" /></label>
 			</td>
 			<td>
 				<c:choose>
@@ -209,7 +209,7 @@ String emailPageUpdatedSignature = ParamUtil.getString(request, "emailPageUpdate
 		</tr>
 		<tr>
 			<td>
-				<liferay-ui:message key="subject-prefix" />
+				<label><liferay-ui:message key="subject-prefix" /></label>
 			</td>
 			<td>
 				<c:choose>
@@ -229,7 +229,7 @@ String emailPageUpdatedSignature = ParamUtil.getString(request, "emailPageUpdate
 		</tr>
 		<tr>
 			<td>
-				<liferay-ui:message key="body" />
+				<label><liferay-ui:message key="body" /></label>
 			</td>
 			<td>
 				<textarea class="lfr-textarea" name="<%= bodyEditorParam %>" wrap="soft"><%= bodyEditorBody %></textarea>
@@ -242,7 +242,7 @@ String emailPageUpdatedSignature = ParamUtil.getString(request, "emailPageUpdate
 		</tr>
 		<tr>
 			<td>
-				<liferay-ui:message key="signature" />
+				<label><liferay-ui:message key="signature" /></label>
 			</td>
 			<td>
 				<textarea class="lfr-textarea" name="<%= signatureEditorParam %>" wrap="soft"><%= signatureEditorBody %></textarea>
@@ -399,7 +399,7 @@ String emailPageUpdatedSignature = ParamUtil.getString(request, "emailPageUpdate
 		<table class="lfr-table">
 		<tr>
 			<td>
-				<liferay-ui:message key="enable-comments" />
+				<label><liferay-ui:message key="enable-comments" /></label>
 			</td>
 			<td>
 				<liferay-ui:input-checkbox param="enableComments" defaultValue="<%= enableComments %>" />
@@ -407,7 +407,7 @@ String emailPageUpdatedSignature = ParamUtil.getString(request, "emailPageUpdate
 		</tr>
 		<tr>
 			<td>
-				<liferay-ui:message key="enable-comment-ratings" />
+				<label><liferay-ui:message key="enable-comment-ratings" /></label>
 			</td>
 			<td>
 				<liferay-ui:input-checkbox param="enableCommentRatings" defaultValue="<%= enableCommentRatings %>" />
@@ -420,7 +420,7 @@ String emailPageUpdatedSignature = ParamUtil.getString(request, "emailPageUpdate
 		<table class="lfr-table">
 		<tr>
 			<td>
-				<liferay-ui:message key="visible-wikis" />
+				<label><liferay-ui:message key="visible-wikis" /></label>
 			</td>
 		</tr>
 		<tr>
@@ -488,7 +488,7 @@ String emailPageUpdatedSignature = ParamUtil.getString(request, "emailPageUpdate
 		<table class="lfr-table">
 		<tr>
 			<td>
-				<liferay-ui:message key="maximum-items-to-display" />
+				<label><liferay-ui:message key="maximum-items-to-display" /></label>
 			</td>
 			<td>
 				<select name="<portlet:namespace />rssDelta">
@@ -514,7 +514,7 @@ String emailPageUpdatedSignature = ParamUtil.getString(request, "emailPageUpdate
 		</tr>
 		<tr>
 			<td>
-				<liferay-ui:message key="display-style" />
+				<label><liferay-ui:message key="display-style" /></label>
 			</td>
 			<td>
 				<select name="<portlet:namespace />rssDisplayStyle">

@@ -232,7 +232,7 @@ portletURL.setParameter("fileShortcutId", String.valueOf(fileShortcutId));
 </tr>
 <tr>
 	<td>
-		<liferay-ui:message key="document" />
+		<label><liferay-ui:message key="document" /></label>
 	</td>
 	<td>
 
@@ -258,7 +258,7 @@ portletURL.setParameter("fileShortcutId", String.valueOf(fileShortcutId));
 	</tr>
 	<tr>
 		<td>
-			<liferay-ui:message key="permissions" />
+			<label><liferay-ui:message key="permissions" /></label>
 		</td>
 		<td>
 			<liferay-ui:input-permissions

@@ -329,7 +329,7 @@ int secondReminder = BeanParamUtil.getInteger(event, request, "secondReminder", 
 <table class="lfr-table">
 <tr>
 	<td>
-		<liferay-ui:message key="start-date" />
+		<label><liferay-ui:message key="start-date" /></label>
 	</td>
 	<td>
 		<liferay-ui:input-field model="<%= CalEvent.class %>" bean="<%= event %>" field="startDate" defaultValue="<%= startDate %>" />
@@ -337,7 +337,7 @@ int secondReminder = BeanParamUtil.getInteger(event, request, "secondReminder", 
 </tr>
 <tr>
 	<td>
-		<liferay-ui:message key="duration" />
+		<label><liferay-ui:message key="duration" /></label>
 	</td>
 	<td>
 		<select name="<portlet:namespace />durationHour">
@@ -385,7 +385,7 @@ int secondReminder = BeanParamUtil.getInteger(event, request, "secondReminder", 
 </tr>
 <tr>
 	<td>
-		<liferay-ui:message key="all-day-event" />
+		<label><liferay-ui:message key="all-day-event" /></label>
 	</td>
 	<td>
 		<liferay-ui:input-checkbox param="allDay" defaultValue="<%= event == null ? false : event.isAllDay() %>" />
@@ -393,7 +393,7 @@ int secondReminder = BeanParamUtil.getInteger(event, request, "secondReminder", 
 </tr>
 <tr>
 	<td>
-		<liferay-ui:message key="time-zone-sensitive" />
+		<label><liferay-ui:message key="time-zone-sensitive" /></label>
 	</td>
 	<td>
 		<liferay-ui:input-checkbox param="timeZoneSensitive" defaultValue="<%= event == null ? true : event.isTimeZoneSensitive() %>" />
@@ -406,7 +406,7 @@ int secondReminder = BeanParamUtil.getInteger(event, request, "secondReminder", 
 </tr>
 <tr>
 	<td>
-		<liferay-ui:message key="title" />
+		<label><liferay-ui:message key="title" /></label>
 	</td>
 	<td>
 		<liferay-ui:input-field model="<%= CalEvent.class %>" field="title" defaultValue="<%= event == null ? LanguageUtil.get(pageContext, "new-event") : event.getTitle() %>" />
@@ -414,7 +414,7 @@ int secondReminder = BeanParamUtil.getInteger(event, request, "secondReminder", 
 </tr>
 <tr>
 	<td>
-		<liferay-ui:message key="description" />
+		<label><liferay-ui:message key="description" /></label>
 	</td>
 	<td>
 		<liferay-ui:input-field model="<%= CalEvent.class %>" bean="<%= event %>" field="description" />
@@ -422,7 +422,7 @@ int secondReminder = BeanParamUtil.getInteger(event, request, "secondReminder", 
 </tr>
 <tr>
 	<td>
-		<liferay-ui:message key="type" />
+		<label><liferay-ui:message key="type" /></label>
 	</td>
 	<td>
 		<select name="<portlet:namespace />type">
@@ -449,7 +449,7 @@ int secondReminder = BeanParamUtil.getInteger(event, request, "secondReminder", 
 	</tr>
 	<tr>
 		<td>
-			<liferay-ui:message key="permissions" />
+			<label><liferay-ui:message key="permissions" /></label>
 		</td>
 		<td>
 			<liferay-ui:input-permissions
@@ -650,7 +650,7 @@ int secondReminder = BeanParamUtil.getInteger(event, request, "secondReminder", 
 </tr>
 <tr>
 	<td>
-		<liferay-ui:message key="end-date" />
+		<label><liferay-ui:message key="end-date" /></label>
 	</td>
 	<td valign="top">
 		<table class="lfr-table">
@@ -673,7 +673,7 @@ int secondReminder = BeanParamUtil.getInteger(event, request, "secondReminder", 
 
 <liferay-ui:tabs names="reminders" />
 
-<liferay-ui:message key="remind-me" />
+		<label><liferay-ui:message key="remind-me" /></label>
 
 <select name="<portlet:namespace />firstReminder">
 

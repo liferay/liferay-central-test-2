@@ -243,7 +243,7 @@ if (Validator.isNull(redirect)) {
 		<c:if test="<%= editTitle %>">
 			<tr>
 				<td>
-					<liferay-ui:message key="title" />
+					<label><liferay-ui:message key="title" /></label>
 				</td>
 				<td>
 					<input name="<portlet:namespace />title" size="30" type="text" value="<%= title %>" />
@@ -253,7 +253,7 @@ if (Validator.isNull(redirect)) {
 
 		<tr>
 			<td>
-				<liferay-ui:message key="format" />
+				<label><liferay-ui:message key="format" /></label>
 			</td>
 			<td>
 				<select name="<portlet:namespace />format" onChange="<portlet:namespace />changeFormat(this);">
@@ -331,7 +331,7 @@ if (Validator.isNull(redirect)) {
 
 	<tr>
 		<td>
-			<liferay-ui:message key="tags" />
+			<label><liferay-ui:message key="tags" /></label>
 		</td>
 		<td>
 
@@ -360,7 +360,7 @@ if (Validator.isNull(redirect)) {
 	</tr>
 	<tr>
 		<td>
-			<liferay-ui:message key="summary" />
+			<label><liferay-ui:message key="summary" /></label>
 		</td>
 		<td>
 			<input name="<portlet:namespace />summary" size="75" type="text" value="<%= summary %>" />

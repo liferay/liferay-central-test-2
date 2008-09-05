@@ -62,7 +62,7 @@ String friendlyURL = BeanParamUtil.getString(group, request, "friendlyURL");
 <c:if test="<%= group != null %>">
 	<tr>
 		<td>
-			<liferay-ui:message key="group-id" />
+			<label><liferay-ui:message key="group-id" /></label>
 		</td>
 		<td>
 			<%= groupId %>
@@ -72,7 +72,7 @@ String friendlyURL = BeanParamUtil.getString(group, request, "friendlyURL");
 
 <tr>
 	<td>
-		<liferay-ui:message key="name" />
+		<label><liferay-ui:message key="name" /></label>
 	</td>
 	<td>
 		<liferay-ui:input-field model="<%= Group.class %>" bean="<%= group %>" field="name" />
@@ -80,7 +80,7 @@ String friendlyURL = BeanParamUtil.getString(group, request, "friendlyURL");
 </tr>
 <tr>
 	<td>
-		<liferay-ui:message key="description" />
+		<label><liferay-ui:message key="description" /></label>
 	</td>
 	<td>
 		<liferay-ui:input-field model="<%= Group.class %>" bean="<%= group %>" field="description" />
@@ -88,7 +88,7 @@ String friendlyURL = BeanParamUtil.getString(group, request, "friendlyURL");
 </tr>
 <tr>
 	<td>
-		<liferay-ui:message key="type" />
+		<label><liferay-ui:message key="type" /></label>
 	</td>
 	<td>
 		<select name="<portlet:namespace />type">
@@ -100,7 +100,7 @@ String friendlyURL = BeanParamUtil.getString(group, request, "friendlyURL");
 </tr>
 <tr>
 	<td>
-		<liferay-ui:message key="active" />
+		<label><liferay-ui:message key="active" /></label>
 	</td>
 	<td>
 		<liferay-ui:input-field model="<%= Group.class %>" bean="<%= group %>" field="active" defaultValue="<%= Boolean.TRUE %>" />

@@ -68,7 +68,7 @@ String redirect = ParamUtil.getString(request, "redirect");
 <table class="lfr-table">
 <tr>
 	<td>
-		<liferay-ui:message key="classic" />
+		<label><liferay-ui:message key="classic" /></label>
 	</td>
 	<td>
 		<input <%= folderDisplayStyle.equals("classic") ? "checked" : "" %> name="<portlet:namespace />folderDisplayStyle" type="radio" value="classic" />
@@ -76,7 +76,7 @@ String redirect = ParamUtil.getString(request, "redirect");
 </tr>
 <tr>
 	<td>
-		<liferay-ui:message key="tree-view" />
+		<label><liferay-ui:message key="tree-view" /></label>
 	</td>
 	<td>
 		<input <%= folderDisplayStyle.equals("tree") ? "checked" : "" %> name="<portlet:namespace />folderDisplayStyle" type="radio" value="tree" />
@@ -91,7 +91,7 @@ String redirect = ParamUtil.getString(request, "redirect");
 <table class="lfr-table">
 <tr>
 	<td>
-		<liferay-ui:message key="root-folder" />
+		<label><liferay-ui:message key="root-folder" /></label>
 	</td>
 	<td>
 		<a href="<liferay-portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" portletName="<%= portletResource %>"><portlet:param name="struts_action" value='<%= strutsAction + "/view" %>' /><portlet:param name="folderId" value="<%= String.valueOf(rootFolderId) %>" /></liferay-portlet:renderURL>" id="<portlet:namespace />rootFolderName">
@@ -109,7 +109,7 @@ String redirect = ParamUtil.getString(request, "redirect");
 </tr>
 <tr>
 	<td>
-		<liferay-ui:message key="show-breadcrumbs" />
+		<label><liferay-ui:message key="show-breadcrumbs" /></label>
 	</td>
 	<td>
 		<liferay-ui:input-checkbox param="showBreadcrumbs" defaultValue="<%= showBreadcrumbs %>" />
@@ -117,7 +117,7 @@ String redirect = ParamUtil.getString(request, "redirect");
 </tr>
 <tr>
 	<td>
-		<liferay-ui:message key="show-search" />
+		<label><liferay-ui:message key="show-search" /></label>
 	</td>
 	<td>
 		<liferay-ui:input-checkbox param="showFoldersSearch" defaultValue="<%= showFoldersSearch %>" />
@@ -125,7 +125,7 @@ String redirect = ParamUtil.getString(request, "redirect");
 </tr>
 <tr>
 	<td>
-		<liferay-ui:message key="show-subfolders" />
+		<label><liferay-ui:message key="show-subfolders" /></label>
 	</td>
 	<td>
 		<liferay-ui:input-checkbox param="showSubfolders" defaultValue="<%= showSubfolders %>" />
@@ -133,7 +133,7 @@ String redirect = ParamUtil.getString(request, "redirect");
 </tr>
 <tr>
 	<td>
-		<liferay-ui:message key="folders-per-page" />
+		<label><liferay-ui:message key="folders-per-page" /></label>
 	</td>
 	<td>
 		<input name="<portlet:namespace />foldersPerPage" size="2" type="text" value="<%= foldersPerPage %>" />
@@ -146,7 +146,7 @@ String redirect = ParamUtil.getString(request, "redirect");
 </tr>
 <tr>
 	<td>
-		<liferay-ui:message key="show-columns" />
+		<label><liferay-ui:message key="show-columns" /></label>
 	</td>
 	<td>
 
@@ -203,7 +203,7 @@ String redirect = ParamUtil.getString(request, "redirect");
 <table class="lfr-table">
 <tr>
 	<td>
-		<liferay-ui:message key="show-search" />
+		<label><liferay-ui:message key="show-search" /></label>
 	</td>
 	<td>
 		<liferay-ui:input-checkbox param="showFileEntriesSearch" defaultValue="<%= showFileEntriesSearch %>" />
@@ -211,7 +211,7 @@ String redirect = ParamUtil.getString(request, "redirect");
 </tr>
 <tr>
 	<td>
-		<liferay-ui:message key="documents-per-page" />
+		<label><liferay-ui:message key="documents-per-page" /></label>
 	</td>
 	<td>
 		<input name="<portlet:namespace />fileEntriesPerPage" size="2" type="text" value="<%= fileEntriesPerPage %>" />
@@ -224,7 +224,7 @@ String redirect = ParamUtil.getString(request, "redirect");
 </tr>
 <tr>
 	<td>
-		<liferay-ui:message key="show-columns" />
+		<label><liferay-ui:message key="show-columns" /></label>
 	</td>
 	<td>
 
@@ -281,7 +281,7 @@ String redirect = ParamUtil.getString(request, "redirect");
 <table class="lfr-table">
 <tr>
 	<td>
-		<liferay-ui:message key="enable-comment-ratings" />
+		<label><liferay-ui:message key="enable-comment-ratings" /></label>
 	</td>
 	<td>
 		<liferay-ui:input-checkbox param="enableCommentRatings" defaultValue="<%= enableCommentRatings %>" />

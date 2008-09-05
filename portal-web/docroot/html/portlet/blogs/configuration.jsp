@@ -35,7 +35,7 @@
 	<table class="lfr-table">
 	<tr>
 		<td>
-			<liferay-ui:message key="maximum-items-to-display" />
+			<label><liferay-ui:message key="maximum-items-to-display" /></label>
 		</td>
 		<td>
 			<select name="<portlet:namespace />pageDelta">
@@ -61,7 +61,7 @@
 	</tr>
 	<tr>
 		<td>
-			<liferay-ui:message key="display-style" />
+			<label><liferay-ui:message key="display-style" /></label>
 		</td>
 		<td>
 			<select name="<portlet:namespace />pageDisplayStyle">
@@ -73,7 +73,7 @@
 	</tr>
 	<tr>
 		<td>
-			<liferay-ui:message key="enable-ratings" />
+			<label><liferay-ui:message key="enable-ratings" /></label>
 		</td>
 		<td>
 			<liferay-ui:input-checkbox param="enableRatings" defaultValue="<%= enableRatings %>" />
@@ -81,7 +81,7 @@
 	</tr>
 	<tr>
 		<td>
-			<liferay-ui:message key="enable-comments" />
+			<label><liferay-ui:message key="enable-comments" /></label>
 		</td>
 		<td>
 			<liferay-ui:input-checkbox param="enableComments" defaultValue="<%= enableComments %>" />
@@ -89,7 +89,7 @@
 	</tr>
 	<tr>
 		<td>
-			<liferay-ui:message key="enable-comment-ratings" />
+			<label><liferay-ui:message key="enable-comment-ratings" /></label>
 		</td>
 		<td>
 			<liferay-ui:input-checkbox param="enableCommentRatings" defaultValue="<%= enableCommentRatings %>" />
@@ -104,7 +104,7 @@
 	<table class="lfr-table">
 	<tr>
 		<td>
-			<liferay-ui:message key="maximum-items-to-display" />
+			<label><liferay-ui:message key="maximum-items-to-display" /></label>
 		</td>
 		<td>
 			<select name="<portlet:namespace />rssDelta">
@@ -130,7 +130,7 @@
 	</tr>
 	<tr>
 		<td>
-			<liferay-ui:message key="display-style" />
+			<label><liferay-ui:message key="display-style" /></label>
 		</td>
 		<td>
 			<select name="<portlet:namespace />rssDisplayStyle">
@@ -142,7 +142,7 @@
 	</tr>
 	<tr>
 		<td>
-			<liferay-ui:message key="format" />
+			<label><liferay-ui:message key="format" /></label>
 		</td>
 		<td>
 			<select name="<portlet:namespace />rssFormat">

@@ -30,7 +30,7 @@
 
 <%--<tr>
 	<td>
-		<liferay-ui:message key="author" />
+		<label><liferay-ui:message key="author" /></label>
 	</td>
 	<td>
 		<input name="ExtraSettingsProperties(author)" style="width: <%= ModelHintsConstants.TEXT_DISPLAY_WIDTH %>px;" type="text" value="<bean:write name="DOCUMENT_LIBRARY_FILE_ENTRY" property="extraSettingsProperties(author)" />" />
@@ -38,7 +38,7 @@
 </tr>
 <tr>
 	<td>
-		<liferay-ui:message key="type" />
+		<label><liferay-ui:message key="type" /></label>
 	</td>
 	<td>
 		<input name="ExtraSettingsProperties(type)" style="width: <%= ModelHintsConstants.TEXT_DISPLAY_WIDTH %>px;" type="text" value="<bean:write name="DOCUMENT_LIBRARY_FILE_ENTRY" property="extraSettingsProperties(type)" />" />
