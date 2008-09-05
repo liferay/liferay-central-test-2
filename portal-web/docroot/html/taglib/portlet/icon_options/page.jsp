@@ -57,9 +57,6 @@
 
 		boolean widgetShowAddAppLink = GetterUtil.getBoolean(portletSetup.getValue("lfr-widget-show-add-app-link", null), true);
 
-		String shareppid = portletDisplay.getId();
-		String sharepptitle = portletDisplay.getTitle();
-
 		String facebookAPIKey = portletSetup.getValue("lfr-facebook-api-key", StringPool.BLANK);
 		String facebookCanvasPageURL = portletSetup.getValue("lfr-facebook-canvas-page-url", StringPool.BLANK);
 		boolean facebookShowAddAppLink = GetterUtil.getBoolean(portletSetup.getValue("lfr-facebook-show-add-app-link", null), true);
@@ -99,7 +96,6 @@
 					url="javascript: ;"
 					method="get"
 					label="<%= true %>"
-					cssClass='<%= portletDisplay.getNamespace() + "share-with-friends" %>'
 				/>
 			</c:if>
 
@@ -140,34 +136,6 @@ Liferay.Widget({ url: &#x27;<%= PortalUtil.getWidgetURL(portlet, themeDisplay) %
 									);
 
 									message.show();
-								}
-							);
-							jQuery('.<portlet:namespace />share-with-friends a').click(
-								function(event) {
-									var share_dialog = Liferay.Popup(
-										{
-											width: 550,
-											modal: true,
-											title: '<liferay-ui:message key="request-share-widget" />',
-											message: '<div class="loading-animation" />'
-										}
-										);
-
-										jQuery.ajax(
-											{
-												url: themeDisplay.getPathMain() + '/portal/render_portlet',
-												data: {
-													p_l_id: themeDisplay.getPlid(),
-													p_p_id: '124',
-													p_p_state: 'exclusive',
-													doAsUserId:themeDisplay.getDoAsUserIdEncoded()
-												},
-												success: function(message) {
-													ss='<script>var ppidForShare="<%=shareppid%>";var pptitleForShare="<%=sharepptitle%>"; <\/script>';
-													share_dialog.html(message + ss);
-												}
-											}
-										);
 								}
 							);
 						}

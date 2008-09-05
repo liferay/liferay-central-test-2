@@ -1965,12 +1965,8 @@
 	</portlet>
 	<portlet>
 		<portlet-name>124</portlet-name>
-		<display-name>portlet_sharing</display-name>
+		<display-name>Social</display-name>
 		<portlet-class>com.liferay.portlet.StrutsPortlet</portlet-class>
-		<init-param>
-				<name>view-action</name>
-				<value>/portlet_sharing/view</value>
-			</init-param>	
 		<expiration-cache>0</expiration-cache>
 		<supports>
 			<mime-type>text/html</mime-type>

@@ -20,36 +20,34 @@
  * SOFTWARE.
  */
 
-/**
- * The contents of this file are subject to the terms of the Common Development
- * and Distribution License (the License). You may not use this file except in
- * compliance with the License.
- *
- * You can obtain a copy of the License at http://www.sun.com/cddl/cddl.html and
- * legal/CDDLv1.0.txt. See the License for the specific language governing
- * permission and limitations under the License.
- *
- * When distributing Covered Code, include this CDDL Header Notice in each file
- * and include the License file at legal/CDDLv1.0.txt.
- *
- * If applicable, add the following below the CDDL Header, with the fields
- * enclosed by brackets [] replaced by your own identifying information:
- * "Portions Copyrighted [year] [name of copyright owner]"
- *
- * Copyright 2008 Sun Microsystems Inc. All rights reserved.
- */
+package com.liferay.portlet.social.util;
 
-package com.liferay.portlet.portletsharing.util;
+import com.liferay.portal.theme.ThemeDisplay;
+import com.liferay.portlet.social.model.BaseSocialActivityInterpreter;
+import com.liferay.portlet.social.model.SocialActivity;
+import com.liferay.portlet.social.model.SocialActivityFeedEntry;
 
 /**
- * <a href="ShareRequestKeys.java.html"><b><i>View Source</i></b></a>
+ * <a href="PortalActivityInterpreter.java.html"><b><i>View Source</i></b></a>
  *
- * @author Neel Haldar
+ * @author Brian Wing Shun Chan
  *
  */
-public class ShareRequestKeys {
+public class PortalActivityInterpreter extends BaseSocialActivityInterpreter {
 
-	public static final int SHARE_REQUEST = 9;
-	public static final String SHARE_EXTRA_DATA_DELIMETER = "|";
+	public String[] getClassNames() {
+		return _CLASS_NAMES;
+	}
+
+	protected SocialActivityFeedEntry doInterpret(
+			SocialActivity activity, ThemeDisplay themeDisplay)
+		throws Exception {
+
+		return null;
+	}
+
+	private static final String[] _CLASS_NAMES = new String[] {
+		PortalActivityInterpreter.class.getName()
+	};
 
 }

@@ -1286,10 +1286,6 @@
 		<!-- Portlet CSS -->
 
 		<action path="/portlet_css/view" forward="portlet.portlet_css.view" />
-		
-		<!-- Portlet Sharing -->
-
-		<action path="/portlet_sharing/view" forward="portlet.portlet_sharing.view" />
 
 		<!-- Quick Note -->
 
