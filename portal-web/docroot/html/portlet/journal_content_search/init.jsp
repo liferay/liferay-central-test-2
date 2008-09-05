@@ -44,7 +44,7 @@ if (Validator.isNotNull(portletResource)) {
 
 boolean showListed = GetterUtil.getBoolean(prefs.getValue("show-listed", "true"));
 
-if (portletDisplay.getId().equals(PortletKeys.JOURNAL_CONTENT_SEARCH)) {
+if (portletName.equals(PortletKeys.JOURNAL_CONTENT_SEARCH)) {
 	showListed = PropsValues.JOURNAL_CONTENT_SEARCH_SHOW_LISTED;
 }
 

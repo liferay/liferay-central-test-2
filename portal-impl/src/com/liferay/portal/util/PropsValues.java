@@ -463,6 +463,10 @@ public class PropsValues {
 		GetterUtil.getBoolean(
 			PropsUtil.get(PropsKeys.JOURNAL_ARTICLE_FORCE_INCREMENT_VERSION));
 
+	public static final boolean JOURNAL_CONTENT_SEARCH_SHOW_LISTED =
+		GetterUtil.getBoolean(
+			PropsUtil.get(PropsKeys.JOURNAL_CONTENT_SEARCH_SHOW_LISTED));
+
 	public static final String JOURNAL_ERROR_TEMPLATE_VELOCITY =
 		PropsUtil.get(PropsKeys.JOURNAL_ERROR_TEMPLATE_VELOCITY);
 
@@ -483,10 +487,6 @@ public class PropsValues {
 	public static final boolean JOURNAL_TEMPLATE_FORCE_AUTOGENERATE_ID =
 		GetterUtil.getBoolean(
 			PropsUtil.get(PropsKeys.JOURNAL_TEMPLATE_FORCE_AUTOGENERATE_ID));
-
-	public static final boolean JOURNAL_CONTENT_SEARCH_SHOW_LISTED =
-		GetterUtil.getBoolean(
-			PropsUtil.get(PropsKeys.JOURNAL_CONTENT_SEARCH_SHOW_LISTED));
 
 	public static final boolean LAST_MODIFIED_CHECK = GetterUtil.getBoolean(
 		PropsUtil.get(PropsKeys.LAST_MODIFIED_CHECK));

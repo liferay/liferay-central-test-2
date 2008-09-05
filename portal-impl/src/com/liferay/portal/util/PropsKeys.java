@@ -449,6 +449,8 @@ public class PropsKeys {
 
 	public static final String JOURNAL_ARTICLES_PAGE_DELTA_VALUES = "journal.articles.page.delta.values";
 
+	public static final String JOURNAL_CONTENT_SEARCH_SHOW_LISTED = "journal.content.search.show.listed";
+
 	public static final String JOURNAL_EMAIL_ARTICLE_APPROVAL_DENIED_BODY = "journal.email.article.approval.denied.body";
 
 	public static final String JOURNAL_EMAIL_ARTICLE_APPROVAL_DENIED_ENABLED = "journal.email.article.approval.denied.enabled";
@@ -498,8 +500,6 @@ public class PropsKeys {
 	public static final String JOURNAL_TEMPLATE_VELOCITY_RESTRICTED_VARIABLES = "journal.template.velocity.restricted.variables";
 
 	public static final String JOURNAL_TRANSFORMER_LISTENER = "journal.transformer.listener";
-
-	public static final String JOURNAL_CONTENT_SEARCH_SHOW_LISTED = "journal.content.search.show.listed";
 
 	public static final String LAST_MODIFIED_CHECK = "last.modified.check";
 
