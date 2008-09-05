@@ -1106,6 +1106,7 @@ public class JournalUtil {
 
 		tokens.put("cdn_host", themeDisplayEl.elementText("cdn-host"));
 		tokens.put("company_id", themeDisplayEl.elementText("company-id"));
+		tokens.put("group_friendly_url", group.getFriendlyURL());
 		tokens.put("group_id", String.valueOf(groupId));
 		tokens.put("image_path", themeDisplayEl.elementText("path-image"));
 		tokens.put("friendly_url_current", friendlyUrlCurrent);
@@ -1159,6 +1160,7 @@ public class JournalUtil {
 
 		tokens.put("cdn_host", themeDisplay.getCDNHost());
 		tokens.put("company_id", String.valueOf(themeDisplay.getCompanyId()));
+		tokens.put("group_friendly_url", group.getFriendlyURL());
 		tokens.put("group_id", String.valueOf(groupId));
 		tokens.put("image_path", themeDisplay.getPathImage());
 		tokens.put("friendly_url_current", friendlyUrlCurrent);
