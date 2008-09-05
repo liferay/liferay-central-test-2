@@ -122,6 +122,7 @@
 <%
 String tabs1 = ParamUtil.getString(request, "tabs1");
 boolean showTabs = false;
+boolean showUserActiveSelect = true;
 
 if (portletName.equals(PortletKeys.ENTERPRISE_USERS_ADMIN)) {
 	tabs1 = "users";
@@ -151,6 +152,8 @@ else if (portletName.equals(PortletKeys.ENTERPRISE_ADMIN)) {
 	showTabs = true;
 }
 else {
+	showUserActiveSelect = false;
+
 	if (tabs1.equals("roles") || tabs1.equals("password-policies") || tabs1.equals("settings") || tabs1.equals("monitoring") || tabs1.equals("plugins")) {
 		tabs1 = "users";
 	}

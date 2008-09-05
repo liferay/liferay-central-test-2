@@ -64,6 +64,7 @@ portletURL.setParameter(searchContainer.getCurParam(), String.valueOf(searchCont
 <liferay-ui:search-form
 	page="/html/portlet/enterprise_admin/user_search.jsp"
 	searchContainer="<%= searchContainer %>"
+	showAddButton="<%= true %>"
 />
 
 <c:if test="<%= windowState.equals(WindowState.MAXIMIZED) %>">

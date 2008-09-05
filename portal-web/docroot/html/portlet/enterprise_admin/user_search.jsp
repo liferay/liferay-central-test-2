@@ -25,9 +25,8 @@
 <%@ include file="/html/portlet/enterprise_admin/init.jsp" %>
 
 <%
-String strutsAction = ParamUtil.getString(request, "struts_action");
-
 UserSearch searchContainer = (UserSearch)request.getAttribute("liferay-ui:search:searchContainer");
+boolean showAddButton = GetterUtil.getBoolean((String)request.getAttribute("liferay-ui:search:showAddButton"));
 
 UserDisplayTerms displayTerms = (UserDisplayTerms)searchContainer.getDisplayTerms();
 %>
@@ -67,9 +66,16 @@ UserDisplayTerms displayTerms = (UserDisplayTerms)searchContainer.getDisplayTerm
 			<liferay-ui:message key="email-address" />
 		</td>
 
-		<td>
-			<liferay-ui:message key="active" />
-		</td>
+		<c:choose>
+			<c:when test="<%= showUserActiveSelect %>">
+				<td>
+					<liferay-ui:message key="active" />
+				</td>
+			</c:when>
+			<c:otherwise>
+				<td></td>
+			</c:otherwise>
+		</c:choose>
 	</tr>
 	<tr>
 		<td>
@@ -78,12 +84,20 @@ UserDisplayTerms displayTerms = (UserDisplayTerms)searchContainer.getDisplayTerm
 		<td>
 			<input name="<portlet:namespace /><%= displayTerms.EMAIL_ADDRESS %>" size="20" type="text" value="<%= HtmlUtil.escape(displayTerms.getEmailAddress()) %>" />
 		</td>
-		<td>
-			<select name="<portlet:namespace /><%= displayTerms.ACTIVE %>">
-				<option <%= displayTerms.isActive() ? "selected" : "" %> value="1"><liferay-ui:message key="yes" /></option>
-				<option <%= !displayTerms.isActive() ? "selected" : "" %> value="0"><liferay-ui:message key="no" /></option>
-			</select>
-		</td>
+
+		<c:choose>
+			<c:when test="<%= showUserActiveSelect %>">
+				<td>
+					<select name="<portlet:namespace /><%= displayTerms.ACTIVE %>">
+						<option <%= displayTerms.isActive() ? "selected" : "" %> value="1"><liferay-ui:message key="yes" /></option>
+						<option <%= !displayTerms.isActive() ? "selected" : "" %> value="0"><liferay-ui:message key="no" /></option>
+					</select>
+				</td>
+			</c:when>
+			<c:otherwise>
+				<td></td>
+			</c:otherwise>
+		</c:choose>
 	</tr>
 	</table>
 </liferay-ui:search-toggle>
@@ -93,7 +107,7 @@ UserDisplayTerms displayTerms = (UserDisplayTerms)searchContainer.getDisplayTerm
 <div>
 	<input type="submit" value="<liferay-ui:message key="search-users" />" />
 
-	<c:if test='<%= Validator.isNull(strutsAction) || strutsAction.equals("/enterprise_admin/view") %>'>
+	<c:if test='<%= showAddButton %>'>
 
 		<c:if test="<%= PortalPermissionUtil.contains(permissionChecker, ActionKeys.ADD_USER) ||
 						OrganizationPermissionUtil.contains(permissionChecker, displayTerms.getOrganizationId(), ActionKeys.ADD_USER) %>">
