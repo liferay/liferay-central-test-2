@@ -190,7 +190,9 @@ String uploadProgressId = "igImageUploadProgress";
 		);
 	</script>
 
-	<div class="lfr-upload-container" id="<portlet:namespace />fileUpload"></div>
+	<div class="lfr-dynamic-uploader">
+		<div class="lfr-upload-container" id="<portlet:namespace />fileUpload"></div>
+	</div>
 
 	<div class="lfr-fallback" id="<portlet:namespace />fallback">
 </c:if>

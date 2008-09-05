@@ -60,7 +60,9 @@ WikiPage wikiPage = (WikiPage)request.getAttribute(WebKeys.WIKI_PAGE);
 <input name="<portlet:namespace />title" type="hidden" value="<%= wikiPage.getTitle() %>" />
 <input name="<portlet:namespace />numOfFiles" type="hidden" value="3" />
 
-<div class="lfr-upload-container" id="<portlet:namespace />fileUpload"></div>
+<div class="lfr-dynamic-uploader">
+	<div class="lfr-upload-container" id="<portlet:namespace />fileUpload"></div>
+</div>
 
 <div class="lfr-fallback" id="<portlet:namespace />fallback">
 	<fieldset class="block-labels">

@@ -146,7 +146,7 @@ else {
 			<%= MBUtil.getBreadcrumbs(null, message, pageContext, renderRequest, renderResponse) %>
 		</div>
 	</td>
-	<td>
+	<td class="thread-icon">
 
 		<%
 		currentURLObj.setParameter("threadView", "combination");
@@ -159,7 +159,7 @@ else {
 			method="get"
 		/>
 	</td>
-	<td>
+	<td class="thread-icon">
 
 		<%
 		currentURLObj.setParameter("threadView", "flat");
@@ -172,7 +172,7 @@ else {
 			method="get"
 		/>
 	</td>
-	<td>
+	<td class="thread-icon">
 
 		<%
 		currentURLObj.setParameter("threadView", "tree");
