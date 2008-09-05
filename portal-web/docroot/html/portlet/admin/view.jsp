@@ -93,8 +93,8 @@
 					installPluginsURL.setParameter("tabs2", tabs2);
 				}
 
-				boolean showEditPluginLink = false;
-				boolean showSearchIndex = true;
+				boolean showEditPluginHREF = false;
+				boolean showReindexButton = true;
 				%>
 
 				<%@ include file="/html/portlet/enterprise_admin/plugins.jspf" %>

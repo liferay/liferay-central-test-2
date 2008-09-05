@@ -219,7 +219,7 @@ request.setAttribute("view.jsp-portletURLString", portletURLString);
 <input name="<portlet:namespace />tabs3" type="hidden" value="<%= HtmlUtil.escape(tabs3) %>" />
 <input name="<portlet:namespace />redirect" type="hidden" value="<%= portletURLString %>" />
 
-<c:if test="<%= showTabs %>">
+<c:if test="<%= showTabs1 %>">
 	<liferay-util:include page="/html/portlet/enterprise_admin/tabs1.jsp" />
 </c:if>
 
@@ -587,12 +587,10 @@ request.setAttribute("view.jsp-portletURLString", portletURLString);
 	<c:when test='<%= tabs1.equals("plugins") %>'>
 
 		<%
-		boolean installable = false;
-
 		PortletURL installPluginsURL = null;
 
-		boolean showEditPluginLink = true;
-		boolean showSearchIndex = false;
+		boolean showEditPluginHREF = true;
+		boolean showReindexButton = false;
 		%>
 
 		<%@ include file="/html/portlet/enterprise_admin/plugins.jspf" %>

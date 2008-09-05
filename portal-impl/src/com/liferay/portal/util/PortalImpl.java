@@ -717,13 +717,13 @@ public class PortalImpl implements Portal {
 		}
 	}
 
-	public String getFirstPageTypes(PageContext pageContext) {
+	public String getFirstPageLayoutTypes(PageContext pageContext) {
 		StringBuilder sb = new StringBuilder();
 
 		for (int i = 0; i < PropsValues.LAYOUT_TYPES.length; i++) {
 			String type = PropsValues.LAYOUT_TYPES[i];
 
-			if (PortalUtil.isLayoutFirstPageSupported(type)) {
+			if (isLayoutFirstPageable(type)) {
 				sb.append(
 					LanguageUtil.get(pageContext, "layout.types." + type));
 				sb.append(StringPool.COMMA);
@@ -2158,36 +2158,9 @@ public class PortalImpl implements Portal {
 		return sb.toString();
 	}
 
-	public boolean isMethodGet(PortletRequest portletRequest) {
-		HttpServletRequest request = getHttpServletRequest(portletRequest);
-
-		String method = GetterUtil.getString(request.getMethod());
-
-		if (method.equalsIgnoreCase(HttpMethods.GET)) {
-			return true;
-		}
-		else {
-			return false;
-		}
-	}
-
-	public boolean isMethodPost(PortletRequest portletRequest) {
-		HttpServletRequest request = getHttpServletRequest(portletRequest);
-
-		String method = GetterUtil.getString(request.getMethod());
-
-		if (method.equalsIgnoreCase(HttpMethods.POST)) {
-			return true;
-		}
-		else {
-			return false;
-		}
-	}
-
-	public boolean isLayoutFirstPageSupported(String type) {
+	public boolean isLayoutFirstPageable(String type) {
 		return GetterUtil.getBoolean(
-			PropsUtil.get(
-				PropsKeys.LAYOUT_FIRST_PAGE_SUPPORTED, new Filter(type)),
+			PropsUtil.get(PropsKeys.LAYOUT_FIRST_PAGEABLE, new Filter(type)),
 			false);
 	}
 
@@ -2215,6 +2188,32 @@ public class PortalImpl implements Portal {
 
 		return GetterUtil.getBoolean(PropsUtil.get(
 			PropsKeys.LAYOUT_SITEMAPABLE, new Filter(layout.getType())), true);
+	}
+
+	public boolean isMethodGet(PortletRequest portletRequest) {
+		HttpServletRequest request = getHttpServletRequest(portletRequest);
+
+		String method = GetterUtil.getString(request.getMethod());
+
+		if (method.equalsIgnoreCase(HttpMethods.GET)) {
+			return true;
+		}
+		else {
+			return false;
+		}
+	}
+
+	public boolean isMethodPost(PortletRequest portletRequest) {
+		HttpServletRequest request = getHttpServletRequest(portletRequest);
+
+		String method = GetterUtil.getString(request.getMethod());
+
+		if (method.equalsIgnoreCase(HttpMethods.POST)) {
+			return true;
+		}
+		else {
+			return false;
+		}
 	}
 
 	public boolean isReservedParameter(String name) {

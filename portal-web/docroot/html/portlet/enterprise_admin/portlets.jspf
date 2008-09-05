@@ -22,7 +22,7 @@
  */
 %>
 
-<c:if test="<%= showSearchIndex %>">
+<c:if test="<%= showReindexButton %>">
 	<script type="text/javascript">
 		function <portlet:namespace />reindexPortlet(portletId) {
 			document.<portlet:namespace />fm.<portlet:namespace />portletId.value = portletId;
@@ -44,7 +44,7 @@ headerNames.add("portlet");
 headerNames.add("active");
 headerNames.add("roles");
 
-if (showSearchIndex) {
+if (showReindexButton) {
 	headerNames.add("search-index");
 }
 
@@ -93,7 +93,7 @@ for (int i = 0; i < results.size(); i++) {
 	String displayName = portlet.getDisplayName();
 	String title = PortalUtil.getPortletTitle(portlet, application, locale);
 
-	if (showEditPluginLink) {
+	if (showEditPluginHREF) {
 		sb.append("<a href=\"");
 		sb.append(rowURL.toString());
 		sb.append("\">");
@@ -103,7 +103,7 @@ for (int i = 0; i < results.size(); i++) {
 	sb.append(title);
 	sb.append("</b>");
 
-	if (showEditPluginLink) {
+	if (showEditPluginHREF) {
 		sb.append("</a>");
 	}
 
@@ -143,7 +143,7 @@ for (int i = 0; i < results.size(); i++) {
 
 	sb = new StringBuilder();
 
-	if (showSearchIndex && Validator.isNotNull(portlet.getIndexerClass())) {
+	if (showReindexButton && Validator.isNotNull(portlet.getIndexerClass())) {
 		sb.append("<input onclick=\"");
 		sb.append(renderResponse.getNamespace());
 		sb.append("reindexPortlet('");

@@ -151,7 +151,7 @@ public interface Portal {
 			PortalException pe)
 		throws PortalException;
 
-	public String getFirstPageTypes(PageContext pageContext);
+	public String getFirstPageLayoutTypes(PageContext pageContext);
 
 	public String getHost(HttpServletRequest request);
 
@@ -381,11 +381,7 @@ public interface Portal {
 
 	public String getWidgetURL(Portlet portlet, ThemeDisplay themeDisplay);
 
-	public boolean isMethodGet(PortletRequest portletRequest);
-
-	public boolean isMethodPost(PortletRequest portletRequest);
-
-	public boolean isLayoutFirstPageSupported(String type);
+	public boolean isLayoutFirstPageable(String type);
 
 	public boolean isLayoutFriendliable(Layout layout);
 
@@ -394,6 +390,10 @@ public interface Portal {
 	public boolean isLayoutParentable(String type);
 
 	public boolean isLayoutSitemapable(Layout layout);
+
+	public boolean isMethodGet(PortletRequest portletRequest);
+
+	public boolean isMethodPost(PortletRequest portletRequest);
 
 	public boolean isReservedParameter(String name);
 

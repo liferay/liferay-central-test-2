@@ -1975,11 +1975,11 @@
 	</portlet>
 	<portlet>
 		<portlet-name>125</portlet-name>
-		<display-name>Users Administration</display-name>
+		<display-name>Enterprise Admin Users</display-name>
 		<portlet-class>com.liferay.portlet.StrutsPortlet</portlet-class>
 		<init-param>
 			<name>view-action</name>
-			<value>/enterprise_users_admin/view</value>
+			<value>/enterprise_admin_users/view</value>
 		</init-param>
 		<expiration-cache>0</expiration-cache>
 		<supports>
@@ -1992,11 +1992,11 @@
 	</portlet>
 	<portlet>
 		<portlet-name>126</portlet-name>
-		<display-name>Organizations Administration</display-name>
+		<display-name>Enterprise Admin Organizations</display-name>
 		<portlet-class>com.liferay.portlet.StrutsPortlet</portlet-class>
 		<init-param>
 			<name>view-action</name>
-			<value>/enterprise_organizations_admin/view</value>
+			<value>/enterprise_admin_organizations/view</value>
 		</init-param>
 		<expiration-cache>0</expiration-cache>
 		<supports>
@@ -2009,11 +2009,11 @@
 	</portlet>
 	<portlet>
 		<portlet-name>127</portlet-name>
-		<display-name>User Groups Administration</display-name>
+		<display-name>Enterprise Admin User Groups</display-name>
 		<portlet-class>com.liferay.portlet.StrutsPortlet</portlet-class>
 		<init-param>
 			<name>view-action</name>
-			<value>/enterprise_user_groups_admin/view</value>
+			<value>/enterprise_admin_user_groups/view</value>
 		</init-param>
 		<expiration-cache>0</expiration-cache>
 		<supports>
@@ -2026,11 +2026,11 @@
 	</portlet>
 	<portlet>
 		<portlet-name>128</portlet-name>
-		<display-name>Roles Administration</display-name>
+		<display-name>Enterprise Admin Roles</display-name>
 		<portlet-class>com.liferay.portlet.StrutsPortlet</portlet-class>
 		<init-param>
 			<name>view-action</name>
-			<value>/enterprise_roles_admin/view</value>
+			<value>/enterprise_admin_roles/view</value>
 		</init-param>
 		<expiration-cache>0</expiration-cache>
 		<supports>
@@ -2043,11 +2043,11 @@
 	</portlet>
 	<portlet>
 		<portlet-name>129</portlet-name>
-		<display-name>Password Policies Administration</display-name>
+		<display-name>Enterprise Admin Password Policies</display-name>
 		<portlet-class>com.liferay.portlet.StrutsPortlet</portlet-class>
 		<init-param>
 			<name>view-action</name>
-			<value>/enterprise_password_policies_admin/view</value>
+			<value>/enterprise_admin_password_policies/view</value>
 		</init-param>
 		<expiration-cache>0</expiration-cache>
 		<supports>
@@ -2060,11 +2060,11 @@
 	</portlet>
 	<portlet>
 		<portlet-name>130</portlet-name>
-		<display-name>Settings</display-name>
+		<display-name>Enterprise Admin Settings</display-name>
 		<portlet-class>com.liferay.portlet.StrutsPortlet</portlet-class>
 		<init-param>
 			<name>view-action</name>
-			<value>/enterprise_settings/view</value>
+			<value>/enterprise_admin_settings/view</value>
 		</init-param>
 		<expiration-cache>0</expiration-cache>
 		<supports>
@@ -2077,11 +2077,11 @@
 	</portlet>
 	<portlet>
 		<portlet-name>131</portlet-name>
-		<display-name>Monitoring</display-name>
+		<display-name>Enterprise Admin Monitoring</display-name>
 		<portlet-class>com.liferay.portlet.StrutsPortlet</portlet-class>
 		<init-param>
 			<name>view-action</name>
-			<value>/enterprise_monitoring/view</value>
+			<value>/enterprise_admin_monitoring/view</value>
 		</init-param>
 		<expiration-cache>0</expiration-cache>
 		<supports>
@@ -2094,11 +2094,11 @@
 	</portlet>
 	<portlet>
 		<portlet-name>132</portlet-name>
-		<display-name>Plugins</display-name>
+		<display-name>Enterprise Admin Plugins</display-name>
 		<portlet-class>com.liferay.portlet.StrutsPortlet</portlet-class>
 		<init-param>
 			<name>view-action</name>
-			<value>/enterprise_plugins/view</value>
+			<value>/enterprise_admin_plugins/view</value>
 		</init-param>
 		<expiration-cache>0</expiration-cache>
 		<supports>

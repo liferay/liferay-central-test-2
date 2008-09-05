@@ -612,7 +612,7 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 			Layout layout = layoutPersistence.findByG_P_L(
 				groupId, privateLayout, layoutIds[0]);
 
-			if (!PortalUtil.isLayoutFirstPageSupported(layout.getType())) {
+			if (!PortalUtil.isLayoutFirstPageable(layout.getType())) {
 				throw new RequiredLayoutException(
 					RequiredLayoutException.FIRST_LAYOUT_TYPE);
 			}
@@ -1108,7 +1108,7 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 	protected void validateFirstLayout(String type, boolean hidden)
 		throws PortalException {
 
-		if (!PortalUtil.isLayoutFirstPageSupported(type)) {
+		if (!PortalUtil.isLayoutFirstPageable(type)) {
 			throw new LayoutTypeException(LayoutTypeException.FIRST_LAYOUT);
 		}
 

@@ -52,21 +52,21 @@ public class PortletKeys {
 
 	public static final String ENTERPRISE_ADMIN = "79";
 
-	public static final String ENTERPRISE_USERS_ADMIN = "125";
+	public static final String ENTERPRISE_ADMIN_MONITORING = "131";
 
-	public static final String ENTERPRISE_ORGANIZATIONS_ADMIN = "126";
+	public static final String ENTERPRISE_ADMIN_PASSWORD_POLICIES = "129";
 
-	public static final String ENTERPRISE_USER_GROUPS_ADMIN = "127";
+	public static final String ENTERPRISE_ADMIN_PLUGINS = "132";
 
-	public static final String ENTERPRISE_ROLES_ADMIN = "128";
+	public static final String ENTERPRISE_ADMIN_ROLES = "128";
 
-	public static final String ENTERPRISE_PASSWORD_POLICIES_ADMIN = "129";
+	public static final String ENTERPRISE_ADMIN_SETTINGS = "130";
 
-	public static final String ENTERPRISE_SETTINGS = "130";
+	public static final String ENTERPRISE_ADMIN_ORGANIZATIONS = "126";
 
-	public static final String ENTERPRISE_MONITORING = "131";
+	public static final String ENTERPRISE_ADMIN_USER_GROUPS = "127";
 
-	public static final String ENTERPRISE_PLUGINS = "132";
+	public static final String ENTERPRISE_ADMIN_USERS = "125";
 
 	public static final String IMAGE_GALLERY = "31";
 

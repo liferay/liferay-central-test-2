@@ -517,8 +517,8 @@ public class PropsKeys {
 
 	public static final String LAYOUT_EDIT_PAGE = "layout.edit.page";
 
-	public static final String LAYOUT_FIRST_PAGE_SUPPORTED = "layout.first.page.supported";
-	
+	public static final String LAYOUT_FIRST_PAGEABLE = "layout.first.pageable";
+
 	public static final String LAYOUT_FRIENDLY_URL_KEYWORDS = "layout.friendly.url.keywords";
 
 	public static final String LAYOUT_FRIENDLY_URL_PAGE_NOT_FOUND = "layout.friendly.url.page.not.found";

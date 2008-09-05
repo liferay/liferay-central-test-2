@@ -229,7 +229,7 @@ publishToRemoteURL.setParameter("localPublishing", "0");
 			</c:if>
 
 			<c:if test="<%= lplide.getType() == LayoutParentLayoutIdException.FIRST_LAYOUT_TYPE %>">
-				<liferay-ui:message key="the-resulting-first-page-must-have-one-of-the-following-types" />: <%= PortalUtil.getFirstPageTypes(pageContext) %>
+				<liferay-ui:message key="the-resulting-first-page-must-have-one-of-the-following-types" />: <%= PortalUtil.getFirstPageLayoutTypes(pageContext) %>
 			</c:if>
 
 			<c:if test="<%= lplide.getType() == LayoutParentLayoutIdException.FIRST_LAYOUT_HIDDEN %>">
@@ -248,7 +248,7 @@ publishToRemoteURL.setParameter("localPublishing", "0");
 			</c:if>
 
 			<c:if test="<%= lte.getType() == LayoutTypeException.FIRST_LAYOUT %>">
-				<liferay-ui:message key="your-first-page-must-have-one-of-the-following-types" />: <%= PortalUtil.getFirstPageTypes(pageContext) %>
+				<liferay-ui:message key="your-first-page-must-have-one-of-the-following-types" />: <%= PortalUtil.getFirstPageLayoutTypes(pageContext) %>
 			</c:if>
 		</liferay-ui:error>
 

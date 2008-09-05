@@ -67,7 +67,7 @@ UserDisplayTerms displayTerms = (UserDisplayTerms)searchContainer.getDisplayTerm
 		</td>
 
 		<c:choose>
-			<c:when test="<%= showUserActiveSelect %>">
+			<c:when test="<%= showActiveUserSelect %>">
 				<td>
 					<liferay-ui:message key="active" />
 				</td>
@@ -86,7 +86,7 @@ UserDisplayTerms displayTerms = (UserDisplayTerms)searchContainer.getDisplayTerm
 		</td>
 
 		<c:choose>
-			<c:when test="<%= showUserActiveSelect %>">
+			<c:when test="<%= showActiveUserSelect %>">
 				<td>
 					<select name="<portlet:namespace /><%= displayTerms.ACTIVE %>">
 						<option <%= displayTerms.isActive() ? "selected" : "" %> value="1"><liferay-ui:message key="yes" /></option>
@@ -108,7 +108,6 @@ UserDisplayTerms displayTerms = (UserDisplayTerms)searchContainer.getDisplayTerm
 	<input type="submit" value="<liferay-ui:message key="search-users" />" />
 
 	<c:if test='<%= showAddButton %>'>
-
 		<c:if test="<%= PortalPermissionUtil.contains(permissionChecker, ActionKeys.ADD_USER) ||
 						OrganizationPermissionUtil.contains(permissionChecker, displayTerms.getOrganizationId(), ActionKeys.ADD_USER) %>">
 

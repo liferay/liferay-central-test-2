@@ -438,6 +438,46 @@
 		<struts-path>social</struts-path>
 		<include>true</include>
 	</portlet>
+	<portlet>
+		<portlet-name>125</portlet-name>
+		<struts-path>enterprise_admin_users</struts-path>
+		<include>true</include>
+	</portlet>
+	<portlet>
+		<portlet-name>126</portlet-name>
+		<struts-path>enterprise_admin_organizations</struts-path>
+		<include>true</include>
+	</portlet>
+	<portlet>
+		<portlet-name>127</portlet-name>
+		<struts-path>enterprise_admin_user_groups</struts-path>
+		<include>true</include>
+	</portlet>
+	<portlet>
+		<portlet-name>128</portlet-name>
+		<struts-path>enterprise_admin_roles</struts-path>
+		<include>true</include>
+	</portlet>
+	<portlet>
+		<portlet-name>129</portlet-name>
+		<struts-path>enterprise_admin_password_policies</struts-path>
+		<include>true</include>
+	</portlet>
+	<portlet>
+		<portlet-name>130</portlet-name>
+		<struts-path>enterprise_admin_settings</struts-path>
+		<include>true</include>
+	</portlet>
+	<portlet>
+		<portlet-name>131</portlet-name>
+		<struts-path>enterprise_admin_monitoring</struts-path>
+		<include>true</include>
+	</portlet>
+	<portlet>
+		<portlet-name>132</portlet-name>
+		<struts-path>enterprise_admin_plugins</struts-path>
+		<include>true</include>
+	</portlet>
 	-->
 
 	<role-mapper>
