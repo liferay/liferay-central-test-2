@@ -48,61 +48,66 @@ public class TagsPropertyLocalServiceUtil {
 	public static com.liferay.portlet.tags.model.TagsProperty addTagsProperty(
 		com.liferay.portlet.tags.model.TagsProperty tagsProperty)
 		throws com.liferay.portal.SystemException {
-		return _service.addTagsProperty(tagsProperty);
+		return getService().addTagsProperty(tagsProperty);
+	}
+
+	public static com.liferay.portlet.tags.model.TagsProperty createTagsProperty(
+		long propertyId) {
+		return getService().createTagsProperty(propertyId);
 	}
 
 	public static void deleteTagsProperty(long propertyId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		_service.deleteTagsProperty(propertyId);
+		getService().deleteTagsProperty(propertyId);
 	}
 
 	public static void deleteTagsProperty(
 		com.liferay.portlet.tags.model.TagsProperty tagsProperty)
 		throws com.liferay.portal.SystemException {
-		_service.deleteTagsProperty(tagsProperty);
+		getService().deleteTagsProperty(tagsProperty);
 	}
 
 	public static java.util.List<Object> dynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery)
 		throws com.liferay.portal.SystemException {
-		return _service.dynamicQuery(dynamicQuery);
+		return getService().dynamicQuery(dynamicQuery);
 	}
 
 	public static java.util.List<Object> dynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery, int start,
 		int end) throws com.liferay.portal.SystemException {
-		return _service.dynamicQuery(dynamicQuery, start, end);
+		return getService().dynamicQuery(dynamicQuery, start, end);
 	}
 
 	public static com.liferay.portlet.tags.model.TagsProperty getTagsProperty(
 		long propertyId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		return _service.getTagsProperty(propertyId);
+		return getService().getTagsProperty(propertyId);
 	}
 
 	public static java.util.List<com.liferay.portlet.tags.model.TagsProperty> getTagsProperties(
 		int start, int end) throws com.liferay.portal.SystemException {
-		return _service.getTagsProperties(start, end);
+		return getService().getTagsProperties(start, end);
 	}
 
 	public static int getTagsPropertiesCount()
 		throws com.liferay.portal.SystemException {
-		return _service.getTagsPropertiesCount();
+		return getService().getTagsPropertiesCount();
 	}
 
 	public static com.liferay.portlet.tags.model.TagsProperty updateTagsProperty(
 		com.liferay.portlet.tags.model.TagsProperty tagsProperty)
 		throws com.liferay.portal.SystemException {
-		return _service.updateTagsProperty(tagsProperty);
+		return getService().updateTagsProperty(tagsProperty);
 	}
 
 	public static com.liferay.portlet.tags.model.TagsProperty addProperty(
 		long userId, long entryId, java.lang.String key, java.lang.String value)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		return _service.addProperty(userId, entryId, key, value);
+		return getService().addProperty(userId, entryId, key, value);
 	}
 
 	public static com.liferay.portlet.tags.model.TagsProperty addProperty(
@@ -110,71 +115,75 @@ public class TagsPropertyLocalServiceUtil {
 		java.lang.String value)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		return _service.addProperty(userId, entryName, key, value);
+		return getService().addProperty(userId, entryName, key, value);
 	}
 
 	public static void deleteProperties(long entryId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		_service.deleteProperties(entryId);
+		getService().deleteProperties(entryId);
 	}
 
 	public static void deleteProperty(long propertyId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		_service.deleteProperty(propertyId);
+		getService().deleteProperty(propertyId);
 	}
 
 	public static void deleteProperty(
 		com.liferay.portlet.tags.model.TagsProperty property)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		_service.deleteProperty(property);
+		getService().deleteProperty(property);
 	}
 
 	public static java.util.List<com.liferay.portlet.tags.model.TagsProperty> getProperties()
 		throws com.liferay.portal.SystemException {
-		return _service.getProperties();
+		return getService().getProperties();
 	}
 
 	public static java.util.List<com.liferay.portlet.tags.model.TagsProperty> getProperties(
 		long entryId) throws com.liferay.portal.SystemException {
-		return _service.getProperties(entryId);
+		return getService().getProperties(entryId);
 	}
 
 	public static com.liferay.portlet.tags.model.TagsProperty getProperty(
 		long propertyId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		return _service.getProperty(propertyId);
+		return getService().getProperty(propertyId);
 	}
 
 	public static com.liferay.portlet.tags.model.TagsProperty getProperty(
 		long entryId, java.lang.String key)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		return _service.getProperty(entryId, key);
+		return getService().getProperty(entryId, key);
 	}
 
 	public static java.lang.String[] getPropertyKeys(long groupId)
 		throws com.liferay.portal.SystemException {
-		return _service.getPropertyKeys(groupId);
+		return getService().getPropertyKeys(groupId);
 	}
 
 	public static java.util.List<com.liferay.portlet.tags.model.TagsProperty> getPropertyValues(
 		long groupId, java.lang.String key)
 		throws com.liferay.portal.SystemException {
-		return _service.getPropertyValues(groupId, key);
+		return getService().getPropertyValues(groupId, key);
 	}
 
 	public static com.liferay.portlet.tags.model.TagsProperty updateProperty(
 		long propertyId, java.lang.String key, java.lang.String value)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		return _service.updateProperty(propertyId, key, value);
+		return getService().updateProperty(propertyId, key, value);
 	}
 
 	public static TagsPropertyLocalService getService() {
+		if (_service == null) {
+			throw new RuntimeException("TagsPropertyLocalService is not set");
+		}
+
 		return _service;
 	}
 

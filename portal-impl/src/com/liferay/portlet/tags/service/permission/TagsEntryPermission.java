@@ -26,7 +26,10 @@ import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.security.permission.PermissionChecker;
+import com.liferay.portal.service.permission.PortletPermissionUtil;
+import com.liferay.portal.util.PortletKeys;
 import com.liferay.portlet.tags.model.TagsEntry;
+import com.liferay.portlet.tags.model.TagsEntryConstants;
 import com.liferay.portlet.tags.service.TagsEntryLocalServiceUtil;
 
 /**
@@ -38,8 +41,17 @@ import com.liferay.portlet.tags.service.TagsEntryLocalServiceUtil;
 public class TagsEntryPermission {
 
 	public static void check(
-			PermissionChecker permissionChecker, long entryId,
+			PermissionChecker permissionChecker, long plid, long entryId,
 			String actionId)
+		throws PortalException, SystemException {
+
+		if (!contains(permissionChecker, plid, entryId, actionId)) {
+			throw new PrincipalException();
+		}
+	}
+
+	public static void check(
+			PermissionChecker permissionChecker, long entryId, String actionId)
 		throws PortalException, SystemException {
 
 		if (!contains(permissionChecker, entryId, actionId)) {
@@ -48,17 +60,32 @@ public class TagsEntryPermission {
 	}
 
 	public static void check(
-			PermissionChecker permissionChecker, String name, long groupId,
+			PermissionChecker permissionChecker, TagsEntry entry,
 			String actionId)
-		throws PortalException, SystemException {
+		throws PortalException {
 
-		if (!contains(permissionChecker, name, groupId, actionId)) {
+		if (!contains(permissionChecker, entry, actionId)) {
 			throw new PrincipalException();
 		}
 	}
 
 	public static boolean contains(
-			PermissionChecker permissionChecker, long entryId, String actionId)
+			PermissionChecker permissionChecker, long plid, long entryId,
+			String actionId)
+		throws PortalException, SystemException {
+
+		if (entryId == TagsEntryConstants.DEFAULT_PARENT_ENTRY_ID) {
+			return PortletPermissionUtil.contains(
+				permissionChecker, plid, PortletKeys.TAGS_ADMIN, actionId);
+		}
+		else {
+			return contains(permissionChecker, entryId, actionId);
+		}
+	}
+
+	public static boolean contains(
+			PermissionChecker permissionChecker, long entryId,
+			String actionId)
 		throws PortalException, SystemException {
 
 		TagsEntry entry = TagsEntryLocalServiceUtil.getEntry(entryId);
@@ -67,22 +94,11 @@ public class TagsEntryPermission {
 	}
 
 	public static boolean contains(
-			PermissionChecker permissionChecker, String name, long groupId, String actionId)
-		throws PortalException, SystemException {
-
-		TagsEntry entry = TagsEntryLocalServiceUtil.getEntry(groupId, name);
-
-		return contains(permissionChecker, entry, actionId);
-	}
-
-	public static boolean contains(
-			PermissionChecker permissionChecker, TagsEntry entry,
-			String actionId)
-		throws PortalException, SystemException {
+		PermissionChecker permissionChecker, TagsEntry entry, String actionId) {
 
 		if (permissionChecker.hasPermission(
-			entry.getGroupId(), TagsEntry.class.getName(),
-			entry.getEntryId(), actionId)) {
+				entry.getGroupId(), TagsEntry.class.getName(),
+				entry.getEntryId(), actionId)) {
 
 			return true;
 		}

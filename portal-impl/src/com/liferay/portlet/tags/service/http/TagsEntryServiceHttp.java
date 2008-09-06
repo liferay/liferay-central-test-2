@@ -24,6 +24,7 @@ package com.liferay.portlet.tags.service.http;
 
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.kernel.util.BooleanWrapper;
 import com.liferay.portal.kernel.util.IntegerWrapper;
 import com.liferay.portal.kernel.util.LongWrapper;
 import com.liferay.portal.kernel.util.MethodWrapper;
@@ -74,112 +75,20 @@ import com.liferay.portlet.tags.service.TagsEntryServiceUtil;
  */
 public class TagsEntryServiceHttp {
 	public static com.liferay.portlet.tags.model.TagsEntry addEntry(
-		HttpPrincipal httpPrincipal, long plid, long groupId,
-		java.lang.String name)
+		HttpPrincipal httpPrincipal, long plid,
+		java.lang.String parentEntryName, java.lang.String name,
+		java.lang.String vocabularyName, java.lang.String[] properties,
+		boolean addCommunityPermissions, boolean addGuestPermissions)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		try {
 			Object paramObj0 = new LongWrapper(plid);
 
-			Object paramObj1 = new LongWrapper(groupId);
+			Object paramObj1 = parentEntryName;
 
-			Object paramObj2 = name;
-
-			if (name == null) {
-				paramObj2 = new NullWrapper("java.lang.String");
+			if (parentEntryName == null) {
+				paramObj1 = new NullWrapper("java.lang.String");
 			}
-
-			MethodWrapper methodWrapper = new MethodWrapper(TagsEntryServiceUtil.class.getName(),
-					"addEntry", new Object[] { paramObj0, paramObj1, paramObj2 });
-
-			Object returnObj = null;
-
-			try {
-				returnObj = TunnelUtil.invoke(httpPrincipal, methodWrapper);
-			}
-			catch (Exception e) {
-				if (e instanceof com.liferay.portal.PortalException) {
-					throw (com.liferay.portal.PortalException)e;
-				}
-
-				if (e instanceof com.liferay.portal.SystemException) {
-					throw (com.liferay.portal.SystemException)e;
-				}
-
-				throw new com.liferay.portal.SystemException(e);
-			}
-
-			return (com.liferay.portlet.tags.model.TagsEntry)returnObj;
-		}
-		catch (com.liferay.portal.SystemException se) {
-			_log.error(se, se);
-
-			throw se;
-		}
-	}
-
-	public static com.liferay.portlet.tags.model.TagsEntry addEntry(
-		HttpPrincipal httpPrincipal, long plid, long groupId,
-		java.lang.String name, java.lang.String[] properties)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
-		try {
-			Object paramObj0 = new LongWrapper(plid);
-
-			Object paramObj1 = new LongWrapper(groupId);
-
-			Object paramObj2 = name;
-
-			if (name == null) {
-				paramObj2 = new NullWrapper("java.lang.String");
-			}
-
-			Object paramObj3 = properties;
-
-			if (properties == null) {
-				paramObj3 = new NullWrapper("[Ljava.lang.String;");
-			}
-
-			MethodWrapper methodWrapper = new MethodWrapper(TagsEntryServiceUtil.class.getName(),
-					"addEntry",
-					new Object[] { paramObj0, paramObj1, paramObj2, paramObj3 });
-
-			Object returnObj = null;
-
-			try {
-				returnObj = TunnelUtil.invoke(httpPrincipal, methodWrapper);
-			}
-			catch (Exception e) {
-				if (e instanceof com.liferay.portal.PortalException) {
-					throw (com.liferay.portal.PortalException)e;
-				}
-
-				if (e instanceof com.liferay.portal.SystemException) {
-					throw (com.liferay.portal.SystemException)e;
-				}
-
-				throw new com.liferay.portal.SystemException(e);
-			}
-
-			return (com.liferay.portlet.tags.model.TagsEntry)returnObj;
-		}
-		catch (com.liferay.portal.SystemException se) {
-			_log.error(se, se);
-
-			throw se;
-		}
-	}
-
-	public static com.liferay.portlet.tags.model.TagsEntry addEntry(
-		HttpPrincipal httpPrincipal, long plid, long groupId,
-		java.lang.String name, java.lang.String vocabularyName,
-		java.lang.String[] properties)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
-		try {
-			Object paramObj0 = new LongWrapper(plid);
-
-			Object paramObj1 = new LongWrapper(groupId);
 
 			Object paramObj2 = name;
 
@@ -199,10 +108,15 @@ public class TagsEntryServiceHttp {
 				paramObj4 = new NullWrapper("[Ljava.lang.String;");
 			}
 
+			Object paramObj5 = new BooleanWrapper(addCommunityPermissions);
+
+			Object paramObj6 = new BooleanWrapper(addGuestPermissions);
+
 			MethodWrapper methodWrapper = new MethodWrapper(TagsEntryServiceUtil.class.getName(),
 					"addEntry",
 					new Object[] {
-						paramObj0, paramObj1, paramObj2, paramObj3, paramObj4
+						paramObj0, paramObj1, paramObj2, paramObj3, paramObj4,
+						paramObj5, paramObj6
 					});
 
 			Object returnObj = null;
@@ -232,16 +146,21 @@ public class TagsEntryServiceHttp {
 	}
 
 	public static com.liferay.portlet.tags.model.TagsEntry addEntry(
-		HttpPrincipal httpPrincipal, long plid, long groupId,
-		java.lang.String name, java.lang.String vocabularyName,
-		java.lang.String[] properties, java.lang.String[] communityPermissions,
+		HttpPrincipal httpPrincipal, long plid,
+		java.lang.String parentEntryName, java.lang.String name,
+		java.lang.String vocabularyName, java.lang.String[] properties,
+		java.lang.String[] communityPermissions,
 		java.lang.String[] guestPermissions)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		try {
 			Object paramObj0 = new LongWrapper(plid);
 
-			Object paramObj1 = new LongWrapper(groupId);
+			Object paramObj1 = parentEntryName;
+
+			if (parentEntryName == null) {
+				paramObj1 = new NullWrapper("java.lang.String");
+			}
 
 			Object paramObj2 = name;
 
@@ -306,156 +225,6 @@ public class TagsEntryServiceHttp {
 		}
 	}
 
-	public static com.liferay.portlet.tags.model.TagsEntry addEntry(
-		HttpPrincipal httpPrincipal, long plid, long groupId,
-		java.lang.String parentEntryName, java.lang.String name,
-		java.lang.String vocabularyName, java.lang.String[] properties)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
-		try {
-			Object paramObj0 = new LongWrapper(plid);
-
-			Object paramObj1 = new LongWrapper(groupId);
-
-			Object paramObj2 = parentEntryName;
-
-			if (parentEntryName == null) {
-				paramObj2 = new NullWrapper("java.lang.String");
-			}
-
-			Object paramObj3 = name;
-
-			if (name == null) {
-				paramObj3 = new NullWrapper("java.lang.String");
-			}
-
-			Object paramObj4 = vocabularyName;
-
-			if (vocabularyName == null) {
-				paramObj4 = new NullWrapper("java.lang.String");
-			}
-
-			Object paramObj5 = properties;
-
-			if (properties == null) {
-				paramObj5 = new NullWrapper("[Ljava.lang.String;");
-			}
-
-			MethodWrapper methodWrapper = new MethodWrapper(TagsEntryServiceUtil.class.getName(),
-					"addEntry",
-					new Object[] {
-						paramObj0, paramObj1, paramObj2, paramObj3, paramObj4,
-						paramObj5
-					});
-
-			Object returnObj = null;
-
-			try {
-				returnObj = TunnelUtil.invoke(httpPrincipal, methodWrapper);
-			}
-			catch (Exception e) {
-				if (e instanceof com.liferay.portal.PortalException) {
-					throw (com.liferay.portal.PortalException)e;
-				}
-
-				if (e instanceof com.liferay.portal.SystemException) {
-					throw (com.liferay.portal.SystemException)e;
-				}
-
-				throw new com.liferay.portal.SystemException(e);
-			}
-
-			return (com.liferay.portlet.tags.model.TagsEntry)returnObj;
-		}
-		catch (com.liferay.portal.SystemException se) {
-			_log.error(se, se);
-
-			throw se;
-		}
-	}
-
-	public static com.liferay.portlet.tags.model.TagsEntry addEntry(
-		HttpPrincipal httpPrincipal, long plid, long groupId,
-		java.lang.String parentEntryName, java.lang.String name,
-		java.lang.String vocabularyName, java.lang.String[] properties,
-		java.lang.String[] communityPermissions,
-		java.lang.String[] guestPermissions)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
-		try {
-			Object paramObj0 = new LongWrapper(plid);
-
-			Object paramObj1 = new LongWrapper(groupId);
-
-			Object paramObj2 = parentEntryName;
-
-			if (parentEntryName == null) {
-				paramObj2 = new NullWrapper("java.lang.String");
-			}
-
-			Object paramObj3 = name;
-
-			if (name == null) {
-				paramObj3 = new NullWrapper("java.lang.String");
-			}
-
-			Object paramObj4 = vocabularyName;
-
-			if (vocabularyName == null) {
-				paramObj4 = new NullWrapper("java.lang.String");
-			}
-
-			Object paramObj5 = properties;
-
-			if (properties == null) {
-				paramObj5 = new NullWrapper("[Ljava.lang.String;");
-			}
-
-			Object paramObj6 = communityPermissions;
-
-			if (communityPermissions == null) {
-				paramObj6 = new NullWrapper("[Ljava.lang.String;");
-			}
-
-			Object paramObj7 = guestPermissions;
-
-			if (guestPermissions == null) {
-				paramObj7 = new NullWrapper("[Ljava.lang.String;");
-			}
-
-			MethodWrapper methodWrapper = new MethodWrapper(TagsEntryServiceUtil.class.getName(),
-					"addEntry",
-					new Object[] {
-						paramObj0, paramObj1, paramObj2, paramObj3, paramObj4,
-						paramObj5, paramObj6, paramObj7
-					});
-
-			Object returnObj = null;
-
-			try {
-				returnObj = TunnelUtil.invoke(httpPrincipal, methodWrapper);
-			}
-			catch (Exception e) {
-				if (e instanceof com.liferay.portal.PortalException) {
-					throw (com.liferay.portal.PortalException)e;
-				}
-
-				if (e instanceof com.liferay.portal.SystemException) {
-					throw (com.liferay.portal.SystemException)e;
-				}
-
-				throw new com.liferay.portal.SystemException(e);
-			}
-
-			return (com.liferay.portlet.tags.model.TagsEntry)returnObj;
-		}
-		catch (com.liferay.portal.SystemException se) {
-			_log.error(se, se);
-
-			throw se;
-		}
-	}
-
 	public static void deleteEntry(HttpPrincipal httpPrincipal, long entryId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
@@ -490,8 +259,7 @@ public class TagsEntryServiceHttp {
 	public static java.util.List<com.liferay.portlet.tags.model.TagsEntry> getEntries(
 		HttpPrincipal httpPrincipal, java.lang.String className, long classPK)
 		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException,
-			com.liferay.portal.security.auth.PrincipalException {
+			com.liferay.portal.SystemException {
 		try {
 			Object paramObj0 = className;
 
@@ -518,10 +286,6 @@ public class TagsEntryServiceHttp {
 					throw (com.liferay.portal.SystemException)e;
 				}
 
-				if (e instanceof com.liferay.portal.security.auth.PrincipalException) {
-					throw (com.liferay.portal.security.auth.PrincipalException)e;
-				}
-
 				throw new com.liferay.portal.SystemException(e);
 			}
 
@@ -538,8 +302,7 @@ public class TagsEntryServiceHttp {
 		HttpPrincipal httpPrincipal, long groupId, long classNameId,
 		java.lang.String name)
 		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException,
-			com.liferay.portal.security.auth.PrincipalException {
+			com.liferay.portal.SystemException {
 		try {
 			Object paramObj0 = new LongWrapper(groupId);
 
@@ -567,10 +330,6 @@ public class TagsEntryServiceHttp {
 
 				if (e instanceof com.liferay.portal.SystemException) {
 					throw (com.liferay.portal.SystemException)e;
-				}
-
-				if (e instanceof com.liferay.portal.security.auth.PrincipalException) {
-					throw (com.liferay.portal.security.auth.PrincipalException)e;
 				}
 
 				throw new com.liferay.portal.SystemException(e);
@@ -975,155 +734,6 @@ public class TagsEntryServiceHttp {
 			}
 
 			return ((Integer)returnObj).intValue();
-		}
-		catch (com.liferay.portal.SystemException se) {
-			_log.error(se, se);
-
-			throw se;
-		}
-	}
-
-	public static com.liferay.portlet.tags.model.TagsEntry updateEntry(
-		HttpPrincipal httpPrincipal, long entryId, java.lang.String name)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
-		try {
-			Object paramObj0 = new LongWrapper(entryId);
-
-			Object paramObj1 = name;
-
-			if (name == null) {
-				paramObj1 = new NullWrapper("java.lang.String");
-			}
-
-			MethodWrapper methodWrapper = new MethodWrapper(TagsEntryServiceUtil.class.getName(),
-					"updateEntry", new Object[] { paramObj0, paramObj1 });
-
-			Object returnObj = null;
-
-			try {
-				returnObj = TunnelUtil.invoke(httpPrincipal, methodWrapper);
-			}
-			catch (Exception e) {
-				if (e instanceof com.liferay.portal.PortalException) {
-					throw (com.liferay.portal.PortalException)e;
-				}
-
-				if (e instanceof com.liferay.portal.SystemException) {
-					throw (com.liferay.portal.SystemException)e;
-				}
-
-				throw new com.liferay.portal.SystemException(e);
-			}
-
-			return (com.liferay.portlet.tags.model.TagsEntry)returnObj;
-		}
-		catch (com.liferay.portal.SystemException se) {
-			_log.error(se, se);
-
-			throw se;
-		}
-	}
-
-	public static com.liferay.portlet.tags.model.TagsEntry updateEntry(
-		HttpPrincipal httpPrincipal, long entryId,
-		java.lang.String parentEntryName, java.lang.String name,
-		java.lang.String vocabularyName)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
-		try {
-			Object paramObj0 = new LongWrapper(entryId);
-
-			Object paramObj1 = parentEntryName;
-
-			if (parentEntryName == null) {
-				paramObj1 = new NullWrapper("java.lang.String");
-			}
-
-			Object paramObj2 = name;
-
-			if (name == null) {
-				paramObj2 = new NullWrapper("java.lang.String");
-			}
-
-			Object paramObj3 = vocabularyName;
-
-			if (vocabularyName == null) {
-				paramObj3 = new NullWrapper("java.lang.String");
-			}
-
-			MethodWrapper methodWrapper = new MethodWrapper(TagsEntryServiceUtil.class.getName(),
-					"updateEntry",
-					new Object[] { paramObj0, paramObj1, paramObj2, paramObj3 });
-
-			Object returnObj = null;
-
-			try {
-				returnObj = TunnelUtil.invoke(httpPrincipal, methodWrapper);
-			}
-			catch (Exception e) {
-				if (e instanceof com.liferay.portal.PortalException) {
-					throw (com.liferay.portal.PortalException)e;
-				}
-
-				if (e instanceof com.liferay.portal.SystemException) {
-					throw (com.liferay.portal.SystemException)e;
-				}
-
-				throw new com.liferay.portal.SystemException(e);
-			}
-
-			return (com.liferay.portlet.tags.model.TagsEntry)returnObj;
-		}
-		catch (com.liferay.portal.SystemException se) {
-			_log.error(se, se);
-
-			throw se;
-		}
-	}
-
-	public static com.liferay.portlet.tags.model.TagsEntry updateEntry(
-		HttpPrincipal httpPrincipal, long entryId, java.lang.String name,
-		java.lang.String[] properties)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
-		try {
-			Object paramObj0 = new LongWrapper(entryId);
-
-			Object paramObj1 = name;
-
-			if (name == null) {
-				paramObj1 = new NullWrapper("java.lang.String");
-			}
-
-			Object paramObj2 = properties;
-
-			if (properties == null) {
-				paramObj2 = new NullWrapper("[Ljava.lang.String;");
-			}
-
-			MethodWrapper methodWrapper = new MethodWrapper(TagsEntryServiceUtil.class.getName(),
-					"updateEntry",
-					new Object[] { paramObj0, paramObj1, paramObj2 });
-
-			Object returnObj = null;
-
-			try {
-				returnObj = TunnelUtil.invoke(httpPrincipal, methodWrapper);
-			}
-			catch (Exception e) {
-				if (e instanceof com.liferay.portal.PortalException) {
-					throw (com.liferay.portal.PortalException)e;
-				}
-
-				if (e instanceof com.liferay.portal.SystemException) {
-					throw (com.liferay.portal.SystemException)e;
-				}
-
-				throw new com.liferay.portal.SystemException(e);
-			}
-
-			return (com.liferay.portlet.tags.model.TagsEntry)returnObj;
 		}
 		catch (com.liferay.portal.SystemException se) {
 			_log.error(se, se);

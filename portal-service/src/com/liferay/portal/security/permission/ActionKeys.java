@@ -103,9 +103,9 @@ public class ActionKeys {
 
 	public static final String ADD_USER_GROUP = "ADD_USER_GROUP";
 
-	public static final String ADD_VOTE = "ADD_VOTE";
-
 	public static final String ADD_VOCABULARY = "ADD_VOCABULARY";
+
+	public static final String ADD_VOTE = "ADD_VOTE";
 
 	public static final String APPROVE_ARTICLE = "APPROVE_ARTICLE";
 

@@ -52,6 +52,9 @@ public interface TagsVocabularyLocalService {
 		com.liferay.portlet.tags.model.TagsVocabulary tagsVocabulary)
 		throws com.liferay.portal.SystemException;
 
+	public com.liferay.portlet.tags.model.TagsVocabulary createTagsVocabulary(
+		long vocabularyId);
+
 	public void deleteTagsVocabulary(long vocabularyId)
 		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
@@ -84,31 +87,43 @@ public interface TagsVocabularyLocalService {
 		throws com.liferay.portal.SystemException;
 
 	public com.liferay.portlet.tags.model.TagsVocabulary addVocabulary(
-		long userId, long groupId, java.lang.String name)
+		long userId, long plid, java.lang.String name, boolean folksonomy,
+		boolean addCommunityPermissions, boolean addGuestPermissions)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;
 
 	public com.liferay.portlet.tags.model.TagsVocabulary addVocabulary(
-		long userId, long groupId, java.lang.String name, boolean folksonomy)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException;
-
-	public com.liferay.portlet.tags.model.TagsVocabulary addVocabulary(
-		long userId, long groupId, java.lang.String name, boolean folksonomy,
-		java.lang.Boolean addGuestPermissions,
-		java.lang.Boolean addCommunityPermissions,
+		long userId, long plid, java.lang.String name, boolean folksonomy,
 		java.lang.String[] communityPermissions,
 		java.lang.String[] guestPermissions)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;
 
-	public void addTagVocabularyResources(
+	public com.liferay.portlet.tags.model.TagsVocabulary addVocabulary(
+		long userId, long plid, java.lang.String name, boolean folksonomy,
+		java.lang.Boolean addCommunityPermissions,
+		java.lang.Boolean addGuestPermissions,
+		java.lang.String[] communityPermissions,
+		java.lang.String[] guestPermissions)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException;
+
+	public com.liferay.portlet.tags.model.TagsVocabulary addVocabularyToGroup(
+		long userId, long groupId, java.lang.String name, boolean folksonomy,
+		java.lang.Boolean addCommunityPermissions,
+		java.lang.Boolean addGuestPermissions,
+		java.lang.String[] communityPermissions,
+		java.lang.String[] guestPermissions)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException;
+
+	public void addVocabularyResources(
 		com.liferay.portlet.tags.model.TagsVocabulary vocabulary,
 		boolean addCommunityPermissions, boolean addGuestPermissions)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;
 
-	public void addTagVocabularyResources(
+	public void addVocabularyResources(
 		com.liferay.portlet.tags.model.TagsVocabulary vocabulary,
 		java.lang.String[] communityPermissions,
 		java.lang.String[] guestPermissions)
@@ -116,6 +131,11 @@ public interface TagsVocabularyLocalService {
 			com.liferay.portal.SystemException;
 
 	public void deleteVocabulary(long vocabularyId)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException;
+
+	public void deleteVocabulary(
+		com.liferay.portlet.tags.model.TagsVocabulary vocabulary)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;
 

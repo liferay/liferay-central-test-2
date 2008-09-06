@@ -48,57 +48,66 @@ public class TagsSourceLocalServiceUtil {
 	public static com.liferay.portlet.tags.model.TagsSource addTagsSource(
 		com.liferay.portlet.tags.model.TagsSource tagsSource)
 		throws com.liferay.portal.SystemException {
-		return _service.addTagsSource(tagsSource);
+		return getService().addTagsSource(tagsSource);
+	}
+
+	public static com.liferay.portlet.tags.model.TagsSource createTagsSource(
+		long sourceId) {
+		return getService().createTagsSource(sourceId);
 	}
 
 	public static void deleteTagsSource(long sourceId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		_service.deleteTagsSource(sourceId);
+		getService().deleteTagsSource(sourceId);
 	}
 
 	public static void deleteTagsSource(
 		com.liferay.portlet.tags.model.TagsSource tagsSource)
 		throws com.liferay.portal.SystemException {
-		_service.deleteTagsSource(tagsSource);
+		getService().deleteTagsSource(tagsSource);
 	}
 
 	public static java.util.List<Object> dynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery)
 		throws com.liferay.portal.SystemException {
-		return _service.dynamicQuery(dynamicQuery);
+		return getService().dynamicQuery(dynamicQuery);
 	}
 
 	public static java.util.List<Object> dynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery, int start,
 		int end) throws com.liferay.portal.SystemException {
-		return _service.dynamicQuery(dynamicQuery, start, end);
+		return getService().dynamicQuery(dynamicQuery, start, end);
 	}
 
 	public static com.liferay.portlet.tags.model.TagsSource getTagsSource(
 		long sourceId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		return _service.getTagsSource(sourceId);
+		return getService().getTagsSource(sourceId);
 	}
 
 	public static java.util.List<com.liferay.portlet.tags.model.TagsSource> getTagsSources(
 		int start, int end) throws com.liferay.portal.SystemException {
-		return _service.getTagsSources(start, end);
+		return getService().getTagsSources(start, end);
 	}
 
 	public static int getTagsSourcesCount()
 		throws com.liferay.portal.SystemException {
-		return _service.getTagsSourcesCount();
+		return getService().getTagsSourcesCount();
 	}
 
 	public static com.liferay.portlet.tags.model.TagsSource updateTagsSource(
 		com.liferay.portlet.tags.model.TagsSource tagsSource)
 		throws com.liferay.portal.SystemException {
-		return _service.updateTagsSource(tagsSource);
+		return getService().updateTagsSource(tagsSource);
 	}
 
 	public static TagsSourceLocalService getService() {
+		if (_service == null) {
+			throw new RuntimeException("TagsSourceLocalService is not set");
+		}
+
 		return _service;
 	}
 

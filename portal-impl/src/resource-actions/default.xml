@@ -16,8 +16,8 @@
 	<resource file="resource-actions/polls.xml" />
 	<resource file="resource-actions/shopping.xml" />
 	<resource file="resource-actions/softwarecatalog.xml" />
+	<resource file="resource-actions/tags.xml" />
 	<resource file="resource-actions/tasks.xml" />
-	<resource file="resource-actions/tagsadmin.xml" />
 	<resource file="resource-actions/wiki.xml" />
 	<resource file="resource-actions/workflow.xml" />
 </resource-action-mapping>

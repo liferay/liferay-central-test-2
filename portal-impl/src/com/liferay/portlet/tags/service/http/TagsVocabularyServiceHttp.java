@@ -74,24 +74,31 @@ import com.liferay.portlet.tags.service.TagsVocabularyServiceUtil;
  */
 public class TagsVocabularyServiceHttp {
 	public static com.liferay.portlet.tags.model.TagsVocabulary addVocabulary(
-		HttpPrincipal httpPrincipal, long plid, long groupId,
-		java.lang.String name)
+		HttpPrincipal httpPrincipal, long plid, java.lang.String name,
+		boolean folksonomy, boolean addCommunityPermissions,
+		boolean addGuestPermissions)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		try {
 			Object paramObj0 = new LongWrapper(plid);
 
-			Object paramObj1 = new LongWrapper(groupId);
-
-			Object paramObj2 = name;
+			Object paramObj1 = name;
 
 			if (name == null) {
-				paramObj2 = new NullWrapper("java.lang.String");
+				paramObj1 = new NullWrapper("java.lang.String");
 			}
+
+			Object paramObj2 = new BooleanWrapper(folksonomy);
+
+			Object paramObj3 = new BooleanWrapper(addCommunityPermissions);
+
+			Object paramObj4 = new BooleanWrapper(addGuestPermissions);
 
 			MethodWrapper methodWrapper = new MethodWrapper(TagsVocabularyServiceUtil.class.getName(),
 					"addVocabulary",
-					new Object[] { paramObj0, paramObj1, paramObj2 });
+					new Object[] {
+						paramObj0, paramObj1, paramObj2, paramObj3, paramObj4
+					});
 
 			Object returnObj = null;
 
@@ -120,90 +127,38 @@ public class TagsVocabularyServiceHttp {
 	}
 
 	public static com.liferay.portlet.tags.model.TagsVocabulary addVocabulary(
-		HttpPrincipal httpPrincipal, long plid, long groupId,
-		java.lang.String name, boolean folksonomy)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
-		try {
-			Object paramObj0 = new LongWrapper(plid);
-
-			Object paramObj1 = new LongWrapper(groupId);
-
-			Object paramObj2 = name;
-
-			if (name == null) {
-				paramObj2 = new NullWrapper("java.lang.String");
-			}
-
-			Object paramObj3 = new BooleanWrapper(folksonomy);
-
-			MethodWrapper methodWrapper = new MethodWrapper(TagsVocabularyServiceUtil.class.getName(),
-					"addVocabulary",
-					new Object[] { paramObj0, paramObj1, paramObj2, paramObj3 });
-
-			Object returnObj = null;
-
-			try {
-				returnObj = TunnelUtil.invoke(httpPrincipal, methodWrapper);
-			}
-			catch (Exception e) {
-				if (e instanceof com.liferay.portal.PortalException) {
-					throw (com.liferay.portal.PortalException)e;
-				}
-
-				if (e instanceof com.liferay.portal.SystemException) {
-					throw (com.liferay.portal.SystemException)e;
-				}
-
-				throw new com.liferay.portal.SystemException(e);
-			}
-
-			return (com.liferay.portlet.tags.model.TagsVocabulary)returnObj;
-		}
-		catch (com.liferay.portal.SystemException se) {
-			_log.error(se, se);
-
-			throw se;
-		}
-	}
-
-	public static com.liferay.portlet.tags.model.TagsVocabulary addVocabulary(
-		HttpPrincipal httpPrincipal, long plid, long groupId,
-		java.lang.String name, boolean folksonomy,
-		java.lang.String[] communityPermissions,
+		HttpPrincipal httpPrincipal, long plid, java.lang.String name,
+		boolean folksonomy, java.lang.String[] communityPermissions,
 		java.lang.String[] guestPermissions)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		try {
 			Object paramObj0 = new LongWrapper(plid);
 
-			Object paramObj1 = new LongWrapper(groupId);
-
-			Object paramObj2 = name;
+			Object paramObj1 = name;
 
 			if (name == null) {
-				paramObj2 = new NullWrapper("java.lang.String");
+				paramObj1 = new NullWrapper("java.lang.String");
 			}
 
-			Object paramObj3 = new BooleanWrapper(folksonomy);
+			Object paramObj2 = new BooleanWrapper(folksonomy);
 
-			Object paramObj4 = communityPermissions;
+			Object paramObj3 = communityPermissions;
 
 			if (communityPermissions == null) {
-				paramObj4 = new NullWrapper("[Ljava.lang.String;");
+				paramObj3 = new NullWrapper("[Ljava.lang.String;");
 			}
 
-			Object paramObj5 = guestPermissions;
+			Object paramObj4 = guestPermissions;
 
 			if (guestPermissions == null) {
-				paramObj5 = new NullWrapper("[Ljava.lang.String;");
+				paramObj4 = new NullWrapper("[Ljava.lang.String;");
 			}
 
 			MethodWrapper methodWrapper = new MethodWrapper(TagsVocabularyServiceUtil.class.getName(),
 					"addVocabulary",
 					new Object[] {
-						paramObj0, paramObj1, paramObj2, paramObj3, paramObj4,
-						paramObj5
+						paramObj0, paramObj1, paramObj2, paramObj3, paramObj4
 					});
 
 			Object returnObj = null;
@@ -267,8 +222,7 @@ public class TagsVocabularyServiceHttp {
 	public static java.util.List<com.liferay.portlet.tags.model.TagsVocabulary> getCompanyVocabularies(
 		HttpPrincipal httpPrincipal, long companyId, boolean folksonomy)
 		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException,
-			com.liferay.portal.security.auth.PrincipalException {
+			com.liferay.portal.SystemException {
 		try {
 			Object paramObj0 = new LongWrapper(companyId);
 
@@ -292,10 +246,6 @@ public class TagsVocabularyServiceHttp {
 					throw (com.liferay.portal.SystemException)e;
 				}
 
-				if (e instanceof com.liferay.portal.security.auth.PrincipalException) {
-					throw (com.liferay.portal.security.auth.PrincipalException)e;
-				}
-
 				throw new com.liferay.portal.SystemException(e);
 			}
 
@@ -311,8 +261,7 @@ public class TagsVocabularyServiceHttp {
 	public static java.util.List<com.liferay.portlet.tags.model.TagsVocabulary> getGroupVocabularies(
 		HttpPrincipal httpPrincipal, long groupId, boolean folksonomy)
 		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException,
-			com.liferay.portal.security.auth.PrincipalException {
+			com.liferay.portal.SystemException {
 		try {
 			Object paramObj0 = new LongWrapper(groupId);
 
@@ -334,10 +283,6 @@ public class TagsVocabularyServiceHttp {
 
 				if (e instanceof com.liferay.portal.SystemException) {
 					throw (com.liferay.portal.SystemException)e;
-				}
-
-				if (e instanceof com.liferay.portal.security.auth.PrincipalException) {
-					throw (com.liferay.portal.security.auth.PrincipalException)e;
 				}
 
 				throw new com.liferay.portal.SystemException(e);

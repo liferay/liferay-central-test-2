@@ -52,6 +52,9 @@ public interface TagsAssetLocalService {
 		com.liferay.portlet.tags.model.TagsAsset tagsAsset)
 		throws com.liferay.portal.SystemException;
 
+	public com.liferay.portlet.tags.model.TagsAsset createTagsAsset(
+		long assetId);
+
 	public void deleteTagsAsset(long assetId)
 		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;

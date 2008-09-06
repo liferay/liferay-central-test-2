@@ -527,9 +527,10 @@ public class TagsAssetLocalServiceImpl extends TagsAssetLocalServiceBaseImpl {
 			TagsEntry entry = tagsEntryPersistence.fetchByG_N(groupId, name);
 
 			if (entry == null) {
-				entry = tagsEntryLocalService.addEntry(
-					user.getUserId(), groupId, entryNames[i],
-					TagsEntryLocalServiceImpl.DEFAULT_PROPERTIES);
+				entry = tagsEntryLocalService.addEntryToGroup(
+					user.getUserId(), groupId, null, entryNames[i], null,
+					PropsValues.TAGS_PROPERTIES_DEFAULT, Boolean.TRUE,
+					Boolean.TRUE, null, null);
 			}
 
 			entries.add(entry);

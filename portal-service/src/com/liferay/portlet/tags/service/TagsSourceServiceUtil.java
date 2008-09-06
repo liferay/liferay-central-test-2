@@ -46,6 +46,10 @@ package com.liferay.portlet.tags.service;
  */
 public class TagsSourceServiceUtil {
 	public static TagsSourceService getService() {
+		if (_service == null) {
+			throw new RuntimeException("TagsSourceService is not set");
+		}
+
 		return _service;
 	}
 

@@ -26,6 +26,7 @@ import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.model.ResourceConstants;
 import com.liferay.portal.model.User;
+import com.liferay.portal.util.PortalUtil;
 import com.liferay.portlet.tags.DuplicateVocabularyException;
 import com.liferay.portlet.tags.model.TagsVocabulary;
 import com.liferay.portlet.tags.service.base.TagsVocabularyLocalServiceBaseImpl;
@@ -44,38 +45,47 @@ import java.util.List;
 public class TagsVocabularyLocalServiceImpl
 	extends TagsVocabularyLocalServiceBaseImpl {
 
-	public TagsVocabulary addVocabulary(long userId, long groupId, String name)
+	public TagsVocabulary addVocabulary(
+			long userId, long plid, String name, boolean folksonomy,
+			boolean addCommunityPermissions, boolean addGuestPermissions)
 		throws PortalException, SystemException {
 
-		Boolean addGuestPermissions = true;
-		Boolean addCommunityPermissions = true;
-		String[] communityPermissions = null;
-		String[] guestPermissions = null;
-
-		return addVocabulary(userId, groupId, name, false, addGuestPermissions,
-			addCommunityPermissions, communityPermissions,
-			guestPermissions);
+		return addVocabulary(
+			userId, plid, name, folksonomy,
+			Boolean.valueOf(addCommunityPermissions),
+			Boolean.valueOf(addGuestPermissions), null, null);
 	}
 
-	public TagsVocabulary addVocabulary(long userId, long groupId, String name,
-			boolean folksonomy)
+	public TagsVocabulary addVocabulary(
+			long userId, long plid, String name, boolean folksonomy,
+			String[] communityPermissions, String[] guestPermissions)
 		throws PortalException, SystemException {
 
-		Boolean addGuestPermissions = true;
-		Boolean addCommunityPermissions = true;
-		String[] communityPermissions = null;
-		String[] guestPermissions = null;
-
-		return addVocabulary(userId, groupId, name, folksonomy, addGuestPermissions,
-			addCommunityPermissions, communityPermissions,
+		return addVocabulary(
+			userId, plid, name, folksonomy, null, null, communityPermissions,
 			guestPermissions);
 	}
 
 	public TagsVocabulary addVocabulary(
-			long userId, long groupId, String name, boolean folksonomy,
-			Boolean addGuestPermissions, Boolean addCommunityPermissions,
+			long userId, long plid, String name, boolean folksonomy,
+			Boolean addCommunityPermissions, Boolean addGuestPermissions,
 			String[] communityPermissions, String[] guestPermissions)
 		throws PortalException, SystemException {
+
+		long groupId = PortalUtil.getPortletGroupId(plid);
+
+		return addVocabulary(
+			userId, groupId, name, folksonomy, addCommunityPermissions,
+			addGuestPermissions, communityPermissions, guestPermissions);
+	}
+
+	public TagsVocabulary addVocabularyToGroup(
+			long userId, long groupId, String name, boolean folksonomy,
+			Boolean addCommunityPermissions, Boolean addGuestPermissions,
+			String[] communityPermissions, String[] guestPermissions)
+		throws PortalException, SystemException {
+
+		// Vocabulary
 
 		User user = userPersistence.findByPrimaryKey(userId);
 		name = name.trim();
@@ -107,12 +117,12 @@ public class TagsVocabularyLocalServiceImpl
 		if ((addCommunityPermissions != null) &&
 			(addGuestPermissions != null)) {
 
-			addTagVocabularyResources(
+			addVocabularyResources(
 				vocabulary, addCommunityPermissions.booleanValue(),
 				addGuestPermissions.booleanValue());
 		}
 		else {
-			addTagVocabularyResources(
+			addVocabularyResources(
 				vocabulary, communityPermissions, guestPermissions);
 		}
 
@@ -120,7 +130,7 @@ public class TagsVocabularyLocalServiceImpl
 
 	}
 
-	public void addTagVocabularyResources(
+	public void addVocabularyResources(
 			TagsVocabulary vocabulary, boolean addCommunityPermissions,
 			boolean addGuestPermissions)
 		throws PortalException, SystemException {
@@ -132,7 +142,7 @@ public class TagsVocabularyLocalServiceImpl
 			addGuestPermissions);
 	}
 
-	public void addTagVocabularyResources(
+	public void addVocabularyResources(
 			TagsVocabulary vocabulary, String[] communityPermissions,
 			String[] guestPermissions)
 		throws PortalException, SystemException {
@@ -140,7 +150,8 @@ public class TagsVocabularyLocalServiceImpl
 		resourceLocalService.addModelResources(
 			vocabulary.getCompanyId(), vocabulary.getGroupId(),
 			vocabulary.getUserId(), TagsVocabulary.class.getName(),
-			vocabulary.getVocabularyId(), communityPermissions, guestPermissions);
+			vocabulary.getVocabularyId(), communityPermissions,
+			guestPermissions);
 	}
 
 	public void deleteVocabulary(long vocabularyId)
@@ -149,7 +160,16 @@ public class TagsVocabularyLocalServiceImpl
 		TagsVocabulary vocabulary = tagsVocabularyPersistence.findByPrimaryKey(
 			vocabularyId);
 
-		tagsEntryLocalService.deleteVocabularyEntries(vocabularyId);
+		deleteVocabulary(vocabulary);
+	}
+
+	public void deleteVocabulary(TagsVocabulary vocabulary)
+		throws PortalException, SystemException {
+
+		// Entries
+
+		tagsEntryLocalService.deleteVocabularyEntries(
+			vocabulary.getVocabularyId());
 
 		// Resources
 
@@ -157,7 +177,7 @@ public class TagsVocabularyLocalServiceImpl
 			vocabulary.getCompanyId(), TagsVocabulary.class.getName(),
 			ResourceConstants.SCOPE_INDIVIDUAL, vocabulary.getVocabularyId());
 
-		tagsVocabularyPersistence.remove(vocabularyId);
+		tagsVocabularyPersistence.remove(vocabulary);
 	}
 
 	public List<TagsVocabulary> getCompanyVocabularies(

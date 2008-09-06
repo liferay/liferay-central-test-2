@@ -52,6 +52,9 @@ public interface TagsEntryLocalService {
 		com.liferay.portlet.tags.model.TagsEntry tagsEntry)
 		throws com.liferay.portal.SystemException;
 
+	public com.liferay.portlet.tags.model.TagsEntry createTagsEntry(
+		long entryId);
+
 	public void deleteTagsEntry(long entryId)
 		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
@@ -82,29 +85,14 @@ public interface TagsEntryLocalService {
 		throws com.liferay.portal.SystemException;
 
 	public com.liferay.portlet.tags.model.TagsEntry addEntry(long userId,
-		long groupId, java.lang.String name)
+		long plid, java.lang.String parentEntryName, java.lang.String name,
+		java.lang.String vocabularyName, java.lang.String[] properties,
+		boolean addCommunityPermissions, boolean addGuestPermissions)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;
 
 	public com.liferay.portlet.tags.model.TagsEntry addEntry(long userId,
-		long groupId, java.lang.String name, java.lang.String[] properties)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException;
-
-	public com.liferay.portlet.tags.model.TagsEntry addEntry(long userId,
-		long groupId, java.lang.String name, java.lang.String vocabularyName,
-		java.lang.String[] properties)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException;
-
-	public com.liferay.portlet.tags.model.TagsEntry addEntry(long userId,
-		long groupId, java.lang.String parentEntryName, java.lang.String name,
-		java.lang.String vocabularyName, java.lang.String[] properties)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException;
-
-	public com.liferay.portlet.tags.model.TagsEntry addEntry(long userId,
-		long groupId, java.lang.String parentEntryName, java.lang.String name,
+		long plid, java.lang.String parentEntryName, java.lang.String name,
 		java.lang.String vocabularyName, java.lang.String[] properties,
 		java.lang.String[] communityPermissions,
 		java.lang.String[] guestPermissions)
@@ -112,29 +100,33 @@ public interface TagsEntryLocalService {
 			com.liferay.portal.SystemException;
 
 	public com.liferay.portlet.tags.model.TagsEntry addEntry(long userId,
-		long groupId, java.lang.String name, java.lang.String vocabularyName,
-		java.lang.String[] properties, java.lang.String[] communityPermissions,
-		java.lang.String[] guestPermissions)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException;
-
-	public com.liferay.portlet.tags.model.TagsEntry addEntry(long userId,
-		long groupId, java.lang.String parentEntryName, java.lang.String name,
+		long plid, java.lang.String parentEntryName, java.lang.String name,
 		java.lang.String vocabularyName, java.lang.String[] properties,
-		java.lang.Boolean addGuestPermissions,
 		java.lang.Boolean addCommunityPermissions,
+		java.lang.Boolean addGuestPermissions,
 		java.lang.String[] communityPermissions,
 		java.lang.String[] guestPermissions)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;
 
-	public void addTagEntryResources(
+	public com.liferay.portlet.tags.model.TagsEntry addEntryToGroup(
+		long userId, long groupId, java.lang.String parentEntryName,
+		java.lang.String name, java.lang.String vocabularyName,
+		java.lang.String[] properties,
+		java.lang.Boolean addCommunityPermissions,
+		java.lang.Boolean addGuestPermissions,
+		java.lang.String[] communityPermissions,
+		java.lang.String[] guestPermissions)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException;
+
+	public void addEntryResources(
 		com.liferay.portlet.tags.model.TagsEntry entry,
 		boolean addCommunityPermissions, boolean addGuestPermissions)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;
 
-	public void addTagEntryResources(
+	public void addEntryResources(
 		com.liferay.portlet.tags.model.TagsEntry entry,
 		java.lang.String[] communityPermissions,
 		java.lang.String[] guestPermissions)
@@ -249,22 +241,6 @@ public interface TagsEntryLocalService {
 	public int searchCount(long groupId, java.lang.String name,
 		java.lang.String[] properties)
 		throws com.liferay.portal.SystemException;
-
-	public com.liferay.portlet.tags.model.TagsEntry updateEntry(long entryId,
-		java.lang.String name)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException;
-
-	public com.liferay.portlet.tags.model.TagsEntry updateEntry(long entryId,
-		java.lang.String parentEntryName, java.lang.String name,
-		java.lang.String vocabularyName)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException;
-
-	public com.liferay.portlet.tags.model.TagsEntry updateEntry(long userId,
-		long entryId, java.lang.String name, java.lang.String[] properties)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException;
 
 	public com.liferay.portlet.tags.model.TagsEntry updateEntry(long userId,
 		long entryId, java.lang.String parentEntryName, java.lang.String name,

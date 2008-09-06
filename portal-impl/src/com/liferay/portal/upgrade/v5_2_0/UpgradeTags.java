@@ -245,8 +245,10 @@ public class UpgradeTags extends UpgradeProcess {
 					groupId, vocabularyName);
 			}
 			catch (NoSuchVocabularyException nsve) {
-				vocabulary = TagsVocabularyLocalServiceUtil.addVocabulary(
-					userId, groupId, vocabularyName, true);
+				vocabulary =
+					TagsVocabularyLocalServiceUtil.addVocabularyToGroup(
+						userId, groupId, vocabularyName, true, Boolean.TRUE,
+						Boolean.TRUE, null, null);
 			}
 
 			_vocabulariesMap.put(key, vocabulary);

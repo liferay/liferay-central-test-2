@@ -510,8 +510,9 @@ public class MediaWikiImporter implements WikiImporter {
 						node.getCompanyId(), categoryName);
 				}
 				catch (NoSuchEntryException nsee) {
-					tagsEntry = TagsEntryLocalServiceUtil.addEntry(
-						userId, node.getGroupId(), categoryName);
+					tagsEntry = TagsEntryLocalServiceUtil.addEntryToGroup(
+						userId, node.getGroupId(), null, categoryName, null,
+						null, Boolean.TRUE, Boolean.TRUE, null, null);
 				}
 
 				if (Validator.isNotNull(description)) {
@@ -605,8 +606,9 @@ public class MediaWikiImporter implements WikiImporter {
 					node.getCompanyId(), categoryName);
 			}
 			catch (NoSuchEntryException nsee) {
-				tagsEntry = TagsEntryLocalServiceUtil.addEntry(
-					userId, node.getGroupId(), categoryName);
+				tagsEntry = TagsEntryLocalServiceUtil.addEntryToGroup(
+					userId, node.getGroupId(), null, categoryName, null, null,
+					Boolean.TRUE, Boolean.TRUE, null, null);
 			}
 
 			tagsEntries.add(tagsEntry.getName());

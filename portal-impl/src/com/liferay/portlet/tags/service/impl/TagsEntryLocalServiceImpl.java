@@ -62,92 +62,69 @@ import java.util.Set;
  */
 public class TagsEntryLocalServiceImpl extends TagsEntryLocalServiceBaseImpl {
 
-	public static String[] DEFAULT_PROPERTIES =
-		PropsValues.TAGS_PROPERTIES_DEFAULT;
-
-	public TagsEntry addEntry(long userId, long groupId, String name)
-		throws PortalException, SystemException {
-
-		return addEntry(userId, groupId, name, new String[0]);
-	}
-
 	public TagsEntry addEntry(
-			long userId, long groupId, String name, String[] properties)
-		throws PortalException, SystemException {
-
-		return addEntry(
-			userId, groupId, name, PropsValues.TAGS_VOCABULARY_DEFAULT,
-			properties);
-	}
-
-	public TagsEntry addEntry(
-			long userId, long groupId, String name, String vocabularyName,
-			String[] properties)
-		throws PortalException, SystemException {
-
-		return addEntry(
-			userId, groupId, null, name, vocabularyName, properties);
-	}
-
-	public TagsEntry addEntry(long userId, long groupId,
-			String parentEntryName, String name, String vocabularyName,
-			String[] properties) throws PortalException, SystemException {
-
-		Boolean addGuestPermissions = true;
-		Boolean addCommunityPermissions = true;
-		String[] communityPermissions = null;
-		String[] guestPermissions = null;
-
-		return addEntry(
-			userId, groupId, parentEntryName, name, vocabularyName,
-			properties, addGuestPermissions, addCommunityPermissions,
-			communityPermissions, guestPermissions);
-	}
-
-	public TagsEntry addEntry(long userId, long groupId,
-			String parentEntryName, String name, String vocabularyName,
-			String[] properties, String[] communityPermissions,
-			String[] guestPermissions)
-		throws PortalException, SystemException {
-
-		Boolean addGuestPermissions = null;
-		Boolean addCommunityPermissions = null;
-
-		return addEntry(
-			userId, groupId, parentEntryName, name, vocabularyName,
-			properties, addGuestPermissions, addCommunityPermissions,
-			communityPermissions, guestPermissions);
-	}
-
-	public TagsEntry addEntry(
-			long userId, long groupId, String name, String vocabularyName,
-			String[] properties, String[] communityPermissions,
-			String[] guestPermissions)
-		throws PortalException, SystemException {
-
-		Boolean addGuestPermissions = null;
-		Boolean addCommunityPermissions = null;
-
-		return addEntry(
-			userId, groupId, null, name, vocabularyName, properties,
-			addGuestPermissions, addCommunityPermissions, communityPermissions,
-			guestPermissions);
-	}
-
-	public TagsEntry addEntry(
-			long userId, long groupId, String parentEntryName, String name,
+			long userId, long plid, String parentEntryName, String name,
 			String vocabularyName, String[] properties,
-			Boolean addGuestPermissions, Boolean addCommunityPermissions,
+			boolean addCommunityPermissions, boolean addGuestPermissions)
+		throws PortalException, SystemException {
+
+		return addEntry(
+			userId, plid, parentEntryName, name, vocabularyName, properties,
+			Boolean.valueOf(addCommunityPermissions),
+			Boolean.valueOf(addGuestPermissions), null, null);
+	}
+
+	public TagsEntry addEntry(
+			long userId, long plid, String parentEntryName, String name,
+			String vocabularyName, String[] properties,
 			String[] communityPermissions, String[] guestPermissions)
 		throws PortalException, SystemException {
 
+		return addEntry(
+			userId, plid, parentEntryName, name, vocabularyName, properties,
+			null, null, communityPermissions, guestPermissions);
+	}
+
+	public TagsEntry addEntry(
+			long userId, long plid, String parentEntryName, String name,
+			String vocabularyName, String[] properties,
+			Boolean addCommunityPermissions, Boolean addGuestPermissions,
+			String[] communityPermissions, String[] guestPermissions)
+		throws PortalException, SystemException {
+
+		long groupId = PortalUtil.getPortletGroupId(plid);
+
+		return addEntryToGroup(
+			userId, groupId, parentEntryName, name, vocabularyName, properties,
+			addCommunityPermissions, addGuestPermissions, communityPermissions,
+			communityPermissions);
+	}
+
+	public TagsEntry addEntryToGroup(
+			long userId, long groupId, String parentEntryName, String name,
+			String vocabularyName, String[] properties,
+			Boolean addCommunityPermissions, Boolean addGuestPermissions,
+			String[] communityPermissions, String[] guestPermissions)
+		throws PortalException, SystemException {
+
+		// Entry
+
 		User user = userPersistence.findByPrimaryKey(userId);
-		Date now = new Date();
 		name = name.trim().toLowerCase();
+
+		if (Validator.isNull(vocabularyName)) {
+			vocabularyName = PropsValues.TAGS_VOCABULARY_DEFAULT;
+		}
+
+		if (properties != null) {
+			properties = new String[0];
+		}
+
+		Date now = new Date();
 
 		validate(name);
 
-		if (hasEntry(user.getCompanyId(), name)) {
+		if (hasEntry(groupId, name)) {
 			throw new DuplicateEntryException(
 				"A tag entry with the name " + name + " already exists");
 		}
@@ -162,29 +139,6 @@ public class TagsEntryLocalServiceImpl extends TagsEntryLocalServiceBaseImpl {
 		entry.setUserName(user.getFullName());
 		entry.setCreateDate(now);
 		entry.setModifiedDate(now);
-		entry.setName(name);
-
-		if (Validator.isNull(vocabularyName)) {
-			vocabularyName = PropsValues.TAGS_VOCABULARY_DEFAULT;
-		}
-
-		TagsVocabulary vocabulary = null;
-
-		try {
-			vocabulary = tagsVocabularyPersistence.findByG_N(
-				groupId, vocabularyName);
-		}
-		catch (NoSuchVocabularyException nsve) {
-			if (vocabularyName.equals(PropsValues.TAGS_VOCABULARY_DEFAULT)) {
-				vocabulary = tagsVocabularyLocalService.addVocabulary(
-					userId, groupId, vocabularyName, true);
-			}
-			else {
-				throw nsve;
-			}
-		}
-
-		entry.setVocabularyId(vocabulary.getVocabularyId());
 
 		if (Validator.isNotNull(parentEntryName)) {
 			TagsEntry parentEntry = tagsEntryPersistence.findByG_N(
@@ -196,6 +150,27 @@ public class TagsEntryLocalServiceImpl extends TagsEntryLocalServiceBaseImpl {
 			entry.setParentEntryId(TagsEntryConstants.DEFAULT_PARENT_ENTRY_ID);
 		}
 
+		entry.setName(name);
+
+		TagsVocabulary vocabulary = null;
+
+		try {
+			vocabulary = tagsVocabularyPersistence.findByG_N(
+				groupId, vocabularyName);
+		}
+		catch (NoSuchVocabularyException nsve) {
+			if (vocabularyName.equals(PropsValues.TAGS_VOCABULARY_DEFAULT)) {
+				vocabulary = tagsVocabularyLocalService.addVocabularyToGroup(
+					userId, groupId, vocabularyName, true, Boolean.TRUE,
+					Boolean.TRUE, null, null);
+			}
+			else {
+				throw nsve;
+			}
+		}
+
+		entry.setVocabularyId(vocabulary.getVocabularyId());
+
 		tagsEntryPersistence.update(entry, false);
 
 		// Resources
@@ -203,14 +178,15 @@ public class TagsEntryLocalServiceImpl extends TagsEntryLocalServiceBaseImpl {
 		if ((addCommunityPermissions != null) &&
 			(addGuestPermissions != null)) {
 
-			addTagEntryResources(
+			addEntryResources(
 				entry, addCommunityPermissions.booleanValue(),
 				addGuestPermissions.booleanValue());
 		}
 		else {
-			addTagEntryResources(
-				entry, communityPermissions, guestPermissions);
+			addEntryResources(entry, communityPermissions, guestPermissions);
 		}
+
+		// Properties
 
 		for (int i = 0; i < properties.length; i++) {
 			String[] property = StringUtil.split(
@@ -237,27 +213,26 @@ public class TagsEntryLocalServiceImpl extends TagsEntryLocalServiceBaseImpl {
 		return entry;
 	}
 
-	public void addTagEntryResources(
+	public void addEntryResources(
 			TagsEntry entry, boolean addCommunityPermissions,
 			boolean addGuestPermissions)
 		throws PortalException, SystemException {
 
 		resourceLocalService.addResources(
-			entry.getCompanyId(), entry.getGroupId(),
-			entry.getUserId(), TagsEntry.class.getName(),
-			entry.getEntryId(), false, addCommunityPermissions,
-			addGuestPermissions);
+			entry.getCompanyId(), entry.getGroupId(), entry.getUserId(),
+			TagsEntry.class.getName(), entry.getEntryId(), false,
+			addCommunityPermissions, addGuestPermissions);
 	}
 
-	public void addTagEntryResources(
+	public void addEntryResources(
 			TagsEntry entry, String[] communityPermissions,
 			String[] guestPermissions)
 		throws PortalException, SystemException {
 
 		resourceLocalService.addModelResources(
-			entry.getCompanyId(), entry.getGroupId(),
-			entry.getUserId(), TagsEntry.class.getName(),
-			entry.getEntryId(), communityPermissions, guestPermissions);
+			entry.getCompanyId(), entry.getGroupId(), entry.getUserId(),
+			TagsEntry.class.getName(), entry.getEntryId(), communityPermissions,
+			guestPermissions);
 	}
 
 	public void checkEntries(long userId, long groupId, String[] names)
@@ -269,7 +244,10 @@ public class TagsEntryLocalServiceImpl extends TagsEntryLocalServiceBaseImpl {
 			TagsEntry entry = tagsEntryPersistence.fetchByG_N(groupId, name);
 
 			if (entry == null) {
-				addEntry(userId, groupId, name, DEFAULT_PROPERTIES);
+				addEntryToGroup(
+					userId, groupId, null, name, null,
+					PropsValues.TAGS_PROPERTIES_DEFAULT, Boolean.TRUE,
+					Boolean.TRUE, null, null);
 			}
 		}
 	}
@@ -297,7 +275,7 @@ public class TagsEntryLocalServiceImpl extends TagsEntryLocalServiceBaseImpl {
 
 		// Entry
 
-		tagsEntryPersistence.remove(entry.getEntryId());
+		tagsEntryPersistence.remove(entry);
 	}
 
 	public void deleteVocabularyEntries(long vocabularyId)
@@ -543,36 +521,42 @@ public class TagsEntryLocalServiceImpl extends TagsEntryLocalServiceBaseImpl {
 		return tagsEntryFinder.countByG_N_P(groupId, name, properties);
 	}
 
-	public TagsEntry updateEntry(long entryId, String name)
-		throws PortalException, SystemException {
-
-		return updateEntry(
-			entryId, null, name, PropsValues.TAGS_VOCABULARY_DEFAULT);
-	}
-
 	public TagsEntry updateEntry(
-			long entryId, String parentEntryName, String name,
-			String vocabularyName)
+			long userId, long entryId, String parentEntryName, String name,
+			String vocabularyName, String[] properties)
 		throws PortalException, SystemException {
+
+		// Entry
 
 		name = name.trim().toLowerCase();
+
+		if (Validator.isNull(vocabularyName)) {
+			vocabularyName = PropsValues.TAGS_VOCABULARY_DEFAULT;
+		}
 
 		validate(name);
 
 		TagsEntry entry = tagsEntryPersistence.findByPrimaryKey(entryId);
 
-		if (!entry.getName().equals(name)) {
-			if (hasEntry(entry.getGroupId(), name)) {
-				throw new DuplicateEntryException();
-			}
+		if (!entry.getName().equals(name) &&
+			hasEntry(entry.getGroupId(), name)) {
+
+			throw new DuplicateEntryException();
 		}
 
 		entry.setModifiedDate(new Date());
-		entry.setName(name);
 
-		if (Validator.isNull(vocabularyName)) {
-			vocabularyName = PropsValues.TAGS_VOCABULARY_DEFAULT;
+		if (Validator.isNotNull(parentEntryName)) {
+			TagsEntry parentEntry = getEntry(
+				entry.getGroupId(), parentEntryName);
+
+			entry.setParentEntryId(parentEntry.getEntryId());
 		}
+		else {
+			entry.setParentEntryId(TagsEntryConstants.DEFAULT_PARENT_ENTRY_ID);
+		}
+
+		entry.setName(name);
 
 		TagsVocabulary vocabulary = null;
 
@@ -582,9 +566,9 @@ public class TagsEntryLocalServiceImpl extends TagsEntryLocalServiceBaseImpl {
 		}
 		catch (NoSuchVocabularyException nsve) {
 			if (vocabularyName.equals(PropsValues.TAGS_VOCABULARY_DEFAULT)) {
-				vocabulary = tagsVocabularyLocalService.addVocabulary(
+				vocabulary = tagsVocabularyLocalService.addVocabularyToGroup(
 					entry.getUserId(), entry.getGroupId(), vocabularyName,
-					true);
+					true, Boolean.TRUE, Boolean.TRUE, null, null);
 			}
 			else {
 				throw nsve;
@@ -593,34 +577,9 @@ public class TagsEntryLocalServiceImpl extends TagsEntryLocalServiceBaseImpl {
 
 		entry.setVocabularyId(vocabulary.getVocabularyId());
 
-		if (Validator.isNotNull(parentEntryName)) {
-			TagsEntry parent = getEntry(entry.getGroupId(), parentEntryName);
-
-			entry.setParentEntryId(parent.getEntryId());
-		}
-		else {
-			entry.setParentEntryId(TagsEntryConstants.DEFAULT_PARENT_ENTRY_ID);
-		}
-
 		tagsEntryPersistence.update(entry, false);
 
-		return entry;
-	}
-
-	public TagsEntry updateEntry(
-			long userId, long entryId, String name, String[] properties)
-		throws PortalException, SystemException {
-
-		return updateEntry(userId, entryId, null, name, null, properties);
-	}
-
-	public TagsEntry updateEntry(
-			long userId, long entryId, String parentEntryName, String name,
-			String vocabularyName, String[] properties)
-		throws PortalException, SystemException {
-
-		TagsEntry entry = updateEntry(
-			entryId, parentEntryName, name, vocabularyName);
+		// Properties
 
 		Set<Long> newProperties = new HashSet<Long>();
 

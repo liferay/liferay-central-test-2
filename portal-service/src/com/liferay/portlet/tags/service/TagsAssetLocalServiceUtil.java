@@ -48,99 +48,105 @@ public class TagsAssetLocalServiceUtil {
 	public static com.liferay.portlet.tags.model.TagsAsset addTagsAsset(
 		com.liferay.portlet.tags.model.TagsAsset tagsAsset)
 		throws com.liferay.portal.SystemException {
-		return _service.addTagsAsset(tagsAsset);
+		return getService().addTagsAsset(tagsAsset);
+	}
+
+	public static com.liferay.portlet.tags.model.TagsAsset createTagsAsset(
+		long assetId) {
+		return getService().createTagsAsset(assetId);
 	}
 
 	public static void deleteTagsAsset(long assetId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		_service.deleteTagsAsset(assetId);
+		getService().deleteTagsAsset(assetId);
 	}
 
 	public static void deleteTagsAsset(
 		com.liferay.portlet.tags.model.TagsAsset tagsAsset)
 		throws com.liferay.portal.SystemException {
-		_service.deleteTagsAsset(tagsAsset);
+		getService().deleteTagsAsset(tagsAsset);
 	}
 
 	public static java.util.List<Object> dynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery)
 		throws com.liferay.portal.SystemException {
-		return _service.dynamicQuery(dynamicQuery);
+		return getService().dynamicQuery(dynamicQuery);
 	}
 
 	public static java.util.List<Object> dynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery, int start,
 		int end) throws com.liferay.portal.SystemException {
-		return _service.dynamicQuery(dynamicQuery, start, end);
+		return getService().dynamicQuery(dynamicQuery, start, end);
 	}
 
 	public static com.liferay.portlet.tags.model.TagsAsset getTagsAsset(
 		long assetId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		return _service.getTagsAsset(assetId);
+		return getService().getTagsAsset(assetId);
 	}
 
 	public static java.util.List<com.liferay.portlet.tags.model.TagsAsset> getTagsAssets(
 		int start, int end) throws com.liferay.portal.SystemException {
-		return _service.getTagsAssets(start, end);
+		return getService().getTagsAssets(start, end);
 	}
 
 	public static int getTagsAssetsCount()
 		throws com.liferay.portal.SystemException {
-		return _service.getTagsAssetsCount();
+		return getService().getTagsAssetsCount();
 	}
 
 	public static com.liferay.portlet.tags.model.TagsAsset updateTagsAsset(
 		com.liferay.portlet.tags.model.TagsAsset tagsAsset)
 		throws com.liferay.portal.SystemException {
-		return _service.updateTagsAsset(tagsAsset);
+		return getService().updateTagsAsset(tagsAsset);
 	}
 
 	public static void deleteAsset(long assetId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		_service.deleteAsset(assetId);
+		getService().deleteAsset(assetId);
 	}
 
 	public static void deleteAsset(java.lang.String className, long classPK)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		_service.deleteAsset(className, classPK);
+		getService().deleteAsset(className, classPK);
 	}
 
 	public static void deleteAsset(
 		com.liferay.portlet.tags.model.TagsAsset asset)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		_service.deleteAsset(asset);
+		getService().deleteAsset(asset);
 	}
 
 	public static com.liferay.portlet.tags.model.TagsAsset getAsset(
 		long assetId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		return _service.getAsset(assetId);
+		return getService().getAsset(assetId);
 	}
 
 	public static com.liferay.portlet.tags.model.TagsAsset getAsset(
 		java.lang.String className, long classPK)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		return _service.getAsset(className, classPK);
+		return getService().getAsset(className, classPK);
 	}
 
 	public static com.liferay.portlet.tags.model.TagsAssetType[] getAssetTypes(
 		java.lang.String languageId) {
-		return _service.getAssetTypes(languageId);
+		return getService().getAssetTypes(languageId);
 	}
 
 	public static java.util.List<com.liferay.portlet.tags.model.TagsAsset> getAssets(
 		long[] entryIds, long[] notEntryIds, boolean andOperator,
 		boolean excludeZeroViewCount, int start, int end)
 		throws com.liferay.portal.SystemException {
-		return _service.getAssets(entryIds, notEntryIds, andOperator,
+		return getService()
+				   .getAssets(entryIds, notEntryIds, andOperator,
 			excludeZeroViewCount, start, end);
 	}
 
@@ -148,7 +154,8 @@ public class TagsAssetLocalServiceUtil {
 		long groupId, long[] classNameIds, long[] entryIds, long[] notEntryIds,
 		boolean andOperator, boolean excludeZeroViewCount, int start, int end)
 		throws com.liferay.portal.SystemException {
-		return _service.getAssets(groupId, classNameIds, entryIds, notEntryIds,
+		return getService()
+				   .getAssets(groupId, classNameIds, entryIds, notEntryIds,
 			andOperator, excludeZeroViewCount, start, end);
 	}
 
@@ -157,7 +164,8 @@ public class TagsAssetLocalServiceUtil {
 		boolean excludeZeroViewCount, java.util.Date publishDate,
 		java.util.Date expirationDate, int start, int end)
 		throws com.liferay.portal.SystemException {
-		return _service.getAssets(entryIds, notEntryIds, andOperator,
+		return getService()
+				   .getAssets(entryIds, notEntryIds, andOperator,
 			excludeZeroViewCount, publishDate, expirationDate, start, end);
 	}
 
@@ -166,7 +174,8 @@ public class TagsAssetLocalServiceUtil {
 		boolean andOperator, boolean excludeZeroViewCount,
 		java.util.Date publishDate, java.util.Date expirationDate, int start,
 		int end) throws com.liferay.portal.SystemException {
-		return _service.getAssets(groupId, classNameIds, entryIds, notEntryIds,
+		return getService()
+				   .getAssets(groupId, classNameIds, entryIds, notEntryIds,
 			andOperator, excludeZeroViewCount, publishDate, expirationDate,
 			start, end);
 	}
@@ -178,9 +187,10 @@ public class TagsAssetLocalServiceUtil {
 		boolean excludeZeroViewCount, java.util.Date publishDate,
 		java.util.Date expirationDate, int start, int end)
 		throws com.liferay.portal.SystemException {
-		return _service.getAssets(entryIds, notEntryIds, andOperator,
-			orderByCol1, orderByCol2, orderByType1, orderByType2,
-			excludeZeroViewCount, publishDate, expirationDate, start, end);
+		return getService()
+				   .getAssets(entryIds, notEntryIds, andOperator, orderByCol1,
+			orderByCol2, orderByType1, orderByType2, excludeZeroViewCount,
+			publishDate, expirationDate, start, end);
 	}
 
 	public static java.util.List<com.liferay.portlet.tags.model.TagsAsset> getAssets(
@@ -190,7 +200,8 @@ public class TagsAssetLocalServiceUtil {
 		java.lang.String orderByType2, boolean excludeZeroViewCount,
 		java.util.Date publishDate, java.util.Date expirationDate, int start,
 		int end) throws com.liferay.portal.SystemException {
-		return _service.getAssets(groupId, classNameIds, entryIds, notEntryIds,
+		return getService()
+				   .getAssets(groupId, classNameIds, entryIds, notEntryIds,
 			andOperator, orderByCol1, orderByCol2, orderByType1, orderByType2,
 			excludeZeroViewCount, publishDate, expirationDate, start, end);
 	}
@@ -198,22 +209,25 @@ public class TagsAssetLocalServiceUtil {
 	public static int getAssetsCount(long[] entryIds, long[] notEntryIds,
 		boolean andOperator, boolean excludeZeroViewCount)
 		throws com.liferay.portal.SystemException {
-		return _service.getAssetsCount(entryIds, notEntryIds, andOperator,
+		return getService()
+				   .getAssetsCount(entryIds, notEntryIds, andOperator,
 			excludeZeroViewCount);
 	}
 
 	public static int getAssetsCount(long groupId, long[] entryIds,
 		long[] notEntryIds, boolean andOperator, boolean excludeZeroViewCount)
 		throws com.liferay.portal.SystemException {
-		return _service.getAssetsCount(groupId, entryIds, notEntryIds,
-			andOperator, excludeZeroViewCount);
+		return getService()
+				   .getAssetsCount(groupId, entryIds, notEntryIds, andOperator,
+			excludeZeroViewCount);
 	}
 
 	public static int getAssetsCount(long[] entryIds, long[] notEntryIds,
 		boolean andOperator, boolean excludeZeroViewCount,
 		java.util.Date publishDate, java.util.Date expirationDate)
 		throws com.liferay.portal.SystemException {
-		return _service.getAssetsCount(entryIds, notEntryIds, andOperator,
+		return getService()
+				   .getAssetsCount(entryIds, notEntryIds, andOperator,
 			excludeZeroViewCount, publishDate, expirationDate);
 	}
 
@@ -222,7 +236,8 @@ public class TagsAssetLocalServiceUtil {
 		boolean excludeZeroViewCount, java.util.Date publishDate,
 		java.util.Date expirationDate)
 		throws com.liferay.portal.SystemException {
-		return _service.getAssetsCount(groupId, classNameIds, entryIds,
+		return getService()
+				   .getAssetsCount(groupId, classNameIds, entryIds,
 			notEntryIds, andOperator, excludeZeroViewCount, publishDate,
 			expirationDate);
 	}
@@ -230,58 +245,60 @@ public class TagsAssetLocalServiceUtil {
 	public static com.liferay.portlet.tags.model.TagsAssetDisplay[] getCompanyAssetDisplays(
 		long companyId, int start, int end, java.lang.String languageId)
 		throws com.liferay.portal.SystemException {
-		return _service.getCompanyAssetDisplays(companyId, start, end,
-			languageId);
+		return getService()
+				   .getCompanyAssetDisplays(companyId, start, end, languageId);
 	}
 
 	public static java.util.List<com.liferay.portlet.tags.model.TagsAsset> getCompanyAssets(
 		long companyId, int start, int end)
 		throws com.liferay.portal.SystemException {
-		return _service.getCompanyAssets(companyId, start, end);
+		return getService().getCompanyAssets(companyId, start, end);
 	}
 
 	public static int getCompanyAssetsCount(long companyId)
 		throws com.liferay.portal.SystemException {
-		return _service.getCompanyAssetsCount(companyId);
+		return getService().getCompanyAssetsCount(companyId);
 	}
 
 	public static java.util.List<com.liferay.portlet.tags.model.TagsAsset> getTopViewedAssets(
 		java.lang.String className, boolean asc, int start, int end)
 		throws com.liferay.portal.SystemException {
-		return _service.getTopViewedAssets(className, asc, start, end);
+		return getService().getTopViewedAssets(className, asc, start, end);
 	}
 
 	public static java.util.List<com.liferay.portlet.tags.model.TagsAsset> getTopViewedAssets(
 		java.lang.String[] className, boolean asc, int start, int end)
 		throws com.liferay.portal.SystemException {
-		return _service.getTopViewedAssets(className, asc, start, end);
+		return getService().getTopViewedAssets(className, asc, start, end);
 	}
 
 	public static com.liferay.portlet.tags.model.TagsAsset incrementViewCounter(
 		java.lang.String className, long classPK)
 		throws com.liferay.portal.SystemException {
-		return _service.incrementViewCounter(className, classPK);
+		return getService().incrementViewCounter(className, classPK);
 	}
 
 	public static com.liferay.portal.kernel.search.Hits search(long companyId,
 		java.lang.String portletId, java.lang.String keywords, int start,
 		int end) throws com.liferay.portal.SystemException {
-		return _service.search(companyId, portletId, keywords, start, end);
+		return getService().search(companyId, portletId, keywords, start, end);
 	}
 
 	public static com.liferay.portlet.tags.model.TagsAssetDisplay[] searchAssetDisplays(
 		long companyId, java.lang.String portletId, java.lang.String keywords,
 		java.lang.String languageId, int start, int end)
 		throws com.liferay.portal.SystemException {
-		return _service.searchAssetDisplays(companyId, portletId, keywords,
+		return getService()
+				   .searchAssetDisplays(companyId, portletId, keywords,
 			languageId, start, end);
 	}
 
 	public static int searchAssetDisplaysCount(long companyId,
 		java.lang.String portletId, java.lang.String keywords,
 		java.lang.String languageId) throws com.liferay.portal.SystemException {
-		return _service.searchAssetDisplaysCount(companyId, portletId,
-			keywords, languageId);
+		return getService()
+				   .searchAssetDisplaysCount(companyId, portletId, keywords,
+			languageId);
 	}
 
 	public static com.liferay.portlet.tags.model.TagsAsset updateAsset(
@@ -289,8 +306,8 @@ public class TagsAssetLocalServiceUtil {
 		java.lang.String[] entryNames)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		return _service.updateAsset(userId, groupId, className, classPK,
-			entryNames);
+		return getService()
+				   .updateAsset(userId, groupId, className, classPK, entryNames);
 	}
 
 	public static com.liferay.portlet.tags.model.TagsAsset updateAsset(
@@ -303,7 +320,8 @@ public class TagsAssetLocalServiceUtil {
 		java.lang.Integer priority)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		return _service.updateAsset(userId, groupId, className, classPK,
+		return getService()
+				   .updateAsset(userId, groupId, className, classPK,
 			entryNames, startDate, endDate, publishDate, expirationDate,
 			mimeType, title, description, summary, url, height, width, priority);
 	}
@@ -318,7 +336,8 @@ public class TagsAssetLocalServiceUtil {
 		java.lang.Integer priority, boolean sync)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		return _service.updateAsset(userId, groupId, className, classPK,
+		return getService()
+				   .updateAsset(userId, groupId, className, classPK,
 			entryNames, startDate, endDate, publishDate, expirationDate,
 			mimeType, title, description, summary, url, height, width,
 			priority, sync);
@@ -327,10 +346,14 @@ public class TagsAssetLocalServiceUtil {
 	public static void validate(java.lang.String className,
 		java.lang.String[] entryNames)
 		throws com.liferay.portal.PortalException {
-		_service.validate(className, entryNames);
+		getService().validate(className, entryNames);
 	}
 
 	public static TagsAssetLocalService getService() {
+		if (_service == null) {
+			throw new RuntimeException("TagsAssetLocalService is not set");
+		}
+
 		return _service;
 	}
 

@@ -48,41 +48,33 @@ public class TagsVocabularyPermission {
 	}
 
 	public static void check(
-			PermissionChecker permissionChecker, String name, long groupId,
+			PermissionChecker permissionChecker, TagsVocabulary vocabulary,
 			String actionId)
-		throws PortalException, SystemException {
+		throws PortalException {
 
-		if (!contains(permissionChecker, name, groupId, actionId)) {
+		if (!contains(permissionChecker, vocabulary, actionId)) {
 			throw new PrincipalException();
 		}
 	}
 
 	public static boolean contains(
-			PermissionChecker permissionChecker, long vocabularyId, String actionId)
-		throws PortalException, SystemException {
-
-		TagsVocabulary vocabulary = TagsVocabularyLocalServiceUtil.getVocabulary(vocabularyId);
-
-		return contains(permissionChecker, vocabulary, actionId);
-	}
-
-	public static boolean contains(
-			PermissionChecker permissionChecker, String name, long groupId, String actionId)
-		throws PortalException, SystemException {
-
-		TagsVocabulary vocabulary = TagsVocabularyLocalServiceUtil.getGroupVocabulary(groupId, name);
-
-		return contains(permissionChecker, vocabulary, actionId);
-	}
-
-	public static boolean contains(
-			PermissionChecker permissionChecker, TagsVocabulary vocabulary,
+			PermissionChecker permissionChecker, long vocabularyId,
 			String actionId)
 		throws PortalException, SystemException {
 
+		TagsVocabulary vocabulary =
+			TagsVocabularyLocalServiceUtil.getVocabulary(vocabularyId);
+
+		return contains(permissionChecker, vocabulary, actionId);
+	}
+
+	public static boolean contains(
+		PermissionChecker permissionChecker, TagsVocabulary vocabulary,
+		String actionId) {
+
 		if (permissionChecker.hasPermission(
-			vocabulary.getGroupId(), TagsVocabulary.class.getName(),
-			vocabulary.getVocabularyId(), actionId)) {
+				vocabulary.getGroupId(), TagsVocabulary.class.getName(),
+				vocabulary.getVocabularyId(), actionId)) {
 
 			return true;
 		}

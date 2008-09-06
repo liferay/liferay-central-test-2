@@ -48,142 +48,182 @@ public class TagsVocabularyLocalServiceUtil {
 	public static com.liferay.portlet.tags.model.TagsVocabulary addTagsVocabulary(
 		com.liferay.portlet.tags.model.TagsVocabulary tagsVocabulary)
 		throws com.liferay.portal.SystemException {
-		return _service.addTagsVocabulary(tagsVocabulary);
+		return getService().addTagsVocabulary(tagsVocabulary);
+	}
+
+	public static com.liferay.portlet.tags.model.TagsVocabulary createTagsVocabulary(
+		long vocabularyId) {
+		return getService().createTagsVocabulary(vocabularyId);
 	}
 
 	public static void deleteTagsVocabulary(long vocabularyId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		_service.deleteTagsVocabulary(vocabularyId);
+		getService().deleteTagsVocabulary(vocabularyId);
 	}
 
 	public static void deleteTagsVocabulary(
 		com.liferay.portlet.tags.model.TagsVocabulary tagsVocabulary)
 		throws com.liferay.portal.SystemException {
-		_service.deleteTagsVocabulary(tagsVocabulary);
+		getService().deleteTagsVocabulary(tagsVocabulary);
 	}
 
 	public static java.util.List<Object> dynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery)
 		throws com.liferay.portal.SystemException {
-		return _service.dynamicQuery(dynamicQuery);
+		return getService().dynamicQuery(dynamicQuery);
 	}
 
 	public static java.util.List<Object> dynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery, int start,
 		int end) throws com.liferay.portal.SystemException {
-		return _service.dynamicQuery(dynamicQuery, start, end);
+		return getService().dynamicQuery(dynamicQuery, start, end);
 	}
 
 	public static com.liferay.portlet.tags.model.TagsVocabulary getTagsVocabulary(
 		long vocabularyId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		return _service.getTagsVocabulary(vocabularyId);
+		return getService().getTagsVocabulary(vocabularyId);
 	}
 
 	public static java.util.List<com.liferay.portlet.tags.model.TagsVocabulary> getTagsVocabularies(
 		int start, int end) throws com.liferay.portal.SystemException {
-		return _service.getTagsVocabularies(start, end);
+		return getService().getTagsVocabularies(start, end);
 	}
 
 	public static int getTagsVocabulariesCount()
 		throws com.liferay.portal.SystemException {
-		return _service.getTagsVocabulariesCount();
+		return getService().getTagsVocabulariesCount();
 	}
 
 	public static com.liferay.portlet.tags.model.TagsVocabulary updateTagsVocabulary(
 		com.liferay.portlet.tags.model.TagsVocabulary tagsVocabulary)
 		throws com.liferay.portal.SystemException {
-		return _service.updateTagsVocabulary(tagsVocabulary);
+		return getService().updateTagsVocabulary(tagsVocabulary);
 	}
 
 	public static com.liferay.portlet.tags.model.TagsVocabulary addVocabulary(
-		long userId, long groupId, java.lang.String name)
+		long userId, long plid, java.lang.String name, boolean folksonomy,
+		boolean addCommunityPermissions, boolean addGuestPermissions)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		return _service.addVocabulary(userId, groupId, name);
+		return getService()
+				   .addVocabulary(userId, plid, name, folksonomy,
+			addCommunityPermissions, addGuestPermissions);
 	}
 
 	public static com.liferay.portlet.tags.model.TagsVocabulary addVocabulary(
-		long userId, long groupId, java.lang.String name, boolean folksonomy)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
-		return _service.addVocabulary(userId, groupId, name, folksonomy);
-	}
-
-	public static com.liferay.portlet.tags.model.TagsVocabulary addVocabulary(
-		long userId, long groupId, java.lang.String name, boolean folksonomy,
-		java.lang.Boolean addGuestPermissions,
-		java.lang.Boolean addCommunityPermissions,
+		long userId, long plid, java.lang.String name, boolean folksonomy,
 		java.lang.String[] communityPermissions,
 		java.lang.String[] guestPermissions)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		return _service.addVocabulary(userId, groupId, name, folksonomy,
-			addGuestPermissions, addCommunityPermissions, communityPermissions,
+		return getService()
+				   .addVocabulary(userId, plid, name, folksonomy,
+			communityPermissions, guestPermissions);
+	}
+
+	public static com.liferay.portlet.tags.model.TagsVocabulary addVocabulary(
+		long userId, long plid, java.lang.String name, boolean folksonomy,
+		java.lang.Boolean addCommunityPermissions,
+		java.lang.Boolean addGuestPermissions,
+		java.lang.String[] communityPermissions,
+		java.lang.String[] guestPermissions)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
+		return getService()
+				   .addVocabulary(userId, plid, name, folksonomy,
+			addCommunityPermissions, addGuestPermissions, communityPermissions,
 			guestPermissions);
 	}
 
-	public static void addTagVocabularyResources(
+	public static com.liferay.portlet.tags.model.TagsVocabulary addVocabularyToGroup(
+		long userId, long groupId, java.lang.String name, boolean folksonomy,
+		java.lang.Boolean addCommunityPermissions,
+		java.lang.Boolean addGuestPermissions,
+		java.lang.String[] communityPermissions,
+		java.lang.String[] guestPermissions)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
+		return getService()
+				   .addVocabularyToGroup(userId, groupId, name, folksonomy,
+			addCommunityPermissions, addGuestPermissions, communityPermissions,
+			guestPermissions);
+	}
+
+	public static void addVocabularyResources(
 		com.liferay.portlet.tags.model.TagsVocabulary vocabulary,
 		boolean addCommunityPermissions, boolean addGuestPermissions)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		_service.addTagVocabularyResources(vocabulary, addCommunityPermissions,
+		getService()
+			.addVocabularyResources(vocabulary, addCommunityPermissions,
 			addGuestPermissions);
 	}
 
-	public static void addTagVocabularyResources(
+	public static void addVocabularyResources(
 		com.liferay.portlet.tags.model.TagsVocabulary vocabulary,
 		java.lang.String[] communityPermissions,
 		java.lang.String[] guestPermissions)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		_service.addTagVocabularyResources(vocabulary, communityPermissions,
+		getService()
+			.addVocabularyResources(vocabulary, communityPermissions,
 			guestPermissions);
 	}
 
 	public static void deleteVocabulary(long vocabularyId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		_service.deleteVocabulary(vocabularyId);
+		getService().deleteVocabulary(vocabularyId);
+	}
+
+	public static void deleteVocabulary(
+		com.liferay.portlet.tags.model.TagsVocabulary vocabulary)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
+		getService().deleteVocabulary(vocabulary);
 	}
 
 	public static java.util.List<com.liferay.portlet.tags.model.TagsVocabulary> getCompanyVocabularies(
 		long companyId, boolean folksonomy)
 		throws com.liferay.portal.SystemException {
-		return _service.getCompanyVocabularies(companyId, folksonomy);
+		return getService().getCompanyVocabularies(companyId, folksonomy);
 	}
 
 	public static java.util.List<com.liferay.portlet.tags.model.TagsVocabulary> getGroupVocabularies(
 		long groupId, boolean folksonomy)
 		throws com.liferay.portal.SystemException {
-		return _service.getGroupVocabularies(groupId, folksonomy);
+		return getService().getGroupVocabularies(groupId, folksonomy);
 	}
 
 	public static com.liferay.portlet.tags.model.TagsVocabulary getGroupVocabulary(
 		long groupId, java.lang.String name)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		return _service.getGroupVocabulary(groupId, name);
+		return getService().getGroupVocabulary(groupId, name);
 	}
 
 	public static com.liferay.portlet.tags.model.TagsVocabulary getVocabulary(
 		long vocabularyId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		return _service.getVocabulary(vocabularyId);
+		return getService().getVocabulary(vocabularyId);
 	}
 
 	public static com.liferay.portlet.tags.model.TagsVocabulary updateVocabulary(
 		long vocabularyId, java.lang.String name, boolean folksonomy)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		return _service.updateVocabulary(vocabularyId, name, folksonomy);
+		return getService().updateVocabulary(vocabularyId, name, folksonomy);
 	}
 
 	public static TagsVocabularyLocalService getService() {
+		if (_service == null) {
+			throw new RuntimeException("TagsVocabularyLocalService is not set");
+		}
+
 		return _service;
 	}
 

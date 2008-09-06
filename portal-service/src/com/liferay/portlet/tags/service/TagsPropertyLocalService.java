@@ -52,6 +52,9 @@ public interface TagsPropertyLocalService {
 		com.liferay.portlet.tags.model.TagsProperty tagsProperty)
 		throws com.liferay.portal.SystemException;
 
+	public com.liferay.portlet.tags.model.TagsProperty createTagsProperty(
+		long propertyId);
+
 	public void deleteTagsProperty(long propertyId)
 		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;

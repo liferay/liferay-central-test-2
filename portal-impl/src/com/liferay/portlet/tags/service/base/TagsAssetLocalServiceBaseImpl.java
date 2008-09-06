@@ -107,6 +107,10 @@ public abstract class TagsAssetLocalServiceBaseImpl
 		return tagsAssetPersistence.update(tagsAsset, false);
 	}
 
+	public TagsAsset createTagsAsset(long assetId) {
+		return tagsAssetPersistence.create(assetId);
+	}
+
 	public void deleteTagsAsset(long assetId)
 		throws PortalException, SystemException {
 		tagsAssetPersistence.remove(assetId);

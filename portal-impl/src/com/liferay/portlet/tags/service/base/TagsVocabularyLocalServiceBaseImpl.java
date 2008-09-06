@@ -76,6 +76,10 @@ public abstract class TagsVocabularyLocalServiceBaseImpl
 		return tagsVocabularyPersistence.update(tagsVocabulary, false);
 	}
 
+	public TagsVocabulary createTagsVocabulary(long vocabularyId) {
+		return tagsVocabularyPersistence.create(vocabularyId);
+	}
+
 	public void deleteTagsVocabulary(long vocabularyId)
 		throws PortalException, SystemException {
 		tagsVocabularyPersistence.remove(vocabularyId);

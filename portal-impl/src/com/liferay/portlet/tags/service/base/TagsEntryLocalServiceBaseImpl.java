@@ -76,6 +76,10 @@ public abstract class TagsEntryLocalServiceBaseImpl
 		return tagsEntryPersistence.update(tagsEntry, false);
 	}
 
+	public TagsEntry createTagsEntry(long entryId) {
+		return tagsEntryPersistence.create(entryId);
+	}
+
 	public void deleteTagsEntry(long entryId)
 		throws PortalException, SystemException {
 		tagsEntryPersistence.remove(entryId);

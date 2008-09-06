@@ -48,266 +48,259 @@ public class TagsEntryLocalServiceUtil {
 	public static com.liferay.portlet.tags.model.TagsEntry addTagsEntry(
 		com.liferay.portlet.tags.model.TagsEntry tagsEntry)
 		throws com.liferay.portal.SystemException {
-		return _service.addTagsEntry(tagsEntry);
+		return getService().addTagsEntry(tagsEntry);
+	}
+
+	public static com.liferay.portlet.tags.model.TagsEntry createTagsEntry(
+		long entryId) {
+		return getService().createTagsEntry(entryId);
 	}
 
 	public static void deleteTagsEntry(long entryId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		_service.deleteTagsEntry(entryId);
+		getService().deleteTagsEntry(entryId);
 	}
 
 	public static void deleteTagsEntry(
 		com.liferay.portlet.tags.model.TagsEntry tagsEntry)
 		throws com.liferay.portal.SystemException {
-		_service.deleteTagsEntry(tagsEntry);
+		getService().deleteTagsEntry(tagsEntry);
 	}
 
 	public static java.util.List<Object> dynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery)
 		throws com.liferay.portal.SystemException {
-		return _service.dynamicQuery(dynamicQuery);
+		return getService().dynamicQuery(dynamicQuery);
 	}
 
 	public static java.util.List<Object> dynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery, int start,
 		int end) throws com.liferay.portal.SystemException {
-		return _service.dynamicQuery(dynamicQuery, start, end);
+		return getService().dynamicQuery(dynamicQuery, start, end);
 	}
 
 	public static com.liferay.portlet.tags.model.TagsEntry getTagsEntry(
 		long entryId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		return _service.getTagsEntry(entryId);
+		return getService().getTagsEntry(entryId);
 	}
 
 	public static java.util.List<com.liferay.portlet.tags.model.TagsEntry> getTagsEntries(
 		int start, int end) throws com.liferay.portal.SystemException {
-		return _service.getTagsEntries(start, end);
+		return getService().getTagsEntries(start, end);
 	}
 
 	public static int getTagsEntriesCount()
 		throws com.liferay.portal.SystemException {
-		return _service.getTagsEntriesCount();
+		return getService().getTagsEntriesCount();
 	}
 
 	public static com.liferay.portlet.tags.model.TagsEntry updateTagsEntry(
 		com.liferay.portlet.tags.model.TagsEntry tagsEntry)
 		throws com.liferay.portal.SystemException {
-		return _service.updateTagsEntry(tagsEntry);
+		return getService().updateTagsEntry(tagsEntry);
 	}
 
 	public static com.liferay.portlet.tags.model.TagsEntry addEntry(
-		long userId, long groupId, java.lang.String name)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
-		return _service.addEntry(userId, groupId, name);
-	}
-
-	public static com.liferay.portlet.tags.model.TagsEntry addEntry(
-		long userId, long groupId, java.lang.String name,
-		java.lang.String[] properties)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
-		return _service.addEntry(userId, groupId, name, properties);
-	}
-
-	public static com.liferay.portlet.tags.model.TagsEntry addEntry(
-		long userId, long groupId, java.lang.String name,
-		java.lang.String vocabularyName, java.lang.String[] properties)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
-		return _service.addEntry(userId, groupId, name, vocabularyName,
-			properties);
-	}
-
-	public static com.liferay.portlet.tags.model.TagsEntry addEntry(
-		long userId, long groupId, java.lang.String parentEntryName,
+		long userId, long plid, java.lang.String parentEntryName,
 		java.lang.String name, java.lang.String vocabularyName,
-		java.lang.String[] properties)
+		java.lang.String[] properties, boolean addCommunityPermissions,
+		boolean addGuestPermissions)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		return _service.addEntry(userId, groupId, parentEntryName, name,
-			vocabularyName, properties);
+		return getService()
+				   .addEntry(userId, plid, parentEntryName, name,
+			vocabularyName, properties, addCommunityPermissions,
+			addGuestPermissions);
 	}
 
 	public static com.liferay.portlet.tags.model.TagsEntry addEntry(
-		long userId, long groupId, java.lang.String parentEntryName,
+		long userId, long plid, java.lang.String parentEntryName,
 		java.lang.String name, java.lang.String vocabularyName,
 		java.lang.String[] properties, java.lang.String[] communityPermissions,
 		java.lang.String[] guestPermissions)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		return _service.addEntry(userId, groupId, parentEntryName, name,
+		return getService()
+				   .addEntry(userId, plid, parentEntryName, name,
 			vocabularyName, properties, communityPermissions, guestPermissions);
 	}
 
 	public static com.liferay.portlet.tags.model.TagsEntry addEntry(
-		long userId, long groupId, java.lang.String name,
-		java.lang.String vocabularyName, java.lang.String[] properties,
+		long userId, long plid, java.lang.String parentEntryName,
+		java.lang.String name, java.lang.String vocabularyName,
+		java.lang.String[] properties,
+		java.lang.Boolean addCommunityPermissions,
+		java.lang.Boolean addGuestPermissions,
 		java.lang.String[] communityPermissions,
 		java.lang.String[] guestPermissions)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		return _service.addEntry(userId, groupId, name, vocabularyName,
-			properties, communityPermissions, guestPermissions);
+		return getService()
+				   .addEntry(userId, plid, parentEntryName, name,
+			vocabularyName, properties, addCommunityPermissions,
+			addGuestPermissions, communityPermissions, guestPermissions);
 	}
 
-	public static com.liferay.portlet.tags.model.TagsEntry addEntry(
+	public static com.liferay.portlet.tags.model.TagsEntry addEntryToGroup(
 		long userId, long groupId, java.lang.String parentEntryName,
 		java.lang.String name, java.lang.String vocabularyName,
-		java.lang.String[] properties, java.lang.Boolean addGuestPermissions,
+		java.lang.String[] properties,
 		java.lang.Boolean addCommunityPermissions,
+		java.lang.Boolean addGuestPermissions,
 		java.lang.String[] communityPermissions,
 		java.lang.String[] guestPermissions)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		return _service.addEntry(userId, groupId, parentEntryName, name,
-			vocabularyName, properties, addGuestPermissions,
-			addCommunityPermissions, communityPermissions, guestPermissions);
+		return getService()
+				   .addEntryToGroup(userId, groupId, parentEntryName, name,
+			vocabularyName, properties, addCommunityPermissions,
+			addGuestPermissions, communityPermissions, guestPermissions);
 	}
 
-	public static void addTagEntryResources(
+	public static void addEntryResources(
 		com.liferay.portlet.tags.model.TagsEntry entry,
 		boolean addCommunityPermissions, boolean addGuestPermissions)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		_service.addTagEntryResources(entry, addCommunityPermissions,
+		getService()
+			.addEntryResources(entry, addCommunityPermissions,
 			addGuestPermissions);
 	}
 
-	public static void addTagEntryResources(
+	public static void addEntryResources(
 		com.liferay.portlet.tags.model.TagsEntry entry,
 		java.lang.String[] communityPermissions,
 		java.lang.String[] guestPermissions)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		_service.addTagEntryResources(entry, communityPermissions,
-			guestPermissions);
+		getService()
+			.addEntryResources(entry, communityPermissions, guestPermissions);
 	}
 
 	public static void checkEntries(long userId, long groupId,
 		java.lang.String[] names)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		_service.checkEntries(userId, groupId, names);
+		getService().checkEntries(userId, groupId, names);
 	}
 
 	public static void deleteEntry(long entryId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		_service.deleteEntry(entryId);
+		getService().deleteEntry(entryId);
 	}
 
 	public static void deleteEntry(
 		com.liferay.portlet.tags.model.TagsEntry entry)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		_service.deleteEntry(entry);
+		getService().deleteEntry(entry);
 	}
 
 	public static void deleteVocabularyEntries(long vocabularyId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		_service.deleteVocabularyEntries(vocabularyId);
+		getService().deleteVocabularyEntries(vocabularyId);
 	}
 
 	public static boolean hasEntry(long groupId, java.lang.String name)
 		throws com.liferay.portal.SystemException {
-		return _service.hasEntry(groupId, name);
+		return getService().hasEntry(groupId, name);
 	}
 
 	public static java.util.List<com.liferay.portlet.tags.model.TagsEntry> getAssetEntries(
 		long assetId) throws com.liferay.portal.SystemException {
-		return _service.getAssetEntries(assetId);
+		return getService().getAssetEntries(assetId);
 	}
 
 	public static java.util.List<com.liferay.portlet.tags.model.TagsEntry> getAssetEntries(
 		long assetId, boolean folksonomy)
 		throws com.liferay.portal.SystemException {
-		return _service.getAssetEntries(assetId, folksonomy);
+		return getService().getAssetEntries(assetId, folksonomy);
 	}
 
 	public static java.util.List<com.liferay.portlet.tags.model.TagsEntry> getEntries()
 		throws com.liferay.portal.SystemException {
-		return _service.getEntries();
+		return getService().getEntries();
 	}
 
 	public static java.util.List<com.liferay.portlet.tags.model.TagsEntry> getEntries(
 		java.lang.String className, long classPK)
 		throws com.liferay.portal.SystemException {
-		return _service.getEntries(className, classPK);
+		return getService().getEntries(className, classPK);
 	}
 
 	public static java.util.List<com.liferay.portlet.tags.model.TagsEntry> getEntries(
 		long classNameId, long classPK)
 		throws com.liferay.portal.SystemException {
-		return _service.getEntries(classNameId, classPK);
+		return getService().getEntries(classNameId, classPK);
 	}
 
 	public static java.util.List<com.liferay.portlet.tags.model.TagsEntry> getEntries(
 		java.lang.String className, long classPK, boolean folksonomy)
 		throws com.liferay.portal.SystemException {
-		return _service.getEntries(className, classPK, folksonomy);
+		return getService().getEntries(className, classPK, folksonomy);
 	}
 
 	public static java.util.List<com.liferay.portlet.tags.model.TagsEntry> getEntries(
 		long groupId, long classNameId, java.lang.String name)
 		throws com.liferay.portal.SystemException {
-		return _service.getEntries(groupId, classNameId, name);
+		return getService().getEntries(groupId, classNameId, name);
 	}
 
 	public static java.util.List<com.liferay.portlet.tags.model.TagsEntry> getEntries(
 		long groupId, long classNameId, java.lang.String name, int start,
 		int end) throws com.liferay.portal.SystemException {
-		return _service.getEntries(groupId, classNameId, name, start, end);
+		return getService().getEntries(groupId, classNameId, name, start, end);
 	}
 
 	public static int getEntriesSize(long groupId, long classNameId,
 		java.lang.String name) throws com.liferay.portal.SystemException {
-		return _service.getEntriesSize(groupId, classNameId, name);
+		return getService().getEntriesSize(groupId, classNameId, name);
 	}
 
 	public static com.liferay.portlet.tags.model.TagsEntry getEntry(
 		long entryId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		return _service.getEntry(entryId);
+		return getService().getEntry(entryId);
 	}
 
 	public static com.liferay.portlet.tags.model.TagsEntry getEntry(
 		long groupId, java.lang.String name)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		return _service.getEntry(groupId, name);
+		return getService().getEntry(groupId, name);
 	}
 
 	public static long[] getEntryIds(long groupId, java.lang.String[] names)
 		throws com.liferay.portal.SystemException {
-		return _service.getEntryIds(groupId, names);
+		return getService().getEntryIds(groupId, names);
 	}
 
 	public static java.lang.String[] getEntryNames()
 		throws com.liferay.portal.SystemException {
-		return _service.getEntryNames();
+		return getService().getEntryNames();
 	}
 
 	public static java.lang.String[] getEntryNames(java.lang.String className,
 		long classPK) throws com.liferay.portal.SystemException {
-		return _service.getEntryNames(className, classPK);
+		return getService().getEntryNames(className, classPK);
 	}
 
 	public static java.lang.String[] getEntryNames(long classNameId,
 		long classPK) throws com.liferay.portal.SystemException {
-		return _service.getEntryNames(classNameId, classPK);
+		return getService().getEntryNames(classNameId, classPK);
 	}
 
 	public static java.util.List<com.liferay.portlet.tags.model.TagsEntry> getGroupVocabularyEntries(
 		long groupId, java.lang.String vocabularyName)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		return _service.getGroupVocabularyEntries(groupId, vocabularyName);
+		return getService().getGroupVocabularyEntries(groupId, vocabularyName);
 	}
 
 	public static java.util.List<com.liferay.portlet.tags.model.TagsEntry> getGroupVocabularyEntries(
@@ -315,7 +308,8 @@ public class TagsEntryLocalServiceUtil {
 		java.lang.String vocabularyName)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		return _service.getGroupVocabularyEntries(groupId, parentEntryName,
+		return getService()
+				   .getGroupVocabularyEntries(groupId, parentEntryName,
 			vocabularyName);
 	}
 
@@ -323,61 +317,39 @@ public class TagsEntryLocalServiceUtil {
 		long groupId, java.lang.String vocabularyName)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		return _service.getGroupVocabularyRootEntries(groupId, vocabularyName);
+		return getService()
+				   .getGroupVocabularyRootEntries(groupId, vocabularyName);
 	}
 
 	public static void mergeEntries(long fromEntryId, long toEntryId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		_service.mergeEntries(fromEntryId, toEntryId);
+		getService().mergeEntries(fromEntryId, toEntryId);
 	}
 
 	public static java.util.List<com.liferay.portlet.tags.model.TagsEntry> search(
 		long groupId, java.lang.String name, java.lang.String[] properties)
 		throws com.liferay.portal.SystemException {
-		return _service.search(groupId, name, properties);
+		return getService().search(groupId, name, properties);
 	}
 
 	public static java.util.List<com.liferay.portlet.tags.model.TagsEntry> search(
 		long groupId, java.lang.String name, java.lang.String[] properties,
 		int start, int end) throws com.liferay.portal.SystemException {
-		return _service.search(groupId, name, properties, start, end);
+		return getService().search(groupId, name, properties, start, end);
 	}
 
 	public static com.liferay.portal.kernel.json.JSONArray searchAutocomplete(
 		long groupId, java.lang.String name, java.lang.String[] properties,
 		int start, int end) throws com.liferay.portal.SystemException {
-		return _service.searchAutocomplete(groupId, name, properties, start, end);
+		return getService()
+				   .searchAutocomplete(groupId, name, properties, start, end);
 	}
 
 	public static int searchCount(long groupId, java.lang.String name,
 		java.lang.String[] properties)
 		throws com.liferay.portal.SystemException {
-		return _service.searchCount(groupId, name, properties);
-	}
-
-	public static com.liferay.portlet.tags.model.TagsEntry updateEntry(
-		long entryId, java.lang.String name)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
-		return _service.updateEntry(entryId, name);
-	}
-
-	public static com.liferay.portlet.tags.model.TagsEntry updateEntry(
-		long entryId, java.lang.String parentEntryName, java.lang.String name,
-		java.lang.String vocabularyName)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
-		return _service.updateEntry(entryId, parentEntryName, name,
-			vocabularyName);
-	}
-
-	public static com.liferay.portlet.tags.model.TagsEntry updateEntry(
-		long userId, long entryId, java.lang.String name,
-		java.lang.String[] properties)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
-		return _service.updateEntry(userId, entryId, name, properties);
+		return getService().searchCount(groupId, name, properties);
 	}
 
 	public static com.liferay.portlet.tags.model.TagsEntry updateEntry(
@@ -386,11 +358,16 @@ public class TagsEntryLocalServiceUtil {
 		java.lang.String[] properties)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		return _service.updateEntry(userId, entryId, parentEntryName, name,
+		return getService()
+				   .updateEntry(userId, entryId, parentEntryName, name,
 			vocabularyName, properties);
 	}
 
 	public static TagsEntryLocalService getService() {
+		if (_service == null) {
+			throw new RuntimeException("TagsEntryLocalService is not set");
+		}
+
 		return _service;
 	}
 

@@ -65,6 +65,10 @@ public abstract class TagsSourceLocalServiceBaseImpl
 		return tagsSourcePersistence.update(tagsSource, false);
 	}
 
+	public TagsSource createTagsSource(long sourceId) {
+		return tagsSourcePersistence.create(sourceId);
+	}
+
 	public void deleteTagsSource(long sourceId)
 		throws PortalException, SystemException {
 		tagsSourcePersistence.remove(sourceId);

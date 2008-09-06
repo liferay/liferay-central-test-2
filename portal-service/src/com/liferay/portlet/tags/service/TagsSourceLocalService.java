@@ -52,6 +52,9 @@ public interface TagsSourceLocalService {
 		com.liferay.portlet.tags.model.TagsSource tagsSource)
 		throws com.liferay.portal.SystemException;
 
+	public com.liferay.portlet.tags.model.TagsSource createTagsSource(
+		long sourceId);
+
 	public void deleteTagsSource(long sourceId)
 		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;

@@ -72,6 +72,10 @@ public abstract class TagsPropertyLocalServiceBaseImpl
 		return tagsPropertyPersistence.update(tagsProperty, false);
 	}
 
+	public TagsProperty createTagsProperty(long propertyId) {
+		return tagsPropertyPersistence.create(propertyId);
+	}
+
 	public void deleteTagsProperty(long propertyId)
 		throws PortalException, SystemException {
 		tagsPropertyPersistence.remove(propertyId);
