@@ -109,7 +109,8 @@ public class JournalContentUtil {
 		ThemeDisplay themeDisplay, String xmlRequest) {
 
 		JournalArticleDisplay articleDisplay = getDisplay(
-			groupId, articleId, templateId, languageId, themeDisplay);
+			groupId, articleId, templateId, languageId, themeDisplay, 1,
+			xmlRequest);
 
 		if (articleDisplay != null) {
 			return articleDisplay.getContent();
