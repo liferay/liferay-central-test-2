@@ -230,7 +230,7 @@ public class WikiNodeLocalServiceImpl extends WikiNodeLocalServiceBaseImpl {
 
 		// Node
 
-		wikiNodePersistence.remove(node.getNodeId());
+		wikiNodePersistence.remove(node);
 	}
 
 	public void deleteNodes(long groupId)

@@ -439,7 +439,7 @@ public class CalEventLocalServiceImpl extends CalEventLocalServiceBaseImpl {
 
 		// Event
 
-		calEventPersistence.remove(event.getEventId());
+		calEventPersistence.remove(event);
 	}
 
 	public void deleteEvents(long groupId)

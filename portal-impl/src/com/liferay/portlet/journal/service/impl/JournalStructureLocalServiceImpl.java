@@ -351,7 +351,7 @@ public class JournalStructureLocalServiceImpl
 
 		// Structure
 
-		journalStructurePersistence.remove(structure.getPrimaryKey());
+		journalStructurePersistence.remove(structure);
 	}
 
 	public void deleteStructures(long groupId)

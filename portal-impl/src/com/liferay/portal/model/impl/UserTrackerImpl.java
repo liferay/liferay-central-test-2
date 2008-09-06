@@ -31,8 +31,6 @@ import com.liferay.portal.service.UserLocalServiceUtil;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.servlet.http.HttpSession;
-
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
@@ -126,7 +124,6 @@ public class UserTrackerImpl
 
 	private static Log _log = LogFactory.getLog(UserTrackerImpl.class);
 
-	private HttpSession _session;
 	private User _user;
 	private String _fullName;
 	private String _emailAddress;

@@ -107,7 +107,7 @@ public class HookHotDeployListener extends BaseHotDeployListener {
 	protected void destroyCustomJspBag(CustomJspBag customJspBag) {
 		String customJspDir = customJspBag.getCustomJspDir();
 		List<String> customJsps = customJspBag.getCustomJsps();
-		String timestamp = customJspBag.getTimestamp();
+		//String timestamp = customJspBag.getTimestamp();
 
 		String portalWebDir = PortalUtil.getPortalWebDir();
 
@@ -398,7 +398,7 @@ public class HookHotDeployListener extends BaseHotDeployListener {
 
 		String customJspDir = customJspBag.getCustomJspDir();
 		List<String> customJsps = customJspBag.getCustomJsps();
-		String timestamp = customJspBag.getTimestamp();
+		//String timestamp = customJspBag.getTimestamp();
 
 		String portalWebDir = PortalUtil.getPortalWebDir();
 

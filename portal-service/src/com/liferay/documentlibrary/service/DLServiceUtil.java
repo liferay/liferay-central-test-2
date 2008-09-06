@@ -140,7 +140,7 @@ public class DLServiceUtil {
 	}
 
 	public static void reIndex(String[] ids)
-		throws PortalException, RemoteException, SystemException {
+		throws RemoteException, SystemException {
 
 		DLService dlService = DLServiceFactory.getService();
 

@@ -84,9 +84,7 @@ public class TagsPropertyLocalServiceImpl
 		return addProperty(userId, entry.getEntryId(), key, value);
 	}
 
-	public void deleteProperties(long entryId)
-		throws PortalException, SystemException {
-
+	public void deleteProperties(long entryId) throws SystemException {
 		List<TagsProperty> properties = tagsPropertyPersistence.findByEntryId(
 			entryId);
 
@@ -104,10 +102,8 @@ public class TagsPropertyLocalServiceImpl
 		deleteProperty(property);
 	}
 
-	public void deleteProperty(TagsProperty property)
-		throws PortalException, SystemException {
-
-		tagsPropertyPersistence.remove(property.getPropertyId());
+	public void deleteProperty(TagsProperty property) throws SystemException {
+		tagsPropertyPersistence.remove(property);
 	}
 
 	public List<TagsProperty> getProperties() throws SystemException {

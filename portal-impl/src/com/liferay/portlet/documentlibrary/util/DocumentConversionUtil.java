@@ -30,7 +30,6 @@ import com.artofsolving.jodconverter.openoffice.connection.OpenOfficeConnection;
 import com.artofsolving.jodconverter.openoffice.connection.SocketOpenOfficeConnection;
 import com.artofsolving.jodconverter.openoffice.converter.OpenOfficeDocumentConverter;
 
-import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.util.ArrayUtil;
 import com.liferay.portal.kernel.util.FileUtil;
@@ -62,7 +61,7 @@ public class DocumentConversionUtil {
 	public static InputStream convert(
 			String id, InputStream is, String sourceExtension,
 			String targetExtension)
-		throws IOException, PortalException, SystemException {
+		throws IOException, SystemException {
 
 		return _instance._convert(id, is, sourceExtension, targetExtension);
 	}
@@ -112,7 +111,7 @@ public class DocumentConversionUtil {
 	private InputStream _convert(
 			String id, InputStream is, String sourceExtension,
 			String targetExtension)
-		throws IOException, PortalException, SystemException {
+		throws IOException, SystemException {
 
 		if (!PrefsPropsUtil.getBoolean(
 				PropsKeys.OPENOFFICE_SERVER_ENABLED,
@@ -191,7 +190,7 @@ public class DocumentConversionUtil {
 	}
 
 	private DocumentConverter _getConverter(DocumentFormatRegistry registry)
-		throws PortalException, SystemException {
+		throws SystemException {
 
 		if ((_connection == null) || (_converter == null)) {
 			int port = PrefsPropsUtil.getInteger(

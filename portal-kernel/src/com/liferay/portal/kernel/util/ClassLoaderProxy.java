@@ -55,23 +55,21 @@ public class ClassLoaderProxy {
 	}
 
 	public Object invoke(String methodName, Object[] args) throws Throwable {
-		byte[] bytes = null;
-
 		ClassLoader contextClassLoader =
 			Thread.currentThread().getContextClassLoader();
 
 		try {
 			Thread.currentThread().setContextClassLoader(_classLoader);
 
-			Class classObj = Class.forName(
+			Class<?> classObj = Class.forName(
 				_obj.getClass().getName(), true, _classLoader);
 
-			List<Class> parameterTypes = new ArrayList<Class>();
+			List<Class<?>> parameterTypes = new ArrayList<Class<?>>();
 
 			for (int i = 0; i < args.length; i++) {
 				Object arg = args[i];
 
-				Class argClass = Class.forName(
+				Class<?> argClass = Class.forName(
 					arg.getClass().getName(), true, _classLoader);
 
 				if (ClassUtil.isSubclass(argClass, PrimitiveWrapper.class)) {
@@ -82,7 +80,7 @@ public class ClassLoaderProxy {
 
 					args[i] = method.invoke(arg, (Object[])null);
 
-					argClass = (Class)argClass.getField("TYPE").get(arg);
+					argClass = (Class<?>)argClass.getField("TYPE").get(arg);
 				}
 
 				parameterTypes.add(argClass);
@@ -108,7 +106,7 @@ public class ClassLoaderProxy {
 						boolean correctParams = true;
 
 						for (int j = 0; j < parameterTypes.size(); j++) {
-							Class<?> a = (Class<?>)parameterTypes.get(j);
+							Class<?> a = parameterTypes.get(j);
 							Class<?> b = methodParameterTypes[j];
 
 							if (!ClassUtil.isSubclass(a, b)) {

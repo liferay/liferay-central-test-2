@@ -28,9 +28,6 @@ import com.liferay.portal.kernel.deploy.hot.HotDeployListener;
 
 import javax.servlet.ServletContext;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
-
 /**
  * <a href="BaseHotDeployListener.java.html"><b><i>View Source</i></b></a>
  *
@@ -49,8 +46,5 @@ public abstract class BaseHotDeployListener implements HotDeployListener {
 
 		throw new HotDeployException(msg + servletContextName, e);
 	}
-
-	private static Log _log =
-		LogFactory.getLog(PluginPackageHotDeployListener.class);
 
 }

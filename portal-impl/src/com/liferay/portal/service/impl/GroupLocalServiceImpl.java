@@ -367,7 +367,7 @@ public class GroupLocalServiceImpl extends GroupLocalServiceBaseImpl {
 
 		// Group
 
-		groupPersistence.remove(groupId);
+		groupPersistence.remove(group);
 
 		// Permission cache
 

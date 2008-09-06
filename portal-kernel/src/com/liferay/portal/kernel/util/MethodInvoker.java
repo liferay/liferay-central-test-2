@@ -62,7 +62,7 @@ public class MethodInvoker {
 		String methodName = methodWrapper.getMethodName();
 		Object[] args = methodWrapper.getArgs();
 
-		List<Object> parameterTypes = new ArrayList<Object>();
+		List<Class<?>> parameterTypes = new ArrayList<Class<?>>();
 
 		for (int i = 0; i < args.length; i++) {
 			if (args[i] == null) {
@@ -74,7 +74,8 @@ public class MethodInvoker {
 			Class<?> argClass = args[i].getClass();
 
 			if (ClassUtil.isSubclass(argClass, PrimitiveWrapper.class)) {
-				parameterTypes.add(argClass.getField("TYPE").get(args[i]));
+				parameterTypes.add(
+					(Class<?>)argClass.getField("TYPE").get(args[i]));
 
 				MethodKey methodKey = new MethodKey(
 					argClass.getName(), "getValue", null);
@@ -149,7 +150,7 @@ public class MethodInvoker {
 					boolean correctParams = true;
 
 					for (int j = 0; j < parameterTypes.size(); j++) {
-						Class<?> a = (Class<?>)parameterTypes.get(j);
+						Class<?> a = parameterTypes.get(j);
 						Class<?> b = methodParameterTypes[j];
 
 						if (!ClassUtil.isSubclass(a, b)) {

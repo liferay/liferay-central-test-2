@@ -136,12 +136,12 @@ public class MBThreadLocalServiceImpl extends MBThreadLocalServiceBaseImpl {
 
 			// Message
 
-			mbMessagePersistence.remove(message.getMessageId());
+			mbMessagePersistence.remove(message);
 		}
 
 		// Thread
 
-		mbThreadPersistence.remove(thread.getThreadId());
+		mbThreadPersistence.remove(thread);
 	}
 
 	public void deleteThreads(long categoryId)

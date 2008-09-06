@@ -235,7 +235,7 @@ public class IGFolderLocalServiceImpl extends IGFolderLocalServiceBaseImpl {
 
 		// Folder
 
-		igFolderPersistence.remove(folder.getFolderId());
+		igFolderPersistence.remove(folder);
 	}
 
 	public void deleteFolders(long groupId)

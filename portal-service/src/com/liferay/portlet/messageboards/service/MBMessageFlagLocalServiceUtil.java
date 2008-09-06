@@ -132,14 +132,12 @@ public class MBMessageFlagLocalServiceUtil {
 	}
 
 	public static boolean hasAnswerFlag(long messageId)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
+		throws com.liferay.portal.SystemException {
 		return getService().hasAnswerFlag(messageId);
 	}
 
 	public static boolean hasQuestionFlag(long messageId)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
+		throws com.liferay.portal.SystemException {
 		return getService().hasQuestionFlag(messageId);
 	}
 

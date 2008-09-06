@@ -292,8 +292,7 @@ public interface Portal {
 	public String getPortletTitle(
 		Portlet portlet, ServletContext servletContext, Locale locale);
 
-	public String getPortletXmlFileName()
-		throws PortalException, SystemException;
+	public String getPortletXmlFileName() throws SystemException;
 
 	public PortletPreferences getPreferences(HttpServletRequest request);
 

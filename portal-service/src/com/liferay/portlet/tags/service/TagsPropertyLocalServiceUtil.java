@@ -119,8 +119,7 @@ public class TagsPropertyLocalServiceUtil {
 	}
 
 	public static void deleteProperties(long entryId)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
+		throws com.liferay.portal.SystemException {
 		getService().deleteProperties(entryId);
 	}
 
@@ -132,8 +131,7 @@ public class TagsPropertyLocalServiceUtil {
 
 	public static void deleteProperty(
 		com.liferay.portlet.tags.model.TagsProperty property)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
+		throws com.liferay.portal.SystemException {
 		getService().deleteProperty(property);
 	}
 

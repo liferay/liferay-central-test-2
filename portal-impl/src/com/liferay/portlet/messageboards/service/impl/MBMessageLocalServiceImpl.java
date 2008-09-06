@@ -665,7 +665,7 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 				mbThreadLocalService.deleteThread(message.getThreadId());
 			}
 
-			mbDiscussionPersistence.remove(discussion.getDiscussionId());
+			mbDiscussionPersistence.remove(discussion);
 		}
 		catch (NoSuchDiscussionException nsde) {
 			if (_log.isDebugEnabled()) {
@@ -848,7 +848,7 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 
 		// Message
 
-		mbMessagePersistence.remove(message.getPrimaryKey());
+		mbMessagePersistence.remove(message);
 	}
 
 	public List<MBMessage> getCategoryMessages(

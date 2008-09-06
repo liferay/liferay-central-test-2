@@ -22,7 +22,6 @@
 
 package com.liferay.portlet.documentlibrary.service.impl;
 
-import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portlet.documentlibrary.NoSuchFileRankException;
 import com.liferay.portlet.documentlibrary.model.DLFileRank;
@@ -65,7 +64,7 @@ public class DLFileRankLocalServiceImpl extends DLFileRankLocalServiceBaseImpl {
 	public DLFileRank updateFileRank(
 			long groupId, long companyId, long userId, long folderId,
 			String name)
-		throws PortalException, SystemException {
+		throws SystemException {
 
 		try {
 			dlFileRankPersistence.removeByC_U_F_N(
@@ -92,7 +91,7 @@ public class DLFileRankLocalServiceImpl extends DLFileRankLocalServiceBaseImpl {
 
 			DLFileRank lastFileRank = fileRanks.get(fileRanks.size() - 1);
 
-			dlFileRankPersistence.remove(lastFileRank.getPrimaryKey());
+			dlFileRankPersistence.remove(lastFileRank);
 		}
 
 		return fileRank;

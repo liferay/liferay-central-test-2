@@ -213,7 +213,7 @@ public class ShoppingCategoryLocalServiceImpl
 
 		// Category
 
-		shoppingCategoryPersistence.remove(category.getCategoryId());
+		shoppingCategoryPersistence.remove(category);
 	}
 
 	public List<ShoppingCategory> getCategories(long groupId)

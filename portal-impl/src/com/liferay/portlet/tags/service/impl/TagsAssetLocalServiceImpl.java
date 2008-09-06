@@ -84,7 +84,7 @@ public class TagsAssetLocalServiceImpl extends TagsAssetLocalServiceBaseImpl {
 	}
 
 	public void deleteAsset(String className, long classPK)
-		throws PortalException, SystemException {
+		throws SystemException {
 
 		long classNameId = PortalUtil.getClassNameId(className);
 
@@ -95,10 +95,8 @@ public class TagsAssetLocalServiceImpl extends TagsAssetLocalServiceBaseImpl {
 		}
 	}
 
-	public void deleteAsset(TagsAsset asset)
-		throws PortalException, SystemException {
-
-		tagsAssetPersistence.remove(asset.getAssetId());
+	public void deleteAsset(TagsAsset asset) throws SystemException {
+		tagsAssetPersistence.remove(asset);
 	}
 
 	public TagsAsset getAsset(long assetId)

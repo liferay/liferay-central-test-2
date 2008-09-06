@@ -127,9 +127,7 @@ public class MBMessageFlagLocalServiceImpl
 		}
 	}
 
-	public boolean hasAnswerFlag(long messageId)
-		throws PortalException, SystemException {
-
+	public boolean hasAnswerFlag(long messageId) throws SystemException {
 		int count = mbMessageFlagPersistence.countByM_F(
 			messageId, MBMessageFlagImpl.ANSWER_FLAG);
 
@@ -141,9 +139,7 @@ public class MBMessageFlagLocalServiceImpl
 		}
 	}
 
-	public boolean hasQuestionFlag(long messageId)
-		throws PortalException, SystemException {
-
+	public boolean hasQuestionFlag(long messageId) throws SystemException {
 		int count = mbMessageFlagPersistence.countByM_F(
 			messageId, MBMessageFlagImpl.QUESTION_FLAG);
 

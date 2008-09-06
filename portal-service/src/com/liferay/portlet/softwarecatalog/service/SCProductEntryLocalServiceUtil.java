@@ -264,8 +264,7 @@ public class SCProductEntryLocalServiceUtil {
 	public static java.lang.String getRepositoryXML(long groupId,
 		java.lang.String baseImageURL, java.util.Date oldestDate,
 		int maxNumOfVersions, java.util.Properties repoSettings)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
+		throws com.liferay.portal.SystemException {
 		return getService()
 				   .getRepositoryXML(groupId, baseImageURL, oldestDate,
 			maxNumOfVersions, repoSettings);
@@ -275,8 +274,7 @@ public class SCProductEntryLocalServiceUtil {
 		java.lang.String version, java.lang.String baseImageURL,
 		java.util.Date oldestDate, int maxNumOfVersions,
 		java.util.Properties repoSettings)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
+		throws com.liferay.portal.SystemException {
 		return getService()
 				   .getRepositoryXML(groupId, version, baseImageURL,
 			oldestDate, maxNumOfVersions, repoSettings);

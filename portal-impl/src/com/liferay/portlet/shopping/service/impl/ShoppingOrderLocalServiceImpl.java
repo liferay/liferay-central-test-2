@@ -195,7 +195,7 @@ public class ShoppingOrderLocalServiceImpl
 
 		// Order
 
-		shoppingOrderPersistence.remove(order.getOrderId());
+		shoppingOrderPersistence.remove(order);
 	}
 
 	public void deleteOrders(long groupId)

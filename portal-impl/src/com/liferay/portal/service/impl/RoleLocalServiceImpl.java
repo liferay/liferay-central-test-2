@@ -210,7 +210,7 @@ public class RoleLocalServiceImpl extends RoleLocalServiceBaseImpl {
 
 		// Role
 
-		rolePersistence.remove(roleId);
+		rolePersistence.remove(role);
 
 		// Permission cache
 

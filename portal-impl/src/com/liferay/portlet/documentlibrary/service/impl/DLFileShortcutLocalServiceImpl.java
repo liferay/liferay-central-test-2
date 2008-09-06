@@ -204,7 +204,7 @@ public class DLFileShortcutLocalServiceImpl
 
 		// File shortcut
 
-		dlFileShortcutPersistence.remove(fileShortcut.getFileShortcutId());
+		dlFileShortcutPersistence.remove(fileShortcut);
 	}
 
 	public void deleteFileShortcuts(long toFolderId, String toName)

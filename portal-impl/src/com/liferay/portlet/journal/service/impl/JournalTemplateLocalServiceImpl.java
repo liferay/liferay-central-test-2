@@ -397,7 +397,7 @@ public class JournalTemplateLocalServiceImpl
 
 		// Template
 
-		journalTemplatePersistence.remove(template.getPrimaryKey());
+		journalTemplatePersistence.remove(template);
 	}
 
 	public void deleteTemplates(long groupId)

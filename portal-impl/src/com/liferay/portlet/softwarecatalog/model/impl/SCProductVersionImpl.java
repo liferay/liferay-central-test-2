@@ -22,7 +22,6 @@
 
 package com.liferay.portlet.softwarecatalog.model.impl;
 
-import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portlet.softwarecatalog.model.SCFrameworkVersion;
 import com.liferay.portlet.softwarecatalog.model.SCProductEntry;
@@ -64,7 +63,7 @@ public class SCProductVersionImpl
 	}
 
 	public List<SCFrameworkVersion> getFrameworkVersions()
-		throws PortalException, SystemException {
+		throws SystemException {
 
 		return SCFrameworkVersionLocalServiceUtil.
 			getProductVersionFrameworkVersions(getProductVersionId());

@@ -223,7 +223,7 @@ public class BookmarksFolderLocalServiceImpl
 
 		// Folder
 
-		bookmarksFolderPersistence.remove(folder.getFolderId());
+		bookmarksFolderPersistence.remove(folder);
 	}
 
 	public void deleteFolders(long groupId)

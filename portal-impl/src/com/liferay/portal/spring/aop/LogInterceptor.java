@@ -84,7 +84,7 @@ public class LogInterceptor
 	}
 
 	protected Log getLog(Method method) {
-		Class classObj = method.getDeclaringClass();
+		Class<?> classObj = method.getDeclaringClass();
 
 		Log log = _logs.get(classObj.getName());
 

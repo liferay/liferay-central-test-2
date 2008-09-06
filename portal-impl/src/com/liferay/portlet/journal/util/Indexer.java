@@ -37,7 +37,6 @@ import com.liferay.portal.util.PortletKeys;
 import com.liferay.portlet.journal.service.JournalArticleLocalServiceUtil;
 
 import java.util.Date;
-import java.util.List;
 
 import javax.portlet.PortletURL;
 
@@ -198,7 +197,7 @@ public class Indexer implements com.liferay.portal.kernel.search.Indexer {
 	private static void _getIndexableContent(StringBuilder sb, Element root)
 		throws Exception {
 
-		for (Element el : (List<Element>)root.elements()) {
+		for (Element el : root.elements()) {
 			String elType = el.attributeValue("type", StringPool.BLANK);
 
 			if (elType.equals("text") || elType.equals("text_box") ||

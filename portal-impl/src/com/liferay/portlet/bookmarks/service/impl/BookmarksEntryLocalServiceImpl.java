@@ -257,7 +257,7 @@ public class BookmarksEntryLocalServiceImpl
 
 		// Entry
 
-		bookmarksEntryPersistence.remove(entry.getEntryId());
+		bookmarksEntryPersistence.remove(entry);
 	}
 
 	public List<BookmarksEntry> getEntries(long folderId, int start, int end)

@@ -22,7 +22,6 @@
 
 package com.liferay.portlet.shopping.util;
 
-import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.StringPool;
@@ -99,7 +98,7 @@ public class ShoppingPreferences {
 	};
 
 	public static ShoppingPreferences getInstance(long companyId, long groupId)
-		throws PortalException, SystemException {
+		throws SystemException {
 
 		return new ShoppingPreferences(companyId, groupId);
 	}
@@ -431,7 +430,7 @@ public class ShoppingPreferences {
 	}
 
 	protected ShoppingPreferences(long companyId, long groupId)
-		throws PortalException, SystemException {
+		throws SystemException {
 
 		long ownerId = groupId;
 		int ownerType = PortletKeys.PREFS_OWNER_TYPE_GROUP;

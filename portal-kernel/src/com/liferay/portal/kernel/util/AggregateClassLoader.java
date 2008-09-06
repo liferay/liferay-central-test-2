@@ -38,7 +38,7 @@ public class AggregateClassLoader extends ClassLoader {
 		_backupClassLoader = backupClassLoader;
 	}
 
-	public Class loadClass(String name) throws ClassNotFoundException {
+	public Class<?> loadClass(String name) throws ClassNotFoundException {
 		try {
 			return super.loadClass(name);
 		}

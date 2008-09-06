@@ -298,7 +298,7 @@ public class JournalFeedLocalServiceImpl
 
 		// Feed
 
-		journalFeedPersistence.remove(feed.getPrimaryKey());
+		journalFeedPersistence.remove(feed);
 	}
 
 	public JournalFeed getFeed(long feedId)

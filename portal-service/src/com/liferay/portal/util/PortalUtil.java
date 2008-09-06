@@ -494,9 +494,7 @@ public class PortalUtil {
 		return getPortal().getPortletTitle(portlet, servletContext, locale);
 	}
 
-	public static String getPortletXmlFileName()
-		throws PortalException, SystemException {
-
+	public static String getPortletXmlFileName() throws SystemException {
 		return getPortal().getPortletXmlFileName();
 	}
 

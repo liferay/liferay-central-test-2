@@ -259,7 +259,7 @@ public class PollsQuestionLocalServiceImpl
 
 		// Question
 
-		pollsQuestionPersistence.remove(question.getQuestionId());
+		pollsQuestionPersistence.remove(question);
 	}
 
 	public void deleteQuestions(long groupId)

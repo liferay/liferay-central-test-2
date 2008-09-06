@@ -56,7 +56,6 @@ public class WSRPWindowInvoker {
 		return _container;
 	}
 
-	private static Container _container =
-		(Container)WSRPContainerFactory.getInstance();
+	private static Container _container = WSRPContainerFactory.getInstance();
 
 }

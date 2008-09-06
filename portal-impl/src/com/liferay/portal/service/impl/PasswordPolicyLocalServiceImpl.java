@@ -153,7 +153,7 @@ public class PasswordPolicyLocalServiceImpl
 
 		// Password policy
 
-		passwordPolicyPersistence.remove(passwordPolicyId);
+		passwordPolicyPersistence.remove(passwordPolicy);
 	}
 
 	public PasswordPolicy getDefaultPasswordPolicy(long companyId)

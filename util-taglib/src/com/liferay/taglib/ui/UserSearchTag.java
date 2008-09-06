@@ -108,7 +108,7 @@ public class UserSearchTag extends TagSupport {
 		_rowChecker = rowChecker;
 	}
 
-	public void setUserParams(LinkedHashMap userParams) {
+	public void setUserParams(LinkedHashMap<String, Object> userParams) {
 		_userParams = userParams;
 	}
 
@@ -122,6 +122,6 @@ public class UserSearchTag extends TagSupport {
 	private String _endPage;
 	private PortletURL _portletURL;
 	private RowChecker _rowChecker;
-	private LinkedHashMap _userParams;
+	private LinkedHashMap<String, Object> _userParams;
 
 }

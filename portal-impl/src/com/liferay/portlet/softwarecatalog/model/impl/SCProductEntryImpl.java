@@ -22,7 +22,6 @@
 
 package com.liferay.portlet.softwarecatalog.model.impl;
 
-import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portlet.softwarecatalog.model.SCLicense;
 import com.liferay.portlet.softwarecatalog.model.SCProductEntry;
@@ -60,9 +59,7 @@ public class SCProductEntryImpl
 		return lastVersion;
 	}
 
-	public List<SCLicense> getLicenses()
-		throws PortalException, SystemException {
-
+	public List<SCLicense> getLicenses() throws SystemException {
 		return SCLicenseLocalServiceUtil.getProductEntryLicenses(
 			getProductEntryId());
 	}

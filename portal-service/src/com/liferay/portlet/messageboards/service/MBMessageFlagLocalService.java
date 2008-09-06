@@ -105,12 +105,10 @@ public interface MBMessageFlagLocalService {
 		throws com.liferay.portal.SystemException;
 
 	public boolean hasAnswerFlag(long messageId)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException;
+		throws com.liferay.portal.SystemException;
 
 	public boolean hasQuestionFlag(long messageId)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException;
+		throws com.liferay.portal.SystemException;
 
 	public boolean hasReadFlag(long userId, long messageId)
 		throws com.liferay.portal.PortalException,

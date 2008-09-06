@@ -299,7 +299,7 @@ public class MBCategoryLocalServiceImpl extends MBCategoryLocalServiceBaseImpl {
 
 		// Category
 
-		mbCategoryPersistence.remove(category.getCategoryId());
+		mbCategoryPersistence.remove(category);
 	}
 
 	public List<MBCategory> getCategories(long groupId, long parentCategoryId)

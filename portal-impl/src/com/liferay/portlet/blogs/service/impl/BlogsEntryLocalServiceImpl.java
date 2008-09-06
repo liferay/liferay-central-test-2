@@ -330,7 +330,7 @@ public class BlogsEntryLocalServiceImpl extends BlogsEntryLocalServiceBaseImpl {
 
 		// Entry
 
-		blogsEntryPersistence.remove(entry.getEntryId());
+		blogsEntryPersistence.remove(entry);
 
 		// Statistics
 

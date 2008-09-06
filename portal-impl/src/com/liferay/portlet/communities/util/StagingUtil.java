@@ -78,9 +78,6 @@ import java.util.TimeZone;
 
 import javax.portlet.ActionRequest;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
-
 /**
  * <a href="StagingUtil.java.html"><b><i>View Source</i></b></a>
  *
@@ -1135,7 +1132,5 @@ public class StagingUtil {
 				startDate, endDate);
 		}
 	}
-
-	private static Log _log = LogFactory.getLog(StagingUtil.class);
 
 }

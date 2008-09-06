@@ -352,7 +352,7 @@ public class ShoppingItemLocalServiceImpl
 
 		// Item
 
-		shoppingItemPersistence.remove(item.getItemId());
+		shoppingItemPersistence.remove(item);
 	}
 
 	public void deleteItems(long categoryId)

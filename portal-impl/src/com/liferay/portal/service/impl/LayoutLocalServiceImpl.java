@@ -281,7 +281,7 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 
 		// Layout
 
-		layoutPersistence.remove(layout.getPlid());
+		layoutPersistence.remove(layout);
 
 		// Layout set
 

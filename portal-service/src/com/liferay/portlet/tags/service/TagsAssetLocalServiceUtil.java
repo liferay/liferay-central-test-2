@@ -110,15 +110,13 @@ public class TagsAssetLocalServiceUtil {
 	}
 
 	public static void deleteAsset(java.lang.String className, long classPK)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
+		throws com.liferay.portal.SystemException {
 		getService().deleteAsset(className, classPK);
 	}
 
 	public static void deleteAsset(
 		com.liferay.portlet.tags.model.TagsAsset asset)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
+		throws com.liferay.portal.SystemException {
 		getService().deleteAsset(asset);
 	}
 

@@ -89,12 +89,10 @@ public interface TagsAssetLocalService {
 			com.liferay.portal.SystemException;
 
 	public void deleteAsset(java.lang.String className, long classPK)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException;
+		throws com.liferay.portal.SystemException;
 
 	public void deleteAsset(com.liferay.portlet.tags.model.TagsAsset asset)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException;
+		throws com.liferay.portal.SystemException;
 
 	public com.liferay.portlet.tags.model.TagsAsset getAsset(long assetId)
 		throws com.liferay.portal.PortalException,

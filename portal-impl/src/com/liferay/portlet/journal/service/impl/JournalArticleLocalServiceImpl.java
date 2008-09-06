@@ -843,7 +843,7 @@ public class JournalArticleLocalServiceImpl
 
 		// Article
 
-		journalArticlePersistence.remove(article.getPrimaryKey());
+		journalArticlePersistence.remove(article);
 	}
 
 	public void deleteArticles(long groupId)

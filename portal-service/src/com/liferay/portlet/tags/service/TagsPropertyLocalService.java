@@ -98,8 +98,7 @@ public interface TagsPropertyLocalService {
 			com.liferay.portal.SystemException;
 
 	public void deleteProperties(long entryId)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException;
+		throws com.liferay.portal.SystemException;
 
 	public void deleteProperty(long propertyId)
 		throws com.liferay.portal.PortalException,
@@ -107,8 +106,7 @@ public interface TagsPropertyLocalService {
 
 	public void deleteProperty(
 		com.liferay.portlet.tags.model.TagsProperty property)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException;
+		throws com.liferay.portal.SystemException;
 
 	public java.util.List<com.liferay.portlet.tags.model.TagsProperty> getProperties()
 		throws com.liferay.portal.SystemException;

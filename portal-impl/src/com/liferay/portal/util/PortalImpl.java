@@ -1640,9 +1640,7 @@ public class PortalImpl implements Portal {
 		return resourceBundle.getString(JavaConstants.JAVAX_PORTLET_TITLE);
 	}
 
-	public String getPortletXmlFileName()
-		throws PortalException, SystemException {
-
+	public String getPortletXmlFileName() throws SystemException {
 		if (PrefsPropsUtil.getBoolean(
 				PropsKeys.AUTO_DEPLOY_CUSTOM_PORTLET_XML,
 				PropsValues.AUTO_DEPLOY_CUSTOM_PORTLET_XML)) {
@@ -2093,7 +2091,7 @@ public class PortalImpl implements Portal {
 		if (HttpUtil.hasDomain(layoutURL)) {
 			String protocol = HttpUtil.getProtocol(layoutURL);
 			String domain = HttpUtil.getDomain(layoutURL);
-			String pathInfo = HttpUtil.removeDomain(layoutURL);
+			HttpUtil.removeDomain(layoutURL);
 
 			sb.append(protocol);
 			sb.append(Http.PROTOCOL_DELIMITER);

@@ -457,7 +457,7 @@ public class DLFileEntryLocalServiceImpl
 			fileEntry.getFolderId(), fileEntry.getName());
 
 		for (DLFileVersion fileVersion : fileVersions) {
-			dlFileVersionPersistence.remove(fileVersion.getPrimaryKey());
+			dlFileVersionPersistence.remove(fileVersion);
 		}
 
 		// Tags
@@ -488,7 +488,7 @@ public class DLFileEntryLocalServiceImpl
 
 		// File entry
 
-		dlFileEntryPersistence.remove(fileEntry.getPrimaryKey());
+		dlFileEntryPersistence.remove(fileEntry);
 	}
 
 	public List<DLFileEntry> getCompanyFileEntries(

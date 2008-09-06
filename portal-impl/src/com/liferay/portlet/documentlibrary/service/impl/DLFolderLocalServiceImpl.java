@@ -282,7 +282,7 @@ public class DLFolderLocalServiceImpl extends DLFolderLocalServiceBaseImpl {
 
 		// Folder
 
-		dlFolderPersistence.remove(folder.getFolderId());
+		dlFolderPersistence.remove(folder);
 	}
 
 	public void deleteFolders(long groupId)

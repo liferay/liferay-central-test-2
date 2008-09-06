@@ -297,7 +297,7 @@ public class IGImageLocalServiceImpl extends IGImageLocalServiceBaseImpl {
 
 		// Image
 
-		igImagePersistence.remove(image.getPrimaryKey());
+		igImagePersistence.remove(image);
 	}
 
 	public void deleteImages(long folderId)

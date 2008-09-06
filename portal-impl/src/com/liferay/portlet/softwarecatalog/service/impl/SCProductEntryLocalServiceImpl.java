@@ -365,7 +365,7 @@ public class SCProductEntryLocalServiceImpl
 	public String getRepositoryXML(
 			long groupId, String baseImageURL, Date oldestDate,
 			int maxNumOfVersions, Properties repoSettings)
-		throws PortalException, SystemException {
+		throws SystemException {
 
 		return getRepositoryXML(
 			groupId, null, baseImageURL, oldestDate, maxNumOfVersions,
@@ -375,7 +375,7 @@ public class SCProductEntryLocalServiceImpl
 	public String getRepositoryXML(
 			long groupId, String version, String baseImageURL, Date oldestDate,
 			int maxNumOfVersions, Properties repoSettings)
-		throws PortalException, SystemException {
+		throws SystemException {
 
 		Document doc = SAXReaderUtil.createDocument();
 
@@ -635,7 +635,7 @@ public class SCProductEntryLocalServiceImpl
 	protected void populatePluginPackageElement(
 			Element el, SCProductEntry productEntry,
 			SCProductVersion productVersion, String baseImageURL)
-		throws PortalException, SystemException {
+		throws SystemException {
 
 		DocUtil.add(el, "name", productEntry.getName());
 

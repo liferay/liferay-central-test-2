@@ -22,9 +22,6 @@
 
 package com.liferay.portal.security.permission;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
-
 /**
  * <a href="SimplePermissionChecker.java.html"><b><i>View Source</i></b></a>
  *
@@ -74,7 +71,5 @@ public class SimplePermissionChecker extends BasePermissionChecker {
 			return false;
 		}
 	}
-
-	private static Log _log = LogFactory.getLog(SimplePermissionChecker.class);
 
 }

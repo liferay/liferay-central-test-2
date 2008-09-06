@@ -32,17 +32,11 @@ import com.liferay.taglib.util.IncludeTag;
  */
 public class InputSchedulerTag extends IncludeTag {
 
-	public void setAddFunction(String addFunction) {
-		_addFunction = addFunction;
-	}
-
 	protected String getDefaultPage() {
 		return _PAGE;
 	}
 
 	private static final String _PAGE =
 		"/html/taglib/ui/input_scheduler/page.jsp";
-
-	private String _addFunction;
 
 }
