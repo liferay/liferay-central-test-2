@@ -63,6 +63,10 @@ public abstract class SocialRequestLocalServiceBaseImpl
 		return socialRequestPersistence.update(socialRequest, false);
 	}
 
+	public SocialRequest createSocialRequest(long requestId) {
+		return socialRequestPersistence.create(requestId);
+	}
+
 	public void deleteSocialRequest(long requestId)
 		throws PortalException, SystemException {
 		socialRequestPersistence.remove(requestId);

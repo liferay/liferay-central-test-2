@@ -53,9 +53,10 @@ public class PollsQuestionServiceUtil {
 		boolean addCommunityPermissions, boolean addGuestPermissions)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
-		return _service.addQuestion(plid, title, description,
-			expirationDateMonth, expirationDateDay, expirationDateYear,
-			expirationDateHour, expirationDateMinute, neverExpire, choices,
+		return getService()
+				   .addQuestion(plid, title, description, expirationDateMonth,
+			expirationDateDay, expirationDateYear, expirationDateHour,
+			expirationDateMinute, neverExpire, choices,
 			addCommunityPermissions, addGuestPermissions);
 	}
 
@@ -68,23 +69,24 @@ public class PollsQuestionServiceUtil {
 		java.lang.String[] guestPermissions)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
-		return _service.addQuestion(plid, title, description,
-			expirationDateMonth, expirationDateDay, expirationDateYear,
-			expirationDateHour, expirationDateMinute, neverExpire, choices,
-			communityPermissions, guestPermissions);
+		return getService()
+				   .addQuestion(plid, title, description, expirationDateMonth,
+			expirationDateDay, expirationDateYear, expirationDateHour,
+			expirationDateMinute, neverExpire, choices, communityPermissions,
+			guestPermissions);
 	}
 
 	public static void deleteQuestion(long questionId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
-		_service.deleteQuestion(questionId);
+		getService().deleteQuestion(questionId);
 	}
 
 	public static com.liferay.portlet.polls.model.PollsQuestion getQuestion(
 		long questionId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
-		return _service.getQuestion(questionId);
+		return getService().getQuestion(questionId);
 	}
 
 	public static com.liferay.portlet.polls.model.PollsQuestion updateQuestion(
@@ -94,12 +96,17 @@ public class PollsQuestionServiceUtil {
 		java.util.List<com.liferay.portlet.polls.model.PollsChoice> choices)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
-		return _service.updateQuestion(questionId, title, description,
+		return getService()
+				   .updateQuestion(questionId, title, description,
 			expirationDateMonth, expirationDateDay, expirationDateYear,
 			expirationDateHour, expirationDateMinute, neverExpire, choices);
 	}
 
 	public static PollsQuestionService getService() {
+		if (_service == null) {
+			throw new RuntimeException("PollsQuestionService is not set");
+		}
+
 		return _service;
 	}
 

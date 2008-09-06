@@ -49,7 +49,7 @@ public class MBThreadServiceUtil {
 		long categoryId, long threadId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
-		return _service.moveThread(categoryId, threadId);
+		return getService().moveThread(categoryId, threadId);
 	}
 
 	public static com.liferay.portlet.messageboards.model.MBThread splitThread(
@@ -57,10 +57,14 @@ public class MBThreadServiceUtil {
 		com.liferay.portal.theme.ThemeDisplay themeDisplay)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
-		return _service.splitThread(messageId, prefs, themeDisplay);
+		return getService().splitThread(messageId, prefs, themeDisplay);
 	}
 
 	public static MBThreadService getService() {
+		if (_service == null) {
+			throw new RuntimeException("MBThreadService is not set");
+		}
+
 		return _service;
 	}
 

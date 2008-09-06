@@ -77,6 +77,10 @@ public abstract class MBMessageFlagLocalServiceBaseImpl
 		return mbMessageFlagPersistence.update(mbMessageFlag, false);
 	}
 
+	public MBMessageFlag createMBMessageFlag(long messageFlagId) {
+		return mbMessageFlagPersistence.create(messageFlagId);
+	}
+
 	public void deleteMBMessageFlag(long messageFlagId)
 		throws PortalException, SystemException {
 		mbMessageFlagPersistence.remove(messageFlagId);

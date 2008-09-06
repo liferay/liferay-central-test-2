@@ -78,6 +78,10 @@ public abstract class MBMailingListLocalServiceBaseImpl
 		return mbMailingListPersistence.update(mbMailingList, false);
 	}
 
+	public MBMailingList createMBMailingList(long mailingListId) {
+		return mbMailingListPersistence.create(mailingListId);
+	}
+
 	public void deleteMBMailingList(long mailingListId)
 		throws PortalException, SystemException {
 		mbMailingListPersistence.remove(mailingListId);

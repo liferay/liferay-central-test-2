@@ -49,39 +49,43 @@ public class RegionServiceUtil {
 		java.lang.String regionCode, java.lang.String name, boolean active)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
-		return _service.addRegion(countryId, regionCode, name, active);
+		return getService().addRegion(countryId, regionCode, name, active);
 	}
 
 	public static java.util.List<com.liferay.portal.model.Region> getRegions()
 		throws com.liferay.portal.SystemException, java.rmi.RemoteException {
-		return _service.getRegions();
+		return getService().getRegions();
 	}
 
 	public static java.util.List<com.liferay.portal.model.Region> getRegions(
 		long countryId)
 		throws com.liferay.portal.SystemException, java.rmi.RemoteException {
-		return _service.getRegions(countryId);
+		return getService().getRegions(countryId);
 	}
 
 	public static java.util.List<com.liferay.portal.model.Region> getRegions(
 		boolean active)
 		throws com.liferay.portal.SystemException, java.rmi.RemoteException {
-		return _service.getRegions(active);
+		return getService().getRegions(active);
 	}
 
 	public static java.util.List<com.liferay.portal.model.Region> getRegions(
 		long countryId, boolean active)
 		throws com.liferay.portal.SystemException, java.rmi.RemoteException {
-		return _service.getRegions(countryId, active);
+		return getService().getRegions(countryId, active);
 	}
 
 	public static com.liferay.portal.model.Region getRegion(long regionId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
-		return _service.getRegion(regionId);
+		return getService().getRegion(regionId);
 	}
 
 	public static RegionService getService() {
+		if (_service == null) {
+			throw new RuntimeException("RegionService is not set");
+		}
+
 		return _service;
 	}
 

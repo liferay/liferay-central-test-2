@@ -52,6 +52,9 @@ public interface MBThreadLocalService {
 		com.liferay.portlet.messageboards.model.MBThread mbThread)
 		throws com.liferay.portal.SystemException;
 
+	public com.liferay.portlet.messageboards.model.MBThread createMBThread(
+		long threadId);
+
 	public void deleteMBThread(long threadId)
 		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;

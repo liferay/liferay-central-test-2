@@ -48,54 +48,59 @@ public class ServiceComponentLocalServiceUtil {
 	public static com.liferay.portal.model.ServiceComponent addServiceComponent(
 		com.liferay.portal.model.ServiceComponent serviceComponent)
 		throws com.liferay.portal.SystemException {
-		return _service.addServiceComponent(serviceComponent);
+		return getService().addServiceComponent(serviceComponent);
+	}
+
+	public static com.liferay.portal.model.ServiceComponent createServiceComponent(
+		long serviceComponentId) {
+		return getService().createServiceComponent(serviceComponentId);
 	}
 
 	public static void deleteServiceComponent(long serviceComponentId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		_service.deleteServiceComponent(serviceComponentId);
+		getService().deleteServiceComponent(serviceComponentId);
 	}
 
 	public static void deleteServiceComponent(
 		com.liferay.portal.model.ServiceComponent serviceComponent)
 		throws com.liferay.portal.SystemException {
-		_service.deleteServiceComponent(serviceComponent);
+		getService().deleteServiceComponent(serviceComponent);
 	}
 
 	public static java.util.List<Object> dynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery)
 		throws com.liferay.portal.SystemException {
-		return _service.dynamicQuery(dynamicQuery);
+		return getService().dynamicQuery(dynamicQuery);
 	}
 
 	public static java.util.List<Object> dynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery, int start,
 		int end) throws com.liferay.portal.SystemException {
-		return _service.dynamicQuery(dynamicQuery, start, end);
+		return getService().dynamicQuery(dynamicQuery, start, end);
 	}
 
 	public static com.liferay.portal.model.ServiceComponent getServiceComponent(
 		long serviceComponentId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		return _service.getServiceComponent(serviceComponentId);
+		return getService().getServiceComponent(serviceComponentId);
 	}
 
 	public static java.util.List<com.liferay.portal.model.ServiceComponent> getServiceComponents(
 		int start, int end) throws com.liferay.portal.SystemException {
-		return _service.getServiceComponents(start, end);
+		return getService().getServiceComponents(start, end);
 	}
 
 	public static int getServiceComponentsCount()
 		throws com.liferay.portal.SystemException {
-		return _service.getServiceComponentsCount();
+		return getService().getServiceComponentsCount();
 	}
 
 	public static com.liferay.portal.model.ServiceComponent updateServiceComponent(
 		com.liferay.portal.model.ServiceComponent serviceComponent)
 		throws com.liferay.portal.SystemException {
-		return _service.updateServiceComponent(serviceComponent);
+		return getService().updateServiceComponent(serviceComponent);
 	}
 
 	public static com.liferay.portal.model.ServiceComponent updateServiceComponent(
@@ -104,11 +109,17 @@ public class ServiceComponentLocalServiceUtil {
 		long buildNumber, long buildDate)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		return _service.updateServiceComponent(servletContext, classLoader,
+		return getService()
+				   .updateServiceComponent(servletContext, classLoader,
 			buildNamespace, buildNumber, buildDate);
 	}
 
 	public static ServiceComponentLocalService getService() {
+		if (_service == null) {
+			throw new RuntimeException(
+				"ServiceComponentLocalService is not set");
+		}
+
 		return _service;
 	}
 

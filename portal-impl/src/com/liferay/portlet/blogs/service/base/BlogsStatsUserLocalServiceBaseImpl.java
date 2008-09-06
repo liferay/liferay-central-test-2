@@ -61,6 +61,10 @@ public abstract class BlogsStatsUserLocalServiceBaseImpl
 		return blogsStatsUserPersistence.update(blogsStatsUser, false);
 	}
 
+	public BlogsStatsUser createBlogsStatsUser(long statsUserId) {
+		return blogsStatsUserPersistence.create(statsUserId);
+	}
+
 	public void deleteBlogsStatsUser(long statsUserId)
 		throws PortalException, SystemException {
 		blogsStatsUserPersistence.remove(statsUserId);

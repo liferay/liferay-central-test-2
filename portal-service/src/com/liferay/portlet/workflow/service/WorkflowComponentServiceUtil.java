@@ -48,60 +48,60 @@ public class WorkflowComponentServiceUtil {
 	public static java.util.List getCurrentTasks(long instanceId, long tokenId)
 		throws com.liferay.portal.kernel.jbi.WorkflowComponentException,
 			java.rmi.RemoteException {
-		return _service.getCurrentTasks(instanceId, tokenId);
+		return getService().getCurrentTasks(instanceId, tokenId);
 	}
 
 	public static java.lang.String getCurrentTasksXml(long instanceId,
 		long tokenId)
 		throws com.liferay.portal.kernel.jbi.WorkflowComponentException,
 			java.rmi.RemoteException {
-		return _service.getCurrentTasksXml(instanceId, tokenId);
+		return getService().getCurrentTasksXml(instanceId, tokenId);
 	}
 
 	public static java.lang.String deploy(java.lang.String xml)
 		throws com.liferay.portal.kernel.jbi.WorkflowComponentException,
 			java.rmi.RemoteException {
-		return _service.deploy(xml);
+		return getService().deploy(xml);
 	}
 
 	public static java.lang.Object getDefinition(long definitionId)
 		throws com.liferay.portal.kernel.jbi.WorkflowComponentException,
 			java.rmi.RemoteException {
-		return _service.getDefinition(definitionId);
+		return getService().getDefinition(definitionId);
 	}
 
 	public static java.util.List getDefinitions(long definitionId,
 		java.lang.String name, int start, int end)
 		throws com.liferay.portal.kernel.jbi.WorkflowComponentException,
 			java.rmi.RemoteException {
-		return _service.getDefinitions(definitionId, name, start, end);
+		return getService().getDefinitions(definitionId, name, start, end);
 	}
 
 	public static java.lang.String getDefinitionsXml(long definitionId,
 		java.lang.String name, int start, int end)
 		throws com.liferay.portal.kernel.jbi.WorkflowComponentException,
 			java.rmi.RemoteException {
-		return _service.getDefinitionsXml(definitionId, name, start, end);
+		return getService().getDefinitionsXml(definitionId, name, start, end);
 	}
 
 	public static int getDefinitionsCount(long definitionId,
 		java.lang.String name)
 		throws com.liferay.portal.kernel.jbi.WorkflowComponentException,
 			java.rmi.RemoteException {
-		return _service.getDefinitionsCount(definitionId, name);
+		return getService().getDefinitionsCount(definitionId, name);
 	}
 
 	public static java.lang.String getDefinitionsCountXml(long definitionId,
 		java.lang.String name)
 		throws com.liferay.portal.kernel.jbi.WorkflowComponentException,
 			java.rmi.RemoteException {
-		return _service.getDefinitionsCountXml(definitionId, name);
+		return getService().getDefinitionsCountXml(definitionId, name);
 	}
 
 	public static java.lang.String getDefinitionXml(long definitionId)
 		throws com.liferay.portal.kernel.jbi.WorkflowComponentException,
 			java.rmi.RemoteException {
-		return _service.getDefinitionXml(definitionId);
+		return getService().getDefinitionXml(definitionId);
 	}
 
 	public static java.util.List getInstances(long definitionId,
@@ -112,7 +112,8 @@ public class WorkflowComponentServiceUtil {
 		boolean retrieveUserInstances, boolean andOperator, int start, int end)
 		throws com.liferay.portal.kernel.jbi.WorkflowComponentException,
 			java.rmi.RemoteException {
-		return _service.getInstances(definitionId, instanceId, definitionName,
+		return getService()
+				   .getInstances(definitionId, instanceId, definitionName,
 			definitionVersion, startDateGT, startDateLT, endDateGT, endDateLT,
 			hideEndedTasks, retrieveUserInstances, andOperator, start, end);
 	}
@@ -125,10 +126,10 @@ public class WorkflowComponentServiceUtil {
 		boolean andOperator)
 		throws com.liferay.portal.kernel.jbi.WorkflowComponentException,
 			java.rmi.RemoteException {
-		return _service.getInstancesCount(definitionId, instanceId,
-			definitionName, definitionVersion, startDateGT, startDateLT,
-			endDateGT, endDateLT, hideEndedTasks, retrieveUserInstances,
-			andOperator);
+		return getService()
+				   .getInstancesCount(definitionId, instanceId, definitionName,
+			definitionVersion, startDateGT, startDateLT, endDateGT, endDateLT,
+			hideEndedTasks, retrieveUserInstances, andOperator);
 	}
 
 	public static java.lang.String getInstancesCountXml(long definitionId,
@@ -139,7 +140,8 @@ public class WorkflowComponentServiceUtil {
 		boolean retrieveUserInstances, boolean andOperator)
 		throws com.liferay.portal.kernel.jbi.WorkflowComponentException,
 			java.rmi.RemoteException {
-		return _service.getInstancesCountXml(definitionId, instanceId,
+		return getService()
+				   .getInstancesCountXml(definitionId, instanceId,
 			definitionName, definitionVersion, startDateGT, startDateLT,
 			endDateGT, endDateLT, hideEndedTasks, retrieveUserInstances,
 			andOperator);
@@ -153,47 +155,47 @@ public class WorkflowComponentServiceUtil {
 		boolean retrieveUserInstances, boolean andOperator, int start, int end)
 		throws com.liferay.portal.kernel.jbi.WorkflowComponentException,
 			java.rmi.RemoteException {
-		return _service.getInstancesXml(definitionId, instanceId,
-			definitionName, definitionVersion, startDateGT, startDateLT,
-			endDateGT, endDateLT, hideEndedTasks, retrieveUserInstances,
-			andOperator, start, end);
+		return getService()
+				   .getInstancesXml(definitionId, instanceId, definitionName,
+			definitionVersion, startDateGT, startDateLT, endDateGT, endDateLT,
+			hideEndedTasks, retrieveUserInstances, andOperator, start, end);
 	}
 
 	public static com.liferay.portlet.workflow.model.WorkflowTask getTask(
 		long taskId)
 		throws com.liferay.portal.kernel.jbi.WorkflowComponentException,
 			java.rmi.RemoteException {
-		return _service.getTask(taskId);
+		return getService().getTask(taskId);
 	}
 
 	public static java.lang.String getTaskXml(long taskId)
 		throws com.liferay.portal.kernel.jbi.WorkflowComponentException,
 			java.rmi.RemoteException {
-		return _service.getTaskXml(taskId);
+		return getService().getTaskXml(taskId);
 	}
 
 	public static java.util.List getTaskFormElements(long taskId)
 		throws com.liferay.portal.kernel.jbi.WorkflowComponentException,
 			java.rmi.RemoteException {
-		return _service.getTaskFormElements(taskId);
+		return getService().getTaskFormElements(taskId);
 	}
 
 	public static java.lang.String getTaskFormElementsXml(long taskId)
 		throws com.liferay.portal.kernel.jbi.WorkflowComponentException,
 			java.rmi.RemoteException {
-		return _service.getTaskFormElementsXml(taskId);
+		return getService().getTaskFormElementsXml(taskId);
 	}
 
 	public static java.util.List getTaskTransitions(long taskId)
 		throws com.liferay.portal.kernel.jbi.WorkflowComponentException,
 			java.rmi.RemoteException {
-		return _service.getTaskTransitions(taskId);
+		return getService().getTaskTransitions(taskId);
 	}
 
 	public static java.lang.String getTaskTransitionsXml(long taskId)
 		throws com.liferay.portal.kernel.jbi.WorkflowComponentException,
 			java.rmi.RemoteException {
-		return _service.getTaskTransitionsXml(taskId);
+		return getService().getTaskTransitionsXml(taskId);
 	}
 
 	public static java.util.List getUserTasks(long instanceId,
@@ -205,7 +207,8 @@ public class WorkflowComponentServiceUtil {
 		boolean andOperator, int start, int end)
 		throws com.liferay.portal.kernel.jbi.WorkflowComponentException,
 			java.rmi.RemoteException {
-		return _service.getUserTasks(instanceId, taskName, definitionName,
+		return getService()
+				   .getUserTasks(instanceId, taskName, definitionName,
 			assignedTo, createDateGT, createDateLT, startDateGT, startDateLT,
 			endDateGT, endDateLT, hideEndedTasks, andOperator, start, end);
 	}
@@ -218,7 +221,8 @@ public class WorkflowComponentServiceUtil {
 		java.lang.String endDateLT, boolean hideEndedTasks, boolean andOperator)
 		throws com.liferay.portal.kernel.jbi.WorkflowComponentException,
 			java.rmi.RemoteException {
-		return _service.getUserTasksCount(instanceId, taskName, definitionName,
+		return getService()
+				   .getUserTasksCount(instanceId, taskName, definitionName,
 			assignedTo, createDateGT, createDateLT, startDateGT, startDateLT,
 			endDateGT, endDateLT, hideEndedTasks, andOperator);
 	}
@@ -231,10 +235,10 @@ public class WorkflowComponentServiceUtil {
 		java.lang.String endDateLT, boolean hideEndedTasks, boolean andOperator)
 		throws com.liferay.portal.kernel.jbi.WorkflowComponentException,
 			java.rmi.RemoteException {
-		return _service.getUserTasksCountXml(instanceId, taskName,
-			definitionName, assignedTo, createDateGT, createDateLT,
-			startDateGT, startDateLT, endDateGT, endDateLT, hideEndedTasks,
-			andOperator);
+		return getService()
+				   .getUserTasksCountXml(instanceId, taskName, definitionName,
+			assignedTo, createDateGT, createDateLT, startDateGT, startDateLT,
+			endDateGT, endDateLT, hideEndedTasks, andOperator);
 	}
 
 	public static java.lang.String getUserTasksXml(long instanceId,
@@ -246,7 +250,8 @@ public class WorkflowComponentServiceUtil {
 		boolean andOperator, int start, int end)
 		throws com.liferay.portal.kernel.jbi.WorkflowComponentException,
 			java.rmi.RemoteException {
-		return _service.getUserTasksXml(instanceId, taskName, definitionName,
+		return getService()
+				   .getUserTasksXml(instanceId, taskName, definitionName,
 			assignedTo, createDateGT, createDateLT, startDateGT, startDateLT,
 			endDateGT, endDateLT, hideEndedTasks, andOperator, start, end);
 	}
@@ -254,36 +259,40 @@ public class WorkflowComponentServiceUtil {
 	public static void signalInstance(long instanceId)
 		throws com.liferay.portal.kernel.jbi.WorkflowComponentException,
 			java.rmi.RemoteException {
-		_service.signalInstance(instanceId);
+		getService().signalInstance(instanceId);
 	}
 
 	public static void signalToken(long instanceId, long tokenId)
 		throws com.liferay.portal.kernel.jbi.WorkflowComponentException,
 			java.rmi.RemoteException {
-		_service.signalToken(instanceId, tokenId);
+		getService().signalToken(instanceId, tokenId);
 	}
 
 	public static java.lang.String startWorkflow(long definitionId)
 		throws com.liferay.portal.kernel.jbi.WorkflowComponentException,
 			java.rmi.RemoteException {
-		return _service.startWorkflow(definitionId);
+		return getService().startWorkflow(definitionId);
 	}
 
 	public static java.util.Map updateTask(long taskId,
 		java.lang.String transition, java.util.Map parameterMap)
 		throws com.liferay.portal.kernel.jbi.WorkflowComponentException,
 			java.rmi.RemoteException {
-		return _service.updateTask(taskId, transition, parameterMap);
+		return getService().updateTask(taskId, transition, parameterMap);
 	}
 
 	public static java.lang.String updateTaskXml(long taskId,
 		java.lang.String transition, java.util.Map parameterMap)
 		throws com.liferay.portal.kernel.jbi.WorkflowComponentException,
 			java.rmi.RemoteException {
-		return _service.updateTaskXml(taskId, transition, parameterMap);
+		return getService().updateTaskXml(taskId, transition, parameterMap);
 	}
 
 	public static WorkflowComponentService getService() {
+		if (_service == null) {
+			throw new RuntimeException("WorkflowComponentService is not set");
+		}
+
 		return _service;
 	}
 

@@ -48,67 +48,76 @@ public class ClassNameLocalServiceUtil {
 	public static com.liferay.portal.model.ClassName addClassName(
 		com.liferay.portal.model.ClassName className)
 		throws com.liferay.portal.SystemException {
-		return _service.addClassName(className);
+		return getService().addClassName(className);
+	}
+
+	public static com.liferay.portal.model.ClassName createClassName(
+		long classNameId) {
+		return getService().createClassName(classNameId);
 	}
 
 	public static void deleteClassName(long classNameId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		_service.deleteClassName(classNameId);
+		getService().deleteClassName(classNameId);
 	}
 
 	public static void deleteClassName(
 		com.liferay.portal.model.ClassName className)
 		throws com.liferay.portal.SystemException {
-		_service.deleteClassName(className);
+		getService().deleteClassName(className);
 	}
 
 	public static java.util.List<Object> dynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery)
 		throws com.liferay.portal.SystemException {
-		return _service.dynamicQuery(dynamicQuery);
+		return getService().dynamicQuery(dynamicQuery);
 	}
 
 	public static java.util.List<Object> dynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery, int start,
 		int end) throws com.liferay.portal.SystemException {
-		return _service.dynamicQuery(dynamicQuery, start, end);
+		return getService().dynamicQuery(dynamicQuery, start, end);
 	}
 
 	public static com.liferay.portal.model.ClassName getClassName(
 		long classNameId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		return _service.getClassName(classNameId);
+		return getService().getClassName(classNameId);
 	}
 
 	public static java.util.List<com.liferay.portal.model.ClassName> getClassNames(
 		int start, int end) throws com.liferay.portal.SystemException {
-		return _service.getClassNames(start, end);
+		return getService().getClassNames(start, end);
 	}
 
 	public static int getClassNamesCount()
 		throws com.liferay.portal.SystemException {
-		return _service.getClassNamesCount();
+		return getService().getClassNamesCount();
 	}
 
 	public static com.liferay.portal.model.ClassName updateClassName(
 		com.liferay.portal.model.ClassName className)
 		throws com.liferay.portal.SystemException {
-		return _service.updateClassName(className);
+		return getService().updateClassName(className);
 	}
 
 	public static void checkClassNames()
 		throws com.liferay.portal.SystemException {
-		_service.checkClassNames();
+		getService().checkClassNames();
 	}
 
 	public static com.liferay.portal.model.ClassName getClassName(
 		java.lang.String value) throws com.liferay.portal.SystemException {
-		return _service.getClassName(value);
+		return getService().getClassName(value);
 	}
 
 	public static ClassNameLocalService getService() {
+		if (_service == null) {
+			throw new RuntimeException("ClassNameLocalService is not set");
+		}
+
 		return _service;
 	}
 

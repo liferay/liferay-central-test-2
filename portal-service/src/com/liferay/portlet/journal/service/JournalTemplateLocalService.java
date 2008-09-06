@@ -52,6 +52,9 @@ public interface JournalTemplateLocalService {
 		com.liferay.portlet.journal.model.JournalTemplate journalTemplate)
 		throws com.liferay.portal.SystemException;
 
+	public com.liferay.portlet.journal.model.JournalTemplate createJournalTemplate(
+		long id);
+
 	public void deleteJournalTemplate(long id)
 		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;

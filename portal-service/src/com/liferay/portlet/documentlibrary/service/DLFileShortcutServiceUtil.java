@@ -50,7 +50,8 @@ public class DLFileShortcutServiceUtil {
 		boolean addCommunityPermissions, boolean addGuestPermissions)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
-		return _service.addFileShortcut(folderId, toFolderId, toName,
+		return getService()
+				   .addFileShortcut(folderId, toFolderId, toName,
 			addCommunityPermissions, addGuestPermissions);
 	}
 
@@ -60,21 +61,22 @@ public class DLFileShortcutServiceUtil {
 		java.lang.String[] guestPermissions)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
-		return _service.addFileShortcut(folderId, toFolderId, toName,
+		return getService()
+				   .addFileShortcut(folderId, toFolderId, toName,
 			communityPermissions, guestPermissions);
 	}
 
 	public static void deleteFileShortcut(long fileShortcutId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
-		_service.deleteFileShortcut(fileShortcutId);
+		getService().deleteFileShortcut(fileShortcutId);
 	}
 
 	public static com.liferay.portlet.documentlibrary.model.DLFileShortcut getFileShortcut(
 		long fileShortcutId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
-		return _service.getFileShortcut(fileShortcutId);
+		return getService().getFileShortcut(fileShortcutId);
 	}
 
 	public static com.liferay.portlet.documentlibrary.model.DLFileShortcut updateFileShortcut(
@@ -82,11 +84,16 @@ public class DLFileShortcutServiceUtil {
 		java.lang.String toName)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
-		return _service.updateFileShortcut(fileShortcutId, folderId,
-			toFolderId, toName);
+		return getService()
+				   .updateFileShortcut(fileShortcutId, folderId, toFolderId,
+			toName);
 	}
 
 	public static DLFileShortcutService getService() {
+		if (_service == null) {
+			throw new RuntimeException("DLFileShortcutService is not set");
+		}
+
 		return _service;
 	}
 

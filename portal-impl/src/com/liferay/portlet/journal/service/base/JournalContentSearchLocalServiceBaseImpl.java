@@ -85,6 +85,10 @@ public abstract class JournalContentSearchLocalServiceBaseImpl
 			false);
 	}
 
+	public JournalContentSearch createJournalContentSearch(long contentSearchId) {
+		return journalContentSearchPersistence.create(contentSearchId);
+	}
+
 	public void deleteJournalContentSearch(long contentSearchId)
 		throws PortalException, SystemException {
 		journalContentSearchPersistence.remove(contentSearchId);

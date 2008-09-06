@@ -92,6 +92,10 @@ public abstract class DLFileEntryLocalServiceBaseImpl
 		return dlFileEntryPersistence.update(dlFileEntry, false);
 	}
 
+	public DLFileEntry createDLFileEntry(long fileEntryId) {
+		return dlFileEntryPersistence.create(fileEntryId);
+	}
+
 	public void deleteDLFileEntry(long fileEntryId)
 		throws PortalException, SystemException {
 		dlFileEntryPersistence.remove(fileEntryId);

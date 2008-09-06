@@ -52,6 +52,8 @@ public interface AddressLocalService {
 		com.liferay.portal.model.Address address)
 		throws com.liferay.portal.SystemException;
 
+	public com.liferay.portal.model.Address createAddress(long addressId);
+
 	public void deleteAddress(long addressId)
 		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;

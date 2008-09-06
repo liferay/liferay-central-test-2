@@ -52,6 +52,9 @@ public interface DLFileVersionLocalService {
 		com.liferay.portlet.documentlibrary.model.DLFileVersion dlFileVersion)
 		throws com.liferay.portal.SystemException;
 
+	public com.liferay.portlet.documentlibrary.model.DLFileVersion createDLFileVersion(
+		long fileVersionId);
+
 	public void deleteDLFileVersion(long fileVersionId)
 		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;

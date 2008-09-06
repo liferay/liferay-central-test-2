@@ -70,6 +70,10 @@ public abstract class ShoppingItemPriceLocalServiceBaseImpl
 		return shoppingItemPricePersistence.update(shoppingItemPrice, false);
 	}
 
+	public ShoppingItemPrice createShoppingItemPrice(long itemPriceId) {
+		return shoppingItemPricePersistence.create(itemPriceId);
+	}
+
 	public void deleteShoppingItemPrice(long itemPriceId)
 		throws PortalException, SystemException {
 		shoppingItemPricePersistence.remove(itemPriceId);

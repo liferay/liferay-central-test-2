@@ -52,6 +52,9 @@ public interface ShoppingCartLocalService {
 		com.liferay.portlet.shopping.model.ShoppingCart shoppingCart)
 		throws com.liferay.portal.SystemException;
 
+	public com.liferay.portlet.shopping.model.ShoppingCart createShoppingCart(
+		long cartId);
+
 	public void deleteShoppingCart(long cartId)
 		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;

@@ -48,62 +48,72 @@ public class ShoppingItemFieldLocalServiceUtil {
 	public static com.liferay.portlet.shopping.model.ShoppingItemField addShoppingItemField(
 		com.liferay.portlet.shopping.model.ShoppingItemField shoppingItemField)
 		throws com.liferay.portal.SystemException {
-		return _service.addShoppingItemField(shoppingItemField);
+		return getService().addShoppingItemField(shoppingItemField);
+	}
+
+	public static com.liferay.portlet.shopping.model.ShoppingItemField createShoppingItemField(
+		long itemFieldId) {
+		return getService().createShoppingItemField(itemFieldId);
 	}
 
 	public static void deleteShoppingItemField(long itemFieldId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		_service.deleteShoppingItemField(itemFieldId);
+		getService().deleteShoppingItemField(itemFieldId);
 	}
 
 	public static void deleteShoppingItemField(
 		com.liferay.portlet.shopping.model.ShoppingItemField shoppingItemField)
 		throws com.liferay.portal.SystemException {
-		_service.deleteShoppingItemField(shoppingItemField);
+		getService().deleteShoppingItemField(shoppingItemField);
 	}
 
 	public static java.util.List<Object> dynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery)
 		throws com.liferay.portal.SystemException {
-		return _service.dynamicQuery(dynamicQuery);
+		return getService().dynamicQuery(dynamicQuery);
 	}
 
 	public static java.util.List<Object> dynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery, int start,
 		int end) throws com.liferay.portal.SystemException {
-		return _service.dynamicQuery(dynamicQuery, start, end);
+		return getService().dynamicQuery(dynamicQuery, start, end);
 	}
 
 	public static com.liferay.portlet.shopping.model.ShoppingItemField getShoppingItemField(
 		long itemFieldId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		return _service.getShoppingItemField(itemFieldId);
+		return getService().getShoppingItemField(itemFieldId);
 	}
 
 	public static java.util.List<com.liferay.portlet.shopping.model.ShoppingItemField> getShoppingItemFields(
 		int start, int end) throws com.liferay.portal.SystemException {
-		return _service.getShoppingItemFields(start, end);
+		return getService().getShoppingItemFields(start, end);
 	}
 
 	public static int getShoppingItemFieldsCount()
 		throws com.liferay.portal.SystemException {
-		return _service.getShoppingItemFieldsCount();
+		return getService().getShoppingItemFieldsCount();
 	}
 
 	public static com.liferay.portlet.shopping.model.ShoppingItemField updateShoppingItemField(
 		com.liferay.portlet.shopping.model.ShoppingItemField shoppingItemField)
 		throws com.liferay.portal.SystemException {
-		return _service.updateShoppingItemField(shoppingItemField);
+		return getService().updateShoppingItemField(shoppingItemField);
 	}
 
 	public static java.util.List<com.liferay.portlet.shopping.model.ShoppingItemField> getItemFields(
 		long itemId) throws com.liferay.portal.SystemException {
-		return _service.getItemFields(itemId);
+		return getService().getItemFields(itemId);
 	}
 
 	public static ShoppingItemFieldLocalService getService() {
+		if (_service == null) {
+			throw new RuntimeException(
+				"ShoppingItemFieldLocalService is not set");
+		}
+
 		return _service;
 	}
 

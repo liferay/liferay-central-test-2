@@ -61,6 +61,10 @@ public abstract class ExpandoColumnLocalServiceBaseImpl
 		return expandoColumnPersistence.update(expandoColumn, false);
 	}
 
+	public ExpandoColumn createExpandoColumn(long columnId) {
+		return expandoColumnPersistence.create(columnId);
+	}
+
 	public void deleteExpandoColumn(long columnId)
 		throws PortalException, SystemException {
 		expandoColumnPersistence.remove(columnId);

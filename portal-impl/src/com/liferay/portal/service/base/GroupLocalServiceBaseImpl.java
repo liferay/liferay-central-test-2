@@ -238,6 +238,10 @@ public abstract class GroupLocalServiceBaseImpl implements GroupLocalService,
 		return groupPersistence.update(group, false);
 	}
 
+	public Group createGroup(long groupId) {
+		return groupPersistence.create(groupId);
+	}
+
 	public void deleteGroup(long groupId)
 		throws PortalException, SystemException {
 		groupPersistence.remove(groupId);

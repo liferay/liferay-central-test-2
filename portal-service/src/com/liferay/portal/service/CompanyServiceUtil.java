@@ -50,14 +50,14 @@ public class CompanyServiceUtil {
 		java.lang.String mx)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
-		return _service.addCompany(webId, virtualHost, mx);
+		return getService().addCompany(webId, virtualHost, mx);
 	}
 
 	public static com.liferay.portal.model.Company updateCompany(
 		long companyId, java.lang.String virtualHost, java.lang.String mx)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
-		return _service.updateCompany(companyId, virtualHost, mx);
+		return getService().updateCompany(companyId, virtualHost, mx);
 	}
 
 	public static com.liferay.portal.model.Company updateCompany(
@@ -68,22 +68,22 @@ public class CompanyServiceUtil {
 		java.lang.String industry, java.lang.String type, java.lang.String size)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
-		return _service.updateCompany(companyId, virtualHost, mx, name,
-			legalName, legalId, legalType, sicCode, tickerSymbol, industry,
-			type, size);
+		return getService()
+				   .updateCompany(companyId, virtualHost, mx, name, legalName,
+			legalId, legalType, sicCode, tickerSymbol, industry, type, size);
 	}
 
 	public static void updateDisplay(long companyId,
 		java.lang.String languageId, java.lang.String timeZoneId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
-		_service.updateDisplay(companyId, languageId, timeZoneId);
+		getService().updateDisplay(companyId, languageId, timeZoneId);
 	}
 
 	public static void updateLogo(long companyId, java.io.File file)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
-		_service.updateLogo(companyId, file);
+		getService().updateLogo(companyId, file);
 	}
 
 	public static void updateSecurity(long companyId,
@@ -92,11 +92,16 @@ public class CompanyServiceUtil {
 		boolean communityLogo)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
-		_service.updateSecurity(companyId, authType, autoLogin, sendPassword,
+		getService()
+			.updateSecurity(companyId, authType, autoLogin, sendPassword,
 			strangers, strangersWithMx, strangersVerify, communityLogo);
 	}
 
 	public static CompanyService getService() {
+		if (_service == null) {
+			throw new RuntimeException("CompanyService is not set");
+		}
+
 		return _service;
 	}
 

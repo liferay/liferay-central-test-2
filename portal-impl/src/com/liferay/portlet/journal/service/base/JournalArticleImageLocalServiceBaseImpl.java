@@ -74,6 +74,10 @@ public abstract class JournalArticleImageLocalServiceBaseImpl
 		return journalArticleImagePersistence.update(journalArticleImage, false);
 	}
 
+	public JournalArticleImage createJournalArticleImage(long articleImageId) {
+		return journalArticleImagePersistence.create(articleImageId);
+	}
+
 	public void deleteJournalArticleImage(long articleImageId)
 		throws PortalException, SystemException {
 		journalArticleImagePersistence.remove(articleImageId);

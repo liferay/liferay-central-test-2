@@ -169,6 +169,10 @@ public abstract class SubscriptionLocalServiceBaseImpl
 		return subscriptionPersistence.update(subscription, false);
 	}
 
+	public Subscription createSubscription(long subscriptionId) {
+		return subscriptionPersistence.create(subscriptionId);
+	}
+
 	public void deleteSubscription(long subscriptionId)
 		throws PortalException, SystemException {
 		subscriptionPersistence.remove(subscriptionId);

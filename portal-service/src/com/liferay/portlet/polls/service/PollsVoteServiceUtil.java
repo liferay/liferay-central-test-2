@@ -49,10 +49,14 @@ public class PollsVoteServiceUtil {
 		long questionId, long choiceId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
-		return _service.addVote(questionId, choiceId);
+		return getService().addVote(questionId, choiceId);
 	}
 
 	public static PollsVoteService getService() {
+		if (_service == null) {
+			throw new RuntimeException("PollsVoteService is not set");
+		}
+
 		return _service;
 	}
 

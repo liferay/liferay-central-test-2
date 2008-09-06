@@ -46,10 +46,14 @@ package com.liferay.portal.service;
  */
 public class PortalServiceUtil {
 	public static void test() throws java.rmi.RemoteException {
-		_service.test();
+		getService().test();
 	}
 
 	public static PortalService getService() {
+		if (_service == null) {
+			throw new RuntimeException("PortalService is not set");
+		}
+
 		return _service;
 	}
 

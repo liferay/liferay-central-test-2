@@ -92,6 +92,10 @@ public abstract class BlogsEntryLocalServiceBaseImpl
 		return blogsEntryPersistence.update(blogsEntry, false);
 	}
 
+	public BlogsEntry createBlogsEntry(long entryId) {
+		return blogsEntryPersistence.create(entryId);
+	}
+
 	public void deleteBlogsEntry(long entryId)
 		throws PortalException, SystemException {
 		blogsEntryPersistence.remove(entryId);

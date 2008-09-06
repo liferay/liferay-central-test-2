@@ -49,34 +49,35 @@ public class PermissionServiceUtil {
 		java.lang.String primKey)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
-		_service.checkPermission(groupId, name, primKey);
+		getService().checkPermission(groupId, name, primKey);
 	}
 
 	public static boolean hasGroupPermission(long groupId,
 		java.lang.String actionId, long resourceId)
 		throws com.liferay.portal.SystemException, java.rmi.RemoteException {
-		return _service.hasGroupPermission(groupId, actionId, resourceId);
+		return getService().hasGroupPermission(groupId, actionId, resourceId);
 	}
 
 	public static boolean hasUserPermission(long userId,
 		java.lang.String actionId, long resourceId)
 		throws com.liferay.portal.SystemException, java.rmi.RemoteException {
-		return _service.hasUserPermission(userId, actionId, resourceId);
+		return getService().hasUserPermission(userId, actionId, resourceId);
 	}
 
 	public static boolean hasUserPermissions(long userId, long groupId,
 		java.lang.String actionId, long[] resourceIds,
 		com.liferay.portal.security.permission.PermissionCheckerBag permissionCheckerBag)
 		throws com.liferay.portal.SystemException, java.rmi.RemoteException {
-		return _service.hasUserPermissions(userId, groupId, actionId,
-			resourceIds, permissionCheckerBag);
+		return getService()
+				   .hasUserPermissions(userId, groupId, actionId, resourceIds,
+			permissionCheckerBag);
 	}
 
 	public static void setGroupPermissions(long groupId,
 		java.lang.String[] actionIds, long resourceId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
-		_service.setGroupPermissions(groupId, actionIds, resourceId);
+		getService().setGroupPermissions(groupId, actionIds, resourceId);
 	}
 
 	public static void setGroupPermissions(java.lang.String className,
@@ -84,7 +85,8 @@ public class PermissionServiceUtil {
 		long resourceId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
-		_service.setGroupPermissions(className, classPK, groupId, actionIds,
+		getService()
+			.setGroupPermissions(className, classPK, groupId, actionIds,
 			resourceId);
 	}
 
@@ -92,7 +94,8 @@ public class PermissionServiceUtil {
 		long groupId, java.lang.String[] actionIds, long resourceId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
-		_service.setOrgGroupPermissions(organizationId, groupId, actionIds,
+		getService()
+			.setOrgGroupPermissions(organizationId, groupId, actionIds,
 			resourceId);
 	}
 
@@ -101,29 +104,29 @@ public class PermissionServiceUtil {
 		java.lang.String actionId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
-		_service.setRolePermission(roleId, groupId, name, scope, primKey,
-			actionId);
+		getService()
+			.setRolePermission(roleId, groupId, name, scope, primKey, actionId);
 	}
 
 	public static void setRolePermissions(long roleId, long groupId,
 		java.lang.String[] actionIds, long resourceId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
-		_service.setRolePermissions(roleId, groupId, actionIds, resourceId);
+		getService().setRolePermissions(roleId, groupId, actionIds, resourceId);
 	}
 
 	public static void setUserPermissions(long userId, long groupId,
 		java.lang.String[] actionIds, long resourceId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
-		_service.setUserPermissions(userId, groupId, actionIds, resourceId);
+		getService().setUserPermissions(userId, groupId, actionIds, resourceId);
 	}
 
 	public static void unsetRolePermission(long roleId, long groupId,
 		long permissionId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
-		_service.unsetRolePermission(roleId, groupId, permissionId);
+		getService().unsetRolePermission(roleId, groupId, permissionId);
 	}
 
 	public static void unsetRolePermission(long roleId, long groupId,
@@ -131,25 +134,29 @@ public class PermissionServiceUtil {
 		java.lang.String actionId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
-		_service.unsetRolePermission(roleId, groupId, name, scope, primKey,
-			actionId);
+		getService()
+			.unsetRolePermission(roleId, groupId, name, scope, primKey, actionId);
 	}
 
 	public static void unsetRolePermissions(long roleId, long groupId,
 		java.lang.String name, int scope, java.lang.String actionId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
-		_service.unsetRolePermissions(roleId, groupId, name, scope, actionId);
+		getService().unsetRolePermissions(roleId, groupId, name, scope, actionId);
 	}
 
 	public static void unsetUserPermissions(long userId, long groupId,
 		java.lang.String[] actionIds, long resourceId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
-		_service.unsetUserPermissions(userId, groupId, actionIds, resourceId);
+		getService().unsetUserPermissions(userId, groupId, actionIds, resourceId);
 	}
 
 	public static PermissionService getService() {
+		if (_service == null) {
+			throw new RuntimeException("PermissionService is not set");
+		}
+
 		return _service;
 	}
 

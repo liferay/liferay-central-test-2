@@ -52,6 +52,9 @@ public interface PermissionLocalService {
 		com.liferay.portal.model.Permission permission)
 		throws com.liferay.portal.SystemException;
 
+	public com.liferay.portal.model.Permission createPermission(
+		long permissionId);
+
 	public void deletePermission(long permissionId)
 		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;

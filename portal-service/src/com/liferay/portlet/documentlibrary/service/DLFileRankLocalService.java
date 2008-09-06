@@ -52,6 +52,9 @@ public interface DLFileRankLocalService {
 		com.liferay.portlet.documentlibrary.model.DLFileRank dlFileRank)
 		throws com.liferay.portal.SystemException;
 
+	public com.liferay.portlet.documentlibrary.model.DLFileRank createDLFileRank(
+		long fileRankId);
+
 	public void deleteDLFileRank(long fileRankId)
 		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;

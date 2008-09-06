@@ -82,6 +82,10 @@ public abstract class DLFolderLocalServiceBaseImpl
 		return dlFolderPersistence.update(dlFolder, false);
 	}
 
+	public DLFolder createDLFolder(long folderId) {
+		return dlFolderPersistence.create(folderId);
+	}
+
 	public void deleteDLFolder(long folderId)
 		throws PortalException, SystemException {
 		dlFolderPersistence.remove(folderId);

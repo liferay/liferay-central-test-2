@@ -167,6 +167,10 @@ public abstract class PortletLocalServiceBaseImpl implements PortletLocalService
 		return portletPersistence.update(portlet, false);
 	}
 
+	public Portlet createPortlet(long id) {
+		return portletPersistence.create(id);
+	}
+
 	public void deletePortlet(long id) throws PortalException, SystemException {
 		portletPersistence.remove(id);
 	}

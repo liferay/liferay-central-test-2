@@ -168,6 +168,10 @@ public abstract class LayoutSetLocalServiceBaseImpl
 		return layoutSetPersistence.update(layoutSet, false);
 	}
 
+	public LayoutSet createLayoutSet(long layoutSetId) {
+		return layoutSetPersistence.create(layoutSetId);
+	}
+
 	public void deleteLayoutSet(long layoutSetId)
 		throws PortalException, SystemException {
 		layoutSetPersistence.remove(layoutSetId);

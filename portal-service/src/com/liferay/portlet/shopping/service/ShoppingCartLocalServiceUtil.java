@@ -48,77 +48,82 @@ public class ShoppingCartLocalServiceUtil {
 	public static com.liferay.portlet.shopping.model.ShoppingCart addShoppingCart(
 		com.liferay.portlet.shopping.model.ShoppingCart shoppingCart)
 		throws com.liferay.portal.SystemException {
-		return _service.addShoppingCart(shoppingCart);
+		return getService().addShoppingCart(shoppingCart);
+	}
+
+	public static com.liferay.portlet.shopping.model.ShoppingCart createShoppingCart(
+		long cartId) {
+		return getService().createShoppingCart(cartId);
 	}
 
 	public static void deleteShoppingCart(long cartId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		_service.deleteShoppingCart(cartId);
+		getService().deleteShoppingCart(cartId);
 	}
 
 	public static void deleteShoppingCart(
 		com.liferay.portlet.shopping.model.ShoppingCart shoppingCart)
 		throws com.liferay.portal.SystemException {
-		_service.deleteShoppingCart(shoppingCart);
+		getService().deleteShoppingCart(shoppingCart);
 	}
 
 	public static java.util.List<Object> dynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery)
 		throws com.liferay.portal.SystemException {
-		return _service.dynamicQuery(dynamicQuery);
+		return getService().dynamicQuery(dynamicQuery);
 	}
 
 	public static java.util.List<Object> dynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery, int start,
 		int end) throws com.liferay.portal.SystemException {
-		return _service.dynamicQuery(dynamicQuery, start, end);
+		return getService().dynamicQuery(dynamicQuery, start, end);
 	}
 
 	public static com.liferay.portlet.shopping.model.ShoppingCart getShoppingCart(
 		long cartId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		return _service.getShoppingCart(cartId);
+		return getService().getShoppingCart(cartId);
 	}
 
 	public static java.util.List<com.liferay.portlet.shopping.model.ShoppingCart> getShoppingCarts(
 		int start, int end) throws com.liferay.portal.SystemException {
-		return _service.getShoppingCarts(start, end);
+		return getService().getShoppingCarts(start, end);
 	}
 
 	public static int getShoppingCartsCount()
 		throws com.liferay.portal.SystemException {
-		return _service.getShoppingCartsCount();
+		return getService().getShoppingCartsCount();
 	}
 
 	public static com.liferay.portlet.shopping.model.ShoppingCart updateShoppingCart(
 		com.liferay.portlet.shopping.model.ShoppingCart shoppingCart)
 		throws com.liferay.portal.SystemException {
-		return _service.updateShoppingCart(shoppingCart);
+		return getService().updateShoppingCart(shoppingCart);
 	}
 
 	public static void deleteGroupCarts(long groupId)
 		throws com.liferay.portal.SystemException {
-		_service.deleteGroupCarts(groupId);
+		getService().deleteGroupCarts(groupId);
 	}
 
 	public static void deleteUserCarts(long userId)
 		throws com.liferay.portal.SystemException {
-		_service.deleteUserCarts(userId);
+		getService().deleteUserCarts(userId);
 	}
 
 	public static com.liferay.portlet.shopping.model.ShoppingCart getCart(
 		long userId, long groupId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		return _service.getCart(userId, groupId);
+		return getService().getCart(userId, groupId);
 	}
 
 	public static java.util.Map<com.liferay.portlet.shopping.model.ShoppingCartItem, Integer> getItems(
 		long groupId, java.lang.String itemIds)
 		throws com.liferay.portal.SystemException {
-		return _service.getItems(groupId, itemIds);
+		return getService().getItems(groupId, itemIds);
 	}
 
 	public static com.liferay.portlet.shopping.model.ShoppingCart updateCart(
@@ -126,11 +131,16 @@ public class ShoppingCartLocalServiceUtil {
 		java.lang.String couponCodes, int altShipping, boolean insure)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		return _service.updateCart(userId, groupId, itemIds, couponCodes,
+		return getService()
+				   .updateCart(userId, groupId, itemIds, couponCodes,
 			altShipping, insure);
 	}
 
 	public static ShoppingCartLocalService getService() {
+		if (_service == null) {
+			throw new RuntimeException("ShoppingCartLocalService is not set");
+		}
+
 		return _service;
 	}
 

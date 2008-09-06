@@ -52,6 +52,9 @@ public interface DLFileShortcutLocalService {
 		com.liferay.portlet.documentlibrary.model.DLFileShortcut dlFileShortcut)
 		throws com.liferay.portal.SystemException;
 
+	public com.liferay.portlet.documentlibrary.model.DLFileShortcut createDLFileShortcut(
+		long fileShortcutId);
+
 	public void deleteDLFileShortcut(long fileShortcutId)
 		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;

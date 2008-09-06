@@ -104,6 +104,10 @@ public abstract class JournalArticleLocalServiceBaseImpl
 		return journalArticlePersistence.update(journalArticle, false);
 	}
 
+	public JournalArticle createJournalArticle(long id) {
+		return journalArticlePersistence.create(id);
+	}
+
 	public void deleteJournalArticle(long id)
 		throws PortalException, SystemException {
 		journalArticlePersistence.remove(id);

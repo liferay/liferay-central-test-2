@@ -52,6 +52,9 @@ public interface JournalArticleImageLocalService {
 		com.liferay.portlet.journal.model.JournalArticleImage journalArticleImage)
 		throws com.liferay.portal.SystemException;
 
+	public com.liferay.portlet.journal.model.JournalArticleImage createJournalArticleImage(
+		long articleImageId);
+
 	public void deleteJournalArticleImage(long articleImageId)
 		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;

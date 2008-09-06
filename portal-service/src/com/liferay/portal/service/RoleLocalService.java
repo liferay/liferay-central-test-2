@@ -52,6 +52,8 @@ public interface RoleLocalService {
 		com.liferay.portal.model.Role role)
 		throws com.liferay.portal.SystemException;
 
+	public com.liferay.portal.model.Role createRole(long roleId);
+
 	public void deleteRole(long roleId)
 		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;

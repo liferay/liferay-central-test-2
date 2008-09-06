@@ -51,9 +51,9 @@ public class TasksProposalServiceUtil {
 		boolean addCommunityPermissions, boolean addGuestPermissions)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
-		return _service.addProposal(groupId, className, classPK, name,
-			description, reviewUserId, addCommunityPermissions,
-			addGuestPermissions);
+		return getService()
+				   .addProposal(groupId, className, classPK, name, description,
+			reviewUserId, addCommunityPermissions, addGuestPermissions);
 	}
 
 	public static com.liferay.portlet.tasks.model.TasksProposal addProposal(
@@ -63,14 +63,15 @@ public class TasksProposalServiceUtil {
 		java.lang.String[] guestPermissions)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
-		return _service.addProposal(groupId, className, classPK, name,
-			description, reviewUserId, communityPermissions, guestPermissions);
+		return getService()
+				   .addProposal(groupId, className, classPK, name, description,
+			reviewUserId, communityPermissions, guestPermissions);
 	}
 
 	public static void deleteProposal(long proposalId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
-		_service.deleteProposal(proposalId);
+		getService().deleteProposal(proposalId);
 	}
 
 	public static com.liferay.portlet.tasks.model.TasksProposal updateProposal(
@@ -78,11 +79,16 @@ public class TasksProposalServiceUtil {
 		int dueDateDay, int dueDateYear, int dueDateHour, int dueDateMinute)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
-		return _service.updateProposal(proposalId, description, dueDateMonth,
+		return getService()
+				   .updateProposal(proposalId, description, dueDateMonth,
 			dueDateDay, dueDateYear, dueDateHour, dueDateMinute);
 	}
 
 	public static TasksProposalService getService() {
+		if (_service == null) {
+			throw new RuntimeException("TasksProposalService is not set");
+		}
+
 		return _service;
 	}
 

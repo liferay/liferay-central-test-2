@@ -52,6 +52,8 @@ public interface ImageLocalService {
 		com.liferay.portal.model.Image image)
 		throws com.liferay.portal.SystemException;
 
+	public com.liferay.portal.model.Image createImage(long imageId);
+
 	public void deleteImage(long imageId)
 		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;

@@ -52,6 +52,9 @@ public interface MBCategoryLocalService {
 		com.liferay.portlet.messageboards.model.MBCategory mbCategory)
 		throws com.liferay.portal.SystemException;
 
+	public com.liferay.portlet.messageboards.model.MBCategory createMBCategory(
+		long categoryId);
+
 	public void deleteMBCategory(long categoryId)
 		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;

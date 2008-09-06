@@ -169,6 +169,10 @@ public abstract class PortletItemLocalServiceBaseImpl
 		return portletItemPersistence.update(portletItem, false);
 	}
 
+	public PortletItem createPortletItem(long portletItemId) {
+		return portletItemPersistence.create(portletItemId);
+	}
+
 	public void deletePortletItem(long portletItemId)
 		throws PortalException, SystemException {
 		portletItemPersistence.remove(portletItemId);

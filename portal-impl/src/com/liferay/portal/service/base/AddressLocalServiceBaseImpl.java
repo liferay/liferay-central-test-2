@@ -167,6 +167,10 @@ public abstract class AddressLocalServiceBaseImpl implements AddressLocalService
 		return addressPersistence.update(address, false);
 	}
 
+	public Address createAddress(long addressId) {
+		return addressPersistence.create(addressId);
+	}
+
 	public void deleteAddress(long addressId)
 		throws PortalException, SystemException {
 		addressPersistence.remove(addressId);

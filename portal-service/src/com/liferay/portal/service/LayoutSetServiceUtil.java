@@ -49,7 +49,7 @@ public class LayoutSetServiceUtil {
 		boolean logo, java.io.File file)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
-		_service.updateLogo(groupId, privateLayout, logo, file);
+		getService().updateLogo(groupId, privateLayout, logo, file);
 	}
 
 	public static com.liferay.portal.model.LayoutSet updateLookAndFeel(
@@ -57,7 +57,8 @@ public class LayoutSetServiceUtil {
 		java.lang.String colorSchemeId, java.lang.String css, boolean wapTheme)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
-		return _service.updateLookAndFeel(groupId, privateLayout, themeId,
+		return getService()
+				   .updateLookAndFeel(groupId, privateLayout, themeId,
 			colorSchemeId, css, wapTheme);
 	}
 
@@ -65,10 +66,15 @@ public class LayoutSetServiceUtil {
 		long groupId, boolean privateLayout, java.lang.String virtualHost)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
-		return _service.updateVirtualHost(groupId, privateLayout, virtualHost);
+		return getService()
+				   .updateVirtualHost(groupId, privateLayout, virtualHost);
 	}
 
 	public static LayoutSetService getService() {
+		if (_service == null) {
+			throw new RuntimeException("LayoutSetService is not set");
+		}
+
 		return _service;
 	}
 

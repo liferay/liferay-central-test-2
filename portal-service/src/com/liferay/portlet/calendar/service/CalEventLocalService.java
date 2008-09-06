@@ -52,6 +52,9 @@ public interface CalEventLocalService {
 		com.liferay.portlet.calendar.model.CalEvent calEvent)
 		throws com.liferay.portal.SystemException;
 
+	public com.liferay.portlet.calendar.model.CalEvent createCalEvent(
+		long eventId);
+
 	public void deleteCalEvent(long eventId)
 		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;

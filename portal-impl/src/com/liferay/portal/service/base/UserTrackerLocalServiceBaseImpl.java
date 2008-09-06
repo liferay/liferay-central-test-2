@@ -169,6 +169,10 @@ public abstract class UserTrackerLocalServiceBaseImpl
 		return userTrackerPersistence.update(userTracker, false);
 	}
 
+	public UserTracker createUserTracker(long userTrackerId) {
+		return userTrackerPersistence.create(userTrackerId);
+	}
+
 	public void deleteUserTracker(long userTrackerId)
 		throws PortalException, SystemException {
 		userTrackerPersistence.remove(userTrackerId);

@@ -52,6 +52,9 @@ public interface EmailAddressLocalService {
 		com.liferay.portal.model.EmailAddress emailAddress)
 		throws com.liferay.portal.SystemException;
 
+	public com.liferay.portal.model.EmailAddress createEmailAddress(
+		long emailAddressId);
+
 	public void deleteEmailAddress(long emailAddressId)
 		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;

@@ -51,8 +51,9 @@ public class MBMessageServiceUtil {
 		com.liferay.portal.theme.ThemeDisplay themeDisplay)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
-		return _service.addDiscussionMessage(groupId, className, classPK,
-			threadId, parentMessageId, subject, body, themeDisplay);
+		return getService()
+				   .addDiscussionMessage(groupId, className, classPK, threadId,
+			parentMessageId, subject, body, themeDisplay);
 	}
 
 	public static com.liferay.portlet.messageboards.model.MBMessage addMessage(
@@ -62,7 +63,8 @@ public class MBMessageServiceUtil {
 		boolean addCommunityPermissions, boolean addGuestPermissions)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
-		return _service.addMessage(categoryId, subject, body, files, anonymous,
+		return getService()
+				   .addMessage(categoryId, subject, body, files, anonymous,
 			priority, tagsEntries, addCommunityPermissions, addGuestPermissions);
 	}
 
@@ -74,7 +76,8 @@ public class MBMessageServiceUtil {
 		java.lang.String[] guestPermissions)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
-		return _service.addMessage(categoryId, subject, body, files, anonymous,
+		return getService()
+				   .addMessage(categoryId, subject, body, files, anonymous,
 			priority, tagsEntries, communityPermissions, guestPermissions);
 	}
 
@@ -87,7 +90,8 @@ public class MBMessageServiceUtil {
 		com.liferay.portal.theme.ThemeDisplay themeDisplay)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
-		return _service.addMessage(categoryId, subject, body, files, anonymous,
+		return getService()
+				   .addMessage(categoryId, subject, body, files, anonymous,
 			priority, tagsEntries, prefs, addCommunityPermissions,
 			addGuestPermissions, themeDisplay);
 	}
@@ -102,7 +106,8 @@ public class MBMessageServiceUtil {
 		com.liferay.portal.theme.ThemeDisplay themeDisplay)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
-		return _service.addMessage(categoryId, subject, body, files, anonymous,
+		return getService()
+				   .addMessage(categoryId, subject, body, files, anonymous,
 			priority, tagsEntries, prefs, communityPermissions,
 			guestPermissions, themeDisplay);
 	}
@@ -115,8 +120,9 @@ public class MBMessageServiceUtil {
 		boolean addCommunityPermissions, boolean addGuestPermissions)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
-		return _service.addMessage(categoryId, threadId, parentMessageId,
-			subject, body, files, anonymous, priority, tagsEntries,
+		return getService()
+				   .addMessage(categoryId, threadId, parentMessageId, subject,
+			body, files, anonymous, priority, tagsEntries,
 			addCommunityPermissions, addGuestPermissions);
 	}
 
@@ -129,8 +135,9 @@ public class MBMessageServiceUtil {
 		java.lang.String[] guestPermissions)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
-		return _service.addMessage(categoryId, threadId, parentMessageId,
-			subject, body, files, anonymous, priority, tagsEntries,
+		return getService()
+				   .addMessage(categoryId, threadId, parentMessageId, subject,
+			body, files, anonymous, priority, tagsEntries,
 			communityPermissions, guestPermissions);
 	}
 
@@ -144,8 +151,9 @@ public class MBMessageServiceUtil {
 		com.liferay.portal.theme.ThemeDisplay themeDisplay)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
-		return _service.addMessage(categoryId, threadId, parentMessageId,
-			subject, body, files, anonymous, priority, tagsEntries, prefs,
+		return getService()
+				   .addMessage(categoryId, threadId, parentMessageId, subject,
+			body, files, anonymous, priority, tagsEntries, prefs,
 			addCommunityPermissions, addGuestPermissions, themeDisplay);
 	}
 
@@ -160,8 +168,9 @@ public class MBMessageServiceUtil {
 		com.liferay.portal.theme.ThemeDisplay themeDisplay)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
-		return _service.addMessage(categoryId, threadId, parentMessageId,
-			subject, body, files, anonymous, priority, tagsEntries, prefs,
+		return getService()
+				   .addMessage(categoryId, threadId, parentMessageId, subject,
+			body, files, anonymous, priority, tagsEntries, prefs,
 			communityPermissions, guestPermissions, themeDisplay);
 	}
 
@@ -169,25 +178,26 @@ public class MBMessageServiceUtil {
 		java.lang.String className, long classPK, long messageId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
-		_service.deleteDiscussionMessage(groupId, className, classPK, messageId);
+		getService()
+			.deleteDiscussionMessage(groupId, className, classPK, messageId);
 	}
 
 	public static void deleteMessage(long messageId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
-		_service.deleteMessage(messageId);
+		getService().deleteMessage(messageId);
 	}
 
 	public static java.util.List<com.liferay.portlet.messageboards.model.MBMessage> getCategoryMessages(
 		long categoryId, int start, int end)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
-		return _service.getCategoryMessages(categoryId, start, end);
+		return getService().getCategoryMessages(categoryId, start, end);
 	}
 
 	public static int getCategoryMessagesCount(long categoryId)
 		throws com.liferay.portal.SystemException, java.rmi.RemoteException {
-		return _service.getCategoryMessagesCount(categoryId);
+		return getService().getCategoryMessagesCount(categoryId);
 	}
 
 	public static java.lang.String getCategoryMessagesRSS(long categoryId,
@@ -197,7 +207,8 @@ public class MBMessageServiceUtil {
 		com.liferay.portal.theme.ThemeDisplay themeDisplay)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
-		return _service.getCategoryMessagesRSS(categoryId, max, type, version,
+		return getService()
+				   .getCategoryMessagesRSS(categoryId, max, type, version,
 			displayStyle, feedURL, entryURL, themeDisplay);
 	}
 
@@ -208,7 +219,8 @@ public class MBMessageServiceUtil {
 		com.liferay.portal.theme.ThemeDisplay themeDisplay)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
-		return _service.getCompanyMessagesRSS(companyId, max, type, version,
+		return getService()
+				   .getCompanyMessagesRSS(companyId, max, type, version,
 			displayStyle, feedURL, entryURL, themeDisplay);
 	}
 
@@ -218,7 +230,8 @@ public class MBMessageServiceUtil {
 		com.liferay.portal.theme.ThemeDisplay themeDisplay)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
-		return _service.getGroupMessagesRSS(groupId, max, type, version,
+		return getService()
+				   .getGroupMessagesRSS(groupId, max, type, version,
 			displayStyle, feedURL, entryURL, themeDisplay);
 	}
 
@@ -229,22 +242,23 @@ public class MBMessageServiceUtil {
 		com.liferay.portal.theme.ThemeDisplay themeDisplay)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
-		return _service.getGroupMessagesRSS(groupId, userId, max, type,
-			version, displayStyle, feedURL, entryURL, themeDisplay);
+		return getService()
+				   .getGroupMessagesRSS(groupId, userId, max, type, version,
+			displayStyle, feedURL, entryURL, themeDisplay);
 	}
 
 	public static com.liferay.portlet.messageboards.model.MBMessage getMessage(
 		long messageId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
-		return _service.getMessage(messageId);
+		return getService().getMessage(messageId);
 	}
 
 	public static com.liferay.portlet.messageboards.model.MBMessageDisplay getMessageDisplay(
 		long messageId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
-		return _service.getMessageDisplay(messageId);
+		return getService().getMessageDisplay(messageId);
 	}
 
 	public static java.lang.String getThreadMessagesRSS(long threadId, int max,
@@ -253,20 +267,21 @@ public class MBMessageServiceUtil {
 		com.liferay.portal.theme.ThemeDisplay themeDisplay)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
-		return _service.getThreadMessagesRSS(threadId, max, type, version,
+		return getService()
+				   .getThreadMessagesRSS(threadId, max, type, version,
 			displayStyle, feedURL, entryURL, themeDisplay);
 	}
 
 	public static void subscribeMessage(long messageId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
-		_service.subscribeMessage(messageId);
+		getService().subscribeMessage(messageId);
 	}
 
 	public static void unsubscribeMessage(long messageId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
-		_service.unsubscribeMessage(messageId);
+		getService().unsubscribeMessage(messageId);
 	}
 
 	public static com.liferay.portlet.messageboards.model.MBMessage updateDiscussionMessage(
@@ -274,7 +289,8 @@ public class MBMessageServiceUtil {
 		java.lang.String subject, java.lang.String body)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
-		return _service.updateDiscussionMessage(groupId, className, classPK,
+		return getService()
+				   .updateDiscussionMessage(groupId, className, classPK,
 			messageId, subject, body);
 	}
 
@@ -285,7 +301,8 @@ public class MBMessageServiceUtil {
 		java.lang.String[] tagsEntries)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
-		return _service.updateMessage(messageId, subject, body, files,
+		return getService()
+				   .updateMessage(messageId, subject, body, files,
 			existingFiles, priority, tagsEntries);
 	}
 
@@ -297,11 +314,16 @@ public class MBMessageServiceUtil {
 		com.liferay.portal.theme.ThemeDisplay themeDisplay)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
-		return _service.updateMessage(messageId, subject, body, files,
+		return getService()
+				   .updateMessage(messageId, subject, body, files,
 			existingFiles, priority, tagsEntries, prefs, themeDisplay);
 	}
 
 	public static MBMessageService getService() {
+		if (_service == null) {
+			throw new RuntimeException("MBMessageService is not set");
+		}
+
 		return _service;
 	}
 

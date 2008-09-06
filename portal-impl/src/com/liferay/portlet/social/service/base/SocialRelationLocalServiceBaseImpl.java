@@ -63,6 +63,10 @@ public abstract class SocialRelationLocalServiceBaseImpl
 		return socialRelationPersistence.update(socialRelation, false);
 	}
 
+	public SocialRelation createSocialRelation(long relationId) {
+		return socialRelationPersistence.create(relationId);
+	}
+
 	public void deleteSocialRelation(long relationId)
 		throws PortalException, SystemException {
 		socialRelationPersistence.remove(relationId);

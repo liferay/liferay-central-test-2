@@ -50,11 +50,16 @@ public class PluginSettingServiceUtil {
 		java.lang.String roles, boolean active)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
-		return _service.updatePluginSetting(companyId, pluginId, pluginType,
-			roles, active);
+		return getService()
+				   .updatePluginSetting(companyId, pluginId, pluginType, roles,
+			active);
 	}
 
 	public static PluginSettingService getService() {
+		if (_service == null) {
+			throw new RuntimeException("PluginSettingService is not set");
+		}
+
 		return _service;
 	}
 

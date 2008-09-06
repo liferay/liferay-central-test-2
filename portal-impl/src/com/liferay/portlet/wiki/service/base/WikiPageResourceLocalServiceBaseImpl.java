@@ -59,6 +59,10 @@ public abstract class WikiPageResourceLocalServiceBaseImpl
 		return wikiPageResourcePersistence.update(wikiPageResource, false);
 	}
 
+	public WikiPageResource createWikiPageResource(long resourcePrimKey) {
+		return wikiPageResourcePersistence.create(resourcePrimKey);
+	}
+
 	public void deleteWikiPageResource(long resourcePrimKey)
 		throws PortalException, SystemException {
 		wikiPageResourcePersistence.remove(resourcePrimKey);

@@ -52,6 +52,9 @@ public interface SocialActivityLocalService {
 		com.liferay.portlet.social.model.SocialActivity socialActivity)
 		throws com.liferay.portal.SystemException;
 
+	public com.liferay.portlet.social.model.SocialActivity createSocialActivity(
+		long activityId);
+
 	public void deleteSocialActivity(long activityId)
 		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;

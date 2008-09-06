@@ -52,6 +52,9 @@ public interface SCProductScreenshotLocalService {
 		com.liferay.portlet.softwarecatalog.model.SCProductScreenshot scProductScreenshot)
 		throws com.liferay.portal.SystemException;
 
+	public com.liferay.portlet.softwarecatalog.model.SCProductScreenshot createSCProductScreenshot(
+		long productScreenshotId);
+
 	public void deleteSCProductScreenshot(long productScreenshotId)
 		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;

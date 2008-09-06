@@ -48,128 +48,136 @@ public class PortletLocalServiceUtil {
 	public static com.liferay.portal.model.Portlet addPortlet(
 		com.liferay.portal.model.Portlet portlet)
 		throws com.liferay.portal.SystemException {
-		return _service.addPortlet(portlet);
+		return getService().addPortlet(portlet);
+	}
+
+	public static com.liferay.portal.model.Portlet createPortlet(long id) {
+		return getService().createPortlet(id);
 	}
 
 	public static void deletePortlet(long id)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		_service.deletePortlet(id);
+		getService().deletePortlet(id);
 	}
 
 	public static void deletePortlet(com.liferay.portal.model.Portlet portlet)
 		throws com.liferay.portal.SystemException {
-		_service.deletePortlet(portlet);
+		getService().deletePortlet(portlet);
 	}
 
 	public static java.util.List<Object> dynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery)
 		throws com.liferay.portal.SystemException {
-		return _service.dynamicQuery(dynamicQuery);
+		return getService().dynamicQuery(dynamicQuery);
 	}
 
 	public static java.util.List<Object> dynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery, int start,
 		int end) throws com.liferay.portal.SystemException {
-		return _service.dynamicQuery(dynamicQuery, start, end);
+		return getService().dynamicQuery(dynamicQuery, start, end);
 	}
 
 	public static com.liferay.portal.model.Portlet getPortlet(long id)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		return _service.getPortlet(id);
+		return getService().getPortlet(id);
 	}
 
 	public static java.util.List<com.liferay.portal.model.Portlet> getPortlets(
 		int start, int end) throws com.liferay.portal.SystemException {
-		return _service.getPortlets(start, end);
+		return getService().getPortlets(start, end);
 	}
 
 	public static int getPortletsCount()
 		throws com.liferay.portal.SystemException {
-		return _service.getPortletsCount();
+		return getService().getPortletsCount();
 	}
 
 	public static com.liferay.portal.model.Portlet updatePortlet(
 		com.liferay.portal.model.Portlet portlet)
 		throws com.liferay.portal.SystemException {
-		return _service.updatePortlet(portlet);
+		return getService().updatePortlet(portlet);
 	}
 
 	public static com.liferay.portal.model.Portlet deployRemotePortlet(
 		com.liferay.portal.model.Portlet portlet) {
-		return _service.deployRemotePortlet(portlet);
+		return getService().deployRemotePortlet(portlet);
 	}
 
 	public static void destroyPortlet(com.liferay.portal.model.Portlet portlet) {
-		_service.destroyPortlet(portlet);
+		getService().destroyPortlet(portlet);
 	}
 
 	public static com.liferay.portal.model.PortletCategory getEARDisplay(
 		java.lang.String xml) throws com.liferay.portal.SystemException {
-		return _service.getEARDisplay(xml);
+		return getService().getEARDisplay(xml);
 	}
 
 	public static com.liferay.portal.model.PortletCategory getWARDisplay(
 		java.lang.String servletContextName, java.lang.String xml)
 		throws com.liferay.portal.SystemException {
-		return _service.getWARDisplay(servletContextName, xml);
+		return getService().getWARDisplay(servletContextName, xml);
 	}
 
 	public static java.util.List<com.liferay.portal.kernel.portlet.FriendlyURLMapper> getFriendlyURLMappers() {
-		return _service.getFriendlyURLMappers();
+		return getService().getFriendlyURLMappers();
 	}
 
 	public static com.liferay.portal.model.Portlet getPortletById(
 		long companyId, java.lang.String portletId)
 		throws com.liferay.portal.SystemException {
-		return _service.getPortletById(companyId, portletId);
+		return getService().getPortletById(companyId, portletId);
 	}
 
 	public static com.liferay.portal.model.Portlet getPortletByStrutsPath(
 		long companyId, java.lang.String strutsPath)
 		throws com.liferay.portal.SystemException {
-		return _service.getPortletByStrutsPath(companyId, strutsPath);
+		return getService().getPortletByStrutsPath(companyId, strutsPath);
 	}
 
 	public static java.util.List<com.liferay.portal.model.Portlet> getPortlets() {
-		return _service.getPortlets();
+		return getService().getPortlets();
 	}
 
 	public static java.util.List<com.liferay.portal.model.Portlet> getPortlets(
 		long companyId) throws com.liferay.portal.SystemException {
-		return _service.getPortlets(companyId);
+		return getService().getPortlets(companyId);
 	}
 
 	public static java.util.List<com.liferay.portal.model.Portlet> getPortlets(
 		long companyId, boolean showSystem, boolean showPortal)
 		throws com.liferay.portal.SystemException {
-		return _service.getPortlets(companyId, showSystem, showPortal);
+		return getService().getPortlets(companyId, showSystem, showPortal);
 	}
 
 	public static boolean hasPortlet(long companyId, java.lang.String portletId)
 		throws com.liferay.portal.SystemException {
-		return _service.hasPortlet(companyId, portletId);
+		return getService().hasPortlet(companyId, portletId);
 	}
 
 	public static void initEAR(java.lang.String[] xmls,
 		com.liferay.portal.kernel.plugin.PluginPackage pluginPackage) {
-		_service.initEAR(xmls, pluginPackage);
+		getService().initEAR(xmls, pluginPackage);
 	}
 
 	public static java.util.List<com.liferay.portal.model.Portlet> initWAR(
 		java.lang.String servletContextName, java.lang.String[] xmls,
 		com.liferay.portal.kernel.plugin.PluginPackage pluginPackage) {
-		return _service.initWAR(servletContextName, xmls, pluginPackage);
+		return getService().initWAR(servletContextName, xmls, pluginPackage);
 	}
 
 	public static com.liferay.portal.model.Portlet updatePortlet(
 		long companyId, java.lang.String portletId, java.lang.String roles,
 		boolean active) throws com.liferay.portal.SystemException {
-		return _service.updatePortlet(companyId, portletId, roles, active);
+		return getService().updatePortlet(companyId, portletId, roles, active);
 	}
 
 	public static PortletLocalService getService() {
+		if (_service == null) {
+			throw new RuntimeException("PortletLocalService is not set");
+		}
+
 		return _service;
 	}
 

@@ -48,54 +48,59 @@ public class BlogsEntryLocalServiceUtil {
 	public static com.liferay.portlet.blogs.model.BlogsEntry addBlogsEntry(
 		com.liferay.portlet.blogs.model.BlogsEntry blogsEntry)
 		throws com.liferay.portal.SystemException {
-		return _service.addBlogsEntry(blogsEntry);
+		return getService().addBlogsEntry(blogsEntry);
+	}
+
+	public static com.liferay.portlet.blogs.model.BlogsEntry createBlogsEntry(
+		long entryId) {
+		return getService().createBlogsEntry(entryId);
 	}
 
 	public static void deleteBlogsEntry(long entryId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		_service.deleteBlogsEntry(entryId);
+		getService().deleteBlogsEntry(entryId);
 	}
 
 	public static void deleteBlogsEntry(
 		com.liferay.portlet.blogs.model.BlogsEntry blogsEntry)
 		throws com.liferay.portal.SystemException {
-		_service.deleteBlogsEntry(blogsEntry);
+		getService().deleteBlogsEntry(blogsEntry);
 	}
 
 	public static java.util.List<Object> dynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery)
 		throws com.liferay.portal.SystemException {
-		return _service.dynamicQuery(dynamicQuery);
+		return getService().dynamicQuery(dynamicQuery);
 	}
 
 	public static java.util.List<Object> dynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery, int start,
 		int end) throws com.liferay.portal.SystemException {
-		return _service.dynamicQuery(dynamicQuery, start, end);
+		return getService().dynamicQuery(dynamicQuery, start, end);
 	}
 
 	public static com.liferay.portlet.blogs.model.BlogsEntry getBlogsEntry(
 		long entryId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		return _service.getBlogsEntry(entryId);
+		return getService().getBlogsEntry(entryId);
 	}
 
 	public static java.util.List<com.liferay.portlet.blogs.model.BlogsEntry> getBlogsEntries(
 		int start, int end) throws com.liferay.portal.SystemException {
-		return _service.getBlogsEntries(start, end);
+		return getService().getBlogsEntries(start, end);
 	}
 
 	public static int getBlogsEntriesCount()
 		throws com.liferay.portal.SystemException {
-		return _service.getBlogsEntriesCount();
+		return getService().getBlogsEntriesCount();
 	}
 
 	public static com.liferay.portlet.blogs.model.BlogsEntry updateBlogsEntry(
 		com.liferay.portlet.blogs.model.BlogsEntry blogsEntry)
 		throws com.liferay.portal.SystemException {
-		return _service.updateBlogsEntry(blogsEntry);
+		return getService().updateBlogsEntry(blogsEntry);
 	}
 
 	public static com.liferay.portlet.blogs.model.BlogsEntry addEntry(
@@ -108,8 +113,9 @@ public class BlogsEntryLocalServiceUtil {
 		com.liferay.portal.theme.ThemeDisplay themeDisplay)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		return _service.addEntry(userId, plid, title, content,
-			displayDateMonth, displayDateDay, displayDateYear, displayDateHour,
+		return getService()
+				   .addEntry(userId, plid, title, content, displayDateMonth,
+			displayDateDay, displayDateYear, displayDateHour,
 			displayDateMinute, draft, allowTrackbacks, trackbacks, tagsEntries,
 			addCommunityPermissions, addGuestPermissions, themeDisplay);
 	}
@@ -124,7 +130,8 @@ public class BlogsEntryLocalServiceUtil {
 		com.liferay.portal.theme.ThemeDisplay themeDisplay)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		return _service.addEntry(uuid, userId, plid, title, content,
+		return getService()
+				   .addEntry(uuid, userId, plid, title, content,
 			displayDateMonth, displayDateDay, displayDateYear, displayDateHour,
 			displayDateMinute, draft, allowTrackbacks, trackbacks, tagsEntries,
 			addCommunityPermissions, addGuestPermissions, themeDisplay);
@@ -141,8 +148,9 @@ public class BlogsEntryLocalServiceUtil {
 		com.liferay.portal.theme.ThemeDisplay themeDisplay)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		return _service.addEntry(userId, plid, title, content,
-			displayDateMonth, displayDateDay, displayDateYear, displayDateHour,
+		return getService()
+				   .addEntry(userId, plid, title, content, displayDateMonth,
+			displayDateDay, displayDateYear, displayDateHour,
 			displayDateMinute, draft, allowTrackbacks, trackbacks, tagsEntries,
 			communityPermissions, guestPermissions, themeDisplay);
 	}
@@ -160,7 +168,8 @@ public class BlogsEntryLocalServiceUtil {
 		com.liferay.portal.theme.ThemeDisplay themeDisplay)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		return _service.addEntry(uuid, userId, plid, title, content,
+		return getService()
+				   .addEntry(uuid, userId, plid, title, content,
 			displayDateMonth, displayDateDay, displayDateYear, displayDateHour,
 			displayDateMinute, draft, allowTrackbacks, trackbacks, tagsEntries,
 			addCommunityPermissions, addGuestPermissions, communityPermissions,
@@ -171,7 +180,8 @@ public class BlogsEntryLocalServiceUtil {
 		boolean addCommunityPermissions, boolean addGuestPermissions)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		_service.addEntryResources(entryId, addCommunityPermissions,
+		getService()
+			.addEntryResources(entryId, addCommunityPermissions,
 			addGuestPermissions);
 	}
 
@@ -180,7 +190,8 @@ public class BlogsEntryLocalServiceUtil {
 		boolean addCommunityPermissions, boolean addGuestPermissions)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		_service.addEntryResources(entry, addCommunityPermissions,
+		getService()
+			.addEntryResources(entry, addCommunityPermissions,
 			addGuestPermissions);
 	}
 
@@ -189,8 +200,8 @@ public class BlogsEntryLocalServiceUtil {
 		java.lang.String[] guestPermissions)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		_service.addEntryResources(entryId, communityPermissions,
-			guestPermissions);
+		getService()
+			.addEntryResources(entryId, communityPermissions, guestPermissions);
 	}
 
 	public static void addEntryResources(
@@ -199,188 +210,192 @@ public class BlogsEntryLocalServiceUtil {
 		java.lang.String[] guestPermissions)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		_service.addEntryResources(entry, communityPermissions, guestPermissions);
+		getService()
+			.addEntryResources(entry, communityPermissions, guestPermissions);
 	}
 
 	public static void deleteEntries(long groupId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		_service.deleteEntries(groupId);
+		getService().deleteEntries(groupId);
 	}
 
 	public static void deleteEntry(long entryId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		_service.deleteEntry(entryId);
+		getService().deleteEntry(entryId);
 	}
 
 	public static void deleteEntry(
 		com.liferay.portlet.blogs.model.BlogsEntry entry)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		_service.deleteEntry(entry);
+		getService().deleteEntry(entry);
 	}
 
 	public static java.util.List<com.liferay.portlet.blogs.model.BlogsEntry> getCompanyEntries(
 		long companyId, int start, int end)
 		throws com.liferay.portal.SystemException {
-		return _service.getCompanyEntries(companyId, start, end);
+		return getService().getCompanyEntries(companyId, start, end);
 	}
 
 	public static java.util.List<com.liferay.portlet.blogs.model.BlogsEntry> getCompanyEntries(
 		long companyId, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException {
-		return _service.getCompanyEntries(companyId, start, end, obc);
+		return getService().getCompanyEntries(companyId, start, end, obc);
 	}
 
 	public static java.util.List<com.liferay.portlet.blogs.model.BlogsEntry> getCompanyEntries(
 		long companyId, boolean draft, int start, int end)
 		throws com.liferay.portal.SystemException {
-		return _service.getCompanyEntries(companyId, draft, start, end);
+		return getService().getCompanyEntries(companyId, draft, start, end);
 	}
 
 	public static java.util.List<com.liferay.portlet.blogs.model.BlogsEntry> getCompanyEntries(
 		long companyId, boolean draft, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException {
-		return _service.getCompanyEntries(companyId, draft, start, end, obc);
+		return getService().getCompanyEntries(companyId, draft, start, end, obc);
 	}
 
 	public static int getCompanyEntriesCount(long companyId)
 		throws com.liferay.portal.SystemException {
-		return _service.getCompanyEntriesCount(companyId);
+		return getService().getCompanyEntriesCount(companyId);
 	}
 
 	public static int getCompanyEntriesCount(long companyId, boolean draft)
 		throws com.liferay.portal.SystemException {
-		return _service.getCompanyEntriesCount(companyId, draft);
+		return getService().getCompanyEntriesCount(companyId, draft);
 	}
 
 	public static com.liferay.portlet.blogs.model.BlogsEntry[] getEntriesPrevAndNext(
 		long entryId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		return _service.getEntriesPrevAndNext(entryId);
+		return getService().getEntriesPrevAndNext(entryId);
 	}
 
 	public static com.liferay.portlet.blogs.model.BlogsEntry getEntry(
 		long entryId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		return _service.getEntry(entryId);
+		return getService().getEntry(entryId);
 	}
 
 	public static com.liferay.portlet.blogs.model.BlogsEntry getEntry(
 		long groupId, java.lang.String urlTitle)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		return _service.getEntry(groupId, urlTitle);
+		return getService().getEntry(groupId, urlTitle);
 	}
 
 	public static java.util.List<com.liferay.portlet.blogs.model.BlogsEntry> getGroupEntries(
 		long groupId, int start, int end)
 		throws com.liferay.portal.SystemException {
-		return _service.getGroupEntries(groupId, start, end);
+		return getService().getGroupEntries(groupId, start, end);
 	}
 
 	public static java.util.List<com.liferay.portlet.blogs.model.BlogsEntry> getGroupEntries(
 		long groupId, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException {
-		return _service.getGroupEntries(groupId, start, end, obc);
+		return getService().getGroupEntries(groupId, start, end, obc);
 	}
 
 	public static java.util.List<com.liferay.portlet.blogs.model.BlogsEntry> getGroupEntries(
 		long groupId, boolean draft, int start, int end)
 		throws com.liferay.portal.SystemException {
-		return _service.getGroupEntries(groupId, draft, start, end);
+		return getService().getGroupEntries(groupId, draft, start, end);
 	}
 
 	public static java.util.List<com.liferay.portlet.blogs.model.BlogsEntry> getGroupEntries(
 		long groupId, boolean draft, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException {
-		return _service.getGroupEntries(groupId, draft, start, end, obc);
+		return getService().getGroupEntries(groupId, draft, start, end, obc);
 	}
 
 	public static int getGroupEntriesCount(long groupId)
 		throws com.liferay.portal.SystemException {
-		return _service.getGroupEntriesCount(groupId);
+		return getService().getGroupEntriesCount(groupId);
 	}
 
 	public static int getGroupEntriesCount(long groupId, boolean draft)
 		throws com.liferay.portal.SystemException {
-		return _service.getGroupEntriesCount(groupId, draft);
+		return getService().getGroupEntriesCount(groupId, draft);
 	}
 
 	public static java.util.List<com.liferay.portlet.blogs.model.BlogsEntry> getGroupUserEntries(
 		long groupId, long userId, int start, int end)
 		throws com.liferay.portal.SystemException {
-		return _service.getGroupUserEntries(groupId, userId, start, end);
+		return getService().getGroupUserEntries(groupId, userId, start, end);
 	}
 
 	public static java.util.List<com.liferay.portlet.blogs.model.BlogsEntry> getGroupUserEntries(
 		long groupId, long userId, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException {
-		return _service.getGroupUserEntries(groupId, userId, start, end, obc);
+		return getService().getGroupUserEntries(groupId, userId, start, end, obc);
 	}
 
 	public static java.util.List<com.liferay.portlet.blogs.model.BlogsEntry> getGroupUserEntries(
 		long groupId, long userId, boolean draft, int start, int end)
 		throws com.liferay.portal.SystemException {
-		return _service.getGroupUserEntries(groupId, userId, draft, start, end);
+		return getService()
+				   .getGroupUserEntries(groupId, userId, draft, start, end);
 	}
 
 	public static java.util.List<com.liferay.portlet.blogs.model.BlogsEntry> getGroupUserEntries(
 		long groupId, long userId, boolean draft, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException {
-		return _service.getGroupUserEntries(groupId, userId, draft, start, end,
-			obc);
+		return getService()
+				   .getGroupUserEntries(groupId, userId, draft, start, end, obc);
 	}
 
 	public static int getGroupUserEntriesCount(long groupId, long userId)
 		throws com.liferay.portal.SystemException {
-		return _service.getGroupUserEntriesCount(groupId, userId);
+		return getService().getGroupUserEntriesCount(groupId, userId);
 	}
 
 	public static int getGroupUserEntriesCount(long groupId, long userId,
 		boolean draft) throws com.liferay.portal.SystemException {
-		return _service.getGroupUserEntriesCount(groupId, userId, draft);
+		return getService().getGroupUserEntriesCount(groupId, userId, draft);
 	}
 
 	public static java.util.List<com.liferay.portlet.blogs.model.BlogsEntry> getNoAssetEntries()
 		throws com.liferay.portal.SystemException {
-		return _service.getNoAssetEntries();
+		return getService().getNoAssetEntries();
 	}
 
 	public static java.util.List<com.liferay.portlet.blogs.model.BlogsEntry> getOrganizationEntries(
 		long organizationId, boolean draft, int start, int end)
 		throws com.liferay.portal.SystemException {
-		return _service.getOrganizationEntries(organizationId, draft, start, end);
+		return getService()
+				   .getOrganizationEntries(organizationId, draft, start, end);
 	}
 
 	public static int getOrganizationEntriesCount(long organizationId,
 		boolean draft) throws com.liferay.portal.SystemException {
-		return _service.getOrganizationEntriesCount(organizationId, draft);
+		return getService().getOrganizationEntriesCount(organizationId, draft);
 	}
 
 	public static java.lang.String getUrlTitle(long entryId,
 		java.lang.String title) {
-		return _service.getUrlTitle(entryId, title);
+		return getService().getUrlTitle(entryId, title);
 	}
 
 	public static void reIndex(java.lang.String[] ids)
 		throws com.liferay.portal.SystemException {
-		_service.reIndex(ids);
+		getService().reIndex(ids);
 	}
 
 	public static com.liferay.portal.kernel.search.Hits search(long companyId,
 		long groupId, long userId, java.lang.String keywords, int start, int end)
 		throws com.liferay.portal.SystemException {
-		return _service.search(companyId, groupId, userId, keywords, start, end);
+		return getService()
+				   .search(companyId, groupId, userId, keywords, start, end);
 	}
 
 	public static com.liferay.portlet.blogs.model.BlogsEntry updateEntry(
@@ -392,7 +407,8 @@ public class BlogsEntryLocalServiceUtil {
 		com.liferay.portal.theme.ThemeDisplay themeDisplay)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		return _service.updateEntry(userId, entryId, title, content,
+		return getService()
+				   .updateEntry(userId, entryId, title, content,
 			displayDateMonth, displayDateDay, displayDateYear, displayDateHour,
 			displayDateMinute, draft, allowTrackbacks, trackbacks, tagsEntries,
 			themeDisplay);
@@ -403,10 +419,14 @@ public class BlogsEntryLocalServiceUtil {
 		java.lang.String[] tagsEntries)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		_service.updateTagsAsset(userId, entry, tagsEntries);
+		getService().updateTagsAsset(userId, entry, tagsEntries);
 	}
 
 	public static BlogsEntryLocalService getService() {
+		if (_service == null) {
+			throw new RuntimeException("BlogsEntryLocalService is not set");
+		}
+
 		return _service;
 	}
 

@@ -51,7 +51,8 @@ public class BookmarksEntryServiceUtil {
 		boolean addCommunityPermissions, boolean addGuestPermissions)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
-		return _service.addEntry(folderId, name, url, comments, tagsEntries,
+		return getService()
+				   .addEntry(folderId, name, url, comments, tagsEntries,
 			addCommunityPermissions, addGuestPermissions);
 	}
 
@@ -62,28 +63,29 @@ public class BookmarksEntryServiceUtil {
 		java.lang.String[] guestPermissions)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
-		return _service.addEntry(folderId, name, url, comments, tagsEntries,
+		return getService()
+				   .addEntry(folderId, name, url, comments, tagsEntries,
 			communityPermissions, guestPermissions);
 	}
 
 	public static void deleteEntry(long entryId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
-		_service.deleteEntry(entryId);
+		getService().deleteEntry(entryId);
 	}
 
 	public static com.liferay.portlet.bookmarks.model.BookmarksEntry getEntry(
 		long entryId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
-		return _service.getEntry(entryId);
+		return getService().getEntry(entryId);
 	}
 
 	public static com.liferay.portlet.bookmarks.model.BookmarksEntry openEntry(
 		long entryId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
-		return _service.openEntry(entryId);
+		return getService().openEntry(entryId);
 	}
 
 	public static com.liferay.portlet.bookmarks.model.BookmarksEntry updateEntry(
@@ -92,11 +94,16 @@ public class BookmarksEntryServiceUtil {
 		java.lang.String[] tagsEntries)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
-		return _service.updateEntry(entryId, folderId, name, url, comments,
+		return getService()
+				   .updateEntry(entryId, folderId, name, url, comments,
 			tagsEntries);
 	}
 
 	public static BookmarksEntryService getService() {
+		if (_service == null) {
+			throw new RuntimeException("BookmarksEntryService is not set");
+		}
+
 		return _service;
 	}
 

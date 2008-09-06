@@ -168,6 +168,10 @@ public abstract class EmailAddressLocalServiceBaseImpl
 		return emailAddressPersistence.update(emailAddress, false);
 	}
 
+	public EmailAddress createEmailAddress(long emailAddressId) {
+		return emailAddressPersistence.create(emailAddressId);
+	}
+
 	public void deleteEmailAddress(long emailAddressId)
 		throws PortalException, SystemException {
 		emailAddressPersistence.remove(emailAddressId);

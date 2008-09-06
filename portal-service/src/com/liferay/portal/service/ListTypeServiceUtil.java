@@ -48,29 +48,33 @@ public class ListTypeServiceUtil {
 	public static com.liferay.portal.model.ListType getListType(int listTypeId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
-		return _service.getListType(listTypeId);
+		return getService().getListType(listTypeId);
 	}
 
 	public static java.util.List<com.liferay.portal.model.ListType> getListTypes(
 		java.lang.String type)
 		throws com.liferay.portal.SystemException, java.rmi.RemoteException {
-		return _service.getListTypes(type);
+		return getService().getListTypes(type);
 	}
 
 	public static void validate(int listTypeId, java.lang.String type)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
-		_service.validate(listTypeId, type);
+		getService().validate(listTypeId, type);
 	}
 
 	public static void validate(int listTypeId, long classNameId,
 		java.lang.String type)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
-		_service.validate(listTypeId, classNameId, type);
+		getService().validate(listTypeId, classNameId, type);
 	}
 
 	public static ListTypeService getService() {
+		if (_service == null) {
+			throw new RuntimeException("ListTypeService is not set");
+		}
+
 		return _service;
 	}
 

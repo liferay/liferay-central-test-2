@@ -168,6 +168,10 @@ public abstract class OrganizationLocalServiceBaseImpl
 		return organizationPersistence.update(organization, false);
 	}
 
+	public Organization createOrganization(long organizationId) {
+		return organizationPersistence.create(organizationId);
+	}
+
 	public void deleteOrganization(long organizationId)
 		throws PortalException, SystemException {
 		organizationPersistence.remove(organizationId);

@@ -51,7 +51,8 @@ public class DLFolderServiceUtil {
 		boolean addGuestPermissions)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
-		return _service.addFolder(plid, parentFolderId, name, description,
+		return getService()
+				   .addFolder(plid, parentFolderId, name, description,
 			addCommunityPermissions, addGuestPermissions);
 	}
 
@@ -61,7 +62,8 @@ public class DLFolderServiceUtil {
 		java.lang.String[] guestPermissions)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
-		return _service.addFolder(plid, parentFolderId, name, description,
+		return getService()
+				   .addFolder(plid, parentFolderId, name, description,
 			communityPermissions, guestPermissions);
 	}
 
@@ -71,55 +73,56 @@ public class DLFolderServiceUtil {
 		boolean addCommunityPermissions, boolean addGuestPermissions)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
-		return _service.copyFolder(plid, sourceFolderId, parentFolderId, name,
+		return getService()
+				   .copyFolder(plid, sourceFolderId, parentFolderId, name,
 			description, addCommunityPermissions, addGuestPermissions);
 	}
 
 	public static void deleteFolder(long folderId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
-		_service.deleteFolder(folderId);
+		getService().deleteFolder(folderId);
 	}
 
 	public static void deleteFolder(long groupId, long parentFolderId,
 		java.lang.String name)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
-		_service.deleteFolder(groupId, parentFolderId, name);
+		getService().deleteFolder(groupId, parentFolderId, name);
 	}
 
 	public static com.liferay.portlet.documentlibrary.model.DLFolder getFolder(
 		long folderId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
-		return _service.getFolder(folderId);
+		return getService().getFolder(folderId);
 	}
 
 	public static com.liferay.portlet.documentlibrary.model.DLFolder getFolder(
 		long groupId, long parentFolderId, java.lang.String name)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
-		return _service.getFolder(groupId, parentFolderId, name);
+		return getService().getFolder(groupId, parentFolderId, name);
 	}
 
 	public static long getFolderId(long groupId, long parentFolderId,
 		java.lang.String name)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
-		return _service.getFolderId(groupId, parentFolderId, name);
+		return getService().getFolderId(groupId, parentFolderId, name);
 	}
 
 	public static java.util.List<com.liferay.portlet.documentlibrary.model.DLFolder> getFolders(
 		long groupId, long parentFolderId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
-		return _service.getFolders(groupId, parentFolderId);
+		return getService().getFolders(groupId, parentFolderId);
 	}
 
 	public static void reIndexSearch(long companyId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
-		_service.reIndexSearch(companyId);
+		getService().reIndexSearch(companyId);
 	}
 
 	public static com.liferay.portlet.documentlibrary.model.DLFolder updateFolder(
@@ -127,10 +130,15 @@ public class DLFolderServiceUtil {
 		java.lang.String description)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
-		return _service.updateFolder(folderId, parentFolderId, name, description);
+		return getService()
+				   .updateFolder(folderId, parentFolderId, name, description);
 	}
 
 	public static DLFolderService getService() {
+		if (_service == null) {
+			throw new RuntimeException("DLFolderService is not set");
+		}
+
 		return _service;
 	}
 

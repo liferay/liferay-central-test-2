@@ -87,6 +87,10 @@ public abstract class MBCategoryLocalServiceBaseImpl
 		return mbCategoryPersistence.update(mbCategory, false);
 	}
 
+	public MBCategory createMBCategory(long categoryId) {
+		return mbCategoryPersistence.create(categoryId);
+	}
+
 	public void deleteMBCategory(long categoryId)
 		throws PortalException, SystemException {
 		mbCategoryPersistence.remove(categoryId);

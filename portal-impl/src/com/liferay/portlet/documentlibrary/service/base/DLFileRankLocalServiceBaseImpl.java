@@ -71,6 +71,10 @@ public abstract class DLFileRankLocalServiceBaseImpl
 		return dlFileRankPersistence.update(dlFileRank, false);
 	}
 
+	public DLFileRank createDLFileRank(long fileRankId) {
+		return dlFileRankPersistence.create(fileRankId);
+	}
+
 	public void deleteDLFileRank(long fileRankId)
 		throws PortalException, SystemException {
 		dlFileRankPersistence.remove(fileRankId);

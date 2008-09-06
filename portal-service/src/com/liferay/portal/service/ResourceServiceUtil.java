@@ -50,10 +50,14 @@ public class ResourceServiceUtil {
 		java.lang.String primKey)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
-		return _service.getResource(companyId, name, scope, primKey);
+		return getService().getResource(companyId, name, scope, primKey);
 	}
 
 	public static ResourceService getService() {
+		if (_service == null) {
+			throw new RuntimeException("ResourceService is not set");
+		}
+
 		return _service;
 	}
 

@@ -92,6 +92,10 @@ public abstract class MBThreadLocalServiceBaseImpl
 		return mbThreadPersistence.update(mbThread, false);
 	}
 
+	public MBThread createMBThread(long threadId) {
+		return mbThreadPersistence.create(threadId);
+	}
+
 	public void deleteMBThread(long threadId)
 		throws PortalException, SystemException {
 		mbThreadPersistence.remove(threadId);

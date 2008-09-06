@@ -48,7 +48,7 @@ public class ShoppingItemServiceUtil {
 	public static void addBookItems(long categoryId, java.lang.String[] isbns)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
-		_service.addBookItems(categoryId, isbns);
+		getService().addBookItems(categoryId, isbns);
 	}
 
 	public static com.liferay.portlet.shopping.model.ShoppingItem addItem(
@@ -66,7 +66,8 @@ public class ShoppingItemServiceUtil {
 		boolean addCommunityPermissions, boolean addGuestPermissions)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
-		return _service.addItem(categoryId, sku, name, description, properties,
+		return getService()
+				   .addItem(categoryId, sku, name, description, properties,
 			fieldsQuantities, requiresShipping, stockQuantity, featured, sale,
 			smallImage, smallImageURL, smallFile, mediumImage, mediumImageURL,
 			mediumFile, largeImage, largeImageURL, largeFile, itemFields,
@@ -89,7 +90,8 @@ public class ShoppingItemServiceUtil {
 		java.lang.String[] guestPermissions)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
-		return _service.addItem(categoryId, sku, name, description, properties,
+		return getService()
+				   .addItem(categoryId, sku, name, description, properties,
 			fieldsQuantities, requiresShipping, stockQuantity, featured, sale,
 			smallImage, smallImageURL, smallFile, mediumImage, mediumImageURL,
 			mediumFile, largeImage, largeImageURL, largeFile, itemFields,
@@ -99,14 +101,14 @@ public class ShoppingItemServiceUtil {
 	public static void deleteItem(long itemId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
-		_service.deleteItem(itemId);
+		getService().deleteItem(itemId);
 	}
 
 	public static com.liferay.portlet.shopping.model.ShoppingItem getItem(
 		long itemId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
-		return _service.getItem(itemId);
+		return getService().getItem(itemId);
 	}
 
 	public static com.liferay.portlet.shopping.model.ShoppingItem updateItem(
@@ -123,7 +125,8 @@ public class ShoppingItemServiceUtil {
 		java.util.List<com.liferay.portlet.shopping.model.ShoppingItemPrice> itemPrices)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
-		return _service.updateItem(itemId, categoryId, sku, name, description,
+		return getService()
+				   .updateItem(itemId, categoryId, sku, name, description,
 			properties, fieldsQuantities, requiresShipping, stockQuantity,
 			featured, sale, smallImage, smallImageURL, smallFile, mediumImage,
 			mediumImageURL, mediumFile, largeImage, largeImageURL, largeFile,
@@ -131,6 +134,10 @@ public class ShoppingItemServiceUtil {
 	}
 
 	public static ShoppingItemService getService() {
+		if (_service == null) {
+			throw new RuntimeException("ShoppingItemService is not set");
+		}
+
 		return _service;
 	}
 

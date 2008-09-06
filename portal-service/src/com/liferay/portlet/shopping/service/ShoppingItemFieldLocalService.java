@@ -52,6 +52,9 @@ public interface ShoppingItemFieldLocalService {
 		com.liferay.portlet.shopping.model.ShoppingItemField shoppingItemField)
 		throws com.liferay.portal.SystemException;
 
+	public com.liferay.portlet.shopping.model.ShoppingItemField createShoppingItemField(
+		long itemFieldId);
+
 	public void deleteShoppingItemField(long itemFieldId)
 		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;

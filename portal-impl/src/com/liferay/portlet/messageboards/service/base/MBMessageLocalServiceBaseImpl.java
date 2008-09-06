@@ -116,6 +116,10 @@ public abstract class MBMessageLocalServiceBaseImpl
 		return mbMessagePersistence.update(mbMessage, false);
 	}
 
+	public MBMessage createMBMessage(long messageId) {
+		return mbMessagePersistence.create(messageId);
+	}
+
 	public void deleteMBMessage(long messageId)
 		throws PortalException, SystemException {
 		mbMessagePersistence.remove(messageId);

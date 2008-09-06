@@ -48,54 +48,59 @@ public class EmailAddressLocalServiceUtil {
 	public static com.liferay.portal.model.EmailAddress addEmailAddress(
 		com.liferay.portal.model.EmailAddress emailAddress)
 		throws com.liferay.portal.SystemException {
-		return _service.addEmailAddress(emailAddress);
+		return getService().addEmailAddress(emailAddress);
+	}
+
+	public static com.liferay.portal.model.EmailAddress createEmailAddress(
+		long emailAddressId) {
+		return getService().createEmailAddress(emailAddressId);
 	}
 
 	public static void deleteEmailAddress(long emailAddressId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		_service.deleteEmailAddress(emailAddressId);
+		getService().deleteEmailAddress(emailAddressId);
 	}
 
 	public static void deleteEmailAddress(
 		com.liferay.portal.model.EmailAddress emailAddress)
 		throws com.liferay.portal.SystemException {
-		_service.deleteEmailAddress(emailAddress);
+		getService().deleteEmailAddress(emailAddress);
 	}
 
 	public static java.util.List<Object> dynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery)
 		throws com.liferay.portal.SystemException {
-		return _service.dynamicQuery(dynamicQuery);
+		return getService().dynamicQuery(dynamicQuery);
 	}
 
 	public static java.util.List<Object> dynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery, int start,
 		int end) throws com.liferay.portal.SystemException {
-		return _service.dynamicQuery(dynamicQuery, start, end);
+		return getService().dynamicQuery(dynamicQuery, start, end);
 	}
 
 	public static com.liferay.portal.model.EmailAddress getEmailAddress(
 		long emailAddressId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		return _service.getEmailAddress(emailAddressId);
+		return getService().getEmailAddress(emailAddressId);
 	}
 
 	public static java.util.List<com.liferay.portal.model.EmailAddress> getEmailAddresses(
 		int start, int end) throws com.liferay.portal.SystemException {
-		return _service.getEmailAddresses(start, end);
+		return getService().getEmailAddresses(start, end);
 	}
 
 	public static int getEmailAddressesCount()
 		throws com.liferay.portal.SystemException {
-		return _service.getEmailAddressesCount();
+		return getService().getEmailAddressesCount();
 	}
 
 	public static com.liferay.portal.model.EmailAddress updateEmailAddress(
 		com.liferay.portal.model.EmailAddress emailAddress)
 		throws com.liferay.portal.SystemException {
-		return _service.updateEmailAddress(emailAddress);
+		return getService().updateEmailAddress(emailAddress);
 	}
 
 	public static com.liferay.portal.model.EmailAddress addEmailAddress(
@@ -103,25 +108,26 @@ public class EmailAddressLocalServiceUtil {
 		java.lang.String address, int typeId, boolean primary)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		return _service.addEmailAddress(userId, className, classPK, address,
+		return getService()
+				   .addEmailAddress(userId, className, classPK, address,
 			typeId, primary);
 	}
 
 	public static void deleteEmailAddresses(long companyId,
 		java.lang.String className, long classPK)
 		throws com.liferay.portal.SystemException {
-		_service.deleteEmailAddresses(companyId, className, classPK);
+		getService().deleteEmailAddresses(companyId, className, classPK);
 	}
 
 	public static java.util.List<com.liferay.portal.model.EmailAddress> getEmailAddresses()
 		throws com.liferay.portal.SystemException {
-		return _service.getEmailAddresses();
+		return getService().getEmailAddresses();
 	}
 
 	public static java.util.List<com.liferay.portal.model.EmailAddress> getEmailAddresses(
 		long companyId, java.lang.String className, long classPK)
 		throws com.liferay.portal.SystemException {
-		return _service.getEmailAddresses(companyId, className, classPK);
+		return getService().getEmailAddresses(companyId, className, classPK);
 	}
 
 	public static com.liferay.portal.model.EmailAddress updateEmailAddress(
@@ -129,11 +135,15 @@ public class EmailAddressLocalServiceUtil {
 		boolean primary)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		return _service.updateEmailAddress(emailAddressId, address, typeId,
-			primary);
+		return getService()
+				   .updateEmailAddress(emailAddressId, address, typeId, primary);
 	}
 
 	public static EmailAddressLocalService getService() {
+		if (_service == null) {
+			throw new RuntimeException("EmailAddressLocalService is not set");
+		}
+
 		return _service;
 	}
 

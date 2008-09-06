@@ -48,16 +48,20 @@ public class MBMessageFlagServiceUtil {
 	public static void addAnswerFlag(long messageId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
-		_service.addAnswerFlag(messageId);
+		getService().addAnswerFlag(messageId);
 	}
 
 	public static void deleteAnswerFlag(long messageId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
-		_service.deleteAnswerFlag(messageId);
+		getService().deleteAnswerFlag(messageId);
 	}
 
 	public static MBMessageFlagService getService() {
+		if (_service == null) {
+			throw new RuntimeException("MBMessageFlagService is not set");
+		}
+
 		return _service;
 	}
 

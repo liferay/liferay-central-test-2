@@ -52,6 +52,9 @@ public interface BlogsEntryLocalService {
 		com.liferay.portlet.blogs.model.BlogsEntry blogsEntry)
 		throws com.liferay.portal.SystemException;
 
+	public com.liferay.portlet.blogs.model.BlogsEntry createBlogsEntry(
+		long entryId);
+
 	public void deleteBlogsEntry(long entryId)
 		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;

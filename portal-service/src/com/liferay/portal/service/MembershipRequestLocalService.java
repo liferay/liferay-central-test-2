@@ -52,6 +52,9 @@ public interface MembershipRequestLocalService {
 		com.liferay.portal.model.MembershipRequest membershipRequest)
 		throws com.liferay.portal.SystemException;
 
+	public com.liferay.portal.model.MembershipRequest createMembershipRequest(
+		long membershipRequestId);
+
 	public void deleteMembershipRequest(long membershipRequestId)
 		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;

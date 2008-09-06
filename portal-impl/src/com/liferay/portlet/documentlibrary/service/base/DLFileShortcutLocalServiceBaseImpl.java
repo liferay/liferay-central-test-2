@@ -74,6 +74,10 @@ public abstract class DLFileShortcutLocalServiceBaseImpl
 		return dlFileShortcutPersistence.update(dlFileShortcut, false);
 	}
 
+	public DLFileShortcut createDLFileShortcut(long fileShortcutId) {
+		return dlFileShortcutPersistence.create(fileShortcutId);
+	}
+
 	public void deleteDLFileShortcut(long fileShortcutId)
 		throws PortalException, SystemException {
 		dlFileShortcutPersistence.remove(fileShortcutId);

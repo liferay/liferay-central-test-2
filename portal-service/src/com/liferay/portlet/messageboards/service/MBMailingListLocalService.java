@@ -52,6 +52,9 @@ public interface MBMailingListLocalService {
 		com.liferay.portlet.messageboards.model.MBMailingList mbMailingList)
 		throws com.liferay.portal.SystemException;
 
+	public com.liferay.portlet.messageboards.model.MBMailingList createMBMailingList(
+		long mailingListId);
+
 	public void deleteMBMailingList(long mailingListId)
 		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;

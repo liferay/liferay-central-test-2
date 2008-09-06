@@ -170,6 +170,10 @@ public abstract class MembershipRequestLocalServiceBaseImpl
 		return membershipRequestPersistence.update(membershipRequest, false);
 	}
 
+	public MembershipRequest createMembershipRequest(long membershipRequestId) {
+		return membershipRequestPersistence.create(membershipRequestId);
+	}
+
 	public void deleteMembershipRequest(long membershipRequestId)
 		throws PortalException, SystemException {
 		membershipRequestPersistence.remove(membershipRequestId);

@@ -52,6 +52,9 @@ public interface WikiPageResourceLocalService {
 		com.liferay.portlet.wiki.model.WikiPageResource wikiPageResource)
 		throws com.liferay.portal.SystemException;
 
+	public com.liferay.portlet.wiki.model.WikiPageResource createWikiPageResource(
+		long resourcePrimKey);
+
 	public void deleteWikiPageResource(long resourcePrimKey)
 		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;

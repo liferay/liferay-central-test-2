@@ -52,7 +52,8 @@ public class OrgLaborServiceUtil {
 		int satOpen, int satClose)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
-		return _service.addOrgLabor(organizationId, typeId, sunOpen, sunClose,
+		return getService()
+				   .addOrgLabor(organizationId, typeId, sunOpen, sunClose,
 			monOpen, monClose, tueOpen, tueClose, wedOpen, wedClose, thuOpen,
 			thuClose, friOpen, friClose, satOpen, satClose);
 	}
@@ -60,20 +61,20 @@ public class OrgLaborServiceUtil {
 	public static void deleteOrgLabor(long orgLaborId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
-		_service.deleteOrgLabor(orgLaborId);
+		getService().deleteOrgLabor(orgLaborId);
 	}
 
 	public static com.liferay.portal.model.OrgLabor getOrgLabor(long orgLaborId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
-		return _service.getOrgLabor(orgLaborId);
+		return getService().getOrgLabor(orgLaborId);
 	}
 
 	public static java.util.List<com.liferay.portal.model.OrgLabor> getOrgLabors(
 		long organizationId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
-		return _service.getOrgLabors(organizationId);
+		return getService().getOrgLabors(organizationId);
 	}
 
 	public static com.liferay.portal.model.OrgLabor updateOrgLabor(
@@ -83,12 +84,17 @@ public class OrgLaborServiceUtil {
 		int satClose)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
-		return _service.updateOrgLabor(orgLaborId, typeId, sunOpen, sunClose,
+		return getService()
+				   .updateOrgLabor(orgLaborId, typeId, sunOpen, sunClose,
 			monOpen, monClose, tueOpen, tueClose, wedOpen, wedClose, thuOpen,
 			thuClose, friOpen, friClose, satOpen, satClose);
 	}
 
 	public static OrgLaborService getService() {
+		if (_service == null) {
+			throw new RuntimeException("OrgLaborService is not set");
+		}
+
 		return _service;
 	}
 

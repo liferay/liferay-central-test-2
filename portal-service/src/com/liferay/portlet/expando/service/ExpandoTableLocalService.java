@@ -52,6 +52,9 @@ public interface ExpandoTableLocalService {
 		com.liferay.portlet.expando.model.ExpandoTable expandoTable)
 		throws com.liferay.portal.SystemException;
 
+	public com.liferay.portlet.expando.model.ExpandoTable createExpandoTable(
+		long tableId);
+
 	public void deleteExpandoTable(long tableId)
 		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;

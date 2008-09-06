@@ -76,6 +76,10 @@ public abstract class ShoppingCouponLocalServiceBaseImpl
 		return shoppingCouponPersistence.update(shoppingCoupon, false);
 	}
 
+	public ShoppingCoupon createShoppingCoupon(long couponId) {
+		return shoppingCouponPersistence.create(couponId);
+	}
+
 	public void deleteShoppingCoupon(long couponId)
 		throws PortalException, SystemException {
 		shoppingCouponPersistence.remove(couponId);

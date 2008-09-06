@@ -68,6 +68,10 @@ public abstract class BookmarksEntryLocalServiceBaseImpl
 		return bookmarksEntryPersistence.update(bookmarksEntry, false);
 	}
 
+	public BookmarksEntry createBookmarksEntry(long entryId) {
+		return bookmarksEntryPersistence.create(entryId);
+	}
+
 	public void deleteBookmarksEntry(long entryId)
 		throws PortalException, SystemException {
 		bookmarksEntryPersistence.remove(entryId);

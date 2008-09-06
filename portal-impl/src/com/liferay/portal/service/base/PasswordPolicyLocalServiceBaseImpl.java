@@ -168,6 +168,10 @@ public abstract class PasswordPolicyLocalServiceBaseImpl
 		return passwordPolicyPersistence.update(passwordPolicy, false);
 	}
 
+	public PasswordPolicy createPasswordPolicy(long passwordPolicyId) {
+		return passwordPolicyPersistence.create(passwordPolicyId);
+	}
+
 	public void deletePasswordPolicy(long passwordPolicyId)
 		throws PortalException, SystemException {
 		passwordPolicyPersistence.remove(passwordPolicyId);

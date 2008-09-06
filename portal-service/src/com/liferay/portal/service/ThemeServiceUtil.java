@@ -47,10 +47,14 @@ package com.liferay.portal.service;
 public class ThemeServiceUtil {
 	public static java.util.List<com.liferay.portal.model.Theme> getThemes(
 		long companyId) throws java.rmi.RemoteException {
-		return _service.getThemes(companyId);
+		return getService().getThemes(companyId);
 	}
 
 	public static ThemeService getService() {
+		if (_service == null) {
+			throw new RuntimeException("ThemeService is not set");
+		}
+
 		return _service;
 	}
 

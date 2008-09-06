@@ -169,6 +169,10 @@ public abstract class ServiceComponentLocalServiceBaseImpl
 		return serviceComponentPersistence.update(serviceComponent, false);
 	}
 
+	public ServiceComponent createServiceComponent(long serviceComponentId) {
+		return serviceComponentPersistence.create(serviceComponentId);
+	}
+
 	public void deleteServiceComponent(long serviceComponentId)
 		throws PortalException, SystemException {
 		serviceComponentPersistence.remove(serviceComponentId);

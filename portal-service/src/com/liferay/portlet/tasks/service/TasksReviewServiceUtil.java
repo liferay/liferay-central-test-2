@@ -49,23 +49,27 @@ public class TasksReviewServiceUtil {
 		long proposalId, int stage)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
-		return _service.approveReview(proposalId, stage);
+		return getService().approveReview(proposalId, stage);
 	}
 
 	public static com.liferay.portlet.tasks.model.TasksReview rejectReview(
 		long proposalId, int stage)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
-		return _service.rejectReview(proposalId, stage);
+		return getService().rejectReview(proposalId, stage);
 	}
 
 	public static void updateReviews(long proposalId, long[][] userIdsPerStage)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
-		_service.updateReviews(proposalId, userIdsPerStage);
+		getService().updateReviews(proposalId, userIdsPerStage);
 	}
 
 	public static TasksReviewService getService() {
+		if (_service == null) {
+			throw new RuntimeException("TasksReviewService is not set");
+		}
+
 		return _service;
 	}
 

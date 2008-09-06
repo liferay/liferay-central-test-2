@@ -71,6 +71,10 @@ public abstract class WikiNodeLocalServiceBaseImpl
 		return wikiNodePersistence.update(wikiNode, false);
 	}
 
+	public WikiNode createWikiNode(long nodeId) {
+		return wikiNodePersistence.create(nodeId);
+	}
+
 	public void deleteWikiNode(long nodeId)
 		throws PortalException, SystemException {
 		wikiNodePersistence.remove(nodeId);

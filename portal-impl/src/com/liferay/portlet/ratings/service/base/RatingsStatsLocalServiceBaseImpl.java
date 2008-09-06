@@ -55,6 +55,10 @@ public abstract class RatingsStatsLocalServiceBaseImpl
 		return ratingsStatsPersistence.update(ratingsStats, false);
 	}
 
+	public RatingsStats createRatingsStats(long statsId) {
+		return ratingsStatsPersistence.create(statsId);
+	}
+
 	public void deleteRatingsStats(long statsId)
 		throws PortalException, SystemException {
 		ratingsStatsPersistence.remove(statsId);

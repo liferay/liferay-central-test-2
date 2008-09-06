@@ -56,7 +56,8 @@ public class ShoppingCouponServiceUtil {
 		java.lang.String discountType)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
-		return _service.addCoupon(plid, code, autoCode, name, description,
+		return getService()
+				   .addCoupon(plid, code, autoCode, name, description,
 			startDateMonth, startDateDay, startDateYear, startDateHour,
 			startDateMinute, endDateMonth, endDateDay, endDateYear,
 			endDateHour, endDateMinute, neverExpire, active, limitCategories,
@@ -66,14 +67,14 @@ public class ShoppingCouponServiceUtil {
 	public static void deleteCoupon(long plid, long couponId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
-		_service.deleteCoupon(plid, couponId);
+		getService().deleteCoupon(plid, couponId);
 	}
 
 	public static com.liferay.portlet.shopping.model.ShoppingCoupon getCoupon(
 		long plid, long couponId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
-		return _service.getCoupon(plid, couponId);
+		return getService().getCoupon(plid, couponId);
 	}
 
 	public static java.util.List<com.liferay.portlet.shopping.model.ShoppingCoupon> search(
@@ -81,7 +82,8 @@ public class ShoppingCouponServiceUtil {
 		java.lang.String discountType, boolean andOperator, int start, int end)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
-		return _service.search(plid, companyId, code, active, discountType,
+		return getService()
+				   .search(plid, companyId, code, active, discountType,
 			andOperator, start, end);
 	}
 
@@ -95,7 +97,8 @@ public class ShoppingCouponServiceUtil {
 		double minOrder, double discount, java.lang.String discountType)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
-		return _service.updateCoupon(plid, couponId, name, description,
+		return getService()
+				   .updateCoupon(plid, couponId, name, description,
 			startDateMonth, startDateDay, startDateYear, startDateHour,
 			startDateMinute, endDateMonth, endDateDay, endDateYear,
 			endDateHour, endDateMinute, neverExpire, active, limitCategories,
@@ -103,6 +106,10 @@ public class ShoppingCouponServiceUtil {
 	}
 
 	public static ShoppingCouponService getService() {
+		if (_service == null) {
+			throw new RuntimeException("ShoppingCouponService is not set");
+		}
+
 		return _service;
 	}
 

@@ -52,6 +52,9 @@ public interface ServiceComponentLocalService {
 		com.liferay.portal.model.ServiceComponent serviceComponent)
 		throws com.liferay.portal.SystemException;
 
+	public com.liferay.portal.model.ServiceComponent createServiceComponent(
+		long serviceComponentId);
+
 	public void deleteServiceComponent(long serviceComponentId)
 		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;

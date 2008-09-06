@@ -52,6 +52,9 @@ public interface BlogsStatsUserLocalService {
 		com.liferay.portlet.blogs.model.BlogsStatsUser blogsStatsUser)
 		throws com.liferay.portal.SystemException;
 
+	public com.liferay.portlet.blogs.model.BlogsStatsUser createBlogsStatsUser(
+		long statsUserId);
+
 	public void deleteBlogsStatsUser(long statsUserId)
 		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;

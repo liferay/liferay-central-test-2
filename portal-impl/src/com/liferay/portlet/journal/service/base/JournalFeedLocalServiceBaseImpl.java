@@ -79,6 +79,10 @@ public abstract class JournalFeedLocalServiceBaseImpl
 		return journalFeedPersistence.update(journalFeed, false);
 	}
 
+	public JournalFeed createJournalFeed(long id) {
+		return journalFeedPersistence.create(id);
+	}
+
 	public void deleteJournalFeed(long id)
 		throws PortalException, SystemException {
 		journalFeedPersistence.remove(id);

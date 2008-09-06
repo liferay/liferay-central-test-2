@@ -52,6 +52,8 @@ public interface ResourceLocalService {
 		com.liferay.portal.model.Resource resource)
 		throws com.liferay.portal.SystemException;
 
+	public com.liferay.portal.model.Resource createResource(long resourceId);
+
 	public void deleteResource(long resourceId)
 		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;

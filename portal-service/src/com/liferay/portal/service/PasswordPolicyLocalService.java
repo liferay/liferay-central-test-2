@@ -52,6 +52,9 @@ public interface PasswordPolicyLocalService {
 		com.liferay.portal.model.PasswordPolicy passwordPolicy)
 		throws com.liferay.portal.SystemException;
 
+	public com.liferay.portal.model.PasswordPolicy createPasswordPolicy(
+		long passwordPolicyId);
+
 	public void deletePasswordPolicy(long passwordPolicyId)
 		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;

@@ -48,93 +48,98 @@ public class UserGroupLocalServiceUtil {
 	public static com.liferay.portal.model.UserGroup addUserGroup(
 		com.liferay.portal.model.UserGroup userGroup)
 		throws com.liferay.portal.SystemException {
-		return _service.addUserGroup(userGroup);
+		return getService().addUserGroup(userGroup);
+	}
+
+	public static com.liferay.portal.model.UserGroup createUserGroup(
+		long userGroupId) {
+		return getService().createUserGroup(userGroupId);
 	}
 
 	public static void deleteUserGroup(long userGroupId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		_service.deleteUserGroup(userGroupId);
+		getService().deleteUserGroup(userGroupId);
 	}
 
 	public static void deleteUserGroup(
 		com.liferay.portal.model.UserGroup userGroup)
 		throws com.liferay.portal.SystemException {
-		_service.deleteUserGroup(userGroup);
+		getService().deleteUserGroup(userGroup);
 	}
 
 	public static java.util.List<Object> dynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery)
 		throws com.liferay.portal.SystemException {
-		return _service.dynamicQuery(dynamicQuery);
+		return getService().dynamicQuery(dynamicQuery);
 	}
 
 	public static java.util.List<Object> dynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery, int start,
 		int end) throws com.liferay.portal.SystemException {
-		return _service.dynamicQuery(dynamicQuery, start, end);
+		return getService().dynamicQuery(dynamicQuery, start, end);
 	}
 
 	public static com.liferay.portal.model.UserGroup getUserGroup(
 		long userGroupId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		return _service.getUserGroup(userGroupId);
+		return getService().getUserGroup(userGroupId);
 	}
 
 	public static java.util.List<com.liferay.portal.model.UserGroup> getUserGroups(
 		int start, int end) throws com.liferay.portal.SystemException {
-		return _service.getUserGroups(start, end);
+		return getService().getUserGroups(start, end);
 	}
 
 	public static int getUserGroupsCount()
 		throws com.liferay.portal.SystemException {
-		return _service.getUserGroupsCount();
+		return getService().getUserGroupsCount();
 	}
 
 	public static com.liferay.portal.model.UserGroup updateUserGroup(
 		com.liferay.portal.model.UserGroup userGroup)
 		throws com.liferay.portal.SystemException {
-		return _service.updateUserGroup(userGroup);
+		return getService().updateUserGroup(userGroup);
 	}
 
 	public static void addGroupUserGroups(long groupId, long[] userGroupIds)
 		throws com.liferay.portal.SystemException {
-		_service.addGroupUserGroups(groupId, userGroupIds);
+		getService().addGroupUserGroups(groupId, userGroupIds);
 	}
 
 	public static com.liferay.portal.model.UserGroup addUserGroup(long userId,
 		long companyId, java.lang.String name, java.lang.String description)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		return _service.addUserGroup(userId, companyId, name, description);
+		return getService().addUserGroup(userId, companyId, name, description);
 	}
 
 	public static void clearUserUserGroups(long userId)
 		throws com.liferay.portal.SystemException {
-		_service.clearUserUserGroups(userId);
+		getService().clearUserUserGroups(userId);
 	}
 
 	public static com.liferay.portal.model.UserGroup getUserGroup(
 		long companyId, java.lang.String name)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		return _service.getUserGroup(companyId, name);
+		return getService().getUserGroup(companyId, name);
 	}
 
 	public static java.util.List<com.liferay.portal.model.UserGroup> getUserGroups(
 		long companyId) throws com.liferay.portal.SystemException {
-		return _service.getUserGroups(companyId);
+		return getService().getUserGroups(companyId);
 	}
 
 	public static java.util.List<com.liferay.portal.model.UserGroup> getUserUserGroups(
 		long userId) throws com.liferay.portal.SystemException {
-		return _service.getUserUserGroups(userId);
+		return getService().getUserUserGroups(userId);
 	}
 
 	public static boolean hasGroupUserGroup(long groupId, long userGroupId)
 		throws com.liferay.portal.SystemException {
-		return _service.hasGroupUserGroup(groupId, userGroupId);
+		return getService().hasGroupUserGroup(groupId, userGroupId);
 	}
 
 	public static java.util.List<com.liferay.portal.model.UserGroup> search(
@@ -142,20 +147,20 @@ public class UserGroupLocalServiceUtil {
 		java.util.LinkedHashMap<String, Object> params, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException {
-		return _service.search(companyId, name, description, params, start,
-			end, obc);
+		return getService()
+				   .search(companyId, name, description, params, start, end, obc);
 	}
 
 	public static int searchCount(long companyId, java.lang.String name,
 		java.lang.String description,
 		java.util.LinkedHashMap<String, Object> params)
 		throws com.liferay.portal.SystemException {
-		return _service.searchCount(companyId, name, description, params);
+		return getService().searchCount(companyId, name, description, params);
 	}
 
 	public static void unsetGroupUserGroups(long groupId, long[] userGroupIds)
 		throws com.liferay.portal.SystemException {
-		_service.unsetGroupUserGroups(groupId, userGroupIds);
+		getService().unsetGroupUserGroups(groupId, userGroupIds);
 	}
 
 	public static com.liferay.portal.model.UserGroup updateUserGroup(
@@ -163,11 +168,15 @@ public class UserGroupLocalServiceUtil {
 		java.lang.String description)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		return _service.updateUserGroup(companyId, userGroupId, name,
-			description);
+		return getService()
+				   .updateUserGroup(companyId, userGroupId, name, description);
 	}
 
 	public static UserGroupLocalService getService() {
+		if (_service == null) {
+			throw new RuntimeException("UserGroupLocalService is not set");
+		}
+
 		return _service;
 	}
 

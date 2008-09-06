@@ -83,6 +83,10 @@ public abstract class JournalTemplateLocalServiceBaseImpl
 		return journalTemplatePersistence.update(journalTemplate, false);
 	}
 
+	public JournalTemplate createJournalTemplate(long id) {
+		return journalTemplatePersistence.create(id);
+	}
+
 	public void deleteJournalTemplate(long id)
 		throws PortalException, SystemException {
 		journalTemplatePersistence.remove(id);

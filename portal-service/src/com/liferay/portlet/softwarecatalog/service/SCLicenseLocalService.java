@@ -52,6 +52,9 @@ public interface SCLicenseLocalService {
 		com.liferay.portlet.softwarecatalog.model.SCLicense scLicense)
 		throws com.liferay.portal.SystemException;
 
+	public com.liferay.portlet.softwarecatalog.model.SCLicense createSCLicense(
+		long licenseId);
+
 	public void deleteSCLicense(long licenseId)
 		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;

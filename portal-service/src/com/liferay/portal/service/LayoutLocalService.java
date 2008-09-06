@@ -52,6 +52,8 @@ public interface LayoutLocalService {
 		com.liferay.portal.model.Layout layout)
 		throws com.liferay.portal.SystemException;
 
+	public com.liferay.portal.model.Layout createLayout(long plid);
+
 	public void deleteLayout(long plid)
 		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;

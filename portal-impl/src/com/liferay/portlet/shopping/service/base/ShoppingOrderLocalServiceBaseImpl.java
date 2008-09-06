@@ -85,6 +85,10 @@ public abstract class ShoppingOrderLocalServiceBaseImpl
 		return shoppingOrderPersistence.update(shoppingOrder, false);
 	}
 
+	public ShoppingOrder createShoppingOrder(long orderId) {
+		return shoppingOrderPersistence.create(orderId);
+	}
+
 	public void deleteShoppingOrder(long orderId)
 		throws PortalException, SystemException {
 		shoppingOrderPersistence.remove(orderId);

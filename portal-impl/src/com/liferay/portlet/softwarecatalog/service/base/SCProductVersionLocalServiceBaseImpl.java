@@ -67,6 +67,10 @@ public abstract class SCProductVersionLocalServiceBaseImpl
 		return scProductVersionPersistence.update(scProductVersion, false);
 	}
 
+	public SCProductVersion createSCProductVersion(long productVersionId) {
+		return scProductVersionPersistence.create(productVersionId);
+	}
+
 	public void deleteSCProductVersion(long productVersionId)
 		throws PortalException, SystemException {
 		scProductVersionPersistence.remove(productVersionId);

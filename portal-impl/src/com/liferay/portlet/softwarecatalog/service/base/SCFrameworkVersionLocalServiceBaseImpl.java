@@ -71,6 +71,10 @@ public abstract class SCFrameworkVersionLocalServiceBaseImpl
 		return scFrameworkVersionPersistence.update(scFrameworkVersion, false);
 	}
 
+	public SCFrameworkVersion createSCFrameworkVersion(long frameworkVersionId) {
+		return scFrameworkVersionPersistence.create(frameworkVersionId);
+	}
+
 	public void deleteSCFrameworkVersion(long frameworkVersionId)
 		throws PortalException, SystemException {
 		scFrameworkVersionPersistence.remove(frameworkVersionId);

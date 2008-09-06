@@ -168,6 +168,10 @@ public abstract class PluginSettingLocalServiceBaseImpl
 		return pluginSettingPersistence.update(pluginSetting, false);
 	}
 
+	public PluginSetting createPluginSetting(long pluginSettingId) {
+		return pluginSettingPersistence.create(pluginSettingId);
+	}
+
 	public void deletePluginSetting(long pluginSettingId)
 		throws PortalException, SystemException {
 		pluginSettingPersistence.remove(pluginSettingId);

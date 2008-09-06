@@ -50,10 +50,15 @@ public class AnnouncementsDeliveryServiceUtil {
 		boolean website)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
-		return _service.updateDelivery(userId, type, email, sms, website);
+		return getService().updateDelivery(userId, type, email, sms, website);
 	}
 
 	public static AnnouncementsDeliveryService getService() {
+		if (_service == null) {
+			throw new RuntimeException(
+				"AnnouncementsDeliveryService is not set");
+		}
+
 		return _service;
 	}
 

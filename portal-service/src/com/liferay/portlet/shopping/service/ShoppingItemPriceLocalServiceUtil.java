@@ -48,64 +48,74 @@ public class ShoppingItemPriceLocalServiceUtil {
 	public static com.liferay.portlet.shopping.model.ShoppingItemPrice addShoppingItemPrice(
 		com.liferay.portlet.shopping.model.ShoppingItemPrice shoppingItemPrice)
 		throws com.liferay.portal.SystemException {
-		return _service.addShoppingItemPrice(shoppingItemPrice);
+		return getService().addShoppingItemPrice(shoppingItemPrice);
+	}
+
+	public static com.liferay.portlet.shopping.model.ShoppingItemPrice createShoppingItemPrice(
+		long itemPriceId) {
+		return getService().createShoppingItemPrice(itemPriceId);
 	}
 
 	public static void deleteShoppingItemPrice(long itemPriceId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		_service.deleteShoppingItemPrice(itemPriceId);
+		getService().deleteShoppingItemPrice(itemPriceId);
 	}
 
 	public static void deleteShoppingItemPrice(
 		com.liferay.portlet.shopping.model.ShoppingItemPrice shoppingItemPrice)
 		throws com.liferay.portal.SystemException {
-		_service.deleteShoppingItemPrice(shoppingItemPrice);
+		getService().deleteShoppingItemPrice(shoppingItemPrice);
 	}
 
 	public static java.util.List<Object> dynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery)
 		throws com.liferay.portal.SystemException {
-		return _service.dynamicQuery(dynamicQuery);
+		return getService().dynamicQuery(dynamicQuery);
 	}
 
 	public static java.util.List<Object> dynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery, int start,
 		int end) throws com.liferay.portal.SystemException {
-		return _service.dynamicQuery(dynamicQuery, start, end);
+		return getService().dynamicQuery(dynamicQuery, start, end);
 	}
 
 	public static com.liferay.portlet.shopping.model.ShoppingItemPrice getShoppingItemPrice(
 		long itemPriceId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		return _service.getShoppingItemPrice(itemPriceId);
+		return getService().getShoppingItemPrice(itemPriceId);
 	}
 
 	public static java.util.List<com.liferay.portlet.shopping.model.ShoppingItemPrice> getShoppingItemPrices(
 		int start, int end) throws com.liferay.portal.SystemException {
-		return _service.getShoppingItemPrices(start, end);
+		return getService().getShoppingItemPrices(start, end);
 	}
 
 	public static int getShoppingItemPricesCount()
 		throws com.liferay.portal.SystemException {
-		return _service.getShoppingItemPricesCount();
+		return getService().getShoppingItemPricesCount();
 	}
 
 	public static com.liferay.portlet.shopping.model.ShoppingItemPrice updateShoppingItemPrice(
 		com.liferay.portlet.shopping.model.ShoppingItemPrice shoppingItemPrice)
 		throws com.liferay.portal.SystemException {
-		return _service.updateShoppingItemPrice(shoppingItemPrice);
+		return getService().updateShoppingItemPrice(shoppingItemPrice);
 	}
 
 	public static java.util.List<com.liferay.portlet.shopping.model.ShoppingItemPrice> getItemPrices(
 		long itemId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		return _service.getItemPrices(itemId);
+		return getService().getItemPrices(itemId);
 	}
 
 	public static ShoppingItemPriceLocalService getService() {
+		if (_service == null) {
+			throw new RuntimeException(
+				"ShoppingItemPriceLocalService is not set");
+		}
+
 		return _service;
 	}
 

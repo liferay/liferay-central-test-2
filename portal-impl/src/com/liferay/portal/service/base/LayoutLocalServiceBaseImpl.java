@@ -183,6 +183,10 @@ public abstract class LayoutLocalServiceBaseImpl implements LayoutLocalService,
 		return layoutPersistence.update(layout, false);
 	}
 
+	public Layout createLayout(long plid) {
+		return layoutPersistence.create(plid);
+	}
+
 	public void deleteLayout(long plid) throws PortalException, SystemException {
 		layoutPersistence.remove(plid);
 	}

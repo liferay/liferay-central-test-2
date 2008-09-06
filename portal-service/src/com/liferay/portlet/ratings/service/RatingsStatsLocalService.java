@@ -52,6 +52,9 @@ public interface RatingsStatsLocalService {
 		com.liferay.portlet.ratings.model.RatingsStats ratingsStats)
 		throws com.liferay.portal.SystemException;
 
+	public com.liferay.portlet.ratings.model.RatingsStats createRatingsStats(
+		long statsId);
+
 	public void deleteRatingsStats(long statsId)
 		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;

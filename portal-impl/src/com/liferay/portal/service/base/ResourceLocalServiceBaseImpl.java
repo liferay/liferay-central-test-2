@@ -167,6 +167,10 @@ public abstract class ResourceLocalServiceBaseImpl
 		return resourcePersistence.update(resource, false);
 	}
 
+	public Resource createResource(long resourceId) {
+		return resourcePersistence.create(resourceId);
+	}
+
 	public void deleteResource(long resourceId)
 		throws PortalException, SystemException {
 		resourcePersistence.remove(resourceId);

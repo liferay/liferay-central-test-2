@@ -166,6 +166,10 @@ public abstract class UserGroupRoleLocalServiceBaseImpl
 		return userGroupRolePersistence.update(userGroupRole, false);
 	}
 
+	public UserGroupRole createUserGroupRole(UserGroupRolePK userGroupRolePK) {
+		return userGroupRolePersistence.create(userGroupRolePK);
+	}
+
 	public void deleteUserGroupRole(UserGroupRolePK userGroupRolePK)
 		throws PortalException, SystemException {
 		userGroupRolePersistence.remove(userGroupRolePK);

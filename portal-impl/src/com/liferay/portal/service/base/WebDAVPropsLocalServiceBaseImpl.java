@@ -169,6 +169,10 @@ public abstract class WebDAVPropsLocalServiceBaseImpl
 		return webDAVPropsPersistence.update(webDAVProps, false);
 	}
 
+	public WebDAVProps createWebDAVProps(long webDavPropsId) {
+		return webDAVPropsPersistence.create(webDavPropsId);
+	}
+
 	public void deleteWebDAVProps(long webDavPropsId)
 		throws PortalException, SystemException {
 		webDAVPropsPersistence.remove(webDavPropsId);

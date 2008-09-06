@@ -52,6 +52,9 @@ public interface JournalContentSearchLocalService {
 		com.liferay.portlet.journal.model.JournalContentSearch journalContentSearch)
 		throws com.liferay.portal.SystemException;
 
+	public com.liferay.portlet.journal.model.JournalContentSearch createJournalContentSearch(
+		long contentSearchId);
+
 	public void deleteJournalContentSearch(long contentSearchId)
 		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;

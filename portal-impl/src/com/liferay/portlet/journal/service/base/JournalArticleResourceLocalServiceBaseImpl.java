@@ -74,6 +74,11 @@ public abstract class JournalArticleResourceLocalServiceBaseImpl
 			false);
 	}
 
+	public JournalArticleResource createJournalArticleResource(
+		long resourcePrimKey) {
+		return journalArticleResourcePersistence.create(resourcePrimKey);
+	}
+
 	public void deleteJournalArticleResource(long resourcePrimKey)
 		throws PortalException, SystemException {
 		journalArticleResourcePersistence.remove(resourcePrimKey);

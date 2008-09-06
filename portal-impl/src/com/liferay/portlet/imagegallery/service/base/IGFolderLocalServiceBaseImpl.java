@@ -73,6 +73,10 @@ public abstract class IGFolderLocalServiceBaseImpl
 		return igFolderPersistence.update(igFolder, false);
 	}
 
+	public IGFolder createIGFolder(long folderId) {
+		return igFolderPersistence.create(folderId);
+	}
+
 	public void deleteIGFolder(long folderId)
 		throws PortalException, SystemException {
 		igFolderPersistence.remove(folderId);

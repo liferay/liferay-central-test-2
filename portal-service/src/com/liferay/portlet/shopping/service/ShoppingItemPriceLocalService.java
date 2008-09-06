@@ -52,6 +52,9 @@ public interface ShoppingItemPriceLocalService {
 		com.liferay.portlet.shopping.model.ShoppingItemPrice shoppingItemPrice)
 		throws com.liferay.portal.SystemException;
 
+	public com.liferay.portlet.shopping.model.ShoppingItemPrice createShoppingItemPrice(
+		long itemPriceId);
+
 	public void deleteShoppingItemPrice(long itemPriceId)
 		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;

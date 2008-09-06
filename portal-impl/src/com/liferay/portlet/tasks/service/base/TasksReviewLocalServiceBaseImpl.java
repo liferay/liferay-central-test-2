@@ -63,6 +63,10 @@ public abstract class TasksReviewLocalServiceBaseImpl
 		return tasksReviewPersistence.update(tasksReview, false);
 	}
 
+	public TasksReview createTasksReview(long reviewId) {
+		return tasksReviewPersistence.create(reviewId);
+	}
+
 	public void deleteTasksReview(long reviewId)
 		throws PortalException, SystemException {
 		tasksReviewPersistence.remove(reviewId);

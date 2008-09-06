@@ -47,7 +47,7 @@ package com.liferay.portal.service;
 public class PortletServiceUtil {
 	public static com.liferay.portal.kernel.json.JSONArray getWARPortlets()
 		throws java.rmi.RemoteException {
-		return _service.getWARPortlets();
+		return getService().getWARPortlets();
 	}
 
 	public static com.liferay.portal.model.Portlet updatePortlet(
@@ -55,10 +55,14 @@ public class PortletServiceUtil {
 		boolean active)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
-		return _service.updatePortlet(companyId, portletId, roles, active);
+		return getService().updatePortlet(companyId, portletId, roles, active);
 	}
 
 	public static PortletService getService() {
+		if (_service == null) {
+			throw new RuntimeException("PortletService is not set");
+		}
+
 		return _service;
 	}
 

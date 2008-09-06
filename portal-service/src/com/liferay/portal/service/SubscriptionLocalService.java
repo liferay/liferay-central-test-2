@@ -52,6 +52,9 @@ public interface SubscriptionLocalService {
 		com.liferay.portal.model.Subscription subscription)
 		throws com.liferay.portal.SystemException;
 
+	public com.liferay.portal.model.Subscription createSubscription(
+		long subscriptionId);
+
 	public void deleteSubscription(long subscriptionId)
 		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;

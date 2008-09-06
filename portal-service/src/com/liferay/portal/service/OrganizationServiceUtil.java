@@ -49,15 +49,15 @@ public class OrganizationServiceUtil {
 		long[] organizationIds)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
-		_service.addGroupOrganizations(groupId, organizationIds);
+		getService().addGroupOrganizations(groupId, organizationIds);
 	}
 
 	public static void addPasswordPolicyOrganizations(long passwordPolicyId,
 		long[] organizationIds)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
-		_service.addPasswordPolicyOrganizations(passwordPolicyId,
-			organizationIds);
+		getService()
+			.addPasswordPolicyOrganizations(passwordPolicyId, organizationIds);
 	}
 
 	public static com.liferay.portal.model.Organization addOrganization(
@@ -66,54 +66,55 @@ public class OrganizationServiceUtil {
 		java.lang.String comments)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
-		return _service.addOrganization(parentOrganizationId, name, type,
+		return getService()
+				   .addOrganization(parentOrganizationId, name, type,
 			recursable, regionId, countryId, statusId, comments);
 	}
 
 	public static void deleteOrganization(long organizationId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
-		_service.deleteOrganization(organizationId);
+		getService().deleteOrganization(organizationId);
 	}
 
 	public static com.liferay.portal.model.Organization getOrganization(
 		long organizationId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
-		return _service.getOrganization(organizationId);
+		return getService().getOrganization(organizationId);
 	}
 
 	public static long getOrganizationId(long companyId, java.lang.String name)
 		throws com.liferay.portal.SystemException, java.rmi.RemoteException {
-		return _service.getOrganizationId(companyId, name);
+		return getService().getOrganizationId(companyId, name);
 	}
 
 	public static java.util.List<com.liferay.portal.model.Organization> getUserOrganizations(
 		long userId)
 		throws com.liferay.portal.SystemException, java.rmi.RemoteException {
-		return _service.getUserOrganizations(userId);
+		return getService().getUserOrganizations(userId);
 	}
 
 	public static void setGroupOrganizations(long groupId,
 		long[] organizationIds)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
-		_service.setGroupOrganizations(groupId, organizationIds);
+		getService().setGroupOrganizations(groupId, organizationIds);
 	}
 
 	public static void unsetGroupOrganizations(long groupId,
 		long[] organizationIds)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
-		_service.unsetGroupOrganizations(groupId, organizationIds);
+		getService().unsetGroupOrganizations(groupId, organizationIds);
 	}
 
 	public static void unsetPasswordPolicyOrganizations(long passwordPolicyId,
 		long[] organizationIds)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
-		_service.unsetPasswordPolicyOrganizations(passwordPolicyId,
-			organizationIds);
+		getService()
+			.unsetPasswordPolicyOrganizations(passwordPolicyId, organizationIds);
 	}
 
 	public static com.liferay.portal.model.Organization updateOrganization(
@@ -122,12 +123,16 @@ public class OrganizationServiceUtil {
 		int statusId, java.lang.String comments)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
-		return _service.updateOrganization(organizationId,
-			parentOrganizationId, name, type, recursable, regionId, countryId,
-			statusId, comments);
+		return getService()
+				   .updateOrganization(organizationId, parentOrganizationId,
+			name, type, recursable, regionId, countryId, statusId, comments);
 	}
 
 	public static OrganizationService getService() {
+		if (_service == null) {
+			throw new RuntimeException("OrganizationService is not set");
+		}
+
 		return _service;
 	}
 

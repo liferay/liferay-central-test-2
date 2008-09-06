@@ -52,6 +52,9 @@ public interface ExpandoValueLocalService {
 		com.liferay.portlet.expando.model.ExpandoValue expandoValue)
 		throws com.liferay.portal.SystemException;
 
+	public com.liferay.portlet.expando.model.ExpandoValue createExpandoValue(
+		long valueId);
+
 	public void deleteExpandoValue(long valueId)
 		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;

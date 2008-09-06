@@ -164,6 +164,10 @@ public abstract class ContactLocalServiceBaseImpl implements ContactLocalService
 		return contactPersistence.update(contact, false);
 	}
 
+	public Contact createContact(long contactId) {
+		return contactPersistence.create(contactId);
+	}
+
 	public void deleteContact(long contactId)
 		throws PortalException, SystemException {
 		contactPersistence.remove(contactId);

@@ -52,6 +52,9 @@ public interface ShoppingCategoryLocalService {
 		com.liferay.portlet.shopping.model.ShoppingCategory shoppingCategory)
 		throws com.liferay.portal.SystemException;
 
+	public com.liferay.portlet.shopping.model.ShoppingCategory createShoppingCategory(
+		long categoryId);
+
 	public void deleteShoppingCategory(long categoryId)
 		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;

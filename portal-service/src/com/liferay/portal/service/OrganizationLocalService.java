@@ -52,6 +52,9 @@ public interface OrganizationLocalService {
 		com.liferay.portal.model.Organization organization)
 		throws com.liferay.portal.SystemException;
 
+	public com.liferay.portal.model.Organization createOrganization(
+		long organizationId);
+
 	public void deleteOrganization(long organizationId)
 		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;

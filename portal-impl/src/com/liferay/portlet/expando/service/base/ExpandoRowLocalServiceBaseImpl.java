@@ -61,6 +61,10 @@ public abstract class ExpandoRowLocalServiceBaseImpl
 		return expandoRowPersistence.update(expandoRow, false);
 	}
 
+	public ExpandoRow createExpandoRow(long rowId) {
+		return expandoRowPersistence.create(rowId);
+	}
+
 	public void deleteExpandoRow(long rowId)
 		throws PortalException, SystemException {
 		expandoRowPersistence.remove(rowId);

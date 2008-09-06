@@ -52,6 +52,9 @@ public interface IGFolderLocalService {
 		com.liferay.portlet.imagegallery.model.IGFolder igFolder)
 		throws com.liferay.portal.SystemException;
 
+	public com.liferay.portlet.imagegallery.model.IGFolder createIGFolder(
+		long folderId);
+
 	public void deleteIGFolder(long folderId)
 		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;

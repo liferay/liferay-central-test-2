@@ -49,22 +49,26 @@ public class WorkflowInstanceServiceUtil {
 		long definitionId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
-		return _service.addInstance(definitionId);
+		return getService().addInstance(definitionId);
 	}
 
 	public static void signalInstance(long instanceId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
-		_service.signalInstance(instanceId);
+		getService().signalInstance(instanceId);
 	}
 
 	public static void signalToken(long instanceId, long tokenId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
-		_service.signalToken(instanceId, tokenId);
+		getService().signalToken(instanceId, tokenId);
 	}
 
 	public static WorkflowInstanceService getService() {
+		if (_service == null) {
+			throw new RuntimeException("WorkflowInstanceService is not set");
+		}
+
 		return _service;
 	}
 

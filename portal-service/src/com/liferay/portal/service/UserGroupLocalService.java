@@ -52,6 +52,8 @@ public interface UserGroupLocalService {
 		com.liferay.portal.model.UserGroup userGroup)
 		throws com.liferay.portal.SystemException;
 
+	public com.liferay.portal.model.UserGroup createUserGroup(long userGroupId);
+
 	public void deleteUserGroup(long userGroupId)
 		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;

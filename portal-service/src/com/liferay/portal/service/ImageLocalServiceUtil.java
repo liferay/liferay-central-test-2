@@ -48,129 +48,138 @@ public class ImageLocalServiceUtil {
 	public static com.liferay.portal.model.Image addImage(
 		com.liferay.portal.model.Image image)
 		throws com.liferay.portal.SystemException {
-		return _service.addImage(image);
+		return getService().addImage(image);
+	}
+
+	public static com.liferay.portal.model.Image createImage(long imageId) {
+		return getService().createImage(imageId);
 	}
 
 	public static void deleteImage(long imageId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		_service.deleteImage(imageId);
+		getService().deleteImage(imageId);
 	}
 
 	public static void deleteImage(com.liferay.portal.model.Image image)
 		throws com.liferay.portal.SystemException {
-		_service.deleteImage(image);
+		getService().deleteImage(image);
 	}
 
 	public static java.util.List<Object> dynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery)
 		throws com.liferay.portal.SystemException {
-		return _service.dynamicQuery(dynamicQuery);
+		return getService().dynamicQuery(dynamicQuery);
 	}
 
 	public static java.util.List<Object> dynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery, int start,
 		int end) throws com.liferay.portal.SystemException {
-		return _service.dynamicQuery(dynamicQuery, start, end);
+		return getService().dynamicQuery(dynamicQuery, start, end);
 	}
 
 	public static com.liferay.portal.model.Image getImage(long imageId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		return _service.getImage(imageId);
+		return getService().getImage(imageId);
 	}
 
 	public static java.util.List<com.liferay.portal.model.Image> getImages(
 		int start, int end) throws com.liferay.portal.SystemException {
-		return _service.getImages(start, end);
+		return getService().getImages(start, end);
 	}
 
 	public static int getImagesCount()
 		throws com.liferay.portal.SystemException {
-		return _service.getImagesCount();
+		return getService().getImagesCount();
 	}
 
 	public static com.liferay.portal.model.Image updateImage(
 		com.liferay.portal.model.Image image)
 		throws com.liferay.portal.SystemException {
-		return _service.updateImage(image);
+		return getService().updateImage(image);
 	}
 
 	public static com.liferay.portal.model.Image getCompanyLogo(long imageId) {
-		return _service.getCompanyLogo(imageId);
+		return getService().getCompanyLogo(imageId);
 	}
 
 	public static com.liferay.portal.model.Image getDefaultCompanyLogo() {
-		return _service.getDefaultCompanyLogo();
+		return getService().getDefaultCompanyLogo();
 	}
 
 	public static com.liferay.portal.model.Image getDefaultSpacer() {
-		return _service.getDefaultSpacer();
+		return getService().getDefaultSpacer();
 	}
 
 	public static com.liferay.portal.model.Image getDefaultUserFemalePortrait() {
-		return _service.getDefaultUserFemalePortrait();
+		return getService().getDefaultUserFemalePortrait();
 	}
 
 	public static com.liferay.portal.model.Image getDefaultUserMalePortrait() {
-		return _service.getDefaultUserMalePortrait();
+		return getService().getDefaultUserMalePortrait();
 	}
 
 	public static com.liferay.portal.model.Image getImage(byte[] bytes)
 		throws java.io.IOException {
-		return _service.getImage(bytes);
+		return getService().getImage(bytes);
 	}
 
 	public static com.liferay.portal.model.Image getImage(java.io.File file)
 		throws java.io.IOException {
-		return _service.getImage(file);
+		return getService().getImage(file);
 	}
 
 	public static com.liferay.portal.model.Image getImage(
 		java.io.InputStream is) throws java.io.IOException {
-		return _service.getImage(is);
+		return getService().getImage(is);
 	}
 
 	public static com.liferay.portal.model.Image getImageOrDefault(long imageId) {
-		return _service.getImageOrDefault(imageId);
+		return getService().getImageOrDefault(imageId);
 	}
 
 	public static java.util.List<com.liferay.portal.model.Image> getImages()
 		throws com.liferay.portal.SystemException {
-		return _service.getImages();
+		return getService().getImages();
 	}
 
 	public static java.util.List<com.liferay.portal.model.Image> getImagesBySize(
 		int size) throws com.liferay.portal.SystemException {
-		return _service.getImagesBySize(size);
+		return getService().getImagesBySize(size);
 	}
 
 	public static boolean isNullOrDefaultSpacer(byte[] bytes) {
-		return _service.isNullOrDefaultSpacer(bytes);
+		return getService().isNullOrDefaultSpacer(bytes);
 	}
 
 	public static com.liferay.portal.model.Image updateImage(long imageId,
 		byte[] bytes) throws com.liferay.portal.SystemException {
-		return _service.updateImage(imageId, bytes);
+		return getService().updateImage(imageId, bytes);
 	}
 
 	public static com.liferay.portal.model.Image updateImage(long imageId,
 		java.io.File file) throws com.liferay.portal.SystemException {
-		return _service.updateImage(imageId, file);
+		return getService().updateImage(imageId, file);
 	}
 
 	public static com.liferay.portal.model.Image updateImage(long imageId,
 		java.io.InputStream is) throws com.liferay.portal.SystemException {
-		return _service.updateImage(imageId, is);
+		return getService().updateImage(imageId, is);
 	}
 
 	public static com.liferay.portal.model.Image updateImage(long imageId,
 		byte[] bytes, java.lang.String type, int height, int width, int size)
 		throws com.liferay.portal.SystemException {
-		return _service.updateImage(imageId, bytes, type, height, width, size);
+		return getService()
+				   .updateImage(imageId, bytes, type, height, width, size);
 	}
 
 	public static ImageLocalService getService() {
+		if (_service == null) {
+			throw new RuntimeException("ImageLocalService is not set");
+		}
+
 		return _service;
 	}
 

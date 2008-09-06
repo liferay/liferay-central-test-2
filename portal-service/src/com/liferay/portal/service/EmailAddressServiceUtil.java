@@ -50,28 +50,28 @@ public class EmailAddressServiceUtil {
 		int typeId, boolean primary)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
-		return _service.addEmailAddress(className, classPK, address, typeId,
-			primary);
+		return getService()
+				   .addEmailAddress(className, classPK, address, typeId, primary);
 	}
 
 	public static void deleteEmailAddress(long emailAddressId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
-		_service.deleteEmailAddress(emailAddressId);
+		getService().deleteEmailAddress(emailAddressId);
 	}
 
 	public static com.liferay.portal.model.EmailAddress getEmailAddress(
 		long emailAddressId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
-		return _service.getEmailAddress(emailAddressId);
+		return getService().getEmailAddress(emailAddressId);
 	}
 
 	public static java.util.List<com.liferay.portal.model.EmailAddress> getEmailAddresses(
 		java.lang.String className, long classPK)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
-		return _service.getEmailAddresses(className, classPK);
+		return getService().getEmailAddresses(className, classPK);
 	}
 
 	public static com.liferay.portal.model.EmailAddress updateEmailAddress(
@@ -79,11 +79,15 @@ public class EmailAddressServiceUtil {
 		boolean primary)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
-		return _service.updateEmailAddress(emailAddressId, address, typeId,
-			primary);
+		return getService()
+				   .updateEmailAddress(emailAddressId, address, typeId, primary);
 	}
 
 	public static EmailAddressService getService() {
+		if (_service == null) {
+			throw new RuntimeException("EmailAddressService is not set");
+		}
+
 		return _service;
 	}
 

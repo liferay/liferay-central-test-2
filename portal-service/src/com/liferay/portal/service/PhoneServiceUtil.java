@@ -50,27 +50,28 @@ public class PhoneServiceUtil {
 		java.lang.String extension, int typeId, boolean primary)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
-		return _service.addPhone(className, classPK, number, extension, typeId,
+		return getService()
+				   .addPhone(className, classPK, number, extension, typeId,
 			primary);
 	}
 
 	public static void deletePhone(long phoneId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
-		_service.deletePhone(phoneId);
+		getService().deletePhone(phoneId);
 	}
 
 	public static com.liferay.portal.model.Phone getPhone(long phoneId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
-		return _service.getPhone(phoneId);
+		return getService().getPhone(phoneId);
 	}
 
 	public static java.util.List<com.liferay.portal.model.Phone> getPhones(
 		java.lang.String className, long classPK)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
-		return _service.getPhones(className, classPK);
+		return getService().getPhones(className, classPK);
 	}
 
 	public static com.liferay.portal.model.Phone updatePhone(long phoneId,
@@ -78,10 +79,15 @@ public class PhoneServiceUtil {
 		boolean primary)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
-		return _service.updatePhone(phoneId, number, extension, typeId, primary);
+		return getService()
+				   .updatePhone(phoneId, number, extension, typeId, primary);
 	}
 
 	public static PhoneService getService() {
+		if (_service == null) {
+			throw new RuntimeException("PhoneService is not set");
+		}
+
 		return _service;
 	}
 

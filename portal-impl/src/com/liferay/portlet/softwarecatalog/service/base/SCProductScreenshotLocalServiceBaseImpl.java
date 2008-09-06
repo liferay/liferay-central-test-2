@@ -63,6 +63,11 @@ public abstract class SCProductScreenshotLocalServiceBaseImpl
 		return scProductScreenshotPersistence.update(scProductScreenshot, false);
 	}
 
+	public SCProductScreenshot createSCProductScreenshot(
+		long productScreenshotId) {
+		return scProductScreenshotPersistence.create(productScreenshotId);
+	}
+
 	public void deleteSCProductScreenshot(long productScreenshotId)
 		throws PortalException, SystemException {
 		scProductScreenshotPersistence.remove(productScreenshotId);

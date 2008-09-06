@@ -50,20 +50,21 @@ public class SCLicenseServiceUtil {
 		boolean active, boolean recommended)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
-		return _service.addLicense(name, url, openSource, active, recommended);
+		return getService()
+				   .addLicense(name, url, openSource, active, recommended);
 	}
 
 	public static void deleteLicense(long licenseId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
-		_service.deleteLicense(licenseId);
+		getService().deleteLicense(licenseId);
 	}
 
 	public static com.liferay.portlet.softwarecatalog.model.SCLicense getLicense(
 		long licenseId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
-		return _service.getLicense(licenseId);
+		return getService().getLicense(licenseId);
 	}
 
 	public static com.liferay.portlet.softwarecatalog.model.SCLicense updateLicense(
@@ -71,11 +72,16 @@ public class SCLicenseServiceUtil {
 		boolean openSource, boolean active, boolean recommended)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
-		return _service.updateLicense(licenseId, name, url, openSource, active,
+		return getService()
+				   .updateLicense(licenseId, name, url, openSource, active,
 			recommended);
 	}
 
 	public static SCLicenseService getService() {
+		if (_service == null) {
+			throw new RuntimeException("SCLicenseService is not set");
+		}
+
 		return _service;
 	}
 

@@ -168,6 +168,11 @@ public abstract class PortletPreferencesLocalServiceBaseImpl
 		return portletPreferencesPersistence.update(portletPreferences, false);
 	}
 
+	public PortletPreferences createPortletPreferences(
+		long portletPreferencesId) {
+		return portletPreferencesPersistence.create(portletPreferencesId);
+	}
+
 	public void deletePortletPreferences(long portletPreferencesId)
 		throws PortalException, SystemException {
 		portletPreferencesPersistence.remove(portletPreferencesId);

@@ -54,8 +54,9 @@ public class AnnouncementsEntryServiceUtil {
 		int expirationDateMinute, int priority, boolean alert)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
-		return _service.addEntry(plid, classNameId, classPK, title, content,
-			url, type, displayDateMonth, displayDateDay, displayDateYear,
+		return getService()
+				   .addEntry(plid, classNameId, classPK, title, content, url,
+			type, displayDateMonth, displayDateDay, displayDateYear,
 			displayDateHour, displayDateMinute, expirationDateMonth,
 			expirationDateDay, expirationDateYear, expirationDateHour,
 			expirationDateMinute, priority, alert);
@@ -64,7 +65,7 @@ public class AnnouncementsEntryServiceUtil {
 	public static void deleteEntry(long entryId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
-		_service.deleteEntry(entryId);
+		getService().deleteEntry(entryId);
 	}
 
 	public static com.liferay.portlet.announcements.model.AnnouncementsEntry updateEntry(
@@ -76,7 +77,8 @@ public class AnnouncementsEntryServiceUtil {
 		int expirationDateMinute, int priority)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
-		return _service.updateEntry(entryId, title, content, url, type,
+		return getService()
+				   .updateEntry(entryId, title, content, url, type,
 			displayDateMonth, displayDateDay, displayDateYear, displayDateHour,
 			displayDateMinute, expirationDateMonth, expirationDateDay,
 			expirationDateYear, expirationDateHour, expirationDateMinute,
@@ -84,6 +86,10 @@ public class AnnouncementsEntryServiceUtil {
 	}
 
 	public static AnnouncementsEntryService getService() {
+		if (_service == null) {
+			throw new RuntimeException("AnnouncementsEntryService is not set");
+		}
+
 		return _service;
 	}
 

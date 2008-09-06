@@ -52,6 +52,8 @@ public interface WikiPageLocalService {
 		com.liferay.portlet.wiki.model.WikiPage wikiPage)
 		throws com.liferay.portal.SystemException;
 
+	public com.liferay.portlet.wiki.model.WikiPage createWikiPage(long pageId);
+
 	public void deleteWikiPage(long pageId)
 		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;

@@ -52,6 +52,8 @@ public interface CompanyLocalService {
 		com.liferay.portal.model.Company company)
 		throws com.liferay.portal.SystemException;
 
+	public com.liferay.portal.model.Company createCompany(long companyId);
+
 	public void deleteCompany(long companyId)
 		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;

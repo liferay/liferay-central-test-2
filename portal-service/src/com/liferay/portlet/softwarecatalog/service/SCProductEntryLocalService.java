@@ -52,6 +52,9 @@ public interface SCProductEntryLocalService {
 		com.liferay.portlet.softwarecatalog.model.SCProductEntry scProductEntry)
 		throws com.liferay.portal.SystemException;
 
+	public com.liferay.portlet.softwarecatalog.model.SCProductEntry createSCProductEntry(
+		long productEntryId);
+
 	public void deleteSCProductEntry(long productEntryId)
 		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;

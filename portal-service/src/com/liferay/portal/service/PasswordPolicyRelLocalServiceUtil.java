@@ -48,109 +48,121 @@ public class PasswordPolicyRelLocalServiceUtil {
 	public static com.liferay.portal.model.PasswordPolicyRel addPasswordPolicyRel(
 		com.liferay.portal.model.PasswordPolicyRel passwordPolicyRel)
 		throws com.liferay.portal.SystemException {
-		return _service.addPasswordPolicyRel(passwordPolicyRel);
+		return getService().addPasswordPolicyRel(passwordPolicyRel);
+	}
+
+	public static com.liferay.portal.model.PasswordPolicyRel createPasswordPolicyRel(
+		long passwordPolicyRelId) {
+		return getService().createPasswordPolicyRel(passwordPolicyRelId);
 	}
 
 	public static void deletePasswordPolicyRel(long passwordPolicyRelId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		_service.deletePasswordPolicyRel(passwordPolicyRelId);
+		getService().deletePasswordPolicyRel(passwordPolicyRelId);
 	}
 
 	public static void deletePasswordPolicyRel(
 		com.liferay.portal.model.PasswordPolicyRel passwordPolicyRel)
 		throws com.liferay.portal.SystemException {
-		_service.deletePasswordPolicyRel(passwordPolicyRel);
+		getService().deletePasswordPolicyRel(passwordPolicyRel);
 	}
 
 	public static java.util.List<Object> dynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery)
 		throws com.liferay.portal.SystemException {
-		return _service.dynamicQuery(dynamicQuery);
+		return getService().dynamicQuery(dynamicQuery);
 	}
 
 	public static java.util.List<Object> dynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery, int start,
 		int end) throws com.liferay.portal.SystemException {
-		return _service.dynamicQuery(dynamicQuery, start, end);
+		return getService().dynamicQuery(dynamicQuery, start, end);
 	}
 
 	public static com.liferay.portal.model.PasswordPolicyRel getPasswordPolicyRel(
 		long passwordPolicyRelId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		return _service.getPasswordPolicyRel(passwordPolicyRelId);
+		return getService().getPasswordPolicyRel(passwordPolicyRelId);
 	}
 
 	public static java.util.List<com.liferay.portal.model.PasswordPolicyRel> getPasswordPolicyRels(
 		int start, int end) throws com.liferay.portal.SystemException {
-		return _service.getPasswordPolicyRels(start, end);
+		return getService().getPasswordPolicyRels(start, end);
 	}
 
 	public static int getPasswordPolicyRelsCount()
 		throws com.liferay.portal.SystemException {
-		return _service.getPasswordPolicyRelsCount();
+		return getService().getPasswordPolicyRelsCount();
 	}
 
 	public static com.liferay.portal.model.PasswordPolicyRel updatePasswordPolicyRel(
 		com.liferay.portal.model.PasswordPolicyRel passwordPolicyRel)
 		throws com.liferay.portal.SystemException {
-		return _service.updatePasswordPolicyRel(passwordPolicyRel);
+		return getService().updatePasswordPolicyRel(passwordPolicyRel);
 	}
 
 	public static com.liferay.portal.model.PasswordPolicyRel addPasswordPolicyRel(
 		long passwordPolicyId, java.lang.String className, long classPK)
 		throws com.liferay.portal.SystemException {
-		return _service.addPasswordPolicyRel(passwordPolicyId, className,
-			classPK);
+		return getService()
+				   .addPasswordPolicyRel(passwordPolicyId, className, classPK);
 	}
 
 	public static void addPasswordPolicyRels(long passwordPolicyId,
 		java.lang.String className, long[] classPKs)
 		throws com.liferay.portal.SystemException {
-		_service.addPasswordPolicyRels(passwordPolicyId, className, classPKs);
+		getService().addPasswordPolicyRels(passwordPolicyId, className, classPKs);
 	}
 
 	public static void deletePasswordPolicyRel(java.lang.String className,
 		long classPK) throws com.liferay.portal.SystemException {
-		_service.deletePasswordPolicyRel(className, classPK);
+		getService().deletePasswordPolicyRel(className, classPK);
 	}
 
 	public static void deletePasswordPolicyRel(long passwordPolicyId,
 		java.lang.String className, long classPK)
 		throws com.liferay.portal.SystemException {
-		_service.deletePasswordPolicyRel(passwordPolicyId, className, classPK);
+		getService()
+			.deletePasswordPolicyRel(passwordPolicyId, className, classPK);
 	}
 
 	public static void deletePasswordPolicyRels(long passwordPolicyId,
 		java.lang.String className, long[] classPKs)
 		throws com.liferay.portal.SystemException {
-		_service.deletePasswordPolicyRels(passwordPolicyId, className, classPKs);
+		getService()
+			.deletePasswordPolicyRels(passwordPolicyId, className, classPKs);
 	}
 
 	public static com.liferay.portal.model.PasswordPolicyRel getPasswordPolicyRel(
 		java.lang.String className, long classPK)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		return _service.getPasswordPolicyRel(className, classPK);
+		return getService().getPasswordPolicyRel(className, classPK);
 	}
 
 	public static com.liferay.portal.model.PasswordPolicyRel getPasswordPolicyRel(
 		long passwordPolicyId, java.lang.String className, long classPK)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		return _service.getPasswordPolicyRel(passwordPolicyId, className,
-			classPK);
+		return getService()
+				   .getPasswordPolicyRel(passwordPolicyId, className, classPK);
 	}
 
 	public static boolean hasPasswordPolicyRel(long passwordPolicyId,
 		java.lang.String className, long classPK)
 		throws com.liferay.portal.SystemException {
-		return _service.hasPasswordPolicyRel(passwordPolicyId, className,
-			classPK);
+		return getService()
+				   .hasPasswordPolicyRel(passwordPolicyId, className, classPK);
 	}
 
 	public static PasswordPolicyRelLocalService getService() {
+		if (_service == null) {
+			throw new RuntimeException(
+				"PasswordPolicyRelLocalService is not set");
+		}
+
 		return _service;
 	}
 

@@ -48,52 +48,56 @@ public class PhoneLocalServiceUtil {
 	public static com.liferay.portal.model.Phone addPhone(
 		com.liferay.portal.model.Phone phone)
 		throws com.liferay.portal.SystemException {
-		return _service.addPhone(phone);
+		return getService().addPhone(phone);
+	}
+
+	public static com.liferay.portal.model.Phone createPhone(long phoneId) {
+		return getService().createPhone(phoneId);
 	}
 
 	public static void deletePhone(long phoneId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		_service.deletePhone(phoneId);
+		getService().deletePhone(phoneId);
 	}
 
 	public static void deletePhone(com.liferay.portal.model.Phone phone)
 		throws com.liferay.portal.SystemException {
-		_service.deletePhone(phone);
+		getService().deletePhone(phone);
 	}
 
 	public static java.util.List<Object> dynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery)
 		throws com.liferay.portal.SystemException {
-		return _service.dynamicQuery(dynamicQuery);
+		return getService().dynamicQuery(dynamicQuery);
 	}
 
 	public static java.util.List<Object> dynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery, int start,
 		int end) throws com.liferay.portal.SystemException {
-		return _service.dynamicQuery(dynamicQuery, start, end);
+		return getService().dynamicQuery(dynamicQuery, start, end);
 	}
 
 	public static com.liferay.portal.model.Phone getPhone(long phoneId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		return _service.getPhone(phoneId);
+		return getService().getPhone(phoneId);
 	}
 
 	public static java.util.List<com.liferay.portal.model.Phone> getPhones(
 		int start, int end) throws com.liferay.portal.SystemException {
-		return _service.getPhones(start, end);
+		return getService().getPhones(start, end);
 	}
 
 	public static int getPhonesCount()
 		throws com.liferay.portal.SystemException {
-		return _service.getPhonesCount();
+		return getService().getPhonesCount();
 	}
 
 	public static com.liferay.portal.model.Phone updatePhone(
 		com.liferay.portal.model.Phone phone)
 		throws com.liferay.portal.SystemException {
-		return _service.updatePhone(phone);
+		return getService().updatePhone(phone);
 	}
 
 	public static com.liferay.portal.model.Phone addPhone(long userId,
@@ -101,24 +105,25 @@ public class PhoneLocalServiceUtil {
 		java.lang.String extension, int typeId, boolean primary)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		return _service.addPhone(userId, className, classPK, number, extension,
+		return getService()
+				   .addPhone(userId, className, classPK, number, extension,
 			typeId, primary);
 	}
 
 	public static void deletePhones(long companyId, java.lang.String className,
 		long classPK) throws com.liferay.portal.SystemException {
-		_service.deletePhones(companyId, className, classPK);
+		getService().deletePhones(companyId, className, classPK);
 	}
 
 	public static java.util.List<com.liferay.portal.model.Phone> getPhones()
 		throws com.liferay.portal.SystemException {
-		return _service.getPhones();
+		return getService().getPhones();
 	}
 
 	public static java.util.List<com.liferay.portal.model.Phone> getPhones(
 		long companyId, java.lang.String className, long classPK)
 		throws com.liferay.portal.SystemException {
-		return _service.getPhones(companyId, className, classPK);
+		return getService().getPhones(companyId, className, classPK);
 	}
 
 	public static com.liferay.portal.model.Phone updatePhone(long phoneId,
@@ -126,10 +131,15 @@ public class PhoneLocalServiceUtil {
 		boolean primary)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		return _service.updatePhone(phoneId, number, extension, typeId, primary);
+		return getService()
+				   .updatePhone(phoneId, number, extension, typeId, primary);
 	}
 
 	public static PhoneLocalService getService() {
+		if (_service == null) {
+			throw new RuntimeException("PhoneLocalService is not set");
+		}
+
 		return _service;
 	}
 

@@ -48,75 +48,80 @@ public class DLFileRankLocalServiceUtil {
 	public static com.liferay.portlet.documentlibrary.model.DLFileRank addDLFileRank(
 		com.liferay.portlet.documentlibrary.model.DLFileRank dlFileRank)
 		throws com.liferay.portal.SystemException {
-		return _service.addDLFileRank(dlFileRank);
+		return getService().addDLFileRank(dlFileRank);
+	}
+
+	public static com.liferay.portlet.documentlibrary.model.DLFileRank createDLFileRank(
+		long fileRankId) {
+		return getService().createDLFileRank(fileRankId);
 	}
 
 	public static void deleteDLFileRank(long fileRankId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		_service.deleteDLFileRank(fileRankId);
+		getService().deleteDLFileRank(fileRankId);
 	}
 
 	public static void deleteDLFileRank(
 		com.liferay.portlet.documentlibrary.model.DLFileRank dlFileRank)
 		throws com.liferay.portal.SystemException {
-		_service.deleteDLFileRank(dlFileRank);
+		getService().deleteDLFileRank(dlFileRank);
 	}
 
 	public static java.util.List<Object> dynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery)
 		throws com.liferay.portal.SystemException {
-		return _service.dynamicQuery(dynamicQuery);
+		return getService().dynamicQuery(dynamicQuery);
 	}
 
 	public static java.util.List<Object> dynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery, int start,
 		int end) throws com.liferay.portal.SystemException {
-		return _service.dynamicQuery(dynamicQuery, start, end);
+		return getService().dynamicQuery(dynamicQuery, start, end);
 	}
 
 	public static com.liferay.portlet.documentlibrary.model.DLFileRank getDLFileRank(
 		long fileRankId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		return _service.getDLFileRank(fileRankId);
+		return getService().getDLFileRank(fileRankId);
 	}
 
 	public static java.util.List<com.liferay.portlet.documentlibrary.model.DLFileRank> getDLFileRanks(
 		int start, int end) throws com.liferay.portal.SystemException {
-		return _service.getDLFileRanks(start, end);
+		return getService().getDLFileRanks(start, end);
 	}
 
 	public static int getDLFileRanksCount()
 		throws com.liferay.portal.SystemException {
-		return _service.getDLFileRanksCount();
+		return getService().getDLFileRanksCount();
 	}
 
 	public static com.liferay.portlet.documentlibrary.model.DLFileRank updateDLFileRank(
 		com.liferay.portlet.documentlibrary.model.DLFileRank dlFileRank)
 		throws com.liferay.portal.SystemException {
-		return _service.updateDLFileRank(dlFileRank);
+		return getService().updateDLFileRank(dlFileRank);
 	}
 
 	public static void deleteFileRanks(long userId)
 		throws com.liferay.portal.SystemException {
-		_service.deleteFileRanks(userId);
+		getService().deleteFileRanks(userId);
 	}
 
 	public static void deleteFileRanks(long folderId, java.lang.String name)
 		throws com.liferay.portal.SystemException {
-		_service.deleteFileRanks(folderId, name);
+		getService().deleteFileRanks(folderId, name);
 	}
 
 	public static java.util.List<com.liferay.portlet.documentlibrary.model.DLFileRank> getFileRanks(
 		long groupId, long userId) throws com.liferay.portal.SystemException {
-		return _service.getFileRanks(groupId, userId);
+		return getService().getFileRanks(groupId, userId);
 	}
 
 	public static java.util.List<com.liferay.portlet.documentlibrary.model.DLFileRank> getFileRanks(
 		long groupId, long userId, int start, int end)
 		throws com.liferay.portal.SystemException {
-		return _service.getFileRanks(groupId, userId, start, end);
+		return getService().getFileRanks(groupId, userId, start, end);
 	}
 
 	public static com.liferay.portlet.documentlibrary.model.DLFileRank updateFileRank(
@@ -124,11 +129,15 @@ public class DLFileRankLocalServiceUtil {
 		java.lang.String name)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		return _service.updateFileRank(groupId, companyId, userId, folderId,
-			name);
+		return getService()
+				   .updateFileRank(groupId, companyId, userId, folderId, name);
 	}
 
 	public static DLFileRankLocalService getService() {
+		if (_service == null) {
+			throw new RuntimeException("DLFileRankLocalService is not set");
+		}
+
 		return _service;
 	}
 

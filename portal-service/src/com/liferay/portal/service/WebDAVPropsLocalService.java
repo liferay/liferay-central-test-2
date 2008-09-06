@@ -52,6 +52,9 @@ public interface WebDAVPropsLocalService {
 		com.liferay.portal.model.WebDAVProps webDAVProps)
 		throws com.liferay.portal.SystemException;
 
+	public com.liferay.portal.model.WebDAVProps createWebDAVProps(
+		long webDavPropsId);
+
 	public void deleteWebDAVProps(long webDavPropsId)
 		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;

@@ -48,52 +48,56 @@ public class WebsiteLocalServiceUtil {
 	public static com.liferay.portal.model.Website addWebsite(
 		com.liferay.portal.model.Website website)
 		throws com.liferay.portal.SystemException {
-		return _service.addWebsite(website);
+		return getService().addWebsite(website);
+	}
+
+	public static com.liferay.portal.model.Website createWebsite(long websiteId) {
+		return getService().createWebsite(websiteId);
 	}
 
 	public static void deleteWebsite(long websiteId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		_service.deleteWebsite(websiteId);
+		getService().deleteWebsite(websiteId);
 	}
 
 	public static void deleteWebsite(com.liferay.portal.model.Website website)
 		throws com.liferay.portal.SystemException {
-		_service.deleteWebsite(website);
+		getService().deleteWebsite(website);
 	}
 
 	public static java.util.List<Object> dynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery)
 		throws com.liferay.portal.SystemException {
-		return _service.dynamicQuery(dynamicQuery);
+		return getService().dynamicQuery(dynamicQuery);
 	}
 
 	public static java.util.List<Object> dynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery, int start,
 		int end) throws com.liferay.portal.SystemException {
-		return _service.dynamicQuery(dynamicQuery, start, end);
+		return getService().dynamicQuery(dynamicQuery, start, end);
 	}
 
 	public static com.liferay.portal.model.Website getWebsite(long websiteId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		return _service.getWebsite(websiteId);
+		return getService().getWebsite(websiteId);
 	}
 
 	public static java.util.List<com.liferay.portal.model.Website> getWebsites(
 		int start, int end) throws com.liferay.portal.SystemException {
-		return _service.getWebsites(start, end);
+		return getService().getWebsites(start, end);
 	}
 
 	public static int getWebsitesCount()
 		throws com.liferay.portal.SystemException {
-		return _service.getWebsitesCount();
+		return getService().getWebsitesCount();
 	}
 
 	public static com.liferay.portal.model.Website updateWebsite(
 		com.liferay.portal.model.Website website)
 		throws com.liferay.portal.SystemException {
-		return _service.updateWebsite(website);
+		return getService().updateWebsite(website);
 	}
 
 	public static com.liferay.portal.model.Website addWebsite(long userId,
@@ -101,35 +105,39 @@ public class WebsiteLocalServiceUtil {
 		int typeId, boolean primary)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		return _service.addWebsite(userId, className, classPK, url, typeId,
-			primary);
+		return getService()
+				   .addWebsite(userId, className, classPK, url, typeId, primary);
 	}
 
 	public static void deleteWebsites(long companyId,
 		java.lang.String className, long classPK)
 		throws com.liferay.portal.SystemException {
-		_service.deleteWebsites(companyId, className, classPK);
+		getService().deleteWebsites(companyId, className, classPK);
 	}
 
 	public static java.util.List<com.liferay.portal.model.Website> getWebsites()
 		throws com.liferay.portal.SystemException {
-		return _service.getWebsites();
+		return getService().getWebsites();
 	}
 
 	public static java.util.List<com.liferay.portal.model.Website> getWebsites(
 		long companyId, java.lang.String className, long classPK)
 		throws com.liferay.portal.SystemException {
-		return _service.getWebsites(companyId, className, classPK);
+		return getService().getWebsites(companyId, className, classPK);
 	}
 
 	public static com.liferay.portal.model.Website updateWebsite(
 		long websiteId, java.lang.String url, int typeId, boolean primary)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		return _service.updateWebsite(websiteId, url, typeId, primary);
+		return getService().updateWebsite(websiteId, url, typeId, primary);
 	}
 
 	public static WebsiteLocalService getService() {
+		if (_service == null) {
+			throw new RuntimeException("WebsiteLocalService is not set");
+		}
+
 		return _service;
 	}
 

@@ -165,6 +165,10 @@ public abstract class ReleaseLocalServiceBaseImpl implements ReleaseLocalService
 		return releasePersistence.update(release, false);
 	}
 
+	public Release createRelease(long releaseId) {
+		return releasePersistence.create(releaseId);
+	}
+
 	public void deleteRelease(long releaseId)
 		throws PortalException, SystemException {
 		releasePersistence.remove(releaseId);

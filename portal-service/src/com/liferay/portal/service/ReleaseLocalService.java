@@ -52,6 +52,8 @@ public interface ReleaseLocalService {
 		com.liferay.portal.model.Release release)
 		throws com.liferay.portal.SystemException;
 
+	public com.liferay.portal.model.Release createRelease(long releaseId);
+
 	public void deleteRelease(long releaseId)
 		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;

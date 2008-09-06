@@ -50,36 +50,40 @@ public class WebsiteServiceUtil {
 		int typeId, boolean primary)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
-		return _service.addWebsite(className, classPK, url, typeId, primary);
+		return getService().addWebsite(className, classPK, url, typeId, primary);
 	}
 
 	public static void deleteWebsite(long websiteId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
-		_service.deleteWebsite(websiteId);
+		getService().deleteWebsite(websiteId);
 	}
 
 	public static com.liferay.portal.model.Website getWebsite(long websiteId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
-		return _service.getWebsite(websiteId);
+		return getService().getWebsite(websiteId);
 	}
 
 	public static java.util.List<com.liferay.portal.model.Website> getWebsites(
 		java.lang.String className, long classPK)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
-		return _service.getWebsites(className, classPK);
+		return getService().getWebsites(className, classPK);
 	}
 
 	public static com.liferay.portal.model.Website updateWebsite(
 		long websiteId, java.lang.String url, int typeId, boolean primary)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
-		return _service.updateWebsite(websiteId, url, typeId, primary);
+		return getService().updateWebsite(websiteId, url, typeId, primary);
 	}
 
 	public static WebsiteService getService() {
+		if (_service == null) {
+			throw new RuntimeException("WebsiteService is not set");
+		}
+
 		return _service;
 	}
 

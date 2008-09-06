@@ -52,6 +52,8 @@ public interface UserLocalService {
 		com.liferay.portal.model.User user)
 		throws com.liferay.portal.SystemException;
 
+	public com.liferay.portal.model.User createUser(long userId);
+
 	public void deleteUser(long userId)
 		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;

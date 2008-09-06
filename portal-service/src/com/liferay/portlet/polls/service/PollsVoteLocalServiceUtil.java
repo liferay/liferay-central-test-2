@@ -48,93 +48,102 @@ public class PollsVoteLocalServiceUtil {
 	public static com.liferay.portlet.polls.model.PollsVote addPollsVote(
 		com.liferay.portlet.polls.model.PollsVote pollsVote)
 		throws com.liferay.portal.SystemException {
-		return _service.addPollsVote(pollsVote);
+		return getService().addPollsVote(pollsVote);
+	}
+
+	public static com.liferay.portlet.polls.model.PollsVote createPollsVote(
+		long voteId) {
+		return getService().createPollsVote(voteId);
 	}
 
 	public static void deletePollsVote(long voteId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		_service.deletePollsVote(voteId);
+		getService().deletePollsVote(voteId);
 	}
 
 	public static void deletePollsVote(
 		com.liferay.portlet.polls.model.PollsVote pollsVote)
 		throws com.liferay.portal.SystemException {
-		_service.deletePollsVote(pollsVote);
+		getService().deletePollsVote(pollsVote);
 	}
 
 	public static java.util.List<Object> dynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery)
 		throws com.liferay.portal.SystemException {
-		return _service.dynamicQuery(dynamicQuery);
+		return getService().dynamicQuery(dynamicQuery);
 	}
 
 	public static java.util.List<Object> dynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery, int start,
 		int end) throws com.liferay.portal.SystemException {
-		return _service.dynamicQuery(dynamicQuery, start, end);
+		return getService().dynamicQuery(dynamicQuery, start, end);
 	}
 
 	public static com.liferay.portlet.polls.model.PollsVote getPollsVote(
 		long voteId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		return _service.getPollsVote(voteId);
+		return getService().getPollsVote(voteId);
 	}
 
 	public static java.util.List<com.liferay.portlet.polls.model.PollsVote> getPollsVotes(
 		int start, int end) throws com.liferay.portal.SystemException {
-		return _service.getPollsVotes(start, end);
+		return getService().getPollsVotes(start, end);
 	}
 
 	public static int getPollsVotesCount()
 		throws com.liferay.portal.SystemException {
-		return _service.getPollsVotesCount();
+		return getService().getPollsVotesCount();
 	}
 
 	public static com.liferay.portlet.polls.model.PollsVote updatePollsVote(
 		com.liferay.portlet.polls.model.PollsVote pollsVote)
 		throws com.liferay.portal.SystemException {
-		return _service.updatePollsVote(pollsVote);
+		return getService().updatePollsVote(pollsVote);
 	}
 
 	public static com.liferay.portlet.polls.model.PollsVote addVote(
 		long userId, long questionId, long choiceId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		return _service.addVote(userId, questionId, choiceId);
+		return getService().addVote(userId, questionId, choiceId);
 	}
 
 	public static java.util.List<com.liferay.portlet.polls.model.PollsVote> getChoiceVotes(
 		long choiceId, int start, int end)
 		throws com.liferay.portal.SystemException {
-		return _service.getChoiceVotes(choiceId, start, end);
+		return getService().getChoiceVotes(choiceId, start, end);
 	}
 
 	public static int getChoiceVotesCount(long choiceId)
 		throws com.liferay.portal.SystemException {
-		return _service.getChoiceVotesCount(choiceId);
+		return getService().getChoiceVotesCount(choiceId);
 	}
 
 	public static com.liferay.portlet.polls.model.PollsVote getVote(
 		long questionId, long userId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		return _service.getVote(questionId, userId);
+		return getService().getVote(questionId, userId);
 	}
 
 	public static java.util.List<com.liferay.portlet.polls.model.PollsVote> getQuestionVotes(
 		long questionId, int start, int end)
 		throws com.liferay.portal.SystemException {
-		return _service.getQuestionVotes(questionId, start, end);
+		return getService().getQuestionVotes(questionId, start, end);
 	}
 
 	public static int getQuestionVotesCount(long questionId)
 		throws com.liferay.portal.SystemException {
-		return _service.getQuestionVotesCount(questionId);
+		return getService().getQuestionVotesCount(questionId);
 	}
 
 	public static PollsVoteLocalService getService() {
+		if (_service == null) {
+			throw new RuntimeException("PollsVoteLocalService is not set");
+		}
+
 		return _service;
 	}
 

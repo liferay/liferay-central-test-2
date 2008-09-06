@@ -96,6 +96,10 @@ public abstract class WikiPageLocalServiceBaseImpl
 		return wikiPagePersistence.update(wikiPage, false);
 	}
 
+	public WikiPage createWikiPage(long pageId) {
+		return wikiPagePersistence.create(pageId);
+	}
+
 	public void deleteWikiPage(long pageId)
 		throws PortalException, SystemException {
 		wikiPagePersistence.remove(pageId);

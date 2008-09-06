@@ -169,6 +169,10 @@ public abstract class ResourceCodeLocalServiceBaseImpl
 		return resourceCodePersistence.update(resourceCode, false);
 	}
 
+	public ResourceCode createResourceCode(long codeId) {
+		return resourceCodePersistence.create(codeId);
+	}
+
 	public void deleteResourceCode(long codeId)
 		throws PortalException, SystemException {
 		resourceCodePersistence.remove(codeId);

@@ -59,6 +59,10 @@ public abstract class AnnouncementsFlagLocalServiceBaseImpl
 		return announcementsFlagPersistence.update(announcementsFlag, false);
 	}
 
+	public AnnouncementsFlag createAnnouncementsFlag(long flagId) {
+		return announcementsFlagPersistence.create(flagId);
+	}
+
 	public void deleteAnnouncementsFlag(long flagId)
 		throws PortalException, SystemException {
 		announcementsFlagPersistence.remove(flagId);

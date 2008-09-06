@@ -48,53 +48,58 @@ public class ResourceLocalServiceUtil {
 	public static com.liferay.portal.model.Resource addResource(
 		com.liferay.portal.model.Resource resource)
 		throws com.liferay.portal.SystemException {
-		return _service.addResource(resource);
+		return getService().addResource(resource);
+	}
+
+	public static com.liferay.portal.model.Resource createResource(
+		long resourceId) {
+		return getService().createResource(resourceId);
 	}
 
 	public static void deleteResource(long resourceId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		_service.deleteResource(resourceId);
+		getService().deleteResource(resourceId);
 	}
 
 	public static void deleteResource(
 		com.liferay.portal.model.Resource resource)
 		throws com.liferay.portal.SystemException {
-		_service.deleteResource(resource);
+		getService().deleteResource(resource);
 	}
 
 	public static java.util.List<Object> dynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery)
 		throws com.liferay.portal.SystemException {
-		return _service.dynamicQuery(dynamicQuery);
+		return getService().dynamicQuery(dynamicQuery);
 	}
 
 	public static java.util.List<Object> dynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery, int start,
 		int end) throws com.liferay.portal.SystemException {
-		return _service.dynamicQuery(dynamicQuery, start, end);
+		return getService().dynamicQuery(dynamicQuery, start, end);
 	}
 
 	public static com.liferay.portal.model.Resource getResource(long resourceId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		return _service.getResource(resourceId);
+		return getService().getResource(resourceId);
 	}
 
 	public static java.util.List<com.liferay.portal.model.Resource> getResources(
 		int start, int end) throws com.liferay.portal.SystemException {
-		return _service.getResources(start, end);
+		return getService().getResources(start, end);
 	}
 
 	public static int getResourcesCount()
 		throws com.liferay.portal.SystemException {
-		return _service.getResourcesCount();
+		return getService().getResourcesCount();
 	}
 
 	public static com.liferay.portal.model.Resource updateResource(
 		com.liferay.portal.model.Resource resource)
 		throws com.liferay.portal.SystemException {
-		return _service.updateResource(resource);
+		return getService().updateResource(resource);
 	}
 
 	public static void addModelResources(long companyId, long groupId,
@@ -103,7 +108,8 @@ public class ResourceLocalServiceUtil {
 		java.lang.String[] guestPermissions)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		_service.addModelResources(companyId, groupId, userId, name, primKey,
+		getService()
+			.addModelResources(companyId, groupId, userId, name, primKey,
 			communityPermissions, guestPermissions);
 	}
 
@@ -113,21 +119,22 @@ public class ResourceLocalServiceUtil {
 		java.lang.String[] guestPermissions)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		_service.addModelResources(companyId, groupId, userId, name, primKey,
+		getService()
+			.addModelResources(companyId, groupId, userId, name, primKey,
 			communityPermissions, guestPermissions);
 	}
 
 	public static com.liferay.portal.model.Resource addResource(
 		long companyId, java.lang.String name, int scope,
 		java.lang.String primKey) throws com.liferay.portal.SystemException {
-		return _service.addResource(companyId, name, scope, primKey);
+		return getService().addResource(companyId, name, scope, primKey);
 	}
 
 	public static void addResources(long companyId, long groupId,
 		java.lang.String name, boolean portletActions)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		_service.addResources(companyId, groupId, name, portletActions);
+		getService().addResources(companyId, groupId, name, portletActions);
 	}
 
 	public static void addResources(long companyId, long groupId, long userId,
@@ -135,7 +142,8 @@ public class ResourceLocalServiceUtil {
 		boolean addCommunityPermissions, boolean addGuestPermissions)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		_service.addResources(companyId, groupId, userId, name, primKey,
+		getService()
+			.addResources(companyId, groupId, userId, name, primKey,
 			portletActions, addCommunityPermissions, addGuestPermissions);
 	}
 
@@ -145,7 +153,8 @@ public class ResourceLocalServiceUtil {
 		boolean addGuestPermissions)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		_service.addResources(companyId, groupId, userId, name, primKey,
+		getService()
+			.addResources(companyId, groupId, userId, name, primKey,
 			portletActions, addCommunityPermissions, addGuestPermissions);
 	}
 
@@ -153,29 +162,29 @@ public class ResourceLocalServiceUtil {
 		int scope, long primKey)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		_service.deleteResource(companyId, name, scope, primKey);
+		getService().deleteResource(companyId, name, scope, primKey);
 	}
 
 	public static void deleteResource(long companyId, java.lang.String name,
 		int scope, java.lang.String primKey)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		_service.deleteResource(companyId, name, scope, primKey);
+		getService().deleteResource(companyId, name, scope, primKey);
 	}
 
 	public static void deleteResources(java.lang.String name)
 		throws com.liferay.portal.SystemException {
-		_service.deleteResources(name);
+		getService().deleteResources(name);
 	}
 
 	public static long getLatestResourceId()
 		throws com.liferay.portal.SystemException {
-		return _service.getLatestResourceId();
+		return getService().getLatestResourceId();
 	}
 
 	public static java.util.List<com.liferay.portal.model.Resource> getResources()
 		throws com.liferay.portal.SystemException {
-		return _service.getResources();
+		return getService().getResources();
 	}
 
 	public static com.liferay.portal.model.Resource getResource(
@@ -183,10 +192,14 @@ public class ResourceLocalServiceUtil {
 		java.lang.String primKey)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		return _service.getResource(companyId, name, scope, primKey);
+		return getService().getResource(companyId, name, scope, primKey);
 	}
 
 	public static ResourceLocalService getService() {
+		if (_service == null) {
+			throw new RuntimeException("ResourceLocalService is not set");
+		}
+
 		return _service;
 	}
 

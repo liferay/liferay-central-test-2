@@ -52,6 +52,8 @@ public interface OrgLaborLocalService {
 		com.liferay.portal.model.OrgLabor orgLabor)
 		throws com.liferay.portal.SystemException;
 
+	public com.liferay.portal.model.OrgLabor createOrgLabor(long orgLaborId);
+
 	public void deleteOrgLabor(long orgLaborId)
 		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;

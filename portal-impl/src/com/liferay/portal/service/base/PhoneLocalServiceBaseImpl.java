@@ -167,6 +167,10 @@ public abstract class PhoneLocalServiceBaseImpl implements PhoneLocalService,
 		return phonePersistence.update(phone, false);
 	}
 
+	public Phone createPhone(long phoneId) {
+		return phonePersistence.create(phoneId);
+	}
+
 	public void deletePhone(long phoneId)
 		throws PortalException, SystemException {
 		phonePersistence.remove(phoneId);

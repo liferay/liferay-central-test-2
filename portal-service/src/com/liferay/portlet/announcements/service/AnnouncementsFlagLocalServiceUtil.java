@@ -48,81 +48,91 @@ public class AnnouncementsFlagLocalServiceUtil {
 	public static com.liferay.portlet.announcements.model.AnnouncementsFlag addAnnouncementsFlag(
 		com.liferay.portlet.announcements.model.AnnouncementsFlag announcementsFlag)
 		throws com.liferay.portal.SystemException {
-		return _service.addAnnouncementsFlag(announcementsFlag);
+		return getService().addAnnouncementsFlag(announcementsFlag);
+	}
+
+	public static com.liferay.portlet.announcements.model.AnnouncementsFlag createAnnouncementsFlag(
+		long flagId) {
+		return getService().createAnnouncementsFlag(flagId);
 	}
 
 	public static void deleteAnnouncementsFlag(long flagId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		_service.deleteAnnouncementsFlag(flagId);
+		getService().deleteAnnouncementsFlag(flagId);
 	}
 
 	public static void deleteAnnouncementsFlag(
 		com.liferay.portlet.announcements.model.AnnouncementsFlag announcementsFlag)
 		throws com.liferay.portal.SystemException {
-		_service.deleteAnnouncementsFlag(announcementsFlag);
+		getService().deleteAnnouncementsFlag(announcementsFlag);
 	}
 
 	public static java.util.List<Object> dynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery)
 		throws com.liferay.portal.SystemException {
-		return _service.dynamicQuery(dynamicQuery);
+		return getService().dynamicQuery(dynamicQuery);
 	}
 
 	public static java.util.List<Object> dynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery, int start,
 		int end) throws com.liferay.portal.SystemException {
-		return _service.dynamicQuery(dynamicQuery, start, end);
+		return getService().dynamicQuery(dynamicQuery, start, end);
 	}
 
 	public static com.liferay.portlet.announcements.model.AnnouncementsFlag getAnnouncementsFlag(
 		long flagId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		return _service.getAnnouncementsFlag(flagId);
+		return getService().getAnnouncementsFlag(flagId);
 	}
 
 	public static java.util.List<com.liferay.portlet.announcements.model.AnnouncementsFlag> getAnnouncementsFlags(
 		int start, int end) throws com.liferay.portal.SystemException {
-		return _service.getAnnouncementsFlags(start, end);
+		return getService().getAnnouncementsFlags(start, end);
 	}
 
 	public static int getAnnouncementsFlagsCount()
 		throws com.liferay.portal.SystemException {
-		return _service.getAnnouncementsFlagsCount();
+		return getService().getAnnouncementsFlagsCount();
 	}
 
 	public static com.liferay.portlet.announcements.model.AnnouncementsFlag updateAnnouncementsFlag(
 		com.liferay.portlet.announcements.model.AnnouncementsFlag announcementsFlag)
 		throws com.liferay.portal.SystemException {
-		return _service.updateAnnouncementsFlag(announcementsFlag);
+		return getService().updateAnnouncementsFlag(announcementsFlag);
 	}
 
 	public static com.liferay.portlet.announcements.model.AnnouncementsFlag addFlag(
 		long userId, long entryId, int value)
 		throws com.liferay.portal.SystemException {
-		return _service.addFlag(userId, entryId, value);
+		return getService().addFlag(userId, entryId, value);
 	}
 
 	public static com.liferay.portlet.announcements.model.AnnouncementsFlag getFlag(
 		long userId, long entryId, int value)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		return _service.getFlag(userId, entryId, value);
+		return getService().getFlag(userId, entryId, value);
 	}
 
 	public static void deleteFlag(long flagId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		_service.deleteFlag(flagId);
+		getService().deleteFlag(flagId);
 	}
 
 	public static void deleteFlags(long entryId)
 		throws com.liferay.portal.SystemException {
-		_service.deleteFlags(entryId);
+		getService().deleteFlags(entryId);
 	}
 
 	public static AnnouncementsFlagLocalService getService() {
+		if (_service == null) {
+			throw new RuntimeException(
+				"AnnouncementsFlagLocalService is not set");
+		}
+
 		return _service;
 	}
 

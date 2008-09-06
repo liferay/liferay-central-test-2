@@ -46,6 +46,10 @@ package com.liferay.portal.service;
  */
 public class AccountServiceUtil {
 	public static AccountService getService() {
+		if (_service == null) {
+			throw new RuntimeException("AccountService is not set");
+		}
+
 		return _service;
 	}
 

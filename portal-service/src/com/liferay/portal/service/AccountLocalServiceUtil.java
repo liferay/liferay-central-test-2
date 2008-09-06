@@ -48,55 +48,63 @@ public class AccountLocalServiceUtil {
 	public static com.liferay.portal.model.Account addAccount(
 		com.liferay.portal.model.Account account)
 		throws com.liferay.portal.SystemException {
-		return _service.addAccount(account);
+		return getService().addAccount(account);
+	}
+
+	public static com.liferay.portal.model.Account createAccount(long accountId) {
+		return getService().createAccount(accountId);
 	}
 
 	public static void deleteAccount(long accountId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		_service.deleteAccount(accountId);
+		getService().deleteAccount(accountId);
 	}
 
 	public static void deleteAccount(com.liferay.portal.model.Account account)
 		throws com.liferay.portal.SystemException {
-		_service.deleteAccount(account);
+		getService().deleteAccount(account);
 	}
 
 	public static java.util.List<Object> dynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery)
 		throws com.liferay.portal.SystemException {
-		return _service.dynamicQuery(dynamicQuery);
+		return getService().dynamicQuery(dynamicQuery);
 	}
 
 	public static java.util.List<Object> dynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery, int start,
 		int end) throws com.liferay.portal.SystemException {
-		return _service.dynamicQuery(dynamicQuery, start, end);
+		return getService().dynamicQuery(dynamicQuery, start, end);
 	}
 
 	public static com.liferay.portal.model.Account getAccount(long accountId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		return _service.getAccount(accountId);
+		return getService().getAccount(accountId);
 	}
 
 	public static java.util.List<com.liferay.portal.model.Account> getAccounts(
 		int start, int end) throws com.liferay.portal.SystemException {
-		return _service.getAccounts(start, end);
+		return getService().getAccounts(start, end);
 	}
 
 	public static int getAccountsCount()
 		throws com.liferay.portal.SystemException {
-		return _service.getAccountsCount();
+		return getService().getAccountsCount();
 	}
 
 	public static com.liferay.portal.model.Account updateAccount(
 		com.liferay.portal.model.Account account)
 		throws com.liferay.portal.SystemException {
-		return _service.updateAccount(account);
+		return getService().updateAccount(account);
 	}
 
 	public static AccountLocalService getService() {
+		if (_service == null) {
+			throw new RuntimeException("AccountLocalService is not set");
+		}
+
 		return _service;
 	}
 

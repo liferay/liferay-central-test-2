@@ -52,6 +52,9 @@ public interface AnnouncementsFlagLocalService {
 		com.liferay.portlet.announcements.model.AnnouncementsFlag announcementsFlag)
 		throws com.liferay.portal.SystemException;
 
+	public com.liferay.portlet.announcements.model.AnnouncementsFlag createAnnouncementsFlag(
+		long flagId);
+
 	public void deleteAnnouncementsFlag(long flagId)
 		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;

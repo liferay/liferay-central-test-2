@@ -52,6 +52,9 @@ public interface TasksProposalLocalService {
 		com.liferay.portlet.tasks.model.TasksProposal tasksProposal)
 		throws com.liferay.portal.SystemException;
 
+	public com.liferay.portlet.tasks.model.TasksProposal createTasksProposal(
+		long proposalId);
+
 	public void deleteTasksProposal(long proposalId)
 		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;

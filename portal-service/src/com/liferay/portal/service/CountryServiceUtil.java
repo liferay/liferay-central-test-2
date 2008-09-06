@@ -50,48 +50,52 @@ public class CountryServiceUtil {
 		java.lang.String number, java.lang.String idd, boolean active)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
-		return _service.addCountry(name, a2, a3, number, idd, active);
+		return getService().addCountry(name, a2, a3, number, idd, active);
 	}
 
 	public static java.util.List<com.liferay.portal.model.Country> getCountries()
 		throws com.liferay.portal.SystemException, java.rmi.RemoteException {
-		return _service.getCountries();
+		return getService().getCountries();
 	}
 
 	public static java.util.List<com.liferay.portal.model.Country> getCountries(
 		boolean active)
 		throws com.liferay.portal.SystemException, java.rmi.RemoteException {
-		return _service.getCountries(active);
+		return getService().getCountries(active);
 	}
 
 	public static com.liferay.portal.model.Country getCountry(long countryId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
-		return _service.getCountry(countryId);
+		return getService().getCountry(countryId);
 	}
 
 	public static com.liferay.portal.model.Country getCountryByA2(
 		java.lang.String a2)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
-		return _service.getCountryByA2(a2);
+		return getService().getCountryByA2(a2);
 	}
 
 	public static com.liferay.portal.model.Country getCountryByA3(
 		java.lang.String a3)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
-		return _service.getCountryByA3(a3);
+		return getService().getCountryByA3(a3);
 	}
 
 	public static com.liferay.portal.model.Country getCountryByName(
 		java.lang.String name)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
-		return _service.getCountryByName(name);
+		return getService().getCountryByName(name);
 	}
 
 	public static CountryService getService() {
+		if (_service == null) {
+			throw new RuntimeException("CountryService is not set");
+		}
+
 		return _service;
 	}
 

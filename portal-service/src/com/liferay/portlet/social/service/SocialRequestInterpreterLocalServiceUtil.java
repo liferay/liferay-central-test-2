@@ -47,33 +47,38 @@ package com.liferay.portlet.social.service;
 public class SocialRequestInterpreterLocalServiceUtil {
 	public static void addRequestInterpreter(
 		com.liferay.portlet.social.model.SocialRequestInterpreter requestInterpreter) {
-		_service.addRequestInterpreter(requestInterpreter);
+		getService().addRequestInterpreter(requestInterpreter);
 	}
 
 	public static void deleteRequestInterpreter(
 		com.liferay.portlet.social.model.SocialRequestInterpreter requestInterpreter) {
-		_service.deleteRequestInterpreter(requestInterpreter);
+		getService().deleteRequestInterpreter(requestInterpreter);
 	}
 
 	public static com.liferay.portlet.social.model.SocialRequestFeedEntry interpret(
 		com.liferay.portlet.social.model.SocialRequest request,
 		com.liferay.portal.theme.ThemeDisplay themeDisplay) {
-		return _service.interpret(request, themeDisplay);
+		return getService().interpret(request, themeDisplay);
 	}
 
 	public static void processConfirmation(
 		com.liferay.portlet.social.model.SocialRequest request,
 		com.liferay.portal.theme.ThemeDisplay themeDisplay) {
-		_service.processConfirmation(request, themeDisplay);
+		getService().processConfirmation(request, themeDisplay);
 	}
 
 	public static void processRejection(
 		com.liferay.portlet.social.model.SocialRequest request,
 		com.liferay.portal.theme.ThemeDisplay themeDisplay) {
-		_service.processRejection(request, themeDisplay);
+		getService().processRejection(request, themeDisplay);
 	}
 
 	public static SocialRequestInterpreterLocalService getService() {
+		if (_service == null) {
+			throw new RuntimeException(
+				"SocialRequestInterpreterLocalService is not set");
+		}
+
 		return _service;
 	}
 

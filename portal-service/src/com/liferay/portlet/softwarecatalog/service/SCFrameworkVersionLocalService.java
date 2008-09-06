@@ -52,6 +52,9 @@ public interface SCFrameworkVersionLocalService {
 		com.liferay.portlet.softwarecatalog.model.SCFrameworkVersion scFrameworkVersion)
 		throws com.liferay.portal.SystemException;
 
+	public com.liferay.portlet.softwarecatalog.model.SCFrameworkVersion createSCFrameworkVersion(
+		long frameworkVersionId);
+
 	public void deleteSCFrameworkVersion(long frameworkVersionId)
 		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;

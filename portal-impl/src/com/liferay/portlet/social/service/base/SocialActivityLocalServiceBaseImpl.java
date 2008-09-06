@@ -63,6 +63,10 @@ public abstract class SocialActivityLocalServiceBaseImpl
 		return socialActivityPersistence.update(socialActivity, false);
 	}
 
+	public SocialActivity createSocialActivity(long activityId) {
+		return socialActivityPersistence.create(activityId);
+	}
+
 	public void deleteSocialActivity(long activityId)
 		throws PortalException, SystemException {
 		socialActivityPersistence.remove(activityId);

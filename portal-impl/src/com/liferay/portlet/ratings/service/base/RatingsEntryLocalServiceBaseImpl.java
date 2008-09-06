@@ -65,6 +65,10 @@ public abstract class RatingsEntryLocalServiceBaseImpl
 		return ratingsEntryPersistence.update(ratingsEntry, false);
 	}
 
+	public RatingsEntry createRatingsEntry(long entryId) {
+		return ratingsEntryPersistence.create(entryId);
+	}
+
 	public void deleteRatingsEntry(long entryId)
 		throws PortalException, SystemException {
 		ratingsEntryPersistence.remove(entryId);

@@ -169,6 +169,10 @@ public abstract class UserTrackerPathLocalServiceBaseImpl
 		return userTrackerPathPersistence.update(userTrackerPath, false);
 	}
 
+	public UserTrackerPath createUserTrackerPath(long userTrackerPathId) {
+		return userTrackerPathPersistence.create(userTrackerPathId);
+	}
+
 	public void deleteUserTrackerPath(long userTrackerPathId)
 		throws PortalException, SystemException {
 		userTrackerPathPersistence.remove(userTrackerPathId);

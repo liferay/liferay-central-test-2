@@ -64,6 +64,10 @@ public abstract class DLFileVersionLocalServiceBaseImpl
 		return dlFileVersionPersistence.update(dlFileVersion, false);
 	}
 
+	public DLFileVersion createDLFileVersion(long fileVersionId) {
+		return dlFileVersionPersistence.create(fileVersionId);
+	}
+
 	public void deleteDLFileVersion(long fileVersionId)
 		throws PortalException, SystemException {
 		dlFileVersionPersistence.remove(fileVersionId);

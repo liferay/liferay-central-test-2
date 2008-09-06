@@ -48,23 +48,27 @@ public class AnnouncementsFlagServiceUtil {
 	public static void addFlag(long entryId, int value)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
-		_service.addFlag(entryId, value);
+		getService().addFlag(entryId, value);
 	}
 
 	public static com.liferay.portlet.announcements.model.AnnouncementsFlag getFlag(
 		long entryId, int value)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
-		return _service.getFlag(entryId, value);
+		return getService().getFlag(entryId, value);
 	}
 
 	public static void deleteFlag(long flagId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
-		_service.deleteFlag(flagId);
+		getService().deleteFlag(flagId);
 	}
 
 	public static AnnouncementsFlagService getService() {
+		if (_service == null) {
+			throw new RuntimeException("AnnouncementsFlagService is not set");
+		}
+
 		return _service;
 	}
 

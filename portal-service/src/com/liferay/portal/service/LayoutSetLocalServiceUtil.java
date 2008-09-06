@@ -48,88 +48,93 @@ public class LayoutSetLocalServiceUtil {
 	public static com.liferay.portal.model.LayoutSet addLayoutSet(
 		com.liferay.portal.model.LayoutSet layoutSet)
 		throws com.liferay.portal.SystemException {
-		return _service.addLayoutSet(layoutSet);
+		return getService().addLayoutSet(layoutSet);
+	}
+
+	public static com.liferay.portal.model.LayoutSet createLayoutSet(
+		long layoutSetId) {
+		return getService().createLayoutSet(layoutSetId);
 	}
 
 	public static void deleteLayoutSet(long layoutSetId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		_service.deleteLayoutSet(layoutSetId);
+		getService().deleteLayoutSet(layoutSetId);
 	}
 
 	public static void deleteLayoutSet(
 		com.liferay.portal.model.LayoutSet layoutSet)
 		throws com.liferay.portal.SystemException {
-		_service.deleteLayoutSet(layoutSet);
+		getService().deleteLayoutSet(layoutSet);
 	}
 
 	public static java.util.List<Object> dynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery)
 		throws com.liferay.portal.SystemException {
-		return _service.dynamicQuery(dynamicQuery);
+		return getService().dynamicQuery(dynamicQuery);
 	}
 
 	public static java.util.List<Object> dynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery, int start,
 		int end) throws com.liferay.portal.SystemException {
-		return _service.dynamicQuery(dynamicQuery, start, end);
+		return getService().dynamicQuery(dynamicQuery, start, end);
 	}
 
 	public static com.liferay.portal.model.LayoutSet getLayoutSet(
 		long layoutSetId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		return _service.getLayoutSet(layoutSetId);
+		return getService().getLayoutSet(layoutSetId);
 	}
 
 	public static java.util.List<com.liferay.portal.model.LayoutSet> getLayoutSets(
 		int start, int end) throws com.liferay.portal.SystemException {
-		return _service.getLayoutSets(start, end);
+		return getService().getLayoutSets(start, end);
 	}
 
 	public static int getLayoutSetsCount()
 		throws com.liferay.portal.SystemException {
-		return _service.getLayoutSetsCount();
+		return getService().getLayoutSetsCount();
 	}
 
 	public static com.liferay.portal.model.LayoutSet updateLayoutSet(
 		com.liferay.portal.model.LayoutSet layoutSet)
 		throws com.liferay.portal.SystemException {
-		return _service.updateLayoutSet(layoutSet);
+		return getService().updateLayoutSet(layoutSet);
 	}
 
 	public static com.liferay.portal.model.LayoutSet addLayoutSet(
 		long groupId, boolean privateLayout)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		return _service.addLayoutSet(groupId, privateLayout);
+		return getService().addLayoutSet(groupId, privateLayout);
 	}
 
 	public static void deleteLayoutSet(long groupId, boolean privateLayout)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		_service.deleteLayoutSet(groupId, privateLayout);
+		getService().deleteLayoutSet(groupId, privateLayout);
 	}
 
 	public static com.liferay.portal.model.LayoutSet getLayoutSet(
 		long groupId, boolean privateLayout)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		return _service.getLayoutSet(groupId, privateLayout);
+		return getService().getLayoutSet(groupId, privateLayout);
 	}
 
 	public static com.liferay.portal.model.LayoutSet getLayoutSet(
 		java.lang.String virtualHost)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		return _service.getLayoutSet(virtualHost);
+		return getService().getLayoutSet(virtualHost);
 	}
 
 	public static void updateLogo(long groupId, boolean privateLayout,
 		boolean logo, java.io.File file)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		_service.updateLogo(groupId, privateLayout, logo, file);
+		getService().updateLogo(groupId, privateLayout, logo, file);
 	}
 
 	public static com.liferay.portal.model.LayoutSet updateLookAndFeel(
@@ -137,7 +142,8 @@ public class LayoutSetLocalServiceUtil {
 		java.lang.String colorSchemeId, java.lang.String css, boolean wapTheme)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		return _service.updateLookAndFeel(groupId, privateLayout, themeId,
+		return getService()
+				   .updateLookAndFeel(groupId, privateLayout, themeId,
 			colorSchemeId, css, wapTheme);
 	}
 
@@ -145,17 +151,22 @@ public class LayoutSetLocalServiceUtil {
 		long groupId, boolean privateLayout)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		return _service.updatePageCount(groupId, privateLayout);
+		return getService().updatePageCount(groupId, privateLayout);
 	}
 
 	public static com.liferay.portal.model.LayoutSet updateVirtualHost(
 		long groupId, boolean privateLayout, java.lang.String virtualHost)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		return _service.updateVirtualHost(groupId, privateLayout, virtualHost);
+		return getService()
+				   .updateVirtualHost(groupId, privateLayout, virtualHost);
 	}
 
 	public static LayoutSetLocalService getService() {
+		if (_service == null) {
+			throw new RuntimeException("LayoutSetLocalService is not set");
+		}
+
 		return _service;
 	}
 

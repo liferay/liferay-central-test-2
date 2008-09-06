@@ -52,6 +52,9 @@ public interface UserGroupRoleLocalService {
 		com.liferay.portal.model.UserGroupRole userGroupRole)
 		throws com.liferay.portal.SystemException;
 
+	public com.liferay.portal.model.UserGroupRole createUserGroupRole(
+		com.liferay.portal.service.persistence.UserGroupRolePK userGroupRolePK);
+
 	public void deleteUserGroupRole(
 		com.liferay.portal.service.persistence.UserGroupRolePK userGroupRolePK)
 		throws com.liferay.portal.SystemException,

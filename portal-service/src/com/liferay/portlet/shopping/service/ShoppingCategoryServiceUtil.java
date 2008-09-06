@@ -51,7 +51,8 @@ public class ShoppingCategoryServiceUtil {
 		boolean addGuestPermissions)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
-		return _service.addCategory(plid, parentCategoryId, name, description,
+		return getService()
+				   .addCategory(plid, parentCategoryId, name, description,
 			addCommunityPermissions, addGuestPermissions);
 	}
 
@@ -61,21 +62,22 @@ public class ShoppingCategoryServiceUtil {
 		java.lang.String[] guestPermissions)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
-		return _service.addCategory(plid, parentCategoryId, name, description,
+		return getService()
+				   .addCategory(plid, parentCategoryId, name, description,
 			communityPermissions, guestPermissions);
 	}
 
 	public static void deleteCategory(long categoryId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
-		_service.deleteCategory(categoryId);
+		getService().deleteCategory(categoryId);
 	}
 
 	public static com.liferay.portlet.shopping.model.ShoppingCategory getCategory(
 		long categoryId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
-		return _service.getCategory(categoryId);
+		return getService().getCategory(categoryId);
 	}
 
 	public static com.liferay.portlet.shopping.model.ShoppingCategory updateCategory(
@@ -83,11 +85,16 @@ public class ShoppingCategoryServiceUtil {
 		java.lang.String description, boolean mergeWithParentCategory)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
-		return _service.updateCategory(categoryId, parentCategoryId, name,
+		return getService()
+				   .updateCategory(categoryId, parentCategoryId, name,
 			description, mergeWithParentCategory);
 	}
 
 	public static ShoppingCategoryService getService() {
+		if (_service == null) {
+			throw new RuntimeException("ShoppingCategoryService is not set");
+		}
+
 		return _service;
 	}
 

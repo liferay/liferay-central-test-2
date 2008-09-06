@@ -48,54 +48,59 @@ public class SocialRequestLocalServiceUtil {
 	public static com.liferay.portlet.social.model.SocialRequest addSocialRequest(
 		com.liferay.portlet.social.model.SocialRequest socialRequest)
 		throws com.liferay.portal.SystemException {
-		return _service.addSocialRequest(socialRequest);
+		return getService().addSocialRequest(socialRequest);
+	}
+
+	public static com.liferay.portlet.social.model.SocialRequest createSocialRequest(
+		long requestId) {
+		return getService().createSocialRequest(requestId);
 	}
 
 	public static void deleteSocialRequest(long requestId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		_service.deleteSocialRequest(requestId);
+		getService().deleteSocialRequest(requestId);
 	}
 
 	public static void deleteSocialRequest(
 		com.liferay.portlet.social.model.SocialRequest socialRequest)
 		throws com.liferay.portal.SystemException {
-		_service.deleteSocialRequest(socialRequest);
+		getService().deleteSocialRequest(socialRequest);
 	}
 
 	public static java.util.List<Object> dynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery)
 		throws com.liferay.portal.SystemException {
-		return _service.dynamicQuery(dynamicQuery);
+		return getService().dynamicQuery(dynamicQuery);
 	}
 
 	public static java.util.List<Object> dynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery, int start,
 		int end) throws com.liferay.portal.SystemException {
-		return _service.dynamicQuery(dynamicQuery, start, end);
+		return getService().dynamicQuery(dynamicQuery, start, end);
 	}
 
 	public static com.liferay.portlet.social.model.SocialRequest getSocialRequest(
 		long requestId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		return _service.getSocialRequest(requestId);
+		return getService().getSocialRequest(requestId);
 	}
 
 	public static java.util.List<com.liferay.portlet.social.model.SocialRequest> getSocialRequests(
 		int start, int end) throws com.liferay.portal.SystemException {
-		return _service.getSocialRequests(start, end);
+		return getService().getSocialRequests(start, end);
 	}
 
 	public static int getSocialRequestsCount()
 		throws com.liferay.portal.SystemException {
-		return _service.getSocialRequestsCount();
+		return getService().getSocialRequestsCount();
 	}
 
 	public static com.liferay.portlet.social.model.SocialRequest updateSocialRequest(
 		com.liferay.portlet.social.model.SocialRequest socialRequest)
 		throws com.liferay.portal.SystemException {
-		return _service.updateSocialRequest(socialRequest);
+		return getService().updateSocialRequest(socialRequest);
 	}
 
 	public static com.liferay.portlet.social.model.SocialRequest addRequest(
@@ -103,81 +108,83 @@ public class SocialRequestLocalServiceUtil {
 		int type, java.lang.String extraData, long receiverUserId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		return _service.addRequest(userId, groupId, className, classPK, type,
+		return getService()
+				   .addRequest(userId, groupId, className, classPK, type,
 			extraData, receiverUserId);
 	}
 
 	public static void deleteReceiverUserRequests(long receiverUserId)
 		throws com.liferay.portal.SystemException {
-		_service.deleteReceiverUserRequests(receiverUserId);
+		getService().deleteReceiverUserRequests(receiverUserId);
 	}
 
 	public static void deleteRequest(long requestId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		_service.deleteRequest(requestId);
+		getService().deleteRequest(requestId);
 	}
 
 	public static void deleteUserRequests(long userId)
 		throws com.liferay.portal.SystemException {
-		_service.deleteUserRequests(userId);
+		getService().deleteUserRequests(userId);
 	}
 
 	public static java.util.List<com.liferay.portlet.social.model.SocialRequest> getReceiverUserRequests(
 		long receiverUserId, int start, int end)
 		throws com.liferay.portal.SystemException {
-		return _service.getReceiverUserRequests(receiverUserId, start, end);
+		return getService().getReceiverUserRequests(receiverUserId, start, end);
 	}
 
 	public static java.util.List<com.liferay.portlet.social.model.SocialRequest> getReceiverUserRequests(
 		long receiverUserId, int status, int start, int end)
 		throws com.liferay.portal.SystemException {
-		return _service.getReceiverUserRequests(receiverUserId, status, start,
-			end);
+		return getService()
+				   .getReceiverUserRequests(receiverUserId, status, start, end);
 	}
 
 	public static int getReceiverUserRequestsCount(long receiverUserId)
 		throws com.liferay.portal.SystemException {
-		return _service.getReceiverUserRequestsCount(receiverUserId);
+		return getService().getReceiverUserRequestsCount(receiverUserId);
 	}
 
 	public static int getReceiverUserRequestsCount(long receiverUserId,
 		int status) throws com.liferay.portal.SystemException {
-		return _service.getReceiverUserRequestsCount(receiverUserId, status);
+		return getService().getReceiverUserRequestsCount(receiverUserId, status);
 	}
 
 	public static java.util.List<com.liferay.portlet.social.model.SocialRequest> getUserRequests(
 		long userId, int start, int end)
 		throws com.liferay.portal.SystemException {
-		return _service.getUserRequests(userId, start, end);
+		return getService().getUserRequests(userId, start, end);
 	}
 
 	public static java.util.List<com.liferay.portlet.social.model.SocialRequest> getUserRequests(
 		long userId, int status, int start, int end)
 		throws com.liferay.portal.SystemException {
-		return _service.getUserRequests(userId, status, start, end);
+		return getService().getUserRequests(userId, status, start, end);
 	}
 
 	public static int getUserRequestsCount(long userId)
 		throws com.liferay.portal.SystemException {
-		return _service.getUserRequestsCount(userId);
+		return getService().getUserRequestsCount(userId);
 	}
 
 	public static int getUserRequestsCount(long userId, int status)
 		throws com.liferay.portal.SystemException {
-		return _service.getUserRequestsCount(userId, status);
+		return getService().getUserRequestsCount(userId, status);
 	}
 
 	public static boolean hasRequest(long userId, java.lang.String className,
 		long classPK, int type, int status)
 		throws com.liferay.portal.SystemException {
-		return _service.hasRequest(userId, className, classPK, type, status);
+		return getService().hasRequest(userId, className, classPK, type, status);
 	}
 
 	public static boolean hasRequest(long userId, java.lang.String className,
 		long classPK, int type, long receiverUserId, int status)
 		throws com.liferay.portal.SystemException {
-		return _service.hasRequest(userId, className, classPK, type,
+		return getService()
+				   .hasRequest(userId, className, classPK, type,
 			receiverUserId, status);
 	}
 
@@ -186,10 +193,14 @@ public class SocialRequestLocalServiceUtil {
 		com.liferay.portal.theme.ThemeDisplay themeDisplay)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		return _service.updateRequest(requestId, status, themeDisplay);
+		return getService().updateRequest(requestId, status, themeDisplay);
 	}
 
 	public static SocialRequestLocalService getService() {
+		if (_service == null) {
+			throw new RuntimeException("SocialRequestLocalService is not set");
+		}
+
 		return _service;
 	}
 

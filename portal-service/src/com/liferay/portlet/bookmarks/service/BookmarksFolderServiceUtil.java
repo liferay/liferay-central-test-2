@@ -51,7 +51,8 @@ public class BookmarksFolderServiceUtil {
 		boolean addGuestPermissions)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
-		return _service.addFolder(plid, parentFolderId, name, description,
+		return getService()
+				   .addFolder(plid, parentFolderId, name, description,
 			addCommunityPermissions, addGuestPermissions);
 	}
 
@@ -61,21 +62,22 @@ public class BookmarksFolderServiceUtil {
 		java.lang.String[] guestPermissions)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
-		return _service.addFolder(plid, parentFolderId, name, description,
+		return getService()
+				   .addFolder(plid, parentFolderId, name, description,
 			communityPermissions, guestPermissions);
 	}
 
 	public static void deleteFolder(long folderId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
-		_service.deleteFolder(folderId);
+		getService().deleteFolder(folderId);
 	}
 
 	public static com.liferay.portlet.bookmarks.model.BookmarksFolder getFolder(
 		long folderId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
-		return _service.getFolder(folderId);
+		return getService().getFolder(folderId);
 	}
 
 	public static com.liferay.portlet.bookmarks.model.BookmarksFolder updateFolder(
@@ -83,11 +85,16 @@ public class BookmarksFolderServiceUtil {
 		java.lang.String description, boolean mergeWithParentFolder)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
-		return _service.updateFolder(folderId, parentFolderId, name,
-			description, mergeWithParentFolder);
+		return getService()
+				   .updateFolder(folderId, parentFolderId, name, description,
+			mergeWithParentFolder);
 	}
 
 	public static BookmarksFolderService getService() {
+		if (_service == null) {
+			throw new RuntimeException("BookmarksFolderService is not set");
+		}
+
 		return _service;
 	}
 

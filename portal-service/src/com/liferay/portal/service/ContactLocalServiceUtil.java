@@ -48,55 +48,63 @@ public class ContactLocalServiceUtil {
 	public static com.liferay.portal.model.Contact addContact(
 		com.liferay.portal.model.Contact contact)
 		throws com.liferay.portal.SystemException {
-		return _service.addContact(contact);
+		return getService().addContact(contact);
+	}
+
+	public static com.liferay.portal.model.Contact createContact(long contactId) {
+		return getService().createContact(contactId);
 	}
 
 	public static void deleteContact(long contactId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		_service.deleteContact(contactId);
+		getService().deleteContact(contactId);
 	}
 
 	public static void deleteContact(com.liferay.portal.model.Contact contact)
 		throws com.liferay.portal.SystemException {
-		_service.deleteContact(contact);
+		getService().deleteContact(contact);
 	}
 
 	public static java.util.List<Object> dynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery)
 		throws com.liferay.portal.SystemException {
-		return _service.dynamicQuery(dynamicQuery);
+		return getService().dynamicQuery(dynamicQuery);
 	}
 
 	public static java.util.List<Object> dynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery, int start,
 		int end) throws com.liferay.portal.SystemException {
-		return _service.dynamicQuery(dynamicQuery, start, end);
+		return getService().dynamicQuery(dynamicQuery, start, end);
 	}
 
 	public static com.liferay.portal.model.Contact getContact(long contactId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		return _service.getContact(contactId);
+		return getService().getContact(contactId);
 	}
 
 	public static java.util.List<com.liferay.portal.model.Contact> getContacts(
 		int start, int end) throws com.liferay.portal.SystemException {
-		return _service.getContacts(start, end);
+		return getService().getContacts(start, end);
 	}
 
 	public static int getContactsCount()
 		throws com.liferay.portal.SystemException {
-		return _service.getContactsCount();
+		return getService().getContactsCount();
 	}
 
 	public static com.liferay.portal.model.Contact updateContact(
 		com.liferay.portal.model.Contact contact)
 		throws com.liferay.portal.SystemException {
-		return _service.updateContact(contact);
+		return getService().updateContact(contact);
 	}
 
 	public static ContactLocalService getService() {
+		if (_service == null) {
+			throw new RuntimeException("ContactLocalService is not set");
+		}
+
 		return _service;
 	}
 

@@ -74,6 +74,10 @@ public abstract class MBStatsUserLocalServiceBaseImpl
 		return mbStatsUserPersistence.update(mbStatsUser, false);
 	}
 
+	public MBStatsUser createMBStatsUser(long statsUserId) {
+		return mbStatsUserPersistence.create(statsUserId);
+	}
+
 	public void deleteMBStatsUser(long statsUserId)
 		throws PortalException, SystemException {
 		mbStatsUserPersistence.remove(statsUserId);

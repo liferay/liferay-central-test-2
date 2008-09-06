@@ -61,6 +61,10 @@ public abstract class ExpandoValueLocalServiceBaseImpl
 		return expandoValuePersistence.update(expandoValue, false);
 	}
 
+	public ExpandoValue createExpandoValue(long valueId) {
+		return expandoValuePersistence.create(valueId);
+	}
+
 	public void deleteExpandoValue(long valueId)
 		throws PortalException, SystemException {
 		expandoValuePersistence.remove(valueId);

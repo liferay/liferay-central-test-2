@@ -48,71 +48,79 @@ public class ReleaseLocalServiceUtil {
 	public static com.liferay.portal.model.Release addRelease(
 		com.liferay.portal.model.Release release)
 		throws com.liferay.portal.SystemException {
-		return _service.addRelease(release);
+		return getService().addRelease(release);
+	}
+
+	public static com.liferay.portal.model.Release createRelease(long releaseId) {
+		return getService().createRelease(releaseId);
 	}
 
 	public static void deleteRelease(long releaseId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		_service.deleteRelease(releaseId);
+		getService().deleteRelease(releaseId);
 	}
 
 	public static void deleteRelease(com.liferay.portal.model.Release release)
 		throws com.liferay.portal.SystemException {
-		_service.deleteRelease(release);
+		getService().deleteRelease(release);
 	}
 
 	public static java.util.List<Object> dynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery)
 		throws com.liferay.portal.SystemException {
-		return _service.dynamicQuery(dynamicQuery);
+		return getService().dynamicQuery(dynamicQuery);
 	}
 
 	public static java.util.List<Object> dynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery, int start,
 		int end) throws com.liferay.portal.SystemException {
-		return _service.dynamicQuery(dynamicQuery, start, end);
+		return getService().dynamicQuery(dynamicQuery, start, end);
 	}
 
 	public static com.liferay.portal.model.Release getRelease(long releaseId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		return _service.getRelease(releaseId);
+		return getService().getRelease(releaseId);
 	}
 
 	public static java.util.List<com.liferay.portal.model.Release> getReleases(
 		int start, int end) throws com.liferay.portal.SystemException {
-		return _service.getReleases(start, end);
+		return getService().getReleases(start, end);
 	}
 
 	public static int getReleasesCount()
 		throws com.liferay.portal.SystemException {
-		return _service.getReleasesCount();
+		return getService().getReleasesCount();
 	}
 
 	public static com.liferay.portal.model.Release updateRelease(
 		com.liferay.portal.model.Release release)
 		throws com.liferay.portal.SystemException {
-		return _service.updateRelease(release);
+		return getService().updateRelease(release);
 	}
 
 	public static int getBuildNumberOrCreate()
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		return _service.getBuildNumberOrCreate();
+		return getService().getBuildNumberOrCreate();
 	}
 
 	public static com.liferay.portal.model.Release getRelease()
 		throws com.liferay.portal.SystemException {
-		return _service.getRelease();
+		return getService().getRelease();
 	}
 
 	public static com.liferay.portal.model.Release updateRelease(
 		boolean verified) throws com.liferay.portal.SystemException {
-		return _service.updateRelease(verified);
+		return getService().updateRelease(verified);
 	}
 
 	public static ReleaseLocalService getService() {
+		if (_service == null) {
+			throw new RuntimeException("ReleaseLocalService is not set");
+		}
+
 		return _service;
 	}
 

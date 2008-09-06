@@ -49,31 +49,35 @@ public class UserGroupRoleServiceUtil {
 		long[] roleIds)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
-		_service.addUserGroupRoles(userId, groupId, roleIds);
+		getService().addUserGroupRoles(userId, groupId, roleIds);
 	}
 
 	public static void addUserGroupRoles(long[] userIds, long groupId,
 		long roleId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
-		_service.addUserGroupRoles(userIds, groupId, roleId);
+		getService().addUserGroupRoles(userIds, groupId, roleId);
 	}
 
 	public static void deleteUserGroupRoles(long userId, long groupId,
 		long[] roleIds)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
-		_service.deleteUserGroupRoles(userId, groupId, roleIds);
+		getService().deleteUserGroupRoles(userId, groupId, roleIds);
 	}
 
 	public static void deleteUserGroupRoles(long[] userIds, long groupId,
 		long roleId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
-		_service.deleteUserGroupRoles(userIds, groupId, roleId);
+		getService().deleteUserGroupRoles(userIds, groupId, roleId);
 	}
 
 	public static UserGroupRoleService getService() {
+		if (_service == null) {
+			throw new RuntimeException("UserGroupRoleService is not set");
+		}
+
 		return _service;
 	}
 

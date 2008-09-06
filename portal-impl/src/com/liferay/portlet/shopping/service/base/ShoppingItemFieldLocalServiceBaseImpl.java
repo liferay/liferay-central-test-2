@@ -70,6 +70,10 @@ public abstract class ShoppingItemFieldLocalServiceBaseImpl
 		return shoppingItemFieldPersistence.update(shoppingItemField, false);
 	}
 
+	public ShoppingItemField createShoppingItemField(long itemFieldId) {
+		return shoppingItemFieldPersistence.create(itemFieldId);
+	}
+
 	public void deleteShoppingItemField(long itemFieldId)
 		throws PortalException, SystemException {
 		shoppingItemFieldPersistence.remove(itemFieldId);

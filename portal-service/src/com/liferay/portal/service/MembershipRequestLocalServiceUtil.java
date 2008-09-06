@@ -48,93 +48,104 @@ public class MembershipRequestLocalServiceUtil {
 	public static com.liferay.portal.model.MembershipRequest addMembershipRequest(
 		com.liferay.portal.model.MembershipRequest membershipRequest)
 		throws com.liferay.portal.SystemException {
-		return _service.addMembershipRequest(membershipRequest);
+		return getService().addMembershipRequest(membershipRequest);
+	}
+
+	public static com.liferay.portal.model.MembershipRequest createMembershipRequest(
+		long membershipRequestId) {
+		return getService().createMembershipRequest(membershipRequestId);
 	}
 
 	public static void deleteMembershipRequest(long membershipRequestId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		_service.deleteMembershipRequest(membershipRequestId);
+		getService().deleteMembershipRequest(membershipRequestId);
 	}
 
 	public static void deleteMembershipRequest(
 		com.liferay.portal.model.MembershipRequest membershipRequest)
 		throws com.liferay.portal.SystemException {
-		_service.deleteMembershipRequest(membershipRequest);
+		getService().deleteMembershipRequest(membershipRequest);
 	}
 
 	public static java.util.List<Object> dynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery)
 		throws com.liferay.portal.SystemException {
-		return _service.dynamicQuery(dynamicQuery);
+		return getService().dynamicQuery(dynamicQuery);
 	}
 
 	public static java.util.List<Object> dynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery, int start,
 		int end) throws com.liferay.portal.SystemException {
-		return _service.dynamicQuery(dynamicQuery, start, end);
+		return getService().dynamicQuery(dynamicQuery, start, end);
 	}
 
 	public static com.liferay.portal.model.MembershipRequest getMembershipRequest(
 		long membershipRequestId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		return _service.getMembershipRequest(membershipRequestId);
+		return getService().getMembershipRequest(membershipRequestId);
 	}
 
 	public static java.util.List<com.liferay.portal.model.MembershipRequest> getMembershipRequests(
 		int start, int end) throws com.liferay.portal.SystemException {
-		return _service.getMembershipRequests(start, end);
+		return getService().getMembershipRequests(start, end);
 	}
 
 	public static int getMembershipRequestsCount()
 		throws com.liferay.portal.SystemException {
-		return _service.getMembershipRequestsCount();
+		return getService().getMembershipRequestsCount();
 	}
 
 	public static com.liferay.portal.model.MembershipRequest updateMembershipRequest(
 		com.liferay.portal.model.MembershipRequest membershipRequest)
 		throws com.liferay.portal.SystemException {
-		return _service.updateMembershipRequest(membershipRequest);
+		return getService().updateMembershipRequest(membershipRequest);
 	}
 
 	public static com.liferay.portal.model.MembershipRequest addMembershipRequest(
 		long userId, long groupId, java.lang.String comments)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		return _service.addMembershipRequest(userId, groupId, comments);
+		return getService().addMembershipRequest(userId, groupId, comments);
 	}
 
 	public static void deleteMembershipRequests(long groupId)
 		throws com.liferay.portal.SystemException {
-		_service.deleteMembershipRequests(groupId);
+		getService().deleteMembershipRequests(groupId);
 	}
 
 	public static void deleteMembershipRequests(long groupId, int statusId)
 		throws com.liferay.portal.SystemException {
-		_service.deleteMembershipRequests(groupId, statusId);
+		getService().deleteMembershipRequests(groupId, statusId);
 	}
 
 	public static java.util.List<com.liferay.portal.model.MembershipRequest> search(
 		long groupId, int status, int start, int end)
 		throws com.liferay.portal.SystemException {
-		return _service.search(groupId, status, start, end);
+		return getService().search(groupId, status, start, end);
 	}
 
 	public static int searchCount(long groupId, int status)
 		throws com.liferay.portal.SystemException {
-		return _service.searchCount(groupId, status);
+		return getService().searchCount(groupId, status);
 	}
 
 	public static void updateStatus(long replierUserId,
 		long membershipRequestId, java.lang.String replyComments, int statusId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		_service.updateStatus(replierUserId, membershipRequestId,
-			replyComments, statusId);
+		getService()
+			.updateStatus(replierUserId, membershipRequestId, replyComments,
+			statusId);
 	}
 
 	public static MembershipRequestLocalService getService() {
+		if (_service == null) {
+			throw new RuntimeException(
+				"MembershipRequestLocalService is not set");
+		}
+
 		return _service;
 	}
 

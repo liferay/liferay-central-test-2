@@ -52,6 +52,9 @@ public interface JournalFeedLocalService {
 		com.liferay.portlet.journal.model.JournalFeed journalFeed)
 		throws com.liferay.portal.SystemException;
 
+	public com.liferay.portlet.journal.model.JournalFeed createJournalFeed(
+		long id);
+
 	public void deleteJournalFeed(long id)
 		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;

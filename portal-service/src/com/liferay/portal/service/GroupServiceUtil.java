@@ -50,7 +50,8 @@ public class GroupServiceUtil {
 		java.lang.String friendlyURL, boolean active)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
-		return _service.addGroup(name, description, type, friendlyURL, active);
+		return getService()
+				   .addGroup(name, description, type, friendlyURL, active);
 	}
 
 	public static com.liferay.portal.model.Group addGroup(long liveGroupId,
@@ -58,82 +59,84 @@ public class GroupServiceUtil {
 		java.lang.String friendlyURL, boolean active)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
-		return _service.addGroup(liveGroupId, name, description, type,
-			friendlyURL, active);
+		return getService()
+				   .addGroup(liveGroupId, name, description, type, friendlyURL,
+			active);
 	}
 
 	public static void addRoleGroups(long roleId, long[] groupIds)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
-		_service.addRoleGroups(roleId, groupIds);
+		getService().addRoleGroups(roleId, groupIds);
 	}
 
 	public static void deleteGroup(long groupId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
-		_service.deleteGroup(groupId);
+		getService().deleteGroup(groupId);
 	}
 
 	public static com.liferay.portal.model.Group getGroup(long groupId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
-		return _service.getGroup(groupId);
+		return getService().getGroup(groupId);
 	}
 
 	public static com.liferay.portal.model.Group getGroup(long companyId,
 		java.lang.String name)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
-		return _service.getGroup(companyId, name);
+		return getService().getGroup(companyId, name);
 	}
 
 	public static java.util.List<com.liferay.portal.model.Group> getOrganizationsGroups(
 		java.util.List<com.liferay.portal.model.Organization> organizations)
 		throws java.rmi.RemoteException {
-		return _service.getOrganizationsGroups(organizations);
+		return getService().getOrganizationsGroups(organizations);
 	}
 
 	public static java.util.List<com.liferay.portal.model.Group> getUserGroupsGroups(
 		java.util.List<com.liferay.portal.model.UserGroup> userGroups)
 		throws java.rmi.RemoteException {
-		return _service.getUserGroupsGroups(userGroups);
+		return getService().getUserGroupsGroups(userGroups);
 	}
 
 	public static boolean hasUserGroup(long userId, long groupId)
 		throws com.liferay.portal.SystemException, java.rmi.RemoteException {
-		return _service.hasUserGroup(userId, groupId);
+		return getService().hasUserGroup(userId, groupId);
 	}
 
 	public static java.util.List<com.liferay.portal.model.Group> search(
 		long companyId, java.lang.String name, java.lang.String description,
 		java.lang.String[] params, int start, int end)
 		throws com.liferay.portal.SystemException, java.rmi.RemoteException {
-		return _service.search(companyId, name, description, params, start, end);
+		return getService()
+				   .search(companyId, name, description, params, start, end);
 	}
 
 	public static int searchCount(long companyId, java.lang.String name,
 		java.lang.String description, java.lang.String[] params)
 		throws com.liferay.portal.SystemException, java.rmi.RemoteException {
-		return _service.searchCount(companyId, name, description, params);
+		return getService().searchCount(companyId, name, description, params);
 	}
 
 	public static void setRoleGroups(long roleId, long[] groupIds)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
-		_service.setRoleGroups(roleId, groupIds);
+		getService().setRoleGroups(roleId, groupIds);
 	}
 
 	public static void unsetRoleGroups(long roleId, long[] groupIds)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
-		_service.unsetRoleGroups(roleId, groupIds);
+		getService().unsetRoleGroups(roleId, groupIds);
 	}
 
 	public static com.liferay.portal.model.Group updateFriendlyURL(
 		long groupId, java.lang.String friendlyURL)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
-		return _service.updateFriendlyURL(groupId, friendlyURL);
+		return getService().updateFriendlyURL(groupId, friendlyURL);
 	}
 
 	public static com.liferay.portal.model.Group updateGroup(long groupId,
@@ -141,15 +144,16 @@ public class GroupServiceUtil {
 		java.lang.String friendlyURL, boolean active)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
-		return _service.updateGroup(groupId, name, description, type,
-			friendlyURL, active);
+		return getService()
+				   .updateGroup(groupId, name, description, type, friendlyURL,
+			active);
 	}
 
 	public static com.liferay.portal.model.Group updateGroup(long groupId,
 		java.lang.String typeSettings)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
-		return _service.updateGroup(groupId, typeSettings);
+		return getService().updateGroup(groupId, typeSettings);
 	}
 
 	public static com.liferay.portal.model.Group updateWorkflow(long groupId,
@@ -157,11 +161,16 @@ public class GroupServiceUtil {
 		java.lang.String workflowRoleNames)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
-		return _service.updateWorkflow(groupId, workflowEnabled,
-			workflowStages, workflowRoleNames);
+		return getService()
+				   .updateWorkflow(groupId, workflowEnabled, workflowStages,
+			workflowRoleNames);
 	}
 
 	public static GroupService getService() {
+		if (_service == null) {
+			throw new RuntimeException("GroupService is not set");
+		}
+
 		return _service;
 	}
 

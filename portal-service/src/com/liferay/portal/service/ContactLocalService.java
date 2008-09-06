@@ -52,6 +52,8 @@ public interface ContactLocalService {
 		com.liferay.portal.model.Contact contact)
 		throws com.liferay.portal.SystemException;
 
+	public com.liferay.portal.model.Contact createContact(long contactId);
+
 	public void deleteContact(long contactId)
 		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;

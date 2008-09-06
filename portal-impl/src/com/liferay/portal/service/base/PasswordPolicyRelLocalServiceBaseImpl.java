@@ -169,6 +169,10 @@ public abstract class PasswordPolicyRelLocalServiceBaseImpl
 		return passwordPolicyRelPersistence.update(passwordPolicyRel, false);
 	}
 
+	public PasswordPolicyRel createPasswordPolicyRel(long passwordPolicyRelId) {
+		return passwordPolicyRelPersistence.create(passwordPolicyRelId);
+	}
+
 	public void deletePasswordPolicyRel(long passwordPolicyRelId)
 		throws PortalException, SystemException {
 		passwordPolicyRelPersistence.remove(passwordPolicyRelId);

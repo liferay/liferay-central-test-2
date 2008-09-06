@@ -80,6 +80,10 @@ public abstract class ShoppingCategoryLocalServiceBaseImpl
 		return shoppingCategoryPersistence.update(shoppingCategory, false);
 	}
 
+	public ShoppingCategory createShoppingCategory(long categoryId) {
+		return shoppingCategoryPersistence.create(categoryId);
+	}
+
 	public void deleteShoppingCategory(long categoryId)
 		throws PortalException, SystemException {
 		shoppingCategoryPersistence.remove(categoryId);

@@ -52,6 +52,9 @@ public interface PortletItemLocalService {
 		com.liferay.portal.model.PortletItem portletItem)
 		throws com.liferay.portal.SystemException;
 
+	public com.liferay.portal.model.PortletItem createPortletItem(
+		long portletItemId);
+
 	public void deletePortletItem(long portletItemId)
 		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;

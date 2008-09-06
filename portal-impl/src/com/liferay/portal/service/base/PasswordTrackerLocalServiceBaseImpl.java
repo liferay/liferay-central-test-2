@@ -169,6 +169,10 @@ public abstract class PasswordTrackerLocalServiceBaseImpl
 		return passwordTrackerPersistence.update(passwordTracker, false);
 	}
 
+	public PasswordTracker createPasswordTracker(long passwordTrackerId) {
+		return passwordTrackerPersistence.create(passwordTrackerId);
+	}
+
 	public void deletePasswordTracker(long passwordTrackerId)
 		throws PortalException, SystemException {
 		passwordTrackerPersistence.remove(passwordTrackerId);

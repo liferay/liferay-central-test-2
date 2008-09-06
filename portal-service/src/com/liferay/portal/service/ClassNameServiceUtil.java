@@ -49,16 +49,20 @@ public class ClassNameServiceUtil {
 		long classNameId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
-		return _service.getClassName(classNameId);
+		return getService().getClassName(classNameId);
 	}
 
 	public static com.liferay.portal.model.ClassName getClassName(
 		java.lang.String value)
 		throws com.liferay.portal.SystemException, java.rmi.RemoteException {
-		return _service.getClassName(value);
+		return getService().getClassName(value);
 	}
 
 	public static ClassNameService getService() {
+		if (_service == null) {
+			throw new RuntimeException("ClassNameService is not set");
+		}
+
 		return _service;
 	}
 

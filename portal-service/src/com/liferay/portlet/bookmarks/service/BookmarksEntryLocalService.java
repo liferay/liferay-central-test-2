@@ -52,6 +52,9 @@ public interface BookmarksEntryLocalService {
 		com.liferay.portlet.bookmarks.model.BookmarksEntry bookmarksEntry)
 		throws com.liferay.portal.SystemException;
 
+	public com.liferay.portlet.bookmarks.model.BookmarksEntry createBookmarksEntry(
+		long entryId);
+
 	public void deleteBookmarksEntry(long entryId)
 		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;

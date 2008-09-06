@@ -72,6 +72,10 @@ public abstract class CalEventLocalServiceBaseImpl
 		return calEventPersistence.update(calEvent, false);
 	}
 
+	public CalEvent createCalEvent(long eventId) {
+		return calEventPersistence.create(eventId);
+	}
+
 	public void deleteCalEvent(long eventId)
 		throws PortalException, SystemException {
 		calEventPersistence.remove(eventId);

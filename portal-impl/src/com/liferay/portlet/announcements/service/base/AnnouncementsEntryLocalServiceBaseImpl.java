@@ -88,6 +88,10 @@ public abstract class AnnouncementsEntryLocalServiceBaseImpl
 		return announcementsEntryPersistence.update(announcementsEntry, false);
 	}
 
+	public AnnouncementsEntry createAnnouncementsEntry(long entryId) {
+		return announcementsEntryPersistence.create(entryId);
+	}
+
 	public void deleteAnnouncementsEntry(long entryId)
 		throws PortalException, SystemException {
 		announcementsEntryPersistence.remove(entryId);

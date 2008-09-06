@@ -52,6 +52,9 @@ public interface UserTrackerPathLocalService {
 		com.liferay.portal.model.UserTrackerPath userTrackerPath)
 		throws com.liferay.portal.SystemException;
 
+	public com.liferay.portal.model.UserTrackerPath createUserTrackerPath(
+		long userTrackerPathId);
+
 	public void deleteUserTrackerPath(long userTrackerPathId)
 		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;

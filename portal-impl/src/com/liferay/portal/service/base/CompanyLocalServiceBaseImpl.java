@@ -167,6 +167,10 @@ public abstract class CompanyLocalServiceBaseImpl implements CompanyLocalService
 		return companyPersistence.update(company, false);
 	}
 
+	public Company createCompany(long companyId) {
+		return companyPersistence.create(companyId);
+	}
+
 	public void deleteCompany(long companyId)
 		throws PortalException, SystemException {
 		companyPersistence.remove(companyId);

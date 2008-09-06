@@ -47,21 +47,26 @@ package com.liferay.portlet.social.service;
 public class SocialActivityInterpreterLocalServiceUtil {
 	public static void addActivityInterpreter(
 		com.liferay.portlet.social.model.SocialActivityInterpreter activityInterpreter) {
-		_service.addActivityInterpreter(activityInterpreter);
+		getService().addActivityInterpreter(activityInterpreter);
 	}
 
 	public static void deleteActivityInterpreter(
 		com.liferay.portlet.social.model.SocialActivityInterpreter activityInterpreter) {
-		_service.deleteActivityInterpreter(activityInterpreter);
+		getService().deleteActivityInterpreter(activityInterpreter);
 	}
 
 	public static com.liferay.portlet.social.model.SocialActivityFeedEntry interpret(
 		com.liferay.portlet.social.model.SocialActivity activity,
 		com.liferay.portal.theme.ThemeDisplay themeDisplay) {
-		return _service.interpret(activity, themeDisplay);
+		return getService().interpret(activity, themeDisplay);
 	}
 
 	public static SocialActivityInterpreterLocalService getService() {
+		if (_service == null) {
+			throw new RuntimeException(
+				"SocialActivityInterpreterLocalService is not set");
+		}
+
 		return _service;
 	}
 

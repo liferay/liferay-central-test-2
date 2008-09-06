@@ -52,6 +52,9 @@ public interface PollsQuestionLocalService {
 		com.liferay.portlet.polls.model.PollsQuestion pollsQuestion)
 		throws com.liferay.portal.SystemException;
 
+	public com.liferay.portlet.polls.model.PollsQuestion createPollsQuestion(
+		long questionId);
+
 	public void deletePollsQuestion(long questionId)
 		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;

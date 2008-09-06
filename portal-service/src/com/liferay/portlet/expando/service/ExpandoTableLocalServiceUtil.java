@@ -48,168 +48,177 @@ public class ExpandoTableLocalServiceUtil {
 	public static com.liferay.portlet.expando.model.ExpandoTable addExpandoTable(
 		com.liferay.portlet.expando.model.ExpandoTable expandoTable)
 		throws com.liferay.portal.SystemException {
-		return _service.addExpandoTable(expandoTable);
+		return getService().addExpandoTable(expandoTable);
+	}
+
+	public static com.liferay.portlet.expando.model.ExpandoTable createExpandoTable(
+		long tableId) {
+		return getService().createExpandoTable(tableId);
 	}
 
 	public static void deleteExpandoTable(long tableId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		_service.deleteExpandoTable(tableId);
+		getService().deleteExpandoTable(tableId);
 	}
 
 	public static void deleteExpandoTable(
 		com.liferay.portlet.expando.model.ExpandoTable expandoTable)
 		throws com.liferay.portal.SystemException {
-		_service.deleteExpandoTable(expandoTable);
+		getService().deleteExpandoTable(expandoTable);
 	}
 
 	public static java.util.List<Object> dynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery)
 		throws com.liferay.portal.SystemException {
-		return _service.dynamicQuery(dynamicQuery);
+		return getService().dynamicQuery(dynamicQuery);
 	}
 
 	public static java.util.List<Object> dynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery, int start,
 		int end) throws com.liferay.portal.SystemException {
-		return _service.dynamicQuery(dynamicQuery, start, end);
+		return getService().dynamicQuery(dynamicQuery, start, end);
 	}
 
 	public static com.liferay.portlet.expando.model.ExpandoTable getExpandoTable(
 		long tableId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		return _service.getExpandoTable(tableId);
+		return getService().getExpandoTable(tableId);
 	}
 
 	public static java.util.List<com.liferay.portlet.expando.model.ExpandoTable> getExpandoTables(
 		int start, int end) throws com.liferay.portal.SystemException {
-		return _service.getExpandoTables(start, end);
+		return getService().getExpandoTables(start, end);
 	}
 
 	public static int getExpandoTablesCount()
 		throws com.liferay.portal.SystemException {
-		return _service.getExpandoTablesCount();
+		return getService().getExpandoTablesCount();
 	}
 
 	public static com.liferay.portlet.expando.model.ExpandoTable updateExpandoTable(
 		com.liferay.portlet.expando.model.ExpandoTable expandoTable)
 		throws com.liferay.portal.SystemException {
-		return _service.updateExpandoTable(expandoTable);
+		return getService().updateExpandoTable(expandoTable);
 	}
 
 	public static com.liferay.portlet.expando.model.ExpandoTable addDefaultTable(
 		java.lang.String className)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		return _service.addDefaultTable(className);
+		return getService().addDefaultTable(className);
 	}
 
 	public static com.liferay.portlet.expando.model.ExpandoTable addDefaultTable(
 		long classNameId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		return _service.addDefaultTable(classNameId);
+		return getService().addDefaultTable(classNameId);
 	}
 
 	public static com.liferay.portlet.expando.model.ExpandoTable addTable(
 		java.lang.String className, java.lang.String name)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		return _service.addTable(className, name);
+		return getService().addTable(className, name);
 	}
 
 	public static com.liferay.portlet.expando.model.ExpandoTable addTable(
 		long classNameId, java.lang.String name)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		return _service.addTable(classNameId, name);
+		return getService().addTable(classNameId, name);
 	}
 
 	public static void deleteTable(long tableId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		_service.deleteTable(tableId);
+		getService().deleteTable(tableId);
 	}
 
 	public static void deleteTable(java.lang.String className,
 		java.lang.String name)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		_service.deleteTable(className, name);
+		getService().deleteTable(className, name);
 	}
 
 	public static void deleteTable(long classNameId, java.lang.String name)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		_service.deleteTable(classNameId, name);
+		getService().deleteTable(classNameId, name);
 	}
 
 	public static void deleteTables(java.lang.String className)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		_service.deleteTables(className);
+		getService().deleteTables(className);
 	}
 
 	public static void deleteTables(long classNameId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		_service.deleteTables(classNameId);
+		getService().deleteTables(classNameId);
 	}
 
 	public static com.liferay.portlet.expando.model.ExpandoTable getDefaultTable(
 		java.lang.String className)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		return _service.getDefaultTable(className);
+		return getService().getDefaultTable(className);
 	}
 
 	public static com.liferay.portlet.expando.model.ExpandoTable getDefaultTable(
 		long classNameId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		return _service.getDefaultTable(classNameId);
+		return getService().getDefaultTable(classNameId);
 	}
 
 	public static com.liferay.portlet.expando.model.ExpandoTable getTable(
 		long tableId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		return _service.getTable(tableId);
+		return getService().getTable(tableId);
 	}
 
 	public static com.liferay.portlet.expando.model.ExpandoTable getTable(
 		java.lang.String className, java.lang.String name)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		return _service.getTable(className, name);
+		return getService().getTable(className, name);
 	}
 
 	public static com.liferay.portlet.expando.model.ExpandoTable getTable(
 		long classNameId, java.lang.String name)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		return _service.getTable(classNameId, name);
+		return getService().getTable(classNameId, name);
 	}
 
 	public static java.util.List<com.liferay.portlet.expando.model.ExpandoTable> getTables(
 		java.lang.String className) throws com.liferay.portal.SystemException {
-		return _service.getTables(className);
+		return getService().getTables(className);
 	}
 
 	public static java.util.List<com.liferay.portlet.expando.model.ExpandoTable> getTables(
 		long classNameId) throws com.liferay.portal.SystemException {
-		return _service.getTables(classNameId);
+		return getService().getTables(classNameId);
 	}
 
 	public static com.liferay.portlet.expando.model.ExpandoTable updateTable(
 		long tableId, java.lang.String name)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		return _service.updateTable(tableId, name);
+		return getService().updateTable(tableId, name);
 	}
 
 	public static ExpandoTableLocalService getService() {
+		if (_service == null) {
+			throw new RuntimeException("ExpandoTableLocalService is not set");
+		}
+
 		return _service;
 	}
 

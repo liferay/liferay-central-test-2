@@ -52,6 +52,9 @@ public interface TasksReviewLocalService {
 		com.liferay.portlet.tasks.model.TasksReview tasksReview)
 		throws com.liferay.portal.SystemException;
 
+	public com.liferay.portlet.tasks.model.TasksReview createTasksReview(
+		long reviewId);
+
 	public void deleteTasksReview(long reviewId)
 		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;

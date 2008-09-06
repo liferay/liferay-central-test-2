@@ -52,9 +52,9 @@ public class IGImageServiceUtil {
 		boolean addGuestPermissions)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
-		return _service.addImage(folderId, name, description, file,
-			contentType, tagsEntries, addCommunityPermissions,
-			addGuestPermissions);
+		return getService()
+				   .addImage(folderId, name, description, file, contentType,
+			tagsEntries, addCommunityPermissions, addGuestPermissions);
 	}
 
 	public static com.liferay.portlet.imagegallery.model.IGImage addImage(
@@ -65,21 +65,23 @@ public class IGImageServiceUtil {
 		java.lang.String[] guestPermissions)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
-		return _service.addImage(folderId, name, description, file,
-			contentType, tagsEntries, communityPermissions, guestPermissions);
+		return getService()
+				   .addImage(folderId, name, description, file, contentType,
+			tagsEntries, communityPermissions, guestPermissions);
 	}
 
 	public static void deleteImage(long imageId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
-		_service.deleteImage(imageId);
+		getService().deleteImage(imageId);
 	}
 
 	public static void deleteImageByFolderIdAndNameWithExtension(
 		long folderId, java.lang.String nameWithExtension)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
-		_service.deleteImageByFolderIdAndNameWithExtension(folderId,
+		getService()
+			.deleteImageByFolderIdAndNameWithExtension(folderId,
 			nameWithExtension);
 	}
 
@@ -87,14 +89,15 @@ public class IGImageServiceUtil {
 		long imageId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
-		return _service.getImage(imageId);
+		return getService().getImage(imageId);
 	}
 
 	public static com.liferay.portlet.imagegallery.model.IGImage getImageByFolderIdAndNameWithExtension(
 		long folderId, java.lang.String nameWithExtension)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
-		return _service.getImageByFolderIdAndNameWithExtension(folderId,
+		return getService()
+				   .getImageByFolderIdAndNameWithExtension(folderId,
 			nameWithExtension);
 	}
 
@@ -102,21 +105,21 @@ public class IGImageServiceUtil {
 		long largeImageId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
-		return _service.getImageByLargeImageId(largeImageId);
+		return getService().getImageByLargeImageId(largeImageId);
 	}
 
 	public static com.liferay.portlet.imagegallery.model.IGImage getImageBySmallImageId(
 		long smallImageId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
-		return _service.getImageBySmallImageId(smallImageId);
+		return getService().getImageBySmallImageId(smallImageId);
 	}
 
 	public static java.util.List<com.liferay.portlet.imagegallery.model.IGImage> getImages(
 		long folderId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
-		return _service.getImages(folderId);
+		return getService().getImages(folderId);
 	}
 
 	public static com.liferay.portlet.imagegallery.model.IGImage updateImage(
@@ -125,11 +128,16 @@ public class IGImageServiceUtil {
 		java.lang.String contentType, java.lang.String[] tagsEntries)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
-		return _service.updateImage(imageId, folderId, name, description, file,
+		return getService()
+				   .updateImage(imageId, folderId, name, description, file,
 			contentType, tagsEntries);
 	}
 
 	public static IGImageService getService() {
+		if (_service == null) {
+			throw new RuntimeException("IGImageService is not set");
+		}
+
 		return _service;
 	}
 

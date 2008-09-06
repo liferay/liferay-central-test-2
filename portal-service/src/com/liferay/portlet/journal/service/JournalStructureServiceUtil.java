@@ -52,7 +52,8 @@ public class JournalStructureServiceUtil {
 		boolean addCommunityPermissions, boolean addGuestPermissions)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
-		return _service.addStructure(structureId, autoStructureId, plid,
+		return getService()
+				   .addStructure(structureId, autoStructureId, plid,
 			parentStructureId, name, description, xsd, addCommunityPermissions,
 			addGuestPermissions);
 	}
@@ -65,7 +66,8 @@ public class JournalStructureServiceUtil {
 		java.lang.String[] guestPermissions)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
-		return _service.addStructure(structureId, autoStructureId, plid,
+		return getService()
+				   .addStructure(structureId, autoStructureId, plid,
 			parentStructureId, name, description, xsd, communityPermissions,
 			guestPermissions);
 	}
@@ -75,7 +77,8 @@ public class JournalStructureServiceUtil {
 		java.lang.String newStructureId, boolean autoStructureId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
-		return _service.copyStructure(groupId, oldStructureId, newStructureId,
+		return getService()
+				   .copyStructure(groupId, oldStructureId, newStructureId,
 			autoStructureId);
 	}
 
@@ -83,14 +86,14 @@ public class JournalStructureServiceUtil {
 		java.lang.String structureId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
-		_service.deleteStructure(groupId, structureId);
+		getService().deleteStructure(groupId, structureId);
 	}
 
 	public static com.liferay.portlet.journal.model.JournalStructure getStructure(
 		long groupId, java.lang.String structureId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
-		return _service.getStructure(groupId, structureId);
+		return getService().getStructure(groupId, structureId);
 	}
 
 	public static com.liferay.portlet.journal.model.JournalStructure updateStructure(
@@ -99,11 +102,16 @@ public class JournalStructureServiceUtil {
 		java.lang.String description, java.lang.String xsd)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
-		return _service.updateStructure(groupId, structureId,
-			parentStructureId, name, description, xsd);
+		return getService()
+				   .updateStructure(groupId, structureId, parentStructureId,
+			name, description, xsd);
 	}
 
 	public static JournalStructureService getService() {
+		if (_service == null) {
+			throw new RuntimeException("JournalStructureService is not set");
+		}
+
 		return _service;
 	}
 

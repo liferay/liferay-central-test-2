@@ -59,6 +59,10 @@ public abstract class PollsChoiceLocalServiceBaseImpl
 		return pollsChoicePersistence.update(pollsChoice, false);
 	}
 
+	public PollsChoice createPollsChoice(long choiceId) {
+		return pollsChoicePersistence.create(choiceId);
+	}
+
 	public void deletePollsChoice(long choiceId)
 		throws PortalException, SystemException {
 		pollsChoicePersistence.remove(choiceId);

@@ -52,6 +52,9 @@ public interface ShoppingOrderLocalService {
 		com.liferay.portlet.shopping.model.ShoppingOrder shoppingOrder)
 		throws com.liferay.portal.SystemException;
 
+	public com.liferay.portlet.shopping.model.ShoppingOrder createShoppingOrder(
+		long orderId);
+
 	public void deleteShoppingOrder(long orderId)
 		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;

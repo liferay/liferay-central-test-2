@@ -48,7 +48,7 @@ public class PortletPreferencesServiceUtil {
 	public static void deleteArchivedPreferences(long portletItemId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
-		_service.deleteArchivedPreferences(portletItemId);
+		getService().deleteArchivedPreferences(portletItemId);
 	}
 
 	public static void restoreArchivedPreferences(long groupId,
@@ -56,7 +56,7 @@ public class PortletPreferencesServiceUtil {
 		javax.portlet.PortletPreferences prefs)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
-		_service.restoreArchivedPreferences(groupId, name, portletId, prefs);
+		getService().restoreArchivedPreferences(groupId, name, portletId, prefs);
 	}
 
 	public static void updateArchivePreferences(long userId, long groupId,
@@ -64,11 +64,15 @@ public class PortletPreferencesServiceUtil {
 		javax.portlet.PortletPreferences prefs)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
-		_service.updateArchivePreferences(userId, groupId, name, portletId,
-			prefs);
+		getService()
+			.updateArchivePreferences(userId, groupId, name, portletId, prefs);
 	}
 
 	public static PortletPreferencesService getService() {
+		if (_service == null) {
+			throw new RuntimeException("PortletPreferencesService is not set");
+		}
+
 		return _service;
 	}
 

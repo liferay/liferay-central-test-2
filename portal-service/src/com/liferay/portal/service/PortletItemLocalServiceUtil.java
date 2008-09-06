@@ -48,54 +48,59 @@ public class PortletItemLocalServiceUtil {
 	public static com.liferay.portal.model.PortletItem addPortletItem(
 		com.liferay.portal.model.PortletItem portletItem)
 		throws com.liferay.portal.SystemException {
-		return _service.addPortletItem(portletItem);
+		return getService().addPortletItem(portletItem);
+	}
+
+	public static com.liferay.portal.model.PortletItem createPortletItem(
+		long portletItemId) {
+		return getService().createPortletItem(portletItemId);
 	}
 
 	public static void deletePortletItem(long portletItemId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		_service.deletePortletItem(portletItemId);
+		getService().deletePortletItem(portletItemId);
 	}
 
 	public static void deletePortletItem(
 		com.liferay.portal.model.PortletItem portletItem)
 		throws com.liferay.portal.SystemException {
-		_service.deletePortletItem(portletItem);
+		getService().deletePortletItem(portletItem);
 	}
 
 	public static java.util.List<Object> dynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery)
 		throws com.liferay.portal.SystemException {
-		return _service.dynamicQuery(dynamicQuery);
+		return getService().dynamicQuery(dynamicQuery);
 	}
 
 	public static java.util.List<Object> dynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery, int start,
 		int end) throws com.liferay.portal.SystemException {
-		return _service.dynamicQuery(dynamicQuery, start, end);
+		return getService().dynamicQuery(dynamicQuery, start, end);
 	}
 
 	public static com.liferay.portal.model.PortletItem getPortletItem(
 		long portletItemId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		return _service.getPortletItem(portletItemId);
+		return getService().getPortletItem(portletItemId);
 	}
 
 	public static java.util.List<com.liferay.portal.model.PortletItem> getPortletItems(
 		int start, int end) throws com.liferay.portal.SystemException {
-		return _service.getPortletItems(start, end);
+		return getService().getPortletItems(start, end);
 	}
 
 	public static int getPortletItemsCount()
 		throws com.liferay.portal.SystemException {
-		return _service.getPortletItemsCount();
+		return getService().getPortletItemsCount();
 	}
 
 	public static com.liferay.portal.model.PortletItem updatePortletItem(
 		com.liferay.portal.model.PortletItem portletItem)
 		throws com.liferay.portal.SystemException {
-		return _service.updatePortletItem(portletItem);
+		return getService().updatePortletItem(portletItem);
 	}
 
 	public static com.liferay.portal.model.PortletItem addPortletItem(
@@ -103,8 +108,8 @@ public class PortletItemLocalServiceUtil {
 		java.lang.String portletId, java.lang.String className)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		return _service.addPortletItem(userId, groupId, name, portletId,
-			className);
+		return getService()
+				   .addPortletItem(userId, groupId, name, portletId, className);
 	}
 
 	public static com.liferay.portal.model.PortletItem getPortletItem(
@@ -112,19 +117,19 @@ public class PortletItemLocalServiceUtil {
 		java.lang.String className)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		return _service.getPortletItem(groupId, name, portletId, className);
+		return getService().getPortletItem(groupId, name, portletId, className);
 	}
 
 	public static java.util.List<com.liferay.portal.model.PortletItem> getPortletItems(
 		long groupId, java.lang.String className)
 		throws com.liferay.portal.SystemException {
-		return _service.getPortletItems(groupId, className);
+		return getService().getPortletItems(groupId, className);
 	}
 
 	public static java.util.List<com.liferay.portal.model.PortletItem> getPortletItems(
 		long groupId, java.lang.String portletId, java.lang.String className)
 		throws com.liferay.portal.SystemException {
-		return _service.getPortletItems(groupId, portletId, className);
+		return getService().getPortletItems(groupId, portletId, className);
 	}
 
 	public static com.liferay.portal.model.PortletItem updatePortletItem(
@@ -132,11 +137,16 @@ public class PortletItemLocalServiceUtil {
 		java.lang.String portletId, java.lang.String className)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		return _service.updatePortletItem(userId, groupId, name, portletId,
+		return getService()
+				   .updatePortletItem(userId, groupId, name, portletId,
 			className);
 	}
 
 	public static PortletItemLocalService getService() {
+		if (_service == null) {
+			throw new RuntimeException("PortletItemLocalService is not set");
+		}
+
 		return _service;
 	}
 

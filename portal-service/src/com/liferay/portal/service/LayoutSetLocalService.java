@@ -52,6 +52,8 @@ public interface LayoutSetLocalService {
 		com.liferay.portal.model.LayoutSet layoutSet)
 		throws com.liferay.portal.SystemException;
 
+	public com.liferay.portal.model.LayoutSet createLayoutSet(long layoutSetId);
+
 	public void deleteLayoutSet(long layoutSetId)
 		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;

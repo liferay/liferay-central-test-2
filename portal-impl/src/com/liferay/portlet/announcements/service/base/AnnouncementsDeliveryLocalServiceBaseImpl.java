@@ -64,6 +64,10 @@ public abstract class AnnouncementsDeliveryLocalServiceBaseImpl
 			false);
 	}
 
+	public AnnouncementsDelivery createAnnouncementsDelivery(long deliveryId) {
+		return announcementsDeliveryPersistence.create(deliveryId);
+	}
+
 	public void deleteAnnouncementsDelivery(long deliveryId)
 		throws PortalException, SystemException {
 		announcementsDeliveryPersistence.remove(deliveryId);

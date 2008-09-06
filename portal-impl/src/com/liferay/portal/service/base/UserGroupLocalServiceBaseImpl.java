@@ -168,6 +168,10 @@ public abstract class UserGroupLocalServiceBaseImpl
 		return userGroupPersistence.update(userGroup, false);
 	}
 
+	public UserGroup createUserGroup(long userGroupId) {
+		return userGroupPersistence.create(userGroupId);
+	}
+
 	public void deleteUserGroup(long userGroupId)
 		throws PortalException, SystemException {
 		userGroupPersistence.remove(userGroupId);

@@ -52,6 +52,8 @@ public interface ClassNameLocalService {
 		com.liferay.portal.model.ClassName className)
 		throws com.liferay.portal.SystemException;
 
+	public com.liferay.portal.model.ClassName createClassName(long classNameId);
+
 	public void deleteClassName(long classNameId)
 		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;

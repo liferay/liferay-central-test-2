@@ -52,6 +52,9 @@ public interface DLFileEntryLocalService {
 		com.liferay.portlet.documentlibrary.model.DLFileEntry dlFileEntry)
 		throws com.liferay.portal.SystemException;
 
+	public com.liferay.portlet.documentlibrary.model.DLFileEntry createDLFileEntry(
+		long fileEntryId);
+
 	public void deleteDLFileEntry(long fileEntryId)
 		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;

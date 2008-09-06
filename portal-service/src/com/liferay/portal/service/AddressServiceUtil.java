@@ -52,27 +52,28 @@ public class AddressServiceUtil {
 		long countryId, int typeId, boolean mailing, boolean primary)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
-		return _service.addAddress(className, classPK, street1, street2,
-			street3, city, zip, regionId, countryId, typeId, mailing, primary);
+		return getService()
+				   .addAddress(className, classPK, street1, street2, street3,
+			city, zip, regionId, countryId, typeId, mailing, primary);
 	}
 
 	public static void deleteAddress(long addressId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
-		_service.deleteAddress(addressId);
+		getService().deleteAddress(addressId);
 	}
 
 	public static com.liferay.portal.model.Address getAddress(long addressId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
-		return _service.getAddress(addressId);
+		return getService().getAddress(addressId);
 	}
 
 	public static java.util.List<com.liferay.portal.model.Address> getAddresses(
 		java.lang.String className, long classPK)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
-		return _service.getAddresses(className, classPK);
+		return getService().getAddresses(className, classPK);
 	}
 
 	public static com.liferay.portal.model.Address updateAddress(
@@ -82,11 +83,16 @@ public class AddressServiceUtil {
 		boolean primary)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
-		return _service.updateAddress(addressId, street1, street2, street3,
-			city, zip, regionId, countryId, typeId, mailing, primary);
+		return getService()
+				   .updateAddress(addressId, street1, street2, street3, city,
+			zip, regionId, countryId, typeId, mailing, primary);
 	}
 
 	public static AddressService getService() {
+		if (_service == null) {
+			throw new RuntimeException("AddressService is not set");
+		}
+
 		return _service;
 	}
 

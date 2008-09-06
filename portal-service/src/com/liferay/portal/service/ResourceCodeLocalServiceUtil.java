@@ -48,63 +48,72 @@ public class ResourceCodeLocalServiceUtil {
 	public static com.liferay.portal.model.ResourceCode addResourceCode(
 		com.liferay.portal.model.ResourceCode resourceCode)
 		throws com.liferay.portal.SystemException {
-		return _service.addResourceCode(resourceCode);
+		return getService().addResourceCode(resourceCode);
+	}
+
+	public static com.liferay.portal.model.ResourceCode createResourceCode(
+		long codeId) {
+		return getService().createResourceCode(codeId);
 	}
 
 	public static void deleteResourceCode(long codeId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		_service.deleteResourceCode(codeId);
+		getService().deleteResourceCode(codeId);
 	}
 
 	public static void deleteResourceCode(
 		com.liferay.portal.model.ResourceCode resourceCode)
 		throws com.liferay.portal.SystemException {
-		_service.deleteResourceCode(resourceCode);
+		getService().deleteResourceCode(resourceCode);
 	}
 
 	public static java.util.List<Object> dynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery)
 		throws com.liferay.portal.SystemException {
-		return _service.dynamicQuery(dynamicQuery);
+		return getService().dynamicQuery(dynamicQuery);
 	}
 
 	public static java.util.List<Object> dynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery, int start,
 		int end) throws com.liferay.portal.SystemException {
-		return _service.dynamicQuery(dynamicQuery, start, end);
+		return getService().dynamicQuery(dynamicQuery, start, end);
 	}
 
 	public static com.liferay.portal.model.ResourceCode getResourceCode(
 		long codeId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		return _service.getResourceCode(codeId);
+		return getService().getResourceCode(codeId);
 	}
 
 	public static java.util.List<com.liferay.portal.model.ResourceCode> getResourceCodes(
 		int start, int end) throws com.liferay.portal.SystemException {
-		return _service.getResourceCodes(start, end);
+		return getService().getResourceCodes(start, end);
 	}
 
 	public static int getResourceCodesCount()
 		throws com.liferay.portal.SystemException {
-		return _service.getResourceCodesCount();
+		return getService().getResourceCodesCount();
 	}
 
 	public static com.liferay.portal.model.ResourceCode updateResourceCode(
 		com.liferay.portal.model.ResourceCode resourceCode)
 		throws com.liferay.portal.SystemException {
-		return _service.updateResourceCode(resourceCode);
+		return getService().updateResourceCode(resourceCode);
 	}
 
 	public static com.liferay.portal.model.ResourceCode getResourceCode(
 		long companyId, java.lang.String name, int scope)
 		throws com.liferay.portal.SystemException {
-		return _service.getResourceCode(companyId, name, scope);
+		return getService().getResourceCode(companyId, name, scope);
 	}
 
 	public static ResourceCodeLocalService getService() {
+		if (_service == null) {
+			throw new RuntimeException("ResourceCodeLocalService is not set");
+		}
+
 		return _service;
 	}
 

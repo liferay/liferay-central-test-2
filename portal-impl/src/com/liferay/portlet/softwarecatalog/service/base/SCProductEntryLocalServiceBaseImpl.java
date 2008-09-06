@@ -79,6 +79,10 @@ public abstract class SCProductEntryLocalServiceBaseImpl
 		return scProductEntryPersistence.update(scProductEntry, false);
 	}
 
+	public SCProductEntry createSCProductEntry(long productEntryId) {
+		return scProductEntryPersistence.create(productEntryId);
+	}
+
 	public void deleteSCProductEntry(long productEntryId)
 		throws PortalException, SystemException {
 		scProductEntryPersistence.remove(productEntryId);

@@ -52,6 +52,9 @@ public interface UserTrackerLocalService {
 		com.liferay.portal.model.UserTracker userTracker)
 		throws com.liferay.portal.SystemException;
 
+	public com.liferay.portal.model.UserTracker createUserTracker(
+		long userTrackerId);
+
 	public void deleteUserTracker(long userTrackerId)
 		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;

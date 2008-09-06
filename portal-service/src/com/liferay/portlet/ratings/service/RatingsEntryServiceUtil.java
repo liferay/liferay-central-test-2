@@ -48,17 +48,21 @@ public class RatingsEntryServiceUtil {
 	public static void deleteEntry(java.lang.String className, long classPK)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
-		_service.deleteEntry(className, classPK);
+		getService().deleteEntry(className, classPK);
 	}
 
 	public static com.liferay.portlet.ratings.model.RatingsEntry updateEntry(
 		java.lang.String className, long classPK, double score)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
-		return _service.updateEntry(className, classPK, score);
+		return getService().updateEntry(className, classPK, score);
 	}
 
 	public static RatingsEntryService getService() {
+		if (_service == null) {
+			throw new RuntimeException("RatingsEntryService is not set");
+		}
+
 		return _service;
 	}
 

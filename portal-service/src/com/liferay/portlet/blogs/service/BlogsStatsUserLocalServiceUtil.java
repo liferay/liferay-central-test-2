@@ -48,124 +48,133 @@ public class BlogsStatsUserLocalServiceUtil {
 	public static com.liferay.portlet.blogs.model.BlogsStatsUser addBlogsStatsUser(
 		com.liferay.portlet.blogs.model.BlogsStatsUser blogsStatsUser)
 		throws com.liferay.portal.SystemException {
-		return _service.addBlogsStatsUser(blogsStatsUser);
+		return getService().addBlogsStatsUser(blogsStatsUser);
+	}
+
+	public static com.liferay.portlet.blogs.model.BlogsStatsUser createBlogsStatsUser(
+		long statsUserId) {
+		return getService().createBlogsStatsUser(statsUserId);
 	}
 
 	public static void deleteBlogsStatsUser(long statsUserId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		_service.deleteBlogsStatsUser(statsUserId);
+		getService().deleteBlogsStatsUser(statsUserId);
 	}
 
 	public static void deleteBlogsStatsUser(
 		com.liferay.portlet.blogs.model.BlogsStatsUser blogsStatsUser)
 		throws com.liferay.portal.SystemException {
-		_service.deleteBlogsStatsUser(blogsStatsUser);
+		getService().deleteBlogsStatsUser(blogsStatsUser);
 	}
 
 	public static java.util.List<Object> dynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery)
 		throws com.liferay.portal.SystemException {
-		return _service.dynamicQuery(dynamicQuery);
+		return getService().dynamicQuery(dynamicQuery);
 	}
 
 	public static java.util.List<Object> dynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery, int start,
 		int end) throws com.liferay.portal.SystemException {
-		return _service.dynamicQuery(dynamicQuery, start, end);
+		return getService().dynamicQuery(dynamicQuery, start, end);
 	}
 
 	public static com.liferay.portlet.blogs.model.BlogsStatsUser getBlogsStatsUser(
 		long statsUserId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		return _service.getBlogsStatsUser(statsUserId);
+		return getService().getBlogsStatsUser(statsUserId);
 	}
 
 	public static java.util.List<com.liferay.portlet.blogs.model.BlogsStatsUser> getBlogsStatsUsers(
 		int start, int end) throws com.liferay.portal.SystemException {
-		return _service.getBlogsStatsUsers(start, end);
+		return getService().getBlogsStatsUsers(start, end);
 	}
 
 	public static int getBlogsStatsUsersCount()
 		throws com.liferay.portal.SystemException {
-		return _service.getBlogsStatsUsersCount();
+		return getService().getBlogsStatsUsersCount();
 	}
 
 	public static com.liferay.portlet.blogs.model.BlogsStatsUser updateBlogsStatsUser(
 		com.liferay.portlet.blogs.model.BlogsStatsUser blogsStatsUser)
 		throws com.liferay.portal.SystemException {
-		return _service.updateBlogsStatsUser(blogsStatsUser);
+		return getService().updateBlogsStatsUser(blogsStatsUser);
 	}
 
 	public static void deleteStatsUserByGroupId(long groupId)
 		throws com.liferay.portal.SystemException {
-		_service.deleteStatsUserByGroupId(groupId);
+		getService().deleteStatsUserByGroupId(groupId);
 	}
 
 	public static void deleteStatsUserByUserId(long userId)
 		throws com.liferay.portal.SystemException {
-		_service.deleteStatsUserByUserId(userId);
+		getService().deleteStatsUserByUserId(userId);
 	}
 
 	public static java.util.List<com.liferay.portlet.blogs.model.BlogsStatsUser> getCompanyStatsUsers(
 		long companyId, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException {
-		return _service.getCompanyStatsUsers(companyId, start, end, obc);
+		return getService().getCompanyStatsUsers(companyId, start, end, obc);
 	}
 
 	public static int getCompanyStatsUsersCount(long companyId)
 		throws com.liferay.portal.SystemException {
-		return _service.getCompanyStatsUsersCount(companyId);
+		return getService().getCompanyStatsUsersCount(companyId);
 	}
 
 	public static java.util.List<com.liferay.portlet.blogs.model.BlogsStatsUser> getGroupStatsUsers(
 		long groupId, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException {
-		return _service.getGroupStatsUsers(groupId, start, end, obc);
+		return getService().getGroupStatsUsers(groupId, start, end, obc);
 	}
 
 	public static int getGroupStatsUsersCount(long groupId)
 		throws com.liferay.portal.SystemException {
-		return _service.getGroupStatsUsersCount(groupId);
+		return getService().getGroupStatsUsersCount(groupId);
 	}
 
 	public static java.util.List<com.liferay.portlet.blogs.model.BlogsStatsUser> getOrganizationStatsUsers(
 		long organizationId, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException {
-		return _service.getOrganizationStatsUsers(organizationId, start, end,
-			obc);
+		return getService()
+				   .getOrganizationStatsUsers(organizationId, start, end, obc);
 	}
 
 	public static int getOrganizationStatsUsersCount(long organizationId)
 		throws com.liferay.portal.SystemException {
-		return _service.getOrganizationStatsUsersCount(organizationId);
+		return getService().getOrganizationStatsUsersCount(organizationId);
 	}
 
 	public static com.liferay.portlet.blogs.model.BlogsStatsUser getStatsUser(
 		long groupId, long userId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		return _service.getStatsUser(groupId, userId);
+		return getService().getStatsUser(groupId, userId);
 	}
 
 	public static void updateStatsUser(long groupId, long userId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		_service.updateStatsUser(groupId, userId);
+		getService().updateStatsUser(groupId, userId);
 	}
 
 	public static void updateStatsUser(long groupId, long userId,
 		java.util.Date displayDate)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		_service.updateStatsUser(groupId, userId, displayDate);
+		getService().updateStatsUser(groupId, userId, displayDate);
 	}
 
 	public static BlogsStatsUserLocalService getService() {
+		if (_service == null) {
+			throw new RuntimeException("BlogsStatsUserLocalService is not set");
+		}
+
 		return _service;
 	}
 

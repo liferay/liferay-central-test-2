@@ -46,6 +46,10 @@ package com.liferay.portal.service;
  */
 public class ContactServiceUtil {
 	public static ContactService getService() {
+		if (_service == null) {
+			throw new RuntimeException("ContactService is not set");
+		}
+
 		return _service;
 	}
 

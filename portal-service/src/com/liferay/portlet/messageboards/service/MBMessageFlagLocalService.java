@@ -52,6 +52,9 @@ public interface MBMessageFlagLocalService {
 		com.liferay.portlet.messageboards.model.MBMessageFlag mbMessageFlag)
 		throws com.liferay.portal.SystemException;
 
+	public com.liferay.portlet.messageboards.model.MBMessageFlag createMBMessageFlag(
+		long messageFlagId);
+
 	public void deleteMBMessageFlag(long messageFlagId)
 		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;

@@ -48,25 +48,25 @@ public class ThemeLocalServiceUtil {
 	public static com.liferay.portal.model.ColorScheme getColorScheme(
 		long companyId, java.lang.String themeId,
 		java.lang.String colorSchemeId, boolean wapTheme) {
-		return _service.getColorScheme(companyId, themeId, colorSchemeId,
-			wapTheme);
+		return getService()
+				   .getColorScheme(companyId, themeId, colorSchemeId, wapTheme);
 	}
 
 	public static com.liferay.portal.model.Theme getTheme(long companyId,
 		java.lang.String themeId, boolean wapTheme) {
-		return _service.getTheme(companyId, themeId, wapTheme);
+		return getService().getTheme(companyId, themeId, wapTheme);
 	}
 
 	public static java.util.List<com.liferay.portal.model.Theme> getThemes(
 		long companyId) {
-		return _service.getThemes(companyId);
+		return getService().getThemes(companyId);
 	}
 
 	public static java.util.List<com.liferay.portal.model.Theme> getThemes(
 		long companyId, long groupId, long userId, boolean wapTheme)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		return _service.getThemes(companyId, groupId, userId, wapTheme);
+		return getService().getThemes(companyId, groupId, userId, wapTheme);
 	}
 
 	public static java.util.List<String> init(
@@ -74,8 +74,9 @@ public class ThemeLocalServiceUtil {
 		java.lang.String themesPath, boolean loadFromServletContext,
 		java.lang.String[] xmls,
 		com.liferay.portal.kernel.plugin.PluginPackage pluginPackage) {
-		return _service.init(servletContext, themesPath,
-			loadFromServletContext, xmls, pluginPackage);
+		return getService()
+				   .init(servletContext, themesPath, loadFromServletContext,
+			xmls, pluginPackage);
 	}
 
 	public static java.util.List<String> init(
@@ -84,15 +85,20 @@ public class ThemeLocalServiceUtil {
 		java.lang.String themesPath, boolean loadFromServletContext,
 		java.lang.String[] xmls,
 		com.liferay.portal.kernel.plugin.PluginPackage pluginPackage) {
-		return _service.init(servletContextName, servletContext, themesPath,
+		return getService()
+				   .init(servletContextName, servletContext, themesPath,
 			loadFromServletContext, xmls, pluginPackage);
 	}
 
 	public static void uninstallThemes(java.util.List<String> themeIds) {
-		_service.uninstallThemes(themeIds);
+		getService().uninstallThemes(themeIds);
 	}
 
 	public static ThemeLocalService getService() {
+		if (_service == null) {
+			throw new RuntimeException("ThemeLocalService is not set");
+		}
+
 		return _service;
 	}
 

@@ -71,6 +71,10 @@ public abstract class TasksProposalLocalServiceBaseImpl
 		return tasksProposalPersistence.update(tasksProposal, false);
 	}
 
+	public TasksProposal createTasksProposal(long proposalId) {
+		return tasksProposalPersistence.create(proposalId);
+	}
+
 	public void deleteTasksProposal(long proposalId)
 		throws PortalException, SystemException {
 		tasksProposalPersistence.remove(proposalId);

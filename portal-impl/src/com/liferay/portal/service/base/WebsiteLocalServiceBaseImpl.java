@@ -167,6 +167,10 @@ public abstract class WebsiteLocalServiceBaseImpl implements WebsiteLocalService
 		return websitePersistence.update(website, false);
 	}
 
+	public Website createWebsite(long websiteId) {
+		return websitePersistence.create(websiteId);
+	}
+
 	public void deleteWebsite(long websiteId)
 		throws PortalException, SystemException {
 		websitePersistence.remove(websiteId);

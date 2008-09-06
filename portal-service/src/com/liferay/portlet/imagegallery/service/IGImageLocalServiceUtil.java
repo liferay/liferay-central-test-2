@@ -48,54 +48,59 @@ public class IGImageLocalServiceUtil {
 	public static com.liferay.portlet.imagegallery.model.IGImage addIGImage(
 		com.liferay.portlet.imagegallery.model.IGImage igImage)
 		throws com.liferay.portal.SystemException {
-		return _service.addIGImage(igImage);
+		return getService().addIGImage(igImage);
+	}
+
+	public static com.liferay.portlet.imagegallery.model.IGImage createIGImage(
+		long imageId) {
+		return getService().createIGImage(imageId);
 	}
 
 	public static void deleteIGImage(long imageId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		_service.deleteIGImage(imageId);
+		getService().deleteIGImage(imageId);
 	}
 
 	public static void deleteIGImage(
 		com.liferay.portlet.imagegallery.model.IGImage igImage)
 		throws com.liferay.portal.SystemException {
-		_service.deleteIGImage(igImage);
+		getService().deleteIGImage(igImage);
 	}
 
 	public static java.util.List<Object> dynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery)
 		throws com.liferay.portal.SystemException {
-		return _service.dynamicQuery(dynamicQuery);
+		return getService().dynamicQuery(dynamicQuery);
 	}
 
 	public static java.util.List<Object> dynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery, int start,
 		int end) throws com.liferay.portal.SystemException {
-		return _service.dynamicQuery(dynamicQuery, start, end);
+		return getService().dynamicQuery(dynamicQuery, start, end);
 	}
 
 	public static com.liferay.portlet.imagegallery.model.IGImage getIGImage(
 		long imageId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		return _service.getIGImage(imageId);
+		return getService().getIGImage(imageId);
 	}
 
 	public static java.util.List<com.liferay.portlet.imagegallery.model.IGImage> getIGImages(
 		int start, int end) throws com.liferay.portal.SystemException {
-		return _service.getIGImages(start, end);
+		return getService().getIGImages(start, end);
 	}
 
 	public static int getIGImagesCount()
 		throws com.liferay.portal.SystemException {
-		return _service.getIGImagesCount();
+		return getService().getIGImagesCount();
 	}
 
 	public static com.liferay.portlet.imagegallery.model.IGImage updateIGImage(
 		com.liferay.portlet.imagegallery.model.IGImage igImage)
 		throws com.liferay.portal.SystemException {
-		return _service.updateIGImage(igImage);
+		return getService().updateIGImage(igImage);
 	}
 
 	public static com.liferay.portlet.imagegallery.model.IGImage addImage(
@@ -105,7 +110,8 @@ public class IGImageLocalServiceUtil {
 		boolean addCommunityPermissions, boolean addGuestPermissions)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		return _service.addImage(userId, folderId, name, description, file,
+		return getService()
+				   .addImage(userId, folderId, name, description, file,
 			contentType, tagsEntries, addCommunityPermissions,
 			addGuestPermissions);
 	}
@@ -117,8 +123,9 @@ public class IGImageLocalServiceUtil {
 		boolean addCommunityPermissions, boolean addGuestPermissions)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		return _service.addImage(uuid, userId, folderId, name, description,
-			file, contentType, tagsEntries, addCommunityPermissions,
+		return getService()
+				   .addImage(uuid, userId, folderId, name, description, file,
+			contentType, tagsEntries, addCommunityPermissions,
 			addGuestPermissions);
 	}
 
@@ -130,7 +137,8 @@ public class IGImageLocalServiceUtil {
 		java.lang.String[] guestPermissions)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		return _service.addImage(userId, folderId, name, description, file,
+		return getService()
+				   .addImage(userId, folderId, name, description, file,
 			contentType, tagsEntries, communityPermissions, guestPermissions);
 	}
 
@@ -144,8 +152,9 @@ public class IGImageLocalServiceUtil {
 		java.lang.String[] guestPermissions)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		return _service.addImage(uuid, userId, folderId, name, description,
-			file, contentType, tagsEntries, addCommunityPermissions,
+		return getService()
+				   .addImage(uuid, userId, folderId, name, description, file,
+			contentType, tagsEntries, addCommunityPermissions,
 			addGuestPermissions, communityPermissions, guestPermissions);
 	}
 
@@ -153,7 +162,8 @@ public class IGImageLocalServiceUtil {
 		boolean addCommunityPermissions, boolean addGuestPermissions)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		_service.addImageResources(folderId, imageId, addCommunityPermissions,
+		getService()
+			.addImageResources(folderId, imageId, addCommunityPermissions,
 			addGuestPermissions);
 	}
 
@@ -163,7 +173,8 @@ public class IGImageLocalServiceUtil {
 		boolean addCommunityPermissions, boolean addGuestPermissions)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		_service.addImageResources(folder, image, addCommunityPermissions,
+		getService()
+			.addImageResources(folder, image, addCommunityPermissions,
 			addGuestPermissions);
 	}
 
@@ -172,7 +183,8 @@ public class IGImageLocalServiceUtil {
 		java.lang.String[] guestPermissions)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		_service.addImageResources(folderId, imageId, communityPermissions,
+		getService()
+			.addImageResources(folderId, imageId, communityPermissions,
 			guestPermissions);
 	}
 
@@ -183,82 +195,84 @@ public class IGImageLocalServiceUtil {
 		java.lang.String[] guestPermissions)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		_service.addImageResources(folder, image, communityPermissions,
+		getService()
+			.addImageResources(folder, image, communityPermissions,
 			guestPermissions);
 	}
 
 	public static void deleteImage(long imageId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		_service.deleteImage(imageId);
+		getService().deleteImage(imageId);
 	}
 
 	public static void deleteImage(
 		com.liferay.portlet.imagegallery.model.IGImage image)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		_service.deleteImage(image);
+		getService().deleteImage(image);
 	}
 
 	public static void deleteImages(long folderId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		_service.deleteImages(folderId);
+		getService().deleteImages(folderId);
 	}
 
 	public static int getFoldersImagesCount(java.util.List<Long> folderIds)
 		throws com.liferay.portal.SystemException {
-		return _service.getFoldersImagesCount(folderIds);
+		return getService().getFoldersImagesCount(folderIds);
 	}
 
 	public static java.util.List<com.liferay.portlet.imagegallery.model.IGImage> getGroupImages(
 		long groupId, int start, int end)
 		throws com.liferay.portal.SystemException {
-		return _service.getGroupImages(groupId, start, end);
+		return getService().getGroupImages(groupId, start, end);
 	}
 
 	public static java.util.List<com.liferay.portlet.imagegallery.model.IGImage> getGroupImages(
 		long groupId, long userId, int start, int end)
 		throws com.liferay.portal.SystemException {
-		return _service.getGroupImages(groupId, userId, start, end);
+		return getService().getGroupImages(groupId, userId, start, end);
 	}
 
 	public static int getGroupImagesCount(long groupId)
 		throws com.liferay.portal.SystemException {
-		return _service.getGroupImagesCount(groupId);
+		return getService().getGroupImagesCount(groupId);
 	}
 
 	public static int getGroupImagesCount(long groupId, long userId)
 		throws com.liferay.portal.SystemException {
-		return _service.getGroupImagesCount(groupId, userId);
+		return getService().getGroupImagesCount(groupId, userId);
 	}
 
 	public static com.liferay.portlet.imagegallery.model.IGImage getImage(
 		long imageId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		return _service.getImage(imageId);
+		return getService().getImage(imageId);
 	}
 
 	public static com.liferay.portlet.imagegallery.model.IGImage getImageByCustom1ImageId(
 		long custom1ImageId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		return _service.getImageByCustom1ImageId(custom1ImageId);
+		return getService().getImageByCustom1ImageId(custom1ImageId);
 	}
 
 	public static com.liferay.portlet.imagegallery.model.IGImage getImageByCustom2ImageId(
 		long custom2ImageId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		return _service.getImageByCustom2ImageId(custom2ImageId);
+		return getService().getImageByCustom2ImageId(custom2ImageId);
 	}
 
 	public static com.liferay.portlet.imagegallery.model.IGImage getImageByFolderIdAndNameWithExtension(
 		long folderId, java.lang.String nameWithExtension)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		return _service.getImageByFolderIdAndNameWithExtension(folderId,
+		return getService()
+				   .getImageByFolderIdAndNameWithExtension(folderId,
 			nameWithExtension);
 	}
 
@@ -266,49 +280,49 @@ public class IGImageLocalServiceUtil {
 		long largeImageId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		return _service.getImageByLargeImageId(largeImageId);
+		return getService().getImageByLargeImageId(largeImageId);
 	}
 
 	public static com.liferay.portlet.imagegallery.model.IGImage getImageBySmallImageId(
 		long smallImageId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		return _service.getImageBySmallImageId(smallImageId);
+		return getService().getImageBySmallImageId(smallImageId);
 	}
 
 	public static com.liferay.portlet.imagegallery.model.IGImage getImageByUuidAndGroupId(
 		java.lang.String uuid, long groupId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		return _service.getImageByUuidAndGroupId(uuid, groupId);
+		return getService().getImageByUuidAndGroupId(uuid, groupId);
 	}
 
 	public static java.util.List<com.liferay.portlet.imagegallery.model.IGImage> getImages(
 		long folderId) throws com.liferay.portal.SystemException {
-		return _service.getImages(folderId);
+		return getService().getImages(folderId);
 	}
 
 	public static java.util.List<com.liferay.portlet.imagegallery.model.IGImage> getImages(
 		long folderId, int start, int end)
 		throws com.liferay.portal.SystemException {
-		return _service.getImages(folderId, start, end);
+		return getService().getImages(folderId, start, end);
 	}
 
 	public static java.util.List<com.liferay.portlet.imagegallery.model.IGImage> getImages(
 		long folderId, int start, int end,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException {
-		return _service.getImages(folderId, start, end, obc);
+		return getService().getImages(folderId, start, end, obc);
 	}
 
 	public static int getImagesCount(long folderId)
 		throws com.liferay.portal.SystemException {
-		return _service.getImagesCount(folderId);
+		return getService().getImagesCount(folderId);
 	}
 
 	public static java.util.List<com.liferay.portlet.imagegallery.model.IGImage> getNoAssetImages()
 		throws com.liferay.portal.SystemException {
-		return _service.getNoAssetImages();
+		return getService().getNoAssetImages();
 	}
 
 	public static com.liferay.portlet.imagegallery.model.IGImage updateImage(
@@ -317,8 +331,9 @@ public class IGImageLocalServiceUtil {
 		java.lang.String contentType, java.lang.String[] tagsEntries)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		return _service.updateImage(userId, imageId, folderId, name,
-			description, file, contentType, tagsEntries);
+		return getService()
+				   .updateImage(userId, imageId, folderId, name, description,
+			file, contentType, tagsEntries);
 	}
 
 	public static void updateTagsAsset(long userId,
@@ -326,10 +341,14 @@ public class IGImageLocalServiceUtil {
 		java.lang.String[] tagsEntries)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		_service.updateTagsAsset(userId, image, tagsEntries);
+		getService().updateTagsAsset(userId, image, tagsEntries);
 	}
 
 	public static IGImageLocalService getService() {
+		if (_service == null) {
+			throw new RuntimeException("IGImageLocalService is not set");
+		}
+
 		return _service;
 	}
 

@@ -52,15 +52,16 @@ public class WikiPageServiceUtil {
 		com.liferay.portal.theme.ThemeDisplay themeDisplay)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
-		return _service.addPage(nodeId, title, content, summary, minorEdit,
-			prefs, themeDisplay);
+		return getService()
+				   .addPage(nodeId, title, content, summary, minorEdit, prefs,
+			themeDisplay);
 	}
 
 	public static void addPageAttachments(long nodeId, java.lang.String title,
 		java.util.List<com.liferay.portal.kernel.util.ObjectValuePair<String, byte[]>> files)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
-		_service.addPageAttachments(nodeId, title, files);
+		getService().addPageAttachments(nodeId, title, files);
 	}
 
 	public static void changeParent(long nodeId, java.lang.String title,
@@ -69,27 +70,28 @@ public class WikiPageServiceUtil {
 		com.liferay.portal.theme.ThemeDisplay themeDisplay)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
-		_service.changeParent(nodeId, title, newParentTitle, prefs, themeDisplay);
+		getService()
+			.changeParent(nodeId, title, newParentTitle, prefs, themeDisplay);
 	}
 
 	public static void deletePage(long nodeId, java.lang.String title)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
-		_service.deletePage(nodeId, title);
+		getService().deletePage(nodeId, title);
 	}
 
 	public static void deletePageAttachment(long nodeId,
 		java.lang.String title, java.lang.String fileName)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
-		_service.deletePageAttachment(nodeId, title, fileName);
+		getService().deletePageAttachment(nodeId, title, fileName);
 	}
 
 	public static java.util.List<com.liferay.portlet.wiki.model.WikiPage> getNodePages(
 		long nodeId, int max)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
-		return _service.getNodePages(nodeId, max);
+		return getService().getNodePages(nodeId, max);
 	}
 
 	public static java.lang.String getNodePagesRSS(long nodeId, int max,
@@ -97,22 +99,23 @@ public class WikiPageServiceUtil {
 		java.lang.String feedURL, java.lang.String entryURL)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
-		return _service.getNodePagesRSS(nodeId, max, type, version,
-			displayStyle, feedURL, entryURL);
+		return getService()
+				   .getNodePagesRSS(nodeId, max, type, version, displayStyle,
+			feedURL, entryURL);
 	}
 
 	public static com.liferay.portlet.wiki.model.WikiPage getPage(long nodeId,
 		java.lang.String title)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
-		return _service.getPage(nodeId, title);
+		return getService().getPage(nodeId, title);
 	}
 
 	public static com.liferay.portlet.wiki.model.WikiPage getPage(long nodeId,
 		java.lang.String title, double version)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
-		return _service.getPage(nodeId, title, version);
+		return getService().getPage(nodeId, title, version);
 	}
 
 	public static java.lang.String getPagesRSS(long companyId, long nodeId,
@@ -121,8 +124,9 @@ public class WikiPageServiceUtil {
 		java.lang.String entryURL, java.util.Locale locale)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
-		return _service.getPagesRSS(companyId, nodeId, title, max, type,
-			version, displayStyle, feedURL, entryURL, locale);
+		return getService()
+				   .getPagesRSS(companyId, nodeId, title, max, type, version,
+			displayStyle, feedURL, entryURL, locale);
 	}
 
 	public static void movePage(long nodeId, java.lang.String title,
@@ -130,7 +134,7 @@ public class WikiPageServiceUtil {
 		com.liferay.portal.theme.ThemeDisplay themeDisplay)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
-		_service.movePage(nodeId, title, newTitle, prefs, themeDisplay);
+		getService().movePage(nodeId, title, newTitle, prefs, themeDisplay);
 	}
 
 	public static com.liferay.portlet.wiki.model.WikiPage revertPage(
@@ -139,19 +143,20 @@ public class WikiPageServiceUtil {
 		com.liferay.portal.theme.ThemeDisplay themeDisplay)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
-		return _service.revertPage(nodeId, title, version, prefs, themeDisplay);
+		return getService()
+				   .revertPage(nodeId, title, version, prefs, themeDisplay);
 	}
 
 	public static void subscribePage(long nodeId, java.lang.String title)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
-		_service.subscribePage(nodeId, title);
+		getService().subscribePage(nodeId, title);
 	}
 
 	public static void unsubscribePage(long nodeId, java.lang.String title)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
-		_service.unsubscribePage(nodeId, title);
+		getService().unsubscribePage(nodeId, title);
 	}
 
 	public static com.liferay.portlet.wiki.model.WikiPage updatePage(
@@ -163,12 +168,17 @@ public class WikiPageServiceUtil {
 		com.liferay.portal.theme.ThemeDisplay themeDisplay)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
-		return _service.updatePage(nodeId, title, version, content, summary,
+		return getService()
+				   .updatePage(nodeId, title, version, content, summary,
 			minorEdit, format, parentTitle, redirectTitle, tagsEntries, prefs,
 			themeDisplay);
 	}
 
 	public static WikiPageService getService() {
+		if (_service == null) {
+			throw new RuntimeException("WikiPageService is not set");
+		}
+
 		return _service;
 	}
 

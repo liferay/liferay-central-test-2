@@ -164,6 +164,10 @@ public abstract class AccountLocalServiceBaseImpl implements AccountLocalService
 		return accountPersistence.update(account, false);
 	}
 
+	public Account createAccount(long accountId) {
+		return accountPersistence.create(accountId);
+	}
+
 	public void deleteAccount(long accountId)
 		throws PortalException, SystemException {
 		accountPersistence.remove(accountId);

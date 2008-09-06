@@ -48,52 +48,56 @@ public class AddressLocalServiceUtil {
 	public static com.liferay.portal.model.Address addAddress(
 		com.liferay.portal.model.Address address)
 		throws com.liferay.portal.SystemException {
-		return _service.addAddress(address);
+		return getService().addAddress(address);
+	}
+
+	public static com.liferay.portal.model.Address createAddress(long addressId) {
+		return getService().createAddress(addressId);
 	}
 
 	public static void deleteAddress(long addressId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		_service.deleteAddress(addressId);
+		getService().deleteAddress(addressId);
 	}
 
 	public static void deleteAddress(com.liferay.portal.model.Address address)
 		throws com.liferay.portal.SystemException {
-		_service.deleteAddress(address);
+		getService().deleteAddress(address);
 	}
 
 	public static java.util.List<Object> dynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery)
 		throws com.liferay.portal.SystemException {
-		return _service.dynamicQuery(dynamicQuery);
+		return getService().dynamicQuery(dynamicQuery);
 	}
 
 	public static java.util.List<Object> dynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery, int start,
 		int end) throws com.liferay.portal.SystemException {
-		return _service.dynamicQuery(dynamicQuery, start, end);
+		return getService().dynamicQuery(dynamicQuery, start, end);
 	}
 
 	public static com.liferay.portal.model.Address getAddress(long addressId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		return _service.getAddress(addressId);
+		return getService().getAddress(addressId);
 	}
 
 	public static java.util.List<com.liferay.portal.model.Address> getAddresses(
 		int start, int end) throws com.liferay.portal.SystemException {
-		return _service.getAddresses(start, end);
+		return getService().getAddresses(start, end);
 	}
 
 	public static int getAddressesCount()
 		throws com.liferay.portal.SystemException {
-		return _service.getAddressesCount();
+		return getService().getAddressesCount();
 	}
 
 	public static com.liferay.portal.model.Address updateAddress(
 		com.liferay.portal.model.Address address)
 		throws com.liferay.portal.SystemException {
-		return _service.updateAddress(address);
+		return getService().updateAddress(address);
 	}
 
 	public static com.liferay.portal.model.Address addAddress(long userId,
@@ -103,26 +107,26 @@ public class AddressLocalServiceUtil {
 		long countryId, int typeId, boolean mailing, boolean primary)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		return _service.addAddress(userId, className, classPK, street1,
-			street2, street3, city, zip, regionId, countryId, typeId, mailing,
-			primary);
+		return getService()
+				   .addAddress(userId, className, classPK, street1, street2,
+			street3, city, zip, regionId, countryId, typeId, mailing, primary);
 	}
 
 	public static void deleteAddresses(long companyId,
 		java.lang.String className, long classPK)
 		throws com.liferay.portal.SystemException {
-		_service.deleteAddresses(companyId, className, classPK);
+		getService().deleteAddresses(companyId, className, classPK);
 	}
 
 	public static java.util.List<com.liferay.portal.model.Address> getAddresses()
 		throws com.liferay.portal.SystemException {
-		return _service.getAddresses();
+		return getService().getAddresses();
 	}
 
 	public static java.util.List<com.liferay.portal.model.Address> getAddresses(
 		long companyId, java.lang.String className, long classPK)
 		throws com.liferay.portal.SystemException {
-		return _service.getAddresses(companyId, className, classPK);
+		return getService().getAddresses(companyId, className, classPK);
 	}
 
 	public static com.liferay.portal.model.Address updateAddress(
@@ -132,11 +136,16 @@ public class AddressLocalServiceUtil {
 		boolean primary)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		return _service.updateAddress(addressId, street1, street2, street3,
-			city, zip, regionId, countryId, typeId, mailing, primary);
+		return getService()
+				   .updateAddress(addressId, street1, street2, street3, city,
+			zip, regionId, countryId, typeId, mailing, primary);
 	}
 
 	public static AddressLocalService getService() {
+		if (_service == null) {
+			throw new RuntimeException("AddressLocalService is not set");
+		}
+
 		return _service;
 	}
 

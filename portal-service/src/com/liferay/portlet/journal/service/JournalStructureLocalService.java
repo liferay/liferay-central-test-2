@@ -52,6 +52,9 @@ public interface JournalStructureLocalService {
 		com.liferay.portlet.journal.model.JournalStructure journalStructure)
 		throws com.liferay.portal.SystemException;
 
+	public com.liferay.portlet.journal.model.JournalStructure createJournalStructure(
+		long id);
+
 	public void deleteJournalStructure(long id)
 		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;

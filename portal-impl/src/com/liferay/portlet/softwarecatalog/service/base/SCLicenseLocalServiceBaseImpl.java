@@ -63,6 +63,10 @@ public abstract class SCLicenseLocalServiceBaseImpl
 		return scLicensePersistence.update(scLicense, false);
 	}
 
+	public SCLicense createSCLicense(long licenseId) {
+		return scLicensePersistence.create(licenseId);
+	}
+
 	public void deleteSCLicense(long licenseId)
 		throws PortalException, SystemException {
 		scLicensePersistence.remove(licenseId);

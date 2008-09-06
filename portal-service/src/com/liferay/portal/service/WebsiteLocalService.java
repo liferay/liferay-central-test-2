@@ -52,6 +52,8 @@ public interface WebsiteLocalService {
 		com.liferay.portal.model.Website website)
 		throws com.liferay.portal.SystemException;
 
+	public com.liferay.portal.model.Website createWebsite(long websiteId);
+
 	public void deleteWebsite(long websiteId)
 		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;

@@ -168,6 +168,10 @@ public abstract class ClassNameLocalServiceBaseImpl
 		return classNamePersistence.update(className, false);
 	}
 
+	public ClassName createClassName(long classNameId) {
+		return classNamePersistence.create(classNameId);
+	}
+
 	public void deleteClassName(long classNameId)
 		throws PortalException, SystemException {
 		classNamePersistence.remove(classNameId);

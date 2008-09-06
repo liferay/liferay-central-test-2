@@ -82,6 +82,10 @@ public abstract class ShoppingItemLocalServiceBaseImpl
 		return shoppingItemPersistence.update(shoppingItem, false);
 	}
 
+	public ShoppingItem createShoppingItem(long itemId) {
+		return shoppingItemPersistence.create(itemId);
+	}
+
 	public void deleteShoppingItem(long itemId)
 		throws PortalException, SystemException {
 		shoppingItemPersistence.remove(itemId);

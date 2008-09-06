@@ -168,6 +168,10 @@ public abstract class PermissionLocalServiceBaseImpl
 		return permissionPersistence.update(permission, false);
 	}
 
+	public Permission createPermission(long permissionId) {
+		return permissionPersistence.create(permissionId);
+	}
+
 	public void deletePermission(long permissionId)
 		throws PortalException, SystemException {
 		permissionPersistence.remove(permissionId);

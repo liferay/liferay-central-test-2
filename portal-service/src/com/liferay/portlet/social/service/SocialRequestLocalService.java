@@ -52,6 +52,9 @@ public interface SocialRequestLocalService {
 		com.liferay.portlet.social.model.SocialRequest socialRequest)
 		throws com.liferay.portal.SystemException;
 
+	public com.liferay.portlet.social.model.SocialRequest createSocialRequest(
+		long requestId);
+
 	public void deleteSocialRequest(long requestId)
 		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;

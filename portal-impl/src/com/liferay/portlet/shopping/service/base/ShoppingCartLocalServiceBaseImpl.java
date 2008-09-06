@@ -77,6 +77,10 @@ public abstract class ShoppingCartLocalServiceBaseImpl
 		return shoppingCartPersistence.update(shoppingCart, false);
 	}
 
+	public ShoppingCart createShoppingCart(long cartId) {
+		return shoppingCartPersistence.create(cartId);
+	}
+
 	public void deleteShoppingCart(long cartId)
 		throws PortalException, SystemException {
 		shoppingCartPersistence.remove(cartId);

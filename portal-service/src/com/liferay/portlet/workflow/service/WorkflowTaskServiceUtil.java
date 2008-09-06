@@ -49,10 +49,14 @@ public class WorkflowTaskServiceUtil {
 		java.lang.String transition, java.util.Map parameterMap)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
-		return _service.updateTask(taskId, transition, parameterMap);
+		return getService().updateTask(taskId, transition, parameterMap);
 	}
 
 	public static WorkflowTaskService getService() {
+		if (_service == null) {
+			throw new RuntimeException("WorkflowTaskService is not set");
+		}
+
 		return _service;
 	}
 

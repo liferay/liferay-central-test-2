@@ -48,62 +48,72 @@ public class ShoppingOrderItemLocalServiceUtil {
 	public static com.liferay.portlet.shopping.model.ShoppingOrderItem addShoppingOrderItem(
 		com.liferay.portlet.shopping.model.ShoppingOrderItem shoppingOrderItem)
 		throws com.liferay.portal.SystemException {
-		return _service.addShoppingOrderItem(shoppingOrderItem);
+		return getService().addShoppingOrderItem(shoppingOrderItem);
+	}
+
+	public static com.liferay.portlet.shopping.model.ShoppingOrderItem createShoppingOrderItem(
+		long orderItemId) {
+		return getService().createShoppingOrderItem(orderItemId);
 	}
 
 	public static void deleteShoppingOrderItem(long orderItemId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		_service.deleteShoppingOrderItem(orderItemId);
+		getService().deleteShoppingOrderItem(orderItemId);
 	}
 
 	public static void deleteShoppingOrderItem(
 		com.liferay.portlet.shopping.model.ShoppingOrderItem shoppingOrderItem)
 		throws com.liferay.portal.SystemException {
-		_service.deleteShoppingOrderItem(shoppingOrderItem);
+		getService().deleteShoppingOrderItem(shoppingOrderItem);
 	}
 
 	public static java.util.List<Object> dynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery)
 		throws com.liferay.portal.SystemException {
-		return _service.dynamicQuery(dynamicQuery);
+		return getService().dynamicQuery(dynamicQuery);
 	}
 
 	public static java.util.List<Object> dynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery, int start,
 		int end) throws com.liferay.portal.SystemException {
-		return _service.dynamicQuery(dynamicQuery, start, end);
+		return getService().dynamicQuery(dynamicQuery, start, end);
 	}
 
 	public static com.liferay.portlet.shopping.model.ShoppingOrderItem getShoppingOrderItem(
 		long orderItemId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		return _service.getShoppingOrderItem(orderItemId);
+		return getService().getShoppingOrderItem(orderItemId);
 	}
 
 	public static java.util.List<com.liferay.portlet.shopping.model.ShoppingOrderItem> getShoppingOrderItems(
 		int start, int end) throws com.liferay.portal.SystemException {
-		return _service.getShoppingOrderItems(start, end);
+		return getService().getShoppingOrderItems(start, end);
 	}
 
 	public static int getShoppingOrderItemsCount()
 		throws com.liferay.portal.SystemException {
-		return _service.getShoppingOrderItemsCount();
+		return getService().getShoppingOrderItemsCount();
 	}
 
 	public static com.liferay.portlet.shopping.model.ShoppingOrderItem updateShoppingOrderItem(
 		com.liferay.portlet.shopping.model.ShoppingOrderItem shoppingOrderItem)
 		throws com.liferay.portal.SystemException {
-		return _service.updateShoppingOrderItem(shoppingOrderItem);
+		return getService().updateShoppingOrderItem(shoppingOrderItem);
 	}
 
 	public static java.util.List<com.liferay.portlet.shopping.model.ShoppingOrderItem> getOrderItems(
 		long orderId) throws com.liferay.portal.SystemException {
-		return _service.getOrderItems(orderId);
+		return getService().getOrderItems(orderId);
 	}
 
 	public static ShoppingOrderItemLocalService getService() {
+		if (_service == null) {
+			throw new RuntimeException(
+				"ShoppingOrderItemLocalService is not set");
+		}
+
 		return _service;
 	}
 

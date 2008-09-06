@@ -167,6 +167,10 @@ public abstract class OrgLaborLocalServiceBaseImpl
 		return orgLaborPersistence.update(orgLabor, false);
 	}
 
+	public OrgLabor createOrgLabor(long orgLaborId) {
+		return orgLaborPersistence.create(orgLaborId);
+	}
+
 	public void deleteOrgLabor(long orgLaborId)
 		throws PortalException, SystemException {
 		orgLaborPersistence.remove(orgLaborId);

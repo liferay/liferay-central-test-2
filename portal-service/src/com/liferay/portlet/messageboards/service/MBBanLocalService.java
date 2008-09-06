@@ -52,6 +52,8 @@ public interface MBBanLocalService {
 		com.liferay.portlet.messageboards.model.MBBan mbBan)
 		throws com.liferay.portal.SystemException;
 
+	public com.liferay.portlet.messageboards.model.MBBan createMBBan(long banId);
+
 	public void deleteMBBan(long banId)
 		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;

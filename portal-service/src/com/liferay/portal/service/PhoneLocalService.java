@@ -52,6 +52,8 @@ public interface PhoneLocalService {
 		com.liferay.portal.model.Phone phone)
 		throws com.liferay.portal.SystemException;
 
+	public com.liferay.portal.model.Phone createPhone(long phoneId);
+
 	public void deletePhone(long phoneId)
 		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;

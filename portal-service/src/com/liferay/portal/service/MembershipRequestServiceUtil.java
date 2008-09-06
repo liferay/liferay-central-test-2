@@ -49,30 +49,34 @@ public class MembershipRequestServiceUtil {
 		long groupId, java.lang.String comments)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
-		return _service.addMembershipRequest(groupId, comments);
+		return getService().addMembershipRequest(groupId, comments);
 	}
 
 	public static void deleteMembershipRequests(long groupId, int statusId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
-		_service.deleteMembershipRequests(groupId, statusId);
+		getService().deleteMembershipRequests(groupId, statusId);
 	}
 
 	public static com.liferay.portal.model.MembershipRequest getMembershipRequest(
 		long membershipRequestId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
-		return _service.getMembershipRequest(membershipRequestId);
+		return getService().getMembershipRequest(membershipRequestId);
 	}
 
 	public static void updateStatus(long membershipRequestId,
 		java.lang.String reviewComments, int statusId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
-		_service.updateStatus(membershipRequestId, reviewComments, statusId);
+		getService().updateStatus(membershipRequestId, reviewComments, statusId);
 	}
 
 	public static MembershipRequestService getService() {
+		if (_service == null) {
+			throw new RuntimeException("MembershipRequestService is not set");
+		}
+
 		return _service;
 	}
 

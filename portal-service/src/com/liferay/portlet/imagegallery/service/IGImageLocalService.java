@@ -52,6 +52,9 @@ public interface IGImageLocalService {
 		com.liferay.portlet.imagegallery.model.IGImage igImage)
 		throws com.liferay.portal.SystemException;
 
+	public com.liferay.portlet.imagegallery.model.IGImage createIGImage(
+		long imageId);
+
 	public void deleteIGImage(long imageId)
 		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;

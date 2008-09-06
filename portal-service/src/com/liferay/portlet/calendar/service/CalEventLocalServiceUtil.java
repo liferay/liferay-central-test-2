@@ -48,54 +48,59 @@ public class CalEventLocalServiceUtil {
 	public static com.liferay.portlet.calendar.model.CalEvent addCalEvent(
 		com.liferay.portlet.calendar.model.CalEvent calEvent)
 		throws com.liferay.portal.SystemException {
-		return _service.addCalEvent(calEvent);
+		return getService().addCalEvent(calEvent);
+	}
+
+	public static com.liferay.portlet.calendar.model.CalEvent createCalEvent(
+		long eventId) {
+		return getService().createCalEvent(eventId);
 	}
 
 	public static void deleteCalEvent(long eventId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		_service.deleteCalEvent(eventId);
+		getService().deleteCalEvent(eventId);
 	}
 
 	public static void deleteCalEvent(
 		com.liferay.portlet.calendar.model.CalEvent calEvent)
 		throws com.liferay.portal.SystemException {
-		_service.deleteCalEvent(calEvent);
+		getService().deleteCalEvent(calEvent);
 	}
 
 	public static java.util.List<Object> dynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery)
 		throws com.liferay.portal.SystemException {
-		return _service.dynamicQuery(dynamicQuery);
+		return getService().dynamicQuery(dynamicQuery);
 	}
 
 	public static java.util.List<Object> dynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery, int start,
 		int end) throws com.liferay.portal.SystemException {
-		return _service.dynamicQuery(dynamicQuery, start, end);
+		return getService().dynamicQuery(dynamicQuery, start, end);
 	}
 
 	public static com.liferay.portlet.calendar.model.CalEvent getCalEvent(
 		long eventId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		return _service.getCalEvent(eventId);
+		return getService().getCalEvent(eventId);
 	}
 
 	public static java.util.List<com.liferay.portlet.calendar.model.CalEvent> getCalEvents(
 		int start, int end) throws com.liferay.portal.SystemException {
-		return _service.getCalEvents(start, end);
+		return getService().getCalEvents(start, end);
 	}
 
 	public static int getCalEventsCount()
 		throws com.liferay.portal.SystemException {
-		return _service.getCalEventsCount();
+		return getService().getCalEventsCount();
 	}
 
 	public static com.liferay.portlet.calendar.model.CalEvent updateCalEvent(
 		com.liferay.portlet.calendar.model.CalEvent calEvent)
 		throws com.liferay.portal.SystemException {
-		return _service.updateCalEvent(calEvent);
+		return getService().updateCalEvent(calEvent);
 	}
 
 	public static com.liferay.portlet.calendar.model.CalEvent addEvent(
@@ -110,11 +115,12 @@ public class CalEventLocalServiceUtil {
 		boolean addCommunityPermissions, boolean addGuestPermissions)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		return _service.addEvent(userId, plid, title, description,
-			startDateMonth, startDateDay, startDateYear, startDateHour,
-			startDateMinute, endDateMonth, endDateDay, endDateYear,
-			durationHour, durationMinute, allDay, timeZoneSensitive, type,
-			repeating, recurrence, remindBy, firstReminder, secondReminder,
+		return getService()
+				   .addEvent(userId, plid, title, description, startDateMonth,
+			startDateDay, startDateYear, startDateHour, startDateMinute,
+			endDateMonth, endDateDay, endDateYear, durationHour,
+			durationMinute, allDay, timeZoneSensitive, type, repeating,
+			recurrence, remindBy, firstReminder, secondReminder,
 			addCommunityPermissions, addGuestPermissions);
 	}
 
@@ -130,7 +136,8 @@ public class CalEventLocalServiceUtil {
 		boolean addCommunityPermissions, boolean addGuestPermissions)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		return _service.addEvent(uuid, userId, plid, title, description,
+		return getService()
+				   .addEvent(uuid, userId, plid, title, description,
 			startDateMonth, startDateDay, startDateYear, startDateHour,
 			startDateMinute, endDateMonth, endDateDay, endDateYear,
 			durationHour, durationMinute, allDay, timeZoneSensitive, type,
@@ -151,11 +158,12 @@ public class CalEventLocalServiceUtil {
 		java.lang.String[] guestPermissions)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		return _service.addEvent(userId, plid, title, description,
-			startDateMonth, startDateDay, startDateYear, startDateHour,
-			startDateMinute, endDateMonth, endDateDay, endDateYear,
-			durationHour, durationMinute, allDay, timeZoneSensitive, type,
-			repeating, recurrence, remindBy, firstReminder, secondReminder,
+		return getService()
+				   .addEvent(userId, plid, title, description, startDateMonth,
+			startDateDay, startDateYear, startDateHour, startDateMinute,
+			endDateMonth, endDateDay, endDateYear, durationHour,
+			durationMinute, allDay, timeZoneSensitive, type, repeating,
+			recurrence, remindBy, firstReminder, secondReminder,
 			communityPermissions, guestPermissions);
 	}
 
@@ -174,7 +182,8 @@ public class CalEventLocalServiceUtil {
 		java.lang.String[] guestPermissions)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		return _service.addEvent(uuid, userId, plid, title, description,
+		return getService()
+				   .addEvent(uuid, userId, plid, title, description,
 			startDateMonth, startDateDay, startDateYear, startDateHour,
 			startDateMinute, endDateMonth, endDateDay, endDateYear,
 			durationHour, durationMinute, allDay, timeZoneSensitive, type,
@@ -187,7 +196,8 @@ public class CalEventLocalServiceUtil {
 		boolean addCommunityPermissions, boolean addGuestPermissions)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		_service.addEventResources(eventId, addCommunityPermissions,
+		getService()
+			.addEventResources(eventId, addCommunityPermissions,
 			addGuestPermissions);
 	}
 
@@ -196,7 +206,8 @@ public class CalEventLocalServiceUtil {
 		boolean addCommunityPermissions, boolean addGuestPermissions)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		_service.addEventResources(event, addCommunityPermissions,
+		getService()
+			.addEventResources(event, addCommunityPermissions,
 			addGuestPermissions);
 	}
 
@@ -205,8 +216,8 @@ public class CalEventLocalServiceUtil {
 		java.lang.String[] guestPermissions)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		_service.addEventResources(eventId, communityPermissions,
-			guestPermissions);
+		getService()
+			.addEventResources(eventId, communityPermissions, guestPermissions);
 	}
 
 	public static void addEventResources(
@@ -215,96 +226,97 @@ public class CalEventLocalServiceUtil {
 		java.lang.String[] guestPermissions)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		_service.addEventResources(event, communityPermissions, guestPermissions);
+		getService()
+			.addEventResources(event, communityPermissions, guestPermissions);
 	}
 
 	public static void checkEvents()
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		_service.checkEvents();
+		getService().checkEvents();
 	}
 
 	public static void deleteEvent(long eventId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		_service.deleteEvent(eventId);
+		getService().deleteEvent(eventId);
 	}
 
 	public static void deleteEvent(
 		com.liferay.portlet.calendar.model.CalEvent event)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		_service.deleteEvent(event);
+		getService().deleteEvent(event);
 	}
 
 	public static void deleteEvents(long groupId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		_service.deleteEvents(groupId);
+		getService().deleteEvents(groupId);
 	}
 
 	public static java.io.File exportEvent(long userId, long eventId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		return _service.exportEvent(userId, eventId);
+		return getService().exportEvent(userId, eventId);
 	}
 
 	public static java.io.File exportGroupEvents(long userId, long plid,
 		java.lang.String fileName)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		return _service.exportGroupEvents(userId, plid, fileName);
+		return getService().exportGroupEvents(userId, plid, fileName);
 	}
 
 	public static com.liferay.portlet.calendar.model.CalEvent getEvent(
 		long eventId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		return _service.getEvent(eventId);
+		return getService().getEvent(eventId);
 	}
 
 	public static java.util.List<com.liferay.portlet.calendar.model.CalEvent> getEvents(
 		long groupId, java.lang.String type, int start, int end)
 		throws com.liferay.portal.SystemException {
-		return _service.getEvents(groupId, type, start, end);
+		return getService().getEvents(groupId, type, start, end);
 	}
 
 	public static java.util.List<com.liferay.portlet.calendar.model.CalEvent> getEvents(
 		long groupId, java.util.Calendar cal)
 		throws com.liferay.portal.SystemException {
-		return _service.getEvents(groupId, cal);
+		return getService().getEvents(groupId, cal);
 	}
 
 	public static java.util.List<com.liferay.portlet.calendar.model.CalEvent> getEvents(
 		long groupId, java.util.Calendar cal, java.lang.String type)
 		throws com.liferay.portal.SystemException {
-		return _service.getEvents(groupId, cal, type);
+		return getService().getEvents(groupId, cal, type);
 	}
 
 	public static int getEventsCount(long groupId, java.lang.String type)
 		throws com.liferay.portal.SystemException {
-		return _service.getEventsCount(groupId, type);
+		return getService().getEventsCount(groupId, type);
 	}
 
 	public static java.util.List<com.liferay.portlet.calendar.model.CalEvent> getRepeatingEvents(
 		long groupId) throws com.liferay.portal.SystemException {
-		return _service.getRepeatingEvents(groupId);
+		return getService().getRepeatingEvents(groupId);
 	}
 
 	public static boolean hasEvents(long groupId, java.util.Calendar cal)
 		throws com.liferay.portal.SystemException {
-		return _service.hasEvents(groupId, cal);
+		return getService().hasEvents(groupId, cal);
 	}
 
 	public static boolean hasEvents(long groupId, java.util.Calendar cal,
 		java.lang.String type) throws com.liferay.portal.SystemException {
-		return _service.hasEvents(groupId, cal, type);
+		return getService().hasEvents(groupId, cal, type);
 	}
 
 	public static void importICal4j(long userId, long plid, java.io.File file)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		_service.importICal4j(userId, plid, file);
+		getService().importICal4j(userId, plid, file);
 	}
 
 	public static com.liferay.portlet.calendar.model.CalEvent updateEvent(
@@ -318,7 +330,8 @@ public class CalEventLocalServiceUtil {
 		java.lang.String remindBy, int firstReminder, int secondReminder)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		return _service.updateEvent(userId, eventId, title, description,
+		return getService()
+				   .updateEvent(userId, eventId, title, description,
 			startDateMonth, startDateDay, startDateYear, startDateHour,
 			startDateMinute, endDateMonth, endDateDay, endDateYear,
 			durationHour, durationMinute, allDay, timeZoneSensitive, type,
@@ -326,6 +339,10 @@ public class CalEventLocalServiceUtil {
 	}
 
 	public static CalEventLocalService getService() {
+		if (_service == null) {
+			throw new RuntimeException("CalEventLocalService is not set");
+		}
+
 		return _service;
 	}
 

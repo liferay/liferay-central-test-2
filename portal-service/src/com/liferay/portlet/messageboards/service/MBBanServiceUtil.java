@@ -49,16 +49,20 @@ public class MBBanServiceUtil {
 		long plid, long banUserId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
-		return _service.addBan(plid, banUserId);
+		return getService().addBan(plid, banUserId);
 	}
 
 	public static void deleteBan(long plid, long banUserId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
-		_service.deleteBan(plid, banUserId);
+		getService().deleteBan(plid, banUserId);
 	}
 
 	public static MBBanService getService() {
+		if (_service == null) {
+			throw new RuntimeException("MBBanService is not set");
+		}
+
 		return _service;
 	}
 

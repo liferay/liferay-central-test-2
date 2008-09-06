@@ -52,6 +52,9 @@ public interface AnnouncementsEntryLocalService {
 		com.liferay.portlet.announcements.model.AnnouncementsEntry announcementsEntry)
 		throws com.liferay.portal.SystemException;
 
+	public com.liferay.portlet.announcements.model.AnnouncementsEntry createAnnouncementsEntry(
+		long entryId);
+
 	public void deleteAnnouncementsEntry(long entryId)
 		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;

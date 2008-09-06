@@ -48,53 +48,58 @@ public class OrgLaborLocalServiceUtil {
 	public static com.liferay.portal.model.OrgLabor addOrgLabor(
 		com.liferay.portal.model.OrgLabor orgLabor)
 		throws com.liferay.portal.SystemException {
-		return _service.addOrgLabor(orgLabor);
+		return getService().addOrgLabor(orgLabor);
+	}
+
+	public static com.liferay.portal.model.OrgLabor createOrgLabor(
+		long orgLaborId) {
+		return getService().createOrgLabor(orgLaborId);
 	}
 
 	public static void deleteOrgLabor(long orgLaborId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		_service.deleteOrgLabor(orgLaborId);
+		getService().deleteOrgLabor(orgLaborId);
 	}
 
 	public static void deleteOrgLabor(
 		com.liferay.portal.model.OrgLabor orgLabor)
 		throws com.liferay.portal.SystemException {
-		_service.deleteOrgLabor(orgLabor);
+		getService().deleteOrgLabor(orgLabor);
 	}
 
 	public static java.util.List<Object> dynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery)
 		throws com.liferay.portal.SystemException {
-		return _service.dynamicQuery(dynamicQuery);
+		return getService().dynamicQuery(dynamicQuery);
 	}
 
 	public static java.util.List<Object> dynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery, int start,
 		int end) throws com.liferay.portal.SystemException {
-		return _service.dynamicQuery(dynamicQuery, start, end);
+		return getService().dynamicQuery(dynamicQuery, start, end);
 	}
 
 	public static com.liferay.portal.model.OrgLabor getOrgLabor(long orgLaborId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		return _service.getOrgLabor(orgLaborId);
+		return getService().getOrgLabor(orgLaborId);
 	}
 
 	public static java.util.List<com.liferay.portal.model.OrgLabor> getOrgLabors(
 		int start, int end) throws com.liferay.portal.SystemException {
-		return _service.getOrgLabors(start, end);
+		return getService().getOrgLabors(start, end);
 	}
 
 	public static int getOrgLaborsCount()
 		throws com.liferay.portal.SystemException {
-		return _service.getOrgLaborsCount();
+		return getService().getOrgLaborsCount();
 	}
 
 	public static com.liferay.portal.model.OrgLabor updateOrgLabor(
 		com.liferay.portal.model.OrgLabor orgLabor)
 		throws com.liferay.portal.SystemException {
-		return _service.updateOrgLabor(orgLabor);
+		return getService().updateOrgLabor(orgLabor);
 	}
 
 	public static com.liferay.portal.model.OrgLabor addOrgLabor(
@@ -104,14 +109,15 @@ public class OrgLaborLocalServiceUtil {
 		int satOpen, int satClose)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		return _service.addOrgLabor(organizationId, typeId, sunOpen, sunClose,
+		return getService()
+				   .addOrgLabor(organizationId, typeId, sunOpen, sunClose,
 			monOpen, monClose, tueOpen, tueClose, wedOpen, wedClose, thuOpen,
 			thuClose, friOpen, friClose, satOpen, satClose);
 	}
 
 	public static java.util.List<com.liferay.portal.model.OrgLabor> getOrgLabors(
 		long organizationId) throws com.liferay.portal.SystemException {
-		return _service.getOrgLabors(organizationId);
+		return getService().getOrgLabors(organizationId);
 	}
 
 	public static com.liferay.portal.model.OrgLabor updateOrgLabor(
@@ -121,12 +127,17 @@ public class OrgLaborLocalServiceUtil {
 		int satClose)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		return _service.updateOrgLabor(orgLaborId, typeId, sunOpen, sunClose,
+		return getService()
+				   .updateOrgLabor(orgLaborId, typeId, sunOpen, sunClose,
 			monOpen, monClose, tueOpen, tueClose, wedOpen, wedClose, thuOpen,
 			thuClose, friOpen, friClose, satOpen, satClose);
 	}
 
 	public static OrgLaborLocalService getService() {
+		if (_service == null) {
+			throw new RuntimeException("OrgLaborLocalService is not set");
+		}
+
 		return _service;
 	}
 

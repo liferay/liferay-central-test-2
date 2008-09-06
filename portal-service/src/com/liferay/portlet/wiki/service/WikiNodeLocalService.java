@@ -52,6 +52,8 @@ public interface WikiNodeLocalService {
 		com.liferay.portlet.wiki.model.WikiNode wikiNode)
 		throws com.liferay.portal.SystemException;
 
+	public com.liferay.portlet.wiki.model.WikiNode createWikiNode(long nodeId);
+
 	public void deleteWikiNode(long nodeId)
 		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;

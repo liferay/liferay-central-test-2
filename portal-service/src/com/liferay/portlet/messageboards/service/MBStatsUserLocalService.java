@@ -52,6 +52,9 @@ public interface MBStatsUserLocalService {
 		com.liferay.portlet.messageboards.model.MBStatsUser mbStatsUser)
 		throws com.liferay.portal.SystemException;
 
+	public com.liferay.portlet.messageboards.model.MBStatsUser createMBStatsUser(
+		long statsUserId);
+
 	public void deleteMBStatsUser(long statsUserId)
 		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;

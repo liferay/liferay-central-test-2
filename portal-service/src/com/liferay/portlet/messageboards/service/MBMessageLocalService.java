@@ -52,6 +52,9 @@ public interface MBMessageLocalService {
 		com.liferay.portlet.messageboards.model.MBMessage mbMessage)
 		throws com.liferay.portal.SystemException;
 
+	public com.liferay.portlet.messageboards.model.MBMessage createMBMessage(
+		long messageId);
+
 	public void deleteMBMessage(long messageId)
 		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;

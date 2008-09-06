@@ -52,6 +52,9 @@ public interface DLFolderLocalService {
 		com.liferay.portlet.documentlibrary.model.DLFolder dlFolder)
 		throws com.liferay.portal.SystemException;
 
+	public com.liferay.portlet.documentlibrary.model.DLFolder createDLFolder(
+		long folderId);
+
 	public void deleteDLFolder(long folderId)
 		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;

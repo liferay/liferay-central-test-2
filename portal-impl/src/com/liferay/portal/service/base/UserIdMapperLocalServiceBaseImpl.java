@@ -169,6 +169,10 @@ public abstract class UserIdMapperLocalServiceBaseImpl
 		return userIdMapperPersistence.update(userIdMapper, false);
 	}
 
+	public UserIdMapper createUserIdMapper(long userIdMapperId) {
+		return userIdMapperPersistence.create(userIdMapperId);
+	}
+
 	public void deleteUserIdMapper(long userIdMapperId)
 		throws PortalException, SystemException {
 		userIdMapperPersistence.remove(userIdMapperId);

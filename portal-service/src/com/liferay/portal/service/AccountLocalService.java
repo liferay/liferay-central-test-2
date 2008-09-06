@@ -52,6 +52,8 @@ public interface AccountLocalService {
 		com.liferay.portal.model.Account account)
 		throws com.liferay.portal.SystemException;
 
+	public com.liferay.portal.model.Account createAccount(long accountId);
+
 	public void deleteAccount(long accountId)
 		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;

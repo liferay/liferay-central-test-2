@@ -81,6 +81,10 @@ public abstract class JournalStructureLocalServiceBaseImpl
 		return journalStructurePersistence.update(journalStructure, false);
 	}
 
+	public JournalStructure createJournalStructure(long id) {
+		return journalStructurePersistence.create(id);
+	}
+
 	public void deleteJournalStructure(long id)
 		throws PortalException, SystemException {
 		journalStructurePersistence.remove(id);

@@ -54,7 +54,8 @@ public class PasswordPolicyServiceUtil {
 		long lockoutDuration, long resetFailureCount)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
-		return _service.addPasswordPolicy(name, description, changeable,
+		return getService()
+				   .addPasswordPolicy(name, description, changeable,
 			changeRequired, minAge, checkSyntax, allowDictionaryWords,
 			minLength, history, historyCount, expireable, maxAge, warningTime,
 			graceLimit, lockout, maxFailure, lockoutDuration, resetFailureCount);
@@ -63,7 +64,7 @@ public class PasswordPolicyServiceUtil {
 	public static void deletePasswordPolicy(long passwordPolicyId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
-		_service.deletePasswordPolicy(passwordPolicyId);
+		getService().deletePasswordPolicy(passwordPolicyId);
 	}
 
 	public static com.liferay.portal.model.PasswordPolicy updatePasswordPolicy(
@@ -76,14 +77,19 @@ public class PasswordPolicyServiceUtil {
 		long resetFailureCount)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
-		return _service.updatePasswordPolicy(passwordPolicyId, name,
-			description, changeable, changeRequired, minAge, checkSyntax,
+		return getService()
+				   .updatePasswordPolicy(passwordPolicyId, name, description,
+			changeable, changeRequired, minAge, checkSyntax,
 			allowDictionaryWords, minLength, history, historyCount, expireable,
 			maxAge, warningTime, graceLimit, lockout, maxFailure,
 			lockoutDuration, resetFailureCount);
 	}
 
 	public static PasswordPolicyService getService() {
+		if (_service == null) {
+			throw new RuntimeException("PasswordPolicyService is not set");
+		}
+
 		return _service;
 	}
 

@@ -48,52 +48,56 @@ public class CompanyLocalServiceUtil {
 	public static com.liferay.portal.model.Company addCompany(
 		com.liferay.portal.model.Company company)
 		throws com.liferay.portal.SystemException {
-		return _service.addCompany(company);
+		return getService().addCompany(company);
+	}
+
+	public static com.liferay.portal.model.Company createCompany(long companyId) {
+		return getService().createCompany(companyId);
 	}
 
 	public static void deleteCompany(long companyId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		_service.deleteCompany(companyId);
+		getService().deleteCompany(companyId);
 	}
 
 	public static void deleteCompany(com.liferay.portal.model.Company company)
 		throws com.liferay.portal.SystemException {
-		_service.deleteCompany(company);
+		getService().deleteCompany(company);
 	}
 
 	public static java.util.List<Object> dynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery)
 		throws com.liferay.portal.SystemException {
-		return _service.dynamicQuery(dynamicQuery);
+		return getService().dynamicQuery(dynamicQuery);
 	}
 
 	public static java.util.List<Object> dynamicQuery(
 		com.liferay.portal.kernel.dao.orm.DynamicQuery dynamicQuery, int start,
 		int end) throws com.liferay.portal.SystemException {
-		return _service.dynamicQuery(dynamicQuery, start, end);
+		return getService().dynamicQuery(dynamicQuery, start, end);
 	}
 
 	public static com.liferay.portal.model.Company getCompany(long companyId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		return _service.getCompany(companyId);
+		return getService().getCompany(companyId);
 	}
 
 	public static java.util.List<com.liferay.portal.model.Company> getCompanies(
 		int start, int end) throws com.liferay.portal.SystemException {
-		return _service.getCompanies(start, end);
+		return getService().getCompanies(start, end);
 	}
 
 	public static int getCompaniesCount()
 		throws com.liferay.portal.SystemException {
-		return _service.getCompaniesCount();
+		return getService().getCompaniesCount();
 	}
 
 	public static com.liferay.portal.model.Company updateCompany(
 		com.liferay.portal.model.Company company)
 		throws com.liferay.portal.SystemException {
-		return _service.updateCompany(company);
+		return getService().updateCompany(company);
 	}
 
 	public static com.liferay.portal.model.Company addCompany(
@@ -101,80 +105,81 @@ public class CompanyLocalServiceUtil {
 		java.lang.String mx)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		return _service.addCompany(webId, virtualHost, mx);
+		return getService().addCompany(webId, virtualHost, mx);
 	}
 
 	public static com.liferay.portal.model.Company checkCompany(
 		java.lang.String webId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		return _service.checkCompany(webId);
+		return getService().checkCompany(webId);
 	}
 
 	public static com.liferay.portal.model.Company checkCompany(
 		java.lang.String webId, java.lang.String mx)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		return _service.checkCompany(webId, mx);
+		return getService().checkCompany(webId, mx);
 	}
 
 	public static void checkCompanyKey(long companyId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		_service.checkCompanyKey(companyId);
+		getService().checkCompanyKey(companyId);
 	}
 
 	public static java.util.List<com.liferay.portal.model.Company> getCompanies()
 		throws com.liferay.portal.SystemException {
-		return _service.getCompanies();
+		return getService().getCompanies();
 	}
 
 	public static com.liferay.portal.model.Company getCompanyById(
 		long companyId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		return _service.getCompanyById(companyId);
+		return getService().getCompanyById(companyId);
 	}
 
 	public static com.liferay.portal.model.Company getCompanyByLogoId(
 		long logoId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		return _service.getCompanyByLogoId(logoId);
+		return getService().getCompanyByLogoId(logoId);
 	}
 
 	public static com.liferay.portal.model.Company getCompanyByMx(
 		java.lang.String mx)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		return _service.getCompanyByMx(mx);
+		return getService().getCompanyByMx(mx);
 	}
 
 	public static com.liferay.portal.model.Company getCompanyByVirtualHost(
 		java.lang.String virtualHost)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		return _service.getCompanyByVirtualHost(virtualHost);
+		return getService().getCompanyByVirtualHost(virtualHost);
 	}
 
 	public static com.liferay.portal.model.Company getCompanyByWebId(
 		java.lang.String webId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		return _service.getCompanyByWebId(webId);
+		return getService().getCompanyByWebId(webId);
 	}
 
 	public static com.liferay.portal.kernel.search.Hits search(long companyId,
 		java.lang.String keywords, int start, int end)
 		throws com.liferay.portal.SystemException {
-		return _service.search(companyId, keywords, start, end);
+		return getService().search(companyId, keywords, start, end);
 	}
 
 	public static com.liferay.portal.kernel.search.Hits search(long companyId,
 		java.lang.String portletId, long groupId, java.lang.String type,
 		java.lang.String keywords, int start, int end)
 		throws com.liferay.portal.SystemException {
-		return _service.search(companyId, portletId, groupId, type, keywords,
+		return getService()
+				   .search(companyId, portletId, groupId, type, keywords,
 			start, end);
 	}
 
@@ -182,7 +187,7 @@ public class CompanyLocalServiceUtil {
 		long companyId, java.lang.String virtualHost, java.lang.String mx)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		return _service.updateCompany(companyId, virtualHost, mx);
+		return getService().updateCompany(companyId, virtualHost, mx);
 	}
 
 	public static com.liferay.portal.model.Company updateCompany(
@@ -193,22 +198,22 @@ public class CompanyLocalServiceUtil {
 		java.lang.String industry, java.lang.String type, java.lang.String size)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		return _service.updateCompany(companyId, virtualHost, mx, name,
-			legalName, legalId, legalType, sicCode, tickerSymbol, industry,
-			type, size);
+		return getService()
+				   .updateCompany(companyId, virtualHost, mx, name, legalName,
+			legalId, legalType, sicCode, tickerSymbol, industry, type, size);
 	}
 
 	public static void updateDisplay(long companyId,
 		java.lang.String languageId, java.lang.String timeZoneId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		_service.updateDisplay(companyId, languageId, timeZoneId);
+		getService().updateDisplay(companyId, languageId, timeZoneId);
 	}
 
 	public static void updateLogo(long companyId, java.io.File file)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		_service.updateLogo(companyId, file);
+		getService().updateLogo(companyId, file);
 	}
 
 	public static void updateSecurity(long companyId,
@@ -217,11 +222,16 @@ public class CompanyLocalServiceUtil {
 		boolean communityLogo)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		_service.updateSecurity(companyId, authType, autoLogin, sendPassword,
+		getService()
+			.updateSecurity(companyId, authType, autoLogin, sendPassword,
 			strangers, strangersWithMx, strangersVerify, communityLogo);
 	}
 
 	public static CompanyLocalService getService() {
+		if (_service == null) {
+			throw new RuntimeException("CompanyLocalService is not set");
+		}
+
 		return _service;
 	}
 

@@ -50,8 +50,9 @@ public class WikiNodeServiceUtil {
 		boolean addCommunityPermissions, boolean addGuestPermissions)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
-		return _service.addNode(plid, name, description,
-			addCommunityPermissions, addGuestPermissions);
+		return getService()
+				   .addNode(plid, name, description, addCommunityPermissions,
+			addGuestPermissions);
 	}
 
 	public static com.liferay.portlet.wiki.model.WikiNode addNode(long plid,
@@ -60,56 +61,61 @@ public class WikiNodeServiceUtil {
 		java.lang.String[] guestPermissions)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
-		return _service.addNode(plid, name, description, communityPermissions,
+		return getService()
+				   .addNode(plid, name, description, communityPermissions,
 			guestPermissions);
 	}
 
 	public static void deleteNode(long nodeId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
-		_service.deleteNode(nodeId);
+		getService().deleteNode(nodeId);
 	}
 
 	public static com.liferay.portlet.wiki.model.WikiNode getNode(long nodeId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
-		return _service.getNode(nodeId);
+		return getService().getNode(nodeId);
 	}
 
 	public static com.liferay.portlet.wiki.model.WikiNode getNode(
 		long groupId, java.lang.String name)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
-		return _service.getNode(groupId, name);
+		return getService().getNode(groupId, name);
 	}
 
 	public static void importPages(long nodeId, java.lang.String importer,
 		java.io.File[] files, java.util.Map<String, String[]> options)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
-		_service.importPages(nodeId, importer, files, options);
+		getService().importPages(nodeId, importer, files, options);
 	}
 
 	public static void subscribeNode(long nodeId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
-		_service.subscribeNode(nodeId);
+		getService().subscribeNode(nodeId);
 	}
 
 	public static void unsubscribeNode(long nodeId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
-		_service.unsubscribeNode(nodeId);
+		getService().unsubscribeNode(nodeId);
 	}
 
 	public static com.liferay.portlet.wiki.model.WikiNode updateNode(
 		long nodeId, java.lang.String name, java.lang.String description)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
-		return _service.updateNode(nodeId, name, description);
+		return getService().updateNode(nodeId, name, description);
 	}
 
 	public static WikiNodeService getService() {
+		if (_service == null) {
+			throw new RuntimeException("WikiNodeService is not set");
+		}
+
 		return _service;
 	}
 

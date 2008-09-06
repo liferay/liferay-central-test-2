@@ -69,6 +69,10 @@ public abstract class IGImageLocalServiceBaseImpl implements IGImageLocalService
 		return igImagePersistence.update(igImage, false);
 	}
 
+	public IGImage createIGImage(long imageId) {
+		return igImagePersistence.create(imageId);
+	}
+
 	public void deleteIGImage(long imageId)
 		throws PortalException, SystemException {
 		igImagePersistence.remove(imageId);

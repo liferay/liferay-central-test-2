@@ -52,6 +52,9 @@ public interface PluginSettingLocalService {
 		com.liferay.portal.model.PluginSetting pluginSetting)
 		throws com.liferay.portal.SystemException;
 
+	public com.liferay.portal.model.PluginSetting createPluginSetting(
+		long pluginSettingId);
+
 	public void deletePluginSetting(long pluginSettingId)
 		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;

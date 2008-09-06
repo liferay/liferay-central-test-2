@@ -61,6 +61,10 @@ public abstract class ExpandoTableLocalServiceBaseImpl
 		return expandoTablePersistence.update(expandoTable, false);
 	}
 
+	public ExpandoTable createExpandoTable(long tableId) {
+		return expandoTablePersistence.create(tableId);
+	}
+
 	public void deleteExpandoTable(long tableId)
 		throws PortalException, SystemException {
 		expandoTablePersistence.remove(tableId);
