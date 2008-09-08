@@ -1830,9 +1830,13 @@ public class ServiceBuilder {
 			return;
 		}
 
+		JavaClass javaClass = _getJavaClass(
+			_outputPath + "/model/impl/" + entity.getName() + "Impl.java");
+
 		Map<String, Object> context = _getContext();
 
 		context.put("entity", entity);
+		context.put("methods", _getMethods(javaClass));
 
 		// Content
 
