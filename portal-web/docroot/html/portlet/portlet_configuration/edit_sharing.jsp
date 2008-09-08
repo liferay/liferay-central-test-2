@@ -178,10 +178,8 @@ Liferay.Widget({ url: &#x27;<%= widgetURL %>&#x27;});
 
 <br />
 
-<div class="button-holder">
-	<input type="submit" value="<liferay-ui:message key="save" />" />
+<input type="submit" value="<liferay-ui:message key="save" />" />
 
-	<input type="button" value="<liferay-ui:message key="cancel" />" onClick="location.href = '<%= HtmlUtil.escape(redirect) %>';" />
-</div>
+<input type="button" value="<liferay-ui:message key="cancel" />" onClick="location.href = '<%= HtmlUtil.escape(redirect) %>';" />
 
 </form>
