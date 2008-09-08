@@ -51,6 +51,14 @@ package com.liferay.portal.model;
 public interface Layout extends LayoutModel {
 	public com.liferay.portal.model.Group getGroup();
 
+	public com.liferay.portal.model.Group getScopeGroup()
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException;
+
+	public boolean hasScopeGroup()
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException;
+
 	public boolean isPublicLayout();
 
 	public long getAncestorPlid();
@@ -62,10 +70,6 @@ public interface Layout extends LayoutModel {
 			com.liferay.portal.SystemException;
 
 	public boolean hasAncestor(long layoutId)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException;
-
-	public boolean hasScopeGroup()
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;
 
@@ -146,10 +150,6 @@ public interface Layout extends LayoutModel {
 	public java.lang.String getResetMaxStateURL(
 		javax.servlet.http.HttpServletRequest request)
 		throws com.liferay.portal.SystemException;
-
-	public com.liferay.portal.model.Group getScopeGroup()
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException;
 
 	public java.lang.String getResetLayoutURL(
 		javax.servlet.http.HttpServletRequest request)

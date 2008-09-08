@@ -500,7 +500,7 @@ public class ResourceLocalServiceImpl extends ResourceLocalServiceBaseImpl {
 		if (PropsValues.PERMISSIONS_USER_CHECK_ALGORITHM == 5) {
 			Role role = null;
 
-			if (group.isLayoutScope()) {
+			if (group.isLayout()) {
 				Layout layout = layoutLocalService.getLayout(
 					group.getClassPK());
 

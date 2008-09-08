@@ -220,8 +220,6 @@ public class EditEntryAction extends PortletAction {
 		ThemeDisplay themeDisplay = (ThemeDisplay)actionRequest.getAttribute(
 			WebKeys.THEME_DISPLAY);
 
-		long scopeGroupId = PortalUtil.getPortletScopeGroupId(actionRequest);
-
 		Layout layout = themeDisplay.getLayout();
 
 		long entryId = ParamUtil.getLong(actionRequest, "entryId");
@@ -266,11 +264,11 @@ public class EditEntryAction extends PortletAction {
 			// Add entry
 
 			entry = BlogsEntryServiceUtil.addEntry(
-				scopeGroupId, layout.getPlid(), title, content,
-				displayDateMonth, displayDateDay, displayDateYear,
-				displayDateHour, displayDateMinute, draft, allowTrackbacks,
-				trackbacks, tagsEntries, addCommunityPermissions,
-				addGuestPermissions, themeDisplay);
+				layout.getPlid(), title, content, displayDateMonth,
+				displayDateDay, displayDateYear, displayDateHour,
+				displayDateMinute, draft, allowTrackbacks, trackbacks,
+				tagsEntries, addCommunityPermissions, addGuestPermissions,
+				themeDisplay);
 
 			if (!draft) {
 				AssetPublisherUtil.addAndStoreSelection(

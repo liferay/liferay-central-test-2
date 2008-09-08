@@ -48,23 +48,21 @@ package com.liferay.portlet.blogs.service;
  *
  */
 public interface BlogsEntryService {
-	public com.liferay.portlet.blogs.model.BlogsEntry addEntry(long groupId,
-		long plid, java.lang.String title, java.lang.String content,
-		int displayDateMonth, int displayDateDay, int displayDateYear,
-		int displayDateHour, int displayDateMinute, boolean draft,
-		boolean allowTrackbacks, java.lang.String[] trackbacks,
-		java.lang.String[] tagsEntries, boolean addCommunityPermissions,
-		boolean addGuestPermissions,
+	public com.liferay.portlet.blogs.model.BlogsEntry addEntry(long plid,
+		java.lang.String title, java.lang.String content, int displayDateMonth,
+		int displayDateDay, int displayDateYear, int displayDateHour,
+		int displayDateMinute, boolean draft, boolean allowTrackbacks,
+		java.lang.String[] trackbacks, java.lang.String[] tagsEntries,
+		boolean addCommunityPermissions, boolean addGuestPermissions,
 		com.liferay.portal.theme.ThemeDisplay themeDisplay)
 		throws java.rmi.RemoteException, com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;
 
-	public com.liferay.portlet.blogs.model.BlogsEntry addEntry(long groupId,
-		long plid, java.lang.String title, java.lang.String content,
-		int displayDateMonth, int displayDateDay, int displayDateYear,
-		int displayDateHour, int displayDateMinute, boolean draft,
-		boolean allowTrackbacks, java.lang.String[] trackbacks,
-		java.lang.String[] tagsEntries,
+	public com.liferay.portlet.blogs.model.BlogsEntry addEntry(long plid,
+		java.lang.String title, java.lang.String content, int displayDateMonth,
+		int displayDateDay, int displayDateYear, int displayDateHour,
+		int displayDateMinute, boolean draft, boolean allowTrackbacks,
+		java.lang.String[] trackbacks, java.lang.String[] tagsEntries,
 		java.lang.String[] communityPermissions,
 		java.lang.String[] guestPermissions,
 		com.liferay.portal.theme.ThemeDisplay themeDisplay)

@@ -995,6 +995,9 @@ public class PortletLocalServiceImpl extends PortletLocalServiceBaseImpl {
 				portletModel.setInstanceable(GetterUtil.getBoolean(
 					portlet.elementText("instanceable"),
 					portletModel.isInstanceable()));
+				portletModel.setScopeable(GetterUtil.getBoolean(
+					portlet.elementText("scopeable"),
+					portletModel.isScopeable()));
 				portletModel.setUserPrincipalStrategy(GetterUtil.getString(
 					portlet.elementText("user-principal-strategy"),
 					portletModel.getUserPrincipalStrategy()));
@@ -1120,9 +1123,6 @@ public class PortletLocalServiceImpl extends PortletLocalServiceBaseImpl {
 				portletModel.setFacebookIntegration(GetterUtil.getString(
 					portlet.elementText("facebook-integration"),
 					portletModel.getFacebookIntegration()));
-				portletModel.setScopable(GetterUtil.getBoolean(
-					portlet.elementText("scopable"),
-					portletModel.isScopable()));
 				portletModel.setAddDefaultResource(GetterUtil.getBoolean(
 					portlet.elementText("add-default-resource"),
 					portletModel.isAddDefaultResource()));

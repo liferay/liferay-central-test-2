@@ -153,16 +153,16 @@ public class GroupLocalServiceUtil {
 		return getService().getGroup(companyId, name);
 	}
 
-	public static java.util.List<com.liferay.portal.model.Group> getNullFriendlyURLGroups()
-		throws com.liferay.portal.SystemException {
-		return getService().getNullFriendlyURLGroups();
-	}
-
 	public static com.liferay.portal.model.Group getLayoutGroup(
 		long companyId, long plid)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		return getService().getLayoutGroup(companyId, plid);
+	}
+
+	public static java.util.List<com.liferay.portal.model.Group> getNullFriendlyURLGroups()
+		throws com.liferay.portal.SystemException {
+		return getService().getNullFriendlyURLGroups();
 	}
 
 	public static com.liferay.portal.model.Group getOrganizationGroup(

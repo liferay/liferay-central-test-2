@@ -136,15 +136,14 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 		boolean showPortletInactive, boolean actionURLRedirect,
 		boolean restoreCurrentView, boolean maximizeEdit, boolean maximizeHelp,
 		boolean popUpPrint, boolean layoutCacheable, boolean instanceable,
-		String userPrincipalStrategy, boolean privateRequestAttributes,
-		boolean privateSessionAttributes, int renderWeight, boolean ajaxable,
-		List<String> headerPortalCss, List<String> headerPortletCss,
-		List<String> headerPortalJavaScript,
+		boolean scopeable, String userPrincipalStrategy,
+		boolean privateRequestAttributes, boolean privateSessionAttributes,
+		int renderWeight, boolean ajaxable, List<String> headerPortalCss,
+		List<String> headerPortletCss, List<String> headerPortalJavaScript,
 		List<String> headerPortletJavaScript, List<String> footerPortalCss,
 		List<String> footerPortletCss, List<String> footerPortalJavaScript,
-		List<String> footerPortletJavaScript,
-		String cssClassWrapper, String facebookIntegration,
-		boolean scopable, boolean addDefaultResource, String roles,
+		List<String> footerPortletJavaScript, String cssClassWrapper,
+		String facebookIntegration, boolean addDefaultResource, String roles,
 		Set<String> unlinkedRoles, Map<String, String> roleMappers,
 		boolean system, boolean active, boolean include,
 		Map<String, String> initParams, Integer expCache,
@@ -195,6 +194,7 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 		_popUpPrint = popUpPrint;
 		_layoutCacheable = layoutCacheable;
 		_instanceable = instanceable;
+		_scopeable = scopeable;
 		_userPrincipalStrategy = userPrincipalStrategy;
 		_privateRequestAttributes = privateRequestAttributes;
 		_privateSessionAttributes = privateSessionAttributes;
@@ -210,7 +210,7 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 		_footerPortletJavaScript = footerPortletJavaScript;
 		_cssClassWrapper = cssClassWrapper;
 		_facebookIntegration = facebookIntegration;
-		_scopable = scopable;
+		_scopeable = scopeable;
 		_addDefaultResource = addDefaultResource;
 		setRoles(roles);
 		_unlinkedRoles = unlinkedRoles;
@@ -1336,6 +1336,34 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 	}
 
 	/**
+	 * Returns true if the portlet supports scoping of data.
+	 *
+	 * @return		true if the portlet supports scoping of data
+	 */
+	public boolean getScopeable() {
+		return _scopeable;
+	}
+
+	/**
+	 * Returns true if the portlet supports scoping of data.
+	 *
+	 * @return		true if the portlet supports scoping of data
+	 */
+	public boolean isScopeable() {
+		return _scopeable;
+	}
+
+	/**
+	 * Set to true if the portlet supports scoping of data.
+	 *
+	 * @param		scopeable boolean value for whether or not the the portlet
+	 *				supports scoping of data
+	 */
+	public void setScopeable(boolean scopeable) {
+		_scopeable = scopeable;
+	}
+
+	/**
 	 * Gets the user principal strategy of the portlet.
 	 *
 	 * @return		the user principal strategy of the portlet
@@ -1696,34 +1724,6 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 		if (Validator.isNotNull(facebookIntegration)) {
 			_facebookIntegration = facebookIntegration;
 		}
-	}
-
-	/**
-	 * Returns true if the portlet supports scoping of data.
-	 *
-	 * @return		true if the portlet supports scoping of data
-	 */
-	public boolean getScopable() {
-		return _scopable;
-	}
-
-	/**
-	 * Returns true if the portlet supports scoping of data.
-	 *
-	 * @return		true if the portlet supports scoping of data
-	 */
-	public boolean isScopable() {
-		return _scopable;
-	}
-
-	/**
-	 * Set to true if the portlet supports scoping of data.
-	 *
-	 * @param		scopable boolean value for whether or not the
-	 *				the portlet supports scoping of data
-	 */
-	public void setScopable(boolean scopable) {
-		_scopable = scopable;
 	}
 
 	/**
@@ -2585,14 +2585,14 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 			isShowPortletInactive(), isActionURLRedirect(),
 			isRestoreCurrentView(), isMaximizeEdit(), isMaximizeHelp(),
 			isPopUpPrint(), isLayoutCacheable(), isInstanceable(),
-			getUserPrincipalStrategy(), isPrivateRequestAttributes(),
-			isPrivateSessionAttributes(), getRenderWeight(), isAjaxable(),
-			getHeaderPortalCss(), getHeaderPortletCss(),
-			getHeaderPortalJavaScript(), getHeaderPortletJavaScript(),
-			getFooterPortalCss(), getFooterPortletCss(),
-			getFooterPortalJavaScript(), getFooterPortletJavaScript(),
-			getCssClassWrapper(), getFacebookIntegration(),
-			isScopable(), isAddDefaultResource(), getRoles(),
+			isScopeable(), getUserPrincipalStrategy(),
+			isPrivateRequestAttributes(), isPrivateSessionAttributes(),
+			getRenderWeight(), isAjaxable(), getHeaderPortalCss(),
+			getHeaderPortletCss(), getHeaderPortalJavaScript(),
+			getHeaderPortletJavaScript(), getFooterPortalCss(),
+			getFooterPortletCss(), getFooterPortalJavaScript(),
+			getFooterPortletJavaScript(), getCssClassWrapper(),
+			getFacebookIntegration(), isAddDefaultResource(), getRoles(),
 			getUnlinkedRoles(), getRoleMappers(), isSystem(), isActive(),
 			isInclude(), getInitParams(), getExpCache(), getPortletModes(),
 			getSupportedLocales(), getResourceBundle(), getPortletInfo(),
@@ -2822,6 +2822,11 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 	private boolean _instanceable;
 
 	/**
+	 * True if the portlet supports scoping of data.
+	 */
+	private boolean _scopeable;
+
+	/**
 	 * The user principal strategy of the portlet.
 	 */
 	private String _userPrincipalStrategy =
@@ -2912,11 +2917,6 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 	 * True if default resources for the portlet are added to a page.
 	 */
 	private boolean _addDefaultResource;
-
-	/**
-	 * True if the portlet supports scoping of data.
-	 */
-	private boolean _scopable;
 
 	/**
 	 * An array of required roles of the portlet.

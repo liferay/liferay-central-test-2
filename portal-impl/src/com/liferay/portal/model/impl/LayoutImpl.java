@@ -157,6 +157,30 @@ public class LayoutImpl extends LayoutModelImpl implements Layout {
 		return group;
 	}
 
+	public Group getScopeGroup() throws PortalException, SystemException {
+		Group group = null;
+
+		try {
+			group = GroupLocalServiceUtil.getLayoutGroup(
+				getCompanyId(), getPlid());
+		}
+		catch (NoSuchGroupException nsge) {
+		}
+
+		return group;
+	}
+
+	public boolean hasScopeGroup() throws PortalException, SystemException {
+		Group group = getScopeGroup();
+
+		if (group != null) {
+			return true;
+		}
+		else {
+			return false;
+		}
+	}
+
 	public boolean isPublicLayout() {
 		return !isPrivateLayout();
 	}
@@ -252,17 +276,6 @@ public class LayoutImpl extends LayoutModelImpl implements Layout {
 		}
 
 		return false;
-	}
-
-	public boolean hasScopeGroup() throws PortalException, SystemException {
-		try {
-			GroupLocalServiceUtil.getLayoutGroup(getCompanyId(), getPlid());
-
-			return true;
-		}
-		catch (NoSuchGroupException nsge) {
-			return false;
-		}
 	}
 
 	public boolean isFirstParent() {
@@ -562,19 +575,6 @@ public class LayoutImpl extends LayoutModelImpl implements Layout {
 		throws SystemException {
 
 		return _getURL(request, true, false);
-	}
-
-	public Group getScopeGroup() throws PortalException, SystemException {
-		Group scopeGroup = null;
-
-		try {
-			scopeGroup = GroupLocalServiceUtil.getLayoutGroup(
-				getCompanyId(), getPlid());
-		}
-		catch (NoSuchGroupException nsge) {
-		}
-
-		return scopeGroup;
 	}
 
 	public String getResetLayoutURL(HttpServletRequest request)

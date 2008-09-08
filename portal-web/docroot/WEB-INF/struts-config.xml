@@ -1260,8 +1260,8 @@
 			<forward name="portlet.portlet_configuration.error" path="portlet.portlet_configuration.error" />
 		</action>
 
-		<action path="/portlet_configuration/edit_scoping" type="com.liferay.portlet.portletconfiguration.action.EditScopingAction">
-			<forward name="portlet.portlet_configuration.edit_scoping" path="portlet.portlet_configuration.edit_scoping" />
+		<action path="/portlet_configuration/edit_scope" type="com.liferay.portlet.portletconfiguration.action.EditScopeAction">
+			<forward name="portlet.portlet_configuration.edit_scope" path="portlet.portlet_configuration.edit_scope" />
 			<forward name="portlet.portlet_configuration.error" path="portlet.portlet_configuration.error" />
 		</action>
 

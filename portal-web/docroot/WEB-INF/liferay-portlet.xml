@@ -328,12 +328,12 @@
 		<preferences-unique-per-layout>false</preferences-unique-per-layout>
 		<use-default-template>false</use-default-template>
 		<restore-current-view>false</restore-current-view>
+		<scopeable>true</scopeable>
 		<private-request-attributes>false</private-request-attributes>
 		<private-session-attributes>false</private-session-attributes>
 		<render-weight>1</render-weight>
 		<header-portlet-css>/html/portlet/blogs/css.jsp</header-portlet-css>
 		<css-class-wrapper>portlet-blogs</css-class-wrapper>
-		<scopable>true</scopable>
 		<add-default-resource>true</add-default-resource>
 	</portlet>
 	<portlet>

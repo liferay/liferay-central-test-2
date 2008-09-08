@@ -22,13 +22,9 @@
 
 package com.liferay.portlet.portletconfiguration.action;
 
-import com.liferay.portal.NoSuchLayoutException;
 import com.liferay.portal.kernel.servlet.SessionErrors;
 import com.liferay.portal.kernel.util.Constants;
-import com.liferay.portal.kernel.util.LocaleUtil;
 import com.liferay.portal.kernel.util.ParamUtil;
-import com.liferay.portal.kernel.util.StringPool;
-import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.model.Layout;
 import com.liferay.portal.model.Portlet;
 import com.liferay.portal.security.auth.PrincipalException;
@@ -50,13 +46,13 @@ import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
 
 /**
- * <a href="EditScopingAction.java.html"><b><i>View Source</i></b></a>
+ * <a href="EditScopeAction.java.html"><b><i>View Source</i></b></a>
  *
  * @author Jesper Weissglas
  * @author Jorge Ferrer
  *
  */
-public class EditScopingAction extends EditConfigurationAction{
+public class EditScopeAction extends EditConfigurationAction {
 
 	public void processAction(
 			ActionMapping mapping, ActionForm form, PortletConfig portletConfig,
@@ -75,50 +71,43 @@ public class EditScopingAction extends EditConfigurationAction{
 			setForward(actionRequest, "portlet.portlet_configuration.error");
 		}
 
-		String command = ParamUtil.getString(actionRequest, Constants.CMD);
+		String cmd = ParamUtil.getString(actionRequest, Constants.CMD);
 
-		try {
-			if (command.equals(Constants.SAVE)) {
-				updateScope(actionRequest, portlet);
+		if (cmd.equals(Constants.SAVE)) {
+			updateScope(actionRequest, portlet);
 
-				sendRedirect(actionRequest, actionResponse);
-			}
-		}
-		catch (Exception e) {
-			SessionErrors.add(actionRequest, e.getClass().getName());
-
-			setForward(
-				actionRequest, "portlet.portlet_configuration.error");
+			sendRedirect(actionRequest, actionResponse);
 		}
 	}
 
 	public ActionForward render(
-			ActionMapping mapping, ActionForm form, PortletConfig config,
-			RenderRequest req, RenderResponse res)
+			ActionMapping mapping, ActionForm form, PortletConfig portletConfig,
+			RenderRequest renderRequest, RenderResponse renderResponse)
 		throws Exception {
 
 		Portlet portlet = null;
 
 		try {
-			portlet = getPortlet(req);
+			portlet = getPortlet(renderRequest);
 		}
 		catch (PrincipalException pe) {
-			SessionErrors.add(req, PrincipalException.class.getName());
+			SessionErrors.add(
+				renderRequest, PrincipalException.class.getName());
 
 			return mapping.findForward("portlet.portlet_configuration.error");
 		}
 
-		res.setTitle(getTitle(portlet, req));
+		renderResponse.setTitle(getTitle(portlet, renderRequest));
 
-		return mapping.findForward(
-			getForward(req, "portlet.portlet_configuration.edit_scoping"));
+		return mapping.findForward(getForward(
+			renderRequest, "portlet.portlet_configuration.edit_scope"));
 	}
 
-	protected void updateScope(ActionRequest req, Portlet portlet)
+	protected void updateScope(ActionRequest actionRequest, Portlet portlet)
 		throws Exception {
 
-		ThemeDisplay themeDisplay =
-			(ThemeDisplay)req.getAttribute(WebKeys.THEME_DISPLAY);
+		ThemeDisplay themeDisplay = (ThemeDisplay)actionRequest.getAttribute(
+			WebKeys.THEME_DISPLAY);
 
 		Layout layout = themeDisplay.getLayout();
 
@@ -126,26 +115,18 @@ public class EditScopingAction extends EditConfigurationAction{
 			PortletPreferencesFactoryUtil.getLayoutPortletSetup(
 				layout, portlet.getPortletId());
 
-		long scopeLayoutId = ParamUtil.getLong(
-			req, "lfr-scope-layout-id");
+		long scopeLayoutId = ParamUtil.getLong(actionRequest, "scopeLayoutId");
 
 		if (scopeLayoutId > 0) {
-			try {
-				Layout scopeLayout = LayoutLocalServiceUtil.getLayout(
-					layout.getGroupId(), layout.isPrivateLayout(),
-					scopeLayoutId);
+			Layout scopeLayout = LayoutLocalServiceUtil.getLayout(
+				layout.getGroupId(), layout.isPrivateLayout(), scopeLayoutId);
 
-				if (!scopeLayout.hasScopeGroup()) {
-					String name = layout.getName(LocaleUtil.getDefault());
-					name = StringUtil.shorten(name, 75, StringPool.BLANK);
+			if (!scopeLayout.hasScopeGroup()) {
+				String name = String.valueOf(scopeLayout.getPlid());
 
-					GroupLocalServiceUtil.addGroup(
-						themeDisplay.getUserId(), Layout.class.getName(),
-						scopeLayout.getPlid(), name, null, 0, null, true);
-				}
-			}
-			catch (NoSuchLayoutException nsle) {
-				scopeLayoutId = 0;
+				GroupLocalServiceUtil.addGroup(
+					themeDisplay.getUserId(), Layout.class.getName(),
+					scopeLayout.getPlid(), name, null, 0, null, true);
 			}
 		}
 

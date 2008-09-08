@@ -106,7 +106,7 @@ public class EditDiscussionAction extends PortletAction {
 	}
 
 	protected void deleteMessage(ActionRequest actionRequest) throws Exception {
-		long groupId = PortalUtil.getPortletScopeGroupId(actionRequest);
+		long groupId = PortalUtil.getPortletGroupId(actionRequest);
 		String className = ParamUtil.getString(actionRequest, "className");
 		long classPK = ParamUtil.getLong(actionRequest, "classPK");
 

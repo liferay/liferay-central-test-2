@@ -88,16 +88,16 @@ sharingURL.setParameter("redirect", redirect);
 sharingURL.setParameter("returnToFullPageURL", returnToFullPageURL);
 sharingURL.setParameter("portletResource", portletResource);
 
-// Scoping
+// Scope
 
-PortletURL scopingURL = renderResponse.createRenderURL();
+PortletURL scopeURL = renderResponse.createRenderURL();
 
-scopingURL.setWindowState(WindowState.MAXIMIZED);
+scopeURL.setWindowState(WindowState.MAXIMIZED);
 
-scopingURL.setParameter("struts_action", "/portlet_configuration/edit_scoping");
-scopingURL.setParameter("redirect", redirect);
-scopingURL.setParameter("returnToFullPageURL", returnToFullPageURL);
-scopingURL.setParameter("portletResource", portletResource);
+scopeURL.setParameter("struts_action", "/portlet_configuration/edit_scope");
+scopeURL.setParameter("redirect", redirect);
+scopeURL.setParameter("returnToFullPageURL", returnToFullPageURL);
+scopeURL.setParameter("portletResource", portletResource);
 
 int pos = 0;
 
@@ -127,10 +127,10 @@ tabsNames += ",sharing";
 
 request.setAttribute("liferay-ui:tabs:url" + pos++, sharingURL.toString());
 
-if (portlet.isScopable()) {
-	tabsNames += ",scoping";
+if (portlet.isScopeable()) {
+	tabsNames += ",scope";
 
-	request.setAttribute("liferay-ui:tabs:url" + pos++, scopingURL.toString());
+	request.setAttribute("liferay-ui:tabs:url" + pos++, scopeURL.toString());
 }
 
 if (tabsNames.startsWith(",")) {

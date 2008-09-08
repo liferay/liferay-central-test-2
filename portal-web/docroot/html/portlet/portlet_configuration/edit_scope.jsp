@@ -25,8 +25,10 @@
 <%@ include file="/html/portlet/portlet_configuration/init.jsp" %>
 
 <%
-String portletResource = ParamUtil.getString(request, "portletResource");
 String redirect = ParamUtil.getString(request, "redirect");
+String returnToFullPageURL = ParamUtil.getString(request, "returnToFullPageURL");
+
+String portletResource = ParamUtil.getString(request, "portletResource");
 
 PortletPreferences prefs = PortletPreferencesFactoryUtil.getLayoutPortletSetup(layout, portletResource);
 
@@ -36,71 +38,61 @@ Group group = layout.getGroup();
 %>
 
 <liferay-util:include page="/html/portlet/portlet_configuration/tabs1.jsp">
-	<liferay-util:param name="tabs1" value="scoping" />
+	<liferay-util:param name="tabs1" value="scope" />
 </liferay-util:include>
 
 <form action="<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/portlet_configuration/edit_scoping" /><portlet:param name="<%= Constants.CMD %>" value="<%= Constants.SAVE %>" /></portlet:actionURL>"  method="post" name="<portlet:namespace />fm">
-
+<input name="<portlet:namespace />redirect" type="hidden" value="<%= HtmlUtil.escape(currentURL) %>" />
+<input name="<portlet:namespace />returnToFullPageURL" type="hidden" value="<%= HtmlUtil.escape(returnToFullPageURL) %>" />
 <input name="<portlet:namespace />portletResource" type="hidden" value="<%= HtmlUtil.escape(portletResource) %>">
 
 <table class="lfr-table">
 <tr>
 	<td>
-		<liferay-ui:message key="scoping" />:
+		<liferay-ui:message key="scope" />
 	</td>
 	<td>
-		<select name="<portlet:namespace />lfr-scope-layout-id">
+		<select name="<portlet:namespace />scopeLayoutId">
+
 			<%
-			StringBuilder sb = new StringBuilder();
+			String currentGroupLabel = "current-community";
 
 			if (group.isOrganization()) {
-				sb.append(LanguageUtil.get(pageContext, "current-organization"));
+				currentGroupLabel = "current-organization";
 			}
-			else {
-				sb.append(LanguageUtil.get(pageContext, "current-community"));
+			else if (group.isUser()) {
+				currentGroupLabel = "current-user";
 			}
-
-			sb.append(StringPool.SPACE);
-			sb.append(StringPool.OPEN_PARENTHESIS);
-			sb.append(group.getDescriptiveName());
-			sb.append(StringPool.CLOSE_PARENTHESIS);
 			%>
-			<option value="0" <%= (scopeLayoutId == 0)? "selected" : "" %>><%= sb.toString() %></option>
+
+			<option <%= (scopeLayoutId == 0) ? "selected" : "" %> value="0"> <liferay-ui:message key="<%= currentGroupLabel %>" /> (<%= group.getDescriptiveName() %>)</option>
+			<option <%= (scopeLayoutId == layout.getLayoutId()) ? "selected" : "" %> value="<%= layout.getLayoutId() %>"><liferay-ui:message key="current-page" /> (<%= HtmlUtil.escape(layout.getName(locale)) %>)</option>
 
 			<%
-			sb = new StringBuilder();
-
-			sb.append(LanguageUtil.get(pageContext, "current-page"));
-			sb.append(StringPool.SPACE);
-			sb.append(StringPool.OPEN_PARENTHESIS);
-			sb.append(layout.getName(user.getLocale()));
-			sb.append(StringPool.CLOSE_PARENTHESIS);
-			%>
-			<option value="<%= layout.getLayoutId() %>"  <%= (scopeLayoutId == layout.getLayoutId())? "selected" : "" %>><%= sb.toString() %></option>
-
-			<%
-			for (Layout curLayout : themeDisplay.getLayouts()) {
+			for (Layout curLayout : LayoutLocalServiceUtil.getLayouts(layout.getGroupId(), layout.isPrivateLayout())) {
 				if (curLayout.getPlid() == layout.getPlid()) {
 					continue;
 				}
 
 				if (curLayout.hasScopeGroup()) {
 			%>
+
 					<option <%= (scopeLayoutId == curLayout.getLayoutId()) ? "selected" : "" %> value="<%= curLayout.getLayoutId() %>"><%= HtmlUtil.escape(curLayout.getName(locale)) %></option>
+
 			<%
 				}
 			}
 			%>
+
 		</select>
 	</td>
 </tr>
 </table>
 
-<br /><br />
+<br />
 
-<div class="button-holder">
-	<input type="submit" value="<liferay-ui:message key="save" />" />
+<input type="submit" value="<liferay-ui:message key="save" />" />
 
-	<input type="button" value="<liferay-ui:message key="cancel" />" onClick="location.href = '<%= HtmlUtil.escape(redirect) %>';" />
-</div>
+<input type="button" value="<liferay-ui:message key="cancel" />" onClick="location.href = '<%= HtmlUtil.escape(redirect) %>';" />
+
 </form>

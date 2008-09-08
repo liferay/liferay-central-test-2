@@ -264,7 +264,7 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 
 		imageLocalService.deleteImage(layout.getIconImageId());
 
-		// Scope Group
+		// Scope group
 
 		Group scopeGroup = layout.getScopeGroup();
 

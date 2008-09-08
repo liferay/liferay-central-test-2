@@ -256,6 +256,12 @@ public interface Portlet extends PortletModel {
 
 	public void setInstanceable(boolean instanceable);
 
+	public boolean getScopeable();
+
+	public boolean isScopeable();
+
+	public void setScopeable(boolean scopeable);
+
 	public java.lang.String getUserPrincipalStrategy();
 
 	public void setUserPrincipalStrategy(java.lang.String userPrincipalStrategy);
@@ -325,12 +331,6 @@ public interface Portlet extends PortletModel {
 	public java.lang.String getFacebookIntegration();
 
 	public void setFacebookIntegration(java.lang.String facebookIntegration);
-
-	public boolean getScopable();
-
-	public boolean isScopable();
-
-	public void setScopable(boolean scopable);
 
 	public boolean getAddDefaultResource();
 

@@ -104,7 +104,7 @@ public class BlogsEntryLocalServiceUtil {
 	}
 
 	public static com.liferay.portlet.blogs.model.BlogsEntry addEntry(
-		long userId, long groupId, long plid, java.lang.String title,
+		long userId, long plid, java.lang.String title,
 		java.lang.String content, int displayDateMonth, int displayDateDay,
 		int displayDateYear, int displayDateHour, int displayDateMinute,
 		boolean draft, boolean allowTrackbacks, java.lang.String[] trackbacks,
@@ -114,31 +114,31 @@ public class BlogsEntryLocalServiceUtil {
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		return getService()
-				   .addEntry(userId, groupId, plid, title, content,
-			displayDateMonth, displayDateDay, displayDateYear, displayDateHour,
+				   .addEntry(userId, plid, title, content, displayDateMonth,
+			displayDateDay, displayDateYear, displayDateHour,
 			displayDateMinute, draft, allowTrackbacks, trackbacks, tagsEntries,
 			addCommunityPermissions, addGuestPermissions, themeDisplay);
 	}
 
 	public static com.liferay.portlet.blogs.model.BlogsEntry addEntry(
-		java.lang.String uuid, long userId, long groupId, long plid,
-		java.lang.String title, java.lang.String content, int displayDateMonth,
-		int displayDateDay, int displayDateYear, int displayDateHour,
-		int displayDateMinute, boolean draft, boolean allowTrackbacks,
-		java.lang.String[] trackbacks, java.lang.String[] tagsEntries,
-		boolean addCommunityPermissions, boolean addGuestPermissions,
+		java.lang.String uuid, long userId, long plid, java.lang.String title,
+		java.lang.String content, int displayDateMonth, int displayDateDay,
+		int displayDateYear, int displayDateHour, int displayDateMinute,
+		boolean draft, boolean allowTrackbacks, java.lang.String[] trackbacks,
+		java.lang.String[] tagsEntries, boolean addCommunityPermissions,
+		boolean addGuestPermissions,
 		com.liferay.portal.theme.ThemeDisplay themeDisplay)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		return getService()
-				   .addEntry(uuid, userId, groupId, plid, title, content,
+				   .addEntry(uuid, userId, plid, title, content,
 			displayDateMonth, displayDateDay, displayDateYear, displayDateHour,
 			displayDateMinute, draft, allowTrackbacks, trackbacks, tagsEntries,
 			addCommunityPermissions, addGuestPermissions, themeDisplay);
 	}
 
 	public static com.liferay.portlet.blogs.model.BlogsEntry addEntry(
-		long userId, long groupId, long plid, java.lang.String title,
+		long userId, long plid, java.lang.String title,
 		java.lang.String content, int displayDateMonth, int displayDateDay,
 		int displayDateYear, int displayDateHour, int displayDateMinute,
 		boolean draft, boolean allowTrackbacks, java.lang.String[] trackbacks,
@@ -149,18 +149,18 @@ public class BlogsEntryLocalServiceUtil {
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		return getService()
-				   .addEntry(userId, groupId, plid, title, content,
-			displayDateMonth, displayDateDay, displayDateYear, displayDateHour,
+				   .addEntry(userId, plid, title, content, displayDateMonth,
+			displayDateDay, displayDateYear, displayDateHour,
 			displayDateMinute, draft, allowTrackbacks, trackbacks, tagsEntries,
 			communityPermissions, guestPermissions, themeDisplay);
 	}
 
 	public static com.liferay.portlet.blogs.model.BlogsEntry addEntry(
-		java.lang.String uuid, long userId, long groupId, long plid,
-		java.lang.String title, java.lang.String content, int displayDateMonth,
-		int displayDateDay, int displayDateYear, int displayDateHour,
-		int displayDateMinute, boolean draft, boolean allowTrackbacks,
-		java.lang.String[] trackbacks, java.lang.String[] tagsEntries,
+		java.lang.String uuid, long userId, long plid, java.lang.String title,
+		java.lang.String content, int displayDateMonth, int displayDateDay,
+		int displayDateYear, int displayDateHour, int displayDateMinute,
+		boolean draft, boolean allowTrackbacks, java.lang.String[] trackbacks,
+		java.lang.String[] tagsEntries,
 		java.lang.Boolean addCommunityPermissions,
 		java.lang.Boolean addGuestPermissions,
 		java.lang.String[] communityPermissions,
@@ -169,7 +169,7 @@ public class BlogsEntryLocalServiceUtil {
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		return getService()
-				   .addEntry(uuid, userId, groupId, plid, title, content,
+				   .addEntry(uuid, userId, plid, title, content,
 			displayDateMonth, displayDateDay, displayDateYear, displayDateHour,
 			displayDateMinute, draft, allowTrackbacks, trackbacks, tagsEntries,
 			addCommunityPermissions, addGuestPermissions, communityPermissions,

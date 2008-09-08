@@ -1583,16 +1583,16 @@ public class PortalImpl implements Portal {
 		return sb.toString();
 	}
 
-	public long getPortletScopeGroupId(ActionRequest req) {
-		return getPortletScopeGroupId(getHttpServletRequest(req));
+	public long getPortletScopeGroupId(ActionRequest actionRequest) {
+		return getPortletScopeGroupId(getHttpServletRequest(actionRequest));
 	}
 
-	public long getPortletScopeGroupId(HttpServletRequest req) {
-		ThemeDisplay themeDisplay = (ThemeDisplay)req.getAttribute(
+	public long getPortletScopeGroupId(HttpServletRequest request) {
+		ThemeDisplay themeDisplay = (ThemeDisplay)request.getAttribute(
 			WebKeys.THEME_DISPLAY);
 
 		Layout layout = themeDisplay.getLayout();
-		String portletId=getPortletId(req);
+		String portletId = getPortletId(request);
 
 		return getPortletScopeGroupId(layout, portletId);
 	}

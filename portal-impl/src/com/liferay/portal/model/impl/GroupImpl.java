@@ -104,7 +104,7 @@ public class GroupImpl extends GroupModelImpl implements Group {
 		}
 	}
 
-	public boolean isLayoutScope() {
+	public boolean isLayout() {
 		long classNameId = getClassNameId();
 		long classPK = getClassPK();
 

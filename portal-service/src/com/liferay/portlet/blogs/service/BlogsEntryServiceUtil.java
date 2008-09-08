@@ -46,27 +46,27 @@ package com.liferay.portlet.blogs.service;
  */
 public class BlogsEntryServiceUtil {
 	public static com.liferay.portlet.blogs.model.BlogsEntry addEntry(
-		long groupId, long plid, java.lang.String title,
-		java.lang.String content, int displayDateMonth, int displayDateDay,
-		int displayDateYear, int displayDateHour, int displayDateMinute,
-		boolean draft, boolean allowTrackbacks, java.lang.String[] trackbacks,
+		long plid, java.lang.String title, java.lang.String content,
+		int displayDateMonth, int displayDateDay, int displayDateYear,
+		int displayDateHour, int displayDateMinute, boolean draft,
+		boolean allowTrackbacks, java.lang.String[] trackbacks,
 		java.lang.String[] tagsEntries, boolean addCommunityPermissions,
 		boolean addGuestPermissions,
 		com.liferay.portal.theme.ThemeDisplay themeDisplay)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		return getService()
-				   .addEntry(groupId, plid, title, content, displayDateMonth,
+				   .addEntry(plid, title, content, displayDateMonth,
 			displayDateDay, displayDateYear, displayDateHour,
 			displayDateMinute, draft, allowTrackbacks, trackbacks, tagsEntries,
 			addCommunityPermissions, addGuestPermissions, themeDisplay);
 	}
 
 	public static com.liferay.portlet.blogs.model.BlogsEntry addEntry(
-		long groupId, long plid, java.lang.String title,
-		java.lang.String content, int displayDateMonth, int displayDateDay,
-		int displayDateYear, int displayDateHour, int displayDateMinute,
-		boolean draft, boolean allowTrackbacks, java.lang.String[] trackbacks,
+		long plid, java.lang.String title, java.lang.String content,
+		int displayDateMonth, int displayDateDay, int displayDateYear,
+		int displayDateHour, int displayDateMinute, boolean draft,
+		boolean allowTrackbacks, java.lang.String[] trackbacks,
 		java.lang.String[] tagsEntries,
 		java.lang.String[] communityPermissions,
 		java.lang.String[] guestPermissions,
@@ -74,7 +74,7 @@ public class BlogsEntryServiceUtil {
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		return getService()
-				   .addEntry(groupId, plid, title, content, displayDateMonth,
+				   .addEntry(plid, title, content, displayDateMonth,
 			displayDateDay, displayDateYear, displayDateHour,
 			displayDateMinute, draft, allowTrackbacks, trackbacks, tagsEntries,
 			communityPermissions, guestPermissions, themeDisplay);

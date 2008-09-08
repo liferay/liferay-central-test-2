@@ -121,7 +121,7 @@ public class TrackbackAction extends PortletAction {
 
 		long userId = UserLocalServiceUtil.getDefaultUserId(
 			themeDisplay.getCompanyId());
-		long groupId = PortalUtil.getPortletScopeGroupId(actionRequest);
+		long groupId = themeDisplay.getPortletGroupId();
 		String className = BlogsEntry.class.getName();
 		long classPK = entry.getEntryId();
 

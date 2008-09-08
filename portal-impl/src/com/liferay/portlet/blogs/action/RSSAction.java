@@ -145,7 +145,7 @@ public class RSSAction extends PortletAction {
 				entryURL, themeDisplay);
 		}
 		else if (layout != null) {
-			groupId = PortalUtil.getPortletScopeGroupId(request);
+			groupId = layout.getGroupId();
 
 			feedURL =
 				themeDisplay.getURLPortal() +
