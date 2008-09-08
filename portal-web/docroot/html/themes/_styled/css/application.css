@@ -871,7 +871,7 @@ img.ui-datepicker-trigger {
 .treeview li {
 	background: url(../images/trees/treeview_line.png) 0 0 no-repeat;
 	margin: 0;
-	padding:0 0 3px 16px;
+	padding: 0 0 3px 16px;
 }
 
 .treeview a.selected {
