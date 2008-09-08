@@ -755,6 +755,17 @@
 		</licenses>
 	</library>
 	<library>
+		<file-name>global/saw-api.jar</file-name>
+		<version>0.7</version>
+		<project-name>SAW(Simple API for Workflow)</project-name>
+		<project-url>https://saw.dev.java.net</project-url>
+		<licenses>
+			<license>
+				<license-name>CDDL 1.0</license-name>
+			</license>
+		</licenses>
+	</library>
+	<library>
 		<file-name>portal/ant.jar</file-name>
 		<version>1.7.0</version>
 		<project-name>Ant</project-name>
