@@ -104,6 +104,22 @@ public class GroupImpl extends GroupModelImpl implements Group {
 		}
 	}
 
+	public boolean isLayoutScope() {
+		long classNameId = getClassNameId();
+		long classPK = getClassPK();
+
+		if ((classNameId > 0) && (classPK > 0)) {
+			long layoutClassNameId = PortalUtil.getClassNameId(
+				Layout.class);
+
+			if (classNameId == layoutClassNameId) {
+				return true;
+			}
+		}
+
+		return false;
+	}
+
 	public boolean isOrganization() {
 		long classNameId = getClassNameId();
 		long classPK = getClassPK();

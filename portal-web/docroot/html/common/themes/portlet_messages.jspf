@@ -22,6 +22,29 @@
  */
 %>
 
+<c:if test="<%= tilesPortletDecorateBoolean && portletDisplay.isShowConfigurationIcon() %>">
+	<%
+	long scopeGroupId = PortalUtil.getPortletScopeGroupId(request);
+
+	if ((scopeGroupId > 0) && (scopeGroupId != layout.getGroupId())) {
+		Group scopeGroup = null;
+
+		try {
+			scopeGroup = GroupLocalServiceUtil.getGroup(scopeGroupId);
+		}
+		catch (Exception e) {
+		}
+
+		if (scopeGroup != null) {
+	%>
+			<div class="portlet-msg-info"><liferay-ui:message key="this-portlet-is-configured-to-use-the-following-scope" />: <%= scopeGroup.getDescriptiveName() %></div>
+	<%
+		}
+	}
+	%>
+</c:if>
+
+
 <liferay-ui:success key="request_processed" message="your-request-processed-successfully" />
 <liferay-ui:success key='<%= portletConfig.getPortletName() + ".doConfigure" %>' message="you-have-successfully-updated-the-setup" />
 <liferay-ui:success key='<%= portletConfig.getPortletName() + ".doEdit" %>' message="you-have-successfully-updated-your-preferences" />

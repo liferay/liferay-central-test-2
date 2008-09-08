@@ -1120,6 +1120,9 @@ public class PortletLocalServiceImpl extends PortletLocalServiceBaseImpl {
 				portletModel.setFacebookIntegration(GetterUtil.getString(
 					portlet.elementText("facebook-integration"),
 					portletModel.getFacebookIntegration()));
+				portletModel.setScopable(GetterUtil.getBoolean(
+					portlet.elementText("scopable"),
+					portletModel.isScopable()));
 				portletModel.setAddDefaultResource(GetterUtil.getBoolean(
 					portlet.elementText("add-default-resource"),
 					portletModel.isAddDefaultResource()));

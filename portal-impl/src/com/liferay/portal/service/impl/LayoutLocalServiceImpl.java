@@ -39,6 +39,7 @@ import com.liferay.portal.lar.LayoutExporter;
 import com.liferay.portal.lar.LayoutImporter;
 import com.liferay.portal.lar.PortletExporter;
 import com.liferay.portal.lar.PortletImporter;
+import com.liferay.portal.model.Group;
 import com.liferay.portal.model.Layout;
 import com.liferay.portal.model.LayoutConstants;
 import com.liferay.portal.model.LayoutReference;
@@ -262,6 +263,14 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 		// Icon
 
 		imageLocalService.deleteImage(layout.getIconImageId());
+
+		// Scope Group
+
+		Group scopeGroup = layout.getScopeGroup();
+
+		if (scopeGroup != null) {
+			groupLocalService.deleteGroup(scopeGroup);
+		}
 
 		// Resources
 

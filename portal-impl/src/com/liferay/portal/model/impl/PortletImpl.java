@@ -144,9 +144,10 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 		List<String> footerPortletCss, List<String> footerPortalJavaScript,
 		List<String> footerPortletJavaScript,
 		String cssClassWrapper, String facebookIntegration,
-		boolean addDefaultResource, String roles, Set<String> unlinkedRoles,
-		Map<String, String> roleMappers, boolean system, boolean active,
-		boolean include, Map<String, String> initParams, Integer expCache,
+		boolean scopable, boolean addDefaultResource, String roles,
+		Set<String> unlinkedRoles, Map<String, String> roleMappers,
+		boolean system, boolean active, boolean include,
+		Map<String, String> initParams, Integer expCache,
 		Map<String, Set<String>> portletModes, Set<String> supportedLocales,
 		String resourceBundle, PortletInfo portletInfo,
 		Map<String, PortletFilter> portletFilters, Set<QName> processingEvents,
@@ -209,6 +210,7 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 		_footerPortletJavaScript = footerPortletJavaScript;
 		_cssClassWrapper = cssClassWrapper;
 		_facebookIntegration = facebookIntegration;
+		_scopable = scopable;
 		_addDefaultResource = addDefaultResource;
 		setRoles(roles);
 		_unlinkedRoles = unlinkedRoles;
@@ -1697,6 +1699,34 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 	}
 
 	/**
+	 * Returns true if the portlet supports scoping of data.
+	 *
+	 * @return		true if the portlet supports scoping of data
+	 */
+	public boolean getScopable() {
+		return _scopable;
+	}
+
+	/**
+	 * Returns true if the portlet supports scoping of data.
+	 *
+	 * @return		true if the portlet supports scoping of data
+	 */
+	public boolean isScopable() {
+		return _scopable;
+	}
+
+	/**
+	 * Set to true if the portlet supports scoping of data.
+	 *
+	 * @param		scopable boolean value for whether or not the
+	 *				the portlet supports scoping of data
+	 */
+	public void setScopable(boolean scopable) {
+		_scopable = scopable;
+	}
+
+	/**
 	 * Returns true if default resources for the portlet are added to a page.
 	 *
 	 * @return		true if default resources for the portlet are added to a
@@ -2562,9 +2592,9 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 			getFooterPortalCss(), getFooterPortletCss(),
 			getFooterPortalJavaScript(), getFooterPortletJavaScript(),
 			getCssClassWrapper(), getFacebookIntegration(),
-			isAddDefaultResource(), getRoles(), getUnlinkedRoles(),
-			getRoleMappers(), isSystem(), isActive(), isInclude(),
-			getInitParams(), getExpCache(), getPortletModes(),
+			isScopable(), isAddDefaultResource(), getRoles(),
+			getUnlinkedRoles(), getRoleMappers(), isSystem(), isActive(),
+			isInclude(), getInitParams(), getExpCache(), getPortletModes(),
 			getSupportedLocales(), getResourceBundle(), getPortletInfo(),
 			getPortletFilters(), getProcessingEvents(), getPublishingEvents(),
 			getPublicRenderParameters(), isRemote(), getRemoteConsumerId(),
@@ -2882,6 +2912,11 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 	 * True if default resources for the portlet are added to a page.
 	 */
 	private boolean _addDefaultResource;
+
+	/**
+	 * True if the portlet supports scoping of data.
+	 */
+	private boolean _scopable;
 
 	/**
 	 * An array of required roles of the portlet.

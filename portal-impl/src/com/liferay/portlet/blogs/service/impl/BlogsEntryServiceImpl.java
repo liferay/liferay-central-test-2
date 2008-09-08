@@ -67,10 +67,10 @@ import java.util.List;
 public class BlogsEntryServiceImpl extends BlogsEntryServiceBaseImpl {
 
 	public BlogsEntry addEntry(
-			long plid, String title, String content, int displayDateMonth,
-			int displayDateDay, int displayDateYear, int displayDateHour,
-			int displayDateMinute, boolean draft, boolean allowTrackbacks,
-			String[] trackbacks, String[] tagsEntries,
+			long groupId, long plid, String title, String content,
+			int displayDateMonth, int displayDateDay, int displayDateYear,
+			int displayDateHour, int displayDateMinute, boolean draft,
+			boolean allowTrackbacks, String[] trackbacks, String[] tagsEntries,
 			boolean addCommunityPermissions, boolean addGuestPermissions,
 			ThemeDisplay themeDisplay)
 		throws PortalException, SystemException {
@@ -80,17 +80,17 @@ public class BlogsEntryServiceImpl extends BlogsEntryServiceBaseImpl {
 			ActionKeys.ADD_ENTRY);
 
 		return blogsEntryLocalService.addEntry(
-			getUserId(), plid, title, content, displayDateMonth, displayDateDay,
-			displayDateYear, displayDateHour, displayDateMinute, draft,
-			allowTrackbacks, trackbacks, tagsEntries, addCommunityPermissions,
-			addGuestPermissions, themeDisplay);
+			getUserId(), groupId, plid, title, content, displayDateMonth,
+			displayDateDay, displayDateYear, displayDateHour, displayDateMinute,
+			draft, allowTrackbacks, trackbacks, tagsEntries,
+			addCommunityPermissions, addGuestPermissions, themeDisplay);
 	}
 
 	public BlogsEntry addEntry(
-			long plid, String title, String content, int displayDateMonth,
-			int displayDateDay, int displayDateYear, int displayDateHour,
-			int displayDateMinute, boolean draft, boolean allowTrackbacks,
-			String[] trackbacks, String[] tagsEntries,
+			long groupId, long plid, String title, String content,
+			int displayDateMonth, int displayDateDay, int displayDateYear,
+			int displayDateHour, int displayDateMinute, boolean draft,
+			boolean allowTrackbacks, String[] trackbacks, String[] tagsEntries,
 			String[] communityPermissions, String[] guestPermissions,
 			ThemeDisplay themeDisplay)
 		throws PortalException, SystemException {
@@ -100,10 +100,10 @@ public class BlogsEntryServiceImpl extends BlogsEntryServiceBaseImpl {
 			ActionKeys.ADD_ENTRY);
 
 		return blogsEntryLocalService.addEntry(
-			getUserId(), plid, title, content, displayDateMonth, displayDateDay,
-			displayDateYear, displayDateHour, displayDateMinute, draft,
-			allowTrackbacks, trackbacks, tagsEntries, communityPermissions,
-			guestPermissions, themeDisplay);
+			getUserId(), groupId, plid, title, content, displayDateMonth,
+			displayDateDay, displayDateYear, displayDateHour, displayDateMinute,
+			draft, allowTrackbacks, trackbacks, tagsEntries,
+			communityPermissions, guestPermissions, themeDisplay);
 	}
 
 	public void deleteEntry(long entryId)

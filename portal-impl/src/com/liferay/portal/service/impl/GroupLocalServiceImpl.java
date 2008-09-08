@@ -402,6 +402,15 @@ public class GroupLocalServiceImpl extends GroupLocalServiceBaseImpl {
 		return groupFinder.findByNullFriendlyURL();
 	}
 
+	public Group getLayoutGroup(long companyId, long plid)
+		throws PortalException, SystemException {
+
+		long classNameId = PortalUtil.getClassNameId(Layout.class);
+
+		return groupPersistence.findByC_C_C(
+			companyId, classNameId, plid);
+	}
+
 	public Group getOrganizationGroup(long companyId, long organizationId)
 		throws PortalException, SystemException {
 

@@ -85,7 +85,7 @@ import org.apache.commons.logging.LogFactory;
 public class BlogsEntryLocalServiceImpl extends BlogsEntryLocalServiceBaseImpl {
 
 	public BlogsEntry addEntry(
-			long userId, long plid, String title, String content,
+			long userId, long groupId, long plid, String title, String content,
 			int displayDateMonth, int displayDateDay, int displayDateYear,
 			int displayDateHour, int displayDateMinute, boolean draft,
 			boolean allowTrackbacks, String[] trackbacks, String[] tagsEntries,
@@ -94,7 +94,7 @@ public class BlogsEntryLocalServiceImpl extends BlogsEntryLocalServiceBaseImpl {
 		throws PortalException, SystemException {
 
 		return addEntry(
-			null, userId, plid, title, content, displayDateMonth,
+			null, userId, groupId, plid, title, content, displayDateMonth,
 			displayDateDay, displayDateYear, displayDateHour, displayDateMinute,
 			draft, allowTrackbacks, trackbacks, tagsEntries,
 			Boolean.valueOf(addCommunityPermissions),
@@ -102,16 +102,16 @@ public class BlogsEntryLocalServiceImpl extends BlogsEntryLocalServiceBaseImpl {
 	}
 
 	public BlogsEntry addEntry(
-			String uuid, long userId, long plid, String title, String content,
-			int displayDateMonth, int displayDateDay, int displayDateYear,
-			int displayDateHour, int displayDateMinute, boolean draft,
-			boolean allowTrackbacks, String[] trackbacks, String[] tagsEntries,
-			boolean addCommunityPermissions, boolean addGuestPermissions,
-			ThemeDisplay themeDisplay)
+			String uuid, long userId, long groupId, long plid, String title,
+			String content, int displayDateMonth, int displayDateDay,
+			int displayDateYear, int displayDateHour, int displayDateMinute,
+			boolean draft, boolean allowTrackbacks, String[] trackbacks,
+			String[] tagsEntries, boolean addCommunityPermissions,
+			boolean addGuestPermissions, ThemeDisplay themeDisplay)
 		throws PortalException, SystemException {
 
 		return addEntry(
-			uuid, userId, plid, title, content, displayDateMonth,
+			uuid, userId, groupId, plid, title, content, displayDateMonth,
 			displayDateDay, displayDateYear, displayDateHour, displayDateMinute,
 			draft, allowTrackbacks, trackbacks, tagsEntries,
 			Boolean.valueOf(addCommunityPermissions),
@@ -119,7 +119,7 @@ public class BlogsEntryLocalServiceImpl extends BlogsEntryLocalServiceBaseImpl {
 	}
 
 	public BlogsEntry addEntry(
-			long userId, long plid, String title, String content,
+			long userId, long groupId, long plid, String title, String content,
 			int displayDateMonth, int displayDateDay, int displayDateYear,
 			int displayDateHour, int displayDateMinute, boolean draft,
 			boolean allowTrackbacks, String[] trackbacks, String[] tagsEntries,
@@ -128,26 +128,25 @@ public class BlogsEntryLocalServiceImpl extends BlogsEntryLocalServiceBaseImpl {
 		throws PortalException, SystemException {
 
 		return addEntry(
-			null, userId, plid, title, content, displayDateMonth,
+			null, userId, groupId, plid, title, content, displayDateMonth,
 			displayDateDay, displayDateYear, displayDateHour, displayDateMinute,
 			draft, allowTrackbacks, trackbacks, tagsEntries, null, null,
 			communityPermissions, guestPermissions, themeDisplay);
 	}
 
 	public BlogsEntry addEntry(
-			String uuid, long userId, long plid, String title, String content,
-			int displayDateMonth, int displayDateDay, int displayDateYear,
-			int displayDateHour, int displayDateMinute, boolean draft,
-			boolean allowTrackbacks, String[] trackbacks, String[] tagsEntries,
-			Boolean addCommunityPermissions, Boolean addGuestPermissions,
-			String[] communityPermissions, String[] guestPermissions,
-			ThemeDisplay themeDisplay)
+			String uuid, long userId, long groupId, long plid, String title,
+			String content, int displayDateMonth, int displayDateDay,
+			int displayDateYear, int displayDateHour, int displayDateMinute,
+			boolean draft, boolean allowTrackbacks, String[] trackbacks,
+			String[] tagsEntries, Boolean addCommunityPermissions,
+			Boolean addGuestPermissions, String[] communityPermissions,
+			String[] guestPermissions, ThemeDisplay themeDisplay)
 		throws PortalException, SystemException {
 
 		// Entry
 
 		User user = userPersistence.findByPrimaryKey(userId);
-		long groupId = PortalUtil.getPortletGroupId(plid);
 
 		Date displayDate = PortalUtil.getDate(
 			displayDateMonth, displayDateDay, displayDateYear, displayDateHour,

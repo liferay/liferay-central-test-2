@@ -23,6 +23,7 @@
 package com.liferay.portal.model.impl;
 
 import com.liferay.portal.LayoutFriendlyURLException;
+import com.liferay.portal.NoSuchGroupException;
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.util.CharPool;
@@ -251,6 +252,17 @@ public class LayoutImpl extends LayoutModelImpl implements Layout {
 		}
 
 		return false;
+	}
+
+	public boolean hasScopeGroup() throws PortalException, SystemException {
+		try {
+			GroupLocalServiceUtil.getLayoutGroup(getCompanyId(), getPlid());
+
+			return true;
+		}
+		catch (NoSuchGroupException nsge) {
+			return false;
+		}
 	}
 
 	public boolean isFirstParent() {
@@ -550,6 +562,19 @@ public class LayoutImpl extends LayoutModelImpl implements Layout {
 		throws SystemException {
 
 		return _getURL(request, true, false);
+	}
+
+	public Group getScopeGroup() throws PortalException, SystemException {
+		Group scopeGroup = null;
+
+		try {
+			scopeGroup = GroupLocalServiceUtil.getLayoutGroup(
+				getCompanyId(), getPlid());
+		}
+		catch (NoSuchGroupException nsge) {
+		}
+
+		return scopeGroup;
 	}
 
 	public String getResetLayoutURL(HttpServletRequest request)

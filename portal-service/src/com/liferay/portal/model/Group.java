@@ -51,6 +51,8 @@ package com.liferay.portal.model;
 public interface Group extends GroupModel {
 	public boolean isCommunity();
 
+	public boolean isLayoutScope();
+
 	public boolean isOrganization();
 
 	public boolean isUser();

@@ -90,6 +90,7 @@ import com.liferay.portlet.ActionRequestImpl;
 import com.liferay.portlet.ActionResponseImpl;
 import com.liferay.portlet.PortletConfigFactory;
 import com.liferay.portlet.PortletConfigImpl;
+import com.liferay.portlet.PortletPreferencesFactoryUtil;
 import com.liferay.portlet.PortletPreferencesImpl;
 import com.liferay.portlet.PortletPreferencesWrapper;
 import com.liferay.portlet.PortletRequestImpl;
@@ -1582,6 +1583,43 @@ public class PortalImpl implements Portal {
 		return sb.toString();
 	}
 
+	public long getPortletScopeGroupId(ActionRequest req) {
+		return getPortletScopeGroupId(getHttpServletRequest(req));
+	}
+
+	public long getPortletScopeGroupId(HttpServletRequest req) {
+		ThemeDisplay themeDisplay = (ThemeDisplay)req.getAttribute(
+			WebKeys.THEME_DISPLAY);
+
+		Layout layout = themeDisplay.getLayout();
+		String portletId=getPortletId(req);
+
+		return getPortletScopeGroupId(layout, portletId);
+	}
+
+	public long getPortletScopeGroupId(Layout layout, String portletId) {
+		try {
+			PortletPreferences prefs =
+				PortletPreferencesFactoryUtil.getLayoutPortletSetup(
+					layout, portletId);
+
+			long scopeLayoutId = GetterUtil.getLong(
+				prefs.getValue("lfr-scope-layout-id", StringPool.BLANK));
+
+			if (scopeLayoutId > 0) {
+				Layout scopeLayout = LayoutLocalServiceUtil.getLayout(
+					layout.getGroupId(), layout.isPrivateLayout(),
+					scopeLayoutId);
+
+				return scopeLayout.getScopeGroup().getGroupId();
+			}
+		}
+		catch (Exception e) {
+		}
+
+		return getPortletGroupId(layout);
+	}
+
 	public String getPortletTitle(
 		String portletId, long companyId, String languageId) {
 
@@ -2900,9 +2938,11 @@ public class PortalImpl implements Portal {
 					(LayoutTypePortlet)layout.getLayoutType();
 
 				if (layoutTypePortlet.hasPortletId(portletId)) {
-					plid = layout.getPlid();
+					if (getPortletScopeGroupId(layout, portletId) == groupId) {
+						plid = layout.getPlid();
 
-					break;
+						break;
+					}
 				}
 			}
 		}

@@ -456,6 +456,18 @@ public class PortalUtil {
 		return getPortal().getPortletNamespace(portletId);
 	}
 
+	public static long getPortletScopeGroupId(ActionRequest req) {
+		return getPortal().getPortletScopeGroupId(req);
+	}
+
+	public static long getPortletScopeGroupId(HttpServletRequest req) {
+		return getPortal().getPortletScopeGroupId(req);
+	}
+
+	public static long getPortletScopeGroupId(Layout layout, String portletId) {
+		return getPortal().getPortletScopeGroupId(layout, portletId);
+	}
+
 	public static String getPortletTitle(
 		String portletId, long companyId, String languageId) {
 

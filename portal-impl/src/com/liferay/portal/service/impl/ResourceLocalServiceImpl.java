@@ -27,6 +27,7 @@ import com.liferay.portal.PortalException;
 import com.liferay.portal.ResourceActionsException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.model.Group;
+import com.liferay.portal.model.Layout;
 import com.liferay.portal.model.Permission;
 import com.liferay.portal.model.Resource;
 import com.liferay.portal.model.ResourceCode;
@@ -498,6 +499,13 @@ public class ResourceLocalServiceImpl extends ResourceLocalServiceBaseImpl {
 
 		if (PropsValues.PERMISSIONS_USER_CHECK_ALGORITHM == 5) {
 			Role role = null;
+
+			if (group.isLayoutScope()) {
+				Layout layout = layoutLocalService.getLayout(
+					group.getClassPK());
+
+				group = layout.getGroup();
+			}
 
 			if (group.isCommunity()) {
 				role = RoleLocalServiceUtil.getRole(

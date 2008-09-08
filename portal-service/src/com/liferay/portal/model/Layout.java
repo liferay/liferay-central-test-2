@@ -65,6 +65,10 @@ public interface Layout extends LayoutModel {
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;
 
+	public boolean hasScopeGroup()
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException;
+
 	public boolean isFirstParent();
 
 	public boolean isFirstChild();
@@ -142,6 +146,10 @@ public interface Layout extends LayoutModel {
 	public java.lang.String getResetMaxStateURL(
 		javax.servlet.http.HttpServletRequest request)
 		throws com.liferay.portal.SystemException;
+
+	public com.liferay.portal.model.Group getScopeGroup()
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException;
 
 	public java.lang.String getResetLayoutURL(
 		javax.servlet.http.HttpServletRequest request)

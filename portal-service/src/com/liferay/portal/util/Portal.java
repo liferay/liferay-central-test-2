@@ -273,6 +273,12 @@ public interface Portal {
 
 	public String getPortletNamespace(String portletId);
 
+	public long getPortletScopeGroupId(ActionRequest req);
+
+	public long getPortletScopeGroupId(HttpServletRequest req);
+
+	public long getPortletScopeGroupId(Layout layout, String portletId);
+
 	public String getPortletTitle(
 		String portletId, long companyId, String languageId);
 

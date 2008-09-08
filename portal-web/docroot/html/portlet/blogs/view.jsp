@@ -30,6 +30,7 @@ String redirect = currentURL;
 PortletURL portletURL = renderResponse.createRenderURL();
 
 portletURL.setParameter("struts_action", "/blogs/view");
+long scopeGroupId = PortalUtil.getPortletScopeGroupId(request);
 %>
 
 <liferay-portlet:renderURL varImpl="searchURL"><portlet:param name="struts_action" value="/blogs/search" /></liferay-portlet:renderURL>
@@ -37,18 +38,17 @@ portletURL.setParameter("struts_action", "/blogs/view");
 <form action="<%= searchURL %>" method="get" name="<portlet:namespace />fm1" onSubmit="submitForm(this); return false;">
 <liferay-portlet:renderURLParams varImpl="searchURL" />
 <input name="<portlet:namespace />redirect" type="hidden" value="<%= HtmlUtil.escape(currentURL) %>" />
-<input name="<portlet:namespace />groupId" type="hidden" value="<%= String.valueOf(layout.getGroupId()) %>" />
-
+<input name="<portlet:namespace />groupId" type="hidden" value="<%= String.valueOf(scopeGroupId) %>" />
 <%
 SearchContainer searchContainer = new SearchContainer(renderRequest, null, null, SearchContainer.DEFAULT_CUR_PARAM, pageDelta, portletURL, null, null);
 
 int total = 0;
 
 if (PortletPermissionUtil.contains(permissionChecker, plid.longValue(), PortletKeys.BLOGS, ActionKeys.ADD_ENTRY)) {
-	total = BlogsEntryLocalServiceUtil.getGroupEntriesCount(portletGroupId.longValue());
+	total = BlogsEntryLocalServiceUtil.getGroupEntriesCount(scopeGroupId);
 }
 else {
-	total = BlogsEntryLocalServiceUtil.getGroupEntriesCount(portletGroupId.longValue(), false);
+	total = BlogsEntryLocalServiceUtil.getGroupEntriesCount(scopeGroupId, false);
 }
 
 searchContainer.setTotal(total);
@@ -56,10 +56,10 @@ searchContainer.setTotal(total);
 List results = null;
 
 if (PortletPermissionUtil.contains(permissionChecker, plid.longValue(), PortletKeys.BLOGS, ActionKeys.ADD_ENTRY)) {
-	results = BlogsEntryLocalServiceUtil.getGroupEntries(portletGroupId.longValue(), searchContainer.getStart(), searchContainer.getEnd());
+	results = BlogsEntryLocalServiceUtil.getGroupEntries(scopeGroupId, searchContainer.getStart(), searchContainer.getEnd());
 }
 else {
-	results = BlogsEntryLocalServiceUtil.getGroupEntries(portletGroupId.longValue(), false, searchContainer.getStart(), searchContainer.getEnd());
+	results = BlogsEntryLocalServiceUtil.getGroupEntries(scopeGroupId, false, searchContainer.getStart(), searchContainer.getEnd());
 }
 
 searchContainer.setResults(results);

@@ -197,6 +197,7 @@ public class BlogsPortletDataHandlerImpl implements PortletDataHandler {
 
 		long userId = context.getUserId(entry.getUserUuid());
 		long plid = context.getPlid();
+		long groupId = context.getGroupId();
 
 		Calendar displayDateCal = CalendarFactoryUtil.getCalendar();
 
@@ -238,7 +239,7 @@ public class BlogsPortletDataHandlerImpl implements PortletDataHandler {
 
 			if (existingEntry == null) {
 				existingEntry = BlogsEntryLocalServiceUtil.addEntry(
-					entry.getUuid(), userId, plid, entry.getTitle(),
+					entry.getUuid(), userId, groupId, plid, entry.getTitle(),
 					entry.getContent(), displayDateMonth, displayDateDay,
 					displayDateYear, displayDateHour, displayDateMinute,
 					draft, allowTrackbacks, trackbacks, tagsEntries,
@@ -255,7 +256,7 @@ public class BlogsPortletDataHandlerImpl implements PortletDataHandler {
 		}
 		else {
 			existingEntry = BlogsEntryLocalServiceUtil.addEntry(
-				userId, plid, entry.getTitle(), entry.getContent(),
+				userId, groupId, plid, entry.getTitle(), entry.getContent(),
 				displayDateMonth, displayDateDay, displayDateYear,
 				displayDateHour, displayDateMinute, draft, allowTrackbacks,
 				trackbacks, tagsEntries, addCommunityPermissions,

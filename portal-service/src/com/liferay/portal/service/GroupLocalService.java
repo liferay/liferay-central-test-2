@@ -120,6 +120,11 @@ public interface GroupLocalService {
 	public java.util.List<com.liferay.portal.model.Group> getNullFriendlyURLGroups()
 		throws com.liferay.portal.SystemException;
 
+	public com.liferay.portal.model.Group getLayoutGroup(long companyId,
+		long plid)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException;
+
 	public com.liferay.portal.model.Group getOrganizationGroup(long companyId,
 		long organizationId)
 		throws com.liferay.portal.PortalException,

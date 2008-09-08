@@ -1,0 +1,106 @@
+<%
+/**
+ * Copyright (c) 2000-2008 Liferay, Inc. All rights reserved.
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * of this software and associated documentation files (the "Software"), to deal
+ * in the Software without restriction, including without limitation the rights
+ * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ * copies of the Software, and to permit persons to whom the Software is
+ * furnished to do so, subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included in
+ * all copies or substantial portions of the Software.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+ * SOFTWARE.
+ */
+%>
+
+<%@ include file="/html/portlet/portlet_configuration/init.jsp" %>
+
+<%
+String portletResource = ParamUtil.getString(request, "portletResource");
+String redirect = ParamUtil.getString(request, "redirect");
+
+PortletPreferences prefs = PortletPreferencesFactoryUtil.getLayoutPortletSetup(layout, portletResource);
+
+long scopeLayoutId = PrefsParamUtil.getLong(prefs, request, "lfr-scope-layout-id");
+
+Group group = layout.getGroup();
+%>
+
+<liferay-util:include page="/html/portlet/portlet_configuration/tabs1.jsp">
+	<liferay-util:param name="tabs1" value="scoping" />
+</liferay-util:include>
+
+<form action="<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/portlet_configuration/edit_scoping" /><portlet:param name="<%= Constants.CMD %>" value="<%= Constants.SAVE %>" /></portlet:actionURL>"  method="post" name="<portlet:namespace />fm">
+
+<input name="<portlet:namespace />portletResource" type="hidden" value="<%= HtmlUtil.escape(portletResource) %>">
+
+<table class="lfr-table">
+<tr>
+	<td>
+		<liferay-ui:message key="scoping" />:
+	</td>
+	<td>
+		<select name="<portlet:namespace />lfr-scope-layout-id">
+			<%
+			StringBuilder sb = new StringBuilder();
+
+			if (group.isOrganization()) {
+				sb.append(LanguageUtil.get(pageContext, "current-organization"));
+			}
+			else {
+				sb.append(LanguageUtil.get(pageContext, "current-community"));
+			}
+
+			sb.append(StringPool.SPACE);
+			sb.append(StringPool.OPEN_PARENTHESIS);
+			sb.append(group.getDescriptiveName());
+			sb.append(StringPool.CLOSE_PARENTHESIS);
+			%>
+			<option value="0" <%= (scopeLayoutId == 0)? "selected" : "" %>><%= sb.toString() %></option>
+
+			<%
+			sb = new StringBuilder();
+
+			sb.append(LanguageUtil.get(pageContext, "current-page"));
+			sb.append(StringPool.SPACE);
+			sb.append(StringPool.OPEN_PARENTHESIS);
+			sb.append(layout.getName(user.getLocale()));
+			sb.append(StringPool.CLOSE_PARENTHESIS);
+			%>
+			<option value="<%= layout.getLayoutId() %>"  <%= (scopeLayoutId == layout.getLayoutId())? "selected" : "" %>><%= sb.toString() %></option>
+
+			<%
+			for (Layout curLayout : themeDisplay.getLayouts()) {
+				if (curLayout.getPlid() == layout.getPlid()) {
+					continue;
+				}
+
+				if (curLayout.hasScopeGroup()) {
+			%>
+					<option <%= (scopeLayoutId == curLayout.getLayoutId()) ? "selected" : "" %> value="<%= curLayout.getLayoutId() %>"><%= HtmlUtil.escape(curLayout.getName(locale)) %></option>
+			<%
+				}
+			}
+			%>
+		</select>
+	</td>
+</tr>
+</table>
+
+<br /><br />
+
+<div class="button-holder">
+	<input type="submit" value="<liferay-ui:message key="save" />" />
+
+	<input type="button" value="<liferay-ui:message key="cancel" />" onClick="location.href = '<%= HtmlUtil.escape(redirect) %>';" />
+</div>
+</form>

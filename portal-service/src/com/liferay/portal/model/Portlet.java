@@ -326,6 +326,12 @@ public interface Portlet extends PortletModel {
 
 	public void setFacebookIntegration(java.lang.String facebookIntegration);
 
+	public boolean getScopable();
+
+	public boolean isScopable();
+
+	public void setScopable(boolean scopable);
+
 	public boolean getAddDefaultResource();
 
 	public boolean isAddDefaultResource();
