@@ -653,10 +653,9 @@ public class SourceFormatter {
 		ds.setBasedir(basedir);
 		ds.setExcludes(
 			new String[] {
-				"**\\com\\liferay\\portlet\\service\\*.java",
-				"**\\model\\*Model.java", "**\\model\\*Soap.java",
-				"**\\model\\impl\\*ModelImpl.java",
-				"**\\service\\*Service.java",
+				"**\\model\\*Clp.java", "**\\model\\*Model.java",
+				"**\\model\\*Soap.java", "**\\model\\impl\\*ModelImpl.java",
+				"**\\service\\*Service.java", "**\\service\\*ServiceClp.java",
 				"**\\service\\*ServiceFactory.java",
 				"**\\service\\*ServiceUtil.java",
 				"**\\service\\base\\*ServiceBaseImpl.java",
