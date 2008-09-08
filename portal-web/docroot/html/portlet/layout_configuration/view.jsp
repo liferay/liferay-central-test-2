@@ -34,7 +34,7 @@
 
 	<div id="portal_add_content">
 		<div class="portal-add-content">
-			<form action="<%= themeDisplay.getPathMain() %>/portal/update_layout?p_l_id=<%= plid %>" class="uni-form" method="post" name="<portlet:namespace />fm">
+			<form action="<%= themeDisplay.getPathMain() %>/portal/update_layout?p_l_id=<%= plid %>" method="post" name="<portlet:namespace />fm">
 			<input name="doAsUserId" type="hidden" value="<%= themeDisplay.getDoAsUserId() %>" />
 			<input name="<%= Constants.CMD %>" type="hidden" value="template" />
 			<input name="<%= WebKeys.REFERER %>" type="hidden" value="<%= refererURL.toString() %>" />
