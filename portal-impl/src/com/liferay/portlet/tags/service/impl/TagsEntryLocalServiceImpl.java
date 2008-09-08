@@ -97,7 +97,7 @@ public class TagsEntryLocalServiceImpl extends TagsEntryLocalServiceBaseImpl {
 		return addEntryToGroup(
 			userId, groupId, parentEntryName, name, vocabularyName, properties,
 			addCommunityPermissions, addGuestPermissions, communityPermissions,
-			communityPermissions);
+			guestPermissions);
 	}
 
 	public TagsEntry addEntryToGroup(

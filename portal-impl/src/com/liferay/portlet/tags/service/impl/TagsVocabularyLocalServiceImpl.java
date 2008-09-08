@@ -74,7 +74,7 @@ public class TagsVocabularyLocalServiceImpl
 
 		long groupId = PortalUtil.getPortletGroupId(plid);
 
-		return addVocabulary(
+		return addVocabularyToGroup(
 			userId, groupId, name, folksonomy, addCommunityPermissions,
 			addGuestPermissions, communityPermissions, guestPermissions);
 	}
