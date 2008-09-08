@@ -18,6 +18,7 @@ import com.liferay.portal.model.BaseModel;
 import java.lang.reflect.Method;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 public class ${entity.name}${sessionTypeName}ServiceClp implements ${entity.name}${sessionTypeName}Service {
