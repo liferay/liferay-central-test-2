@@ -37,6 +37,7 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
 import org.springframework.context.ApplicationContext;
+import org.springframework.web.context.ContextLoader;
 import org.springframework.web.context.ContextLoaderListener;
 import org.springframework.web.context.support.WebApplicationContextUtils;
 
@@ -81,6 +82,10 @@ public class PortletContextLoaderListener extends ContextLoaderListener {
 		}
 
 		SpringUtil.initContext(applicationContext);
+	}
+
+	protected ContextLoader createContextLoader() {
+		return new PortletContextLoader();
 	}
 
 	private static Log _log =
