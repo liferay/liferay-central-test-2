@@ -22,6 +22,7 @@
 
 package com.liferay.portal.language;
 
+import com.liferay.portal.NoSuchPortletException;
 import com.liferay.portal.kernel.language.Language;
 import com.liferay.portal.kernel.language.LanguageWrapper;
 import com.liferay.portal.kernel.util.GetterUtil;
@@ -32,13 +33,17 @@ import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Time;
 import com.liferay.portal.kernel.util.Validator;
+import com.liferay.portal.model.Portlet;
 import com.liferay.portal.security.auth.CompanyThreadLocal;
+import com.liferay.portal.service.PortletLocalServiceUtil;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.CookieKeys;
 import com.liferay.portal.util.PortalUtil;
+import com.liferay.portal.util.PortletKeys;
 import com.liferay.portal.util.PropsValues;
 import com.liferay.portal.util.WebAppPool;
 import com.liferay.portal.util.WebKeys;
+import com.liferay.portlet.PortletConfigFactory;
 
 import java.text.MessageFormat;
 
@@ -358,6 +363,39 @@ public class LanguageImpl implements Language {
 					value = bundle.getString(key);
 				}
 				catch (MissingResourceException mre) {
+				}
+			}
+
+			if ((value == defaultValue) || (value == null) &&
+					portletConfig.getPortletName().equals(
+						PortletKeys.PORTLET_CONFIGURATION)) {
+
+				String portletResource = ParamUtil.getString(
+					request, "portletResource");
+
+				long companyId = PortalUtil.getCompanyId(request);
+
+				try {
+					Portlet portlet = PortletLocalServiceUtil.getPortletById(
+						companyId, portletResource);
+
+					portletConfig = PortletConfigFactory.create(
+						portlet, pageContext.getServletContext());
+
+					if (portletConfig != null) {
+						Locale locale = request.getLocale();
+
+						ResourceBundle bundle = portletConfig.getResourceBundle(
+							locale);
+
+						try {
+							value = bundle.getString(key);
+						}
+						catch (MissingResourceException mre) {
+						}
+					}
+				}
+				catch (Exception e) {
 				}
 			}
 		}
