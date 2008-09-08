@@ -483,6 +483,7 @@ Liferay.Portlet.TagsAdmin = new Class({
 				listLinks.mousedown(
 					function(event) {
 						var vocabularyId = instance._getVocabularyId(this);
+
 						instance._selectVocabulary(vocabularyId);
 					}
 				);
