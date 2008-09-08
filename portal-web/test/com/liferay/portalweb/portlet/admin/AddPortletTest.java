@@ -40,7 +40,7 @@ public class AddPortletTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("//div[@id=\"Admin-Admin\"]")) {
+				if (selenium.isElementPresent("//div[@id='Admin-Server-Admin']")) {
 					break;
 				}
 			}
@@ -50,7 +50,7 @@ public class AddPortletTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click("//div[@id=\"Admin-Admin\"]/p/a");
+		selenium.click("//div[@id='Admin-Server-Admin']/p/a");
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
