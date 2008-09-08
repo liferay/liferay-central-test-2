@@ -22,7 +22,6 @@
 
 package com.liferay.portal.language;
 
-import com.liferay.portal.NoSuchPortletException;
 import com.liferay.portal.kernel.language.Language;
 import com.liferay.portal.kernel.language.LanguageWrapper;
 import com.liferay.portal.kernel.util.GetterUtil;
@@ -123,7 +122,7 @@ public class LanguageImpl implements Language {
 		}
 		catch (Exception e) {
 			if (_log.isWarnEnabled()) {
-				_log.warn(e.getMessage());
+				_log.warn(e, e);
 			}
 		}
 
@@ -182,7 +181,7 @@ public class LanguageImpl implements Language {
 		}
 		catch (Exception e) {
 			if (_log.isWarnEnabled()) {
-				_log.warn(e.getMessage());
+				_log.warn(e, e);
 			}
 		}
 
@@ -248,7 +247,7 @@ public class LanguageImpl implements Language {
 		}
 		catch (Exception e) {
 			if (_log.isWarnEnabled()) {
-				_log.warn(e.getMessage());
+				_log.warn(e, e);
 			}
 		}
 
@@ -297,7 +296,7 @@ public class LanguageImpl implements Language {
 		}
 		catch (Exception e) {
 			if (_log.isWarnEnabled()) {
-				_log.warn(e.getMessage());
+				_log.warn(e, e);
 			}
 		}
 
@@ -366,36 +365,35 @@ public class LanguageImpl implements Language {
 				}
 			}
 
+			// LEP-7393
+
 			if ((value == defaultValue) || (value == null) &&
-					portletConfig.getPortletName().equals(
-						PortletKeys.PORTLET_CONFIGURATION)) {
-
-				String portletResource = ParamUtil.getString(
-					request, "portletResource");
-
-				long companyId = PortalUtil.getCompanyId(request);
+				portletConfig.getPortletName().equals(
+					PortletKeys.PORTLET_CONFIGURATION)) {
 
 				try {
+					String portletResource = ParamUtil.getString(
+						request, "portletResource");
+
+					long companyId = PortalUtil.getCompanyId(request);
+
 					Portlet portlet = PortletLocalServiceUtil.getPortletById(
 						companyId, portletResource);
 
 					portletConfig = PortletConfigFactory.create(
 						portlet, pageContext.getServletContext());
 
-					if (portletConfig != null) {
-						Locale locale = request.getLocale();
+					Locale locale = request.getLocale();
 
-						ResourceBundle bundle = portletConfig.getResourceBundle(
-							locale);
+					ResourceBundle bundle = portletConfig.getResourceBundle(
+						locale);
 
-						try {
-							value = bundle.getString(key);
-						}
-						catch (MissingResourceException mre) {
-						}
-					}
+					value = bundle.getString(key);
 				}
 				catch (Exception e) {
+					if (_log.isWarnEnabled()) {
+						_log.warn(e, e);
+					}
 				}
 			}
 		}
@@ -468,7 +466,7 @@ public class LanguageImpl implements Language {
 		}
 		catch (Exception e) {
 			if (_log.isWarnEnabled()) {
-				_log.warn(e.getMessage());
+				_log.warn(e, e);
 			}
 		}
 
