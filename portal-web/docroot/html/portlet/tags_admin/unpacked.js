@@ -123,23 +123,29 @@ Liferay.Portlet.TagsAdmin = new Class({
 			}
 		);
 
-		jQuery('.permissions-entries-button').click(function() {
-			var portletURL = instance._createPermissionURL(
-				'com.liferay.portlet.tags.model.TagsEntry',
-				instance._selectedEntryName,
-				instance._selectedEntryId
-			);
-			submitForm(document.hrefFm, portletURL.toString());
-		});
+		jQuery('.permissions-entries-button').click(
+			function() {
+				var portletURL = instance._createPermissionURL(
+					'com.liferay.portlet.tags.model.TagsEntry',
+					instance._selectedEntryName,
+					instance._selectedEntryId
+				);
 
-		jQuery('.permissions-vocabulary-button').click(function() {
-			var portletURL = instance._createPermissionURL(
-				'com.liferay.portlet.tags.model.TagsVocabulary',
-				instance._selectedVocabularyName,
-				instance._selectedVocabularyId
-			);
-			submitForm(document.hrefFm, portletURL.toString());
-		});
+				submitForm(document.hrefFm, portletURL.toString());
+			}
+		);
+
+		jQuery('.permissions-vocabulary-button').click(
+			function() {
+				var portletURL = instance._createPermissionURL(
+					'com.liferay.portlet.tags.model.TagsVocabulary',
+					instance._selectedVocabularyName,
+					instance._selectedVocabularyId
+				);
+
+				submitForm(document.hrefFm, portletURL.toString());
+			}
+		);
 
 		jQuery('#vocabulary-search-bar').change(
 			function(event) {
@@ -248,8 +254,10 @@ Liferay.Portlet.TagsAdmin = new Class({
 
 	_createPermissionURL: function(modelResource, modelResourceDescription, resourcePrimKey) {
 		var instance = this;
+
 		var portletURL = Liferay.PortletURL.createPermissionURL(
 			instance.portletId, modelResource, modelResourceDescription, resourcePrimKey);
+
 		return portletURL;
 	},
 
@@ -503,14 +511,19 @@ Liferay.Portlet.TagsAdmin = new Class({
 
 						li.attr('data-vocabulary', value);
 
-						instance._updateVocabulary(vocabularyId, vocabularyName, folksonomy, function(message) {
-							var exception = message.exception;
-							if (exception) {
-								if (exception.indexOf('auth.PrincipalException') > -1) {
-									instance._sendMessage('error', 'you-do-not-have-permission-to-access-the-requested-resource');
+						instance._updateVocabulary(
+							vocabularyId,
+							vocabularyName,
+							folksonomy,
+							function(message) {
+								var exception = message.exception;
+								if (exception) {
+									if (exception.indexOf('auth.PrincipalException') > -1) {
+										instance._sendMessage('error', 'you-do-not-have-permission-to-access-the-requested-resource');
+									}
 								}
 							}
-						});
+						);
 
 						return value;
 					},
@@ -592,6 +605,16 @@ Liferay.Portlet.TagsAdmin = new Class({
 		var communityPermission = instance._getPermissionsEnabled('entry', 'community');
 		var guestPermission = instance._getPermissionsEnabled('entry', 'guest');
 
+		var serviceParameterTypes = [
+			'long',
+			'java.lang.String',
+			'java.lang.String',
+			'java.lang.String',
+			'[Ljava.lang.String;',
+			'[Ljava.lang.String;',
+			'[Ljava.lang.String;'
+		].join(',');
+
 		Liferay.Service.Tags.TagsEntry.addEntry(
 			{
 				plid: themeDisplay.getPlid(),
@@ -601,15 +624,7 @@ Liferay.Portlet.TagsAdmin = new Class({
 				properties: [],
 				communityPermissions: communityPermission,
 				guestPermissions: guestPermission,
-				serviceParameterTypes: [
-					'long',
-					'java.lang.String',
-					'java.lang.String',
-					'java.lang.String',
-					'[Ljava.lang.String;',
-					'[Ljava.lang.String;',
-					'[Ljava.lang.String;'
-			    ].join(',')
+				serviceParameterTypes: serviceParameterTypes
 			},
 			function(message) {
 				var exception = message.exception;
@@ -687,6 +702,14 @@ Liferay.Portlet.TagsAdmin = new Class({
 		var communityPermission = instance._getPermissionsEnabled('vocabulary', 'community');
 		var guestPermission = instance._getPermissionsEnabled('vocabulary', 'guest');
 
+		var serviceParameterTypes = [
+			'long',
+			'java.lang.String',
+			'boolean',
+			'[Ljava.lang.String;',
+			'[Ljava.lang.String;'
+		].join(',');
+
 		Liferay.Service.Tags.TagsVocabulary.addVocabulary(
 			{
 				plid: themeDisplay.getPlid(),
@@ -694,13 +717,7 @@ Liferay.Portlet.TagsAdmin = new Class({
 				folksonomy: folksonomy,
 				communityPermissions: communityPermission,
 				guestPermissions: guestPermission,
-				serviceParameterTypes: [
-					'long',
-					'java.lang.String',
-					'boolean',
-					'[Ljava.lang.String;',
-					'[Ljava.lang.String;'
-			    ].join(',')
+				serviceParameterTypes: serviceParameterTypes
 			},
 			function(message) {
 				var exception = message.exception;
@@ -916,6 +933,16 @@ Liferay.Portlet.TagsAdmin = new Class({
 		return jQuery(exp).attr('data-entry');
 	},
 
+	_getPermissionsEnabled: function(vocabularyType, type) {
+		var buffer = [];
+		var permissionsActions = jQuery('.'+vocabularyType+'-permissions-actions');
+		var permissions = permissionsActions.find('[name$='+type+'Permissions]:checked');
+
+		buffer = permissions.fieldValue().join(',');
+
+		return buffer;
+	},
+
 	_getProperties: function(entryId, callback) {
 		var instance = this;
 
@@ -991,21 +1018,6 @@ Liferay.Portlet.TagsAdmin = new Class({
 
 	_hideToolbarSections: function(){
 		jQuery('.vocabulary-toolbar-section, .entry-toolbar-section').hide();
-	},
-
-	_getPermissionsEnabled: function(vocabularyType, type) {
-		var buffer = [];
-	    var permissionsActions = jQuery('.'+vocabularyType+'-permissions-actions');
-	    var permission = permissionsActions.find('[name$='+type+'Permissions]:checked');
-
-	    permission.each(
-	        function() {
-	            var checkboxValue = jQuery(this).val();
-		    buffer.push(checkboxValue);
-	        }
-	    );
-	    buffer.join(',');
-	    return buffer.toString();
 	},
 
 	_loadData: function() {
