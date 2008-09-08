@@ -363,37 +363,14 @@ public class LanguageImpl implements Language {
 				}
 				catch (MissingResourceException mre) {
 				}
-			}
 
-			// LEP-7393
+				// LEP-7393
 
-			if ((value == defaultValue) || (value == null) &&
-				portletConfig.getPortletName().equals(
-					PortletKeys.PORTLET_CONFIGURATION)) {
+				if ((value == null) || (value == defaultValue) &&
+					(portletConfig.getPortletName().equals(
+						PortletKeys.PORTLET_CONFIGURATION))) {
 
-				try {
-					String portletResource = ParamUtil.getString(
-						request, "portletResource");
-
-					long companyId = PortalUtil.getCompanyId(request);
-
-					Portlet portlet = PortletLocalServiceUtil.getPortletById(
-						companyId, portletResource);
-
-					portletConfig = PortletConfigFactory.create(
-						portlet, pageContext.getServletContext());
-
-					Locale locale = request.getLocale();
-
-					ResourceBundle bundle = portletConfig.getResourceBundle(
-						locale);
-
-					value = bundle.getString(key);
-				}
-				catch (Exception e) {
-					if (_log.isWarnEnabled()) {
-						_log.warn(e, e);
-					}
+					value = _getPortletConfigurationValue(pageContext, key);
 				}
 			}
 		}
@@ -539,6 +516,41 @@ public class LanguageImpl implements Language {
 
 	private Locale _getLocale(String languageCode) {
 		return _localesMap.get(languageCode);
+	}
+
+	private String _getPortletConfigurationValue(
+		PageContext pageContext, String key) {
+
+		String value = null;
+
+		try {
+			HttpServletRequest request =
+				(HttpServletRequest)pageContext.getRequest();
+
+			String portletResource = ParamUtil.getString(
+				request, "portletResource");
+
+			long companyId = PortalUtil.getCompanyId(request);
+
+			Portlet portlet = PortletLocalServiceUtil.getPortletById(
+				companyId, portletResource);
+
+			PortletConfig portletConfig = PortletConfigFactory.create(
+				portlet, pageContext.getServletContext());
+
+			Locale locale = request.getLocale();
+
+			ResourceBundle bundle = portletConfig.getResourceBundle(locale);
+
+			value = bundle.getString(key);
+		}
+		catch (Exception e) {
+			if (_log.isWarnEnabled()) {
+				_log.warn(e, e);
+			}
+		}
+
+		return value;
 	}
 
 	private static Log _log = LogFactory.getLog(LanguageImpl.class);
