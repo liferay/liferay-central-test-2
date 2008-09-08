@@ -178,6 +178,7 @@
 	<td colspan="3">
 		<div class="vocabulary-footer">
 			<input class="vocabulary-delete-list-button" type="button" value="<liferay-ui:message key="delete-tag-set" />" />
+
 			<input class="permissions-vocabulary-button" type="button" value="<liferay-ui:message key="edit-vocabulary-permissions" />" />
 		</div>
 	</td>
