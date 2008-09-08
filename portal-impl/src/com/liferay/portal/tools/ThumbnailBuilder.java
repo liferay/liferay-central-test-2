@@ -25,6 +25,7 @@ package com.liferay.portal.tools;
 import com.liferay.portal.kernel.image.ImageBag;
 import com.liferay.portal.kernel.image.ImageProcessorUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
+import com.liferay.portal.util.InitUtil;
 
 import java.awt.image.RenderedImage;
 
@@ -41,6 +42,8 @@ import javax.imageio.ImageIO;
 public class ThumbnailBuilder {
 
 	public static void main(String[] args) {
+		InitUtil.initWithSpring();
+
 		File originalFile = new File(
 			System.getProperty("thumbnail.original.file"));
 		File thumbnailFile = new File(
