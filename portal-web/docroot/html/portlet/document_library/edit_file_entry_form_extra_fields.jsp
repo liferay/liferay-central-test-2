@@ -29,16 +29,16 @@
 --%>
 
 <%--<tr>
-	<td>
-		<label><liferay-ui:message key="author" /></label>
+	<td class="lfr-label">
+		<liferay-ui:message key="author" />
 	</td>
 	<td>
 		<input name="ExtraSettingsProperties(author)" style="width: <%= ModelHintsConstants.TEXT_DISPLAY_WIDTH %>px;" type="text" value="<bean:write name="DOCUMENT_LIBRARY_FILE_ENTRY" property="extraSettingsProperties(author)" />" />
 	</td>
 </tr>
 <tr>
-	<td>
-		<label><liferay-ui:message key="type" /></label>
+	<td class="lfr-label">
+		<liferay-ui:message key="type" />
 	</td>
 	<td>
 		<input name="ExtraSettingsProperties(type)" style="width: <%= ModelHintsConstants.TEXT_DISPLAY_WIDTH %>px;" type="text" value="<bean:write name="DOCUMENT_LIBRARY_FILE_ENTRY" property="extraSettingsProperties(type)" />" />

@@ -81,16 +81,16 @@ String emailEventReminderBody = ParamUtil.getString(request, "emailEventReminder
 	<c:when test='<%= tabs2.equals("email-from") %>'>
 		<table class="lfr-table">
 		<tr>
-			<td>
-				<label><liferay-ui:message key="name" /></label>
+			<td class="lfr-label">
+				<liferay-ui:message key="name" />
 			</td>
 			<td>
 				<input class="lfr-input-text" name="<portlet:namespace />emailFromName" type="text" value="<%= emailFromName %>" />
 			</td>
 		</tr>
 		<tr>
-			<td>
-				<label><liferay-ui:message key="address" /></label>
+			<td class="lfr-label">
+				<liferay-ui:message key="address" />
 			</td>
 			<td>
 				<input class="lfr-input-text" name="<portlet:namespace />emailFromAddress" type="text" value="<%= emailFromAddress %>" />
@@ -101,8 +101,8 @@ String emailEventReminderBody = ParamUtil.getString(request, "emailEventReminder
 	<c:when test='<%= tabs2.equals("event-reminder-email") %>'>
 		<table class="lfr-table">
 		<tr>
-			<td>
-				<label><liferay-ui:message key="enabled" /></label>
+			<td class="lfr-label">
+				<liferay-ui:message key="enabled" />
 			</td>
 			<td>
 				<liferay-ui:input-checkbox param="emailEventReminderEnabled" defaultValue="<%= CalUtil.getEmailEventReminderEnabled(prefs) %>" />
@@ -114,8 +114,8 @@ String emailEventReminderBody = ParamUtil.getString(request, "emailEventReminder
 			</td>
 		</tr>
 		<tr>
-			<td>
-				<label><liferay-ui:message key="subject" /></label>
+			<td class="lfr-label">
+				<liferay-ui:message key="subject" />
 			</td>
 			<td>
 				<input class="lfr-input-text" name="<portlet:namespace />emailEventReminderSubject" type="text" value="<%= emailEventReminderSubject %>" />
@@ -127,8 +127,8 @@ String emailEventReminderBody = ParamUtil.getString(request, "emailEventReminder
 			</td>
 		</tr>
 		<tr>
-			<td>
-				<label><liferay-ui:message key="body" /></label>
+			<td class="lfr-label">
+				<liferay-ui:message key="body" />
 			</td>
 			<td>
 				<liferay-ui:input-editor editorImpl="<%= EDITOR_WYSIWYG_IMPL_KEY %>" />
@@ -217,8 +217,8 @@ String emailEventReminderBody = ParamUtil.getString(request, "emailEventReminder
 
 			<table class="lfr-table">
 			<tr>
-				<td>
-					<label><liferay-ui:message key="default-tab" /></label>
+				<td class="lfr-label">
+					<liferay-ui:message key="default-tab" />
 				</td>
 				<td>
 					<select name="<portlet:namespace />tabs1Default">
@@ -245,8 +245,8 @@ String emailEventReminderBody = ParamUtil.getString(request, "emailEventReminder
 
 			<table class="lfr-table">
 			<tr>
-				<td>
-					<label><liferay-ui:message key="orientation" /></label>
+				<td class="lfr-label">
+					<liferay-ui:message key="orientation" />
 				</td>
 				<td>
 					<select name="<portlet:namespace />summaryTabOrientation" size="1">
@@ -256,16 +256,16 @@ String emailEventReminderBody = ParamUtil.getString(request, "emailEventReminder
 				</td>
 			</tr>
 			<tr>
-				<td>
-					<label><liferay-ui:message key="show-mini-month" /></label>
+				<td class="lfr-label">
+					<liferay-ui:message key="show-mini-month" />
 				</td>
 				<td>
 					<liferay-ui:input-checkbox param="summaryTabShowMiniMonth" defaultValue="<%= summaryTabShowMiniMonth %>" />
 				</td>
 			</tr>
 			<tr>
-				<td>
-					<label><liferay-ui:message key="show-todays-events" /></label>
+				<td class="lfr-label">
+					<liferay-ui:message key="show-todays-events" />
 				</td>
 				<td>
 					<liferay-ui:input-checkbox param="summaryTabShowTodaysEvents" defaultValue="<%= summaryTabShowTodaysEvents %>" />

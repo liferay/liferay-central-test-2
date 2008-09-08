@@ -67,16 +67,16 @@ String redirect = ParamUtil.getString(request, "redirect");
 
 <table class="lfr-table">
 <tr>
-	<td>
-		<label><liferay-ui:message key="classic" /></label>
+	<td class="lfr-label">
+		<liferay-ui:message key="classic" />
 	</td>
 	<td>
 		<input <%= folderDisplayStyle.equals("classic") ? "checked" : "" %> name="<portlet:namespace />folderDisplayStyle" type="radio" value="classic" />
 	</td>
 </tr>
 <tr>
-	<td>
-		<label><liferay-ui:message key="tree-view" /></label>
+	<td class="lfr-label">
+		<liferay-ui:message key="tree-view" />
 	</td>
 	<td>
 		<input <%= folderDisplayStyle.equals("tree") ? "checked" : "" %> name="<portlet:namespace />folderDisplayStyle" type="radio" value="tree" />
@@ -90,8 +90,8 @@ String redirect = ParamUtil.getString(request, "redirect");
 
 <table class="lfr-table">
 <tr>
-	<td>
-		<label><liferay-ui:message key="root-folder" /></label>
+	<td class="lfr-label">
+		<liferay-ui:message key="root-folder" />
 	</td>
 	<td>
 		<a href="<liferay-portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" portletName="<%= portletResource %>"><portlet:param name="struts_action" value='<%= strutsAction + "/view" %>' /><portlet:param name="folderId" value="<%= String.valueOf(rootFolderId) %>" /></liferay-portlet:renderURL>" id="<portlet:namespace />rootFolderName">
@@ -108,32 +108,32 @@ String redirect = ParamUtil.getString(request, "redirect");
 	</td>
 </tr>
 <tr>
-	<td>
-		<label><liferay-ui:message key="show-breadcrumbs" /></label>
+	<td class="lfr-label">
+		<liferay-ui:message key="show-breadcrumbs" />
 	</td>
 	<td>
 		<liferay-ui:input-checkbox param="showBreadcrumbs" defaultValue="<%= showBreadcrumbs %>" />
 	</td>
 </tr>
 <tr>
-	<td>
-		<label><liferay-ui:message key="show-search" /></label>
+	<td class="lfr-label">
+		<liferay-ui:message key="show-search" />
 	</td>
 	<td>
 		<liferay-ui:input-checkbox param="showFoldersSearch" defaultValue="<%= showFoldersSearch %>" />
 	</td>
 </tr>
 <tr>
-	<td>
-		<label><liferay-ui:message key="show-subfolders" /></label>
+	<td class="lfr-label">
+		<liferay-ui:message key="show-subfolders" />
 	</td>
 	<td>
 		<liferay-ui:input-checkbox param="showSubfolders" defaultValue="<%= showSubfolders %>" />
 	</td>
 </tr>
 <tr>
-	<td>
-		<label><liferay-ui:message key="folders-per-page" /></label>
+	<td class="lfr-label">
+		<liferay-ui:message key="folders-per-page" />
 	</td>
 	<td>
 		<input name="<portlet:namespace />foldersPerPage" size="2" type="text" value="<%= foldersPerPage %>" />
@@ -145,8 +145,8 @@ String redirect = ParamUtil.getString(request, "redirect");
 	</td>
 </tr>
 <tr>
-	<td>
-		<label><liferay-ui:message key="show-columns" /></label>
+	<td class="lfr-label">
+		<liferay-ui:message key="show-columns" />
 	</td>
 	<td>
 
@@ -202,16 +202,16 @@ String redirect = ParamUtil.getString(request, "redirect");
 
 <table class="lfr-table">
 <tr>
-	<td>
-		<label><liferay-ui:message key="show-search" /></label>
+	<td class="lfr-label">
+		<liferay-ui:message key="show-search" />
 	</td>
 	<td>
 		<liferay-ui:input-checkbox param="showFileEntriesSearch" defaultValue="<%= showFileEntriesSearch %>" />
 	</td>
 </tr>
 <tr>
-	<td>
-		<label><liferay-ui:message key="documents-per-page" /></label>
+	<td class="lfr-label">
+		<liferay-ui:message key="documents-per-page" />
 	</td>
 	<td>
 		<input name="<portlet:namespace />fileEntriesPerPage" size="2" type="text" value="<%= fileEntriesPerPage %>" />
@@ -223,8 +223,8 @@ String redirect = ParamUtil.getString(request, "redirect");
 	</td>
 </tr>
 <tr>
-	<td>
-		<label><liferay-ui:message key="show-columns" /></label>
+	<td class="lfr-label">
+		<liferay-ui:message key="show-columns" />
 	</td>
 	<td>
 
@@ -280,8 +280,8 @@ String redirect = ParamUtil.getString(request, "redirect");
 
 <table class="lfr-table">
 <tr>
-	<td>
-		<label><liferay-ui:message key="enable-comment-ratings" /></label>
+	<td class="lfr-label">
+		<liferay-ui:message key="enable-comment-ratings" />
 	</td>
 	<td>
 		<liferay-ui:input-checkbox param="enableCommentRatings" defaultValue="<%= enableCommentRatings %>" />

@@ -127,8 +127,8 @@ request.setAttribute(WebKeys.MESSAGE_BOARDS_TREE_WALKER_DEPTH, new Integer(0));
 
 <table class="lfr-table">
 <tr>
-	<td>
-		<label><liferay-ui:message key="add-explanation-post-to-the-source-thread" /></label>
+	<td class="lfr-label">
+		<liferay-ui:message key="add-explanation-post-to-the-source-thread" />
 	</td>
 	<td>
 		<input id="<portlet:namespace/>addExplanationPost" name="<portlet:namespace/>addExplanationPost" type="checkbox" onClick="<portlet:namespace/>toggleExplanationPost();" />
@@ -150,8 +150,8 @@ request.setAttribute(WebKeys.MESSAGE_BOARDS_TREE_WALKER_DEPTH, new Integer(0));
 	</td>
 </tr>
 <tr>
-	<td>
-		<label><liferay-ui:message key="subject" /></label>
+	<td class="lfr-label">
+		<liferay-ui:message key="subject" />
 	</td>
 	<td>
 		<liferay-ui:input-field model="<%= MBMessage.class %>" field="subject" defaultValue="<%= LanguageUtil.get(pageContext, "thread-splitted") %>" />
@@ -163,8 +163,8 @@ request.setAttribute(WebKeys.MESSAGE_BOARDS_TREE_WALKER_DEPTH, new Integer(0));
 	</td>
 </tr>
 <tr>
-	<td>
-		<label><liferay-ui:message key="body" /></label>
+	<td class="lfr-label">
+		<liferay-ui:message key="body" />
 	</td>
 	<td>
 		<%@ include file="/html/portlet/message_boards/bbcode_editor.jspf" %>

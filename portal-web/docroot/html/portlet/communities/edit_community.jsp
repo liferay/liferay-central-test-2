@@ -61,8 +61,8 @@ String friendlyURL = BeanParamUtil.getString(group, request, "friendlyURL");
 
 <c:if test="<%= group != null %>">
 	<tr>
-		<td>
-			<label><liferay-ui:message key="group-id" /></label>
+		<td class="lfr-label">
+			<liferay-ui:message key="group-id" />
 		</td>
 		<td>
 			<%= groupId %>
@@ -71,24 +71,24 @@ String friendlyURL = BeanParamUtil.getString(group, request, "friendlyURL");
 </c:if>
 
 <tr>
-	<td>
-		<label><liferay-ui:message key="name" /></label>
+	<td class="lfr-label">
+		<liferay-ui:message key="name" />
 	</td>
 	<td>
 		<liferay-ui:input-field model="<%= Group.class %>" bean="<%= group %>" field="name" />
 	</td>
 </tr>
 <tr>
-	<td>
-		<label><liferay-ui:message key="description" /></label>
+	<td class="lfr-label">
+		<liferay-ui:message key="description" />
 	</td>
 	<td>
 		<liferay-ui:input-field model="<%= Group.class %>" bean="<%= group %>" field="description" />
 	</td>
 </tr>
 <tr>
-	<td>
-		<label><liferay-ui:message key="type" /></label>
+	<td class="lfr-label">
+		<liferay-ui:message key="type" />
 	</td>
 	<td>
 		<select name="<portlet:namespace />type">
@@ -99,8 +99,8 @@ String friendlyURL = BeanParamUtil.getString(group, request, "friendlyURL");
 	</td>
 </tr>
 <tr>
-	<td>
-		<label><liferay-ui:message key="active" /></label>
+	<td class="lfr-label">
+		<liferay-ui:message key="active" />
 	</td>
 	<td>
 		<liferay-ui:input-field model="<%= Group.class %>" bean="<%= group %>" field="active" defaultValue="<%= Boolean.TRUE %>" />

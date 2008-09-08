@@ -84,8 +84,8 @@ long parentFolderId = BeanParamUtil.getLong(folder, request, "parentFolderId", D
 
 <c:if test="<%= folder != null %>">
 	<tr>
-		<td>
-			<label><liferay-ui:message key="parent-folder" /></label>
+		<td class="lfr-label">
+			<liferay-ui:message key="parent-folder" />
 		</td>
 		<td>
 
@@ -117,16 +117,16 @@ long parentFolderId = BeanParamUtil.getLong(folder, request, "parentFolderId", D
 </c:if>
 
 <tr>
-	<td>
-		<label><liferay-ui:message key="name" /></label>
+	<td class="lfr-label">
+		<liferay-ui:message key="name" />
 	</td>
 	<td>
 		<liferay-ui:input-field model="<%= DLFolder.class %>" bean="<%= folder %>" field="name" />
 	</td>
 </tr>
 <tr>
-	<td>
-		<label><liferay-ui:message key="description" /></label>
+	<td class="lfr-label">
+		<liferay-ui:message key="description" />
 	</td>
 	<td>
 		<liferay-ui:input-field model="<%= DLFolder.class %>" bean="<%= folder %>" field="description" />
@@ -181,8 +181,8 @@ long parentFolderId = BeanParamUtil.getLong(folder, request, "parentFolderId", D
 		</td>
 	</tr>
 	<tr>
-		<td>
-			<label><liferay-ui:message key="permissions" /></label>
+		<td class="lfr-label">
+			<liferay-ui:message key="permissions" />
 		</td>
 		<td>
 			<liferay-ui:input-permissions

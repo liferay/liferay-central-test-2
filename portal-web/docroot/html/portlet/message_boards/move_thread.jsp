@@ -89,8 +89,8 @@ long breadcrumbsMessageId = message.getMessageId();
 
 <table class="lfr-table">
 <tr>
-	<td>
-		<label><liferay-ui:message key="category" />:</label>
+	<td class="lfr-label">
+		<liferay-ui:message key="category" />:
 	</td>
 	<td>
 
@@ -112,8 +112,8 @@ long breadcrumbsMessageId = message.getMessageId();
 
 <table class="lfr-table">
 <tr>
-	<td>
-		<label><liferay-ui:message key="add-explanation-post" /></label>
+	<td class="lfr-label">
+		<liferay-ui:message key="add-explanation-post" />
 	</td>
 	<td>
 		<input id="<portlet:namespace/>addExplanationPost" name="<portlet:namespace/>addExplanationPost" type="checkbox" onClick="<portlet:namespace/>toggleExplanationPost();" />
@@ -125,8 +125,8 @@ long breadcrumbsMessageId = message.getMessageId();
 
 <table class="lfr-table" id="<portlet:namespace/>explanationPost" style="display: none;">
 <tr>
-	<td>
-		<label><liferay-ui:message key="subject" /></label>
+	<td class="lfr-label">
+		<liferay-ui:message key="subject" />
 	</td>
 	<td>
 		<liferay-ui:input-field model="<%= MBMessage.class %>" field="subject" defaultValue="" />
@@ -138,8 +138,8 @@ long breadcrumbsMessageId = message.getMessageId();
 	</td>
 </tr>
 <tr>
-	<td>
-		<label><liferay-ui:message key="body" /></label>
+	<td class="lfr-label">
+		<liferay-ui:message key="body" />
 	</td>
 	<td>
 		<%@ include file="/html/portlet/message_boards/bbcode_editor.jspf" %>

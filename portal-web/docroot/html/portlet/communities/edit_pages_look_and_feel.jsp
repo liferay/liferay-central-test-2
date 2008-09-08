@@ -64,8 +64,8 @@ PortletURL portletURL = (PortletURL)request.getAttribute("edit_pages.jsp-portlet
 		<c:if test="<%= selLayout != null %>">
 			<table class="lfr-table">
 			<tr>
-				<td>
-					<label><%= LanguageUtil.get(pageContext, "use-the-general-look-and-feel-for-the-" + (privateLayout ? "public" : "private") + "-pages") %></label>
+				<td class="lfr-label">
+					<%= LanguageUtil.get(pageContext, "use-the-general-look-and-feel-for-the-" + (privateLayout ? "public" : "private") + "-pages") %>
 				</td>
 				<td>
 					<select name="<portlet:namespace />hidden" onChange="if (this.value == 1) { <portlet:namespace />updateLookAndFeel('', ''); } else { <portlet:namespace />updateLookAndFeel('<%= selTheme.getThemeId() %>', '<%= selColorScheme.getColorSchemeId() %>'); }">
@@ -192,8 +192,8 @@ PortletURL portletURL = (PortletURL)request.getAttribute("edit_pages.jsp-portlet
 		<c:if test="<%= selLayout != null %>">
 			<table class="lfr-table">
 			<tr>
-				<td>
-					<label><%= LanguageUtil.get(pageContext, "use-the-general-look-and-feel-for-the-" + (privateLayout ? "public" : "private") + "-pages") %></label>
+				<td class="lfr-label">
+					<%= LanguageUtil.get(pageContext, "use-the-general-look-and-feel-for-the-" + (privateLayout ? "public" : "private") + "-pages") %>
 				</td>
 				<td>
 					<select name="<portlet:namespace />hidden" onChange="if (this.value == 1) { <portlet:namespace />updateLookAndFeel('', ''); } else { <portlet:namespace />updateLookAndFeel('<%= selTheme.getThemeId() %>', '<%= selColorScheme.getColorSchemeId() %>'); }">

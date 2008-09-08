@@ -54,16 +54,16 @@ long nodeId = BeanParamUtil.getLong(node, request, "nodeId");
 
 <table class="lfr-table">
 <tr>
-	<td>
-		<label><liferay-ui:message key="name" /></label>
+	<td class="lfr-label">
+		<liferay-ui:message key="name" />
 	</td>
 	<td>
 		<liferay-ui:input-field model="<%= WikiNode.class %>" bean="<%= node %>" field="name" />
 	</td>
 </tr>
 <tr>
-	<td>
-		<label><liferay-ui:message key="description" /></label>
+	<td class="lfr-label">
+		<liferay-ui:message key="description" />
 	</td>
 	<td>
 		<liferay-ui:input-field model="<%= WikiNode.class %>" bean="<%= node %>" field="description" />
@@ -77,8 +77,8 @@ long nodeId = BeanParamUtil.getLong(node, request, "nodeId");
 		</td>
 	</tr>
 	<tr>
-		<td>
-			<label><liferay-ui:message key="permissions" /></label>
+		<td class="lfr-label">
+			<liferay-ui:message key="permissions" />
 		</td>
 		<td>
 			<liferay-ui:input-permissions

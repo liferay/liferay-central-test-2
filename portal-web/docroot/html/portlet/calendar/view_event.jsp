@@ -185,8 +185,8 @@ if ((event.getRepeating()) && (recurrence != null)) {
 <div class="vevent">
 	<table class="lfr-table">
 	<tr>
-		<td>
-			<label><liferay-ui:message key="date-and-time" />:</label>
+		<td class="lfr-label">
+			<liferay-ui:message key="from" />:
 		</td>
 		<td>
 			<c:choose>
@@ -200,8 +200,8 @@ if ((event.getRepeating()) && (recurrence != null)) {
 		</td>
 	</tr>
 	<tr>
-		<td>
-			<label><liferay-ui:message key="duration" />:</label>
+		<td class="lfr-label">
+			<liferay-ui:message key="duration" />:
 		</td>
 		<td>
 
@@ -257,24 +257,24 @@ if ((event.getRepeating()) && (recurrence != null)) {
 		</td>
 	</tr>
 	<tr>
-		<td>
-			<label><liferay-ui:message key="title" />:</label>
+		<td class="lfr-label">
+			<liferay-ui:message key="title" />
 		</td>
 		<td>
 			<span class="summary"><%= event.getTitle() %></span>
 		</td>
 	</tr>
 	<tr>
-		<td>
-			<label><liferay-ui:message key="description" />:</label>
+		<td class="lfr-label">
+			<liferay-ui:message key="description" />:
 		</td>
 		<td>
 			<%= event.getDescription() %>
 		</td>
 	</tr>
 	<tr>
-		<td>
-			<label><liferay-ui:message key="type" />:</label>
+		<td class="lfr-label">
+			<liferay-ui:message key="type" />:
 		</td>
 		<td>
 			<span class="categories"><%= LanguageUtil.get(pageContext, event.getType()) %></span>
@@ -288,8 +288,8 @@ if ((event.getRepeating()) && (recurrence != null)) {
 
 	<c:if test="<%= (recurrenceType == Recurrence.DAILY) %>">
 		<tr>
-			<td>
-				<label><liferay-ui:message key="repeat-daily" />:</label>
+			<td class="lfr-label">
+				<liferay-ui:message key="repeat-daily" />:
 			</td>
 			<td>
 				<c:if test="<%= (dailyType == 0) %>">
@@ -305,8 +305,8 @@ if ((event.getRepeating()) && (recurrence != null)) {
 
 	<c:if test="<%= (recurrenceType == Recurrence.WEEKLY) %>">
 		<tr>
-			<td>
-				<label><liferay-ui:message key="repeat-weekly" />:</label>
+			<td class="lfr-label">
+				<liferay-ui:message key="repeat-weekly" />:
 			</td>
 			<td>
 				<abbr class="rrule" title="FREQ=WEEKLY">
@@ -326,8 +326,8 @@ if ((event.getRepeating()) && (recurrence != null)) {
 
 	<c:if test="<%= (recurrenceType == Recurrence.MONTHLY) %>">
 		<tr>
-			<td>
-				<label><liferay-ui:message key="repeat-monthly" />:</label>
+			<td class="lfr-label">
+				<liferay-ui:message key="repeat-monthly" />:
 			</td>
 			<td>
 				<c:if test="<%= (monthlyType == 0) %>">
@@ -361,8 +361,8 @@ if ((event.getRepeating()) && (recurrence != null)) {
 
 	<c:if test="<%= (recurrenceType == Recurrence.YEARLY) %>">
 		<tr>
-			<td>
-				<label><liferay-ui:message key="repeat-yearly" />:</label>
+			<td class="lfr-label">
+				<liferay-ui:message key="repeat-yearly" />:
 			</td>
 			<td>
 				<abbr class="rrule" title="FREQ=YEARLY">
@@ -397,8 +397,8 @@ if ((event.getRepeating()) && (recurrence != null)) {
 	</c:if>
 
 	<tr>
-		<td>
-			<label><liferay-ui:message key="end-date" />:</label>
+		<td class="lfr-label">
+			<liferay-ui:message key="end-date" />:
 		</td>
 		<td>
 			<c:if test="<%= (endDateType == 0) %>">

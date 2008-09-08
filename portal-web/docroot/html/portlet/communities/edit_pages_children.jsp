@@ -83,8 +83,8 @@ if (!StringUtil.contains(tabs4Names, tabs4)) {
 
 		<table class="lfr-table">
 		<tr>
-			<td>
-				<label><liferay-ui:message key="name" /></label>
+			<td class="lfr-label">
+				<liferay-ui:message key="name" />
 			</td>
 			<td>
 				<input name="<portlet:namespace />name_<%= defaultLanguageId %>" size="30" type="text" value="<%= name %>" />
@@ -96,8 +96,8 @@ if (!StringUtil.contains(tabs4Names, tabs4)) {
 			</td>
 		</tr>
 		<tr>
-			<td>
-				<label><liferay-ui:message key="type" /></label>
+			<td class="lfr-label">
+				<liferay-ui:message key="type" />
 			</td>
 			<td>
 				<select name="<portlet:namespace />type">
@@ -116,8 +116,8 @@ if (!StringUtil.contains(tabs4Names, tabs4)) {
 			</td>
 		</tr>
 		<tr>
-			<td>
-				<label><liferay-ui:message key="hidden" /></label>
+			<td class="lfr-label">
+				<liferay-ui:message key="hidden" />
 			</td>
 			<td>
 				<liferay-ui:input-checkbox param="hidden" defaultValue="<%= hidden %>" />
@@ -126,8 +126,8 @@ if (!StringUtil.contains(tabs4Names, tabs4)) {
 
 		<c:if test="<%= (selLayout != null) && selLayout.getType().equals(LayoutConstants.TYPE_PORTLET) %>">
 			<tr>
-				<td>
-					<label><liferay-ui:message key="inherit" /></label>
+				<td class="lfr-label">
+					<liferay-ui:message key="inherit" />
 				</td>
 				<td>
 					<liferay-ui:input-checkbox param="inheritFromParentLayoutId" defaultValue="false" />
@@ -215,8 +215,8 @@ if (!StringUtil.contains(tabs4Names, tabs4)) {
 
 		<table class="lfr-table">
 		<tr>
-			<td>
-				<label><liferay-ui:message key="merge-guest-public-pages" /></label>
+			<td class="lfr-label">
+				<liferay-ui:message key="merge-guest-public-pages" />
 			</td>
 			<td>
 				<liferay-ui:input-checkbox param="mergeGuestPublicPages" defaultValue="<%= mergeGuestPublicPages %>" />

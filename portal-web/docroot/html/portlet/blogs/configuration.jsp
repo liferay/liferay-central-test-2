@@ -34,8 +34,8 @@
 
 	<table class="lfr-table">
 	<tr>
-		<td>
-			<label><liferay-ui:message key="maximum-items-to-display" /></label>
+		<td class="lfr-label">
+			<liferay-ui:message key="maximum-items-to-display" />
 		</td>
 		<td>
 			<select name="<portlet:namespace />pageDelta">
@@ -60,8 +60,8 @@
 		</td>
 	</tr>
 	<tr>
-		<td>
-			<label><liferay-ui:message key="display-style" /></label>
+		<td class="lfr-label">
+			<liferay-ui:message key="display-style" />
 		</td>
 		<td>
 			<select name="<portlet:namespace />pageDisplayStyle">
@@ -72,24 +72,24 @@
 		</td>
 	</tr>
 	<tr>
-		<td>
-			<label><liferay-ui:message key="enable-ratings" /></label>
+		<td class="lfr-label">
+			<liferay-ui:message key="enable-ratings" />
 		</td>
 		<td>
 			<liferay-ui:input-checkbox param="enableRatings" defaultValue="<%= enableRatings %>" />
 		</td>
 	</tr>
 	<tr>
-		<td>
-			<label><liferay-ui:message key="enable-comments" /></label>
+		<td class="lfr-label">
+			<liferay-ui:message key="enable-comments" />
 		</td>
 		<td>
 			<liferay-ui:input-checkbox param="enableComments" defaultValue="<%= enableComments %>" />
 		</td>
 	</tr>
 	<tr>
-		<td>
-			<label><liferay-ui:message key="enable-comment-ratings" /></label>
+		<td class="lfr-label">
+			<liferay-ui:message key="enable-comment-ratings" />
 		</td>
 		<td>
 			<liferay-ui:input-checkbox param="enableCommentRatings" defaultValue="<%= enableCommentRatings %>" />
@@ -103,8 +103,8 @@
 
 	<table class="lfr-table">
 	<tr>
-		<td>
-			<label><liferay-ui:message key="maximum-items-to-display" /></label>
+		<td class="lfr-label">
+			<liferay-ui:message key="maximum-items-to-display" />
 		</td>
 		<td>
 			<select name="<portlet:namespace />rssDelta">
@@ -129,8 +129,8 @@
 		</td>
 	</tr>
 	<tr>
-		<td>
-			<label><liferay-ui:message key="display-style" /></label>
+		<td class="lfr-label">
+			<liferay-ui:message key="display-style" />
 		</td>
 		<td>
 			<select name="<portlet:namespace />rssDisplayStyle">
@@ -141,8 +141,8 @@
 		</td>
 	</tr>
 	<tr>
-		<td>
-			<label><liferay-ui:message key="format" /></label>
+		<td class="lfr-label">
+			<liferay-ui:message key="format" />
 		</td>
 		<td>
 			<select name="<portlet:namespace />rssFormat">

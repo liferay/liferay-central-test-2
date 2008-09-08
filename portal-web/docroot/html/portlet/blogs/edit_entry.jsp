@@ -208,16 +208,16 @@ boolean allowTrackbacks = BeanParamUtil.getBoolean(entry, request, "allowTrackba
 </c:if>
 
 <tr>
-	<td>
-		<label><liferay-ui:message key="title" /></label>
+	<td class="lfr-label">
+		<liferay-ui:message key="title" />
 	</td>
 	<td>
 		<liferay-ui:input-field model="<%= BlogsEntry.class %>" bean="<%= entry %>" field="title" />
 	</td>
 </tr>
 <tr>
-	<td>
-		<label><liferay-ui:message key="display-date" /></label>
+	<td class="lfr-label">
+		<liferay-ui:message key="display-date" />
 	</td>
 	<td>
 		<liferay-ui:input-field model="<%= BlogsEntry.class %>" bean="<%= entry %>" field="displayDate" defaultValue="<%= displayDate %>" />
@@ -229,8 +229,8 @@ boolean allowTrackbacks = BeanParamUtil.getBoolean(entry, request, "allowTrackba
 	</td>
 </tr>
 <tr>
-	<td>
-		<label><liferay-ui:message key="content" /></label>
+	<td class="lfr-label">
+		<liferay-ui:message key="content" />
 	</td>
 	<td>
 		<liferay-ui:input-editor editorImpl="<%= EDITOR_WYSIWYG_IMPL_KEY %>" />
@@ -244,8 +244,8 @@ boolean allowTrackbacks = BeanParamUtil.getBoolean(entry, request, "allowTrackba
 	</td>
 </tr>
 <tr>
-	<td>
-		<label><liferay-ui:message key="allow-incoming-trackbacks" /></label>
+	<td class="lfr-label">
+		<liferay-ui:message key="allow-incoming-trackbacks" />
 	</td>
 	<td>
 		<liferay-ui:input-checkbox param="allowTrackbacks" defaultValue="<%= allowTrackbacks %>" />
@@ -257,8 +257,8 @@ boolean allowTrackbacks = BeanParamUtil.getBoolean(entry, request, "allowTrackba
 	</td>
 </tr>
 <tr>
-	<td>
-		<label><liferay-ui:message key="trackbacks-to-send" /></label>
+	<td class="lfr-label">
+		<liferay-ui:message key="trackbacks-to-send" />
 	</td>
 	<td>
 		<liferay-ui:input-field model="<%= BlogsEntry.class %>" bean="<%= entry %>" field="trackbacks" />
@@ -297,8 +297,8 @@ boolean allowTrackbacks = BeanParamUtil.getBoolean(entry, request, "allowTrackba
 	</td>
 </tr>
 <tr>
-	<td>
-		<label><liferay-ui:message key="tags" /></label>
+	<td class="lfr-label">
+		<liferay-ui:message key="tags" />
 	</td>
 	<td>
 
@@ -326,8 +326,8 @@ boolean allowTrackbacks = BeanParamUtil.getBoolean(entry, request, "allowTrackba
 		</td>
 	</tr>
 	<tr>
-		<td>
-			<label><liferay-ui:message key="permissions" /></label>
+		<td class="lfr-label">
+			<liferay-ui:message key="permissions" />
 		</td>
 		<td>
 			<liferay-ui:input-permissions

@@ -191,7 +191,7 @@ portletURL.setParameter("name", name);
 		</td>
 	</tr>
 	<tr>
-		<td>
+		<td class="lfr-label">
 			<liferay-ui:message key="version" />
 		</td>
 		<td>
@@ -199,7 +199,7 @@ portletURL.setParameter("name", name);
 		</td>
 	</tr>
 	<tr>
-		<td>
+		<td class="lfr-label">
 			<liferay-ui:message key="size" />
 		</td>
 		<td>
@@ -207,7 +207,7 @@ portletURL.setParameter("name", name);
 		</td>
 	</tr>
 	<tr>
-		<td>
+		<td class="lfr-label">
 			<liferay-ui:message key="num-of-downloads" />
 		</td>
 		<td>
@@ -220,7 +220,7 @@ portletURL.setParameter("name", name);
 		</td>
 	</tr>
 	<tr>
-		<td>
+		<td class="lfr-label">
 			<liferay-ui:message key="download" />
 		</td>
 		<td>
@@ -235,7 +235,7 @@ portletURL.setParameter("name", name);
 
 	<c:if test="<%= conversions.length > 0 %>">
 		<tr>
-			<td>
+			<td class="lfr-label">
 				<liferay-ui:message key="convert-to" />
 			</td>
 			<td>
@@ -273,7 +273,7 @@ portletURL.setParameter("name", name);
 		</td>
 	</tr>
 	<tr>
-		<td>
+		<td class="lfr-label">
 			<liferay-ui:message key="url" />
 		</td>
 		<td>
@@ -285,7 +285,7 @@ portletURL.setParameter("name", name);
 
 	<c:if test="<%= WebDAVUtil.isEditEnabled(DLWebDAVStorageImpl.class.getName()) %>">
 		<tr>
-			<td>
+			<td class="lfr-label">
 				<liferay-ui:message key="webdav-url" />
 			</td>
 			<td>

@@ -242,8 +242,8 @@ if (Validator.isNull(redirect)) {
 
 		<c:if test="<%= editTitle %>">
 			<tr>
-				<td>
-					<label><liferay-ui:message key="title" /></label>
+				<td class="lfr-label">
+					<liferay-ui:message key="title" />
 				</td>
 				<td>
 					<input name="<portlet:namespace />title" size="30" type="text" value="<%= title %>" />
@@ -252,8 +252,8 @@ if (Validator.isNull(redirect)) {
 		</c:if>
 
 		<tr>
-			<td>
-				<label><liferay-ui:message key="format" /></label>
+			<td class="lfr-label">
+				<liferay-ui:message key="format" />
 			</td>
 			<td>
 				<select name="<portlet:namespace />format" onChange="<portlet:namespace />changeFormat(this);">
@@ -330,8 +330,8 @@ if (Validator.isNull(redirect)) {
 	</c:if>
 
 	<tr>
-		<td>
-			<label><liferay-ui:message key="tags" /></label>
+		<td class="lfr-label">
+			<liferay-ui:message key="tags" />
 		</td>
 		<td>
 
@@ -359,8 +359,8 @@ if (Validator.isNull(redirect)) {
 		</td>
 	</tr>
 	<tr>
-		<td>
-			<label><liferay-ui:message key="summary" /></label>
+		<td class="lfr-label">
+			<liferay-ui:message key="summary" />
 		</td>
 		<td>
 			<input name="<portlet:namespace />summary" size="75" type="text" value="<%= summary %>" />

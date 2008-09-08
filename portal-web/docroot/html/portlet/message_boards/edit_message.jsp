@@ -196,8 +196,8 @@ if (message != null) {
 
 <table class="lfr-table">
 <tr>
-	<td>
-		<label><liferay-ui:message key="subject" /></label>
+	<td class="lfr-label">
+		<liferay-ui:message key="subject" />
 	</td>
 	<td>
 		<liferay-ui:input-field model="<%= MBMessage.class %>" field="subject" defaultValue="<%= subject %>" />
@@ -209,8 +209,8 @@ if (message != null) {
 	</td>
 </tr>
 <tr>
-	<td>
-		<label><liferay-ui:message key="body" /></label>
+	<td class="lfr-label">
+		<liferay-ui:message key="body" />
 	</td>
 	<td class="message-edit-body">
 		<%@ include file="/html/portlet/message_boards/bbcode_editor.jspf" %>
@@ -227,7 +227,7 @@ if (message != null) {
 	</tr>
 
 	<tr>
-		<td>
+		<td class="lfr-label">
 			<liferay-ui:message key="attachments" />
 		</td>
 		<td>
@@ -300,8 +300,8 @@ if (message != null) {
 		</td>
 	</tr>
 	<tr>
-		<td>
-			<label><liferay-ui:message key="mark-as-a-question" /></label>
+		<td class="lfr-label">
+			<liferay-ui:message key="mark-as-a-question" />
 		</td>
 		<td>
 			<liferay-ui:input-checkbox param="question" defaultValue="<%= question %>" />
@@ -318,8 +318,8 @@ if (message != null) {
 		</td>
 	</tr>
 	<tr>
-		<td>
-			<label><liferay-ui:message key="anonymous" /></label>
+		<td class="lfr-label">
+			<liferay-ui:message key="anonymous" />
 		</td>
 		<td>
 			<liferay-ui:input-checkbox param="anonymous" />
@@ -336,8 +336,8 @@ if (message != null) {
 		</td>
 	</tr>
 	<tr>
-		<td>
-			<label><liferay-ui:message key="priority" /></label>
+		<td class="lfr-label">
+			<liferay-ui:message key="priority" />
 		</td>
 		<td>
 
@@ -389,8 +389,8 @@ if (message != null) {
 	</td>
 </tr>
 <tr>
-	<td>
-		<label><liferay-ui:message key="tags" /></label>
+	<td class="lfr-label">
+		<liferay-ui:message key="tags" />
 	</td>
 	<td>
 
@@ -418,8 +418,8 @@ if (message != null) {
 		</td>
 	</tr>
 	<tr>
-		<td>
-			<label><liferay-ui:message key="permissions" /></label>
+		<td class="lfr-label">
+			<liferay-ui:message key="permissions" />
 		</td>
 		<td>
 			<liferay-ui:input-permissions

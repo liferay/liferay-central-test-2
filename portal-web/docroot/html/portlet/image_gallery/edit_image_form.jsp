@@ -103,7 +103,7 @@ String imageMaxSize = String.valueOf(PropsValues.IG_IMAGE_MAX_SIZE / 1024);
 
 <c:if test="<%= ((image != null) || (folderId <= 0)) %>">
 	<tr>
-		<td>
+		<td class="lfr-label">
 			<liferay-ui:message key="folder" />
 		</td>
 		<td>
@@ -135,7 +135,7 @@ String imageMaxSize = String.valueOf(PropsValues.IG_IMAGE_MAX_SIZE / 1024);
 </c:if>
 
 <tr>
-	<td>
+	<td class="lfr-label">
 		<liferay-ui:message key="file" />
 	</td>
 	<td>
@@ -143,7 +143,7 @@ String imageMaxSize = String.valueOf(PropsValues.IG_IMAGE_MAX_SIZE / 1024);
 	</td>
 </tr>
 <tr>
-	<td>
+	<td class="lfr-label">
 		<liferay-ui:message key="name" />
 	</td>
 	<td>
@@ -151,7 +151,7 @@ String imageMaxSize = String.valueOf(PropsValues.IG_IMAGE_MAX_SIZE / 1024);
 	</td>
 </tr>
 <tr>
-	<td>
+	<td class="lfr-label">
 		<liferay-ui:message key="description" />
 	</td>
 	<td>
@@ -164,7 +164,7 @@ String imageMaxSize = String.valueOf(PropsValues.IG_IMAGE_MAX_SIZE / 1024);
 	</td>
 </tr>
 <tr>
-	<td>
+	<td class="lfr-label">
 		<liferay-ui:message key="tags" />
 	</td>
 	<td>
@@ -192,7 +192,7 @@ String imageMaxSize = String.valueOf(PropsValues.IG_IMAGE_MAX_SIZE / 1024);
 		</td>
 	</tr>
 	<tr>
-		<td>
+		<td class="lfr-label">
 			<liferay-ui:message key="permissions" />
 		</td>
 		<td>

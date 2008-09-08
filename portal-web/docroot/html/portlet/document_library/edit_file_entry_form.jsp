@@ -129,8 +129,8 @@ String fileMaxSize = String.valueOf(PropsValues.DL_FILE_MAX_SIZE / 1024);
 
 <c:if test="<%= ((fileEntry != null) || (folderId <= 0)) %>">
 	<tr>
-		<td>
-			<label><liferay-ui:message key="folder" /></label>
+		<td class="lfr-label">
+			<liferay-ui:message key="folder" />
 		</td>
 		<td>
 
@@ -162,24 +162,24 @@ String fileMaxSize = String.valueOf(PropsValues.DL_FILE_MAX_SIZE / 1024);
 </c:if>
 
 <tr>
-	<td>
-		<label><liferay-ui:message key="file" /></label>
+	<td class="lfr-label">
+		<liferay-ui:message key="file" />
 	</td>
 	<td>
 		<input class="lfr-input-text" id="<portlet:namespace />file" name="<portlet:namespace />file" type="file" />
 	</td>
 </tr>
 <tr>
-	<td>
-		<label><liferay-ui:message key="title" /></label>
+	<td class="lfr-label">
+		<liferay-ui:message key="title" />
 	</td>
 	<td>
 		<liferay-ui:input-field model="<%= DLFileEntry.class %>" bean="<%= fileEntry %>" field="title" /><%= extension %>
 	</td>
 </tr>
 <tr>
-	<td>
-		<label><liferay-ui:message key="description" /></label>
+	<td class="lfr-label">
+		<liferay-ui:message key="description" />
 	</td>
 	<td>
 		<liferay-ui:input-field model="<%= DLFileEntry.class %>" bean="<%= fileEntry %>" field="description" />
@@ -191,8 +191,8 @@ String fileMaxSize = String.valueOf(PropsValues.DL_FILE_MAX_SIZE / 1024);
 	</td>
 </tr>
 <tr>
-	<td>
-		<label><liferay-ui:message key="tags" /></label>
+	<td class="lfr-label">
+		<liferay-ui:message key="tags" />
 	</td>
 	<td>
 
@@ -233,8 +233,8 @@ if (fileEntry == null) {
 		</td>
 	</tr>
 	<tr>
-		<td>
-			<label><liferay-ui:message key="permissions" /></label>
+		<td class="lfr-label">
+			<liferay-ui:message key="permissions" />
 		</td>
 		<td>
 			<liferay-ui:input-permissions

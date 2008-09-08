@@ -103,16 +103,16 @@ String emailPageUpdatedSignature = ParamUtil.getString(request, "emailPageUpdate
 	<c:when test='<%= tabs2.equals("email-from") %>'>
 		<table class="lfr-table">
 		<tr>
-			<td>
-				<label><liferay-ui:message key="name" /></label>
+			<td class="lfr-label">
+				<liferay-ui:message key="name" />
 			</td>
 			<td>
 				<input class="lfr-input-text" name="<portlet:namespace />emailFromName" type="text" value="<%= emailFromName %>" />
 			</td>
 		</tr>
 		<tr>
-			<td>
-				<label><liferay-ui:message key="address" /></label>
+			<td class="lfr-label">
+				<liferay-ui:message key="address" />
 			</td>
 			<td>
 				<input class="lfr-input-text" name="<portlet:namespace />emailFromAddress" type="text" value="<%= emailFromAddress %>" />
@@ -188,8 +188,8 @@ String emailPageUpdatedSignature = ParamUtil.getString(request, "emailPageUpdate
 	<c:when test='<%= tabs2.startsWith("page-") %>'>
 		<table class="lfr-table">
 		<tr>
-			<td>
-				<label><liferay-ui:message key="enabled" /></label>
+			<td class="lfr-label">
+				<liferay-ui:message key="enabled" />
 			</td>
 			<td>
 				<c:choose>
@@ -208,8 +208,8 @@ String emailPageUpdatedSignature = ParamUtil.getString(request, "emailPageUpdate
 			</td>
 		</tr>
 		<tr>
-			<td>
-				<label><liferay-ui:message key="subject-prefix" /></label>
+			<td class="lfr-label">
+				<liferay-ui:message key="subject-prefix" />
 			</td>
 			<td>
 				<c:choose>
@@ -228,8 +228,8 @@ String emailPageUpdatedSignature = ParamUtil.getString(request, "emailPageUpdate
 			</td>
 		</tr>
 		<tr>
-			<td>
-				<label><liferay-ui:message key="body" /></label>
+			<td class="lfr-label">
+				<liferay-ui:message key="body" />
 			</td>
 			<td>
 				<textarea class="lfr-textarea" name="<%= bodyEditorParam %>" wrap="soft"><%= bodyEditorBody %></textarea>
@@ -241,8 +241,8 @@ String emailPageUpdatedSignature = ParamUtil.getString(request, "emailPageUpdate
 			</td>
 		</tr>
 		<tr>
-			<td>
-				<label><liferay-ui:message key="signature" /></label>
+			<td class="lfr-label">
+				<liferay-ui:message key="signature" />
 			</td>
 			<td>
 				<textarea class="lfr-textarea" name="<%= signatureEditorParam %>" wrap="soft"><%= signatureEditorBody %></textarea>
@@ -398,16 +398,16 @@ String emailPageUpdatedSignature = ParamUtil.getString(request, "emailPageUpdate
 	<c:when test='<%= tabs2.equals("display-settings") %>'>
 		<table class="lfr-table">
 		<tr>
-			<td>
-				<label><liferay-ui:message key="enable-comments" /></label>
+			<td class="lfr-label">
+				<liferay-ui:message key="enable-comments" />
 			</td>
 			<td>
 				<liferay-ui:input-checkbox param="enableComments" defaultValue="<%= enableComments %>" />
 			</td>
 		</tr>
 		<tr>
-			<td>
-				<label><liferay-ui:message key="enable-comment-ratings" /></label>
+			<td class="lfr-label">
+				<liferay-ui:message key="enable-comment-ratings" />
 			</td>
 			<td>
 				<liferay-ui:input-checkbox param="enableCommentRatings" defaultValue="<%= enableCommentRatings %>" />
@@ -419,8 +419,8 @@ String emailPageUpdatedSignature = ParamUtil.getString(request, "emailPageUpdate
 
 		<table class="lfr-table">
 		<tr>
-			<td>
-				<label><liferay-ui:message key="visible-wikis" /></label>
+			<td class="lfr-label">
+				<liferay-ui:message key="visible-wikis" />
 			</td>
 		</tr>
 		<tr>
@@ -487,8 +487,8 @@ String emailPageUpdatedSignature = ParamUtil.getString(request, "emailPageUpdate
 	<c:when test='<%= tabs2.equals("rss") %>'>
 		<table class="lfr-table">
 		<tr>
-			<td>
-				<label><liferay-ui:message key="maximum-items-to-display" /></label>
+			<td class="lfr-label">
+				<liferay-ui:message key="maximum-items-to-display" />
 			</td>
 			<td>
 				<select name="<portlet:namespace />rssDelta">
@@ -513,8 +513,8 @@ String emailPageUpdatedSignature = ParamUtil.getString(request, "emailPageUpdate
 			</td>
 		</tr>
 		<tr>
-			<td>
-				<label><liferay-ui:message key="display-style" /></label>
+			<td class="lfr-label">
+				<liferay-ui:message key="display-style" />
 			</td>
 			<td>
 				<select name="<portlet:namespace />rssDisplayStyle">

@@ -101,24 +101,24 @@ String emailMessageUpdatedSignature = ParamUtil.getString(request, "emailMessage
 	<c:when test='<%= tabs2.equals("email-from") %>'>
 		<table class="lfr-table">
 		<tr>
-			<td>
-				<label><liferay-ui:message key="name" /></label>
+			<td class="lfr-label">
+				<liferay-ui:message key="name" />
 			</td>
 			<td>
 				<input class="lfr-input-text" name="<portlet:namespace />emailFromName" type="text" value="<%= emailFromName %>" />
 			</td>
 		</tr>
 		<tr>
-			<td>
-				<label><liferay-ui:message key="address" /></label>
+			<td class="lfr-label">
+				<liferay-ui:message key="address" />
 			</td>
 			<td>
 				<input class="lfr-input-text" name="<portlet:namespace />emailFromAddress" type="text" value="<%= emailFromAddress %>" />
 			</td>
 		</tr>
 		<tr>
-			<td>
-				<label><liferay-ui:message key="html-format" /></label>
+			<td class="lfr-label">
+				<liferay-ui:message key="html-format" />
 			</td>
 			<td>
 				<liferay-ui:input-checkbox param="emailHtmlFormat" defaultValue="<%= MBUtil.getEmailHtmlFormat(prefs) %>" />
@@ -202,8 +202,8 @@ String emailMessageUpdatedSignature = ParamUtil.getString(request, "emailMessage
 	<c:when test='<%= tabs2.startsWith("message-") %>'>
 		<table class="lfr-table">
 		<tr>
-			<td>
-				<label><liferay-ui:message key="enabled" /></label>
+			<td class="lfr-label">
+				<liferay-ui:message key="enabled" />
 			</td>
 			<td>
 				<c:choose>
@@ -222,8 +222,8 @@ String emailMessageUpdatedSignature = ParamUtil.getString(request, "emailMessage
 			</td>
 		</tr>
 		<tr>
-			<td>
-				<label><liferay-ui:message key="subject-prefix" /></label>
+			<td class="lfr-label">
+				<liferay-ui:message key="subject-prefix" />
 			</td>
 			<td>
 				<c:choose>
@@ -242,8 +242,8 @@ String emailMessageUpdatedSignature = ParamUtil.getString(request, "emailMessage
 			</td>
 		</tr>
 		<tr>
-			<td>
-				<label><liferay-ui:message key="body" /></label>
+			<td class="lfr-label">
+				<liferay-ui:message key="body" />
 			</td>
 			<td>
 				<textarea class="lfr-textarea" name="<%= bodyEditorParam %>" wrap="soft"><%= bodyEditorContent %></textarea>
@@ -255,8 +255,8 @@ String emailMessageUpdatedSignature = ParamUtil.getString(request, "emailMessage
 			</td>
 		</tr>
 		<tr>
-			<td>
-				<label><liferay-ui:message key="signature" /></label>
+			<td class="lfr-label">
+				<liferay-ui:message key="signature" />
 			</td>
 			<td>
 				<textarea class="lfr-textarea" name="<%= signatureEditorParam %>" wrap="soft"><%= signatureEditorContent %></textarea>
@@ -416,8 +416,8 @@ String emailMessageUpdatedSignature = ParamUtil.getString(request, "emailMessage
 
 		<table class="lfr-table">
 		<tr>
-			<td>
-				<label><liferay-ui:message key="default-language" />: <%= defaultLocale.getDisplayName(defaultLocale) %></label>
+			<td class="lfr-label">
+				<liferay-ui:message key="default-language" />: <%= defaultLocale.getDisplayName(defaultLocale) %>
 			</td>
 			<td>
 				<liferay-ui:message key="localized-language" />:
@@ -450,14 +450,14 @@ String emailMessageUpdatedSignature = ParamUtil.getString(request, "emailMessage
 			<td>
 				<table class="lfr-table">
 				<tr>
-					<td>
-						<label><liferay-ui:message key="name" /></label>
+					<td class="lfr-label">
+						<liferay-ui:message key="name" />
 					</td>
-					<td>
-						<label><liferay-ui:message key="image" /></label>
+					<td class="lfr-label">
+						<liferay-ui:message key="image" />
 					</td>
-					<td>
-						<label><liferay-ui:message key="priority" /></label>
+					<td class="lfr-label">
+						<liferay-ui:message key="priority" />
 					</td>
 				</tr>
 
@@ -507,14 +507,14 @@ String emailMessageUpdatedSignature = ParamUtil.getString(request, "emailMessage
 			<td>
 				<table id="<portlet:namespace />localized-priorities-table" class="lfr-table" <%= currentLocale.equals(defaultLocale) ? "style='display: none'" : "" %>>
 				<tr>
-					<td>
-						<label><liferay-ui:message key="name" /></label>
+					<td class="lfr-label">
+						<liferay-ui:message key="name" />
 					</td>
-					<td>
-						<label><liferay-ui:message key="image" /></label>
+					<td class="lfr-label">
+						<liferay-ui:message key="image" />
 					</td>
-					<td>
-						<label><liferay-ui:message key="priority" /></label>
+					<td class="lfr-label">
+						<liferay-ui:message key="priority" />
 					</td>
 				</tr>
 
@@ -704,11 +704,11 @@ String emailMessageUpdatedSignature = ParamUtil.getString(request, "emailMessage
 
 		<table class="lfr-table">
 		<tr>
-			<td>
-				<label><liferay-ui:message key="default-language" />:</label> <%= defaultLocale.getDisplayName(defaultLocale) %>
+			<td class="lfr-label">
+				<liferay-ui:message key="default-language" />: <%= defaultLocale.getDisplayName(defaultLocale) %>
 			</td>
-			<td>
-				<label><liferay-ui:message key="localized-language" />:</label>
+			<td class="lfr-label">
+				<liferay-ui:message key="localized-language" />:
 
 				<select id="<portlet:namespace />languageId" onChange="<portlet:namespace />updateLanguage();">
 					<option value="" />
@@ -824,8 +824,8 @@ String emailMessageUpdatedSignature = ParamUtil.getString(request, "emailMessage
 	<c:when test='<%= tabs2.equals("rss") %>'>
 		<table class="lfr-table">
 		<tr>
-			<td>
-				<label><liferay-ui:message key="maximum-items-to-display" /></label>
+			<td class="lfr-label">
+				<liferay-ui:message key="maximum-items-to-display" />
 			</td>
 			<td>
 				<select name="<portlet:namespace />rssDelta">
@@ -850,8 +850,8 @@ String emailMessageUpdatedSignature = ParamUtil.getString(request, "emailMessage
 			</td>
 		</tr>
 		<tr>
-			<td>
-				<label><liferay-ui:message key="display-style" /></label>
+			<td class="lfr-label">
+				<liferay-ui:message key="display-style" />
 			</td>
 			<td>
 				<select name="<portlet:namespace />rssDisplayStyle">
@@ -862,8 +862,8 @@ String emailMessageUpdatedSignature = ParamUtil.getString(request, "emailMessage
 			</td>
 		</tr>
 		<tr>
-			<td>
-				<label><liferay-ui:message key="format" /></label>
+			<td class="lfr-label">
+				<liferay-ui:message key="format" />
 			</td>
 			<td>
 				<select name="<portlet:namespace />rssFormat">
@@ -878,8 +878,8 @@ String emailMessageUpdatedSignature = ParamUtil.getString(request, "emailMessage
 	<c:when test='<%= tabs2.equals("anonymous-posting") %>'>
 		<table class="lfr-table">
 		<tr>
-			<td>
-				<label><liferay-ui:message key="allow-anonymous-posting" /></label>
+			<td class="lfr-label">
+				<liferay-ui:message key="allow-anonymous-posting" />
 			</td>
 			<td>
 				<liferay-ui:input-checkbox param="allowAnonymousPosting" defaultValue="<%= MBUtil.isAllowAnonymousPosting(prefs) %>" />
@@ -890,8 +890,8 @@ String emailMessageUpdatedSignature = ParamUtil.getString(request, "emailMessage
 	<c:when test='<%= tabs2.equals("ratings") %>'>
 		<table class="lfr-table">
 		<tr>
-			<td>
-				<label><liferay-ui:message key="enable-message-ratings" /></label>
+			<td class="lfr-label">
+				<liferay-ui:message key="enable-message-ratings" />
 			</td>
 			<td>
 				<liferay-ui:input-checkbox param="enableMessageRatings" defaultValue="<%= enableMessageRatings %>" />
