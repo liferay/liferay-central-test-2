@@ -29,9 +29,10 @@ String redirect = ParamUtil.getString(request, "redirect");
 
 String sessionId = ParamUtil.getString(request, "sessionId");
 
-Map liveUsers = LiveUsers.getSessionUsers(company.getCompanyId());
+UserTracker userTracker = LiveUsers.getUserTracker(company.getCompanyId(), sessionId);
 
-UserTracker userTracker = (UserTracker)liveUsers.get(sessionId);
+int hits = userTracker.getHits();
+List paths = userTracker.getPaths();
 
 userTracker = userTracker.toEscapedModel();
 %>
@@ -111,7 +112,7 @@ userTracker = userTracker.toEscapedModel();
 				<liferay-ui:message key="num-of-hits" />:
 			</td>
 			<td>
-				<%= userTracker.getHits() %>
+				<%= hits %>
 			</td>
 		</tr>
 		<tr>
@@ -156,8 +157,6 @@ userTracker = userTracker.toEscapedModel();
 					<table border="0" cellpadding="4" cellspacing="0" width="100%">
 
 					<%
-					List paths = userTracker.getPaths();
-
 					for (int i = 0; i < paths.size(); i++) {
 						UserTrackerPath userTrackerPath = (UserTrackerPath)paths.get(i);
 
