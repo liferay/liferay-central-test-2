@@ -31,9 +31,7 @@ String sessionId = ParamUtil.getString(request, "sessionId");
 
 UserTracker userTracker = LiveUsers.getUserTracker(company.getCompanyId(), sessionId);
 
-int hits = userTracker.getHits();
-
-List paths = userTracker.getPaths();
+List<UserTrackerPath> paths = userTracker.getPaths();
 
 userTracker = userTracker.toEscapedModel();
 %>
@@ -113,7 +111,7 @@ userTracker = userTracker.toEscapedModel();
 				<liferay-ui:message key="num-of-hits" />:
 			</td>
 			<td>
-				<%= hits %>
+				<%= userTracker.getHits() %>
 			</td>
 		</tr>
 		<tr>
@@ -159,7 +157,7 @@ userTracker = userTracker.toEscapedModel();
 
 					<%
 					for (int i = 0; i < paths.size(); i++) {
-						UserTrackerPath userTrackerPath = (UserTrackerPath)paths.get(i);
+						UserTrackerPath userTrackerPath = paths.get(i);
 
 						String className = "portlet-section-body results-row";
 						String classHoverName = "portlet-section-body-hover results-row hover";
