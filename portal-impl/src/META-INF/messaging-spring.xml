@@ -64,11 +64,7 @@
 	<bean id="messageListener.live_users" class="com.liferay.portal.liveusers.messaging.LiveUsersMessageListener" />
 	<bean id="messageListener.mail" class="com.liferay.mail.messaging.MailMessageListener" />
 	<bean id="messageListener.message_boards" class="com.liferay.portlet.messageboards.messaging.MBMessageListener" />
-	<bean id="messageListener.message_boards_mailing_list" class="com.liferay.portlet.messageboards.messaging.MailingListMessageListener">
-		<property name="parentMessageFinder">
-			<bean class="com.liferay.portlet.messageboards.parentfinder.HeadersBasedParentMessageFinder" />
-		</property>
-	</bean>
+	<bean id="messageListener.message_boards_mailing_list" class="com.liferay.portlet.messageboards.messaging.MailingListMessageListener" />
 	<bean id="messageListener.scheduler" class="com.liferay.portal.scheduler.messaging.SchedulerMessageListener">
 		<constructor-arg type="com.liferay.portal.kernel.scheduler.SchedulerEngine" ref="com.liferay.portal.kernel.scheduler.SchedulerEngine" />
 	</bean>
