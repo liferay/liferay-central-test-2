@@ -51,6 +51,7 @@
 		<private-request-attributes>false</private-request-attributes>
 		<private-session-attributes>false</private-session-attributes>
 		<render-weight>1</render-weight>
+		<css-class-wrapper>portlet-reverend-fun</css-class-wrapper>
 	</portlet>
 	<portlet>
 		<portlet-name>7</portlet-name>
@@ -60,6 +61,7 @@
 		<private-request-attributes>false</private-request-attributes>
 		<private-session-attributes>false</private-session-attributes>
 		<render-weight>1</render-weight>
+		<css-class-wrapper>portlet-bible-gateway</css-class-wrapper>
 	</portlet>
 	<portlet>
 		<portlet-name>8</portlet-name>
@@ -129,6 +131,7 @@
 		<private-request-attributes>false</private-request-attributes>
 		<private-session-attributes>false</private-session-attributes>
 		<render-weight>0</render-weight>
+		<css-class-wrapper>portlet-stocks</css-class-wrapper>
 	</portlet>
 	<portlet>
 		<portlet-name>15</portlet-name>
@@ -160,6 +163,7 @@
 		<private-request-attributes>false</private-request-attributes>
 		<private-session-attributes>false</private-session-attributes>
 		<render-weight>0</render-weight>
+		<css-class-wrapper>portlet-currency-converter</css-class-wrapper>
 	</portlet>
 	<portlet>
 		<portlet-name>19</portlet-name>
@@ -211,6 +215,7 @@
 		<private-request-attributes>false</private-request-attributes>
 		<private-session-attributes>false</private-session-attributes>
 		<render-weight>0</render-weight>
+		<css-class-wrapper>portlet-random-bible-verse</css-class-wrapper>
 	</portlet>
 	<portlet>
 		<portlet-name>23</portlet-name>
@@ -230,6 +235,7 @@
 		<private-request-attributes>false</private-request-attributes>
 		<private-session-attributes>false</private-session-attributes>
 		<render-weight>1</render-weight>
+		<css-class-wrapper>portlet-sms</css-class-wrapper>
 	</portlet>
 	<portlet>
 		<portlet-name>25</portlet-name>
@@ -251,6 +257,7 @@
 		<private-request-attributes>false</private-request-attributes>
 		<private-session-attributes>false</private-session-attributes>
 		<render-weight>1</render-weight>
+		<css-class-wrapper>portlet-translator</css-class-wrapper>
 	</portlet>
 	<portlet>
 		<portlet-name>27</portlet-name>
@@ -260,6 +267,7 @@
 		<private-request-attributes>false</private-request-attributes>
 		<private-session-attributes>false</private-session-attributes>
 		<render-weight>1</render-weight>
+		<css-class-wrapper>portlet-unit-converter</css-class-wrapper>
 	</portlet>
 	<portlet>
 		<portlet-name>28</portlet-name>
@@ -296,6 +304,7 @@
 		<private-request-attributes>false</private-request-attributes>
 		<private-session-attributes>false</private-session-attributes>
 		<render-weight>1</render-weight>
+		<css-class-wrapper>portlet-network</css-class-wrapper>
 	</portlet>
 	<portlet>
 		<portlet-name>31</portlet-name>
@@ -347,6 +356,7 @@
 		<private-request-attributes>false</private-request-attributes>
 		<private-session-attributes>false</private-session-attributes>
 		<render-weight>1</render-weight>
+		<css-class-wrapper>portlet-shopping</css-class-wrapper>
 	</portlet>
 	<portlet>
 		<portlet-name>36</portlet-name>
@@ -377,6 +387,7 @@
 		<private-request-attributes>false</private-request-attributes>
 		<private-session-attributes>false</private-session-attributes>
 		<render-weight>1</render-weight>
+		<css-class-wrapper>portlet-words</css-class-wrapper>
 	</portlet>
 	<portlet>
 		<portlet-name>39</portlet-name>
@@ -401,6 +412,7 @@
 		<private-request-attributes>false</private-request-attributes>
 		<private-session-attributes>false</private-session-attributes>
 		<render-weight>1</render-weight>
+		<css-class-wrapper>portlet-gospel-for-asia</css-class-wrapper>
 	</portlet>
 	<portlet>
 		<portlet-name>47</portlet-name>
@@ -410,6 +422,7 @@
 		<private-request-attributes>false</private-request-attributes>
 		<private-session-attributes>false</private-session-attributes>
 		<render-weight>1</render-weight>
+		<css-class-wrapper>portlet-hello-world</css-class-wrapper>
 	</portlet>
 	<portlet>
 		<portlet-name>48</portlet-name>
@@ -422,6 +435,7 @@
 		<private-request-attributes>false</private-request-attributes>
 		<private-session-attributes>false</private-session-attributes>
 		<render-weight>1</render-weight>
+		<css-class-wrapper>portlet-iframe</css-class-wrapper>
 	</portlet>
 	<portlet>
 		<portlet-name>49</portlet-name>
@@ -445,6 +459,7 @@
 		<private-request-attributes>false</private-request-attributes>
 		<private-session-attributes>false</private-session-attributes>
 		<render-weight>1</render-weight>
+		<css-class-wrapper>portlet-hello-velocity</css-class-wrapper>
 	</portlet>
 	<portlet>
 		<portlet-name>51</portlet-name>
@@ -455,6 +470,7 @@
 		<private-request-attributes>false</private-request-attributes>
 		<private-session-attributes>false</private-session-attributes>
 		<render-weight>1</render-weight>
+		<css-class-wrapper>portlet-global-prayer-digest</css-class-wrapper>
 	</portlet>
 	<portlet>
 		<portlet-name>54</portlet-name>
@@ -513,6 +529,7 @@
 		<private-request-attributes>false</private-request-attributes>
 		<private-session-attributes>false</private-session-attributes>
 		<render-weight>1</render-weight>
+		<css-class-wrapper>portlet-polls-display</css-class-wrapper>
 	</portlet>
 	<portlet>
 		<portlet-name>61</portlet-name>
@@ -522,6 +539,7 @@
 		<private-request-attributes>false</private-request-attributes>
 		<private-session-attributes>false</private-session-attributes>
 		<render-weight>1</render-weight>
+		<css-class-wrapper>portlet-loan-calculator</css-class-wrapper>
 	</portlet>
 	<portlet>
 		<portlet-name>62</portlet-name>
@@ -557,6 +575,7 @@
 		<private-request-attributes>false</private-request-attributes>
 		<private-session-attributes>false</private-session-attributes>
 		<render-weight>1</render-weight>
+		<css-class-wrapper>portlet-web-proxy</css-class-wrapper>
 	</portlet>
 	<portlet>
 		<portlet-name>67</portlet-name>
@@ -568,6 +587,7 @@
 		<private-request-attributes>false</private-request-attributes>
 		<private-session-attributes>false</private-session-attributes>
 		<render-weight>0</render-weight>
+		<css-class-wrapper>portlet-amazon-rankings</css-class-wrapper>
 	</portlet>
 	<portlet>
 		<portlet-name>70</portlet-name>
@@ -577,6 +597,7 @@
 		<private-request-attributes>false</private-request-attributes>
 		<private-session-attributes>false</private-session-attributes>
 		<render-weight>1</render-weight>
+		<css-class-wrapper>portlet-password-generator</css-class-wrapper>
 	</portlet>
 	<portlet>
 		<portlet-name>71</portlet-name>
@@ -619,6 +640,7 @@
 		<private-request-attributes>false</private-request-attributes>
 		<private-session-attributes>false</private-session-attributes>
 		<render-weight>1</render-weight>
+		<css-class-wrapper>portlet-journal-content-search</css-class-wrapper>
 		<add-default-resource>true</add-default-resource>
 	</portlet>
 	<portlet>
@@ -803,6 +825,7 @@
 		<private-request-attributes>false</private-request-attributes>
 		<private-session-attributes>false</private-session-attributes>
 		<render-weight>1</render-weight>
+		<css-class-wrapper>portlet-invitation</css-class-wrapper>
 	</portlet>
 	<portlet>
 		<portlet-name>101</portlet-name>
@@ -830,6 +853,7 @@
 		<private-request-attributes>false</private-request-attributes>
 		<private-session-attributes>false</private-session-attributes>
 		<render-weight>1</render-weight>
+		<css-class-wrapper>portlet-xsl-content</css-class-wrapper>
 	</portlet>
 	<portlet>
 		<portlet-name>103</portlet-name>
@@ -856,6 +880,7 @@
 		<private-session-attributes>false</private-session-attributes>
 		<render-weight>1</render-weight>
 		<header-portlet-css>/html/portlet/update_manager/css.jsp</header-portlet-css>
+		<css-class-wrapper>portlet-update-manager</css-class-wrapper>
 		<add-default-resource>true</add-default-resource>
 	</portlet>
 	<portlet>
@@ -868,6 +893,7 @@
 		<private-request-attributes>false</private-request-attributes>
 		<private-session-attributes>false</private-session-attributes>
 		<render-weight>1</render-weight>
+		<css-class-wrapper>portlet-page-comments</css-class-wrapper>
 	</portlet>
 	<portlet>
 		<portlet-name>108</portlet-name>
@@ -879,6 +905,7 @@
 		<private-request-attributes>false</private-request-attributes>
 		<private-session-attributes>false</private-session-attributes>
 		<render-weight>1</render-weight>
+		<css-class-wrapper>portlet-page-ratings</css-class-wrapper>
 	</portlet>
 	<portlet>
 		<portlet-name>109</portlet-name>
@@ -917,6 +944,7 @@
 		<private-request-attributes>false</private-request-attributes>
 		<private-session-attributes>false</private-session-attributes>
 		<render-weight>1</render-weight>
+		<css-class-wrapper>portlet-plugin-installer</css-class-wrapper>
 		<add-default-resource>true</add-default-resource>
 	</portlet>
 	<portlet>
@@ -928,6 +956,7 @@
 		<private-request-attributes>false</private-request-attributes>
 		<private-session-attributes>false</private-session-attributes>
 		<render-weight>1</render-weight>
+		<css-class-wrapper>portlet-open-id</css-class-wrapper>
 		<add-default-resource>true</add-default-resource>
 	</portlet>
 	<portlet>
@@ -988,6 +1017,7 @@
 		<private-request-attributes>false</private-request-attributes>
 		<private-session-attributes>false</private-session-attributes>
 		<render-weight>1</render-weight>
+		<css-class-wrapper>portlet-nested-portlets</css-class-wrapper>
 	</portlet>
 	<portlet>
 		<portlet-name>119</portlet-name>
