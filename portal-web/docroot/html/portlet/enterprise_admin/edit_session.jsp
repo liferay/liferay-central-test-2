@@ -32,6 +32,7 @@ String sessionId = ParamUtil.getString(request, "sessionId");
 UserTracker userTracker = LiveUsers.getUserTracker(company.getCompanyId(), sessionId);
 
 int hits = userTracker.getHits();
+
 List paths = userTracker.getPaths();
 
 userTracker = userTracker.toEscapedModel();
