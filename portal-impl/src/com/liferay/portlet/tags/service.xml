@@ -231,7 +231,6 @@
 	<exceptions>
 		<exception>DuplicateEntry</exception>
 		<exception>DuplicateVocabulary</exception>
-		<exception>EntryName</exception>
 		<exception>PropertyKey</exception>
 		<exception>PropertyValue</exception>
 		<exception>TagsEntry</exception>
