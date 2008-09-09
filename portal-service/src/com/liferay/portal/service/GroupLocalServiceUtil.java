@@ -219,8 +219,7 @@ public class GroupLocalServiceUtil {
 	}
 
 	public static boolean hasStagingGroup(long liveGroupId)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
+		throws com.liferay.portal.SystemException {
 		return getService().hasStagingGroup(liveGroupId);
 	}
 

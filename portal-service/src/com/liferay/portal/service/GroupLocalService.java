@@ -160,8 +160,7 @@ public interface GroupLocalService {
 		throws com.liferay.portal.SystemException;
 
 	public boolean hasStagingGroup(long liveGroupId)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException;
+		throws com.liferay.portal.SystemException;
 
 	public boolean hasUserGroup(long userId, long groupId)
 		throws com.liferay.portal.SystemException;
