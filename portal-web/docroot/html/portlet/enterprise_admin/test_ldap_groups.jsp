@@ -45,7 +45,7 @@ if (Validator.isNull(ParamUtil.getString(request, "groupMappingGroupName")) ||
 	Validator.isNull(ParamUtil.getString(request, "groupMappingUser"))) {
 %>
 
-	<liferay-ui:message key="please-map-the-following-group-properties-to-a-ldap-attribute" />
+	<liferay-ui:message key="please-map-each-of-the-group-properties-group-name-and-user-to-an-ldap-attribute" />
 
 <%
 	return;
@@ -152,7 +152,9 @@ if (counter == 0) {
 if (showMissingAttributeMessage) {
 %>
 
-	<div class="portlet-msg-info"><liferay-ui:message key="the-above-results-include-groups-which-are-missing-required-attributes-these-groups-will-not-be-imported-until-these-attributes-are-filled-in" /></div>
+	<div class="portlet-msg-info">
+		<liferay-ui:message key="the-above-results-include-groups-which-are-missing-the-required-attributes-(group-name-and-user).-these-groups-will-not-be-imported-until-these-attributes-are-filled-in" />
+	</div>
 
 <%
 }

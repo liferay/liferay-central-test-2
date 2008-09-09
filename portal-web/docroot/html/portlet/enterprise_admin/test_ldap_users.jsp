@@ -48,7 +48,7 @@ if (Validator.isNull(ParamUtil.getString(request, "userMappingScreenName")) ||
 	Validator.isNull(ParamUtil.getString(request, "userMappingLastName"))) {
 %>
 
-	<liferay-ui:message key="please-map-the-following-user-properties-to-a-ldap-attribute" />
+	<liferay-ui:message key="please-map-each-of-the-user-properties-screen-name,-password,-email-address,-first-name,-and-last-name-to-an-ldap-attribute" />
 
 <%
 	return;
@@ -182,7 +182,9 @@ if (counter == 0) {
 if (showMissingAttributeMessage) {
 %>
 
-	<div class="portlet-msg-info"><liferay-ui:message key="the-above-results-include-users-which-are-missing-required-attributes-these-users-will-not-be-imported-until-these-attributes-are-filled-in" /></div>
+	<div class="portlet-msg-info">
+		<liferay-ui:message key="the-above-results-include-users-which-are-missing-the-required-attributes-(screen-name,-password,-email-address,-first-name,-and-last-name).-these-users-will-not-be-imported-until-these-attributes-are-filled-in" />
+	</div>
 
 <%
 }
