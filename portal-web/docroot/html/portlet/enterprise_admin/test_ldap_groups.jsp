@@ -41,6 +41,16 @@ if (ldapContext == null) {
 	return;
 }
 
+if (Validator.isNull(ParamUtil.getString(request, "groupMappingGroupName")) ||
+	Validator.isNull(ParamUtil.getString(request, "groupMappingUser"))) {
+%>
+
+	<liferay-ui:message key="please-map-the-following-group-properties-to-a-ldap-attribute" />
+
+<%
+	return;
+}
+
 String groupFilter = ParamUtil.getString(request, "importGroupSearchFilter");
 
 NamingEnumeration enu = PortalLDAPUtil.getGroups(themeDisplay.getCompanyId(), ldapContext, 20, baseDN, groupFilter);
@@ -64,6 +74,8 @@ Properties groupMappings = PropertiesUtil.load(groupMappingsParam);
 <table class="lfr-table">
 
 <%
+boolean showMissingAttributeMessage = false;
+
 int counter = 0;
 
 while (enu.hasMoreElements()) {
@@ -74,6 +86,10 @@ while (enu.hasMoreElements()) {
 	String name = LDAPUtil.getAttributeValue(attrs, groupMappings.getProperty("groupName")).toLowerCase();
 	String description = LDAPUtil.getAttributeValue(attrs, groupMappings.getProperty("description"));
 	Attribute attribute = attrs.get(groupMappings.getProperty("user"));
+
+	if (Validator.isNull(name)) {
+		showMissingAttributeMessage = true;
+	}
 
 	if (counter == 0) {
 %>
@@ -133,6 +149,14 @@ if (counter == 0) {
 </table>
 
 <%
+if (showMissingAttributeMessage) {
+%>
+
+	<div class="portlet-msg-info"><liferay-ui:message key="the-above-results-include-groups-which-are-missing-required-attributes-these-groups-will-not-be-imported-until-these-attributes-are-filled-in" /></div>
+
+<%
+}
+
 if (ldapContext != null) {
 	ldapContext.close();
 }

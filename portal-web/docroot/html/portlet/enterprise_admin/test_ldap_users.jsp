@@ -41,6 +41,19 @@ if (ldapContext == null) {
 	return;
 }
 
+if (Validator.isNull(ParamUtil.getString(request, "userMappingScreenName")) ||
+	Validator.isNull(ParamUtil.getString(request, "userMappingPassword")) ||
+	Validator.isNull(ParamUtil.getString(request, "userMappingEmailAddress")) ||
+	Validator.isNull(ParamUtil.getString(request, "userMappingFirstName")) ||
+	Validator.isNull(ParamUtil.getString(request, "userMappingLastName"))) {
+%>
+
+	<liferay-ui:message key="please-map-the-following-user-properties-to-a-ldap-attribute" />
+
+<%
+	return;
+}
+
 String userFilter = ParamUtil.getString(request, "importUserSearchFilter");
 
 NamingEnumeration enu = PortalLDAPUtil.getUsers(themeDisplay.getCompanyId(), ldapContext, 20, baseDN, userFilter);
@@ -69,6 +82,8 @@ Properties userMappings = PropertiesUtil.load(userMappingsParams);
 <table class="lfr-table">
 
 <%
+boolean showMissingAttributeMessage = false;
+
 int counter = 0;
 
 while (enu.hasMoreElements()) {
@@ -77,11 +92,16 @@ while (enu.hasMoreElements()) {
 	Attributes attrs = result.getAttributes();
 
 	String screenName = LDAPUtil.getAttributeValue(attrs, userMappings.getProperty("screenName")).toLowerCase();
+	String password = LDAPUtil.getAttributeValue(attrs, userMappings.getProperty("password")).toLowerCase();
 	String emailAddress = LDAPUtil.getAttributeValue(attrs, userMappings.getProperty("emailAddress"));
 	String firstName = LDAPUtil.getAttributeValue(attrs, userMappings.getProperty("firstName"));
 	String lastName = LDAPUtil.getAttributeValue(attrs, userMappings.getProperty("lastName"));
 	String jobTitle = LDAPUtil.getAttributeValue(attrs, userMappings.getProperty("jobTitle"));
 	Attribute attribute = attrs.get(userMappings.getProperty("group"));
+
+	if (Validator.isNull(screenName) || Validator.isNull(password) || Validator.isNull(emailAddress) || Validator.isNull(firstName) || Validator.isNull(lastName)) {
+		showMissingAttributeMessage = true;
+	}
 
 	if (counter == 0) {
 %>
@@ -159,6 +179,14 @@ if (counter == 0) {
 </table>
 
 <%
+if (showMissingAttributeMessage) {
+%>
+
+	<div class="portlet-msg-info"><liferay-ui:message key="the-above-results-include-users-which-are-missing-required-attributes-these-users-will-not-be-imported-until-these-attributes-are-filled-in" /></div>
+
+<%
+}
+
 if (ldapContext != null) {
 	ldapContext.close();
 }
