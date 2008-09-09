@@ -32,9 +32,8 @@ import com.liferay.portal.model.User;
 import com.liferay.portal.security.permission.PermissionCheckerUtil;
 import com.liferay.portal.service.CompanyLocalServiceUtil;
 import com.liferay.portal.service.UserLocalServiceUtil;
-import com.liferay.portlet.messageboards.NoSuchMessageException;
 import com.liferay.portlet.messageboards.model.MBMessage;
-import com.liferay.portlet.messageboards.service.MBMessageLocalServiceUtil;
+import com.liferay.portlet.messageboards.parentfinder.IParentMessageFinder;
 import com.liferay.portlet.messageboards.service.MBMessageServiceUtil;
 import com.liferay.portlet.messageboards.util.MBMailMessage;
 import com.liferay.portlet.messageboards.util.MBUtil;
@@ -184,26 +183,8 @@ public class MailingListMessageListener implements MessageListener {
 			anonymous = true;
 		}
 
-		long parentMessageId = MBUtil.getParentMessageId(mailMessage);
-
-		if (_log.isDebugEnabled()) {
-			_log.debug("Parent message id " + parentMessageId);
-		}
-
-		MBMessage parentMessage = null;
-
-		try {
-			if (parentMessageId > 0) {
-				parentMessage = MBMessageLocalServiceUtil.getMessage(
-					parentMessageId);
-			}
-		}
-		catch (NoSuchMessageException nsme) {
-		}
-
-		if (_log.isDebugEnabled()) {
-			_log.debug("Parent message " + parentMessage);
-		}
+		MBMessage parentMessage = _parentMessageFinder.getParentMessage(
+			categoryId, mailMessage);
 
 		MBMailMessage collector = new MBMailMessage();
 
@@ -236,7 +217,15 @@ public class MailingListMessageListener implements MessageListener {
 		}
 	}
 
+	public void setParentMessageFinder(
+		IParentMessageFinder parentMessageFinder) {
+
+		_parentMessageFinder = parentMessageFinder;
+	}
+
 	private static Log _log =
 		LogFactory.getLog(MailingListMessageListener.class);
+
+	private IParentMessageFinder _parentMessageFinder;
 
 }
