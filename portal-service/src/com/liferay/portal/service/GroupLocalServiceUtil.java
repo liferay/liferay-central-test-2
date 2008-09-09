@@ -189,12 +189,6 @@ public class GroupLocalServiceUtil {
 		return getService().getStagingGroup(liveGroupId);
 	}
 
-	public static boolean hasStagingGroup(long liveGroupId)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
-		return getService().hasStagingGroup(liveGroupId);
-	}
-
 	public static com.liferay.portal.model.Group getUserGroup(long companyId,
 		long userId)
 		throws com.liferay.portal.PortalException,
@@ -222,6 +216,12 @@ public class GroupLocalServiceUtil {
 	public static boolean hasRoleGroup(long roleId, long groupId)
 		throws com.liferay.portal.SystemException {
 		return getService().hasRoleGroup(roleId, groupId);
+	}
+
+	public static boolean hasStagingGroup(long liveGroupId)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
+		return getService().hasStagingGroup(liveGroupId);
 	}
 
 	public static boolean hasUserGroup(long userId, long groupId)
