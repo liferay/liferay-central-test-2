@@ -215,16 +215,12 @@ public class GroupImpl extends GroupModelImpl implements Group {
 		if (_stagingGroup != null) {
 			return true;
 		}
-		else {
-			try {
-				_stagingGroup =
-					GroupLocalServiceUtil.getStagingGroup(getGroupId());
 
-				return true;
-			}
-			catch (Exception e) {
-				return false;
-			}
+		try {
+			return GroupLocalServiceUtil.hasStagingGroup(getGroupId());
+		}
+		catch (Exception e) {
+			return false;
 		}
 	}
 

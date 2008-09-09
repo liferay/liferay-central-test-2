@@ -445,6 +445,12 @@ public class GroupLocalServiceImpl extends GroupLocalServiceBaseImpl {
 		return groupPersistence.findByLiveGroupId(liveGroupId);
 	}
 
+	public boolean hasStagingGroup(long liveGroupId)
+		throws PortalException, SystemException {
+
+		return groupPersistence.fetchByLiveGroupId(liveGroupId) != null;
+	}
+
 	public Group getUserGroup(long companyId, long userId)
 		throws PortalException, SystemException {
 
