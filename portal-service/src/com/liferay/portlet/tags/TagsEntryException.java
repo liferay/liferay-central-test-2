@@ -34,6 +34,8 @@ public class TagsEntryException extends PortalException {
 
 	public static final int AT_LEAST_ONE_TAG = 1;
 
+	public static final int INVALID_CHARACTER = 2;
+
 	public TagsEntryException(int type) {
 		_type = type;
 	}

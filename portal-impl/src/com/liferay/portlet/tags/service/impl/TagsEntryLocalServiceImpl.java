@@ -35,8 +35,8 @@ import com.liferay.portal.model.User;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PropsValues;
 import com.liferay.portlet.tags.DuplicateEntryException;
-import com.liferay.portlet.tags.EntryNameException;
 import com.liferay.portlet.tags.NoSuchVocabularyException;
+import com.liferay.portlet.tags.TagsEntryException;
 import com.liferay.portlet.tags.model.TagsAsset;
 import com.liferay.portlet.tags.model.TagsEntry;
 import com.liferay.portlet.tags.model.TagsEntryConstants;
@@ -642,7 +642,7 @@ public class TagsEntryLocalServiceImpl extends TagsEntryLocalServiceBaseImpl {
 
 	protected void validate(String name) throws PortalException {
 		if (!TagsUtil.isValidWord(name)) {
-			throw new EntryNameException();
+			throw new TagsEntryException(TagsEntryException.INVALID_CHARACTER);
 		}
 	}
 

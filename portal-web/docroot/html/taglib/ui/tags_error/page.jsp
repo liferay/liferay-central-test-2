@@ -32,7 +32,12 @@
 	TagsEntryException tee = (TagsEntryException)errorException;
 	%>
 
-	<c:if test="<%= tee.getType() == TagsEntryException.AT_LEAST_ONE_TAG %>">
-		<liferay-ui:message key="please-enter-at-least-one-tag" />
-	</c:if>
+	<c:choose>
+		<c:when test="<%= tee.getType() == TagsEntryException.AT_LEAST_ONE_TAG %>">
+			<liferay-ui:message key="please-enter-at-least-one-tag" />
+		</c:when>
+		<c:when test="<%= tee.getType() == TagsEntryException.INVALID_CHARACTER %>">
+			<liferay-ui:message key="one-or-more-tags-contains-invalid-characters" />
+		</c:when>
+	</c:choose>
 </liferay-ui:error>

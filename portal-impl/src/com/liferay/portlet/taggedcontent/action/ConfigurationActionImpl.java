@@ -32,6 +32,7 @@ import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.WebKeys;
 import com.liferay.portlet.PortletPreferencesFactoryUtil;
 import com.liferay.portlet.taggedcontent.util.AssetPublisherUtil;
+import com.liferay.portlet.tags.TagsEntryException;
 import com.liferay.portlet.tags.service.TagsEntryLocalServiceUtil;
 
 import javax.portlet.ActionRequest;
@@ -56,45 +57,56 @@ public class ConfigurationActionImpl implements ConfigurationAction {
 
 		String cmd = ParamUtil.getString(actionRequest, Constants.CMD);
 
-		String portletResource = ParamUtil.getString(
-			actionRequest, "portletResource");
+		try {
+			String portletResource = ParamUtil.getString(
+				actionRequest, "portletResource");
 
-		PortletPreferences prefs =
-			PortletPreferencesFactoryUtil.getPortletSetup(
-				actionRequest, portletResource);
+			PortletPreferences prefs =
+				PortletPreferencesFactoryUtil.getPortletSetup(
+					actionRequest, portletResource);
 
-		if (cmd.equals("add-selection")) {
-			AssetPublisherUtil.addSelection(actionRequest, prefs);
-		}
-		else if (cmd.equals("move-selection-down")) {
-			moveSelectionDown(actionRequest, prefs);
-		}
-		else if (cmd.equals("move-selection-up")) {
-			moveSelectionUp(actionRequest, prefs);
-		}
-		else if (cmd.equals("remove-selection")) {
-			removeSelection(actionRequest, prefs);
-		}
-		else if (cmd.equals("selection-style")) {
-			setSelectionStyle(actionRequest, prefs);
-		}
-		else if (cmd.equals(Constants.UPDATE)) {
-			String selectionStyle = prefs.getValue(
-				"selection-style", "dynamic");
-
-			if (selectionStyle.equals("dynamic")) {
-				updateDynamicSettings(actionRequest, prefs);
+			if (cmd.equals("add-selection")) {
+				AssetPublisherUtil.addSelection(actionRequest, prefs);
 			}
-			else if (selectionStyle.equals("manual")) {
-				updateManualSettings(actionRequest, prefs);
+			else if (cmd.equals("move-selection-down")) {
+				moveSelectionDown(actionRequest, prefs);
+			}
+			else if (cmd.equals("move-selection-up")) {
+				moveSelectionUp(actionRequest, prefs);
+			}
+			else if (cmd.equals("remove-selection")) {
+				removeSelection(actionRequest, prefs);
+			}
+			else if (cmd.equals("selection-style")) {
+				setSelectionStyle(actionRequest, prefs);
+			}
+			else if (cmd.equals(Constants.UPDATE)) {
+				String selectionStyle = prefs.getValue(
+					"selection-style", "dynamic");
+
+				if (selectionStyle.equals("dynamic")) {
+					updateDynamicSettings(actionRequest, prefs);
+				}
+				else if (selectionStyle.equals("manual")) {
+					updateManualSettings(actionRequest, prefs);
+				}
+			}
+
+			if (SessionErrors.isEmpty(actionRequest)) {
+				prefs.store();
+
+				SessionMessages.add(
+					actionRequest,
+					portletConfig.getPortletName() + ".doConfigure");
 			}
 		}
-
-		if (SessionErrors.isEmpty(actionRequest)) {
-			prefs.store();
-
-			SessionMessages.add(
-				actionRequest, portletConfig.getPortletName() + ".doConfigure");
+		catch (Exception e) {
+			if (e instanceof TagsEntryException) {
+				SessionErrors.add(actionRequest, e.getClass().getName(), e);
+			}
+			else {
+				throw e;
+			}
 		}
 	}
 

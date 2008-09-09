@@ -277,6 +277,8 @@ configurationActionURL.setParameter("portletResource", portletResource);
 					refresh="<%= false %>"
 				>
 					<liferay-ui:section>
+						<liferay-ui:tags-error />
+
 						<liferay-ui:message key="asset-type" />
 
 						<select name="<portlet:namespace/>classNameId">
