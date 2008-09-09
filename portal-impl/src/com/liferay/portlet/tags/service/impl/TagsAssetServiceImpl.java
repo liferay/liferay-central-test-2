@@ -48,6 +48,7 @@ import com.sun.syndication.io.FeedException;
 import java.io.IOException;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 
@@ -80,17 +81,15 @@ public class TagsAssetServiceImpl extends TagsAssetServiceBaseImpl {
 			int start, int end)
 		throws PortalException, SystemException {
 
-		long[] notPermittedEntryIds = getNotPermittedEntryIds(entryIds);
+		long[] notViewableEntryIds = getNotViewableEntryIds(entryIds);
 
-		notEntryIds = ArrayUtil.append(notEntryIds, notPermittedEntryIds);
-
-		entryIds = ArrayUtil.toArray(
-			getPermittedEntryIds(entryIds, notPermittedEntryIds));
+		entryIds = getViewableEntryIds(entryIds, notViewableEntryIds);
+		notEntryIds = ArrayUtil.append(notEntryIds, notViewableEntryIds);
 
 		return tagsAssetLocalService.getAssets(
-			entryIds, notEntryIds, andOperator, orderByCol1, orderByCol2,
-			orderByType1, orderByType2, excludeZeroViewCount, publishDate,
-			expirationDate, start, end);
+			groupId, classNameIds, entryIds, notEntryIds, andOperator,
+			orderByCol1, orderByCol2, orderByType1, orderByType2,
+			excludeZeroViewCount, publishDate, expirationDate, start, end);
 	}
 
 	public int getAssetsCount(
@@ -99,14 +98,12 @@ public class TagsAssetServiceImpl extends TagsAssetServiceBaseImpl {
 			boolean excludeZeroViewCount, Date publishDate, Date expirationDate)
 		throws PortalException, SystemException {
 
-		long[] notPermittedEntryIds = getNotPermittedEntryIds(entryIds);
+		long[] notViewableEntryIds = getNotViewableEntryIds(entryIds);
 
-		notEntryIds = ArrayUtil.append(notEntryIds, notPermittedEntryIds);
+		entryIds = getViewableEntryIds(entryIds, notViewableEntryIds);
+		notEntryIds = ArrayUtil.append(notEntryIds, notViewableEntryIds);
 
-		entryIds = ArrayUtil.toArray(
-			getPermittedEntryIds(entryIds, notPermittedEntryIds));
-
-		return  tagsAssetLocalService.getAssetsCount(
+		return tagsAssetLocalService.getAssetsCount(
 			groupId, classNameIds, entryIds, notEntryIds, andOperator,
 			excludeZeroViewCount, publishDate, expirationDate);
 	}
@@ -260,34 +257,48 @@ public class TagsAssetServiceImpl extends TagsAssetServiceBaseImpl {
 		}
 	}
 
-	protected Long[] getPermittedEntryIds(
-			long[] entryIds, long[] notPermittedEntryIds) {
-
-		ArrayList<Long> permittedEntryIds = new ArrayList<Long>();
-
-		for (long entryId : entryIds) {
-			if (!ArrayUtil.contains(notPermittedEntryIds, entryId)) {
-				permittedEntryIds.add(entryId);
-			}
-		}
-
-		return ArrayUtil.toArray(permittedEntryIds);
-	}
-
-	protected long[] getNotPermittedEntryIds(long entryIds[])
+	protected long[] getNotViewableEntryIds(long[] entryIds)
 		throws PortalException, SystemException {
 
-		ArrayList<Long> notPermittedEntryIds = new ArrayList<Long>();
+		List<Long> list = new ArrayList<Long>();
 
 		for (long entryId : entryIds) {
 			if (!TagsEntryPermission.contains(
 					getPermissionChecker(), entryId, ActionKeys.VIEW)) {
 
-				notPermittedEntryIds.add(entryId);
+				list.add(entryId);
 			}
 		}
 
-		return ArrayUtil.toArray(ArrayUtil.toArray(notPermittedEntryIds));
+		long[] array = new long[list.size()];
+
+		for (int i = 0; i < list.size(); i++) {
+			array[i] = list.get(i).longValue();
+		}
+
+		return array;
+	}
+
+	protected long[] getViewableEntryIds(
+		long[] entryIds, long[] notViewableEntryIds) {
+
+		Arrays.sort(notViewableEntryIds);
+
+		List<Long> list = new ArrayList<Long>(entryIds.length);
+
+		for (long entryId : entryIds) {
+			if (Arrays.binarySearch(notViewableEntryIds, entryId) == -1) {
+				list.add(entryId);
+			}
+		}
+
+		long[] array = new long[list.size()];
+
+		for (int i = 0; i < list.size(); i++) {
+			array[i] = list.get(i).longValue();
+		}
+
+		return array;
 	}
 
 }
