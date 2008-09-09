@@ -2015,6 +2015,7 @@ name=Nombre
 narrow-column=Columna estrecha
 narrow=Estrecho
 navigation-style=Estilo de navegación
+nested-children=Niños jerarquizados
 net-event=Evento de red
 never-auto-expire=No expira automáticamente
 never-expire=No expira
