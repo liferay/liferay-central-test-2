@@ -27,7 +27,9 @@ import com.liferay.portal.kernel.util.HtmlUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.apache.commons.logging.Log;
@@ -243,7 +245,7 @@ public class BBCodeUtil {
 			String preTag = html.substring(0, tag.getStartPos());
 			String postTag = html.substring(tag.getEndPos());
 
-			String[] items = StringUtil.split(tag.getElement(), "[*]");
+			String[] items = _getListItems(tag.getElement());
 
 			sb = new StringBuilder(preTag);
 
@@ -368,7 +370,7 @@ public class BBCodeUtil {
 				preTag.length() + begTag.length());
 
 			int cb = remainder.indexOf("]");
-			int end = remainder.indexOf(endTag);
+			int end = _getEndTagPos(remainder, begTag, endTag);
 
 			if (cb > 0 && remainder.startsWith("=")) {
 				tag.setParameter(remainder.substring(1, cb));
@@ -401,6 +403,76 @@ public class BBCodeUtil {
 		}
 
 		return null;
+	}
+
+	private static int _getEndTagPos(
+		String remainder, String begTag, String endTag) {
+
+		int nextBegTagPos = remainder.indexOf(begTag);
+		int nextEndTagPos = remainder.indexOf(endTag);
+
+		while ((nextBegTagPos < nextEndTagPos) && (nextBegTagPos >= 0)) {
+			nextBegTagPos = remainder.indexOf(
+				begTag, nextBegTagPos + begTag.length());
+			nextEndTagPos = remainder.indexOf(
+				endTag, nextEndTagPos + endTag.length());
+		}
+
+		return nextEndTagPos;
+	}
+
+	private static String[] _getListItems(String tagElement) {
+		List<String> items = new ArrayList<String>();
+
+		StringBuilder sb = new StringBuilder();
+
+		int nestLevel = 0;
+
+		for (String item : StringUtil.split(tagElement, "[*]")) {
+			item = item.trim();
+
+			if (item.length() == 0) {
+				continue;
+			}
+
+			int begTagCount = StringUtil.count(item, "[list");
+
+			if (begTagCount > 0) {
+				nestLevel += begTagCount;
+			}
+
+			int endTagCount = StringUtil.count(item, "[/list]");
+
+			if (endTagCount > 0) {
+				nestLevel -= endTagCount;
+			}
+
+			if (nestLevel == 0) {
+				if ((begTagCount == 0) && (endTagCount == 0)) {
+					items.add(item);
+				}
+				else if (endTagCount > 0) {
+					if (sb.length() > 0) {
+						sb.append("[*]");
+					}
+
+					sb.append(item);
+
+					items.add(sb.toString());
+
+					sb.delete(0, sb.length());
+				}
+			}
+			else {
+				if (sb.length() > 0) {
+					sb.append("[*]");
+				}
+
+				sb.append(item);
+			}
+		}
+
+		return items.toArray(new String[items.size()]);
 	}
 
 	private static final String[] _BBCODE_TAGS = {
