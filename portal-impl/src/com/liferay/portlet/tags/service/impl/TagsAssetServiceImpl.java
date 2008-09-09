@@ -24,14 +24,17 @@ package com.liferay.portlet.tags.service.impl;
 
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
+import com.liferay.portal.kernel.util.ArrayUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.model.Company;
 import com.liferay.portal.model.Group;
+import com.liferay.portal.security.permission.ActionKeys;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portlet.tags.model.TagsAsset;
 import com.liferay.portlet.tags.model.TagsAssetDisplay;
 import com.liferay.portlet.tags.model.TagsAssetType;
 import com.liferay.portlet.tags.service.base.TagsAssetServiceBaseImpl;
+import com.liferay.portlet.tags.service.permission.TagsEntryPermission;
 import com.liferay.util.RSSUtil;
 
 import com.sun.syndication.feed.synd.SyndContent;
@@ -67,6 +70,45 @@ public class TagsAssetServiceImpl extends TagsAssetServiceBaseImpl {
 		throws PortalException, SystemException {
 
 		return tagsAssetLocalService.getAsset(assetId);
+	}
+
+	public List<TagsAsset> getAssets(
+			long groupId, long[] classNameIds, long[] entryIds,
+			long[] notEntryIds, boolean andOperator, String orderByCol1,
+			String orderByCol2, String orderByType1, String orderByType2,
+			boolean excludeZeroViewCount, Date publishDate, Date expirationDate,
+			int start, int end)
+		throws PortalException, SystemException {
+
+		long[] notPermittedEntryIds = getNotPermittedEntryIds(entryIds);
+
+		notEntryIds = ArrayUtil.append(notEntryIds, notPermittedEntryIds);
+
+		entryIds = ArrayUtil.toArray(
+			getPermittedEntryIds(entryIds, notPermittedEntryIds));
+
+		return tagsAssetLocalService.getAssets(
+			entryIds, notEntryIds, andOperator, orderByCol1, orderByCol2,
+			orderByType1, orderByType2, excludeZeroViewCount, publishDate,
+			expirationDate, start, end);
+	}
+
+	public int getAssetsCount(
+			long groupId, long[] classNameIds, long[] entryIds,
+			long[] notEntryIds, boolean andOperator,
+			boolean excludeZeroViewCount, Date publishDate, Date expirationDate)
+		throws PortalException, SystemException {
+
+		long[] notPermittedEntryIds = getNotPermittedEntryIds(entryIds);
+
+		notEntryIds = ArrayUtil.append(notEntryIds, notPermittedEntryIds);
+
+		entryIds = ArrayUtil.toArray(
+			getPermittedEntryIds(entryIds, notPermittedEntryIds));
+
+		return  tagsAssetLocalService.getAssetsCount(
+			groupId, classNameIds, entryIds, notEntryIds, andOperator,
+			excludeZeroViewCount, publishDate, expirationDate);
 	}
 
 	public String getAssetsRSS(
@@ -216,6 +258,36 @@ public class TagsAssetServiceImpl extends TagsAssetServiceBaseImpl {
 		catch (IOException ioe) {
 			throw new SystemException(ioe);
 		}
+	}
+
+	protected Long[] getPermittedEntryIds(
+			long[] entryIds, long[] notPermittedEntryIds) {
+
+		ArrayList<Long> permittedEntryIds = new ArrayList<Long>();
+
+		for (long entryId : entryIds) {
+			if (!ArrayUtil.contains(notPermittedEntryIds, entryId)) {
+				permittedEntryIds.add(entryId);
+			}
+		}
+
+		return ArrayUtil.toArray(permittedEntryIds);
+	}
+
+	protected long[] getNotPermittedEntryIds(long entryIds[])
+		throws PortalException, SystemException {
+
+		ArrayList<Long> notPermittedEntryIds = new ArrayList<Long>();
+
+		for (long entryId : entryIds) {
+			if (!TagsEntryPermission.contains(
+					getPermissionChecker(), entryId, ActionKeys.VIEW)) {
+
+				notPermittedEntryIds.add(entryId);
+			}
+		}
+
+		return ArrayUtil.toArray(ArrayUtil.toArray(notPermittedEntryIds));
 	}
 
 }

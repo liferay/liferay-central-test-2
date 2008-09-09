@@ -88,6 +88,35 @@ public class TagsAssetServiceJSON {
 		return TagsAssetJSONSerializer.toJSONObject(returnValue);
 	}
 
+	public static JSONArray getAssets(long groupId, long[] classNameIds,
+		long[] entryIds, long[] notEntryIds, boolean andOperator,
+		java.lang.String orderByCol1, java.lang.String orderByCol2,
+		java.lang.String orderByType1, java.lang.String orderByType2,
+		boolean excludeZeroViewCount, java.util.Date publishDate,
+		java.util.Date expirationDate, int start, int end)
+		throws java.rmi.RemoteException, com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
+		java.util.List<com.liferay.portlet.tags.model.TagsAsset> returnValue = TagsAssetServiceUtil.getAssets(groupId,
+				classNameIds, entryIds, notEntryIds, andOperator, orderByCol1,
+				orderByCol2, orderByType1, orderByType2, excludeZeroViewCount,
+				publishDate, expirationDate, start, end);
+
+		return TagsAssetJSONSerializer.toJSONArray(returnValue);
+	}
+
+	public static int getAssetsCount(long groupId, long[] classNameIds,
+		long[] entryIds, long[] notEntryIds, boolean andOperator,
+		boolean excludeZeroViewCount, java.util.Date publishDate,
+		java.util.Date expirationDate)
+		throws java.rmi.RemoteException, com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
+		int returnValue = TagsAssetServiceUtil.getAssetsCount(groupId,
+				classNameIds, entryIds, notEntryIds, andOperator,
+				excludeZeroViewCount, publishDate, expirationDate);
+
+		return returnValue;
+	}
+
 	public static java.lang.String getAssetsRSS(long groupId,
 		long[] classNameIds, long[] entryIds, long[] notEntryIds,
 		boolean andOperator, java.lang.String orderByCol1,

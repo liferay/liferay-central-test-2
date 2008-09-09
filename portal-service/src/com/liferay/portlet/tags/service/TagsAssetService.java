@@ -56,6 +56,23 @@ public interface TagsAssetService {
 		throws java.rmi.RemoteException, com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;
 
+	public java.util.List<com.liferay.portlet.tags.model.TagsAsset> getAssets(
+		long groupId, long[] classNameIds, long[] entryIds, long[] notEntryIds,
+		boolean andOperator, java.lang.String orderByCol1,
+		java.lang.String orderByCol2, java.lang.String orderByType1,
+		java.lang.String orderByType2, boolean excludeZeroViewCount,
+		java.util.Date publishDate, java.util.Date expirationDate, int start,
+		int end)
+		throws java.rmi.RemoteException, com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException;
+
+	public int getAssetsCount(long groupId, long[] classNameIds,
+		long[] entryIds, long[] notEntryIds, boolean andOperator,
+		boolean excludeZeroViewCount, java.util.Date publishDate,
+		java.util.Date expirationDate)
+		throws java.rmi.RemoteException, com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException;
+
 	public java.lang.String getAssetsRSS(long groupId, long[] classNameIds,
 		long[] entryIds, long[] notEntryIds, boolean andOperator,
 		java.lang.String orderByCol1, java.lang.String orderByCol2,

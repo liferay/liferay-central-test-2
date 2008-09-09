@@ -106,6 +106,47 @@ public class TagsAssetServiceSoap {
 		}
 	}
 
+	public static com.liferay.portlet.tags.model.TagsAssetSoap[] getAssets(
+		long groupId, long[] classNameIds, long[] entryIds, long[] notEntryIds,
+		boolean andOperator, java.lang.String orderByCol1,
+		java.lang.String orderByCol2, java.lang.String orderByType1,
+		java.lang.String orderByType2, boolean excludeZeroViewCount,
+		java.util.Date publishDate, java.util.Date expirationDate, int start,
+		int end) throws RemoteException {
+		try {
+			java.util.List<com.liferay.portlet.tags.model.TagsAsset> returnValue =
+				TagsAssetServiceUtil.getAssets(groupId, classNameIds, entryIds,
+					notEntryIds, andOperator, orderByCol1, orderByCol2,
+					orderByType1, orderByType2, excludeZeroViewCount,
+					publishDate, expirationDate, start, end);
+
+			return com.liferay.portlet.tags.model.TagsAssetSoap.toSoapModels(returnValue);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
+	public static int getAssetsCount(long groupId, long[] classNameIds,
+		long[] entryIds, long[] notEntryIds, boolean andOperator,
+		boolean excludeZeroViewCount, java.util.Date publishDate,
+		java.util.Date expirationDate) throws RemoteException {
+		try {
+			int returnValue = TagsAssetServiceUtil.getAssetsCount(groupId,
+					classNameIds, entryIds, notEntryIds, andOperator,
+					excludeZeroViewCount, publishDate, expirationDate);
+
+			return returnValue;
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
 	public static java.lang.String getAssetsRSS(long groupId,
 		long[] classNameIds, long[] entryIds, long[] notEntryIds,
 		boolean andOperator, java.lang.String orderByCol1,

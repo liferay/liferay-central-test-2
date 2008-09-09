@@ -142,6 +142,190 @@ public class TagsAssetServiceHttp {
 		}
 	}
 
+	public static java.util.List<com.liferay.portlet.tags.model.TagsAsset> getAssets(
+		HttpPrincipal httpPrincipal, long groupId, long[] classNameIds,
+		long[] entryIds, long[] notEntryIds, boolean andOperator,
+		java.lang.String orderByCol1, java.lang.String orderByCol2,
+		java.lang.String orderByType1, java.lang.String orderByType2,
+		boolean excludeZeroViewCount, java.util.Date publishDate,
+		java.util.Date expirationDate, int start, int end)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
+		try {
+			Object paramObj0 = new LongWrapper(groupId);
+
+			Object paramObj1 = classNameIds;
+
+			if (classNameIds == null) {
+				paramObj1 = new NullWrapper("[J");
+			}
+
+			Object paramObj2 = entryIds;
+
+			if (entryIds == null) {
+				paramObj2 = new NullWrapper("[J");
+			}
+
+			Object paramObj3 = notEntryIds;
+
+			if (notEntryIds == null) {
+				paramObj3 = new NullWrapper("[J");
+			}
+
+			Object paramObj4 = new BooleanWrapper(andOperator);
+
+			Object paramObj5 = orderByCol1;
+
+			if (orderByCol1 == null) {
+				paramObj5 = new NullWrapper("java.lang.String");
+			}
+
+			Object paramObj6 = orderByCol2;
+
+			if (orderByCol2 == null) {
+				paramObj6 = new NullWrapper("java.lang.String");
+			}
+
+			Object paramObj7 = orderByType1;
+
+			if (orderByType1 == null) {
+				paramObj7 = new NullWrapper("java.lang.String");
+			}
+
+			Object paramObj8 = orderByType2;
+
+			if (orderByType2 == null) {
+				paramObj8 = new NullWrapper("java.lang.String");
+			}
+
+			Object paramObj9 = new BooleanWrapper(excludeZeroViewCount);
+
+			Object paramObj10 = publishDate;
+
+			if (publishDate == null) {
+				paramObj10 = new NullWrapper("java.util.Date");
+			}
+
+			Object paramObj11 = expirationDate;
+
+			if (expirationDate == null) {
+				paramObj11 = new NullWrapper("java.util.Date");
+			}
+
+			Object paramObj12 = new IntegerWrapper(start);
+
+			Object paramObj13 = new IntegerWrapper(end);
+
+			MethodWrapper methodWrapper = new MethodWrapper(TagsAssetServiceUtil.class.getName(),
+					"getAssets",
+					new Object[] {
+						paramObj0, paramObj1, paramObj2, paramObj3, paramObj4,
+						paramObj5, paramObj6, paramObj7, paramObj8, paramObj9,
+						paramObj10, paramObj11, paramObj12, paramObj13
+					});
+
+			Object returnObj = null;
+
+			try {
+				returnObj = TunnelUtil.invoke(httpPrincipal, methodWrapper);
+			}
+			catch (Exception e) {
+				if (e instanceof com.liferay.portal.PortalException) {
+					throw (com.liferay.portal.PortalException)e;
+				}
+
+				if (e instanceof com.liferay.portal.SystemException) {
+					throw (com.liferay.portal.SystemException)e;
+				}
+
+				throw new com.liferay.portal.SystemException(e);
+			}
+
+			return (java.util.List<com.liferay.portlet.tags.model.TagsAsset>)returnObj;
+		}
+		catch (com.liferay.portal.SystemException se) {
+			_log.error(se, se);
+
+			throw se;
+		}
+	}
+
+	public static int getAssetsCount(HttpPrincipal httpPrincipal, long groupId,
+		long[] classNameIds, long[] entryIds, long[] notEntryIds,
+		boolean andOperator, boolean excludeZeroViewCount,
+		java.util.Date publishDate, java.util.Date expirationDate)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
+		try {
+			Object paramObj0 = new LongWrapper(groupId);
+
+			Object paramObj1 = classNameIds;
+
+			if (classNameIds == null) {
+				paramObj1 = new NullWrapper("[J");
+			}
+
+			Object paramObj2 = entryIds;
+
+			if (entryIds == null) {
+				paramObj2 = new NullWrapper("[J");
+			}
+
+			Object paramObj3 = notEntryIds;
+
+			if (notEntryIds == null) {
+				paramObj3 = new NullWrapper("[J");
+			}
+
+			Object paramObj4 = new BooleanWrapper(andOperator);
+
+			Object paramObj5 = new BooleanWrapper(excludeZeroViewCount);
+
+			Object paramObj6 = publishDate;
+
+			if (publishDate == null) {
+				paramObj6 = new NullWrapper("java.util.Date");
+			}
+
+			Object paramObj7 = expirationDate;
+
+			if (expirationDate == null) {
+				paramObj7 = new NullWrapper("java.util.Date");
+			}
+
+			MethodWrapper methodWrapper = new MethodWrapper(TagsAssetServiceUtil.class.getName(),
+					"getAssetsCount",
+					new Object[] {
+						paramObj0, paramObj1, paramObj2, paramObj3, paramObj4,
+						paramObj5, paramObj6, paramObj7
+					});
+
+			Object returnObj = null;
+
+			try {
+				returnObj = TunnelUtil.invoke(httpPrincipal, methodWrapper);
+			}
+			catch (Exception e) {
+				if (e instanceof com.liferay.portal.PortalException) {
+					throw (com.liferay.portal.PortalException)e;
+				}
+
+				if (e instanceof com.liferay.portal.SystemException) {
+					throw (com.liferay.portal.SystemException)e;
+				}
+
+				throw new com.liferay.portal.SystemException(e);
+			}
+
+			return ((Integer)returnObj).intValue();
+		}
+		catch (com.liferay.portal.SystemException se) {
+			_log.error(se, se);
+
+			throw se;
+		}
+	}
+
 	public static java.lang.String getAssetsRSS(HttpPrincipal httpPrincipal,
 		long groupId, long[] classNameIds, long[] entryIds, long[] notEntryIds,
 		boolean andOperator, java.lang.String orderByCol1,

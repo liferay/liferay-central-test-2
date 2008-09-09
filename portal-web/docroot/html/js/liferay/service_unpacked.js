@@ -2460,6 +2460,20 @@ Liferay.Service.Tags.TagsAsset = {
 		return Liferay.Service.ajax(params, callback);
 	},
 
+	getAssets: function(params, callback) {
+		params.serviceClassName = this.serviceClassName;
+		params.serviceMethodName = "getAssets";
+
+		return Liferay.Service.ajax(params, callback);
+	},
+
+	getAssetsCount: function(params, callback) {
+		params.serviceClassName = this.serviceClassName;
+		params.serviceMethodName = "getAssetsCount";
+
+		return Liferay.Service.ajax(params, callback);
+	},
+
 	getAssetsRSS: function(params, callback) {
 		params.serviceClassName = this.serviceClassName;
 		params.serviceMethodName = "getAssetsRSS";
