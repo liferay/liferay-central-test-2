@@ -139,6 +139,17 @@ String[] bulletStyleOptions = StringUtil.split(themeDisplay.getTheme().getSettin
 				</select>
 			</td>
 		</tr>
+		<tr>
+			<td>
+				<liferay-ui:message key="nested-children" />
+			</td>
+			<td>
+				<select name="<portlet:namespace />nestedChildren">
+					<option <%= nestedChildren ? "selected" : "" %> value="1"><liferay-ui:message key="yes" /></option>
+					<option <%= !nestedChildren ? "selected" : "" %> value="0"><liferay-ui:message key="no" /></option>
+				</select>
+			</td>
+		</tr>
 		</table>
 	</td>
 </tr>

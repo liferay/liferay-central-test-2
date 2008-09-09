@@ -32,6 +32,7 @@ String headerType = null;
 String rootLayoutType = null;
 int rootLayoutLevel = 0;
 String includedLayouts = null;
+boolean nestedChildren = true;
 
 String[] displayStyleDefinition = _getDisplayStyleDefinition(displayStyle);
 
@@ -40,12 +41,14 @@ if ((displayStyleDefinition != null) && (displayStyleDefinition.length == 4)) {
 	rootLayoutType = displayStyleDefinition[1];
 	rootLayoutLevel = GetterUtil.getInteger(displayStyleDefinition[2]);
 	includedLayouts = displayStyleDefinition[3];
+	nestedChildren = GetterUtil.getBoolean(displayStyleDefinition[4]);
 }
 else {
 	headerType = (String)request.getAttribute("liferay-ui:navigation:headerType");
 	rootLayoutType = (String)request.getAttribute("liferay-ui:navigation:rootLayoutType");
 	rootLayoutLevel = GetterUtil.getInteger((String)request.getAttribute("liferay-ui:navigation:rootLayoutLevel"));
 	includedLayouts = (String)request.getAttribute("liferay-ui:navigation:includedLayouts");
+	nestedChildren = GetterUtil.getBoolean((String)request.getAttribute("liferay-ui:navigation:nestedChildren"));
 }
 %>
 

@@ -85,10 +85,17 @@
 		if (!hidden) {
 			StringBuilder sb = new StringBuilder();
 
-			_buildNavigation(rootLayout, layout, selBranch, themeDisplay, 1, includedLayouts, sb);
+			_buildNavigation(rootLayout, layout, selBranch, themeDisplay, 1, includedLayouts, nestedChildren, sb);
+
+			String content = sb.toString();
+
+			if (!nestedChildren) {
+				content = StringUtil.replace(content, "</a><ul class", "</a></li></ul><ul class");
+				content = StringUtil.replace(content, "</ul></li>", "</ul><ul class=\"layouts\">");
+			}
 		%>
 
-			<%= sb.toString() %>
+			<%= content %>
 
 		<%
 		}
@@ -98,7 +105,7 @@
 </c:if>
 
 <%!
-private void _buildNavigation(Layout rootLayout, Layout selLayout, List selBranch, ThemeDisplay themeDisplay, int layoutLevel, String includedLayouts, StringBuilder sb) throws Exception {
+private void _buildNavigation(Layout rootLayout, Layout selLayout, List selBranch, ThemeDisplay themeDisplay, int layoutLevel, String includedLayouts, boolean nestedChildren, StringBuilder sb) throws Exception {
 	List layoutChildren = null;
 
 	if (rootLayout != null) {
@@ -164,7 +171,7 @@ private void _buildNavigation(Layout rootLayout, Layout selLayout, List selBranc
 				sb.append("</a>");
 
 				if (open) {
-					_buildNavigation(layoutChild, selLayout, selBranch, themeDisplay, layoutLevel + 1, includedLayouts, sb);
+					_buildNavigation(layoutChild, selLayout, selBranch, themeDisplay, layoutLevel + 1, includedLayouts, nestedChildren, sb);
 				}
 
 				sb.append("</li>");

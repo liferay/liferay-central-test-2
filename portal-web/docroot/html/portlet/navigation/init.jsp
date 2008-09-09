@@ -42,4 +42,6 @@ String rootLayoutType = PrefsParamUtil.getString(prefs, request, "root-layout-ty
 int rootLayoutLevel = PrefsParamUtil.getInteger(prefs, request, "root-layout-level", 1);
 
 String includedLayouts = PrefsParamUtil.getString(prefs, request, "included-layouts", "current");
+
+boolean nestedChildren = PrefsParamUtil.getBoolean(prefs, request, "nested-children", true);
 %>

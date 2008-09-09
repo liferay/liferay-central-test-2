@@ -50,6 +50,9 @@ public class NavigationTag extends IncludeTag {
 			String.valueOf(_rootLayoutLevel));
 		request.setAttribute(
 			"liferay-ui:navigation:includedLayouts", _includedLayouts);
+		request.setAttribute(
+			"liferay-ui:navigation:nestedChildren",
+			String.valueOf(_nestedChildren));
 
 		return EVAL_BODY_BUFFERED;
 	}
@@ -78,6 +81,10 @@ public class NavigationTag extends IncludeTag {
 		_includedLayouts = includedLayouts;
 	}
 
+	public void setNestedChildren(boolean nestedChildren) {
+		_nestedChildren = nestedChildren;
+	}
+
 	protected String getDefaultPage() {
 		return _PAGE;
 	}
@@ -90,5 +97,6 @@ public class NavigationTag extends IncludeTag {
 	private String _rootLayoutType = "absolute";
 	private int _rootLayoutLevel = 1;
 	private String _includedLayouts = "auto";
+	private boolean _nestedChildren = true;
 
 }

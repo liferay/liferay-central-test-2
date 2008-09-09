@@ -31,4 +31,5 @@
 	rootLayoutType="<%= rootLayoutType %>"
 	rootLayoutLevel="<%= rootLayoutLevel %>"
 	includedLayouts="<%= includedLayouts %>"
+	nestedChildren="<%= nestedChildren %>"
 />

@@ -64,6 +64,8 @@ public class ConfigurationActionImpl implements ConfigurationAction {
 			actionRequest, "rootLayoutLevel");
 		String includedLayouts = ParamUtil.getString(
 			actionRequest, "includedLayouts");
+		boolean nestedChildren = ParamUtil.getBoolean(
+			actionRequest, "nestedChildren");
 
 		String portletResource = ParamUtil.getString(
 			actionRequest, "portletResource");
@@ -81,6 +83,7 @@ public class ConfigurationActionImpl implements ConfigurationAction {
 			prefs.setValue(
 				"root-layout-level", String.valueOf(rootLayoutLevel));
 			prefs.setValue("included-layouts", includedLayouts);
+			prefs.setValue("nested-children", String.valueOf(nestedChildren));
 		}
 
 		prefs.store();
