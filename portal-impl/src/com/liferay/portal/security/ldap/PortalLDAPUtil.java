@@ -229,62 +229,6 @@ public class PortalLDAPUtil {
 		ctx.close();
 	}
 
-	/**
-	 * @deprecated Use <code>getGroupAttributes</code> and
-	 * <code>getUserAttributes</code>.
-	 */
-	public static Attributes getAttributes(
-			LdapContext ctx, String fullDistinguishedName)
-		throws Exception {
-
-		return getAttributes(ctx, fullDistinguishedName, null);
-	}
-
-	public static Attributes getAttributes(
-			LdapContext ctx, String fullDistinguishedName,
-			String[] attributeIds)
-		throws Exception {
-
-		String[] auditAttributeIds = {
-			"creatorsName", "createTimestamp", "modifiersName",
-			"modifyTimestamp"
-		};
-
-		Attributes attrs;
-
-		if (attributeIds == null) {
-
-			// Get complete listing of LDAP attributes (slow)
-
-			attrs = ctx.getAttributes(fullDistinguishedName);
-
-			NamingEnumeration<? extends Attribute> enu = ctx.getAttributes(
-				fullDistinguishedName, auditAttributeIds).getAll();
-
-			while (enu.hasMoreElements()) {
-				attrs.put(enu.nextElement());
-			}
-		}
-		else {
-
-			// Get specified LDAP attributes
-
-			int attributeCount = attributeIds.length + auditAttributeIds.length;
-
-			String[] allAttributeIds = new String[attributeCount];
-
-			System.arraycopy(
-				attributeIds, 0, allAttributeIds, 0, attributeIds.length);
-			System.arraycopy(
-				auditAttributeIds, 0, allAttributeIds, attributeIds.length,
-				auditAttributeIds.length);
-
-			attrs = ctx.getAttributes(fullDistinguishedName, allAttributeIds);
-		}
-
-		return attrs;
-	}
-
 	public static String getAuthSearchFilter(
 			long companyId, String emailAddress, String screenName,
 			String userId)
@@ -374,7 +318,7 @@ public class PortalLDAPUtil {
 			groupMappings.getProperty("description")
 		};
 
-		return getAttributes(
+		return _getAttributes(
 			ctx, fullDistinguishedName, mappedGroupAttributeIds);
 	}
 
@@ -489,7 +433,7 @@ public class PortalLDAPUtil {
 			userMappings.getProperty("group")
 		};
 
-		return getAttributes(
+		return _getAttributes(
 			ctx, fullDistinguishedName, mappedUserAttributeIds);
 	}
 
@@ -984,6 +928,51 @@ public class PortalLDAPUtil {
 		else {
 			return false;
 		}
+	}
+
+	private static Attributes _getAttributes(
+			LdapContext ctx, String fullDistinguishedName,
+			String[] attributeIds)
+		throws Exception {
+
+		Attributes attrs = null;
+
+		String[] auditAttributeIds = {
+			"creatorsName", "createTimestamp", "modifiersName",
+			"modifyTimestamp"
+		};
+
+		if (attributeIds == null) {
+
+			// Get complete listing of LDAP attributes (slow)
+
+			attrs = ctx.getAttributes(fullDistinguishedName);
+
+			NamingEnumeration<? extends Attribute> enu = ctx.getAttributes(
+				fullDistinguishedName, auditAttributeIds).getAll();
+
+			while (enu.hasMoreElements()) {
+				attrs.put(enu.nextElement());
+			}
+		}
+		else {
+
+			// Get specified LDAP attributes
+
+			int attributeCount = attributeIds.length + auditAttributeIds.length;
+
+			String[] allAttributeIds = new String[attributeCount];
+
+			System.arraycopy(
+				attributeIds, 0, allAttributeIds, 0, attributeIds.length);
+			System.arraycopy(
+				auditAttributeIds, 0, allAttributeIds, attributeIds.length,
+				auditAttributeIds.length);
+
+			attrs = ctx.getAttributes(fullDistinguishedName, allAttributeIds);
+		}
+
+		return attrs;
 	}
 
 	private static void _importGroupsAndMembershipFromLDAPUser(
