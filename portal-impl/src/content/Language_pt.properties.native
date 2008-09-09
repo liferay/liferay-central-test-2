@@ -2170,6 +2170,7 @@ on=Em
 one-column=Uma Coluna
 one-of-your-fields-contain-invalid-characters=Um de seus campos contem caráteres inválidos.
 one-or-more-organizations-are-associated-with-deactivated-users.-do-you-want-to-proceed-with-deleting-the-selected-organizations-by-automatically-unassociating-the-deactivated-users=Um ou os mais organização é associado com os usuários desativados. Você quer proseguir com suprimir as organizações selecionadas automaticamente unassociating os usuários desativados?
+one-or-more-tags-contains-invalid-characters=Uns ou vários Tag contêm caráteres inválidos.
 one-or-more-user-groups-are-associated-with-deactivated-users.-do-you-want-to-proceed-with-deleting-the-selected-user-groups-by-automatically-unassociating-the-deactivated-users=Um ou os mais grupo de usuário é associado com os usuários desativados. Você quer proseguir com suprimir os grupos de usuário selecionados automaticamente unassociating os usuários desativados?
 online-now=Em linha Agora
 only-articles-associated-with-structure-x-are-shown=Only articles associated with structure {0} are shown.

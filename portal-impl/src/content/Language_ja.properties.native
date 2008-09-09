@@ -2170,6 +2170,7 @@ on=
 one-column=1 つのコラム
 one-of-your-fields-contain-invalid-characters=あなたの分野の1 つは無効な特性を含んでいる。
 one-or-more-organizations-are-associated-with-deactivated-users.-do-you-want-to-proceed-with-deleting-the-selected-organizations-by-automatically-unassociating-the-deactivated-users=一つ以上の組織は非活動化させたユーザーと関連付けられる。自動的に非活動化させたユーザーをunassociating によって指定組織の削除と進みたいと思うか。
+one-or-more-tags-contains-invalid-characters=1つ以上の札は無効な特性を含んでいる。
 one-or-more-user-groups-are-associated-with-deactivated-users.-do-you-want-to-proceed-with-deleting-the-selected-user-groups-by-automatically-unassociating-the-deactivated-users=一つ以上のユーザ・グループは非活動化させたユーザーと関連付けられる。自動的に非活動化させたユーザーをunassociating によって指定ユーザ・グループの削除と進みたいと思うか。
 online-now=オンライン今
 only-articles-associated-with-structure-x-are-shown=Only articles associated with structure {0} are shown.

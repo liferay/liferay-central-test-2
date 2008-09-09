@@ -2170,6 +2170,7 @@ on=
 one-column=Μια στήλη
 one-of-your-fields-contain-invalid-characters=Ένας από τους τομείς σας περιέχει τους άκυρους χαρακτήρες.
 one-or-more-organizations-are-associated-with-deactivated-users.-do-you-want-to-proceed-with-deleting-the-selected-organizations-by-automatically-unassociating-the-deactivated-users=Μια ή περισσότερες οργανώσεις συνδέονται με τους απενεργοποιημένους χρήστες. Θέλετε να συνεχίσετε με τη διαγραφή των επιλεγμένων οργανώσεων με αυτόματα οι απενεργοποιημένοι χρήστες;
+one-or-more-tags-contains-invalid-characters=Μια ή περισσότερες ετικέττες περιέχουν τους άκυρους χαρακτήρες.
 one-or-more-user-groups-are-associated-with-deactivated-users.-do-you-want-to-proceed-with-deleting-the-selected-user-groups-by-automatically-unassociating-the-deactivated-users=Μια ή περισσότερες ομάδες χρηστών συνδέονται με τους απενεργοποιημένους χρήστες. Θέλετε να συνεχίσετε με τη διαγραφή των επιλεγμένων ομάδων χρηστών με αυτόματα οι απενεργοποιημένοι χρήστες;
 online-now=Θ*ον-ληνε τώρα
 only-articles-associated-with-structure-x-are-shown=Only articles associated with structure {0} are shown.
