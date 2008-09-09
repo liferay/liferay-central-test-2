@@ -61,6 +61,11 @@
 			<bean class="com.liferay.portal.dao.orm.hibernate.PropertyFactoryImpl" />
 		</property>
 	</bean>
+	<bean id="com.liferay.portal.kernel.dao.orm.RestrictionsFactoryUtil" class="com.liferay.portal.kernel.dao.orm.RestrictionsFactoryUtil">
+		<property name="restrictionsFactory">
+			<bean class="com.liferay.portal.dao.orm.hibernate.RestrictionsFactoryImpl" />
+		</property>
+	</bean>
 	<bean id="com.liferay.portal.kernel.image.ImageProcessorUtil" class="com.liferay.portal.kernel.image.ImageProcessorUtil">
 		<property name="imageProcessor">
 			<bean class="com.liferay.portal.image.ImageProcessorImpl" />
