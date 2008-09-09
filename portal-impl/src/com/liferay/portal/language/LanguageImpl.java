@@ -329,7 +329,7 @@ public class LanguageImpl implements Language {
 
 			// LEP-7292
 
-			if (value != defaultValue) {
+			if ((value != null) && !value.equals(defaultValue)) {
 				return value;
 			}
 		}
@@ -366,7 +366,7 @@ public class LanguageImpl implements Language {
 
 				// LEP-7393
 
-				if ((value == null) || (value == defaultValue) &&
+				if ((value == null) || (value.equals(defaultValue)) &&
 					(portletConfig.getPortletName().equals(
 						PortletKeys.PORTLET_CONFIGURATION))) {
 
