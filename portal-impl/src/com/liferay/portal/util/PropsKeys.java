@@ -749,6 +749,8 @@ public class PropsKeys {
 
 	public static final String MESSAGE_BOARDS_EXPIRE_BAN_JOB_INTERVAL = "message.boards.expire.ban.job.interval";
 
+	public static final String MESSAGE_BOARDS_MAIL_MESSAGE_STRATEGY = "message.boards.mail.message.strategy";
+
 	public static final String MESSAGE_BOARDS_RSS_ABSTRACT_LENGTH = "message.boards.rss.abstract.length";
 
 	public static final String MIME_TYPES = "mime.types";
