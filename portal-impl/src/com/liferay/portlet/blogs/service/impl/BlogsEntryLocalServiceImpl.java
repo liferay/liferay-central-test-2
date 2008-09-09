@@ -147,7 +147,7 @@ public class BlogsEntryLocalServiceImpl extends BlogsEntryLocalServiceBaseImpl {
 		// Entry
 
 		User user = userPersistence.findByPrimaryKey(userId);
-		long groupId = PortalUtil.getPortletGroupId(plid);
+		long groupId = PortalUtil.getScopeGroupId(plid);
 
 		Date displayDate = PortalUtil.getDate(
 			displayDateMonth, displayDateDay, displayDateYear, displayDateHour,

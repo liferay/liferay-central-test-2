@@ -40,7 +40,7 @@
 					>
 
 						<%
-						MBStatsUser statsUser = MBStatsUserLocalServiceUtil.getStatsUser(portletGroupId.longValue(), message.getUserId());
+						MBStatsUser statsUser = MBStatsUserLocalServiceUtil.getStatsUser(scopeGroupId, message.getUserId());
 
 						int posts = statsUser.getMessageCount();
 						String rank = MBUtil.getUserRank(prefs, themeDisplay.getLanguageId(), statsUser);
@@ -73,7 +73,7 @@
 							<br />
 
 							<c:choose>
-								<c:when test="<%= MBBanLocalServiceUtil.hasBan(portletGroupId.longValue(), userDisplay.getUserId()) %>">
+								<c:when test="<%= MBBanLocalServiceUtil.hasBan(scopeGroupId, userDisplay.getUserId()) %>">
 									<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="unbanUserURL">
 										<portlet:param name="struts_action" value="/message_boards/ban_user" />
 										<portlet:param name="<%= Constants.CMD %>" value="unban" />

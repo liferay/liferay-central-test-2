@@ -144,7 +144,7 @@ for (int i = 0; i < 7; i++) {
 					<table border="0" cellpadding="4" cellspacing="0" width="100%">
 
 					<%
-					List events = CalEventLocalServiceUtil.getEvents(portletGroupId.longValue(), cal, eventType);
+					List events = CalEventLocalServiceUtil.getEvents(scopeGroupId, cal, eventType);
 
 					Collections.sort(events, new EventTimeComparator(timeZone, locale));
 

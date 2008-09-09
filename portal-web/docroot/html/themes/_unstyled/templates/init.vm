@@ -77,7 +77,7 @@
 
 #set ($is_signed_in = $theme_display.isSignedIn())
 
-#set ($group_id = $theme_display.getPortletGroupId())
+#set ($group_id = $theme_display.getScopeGroupId())
 
 ## ---------- URLs ---------- ##
 

@@ -142,7 +142,7 @@ public class JournalFeedLocalServiceImpl
 			String[] communityPermissions, String[] guestPermissions)
 		throws PortalException, SystemException {
 
-		long groupId = PortalUtil.getPortletGroupId(plid);
+		long groupId = PortalUtil.getScopeGroupId(plid);
 
 		return addFeedToGroup(
 			uuid, userId, groupId, feedId, autoFeedId, name, description, type,

@@ -128,7 +128,7 @@ public class SCProductEntryLocalServiceImpl
 		// Product entry
 
 		User user = userPersistence.findByPrimaryKey(userId);
-		long groupId = PortalUtil.getPortletGroupId(plid);
+		long groupId = PortalUtil.getScopeGroupId(plid);
 		tags = getTags(tags);
 		repoGroupId = repoGroupId.trim().toLowerCase();
 		repoArtifactId = repoArtifactId.trim().toLowerCase();

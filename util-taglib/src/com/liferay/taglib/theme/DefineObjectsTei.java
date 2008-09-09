@@ -75,7 +75,7 @@ public class DefineObjectsTei extends TagExtraInfo {
 				"layoutTypePortlet", LayoutTypePortlet.class.getName(), true,
 				VariableInfo.AT_END),
 			new VariableInfo(
-				"portletGroupId", Long.class.getName(), true,
+				"scopeGroupId", Long.class.getName(), true,
 				VariableInfo.AT_END),
 			new VariableInfo(
 				"permissionChecker", PermissionChecker.class.getName(), true,
@@ -92,6 +92,12 @@ public class DefineObjectsTei extends TagExtraInfo {
 				VariableInfo.AT_END),
 			new VariableInfo(
 				"portletDisplay", PortletDisplay.class.getName(), true,
+				VariableInfo.AT_END),
+
+			// Deprecated
+
+			new VariableInfo(
+				"portletGroupId", Long.class.getName(), true,
 				VariableInfo.AT_END)
 		};
 	}

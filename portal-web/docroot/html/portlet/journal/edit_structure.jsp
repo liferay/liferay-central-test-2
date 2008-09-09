@@ -38,7 +38,7 @@ else {
 
 JournalStructure structure = (JournalStructure)request.getAttribute(WebKeys.JOURNAL_STRUCTURE);
 
-long groupId = BeanParamUtil.getLong(structure, request, "groupId", portletGroupId.longValue());
+long groupId = BeanParamUtil.getLong(structure, request, "groupId", scopeGroupId);
 
 Group group = GroupLocalServiceUtil.getGroup(groupId);
 

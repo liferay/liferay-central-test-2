@@ -123,7 +123,7 @@ public class JournalTemplateLocalServiceImpl
 			String[] communityPermissions, String[] guestPermissions)
 		throws PortalException, SystemException {
 
-		long groupId = PortalUtil.getPortletGroupId(plid);
+		long groupId = PortalUtil.getScopeGroupId(plid);
 
 		return addTemplateToGroup(
 			uuid, userId, templateId, autoTemplateId, groupId, structureId,

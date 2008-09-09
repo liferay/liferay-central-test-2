@@ -77,7 +77,7 @@ if (Validator.isNotNull(portletResource)) {
 boolean enableComments = GetterUtil.getBoolean(prefs.getValue("enable-comments", null), true);
 boolean enableCommentRatings = GetterUtil.getBoolean(prefs.getValue("enable-comment-ratings", null), true);
 
-String allNodes = ListUtil.toString(WikiNodeLocalServiceUtil.getNodes(portletGroupId.longValue()), "name");
+String allNodes = ListUtil.toString(WikiNodeLocalServiceUtil.getNodes(scopeGroupId), "name");
 
 String[] visibleNodes = StringUtil.split(PrefsParamUtil.getString(prefs, request, "visible-nodes", allNodes));
 String[] hiddenNodes = StringUtil.split(PrefsParamUtil.getString(prefs, request, "hidden-nodes", StringPool.BLANK));

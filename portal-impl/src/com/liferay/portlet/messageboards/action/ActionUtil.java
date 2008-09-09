@@ -76,7 +76,7 @@ public class ActionUtil {
 			WebKeys.THEME_DISPLAY);
 
 		MBBanLocalServiceUtil.checkBan(
-			themeDisplay.getPortletGroupId(), themeDisplay.getUserId());
+			themeDisplay.getScopeGroupId(), themeDisplay.getUserId());
 
 		long categoryId = ParamUtil.getLong(request, "categoryId");
 

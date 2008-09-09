@@ -57,7 +57,7 @@ public class TagsEntryServiceImpl extends TagsEntryServiceBaseImpl {
 		long parentEntryId = TagsEntryConstants.DEFAULT_PARENT_ENTRY_ID;
 
 		if (Validator.isNotNull(parentEntryName)) {
-			long groupId = PortalUtil.getPortletGroupId(plid);
+			long groupId = PortalUtil.getScopeGroupId(plid);
 
 			TagsEntry parentEntry = tagsEntryPersistence.findByG_N(
 				groupId, parentEntryName);
@@ -82,7 +82,7 @@ public class TagsEntryServiceImpl extends TagsEntryServiceBaseImpl {
 		long parentEntryId = TagsEntryConstants.DEFAULT_PARENT_ENTRY_ID;
 
 		if (Validator.isNotNull(parentEntryName)) {
-			long groupId = PortalUtil.getPortletGroupId(plid);
+			long groupId = PortalUtil.getScopeGroupId(plid);
 
 			TagsEntry parentEntry = tagsEntryPersistence.findByG_N(
 				groupId, parentEntryName);

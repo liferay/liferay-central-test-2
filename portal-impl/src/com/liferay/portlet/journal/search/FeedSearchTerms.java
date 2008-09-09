@@ -39,8 +39,7 @@ public class FeedSearchTerms extends FeedDisplayTerms {
 		super(renderRequest);
 
 		groupId = ParamUtil.getLong(
-			renderRequest, GROUP_ID,
-			PortalUtil.getPortletGroupId(renderRequest));
+			renderRequest, GROUP_ID, PortalUtil.getScopeGroupId(renderRequest));
 		feedId = ParamUtil.getString(renderRequest, FEED_ID);
 		name = ParamUtil.getString(renderRequest, NAME);
 		description = ParamUtil.getString(renderRequest, DESCRIPTION);

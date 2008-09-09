@@ -73,11 +73,11 @@ List scores = null;
 
 		SearchContainer searchContainer = new SearchContainer(renderRequest, null, null, "cur1", SearchContainer.DEFAULT_DELTA, portletURL, headerNames, null);
 
-		int total = IGFolderLocalServiceUtil.getFoldersCount(portletGroupId.longValue(), folderId);
+		int total = IGFolderLocalServiceUtil.getFoldersCount(scopeGroupId, folderId);
 
 		searchContainer.setTotal(total);
 
-		List results = IGFolderLocalServiceUtil.getFolders(portletGroupId.longValue(), folderId, searchContainer.getStart(), searchContainer.getEnd());
+		List results = IGFolderLocalServiceUtil.getFolders(scopeGroupId, folderId, searchContainer.getStart(), searchContainer.getEnd());
 
 		searchContainer.setResults(results);
 
@@ -118,10 +118,10 @@ List scores = null;
 
 			sb.append("</a>");
 
-			List subfolders = IGFolderLocalServiceUtil.getFolders(portletGroupId.longValue(), curFolder.getFolderId(), 0, 5);
+			List subfolders = IGFolderLocalServiceUtil.getFolders(scopeGroupId, curFolder.getFolderId(), 0, 5);
 
 			if (subfolders.size() > 0) {
-				int subfoldersCount = IGFolderLocalServiceUtil.getFoldersCount(portletGroupId.longValue(), curFolder.getFolderId());
+				int subfoldersCount = IGFolderLocalServiceUtil.getFoldersCount(scopeGroupId, curFolder.getFolderId());
 
 				sb.append("<br /><u>");
 				sb.append(LanguageUtil.get(pageContext, "subfolders"));
@@ -167,7 +167,7 @@ List scores = null;
 
 			subfolderIds.add(new Long(curFolder.getFolderId()));
 
-			IGFolderLocalServiceUtil.getSubfolderIds(subfolderIds, portletGroupId.longValue(), curFolder.getFolderId());
+			IGFolderLocalServiceUtil.getSubfolderIds(subfolderIds, scopeGroupId, curFolder.getFolderId());
 
 			int foldersCount = subfolderIds.size() - 1;
 			int imagesCount = IGImageLocalServiceUtil.getFoldersImagesCount(subfolderIds);
@@ -348,11 +348,11 @@ List scores = null;
 
 		SearchContainer searchContainer = new SearchContainer(renderRequest, null, null, SearchContainer.DEFAULT_CUR_PARAM, SearchContainer.DEFAULT_DELTA, portletURL, null, null);
 
-		int total = IGImageLocalServiceUtil.getGroupImagesCount(portletGroupId.longValue(), groupImagesUserId);
+		int total = IGImageLocalServiceUtil.getGroupImagesCount(scopeGroupId, groupImagesUserId);
 
 		searchContainer.setTotal(total);
 
-		List results = IGImageLocalServiceUtil.getGroupImages(portletGroupId.longValue(), groupImagesUserId, searchContainer.getStart(), searchContainer.getEnd());
+		List results = IGImageLocalServiceUtil.getGroupImages(scopeGroupId, groupImagesUserId, searchContainer.getStart(), searchContainer.getEnd());
 
 		searchContainer.setResults(results);
 		%>

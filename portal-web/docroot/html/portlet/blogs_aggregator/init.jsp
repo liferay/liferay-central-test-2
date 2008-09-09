@@ -51,7 +51,7 @@ int max = GetterUtil.getInteger(prefs.getValue("max", "20"));
 boolean enableRssSubscription = GetterUtil.getBoolean(prefs.getValue("enable-rss-subscription", null), true);
 
 if (organizationId == 0) {
-	Group group = GroupLocalServiceUtil.getGroup(themeDisplay.getPortletGroupId());
+	Group group = GroupLocalServiceUtil.getGroup(scopeGroupId);
 
 	if (group.isOrganization()) {
 		organizationId = group.getClassPK();

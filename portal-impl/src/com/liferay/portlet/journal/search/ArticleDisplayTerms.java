@@ -67,8 +67,7 @@ public class ArticleDisplayTerms extends DisplayTerms {
 		super(renderRequest);
 
 		groupId = ParamUtil.getLong(
-			renderRequest, GROUP_ID,
-			PortalUtil.getPortletGroupId(renderRequest));
+			renderRequest, GROUP_ID, PortalUtil.getScopeGroupId(renderRequest));
 		articleId = ParamUtil.getString(renderRequest, ARTICLE_ID);
 		version = ParamUtil.getDouble(renderRequest, VERSION);
 		title = ParamUtil.getString(renderRequest, TITLE);

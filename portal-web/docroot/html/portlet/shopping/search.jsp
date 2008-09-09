@@ -42,7 +42,7 @@ else {
 
 	categoryIds.add(new Long(searchCategoryIds));
 
-	ShoppingCategoryLocalServiceUtil.getSubcategoryIds(categoryIds, portletGroupId.longValue(), searchCategoryIds);
+	ShoppingCategoryLocalServiceUtil.getSubcategoryIds(categoryIds, scopeGroupId, searchCategoryIds);
 
 	categoryIdsArray = StringUtil.split(StringUtil.merge(categoryIds), 0L);
 }
@@ -86,11 +86,11 @@ headerNames.add(StringPool.BLANK);
 
 SearchContainer searchContainer = new SearchContainer(renderRequest, null, null, SearchContainer.DEFAULT_CUR_PARAM, SearchContainer.DEFAULT_DELTA, portletURL, headerNames, LanguageUtil.format(pageContext, "no-entries-were-found-that-matched-the-keywords-x", "<b>" + HtmlUtil.escape(keywords) + "</b>"));
 
-int total = ShoppingItemLocalServiceUtil.searchCount(portletGroupId.longValue(), categoryIdsArray, keywords);
+int total = ShoppingItemLocalServiceUtil.searchCount(scopeGroupId, categoryIdsArray, keywords);
 
 searchContainer.setTotal(total);
 
-List results = ShoppingItemLocalServiceUtil.search(portletGroupId.longValue(), categoryIdsArray, keywords, searchContainer.getStart(), searchContainer.getEnd());
+List results = ShoppingItemLocalServiceUtil.search(scopeGroupId, categoryIdsArray, keywords, searchContainer.getStart(), searchContainer.getEnd());
 
 searchContainer.setResults(results);
 

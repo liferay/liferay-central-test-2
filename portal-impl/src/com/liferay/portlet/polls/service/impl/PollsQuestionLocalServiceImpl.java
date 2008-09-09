@@ -127,7 +127,7 @@ public class PollsQuestionLocalServiceImpl
 		// Question
 
 		User user = userPersistence.findByPrimaryKey(userId);
-		long groupId = PortalUtil.getPortletGroupId(plid);
+		long groupId = PortalUtil.getScopeGroupId(plid);
 
 		Date expirationDate = null;
 

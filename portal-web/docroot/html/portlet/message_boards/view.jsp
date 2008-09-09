@@ -73,11 +73,11 @@ portletURL.setParameter("categoryId", String.valueOf(categoryId));
 
 		SearchContainer searchContainer = new SearchContainer(renderRequest, null, null, "cur1", SearchContainer.DEFAULT_DELTA, portletURL, headerNames, null);
 
-		int total = MBCategoryLocalServiceUtil.getCategoriesCount(portletGroupId.longValue(), categoryId);
+		int total = MBCategoryLocalServiceUtil.getCategoriesCount(scopeGroupId, categoryId);
 
 		searchContainer.setTotal(total);
 
-		List results = MBCategoryLocalServiceUtil.getCategories(portletGroupId.longValue(), categoryId, searchContainer.getStart(), searchContainer.getEnd());
+		List results = MBCategoryLocalServiceUtil.getCategories(scopeGroupId, categoryId, searchContainer.getStart(), searchContainer.getEnd());
 
 		searchContainer.setResults(results);
 
@@ -123,10 +123,10 @@ portletURL.setParameter("categoryId", String.valueOf(categoryId));
 			if (!restricted) {
 				sb.append("</a>");
 
-				List subcategories = MBCategoryLocalServiceUtil.getCategories(portletGroupId.longValue(), curCategory.getCategoryId(), 0, 5);
+				List subcategories = MBCategoryLocalServiceUtil.getCategories(scopeGroupId, curCategory.getCategoryId(), 0, 5);
 
 				if (subcategories.size() > 0) {
-					int subcategoriesCount = MBCategoryLocalServiceUtil.getCategoriesCount(portletGroupId.longValue(), curCategory.getCategoryId());
+					int subcategoriesCount = MBCategoryLocalServiceUtil.getCategoriesCount(scopeGroupId, curCategory.getCategoryId());
 
 					sb.append("<br /><span class=\"subcategories\">");
 					sb.append(LanguageUtil.get(pageContext, "subcategories"));
@@ -171,7 +171,7 @@ portletURL.setParameter("categoryId", String.valueOf(categoryId));
 
 			subcategoryIds.add(new Long(curCategory.getCategoryId()));
 
-			MBCategoryLocalServiceUtil.getSubcategoryIds(subcategoryIds, portletGroupId.longValue(), curCategory.getCategoryId());
+			MBCategoryLocalServiceUtil.getSubcategoryIds(subcategoryIds, scopeGroupId, curCategory.getCategoryId());
 
 			int categoriesCount = subcategoryIds.size() - 1;
 			int threadsCount = MBThreadLocalServiceUtil.getCategoriesThreadsCount(subcategoryIds);
@@ -465,13 +465,13 @@ portletURL.setParameter("categoryId", String.valueOf(categoryId));
 
 			SearchContainer searchContainer = new SearchContainer(renderRequest, null, null, "cur1", SearchContainer.DEFAULT_DELTA, portletURL, headerNames, "you-are-not-subscribed-to-any-categories");
 
-			int total = MBCategoryLocalServiceUtil.getSubscribedCategoriesCount(portletGroupId.longValue(), user.getUserId());
+			int total = MBCategoryLocalServiceUtil.getSubscribedCategoriesCount(scopeGroupId, user.getUserId());
 
 			searchContainer.setTotal(total);
 
 			totalCategories = total;
 
-			List results = MBCategoryLocalServiceUtil.getSubscribedCategories(portletGroupId.longValue(), user.getUserId(), searchContainer.getStart(), searchContainer.getEnd());
+			List results = MBCategoryLocalServiceUtil.getSubscribedCategories(scopeGroupId, user.getUserId(), searchContainer.getStart(), searchContainer.getEnd());
 
 			searchContainer.setResults(results);
 
@@ -522,7 +522,7 @@ portletURL.setParameter("categoryId", String.valueOf(categoryId));
 
 				subcategoryIds.add(new Long(curCategory.getCategoryId()));
 
-				MBCategoryLocalServiceUtil.getSubcategoryIds(subcategoryIds, portletGroupId.longValue(), curCategory.getCategoryId());
+				MBCategoryLocalServiceUtil.getSubcategoryIds(subcategoryIds, scopeGroupId, curCategory.getCategoryId());
 
 				int categoriesCount = subcategoryIds.size() - 1;
 				int threadsCount = MBThreadLocalServiceUtil.getCategoriesThreadsCount(subcategoryIds);
@@ -577,20 +577,20 @@ portletURL.setParameter("categoryId", String.valueOf(categoryId));
 		List results = null;
 
 		if (tabs1.equals("my_subscriptions")) {
-			int total = MBThreadLocalServiceUtil.getGroupThreadsCount(portletGroupId.longValue(), groupThreadsUserId, true);
+			int total = MBThreadLocalServiceUtil.getGroupThreadsCount(scopeGroupId, groupThreadsUserId, true);
 
 			searchContainer.setTotal(total);
 
-			results = MBThreadLocalServiceUtil.getGroupThreads(portletGroupId.longValue(), groupThreadsUserId, true, searchContainer.getStart(), searchContainer.getEnd());
+			results = MBThreadLocalServiceUtil.getGroupThreads(scopeGroupId, groupThreadsUserId, true, searchContainer.getStart(), searchContainer.getEnd());
 
 			searchContainer.setResults(results);
 		}
 		else {
-			int total = MBThreadLocalServiceUtil.getGroupThreadsCount(portletGroupId.longValue(), groupThreadsUserId);
+			int total = MBThreadLocalServiceUtil.getGroupThreadsCount(scopeGroupId, groupThreadsUserId);
 
 			searchContainer.setTotal(total);
 
-			results = MBThreadLocalServiceUtil.getGroupThreads(portletGroupId.longValue(), groupThreadsUserId, searchContainer.getStart(), searchContainer.getEnd());
+			results = MBThreadLocalServiceUtil.getGroupThreads(scopeGroupId, groupThreadsUserId, searchContainer.getStart(), searchContainer.getEnd());
 
 			searchContainer.setResults(results);
 		}
@@ -697,7 +697,7 @@ portletURL.setParameter("categoryId", String.valueOf(categoryId));
 		<c:if test='<%= tabs1.equals("recent_posts") %>'>
 
 			<%
-			String rssURL = themeDisplay.getPortalURL() + themeDisplay.getPathMain() + "/message_boards/rss?p_l_id=" + plid + "&groupId=" + portletGroupId.longValue();
+			String rssURL = themeDisplay.getPortalURL() + themeDisplay.getPathMain() + "/message_boards/rss?p_l_id=" + plid + "&groupId=" + scopeGroupId;
 
 			if (groupThreadsUserId > 0) {
 				rssURL += "&userId=" + groupThreadsUserId;
@@ -733,20 +733,20 @@ portletURL.setParameter("categoryId", String.valueOf(categoryId));
 
 		<c:choose>
 			<c:when test='<%= tabs2.equals("general") %>'>
-				<liferay-ui:message key="num-of-categories" />: <%= numberFormat.format(MBCategoryLocalServiceUtil.getCategoriesCount(portletGroupId.longValue())) %><br />
-				<liferay-ui:message key="num-of-posts" />: <%= numberFormat.format(MBMessageLocalServiceUtil.getGroupMessagesCount(portletGroupId.longValue())) %><br />
-				<liferay-ui:message key="num-of-participants" />: <%= numberFormat.format(MBStatsUserLocalServiceUtil.getStatsUsersCount(portletGroupId.longValue())) %>
+				<liferay-ui:message key="num-of-categories" />: <%= numberFormat.format(MBCategoryLocalServiceUtil.getCategoriesCount(scopeGroupId)) %><br />
+				<liferay-ui:message key="num-of-posts" />: <%= numberFormat.format(MBMessageLocalServiceUtil.getGroupMessagesCount(scopeGroupId)) %><br />
+				<liferay-ui:message key="num-of-participants" />: <%= numberFormat.format(MBStatsUserLocalServiceUtil.getStatsUsersCount(scopeGroupId)) %>
 			</c:when>
 			<c:when test='<%= tabs2.equals("top-posters") %>'>
 
 				<%
 				SearchContainer searchContainer = new SearchContainer(renderRequest, null, null, SearchContainer.DEFAULT_CUR_PARAM, SearchContainer.DEFAULT_DELTA, portletURL, null, "there-are-no-top-posters");
 
-				int total = MBStatsUserLocalServiceUtil.getStatsUsersCount(portletGroupId.longValue());
+				int total = MBStatsUserLocalServiceUtil.getStatsUsersCount(scopeGroupId);
 
 				searchContainer.setTotal(total);
 
-				List results = MBStatsUserLocalServiceUtil.getStatsUsers(portletGroupId.longValue(), searchContainer.getStart(), searchContainer.getEnd());
+				List results = MBStatsUserLocalServiceUtil.getStatsUsers(scopeGroupId, searchContainer.getStart(), searchContainer.getEnd());
 
 				searchContainer.setResults(results);
 
@@ -788,11 +788,11 @@ portletURL.setParameter("categoryId", String.valueOf(categoryId));
 
 		SearchContainer searchContainer = new SearchContainer(renderRequest, null, null, SearchContainer.DEFAULT_CUR_PARAM, SearchContainer.DEFAULT_DELTA, portletURL, headerNames, "there-are-no-banned-users");
 
-		int total = MBBanLocalServiceUtil.getBansCount(portletGroupId.longValue());
+		int total = MBBanLocalServiceUtil.getBansCount(scopeGroupId);
 
 		searchContainer.setTotal(total);
 
-		List results = MBBanLocalServiceUtil.getBans(portletGroupId.longValue(), searchContainer.getStart(), searchContainer.getEnd());
+		List results = MBBanLocalServiceUtil.getBans(scopeGroupId, searchContainer.getStart(), searchContainer.getEnd());
 
 		searchContainer.setResults(results);
 

@@ -67,8 +67,7 @@ public class DefineObjectsTag extends TagSupport {
 			}
 
 			pageContext.setAttribute(
-				"portletGroupId",
-				new Long(themeDisplay.getPortletGroupId()));
+				"scopeGroupId", new Long(themeDisplay.getScopeGroupId()));
 			pageContext.setAttribute(
 				"permissionChecker", themeDisplay.getPermissionChecker());
 			pageContext.setAttribute("locale", themeDisplay.getLocale());
@@ -78,6 +77,11 @@ public class DefineObjectsTag extends TagSupport {
 				"colorScheme", themeDisplay.getColorScheme());
 			pageContext.setAttribute(
 				"portletDisplay", themeDisplay.getPortletDisplay());
+
+			// Deprecated
+
+			pageContext.setAttribute(
+				"portletGroupId", new Long(themeDisplay.getScopeGroupId()));
 		}
 
 		return SKIP_BODY;

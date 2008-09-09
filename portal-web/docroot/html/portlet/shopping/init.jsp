@@ -108,7 +108,7 @@
 <%
 PortalPreferences portalPrefs = PortletPreferencesFactoryUtil.getPortalPreferences(request);
 
-ShoppingPreferences shoppingPrefs = ShoppingPreferences.getInstance(company.getCompanyId(), portletGroupId.longValue());
+ShoppingPreferences shoppingPrefs = ShoppingPreferences.getInstance(company.getCompanyId(), scopeGroupId);
 
 Currency currency = Currency.getInstance(shoppingPrefs.getCurrencyId());
 

@@ -25,7 +25,7 @@
 <%@ include file="/html/portlet/activities/init.jsp" %>
 
 <%
-Group group = GroupLocalServiceUtil.getGroup(themeDisplay.getPortletGroupId());
+Group group = GroupLocalServiceUtil.getGroup(scopeGroupId);
 
 int start = 0;
 int end = 10;

@@ -42,7 +42,7 @@ else {
 
 	folderIds.add(new Long(searchFolderIds));
 
-	DLFolderLocalServiceUtil.getSubfolderIds(folderIds, portletGroupId.longValue(), searchFolderIds);
+	DLFolderLocalServiceUtil.getSubfolderIds(folderIds, scopeGroupId, searchFolderIds);
 
 	folderIdsArray = StringUtil.split(StringUtil.merge(folderIds), 0L);
 }
@@ -87,7 +87,7 @@ headerNames.add(StringPool.BLANK);
 SearchContainer searchContainer = new SearchContainer(renderRequest, null, null, SearchContainer.DEFAULT_CUR_PARAM, SearchContainer.DEFAULT_DELTA, portletURL, headerNames, LanguageUtil.format(pageContext, "no-documents-were-found-that-matched-the-keywords-x", "<b>" + HtmlUtil.escape(keywords) + "</b>"));
 
 try {
-	Hits results = DLFolderLocalServiceUtil.search(company.getCompanyId(), portletGroupId.longValue(), folderIdsArray, keywords, searchContainer.getStart(), searchContainer.getEnd());
+	Hits results = DLFolderLocalServiceUtil.search(company.getCompanyId(), scopeGroupId, folderIdsArray, keywords, searchContainer.getStart(), searchContainer.getEnd());
 
 	int total = results.getLength();
 

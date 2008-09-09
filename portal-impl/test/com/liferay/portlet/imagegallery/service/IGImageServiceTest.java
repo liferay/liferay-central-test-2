@@ -71,8 +71,7 @@ public class IGImageServiceTest extends BaseServiceTestCase {
 	protected void setUp() throws Exception {
 		super.setUp();
 
-		long groupId = PortalUtil.getPortletGroupId(
-			TestPropsValues.LAYOUT_PLID);
+		long groupId = PortalUtil.getScopeGroupId(TestPropsValues.LAYOUT_PLID);
 
 		String name = "Test Folder";
 		String description = "This is a test folder.";

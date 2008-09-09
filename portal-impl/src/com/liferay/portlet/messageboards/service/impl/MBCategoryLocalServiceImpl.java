@@ -141,7 +141,7 @@ public class MBCategoryLocalServiceImpl extends MBCategoryLocalServiceBaseImpl {
 		// Category
 
 		User user = userPersistence.findByPrimaryKey(userId);
-		long groupId = PortalUtil.getPortletGroupId(plid);
+		long groupId = PortalUtil.getScopeGroupId(plid);
 		parentCategoryId = getParentCategoryId(groupId, parentCategoryId);
 		Date now = new Date();
 

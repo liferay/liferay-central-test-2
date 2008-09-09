@@ -1066,9 +1066,9 @@ public class ServicePreAction extends Action {
 
 		LayoutTypePortlet layoutTypePortlet = null;
 
-		long portletGroupId = PortalUtil.getPortletGroupId(layout);
+		long scopeGroupId = PortalUtil.getScopeGroupId(layout);
 
-		rememberVisitedGroupIds(request, portletGroupId);
+		rememberVisitedGroupIds(request, scopeGroupId);
 
 		layouts = mergeAdditionalLayouts(
 			request, user, permissionChecker, layout, layouts);
@@ -1248,7 +1248,7 @@ public class ServicePreAction extends Action {
 		themeDisplay.setLayouts(layouts);
 		themeDisplay.setPlid(plid);
 		themeDisplay.setLayoutTypePortlet(layoutTypePortlet);
-		themeDisplay.setPortletGroupId(portletGroupId);
+		themeDisplay.setScopeGroupId(scopeGroupId);
 		themeDisplay.setSignedIn(signedIn);
 		themeDisplay.setPermissionChecker(permissionChecker);
 		themeDisplay.setLocale(locale);
@@ -1345,8 +1345,7 @@ public class ServicePreAction extends Action {
 
 			boolean hasManageLayoutsPermission =
 				GroupPermissionUtil.contains(
-					permissionChecker, portletGroupId,
-					ActionKeys.MANAGE_LAYOUTS);
+					permissionChecker, scopeGroupId, ActionKeys.MANAGE_LAYOUTS);
 
 			if (group.isUser()) {
 				if ((layout.isPrivateLayout() &&
@@ -1380,7 +1379,7 @@ public class ServicePreAction extends Action {
 
 				pageSettingsURL.setParameter("redirect", currentURL);
 				pageSettingsURL.setParameter(
-					"groupId", String.valueOf(portletGroupId));
+					"groupId", String.valueOf(scopeGroupId));
 				pageSettingsURL.setParameter("selPlid", String.valueOf(plid));
 
 				themeDisplay.setURLPageSettings(pageSettingsURL);
@@ -1404,7 +1403,7 @@ public class ServicePreAction extends Action {
 
 				publishToLiveURL.setParameter("pagesRedirect", currentURL);
 				publishToLiveURL.setParameter(
-					"groupId", String.valueOf(portletGroupId));
+					"groupId", String.valueOf(scopeGroupId));
 				publishToLiveURL.setParameter("selPlid", String.valueOf(plid));
 
 				themeDisplay.setURLPublishToLive(publishToLiveURL);
@@ -1422,7 +1421,7 @@ public class ServicePreAction extends Action {
 			if (group.hasStagingGroup() || group.isStagingGroup()) {
 				boolean hasApproveProposalPermission =
 					GroupPermissionUtil.contains(
-						permissionChecker, portletGroupId,
+						permissionChecker, scopeGroupId,
 						ActionKeys.APPROVE_PROPOSAL);
 
 				if (hasManageLayoutsPermission) {

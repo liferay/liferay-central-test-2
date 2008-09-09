@@ -45,10 +45,10 @@ SearchContainer searchContainer = new SearchContainer(renderRequest, null, null,
 int total = 0;
 
 if (PortletPermissionUtil.contains(permissionChecker, plid.longValue(), PortletKeys.BLOGS, ActionKeys.ADD_ENTRY)) {
-	total = BlogsEntryLocalServiceUtil.getGroupEntriesCount(portletGroupId.longValue());
+	total = BlogsEntryLocalServiceUtil.getGroupEntriesCount(scopeGroupId);
 }
 else {
-	total = BlogsEntryLocalServiceUtil.getGroupEntriesCount(portletGroupId.longValue(), false);
+	total = BlogsEntryLocalServiceUtil.getGroupEntriesCount(scopeGroupId, false);
 }
 
 searchContainer.setTotal(total);
@@ -56,10 +56,10 @@ searchContainer.setTotal(total);
 List results = null;
 
 if (PortletPermissionUtil.contains(permissionChecker, plid.longValue(), PortletKeys.BLOGS, ActionKeys.ADD_ENTRY)) {
-	results = BlogsEntryLocalServiceUtil.getGroupEntries(portletGroupId.longValue(), searchContainer.getStart(), searchContainer.getEnd());
+	results = BlogsEntryLocalServiceUtil.getGroupEntries(scopeGroupId, searchContainer.getStart(), searchContainer.getEnd());
 }
 else {
-	results = BlogsEntryLocalServiceUtil.getGroupEntries(portletGroupId.longValue(), false, searchContainer.getStart(), searchContainer.getEnd());
+	results = BlogsEntryLocalServiceUtil.getGroupEntries(scopeGroupId, false, searchContainer.getStart(), searchContainer.getEnd());
 }
 
 searchContainer.setResults(results);

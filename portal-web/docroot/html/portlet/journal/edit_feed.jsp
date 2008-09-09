@@ -29,7 +29,7 @@ String redirect = ParamUtil.getString(request, "redirect");
 
 JournalFeed feed = (JournalFeed)request.getAttribute(WebKeys.JOURNAL_FEED);
 
-long groupId = BeanParamUtil.getLong(feed, request, "groupId", portletGroupId.longValue());
+long groupId = BeanParamUtil.getLong(feed, request, "groupId", scopeGroupId);
 
 String feedId = BeanParamUtil.getString(feed, request, "feedId");
 String newFeedId = ParamUtil.getString(request, "newFeedId");

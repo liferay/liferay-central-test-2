@@ -106,7 +106,7 @@ public class EditDiscussionAction extends PortletAction {
 	}
 
 	protected void deleteMessage(ActionRequest actionRequest) throws Exception {
-		long groupId = PortalUtil.getPortletGroupId(actionRequest);
+		long groupId = PortalUtil.getScopeGroupId(actionRequest);
 		String className = ParamUtil.getString(actionRequest, "className");
 		long classPK = ParamUtil.getLong(actionRequest, "classPK");
 
@@ -126,7 +126,7 @@ public class EditDiscussionAction extends PortletAction {
 		ThemeDisplay themeDisplay = (ThemeDisplay)actionRequest.getAttribute(
 			WebKeys.THEME_DISPLAY);
 
-		long groupId = PortalUtil.getPortletGroupId(actionRequest);
+		long groupId = PortalUtil.getScopeGroupId(actionRequest);
 		String className = ParamUtil.getString(actionRequest, "className");
 		long classPK = ParamUtil.getLong(actionRequest, "classPK");
 

@@ -206,7 +206,7 @@ public class AssetPublisherUtil {
 			WebKeys.THEME_DISPLAY);
 
 		String key =
-			AssetPublisherUtil.class + "_" + themeDisplay.getPortletGroupId();
+			AssetPublisherUtil.class + "_" + themeDisplay.getScopeGroupId();
 
 		Map<String, Long> recentFolderIds =
 			(Map<String, Long>)session.getAttribute(key);

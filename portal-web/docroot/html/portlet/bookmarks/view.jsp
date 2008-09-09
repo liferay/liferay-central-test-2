@@ -70,11 +70,11 @@ portletURL.setParameter("folderId", String.valueOf(folderId));
 
 		SearchContainer searchContainer = new SearchContainer(renderRequest, null, null, "cur1", SearchContainer.DEFAULT_DELTA, portletURL, headerNames, null);
 
-		int total = BookmarksFolderLocalServiceUtil.getFoldersCount(portletGroupId.longValue(), folderId);
+		int total = BookmarksFolderLocalServiceUtil.getFoldersCount(scopeGroupId, folderId);
 
 		searchContainer.setTotal(total);
 
-		List results = BookmarksFolderLocalServiceUtil.getFolders(portletGroupId.longValue(), folderId, searchContainer.getStart(), searchContainer.getEnd());
+		List results = BookmarksFolderLocalServiceUtil.getFolders(scopeGroupId, folderId, searchContainer.getStart(), searchContainer.getEnd());
 
 		searchContainer.setResults(results);
 
@@ -117,10 +117,10 @@ portletURL.setParameter("folderId", String.valueOf(folderId));
 
 			sb.append("</a>");
 
-			List subfolders = BookmarksFolderLocalServiceUtil.getFolders(portletGroupId.longValue(), curFolder.getFolderId(), 0, 5);
+			List subfolders = BookmarksFolderLocalServiceUtil.getFolders(scopeGroupId, curFolder.getFolderId(), 0, 5);
 
 			if (subfolders.size() > 0) {
-				int subfoldersCount = BookmarksFolderLocalServiceUtil.getFoldersCount(portletGroupId.longValue(), curFolder.getFolderId());
+				int subfoldersCount = BookmarksFolderLocalServiceUtil.getFoldersCount(scopeGroupId, curFolder.getFolderId());
 
 				sb.append("<br /><u>");
 				sb.append(LanguageUtil.get(pageContext, "subfolders"));
@@ -166,7 +166,7 @@ portletURL.setParameter("folderId", String.valueOf(folderId));
 
 			subfolderIds.add(new Long(curFolder.getFolderId()));
 
-			BookmarksFolderLocalServiceUtil.getSubfolderIds(subfolderIds, portletGroupId.longValue(), curFolder.getFolderId());
+			BookmarksFolderLocalServiceUtil.getSubfolderIds(subfolderIds, scopeGroupId, curFolder.getFolderId());
 
 			int foldersCount = subfolderIds.size() - 1;
 			int entriesCount = BookmarksEntryLocalServiceUtil.getFoldersEntriesCount(subfolderIds);
@@ -412,11 +412,11 @@ portletURL.setParameter("folderId", String.valueOf(folderId));
 
 		SearchContainer searchContainer = new SearchContainer(renderRequest, null, null, SearchContainer.DEFAULT_CUR_PARAM, SearchContainer.DEFAULT_DELTA, portletURL, headerNames, null);
 
-		int total = BookmarksEntryLocalServiceUtil.getGroupEntriesCount(portletGroupId.longValue(), groupEntriesUserId);
+		int total = BookmarksEntryLocalServiceUtil.getGroupEntriesCount(scopeGroupId, groupEntriesUserId);
 
 		searchContainer.setTotal(total);
 
-		List results = BookmarksEntryLocalServiceUtil.getGroupEntries(portletGroupId.longValue(), groupEntriesUserId, searchContainer.getStart(), searchContainer.getEnd());
+		List results = BookmarksEntryLocalServiceUtil.getGroupEntries(scopeGroupId, groupEntriesUserId, searchContainer.getStart(), searchContainer.getEnd());
 
 		searchContainer.setResults(results);
 

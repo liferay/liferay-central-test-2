@@ -156,7 +156,7 @@ public class CheckoutAction extends CartAction {
 			WebKeys.SHOPPING_ORDER);
 
 		ShoppingPreferences prefs = ShoppingPreferences.getInstance(
-			themeDisplay.getCompanyId(), themeDisplay.getPortletGroupId());
+			themeDisplay.getCompanyId(), themeDisplay.getScopeGroupId());
 
 		String returnURL = ShoppingUtil.getPayPalReturnURL(
 			((ActionResponseImpl)actionResponse).createActionURL(), order);
@@ -186,7 +186,7 @@ public class CheckoutAction extends CartAction {
 			WebKeys.THEME_DISPLAY);
 
 		ShoppingOrder order = ShoppingOrderLocalServiceUtil.getLatestOrder(
-			themeDisplay.getUserId(), themeDisplay.getPortletGroupId());
+			themeDisplay.getUserId(), themeDisplay.getScopeGroupId());
 
 		actionRequest.setAttribute(WebKeys.SHOPPING_ORDER, order);
 	}
@@ -275,7 +275,7 @@ public class CheckoutAction extends CartAction {
 		String comments = ParamUtil.getString(actionRequest, "comments");
 
 		ShoppingOrder order = ShoppingOrderLocalServiceUtil.updateLatestOrder(
-			themeDisplay.getUserId(), themeDisplay.getPortletGroupId(),
+			themeDisplay.getUserId(), themeDisplay.getScopeGroupId(),
 			billingFirstName, billingLastName, billingEmailAddress,
 			billingCompany, billingStreet, billingCity, billingState,
 			billingZip, billingCountry, billingPhone, shipToBilling,

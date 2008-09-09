@@ -679,7 +679,7 @@ public class ShoppingUtil {
 	public static ShoppingCart getCart(ThemeDisplay themeDisplay) {
 		ShoppingCart cart = new ShoppingCartImpl();
 
-		cart.setGroupId(themeDisplay.getPortletGroupId());
+		cart.setGroupId(themeDisplay.getScopeGroupId());
 		cart.setCompanyId(themeDisplay.getCompanyId());
 		cart.setUserId(themeDisplay.getUserId());
 		cart.setItemIds(StringPool.BLANK);
@@ -699,7 +699,7 @@ public class ShoppingUtil {
 			WebKeys.THEME_DISPLAY);
 
 		String sessionCartId =
-			ShoppingCart.class.getName() + themeDisplay.getPortletGroupId();
+			ShoppingCart.class.getName() + themeDisplay.getScopeGroupId();
 
 		if (themeDisplay.isSignedIn()) {
 			ShoppingCart cart = (ShoppingCart)portletSession.getAttribute(
@@ -711,7 +711,7 @@ public class ShoppingUtil {
 
 			if ((cart != null) && (cart.getItemsSize() > 0)) {
 				cart = ShoppingCartLocalServiceUtil.updateCart(
-					themeDisplay.getUserId(), themeDisplay.getPortletGroupId(),
+					themeDisplay.getUserId(), themeDisplay.getScopeGroupId(),
 					cart.getItemIds(), cart.getCouponCodes(),
 					cart.getAltShipping(), cart.isInsure());
 			}
@@ -719,14 +719,14 @@ public class ShoppingUtil {
 				try {
 					cart = ShoppingCartLocalServiceUtil.getCart(
 						themeDisplay.getUserId(),
-						themeDisplay.getPortletGroupId());
+						themeDisplay.getScopeGroupId());
 				}
 				catch (NoSuchCartException nsce) {
 					cart = getCart(themeDisplay);
 
 					cart = ShoppingCartLocalServiceUtil.updateCart(
 						themeDisplay.getUserId(),
-						themeDisplay.getPortletGroupId(), cart.getItemIds(),
+						themeDisplay.getScopeGroupId(), cart.getItemIds(),
 						cart.getCouponCodes(), cart.getAltShipping(),
 						cart.isInsure());
 				}

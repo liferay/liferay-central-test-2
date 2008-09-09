@@ -235,12 +235,19 @@ public class ThemeDisplay implements Serializable {
 		_layoutTypePortlet = layoutTypePortlet;
 	}
 
+	/**
+	 * @deprecated Use <code>getScopeGroupId</code>.
+	 */
 	public long getPortletGroupId() {
-		return _portletGroupId;
+		return getScopeGroupId();
 	}
 
-	public void setPortletGroupId(long portletGroupId) {
-		_portletGroupId = portletGroupId;
+	public long getScopeGroupId() {
+		return _scopeGroupId;
+	}
+
+	public void setScopeGroupId(long scopeGroupId) {
+		_scopeGroupId = scopeGroupId;
 	}
 
 	public boolean isSignedIn() {
@@ -945,7 +952,7 @@ public class ThemeDisplay implements Serializable {
 		_layouts = null;
 		_plid = 0;
 		_layoutTypePortlet = null;
-		_portletGroupId = 0;
+		_scopeGroupId = 0;
 		_signedIn = false;
 		_permissionChecker = null;
 		_locale = null;
@@ -1041,7 +1048,7 @@ public class ThemeDisplay implements Serializable {
 	private List<Layout> _layouts;
 	private long _plid;
 	private LayoutTypePortlet _layoutTypePortlet;
-	private long _portletGroupId;
+	private long _scopeGroupId;
 	private boolean _signedIn;
 	private PermissionChecker _permissionChecker;
 	private Locale _locale;

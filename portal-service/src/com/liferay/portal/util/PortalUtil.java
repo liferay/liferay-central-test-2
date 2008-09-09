@@ -420,22 +420,37 @@ public class PortalUtil {
 			groupId, privateLayout, url, params);
 	}
 
+	/**
+	 * @deprecated Use <code>getScopeGroupId</code>.
+	 */
 	public static long getPortletGroupId(long plid) {
 		return getPortal().getPortletGroupId(plid);
 	}
 
+	/**
+	 * @deprecated Use <code>getScopeGroupId</code>.
+	 */
 	public static long getPortletGroupId(Layout layout) {
 		return getPortal().getPortletGroupId(layout);
 	}
 
+	/**
+	 * @deprecated Use <code>getScopeGroupId</code>.
+	 */
 	public static long getPortletGroupId(HttpServletRequest request) {
 		return getPortal().getPortletGroupId(request);
 	}
 
+	/**
+	 * @deprecated Use <code>getScopeGroupId</code>.
+	 */
 	public static long getPortletGroupId(ActionRequest actionRequest) {
 		return getPortal().getPortletGroupId(actionRequest);
 	}
 
+	/**
+	 * @deprecated Use <code>getScopeGroupId</code>.
+	 */
 	public static long getPortletGroupId(RenderRequest renderRequest) {
 		return getPortal().getPortletGroupId(renderRequest);
 	}
@@ -454,18 +469,6 @@ public class PortalUtil {
 
 	public static String getPortletNamespace(String portletId) {
 		return getPortal().getPortletNamespace(portletId);
-	}
-
-	public static long getPortletScopeGroupId(ActionRequest req) {
-		return getPortal().getPortletScopeGroupId(req);
-	}
-
-	public static long getPortletScopeGroupId(HttpServletRequest req) {
-		return getPortal().getPortletScopeGroupId(req);
-	}
-
-	public static long getPortletScopeGroupId(Layout layout, String portletId) {
-		return getPortal().getPortletScopeGroupId(layout, portletId);
 	}
 
 	public static String getPortletTitle(
@@ -520,6 +523,26 @@ public class PortalUtil {
 		Portlet portlet) {
 
 		return getPortal().getPreferencesValidator(portlet);
+	}
+
+	public static long getScopeGroupId(long plid) {
+		return getPortal().getScopeGroupId(plid);
+	}
+
+	public static long getScopeGroupId(Layout layout) {
+		return getPortal().getScopeGroupId(layout);
+	}
+
+	public static long getScopeGroupId(HttpServletRequest request) {
+		return getPortal().getScopeGroupId(request);
+	}
+
+	public static long getScopeGroupId(ActionRequest actionRequest) {
+		return getPortal().getScopeGroupId(actionRequest);
+	}
+
+	public static long getScopeGroupId(RenderRequest renderRequest) {
+		return getPortal().getScopeGroupId(renderRequest);
 	}
 
 	public static User getSelectedUser(HttpServletRequest request)

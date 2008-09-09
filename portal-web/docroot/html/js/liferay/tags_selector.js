@@ -229,7 +229,7 @@ Liferay.TagsSelector = new Class({
 
 		var data = Liferay.Service.Tags.TagsEntry.searchAutocomplete(
 			{
-				groupId: themeDisplay.getGroupId(),
+				groupId: themeDisplay.getScopeGroupId(),
 				name: "%" + term + "%",
 				properties: "",
 				begin: beginning,

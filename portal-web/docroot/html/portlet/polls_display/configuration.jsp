@@ -27,7 +27,7 @@
 <%
 questionId = ParamUtil.getLong(request, "questionId", questionId);
 
-List questions = PollsQuestionLocalServiceUtil.getQuestions(portletGroupId.longValue());
+List questions = PollsQuestionLocalServiceUtil.getQuestions(scopeGroupId);
 %>
 
 <form action="<liferay-portlet:actionURL portletConfiguration="true" />" method="post" name="<portlet:namespace />fm">

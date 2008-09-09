@@ -125,9 +125,7 @@ public class EditUserAction extends PortletAction {
 
 					Group group = user.getGroup();
 
-					if (group.getGroupId() ==
-							themeDisplay.getPortletGroupId()) {
-
+					if (group.getGroupId() == themeDisplay.getScopeGroupId()) {
 						Layout layout = themeDisplay.getLayout();
 
 						String friendlyURLPath = group.getPathFriendlyURL(

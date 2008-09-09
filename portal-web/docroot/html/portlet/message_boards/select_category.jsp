@@ -56,11 +56,11 @@ headerNames.add(StringPool.BLANK);
 
 SearchContainer searchContainer = new SearchContainer(renderRequest, null, null, SearchContainer.DEFAULT_CUR_PARAM, SearchContainer.DEFAULT_DELTA, portletURL, headerNames, null);
 
-int total = MBCategoryLocalServiceUtil.getCategoriesCount(portletGroupId.longValue(), categoryId);
+int total = MBCategoryLocalServiceUtil.getCategoriesCount(scopeGroupId, categoryId);
 
 searchContainer.setTotal(total);
 
-List results = MBCategoryLocalServiceUtil.getCategories(portletGroupId.longValue(), categoryId, searchContainer.getStart(), searchContainer.getEnd());
+List results = MBCategoryLocalServiceUtil.getCategories(scopeGroupId, categoryId, searchContainer.getStart(), searchContainer.getEnd());
 
 searchContainer.setResults(results);
 
@@ -97,7 +97,7 @@ for (int i = 0; i < results.size(); i++) {
 
 	subcategoryIds.add(new Long(curCategory.getCategoryId()));
 
-	MBCategoryLocalServiceUtil.getSubcategoryIds(subcategoryIds, portletGroupId.longValue(), curCategory.getCategoryId());
+	MBCategoryLocalServiceUtil.getSubcategoryIds(subcategoryIds, scopeGroupId, curCategory.getCategoryId());
 
 	int categoriesCount = subcategoryIds.size() - 1;
 	int threadsCount = MBThreadLocalServiceUtil.getCategoriesThreadsCount(subcategoryIds);

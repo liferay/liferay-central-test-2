@@ -252,7 +252,7 @@ public class JournalArticleLocalServiceImpl
 			String[] communityPermissions, String[] guestPermissions)
 		throws PortalException, SystemException {
 
-		long groupId = PortalUtil.getPortletGroupId(plid);
+		long groupId = PortalUtil.getScopeGroupId(plid);
 
 		return addArticleToGroup(
 			uuid, userId, articleId, autoArticleId, groupId, version, title,

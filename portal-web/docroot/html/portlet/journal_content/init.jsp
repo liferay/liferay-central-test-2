@@ -51,7 +51,7 @@ if (Validator.isNotNull(portletResource)) {
 	prefs = PortletPreferencesFactoryUtil.getPortletSetup(request, portletResource);
 }
 
-long groupId = GetterUtil.getLong(prefs.getValue("group-id", portletGroupId.toString()));
+long groupId = GetterUtil.getLong(prefs.getValue("group-id", scopeGroupId.toString()));
 String articleId = GetterUtil.getString(prefs.getValue("article-id", StringPool.BLANK));
 String templateId = GetterUtil.getString(prefs.getValue("template-id", StringPool.BLANK));
 boolean showAvailableLocales = GetterUtil.getBoolean(prefs.getValue("show-available-locales", StringPool.BLANK));

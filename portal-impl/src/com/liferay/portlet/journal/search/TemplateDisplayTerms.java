@@ -50,8 +50,7 @@ public class TemplateDisplayTerms extends DisplayTerms {
 		super(renderRequest);
 
 		groupId = ParamUtil.getLong(
-			renderRequest, GROUP_ID,
-			PortalUtil.getPortletGroupId(renderRequest));
+			renderRequest, GROUP_ID, PortalUtil.getScopeGroupId(renderRequest));
 		templateId = ParamUtil.getString(renderRequest, TEMPLATE_ID);
 		structureId = ParamUtil.getString(renderRequest, STRUCTURE_ID);
 		name = ParamUtil.getString(renderRequest, NAME);

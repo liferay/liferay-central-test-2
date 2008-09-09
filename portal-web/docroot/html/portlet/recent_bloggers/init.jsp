@@ -44,7 +44,7 @@ String displayStyle = prefs.getValue("display-style", "user-name-and-image");
 int max = GetterUtil.getInteger(prefs.getValue("max", "10"));
 
 if (organizationId == 0) {
-	Group group = GroupLocalServiceUtil.getGroup(themeDisplay.getPortletGroupId());
+	Group group = GroupLocalServiceUtil.getGroup(scopeGroupId);
 
 	if (group.isOrganization()) {
 		organizationId = group.getClassPK();

@@ -90,7 +90,6 @@ import com.liferay.portlet.ActionRequestImpl;
 import com.liferay.portlet.ActionResponseImpl;
 import com.liferay.portlet.PortletConfigFactory;
 import com.liferay.portlet.PortletConfigImpl;
-import com.liferay.portlet.PortletPreferencesFactoryUtil;
 import com.liferay.portlet.PortletPreferencesImpl;
 import com.liferay.portlet.PortletPreferencesWrapper;
 import com.liferay.portlet.PortletRequestImpl;
@@ -1515,6 +1514,9 @@ public class PortalImpl implements Portal {
 		return new Object[] {layout, queryString};
 	}
 
+	/**
+	 * @deprecated Use <code>getScopeGroupId</code>.
+	 */
 	public long getPortletGroupId(long plid) {
 		Layout layout = null;
 
@@ -1527,27 +1529,32 @@ public class PortalImpl implements Portal {
 		return getPortletGroupId(layout);
 	}
 
+	/**
+	 * @deprecated Use <code>getScopeGroupId</code>.
+	 */
 	public long getPortletGroupId(Layout layout) {
-		if (layout == null) {
-			return 0;
-		}
-		else {
-			return layout.getGroupId();
-		}
+		return getScopeGroupId(layout);
 	}
 
+	/**
+	 * @deprecated Use <code>getScopeGroupId</code>.
+	 */
 	public long getPortletGroupId(HttpServletRequest request) {
-		Layout layout = (Layout)request.getAttribute(WebKeys.LAYOUT);
-
-		return getPortletGroupId(layout);
+		return getScopeGroupId(request);
 	}
 
+	/**
+	 * @deprecated Use <code>getScopeGroupId</code>.
+	 */
 	public long getPortletGroupId(ActionRequest actionRequest) {
-		return getPortletGroupId(getHttpServletRequest(actionRequest));
+		return getScopeGroupId(actionRequest);
 	}
 
+	/**
+	 * @deprecated Use <code>getScopeGroupId</code>.
+	 */
 	public long getPortletGroupId(RenderRequest renderRequest) {
-		return getPortletGroupId(getHttpServletRequest(renderRequest));
+		return getScopeGroupId(renderRequest);
 	}
 
 	public String getPortletId(HttpServletRequest request) {
@@ -1581,43 +1588,6 @@ public class PortalImpl implements Portal {
 		sb.append(StringPool.UNDERLINE);
 
 		return sb.toString();
-	}
-
-	public long getPortletScopeGroupId(ActionRequest actionRequest) {
-		return getPortletScopeGroupId(getHttpServletRequest(actionRequest));
-	}
-
-	public long getPortletScopeGroupId(HttpServletRequest request) {
-		ThemeDisplay themeDisplay = (ThemeDisplay)request.getAttribute(
-			WebKeys.THEME_DISPLAY);
-
-		Layout layout = themeDisplay.getLayout();
-		String portletId = getPortletId(request);
-
-		return getPortletScopeGroupId(layout, portletId);
-	}
-
-	public long getPortletScopeGroupId(Layout layout, String portletId) {
-		try {
-			PortletPreferences prefs =
-				PortletPreferencesFactoryUtil.getLayoutPortletSetup(
-					layout, portletId);
-
-			long scopeLayoutId = GetterUtil.getLong(
-				prefs.getValue("lfr-scope-layout-id", StringPool.BLANK));
-
-			if (scopeLayoutId > 0) {
-				Layout scopeLayout = LayoutLocalServiceUtil.getLayout(
-					layout.getGroupId(), layout.isPrivateLayout(),
-					scopeLayoutId);
-
-				return scopeLayout.getScopeGroup().getGroupId();
-			}
-		}
-		catch (Exception e) {
-		}
-
-		return getPortletGroupId(layout);
 	}
 
 	public String getPortletTitle(
@@ -1726,6 +1696,41 @@ public class PortalImpl implements Portal {
 
 			return prefsValidator;
 		}
+	}
+
+	public long getScopeGroupId(long plid) {
+		Layout layout = null;
+
+		try {
+			layout = LayoutLocalServiceUtil.getLayout(plid);
+		}
+		catch (Exception e) {
+		}
+
+		return getScopeGroupId(layout);
+	}
+
+	public long getScopeGroupId(Layout layout) {
+		if (layout == null) {
+			return 0;
+		}
+		else {
+			return layout.getGroupId();
+		}
+	}
+
+	public long getScopeGroupId(HttpServletRequest request) {
+		Layout layout = (Layout)request.getAttribute(WebKeys.LAYOUT);
+
+		return getScopeGroupId(layout);
+	}
+
+	public long getScopeGroupId(ActionRequest actionRequest) {
+		return getScopeGroupId(getHttpServletRequest(actionRequest));
+	}
+
+	public long getScopeGroupId(RenderRequest renderRequest) {
+		return getScopeGroupId(getHttpServletRequest(renderRequest));
 	}
 
 	public User getSelectedUser(HttpServletRequest request)
@@ -2938,7 +2943,7 @@ public class PortalImpl implements Portal {
 					(LayoutTypePortlet)layout.getLayoutType();
 
 				if (layoutTypePortlet.hasPortletId(portletId)) {
-					if (getPortletScopeGroupId(layout, portletId) == groupId) {
+					if (getScopeGroupId(layout) == groupId) {
 						plid = layout.getPlid();
 
 						break;

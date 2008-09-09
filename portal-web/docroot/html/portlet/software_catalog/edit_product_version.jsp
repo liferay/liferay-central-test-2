@@ -122,7 +122,7 @@ editProductEntryURL.setParameter("productEntryId", String.valueOf(productEntryId
 			<select multiple="true" name="<portlet:namespace/>frameworkVersions">
 
 				<%
-				Iterator itr = SCFrameworkVersionServiceUtil.getFrameworkVersions(portletGroupId.longValue(), true).iterator();
+				Iterator itr = SCFrameworkVersionServiceUtil.getFrameworkVersions(scopeGroupId, true).iterator();
 
 				while (itr.hasNext()) {
 					SCFrameworkVersion frameworkVersion = (SCFrameworkVersion)itr.next();

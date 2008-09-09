@@ -57,10 +57,10 @@ for (int j = 0; j < folderColumns.length; j++) {
 
 		sb.append("</a>");
 
-		List subfolders = DLFolderLocalServiceUtil.getFolders(portletGroupId.longValue(), curFolder.getFolderId(), 0, 5);
+		List subfolders = DLFolderLocalServiceUtil.getFolders(scopeGroupId, curFolder.getFolderId(), 0, 5);
 
 		if (subfolders.size() > 0) {
-			int subfoldersCount = DLFolderLocalServiceUtil.getFoldersCount(portletGroupId.longValue(), curFolder.getFolderId());
+			int subfoldersCount = DLFolderLocalServiceUtil.getFoldersCount(scopeGroupId, curFolder.getFolderId());
 
 			sb.append("<br /><u>");
 			sb.append(LanguageUtil.get(pageContext, "subfolders"));

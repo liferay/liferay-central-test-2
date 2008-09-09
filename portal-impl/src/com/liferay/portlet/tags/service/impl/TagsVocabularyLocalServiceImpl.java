@@ -72,7 +72,7 @@ public class TagsVocabularyLocalServiceImpl
 			String[] communityPermissions, String[] guestPermissions)
 		throws PortalException, SystemException {
 
-		long groupId = PortalUtil.getPortletGroupId(plid);
+		long groupId = PortalUtil.getScopeGroupId(plid);
 
 		return addVocabularyToGroup(
 			userId, groupId, name, folksonomy, addCommunityPermissions,

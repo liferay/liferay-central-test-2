@@ -74,7 +74,7 @@ public class ShoppingCouponLocalServiceImpl
 		// Coupon
 
 		User user = userPersistence.findByPrimaryKey(userId);
-		long groupId = PortalUtil.getPortletGroupId(plid);
+		long groupId = PortalUtil.getScopeGroupId(plid);
 
 		code = code.trim().toUpperCase();
 
@@ -162,7 +162,7 @@ public class ShoppingCouponLocalServiceImpl
 			String discountType, boolean andOperator, int start, int end)
 		throws SystemException {
 
-		long groupId = PortalUtil.getPortletGroupId(plid);
+		long groupId = PortalUtil.getScopeGroupId(plid);
 
 		return shoppingCouponFinder.findByG_C_C_A_DT(
 			groupId, companyId, code, active, discountType, andOperator,

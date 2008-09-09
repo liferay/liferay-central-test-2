@@ -62,7 +62,7 @@ public class ViewAction extends PortletAction {
 			WebKeys.THEME_DISPLAY);
 
 		Group group = GroupLocalServiceUtil.getGroup(
-			themeDisplay.getPortletGroupId());
+			themeDisplay.getScopeGroupId());
 
 		User user = themeDisplay.getUser();
 

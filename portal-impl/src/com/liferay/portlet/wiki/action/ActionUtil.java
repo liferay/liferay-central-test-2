@@ -137,7 +137,7 @@ public class ActionUtil {
 		}
 		else if (Validator.isNotNull(nodeName)) {
 			node = WikiNodeServiceUtil.getNode(
-				themeDisplay.getPortletGroupId(), nodeName);
+				themeDisplay.getScopeGroupId(), nodeName);
 		}
 
 		request.setAttribute(WebKeys.WIKI_NODE, node);

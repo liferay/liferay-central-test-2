@@ -70,7 +70,7 @@ portletURL.setParameter("typeSelection", BlogsEntry.class.getName());
 		SearchContainer searchContainer = new SearchContainer(renderRequest, null, null, SearchContainer.DEFAULT_CUR_PARAM, SearchContainer.DEFAULT_DELTA, portletURL, headerNames, LanguageUtil.format(pageContext, "no-entries-were-found-that-matched-the-keywords-x", "<b>" + HtmlUtil.escape(keywords) + "</b>"));
 
 		try {
-			Hits results = BlogsEntryLocalServiceUtil.search(company.getCompanyId(), portletGroupId.longValue(), userId, keywords, searchContainer.getStart(), searchContainer.getEnd());
+			Hits results = BlogsEntryLocalServiceUtil.search(company.getCompanyId(), scopeGroupId, userId, keywords, searchContainer.getStart(), searchContainer.getEnd());
 			int total = results.getLength();
 
 			searchContainer.setTotal(total);
@@ -144,11 +144,11 @@ portletURL.setParameter("typeSelection", BlogsEntry.class.getName());
 
 		SearchContainer searchContainer = new SearchContainer(renderRequest, null, null, SearchContainer.DEFAULT_CUR_PARAM, SearchContainer.DEFAULT_DELTA, portletURL, headerNames, "there-are-no-entries");
 
-		int total = BlogsEntryLocalServiceUtil.getGroupEntriesCount(portletGroupId.longValue());
+		int total = BlogsEntryLocalServiceUtil.getGroupEntriesCount(scopeGroupId);
 
 		searchContainer.setTotal(total);
 
-		List results = BlogsEntryLocalServiceUtil.getGroupEntries(portletGroupId.longValue(), searchContainer.getStart(), searchContainer.getEnd());
+		List results = BlogsEntryLocalServiceUtil.getGroupEntries(scopeGroupId, searchContainer.getStart(), searchContainer.getEnd());
 
 		searchContainer.setResults(results);
 

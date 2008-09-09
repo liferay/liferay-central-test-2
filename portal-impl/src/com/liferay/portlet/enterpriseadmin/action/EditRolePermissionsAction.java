@@ -132,7 +132,7 @@ public class EditRolePermissionsAction extends PortletAction {
 		long permissionId = ParamUtil.getLong(actionRequest, "permissionId");
 
 		PermissionServiceUtil.unsetRolePermission(
-			roleId, themeDisplay.getPortletGroupId(), permissionId);
+			roleId, themeDisplay.getScopeGroupId(), permissionId);
 
 		// Send redirect
 
@@ -193,7 +193,7 @@ public class EditRolePermissionsAction extends PortletAction {
 
 				if (scope == ResourceConstants.SCOPE_COMPANY) {
 					PermissionServiceUtil.setRolePermission(
-						roleId, themeDisplay.getPortletGroupId(), selResource,
+						roleId, themeDisplay.getScopeGroupId(), selResource,
 						scope, String.valueOf(themeDisplay.getCompanyId()),
 						actionId);
 				}
@@ -202,8 +202,8 @@ public class EditRolePermissionsAction extends PortletAction {
 						(role.getType() == RoleImpl.TYPE_ORGANIZATION)) {
 
 						PermissionServiceUtil.setRolePermission(
-							roleId, themeDisplay.getPortletGroupId(),
-							selResource, ResourceConstants.SCOPE_GROUP_TEMPLATE,
+							roleId, themeDisplay.getScopeGroupId(), selResource,
+							ResourceConstants.SCOPE_GROUP_TEMPLATE,
 							String.valueOf(GroupImpl.DEFAULT_PARENT_GROUP_ID),
 							actionId);
 					}
@@ -223,13 +223,13 @@ public class EditRolePermissionsAction extends PortletAction {
 						groupIds = ArrayUtil.distinct(groupIds);
 
 						PermissionServiceUtil.unsetRolePermissions(
-							roleId, themeDisplay.getPortletGroupId(),
+							roleId, themeDisplay.getScopeGroupId(),
 							selResource, ResourceConstants.SCOPE_GROUP,
 							actionId);
 
 						for (int j = 0; j < groupIds.length; j++) {
 							PermissionServiceUtil.setRolePermission(
-								roleId, themeDisplay.getPortletGroupId(),
+								roleId, themeDisplay.getScopeGroupId(),
 								selResource, ResourceConstants.SCOPE_GROUP,
 								groupIds[j], actionId);
 						}
@@ -240,15 +240,15 @@ public class EditRolePermissionsAction extends PortletAction {
 					// Remove company, group template, and group permissions
 
 					PermissionServiceUtil.unsetRolePermissions(
-						roleId, themeDisplay.getPortletGroupId(), selResource,
+						roleId, themeDisplay.getScopeGroupId(), selResource,
 						ResourceConstants.SCOPE_COMPANY, actionId);
 
 					PermissionServiceUtil.unsetRolePermissions(
-						roleId, themeDisplay.getPortletGroupId(), selResource,
+						roleId, themeDisplay.getScopeGroupId(), selResource,
 						ResourceConstants.SCOPE_GROUP_TEMPLATE, actionId);
 
 					PermissionServiceUtil.unsetRolePermissions(
-						roleId, themeDisplay.getPortletGroupId(), selResource,
+						roleId, themeDisplay.getScopeGroupId(), selResource,
 						ResourceConstants.SCOPE_GROUP, actionId);
 				}
 			}

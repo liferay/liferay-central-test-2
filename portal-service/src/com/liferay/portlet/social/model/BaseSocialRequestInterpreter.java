@@ -56,7 +56,7 @@ public abstract class BaseSocialRequestInterpreter
 
 			Group group = user.getGroup();
 
-			if (group.getGroupId() == themeDisplay.getPortletGroupId()) {
+			if (group.getGroupId() == themeDisplay.getScopeGroupId()) {
 				return userName;
 			}
 

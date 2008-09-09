@@ -311,7 +311,7 @@ public class VelocityVariables {
 		velocityContext.put(
 			"userPermission", UserPermissionUtil.getUserPermission());
 
-		// Deprecated permissions
+		// Deprecated
 
 		velocityContext.put(
 			"locationPermission",
@@ -387,7 +387,7 @@ public class VelocityVariables {
 			velocityContext.put(
 				"layoutTypePortlet", themeDisplay.getLayoutTypePortlet());
 			velocityContext.put(
-				"portletGroupId", new Long(themeDisplay.getPortletGroupId()));
+				"scopeGroupId", new Long(themeDisplay.getScopeGroupId()));
 			velocityContext.put(
 				"permissionChecker", themeDisplay.getPermissionChecker());
 			velocityContext.put("locale", themeDisplay.getLocale());
@@ -432,6 +432,11 @@ public class VelocityVariables {
 				themeDisplay.getPathContext() +
 					VelocityResourceListener.SERVLET_SEPARATOR +
 						"/html/themes/_unstyled/templates/init.vm");
+
+			// Deprecated
+
+			velocityContext.put(
+				"portletGroupId", new Long(themeDisplay.getScopeGroupId()));
 		}
 
 		// Tiles attributes

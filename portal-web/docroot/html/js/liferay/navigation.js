@@ -327,7 +327,7 @@ Liferay.Navigation = new Class({
 					stop: function(event, ui) {
 						instance._saveSortables(ui.item[0]);
 
-						Liferay.trigger('navigation', 
+						Liferay.trigger('navigation',
 							{
 								item: ui.item[0],
 								type: 'sort'
@@ -349,7 +349,7 @@ Liferay.Navigation = new Class({
 			var data = {
 				doAsUserId: themeDisplay.getDoAsUserIdEncoded(),
 				cmd: 'delete',
-				groupId: themeDisplay.getGroupId(),
+				groupId: themeDisplay.getScopeGroupId(),
 				privateLayout: themeDisplay.isPrivateLayout(),
 				layoutId: tab[0]._LFR_layoutId
 			};
@@ -358,7 +358,7 @@ Liferay.Navigation = new Class({
 				{
 					data: data,
 					success: function() {
-						Liferay.trigger('navigation', 
+						Liferay.trigger('navigation',
 							{
 								item: tab,
 								type: 'delete'
@@ -395,7 +395,7 @@ Liferay.Navigation = new Class({
 				data = {
 					doAsUserId: themeDisplay.getDoAsUserIdEncoded(),
 					cmd: 'name',
-					groupId: themeDisplay.getGroupId(),
+					groupId: themeDisplay.getScopeGroupId(),
 					privateLayout: themeDisplay.isPrivateLayout(),
 					layoutId: themeDisplay.getLayoutId(),
 					name: name,
@@ -440,7 +440,7 @@ Liferay.Navigation = new Class({
 				mainPath: themeDisplay.getPathMain(),
 				doAsUserId: themeDisplay.getDoAsUserIdEncoded(),
 				cmd: 'add',
-				groupId: themeDisplay.getGroupId(),
+				groupId: themeDisplay.getScopeGroupId(),
 				privateLayout: themeDisplay.isPrivateLayout(),
 				parentLayoutId: themeDisplay.getParentLayoutId(),
 				name: name
@@ -493,7 +493,7 @@ Liferay.Navigation = new Class({
 		var data = {
 			doAsUserId: themeDisplay.getDoAsUserIdEncoded(),
 			cmd: 'priority',
-			groupId: themeDisplay.getGroupId(),
+			groupId: themeDisplay.getScopeGroupId(),
 			privateLayout: themeDisplay.isPrivateLayout(),
 			layoutId: obj._LFR_layoutId,
 			priority: tabs.index(obj)

@@ -207,7 +207,7 @@ public class ConfigurationActionImpl implements ConfigurationAction {
 			WebKeys.THEME_DISPLAY);
 
 		long userId = themeDisplay.getUserId();
-		long groupId = themeDisplay.getPortletGroupId();
+		long groupId = themeDisplay.getScopeGroupId();
 
 		String[] entries = StringUtil.split(
 			ParamUtil.getString(actionRequest, "entries"));

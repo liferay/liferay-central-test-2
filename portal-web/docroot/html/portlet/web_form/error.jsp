@@ -25,14 +25,13 @@
 <%@ include file="/html/portlet/web_form/init.jsp" %>
 
 <%
-long groupId = themeDisplay.getPortletGroupId();
 String name = portletDisplay.getRootPortletId();
 String primKey = portletDisplay.getResourcePK();
 %>
 
 <div>
 	<c:choose>
-		<c:when test="<%= permissionChecker.hasPermission(groupId, name, primKey, ActionKeys.CONFIGURATION) %>">
+		<c:when test="<%= permissionChecker.hasPermission(scopeGroupId, name, primKey, ActionKeys.CONFIGURATION) %>">
 			<span class="portlet-msg-error"><liferay-ui:message key="an-error-occurred-while-executing-the-validation.-please-review-the-following-errors" /></span>
 
 			<pre><%= request.getAttribute("validationScriptError") %></pre>

@@ -35,7 +35,7 @@ if (showCompanyCategories.booleanValue()) {
 	vocabularies = TagsVocabularyServiceUtil.getCompanyVocabularies(company.getCompanyId(), false);
 }
 else {
-	vocabularies = TagsVocabularyServiceUtil.getGroupVocabularies(portletGroupId.longValue(), false);
+	vocabularies = TagsVocabularyServiceUtil.getGroupVocabularies(scopeGroupId, false);
 }
 
 PortletURL portletURL = renderResponse.createRenderURL();

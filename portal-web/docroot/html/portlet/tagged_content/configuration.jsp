@@ -304,7 +304,7 @@ configurationActionURL.setParameter("portletResource", portletResource);
 							<option value=""><liferay-ui:message key="none" /></option>
 
 							<%
-							List<TagsProperty> categories = TagsPropertyLocalServiceUtil.getPropertyValues(portletGroupId.longValue(), "category");
+							List<TagsProperty> categories = TagsPropertyLocalServiceUtil.getPropertyValues(scopeGroupId, "category");
 
 							for (TagsProperty property : categories) {
 							%>

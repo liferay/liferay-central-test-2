@@ -42,7 +42,7 @@ else {
 
 	folderIds.add(new Long(searchFolderIds));
 
-	IGFolderLocalServiceUtil.getSubfolderIds(folderIds, portletGroupId.longValue(), searchFolderIds);
+	IGFolderLocalServiceUtil.getSubfolderIds(folderIds, scopeGroupId, searchFolderIds);
 
 	folderIdsArray = StringUtil.split(StringUtil.merge(folderIds), 0L);
 }
@@ -79,7 +79,7 @@ portletURL.setParameter("keywords", keywords);
 SearchContainer searchContainer = new SearchContainer(renderRequest, null, null, SearchContainer.DEFAULT_CUR_PARAM, SearchContainer.DEFAULT_DELTA, portletURL, null, LanguageUtil.format(pageContext, "no-entries-were-found-that-matched-the-keywords-x", "<b>" + HtmlUtil.escape(keywords) + "</b>"));
 
 try {
-	Hits hits = IGFolderLocalServiceUtil.search(company.getCompanyId(), portletGroupId.longValue(), folderIdsArray, keywords, searchContainer.getStart(), searchContainer.getEnd());
+	Hits hits = IGFolderLocalServiceUtil.search(company.getCompanyId(), scopeGroupId, folderIdsArray, keywords, searchContainer.getStart(), searchContainer.getEnd());
 
 	int total = hits.getLength();
 

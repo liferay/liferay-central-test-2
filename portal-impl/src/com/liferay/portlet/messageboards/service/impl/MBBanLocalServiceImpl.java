@@ -51,7 +51,7 @@ public class MBBanLocalServiceImpl extends MBBanLocalServiceBaseImpl {
 		throws PortalException, SystemException {
 
 		User user = userPersistence.findByPrimaryKey(userId);
-		long groupId = PortalUtil.getPortletGroupId(plid);
+		long groupId = PortalUtil.getScopeGroupId(plid);
 		Date now = new Date();
 
 		long banId = counterLocalService.increment();
@@ -85,7 +85,7 @@ public class MBBanLocalServiceImpl extends MBBanLocalServiceBaseImpl {
 	}
 
 	public void deleteBan(long plid, long banUserId) throws SystemException {
-		long groupId = PortalUtil.getPortletGroupId(plid);
+		long groupId = PortalUtil.getScopeGroupId(plid);
 
 		try {
 			mbBanPersistence.removeByG_B(groupId, banUserId);

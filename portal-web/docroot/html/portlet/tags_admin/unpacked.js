@@ -960,7 +960,7 @@ Liferay.Portlet.TagsAdmin = new Class({
 
 		Liferay.Service.Tags.TagsVocabulary.getGroupVocabularies(
 			{
-				groupId: themeDisplay.getGroupId(),
+				groupId: themeDisplay.getScopeGroupId(),
 				folksonomy: folksonomy
 			},
 			callback
@@ -980,7 +980,7 @@ Liferay.Portlet.TagsAdmin = new Class({
 
 		Liferay.Service.Tags.TagsEntry.getGroupVocabularyEntries(
 			{
-				groupId: themeDisplay.getGroupId(),
+				groupId: themeDisplay.getScopeGroupId(),
 				name: vocabulary
 			},
 			callback

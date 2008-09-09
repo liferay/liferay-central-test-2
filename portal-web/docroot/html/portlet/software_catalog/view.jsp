@@ -104,7 +104,7 @@ portletURL.setParameter("tabs1", tabs1);
 		searchContainer.setOrderByCol(orderByCol);
 		searchContainer.setOrderByType(orderByType);
 
-		Hits hits = SCProductEntryLocalServiceUtil.search(company.getCompanyId(), portletGroupId.longValue(), keywords, type, searchContainer.getStart(), searchContainer.getEnd());
+		Hits hits = SCProductEntryLocalServiceUtil.search(company.getCompanyId(), scopeGroupId, keywords, type, searchContainer.getStart(), searchContainer.getEnd());
 
 		List results = hits.toList();
 
@@ -316,10 +316,10 @@ portletURL.setParameter("tabs1", tabs1);
 		int total = 0;
 
 		if (tabs1.equals("products")) {
-			total = SCProductEntryLocalServiceUtil.getProductEntriesCount(portletGroupId.longValue());
+			total = SCProductEntryLocalServiceUtil.getProductEntriesCount(scopeGroupId);
 		}
 		else {
-			total = SCProductEntryLocalServiceUtil.getProductEntriesCount(portletGroupId.longValue(), user.getUserId());
+			total = SCProductEntryLocalServiceUtil.getProductEntriesCount(scopeGroupId, user.getUserId());
 		}
 
 		searchContainer.setTotal(total);
@@ -327,10 +327,10 @@ portletURL.setParameter("tabs1", tabs1);
 		List results = null;
 
 		if (tabs1.equals("products")) {
-			results = SCProductEntryLocalServiceUtil.getProductEntries(portletGroupId.longValue(), searchContainer.getStart(), searchContainer.getEnd(), orderByComparator);
+			results = SCProductEntryLocalServiceUtil.getProductEntries(scopeGroupId, searchContainer.getStart(), searchContainer.getEnd(), orderByComparator);
 		}
 		else {
-			results = SCProductEntryLocalServiceUtil.getProductEntries(portletGroupId.longValue(), user.getUserId(), searchContainer.getStart(), searchContainer.getEnd(), orderByComparator);
+			results = SCProductEntryLocalServiceUtil.getProductEntries(scopeGroupId, user.getUserId(), searchContainer.getStart(), searchContainer.getEnd(), orderByComparator);
 		}
 
 		searchContainer.setResults(results);
@@ -452,11 +452,11 @@ portletURL.setParameter("tabs1", tabs1);
 
 		SearchContainer searchContainer = new SearchContainer(renderRequest, null, null, SearchContainer.DEFAULT_CUR_PARAM, SearchContainer.DEFAULT_DELTA, portletURL, headerNames, null);
 
-		int total = SCFrameworkVersionLocalServiceUtil.getFrameworkVersionsCount(portletGroupId.longValue());
+		int total = SCFrameworkVersionLocalServiceUtil.getFrameworkVersionsCount(scopeGroupId);
 
 		searchContainer.setTotal(total);
 
-		List results = SCFrameworkVersionLocalServiceUtil.getFrameworkVersions(portletGroupId.longValue(), searchContainer.getStart(),searchContainer.getEnd());
+		List results = SCFrameworkVersionLocalServiceUtil.getFrameworkVersions(scopeGroupId, searchContainer.getStart(),searchContainer.getEnd());
 
 		searchContainer.setResults(results);
 

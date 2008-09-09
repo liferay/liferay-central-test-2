@@ -62,7 +62,7 @@ public class ConfigurationActionImpl implements ConfigurationAction {
 			WebKeys.THEME_DISPLAY);
 
 		ShoppingPreferences prefs = ShoppingPreferences.getInstance(
-			themeDisplay.getCompanyId(), themeDisplay.getPortletGroupId());
+			themeDisplay.getCompanyId(), themeDisplay.getScopeGroupId());
 
 		String tabs2 = ParamUtil.getString(actionRequest, "tabs2");
 		String tabs3 = ParamUtil.getString(actionRequest, "tabs3");

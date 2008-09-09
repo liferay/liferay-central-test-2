@@ -200,7 +200,7 @@ public class CalEventLocalServiceImpl extends CalEventLocalServiceBaseImpl {
 		// Event
 
 		User user = userPersistence.findByPrimaryKey(userId);
-		long groupId = PortalUtil.getPortletGroupId(plid);
+		long groupId = PortalUtil.getScopeGroupId(plid);
 		Date now = new Date();
 
 		Locale locale = null;
@@ -470,7 +470,7 @@ public class CalEventLocalServiceImpl extends CalEventLocalServiceBaseImpl {
 	public File exportGroupEvents(long userId, long plid, String fileName)
 		throws PortalException, SystemException {
 
-		long groupId = PortalUtil.getPortletGroupId(plid);
+		long groupId = PortalUtil.getScopeGroupId(plid);
 
 		List<CalEvent> events = calEventPersistence.findByGroupId(groupId);
 

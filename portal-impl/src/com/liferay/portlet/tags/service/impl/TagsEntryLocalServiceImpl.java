@@ -92,7 +92,7 @@ public class TagsEntryLocalServiceImpl extends TagsEntryLocalServiceBaseImpl {
 			String[] communityPermissions, String[] guestPermissions)
 		throws PortalException, SystemException {
 
-		long groupId = PortalUtil.getPortletGroupId(plid);
+		long groupId = PortalUtil.getScopeGroupId(plid);
 
 		return addEntryToGroup(
 			userId, groupId, parentEntryName, name, vocabularyName, properties,

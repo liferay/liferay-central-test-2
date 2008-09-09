@@ -48,8 +48,7 @@ public class StructureDisplayTerms extends DisplayTerms {
 		super(renderRequest);
 
 		groupId = ParamUtil.getLong(
-			renderRequest, GROUP_ID,
-			PortalUtil.getPortletGroupId(renderRequest));
+			renderRequest, GROUP_ID, PortalUtil.getScopeGroupId(renderRequest));
 		structureId = ParamUtil.getString(renderRequest, STRUCTURE_ID);
 		name = ParamUtil.getString(renderRequest, NAME);
 		description = ParamUtil.getString(renderRequest, DESCRIPTION);

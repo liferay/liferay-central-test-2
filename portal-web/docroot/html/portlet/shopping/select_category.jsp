@@ -55,11 +55,11 @@ headerNames.add(StringPool.BLANK);
 
 SearchContainer searchContainer = new SearchContainer(renderRequest, null, null, SearchContainer.DEFAULT_CUR_PARAM, SearchContainer.DEFAULT_DELTA, portletURL, headerNames, null);
 
-int total = ShoppingCategoryLocalServiceUtil.getCategoriesCount(portletGroupId.longValue(), categoryId);
+int total = ShoppingCategoryLocalServiceUtil.getCategoriesCount(scopeGroupId, categoryId);
 
 searchContainer.setTotal(total);
 
-List results = ShoppingCategoryLocalServiceUtil.getCategories(portletGroupId.longValue(), categoryId, searchContainer.getStart(), searchContainer.getEnd());
+List results = ShoppingCategoryLocalServiceUtil.getCategories(scopeGroupId, categoryId, searchContainer.getStart(), searchContainer.getEnd());
 
 searchContainer.setResults(results);
 
@@ -96,7 +96,7 @@ for (int i = 0; i < results.size(); i++) {
 
 	subcategoryIds.add(new Long(curCategory.getCategoryId()));
 
-	ShoppingCategoryLocalServiceUtil.getSubcategoryIds(subcategoryIds, portletGroupId.longValue(), curCategory.getCategoryId());
+	ShoppingCategoryLocalServiceUtil.getSubcategoryIds(subcategoryIds, scopeGroupId, curCategory.getCategoryId());
 
 	int categoriesCount = subcategoryIds.size() - 1;
 	int itemsCount = ShoppingItemLocalServiceUtil.getCategoriesItemsCount(subcategoryIds);

@@ -39,7 +39,7 @@ portletURL.setParameter("tabs1", tabs1);
 	function <portlet:namespace />deleteArticles() {
 		if (confirm('<%= UnicodeLanguageUtil.get(pageContext, "are-you-sure-you-want-to-delete-the-selected-articles") %>')) {
 			document.<portlet:namespace />fm.<portlet:namespace /><%= Constants.CMD %>.value = "<%= Constants.DELETE %>";
-			document.<portlet:namespace />fm.<portlet:namespace />groupId.value = "<%= portletGroupId.longValue() %>";
+			document.<portlet:namespace />fm.<portlet:namespace />groupId.value = "<%= scopeGroupId %>";
 			document.<portlet:namespace />fm.<portlet:namespace />deleteArticleIds.value = Liferay.Util.listCheckedExcept(document.<portlet:namespace />fm, "<portlet:namespace />allRowIds");
 			submitForm(document.<portlet:namespace />fm, "<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/journal/edit_article" /><portlet:param name="redirect" value="<%= currentURL %>" /></portlet:actionURL>");
 		}
@@ -48,7 +48,7 @@ portletURL.setParameter("tabs1", tabs1);
 	function <portlet:namespace />deleteFeeds() {
 		if (confirm('<%= UnicodeLanguageUtil.get(pageContext, "are-you-sure-you-want-to-delete-the-selected-feeds") %>')) {
 			document.<portlet:namespace />fm.<portlet:namespace /><%= Constants.CMD %>.value = "<%= Constants.DELETE %>";
-			document.<portlet:namespace />fm.<portlet:namespace />groupId.value = "<%= portletGroupId.longValue() %>";
+			document.<portlet:namespace />fm.<portlet:namespace />groupId.value = "<%= scopeGroupId %>";
 			document.<portlet:namespace />fm.<portlet:namespace />deleteFeedIds.value = Liferay.Util.listCheckedExcept(document.<portlet:namespace />fm, "<portlet:namespace />allRowIds");
 			submitForm(document.<portlet:namespace />fm, "<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/journal/edit_feed" /><portlet:param name="redirect" value="<%= currentURL %>" /></portlet:actionURL>");
 		}
@@ -57,7 +57,7 @@ portletURL.setParameter("tabs1", tabs1);
 	function <portlet:namespace />deleteStructures() {
 		if (confirm('<%= UnicodeLanguageUtil.get(pageContext, "are-you-sure-you-want-to-delete-the-selected-structures") %>')) {
 			document.<portlet:namespace />fm.<portlet:namespace /><%= Constants.CMD %>.value = "<%= Constants.DELETE %>";
-			document.<portlet:namespace />fm.<portlet:namespace />groupId.value = "<%= portletGroupId.longValue() %>";
+			document.<portlet:namespace />fm.<portlet:namespace />groupId.value = "<%= scopeGroupId %>";
 			document.<portlet:namespace />fm.<portlet:namespace />deleteStructureIds.value = Liferay.Util.listCheckedExcept(document.<portlet:namespace />fm, "<portlet:namespace />allRowIds");
 			submitForm(document.<portlet:namespace />fm, "<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/journal/edit_structure" /><portlet:param name="redirect" value="<%= currentURL %>" /></portlet:actionURL>");
 		}
@@ -66,7 +66,7 @@ portletURL.setParameter("tabs1", tabs1);
 	function <portlet:namespace />deleteTemplates() {
 		if (confirm('<%= UnicodeLanguageUtil.get(pageContext, "are-you-sure-you-want-to-delete-the-selected-templates") %>')) {
 			document.<portlet:namespace />fm.<portlet:namespace /><%= Constants.CMD %>.value = "<%= Constants.DELETE %>";
-			document.<portlet:namespace />fm.<portlet:namespace />groupId.value = "<%= portletGroupId.longValue() %>";
+			document.<portlet:namespace />fm.<portlet:namespace />groupId.value = "<%= scopeGroupId %>";
 			document.<portlet:namespace />fm.<portlet:namespace />deleteTemplateIds.value = Liferay.Util.listCheckedExcept(document.<portlet:namespace />fm, "<portlet:namespace />allRowIds");
 			submitForm(document.<portlet:namespace />fm, "<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/journal/edit_template" /><portlet:param name="redirect" value="<%= currentURL %>" /></portlet:actionURL>");
 		}
@@ -75,7 +75,7 @@ portletURL.setParameter("tabs1", tabs1);
 	function <portlet:namespace />expireArticles() {
 		if (confirm('<%= UnicodeLanguageUtil.get(pageContext, "are-you-sure-you-want-to-expire-the-selected-articles") %>')) {
 			document.<portlet:namespace />fm.<portlet:namespace /><%= Constants.CMD %>.value = "<%= Constants.EXPIRE %>";
-			document.<portlet:namespace />fm.<portlet:namespace />groupId.value = "<%= portletGroupId.longValue() %>";
+			document.<portlet:namespace />fm.<portlet:namespace />groupId.value = "<%= scopeGroupId %>";
 			document.<portlet:namespace />fm.<portlet:namespace />expireArticleIds.value = Liferay.Util.listCheckedExcept(document.<portlet:namespace />fm, "<portlet:namespace />allRowIds");
 			submitForm(document.<portlet:namespace />fm, "<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/journal/edit_article" /><portlet:param name="redirect" value="<%= currentURL %>" /></portlet:actionURL>");
 		}

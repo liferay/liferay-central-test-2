@@ -40,7 +40,7 @@ List folderIdLists = new ArrayList();
 
 folderIdLists.add(new Long(folderId));
 
-DLFolderLocalServiceUtil.getSubfolderIds(folderIdLists, portletGroupId.longValue(), folderId);
+DLFolderLocalServiceUtil.getSubfolderIds(folderIdLists, scopeGroupId, folderId);
 
 String folderIds = ParamUtil.getString(request, "folderIds");
 long[] folderIdsArray = StringUtil.split(folderIds, 0L);
@@ -97,7 +97,7 @@ portletURL.setParameter("assetParentId", String.valueOf(folderId));
 		SearchContainer searchContainer = new SearchContainer(renderRequest, null, null, SearchContainer.DEFAULT_CUR_PARAM, SearchContainer.DEFAULT_DELTA, portletURL, headerNames, LanguageUtil.format(pageContext, "no-documents-were-found-that-matched-the-keywords-x", "<b>" + HtmlUtil.escape(keywords) + "</b>"));
 
 		try {
-			Hits results = DLFolderLocalServiceUtil.search(company.getCompanyId(), portletGroupId.longValue(), folderIdsArray, keywords, searchContainer.getStart(), searchContainer.getEnd());
+			Hits results = DLFolderLocalServiceUtil.search(company.getCompanyId(), scopeGroupId, folderIdsArray, keywords, searchContainer.getStart(), searchContainer.getEnd());
 
 			int total = results.getLength();
 
@@ -172,11 +172,11 @@ portletURL.setParameter("assetParentId", String.valueOf(folderId));
 
 		SearchContainer searchContainer = new SearchContainer(renderRequest, null, null, SearchContainer.DEFAULT_CUR_PARAM, SearchContainer.DEFAULT_DELTA, portletURL, headerNames, "there-are-no-folders");
 
-		int total = DLFolderLocalServiceUtil.getFoldersCount(portletGroupId.longValue(), folderId);
+		int total = DLFolderLocalServiceUtil.getFoldersCount(scopeGroupId, folderId);
 
 		searchContainer.setTotal(total);
 
-		List results = DLFolderLocalServiceUtil.getFolders(portletGroupId.longValue(), folderId, searchContainer.getStart(), searchContainer.getEnd());
+		List results = DLFolderLocalServiceUtil.getFolders(scopeGroupId, folderId, searchContainer.getStart(), searchContainer.getEnd());
 
 		searchContainer.setResults(results);
 
@@ -220,7 +220,7 @@ portletURL.setParameter("assetParentId", String.valueOf(folderId));
 
 			subfolderIds.add(new Long(curFolder.getFolderId()));
 
-			DLFolderLocalServiceUtil.getSubfolderIds(subfolderIds, portletGroupId.longValue(), curFolder.getFolderId());
+			DLFolderLocalServiceUtil.getSubfolderIds(subfolderIds, scopeGroupId, curFolder.getFolderId());
 
 			int foldersCount = subfolderIds.size() - 1;
 			int fileEntriesCount = DLFileEntryLocalServiceUtil.getFoldersFileEntriesCount(subfolderIds);

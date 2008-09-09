@@ -59,7 +59,7 @@ String referringPortletResource = ParamUtil.getString(request, "referringPortlet
 
 JournalArticle article = (JournalArticle)request.getAttribute(WebKeys.JOURNAL_ARTICLE);
 
-long groupId = BeanParamUtil.getLong(article, request, "groupId", portletGroupId.longValue());
+long groupId = BeanParamUtil.getLong(article, request, "groupId", scopeGroupId);
 
 String articleId = BeanParamUtil.getString(article, request, "articleId");
 String newArticleId = ParamUtil.getString(request, "newArticleId");

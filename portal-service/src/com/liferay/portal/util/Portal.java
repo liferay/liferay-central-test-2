@@ -255,14 +255,29 @@ public interface Portal {
 			Map<String, String[]> params)
 		throws PortalException, SystemException;
 
+	/**
+	 * @deprecated Use <code>getScopeGroupId</code>.
+	 */
 	public long getPortletGroupId(long plid);
 
+	/**
+	 * @deprecated Use <code>getScopeGroupId</code>.
+	 */
 	public long getPortletGroupId(Layout layout);
 
+	/**
+	 * @deprecated Use <code>getScopeGroupId</code>.
+	 */
 	public long getPortletGroupId(HttpServletRequest request);
 
+	/**
+	 * @deprecated Use <code>getScopeGroupId</code>.
+	 */
 	public long getPortletGroupId(ActionRequest actionRequest);
 
+	/**
+	 * @deprecated Use <code>getScopeGroupId</code>.
+	 */
 	public long getPortletGroupId(RenderRequest renderRequest);
 
 	public String getPortletId(HttpServletRequest request);
@@ -272,12 +287,6 @@ public interface Portal {
 	public String getPortletId(RenderRequest renderRequest);
 
 	public String getPortletNamespace(String portletId);
-
-	public long getPortletScopeGroupId(ActionRequest req);
-
-	public long getPortletScopeGroupId(HttpServletRequest req);
-
-	public long getPortletScopeGroupId(Layout layout, String portletId);
 
 	public String getPortletTitle(
 		String portletId, long companyId, String languageId);
@@ -304,6 +313,16 @@ public interface Portal {
 
 	public PreferencesValidator getPreferencesValidator(
 		Portlet portlet);
+
+	public long getScopeGroupId(long plid);
+
+	public long getScopeGroupId(Layout layout);
+
+	public long getScopeGroupId(HttpServletRequest request);
+
+	public long getScopeGroupId(ActionRequest actionRequest);
+
+	public long getScopeGroupId(RenderRequest renderRequest);
 
 	public User getSelectedUser(HttpServletRequest request)
 		throws PortalException, RemoteException, SystemException;

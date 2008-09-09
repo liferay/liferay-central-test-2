@@ -113,7 +113,7 @@ public class JournalStructureLocalServiceImpl
 			String[] communityPermissions, String[] guestPermissions)
 		throws PortalException, SystemException {
 
-		long groupId = PortalUtil.getPortletGroupId(plid);
+		long groupId = PortalUtil.getScopeGroupId(plid);
 
 		return addStructureToGroup(
 			uuid, userId, structureId, autoStructureId, groupId,

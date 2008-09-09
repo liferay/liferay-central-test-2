@@ -55,7 +55,7 @@ try {
 
 				for (String compilerEntry : compilerEntries) {
 					try {
-						TagsEntry entry = TagsEntryLocalServiceUtil.getEntry(portletGroupId.longValue(), compilerEntry);
+						TagsEntry entry = TagsEntryLocalServiceUtil.getEntry(scopeGroupId, compilerEntry);
 
 						TagsProperty property = TagsPropertyLocalServiceUtil.getProperty(entry.getEntryId(), "category");
 

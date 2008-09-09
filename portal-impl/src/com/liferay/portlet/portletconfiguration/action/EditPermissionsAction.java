@@ -112,7 +112,7 @@ public class EditPermissionsAction extends EditConfigurationAction {
 		ThemeDisplay themeDisplay = (ThemeDisplay)renderRequest.getAttribute(
 			WebKeys.THEME_DISPLAY);
 
-		long groupId = themeDisplay.getPortletGroupId();
+		long groupId = themeDisplay.getScopeGroupId();
 
 		String portletResource = ParamUtil.getString(
 			renderRequest, "portletResource");
@@ -185,7 +185,7 @@ public class EditPermissionsAction extends EditConfigurationAction {
 			ParamUtil.getString(actionRequest, "guestActionIds"));
 
 		PermissionServiceUtil.setUserPermissions(
-			themeDisplay.getDefaultUserId(), themeDisplay.getPortletGroupId(),
+			themeDisplay.getDefaultUserId(), themeDisplay.getScopeGroupId(),
 			actionIds, resourceId);
 	}
 
@@ -225,7 +225,7 @@ public class EditPermissionsAction extends EditConfigurationAction {
 			ParamUtil.getString(actionRequest, "roleIdActionIds"));
 
 		PermissionServiceUtil.setRolePermissions(
-			roleId, themeDisplay.getPortletGroupId(), actionIds, resourceId);
+			roleId, themeDisplay.getScopeGroupId(), actionIds, resourceId);
 	}
 
 	protected void updateUserGroupPermissions(ActionRequest actionRequest)
@@ -256,7 +256,7 @@ public class EditPermissionsAction extends EditConfigurationAction {
 			ParamUtil.getString(actionRequest, "userIdActionIds"));
 
 		PermissionServiceUtil.setUserPermissions(
-			userId, themeDisplay.getPortletGroupId(), actionIds, resourceId);
+			userId, themeDisplay.getScopeGroupId(), actionIds, resourceId);
 	}
 
 }

@@ -28,15 +28,6 @@
 			getCompanyId: function() {
 				return "<%= themeDisplay.getCompanyId() %>";
 			},
-			getDoAsUserIdEncoded: function() {
-				return "<%= themeDisplay.getDoAsUserId() %>";
-			},
-			getPlid: function() {
-				return "<%= themeDisplay.getPlid() %>";
-			},
-			getGroupId: function() {
-				return "<%= themeDisplay.getPortletGroupId() %>";
-			},
 			getUserId: function() {
 				return "<%= themeDisplay.getUserId() %>";
 			},
@@ -46,6 +37,13 @@
 					return "<%= UnicodeFormatter.toString(user.getFullName()) %>";
 				},
 			</c:if>
+
+			getDoAsUserIdEncoded: function() {
+				return "<%= themeDisplay.getDoAsUserId() %>";
+			},
+			getPlid: function() {
+				return "<%= themeDisplay.getPlid() %>";
+			},
 
 			<c:if test="<%= layout != null %>">
 				getLayoutId: function() {
@@ -62,14 +60,17 @@
 				},
 			</c:if>
 
+			getScopeGroupId: function() {
+				return "<%= themeDisplay.getScopeGroupId() %>";
+			},
+			isSignedIn: function() {
+				return <%= themeDisplay.isSignedIn() %>;
+			},
 			getLanguageId: function() {
 				return "<%= LanguageUtil.getLanguageId(request) %>";
 			},
 			isFreeformLayout: function() {
 				return <%= themeDisplay.isFreeformLayout() %>;
-			},
-			isSignedIn: function() {
-				return <%= themeDisplay.isSignedIn() %>;
 			},
 			isStateExclusive: function() {
 				return <%= themeDisplay.isStateExclusive() %>;
@@ -251,7 +252,7 @@
 							{
 								layoutIds: [<%= ListUtil.toString(layouts, "layoutId") %>],
 								navBlock: '#navigation',
-								hasPermission: <%= GroupPermissionUtil.contains(permissionChecker, portletGroupId.longValue(), ActionKeys.MANAGE_LAYOUTS) %>
+								hasPermission: <%= GroupPermissionUtil.contains(permissionChecker, scopeGroupId, ActionKeys.MANAGE_LAYOUTS) %>
 							}
 						);
 					}

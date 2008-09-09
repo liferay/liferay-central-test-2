@@ -107,7 +107,7 @@ public class BookmarksFolderLocalServiceImpl
 		// Folder
 
 		User user = userPersistence.findByPrimaryKey(userId);
-		long groupId = PortalUtil.getPortletGroupId(plid);
+		long groupId = PortalUtil.getScopeGroupId(plid);
 		parentFolderId = getParentFolderId(groupId, parentFolderId);
 		Date now = new Date();
 
