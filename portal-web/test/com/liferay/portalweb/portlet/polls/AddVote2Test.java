@@ -20,27 +20,42 @@
  * SOFTWARE.
  */
 
-package com.liferay.portalweb.portlet.language;
+package com.liferay.portalweb.portlet.polls;
 
-import com.liferay.portalweb.portal.BaseTests;
+import com.liferay.portalweb.portal.BaseTestCase;
+import com.liferay.portalweb.portal.util.RuntimeVariables;
 
 /**
- * <a href="LanguageTests.java.html"><b><i>View Source</i></b></a>
+ * <a href="AddVote2Test.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *
  */
-public class LanguageTests extends BaseTests {
+public class AddVote2Test extends BaseTestCase {
+	public void testAddVote2() throws Exception {
+		selenium.click(RuntimeVariables.replace("link=Test Poll Question 2"));
+		selenium.waitForPageToLoad("30000");
+		selenium.click("document.forms[0].elements[4]");
+		selenium.click(RuntimeVariables.replace("//input[@value='Vote']"));
+		selenium.waitForPageToLoad("30000");
+		verifyTrue(selenium.isTextPresent("100%"));
+		selenium.click(RuntimeVariables.replace("link=Return to Full Page"));
+		selenium.waitForPageToLoad("30000");
 
-	public LanguageTests() {
-		addTestSuite(AddPageTest.class);
-		addTestSuite(AddPortletTest.class);
-		addTestSuite(LanguageTest.class);
-		addTestSuite(InternationalizationChineseTest.class);
-		addTestSuite(InternationalizationJapaneseTest.class);
-		addTestSuite(InternationalizationSpanishTest.class);
-		addTestSuite(InternationalizationVerifyTest.class);
-		addTestSuite(DeletePageTest.class);
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isElementPresent("link=Test Poll Question 2")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
 	}
-
 }

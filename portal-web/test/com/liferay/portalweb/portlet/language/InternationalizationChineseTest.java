@@ -22,25 +22,43 @@
 
 package com.liferay.portalweb.portlet.language;
 
-import com.liferay.portalweb.portal.BaseTests;
+import com.liferay.portalweb.portal.BaseTestCase;
+import com.liferay.portalweb.portal.util.RuntimeVariables;
 
 /**
- * <a href="LanguageTests.java.html"><b><i>View Source</i></b></a>
+ * <a href="InternationalizationChineseTest.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *
  */
-public class LanguageTests extends BaseTests {
+public class InternationalizationChineseTest extends BaseTestCase {
+	public void testInternationalizationChinese() throws Exception {
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
 
-	public LanguageTests() {
-		addTestSuite(AddPageTest.class);
-		addTestSuite(AddPortletTest.class);
-		addTestSuite(LanguageTest.class);
-		addTestSuite(InternationalizationChineseTest.class);
-		addTestSuite(InternationalizationJapaneseTest.class);
-		addTestSuite(InternationalizationSpanishTest.class);
-		addTestSuite(InternationalizationVerifyTest.class);
-		addTestSuite(DeletePageTest.class);
+			try {
+				if (selenium.isElementPresent(
+							"//img[@alt='\u4e2d\u6587 (\u4e2d\u56fd)']")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
+		selenium.click("//img[@alt='\u4e2d\u6587 (\u4e2d\u56fd)']");
+		selenium.click("//div[@id='navigation']/ul/li[3]/a/span");
+		selenium.typeKeys("new_page",
+			RuntimeVariables.replace("\u8bed\u8a00\u6d4b\u8bd5\u9875"));
+		selenium.type("new_page",
+			RuntimeVariables.replace("\u8bed\u8a00\u6d4b\u8bd5\u9875"));
+		selenium.click("link=\u50a8\u5b58");
+		selenium.click(RuntimeVariables.replace(
+				"//img[@alt='English (United States)']"));
+		selenium.waitForPageToLoad("30000");
 	}
-
 }
