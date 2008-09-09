@@ -158,8 +158,9 @@ public class CASAutoLogin implements AutoLogin {
 
 				Binding binding = enu.nextElement();
 
-				Attributes attrs = PortalLDAPUtil.getAttributes(
-					ctx, PortalLDAPUtil.getNameInNamespace(companyId, binding));
+				Attributes attrs = PortalLDAPUtil.getUserAttributes(
+					companyId, ctx,
+					PortalLDAPUtil.getNameInNamespace(companyId, binding));
 
 				return PortalLDAPUtil.importLDAPUser(
 					companyId, ctx, attrs, StringPool.BLANK, true);

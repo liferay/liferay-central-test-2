@@ -176,8 +176,8 @@ public class LDAPAuth implements Authenticator {
 				String fullUserDN = PortalLDAPUtil.getNameInNamespace(
 					companyId, result);
 
-				Attributes attrs = PortalLDAPUtil.getAttributes(
-					ctx, fullUserDN);
+				Attributes attrs = PortalLDAPUtil.getUserAttributes(
+					companyId, ctx, fullUserDN);
 
 				LDAPAuthResult ldapAuthResult = authenticate(
 					ctx, companyId, attrs, fullUserDN, password);

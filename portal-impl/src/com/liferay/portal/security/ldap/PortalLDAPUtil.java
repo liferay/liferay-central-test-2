@@ -229,22 +229,57 @@ public class PortalLDAPUtil {
 		ctx.close();
 	}
 
+	/**
+	 * @deprecated Use <code>getGroupAttributes</code> and
+	 * <code>getUserAttributes</code>.
+	 */
 	public static Attributes getAttributes(
 			LdapContext ctx, String fullDistinguishedName)
 		throws Exception {
 
-		String[] attrIds = {
+		return getAttributes(ctx, fullDistinguishedName, null);
+	}
+
+	public static Attributes getAttributes(
+			LdapContext ctx, String fullDistinguishedName,
+			String[] attributeIds)
+		throws Exception {
+
+		String[] auditAttributeIds = {
 			"creatorsName", "createTimestamp", "modifiersName",
 			"modifyTimestamp"
 		};
 
-		Attributes attrs = ctx.getAttributes(fullDistinguishedName);
+		Attributes attrs;
 
-		NamingEnumeration<? extends Attribute> enu = ctx.getAttributes(
-			fullDistinguishedName, attrIds).getAll();
+		if (attributeIds == null) {
 
-		while (enu.hasMoreElements()) {
-			attrs.put(enu.nextElement());
+			// Get complete listing of LDAP attributes (slow)
+
+			attrs = ctx.getAttributes(fullDistinguishedName);
+
+			NamingEnumeration<? extends Attribute> enu = ctx.getAttributes(
+				fullDistinguishedName, auditAttributeIds).getAll();
+
+			while (enu.hasMoreElements()) {
+				attrs.put(enu.nextElement());
+			}
+		}
+		else {
+
+			// Get specified LDAP attributes
+
+			int attributeCount = attributeIds.length + auditAttributeIds.length;
+
+			String[] allAttributeIds = new String[attributeCount];
+
+			System.arraycopy(
+				attributeIds, 0, allAttributeIds, 0, attributeIds.length);
+			System.arraycopy(
+				auditAttributeIds, 0, allAttributeIds, attributeIds.length,
+				auditAttributeIds.length);
+
+			attrs = ctx.getAttributes(fullDistinguishedName, allAttributeIds);
 		}
 
 		return attrs;
@@ -326,6 +361,21 @@ public class PortalLDAPUtil {
 		}
 
 		return ctx;
+	}
+
+	public static Attributes getGroupAttributes(
+			long companyId, LdapContext ctx, String fullDistinguishedName)
+		throws Exception {
+
+		Properties groupMappings = getGroupMappings(companyId);
+
+		String[] mappedGroupAttributeIds = {
+			groupMappings.getProperty("groupName"),
+			groupMappings.getProperty("description")
+		};
+
+		return getAttributes(
+			ctx, fullDistinguishedName, mappedGroupAttributeIds);
 	}
 
 	public static Properties getGroupMappings(long companyId)
@@ -422,6 +472,27 @@ public class PortalLDAPUtil {
 		}
 	}
 
+	public static Attributes getUserAttributes(
+			long companyId, LdapContext ctx, String fullDistinguishedName)
+		throws Exception {
+
+		Properties userMappings = getUserMappings(companyId);
+
+		String[] mappedUserAttributeIds = {
+			userMappings.getProperty("screenName"),
+			userMappings.getProperty("emailAddress"),
+			userMappings.getProperty("fullName"),
+			userMappings.getProperty("firstName"),
+			userMappings.getProperty("middleName"),
+			userMappings.getProperty("lastName"),
+			userMappings.getProperty("jobTitle"),
+			userMappings.getProperty("group")
+		};
+
+		return getAttributes(
+			ctx, fullDistinguishedName, mappedUserAttributeIds);
+	}
+
 	public static Properties getUserMappings(long companyId) throws Exception {
 		Properties userMappings = PropertiesUtil.load(
 			PrefsPropsUtil.getString(companyId, PropsKeys.LDAP_USER_MAPPINGS));
@@ -501,8 +572,8 @@ public class PortalLDAPUtil {
 				while (enu.hasMoreElements()) {
 					SearchResult result = enu.nextElement();
 
-					Attributes attrs = getAttributes(
-						ctx, getNameInNamespace(companyId, result));
+					Attributes attrs = getUserAttributes(
+						companyId, ctx, getNameInNamespace(companyId, result));
 
 					importLDAPUser(
 						companyId, ctx, attrs, StringPool.BLANK, true);
@@ -517,8 +588,8 @@ public class PortalLDAPUtil {
 				while (enu.hasMoreElements()) {
 					SearchResult result = enu.nextElement();
 
-					Attributes attrs = getAttributes(
-						ctx, getNameInNamespace(companyId, result));
+					Attributes attrs = getGroupAttributes(
+						companyId, ctx, getNameInNamespace(companyId, result));
 
 					importLDAPGroup(companyId, ctx, attrs, true);
 				}
@@ -932,7 +1003,7 @@ public class PortalLDAPUtil {
 			Attributes groupAttrs = null;
 
 			try {
-				groupAttrs = getAttributes(ctx, fullGroupDN);
+				groupAttrs = getGroupAttributes(companyId, ctx, fullGroupDN);
 			}
 			catch (NameNotFoundException nnfe) {
 				_log.error(
@@ -978,7 +1049,7 @@ public class PortalLDAPUtil {
 			Attributes userAttrs = null;
 
 			try {
-				userAttrs = getAttributes(ctx, fullUserDN);
+				userAttrs = getUserAttributes(companyId, ctx, fullUserDN);
 			}
 			catch (NameNotFoundException nnfe) {
 				_log.error(
