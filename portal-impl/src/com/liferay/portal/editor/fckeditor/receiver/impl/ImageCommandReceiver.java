@@ -34,7 +34,6 @@ import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portlet.imagegallery.model.IGFolder;
 import com.liferay.portlet.imagegallery.model.IGImage;
 import com.liferay.portlet.imagegallery.model.impl.IGFolderImpl;
-import com.liferay.portlet.imagegallery.service.IGFolderLocalServiceUtil;
 import com.liferay.portlet.imagegallery.service.IGFolderServiceUtil;
 import com.liferay.portlet.imagegallery.service.IGImageServiceUtil;
 
@@ -194,7 +193,7 @@ public class ImageCommandReceiver extends BaseCommandReceiver {
 		while (st.hasMoreTokens()) {
 			String curFolderName = st.nextToken();
 
-			List<IGFolder> folders = IGFolderLocalServiceUtil.getFolders(
+			List<IGFolder> folders = IGFolderServiceUtil.getFolders(
 				groupId, folder.getFolderId());
 
 			for (IGFolder curFolder : folders) {
@@ -225,7 +224,7 @@ public class ImageCommandReceiver extends BaseCommandReceiver {
 			IGFolder folder = _getFolder(
 				group.getGroupId(), arg.getCurrentFolder());
 
-			List<IGFolder> folders = IGFolderLocalServiceUtil.getFolders(
+			List<IGFolder> folders = IGFolderServiceUtil.getFolders(
 				group.getGroupId(), folder.getFolderId());
 
 			for (IGFolder curFolder : folders) {

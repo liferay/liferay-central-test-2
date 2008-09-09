@@ -32,7 +32,6 @@ import com.liferay.portlet.documentlibrary.model.DLFileEntry;
 import com.liferay.portlet.documentlibrary.model.DLFolder;
 import com.liferay.portlet.documentlibrary.model.impl.DLFolderImpl;
 import com.liferay.portlet.documentlibrary.service.DLFileEntryServiceUtil;
-import com.liferay.portlet.documentlibrary.service.DLFolderLocalServiceUtil;
 import com.liferay.portlet.documentlibrary.service.DLFolderServiceUtil;
 
 import java.io.File;
@@ -185,7 +184,7 @@ public class DocumentCommandReceiver extends BaseCommandReceiver {
 		while (st.hasMoreTokens()) {
 			String curFolderName = st.nextToken();
 
-			List<DLFolder> folders = DLFolderLocalServiceUtil.getFolders(
+			List<DLFolder> folders = DLFolderServiceUtil.getFolders(
 				groupId, folder.getFolderId());
 
 			for (DLFolder curFolder : folders) {
@@ -216,7 +215,7 @@ public class DocumentCommandReceiver extends BaseCommandReceiver {
 			DLFolder folder = _getFolder(
 				group.getGroupId(), arg.getCurrentFolder());
 
-			List<DLFolder> folders = DLFolderLocalServiceUtil.getFolders(
+			List<DLFolder> folders = DLFolderServiceUtil.getFolders(
 				group.getGroupId(), folder.getFolderId());
 
 			for (DLFolder curFolder : folders) {
