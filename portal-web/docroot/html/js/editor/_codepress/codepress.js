@@ -49,6 +49,8 @@ CodePress = function(obj) {
 		for (language in CodePress.languages)
 			if(self.options.match('\\b'+language+'\\b'))
 				return CodePress.languages[language] ? language : 'generic';
+
+		return 'generic';
 	}
 
 	self.setOptions = function() {
