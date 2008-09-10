@@ -505,9 +505,10 @@ public class EditArticleAction extends PortletAction {
 							groupId, structureId);
 
 					content = JournalUtil.mergeLocaleContent(
-						curArticle.getContent(), content, structure.getXsd());
+						curArticle.getContent(), content,
+						structure.getMergedXsd());
 					content = JournalUtil.removeOldContent(
-						content, structure.getXsd());
+						content, structure.getMergedXsd());
 				}
 			}
 
