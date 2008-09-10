@@ -109,6 +109,14 @@ List layoutList = layoutView.getList();
 		</select>
 	</td>
 </tr>
+<tr>
+	<td>
+		<liferay-ui:message key="show-hidden-pages" />
+	</td>
+	<td>
+		<liferay-ui:input-checkbox param="showHiddenPages" defaultValue="<%= showHiddenPages %>" />
+	</td>
+</tr>
 </table>
 
 <br />

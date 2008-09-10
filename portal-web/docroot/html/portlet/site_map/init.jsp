@@ -38,4 +38,5 @@ if (Validator.isNotNull(portletResource)) {
 
 long rootLayoutId = GetterUtil.getLong(prefs.getValue("root-layout-id", StringPool.BLANK));
 int displayDepth = GetterUtil.getInteger(prefs.getValue("display-depth", StringPool.BLANK));
+boolean showHiddenPages = GetterUtil.getBoolean(prefs.getValue("show-hidden-pages", StringPool.BLANK));
 %>

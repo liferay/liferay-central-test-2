@@ -59,6 +59,9 @@ public class ConfigurationActionImpl implements ConfigurationAction {
 		String displayDepth = ParamUtil.getString(
 			actionRequest, "displayDepth");
 
+		boolean showHiddenPages = ParamUtil.getBoolean(
+			actionRequest, "showHiddenPages");
+
 		String portletResource = ParamUtil.getString(
 			actionRequest, "portletResource");
 
@@ -68,6 +71,7 @@ public class ConfigurationActionImpl implements ConfigurationAction {
 
 		prefs.setValue("root-layout-id", String.valueOf(rootLayoutId));
 		prefs.setValue("display-depth", displayDepth);
+		prefs.setValue("show-hidden-pages", String.valueOf(showHiddenPages));
 
 		prefs.store();
 

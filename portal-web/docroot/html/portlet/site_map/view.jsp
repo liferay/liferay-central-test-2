@@ -29,13 +29,13 @@ List rootLayouts = LayoutLocalServiceUtil.getLayouts(layout.getGroupId(), layout
 
 StringBuilder sb = new StringBuilder();
 
-_buildSiteMap(rootLayouts, displayDepth, 1, themeDisplay, sb);
+_buildSiteMap(rootLayouts, displayDepth, showHiddenPages, 1, themeDisplay, sb);
 %>
 
 <%= sb.toString() %>
 
 <%!
-private void _buildSiteMap(List layouts, int displayDepth, int curDepth, ThemeDisplay themeDisplay, StringBuilder sb) throws Exception {
+private void _buildSiteMap(List layouts, int displayDepth, boolean showHiddenPages, int curDepth, ThemeDisplay themeDisplay, StringBuilder sb) throws Exception {
 	if (layouts.size() == 0) {
 		return;
 	}
@@ -47,7 +47,7 @@ private void _buildSiteMap(List layouts, int displayDepth, int curDepth, ThemeDi
 	for (int i = 0; i < layouts.size(); i++) {
 		Layout layout = (Layout)layouts.get(i);
 
-		if (!layout.isHidden() && LayoutPermissionUtil.contains(permissionChecker, layout, ActionKeys.VIEW)) {
+		if ((showHiddenPages || !layout.isHidden()) && LayoutPermissionUtil.contains(permissionChecker, layout, ActionKeys.VIEW)) {
 			String layoutURL = PortalUtil.getLayoutURL(layout, themeDisplay);
 			String target = PortalUtil.getLayoutTarget(layout);
 
@@ -61,7 +61,7 @@ private void _buildSiteMap(List layouts, int displayDepth, int curDepth, ThemeDi
 			sb.append("</a>");
 
 			if ((displayDepth == 0) || (displayDepth > curDepth)) {
-				_buildSiteMap(layout.getChildren(), displayDepth, curDepth + 1, themeDisplay, sb);
+				_buildSiteMap(layout.getChildren(), displayDepth, showHiddenPages, curDepth + 1, themeDisplay, sb);
 			}
 
 			sb.append("</li>");
