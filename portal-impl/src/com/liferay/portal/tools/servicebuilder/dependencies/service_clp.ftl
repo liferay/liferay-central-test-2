@@ -1,6 +1,8 @@
 package ${packagePath}.service;
 
-import ${packagePath}.model.${entity.name}Clp;
+<#if entity.hasColumns()>
+	import ${packagePath}.model.${entity.name}Clp;
+</#if>
 
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
@@ -147,69 +149,71 @@ public class ${entity.name}${sessionTypeName}ServiceClp implements ${entity.name
 		</#if>
 	</#list>
 
-	protected Object translateInput(BaseModel oldModel) {
-		Class oldModelClass = oldModel.getClass();
+	<#if entity.hasColumns()>
+		protected Object translateInput(BaseModel oldModel) {
+			Class oldModelClass = oldModel.getClass();
 
-		String oldModelClassName = oldModelClass.getName();
+			String oldModelClassName = oldModelClass.getName();
 
-		if (oldModelClassName.equals(${entity.name}Clp.class.getName())) {
-			${entity.name}Clp oldCplModel = (${entity.name}Clp)oldModel;
+			if (oldModelClassName.equals(${entity.name}Clp.class.getName())) {
+				${entity.name}Clp oldCplModel = (${entity.name}Clp)oldModel;
 
-			ClassLoader contextClassLoader = Thread.currentThread().getContextClassLoader();
-
-			try {
-				Thread.currentThread().setContextClassLoader(_classLoader);
+				ClassLoader contextClassLoader = Thread.currentThread().getContextClassLoader();
 
 				try {
-					Class newModelClass = Class.forName("${packagePath}.model.impl.${entity.name}Impl", true, _classLoader);
+					Thread.currentThread().setContextClassLoader(_classLoader);
 
-					Object newModel = newModelClass.newInstance();
+					try {
+						Class newModelClass = Class.forName("${packagePath}.model.impl.${entity.name}Impl", true, _classLoader);
 
-					<#list entity.regularColList as column>
-						Method method${column_index} = newModelClass.getMethod("set${column.methodName}", new Class[] {
+						Object newModel = newModelClass.newInstance();
+
+						<#list entity.regularColList as column>
+							Method method${column_index} = newModelClass.getMethod("set${column.methodName}", new Class[] {
+								<#if column.isPrimitiveType()>
+									${serviceBuilder.getPrimitiveObj(column.type)}.TYPE
+								<#else>
+									${column.type}.class
+								</#if>
+							});
+
 							<#if column.isPrimitiveType()>
-								${serviceBuilder.getPrimitiveObj(column.type)}.TYPE
+								${serviceBuilder.getPrimitiveObj(column.type)}
 							<#else>
-								${column.type}.class
+								${column.type}
 							</#if>
-						});
 
-						<#if column.isPrimitiveType()>
-							${serviceBuilder.getPrimitiveObj(column.type)}
-						<#else>
-							${column.type}
-						</#if>
+							value${column_index} =
 
-						value${column_index} =
+							<#if column.isPrimitiveType()>
+								new ${serviceBuilder.getPrimitiveObj(column.type)}(
+							</#if>
 
-						<#if column.isPrimitiveType()>
-							new ${serviceBuilder.getPrimitiveObj(column.type)}(
-						</#if>
+							oldCplModel.get${column.methodName}()
 
-						oldCplModel.get${column.methodName}()
+							<#if column.isPrimitiveType()>
+								)
+							</#if>
 
-						<#if column.isPrimitiveType()>
-							)
-						</#if>
+							;
 
-						;
+							method${column_index}.invoke(newModel, value${column_index});
+						</#list>
 
-						method${column_index}.invoke(newModel, value${column_index});
-					</#list>
-
-					return newModel;
+						return newModel;
+					}
+					catch (Exception e) {
+						_log.error(e, e);
+					}
 				}
-				catch (Exception e) {
-					_log.error(e, e);
+				finally {
+					Thread.currentThread().setContextClassLoader(contextClassLoader);
 				}
 			}
-			finally {
-				Thread.currentThread().setContextClassLoader(contextClassLoader);
-			}
+
+			return oldModel;
 		}
-
-		return oldModel;
-	}
+	</#if>
 
 	protected Object translateInput(List oldList) {
 		List newList = new ArrayList(oldList.size());
@@ -224,10 +228,13 @@ public class ${entity.name}${sessionTypeName}ServiceClp implements ${entity.name
 	}
 
 	protected Object translateInput(Object obj) {
-		if (obj instanceof BaseModel) {
-			return translateInput((BaseModel)obj);
-		}
-		else if (obj instanceof List) {
+		<#if entity.hasColumns()>
+			if (obj instanceof BaseModel) {
+				return translateInput((BaseModel)obj);
+			}
+		</#if>
+
+		if (obj instanceof List) {
 			return translateInput((List)obj);
 		}
 		else {
@@ -235,65 +242,67 @@ public class ${entity.name}${sessionTypeName}ServiceClp implements ${entity.name
 		}
 	}
 
-	protected Object translateOutput(BaseModel oldModel) {
-		Class oldModelClass = oldModel.getClass();
+	<#if entity.hasColumns()>
+		protected Object translateOutput(BaseModel oldModel) {
+			Class oldModelClass = oldModel.getClass();
 
-		String oldModelClassName = oldModelClass.getName();
+			String oldModelClassName = oldModelClass.getName();
 
-		if (oldModelClassName.equals("${packagePath}.model.impl.${entity.name}Impl")) {
-			ClassLoader contextClassLoader = Thread.currentThread().getContextClassLoader();
-
-			try {
-				Thread.currentThread().setContextClassLoader(_classLoader);
+			if (oldModelClassName.equals("${packagePath}.model.impl.${entity.name}Impl")) {
+				ClassLoader contextClassLoader = Thread.currentThread().getContextClassLoader();
 
 				try {
-					${entity.name}Clp newModel = new ${entity.name}Clp();
+					Thread.currentThread().setContextClassLoader(_classLoader);
 
-					<#list entity.regularColList as column>
-						Method method${column_index} = oldModelClass.getMethod("get${column.methodName}");
+					try {
+						${entity.name}Clp newModel = new ${entity.name}Clp();
 
-						<#if column.isPrimitiveType()>
-							${serviceBuilder.getPrimitiveObj(column.type)}
-						<#else>
-							${column.type}
-						</#if>
+						<#list entity.regularColList as column>
+							Method method${column_index} = oldModelClass.getMethod("get${column.methodName}");
 
-						value${column_index} =
-						
-						(
+							<#if column.isPrimitiveType()>
+								${serviceBuilder.getPrimitiveObj(column.type)}
+							<#else>
+								${column.type}
+							</#if>
 
-						<#if column.isPrimitiveType()>
-							${serviceBuilder.getPrimitiveObj(column.type)}
-						<#else>
-							${column.type}
-						</#if>
+							value${column_index} =
+							
+							(
 
-						)
-						
-						method${column_index}.invoke(oldModel, (Object[])null);
+							<#if column.isPrimitiveType()>
+								${serviceBuilder.getPrimitiveObj(column.type)}
+							<#else>
+								${column.type}
+							</#if>
 
-						newModel.set${column.methodName}(value${column_index}
-						
-						<#if column.isPrimitiveType()>
-							.${column.type}Value()
-						</#if>
+							)
+							
+							method${column_index}.invoke(oldModel, (Object[])null);
 
-						);
-					</#list>
+							newModel.set${column.methodName}(value${column_index}
+							
+							<#if column.isPrimitiveType()>
+								.${column.type}Value()
+							</#if>
 
-					return newModel;
+							);
+						</#list>
+
+						return newModel;
+					}
+					catch (Exception e) {
+						_log.error(e, e);
+					}
 				}
-				catch (Exception e) {
-					_log.error(e, e);
+				finally {
+					Thread.currentThread().setContextClassLoader(contextClassLoader);
 				}
 			}
-			finally {
-				Thread.currentThread().setContextClassLoader(contextClassLoader);
-			}
+
+			return oldModel;
 		}
-
-		return oldModel;
-	}
+	</#if>
 
 	protected Object translateOutput(List oldList) {
 		List newList = new ArrayList(oldList.size());
@@ -308,10 +317,13 @@ public class ${entity.name}${sessionTypeName}ServiceClp implements ${entity.name
 	}
 
 	protected Object translateOutput(Object obj) {
-		if (obj instanceof BaseModel) {
-			return translateOutput((BaseModel)obj);
-		}
-		else if (obj instanceof List) {
+		<#if entity.hasColumns()>
+			if (obj instanceof BaseModel) {
+				return translateOutput((BaseModel)obj);
+			}
+		</#if>
+
+		if (obj instanceof List) {
 			return translateOutput((List)obj);
 		}
 		else {
