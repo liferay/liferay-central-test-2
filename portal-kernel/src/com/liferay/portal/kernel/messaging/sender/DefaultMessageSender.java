@@ -20,17 +20,27 @@
  * SOFTWARE.
  */
 
-package com.liferay.portal.kernel.messaging;
+package com.liferay.portal.kernel.messaging.sender;
+
+import com.liferay.portal.kernel.messaging.Message;
+import com.liferay.portal.kernel.messaging.MessageBus;
 
 /**
- * <a href="SingleDestinationMessageSender.java.html"><b><i>View Source</i></b>
- * </a>
+ * <a href="DefaultMessageSender.java.html"><b><i>View Source</i></b></a>
  *
  * @author Michael C. Han
  *
  */
-public interface SingleDestinationMessageSender {
+public class DefaultMessageSender implements MessageSender {
 
-	public void send(Message message);
+	public void send(String destination, Message message) {
+		_messageBus.sendMessage(destination, message);
+	}
+
+	public void setMessageBus(MessageBus messageBus) {
+		_messageBus = messageBus;
+	}
+
+	private MessageBus _messageBus;
 
 }

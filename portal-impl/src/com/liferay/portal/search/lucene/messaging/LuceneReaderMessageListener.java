@@ -23,8 +23,8 @@
 package com.liferay.portal.search.lucene.messaging;
 
 import com.liferay.portal.kernel.messaging.Message;
-import com.liferay.portal.kernel.messaging.MessageBusUtil;
 import com.liferay.portal.kernel.messaging.MessageListener;
+import com.liferay.portal.kernel.messaging.sender.MessageSender;
 import com.liferay.portal.kernel.search.Hits;
 import com.liferay.portal.kernel.search.messaging.SearchRequest;
 import com.liferay.portal.search.lucene.LuceneSearchEngineUtil;
@@ -40,6 +40,10 @@ import org.apache.commons.logging.LogFactory;
  */
 public class LuceneReaderMessageListener implements MessageListener {
 
+	public LuceneReaderMessageListener(MessageSender sender) {
+		_messageSender = sender;
+	}
+
 	public void receive(Message message) {
 		try {
 			doReceive(message);
@@ -53,12 +57,12 @@ public class LuceneReaderMessageListener implements MessageListener {
 		SearchRequest searchRequest = (SearchRequest)message.getPayload();
 
 		String command = searchRequest.getCommand();
-
+		Message reply = new Message();
 		if (command.equals(SearchRequest.COMMAND_INDEX_ONLY)) {
-			doCommandIndexOnly(message);
+			doCommandIndexOnly(reply);
 		}
 		else if (command.equals(SearchRequest.COMMAND_SEARCH)) {
-			doCommandSearch(message, searchRequest);
+			doCommandSearch(reply, searchRequest);
 		}
 	}
 
@@ -70,7 +74,7 @@ public class LuceneReaderMessageListener implements MessageListener {
 
 		message.setPayload(indexReadOnly);
 
-		MessageBusUtil.sendMessage(message.getResponseDestination(), message);
+		_messageSender.send(message.getResponseDestination(), message);
 	}
 
 	protected void doCommandSearch(Message message, SearchRequest searchRequest)
@@ -83,10 +87,11 @@ public class LuceneReaderMessageListener implements MessageListener {
 
 		message.setPayload(hits);
 
-		MessageBusUtil.sendMessage(message.getResponseDestination(), message);
+		_messageSender.send(message.getResponseDestination(), message);
 	}
 
 	private static Log _log =
 		LogFactory.getLog(LuceneReaderMessageListener.class);
 
+	private MessageSender _messageSender;
 }

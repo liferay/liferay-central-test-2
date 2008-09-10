@@ -49,7 +49,8 @@ public class SchedulerEngineProxy implements SchedulerEngine {
 
 			List<SchedulerRequest> schedulerRequests =
 				(List<SchedulerRequest>)MessageBusUtil.sendSynchronizedMessage(
-					DestinationNames.SCHEDULER, schedulerRequest);
+					DestinationNames.SCHEDULER, DestinationNames.SCHEDULER_RESPONSE,
+					schedulerRequest);
 
 			return schedulerRequests;
 		}

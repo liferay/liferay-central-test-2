@@ -220,10 +220,9 @@
 			<bean class="com.liferay.portal.util.PortalImpl" />
 		</property>
 	</bean>
+	<bean id="com.liferay.portal.kernel.uuid.PortalUUID" class="com.liferay.portal.uuid.PortalUUIDImpl"/>
 	<bean id="com.liferay.portal.kernel.uuid.PortalUUIDUtil" class="com.liferay.portal.kernel.uuid.PortalUUIDUtil">
-		<property name="portalUUID">
-			<bean class="com.liferay.portal.uuid.PortalUUIDImpl" />
-		</property>
+		<property name="portalUUID" ref="com.liferay.portal.kernel.uuid.PortalUUID"/>
 	</bean>
 	<bean id="com.liferay.portal.kernel.webcache.WebCachePoolUtil" class="com.liferay.portal.kernel.webcache.WebCachePoolUtil">
 		<property name="webCachePool">

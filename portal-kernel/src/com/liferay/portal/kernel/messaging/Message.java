@@ -119,6 +119,26 @@ public class Message implements Serializable {
 		return GetterUtil.getString(String.valueOf(get(key)));
 	}
 
+	public String getDestination() {
+		return _destination;
+	}
+
+	public String getResponseId() {
+		return _responseId;
+	}
+
+	public void setDestination(String destination) {
+		_destination = destination;
+	}
+
+	public void setResponseDestination(String responseDestination) {
+		_responseDestination = responseDestination;
+	}
+
+	public void setResponseId(String responseId) {
+		_responseId = responseId;
+	}
+
 	public void put(String key, Object value) {
 		if (_values == null) {
 			 _values = new HashMap<String, Object>();
@@ -148,26 +168,6 @@ public class Message implements Serializable {
 		sb.append("}");
 
 		return sb.toString();
-	}
-
-	protected String getDestination() {
-		return _destination;
-	}
-
-	protected String getResponseId() {
-		return _responseId;
-	}
-
-	protected void setDestination(String destination) {
-		_destination = destination;
-	}
-
-	protected void setResponseDestination(String responseDestination) {
-		_responseDestination = responseDestination;
-	}
-
-	protected void setResponseId(String responseId) {
-		_responseId = responseId;
 	}
 
 	private String _destination;

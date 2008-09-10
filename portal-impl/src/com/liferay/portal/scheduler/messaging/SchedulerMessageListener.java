@@ -23,8 +23,8 @@
 package com.liferay.portal.scheduler.messaging;
 
 import com.liferay.portal.kernel.messaging.Message;
-import com.liferay.portal.kernel.messaging.MessageBusUtil;
 import com.liferay.portal.kernel.messaging.MessageListener;
+import com.liferay.portal.kernel.messaging.sender.MessageSender;
 import com.liferay.portal.kernel.scheduler.SchedulerEngine;
 import com.liferay.portal.kernel.scheduler.messaging.SchedulerRequest;
 
@@ -42,8 +42,10 @@ import org.apache.commons.logging.LogFactory;
  */
 public class SchedulerMessageListener implements MessageListener {
 
-	public SchedulerMessageListener(SchedulerEngine schedulerEngine) {
+	public SchedulerMessageListener(SchedulerEngine schedulerEngine,
+									MessageSender sender) {
 		_schedulerEngine = schedulerEngine;
+		_messageSender = sender;
 	}
 
 	public void receive(Message message) {
@@ -93,11 +95,12 @@ public class SchedulerMessageListener implements MessageListener {
 
 		message.setPayload(schedulerRequests);
 
-		MessageBusUtil.sendMessage(message.getResponseDestination(), message);
+		_messageSender.send(message.getResponseDestination(), message);
 	}
 
 	private static Log _log = LogFactory.getLog(SchedulerMessageListener.class);
 
 	private SchedulerEngine _schedulerEngine;
 
+	private MessageSender _messageSender;
 }

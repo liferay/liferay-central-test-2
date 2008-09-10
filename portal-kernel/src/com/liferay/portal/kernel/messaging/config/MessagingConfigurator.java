@@ -20,7 +20,11 @@
  * SOFTWARE.
  */
 
-package com.liferay.portal.kernel.messaging;
+package com.liferay.portal.kernel.messaging.config;
+
+import com.liferay.portal.kernel.messaging.DestinationEventListener;
+import com.liferay.portal.kernel.messaging.Destination;
+import com.liferay.portal.kernel.messaging.MessageListener;
 
 import java.util.List;
 import java.util.Map;

@@ -30,7 +30,8 @@ import com.liferay.portal.kernel.events.ActionException;
 import com.liferay.portal.kernel.events.SimpleAction;
 import com.liferay.portal.kernel.messaging.MessageBus;
 import com.liferay.portal.kernel.messaging.MessageBusUtil;
-import com.liferay.portal.kernel.messaging.MessageSender;
+import com.liferay.portal.kernel.messaging.sender.MessageSender;
+import com.liferay.portal.kernel.messaging.sender.SynchronousMessageSender;
 import com.liferay.portal.kernel.scheduler.SchedulerEngineUtil;
 import com.liferay.portal.kernel.search.SearchEngineUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
@@ -245,8 +246,11 @@ public class StartupAction extends SimpleAction {
 		MessageSender messageSender =
 			(MessageSender)PortalBeanLocatorUtil.locate(
 				MessageSender.class.getName());
+		SynchronousMessageSender syncMessageSender =
+			(SynchronousMessageSender)PortalBeanLocatorUtil.locate(
+				SynchronousMessageSender.class.getName());
 
-		MessageBusUtil.init(messageBus, messageSender);
+		MessageBusUtil.init(messageBus, messageSender, syncMessageSender);
 
 		// Scheduler
 

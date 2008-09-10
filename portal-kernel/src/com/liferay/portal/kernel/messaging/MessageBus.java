@@ -48,10 +48,6 @@ public interface MessageBus {
 
 	public void sendMessage(String destination, Message message);
 
-	public Object sendSynchronizedMessage(
-			String destination, Message message, long timeout)
-		throws MessageBusException;
-
 	public boolean unregisterMessageListener(
 		String destination, MessageListener listener);
 

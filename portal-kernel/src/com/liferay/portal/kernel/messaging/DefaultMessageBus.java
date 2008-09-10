@@ -24,7 +24,6 @@ package com.liferay.portal.kernel.messaging;
 
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
-import com.liferay.portal.kernel.uuid.PortalUUIDUtil;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -42,10 +41,6 @@ public class DefaultMessageBus implements MessageBus {
 	public synchronized void addDestination(Destination destination) {
 		_destinations.put(destination.getName(), destination);
 		fireDestinationAddedEvent(destination);
-
-		Destination responseDestination = getResponseDestination(destination);
-
-		_destinations.put(responseDestination.getName(), responseDestination);
 	}
 
 	public void addDestinationEventListener(DestinationEventListener listener) {
@@ -84,10 +79,6 @@ public class DefaultMessageBus implements MessageBus {
 		Destination destinationModel = _destinations.remove(destination);
 
 		fireDestinationRemovedEvent(destinationModel);
-
-		String responseDestination = getResponseDestination(destination);
-
-		_destinations.remove(responseDestination);
 	}
 
 	public void removeDestinationEventListener(
@@ -110,51 +101,6 @@ public class DefaultMessageBus implements MessageBus {
 		message.setDestination(destination);
 
 		destinationModel.send(message);
-	}
-
-	public Object sendSynchronizedMessage(
-			String destination, Message message, long timeout)
-		throws MessageBusException {
-
-		Destination destinationModel = _destinations.get(destination);
-
-		if (destinationModel == null) {
-			if (_log.isWarnEnabled()) {
-				_log.warn("Destination " + destination + " is not configured");
-			}
-
-			return null;
-		}
-
-		Destination responseDestinationModel = _destinations.get(
-			getResponseDestination(destination));
-
-		if (responseDestinationModel == null) {
-			_log.error(
-				"Response destination " + destination + " is not configured");
-
-			return null;
-		}
-
-		message.setResponseDestination(responseDestinationModel.getName());
-
-		String responseId = getNextResponseId();
-
-		message.setResponseId(responseId);
-
-		ResponseMessageListener responseMessageListener =
-			new ResponseMessageListener(destinationModel, responseId, timeout);
-
-		responseDestinationModel.register(responseMessageListener);
-
-		try {
-			Object responseValue = responseMessageListener.send(message);
-
-			return responseValue;
-		}
-		finally {
-			responseDestinationModel.unregister(responseMessageListener);
-		}
 	}
 
 	public void shutdown() {
@@ -190,21 +136,6 @@ public class DefaultMessageBus implements MessageBus {
 			listener.destinationRemoved(destination);
 		}
 	}
-
-	protected String getNextResponseId() {
-		return PortalUUIDUtil.generate();
-	}
-
-	protected String getResponseDestination(String destination) {
-		return destination + _RESPONSE_DESTINATION_SUFFIX;
-	}
-
-	protected Destination getResponseDestination(Destination destination) {
-		return new TempDestination(
-			getResponseDestination(destination.getName()));
-	}
-
-	private static final String _RESPONSE_DESTINATION_SUFFIX = "/response";
 
 	private static Log _log = LogFactoryUtil.getLog(DefaultMessageBus.class);
 

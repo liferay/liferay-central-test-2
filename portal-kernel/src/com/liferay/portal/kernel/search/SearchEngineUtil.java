@@ -130,7 +130,8 @@ public class SearchEngineUtil {
 			searchRequest.setCommand(SearchRequest.COMMAND_INDEX_ONLY);
 
 			_indexReadOnly = (Boolean)MessageBusUtil.sendSynchronizedMessage(
-				DestinationNames.SEARCH_READER, searchRequest);
+				DestinationNames.SEARCH_READER,
+				DestinationNames.SEARCH_READER_RESPONSE, searchRequest);
 
 			if (_indexReadOnly == null) {
 				_indexReadOnly = Boolean.FALSE;

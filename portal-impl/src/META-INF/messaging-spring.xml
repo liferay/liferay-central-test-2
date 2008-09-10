@@ -9,8 +9,13 @@
 			<bean class="com.liferay.portal.kernel.messaging.DefaultMessageBus" />
 		</property>
 	</bean>
-	<bean id="com.liferay.portal.kernel.messaging.MessageSender" class="com.liferay.portal.kernel.messaging.DefaultMessageSender">
+	<bean id="com.liferay.portal.kernel.messaging.sender.MessageSender" class="com.liferay.portal.kernel.messaging.sender.DefaultMessageSender">
 		<property name="messageBus" ref="com.liferay.portal.kernel.messaging.MessageBus" />
+	</bean>
+	<bean id="com.liferay.portal.kernel.messaging.sender.SynchronousMessageSender" class="com.liferay.portal.kernel.messaging.sender.DefaultSynchronousMessageSender">
+		<constructor-arg index="0" type="com.liferay.portal.kernel.messaging.MessageBus" ref="com.liferay.portal.kernel.messaging.MessageBus" />
+		<constructor-arg index="1" type="com.liferay.portal.kernel.uuid.PortalUUID" ref="com.liferay.portal.kernel.uuid.PortalUUID" />
+		<constructor-arg index="2" type="java.lang.Long" value="10000"/>
 	</bean>
 
 	<!-- Destinations -->
@@ -39,8 +44,14 @@
 	<bean id="destination.scheduler" class="com.liferay.portal.kernel.messaging.ParallelDestination">
 		<constructor-arg type="java.lang.String" index="0" value="liferay/scheduler" />
 	</bean>
+	<bean id="destination.scheduler.response" class="com.liferay.portal.kernel.messaging.ParallelDestination">
+		<constructor-arg type="java.lang.String" index="0" value="liferay/scheduler/response" />
+	</bean>
 	<bean id="destination.search_reader" class="com.liferay.portal.kernel.messaging.ParallelDestination">
 		<constructor-arg type="java.lang.String" index="0" value="liferay/search_reader" />
+	</bean>
+	<bean id="destination.search_reader.response" class="com.liferay.portal.kernel.messaging.ParallelDestination">
+		<constructor-arg type="java.lang.String" index="0" value="liferay/search_reader/response" />
 	</bean>
 	<bean id="destination.search_writer" class="com.liferay.portal.kernel.messaging.SerialDestination">
 		<constructor-arg type="java.lang.String" index="0" value="liferay/search_writer" />
@@ -52,10 +63,10 @@
 	<!-- Listeners -->
 
 	<bean id="messageListener.global" class="com.liferay.portal.kernel.messaging.BridgingMessageListener">
-		<constructor-arg index="0" type="com.liferay.portal.kernel.messaging.SingleDestinationMessageSender">
-			<bean class="com.liferay.portal.kernel.messaging.DefaultSingleDestinationMessageSender">
+		<constructor-arg index="0" type="com.liferay.portal.kernel.messaging.sender.SingleDestinationMessageSender">
+			<bean class="com.liferay.portal.kernel.messaging.sender.DefaultSingleDestinationMessageSender">
 				<constructor-arg type="java.lang.String" index="0" value="liferay/global" />
-				<constructor-arg type="com.liferay.portal.kernel.messaging.MessageSender" index="1" ref="com.liferay.portal.kernel.messaging.MessageSender" />
+				<constructor-arg type="com.liferay.portal.kernel.messaging.sender.MessageSender" index="1" ref="com.liferay.portal.kernel.messaging.sender.MessageSender" />
 			</bean>
 		</constructor-arg>
 	</bean>
@@ -67,14 +78,17 @@
 	<bean id="messageListener.message_boards_mailing_list" class="com.liferay.portlet.messageboards.messaging.MailingListMessageListener" />
 	<bean id="messageListener.scheduler" class="com.liferay.portal.scheduler.messaging.SchedulerMessageListener">
 		<constructor-arg type="com.liferay.portal.kernel.scheduler.SchedulerEngine" ref="com.liferay.portal.kernel.scheduler.SchedulerEngine" />
+		<constructor-arg type="com.liferay.portal.kernel.messaging.sender.MessageSender" ref="com.liferay.portal.kernel.messaging.sender.MessageSender" />
 	</bean>
-	<bean id="messageListener.search_reader" class="com.liferay.portal.search.lucene.messaging.LuceneReaderMessageListener" />
+	<bean id="messageListener.search_reader" class="com.liferay.portal.search.lucene.messaging.LuceneReaderMessageListener">
+		<constructor-arg type="com.liferay.portal.kernel.messaging.sender.MessageSender" ref="com.liferay.portal.kernel.messaging.sender.MessageSender" />
+	</bean>
 	<bean id="messageListener.search_writer" class="com.liferay.portal.search.lucene.messaging.LuceneWriterMessageListener" />
 	<bean id="messageListener.wiki" class="com.liferay.portlet.wiki.messaging.WikiMessageListener" />
 
 	<!-- Configurator -->
 
-	<bean id="com.liferay.portal.kernel.messaging.MessagingConfigurator" class="com.liferay.portal.kernel.messaging.DefaultMessagingConfigurator" init-method="configure">
+	<bean id="com.liferay.portal.kernel.messaging.config.MessagingConfigurator" class="com.liferay.portal.kernel.messaging.config.DefaultMessagingConfigurator" init-method="configure">
 		<property name="destinationEventListeners">
 			<list>
 				<!--<bean class="com.liferay.portal.kernel.messaging.GlobalDestinationEventListener">
@@ -96,7 +110,9 @@
 				<ref bean="destination.message_boards" />
 				<ref bean="destination.message_boards_mailing_list" />
 				<ref bean="destination.scheduler" />
+				<ref bean="destination.scheduler.response" />
 				<ref bean="destination.search_reader" />
+				<ref bean="destination.search_reader.response" />
 				<ref bean="destination.search_writer" />
 				<ref bean="destination.wiki" />
 			</list>
