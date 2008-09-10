@@ -43,6 +43,7 @@ import com.liferay.portal.kernel.util.StringUtil_IW;
 import com.liferay.portal.kernel.util.UnicodeFormatter_IW;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.kernel.util.Validator_IW;
+import com.liferay.portal.kernel.xml.SAXReaderUtil;
 import com.liferay.portal.model.Layout;
 import com.liferay.portal.model.Theme;
 import com.liferay.portal.service.permission.AccountPermissionUtil;
@@ -64,6 +65,7 @@ import com.liferay.portal.util.PrefsPropsUtil_IW;
 import com.liferay.portal.util.PropsUtil_IW;
 import com.liferay.portal.util.ServiceLocator;
 import com.liferay.portal.util.SessionClicks_IW;
+import com.liferay.portal.util.UtilLocator;
 import com.liferay.portal.util.WebKeys;
 import com.liferay.portlet.PortletConfigImpl;
 import com.liferay.portlet.PortletURLFactory;
@@ -134,6 +136,7 @@ public class VelocityVariables {
 		// Expando column service
 
 		ServiceLocator serviceLocator = ServiceLocator.getInstance();
+		UtilLocator utilLocator = UtilLocator.getInstance();
 
 		velocityContext.put(
 			"expandoColumnLocalService",
@@ -249,6 +252,12 @@ public class VelocityVariables {
 		velocityContext.put(
 			"randomizer", Randomizer_IW.getInstance().getWrappedInstance());
 
+		// SAX reader util
+
+		velocityContext.put(
+			"saxReaderUtil",
+			utilLocator.findUtil(SAXReaderUtil.class.getName()));
+
 		// Service locator
 
 		_insertHelperUtility(
@@ -273,6 +282,12 @@ public class VelocityVariables {
 		// String util
 
 		velocityContext.put("stringUtil", StringUtil_IW.getInstance());
+
+		// Util locator
+
+		_insertHelperUtility(
+			velocityContext, restrictedVariables, "utilLocator",
+			utilLocator);
 
 		// Unicode formatter
 

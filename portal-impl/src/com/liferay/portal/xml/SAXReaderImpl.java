@@ -41,6 +41,7 @@ import java.io.File;
 import java.io.InputStream;
 import java.io.Reader;
 
+import java.net.MalformedURLException;
 import java.net.URL;
 
 import java.util.ArrayList;
@@ -396,6 +397,18 @@ public class SAXReaderImpl implements SAXReader {
 		catch (org.dom4j.DocumentException de) {
 			throw new DocumentException(de.getMessage());
 		}
+	}
+
+	public Document readURL(String url)
+		throws DocumentException, MalformedURLException {
+
+		return read(new URL(url), false);
+	}
+
+	public Document readURL(String url, boolean validate)
+		throws DocumentException, MalformedURLException {
+
+		return read(new URL(url), validate);
 	}
 
 	protected org.dom4j.io.SAXReader getSAXReader(boolean validate) {

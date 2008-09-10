@@ -1,6 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <beans default-init-method="afterPropertiesSet" xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd">
+	<bean id="velocityUtilInterceptor" class="com.liferay.portal.spring.aop.BeanInterceptor">
+		<property name="exceptionSafe" value="true" />
+	</bean>
+	<bean id="baseVelocityUtil" abstract="true">
+		<property name="interceptorNames">
+			<list>
+				<value>velocityUtilInterceptor</value>
+			</list>
+		</property>
+	</bean>
 	<bean id="com.liferay.portal.kernel.bean.BeanPropertiesUtil" class="com.liferay.portal.kernel.bean.BeanPropertiesUtil">
 		<property name="beanProperties">
 			<bean class="com.liferay.portal.bean.BeanPropertiesImpl" />
@@ -225,6 +235,9 @@
 	<bean id="com.liferay.portal.xml.SAXReaderImpl" class="com.liferay.portal.xml.SAXReaderImpl" />
 	<bean id="com.liferay.portal.kernel.xml.SAXReaderUtil" class="com.liferay.portal.kernel.xml.SAXReaderUtil">
 		<property name="SAXReader" ref="com.liferay.portal.xml.SAXReaderImpl" />
+	</bean>
+	<bean id="com.liferay.portal.kernel.xml.SAXReaderUtil.velocity" class="org.springframework.aop.framework.ProxyFactoryBean" parent="baseVelocityUtil">
+		<property name="target" ref="com.liferay.portal.xml.SAXReaderImpl" />
 	</bean>
 	<bean id="com.liferay.portlet.PortletPreferencesFactoryUtil" class="com.liferay.portlet.PortletPreferencesFactoryUtil">
 		<property name="portletPreferencesFactory">

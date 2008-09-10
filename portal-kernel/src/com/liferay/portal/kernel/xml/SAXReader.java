@@ -26,6 +26,7 @@ import java.io.File;
 import java.io.InputStream;
 import java.io.Reader;
 
+import java.net.MalformedURLException;
 import java.net.URL;
 
 import java.util.List;
@@ -98,6 +99,12 @@ public interface SAXReader {
 	public Document read(URL url) throws DocumentException;
 
 	public Document read(URL url, boolean validate) throws DocumentException;
+
+	public Document readURL(String url)
+		throws DocumentException, MalformedURLException;
+
+	public Document readURL(String url, boolean validate)
+		throws DocumentException, MalformedURLException;
 
 	public List<Node> selectNodes(
 		String xpathFilterExpression, List<Node> nodes);

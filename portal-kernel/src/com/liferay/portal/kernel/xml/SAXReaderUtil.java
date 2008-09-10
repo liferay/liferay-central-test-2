@@ -26,6 +26,7 @@ import java.io.File;
 import java.io.InputStream;
 import java.io.Reader;
 
+import java.net.MalformedURLException;
 import java.net.URL;
 
 import java.util.List;
@@ -163,6 +164,18 @@ public class SAXReaderUtil {
 		throws DocumentException {
 
 		return getSAXReader().read(url, validate);
+	}
+
+	public static Document readURL(String url)
+		throws DocumentException, MalformedURLException {
+
+		return getSAXReader().readURL(url);
+	}
+
+	public static Document readURL(String url, boolean validate)
+		throws DocumentException, MalformedURLException {
+
+		return getSAXReader().readURL(url, validate);
 	}
 
 	public static List<Node> selectNodes(
