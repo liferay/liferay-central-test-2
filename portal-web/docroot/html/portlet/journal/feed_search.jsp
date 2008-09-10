@@ -65,7 +65,7 @@ FeedDisplayTerms displayTerms = (FeedDisplayTerms)searchContainer.getDisplayTerm
 <div>
 	<input type="submit" value="<liferay-ui:message key="search-feeds" />" />
 
-	<c:if test="<%= PortletPermissionUtil.contains(permissionChecker, plid.longValue(), PortletKeys.JOURNAL, ActionKeys.ADD_FEED) %>">
+	<c:if test="<%= PortletPermissionUtil.contains(permissionChecker, plid, PortletKeys.JOURNAL, ActionKeys.ADD_FEED) %>">
 		<input type="button" value="<liferay-ui:message key="add-feed" />" onClick="<portlet:namespace />addFeed();" />
 	</c:if>
 </div>

@@ -55,7 +55,7 @@ String currentURL = PortalUtil.getCurrentURL(request);
 		url.append(themeDisplay.getPathMain());
 		url.append("/portal/render_portlet");
 		url.append("?p_l_id=");
-		url.append(plid.longValue());
+		url.append(plid);
 		url.append("&p_p_id=");
 		url.append(portlet.getPortletId());
 		url.append("&p_p_lifecycle=0&p_p_state=normal&p_p_mode=view&p_p_col_id=");
@@ -101,7 +101,7 @@ String currentURL = PortalUtil.getCurrentURL(request);
 				}
 			}
 
-			Map renderParameters = RenderParametersPool.get(request, plid.longValue(), ppid);
+			Map renderParameters = RenderParametersPool.get(request, plid, ppid);
 
 			Iterator itr = renderParameters.keySet().iterator();
 

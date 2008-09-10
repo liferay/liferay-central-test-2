@@ -195,7 +195,7 @@ portletURL.setParameter("categoryId", String.valueOf(categoryId));
 			resultRows.add(row);
 		}
 
-		boolean showAddCategoryButton = MBCategoryPermission.contains(permissionChecker, plid.longValue(), categoryId, ActionKeys.ADD_CATEGORY);
+		boolean showAddCategoryButton = MBCategoryPermission.contains(permissionChecker, plid, categoryId, ActionKeys.ADD_CATEGORY);
 		%>
 
 		<c:if test="<%= showAddCategoryButton || (results.size() > 0) %>">

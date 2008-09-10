@@ -96,7 +96,7 @@ else if (className.equals(IGImage.class.getName())) {
 
 	summary = image.getDescription();
 
-	PortletURL imageURL = new PortletURLImpl(request, PortletKeys.IMAGE_GALLERY, plid.longValue(), PortletRequest.RENDER_PHASE);
+	PortletURL imageURL = new PortletURLImpl(request, PortletKeys.IMAGE_GALLERY, plid, PortletRequest.RENDER_PHASE);
 
 	imageURL.setWindowState(WindowState.MAXIMIZED);
 
@@ -163,7 +163,7 @@ else if (className.equals(WikiPage.class.getName())) {
 
 	WikiPage wikiPage = WikiPageLocalServiceUtil.getPage(pageResource.getNodeId(), pageResource.getTitle());
 
-	PortletURL pageURL = new PortletURLImpl(request, PortletKeys.WIKI, plid.longValue(), PortletRequest.ACTION_PHASE);
+	PortletURL pageURL = new PortletURLImpl(request, PortletKeys.WIKI, plid, PortletRequest.ACTION_PHASE);
 
 	pageURL.setWindowState(WindowState.MAXIMIZED);
 	pageURL.setPortletMode(PortletMode.VIEW);

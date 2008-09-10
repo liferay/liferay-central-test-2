@@ -37,7 +37,7 @@ if (PortalPermissionUtil.contains(permissionChecker, ActionKeys.ADD_LICENSE)) {
 	tabs1Values += ",licenses";
 }
 
-if (PortletPermissionUtil.contains(permissionChecker, plid.longValue(), PortletKeys.SOFTWARE_CATALOG, ActionKeys.ADD_FRAMEWORK_VERSION)) {
+if (PortletPermissionUtil.contains(permissionChecker, plid, PortletKeys.SOFTWARE_CATALOG, ActionKeys.ADD_FRAMEWORK_VERSION)) {
 	tabs1Values += ",framework_versions";
 }
 
@@ -240,7 +240,7 @@ portletURL.setParameter("tabs1", tabs1);
 			resultRows.add(row);
 		}
 
-		boolean showAddProductEntryButton = PortletPermissionUtil.contains(permissionChecker, plid.longValue(), PortletKeys.SOFTWARE_CATALOG, ActionKeys.ADD_PRODUCT_ENTRY);
+		boolean showAddProductEntryButton = PortletPermissionUtil.contains(permissionChecker, plid, PortletKeys.SOFTWARE_CATALOG, ActionKeys.ADD_PRODUCT_ENTRY);
 		%>
 
 		<div>
@@ -425,7 +425,7 @@ portletURL.setParameter("tabs1", tabs1);
 			resultRows.add(row);
 		}
 
-		boolean showAddProductEntryButton = PortletPermissionUtil.contains(permissionChecker, plid.longValue(), PortletKeys.SOFTWARE_CATALOG, ActionKeys.ADD_PRODUCT_ENTRY);
+		boolean showAddProductEntryButton = PortletPermissionUtil.contains(permissionChecker, plid, PortletKeys.SOFTWARE_CATALOG, ActionKeys.ADD_PRODUCT_ENTRY);
 		%>
 
 		<c:if test="<%= showAddProductEntryButton %>">
@@ -503,7 +503,7 @@ portletURL.setParameter("tabs1", tabs1);
 		}
 		%>
 
-		<c:if test="<%= PortletPermissionUtil.contains(permissionChecker, plid.longValue(), PortletKeys.SOFTWARE_CATALOG, ActionKeys.ADD_FRAMEWORK_VERSION) %>">
+		<c:if test="<%= PortletPermissionUtil.contains(permissionChecker, plid, PortletKeys.SOFTWARE_CATALOG, ActionKeys.ADD_FRAMEWORK_VERSION) %>">
 			<div>
 				<input type="button" value="<liferay-ui:message key="add-framework-version" />" onClick="location.href = '<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/software_catalog/edit_framework_version" /><portlet:param name="redirect" value="<%= currentURL %>" /></portlet:renderURL>';" />
 			</div>

@@ -44,7 +44,7 @@ SearchContainer searchContainer = new SearchContainer(renderRequest, null, null,
 
 int total = 0;
 
-if (PortletPermissionUtil.contains(permissionChecker, plid.longValue(), PortletKeys.BLOGS, ActionKeys.ADD_ENTRY)) {
+if (PortletPermissionUtil.contains(permissionChecker, plid, PortletKeys.BLOGS, ActionKeys.ADD_ENTRY)) {
 	total = BlogsEntryLocalServiceUtil.getGroupEntriesCount(scopeGroupId);
 }
 else {
@@ -55,7 +55,7 @@ searchContainer.setTotal(total);
 
 List results = null;
 
-if (PortletPermissionUtil.contains(permissionChecker, plid.longValue(), PortletKeys.BLOGS, ActionKeys.ADD_ENTRY)) {
+if (PortletPermissionUtil.contains(permissionChecker, plid, PortletKeys.BLOGS, ActionKeys.ADD_ENTRY)) {
 	results = BlogsEntryLocalServiceUtil.getGroupEntries(scopeGroupId, searchContainer.getStart(), searchContainer.getEnd());
 }
 else {

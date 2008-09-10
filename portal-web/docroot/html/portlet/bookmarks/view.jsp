@@ -183,7 +183,7 @@ portletURL.setParameter("folderId", String.valueOf(folderId));
 			resultRows.add(row);
 		}
 
-		boolean showAddFolderButton = BookmarksFolderPermission.contains(permissionChecker, plid.longValue(), folderId, ActionKeys.ADD_FOLDER);
+		boolean showAddFolderButton = BookmarksFolderPermission.contains(permissionChecker, plid, folderId, ActionKeys.ADD_FOLDER);
 		%>
 
 		<c:if test="<%= showAddFolderButton || (results.size() > 0) %>">

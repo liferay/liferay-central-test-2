@@ -184,7 +184,7 @@ List scores = null;
 			resultRows.add(row);
 		}
 
-		boolean showAddFolderButton = IGFolderPermission.contains(permissionChecker, plid.longValue(), folderId, ActionKeys.ADD_FOLDER);
+		boolean showAddFolderButton = IGFolderPermission.contains(permissionChecker, plid, folderId, ActionKeys.ADD_FOLDER);
 		%>
 
 		<c:if test="<%= showAddFolderButton || (results.size() > 0) %>">

@@ -897,7 +897,7 @@ String smallImageURL = BeanParamUtil.getString(article, request, "smallImageURL"
 				hasSavePermission = JournalArticlePermission.contains(permissionChecker, groupId, articleId, ActionKeys.UPDATE);
 			}
 			else {
-				hasSavePermission = PortletPermissionUtil.contains(permissionChecker, plid.longValue(), PortletKeys.JOURNAL, ActionKeys.ADD_ARTICLE);
+				hasSavePermission = PortletPermissionUtil.contains(permissionChecker, plid, PortletKeys.JOURNAL, ActionKeys.ADD_ARTICLE);
 			}
 			%>
 
@@ -906,7 +906,7 @@ String smallImageURL = BeanParamUtil.getString(article, request, "smallImageURL"
 
 				<input name="save-and-continue" type="button" value="<liferay-ui:message key="save-and-continue" />" onClick="<portlet:namespace />saveAndContinueArticle();" />
 
-				<c:if test="<%= ((article == null) || ((article != null) && !article.isApproved())) && PortletPermissionUtil.contains(permissionChecker, plid.longValue(), PortletKeys.JOURNAL, ActionKeys.APPROVE_ARTICLE) %>">
+				<c:if test="<%= ((article == null) || ((article != null) && !article.isApproved())) && PortletPermissionUtil.contains(permissionChecker, plid, PortletKeys.JOURNAL, ActionKeys.APPROVE_ARTICLE) %>">
 					<input type="button" value="<liferay-ui:message key="save-and-approve" />" onClick="<portlet:namespace />saveAndApproveArticle();" />
 				</c:if>
 			</c:if>

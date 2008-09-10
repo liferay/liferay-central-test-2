@@ -65,7 +65,7 @@ StructureDisplayTerms displayTerms = (StructureDisplayTerms)searchContainer.getD
 <div>
 	<input type="submit" value="<liferay-ui:message key="search-structures" />" />
 
-	<c:if test="<%= PortletPermissionUtil.contains(permissionChecker, plid.longValue(), PortletKeys.JOURNAL, ActionKeys.ADD_STRUCTURE) %>">
+	<c:if test="<%= PortletPermissionUtil.contains(permissionChecker, plid, PortletKeys.JOURNAL, ActionKeys.ADD_STRUCTURE) %>">
 		<input type="button" value="<liferay-ui:message key="add-structure" />" onClick="<portlet:namespace />addStructure();" />
 	</c:if>
 </div>

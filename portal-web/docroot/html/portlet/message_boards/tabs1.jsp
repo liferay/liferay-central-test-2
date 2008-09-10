@@ -39,7 +39,7 @@ String tabs1Values = "categories,recent_posts,statistics";
 if (themeDisplay.isSignedIn()) {
 	tabs1Values = "categories,my_posts,my_subscriptions,recent_posts,statistics";
 
-	if (PortletPermissionUtil.contains(permissionChecker, plid.longValue(), PortletKeys.MESSAGE_BOARDS, ActionKeys.BAN_USER)) {
+	if (PortletPermissionUtil.contains(permissionChecker, plid, PortletKeys.MESSAGE_BOARDS, ActionKeys.BAN_USER)) {
 		tabs1Values += ",banned_users";
 	}
 }

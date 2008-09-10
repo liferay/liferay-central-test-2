@@ -31,7 +31,7 @@ String portletId = portlet.getPortletId();
 String rootPortletId = portlet.getRootPortletId();
 String instanceId = portlet.getInstanceId();
 
-String portletPrimaryKey = PortletPermissionUtil.getPrimaryKey(plid.longValue(), portletId);
+String portletPrimaryKey = PortletPermissionUtil.getPrimaryKey(plid, portletId);
 
 String queryString = (String)request.getAttribute(WebKeys.RENDER_PORTLET_QUERY_STRING);
 String columnId = (String)request.getAttribute(WebKeys.RENDER_PORTLET_COLUMN_ID);
@@ -97,7 +97,7 @@ catch (NoSuchResourceException nsre) {
 	}
 }
 
-boolean access = PortletPermissionUtil.contains(permissionChecker, plid.longValue(), portlet, ActionKeys.VIEW);
+boolean access = PortletPermissionUtil.contains(permissionChecker, plid, portlet, ActionKeys.VIEW);
 
 boolean stateMax = layoutTypePortlet.hasStateMaxPortletId(portletId);
 boolean stateMin = layoutTypePortlet.hasStateMinPortletId(portletId);
@@ -176,7 +176,7 @@ else if (modePrint) {
 
 HttpServletRequest originalRequest = PortalUtil.getOriginalServletRequest(request);
 
-RenderRequestImpl renderRequestImpl = RenderRequestFactory.create(originalRequest, portlet, invokerPortlet, portletCtx, windowState, portletMode, portletPreferences, plid.longValue());
+RenderRequestImpl renderRequestImpl = RenderRequestFactory.create(originalRequest, portlet, invokerPortlet, portletCtx, windowState, portletMode, portletPreferences, plid);
 
 if (Validator.isNotNull(queryString)) {
 	DynamicServletRequest dynamicRequest = (DynamicServletRequest)renderRequestImpl.getHttpServletRequest();
@@ -197,7 +197,7 @@ if (Validator.isNotNull(queryString)) {
 
 StringServletResponse stringResponse = new StringServletResponse(response);
 
-RenderResponseImpl renderResponseImpl = RenderResponseFactory.create(renderRequestImpl, stringResponse, portletId, company.getCompanyId(), plid.longValue());
+RenderResponseImpl renderResponseImpl = RenderResponseFactory.create(renderRequestImpl, stringResponse, portletId, company.getCompanyId(), plid);
 
 renderRequestImpl.defineObjects(portletConfig, renderResponseImpl);
 
@@ -239,7 +239,7 @@ Group group = layout.getGroup();
 
 if (!portletId.equals(PortletKeys.PORTLET_CONFIGURATION)) {
 	if ((!group.hasStagingGroup() || group.isStagingGroup()) &&
-		(PortletPermissionUtil.contains(permissionChecker, plid.longValue(), portletId, ActionKeys.CONFIGURATION))) {
+		(PortletPermissionUtil.contains(permissionChecker, plid, portletId, ActionKeys.CONFIGURATION))) {
 
 		showConfigurationIcon = true;
 
@@ -250,7 +250,7 @@ if (!portletId.equals(PortletKeys.PORTLET_CONFIGURATION)) {
 }
 
 if (portlet.hasPortletMode(responseContentType, PortletMode.EDIT)) {
-	if (PortletPermissionUtil.contains(permissionChecker, plid.longValue(), portletId, ActionKeys.PREFERENCES)) {
+	if (PortletPermissionUtil.contains(permissionChecker, plid, portletId, ActionKeys.PREFERENCES)) {
 		showEditIcon = true;
 	}
 }
@@ -302,7 +302,7 @@ if (portlet.isStatic()) {
 
 // Deny access to edit mode if you do not have permission
 
-if (!PropsValues.TCK_URL && portletMode.equals(PortletMode.EDIT) && !PortletPermissionUtil.contains(permissionChecker, plid.longValue(), portletId, ActionKeys.PREFERENCES)) {
+if (!PropsValues.TCK_URL && portletMode.equals(PortletMode.EDIT) && !PortletPermissionUtil.contains(permissionChecker, plid, portletId, ActionKeys.PREFERENCES)) {
 	denyAccess = true;
 }
 
@@ -390,13 +390,13 @@ portletDisplay.setURLPortlet(themeDisplay.getCDNHost() + portletIcon);
 
 // URL close
 
-String urlClose = themeDisplay.getPathMain() + "/portal/update_layout?p_l_id=" + plid.longValue() + "&p_p_id=" + portletDisplay.getId() + "&doAsUserId=" + themeDisplay.getDoAsUserId() + "&" + Constants.CMD + "=" + Constants.DELETE + "&referer=" + HttpUtil.encodeURL(themeDisplay.getPathMain() + "/portal/layout?p_l_id=" + plid.longValue() + "&doAsUserId=" + themeDisplay.getDoAsUserId()) + "&refresh=1";
+String urlClose = themeDisplay.getPathMain() + "/portal/update_layout?p_l_id=" + plid + "&p_p_id=" + portletDisplay.getId() + "&doAsUserId=" + themeDisplay.getDoAsUserId() + "&" + Constants.CMD + "=" + Constants.DELETE + "&referer=" + HttpUtil.encodeURL(themeDisplay.getPathMain() + "/portal/layout?p_l_id=" + plid + "&doAsUserId=" + themeDisplay.getDoAsUserId()) + "&refresh=1";
 
 portletDisplay.setURLClose(urlClose.toString());
 
 // URL configuration
 
-PortletURLImpl urlConfiguration = new PortletURLImpl(request, PortletKeys.PORTLET_CONFIGURATION, plid.longValue(), PortletRequest.RENDER_PHASE);
+PortletURLImpl urlConfiguration = new PortletURLImpl(request, PortletKeys.PORTLET_CONFIGURATION, plid, PortletRequest.RENDER_PHASE);
 
 urlConfiguration.setWindowState(WindowState.MAXIMIZED);
 
@@ -412,13 +412,13 @@ urlConfiguration.setEscapeXml(false);
 urlConfiguration.setParameter("redirect", currentURL);
 urlConfiguration.setParameter("returnToFullPageURL", currentURL);
 urlConfiguration.setParameter("portletResource", portletDisplay.getId());
-urlConfiguration.setParameter("resourcePrimKey", PortletPermissionUtil.getPrimaryKey(plid.longValue(), portlet.getPortletId()));
+urlConfiguration.setParameter("resourcePrimKey", PortletPermissionUtil.getPrimaryKey(plid, portlet.getPortletId()));
 
 portletDisplay.setURLConfiguration(urlConfiguration.toString() + "&" + PortalUtil.getPortletNamespace(PortletKeys.PORTLET_CONFIGURATION));
 
 // URL edit
 
-PortletURLImpl urlEdit = new PortletURLImpl(request, portletDisplay.getId(), plid.longValue(), PortletRequest.RENDER_PHASE);
+PortletURLImpl urlEdit = new PortletURLImpl(request, portletDisplay.getId(), plid, PortletRequest.RENDER_PHASE);
 
 if (portletDisplay.isModeEdit()) {
 	urlEdit.setWindowState(WindowState.NORMAL);
@@ -441,7 +441,7 @@ portletDisplay.setURLEdit(urlEdit.toString());
 
 // URL edit defaults
 
-PortletURLImpl urlEditDefaults = new PortletURLImpl(request, portletDisplay.getId(), plid.longValue(), PortletRequest.RENDER_PHASE);
+PortletURLImpl urlEditDefaults = new PortletURLImpl(request, portletDisplay.getId(), plid, PortletRequest.RENDER_PHASE);
 
 if (portletDisplay.isModeEditDefaults()) {
 	urlEditDefaults.setWindowState(WindowState.NORMAL);
@@ -464,7 +464,7 @@ portletDisplay.setURLEditDefaults(urlEditDefaults.toString());
 
 // URL edit guest
 
-PortletURLImpl urlEditGuest = new PortletURLImpl(request, portletDisplay.getId(), plid.longValue(), PortletRequest.RENDER_PHASE);
+PortletURLImpl urlEditGuest = new PortletURLImpl(request, portletDisplay.getId(), plid, PortletRequest.RENDER_PHASE);
 
 if (portletDisplay.isModeEditGuest()) {
 	urlEditGuest.setWindowState(WindowState.NORMAL);
@@ -487,7 +487,7 @@ portletDisplay.setURLEditGuest(urlEditGuest.toString());
 
 // URL help
 
-PortletURLImpl urlHelp = new PortletURLImpl(request, portletDisplay.getId(), plid.longValue(), PortletRequest.RENDER_PHASE);
+PortletURLImpl urlHelp = new PortletURLImpl(request, portletDisplay.getId(), plid, PortletRequest.RENDER_PHASE);
 
 if (portletDisplay.isModeHelp()) {
 	urlHelp.setWindowState(WindowState.NORMAL);
@@ -516,7 +516,7 @@ if (!portletDisplay.isRestoreCurrentView()) {
 	lifecycle = PortletRequest.ACTION_PHASE;
 }
 
-PortletURLImpl urlMax = new PortletURLImpl(request, portletDisplay.getId(), plid.longValue(), lifecycle);
+PortletURLImpl urlMax = new PortletURLImpl(request, portletDisplay.getId(), plid, lifecycle);
 
 if (portletDisplay.isStateMax()) {
 	urlMax.setWindowState(WindowState.NORMAL);
@@ -530,7 +530,7 @@ urlMax.setEscapeXml(false);
 if (lifecycle.equals(PortletRequest.RENDER_PHASE)) {
 	String portletNamespace = portletDisplay.getNamespace();
 
-	Map renderParameters = RenderParametersPool.get(request, plid.longValue(), portletDisplay.getId());
+	Map renderParameters = RenderParametersPool.get(request, plid, portletDisplay.getId());
 
 	Iterator itr = renderParameters.entrySet().iterator();
 
@@ -553,7 +553,7 @@ portletDisplay.setURLMax(urlMax.toString());
 
 // URL min
 
-String urlMin = themeDisplay.getPathMain() + "/portal/update_layout?p_l_id=" + plid.longValue() + "&p_p_id=" + portletDisplay.getId() + "&p_p_restore=" + portletDisplay.isStateMin() + "&doAsUserId=" + themeDisplay.getDoAsUserId() + "&" + Constants.CMD + "=minimize&referer=" + HttpUtil.encodeURL(themeDisplay.getPathMain() + "/portal/layout?p_l_id=" + plid.longValue() + "&doAsUserId=" + themeDisplay.getDoAsUserId()) + "&refresh=1";
+String urlMin = themeDisplay.getPathMain() + "/portal/update_layout?p_l_id=" + plid + "&p_p_id=" + portletDisplay.getId() + "&p_p_restore=" + portletDisplay.isStateMin() + "&doAsUserId=" + themeDisplay.getDoAsUserId() + "&" + Constants.CMD + "=minimize&referer=" + HttpUtil.encodeURL(themeDisplay.getPathMain() + "/portal/layout?p_l_id=" + plid + "&doAsUserId=" + themeDisplay.getDoAsUserId()) + "&refresh=1";
 
 portletDisplay.setURLMin(urlMin);
 
@@ -565,7 +565,7 @@ portletDisplay.setURLPortletCss(urlPortletCss.toString());
 
 // URL print
 
-PortletURLImpl urlPrint = new PortletURLImpl(request, portletDisplay.getId(), plid.longValue(), PortletRequest.RENDER_PHASE);
+PortletURLImpl urlPrint = new PortletURLImpl(request, portletDisplay.getId(), plid, PortletRequest.RENDER_PHASE);
 
 if (portletDisplay.isModePrint()) {
 	urlPrint.setWindowState(WindowState.NORMAL);

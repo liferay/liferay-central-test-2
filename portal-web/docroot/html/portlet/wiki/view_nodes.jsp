@@ -101,7 +101,7 @@ for (int i = 0; i < results.size(); i++) {
 	resultRows.add(row);
 }
 
-boolean showAddNodeButton = PortletPermissionUtil.contains(permissionChecker, plid.longValue(), PortletKeys.WIKI, ActionKeys.ADD_NODE);
+boolean showAddNodeButton = PortletPermissionUtil.contains(permissionChecker, plid, PortletKeys.WIKI, ActionKeys.ADD_NODE);
 %>
 
 <c:if test="<%= showAddNodeButton || (results.size() > 0) %>">

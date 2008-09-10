@@ -152,7 +152,7 @@ ArticleDisplayTerms displayTerms = (ArticleDisplayTerms)searchContainer.getDispl
 <div>
 	<input type="submit" value="<liferay-ui:message key="search-articles" />" />
 
-	<c:if test="<%= PortletPermissionUtil.contains(permissionChecker, plid.longValue(), PortletKeys.JOURNAL, ActionKeys.ADD_ARTICLE) %>">
+	<c:if test="<%= PortletPermissionUtil.contains(permissionChecker, plid, PortletKeys.JOURNAL, ActionKeys.ADD_ARTICLE) %>">
 		<input type="button" value="<liferay-ui:message key="add-article" />" onClick="<portlet:namespace />addArticle();" />
 	</c:if>
 </div>
