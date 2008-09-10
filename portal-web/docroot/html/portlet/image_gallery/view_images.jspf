@@ -105,7 +105,7 @@
 	%>
 
 		<div style="float: left; margin: <%= topMargin %>px <%= sideMargin %>px 0px <%= sideMargin %>px;">
-			<a href="#" onClick="<portlet:namespace />viewImage(<%= largeImage.getImageId() %>, '<b><%= image.getName() %></b><br /><%= image.getDescription() %>', <%= largeImage.getWidth() %>, <%= largeImage.getHeight() %>)">
+			<a href="javascript: ;" onClick="<portlet:namespace />viewImage(<%= largeImage.getImageId() %>, '<b><%= image.getName() %></b><br /><%= image.getDescription() %>', <%= largeImage.getWidth() %>, <%= largeImage.getHeight() %>)">
 				<img alt="<liferay-ui:message key="image" />" border="no" src="<%= themeDisplay.getPathImage() %>/image_gallery?img_id=<%= smallImage.getImageId() %>" style="height: <%= smallImage.getHeight() %>; width: <%= smallImage.getWidth() %>;" />
 			</a>
 
