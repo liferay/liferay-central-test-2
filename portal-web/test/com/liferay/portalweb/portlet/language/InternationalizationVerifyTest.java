@@ -34,27 +34,6 @@ import com.liferay.portalweb.portal.util.RuntimeVariables;
 public class InternationalizationVerifyTest extends BaseTestCase {
 	public void testInternationalizationVerify() throws Exception {
 		selenium.click(RuntimeVariables.replace(
-				"//img[@alt='\u4e2d\u6587 (\u4e2d\u56fd)']"));
-		selenium.waitForPageToLoad("30000");
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isElementPresent(
-							"link=\u8bed\u8a00\u6d4b\u8bd5\u9875")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
-		selenium.click(RuntimeVariables.replace(
 				"//img[@alt='\u65e5\u672c\u8a9e (\u65e5\u672c)']"));
 		selenium.waitForPageToLoad("30000");
 
