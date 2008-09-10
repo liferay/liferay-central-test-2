@@ -24,7 +24,7 @@ package com.liferay.taglib.portlet;
 
 import com.liferay.portal.kernel.util.JavaConstants;
 
-import javax.portlet.RenderResponse;
+import javax.portlet.PortletResponse;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.jsp.JspException;
@@ -43,11 +43,11 @@ public class NamespaceTag extends TagSupport {
 			HttpServletRequest request =
 				(HttpServletRequest)pageContext.getRequest();
 
-			RenderResponse renderResponse =
-				(RenderResponse)request.getAttribute(
+			PortletResponse portletResponse =
+				(PortletResponse)request.getAttribute(
 					JavaConstants.JAVAX_PORTLET_RESPONSE);
 
-			pageContext.getOut().print(renderResponse.getNamespace());
+			pageContext.getOut().print(portletResponse.getNamespace());
 		}
 		catch (Exception e) {
 			throw new JspException(e);

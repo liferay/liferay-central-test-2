@@ -1,4 +1,3 @@
-<%
 /**
  * Copyright (c) 2000-2008 Liferay, Inc. All rights reserved.
  *
@@ -20,33 +19,38 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-%>
 
-<%@ include file="/html/common/init.jsp" %>
+package com.liferay.portlet.portletsharing.action;
 
-<portlet:defineObjects />
+import com.liferay.portal.struts.PortletAction;
 
-<%
-WindowState windowState = null;
-PortletMode portletMode = null;
+import javax.portlet.PortletConfig;
+import javax.portlet.PortletRequestDispatcher;
+import javax.portlet.ResourceRequest;
+import javax.portlet.ResourceResponse;
 
-PortletURL currentURLObj = null;
+import org.apache.struts.action.ActionForm;
+import org.apache.struts.action.ActionMapping;
 
-if (renderRequest != null) {
-	windowState = renderRequest.getWindowState();
-	portletMode = renderRequest.getPortletMode();
+/**
+ * <a href="ViewAction.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Brian Wing Shun Chan
+ *
+ */
+public class ViewAction extends PortletAction {
 
-	currentURLObj = PortletURLUtil.getCurrent(renderRequest, renderResponse);
+	public void serveResource(
+			ActionMapping mapping, ActionForm form, PortletConfig portletConfig,
+			ResourceRequest resourceRequest, ResourceResponse resourceResponse)
+		throws Exception {
+
+		String path = "/html/portlet/portlet_sharing/view.jsp";
+
+		PortletRequestDispatcher prd =
+			portletConfig.getPortletContext().getRequestDispatcher(path);
+
+		prd.include(resourceRequest, resourceResponse);
+	}
+
 }
-else if (resourceRequest != null) {
-	windowState = resourceRequest.getWindowState();
-	portletMode = resourceRequest.getPortletMode();
-
-	//currentURLObj = PortletURLUtil.getCurrent(resourceRequest, resourceResponse);
-}
-
-//String currentURL = currentURLObj.toString();
-String currentURL = PortalUtil.getCurrentURL(request);
-%>
-
-<%@ include file="/html/portlet/init-ext.jsp" %>

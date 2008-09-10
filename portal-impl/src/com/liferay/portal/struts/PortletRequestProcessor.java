@@ -50,6 +50,8 @@ import javax.portlet.ActionRequest;
 import javax.portlet.ActionResponse;
 import javax.portlet.PortletContext;
 import javax.portlet.PortletException;
+import javax.portlet.PortletRequest;
+import javax.portlet.PortletResponse;
 import javax.portlet.RenderRequest;
 import javax.portlet.RenderResponse;
 import javax.portlet.ResourceRequest;
@@ -193,7 +195,7 @@ public class PortletRequestProcessor extends TilesRequestProcessor {
 		if (forward != null) {
 			String queryString = StringPool.BLANK;
 
-			int pos = forward.indexOf("?");
+			int pos = forward.indexOf(StringPool.QUESTION);
 
 			if (pos != -1) {
 				queryString = forward.substring(pos + 1, forward.length());
@@ -205,7 +207,7 @@ public class PortletRequestProcessor extends TilesRequestProcessor {
 			if ((actionForward != null) && (actionForward.getRedirect())) {
 				String forwardPath = actionForward.getPath();
 
-				if (forwardPath.startsWith("/")) {
+				if (forwardPath.startsWith(StringPool.SLASH)) {
 					LiferayPortletURL forwardURL =
 						(LiferayPortletURL)actionResponseImpl.createRenderURL();
 
@@ -264,10 +266,10 @@ public class PortletRequestProcessor extends TilesRequestProcessor {
 
 		PortletContext portletContext = portletConfig.getPortletContext();
 
-		RenderRequest renderRequest = (RenderRequest)request.getAttribute(
+		PortletRequest portletRequest = (PortletRequest)request.getAttribute(
 			JavaConstants.JAVAX_PORTLET_REQUEST);
 
-		RenderResponse renderResponse = (RenderResponse)request.getAttribute(
+		PortletResponse portletResponse = (PortletResponse)request.getAttribute(
 			JavaConstants.JAVAX_PORTLET_RESPONSE);
 
 		PortletRequestDispatcherImpl portletRequestDispatcher =
@@ -280,7 +282,7 @@ public class PortletRequestProcessor extends TilesRequestProcessor {
 			}
 			else {
 				portletRequestDispatcher.include(
-					renderRequest, renderResponse, true);
+					portletRequest, portletResponse, true);
 			}
 		}
 		catch (PortletException pe) {

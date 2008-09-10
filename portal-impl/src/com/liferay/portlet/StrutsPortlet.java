@@ -213,6 +213,8 @@ public class StrutsPortlet extends LiferayPortlet {
 			ResourceRequest resourceRequest, ResourceResponse resourceResponse)
 		throws IOException, PortletException {
 
+		resourceRequest.setAttribute(WebKeys.PORTLET_STRUTS_ACTION, viewAction);
+
 		// Call serveResource of com.liferay.portal.struts.PortletAction
 
 		PermissionChecker permissionChecker =
@@ -225,9 +227,6 @@ public class StrutsPortlet extends LiferayPortlet {
 				_getPortletRequestProcessor(resourceRequest);
 
 			processor.process(resourceRequest, resourceResponse);
-		}
-		catch (IOException ioe) {
-			throw ioe;
 		}
 		catch (ServletException se) {
 			throw new PortletException(se);
@@ -260,9 +259,6 @@ public class StrutsPortlet extends LiferayPortlet {
 				_getPortletRequestProcessor(renderRequest);
 
 			processor.process(renderRequest, renderResponse);
-		}
-		catch (IOException ioe) {
-			throw ioe;
 		}
 		catch (ServletException se) {
 			throw new PortletException(se);

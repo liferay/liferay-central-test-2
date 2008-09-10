@@ -70,10 +70,15 @@
 
 		<c:if test="<%= widgetShowAddAppLink || facebookShowAddAppLink || appShowShareWithFriendsLink %>">
 			<c:if test="<%= widgetShowAddAppLink %>">
+
+				<%
+				String portletSharingHREF = "javascript: Liferay.PortletSharing.showWidgetInfo('" + PortalUtil.getWidgetURL(portlet, themeDisplay) + "');";
+				%>
+
 				<liferay-ui:icon
 					image="../dock/add_content"
 					message="add-to-any-website"
-					url="javascript: ;"
+					url="<%= portletSharingHREF %>"
 					label="<%= true %>"
 					cssClass='<%= portletDisplay.getNamespace() + "expose-as-widget" %>'
 				/>
@@ -97,50 +102,6 @@
 					method="get"
 					label="<%= true %>"
 				/>
-			</c:if>
-
-			<c:if test="<%= widgetShowAddAppLink %>">
-				<div class="lfr-widget-information" id="<portlet:namespace />widgetInformation">
-					<p>
-						<liferay-ui:message key="share-this-application-on-any-website" />
-					</p>
-
-					<textarea class="lfr-textarea">&lt;script src=&quot;<%= themeDisplay.getPortalURL() %><%= themeDisplay.getPathContext() %>/html/js/liferay/widget.js&quot; type=&quot;text/javascript&quot;&gt;&lt;/script&gt;
-&lt;script type=&quot;text/javascript&quot;&gt;
-Liferay.Widget({ url: &#x27;<%= PortalUtil.getWidgetURL(portlet, themeDisplay) %>&#x27;});
-&lt;/script&gt;</textarea>
-				</div>
-
-				<script type="text/javascript">
-					jQuery(
-						function() {
-							jQuery('.<portlet:namespace />expose-as-widget a').click(
-								function(event) {
-									var message = jQuery('#<portlet:namespace />widgetInformation').clone();
-
-									var textarea = message.find('textarea');
-
-									textarea.focus(
-										function(event) {
-											Liferay.Util.selectAndCopy(this);
-										}
-									);
-
-									Liferay.Popup(
-										{
-											width: 550,
-											modal: true,
-											title: '<liferay-ui:message key="add-to-any-website" />',
-											message: message[0]
-										}
-									);
-
-									message.show();
-								}
-							);
-						}
-					);
-				</script>
 			</c:if>
 		</c:if>
 	</c:if>

@@ -1175,6 +1175,18 @@
 		<render-weight>1</render-weight>
 		<css-class-wrapper>portlet-enterprise-admin</css-class-wrapper>
 	</portlet>
+	<portlet>
+		<portlet-name>133</portlet-name>
+		<icon>/html/portlet/portlet_sharing/icon.png</icon>
+		<struts-path>portlet_sharing</struts-path>
+		<use-default-template>false</use-default-template>
+		<restore-current-view>false</restore-current-view>
+		<private-request-attributes>false</private-request-attributes>
+		<private-session-attributes>false</private-session-attributes>
+		<render-weight>1</render-weight>
+		<add-default-resource>true</add-default-resource>
+		<system>true</system>
+	</portlet>
 	<role-mapper>
 		<role-name>administrator</role-name>
 		<role-link>Administrator</role-link>

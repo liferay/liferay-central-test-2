@@ -22,31 +22,17 @@
  */
 %>
 
-<%@ include file="/html/common/init.jsp" %>
-
-<portlet:defineObjects />
+<%@ include file="/html/portlet/portlet_sharing/init.jsp" %>
 
 <%
-WindowState windowState = null;
-PortletMode portletMode = null;
-
-PortletURL currentURLObj = null;
-
-if (renderRequest != null) {
-	windowState = renderRequest.getWindowState();
-	portletMode = renderRequest.getPortletMode();
-
-	currentURLObj = PortletURLUtil.getCurrent(renderRequest, renderResponse);
-}
-else if (resourceRequest != null) {
-	windowState = resourceRequest.getWindowState();
-	portletMode = resourceRequest.getPortletMode();
-
-	//currentURLObj = PortletURLUtil.getCurrent(resourceRequest, resourceResponse);
-}
-
-//String currentURL = currentURLObj.toString();
-String currentURL = PortalUtil.getCurrentURL(request);
+String widgetURL = ParamUtil.getString(request, "widgetURL");
 %>
 
-<%@ include file="/html/portlet/init-ext.jsp" %>
+<p>
+	<liferay-ui:message key="share-this-application-on-any-website" />
+</p>
+
+<textarea class="lfr-textarea">&lt;script src=&quot;<%= themeDisplay.getPortalURL() %><%= themeDisplay.getPathContext() %>/html/js/liferay/widget.js&quot; type=&quot;text/javascript&quot;&gt;&lt;/script&gt;
+&lt;script type=&quot;text/javascript&quot;&gt;
+Liferay.Widget({ url: &#x27;<%= widgetURL %>&#x27;});
+&lt;/script&gt;</textarea>

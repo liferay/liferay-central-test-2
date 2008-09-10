@@ -6975,13 +6975,6 @@ Liferay.PortletURL = new Class({
 	initialize: function(lifecycle, params) {
 		var instance = this;
 
-		var	dictionary = {
-			action: Liferay.PortletURL.PortletRequest.ACTION_PHASE,
-			render: Liferay.PortletURL.PortletRequest.RENDER_PHASE,
-			resource: Liferay.PortletURL.PortletRequest.RESOURCE_PHASE
-		};
-
-		lifecycle = dictionary[lifecycle] || dictionary.render;
 		instance.params = params || {};
 
 		instance.options = {
@@ -6991,7 +6984,7 @@ Liferay.PortletURL = new Class({
 			escapeXML: null,
 			lifecycle: lifecycle,
 			name: null,
-			p_l_id: null,
+			p_l_id: themeDisplay.getPlid(),
 			portletConfiguration: false,
 			portletId: null,
 			portletMode: null,
@@ -7150,11 +7143,11 @@ jQuery.extend(
 	Liferay.PortletURL,
 	{
 		createRenderURL: function() {
-			return new Liferay.PortletURL(Liferay.PortletURL.PortletRequest.RENDER_PHASE);
+			return new Liferay.PortletURL('RENDER_PHASE');
 		},
 
 		createActionURL: function() {
-			return new Liferay.PortletURL(Liferay.PortletURL.PortletRequest.ACTION_PHASE);
+			return new Liferay.PortletURL('ACTION_PHASE');
 		},
 
 		createPermissionURL: function(portletResource, modelResource, modelResourceDescription, resourcePrimKey) {
@@ -7162,7 +7155,6 @@ jQuery.extend(
 
 			var portletURL = Liferay.PortletURL.createRenderURL();
 
-			portletURL.setPlid(themeDisplay.getPlid());
 			portletURL.setPortletId(86);
 
 			portletURL.setWindowState('MAXIMIZED');
@@ -7183,13 +7175,7 @@ jQuery.extend(
 		},
 
 		createResourceURL: function() {
-			return new Liferay.PortletURL(Liferay.PortletURL.PortletRequest.RESOURCE_PHASE);
-		},
-
-		PortletRequest: {
-			ACTION_PHASE: 'ACTION_PHASE',
-			RENDER_PHASE: 'RENDER_PHASE',
-			RESOURCE_PHASE: 'RESOURCE_PHASE'
+			return new Liferay.PortletURL('RESOURCE_PHASE');
 		}
 	}
 );

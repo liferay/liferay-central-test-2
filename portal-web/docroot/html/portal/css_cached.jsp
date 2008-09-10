@@ -884,38 +884,6 @@ li.toggle-expand a {
 	margin-bottom: 1.5em;
 }
 
-.lfr-widget-bar {
-	margin: 1em 0 0;
-}
-
-.lfr-widget-bar:after {
-	clear: both;
-	content: ".";
-	display: block;
-	height: 0;
-	visibility: hidden;
-}
-
-.ie .lfr-widget-bar {
-	height: 1%;
-}
-
-.lfr-widget-information {
-	display: none;
-}
-
-.lfr-widget-bar .lfr-actions.left .lfr-trigger strong span, .lfr-widget-bar .lfr-actions.right .lfr-trigger strong span {
-	background-image: url(<%= themeDisplay.getPathThemeImages() %>/common/sharing.png);
-}
-
-.lfr-widget-bar .lfr-actions.left .lfr-trigger  strong span {
-	padding-right: 25px;
-}
-
-.lfr-widget-bar .lfr-actions.right .lfr-trigger  strong span {
-	padding-left: 25px;
-}
-
 .portlet-minimized .portlet-content-container {
 	display: none;
 }
