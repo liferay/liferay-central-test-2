@@ -42,62 +42,53 @@
 package com.liferay.portal.mirage.aop;
 
 import com.liferay.portal.mirage.service.MirageServiceFactory;
-
 import com.sun.portal.cms.mirage.service.custom.BinaryContentService;
 
-import org.aopalliance.intercept.MethodInvocation;
+import org.aspectj.lang.ProceedingJoinPoint;
 
 /**
- * <a href="JournalContentSearchLocalServiceInterceptor.java.html"><b><i>View
+ * <a href="JournalArticleResourceLocalServiceInterceptor.java.html"><b><i>View
  * Source</i></b></a>
  *
- * @author Prakash Reddy
+ * @author Karthik Sudarshan
  *
  */
-public class JournalContentSearchLocalServiceInterceptor
-	extends MirageInterceptor {
+public class JournalArticleResourceLocalServiceAspect extends MirageAspect{
 
-	protected Object doInvoke(MethodInvocation invocation) throws Throwable {
-		String methodName = invocation.getMethod().getName();
+	protected Object doInvoke(ProceedingJoinPoint proceedingJoinPoint) 
+		throws Throwable {
+		
+		String methodName = proceedingJoinPoint.getSignature().getName();
 
-		if (methodName.equals("checkContentSearches") ||
-			methodName.equals("deleteArticleContentSearch") ||
-			methodName.equals("deleteArticleContentSearches") ||
-			methodName.equals("deleteLayoutContentSearches") ||
-			methodName.equals("deleteOwnerContentSearches") ||
-			methodName.equals("getArticleContentSearches") ||
-			methodName.equals("updateContentSearch")) {
+		if (methodName.equals("deleteArticleResource") ||
+			methodName.equals("getArticleResource") ||
+			methodName.equals("getArticleResourcePrimKey") ||
+			methodName.equals("getArticleResources")) {
 
-			ContentSearchInvoker contentSearchInvoker =
-				new ContentSearchInvoker(invocation);
+			ArticleResourceInvoker articleResourceInvoker =
+				new ArticleResourceInvoker(proceedingJoinPoint);
 
 			BinaryContentService binaryContentService =
-				MirageServiceFactory.getContentSearchService();
+				MirageServiceFactory.getArticleResourceService();
 
-			if (methodName.equals("checkContentSearches")) {
-				binaryContentService.createBinaryContent(contentSearchInvoker);
-			}
-			else if (methodName.equals("deleteArticleContentSearch")) {
+			if (methodName.equals("deleteArticleResource")) {
 				binaryContentService.deleteBinaryContent(
-					contentSearchInvoker, null);
+					articleResourceInvoker, null);
 			}
-			else if (methodName.equals("deleteArticleContentSearches") ||
-					methodName.equals("deleteLayoutContentSearches") ||
-					methodName.equals("deleteOwnerContentSearches")) {
-
-				binaryContentService.deleteBinaryContents(contentSearchInvoker);
+			else if (methodName.equals("getArticleResource")) {
+				binaryContentService.getBinaryContent(articleResourceInvoker);
 			}
-			else if (methodName.equals("getArticleContentSearches")) {
-				binaryContentService.getBinaryContents(contentSearchInvoker);
+			else if (methodName.equals("getArticleResourcePrimKey")) {
+				binaryContentService.getBinaryContentId(articleResourceInvoker);
 			}
-			else if (methodName.equals("updateContentSearch")) {
-				binaryContentService.updateBinaryContent(contentSearchInvoker);
+			else if (methodName.equals("getArticleResources")) {
+				binaryContentService.getBinaryContents(articleResourceInvoker);
 			}
 
-			return contentSearchInvoker.getReturnValue();
+			return articleResourceInvoker.getReturnValue();
 		}
 		else {
-			return invocation.proceed();
+			return proceedingJoinPoint.proceed();
 		}
 	}
 

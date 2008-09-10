@@ -22,20 +22,19 @@
 
 package com.liferay.portal.mirage.aop;
 
-import org.aopalliance.intercept.MethodInterceptor;
-import org.aopalliance.intercept.MethodInvocation;
+import org.aspectj.lang.ProceedingJoinPoint;
 
 /**
- * <a href="MirageInterceptor.java.html"><b><i>View Source</i></b></a>
+ * <a href="MirageAspect.java.html"><b><i>View Source</i></b></a>
  *
- * @author Brian Wing Shun Chan
+ * @author Michael Young
  *
  */
-public abstract class MirageInterceptor implements MethodInterceptor {
+public abstract class MirageAspect {
 
-	public Object invoke(MethodInvocation invocation) throws Throwable {
+	public Object invoke(ProceedingJoinPoint proceedingJoinPoint) throws Throwable {
 		try {
-			return doInvoke(invocation);
+			return doInvoke(proceedingJoinPoint);
 		}
 		catch (Throwable t) {
 			Throwable cause = t.getCause();
@@ -49,7 +48,6 @@ public abstract class MirageInterceptor implements MethodInterceptor {
 		}
 	}
 
-	protected abstract Object doInvoke(MethodInvocation invocation)
+	protected abstract Object doInvoke(ProceedingJoinPoint proceedingJoinPoint)
 		throws Throwable;
-
 }

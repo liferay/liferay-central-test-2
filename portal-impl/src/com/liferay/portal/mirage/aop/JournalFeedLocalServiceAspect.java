@@ -23,10 +23,9 @@
 package com.liferay.portal.mirage.aop;
 
 import com.liferay.portal.mirage.service.MirageServiceFactory;
-
 import com.sun.portal.cms.mirage.service.custom.ContentFeedService;
 
-import org.aopalliance.intercept.MethodInvocation;
+import org.aspectj.lang.ProceedingJoinPoint;
 
 /**
  * <a href="JournalFeedLocalServiceInterceptor.java.html"><b><i>View Source</i>
@@ -35,16 +34,16 @@ import org.aopalliance.intercept.MethodInvocation;
  * @author Brian Wing Shun Chan
  *
  */
-public class JournalFeedLocalServiceInterceptor extends MirageInterceptor {
+public class JournalFeedLocalServiceAspect extends MirageAspect {
 
-	protected Object doInvoke(MethodInvocation invocation) throws Throwable {
-		String methodName = invocation.getMethod().getName();
+	protected Object doInvoke(ProceedingJoinPoint proceedingJoinPoint) throws Throwable {
+		String methodName = proceedingJoinPoint.getSignature().getName();
 
 		if (methodName.equals("addFeed") || methodName.equals("deleteFeed") ||
 			methodName.equals("getFeed") || methodName.equals("updateFeed")) {
 
 			ContentFeedInvoker contentFeedInvoker = new ContentFeedInvoker(
-				invocation);
+				proceedingJoinPoint);
 
 			ContentFeedService contentFeedService =
 				MirageServiceFactory.getContentFeedService();
@@ -70,7 +69,7 @@ public class JournalFeedLocalServiceInterceptor extends MirageInterceptor {
 				 methodName.equals("searchCount")) {
 
 			SearchCriteriaInvoker searchCriteriaInvoker =
-				new SearchCriteriaInvoker(invocation);
+				new SearchCriteriaInvoker(proceedingJoinPoint);
 
 			ContentFeedService contentFeedService =
 				MirageServiceFactory.getContentFeedService();
@@ -88,7 +87,7 @@ public class JournalFeedLocalServiceInterceptor extends MirageInterceptor {
 			return searchCriteriaInvoker.getReturnValue();
 		}
 		else {
-			return invocation.proceed();
+			return proceedingJoinPoint.proceed();
 		}
 	}
 

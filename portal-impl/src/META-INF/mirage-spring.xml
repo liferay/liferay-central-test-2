@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd">
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:aop="http://www.springframework.org/schema/aop" xsi:schemaLocation="http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-2.5.xsd http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd">
 	<bean id="com.liferay.portal.mirage.ArticleImageService" class="org.springframework.aop.framework.ProxyFactoryBean" parent="baseLogService">
 		<property name="proxyInterfaces">
 			<value>com.sun.portal.cms.mirage.service.custom.BinaryContentService</value>
@@ -57,81 +57,34 @@
 			<bean class="com.liferay.portal.mirage.service.WorkflowServiceImpl" />
 		</property>
 	</bean>
-	<bean id="com.liferay.portal.mirage.aop.JournalArticleImageLocalServiceInterceptor" class="com.liferay.portal.mirage.aop.JournalArticleImageLocalServiceInterceptor" />
-	<bean id="com.liferay.portal.mirage.aop.JournalArticleLocalServiceInterceptor" class="com.liferay.portal.mirage.aop.JournalArticleLocalServiceInterceptor" />
-	<bean id="com.liferay.portal.mirage.aop.JournalArticleResourceLocalServiceInterceptor" class="com.liferay.portal.mirage.aop.JournalArticleResourceLocalServiceInterceptor" />
-	<bean id="com.liferay.portal.mirage.aop.JournalContentSearchLocalServiceInterceptor" class="com.liferay.portal.mirage.aop.JournalContentSearchLocalServiceInterceptor" />
-	<bean id="com.liferay.portal.mirage.aop.JournalFeedLocalServiceInterceptor" class="com.liferay.portal.mirage.aop.JournalFeedLocalServiceInterceptor" />
-	<bean id="com.liferay.portal.mirage.aop.JournalStructureLocalServiceInterceptor" class="com.liferay.portal.mirage.aop.JournalStructureLocalServiceInterceptor" />
-	<bean id="com.liferay.portal.mirage.aop.JournalTemplateLocalServiceInterceptor" class="com.liferay.portal.mirage.aop.JournalTemplateLocalServiceInterceptor" />
-	<bean id="com.liferay.portlet.journal.service.impl.JournalArticleImageLocalServiceImpl" class="com.liferay.portlet.journal.service.impl.JournalArticleImageLocalServiceImpl" />
-	<bean id="com.liferay.portlet.journal.service.impl.JournalArticleLocalServiceImpl" class="com.liferay.portlet.journal.service.impl.JournalArticleLocalServiceImpl" />
-	<bean id="com.liferay.portlet.journal.service.impl.JournalArticleResourceLocalServiceImpl" class="com.liferay.portlet.journal.service.impl.JournalArticleResourceLocalServiceImpl" />
-	<bean id="com.liferay.portlet.journal.service.impl.JournalContentSearchLocalServiceImpl" class="com.liferay.portlet.journal.service.impl.JournalContentSearchLocalServiceImpl" />
-	<bean id="com.liferay.portlet.journal.service.impl.JournalFeedLocalServiceImpl" class="com.liferay.portlet.journal.service.impl.JournalFeedLocalServiceImpl" />
-	<bean id="com.liferay.portlet.journal.service.impl.JournalStructureLocalServiceImpl" class="com.liferay.portlet.journal.service.impl.JournalStructureLocalServiceImpl" />
-	<bean id="com.liferay.portlet.journal.service.impl.JournalTemplateLocalServiceImpl" class="com.liferay.portlet.journal.service.impl.JournalTemplateLocalServiceImpl" />
-	<bean id="com.liferay.portlet.journal.service.JournalArticleImageLocalService.impl" class="org.springframework.aop.framework.ProxyFactoryBean">
-		<property name="proxyInterfaces" value="com.liferay.portlet.journal.service.JournalArticleImageLocalService" />
-		<property name="interceptorNames">
-			<list>
-				<value>com.liferay.portal.mirage.aop.JournalArticleImageLocalServiceInterceptor</value>
-			</list>
-		</property>
-		<property name="target" ref="com.liferay.portlet.journal.service.impl.JournalArticleImageLocalServiceImpl" />
-	</bean>
-	<bean id="com.liferay.portlet.journal.service.JournalArticleLocalService.impl" class="org.springframework.aop.framework.ProxyFactoryBean">
-		<property name="proxyInterfaces" value="com.liferay.portlet.journal.service.JournalArticleLocalService" />
-		<property name="interceptorNames">
-			<list>
-				<value>com.liferay.portal.mirage.aop.JournalArticleLocalServiceInterceptor</value>
-			</list>
-		</property>
-		<property name="target" ref="com.liferay.portlet.journal.service.impl.JournalArticleLocalServiceImpl" />
-	</bean>
-	<bean id="com.liferay.portlet.journal.service.JournalArticleResourceLocalService.impl" class="org.springframework.aop.framework.ProxyFactoryBean">
-		<property name="proxyInterfaces" value="com.liferay.portlet.journal.service.JournalArticleResourceLocalService" />
-		<property name="interceptorNames">
-			<list>
-				<value>com.liferay.portal.mirage.aop.JournalArticleResourceLocalServiceInterceptor</value>
-			</list>
-		</property>
-		<property name="target" ref="com.liferay.portlet.journal.service.impl.JournalArticleResourceLocalServiceImpl" />
-	</bean>
-	<bean id="com.liferay.portlet.journal.service.JournalContentSearchLocalService.impl" class="org.springframework.aop.framework.ProxyFactoryBean">
-		<property name="proxyInterfaces" value="com.liferay.portlet.journal.service.JournalContentSearchLocalService" />
-		<property name="interceptorNames">
-			<list>
-				<value>com.liferay.portal.mirage.aop.JournalContentSearchLocalServiceInterceptor</value>
-			</list>
-		</property>
-		<property name="target" ref="com.liferay.portlet.journal.service.impl.JournalContentSearchLocalServiceImpl" />
-	</bean>
-	<bean id="com.liferay.portlet.journal.service.JournalFeedLocalService.impl" class="org.springframework.aop.framework.ProxyFactoryBean">
-		<property name="proxyInterfaces" value="com.liferay.portlet.journal.service.JournalFeedLocalService" />
-		<property name="interceptorNames">
-			<list>
-				<value>com.liferay.portal.mirage.aop.JournalFeedLocalServiceInterceptor</value>
-			</list>
-		</property>
-		<property name="target" ref="com.liferay.portlet.journal.service.impl.JournalFeedLocalServiceImpl" />
-	</bean>
-	<bean id="com.liferay.portlet.journal.service.JournalStructureLocalService.impl" class="org.springframework.aop.framework.ProxyFactoryBean">
-		<property name="proxyInterfaces" value="com.liferay.portlet.journal.service.JournalStructureLocalService" />
-		<property name="interceptorNames">
-			<list>
-				<value>com.liferay.portal.mirage.aop.JournalStructureLocalServiceInterceptor</value>
-			</list>
-		</property>
-		<property name="target" ref="com.liferay.portlet.journal.service.impl.JournalStructureLocalServiceImpl" />
-	</bean>
-	<bean id="com.liferay.portlet.journal.service.JournalTemplateLocalService.impl" class="org.springframework.aop.framework.ProxyFactoryBean">
-		<property name="proxyInterfaces" value="com.liferay.portlet.journal.service.JournalTemplateLocalService" />
-		<property name="interceptorNames">
-			<list>
-				<value>com.liferay.portal.mirage.aop.JournalTemplateLocalServiceInterceptor</value>
-			</list>
-		</property>
-		<property name="target" ref="com.liferay.portlet.journal.service.impl.JournalTemplateLocalServiceImpl" />
-	</bean>
+	<bean id="com.liferay.portal.mirage.aop.JournalArticleImageLocalServiceAspect" class="com.liferay.portal.mirage.aop.JournalArticleImageLocalServiceAspect" />
+	<bean id="com.liferay.portal.mirage.aop.JournalArticleLocalServiceAspect" class="com.liferay.portal.mirage.aop.JournalArticleLocalServiceAspect" />
+	<bean id="com.liferay.portal.mirage.aop.JournalArticleResourceLocalServiceAspect" class="com.liferay.portal.mirage.aop.JournalArticleResourceLocalServiceAspect" />
+	<bean id="com.liferay.portal.mirage.aop.JournalContentSearchLocalServiceAspect" class="com.liferay.portal.mirage.aop.JournalContentSearchLocalServiceAspect" />
+	<bean id="com.liferay.portal.mirage.aop.JournalFeedLocalServiceAspect" class="com.liferay.portal.mirage.aop.JournalFeedLocalServiceAspect" />
+	<bean id="com.liferay.portal.mirage.aop.JournalStructureLocalServiceAspect" class="com.liferay.portal.mirage.aop.JournalStructureLocalServiceAspect" />
+	<bean id="com.liferay.portal.mirage.aop.JournalTemplateLocalServiceAspect" class="com.liferay.portal.mirage.aop.JournalTemplateLocalServiceAspect" />
+	<aop:config>
+		<aop:aspect id="com.liferay.portlet.journal.service.JournalArticleImageLocalService.aspect" ref="com.liferay.portal.mirage.aop.JournalArticleImageLocalServiceAspect">
+			<aop:around pointcut="bean(com.liferay.portlet.journal.service.JournalArticleImageLocalService.impl)" method="doInvoke"/>
+		</aop:aspect>
+		<aop:aspect id="com.liferay.portlet.journal.service.JournalArticleLocalService.aspect" ref="com.liferay.portal.mirage.aop.JournalArticleLocalServiceAspect">
+			<aop:around pointcut="bean(com.liferay.portlet.journal.service.JournalArticleLocalService.impl)" method="doInvoke"/>
+		</aop:aspect>
+		<aop:aspect id="com.liferay.portlet.journal.service.JournalArticleResourceLocalService.aspect" ref="com.liferay.portal.mirage.aop.JournalArticleResourceLocalServiceAspect">
+			<aop:around pointcut="bean(com.liferay.portlet.journal.service.JournalArticleResourceLocalService.impl)" method="doInvoke"/>
+		</aop:aspect>
+		<aop:aspect id="com.liferay.portlet.journal.service.JournalContentSearchLocalService.aspect" ref="com.liferay.portal.mirage.aop.JournalContentSearchLocalServiceAspect">
+			<aop:around pointcut="bean(com.liferay.portlet.journal.service.JournalContentSearchLocalService.impl)" method="doInvoke"/>
+		</aop:aspect>
+		<aop:aspect id="com.liferay.portlet.journal.service.JournalFeedLocalService.aspect" ref="com.liferay.portal.mirage.aop.JournalFeedLocalServiceAspect">
+			<aop:around pointcut="bean(com.liferay.portlet.journal.service.JournalFeedLocalService.impl)" method="doInvoke"/>
+		</aop:aspect>
+		<aop:aspect id="com.liferay.portlet.journal.service.JournalStructureLocalService.aspect" ref="com.liferay.portal.mirage.aop.JournalStructureLocalServiceAspect">
+			<aop:around pointcut="bean(com.liferay.portlet.journal.service.JournalStructureLocalService.impl)" method="doInvoke"/>
+		</aop:aspect>
+		<aop:aspect id="com.liferay.portlet.journal.service.JournalTemplateLocalService.aspect" ref="com.liferay.portal.mirage.aop.JournalTemplateLocalServiceAspect">
+			<aop:around pointcut="bean(com.liferay.portlet.journal.service.JournalTemplateLocalService.impl)" method="doInvoke"/>
+		</aop:aspect>
+	</aop:config>
 </beans>

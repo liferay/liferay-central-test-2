@@ -42,10 +42,9 @@
 package com.liferay.portal.mirage.aop;
 
 import com.liferay.portal.mirage.service.MirageServiceFactory;
-
 import com.sun.portal.cms.mirage.service.custom.ContentTypeService;
 
-import org.aopalliance.intercept.MethodInvocation;
+import org.aspectj.lang.ProceedingJoinPoint;
 
 /**
  * <a href="JournalTemplateLocalServiceInterceptor.java.html"><b><i>View Source
@@ -54,10 +53,10 @@ import org.aopalliance.intercept.MethodInvocation;
  * @author Prakash Reddy
  *
  */
-public class JournalTemplateLocalServiceInterceptor extends MirageInterceptor {
+public class JournalTemplateLocalServiceAspect extends MirageAspect {
 
-	protected Object doInvoke(MethodInvocation invocation) throws Throwable {
-		String methodName = invocation.getMethod().getName();
+	protected Object doInvoke(ProceedingJoinPoint proceedingJoinPoint) throws Throwable {
+		String methodName = proceedingJoinPoint.getSignature().getName();
 
 		if (methodName.equals("addTemplate") ||
 			methodName.equals("addTemplateToGroup") ||
@@ -67,7 +66,7 @@ public class JournalTemplateLocalServiceInterceptor extends MirageInterceptor {
 			methodName.equals("getTemplateBySmallImageId") ||
 			methodName.equals("updateTemplate")) {
 
-			TemplateInvoker templateInvoker = new TemplateInvoker(invocation);
+			TemplateInvoker templateInvoker = new TemplateInvoker(proceedingJoinPoint);
 
 			ContentTypeService contentTypeService =
 				MirageServiceFactory.getContentTypeService();
@@ -105,7 +104,7 @@ public class JournalTemplateLocalServiceInterceptor extends MirageInterceptor {
 				 methodName.equals("searchCount")) {
 
 			SearchCriteriaInvoker searchCriteriaInvoker =
-				new SearchCriteriaInvoker(invocation);
+				new SearchCriteriaInvoker(proceedingJoinPoint);
 
 			ContentTypeService contentTypeService =
 				MirageServiceFactory.getContentTypeService();
@@ -125,7 +124,7 @@ public class JournalTemplateLocalServiceInterceptor extends MirageInterceptor {
 			return searchCriteriaInvoker.getReturnValue();
 		}
 		else {
-			return invocation.proceed();
+			return proceedingJoinPoint.proceed();
 		}
 	}
 

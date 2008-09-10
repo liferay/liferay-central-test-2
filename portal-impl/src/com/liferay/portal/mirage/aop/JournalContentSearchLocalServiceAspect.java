@@ -42,61 +42,61 @@
 package com.liferay.portal.mirage.aop;
 
 import com.liferay.portal.mirage.service.MirageServiceFactory;
-
 import com.sun.portal.cms.mirage.service.custom.BinaryContentService;
 
-import org.aopalliance.intercept.MethodInvocation;
+import org.aspectj.lang.ProceedingJoinPoint;
 
 /**
- * <a href="JournalArticleImageLocalServiceInterceptor.java.html"><b><i>View
+ * <a href="JournalContentSearchLocalServiceInterceptor.java.html"><b><i>View
  * Source</i></b></a>
  *
- * @author Karthik Sudarshan
+ * @author Prakash Reddy
  *
  */
-public class JournalArticleImageLocalServiceInterceptor
-	extends MirageInterceptor {
+public class JournalContentSearchLocalServiceAspect
+	extends MirageAspect {
 
-	protected Object doInvoke(MethodInvocation invocation) throws Throwable {
-		String methodName = invocation.getMethod().getName();
+	protected Object doInvoke(ProceedingJoinPoint proceedingJoinPoint) throws Throwable {
+		String methodName = proceedingJoinPoint.getSignature().getName();
 
-		if (methodName.equals("addArticleImageId") ||
-			methodName.equals("deleteArticleImage") ||
-			methodName.equals("deleteImages") ||
-			methodName.equals("getArticleImage") ||
-			methodName.equals("getArticleImageId") ||
-			methodName.equals("getArticleImages")) {
+		if (methodName.equals("checkContentSearches") ||
+			methodName.equals("deleteArticleContentSearch") ||
+			methodName.equals("deleteArticleContentSearches") ||
+			methodName.equals("deleteLayoutContentSearches") ||
+			methodName.equals("deleteOwnerContentSearches") ||
+			methodName.equals("getArticleContentSearches") ||
+			methodName.equals("updateContentSearch")) {
 
-			ArticleImageInvoker articleImageInvoker = new ArticleImageInvoker(
-				invocation);
+			ContentSearchInvoker contentSearchInvoker =
+				new ContentSearchInvoker(proceedingJoinPoint);
 
 			BinaryContentService binaryContentService =
-				MirageServiceFactory.getArticleImageService();
+				MirageServiceFactory.getContentSearchService();
 
-			if (methodName.equals("addArticleImageId")) {
-				binaryContentService.createBinaryContent(articleImageInvoker);
+			if (methodName.equals("checkContentSearches")) {
+				binaryContentService.createBinaryContent(contentSearchInvoker);
 			}
-			else if (methodName.equals("deleteArticleImage")) {
+			else if (methodName.equals("deleteArticleContentSearch")) {
 				binaryContentService.deleteBinaryContent(
-					articleImageInvoker, null);
+					contentSearchInvoker, null);
 			}
-			else if (methodName.equals("deleteImages")) {
-				binaryContentService.deleteBinaryContents(articleImageInvoker);
+			else if (methodName.equals("deleteArticleContentSearches") ||
+					methodName.equals("deleteLayoutContentSearches") ||
+					methodName.equals("deleteOwnerContentSearches")) {
+
+				binaryContentService.deleteBinaryContents(contentSearchInvoker);
 			}
-			else if (methodName.equals("getArticleImage")) {
-				binaryContentService.getBinaryContent(articleImageInvoker);
+			else if (methodName.equals("getArticleContentSearches")) {
+				binaryContentService.getBinaryContents(contentSearchInvoker);
 			}
-			else if (methodName.equals("getArticleImageId")) {
-				binaryContentService.getBinaryContentId(articleImageInvoker);
-			}
-			else if (methodName.equals("getArticleImages")) {
-				binaryContentService.getBinaryContents(articleImageInvoker);
+			else if (methodName.equals("updateContentSearch")) {
+				binaryContentService.updateBinaryContent(contentSearchInvoker);
 			}
 
-			return articleImageInvoker.getReturnValue();
+			return contentSearchInvoker.getReturnValue();
 		}
 		else {
-			return invocation.proceed();
+			return proceedingJoinPoint.proceed();
 		}
 	}
 
