@@ -32,12 +32,12 @@ import com.liferay.portal.model.User;
 import com.liferay.portal.security.permission.PermissionCheckerUtil;
 import com.liferay.portal.service.CompanyLocalServiceUtil;
 import com.liferay.portal.service.UserLocalServiceUtil;
+import com.liferay.portlet.messageboards.NoSuchMessageException;
 import com.liferay.portlet.messageboards.model.MBMessage;
+import com.liferay.portlet.messageboards.service.MBMessageLocalServiceUtil;
 import com.liferay.portlet.messageboards.service.MBMessageServiceUtil;
 import com.liferay.portlet.messageboards.util.MBMailMessage;
 import com.liferay.portlet.messageboards.util.MBUtil;
-import com.liferay.portlet.messageboards.util.MailMessageStrategy;
-import com.liferay.portlet.messageboards.util.MailMessageStrategyFactory;
 import com.liferay.portlet.messageboards.util.MailingListThreadLocal;
 import com.liferay.util.mail.MailEngine;
 
@@ -184,11 +184,26 @@ public class MailingListMessageListener implements MessageListener {
 			anonymous = true;
 		}
 
-		MailMessageStrategy mailMessageStrategy =
-			MailMessageStrategyFactory.getInstance();
+		long parentMessageId = MBUtil.getParentMessageId(mailMessage);
 
-		MBMessage parentMessage = mailMessageStrategy.getParentMessage(
-			categoryId, mailMessage);
+		if (_log.isDebugEnabled()) {
+			_log.debug("Parent message id " + parentMessageId);
+		}
+
+		MBMessage parentMessage = null;
+
+		try {
+			if (parentMessageId > 0) {
+				parentMessage = MBMessageLocalServiceUtil.getMessage(
+					parentMessageId);
+			}
+		}
+		catch (NoSuchMessageException nsme) {
+		}
+
+		if (_log.isDebugEnabled()) {
+			_log.debug("Parent message " + parentMessage);
+		}
 
 		MBMailMessage collector = new MBMailMessage();
 

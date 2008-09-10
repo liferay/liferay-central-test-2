@@ -703,9 +703,6 @@ public class PropsValues {
 		GetterUtil.getLong(
 			PropsUtil.get(PropsKeys.MESSAGE_BOARDS_EXPIRE_BAN_JOB_INTERVAL));
 
-	public static final String MESSAGE_BOARDS_MAIL_MESSAGE_STRATEGY =
-		PropsUtil.get(PropsKeys.MESSAGE_BOARDS_MAIL_MESSAGE_STRATEGY);
-
 	public static boolean
 		MY_PLACES_SHOW_COMMUNITY_PRIVATE_SITES_WITH_NO_LAYOUTS =
 			GetterUtil.getBoolean(PropsUtil.get(PropsKeys.
