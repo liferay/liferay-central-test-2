@@ -48,15 +48,6 @@ public interface TagsEntryFinder {
 		long groupId, java.lang.String name, java.lang.String[] properties,
 		int start, int end) throws com.liferay.portal.SystemException;
 
-	public java.util.List<com.liferay.portlet.tags.model.TagsEntry> findByG_N_P_F(
-		long groupId, java.lang.String name, java.lang.String[] properties,
-		boolean folksonomy) throws com.liferay.portal.SystemException;
-
-	public java.util.List<com.liferay.portlet.tags.model.TagsEntry> findByG_N_P_F(
-		long groupId, java.lang.String name, java.lang.String[] properties,
-		boolean folksonomy, int start, int end)
-		throws com.liferay.portal.SystemException;
-
 	public java.util.List<com.liferay.portlet.tags.model.TagsEntry> findByG_C_N(
 		long groupId, long classNameId, java.lang.String name)
 		throws com.liferay.portal.SystemException;
@@ -64,4 +55,14 @@ public interface TagsEntryFinder {
 	public java.util.List<com.liferay.portlet.tags.model.TagsEntry> findByG_C_N(
 		long groupId, long classNameId, java.lang.String name, int start,
 		int end) throws com.liferay.portal.SystemException;
+
+	public java.util.List<com.liferay.portlet.tags.model.TagsEntry> findByG_N_F_P(
+		long groupId, java.lang.String name, boolean folksonomy,
+		java.lang.String[] properties)
+		throws com.liferay.portal.SystemException;
+
+	public java.util.List<com.liferay.portlet.tags.model.TagsEntry> findByG_N_F_P(
+		long groupId, java.lang.String name, boolean folksonomy,
+		java.lang.String[] properties, int start, int end)
+		throws com.liferay.portal.SystemException;
 }

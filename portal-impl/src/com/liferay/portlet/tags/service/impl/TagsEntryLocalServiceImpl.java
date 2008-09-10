@@ -509,8 +509,8 @@ public class TagsEntryLocalServiceImpl extends TagsEntryLocalServiceBaseImpl {
 			long groupId, String name, String[] properties, int start, int end)
 		throws SystemException {
 
-		List<TagsEntry> list = tagsEntryFinder.findByG_N_P_F(
-			groupId, name, properties, true, start, end);
+		List<TagsEntry> list = tagsEntryFinder.findByG_N_F_P(
+			groupId, name, true, properties, start, end);
 
 		return Autocomplete.listToJson(list, "name", "name");
 	}
