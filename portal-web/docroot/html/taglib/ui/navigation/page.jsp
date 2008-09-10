@@ -89,10 +89,10 @@
 
 			String content = sb.toString();
 
-			if (!nestedChildren) {
+			/*if (!nestedChildren) {
 				content = StringUtil.replace(content, "</a><ul class", "</a></li></ul><ul class");
 				content = StringUtil.replace(content, "</ul></li>", "</ul><ul class=\"layouts\">");
-			}
+			}*/
 		%>
 
 			<%= content %>
@@ -116,6 +116,12 @@ private void _buildNavigation(Layout rootLayout, Layout selLayout, List selBranc
 	}
 
 	if (layoutChildren.size() > 0) {
+		StringBuilder tailSB = null;
+
+		if (!nestedChildren) {
+			tailSB = new StringBuilder();
+		}
+
 		sb.append("<ul class=\"layouts\">");
 
 		for (int i = 0; i < layoutChildren.size(); i++) {
@@ -171,7 +177,16 @@ private void _buildNavigation(Layout rootLayout, Layout selLayout, List selBranc
 				sb.append("</a>");
 
 				if (open) {
-					_buildNavigation(layoutChild, selLayout, selBranch, themeDisplay, layoutLevel + 1, includedLayouts, nestedChildren, sb);
+					StringBuilder layoutChildSB = null;
+
+					if (nestedChildren) {
+						layoutChildSB = sb;
+					}
+					else {
+						layoutChildSB = tailSB;
+					}
+
+					_buildNavigation(layoutChild, selLayout, selBranch, themeDisplay, layoutLevel + 1, includedLayouts, nestedChildren, layoutChildSB);
 				}
 
 				sb.append("</li>");
@@ -179,6 +194,10 @@ private void _buildNavigation(Layout rootLayout, Layout selLayout, List selBranc
 		}
 
 		sb.append("</ul>");
+
+		if (!nestedChildren) {
+			sb.append(tailSB);
+		}
 	}
 }
 %>
