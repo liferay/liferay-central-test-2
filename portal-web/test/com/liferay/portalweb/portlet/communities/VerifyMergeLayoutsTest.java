@@ -49,81 +49,12 @@ public class VerifyMergeLayoutsTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isElementPresent(
-							"//div[@id=\"banner\"]/div/div/ul/li[8]/ul/li[5]/ul/li[1]/a[2]")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
-		selenium.click(
-			"//div[@id=\"banner\"]/div/div/ul/li[8]/ul/li[5]/ul/li[1]/a[2]");
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isElementPresent("link=New Page")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
-		selenium.click(RuntimeVariables.replace("link=New Page"));
+		selenium.click(RuntimeVariables.replace("//li[6]/ul/li[1]/a[2]"));
 		selenium.waitForPageToLoad("30000");
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isElementPresent("link=Welcome")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
-		selenium.click(RuntimeVariables.replace(
-				"//div[@id='_88_layoutsTreeOutput']/ul/li[2]/a/span"));
+		selenium.click("//a/img");
+		assertTrue(selenium.isElementPresent("link=Welcome"));
+		selenium.click(RuntimeVariables.replace("//li[5]/ul/li[1]/a[2]"));
 		selenium.waitForPageToLoad("30000");
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isElementPresent("_88_name_en_US")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
 		selenium.type("_88_name_en_US", RuntimeVariables.replace("Hidden Page"));
 		selenium.click("//input[@value='Add Page']");
 
@@ -144,38 +75,19 @@ public class VerifyMergeLayoutsTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click(RuntimeVariables.replace(
-				"//div[@id='banner']/div/div/ul/li[6]/ul/li[6]/ul/li[1]/a[2]"));
+		assertTrue(selenium.isElementPresent("link=Hidden Page"));
+		selenium.click(RuntimeVariables.replace("//li[6]/ul/li[1]/a[2]"));
 		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.isElementPresent("link=Hidden Page"));
-		selenium.click(RuntimeVariables.replace(
-				"//div[@id='banner']/div/div/ul/li[6]/ul/li[5]/ul/li[1]/a[2]"));
+		selenium.click(RuntimeVariables.replace("//li[5]/ul/li[1]/a[2]"));
 		selenium.waitForPageToLoad("30000");
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isElementPresent("link=Hidden Page")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
 		selenium.click(RuntimeVariables.replace(
-				"//div[@id='_88_layoutsTreeOutput']/ul/li[2]/ul/li[2]/a/span"));
+				"//div/ul/li[2]/ul/li[2]/a/span"));
 		selenium.waitForPageToLoad("30000");
 		selenium.click(RuntimeVariables.replace("link=Page"));
 		selenium.waitForPageToLoad("30000");
 		selenium.click("_88_hiddenCheckbox");
-		selenium.click(RuntimeVariables.replace("//input[@value='Save']"));
-		selenium.waitForPageToLoad("30000");
+		selenium.click("//input[@value='Save']");
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -194,14 +106,12 @@ public class VerifyMergeLayoutsTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click(RuntimeVariables.replace(
-				"//div[@id='banner']/div/div/ul/li[6]/ul/li[6]/ul/li[1]/a[2]"));
+		selenium.click(RuntimeVariables.replace("//li[6]/ul/li[1]/a[2]"));
 		selenium.waitForPageToLoad("30000");
 		assertFalse(selenium.isElementPresent("link=Hidden Page"));
 		selenium.click(RuntimeVariables.replace("my-community-private-pages"));
 		selenium.waitForPageToLoad("30000");
-		selenium.click(RuntimeVariables.replace(
-				"//div[@id='navigation']/ul/li[4]/a/span"));
+		selenium.click(RuntimeVariables.replace("link=Communities Test Page"));
 		selenium.waitForPageToLoad("30000");
 	}
 }

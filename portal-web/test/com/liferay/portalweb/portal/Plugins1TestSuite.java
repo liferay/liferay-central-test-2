@@ -43,6 +43,7 @@ import com.liferay.portalweb.portlet.sampleicefacesjsf11sunfacelets.SampleIcefac
 import com.liferay.portalweb.portlet.sampleicefacesjsf11sunjsp.SampleIcefacesJSF11SunJSPTests;
 import com.liferay.portalweb.portlet.sampleicefacesjsf11sunmyfacesjsp.SampleIcefacesJSF11SunMyfacesJSPTests;
 import com.liferay.portalweb.portlet.sampleicefacesjsf12sunfacelets.SampleIcefacesJSF12SunFaceletsTests;
+import com.liferay.portalweb.portlet.samplejavascript.SampleJavascriptTests;
 import com.liferay.portalweb.portlet.samplejsf11myfacesfacelets.SampleJSF11MyfacesFaceletsTests;
 import com.liferay.portalweb.portlet.samplejsf11myfacesjsp.SampleJSF11MyfacesJSPTests;
 import com.liferay.portalweb.portlet.samplejsf11sunfacelets.SampleJSF11SunFaceletsTests;
@@ -84,7 +85,7 @@ public class Plugins1TestSuite extends BaseTests {
 		addTestSuite(SampleIcefacesJSF11SunJSPTests.class);
 		addTestSuite(SampleIcefacesJSF11SunMyfacesJSPTests.class);
 		addTestSuite(SampleIcefacesJSF12SunFaceletsTests.class);
-		//addTestSuite(SampleJavascriptTests.class);
+		addTestSuite(SampleJavascriptTests.class);
 		addTestSuite(SampleJSF11MyfacesFaceletsTests.class);
 		addTestSuite(SampleJSF11MyfacesJSPTests.class);
 		addTestSuite(SampleJSF11SunFaceletsTests.class);
