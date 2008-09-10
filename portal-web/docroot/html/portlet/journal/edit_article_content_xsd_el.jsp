@@ -295,7 +295,7 @@ Integer depth = (Integer)request.getAttribute(WebKeys.JOURNAL_STRUCTURE_EL_DEPTH
 								<table>
 								<tr>
 									<td>
-										<img name="<portlet:namespace />image_<%= elName %>_img" hspace="0" src="<%= elContent %>" vspace="0" />
+										<img name="<portlet:namespace />image_<%= elName %>_img" hspace="0" src="<%= themeDisplay.getPathContext() + elContent %>" vspace="0" />
 									</td>
 								</tr>
 								<tr>
