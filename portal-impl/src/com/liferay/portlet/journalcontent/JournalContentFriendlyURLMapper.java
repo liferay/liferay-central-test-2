@@ -24,6 +24,7 @@ package com.liferay.portlet.journalcontent;
 
 import com.liferay.portal.kernel.portlet.FriendlyURLMapper;
 import com.liferay.portal.kernel.portlet.LiferayPortletURL;
+import com.liferay.portal.kernel.portlet.LiferayWindowState;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;
@@ -49,7 +50,8 @@ public class JournalContentFriendlyURLMapper implements FriendlyURLMapper {
 		String strutsAction = GetterUtil.getString(
 			portletURL.getParameter("struts_action"));
 
-		if (strutsAction.equals("/journal_content/view")) {
+		if (strutsAction.equals("/journal_content/view") &&
+				!portletURL.getWindowState().equals(LiferayWindowState.EXCLUSIVE)) {
 			String portletId = portletURL.getPortletId();
 			String groupId = portletURL.getParameter("groupId");
 			String articleId = portletURL.getParameter("articleId");
