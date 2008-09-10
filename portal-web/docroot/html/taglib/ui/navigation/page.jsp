@@ -122,7 +122,9 @@ private void _buildNavigation(Layout rootLayout, Layout selLayout, List selBranc
 			tailSB = new StringBuilder();
 		}
 
-		sb.append("<ul class=\"layouts\">");
+		sb.append("<ul class=\"layouts level-");
+		sb.append(layoutLevel);
+		sb.append("\">");
 
 		for (int i = 0; i < layoutChildren.size(); i++) {
 			Layout layoutChild = (Layout)layoutChildren.get(i);
