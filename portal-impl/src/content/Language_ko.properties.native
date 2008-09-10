@@ -39,6 +39,7 @@ javax.portlet.title.12=저장
 javax.portlet.title.130=조정
 javax.portlet.title.131=감시
 javax.portlet.title.132=플러그 접속식
+javax.portlet.title.133=Portlet 공유
 javax.portlet.title.15=전표
 javax.portlet.title.16=통화 변환기
 javax.portlet.title.17=CSZ 수색
