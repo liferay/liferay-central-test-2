@@ -41,7 +41,6 @@ public class AnnouncementsTests extends BaseTests {
 		addTestSuite(AddLowPriorityAnnouncementTest.class);
 		addTestSuite(AddMediumPriorityAnnouncementTest.class);
 		addTestSuite(AddHighPriorityAnnouncementTest.class);
-		addTestSuite(OldEntriesTest.class);
 		addTestSuite(DeletePageTest.class);
 	}
 
