@@ -27,6 +27,7 @@ import com.liferay.portal.kernel.scheduler.SchedulerException;
 import com.liferay.portal.kernel.scheduler.messaging.SchedulerRequest;
 import com.liferay.portal.kernel.uuid.PortalUUIDUtil;
 import com.liferay.portal.scheduler.job.MessageSenderJob;
+import com.liferay.portal.tools.sql.DBUtil;
 import com.liferay.portal.util.PropsUtil;
 import com.liferay.portal.util.PropsValues;
 
@@ -79,10 +80,19 @@ public class QuartzSchedulerEngineImpl implements SchedulerEngine {
 
 			schedulerFactory.initialize(props);
 
-			_scheduler = schedulerFactory.getScheduler();
+			try {
+				_scheduler = schedulerFactory.getScheduler();
+			}
+			catch (Exception e1) {
+				DBUtil dbUtil = DBUtil.getInstance();
+
+				dbUtil.runSQLTemplate("quartz-tables.sql", false);
+
+				_scheduler = schedulerFactory.getScheduler();
+			}
 		}
-		catch (Exception e) {
-			_log.error("Unable to initialize engine", e);
+		catch (Exception e2) {
+			_log.error("Unable to initialize engine", e2);
 		}
 	}
 
