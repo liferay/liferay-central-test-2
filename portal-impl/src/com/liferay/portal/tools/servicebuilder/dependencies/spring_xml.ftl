@@ -25,7 +25,6 @@
 			<bean id="${packagePath}.service.persistence.${entity.name}Persistence.impl" class="${entity.getPersistenceClass()}" parent="basePersistence" />		
 		</#if>
 
-		<bean id="${packagePath}.service.persistence.${entity.name}Persistence.transaction" parent="${packagePath}.service.persistence.${entity.name}Persistence.impl" />
 		<bean id="${packagePath}.service.persistence.${entity.name}Util" class="${packagePath}.service.persistence.${entity.name}Util" >
 			<property name="persistence" ref="${packagePath}.service.persistence.${entity.name}Persistence.impl" />
 		</bean>

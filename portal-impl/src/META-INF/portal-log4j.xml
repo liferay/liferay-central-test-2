@@ -725,7 +725,7 @@
 	</category>
 
 	<category name="org.springframework">
-		<priority value="ERROR" />
+		<priority value="INFO" />
 	</category>
 
 	<category name="com.sun">

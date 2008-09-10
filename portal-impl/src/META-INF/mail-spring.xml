@@ -2,9 +2,8 @@
 
 <beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd">
 	<bean id="com.liferay.mail.service.MailService.impl" class="com.liferay.mail.service.impl.MailServiceImpl" lazy-init="true" />
-	<bean id="com.liferay.mail.service.MailService.transaction" parent="com.liferay.mail.service.MailService.impl" lazy-init="true" />
 	<bean id="com.liferay.mail.service.MailServiceFactory" class="com.liferay.mail.service.MailServiceFactory" lazy-init="true">
-		<property name="service" ref="com.liferay.mail.service.MailService.transaction" />
+		<property name="service" ref="com.liferay.mail.service.MailService.impl" />
 	</bean>
 	<bean id="com.liferay.mail.service.persistence.CyrusUserPersistence" class="com.liferay.mail.service.persistence.CyrusUserPersistence" parent="basePersistence" lazy-init="true" />
 	<bean id="com.liferay.mail.service.persistence.CyrusUserUtil" class="com.liferay.mail.service.persistence.CyrusUserUtil" lazy-init="true">

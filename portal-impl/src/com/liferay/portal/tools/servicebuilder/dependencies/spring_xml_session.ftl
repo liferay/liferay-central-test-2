@@ -1,9 +1,10 @@
-<bean id="${packagePath}.service.${entity.name}${sessionType}Service.impl" class="${packagePath}.service.impl.${entity.name}${sessionType}ServiceImpl" />
-
-<#if entity.TXManager != "none">
+<#if entity.TXManager == "none">
+	<bean id="${packagePath}.service.${entity.name}${sessionType}Service.impl" class="${packagePath}.service.impl.${entity.name}${sessionType}ServiceImpl" primary="true" autowire="byType" />
+<#else>
 	<#assign txRequiredList = entity.getTxRequiredList()>
 
 	<#if propsUtil == "com.liferay.portal.util.PropsUtil">
+		<bean id="${packagePath}.service.${entity.name}${sessionType}Service.impl" class="${packagePath}.service.impl.${entity.name}${sessionType}ServiceImpl" />
 		<#if txRequredList?? && (txRequiredList.size > 0)>
 			<aop:config>
 				<aop:pointcut id="${packagePath}.service.${entity.name}${sessionType}Service.operation" expression="bean(${packagePath}.service.${entity.name}${sessionType}Service.transaction)" />
@@ -17,15 +18,13 @@
 				</tx:attributes>
 			</tx:advice>
 		</#if>
-
-		<bean id="${packagePath}.service.${entity.name}${sessionType}Service.transaction" parent="${packagePath}.service.${entity.name}${sessionType}Service.impl" />
 	<#else>
-		<bean id="${packagePath}.service.${entity.name}${sessionType}Service.transaction" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean" lazy-init="true">
+		<bean id="${packagePath}.service.${entity.name}${sessionType}Service.impl" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean">
 			<property name="transactionManager">
 				<ref bean="${entity.TXManager}" />
 			</property>
 			<property name="target">
-				<ref bean="${packagePath}.service.${entity.name}${sessionType}Service.impl" />
+				<bean class="${packagePath}.service.impl.${entity.name}${sessionType}ServiceImpl" />
 			</property>
 			<property name="transactionAttributes">
 				<props>
@@ -47,27 +46,15 @@
 </#if>
 
 <bean id="${packagePath}.service.${entity.name}${sessionType}Service.velocity" class="org.springframework.aop.framework.ProxyFactoryBean" parent="baseVelocityService">
-	<#if entity.TXManager != "none">
-		<property name="target" ref="${packagePath}.service.${entity.name}${sessionType}Service.transaction" />
-	<#else>
-		<property name="target" ref="${packagePath}.service.${entity.name}${sessionType}Service.impl" />
-	</#if>
+	<property name="target" ref="${packagePath}.service.${entity.name}${sessionType}Service.impl" />
 </bean>
 
 <#if propsUtil == "com.liferay.portal.util.PropsUtil">
 	<bean id="${packagePath}.service.${entity.name}${sessionType}ServiceFactory" class="${packagePath}.service.${entity.name}${sessionType}ServiceFactory">
-		<#if entity.TXManager != "none">
-			<property name="service" ref="${packagePath}.service.${entity.name}${sessionType}Service.transaction" />
-		<#else>
-			<property name="service" ref="${packagePath}.service.${entity.name}${sessionType}Service.impl" />
-		</#if>
+		<property name="service" ref="${packagePath}.service.${entity.name}${sessionType}Service.impl" />
 	</bean>
 </#if>
 
 <bean id="${packagePath}.service.${entity.name}${sessionType}ServiceUtil" class="${packagePath}.service.${entity.name}${sessionType}ServiceUtil">
-	<#if entity.TXManager != "none">
-		<property name="service" ref="${packagePath}.service.${entity.name}${sessionType}Service.transaction" />
-	<#else>
-		<property name="service" ref="${packagePath}.service.${entity.name}${sessionType}Service.impl" />
-	</#if>
+	<property name="service" ref="${packagePath}.service.${entity.name}${sessionType}Service.impl" />
 </bean>
