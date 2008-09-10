@@ -848,6 +848,7 @@ img.ui-datepicker-trigger {
 
 .treeview ul {
 	margin-top: 4px;
+	background-color: white;
 }
 
 .treeview li {
@@ -860,10 +861,12 @@ img.ui-datepicker-trigger {
 	float: left;
 	height: 16px;
 	margin-left: -16px;
+	margin-top: 3px;
 	width: 16px;
 }
 
-.ie6 .hitarea {
+/* fix for IE6 - do not use .ie6 */
+* html .hitarea {
 	display: inline;
 	float: none;
 }
