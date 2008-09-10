@@ -47,13 +47,15 @@ import javax.servlet.jsp.PageContext;
  * <a href="DLUtil.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
+ * @author Julio Camarero
  *
  */
 public class DLUtil {
 
 	public static String getBreadcrumbs(
-			long folderId, String name, PageContext pageContext,
-			RenderRequest renderRequest, RenderResponse renderResponse)
+			long folderId, String name, long rootFolderId,
+			PageContext pageContext, RenderRequest renderRequest,
+			RenderResponse renderResponse)
 		throws Exception {
 
 		if ((folderId > 0) && Validator.isNotNull(name)) {
@@ -61,8 +63,8 @@ public class DLUtil {
 				folderId, name);
 
 			return getBreadcrumbs(
-				fileEntry.getFolder(), fileEntry, pageContext, renderRequest,
-				renderResponse);
+				fileEntry.getFolder(), fileEntry, rootFolderId, pageContext,
+				renderRequest, renderResponse);
 		}
 		else {
 			DLFolder folder = null;
@@ -74,13 +76,15 @@ public class DLUtil {
 			}
 
 			return getBreadcrumbs(
-				folder, null, pageContext, renderRequest, renderResponse);
+				folder, null, rootFolderId, pageContext, renderRequest,
+				renderResponse);
 		}
 	}
 
 	public static String getBreadcrumbs(
-			DLFolder folder, DLFileEntry fileEntry, PageContext pageContext,
-			RenderRequest renderRequest, RenderResponse renderResponse)
+			DLFolder folder, DLFileEntry fileEntry, long rootFolderId,
+			PageContext pageContext, RenderRequest renderRequest,
+			RenderResponse renderResponse)
 		throws Exception {
 
 		String strutsAction = ParamUtil.getString(
@@ -152,7 +156,7 @@ public class DLUtil {
 					breadcrumbs = folderLink + " &raquo; " + breadcrumbs;
 				}
 
-				if (folder.isRoot()) {
+				if (folder.isRoot() || (folder.getFolderId() == rootFolderId)) {
 					break;
 				}
 
