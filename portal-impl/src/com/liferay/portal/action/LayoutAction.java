@@ -551,6 +551,12 @@ public class LayoutAction extends Action {
 			return null;
 		}
 
+		ThemeDisplay themeDisplay = (ThemeDisplay)request.getAttribute(
+			WebKeys.THEME_DISPLAY);
+
+		themeDisplay.setScopeGroupId(
+			PortalUtil.getScopeGroupId(layout, portletId));
+
 		ServletContext servletContext = (ServletContext)request.getAttribute(
 			WebKeys.CTX);
 
@@ -660,9 +666,6 @@ public class LayoutAction extends Action {
 		}
 
 		if (lifecycle.equals(PortletRequest.RESOURCE_PHASE)) {
-			ThemeDisplay themeDisplay = (ThemeDisplay)request.getAttribute(
-				WebKeys.THEME_DISPLAY);
-
 			PortletDisplay portletDisplay = themeDisplay.getPortletDisplay();
 
 			String portletPrimaryKey = PortletPermissionUtil.getPrimaryKey(

@@ -324,6 +324,8 @@ if (denyAccess) {
 	showPrintIcon = false;
 }
 
+themeDisplay.setScopeGroupId(PortalUtil.getScopeGroupId(layout, portletId));
+
 portletDisplay.recycle();
 
 portletDisplay.setId(portletId);
@@ -851,6 +853,8 @@ else {
 </c:if>
 
 <%
+themeDisplay.setScopeGroupId(PortalUtil.getScopeGroupId(layout));
+
 if (showPortletCssIcon) {
 	themeDisplay.setIncludePortletCssJs(true);
 }

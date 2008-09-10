@@ -90,6 +90,7 @@ import com.liferay.portlet.ActionRequestImpl;
 import com.liferay.portlet.ActionResponseImpl;
 import com.liferay.portlet.PortletConfigFactory;
 import com.liferay.portlet.PortletConfigImpl;
+import com.liferay.portlet.PortletPreferencesFactoryUtil;
 import com.liferay.portlet.PortletPreferencesImpl;
 import com.liferay.portlet.PortletPreferencesWrapper;
 import com.liferay.portlet.PortletRequestImpl;
@@ -1558,18 +1559,29 @@ public class PortalImpl implements Portal {
 	}
 
 	public String getPortletId(HttpServletRequest request) {
-		PortletConfigImpl configImpl = (PortletConfigImpl)request.getAttribute(
-			JavaConstants.JAVAX_PORTLET_CONFIG);
+		PortletConfigImpl portletConfigImpl =
+			(PortletConfigImpl)request.getAttribute(
+				JavaConstants.JAVAX_PORTLET_CONFIG);
 
-		return configImpl.getPortletId();
+		if (portletConfigImpl != null) {
+			return portletConfigImpl.getPortletId();
+		}
+		else {
+			return null;
+		}
 	}
 
 	public String getPortletId(ActionRequest actionRequest) {
-		PortletConfigImpl configImpl =
+		PortletConfigImpl portletConfigImpl =
 			(PortletConfigImpl)actionRequest.getAttribute(
 				JavaConstants.JAVAX_PORTLET_CONFIG);
 
-		return configImpl.getPortletId();
+		if (portletConfigImpl != null) {
+			return portletConfigImpl.getPortletId();
+		}
+		else {
+			return null;
+		}
 	}
 
 	public String getPortletId(RenderRequest renderRequest) {
@@ -1577,7 +1589,12 @@ public class PortalImpl implements Portal {
 			(PortletConfigImpl)renderRequest.getAttribute(
 				JavaConstants.JAVAX_PORTLET_CONFIG);
 
-		return portletConfigImpl.getPortletId();
+		if (portletConfigImpl != null) {
+			return portletConfigImpl.getPortletId();
+		}
+		else {
+			return null;
+		}
 	}
 
 	public String getPortletNamespace(String portletId) {
@@ -1719,10 +1736,53 @@ public class PortalImpl implements Portal {
 		}
 	}
 
+	public long getScopeGroupId(long plid, String portletId) {
+		Layout layout = null;
+
+		try {
+			layout = LayoutLocalServiceUtil.getLayout(plid);
+		}
+		catch (Exception e) {
+		}
+
+		return getScopeGroupId(layout, portletId);
+	}
+
+	public long getScopeGroupId(Layout layout, String portletId) {
+		if (layout == null) {
+			return 0;
+		}
+		else {
+			if (Validator.isNotNull(portletId)) {
+				try {
+					PortletPreferences portletSetup =
+						PortletPreferencesFactoryUtil.getLayoutPortletSetup(
+							layout, portletId);
+
+					long scopeLayoutId = GetterUtil.getLong(
+						portletSetup.getValue("lfr-scope-layout-id", null));
+
+					if (scopeLayoutId > 0) {
+						Layout scopeLayout = LayoutLocalServiceUtil.getLayout(
+							layout.getGroupId(), layout.isPrivateLayout(),
+							scopeLayoutId);
+
+						return scopeLayout.getScopeGroup().getGroupId();
+					}
+				}
+				catch (Exception e) {
+				}
+			}
+
+			return layout.getGroupId();
+		}
+	}
+
 	public long getScopeGroupId(HttpServletRequest request) {
 		Layout layout = (Layout)request.getAttribute(WebKeys.LAYOUT);
+		String portletId = getPortletId(request);
 
-		return getScopeGroupId(layout);
+		return getScopeGroupId(layout, portletId);
 	}
 
 	public long getScopeGroupId(ActionRequest actionRequest) {
@@ -2943,7 +3003,7 @@ public class PortalImpl implements Portal {
 					(LayoutTypePortlet)layout.getLayoutType();
 
 				if (layoutTypePortlet.hasPortletId(portletId)) {
-					if (getScopeGroupId(layout) == groupId) {
+					if (getScopeGroupId(layout, portletId) == groupId) {
 						plid = layout.getPlid();
 
 						break;
