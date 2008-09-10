@@ -195,6 +195,188 @@ public class ListUtil {
 		return newList;
 	}
 
+	public static List<Boolean> toList(boolean[] array) {
+		if ((array == null) || (array.length == 0)) {
+			return Collections.EMPTY_LIST;
+		}
+
+		List<Boolean> list = new ArrayList<Boolean>(array.length);
+
+		for (boolean value : array) {
+			list.add(value);
+		}
+
+		return list;
+	}
+
+	public static List<Double> toList(double[] array) {
+		if ((array == null) || (array.length == 0)) {
+			return Collections.EMPTY_LIST;
+		}
+
+		List<Double> list = new ArrayList<Double>(array.length);
+
+		for (double value : array) {
+			list.add(value);
+		}
+
+		return list;
+	}
+
+	public static List<Float> toList(float[] array) {
+		if ((array == null) || (array.length == 0)) {
+			return Collections.EMPTY_LIST;
+		}
+
+		List<Float> list = new ArrayList<Float>(array.length);
+
+		for (float value : array) {
+			list.add(value);
+		}
+
+		return list;
+	}
+
+	public static List<Integer> toList(int[] array) {
+		if ((array == null) || (array.length == 0)) {
+			return Collections.EMPTY_LIST;
+		}
+
+		List<Integer> list = new ArrayList<Integer>(array.length);
+
+		for (int value : array) {
+			list.add(value);
+		}
+
+		return list;
+	}
+
+	public static List<Long> toList(long[] array) {
+		if ((array == null) || (array.length == 0)) {
+			return Collections.EMPTY_LIST;
+		}
+
+		List<Long> list = new ArrayList<Long>(array.length);
+
+		for (long value : array) {
+			list.add(value);
+		}
+
+		return list;
+	}
+
+	public static List<Short> toList(short[] array) {
+		if ((array == null) || (array.length == 0)) {
+			return Collections.EMPTY_LIST;
+		}
+
+		List<Short> list = new ArrayList<Short>(array.length);
+
+		for (short value : array) {
+			list.add(value);
+		}
+
+		return list;
+	}
+
+	public static List<Boolean> toList(Boolean[] array) {
+		if ((array == null) || (array.length == 0)) {
+			return Collections.EMPTY_LIST;
+		}
+
+		List<Boolean> list = new ArrayList<Boolean>(array.length);
+
+		for (Boolean value : array) {
+			list.add(value);
+		}
+
+		return list;
+	}
+
+	public static List<Double> toList(Double[] array) {
+		if ((array == null) || (array.length == 0)) {
+			return Collections.EMPTY_LIST;
+		}
+
+		List<Double> list = new ArrayList<Double>(array.length);
+
+		for (Double value : array) {
+			list.add(value);
+		}
+
+		return list;
+	}
+
+	public static List<Float> toList(Float[] array) {
+		if ((array == null) || (array.length == 0)) {
+			return Collections.EMPTY_LIST;
+		}
+
+		List<Float> list = new ArrayList<Float>(array.length);
+
+		for (Float value : array) {
+			list.add(value);
+		}
+
+		return list;
+	}
+
+	public static List<Integer> toList(Integer[] array) {
+		if ((array == null) || (array.length == 0)) {
+			return Collections.EMPTY_LIST;
+		}
+
+		List<Integer> list = new ArrayList<Integer>(array.length);
+
+		for (Integer value : array) {
+			list.add(value);
+		}
+
+		return list;
+	}
+
+	public static List<Long> toList(Long[] array) {
+		if ((array == null) || (array.length == 0)) {
+			return Collections.EMPTY_LIST;
+		}
+
+		List<Long> list = new ArrayList<Long>(array.length);
+
+		for (Long value : array) {
+			list.add(value);
+		}
+
+		return list;
+	}
+
+	public static List<Short> toList(Short[] array) {
+		if ((array == null) || (array.length == 0)) {
+			return Collections.EMPTY_LIST;
+		}
+
+		List<Short> list = new ArrayList<Short>(array.length);
+
+		for (Short value : array) {
+			list.add(value);
+		}
+
+		return list;
+	}
+
+	public static List<String> toList(String[] array) {
+		if ((array == null) || (array.length == 0)) {
+			return Collections.EMPTY_LIST;
+		}
+
+		List<String> list = new ArrayList<String>(array.length);
+
+		for (String value : array) {
+			list.add(value);
+		}
+
+		return list;
+	}
+
 	public static String toString(List list, String param) {
 		return toString(list, param, StringPool.COMMA);
 	}
@@ -219,104 +401,6 @@ public class ListUtil {
 		}
 
 		return sb.toString();
-	}
-
-	public static List<Boolean> toList(Boolean[] list) {
-		if ((list == null) || (list.length == 0)) {
-			return Collections.EMPTY_LIST;
-		}
-
-		List<Boolean> newList = new ArrayList<Boolean>(list.length);
-
-		for (Boolean value : list) {
-			newList.add(value);
-		}
-
-		return newList;
-	}
-
-	public static List<Double> toList(Double[] list) {
-		if ((list == null) || (list.length == 0)) {
-			return Collections.EMPTY_LIST;
-		}
-
-		List<Double> newList = new ArrayList<Double>(list.length);
-
-		for (Double value : list) {
-			newList.add(value);
-		}
-
-		return newList;
-	}
-
-	public static List<Float> toList(Float[] list) {
-		if ((list == null) || (list.length == 0)) {
-			return Collections.EMPTY_LIST;
-		}
-
-		List<Float> newList = new ArrayList<Float>(list.length);
-
-		for (Float value : list) {
-			newList.add(value);
-		}
-
-		return newList;
-	}
-
-	public static List<Integer> toList(Integer[] list) {
-		if ((list == null) || (list.length == 0)) {
-			return Collections.EMPTY_LIST;
-		}
-
-		List<Integer> newList = new ArrayList<Integer>(list.length);
-
-		for (Integer value : list) {
-			newList.add(value);
-		}
-
-		return newList;
-	}
-
-	public static List<Long> toList(Long[] list) {
-		if ((list == null) || (list.length == 0)) {
-			return Collections.EMPTY_LIST;
-		}
-
-		List<Long> newList = new ArrayList<Long>(list.length);
-
-		for (Long value : list) {
-			newList.add(value);
-		}
-
-		return newList;
-	}
-
-	public static List<Short> toList(Short[] list) {
-		if ((list == null) || (list.length == 0)) {
-			return Collections.EMPTY_LIST;
-		}
-
-		List<Short> newList = new ArrayList<Short>(list.length);
-
-		for (Short value : list) {
-			newList.add(value);
-		}
-
-		return newList;
-	}
-
-	public static List<String> toList(String[] list) {
-		if ((list == null) || (list.length == 0)) {
-			return Collections.EMPTY_LIST;
-		}
-
-		List<String> newList = new ArrayList<String>(list.length);
-
-		for (String value : list) {
-			newList.add(value);
-		}
-
-		return newList;
 	}
 
 }
