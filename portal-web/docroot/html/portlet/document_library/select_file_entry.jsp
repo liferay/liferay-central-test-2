@@ -38,7 +38,7 @@ long groupId = BeanParamUtil.getLong(folder, request, "groupId");
 
 <c:if test="<%= folder != null %>">
 	<div class="breadcrumbs">
-		<%= DLUtil.getBreadcrumbs(folder, null, pageContext, renderRequest, renderResponse) %>
+		<%= DLUtil.getBreadcrumbs(folder, null, rootFolderId, pageContext, renderRequest, renderResponse) %>
 	</div>
 </c:if>
 

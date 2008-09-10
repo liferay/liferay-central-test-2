@@ -175,7 +175,7 @@ portletURL.setParameter("name", name);
 />
 
 <div class="breadcrumbs">
-	<%= DLUtil.getBreadcrumbs(folderId, null, pageContext, renderRequest, renderResponse) %>
+	<%= DLUtil.getBreadcrumbs(folderId, null, rootFolderId, pageContext, renderRequest, renderResponse) %>
 </div>
 
 <c:if test="<%= fileEntry != null %>">

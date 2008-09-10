@@ -147,7 +147,7 @@ portletURL.setParameter("fileShortcutId", String.valueOf(fileShortcutId));
 <liferay-ui:error exception="<%= NoSuchFileEntryException.class %>" message="the-document-could-not-be-found" />
 
 <div class="breadcrumbs">
-	<%= DLUtil.getBreadcrumbs(folderId, null, pageContext, renderRequest, renderResponse) %>
+	<%= DLUtil.getBreadcrumbs(folderId, null, rootFolderId, pageContext, renderRequest, renderResponse) %>
 </div>
 
 <c:if test="<%= (fileShortcut != null) && (toFileEntry != null) %>">

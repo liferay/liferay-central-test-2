@@ -76,7 +76,7 @@ long parentFolderId = BeanParamUtil.getLong(folder, request, "parentFolderId", D
 
 <c:if test="<%= parentFolderId != DLFolderImpl.DEFAULT_PARENT_FOLDER_ID %>">
 	<div class="breadcrumbs">
-		<%= DLUtil.getBreadcrumbs(parentFolderId, null, pageContext, renderRequest, renderResponse) %>
+		<%= DLUtil.getBreadcrumbs(parentFolderId, null, rootFolderId, pageContext, renderRequest, renderResponse) %>
 	</div>
 </c:if>
 
