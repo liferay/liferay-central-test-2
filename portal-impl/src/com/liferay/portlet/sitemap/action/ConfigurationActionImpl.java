@@ -55,10 +55,8 @@ public class ConfigurationActionImpl implements ConfigurationAction {
 		}
 
 		long rootLayoutId = ParamUtil.getLong(actionRequest, "rootLayoutId");
-
 		String displayDepth = ParamUtil.getString(
 			actionRequest, "displayDepth");
-
 		boolean showHiddenPages = ParamUtil.getBoolean(
 			actionRequest, "showHiddenPages");
 
