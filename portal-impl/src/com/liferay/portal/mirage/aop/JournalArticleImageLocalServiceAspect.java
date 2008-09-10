@@ -45,19 +45,20 @@ import com.liferay.portal.mirage.service.MirageServiceFactory;
 
 import com.sun.portal.cms.mirage.service.custom.BinaryContentService;
 
-import org.aopalliance.intercept.MethodInvocation;
 import org.aspectj.lang.ProceedingJoinPoint;
 
 /**
- * <a href="JournalArticleImageLocalServiceInterceptor.java.html"><b><i>View
- * Source</i></b></a>
+ * <a href="JournalArticleImageLocalServiceAspect.java.html"><b><i>View Source
+ * </i></b></a>
  *
  * @author Karthik Sudarshan
  *
  */
 public class JournalArticleImageLocalServiceAspect extends MirageAspect {
 
-	protected Object doInvoke(ProceedingJoinPoint proceedingJoinPoint) throws Throwable {
+	protected Object doInvoke(ProceedingJoinPoint proceedingJoinPoint)
+		throws Throwable {
+
 		String methodName = proceedingJoinPoint.getSignature().getName();
 
 		if (methodName.equals("addArticleImageId") ||

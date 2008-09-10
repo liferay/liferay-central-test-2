@@ -24,7 +24,6 @@ package com.liferay.portal.mirage.aop;
 
 import com.sun.portal.cms.mirage.exception.CMSException;
 
-import org.aopalliance.intercept.MethodInvocation;
 import org.aspectj.lang.ProceedingJoinPoint;
 
 /**

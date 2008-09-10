@@ -23,21 +23,24 @@
 package com.liferay.portal.mirage.aop;
 
 import com.liferay.portal.mirage.service.MirageServiceFactory;
+
 import com.sun.portal.cms.mirage.service.custom.ContentService;
 import com.sun.portal.cms.mirage.service.custom.WorkflowService;
 
 import org.aspectj.lang.ProceedingJoinPoint;
 
 /**
- * <a href="JournalArticleLocalServiceInterceptor.java.html"><b><i>View Source
- * </i></b></a>
+ * <a href="JournalArticleLocalServiceAspect.java.html"><b><i>View Source</i>
+ * </b></a>
  *
  * @author Joshna Reddy
  *
  */
 public class JournalArticleLocalServiceAspect extends MirageAspect {
 
-	protected Object doInvoke(ProceedingJoinPoint proceedingJoinPoint) throws Throwable {
+	protected Object doInvoke(ProceedingJoinPoint proceedingJoinPoint)
+		throws Throwable {
+
 		String methodName = proceedingJoinPoint.getSignature().getName();
 		Object[] arguments = proceedingJoinPoint.getArgs();
 
@@ -48,7 +51,8 @@ public class JournalArticleLocalServiceAspect extends MirageAspect {
 			methodName.equals("updateArticle")||
 			methodName.equals("updateContent")) {
 
-			ContentInvoker contentInvoker = new ContentInvoker(proceedingJoinPoint);
+			ContentInvoker contentInvoker = new ContentInvoker(
+				proceedingJoinPoint);
 
 			ContentService contentService =
 				MirageServiceFactory.getContentService();
@@ -76,7 +80,8 @@ public class JournalArticleLocalServiceAspect extends MirageAspect {
 		else if (methodName.equals("approveArticle") ||
 				 methodName.equals("expireArticle")) {
 
-			WorkflowInvoker workflowInvoker = new WorkflowInvoker(proceedingJoinPoint);
+			WorkflowInvoker workflowInvoker = new WorkflowInvoker(
+				proceedingJoinPoint);
 
 			WorkflowService workflowService =
 				MirageServiceFactory.getWorkflowService();
