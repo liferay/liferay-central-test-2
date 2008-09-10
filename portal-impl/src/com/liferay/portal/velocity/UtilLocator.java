@@ -20,46 +20,48 @@
  * SOFTWARE.
  */
 
-package com.liferay.portal.util;
+package com.liferay.portal.velocity;
 
 import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
 import com.liferay.portal.kernel.bean.PortletBeanLocatorUtil;
 
 /**
- * <a href="ServiceLocator.java.html"><b><i>View Source</i></b></a>
+ * <a href="UtilLocator.java.html"><b><i>View Source</i></b></a>
  *
- * @author Brian Wing Shun Chan
+ * @author Raymond Augé
  *
  */
-public class ServiceLocator {
+public class UtilLocator {
 
-	public static ServiceLocator getInstance() {
+	public static UtilLocator getInstance() {
 		return _instance;
 	}
 
-	public Object findService(String serviceName) {
-		if (serviceName.endsWith(_SERVICE)) {
-			serviceName += _VELOCITY;
+	public Object findUtil(String utilName) {
+		if (utilName.endsWith(_UTIL)) {
+			utilName += _VELOCITY;
 		}
 
-		return PortalBeanLocatorUtil.locate(serviceName);
+		return PortalBeanLocatorUtil.locate(utilName);
 	}
 
-	public Object findService(String servletContextName, String serviceName) {
-		if (serviceName.endsWith(_SERVICE)) {
-			serviceName += _VELOCITY;
+	public Object findUtil(
+		String servletContextName, String utilName) {
+
+		if (utilName.endsWith(_UTIL)) {
+			utilName += _VELOCITY;
 		}
 
-		return PortletBeanLocatorUtil.locate(servletContextName, serviceName);
+		return PortletBeanLocatorUtil.locate(servletContextName, utilName);
 	}
 
-	private ServiceLocator() {
+	private UtilLocator() {
 	}
 
-	private static final String _SERVICE = "Service";
+	private static final String _UTIL = "Util";
 
 	private static final String _VELOCITY = ".velocity";
 
-	private static ServiceLocator _instance = new ServiceLocator();
+	private static UtilLocator _instance = new UtilLocator();
 
 }
