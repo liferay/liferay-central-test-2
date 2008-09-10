@@ -124,8 +124,8 @@ public class RuntimePortletUtil {
 				themeDisplay.getCompanyId(), portletId);
 		}
 
-		if ((portlet != null) && portlet.isInstanceable() &&
-			!portlet.isAddDefaultResource()) {
+		if ((portlet != null) && (portlet.isInstanceable()) &&
+			(!portlet.isAddDefaultResource())) {
 
 			String instanceId = portlet.getInstanceId();
 
