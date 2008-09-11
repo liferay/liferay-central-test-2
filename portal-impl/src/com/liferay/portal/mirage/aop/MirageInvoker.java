@@ -25,7 +25,6 @@ package com.liferay.portal.mirage.aop;
 import com.sun.portal.cms.mirage.exception.CMSException;
 
 import org.aopalliance.intercept.MethodInvocation;
-import org.aspectj.lang.ProceedingJoinPoint;
 
 /**
  * <a href="MirageInvoker.java.html"><b><i>View Source</i></b></a>
@@ -35,8 +34,8 @@ import org.aspectj.lang.ProceedingJoinPoint;
  */
 public class MirageInvoker {
 
-	public MirageInvoker(ProceedingJoinPoint proceedingJoinPoint) {
-		_proceedingJoinPoint = proceedingJoinPoint;
+	public MirageInvoker(MethodInvocation invocation) {
+		_invocation = invocation;
 	}
 
 	public Object getReturnValue() {
@@ -45,7 +44,7 @@ public class MirageInvoker {
 
 	public Object invoke() throws CMSException {
 		try {
-			Object returnValue = _proceedingJoinPoint.proceed();
+			Object returnValue = _invocation.proceed();
 
 			_returnValue = returnValue;
 
@@ -59,7 +58,7 @@ public class MirageInvoker {
 		}
 	}
 
-	private ProceedingJoinPoint _proceedingJoinPoint;
+	private MethodInvocation _invocation;
 	private Object _returnValue;
 
 }

@@ -41,31 +41,55 @@
 
 package com.liferay.portal.mirage.aop;
 
-import com.sun.portal.cms.mirage.exception.CMSException;
-import com.sun.portal.cms.mirage.model.custom.Content;
+import com.liferay.portal.mirage.service.MirageServiceFactory;
+
+import com.sun.portal.cms.mirage.service.custom.BinaryContentService;
 
 import org.aopalliance.intercept.MethodInvocation;
 
 /**
- * <a href="WorkflowInvoker.java.html"><b><i>View Source</i></b></a>
+ * <a href="JournalArticleResourceLocalServiceInterceptor.java.html"><b><i>View
+ * Source</i></b></a>
  *
- * @author Joshna Reddy
+ * @author Karthik Sudarshan
  *
  */
-public class WorkflowInvoker extends Content {
+public class JournalArticleResourceLocalServiceInterceptor
+	extends MirageInterceptor {
 
-	public WorkflowInvoker(MethodInvocation invocation) {
-		_invoker = new MirageInvoker(invocation);
+	protected Object doInvoke(MethodInvocation invocation) throws Throwable {
+		String methodName = invocation.getMethod().getName();
+
+		if (methodName.equals("deleteArticleResource") ||
+			methodName.equals("getArticleResource") ||
+			methodName.equals("getArticleResourcePrimKey") ||
+			methodName.equals("getArticleResources")) {
+
+			ArticleResourceInvoker articleResourceInvoker =
+				new ArticleResourceInvoker(invocation);
+
+			BinaryContentService binaryContentService =
+				MirageServiceFactory.getArticleResourceService();
+
+			if (methodName.equals("deleteArticleResource")) {
+				binaryContentService.deleteBinaryContent(
+					articleResourceInvoker, null);
+			}
+			else if (methodName.equals("getArticleResource")) {
+				binaryContentService.getBinaryContent(articleResourceInvoker);
+			}
+			else if (methodName.equals("getArticleResourcePrimKey")) {
+				binaryContentService.getBinaryContentId(articleResourceInvoker);
+			}
+			else if (methodName.equals("getArticleResources")) {
+				binaryContentService.getBinaryContents(articleResourceInvoker);
+			}
+
+			return articleResourceInvoker.getReturnValue();
+		}
+		else {
+			return invocation.proceed();
+		}
 	}
-
-	public Object getReturnValue() {
-		return _invoker.getReturnValue();
-	}
-
-	public Object invoke() throws CMSException {
-		return _invoker.invoke();
-	}
-
-	private MirageInvoker _invoker;
 
 }

@@ -25,7 +25,7 @@ package com.liferay.portal.mirage.aop;
 import com.sun.portal.cms.mirage.exception.CMSException;
 import com.sun.portal.cms.mirage.model.search.SearchCriteria;
 
-import org.aspectj.lang.ProceedingJoinPoint;
+import org.aopalliance.intercept.MethodInvocation;
 
 /**
  * <a href="SearchCriteriaInvoker.java.html"><b><i>View Source</i></b></a>
@@ -35,8 +35,8 @@ import org.aspectj.lang.ProceedingJoinPoint;
  */
 public class SearchCriteriaInvoker extends SearchCriteria {
 
-	public SearchCriteriaInvoker(ProceedingJoinPoint proceedingJoinPoint) {
-		_invoker = new MirageInvoker(proceedingJoinPoint);
+	public SearchCriteriaInvoker(MethodInvocation invocation) {
+		_invoker = new MirageInvoker(invocation);
 	}
 
 	public Object getReturnValue() {

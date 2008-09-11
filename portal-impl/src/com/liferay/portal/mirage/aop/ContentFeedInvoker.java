@@ -25,7 +25,7 @@ package com.liferay.portal.mirage.aop;
 import com.sun.portal.cms.mirage.exception.CMSException;
 import com.sun.portal.cms.mirage.model.custom.ContentFeed;
 
-import org.aspectj.lang.ProceedingJoinPoint;
+import org.aopalliance.intercept.MethodInvocation;
 
 /**
  * <a href="ContentFeedInvoker.java.html"><b><i>View Source</i></b></a>
@@ -35,8 +35,8 @@ import org.aspectj.lang.ProceedingJoinPoint;
  */
 public class ContentFeedInvoker extends ContentFeed {
 
-	public ContentFeedInvoker(ProceedingJoinPoint proceedingJoinPoint) {
-		_invoker = new MirageInvoker(proceedingJoinPoint);
+	public ContentFeedInvoker(MethodInvocation invocation) {
+		_invoker = new MirageInvoker(invocation);
 	}
 
 	public Object getReturnValue() {

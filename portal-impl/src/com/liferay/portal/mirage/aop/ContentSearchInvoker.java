@@ -47,7 +47,7 @@ import com.sun.portal.cms.mirage.model.custom.OptionalCriteria;
 
 import java.util.Map;
 
-import org.aspectj.lang.ProceedingJoinPoint;
+import org.aopalliance.intercept.MethodInvocation;
 
 /**
  * <a href="ContentSearchInvoker.java.html"><b><i>View Source</i></b></a>
@@ -58,8 +58,8 @@ import org.aspectj.lang.ProceedingJoinPoint;
 public class ContentSearchInvoker
 	extends BinaryContent implements OptionalCriteria {
 
-	public ContentSearchInvoker(ProceedingJoinPoint proceedingJoinPoint) {
-		_invoker = new MirageInvoker(proceedingJoinPoint);
+	public ContentSearchInvoker(MethodInvocation invocation) {
+		_invoker = new MirageInvoker(invocation);
 	}
 
 	public Map<Object, Object> getOptions() {

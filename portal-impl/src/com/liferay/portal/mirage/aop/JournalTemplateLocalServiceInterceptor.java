@@ -42,9 +42,10 @@
 package com.liferay.portal.mirage.aop;
 
 import com.liferay.portal.mirage.service.MirageServiceFactory;
+
 import com.sun.portal.cms.mirage.service.custom.ContentTypeService;
 
-import org.aspectj.lang.ProceedingJoinPoint;
+import org.aopalliance.intercept.MethodInvocation;
 
 /**
  * <a href="JournalTemplateLocalServiceInterceptor.java.html"><b><i>View Source
@@ -53,10 +54,10 @@ import org.aspectj.lang.ProceedingJoinPoint;
  * @author Prakash Reddy
  *
  */
-public class JournalTemplateLocalServiceAspect extends MirageAspect {
+public class JournalTemplateLocalServiceInterceptor extends MirageInterceptor {
 
-	protected Object doInvoke(ProceedingJoinPoint proceedingJoinPoint) throws Throwable {
-		String methodName = proceedingJoinPoint.getSignature().getName();
+	protected Object doInvoke(MethodInvocation invocation) throws Throwable {
+		String methodName = invocation.getMethod().getName();
 
 		if (methodName.equals("addTemplate") ||
 			methodName.equals("addTemplateToGroup") ||
@@ -66,7 +67,7 @@ public class JournalTemplateLocalServiceAspect extends MirageAspect {
 			methodName.equals("getTemplateBySmallImageId") ||
 			methodName.equals("updateTemplate")) {
 
-			TemplateInvoker templateInvoker = new TemplateInvoker(proceedingJoinPoint);
+			TemplateInvoker templateInvoker = new TemplateInvoker(invocation);
 
 			ContentTypeService contentTypeService =
 				MirageServiceFactory.getContentTypeService();
@@ -104,7 +105,7 @@ public class JournalTemplateLocalServiceAspect extends MirageAspect {
 				 methodName.equals("searchCount")) {
 
 			SearchCriteriaInvoker searchCriteriaInvoker =
-				new SearchCriteriaInvoker(proceedingJoinPoint);
+				new SearchCriteriaInvoker(invocation);
 
 			ContentTypeService contentTypeService =
 				MirageServiceFactory.getContentTypeService();
@@ -124,7 +125,7 @@ public class JournalTemplateLocalServiceAspect extends MirageAspect {
 			return searchCriteriaInvoker.getReturnValue();
 		}
 		else {
-			return proceedingJoinPoint.proceed();
+			return invocation.proceed();
 		}
 	}
 

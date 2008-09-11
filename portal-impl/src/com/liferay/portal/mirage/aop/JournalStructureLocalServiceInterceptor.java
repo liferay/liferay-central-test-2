@@ -43,60 +43,78 @@ package com.liferay.portal.mirage.aop;
 
 import com.liferay.portal.mirage.service.MirageServiceFactory;
 
-import com.sun.portal.cms.mirage.service.custom.BinaryContentService;
+import com.sun.portal.cms.mirage.service.custom.ContentTypeService;
 
 import org.aopalliance.intercept.MethodInvocation;
-import org.aspectj.lang.ProceedingJoinPoint;
 
 /**
- * <a href="JournalArticleImageLocalServiceInterceptor.java.html"><b><i>View
- * Source</i></b></a>
+ * <a href="JournalStructureLocalServiceInterceptor.java.html"><b><i>View Source
+ * </i></b></a>
  *
- * @author Karthik Sudarshan
+ * @author Prakash Reddy
  *
  */
-public class JournalArticleImageLocalServiceAspect extends MirageAspect {
+public class JournalStructureLocalServiceInterceptor extends MirageInterceptor {
 
-	protected Object doInvoke(ProceedingJoinPoint proceedingJoinPoint) throws Throwable {
-		String methodName = proceedingJoinPoint.getSignature().getName();
+	protected Object doInvoke(MethodInvocation invocation) throws Throwable {
+		String methodName = invocation.getMethod().getName();
 
-		if (methodName.equals("addArticleImageId") ||
-			methodName.equals("deleteArticleImage") ||
-			methodName.equals("deleteImages") ||
-			methodName.equals("getArticleImage") ||
-			methodName.equals("getArticleImageId") ||
-			methodName.equals("getArticleImages")) {
+		if (methodName.equals("addStructure") ||
+			methodName.equals("addStructureToGroup") ||
+			methodName.equals("deleteStructure") ||
+			methodName.equals("getStructure") ||
+			methodName.equals("updateStructure")) {
 
-			ArticleImageInvoker articleImageInvoker = new ArticleImageInvoker(
-				proceedingJoinPoint);
+			ContentTypeInvoker contentTypeInvoker =
+				new ContentTypeInvoker(invocation);
 
-			BinaryContentService binaryContentService =
-				MirageServiceFactory.getArticleImageService();
+			ContentTypeService contentTypeService =
+				MirageServiceFactory.getContentTypeService();
 
-			if (methodName.equals("addArticleImageId")) {
-				binaryContentService.createBinaryContent(articleImageInvoker);
+			if (methodName.equals("addStructure") ||
+				methodName.equals("addStructureToGroup")) {
+
+				contentTypeService.createContentType(contentTypeInvoker);
 			}
-			else if (methodName.equals("deleteArticleImage")) {
-				binaryContentService.deleteBinaryContent(
-					articleImageInvoker, null);
+			else if (methodName.equals("deleteStructure")) {
+				contentTypeService.deleteContentType(contentTypeInvoker);
 			}
-			else if (methodName.equals("deleteImages")) {
-				binaryContentService.deleteBinaryContents(articleImageInvoker);
+			else if (methodName.equals("getStructure")) {
+				contentTypeService.getContentType(contentTypeInvoker);
 			}
-			else if (methodName.equals("getArticleImage")) {
-				binaryContentService.getBinaryContent(articleImageInvoker);
-			}
-			else if (methodName.equals("getArticleImageId")) {
-				binaryContentService.getBinaryContentId(articleImageInvoker);
-			}
-			else if (methodName.equals("getArticleImages")) {
-				binaryContentService.getBinaryContents(articleImageInvoker);
+			else if (methodName.equals("updateStructure")) {
+				contentTypeService.updateContentType(contentTypeInvoker);
 			}
 
-			return articleImageInvoker.getReturnValue();
+			return contentTypeInvoker.getReturnValue();
+		}
+		else if (methodName.equals("getStructures") ||
+				 methodName.equals("getStructuresCount") ||
+				 methodName.equals("search") ||
+				 methodName.equals("searchCount")) {
+
+			SearchCriteriaInvoker searchCriteriaInvoker =
+				new SearchCriteriaInvoker(invocation);
+
+			ContentTypeService contentTypeService =
+				MirageServiceFactory.getContentTypeService();
+
+			if (methodName.equals("getStructures") ||
+				methodName.equals("search")) {
+
+				contentTypeService.searchContentTypes(searchCriteriaInvoker);
+			}
+			else if (methodName.equals("getStructuresCount") ||
+					 methodName.equals("searchCount")) {
+
+				contentTypeService.contentTypeSearchCount(
+					null, searchCriteriaInvoker);
+			}
+
+			return searchCriteriaInvoker.getReturnValue();
 		}
 		else {
-			return proceedingJoinPoint.proceed();
+			return invocation.proceed();
 		}
 	}
 
