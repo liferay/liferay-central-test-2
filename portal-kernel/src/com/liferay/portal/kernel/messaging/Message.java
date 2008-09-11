@@ -23,6 +23,7 @@
 package com.liferay.portal.kernel.messaging;
 
 import com.liferay.portal.kernel.util.GetterUtil;
+import com.liferay.portal.kernel.util.Validator;
 
 import java.io.Serializable;
 
@@ -60,6 +61,10 @@ public class Message implements Serializable {
 		}
 
 		return value;
+	}
+
+	public String getDestination() {
+		return _destination;
 	}
 
 	public double getDouble(String key) {
@@ -112,31 +117,20 @@ public class Message implements Serializable {
 	}
 
 	public String getResponseDestination() {
-		return _responseDestination;
-	}
-
-	public String getString(String key) {
-		return GetterUtil.getString(String.valueOf(get(key)));
-	}
-
-	public String getDestination() {
-		return _destination;
+		if (Validator.isNull(_responseDestination)) {
+			return _destination + _DEFAULT_RESPONSE_DESTINATION_SUFFIX;
+		}
+		else {
+			return _responseDestination;
+		}
 	}
 
 	public String getResponseId() {
 		return _responseId;
 	}
 
-	public void setDestination(String destination) {
-		_destination = destination;
-	}
-
-	public void setResponseDestination(String responseDestination) {
-		_responseDestination = responseDestination;
-	}
-
-	public void setResponseId(String responseId) {
-		_responseId = responseId;
+	public String getString(String key) {
+		return GetterUtil.getString(String.valueOf(get(key)));
 	}
 
 	public void put(String key, Object value) {
@@ -147,14 +141,28 @@ public class Message implements Serializable {
 		_values.put(key, value);
 	}
 
+	public void setDestination(String destination) {
+		_destination = destination;
+	}
+
 	public void setPayload(Object payload) {
 		_payload = payload;
+	}
+
+	public void setResponseDestination(String responseDestination) {
+		_responseDestination = responseDestination;
+	}
+
+	public void setResponseId(String responseId) {
+		_responseId = responseId;
 	}
 
 	public String toString() {
 		StringBuilder sb = new StringBuilder();
 
-		sb.append("{responseDestination=");
+		sb.append("{destination=");
+		sb.append(_destination);
+		sb.append(", responseDestination=");
 		sb.append(_responseDestination);
 		sb.append(", ");
 		sb.append("responseId=");
@@ -169,6 +177,9 @@ public class Message implements Serializable {
 
 		return sb.toString();
 	}
+
+	private static final String _DEFAULT_RESPONSE_DESTINATION_SUFFIX =
+		"/response";
 
 	private String _destination;
 	private String _responseDestination;

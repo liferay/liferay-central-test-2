@@ -38,6 +38,9 @@ public interface DestinationNames {
 
 	public static final String IP_GEOCODER = "liferay/ip_geocoder";
 
+	public static final String IP_GEOCODER_RESPONSE =
+		"liferay/ip_geocoder/response";
+
 	public static final String LAYOUTS_LOCAL_PUBLISHER =
 		"liferay/layouts_local_publisher";
 
@@ -59,11 +62,13 @@ public interface DestinationNames {
 
 	public static final String SCHEDULER = "liferay/scheduler";
 
-	public static final String SCHEDULER_RESPONSE = "liferay/scheduler/response";
+	public static final String SCHEDULER_RESPONSE =
+		"liferay/scheduler/response";
 
 	public static final String SEARCH_READER = "liferay/search_reader";
 
-	public static final String SEARCH_READER_RESPONSE = "liferay/search_reader/response";
+	public static final String SEARCH_READER_RESPONSE =
+		"liferay/search_reader/response";
 
 	public static final String SEARCH_WRITER = "liferay/search_writer";
 

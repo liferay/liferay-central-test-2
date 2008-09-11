@@ -51,9 +51,9 @@ public class MessageBusUtil {
 
 	public static void init(
 		MessageBus messageBus, MessageSender messageSender,
-		SynchronousMessageSender syncSender) {
+		SynchronousMessageSender synchronousMessageSender) {
 
-		_instance._init(messageBus, messageSender, syncSender);
+		_instance._init(messageBus, messageSender, synchronousMessageSender);
 	}
 
 	public static void registerMessageListener(
@@ -71,37 +71,37 @@ public class MessageBusUtil {
 	}
 
 	public static void sendMessage(String destination, Object payload) {
-		Message message = new Message();
-
-		message.setPayload(payload);
-		_instance._sendMessage(destination, message);
+		_instance._sendMessage(destination, payload);
 	}
 
-	public static Object sendSynchronizedMessage(
-			String destination, String responseDestination,
-			Message message)
+	public static Object sendSynchronousMessage(
+			String destination, Message message)
 		throws MessageBusException {
-		message.setResponseDestination(responseDestination);
-		return _instance._sendSynchronizedMessage(
-			destination, message);
+
+		return _instance._sendSynchronousMessage(destination, message);
 	}
 
-	public static Object sendSynchronizedMessage(
-			String destination, String responseDestination,
-			Object payload)
+	public static Object sendSynchronousMessage(
+			String destination, Object payload)
 		throws MessageBusException {
-		Message message = new Message();
-		message.setResponseDestination(responseDestination);
-		message.setPayload(payload);
-		return _instance._sendSynchronizedMessage(destination, message);
+
+		return _instance._sendSynchronousMessage(destination, payload);
 	}
 
-	public static Object sendSynchronizedMessage(
-			String destination, String responseDestination,
-			Message message, long timeout)
+	public static Object sendSynchronousMessage(
+			String destination, Message message, long timeout)
 		throws MessageBusException {
-		message.setResponseDestination(responseDestination);
-		return _instance._sendSynchronizedMessage(destination, message, timeout);
+
+		return _instance._sendSynchronousMessage(
+			destination, message, timeout);
+	}
+
+	public static Object sendSynchronousMessage(
+			String destination, Object payload, long timeout)
+		throws MessageBusException {
+
+		return _instance._sendSynchronousMessage(
+			destination, payload, timeout);
 	}
 
 	public static boolean unregisterMessageListener(
@@ -121,11 +121,13 @@ public class MessageBusUtil {
 		return _messageBus.hasMessageListener(destination);
 	}
 
-	private void _init(MessageBus messageBus, MessageSender messageSender,
-					   SynchronousMessageSender synchronousSender) {
+	private void _init(
+		MessageBus messageBus, MessageSender messageSender,
+		SynchronousMessageSender synchronousMessageSender) {
+
 		_messageBus = messageBus;
 		_messageSender = messageSender;
-		_synchronousSender = synchronousSender;
+		_synchronousMessageSender = synchronousMessageSender;
 	}
 
 	private void _registerMessageListener(
@@ -142,16 +144,47 @@ public class MessageBusUtil {
 		_messageBus.sendMessage(destination, message);
 	}
 
-	private Object _sendSynchronizedMessage(
-		String destination, Message message)
-		throws MessageBusException {
-		return _synchronousSender.sendMessage(destination, message);
+	private void _sendMessage(String destination, Object payload) {
+		Message message = new Message();
+
+		message.setPayload(payload);
+
+		_sendMessage(destination, message);
 	}
 
-	private Object _sendSynchronizedMessage(
+	private Object _sendSynchronousMessage(String destination, Message message)
+		throws MessageBusException {
+
+		return _synchronousMessageSender.sendMessage(destination, message);
+	}
+
+	private Object _sendSynchronousMessage(String destination, Object payload)
+		throws MessageBusException {
+
+		Message message = new Message();
+
+		message.setPayload(payload);
+
+		return _sendSynchronousMessage(destination, message);
+	}
+
+	private Object _sendSynchronousMessage(
 			String destination, Message message, long timeout)
 		throws MessageBusException {
-		return _synchronousSender.sendMessage(destination, message, timeout);
+
+		return _synchronousMessageSender.sendMessage(
+			destination, message, timeout);
+	}
+
+	private Object _sendSynchronousMessage(
+			String destination, Object payload, long timeout)
+		throws MessageBusException {
+
+		Message message = new Message();
+
+		message.setPayload(payload);
+
+		return _sendSynchronousMessage(destination, message, timeout);
 	}
 
 	private boolean _unregisterMessageListener(
@@ -164,6 +197,6 @@ public class MessageBusUtil {
 
 	private MessageBus _messageBus;
 	private MessageSender _messageSender;
+	private SynchronousMessageSender _synchronousMessageSender;
 
-	private SynchronousMessageSender _synchronousSender;
 }

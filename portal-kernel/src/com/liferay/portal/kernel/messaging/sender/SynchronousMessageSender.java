@@ -1,4 +1,4 @@
-/*
+/**
  * Copyright (c) 2000-2008 Liferay, Inc. All rights reserved.
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -29,11 +29,14 @@ import com.liferay.portal.kernel.messaging.MessageBusException;
  * <a href="SynchronousMessageSender.java.html"><b><i>View Source</i></b></a>
  *
  * @author Michael C. Han
+ *
  */
 public interface SynchronousMessageSender {
+
 	public Object sendMessage(String destination, Message message)
 		throws MessageBusException;
 
 	public Object sendMessage(String destination, Message message, long timeout)
 		throws MessageBusException;
+
 }

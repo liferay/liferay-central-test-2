@@ -42,10 +42,11 @@ import org.apache.commons.logging.LogFactory;
  */
 public class SchedulerMessageListener implements MessageListener {
 
-	public SchedulerMessageListener(SchedulerEngine schedulerEngine,
-									MessageSender sender) {
+	public SchedulerMessageListener(
+		MessageSender messageSender, SchedulerEngine schedulerEngine) {
+
+		_messageSender = messageSender;
 		_schedulerEngine = schedulerEngine;
-		_messageSender = sender;
 	}
 
 	public void receive(Message message) {
@@ -100,7 +101,7 @@ public class SchedulerMessageListener implements MessageListener {
 
 	private static Log _log = LogFactory.getLog(SchedulerMessageListener.class);
 
+	private MessageSender _messageSender;
 	private SchedulerEngine _schedulerEngine;
 
-	private MessageSender _messageSender;
 }

@@ -84,11 +84,12 @@ public class ServiceTestSuite extends TestSuite {
 		MessageSender messageSender =
 			(MessageSender)PortalBeanLocatorUtil.locate(
 				MessageSender.class.getName());
-		SynchronousMessageSender syncMessageSender =
+		SynchronousMessageSender synchronousMessageSender =
 			(SynchronousMessageSender)PortalBeanLocatorUtil.locate(
 				SynchronousMessageSender.class.getName());
 
-		MessageBusUtil.init(messageBus, messageSender, syncMessageSender);
+		MessageBusUtil.init(
+			messageBus, messageSender, synchronousMessageSender);
 
 		// Scheduler
 

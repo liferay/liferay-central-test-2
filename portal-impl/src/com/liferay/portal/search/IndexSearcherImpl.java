@@ -59,9 +59,8 @@ public class IndexSearcherImpl implements IndexSearcher {
 			searchRequest.setStart(start);
 			searchRequest.setEnd(end);
 
-			Hits hits = (Hits)MessageBusUtil.sendSynchronizedMessage(
-				DestinationNames.SEARCH_READER,
-				DestinationNames.SEARCH_READER_RESPONSE, searchRequest);
+			Hits hits = (Hits)MessageBusUtil.sendSynchronousMessage(
+				DestinationNames.SEARCH_READER, searchRequest);
 
 			return hits;
 		}

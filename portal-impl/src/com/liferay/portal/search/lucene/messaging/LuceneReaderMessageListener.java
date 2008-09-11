@@ -40,8 +40,8 @@ import org.apache.commons.logging.LogFactory;
  */
 public class LuceneReaderMessageListener implements MessageListener {
 
-	public LuceneReaderMessageListener(MessageSender sender) {
-		_messageSender = sender;
+	public LuceneReaderMessageListener(MessageSender messageSender) {
+		_messageSender = messageSender;
 	}
 
 	public void receive(Message message) {
@@ -57,12 +57,12 @@ public class LuceneReaderMessageListener implements MessageListener {
 		SearchRequest searchRequest = (SearchRequest)message.getPayload();
 
 		String command = searchRequest.getCommand();
-		Message reply = new Message();
+
 		if (command.equals(SearchRequest.COMMAND_INDEX_ONLY)) {
-			doCommandIndexOnly(reply);
+			doCommandIndexOnly(message);
 		}
 		else if (command.equals(SearchRequest.COMMAND_SEARCH)) {
-			doCommandSearch(reply, searchRequest);
+			doCommandSearch(message, searchRequest);
 		}
 	}
 
@@ -94,4 +94,5 @@ public class LuceneReaderMessageListener implements MessageListener {
 		LogFactory.getLog(LuceneReaderMessageListener.class);
 
 	private MessageSender _messageSender;
+
 }

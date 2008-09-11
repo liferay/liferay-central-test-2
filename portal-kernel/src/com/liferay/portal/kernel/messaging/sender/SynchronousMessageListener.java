@@ -25,59 +25,73 @@ package com.liferay.portal.kernel.messaging.sender;
 import com.liferay.portal.kernel.messaging.Message;
 import com.liferay.portal.kernel.messaging.MessageBus;
 import com.liferay.portal.kernel.messaging.MessageBusException;
-import com.liferay.portal.kernel.uuid.PortalUUID;
+import com.liferay.portal.kernel.messaging.MessageListener;
 
 /**
- * <a href="DefaultSynchronousMessageSender.java.html"><b><i>View Source</i>
- * </b></a>
+ * <a href="SynchronousMessageListener.java.html"><b><i>View Source</i></b></a>
  *
  * @author Michael C. Han
  *
  */
-public class DefaultSynchronousMessageSender
-	implements SynchronousMessageSender {
+public class SynchronousMessageListener implements MessageListener {
 
-	public DefaultSynchronousMessageSender(
-		MessageBus messageBus, PortalUUID portalUUID, long timeout) {
+	public SynchronousMessageListener(
+		MessageBus messageBus, Message message, long timeout) {
 
 		_messageBus = messageBus;
-		_portalUUID = portalUUID;
+		_message = message;
 		_timeout = timeout;
+		_responseId = _message.getResponseId();
 	}
 
-	public Object sendMessage(String destination, Message message)
-		throws MessageBusException {
-
-		return sendMessage(destination, message, _timeout);
+	public Object getResults() {
+		return _results;
 	}
 
-	public Object sendMessage(String destination, Message message, long timeout)
-		throws MessageBusException {
-
-		message.setDestination(destination);
-
-		String responseDestination = message.getResponseDestination();
-
-		if (!_messageBus.hasDestination(responseDestination)) {
-			throw new MessageBusException(
-				"Response destination " + responseDestination +
-					" is not configured");
+	public void receive(Message message) {
+		if (!message.getResponseId().equals(_responseId)) {
+			return;
 		}
 
-		message.setDestination(destination);
+		synchronized (this) {
+			_results = message.getPayload();
 
-		String responseId = _portalUUID.generate();
+			notify();
+		}
+	}
 
-		message.setResponseId(responseId);
+	public Object send() throws MessageBusException {
+		_messageBus.registerMessageListener(
+			_message.getResponseDestination(), this);
 
-		SynchronousMessageListener synchronousMessageListener =
-			new SynchronousMessageListener(_messageBus, message, timeout);
+		try {
+			synchronized (this) {
+				_messageBus.sendMessage(_message.getDestination(), _message);
 
-		return synchronousMessageListener.send();
+				wait(_timeout);
+
+				if (_results == null) {
+					throw new MessageBusException(
+						"No reply received for message: " + _message);
+				}
+			}
+
+			return _results;
+		}
+		catch (InterruptedException ie) {
+			throw new MessageBusException(
+				"Message sending interrupted for: " + _message, ie);
+		}
+		finally {
+			_messageBus.unregisterMessageListener(
+				_message.getResponseDestination(), this);
+		}
 	}
 
 	private MessageBus _messageBus;
-	private PortalUUID _portalUUID;
+	private Message _message;
 	private long _timeout;
+	private String _responseId;
+	private Object _results;
 
 }
