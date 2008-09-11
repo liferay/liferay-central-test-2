@@ -145,7 +145,7 @@ ${exception.message}
 			debug="${javac.debug}"
 			deprecation="${javac.deprecation}"
 			destdir="${portal-impl.classes.dir}"
-			includes="**/portal/tools/*.java,**/portal/tools/**/*.java,**/portal/spring/util/SpringUtil.java"
+			includes="**/portal/tools/**"
 			nowarn="${javac.nowarn}"
 			srcdir="src"
 		/>

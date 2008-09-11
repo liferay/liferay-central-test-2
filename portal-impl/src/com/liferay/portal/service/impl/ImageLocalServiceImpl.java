@@ -57,8 +57,6 @@ import org.apache.commons.logging.LogFactory;
 public class ImageLocalServiceImpl extends ImageLocalServiceBaseImpl {
 
 	public void afterPropertiesSet() {
-		super.afterPropertiesSet();
-
 		ClassLoader classLoader = getClass().getClassLoader();
 
 		try {
