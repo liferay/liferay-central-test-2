@@ -25,8 +25,6 @@ package com.liferay.portlet.tasks.service.base;
 import com.liferay.counter.service.CounterLocalService;
 import com.liferay.counter.service.CounterService;
 
-import com.liferay.portal.kernel.bean.InitializingBean;
-import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
 import com.liferay.portal.service.ResourceLocalService;
 import com.liferay.portal.service.ResourceService;
 import com.liferay.portal.service.UserLocalService;
@@ -46,6 +44,7 @@ import com.liferay.portlet.social.service.persistence.SocialActivityFinder;
 import com.liferay.portlet.social.service.persistence.SocialActivityPersistence;
 import com.liferay.portlet.tasks.service.TasksProposalLocalService;
 import com.liferay.portlet.tasks.service.TasksProposalService;
+import com.liferay.portlet.tasks.service.TasksProposalService;
 import com.liferay.portlet.tasks.service.TasksReviewLocalService;
 import com.liferay.portlet.tasks.service.TasksReviewService;
 import com.liferay.portlet.tasks.service.persistence.TasksProposalFinder;
@@ -59,7 +58,7 @@ import com.liferay.portlet.tasks.service.persistence.TasksReviewPersistence;
  *
  */
 public abstract class TasksProposalServiceBaseImpl extends PrincipalBean
-	implements TasksProposalService, InitializingBean {
+	implements TasksProposalService {
 	public TasksReviewLocalService getTasksReviewLocalService() {
 		return tasksReviewLocalService;
 	}
@@ -93,6 +92,15 @@ public abstract class TasksProposalServiceBaseImpl extends PrincipalBean
 	public void setTasksProposalLocalService(
 		TasksProposalLocalService tasksProposalLocalService) {
 		this.tasksProposalLocalService = tasksProposalLocalService;
+	}
+
+	public TasksProposalService getTasksProposalService() {
+		return tasksProposalService;
+	}
+
+	public void setTasksProposalService(
+		TasksProposalService tasksProposalService) {
+		this.tasksProposalService = tasksProposalService;
 	}
 
 	public TasksProposalPersistence getTasksProposalPersistence() {
@@ -254,127 +262,11 @@ public abstract class TasksProposalServiceBaseImpl extends PrincipalBean
 		this.socialActivityFinder = socialActivityFinder;
 	}
 
-	public void afterPropertiesSet() {
-		if (tasksReviewLocalService == null) {
-			tasksReviewLocalService = (TasksReviewLocalService)PortalBeanLocatorUtil.locate(TasksReviewLocalService.class.getName() +
-					".impl");
-		}
-
-		if (tasksReviewService == null) {
-			tasksReviewService = (TasksReviewService)PortalBeanLocatorUtil.locate(TasksReviewService.class.getName() +
-					".impl");
-		}
-
-		if (tasksReviewPersistence == null) {
-			tasksReviewPersistence = (TasksReviewPersistence)PortalBeanLocatorUtil.locate(TasksReviewPersistence.class.getName() +
-					".impl");
-		}
-
-		if (tasksProposalLocalService == null) {
-			tasksProposalLocalService = (TasksProposalLocalService)PortalBeanLocatorUtil.locate(TasksProposalLocalService.class.getName() +
-					".impl");
-		}
-
-		if (tasksProposalPersistence == null) {
-			tasksProposalPersistence = (TasksProposalPersistence)PortalBeanLocatorUtil.locate(TasksProposalPersistence.class.getName() +
-					".impl");
-		}
-
-		if (tasksProposalFinder == null) {
-			tasksProposalFinder = (TasksProposalFinder)PortalBeanLocatorUtil.locate(TasksProposalFinder.class.getName() +
-					".impl");
-		}
-
-		if (counterLocalService == null) {
-			counterLocalService = (CounterLocalService)PortalBeanLocatorUtil.locate(CounterLocalService.class.getName() +
-					".impl");
-		}
-
-		if (counterService == null) {
-			counterService = (CounterService)PortalBeanLocatorUtil.locate(CounterService.class.getName() +
-					".impl");
-		}
-
-		if (resourceLocalService == null) {
-			resourceLocalService = (ResourceLocalService)PortalBeanLocatorUtil.locate(ResourceLocalService.class.getName() +
-					".impl");
-		}
-
-		if (resourceService == null) {
-			resourceService = (ResourceService)PortalBeanLocatorUtil.locate(ResourceService.class.getName() +
-					".impl");
-		}
-
-		if (resourcePersistence == null) {
-			resourcePersistence = (ResourcePersistence)PortalBeanLocatorUtil.locate(ResourcePersistence.class.getName() +
-					".impl");
-		}
-
-		if (resourceFinder == null) {
-			resourceFinder = (ResourceFinder)PortalBeanLocatorUtil.locate(ResourceFinder.class.getName() +
-					".impl");
-		}
-
-		if (userLocalService == null) {
-			userLocalService = (UserLocalService)PortalBeanLocatorUtil.locate(UserLocalService.class.getName() +
-					".impl");
-		}
-
-		if (userService == null) {
-			userService = (UserService)PortalBeanLocatorUtil.locate(UserService.class.getName() +
-					".impl");
-		}
-
-		if (userPersistence == null) {
-			userPersistence = (UserPersistence)PortalBeanLocatorUtil.locate(UserPersistence.class.getName() +
-					".impl");
-		}
-
-		if (userFinder == null) {
-			userFinder = (UserFinder)PortalBeanLocatorUtil.locate(UserFinder.class.getName() +
-					".impl");
-		}
-
-		if (mbMessageLocalService == null) {
-			mbMessageLocalService = (MBMessageLocalService)PortalBeanLocatorUtil.locate(MBMessageLocalService.class.getName() +
-					".impl");
-		}
-
-		if (mbMessageService == null) {
-			mbMessageService = (MBMessageService)PortalBeanLocatorUtil.locate(MBMessageService.class.getName() +
-					".impl");
-		}
-
-		if (mbMessagePersistence == null) {
-			mbMessagePersistence = (MBMessagePersistence)PortalBeanLocatorUtil.locate(MBMessagePersistence.class.getName() +
-					".impl");
-		}
-
-		if (mbMessageFinder == null) {
-			mbMessageFinder = (MBMessageFinder)PortalBeanLocatorUtil.locate(MBMessageFinder.class.getName() +
-					".impl");
-		}
-
-		if (socialActivityLocalService == null) {
-			socialActivityLocalService = (SocialActivityLocalService)PortalBeanLocatorUtil.locate(SocialActivityLocalService.class.getName() +
-					".impl");
-		}
-
-		if (socialActivityPersistence == null) {
-			socialActivityPersistence = (SocialActivityPersistence)PortalBeanLocatorUtil.locate(SocialActivityPersistence.class.getName() +
-					".impl");
-		}
-
-		if (socialActivityFinder == null) {
-			socialActivityFinder = (SocialActivityFinder)PortalBeanLocatorUtil.locate(SocialActivityFinder.class.getName() +
-					".impl");
-		}
-	}
-
 	protected TasksReviewLocalService tasksReviewLocalService;
 	protected TasksReviewService tasksReviewService;
 	protected TasksReviewPersistence tasksReviewPersistence;
 	protected TasksProposalLocalService tasksProposalLocalService;
+	protected TasksProposalService tasksProposalService;
 	protected TasksProposalPersistence tasksProposalPersistence;
 	protected TasksProposalFinder tasksProposalFinder;
 	protected CounterLocalService counterLocalService;

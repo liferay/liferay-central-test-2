@@ -24,7 +24,6 @@ package com.liferay.portal.service.persistence;
 
 import com.liferay.portal.NoSuchUserIdMapperException;
 import com.liferay.portal.SystemException;
-import com.liferay.portal.kernel.bean.InitializingBean;
 import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 import com.liferay.portal.kernel.dao.orm.FinderCacheUtil;
 import com.liferay.portal.kernel.dao.orm.Query;
@@ -57,7 +56,7 @@ import java.util.List;
  *
  */
 public class UserIdMapperPersistenceImpl extends BasePersistenceImpl
-	implements UserIdMapperPersistence, InitializingBean {
+	implements UserIdMapperPersistence {
 	public UserIdMapper create(long userIdMapperId) {
 		UserIdMapper userIdMapper = new UserIdMapperImpl();
 

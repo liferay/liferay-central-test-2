@@ -25,8 +25,6 @@ package com.liferay.portlet.polls.service.base;
 import com.liferay.counter.service.CounterLocalService;
 import com.liferay.counter.service.CounterService;
 
-import com.liferay.portal.kernel.bean.InitializingBean;
-import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
 import com.liferay.portal.service.ResourceLocalService;
 import com.liferay.portal.service.ResourceService;
 import com.liferay.portal.service.UserLocalService;
@@ -39,6 +37,7 @@ import com.liferay.portal.service.persistence.UserPersistence;
 
 import com.liferay.portlet.polls.service.PollsChoiceLocalService;
 import com.liferay.portlet.polls.service.PollsQuestionLocalService;
+import com.liferay.portlet.polls.service.PollsQuestionService;
 import com.liferay.portlet.polls.service.PollsQuestionService;
 import com.liferay.portlet.polls.service.PollsVoteLocalService;
 import com.liferay.portlet.polls.service.PollsVoteService;
@@ -54,7 +53,7 @@ import com.liferay.portlet.polls.service.persistence.PollsVotePersistence;
  *
  */
 public abstract class PollsQuestionServiceBaseImpl extends PrincipalBean
-	implements PollsQuestionService, InitializingBean {
+	implements PollsQuestionService {
 	public PollsChoiceLocalService getPollsChoiceLocalService() {
 		return pollsChoiceLocalService;
 	}
@@ -88,6 +87,15 @@ public abstract class PollsQuestionServiceBaseImpl extends PrincipalBean
 	public void setPollsQuestionLocalService(
 		PollsQuestionLocalService pollsQuestionLocalService) {
 		this.pollsQuestionLocalService = pollsQuestionLocalService;
+	}
+
+	public PollsQuestionService getPollsQuestionService() {
+		return pollsQuestionService;
+	}
+
+	public void setPollsQuestionService(
+		PollsQuestionService pollsQuestionService) {
+		this.pollsQuestionService = pollsQuestionService;
 	}
 
 	public PollsQuestionPersistence getPollsQuestionPersistence() {
@@ -206,102 +214,11 @@ public abstract class PollsQuestionServiceBaseImpl extends PrincipalBean
 		this.userFinder = userFinder;
 	}
 
-	public void afterPropertiesSet() {
-		if (pollsChoiceLocalService == null) {
-			pollsChoiceLocalService = (PollsChoiceLocalService)PortalBeanLocatorUtil.locate(PollsChoiceLocalService.class.getName() +
-					".impl");
-		}
-
-		if (pollsChoicePersistence == null) {
-			pollsChoicePersistence = (PollsChoicePersistence)PortalBeanLocatorUtil.locate(PollsChoicePersistence.class.getName() +
-					".impl");
-		}
-
-		if (pollsChoiceFinder == null) {
-			pollsChoiceFinder = (PollsChoiceFinder)PortalBeanLocatorUtil.locate(PollsChoiceFinder.class.getName() +
-					".impl");
-		}
-
-		if (pollsQuestionLocalService == null) {
-			pollsQuestionLocalService = (PollsQuestionLocalService)PortalBeanLocatorUtil.locate(PollsQuestionLocalService.class.getName() +
-					".impl");
-		}
-
-		if (pollsQuestionPersistence == null) {
-			pollsQuestionPersistence = (PollsQuestionPersistence)PortalBeanLocatorUtil.locate(PollsQuestionPersistence.class.getName() +
-					".impl");
-		}
-
-		if (pollsVoteLocalService == null) {
-			pollsVoteLocalService = (PollsVoteLocalService)PortalBeanLocatorUtil.locate(PollsVoteLocalService.class.getName() +
-					".impl");
-		}
-
-		if (pollsVoteService == null) {
-			pollsVoteService = (PollsVoteService)PortalBeanLocatorUtil.locate(PollsVoteService.class.getName() +
-					".impl");
-		}
-
-		if (pollsVotePersistence == null) {
-			pollsVotePersistence = (PollsVotePersistence)PortalBeanLocatorUtil.locate(PollsVotePersistence.class.getName() +
-					".impl");
-		}
-
-		if (counterLocalService == null) {
-			counterLocalService = (CounterLocalService)PortalBeanLocatorUtil.locate(CounterLocalService.class.getName() +
-					".impl");
-		}
-
-		if (counterService == null) {
-			counterService = (CounterService)PortalBeanLocatorUtil.locate(CounterService.class.getName() +
-					".impl");
-		}
-
-		if (resourceLocalService == null) {
-			resourceLocalService = (ResourceLocalService)PortalBeanLocatorUtil.locate(ResourceLocalService.class.getName() +
-					".impl");
-		}
-
-		if (resourceService == null) {
-			resourceService = (ResourceService)PortalBeanLocatorUtil.locate(ResourceService.class.getName() +
-					".impl");
-		}
-
-		if (resourcePersistence == null) {
-			resourcePersistence = (ResourcePersistence)PortalBeanLocatorUtil.locate(ResourcePersistence.class.getName() +
-					".impl");
-		}
-
-		if (resourceFinder == null) {
-			resourceFinder = (ResourceFinder)PortalBeanLocatorUtil.locate(ResourceFinder.class.getName() +
-					".impl");
-		}
-
-		if (userLocalService == null) {
-			userLocalService = (UserLocalService)PortalBeanLocatorUtil.locate(UserLocalService.class.getName() +
-					".impl");
-		}
-
-		if (userService == null) {
-			userService = (UserService)PortalBeanLocatorUtil.locate(UserService.class.getName() +
-					".impl");
-		}
-
-		if (userPersistence == null) {
-			userPersistence = (UserPersistence)PortalBeanLocatorUtil.locate(UserPersistence.class.getName() +
-					".impl");
-		}
-
-		if (userFinder == null) {
-			userFinder = (UserFinder)PortalBeanLocatorUtil.locate(UserFinder.class.getName() +
-					".impl");
-		}
-	}
-
 	protected PollsChoiceLocalService pollsChoiceLocalService;
 	protected PollsChoicePersistence pollsChoicePersistence;
 	protected PollsChoiceFinder pollsChoiceFinder;
 	protected PollsQuestionLocalService pollsQuestionLocalService;
+	protected PollsQuestionService pollsQuestionService;
 	protected PollsQuestionPersistence pollsQuestionPersistence;
 	protected PollsVoteLocalService pollsVoteLocalService;
 	protected PollsVoteService pollsVoteService;

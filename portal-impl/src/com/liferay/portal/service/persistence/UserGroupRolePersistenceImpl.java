@@ -24,7 +24,6 @@ package com.liferay.portal.service.persistence;
 
 import com.liferay.portal.NoSuchUserGroupRoleException;
 import com.liferay.portal.SystemException;
-import com.liferay.portal.kernel.bean.InitializingBean;
 import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 import com.liferay.portal.kernel.dao.orm.FinderCacheUtil;
 import com.liferay.portal.kernel.dao.orm.Query;
@@ -57,7 +56,7 @@ import java.util.List;
  *
  */
 public class UserGroupRolePersistenceImpl extends BasePersistenceImpl
-	implements UserGroupRolePersistence, InitializingBean {
+	implements UserGroupRolePersistence {
 	public UserGroupRole create(UserGroupRolePK userGroupRolePK) {
 		UserGroupRole userGroupRole = new UserGroupRoleImpl();
 

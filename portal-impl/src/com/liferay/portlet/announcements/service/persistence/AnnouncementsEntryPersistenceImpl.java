@@ -23,7 +23,6 @@
 package com.liferay.portlet.announcements.service.persistence;
 
 import com.liferay.portal.SystemException;
-import com.liferay.portal.kernel.bean.InitializingBean;
 import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 import com.liferay.portal.kernel.dao.orm.FinderCacheUtil;
 import com.liferay.portal.kernel.dao.orm.Query;
@@ -60,7 +59,7 @@ import java.util.List;
  *
  */
 public class AnnouncementsEntryPersistenceImpl extends BasePersistenceImpl
-	implements AnnouncementsEntryPersistence, InitializingBean {
+	implements AnnouncementsEntryPersistence {
 	public AnnouncementsEntry create(long entryId) {
 		AnnouncementsEntry announcementsEntry = new AnnouncementsEntryImpl();
 

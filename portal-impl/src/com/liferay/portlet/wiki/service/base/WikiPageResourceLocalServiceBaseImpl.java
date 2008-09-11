@@ -27,14 +27,13 @@ import com.liferay.counter.service.CounterService;
 
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
-import com.liferay.portal.kernel.bean.InitializingBean;
-import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
 import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 
 import com.liferay.portlet.wiki.model.WikiPageResource;
 import com.liferay.portlet.wiki.service.WikiNodeLocalService;
 import com.liferay.portlet.wiki.service.WikiNodeService;
 import com.liferay.portlet.wiki.service.WikiPageLocalService;
+import com.liferay.portlet.wiki.service.WikiPageResourceLocalService;
 import com.liferay.portlet.wiki.service.WikiPageResourceLocalService;
 import com.liferay.portlet.wiki.service.WikiPageService;
 import com.liferay.portlet.wiki.service.persistence.WikiNodePersistence;
@@ -51,7 +50,7 @@ import java.util.List;
  *
  */
 public abstract class WikiPageResourceLocalServiceBaseImpl
-	implements WikiPageResourceLocalService, InitializingBean {
+	implements WikiPageResourceLocalService {
 	public WikiPageResource addWikiPageResource(
 		WikiPageResource wikiPageResource) throws SystemException {
 		wikiPageResource.setNew(true);
@@ -163,6 +162,15 @@ public abstract class WikiPageResourceLocalServiceBaseImpl
 		this.wikiPageFinder = wikiPageFinder;
 	}
 
+	public WikiPageResourceLocalService getWikiPageResourceLocalService() {
+		return wikiPageResourceLocalService;
+	}
+
+	public void setWikiPageResourceLocalService(
+		WikiPageResourceLocalService wikiPageResourceLocalService) {
+		this.wikiPageResourceLocalService = wikiPageResourceLocalService;
+	}
+
 	public WikiPageResourcePersistence getWikiPageResourcePersistence() {
 		return wikiPageResourcePersistence;
 	}
@@ -188,58 +196,6 @@ public abstract class WikiPageResourceLocalServiceBaseImpl
 		this.counterService = counterService;
 	}
 
-	public void afterPropertiesSet() {
-		if (wikiNodeLocalService == null) {
-			wikiNodeLocalService = (WikiNodeLocalService)PortalBeanLocatorUtil.locate(WikiNodeLocalService.class.getName() +
-					".impl");
-		}
-
-		if (wikiNodeService == null) {
-			wikiNodeService = (WikiNodeService)PortalBeanLocatorUtil.locate(WikiNodeService.class.getName() +
-					".impl");
-		}
-
-		if (wikiNodePersistence == null) {
-			wikiNodePersistence = (WikiNodePersistence)PortalBeanLocatorUtil.locate(WikiNodePersistence.class.getName() +
-					".impl");
-		}
-
-		if (wikiPageLocalService == null) {
-			wikiPageLocalService = (WikiPageLocalService)PortalBeanLocatorUtil.locate(WikiPageLocalService.class.getName() +
-					".impl");
-		}
-
-		if (wikiPageService == null) {
-			wikiPageService = (WikiPageService)PortalBeanLocatorUtil.locate(WikiPageService.class.getName() +
-					".impl");
-		}
-
-		if (wikiPagePersistence == null) {
-			wikiPagePersistence = (WikiPagePersistence)PortalBeanLocatorUtil.locate(WikiPagePersistence.class.getName() +
-					".impl");
-		}
-
-		if (wikiPageFinder == null) {
-			wikiPageFinder = (WikiPageFinder)PortalBeanLocatorUtil.locate(WikiPageFinder.class.getName() +
-					".impl");
-		}
-
-		if (wikiPageResourcePersistence == null) {
-			wikiPageResourcePersistence = (WikiPageResourcePersistence)PortalBeanLocatorUtil.locate(WikiPageResourcePersistence.class.getName() +
-					".impl");
-		}
-
-		if (counterLocalService == null) {
-			counterLocalService = (CounterLocalService)PortalBeanLocatorUtil.locate(CounterLocalService.class.getName() +
-					".impl");
-		}
-
-		if (counterService == null) {
-			counterService = (CounterService)PortalBeanLocatorUtil.locate(CounterService.class.getName() +
-					".impl");
-		}
-	}
-
 	protected WikiNodeLocalService wikiNodeLocalService;
 	protected WikiNodeService wikiNodeService;
 	protected WikiNodePersistence wikiNodePersistence;
@@ -247,6 +203,7 @@ public abstract class WikiPageResourceLocalServiceBaseImpl
 	protected WikiPageService wikiPageService;
 	protected WikiPagePersistence wikiPagePersistence;
 	protected WikiPageFinder wikiPageFinder;
+	protected WikiPageResourceLocalService wikiPageResourceLocalService;
 	protected WikiPageResourcePersistence wikiPageResourcePersistence;
 	protected CounterLocalService counterLocalService;
 	protected CounterService counterService;

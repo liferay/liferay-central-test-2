@@ -23,7 +23,6 @@
 package com.liferay.portlet.announcements.service.persistence;
 
 import com.liferay.portal.SystemException;
-import com.liferay.portal.kernel.bean.InitializingBean;
 import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 import com.liferay.portal.kernel.dao.orm.FinderCacheUtil;
 import com.liferay.portal.kernel.dao.orm.Query;
@@ -58,7 +57,7 @@ import java.util.List;
  *
  */
 public class AnnouncementsFlagPersistenceImpl extends BasePersistenceImpl
-	implements AnnouncementsFlagPersistence, InitializingBean {
+	implements AnnouncementsFlagPersistence {
 	public AnnouncementsFlag create(long flagId) {
 		AnnouncementsFlag announcementsFlag = new AnnouncementsFlagImpl();
 

@@ -23,7 +23,6 @@
 package com.liferay.portlet.softwarecatalog.service.persistence;
 
 import com.liferay.portal.SystemException;
-import com.liferay.portal.kernel.bean.InitializingBean;
 import com.liferay.portal.kernel.dao.jdbc.MappingSqlQuery;
 import com.liferay.portal.kernel.dao.jdbc.MappingSqlQueryFactoryUtil;
 import com.liferay.portal.kernel.dao.jdbc.RowMapper;
@@ -67,7 +66,7 @@ import java.util.List;
  *
  */
 public class SCProductEntryPersistenceImpl extends BasePersistenceImpl
-	implements SCProductEntryPersistence, InitializingBean {
+	implements SCProductEntryPersistence {
 	public SCProductEntry create(long productEntryId) {
 		SCProductEntry scProductEntry = new SCProductEntryImpl();
 

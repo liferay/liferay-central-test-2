@@ -22,9 +22,16 @@
 
 package com.liferay.portlet.social.service.base;
 
-import com.liferay.portal.kernel.bean.InitializingBean;
-
+import com.liferay.portlet.social.service.SocialActivityInterpreterLocalService;
+import com.liferay.portlet.social.service.SocialActivityLocalService;
+import com.liferay.portlet.social.service.SocialRelationLocalService;
 import com.liferay.portlet.social.service.SocialRequestInterpreterLocalService;
+import com.liferay.portlet.social.service.SocialRequestInterpreterLocalService;
+import com.liferay.portlet.social.service.SocialRequestLocalService;
+import com.liferay.portlet.social.service.persistence.SocialActivityFinder;
+import com.liferay.portlet.social.service.persistence.SocialActivityPersistence;
+import com.liferay.portlet.social.service.persistence.SocialRelationPersistence;
+import com.liferay.portlet.social.service.persistence.SocialRequestPersistence;
 
 /**
  * <a href="SocialRequestInterpreterLocalServiceBaseImpl.java.html"><b><i>View Source</i></b></a>
@@ -33,7 +40,95 @@ import com.liferay.portlet.social.service.SocialRequestInterpreterLocalService;
  *
  */
 public abstract class SocialRequestInterpreterLocalServiceBaseImpl
-	implements SocialRequestInterpreterLocalService, InitializingBean {
-	public void afterPropertiesSet() {
+	implements SocialRequestInterpreterLocalService {
+	public SocialActivityLocalService getSocialActivityLocalService() {
+		return socialActivityLocalService;
 	}
+
+	public void setSocialActivityLocalService(
+		SocialActivityLocalService socialActivityLocalService) {
+		this.socialActivityLocalService = socialActivityLocalService;
+	}
+
+	public SocialActivityPersistence getSocialActivityPersistence() {
+		return socialActivityPersistence;
+	}
+
+	public void setSocialActivityPersistence(
+		SocialActivityPersistence socialActivityPersistence) {
+		this.socialActivityPersistence = socialActivityPersistence;
+	}
+
+	public SocialActivityFinder getSocialActivityFinder() {
+		return socialActivityFinder;
+	}
+
+	public void setSocialActivityFinder(
+		SocialActivityFinder socialActivityFinder) {
+		this.socialActivityFinder = socialActivityFinder;
+	}
+
+	public SocialActivityInterpreterLocalService getSocialActivityInterpreterLocalService() {
+		return socialActivityInterpreterLocalService;
+	}
+
+	public void setSocialActivityInterpreterLocalService(
+		SocialActivityInterpreterLocalService socialActivityInterpreterLocalService) {
+		this.socialActivityInterpreterLocalService = socialActivityInterpreterLocalService;
+	}
+
+	public SocialRelationLocalService getSocialRelationLocalService() {
+		return socialRelationLocalService;
+	}
+
+	public void setSocialRelationLocalService(
+		SocialRelationLocalService socialRelationLocalService) {
+		this.socialRelationLocalService = socialRelationLocalService;
+	}
+
+	public SocialRelationPersistence getSocialRelationPersistence() {
+		return socialRelationPersistence;
+	}
+
+	public void setSocialRelationPersistence(
+		SocialRelationPersistence socialRelationPersistence) {
+		this.socialRelationPersistence = socialRelationPersistence;
+	}
+
+	public SocialRequestLocalService getSocialRequestLocalService() {
+		return socialRequestLocalService;
+	}
+
+	public void setSocialRequestLocalService(
+		SocialRequestLocalService socialRequestLocalService) {
+		this.socialRequestLocalService = socialRequestLocalService;
+	}
+
+	public SocialRequestPersistence getSocialRequestPersistence() {
+		return socialRequestPersistence;
+	}
+
+	public void setSocialRequestPersistence(
+		SocialRequestPersistence socialRequestPersistence) {
+		this.socialRequestPersistence = socialRequestPersistence;
+	}
+
+	public SocialRequestInterpreterLocalService getSocialRequestInterpreterLocalService() {
+		return socialRequestInterpreterLocalService;
+	}
+
+	public void setSocialRequestInterpreterLocalService(
+		SocialRequestInterpreterLocalService socialRequestInterpreterLocalService) {
+		this.socialRequestInterpreterLocalService = socialRequestInterpreterLocalService;
+	}
+
+	protected SocialActivityLocalService socialActivityLocalService;
+	protected SocialActivityPersistence socialActivityPersistence;
+	protected SocialActivityFinder socialActivityFinder;
+	protected SocialActivityInterpreterLocalService socialActivityInterpreterLocalService;
+	protected SocialRelationLocalService socialRelationLocalService;
+	protected SocialRelationPersistence socialRelationPersistence;
+	protected SocialRequestLocalService socialRequestLocalService;
+	protected SocialRequestPersistence socialRequestPersistence;
+	protected SocialRequestInterpreterLocalService socialRequestInterpreterLocalService;
 }

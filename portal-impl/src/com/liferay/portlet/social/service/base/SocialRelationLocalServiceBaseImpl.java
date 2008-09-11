@@ -27,8 +27,6 @@ import com.liferay.counter.service.CounterService;
 
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
-import com.liferay.portal.kernel.bean.InitializingBean;
-import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
 import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 import com.liferay.portal.service.UserLocalService;
 import com.liferay.portal.service.UserService;
@@ -38,6 +36,7 @@ import com.liferay.portal.service.persistence.UserPersistence;
 import com.liferay.portlet.social.model.SocialRelation;
 import com.liferay.portlet.social.service.SocialActivityInterpreterLocalService;
 import com.liferay.portlet.social.service.SocialActivityLocalService;
+import com.liferay.portlet.social.service.SocialRelationLocalService;
 import com.liferay.portlet.social.service.SocialRelationLocalService;
 import com.liferay.portlet.social.service.SocialRequestInterpreterLocalService;
 import com.liferay.portlet.social.service.SocialRequestLocalService;
@@ -55,7 +54,7 @@ import java.util.List;
  *
  */
 public abstract class SocialRelationLocalServiceBaseImpl
-	implements SocialRelationLocalService, InitializingBean {
+	implements SocialRelationLocalService {
 	public SocialRelation addSocialRelation(SocialRelation socialRelation)
 		throws SystemException {
 		socialRelation.setNew(true);
@@ -145,6 +144,15 @@ public abstract class SocialRelationLocalServiceBaseImpl
 		this.socialActivityInterpreterLocalService = socialActivityInterpreterLocalService;
 	}
 
+	public SocialRelationLocalService getSocialRelationLocalService() {
+		return socialRelationLocalService;
+	}
+
+	public void setSocialRelationLocalService(
+		SocialRelationLocalService socialRelationLocalService) {
+		this.socialRelationLocalService = socialRelationLocalService;
+	}
+
 	public SocialRelationPersistence getSocialRelationPersistence() {
 		return socialRelationPersistence;
 	}
@@ -229,82 +237,11 @@ public abstract class SocialRelationLocalServiceBaseImpl
 		this.userFinder = userFinder;
 	}
 
-	public void afterPropertiesSet() {
-		if (socialActivityLocalService == null) {
-			socialActivityLocalService = (SocialActivityLocalService)PortalBeanLocatorUtil.locate(SocialActivityLocalService.class.getName() +
-					".impl");
-		}
-
-		if (socialActivityPersistence == null) {
-			socialActivityPersistence = (SocialActivityPersistence)PortalBeanLocatorUtil.locate(SocialActivityPersistence.class.getName() +
-					".impl");
-		}
-
-		if (socialActivityFinder == null) {
-			socialActivityFinder = (SocialActivityFinder)PortalBeanLocatorUtil.locate(SocialActivityFinder.class.getName() +
-					".impl");
-		}
-
-		if (socialActivityInterpreterLocalService == null) {
-			socialActivityInterpreterLocalService = (SocialActivityInterpreterLocalService)PortalBeanLocatorUtil.locate(SocialActivityInterpreterLocalService.class.getName() +
-					".impl");
-		}
-
-		if (socialRelationPersistence == null) {
-			socialRelationPersistence = (SocialRelationPersistence)PortalBeanLocatorUtil.locate(SocialRelationPersistence.class.getName() +
-					".impl");
-		}
-
-		if (socialRequestLocalService == null) {
-			socialRequestLocalService = (SocialRequestLocalService)PortalBeanLocatorUtil.locate(SocialRequestLocalService.class.getName() +
-					".impl");
-		}
-
-		if (socialRequestPersistence == null) {
-			socialRequestPersistence = (SocialRequestPersistence)PortalBeanLocatorUtil.locate(SocialRequestPersistence.class.getName() +
-					".impl");
-		}
-
-		if (socialRequestInterpreterLocalService == null) {
-			socialRequestInterpreterLocalService = (SocialRequestInterpreterLocalService)PortalBeanLocatorUtil.locate(SocialRequestInterpreterLocalService.class.getName() +
-					".impl");
-		}
-
-		if (counterLocalService == null) {
-			counterLocalService = (CounterLocalService)PortalBeanLocatorUtil.locate(CounterLocalService.class.getName() +
-					".impl");
-		}
-
-		if (counterService == null) {
-			counterService = (CounterService)PortalBeanLocatorUtil.locate(CounterService.class.getName() +
-					".impl");
-		}
-
-		if (userLocalService == null) {
-			userLocalService = (UserLocalService)PortalBeanLocatorUtil.locate(UserLocalService.class.getName() +
-					".impl");
-		}
-
-		if (userService == null) {
-			userService = (UserService)PortalBeanLocatorUtil.locate(UserService.class.getName() +
-					".impl");
-		}
-
-		if (userPersistence == null) {
-			userPersistence = (UserPersistence)PortalBeanLocatorUtil.locate(UserPersistence.class.getName() +
-					".impl");
-		}
-
-		if (userFinder == null) {
-			userFinder = (UserFinder)PortalBeanLocatorUtil.locate(UserFinder.class.getName() +
-					".impl");
-		}
-	}
-
 	protected SocialActivityLocalService socialActivityLocalService;
 	protected SocialActivityPersistence socialActivityPersistence;
 	protected SocialActivityFinder socialActivityFinder;
 	protected SocialActivityInterpreterLocalService socialActivityInterpreterLocalService;
+	protected SocialRelationLocalService socialRelationLocalService;
 	protected SocialRelationPersistence socialRelationPersistence;
 	protected SocialRequestLocalService socialRequestLocalService;
 	protected SocialRequestPersistence socialRequestPersistence;

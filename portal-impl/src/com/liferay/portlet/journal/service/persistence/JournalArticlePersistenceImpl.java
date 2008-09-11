@@ -23,7 +23,6 @@
 package com.liferay.portlet.journal.service.persistence;
 
 import com.liferay.portal.SystemException;
-import com.liferay.portal.kernel.bean.InitializingBean;
 import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 import com.liferay.portal.kernel.dao.orm.FinderCacheUtil;
 import com.liferay.portal.kernel.dao.orm.Query;
@@ -60,7 +59,7 @@ import java.util.List;
  *
  */
 public class JournalArticlePersistenceImpl extends BasePersistenceImpl
-	implements JournalArticlePersistence, InitializingBean {
+	implements JournalArticlePersistence {
 	public JournalArticle create(long id) {
 		JournalArticle journalArticle = new JournalArticleImpl();
 

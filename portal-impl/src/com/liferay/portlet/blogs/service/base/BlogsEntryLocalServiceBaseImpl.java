@@ -27,8 +27,6 @@ import com.liferay.counter.service.CounterService;
 
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
-import com.liferay.portal.kernel.bean.InitializingBean;
-import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
 import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 import com.liferay.portal.service.CompanyLocalService;
 import com.liferay.portal.service.CompanyService;
@@ -52,6 +50,8 @@ import com.liferay.portal.service.persistence.UserPersistence;
 
 import com.liferay.portlet.blogs.model.BlogsEntry;
 import com.liferay.portlet.blogs.service.BlogsEntryLocalService;
+import com.liferay.portlet.blogs.service.BlogsEntryLocalService;
+import com.liferay.portlet.blogs.service.BlogsEntryService;
 import com.liferay.portlet.blogs.service.BlogsStatsUserLocalService;
 import com.liferay.portlet.blogs.service.persistence.BlogsEntryFinder;
 import com.liferay.portlet.blogs.service.persistence.BlogsEntryPersistence;
@@ -84,7 +84,7 @@ import java.util.List;
  *
  */
 public abstract class BlogsEntryLocalServiceBaseImpl
-	implements BlogsEntryLocalService, InitializingBean {
+	implements BlogsEntryLocalService {
 	public BlogsEntry addBlogsEntry(BlogsEntry blogsEntry)
 		throws SystemException {
 		blogsEntry.setNew(true);
@@ -136,6 +136,23 @@ public abstract class BlogsEntryLocalServiceBaseImpl
 		blogsEntry.setNew(false);
 
 		return blogsEntryPersistence.update(blogsEntry, true);
+	}
+
+	public BlogsEntryLocalService getBlogsEntryLocalService() {
+		return blogsEntryLocalService;
+	}
+
+	public void setBlogsEntryLocalService(
+		BlogsEntryLocalService blogsEntryLocalService) {
+		this.blogsEntryLocalService = blogsEntryLocalService;
+	}
+
+	public BlogsEntryService getBlogsEntryService() {
+		return blogsEntryService;
+	}
+
+	public void setBlogsEntryService(BlogsEntryService blogsEntryService) {
+		this.blogsEntryService = blogsEntryService;
 	}
 
 	public BlogsEntryPersistence getBlogsEntryPersistence() {
@@ -500,223 +517,8 @@ public abstract class BlogsEntryLocalServiceBaseImpl
 		this.tagsEntryFinder = tagsEntryFinder;
 	}
 
-	public void afterPropertiesSet() {
-		if (blogsEntryPersistence == null) {
-			blogsEntryPersistence = (BlogsEntryPersistence)PortalBeanLocatorUtil.locate(BlogsEntryPersistence.class.getName() +
-					".impl");
-		}
-
-		if (blogsEntryFinder == null) {
-			blogsEntryFinder = (BlogsEntryFinder)PortalBeanLocatorUtil.locate(BlogsEntryFinder.class.getName() +
-					".impl");
-		}
-
-		if (blogsStatsUserLocalService == null) {
-			blogsStatsUserLocalService = (BlogsStatsUserLocalService)PortalBeanLocatorUtil.locate(BlogsStatsUserLocalService.class.getName() +
-					".impl");
-		}
-
-		if (blogsStatsUserPersistence == null) {
-			blogsStatsUserPersistence = (BlogsStatsUserPersistence)PortalBeanLocatorUtil.locate(BlogsStatsUserPersistence.class.getName() +
-					".impl");
-		}
-
-		if (blogsStatsUserFinder == null) {
-			blogsStatsUserFinder = (BlogsStatsUserFinder)PortalBeanLocatorUtil.locate(BlogsStatsUserFinder.class.getName() +
-					".impl");
-		}
-
-		if (counterLocalService == null) {
-			counterLocalService = (CounterLocalService)PortalBeanLocatorUtil.locate(CounterLocalService.class.getName() +
-					".impl");
-		}
-
-		if (counterService == null) {
-			counterService = (CounterService)PortalBeanLocatorUtil.locate(CounterService.class.getName() +
-					".impl");
-		}
-
-		if (companyLocalService == null) {
-			companyLocalService = (CompanyLocalService)PortalBeanLocatorUtil.locate(CompanyLocalService.class.getName() +
-					".impl");
-		}
-
-		if (companyService == null) {
-			companyService = (CompanyService)PortalBeanLocatorUtil.locate(CompanyService.class.getName() +
-					".impl");
-		}
-
-		if (companyPersistence == null) {
-			companyPersistence = (CompanyPersistence)PortalBeanLocatorUtil.locate(CompanyPersistence.class.getName() +
-					".impl");
-		}
-
-		if (groupLocalService == null) {
-			groupLocalService = (GroupLocalService)PortalBeanLocatorUtil.locate(GroupLocalService.class.getName() +
-					".impl");
-		}
-
-		if (groupService == null) {
-			groupService = (GroupService)PortalBeanLocatorUtil.locate(GroupService.class.getName() +
-					".impl");
-		}
-
-		if (groupPersistence == null) {
-			groupPersistence = (GroupPersistence)PortalBeanLocatorUtil.locate(GroupPersistence.class.getName() +
-					".impl");
-		}
-
-		if (groupFinder == null) {
-			groupFinder = (GroupFinder)PortalBeanLocatorUtil.locate(GroupFinder.class.getName() +
-					".impl");
-		}
-
-		if (organizationLocalService == null) {
-			organizationLocalService = (OrganizationLocalService)PortalBeanLocatorUtil.locate(OrganizationLocalService.class.getName() +
-					".impl");
-		}
-
-		if (organizationService == null) {
-			organizationService = (OrganizationService)PortalBeanLocatorUtil.locate(OrganizationService.class.getName() +
-					".impl");
-		}
-
-		if (organizationPersistence == null) {
-			organizationPersistence = (OrganizationPersistence)PortalBeanLocatorUtil.locate(OrganizationPersistence.class.getName() +
-					".impl");
-		}
-
-		if (organizationFinder == null) {
-			organizationFinder = (OrganizationFinder)PortalBeanLocatorUtil.locate(OrganizationFinder.class.getName() +
-					".impl");
-		}
-
-		if (resourceLocalService == null) {
-			resourceLocalService = (ResourceLocalService)PortalBeanLocatorUtil.locate(ResourceLocalService.class.getName() +
-					".impl");
-		}
-
-		if (resourceService == null) {
-			resourceService = (ResourceService)PortalBeanLocatorUtil.locate(ResourceService.class.getName() +
-					".impl");
-		}
-
-		if (resourcePersistence == null) {
-			resourcePersistence = (ResourcePersistence)PortalBeanLocatorUtil.locate(ResourcePersistence.class.getName() +
-					".impl");
-		}
-
-		if (resourceFinder == null) {
-			resourceFinder = (ResourceFinder)PortalBeanLocatorUtil.locate(ResourceFinder.class.getName() +
-					".impl");
-		}
-
-		if (userLocalService == null) {
-			userLocalService = (UserLocalService)PortalBeanLocatorUtil.locate(UserLocalService.class.getName() +
-					".impl");
-		}
-
-		if (userService == null) {
-			userService = (UserService)PortalBeanLocatorUtil.locate(UserService.class.getName() +
-					".impl");
-		}
-
-		if (userPersistence == null) {
-			userPersistence = (UserPersistence)PortalBeanLocatorUtil.locate(UserPersistence.class.getName() +
-					".impl");
-		}
-
-		if (userFinder == null) {
-			userFinder = (UserFinder)PortalBeanLocatorUtil.locate(UserFinder.class.getName() +
-					".impl");
-		}
-
-		if (mbMessageLocalService == null) {
-			mbMessageLocalService = (MBMessageLocalService)PortalBeanLocatorUtil.locate(MBMessageLocalService.class.getName() +
-					".impl");
-		}
-
-		if (mbMessageService == null) {
-			mbMessageService = (MBMessageService)PortalBeanLocatorUtil.locate(MBMessageService.class.getName() +
-					".impl");
-		}
-
-		if (mbMessagePersistence == null) {
-			mbMessagePersistence = (MBMessagePersistence)PortalBeanLocatorUtil.locate(MBMessagePersistence.class.getName() +
-					".impl");
-		}
-
-		if (mbMessageFinder == null) {
-			mbMessageFinder = (MBMessageFinder)PortalBeanLocatorUtil.locate(MBMessageFinder.class.getName() +
-					".impl");
-		}
-
-		if (ratingsStatsLocalService == null) {
-			ratingsStatsLocalService = (RatingsStatsLocalService)PortalBeanLocatorUtil.locate(RatingsStatsLocalService.class.getName() +
-					".impl");
-		}
-
-		if (ratingsStatsPersistence == null) {
-			ratingsStatsPersistence = (RatingsStatsPersistence)PortalBeanLocatorUtil.locate(RatingsStatsPersistence.class.getName() +
-					".impl");
-		}
-
-		if (socialActivityLocalService == null) {
-			socialActivityLocalService = (SocialActivityLocalService)PortalBeanLocatorUtil.locate(SocialActivityLocalService.class.getName() +
-					".impl");
-		}
-
-		if (socialActivityPersistence == null) {
-			socialActivityPersistence = (SocialActivityPersistence)PortalBeanLocatorUtil.locate(SocialActivityPersistence.class.getName() +
-					".impl");
-		}
-
-		if (socialActivityFinder == null) {
-			socialActivityFinder = (SocialActivityFinder)PortalBeanLocatorUtil.locate(SocialActivityFinder.class.getName() +
-					".impl");
-		}
-
-		if (tagsAssetLocalService == null) {
-			tagsAssetLocalService = (TagsAssetLocalService)PortalBeanLocatorUtil.locate(TagsAssetLocalService.class.getName() +
-					".impl");
-		}
-
-		if (tagsAssetService == null) {
-			tagsAssetService = (TagsAssetService)PortalBeanLocatorUtil.locate(TagsAssetService.class.getName() +
-					".impl");
-		}
-
-		if (tagsAssetPersistence == null) {
-			tagsAssetPersistence = (TagsAssetPersistence)PortalBeanLocatorUtil.locate(TagsAssetPersistence.class.getName() +
-					".impl");
-		}
-
-		if (tagsAssetFinder == null) {
-			tagsAssetFinder = (TagsAssetFinder)PortalBeanLocatorUtil.locate(TagsAssetFinder.class.getName() +
-					".impl");
-		}
-
-		if (tagsEntryLocalService == null) {
-			tagsEntryLocalService = (TagsEntryLocalService)PortalBeanLocatorUtil.locate(TagsEntryLocalService.class.getName() +
-					".impl");
-		}
-
-		if (tagsEntryService == null) {
-			tagsEntryService = (TagsEntryService)PortalBeanLocatorUtil.locate(TagsEntryService.class.getName() +
-					".impl");
-		}
-
-		if (tagsEntryPersistence == null) {
-			tagsEntryPersistence = (TagsEntryPersistence)PortalBeanLocatorUtil.locate(TagsEntryPersistence.class.getName() +
-					".impl");
-		}
-
-		if (tagsEntryFinder == null) {
-			tagsEntryFinder = (TagsEntryFinder)PortalBeanLocatorUtil.locate(TagsEntryFinder.class.getName() +
-					".impl");
-		}
-	}
-
+	protected BlogsEntryLocalService blogsEntryLocalService;
+	protected BlogsEntryService blogsEntryService;
 	protected BlogsEntryPersistence blogsEntryPersistence;
 	protected BlogsEntryFinder blogsEntryFinder;
 	protected BlogsStatsUserLocalService blogsStatsUserLocalService;

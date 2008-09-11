@@ -27,8 +27,6 @@ import com.liferay.counter.service.CounterService;
 
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
-import com.liferay.portal.kernel.bean.InitializingBean;
-import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
 import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 import com.liferay.portal.service.ResourceLocalService;
 import com.liferay.portal.service.ResourceService;
@@ -44,6 +42,8 @@ import com.liferay.portlet.documentlibrary.service.DLFileEntryLocalService;
 import com.liferay.portlet.documentlibrary.service.DLFileEntryService;
 import com.liferay.portlet.documentlibrary.service.DLFileRankLocalService;
 import com.liferay.portlet.documentlibrary.service.DLFileShortcutLocalService;
+import com.liferay.portlet.documentlibrary.service.DLFileShortcutLocalService;
+import com.liferay.portlet.documentlibrary.service.DLFileShortcutService;
 import com.liferay.portlet.documentlibrary.service.DLFileVersionLocalService;
 import com.liferay.portlet.documentlibrary.service.DLFolderLocalService;
 import com.liferay.portlet.documentlibrary.service.DLFolderService;
@@ -66,7 +66,7 @@ import java.util.List;
  *
  */
 public abstract class DLFileShortcutLocalServiceBaseImpl
-	implements DLFileShortcutLocalService, InitializingBean {
+	implements DLFileShortcutLocalService {
 	public DLFileShortcut addDLFileShortcut(DLFileShortcut dlFileShortcut)
 		throws SystemException {
 		dlFileShortcut.setNew(true);
@@ -187,6 +187,24 @@ public abstract class DLFileShortcutLocalServiceBaseImpl
 
 	public void setDLFileRankFinder(DLFileRankFinder dlFileRankFinder) {
 		this.dlFileRankFinder = dlFileRankFinder;
+	}
+
+	public DLFileShortcutLocalService getDLFileShortcutLocalService() {
+		return dlFileShortcutLocalService;
+	}
+
+	public void setDLFileShortcutLocalService(
+		DLFileShortcutLocalService dlFileShortcutLocalService) {
+		this.dlFileShortcutLocalService = dlFileShortcutLocalService;
+	}
+
+	public DLFileShortcutService getDLFileShortcutService() {
+		return dlFileShortcutService;
+	}
+
+	public void setDLFileShortcutService(
+		DLFileShortcutService dlFileShortcutService) {
+		this.dlFileShortcutService = dlFileShortcutService;
 	}
 
 	public DLFileShortcutPersistence getDLFileShortcutPersistence() {
@@ -331,133 +349,6 @@ public abstract class DLFileShortcutLocalServiceBaseImpl
 		this.userFinder = userFinder;
 	}
 
-	public void afterPropertiesSet() {
-		if (dlFileEntryLocalService == null) {
-			dlFileEntryLocalService = (DLFileEntryLocalService)PortalBeanLocatorUtil.locate(DLFileEntryLocalService.class.getName() +
-					".impl");
-		}
-
-		if (dlFileEntryService == null) {
-			dlFileEntryService = (DLFileEntryService)PortalBeanLocatorUtil.locate(DLFileEntryService.class.getName() +
-					".impl");
-		}
-
-		if (dlFileEntryPersistence == null) {
-			dlFileEntryPersistence = (DLFileEntryPersistence)PortalBeanLocatorUtil.locate(DLFileEntryPersistence.class.getName() +
-					".impl");
-		}
-
-		if (dlFileEntryFinder == null) {
-			dlFileEntryFinder = (DLFileEntryFinder)PortalBeanLocatorUtil.locate(DLFileEntryFinder.class.getName() +
-					".impl");
-		}
-
-		if (dlFileEntryAndShortcutFinder == null) {
-			dlFileEntryAndShortcutFinder = (DLFileEntryAndShortcutFinder)PortalBeanLocatorUtil.locate(DLFileEntryAndShortcutFinder.class.getName() +
-					".impl");
-		}
-
-		if (dlFileRankLocalService == null) {
-			dlFileRankLocalService = (DLFileRankLocalService)PortalBeanLocatorUtil.locate(DLFileRankLocalService.class.getName() +
-					".impl");
-		}
-
-		if (dlFileRankPersistence == null) {
-			dlFileRankPersistence = (DLFileRankPersistence)PortalBeanLocatorUtil.locate(DLFileRankPersistence.class.getName() +
-					".impl");
-		}
-
-		if (dlFileRankFinder == null) {
-			dlFileRankFinder = (DLFileRankFinder)PortalBeanLocatorUtil.locate(DLFileRankFinder.class.getName() +
-					".impl");
-		}
-
-		if (dlFileShortcutPersistence == null) {
-			dlFileShortcutPersistence = (DLFileShortcutPersistence)PortalBeanLocatorUtil.locate(DLFileShortcutPersistence.class.getName() +
-					".impl");
-		}
-
-		if (dlFileShortcutFinder == null) {
-			dlFileShortcutFinder = (DLFileShortcutFinder)PortalBeanLocatorUtil.locate(DLFileShortcutFinder.class.getName() +
-					".impl");
-		}
-
-		if (dlFileVersionLocalService == null) {
-			dlFileVersionLocalService = (DLFileVersionLocalService)PortalBeanLocatorUtil.locate(DLFileVersionLocalService.class.getName() +
-					".impl");
-		}
-
-		if (dlFileVersionPersistence == null) {
-			dlFileVersionPersistence = (DLFileVersionPersistence)PortalBeanLocatorUtil.locate(DLFileVersionPersistence.class.getName() +
-					".impl");
-		}
-
-		if (dlFolderLocalService == null) {
-			dlFolderLocalService = (DLFolderLocalService)PortalBeanLocatorUtil.locate(DLFolderLocalService.class.getName() +
-					".impl");
-		}
-
-		if (dlFolderService == null) {
-			dlFolderService = (DLFolderService)PortalBeanLocatorUtil.locate(DLFolderService.class.getName() +
-					".impl");
-		}
-
-		if (dlFolderPersistence == null) {
-			dlFolderPersistence = (DLFolderPersistence)PortalBeanLocatorUtil.locate(DLFolderPersistence.class.getName() +
-					".impl");
-		}
-
-		if (counterLocalService == null) {
-			counterLocalService = (CounterLocalService)PortalBeanLocatorUtil.locate(CounterLocalService.class.getName() +
-					".impl");
-		}
-
-		if (counterService == null) {
-			counterService = (CounterService)PortalBeanLocatorUtil.locate(CounterService.class.getName() +
-					".impl");
-		}
-
-		if (resourceLocalService == null) {
-			resourceLocalService = (ResourceLocalService)PortalBeanLocatorUtil.locate(ResourceLocalService.class.getName() +
-					".impl");
-		}
-
-		if (resourceService == null) {
-			resourceService = (ResourceService)PortalBeanLocatorUtil.locate(ResourceService.class.getName() +
-					".impl");
-		}
-
-		if (resourcePersistence == null) {
-			resourcePersistence = (ResourcePersistence)PortalBeanLocatorUtil.locate(ResourcePersistence.class.getName() +
-					".impl");
-		}
-
-		if (resourceFinder == null) {
-			resourceFinder = (ResourceFinder)PortalBeanLocatorUtil.locate(ResourceFinder.class.getName() +
-					".impl");
-		}
-
-		if (userLocalService == null) {
-			userLocalService = (UserLocalService)PortalBeanLocatorUtil.locate(UserLocalService.class.getName() +
-					".impl");
-		}
-
-		if (userService == null) {
-			userService = (UserService)PortalBeanLocatorUtil.locate(UserService.class.getName() +
-					".impl");
-		}
-
-		if (userPersistence == null) {
-			userPersistence = (UserPersistence)PortalBeanLocatorUtil.locate(UserPersistence.class.getName() +
-					".impl");
-		}
-
-		if (userFinder == null) {
-			userFinder = (UserFinder)PortalBeanLocatorUtil.locate(UserFinder.class.getName() +
-					".impl");
-		}
-	}
-
 	protected DLFileEntryLocalService dlFileEntryLocalService;
 	protected DLFileEntryService dlFileEntryService;
 	protected DLFileEntryPersistence dlFileEntryPersistence;
@@ -466,6 +357,8 @@ public abstract class DLFileShortcutLocalServiceBaseImpl
 	protected DLFileRankLocalService dlFileRankLocalService;
 	protected DLFileRankPersistence dlFileRankPersistence;
 	protected DLFileRankFinder dlFileRankFinder;
+	protected DLFileShortcutLocalService dlFileShortcutLocalService;
+	protected DLFileShortcutService dlFileShortcutService;
 	protected DLFileShortcutPersistence dlFileShortcutPersistence;
 	protected DLFileShortcutFinder dlFileShortcutFinder;
 	protected DLFileVersionLocalService dlFileVersionLocalService;

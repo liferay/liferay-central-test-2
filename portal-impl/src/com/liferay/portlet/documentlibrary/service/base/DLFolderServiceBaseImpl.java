@@ -28,8 +28,6 @@ import com.liferay.counter.service.CounterService;
 import com.liferay.documentlibrary.service.DLLocalService;
 import com.liferay.documentlibrary.service.DLService;
 
-import com.liferay.portal.kernel.bean.InitializingBean;
-import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
 import com.liferay.portal.service.LayoutLocalService;
 import com.liferay.portal.service.LayoutService;
 import com.liferay.portal.service.ResourceLocalService;
@@ -54,6 +52,7 @@ import com.liferay.portlet.documentlibrary.service.DLFileShortcutService;
 import com.liferay.portlet.documentlibrary.service.DLFileVersionLocalService;
 import com.liferay.portlet.documentlibrary.service.DLFolderLocalService;
 import com.liferay.portlet.documentlibrary.service.DLFolderService;
+import com.liferay.portlet.documentlibrary.service.DLFolderService;
 import com.liferay.portlet.documentlibrary.service.persistence.DLFileEntryAndShortcutFinder;
 import com.liferay.portlet.documentlibrary.service.persistence.DLFileEntryFinder;
 import com.liferay.portlet.documentlibrary.service.persistence.DLFileEntryPersistence;
@@ -71,7 +70,7 @@ import com.liferay.portlet.documentlibrary.service.persistence.DLFolderPersisten
  *
  */
 public abstract class DLFolderServiceBaseImpl extends PrincipalBean
-	implements DLFolderService, InitializingBean {
+	implements DLFolderService {
 	public DLFileEntryLocalService getDLFileEntryLocalService() {
 		return dlFileEntryLocalService;
 	}
@@ -202,6 +201,14 @@ public abstract class DLFolderServiceBaseImpl extends PrincipalBean
 	public void setDLFolderLocalService(
 		DLFolderLocalService dlFolderLocalService) {
 		this.dlFolderLocalService = dlFolderLocalService;
+	}
+
+	public DLFolderService getDLFolderService() {
+		return dlFolderService;
+	}
+
+	public void setDLFolderService(DLFolderService dlFolderService) {
+		this.dlFolderService = dlFolderService;
 	}
 
 	public DLFolderPersistence getDLFolderPersistence() {
@@ -359,178 +366,6 @@ public abstract class DLFolderServiceBaseImpl extends PrincipalBean
 		this.webDAVPropsPersistence = webDAVPropsPersistence;
 	}
 
-	public void afterPropertiesSet() {
-		if (dlFileEntryLocalService == null) {
-			dlFileEntryLocalService = (DLFileEntryLocalService)PortalBeanLocatorUtil.locate(DLFileEntryLocalService.class.getName() +
-					".impl");
-		}
-
-		if (dlFileEntryService == null) {
-			dlFileEntryService = (DLFileEntryService)PortalBeanLocatorUtil.locate(DLFileEntryService.class.getName() +
-					".impl");
-		}
-
-		if (dlFileEntryPersistence == null) {
-			dlFileEntryPersistence = (DLFileEntryPersistence)PortalBeanLocatorUtil.locate(DLFileEntryPersistence.class.getName() +
-					".impl");
-		}
-
-		if (dlFileEntryFinder == null) {
-			dlFileEntryFinder = (DLFileEntryFinder)PortalBeanLocatorUtil.locate(DLFileEntryFinder.class.getName() +
-					".impl");
-		}
-
-		if (dlFileEntryAndShortcutFinder == null) {
-			dlFileEntryAndShortcutFinder = (DLFileEntryAndShortcutFinder)PortalBeanLocatorUtil.locate(DLFileEntryAndShortcutFinder.class.getName() +
-					".impl");
-		}
-
-		if (dlFileRankLocalService == null) {
-			dlFileRankLocalService = (DLFileRankLocalService)PortalBeanLocatorUtil.locate(DLFileRankLocalService.class.getName() +
-					".impl");
-		}
-
-		if (dlFileRankPersistence == null) {
-			dlFileRankPersistence = (DLFileRankPersistence)PortalBeanLocatorUtil.locate(DLFileRankPersistence.class.getName() +
-					".impl");
-		}
-
-		if (dlFileRankFinder == null) {
-			dlFileRankFinder = (DLFileRankFinder)PortalBeanLocatorUtil.locate(DLFileRankFinder.class.getName() +
-					".impl");
-		}
-
-		if (dlFileShortcutLocalService == null) {
-			dlFileShortcutLocalService = (DLFileShortcutLocalService)PortalBeanLocatorUtil.locate(DLFileShortcutLocalService.class.getName() +
-					".impl");
-		}
-
-		if (dlFileShortcutService == null) {
-			dlFileShortcutService = (DLFileShortcutService)PortalBeanLocatorUtil.locate(DLFileShortcutService.class.getName() +
-					".impl");
-		}
-
-		if (dlFileShortcutPersistence == null) {
-			dlFileShortcutPersistence = (DLFileShortcutPersistence)PortalBeanLocatorUtil.locate(DLFileShortcutPersistence.class.getName() +
-					".impl");
-		}
-
-		if (dlFileShortcutFinder == null) {
-			dlFileShortcutFinder = (DLFileShortcutFinder)PortalBeanLocatorUtil.locate(DLFileShortcutFinder.class.getName() +
-					".impl");
-		}
-
-		if (dlFileVersionLocalService == null) {
-			dlFileVersionLocalService = (DLFileVersionLocalService)PortalBeanLocatorUtil.locate(DLFileVersionLocalService.class.getName() +
-					".impl");
-		}
-
-		if (dlFileVersionPersistence == null) {
-			dlFileVersionPersistence = (DLFileVersionPersistence)PortalBeanLocatorUtil.locate(DLFileVersionPersistence.class.getName() +
-					".impl");
-		}
-
-		if (dlFolderLocalService == null) {
-			dlFolderLocalService = (DLFolderLocalService)PortalBeanLocatorUtil.locate(DLFolderLocalService.class.getName() +
-					".impl");
-		}
-
-		if (dlFolderPersistence == null) {
-			dlFolderPersistence = (DLFolderPersistence)PortalBeanLocatorUtil.locate(DLFolderPersistence.class.getName() +
-					".impl");
-		}
-
-		if (counterLocalService == null) {
-			counterLocalService = (CounterLocalService)PortalBeanLocatorUtil.locate(CounterLocalService.class.getName() +
-					".impl");
-		}
-
-		if (counterService == null) {
-			counterService = (CounterService)PortalBeanLocatorUtil.locate(CounterService.class.getName() +
-					".impl");
-		}
-
-		if (dlLocalService == null) {
-			dlLocalService = (DLLocalService)PortalBeanLocatorUtil.locate(DLLocalService.class.getName() +
-					".impl");
-		}
-
-		if (dlService == null) {
-			dlService = (DLService)PortalBeanLocatorUtil.locate(DLService.class.getName() +
-					".impl");
-		}
-
-		if (layoutLocalService == null) {
-			layoutLocalService = (LayoutLocalService)PortalBeanLocatorUtil.locate(LayoutLocalService.class.getName() +
-					".impl");
-		}
-
-		if (layoutService == null) {
-			layoutService = (LayoutService)PortalBeanLocatorUtil.locate(LayoutService.class.getName() +
-					".impl");
-		}
-
-		if (layoutPersistence == null) {
-			layoutPersistence = (LayoutPersistence)PortalBeanLocatorUtil.locate(LayoutPersistence.class.getName() +
-					".impl");
-		}
-
-		if (layoutFinder == null) {
-			layoutFinder = (LayoutFinder)PortalBeanLocatorUtil.locate(LayoutFinder.class.getName() +
-					".impl");
-		}
-
-		if (resourceLocalService == null) {
-			resourceLocalService = (ResourceLocalService)PortalBeanLocatorUtil.locate(ResourceLocalService.class.getName() +
-					".impl");
-		}
-
-		if (resourceService == null) {
-			resourceService = (ResourceService)PortalBeanLocatorUtil.locate(ResourceService.class.getName() +
-					".impl");
-		}
-
-		if (resourcePersistence == null) {
-			resourcePersistence = (ResourcePersistence)PortalBeanLocatorUtil.locate(ResourcePersistence.class.getName() +
-					".impl");
-		}
-
-		if (resourceFinder == null) {
-			resourceFinder = (ResourceFinder)PortalBeanLocatorUtil.locate(ResourceFinder.class.getName() +
-					".impl");
-		}
-
-		if (userLocalService == null) {
-			userLocalService = (UserLocalService)PortalBeanLocatorUtil.locate(UserLocalService.class.getName() +
-					".impl");
-		}
-
-		if (userService == null) {
-			userService = (UserService)PortalBeanLocatorUtil.locate(UserService.class.getName() +
-					".impl");
-		}
-
-		if (userPersistence == null) {
-			userPersistence = (UserPersistence)PortalBeanLocatorUtil.locate(UserPersistence.class.getName() +
-					".impl");
-		}
-
-		if (userFinder == null) {
-			userFinder = (UserFinder)PortalBeanLocatorUtil.locate(UserFinder.class.getName() +
-					".impl");
-		}
-
-		if (webDAVPropsLocalService == null) {
-			webDAVPropsLocalService = (WebDAVPropsLocalService)PortalBeanLocatorUtil.locate(WebDAVPropsLocalService.class.getName() +
-					".impl");
-		}
-
-		if (webDAVPropsPersistence == null) {
-			webDAVPropsPersistence = (WebDAVPropsPersistence)PortalBeanLocatorUtil.locate(WebDAVPropsPersistence.class.getName() +
-					".impl");
-		}
-	}
-
 	protected DLFileEntryLocalService dlFileEntryLocalService;
 	protected DLFileEntryService dlFileEntryService;
 	protected DLFileEntryPersistence dlFileEntryPersistence;
@@ -546,6 +381,7 @@ public abstract class DLFolderServiceBaseImpl extends PrincipalBean
 	protected DLFileVersionLocalService dlFileVersionLocalService;
 	protected DLFileVersionPersistence dlFileVersionPersistence;
 	protected DLFolderLocalService dlFolderLocalService;
+	protected DLFolderService dlFolderService;
 	protected DLFolderPersistence dlFolderPersistence;
 	protected CounterLocalService counterLocalService;
 	protected CounterService counterService;

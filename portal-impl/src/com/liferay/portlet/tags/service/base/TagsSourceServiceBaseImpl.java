@@ -22,8 +22,6 @@
 
 package com.liferay.portlet.tags.service.base;
 
-import com.liferay.portal.kernel.bean.InitializingBean;
-import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
 import com.liferay.portal.service.base.PrincipalBean;
 
 import com.liferay.portlet.tags.service.TagsAssetLocalService;
@@ -33,6 +31,7 @@ import com.liferay.portlet.tags.service.TagsEntryService;
 import com.liferay.portlet.tags.service.TagsPropertyLocalService;
 import com.liferay.portlet.tags.service.TagsPropertyService;
 import com.liferay.portlet.tags.service.TagsSourceLocalService;
+import com.liferay.portlet.tags.service.TagsSourceService;
 import com.liferay.portlet.tags.service.TagsSourceService;
 import com.liferay.portlet.tags.service.TagsVocabularyLocalService;
 import com.liferay.portlet.tags.service.TagsVocabularyService;
@@ -53,7 +52,7 @@ import com.liferay.portlet.tags.service.persistence.TagsVocabularyPersistence;
  *
  */
 public abstract class TagsSourceServiceBaseImpl extends PrincipalBean
-	implements TagsSourceService, InitializingBean {
+	implements TagsSourceService {
 	public TagsAssetLocalService getTagsAssetLocalService() {
 		return tagsAssetLocalService;
 	}
@@ -174,6 +173,14 @@ public abstract class TagsSourceServiceBaseImpl extends PrincipalBean
 		this.tagsSourceLocalService = tagsSourceLocalService;
 	}
 
+	public TagsSourceService getTagsSourceService() {
+		return tagsSourceService;
+	}
+
+	public void setTagsSourceService(TagsSourceService tagsSourceService) {
+		this.tagsSourceService = tagsSourceService;
+	}
+
 	public TagsSourcePersistence getTagsSourcePersistence() {
 		return tagsSourcePersistence;
 	}
@@ -210,98 +217,6 @@ public abstract class TagsSourceServiceBaseImpl extends PrincipalBean
 		this.tagsVocabularyPersistence = tagsVocabularyPersistence;
 	}
 
-	public void afterPropertiesSet() {
-		if (tagsAssetLocalService == null) {
-			tagsAssetLocalService = (TagsAssetLocalService)PortalBeanLocatorUtil.locate(TagsAssetLocalService.class.getName() +
-					".impl");
-		}
-
-		if (tagsAssetService == null) {
-			tagsAssetService = (TagsAssetService)PortalBeanLocatorUtil.locate(TagsAssetService.class.getName() +
-					".impl");
-		}
-
-		if (tagsAssetPersistence == null) {
-			tagsAssetPersistence = (TagsAssetPersistence)PortalBeanLocatorUtil.locate(TagsAssetPersistence.class.getName() +
-					".impl");
-		}
-
-		if (tagsAssetFinder == null) {
-			tagsAssetFinder = (TagsAssetFinder)PortalBeanLocatorUtil.locate(TagsAssetFinder.class.getName() +
-					".impl");
-		}
-
-		if (tagsEntryLocalService == null) {
-			tagsEntryLocalService = (TagsEntryLocalService)PortalBeanLocatorUtil.locate(TagsEntryLocalService.class.getName() +
-					".impl");
-		}
-
-		if (tagsEntryService == null) {
-			tagsEntryService = (TagsEntryService)PortalBeanLocatorUtil.locate(TagsEntryService.class.getName() +
-					".impl");
-		}
-
-		if (tagsEntryPersistence == null) {
-			tagsEntryPersistence = (TagsEntryPersistence)PortalBeanLocatorUtil.locate(TagsEntryPersistence.class.getName() +
-					".impl");
-		}
-
-		if (tagsEntryFinder == null) {
-			tagsEntryFinder = (TagsEntryFinder)PortalBeanLocatorUtil.locate(TagsEntryFinder.class.getName() +
-					".impl");
-		}
-
-		if (tagsPropertyLocalService == null) {
-			tagsPropertyLocalService = (TagsPropertyLocalService)PortalBeanLocatorUtil.locate(TagsPropertyLocalService.class.getName() +
-					".impl");
-		}
-
-		if (tagsPropertyService == null) {
-			tagsPropertyService = (TagsPropertyService)PortalBeanLocatorUtil.locate(TagsPropertyService.class.getName() +
-					".impl");
-		}
-
-		if (tagsPropertyPersistence == null) {
-			tagsPropertyPersistence = (TagsPropertyPersistence)PortalBeanLocatorUtil.locate(TagsPropertyPersistence.class.getName() +
-					".impl");
-		}
-
-		if (tagsPropertyFinder == null) {
-			tagsPropertyFinder = (TagsPropertyFinder)PortalBeanLocatorUtil.locate(TagsPropertyFinder.class.getName() +
-					".impl");
-		}
-
-		if (tagsPropertyKeyFinder == null) {
-			tagsPropertyKeyFinder = (TagsPropertyKeyFinder)PortalBeanLocatorUtil.locate(TagsPropertyKeyFinder.class.getName() +
-					".impl");
-		}
-
-		if (tagsSourceLocalService == null) {
-			tagsSourceLocalService = (TagsSourceLocalService)PortalBeanLocatorUtil.locate(TagsSourceLocalService.class.getName() +
-					".impl");
-		}
-
-		if (tagsSourcePersistence == null) {
-			tagsSourcePersistence = (TagsSourcePersistence)PortalBeanLocatorUtil.locate(TagsSourcePersistence.class.getName() +
-					".impl");
-		}
-
-		if (tagsVocabularyLocalService == null) {
-			tagsVocabularyLocalService = (TagsVocabularyLocalService)PortalBeanLocatorUtil.locate(TagsVocabularyLocalService.class.getName() +
-					".impl");
-		}
-
-		if (tagsVocabularyService == null) {
-			tagsVocabularyService = (TagsVocabularyService)PortalBeanLocatorUtil.locate(TagsVocabularyService.class.getName() +
-					".impl");
-		}
-
-		if (tagsVocabularyPersistence == null) {
-			tagsVocabularyPersistence = (TagsVocabularyPersistence)PortalBeanLocatorUtil.locate(TagsVocabularyPersistence.class.getName() +
-					".impl");
-		}
-	}
-
 	protected TagsAssetLocalService tagsAssetLocalService;
 	protected TagsAssetService tagsAssetService;
 	protected TagsAssetPersistence tagsAssetPersistence;
@@ -316,6 +231,7 @@ public abstract class TagsSourceServiceBaseImpl extends PrincipalBean
 	protected TagsPropertyFinder tagsPropertyFinder;
 	protected TagsPropertyKeyFinder tagsPropertyKeyFinder;
 	protected TagsSourceLocalService tagsSourceLocalService;
+	protected TagsSourceService tagsSourceService;
 	protected TagsSourcePersistence tagsSourcePersistence;
 	protected TagsVocabularyLocalService tagsVocabularyLocalService;
 	protected TagsVocabularyService tagsVocabularyService;

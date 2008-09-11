@@ -27,8 +27,6 @@ import com.liferay.counter.service.CounterService;
 
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
-import com.liferay.portal.kernel.bean.InitializingBean;
-import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
 import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 import com.liferay.portal.service.ResourceLocalService;
 import com.liferay.portal.service.ResourceService;
@@ -41,6 +39,8 @@ import com.liferay.portal.service.persistence.UserPersistence;
 
 import com.liferay.portlet.bookmarks.model.BookmarksEntry;
 import com.liferay.portlet.bookmarks.service.BookmarksEntryLocalService;
+import com.liferay.portlet.bookmarks.service.BookmarksEntryLocalService;
+import com.liferay.portlet.bookmarks.service.BookmarksEntryService;
 import com.liferay.portlet.bookmarks.service.BookmarksFolderLocalService;
 import com.liferay.portlet.bookmarks.service.BookmarksFolderService;
 import com.liferay.portlet.bookmarks.service.persistence.BookmarksEntryFinder;
@@ -60,7 +60,7 @@ import java.util.List;
  *
  */
 public abstract class BookmarksEntryLocalServiceBaseImpl
-	implements BookmarksEntryLocalService, InitializingBean {
+	implements BookmarksEntryLocalService {
 	public BookmarksEntry addBookmarksEntry(BookmarksEntry bookmarksEntry)
 		throws SystemException {
 		bookmarksEntry.setNew(true);
@@ -112,6 +112,24 @@ public abstract class BookmarksEntryLocalServiceBaseImpl
 		bookmarksEntry.setNew(false);
 
 		return bookmarksEntryPersistence.update(bookmarksEntry, true);
+	}
+
+	public BookmarksEntryLocalService getBookmarksEntryLocalService() {
+		return bookmarksEntryLocalService;
+	}
+
+	public void setBookmarksEntryLocalService(
+		BookmarksEntryLocalService bookmarksEntryLocalService) {
+		this.bookmarksEntryLocalService = bookmarksEntryLocalService;
+	}
+
+	public BookmarksEntryService getBookmarksEntryService() {
+		return bookmarksEntryService;
+	}
+
+	public void setBookmarksEntryService(
+		BookmarksEntryService bookmarksEntryService) {
+		this.bookmarksEntryService = bookmarksEntryService;
 	}
 
 	public BookmarksEntryPersistence getBookmarksEntryPersistence() {
@@ -274,103 +292,8 @@ public abstract class BookmarksEntryLocalServiceBaseImpl
 		this.tagsAssetFinder = tagsAssetFinder;
 	}
 
-	public void afterPropertiesSet() {
-		if (bookmarksEntryPersistence == null) {
-			bookmarksEntryPersistence = (BookmarksEntryPersistence)PortalBeanLocatorUtil.locate(BookmarksEntryPersistence.class.getName() +
-					".impl");
-		}
-
-		if (bookmarksEntryFinder == null) {
-			bookmarksEntryFinder = (BookmarksEntryFinder)PortalBeanLocatorUtil.locate(BookmarksEntryFinder.class.getName() +
-					".impl");
-		}
-
-		if (bookmarksFolderLocalService == null) {
-			bookmarksFolderLocalService = (BookmarksFolderLocalService)PortalBeanLocatorUtil.locate(BookmarksFolderLocalService.class.getName() +
-					".impl");
-		}
-
-		if (bookmarksFolderService == null) {
-			bookmarksFolderService = (BookmarksFolderService)PortalBeanLocatorUtil.locate(BookmarksFolderService.class.getName() +
-					".impl");
-		}
-
-		if (bookmarksFolderPersistence == null) {
-			bookmarksFolderPersistence = (BookmarksFolderPersistence)PortalBeanLocatorUtil.locate(BookmarksFolderPersistence.class.getName() +
-					".impl");
-		}
-
-		if (counterLocalService == null) {
-			counterLocalService = (CounterLocalService)PortalBeanLocatorUtil.locate(CounterLocalService.class.getName() +
-					".impl");
-		}
-
-		if (counterService == null) {
-			counterService = (CounterService)PortalBeanLocatorUtil.locate(CounterService.class.getName() +
-					".impl");
-		}
-
-		if (resourceLocalService == null) {
-			resourceLocalService = (ResourceLocalService)PortalBeanLocatorUtil.locate(ResourceLocalService.class.getName() +
-					".impl");
-		}
-
-		if (resourceService == null) {
-			resourceService = (ResourceService)PortalBeanLocatorUtil.locate(ResourceService.class.getName() +
-					".impl");
-		}
-
-		if (resourcePersistence == null) {
-			resourcePersistence = (ResourcePersistence)PortalBeanLocatorUtil.locate(ResourcePersistence.class.getName() +
-					".impl");
-		}
-
-		if (resourceFinder == null) {
-			resourceFinder = (ResourceFinder)PortalBeanLocatorUtil.locate(ResourceFinder.class.getName() +
-					".impl");
-		}
-
-		if (userLocalService == null) {
-			userLocalService = (UserLocalService)PortalBeanLocatorUtil.locate(UserLocalService.class.getName() +
-					".impl");
-		}
-
-		if (userService == null) {
-			userService = (UserService)PortalBeanLocatorUtil.locate(UserService.class.getName() +
-					".impl");
-		}
-
-		if (userPersistence == null) {
-			userPersistence = (UserPersistence)PortalBeanLocatorUtil.locate(UserPersistence.class.getName() +
-					".impl");
-		}
-
-		if (userFinder == null) {
-			userFinder = (UserFinder)PortalBeanLocatorUtil.locate(UserFinder.class.getName() +
-					".impl");
-		}
-
-		if (tagsAssetLocalService == null) {
-			tagsAssetLocalService = (TagsAssetLocalService)PortalBeanLocatorUtil.locate(TagsAssetLocalService.class.getName() +
-					".impl");
-		}
-
-		if (tagsAssetService == null) {
-			tagsAssetService = (TagsAssetService)PortalBeanLocatorUtil.locate(TagsAssetService.class.getName() +
-					".impl");
-		}
-
-		if (tagsAssetPersistence == null) {
-			tagsAssetPersistence = (TagsAssetPersistence)PortalBeanLocatorUtil.locate(TagsAssetPersistence.class.getName() +
-					".impl");
-		}
-
-		if (tagsAssetFinder == null) {
-			tagsAssetFinder = (TagsAssetFinder)PortalBeanLocatorUtil.locate(TagsAssetFinder.class.getName() +
-					".impl");
-		}
-	}
-
+	protected BookmarksEntryLocalService bookmarksEntryLocalService;
+	protected BookmarksEntryService bookmarksEntryService;
 	protected BookmarksEntryPersistence bookmarksEntryPersistence;
 	protected BookmarksEntryFinder bookmarksEntryFinder;
 	protected BookmarksFolderLocalService bookmarksFolderLocalService;

@@ -29,8 +29,6 @@ import com.liferay.mail.service.MailService;
 
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
-import com.liferay.portal.kernel.bean.InitializingBean;
-import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
 import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 import com.liferay.portal.service.CompanyLocalService;
 import com.liferay.portal.service.CompanyService;
@@ -50,6 +48,8 @@ import com.liferay.portal.service.persistence.UserPersistence;
 
 import com.liferay.portlet.calendar.model.CalEvent;
 import com.liferay.portlet.calendar.service.CalEventLocalService;
+import com.liferay.portlet.calendar.service.CalEventLocalService;
+import com.liferay.portlet.calendar.service.CalEventService;
 import com.liferay.portlet.calendar.service.persistence.CalEventFinder;
 import com.liferay.portlet.calendar.service.persistence.CalEventPersistence;
 import com.liferay.portlet.social.service.SocialActivityLocalService;
@@ -65,7 +65,7 @@ import java.util.List;
  *
  */
 public abstract class CalEventLocalServiceBaseImpl
-	implements CalEventLocalService, InitializingBean {
+	implements CalEventLocalService {
 	public CalEvent addCalEvent(CalEvent calEvent) throws SystemException {
 		calEvent.setNew(true);
 
@@ -113,6 +113,23 @@ public abstract class CalEventLocalServiceBaseImpl
 		calEvent.setNew(false);
 
 		return calEventPersistence.update(calEvent, true);
+	}
+
+	public CalEventLocalService getCalEventLocalService() {
+		return calEventLocalService;
+	}
+
+	public void setCalEventLocalService(
+		CalEventLocalService calEventLocalService) {
+		this.calEventLocalService = calEventLocalService;
+	}
+
+	public CalEventService getCalEventService() {
+		return calEventService;
+	}
+
+	public void setCalEventService(CalEventService calEventService) {
+		this.calEventService = calEventService;
 	}
 
 	public CalEventPersistence getCalEventPersistence() {
@@ -307,123 +324,8 @@ public abstract class CalEventLocalServiceBaseImpl
 		this.userFinder = userFinder;
 	}
 
-	public void afterPropertiesSet() {
-		if (calEventPersistence == null) {
-			calEventPersistence = (CalEventPersistence)PortalBeanLocatorUtil.locate(CalEventPersistence.class.getName() +
-					".impl");
-		}
-
-		if (calEventFinder == null) {
-			calEventFinder = (CalEventFinder)PortalBeanLocatorUtil.locate(CalEventFinder.class.getName() +
-					".impl");
-		}
-
-		if (counterLocalService == null) {
-			counterLocalService = (CounterLocalService)PortalBeanLocatorUtil.locate(CounterLocalService.class.getName() +
-					".impl");
-		}
-
-		if (counterService == null) {
-			counterService = (CounterService)PortalBeanLocatorUtil.locate(CounterService.class.getName() +
-					".impl");
-		}
-
-		if (mailService == null) {
-			mailService = (MailService)PortalBeanLocatorUtil.locate(MailService.class.getName() +
-					".impl");
-		}
-
-		if (companyLocalService == null) {
-			companyLocalService = (CompanyLocalService)PortalBeanLocatorUtil.locate(CompanyLocalService.class.getName() +
-					".impl");
-		}
-
-		if (companyService == null) {
-			companyService = (CompanyService)PortalBeanLocatorUtil.locate(CompanyService.class.getName() +
-					".impl");
-		}
-
-		if (companyPersistence == null) {
-			companyPersistence = (CompanyPersistence)PortalBeanLocatorUtil.locate(CompanyPersistence.class.getName() +
-					".impl");
-		}
-
-		if (portletPreferencesLocalService == null) {
-			portletPreferencesLocalService = (PortletPreferencesLocalService)PortalBeanLocatorUtil.locate(PortletPreferencesLocalService.class.getName() +
-					".impl");
-		}
-
-		if (portletPreferencesService == null) {
-			portletPreferencesService = (PortletPreferencesService)PortalBeanLocatorUtil.locate(PortletPreferencesService.class.getName() +
-					".impl");
-		}
-
-		if (portletPreferencesPersistence == null) {
-			portletPreferencesPersistence = (PortletPreferencesPersistence)PortalBeanLocatorUtil.locate(PortletPreferencesPersistence.class.getName() +
-					".impl");
-		}
-
-		if (portletPreferencesFinder == null) {
-			portletPreferencesFinder = (PortletPreferencesFinder)PortalBeanLocatorUtil.locate(PortletPreferencesFinder.class.getName() +
-					".impl");
-		}
-
-		if (resourceLocalService == null) {
-			resourceLocalService = (ResourceLocalService)PortalBeanLocatorUtil.locate(ResourceLocalService.class.getName() +
-					".impl");
-		}
-
-		if (resourceService == null) {
-			resourceService = (ResourceService)PortalBeanLocatorUtil.locate(ResourceService.class.getName() +
-					".impl");
-		}
-
-		if (resourcePersistence == null) {
-			resourcePersistence = (ResourcePersistence)PortalBeanLocatorUtil.locate(ResourcePersistence.class.getName() +
-					".impl");
-		}
-
-		if (resourceFinder == null) {
-			resourceFinder = (ResourceFinder)PortalBeanLocatorUtil.locate(ResourceFinder.class.getName() +
-					".impl");
-		}
-
-		if (socialActivityLocalService == null) {
-			socialActivityLocalService = (SocialActivityLocalService)PortalBeanLocatorUtil.locate(SocialActivityLocalService.class.getName() +
-					".impl");
-		}
-
-		if (socialActivityPersistence == null) {
-			socialActivityPersistence = (SocialActivityPersistence)PortalBeanLocatorUtil.locate(SocialActivityPersistence.class.getName() +
-					".impl");
-		}
-
-		if (socialActivityFinder == null) {
-			socialActivityFinder = (SocialActivityFinder)PortalBeanLocatorUtil.locate(SocialActivityFinder.class.getName() +
-					".impl");
-		}
-
-		if (userLocalService == null) {
-			userLocalService = (UserLocalService)PortalBeanLocatorUtil.locate(UserLocalService.class.getName() +
-					".impl");
-		}
-
-		if (userService == null) {
-			userService = (UserService)PortalBeanLocatorUtil.locate(UserService.class.getName() +
-					".impl");
-		}
-
-		if (userPersistence == null) {
-			userPersistence = (UserPersistence)PortalBeanLocatorUtil.locate(UserPersistence.class.getName() +
-					".impl");
-		}
-
-		if (userFinder == null) {
-			userFinder = (UserFinder)PortalBeanLocatorUtil.locate(UserFinder.class.getName() +
-					".impl");
-		}
-	}
-
+	protected CalEventLocalService calEventLocalService;
+	protected CalEventService calEventService;
 	protected CalEventPersistence calEventPersistence;
 	protected CalEventFinder calEventFinder;
 	protected CounterLocalService counterLocalService;

@@ -24,7 +24,6 @@ package com.liferay.portal.service.persistence;
 
 import com.liferay.portal.NoSuchReleaseException;
 import com.liferay.portal.SystemException;
-import com.liferay.portal.kernel.bean.InitializingBean;
 import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 import com.liferay.portal.kernel.dao.orm.FinderCacheUtil;
 import com.liferay.portal.kernel.dao.orm.Query;
@@ -55,7 +54,7 @@ import java.util.List;
  *
  */
 public class ReleasePersistenceImpl extends BasePersistenceImpl
-	implements ReleasePersistence, InitializingBean {
+	implements ReleasePersistence {
 	public Release create(long releaseId) {
 		Release release = new ReleaseImpl();
 

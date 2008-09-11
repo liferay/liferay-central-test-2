@@ -24,7 +24,6 @@ package com.liferay.portal.service.persistence;
 
 import com.liferay.portal.NoSuchEmailAddressException;
 import com.liferay.portal.SystemException;
-import com.liferay.portal.kernel.bean.InitializingBean;
 import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 import com.liferay.portal.kernel.dao.orm.FinderCacheUtil;
 import com.liferay.portal.kernel.dao.orm.Query;
@@ -57,7 +56,7 @@ import java.util.List;
  *
  */
 public class EmailAddressPersistenceImpl extends BasePersistenceImpl
-	implements EmailAddressPersistence, InitializingBean {
+	implements EmailAddressPersistence {
 	public EmailAddress create(long emailAddressId) {
 		EmailAddress emailAddress = new EmailAddressImpl();
 

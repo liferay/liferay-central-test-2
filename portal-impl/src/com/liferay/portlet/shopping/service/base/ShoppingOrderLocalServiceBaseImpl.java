@@ -29,8 +29,6 @@ import com.liferay.mail.service.MailService;
 
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
-import com.liferay.portal.kernel.bean.InitializingBean;
-import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
 import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 import com.liferay.portal.service.CompanyLocalService;
 import com.liferay.portal.service.CompanyService;
@@ -56,6 +54,8 @@ import com.liferay.portlet.shopping.service.ShoppingItemPriceLocalService;
 import com.liferay.portlet.shopping.service.ShoppingItemService;
 import com.liferay.portlet.shopping.service.ShoppingOrderItemLocalService;
 import com.liferay.portlet.shopping.service.ShoppingOrderLocalService;
+import com.liferay.portlet.shopping.service.ShoppingOrderLocalService;
+import com.liferay.portlet.shopping.service.ShoppingOrderService;
 import com.liferay.portlet.shopping.service.persistence.ShoppingCartPersistence;
 import com.liferay.portlet.shopping.service.persistence.ShoppingCategoryPersistence;
 import com.liferay.portlet.shopping.service.persistence.ShoppingCouponFinder;
@@ -77,7 +77,7 @@ import java.util.List;
  *
  */
 public abstract class ShoppingOrderLocalServiceBaseImpl
-	implements ShoppingOrderLocalService, InitializingBean {
+	implements ShoppingOrderLocalService {
 	public ShoppingOrder addShoppingOrder(ShoppingOrder shoppingOrder)
 		throws SystemException {
 		shoppingOrder.setNew(true);
@@ -282,6 +282,24 @@ public abstract class ShoppingOrderLocalServiceBaseImpl
 		this.shoppingItemPricePersistence = shoppingItemPricePersistence;
 	}
 
+	public ShoppingOrderLocalService getShoppingOrderLocalService() {
+		return shoppingOrderLocalService;
+	}
+
+	public void setShoppingOrderLocalService(
+		ShoppingOrderLocalService shoppingOrderLocalService) {
+		this.shoppingOrderLocalService = shoppingOrderLocalService;
+	}
+
+	public ShoppingOrderService getShoppingOrderService() {
+		return shoppingOrderService;
+	}
+
+	public void setShoppingOrderService(
+		ShoppingOrderService shoppingOrderService) {
+		this.shoppingOrderService = shoppingOrderService;
+	}
+
 	public ShoppingOrderPersistence getShoppingOrderPersistence() {
 		return shoppingOrderPersistence;
 	}
@@ -431,183 +449,6 @@ public abstract class ShoppingOrderLocalServiceBaseImpl
 		this.mbMessageFinder = mbMessageFinder;
 	}
 
-	public void afterPropertiesSet() {
-		if (shoppingCartLocalService == null) {
-			shoppingCartLocalService = (ShoppingCartLocalService)PortalBeanLocatorUtil.locate(ShoppingCartLocalService.class.getName() +
-					".impl");
-		}
-
-		if (shoppingCartPersistence == null) {
-			shoppingCartPersistence = (ShoppingCartPersistence)PortalBeanLocatorUtil.locate(ShoppingCartPersistence.class.getName() +
-					".impl");
-		}
-
-		if (shoppingCategoryLocalService == null) {
-			shoppingCategoryLocalService = (ShoppingCategoryLocalService)PortalBeanLocatorUtil.locate(ShoppingCategoryLocalService.class.getName() +
-					".impl");
-		}
-
-		if (shoppingCategoryService == null) {
-			shoppingCategoryService = (ShoppingCategoryService)PortalBeanLocatorUtil.locate(ShoppingCategoryService.class.getName() +
-					".impl");
-		}
-
-		if (shoppingCategoryPersistence == null) {
-			shoppingCategoryPersistence = (ShoppingCategoryPersistence)PortalBeanLocatorUtil.locate(ShoppingCategoryPersistence.class.getName() +
-					".impl");
-		}
-
-		if (shoppingCouponLocalService == null) {
-			shoppingCouponLocalService = (ShoppingCouponLocalService)PortalBeanLocatorUtil.locate(ShoppingCouponLocalService.class.getName() +
-					".impl");
-		}
-
-		if (shoppingCouponService == null) {
-			shoppingCouponService = (ShoppingCouponService)PortalBeanLocatorUtil.locate(ShoppingCouponService.class.getName() +
-					".impl");
-		}
-
-		if (shoppingCouponPersistence == null) {
-			shoppingCouponPersistence = (ShoppingCouponPersistence)PortalBeanLocatorUtil.locate(ShoppingCouponPersistence.class.getName() +
-					".impl");
-		}
-
-		if (shoppingCouponFinder == null) {
-			shoppingCouponFinder = (ShoppingCouponFinder)PortalBeanLocatorUtil.locate(ShoppingCouponFinder.class.getName() +
-					".impl");
-		}
-
-		if (shoppingItemLocalService == null) {
-			shoppingItemLocalService = (ShoppingItemLocalService)PortalBeanLocatorUtil.locate(ShoppingItemLocalService.class.getName() +
-					".impl");
-		}
-
-		if (shoppingItemService == null) {
-			shoppingItemService = (ShoppingItemService)PortalBeanLocatorUtil.locate(ShoppingItemService.class.getName() +
-					".impl");
-		}
-
-		if (shoppingItemPersistence == null) {
-			shoppingItemPersistence = (ShoppingItemPersistence)PortalBeanLocatorUtil.locate(ShoppingItemPersistence.class.getName() +
-					".impl");
-		}
-
-		if (shoppingItemFinder == null) {
-			shoppingItemFinder = (ShoppingItemFinder)PortalBeanLocatorUtil.locate(ShoppingItemFinder.class.getName() +
-					".impl");
-		}
-
-		if (shoppingItemFieldLocalService == null) {
-			shoppingItemFieldLocalService = (ShoppingItemFieldLocalService)PortalBeanLocatorUtil.locate(ShoppingItemFieldLocalService.class.getName() +
-					".impl");
-		}
-
-		if (shoppingItemFieldPersistence == null) {
-			shoppingItemFieldPersistence = (ShoppingItemFieldPersistence)PortalBeanLocatorUtil.locate(ShoppingItemFieldPersistence.class.getName() +
-					".impl");
-		}
-
-		if (shoppingItemPriceLocalService == null) {
-			shoppingItemPriceLocalService = (ShoppingItemPriceLocalService)PortalBeanLocatorUtil.locate(ShoppingItemPriceLocalService.class.getName() +
-					".impl");
-		}
-
-		if (shoppingItemPricePersistence == null) {
-			shoppingItemPricePersistence = (ShoppingItemPricePersistence)PortalBeanLocatorUtil.locate(ShoppingItemPricePersistence.class.getName() +
-					".impl");
-		}
-
-		if (shoppingOrderPersistence == null) {
-			shoppingOrderPersistence = (ShoppingOrderPersistence)PortalBeanLocatorUtil.locate(ShoppingOrderPersistence.class.getName() +
-					".impl");
-		}
-
-		if (shoppingOrderFinder == null) {
-			shoppingOrderFinder = (ShoppingOrderFinder)PortalBeanLocatorUtil.locate(ShoppingOrderFinder.class.getName() +
-					".impl");
-		}
-
-		if (shoppingOrderItemLocalService == null) {
-			shoppingOrderItemLocalService = (ShoppingOrderItemLocalService)PortalBeanLocatorUtil.locate(ShoppingOrderItemLocalService.class.getName() +
-					".impl");
-		}
-
-		if (shoppingOrderItemPersistence == null) {
-			shoppingOrderItemPersistence = (ShoppingOrderItemPersistence)PortalBeanLocatorUtil.locate(ShoppingOrderItemPersistence.class.getName() +
-					".impl");
-		}
-
-		if (counterLocalService == null) {
-			counterLocalService = (CounterLocalService)PortalBeanLocatorUtil.locate(CounterLocalService.class.getName() +
-					".impl");
-		}
-
-		if (counterService == null) {
-			counterService = (CounterService)PortalBeanLocatorUtil.locate(CounterService.class.getName() +
-					".impl");
-		}
-
-		if (mailService == null) {
-			mailService = (MailService)PortalBeanLocatorUtil.locate(MailService.class.getName() +
-					".impl");
-		}
-
-		if (companyLocalService == null) {
-			companyLocalService = (CompanyLocalService)PortalBeanLocatorUtil.locate(CompanyLocalService.class.getName() +
-					".impl");
-		}
-
-		if (companyService == null) {
-			companyService = (CompanyService)PortalBeanLocatorUtil.locate(CompanyService.class.getName() +
-					".impl");
-		}
-
-		if (companyPersistence == null) {
-			companyPersistence = (CompanyPersistence)PortalBeanLocatorUtil.locate(CompanyPersistence.class.getName() +
-					".impl");
-		}
-
-		if (userLocalService == null) {
-			userLocalService = (UserLocalService)PortalBeanLocatorUtil.locate(UserLocalService.class.getName() +
-					".impl");
-		}
-
-		if (userService == null) {
-			userService = (UserService)PortalBeanLocatorUtil.locate(UserService.class.getName() +
-					".impl");
-		}
-
-		if (userPersistence == null) {
-			userPersistence = (UserPersistence)PortalBeanLocatorUtil.locate(UserPersistence.class.getName() +
-					".impl");
-		}
-
-		if (userFinder == null) {
-			userFinder = (UserFinder)PortalBeanLocatorUtil.locate(UserFinder.class.getName() +
-					".impl");
-		}
-
-		if (mbMessageLocalService == null) {
-			mbMessageLocalService = (MBMessageLocalService)PortalBeanLocatorUtil.locate(MBMessageLocalService.class.getName() +
-					".impl");
-		}
-
-		if (mbMessageService == null) {
-			mbMessageService = (MBMessageService)PortalBeanLocatorUtil.locate(MBMessageService.class.getName() +
-					".impl");
-		}
-
-		if (mbMessagePersistence == null) {
-			mbMessagePersistence = (MBMessagePersistence)PortalBeanLocatorUtil.locate(MBMessagePersistence.class.getName() +
-					".impl");
-		}
-
-		if (mbMessageFinder == null) {
-			mbMessageFinder = (MBMessageFinder)PortalBeanLocatorUtil.locate(MBMessageFinder.class.getName() +
-					".impl");
-		}
-	}
-
 	protected ShoppingCartLocalService shoppingCartLocalService;
 	protected ShoppingCartPersistence shoppingCartPersistence;
 	protected ShoppingCategoryLocalService shoppingCategoryLocalService;
@@ -625,6 +466,8 @@ public abstract class ShoppingOrderLocalServiceBaseImpl
 	protected ShoppingItemFieldPersistence shoppingItemFieldPersistence;
 	protected ShoppingItemPriceLocalService shoppingItemPriceLocalService;
 	protected ShoppingItemPricePersistence shoppingItemPricePersistence;
+	protected ShoppingOrderLocalService shoppingOrderLocalService;
+	protected ShoppingOrderService shoppingOrderService;
 	protected ShoppingOrderPersistence shoppingOrderPersistence;
 	protected ShoppingOrderFinder shoppingOrderFinder;
 	protected ShoppingOrderItemLocalService shoppingOrderItemLocalService;

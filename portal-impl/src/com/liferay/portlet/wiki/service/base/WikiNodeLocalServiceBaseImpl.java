@@ -27,8 +27,6 @@ import com.liferay.counter.service.CounterService;
 
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
-import com.liferay.portal.kernel.bean.InitializingBean;
-import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
 import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 import com.liferay.portal.service.ResourceLocalService;
 import com.liferay.portal.service.ResourceService;
@@ -47,6 +45,8 @@ import com.liferay.portlet.tags.service.persistence.TagsEntryFinder;
 import com.liferay.portlet.tags.service.persistence.TagsEntryPersistence;
 import com.liferay.portlet.wiki.model.WikiNode;
 import com.liferay.portlet.wiki.service.WikiNodeLocalService;
+import com.liferay.portlet.wiki.service.WikiNodeLocalService;
+import com.liferay.portlet.wiki.service.WikiNodeService;
 import com.liferay.portlet.wiki.service.WikiPageLocalService;
 import com.liferay.portlet.wiki.service.WikiPageResourceLocalService;
 import com.liferay.portlet.wiki.service.WikiPageService;
@@ -64,7 +64,7 @@ import java.util.List;
  *
  */
 public abstract class WikiNodeLocalServiceBaseImpl
-	implements WikiNodeLocalService, InitializingBean {
+	implements WikiNodeLocalService {
 	public WikiNode addWikiNode(WikiNode wikiNode) throws SystemException {
 		wikiNode.setNew(true);
 
@@ -112,6 +112,23 @@ public abstract class WikiNodeLocalServiceBaseImpl
 		wikiNode.setNew(false);
 
 		return wikiNodePersistence.update(wikiNode, true);
+	}
+
+	public WikiNodeLocalService getWikiNodeLocalService() {
+		return wikiNodeLocalService;
+	}
+
+	public void setWikiNodeLocalService(
+		WikiNodeLocalService wikiNodeLocalService) {
+		this.wikiNodeLocalService = wikiNodeLocalService;
+	}
+
+	public WikiNodeService getWikiNodeService() {
+		return wikiNodeService;
+	}
+
+	public void setWikiNodeService(WikiNodeService wikiNodeService) {
+		this.wikiNodeService = wikiNodeService;
 	}
 
 	public WikiNodePersistence getWikiNodePersistence() {
@@ -306,123 +323,8 @@ public abstract class WikiNodeLocalServiceBaseImpl
 		this.tagsEntryFinder = tagsEntryFinder;
 	}
 
-	public void afterPropertiesSet() {
-		if (wikiNodePersistence == null) {
-			wikiNodePersistence = (WikiNodePersistence)PortalBeanLocatorUtil.locate(WikiNodePersistence.class.getName() +
-					".impl");
-		}
-
-		if (wikiPageLocalService == null) {
-			wikiPageLocalService = (WikiPageLocalService)PortalBeanLocatorUtil.locate(WikiPageLocalService.class.getName() +
-					".impl");
-		}
-
-		if (wikiPageService == null) {
-			wikiPageService = (WikiPageService)PortalBeanLocatorUtil.locate(WikiPageService.class.getName() +
-					".impl");
-		}
-
-		if (wikiPagePersistence == null) {
-			wikiPagePersistence = (WikiPagePersistence)PortalBeanLocatorUtil.locate(WikiPagePersistence.class.getName() +
-					".impl");
-		}
-
-		if (wikiPageFinder == null) {
-			wikiPageFinder = (WikiPageFinder)PortalBeanLocatorUtil.locate(WikiPageFinder.class.getName() +
-					".impl");
-		}
-
-		if (wikiPageResourceLocalService == null) {
-			wikiPageResourceLocalService = (WikiPageResourceLocalService)PortalBeanLocatorUtil.locate(WikiPageResourceLocalService.class.getName() +
-					".impl");
-		}
-
-		if (wikiPageResourcePersistence == null) {
-			wikiPageResourcePersistence = (WikiPageResourcePersistence)PortalBeanLocatorUtil.locate(WikiPageResourcePersistence.class.getName() +
-					".impl");
-		}
-
-		if (counterLocalService == null) {
-			counterLocalService = (CounterLocalService)PortalBeanLocatorUtil.locate(CounterLocalService.class.getName() +
-					".impl");
-		}
-
-		if (counterService == null) {
-			counterService = (CounterService)PortalBeanLocatorUtil.locate(CounterService.class.getName() +
-					".impl");
-		}
-
-		if (resourceLocalService == null) {
-			resourceLocalService = (ResourceLocalService)PortalBeanLocatorUtil.locate(ResourceLocalService.class.getName() +
-					".impl");
-		}
-
-		if (resourceService == null) {
-			resourceService = (ResourceService)PortalBeanLocatorUtil.locate(ResourceService.class.getName() +
-					".impl");
-		}
-
-		if (resourcePersistence == null) {
-			resourcePersistence = (ResourcePersistence)PortalBeanLocatorUtil.locate(ResourcePersistence.class.getName() +
-					".impl");
-		}
-
-		if (resourceFinder == null) {
-			resourceFinder = (ResourceFinder)PortalBeanLocatorUtil.locate(ResourceFinder.class.getName() +
-					".impl");
-		}
-
-		if (subscriptionLocalService == null) {
-			subscriptionLocalService = (SubscriptionLocalService)PortalBeanLocatorUtil.locate(SubscriptionLocalService.class.getName() +
-					".impl");
-		}
-
-		if (subscriptionPersistence == null) {
-			subscriptionPersistence = (SubscriptionPersistence)PortalBeanLocatorUtil.locate(SubscriptionPersistence.class.getName() +
-					".impl");
-		}
-
-		if (userLocalService == null) {
-			userLocalService = (UserLocalService)PortalBeanLocatorUtil.locate(UserLocalService.class.getName() +
-					".impl");
-		}
-
-		if (userService == null) {
-			userService = (UserService)PortalBeanLocatorUtil.locate(UserService.class.getName() +
-					".impl");
-		}
-
-		if (userPersistence == null) {
-			userPersistence = (UserPersistence)PortalBeanLocatorUtil.locate(UserPersistence.class.getName() +
-					".impl");
-		}
-
-		if (userFinder == null) {
-			userFinder = (UserFinder)PortalBeanLocatorUtil.locate(UserFinder.class.getName() +
-					".impl");
-		}
-
-		if (tagsEntryLocalService == null) {
-			tagsEntryLocalService = (TagsEntryLocalService)PortalBeanLocatorUtil.locate(TagsEntryLocalService.class.getName() +
-					".impl");
-		}
-
-		if (tagsEntryService == null) {
-			tagsEntryService = (TagsEntryService)PortalBeanLocatorUtil.locate(TagsEntryService.class.getName() +
-					".impl");
-		}
-
-		if (tagsEntryPersistence == null) {
-			tagsEntryPersistence = (TagsEntryPersistence)PortalBeanLocatorUtil.locate(TagsEntryPersistence.class.getName() +
-					".impl");
-		}
-
-		if (tagsEntryFinder == null) {
-			tagsEntryFinder = (TagsEntryFinder)PortalBeanLocatorUtil.locate(TagsEntryFinder.class.getName() +
-					".impl");
-		}
-	}
-
+	protected WikiNodeLocalService wikiNodeLocalService;
+	protected WikiNodeService wikiNodeService;
 	protected WikiNodePersistence wikiNodePersistence;
 	protected WikiPageLocalService wikiPageLocalService;
 	protected WikiPageService wikiPageService;

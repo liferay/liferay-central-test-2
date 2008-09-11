@@ -22,13 +22,12 @@
 
 package com.liferay.portlet.workflow.service.base;
 
-import com.liferay.portal.kernel.bean.InitializingBean;
-import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
 import com.liferay.portal.service.base.PrincipalBean;
 
 import com.liferay.portlet.workflow.service.WorkflowComponentService;
 import com.liferay.portlet.workflow.service.WorkflowDefinitionService;
 import com.liferay.portlet.workflow.service.WorkflowInstanceService;
+import com.liferay.portlet.workflow.service.WorkflowTaskService;
 import com.liferay.portlet.workflow.service.WorkflowTaskService;
 
 /**
@@ -38,7 +37,7 @@ import com.liferay.portlet.workflow.service.WorkflowTaskService;
  *
  */
 public abstract class WorkflowTaskServiceBaseImpl extends PrincipalBean
-	implements WorkflowTaskService, InitializingBean {
+	implements WorkflowTaskService {
 	public WorkflowComponentService getWorkflowComponentService() {
 		return workflowComponentService;
 	}
@@ -66,24 +65,16 @@ public abstract class WorkflowTaskServiceBaseImpl extends PrincipalBean
 		this.workflowInstanceService = workflowInstanceService;
 	}
 
-	public void afterPropertiesSet() {
-		if (workflowComponentService == null) {
-			workflowComponentService = (WorkflowComponentService)PortalBeanLocatorUtil.locate(WorkflowComponentService.class.getName() +
-					".impl");
-		}
+	public WorkflowTaskService getWorkflowTaskService() {
+		return workflowTaskService;
+	}
 
-		if (workflowDefinitionService == null) {
-			workflowDefinitionService = (WorkflowDefinitionService)PortalBeanLocatorUtil.locate(WorkflowDefinitionService.class.getName() +
-					".impl");
-		}
-
-		if (workflowInstanceService == null) {
-			workflowInstanceService = (WorkflowInstanceService)PortalBeanLocatorUtil.locate(WorkflowInstanceService.class.getName() +
-					".impl");
-		}
+	public void setWorkflowTaskService(WorkflowTaskService workflowTaskService) {
+		this.workflowTaskService = workflowTaskService;
 	}
 
 	protected WorkflowComponentService workflowComponentService;
 	protected WorkflowDefinitionService workflowDefinitionService;
 	protected WorkflowInstanceService workflowInstanceService;
+	protected WorkflowTaskService workflowTaskService;
 }

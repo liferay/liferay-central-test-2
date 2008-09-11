@@ -27,8 +27,6 @@ import com.liferay.counter.service.CounterService;
 
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
-import com.liferay.portal.kernel.bean.InitializingBean;
-import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
 import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 import com.liferay.portal.service.UserLocalService;
 import com.liferay.portal.service.UserService;
@@ -37,6 +35,8 @@ import com.liferay.portal.service.persistence.UserPersistence;
 
 import com.liferay.portlet.announcements.model.AnnouncementsDelivery;
 import com.liferay.portlet.announcements.service.AnnouncementsDeliveryLocalService;
+import com.liferay.portlet.announcements.service.AnnouncementsDeliveryLocalService;
+import com.liferay.portlet.announcements.service.AnnouncementsDeliveryService;
 import com.liferay.portlet.announcements.service.AnnouncementsEntryLocalService;
 import com.liferay.portlet.announcements.service.AnnouncementsEntryService;
 import com.liferay.portlet.announcements.service.AnnouncementsFlagLocalService;
@@ -55,7 +55,7 @@ import java.util.List;
  *
  */
 public abstract class AnnouncementsDeliveryLocalServiceBaseImpl
-	implements AnnouncementsDeliveryLocalService, InitializingBean {
+	implements AnnouncementsDeliveryLocalService {
 	public AnnouncementsDelivery addAnnouncementsDelivery(
 		AnnouncementsDelivery announcementsDelivery) throws SystemException {
 		announcementsDelivery.setNew(true);
@@ -109,6 +109,24 @@ public abstract class AnnouncementsDeliveryLocalServiceBaseImpl
 
 		return announcementsDeliveryPersistence.update(announcementsDelivery,
 			true);
+	}
+
+	public AnnouncementsDeliveryLocalService getAnnouncementsDeliveryLocalService() {
+		return announcementsDeliveryLocalService;
+	}
+
+	public void setAnnouncementsDeliveryLocalService(
+		AnnouncementsDeliveryLocalService announcementsDeliveryLocalService) {
+		this.announcementsDeliveryLocalService = announcementsDeliveryLocalService;
+	}
+
+	public AnnouncementsDeliveryService getAnnouncementsDeliveryService() {
+		return announcementsDeliveryService;
+	}
+
+	public void setAnnouncementsDeliveryService(
+		AnnouncementsDeliveryService announcementsDeliveryService) {
+		this.announcementsDeliveryService = announcementsDeliveryService;
 	}
 
 	public AnnouncementsDeliveryPersistence getAnnouncementsDeliveryPersistence() {
@@ -231,78 +249,8 @@ public abstract class AnnouncementsDeliveryLocalServiceBaseImpl
 		this.userFinder = userFinder;
 	}
 
-	public void afterPropertiesSet() {
-		if (announcementsDeliveryPersistence == null) {
-			announcementsDeliveryPersistence = (AnnouncementsDeliveryPersistence)PortalBeanLocatorUtil.locate(AnnouncementsDeliveryPersistence.class.getName() +
-					".impl");
-		}
-
-		if (announcementsEntryLocalService == null) {
-			announcementsEntryLocalService = (AnnouncementsEntryLocalService)PortalBeanLocatorUtil.locate(AnnouncementsEntryLocalService.class.getName() +
-					".impl");
-		}
-
-		if (announcementsEntryService == null) {
-			announcementsEntryService = (AnnouncementsEntryService)PortalBeanLocatorUtil.locate(AnnouncementsEntryService.class.getName() +
-					".impl");
-		}
-
-		if (announcementsEntryPersistence == null) {
-			announcementsEntryPersistence = (AnnouncementsEntryPersistence)PortalBeanLocatorUtil.locate(AnnouncementsEntryPersistence.class.getName() +
-					".impl");
-		}
-
-		if (announcementsEntryFinder == null) {
-			announcementsEntryFinder = (AnnouncementsEntryFinder)PortalBeanLocatorUtil.locate(AnnouncementsEntryFinder.class.getName() +
-					".impl");
-		}
-
-		if (announcementsFlagLocalService == null) {
-			announcementsFlagLocalService = (AnnouncementsFlagLocalService)PortalBeanLocatorUtil.locate(AnnouncementsFlagLocalService.class.getName() +
-					".impl");
-		}
-
-		if (announcementsFlagService == null) {
-			announcementsFlagService = (AnnouncementsFlagService)PortalBeanLocatorUtil.locate(AnnouncementsFlagService.class.getName() +
-					".impl");
-		}
-
-		if (announcementsFlagPersistence == null) {
-			announcementsFlagPersistence = (AnnouncementsFlagPersistence)PortalBeanLocatorUtil.locate(AnnouncementsFlagPersistence.class.getName() +
-					".impl");
-		}
-
-		if (counterLocalService == null) {
-			counterLocalService = (CounterLocalService)PortalBeanLocatorUtil.locate(CounterLocalService.class.getName() +
-					".impl");
-		}
-
-		if (counterService == null) {
-			counterService = (CounterService)PortalBeanLocatorUtil.locate(CounterService.class.getName() +
-					".impl");
-		}
-
-		if (userLocalService == null) {
-			userLocalService = (UserLocalService)PortalBeanLocatorUtil.locate(UserLocalService.class.getName() +
-					".impl");
-		}
-
-		if (userService == null) {
-			userService = (UserService)PortalBeanLocatorUtil.locate(UserService.class.getName() +
-					".impl");
-		}
-
-		if (userPersistence == null) {
-			userPersistence = (UserPersistence)PortalBeanLocatorUtil.locate(UserPersistence.class.getName() +
-					".impl");
-		}
-
-		if (userFinder == null) {
-			userFinder = (UserFinder)PortalBeanLocatorUtil.locate(UserFinder.class.getName() +
-					".impl");
-		}
-	}
-
+	protected AnnouncementsDeliveryLocalService announcementsDeliveryLocalService;
+	protected AnnouncementsDeliveryService announcementsDeliveryService;
 	protected AnnouncementsDeliveryPersistence announcementsDeliveryPersistence;
 	protected AnnouncementsEntryLocalService announcementsEntryLocalService;
 	protected AnnouncementsEntryService announcementsEntryService;

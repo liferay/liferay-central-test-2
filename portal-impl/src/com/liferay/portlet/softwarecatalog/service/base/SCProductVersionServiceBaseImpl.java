@@ -25,8 +25,6 @@ package com.liferay.portlet.softwarecatalog.service.base;
 import com.liferay.counter.service.CounterLocalService;
 import com.liferay.counter.service.CounterService;
 
-import com.liferay.portal.kernel.bean.InitializingBean;
-import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
 import com.liferay.portal.service.UserLocalService;
 import com.liferay.portal.service.UserService;
 import com.liferay.portal.service.base.PrincipalBean;
@@ -42,6 +40,7 @@ import com.liferay.portlet.softwarecatalog.service.SCProductEntryService;
 import com.liferay.portlet.softwarecatalog.service.SCProductScreenshotLocalService;
 import com.liferay.portlet.softwarecatalog.service.SCProductVersionLocalService;
 import com.liferay.portlet.softwarecatalog.service.SCProductVersionService;
+import com.liferay.portlet.softwarecatalog.service.SCProductVersionService;
 import com.liferay.portlet.softwarecatalog.service.persistence.SCFrameworkVersionPersistence;
 import com.liferay.portlet.softwarecatalog.service.persistence.SCLicensePersistence;
 import com.liferay.portlet.softwarecatalog.service.persistence.SCProductEntryPersistence;
@@ -55,7 +54,7 @@ import com.liferay.portlet.softwarecatalog.service.persistence.SCProductVersionP
  *
  */
 public abstract class SCProductVersionServiceBaseImpl extends PrincipalBean
-	implements SCProductVersionService, InitializingBean {
+	implements SCProductVersionService {
 	public SCLicenseLocalService getSCLicenseLocalService() {
 		return scLicenseLocalService;
 	}
@@ -163,6 +162,15 @@ public abstract class SCProductVersionServiceBaseImpl extends PrincipalBean
 		this.scProductVersionLocalService = scProductVersionLocalService;
 	}
 
+	public SCProductVersionService getSCProductVersionService() {
+		return scProductVersionService;
+	}
+
+	public void setSCProductVersionService(
+		SCProductVersionService scProductVersionService) {
+		this.scProductVersionService = scProductVersionService;
+	}
+
 	public SCProductVersionPersistence getSCProductVersionPersistence() {
 		return scProductVersionPersistence;
 	}
@@ -220,103 +228,6 @@ public abstract class SCProductVersionServiceBaseImpl extends PrincipalBean
 		this.userFinder = userFinder;
 	}
 
-	public void afterPropertiesSet() {
-		if (scLicenseLocalService == null) {
-			scLicenseLocalService = (SCLicenseLocalService)PortalBeanLocatorUtil.locate(SCLicenseLocalService.class.getName() +
-					".impl");
-		}
-
-		if (scLicenseService == null) {
-			scLicenseService = (SCLicenseService)PortalBeanLocatorUtil.locate(SCLicenseService.class.getName() +
-					".impl");
-		}
-
-		if (scLicensePersistence == null) {
-			scLicensePersistence = (SCLicensePersistence)PortalBeanLocatorUtil.locate(SCLicensePersistence.class.getName() +
-					".impl");
-		}
-
-		if (scFrameworkVersionLocalService == null) {
-			scFrameworkVersionLocalService = (SCFrameworkVersionLocalService)PortalBeanLocatorUtil.locate(SCFrameworkVersionLocalService.class.getName() +
-					".impl");
-		}
-
-		if (scFrameworkVersionService == null) {
-			scFrameworkVersionService = (SCFrameworkVersionService)PortalBeanLocatorUtil.locate(SCFrameworkVersionService.class.getName() +
-					".impl");
-		}
-
-		if (scFrameworkVersionPersistence == null) {
-			scFrameworkVersionPersistence = (SCFrameworkVersionPersistence)PortalBeanLocatorUtil.locate(SCFrameworkVersionPersistence.class.getName() +
-					".impl");
-		}
-
-		if (scProductEntryLocalService == null) {
-			scProductEntryLocalService = (SCProductEntryLocalService)PortalBeanLocatorUtil.locate(SCProductEntryLocalService.class.getName() +
-					".impl");
-		}
-
-		if (scProductEntryService == null) {
-			scProductEntryService = (SCProductEntryService)PortalBeanLocatorUtil.locate(SCProductEntryService.class.getName() +
-					".impl");
-		}
-
-		if (scProductEntryPersistence == null) {
-			scProductEntryPersistence = (SCProductEntryPersistence)PortalBeanLocatorUtil.locate(SCProductEntryPersistence.class.getName() +
-					".impl");
-		}
-
-		if (scProductScreenshotLocalService == null) {
-			scProductScreenshotLocalService = (SCProductScreenshotLocalService)PortalBeanLocatorUtil.locate(SCProductScreenshotLocalService.class.getName() +
-					".impl");
-		}
-
-		if (scProductScreenshotPersistence == null) {
-			scProductScreenshotPersistence = (SCProductScreenshotPersistence)PortalBeanLocatorUtil.locate(SCProductScreenshotPersistence.class.getName() +
-					".impl");
-		}
-
-		if (scProductVersionLocalService == null) {
-			scProductVersionLocalService = (SCProductVersionLocalService)PortalBeanLocatorUtil.locate(SCProductVersionLocalService.class.getName() +
-					".impl");
-		}
-
-		if (scProductVersionPersistence == null) {
-			scProductVersionPersistence = (SCProductVersionPersistence)PortalBeanLocatorUtil.locate(SCProductVersionPersistence.class.getName() +
-					".impl");
-		}
-
-		if (counterLocalService == null) {
-			counterLocalService = (CounterLocalService)PortalBeanLocatorUtil.locate(CounterLocalService.class.getName() +
-					".impl");
-		}
-
-		if (counterService == null) {
-			counterService = (CounterService)PortalBeanLocatorUtil.locate(CounterService.class.getName() +
-					".impl");
-		}
-
-		if (userLocalService == null) {
-			userLocalService = (UserLocalService)PortalBeanLocatorUtil.locate(UserLocalService.class.getName() +
-					".impl");
-		}
-
-		if (userService == null) {
-			userService = (UserService)PortalBeanLocatorUtil.locate(UserService.class.getName() +
-					".impl");
-		}
-
-		if (userPersistence == null) {
-			userPersistence = (UserPersistence)PortalBeanLocatorUtil.locate(UserPersistence.class.getName() +
-					".impl");
-		}
-
-		if (userFinder == null) {
-			userFinder = (UserFinder)PortalBeanLocatorUtil.locate(UserFinder.class.getName() +
-					".impl");
-		}
-	}
-
 	protected SCLicenseLocalService scLicenseLocalService;
 	protected SCLicenseService scLicenseService;
 	protected SCLicensePersistence scLicensePersistence;
@@ -329,6 +240,7 @@ public abstract class SCProductVersionServiceBaseImpl extends PrincipalBean
 	protected SCProductScreenshotLocalService scProductScreenshotLocalService;
 	protected SCProductScreenshotPersistence scProductScreenshotPersistence;
 	protected SCProductVersionLocalService scProductVersionLocalService;
+	protected SCProductVersionService scProductVersionService;
 	protected SCProductVersionPersistence scProductVersionPersistence;
 	protected CounterLocalService counterLocalService;
 	protected CounterService counterService;

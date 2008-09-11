@@ -24,7 +24,6 @@ package com.liferay.portal.service.persistence;
 
 import com.liferay.portal.NoSuchRoleException;
 import com.liferay.portal.SystemException;
-import com.liferay.portal.kernel.bean.InitializingBean;
 import com.liferay.portal.kernel.dao.jdbc.MappingSqlQuery;
 import com.liferay.portal.kernel.dao.jdbc.MappingSqlQueryFactoryUtil;
 import com.liferay.portal.kernel.dao.jdbc.RowMapper;
@@ -66,7 +65,7 @@ import java.util.List;
  *
  */
 public class RolePersistenceImpl extends BasePersistenceImpl
-	implements RolePersistence, InitializingBean {
+	implements RolePersistence {
 	public Role create(long roleId) {
 		Role role = new RoleImpl();
 

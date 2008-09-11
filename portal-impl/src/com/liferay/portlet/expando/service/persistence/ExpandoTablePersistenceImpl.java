@@ -23,7 +23,6 @@
 package com.liferay.portlet.expando.service.persistence;
 
 import com.liferay.portal.SystemException;
-import com.liferay.portal.kernel.bean.InitializingBean;
 import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 import com.liferay.portal.kernel.dao.orm.FinderCacheUtil;
 import com.liferay.portal.kernel.dao.orm.Query;
@@ -58,7 +57,7 @@ import java.util.List;
  *
  */
 public class ExpandoTablePersistenceImpl extends BasePersistenceImpl
-	implements ExpandoTablePersistence, InitializingBean {
+	implements ExpandoTablePersistence {
 	public ExpandoTable create(long tableId) {
 		ExpandoTable expandoTable = new ExpandoTableImpl();
 

@@ -25,8 +25,6 @@ package com.liferay.portlet.announcements.service.base;
 import com.liferay.counter.service.CounterLocalService;
 import com.liferay.counter.service.CounterService;
 
-import com.liferay.portal.kernel.bean.InitializingBean;
-import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
 import com.liferay.portal.service.base.PrincipalBean;
 
 import com.liferay.portlet.announcements.service.AnnouncementsDeliveryLocalService;
@@ -34,6 +32,7 @@ import com.liferay.portlet.announcements.service.AnnouncementsDeliveryService;
 import com.liferay.portlet.announcements.service.AnnouncementsEntryLocalService;
 import com.liferay.portlet.announcements.service.AnnouncementsEntryService;
 import com.liferay.portlet.announcements.service.AnnouncementsFlagLocalService;
+import com.liferay.portlet.announcements.service.AnnouncementsFlagService;
 import com.liferay.portlet.announcements.service.AnnouncementsFlagService;
 import com.liferay.portlet.announcements.service.persistence.AnnouncementsDeliveryPersistence;
 import com.liferay.portlet.announcements.service.persistence.AnnouncementsEntryFinder;
@@ -47,7 +46,7 @@ import com.liferay.portlet.announcements.service.persistence.AnnouncementsFlagPe
  *
  */
 public abstract class AnnouncementsFlagServiceBaseImpl extends PrincipalBean
-	implements AnnouncementsFlagService, InitializingBean {
+	implements AnnouncementsFlagService {
 	public AnnouncementsDeliveryLocalService getAnnouncementsDeliveryLocalService() {
 		return announcementsDeliveryLocalService;
 	}
@@ -120,6 +119,15 @@ public abstract class AnnouncementsFlagServiceBaseImpl extends PrincipalBean
 		this.announcementsFlagLocalService = announcementsFlagLocalService;
 	}
 
+	public AnnouncementsFlagService getAnnouncementsFlagService() {
+		return announcementsFlagService;
+	}
+
+	public void setAnnouncementsFlagService(
+		AnnouncementsFlagService announcementsFlagService) {
+		this.announcementsFlagService = announcementsFlagService;
+	}
+
 	public AnnouncementsFlagPersistence getAnnouncementsFlagPersistence() {
 		return announcementsFlagPersistence;
 	}
@@ -145,63 +153,6 @@ public abstract class AnnouncementsFlagServiceBaseImpl extends PrincipalBean
 		this.counterService = counterService;
 	}
 
-	public void afterPropertiesSet() {
-		if (announcementsDeliveryLocalService == null) {
-			announcementsDeliveryLocalService = (AnnouncementsDeliveryLocalService)PortalBeanLocatorUtil.locate(AnnouncementsDeliveryLocalService.class.getName() +
-					".impl");
-		}
-
-		if (announcementsDeliveryService == null) {
-			announcementsDeliveryService = (AnnouncementsDeliveryService)PortalBeanLocatorUtil.locate(AnnouncementsDeliveryService.class.getName() +
-					".impl");
-		}
-
-		if (announcementsDeliveryPersistence == null) {
-			announcementsDeliveryPersistence = (AnnouncementsDeliveryPersistence)PortalBeanLocatorUtil.locate(AnnouncementsDeliveryPersistence.class.getName() +
-					".impl");
-		}
-
-		if (announcementsEntryLocalService == null) {
-			announcementsEntryLocalService = (AnnouncementsEntryLocalService)PortalBeanLocatorUtil.locate(AnnouncementsEntryLocalService.class.getName() +
-					".impl");
-		}
-
-		if (announcementsEntryService == null) {
-			announcementsEntryService = (AnnouncementsEntryService)PortalBeanLocatorUtil.locate(AnnouncementsEntryService.class.getName() +
-					".impl");
-		}
-
-		if (announcementsEntryPersistence == null) {
-			announcementsEntryPersistence = (AnnouncementsEntryPersistence)PortalBeanLocatorUtil.locate(AnnouncementsEntryPersistence.class.getName() +
-					".impl");
-		}
-
-		if (announcementsEntryFinder == null) {
-			announcementsEntryFinder = (AnnouncementsEntryFinder)PortalBeanLocatorUtil.locate(AnnouncementsEntryFinder.class.getName() +
-					".impl");
-		}
-
-		if (announcementsFlagLocalService == null) {
-			announcementsFlagLocalService = (AnnouncementsFlagLocalService)PortalBeanLocatorUtil.locate(AnnouncementsFlagLocalService.class.getName() +
-					".impl");
-		}
-
-		if (announcementsFlagPersistence == null) {
-			announcementsFlagPersistence = (AnnouncementsFlagPersistence)PortalBeanLocatorUtil.locate(AnnouncementsFlagPersistence.class.getName() +
-					".impl");
-		}
-
-		if (counterLocalService == null) {
-			counterLocalService = (CounterLocalService)PortalBeanLocatorUtil.locate(CounterLocalService.class.getName() +
-					".impl");
-		}
-
-		if (counterService == null) {
-			counterService = (CounterService)PortalBeanLocatorUtil.locate(CounterService.class.getName() +
-					".impl");
-		}
-	}
-
 	protected AnnouncementsDeliveryLocalService announcementsDeliveryLocalService;
 	protected AnnouncementsDeliveryService announcementsDeliveryService;
 	protected AnnouncementsDeliveryPersistence announcementsDeliveryPersistence;
@@ -210,6 +161,7 @@ public abstract class AnnouncementsFlagServiceBaseImpl extends PrincipalBean
 	protected AnnouncementsEntryPersistence announcementsEntryPersistence;
 	protected AnnouncementsEntryFinder announcementsEntryFinder;
 	protected AnnouncementsFlagLocalService announcementsFlagLocalService;
+	protected AnnouncementsFlagService announcementsFlagService;
 	protected AnnouncementsFlagPersistence announcementsFlagPersistence;
 	protected CounterLocalService counterLocalService;
 	protected CounterService counterService;

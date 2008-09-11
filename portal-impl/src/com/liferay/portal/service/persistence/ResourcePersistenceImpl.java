@@ -24,7 +24,6 @@ package com.liferay.portal.service.persistence;
 
 import com.liferay.portal.NoSuchResourceException;
 import com.liferay.portal.SystemException;
-import com.liferay.portal.kernel.bean.InitializingBean;
 import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 import com.liferay.portal.kernel.dao.orm.FinderCacheUtil;
 import com.liferay.portal.kernel.dao.orm.Query;
@@ -57,7 +56,7 @@ import java.util.List;
  *
  */
 public class ResourcePersistenceImpl extends BasePersistenceImpl
-	implements ResourcePersistence, InitializingBean {
+	implements ResourcePersistence {
 	public Resource create(long resourceId) {
 		Resource resource = new ResourceImpl();
 

@@ -23,7 +23,6 @@
 package com.liferay.portlet.documentlibrary.service.persistence;
 
 import com.liferay.portal.SystemException;
-import com.liferay.portal.kernel.bean.InitializingBean;
 import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 import com.liferay.portal.kernel.dao.orm.FinderCacheUtil;
 import com.liferay.portal.kernel.dao.orm.Query;
@@ -60,7 +59,7 @@ import java.util.List;
  *
  */
 public class DLFileEntryPersistenceImpl extends BasePersistenceImpl
-	implements DLFileEntryPersistence, InitializingBean {
+	implements DLFileEntryPersistence {
 	public DLFileEntry create(long fileEntryId) {
 		DLFileEntry dlFileEntry = new DLFileEntryImpl();
 

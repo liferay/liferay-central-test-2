@@ -25,8 +25,6 @@ package com.liferay.portlet.journal.service.base;
 import com.liferay.counter.service.CounterLocalService;
 import com.liferay.counter.service.CounterService;
 
-import com.liferay.portal.kernel.bean.InitializingBean;
-import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
 import com.liferay.portal.service.ResourceLocalService;
 import com.liferay.portal.service.ResourceService;
 import com.liferay.portal.service.UserLocalService;
@@ -43,6 +41,7 @@ import com.liferay.portlet.journal.service.JournalArticleResourceLocalService;
 import com.liferay.portlet.journal.service.JournalArticleService;
 import com.liferay.portlet.journal.service.JournalContentSearchLocalService;
 import com.liferay.portlet.journal.service.JournalFeedLocalService;
+import com.liferay.portlet.journal.service.JournalFeedService;
 import com.liferay.portlet.journal.service.JournalFeedService;
 import com.liferay.portlet.journal.service.JournalStructureLocalService;
 import com.liferay.portlet.journal.service.JournalStructureService;
@@ -67,7 +66,7 @@ import com.liferay.portlet.journal.service.persistence.JournalTemplatePersistenc
  *
  */
 public abstract class JournalFeedServiceBaseImpl extends PrincipalBean
-	implements JournalFeedService, InitializingBean {
+	implements JournalFeedService {
 	public JournalArticleLocalService getJournalArticleLocalService() {
 		return journalArticleLocalService;
 	}
@@ -165,6 +164,14 @@ public abstract class JournalFeedServiceBaseImpl extends PrincipalBean
 	public void setJournalFeedLocalService(
 		JournalFeedLocalService journalFeedLocalService) {
 		this.journalFeedLocalService = journalFeedLocalService;
+	}
+
+	public JournalFeedService getJournalFeedService() {
+		return journalFeedService;
+	}
+
+	public void setJournalFeedService(JournalFeedService journalFeedService) {
+		this.journalFeedService = journalFeedService;
 	}
 
 	public JournalFeedPersistence getJournalFeedPersistence() {
@@ -337,163 +344,6 @@ public abstract class JournalFeedServiceBaseImpl extends PrincipalBean
 		this.userFinder = userFinder;
 	}
 
-	public void afterPropertiesSet() {
-		if (journalArticleLocalService == null) {
-			journalArticleLocalService = (JournalArticleLocalService)PortalBeanLocatorUtil.locate(JournalArticleLocalService.class.getName() +
-					".impl");
-		}
-
-		if (journalArticleService == null) {
-			journalArticleService = (JournalArticleService)PortalBeanLocatorUtil.locate(JournalArticleService.class.getName() +
-					".impl");
-		}
-
-		if (journalArticlePersistence == null) {
-			journalArticlePersistence = (JournalArticlePersistence)PortalBeanLocatorUtil.locate(JournalArticlePersistence.class.getName() +
-					".impl");
-		}
-
-		if (journalArticleFinder == null) {
-			journalArticleFinder = (JournalArticleFinder)PortalBeanLocatorUtil.locate(JournalArticleFinder.class.getName() +
-					".impl");
-		}
-
-		if (journalArticleImageLocalService == null) {
-			journalArticleImageLocalService = (JournalArticleImageLocalService)PortalBeanLocatorUtil.locate(JournalArticleImageLocalService.class.getName() +
-					".impl");
-		}
-
-		if (journalArticleImagePersistence == null) {
-			journalArticleImagePersistence = (JournalArticleImagePersistence)PortalBeanLocatorUtil.locate(JournalArticleImagePersistence.class.getName() +
-					".impl");
-		}
-
-		if (journalArticleResourceLocalService == null) {
-			journalArticleResourceLocalService = (JournalArticleResourceLocalService)PortalBeanLocatorUtil.locate(JournalArticleResourceLocalService.class.getName() +
-					".impl");
-		}
-
-		if (journalArticleResourcePersistence == null) {
-			journalArticleResourcePersistence = (JournalArticleResourcePersistence)PortalBeanLocatorUtil.locate(JournalArticleResourcePersistence.class.getName() +
-					".impl");
-		}
-
-		if (journalContentSearchLocalService == null) {
-			journalContentSearchLocalService = (JournalContentSearchLocalService)PortalBeanLocatorUtil.locate(JournalContentSearchLocalService.class.getName() +
-					".impl");
-		}
-
-		if (journalContentSearchPersistence == null) {
-			journalContentSearchPersistence = (JournalContentSearchPersistence)PortalBeanLocatorUtil.locate(JournalContentSearchPersistence.class.getName() +
-					".impl");
-		}
-
-		if (journalFeedLocalService == null) {
-			journalFeedLocalService = (JournalFeedLocalService)PortalBeanLocatorUtil.locate(JournalFeedLocalService.class.getName() +
-					".impl");
-		}
-
-		if (journalFeedPersistence == null) {
-			journalFeedPersistence = (JournalFeedPersistence)PortalBeanLocatorUtil.locate(JournalFeedPersistence.class.getName() +
-					".impl");
-		}
-
-		if (journalFeedFinder == null) {
-			journalFeedFinder = (JournalFeedFinder)PortalBeanLocatorUtil.locate(JournalFeedFinder.class.getName() +
-					".impl");
-		}
-
-		if (journalStructureLocalService == null) {
-			journalStructureLocalService = (JournalStructureLocalService)PortalBeanLocatorUtil.locate(JournalStructureLocalService.class.getName() +
-					".impl");
-		}
-
-		if (journalStructureService == null) {
-			journalStructureService = (JournalStructureService)PortalBeanLocatorUtil.locate(JournalStructureService.class.getName() +
-					".impl");
-		}
-
-		if (journalStructurePersistence == null) {
-			journalStructurePersistence = (JournalStructurePersistence)PortalBeanLocatorUtil.locate(JournalStructurePersistence.class.getName() +
-					".impl");
-		}
-
-		if (journalStructureFinder == null) {
-			journalStructureFinder = (JournalStructureFinder)PortalBeanLocatorUtil.locate(JournalStructureFinder.class.getName() +
-					".impl");
-		}
-
-		if (journalTemplateLocalService == null) {
-			journalTemplateLocalService = (JournalTemplateLocalService)PortalBeanLocatorUtil.locate(JournalTemplateLocalService.class.getName() +
-					".impl");
-		}
-
-		if (journalTemplateService == null) {
-			journalTemplateService = (JournalTemplateService)PortalBeanLocatorUtil.locate(JournalTemplateService.class.getName() +
-					".impl");
-		}
-
-		if (journalTemplatePersistence == null) {
-			journalTemplatePersistence = (JournalTemplatePersistence)PortalBeanLocatorUtil.locate(JournalTemplatePersistence.class.getName() +
-					".impl");
-		}
-
-		if (journalTemplateFinder == null) {
-			journalTemplateFinder = (JournalTemplateFinder)PortalBeanLocatorUtil.locate(JournalTemplateFinder.class.getName() +
-					".impl");
-		}
-
-		if (counterLocalService == null) {
-			counterLocalService = (CounterLocalService)PortalBeanLocatorUtil.locate(CounterLocalService.class.getName() +
-					".impl");
-		}
-
-		if (counterService == null) {
-			counterService = (CounterService)PortalBeanLocatorUtil.locate(CounterService.class.getName() +
-					".impl");
-		}
-
-		if (resourceLocalService == null) {
-			resourceLocalService = (ResourceLocalService)PortalBeanLocatorUtil.locate(ResourceLocalService.class.getName() +
-					".impl");
-		}
-
-		if (resourceService == null) {
-			resourceService = (ResourceService)PortalBeanLocatorUtil.locate(ResourceService.class.getName() +
-					".impl");
-		}
-
-		if (resourcePersistence == null) {
-			resourcePersistence = (ResourcePersistence)PortalBeanLocatorUtil.locate(ResourcePersistence.class.getName() +
-					".impl");
-		}
-
-		if (resourceFinder == null) {
-			resourceFinder = (ResourceFinder)PortalBeanLocatorUtil.locate(ResourceFinder.class.getName() +
-					".impl");
-		}
-
-		if (userLocalService == null) {
-			userLocalService = (UserLocalService)PortalBeanLocatorUtil.locate(UserLocalService.class.getName() +
-					".impl");
-		}
-
-		if (userService == null) {
-			userService = (UserService)PortalBeanLocatorUtil.locate(UserService.class.getName() +
-					".impl");
-		}
-
-		if (userPersistence == null) {
-			userPersistence = (UserPersistence)PortalBeanLocatorUtil.locate(UserPersistence.class.getName() +
-					".impl");
-		}
-
-		if (userFinder == null) {
-			userFinder = (UserFinder)PortalBeanLocatorUtil.locate(UserFinder.class.getName() +
-					".impl");
-		}
-	}
-
 	protected JournalArticleLocalService journalArticleLocalService;
 	protected JournalArticleService journalArticleService;
 	protected JournalArticlePersistence journalArticlePersistence;
@@ -505,6 +355,7 @@ public abstract class JournalFeedServiceBaseImpl extends PrincipalBean
 	protected JournalContentSearchLocalService journalContentSearchLocalService;
 	protected JournalContentSearchPersistence journalContentSearchPersistence;
 	protected JournalFeedLocalService journalFeedLocalService;
+	protected JournalFeedService journalFeedService;
 	protected JournalFeedPersistence journalFeedPersistence;
 	protected JournalFeedFinder journalFeedFinder;
 	protected JournalStructureLocalService journalStructureLocalService;

@@ -24,7 +24,6 @@ package com.liferay.portal.service.persistence;
 
 import com.liferay.portal.NoSuchListTypeException;
 import com.liferay.portal.SystemException;
-import com.liferay.portal.kernel.bean.InitializingBean;
 import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 import com.liferay.portal.kernel.dao.orm.FinderCacheUtil;
 import com.liferay.portal.kernel.dao.orm.Query;
@@ -57,7 +56,7 @@ import java.util.List;
  *
  */
 public class ListTypePersistenceImpl extends BasePersistenceImpl
-	implements ListTypePersistence, InitializingBean {
+	implements ListTypePersistence {
 	public ListType create(int listTypeId) {
 		ListType listType = new ListTypeImpl();
 

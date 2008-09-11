@@ -27,8 +27,6 @@ import com.liferay.counter.service.CounterService;
 
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
-import com.liferay.portal.kernel.bean.InitializingBean;
-import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
 import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 import com.liferay.portal.service.UserLocalService;
 import com.liferay.portal.service.UserService;
@@ -42,6 +40,8 @@ import com.liferay.portlet.tasks.model.TasksReview;
 import com.liferay.portlet.tasks.service.TasksProposalLocalService;
 import com.liferay.portlet.tasks.service.TasksProposalService;
 import com.liferay.portlet.tasks.service.TasksReviewLocalService;
+import com.liferay.portlet.tasks.service.TasksReviewLocalService;
+import com.liferay.portlet.tasks.service.TasksReviewService;
 import com.liferay.portlet.tasks.service.persistence.TasksProposalFinder;
 import com.liferay.portlet.tasks.service.persistence.TasksProposalPersistence;
 import com.liferay.portlet.tasks.service.persistence.TasksReviewPersistence;
@@ -55,7 +55,7 @@ import java.util.List;
  *
  */
 public abstract class TasksReviewLocalServiceBaseImpl
-	implements TasksReviewLocalService, InitializingBean {
+	implements TasksReviewLocalService {
 	public TasksReview addTasksReview(TasksReview tasksReview)
 		throws SystemException {
 		tasksReview.setNew(true);
@@ -107,6 +107,23 @@ public abstract class TasksReviewLocalServiceBaseImpl
 		tasksReview.setNew(false);
 
 		return tasksReviewPersistence.update(tasksReview, true);
+	}
+
+	public TasksReviewLocalService getTasksReviewLocalService() {
+		return tasksReviewLocalService;
+	}
+
+	public void setTasksReviewLocalService(
+		TasksReviewLocalService tasksReviewLocalService) {
+		this.tasksReviewLocalService = tasksReviewLocalService;
+	}
+
+	public TasksReviewService getTasksReviewService() {
+		return tasksReviewService;
+	}
+
+	public void setTasksReviewService(TasksReviewService tasksReviewService) {
+		this.tasksReviewService = tasksReviewService;
 	}
 
 	public TasksReviewPersistence getTasksReviewPersistence() {
@@ -228,78 +245,8 @@ public abstract class TasksReviewLocalServiceBaseImpl
 		this.socialActivityFinder = socialActivityFinder;
 	}
 
-	public void afterPropertiesSet() {
-		if (tasksReviewPersistence == null) {
-			tasksReviewPersistence = (TasksReviewPersistence)PortalBeanLocatorUtil.locate(TasksReviewPersistence.class.getName() +
-					".impl");
-		}
-
-		if (tasksProposalLocalService == null) {
-			tasksProposalLocalService = (TasksProposalLocalService)PortalBeanLocatorUtil.locate(TasksProposalLocalService.class.getName() +
-					".impl");
-		}
-
-		if (tasksProposalService == null) {
-			tasksProposalService = (TasksProposalService)PortalBeanLocatorUtil.locate(TasksProposalService.class.getName() +
-					".impl");
-		}
-
-		if (tasksProposalPersistence == null) {
-			tasksProposalPersistence = (TasksProposalPersistence)PortalBeanLocatorUtil.locate(TasksProposalPersistence.class.getName() +
-					".impl");
-		}
-
-		if (tasksProposalFinder == null) {
-			tasksProposalFinder = (TasksProposalFinder)PortalBeanLocatorUtil.locate(TasksProposalFinder.class.getName() +
-					".impl");
-		}
-
-		if (counterLocalService == null) {
-			counterLocalService = (CounterLocalService)PortalBeanLocatorUtil.locate(CounterLocalService.class.getName() +
-					".impl");
-		}
-
-		if (counterService == null) {
-			counterService = (CounterService)PortalBeanLocatorUtil.locate(CounterService.class.getName() +
-					".impl");
-		}
-
-		if (userLocalService == null) {
-			userLocalService = (UserLocalService)PortalBeanLocatorUtil.locate(UserLocalService.class.getName() +
-					".impl");
-		}
-
-		if (userService == null) {
-			userService = (UserService)PortalBeanLocatorUtil.locate(UserService.class.getName() +
-					".impl");
-		}
-
-		if (userPersistence == null) {
-			userPersistence = (UserPersistence)PortalBeanLocatorUtil.locate(UserPersistence.class.getName() +
-					".impl");
-		}
-
-		if (userFinder == null) {
-			userFinder = (UserFinder)PortalBeanLocatorUtil.locate(UserFinder.class.getName() +
-					".impl");
-		}
-
-		if (socialActivityLocalService == null) {
-			socialActivityLocalService = (SocialActivityLocalService)PortalBeanLocatorUtil.locate(SocialActivityLocalService.class.getName() +
-					".impl");
-		}
-
-		if (socialActivityPersistence == null) {
-			socialActivityPersistence = (SocialActivityPersistence)PortalBeanLocatorUtil.locate(SocialActivityPersistence.class.getName() +
-					".impl");
-		}
-
-		if (socialActivityFinder == null) {
-			socialActivityFinder = (SocialActivityFinder)PortalBeanLocatorUtil.locate(SocialActivityFinder.class.getName() +
-					".impl");
-		}
-	}
-
+	protected TasksReviewLocalService tasksReviewLocalService;
+	protected TasksReviewService tasksReviewService;
 	protected TasksReviewPersistence tasksReviewPersistence;
 	protected TasksProposalLocalService tasksProposalLocalService;
 	protected TasksProposalService tasksProposalService;

@@ -25,8 +25,6 @@ package com.liferay.portlet.softwarecatalog.service.base;
 import com.liferay.counter.service.CounterLocalService;
 import com.liferay.counter.service.CounterService;
 
-import com.liferay.portal.kernel.bean.InitializingBean;
-import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
 import com.liferay.portal.service.ResourceLocalService;
 import com.liferay.portal.service.ResourceService;
 import com.liferay.portal.service.UserLocalService;
@@ -38,6 +36,7 @@ import com.liferay.portal.service.persistence.UserFinder;
 import com.liferay.portal.service.persistence.UserPersistence;
 
 import com.liferay.portlet.softwarecatalog.service.SCFrameworkVersionLocalService;
+import com.liferay.portlet.softwarecatalog.service.SCFrameworkVersionService;
 import com.liferay.portlet.softwarecatalog.service.SCFrameworkVersionService;
 import com.liferay.portlet.softwarecatalog.service.SCLicenseLocalService;
 import com.liferay.portlet.softwarecatalog.service.SCLicenseService;
@@ -59,7 +58,7 @@ import com.liferay.portlet.softwarecatalog.service.persistence.SCProductVersionP
  *
  */
 public abstract class SCFrameworkVersionServiceBaseImpl extends PrincipalBean
-	implements SCFrameworkVersionService, InitializingBean {
+	implements SCFrameworkVersionService {
 	public SCLicenseLocalService getSCLicenseLocalService() {
 		return scLicenseLocalService;
 	}
@@ -93,6 +92,15 @@ public abstract class SCFrameworkVersionServiceBaseImpl extends PrincipalBean
 	public void setSCFrameworkVersionLocalService(
 		SCFrameworkVersionLocalService scFrameworkVersionLocalService) {
 		this.scFrameworkVersionLocalService = scFrameworkVersionLocalService;
+	}
+
+	public SCFrameworkVersionService getSCFrameworkVersionService() {
+		return scFrameworkVersionService;
+	}
+
+	public void setSCFrameworkVersionService(
+		SCFrameworkVersionService scFrameworkVersionService) {
+		this.scFrameworkVersionService = scFrameworkVersionService;
 	}
 
 	public SCFrameworkVersionPersistence getSCFrameworkVersionPersistence() {
@@ -257,127 +265,11 @@ public abstract class SCFrameworkVersionServiceBaseImpl extends PrincipalBean
 		this.userFinder = userFinder;
 	}
 
-	public void afterPropertiesSet() {
-		if (scLicenseLocalService == null) {
-			scLicenseLocalService = (SCLicenseLocalService)PortalBeanLocatorUtil.locate(SCLicenseLocalService.class.getName() +
-					".impl");
-		}
-
-		if (scLicenseService == null) {
-			scLicenseService = (SCLicenseService)PortalBeanLocatorUtil.locate(SCLicenseService.class.getName() +
-					".impl");
-		}
-
-		if (scLicensePersistence == null) {
-			scLicensePersistence = (SCLicensePersistence)PortalBeanLocatorUtil.locate(SCLicensePersistence.class.getName() +
-					".impl");
-		}
-
-		if (scFrameworkVersionLocalService == null) {
-			scFrameworkVersionLocalService = (SCFrameworkVersionLocalService)PortalBeanLocatorUtil.locate(SCFrameworkVersionLocalService.class.getName() +
-					".impl");
-		}
-
-		if (scFrameworkVersionPersistence == null) {
-			scFrameworkVersionPersistence = (SCFrameworkVersionPersistence)PortalBeanLocatorUtil.locate(SCFrameworkVersionPersistence.class.getName() +
-					".impl");
-		}
-
-		if (scProductEntryLocalService == null) {
-			scProductEntryLocalService = (SCProductEntryLocalService)PortalBeanLocatorUtil.locate(SCProductEntryLocalService.class.getName() +
-					".impl");
-		}
-
-		if (scProductEntryService == null) {
-			scProductEntryService = (SCProductEntryService)PortalBeanLocatorUtil.locate(SCProductEntryService.class.getName() +
-					".impl");
-		}
-
-		if (scProductEntryPersistence == null) {
-			scProductEntryPersistence = (SCProductEntryPersistence)PortalBeanLocatorUtil.locate(SCProductEntryPersistence.class.getName() +
-					".impl");
-		}
-
-		if (scProductScreenshotLocalService == null) {
-			scProductScreenshotLocalService = (SCProductScreenshotLocalService)PortalBeanLocatorUtil.locate(SCProductScreenshotLocalService.class.getName() +
-					".impl");
-		}
-
-		if (scProductScreenshotPersistence == null) {
-			scProductScreenshotPersistence = (SCProductScreenshotPersistence)PortalBeanLocatorUtil.locate(SCProductScreenshotPersistence.class.getName() +
-					".impl");
-		}
-
-		if (scProductVersionLocalService == null) {
-			scProductVersionLocalService = (SCProductVersionLocalService)PortalBeanLocatorUtil.locate(SCProductVersionLocalService.class.getName() +
-					".impl");
-		}
-
-		if (scProductVersionService == null) {
-			scProductVersionService = (SCProductVersionService)PortalBeanLocatorUtil.locate(SCProductVersionService.class.getName() +
-					".impl");
-		}
-
-		if (scProductVersionPersistence == null) {
-			scProductVersionPersistence = (SCProductVersionPersistence)PortalBeanLocatorUtil.locate(SCProductVersionPersistence.class.getName() +
-					".impl");
-		}
-
-		if (counterLocalService == null) {
-			counterLocalService = (CounterLocalService)PortalBeanLocatorUtil.locate(CounterLocalService.class.getName() +
-					".impl");
-		}
-
-		if (counterService == null) {
-			counterService = (CounterService)PortalBeanLocatorUtil.locate(CounterService.class.getName() +
-					".impl");
-		}
-
-		if (resourceLocalService == null) {
-			resourceLocalService = (ResourceLocalService)PortalBeanLocatorUtil.locate(ResourceLocalService.class.getName() +
-					".impl");
-		}
-
-		if (resourceService == null) {
-			resourceService = (ResourceService)PortalBeanLocatorUtil.locate(ResourceService.class.getName() +
-					".impl");
-		}
-
-		if (resourcePersistence == null) {
-			resourcePersistence = (ResourcePersistence)PortalBeanLocatorUtil.locate(ResourcePersistence.class.getName() +
-					".impl");
-		}
-
-		if (resourceFinder == null) {
-			resourceFinder = (ResourceFinder)PortalBeanLocatorUtil.locate(ResourceFinder.class.getName() +
-					".impl");
-		}
-
-		if (userLocalService == null) {
-			userLocalService = (UserLocalService)PortalBeanLocatorUtil.locate(UserLocalService.class.getName() +
-					".impl");
-		}
-
-		if (userService == null) {
-			userService = (UserService)PortalBeanLocatorUtil.locate(UserService.class.getName() +
-					".impl");
-		}
-
-		if (userPersistence == null) {
-			userPersistence = (UserPersistence)PortalBeanLocatorUtil.locate(UserPersistence.class.getName() +
-					".impl");
-		}
-
-		if (userFinder == null) {
-			userFinder = (UserFinder)PortalBeanLocatorUtil.locate(UserFinder.class.getName() +
-					".impl");
-		}
-	}
-
 	protected SCLicenseLocalService scLicenseLocalService;
 	protected SCLicenseService scLicenseService;
 	protected SCLicensePersistence scLicensePersistence;
 	protected SCFrameworkVersionLocalService scFrameworkVersionLocalService;
+	protected SCFrameworkVersionService scFrameworkVersionService;
 	protected SCFrameworkVersionPersistence scFrameworkVersionPersistence;
 	protected SCProductEntryLocalService scProductEntryLocalService;
 	protected SCProductEntryService scProductEntryService;

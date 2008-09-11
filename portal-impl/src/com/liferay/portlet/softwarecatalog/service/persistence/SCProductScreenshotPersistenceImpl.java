@@ -23,7 +23,6 @@
 package com.liferay.portlet.softwarecatalog.service.persistence;
 
 import com.liferay.portal.SystemException;
-import com.liferay.portal.kernel.bean.InitializingBean;
 import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 import com.liferay.portal.kernel.dao.orm.FinderCacheUtil;
 import com.liferay.portal.kernel.dao.orm.Query;
@@ -58,7 +57,7 @@ import java.util.List;
  *
  */
 public class SCProductScreenshotPersistenceImpl extends BasePersistenceImpl
-	implements SCProductScreenshotPersistence, InitializingBean {
+	implements SCProductScreenshotPersistence {
 	public SCProductScreenshot create(long productScreenshotId) {
 		SCProductScreenshot scProductScreenshot = new SCProductScreenshotImpl();
 

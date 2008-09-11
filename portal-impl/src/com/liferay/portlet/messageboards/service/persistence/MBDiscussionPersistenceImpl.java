@@ -23,7 +23,6 @@
 package com.liferay.portlet.messageboards.service.persistence;
 
 import com.liferay.portal.SystemException;
-import com.liferay.portal.kernel.bean.InitializingBean;
 import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 import com.liferay.portal.kernel.dao.orm.FinderCacheUtil;
 import com.liferay.portal.kernel.dao.orm.Query;
@@ -58,7 +57,7 @@ import java.util.List;
  *
  */
 public class MBDiscussionPersistenceImpl extends BasePersistenceImpl
-	implements MBDiscussionPersistence, InitializingBean {
+	implements MBDiscussionPersistence {
 	public MBDiscussion create(long discussionId) {
 		MBDiscussion mbDiscussion = new MBDiscussionImpl();
 

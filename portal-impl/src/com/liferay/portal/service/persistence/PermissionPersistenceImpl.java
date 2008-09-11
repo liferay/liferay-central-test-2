@@ -24,7 +24,6 @@ package com.liferay.portal.service.persistence;
 
 import com.liferay.portal.NoSuchPermissionException;
 import com.liferay.portal.SystemException;
-import com.liferay.portal.kernel.bean.InitializingBean;
 import com.liferay.portal.kernel.dao.jdbc.MappingSqlQuery;
 import com.liferay.portal.kernel.dao.jdbc.MappingSqlQueryFactoryUtil;
 import com.liferay.portal.kernel.dao.jdbc.RowMapper;
@@ -66,7 +65,7 @@ import java.util.List;
  *
  */
 public class PermissionPersistenceImpl extends BasePersistenceImpl
-	implements PermissionPersistence, InitializingBean {
+	implements PermissionPersistence {
 	public Permission create(long permissionId) {
 		Permission permission = new PermissionImpl();
 

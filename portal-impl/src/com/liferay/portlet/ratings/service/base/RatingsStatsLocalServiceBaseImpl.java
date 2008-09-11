@@ -27,13 +27,12 @@ import com.liferay.counter.service.CounterService;
 
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
-import com.liferay.portal.kernel.bean.InitializingBean;
-import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
 import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 
 import com.liferay.portlet.ratings.model.RatingsStats;
 import com.liferay.portlet.ratings.service.RatingsEntryLocalService;
 import com.liferay.portlet.ratings.service.RatingsEntryService;
+import com.liferay.portlet.ratings.service.RatingsStatsLocalService;
 import com.liferay.portlet.ratings.service.RatingsStatsLocalService;
 import com.liferay.portlet.ratings.service.persistence.RatingsEntryPersistence;
 import com.liferay.portlet.ratings.service.persistence.RatingsStatsPersistence;
@@ -47,7 +46,7 @@ import java.util.List;
  *
  */
 public abstract class RatingsStatsLocalServiceBaseImpl
-	implements RatingsStatsLocalService, InitializingBean {
+	implements RatingsStatsLocalService {
 	public RatingsStats addRatingsStats(RatingsStats ratingsStats)
 		throws SystemException {
 		ratingsStats.setNew(true);
@@ -127,6 +126,15 @@ public abstract class RatingsStatsLocalServiceBaseImpl
 		this.ratingsEntryPersistence = ratingsEntryPersistence;
 	}
 
+	public RatingsStatsLocalService getRatingsStatsLocalService() {
+		return ratingsStatsLocalService;
+	}
+
+	public void setRatingsStatsLocalService(
+		RatingsStatsLocalService ratingsStatsLocalService) {
+		this.ratingsStatsLocalService = ratingsStatsLocalService;
+	}
+
 	public RatingsStatsPersistence getRatingsStatsPersistence() {
 		return ratingsStatsPersistence;
 	}
@@ -152,41 +160,10 @@ public abstract class RatingsStatsLocalServiceBaseImpl
 		this.counterService = counterService;
 	}
 
-	public void afterPropertiesSet() {
-		if (ratingsEntryLocalService == null) {
-			ratingsEntryLocalService = (RatingsEntryLocalService)PortalBeanLocatorUtil.locate(RatingsEntryLocalService.class.getName() +
-					".impl");
-		}
-
-		if (ratingsEntryService == null) {
-			ratingsEntryService = (RatingsEntryService)PortalBeanLocatorUtil.locate(RatingsEntryService.class.getName() +
-					".impl");
-		}
-
-		if (ratingsEntryPersistence == null) {
-			ratingsEntryPersistence = (RatingsEntryPersistence)PortalBeanLocatorUtil.locate(RatingsEntryPersistence.class.getName() +
-					".impl");
-		}
-
-		if (ratingsStatsPersistence == null) {
-			ratingsStatsPersistence = (RatingsStatsPersistence)PortalBeanLocatorUtil.locate(RatingsStatsPersistence.class.getName() +
-					".impl");
-		}
-
-		if (counterLocalService == null) {
-			counterLocalService = (CounterLocalService)PortalBeanLocatorUtil.locate(CounterLocalService.class.getName() +
-					".impl");
-		}
-
-		if (counterService == null) {
-			counterService = (CounterService)PortalBeanLocatorUtil.locate(CounterService.class.getName() +
-					".impl");
-		}
-	}
-
 	protected RatingsEntryLocalService ratingsEntryLocalService;
 	protected RatingsEntryService ratingsEntryService;
 	protected RatingsEntryPersistence ratingsEntryPersistence;
+	protected RatingsStatsLocalService ratingsStatsLocalService;
 	protected RatingsStatsPersistence ratingsStatsPersistence;
 	protected CounterLocalService counterLocalService;
 	protected CounterService counterService;

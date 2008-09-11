@@ -27,8 +27,6 @@ import com.liferay.counter.service.CounterService;
 
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
-import com.liferay.portal.kernel.bean.InitializingBean;
-import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
 import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 import com.liferay.portal.service.ImageLocalService;
 import com.liferay.portal.service.LayoutLocalService;
@@ -47,6 +45,8 @@ import com.liferay.portal.service.persistence.UserPersistence;
 
 import com.liferay.portlet.imagegallery.model.IGFolder;
 import com.liferay.portlet.imagegallery.service.IGFolderLocalService;
+import com.liferay.portlet.imagegallery.service.IGFolderLocalService;
+import com.liferay.portlet.imagegallery.service.IGFolderService;
 import com.liferay.portlet.imagegallery.service.IGImageLocalService;
 import com.liferay.portlet.imagegallery.service.IGImageService;
 import com.liferay.portlet.imagegallery.service.persistence.IGFolderPersistence;
@@ -66,7 +66,7 @@ import java.util.List;
  *
  */
 public abstract class IGFolderLocalServiceBaseImpl
-	implements IGFolderLocalService, InitializingBean {
+	implements IGFolderLocalService {
 	public IGFolder addIGFolder(IGFolder igFolder) throws SystemException {
 		igFolder.setNew(true);
 
@@ -114,6 +114,23 @@ public abstract class IGFolderLocalServiceBaseImpl
 		igFolder.setNew(false);
 
 		return igFolderPersistence.update(igFolder, true);
+	}
+
+	public IGFolderLocalService getIGFolderLocalService() {
+		return igFolderLocalService;
+	}
+
+	public void setIGFolderLocalService(
+		IGFolderLocalService igFolderLocalService) {
+		this.igFolderLocalService = igFolderLocalService;
+	}
+
+	public IGFolderService getIGFolderService() {
+		return igFolderService;
+	}
+
+	public void setIGFolderService(IGFolderService igFolderService) {
+		this.igFolderService = igFolderService;
 	}
 
 	public IGFolderPersistence getIGFolderPersistence() {
@@ -319,133 +336,8 @@ public abstract class IGFolderLocalServiceBaseImpl
 		this.tagsEntryFinder = tagsEntryFinder;
 	}
 
-	public void afterPropertiesSet() {
-		if (igFolderPersistence == null) {
-			igFolderPersistence = (IGFolderPersistence)PortalBeanLocatorUtil.locate(IGFolderPersistence.class.getName() +
-					".impl");
-		}
-
-		if (igImageLocalService == null) {
-			igImageLocalService = (IGImageLocalService)PortalBeanLocatorUtil.locate(IGImageLocalService.class.getName() +
-					".impl");
-		}
-
-		if (igImageService == null) {
-			igImageService = (IGImageService)PortalBeanLocatorUtil.locate(IGImageService.class.getName() +
-					".impl");
-		}
-
-		if (igImagePersistence == null) {
-			igImagePersistence = (IGImagePersistence)PortalBeanLocatorUtil.locate(IGImagePersistence.class.getName() +
-					".impl");
-		}
-
-		if (igImageFinder == null) {
-			igImageFinder = (IGImageFinder)PortalBeanLocatorUtil.locate(IGImageFinder.class.getName() +
-					".impl");
-		}
-
-		if (counterLocalService == null) {
-			counterLocalService = (CounterLocalService)PortalBeanLocatorUtil.locate(CounterLocalService.class.getName() +
-					".impl");
-		}
-
-		if (counterService == null) {
-			counterService = (CounterService)PortalBeanLocatorUtil.locate(CounterService.class.getName() +
-					".impl");
-		}
-
-		if (imageLocalService == null) {
-			imageLocalService = (ImageLocalService)PortalBeanLocatorUtil.locate(ImageLocalService.class.getName() +
-					".impl");
-		}
-
-		if (imagePersistence == null) {
-			imagePersistence = (ImagePersistence)PortalBeanLocatorUtil.locate(ImagePersistence.class.getName() +
-					".impl");
-		}
-
-		if (layoutLocalService == null) {
-			layoutLocalService = (LayoutLocalService)PortalBeanLocatorUtil.locate(LayoutLocalService.class.getName() +
-					".impl");
-		}
-
-		if (layoutService == null) {
-			layoutService = (LayoutService)PortalBeanLocatorUtil.locate(LayoutService.class.getName() +
-					".impl");
-		}
-
-		if (layoutPersistence == null) {
-			layoutPersistence = (LayoutPersistence)PortalBeanLocatorUtil.locate(LayoutPersistence.class.getName() +
-					".impl");
-		}
-
-		if (layoutFinder == null) {
-			layoutFinder = (LayoutFinder)PortalBeanLocatorUtil.locate(LayoutFinder.class.getName() +
-					".impl");
-		}
-
-		if (resourceLocalService == null) {
-			resourceLocalService = (ResourceLocalService)PortalBeanLocatorUtil.locate(ResourceLocalService.class.getName() +
-					".impl");
-		}
-
-		if (resourceService == null) {
-			resourceService = (ResourceService)PortalBeanLocatorUtil.locate(ResourceService.class.getName() +
-					".impl");
-		}
-
-		if (resourcePersistence == null) {
-			resourcePersistence = (ResourcePersistence)PortalBeanLocatorUtil.locate(ResourcePersistence.class.getName() +
-					".impl");
-		}
-
-		if (resourceFinder == null) {
-			resourceFinder = (ResourceFinder)PortalBeanLocatorUtil.locate(ResourceFinder.class.getName() +
-					".impl");
-		}
-
-		if (userLocalService == null) {
-			userLocalService = (UserLocalService)PortalBeanLocatorUtil.locate(UserLocalService.class.getName() +
-					".impl");
-		}
-
-		if (userService == null) {
-			userService = (UserService)PortalBeanLocatorUtil.locate(UserService.class.getName() +
-					".impl");
-		}
-
-		if (userPersistence == null) {
-			userPersistence = (UserPersistence)PortalBeanLocatorUtil.locate(UserPersistence.class.getName() +
-					".impl");
-		}
-
-		if (userFinder == null) {
-			userFinder = (UserFinder)PortalBeanLocatorUtil.locate(UserFinder.class.getName() +
-					".impl");
-		}
-
-		if (tagsEntryLocalService == null) {
-			tagsEntryLocalService = (TagsEntryLocalService)PortalBeanLocatorUtil.locate(TagsEntryLocalService.class.getName() +
-					".impl");
-		}
-
-		if (tagsEntryService == null) {
-			tagsEntryService = (TagsEntryService)PortalBeanLocatorUtil.locate(TagsEntryService.class.getName() +
-					".impl");
-		}
-
-		if (tagsEntryPersistence == null) {
-			tagsEntryPersistence = (TagsEntryPersistence)PortalBeanLocatorUtil.locate(TagsEntryPersistence.class.getName() +
-					".impl");
-		}
-
-		if (tagsEntryFinder == null) {
-			tagsEntryFinder = (TagsEntryFinder)PortalBeanLocatorUtil.locate(TagsEntryFinder.class.getName() +
-					".impl");
-		}
-	}
-
+	protected IGFolderLocalService igFolderLocalService;
+	protected IGFolderService igFolderService;
 	protected IGFolderPersistence igFolderPersistence;
 	protected IGImageLocalService igImageLocalService;
 	protected IGImageService igImageService;

@@ -24,7 +24,6 @@ package com.liferay.portal.service.persistence;
 
 import com.liferay.portal.NoSuchWebDAVPropsException;
 import com.liferay.portal.SystemException;
-import com.liferay.portal.kernel.bean.InitializingBean;
 import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 import com.liferay.portal.kernel.dao.orm.FinderCacheUtil;
 import com.liferay.portal.kernel.dao.orm.Query;
@@ -57,7 +56,7 @@ import java.util.List;
  *
  */
 public class WebDAVPropsPersistenceImpl extends BasePersistenceImpl
-	implements WebDAVPropsPersistence, InitializingBean {
+	implements WebDAVPropsPersistence {
 	public WebDAVProps create(long webDavPropsId) {
 		WebDAVProps webDAVProps = new WebDAVPropsImpl();
 

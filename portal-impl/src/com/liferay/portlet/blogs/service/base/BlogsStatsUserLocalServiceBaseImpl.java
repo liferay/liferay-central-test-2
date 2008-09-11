@@ -27,8 +27,6 @@ import com.liferay.counter.service.CounterService;
 
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
-import com.liferay.portal.kernel.bean.InitializingBean;
-import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
 import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 import com.liferay.portal.service.GroupLocalService;
 import com.liferay.portal.service.GroupService;
@@ -38,6 +36,7 @@ import com.liferay.portal.service.persistence.GroupPersistence;
 import com.liferay.portlet.blogs.model.BlogsStatsUser;
 import com.liferay.portlet.blogs.service.BlogsEntryLocalService;
 import com.liferay.portlet.blogs.service.BlogsEntryService;
+import com.liferay.portlet.blogs.service.BlogsStatsUserLocalService;
 import com.liferay.portlet.blogs.service.BlogsStatsUserLocalService;
 import com.liferay.portlet.blogs.service.persistence.BlogsEntryFinder;
 import com.liferay.portlet.blogs.service.persistence.BlogsEntryPersistence;
@@ -53,7 +52,7 @@ import java.util.List;
  *
  */
 public abstract class BlogsStatsUserLocalServiceBaseImpl
-	implements BlogsStatsUserLocalService, InitializingBean {
+	implements BlogsStatsUserLocalService {
 	public BlogsStatsUser addBlogsStatsUser(BlogsStatsUser blogsStatsUser)
 		throws SystemException {
 		blogsStatsUser.setNew(true);
@@ -141,6 +140,15 @@ public abstract class BlogsStatsUserLocalServiceBaseImpl
 		this.blogsEntryFinder = blogsEntryFinder;
 	}
 
+	public BlogsStatsUserLocalService getBlogsStatsUserLocalService() {
+		return blogsStatsUserLocalService;
+	}
+
+	public void setBlogsStatsUserLocalService(
+		BlogsStatsUserLocalService blogsStatsUserLocalService) {
+		this.blogsStatsUserLocalService = blogsStatsUserLocalService;
+	}
+
 	public BlogsStatsUserPersistence getBlogsStatsUserPersistence() {
 		return blogsStatsUserPersistence;
 	}
@@ -207,72 +215,11 @@ public abstract class BlogsStatsUserLocalServiceBaseImpl
 		this.groupFinder = groupFinder;
 	}
 
-	public void afterPropertiesSet() {
-		if (blogsEntryLocalService == null) {
-			blogsEntryLocalService = (BlogsEntryLocalService)PortalBeanLocatorUtil.locate(BlogsEntryLocalService.class.getName() +
-					".impl");
-		}
-
-		if (blogsEntryService == null) {
-			blogsEntryService = (BlogsEntryService)PortalBeanLocatorUtil.locate(BlogsEntryService.class.getName() +
-					".impl");
-		}
-
-		if (blogsEntryPersistence == null) {
-			blogsEntryPersistence = (BlogsEntryPersistence)PortalBeanLocatorUtil.locate(BlogsEntryPersistence.class.getName() +
-					".impl");
-		}
-
-		if (blogsEntryFinder == null) {
-			blogsEntryFinder = (BlogsEntryFinder)PortalBeanLocatorUtil.locate(BlogsEntryFinder.class.getName() +
-					".impl");
-		}
-
-		if (blogsStatsUserPersistence == null) {
-			blogsStatsUserPersistence = (BlogsStatsUserPersistence)PortalBeanLocatorUtil.locate(BlogsStatsUserPersistence.class.getName() +
-					".impl");
-		}
-
-		if (blogsStatsUserFinder == null) {
-			blogsStatsUserFinder = (BlogsStatsUserFinder)PortalBeanLocatorUtil.locate(BlogsStatsUserFinder.class.getName() +
-					".impl");
-		}
-
-		if (counterLocalService == null) {
-			counterLocalService = (CounterLocalService)PortalBeanLocatorUtil.locate(CounterLocalService.class.getName() +
-					".impl");
-		}
-
-		if (counterService == null) {
-			counterService = (CounterService)PortalBeanLocatorUtil.locate(CounterService.class.getName() +
-					".impl");
-		}
-
-		if (groupLocalService == null) {
-			groupLocalService = (GroupLocalService)PortalBeanLocatorUtil.locate(GroupLocalService.class.getName() +
-					".impl");
-		}
-
-		if (groupService == null) {
-			groupService = (GroupService)PortalBeanLocatorUtil.locate(GroupService.class.getName() +
-					".impl");
-		}
-
-		if (groupPersistence == null) {
-			groupPersistence = (GroupPersistence)PortalBeanLocatorUtil.locate(GroupPersistence.class.getName() +
-					".impl");
-		}
-
-		if (groupFinder == null) {
-			groupFinder = (GroupFinder)PortalBeanLocatorUtil.locate(GroupFinder.class.getName() +
-					".impl");
-		}
-	}
-
 	protected BlogsEntryLocalService blogsEntryLocalService;
 	protected BlogsEntryService blogsEntryService;
 	protected BlogsEntryPersistence blogsEntryPersistence;
 	protected BlogsEntryFinder blogsEntryFinder;
+	protected BlogsStatsUserLocalService blogsStatsUserLocalService;
 	protected BlogsStatsUserPersistence blogsStatsUserPersistence;
 	protected BlogsStatsUserFinder blogsStatsUserFinder;
 	protected CounterLocalService counterLocalService;

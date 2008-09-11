@@ -27,8 +27,6 @@ import com.liferay.counter.service.CounterService;
 
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
-import com.liferay.portal.kernel.bean.InitializingBean;
-import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
 import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 
 import com.liferay.portlet.messageboards.model.MBStatsUser;
@@ -41,6 +39,7 @@ import com.liferay.portlet.messageboards.service.MBMessageFlagLocalService;
 import com.liferay.portlet.messageboards.service.MBMessageFlagService;
 import com.liferay.portlet.messageboards.service.MBMessageLocalService;
 import com.liferay.portlet.messageboards.service.MBMessageService;
+import com.liferay.portlet.messageboards.service.MBStatsUserLocalService;
 import com.liferay.portlet.messageboards.service.MBStatsUserLocalService;
 import com.liferay.portlet.messageboards.service.MBThreadLocalService;
 import com.liferay.portlet.messageboards.service.MBThreadService;
@@ -66,7 +65,7 @@ import java.util.List;
  *
  */
 public abstract class MBStatsUserLocalServiceBaseImpl
-	implements MBStatsUserLocalService, InitializingBean {
+	implements MBStatsUserLocalService {
 	public MBStatsUser addMBStatsUser(MBStatsUser mbStatsUser)
 		throws SystemException {
 		mbStatsUser.setNew(true);
@@ -274,6 +273,15 @@ public abstract class MBStatsUserLocalServiceBaseImpl
 		this.mbMessageFlagFinder = mbMessageFlagFinder;
 	}
 
+	public MBStatsUserLocalService getMBStatsUserLocalService() {
+		return mbStatsUserLocalService;
+	}
+
+	public void setMBStatsUserLocalService(
+		MBStatsUserLocalService mbStatsUserLocalService) {
+		this.mbStatsUserLocalService = mbStatsUserLocalService;
+	}
+
 	public MBStatsUserPersistence getMBStatsUserPersistence() {
 		return mbStatsUserPersistence;
 	}
@@ -332,133 +340,6 @@ public abstract class MBStatsUserLocalServiceBaseImpl
 		this.counterService = counterService;
 	}
 
-	public void afterPropertiesSet() {
-		if (mbBanLocalService == null) {
-			mbBanLocalService = (MBBanLocalService)PortalBeanLocatorUtil.locate(MBBanLocalService.class.getName() +
-					".impl");
-		}
-
-		if (mbBanService == null) {
-			mbBanService = (MBBanService)PortalBeanLocatorUtil.locate(MBBanService.class.getName() +
-					".impl");
-		}
-
-		if (mbBanPersistence == null) {
-			mbBanPersistence = (MBBanPersistence)PortalBeanLocatorUtil.locate(MBBanPersistence.class.getName() +
-					".impl");
-		}
-
-		if (mbCategoryLocalService == null) {
-			mbCategoryLocalService = (MBCategoryLocalService)PortalBeanLocatorUtil.locate(MBCategoryLocalService.class.getName() +
-					".impl");
-		}
-
-		if (mbCategoryService == null) {
-			mbCategoryService = (MBCategoryService)PortalBeanLocatorUtil.locate(MBCategoryService.class.getName() +
-					".impl");
-		}
-
-		if (mbCategoryPersistence == null) {
-			mbCategoryPersistence = (MBCategoryPersistence)PortalBeanLocatorUtil.locate(MBCategoryPersistence.class.getName() +
-					".impl");
-		}
-
-		if (mbCategoryFinder == null) {
-			mbCategoryFinder = (MBCategoryFinder)PortalBeanLocatorUtil.locate(MBCategoryFinder.class.getName() +
-					".impl");
-		}
-
-		if (mbDiscussionPersistence == null) {
-			mbDiscussionPersistence = (MBDiscussionPersistence)PortalBeanLocatorUtil.locate(MBDiscussionPersistence.class.getName() +
-					".impl");
-		}
-
-		if (mbMailingListLocalService == null) {
-			mbMailingListLocalService = (MBMailingListLocalService)PortalBeanLocatorUtil.locate(MBMailingListLocalService.class.getName() +
-					".impl");
-		}
-
-		if (mbMailingListPersistence == null) {
-			mbMailingListPersistence = (MBMailingListPersistence)PortalBeanLocatorUtil.locate(MBMailingListPersistence.class.getName() +
-					".impl");
-		}
-
-		if (mbMessageLocalService == null) {
-			mbMessageLocalService = (MBMessageLocalService)PortalBeanLocatorUtil.locate(MBMessageLocalService.class.getName() +
-					".impl");
-		}
-
-		if (mbMessageService == null) {
-			mbMessageService = (MBMessageService)PortalBeanLocatorUtil.locate(MBMessageService.class.getName() +
-					".impl");
-		}
-
-		if (mbMessagePersistence == null) {
-			mbMessagePersistence = (MBMessagePersistence)PortalBeanLocatorUtil.locate(MBMessagePersistence.class.getName() +
-					".impl");
-		}
-
-		if (mbMessageFinder == null) {
-			mbMessageFinder = (MBMessageFinder)PortalBeanLocatorUtil.locate(MBMessageFinder.class.getName() +
-					".impl");
-		}
-
-		if (mbMessageFlagLocalService == null) {
-			mbMessageFlagLocalService = (MBMessageFlagLocalService)PortalBeanLocatorUtil.locate(MBMessageFlagLocalService.class.getName() +
-					".impl");
-		}
-
-		if (mbMessageFlagService == null) {
-			mbMessageFlagService = (MBMessageFlagService)PortalBeanLocatorUtil.locate(MBMessageFlagService.class.getName() +
-					".impl");
-		}
-
-		if (mbMessageFlagPersistence == null) {
-			mbMessageFlagPersistence = (MBMessageFlagPersistence)PortalBeanLocatorUtil.locate(MBMessageFlagPersistence.class.getName() +
-					".impl");
-		}
-
-		if (mbMessageFlagFinder == null) {
-			mbMessageFlagFinder = (MBMessageFlagFinder)PortalBeanLocatorUtil.locate(MBMessageFlagFinder.class.getName() +
-					".impl");
-		}
-
-		if (mbStatsUserPersistence == null) {
-			mbStatsUserPersistence = (MBStatsUserPersistence)PortalBeanLocatorUtil.locate(MBStatsUserPersistence.class.getName() +
-					".impl");
-		}
-
-		if (mbThreadLocalService == null) {
-			mbThreadLocalService = (MBThreadLocalService)PortalBeanLocatorUtil.locate(MBThreadLocalService.class.getName() +
-					".impl");
-		}
-
-		if (mbThreadService == null) {
-			mbThreadService = (MBThreadService)PortalBeanLocatorUtil.locate(MBThreadService.class.getName() +
-					".impl");
-		}
-
-		if (mbThreadPersistence == null) {
-			mbThreadPersistence = (MBThreadPersistence)PortalBeanLocatorUtil.locate(MBThreadPersistence.class.getName() +
-					".impl");
-		}
-
-		if (mbThreadFinder == null) {
-			mbThreadFinder = (MBThreadFinder)PortalBeanLocatorUtil.locate(MBThreadFinder.class.getName() +
-					".impl");
-		}
-
-		if (counterLocalService == null) {
-			counterLocalService = (CounterLocalService)PortalBeanLocatorUtil.locate(CounterLocalService.class.getName() +
-					".impl");
-		}
-
-		if (counterService == null) {
-			counterService = (CounterService)PortalBeanLocatorUtil.locate(CounterService.class.getName() +
-					".impl");
-		}
-	}
-
 	protected MBBanLocalService mbBanLocalService;
 	protected MBBanService mbBanService;
 	protected MBBanPersistence mbBanPersistence;
@@ -477,6 +358,7 @@ public abstract class MBStatsUserLocalServiceBaseImpl
 	protected MBMessageFlagService mbMessageFlagService;
 	protected MBMessageFlagPersistence mbMessageFlagPersistence;
 	protected MBMessageFlagFinder mbMessageFlagFinder;
+	protected MBStatsUserLocalService mbStatsUserLocalService;
 	protected MBStatsUserPersistence mbStatsUserPersistence;
 	protected MBThreadLocalService mbThreadLocalService;
 	protected MBThreadService mbThreadService;

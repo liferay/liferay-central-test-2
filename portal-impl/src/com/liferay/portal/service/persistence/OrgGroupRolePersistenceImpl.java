@@ -24,7 +24,6 @@ package com.liferay.portal.service.persistence;
 
 import com.liferay.portal.NoSuchOrgGroupRoleException;
 import com.liferay.portal.SystemException;
-import com.liferay.portal.kernel.bean.InitializingBean;
 import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 import com.liferay.portal.kernel.dao.orm.FinderCacheUtil;
 import com.liferay.portal.kernel.dao.orm.Query;
@@ -57,7 +56,7 @@ import java.util.List;
  *
  */
 public class OrgGroupRolePersistenceImpl extends BasePersistenceImpl
-	implements OrgGroupRolePersistence, InitializingBean {
+	implements OrgGroupRolePersistence {
 	public OrgGroupRole create(OrgGroupRolePK orgGroupRolePK) {
 		OrgGroupRole orgGroupRole = new OrgGroupRoleImpl();
 

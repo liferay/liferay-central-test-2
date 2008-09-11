@@ -24,7 +24,6 @@ package com.liferay.portal.service.persistence;
 
 import com.liferay.portal.NoSuchUserException;
 import com.liferay.portal.SystemException;
-import com.liferay.portal.kernel.bean.InitializingBean;
 import com.liferay.portal.kernel.dao.jdbc.MappingSqlQuery;
 import com.liferay.portal.kernel.dao.jdbc.MappingSqlQueryFactoryUtil;
 import com.liferay.portal.kernel.dao.jdbc.RowMapper;
@@ -68,7 +67,7 @@ import java.util.List;
  *
  */
 public class UserPersistenceImpl extends BasePersistenceImpl
-	implements UserPersistence, InitializingBean {
+	implements UserPersistence {
 	public User create(long userId) {
 		User user = new UserImpl();
 

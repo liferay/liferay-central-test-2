@@ -25,8 +25,6 @@ package com.liferay.portlet.workflow.service.base;
 import com.liferay.documentlibrary.service.DLLocalService;
 import com.liferay.documentlibrary.service.DLService;
 
-import com.liferay.portal.kernel.bean.InitializingBean;
-import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
 import com.liferay.portal.service.ResourceLocalService;
 import com.liferay.portal.service.ResourceService;
 import com.liferay.portal.service.base.PrincipalBean;
@@ -34,6 +32,7 @@ import com.liferay.portal.service.persistence.ResourceFinder;
 import com.liferay.portal.service.persistence.ResourcePersistence;
 
 import com.liferay.portlet.workflow.service.WorkflowComponentService;
+import com.liferay.portlet.workflow.service.WorkflowDefinitionService;
 import com.liferay.portlet.workflow.service.WorkflowDefinitionService;
 import com.liferay.portlet.workflow.service.WorkflowInstanceService;
 import com.liferay.portlet.workflow.service.WorkflowTaskService;
@@ -45,7 +44,7 @@ import com.liferay.portlet.workflow.service.WorkflowTaskService;
  *
  */
 public abstract class WorkflowDefinitionServiceBaseImpl extends PrincipalBean
-	implements WorkflowDefinitionService, InitializingBean {
+	implements WorkflowDefinitionService {
 	public WorkflowComponentService getWorkflowComponentService() {
 		return workflowComponentService;
 	}
@@ -53,6 +52,15 @@ public abstract class WorkflowDefinitionServiceBaseImpl extends PrincipalBean
 	public void setWorkflowComponentService(
 		WorkflowComponentService workflowComponentService) {
 		this.workflowComponentService = workflowComponentService;
+	}
+
+	public WorkflowDefinitionService getWorkflowDefinitionService() {
+		return workflowDefinitionService;
+	}
+
+	public void setWorkflowDefinitionService(
+		WorkflowDefinitionService workflowDefinitionService) {
+		this.workflowDefinitionService = workflowDefinitionService;
 	}
 
 	public WorkflowInstanceService getWorkflowInstanceService() {
@@ -121,54 +129,8 @@ public abstract class WorkflowDefinitionServiceBaseImpl extends PrincipalBean
 		this.resourceFinder = resourceFinder;
 	}
 
-	public void afterPropertiesSet() {
-		if (workflowComponentService == null) {
-			workflowComponentService = (WorkflowComponentService)PortalBeanLocatorUtil.locate(WorkflowComponentService.class.getName() +
-					".impl");
-		}
-
-		if (workflowInstanceService == null) {
-			workflowInstanceService = (WorkflowInstanceService)PortalBeanLocatorUtil.locate(WorkflowInstanceService.class.getName() +
-					".impl");
-		}
-
-		if (workflowTaskService == null) {
-			workflowTaskService = (WorkflowTaskService)PortalBeanLocatorUtil.locate(WorkflowTaskService.class.getName() +
-					".impl");
-		}
-
-		if (dlLocalService == null) {
-			dlLocalService = (DLLocalService)PortalBeanLocatorUtil.locate(DLLocalService.class.getName() +
-					".impl");
-		}
-
-		if (dlService == null) {
-			dlService = (DLService)PortalBeanLocatorUtil.locate(DLService.class.getName() +
-					".impl");
-		}
-
-		if (resourceLocalService == null) {
-			resourceLocalService = (ResourceLocalService)PortalBeanLocatorUtil.locate(ResourceLocalService.class.getName() +
-					".impl");
-		}
-
-		if (resourceService == null) {
-			resourceService = (ResourceService)PortalBeanLocatorUtil.locate(ResourceService.class.getName() +
-					".impl");
-		}
-
-		if (resourcePersistence == null) {
-			resourcePersistence = (ResourcePersistence)PortalBeanLocatorUtil.locate(ResourcePersistence.class.getName() +
-					".impl");
-		}
-
-		if (resourceFinder == null) {
-			resourceFinder = (ResourceFinder)PortalBeanLocatorUtil.locate(ResourceFinder.class.getName() +
-					".impl");
-		}
-	}
-
 	protected WorkflowComponentService workflowComponentService;
+	protected WorkflowDefinitionService workflowDefinitionService;
 	protected WorkflowInstanceService workflowInstanceService;
 	protected WorkflowTaskService workflowTaskService;
 	protected DLLocalService dlLocalService;

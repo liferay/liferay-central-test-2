@@ -24,7 +24,6 @@ package com.liferay.portal.service.persistence;
 
 import com.liferay.portal.NoSuchAccountException;
 import com.liferay.portal.SystemException;
-import com.liferay.portal.kernel.bean.InitializingBean;
 import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 import com.liferay.portal.kernel.dao.orm.FinderCacheUtil;
 import com.liferay.portal.kernel.dao.orm.Query;
@@ -55,7 +54,7 @@ import java.util.List;
  *
  */
 public class AccountPersistenceImpl extends BasePersistenceImpl
-	implements AccountPersistence, InitializingBean {
+	implements AccountPersistence {
 	public Account create(long accountId) {
 		Account account = new AccountImpl();
 
