@@ -1,4 +1,4 @@
-<bean id="${packagePath}.${portletShortName}.base" abstract="true">
+<bean id="${packagePath}.service.${portletShortName}.base" abstract="true">
 	<#list entities as entity>
 		<#if entity.hasLocalService()>
 			<property name="${entity.springPropertyName}LocalService" ref="${entity.packagePath}.service.${entity.name}LocalService.impl" />

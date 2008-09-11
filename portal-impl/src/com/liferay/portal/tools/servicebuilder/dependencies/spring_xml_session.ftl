@@ -1,5 +1,5 @@
 <#if entity.TXManager == "none">
-	<bean id="${packagePath}.service.${entity.name}${sessionType}Service.impl" class="${packagePath}.service.impl.${entity.name}${sessionType}ServiceImpl" parent="${packagePath}.${portletShortName}.base">
+	<bean id="${packagePath}.service.${entity.name}${sessionType}Service.impl" class="${packagePath}.service.impl.${entity.name}${sessionType}ServiceImpl" parent="${packagePath}.service.${portletShortName}.base">
 		<#list entity.referenceList as tempEntity>
 			<#if tempEntity.hasLocalService()>
 				<property name="${tempEntity.springPropertyName}LocalService" ref="${tempEntity.packagePath}.service.${tempEntity.name}LocalService.impl" />
@@ -22,7 +22,7 @@
 	<#assign txRequiredList = entity.getTxRequiredList()>
 
 	<#if pluginName == "">
-		<bean id="${packagePath}.service.${entity.name}${sessionType}Service.impl" class="${packagePath}.service.impl.${entity.name}${sessionType}ServiceImpl" parent="${packagePath}.${portletShortName}.base">
+		<bean id="${packagePath}.service.${entity.name}${sessionType}Service.impl" class="${packagePath}.service.impl.${entity.name}${sessionType}ServiceImpl" parent="${packagePath}.service.${portletShortName}.base">
 			<#list entity.referenceList as tempEntity>
 				<#if tempEntity.hasLocalService()>
 					<property name="${tempEntity.springPropertyName}LocalService" ref="${tempEntity.packagePath}.service.${tempEntity.name}LocalService.impl" />
@@ -55,7 +55,7 @@
 			</tx:advice>
 		</#if>
 	<#else>
-		<bean id="${packagePath}.service.${entity.name}${sessionType}Service.target" class="${packagePath}.service.impl.${entity.name}${sessionType}ServiceImpl" parent="${packagePath}.${portletShortName}.base">
+		<bean id="${packagePath}.service.${entity.name}${sessionType}Service.target" class="${packagePath}.service.impl.${entity.name}${sessionType}ServiceImpl" parent="${packagePath}.service.${portletShortName}.base">
 			<property name="${entity.springPropertyName}${sessionType}Service" ref="${entity.packagePath}.service.${entity.name}${sessionType}Service.target" />
 			<#list entity.referenceList as tempEntity>
 				<#if tempEntity.hasLocalService()>
