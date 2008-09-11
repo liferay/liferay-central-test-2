@@ -117,12 +117,7 @@ public class Message implements Serializable {
 	}
 
 	public String getResponseDestination() {
-		if (Validator.isNull(_responseDestination)) {
-			return _destination + _DEFAULT_RESPONSE_DESTINATION_SUFFIX;
-		}
-		else {
-			return _responseDestination;
-		}
+		return _responseDestination;
 	}
 
 	public String getResponseId() {
@@ -143,6 +138,11 @@ public class Message implements Serializable {
 
 	public void setDestination(String destination) {
 		_destination = destination;
+
+		if (Validator.isNull(_responseDestination)) {
+			_responseDestination =
+				_destination + _DEFAULT_RESPONSE_DESTINATION_SUFFIX;
+		}
 	}
 
 	public void setPayload(Object payload) {
