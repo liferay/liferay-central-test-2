@@ -178,7 +178,14 @@ Liferay.Portlet.TagsAdmin = new Class({
 		jQuery('.vocabulary-actions input').keyup(
 			function(event) {
 				if (event.keyCode == 13) {
-					addEntry();
+					var input = jQuery(this);
+
+					if (input.is('.vocabulary-entry-name')) {
+						addEntry();
+					}
+					else if (input.is('.vocabulary-name')) {
+						addVocabulary();
+					}
 
 					return false;
 				}
