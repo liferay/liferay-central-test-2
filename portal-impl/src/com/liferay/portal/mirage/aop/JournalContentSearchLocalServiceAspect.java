@@ -42,23 +42,21 @@
 package com.liferay.portal.mirage.aop;
 
 import com.liferay.portal.mirage.service.MirageServiceFactory;
-
 import com.sun.portal.cms.mirage.service.custom.BinaryContentService;
 
 import org.aspectj.lang.ProceedingJoinPoint;
 
 /**
- * <a href="JournalContentSearchLocalServiceAspect.java.html"><b><i>View Source
- * </i></b></a>
+ * <a href="JournalContentSearchLocalServiceInterceptor.java.html"><b><i>View
+ * Source</i></b></a>
  *
  * @author Prakash Reddy
  *
  */
-public class JournalContentSearchLocalServiceAspect extends MirageAspect {
+public class JournalContentSearchLocalServiceAspect
+	extends MirageAspect {
 
-	protected Object doInvoke(ProceedingJoinPoint proceedingJoinPoint)
-		throws Throwable {
-
+	protected Object doInvoke(ProceedingJoinPoint proceedingJoinPoint) throws Throwable {
 		String methodName = proceedingJoinPoint.getSignature().getName();
 
 		if (methodName.equals("checkContentSearches") ||

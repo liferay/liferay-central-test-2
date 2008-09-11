@@ -42,23 +42,22 @@
 package com.liferay.portal.mirage.aop;
 
 import com.liferay.portal.mirage.service.MirageServiceFactory;
-
 import com.sun.portal.cms.mirage.service.custom.BinaryContentService;
 
 import org.aspectj.lang.ProceedingJoinPoint;
 
 /**
- * <a href="JournalArticleResourceLocalServiceAspect.java.html"><b><i>View
+ * <a href="JournalArticleResourceLocalServiceInterceptor.java.html"><b><i>View
  * Source</i></b></a>
  *
  * @author Karthik Sudarshan
  *
  */
-public class JournalArticleResourceLocalServiceAspect extends MirageAspect {
+public class JournalArticleResourceLocalServiceAspect extends MirageAspect{
 
-	protected Object doInvoke(ProceedingJoinPoint proceedingJoinPoint)
+	protected Object doInvoke(ProceedingJoinPoint proceedingJoinPoint) 
 		throws Throwable {
-
+		
 		String methodName = proceedingJoinPoint.getSignature().getName();
 
 		if (methodName.equals("deleteArticleResource") ||

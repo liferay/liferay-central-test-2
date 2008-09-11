@@ -23,23 +23,20 @@
 package com.liferay.portal.mirage.aop;
 
 import com.liferay.portal.mirage.service.MirageServiceFactory;
-
 import com.sun.portal.cms.mirage.service.custom.ContentFeedService;
 
 import org.aspectj.lang.ProceedingJoinPoint;
 
 /**
- * <a href="JournalFeedLocalServiceAspect.java.html"><b><i>View Source</i></b>
- * </a>
+ * <a href="JournalFeedLocalServiceInterceptor.java.html"><b><i>View Source</i>
+ * </b></a>
  *
  * @author Brian Wing Shun Chan
  *
  */
 public class JournalFeedLocalServiceAspect extends MirageAspect {
 
-	protected Object doInvoke(ProceedingJoinPoint proceedingJoinPoint)
-		throws Throwable {
-
+	protected Object doInvoke(ProceedingJoinPoint proceedingJoinPoint) throws Throwable {
 		String methodName = proceedingJoinPoint.getSignature().getName();
 
 		if (methodName.equals("addFeed") || methodName.equals("deleteFeed") ||

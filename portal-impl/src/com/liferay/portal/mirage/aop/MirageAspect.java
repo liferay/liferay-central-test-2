@@ -32,9 +32,7 @@ import org.aspectj.lang.ProceedingJoinPoint;
  */
 public abstract class MirageAspect {
 
-	public Object invoke(ProceedingJoinPoint proceedingJoinPoint)
-		throws Throwable {
-
+	public Object invoke(ProceedingJoinPoint proceedingJoinPoint) throws Throwable {
 		try {
 			return doInvoke(proceedingJoinPoint);
 		}
@@ -52,5 +50,4 @@ public abstract class MirageAspect {
 
 	protected abstract Object doInvoke(ProceedingJoinPoint proceedingJoinPoint)
 		throws Throwable;
-
 }

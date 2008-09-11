@@ -42,23 +42,20 @@
 package com.liferay.portal.mirage.aop;
 
 import com.liferay.portal.mirage.service.MirageServiceFactory;
-
 import com.sun.portal.cms.mirage.service.custom.ContentTypeService;
 
 import org.aspectj.lang.ProceedingJoinPoint;
 
 /**
- * <a href="JournalTemplateLocalServiceAspect.java.html"><b><i>View Source</i>
- * </b></a>
+ * <a href="JournalTemplateLocalServiceInterceptor.java.html"><b><i>View Source
+ * </i></b></a>
  *
  * @author Prakash Reddy
  *
  */
 public class JournalTemplateLocalServiceAspect extends MirageAspect {
 
-	protected Object doInvoke(ProceedingJoinPoint proceedingJoinPoint)
-		throws Throwable {
-
+	protected Object doInvoke(ProceedingJoinPoint proceedingJoinPoint) throws Throwable {
 		String methodName = proceedingJoinPoint.getSignature().getName();
 
 		if (methodName.equals("addTemplate") ||
@@ -69,8 +66,7 @@ public class JournalTemplateLocalServiceAspect extends MirageAspect {
 			methodName.equals("getTemplateBySmallImageId") ||
 			methodName.equals("updateTemplate")) {
 
-			TemplateInvoker templateInvoker = new TemplateInvoker(
-				proceedingJoinPoint);
+			TemplateInvoker templateInvoker = new TemplateInvoker(proceedingJoinPoint);
 
 			ContentTypeService contentTypeService =
 				MirageServiceFactory.getContentTypeService();

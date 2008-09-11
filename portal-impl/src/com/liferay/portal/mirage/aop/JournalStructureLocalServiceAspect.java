@@ -42,23 +42,20 @@
 package com.liferay.portal.mirage.aop;
 
 import com.liferay.portal.mirage.service.MirageServiceFactory;
-
 import com.sun.portal.cms.mirage.service.custom.ContentTypeService;
 
 import org.aspectj.lang.ProceedingJoinPoint;
 
 /**
- * <a href="JournalStructureLocalServiceAspect.java.html"><b><i>View Source</i>
- * </b></a>
+ * <a href="JournalStructureLocalServiceInterceptor.java.html"><b><i>View Source
+ * </i></b></a>
  *
  * @author Prakash Reddy
  *
  */
 public class JournalStructureLocalServiceAspect extends MirageAspect {
 
-	protected Object doInvoke(ProceedingJoinPoint proceedingJoinPoint)
-		throws Throwable {
-
+	protected Object doInvoke(ProceedingJoinPoint proceedingJoinPoint) throws Throwable {
 		String methodName = proceedingJoinPoint.getSignature().getName();
 
 		if (methodName.equals("addStructure") ||
