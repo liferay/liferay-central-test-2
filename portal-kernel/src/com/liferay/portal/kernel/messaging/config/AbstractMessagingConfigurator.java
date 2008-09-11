@@ -31,14 +31,40 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * <a href="AbstractMessagingConfigurator.java.html"><b><i>View
- * Source</i></b></a>
+ * <a href="AbstractMessagingConfigurator.java.html"><b><i>View Source</i></b>
+ * </a>
  *
  * @author Michael C. Han
+ *
  */
-public abstract class AbstractMessagingConfigurator implements MessagingConfigurator {
-	public void configure() {
+public abstract class AbstractMessagingConfigurator
+	implements MessagingConfigurator {
+
+	public void destroy() {
 		MessageBus messageBus = getMessageBus();
+
+		for (Map.Entry<String, List<MessageListener>> listeners :
+				_messageListeners.entrySet()) {
+
+			String destination = listeners.getKey();
+
+			for (MessageListener listener : listeners.getValue()) {
+				messageBus.unregisterMessageListener(destination, listener);
+			}
+		}
+
+		for (Destination destination : _destinations) {
+			messageBus.removeDestination(destination.getName());
+		}
+
+		for (DestinationEventListener listener : _destinationEventListeners) {
+			messageBus.removeDestinationEventListener(listener);
+		}
+	}
+
+	public void init() {
+		MessageBus messageBus = getMessageBus();
+
 		for (DestinationEventListener listener : _destinationEventListeners) {
 			messageBus.addDestinationEventListener(listener);
 		}
@@ -56,27 +82,6 @@ public abstract class AbstractMessagingConfigurator implements MessagingConfigur
 				messageBus.registerMessageListener(destination, listener);
 			}
 		}
-	}
-
-	public void destroy() {
-		MessageBus messageBus = getMessageBus();
-		for (DestinationEventListener listener : _destinationEventListeners) {
-			messageBus.removeDestinationEventListener(listener);
-		}
-
-		for (Map.Entry<String, List<MessageListener>> listeners :
-				_messageListeners.entrySet()) {
-
-			String destination = listeners.getKey();
-
-			for (MessageListener listener : listeners.getValue()) {
-				messageBus.unregisterMessageListener(destination, listener);
-			}
-		}
-		for (Destination destination : _destinations) {
-			messageBus.removeDestination(destination.getName());
-		}
-
 	}
 
 	public void setDestinationEventListeners(
@@ -100,4 +105,5 @@ public abstract class AbstractMessagingConfigurator implements MessagingConfigur
 	private List<DestinationEventListener> _destinationEventListeners;
 	private List<Destination> _destinations;
 	private Map<String, List<MessageListener>> _messageListeners;
+
 }

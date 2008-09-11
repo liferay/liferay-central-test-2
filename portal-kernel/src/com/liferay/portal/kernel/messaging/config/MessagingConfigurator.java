@@ -37,9 +37,9 @@ import java.util.Map;
  */
 public interface MessagingConfigurator {
 
-	public void configure();
-
 	public void destroy();
+
+	public void init();
 
 	public void setDestinationEventListeners(
 		List<DestinationEventListener> listeners);

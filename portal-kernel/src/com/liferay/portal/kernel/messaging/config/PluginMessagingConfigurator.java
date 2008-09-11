@@ -22,26 +22,19 @@
 
 package com.liferay.portal.kernel.messaging.config;
 
-import com.liferay.portal.kernel.messaging.DestinationEventListener;
-import com.liferay.portal.kernel.messaging.Destination;
-import com.liferay.portal.kernel.messaging.MessageListener;
 import com.liferay.portal.kernel.messaging.MessageBus;
 import com.liferay.portal.kernel.messaging.MessageBusUtil;
 
-import java.util.List;
-import java.util.Map;
-
 /**
- * <a href="PluginMessageConfigurator.java.html"><b><i>View Source</i></b></a>
- *
- * Configurator designed for the plugins environments.  In Plugins, we must
- * communicate with the MessageBus already instantiated by the Portal.
+ * <a href="PluginMessagingConfigurator.java.html"><b><i>View Source</i></b></a>
  *
  * @author Michael C. Han
+ *
  */
 public class PluginMessagingConfigurator extends AbstractMessagingConfigurator {
 
 	protected MessageBus getMessageBus() {
-		return MessageBusUtil.getMessageBus();		
+		return MessageBusUtil.getMessageBus();
 	}
+
 }

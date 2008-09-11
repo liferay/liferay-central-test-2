@@ -92,7 +92,7 @@
 
 	<!-- Configurator -->
 
-	<bean id="com.liferay.portal.kernel.messaging.config.MessagingConfigurator" class="com.liferay.portal.kernel.messaging.config.DefaultMessagingConfigurator" init-method="configure">
+	<bean id="com.liferay.portal.kernel.messaging.config.MessagingConfigurator" class="com.liferay.portal.kernel.messaging.config.DefaultMessagingConfigurator" init-method="init" destroy-method="destroy">
 		<property name="destinationEventListeners">
 			<list>
 				<!--<bean class="com.liferay.portal.kernel.messaging.GlobalDestinationEventListener">
