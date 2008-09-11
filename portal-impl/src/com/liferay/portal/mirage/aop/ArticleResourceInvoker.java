@@ -47,7 +47,7 @@ import com.sun.portal.cms.mirage.model.custom.OptionalCriteria;
 
 import java.util.Map;
 
-import org.aopalliance.intercept.MethodInvocation;
+import org.aspectj.lang.ProceedingJoinPoint;
 
 /**
  * <a href="ArticleResourceInvoker.java.html"><b><i>View Source</i></b></a>
@@ -58,8 +58,8 @@ import org.aopalliance.intercept.MethodInvocation;
 public class ArticleResourceInvoker
 	extends BinaryContent implements OptionalCriteria {
 
-	public ArticleResourceInvoker(MethodInvocation invocation) {
-		_invoker = new MirageInvoker(invocation);
+	public ArticleResourceInvoker(ProceedingJoinPoint proceedingJoinPoint) {
+		_invoker = new MirageInvoker(proceedingJoinPoint);
 	}
 
 	public Map<Object, Object> getOptions() {

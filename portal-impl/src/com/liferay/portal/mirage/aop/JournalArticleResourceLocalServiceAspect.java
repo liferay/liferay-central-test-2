@@ -45,20 +45,21 @@ import com.liferay.portal.mirage.service.MirageServiceFactory;
 
 import com.sun.portal.cms.mirage.service.custom.BinaryContentService;
 
-import org.aopalliance.intercept.MethodInvocation;
+import org.aspectj.lang.ProceedingJoinPoint;
 
 /**
- * <a href="JournalArticleResourceLocalServiceInterceptor.java.html"><b><i>View
+ * <a href="JournalArticleResourceLocalServiceAspect.java.html"><b><i>View
  * Source</i></b></a>
  *
  * @author Karthik Sudarshan
  *
  */
-public class JournalArticleResourceLocalServiceInterceptor
-	extends MirageInterceptor {
+public class JournalArticleResourceLocalServiceAspect extends MirageAspect {
 
-	protected Object doInvoke(MethodInvocation invocation) throws Throwable {
-		String methodName = invocation.getMethod().getName();
+	protected Object doInvoke(ProceedingJoinPoint proceedingJoinPoint)
+		throws Throwable {
+
+		String methodName = proceedingJoinPoint.getSignature().getName();
 
 		if (methodName.equals("deleteArticleResource") ||
 			methodName.equals("getArticleResource") ||
@@ -66,7 +67,7 @@ public class JournalArticleResourceLocalServiceInterceptor
 			methodName.equals("getArticleResources")) {
 
 			ArticleResourceInvoker articleResourceInvoker =
-				new ArticleResourceInvoker(invocation);
+				new ArticleResourceInvoker(proceedingJoinPoint);
 
 			BinaryContentService binaryContentService =
 				MirageServiceFactory.getArticleResourceService();
@@ -88,7 +89,7 @@ public class JournalArticleResourceLocalServiceInterceptor
 			return articleResourceInvoker.getReturnValue();
 		}
 		else {
-			return invocation.proceed();
+			return proceedingJoinPoint.proceed();
 		}
 	}
 

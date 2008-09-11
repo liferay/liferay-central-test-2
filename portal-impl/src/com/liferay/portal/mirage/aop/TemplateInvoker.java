@@ -44,7 +44,7 @@ package com.liferay.portal.mirage.aop;
 import com.sun.portal.cms.mirage.exception.CMSException;
 import com.sun.portal.cms.mirage.model.custom.Template;
 
-import org.aopalliance.intercept.MethodInvocation;
+import org.aspectj.lang.ProceedingJoinPoint;
 
 /**
  * <a href="TemplateInvoker.java.html"><b><i>View Source</i></b></a>
@@ -54,8 +54,8 @@ import org.aopalliance.intercept.MethodInvocation;
  */
 public class TemplateInvoker extends Template {
 
-	public TemplateInvoker(MethodInvocation invocation) {
-		_invoker = new MirageInvoker(invocation);
+	public TemplateInvoker(ProceedingJoinPoint proceedingJoinPoint) {
+		_invoker = new MirageInvoker(proceedingJoinPoint);
 	}
 
 	public Object getReturnValue() {

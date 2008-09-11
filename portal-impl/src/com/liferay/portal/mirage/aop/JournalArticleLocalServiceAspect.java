@@ -27,20 +27,22 @@ import com.liferay.portal.mirage.service.MirageServiceFactory;
 import com.sun.portal.cms.mirage.service.custom.ContentService;
 import com.sun.portal.cms.mirage.service.custom.WorkflowService;
 
-import org.aopalliance.intercept.MethodInvocation;
+import org.aspectj.lang.ProceedingJoinPoint;
 
 /**
- * <a href="JournalArticleLocalServiceInterceptor.java.html"><b><i>View Source
- * </i></b></a>
+ * <a href="JournalArticleLocalServiceAspect.java.html"><b><i>View Source</i>
+ * </b></a>
  *
  * @author Joshna Reddy
  *
  */
-public class JournalArticleLocalServiceInterceptor extends MirageInterceptor {
+public class JournalArticleLocalServiceAspect extends MirageAspect {
 
-	protected Object doInvoke(MethodInvocation invocation) throws Throwable {
-		String methodName = invocation.getMethod().getName();
-		Object[] arguments = invocation.getArguments();
+	protected Object doInvoke(ProceedingJoinPoint proceedingJoinPoint)
+		throws Throwable {
+
+		String methodName = proceedingJoinPoint.getSignature().getName();
+		Object[] arguments = proceedingJoinPoint.getArgs();
 
 		if (methodName.equals("addArticle") ||
 			methodName.equals("deleteArticle") ||
@@ -49,7 +51,8 @@ public class JournalArticleLocalServiceInterceptor extends MirageInterceptor {
 			methodName.equals("updateArticle")||
 			methodName.equals("updateContent")) {
 
-			ContentInvoker contentInvoker = new ContentInvoker(invocation);
+			ContentInvoker contentInvoker = new ContentInvoker(
+				proceedingJoinPoint);
 
 			ContentService contentService =
 				MirageServiceFactory.getContentService();
@@ -77,7 +80,8 @@ public class JournalArticleLocalServiceInterceptor extends MirageInterceptor {
 		else if (methodName.equals("approveArticle") ||
 				 methodName.equals("expireArticle")) {
 
-			WorkflowInvoker workflowInvoker = new WorkflowInvoker(invocation);
+			WorkflowInvoker workflowInvoker = new WorkflowInvoker(
+				proceedingJoinPoint);
 
 			WorkflowService workflowService =
 				MirageServiceFactory.getWorkflowService();
@@ -103,7 +107,7 @@ public class JournalArticleLocalServiceInterceptor extends MirageInterceptor {
 				 (methodName.equals("search") && (arguments.length > 6))) {
 
 			SearchCriteriaInvoker searchCriteriaInvoker =
-				new SearchCriteriaInvoker(invocation);
+				new SearchCriteriaInvoker(proceedingJoinPoint);
 
 			ContentService contentService =
 				MirageServiceFactory.getContentService();
@@ -133,7 +137,7 @@ public class JournalArticleLocalServiceInterceptor extends MirageInterceptor {
 			return searchCriteriaInvoker.getReturnValue();
 		}
 		else {
-			return invocation.proceed();
+			return proceedingJoinPoint.proceed();
 		}
 	}
 

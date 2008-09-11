@@ -45,87 +45,78 @@ import com.liferay.portal.mirage.service.MirageServiceFactory;
 
 import com.sun.portal.cms.mirage.service.custom.ContentTypeService;
 
-import org.aopalliance.intercept.MethodInvocation;
+import org.aspectj.lang.ProceedingJoinPoint;
 
 /**
- * <a href="JournalTemplateLocalServiceInterceptor.java.html"><b><i>View Source
- * </i></b></a>
+ * <a href="JournalStructureLocalServiceAspect.java.html"><b><i>View Source</i>
+ * </b></a>
  *
  * @author Prakash Reddy
  *
  */
-public class JournalTemplateLocalServiceInterceptor extends MirageInterceptor {
+public class JournalStructureLocalServiceAspect extends MirageAspect {
 
-	protected Object doInvoke(MethodInvocation invocation) throws Throwable {
-		String methodName = invocation.getMethod().getName();
+	protected Object doInvoke(ProceedingJoinPoint proceedingJoinPoint)
+		throws Throwable {
 
-		if (methodName.equals("addTemplate") ||
-			methodName.equals("addTemplateToGroup") ||
-			methodName.equals("deleteTemplate") ||
-			methodName.equals("deleteTemplates") ||
-			methodName.equals("getTemplate") ||
-			methodName.equals("getTemplateBySmallImageId") ||
-			methodName.equals("updateTemplate")) {
+		String methodName = proceedingJoinPoint.getSignature().getName();
 
-			TemplateInvoker templateInvoker = new TemplateInvoker(invocation);
+		if (methodName.equals("addStructure") ||
+			methodName.equals("addStructureToGroup") ||
+			methodName.equals("deleteStructure") ||
+			methodName.equals("getStructure") ||
+			methodName.equals("updateStructure")) {
+
+			ContentTypeInvoker contentTypeInvoker =
+				new ContentTypeInvoker(proceedingJoinPoint);
 
 			ContentTypeService contentTypeService =
 				MirageServiceFactory.getContentTypeService();
 
-			if (methodName.equals("addTemplate") ||
-				methodName.equals("addTemplateToGroup")) {
+			if (methodName.equals("addStructure") ||
+				methodName.equals("addStructureToGroup")) {
 
-				contentTypeService.addTemplateToContentType(
-					templateInvoker, null);
+				contentTypeService.createContentType(contentTypeInvoker);
 			}
-			else if (methodName.equals("deleteTemplate")) {
-				contentTypeService.deleteTemplateOfContentType(
-					null, templateInvoker);
+			else if (methodName.equals("deleteStructure")) {
+				contentTypeService.deleteContentType(contentTypeInvoker);
 			}
-			else if (methodName.equals("deleteTemplates")) {
-				contentTypeService.deleteTemplatesOfContentType(
-					null, new TemplateInvoker[] {templateInvoker});
+			else if (methodName.equals("getStructure")) {
+				contentTypeService.getContentType(contentTypeInvoker);
 			}
-			else if (methodName.equals("getTemplate") ||
-					 methodName.equals("getTemplateBySmallImageId")) {
-
-				contentTypeService.getTemplate(templateInvoker, null);
-			}
-			else if (methodName.equals("updateTemplate")) {
-				contentTypeService.updateTemplateOfContentType(
-					templateInvoker, null);
+			else if (methodName.equals("updateStructure")) {
+				contentTypeService.updateContentType(contentTypeInvoker);
 			}
 
-			return templateInvoker.getReturnValue();
+			return contentTypeInvoker.getReturnValue();
 		}
-		else if (methodName.equals("getStructureTemplates") ||
-				 methodName.equals("getTemplates") ||
-				 methodName.equals("getTemplatesCount") ||
+		else if (methodName.equals("getStructures") ||
+				 methodName.equals("getStructuresCount") ||
 				 methodName.equals("search") ||
 				 methodName.equals("searchCount")) {
 
 			SearchCriteriaInvoker searchCriteriaInvoker =
-				new SearchCriteriaInvoker(invocation);
+				new SearchCriteriaInvoker(proceedingJoinPoint);
 
 			ContentTypeService contentTypeService =
 				MirageServiceFactory.getContentTypeService();
 
-			if (methodName.equals("getStructureTemplates") ||
-				methodName.equals("getTemplates") ||
+			if (methodName.equals("getStructures") ||
 				methodName.equals("search")) {
 
-				contentTypeService.searchTemplates(searchCriteriaInvoker);
+				contentTypeService.searchContentTypes(searchCriteriaInvoker);
 			}
-			else if (methodName.equals("getTemplatesCount") ||
+			else if (methodName.equals("getStructuresCount") ||
 					 methodName.equals("searchCount")) {
 
-				contentTypeService.searchTemplatesCount(searchCriteriaInvoker);
+				contentTypeService.contentTypeSearchCount(
+					null, searchCriteriaInvoker);
 			}
 
 			return searchCriteriaInvoker.getReturnValue();
 		}
 		else {
-			return invocation.proceed();
+			return proceedingJoinPoint.proceed();
 		}
 	}
 

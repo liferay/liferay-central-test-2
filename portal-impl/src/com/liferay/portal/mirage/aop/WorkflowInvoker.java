@@ -44,7 +44,7 @@ package com.liferay.portal.mirage.aop;
 import com.sun.portal.cms.mirage.exception.CMSException;
 import com.sun.portal.cms.mirage.model.custom.Content;
 
-import org.aopalliance.intercept.MethodInvocation;
+import org.aspectj.lang.ProceedingJoinPoint;
 
 /**
  * <a href="WorkflowInvoker.java.html"><b><i>View Source</i></b></a>
@@ -54,8 +54,8 @@ import org.aopalliance.intercept.MethodInvocation;
  */
 public class WorkflowInvoker extends Content {
 
-	public WorkflowInvoker(MethodInvocation invocation) {
-		_invoker = new MirageInvoker(invocation);
+	public WorkflowInvoker(ProceedingJoinPoint proceedingJoinPoint) {
+		_invoker = new MirageInvoker(proceedingJoinPoint);
 	}
 
 	public Object getReturnValue() {
