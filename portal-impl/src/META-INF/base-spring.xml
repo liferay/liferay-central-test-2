@@ -33,7 +33,7 @@
 	</tx:advice>
 	<tx:advice id="persistenceTransactionAdvice" transaction-manager="liferayTransactionManager">
 		<tx:attributes>
-		<tx:method name="remove*" propagation="REQUIRED" rollback-for="com.liferay.portal.PortalException,com.liferay.portal.SystemException" />
+			<tx:method name="remove*" propagation="REQUIRED" rollback-for="com.liferay.portal.PortalException,com.liferay.portal.SystemException" />
 			<tx:method name="set*" propagation="REQUIRED" rollback-for="com.liferay.portal.PortalException,com.liferay.portal.SystemException" />
 			<tx:method name="update*" propagation="REQUIRED" rollback-for="com.liferay.portal.PortalException,com.liferay.portal.SystemException" />
 			<tx:method name="*" propagation="SUPPORTS" read-only="true" />
