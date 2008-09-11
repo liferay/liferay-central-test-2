@@ -76,7 +76,7 @@ public class ${entity.name}${sessionTypeName}ServiceUtil {
 		if (_service == null) {
 			<#if pluginName != "">
 				Object obj = PortletBeanLocatorUtil.locate("${pluginName}", ${entity.name}${sessionTypeName}ServiceUtil.class.getName());
-				ClassLoader portletClassLoader = (ClassLoader)PortletBeanLocatorUtil.locate("chat-portlet", "portletClassLoader");
+				ClassLoader portletClassLoader = (ClassLoader)PortletBeanLocatorUtil.locate("${pluginName}", "portletClassLoader");
 
 				ClassLoaderProxy classLoaderProxy = new ClassLoaderProxy(obj, portletClassLoader);
 
