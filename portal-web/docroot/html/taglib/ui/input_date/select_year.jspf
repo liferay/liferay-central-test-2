@@ -1,0 +1,23 @@
+				<select <%= disabled ? "disabled" : "" %> id="<%= yearParam %>" name="<%= yearParam %>">
+					<c:if test="<%= yearNullable %>">
+						<option value=""></option>
+					</c:if>
+		
+					<c:if test="<%= (yearValue > 0) && (yearValue < yearRangeStart) %>">
+						<option selected value="<%= yearValue %>"><%= yearValue %></option>
+					</c:if>
+		
+					<%
+					for (int i = yearRangeStart; i <= yearRangeEnd; i++) {
+					%>
+		
+						<option <%= (yearValue == i) ? "selected" : "" %> value="<%= i %>"><%= i %></option>
+		
+					<%
+					}
+					%>
+		
+					<c:if test="<%= (yearValue > 0) && (yearValue > yearRangeEnd) %>">
+						<option selected value="<%= yearValue %>"><%= yearValue %></option>
+					</c:if>
+				</select>

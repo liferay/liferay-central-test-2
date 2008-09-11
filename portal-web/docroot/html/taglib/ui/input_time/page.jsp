@@ -39,6 +39,11 @@ boolean disabled = GetterUtil.getBoolean((String)request.getAttribute("liferay-u
 
 NumberFormat numberFormat = NumberFormat.getInstance(locale);
 numberFormat.setMinimumIntegerDigits(2);
+
+String timePattern = ((SimpleDateFormat)(DateFormat.getTimeInstance(DateFormat.SHORT))).toPattern();
+boolean timeFormatAmPm = true;
+if( timePattern.indexOf("a") == -1 ) timeFormatAmPm = false;
+
 %>
 
 <select <%= disabled ? "disabled" : "" %> name="<%= hourParam %>">
@@ -47,10 +52,12 @@ numberFormat.setMinimumIntegerDigits(2);
 	</c:if>
 
 	<%
-	for (int i = 0; i < 12; i++) {
+	for (int i = 0; i < (timeFormatAmPm ? 12:24); i++) {
+		String hourStr = String.valueOf(i);
+		if( timeFormatAmPm && i==0 ) hourStr = "12"; 
 	%>
 
-		<option <%= (hourValue == i) ? "selected" : "" %> value="<%= i %>"><%= (i == 0) ? "12" : String.valueOf(i) %></option>
+		<option <%= (hourValue == i) ? "selected" : "" %> value="<%= i %>"><%= hourStr %></option>
 
 	<%
 	}
@@ -78,11 +85,21 @@ numberFormat.setMinimumIntegerDigits(2);
 
 </select>
 
-<select <%= disabled ? "disabled" : "" %> name="<%= amPmParam %>">
-	<c:if test="<%= amPmNullable %>">
-		<option value=""></option>
-	</c:if>
+<c:choose>
 
-	<option <%= (amPmValue == Calendar.AM) ? "selected" : "" %> value="<%= Calendar.AM %>">AM</option>
-	<option <%= (amPmValue == Calendar.PM) ? "selected" : "" %> value="<%= Calendar.PM %>">PM</option>
-</select>
+	<c:when test="<%= ! timeFormatAmPm %>">
+		<input type="hidden" name="<%= amPmParam %>" value="<%= Calendar.AM %>" />
+	</c:when>
+
+	<c:otherwise>
+		<select <%= disabled ? "disabled" : "" %> name="<%= amPmParam %>">
+			<c:if test="<%= amPmNullable %>">
+				<option value=""></option>
+			</c:if>
+		
+			<option <%= (amPmValue == Calendar.AM) ? "selected" : "" %> value="<%= Calendar.AM %>">AM</option>
+			<option <%= (amPmValue == Calendar.PM) ? "selected" : "" %> value="<%= Calendar.PM %>">PM</option>
+		</select>
+	</c:otherwise>
+
+</c:choose>

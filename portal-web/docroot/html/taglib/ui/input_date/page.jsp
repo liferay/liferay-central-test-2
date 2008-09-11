@@ -51,6 +51,10 @@ int firstDayOfWeek = GetterUtil.getInteger((String)request.getAttribute("liferay
 String imageInputId = JS.getSafeName(GetterUtil.getString((String)request.getAttribute("liferay-ui:input-date:imageInputId")));
 boolean disabled = GetterUtil.getBoolean((String)request.getAttribute("liferay-ui:input-date:disabled"));
 
+String datePattern = ((SimpleDateFormat)(DateFormat.getDateInstance(DateFormat.SHORT))).toPattern();
+boolean dateFormatMDY = true;
+if( datePattern.indexOf("y") == 0 ) dateFormatMDY = false;
+
 if (Validator.isNull(imageInputId)) {
 	imageInputId = randomNamespace + "imageInputId";
 }
@@ -180,64 +184,26 @@ else {
 		String[] months = CalendarUtil.getMonths(locale);
 		%>
 
-		<select <%= disabled ? "disabled" : "" %> id="<%= monthParam %>" name="<%= monthParam %>">
-			<c:if test="<%= monthNullable %>">
-				<option value=""></option>
-			</c:if>
-
-			<%
-			for (int i = 0; i < months.length; i++) {
-			%>
-
-				<option <%= (monthValue == monthIds[i]) ? "selected" : "" %> value="<%= monthIds[i] %>"><%= months[i] %></option>
-
-			<%
-			}
-			%>
-
-		</select>
-
-		<select <%= disabled ? "disabled" : "" %> id="<%= dayParam %>" name="<%= dayParam %>">
-			<c:if test="<%= dayNullable %>">
-				<option value=""></option>
-			</c:if>
-
-			<%
-			for (int i = 1; i <= 31; i++) {
-			%>
-
-				<option <%= (dayValue == i) ? "selected" : "" %> value="<%= i %>"><%= i %></option>
-
-			<%
-			}
-			%>
-
-		</select>
-
-		<select <%= disabled ? "disabled" : "" %> id="<%= yearParam %>" name="<%= yearParam %>">
-			<c:if test="<%= yearNullable %>">
-				<option value=""></option>
-			</c:if>
-
-			<c:if test="<%= (yearValue > 0) && (yearValue < yearRangeStart) %>">
-				<option selected value="<%= yearValue %>"><%= yearValue %></option>
-			</c:if>
-
-			<%
-			for (int i = yearRangeStart; i <= yearRangeEnd; i++) {
-			%>
-
-				<option <%= (yearValue == i) ? "selected" : "" %> value="<%= i %>"><%= i %></option>
-
-			<%
-			}
-			%>
-
-			<c:if test="<%= (yearValue > 0) && (yearValue > yearRangeEnd) %>">
-				<option selected value="<%= yearValue %>"><%= yearValue %></option>
-			</c:if>
-		</select>
+		<c:choose>
+		
+			<c:when test="<%= dateFormatMDY %>">
+			
+				<%@ include file="select_month.jspf" %>
+				<%@ include file="select_day.jspf" %>
+				<%@ include file="select_year.jspf" %>
+				
+			</c:when>
+			
+			<c:otherwise>
+			
+				<%@ include file="select_year.jspf" %>
+				<%@ include file="select_month.jspf" %>
+				<%@ include file="select_day.jspf" %>
+				
+			</c:otherwise>	
+		</c:choose>
 	</c:when>
+
 	<c:otherwise>
 
 		<%
@@ -263,23 +229,9 @@ else {
 			%>
 
 		</select>
-
-		<select <%= disabled ? "disabled" : "" %> id="<%= dayParam %>" name="<%= dayParam %>">
-			<c:if test="<%= dayNullable %>">
-				<option value=""></option>
-			</c:if>
-
-			<%
-			for (int i = 1; i <= 31; i++) {
-			%>
-
-				<option <%= (dayValue == i) ? "selected" : "" %> value="<%= i %>"><%= i %></option>
-
-			<%
-			}
-			%>
-
-		</select>
+		
+		<%@ include file="select_day.jspf" %>
+		
 	</c:otherwise>
 </c:choose>
 

@@ -1,0 +1,16 @@
+				<select <%= disabled ? "disabled" : "" %> id="<%= dayParam %>" name="<%= dayParam %>">
+					<c:if test="<%= dayNullable %>">
+						<option value=""></option>
+					</c:if>
+		
+					<%
+					for (int i = 1; i <= 31; i++) {
+					%>
+		
+						<option <%= (dayValue == i) ? "selected" : "" %> value="<%= i %>"><%= i %></option>
+		
+					<%
+					}
+					%>
+		
+				</select>

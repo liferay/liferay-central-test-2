@@ -63,6 +63,10 @@ Map hints = ModelHintsUtil.getHints(model, field);
 		<c:when test='<%= type.equals("Date") %>'>
 
 			<%
+			String timePattern = ((SimpleDateFormat)(DateFormat.getTimeInstance(DateFormat.SHORT))).toPattern();
+			boolean timeFormatAmPm = true;
+			if( timePattern.indexOf("a") == -1 ) timeFormatAmPm = false;
+
 			if (fieldParam == null) {
 				fieldParam = field;
 			}
@@ -130,7 +134,8 @@ Map hints = ModelHintsUtil.getHints(model, field);
 			int hour = ParamUtil.getInteger(request, fieldParam + "Hour", -1);
 
 			if ((hour == -1) && (cal != null)) {
-				hour = cal.get(Calendar.HOUR);
+				hour = cal.get(Calendar.HOUR_OF_DAY);
+				if( timeFormatAmPm ) hour = cal.get(Calendar.HOUR);
 			}
 
 			int minute = ParamUtil.getInteger(request, fieldParam + "Minute", -1);
@@ -142,7 +147,8 @@ Map hints = ModelHintsUtil.getHints(model, field);
 			int amPm = ParamUtil.getInteger(request, fieldParam + "AmPm", -1);
 
 			if ((amPm == -1) && (cal != null)) {
-				amPm = cal.get(Calendar.AM_PM);
+				amPm = Calendar.AM;
+				if( timeFormatAmPm ) amPm = cal.get(Calendar.AM_PM);
 			}
 
 			boolean showTime = true;
