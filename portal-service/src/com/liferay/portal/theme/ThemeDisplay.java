@@ -1015,8 +1015,8 @@ public class ThemeDisplay implements Serializable {
 		_pathThemeRoot = StringPool.BLANK;
 		_pathThemeTemplates = StringPool.BLANK;
 		_showAddContentIcon = false;
-		_showHomeIcon = false;
 		_showControlPanelIcon = false;
+		_showHomeIcon = false;
 		_showLayoutTemplatesIcon = false;
 		_showMyAccountIcon = false;
 		_showPageSettingsIcon = false;

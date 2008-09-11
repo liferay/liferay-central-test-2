@@ -91,6 +91,13 @@
 	#set ($layout_url = $theme_display.getURLLayoutTemplates())
 #end
 
+#set ($show_control_panel = $theme_display.isShowControlPanelIcon())
+
+#if ($show_control_panel)
+	#set ($control_panel_text = $languageUtil.get($company_id, $locale, "control-panel"))
+	#set ($control_panel_url = $theme_display.getURLControlPanel())
+#end
+
 #set ($show_home = $theme_display.isShowHomeIcon())
 
 #if ($show_home)
@@ -99,17 +106,6 @@
 
 	#if (!$request.isRequestedSessionIdFromCookie())
 		#set ($home_url = $portalUtil.getURLWithSessionId($home_url, $request.getSession().getId()))
-	#end
-#end
-
-#set ($show_control_panel = $theme_display.isShowControlPanelIcon())
-
-#if ($show_control_panel)
-	#set ($control_panel_text = $languageUtil.get($company_id, $locale, "control-panel"))
-	#set ($control_panel_url = $theme_display.getURLControlPanel())
-
-	#if (!$request.isRequestedSessionIdFromCookie())
-		#set ($control_panel_url = $portalUtil.getURLWithSessionId($control_panel_url, $request.getSession().getId()))
 	#end
 #end
 

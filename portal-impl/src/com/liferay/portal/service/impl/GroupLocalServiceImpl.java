@@ -224,20 +224,29 @@ public class GroupLocalServiceImpl extends GroupLocalServiceBaseImpl {
 				group = groupFinder.findByC_N(companyId, systemGroups[i]);
 			}
 			catch (NoSuchGroupException nsge) {
+				int type = GroupImpl.TYPE_COMMUNITY_OPEN;
 				String friendlyURL = null;
-				int communityType = GroupImpl.TYPE_COMMUNITY_OPEN;
 
-				if (systemGroups[i].equals(GroupImpl.GUEST)) {
-					friendlyURL = "/guest";
+				if (systemGroups[i].equals(GroupImpl.CONTROL_PANEL)) {
+					type = GroupImpl.TYPE_COMMUNITY_PRIVATE;
+					friendlyURL = "/control_panel";
 				}
-				else if (systemGroups[i].equals(GroupImpl.CONTROL_PANEL)) {
-					friendlyURL = "/control-panel";
-					communityType = GroupImpl.TYPE_COMMUNITY_PRIVATE;
+				else if (systemGroups[i].equals(GroupImpl.GUEST)) {
+					friendlyURL = "/guest";
 				}
 
 				group = addGroup(
 					defaultUserId, null, 0, systemGroups[i], null,
-					communityType, friendlyURL, true);
+					type, friendlyURL, true);
+			}
+
+			if (group.getName().equals(GroupImpl.CONTROL_PANEL)) {
+				LayoutSet layoutSet = layoutSetLocalService.getLayoutSet(
+					group.getGroupId(), true);
+
+				if (layoutSet.getPageCount() == 0) {
+					addControlPanelLayouts(group);
+				}
 			}
 
 			if (group.getName().equals(GroupImpl.GUEST)) {
@@ -246,15 +255,6 @@ public class GroupLocalServiceImpl extends GroupLocalServiceBaseImpl {
 
 				if (layoutSet.getPageCount() == 0) {
 					addDefaultGuestPublicLayouts(group);
-				}
-			}
-
-			if (group.getName().equals(GroupImpl.CONTROL_PANEL)) {
-				LayoutSet layoutSet = layoutSetLocalService.getLayoutSet(
-					group.getGroupId(), true);
-
-				if (layoutSet.getPageCount() == 0) {
-					addDefaultControlPanelLayouts(group);
 				}
 			}
 		}
@@ -688,6 +688,38 @@ public class GroupLocalServiceImpl extends GroupLocalServiceBaseImpl {
 		return group;
 	}
 
+	protected void addControlPanelLayouts(Group group)
+		throws PortalException, SystemException {
+
+		long defaultUserId = userLocalService.getDefaultUserId(
+			group.getCompanyId());
+
+		String friendlyURL = getFriendlyURL(
+			PropsValues.CONTROL_PANEL_LAYOUT_FRIENDLY_URL);
+
+		Layout layout = layoutLocalService.addLayout(
+			defaultUserId, group.getGroupId(), true,
+			LayoutConstants.DEFAULT_PARENT_LAYOUT_ID,
+			PropsValues.CONTROL_PANEL_LAYOUT_NAME, StringPool.BLANK,
+			StringPool.BLANK, LayoutConstants.TYPE_PANEL, false, friendlyURL);
+
+		UnicodeProperties props = layout.getTypeSettingsProperties();
+
+		props.setProperty(
+			"panelSelectedPortlets",
+			PropsValues.CONTROL_PANEL_LAYOUT_PORTLETS);
+
+		layoutLocalService.updateLayout(
+			layout.getGroupId(), layout.isPrivateLayout(), layout.getLayoutId(),
+			layout.getTypeSettings());
+
+		LayoutSet layoutSet = layout.getLayoutSet();
+
+		layoutSet.setThemeId(PropsValues.CONTROL_PANEL_LAYOUT_REGULAR_THEME_ID);
+
+		LayoutSetLocalServiceUtil.updateLayoutSet(layoutSet);
+	}
+
 	protected void addDefaultGuestPublicLayoutByProperties(Group group)
 		throws PortalException, SystemException {
 
@@ -768,74 +800,18 @@ public class GroupLocalServiceImpl extends GroupLocalServiceBaseImpl {
 		}
 	}
 
-	protected void addDefaultControlPanelLayouts(Group group)
-		throws PortalException, SystemException {
-
-		if (controlPanelLARFile != null) {
-			addLayoutsByLAR(group, controlPanelLARFile, true);
-		}
-		else {
-			addDefaultControlPanelLayoutByProperties(group);
-		}
-
-	}
-
-	protected void addDefaultControlPanelLayoutByProperties(Group group)
-		throws PortalException, SystemException {
-
-		long defaultUserId = userLocalService.getDefaultUserId(
-			group.getCompanyId());
-
-		String friendlyURL = getFriendlyURL(
-			PropsValues.DEFAULT_CONTROL_PANEL_FRIENDLY_URL);
-
-		Layout layout = layoutLocalService.addLayout(
-			defaultUserId, group.getGroupId(), true,
-			LayoutConstants.DEFAULT_PARENT_LAYOUT_ID,
-			PropsValues.DEFAULT_CONTROL_PANEL_LAYOUT_NAME, StringPool.BLANK,
-			StringPool.BLANK, LayoutConstants.TYPE_PANEL, false, friendlyURL);
-
-		UnicodeProperties props = layout.getTypeSettingsProperties();
-
-		props.setProperty(
-			"panelSelectedPortlets",
-			PropsValues.DEFAULT_CONTROL_PANEL_LAYOUT_PORTLETS);
-
-		layoutLocalService.updateLayout(
-			layout.getGroupId(), layout.isPrivateLayout(), layout.getLayoutId(),
-			layout.getTypeSettings());
-
-		boolean updateLayoutSet = false;
-
-		LayoutSet layoutSet = layout.getLayoutSet();
-
-		if (Validator.isNotNull(
-				PropsValues.DEFAULT_CONTROL_PANEL_LAYOUT_REGULAR_THEME_ID)) {
-
-			layoutSet.setThemeId(
-				PropsValues.DEFAULT_CONTROL_PANEL_LAYOUT_REGULAR_THEME_ID);
-
-			updateLayoutSet = true;
-		}
-
-		if (updateLayoutSet) {
-			LayoutSetLocalServiceUtil.updateLayoutSet(layoutSet);
-		}
-	}
-
 	protected void addDefaultGuestPublicLayouts(Group group)
 		throws PortalException, SystemException {
 
 		if (publicLARFile != null) {
-			addLayoutsByLAR(group, publicLARFile, false);
+			addDefaultGuestPublicLayoutsByLAR(group, publicLARFile);
 		}
 		else {
 			addDefaultGuestPublicLayoutByProperties(group);
 		}
 	}
 
-	protected void addLayoutsByLAR(
-			Group group, File larFile, boolean privateLayout)
+	protected void addDefaultGuestPublicLayoutsByLAR(Group group, File larFile)
 		throws PortalException, SystemException {
 
 		long defaultUserId = userLocalService.getDefaultUserId(
@@ -860,8 +836,7 @@ public class GroupLocalServiceImpl extends GroupLocalServiceBaseImpl {
 			new String[] {Boolean.TRUE.toString()});
 
 		LayoutLocalServiceUtil.importLayouts(
-			defaultUserId, group.getGroupId(), privateLayout, parameterMap,
-			larFile);
+			defaultUserId, group.getGroupId(), false, parameterMap, larFile);
 	}
 
 	protected String getFriendlyURL(String friendlyURL) {
@@ -888,33 +863,6 @@ public class GroupLocalServiceImpl extends GroupLocalServiceBaseImpl {
 	}
 
 	protected void initImportLARFile() {
-		String controlPanelLARFileName =
-			PropsValues.DEFAULT_CONTROL_PANEL_LAYOUTS_LAR;
-
-		if (_log.isDebugEnabled()) {
-			_log.debug(
-				"Reading Control Panel LAR file " + controlPanelLARFileName);
-		}
-
-		if (Validator.isNotNull(controlPanelLARFileName)) {
-			controlPanelLARFile = new File(controlPanelLARFileName);
-
-			if (!controlPanelLARFile.exists()) {
-				_log.error(
-					"Control Panel LAR file " + controlPanelLARFile +
-						" does not exist");
-
-				controlPanelLARFile = null;
-			}
-			else {
-				if (_log.isDebugEnabled()) {
-					_log.debug(
-						"Using Control Panel LAR file " +
-							controlPanelLARFileName);
-				}
-			}
-		}
-
 		String publicLARFileName = PropsValues.DEFAULT_GUEST_PUBLIC_LAYOUTS_LAR;
 
 		if (_log.isDebugEnabled()) {
@@ -1085,8 +1033,6 @@ public class GroupLocalServiceImpl extends GroupLocalServiceBaseImpl {
 		catch (NoSuchGroupException nsge) {
 		}
 	}
-
-	protected File controlPanelLARFile;
 
 	protected File publicLARFile;
 

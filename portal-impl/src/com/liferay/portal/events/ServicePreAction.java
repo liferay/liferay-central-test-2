@@ -1295,8 +1295,7 @@ public class ServicePreAction extends Action {
 		themeDisplay.setShowStagingIcon(false);
 
 		String urlControlPanel =
-			portalURL + contextPath +
-			PortalUtil.getPathFriendlyURLPrivateGroup() + "/control-panel";
+			contextPath + friendlyURLPrivateGroupPath + "/control_panel";
 
 		themeDisplay.setURLControlPanel(urlControlPanel);
 

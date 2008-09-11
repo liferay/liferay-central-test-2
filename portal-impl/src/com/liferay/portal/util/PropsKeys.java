@@ -238,6 +238,14 @@ public class PropsKeys {
 
 	public static final String COMPANY_SECURITY_STRANGERS_WITH_MX = "company.security.strangers.with.mx";
 
+	public static final String CONTROL_PANEL_LAYOUT_FRIENDLY_URL = "control.panel.layout.friendly.url";
+
+	public static final String CONTROL_PANEL_LAYOUT_NAME = "control.panel.layout.name";
+
+	public static final String CONTROL_PANEL_LAYOUT_PORTLETS = "control.panel.layout.portlets";
+
+	public static final String CONTROL_PANEL_LAYOUT_REGULAR_THEME_ID = "control.panel.layout.regular.theme.id";
+
 	public static final String COUNTER_INCREMENT = "counter.increment";
 
 	public static final String CUSTOM_SQL_FUNCTION_ISNOTNULL = "custom.sql.function.isnotnull";
@@ -255,16 +263,6 @@ public class PropsKeys {
 	public static final String DEFAULT_ADMIN_PASSWORD = "default.admin.password";
 
 	public static final String DEFAULT_ADMIN_SCREEN_NAME = "default.admin.screen.name";
-
-	public static final String DEFAULT_CONTROL_PANEL_FRIENDLY_URL = "default.control.panel.friendly.url";
-
-	public static final String DEFAULT_CONTROL_PANEL_LAYOUT_NAME = "default.control.panel.layout.name";
-
-	public static final String DEFAULT_CONTROL_PANEL_LAYOUT_PORTLETS = "default.control.panel.layout.portlets";
-
-	public static final String DEFAULT_CONTROL_PANEL_LAYOUT_REGULAR_THEME_ID = "default.control.panel.layout.regular.theme.id";
-
-	public static final String DEFAULT_CONTROL_PANEL_LAYOUTS_LAR = "default.control.panel.layouts.lar";
 
 	public static final String DEFAULT_GUEST_PUBLIC_LAYOUT_COLUMN = "default.guest.public.layout.column-";
 
