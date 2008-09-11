@@ -2592,6 +2592,7 @@ public class ServiceBuilder {
 				"<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n" +
 				"\n" +
 				"<beans\n" +
+				"\tdefault-init-method=\"afterPropertiesSet\"\n" +
 				"\txmlns=\"http://www.springframework.org/schema/beans\"\n" +
 				"\txmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"\n" +
 				"\txsi:schemaLocation=\"http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd\"\n" +

@@ -26,7 +26,6 @@ import com.liferay.portal.bean.BeanLocatorImpl;
 import com.liferay.portal.kernel.bean.BeanLocator;
 import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
 import com.liferay.portal.kernel.util.PortalClassLoaderUtil;
-import com.liferay.portal.spring.util.SpringUtil;
 import com.liferay.portal.util.InitUtil;
 
 import javax.servlet.ServletContext;
@@ -58,8 +57,6 @@ public class PortalContextLoaderListener extends ContextLoaderListener {
 			PortalClassLoaderUtil.getClassLoader(), applicationContext);
 
 		PortalBeanLocatorUtil.setBeanLocator(beanLocator);
-
-		SpringUtil.initContext(applicationContext);
 	}
 
 }

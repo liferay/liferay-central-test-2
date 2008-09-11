@@ -8,7 +8,6 @@ import ${packagePath}.model.impl.${entity.name}Impl;
 import ${packagePath}.model.impl.${entity.name}ModelImpl;
 
 import com.liferay.portal.SystemException;
-import com.liferay.portal.kernel.bean.InitializingBean;
 import com.liferay.portal.kernel.dao.jdbc.MappingSqlQuery;
 import com.liferay.portal.kernel.dao.jdbc.MappingSqlQueryFactoryUtil;
 import com.liferay.portal.kernel.dao.jdbc.RowMapper;
@@ -46,7 +45,7 @@ import java.util.List;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
-public class ${entity.name}PersistenceImpl extends BasePersistenceImpl implements ${entity.name}Persistence, InitializingBean {
+public class ${entity.name}PersistenceImpl extends BasePersistenceImpl implements ${entity.name}Persistence {
 
 	public ${entity.name} create(${entity.PKClassName} ${entity.PKVarName}) {
 		${entity.name} ${entity.varName} = new ${entity.name}Impl();

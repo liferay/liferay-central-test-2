@@ -24,14 +24,12 @@ package com.liferay.portal.spring.util;
 
 import com.liferay.portal.bean.BeanLocatorImpl;
 import com.liferay.portal.kernel.bean.BeanLocator;
-import com.liferay.portal.kernel.bean.InitializingBean;
 import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
 import com.liferay.portal.kernel.util.PortalClassLoaderUtil;
 import com.liferay.portal.spring.context.ArrayApplicationContext;
 import com.liferay.portal.util.PropsKeys;
 import com.liferay.portal.util.PropsUtil;
 
-import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.AbstractApplicationContext;
 
 /**
@@ -50,30 +48,6 @@ import org.springframework.context.support.AbstractApplicationContext;
  */
 public class SpringUtil {
 
-	public static void initContext(ApplicationContext applicationContext) {
-
-		// Preinitialize Spring beans. See LEP-4734.
-
-		String[] beanDefinitionNames =
-			applicationContext.getBeanDefinitionNames();
-
-		for (String beanDefinitionName : beanDefinitionNames) {
-			if (beanDefinitionName.startsWith("base") ||
-				beanDefinitionName.endsWith(".base") ) {
-
-				continue;
-			}
-
-			Object obj = applicationContext.getBean(beanDefinitionName);
-
-			if (obj instanceof InitializingBean) {
-				InitializingBean initializingBean = (InitializingBean)obj;
-
-				initializingBean.afterPropertiesSet();
-			}
-		}
-	}
-
 	public static void loadContext() {
 		AbstractApplicationContext applicationContext =
 			new ArrayApplicationContext(
@@ -85,8 +59,6 @@ public class SpringUtil {
 			PortalClassLoaderUtil.getClassLoader(), applicationContext);
 
 		PortalBeanLocatorUtil.setBeanLocator(beanLocator);
-
-		initContext(applicationContext);
 	}
 
 }

@@ -69,6 +69,9 @@ public class TextFormatter {
 	// formatId --> format-id
 
 	public static final int K = 10;
+	
+	// FormatId --> formatId, FOrmatId->FOrmatId
+	public static final int L = 11;
 
 	public static String format(String s, int style) {
 		if (Validator.isNull(s)) {
@@ -109,6 +112,9 @@ public class TextFormatter {
 		}
 		else if (style == K) {
 			return _formatK(s);
+		}
+		else if (style == L) {
+			return _formatL(s);
 		}
 		else {
 			return s;
@@ -274,6 +280,20 @@ public class TextFormatter {
 		s = StringUtil.replace(s, StringPool.SPACE, StringPool.DASH);
 
 		return s;
+	}
+
+	private static String _formatL(String s) {
+		if (s.length() == 1) {
+			return s.toLowerCase();
+		} 
+		else if (Character.isUpperCase(s.charAt(0)) &&
+				Character.isUpperCase(s.charAt(1))) {
+			return s;
+		} 
+		else {
+			return Character.toLowerCase(s.charAt(0)) +
+				s.substring(1, s.length());
+		}
 	}
 
 }

@@ -26,7 +26,6 @@ import com.liferay.portal.bean.BeanLocatorImpl;
 import com.liferay.portal.kernel.bean.BeanLocator;
 import com.liferay.portal.kernel.bean.PortletBeanLocatorUtil;
 import com.liferay.portal.kernel.portlet.PortletClassLoaderUtil;
-import com.liferay.portal.spring.util.SpringUtil;
 
 import java.lang.reflect.Method;
 
@@ -80,8 +79,6 @@ public class PortletContextLoaderListener extends ContextLoaderListener {
 		catch (Exception e) {
 			_log.error(e, e);
 		}
-
-		SpringUtil.initContext(applicationContext);
 	}
 
 	protected ContextLoader createContextLoader() {

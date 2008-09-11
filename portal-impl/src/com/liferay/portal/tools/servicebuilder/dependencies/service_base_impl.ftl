@@ -2,7 +2,6 @@ package ${packagePath}.service.base;
 
 import ${packagePath}.service.${entity.name}${sessionTypeName}Service;
 
-import com.liferay.portal.kernel.bean.InitializingBean;
 import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
 import ${beanLocatorUtil};
 
@@ -26,17 +25,12 @@ import ${beanLocatorUtil};
 </#if>
 
 <#list referenceList as tempEntity>
-	<#if entity.equals(tempEntity)>
-		<#if sessionTypeName == "" && tempEntity.hasLocalService()>
-			import ${tempEntity.packagePath}.service.${tempEntity.name}LocalService;
-		</#if>
-	<#else>
-		<#if tempEntity.hasLocalService()>
-			import ${tempEntity.packagePath}.service.${tempEntity.name}LocalService;
-		</#if>
-		<#if tempEntity.hasRemoteService()>
-			import ${tempEntity.packagePath}.service.${tempEntity.name}Service;
-		</#if>
+	<#if tempEntity.hasLocalService()>
+		import ${tempEntity.packagePath}.service.${tempEntity.name}LocalService;
+	</#if>
+
+	<#if tempEntity.hasRemoteService()>
+		import ${tempEntity.packagePath}.service.${tempEntity.name}Service;
 	</#if>
 
 	<#if tempEntity.hasColumns()>
@@ -51,9 +45,9 @@ import ${beanLocatorUtil};
 </#list>
 
 <#if sessionTypeName == "Local">
-	public abstract class ${entity.name}LocalServiceBaseImpl implements ${entity.name}LocalService, InitializingBean {
+	public abstract class ${entity.name}LocalServiceBaseImpl implements ${entity.name}LocalService {
 <#else>
-	public abstract class ${entity.name}ServiceBaseImpl extends PrincipalBean implements ${entity.name}Service, InitializingBean {
+	public abstract class ${entity.name}ServiceBaseImpl extends PrincipalBean implements ${entity.name}Service {
 </#if>
 
 <#if sessionTypeName == "Local" && entity.hasColumns()>
@@ -102,129 +96,63 @@ import ${beanLocatorUtil};
 	}
 </#if>
 
-<#if entity.TXManager != "none">
-	<#list referenceList as tempEntity>
-		<#if entity.equals(tempEntity)>
-			<#if sessionTypeName == "" && tempEntity.hasLocalService()>
-				public ${tempEntity.name}LocalService get${tempEntity.name}LocalService() {
-					return ${tempEntity.varName}LocalService;
-				}
+<#list referenceList as tempEntity>
+	<#if tempEntity.hasLocalService()>
+		public ${tempEntity.name}LocalService get${tempEntity.name}LocalService() {
+			return ${tempEntity.varName}LocalService;
+		}
 
-				public void set${tempEntity.name}LocalService(${tempEntity.name}LocalService ${tempEntity.varName}LocalService) {
-					this.${tempEntity.varName}LocalService = ${tempEntity.varName}LocalService;
-				}
-			</#if>
-		<#else>
-			<#if tempEntity.hasLocalService()>
-				public ${tempEntity.name}LocalService get${tempEntity.name}LocalService() {
-					return ${tempEntity.varName}LocalService;
-				}
+		public void set${tempEntity.name}LocalService(${tempEntity.name}LocalService ${tempEntity.varName}LocalService) {
+			this.${tempEntity.varName}LocalService = ${tempEntity.varName}LocalService;
+		}
+	</#if>
 
-				public void set${tempEntity.name}LocalService(${tempEntity.name}LocalService ${tempEntity.varName}LocalService) {
-					this.${tempEntity.varName}LocalService = ${tempEntity.varName}LocalService;
-				}
-			</#if>
+	<#if tempEntity.hasRemoteService()>
+		public ${tempEntity.name}Service get${tempEntity.name}Service() {
+			return ${tempEntity.varName}Service;
+		}
 
-			<#if tempEntity.hasRemoteService()>
-				public ${tempEntity.name}Service get${tempEntity.name}Service() {
-					return ${tempEntity.varName}Service;
-				}
+		public void set${tempEntity.name}Service(${tempEntity.name}Service ${tempEntity.varName}Service) {
+			this.${tempEntity.varName}Service = ${tempEntity.varName}Service;
+		}
+	</#if>
 
-				public void set${tempEntity.name}Service(${tempEntity.name}Service ${tempEntity.varName}Service) {
-					this.${tempEntity.varName}Service = ${tempEntity.varName}Service;
-				}
-			</#if>
-		</#if>
+	<#if tempEntity.hasColumns()>
+		public ${tempEntity.name}Persistence get${tempEntity.name}Persistence() {
+			return ${tempEntity.varName}Persistence;
+		}
 
-		<#if tempEntity.hasColumns()>
-			public ${tempEntity.name}Persistence get${tempEntity.name}Persistence() {
-				return ${tempEntity.varName}Persistence;
-			}
+		public void set${tempEntity.name}Persistence(${tempEntity.name}Persistence ${tempEntity.varName}Persistence) {
+			this.${tempEntity.varName}Persistence = ${tempEntity.varName}Persistence;
+		}
+	</#if>
 
-			public void set${tempEntity.name}Persistence(${tempEntity.name}Persistence ${tempEntity.varName}Persistence) {
-				this.${tempEntity.varName}Persistence = ${tempEntity.varName}Persistence;
-			}
-		</#if>
+	<#if tempEntity.hasFinderClass()>
+		public ${tempEntity.name}Finder get${tempEntity.name}Finder() {
+			return ${tempEntity.varName}Finder;
+		}
 
-		<#if tempEntity.hasFinderClass()>
-			public ${tempEntity.name}Finder get${tempEntity.name}Finder() {
-				return ${tempEntity.varName}Finder;
-			}
+		public void set${tempEntity.name}Finder(${tempEntity.name}Finder ${tempEntity.varName}Finder) {
+			this.${tempEntity.varName}Finder = ${tempEntity.varName}Finder;
+		}
+	</#if>
+</#list>
 
-			public void set${tempEntity.name}Finder(${tempEntity.name}Finder ${tempEntity.varName}Finder) {
-				this.${tempEntity.varName}Finder = ${tempEntity.varName}Finder;
-			}
-		</#if>
-	</#list>
+<#list referenceList as tempEntity>
+	<#if tempEntity.hasLocalService()>
+		protected ${tempEntity.name}LocalService ${tempEntity.varName}LocalService;
+	</#if>
 
-	public void afterPropertiesSet() {
-		<#list referenceList as tempEntity>
-			<#if tempEntity.isPortalReference()>
-				<#assign tempBeanLocatorUtilShortName = "PortalBeanLocatorUtil">
-			<#else>
-				<#assign tempBeanLocatorUtilShortName = beanLocatorUtilShortName>
-			</#if>
+	<#if tempEntity.hasRemoteService()>
+		protected ${tempEntity.name}Service ${tempEntity.varName}Service;
+	</#if>
 
-			<#if entity.equals(tempEntity)>
-				<#if sessionTypeName == "" && tempEntity.hasLocalService()>
-					if (${tempEntity.varName}LocalService == null) {
-						${tempEntity.varName}LocalService = (${tempEntity.name}LocalService)${tempBeanLocatorUtilShortName}.locate(${tempEntity.name}LocalService.class.getName() + ".impl");
-					}
-				</#if>
-			<#else>
-				<#if tempEntity.hasLocalService()>
-					if (${tempEntity.varName}LocalService == null) {
-						${tempEntity.varName}LocalService = (${tempEntity.name}LocalService)${tempBeanLocatorUtilShortName}.locate(${tempEntity.name}LocalService.class.getName() + ".impl");
-					}
-				</#if>
+	<#if tempEntity.hasColumns()>
+		protected ${tempEntity.name}Persistence ${tempEntity.varName}Persistence;
+	</#if>
 
-				<#if tempEntity.hasRemoteService()>
-					if (${tempEntity.varName}Service == null) {
-						${tempEntity.varName}Service = (${tempEntity.name}Service)${tempBeanLocatorUtilShortName}.locate(${tempEntity.name}Service.class.getName() + ".impl");
-					}
-				</#if>
-			</#if>
-
-			<#if tempEntity.hasColumns()>
-				if (${tempEntity.varName}Persistence == null) {
-					${tempEntity.varName}Persistence = (${tempEntity.name}Persistence)${tempBeanLocatorUtilShortName}.locate(${tempEntity.name}Persistence.class.getName() + ".impl");
-				}
-			</#if>
-
-			<#if tempEntity.hasFinderClass()>
-				if (${tempEntity.varName}Finder == null) {
-					${tempEntity.varName}Finder = (${tempEntity.name}Finder)${tempBeanLocatorUtilShortName}.locate(${tempEntity.name}Finder.class.getName() + ".impl");
-				}
-			</#if>
-		</#list>
-	}
-
-	<#list referenceList as tempEntity>
-		<#if entity.equals(tempEntity)>
-			<#if (sessionTypeName == "") && tempEntity.hasLocalService()>
-				protected ${tempEntity.name}LocalService ${tempEntity.varName}LocalService;
-			</#if>
-		<#else>
-			<#if tempEntity.hasLocalService()>
-				protected ${tempEntity.name}LocalService ${tempEntity.varName}LocalService;
-			</#if>
-
-			<#if tempEntity.hasRemoteService()>
-				protected ${tempEntity.name}Service ${tempEntity.varName}Service;
-			</#if>
-		</#if>
-
-		<#if tempEntity.hasColumns()>
-			protected ${tempEntity.name}Persistence ${tempEntity.varName}Persistence;
-		</#if>
-
-		<#if tempEntity.hasFinderClass()>
-			protected ${tempEntity.name}Finder ${tempEntity.varName}Finder;
-		</#if>
-	</#list>
-<#else>
-	public void afterPropertiesSet() {
-	}
-</#if>
-
+	<#if tempEntity.hasFinderClass()>
+		protected ${tempEntity.name}Finder ${tempEntity.varName}Finder;
+	</#if>
+</#list>
 }
