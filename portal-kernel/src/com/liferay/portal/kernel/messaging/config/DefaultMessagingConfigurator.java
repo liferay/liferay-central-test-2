@@ -37,51 +37,17 @@ import java.util.Map;
  * @author Michael C. Han
  *
  */
-public class DefaultMessagingConfigurator implements MessagingConfigurator {
+public class DefaultMessagingConfigurator extends AbstractMessagingConfigurator {
 
-	public void configure() {
-		for (DestinationEventListener listener : _destinationEventListeners) {
-			_messageBus.addDestinationEventListener(listener);
-		}
-
-		for (Destination destination : _destinations) {
-			_messageBus.addDestination(destination);
-		}
-
-		for (Map.Entry<String, List<MessageListener>> listeners :
-				_messageListeners.entrySet()) {
-
-			String destination = listeners.getKey();
-
-			for (MessageListener listener : listeners.getValue()) {
-				_messageBus.registerMessageListener(destination, listener);
-			}
-		}
-	}
-
-	public void setDestinationEventListeners(
-		List<DestinationEventListener> destinationEventListeners) {
-
-		_destinationEventListeners = destinationEventListeners;
-	}
-
-	public void setDestinations(List<Destination> destinations) {
-		_destinations = destinations;
-	}
 
 	public void setMessageBus(MessageBus messageBus) {
 		_messageBus = messageBus;
 	}
 
-	public void setMessageListeners(
-		Map<String, List<MessageListener>> messageListeners) {
-
-		_messageListeners = messageListeners;
+	protected MessageBus getMessageBus() {
+		return _messageBus;
 	}
 
-	private List<DestinationEventListener> _destinationEventListeners;
-	private List<Destination> _destinations;
 	private MessageBus _messageBus;
-	private Map<String, List<MessageListener>> _messageListeners;
 
 }

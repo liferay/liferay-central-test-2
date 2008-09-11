@@ -39,6 +39,8 @@ public interface MessagingConfigurator {
 
 	public void configure();
 
+	public void destroy();
+
 	public void setDestinationEventListeners(
 		List<DestinationEventListener> listeners);
 
