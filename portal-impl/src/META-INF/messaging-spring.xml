@@ -19,7 +19,7 @@
 	<bean id="com.liferay.portal.kernel.messaging.sender.SynchronousMessageSender" class="com.liferay.portal.kernel.messaging.sender.DefaultSynchronousMessageSender">
 		<constructor-arg index="0" type="com.liferay.portal.kernel.messaging.MessageBus" ref="com.liferay.portal.kernel.messaging.MessageBus" />
 		<constructor-arg index="1" type="com.liferay.portal.kernel.uuid.PortalUUID" ref="com.liferay.portal.kernel.uuid.PortalUUID" />
-		<constructor-arg index="2" type="java.lang.Long" value="10000"/>
+		<constructor-arg index="2" type="long" value="10000"/>
 	</bean>
 
 	<!-- Destinations -->
