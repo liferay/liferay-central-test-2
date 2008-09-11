@@ -51,15 +51,19 @@ int firstDayOfWeek = GetterUtil.getInteger((String)request.getAttribute("liferay
 String imageInputId = JS.getSafeName(GetterUtil.getString((String)request.getAttribute("liferay-ui:input-date:imageInputId")));
 boolean disabled = GetterUtil.getBoolean((String)request.getAttribute("liferay-ui:input-date:disabled"));
 
-String datePattern = ((SimpleDateFormat)(DateFormat.getDateInstance(DateFormat.SHORT))).toPattern();
-boolean dateFormatMDY = true;
-if( datePattern.indexOf("y") == 0 ) dateFormatMDY = false;
-
 if (Validator.isNull(imageInputId)) {
 	imageInputId = randomNamespace + "imageInputId";
 }
 else {
 	imageInputId = namespace + imageInputId;
+}
+
+String dateFormatPattern = ((SimpleDateFormat)(DateFormat.getDateInstance(DateFormat.SHORT))).toPattern();
+
+boolean dateFormatMDY = true;
+
+if (dateFormatPattern.indexOf("y") == 0) {
+	dateFormatMDY = false;
 }
 %>
 
@@ -185,22 +189,21 @@ else {
 		%>
 
 		<c:choose>
-		
 			<c:when test="<%= dateFormatMDY %>">
-			
 				<%@ include file="select_month.jspf" %>
+
 				<%@ include file="select_day.jspf" %>
+
 				<%@ include file="select_year.jspf" %>
-				
 			</c:when>
-			
+
 			<c:otherwise>
-			
 				<%@ include file="select_year.jspf" %>
+
 				<%@ include file="select_month.jspf" %>
+
 				<%@ include file="select_day.jspf" %>
-				
-			</c:otherwise>	
+			</c:otherwise>
 		</c:choose>
 	</c:when>
 
@@ -229,9 +232,8 @@ else {
 			%>
 
 		</select>
-		
+
 		<%@ include file="select_day.jspf" %>
-		
 	</c:otherwise>
 </c:choose>
 
