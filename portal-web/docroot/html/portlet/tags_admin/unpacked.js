@@ -68,6 +68,26 @@ Liferay.Portlet.TagsAdmin = new Class({
 			jQuery('.vocabulary-list-container .results-header').html(label);
 		};
 
+		var changeEntryHeaderLabel = function(label){
+			label = Liferay.Language.get(label);
+			jQuery('.vocabulary-entries-container .results-header').html(label);
+		};
+
+		var changeEditEntryHeaderLabel = function(label){
+			label = Liferay.Language.get(label);
+			jQuery('.vocabulary-edit-entry .results-header').html(label);
+		};
+
+		var changeVocabularyPermissionButtonsLabels = function(label) {
+			label = Liferay.Language.get(label);
+			jQuery('.permissions-vocabulary-btn').val(label);
+		};
+
+		var changeEntryPermissionButtonsLabels = function(label) {
+			label = Liferay.Language.get(label);
+			jQuery('.permissions-entries-btn').val(label);
+		};
+
 		var selectButton = function(button) {
 			buttons.find('.button').removeClass('selected');
 			jQuery(button).addClass('selected');
@@ -78,12 +98,16 @@ Liferay.Portlet.TagsAdmin = new Class({
 				instance._selectedVocabulary = 'tag';
 
 				changeAddLabel('add-tag');
-				changeToLabel('to-tag-set');
+				changeEditEntryHeaderLabel('edit-tag');
+				changeEntryHeaderLabel('tags');
+				changeEntryPermissionButtonsLabels('edit-tag-permissions');
 				changeSearchSelectLabels('tag-sets');
+				changeToLabel('to-tag-set');
 				changeToolbarSectionLabels('add-tag-set');
-				changeVocaularyAddLabel('add-tag-set');
 				changeVocabularyDeleteBtnLabel('delete-tag-set');
 				changeVocabularyHeaderLabel('tag-sets');
+				changeVocabularyPermissionButtonsLabels('edit-tag-set-permissions');
+				changeVocaularyAddLabel('add-tag-set');
 
 				selectButton(this);
 
@@ -97,12 +121,16 @@ Liferay.Portlet.TagsAdmin = new Class({
 				instance._selectedVocabulary = 'category';
 
 				changeAddLabel('add-category');
-				changeToLabel('to-vocabulary');
+				changeEditEntryHeaderLabel('edit-category');
+				changeEntryHeaderLabel('categories');
+				changeEntryPermissionButtonsLabels('edit-category-permissions');
 				changeSearchSelectLabels('categories');
+				changeToLabel('to-vocabulary');
 				changeToolbarSectionLabels('add-vocabulary');
-				changeVocaularyAddLabel('add-vocabulary');
 				changeVocabularyDeleteBtnLabel('delete-vocabulary');
 				changeVocabularyHeaderLabel('Vocabulary');
+				changeVocabularyPermissionButtonsLabels('edit-vocabulary-permissions');
+				changeVocaularyAddLabel('add-vocabulary');
 
 				selectButton(this);
 
@@ -123,7 +151,7 @@ Liferay.Portlet.TagsAdmin = new Class({
 			}
 		);
 
-		jQuery('.permissions-entries-button').click(
+		jQuery('.permissions-entries-btn').click(
 			function() {
 				var portletURL = instance._createPermissionURL(
 					'com.liferay.portlet.tags.model.TagsEntry',
@@ -135,7 +163,7 @@ Liferay.Portlet.TagsAdmin = new Class({
 			}
 		);
 
-		jQuery('.permissions-vocabulary-button').click(
+		jQuery('.permissions-vocabulary-btn').click(
 			function() {
 				var portletURL = instance._createPermissionURL(
 					'com.liferay.portlet.tags.model.TagsVocabulary',
@@ -864,6 +892,7 @@ Liferay.Portlet.TagsAdmin = new Class({
 		var instance = this;
 
 		instance._hideSection('.vocabulary-edit');
+		jQuery(instance._layoutContainerCells).width('auto');
 	},
 
 	_deleteEntry: function(entryId, callback) {
@@ -1268,6 +1297,7 @@ Liferay.Portlet.TagsAdmin = new Class({
 		if (!element.is(':visible')) {
 			element.parent().addClass('vocabulary-editing-tag');
 			element.find('input:first').focus();
+			jQuery(instance._layoutContainerCells).width('33%');
 		}
 	},
 
@@ -1410,10 +1440,11 @@ Liferay.Portlet.TagsAdmin = new Class({
 
 	_entryListClass: '.vocabulary-entries li',
 	_entryScopeClass: '.vocabulary-entries',
+	_layoutContainerCells: '.portlet-tags-admin .vocabulary-content td',
+	_selectedEntryName: null,
 	_selectedVocabulary: 'tag',
 	_selectedVocabularyId: null,
 	_selectedVocabularyName: null,
-	_selectedEntryName: null,
 	_vocabularyListClass: '.vocabulary-list li',
 	_vocabularyScopeClass: '.vocabulary-list'
 });

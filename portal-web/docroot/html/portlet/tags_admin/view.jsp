@@ -59,7 +59,7 @@
 					<div class="panel-content">
 						<div class="ctrl-holder">
 							<label class="vocabulary-label" for="vocabulary-entry-name">
-								<liferay-ui:message key="tag-name" />
+								<liferay-ui:message key="name" />
 							</label>
 
 							<input class="vocabulary-entry-name" name="vocabulary-entry-name" type="text" value="" />
@@ -139,7 +139,7 @@
 			</div>
 
 			<div class="vocabulary-label">
-				<liferay-ui:message key="tag-name" />:
+				<liferay-ui:message key="name" />:
 			</div>
 
 			<input class="entry-name" name="entry-name" type="text" />
@@ -169,7 +169,7 @@
 
 				<input class="vocabulary-delete-entries-button" type="button" value="<liferay-ui:message key="delete" />" />
 
-				<input class="permissions-entries-button" type="button" value="<liferay-ui:message key="edit-entry-permissions" />" />
+				<input class="permissions-entries-btn" type="button" value="<liferay-ui:message key="edit-tag-permissions" />" />
 			</div>
 		</div>
 	</td>
@@ -179,7 +179,7 @@
 		<div class="vocabulary-footer">
 			<input class="vocabulary-delete-list-button" type="button" value="<liferay-ui:message key="delete-tag-set" />" />
 
-			<input class="permissions-vocabulary-button" type="button" value="<liferay-ui:message key="edit-vocabulary-permissions" />" />
+			<input class="permissions-vocabulary-btn" type="button" value="<liferay-ui:message key="edit-tag-set-permissions" />" />
 		</div>
 	</td>
 </tr>

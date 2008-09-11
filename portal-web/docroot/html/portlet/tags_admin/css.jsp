@@ -101,6 +101,10 @@
 	background: #aeb9be;
 }
 
+.ie6 .portlet-tags-admin .vocabulary-treeview-container .vocabulary-item.selected {
+	background: none;
+}
+
 .portlet-tags-admin .vocabulary-item.selected a {
 	color: #000;
 	text-decoration: none;
@@ -126,7 +130,6 @@
 .portlet-tags-admin .vocabulary-entries {
 	border-right: 1px solid #D3D7DB;
 	height: 300px;
-	min-width: 200px;
 	overflow: auto;
 }
 
@@ -143,7 +146,7 @@
 }
 
 .portlet-tags-admin .vocabulary-properties {
-	width: 300px;
+	width: 380px;
 }
 
 .portlet-tags-admin .ui-tags .nowrap {
@@ -224,6 +227,7 @@
 .portlet-tags-admin .lfr-floating-panel {
 	display: none;
 	position: absolute;
+	width: 230px;
 }
 
 .portlet-tags-admin .panel-content {
@@ -274,7 +278,7 @@
 }
 
 .portlet-tags-admin .vocabulary-container .entry-name {
-	width: 99%;
+	width: 300px;
 }
 
 .portlet-tags-admin #vocabulary-search-input {
@@ -292,12 +296,16 @@
 	height: 1px;
 }
 
+.ie6 .portlet-tags-admin .treeview .hitarea {
+	background-image: none;
+}
+
 .portlet-tags-admin .treeview .hover {
 	cursor: pointer;
 }
 
 .portlet-tags-admin .treeview li, .portlet-tags-admin .treeview li.lastCollapsable, .portlet-tags-admin .treeview li.lastExpandable {
-	background-image: none !important;
+	background-image: none;
 }
 
 .portlet-tags-admin .treeview .placeholder {
