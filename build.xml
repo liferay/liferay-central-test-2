@@ -374,7 +374,7 @@
 				<copy todir="${app.server.glassfish.lib.global.dir}">
 					<fileset
 						dir="lib/portal"
-						includes="log4j.jar,xercesImpl.jar,ccpp.jar"
+						includes="ccpp.jar,log4j.jar,xercesImpl.jar"
 					/>
 				</copy>
 
