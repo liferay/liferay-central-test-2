@@ -439,6 +439,8 @@ public class ServiceBuilder {
 		_tplServiceBaseImpl = _getTplProperty(
 			"service_base_impl", _tplServiceBaseImpl);
 		_tplServiceClp = _getTplProperty("service_clp", _tplServiceClp);
+		_tplServiceClpSerializer = _getTplProperty(
+			"service_clp_serializer", _tplServiceClpSerializer);
 		_tplServiceFactory = _getTplProperty(
 			"service_factory", _tplServiceFactory);
 		_tplServiceHttp = _getTplProperty("service_http", _tplServiceHttp);
@@ -906,8 +908,8 @@ public class ServiceBuilder {
 						entity.getName().equals("User")) {
 
 						if (entity.hasColumns()) {
-							_createHBM(entity);
-							_createHBMUtil(entity);
+							_createHbm(entity);
+							_createHbmUtil(entity);
 
 							_createPersistenceImpl(entity);
 							_createPersistence(entity);
@@ -959,10 +961,10 @@ public class ServiceBuilder {
 
 							if (Validator.isNotNull(_jsonFileName)) {
 								_createServiceHttp(entity);
-								_createServiceJSON(entity);
+								_createServiceJson(entity);
 
 								if (entity.hasColumns()) {
-									_createServiceJSONSerializer(entity);
+									_createServiceJsonSerializer(entity);
 								}
 
 								_createServiceSoap(entity);
@@ -971,16 +973,18 @@ public class ServiceBuilder {
 					}
 				}
 
-				_createHBMXML();
-				_createModelHintsXML();
-				_createSpringXML();
+				_createHbmXml();
+				_createModelHintsXml();
+				_createSpringXml();
+
+				_createServiceClpSerializer();
 
 				if (Validator.isNotNull(_jsonFileName)) {
-					_createJSONJS();
+					_createJsonJs();
 				}
 
 				if (Validator.isNotNull(_remotingFileName)) {
-					_createRemotingXML();
+					_createRemotingXml();
 				}
 
 				_createSQLIndexes();
@@ -990,9 +994,9 @@ public class ServiceBuilder {
 				_createExceptions(exceptionList);
 
 				_createProps();
-				_createSpringBaseXML();
-				_createSpringHibernateXML();
-				_createSpringInfrastructureXML();
+				_createSpringBaseXml();
+				_createSpringHibernateXml();
+				_createSpringInfrastructureXml();
 			}
 		}
 		catch (Exception e) {
@@ -1636,7 +1640,7 @@ public class ServiceBuilder {
 		}
 	}
 
-	private void _createHBM(Entity entity) {
+	private void _createHbm(Entity entity) {
 		File ejbFile = new File(
 			_outputPath + "/service/persistence/" + entity.getName() +
 				"HBM.java");
@@ -1648,7 +1652,7 @@ public class ServiceBuilder {
 		}
 	}
 
-	private void _createHBMUtil(Entity entity) {
+	private void _createHbmUtil(Entity entity) {
 		File ejbFile = new File(
 			_outputPath + "/service/persistence/" + entity.getName() +
 				"HBMUtil.java");
@@ -1660,7 +1664,7 @@ public class ServiceBuilder {
 		}
 	}
 
-	private void _createHBMXML() throws Exception {
+	private void _createHbmXml() throws Exception {
 		Map<String, Object> context = _getContext();
 
 		context.put("entities", _ejbList);
@@ -1683,7 +1687,7 @@ public class ServiceBuilder {
 		}
 
 		String oldContent = FileUtil.read(xmlFile);
-		String newContent = _fixHBMXML(oldContent);
+		String newContent = _fixHbmXml(oldContent);
 
 		int firstClass = newContent.indexOf(
 			"<class name=\"" + _packagePath + ".model.impl.");
@@ -1706,14 +1710,14 @@ public class ServiceBuilder {
 					newContent.substring(lastClass, newContent.length());
 		}
 
-		newContent = _formatXML(newContent);
+		newContent = _formatXml(newContent);
 
 		if (!oldContent.equals(newContent)) {
 			FileUtil.write(xmlFile, newContent);
 		}
 	}
 
-	private void _createJSONJS() throws Exception {
+	private void _createJsonJs() throws Exception {
 		StringBuilder content = new StringBuilder();
 
 		if (_ejbList.size() > 0) {
@@ -1850,7 +1854,7 @@ public class ServiceBuilder {
 		writeFile(modelFile, content, _author);
 	}
 
-	private void _createModelHintsXML() throws Exception {
+	private void _createModelHintsXml() throws Exception {
 		Map<String, Object> context = _getContext();
 
 		context.put("entities", _ejbList);
@@ -1895,7 +1899,7 @@ public class ServiceBuilder {
 				newContent.substring(lastModel, newContent.length());
 		}
 
-		newContent = _formatXML(newContent);
+		newContent = _formatXml(newContent);
 
 		if (!oldContent.equals(newContent)) {
 			FileUtil.write(xmlFile, newContent);
@@ -2103,7 +2107,7 @@ public class ServiceBuilder {
 		FileUtil.write(propsFile, content, true);
 	}
 
-	private void _createRemotingXML() throws Exception {
+	private void _createRemotingXml() throws Exception {
 		StringBuilder sb = new StringBuilder();
 
 		Document doc = SAXReaderUtil.read(new File(_springFileName), true);
@@ -2177,7 +2181,7 @@ public class ServiceBuilder {
 					content.substring(x, content.length());
 		}
 
-		newContent = _formatXML(newContent);
+		newContent = _formatXml(newContent);
 
 		if (!content.equals(newContent)) {
 			FileUtil.write(outputFile, newContent);
@@ -2304,6 +2308,23 @@ public class ServiceBuilder {
 		writeFile(ejbFile, content, _author);
 	}
 
+	private void _createServiceClpSerializer() throws Exception {
+		Map<String, Object> context = _getContext();
+
+		context.put("entities", _ejbList);
+
+		// Content
+
+		String content = _processTemplate(_tplServiceClpSerializer, context);
+
+		// Write file
+
+		File ejbFile = new File(
+			_serviceOutputPath + "/service/ClpSerializer.java");
+
+		writeFile(ejbFile, content);
+	}
+
 	private void _createServiceFactory(Entity entity, int sessionType)
 		throws Exception {
 
@@ -2404,7 +2425,7 @@ public class ServiceBuilder {
 		}
 	}
 
-	private void _createServiceJSON(Entity entity) throws Exception {
+	private void _createServiceJson(Entity entity) throws Exception {
 		JavaClass javaClass = _getJavaClass(
 			_outputPath + "/service/impl/" + entity.getName() +
 				"ServiceImpl.java");
@@ -2431,7 +2452,7 @@ public class ServiceBuilder {
 		writeFile(ejbFile, content, _author, jalopySettings);
 	}
 
-	private void _createServiceJSONSerializer(Entity entity) throws Exception {
+	private void _createServiceJsonSerializer(Entity entity) throws Exception {
 		Map<String, Object> context = _getContext();
 
 		context.put("entity", entity);
@@ -2522,7 +2543,7 @@ public class ServiceBuilder {
 		}
 	}
 
-	private void _createSpringBaseXML() throws Exception {
+	private void _createSpringBaseXml() throws Exception {
 		if (Validator.isNull(_springBaseFileName)) {
 			return;
 		}
@@ -2544,7 +2565,7 @@ public class ServiceBuilder {
 		}
 	}
 
-	private void _createSpringHibernateXML() throws Exception {
+	private void _createSpringHibernateXml() throws Exception {
 		if (Validator.isNull(_springHibernateFileName)) {
 			return;
 		}
@@ -2560,7 +2581,7 @@ public class ServiceBuilder {
 		FileUtil.write(ejbFile, content, true);
 	}
 
-	private void _createSpringInfrastructureXML() throws Exception {
+	private void _createSpringInfrastructureXml() throws Exception {
 		if (Validator.isNull(_springInfrastructureFileName)) {
 			return;
 		}
@@ -2576,7 +2597,7 @@ public class ServiceBuilder {
 		FileUtil.write(ejbFile, content, true);
 	}
 
-	private void _createSpringXML() throws Exception {
+	private void _createSpringXml() throws Exception {
 		Map<String, Object> context = _getContext();
 
 		context.put("entities", _ejbList);
@@ -2603,7 +2624,7 @@ public class ServiceBuilder {
 		}
 
 		String oldContent = FileUtil.read(xmlFile);
-		String newContent = _fixSpringXML(oldContent);
+		String newContent = _fixSpringXml(oldContent);
 
 		int x = oldContent.indexOf("<beans");
 		int y = oldContent.lastIndexOf("</beans>");
@@ -2630,7 +2651,7 @@ public class ServiceBuilder {
 				newContent.substring(lastSession, newContent.length());
 		}
 
-		newContent = _formatXML(newContent);
+		newContent = _formatXml(newContent);
 
 		if (!oldContent.equals(newContent)) {
 			FileUtil.write(xmlFile, newContent);
@@ -3067,7 +3088,7 @@ public class ServiceBuilder {
 		}
 	}
 
-	private String _fixHBMXML(String content) throws IOException {
+	private String _fixHbmXml(String content) throws IOException {
 		StringBuilder sb = new StringBuilder();
 
 		BufferedReader br = new BufferedReader(new StringReader(content));
@@ -3106,11 +3127,11 @@ public class ServiceBuilder {
 		return sb.toString().trim();
 	}
 
-	private String _fixSpringXML(String content) {
+	private String _fixSpringXml(String content) {
 		return StringUtil.replace(content, ".service.spring.", ".service.");
 	}
 
-	private String _formatXML(String xml)
+	private String _formatXml(String xml)
 		throws DocumentException, IOException {
 
 		String doctype = null;
@@ -3537,6 +3558,8 @@ public class ServiceBuilder {
 	private String _tplService = _TPL_ROOT + "service.ftl";
 	private String _tplServiceBaseImpl = _TPL_ROOT + "service_base_impl.ftl";
 	private String _tplServiceClp = _TPL_ROOT + "service_clp.ftl";
+	private String _tplServiceClpSerializer =
+		_TPL_ROOT + "service_clp_serializer.ftl";
 	private String _tplServiceFactory = _TPL_ROOT + "service_factory.ftl";
 	private String _tplServiceHttp = _TPL_ROOT + "service_http.ftl";
 	private String _tplServiceImpl = _TPL_ROOT + "service_impl.ftl";

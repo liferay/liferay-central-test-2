@@ -1,11 +1,5 @@
 package ${packagePath}.service;
 
-<#if entity.hasColumns()>
-	import ${packagePath}.model.${entity.name}Clp;
-</#if>
-
-import com.liferay.portal.kernel.log.Log;
-import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.BooleanWrapper;
 import com.liferay.portal.kernel.util.ClassLoaderProxy;
 import com.liferay.portal.kernel.util.DoubleWrapper;
@@ -15,19 +9,11 @@ import com.liferay.portal.kernel.util.LongWrapper;
 import com.liferay.portal.kernel.util.MethodWrapper;
 import com.liferay.portal.kernel.util.NullWrapper;
 import com.liferay.portal.kernel.util.ShortWrapper;
-import com.liferay.portal.model.BaseModel;
-
-import java.lang.reflect.Method;
-
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
 
 public class ${entity.name}${sessionTypeName}ServiceClp implements ${entity.name}${sessionTypeName}Service {
 
 	public ${entity.name}${sessionTypeName}ServiceClp(ClassLoaderProxy classLoaderProxy) {
 		_classLoaderProxy = classLoaderProxy;
-		_classLoader = classLoaderProxy.getClassLoader();
 	}
 
 	<#list methods as method>
@@ -78,7 +64,7 @@ public class ${entity.name}${sessionTypeName}ServiceClp implements ${entity.name
 					<#elseif parameterTypeName == "short">
 						new ShortWrapper(${parameter.name});
 					<#else>
-						translateInput(${parameter.name});
+						ClpSerializer.translateInput(${parameter.name});
 
 						if (${parameter.name} == null) {
 							paramObj${parameter_index} = new NullWrapper("${serviceBuilder.getClassName(parameter.type)}");
@@ -142,198 +128,13 @@ public class ${entity.name}${sessionTypeName}ServiceClp implements ${entity.name
 					<#elseif returnTypeName == "short">
 						return ((Short)returnObj).shortValue();
 					<#else>
-						return (${returnTypeName})translateOutput(returnObj);
+						return (${returnTypeName})ClpSerializer.translateOutput(returnObj);
 					</#if>
 				</#if>
 			}
 		</#if>
 	</#list>
 
-	<#if entity.hasColumns()>
-		protected Object translateInput(BaseModel oldModel) {
-			Class oldModelClass = oldModel.getClass();
-
-			String oldModelClassName = oldModelClass.getName();
-
-			if (oldModelClassName.equals(${entity.name}Clp.class.getName())) {
-				${entity.name}Clp oldCplModel = (${entity.name}Clp)oldModel;
-
-				ClassLoader contextClassLoader = Thread.currentThread().getContextClassLoader();
-
-				try {
-					Thread.currentThread().setContextClassLoader(_classLoader);
-
-					try {
-						Class newModelClass = Class.forName("${packagePath}.model.impl.${entity.name}Impl", true, _classLoader);
-
-						Object newModel = newModelClass.newInstance();
-
-						<#list entity.regularColList as column>
-							Method method${column_index} = newModelClass.getMethod("set${column.methodName}", new Class[] {
-								<#if column.isPrimitiveType()>
-									${serviceBuilder.getPrimitiveObj(column.type)}.TYPE
-								<#else>
-									${column.type}.class
-								</#if>
-							});
-
-							<#if column.isPrimitiveType()>
-								${serviceBuilder.getPrimitiveObj(column.type)}
-							<#else>
-								${column.type}
-							</#if>
-
-							value${column_index} =
-
-							<#if column.isPrimitiveType()>
-								new ${serviceBuilder.getPrimitiveObj(column.type)}(
-							</#if>
-
-							oldCplModel.get${column.methodName}()
-
-							<#if column.isPrimitiveType()>
-								)
-							</#if>
-
-							;
-
-							method${column_index}.invoke(newModel, value${column_index});
-						</#list>
-
-						return newModel;
-					}
-					catch (Exception e) {
-						_log.error(e, e);
-					}
-				}
-				finally {
-					Thread.currentThread().setContextClassLoader(contextClassLoader);
-				}
-			}
-
-			return oldModel;
-		}
-	</#if>
-
-	protected Object translateInput(List oldList) {
-		List newList = new ArrayList(oldList.size());
-
-		for (int i = 0; i < oldList.size(); i++) {
-			Object curObj = oldList.get(i);
-
-			newList.add(translateInput(curObj));
-		}
-
-		return newList;
-	}
-
-	protected Object translateInput(Object obj) {
-		<#if entity.hasColumns()>
-			if (obj instanceof BaseModel) {
-				return translateInput((BaseModel)obj);
-			}
-		</#if>
-
-		if (obj instanceof List) {
-			return translateInput((List)obj);
-		}
-		else {
-			return obj;
-		}
-	}
-
-	<#if entity.hasColumns()>
-		protected Object translateOutput(BaseModel oldModel) {
-			Class oldModelClass = oldModel.getClass();
-
-			String oldModelClassName = oldModelClass.getName();
-
-			if (oldModelClassName.equals("${packagePath}.model.impl.${entity.name}Impl")) {
-				ClassLoader contextClassLoader = Thread.currentThread().getContextClassLoader();
-
-				try {
-					Thread.currentThread().setContextClassLoader(_classLoader);
-
-					try {
-						${entity.name}Clp newModel = new ${entity.name}Clp();
-
-						<#list entity.regularColList as column>
-							Method method${column_index} = oldModelClass.getMethod("get${column.methodName}");
-
-							<#if column.isPrimitiveType()>
-								${serviceBuilder.getPrimitiveObj(column.type)}
-							<#else>
-								${column.type}
-							</#if>
-
-							value${column_index} =
-							
-							(
-
-							<#if column.isPrimitiveType()>
-								${serviceBuilder.getPrimitiveObj(column.type)}
-							<#else>
-								${column.type}
-							</#if>
-
-							)
-							
-							method${column_index}.invoke(oldModel, (Object[])null);
-
-							newModel.set${column.methodName}(value${column_index}
-							
-							<#if column.isPrimitiveType()>
-								.${column.type}Value()
-							</#if>
-
-							);
-						</#list>
-
-						return newModel;
-					}
-					catch (Exception e) {
-						_log.error(e, e);
-					}
-				}
-				finally {
-					Thread.currentThread().setContextClassLoader(contextClassLoader);
-				}
-			}
-
-			return oldModel;
-		}
-	</#if>
-
-	protected Object translateOutput(List oldList) {
-		List newList = new ArrayList(oldList.size());
-
-		for (int i = 0; i < oldList.size(); i++) {
-			Object curObj = oldList.get(i);
-
-			newList.add(translateOutput(curObj));
-		}
-
-		return newList;
-	}
-
-	protected Object translateOutput(Object obj) {
-		<#if entity.hasColumns()>
-			if (obj instanceof BaseModel) {
-				return translateOutput((BaseModel)obj);
-			}
-		</#if>
-
-		if (obj instanceof List) {
-			return translateOutput((List)obj);
-		}
-		else {
-			return obj;
-		}
-	}
-
-	private static Log _log = LogFactoryUtil.getLog(${entity.name}${sessionTypeName}ServiceClp.class);
-
 	private ClassLoaderProxy _classLoaderProxy;
-	private ClassLoader _classLoader;
 
 }

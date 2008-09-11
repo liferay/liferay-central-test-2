@@ -81,6 +81,8 @@ public class ${entity.name}${sessionTypeName}ServiceUtil {
 				ClassLoaderProxy classLoaderProxy = new ClassLoaderProxy(obj, portletClassLoader);
 
 				_service = new ${entity.name}${sessionTypeName}ServiceClp(classLoaderProxy);
+
+				ClpSerializer.setClassLoader(portletClassLoader);
 			<#else>
 				throw new RuntimeException("${entity.name}${sessionTypeName}Service is not set");
 			</#if>
