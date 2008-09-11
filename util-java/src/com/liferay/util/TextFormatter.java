@@ -39,23 +39,35 @@ import java.util.Locale;
 public class TextFormatter {
 
 	// Web Search --> WEB_SEARCH
-	// Web Search --> websearch
-	// Web Search --> web_search
-	// Web Search --> WebSearch
-	// Web Search --> web search
-	// Web Search --> webSearch
 
 	public static final int A = 0;
+
+	// Web Search --> websearch
+
 	public static final int B = 1;
+
+	// Web Search --> web_search
+
 	public static final int C = 2;
+
+	// Web Search --> WebSearch
+
 	public static final int D = 3;
+
+	// Web Search --> web search
+
 	public static final int E = 4;
+
+	// Web Search --> webSearch
+
 	public static final int F = 5;
 
 	// formatId --> FormatId
-	// formatId --> format id
 
 	public static final int G = 6;
+
+	// formatId --> format id
+
 	public static final int H = 7;
 
 	// FormatId --> formatId
@@ -69,8 +81,9 @@ public class TextFormatter {
 	// formatId --> format-id
 
 	public static final int K = 10;
-	
-	// FormatId --> formatId, FOrmatId->FOrmatId
+
+	// FormatId --> formatId, FOrmatId --> FOrmatId
+
 	public static final int L = 11;
 
 	public static String format(String s, int style) {
@@ -285,14 +298,14 @@ public class TextFormatter {
 	private static String _formatL(String s) {
 		if (s.length() == 1) {
 			return s.toLowerCase();
-		} 
+		}
 		else if (Character.isUpperCase(s.charAt(0)) &&
-				Character.isUpperCase(s.charAt(1))) {
+				 Character.isUpperCase(s.charAt(1))) {
+
 			return s;
-		} 
+		}
 		else {
-			return Character.toLowerCase(s.charAt(0)) +
-				s.substring(1, s.length());
+			return Character.toLowerCase(s.charAt(0)) + s.substring(1);
 		}
 	}
 

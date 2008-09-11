@@ -4,12 +4,15 @@
 			<#if tempEntity.hasLocalService()>
 				<property name="${tempEntity.springPropertyName}LocalService" ref="${tempEntity.packagePath}.service.${tempEntity.name}LocalService.impl" />
 			</#if>
+
 			<#if tempEntity.hasRemoteService()>
 				<property name="${tempEntity.springPropertyName}Service" ref="${tempEntity.packagePath}.service.${tempEntity.name}Service.impl" />
 			</#if>
+
 			<#if tempEntity.hasColumns()>
 				<property name="${tempEntity.springPropertyName}Persistence" ref="${tempEntity.packagePath}.service.persistence.${tempEntity.name}Persistence.impl" />
 			</#if>
+
 			<#if tempEntity.hasFinderClass()>
 				<property name="${tempEntity.springPropertyName}Finder" ref="${tempEntity.packagePath}.service.persistence.${tempEntity.name}Finder.impl" />
 			</#if>
@@ -24,12 +27,15 @@
 				<#if tempEntity.hasLocalService()>
 					<property name="${tempEntity.springPropertyName}LocalService" ref="${tempEntity.packagePath}.service.${tempEntity.name}LocalService.impl" />
 				</#if>
+
 				<#if tempEntity.hasRemoteService()>
 					<property name="${tempEntity.springPropertyName}Service" ref="${tempEntity.packagePath}.service.${tempEntity.name}Service.impl" />
 				</#if>
+
 				<#if tempEntity.hasColumns()>
 					<property name="${tempEntity.springPropertyName}Persistence" ref="${tempEntity.packagePath}.service.persistence.${tempEntity.name}Persistence.impl" />
 				</#if>
+
 				<#if tempEntity.hasFinderClass()>
 					<property name="${tempEntity.springPropertyName}Finder" ref="${tempEntity.packagePath}.service.persistence.${tempEntity.name}Finder.impl" />
 				</#if>
@@ -42,7 +48,7 @@
 			</aop:config>
 			<tx:advice id="${packagePath}.service.${entity.name}${sessionType}Service.advice" transaction-manager="liferayTransactionManager">
 				<tx:attributes>
-					<#list txRequiredList as txRequired>	
+					<#list txRequiredList as txRequired>
 						<tx:method name="${txRequired}" propagation="REQUIRED" rollback-for="com.liferay.portal.PortalException,com.liferay.portal.SystemException" />
 					</#list>
 				</tx:attributes>
@@ -55,12 +61,15 @@
 				<#if tempEntity.hasLocalService()>
 					<property name="${tempEntity.springPropertyName}LocalService" ref="${tempEntity.packagePath}.service.${tempEntity.name}LocalService.impl" />
 				</#if>
+
 				<#if tempEntity.hasRemoteService()>
 					<property name="${tempEntity.springPropertyName}Service" ref="${tempEntity.packagePath}.service.${tempEntity.name}Service.impl" />
 				</#if>
+
 				<#if tempEntity.hasColumns()>
 					<property name="${tempEntity.springPropertyName}Persistence" ref="${tempEntity.packagePath}.service.persistence.${tempEntity.name}Persistence.impl" />
 				</#if>
+
 				<#if tempEntity.hasFinderClass()>
 					<property name="${tempEntity.springPropertyName}Finder" ref="${tempEntity.packagePath}.service.persistence.${tempEntity.name}Finder.impl" />
 				</#if>

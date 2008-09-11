@@ -155,4 +155,5 @@ import ${beanLocatorUtil};
 		protected ${tempEntity.name}Finder ${tempEntity.varName}Finder;
 	</#if>
 </#list>
+
 }

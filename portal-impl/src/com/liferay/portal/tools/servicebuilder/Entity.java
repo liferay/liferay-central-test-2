@@ -135,7 +135,7 @@ public class Entity {
 	}
 
 	public String getSpringPropertyName() {
-		return TextFormatter.format(_name, TextFormatter.L);		
+		return TextFormatter.format(_name, TextFormatter.L);
 	}
 
 	public String getTable() {
