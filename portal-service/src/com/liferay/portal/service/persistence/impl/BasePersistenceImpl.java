@@ -30,6 +30,7 @@ import com.liferay.portal.kernel.dao.orm.ORMException;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.model.ModelListener;
+import com.liferay.portal.service.persistence.BasePersistence;
 
 import javax.sql.DataSource;
 
@@ -39,7 +40,7 @@ import javax.sql.DataSource;
  * @author Brian Wing Shun Chan
  *
  */
-public class BasePersistenceImpl implements SessionFactory {
+public class BasePersistenceImpl implements BasePersistence, SessionFactory {
 
 	public static final String COUNT_COLUMN_NAME = "COUNT_VALUE";
 

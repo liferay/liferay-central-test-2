@@ -43,7 +43,7 @@ import com.liferay.portal.kernel.xml.Document;
 import com.liferay.portal.kernel.xml.Element;
 import com.liferay.portal.kernel.xml.SAXReaderUtil;
 import com.liferay.portal.model.ModelListener;
-import com.liferay.portal.service.persistence.impl.BasePersistenceImpl;
+import com.liferay.portal.service.persistence.BasePersistence;
 import com.liferay.portal.servlet.filters.layoutcache.LayoutCacheUtil;
 import com.liferay.portal.util.PortalInstances;
 import com.liferay.portal.util.PortalUtil;
@@ -329,7 +329,7 @@ public class HookHotDeployListener extends BaseHotDeployListener {
 			String modelName = entry.getKey();
 			List<ModelListener> modelListeners = entry.getValue();
 
-			BasePersistenceImpl persistence = getPersistence(modelName);
+			BasePersistence persistence = getPersistence(modelName);
 
 			for (ModelListener modelListener : modelListeners) {
 				persistence.unregisterListener(modelListener);
@@ -379,7 +379,7 @@ public class HookHotDeployListener extends BaseHotDeployListener {
 		}
 	}
 
-	protected BasePersistenceImpl getPersistence(String modelName) {
+	protected BasePersistence getPersistence(String modelName) {
 		int pos = modelName.lastIndexOf(StringPool.PERIOD);
 
 		String entityName = modelName.substring(pos + 1);
@@ -388,7 +388,7 @@ public class HookHotDeployListener extends BaseHotDeployListener {
 
 		String packagePath = modelName.substring(0, pos);
 
-		return (BasePersistenceImpl)PortalBeanLocatorUtil.locate(
+		return (BasePersistence)PortalBeanLocatorUtil.locate(
 			packagePath + ".service.persistence." + entityName +
 				"Persistence.impl");
 	}
@@ -467,7 +467,7 @@ public class HookHotDeployListener extends BaseHotDeployListener {
 			(ModelListener)portletClassLoader.loadClass(
 				modelListenerClass).newInstance();
 
-		BasePersistenceImpl persistence = getPersistence(modelName);
+		BasePersistence persistence = getPersistence(modelName);
 
 		persistence.registerListener(modelListener);
 
