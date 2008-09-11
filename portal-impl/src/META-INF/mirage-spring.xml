@@ -75,7 +75,7 @@
 	<bean id="com.liferay.portlet.journal.service.impl.JournalFeedLocalServiceImpl" class="com.liferay.portlet.journal.service.impl.JournalFeedLocalServiceImpl" />
 	<bean id="com.liferay.portlet.journal.service.impl.JournalStructureLocalServiceImpl" class="com.liferay.portlet.journal.service.impl.JournalStructureLocalServiceImpl" />
 	<bean id="com.liferay.portlet.journal.service.impl.JournalTemplateLocalServiceImpl" class="com.liferay.portlet.journal.service.impl.JournalTemplateLocalServiceImpl" />
-	<bean id="com.liferay.portlet.journal.service.JournalArticleImageLocalService.impl" class="org.springframework.aop.framework.ProxyFactoryBean">
+	<!--<bean id="com.liferay.portlet.journal.service.JournalArticleImageLocalService.impl" class="org.springframework.aop.framework.ProxyFactoryBean">
 		<property name="proxyInterfaces" value="com.liferay.portlet.journal.service.JournalArticleImageLocalService" />
 		<property name="interceptorNames">
 			<list>
@@ -137,5 +137,5 @@
 			</list>
 		</property>
 		<property name="target" ref="com.liferay.portlet.journal.service.impl.JournalTemplateLocalServiceImpl" />
-	</bean>
+	</bean>-->
 </beans>
