@@ -865,10 +865,8 @@ img.ui-datepicker-trigger {
 	width: 16px;
 }
 
-/* fix for IE6 - do not use .ie6 */
-* html .hitarea {
+.ie6 .hitarea {
 	display: inline;
-	float: none;
 }
 
 .treeview li {

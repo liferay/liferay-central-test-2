@@ -453,6 +453,9 @@ img.ui-datepicker-trigger {
 .ui-tags-input {
 }
 
+.tags-vocabulary-name span {
+}
+
 /* ---------- Treeview ---------- */
 
 .treeview {
@@ -507,6 +510,9 @@ img.ui-datepicker-trigger {
 }
 
 .treeview .placeholder {
+}
+
+.treeview span {
 }
 
 .filetree li {
