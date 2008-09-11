@@ -1285,6 +1285,7 @@ public class ServicePreAction extends Action {
 		// URLs
 
 		themeDisplay.setShowAddContentIcon(false);
+		themeDisplay.setShowControlPanelIcon(true);
 		themeDisplay.setShowHomeIcon(true);
 		themeDisplay.setShowMyAccountIcon(signedIn);
 		themeDisplay.setShowPageSettingsIcon(false);
@@ -1292,6 +1293,12 @@ public class ServicePreAction extends Action {
 		themeDisplay.setShowSignInIcon(!signedIn);
 		themeDisplay.setShowSignOutIcon(signedIn);
 		themeDisplay.setShowStagingIcon(false);
+
+		String urlControlPanel =
+			portalURL + contextPath +
+			PortalUtil.getPathFriendlyURLPrivateGroup() + "/control-panel";
+
+		themeDisplay.setURLControlPanel(urlControlPanel);
 
 		PortletURL createAccountURL = new PortletURLImpl(
 			request, PortletKeys.MY_ACCOUNT, plid, PortletRequest.ACTION_PHASE);

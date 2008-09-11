@@ -256,6 +256,16 @@ public class PropsKeys {
 
 	public static final String DEFAULT_ADMIN_SCREEN_NAME = "default.admin.screen.name";
 
+	public static final String DEFAULT_CONTROL_PANEL_FRIENDLY_URL = "default.control.panel.friendly.url";
+
+	public static final String DEFAULT_CONTROL_PANEL_LAYOUT_NAME = "default.control.panel.layout.name";
+
+	public static final String DEFAULT_CONTROL_PANEL_LAYOUT_PORTLETS = "default.control.panel.layout.portlets";
+
+	public static final String DEFAULT_CONTROL_PANEL_LAYOUT_REGULAR_THEME_ID = "default.control.panel.layout.regular.theme.id";
+
+	public static final String DEFAULT_CONTROL_PANEL_LAYOUTS_LAR = "default.control.panel.layouts.lar";
+
 	public static final String DEFAULT_GUEST_PUBLIC_LAYOUT_COLUMN = "default.guest.public.layout.column-";
 
 	public static final String DEFAULT_GUEST_PUBLIC_LAYOUT_FRIENDLY_URL = "default.guest.public.layout.friendly.url";

@@ -252,6 +252,21 @@ public class PropsValues {
 	public static final String DEFAULT_ADMIN_SCREEN_NAME =
 		PropsUtil.get(PropsKeys.DEFAULT_ADMIN_SCREEN_NAME);
 
+	public static final String DEFAULT_CONTROL_PANEL_FRIENDLY_URL =
+		PropsUtil.get(PropsKeys.DEFAULT_CONTROL_PANEL_FRIENDLY_URL);
+
+	public static final String DEFAULT_CONTROL_PANEL_LAYOUT_NAME =
+		PropsUtil.get(PropsKeys.DEFAULT_CONTROL_PANEL_LAYOUT_NAME);
+
+	public static final String DEFAULT_CONTROL_PANEL_LAYOUT_PORTLETS =
+		PropsUtil.get(PropsKeys.DEFAULT_CONTROL_PANEL_LAYOUT_PORTLETS);
+
+	public static final String DEFAULT_CONTROL_PANEL_LAYOUT_REGULAR_THEME_ID =
+		PropsUtil.get(PropsKeys.DEFAULT_CONTROL_PANEL_LAYOUT_REGULAR_THEME_ID);
+
+	public static final String DEFAULT_CONTROL_PANEL_LAYOUTS_LAR =
+		PropsUtil.get(PropsKeys.DEFAULT_CONTROL_PANEL_LAYOUTS_LAR);
+
 	public static final String DEFAULT_GUEST_PUBLIC_LAYOUT_COLUMN =
 		PropsUtil.get(PropsKeys.DEFAULT_GUEST_PUBLIC_LAYOUT_COLUMN);
 

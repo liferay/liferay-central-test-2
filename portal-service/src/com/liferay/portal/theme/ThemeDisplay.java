@@ -691,6 +691,14 @@ public class ThemeDisplay implements Serializable {
 		_showAddContentIcon = showAddContentIcon;
 	}
 
+	public boolean isShowControlPanelIcon() {
+		return _showControlPanelIcon;
+	}
+
+	public void setShowControlPanelIcon(boolean showControlPanelIcon) {
+		_showControlPanelIcon = showControlPanelIcon;
+	}
+
 	public boolean isShowHomeIcon() {
 		return _showHomeIcon;
 	}
@@ -761,6 +769,14 @@ public class ThemeDisplay implements Serializable {
 
 	public void setURLAddContent(String urlAddContent) {
 		_urlAddContent = urlAddContent;
+	}
+
+	public String getURLControlPanel() {
+		return _urlControlPanel;
+	}
+
+	public void setURLControlPanel(String urlControlPanel) {
+		_urlControlPanel = urlControlPanel;
 	}
 
 	public PortletURL getURLCreateAccount() {
@@ -1000,6 +1016,7 @@ public class ThemeDisplay implements Serializable {
 		_pathThemeTemplates = StringPool.BLANK;
 		_showAddContentIcon = false;
 		_showHomeIcon = false;
+		_showControlPanelIcon = false;
 		_showLayoutTemplatesIcon = false;
 		_showMyAccountIcon = false;
 		_showPageSettingsIcon = false;
@@ -1008,6 +1025,7 @@ public class ThemeDisplay implements Serializable {
 		_showSignOutIcon = false;
 		_showStagingIcon = false;
 		_urlAddContent = StringPool.BLANK;
+		_urlControlPanel = StringPool.BLANK;
 		_urlCreateAccount = null;
 		_urlCurrent = StringPool.BLANK;
 		_urlHome = StringPool.BLANK;
@@ -1095,6 +1113,7 @@ public class ThemeDisplay implements Serializable {
 	private String _pathThemeRoot = StringPool.BLANK;
 	private String _pathThemeTemplates = StringPool.BLANK;
 	private boolean _showAddContentIcon;
+	private boolean _showControlPanelIcon;
 	private boolean _showHomeIcon;
 	private boolean _showLayoutTemplatesIcon;
 	private boolean _showMyAccountIcon;
@@ -1104,6 +1123,7 @@ public class ThemeDisplay implements Serializable {
 	private boolean _showSignOutIcon;
 	private boolean _showStagingIcon;
 	private String _urlAddContent = StringPool.BLANK;
+	private String _urlControlPanel = StringPool.BLANK;
 	private transient PortletURL _urlCreateAccount = null;
 	private String _urlCurrent = StringPool.BLANK;
 	private String _urlHome = StringPool.BLANK;

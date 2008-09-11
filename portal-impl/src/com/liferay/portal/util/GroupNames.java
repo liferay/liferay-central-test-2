@@ -32,8 +32,10 @@ public class GroupNames {
 
 	public static final String GUEST = "Guest";
 
+	public static final String CONTROL_PANEL = "Control Panel";
+
 	public static final String[] SYSTEM_GROUPS = {
-		GUEST
+		GUEST, CONTROL_PANEL
 	};
 
 }

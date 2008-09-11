@@ -63,6 +63,8 @@ public class GroupImpl extends GroupModelImpl implements Group {
 
 	public static final String GUEST = GroupNames.GUEST;
 
+	public static final String CONTROL_PANEL = GroupNames.CONTROL_PANEL;
+
 	public static final String[] SYSTEM_GROUPS = GroupNames.SYSTEM_GROUPS;
 
 	public static final int TYPE_COMMUNITY_OPEN = 1;
