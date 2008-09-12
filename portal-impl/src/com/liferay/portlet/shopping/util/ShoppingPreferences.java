@@ -52,6 +52,8 @@ import javax.portlet.ValidatorException;
  */
 public class ShoppingPreferences {
 
+	public static final String CC_NONE = "none";
+
 	public static final String[] CC_TYPES =
 		new String[] {"visa", "mastercard", "discover", "amex"};
 
@@ -126,12 +128,24 @@ public class ShoppingPreferences {
 	}
 
 	public String[] getCcTypes() {
-		return StringUtil.split(_prefs.getValue(
-			"cc-types", StringUtil.merge(CC_TYPES)));
+		String ccTypes = _prefs.getValue(
+			"cc-types", StringUtil.merge(CC_TYPES));
+
+		if (ccTypes.equals(CC_NONE)) {
+			return new String[0];
+		}
+		else {
+			return StringUtil.split(ccTypes);
+		}
 	}
 
 	public void setCcTypes(String[] ccTypes) throws ReadOnlyException {
-		_prefs.setValue("cc-types", StringUtil.merge(ccTypes));
+		if (ccTypes.length == 0) {
+			_prefs.setValue("cc-types", CC_NONE);
+		}
+		else {
+			_prefs.setValue("cc-types", StringUtil.merge(ccTypes));
+		}
 	}
 
 	public String getTaxState() {
