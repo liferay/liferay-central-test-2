@@ -47,6 +47,7 @@ import com.liferay.portlet.imagegallery.model.IGImage;
 import com.liferay.portlet.imagegallery.model.impl.IGFolderImpl;
 import com.liferay.portlet.imagegallery.service.base.IGFolderLocalServiceBaseImpl;
 import com.liferay.portlet.imagegallery.util.Indexer;
+import com.liferay.portlet.tags.util.TagsUtil;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -512,9 +513,7 @@ public class IGFolderLocalServiceImpl extends IGFolderLocalServiceBaseImpl {
 			long folderId, long groupId, long parentFolderId, String name)
 		throws PortalException, SystemException {
 
-		if ((Validator.isNull(name)) || (name.indexOf("\\\\") != -1) ||
-			(name.indexOf("//") != -1)) {
-
+		if (!TagsUtil.isValidWord(name)) {
 			throw new FolderNameException();
 		}
 
