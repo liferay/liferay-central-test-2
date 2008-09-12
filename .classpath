@@ -221,6 +221,7 @@
 	<classpathentry kind="lib" path="lib/portal/wsrp-consumer-portlet.jar"/>
 	<classpathentry kind="lib" path="lib/portal/wsrp-generated.jar"/>
 	<classpathentry kind="lib" path="lib/portal/wsrp-producer.jar"/>
+	<classpathentry kind="lib" path="lib/portal/wsrp-producer-portlet.jar"/>
 	<classpathentry kind="lib" path="lib/portal/wstx.jar"/>
 	<classpathentry kind="lib" path="lib/portal/xalan.jar"/>
 	<classpathentry kind="lib" path="lib/portal/xbean-spring.jar"/>
