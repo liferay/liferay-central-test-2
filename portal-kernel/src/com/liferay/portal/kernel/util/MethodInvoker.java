@@ -58,7 +58,6 @@ public class MethodInvoker {
 		ClassLoader contextClassLoader =
 			Thread.currentThread().getContextClassLoader();
 
-		Object target = methodWrapper.getTarget();
 		String className = methodWrapper.getClassName();
 		String methodName = methodWrapper.getMethodName();
 		Object[] args = methodWrapper.getArgs();
@@ -118,7 +117,7 @@ public class MethodInvoker {
 
 		Object classObj = contextClassLoader.loadClass(className);
 
-		if ((target == null) && newInstance) {
+		if (newInstance) {
 			classObj = ((Class<?>)classObj).newInstance();
 		}
 
@@ -134,18 +133,16 @@ public class MethodInvoker {
 		catch (NoSuchMethodException nsme) {
 			Method[] methods = null;
 
-			if ((target != null) || (!newInstance)) {
-				methods = ((Class<?>)classObj).getMethods();
+			if (newInstance) {
+				methods = classObj.getClass().getMethods();
 			}
 			else {
-				methods = classObj.getClass().getMethods();
+				methods = ((Class<?>)classObj).getMethods();
 			}
 
 			for (int i = 0; i < methods.length; i++) {
 				Class<?>[] methodParameterTypes =
 					methods[i].getParameterTypes();
-
-				String QQ = methods[i].getName();
 
 				if (methods[i].getName().equals(methodName) &&
 					methodParameterTypes.length == parameterTypes.size()) {
@@ -179,12 +176,7 @@ public class MethodInvoker {
 		Object returnObj = null;
 
 		if (method != null) {
-			if (target != null) {
-				returnObj = method.invoke(target, args);
-			}
-			else {
-				returnObj = method.invoke(classObj, args);
-			}
+			returnObj = method.invoke(classObj, args);
 		}
 
 		return returnObj;
