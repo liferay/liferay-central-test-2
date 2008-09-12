@@ -363,7 +363,7 @@ if (Validator.isNull(redirect)) {
 			<liferay-ui:message key="summary" />
 		</td>
 		<td>
-			<input name="<portlet:namespace />summary" size="75" type="text" value="<%= summary %>" />
+			<liferay-ui:input-field model="<%= WikiPage.class %>" bean="<%= wikiPage %>" field="summary" />
 		</td>
 	</tr>
 	<tr>
@@ -373,7 +373,7 @@ if (Validator.isNull(redirect)) {
 	</tr>
 	<tr>
 		<td colspan="2">
-			<input <%= minorEdit ? "checked" : "" %> name="<portlet:namespace />minorEdit" type="checkbox" />
+			<liferay-ui:input-field model="<%= WikiPage.class %>" bean="<%= wikiPage %>" field="minorEdit" />
 
 			<liferay-ui:message key="this-is-a-minor-edit" />
 		</td>
