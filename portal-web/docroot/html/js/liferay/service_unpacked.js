@@ -2286,6 +2286,10 @@ Liferay.Service.Shopping.ShoppingOrder = {
 	}
 };
 
+Liferay.Service.Social = {
+	servicePackage: "com.liferay.portlet.social.service.http."
+};
+
 Liferay.Service.SC = {
 	servicePackage: "com.liferay.portlet.softwarecatalog.service.http."
 };
@@ -2437,10 +2441,6 @@ Liferay.Service.SC.SCProductVersion = {
 
 		return Liferay.Service.ajax(params, callback);
 	}
-};
-
-Liferay.Service.Social = {
-	servicePackage: "com.liferay.portlet.social.service.http."
 };
 
 Liferay.Service.Tags = {

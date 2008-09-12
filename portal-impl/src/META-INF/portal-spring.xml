@@ -3647,7 +3647,7 @@
 	<bean id="com.liferay.portlet.social.service.persistence.SocialActivityFinderUtil" class="com.liferay.portlet.social.service.persistence.SocialActivityFinderUtil">
 		<property name="finder" ref="com.liferay.portlet.social.service.persistence.SocialActivityFinder.impl" />
 	</bean>
-	<bean id="com.liferay.portlet.social.service.SocialActivityInterpreterLocalService.impl" class="com.liferay.portlet.social.service.impl.SocialActivityInterpreterLocalServiceImpl" parent="com.liferay.portlet.social.service.Social.base"></bean>
+	<bean id="com.liferay.portlet.social.service.SocialActivityInterpreterLocalService.impl" class="com.liferay.portlet.social.service.impl.SocialActivityInterpreterLocalServiceImpl" parent="com.liferay.portlet.social.service.Social.base" />
 	<bean id="com.liferay.portlet.social.service.SocialActivityInterpreterLocalService.velocity" class="org.springframework.aop.framework.ProxyFactoryBean" parent="baseVelocityService">
 		<property name="target" ref="com.liferay.portlet.social.service.SocialActivityInterpreterLocalService.impl" />
 	</bean>
@@ -3699,7 +3699,7 @@
 	<bean id="com.liferay.portlet.social.service.persistence.SocialRequestUtil" class="com.liferay.portlet.social.service.persistence.SocialRequestUtil">
 		<property name="persistence" ref="com.liferay.portlet.social.service.persistence.SocialRequestPersistence.impl" />
 	</bean>
-	<bean id="com.liferay.portlet.social.service.SocialRequestInterpreterLocalService.impl" class="com.liferay.portlet.social.service.impl.SocialRequestInterpreterLocalServiceImpl" parent="com.liferay.portlet.social.service.Social.base"></bean>
+	<bean id="com.liferay.portlet.social.service.SocialRequestInterpreterLocalService.impl" class="com.liferay.portlet.social.service.impl.SocialRequestInterpreterLocalServiceImpl" parent="com.liferay.portlet.social.service.Social.base" />
 	<bean id="com.liferay.portlet.social.service.SocialRequestInterpreterLocalService.velocity" class="org.springframework.aop.framework.ProxyFactoryBean" parent="baseVelocityService">
 		<property name="target" ref="com.liferay.portlet.social.service.SocialRequestInterpreterLocalService.impl" />
 	</bean>
