@@ -27,10 +27,12 @@ import com.liferay.portal.kernel.cache.PortalCacheManager;
 import com.liferay.portal.util.PropsUtil;
 
 import java.net.URL;
+import javax.management.MBeanServer;
 
 import net.sf.ehcache.Cache;
 import net.sf.ehcache.CacheManager;
 import net.sf.ehcache.ObjectExistsException;
+import net.sf.ehcache.management.ManagementService;
 
 import org.springframework.beans.factory.DisposableBean;
 import org.springframework.beans.factory.InitializingBean;
@@ -49,6 +51,11 @@ public class EhcachePortalCacheManager
 		URL url = getClass().getResource(PropsUtil.get(_configPropertyKey));
 
 		_cacheManager = new CacheManager(url);
+		ManagementService.registerMBeans(_cacheManager, _mbeanServer,
+										 _registerCacheManager,
+										 _registerCaches,
+										 _registerCacheConfigurations,
+										 _registerCacheStatistics);
 	}
 
 	public void clearAll() {
@@ -82,7 +89,34 @@ public class EhcachePortalCacheManager
 		_configPropertyKey = configPropertyKey;
 	}
 
+	public void setMBeanServer(MBeanServer server) {
+		_mbeanServer = server;
+	}
+
+	public void setRegisterCacheConfigurations(
+		boolean registerCacheConfigurations) {
+		_registerCacheConfigurations = registerCacheConfigurations;
+	}
+
+	public void setRegisterCacheManager(boolean registerCacheManager) {
+		_registerCacheManager = registerCacheManager;
+	}
+
+	public void setRegisterCaches(boolean registerCaches) {
+		_registerCaches = registerCaches;
+	}
+
+	public void setRegisterCacheStatistics(boolean registerCacheStatistics) {
+		_registerCacheStatistics = registerCacheStatistics;
+	}
+
 	private String _configPropertyKey;
 	private CacheManager _cacheManager;
+
+	private MBeanServer _mbeanServer;
+	private boolean _registerCacheManager = true;
+	private boolean _registerCaches = true;
+	private boolean _registerCacheConfigurations = true;
+	private boolean _registerCacheStatistics = true;
 
 }
