@@ -1,45 +1,25 @@
-<#if entity.TXManager == "none">
-	<bean id="${packagePath}.service.${entity.name}${sessionType}Service.impl" class="${packagePath}.service.impl.${entity.name}${sessionType}ServiceImpl" parent="${packagePath}.service.${portletShortName}.base">
-		<#list entity.referenceList as tempEntity>
-			<#if tempEntity.hasLocalService()>
-				<property name="${tempEntity.springPropertyName}LocalService" ref="${tempEntity.packagePath}.service.${tempEntity.name}LocalService.impl" />
-			</#if>
+<bean id="${packagePath}.service.${entity.name}${sessionType}Service.impl" class="${packagePath}.service.impl.${entity.name}${sessionType}ServiceImpl" parent="${packagePath}.service.${portletShortName}.base">
+	<#list entity.referenceList as tempEntity>
+		<#if tempEntity.hasLocalService()>
+			<property name="${tempEntity.springPropertyName}LocalService" ref="${tempEntity.packagePath}.service.${tempEntity.name}LocalService.impl" />
+		</#if>
 
-			<#if tempEntity.hasRemoteService()>
-				<property name="${tempEntity.springPropertyName}Service" ref="${tempEntity.packagePath}.service.${tempEntity.name}Service.impl" />
-			</#if>
+		<#if tempEntity.hasRemoteService()>
+			<property name="${tempEntity.springPropertyName}Service" ref="${tempEntity.packagePath}.service.${tempEntity.name}Service.impl" />
+		</#if>
 
-			<#if tempEntity.hasColumns()>
-				<property name="${tempEntity.springPropertyName}Persistence" ref="${tempEntity.packagePath}.service.persistence.${tempEntity.name}Persistence.impl" />
-			</#if>
+		<#if tempEntity.hasColumns()>
+			<property name="${tempEntity.springPropertyName}Persistence" ref="${tempEntity.packagePath}.service.persistence.${tempEntity.name}Persistence.impl" />
+		</#if>
 
-			<#if tempEntity.hasFinderClass()>
-				<property name="${tempEntity.springPropertyName}Finder" ref="${tempEntity.packagePath}.service.persistence.${tempEntity.name}Finder.impl" />
-			</#if>
-		</#list>
-	</bean>
-<#else>
+		<#if tempEntity.hasFinderClass()>
+			<property name="${tempEntity.springPropertyName}Finder" ref="${tempEntity.packagePath}.service.persistence.${tempEntity.name}Finder.impl" />
+		</#if>
+	</#list>
+</bean>
+
+<#if entity.TXManager != "none">
 	<#assign txRequiredList = entity.getTxRequiredList()>
-
-	<bean id="${packagePath}.service.${entity.name}${sessionType}Service.impl" class="${packagePath}.service.impl.${entity.name}${sessionType}ServiceImpl" parent="${packagePath}.service.${portletShortName}.base">
-		<#list entity.referenceList as tempEntity>
-			<#if tempEntity.hasLocalService()>
-				<property name="${tempEntity.springPropertyName}LocalService" ref="${tempEntity.packagePath}.service.${tempEntity.name}LocalService.impl" />
-			</#if>
-
-			<#if tempEntity.hasRemoteService()>
-				<property name="${tempEntity.springPropertyName}Service" ref="${tempEntity.packagePath}.service.${tempEntity.name}Service.impl" />
-			</#if>
-
-			<#if tempEntity.hasColumns()>
-				<property name="${tempEntity.springPropertyName}Persistence" ref="${tempEntity.packagePath}.service.persistence.${tempEntity.name}Persistence.impl" />
-			</#if>
-
-			<#if tempEntity.hasFinderClass()>
-				<property name="${tempEntity.springPropertyName}Finder" ref="${tempEntity.packagePath}.service.persistence.${tempEntity.name}Finder.impl" />
-			</#if>
-		</#list>
-	</bean>
 
 	<#if txRequredList?? && (txRequiredList.size > 0)>
 		<aop:config>
