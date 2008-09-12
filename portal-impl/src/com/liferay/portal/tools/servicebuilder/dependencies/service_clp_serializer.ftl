@@ -23,7 +23,7 @@ public class ClpSerializer {
 	}
 
 	public static Object translateInput(BaseModel oldModel) {
-		Class oldModelClass = oldModel.getClass();
+		Class<?> oldModelClass = oldModel.getClass();
 
 		String oldModelClassName = oldModelClass.getName();
 
@@ -38,7 +38,7 @@ public class ClpSerializer {
 						Thread.currentThread().setContextClassLoader(_classLoader);
 
 						try {
-							Class newModelClass = Class.forName("${packagePath}.model.impl.${entity.name}Impl", true, _classLoader);
+							Class<?> newModelClass = Class.forName("${packagePath}.model.impl.${entity.name}Impl", true, _classLoader);
 
 							Object newModel = newModelClass.newInstance();
 
@@ -115,7 +115,7 @@ public class ClpSerializer {
 	}
 
 	public static Object translateOutput(BaseModel oldModel) {
-		Class oldModelClass = oldModel.getClass();
+		Class<?> oldModelClass = oldModel.getClass();
 
 		String oldModelClassName = oldModelClass.getName();
 

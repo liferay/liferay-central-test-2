@@ -21,7 +21,7 @@
 <#if entity.TXManager != "none">
 	<#assign txRequiredList = entity.getTxRequiredList()>
 
-	<#if txRequredList?? && (txRequiredList.size > 0)>
+	<#if txRequiredList?size gt 0>
 		<aop:config>
 			<aop:pointcut id="${packagePath}.service.${entity.name}${sessionType}Service.operation" expression="bean(${packagePath}.service.${entity.name}${sessionType}Service.transaction)" />
 			<aop:advisor advice-ref="${packagePath}.service.${entity.name}${sessionType}Service.advice" pointcut-ref="${packagePath}.service.${entity.name}${sessionType}Service.operation" />
