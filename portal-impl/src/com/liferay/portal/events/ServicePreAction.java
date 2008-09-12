@@ -1294,8 +1294,7 @@ public class ServicePreAction extends Action {
 		themeDisplay.setShowSignOutIcon(signedIn);
 		themeDisplay.setShowStagingIcon(false);
 
-		String urlControlPanel =
-			contextPath + friendlyURLPrivateGroupPath + "/control_panel";
+		String urlControlPanel = friendlyURLPrivateGroupPath + "/control_panel";
 
 		themeDisplay.setURLControlPanel(urlControlPanel);
 
