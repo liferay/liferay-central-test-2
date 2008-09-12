@@ -133,15 +133,6 @@
 		<filter-name>Sharepoint Filter</filter-name>
 		<filter-class>com.liferay.portal.sharepoint.SharepointFilter</filter-class>
 	</filter>
-	<filter> 
-		<filter-name>ProducerFilter</filter-name> 
-		<filter-class>com.sun.portal.wsrp.producer.filter.ProducerFilter</filter-class> 
-	</filter> 
-
-	<filter-mapping> 
-		<filter-name>ProducerFilter</filter-name> 
-		<url-pattern>/wsrp/*</url-pattern> 
-	</filter-mapping> 
 	<filter-mapping>
 		<filter-name>URL Rewrite Filter</filter-name>
 		<url-pattern>/*</url-pattern>
@@ -463,9 +454,6 @@
 	<listener>
 		<listener-class>com.sun.portal.portletcontainer.impl.PortletContainerContextListenerImpl</listener-class>
 	</listener>
-	<listener>
-		<listener-class>com.sun.xml.ws.transport.http.servlet.WSServletContextListener</listener-class>
-	</listener>	
 	<servlet>
 		<servlet-name>MainServlet</servlet-name>
 		<servlet-class>com.liferay.portal.servlet.MainServlet</servlet-class>
@@ -614,106 +602,6 @@
 		</init-param>
 		<load-on-startup>16</load-on-startup>
 	</servlet>
-<!-- WSRP v1 service -->
-	<servlet>
-		<description>JAX-WS endpoint - WSRP_v1_PortletManagement_Service</description>
-		<servlet-name>WSRP_v1_PortletManagement_PortType</servlet-name>              
-		<servlet-class>com.sun.xml.ws.transport.http.servlet.WSServlet</servlet-class>        
-	</servlet>
-	<servlet>
-		<description>JAX-WS endpoint - WSRP_v1_Registration_Service</description>
-		<servlet-name>WSRP_v1_Registration_PortType</servlet-name>                
-		<servlet-class>com.sun.xml.ws.transport.http.servlet.WSServlet</servlet-class>        
-	</servlet>
-	<servlet>
-		<description>JAX-WS endpoint - WSRP_v1_Markup_Service</description>
-		<servlet-name>WSRP_v1_Markup_PortType</servlet-name>                
-		<servlet-class>com.sun.xml.ws.transport.http.servlet.WSServlet</servlet-class>        
-	</servlet>
-	<servlet>
-		<description>JAX-WS endpoint - WSRP_v1_ServiceDescription_Service</description>
-		<servlet-name>WSRP_v1_ServiceDescription_PortType</servlet-name>        
-		<servlet-class>com.sun.xml.ws.transport.http.servlet.WSServlet</servlet-class>        
-	</servlet>
-
-<!-- WSRP v2 service -->
-	<servlet>
-		<description>JAX-WS endpoint - WSRP_v2_PortletManagement_Service</description>
-		<servlet-name>WSRP_v2_PortletManagement_PortType</servlet-name>              
-		<servlet-class>com.sun.xml.ws.transport.http.servlet.WSServlet</servlet-class>        
-	</servlet>
-	<servlet>
-		<description>JAX-WS endpoint - WSRP_v2_Registration_Service</description>
-		<servlet-name>WSRP_v2_Registration_PortType</servlet-name>                
-		<servlet-class>com.sun.xml.ws.transport.http.servlet.WSServlet</servlet-class>        
-	</servlet>
-	<servlet>
-		<description>JAX-WS endpoint - WSRP_v2_Markup_Service</description>
-		<servlet-name>WSRP_v2_Markup_PortType</servlet-name>                
-		<servlet-class>com.sun.xml.ws.transport.http.servlet.WSServlet</servlet-class>        
-	</servlet>
-	<servlet>
-		<description>JAX-WS endpoint - WSRP_v2_ServiceDescription_Service</description>
-		<servlet-name>WSRP_v2_ServiceDescription_PortType</servlet-name>        
-		<servlet-class>com.sun.xml.ws.transport.http.servlet.WSServlet</servlet-class>        
-	</servlet>
-
-<!-- WSRP WSDL & Router Servlet -->
-	<servlet>
-		<description>WSRP WSDL Servlet</description>
-		<servlet-name>WSDLServlet</servlet-name>
-		<servlet-class>com.sun.portal.wsrp.producer.wsdl.WSDLServlet</servlet-class>
-		<load-on-startup>1</load-on-startup>
-	</servlet>
-	<servlet>
-		<servlet-name>RouterServlet</servlet-name>
-		<servlet-class>com.sun.portal.wsrp.producer.router.RouterServlet</servlet-class>
-		<load-on-startup>1</load-on-startup>
-	</servlet>
-
-<!-- WSRP v1 Servlet mappings -->
-	<servlet-mapping>
-		<servlet-name>WSRP_v1_PortletManagement_PortType</servlet-name>
-		<url-pattern>/wsrp/service/v1/portletmanagement/*</url-pattern>
-	</servlet-mapping>
-	<servlet-mapping>
-		<servlet-name>WSRP_v1_Registration_PortType</servlet-name>
-		<url-pattern>/wsrp/service/v1/registration/*</url-pattern>
-	</servlet-mapping>
-	<servlet-mapping>
-		<servlet-name>WSRP_v1_ServiceDescription_PortType</servlet-name>
-		<url-pattern>/wsrp/service/v1/servicedescription/*</url-pattern>
-	</servlet-mapping>
-	<servlet-mapping>
-		<servlet-name>WSRP_v1_Markup_PortType</servlet-name>
-		<url-pattern>/wsrp/service/v1/markup/*</url-pattern>
-	</servlet-mapping>
-
-<!-- WSRP v2 Servlet mappings -->
-	<servlet-mapping>
-		<servlet-name>WSRP_v2_PortletManagement_PortType</servlet-name>
-		<url-pattern>/wsrp/service/v2/portletmanagement/*</url-pattern>
-	</servlet-mapping>
-	<servlet-mapping>
-		<servlet-name>WSRP_v2_Registration_PortType</servlet-name>
-		<url-pattern>/wsrp/service/v2/registration/*</url-pattern>
-	</servlet-mapping>
-	<servlet-mapping>
-		<servlet-name>WSRP_v2_ServiceDescription_PortType</servlet-name>
-		<url-pattern>/wsrp/service/v2/servicedescription/*</url-pattern>
-	</servlet-mapping>
-	<servlet-mapping>
-		<servlet-name>WSRP_v2_Markup_PortType</servlet-name>
-		<url-pattern>/wsrp/service/v2/markup/*</url-pattern>
-	</servlet-mapping>
-	<servlet-mapping>
-		<servlet-name>WSDLServlet</servlet-name>
-		<url-pattern>/wsrp/wsdl/*</url-pattern>
-	</servlet-mapping>
-	<servlet-mapping>
-		<servlet-name>RouterServlet</servlet-name>
-		<url-pattern>/wsrp/router/*</url-pattern>
-	</servlet-mapping>
 	<servlet-mapping>
 		<servlet-name>MainServlet</servlet-name>
 		<url-pattern>/c/*</url-pattern>
