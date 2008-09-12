@@ -27,6 +27,13 @@
 <%
 String tabs1 = ParamUtil.getString(request, "tabs1", "communities-owned");
 
+boolean showTabs1 = true;
+
+if (portletName.equals(PortletKeys.ENTERPRISE_ADMIN_COMMUNITIES)) {
+	tabs1 = "all-communities";
+	showTabs1 = false;
+}
+
 PortletURL portletURL = renderResponse.createRenderURL();
 
 portletURL.setWindowState(WindowState.MAXIMIZED);
@@ -42,10 +49,12 @@ pageContext.setAttribute("portletURL", portletURL);
 <form action="<%= portletURL.toString() %>" method="get" name="<portlet:namespace />fm">
 <liferay-portlet:renderURLParams varImpl="portletURL" />
 
-<liferay-ui:tabs
-	names="communities-owned,communities-joined,available-communities,all-communities"
-	url="<%= portletURL.toString() %>"
-/>
+<c:if test="<%= showTabs1 %>">
+	<liferay-ui:tabs
+		names="communities-owned,communities-joined,available-communities"
+		url="<%= portletURL.toString() %>"
+	/>
+</c:if>
 
 <%
 GroupSearch searchContainer = new GroupSearch(renderRequest, portletURL);
@@ -169,7 +178,7 @@ GroupSearch searchContainer = new GroupSearch(renderRequest, portletURL);
 			stagingGroup = group.getStagingGroup();
 		}
 
-		if ((tabs1.equals("communities-owned") || tabs1.equals("communities-joined")) &&
+		if ((tabs1.equals("communities-owned") || tabs1.equals("communities-joined") || tabs1.equals("all-communities")) &&
 			((publicLayoutsPageCount > 0) || (privateLayoutsPageCount > 0))) {
 
 			sb.append("<br />");

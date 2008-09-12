@@ -520,7 +520,7 @@
 	</portlet>
 	<portlet>
 		<portlet-name>29</portlet-name>
-		<display-name>Communities</display-name>
+		<display-name>My Communities</display-name>
 		<portlet-class>com.liferay.portlet.StrutsPortlet</portlet-class>
 		<init-param>
 			<name>view-action</name>
@@ -2102,6 +2102,23 @@
 			<mime-type>text/html</mime-type>
 		</supports>
 		<resource-bundle>com.liferay.portlet.StrutsResourceBundle</resource-bundle>
+	</portlet>
+	<portlet>
+		<portlet-name>134</portlet-name>
+		<display-name>Enterprise Admin Communities</display-name>
+		<portlet-class>com.liferay.portlet.StrutsPortlet</portlet-class>
+		<init-param>
+			<name>view-action</name>
+			<value>/enterprise_admin_communities/view</value>
+		</init-param>
+		<expiration-cache>0</expiration-cache>
+		<supports>
+			<mime-type>text/html</mime-type>
+		</supports>
+		<resource-bundle>com.liferay.portlet.StrutsResourceBundle</resource-bundle>
+		<security-role-ref>
+			<role-name>administrator</role-name>
+		</security-role-ref>
 	</portlet>
 	<custom-window-state>
 		<window-state>exclusive</window-state>

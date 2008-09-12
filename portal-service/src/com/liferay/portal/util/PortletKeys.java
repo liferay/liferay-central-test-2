@@ -52,6 +52,8 @@ public class PortletKeys {
 
 	public static final String ENTERPRISE_ADMIN = "79";
 
+	public static final String ENTERPRISE_ADMIN_COMMUNITIES = "134";
+
 	public static final String ENTERPRISE_ADMIN_MONITORING = "131";
 
 	public static final String ENTERPRISE_ADMIN_PASSWORD_POLICIES = "129";
