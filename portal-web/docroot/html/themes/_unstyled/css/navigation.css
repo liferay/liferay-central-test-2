@@ -20,21 +20,6 @@
 #navigation li {
 }
 
-#navigation a {
-}
-
-#navigation li a {
-}
-
-#navigation li a span {
-}
-
-#navigation li.selected a, #navigation li a:hover {
-}
-
-#navigation li.selected a span {
-}
-
 #navigation .child-menu {
 }
 
@@ -194,42 +179,6 @@
 
 /* ---------- Add/remove page ---------- */
 
-.js #navigation .enter-page {
-}
-
-.js #navigation .enter-page a {
-}
-
-.js #navigation .enter-page .save-page {
-}
-
-.ie.js #navigation .enter-page .save-page {
-}
-
-.js #navigation .enter-page .cancel-page {
-}
-
-.ie.js #navigation .enter-page {
-}
-
-.ie.js #navigation .enter-page input.text {
-}
-
-.js #navigation {
-}
-
-.js #add-page {
-}
-
-.js #add-page a {
-}
-
-.js #add-page a span {
-}
-
-.js #add-page a:hover span {
-}
-
 .js .delete-tab {
 }
 
@@ -242,10 +191,4 @@
 }
 
 .nav-menu ul {
-}
-
-.nav-menu-style-1 {
-}
-
-.nav-menu-style-2 {
 }

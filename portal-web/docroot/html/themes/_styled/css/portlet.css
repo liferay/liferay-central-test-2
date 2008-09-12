@@ -3,10 +3,6 @@
 /* ---------- Portlet wrapper and icons ---------- */
 
 .portlet {
-	background: #fff;
-	border: 2px solid #828F95;
-	margin: 0 0 10px;
-	padding: 3px;
 	text-align: left;
 }
 
@@ -19,9 +15,6 @@ body.portlet {
 }
 
 .portlet-topper {
-	background: #D3DADD;
-	border-bottom: 1px solid #AEB8BC;
-	padding-right: 40px;
 	position: relative;
 }
 
@@ -29,11 +22,6 @@ body.portlet {
 	display: block;
 	font-weight: bold;
 	min-width: 50%;
-	padding: 5px;
-}
-
-.ie .portlet-title {
-	padding-bottom: 5px;
 }
 
 .portlet-title img {

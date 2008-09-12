@@ -146,13 +146,7 @@ body.staging {
 #banner {
 }
 
-#banner h1.logo {
-}
-
-#banner .logo a {
-}
-
-.ie6 #banner .logo {
+#banner .logo {
 }
 
 /* ---------- Alerts and popups ---------- */

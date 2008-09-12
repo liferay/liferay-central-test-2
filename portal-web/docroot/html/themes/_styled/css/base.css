@@ -43,12 +43,9 @@ body {
 }
 
 html {
-	height: 100%;
 }
 
 body {
-	background: #fff;
-	font-size: 11px;
 }
 
 body.portal-popup {
@@ -183,12 +180,9 @@ body.staging {
 /* ---------- Main content body ---------- */
 
 #wrapper {
-	background: transparent url(../images/common/body_bg.png) repeat-x 0 0;
 }
 
 #content-wrapper {
-	margin: 0 auto;
-	width: 90%;
 }
 
 .portal-iframe #content-wrapper {
@@ -198,26 +192,9 @@ body.staging {
 /* ---------- Banner ---------- */
 
 #banner {
-	background: transparent url(../images/common/banner_bg.jpg) no-repeat 20% 0;
-	height: 100px;
-	top: -1px;
 }
 
-#banner h1.logo {
-	display: block;
-	font-size: 2em;
-	left: 5%;
-	margin: 25px 0 0;
-	padding: 0;
-	position: absolute;
-}
-
-#banner .logo a {
-	text-decoration: none;
-}
-
-.ie6 #banner .logo {
-	zoom: 1;
+#banner .logo {
 }
 
 /* ---------- Alerts and popups ---------- */
