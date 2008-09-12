@@ -38,7 +38,6 @@ import com.liferay.portal.service.persistence.UserPersistence;
 import com.liferay.portlet.polls.service.PollsChoiceLocalService;
 import com.liferay.portlet.polls.service.PollsQuestionLocalService;
 import com.liferay.portlet.polls.service.PollsQuestionService;
-import com.liferay.portlet.polls.service.PollsQuestionService;
 import com.liferay.portlet.polls.service.PollsVoteLocalService;
 import com.liferay.portlet.polls.service.PollsVoteService;
 import com.liferay.portlet.polls.service.persistence.PollsChoiceFinder;
@@ -214,23 +213,42 @@ public abstract class PollsQuestionServiceBaseImpl extends PrincipalBean
 		this.userFinder = userFinder;
 	}
 
+	@javax.annotation.Resource(name = "com.liferay.portlet.polls.service.PollsChoiceLocalService.impl")
 	protected PollsChoiceLocalService pollsChoiceLocalService;
+	@javax.annotation.Resource(name = "com.liferay.portlet.polls.service.persistence.PollsChoicePersistence.impl")
 	protected PollsChoicePersistence pollsChoicePersistence;
+	@javax.annotation.Resource(name = "com.liferay.portlet.polls.service.persistence.PollsChoiceFinder.impl")
 	protected PollsChoiceFinder pollsChoiceFinder;
+	@javax.annotation.Resource(name = "com.liferay.portlet.polls.service.PollsQuestionLocalService.impl")
 	protected PollsQuestionLocalService pollsQuestionLocalService;
+	@javax.annotation.Resource(name = "com.liferay.portlet.polls.service.PollsQuestionService.impl")
 	protected PollsQuestionService pollsQuestionService;
+	@javax.annotation.Resource(name = "com.liferay.portlet.polls.service.persistence.PollsQuestionPersistence.impl")
 	protected PollsQuestionPersistence pollsQuestionPersistence;
+	@javax.annotation.Resource(name = "com.liferay.portlet.polls.service.PollsVoteLocalService.impl")
 	protected PollsVoteLocalService pollsVoteLocalService;
+	@javax.annotation.Resource(name = "com.liferay.portlet.polls.service.PollsVoteService.impl")
 	protected PollsVoteService pollsVoteService;
+	@javax.annotation.Resource(name = "com.liferay.portlet.polls.service.persistence.PollsVotePersistence.impl")
 	protected PollsVotePersistence pollsVotePersistence;
+	@javax.annotation.Resource(name = "com.liferay.counter.service.CounterLocalService.impl")
 	protected CounterLocalService counterLocalService;
+	@javax.annotation.Resource(name = "com.liferay.counter.service.CounterService.impl")
 	protected CounterService counterService;
+	@javax.annotation.Resource(name = "com.liferay.portal.service.ResourceLocalService.impl")
 	protected ResourceLocalService resourceLocalService;
+	@javax.annotation.Resource(name = "com.liferay.portal.service.ResourceService.impl")
 	protected ResourceService resourceService;
+	@javax.annotation.Resource(name = "com.liferay.portal.service.persistence.ResourcePersistence.impl")
 	protected ResourcePersistence resourcePersistence;
+	@javax.annotation.Resource(name = "com.liferay.portal.service.persistence.ResourceFinder.impl")
 	protected ResourceFinder resourceFinder;
+	@javax.annotation.Resource(name = "com.liferay.portal.service.UserLocalService.impl")
 	protected UserLocalService userLocalService;
+	@javax.annotation.Resource(name = "com.liferay.portal.service.UserService.impl")
 	protected UserService userService;
+	@javax.annotation.Resource(name = "com.liferay.portal.service.persistence.UserPersistence.impl")
 	protected UserPersistence userPersistence;
+	@javax.annotation.Resource(name = "com.liferay.portal.service.persistence.UserFinder.impl")
 	protected UserFinder userFinder;
 }

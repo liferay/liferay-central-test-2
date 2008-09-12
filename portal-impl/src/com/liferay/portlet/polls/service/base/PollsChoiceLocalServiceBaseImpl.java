@@ -31,7 +31,6 @@ import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 
 import com.liferay.portlet.polls.model.PollsChoice;
 import com.liferay.portlet.polls.service.PollsChoiceLocalService;
-import com.liferay.portlet.polls.service.PollsChoiceLocalService;
 import com.liferay.portlet.polls.service.PollsQuestionLocalService;
 import com.liferay.portlet.polls.service.PollsQuestionService;
 import com.liferay.portlet.polls.service.PollsVoteLocalService;
@@ -199,15 +198,26 @@ public abstract class PollsChoiceLocalServiceBaseImpl
 		this.counterService = counterService;
 	}
 
+	@javax.annotation.Resource(name = "com.liferay.portlet.polls.service.PollsChoiceLocalService.impl")
 	protected PollsChoiceLocalService pollsChoiceLocalService;
+	@javax.annotation.Resource(name = "com.liferay.portlet.polls.service.persistence.PollsChoicePersistence.impl")
 	protected PollsChoicePersistence pollsChoicePersistence;
+	@javax.annotation.Resource(name = "com.liferay.portlet.polls.service.persistence.PollsChoiceFinder.impl")
 	protected PollsChoiceFinder pollsChoiceFinder;
+	@javax.annotation.Resource(name = "com.liferay.portlet.polls.service.PollsQuestionLocalService.impl")
 	protected PollsQuestionLocalService pollsQuestionLocalService;
+	@javax.annotation.Resource(name = "com.liferay.portlet.polls.service.PollsQuestionService.impl")
 	protected PollsQuestionService pollsQuestionService;
+	@javax.annotation.Resource(name = "com.liferay.portlet.polls.service.persistence.PollsQuestionPersistence.impl")
 	protected PollsQuestionPersistence pollsQuestionPersistence;
+	@javax.annotation.Resource(name = "com.liferay.portlet.polls.service.PollsVoteLocalService.impl")
 	protected PollsVoteLocalService pollsVoteLocalService;
+	@javax.annotation.Resource(name = "com.liferay.portlet.polls.service.PollsVoteService.impl")
 	protected PollsVoteService pollsVoteService;
+	@javax.annotation.Resource(name = "com.liferay.portlet.polls.service.persistence.PollsVotePersistence.impl")
 	protected PollsVotePersistence pollsVotePersistence;
+	@javax.annotation.Resource(name = "com.liferay.counter.service.CounterLocalService.impl")
 	protected CounterLocalService counterLocalService;
+	@javax.annotation.Resource(name = "com.liferay.counter.service.CounterService.impl")
 	protected CounterService counterService;
 }

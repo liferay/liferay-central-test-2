@@ -39,7 +39,6 @@ import com.liferay.portlet.bookmarks.service.BookmarksEntryLocalService;
 import com.liferay.portlet.bookmarks.service.BookmarksEntryService;
 import com.liferay.portlet.bookmarks.service.BookmarksFolderLocalService;
 import com.liferay.portlet.bookmarks.service.BookmarksFolderService;
-import com.liferay.portlet.bookmarks.service.BookmarksFolderService;
 import com.liferay.portlet.bookmarks.service.persistence.BookmarksEntryFinder;
 import com.liferay.portlet.bookmarks.service.persistence.BookmarksEntryPersistence;
 import com.liferay.portlet.bookmarks.service.persistence.BookmarksFolderPersistence;
@@ -234,25 +233,46 @@ public abstract class BookmarksFolderServiceBaseImpl extends PrincipalBean
 		this.tagsEntryFinder = tagsEntryFinder;
 	}
 
+	@javax.annotation.Resource(name = "com.liferay.portlet.bookmarks.service.BookmarksEntryLocalService.impl")
 	protected BookmarksEntryLocalService bookmarksEntryLocalService;
+	@javax.annotation.Resource(name = "com.liferay.portlet.bookmarks.service.BookmarksEntryService.impl")
 	protected BookmarksEntryService bookmarksEntryService;
+	@javax.annotation.Resource(name = "com.liferay.portlet.bookmarks.service.persistence.BookmarksEntryPersistence.impl")
 	protected BookmarksEntryPersistence bookmarksEntryPersistence;
+	@javax.annotation.Resource(name = "com.liferay.portlet.bookmarks.service.persistence.BookmarksEntryFinder.impl")
 	protected BookmarksEntryFinder bookmarksEntryFinder;
+	@javax.annotation.Resource(name = "com.liferay.portlet.bookmarks.service.BookmarksFolderLocalService.impl")
 	protected BookmarksFolderLocalService bookmarksFolderLocalService;
+	@javax.annotation.Resource(name = "com.liferay.portlet.bookmarks.service.BookmarksFolderService.impl")
 	protected BookmarksFolderService bookmarksFolderService;
+	@javax.annotation.Resource(name = "com.liferay.portlet.bookmarks.service.persistence.BookmarksFolderPersistence.impl")
 	protected BookmarksFolderPersistence bookmarksFolderPersistence;
+	@javax.annotation.Resource(name = "com.liferay.counter.service.CounterLocalService.impl")
 	protected CounterLocalService counterLocalService;
+	@javax.annotation.Resource(name = "com.liferay.counter.service.CounterService.impl")
 	protected CounterService counterService;
+	@javax.annotation.Resource(name = "com.liferay.portal.service.ResourceLocalService.impl")
 	protected ResourceLocalService resourceLocalService;
+	@javax.annotation.Resource(name = "com.liferay.portal.service.ResourceService.impl")
 	protected ResourceService resourceService;
+	@javax.annotation.Resource(name = "com.liferay.portal.service.persistence.ResourcePersistence.impl")
 	protected ResourcePersistence resourcePersistence;
+	@javax.annotation.Resource(name = "com.liferay.portal.service.persistence.ResourceFinder.impl")
 	protected ResourceFinder resourceFinder;
+	@javax.annotation.Resource(name = "com.liferay.portal.service.UserLocalService.impl")
 	protected UserLocalService userLocalService;
+	@javax.annotation.Resource(name = "com.liferay.portal.service.UserService.impl")
 	protected UserService userService;
+	@javax.annotation.Resource(name = "com.liferay.portal.service.persistence.UserPersistence.impl")
 	protected UserPersistence userPersistence;
+	@javax.annotation.Resource(name = "com.liferay.portal.service.persistence.UserFinder.impl")
 	protected UserFinder userFinder;
+	@javax.annotation.Resource(name = "com.liferay.portlet.tags.service.TagsEntryLocalService.impl")
 	protected TagsEntryLocalService tagsEntryLocalService;
+	@javax.annotation.Resource(name = "com.liferay.portlet.tags.service.TagsEntryService.impl")
 	protected TagsEntryService tagsEntryService;
+	@javax.annotation.Resource(name = "com.liferay.portlet.tags.service.persistence.TagsEntryPersistence.impl")
 	protected TagsEntryPersistence tagsEntryPersistence;
+	@javax.annotation.Resource(name = "com.liferay.portlet.tags.service.persistence.TagsEntryFinder.impl")
 	protected TagsEntryFinder tagsEntryFinder;
 }

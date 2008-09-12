@@ -45,7 +45,6 @@ import com.liferay.portlet.tags.service.persistence.TagsEntryFinder;
 import com.liferay.portlet.tags.service.persistence.TagsEntryPersistence;
 import com.liferay.portlet.wiki.model.WikiNode;
 import com.liferay.portlet.wiki.service.WikiNodeLocalService;
-import com.liferay.portlet.wiki.service.WikiNodeLocalService;
 import com.liferay.portlet.wiki.service.WikiNodeService;
 import com.liferay.portlet.wiki.service.WikiPageLocalService;
 import com.liferay.portlet.wiki.service.WikiPageResourceLocalService;
@@ -323,29 +322,54 @@ public abstract class WikiNodeLocalServiceBaseImpl
 		this.tagsEntryFinder = tagsEntryFinder;
 	}
 
+	@javax.annotation.Resource(name = "com.liferay.portlet.wiki.service.WikiNodeLocalService.impl")
 	protected WikiNodeLocalService wikiNodeLocalService;
+	@javax.annotation.Resource(name = "com.liferay.portlet.wiki.service.WikiNodeService.impl")
 	protected WikiNodeService wikiNodeService;
+	@javax.annotation.Resource(name = "com.liferay.portlet.wiki.service.persistence.WikiNodePersistence.impl")
 	protected WikiNodePersistence wikiNodePersistence;
+	@javax.annotation.Resource(name = "com.liferay.portlet.wiki.service.WikiPageLocalService.impl")
 	protected WikiPageLocalService wikiPageLocalService;
+	@javax.annotation.Resource(name = "com.liferay.portlet.wiki.service.WikiPageService.impl")
 	protected WikiPageService wikiPageService;
+	@javax.annotation.Resource(name = "com.liferay.portlet.wiki.service.persistence.WikiPagePersistence.impl")
 	protected WikiPagePersistence wikiPagePersistence;
+	@javax.annotation.Resource(name = "com.liferay.portlet.wiki.service.persistence.WikiPageFinder.impl")
 	protected WikiPageFinder wikiPageFinder;
+	@javax.annotation.Resource(name = "com.liferay.portlet.wiki.service.WikiPageResourceLocalService.impl")
 	protected WikiPageResourceLocalService wikiPageResourceLocalService;
+	@javax.annotation.Resource(name = "com.liferay.portlet.wiki.service.persistence.WikiPageResourcePersistence.impl")
 	protected WikiPageResourcePersistence wikiPageResourcePersistence;
+	@javax.annotation.Resource(name = "com.liferay.counter.service.CounterLocalService.impl")
 	protected CounterLocalService counterLocalService;
+	@javax.annotation.Resource(name = "com.liferay.counter.service.CounterService.impl")
 	protected CounterService counterService;
+	@javax.annotation.Resource(name = "com.liferay.portal.service.ResourceLocalService.impl")
 	protected ResourceLocalService resourceLocalService;
+	@javax.annotation.Resource(name = "com.liferay.portal.service.ResourceService.impl")
 	protected ResourceService resourceService;
+	@javax.annotation.Resource(name = "com.liferay.portal.service.persistence.ResourcePersistence.impl")
 	protected ResourcePersistence resourcePersistence;
+	@javax.annotation.Resource(name = "com.liferay.portal.service.persistence.ResourceFinder.impl")
 	protected ResourceFinder resourceFinder;
+	@javax.annotation.Resource(name = "com.liferay.portal.service.SubscriptionLocalService.impl")
 	protected SubscriptionLocalService subscriptionLocalService;
+	@javax.annotation.Resource(name = "com.liferay.portal.service.persistence.SubscriptionPersistence.impl")
 	protected SubscriptionPersistence subscriptionPersistence;
+	@javax.annotation.Resource(name = "com.liferay.portal.service.UserLocalService.impl")
 	protected UserLocalService userLocalService;
+	@javax.annotation.Resource(name = "com.liferay.portal.service.UserService.impl")
 	protected UserService userService;
+	@javax.annotation.Resource(name = "com.liferay.portal.service.persistence.UserPersistence.impl")
 	protected UserPersistence userPersistence;
+	@javax.annotation.Resource(name = "com.liferay.portal.service.persistence.UserFinder.impl")
 	protected UserFinder userFinder;
+	@javax.annotation.Resource(name = "com.liferay.portlet.tags.service.TagsEntryLocalService.impl")
 	protected TagsEntryLocalService tagsEntryLocalService;
+	@javax.annotation.Resource(name = "com.liferay.portlet.tags.service.TagsEntryService.impl")
 	protected TagsEntryService tagsEntryService;
+	@javax.annotation.Resource(name = "com.liferay.portlet.tags.service.persistence.TagsEntryPersistence.impl")
 	protected TagsEntryPersistence tagsEntryPersistence;
+	@javax.annotation.Resource(name = "com.liferay.portlet.tags.service.persistence.TagsEntryFinder.impl")
 	protected TagsEntryFinder tagsEntryFinder;
 }

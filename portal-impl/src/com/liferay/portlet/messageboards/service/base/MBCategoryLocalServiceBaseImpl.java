@@ -43,7 +43,6 @@ import com.liferay.portlet.messageboards.model.MBCategory;
 import com.liferay.portlet.messageboards.service.MBBanLocalService;
 import com.liferay.portlet.messageboards.service.MBBanService;
 import com.liferay.portlet.messageboards.service.MBCategoryLocalService;
-import com.liferay.portlet.messageboards.service.MBCategoryLocalService;
 import com.liferay.portlet.messageboards.service.MBCategoryService;
 import com.liferay.portlet.messageboards.service.MBMailingListLocalService;
 import com.liferay.portlet.messageboards.service.MBMessageFlagLocalService;
@@ -471,44 +470,84 @@ public abstract class MBCategoryLocalServiceBaseImpl
 		this.tagsEntryFinder = tagsEntryFinder;
 	}
 
+	@javax.annotation.Resource(name = "com.liferay.portlet.messageboards.service.MBBanLocalService.impl")
 	protected MBBanLocalService mbBanLocalService;
+	@javax.annotation.Resource(name = "com.liferay.portlet.messageboards.service.MBBanService.impl")
 	protected MBBanService mbBanService;
+	@javax.annotation.Resource(name = "com.liferay.portlet.messageboards.service.persistence.MBBanPersistence.impl")
 	protected MBBanPersistence mbBanPersistence;
+	@javax.annotation.Resource(name = "com.liferay.portlet.messageboards.service.MBCategoryLocalService.impl")
 	protected MBCategoryLocalService mbCategoryLocalService;
+	@javax.annotation.Resource(name = "com.liferay.portlet.messageboards.service.MBCategoryService.impl")
 	protected MBCategoryService mbCategoryService;
+	@javax.annotation.Resource(name = "com.liferay.portlet.messageboards.service.persistence.MBCategoryPersistence.impl")
 	protected MBCategoryPersistence mbCategoryPersistence;
+	@javax.annotation.Resource(name = "com.liferay.portlet.messageboards.service.persistence.MBCategoryFinder.impl")
 	protected MBCategoryFinder mbCategoryFinder;
+	@javax.annotation.Resource(name = "com.liferay.portlet.messageboards.service.persistence.MBDiscussionPersistence.impl")
 	protected MBDiscussionPersistence mbDiscussionPersistence;
+	@javax.annotation.Resource(name = "com.liferay.portlet.messageboards.service.MBMailingListLocalService.impl")
 	protected MBMailingListLocalService mbMailingListLocalService;
+	@javax.annotation.Resource(name = "com.liferay.portlet.messageboards.service.persistence.MBMailingListPersistence.impl")
 	protected MBMailingListPersistence mbMailingListPersistence;
+	@javax.annotation.Resource(name = "com.liferay.portlet.messageboards.service.MBMessageLocalService.impl")
 	protected MBMessageLocalService mbMessageLocalService;
+	@javax.annotation.Resource(name = "com.liferay.portlet.messageboards.service.MBMessageService.impl")
 	protected MBMessageService mbMessageService;
+	@javax.annotation.Resource(name = "com.liferay.portlet.messageboards.service.persistence.MBMessagePersistence.impl")
 	protected MBMessagePersistence mbMessagePersistence;
+	@javax.annotation.Resource(name = "com.liferay.portlet.messageboards.service.persistence.MBMessageFinder.impl")
 	protected MBMessageFinder mbMessageFinder;
+	@javax.annotation.Resource(name = "com.liferay.portlet.messageboards.service.MBMessageFlagLocalService.impl")
 	protected MBMessageFlagLocalService mbMessageFlagLocalService;
+	@javax.annotation.Resource(name = "com.liferay.portlet.messageboards.service.MBMessageFlagService.impl")
 	protected MBMessageFlagService mbMessageFlagService;
+	@javax.annotation.Resource(name = "com.liferay.portlet.messageboards.service.persistence.MBMessageFlagPersistence.impl")
 	protected MBMessageFlagPersistence mbMessageFlagPersistence;
+	@javax.annotation.Resource(name = "com.liferay.portlet.messageboards.service.persistence.MBMessageFlagFinder.impl")
 	protected MBMessageFlagFinder mbMessageFlagFinder;
+	@javax.annotation.Resource(name = "com.liferay.portlet.messageboards.service.MBStatsUserLocalService.impl")
 	protected MBStatsUserLocalService mbStatsUserLocalService;
+	@javax.annotation.Resource(name = "com.liferay.portlet.messageboards.service.persistence.MBStatsUserPersistence.impl")
 	protected MBStatsUserPersistence mbStatsUserPersistence;
+	@javax.annotation.Resource(name = "com.liferay.portlet.messageboards.service.MBThreadLocalService.impl")
 	protected MBThreadLocalService mbThreadLocalService;
+	@javax.annotation.Resource(name = "com.liferay.portlet.messageboards.service.MBThreadService.impl")
 	protected MBThreadService mbThreadService;
+	@javax.annotation.Resource(name = "com.liferay.portlet.messageboards.service.persistence.MBThreadPersistence.impl")
 	protected MBThreadPersistence mbThreadPersistence;
+	@javax.annotation.Resource(name = "com.liferay.portlet.messageboards.service.persistence.MBThreadFinder.impl")
 	protected MBThreadFinder mbThreadFinder;
+	@javax.annotation.Resource(name = "com.liferay.counter.service.CounterLocalService.impl")
 	protected CounterLocalService counterLocalService;
+	@javax.annotation.Resource(name = "com.liferay.counter.service.CounterService.impl")
 	protected CounterService counterService;
+	@javax.annotation.Resource(name = "com.liferay.portal.service.ResourceLocalService.impl")
 	protected ResourceLocalService resourceLocalService;
+	@javax.annotation.Resource(name = "com.liferay.portal.service.ResourceService.impl")
 	protected ResourceService resourceService;
+	@javax.annotation.Resource(name = "com.liferay.portal.service.persistence.ResourcePersistence.impl")
 	protected ResourcePersistence resourcePersistence;
+	@javax.annotation.Resource(name = "com.liferay.portal.service.persistence.ResourceFinder.impl")
 	protected ResourceFinder resourceFinder;
+	@javax.annotation.Resource(name = "com.liferay.portal.service.SubscriptionLocalService.impl")
 	protected SubscriptionLocalService subscriptionLocalService;
+	@javax.annotation.Resource(name = "com.liferay.portal.service.persistence.SubscriptionPersistence.impl")
 	protected SubscriptionPersistence subscriptionPersistence;
+	@javax.annotation.Resource(name = "com.liferay.portal.service.UserLocalService.impl")
 	protected UserLocalService userLocalService;
+	@javax.annotation.Resource(name = "com.liferay.portal.service.UserService.impl")
 	protected UserService userService;
+	@javax.annotation.Resource(name = "com.liferay.portal.service.persistence.UserPersistence.impl")
 	protected UserPersistence userPersistence;
+	@javax.annotation.Resource(name = "com.liferay.portal.service.persistence.UserFinder.impl")
 	protected UserFinder userFinder;
+	@javax.annotation.Resource(name = "com.liferay.portlet.tags.service.TagsEntryLocalService.impl")
 	protected TagsEntryLocalService tagsEntryLocalService;
+	@javax.annotation.Resource(name = "com.liferay.portlet.tags.service.TagsEntryService.impl")
 	protected TagsEntryService tagsEntryService;
+	@javax.annotation.Resource(name = "com.liferay.portlet.tags.service.persistence.TagsEntryPersistence.impl")
 	protected TagsEntryPersistence tagsEntryPersistence;
+	@javax.annotation.Resource(name = "com.liferay.portlet.tags.service.persistence.TagsEntryFinder.impl")
 	protected TagsEntryFinder tagsEntryFinder;
 }

@@ -40,7 +40,6 @@ import com.liferay.portlet.softwarecatalog.service.SCProductEntryService;
 import com.liferay.portlet.softwarecatalog.service.SCProductScreenshotLocalService;
 import com.liferay.portlet.softwarecatalog.service.SCProductVersionLocalService;
 import com.liferay.portlet.softwarecatalog.service.SCProductVersionService;
-import com.liferay.portlet.softwarecatalog.service.SCProductVersionService;
 import com.liferay.portlet.softwarecatalog.service.persistence.SCFrameworkVersionPersistence;
 import com.liferay.portlet.softwarecatalog.service.persistence.SCLicensePersistence;
 import com.liferay.portlet.softwarecatalog.service.persistence.SCProductEntryPersistence;
@@ -228,24 +227,44 @@ public abstract class SCProductVersionServiceBaseImpl extends PrincipalBean
 		this.userFinder = userFinder;
 	}
 
+	@javax.annotation.Resource(name = "com.liferay.portlet.softwarecatalog.service.SCLicenseLocalService.impl")
 	protected SCLicenseLocalService scLicenseLocalService;
+	@javax.annotation.Resource(name = "com.liferay.portlet.softwarecatalog.service.SCLicenseService.impl")
 	protected SCLicenseService scLicenseService;
+	@javax.annotation.Resource(name = "com.liferay.portlet.softwarecatalog.service.persistence.SCLicensePersistence.impl")
 	protected SCLicensePersistence scLicensePersistence;
+	@javax.annotation.Resource(name = "com.liferay.portlet.softwarecatalog.service.SCFrameworkVersionLocalService.impl")
 	protected SCFrameworkVersionLocalService scFrameworkVersionLocalService;
+	@javax.annotation.Resource(name = "com.liferay.portlet.softwarecatalog.service.SCFrameworkVersionService.impl")
 	protected SCFrameworkVersionService scFrameworkVersionService;
+	@javax.annotation.Resource(name = "com.liferay.portlet.softwarecatalog.service.persistence.SCFrameworkVersionPersistence.impl")
 	protected SCFrameworkVersionPersistence scFrameworkVersionPersistence;
+	@javax.annotation.Resource(name = "com.liferay.portlet.softwarecatalog.service.SCProductEntryLocalService.impl")
 	protected SCProductEntryLocalService scProductEntryLocalService;
+	@javax.annotation.Resource(name = "com.liferay.portlet.softwarecatalog.service.SCProductEntryService.impl")
 	protected SCProductEntryService scProductEntryService;
+	@javax.annotation.Resource(name = "com.liferay.portlet.softwarecatalog.service.persistence.SCProductEntryPersistence.impl")
 	protected SCProductEntryPersistence scProductEntryPersistence;
+	@javax.annotation.Resource(name = "com.liferay.portlet.softwarecatalog.service.SCProductScreenshotLocalService.impl")
 	protected SCProductScreenshotLocalService scProductScreenshotLocalService;
+	@javax.annotation.Resource(name = "com.liferay.portlet.softwarecatalog.service.persistence.SCProductScreenshotPersistence.impl")
 	protected SCProductScreenshotPersistence scProductScreenshotPersistence;
+	@javax.annotation.Resource(name = "com.liferay.portlet.softwarecatalog.service.SCProductVersionLocalService.impl")
 	protected SCProductVersionLocalService scProductVersionLocalService;
+	@javax.annotation.Resource(name = "com.liferay.portlet.softwarecatalog.service.SCProductVersionService.impl")
 	protected SCProductVersionService scProductVersionService;
+	@javax.annotation.Resource(name = "com.liferay.portlet.softwarecatalog.service.persistence.SCProductVersionPersistence.impl")
 	protected SCProductVersionPersistence scProductVersionPersistence;
+	@javax.annotation.Resource(name = "com.liferay.counter.service.CounterLocalService.impl")
 	protected CounterLocalService counterLocalService;
+	@javax.annotation.Resource(name = "com.liferay.counter.service.CounterService.impl")
 	protected CounterService counterService;
+	@javax.annotation.Resource(name = "com.liferay.portal.service.UserLocalService.impl")
 	protected UserLocalService userLocalService;
+	@javax.annotation.Resource(name = "com.liferay.portal.service.UserService.impl")
 	protected UserService userService;
+	@javax.annotation.Resource(name = "com.liferay.portal.service.persistence.UserPersistence.impl")
 	protected UserPersistence userPersistence;
+	@javax.annotation.Resource(name = "com.liferay.portal.service.persistence.UserFinder.impl")
 	protected UserFinder userFinder;
 }

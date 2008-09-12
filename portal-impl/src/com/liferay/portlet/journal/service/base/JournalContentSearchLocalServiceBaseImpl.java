@@ -47,7 +47,6 @@ import com.liferay.portlet.journal.service.JournalArticleLocalService;
 import com.liferay.portlet.journal.service.JournalArticleResourceLocalService;
 import com.liferay.portlet.journal.service.JournalArticleService;
 import com.liferay.portlet.journal.service.JournalContentSearchLocalService;
-import com.liferay.portlet.journal.service.JournalContentSearchLocalService;
 import com.liferay.portlet.journal.service.JournalFeedLocalService;
 import com.liferay.portlet.journal.service.JournalFeedService;
 import com.liferay.portlet.journal.service.JournalStructureLocalService;
@@ -442,40 +441,76 @@ public abstract class JournalContentSearchLocalServiceBaseImpl
 		this.portletPreferencesFinder = portletPreferencesFinder;
 	}
 
+	@javax.annotation.Resource(name = "com.liferay.portlet.journal.service.JournalArticleLocalService.impl")
 	protected JournalArticleLocalService journalArticleLocalService;
+	@javax.annotation.Resource(name = "com.liferay.portlet.journal.service.JournalArticleService.impl")
 	protected JournalArticleService journalArticleService;
+	@javax.annotation.Resource(name = "com.liferay.portlet.journal.service.persistence.JournalArticlePersistence.impl")
 	protected JournalArticlePersistence journalArticlePersistence;
+	@javax.annotation.Resource(name = "com.liferay.portlet.journal.service.persistence.JournalArticleFinder.impl")
 	protected JournalArticleFinder journalArticleFinder;
+	@javax.annotation.Resource(name = "com.liferay.portlet.journal.service.JournalArticleImageLocalService.impl")
 	protected JournalArticleImageLocalService journalArticleImageLocalService;
+	@javax.annotation.Resource(name = "com.liferay.portlet.journal.service.persistence.JournalArticleImagePersistence.impl")
 	protected JournalArticleImagePersistence journalArticleImagePersistence;
+	@javax.annotation.Resource(name = "com.liferay.portlet.journal.service.JournalArticleResourceLocalService.impl")
 	protected JournalArticleResourceLocalService journalArticleResourceLocalService;
+	@javax.annotation.Resource(name = "com.liferay.portlet.journal.service.persistence.JournalArticleResourcePersistence.impl")
 	protected JournalArticleResourcePersistence journalArticleResourcePersistence;
+	@javax.annotation.Resource(name = "com.liferay.portlet.journal.service.JournalContentSearchLocalService.impl")
 	protected JournalContentSearchLocalService journalContentSearchLocalService;
+	@javax.annotation.Resource(name = "com.liferay.portlet.journal.service.persistence.JournalContentSearchPersistence.impl")
 	protected JournalContentSearchPersistence journalContentSearchPersistence;
+	@javax.annotation.Resource(name = "com.liferay.portlet.journal.service.JournalFeedLocalService.impl")
 	protected JournalFeedLocalService journalFeedLocalService;
+	@javax.annotation.Resource(name = "com.liferay.portlet.journal.service.JournalFeedService.impl")
 	protected JournalFeedService journalFeedService;
+	@javax.annotation.Resource(name = "com.liferay.portlet.journal.service.persistence.JournalFeedPersistence.impl")
 	protected JournalFeedPersistence journalFeedPersistence;
+	@javax.annotation.Resource(name = "com.liferay.portlet.journal.service.persistence.JournalFeedFinder.impl")
 	protected JournalFeedFinder journalFeedFinder;
+	@javax.annotation.Resource(name = "com.liferay.portlet.journal.service.JournalStructureLocalService.impl")
 	protected JournalStructureLocalService journalStructureLocalService;
+	@javax.annotation.Resource(name = "com.liferay.portlet.journal.service.JournalStructureService.impl")
 	protected JournalStructureService journalStructureService;
+	@javax.annotation.Resource(name = "com.liferay.portlet.journal.service.persistence.JournalStructurePersistence.impl")
 	protected JournalStructurePersistence journalStructurePersistence;
+	@javax.annotation.Resource(name = "com.liferay.portlet.journal.service.persistence.JournalStructureFinder.impl")
 	protected JournalStructureFinder journalStructureFinder;
+	@javax.annotation.Resource(name = "com.liferay.portlet.journal.service.JournalTemplateLocalService.impl")
 	protected JournalTemplateLocalService journalTemplateLocalService;
+	@javax.annotation.Resource(name = "com.liferay.portlet.journal.service.JournalTemplateService.impl")
 	protected JournalTemplateService journalTemplateService;
+	@javax.annotation.Resource(name = "com.liferay.portlet.journal.service.persistence.JournalTemplatePersistence.impl")
 	protected JournalTemplatePersistence journalTemplatePersistence;
+	@javax.annotation.Resource(name = "com.liferay.portlet.journal.service.persistence.JournalTemplateFinder.impl")
 	protected JournalTemplateFinder journalTemplateFinder;
+	@javax.annotation.Resource(name = "com.liferay.counter.service.CounterLocalService.impl")
 	protected CounterLocalService counterLocalService;
+	@javax.annotation.Resource(name = "com.liferay.counter.service.CounterService.impl")
 	protected CounterService counterService;
+	@javax.annotation.Resource(name = "com.liferay.portal.service.GroupLocalService.impl")
 	protected GroupLocalService groupLocalService;
+	@javax.annotation.Resource(name = "com.liferay.portal.service.GroupService.impl")
 	protected GroupService groupService;
+	@javax.annotation.Resource(name = "com.liferay.portal.service.persistence.GroupPersistence.impl")
 	protected GroupPersistence groupPersistence;
+	@javax.annotation.Resource(name = "com.liferay.portal.service.persistence.GroupFinder.impl")
 	protected GroupFinder groupFinder;
+	@javax.annotation.Resource(name = "com.liferay.portal.service.LayoutLocalService.impl")
 	protected LayoutLocalService layoutLocalService;
+	@javax.annotation.Resource(name = "com.liferay.portal.service.LayoutService.impl")
 	protected LayoutService layoutService;
+	@javax.annotation.Resource(name = "com.liferay.portal.service.persistence.LayoutPersistence.impl")
 	protected LayoutPersistence layoutPersistence;
+	@javax.annotation.Resource(name = "com.liferay.portal.service.persistence.LayoutFinder.impl")
 	protected LayoutFinder layoutFinder;
+	@javax.annotation.Resource(name = "com.liferay.portal.service.PortletPreferencesLocalService.impl")
 	protected PortletPreferencesLocalService portletPreferencesLocalService;
+	@javax.annotation.Resource(name = "com.liferay.portal.service.PortletPreferencesService.impl")
 	protected PortletPreferencesService portletPreferencesService;
+	@javax.annotation.Resource(name = "com.liferay.portal.service.persistence.PortletPreferencesPersistence.impl")
 	protected PortletPreferencesPersistence portletPreferencesPersistence;
+	@javax.annotation.Resource(name = "com.liferay.portal.service.persistence.PortletPreferencesFinder.impl")
 	protected PortletPreferencesFinder portletPreferencesFinder;
 }

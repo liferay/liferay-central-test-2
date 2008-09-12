@@ -33,7 +33,6 @@ import com.liferay.portlet.documentlibrary.service.DLFileRankLocalService;
 import com.liferay.portlet.documentlibrary.service.DLFileShortcutLocalService;
 import com.liferay.portlet.documentlibrary.service.DLFileShortcutService;
 import com.liferay.portlet.documentlibrary.service.DLFileVersionLocalService;
-import com.liferay.portlet.documentlibrary.service.DLFileVersionLocalService;
 import com.liferay.portlet.documentlibrary.service.DLFolderLocalService;
 import com.liferay.portlet.documentlibrary.service.DLFolderService;
 import com.liferay.portlet.documentlibrary.service.persistence.DLFileEntryAndShortcutFinder;
@@ -257,21 +256,38 @@ public abstract class DLFileVersionLocalServiceBaseImpl
 		this.dlFolderPersistence = dlFolderPersistence;
 	}
 
+	@javax.annotation.Resource(name = "com.liferay.portlet.documentlibrary.service.DLFileEntryLocalService.impl")
 	protected DLFileEntryLocalService dlFileEntryLocalService;
+	@javax.annotation.Resource(name = "com.liferay.portlet.documentlibrary.service.DLFileEntryService.impl")
 	protected DLFileEntryService dlFileEntryService;
+	@javax.annotation.Resource(name = "com.liferay.portlet.documentlibrary.service.persistence.DLFileEntryPersistence.impl")
 	protected DLFileEntryPersistence dlFileEntryPersistence;
+	@javax.annotation.Resource(name = "com.liferay.portlet.documentlibrary.service.persistence.DLFileEntryFinder.impl")
 	protected DLFileEntryFinder dlFileEntryFinder;
+	@javax.annotation.Resource(name = "com.liferay.portlet.documentlibrary.service.persistence.DLFileEntryAndShortcutFinder.impl")
 	protected DLFileEntryAndShortcutFinder dlFileEntryAndShortcutFinder;
+	@javax.annotation.Resource(name = "com.liferay.portlet.documentlibrary.service.DLFileRankLocalService.impl")
 	protected DLFileRankLocalService dlFileRankLocalService;
+	@javax.annotation.Resource(name = "com.liferay.portlet.documentlibrary.service.persistence.DLFileRankPersistence.impl")
 	protected DLFileRankPersistence dlFileRankPersistence;
+	@javax.annotation.Resource(name = "com.liferay.portlet.documentlibrary.service.persistence.DLFileRankFinder.impl")
 	protected DLFileRankFinder dlFileRankFinder;
+	@javax.annotation.Resource(name = "com.liferay.portlet.documentlibrary.service.DLFileShortcutLocalService.impl")
 	protected DLFileShortcutLocalService dlFileShortcutLocalService;
+	@javax.annotation.Resource(name = "com.liferay.portlet.documentlibrary.service.DLFileShortcutService.impl")
 	protected DLFileShortcutService dlFileShortcutService;
+	@javax.annotation.Resource(name = "com.liferay.portlet.documentlibrary.service.persistence.DLFileShortcutPersistence.impl")
 	protected DLFileShortcutPersistence dlFileShortcutPersistence;
+	@javax.annotation.Resource(name = "com.liferay.portlet.documentlibrary.service.persistence.DLFileShortcutFinder.impl")
 	protected DLFileShortcutFinder dlFileShortcutFinder;
+	@javax.annotation.Resource(name = "com.liferay.portlet.documentlibrary.service.DLFileVersionLocalService.impl")
 	protected DLFileVersionLocalService dlFileVersionLocalService;
+	@javax.annotation.Resource(name = "com.liferay.portlet.documentlibrary.service.persistence.DLFileVersionPersistence.impl")
 	protected DLFileVersionPersistence dlFileVersionPersistence;
+	@javax.annotation.Resource(name = "com.liferay.portlet.documentlibrary.service.DLFolderLocalService.impl")
 	protected DLFolderLocalService dlFolderLocalService;
+	@javax.annotation.Resource(name = "com.liferay.portlet.documentlibrary.service.DLFolderService.impl")
 	protected DLFolderService dlFolderService;
+	@javax.annotation.Resource(name = "com.liferay.portlet.documentlibrary.service.persistence.DLFolderPersistence.impl")
 	protected DLFolderPersistence dlFolderPersistence;
 }

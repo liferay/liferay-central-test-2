@@ -43,7 +43,6 @@ import com.liferay.portal.service.CountryService;
 import com.liferay.portal.service.EmailAddressLocalService;
 import com.liferay.portal.service.EmailAddressService;
 import com.liferay.portal.service.GroupLocalService;
-import com.liferay.portal.service.GroupLocalService;
 import com.liferay.portal.service.GroupService;
 import com.liferay.portal.service.ImageLocalService;
 import com.liferay.portal.service.LayoutLocalService;
@@ -1922,196 +1921,388 @@ public abstract class GroupLocalServiceBaseImpl implements GroupLocalService {
 		this.wikiNodePersistence = wikiNodePersistence;
 	}
 
+	@javax.annotation.Resource(name = "com.liferay.portal.service.AccountLocalService.impl")
 	protected AccountLocalService accountLocalService;
+	@javax.annotation.Resource(name = "com.liferay.portal.service.AccountService.impl")
 	protected AccountService accountService;
+	@javax.annotation.Resource(name = "com.liferay.portal.service.persistence.AccountPersistence.impl")
 	protected AccountPersistence accountPersistence;
+	@javax.annotation.Resource(name = "com.liferay.portal.service.AddressLocalService.impl")
 	protected AddressLocalService addressLocalService;
+	@javax.annotation.Resource(name = "com.liferay.portal.service.AddressService.impl")
 	protected AddressService addressService;
+	@javax.annotation.Resource(name = "com.liferay.portal.service.persistence.AddressPersistence.impl")
 	protected AddressPersistence addressPersistence;
+	@javax.annotation.Resource(name = "com.liferay.portal.service.ClassNameLocalService.impl")
 	protected ClassNameLocalService classNameLocalService;
+	@javax.annotation.Resource(name = "com.liferay.portal.service.ClassNameService.impl")
 	protected ClassNameService classNameService;
+	@javax.annotation.Resource(name = "com.liferay.portal.service.persistence.ClassNamePersistence.impl")
 	protected ClassNamePersistence classNamePersistence;
+	@javax.annotation.Resource(name = "com.liferay.portal.service.CompanyLocalService.impl")
 	protected CompanyLocalService companyLocalService;
+	@javax.annotation.Resource(name = "com.liferay.portal.service.CompanyService.impl")
 	protected CompanyService companyService;
+	@javax.annotation.Resource(name = "com.liferay.portal.service.persistence.CompanyPersistence.impl")
 	protected CompanyPersistence companyPersistence;
+	@javax.annotation.Resource(name = "com.liferay.portal.service.ContactLocalService.impl")
 	protected ContactLocalService contactLocalService;
+	@javax.annotation.Resource(name = "com.liferay.portal.service.ContactService.impl")
 	protected ContactService contactService;
+	@javax.annotation.Resource(name = "com.liferay.portal.service.persistence.ContactPersistence.impl")
 	protected ContactPersistence contactPersistence;
+	@javax.annotation.Resource(name = "com.liferay.portal.service.CountryService.impl")
 	protected CountryService countryService;
+	@javax.annotation.Resource(name = "com.liferay.portal.service.persistence.CountryPersistence.impl")
 	protected CountryPersistence countryPersistence;
+	@javax.annotation.Resource(name = "com.liferay.portal.service.EmailAddressLocalService.impl")
 	protected EmailAddressLocalService emailAddressLocalService;
+	@javax.annotation.Resource(name = "com.liferay.portal.service.EmailAddressService.impl")
 	protected EmailAddressService emailAddressService;
+	@javax.annotation.Resource(name = "com.liferay.portal.service.persistence.EmailAddressPersistence.impl")
 	protected EmailAddressPersistence emailAddressPersistence;
+	@javax.annotation.Resource(name = "com.liferay.portal.service.GroupLocalService.impl")
 	protected GroupLocalService groupLocalService;
+	@javax.annotation.Resource(name = "com.liferay.portal.service.GroupService.impl")
 	protected GroupService groupService;
+	@javax.annotation.Resource(name = "com.liferay.portal.service.persistence.GroupPersistence.impl")
 	protected GroupPersistence groupPersistence;
+	@javax.annotation.Resource(name = "com.liferay.portal.service.persistence.GroupFinder.impl")
 	protected GroupFinder groupFinder;
+	@javax.annotation.Resource(name = "com.liferay.portal.service.ImageLocalService.impl")
 	protected ImageLocalService imageLocalService;
+	@javax.annotation.Resource(name = "com.liferay.portal.service.persistence.ImagePersistence.impl")
 	protected ImagePersistence imagePersistence;
+	@javax.annotation.Resource(name = "com.liferay.portal.service.LayoutLocalService.impl")
 	protected LayoutLocalService layoutLocalService;
+	@javax.annotation.Resource(name = "com.liferay.portal.service.LayoutService.impl")
 	protected LayoutService layoutService;
+	@javax.annotation.Resource(name = "com.liferay.portal.service.persistence.LayoutPersistence.impl")
 	protected LayoutPersistence layoutPersistence;
+	@javax.annotation.Resource(name = "com.liferay.portal.service.persistence.LayoutFinder.impl")
 	protected LayoutFinder layoutFinder;
+	@javax.annotation.Resource(name = "com.liferay.portal.service.LayoutSetLocalService.impl")
 	protected LayoutSetLocalService layoutSetLocalService;
+	@javax.annotation.Resource(name = "com.liferay.portal.service.LayoutSetService.impl")
 	protected LayoutSetService layoutSetService;
+	@javax.annotation.Resource(name = "com.liferay.portal.service.persistence.LayoutSetPersistence.impl")
 	protected LayoutSetPersistence layoutSetPersistence;
+	@javax.annotation.Resource(name = "com.liferay.portal.service.LayoutTemplateLocalService.impl")
 	protected LayoutTemplateLocalService layoutTemplateLocalService;
+	@javax.annotation.Resource(name = "com.liferay.portal.service.ListTypeService.impl")
 	protected ListTypeService listTypeService;
+	@javax.annotation.Resource(name = "com.liferay.portal.service.persistence.ListTypePersistence.impl")
 	protected ListTypePersistence listTypePersistence;
+	@javax.annotation.Resource(name = "com.liferay.portal.service.MembershipRequestLocalService.impl")
 	protected MembershipRequestLocalService membershipRequestLocalService;
+	@javax.annotation.Resource(name = "com.liferay.portal.service.MembershipRequestService.impl")
 	protected MembershipRequestService membershipRequestService;
+	@javax.annotation.Resource(name = "com.liferay.portal.service.persistence.MembershipRequestPersistence.impl")
 	protected MembershipRequestPersistence membershipRequestPersistence;
+	@javax.annotation.Resource(name = "com.liferay.portal.service.OrganizationLocalService.impl")
 	protected OrganizationLocalService organizationLocalService;
+	@javax.annotation.Resource(name = "com.liferay.portal.service.OrganizationService.impl")
 	protected OrganizationService organizationService;
+	@javax.annotation.Resource(name = "com.liferay.portal.service.persistence.OrganizationPersistence.impl")
 	protected OrganizationPersistence organizationPersistence;
+	@javax.annotation.Resource(name = "com.liferay.portal.service.persistence.OrganizationFinder.impl")
 	protected OrganizationFinder organizationFinder;
+	@javax.annotation.Resource(name = "com.liferay.portal.service.persistence.OrgGroupPermissionPersistence.impl")
 	protected OrgGroupPermissionPersistence orgGroupPermissionPersistence;
+	@javax.annotation.Resource(name = "com.liferay.portal.service.persistence.OrgGroupPermissionFinder.impl")
 	protected OrgGroupPermissionFinder orgGroupPermissionFinder;
+	@javax.annotation.Resource(name = "com.liferay.portal.service.persistence.OrgGroupRolePersistence.impl")
 	protected OrgGroupRolePersistence orgGroupRolePersistence;
+	@javax.annotation.Resource(name = "com.liferay.portal.service.OrgLaborLocalService.impl")
 	protected OrgLaborLocalService orgLaborLocalService;
+	@javax.annotation.Resource(name = "com.liferay.portal.service.OrgLaborService.impl")
 	protected OrgLaborService orgLaborService;
+	@javax.annotation.Resource(name = "com.liferay.portal.service.persistence.OrgLaborPersistence.impl")
 	protected OrgLaborPersistence orgLaborPersistence;
+	@javax.annotation.Resource(name = "com.liferay.portal.service.PasswordPolicyLocalService.impl")
 	protected PasswordPolicyLocalService passwordPolicyLocalService;
+	@javax.annotation.Resource(name = "com.liferay.portal.service.PasswordPolicyService.impl")
 	protected PasswordPolicyService passwordPolicyService;
+	@javax.annotation.Resource(name = "com.liferay.portal.service.persistence.PasswordPolicyPersistence.impl")
 	protected PasswordPolicyPersistence passwordPolicyPersistence;
+	@javax.annotation.Resource(name = "com.liferay.portal.service.persistence.PasswordPolicyFinder.impl")
 	protected PasswordPolicyFinder passwordPolicyFinder;
+	@javax.annotation.Resource(name = "com.liferay.portal.service.PasswordPolicyRelLocalService.impl")
 	protected PasswordPolicyRelLocalService passwordPolicyRelLocalService;
+	@javax.annotation.Resource(name = "com.liferay.portal.service.persistence.PasswordPolicyRelPersistence.impl")
 	protected PasswordPolicyRelPersistence passwordPolicyRelPersistence;
+	@javax.annotation.Resource(name = "com.liferay.portal.service.PasswordTrackerLocalService.impl")
 	protected PasswordTrackerLocalService passwordTrackerLocalService;
+	@javax.annotation.Resource(name = "com.liferay.portal.service.persistence.PasswordTrackerPersistence.impl")
 	protected PasswordTrackerPersistence passwordTrackerPersistence;
+	@javax.annotation.Resource(name = "com.liferay.portal.service.PermissionLocalService.impl")
 	protected PermissionLocalService permissionLocalService;
+	@javax.annotation.Resource(name = "com.liferay.portal.service.PermissionService.impl")
 	protected PermissionService permissionService;
+	@javax.annotation.Resource(name = "com.liferay.portal.service.persistence.PermissionPersistence.impl")
 	protected PermissionPersistence permissionPersistence;
+	@javax.annotation.Resource(name = "com.liferay.portal.service.persistence.PermissionFinder.impl")
 	protected PermissionFinder permissionFinder;
+	@javax.annotation.Resource(name = "com.liferay.portal.service.persistence.PermissionUserFinder.impl")
 	protected PermissionUserFinder permissionUserFinder;
+	@javax.annotation.Resource(name = "com.liferay.portal.service.PhoneLocalService.impl")
 	protected PhoneLocalService phoneLocalService;
+	@javax.annotation.Resource(name = "com.liferay.portal.service.PhoneService.impl")
 	protected PhoneService phoneService;
+	@javax.annotation.Resource(name = "com.liferay.portal.service.persistence.PhonePersistence.impl")
 	protected PhonePersistence phonePersistence;
+	@javax.annotation.Resource(name = "com.liferay.portal.service.PortalService.impl")
 	protected PortalService portalService;
+	@javax.annotation.Resource(name = "com.liferay.portal.service.PluginSettingLocalService.impl")
 	protected PluginSettingLocalService pluginSettingLocalService;
+	@javax.annotation.Resource(name = "com.liferay.portal.service.PluginSettingService.impl")
 	protected PluginSettingService pluginSettingService;
+	@javax.annotation.Resource(name = "com.liferay.portal.service.persistence.PluginSettingPersistence.impl")
 	protected PluginSettingPersistence pluginSettingPersistence;
+	@javax.annotation.Resource(name = "com.liferay.portal.service.PortletLocalService.impl")
 	protected PortletLocalService portletLocalService;
+	@javax.annotation.Resource(name = "com.liferay.portal.service.PortletService.impl")
 	protected PortletService portletService;
+	@javax.annotation.Resource(name = "com.liferay.portal.service.persistence.PortletPersistence.impl")
 	protected PortletPersistence portletPersistence;
+	@javax.annotation.Resource(name = "com.liferay.portal.service.PortletPreferencesLocalService.impl")
 	protected PortletPreferencesLocalService portletPreferencesLocalService;
+	@javax.annotation.Resource(name = "com.liferay.portal.service.PortletPreferencesService.impl")
 	protected PortletPreferencesService portletPreferencesService;
+	@javax.annotation.Resource(name = "com.liferay.portal.service.persistence.PortletPreferencesPersistence.impl")
 	protected PortletPreferencesPersistence portletPreferencesPersistence;
+	@javax.annotation.Resource(name = "com.liferay.portal.service.persistence.PortletPreferencesFinder.impl")
 	protected PortletPreferencesFinder portletPreferencesFinder;
+	@javax.annotation.Resource(name = "com.liferay.portal.service.RegionService.impl")
 	protected RegionService regionService;
+	@javax.annotation.Resource(name = "com.liferay.portal.service.persistence.RegionPersistence.impl")
 	protected RegionPersistence regionPersistence;
+	@javax.annotation.Resource(name = "com.liferay.portal.service.ReleaseLocalService.impl")
 	protected ReleaseLocalService releaseLocalService;
+	@javax.annotation.Resource(name = "com.liferay.portal.service.persistence.ReleasePersistence.impl")
 	protected ReleasePersistence releasePersistence;
+	@javax.annotation.Resource(name = "com.liferay.portal.service.ResourceLocalService.impl")
 	protected ResourceLocalService resourceLocalService;
+	@javax.annotation.Resource(name = "com.liferay.portal.service.ResourceService.impl")
 	protected ResourceService resourceService;
+	@javax.annotation.Resource(name = "com.liferay.portal.service.persistence.ResourcePersistence.impl")
 	protected ResourcePersistence resourcePersistence;
+	@javax.annotation.Resource(name = "com.liferay.portal.service.persistence.ResourceFinder.impl")
 	protected ResourceFinder resourceFinder;
+	@javax.annotation.Resource(name = "com.liferay.portal.service.ResourceCodeLocalService.impl")
 	protected ResourceCodeLocalService resourceCodeLocalService;
+	@javax.annotation.Resource(name = "com.liferay.portal.service.persistence.ResourceCodePersistence.impl")
 	protected ResourceCodePersistence resourceCodePersistence;
+	@javax.annotation.Resource(name = "com.liferay.portal.service.RoleLocalService.impl")
 	protected RoleLocalService roleLocalService;
+	@javax.annotation.Resource(name = "com.liferay.portal.service.RoleService.impl")
 	protected RoleService roleService;
+	@javax.annotation.Resource(name = "com.liferay.portal.service.persistence.RolePersistence.impl")
 	protected RolePersistence rolePersistence;
+	@javax.annotation.Resource(name = "com.liferay.portal.service.persistence.RoleFinder.impl")
 	protected RoleFinder roleFinder;
+	@javax.annotation.Resource(name = "com.liferay.portal.service.ServiceComponentLocalService.impl")
 	protected ServiceComponentLocalService serviceComponentLocalService;
+	@javax.annotation.Resource(name = "com.liferay.portal.service.persistence.ServiceComponentPersistence.impl")
 	protected ServiceComponentPersistence serviceComponentPersistence;
+	@javax.annotation.Resource(name = "com.liferay.portal.service.PortletItemLocalService.impl")
 	protected PortletItemLocalService portletItemLocalService;
+	@javax.annotation.Resource(name = "com.liferay.portal.service.persistence.PortletItemPersistence.impl")
 	protected PortletItemPersistence portletItemPersistence;
+	@javax.annotation.Resource(name = "com.liferay.portal.service.SubscriptionLocalService.impl")
 	protected SubscriptionLocalService subscriptionLocalService;
+	@javax.annotation.Resource(name = "com.liferay.portal.service.persistence.SubscriptionPersistence.impl")
 	protected SubscriptionPersistence subscriptionPersistence;
+	@javax.annotation.Resource(name = "com.liferay.portal.service.ThemeLocalService.impl")
 	protected ThemeLocalService themeLocalService;
+	@javax.annotation.Resource(name = "com.liferay.portal.service.ThemeService.impl")
 	protected ThemeService themeService;
+	@javax.annotation.Resource(name = "com.liferay.portal.service.UserLocalService.impl")
 	protected UserLocalService userLocalService;
+	@javax.annotation.Resource(name = "com.liferay.portal.service.UserService.impl")
 	protected UserService userService;
+	@javax.annotation.Resource(name = "com.liferay.portal.service.persistence.UserPersistence.impl")
 	protected UserPersistence userPersistence;
+	@javax.annotation.Resource(name = "com.liferay.portal.service.persistence.UserFinder.impl")
 	protected UserFinder userFinder;
+	@javax.annotation.Resource(name = "com.liferay.portal.service.UserGroupLocalService.impl")
 	protected UserGroupLocalService userGroupLocalService;
+	@javax.annotation.Resource(name = "com.liferay.portal.service.UserGroupService.impl")
 	protected UserGroupService userGroupService;
+	@javax.annotation.Resource(name = "com.liferay.portal.service.persistence.UserGroupPersistence.impl")
 	protected UserGroupPersistence userGroupPersistence;
+	@javax.annotation.Resource(name = "com.liferay.portal.service.persistence.UserGroupFinder.impl")
 	protected UserGroupFinder userGroupFinder;
+	@javax.annotation.Resource(name = "com.liferay.portal.service.UserGroupRoleLocalService.impl")
 	protected UserGroupRoleLocalService userGroupRoleLocalService;
+	@javax.annotation.Resource(name = "com.liferay.portal.service.UserGroupRoleService.impl")
 	protected UserGroupRoleService userGroupRoleService;
+	@javax.annotation.Resource(name = "com.liferay.portal.service.persistence.UserGroupRolePersistence.impl")
 	protected UserGroupRolePersistence userGroupRolePersistence;
+	@javax.annotation.Resource(name = "com.liferay.portal.service.UserIdMapperLocalService.impl")
 	protected UserIdMapperLocalService userIdMapperLocalService;
+	@javax.annotation.Resource(name = "com.liferay.portal.service.persistence.UserIdMapperPersistence.impl")
 	protected UserIdMapperPersistence userIdMapperPersistence;
+	@javax.annotation.Resource(name = "com.liferay.portal.service.UserTrackerLocalService.impl")
 	protected UserTrackerLocalService userTrackerLocalService;
+	@javax.annotation.Resource(name = "com.liferay.portal.service.persistence.UserTrackerPersistence.impl")
 	protected UserTrackerPersistence userTrackerPersistence;
+	@javax.annotation.Resource(name = "com.liferay.portal.service.UserTrackerPathLocalService.impl")
 	protected UserTrackerPathLocalService userTrackerPathLocalService;
+	@javax.annotation.Resource(name = "com.liferay.portal.service.persistence.UserTrackerPathPersistence.impl")
 	protected UserTrackerPathPersistence userTrackerPathPersistence;
+	@javax.annotation.Resource(name = "com.liferay.portal.service.WebDAVPropsLocalService.impl")
 	protected WebDAVPropsLocalService webDAVPropsLocalService;
+	@javax.annotation.Resource(name = "com.liferay.portal.service.persistence.WebDAVPropsPersistence.impl")
 	protected WebDAVPropsPersistence webDAVPropsPersistence;
+	@javax.annotation.Resource(name = "com.liferay.portal.service.WebsiteLocalService.impl")
 	protected WebsiteLocalService websiteLocalService;
+	@javax.annotation.Resource(name = "com.liferay.portal.service.WebsiteService.impl")
 	protected WebsiteService websiteService;
+	@javax.annotation.Resource(name = "com.liferay.portal.service.persistence.WebsitePersistence.impl")
 	protected WebsitePersistence websitePersistence;
+	@javax.annotation.Resource(name = "com.liferay.counter.service.CounterLocalService.impl")
 	protected CounterLocalService counterLocalService;
+	@javax.annotation.Resource(name = "com.liferay.counter.service.CounterService.impl")
 	protected CounterService counterService;
+	@javax.annotation.Resource(name = "com.liferay.portlet.blogs.service.BlogsEntryLocalService.impl")
 	protected BlogsEntryLocalService blogsEntryLocalService;
+	@javax.annotation.Resource(name = "com.liferay.portlet.blogs.service.BlogsEntryService.impl")
 	protected BlogsEntryService blogsEntryService;
+	@javax.annotation.Resource(name = "com.liferay.portlet.blogs.service.persistence.BlogsEntryPersistence.impl")
 	protected BlogsEntryPersistence blogsEntryPersistence;
+	@javax.annotation.Resource(name = "com.liferay.portlet.blogs.service.persistence.BlogsEntryFinder.impl")
 	protected BlogsEntryFinder blogsEntryFinder;
+	@javax.annotation.Resource(name = "com.liferay.portlet.blogs.service.BlogsStatsUserLocalService.impl")
 	protected BlogsStatsUserLocalService blogsStatsUserLocalService;
+	@javax.annotation.Resource(name = "com.liferay.portlet.blogs.service.persistence.BlogsStatsUserPersistence.impl")
 	protected BlogsStatsUserPersistence blogsStatsUserPersistence;
+	@javax.annotation.Resource(name = "com.liferay.portlet.blogs.service.persistence.BlogsStatsUserFinder.impl")
 	protected BlogsStatsUserFinder blogsStatsUserFinder;
+	@javax.annotation.Resource(name = "com.liferay.portlet.bookmarks.service.BookmarksFolderLocalService.impl")
 	protected BookmarksFolderLocalService bookmarksFolderLocalService;
+	@javax.annotation.Resource(name = "com.liferay.portlet.bookmarks.service.BookmarksFolderService.impl")
 	protected BookmarksFolderService bookmarksFolderService;
+	@javax.annotation.Resource(name = "com.liferay.portlet.bookmarks.service.persistence.BookmarksFolderPersistence.impl")
 	protected BookmarksFolderPersistence bookmarksFolderPersistence;
+	@javax.annotation.Resource(name = "com.liferay.portlet.calendar.service.CalEventLocalService.impl")
 	protected CalEventLocalService calEventLocalService;
+	@javax.annotation.Resource(name = "com.liferay.portlet.calendar.service.CalEventService.impl")
 	protected CalEventService calEventService;
+	@javax.annotation.Resource(name = "com.liferay.portlet.calendar.service.persistence.CalEventPersistence.impl")
 	protected CalEventPersistence calEventPersistence;
+	@javax.annotation.Resource(name = "com.liferay.portlet.calendar.service.persistence.CalEventFinder.impl")
 	protected CalEventFinder calEventFinder;
+	@javax.annotation.Resource(name = "com.liferay.portlet.documentlibrary.service.DLFolderLocalService.impl")
 	protected DLFolderLocalService dlFolderLocalService;
+	@javax.annotation.Resource(name = "com.liferay.portlet.documentlibrary.service.DLFolderService.impl")
 	protected DLFolderService dlFolderService;
+	@javax.annotation.Resource(name = "com.liferay.portlet.documentlibrary.service.persistence.DLFolderPersistence.impl")
 	protected DLFolderPersistence dlFolderPersistence;
+	@javax.annotation.Resource(name = "com.liferay.portlet.imagegallery.service.IGFolderLocalService.impl")
 	protected IGFolderLocalService igFolderLocalService;
+	@javax.annotation.Resource(name = "com.liferay.portlet.imagegallery.service.IGFolderService.impl")
 	protected IGFolderService igFolderService;
+	@javax.annotation.Resource(name = "com.liferay.portlet.imagegallery.service.persistence.IGFolderPersistence.impl")
 	protected IGFolderPersistence igFolderPersistence;
+	@javax.annotation.Resource(name = "com.liferay.portlet.journal.service.JournalArticleLocalService.impl")
 	protected JournalArticleLocalService journalArticleLocalService;
+	@javax.annotation.Resource(name = "com.liferay.portlet.journal.service.JournalArticleService.impl")
 	protected JournalArticleService journalArticleService;
+	@javax.annotation.Resource(name = "com.liferay.portlet.journal.service.persistence.JournalArticlePersistence.impl")
 	protected JournalArticlePersistence journalArticlePersistence;
+	@javax.annotation.Resource(name = "com.liferay.portlet.journal.service.persistence.JournalArticleFinder.impl")
 	protected JournalArticleFinder journalArticleFinder;
+	@javax.annotation.Resource(name = "com.liferay.portlet.journal.service.JournalStructureLocalService.impl")
 	protected JournalStructureLocalService journalStructureLocalService;
+	@javax.annotation.Resource(name = "com.liferay.portlet.journal.service.JournalStructureService.impl")
 	protected JournalStructureService journalStructureService;
+	@javax.annotation.Resource(name = "com.liferay.portlet.journal.service.persistence.JournalStructurePersistence.impl")
 	protected JournalStructurePersistence journalStructurePersistence;
+	@javax.annotation.Resource(name = "com.liferay.portlet.journal.service.persistence.JournalStructureFinder.impl")
 	protected JournalStructureFinder journalStructureFinder;
+	@javax.annotation.Resource(name = "com.liferay.portlet.journal.service.JournalTemplateLocalService.impl")
 	protected JournalTemplateLocalService journalTemplateLocalService;
+	@javax.annotation.Resource(name = "com.liferay.portlet.journal.service.JournalTemplateService.impl")
 	protected JournalTemplateService journalTemplateService;
+	@javax.annotation.Resource(name = "com.liferay.portlet.journal.service.persistence.JournalTemplatePersistence.impl")
 	protected JournalTemplatePersistence journalTemplatePersistence;
+	@javax.annotation.Resource(name = "com.liferay.portlet.journal.service.persistence.JournalTemplateFinder.impl")
 	protected JournalTemplateFinder journalTemplateFinder;
+	@javax.annotation.Resource(name = "com.liferay.portlet.messageboards.service.MBBanLocalService.impl")
 	protected MBBanLocalService mbBanLocalService;
+	@javax.annotation.Resource(name = "com.liferay.portlet.messageboards.service.MBBanService.impl")
 	protected MBBanService mbBanService;
+	@javax.annotation.Resource(name = "com.liferay.portlet.messageboards.service.persistence.MBBanPersistence.impl")
 	protected MBBanPersistence mbBanPersistence;
+	@javax.annotation.Resource(name = "com.liferay.portlet.messageboards.service.MBCategoryLocalService.impl")
 	protected MBCategoryLocalService mbCategoryLocalService;
+	@javax.annotation.Resource(name = "com.liferay.portlet.messageboards.service.MBCategoryService.impl")
 	protected MBCategoryService mbCategoryService;
+	@javax.annotation.Resource(name = "com.liferay.portlet.messageboards.service.persistence.MBCategoryPersistence.impl")
 	protected MBCategoryPersistence mbCategoryPersistence;
+	@javax.annotation.Resource(name = "com.liferay.portlet.messageboards.service.persistence.MBCategoryFinder.impl")
 	protected MBCategoryFinder mbCategoryFinder;
+	@javax.annotation.Resource(name = "com.liferay.portlet.messageboards.service.MBStatsUserLocalService.impl")
 	protected MBStatsUserLocalService mbStatsUserLocalService;
+	@javax.annotation.Resource(name = "com.liferay.portlet.messageboards.service.persistence.MBStatsUserPersistence.impl")
 	protected MBStatsUserPersistence mbStatsUserPersistence;
+	@javax.annotation.Resource(name = "com.liferay.portlet.polls.service.PollsQuestionLocalService.impl")
 	protected PollsQuestionLocalService pollsQuestionLocalService;
+	@javax.annotation.Resource(name = "com.liferay.portlet.polls.service.PollsQuestionService.impl")
 	protected PollsQuestionService pollsQuestionService;
+	@javax.annotation.Resource(name = "com.liferay.portlet.polls.service.persistence.PollsQuestionPersistence.impl")
 	protected PollsQuestionPersistence pollsQuestionPersistence;
+	@javax.annotation.Resource(name = "com.liferay.portlet.shopping.service.ShoppingCartLocalService.impl")
 	protected ShoppingCartLocalService shoppingCartLocalService;
+	@javax.annotation.Resource(name = "com.liferay.portlet.shopping.service.persistence.ShoppingCartPersistence.impl")
 	protected ShoppingCartPersistence shoppingCartPersistence;
+	@javax.annotation.Resource(name = "com.liferay.portlet.shopping.service.ShoppingCategoryLocalService.impl")
 	protected ShoppingCategoryLocalService shoppingCategoryLocalService;
+	@javax.annotation.Resource(name = "com.liferay.portlet.shopping.service.ShoppingCategoryService.impl")
 	protected ShoppingCategoryService shoppingCategoryService;
+	@javax.annotation.Resource(name = "com.liferay.portlet.shopping.service.persistence.ShoppingCategoryPersistence.impl")
 	protected ShoppingCategoryPersistence shoppingCategoryPersistence;
+	@javax.annotation.Resource(name = "com.liferay.portlet.shopping.service.ShoppingCouponLocalService.impl")
 	protected ShoppingCouponLocalService shoppingCouponLocalService;
+	@javax.annotation.Resource(name = "com.liferay.portlet.shopping.service.ShoppingCouponService.impl")
 	protected ShoppingCouponService shoppingCouponService;
+	@javax.annotation.Resource(name = "com.liferay.portlet.shopping.service.persistence.ShoppingCouponPersistence.impl")
 	protected ShoppingCouponPersistence shoppingCouponPersistence;
+	@javax.annotation.Resource(name = "com.liferay.portlet.shopping.service.persistence.ShoppingCouponFinder.impl")
 	protected ShoppingCouponFinder shoppingCouponFinder;
+	@javax.annotation.Resource(name = "com.liferay.portlet.shopping.service.ShoppingOrderLocalService.impl")
 	protected ShoppingOrderLocalService shoppingOrderLocalService;
+	@javax.annotation.Resource(name = "com.liferay.portlet.shopping.service.ShoppingOrderService.impl")
 	protected ShoppingOrderService shoppingOrderService;
+	@javax.annotation.Resource(name = "com.liferay.portlet.shopping.service.persistence.ShoppingOrderPersistence.impl")
 	protected ShoppingOrderPersistence shoppingOrderPersistence;
+	@javax.annotation.Resource(name = "com.liferay.portlet.shopping.service.persistence.ShoppingOrderFinder.impl")
 	protected ShoppingOrderFinder shoppingOrderFinder;
+	@javax.annotation.Resource(name = "com.liferay.portlet.softwarecatalog.service.SCFrameworkVersionLocalService.impl")
 	protected SCFrameworkVersionLocalService scFrameworkVersionLocalService;
+	@javax.annotation.Resource(name = "com.liferay.portlet.softwarecatalog.service.SCFrameworkVersionService.impl")
 	protected SCFrameworkVersionService scFrameworkVersionService;
+	@javax.annotation.Resource(name = "com.liferay.portlet.softwarecatalog.service.persistence.SCFrameworkVersionPersistence.impl")
 	protected SCFrameworkVersionPersistence scFrameworkVersionPersistence;
+	@javax.annotation.Resource(name = "com.liferay.portlet.softwarecatalog.service.SCProductEntryLocalService.impl")
 	protected SCProductEntryLocalService scProductEntryLocalService;
+	@javax.annotation.Resource(name = "com.liferay.portlet.softwarecatalog.service.SCProductEntryService.impl")
 	protected SCProductEntryService scProductEntryService;
+	@javax.annotation.Resource(name = "com.liferay.portlet.softwarecatalog.service.persistence.SCProductEntryPersistence.impl")
 	protected SCProductEntryPersistence scProductEntryPersistence;
+	@javax.annotation.Resource(name = "com.liferay.portlet.tasks.service.TasksProposalLocalService.impl")
 	protected TasksProposalLocalService tasksProposalLocalService;
+	@javax.annotation.Resource(name = "com.liferay.portlet.tasks.service.TasksProposalService.impl")
 	protected TasksProposalService tasksProposalService;
+	@javax.annotation.Resource(name = "com.liferay.portlet.tasks.service.persistence.TasksProposalPersistence.impl")
 	protected TasksProposalPersistence tasksProposalPersistence;
+	@javax.annotation.Resource(name = "com.liferay.portlet.tasks.service.persistence.TasksProposalFinder.impl")
 	protected TasksProposalFinder tasksProposalFinder;
+	@javax.annotation.Resource(name = "com.liferay.portlet.wiki.service.WikiNodeLocalService.impl")
 	protected WikiNodeLocalService wikiNodeLocalService;
+	@javax.annotation.Resource(name = "com.liferay.portlet.wiki.service.WikiNodeService.impl")
 	protected WikiNodeService wikiNodeService;
+	@javax.annotation.Resource(name = "com.liferay.portlet.wiki.service.persistence.WikiNodePersistence.impl")
 	protected WikiNodePersistence wikiNodePersistence;
 }

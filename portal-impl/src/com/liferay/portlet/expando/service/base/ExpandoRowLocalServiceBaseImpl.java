@@ -32,7 +32,6 @@ import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 import com.liferay.portlet.expando.model.ExpandoRow;
 import com.liferay.portlet.expando.service.ExpandoColumnLocalService;
 import com.liferay.portlet.expando.service.ExpandoRowLocalService;
-import com.liferay.portlet.expando.service.ExpandoRowLocalService;
 import com.liferay.portlet.expando.service.ExpandoTableLocalService;
 import com.liferay.portlet.expando.service.ExpandoValueLocalService;
 import com.liferay.portlet.expando.service.persistence.ExpandoColumnFinder;
@@ -218,17 +217,30 @@ public abstract class ExpandoRowLocalServiceBaseImpl
 		this.counterService = counterService;
 	}
 
+	@javax.annotation.Resource(name = "com.liferay.portlet.expando.service.ExpandoColumnLocalService.impl")
 	protected ExpandoColumnLocalService expandoColumnLocalService;
+	@javax.annotation.Resource(name = "com.liferay.portlet.expando.service.persistence.ExpandoColumnPersistence.impl")
 	protected ExpandoColumnPersistence expandoColumnPersistence;
+	@javax.annotation.Resource(name = "com.liferay.portlet.expando.service.persistence.ExpandoColumnFinder.impl")
 	protected ExpandoColumnFinder expandoColumnFinder;
+	@javax.annotation.Resource(name = "com.liferay.portlet.expando.service.ExpandoRowLocalService.impl")
 	protected ExpandoRowLocalService expandoRowLocalService;
+	@javax.annotation.Resource(name = "com.liferay.portlet.expando.service.persistence.ExpandoRowPersistence.impl")
 	protected ExpandoRowPersistence expandoRowPersistence;
+	@javax.annotation.Resource(name = "com.liferay.portlet.expando.service.persistence.ExpandoRowFinder.impl")
 	protected ExpandoRowFinder expandoRowFinder;
+	@javax.annotation.Resource(name = "com.liferay.portlet.expando.service.ExpandoTableLocalService.impl")
 	protected ExpandoTableLocalService expandoTableLocalService;
+	@javax.annotation.Resource(name = "com.liferay.portlet.expando.service.persistence.ExpandoTablePersistence.impl")
 	protected ExpandoTablePersistence expandoTablePersistence;
+	@javax.annotation.Resource(name = "com.liferay.portlet.expando.service.ExpandoValueLocalService.impl")
 	protected ExpandoValueLocalService expandoValueLocalService;
+	@javax.annotation.Resource(name = "com.liferay.portlet.expando.service.persistence.ExpandoValuePersistence.impl")
 	protected ExpandoValuePersistence expandoValuePersistence;
+	@javax.annotation.Resource(name = "com.liferay.portlet.expando.service.persistence.ExpandoValueFinder.impl")
 	protected ExpandoValueFinder expandoValueFinder;
+	@javax.annotation.Resource(name = "com.liferay.counter.service.CounterLocalService.impl")
 	protected CounterLocalService counterLocalService;
+	@javax.annotation.Resource(name = "com.liferay.counter.service.CounterService.impl")
 	protected CounterService counterService;
 }

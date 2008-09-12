@@ -36,7 +36,6 @@ import com.liferay.portlet.softwarecatalog.service.SCLicenseService;
 import com.liferay.portlet.softwarecatalog.service.SCProductEntryLocalService;
 import com.liferay.portlet.softwarecatalog.service.SCProductEntryService;
 import com.liferay.portlet.softwarecatalog.service.SCProductScreenshotLocalService;
-import com.liferay.portlet.softwarecatalog.service.SCProductScreenshotLocalService;
 import com.liferay.portlet.softwarecatalog.service.SCProductVersionLocalService;
 import com.liferay.portlet.softwarecatalog.service.SCProductVersionService;
 import com.liferay.portlet.softwarecatalog.service.persistence.SCFrameworkVersionPersistence;
@@ -250,20 +249,36 @@ public abstract class SCProductScreenshotLocalServiceBaseImpl
 		this.imagePersistence = imagePersistence;
 	}
 
+	@javax.annotation.Resource(name = "com.liferay.portlet.softwarecatalog.service.SCLicenseLocalService.impl")
 	protected SCLicenseLocalService scLicenseLocalService;
+	@javax.annotation.Resource(name = "com.liferay.portlet.softwarecatalog.service.SCLicenseService.impl")
 	protected SCLicenseService scLicenseService;
+	@javax.annotation.Resource(name = "com.liferay.portlet.softwarecatalog.service.persistence.SCLicensePersistence.impl")
 	protected SCLicensePersistence scLicensePersistence;
+	@javax.annotation.Resource(name = "com.liferay.portlet.softwarecatalog.service.SCFrameworkVersionLocalService.impl")
 	protected SCFrameworkVersionLocalService scFrameworkVersionLocalService;
+	@javax.annotation.Resource(name = "com.liferay.portlet.softwarecatalog.service.SCFrameworkVersionService.impl")
 	protected SCFrameworkVersionService scFrameworkVersionService;
+	@javax.annotation.Resource(name = "com.liferay.portlet.softwarecatalog.service.persistence.SCFrameworkVersionPersistence.impl")
 	protected SCFrameworkVersionPersistence scFrameworkVersionPersistence;
+	@javax.annotation.Resource(name = "com.liferay.portlet.softwarecatalog.service.SCProductEntryLocalService.impl")
 	protected SCProductEntryLocalService scProductEntryLocalService;
+	@javax.annotation.Resource(name = "com.liferay.portlet.softwarecatalog.service.SCProductEntryService.impl")
 	protected SCProductEntryService scProductEntryService;
+	@javax.annotation.Resource(name = "com.liferay.portlet.softwarecatalog.service.persistence.SCProductEntryPersistence.impl")
 	protected SCProductEntryPersistence scProductEntryPersistence;
+	@javax.annotation.Resource(name = "com.liferay.portlet.softwarecatalog.service.SCProductScreenshotLocalService.impl")
 	protected SCProductScreenshotLocalService scProductScreenshotLocalService;
+	@javax.annotation.Resource(name = "com.liferay.portlet.softwarecatalog.service.persistence.SCProductScreenshotPersistence.impl")
 	protected SCProductScreenshotPersistence scProductScreenshotPersistence;
+	@javax.annotation.Resource(name = "com.liferay.portlet.softwarecatalog.service.SCProductVersionLocalService.impl")
 	protected SCProductVersionLocalService scProductVersionLocalService;
+	@javax.annotation.Resource(name = "com.liferay.portlet.softwarecatalog.service.SCProductVersionService.impl")
 	protected SCProductVersionService scProductVersionService;
+	@javax.annotation.Resource(name = "com.liferay.portlet.softwarecatalog.service.persistence.SCProductVersionPersistence.impl")
 	protected SCProductVersionPersistence scProductVersionPersistence;
+	@javax.annotation.Resource(name = "com.liferay.portal.service.ImageLocalService.impl")
 	protected ImageLocalService imageLocalService;
+	@javax.annotation.Resource(name = "com.liferay.portal.service.persistence.ImagePersistence.impl")
 	protected ImagePersistence imagePersistence;
 }

@@ -33,7 +33,6 @@ import com.liferay.portlet.announcements.service.AnnouncementsEntryLocalService;
 import com.liferay.portlet.announcements.service.AnnouncementsEntryService;
 import com.liferay.portlet.announcements.service.AnnouncementsFlagLocalService;
 import com.liferay.portlet.announcements.service.AnnouncementsFlagService;
-import com.liferay.portlet.announcements.service.AnnouncementsFlagService;
 import com.liferay.portlet.announcements.service.persistence.AnnouncementsDeliveryPersistence;
 import com.liferay.portlet.announcements.service.persistence.AnnouncementsEntryFinder;
 import com.liferay.portlet.announcements.service.persistence.AnnouncementsEntryPersistence;
@@ -153,16 +152,28 @@ public abstract class AnnouncementsFlagServiceBaseImpl extends PrincipalBean
 		this.counterService = counterService;
 	}
 
+	@javax.annotation.Resource(name = "com.liferay.portlet.announcements.service.AnnouncementsDeliveryLocalService.impl")
 	protected AnnouncementsDeliveryLocalService announcementsDeliveryLocalService;
+	@javax.annotation.Resource(name = "com.liferay.portlet.announcements.service.AnnouncementsDeliveryService.impl")
 	protected AnnouncementsDeliveryService announcementsDeliveryService;
+	@javax.annotation.Resource(name = "com.liferay.portlet.announcements.service.persistence.AnnouncementsDeliveryPersistence.impl")
 	protected AnnouncementsDeliveryPersistence announcementsDeliveryPersistence;
+	@javax.annotation.Resource(name = "com.liferay.portlet.announcements.service.AnnouncementsEntryLocalService.impl")
 	protected AnnouncementsEntryLocalService announcementsEntryLocalService;
+	@javax.annotation.Resource(name = "com.liferay.portlet.announcements.service.AnnouncementsEntryService.impl")
 	protected AnnouncementsEntryService announcementsEntryService;
+	@javax.annotation.Resource(name = "com.liferay.portlet.announcements.service.persistence.AnnouncementsEntryPersistence.impl")
 	protected AnnouncementsEntryPersistence announcementsEntryPersistence;
+	@javax.annotation.Resource(name = "com.liferay.portlet.announcements.service.persistence.AnnouncementsEntryFinder.impl")
 	protected AnnouncementsEntryFinder announcementsEntryFinder;
+	@javax.annotation.Resource(name = "com.liferay.portlet.announcements.service.AnnouncementsFlagLocalService.impl")
 	protected AnnouncementsFlagLocalService announcementsFlagLocalService;
+	@javax.annotation.Resource(name = "com.liferay.portlet.announcements.service.AnnouncementsFlagService.impl")
 	protected AnnouncementsFlagService announcementsFlagService;
+	@javax.annotation.Resource(name = "com.liferay.portlet.announcements.service.persistence.AnnouncementsFlagPersistence.impl")
 	protected AnnouncementsFlagPersistence announcementsFlagPersistence;
+	@javax.annotation.Resource(name = "com.liferay.counter.service.CounterLocalService.impl")
 	protected CounterLocalService counterLocalService;
+	@javax.annotation.Resource(name = "com.liferay.counter.service.CounterService.impl")
 	protected CounterService counterService;
 }
