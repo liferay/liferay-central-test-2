@@ -41,9 +41,24 @@ public class MethodWrapper implements Serializable {
 	}
 
 	public MethodWrapper(String className, String methodName, Object[] args) {
+		this(null, className, methodName, args);
+	}
+
+	public MethodWrapper(
+			Object target, String className, String methodName) {
+		this(target, className, methodName, new Object[0]);
+	}
+
+	public MethodWrapper(
+			Object target, String className, String methodName, Object[] args) {
+		_target = target;
 		_className = className;
 		_methodName = methodName;
 		_args = args;
+	}
+
+	public Object getTarget() {
+		return _target;
 	}
 
 	public String getClassName() {
@@ -62,6 +77,7 @@ public class MethodWrapper implements Serializable {
 		return args;
 	}
 
+	private Object _target;
 	private String _className;
 	private String _methodName;
 	private Object[] _args;
