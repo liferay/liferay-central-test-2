@@ -31,6 +31,7 @@ boolean showTabs1 = true;
 
 if (portletName.equals(PortletKeys.ENTERPRISE_ADMIN_COMMUNITIES)) {
 	tabs1 = "all-communities";
+
 	showTabs1 = false;
 }
 
