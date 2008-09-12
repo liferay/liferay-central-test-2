@@ -1285,7 +1285,7 @@ public class ServicePreAction extends Action {
 		// URLs
 
 		themeDisplay.setShowAddContentIcon(false);
-		themeDisplay.setShowControlPanelIcon(true);
+		themeDisplay.setShowControlPanelIcon(signedIn);
 		themeDisplay.setShowHomeIcon(true);
 		themeDisplay.setShowMyAccountIcon(signedIn);
 		themeDisplay.setShowPageSettingsIcon(false);
