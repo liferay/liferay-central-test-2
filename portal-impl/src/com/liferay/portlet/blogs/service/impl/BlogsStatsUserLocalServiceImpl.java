@@ -30,6 +30,7 @@ import com.liferay.portlet.blogs.model.BlogsEntry;
 import com.liferay.portlet.blogs.model.BlogsStatsUser;
 import com.liferay.portlet.blogs.service.base.BlogsStatsUserLocalServiceBaseImpl;
 import com.liferay.portlet.blogs.util.comparator.EntryDisplayDateComparator;
+import com.liferay.portlet.blogs.util.comparator.StatsUserLastPostDateComparator;
 
 import java.util.Date;
 import java.util.List;
@@ -55,6 +56,14 @@ public class BlogsStatsUserLocalServiceImpl
 	}
 
 	public List<BlogsStatsUser> getCompanyStatsUsers(
+			long companyId, int start, int end)
+		throws SystemException {
+
+		return blogsStatsUserPersistence.findByC_E(
+			companyId, 0, start, end, new StatsUserLastPostDateComparator());
+	}
+
+	public List<BlogsStatsUser> getCompanyStatsUsers(
 			long companyId, int start, int end, OrderByComparator obc)
 		throws SystemException {
 
@@ -69,6 +78,14 @@ public class BlogsStatsUserLocalServiceImpl
 	}
 
 	public List<BlogsStatsUser> getGroupStatsUsers(
+			long groupId, int start, int end)
+		throws SystemException {
+
+		return blogsStatsUserPersistence.findByG_E(
+			groupId, 0, start, end, new StatsUserLastPostDateComparator());
+	}
+
+	public List<BlogsStatsUser> getGroupStatsUsers(
 			long groupId, int start, int end, OrderByComparator obc)
 		throws SystemException {
 
@@ -77,6 +94,14 @@ public class BlogsStatsUserLocalServiceImpl
 
 	public int getGroupStatsUsersCount(long groupId) throws SystemException {
 		return blogsStatsUserPersistence.countByG_E(groupId, 0);
+	}
+
+	public List<BlogsStatsUser> getOrganizationStatsUsers(
+			long organizationId, int start, int end)
+		throws SystemException {
+
+		return blogsStatsUserFinder.findByOrganizationId(
+			organizationId, start, end, new StatsUserLastPostDateComparator());
 	}
 
 	public List<BlogsStatsUser> getOrganizationStatsUsers(
