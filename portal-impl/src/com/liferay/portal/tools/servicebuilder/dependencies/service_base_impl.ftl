@@ -140,18 +140,22 @@ import ${beanLocatorUtil};
 
 <#list referenceList as tempEntity>
 	<#if tempEntity.hasLocalService()>
+		@javax.annotation.Resource(name="${tempEntity.packagePath}.service.${tempEntity.name}LocalService.impl")
 		protected ${tempEntity.name}LocalService ${tempEntity.varName}LocalService;
 	</#if>
 
 	<#if tempEntity.hasRemoteService()>
+		@javax.annotation.Resource(name="${tempEntity.packagePath}.service.${tempEntity.name}Service.impl")
 		protected ${tempEntity.name}Service ${tempEntity.varName}Service;
 	</#if>
 
 	<#if tempEntity.hasColumns()>
+		@javax.annotation.Resource(name="${tempEntity.packagePath}.service.persistence.${tempEntity.name}Persistence.impl")
 		protected ${tempEntity.name}Persistence ${tempEntity.varName}Persistence;
 	</#if>
 
 	<#if tempEntity.hasFinderClass()>
+		@javax.annotation.Resource(name="${tempEntity.packagePath}.service.persistence.${tempEntity.name}Finder.impl")
 		protected ${tempEntity.name}Finder ${tempEntity.varName}Finder;
 	</#if>
 </#list>

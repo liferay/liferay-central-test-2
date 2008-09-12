@@ -733,6 +733,17 @@
 		</licenses>
 	</library>
 	<library>
+		<file-name>global/jar250-api.jar</file-name>
+		<version>1.0</version>
+		<project-name>Common Annotations</project-name>
+		<project-url>https://jsr250.dev.java.net/</project-url>
+		<licenses>
+			<license>
+				<license-name>CDDL 1.0</license-name>
+			</license>
+		</licenses>
+	</library>
+	<library>
 		<file-name>global/portlet.jar</file-name>
 		<version>2.0</version>
 		<project-name>JSR 286 Portlet 2.0 Specification</project-name>

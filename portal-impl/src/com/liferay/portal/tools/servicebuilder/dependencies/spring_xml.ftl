@@ -1,23 +1,3 @@
-<bean id="${packagePath}.service.${portletShortName}.base" abstract="true">
-	<#list entities as entity>
-		<#if entity.hasLocalService()>
-			<property name="${entity.springPropertyName}LocalService" ref="${entity.packagePath}.service.${entity.name}LocalService.impl" />
-		</#if>
-
-		<#if entity.hasRemoteService()>
-			<property name="${entity.springPropertyName}Service" ref="${entity.packagePath}.service.${entity.name}Service.impl" />
-		</#if>
-
-		<#if entity.hasColumns()>
-			<property name="${entity.springPropertyName}Persistence" ref="${entity.packagePath}.service.persistence.${entity.name}Persistence.impl" />
-		</#if>
-
-		<#if entity.hasFinderClass()>
-			<property name="${entity.springPropertyName}Finder" ref="${entity.packagePath}.service.persistence.${entity.name}Finder.impl" />
-		</#if>
-	</#list>
-</bean>
-
 <#list entities as entity>
 	<#if entity.hasLocalService()>
 		<#assign sessionType = "Local">
