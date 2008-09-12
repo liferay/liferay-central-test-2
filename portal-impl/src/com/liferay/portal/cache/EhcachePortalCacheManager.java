@@ -27,6 +27,7 @@ import com.liferay.portal.kernel.cache.PortalCacheManager;
 import com.liferay.portal.util.PropsUtil;
 
 import java.net.URL;
+
 import javax.management.MBeanServer;
 
 import net.sf.ehcache.Cache;
@@ -42,6 +43,7 @@ import org.springframework.beans.factory.InitializingBean;
  *
  * @author Joseph Shum
  * @author Raymond Augé
+ * @author Michael C. Han
  *
  */
 public class EhcachePortalCacheManager
@@ -51,11 +53,10 @@ public class EhcachePortalCacheManager
 		URL url = getClass().getResource(PropsUtil.get(_configPropertyKey));
 
 		_cacheManager = new CacheManager(url);
-		ManagementService.registerMBeans(_cacheManager, _mbeanServer,
-										 _registerCacheManager,
-										 _registerCaches,
-										 _registerCacheConfigurations,
-										 _registerCacheStatistics);
+
+		ManagementService.registerMBeans(
+			_cacheManager, _mbeanServer, _registerCacheManager, _registerCaches,
+			_registerCacheConfigurations, _registerCacheStatistics);
 	}
 
 	public void clearAll() {
@@ -95,6 +96,7 @@ public class EhcachePortalCacheManager
 
 	public void setRegisterCacheConfigurations(
 		boolean registerCacheConfigurations) {
+
 		_registerCacheConfigurations = registerCacheConfigurations;
 	}
 
@@ -112,7 +114,6 @@ public class EhcachePortalCacheManager
 
 	private String _configPropertyKey;
 	private CacheManager _cacheManager;
-
 	private MBeanServer _mbeanServer;
 	private boolean _registerCacheManager = true;
 	private boolean _registerCaches = true;
