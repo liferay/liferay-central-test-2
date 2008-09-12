@@ -2311,6 +2311,10 @@ public class ServiceBuilder {
 	}
 
 	private void _createServiceClpSerializer() throws Exception {
+		if (Validator.isNull(_pluginName)) {
+			return;
+		}
+
 		Map<String, Object> context = _getContext();
 
 		context.put("entities", _ejbList);
