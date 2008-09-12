@@ -1697,9 +1697,11 @@ public class ServiceBuilder {
 		if (firstClass == -1) {
 			int x = newContent.indexOf("</hibernate-mapping>");
 
-			newContent =
-				newContent.substring(0, x) + content +
-				newContent.substring(x, newContent.length());
+			if (x != -1) {
+				newContent =
+					newContent.substring(0, x) + content +
+					newContent.substring(x, newContent.length());
+			}
 		}
 		else {
 			firstClass = newContent.lastIndexOf("<class", firstClass) - 1;

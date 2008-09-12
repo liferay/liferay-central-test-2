@@ -658,6 +658,7 @@ public class SourceFormatter {
 				"**\\service\\*Service.java", "**\\service\\*ServiceClp.java",
 				"**\\service\\*ServiceFactory.java",
 				"**\\service\\*ServiceUtil.java",
+				"**\\service\\ClpSerializer.java",
 				"**\\service\\base\\*ServiceBaseImpl.java",
 				"**\\service\\http\\*JSONSerializer.java",
 				"**\\service\\http\\*ServiceHttp.java",
