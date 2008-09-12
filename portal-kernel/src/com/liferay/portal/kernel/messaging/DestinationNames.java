@@ -59,7 +59,7 @@ public interface DestinationNames {
 		"liferay/message_boards_mailing_list";
 
 	public static final String RUON = "liferay/ruon";
-	
+
 	public static final String SAW = "liferay/saw";
 
 	public static final String SCHEDULER = "liferay/scheduler";
