@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<beans default-init-method="afterPropertiesSet" xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd">
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" default-init-method="afterPropertiesSet" xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd">
 	<bean id="com.liferay.portal.service.Portal.base" abstract="true">
 		<property name="accountLocalService" ref="com.liferay.portal.service.AccountLocalService.impl" />
 		<property name="accountService" ref="com.liferay.portal.service.AccountService.impl" />
@@ -3647,7 +3647,7 @@
 	<bean id="com.liferay.portlet.social.service.persistence.SocialActivityFinderUtil" class="com.liferay.portlet.social.service.persistence.SocialActivityFinderUtil">
 		<property name="finder" ref="com.liferay.portlet.social.service.persistence.SocialActivityFinder.impl" />
 	</bean>
-	<bean id="com.liferay.portlet.social.service.SocialActivityInterpreterLocalService.impl" class="com.liferay.portlet.social.service.impl.SocialActivityInterpreterLocalServiceImpl" parent="com.liferay.portlet.social.service.Social.base" />
+	<bean id="com.liferay.portlet.social.service.SocialActivityInterpreterLocalService.impl" class="com.liferay.portlet.social.service.impl.SocialActivityInterpreterLocalServiceImpl" parent="com.liferay.portlet.social.service.Social.base"></bean>
 	<bean id="com.liferay.portlet.social.service.SocialActivityInterpreterLocalService.velocity" class="org.springframework.aop.framework.ProxyFactoryBean" parent="baseVelocityService">
 		<property name="target" ref="com.liferay.portlet.social.service.SocialActivityInterpreterLocalService.impl" />
 	</bean>
@@ -3699,7 +3699,7 @@
 	<bean id="com.liferay.portlet.social.service.persistence.SocialRequestUtil" class="com.liferay.portlet.social.service.persistence.SocialRequestUtil">
 		<property name="persistence" ref="com.liferay.portlet.social.service.persistence.SocialRequestPersistence.impl" />
 	</bean>
-	<bean id="com.liferay.portlet.social.service.SocialRequestInterpreterLocalService.impl" class="com.liferay.portlet.social.service.impl.SocialRequestInterpreterLocalServiceImpl" parent="com.liferay.portlet.social.service.Social.base" />
+	<bean id="com.liferay.portlet.social.service.SocialRequestInterpreterLocalService.impl" class="com.liferay.portlet.social.service.impl.SocialRequestInterpreterLocalServiceImpl" parent="com.liferay.portlet.social.service.Social.base"></bean>
 	<bean id="com.liferay.portlet.social.service.SocialRequestInterpreterLocalService.velocity" class="org.springframework.aop.framework.ProxyFactoryBean" parent="baseVelocityService">
 		<property name="target" ref="com.liferay.portlet.social.service.SocialRequestInterpreterLocalService.impl" />
 	</bean>
@@ -4529,58 +4529,5 @@
 	<bean id="com.liferay.portlet.wiki.service.persistence.WikiPageResourcePersistence.impl" class="com.liferay.portlet.wiki.service.persistence.WikiPageResourcePersistenceImpl" parent="basePersistence" />
 	<bean id="com.liferay.portlet.wiki.service.persistence.WikiPageResourceUtil" class="com.liferay.portlet.wiki.service.persistence.WikiPageResourceUtil">
 		<property name="persistence" ref="com.liferay.portlet.wiki.service.persistence.WikiPageResourcePersistence.impl" />
-	</bean>
-	<bean id="com.liferay.portlet.workflow.service.Workflow.base" abstract="true">
-		<property name="workflowComponentService" ref="com.liferay.portlet.workflow.service.WorkflowComponentService.impl" />
-		<property name="workflowDefinitionService" ref="com.liferay.portlet.workflow.service.WorkflowDefinitionService.impl" />
-		<property name="workflowInstanceService" ref="com.liferay.portlet.workflow.service.WorkflowInstanceService.impl" />
-		<property name="workflowTaskService" ref="com.liferay.portlet.workflow.service.WorkflowTaskService.impl" />
-	</bean>
-	<bean id="com.liferay.portlet.workflow.service.WorkflowComponentService.impl" class="com.liferay.portlet.workflow.service.impl.WorkflowComponentServiceImpl" parent="com.liferay.portlet.workflow.service.Workflow.base"></bean>
-	<bean id="com.liferay.portlet.workflow.service.WorkflowComponentService.velocity" class="org.springframework.aop.framework.ProxyFactoryBean" parent="baseVelocityService">
-		<property name="target" ref="com.liferay.portlet.workflow.service.WorkflowComponentService.impl" />
-	</bean>
-	<bean id="com.liferay.portlet.workflow.service.WorkflowComponentServiceFactory" class="com.liferay.portlet.workflow.service.WorkflowComponentServiceFactory">
-		<property name="service" ref="com.liferay.portlet.workflow.service.WorkflowComponentService.impl" />
-	</bean>
-	<bean id="com.liferay.portlet.workflow.service.WorkflowComponentServiceUtil" class="com.liferay.portlet.workflow.service.WorkflowComponentServiceUtil">
-		<property name="service" ref="com.liferay.portlet.workflow.service.WorkflowComponentService.impl" />
-	</bean>
-	<bean id="com.liferay.portlet.workflow.service.WorkflowDefinitionService.impl" class="com.liferay.portlet.workflow.service.impl.WorkflowDefinitionServiceImpl" parent="com.liferay.portlet.workflow.service.Workflow.base">
-		<property name="DLLocalService" ref="com.liferay.documentlibrary.service.DLLocalService.impl" />
-		<property name="DLService" ref="com.liferay.documentlibrary.service.DLService.impl" />
-		<property name="resourceLocalService" ref="com.liferay.portal.service.ResourceLocalService.impl" />
-		<property name="resourceService" ref="com.liferay.portal.service.ResourceService.impl" />
-		<property name="resourcePersistence" ref="com.liferay.portal.service.persistence.ResourcePersistence.impl" />
-		<property name="resourceFinder" ref="com.liferay.portal.service.persistence.ResourceFinder.impl" />
-	</bean>
-	<bean id="com.liferay.portlet.workflow.service.WorkflowDefinitionService.velocity" class="org.springframework.aop.framework.ProxyFactoryBean" parent="baseVelocityService">
-		<property name="target" ref="com.liferay.portlet.workflow.service.WorkflowDefinitionService.impl" />
-	</bean>
-	<bean id="com.liferay.portlet.workflow.service.WorkflowDefinitionServiceFactory" class="com.liferay.portlet.workflow.service.WorkflowDefinitionServiceFactory">
-		<property name="service" ref="com.liferay.portlet.workflow.service.WorkflowDefinitionService.impl" />
-	</bean>
-	<bean id="com.liferay.portlet.workflow.service.WorkflowDefinitionServiceUtil" class="com.liferay.portlet.workflow.service.WorkflowDefinitionServiceUtil">
-		<property name="service" ref="com.liferay.portlet.workflow.service.WorkflowDefinitionService.impl" />
-	</bean>
-	<bean id="com.liferay.portlet.workflow.service.WorkflowInstanceService.impl" class="com.liferay.portlet.workflow.service.impl.WorkflowInstanceServiceImpl" parent="com.liferay.portlet.workflow.service.Workflow.base"></bean>
-	<bean id="com.liferay.portlet.workflow.service.WorkflowInstanceService.velocity" class="org.springframework.aop.framework.ProxyFactoryBean" parent="baseVelocityService">
-		<property name="target" ref="com.liferay.portlet.workflow.service.WorkflowInstanceService.impl" />
-	</bean>
-	<bean id="com.liferay.portlet.workflow.service.WorkflowInstanceServiceFactory" class="com.liferay.portlet.workflow.service.WorkflowInstanceServiceFactory">
-		<property name="service" ref="com.liferay.portlet.workflow.service.WorkflowInstanceService.impl" />
-	</bean>
-	<bean id="com.liferay.portlet.workflow.service.WorkflowInstanceServiceUtil" class="com.liferay.portlet.workflow.service.WorkflowInstanceServiceUtil">
-		<property name="service" ref="com.liferay.portlet.workflow.service.WorkflowInstanceService.impl" />
-	</bean>
-	<bean id="com.liferay.portlet.workflow.service.WorkflowTaskService.impl" class="com.liferay.portlet.workflow.service.impl.WorkflowTaskServiceImpl" parent="com.liferay.portlet.workflow.service.Workflow.base"></bean>
-	<bean id="com.liferay.portlet.workflow.service.WorkflowTaskService.velocity" class="org.springframework.aop.framework.ProxyFactoryBean" parent="baseVelocityService">
-		<property name="target" ref="com.liferay.portlet.workflow.service.WorkflowTaskService.impl" />
-	</bean>
-	<bean id="com.liferay.portlet.workflow.service.WorkflowTaskServiceFactory" class="com.liferay.portlet.workflow.service.WorkflowTaskServiceFactory">
-		<property name="service" ref="com.liferay.portlet.workflow.service.WorkflowTaskService.impl" />
-	</bean>
-	<bean id="com.liferay.portlet.workflow.service.WorkflowTaskServiceUtil" class="com.liferay.portlet.workflow.service.WorkflowTaskServiceUtil">
-		<property name="service" ref="com.liferay.portlet.workflow.service.WorkflowTaskService.impl" />
 	</bean>
 </beans>

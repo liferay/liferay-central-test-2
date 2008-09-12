@@ -309,11 +309,6 @@
 		<include>true</include>
 	</portlet>
 	<portlet>
-		<portlet-name>93</portlet-name>
-		<struts-path>workflow</struts-path>
-		<include>true</include>
-	</portlet>
-	<portlet>
 		<portlet-name>97</portlet-name>
 		<struts-path>quick_note</struts-path>
 		<include>true</include>

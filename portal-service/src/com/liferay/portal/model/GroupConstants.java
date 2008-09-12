@@ -20,27 +20,50 @@
  * SOFTWARE.
  */
 
-package com.liferay.portlet.workflow.search;
-
-import com.liferay.portal.kernel.dao.search.DAOParamUtil;
-import com.liferay.portal.kernel.util.ParamUtil;
-import com.liferay.portal.kernel.util.StringPool;
-
-import javax.portlet.RenderRequest;
+package com.liferay.portal.model;
 
 /**
- * <a href="DefinitionSearchTerms.java.html"><b><i>View Source</i></b></a>
+ * <a href="GroupConstants.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *
  */
-public class DefinitionSearchTerms extends DefinitionDisplayTerms {
+public class GroupConstants {
 
-	public DefinitionSearchTerms(RenderRequest renderRequest) {
-		super(renderRequest);
+	public static final long DEFAULT_PARENT_GROUP_ID = 0;
 
-		definitionId = ParamUtil.getLong(renderRequest, DEFINITION_ID);
-		name = DAOParamUtil.getLike(renderRequest, NAME, StringPool.PERCENT);
+	public static final long DEFAULT_LIVE_GROUP_ID = 0;
+
+	public static final String CONTROL_PANEL = "Control Panel";
+
+	public static final String GUEST = "Guest";
+
+	public static final String[] SYSTEM_GROUPS = {
+		CONTROL_PANEL, GUEST
+	};
+
+	public static final int TYPE_COMMUNITY_OPEN = 1;
+
+	public static final String TYPE_COMMUNITY_OPEN_LABEL = "open";
+
+	public static final int TYPE_COMMUNITY_PRIVATE = 3;
+
+	public static final String TYPE_COMMUNITY_PRIVATE_LABEL = "private";
+
+	public static final int TYPE_COMMUNITY_RESTRICTED = 2;
+
+	public static final String TYPE_COMMUNITY_RESTRICTED_LABEL = "restricted";
+
+	public static String getTypeLabel(int type) {
+		if (type == TYPE_COMMUNITY_OPEN) {
+			return TYPE_COMMUNITY_OPEN_LABEL;
+		}
+		else if (type == TYPE_COMMUNITY_PRIVATE) {
+			return TYPE_COMMUNITY_PRIVATE_LABEL;
+		}
+		else {
+			return TYPE_COMMUNITY_RESTRICTED_LABEL;
+		}
 	}
 
 }

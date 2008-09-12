@@ -114,7 +114,4 @@
 		<portlet id="36" />
 		<portlet id="54" />
 	</category>
-	<category name="category.workflow">
-		<portlet id="93" />
-	</category>
 </display>

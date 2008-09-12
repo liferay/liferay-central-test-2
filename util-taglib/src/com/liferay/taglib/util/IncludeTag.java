@@ -112,6 +112,19 @@ public class IncludeTag extends ParamAndPropertyAncestorTagImpl {
 		_page = page;
 	}
 
+	public ServletContext getServletContext() {
+		if (_servletContext != null) {
+			return _servletContext;
+		}
+		else {
+			return super.getServletContext();
+		}
+	}
+
+	public void setServletContext(ServletContext servletContext) {
+		_servletContext = servletContext;
+	}
+
 	protected String getDefaultPage() {
 		return null;
 	}
@@ -119,5 +132,6 @@ public class IncludeTag extends ParamAndPropertyAncestorTagImpl {
 	private static Log _log = LogFactoryUtil.getLog(IncludeTag.class);
 
 	private String _page;
+	private ServletContext _servletContext;
 
 }

@@ -590,12 +590,6 @@ ${exception.message}
 		</antcall>
 	</target>
 
-	<target name="build-service-portlet-workflow">
-		<antcall target="build-service">
-			<param name="service.file" value="src/com/liferay/portlet/workflow/service.xml" />
-		</antcall>
-	</target>
-
 	<target name="build-service-portlets">
 		<antcall target="build-service-portlet-announcements" />
 		<antcall target="build-service-portlet-blogs" />
@@ -614,7 +608,6 @@ ${exception.message}
 		<antcall target="build-service-portlet-tags" />
 		<antcall target="build-service-portlet-tasks" />
 		<antcall target="build-service-portlet-wiki" />
-		<antcall target="build-service-portlet-workflow" />
 	</target>
 
 	<target name="build-services">
@@ -749,12 +742,6 @@ ${exception.message}
 		</antcall>
 	</target>
 
-	<target name="build-wsdd-portlet-workflow">
-		<antcall target="build-wsdd">
-			<param name="service.file" value="src/com/liferay/portlet/workflow/service.xml" />
-		</antcall>
-	</target>
-
 	<target name="build-wsdd-portlets">
 		<antcall target="build-wsdd-portlet-announcements" />
 		<antcall target="build-wsdd-portlet-blogs" />
@@ -772,7 +759,6 @@ ${exception.message}
 		<antcall target="build-wsdd-portlet-tags" />
 		<antcall target="build-wsdd-portlet-tasks" />
 		<antcall target="build-wsdd-portlet-wiki" />
-		<antcall target="build-wsdd-portlet-workflow" />
 	</target>
 
 	<target name="build-wsdds">

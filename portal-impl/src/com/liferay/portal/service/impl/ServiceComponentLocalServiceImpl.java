@@ -76,6 +76,14 @@ public class ServiceComponentLocalServiceImpl
 			throw new SystemException(e);
 		}
 
+		try {
+			ModelHintsUtil.read(
+				classLoader, "META-INF/portlet-model-hints-ext.xml");
+		}
+		catch (Exception e) {
+			throw new SystemException(e);
+		}
+
 		ServiceComponent serviceComponent = null;
 		ServiceComponent previousServiceComponent = null;
 

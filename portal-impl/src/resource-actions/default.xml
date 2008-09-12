@@ -19,5 +19,4 @@
 	<resource file="resource-actions/tags.xml" />
 	<resource file="resource-actions/tasks.xml" />
 	<resource file="resource-actions/wiki.xml" />
-	<resource file="resource-actions/workflow.xml" />
 </resource-action-mapping>

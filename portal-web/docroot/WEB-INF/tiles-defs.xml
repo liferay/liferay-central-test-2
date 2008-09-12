@@ -1215,26 +1215,6 @@
 		<put name="portlet_content" value="/portlet/words/view.jsp" />
 	</definition>
 
-	<!-- Workflow -->
-
-	<definition name="portlet.workflow" extends="portlet" />
-
-	<definition name="portlet.workflow.edit_definition" extends="portlet.workflow">
-		<put name="portlet_content" value="/portlet/workflow/edit_definition.jsp" />
-	</definition>
-
-	<definition name="portlet.workflow.edit_task" extends="portlet.workflow">
-		<put name="portlet_content" value="/portlet/workflow/edit_task.jsp" />
-	</definition>
-
-	<definition name="portlet.workflow.error" extends="portlet.workflow">
-		<put name="portlet_content" value="/portlet/workflow/error.jsp" />
-	</definition>
-
-	<definition name="portlet.workflow.view" extends="portlet.workflow">
-		<put name="portlet_content" value="/portlet/workflow/view.jsp" />
-	</definition>
-
 	<!-- XSL Content -->
 
 	<definition name="portlet.xsl_content" extends="portlet" />

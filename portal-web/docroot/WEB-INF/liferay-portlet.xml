@@ -762,18 +762,6 @@
 		<system>true</system>
 	</portlet>
 	<portlet>
-		<portlet-name>93</portlet-name>
-		<icon>/html/portlet/workflow/icon.png</icon>
-		<struts-path>workflow</struts-path>
-		<configuration-action-class>com.liferay.portlet.workflow.action.ConfigurationActionImpl</configuration-action-class>
-		<use-default-template>false</use-default-template>
-		<restore-current-view>false</restore-current-view>
-		<private-request-attributes>false</private-request-attributes>
-		<private-session-attributes>false</private-session-attributes>
-		<render-weight>1</render-weight>
-		<css-class-wrapper>portlet-workflow</css-class-wrapper>
-	</portlet>
-	<portlet>
 		<portlet-name>97</portlet-name>
 		<icon>/html/portlet/quick_note/icon.png</icon>
 		<struts-path>quick_note</struts-path>
