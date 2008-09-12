@@ -1,7 +1,5 @@
 package ${packagePath}.service.base;
 
-import ${packagePath}.service.${entity.name}${sessionTypeName}Service;
-
 import com.liferay.portal.kernel.bean.PortalBeanLocatorUtil;
 import ${beanLocatorUtil};
 

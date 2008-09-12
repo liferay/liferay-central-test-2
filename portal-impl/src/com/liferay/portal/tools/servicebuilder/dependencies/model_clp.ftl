@@ -102,7 +102,7 @@ public class ${entity.name}Clp extends BaseModelImpl implements ${entity.name} {
 
 			)
 
-			<#list method.exceptions as exception>
+			<#--<#list method.exceptions as exception>
 				<#if exception_index == 0>
 					throws
 				</#if>
@@ -112,7 +112,7 @@ public class ${entity.name}Clp extends BaseModelImpl implements ${entity.name} {
 				<#if exception_has_next>
 					,
 				</#if>
-			</#list>
+			</#list>-->
 
 			{
 				throw new UnsupportedOperationException();
@@ -122,7 +122,7 @@ public class ${entity.name}Clp extends BaseModelImpl implements ${entity.name} {
 
 	public ${entity.name} toEscapedModel() {
 		if (isEscapedModel()) {
-			return (${entity.name})this;
+			return this;
 		}
 		else {
 			${entity.name} model = new ${entity.name}Clp();
