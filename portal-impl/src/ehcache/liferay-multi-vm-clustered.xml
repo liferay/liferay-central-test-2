@@ -28,21 +28,7 @@
 		<bootstrapCacheLoaderFactory class="net.sf.ehcache.distribution.RMIBootstrapCacheLoaderFactory" />
 	</defaultCache>
 	<cache
-		name="com.liferay.portlet.alfrescocontent.util.AlfrescoContentCacheUtil"
-		maxElementsInMemory="10000"
-		eternal="false"
-		timeToLiveSeconds="300"
-		overflowToDisk="false"
-	>
-        <cacheEventListenerFactory
-			class="net.sf.ehcache.distribution.RMICacheReplicatorFactory"
-			properties="replicatePuts=false,replicateUpdatesViaCopy=false"
-			propertySeparator=","
-		/>
-		<bootstrapCacheLoaderFactory class="net.sf.ehcache.distribution.RMIBootstrapCacheLoaderFactory" />
-	</cache>
-	<cache
-		name="com.liferay.portlet.calendar.service.impl.CalEventLocalUtil"
+		name="com.liferay.portal.kernel.dao.orm.FinderCache"
 		maxElementsInMemory="10000"
 		eternal="false"
         timeToIdleSeconds="600"
@@ -56,7 +42,7 @@
 		<bootstrapCacheLoaderFactory class="net.sf.ehcache.distribution.RMIBootstrapCacheLoaderFactory" />
 	</cache>
 	<cache
-		name="com.liferay.portal.kernel.dao.orm.FinderCache"
+		name="com.liferay.portlet.calendar.service.impl.CalEventLocalUtil"
 		maxElementsInMemory="10000"
 		eternal="false"
         timeToIdleSeconds="600"
