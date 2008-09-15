@@ -26,7 +26,16 @@
 
 <%
 String ppid = ParamUtil.getString(request, "p_p_id");
+
+if (ppid.equals(PortletKeys.PORTLET_CONFIGURATION)) {
+	ppid = ParamUtil.getString(request, PortalUtil.getPortletNamespace(ppid) + "portletResource");
+}
+
 String category = PortalUtil.getControlPanelCategory(ppid);
+
+if (Validator.isNull(category)) {
+	category = "content";
+}
 %>
 
 <c:if test="<%= !themeDisplay.isStateExclusive() && !themeDisplay.isStatePopUp() %>">
