@@ -160,12 +160,12 @@ public class PortalUtil {
 		return getPortal().getComputerName();
 	}
 
-	public static List<Portlet> getControlPanelPortlets(String category) {
-		return getPortal().getControlPanelPortlets(category);
-	}
-
 	public static String getControlPanelCategory(String portletId) {
 		return getPortal().getControlPanelCategory(portletId);
+	}
+
+	public static List<Portlet> getControlPanelPortlets(String category) {
+		return getPortal().getControlPanelPortlets(category);
 	}
 
 	public static String getCurrentURL(HttpServletRequest request) {

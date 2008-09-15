@@ -36,9 +36,9 @@ public class LayoutConstants {
 
 	public static final String TYPE_PORTLET = "portlet";
 
-	public static final String TYPE_CONTROL_PANEL = "control_panel";
-
 	public static final String TYPE_PANEL = "panel";
+
+	public static final String TYPE_CONTROL_PANEL = "control_panel";
 
 	public static final String TYPE_EMBEDDED = "embedded";
 

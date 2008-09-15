@@ -25,17 +25,20 @@
 <%@ include file="/html/portlet/layout_configuration/init.jsp" %>
 
 <div class="portal-add-content">
+
 	<%
 	String ppid = layoutTypePortlet.getStateMaxPortletId();
 
-	for (String category : _portletCategories) {
+	for (String category : _PORTLET_CATEGORIES) {
 	%>
+
 		<div class="lfr-add-content" id="<%= category %>">
-			<h2 <%= (category.equals(PortalUtil.getControlPanelCategory(ppid))) ? "class=\"selected\"" : StringPool.BLANK %>>
+			<h2 <%= (category.equals(PortalUtil.getControlPanelCategory(ppid))) ? "class=\"selected\"" : "" %>>
 				<span><liferay-ui:message key="<%= category %>" /></span>
 			</h2>
 
 			<div class="lfr-content-category">
+
 				<%
 				List<Portlet> portlets = PortalUtil.getControlPanelPortlets(category);
 
@@ -44,12 +47,15 @@
 						continue;
 					}
 				%>
+
 					<div>
-						<a  <%= (ppid.equals(portlet.getPortletId())) ? "class=\"selected\"" : StringPool.BLANK %> href="<liferay-portlet:renderURL portletName="<%= portlet.getRootPortletId() %>" windowState="<%= WindowState.MAXIMIZED.toString() %>"></liferay-portlet:renderURL>"><%= PortalUtil.getPortletTitle(portlet, application, locale) %></a>
+						<a <%= (ppid.equals(portlet.getPortletId())) ? "class=\"selected\"" : "" %> href="<liferay-portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" portletName="<%= portlet.getRootPortletId() %>" />"><%= PortalUtil.getPortletTitle(portlet, application, locale) %></a>
 					</div>
+
 				<%
 				}
 				%>
+
 			</div>
 		</div>
 	<%
@@ -58,5 +64,5 @@
 </div>
 
 <%!
-private String[] _portletCategories = new String[]{"content", "portal", "server"};
+private static final String[] _PORTLET_CATEGORIES = new String[] {"content", "portal", "server"};
 %>

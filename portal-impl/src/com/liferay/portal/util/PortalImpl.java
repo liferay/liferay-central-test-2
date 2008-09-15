@@ -600,8 +600,33 @@ public class PortalImpl implements Portal {
 		return _computerName;
 	}
 
+	public String getControlPanelCategory(String portletId) {
+		String category = null;
+
+		if (ArrayUtil.contains(
+				PropsValues.CONTROL_PANEL_CATEGORY_CONTENT_PORTLETS,
+				portletId)) {
+
+			category = "content";
+		}
+		else if (ArrayUtil.contains(
+					PropsValues.CONTROL_PANEL_CATEGORY_PORTAL_PORTLETS,
+					portletId)) {
+
+			category = "portal";
+		}
+		else if (ArrayUtil.contains(
+					PropsValues.CONTROL_PANEL_CATEGORY_SERVER_PORTLETS,
+					portletId)) {
+
+			category = "server";
+		}
+
+		return category;
+	}
+
 	public List<Portlet> getControlPanelPortlets(String category) {
-		String[] portletIds;
+		String[] portletIds = null;
 
 		if (category.equals("content")) {
 			portletIds = PropsValues.CONTROL_PANEL_CATEGORY_CONTENT_PORTLETS;
@@ -616,10 +641,11 @@ public class PortalImpl implements Portal {
 			portletIds = new String[0];
 		}
 
-		List portlets = new ArrayList();
+		List<Portlet> portlets = new ArrayList<Portlet>();
 
 		for (String portletId : portletIds) {
 			Portlet portlet = null;
+
 			try {
 				portlet = PortletLocalServiceUtil.getPortletById(
 					CompanyThreadLocal.getCompanyId(), portletId);
@@ -628,33 +654,14 @@ public class PortalImpl implements Portal {
 					portlets.add(portlet);
 				}
 			}
-			catch (SystemException e) {
+			catch (Exception e) {
+				if (_log.isWarnEnabled()) {
+					_log.warn(e, e);
+				}
 			}
 		}
 
 		return portlets;
-	}
-
-	public String getControlPanelCategory(String portletId) {
-		String category = null;
-
-		if (ArrayUtil.contains(
-			PropsValues.CONTROL_PANEL_CATEGORY_CONTENT_PORTLETS, portletId)) {
-
-			category = "content";
-		}
-		else if (ArrayUtil.contains(
-			PropsValues.CONTROL_PANEL_CATEGORY_PORTAL_PORTLETS, portletId)) {
-
-			category = "portal";
-		}
-		else if (ArrayUtil.contains(
-			PropsValues.CONTROL_PANEL_CATEGORY_SERVER_PORTLETS, portletId)) {
-
-			category = "server";
-		}
-
-		return category;
 	}
 
 	public String getCurrentURL(HttpServletRequest request) {

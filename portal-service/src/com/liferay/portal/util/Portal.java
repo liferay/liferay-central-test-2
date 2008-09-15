@@ -127,9 +127,9 @@ public interface Portal {
 
 	public String getComputerName();
 
-	public List<Portlet> getControlPanelPortlets(String category);
-
 	public String getControlPanelCategory(String portletId);
+
+	public List<Portlet> getControlPanelPortlets(String category);
 
 	public String getCurrentURL(HttpServletRequest request);
 
