@@ -24,6 +24,12 @@
 
 <%@ include file="/html/portal/init.jsp" %>
 
+<%
+String ppid = ParamUtil.getString(request, "p_p_id");
+String category = PortalUtil.getControlPanelCategory(ppid);
+%>
+
+<c:if test="<%= !themeDisplay.isStateExclusive() && !themeDisplay.isStatePopUp() %>">
 <table class="lfr-panel <%= (!layoutTypePortlet.hasStateMax()) ? "panel-frontpage" : "panel-application" %>" width="100%">
 <tr>
 	<td class="panel-menu" valign="top" width="200">
@@ -33,11 +39,6 @@
 		<table width="100%">
 		<tr>
 			<td>
-
-				<%
-				String ppid = ParamUtil.getString(request, "p_p_id");
-				String category = PortalUtil.getControlPanelCategory(ppid);
-				%>
 
 				<c:if test='<%= category.equals("content") %>'>
 
@@ -66,6 +67,7 @@
 			</td>
 		</tr>
 		</table>
+</c:if>
 
 		<%
 		if (themeDisplay.isStateExclusive() || themeDisplay.isStatePopUp() || layoutTypePortlet.hasStateMax()) {
@@ -108,6 +110,8 @@
 		}
 		%>
 
+<c:if test="<%= !themeDisplay.isStateExclusive() && !themeDisplay.isStatePopUp() %>">
 	</td>
 </tr>
 </table>
+</c:if>
