@@ -30,88 +30,88 @@ String category = PortalUtil.getControlPanelCategory(ppid);
 %>
 
 <c:if test="<%= !themeDisplay.isStateExclusive() && !themeDisplay.isStatePopUp() %>">
-<table class="lfr-panel <%= (!layoutTypePortlet.hasStateMax()) ? "panel-frontpage" : "panel-application" %>" width="100%">
-<tr>
-	<td class="panel-menu" valign="top" width="200">
-		<liferay-portlet:runtime portletName="87" />
-	</td>
-	<td class="panel-content" valign="top">
-		<table width="100%">
-		<tr>
-			<td>
+	<table class="lfr-panel <%= (!layoutTypePortlet.hasStateMax()) ? "panel-frontpage" : "panel-application" %>" width="100%">
+	<tr>
+		<td class="panel-menu" valign="top" width="200">
+			<liferay-portlet:runtime portletName="87" />
+		</td>
+		<td class="panel-content" valign="top">
+			<table width="100%">
+			<tr>
+				<td>
 
-				<c:if test='<%= category.equals("content") %>'>
+					<c:if test='<%= category.equals("content") %>'>
 
-					<%
-					Group scopeGroup = GroupLocalServiceUtil.getGroup(scopeGroupId);
+						<%
+						Group scopeGroup = GroupLocalServiceUtil.getGroup(scopeGroupId);
 
-					String currentGroupLabel = "current-community";
+						String currentGroupLabel = "current-community";
 
-					if (scopeGroup.isOrganization()) {
-						currentGroupLabel = "current-organization";
-					}
-					else if (scopeGroup.isUser()) {
-						currentGroupLabel = "current-user";
-					}
-					%>
+						if (scopeGroup.isOrganization()) {
+							currentGroupLabel = "current-organization";
+						}
+						else if (scopeGroup.isUser()) {
+							currentGroupLabel = "current-user";
+						}
+						%>
 
-					<h2>
-						<liferay-ui:message key="<%= currentGroupLabel %>" />: <%= scopeGroup.getDescriptiveName() %>
-					</h2>
-				</c:if>
-			</td>
-			<td align="right">
-				<c:if test='<%= !category.equals("server") %>'>
-					<h4><liferay-ui:message key="current-portal-instance" />: <%= company.getName() %></h4>
-				</c:if>
-			</td>
-		</tr>
-		</table>
+						<h2>
+							<liferay-ui:message key="<%= currentGroupLabel %>" />: <%= scopeGroup.getDescriptiveName() %>
+						</h2>
+					</c:if>
+				</td>
+				<td align="right">
+					<c:if test='<%= !category.equals("server") %>'>
+						<h4><liferay-ui:message key="current-portal-instance" />: <%= company.getName() %></h4>
+					</c:if>
+				</td>
+			</tr>
+			</table>
 </c:if>
 
-		<%
-		if (themeDisplay.isStateExclusive() || themeDisplay.isStatePopUp() || layoutTypePortlet.hasStateMax()) {
-			String content = null;
+<%
+if (themeDisplay.isStateExclusive() || themeDisplay.isStatePopUp() || layoutTypePortlet.hasStateMax()) {
+	String content = null;
 
-			if (themeDisplay.isStateExclusive()) {
-				content = LayoutTemplateLocalServiceUtil.getContent("exclusive", true, theme.getThemeId());
-			}
-			else if (themeDisplay.isStatePopUp()) {
-				content = LayoutTemplateLocalServiceUtil.getContent("pop_up", true, theme.getThemeId());
-			}
-			else {
-				ppid = StringUtil.split(layoutTypePortlet.getStateMax())[0];
+	if (themeDisplay.isStateExclusive()) {
+		content = LayoutTemplateLocalServiceUtil.getContent("exclusive", true, theme.getThemeId());
+	}
+	else if (themeDisplay.isStatePopUp()) {
+		content = LayoutTemplateLocalServiceUtil.getContent("pop_up", true, theme.getThemeId());
+	}
+	else {
+		ppid = StringUtil.split(layoutTypePortlet.getStateMax())[0];
 
-				content = LayoutTemplateLocalServiceUtil.getContent("max", true, theme.getThemeId());
-			}
-		%>
+		content = LayoutTemplateLocalServiceUtil.getContent("max", true, theme.getThemeId());
+	}
+%>
 
-			<%= RuntimePortletUtil.processTemplate(application, request, response, pageContext, ppid, content) %>
+	<%= RuntimePortletUtil.processTemplate(application, request, response, pageContext, ppid, content) %>
 
-		<%
-		}
-		else {
-			String description = StringPool.BLANK;
+<%
+}
+else {
+	String description = StringPool.BLANK;
 
-			if (Validator.isNull(description)) {
-				description = LanguageUtil.get(pageContext, "please-select-a-tool-from-the-left-menu");
-			}
-		%>
+	if (Validator.isNull(description)) {
+		description = LanguageUtil.get(pageContext, "please-select-a-tool-from-the-left-menu");
+	}
+%>
 
-			<h2>
-				<%= layout.getName(locale) %>
-			</h2>
+	<h2>
+		<%= layout.getName(locale) %>
+	</h2>
 
-			<div class="portlet-msg-info">
-				<%= description %>
-			</div>
+	<div class="portlet-msg-info">
+		<%= description %>
+	</div>
 
-		<%
-		}
-		%>
+<%
+}
+%>
 
 <c:if test="<%= !themeDisplay.isStateExclusive() && !themeDisplay.isStatePopUp() %>">
-	</td>
-</tr>
-</table>
+		</td>
+	</tr>
+	</table>
 </c:if>
