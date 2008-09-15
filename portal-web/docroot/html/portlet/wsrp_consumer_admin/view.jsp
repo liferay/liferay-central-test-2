@@ -241,7 +241,7 @@ if (configuredProducerBeans == null) {
 							searchContainer.setHeaderNames(headerNames);
 							searchContainer.setEmptyResultsMessage("there-are-no-registration-properties");
 
-							List<Map.Entry<String, String>> results = ListUtil.fromCollection(registrationPropertyDescription.entrySet());
+							List<Map.Entry<String, String>> results = (registrationPropertyDescription != null)? ListUtil.fromCollection(registrationPropertyDescription.entrySet()):ListUtil.fromCollection(null);
 							List resultRows = searchContainer.getResultRows();
 
 							for (int i = 0; i < results.size(); i++) {
@@ -441,7 +441,7 @@ if (configuredProducerBeans == null) {
 				searchContainer.setHeaderNames(headerNames);
 				searchContainer.setEmptyResultsMessage("there-are-no-registration-properties");
 
-				List<Map.Entry<String, String>> results = ListUtil.fromCollection(registrationPropertyDescriptions.entrySet());
+				List<Map.Entry<String, String>> results = (registrationPropertyDescriptions != null)? ListUtil.fromCollection(registrationPropertyDescriptions.entrySet()):ListUtil.fromCollection(null);
 				List resultRows = searchContainer.getResultRows();
 
 				for (int i = 0; i < results.size(); i++) {
