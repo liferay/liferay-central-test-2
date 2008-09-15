@@ -6,7 +6,6 @@ import com.ext.portlet.reports.model.impl.ReportsEntryImpl;
 import com.ext.portlet.reports.model.impl.ReportsEntryModelImpl;
 
 import com.liferay.portal.SystemException;
-import com.liferay.portal.kernel.bean.InitializingBean;
 import com.liferay.portal.kernel.dao.orm.DynamicQuery;
 import com.liferay.portal.kernel.dao.orm.FinderCacheUtil;
 import com.liferay.portal.kernel.dao.orm.Query;
@@ -31,7 +30,7 @@ import java.util.List;
 
 
 public class ReportsEntryPersistenceImpl extends BasePersistenceImpl
-    implements ReportsEntryPersistence, InitializingBean {
+    implements ReportsEntryPersistence {
     private static Log _log = LogFactory.getLog(ReportsEntryPersistenceImpl.class);
     private ModelListener[] _listeners = new ModelListener[0];
 
