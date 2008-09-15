@@ -24,63 +24,68 @@
 
 <%@ include file="/html/portlet/layout_configuration/init.jsp" %>
 
-<c:if test="<%= themeDisplay.isSignedIn() && (layout != null) && (layout.getType().equals(LayoutConstants.TYPE_PORTLET) || layout.getType().equals(LayoutConstants.TYPE_PANEL)) %>">
+<c:choose>
+	<c:when test="<%= themeDisplay.isSignedIn() && (layout != null) && (layout.getType().equals(LayoutConstants.TYPE_PORTLET) || layout.getType().equals(LayoutConstants.TYPE_PANEL)) %>">
 
-	<%
-	PortletURL refererURL = renderResponse.createActionURL();
+		<%
+		PortletURL refererURL = renderResponse.createActionURL();
 
-	refererURL.setParameter("updateLayout", "true");
-	%>
+		refererURL.setParameter("updateLayout", "true");
+		%>
 
-	<div id="portal_add_content">
-		<div class="portal-add-content">
-			<form action="<%= themeDisplay.getPathMain() %>/portal/update_layout?p_l_id=<%= plid %>" method="post" name="<portlet:namespace />fm">
-			<input name="doAsUserId" type="hidden" value="<%= themeDisplay.getDoAsUserId() %>" />
-			<input name="<%= Constants.CMD %>" type="hidden" value="template" />
-			<input name="<%= WebKeys.REFERER %>" type="hidden" value="<%= refererURL.toString() %>" />
-			<input name="refresh" type="hidden" value="true" />
+		<div id="portal_add_content">
+			<div class="portal-add-content">
+				<form action="<%= themeDisplay.getPathMain() %>/portal/update_layout?p_l_id=<%= plid %>" method="post" name="<portlet:namespace />fm">
+				<input name="doAsUserId" type="hidden" value="<%= themeDisplay.getDoAsUserId() %>" />
+				<input name="<%= Constants.CMD %>" type="hidden" value="template" />
+				<input name="<%= WebKeys.REFERER %>" type="hidden" value="<%= refererURL.toString() %>" />
+				<input name="refresh" type="hidden" value="true" />
 
-			<c:if test="<%= layout.getType().equals(LayoutConstants.TYPE_PORTLET) %>">
-				<div class="portal-add-content-search">
-					<span id="portal_add_content_title"><liferay-ui:message key="search-content-searches-as-you-type" /></span>
+				<c:if test="<%= layout.getType().equals(LayoutConstants.TYPE_PORTLET) %>">
+					<div class="portal-add-content-search">
+						<span id="portal_add_content_title"><liferay-ui:message key="search-content-searches-as-you-type" /></span>
 
-					<input class="lfr-auto-focus" id="layout_configuration_content" type="text" onKeyPress="if (event.keyCode == 13) { return false; }" />
-				</div>
-			</c:if>
+						<input class="lfr-auto-focus" id="layout_configuration_content" type="text" onKeyPress="if (event.keyCode == 13) { return false; }" />
+					</div>
+				</c:if>
 
-			<%
-			Set panelSelectedPortlets = SetUtil.fromArray(StringUtil.split(layout.getTypeSettingsProperties().getProperty("panelSelectedPortlets")));
+				<%
+				Set panelSelectedPortlets = SetUtil.fromArray(StringUtil.split(layout.getTypeSettingsProperties().getProperty("panelSelectedPortlets")));
 
-			PortletCategory portletCategory = (PortletCategory)WebAppPool.get(String.valueOf(company.getCompanyId()), WebKeys.PORTLET_CATEGORY);
+				PortletCategory portletCategory = (PortletCategory)WebAppPool.get(String.valueOf(company.getCompanyId()), WebKeys.PORTLET_CATEGORY);
 
-			portletCategory = _getRelevantPortletCategory(portletCategory, panelSelectedPortlets, layoutTypePortlet, layout, user);
+				portletCategory = _getRelevantPortletCategory(portletCategory, panelSelectedPortlets, layoutTypePortlet, layout, user);
 
-			List categories = ListUtil.fromCollection(portletCategory.getCategories());
+				List categories = ListUtil.fromCollection(portletCategory.getCategories());
 
-			Collections.sort(categories, new PortletCategoryComparator(company.getCompanyId(), locale));
+				Collections.sort(categories, new PortletCategoryComparator(company.getCompanyId(), locale));
 
-			Iterator itr = categories.iterator();
+				Iterator itr = categories.iterator();
 
-			while (itr.hasNext()) {
-				request.setAttribute(WebKeys.PORTLET_CATEGORY, itr.next());
-			%>
+				while (itr.hasNext()) {
+					request.setAttribute(WebKeys.PORTLET_CATEGORY, itr.next());
+				%>
 
-				<liferay-util:include page="/html/portlet/layout_configuration/view_category.jsp" />
+					<liferay-util:include page="/html/portlet/layout_configuration/view_category.jsp" />
 
-			<%
-			}
-			%>
+				<%
+				}
+				%>
 
-			<c:if test="<%= layout.getType().equals(LayoutConstants.TYPE_PORTLET) %>">
-				<p class="portlet-msg-info">
-					<liferay-ui:message key="to-add-a-portlet-to-the-page-just-drag-it" />
-				</p>
-			</c:if>
+				<c:if test="<%= layout.getType().equals(LayoutConstants.TYPE_PORTLET) %>">
+					<p class="portlet-msg-info">
+						<liferay-ui:message key="to-add-a-portlet-to-the-page-just-drag-it" />
+					</p>
+				</c:if>
 
-			</form>
+				</form>
+			</div>
 		</div>
-	</div>
-</c:if>
+	</c:when>
+	<c:when test="<%= themeDisplay.isSignedIn() && (layout != null) && (layout.getType().equals(LayoutConstants.TYPE_CONTROL_PANEL)) %>">
+		<liferay-util:include page="/html/portlet/layout_configuration/view_control_panel_menu.jsp" />
+	</c:when>
+</c:choose>
 
 <c:if test="<%= !themeDisplay.isSignedIn() %>">
 	<liferay-ui:message key="please-sign-in-to-continue" />

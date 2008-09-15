@@ -38,6 +38,7 @@ import java.io.IOException;
 import java.rmi.RemoteException;
 
 import java.util.Date;
+import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 import java.util.Properties;
@@ -68,7 +69,6 @@ import javax.servlet.jsp.PageContext;
  *
  */
 public interface Portal {
-
 	public static final String PATH_IMAGE = "/image";
 
 	public static final String PATH_MAIN = "/c";
@@ -126,6 +126,10 @@ public interface Portal {
 	public String getComputerAddress();
 
 	public String getComputerName();
+
+	public List<Portlet> getControlPanelPortlets(String category);
+
+	public String getControlPanelCategory(String portletId);
 
 	public String getCurrentURL(HttpServletRequest request);
 

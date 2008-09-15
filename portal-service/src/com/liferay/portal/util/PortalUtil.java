@@ -38,6 +38,7 @@ import java.io.IOException;
 import java.rmi.RemoteException;
 
 import java.util.Date;
+import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 import java.util.Properties;
@@ -157,6 +158,14 @@ public class PortalUtil {
 
 	public static String getComputerName() {
 		return getPortal().getComputerName();
+	}
+
+	public static List<Portlet> getControlPanelPortlets(String category) {
+		return getPortal().getControlPanelPortlets(category);
+	}
+
+	public static String getControlPanelCategory(String portletId) {
+		return getPortal().getControlPanelCategory(portletId);
 	}
 
 	public static String getCurrentURL(HttpServletRequest request) {

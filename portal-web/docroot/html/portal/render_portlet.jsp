@@ -55,6 +55,9 @@ catch (NoSuchResourceException nsre) {
 	else if (layout.getType().equals(LayoutConstants.TYPE_PANEL)) {
 		addDefaultResource = true;
 	}
+	else if (layout.getType().equals(LayoutConstants.TYPE_CONTROL_PANEL)) {
+		addDefaultResource = true;
+	}
 	else if (layoutTypePortlet.hasPortletId(portletId)) {
 		addDefaultResource = true;
 	}

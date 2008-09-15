@@ -242,7 +242,11 @@ public class PropsKeys {
 
 	public static final String CONTROL_PANEL_LAYOUT_NAME = "control.panel.layout.name";
 
-	public static final String CONTROL_PANEL_LAYOUT_PORTLETS = "control.panel.layout.portlets";
+	public static final String CONTROL_PANEL_CATEGORY_CONTENT_PORTLETS = "control.panel.category.content.portlets";
+
+	public static final String CONTROL_PANEL_CATEGORY_PORTAL_PORTLETS = "control.panel.category.portal.portlets";
+
+	public static final String CONTROL_PANEL_CATEGORY_SERVER_PORTLETS = "control.panel.category.server.portlets";
 
 	public static final String CONTROL_PANEL_LAYOUT_REGULAR_THEME_ID = "control.panel.layout.regular.theme.id";
 

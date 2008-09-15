@@ -70,6 +70,7 @@ import com.liferay.portal.model.UserGroup;
 import com.liferay.portal.model.impl.GroupImpl;
 import com.liferay.portal.model.impl.RoleImpl;
 import com.liferay.portal.plugin.PluginPackageUtil;
+import com.liferay.portal.security.auth.CompanyThreadLocal;
 import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.security.permission.ActionKeys;
 import com.liferay.portal.security.permission.PermissionChecker;
@@ -118,6 +119,7 @@ import java.net.UnknownHostException;
 
 import java.rmi.RemoteException;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Date;
@@ -596,6 +598,63 @@ public class PortalImpl implements Portal {
 
 	public String getComputerName() {
 		return _computerName;
+	}
+
+	public List<Portlet> getControlPanelPortlets(String category) {
+		String[] portletIds;
+
+		if (category.equals("content")) {
+			portletIds = PropsValues.CONTROL_PANEL_CATEGORY_CONTENT_PORTLETS;
+		}
+		else if (category.equals("portal")) {
+			portletIds = PropsValues.CONTROL_PANEL_CATEGORY_PORTAL_PORTLETS;
+		}
+		else if (category.equals("server")) {
+			portletIds = PropsValues.CONTROL_PANEL_CATEGORY_SERVER_PORTLETS;
+		}
+		else {
+			portletIds = new String[0];
+		}
+
+		List portlets = new ArrayList();
+
+		for (String portletId : portletIds) {
+			Portlet portlet = null;
+			try {
+				portlet = PortletLocalServiceUtil.getPortletById(
+					CompanyThreadLocal.getCompanyId(), portletId);
+
+				if (portlet != null) {
+					portlets.add(portlet);
+				}
+			}
+			catch (SystemException e) {
+			}
+		}
+
+		return portlets;
+	}
+
+	public String getControlPanelCategory(String portletId) {
+		String category = null;
+
+		if (ArrayUtil.contains(
+			PropsValues.CONTROL_PANEL_CATEGORY_CONTENT_PORTLETS, portletId)) {
+
+			category = "content";
+		}
+		else if (ArrayUtil.contains(
+			PropsValues.CONTROL_PANEL_CATEGORY_PORTAL_PORTLETS, portletId)) {
+
+			category = "portal";
+		}
+		else if (ArrayUtil.contains(
+			PropsValues.CONTROL_PANEL_CATEGORY_SERVER_PORTLETS, portletId)) {
+
+			category = "server";
+		}
+
+		return category;
 	}
 
 	public String getCurrentURL(HttpServletRequest request) {

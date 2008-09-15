@@ -1421,6 +1421,11 @@ public class ServicePreAction extends Action {
 				themeDisplay.setURLPublishToLive(null);
 			}
 
+			if (group.getName().equals(GroupImpl.CONTROL_PANEL)) {
+				themeDisplay.setShowPageSettingsIcon(false);
+				themeDisplay.setURLPublishToLive(null);
+			}
+
 			// LEP-4987
 
 			if (group.hasStagingGroup() || group.isStagingGroup()) {

@@ -1,3 +1,4 @@
+<%
 /**
  * Copyright (c) 2000-2008 Liferay, Inc. All rights reserved.
  *
@@ -19,33 +20,6 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
+%>
 
-package com.liferay.portal.model;
-
-/**
- * <a href="LayoutConstants.java.html"><b><i>View Source</i></b></a>
- *
- * @author Brian Wing Shun Chan
- *
- */
-public class LayoutConstants {
-
-	public static final long DEFAULT_PLID = 0;
-
-	public static final long DEFAULT_PARENT_LAYOUT_ID = 0;
-
-	public static final String TYPE_PORTLET = "portlet";
-
-	public static final String TYPE_CONTROL_PANEL = "control_panel";
-
-	public static final String TYPE_PANEL = "panel";
-
-	public static final String TYPE_EMBEDDED = "embedded";
-
-	public static final String TYPE_ARTICLE = "article";
-
-	public static final String TYPE_URL = "url";
-
-	public static final String TYPE_LINK_TO_LAYOUT = "link_to_layout";
-
-}
+<%@ include file="/html/portal/layout/edit/init.jsp" %>

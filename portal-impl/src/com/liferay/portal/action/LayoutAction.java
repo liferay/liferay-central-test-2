@@ -259,6 +259,11 @@ public class LayoutAction extends Action {
 			if (layout.getType().equals(LayoutConstants.TYPE_PANEL)) {
 				path += "/portal/layout/view/panel.jsp";
 			}
+			else if (layout.getType().equals(
+						LayoutConstants.TYPE_CONTROL_PANEL)) {
+
+				path += "/portal/layout/view/control_panel.jsp";
+			}
 			else {
 				path += "/portal/layout/view/portlet.jsp";
 			}

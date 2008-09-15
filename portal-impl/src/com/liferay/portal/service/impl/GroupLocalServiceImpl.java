@@ -701,17 +701,8 @@ public class GroupLocalServiceImpl extends GroupLocalServiceBaseImpl {
 			defaultUserId, group.getGroupId(), true,
 			LayoutConstants.DEFAULT_PARENT_LAYOUT_ID,
 			PropsValues.CONTROL_PANEL_LAYOUT_NAME, StringPool.BLANK,
-			StringPool.BLANK, LayoutConstants.TYPE_PANEL, false, friendlyURL);
-
-		UnicodeProperties props = layout.getTypeSettingsProperties();
-
-		props.setProperty(
-			"panelSelectedPortlets",
-			PropsValues.CONTROL_PANEL_LAYOUT_PORTLETS);
-
-		layoutLocalService.updateLayout(
-			layout.getGroupId(), layout.isPrivateLayout(), layout.getLayoutId(),
-			layout.getTypeSettings());
+			StringPool.BLANK, LayoutConstants.TYPE_CONTROL_PANEL, false,
+			friendlyURL);
 
 		LayoutSet layoutSet = layout.getLayoutSet();
 

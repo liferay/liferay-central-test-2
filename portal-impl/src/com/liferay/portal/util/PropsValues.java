@@ -234,8 +234,14 @@ public class PropsValues {
 	public static final String CONTROL_PANEL_LAYOUT_NAME =
 		PropsUtil.get(PropsKeys.CONTROL_PANEL_LAYOUT_NAME);
 
-	public static final String CONTROL_PANEL_LAYOUT_PORTLETS =
-		PropsUtil.get(PropsKeys.CONTROL_PANEL_LAYOUT_PORTLETS);
+	public static final String[] CONTROL_PANEL_CATEGORY_CONTENT_PORTLETS =
+		PropsUtil.getArray(PropsKeys.CONTROL_PANEL_CATEGORY_CONTENT_PORTLETS);
+
+	public static final String[] CONTROL_PANEL_CATEGORY_PORTAL_PORTLETS =
+		PropsUtil.getArray(PropsKeys.CONTROL_PANEL_CATEGORY_PORTAL_PORTLETS);
+
+	public static final String[] CONTROL_PANEL_CATEGORY_SERVER_PORTLETS =
+		PropsUtil.getArray(PropsKeys.CONTROL_PANEL_CATEGORY_SERVER_PORTLETS);
 
 	public static final String CONTROL_PANEL_LAYOUT_REGULAR_THEME_ID =
 		PropsUtil.get(PropsKeys.CONTROL_PANEL_LAYOUT_REGULAR_THEME_ID);
