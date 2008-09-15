@@ -226,6 +226,7 @@
 				<unjar src="${project.dir}/lib/portal/commons-beanutils.jar" dest="${classpath.jsp}" />
 				<unjar src="${project.dir}/lib/portal/commons-digester.jar" dest="${classpath.jsp}" />
 				<unjar src="${project.dir}/lib/portal/commons-httpclient.jar" dest="${classpath.jsp}" />
+				<unjar src="${project.dir}/lib/portal/easyconf.jar" dest="${classpath.jsp}" />
 				<unjar src="${project.dir}/lib/portal/portletbridge-core.jar" dest="${classpath.jsp}" />
 				<unjar src="${project.dir}/lib/portal/portletbridge-portlet.jar" dest="${classpath.jsp}" />
 				<unjar src="${project.dir}/lib/portal/simplecaptcha.jar" dest="${classpath.jsp}" />
