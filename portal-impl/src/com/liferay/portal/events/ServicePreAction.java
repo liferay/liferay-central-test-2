@@ -636,6 +636,15 @@ public class ServicePreAction extends Action {
 			return true;
 		}
 
+		if (group.getName().equals(GroupImpl.CONTROL_PANEL)) {
+			if ((user == null) || (user.isDefaultUser())) {
+				return false;
+			}
+			else {
+				return true;
+			}
+		}
+
 		// If the current group is staging, the live group should be checked
 		// for membership instead
 
