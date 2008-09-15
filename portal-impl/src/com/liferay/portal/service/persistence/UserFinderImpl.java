@@ -509,6 +509,10 @@ public class UserFinderImpl extends BasePersistenceImpl implements UserFinder {
 					}
 				}
 
+				if (organizationIds.length == 0) {
+					sb.append("(Users_Orgs.organizationId = -1) ");
+				}
+
 				sb.append(")");
 
 				join = sb.toString();

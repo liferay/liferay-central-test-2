@@ -892,6 +892,10 @@ public class OrganizationFinderImpl
 				}
 			}
 
+			if (organizationIds.length == 0) {
+				sb.append("(Organization_.organizationId = -1) ");
+			}
+
 			sb.append(")");
 
 			join = sb.toString();
