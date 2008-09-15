@@ -77,7 +77,14 @@ request.setAttribute("view.jsp-portletURLString", portletURLString);
 	function <portlet:namespace />deleteUsers(cmd) {
 		var deleteUsers = true;
 
-		if (cmd == "<%= Constants.DEACTIVATE %>") {
+		var deleteUserIds = Liferay.Util.listCheckedExcept(document.<portlet:namespace />fm, "<portlet:namespace />allRowIds");
+
+		if (!deleteUserIds) {
+			alert('<%= UnicodeLanguageUtil.get(pageContext, "no-users-were-selected") %>');
+
+			deleteUsers = false;
+		}
+		else if (cmd == "<%= Constants.DEACTIVATE %>") {
 			if (!confirm('<%= UnicodeLanguageUtil.get(pageContext, "are-you-sure-you-want-to-deactivate-the-selected-users") %>')) {
 				deleteUsers = false;
 			}
@@ -92,7 +99,7 @@ request.setAttribute("view.jsp-portletURLString", portletURLString);
 			document.<portlet:namespace />fm.method = "post";
 			document.<portlet:namespace />fm.<portlet:namespace /><%= Constants.CMD %>.value = cmd;
 			document.<portlet:namespace />fm.<portlet:namespace />redirect.value = document.<portlet:namespace />fm.<portlet:namespace />usersRedirect.value;
-			document.<portlet:namespace />fm.<portlet:namespace />deleteUserIds.value = Liferay.Util.listCheckedExcept(document.<portlet:namespace />fm, "<portlet:namespace />allRowIds");
+			document.<portlet:namespace />fm.<portlet:namespace />deleteUserIds.value = deleteUserIds;
 			submitForm(document.<portlet:namespace />fm, "<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/enterprise_admin/edit_user" /></portlet:actionURL>");
 		}
 	}
