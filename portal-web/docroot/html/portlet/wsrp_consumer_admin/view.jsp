@@ -189,10 +189,10 @@ if (configuredProducerBeans == null) {
 			if (requiresRegistration) {
 				supportsInbandRegistration = GetterUtil.getBoolean(producerInfoMap.get("InbandSupported").toString());
 
-				Map<String, String> registrationPropertyDescription = null;
+				Map<String, String> registrationPropertyDescriptions = null;
 
 				if (supportsInbandRegistration) {
-					registrationPropertyDescription = (Map<String, String>)producerInfoMap.get("RegistrationPropertyDescription");
+					registrationPropertyDescriptions = (Map<String, String>)producerInfoMap.get("RegistrationPropertyDescription");
 				}
 		%>
 
@@ -241,7 +241,15 @@ if (configuredProducerBeans == null) {
 							searchContainer.setHeaderNames(headerNames);
 							searchContainer.setEmptyResultsMessage("there-are-no-registration-properties");
 
-							List<Map.Entry<String, String>> results = (registrationPropertyDescription != null)? ListUtil.fromCollection(registrationPropertyDescription.entrySet()):ListUtil.fromCollection(null);
+							List<Map.Entry<String, String>> results = null;
+
+							if (registrationPropertyDescriptions != null) {
+								ListUtil.fromCollection(registrationPropertyDescriptions.entrySet());
+							}
+							else {
+								results = Collections.EMPTY_LIST;
+							}
+
 							List resultRows = searchContainer.getResultRows();
 
 							for (int i = 0; i < results.size(); i++) {
@@ -441,7 +449,15 @@ if (configuredProducerBeans == null) {
 				searchContainer.setHeaderNames(headerNames);
 				searchContainer.setEmptyResultsMessage("there-are-no-registration-properties");
 
-				List<Map.Entry<String, String>> results = (registrationPropertyDescriptions != null)? ListUtil.fromCollection(registrationPropertyDescriptions.entrySet()):ListUtil.fromCollection(null);
+				List<Map.Entry<String, String>> results = null;
+
+				if (registrationPropertyDescriptions != null) {
+					ListUtil.fromCollection(registrationPropertyDescriptions.entrySet());
+				}
+				else {
+					results = Collections.EMPTY_LIST;
+				}
+
 				List resultRows = searchContainer.getResultRows();
 
 				for (int i = 0; i < results.size(); i++) {
