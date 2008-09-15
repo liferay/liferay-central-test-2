@@ -876,6 +876,12 @@ public class PortletURLImpl
 				}
 			}
 
+			// LEP-7495
+
+			//if (isBlankValue(values)) {
+			//	continue;
+			//}
+
 			for (int i = 0; i < values.length; i++) {
 				if (isParameterIncludedInPath(name)) {
 					continue;
