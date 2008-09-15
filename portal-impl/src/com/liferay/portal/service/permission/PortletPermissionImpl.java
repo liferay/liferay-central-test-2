@@ -131,12 +131,12 @@ public class PortletPermissionImpl implements PortletPermission {
 			if (actionId.equals(ActionKeys.VIEW)) {
 				Group group = GroupLocalServiceUtil.getGroup(
 					layout.getGroupId());
-				
+
 				if (group.getName().equals(GroupImpl.CONTROL_PANEL)) {
 					return true;
 				}
 			}
-			
+
 			if (!strict) {
 				if (LayoutPermissionUtil.contains(
 						permissionChecker, groupId, layout.isPrivateLayout(),

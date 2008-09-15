@@ -636,8 +636,10 @@ public class ServicePreAction extends Action {
 			return true;
 		}
 
+		// Control panel layouts are only viewable by authenticated users
+
 		if (group.getName().equals(GroupImpl.CONTROL_PANEL)) {
-			if ((user == null) || (user.isDefaultUser())) {
+			if (user.isDefaultUser()) {
 				return false;
 			}
 			else {
