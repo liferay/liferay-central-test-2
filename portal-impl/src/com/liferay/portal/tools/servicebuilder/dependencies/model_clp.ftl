@@ -1,5 +1,9 @@
 package ${packagePath}.model;
 
+<#if entity.hasCompoundPK()>
+	import ${packagePath}.service.persistence.${entity.name}PK;
+</#if>
+
 import com.liferay.portal.kernel.bean.ReadOnlyBeanHandler;
 import com.liferay.portal.kernel.util.DateUtil;
 import com.liferay.portal.kernel.util.HtmlUtil;
