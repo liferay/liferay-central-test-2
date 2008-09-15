@@ -1305,6 +1305,11 @@ public class ServicePreAction extends Action {
 
 		String urlControlPanel = friendlyURLPrivateGroupPath + "/control_panel";
 
+		if (Validator.isNotNull(doAsUserId)) {
+			urlControlPanel = HttpUtil.addParameter(
+				urlControlPanel, "doAsUserId", doAsUserId);
+		}
+
 		themeDisplay.setURLControlPanel(urlControlPanel);
 
 		PortletURL createAccountURL = new PortletURLImpl(
