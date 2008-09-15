@@ -28,6 +28,7 @@ import com.liferay.portal.model.Group;
 import com.liferay.portal.model.Layout;
 import com.liferay.portal.model.Portlet;
 import com.liferay.portal.model.PortletConstants;
+import com.liferay.portal.model.impl.GroupImpl;
 import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.security.permission.ActionKeys;
 import com.liferay.portal.security.permission.PermissionChecker;
@@ -127,6 +128,15 @@ public class PortletPermissionImpl implements PortletPermission {
 				}
 			}
 
+			if (actionId.equals(ActionKeys.VIEW)) {
+				Group group = GroupLocalServiceUtil.getGroup(
+					layout.getGroupId());
+				
+				if (group.getName().equals(GroupImpl.CONTROL_PANEL)) {
+					return true;
+				}
+			}
+			
 			if (!strict) {
 				if (LayoutPermissionUtil.contains(
 						permissionChecker, groupId, layout.isPrivateLayout(),
