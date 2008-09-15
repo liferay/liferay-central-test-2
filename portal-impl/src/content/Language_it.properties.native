@@ -1781,6 +1781,7 @@ layout-template-plugins=Mascherina Plugins Della Disposizione
 layout-template=Modello di Layout
 layout-templates=Modelli di Layout
 layout.types.article=Articolo
+layout.types.control_panel=Quadro di controllo
 layout.types.embedded=Incorporato
 layout.types.link_to_layout=Collegamento a una Pagina
 layout.types.panel=Pannello

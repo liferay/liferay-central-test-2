@@ -1781,6 +1781,7 @@ layout-template-plugins=Layout template plugins
 layout-template=Layout template
 layout-templates=Layout templates
 layout.types.article=Artikel
+layout.types.control_panel=Controlebord
 layout.types.embedded=Ingebed
 layout.types.link_to_layout=Link naar pagina
 layout.types.panel=Comité

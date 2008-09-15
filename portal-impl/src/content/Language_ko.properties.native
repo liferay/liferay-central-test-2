@@ -1781,6 +1781,7 @@ layout-template-plugins=배치 템플렛Plugins
 layout-template=배치 템플렛
 layout-templates=배치 템플렛
 layout.types.article=기사
+layout.types.control_panel=제어반
 layout.types.embedded=끼워넣는
 layout.types.link_to_layout=페이지에 연결
 layout.types.panel=위원회

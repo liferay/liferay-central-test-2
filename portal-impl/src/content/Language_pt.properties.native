@@ -1781,6 +1781,7 @@ layout-template-plugins=Molde Plugins Da Disposição
 layout-template=Molde Da Disposição
 layout-templates=Moldes Da Disposição
 layout.types.article=Artigo
+layout.types.control_panel=Painel de controle
 layout.types.embedded=Encaixado
 layout.types.link_to_layout=Ligação à página
 layout.types.panel=Painel

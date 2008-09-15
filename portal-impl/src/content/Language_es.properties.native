@@ -1781,6 +1781,7 @@ layout-template-plugins=Plugins de plantilla de página
 layout-template=Plantilla de página
 layout-templates=Plantillas de página
 layout.types.article=Artículo
+layout.types.control_panel=Panel de control
 layout.types.embedded=Web insertada
 layout.types.link_to_layout=Enlace a página
 layout.types.panel=Panel

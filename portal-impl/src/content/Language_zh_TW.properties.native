@@ -1781,6 +1781,7 @@ layout-template-plugins=佈局模板Plugins
 layout-template=佈局模板
 layout-templates=佈局模板
 layout.types.article=文章
+layout.types.control_panel=控制板
 layout.types.embedded=埋置
 layout.types.link_to_layout=頁的鏈接
 layout.types.panel=盤區

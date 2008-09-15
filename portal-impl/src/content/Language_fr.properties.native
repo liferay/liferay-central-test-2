@@ -1781,6 +1781,7 @@ layout-template-plugins=Plugins de disposition
 layout-template=Modèle de disposition
 layout-templates=Modèles de disposition
 layout.types.article=Article
+layout.types.control_panel=Panneau de commande
 layout.types.embedded=Incorporé
 layout.types.link_to_layout=Lien vers une page
 layout.types.panel=Panneau

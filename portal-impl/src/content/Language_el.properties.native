@@ -1781,6 +1781,7 @@ layout-template-plugins=Πρότυπο Plugins σχεδιαγράμματος
 layout-template=Πρότυπο σχεδιαγράμματος
 layout-templates=Πρότυπα σχεδιαγράμματος
 layout.types.article=Αρθρο
+layout.types.control_panel=Επιτροπή ελέγχου
 layout.types.embedded=Ενσωματωμένος
 layout.types.link_to_layout=Σύνδεση με τη σελίδα
 layout.types.panel=Επιτροπή
