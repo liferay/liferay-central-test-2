@@ -1,3 +1,4 @@
+
 <%
 /**
  * Copyright (c) 2000-2008 Liferay, Inc. All rights reserved.
@@ -22,17 +23,27 @@
  */
 %>
 
-<%@ include file="/html/portlet/init.jsp" %>
+<%@ include file="/html/portlet/login/init.jsp" %>
 
-<%@ page import="com.liferay.portal.CookieNotSupportedException" %>
-<%@ page import="com.liferay.portal.NoSuchResourceException" %>
-<%@ page import="com.liferay.portal.NoSuchUserException" %>
-<%@ page import="com.liferay.portal.PasswordExpiredException" %>
-<%@ page import="com.liferay.portal.SendPasswordException" %>
-<%@ page import="com.liferay.portal.UserActiveException" %>
-<%@ page import="com.liferay.portal.UserEmailAddressException" %>
-<%@ page import="com.liferay.portal.UserLockoutException" %>
-<%@ page import="com.liferay.portal.UserPasswordException" %>
-<%@ page import="com.liferay.portal.UserScreenNameException" %>
-<%@ page import="com.liferay.portal.action.LoginAction" %>
-<%@ page import="com.liferay.portal.security.auth.AuthException" %>
+<liferay-ui:tabs names="forgot-password" refresh="<%= false %>">
+	<liferay-ui:section>
+		<portlet:actionURL var="captchaActionURL" windowState="<%= LiferayWindowState.EXCLUSIVE.toString() %>">
+			<portlet:param name="struts_action" value="/login/captcha" />
+		</portlet:actionURL>
+
+		<portlet:actionURL var="forgotPasswordActionURL" windowState="<%= WindowState.NORMAL.toString() %>">
+			<portlet:param name="struts_action" value="/login/view" />
+		</portlet:actionURL>
+
+		<%
+		String forgotPasswordURL =forgotPasswordActionURL.toString();
+		String captchaURL = captchaActionURL.toString();
+		%>
+		<%@ include file="/html/portal/login_forgot_password.jspf" %>
+
+	</liferay-ui:section>
+</liferay-ui:tabs>
+
+<script type="text/javascript">
+	Liferay.Util.focusFormField(document.fm3.emailAddress);
+</script>
