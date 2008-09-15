@@ -876,10 +876,6 @@ public class PortletURLImpl
 				}
 			}
 
-			if (isBlankValue(values)) {
-				continue;
-			}
-
 			for (int i = 0; i < values.length; i++) {
 				if (isParameterIncludedInPath(name)) {
 					continue;
