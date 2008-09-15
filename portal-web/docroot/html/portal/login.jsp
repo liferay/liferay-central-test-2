@@ -44,9 +44,6 @@ if (tabs1Names.equals("already-registered")) {
 String redirect = ParamUtil.getString(request, "redirect");
 
 PortletURL createAccountURL = themeDisplay.getURLCreateAccount();
-
-String forgotPasswordURL = themeDisplay.getPathMain().toString() + "/portal/login";
-String captchaURL = themeDisplay.getPathMain().toString() + "/portal/login_captcha";
 %>
 
 <c:if test="<%= SessionErrors.contains(request, PrincipalException.class.getName()) %>">

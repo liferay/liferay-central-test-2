@@ -1042,7 +1042,6 @@
 			<forward name="portlet.login.view" path="portlet.login.view" />
 		</action>
 
-		<action path="/login/captcha" type="com.liferay.portal.captcha.CaptchaPortletAction" />
 		<!-- Maps -->
 
 		<action path="/maps/view" forward="portlet.maps.view" name="mapsMapsForm" scope="request" />

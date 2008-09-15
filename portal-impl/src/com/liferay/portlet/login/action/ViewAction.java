@@ -22,19 +22,20 @@
 
 package com.liferay.portlet.login.action;
 
-import com.liferay.portal.*;
+import com.liferay.portal.CookieNotSupportedException;
+import com.liferay.portal.NoSuchUserException;
+import com.liferay.portal.PasswordExpiredException;
+import com.liferay.portal.UserEmailAddressException;
+import com.liferay.portal.UserIdException;
+import com.liferay.portal.UserLockoutException;
+import com.liferay.portal.UserPasswordException;
+import com.liferay.portal.UserScreenNameException;
 import com.liferay.portal.action.LoginAction;
-import com.liferay.portal.captcha.CaptchaTextException;
-import com.liferay.portal.captcha.CaptchaUtil;
-import com.liferay.portal.kernel.servlet.HttpHeaders;
 import com.liferay.portal.kernel.servlet.SessionErrors;
-import com.liferay.portal.kernel.servlet.SessionMessages;
 import com.liferay.portal.kernel.util.Constants;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.Validator;
-import com.liferay.portal.model.Company;
 import com.liferay.portal.security.auth.AuthException;
-import com.liferay.portal.service.UserLocalServiceUtil;
 import com.liferay.portal.struts.PortletAction;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.PortalUtil;
@@ -69,68 +70,44 @@ public class ViewAction extends PortletAction {
 
 		String cmd = actionRequest.getParameter(Constants.CMD);
 
-		if (cmd.equals("forgot-password")) {
+		ThemeDisplay themeDisplay = (ThemeDisplay)actionRequest.getAttribute(
+			WebKeys.THEME_DISPLAY);
 
+		if (actionRequest.getRemoteUser() != null) {
+			actionResponse.sendRedirect(themeDisplay.getPathMain());
+		}
+		else if (Validator.isNotNull(cmd)) {
 			try {
-				sendPassword(actionRequest);
-
-				actionResponse.setRenderParameter(
-					Constants.CMD, "already-registered");
+				login(themeDisplay, actionRequest, actionResponse);
 			}
 			catch (Exception e) {
-				if (e instanceof CaptchaTextException ||
-					e instanceof NoSuchUserException ||
-					e instanceof SendPasswordException ||
-					e instanceof UserEmailAddressException) {
+				if (e instanceof AuthException) {
+					Throwable cause = e.getCause();
+
+					if (cause instanceof PasswordExpiredException ||
+						cause instanceof UserLockoutException) {
+
+						SessionErrors.add(
+							actionRequest, cause.getClass().getName());
+					}
+					else {
+						SessionErrors.add(
+							actionRequest, e.getClass().getName());
+					}
+				}
+				else if (e instanceof CookieNotSupportedException ||
+						 e instanceof NoSuchUserException ||
+						 e instanceof PasswordExpiredException ||
+						 e instanceof UserEmailAddressException ||
+						 e instanceof UserIdException ||
+						 e instanceof UserLockoutException ||
+						 e instanceof UserPasswordException ||
+						 e instanceof UserScreenNameException) {
 
 					SessionErrors.add(actionRequest, e.getClass().getName());
 				}
 				else {
 					PortalUtil.sendError(e, actionRequest, actionResponse);
-				}
-			}
-		}
-		else {
-			ThemeDisplay themeDisplay =
-				(ThemeDisplay)actionRequest.getAttribute(WebKeys.THEME_DISPLAY);
-
-			if (actionRequest.getRemoteUser() != null) {
-				actionResponse.sendRedirect(themeDisplay.getPathMain());
-			}
-			else if (Validator.isNotNull(cmd)) {
-				try {
-					login(themeDisplay, actionRequest, actionResponse);
-				}
-				catch (Exception e) {
-					if (e instanceof AuthException) {
-						Throwable cause = e.getCause();
-
-						if (cause instanceof PasswordExpiredException ||
-							cause instanceof UserLockoutException) {
-
-							SessionErrors.add(
-								actionRequest, cause.getClass().getName());
-						}
-						else {
-							SessionErrors.add(
-								actionRequest, e.getClass().getName());
-						}
-					}
-					else if (e instanceof CookieNotSupportedException ||
-						e instanceof NoSuchUserException ||
-						e instanceof PasswordExpiredException ||
-						e instanceof UserEmailAddressException ||
-						e instanceof UserIdException ||
-						e instanceof UserLockoutException ||
-						e instanceof UserPasswordException ||
-						e instanceof UserScreenNameException) {
-
-						SessionErrors.add(
-							actionRequest, e.getClass().getName());
-					}
-					else {
-						PortalUtil.sendError(e, actionRequest, actionResponse);
-					}
 				}
 			}
 		}
@@ -174,37 +151,6 @@ public class ViewAction extends PortletAction {
 				actionResponse.sendRedirect(themeDisplay.getPathMain());
 			}
 		}
-	}
-
-	protected void sendPassword(ActionRequest actionRequest) throws Exception {
-		ThemeDisplay themeDisplay = (ThemeDisplay) actionRequest.getAttribute(
-			WebKeys.THEME_DISPLAY);
-
-		Company company = themeDisplay.getCompany();
-
-		if (!company.isSendPassword()) {
-			return;
-		}
-
-		if (PropsValues.CAPTCHA_CHECK_PORTAL_SEND_PASSWORD) {
-			CaptchaUtil.check(actionRequest);
-		}
-
-		String emailAddress = ParamUtil.getString(
-			actionRequest, "emailAddress");
-
-		HttpServletRequest httpReq = PortalUtil.getHttpServletRequest(
-			actionRequest);
-
-		String remoteAddr = httpReq.getRemoteAddr();
-		String remoteHost = httpReq.getRemoteHost();
-		String userAgent = httpReq.getHeader(HttpHeaders.USER_AGENT);
-
-		UserLocalServiceUtil.sendPassword(
-			PortalUtil.getCompanyId(actionRequest), emailAddress, remoteAddr,
-			remoteHost, userAgent);
-
-		SessionMessages.add(actionRequest, "request_processed", emailAddress);
 	}
 
 }
