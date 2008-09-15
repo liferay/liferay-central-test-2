@@ -22,11 +22,10 @@
 
 package com.liferay.portal.tools.jspc.resin;
 
-import com.liferay.portal.kernel.util.FileUtil;
 import com.liferay.portal.kernel.util.MethodInvoker;
 import com.liferay.portal.kernel.util.MethodWrapper;
 import com.liferay.portal.kernel.util.StackTraceUtil;
-import com.liferay.portal.util.InitUtil;
+import com.liferay.portal.util.FileImpl;
 
 import java.io.File;
 
@@ -45,8 +44,6 @@ import org.apache.tools.ant.DirectoryScanner;
 public class BatchJspCompiler {
 
 	public static void main(String[] args) {
-		InitUtil.initWithSpring();
-
 		if (args.length == 2) {
 			new BatchJspCompiler(args[0], args[1]);
 		}
@@ -113,10 +110,12 @@ public class BatchJspCompiler {
 			MethodInvoker.invoke(methodWrapper);
 		}
 		catch (Exception e) {
-			FileUtil.write(
+			_fileUtil.write(
 				_appDir + "/../jspc_error", StackTraceUtil.getStackTrace(e));
 		}
 	}
+
+	private static FileImpl _fileUtil = new FileImpl();
 
 	private String _appDir;
 	private String _classDir;
