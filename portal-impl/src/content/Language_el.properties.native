@@ -167,6 +167,7 @@ model.resource.com.liferay.portlet.journal.model.JournalArticle=Αρθρο σε 
 model.resource.com.liferay.portlet.journal.model.JournalFeed=Τροφή περιοδικών
 model.resource.com.liferay.portlet.journal.model.JournalStructure=Δομή περιοδικών
 model.resource.com.liferay.portlet.journal.model.JournalTemplate=Πρότυπο περιοδικών
+model.resource.com.liferay.portlet.journal=Περιοδικό
 model.resource.com.liferay.portlet.messageboards.model.MBCategory=Κατηγορία πινάκων μηνυμάτων
 model.resource.com.liferay.portlet.messageboards.model.MBMessage=Μήνυμα πινάκων μηνυμάτων
 model.resource.com.liferay.portlet.messageboards.model.MBTopic=Θέμα πινάκων μηνυμάτων

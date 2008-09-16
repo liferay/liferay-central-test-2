@@ -167,6 +167,7 @@ model.resource.com.liferay.portlet.journal.model.JournalArticle=Journaal artikel
 model.resource.com.liferay.portlet.journal.model.JournalFeed=Journaal feed
 model.resource.com.liferay.portlet.journal.model.JournalStructure=Journaal structuur
 model.resource.com.liferay.portlet.journal.model.JournalTemplate=Journaal template
+model.resource.com.liferay.portlet.journal=Dagboek
 model.resource.com.liferay.portlet.messageboards.model.MBCategory=Forum categorie
 model.resource.com.liferay.portlet.messageboards.model.MBMessage=Forum bericht
 model.resource.com.liferay.portlet.messageboards.model.MBTopic=Forum onderwerp

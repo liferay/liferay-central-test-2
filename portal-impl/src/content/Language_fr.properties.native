@@ -167,6 +167,7 @@ model.resource.com.liferay.portlet.journal.model.JournalArticle=Article
 model.resource.com.liferay.portlet.journal.model.JournalFeed=Flux d'articles
 model.resource.com.liferay.portlet.journal.model.JournalStructure=Structure
 model.resource.com.liferay.portlet.journal.model.JournalTemplate=Modèle
+model.resource.com.liferay.portlet.journal=Journal
 model.resource.com.liferay.portlet.messageboards.model.MBCategory=Catégorie
 model.resource.com.liferay.portlet.messageboards.model.MBMessage=Message
 model.resource.com.liferay.portlet.messageboards.model.MBTopic=Sujet

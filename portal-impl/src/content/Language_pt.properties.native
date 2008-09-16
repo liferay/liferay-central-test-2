@@ -167,6 +167,7 @@ model.resource.com.liferay.portlet.journal.model.JournalArticle=Artigo De Jornal
 model.resource.com.liferay.portlet.journal.model.JournalFeed=Alimentação Do Jornal
 model.resource.com.liferay.portlet.journal.model.JournalStructure=Estrutura Do Jornal
 model.resource.com.liferay.portlet.journal.model.JournalTemplate=Molde Do Jornal
+model.resource.com.liferay.portlet.journal=Jornal
 model.resource.com.liferay.portlet.messageboards.model.MBCategory=A Mensagem Boards A Categoria
 model.resource.com.liferay.portlet.messageboards.model.MBMessage=A Mensagem Boards A Mensagem
 model.resource.com.liferay.portlet.messageboards.model.MBTopic=A Mensagem Boards O Tópico

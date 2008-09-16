@@ -167,6 +167,7 @@ model.resource.com.liferay.portlet.journal.model.JournalArticle=신문 기사
 model.resource.com.liferay.portlet.journal.model.JournalFeed=전표 급식
 model.resource.com.liferay.portlet.journal.model.JournalStructure=전표 구조
 model.resource.com.liferay.portlet.journal.model.JournalTemplate=전표 템플렛
+model.resource.com.liferay.portlet.journal=전표
 model.resource.com.liferay.portlet.messageboards.model.MBCategory=전보국 종류
 model.resource.com.liferay.portlet.messageboards.model.MBMessage=전보국 메시지
 model.resource.com.liferay.portlet.messageboards.model.MBTopic=전보국 화제

@@ -167,6 +167,7 @@ model.resource.com.liferay.portlet.journal.model.JournalArticle=ジャーナル�
 model.resource.com.liferay.portlet.journal.model.JournalFeed=ジャーナル供給
 model.resource.com.liferay.portlet.journal.model.JournalStructure=ジャーナル構造
 model.resource.com.liferay.portlet.journal.model.JournalTemplate=ジャーナル型板
+model.resource.com.liferay.portlet.journal=ジャーナル
 model.resource.com.liferay.portlet.messageboards.model.MBCategory=伝言板の部門
 model.resource.com.liferay.portlet.messageboards.model.MBMessage=伝言板メッセージ
 model.resource.com.liferay.portlet.messageboards.model.MBTopic=伝言板のトピック

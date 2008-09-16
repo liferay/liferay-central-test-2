@@ -167,6 +167,7 @@ model.resource.com.liferay.portlet.journal.model.JournalArticle=期刊文章
 model.resource.com.liferay.portlet.journal.model.JournalFeed=學報飼料
 model.resource.com.liferay.portlet.journal.model.JournalStructure=學報結構
 model.resource.com.liferay.portlet.journal.model.JournalTemplate=學報模板
+model.resource.com.liferay.portlet.journal=學報
 model.resource.com.liferay.portlet.messageboards.model.MBCategory=留言簿類別
 model.resource.com.liferay.portlet.messageboards.model.MBMessage=留言簿消息
 model.resource.com.liferay.portlet.messageboards.model.MBTopic=留言簿題目
