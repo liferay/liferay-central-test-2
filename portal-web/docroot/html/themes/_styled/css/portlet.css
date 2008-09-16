@@ -53,8 +53,7 @@ body.portlet {
 /* ---------- Panel Page ---------- */
 
 .lfr-panel {
-	margin: 0 auto;
-	width: 90%;
+	width: 100%;
 }
 
 .lfr-panel .portlet-title {
@@ -68,6 +67,42 @@ body.portlet {
 
 .lfr-panel .lfr-add-content h2 span {
 	background-color: #D3DADD;
+}
+
+/* ---------- Control Panel Page ---------- */
+
+.lfr-ctrl-panel {
+	width: 100%;
+}
+
+.lfr-ctrl-panel .portlet {
+	border: none;
+}
+
+.lfr-ctrl-panel .portlet-topper {
+	background-color: #BCC7CA;
+	border-bottom: none;
+	margin: 0 10px;
+}
+
+.lfr-ctrl-panel .portlet-title img {
+	display: none;
+}
+
+.lfr-ctrl-panel .portlet-icons {
+	display: none;
+}
+
+.lfr-ctrl-panel .portlet-title {
+	font-size: 18px;
+	font-weight: 500;
+	line-height: 34px;
+	padding: 0 10px;
+}
+
+.lfr-ctrl-panel #content-wrapper {
+	margin: 0;
+	width: auto;
 }
 
 /* ---------- Standard styles defined in the JSR 168 ---------- */

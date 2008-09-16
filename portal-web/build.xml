@@ -540,6 +540,11 @@
 					excludes="**/classic/_diffs/css/custom.css"
 					includes="**/_diffs/css/*.css"
 				/>
+				<fileset
+					dir="docroot/html/themes"
+					excludes="**/admin/_diffs/css/custom.css"
+					includes="**/_diffs/css/*.css"
+				/>
 			</path>
 			<sequential>
 				<antcall target="build-css-cmd">

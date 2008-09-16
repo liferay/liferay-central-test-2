@@ -1,0 +1,53 @@
+/* This file allows you to override default styles in one central location for easier upgrade and maintenance. */
+
+/* ---------- Base styles ---------- */
+
+body {
+	font-size: 11px;
+}
+
+/* ---------- Main content body ---------- */
+
+#wrapper {
+	background: none;
+}
+
+#content-wrapper {
+	margin: 20px auto;
+	width: 976px;
+}
+
+
+/* ---------- Control Panel Page ---------- */
+
+.lfr-ctrl-panel #panel-manage-portal {
+	background: url(../images/panel/category_portal_bg.png) repeat-x 0 0;
+}
+
+.lfr-ctrl-panel #panel-manage-portal a.selected-portlet {
+	background-color: #9BAA95;
+}
+
+.lfr-ctrl-panel.panel-manage-portal .panel-menu {
+	background-color: #DCE3DB;
+}
+
+.lfr-ctrl-panel.panel-manage-portal .portlet-topper {
+	background-color: #9BAA95;
+}
+
+.lfr-ctrl-panel #panel-manage-server {
+	background: url(../images/panel/category_server_bg.png) repeat-x 0 0;
+}
+
+.lfr-ctrl-panel #panel-manage-server a.selected-portlet {
+	background-color: #CABCC9;
+}
+
+.lfr-ctrl-panel.panel-manage-server .panel-menu {
+	background-color: #E3DBE3;
+}
+
+.lfr-ctrl-panel.panel-manage-server .portlet-topper {
+	background-color: #CABCC9;
+}

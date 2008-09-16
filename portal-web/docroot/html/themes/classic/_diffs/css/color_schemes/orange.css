@@ -263,6 +263,7 @@
 .orange .portlet-section-selected a:hover, .orange .portlet-section-selected a:focus {
 	background-color: #817671;
 }
+
 /* ---------- Calendar portlet ---------- */
 
 .orange .portlet-calendar .calendar-day .day-text {
