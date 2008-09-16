@@ -23,6 +23,8 @@
 package com.liferay.portal.tools;
 
 import com.liferay.portal.kernel.util.FileUtil;
+import com.liferay.portal.kernel.util.StringPool;
+import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.util.InitUtil;
 
 import java.io.File;
@@ -60,7 +62,7 @@ public class CSSBuilder {
 
 			String content = FileUtil.read(mainCssFile);
 
-			content = replaceImports(cssDir, content);
+			content = replaceImports(cssDir, content, 0);
 
 			FileUtil.write(mergedFile, content);
 		}
@@ -69,7 +71,9 @@ public class CSSBuilder {
 		}
 	}
 
-	public String replaceImports(String cssDir, String s) throws Exception {
+	public String replaceImports(String cssDir, String s, int level)
+		throws Exception {
+
 		StringBuilder sb = new StringBuilder(s.length());
 
 		int pos = 0;
@@ -98,7 +102,31 @@ public class CSSBuilder {
 				}
 
 				importContent = replaceImports(
-					cssDir + importFilePath, importContent);
+					cssDir + importFilePath, importContent, level + 1);
+
+				// LEP-7540
+
+				String relativePath = StringPool.BLANK;
+
+				for (int i = 0; i < level; i++) {
+					relativePath += "../";
+				}
+
+				importContent = StringUtil.replace(
+					importContent,
+					new String[] {
+						"url('" + relativePath,
+						"url(\"" + relativePath,
+						"url(" + relativePath
+					},
+					new String[] {
+						"url('[$TEMP_RELATIVE_PATH$]",
+						"url(\"[$TEMP_RELATIVE_PATH$]",
+						"url([$TEMP_RELATIVE_PATH$]"
+					});
+
+				importContent = StringUtil.replace(
+					importContent, "[$TEMP_RELATIVE_PATH$]", StringPool.BLANK);
 
 				sb.append(importContent);
 
