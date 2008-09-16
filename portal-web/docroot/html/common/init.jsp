@@ -146,7 +146,6 @@
 <%@ page import="com.liferay.portal.util.ContentUtil" %>
 <%@ page import="com.liferay.portal.util.CookieKeys" %>
 <%@ page import="com.liferay.portal.util.PortalUtil" %>
-<%@ page import="com.liferay.portal.util.PortletCategoryKeys" %>
 <%@ page import="com.liferay.portal.util.PortletKeys" %>
 <%@ page import="com.liferay.portal.util.PrefsPropsUtil" %>
 <%@ page import="com.liferay.portal.util.PropsKeys" %>

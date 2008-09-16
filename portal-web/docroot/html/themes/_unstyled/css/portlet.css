@@ -46,53 +46,6 @@ body.portlet {
 .lfr-panel .lfr-add-content h2 span {
 }
 
-/* ---------- Control Panel Page ---------- */
-
-.lfr-ctrl-panel {
-}
-
-.lfr-ctrl-panel .portlet {
-}
-
-.lfr-ctrl-panel .portlet-topper {
-}
-
-.lfr-ctrl-panel .portlet-title img {
-}
-
-.lfr-ctrl-panel .portlet-icons {
-}
-
-.lfr-ctrl-panel .portlet-title {
-}
-
-.lfr-ctrl-panel #content-wrapper {
-}
-
-.lfr-ctrl-panel #panel-manage-portal {
-}
-
-.lfr-ctrl-panel #panel-manage-portal a.selected-portlet {
-}
-
-.lfr-ctrl-panel.panel-manage-portal .panel-menu {
-}
-
-.lfr-ctrl-panel.panel-manage-portal .portlet-topper {
-}
-
-.lfr-ctrl-panel #panel-manage-server {
-}
-
-.lfr-ctrl-panel #panel-manage-server a.selected-portlet {
-}
-
-.lfr-ctrl-panel.panel-manage-server .panel-menu {
-}
-
-.lfr-ctrl-panel.panel-manage-server .portlet-topper {
-}
-
 /* ---------- Standard styles defined in the JSR 168 ---------- */
 
 /* ---------- Fonts ---------- */

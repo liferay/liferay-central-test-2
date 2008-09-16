@@ -3,10 +3,6 @@
 
 <display>
 	<category name="category.admin">
-		<category name="category.content">
-			<portlet id="15" />
-			<portlet id="99" />
-		</category>
 		<category name="category.portal">
 			<portlet id="79" />
 			<portlet id="98" />

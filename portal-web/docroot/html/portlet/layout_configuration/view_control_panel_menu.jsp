@@ -24,37 +24,20 @@
 
 <%@ include file="/html/portlet/layout_configuration/init.jsp" %>
 
-<div class="user-greeting">
-	<%= LanguageUtil.get(pageContext, "welcome") %> <a href="<%= user.getDisplayURL(themeDisplay) %>"><b><%= user.getFirstName() %> <%= user.getLastName() %></b></a>!
-</div>
-
 <div class="portal-add-content">
 
 	<%
 	String ppid = layoutTypePortlet.getStateMaxPortletId();
 
 	for (String category : _PORTLET_CATEGORIES) {
-		String panelCategory = StringPool.BLANK;
-
-		if (category.equals(PortletCategoryKeys.CONTENT)) {
-			panelCategory = "panel-manage-content";
-		}
-		else if (category.equals(PortletCategoryKeys.PORTAL)) {
-			panelCategory = "panel-manage-portal";
-		}
-		else if (category.equals(PortletCategoryKeys.SERVER)) {
-			panelCategory = "panel-manage-server";
-		}
-
-		boolean isSelectedCategory = category.equals(PortalUtil.getControlPanelCategory(ppid));
 	%>
 
-		<div class="lfr-add-content" id="<%= panelCategory %>">
-			<h2 class="<%= isSelectedCategory ? "selected" : "" %>">
+		<div class="lfr-add-content" id="<%= category %>">
+			<h2 <%= (category.equals(PortalUtil.getControlPanelCategory(ppid))) ? "class=\"selected\"" : "" %>>
 				<span><liferay-ui:message key="<%= category %>" /></span>
 			</h2>
 
-			<div class="lfr-content-category <%= isSelectedCategory ? "selected" : "" %>">
+			<div class="lfr-content-category">
 
 				<%
 				List<Portlet> portlets = PortalUtil.getControlPanelPortlets(category);
@@ -66,7 +49,7 @@
 				%>
 
 					<div>
-						<a class='<%= (ppid.equals(portlet.getPortletId())) ? "selected-portlet" : "" %>' href="<liferay-portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" portletName="<%= portlet.getRootPortletId() %>" />&panel_category=<%= panelCategory %>"><%= PortalUtil.getPortletTitle(portlet, application, locale) %></a>
+						<a <%= (ppid.equals(portlet.getPortletId())) ? "class=\"selected\"" : "" %> href="<liferay-portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" portletName="<%= portlet.getRootPortletId() %>" />"><%= PortalUtil.getPortletTitle(portlet, application, locale) %></a>
 					</div>
 
 				<%
@@ -81,5 +64,5 @@
 </div>
 
 <%!
-private static final String[] _PORTLET_CATEGORIES = new String[] {PortletCategoryKeys.CONTENT, PortletCategoryKeys.PORTAL, PortletCategoryKeys.SERVER};
+private static final String[] _PORTLET_CATEGORIES = new String[] {"content", "portal", "server"};
 %>

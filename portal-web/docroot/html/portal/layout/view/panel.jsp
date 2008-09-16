@@ -21,17 +21,15 @@
  * SOFTWARE.
  */
 %>
-
 <%@ include file="/html/portal/init.jsp" %>
 
 <c:if test="<%= !themeDisplay.isStateExclusive() && !themeDisplay.isStatePopUp() %>">
-	<div id="content-wrapper">
-		<table class="lfr-panel">
-		<tr>
-			<td class="panel-menu" valign="top" width="200">
-				<liferay-portlet:runtime portletName="87" />
-			</td>
-			<td class="panel-content <%= (!layoutTypePortlet.hasStateMax()) ? "panel-frontpage" : "panel-application" %>" valign="top">
+	<table class="lfr-panel <%= (!layoutTypePortlet.hasStateMax()) ? "panel-frontpage" : "panel-application" %>" width="100%">
+	<tr>
+		<td class="panel-menu" valign="top" width="200">
+			<liferay-portlet:runtime portletName="87" />
+		</td>
+		<td class="panel-content" valign="top">
 </c:if>
 
 <%
@@ -78,8 +76,7 @@ else {
 %>
 
 <c:if test="<%= !themeDisplay.isStateExclusive() && !themeDisplay.isStatePopUp() %>">
-			</td>
-		</tr>
-		</table>
-	</div>
+		</td>
+	</tr>
+	</table>
 </c:if>

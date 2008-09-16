@@ -3,10 +3,6 @@
 
 <display>
 	<category name="category.admin">
-		<category name="category.content">
-			<portlet id="15" />
-			<portlet id="99" />
-		</category>
 		<category name="category.portal">
 			<portlet id="79" />
 			<portlet id="98" />
@@ -16,7 +12,6 @@
 			<portlet id="127" />
 			<portlet id="128" />
 			<portlet id="129" />
-			<portlet id="134" />
 		</category>
 		<category name="category.server">
 			<portlet id="9" />
