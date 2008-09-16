@@ -63,7 +63,7 @@ NumberFormat numberFormat = NumberFormat.getNumberInstance(locale);
 
 <c:if test='<%= type.equals("regular")  && !themeDisplay.isFacebook() %>'>
 	<script type="text/javascript">
-		function <%= namespace %>submitPageIterator() {
+		function <%= namespace %>submitPageIterator<%= curParam %>() {
 			var curValue = jQuery("option:selected", this).val();
 
 			if (<%= Validator.isNotNull(url) %>) {
@@ -80,7 +80,7 @@ NumberFormat numberFormat = NumberFormat.getNumberInstance(locale);
 
 		jQuery(
 			function() {
-				jQuery('.<%= namespace %>pageIteratorValue').change(<%= namespace %>submitPageIterator);
+				jQuery('.<%= namespace %>pageIteratorValue<%= curParam %>').change(<%= namespace %>submitPageIterator<%= curParam %>);
 			}
 		);
 	</script>
@@ -172,7 +172,7 @@ NumberFormat numberFormat = NumberFormat.getNumberInstance(locale);
 						<%= curValue %>
 					</c:when>
 					<c:otherwise>
-						<select class="pages <%= namespace %>pageIteratorValue">
+						<select class="pages <%= namespace %>pageIteratorValue<%= curParam %>">
 
 							<%
 							int pagesIteratorMax = maxPages;
