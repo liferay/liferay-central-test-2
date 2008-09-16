@@ -31,7 +31,7 @@
 <%
 String editorImpl = ParamUtil.getString(request, "editorImpl", PropsValues.EDITOR_WYSIWYG_DEFAULT);
 
-if (!BrowserSnifferUtil.isRTF(request)) {
+if (!BrowserSnifferUtil.isRtf(request)) {
 	if (BrowserSnifferUtil.isSafari(request) && BrowserSnifferUtil.isMobile(request)) {
 		editorImpl = "simple";
 	}
