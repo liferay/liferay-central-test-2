@@ -73,7 +73,6 @@ public class ViewAction extends PortletAction {
 		String cmd = actionRequest.getParameter(Constants.CMD);
 
 		if (cmd.equals("forgot-password")) {
-
 			try {
 				sendPassword(actionRequest);
 
@@ -120,15 +119,16 @@ public class ViewAction extends PortletAction {
 						}
 					}
 					else if (e instanceof CookieNotSupportedException ||
-						e instanceof NoSuchUserException ||
-						e instanceof PasswordExpiredException ||
-						e instanceof UserEmailAddressException ||
-						e instanceof UserIdException ||
-						e instanceof UserLockoutException ||
-						e instanceof UserPasswordException ||
-						e instanceof UserScreenNameException) {
+							 e instanceof NoSuchUserException ||
+							 e instanceof PasswordExpiredException ||
+							 e instanceof UserEmailAddressException ||
+							 e instanceof UserIdException ||
+							 e instanceof UserLockoutException ||
+							 e instanceof UserPasswordException ||
+							 e instanceof UserScreenNameException) {
 
-					SessionErrors.add(actionRequest, e.getClass().getName());
+						SessionErrors.add(
+							actionRequest, e.getClass().getName());
 					}
 					else {
 						PortalUtil.sendError(e, actionRequest, actionResponse);

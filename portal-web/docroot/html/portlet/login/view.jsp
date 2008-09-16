@@ -30,6 +30,7 @@ String cmd = ParamUtil.getString(renderRequest, Constants.CMD);
 
 <c:choose>
 	<c:when test="<%= themeDisplay.isSignedIn() %>">
+
 		<%
 		String signedInAs = user.getFullName();
 
@@ -37,6 +38,7 @@ String cmd = ParamUtil.getString(renderRequest, Constants.CMD);
 			signedInAs = "<a href=\"" + themeDisplay.getURLMyAccount().toString() + "\">" + signedInAs + "</a>";
 		}
 		%>
+
 		<%= LanguageUtil.format(pageContext, "you-are-signed-in-as-x", signedInAs) %>
 	</c:when>
 	<c:otherwise>
