@@ -80,8 +80,6 @@ request.setAttribute("view.jsp-portletURLString", portletURLString);
 		var deleteUserIds = Liferay.Util.listCheckedExcept(document.<portlet:namespace />fm, "<portlet:namespace />allRowIds");
 
 		if (!deleteUserIds) {
-			alert('<%= UnicodeLanguageUtil.get(pageContext, "no-users-were-selected") %>');
-
 			deleteUsers = false;
 		}
 		else if (cmd == "<%= Constants.DEACTIVATE %>") {
