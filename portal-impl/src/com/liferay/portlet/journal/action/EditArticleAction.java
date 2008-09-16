@@ -204,8 +204,6 @@ public class EditArticleAction extends PortletAction {
 	protected void approveArticle(ActionRequest actionRequest)
 		throws Exception {
 
-		Layout layout = (Layout)actionRequest.getAttribute(WebKeys.LAYOUT);
-
 		long groupId = ParamUtil.getLong(actionRequest, "groupId");
 		String articleId = ParamUtil.getString(actionRequest, "articleId");
 		double version = ParamUtil.getDouble(actionRequest, "version");
@@ -213,7 +211,7 @@ public class EditArticleAction extends PortletAction {
 		String articleURL = ParamUtil.getString(actionRequest, "articleURL");
 
 		JournalArticleServiceUtil.approveArticle(
-			groupId, articleId, version, layout.getPlid(), articleURL,
+			groupId, articleId, version, articleURL,
 			actionRequest.getPreferences());
 	}
 
@@ -469,7 +467,7 @@ public class EditArticleAction extends PortletAction {
 			// Add article
 
 			article = JournalArticleServiceUtil.addArticle(
-				articleId, autoArticleId, layout.getPlid(), title, description,
+				articleId, autoArticleId, groupId, title, description,
 				content, type, structureId, templateId, displayDateMonth,
 				displayDateDay, displayDateYear, displayDateHour,
 				displayDateMinute, expirationDateMonth, expirationDateDay,
@@ -530,7 +528,7 @@ public class EditArticleAction extends PortletAction {
 		if (approve) {
 			article = JournalArticleServiceUtil.approveArticle(
 				article.getGroupId(), article.getArticleId(),
-				article.getVersion(), layout.getPlid(), articleURL,
+				article.getVersion(), articleURL,
 				actionRequest.getPreferences());
 		}
 

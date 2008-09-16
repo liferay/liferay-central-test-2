@@ -93,6 +93,7 @@
 <%@ page import="com.liferay.portlet.journal.service.JournalTemplateLocalServiceUtil" %>
 <%@ page import="com.liferay.portlet.journal.service.permission.JournalArticlePermission" %>
 <%@ page import="com.liferay.portlet.journal.service.permission.JournalFeedPermission" %>
+<%@ page import="com.liferay.portlet.journal.service.permission.JournalPermission" %>
 <%@ page import="com.liferay.portlet.journal.service.permission.JournalStructurePermission" %>
 <%@ page import="com.liferay.portlet.journal.service.permission.JournalTemplatePermission" %>
 <%@ page import="com.liferay.portlet.journal.util.JournalUtil" %>

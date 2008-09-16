@@ -73,7 +73,7 @@ import com.liferay.portlet.journal.service.JournalFeedServiceUtil;
  *
  */
 public class JournalFeedServiceJSON {
-	public static JSONObject addFeed(long plid, java.lang.String feedId,
+	public static JSONObject addFeed(long groupId, java.lang.String feedId,
 		boolean autoFeedId, java.lang.String name,
 		java.lang.String description, java.lang.String type,
 		java.lang.String structureId, java.lang.String templateId,
@@ -85,7 +85,7 @@ public class JournalFeedServiceJSON {
 		boolean addCommunityPermissions, boolean addGuestPermissions)
 		throws java.rmi.RemoteException, com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		com.liferay.portlet.journal.model.JournalFeed returnValue = JournalFeedServiceUtil.addFeed(plid,
+		com.liferay.portlet.journal.model.JournalFeed returnValue = JournalFeedServiceUtil.addFeed(groupId,
 				feedId, autoFeedId, name, description, type, structureId,
 				templateId, rendererTemplateId, delta, orderByCol, orderByType,
 				targetLayoutFriendlyUrl, targetPortletId, contentField,
@@ -95,7 +95,7 @@ public class JournalFeedServiceJSON {
 		return JournalFeedJSONSerializer.toJSONObject(returnValue);
 	}
 
-	public static JSONObject addFeed(long plid, java.lang.String feedId,
+	public static JSONObject addFeed(long groupId, java.lang.String feedId,
 		boolean autoFeedId, java.lang.String name,
 		java.lang.String description, java.lang.String type,
 		java.lang.String structureId, java.lang.String templateId,
@@ -108,7 +108,7 @@ public class JournalFeedServiceJSON {
 		java.lang.String[] guestPermissions)
 		throws java.rmi.RemoteException, com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		com.liferay.portlet.journal.model.JournalFeed returnValue = JournalFeedServiceUtil.addFeed(plid,
+		com.liferay.portlet.journal.model.JournalFeed returnValue = JournalFeedServiceUtil.addFeed(groupId,
 				feedId, autoFeedId, name, description, type, structureId,
 				templateId, rendererTemplateId, delta, orderByCol, orderByType,
 				targetLayoutFriendlyUrl, targetPortletId, contentField,

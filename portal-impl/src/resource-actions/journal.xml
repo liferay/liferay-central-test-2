@@ -4,11 +4,6 @@
 	<portlet-resource>
 		<portlet-name>15</portlet-name>
 		<supports>
-			<action-key>ADD_ARTICLE</action-key>
-			<action-key>ADD_FEED</action-key>
-			<action-key>ADD_STRUCTURE</action-key>
-			<action-key>ADD_TEMPLATE</action-key>
-			<action-key>APPROVE_ARTICLE</action-key>
 			<action-key>CONFIGURATION</action-key>
 			<action-key>VIEW</action-key>
 		</supports>
@@ -18,13 +13,7 @@
 		<guest-defaults>
 			<action-key>VIEW</action-key>
 		</guest-defaults>
-		<guest-unsupported>
-			<action-key>ADD_ARTICLE</action-key>
-			<action-key>ADD_FEED</action-key>
-			<action-key>ADD_STRUCTURE</action-key>
-			<action-key>ADD_TEMPLATE</action-key>
-			<action-key>APPROVE_ARTICLE</action-key>
-		</guest-unsupported>
+		<guest-unsupported/>
 	</portlet-resource>
 	<portlet-resource>
 		<portlet-name>56</portlet-name>
@@ -40,6 +29,28 @@
 		</guest-defaults>
 		<guest-unsupported />
 	</portlet-resource>
+	<model-resource>
+		<model-name>com.liferay.portlet.journal</model-name>
+		<portlet-ref>
+			<portlet-name>15</portlet-name>
+		</portlet-ref>
+		<supports>
+			<action-key>ADD_ARTICLE</action-key>
+			<action-key>ADD_FEED</action-key>
+			<action-key>ADD_STRUCTURE</action-key>
+			<action-key>ADD_TEMPLATE</action-key>
+			<action-key>APPROVE_ARTICLE</action-key>
+		</supports>
+		<community-defaults/>
+		<guest-defaults/>
+		<guest-unsupported>
+			<action-key>ADD_ARTICLE</action-key>
+			<action-key>ADD_FEED</action-key>
+			<action-key>ADD_STRUCTURE</action-key>
+			<action-key>ADD_TEMPLATE</action-key>
+			<action-key>APPROVE_ARTICLE</action-key>
+		</guest-unsupported>
+	</model-resource>
 	<model-resource>
 		<model-name>com.liferay.portlet.journal.model.JournalArticle</model-name>
 		<portlet-ref>

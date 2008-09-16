@@ -77,7 +77,7 @@ import com.liferay.portlet.journal.service.JournalArticleServiceUtil;
 public class JournalArticleServiceHttp {
 	public static com.liferay.portlet.journal.model.JournalArticle addArticle(
 		HttpPrincipal httpPrincipal, java.lang.String articleId,
-		boolean autoArticleId, long plid, java.lang.String title,
+		boolean autoArticleId, long groupId, java.lang.String title,
 		java.lang.String description, java.lang.String content,
 		java.lang.String type, java.lang.String structureId,
 		java.lang.String templateId, int displayDateMonth, int displayDateDay,
@@ -100,7 +100,7 @@ public class JournalArticleServiceHttp {
 
 			Object paramObj1 = new BooleanWrapper(autoArticleId);
 
-			Object paramObj2 = new LongWrapper(plid);
+			Object paramObj2 = new LongWrapper(groupId);
 
 			Object paramObj3 = title;
 
@@ -231,7 +231,7 @@ public class JournalArticleServiceHttp {
 
 	public static com.liferay.portlet.journal.model.JournalArticle addArticle(
 		HttpPrincipal httpPrincipal, java.lang.String articleId,
-		boolean autoArticleId, long plid, java.lang.String title,
+		boolean autoArticleId, long groupId, java.lang.String title,
 		java.lang.String description, java.lang.String content,
 		java.lang.String type, java.lang.String structureId,
 		java.lang.String templateId, int displayDateMonth, int displayDateDay,
@@ -256,7 +256,7 @@ public class JournalArticleServiceHttp {
 
 			Object paramObj1 = new BooleanWrapper(autoArticleId);
 
-			Object paramObj2 = new LongWrapper(plid);
+			Object paramObj2 = new LongWrapper(groupId);
 
 			Object paramObj3 = title;
 
@@ -414,7 +414,7 @@ public class JournalArticleServiceHttp {
 
 	public static com.liferay.portlet.journal.model.JournalArticle addArticle(
 		HttpPrincipal httpPrincipal, java.lang.String articleId,
-		boolean autoArticleId, long plid, java.lang.String title,
+		boolean autoArticleId, long groupId, java.lang.String title,
 		java.lang.String description, java.lang.String content,
 		java.lang.String type, java.lang.String structureId,
 		java.lang.String templateId, int displayDateMonth, int displayDateDay,
@@ -438,7 +438,7 @@ public class JournalArticleServiceHttp {
 
 			Object paramObj1 = new BooleanWrapper(autoArticleId);
 
-			Object paramObj2 = new LongWrapper(plid);
+			Object paramObj2 = new LongWrapper(groupId);
 
 			Object paramObj3 = title;
 
@@ -577,7 +577,7 @@ public class JournalArticleServiceHttp {
 
 	public static com.liferay.portlet.journal.model.JournalArticle addArticle(
 		HttpPrincipal httpPrincipal, java.lang.String articleId,
-		boolean autoArticleId, long plid, java.lang.String title,
+		boolean autoArticleId, long groupId, java.lang.String title,
 		java.lang.String description, java.lang.String content,
 		java.lang.String type, java.lang.String structureId,
 		java.lang.String templateId, int displayDateMonth, int displayDateDay,
@@ -603,7 +603,7 @@ public class JournalArticleServiceHttp {
 
 			Object paramObj1 = new BooleanWrapper(autoArticleId);
 
-			Object paramObj2 = new LongWrapper(plid);
+			Object paramObj2 = new LongWrapper(groupId);
 
 			Object paramObj3 = title;
 
@@ -769,7 +769,7 @@ public class JournalArticleServiceHttp {
 
 	public static com.liferay.portlet.journal.model.JournalArticle approveArticle(
 		HttpPrincipal httpPrincipal, long groupId, java.lang.String articleId,
-		double version, long plid, java.lang.String articleURL,
+		double version, java.lang.String articleURL,
 		javax.portlet.PortletPreferences prefs)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
@@ -784,25 +784,22 @@ public class JournalArticleServiceHttp {
 
 			Object paramObj2 = new DoubleWrapper(version);
 
-			Object paramObj3 = new LongWrapper(plid);
-
-			Object paramObj4 = articleURL;
+			Object paramObj3 = articleURL;
 
 			if (articleURL == null) {
-				paramObj4 = new NullWrapper("java.lang.String");
+				paramObj3 = new NullWrapper("java.lang.String");
 			}
 
-			Object paramObj5 = prefs;
+			Object paramObj4 = prefs;
 
 			if (prefs == null) {
-				paramObj5 = new NullWrapper("javax.portlet.PortletPreferences");
+				paramObj4 = new NullWrapper("javax.portlet.PortletPreferences");
 			}
 
 			MethodWrapper methodWrapper = new MethodWrapper(JournalArticleServiceUtil.class.getName(),
 					"approveArticle",
 					new Object[] {
-						paramObj0, paramObj1, paramObj2, paramObj3, paramObj4,
-						paramObj5
+						paramObj0, paramObj1, paramObj2, paramObj3, paramObj4
 					});
 
 			Object returnObj = null;

@@ -46,7 +46,7 @@ package com.liferay.portlet.journal.service;
  */
 public class JournalTemplateServiceUtil {
 	public static com.liferay.portlet.journal.model.JournalTemplate addTemplate(
-		java.lang.String templateId, boolean autoTemplateId, long plid,
+		java.lang.String templateId, boolean autoTemplateId, long groupId,
 		java.lang.String structureId, java.lang.String name,
 		java.lang.String description, java.lang.String xsl, boolean formatXsl,
 		java.lang.String langType, boolean cacheable, boolean smallImage,
@@ -55,14 +55,14 @@ public class JournalTemplateServiceUtil {
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		return getService()
-				   .addTemplate(templateId, autoTemplateId, plid, structureId,
-			name, description, xsl, formatXsl, langType, cacheable, smallImage,
-			smallImageURL, smallFile, addCommunityPermissions,
-			addGuestPermissions);
+				   .addTemplate(templateId, autoTemplateId, groupId,
+			structureId, name, description, xsl, formatXsl, langType,
+			cacheable, smallImage, smallImageURL, smallFile,
+			addCommunityPermissions, addGuestPermissions);
 	}
 
 	public static com.liferay.portlet.journal.model.JournalTemplate addTemplate(
-		java.lang.String templateId, boolean autoTemplateId, long plid,
+		java.lang.String templateId, boolean autoTemplateId, long groupId,
 		java.lang.String structureId, java.lang.String name,
 		java.lang.String description, java.lang.String xsl, boolean formatXsl,
 		java.lang.String langType, boolean cacheable, boolean smallImage,
@@ -72,9 +72,10 @@ public class JournalTemplateServiceUtil {
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		return getService()
-				   .addTemplate(templateId, autoTemplateId, plid, structureId,
-			name, description, xsl, formatXsl, langType, cacheable, smallImage,
-			smallImageURL, smallFile, communityPermissions, guestPermissions);
+				   .addTemplate(templateId, autoTemplateId, groupId,
+			structureId, name, description, xsl, formatXsl, langType,
+			cacheable, smallImage, smallImageURL, smallFile,
+			communityPermissions, guestPermissions);
 	}
 
 	public static com.liferay.portlet.journal.model.JournalTemplate copyTemplate(

@@ -27,7 +27,6 @@ import com.liferay.portal.kernel.util.Constants;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
-import com.liferay.portal.model.Layout;
 import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.struts.PortletAction;
 import com.liferay.portal.theme.ThemeDisplay;
@@ -215,8 +214,6 @@ public class EditStructureAction extends PortletAction {
 
 		String cmd = ParamUtil.getString(actionRequest, Constants.CMD);
 
-		Layout layout = (Layout)actionRequest.getAttribute(WebKeys.LAYOUT);
-
 		long groupId = ParamUtil.getLong(actionRequest, "groupId");
 
 		String structureId = ParamUtil.getString(actionRequest, "structureId");
@@ -241,9 +238,8 @@ public class EditStructureAction extends PortletAction {
 			// Add structure
 
 			structure = JournalStructureServiceUtil.addStructure(
-				structureId, autoStructureId, layout.getPlid(),
-				parentStructureId, name, description, xsd, communityPermissions,
-				guestPermissions);
+				structureId, autoStructureId, groupId, parentStructureId, name,
+				description, xsd, communityPermissions, guestPermissions);
 		}
 		else {
 

@@ -33,7 +33,6 @@ import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.Image;
 import com.liferay.portal.model.ResourceConstants;
 import com.liferay.portal.model.User;
-import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PropsKeys;
 import com.liferay.portal.util.PropsUtil;
 import com.liferay.portlet.journal.DuplicateTemplateIdException;
@@ -70,60 +69,58 @@ public class JournalTemplateLocalServiceImpl
 	extends JournalTemplateLocalServiceBaseImpl {
 
 	public JournalTemplate addTemplate(
-			long userId, String templateId, boolean autoTemplateId, long plid,
-			String structureId, String name, String description, String xsl,
-			boolean formatXsl, String langType, boolean cacheable,
-			boolean smallImage, String smallImageURL, File smallFile,
-			boolean addCommunityPermissions, boolean addGuestPermissions)
-		throws PortalException, SystemException {
-
-		return addTemplate(
-			null, userId, templateId, autoTemplateId, plid, structureId, name,
-			description, xsl, formatXsl, langType, cacheable, smallImage,
-			smallImageURL, smallFile, Boolean.valueOf(addCommunityPermissions),
-			Boolean.valueOf(addGuestPermissions), null, null);
-	}
-
-	public JournalTemplate addTemplate(
-			String uuid, long userId, String templateId, boolean autoTemplateId,
-			long plid, String structureId, String name, String description,
+			long userId, String templateId, boolean autoTemplateId,
+			long groupId, String structureId, String name, String description,
 			String xsl, boolean formatXsl, String langType, boolean cacheable,
 			boolean smallImage, String smallImageURL, File smallFile,
 			boolean addCommunityPermissions, boolean addGuestPermissions)
 		throws PortalException, SystemException {
 
 		return addTemplate(
-			uuid, userId, templateId, autoTemplateId, plid, structureId, name,
-			description, xsl, formatXsl, langType, cacheable, smallImage,
+			null, userId, templateId, autoTemplateId, groupId, structureId,
+			name, description, xsl, formatXsl, langType, cacheable, smallImage,
 			smallImageURL, smallFile, Boolean.valueOf(addCommunityPermissions),
 			Boolean.valueOf(addGuestPermissions), null, null);
 	}
 
 	public JournalTemplate addTemplate(
-			long userId, String templateId, boolean autoTemplateId, long plid,
-			String structureId, String name, String description, String xsl,
-			boolean formatXsl, String langType, boolean cacheable,
+			String uuid, long userId, String templateId, boolean autoTemplateId,
+			long groupId, String structureId, String name, String description,
+			String xsl, boolean formatXsl, String langType, boolean cacheable,
+			boolean smallImage, String smallImageURL, File smallFile,
+			boolean addCommunityPermissions, boolean addGuestPermissions)
+		throws PortalException, SystemException {
+
+		return addTemplate(
+			uuid, userId, templateId, autoTemplateId, groupId, structureId,
+			name, description, xsl, formatXsl, langType, cacheable, smallImage,
+			smallImageURL, smallFile, Boolean.valueOf(addCommunityPermissions),
+			Boolean.valueOf(addGuestPermissions), null, null);
+	}
+
+	public JournalTemplate addTemplate(
+			long userId, String templateId, boolean autoTemplateId,
+			long groupId, String structureId, String name, String description,
+			String xsl, boolean formatXsl, String langType, boolean cacheable,
 			boolean smallImage, String smallImageURL, File smallFile,
 			String[] communityPermissions, String[] guestPermissions)
 		throws PortalException, SystemException {
 
 		return addTemplate(
-			null, userId, templateId, autoTemplateId, plid, structureId, name,
-			description, xsl, formatXsl, langType, cacheable, smallImage,
+			null, userId, templateId, autoTemplateId, groupId, structureId,
+			name, description, xsl, formatXsl, langType, cacheable, smallImage,
 			smallImageURL, smallFile, null, null, communityPermissions,
 			guestPermissions);
 	}
 
 	public JournalTemplate addTemplate(
 			String uuid, long userId, String templateId, boolean autoTemplateId,
-			long plid, String structureId, String name, String description,
+			long groupId, String structureId, String name, String description,
 			String xsl, boolean formatXsl, String langType, boolean cacheable,
 			boolean smallImage, String smallImageURL, File smallFile,
 			Boolean addCommunityPermissions, Boolean addGuestPermissions,
 			String[] communityPermissions, String[] guestPermissions)
 		throws PortalException, SystemException {
-
-		long groupId = PortalUtil.getScopeGroupId(plid);
 
 		return addTemplateToGroup(
 			uuid, userId, templateId, autoTemplateId, groupId, structureId,

@@ -46,7 +46,7 @@ package com.liferay.portlet.journal.service;
  */
 public class JournalFeedServiceUtil {
 	public static com.liferay.portlet.journal.model.JournalFeed addFeed(
-		long plid, java.lang.String feedId, boolean autoFeedId,
+		long groupId, java.lang.String feedId, boolean autoFeedId,
 		java.lang.String name, java.lang.String description,
 		java.lang.String type, java.lang.String structureId,
 		java.lang.String templateId, java.lang.String rendererTemplateId,
@@ -58,15 +58,15 @@ public class JournalFeedServiceUtil {
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		return getService()
-				   .addFeed(plid, feedId, autoFeedId, name, description, type,
-			structureId, templateId, rendererTemplateId, delta, orderByCol,
-			orderByType, targetLayoutFriendlyUrl, targetPortletId,
+				   .addFeed(groupId, feedId, autoFeedId, name, description,
+			type, structureId, templateId, rendererTemplateId, delta,
+			orderByCol, orderByType, targetLayoutFriendlyUrl, targetPortletId,
 			contentField, feedType, feedVersion, addCommunityPermissions,
 			addGuestPermissions);
 	}
 
 	public static com.liferay.portlet.journal.model.JournalFeed addFeed(
-		long plid, java.lang.String feedId, boolean autoFeedId,
+		long groupId, java.lang.String feedId, boolean autoFeedId,
 		java.lang.String name, java.lang.String description,
 		java.lang.String type, java.lang.String structureId,
 		java.lang.String templateId, java.lang.String rendererTemplateId,
@@ -79,9 +79,9 @@ public class JournalFeedServiceUtil {
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		return getService()
-				   .addFeed(plid, feedId, autoFeedId, name, description, type,
-			structureId, templateId, rendererTemplateId, delta, orderByCol,
-			orderByType, targetLayoutFriendlyUrl, targetPortletId,
+				   .addFeed(groupId, feedId, autoFeedId, name, description,
+			type, structureId, templateId, rendererTemplateId, delta,
+			orderByCol, orderByType, targetLayoutFriendlyUrl, targetPortletId,
 			contentField, feedType, feedVersion, communityPermissions,
 			guestPermissions);
 	}

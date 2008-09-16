@@ -88,7 +88,7 @@ public interface JournalTemplateLocalService {
 
 	public com.liferay.portlet.journal.model.JournalTemplate addTemplate(
 		long userId, java.lang.String templateId, boolean autoTemplateId,
-		long plid, java.lang.String structureId, java.lang.String name,
+		long groupId, java.lang.String structureId, java.lang.String name,
 		java.lang.String description, java.lang.String xsl, boolean formatXsl,
 		java.lang.String langType, boolean cacheable, boolean smallImage,
 		java.lang.String smallImageURL, java.io.File smallFile,
@@ -98,7 +98,7 @@ public interface JournalTemplateLocalService {
 
 	public com.liferay.portlet.journal.model.JournalTemplate addTemplate(
 		java.lang.String uuid, long userId, java.lang.String templateId,
-		boolean autoTemplateId, long plid, java.lang.String structureId,
+		boolean autoTemplateId, long groupId, java.lang.String structureId,
 		java.lang.String name, java.lang.String description,
 		java.lang.String xsl, boolean formatXsl, java.lang.String langType,
 		boolean cacheable, boolean smallImage, java.lang.String smallImageURL,
@@ -109,7 +109,7 @@ public interface JournalTemplateLocalService {
 
 	public com.liferay.portlet.journal.model.JournalTemplate addTemplate(
 		long userId, java.lang.String templateId, boolean autoTemplateId,
-		long plid, java.lang.String structureId, java.lang.String name,
+		long groupId, java.lang.String structureId, java.lang.String name,
 		java.lang.String description, java.lang.String xsl, boolean formatXsl,
 		java.lang.String langType, boolean cacheable, boolean smallImage,
 		java.lang.String smallImageURL, java.io.File smallFile,
@@ -120,7 +120,7 @@ public interface JournalTemplateLocalService {
 
 	public com.liferay.portlet.journal.model.JournalTemplate addTemplate(
 		java.lang.String uuid, long userId, java.lang.String templateId,
-		boolean autoTemplateId, long plid, java.lang.String structureId,
+		boolean autoTemplateId, long groupId, java.lang.String structureId,
 		java.lang.String name, java.lang.String description,
 		java.lang.String xsl, boolean formatXsl, java.lang.String langType,
 		boolean cacheable, boolean smallImage, java.lang.String smallImageURL,

@@ -82,7 +82,7 @@ import java.rmi.RemoteException;
  */
 public class JournalFeedServiceSoap {
 	public static com.liferay.portlet.journal.model.JournalFeedSoap addFeed(
-		long plid, java.lang.String feedId, boolean autoFeedId,
+		long groupId, java.lang.String feedId, boolean autoFeedId,
 		java.lang.String name, java.lang.String description,
 		java.lang.String type, java.lang.String structureId,
 		java.lang.String templateId, java.lang.String rendererTemplateId,
@@ -93,7 +93,7 @@ public class JournalFeedServiceSoap {
 		boolean addCommunityPermissions, boolean addGuestPermissions)
 		throws RemoteException {
 		try {
-			com.liferay.portlet.journal.model.JournalFeed returnValue = JournalFeedServiceUtil.addFeed(plid,
+			com.liferay.portlet.journal.model.JournalFeed returnValue = JournalFeedServiceUtil.addFeed(groupId,
 					feedId, autoFeedId, name, description, type, structureId,
 					templateId, rendererTemplateId, delta, orderByCol,
 					orderByType, targetLayoutFriendlyUrl, targetPortletId,
@@ -110,7 +110,7 @@ public class JournalFeedServiceSoap {
 	}
 
 	public static com.liferay.portlet.journal.model.JournalFeedSoap addFeed(
-		long plid, java.lang.String feedId, boolean autoFeedId,
+		long groupId, java.lang.String feedId, boolean autoFeedId,
 		java.lang.String name, java.lang.String description,
 		java.lang.String type, java.lang.String structureId,
 		java.lang.String templateId, java.lang.String rendererTemplateId,
@@ -121,7 +121,7 @@ public class JournalFeedServiceSoap {
 		java.lang.String[] communityPermissions,
 		java.lang.String[] guestPermissions) throws RemoteException {
 		try {
-			com.liferay.portlet.journal.model.JournalFeed returnValue = JournalFeedServiceUtil.addFeed(plid,
+			com.liferay.portlet.journal.model.JournalFeed returnValue = JournalFeedServiceUtil.addFeed(groupId,
 					feedId, autoFeedId, name, description, type, structureId,
 					templateId, rendererTemplateId, delta, orderByCol,
 					orderByType, targetLayoutFriendlyUrl, targetPortletId,

@@ -29,10 +29,8 @@ import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
-import com.liferay.portal.model.Layout;
 import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.struts.PortletAction;
-import com.liferay.portal.util.WebKeys;
 import com.liferay.portlet.journal.DuplicateFeedIdException;
 import com.liferay.portlet.journal.FeedContentFieldException;
 import com.liferay.portlet.journal.FeedDescriptionException;
@@ -150,8 +148,6 @@ public class EditFeedAction extends PortletAction {
 	protected void updateFeed(ActionRequest actionRequest) throws Exception {
 		String cmd = ParamUtil.getString(actionRequest, Constants.CMD);
 
-		Layout layout = (Layout)actionRequest.getAttribute(WebKeys.LAYOUT);
-
 		long groupId = ParamUtil.getLong(actionRequest, "groupId");
 
 		String feedId = ParamUtil.getString(actionRequest, "feedId");
@@ -206,7 +202,7 @@ public class EditFeedAction extends PortletAction {
 			// Add feed
 
 			JournalFeedServiceUtil.addFeed(
-				layout.getPlid(), feedId, autoFeedId, name, description,
+				groupId, feedId, autoFeedId, name, description,
 				type, structureId, templateId, rendererTemplateId, delta,
 				orderByCol, orderByType, targetLayoutFriendlyUrl,
 				targetPortletId, contentField, feedType, feedVersion,

@@ -75,7 +75,7 @@ import com.liferay.portlet.journal.service.JournalTemplateServiceUtil;
 public class JournalTemplateServiceHttp {
 	public static com.liferay.portlet.journal.model.JournalTemplate addTemplate(
 		HttpPrincipal httpPrincipal, java.lang.String templateId,
-		boolean autoTemplateId, long plid, java.lang.String structureId,
+		boolean autoTemplateId, long groupId, java.lang.String structureId,
 		java.lang.String name, java.lang.String description,
 		java.lang.String xsl, boolean formatXsl, java.lang.String langType,
 		boolean cacheable, boolean smallImage, java.lang.String smallImageURL,
@@ -92,7 +92,7 @@ public class JournalTemplateServiceHttp {
 
 			Object paramObj1 = new BooleanWrapper(autoTemplateId);
 
-			Object paramObj2 = new LongWrapper(plid);
+			Object paramObj2 = new LongWrapper(groupId);
 
 			Object paramObj3 = structureId;
 
@@ -183,7 +183,7 @@ public class JournalTemplateServiceHttp {
 
 	public static com.liferay.portlet.journal.model.JournalTemplate addTemplate(
 		HttpPrincipal httpPrincipal, java.lang.String templateId,
-		boolean autoTemplateId, long plid, java.lang.String structureId,
+		boolean autoTemplateId, long groupId, java.lang.String structureId,
 		java.lang.String name, java.lang.String description,
 		java.lang.String xsl, boolean formatXsl, java.lang.String langType,
 		boolean cacheable, boolean smallImage, java.lang.String smallImageURL,
@@ -200,7 +200,7 @@ public class JournalTemplateServiceHttp {
 
 			Object paramObj1 = new BooleanWrapper(autoTemplateId);
 
-			Object paramObj2 = new LongWrapper(plid);
+			Object paramObj2 = new LongWrapper(groupId);
 
 			Object paramObj3 = structureId;
 

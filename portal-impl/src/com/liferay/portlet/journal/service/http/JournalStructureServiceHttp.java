@@ -75,10 +75,10 @@ import com.liferay.portlet.journal.service.JournalStructureServiceUtil;
 public class JournalStructureServiceHttp {
 	public static com.liferay.portlet.journal.model.JournalStructure addStructure(
 		HttpPrincipal httpPrincipal, java.lang.String structureId,
-		boolean autoStructureId, long plid, java.lang.String parentStructureId,
-		java.lang.String name, java.lang.String description,
-		java.lang.String xsd, boolean addCommunityPermissions,
-		boolean addGuestPermissions)
+		boolean autoStructureId, long groupId,
+		java.lang.String parentStructureId, java.lang.String name,
+		java.lang.String description, java.lang.String xsd,
+		boolean addCommunityPermissions, boolean addGuestPermissions)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		try {
@@ -90,7 +90,7 @@ public class JournalStructureServiceHttp {
 
 			Object paramObj1 = new BooleanWrapper(autoStructureId);
 
-			Object paramObj2 = new LongWrapper(plid);
+			Object paramObj2 = new LongWrapper(groupId);
 
 			Object paramObj3 = parentStructureId;
 
@@ -155,9 +155,10 @@ public class JournalStructureServiceHttp {
 
 	public static com.liferay.portlet.journal.model.JournalStructure addStructure(
 		HttpPrincipal httpPrincipal, java.lang.String structureId,
-		boolean autoStructureId, long plid, java.lang.String parentStructureId,
-		java.lang.String name, java.lang.String description,
-		java.lang.String xsd, java.lang.String[] communityPermissions,
+		boolean autoStructureId, long groupId,
+		java.lang.String parentStructureId, java.lang.String name,
+		java.lang.String description, java.lang.String xsd,
+		java.lang.String[] communityPermissions,
 		java.lang.String[] guestPermissions)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
@@ -170,7 +171,7 @@ public class JournalStructureServiceHttp {
 
 			Object paramObj1 = new BooleanWrapper(autoStructureId);
 
-			Object paramObj2 = new LongWrapper(plid);
+			Object paramObj2 = new LongWrapper(groupId);
 
 			Object paramObj3 = parentStructureId;
 

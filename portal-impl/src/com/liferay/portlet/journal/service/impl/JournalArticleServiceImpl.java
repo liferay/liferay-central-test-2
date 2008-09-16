@@ -26,12 +26,11 @@ import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.model.User;
 import com.liferay.portal.security.permission.ActionKeys;
-import com.liferay.portal.service.permission.PortletPermissionUtil;
 import com.liferay.portal.theme.ThemeDisplay;
-import com.liferay.portal.util.PortletKeys;
 import com.liferay.portlet.journal.model.JournalArticle;
 import com.liferay.portlet.journal.service.base.JournalArticleServiceBaseImpl;
 import com.liferay.portlet.journal.service.permission.JournalArticlePermission;
+import com.liferay.portlet.journal.service.permission.JournalPermission;
 
 import java.io.File;
 
@@ -48,7 +47,7 @@ import javax.portlet.PortletPreferences;
 public class JournalArticleServiceImpl extends JournalArticleServiceBaseImpl {
 
 	public JournalArticle addArticle(
-			String articleId, boolean autoArticleId, long plid, String title,
+			String articleId, boolean autoArticleId, long groupId, String title,
 			String description, String content, String type, String structureId,
 			String templateId, int displayDateMonth, int displayDateDay,
 			int displayDateYear, int displayDateHour, int displayDateMinute,
@@ -61,12 +60,11 @@ public class JournalArticleServiceImpl extends JournalArticleServiceBaseImpl {
 			boolean addCommunityPermissions, boolean addGuestPermissions)
 		throws PortalException, SystemException {
 
-		PortletPermissionUtil.check(
-			getPermissionChecker(), plid, PortletKeys.JOURNAL,
-			ActionKeys.ADD_ARTICLE);
+		JournalPermission.check(
+			getPermissionChecker(), groupId, ActionKeys.ADD_ARTICLE);
 
 		return journalArticleLocalService.addArticle(
-			getUserId(), articleId, autoArticleId, plid, title, description,
+			getUserId(), articleId, autoArticleId, groupId, title, description,
 			content, type, structureId, templateId, displayDateMonth,
 			displayDateDay, displayDateYear, displayDateHour, displayDateMinute,
 			expirationDateMonth, expirationDateDay, expirationDateYear,
@@ -78,7 +76,7 @@ public class JournalArticleServiceImpl extends JournalArticleServiceBaseImpl {
 	}
 
 	public JournalArticle addArticle(
-			String articleId, boolean autoArticleId, long plid, String title,
+			String articleId, boolean autoArticleId, long groupId, String title,
 			String description, String content, String type, String structureId,
 			String templateId, int displayDateMonth, int displayDateDay,
 			int displayDateYear, int displayDateHour, int displayDateMinute,
@@ -93,12 +91,11 @@ public class JournalArticleServiceImpl extends JournalArticleServiceBaseImpl {
 			boolean addCommunityPermissions, boolean addGuestPermissions)
 		throws PortalException, SystemException {
 
-		PortletPermissionUtil.check(
-			getPermissionChecker(), plid, PortletKeys.JOURNAL,
-			ActionKeys.ADD_ARTICLE);
+		JournalPermission.check(
+			getPermissionChecker(), groupId, ActionKeys.ADD_ARTICLE);
 
 		return journalArticleLocalService.addArticle(
-			getUserId(), articleId, autoArticleId, plid, title, description,
+			getUserId(), articleId, autoArticleId, groupId, title, description,
 			content, type, structureId, templateId, displayDateMonth,
 			displayDateDay, displayDateYear, displayDateHour, displayDateMinute,
 			expirationDateMonth, expirationDateDay, expirationDateYear,
@@ -110,7 +107,7 @@ public class JournalArticleServiceImpl extends JournalArticleServiceBaseImpl {
 	}
 
 	public JournalArticle addArticle(
-			String articleId, boolean autoArticleId, long plid, String title,
+			String articleId, boolean autoArticleId, long groupId, String title,
 			String description, String content, String type, String structureId,
 			String templateId, int displayDateMonth, int displayDateDay,
 			int displayDateYear, int displayDateHour, int displayDateMinute,
@@ -123,12 +120,11 @@ public class JournalArticleServiceImpl extends JournalArticleServiceBaseImpl {
 			String[] communityPermissions, String[] guestPermissions)
 		throws PortalException, SystemException {
 
-		PortletPermissionUtil.check(
-			getPermissionChecker(), plid, PortletKeys.JOURNAL,
-			ActionKeys.ADD_ARTICLE);
+		JournalPermission.check(
+			getPermissionChecker(), groupId, ActionKeys.ADD_ARTICLE);
 
 		return journalArticleLocalService.addArticle(
-			getUserId(), articleId, autoArticleId, plid, title, description,
+			getUserId(), articleId, autoArticleId, groupId, title, description,
 			content, type, structureId, templateId, displayDateMonth,
 			displayDateDay, displayDateYear, displayDateHour, displayDateMinute,
 			expirationDateMonth, expirationDateDay, expirationDateYear,
@@ -140,7 +136,7 @@ public class JournalArticleServiceImpl extends JournalArticleServiceBaseImpl {
 	}
 
 	public JournalArticle addArticle(
-			String articleId, boolean autoArticleId, long plid, String title,
+			String articleId, boolean autoArticleId, long groupId, String title,
 			String description, String content, String type, String structureId,
 			String templateId, int displayDateMonth, int displayDateDay,
 			int displayDateYear, int displayDateHour, int displayDateMinute,
@@ -155,12 +151,11 @@ public class JournalArticleServiceImpl extends JournalArticleServiceBaseImpl {
 			String[] communityPermissions, String[] guestPermissions)
 		throws PortalException, SystemException {
 
-		PortletPermissionUtil.check(
-			getPermissionChecker(), plid, PortletKeys.JOURNAL,
-			ActionKeys.ADD_ARTICLE);
+		JournalPermission.check(
+			getPermissionChecker(), groupId, ActionKeys.ADD_ARTICLE);
 
 		return journalArticleLocalService.addArticle(
-			getUserId(), articleId, autoArticleId, plid, title, description,
+			getUserId(), articleId, autoArticleId, groupId, title, description,
 			content, type, structureId, templateId, displayDateMonth,
 			displayDateDay, displayDateYear, displayDateHour, displayDateMinute,
 			expirationDateMonth, expirationDateDay, expirationDateYear,
@@ -172,15 +167,14 @@ public class JournalArticleServiceImpl extends JournalArticleServiceBaseImpl {
 	}
 
 	public JournalArticle approveArticle(
-			long groupId, String articleId, double version, long plid,
-			String articleURL, PortletPreferences prefs)
+			long groupId, String articleId, double version, String articleURL,
+			PortletPreferences prefs)
 		throws PortalException, SystemException {
 
 		User user = getUser();
 
-		PortletPermissionUtil.check(
-			getPermissionChecker(), plid, PortletKeys.JOURNAL,
-			ActionKeys.APPROVE_ARTICLE);
+		JournalPermission.check(
+			getPermissionChecker(), groupId, ActionKeys.APPROVE_ARTICLE);
 
 		return journalArticleLocalService.approveArticle(
 			user.getUserId(), groupId, articleId, version, articleURL, prefs);
@@ -191,9 +185,8 @@ public class JournalArticleServiceImpl extends JournalArticleServiceBaseImpl {
 			boolean autoArticleId, double version)
 		throws PortalException, SystemException {
 
-		JournalArticlePermission.check(
-			getPermissionChecker(), groupId, oldArticleId,
-			ActionKeys.ADD_ARTICLE);
+		JournalPermission.check(
+			getPermissionChecker(), groupId, ActionKeys.ADD_ARTICLE);
 
 		return journalArticleLocalService.copyArticle(
 			getUserId(), groupId, oldArticleId, newArticleId, autoArticleId,

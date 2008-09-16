@@ -71,7 +71,7 @@ JournalArticle article = (JournalArticle)row.getObject();
 		<liferay-ui:icon image="preview" url="<%= sb.toString() %>" target="_blank" />
 	</c:if>
 
-	<c:if test="<%= PortletPermissionUtil.contains(permissionChecker, plid, PortletKeys.JOURNAL, ActionKeys.ADD_ARTICLE) %>">
+	<c:if test="<%= JournalPermission.contains(permissionChecker, scopeGroupId.longValue(), ActionKeys.ADD_ARTICLE) %>">
 		<portlet:renderURL var="copyURL">
 			<portlet:param name="struts_action" value="/journal/copy_article" />
 			<portlet:param name="redirect" value="<%= currentURL %>" />

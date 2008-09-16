@@ -82,7 +82,7 @@ import java.rmi.RemoteException;
  */
 public class JournalArticleServiceSoap {
 	public static com.liferay.portlet.journal.model.JournalArticleSoap addArticle(
-		java.lang.String articleId, boolean autoArticleId, long plid,
+		java.lang.String articleId, boolean autoArticleId, long groupId,
 		java.lang.String title, java.lang.String description,
 		java.lang.String content, java.lang.String type,
 		java.lang.String structureId, java.lang.String templateId,
@@ -97,7 +97,7 @@ public class JournalArticleServiceSoap {
 		throws RemoteException {
 		try {
 			com.liferay.portlet.journal.model.JournalArticle returnValue = JournalArticleServiceUtil.addArticle(articleId,
-					autoArticleId, plid, title, description, content, type,
+					autoArticleId, groupId, title, description, content, type,
 					structureId, templateId, displayDateMonth, displayDateDay,
 					displayDateYear, displayDateHour, displayDateMinute,
 					expirationDateMonth, expirationDateDay, expirationDateYear,
@@ -117,7 +117,7 @@ public class JournalArticleServiceSoap {
 	}
 
 	public static com.liferay.portlet.journal.model.JournalArticleSoap addArticle(
-		java.lang.String articleId, boolean autoArticleId, long plid,
+		java.lang.String articleId, boolean autoArticleId, long groupId,
 		java.lang.String title, java.lang.String description,
 		java.lang.String content, java.lang.String type,
 		java.lang.String structureId, java.lang.String templateId,
@@ -132,7 +132,7 @@ public class JournalArticleServiceSoap {
 		java.lang.String[] guestPermissions) throws RemoteException {
 		try {
 			com.liferay.portlet.journal.model.JournalArticle returnValue = JournalArticleServiceUtil.addArticle(articleId,
-					autoArticleId, plid, title, description, content, type,
+					autoArticleId, groupId, title, description, content, type,
 					structureId, templateId, displayDateMonth, displayDateDay,
 					displayDateYear, displayDateHour, displayDateMinute,
 					expirationDateMonth, expirationDateDay, expirationDateYear,

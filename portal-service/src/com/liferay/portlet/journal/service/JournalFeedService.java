@@ -48,7 +48,7 @@ package com.liferay.portlet.journal.service;
  *
  */
 public interface JournalFeedService {
-	public com.liferay.portlet.journal.model.JournalFeed addFeed(long plid,
+	public com.liferay.portlet.journal.model.JournalFeed addFeed(long groupId,
 		java.lang.String feedId, boolean autoFeedId, java.lang.String name,
 		java.lang.String description, java.lang.String type,
 		java.lang.String structureId, java.lang.String templateId,
@@ -61,7 +61,7 @@ public interface JournalFeedService {
 		throws java.rmi.RemoteException, com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;
 
-	public com.liferay.portlet.journal.model.JournalFeed addFeed(long plid,
+	public com.liferay.portlet.journal.model.JournalFeed addFeed(long groupId,
 		java.lang.String feedId, boolean autoFeedId, java.lang.String name,
 		java.lang.String description, java.lang.String type,
 		java.lang.String structureId, java.lang.String templateId,

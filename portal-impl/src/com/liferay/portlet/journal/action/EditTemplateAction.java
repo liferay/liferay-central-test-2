@@ -28,7 +28,6 @@ import com.liferay.portal.kernel.util.Constants;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
-import com.liferay.portal.model.Layout;
 import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.struts.PortletAction;
 import com.liferay.portal.theme.ThemeDisplay;
@@ -222,8 +221,6 @@ public class EditTemplateAction extends PortletAction {
 
 		String cmd = ParamUtil.getString(uploadRequest, Constants.CMD);
 
-		Layout layout = (Layout)uploadRequest.getAttribute(WebKeys.LAYOUT);
-
 		long groupId = ParamUtil.getLong(uploadRequest, "groupId");
 
 		String templateId = ParamUtil.getString(uploadRequest, "templateId");
@@ -265,7 +262,7 @@ public class EditTemplateAction extends PortletAction {
 			// Add template
 
 			template = JournalTemplateServiceUtil.addTemplate(
-				templateId, autoTemplateId, layout.getPlid(), structureId, name,
+				templateId, autoTemplateId, groupId, structureId, name,
 				description, xsl, formatXsl, langType, cacheable, smallImage,
 				smallImageURL, smallFile, communityPermissions,
 				guestPermissions);

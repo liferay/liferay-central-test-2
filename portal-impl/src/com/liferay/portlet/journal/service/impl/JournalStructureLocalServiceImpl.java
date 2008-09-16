@@ -34,7 +34,6 @@ import com.liferay.portal.kernel.xml.Element;
 import com.liferay.portal.kernel.xml.SAXReaderUtil;
 import com.liferay.portal.model.ResourceConstants;
 import com.liferay.portal.model.User;
-import com.liferay.portal.util.PortalUtil;
 import com.liferay.portlet.journal.DuplicateStructureIdException;
 import com.liferay.portlet.journal.NoSuchStructureException;
 import com.liferay.portlet.journal.RequiredStructureException;
@@ -67,53 +66,53 @@ public class JournalStructureLocalServiceImpl
 	extends JournalStructureLocalServiceBaseImpl {
 
 	public JournalStructure addStructure(
-			long userId, String structureId, boolean autoStructureId, long plid,
-			String parentStructureId, String name, String description,
-			String xsd, boolean addCommunityPermissions,
+			long userId, String structureId, boolean autoStructureId,
+			long groupId, String parentStructureId, String name,
+			String description, String xsd, boolean addCommunityPermissions,
 			boolean addGuestPermissions)
 		throws PortalException, SystemException {
 
 		return addStructure(
-			null, userId, structureId, autoStructureId, plid, parentStructureId,
-			name, description, xsd, Boolean.valueOf(addCommunityPermissions),
+			null, userId, structureId, autoStructureId, groupId,
+			parentStructureId, name, description, xsd,
+			Boolean.valueOf(addCommunityPermissions),
 			Boolean.valueOf(addGuestPermissions), null, null);
 	}
 
 	public JournalStructure addStructure(
 			String uuid, long userId, String structureId,
-			boolean autoStructureId, long plid, String parentStructureId,
+			boolean autoStructureId, long groupId, String parentStructureId,
 			String name, String description, String xsd,
 			boolean addCommunityPermissions, boolean addGuestPermissions)
 		throws PortalException, SystemException {
 
 		return addStructure(
-			uuid, userId, structureId, autoStructureId, plid, parentStructureId,
-			name, description, xsd, Boolean.valueOf(addCommunityPermissions),
+			uuid, userId, structureId, autoStructureId, groupId,
+			parentStructureId, name, description, xsd,
+			Boolean.valueOf(addCommunityPermissions),
 			Boolean.valueOf(addGuestPermissions), null, null);
 	}
 
 	public JournalStructure addStructure(
-			long userId, String structureId, boolean autoStructureId, long plid,
-			String parentStructureId, String name, String description,
-			String xsd, String[] communityPermissions,
+			long userId, String structureId, boolean autoStructureId,
+			long groupId, String parentStructureId, String name,
+			String description, String xsd, String[] communityPermissions,
 			String[] guestPermissions)
 		throws PortalException, SystemException {
 
 		return addStructure(
-			null, userId, structureId, autoStructureId, plid, parentStructureId,
-			name, description, xsd, null, null, communityPermissions,
-			guestPermissions);
+			null, userId, structureId, autoStructureId, groupId,
+			parentStructureId, name, description, xsd, null, null,
+			communityPermissions, guestPermissions);
 	}
 
 	public JournalStructure addStructure(
 			String uuid, long userId, String structureId,
-			boolean autoStructureId, long plid, String parentStructureId,
+			boolean autoStructureId, long groupId, String parentStructureId,
 			String name, String description, String xsd,
 			Boolean addCommunityPermissions, Boolean addGuestPermissions,
 			String[] communityPermissions, String[] guestPermissions)
 		throws PortalException, SystemException {
-
-		long groupId = PortalUtil.getScopeGroupId(plid);
 
 		return addStructureToGroup(
 			uuid, userId, structureId, autoStructureId, groupId,

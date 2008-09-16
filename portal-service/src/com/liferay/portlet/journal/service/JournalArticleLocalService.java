@@ -88,7 +88,7 @@ public interface JournalArticleLocalService {
 
 	public com.liferay.portlet.journal.model.JournalArticle addArticle(
 		long userId, java.lang.String articleId, boolean autoArticleId,
-		long plid, java.lang.String title, java.lang.String description,
+		long groupId, java.lang.String title, java.lang.String description,
 		java.lang.String content, java.lang.String type,
 		java.lang.String structureId, java.lang.String templateId,
 		int displayDateMonth, int displayDateDay, int displayDateYear,
@@ -107,7 +107,7 @@ public interface JournalArticleLocalService {
 
 	public com.liferay.portlet.journal.model.JournalArticle addArticle(
 		long userId, java.lang.String articleId, boolean autoArticleId,
-		long plid, double version, java.lang.String title,
+		long groupId, double version, java.lang.String title,
 		java.lang.String description, java.lang.String content,
 		java.lang.String type, java.lang.String structureId,
 		java.lang.String templateId, int displayDateMonth, int displayDateDay,
@@ -126,7 +126,7 @@ public interface JournalArticleLocalService {
 
 	public com.liferay.portlet.journal.model.JournalArticle addArticle(
 		java.lang.String uuid, long userId, java.lang.String articleId,
-		boolean autoArticleId, long plid, double version,
+		boolean autoArticleId, long groupId, double version,
 		java.lang.String title, java.lang.String description,
 		java.lang.String content, java.lang.String type,
 		java.lang.String structureId, java.lang.String templateId,
@@ -146,7 +146,7 @@ public interface JournalArticleLocalService {
 
 	public com.liferay.portlet.journal.model.JournalArticle addArticle(
 		long userId, java.lang.String articleId, boolean autoArticleId,
-		long plid, java.lang.String title, java.lang.String description,
+		long groupId, java.lang.String title, java.lang.String description,
 		java.lang.String content, java.lang.String type,
 		java.lang.String structureId, java.lang.String templateId,
 		int displayDateMonth, int displayDateDay, int displayDateYear,
@@ -166,7 +166,7 @@ public interface JournalArticleLocalService {
 
 	public com.liferay.portlet.journal.model.JournalArticle addArticle(
 		java.lang.String uuid, long userId, java.lang.String articleId,
-		boolean autoArticleId, long plid, double version,
+		boolean autoArticleId, long groupId, double version,
 		java.lang.String title, java.lang.String description,
 		java.lang.String content, java.lang.String type,
 		java.lang.String structureId, java.lang.String templateId,

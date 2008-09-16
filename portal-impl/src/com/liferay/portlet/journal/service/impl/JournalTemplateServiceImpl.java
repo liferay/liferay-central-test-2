@@ -25,10 +25,9 @@ package com.liferay.portlet.journal.service.impl;
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.security.permission.ActionKeys;
-import com.liferay.portal.service.permission.PortletPermissionUtil;
-import com.liferay.portal.util.PortletKeys;
 import com.liferay.portlet.journal.model.JournalTemplate;
 import com.liferay.portlet.journal.service.base.JournalTemplateServiceBaseImpl;
+import com.liferay.portlet.journal.service.permission.JournalPermission;
 import com.liferay.portlet.journal.service.permission.JournalStructurePermission;
 import com.liferay.portlet.journal.service.permission.JournalTemplatePermission;
 
@@ -47,38 +46,36 @@ import java.util.List;
 public class JournalTemplateServiceImpl extends JournalTemplateServiceBaseImpl {
 
 	public JournalTemplate addTemplate(
-			String templateId, boolean autoTemplateId, long plid,
+			String templateId, boolean autoTemplateId, long groupId,
 			String structureId, String name, String description, String xsl,
 			boolean formatXsl, String langType, boolean cacheable,
 			boolean smallImage, String smallImageURL, File smallFile,
 			boolean addCommunityPermissions, boolean addGuestPermissions)
 		throws PortalException, SystemException {
 
-		PortletPermissionUtil.check(
-			getPermissionChecker(), plid, PortletKeys.JOURNAL,
-			ActionKeys.ADD_TEMPLATE);
+		JournalPermission.check(
+			getPermissionChecker(), groupId, ActionKeys.ADD_TEMPLATE);
 
 		return journalTemplateLocalService.addTemplate(
-			getUserId(), templateId, autoTemplateId, plid, structureId, name,
+			getUserId(), templateId, autoTemplateId, groupId, structureId, name,
 			description, xsl, formatXsl, langType, cacheable, smallImage,
 			smallImageURL, smallFile, addCommunityPermissions,
 			addGuestPermissions);
 	}
 
 	public JournalTemplate addTemplate(
-			String templateId, boolean autoTemplateId, long plid,
+			String templateId, boolean autoTemplateId, long groupId,
 			String structureId, String name, String description, String xsl,
 			boolean formatXsl, String langType, boolean cacheable,
 			boolean smallImage, String smallImageURL, File smallFile,
 			String[] communityPermissions, String[] guestPermissions)
 		throws PortalException, SystemException {
 
-		PortletPermissionUtil.check(
-			getPermissionChecker(), plid, PortletKeys.JOURNAL,
-			ActionKeys.ADD_TEMPLATE);
+		JournalPermission.check(
+			getPermissionChecker(), groupId, ActionKeys.ADD_TEMPLATE);
 
 		return journalTemplateLocalService.addTemplate(
-			getUserId(), templateId, autoTemplateId, plid, structureId, name,
+			getUserId(), templateId, autoTemplateId, groupId, structureId, name,
 			description, xsl, formatXsl, langType, cacheable, smallImage,
 			smallImageURL, smallFile, communityPermissions, guestPermissions);
 	}
@@ -88,9 +85,8 @@ public class JournalTemplateServiceImpl extends JournalTemplateServiceBaseImpl {
 			boolean autoTemplateId)
 		throws PortalException, SystemException {
 
-		JournalTemplatePermission.check(
-			getPermissionChecker(), groupId, oldTemplateId,
-			ActionKeys.ADD_TEMPLATE);
+		JournalPermission.check(
+			getPermissionChecker(), groupId, ActionKeys.ADD_TEMPLATE);
 
 		return journalTemplateLocalService.copyTemplate(
 			getUserId(), groupId, oldTemplateId, newTemplateId, autoTemplateId);

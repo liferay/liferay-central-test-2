@@ -85,7 +85,7 @@ public interface JournalFeedLocalService {
 		throws com.liferay.portal.SystemException;
 
 	public com.liferay.portlet.journal.model.JournalFeed addFeed(long userId,
-		long plid, java.lang.String feedId, boolean autoFeedId,
+		long groupId, java.lang.String feedId, boolean autoFeedId,
 		java.lang.String name, java.lang.String description,
 		java.lang.String type, java.lang.String structureId,
 		java.lang.String templateId, java.lang.String rendererTemplateId,
@@ -98,7 +98,7 @@ public interface JournalFeedLocalService {
 			com.liferay.portal.SystemException;
 
 	public com.liferay.portlet.journal.model.JournalFeed addFeed(long userId,
-		long plid, java.lang.String feedId, boolean autoFeedId,
+		long groupId, java.lang.String feedId, boolean autoFeedId,
 		java.lang.String name, java.lang.String description,
 		java.lang.String type, java.lang.String structureId,
 		java.lang.String templateId, java.lang.String rendererTemplateId,
@@ -112,8 +112,8 @@ public interface JournalFeedLocalService {
 			com.liferay.portal.SystemException;
 
 	public com.liferay.portlet.journal.model.JournalFeed addFeed(
-		java.lang.String uuid, long userId, long plid, java.lang.String feedId,
-		boolean autoFeedId, java.lang.String name,
+		java.lang.String uuid, long userId, long groupId,
+		java.lang.String feedId, boolean autoFeedId, java.lang.String name,
 		java.lang.String description, java.lang.String type,
 		java.lang.String structureId, java.lang.String templateId,
 		java.lang.String rendererTemplateId, int delta,
@@ -126,8 +126,8 @@ public interface JournalFeedLocalService {
 			com.liferay.portal.SystemException;
 
 	public com.liferay.portlet.journal.model.JournalFeed addFeed(
-		java.lang.String uuid, long userId, long plid, java.lang.String feedId,
-		boolean autoFeedId, java.lang.String name,
+		java.lang.String uuid, long userId, long groupId,
+		java.lang.String feedId, boolean autoFeedId, java.lang.String name,
 		java.lang.String description, java.lang.String type,
 		java.lang.String structureId, java.lang.String templateId,
 		java.lang.String rendererTemplateId, int delta,
@@ -141,8 +141,8 @@ public interface JournalFeedLocalService {
 			com.liferay.portal.SystemException;
 
 	public com.liferay.portlet.journal.model.JournalFeed addFeed(
-		java.lang.String uuid, long userId, long plid, java.lang.String feedId,
-		boolean autoFeedId, java.lang.String name,
+		java.lang.String uuid, long userId, long groupId,
+		java.lang.String feedId, boolean autoFeedId, java.lang.String name,
 		java.lang.String description, java.lang.String type,
 		java.lang.String structureId, java.lang.String templateId,
 		java.lang.String rendererTemplateId, int delta,

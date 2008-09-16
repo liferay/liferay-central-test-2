@@ -25,11 +25,10 @@ package com.liferay.portlet.journal.service.impl;
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.security.permission.ActionKeys;
-import com.liferay.portal.service.permission.PortletPermissionUtil;
-import com.liferay.portal.util.PortletKeys;
 import com.liferay.portlet.journal.model.JournalFeed;
 import com.liferay.portlet.journal.service.base.JournalFeedServiceBaseImpl;
 import com.liferay.portlet.journal.service.permission.JournalFeedPermission;
+import com.liferay.portlet.journal.service.permission.JournalPermission;
 
 /**
  * <a href="JournalFeedServiceImpl.java.html"><b><i>View Source</i></b></a>
@@ -40,7 +39,7 @@ import com.liferay.portlet.journal.service.permission.JournalFeedPermission;
 public class JournalFeedServiceImpl extends JournalFeedServiceBaseImpl {
 
 	public JournalFeed addFeed(
-			long plid, String feedId, boolean autoFeedId, String name,
+			long groupId, String feedId, boolean autoFeedId, String name,
 			String description, String type, String structureId,
 			String templateId, String rendererTemplateId, int delta,
 			String orderByCol, String orderByType,
@@ -49,12 +48,11 @@ public class JournalFeedServiceImpl extends JournalFeedServiceBaseImpl {
 			boolean addCommunityPermissions, boolean addGuestPermissions)
 		throws PortalException, SystemException {
 
-		PortletPermissionUtil.check(
-			getPermissionChecker(), plid, PortletKeys.JOURNAL,
-			ActionKeys.ADD_FEED);
+		JournalPermission.check(
+			getPermissionChecker(), groupId, ActionKeys.ADD_FEED);
 
 		return journalFeedLocalService.addFeed(
-			getUserId(), plid, feedId, autoFeedId, name, description, type,
+			getUserId(), groupId, feedId, autoFeedId, name, description, type,
 			structureId, templateId, rendererTemplateId, delta, orderByCol,
 			orderByType, targetLayoutFriendlyUrl, targetPortletId, contentField,
 			feedType, feedVersion, addCommunityPermissions,
@@ -62,7 +60,7 @@ public class JournalFeedServiceImpl extends JournalFeedServiceBaseImpl {
 	}
 
 	public JournalFeed addFeed(
-			long plid, String feedId, boolean autoFeedId, String name,
+			long groupId, String feedId, boolean autoFeedId, String name,
 			String description, String type, String structureId,
 			String templateId, String rendererTemplateId, int delta,
 			String orderByCol, String orderByType,
@@ -71,12 +69,11 @@ public class JournalFeedServiceImpl extends JournalFeedServiceBaseImpl {
 			String[] communityPermissions, String[] guestPermissions)
 		throws PortalException, SystemException {
 
-		PortletPermissionUtil.check(
-			getPermissionChecker(), plid, PortletKeys.JOURNAL,
-			ActionKeys.ADD_FEED);
+		JournalPermission.check(
+			getPermissionChecker(), groupId, ActionKeys.ADD_FEED);
 
 		return journalFeedLocalService.addFeed(
-			getUserId(), plid, feedId, autoFeedId, name, description, type,
+			getUserId(), groupId, feedId, autoFeedId, name, description, type,
 			structureId, templateId, rendererTemplateId, delta, orderByCol,
 			orderByType, targetLayoutFriendlyUrl, targetPortletId, contentField,
 			feedType, feedVersion, communityPermissions, guestPermissions);

@@ -105,7 +105,7 @@ public class JournalTemplateLocalServiceUtil {
 
 	public static com.liferay.portlet.journal.model.JournalTemplate addTemplate(
 		long userId, java.lang.String templateId, boolean autoTemplateId,
-		long plid, java.lang.String structureId, java.lang.String name,
+		long groupId, java.lang.String structureId, java.lang.String name,
 		java.lang.String description, java.lang.String xsl, boolean formatXsl,
 		java.lang.String langType, boolean cacheable, boolean smallImage,
 		java.lang.String smallImageURL, java.io.File smallFile,
@@ -113,7 +113,7 @@ public class JournalTemplateLocalServiceUtil {
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		return getService()
-				   .addTemplate(userId, templateId, autoTemplateId, plid,
+				   .addTemplate(userId, templateId, autoTemplateId, groupId,
 			structureId, name, description, xsl, formatXsl, langType,
 			cacheable, smallImage, smallImageURL, smallFile,
 			addCommunityPermissions, addGuestPermissions);
@@ -121,7 +121,7 @@ public class JournalTemplateLocalServiceUtil {
 
 	public static com.liferay.portlet.journal.model.JournalTemplate addTemplate(
 		java.lang.String uuid, long userId, java.lang.String templateId,
-		boolean autoTemplateId, long plid, java.lang.String structureId,
+		boolean autoTemplateId, long groupId, java.lang.String structureId,
 		java.lang.String name, java.lang.String description,
 		java.lang.String xsl, boolean formatXsl, java.lang.String langType,
 		boolean cacheable, boolean smallImage, java.lang.String smallImageURL,
@@ -130,15 +130,15 @@ public class JournalTemplateLocalServiceUtil {
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		return getService()
-				   .addTemplate(uuid, userId, templateId, autoTemplateId, plid,
-			structureId, name, description, xsl, formatXsl, langType,
+				   .addTemplate(uuid, userId, templateId, autoTemplateId,
+			groupId, structureId, name, description, xsl, formatXsl, langType,
 			cacheable, smallImage, smallImageURL, smallFile,
 			addCommunityPermissions, addGuestPermissions);
 	}
 
 	public static com.liferay.portlet.journal.model.JournalTemplate addTemplate(
 		long userId, java.lang.String templateId, boolean autoTemplateId,
-		long plid, java.lang.String structureId, java.lang.String name,
+		long groupId, java.lang.String structureId, java.lang.String name,
 		java.lang.String description, java.lang.String xsl, boolean formatXsl,
 		java.lang.String langType, boolean cacheable, boolean smallImage,
 		java.lang.String smallImageURL, java.io.File smallFile,
@@ -147,7 +147,7 @@ public class JournalTemplateLocalServiceUtil {
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		return getService()
-				   .addTemplate(userId, templateId, autoTemplateId, plid,
+				   .addTemplate(userId, templateId, autoTemplateId, groupId,
 			structureId, name, description, xsl, formatXsl, langType,
 			cacheable, smallImage, smallImageURL, smallFile,
 			communityPermissions, guestPermissions);
@@ -155,7 +155,7 @@ public class JournalTemplateLocalServiceUtil {
 
 	public static com.liferay.portlet.journal.model.JournalTemplate addTemplate(
 		java.lang.String uuid, long userId, java.lang.String templateId,
-		boolean autoTemplateId, long plid, java.lang.String structureId,
+		boolean autoTemplateId, long groupId, java.lang.String structureId,
 		java.lang.String name, java.lang.String description,
 		java.lang.String xsl, boolean formatXsl, java.lang.String langType,
 		boolean cacheable, boolean smallImage, java.lang.String smallImageURL,
@@ -166,8 +166,8 @@ public class JournalTemplateLocalServiceUtil {
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		return getService()
-				   .addTemplate(uuid, userId, templateId, autoTemplateId, plid,
-			structureId, name, description, xsl, formatXsl, langType,
+				   .addTemplate(uuid, userId, templateId, autoTemplateId,
+			groupId, structureId, name, description, xsl, formatXsl, langType,
 			cacheable, smallImage, smallImageURL, smallFile,
 			addCommunityPermissions, addGuestPermissions, communityPermissions,
 			guestPermissions);

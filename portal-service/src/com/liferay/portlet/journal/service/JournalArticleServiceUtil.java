@@ -46,7 +46,7 @@ package com.liferay.portlet.journal.service;
  */
 public class JournalArticleServiceUtil {
 	public static com.liferay.portlet.journal.model.JournalArticle addArticle(
-		java.lang.String articleId, boolean autoArticleId, long plid,
+		java.lang.String articleId, boolean autoArticleId, long groupId,
 		java.lang.String title, java.lang.String description,
 		java.lang.String content, java.lang.String type,
 		java.lang.String structureId, java.lang.String templateId,
@@ -61,7 +61,7 @@ public class JournalArticleServiceUtil {
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		return getService()
-				   .addArticle(articleId, autoArticleId, plid, title,
+				   .addArticle(articleId, autoArticleId, groupId, title,
 			description, content, type, structureId, templateId,
 			displayDateMonth, displayDateDay, displayDateYear, displayDateHour,
 			displayDateMinute, expirationDateMonth, expirationDateDay,
@@ -73,7 +73,7 @@ public class JournalArticleServiceUtil {
 	}
 
 	public static com.liferay.portlet.journal.model.JournalArticle addArticle(
-		java.lang.String articleId, boolean autoArticleId, long plid,
+		java.lang.String articleId, boolean autoArticleId, long groupId,
 		java.lang.String title, java.lang.String description,
 		java.lang.String content, java.lang.String type,
 		java.lang.String structureId, java.lang.String templateId,
@@ -91,7 +91,7 @@ public class JournalArticleServiceUtil {
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		return getService()
-				   .addArticle(articleId, autoArticleId, plid, title,
+				   .addArticle(articleId, autoArticleId, groupId, title,
 			description, content, type, structureId, templateId,
 			displayDateMonth, displayDateDay, displayDateYear, displayDateHour,
 			displayDateMinute, expirationDateMonth, expirationDateDay,
@@ -103,7 +103,7 @@ public class JournalArticleServiceUtil {
 	}
 
 	public static com.liferay.portlet.journal.model.JournalArticle addArticle(
-		java.lang.String articleId, boolean autoArticleId, long plid,
+		java.lang.String articleId, boolean autoArticleId, long groupId,
 		java.lang.String title, java.lang.String description,
 		java.lang.String content, java.lang.String type,
 		java.lang.String structureId, java.lang.String templateId,
@@ -119,7 +119,7 @@ public class JournalArticleServiceUtil {
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		return getService()
-				   .addArticle(articleId, autoArticleId, plid, title,
+				   .addArticle(articleId, autoArticleId, groupId, title,
 			description, content, type, structureId, templateId,
 			displayDateMonth, displayDateDay, displayDateYear, displayDateHour,
 			displayDateMinute, expirationDateMonth, expirationDateDay,
@@ -130,7 +130,7 @@ public class JournalArticleServiceUtil {
 	}
 
 	public static com.liferay.portlet.journal.model.JournalArticle addArticle(
-		java.lang.String articleId, boolean autoArticleId, long plid,
+		java.lang.String articleId, boolean autoArticleId, long groupId,
 		java.lang.String title, java.lang.String description,
 		java.lang.String content, java.lang.String type,
 		java.lang.String structureId, java.lang.String templateId,
@@ -149,7 +149,7 @@ public class JournalArticleServiceUtil {
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		return getService()
-				   .addArticle(articleId, autoArticleId, plid, title,
+				   .addArticle(articleId, autoArticleId, groupId, title,
 			description, content, type, structureId, templateId,
 			displayDateMonth, displayDateDay, displayDateYear, displayDateHour,
 			displayDateMinute, expirationDateMonth, expirationDateDay,
@@ -161,13 +161,13 @@ public class JournalArticleServiceUtil {
 	}
 
 	public static com.liferay.portlet.journal.model.JournalArticle approveArticle(
-		long groupId, java.lang.String articleId, double version, long plid,
+		long groupId, java.lang.String articleId, double version,
 		java.lang.String articleURL, javax.portlet.PortletPreferences prefs)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		return getService()
-				   .approveArticle(groupId, articleId, version, plid,
-			articleURL, prefs);
+				   .approveArticle(groupId, articleId, version, articleURL,
+			prefs);
 	}
 
 	public static com.liferay.portlet.journal.model.JournalArticle copyArticle(

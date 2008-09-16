@@ -74,7 +74,7 @@ import com.liferay.portlet.journal.service.JournalArticleServiceUtil;
  */
 public class JournalArticleServiceJSON {
 	public static JSONObject addArticle(java.lang.String articleId,
-		boolean autoArticleId, long plid, java.lang.String title,
+		boolean autoArticleId, long groupId, java.lang.String title,
 		java.lang.String description, java.lang.String content,
 		java.lang.String type, java.lang.String structureId,
 		java.lang.String templateId, int displayDateMonth, int displayDateDay,
@@ -89,7 +89,7 @@ public class JournalArticleServiceJSON {
 		throws java.rmi.RemoteException, com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		com.liferay.portlet.journal.model.JournalArticle returnValue = JournalArticleServiceUtil.addArticle(articleId,
-				autoArticleId, plid, title, description, content, type,
+				autoArticleId, groupId, title, description, content, type,
 				structureId, templateId, displayDateMonth, displayDateDay,
 				displayDateYear, displayDateHour, displayDateMinute,
 				expirationDateMonth, expirationDateDay, expirationDateYear,
@@ -102,7 +102,7 @@ public class JournalArticleServiceJSON {
 	}
 
 	public static JSONObject addArticle(java.lang.String articleId,
-		boolean autoArticleId, long plid, java.lang.String title,
+		boolean autoArticleId, long groupId, java.lang.String title,
 		java.lang.String description, java.lang.String content,
 		java.lang.String type, java.lang.String structureId,
 		java.lang.String templateId, int displayDateMonth, int displayDateDay,
@@ -118,7 +118,7 @@ public class JournalArticleServiceJSON {
 		throws java.rmi.RemoteException, com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		com.liferay.portlet.journal.model.JournalArticle returnValue = JournalArticleServiceUtil.addArticle(articleId,
-				autoArticleId, plid, title, description, content, type,
+				autoArticleId, groupId, title, description, content, type,
 				structureId, templateId, displayDateMonth, displayDateDay,
 				displayDateYear, displayDateHour, displayDateMinute,
 				expirationDateMonth, expirationDateDay, expirationDateYear,

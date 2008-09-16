@@ -49,7 +49,7 @@ package com.liferay.portlet.journal.service;
  */
 public interface JournalStructureService {
 	public com.liferay.portlet.journal.model.JournalStructure addStructure(
-		java.lang.String structureId, boolean autoStructureId, long plid,
+		java.lang.String structureId, boolean autoStructureId, long groupId,
 		java.lang.String parentStructureId, java.lang.String name,
 		java.lang.String description, java.lang.String xsd,
 		boolean addCommunityPermissions, boolean addGuestPermissions)
@@ -57,7 +57,7 @@ public interface JournalStructureService {
 			com.liferay.portal.SystemException;
 
 	public com.liferay.portlet.journal.model.JournalStructure addStructure(
-		java.lang.String structureId, boolean autoStructureId, long plid,
+		java.lang.String structureId, boolean autoStructureId, long groupId,
 		java.lang.String parentStructureId, java.lang.String name,
 		java.lang.String description, java.lang.String xsd,
 		java.lang.String[] communityPermissions,

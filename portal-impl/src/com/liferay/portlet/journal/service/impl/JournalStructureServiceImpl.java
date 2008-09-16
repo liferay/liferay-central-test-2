@@ -25,10 +25,9 @@ package com.liferay.portlet.journal.service.impl;
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.security.permission.ActionKeys;
-import com.liferay.portal.service.permission.PortletPermissionUtil;
-import com.liferay.portal.util.PortletKeys;
 import com.liferay.portlet.journal.model.JournalStructure;
 import com.liferay.portlet.journal.service.base.JournalStructureServiceBaseImpl;
+import com.liferay.portlet.journal.service.permission.JournalPermission;
 import com.liferay.portlet.journal.service.permission.JournalStructurePermission;
 
 /**
@@ -41,35 +40,33 @@ public class JournalStructureServiceImpl
 	extends JournalStructureServiceBaseImpl {
 
 	public JournalStructure addStructure(
-			String structureId, boolean autoStructureId, long plid,
+			String structureId, boolean autoStructureId, long groupId,
 			String parentStructureId, String name, String description,
 			String xsd, boolean addCommunityPermissions,
 			boolean addGuestPermissions)
 		throws PortalException, SystemException {
 
-		PortletPermissionUtil.check(
-			getPermissionChecker(), plid, PortletKeys.JOURNAL,
-			ActionKeys.ADD_STRUCTURE);
+		JournalPermission.check(
+			getPermissionChecker(), groupId, ActionKeys.ADD_STRUCTURE);
 
 		return journalStructureLocalService.addStructure(
-			getUserId(), structureId, autoStructureId, plid, parentStructureId,
+			getUserId(), structureId, autoStructureId, groupId, parentStructureId,
 			name, description, xsd, addCommunityPermissions,
 			addGuestPermissions);
 	}
 
 	public JournalStructure addStructure(
-			String structureId, boolean autoStructureId, long plid,
+			String structureId, boolean autoStructureId, long groupId,
 			String parentStructureId, String name, String description,
 			String xsd, String[] communityPermissions,
 			String[] guestPermissions)
 		throws PortalException, SystemException {
 
-		PortletPermissionUtil.check(
-			getPermissionChecker(), plid, PortletKeys.JOURNAL,
-			ActionKeys.ADD_STRUCTURE);
+		JournalPermission.check(
+			getPermissionChecker(), groupId, ActionKeys.ADD_STRUCTURE);
 
 		return journalStructureLocalService.addStructure(
-			getUserId(), structureId, autoStructureId, plid, parentStructureId,
+			getUserId(), structureId, autoStructureId, groupId, parentStructureId,
 			name, description, xsd, communityPermissions, guestPermissions);
 	}
 
@@ -78,9 +75,8 @@ public class JournalStructureServiceImpl
 			boolean autoStructureId)
 		throws PortalException, SystemException {
 
-		JournalStructurePermission.check(
-			getPermissionChecker(), groupId, oldStructureId,
-			ActionKeys.ADD_STRUCTURE);
+		JournalPermission.check(
+			getPermissionChecker(), groupId, ActionKeys.ADD_STRUCTURE);
 
 		return journalStructureLocalService.copyStructure(
 			getUserId(), groupId, oldStructureId, newStructureId,

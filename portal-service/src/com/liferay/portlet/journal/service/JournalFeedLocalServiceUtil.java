@@ -104,7 +104,7 @@ public class JournalFeedLocalServiceUtil {
 	}
 
 	public static com.liferay.portlet.journal.model.JournalFeed addFeed(
-		long userId, long plid, java.lang.String feedId, boolean autoFeedId,
+		long userId, long groupId, java.lang.String feedId, boolean autoFeedId,
 		java.lang.String name, java.lang.String description,
 		java.lang.String type, java.lang.String structureId,
 		java.lang.String templateId, java.lang.String rendererTemplateId,
@@ -116,7 +116,7 @@ public class JournalFeedLocalServiceUtil {
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		return getService()
-				   .addFeed(userId, plid, feedId, autoFeedId, name,
+				   .addFeed(userId, groupId, feedId, autoFeedId, name,
 			description, type, structureId, templateId, rendererTemplateId,
 			delta, orderByCol, orderByType, targetLayoutFriendlyUrl,
 			targetPortletId, contentField, feedType, feedVersion,
@@ -124,7 +124,7 @@ public class JournalFeedLocalServiceUtil {
 	}
 
 	public static com.liferay.portlet.journal.model.JournalFeed addFeed(
-		long userId, long plid, java.lang.String feedId, boolean autoFeedId,
+		long userId, long groupId, java.lang.String feedId, boolean autoFeedId,
 		java.lang.String name, java.lang.String description,
 		java.lang.String type, java.lang.String structureId,
 		java.lang.String templateId, java.lang.String rendererTemplateId,
@@ -137,7 +137,7 @@ public class JournalFeedLocalServiceUtil {
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		return getService()
-				   .addFeed(userId, plid, feedId, autoFeedId, name,
+				   .addFeed(userId, groupId, feedId, autoFeedId, name,
 			description, type, structureId, templateId, rendererTemplateId,
 			delta, orderByCol, orderByType, targetLayoutFriendlyUrl,
 			targetPortletId, contentField, feedType, feedVersion,
@@ -145,8 +145,8 @@ public class JournalFeedLocalServiceUtil {
 	}
 
 	public static com.liferay.portlet.journal.model.JournalFeed addFeed(
-		java.lang.String uuid, long userId, long plid, java.lang.String feedId,
-		boolean autoFeedId, java.lang.String name,
+		java.lang.String uuid, long userId, long groupId,
+		java.lang.String feedId, boolean autoFeedId, java.lang.String name,
 		java.lang.String description, java.lang.String type,
 		java.lang.String structureId, java.lang.String templateId,
 		java.lang.String rendererTemplateId, int delta,
@@ -158,7 +158,7 @@ public class JournalFeedLocalServiceUtil {
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		return getService()
-				   .addFeed(uuid, userId, plid, feedId, autoFeedId, name,
+				   .addFeed(uuid, userId, groupId, feedId, autoFeedId, name,
 			description, type, structureId, templateId, rendererTemplateId,
 			delta, orderByCol, orderByType, targetLayoutFriendlyUrl,
 			targetPortletId, contentField, feedType, feedVersion,
@@ -166,8 +166,8 @@ public class JournalFeedLocalServiceUtil {
 	}
 
 	public static com.liferay.portlet.journal.model.JournalFeed addFeed(
-		java.lang.String uuid, long userId, long plid, java.lang.String feedId,
-		boolean autoFeedId, java.lang.String name,
+		java.lang.String uuid, long userId, long groupId,
+		java.lang.String feedId, boolean autoFeedId, java.lang.String name,
 		java.lang.String description, java.lang.String type,
 		java.lang.String structureId, java.lang.String templateId,
 		java.lang.String rendererTemplateId, int delta,
@@ -180,7 +180,7 @@ public class JournalFeedLocalServiceUtil {
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		return getService()
-				   .addFeed(uuid, userId, plid, feedId, autoFeedId, name,
+				   .addFeed(uuid, userId, groupId, feedId, autoFeedId, name,
 			description, type, structureId, templateId, rendererTemplateId,
 			delta, orderByCol, orderByType, targetLayoutFriendlyUrl,
 			targetPortletId, contentField, feedType, feedVersion,
@@ -188,8 +188,8 @@ public class JournalFeedLocalServiceUtil {
 	}
 
 	public static com.liferay.portlet.journal.model.JournalFeed addFeed(
-		java.lang.String uuid, long userId, long plid, java.lang.String feedId,
-		boolean autoFeedId, java.lang.String name,
+		java.lang.String uuid, long userId, long groupId,
+		java.lang.String feedId, boolean autoFeedId, java.lang.String name,
 		java.lang.String description, java.lang.String type,
 		java.lang.String structureId, java.lang.String templateId,
 		java.lang.String rendererTemplateId, int delta,
@@ -204,7 +204,7 @@ public class JournalFeedLocalServiceUtil {
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		return getService()
-				   .addFeed(uuid, userId, plid, feedId, autoFeedId, name,
+				   .addFeed(uuid, userId, groupId, feedId, autoFeedId, name,
 			description, type, structureId, templateId, rendererTemplateId,
 			delta, orderByCol, orderByType, targetLayoutFriendlyUrl,
 			targetPortletId, contentField, feedType, feedVersion,

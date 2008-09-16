@@ -60,7 +60,7 @@ public class JournalFeedLocalServiceImpl
 	extends JournalFeedLocalServiceBaseImpl {
 
 	public JournalFeed addFeed(
-			long userId, long plid, String feedId, boolean autoFeedId,
+			long userId, long groupId, String feedId, boolean autoFeedId,
 			String name, String description, String type, String structureId,
 			String templateId, String rendererTemplateId, int delta,
 			String orderByCol, String orderByType,
@@ -70,7 +70,7 @@ public class JournalFeedLocalServiceImpl
 		throws PortalException, SystemException {
 
 		return addFeed(
-			null, userId, plid, feedId, autoFeedId, name, description, type,
+			null, userId, groupId, feedId, autoFeedId, name, description, type,
 			structureId, templateId, rendererTemplateId, delta, orderByCol,
 			orderByType, targetLayoutFriendlyUrl, targetPortletId, contentField,
 			feedType, feedVersion, Boolean.valueOf(addCommunityPermissions),
@@ -78,7 +78,7 @@ public class JournalFeedLocalServiceImpl
 	}
 
 	public JournalFeed addFeed(
-			long userId, long plid, String feedId, boolean autoFeedId,
+			long userId, long groupId, String feedId, boolean autoFeedId,
 			String name, String description, String type, String structureId,
 			String templateId, String rendererTemplateId, int delta,
 			String orderByCol, String orderByType,
@@ -88,7 +88,7 @@ public class JournalFeedLocalServiceImpl
 		throws PortalException, SystemException {
 
 		return addFeed(
-			null, userId, plid, feedId, autoFeedId, name, description, type,
+			null, userId, groupId, feedId, autoFeedId, name, description, type,
 			structureId, templateId, rendererTemplateId, delta, orderByCol,
 			orderByType, targetLayoutFriendlyUrl, targetPortletId, contentField,
 			feedType, feedVersion, null, null, communityPermissions,
@@ -96,7 +96,7 @@ public class JournalFeedLocalServiceImpl
 	}
 
 	public JournalFeed addFeed(
-			String uuid, long userId, long plid, String feedId,
+			String uuid, long userId, long groupId, String feedId,
 			boolean autoFeedId, String name, String description, String type,
 			String structureId, String templateId, String rendererTemplateId,
 			int delta, String orderByCol, String orderByType,
@@ -106,7 +106,7 @@ public class JournalFeedLocalServiceImpl
 		throws PortalException, SystemException {
 
 		return addFeed(
-			uuid, userId, plid, feedId, autoFeedId, name, description, type,
+			uuid, userId, groupId, feedId, autoFeedId, name, description, type,
 			structureId, templateId, rendererTemplateId, delta, orderByCol,
 			orderByType, targetLayoutFriendlyUrl, targetPortletId, contentField,
 			feedType, feedVersion, Boolean.valueOf(addCommunityPermissions),
@@ -114,7 +114,7 @@ public class JournalFeedLocalServiceImpl
 	}
 
 	public JournalFeed addFeed(
-			String uuid, long userId, long plid, String feedId,
+			String uuid, long userId, long groupId, String feedId,
 			boolean autoFeedId, String name, String description, String type,
 			String structureId, String templateId, String rendererTemplateId,
 			int delta, String orderByCol, String orderByType,
@@ -124,7 +124,7 @@ public class JournalFeedLocalServiceImpl
 		throws PortalException, SystemException {
 
 		return addFeed(
-			uuid, userId, plid, feedId, autoFeedId, name, description, type,
+			uuid, userId, groupId, feedId, autoFeedId, name, description, type,
 			structureId, templateId, rendererTemplateId, delta, orderByCol,
 			orderByType,targetLayoutFriendlyUrl, targetPortletId, contentField,
 			feedType, feedVersion, null, null, communityPermissions,
@@ -132,7 +132,7 @@ public class JournalFeedLocalServiceImpl
 	}
 
 	public JournalFeed addFeed(
-			String uuid, long userId, long plid, String feedId,
+			String uuid, long userId, long groupId, String feedId,
 			boolean autoFeedId, String name, String description, String type,
 			String structureId, String templateId, String rendererTemplateId,
 			int delta, String orderByCol, String orderByType,
@@ -141,8 +141,6 @@ public class JournalFeedLocalServiceImpl
 			Boolean addCommunityPermissions, Boolean addGuestPermissions,
 			String[] communityPermissions, String[] guestPermissions)
 		throws PortalException, SystemException {
-
-		long groupId = PortalUtil.getScopeGroupId(plid);
 
 		return addFeedToGroup(
 			uuid, userId, groupId, feedId, autoFeedId, name, description, type,

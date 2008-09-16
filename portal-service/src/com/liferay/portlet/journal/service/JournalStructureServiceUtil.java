@@ -46,20 +46,20 @@ package com.liferay.portlet.journal.service;
  */
 public class JournalStructureServiceUtil {
 	public static com.liferay.portlet.journal.model.JournalStructure addStructure(
-		java.lang.String structureId, boolean autoStructureId, long plid,
+		java.lang.String structureId, boolean autoStructureId, long groupId,
 		java.lang.String parentStructureId, java.lang.String name,
 		java.lang.String description, java.lang.String xsd,
 		boolean addCommunityPermissions, boolean addGuestPermissions)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		return getService()
-				   .addStructure(structureId, autoStructureId, plid,
+				   .addStructure(structureId, autoStructureId, groupId,
 			parentStructureId, name, description, xsd, addCommunityPermissions,
 			addGuestPermissions);
 	}
 
 	public static com.liferay.portlet.journal.model.JournalStructure addStructure(
-		java.lang.String structureId, boolean autoStructureId, long plid,
+		java.lang.String structureId, boolean autoStructureId, long groupId,
 		java.lang.String parentStructureId, java.lang.String name,
 		java.lang.String description, java.lang.String xsd,
 		java.lang.String[] communityPermissions,
@@ -67,7 +67,7 @@ public class JournalStructureServiceUtil {
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		return getService()
-				   .addStructure(structureId, autoStructureId, plid,
+				   .addStructure(structureId, autoStructureId, groupId,
 			parentStructureId, name, description, xsd, communityPermissions,
 			guestPermissions);
 	}
