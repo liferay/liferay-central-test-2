@@ -724,15 +724,6 @@
 		<property name="service" ref="com.liferay.portal.service.ThemeService.impl" />
 	</bean>
 	<bean id="com.liferay.portal.service.UserLocalService.impl" class="com.liferay.portal.service.impl.UserLocalServiceImpl" />
-	<aop:config>
-		<aop:pointcut id="com.liferay.portal.service.UserLocalService.operation" expression="bean(com.liferay.portal.service.UserLocalService.transaction)" />
-		<aop:advisor advice-ref="com.liferay.portal.service.UserLocalService.advice" pointcut-ref="com.liferay.portal.service.UserLocalService.operation" />
-	</aop:config>
-	<tx:advice id="com.liferay.portal.service.UserLocalService.advice" transaction-manager="liferayTransactionManager">
-		<tx:attributes>
-			<tx:method name="authenticate*" propagation="REQUIRED" rollback-for="com.liferay.portal.PortalException,com.liferay.portal.SystemException" />
-		</tx:attributes>
-	</tx:advice>
 	<bean id="com.liferay.portal.service.UserLocalService.velocity" class="org.springframework.aop.framework.ProxyFactoryBean" parent="baseVelocityService">
 		<property name="target" ref="com.liferay.portal.service.UserLocalService.impl" />
 	</bean>
@@ -743,15 +734,6 @@
 		<property name="service" ref="com.liferay.portal.service.UserLocalService.impl" />
 	</bean>
 	<bean id="com.liferay.portal.service.UserService.impl" class="com.liferay.portal.service.impl.UserServiceImpl" />
-	<aop:config>
-		<aop:pointcut id="com.liferay.portal.service.UserService.operation" expression="bean(com.liferay.portal.service.UserService.transaction)" />
-		<aop:advisor advice-ref="com.liferay.portal.service.UserService.advice" pointcut-ref="com.liferay.portal.service.UserService.operation" />
-	</aop:config>
-	<tx:advice id="com.liferay.portal.service.UserService.advice" transaction-manager="liferayTransactionManager">
-		<tx:attributes>
-			<tx:method name="authenticate*" propagation="REQUIRED" rollback-for="com.liferay.portal.PortalException,com.liferay.portal.SystemException" />
-		</tx:attributes>
-	</tx:advice>
 	<bean id="com.liferay.portal.service.UserService.velocity" class="org.springframework.aop.framework.ProxyFactoryBean" parent="baseVelocityService">
 		<property name="target" ref="com.liferay.portal.service.UserService.impl" />
 	</bean>
