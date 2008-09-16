@@ -36,46 +36,48 @@ String category = PortalUtil.getControlPanelCategory(ppid);
 if (Validator.isNull(category)) {
 	category = "content";
 }
+
+String panelCategory = ParamUtil.getString(request, "panel_category");
 %>
 
 <c:if test="<%= !themeDisplay.isStateExclusive() && !themeDisplay.isStatePopUp() %>">
-	<table class="lfr-panel <%= (!layoutTypePortlet.hasStateMax()) ? "panel-frontpage" : "panel-application" %>" width="100%">
-	<tr>
-		<td class="panel-menu" valign="top" width="200">
-			<liferay-portlet:runtime portletName="87" />
-		</td>
-		<td class="panel-content" valign="top">
-			<table width="100%">
-			<tr>
-				<td>
+	<div id="content-wrapper">
+		<table class="lfr-ctrl-panel <%= panelCategory %>">
+		<tr>
+			<td class="panel-menu" valign="top">
+				<liferay-portlet:runtime portletName="87" /><br />
+			</td>
+			<td class="panel-content <%= (!layoutTypePortlet.hasStateMax()) ? "panel-frontpage" : "panel-application" %>" valign="top">
+				<table class="panel-content-menu">
+				<tr>
+					<td>
+						<c:if test='<%= category.equals(PortletCategoryKeys.CONTENT) %>'>
 
-					<c:if test='<%= category.equals("content") %>'>
+							<%
+							Group scopeGroup = GroupLocalServiceUtil.getGroup(scopeGroupId);
 
-						<%
-						Group scopeGroup = GroupLocalServiceUtil.getGroup(scopeGroupId);
+							String currentGroupLabel = "current-community";
 
-						String currentGroupLabel = "current-community";
+							if (scopeGroup.isOrganization()) {
+								currentGroupLabel = "current-organization";
+							}
+							else if (scopeGroup.isUser()) {
+								currentGroupLabel = "current-user";
+							}
+							%>
 
-						if (scopeGroup.isOrganization()) {
-							currentGroupLabel = "current-organization";
-						}
-						else if (scopeGroup.isUser()) {
-							currentGroupLabel = "current-user";
-						}
-						%>
-
-						<h2>
-							<liferay-ui:message key="<%= currentGroupLabel %>" />: <%= scopeGroup.getDescriptiveName() %>
-						</h2>
-					</c:if>
-				</td>
-				<td align="right">
-					<c:if test='<%= !category.equals("server") %>'>
-						<h4><liferay-ui:message key="current-portal-instance" />: <%= company.getName() %></h4>
-					</c:if>
-				</td>
-			</tr>
-			</table>
+							<span class="current-community">
+								<liferay-ui:message key="<%= currentGroupLabel %>" />: <b><%= scopeGroup.getDescriptiveName() %></b>
+							</span>
+						</c:if>
+					</td>
+					<td align="right">
+						<c:if test='<%= !category.equals("server") %>'>
+							<liferay-ui:message key="current-portal-instance" />: <a href="http://www.<%= company.getWebId() %>"><b><%= company.getWebId() %></b></a>
+						</c:if>
+					</td>
+				</tr>
+				</table>
 </c:if>
 
 <%
@@ -107,11 +109,7 @@ else {
 	}
 %>
 
-	<h2>
-		<%= layout.getName(locale) %>
-	</h2>
-
-	<div class="portlet-msg-info">
+	<div class="portlet-msg-info" style="margin: auto 10px;">
 		<%= description %>
 	</div>
 
@@ -120,7 +118,8 @@ else {
 %>
 
 <c:if test="<%= !themeDisplay.isStateExclusive() && !themeDisplay.isStatePopUp() %>">
-		</td>
-	</tr>
-	</table>
+			</td>
+		</tr>
+		</table>
+	</div>
 </c:if>

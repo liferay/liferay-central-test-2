@@ -168,16 +168,6 @@ response.setContentType(ContentTypes.TEXT_CSS);
 
 /* ---------- Panel Page styles ---------- */
 
-.lfr-panel .portal-add-content {
-	padding: 0;
-	padding-left: 4px;
-}
-
-.lfr-panel .panel-content {
-	border-left: 1px solid #ccc;
-	padding-left: 1em;
-}
-
 .lfr-panel .lfr-add-content h2 {
 	border: 1px solid #ccc;
 	border-right: none;
@@ -200,7 +190,87 @@ response.setContentType(ContentTypes.TEXT_CSS);
 	background: none;
 }
 
-.lfr-panel.panel-frontpage .panel-content h2 {
+.lfr-panel .panel-content {
+	border-left: 1px solid #ccc;
+	padding-left: 1em;
+}
+
+.lfr-panel .panel-content.panel-frontpage h2 {
+	margin-top: 0;
+}
+
+/* ---------- Control Panel Page styles ---------- */
+
+.lfr-ctrl-panel .portal-add-content {
+	background: transparent;
+}
+
+.lfr-ctrl-panel .user-greeting {
+	background: transparent url(<%= themeDisplay.getPathThemeImages() %>/panel/admin.png) no-repeat 8px 50%;
+	line-height: 34px;
+	padding: 0 0 0 30px;
+}
+
+.lfr-ctrl-panel .current-community {
+	font-size: 14px;
+}
+
+.lfr-ctrl-panel .panel-content-menu {
+	background-color: #F3F5F5;
+	margin: 0 10px 10px;
+	width: 100%;
+}
+
+.lfr-ctrl-panel .panel-content-menu td {
+	line-height: 34px;
+	padding: 0 10px;
+}
+
+.lfr-ctrl-panel .lfr-add-content {
+	background: url(<%= themeDisplay.getPathThemeImages() %>/panel/category_bg.png) repeat-x 0 0;
+	margin: 0;
+}
+
+.lfr-ctrl-panel .lfr-add-content h2 {
+	background: url(<%= themeDisplay.getPathThemeImages() %>/arrows/05_down.png) no-repeat 5px 50%;
+	font-size: 14px;
+}
+
+.lfr-ctrl-panel .lfr-add-content h2 span {
+	background: url(<%= themeDisplay.getPathThemeImages() %>/panel/category_menu_icon.png) no-repeat right 50%;
+	display: block;
+	line-height: 26px;
+	margin: 0 5px 0 0;
+}
+
+.lfr-ctrl-panel .panel-menu {
+	background-color: #DBE1E3;
+	width: 225px;
+}
+
+.lfr-ctrl-panel .lfr-content-category {
+	margin: 0 0 5px;
+	padding: 0;
+}
+
+.lfr-ctrl-panel .lfr-content-category a {
+	color: #888;
+	display: block;
+	font-size: 12px;
+	line-height: 22px;
+	padding: 0 20px;
+}
+
+.lfr-ctrl-panel .lfr-content-category.selected a {
+	color: #000;
+}
+
+.lfr-ctrl-panel a.selected-portlet {
+	background: transparent url(<%= themeDisplay.getPathThemeImages() %>/panel/selected_portlet_arrow.png) no-repeat right 0;
+	background-color: #BCC7CA;
+}
+
+.lfr-ctrl-panel .panel-content.panel-frontpage h2 {
 	margin-top: 0;
 }
 
