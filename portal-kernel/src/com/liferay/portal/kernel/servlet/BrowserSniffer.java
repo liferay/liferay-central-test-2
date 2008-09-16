@@ -22,8 +22,6 @@
 
 package com.liferay.portal.kernel.servlet;
 
-import java.util.regex.*;
-
 import javax.servlet.http.HttpServletRequest;
 
 /**
@@ -38,6 +36,12 @@ public interface BrowserSniffer {
 
 	public boolean acceptsGzip(HttpServletRequest request);
 
+	public float getMajorVersion(HttpServletRequest request);
+
+	public String getRevision(HttpServletRequest request);
+
+	public String getVersion(HttpServletRequest request);
+
 	public boolean isAir(HttpServletRequest request);
 
 	public boolean isChrome(HttpServletRequest request);
@@ -46,40 +50,34 @@ public interface BrowserSniffer {
 
 	public boolean isGecko(HttpServletRequest request);
 
-	public boolean isIE(HttpServletRequest request);
+	public boolean isIe(HttpServletRequest request);
 
-	public boolean isIPhone(HttpServletRequest request);
+	public boolean isIphone(HttpServletRequest request);
 
 	public boolean isLinux(HttpServletRequest request);
+
+	public boolean isMac(HttpServletRequest request);
 
 	public boolean isMobile(HttpServletRequest request);
 
 	public boolean isMozilla(HttpServletRequest request);
 
-	public boolean isMac(HttpServletRequest request);
-
 	public boolean isOpera(HttpServletRequest request);
 
-	public boolean isRTF(HttpServletRequest request);
+	public boolean isRtf(HttpServletRequest request);
 
 	public boolean isSafari(HttpServletRequest request);
 
 	public boolean isSun(HttpServletRequest request);
 
-	public boolean isWebkit(HttpServletRequest request);
-
 	public boolean isWap(HttpServletRequest request);
 
-	public boolean isWapXHTML(HttpServletRequest request);
+	public boolean isWapXhtml(HttpServletRequest request);
+
+	public boolean isWebKit(HttpServletRequest request);
 
 	public boolean isWindows(HttpServletRequest request);
 
-	public boolean isWML(HttpServletRequest request);
-
-	public float majorVersion(HttpServletRequest request);
-
-	public String revision(HttpServletRequest request);
-
-	public String version(HttpServletRequest request);
+	public boolean isWml(HttpServletRequest request);
 
 }

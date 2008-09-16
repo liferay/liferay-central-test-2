@@ -39,6 +39,22 @@ public class BrowserSnifferUtil {
 		return getBrowserSniffer().acceptsGzip(request);
 	}
 
+	public static BrowserSniffer getBrowserSniffer() {
+		return _browserSniffer;
+	}
+
+	public static float getMajorVersion(HttpServletRequest request) {
+		return getBrowserSniffer().getMajorVersion(request);
+	}
+
+	public static String getRevision(HttpServletRequest request) {
+		return getBrowserSniffer().getRevision(request);
+	}
+
+	public static String getVersion(HttpServletRequest request) {
+		return getBrowserSniffer().getVersion(request);
+	}
+
 	public static boolean isAir(HttpServletRequest request) {
 		return getBrowserSniffer().isAir(request);
 	}
@@ -55,16 +71,20 @@ public class BrowserSnifferUtil {
 		return getBrowserSniffer().isGecko(request);
 	}
 
-	public static boolean isIE(HttpServletRequest request) {
-		return getBrowserSniffer().isIE(request);
+	public static boolean isIe(HttpServletRequest request) {
+		return getBrowserSniffer().isIe(request);
 	}
 
-	public static boolean isIPhone(HttpServletRequest request) {
-		return getBrowserSniffer().isIPhone(request);
+	public static boolean isIphone(HttpServletRequest request) {
+		return getBrowserSniffer().isIphone(request);
 	}
 
 	public static boolean isLinux(HttpServletRequest request) {
 		return getBrowserSniffer().isLinux(request);
+	}
+
+	public static boolean isMac(HttpServletRequest request) {
+		return getBrowserSniffer().isMac(request);
 	}
 
 	public static boolean isMobile(HttpServletRequest request) {
@@ -75,16 +95,12 @@ public class BrowserSnifferUtil {
 		return getBrowserSniffer().isMozilla(request);
 	}
 
-	public static boolean isMac(HttpServletRequest request) {
-		return getBrowserSniffer().isMac(request);
-	}
-
-	public static boolean isRTF(HttpServletRequest request) {
-		return getBrowserSniffer().isRTF(request);
-	}
-
 	public static boolean isOpera(HttpServletRequest request) {
 		return getBrowserSniffer().isOpera(request);
+	}
+
+	public static boolean isRtf(HttpServletRequest request) {
+		return getBrowserSniffer().isRtf(request);
 	}
 
 	public static boolean isSafari(HttpServletRequest request) {
@@ -95,40 +111,24 @@ public class BrowserSnifferUtil {
 		return getBrowserSniffer().isSun(request);
 	}
 
-	public static boolean isWebkit(HttpServletRequest request) {
-		return getBrowserSniffer().isWebkit(request);
-	}
-
 	public static boolean isWap(HttpServletRequest request) {
 		return getBrowserSniffer().isWap(request);
 	}
 
-	public static boolean isWapXHTML(HttpServletRequest request) {
-		return getBrowserSniffer().isWapXHTML(request);
+	public static boolean isWapXhtml(HttpServletRequest request) {
+		return getBrowserSniffer().isWapXhtml(request);
+	}
+
+	public static boolean isWebKit(HttpServletRequest request) {
+		return getBrowserSniffer().isWebKit(request);
 	}
 
 	public static boolean isWindows(HttpServletRequest request) {
 		return getBrowserSniffer().isWindows(request);
 	}
 
-	public static boolean isWML(HttpServletRequest request) {
-		return getBrowserSniffer().isWML(request);
-	}
-
-	public static float majorVersion(HttpServletRequest request) {
-		return getBrowserSniffer().majorVersion(request);
-	}
-
-	public static String revision(HttpServletRequest request) {
-		return getBrowserSniffer().revision(request);
-	}
-
-	public static String version(HttpServletRequest request) {
-		return getBrowserSniffer().version(request);
-	}
-
-	public static BrowserSniffer getBrowserSniffer() {
-		return _browserSniffer;
+	public static boolean isWml(HttpServletRequest request) {
+		return getBrowserSniffer().isWml(request);
 	}
 
 	public void setBrowserSniffer(BrowserSniffer browserSniffer) {

@@ -32,7 +32,7 @@
 <%@ page import="com.liferay.portal.util.PortalUtil" %>
 
 <%
-String panel = ParamUtil.get(request, "panel", (BrowserSnifferUtil.isIE(request) && BrowserSnifferUtil.majorVersion(request) >= 5.5 ? DEFAULT_PANEL_IE : DEFAULT_PANEL_MOZILLA));
+String panel = ParamUtil.get(request, "panel", (BrowserSnifferUtil.isIe(request) && (BrowserSnifferUtil.getMajorVersion(request) >= 5.5)) ? DEFAULT_PANEL_IE : DEFAULT_PANEL_MOZILLA);
 String initMethod = ParamUtil.get(request, "initMethod", DEFAULT_INIT_METHOD);
 String onChangeMethod = ParamUtil.getString(request, "onChangeMethod");
 boolean disableControl = ParamUtil.get(request, "disable_control", false);
