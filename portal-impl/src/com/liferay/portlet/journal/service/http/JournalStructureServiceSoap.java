@@ -82,14 +82,14 @@ import java.rmi.RemoteException;
  */
 public class JournalStructureServiceSoap {
 	public static com.liferay.portlet.journal.model.JournalStructureSoap addStructure(
-		java.lang.String structureId, boolean autoStructureId, long groupId,
+		long groupId, java.lang.String structureId, boolean autoStructureId,
 		java.lang.String parentStructureId, java.lang.String name,
 		java.lang.String description, java.lang.String xsd,
 		boolean addCommunityPermissions, boolean addGuestPermissions)
 		throws RemoteException {
 		try {
-			com.liferay.portlet.journal.model.JournalStructure returnValue = JournalStructureServiceUtil.addStructure(structureId,
-					autoStructureId, groupId, parentStructureId, name,
+			com.liferay.portlet.journal.model.JournalStructure returnValue = JournalStructureServiceUtil.addStructure(groupId,
+					structureId, autoStructureId, parentStructureId, name,
 					description, xsd, addCommunityPermissions,
 					addGuestPermissions);
 
@@ -103,14 +103,14 @@ public class JournalStructureServiceSoap {
 	}
 
 	public static com.liferay.portlet.journal.model.JournalStructureSoap addStructure(
-		java.lang.String structureId, boolean autoStructureId, long groupId,
+		long groupId, java.lang.String structureId, boolean autoStructureId,
 		java.lang.String parentStructureId, java.lang.String name,
 		java.lang.String description, java.lang.String xsd,
 		java.lang.String[] communityPermissions,
 		java.lang.String[] guestPermissions) throws RemoteException {
 		try {
-			com.liferay.portlet.journal.model.JournalStructure returnValue = JournalStructureServiceUtil.addStructure(structureId,
-					autoStructureId, groupId, parentStructureId, name,
+			com.liferay.portlet.journal.model.JournalStructure returnValue = JournalStructureServiceUtil.addStructure(groupId,
+					structureId, autoStructureId, parentStructureId, name,
 					description, xsd, communityPermissions, guestPermissions);
 
 			return com.liferay.portlet.journal.model.JournalStructureSoap.toSoapModel(returnValue);

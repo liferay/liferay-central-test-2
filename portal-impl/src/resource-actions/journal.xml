@@ -13,7 +13,7 @@
 		<guest-defaults>
 			<action-key>VIEW</action-key>
 		</guest-defaults>
-		<guest-unsupported/>
+		<guest-unsupported />
 	</portlet-resource>
 	<portlet-resource>
 		<portlet-name>56</portlet-name>
@@ -41,8 +41,8 @@
 			<action-key>ADD_TEMPLATE</action-key>
 			<action-key>APPROVE_ARTICLE</action-key>
 		</supports>
-		<community-defaults/>
-		<guest-defaults/>
+		<community-defaults />
+		<guest-defaults />
 		<guest-unsupported>
 			<action-key>ADD_ARTICLE</action-key>
 			<action-key>ADD_FEED</action-key>

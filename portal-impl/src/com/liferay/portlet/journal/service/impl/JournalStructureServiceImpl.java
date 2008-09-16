@@ -40,7 +40,7 @@ public class JournalStructureServiceImpl
 	extends JournalStructureServiceBaseImpl {
 
 	public JournalStructure addStructure(
-			String structureId, boolean autoStructureId, long groupId,
+			long groupId, String structureId, boolean autoStructureId,
 			String parentStructureId, String name, String description,
 			String xsd, boolean addCommunityPermissions,
 			boolean addGuestPermissions)
@@ -50,13 +50,13 @@ public class JournalStructureServiceImpl
 			getPermissionChecker(), groupId, ActionKeys.ADD_STRUCTURE);
 
 		return journalStructureLocalService.addStructure(
-			getUserId(), structureId, autoStructureId, groupId, parentStructureId,
-			name, description, xsd, addCommunityPermissions,
+			getUserId(), groupId, structureId, autoStructureId,
+			parentStructureId, name, description, xsd, addCommunityPermissions,
 			addGuestPermissions);
 	}
 
 	public JournalStructure addStructure(
-			String structureId, boolean autoStructureId, long groupId,
+			long groupId, String structureId, boolean autoStructureId,
 			String parentStructureId, String name, String description,
 			String xsd, String[] communityPermissions,
 			String[] guestPermissions)
@@ -66,8 +66,9 @@ public class JournalStructureServiceImpl
 			getPermissionChecker(), groupId, ActionKeys.ADD_STRUCTURE);
 
 		return journalStructureLocalService.addStructure(
-			getUserId(), structureId, autoStructureId, groupId, parentStructureId,
-			name, description, xsd, communityPermissions, guestPermissions);
+			getUserId(), groupId, structureId, autoStructureId,
+			parentStructureId, name, description, xsd, communityPermissions,
+			guestPermissions);
 	}
 
 	public JournalStructure copyStructure(

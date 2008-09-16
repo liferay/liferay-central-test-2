@@ -65,7 +65,7 @@ TemplateDisplayTerms displayTerms = (TemplateDisplayTerms)searchContainer.getDis
 <div>
 	<input type="submit" value="<liferay-ui:message key="search-templates" />" />
 
-	<c:if test="<%= JournalPermission.contains(permissionChecker, scopeGroupId.longValue(), ActionKeys.ADD_TEMPLATE) %>">
+	<c:if test="<%= JournalPermission.contains(permissionChecker, scopeGroupId, ActionKeys.ADD_TEMPLATE) %>">
 		<input type="button" value="<liferay-ui:message key="add-template" />" onClick="<portlet:namespace />addTemplate();" />
 	</c:if>
 </div>

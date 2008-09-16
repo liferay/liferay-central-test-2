@@ -91,7 +91,7 @@
 
 				<br /><br />
 
-				<c:if test="<%= !article.isApproved() && JournalPermission.contains(permissionChecker, scopeGroupId.longValue(), ActionKeys.APPROVE_ARTICLE) %>">
+				<c:if test="<%= !article.isApproved() && JournalPermission.contains(permissionChecker, scopeGroupId, ActionKeys.APPROVE_ARTICLE) %>">
 					<input type="button" value="<liferay-ui:message key="approve" />" onClick="<portlet:namespace />approveArticle();" />
 				</c:if>
 

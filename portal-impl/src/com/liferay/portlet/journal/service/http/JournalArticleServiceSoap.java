@@ -82,7 +82,7 @@ import java.rmi.RemoteException;
  */
 public class JournalArticleServiceSoap {
 	public static com.liferay.portlet.journal.model.JournalArticleSoap addArticle(
-		java.lang.String articleId, boolean autoArticleId, long groupId,
+		long groupId, java.lang.String articleId, boolean autoArticleId,
 		java.lang.String title, java.lang.String description,
 		java.lang.String content, java.lang.String type,
 		java.lang.String structureId, java.lang.String templateId,
@@ -96,16 +96,16 @@ public class JournalArticleServiceSoap {
 		boolean addCommunityPermissions, boolean addGuestPermissions)
 		throws RemoteException {
 		try {
-			com.liferay.portlet.journal.model.JournalArticle returnValue = JournalArticleServiceUtil.addArticle(articleId,
-					autoArticleId, groupId, title, description, content, type,
-					structureId, templateId, displayDateMonth, displayDateDay,
-					displayDateYear, displayDateHour, displayDateMinute,
-					expirationDateMonth, expirationDateDay, expirationDateYear,
-					expirationDateHour, expirationDateMinute, neverExpire,
-					reviewDateMonth, reviewDateDay, reviewDateYear,
-					reviewDateHour, reviewDateMinute, neverReview, indexable,
-					articleURL, tagsEntries, addCommunityPermissions,
-					addGuestPermissions);
+			com.liferay.portlet.journal.model.JournalArticle returnValue = JournalArticleServiceUtil.addArticle(groupId,
+					articleId, autoArticleId, title, description, content,
+					type, structureId, templateId, displayDateMonth,
+					displayDateDay, displayDateYear, displayDateHour,
+					displayDateMinute, expirationDateMonth, expirationDateDay,
+					expirationDateYear, expirationDateHour,
+					expirationDateMinute, neverExpire, reviewDateMonth,
+					reviewDateDay, reviewDateYear, reviewDateHour,
+					reviewDateMinute, neverReview, indexable, articleURL,
+					tagsEntries, addCommunityPermissions, addGuestPermissions);
 
 			return com.liferay.portlet.journal.model.JournalArticleSoap.toSoapModel(returnValue);
 		}
@@ -117,7 +117,7 @@ public class JournalArticleServiceSoap {
 	}
 
 	public static com.liferay.portlet.journal.model.JournalArticleSoap addArticle(
-		java.lang.String articleId, boolean autoArticleId, long groupId,
+		long groupId, java.lang.String articleId, boolean autoArticleId,
 		java.lang.String title, java.lang.String description,
 		java.lang.String content, java.lang.String type,
 		java.lang.String structureId, java.lang.String templateId,
@@ -131,16 +131,16 @@ public class JournalArticleServiceSoap {
 		java.lang.String[] communityPermissions,
 		java.lang.String[] guestPermissions) throws RemoteException {
 		try {
-			com.liferay.portlet.journal.model.JournalArticle returnValue = JournalArticleServiceUtil.addArticle(articleId,
-					autoArticleId, groupId, title, description, content, type,
-					structureId, templateId, displayDateMonth, displayDateDay,
-					displayDateYear, displayDateHour, displayDateMinute,
-					expirationDateMonth, expirationDateDay, expirationDateYear,
-					expirationDateHour, expirationDateMinute, neverExpire,
-					reviewDateMonth, reviewDateDay, reviewDateYear,
-					reviewDateHour, reviewDateMinute, neverReview, indexable,
-					articleURL, tagsEntries, communityPermissions,
-					guestPermissions);
+			com.liferay.portlet.journal.model.JournalArticle returnValue = JournalArticleServiceUtil.addArticle(groupId,
+					articleId, autoArticleId, title, description, content,
+					type, structureId, templateId, displayDateMonth,
+					displayDateDay, displayDateYear, displayDateHour,
+					displayDateMinute, expirationDateMonth, expirationDateDay,
+					expirationDateYear, expirationDateHour,
+					expirationDateMinute, neverExpire, reviewDateMonth,
+					reviewDateDay, reviewDateYear, reviewDateHour,
+					reviewDateMinute, neverReview, indexable, articleURL,
+					tagsEntries, communityPermissions, guestPermissions);
 
 			return com.liferay.portlet.journal.model.JournalArticleSoap.toSoapModel(returnValue);
 		}

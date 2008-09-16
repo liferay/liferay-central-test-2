@@ -49,7 +49,7 @@ package com.liferay.portlet.journal.service;
  */
 public interface JournalArticleService {
 	public com.liferay.portlet.journal.model.JournalArticle addArticle(
-		java.lang.String articleId, boolean autoArticleId, long groupId,
+		long groupId, java.lang.String articleId, boolean autoArticleId,
 		java.lang.String title, java.lang.String description,
 		java.lang.String content, java.lang.String type,
 		java.lang.String structureId, java.lang.String templateId,
@@ -65,7 +65,7 @@ public interface JournalArticleService {
 			com.liferay.portal.SystemException;
 
 	public com.liferay.portlet.journal.model.JournalArticle addArticle(
-		java.lang.String articleId, boolean autoArticleId, long groupId,
+		long groupId, java.lang.String articleId, boolean autoArticleId,
 		java.lang.String title, java.lang.String description,
 		java.lang.String content, java.lang.String type,
 		java.lang.String structureId, java.lang.String templateId,
@@ -84,7 +84,7 @@ public interface JournalArticleService {
 			com.liferay.portal.SystemException;
 
 	public com.liferay.portlet.journal.model.JournalArticle addArticle(
-		java.lang.String articleId, boolean autoArticleId, long groupId,
+		long groupId, java.lang.String articleId, boolean autoArticleId,
 		java.lang.String title, java.lang.String description,
 		java.lang.String content, java.lang.String type,
 		java.lang.String structureId, java.lang.String templateId,
@@ -101,7 +101,7 @@ public interface JournalArticleService {
 			com.liferay.portal.SystemException;
 
 	public com.liferay.portlet.journal.model.JournalArticle addArticle(
-		java.lang.String articleId, boolean autoArticleId, long groupId,
+		long groupId, java.lang.String articleId, boolean autoArticleId,
 		java.lang.String title, java.lang.String description,
 		java.lang.String content, java.lang.String type,
 		java.lang.String structureId, java.lang.String templateId,

@@ -888,10 +888,6 @@ li.toggle-expand a {
 	display: none;
 }
 
-.portlet-permission-icon {
-	float: right;
-}
-
 /* ---------- Liferay forms ---------- */
 
 .lfr-input-text {

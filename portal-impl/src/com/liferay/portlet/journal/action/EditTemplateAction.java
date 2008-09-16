@@ -262,7 +262,7 @@ public class EditTemplateAction extends PortletAction {
 			// Add template
 
 			template = JournalTemplateServiceUtil.addTemplate(
-				templateId, autoTemplateId, groupId, structureId, name,
+				groupId, templateId, autoTemplateId, structureId, name,
 				description, xsl, formatXsl, langType, cacheable, smallImage,
 				smallImageURL, smallFile, communityPermissions,
 				guestPermissions);

@@ -74,23 +74,23 @@ import com.liferay.portlet.journal.service.JournalStructureServiceUtil;
  */
 public class JournalStructureServiceHttp {
 	public static com.liferay.portlet.journal.model.JournalStructure addStructure(
-		HttpPrincipal httpPrincipal, java.lang.String structureId,
-		boolean autoStructureId, long groupId,
+		HttpPrincipal httpPrincipal, long groupId,
+		java.lang.String structureId, boolean autoStructureId,
 		java.lang.String parentStructureId, java.lang.String name,
 		java.lang.String description, java.lang.String xsd,
 		boolean addCommunityPermissions, boolean addGuestPermissions)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		try {
-			Object paramObj0 = structureId;
+			Object paramObj0 = new LongWrapper(groupId);
+
+			Object paramObj1 = structureId;
 
 			if (structureId == null) {
-				paramObj0 = new NullWrapper("java.lang.String");
+				paramObj1 = new NullWrapper("java.lang.String");
 			}
 
-			Object paramObj1 = new BooleanWrapper(autoStructureId);
-
-			Object paramObj2 = new LongWrapper(groupId);
+			Object paramObj2 = new BooleanWrapper(autoStructureId);
 
 			Object paramObj3 = parentStructureId;
 
@@ -154,8 +154,8 @@ public class JournalStructureServiceHttp {
 	}
 
 	public static com.liferay.portlet.journal.model.JournalStructure addStructure(
-		HttpPrincipal httpPrincipal, java.lang.String structureId,
-		boolean autoStructureId, long groupId,
+		HttpPrincipal httpPrincipal, long groupId,
+		java.lang.String structureId, boolean autoStructureId,
 		java.lang.String parentStructureId, java.lang.String name,
 		java.lang.String description, java.lang.String xsd,
 		java.lang.String[] communityPermissions,
@@ -163,15 +163,15 @@ public class JournalStructureServiceHttp {
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		try {
-			Object paramObj0 = structureId;
+			Object paramObj0 = new LongWrapper(groupId);
+
+			Object paramObj1 = structureId;
 
 			if (structureId == null) {
-				paramObj0 = new NullWrapper("java.lang.String");
+				paramObj1 = new NullWrapper("java.lang.String");
 			}
 
-			Object paramObj1 = new BooleanWrapper(autoStructureId);
-
-			Object paramObj2 = new LongWrapper(groupId);
+			Object paramObj2 = new BooleanWrapper(autoStructureId);
 
 			Object paramObj3 = parentStructureId;
 

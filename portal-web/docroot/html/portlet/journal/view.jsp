@@ -82,19 +82,6 @@ portletURL.setParameter("tabs1", tabs1);
 	}
 </script>
 
-<c:if test="<%= GroupPermissionUtil.contains(permissionChecker, scopeGroupId, ActionKeys.PERMISSIONS) %>">
-	<div class="portlet-permission-icon">
-		<liferay-security:permissionsURL
-			modelResource="com.liferay.portlet.journal"
-			modelResourceDescription="<%= LanguageUtil.get(pageContext, "model.resource.com.liferay.portlet.journal") %>"
-			resourcePrimKey="<%= String.valueOf(scopeGroupId) %>"
-			var="permissionsURL"
-		/>
-
-		<liferay-ui:icon image="permissions" url="<%= permissionsURL %>" />
-	</div>
-</c:if>
-
 <form action="<%= portletURL.toString() %>" method="post" name="<portlet:namespace />fm" onSubmit="submitForm(this); return false;">
 <input name="<portlet:namespace /><%= Constants.CMD %>" type="hidden" value="" />
 

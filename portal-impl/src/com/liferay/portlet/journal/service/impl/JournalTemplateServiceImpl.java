@@ -46,7 +46,7 @@ import java.util.List;
 public class JournalTemplateServiceImpl extends JournalTemplateServiceBaseImpl {
 
 	public JournalTemplate addTemplate(
-			String templateId, boolean autoTemplateId, long groupId,
+			long groupId, String templateId, boolean autoTemplateId,
 			String structureId, String name, String description, String xsl,
 			boolean formatXsl, String langType, boolean cacheable,
 			boolean smallImage, String smallImageURL, File smallFile,
@@ -57,14 +57,14 @@ public class JournalTemplateServiceImpl extends JournalTemplateServiceBaseImpl {
 			getPermissionChecker(), groupId, ActionKeys.ADD_TEMPLATE);
 
 		return journalTemplateLocalService.addTemplate(
-			getUserId(), templateId, autoTemplateId, groupId, structureId, name,
+			getUserId(), groupId, templateId, autoTemplateId, structureId, name,
 			description, xsl, formatXsl, langType, cacheable, smallImage,
 			smallImageURL, smallFile, addCommunityPermissions,
 			addGuestPermissions);
 	}
 
 	public JournalTemplate addTemplate(
-			String templateId, boolean autoTemplateId, long groupId,
+			long groupId, String templateId, boolean autoTemplateId,
 			String structureId, String name, String description, String xsl,
 			boolean formatXsl, String langType, boolean cacheable,
 			boolean smallImage, String smallImageURL, File smallFile,
@@ -75,7 +75,7 @@ public class JournalTemplateServiceImpl extends JournalTemplateServiceBaseImpl {
 			getPermissionChecker(), groupId, ActionKeys.ADD_TEMPLATE);
 
 		return journalTemplateLocalService.addTemplate(
-			getUserId(), templateId, autoTemplateId, groupId, structureId, name,
+			getUserId(), groupId, templateId, autoTemplateId, structureId, name,
 			description, xsl, formatXsl, langType, cacheable, smallImage,
 			smallImageURL, smallFile, communityPermissions, guestPermissions);
 	}

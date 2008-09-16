@@ -467,7 +467,7 @@ public class EditArticleAction extends PortletAction {
 			// Add article
 
 			article = JournalArticleServiceUtil.addArticle(
-				articleId, autoArticleId, groupId, title, description,
+				groupId, articleId, autoArticleId, title, description,
 				content, type, structureId, templateId, displayDateMonth,
 				displayDateDay, displayDateYear, displayDateHour,
 				displayDateMinute, expirationDateMonth, expirationDateDay,

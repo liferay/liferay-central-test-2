@@ -76,8 +76,8 @@ import com.liferay.portlet.journal.service.JournalArticleServiceUtil;
  */
 public class JournalArticleServiceHttp {
 	public static com.liferay.portlet.journal.model.JournalArticle addArticle(
-		HttpPrincipal httpPrincipal, java.lang.String articleId,
-		boolean autoArticleId, long groupId, java.lang.String title,
+		HttpPrincipal httpPrincipal, long groupId, java.lang.String articleId,
+		boolean autoArticleId, java.lang.String title,
 		java.lang.String description, java.lang.String content,
 		java.lang.String type, java.lang.String structureId,
 		java.lang.String templateId, int displayDateMonth, int displayDateDay,
@@ -92,15 +92,15 @@ public class JournalArticleServiceHttp {
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		try {
-			Object paramObj0 = articleId;
+			Object paramObj0 = new LongWrapper(groupId);
+
+			Object paramObj1 = articleId;
 
 			if (articleId == null) {
-				paramObj0 = new NullWrapper("java.lang.String");
+				paramObj1 = new NullWrapper("java.lang.String");
 			}
 
-			Object paramObj1 = new BooleanWrapper(autoArticleId);
-
-			Object paramObj2 = new LongWrapper(groupId);
+			Object paramObj2 = new BooleanWrapper(autoArticleId);
 
 			Object paramObj3 = title;
 
@@ -230,8 +230,8 @@ public class JournalArticleServiceHttp {
 	}
 
 	public static com.liferay.portlet.journal.model.JournalArticle addArticle(
-		HttpPrincipal httpPrincipal, java.lang.String articleId,
-		boolean autoArticleId, long groupId, java.lang.String title,
+		HttpPrincipal httpPrincipal, long groupId, java.lang.String articleId,
+		boolean autoArticleId, java.lang.String title,
 		java.lang.String description, java.lang.String content,
 		java.lang.String type, java.lang.String structureId,
 		java.lang.String templateId, int displayDateMonth, int displayDateDay,
@@ -248,15 +248,15 @@ public class JournalArticleServiceHttp {
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		try {
-			Object paramObj0 = articleId;
+			Object paramObj0 = new LongWrapper(groupId);
+
+			Object paramObj1 = articleId;
 
 			if (articleId == null) {
-				paramObj0 = new NullWrapper("java.lang.String");
+				paramObj1 = new NullWrapper("java.lang.String");
 			}
 
-			Object paramObj1 = new BooleanWrapper(autoArticleId);
-
-			Object paramObj2 = new LongWrapper(groupId);
+			Object paramObj2 = new BooleanWrapper(autoArticleId);
 
 			Object paramObj3 = title;
 
@@ -413,8 +413,8 @@ public class JournalArticleServiceHttp {
 	}
 
 	public static com.liferay.portlet.journal.model.JournalArticle addArticle(
-		HttpPrincipal httpPrincipal, java.lang.String articleId,
-		boolean autoArticleId, long groupId, java.lang.String title,
+		HttpPrincipal httpPrincipal, long groupId, java.lang.String articleId,
+		boolean autoArticleId, java.lang.String title,
 		java.lang.String description, java.lang.String content,
 		java.lang.String type, java.lang.String structureId,
 		java.lang.String templateId, int displayDateMonth, int displayDateDay,
@@ -430,15 +430,15 @@ public class JournalArticleServiceHttp {
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		try {
-			Object paramObj0 = articleId;
+			Object paramObj0 = new LongWrapper(groupId);
+
+			Object paramObj1 = articleId;
 
 			if (articleId == null) {
-				paramObj0 = new NullWrapper("java.lang.String");
+				paramObj1 = new NullWrapper("java.lang.String");
 			}
 
-			Object paramObj1 = new BooleanWrapper(autoArticleId);
-
-			Object paramObj2 = new LongWrapper(groupId);
+			Object paramObj2 = new BooleanWrapper(autoArticleId);
 
 			Object paramObj3 = title;
 
@@ -576,8 +576,8 @@ public class JournalArticleServiceHttp {
 	}
 
 	public static com.liferay.portlet.journal.model.JournalArticle addArticle(
-		HttpPrincipal httpPrincipal, java.lang.String articleId,
-		boolean autoArticleId, long groupId, java.lang.String title,
+		HttpPrincipal httpPrincipal, long groupId, java.lang.String articleId,
+		boolean autoArticleId, java.lang.String title,
 		java.lang.String description, java.lang.String content,
 		java.lang.String type, java.lang.String structureId,
 		java.lang.String templateId, int displayDateMonth, int displayDateDay,
@@ -595,15 +595,15 @@ public class JournalArticleServiceHttp {
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		try {
-			Object paramObj0 = articleId;
+			Object paramObj0 = new LongWrapper(groupId);
+
+			Object paramObj1 = articleId;
 
 			if (articleId == null) {
-				paramObj0 = new NullWrapper("java.lang.String");
+				paramObj1 = new NullWrapper("java.lang.String");
 			}
 
-			Object paramObj1 = new BooleanWrapper(autoArticleId);
-
-			Object paramObj2 = new LongWrapper(groupId);
+			Object paramObj2 = new BooleanWrapper(autoArticleId);
 
 			Object paramObj3 = title;
 

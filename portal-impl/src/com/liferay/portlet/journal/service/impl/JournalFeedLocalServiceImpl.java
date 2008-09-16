@@ -142,25 +142,6 @@ public class JournalFeedLocalServiceImpl
 			String[] communityPermissions, String[] guestPermissions)
 		throws PortalException, SystemException {
 
-		return addFeedToGroup(
-			uuid, userId, groupId, feedId, autoFeedId, name, description, type,
-			structureId, templateId, rendererTemplateId, delta, orderByCol,
-			orderByType, targetLayoutFriendlyUrl, targetPortletId, contentField,
-			feedType, feedVersion, addCommunityPermissions, addGuestPermissions,
-			communityPermissions, guestPermissions);
-	}
-
-	public JournalFeed addFeedToGroup(
-			String uuid, long userId, long groupId, String feedId,
-			boolean autoFeedId, String name, String description, String type,
-			String structureId, String templateId, String rendererTemplateId,
-			int delta, String orderByCol, String orderByType,
-			String targetLayoutFriendlyUrl, String targetPortletId,
-			String contentField, String feedType, double feedVersion,
-			Boolean addCommunityPermissions, Boolean addGuestPermissions,
-			String[] communityPermissions, String[] guestPermissions)
-		throws PortalException, SystemException {
-
 		// Feed
 
 		User user = userPersistence.findByPrimaryKey(userId);

@@ -238,7 +238,7 @@ public class EditStructureAction extends PortletAction {
 			// Add structure
 
 			structure = JournalStructureServiceUtil.addStructure(
-				structureId, autoStructureId, groupId, parentStructureId, name,
+				groupId, structureId, autoStructureId, parentStructureId, name,
 				description, xsd, communityPermissions, guestPermissions);
 		}
 		else {

@@ -74,8 +74,8 @@ import com.liferay.portlet.journal.service.JournalTemplateServiceUtil;
  */
 public class JournalTemplateServiceHttp {
 	public static com.liferay.portlet.journal.model.JournalTemplate addTemplate(
-		HttpPrincipal httpPrincipal, java.lang.String templateId,
-		boolean autoTemplateId, long groupId, java.lang.String structureId,
+		HttpPrincipal httpPrincipal, long groupId, java.lang.String templateId,
+		boolean autoTemplateId, java.lang.String structureId,
 		java.lang.String name, java.lang.String description,
 		java.lang.String xsl, boolean formatXsl, java.lang.String langType,
 		boolean cacheable, boolean smallImage, java.lang.String smallImageURL,
@@ -84,15 +84,15 @@ public class JournalTemplateServiceHttp {
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		try {
-			Object paramObj0 = templateId;
+			Object paramObj0 = new LongWrapper(groupId);
+
+			Object paramObj1 = templateId;
 
 			if (templateId == null) {
-				paramObj0 = new NullWrapper("java.lang.String");
+				paramObj1 = new NullWrapper("java.lang.String");
 			}
 
-			Object paramObj1 = new BooleanWrapper(autoTemplateId);
-
-			Object paramObj2 = new LongWrapper(groupId);
+			Object paramObj2 = new BooleanWrapper(autoTemplateId);
 
 			Object paramObj3 = structureId;
 
@@ -182,8 +182,8 @@ public class JournalTemplateServiceHttp {
 	}
 
 	public static com.liferay.portlet.journal.model.JournalTemplate addTemplate(
-		HttpPrincipal httpPrincipal, java.lang.String templateId,
-		boolean autoTemplateId, long groupId, java.lang.String structureId,
+		HttpPrincipal httpPrincipal, long groupId, java.lang.String templateId,
+		boolean autoTemplateId, java.lang.String structureId,
 		java.lang.String name, java.lang.String description,
 		java.lang.String xsl, boolean formatXsl, java.lang.String langType,
 		boolean cacheable, boolean smallImage, java.lang.String smallImageURL,
@@ -192,15 +192,15 @@ public class JournalTemplateServiceHttp {
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		try {
-			Object paramObj0 = templateId;
+			Object paramObj0 = new LongWrapper(groupId);
+
+			Object paramObj1 = templateId;
 
 			if (templateId == null) {
-				paramObj0 = new NullWrapper("java.lang.String");
+				paramObj1 = new NullWrapper("java.lang.String");
 			}
 
-			Object paramObj1 = new BooleanWrapper(autoTemplateId);
-
-			Object paramObj2 = new LongWrapper(groupId);
+			Object paramObj2 = new BooleanWrapper(autoTemplateId);
 
 			Object paramObj3 = structureId;
 

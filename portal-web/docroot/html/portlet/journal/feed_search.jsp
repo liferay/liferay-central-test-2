@@ -65,7 +65,7 @@ FeedDisplayTerms displayTerms = (FeedDisplayTerms)searchContainer.getDisplayTerm
 <div>
 	<input type="submit" value="<liferay-ui:message key="search-feeds" />" />
 
-	<c:if test="<%= JournalPermission.contains(permissionChecker, scopeGroupId.longValue(), ActionKeys.ADD_FEED) %>">
+	<c:if test="<%= JournalPermission.contains(permissionChecker, scopeGroupId, ActionKeys.ADD_FEED) %>">
 		<input type="button" value="<liferay-ui:message key="add-feed" />" onClick="<portlet:namespace />addFeed();" />
 	</c:if>
 </div>

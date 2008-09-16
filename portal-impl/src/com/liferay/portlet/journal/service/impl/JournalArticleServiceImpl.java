@@ -47,7 +47,7 @@ import javax.portlet.PortletPreferences;
 public class JournalArticleServiceImpl extends JournalArticleServiceBaseImpl {
 
 	public JournalArticle addArticle(
-			String articleId, boolean autoArticleId, long groupId, String title,
+			long groupId, String articleId, boolean autoArticleId, String title,
 			String description, String content, String type, String structureId,
 			String templateId, int displayDateMonth, int displayDateDay,
 			int displayDateYear, int displayDateHour, int displayDateMinute,
@@ -64,7 +64,7 @@ public class JournalArticleServiceImpl extends JournalArticleServiceBaseImpl {
 			getPermissionChecker(), groupId, ActionKeys.ADD_ARTICLE);
 
 		return journalArticleLocalService.addArticle(
-			getUserId(), articleId, autoArticleId, groupId, title, description,
+			getUserId(), groupId, articleId, autoArticleId, title, description,
 			content, type, structureId, templateId, displayDateMonth,
 			displayDateDay, displayDateYear, displayDateHour, displayDateMinute,
 			expirationDateMonth, expirationDateDay, expirationDateYear,
@@ -76,7 +76,7 @@ public class JournalArticleServiceImpl extends JournalArticleServiceBaseImpl {
 	}
 
 	public JournalArticle addArticle(
-			String articleId, boolean autoArticleId, long groupId, String title,
+			long groupId, String articleId, boolean autoArticleId, String title,
 			String description, String content, String type, String structureId,
 			String templateId, int displayDateMonth, int displayDateDay,
 			int displayDateYear, int displayDateHour, int displayDateMinute,
@@ -95,7 +95,7 @@ public class JournalArticleServiceImpl extends JournalArticleServiceBaseImpl {
 			getPermissionChecker(), groupId, ActionKeys.ADD_ARTICLE);
 
 		return journalArticleLocalService.addArticle(
-			getUserId(), articleId, autoArticleId, groupId, title, description,
+			getUserId(), groupId, articleId, autoArticleId, title, description,
 			content, type, structureId, templateId, displayDateMonth,
 			displayDateDay, displayDateYear, displayDateHour, displayDateMinute,
 			expirationDateMonth, expirationDateDay, expirationDateYear,
@@ -107,7 +107,7 @@ public class JournalArticleServiceImpl extends JournalArticleServiceBaseImpl {
 	}
 
 	public JournalArticle addArticle(
-			String articleId, boolean autoArticleId, long groupId, String title,
+			long groupId, String articleId, boolean autoArticleId, String title,
 			String description, String content, String type, String structureId,
 			String templateId, int displayDateMonth, int displayDateDay,
 			int displayDateYear, int displayDateHour, int displayDateMinute,
@@ -124,7 +124,7 @@ public class JournalArticleServiceImpl extends JournalArticleServiceBaseImpl {
 			getPermissionChecker(), groupId, ActionKeys.ADD_ARTICLE);
 
 		return journalArticleLocalService.addArticle(
-			getUserId(), articleId, autoArticleId, groupId, title, description,
+			getUserId(), groupId, articleId, autoArticleId, title, description,
 			content, type, structureId, templateId, displayDateMonth,
 			displayDateDay, displayDateYear, displayDateHour, displayDateMinute,
 			expirationDateMonth, expirationDateDay, expirationDateYear,
@@ -136,7 +136,7 @@ public class JournalArticleServiceImpl extends JournalArticleServiceBaseImpl {
 	}
 
 	public JournalArticle addArticle(
-			String articleId, boolean autoArticleId, long groupId, String title,
+			long groupId, String articleId, boolean autoArticleId, String title,
 			String description, String content, String type, String structureId,
 			String templateId, int displayDateMonth, int displayDateDay,
 			int displayDateYear, int displayDateHour, int displayDateMinute,
@@ -155,7 +155,7 @@ public class JournalArticleServiceImpl extends JournalArticleServiceBaseImpl {
 			getPermissionChecker(), groupId, ActionKeys.ADD_ARTICLE);
 
 		return journalArticleLocalService.addArticle(
-			getUserId(), articleId, autoArticleId, groupId, title, description,
+			getUserId(), groupId, articleId, autoArticleId, title, description,
 			content, type, structureId, templateId, displayDateMonth,
 			displayDateDay, displayDateYear, displayDateHour, displayDateMinute,
 			expirationDateMonth, expirationDateDay, expirationDateYear,

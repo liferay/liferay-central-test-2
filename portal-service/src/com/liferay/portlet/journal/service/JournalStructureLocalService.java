@@ -87,8 +87,8 @@ public interface JournalStructureLocalService {
 		throws com.liferay.portal.SystemException;
 
 	public com.liferay.portlet.journal.model.JournalStructure addStructure(
-		long userId, java.lang.String structureId, boolean autoStructureId,
-		long groupId, java.lang.String parentStructureId,
+		long userId, long groupId, java.lang.String structureId,
+		boolean autoStructureId, java.lang.String parentStructureId,
 		java.lang.String name, java.lang.String description,
 		java.lang.String xsd, boolean addCommunityPermissions,
 		boolean addGuestPermissions)
@@ -96,8 +96,8 @@ public interface JournalStructureLocalService {
 			com.liferay.portal.SystemException;
 
 	public com.liferay.portlet.journal.model.JournalStructure addStructure(
-		java.lang.String uuid, long userId, java.lang.String structureId,
-		boolean autoStructureId, long groupId,
+		java.lang.String uuid, long userId, long groupId,
+		java.lang.String structureId, boolean autoStructureId,
 		java.lang.String parentStructureId, java.lang.String name,
 		java.lang.String description, java.lang.String xsd,
 		boolean addCommunityPermissions, boolean addGuestPermissions)
@@ -105,8 +105,8 @@ public interface JournalStructureLocalService {
 			com.liferay.portal.SystemException;
 
 	public com.liferay.portlet.journal.model.JournalStructure addStructure(
-		long userId, java.lang.String structureId, boolean autoStructureId,
-		long groupId, java.lang.String parentStructureId,
+		long userId, long groupId, java.lang.String structureId,
+		boolean autoStructureId, java.lang.String parentStructureId,
 		java.lang.String name, java.lang.String description,
 		java.lang.String xsd, java.lang.String[] communityPermissions,
 		java.lang.String[] guestPermissions)
@@ -114,20 +114,8 @@ public interface JournalStructureLocalService {
 			com.liferay.portal.SystemException;
 
 	public com.liferay.portlet.journal.model.JournalStructure addStructure(
-		java.lang.String uuid, long userId, java.lang.String structureId,
-		boolean autoStructureId, long groupId,
-		java.lang.String parentStructureId, java.lang.String name,
-		java.lang.String description, java.lang.String xsd,
-		java.lang.Boolean addCommunityPermissions,
-		java.lang.Boolean addGuestPermissions,
-		java.lang.String[] communityPermissions,
-		java.lang.String[] guestPermissions)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException;
-
-	public com.liferay.portlet.journal.model.JournalStructure addStructureToGroup(
-		java.lang.String uuid, long userId, java.lang.String structureId,
-		boolean autoStructureId, long groupId,
+		java.lang.String uuid, long userId, long groupId,
+		java.lang.String structureId, boolean autoStructureId,
 		java.lang.String parentStructureId, java.lang.String name,
 		java.lang.String description, java.lang.String xsd,
 		java.lang.Boolean addCommunityPermissions,
