@@ -1038,6 +1038,8 @@
 
 		<!-- Login -->
 
+		<action path="/login/captcha" type="com.liferay.portal.captcha.CaptchaPortletAction" />
+
 		<action path="/login/view" type="com.liferay.portlet.login.action.ViewAction">
 			<forward name="portlet.login.view" path="portlet.login.view" />
 		</action>

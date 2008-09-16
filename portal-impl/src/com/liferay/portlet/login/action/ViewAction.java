@@ -25,12 +25,14 @@ package com.liferay.portlet.login.action;
 import com.liferay.portal.CookieNotSupportedException;
 import com.liferay.portal.NoSuchUserException;
 import com.liferay.portal.PasswordExpiredException;
+import com.liferay.portal.SendPasswordException;
 import com.liferay.portal.UserEmailAddressException;
 import com.liferay.portal.UserIdException;
 import com.liferay.portal.UserLockoutException;
 import com.liferay.portal.UserPasswordException;
 import com.liferay.portal.UserScreenNameException;
 import com.liferay.portal.action.LoginAction;
+import com.liferay.portal.captcha.CaptchaTextException;
 import com.liferay.portal.kernel.servlet.SessionErrors;
 import com.liferay.portal.kernel.util.Constants;
 import com.liferay.portal.kernel.util.ParamUtil;
@@ -70,44 +72,67 @@ public class ViewAction extends PortletAction {
 
 		String cmd = actionRequest.getParameter(Constants.CMD);
 
-		ThemeDisplay themeDisplay = (ThemeDisplay)actionRequest.getAttribute(
-			WebKeys.THEME_DISPLAY);
+		if (cmd.equals("forgot-password")) {
 
-		if (actionRequest.getRemoteUser() != null) {
-			actionResponse.sendRedirect(themeDisplay.getPathMain());
-		}
-		else if (Validator.isNotNull(cmd)) {
 			try {
-				login(themeDisplay, actionRequest, actionResponse);
+				sendPassword(actionRequest);
+
+				actionResponse.setRenderParameter(
+					Constants.CMD, "already-registered");
 			}
 			catch (Exception e) {
-				if (e instanceof AuthException) {
-					Throwable cause = e.getCause();
-
-					if (cause instanceof PasswordExpiredException ||
-						cause instanceof UserLockoutException) {
-
-						SessionErrors.add(
-							actionRequest, cause.getClass().getName());
-					}
-					else {
-						SessionErrors.add(
-							actionRequest, e.getClass().getName());
-					}
-				}
-				else if (e instanceof CookieNotSupportedException ||
-						 e instanceof NoSuchUserException ||
-						 e instanceof PasswordExpiredException ||
-						 e instanceof UserEmailAddressException ||
-						 e instanceof UserIdException ||
-						 e instanceof UserLockoutException ||
-						 e instanceof UserPasswordException ||
-						 e instanceof UserScreenNameException) {
+				if (e instanceof CaptchaTextException ||
+					e instanceof NoSuchUserException ||
+					e instanceof SendPasswordException ||
+					e instanceof UserEmailAddressException) {
 
 					SessionErrors.add(actionRequest, e.getClass().getName());
 				}
 				else {
 					PortalUtil.sendError(e, actionRequest, actionResponse);
+				}
+			}
+		}
+		else {
+			ThemeDisplay themeDisplay =
+				(ThemeDisplay)actionRequest.getAttribute(WebKeys.THEME_DISPLAY);
+
+			if (actionRequest.getRemoteUser() != null) {
+				actionResponse.sendRedirect(themeDisplay.getPathMain());
+			}
+			else if (Validator.isNotNull(cmd)) {
+				try {
+					login(themeDisplay, actionRequest, actionResponse);
+				}
+				catch (Exception e) {
+					if (e instanceof AuthException) {
+						Throwable cause = e.getCause();
+
+						if (cause instanceof PasswordExpiredException ||
+							cause instanceof UserLockoutException) {
+
+							SessionErrors.add(
+								actionRequest, cause.getClass().getName());
+						}
+						else {
+							SessionErrors.add(
+								actionRequest, e.getClass().getName());
+						}
+					}
+					else if (e instanceof CookieNotSupportedException ||
+						e instanceof NoSuchUserException ||
+						e instanceof PasswordExpiredException ||
+						e instanceof UserEmailAddressException ||
+						e instanceof UserIdException ||
+						e instanceof UserLockoutException ||
+						e instanceof UserPasswordException ||
+						e instanceof UserScreenNameException) {
+
+					SessionErrors.add(actionRequest, e.getClass().getName());
+					}
+					else {
+						PortalUtil.sendError(e, actionRequest, actionResponse);
+					}
 				}
 			}
 		}
@@ -151,6 +176,13 @@ public class ViewAction extends PortletAction {
 				actionResponse.sendRedirect(themeDisplay.getPathMain());
 			}
 		}
+	}
+
+	protected void sendPassword(ActionRequest actionRequest) throws Exception {
+		HttpServletRequest request = PortalUtil.getHttpServletRequest(
+			actionRequest);
+
+		LoginAction.sendPassword(request);
 	}
 
 }

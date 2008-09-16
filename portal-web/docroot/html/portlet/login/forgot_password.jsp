@@ -1,3 +1,4 @@
+
 <%
 /**
  * Copyright (c) 2000-2008 Liferay, Inc. All rights reserved.
@@ -24,29 +25,25 @@
 
 <%@ include file="/html/portlet/login/init.jsp" %>
 
-<%
-String cmd = ParamUtil.getString(renderRequest, Constants.CMD);
-%>
+<liferay-ui:tabs names="forgot-password" refresh="<%= false %>">
+	<liferay-ui:section>
+		<portlet:actionURL var="forgotPasswordActionURL" windowState="<%= WindowState.NORMAL.toString() %>">
+			<portlet:param name="struts_action" value="/login/view" />
+		</portlet:actionURL>
 
-<c:choose>
-	<c:when test="<%= themeDisplay.isSignedIn() %>">
+		<portlet:actionURL var="captchaActionURL" windowState="<%= LiferayWindowState.EXCLUSIVE.toString() %>">
+			<portlet:param name="struts_action" value="/login/captcha" />
+		</portlet:actionURL>
+
 		<%
-		String signedInAs = user.getFullName();
-
-		if (themeDisplay.isShowMyAccountIcon()) {
-			signedInAs = "<a href=\"" + themeDisplay.getURLMyAccount().toString() + "\">" + signedInAs + "</a>";
-		}
+		String forgotPasswordURL =forgotPasswordActionURL.toString();
+		String captchaURL = captchaActionURL.toString();
 		%>
-		<%= LanguageUtil.format(pageContext, "you-are-signed-in-as-x", signedInAs) %>
-	</c:when>
-	<c:otherwise>
-		<c:choose>
-			<c:when test='<%= cmd.equals("forgot-password") %>'>
-				<liferay-util:include page="/html/portlet/login/forgot_password.jsp" />
-			</c:when>
-			<c:otherwise>
-				<liferay-util:include page="/html/portlet/login/login.jsp" />
-			</c:otherwise>
-		</c:choose>
-	</c:otherwise>
-</c:choose>
+		<%@ include file="/html/portal/login_forgot_password.jspf" %>
+
+	</liferay-ui:section>
+</liferay-ui:tabs>
+
+<script type="text/javascript">
+	Liferay.Util.focusFormField(document.fm3.emailAddress);
+</script>

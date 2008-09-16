@@ -309,6 +309,35 @@ public class LoginAction extends Action {
 		}
 	}
 
+	public static void sendPassword(HttpServletRequest request)
+		throws Exception {
+
+		ThemeDisplay themeDisplay = (ThemeDisplay)request.getAttribute(
+			WebKeys.THEME_DISPLAY);
+
+		Company company = themeDisplay.getCompany();
+
+		if (!company.isSendPassword()) {
+			return;
+		}
+
+		if (PropsValues.CAPTCHA_CHECK_PORTAL_SEND_PASSWORD) {
+			CaptchaUtil.check(request);
+		}
+
+		String emailAddress = ParamUtil.getString(request, "emailAddress");
+
+		String remoteAddr = request.getRemoteAddr();
+		String remoteHost = request.getRemoteHost();
+		String userAgent = request.getHeader(HttpHeaders.USER_AGENT);
+
+		UserLocalServiceUtil.sendPassword(
+			PortalUtil.getCompanyId(request), emailAddress, remoteAddr,
+			remoteHost, userAgent);
+
+		SessionMessages.add(request, "request_processed", emailAddress);
+	}
+
 	public ActionForward execute(
 			ActionMapping mapping, ActionForm form, HttpServletRequest request,
 			HttpServletResponse response)
@@ -456,33 +485,6 @@ public class LoginAction extends Action {
 		boolean rememberMe = ParamUtil.getBoolean(request, "rememberMe");
 
 		login(request, response, login, password, rememberMe);
-	}
-
-	protected void sendPassword(HttpServletRequest request) throws Exception {
-		ThemeDisplay themeDisplay = (ThemeDisplay)request.getAttribute(
-			WebKeys.THEME_DISPLAY);
-
-		Company company = themeDisplay.getCompany();
-
-		if (!company.isSendPassword()) {
-			return;
-		}
-
-		if (PropsValues.CAPTCHA_CHECK_PORTAL_SEND_PASSWORD) {
-			CaptchaUtil.check(request);
-		}
-
-		String emailAddress = ParamUtil.getString(request, "emailAddress");
-
-		String remoteAddr = request.getRemoteAddr();
-		String remoteHost = request.getRemoteHost();
-		String userAgent = request.getHeader(HttpHeaders.USER_AGENT);
-
-		UserLocalServiceUtil.sendPassword(
-			PortalUtil.getCompanyId(request), emailAddress, remoteAddr,
-			remoteHost, userAgent);
-
-		SessionMessages.add(request, "request_processed", emailAddress);
 	}
 
 	private static Log _log = LogFactory.getLog(LoginAction.class);
