@@ -1178,7 +1178,7 @@
 	</portlet>
 	<portlet>
 		<portlet-name>134</portlet-name>
-		<icon>/html/portlet/enterprise_admin_communities/icon.png</icon>
+		<icon>/html/portlet/enterprise_admin/icon.png</icon>
 		<struts-path>enterprise_admin_communities</struts-path>
 		<portlet-url-class>com.liferay.portal.struts.StrutsActionPortletURL</portlet-url-class>
 		<use-default-template>false</use-default-template>
