@@ -44,7 +44,8 @@
 		overflowToDisk="false"
 	>
         <cacheEventListenerFactory
-			class="net.sf.ehcache.distribution.RMICacheReplicatorFactory" />
+			class="net.sf.ehcache.distribution.RMICacheReplicatorFactory"
+		/>
 		<bootstrapCacheLoaderFactory class="net.sf.ehcache.distribution.RMIBootstrapCacheLoaderFactory" />
 	</cache>
 

@@ -24,7 +24,6 @@ package com.liferay.portal.spring.context;
 
 import com.liferay.portal.bean.BeanLocatorImpl;
 import com.liferay.portal.kernel.bean.BeanLocator;
-import com.liferay.portal.kernel.bean.PortletBeanLocatorUtil;
 import com.liferay.portal.kernel.portlet.PortletClassLoaderUtil;
 
 import java.lang.reflect.Method;
@@ -49,6 +48,29 @@ import org.springframework.web.context.support.WebApplicationContextUtils;
  */
 public class PortletContextLoaderListener extends ContextLoaderListener {
 
+	public void contextDestroyed(ServletContextEvent event) {
+		ClassLoader classLoader = PortletClassLoaderUtil.getClassLoader();
+
+		ServletContext servletContext = event.getServletContext();
+
+		try {
+			Class<?> beanLocatorUtilClass = Class.forName(
+				"com.liferay.util.bean.PortletBeanLocatorUtil", true,
+				classLoader);
+
+			Method setBeanLocatorMethod = beanLocatorUtilClass.getMethod(
+				"setBeanLocator", new Class[] {BeanLocator.class});
+
+			setBeanLocatorMethod.invoke(
+				beanLocatorUtilClass, new Object[] {null});
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+		}
+
+		super.contextDestroyed(event);
+	}
+
 	public void contextInitialized(ServletContextEvent event) {
 		super.contextInitialized(event);
 
@@ -61,9 +83,6 @@ public class PortletContextLoaderListener extends ContextLoaderListener {
 
 		BeanLocator beanLocator = new BeanLocatorImpl(
 			classLoader, applicationContext);
-
-		PortletBeanLocatorUtil.setBeanLocator(
-			servletContext.getServletContextName(), beanLocator);
 
 		try {
 			Class<?> beanLocatorUtilClass = Class.forName(

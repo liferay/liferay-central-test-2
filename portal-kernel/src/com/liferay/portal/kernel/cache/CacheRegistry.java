@@ -22,8 +22,11 @@
 
 package com.liferay.portal.kernel.cache;
 
-import java.util.List;
-import java.util.Vector;
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
+
+import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 
 /**
  * <a href="CacheRegistry.java.html"><b><i>View Source</i></b></a>
@@ -33,8 +36,33 @@ import java.util.Vector;
  */
 public class CacheRegistry {
 
+	public static void clear() {
+		for (Map.Entry<String, CacheRegistryItem> entry : _items.entrySet()) {
+			CacheRegistryItem item = entry.getValue();
+
+			item.invalidate();
+		}
+	}
+
 	public static boolean isActive() {
 		return _active;
+	}
+
+	public static void register(CacheRegistryItem item) {
+		String name = item.getRegistryName();
+
+		if (_log.isDebugEnabled()) {
+			_log.debug("Registering " + name);
+		}
+
+		if (_items.containsKey(name)) {
+			if (_log.isDebugEnabled()) {
+				_log.debug("Not registering duplicate " + name);
+			}
+		}
+		else {
+			_items.put(name, item);
+		}
 	}
 
 	public static void setActive(boolean active) {
@@ -45,20 +73,18 @@ public class CacheRegistry {
 		}
 	}
 
-	public static void clear() {
-		for (int i = 0; i < _registry.size(); i++) {
-			CacheRegistryItem item = _registry.get(i);
-
-			item.invalidate();
+	public static void unregister(String name) {
+		if (_log.isDebugEnabled()) {
+			_log.debug("Unregistering " + name);
 		}
+
+		_items.remove(name);
 	}
 
-	public static void register(CacheRegistryItem item) {
-		_registry.add(item);
-	}
+	private static Log _log = LogFactoryUtil.getLog(CacheRegistry.class);
 
 	private static boolean _active = true;
-	private static List<CacheRegistryItem> _registry =
-		new Vector<CacheRegistryItem>();
+	private static Map<String, CacheRegistryItem> _items =
+		new ConcurrentHashMap<String, CacheRegistryItem>();
 
 }

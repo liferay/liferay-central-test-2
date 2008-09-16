@@ -47,6 +47,8 @@ public abstract class PortalClassLoaderServletContextListener
 	}
 
 	public void contextDestroyed(ServletContextEvent event) {
+		PortletClassLoaderUtil.setClassLoader(_portletClassLoader);
+
 		ClassLoader contextClassLoader =
 			Thread.currentThread().getContextClassLoader();
 

@@ -30,6 +30,8 @@ package com.liferay.portal.kernel.cache;
  */
 public interface CacheRegistryItem {
 
+	public String getRegistryName();
+
 	public void invalidate();
 
 }

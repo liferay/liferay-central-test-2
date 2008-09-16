@@ -27,6 +27,9 @@ import com.liferay.portal.kernel.cache.CacheRegistryItem;
 
 import java.util.Map;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+
 import org.hibernate.cache.Cache;
 import org.hibernate.cache.CacheException;
 
@@ -40,6 +43,11 @@ public class CacheWrapper implements Cache, CacheRegistryItem {
 
 	public CacheWrapper(Cache cache) {
 		_cache = cache;
+		_registryName = cache.getRegionName();
+
+		if (_log.isDebugEnabled()) {
+			_log.debug("Creating cache for " + _registryName);
+		}
 
 		CacheRegistry.register(this);
 	}
@@ -66,6 +74,10 @@ public class CacheWrapper implements Cache, CacheRegistryItem {
 
 	public String getRegionName() {
 		return _cache.getRegionName();
+	}
+
+	public String getRegistryName() {
+		return _registryName;
 	}
 
 	public long getSizeInMemory() {
@@ -113,9 +125,16 @@ public class CacheWrapper implements Cache, CacheRegistryItem {
 	}
 
 	public void invalidate() {
+		if (_log.isDebugEnabled()) {
+			_log.debug("Invalidating cache for " + _registryName);
+		}
+
 		_cache.clear();
 	}
 
+	private static Log _log = LogFactory.getLog(CacheWrapper.class);
+
 	private Cache _cache;
+	private String _registryName;
 
 }

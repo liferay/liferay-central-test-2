@@ -74,6 +74,10 @@ public class FinderCacheImpl implements CacheRegistryItem, FinderCache {
 		_multiVMPool.clearGroup(_groups, groupKey, _cache);
 	}
 
+	public String getRegistryName() {
+		return CACHE_NAME;
+	}
+
 	public Object getResult(
 		String className, String methodName, String[] params, Object[] args,
 		SessionFactory sessionFactory) {

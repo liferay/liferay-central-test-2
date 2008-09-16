@@ -22,7 +22,6 @@
 
 package com.liferay.portal.deploy.hot;
 
-import com.liferay.portal.kernel.bean.PortletBeanLocatorUtil;
 import com.liferay.portal.kernel.cache.CacheRegistry;
 import com.liferay.portal.kernel.configuration.Configuration;
 import com.liferay.portal.kernel.configuration.ConfigurationFactoryUtil;
@@ -33,7 +32,10 @@ import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.HttpUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;
+import com.liferay.portal.kernel.xml.Document;
 import com.liferay.portal.kernel.xml.DocumentException;
+import com.liferay.portal.kernel.xml.Element;
+import com.liferay.portal.kernel.xml.SAXReaderUtil;
 import com.liferay.portal.plugin.PluginPackageImpl;
 import com.liferay.portal.plugin.PluginPackageUtil;
 import com.liferay.portal.service.ServiceComponentLocalServiceUtil;
@@ -42,6 +44,7 @@ import com.liferay.util.Version;
 import java.io.IOException;
 import java.io.InputStream;
 
+import java.util.List;
 import java.util.Properties;
 import java.util.jar.Attributes;
 import java.util.jar.Manifest;
@@ -242,17 +245,42 @@ public class PluginPackageHotDeployListener extends BaseHotDeployListener {
 
 		PluginPackageUtil.unregisterInstalledPluginPackage(pluginPackage);
 
-		PortletBeanLocatorUtil.setBeanLocator(servletContextName, null);
-
-		if (_processServiceBuilderProperties) {
-			CacheRegistry.clear();
-		}
+		processCacheRegistry(servletContext);
 
 		if (_log.isInfoEnabled()) {
 			_log.info(
 				"Plugin package " + pluginPackage.getModuleId() +
 					" unregistered successfully");
 		}
+	}
+
+	protected void processCacheRegistry(ServletContext servletContext)
+		throws Exception {
+
+		if (!_processServiceBuilderProperties) {
+			return;
+		}
+
+		String xml = HttpUtil.URLtoString(servletContext.getResource(
+			"/WEB-INF/classes/META-INF/portlet-hbm.xml"));
+
+		if (xml == null) {
+			return;
+		}
+
+		Document doc = SAXReaderUtil.read(xml);
+
+		Element root = doc.getRootElement();
+
+		List<Element> classEls = root.elements("class");
+
+		for (Element classEl : classEls) {
+			String name = classEl.attributeValue("name");
+
+			CacheRegistry.unregister(name);
+		}
+
+		CacheRegistry.clear();
 	}
 
 	protected void processServiceBuilderProperties(
