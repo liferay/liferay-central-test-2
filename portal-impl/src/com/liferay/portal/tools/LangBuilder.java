@@ -171,8 +171,8 @@ public class LangBuilder {
 
 				if (Validator.isNotNull(translatedText)) {
 					if (translatedText.indexOf("&#39;") != -1) {
-						translatedText =
-							StringUtil.replace(translatedText, "&#39;", "\'");
+						translatedText = StringUtil.replace(
+							translatedText, "&#39;", "\'");
 					}
 
 					bw.write(key + "=" + translatedText);
