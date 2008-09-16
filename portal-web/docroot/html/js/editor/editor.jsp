@@ -31,11 +31,11 @@
 <%
 String editorImpl = ParamUtil.getString(request, "editorImpl", PropsValues.EDITOR_WYSIWYG_DEFAULT);
 
-if (!BrowserSnifferUtil.is_rtf(request)) {
-	if (BrowserSnifferUtil.is_safari_mobile(request)) {
+if (!BrowserSnifferUtil.isRTF(request)) {
+	if (BrowserSnifferUtil.isSafari(request) && BrowserSnifferUtil.isMobile(request)) {
 		editorImpl = "simple";
 	}
-	else if (BrowserSnifferUtil.is_safari(request) && (editorImpl.indexOf("simple") == -1)) {
+	else if (BrowserSnifferUtil.isSafari(request) && (editorImpl.indexOf("simple") == -1)) {
 		editorImpl = "tinymcesimple";
 	}
 	else {

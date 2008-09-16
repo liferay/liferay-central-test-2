@@ -1170,7 +1170,7 @@ public class ServicePreAction extends Action {
 		Theme theme = null;
 		ColorScheme colorScheme = null;
 
-		boolean wapTheme = BrowserSnifferUtil.is_wap(request);
+		boolean wapTheme = BrowserSnifferUtil.isWap(request);
 
 		if (layout != null) {
 			if (wapTheme) {

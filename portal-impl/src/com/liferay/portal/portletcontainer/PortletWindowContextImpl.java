@@ -125,7 +125,7 @@ public class PortletWindowContextImpl implements PortletWindowContext {
 	}
 
 	public String getContentType() {
-		if (BrowserSnifferUtil.is_wap(_request)) {
+		if (BrowserSnifferUtil.isWap(_request)) {
 			return ContentTypes.XHTML_MP;
 		}
 		else {

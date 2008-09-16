@@ -90,10 +90,11 @@ public class LayoutCacheFilter extends BasePortalFilter {
 	}
 
 	protected String getBrowserType(HttpServletRequest request) {
-		if (BrowserSnifferUtil.is_ie_7(request)) {
+		if (BrowserSnifferUtil.isIE(request) &&
+			BrowserSnifferUtil.majorVersion(request) == 7.0) {
 			return _BROWSER_TYPE_IE_7;
 		}
-		else if (BrowserSnifferUtil.is_ie(request)) {
+		else if (BrowserSnifferUtil.isIE(request)) {
 			return _BROWSER_TYPE_IE;
 		}
 		else {

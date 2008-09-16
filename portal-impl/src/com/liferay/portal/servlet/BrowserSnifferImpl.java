@@ -24,6 +24,10 @@ package com.liferay.portal.servlet;
 
 import com.liferay.portal.kernel.servlet.BrowserSniffer;
 import com.liferay.portal.kernel.servlet.HttpHeaders;
+import com.liferay.portal.kernel.util.StringPool;
+
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -32,7 +36,8 @@ import javax.servlet.http.HttpServletRequest;
  *
  * See http://www.zytrax.com/tech/web/browser_ids.htm for examples.
  *
- * @author Brian Wing Shun Chan
+ * @author Eduardo Lundgren
+ * @author Nate Cavanaugh
  *
  */
 public class BrowserSnifferImpl implements BrowserSniffer {
@@ -50,230 +55,131 @@ public class BrowserSnifferImpl implements BrowserSniffer {
 		}
 	}
 
-	public boolean is_ie(HttpServletRequest request) {
-		if (request == null) {
-			return false;
-		}
+	public boolean isAir(HttpServletRequest request) {
+		String agent = _getUserAgent(request);
 
-		String agent = request.getHeader(HttpHeaders.USER_AGENT);
-
-		if (agent == null) {
-			return false;
-		}
-
-		agent = agent.toLowerCase();
-
-		if (agent.indexOf("msie") != -1) {
+		if (agent.indexOf("adobeair") != -1) {
 			return true;
 		}
-		else {
-			return false;
-		}
+
+		return false;
 	}
 
-	public boolean is_ie_4(HttpServletRequest request) {
-		if (request == null) {
-			return false;
-		}
+	public boolean isChrome(HttpServletRequest request) {
+		String agent = _getUserAgent(request);
 
-		String agent = request.getHeader(HttpHeaders.USER_AGENT);
-
-		if (agent == null) {
-			return false;
-		}
-
-		agent = agent.toLowerCase();
-
-		if (is_ie(request) && (agent.indexOf("msie 4") != -1)) {
+		if (agent.indexOf("chrome") != -1) {
 			return true;
 		}
-		else {
-			return false;
-		}
+
+		return false;
 	}
 
-	public boolean is_ie_5(HttpServletRequest request) {
-		if (request == null) {
-			return false;
-		}
+	public boolean isFirefox(HttpServletRequest request) {
+		String agent = _getUserAgent(request);
 
-		String agent = request.getHeader(HttpHeaders.USER_AGENT);
+		if (isMozilla(request)) {
+			String uaPattern = "(firefox|minefield|granparadiso|bonecho|" +
+				"firebird|phoenix|camino)";
 
-		if (agent == null) {
-			return false;
-		}
+			Pattern pattern = Pattern.compile(uaPattern);
+			Matcher match = pattern.matcher(agent);
 
-		agent = agent.toLowerCase();
-
-		if (is_ie(request) && (agent.indexOf("msie 5.0") != -1)) {
-			return true;
-		}
-		else {
-			return false;
-		}
-	}
-
-	public boolean is_ie_5_5(HttpServletRequest request) {
-		if (request == null) {
-			return false;
-		}
-
-		String agent = request.getHeader(HttpHeaders.USER_AGENT);
-
-		if (agent == null) {
-			return false;
-		}
-
-		agent = agent.toLowerCase();
-
-		if (is_ie(request) && (agent.indexOf("msie 5.5") != -1)) {
-			return true;
-		}
-		else {
-			return false;
-		}
-	}
-
-	public boolean is_ie_5_5_up(HttpServletRequest request) {
-		if (is_ie(request) && !is_ie_4(request) && !is_ie_5(request)) {
-			return true;
-		}
-		else {
-			return false;
-		}
-	}
-
-	public boolean is_ie_6(HttpServletRequest request) {
-		if (request == null) {
-			return false;
-		}
-
-		String agent = request.getHeader(HttpHeaders.USER_AGENT);
-
-		if (agent == null) {
-			return false;
-		}
-
-		agent = agent.toLowerCase();
-
-		if (is_ie(request) && (agent.indexOf("msie 6.0") != -1)) {
-			return true;
-		}
-		else {
-			return false;
-		}
-	}
-
-	public boolean is_ie_7(HttpServletRequest request) {
-		if (request == null) {
-			return false;
-		}
-
-		String agent = request.getHeader(HttpHeaders.USER_AGENT);
-
-		if (agent == null) {
-			return false;
-		}
-
-		agent = agent.toLowerCase();
-
-		if (is_ie(request) && (agent.indexOf("msie 7.0") != -1)) {
-			return true;
-		}
-		else {
-			return false;
-		}
-	}
-
-	public boolean is_linux(HttpServletRequest request) {
-		String agent = request.getHeader(HttpHeaders.USER_AGENT);
-
-		if (agent == null) {
-			return false;
-		}
-
-		agent = agent.toLowerCase();
-
-		if (agent.matches(".*linux.*")) {
-			return true;
-		}
-		else {
-			return false;
-		}
-	}
-
-	public boolean is_mozilla(HttpServletRequest request) {
-		if (request == null) {
-			return false;
-		}
-
-		String agent = request.getHeader(HttpHeaders.USER_AGENT);
-
-		if (agent == null) {
-			return false;
-		}
-
-		agent = agent.toLowerCase();
-
-		if ((agent.indexOf("mozilla") != -1) &&
-			(agent.indexOf("spoofer") == -1) &&
-			(agent.indexOf("compatible") == -1) &&
-			(agent.indexOf("opera") == -1) &&
-			(agent.indexOf("webtv") == -1) &&
-			(agent.indexOf("hotjava") == -1)) {
-
-			return true;
-		}
-		else {
-			return false;
-		}
-	}
-
-	public boolean is_mozilla_1_3_up(HttpServletRequest request) {
-		if (request == null) {
-			return false;
-		}
-
-		String agent = request.getHeader(HttpHeaders.USER_AGENT);
-
-		if (agent == null) {
-			return false;
-		}
-
-		agent = agent.toLowerCase();
-
-		if (is_mozilla(request)) {
-			int pos = agent.indexOf("gecko/");
-
-			if (pos == -1) {
-				return false;
-			}
-			else {
-				String releaseDate = agent.substring(pos + 6, agent.length());
-
-				if (releaseDate.compareTo("20030210") > 0) {
-					return true;
-				}
+			if (match.find()) {
+				return true;
 			}
 		}
 
 		return false;
 	}
 
-	public boolean is_ns_4(HttpServletRequest request) {
-		if (request == null) {
-			return false;
+	public boolean isGecko(HttpServletRequest request) {
+		String agent = _getUserAgent(request);
+
+		if (agent.indexOf("gecko") != -1) {
+			return true;
 		}
 
-		String agent = request.getHeader(HttpHeaders.USER_AGENT);
+		return false;
+	}
 
-		if (agent == null) {
-			return false;
+	public boolean isIE(HttpServletRequest request) {
+		String agent = _getUserAgent(request);
+
+		if ((agent.indexOf("msie") != -1) && (agent.indexOf("opera") == -1)) {
+			return true;
 		}
 
-		agent = agent.toLowerCase();
+		return false;
+	}
 
-		if (!is_ie(request) && (agent.indexOf("mozilla/4.") != -1)) {
+	public boolean isIPhone(HttpServletRequest request) {
+		String agent = _getUserAgent(request);
+
+		if (agent.indexOf("iphone") != -1) {
+			return true;
+		}
+
+		return false;
+	}
+
+	public boolean isLinux(HttpServletRequest request) {
+		String agent = _getUserAgent(request);
+
+		if (agent.indexOf("linux") != -1) {
+			return true;
+		}
+
+		return false;
+	}
+
+	public boolean isMobile(HttpServletRequest request) {
+		String agent = _getUserAgent(request);
+
+		if (agent.indexOf("mobile") != -1) {
+			return true;
+		}
+
+		return false;
+	}
+
+	public boolean isMozilla(HttpServletRequest request) {
+		String agent = _getUserAgent(request);
+
+		if ((agent.indexOf("mozilla") != -1) &&
+				!agent.matches("compatible|webkit")) {
+			return true;
+		}
+
+		return false;
+	}
+
+	public boolean isMac(HttpServletRequest request) {
+		String agent = _getUserAgent(request);
+
+		if (agent.indexOf("mac") != -1) {
+			return true;
+		}
+
+		return false;
+	}
+
+	public boolean isOpera(HttpServletRequest request) {
+		String agent = _getUserAgent(request);
+
+		if (agent.indexOf("opera") != -1) {
+			return true;
+		}
+
+		return false;
+	}
+
+	public boolean isRTF(HttpServletRequest request) {
+		if ((isIE(request) && majorVersion(request) >= 5.5) ||
+			(isMozilla(request) && majorVersion(request) >= 1.3) ||
+			(isSafari(request) && majorVersion(request) >= 3.0 &&
+			!isMobile(request))) {
+
 			return true;
 		}
 		else {
@@ -281,126 +187,155 @@ public class BrowserSnifferImpl implements BrowserSniffer {
 		}
 	}
 
-	public boolean is_rtf(HttpServletRequest request) {
-		if (is_ie_5_5_up(request) || is_mozilla_1_3_up(request) ||
-			(is_safari_3(request) && !is_safari_mobile(request))) {
+	public boolean isSafari(HttpServletRequest request) {
+		String agent = _getUserAgent(request);
 
+		if (isWebkit(request) && (agent.indexOf("safari") != -1)) {
 			return true;
 		}
-		else {
-			return false;
-		}
+
+		return false;
 	}
 
-	public boolean is_safari(HttpServletRequest request) {
-		if (request == null) {
-			return false;
-		}
+	public boolean isSun(HttpServletRequest request) {
+		String agent = _getUserAgent(request);
 
-		String agent = request.getHeader(HttpHeaders.USER_AGENT);
-
-		if (agent == null) {
-			return false;
-		}
-
-		agent = agent.toLowerCase();
-
-		if (agent.indexOf("safari") != -1) {
+		if (agent.indexOf("sunos") != -1) {
 			return true;
 		}
-		else {
-			return false;
-		}
+
+		return false;
 	}
 
-	public boolean is_safari_3(HttpServletRequest request) {
-		if (request == null) {
-			return false;
-		}
+	public boolean isWebkit(HttpServletRequest request) {
+		String agent = _getUserAgent(request);
 
-		String agent = request.getHeader(HttpHeaders.USER_AGENT);
+		String uaPattern = "(khtml|applewebkit)";
+		Pattern pattern = Pattern.compile(uaPattern);
+		Matcher match = pattern.matcher(agent);
 
-		if (agent == null) {
-			return false;
-		}
-
-		agent = agent.toLowerCase();
-
-		if (is_safari(request) && (agent.indexOf("version/3.") != -1)) {
+		if (match.find()) {
 			return true;
 		}
-		else {
-			return false;
-		}
+
+		return false;
 	}
 
-	public boolean is_safari_mobile(HttpServletRequest request) {
-		if (request == null) {
-			return false;
-		}
+	public boolean isWap(HttpServletRequest request) {
+		return isWapXHTML(request);
+	}
 
-		String agent = request.getHeader(HttpHeaders.USER_AGENT);
+	public boolean isWapXHTML(HttpServletRequest request) {
+		String agent = _getUserAgent(request);
 
-		if (agent == null) {
-			return false;
-		}
-
-		agent = agent.toLowerCase();
-
-		if (is_safari(request) && (agent.indexOf("mobile") != -1)) {
+		if (agent.indexOf("wap.xhtml") != -1) {
 			return true;
 		}
-		else {
-			return false;
-		}
+
+		return false;
 	}
 
-	public boolean is_wap(HttpServletRequest request) {
-		return is_wap_xhtml(request);
-	}
+	public boolean isWindows(HttpServletRequest request) {
+		String agent = _getUserAgent(request);
 
-	public boolean is_wap_xhtml(HttpServletRequest request) {
-		if (request == null) {
-			return false;
-		}
+		String uaPattern = "(windows|win32|16bit)";
+		Pattern pattern = Pattern.compile(uaPattern);
+		Matcher match = pattern.matcher(agent);
 
-		String accept = request.getHeader(HttpHeaders.ACCEPT);
-
-		if (accept == null) {
-			return false;
-		}
-
-		accept = accept.toLowerCase();
-
-		if (accept.indexOf("wap.xhtml") != -1) {
+		if (match.find()) {
 			return true;
 		}
-		else {
-			return false;
-		}
+
+		return false;
 	}
 
-	public boolean is_wml(HttpServletRequest request) {
-		if (request == null) {
-			return false;
-		}
+	public boolean isWML(HttpServletRequest request) {
+		String agent = _getUserAgent(request);
 
-		String accept = request.getHeader(HttpHeaders.ACCEPT);
-
-		if (accept == null) {
-			return false;
-		}
-
-		accept = accept.toLowerCase();
-
-		if (accept.indexOf("wap.wml") != -1) {
+		if (agent.indexOf("wap.wml") != -1) {
 			return true;
 		}
-		else {
-			return false;
+
+		return false;
+	}
+
+	public float majorVersion(HttpServletRequest request) {
+		float _majorVersion = 0;
+		String version = version(request);
+
+		Pattern pattern = Pattern.compile("(\\d+[.]\\d+)");
+		Matcher matcher = pattern.matcher(version);
+
+		if (matcher.find()) {
+			_majorVersion = Float.parseFloat(matcher.group(1));
 		}
+
+		return _majorVersion;
+	}
+
+	public String revision(HttpServletRequest request) {
+		String _revision = null;
+		String agent = _getUserAgent(request);
+		Pattern pattern = Pattern.compile(".+(?:rv|it|ra|ie)[\\/: ]([\\d.]+)");
+		Matcher matcher = pattern.matcher(agent);
+
+		while (matcher.find()) {
+			for (int i = 1; i <= matcher.groupCount(); ++i) {
+				_revision = matcher.group(i);
+			}
+		}
+
+		return _revision;
+	}
+
+	public String version(HttpServletRequest request) {
+		String agent = _getUserAgent(request);
+		String _version = StringPool.BLANK;
+
+		Pattern versionPattern = Pattern.compile("(?:version)[\\/]([\\d.]+)");
+		Matcher varsionMatcher = versionPattern.matcher(agent);
+
+		if (varsionMatcher.find()) {
+			_version = varsionMatcher.group(1);
+		}
+		else if (isFirefox(request)) {
+			Pattern pattern =
+				Pattern.compile("(?:firefox|minefield)[\\/]([\\d.]+)");
+
+			Matcher matcher = pattern.matcher(agent);
+
+			if (matcher.find()) {
+				_version = matcher.group(1);
+			}
+		}
+		else if (isChrome(request)) {
+			Pattern pattern = Pattern.compile("(?:chrome)[\\/]([\\d.]+)");
+			Matcher matcher = pattern.matcher(agent);
+
+			if (matcher.find()) {
+				_version = matcher.group(1);
+			}
+		}
+		else {
+			_version = revision(request);
+		}
+
+		return _version;
+	}
+
+	private String _getUserAgent(HttpServletRequest request) {
+		String agent = StringPool.BLANK;
+
+		if (request != null) {
+			String agentHeader = request.getHeader(HttpHeaders.USER_AGENT);
+
+			if (agentHeader != null) {
+				agent = agentHeader.toLowerCase();
+			}
+		}
+
+		return agent;
 	}
 
 	private static final String _GZIP = "gzip";
-
 }

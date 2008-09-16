@@ -22,6 +22,8 @@
 
 package com.liferay.portal.kernel.servlet;
 
+import java.util.regex.*;
+
 import javax.servlet.http.HttpServletRequest;
 
 /**
@@ -36,40 +38,48 @@ public interface BrowserSniffer {
 
 	public boolean acceptsGzip(HttpServletRequest request);
 
-	public boolean is_ie(HttpServletRequest request);
+	public boolean isAir(HttpServletRequest request);
 
-	public boolean is_ie_4(HttpServletRequest request);
+	public boolean isChrome(HttpServletRequest request);
 
-	public boolean is_ie_5(HttpServletRequest request);
+	public boolean isFirefox(HttpServletRequest request);
 
-	public boolean is_ie_5_5(HttpServletRequest request);
+	public boolean isGecko(HttpServletRequest request);
 
-	public boolean is_ie_5_5_up(HttpServletRequest request);
+	public boolean isIE(HttpServletRequest request);
 
-	public boolean is_ie_6(HttpServletRequest request);
+	public boolean isIPhone(HttpServletRequest request);
 
-	public boolean is_ie_7(HttpServletRequest request);
+	public boolean isLinux(HttpServletRequest request);
 
-	public boolean is_linux(HttpServletRequest request);
+	public boolean isMobile(HttpServletRequest request);
 
-	public boolean is_mozilla(HttpServletRequest request);
+	public boolean isMozilla(HttpServletRequest request);
 
-	public boolean is_mozilla_1_3_up(HttpServletRequest request);
+	public boolean isMac(HttpServletRequest request);
 
-	public boolean is_ns_4(HttpServletRequest request);
+	public boolean isOpera(HttpServletRequest request);
 
-	public boolean is_rtf(HttpServletRequest request);
+	public boolean isRTF(HttpServletRequest request);
 
-	public boolean is_safari(HttpServletRequest request);
+	public boolean isSafari(HttpServletRequest request);
 
-	public boolean is_safari_3(HttpServletRequest request);
+	public boolean isSun(HttpServletRequest request);
 
-	public boolean is_safari_mobile(HttpServletRequest request);
+	public boolean isWebkit(HttpServletRequest request);
 
-	public boolean is_wap(HttpServletRequest request);
+	public boolean isWap(HttpServletRequest request);
 
-	public boolean is_wap_xhtml(HttpServletRequest request);
+	public boolean isWapXHTML(HttpServletRequest request);
 
-	public boolean is_wml(HttpServletRequest request);
+	public boolean isWindows(HttpServletRequest request);
+
+	public boolean isWML(HttpServletRequest request);
+
+	public float majorVersion(HttpServletRequest request);
+
+	public String revision(HttpServletRequest request);
+
+	public String version(HttpServletRequest request);
 
 }
