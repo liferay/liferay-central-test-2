@@ -176,6 +176,10 @@ public class HookHotDeployListener extends BaseHotDeployListener {
 
 		Element root = doc.getRootElement();
 
+		EventsContainer eventsContainer = new EventsContainer();
+
+		_eventsContainerMap.put(servletContextName, new EventsContainer());
+
 		List<Element> eventEls = root.elements("event");
 
 		for (Element eventEl : eventEls) {
@@ -185,17 +189,15 @@ public class HookHotDeployListener extends BaseHotDeployListener {
 			Object obj = initEvent(eventClass, eventType, portletClassLoader);
 
 			if (obj != null) {
-				List<Object> events = _eventsMap.get(eventType);
-
-				if (events == null) {
-					events = new ArrayList<Object>();
-
-					_eventsMap.put(eventType, events);
-				}
-
-				events.add(obj);
+				eventsContainer.addEvent(eventType, obj);
 			}
 		}
+
+		ModelListenersContainer modelListenersContainer =
+			new ModelListenersContainer();
+
+		_modelListenersContainerMap.put(
+			servletContextName, new ModelListenersContainer());
 
 		List<Element> modelListenerEls = root.elements("model-listener");
 
@@ -208,16 +210,8 @@ public class HookHotDeployListener extends BaseHotDeployListener {
 				modelListenerClass, modelName, portletClassLoader);
 
 			if (modelListener != null) {
-				List<ModelListener> modelListeners = _modelListenersMap.get(
-					modelName);
-
-				if (modelListeners == null) {
-					modelListeners = new ArrayList<ModelListener>();
-
-					_modelListenersMap.put(modelName, modelListeners);
-				}
-
-				modelListeners.add(modelListener);
+				modelListenersContainer.addModelListener(
+					modelName, modelListener);
 			}
 		}
 
@@ -314,26 +308,25 @@ public class HookHotDeployListener extends BaseHotDeployListener {
 			_log.debug("Invoking undeploy for " + servletContextName);
 		}
 
-		for (Map.Entry<String, List<Object>> entry : _eventsMap.entrySet()) {
-			String eventType = entry.getKey();
-			List<Object> events = entry.getValue();
+		String xml = HttpUtil.URLtoString(
+			servletContext.getResource("/WEB-INF/liferay-hook.xml"));
 
-			for (Object obj : events) {
-				EventsProcessor.unregisterEvent(eventType, obj);
-			}
+		if (xml == null) {
+			return;
 		}
 
-		for (Map.Entry<String, List<ModelListener>> entry :
-				_modelListenersMap.entrySet()) {
+		EventsContainer eventsContainer = _eventsContainerMap.get(
+			servletContextName);
 
-			String modelName = entry.getKey();
-			List<ModelListener> modelListeners = entry.getValue();
+		if (eventsContainer != null) {
+			eventsContainer.unregisterEvents();
+		}
 
-			BasePersistence persistence = getPersistence(modelName);
+		ModelListenersContainer modelListenersContainer =
+			_modelListenersContainerMap.get(servletContextName);
 
-			for (ModelListener modelListener : modelListeners) {
-				persistence.unregisterListener(modelListener);
-			}
+		if (modelListenersContainer != null) {
+			modelListenersContainer.unregisterModelListeners();
 		}
 
 		Properties portalProperties = _portalPropertiesMap.get(
@@ -658,14 +651,83 @@ public class HookHotDeployListener extends BaseHotDeployListener {
 
 	private static Log _log = LogFactory.getLog(HookHotDeployListener.class);
 
-	private Map<String, List<Object>> _eventsMap =
-		new HashMap<String, List<Object>>();
-	private Map<String, List<ModelListener>> _modelListenersMap =
-		new HashMap<String, List<ModelListener>>();
+	private Map<String, EventsContainer> _eventsContainerMap =
+		new HashMap<String, EventsContainer>();
+	private Map<String, ModelListenersContainer> _modelListenersContainerMap =
+		new HashMap<String, ModelListenersContainer>();
 	private Map<String, Properties> _portalPropertiesMap =
 		new HashMap<String, Properties>();
 	private Map<String, CustomJspBag> _customJspBagsMap =
 		new HashMap<String, CustomJspBag>();
+
+	private class EventsContainer {
+
+		public void addEvent(String eventType, Object event) {
+			List<Object> events = _eventsMap.get(eventType);
+
+			if (events == null) {
+				events = new ArrayList<Object>();
+
+				_eventsMap.put(eventType, events);
+			}
+
+			events.add(event);
+		}
+
+		public void unregisterEvents() {
+			for (Map.Entry<String, List<Object>> entry :
+					_eventsMap.entrySet()) {
+
+				String eventType = entry.getKey();
+				List<Object> events = entry.getValue();
+
+				for (Object event : events) {
+					EventsProcessor.unregisterEvent(eventType, event);
+				}
+			}
+		}
+
+		private Map<String, List<Object>> _eventsMap =
+			new HashMap<String, List<Object>>();
+
+	}
+
+	private class ModelListenersContainer {
+
+		public void addModelListener(
+			String modelName, ModelListener modelListener) {
+
+			List<ModelListener> modelListeners = _modelListenersMap.get(
+				modelName);
+
+			if (modelListeners == null) {
+				modelListeners = new ArrayList<ModelListener>();
+
+				_modelListenersMap.put(modelName, modelListeners);
+			}
+
+			modelListeners.add(modelListener);
+		}
+
+		public void unregisterModelListeners() {
+			for (Map.Entry<String, List<ModelListener>> entry :
+					_modelListenersMap.entrySet()) {
+
+				String modelName = entry.getKey();
+				List<ModelListener> modelListeners = entry.getValue();
+
+				BasePersistence persistence = getPersistence(modelName);
+
+				for (ModelListener modelListener : modelListeners) {
+					persistence.unregisterListener(modelListener);
+				}
+			}
+		}
+
+		private Map<String, List<ModelListener>> _modelListenersMap =
+			new HashMap<String, List<ModelListener>>();
+
+	}
 
 	private class CustomJspBag {
 
