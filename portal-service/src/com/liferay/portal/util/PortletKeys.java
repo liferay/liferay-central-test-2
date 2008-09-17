@@ -32,6 +32,12 @@ public class PortletKeys {
 
 	public static final String ADMIN = "9";
 
+	public static final String ADMIN_INSTANCE = "135";
+
+	public static final String ADMIN_PLUGINS = "136";
+
+	public static final String ADMIN_SERVER = "137";
+
 	public static final String ALERTS = "83";
 
 	public static final String ANNOUNCEMENTS = "84";

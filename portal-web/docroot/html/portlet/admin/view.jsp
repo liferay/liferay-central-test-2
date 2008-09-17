@@ -29,6 +29,22 @@
 
 		<%
 		String tabs1 = ParamUtil.getString(request, "tabs1", "server");
+
+		boolean showTabs1 = false;
+
+		if (portletName.equals(PortletKeys.ADMIN_INSTANCE)) {
+			tabs1 = "instances";
+		}
+		else if (portletName.equals(PortletKeys.ADMIN_PLUGINS)) {
+			tabs1 = "plugins";
+		}
+		else if (portletName.equals(PortletKeys.ADMIN_SERVER)) {
+			tabs1 = "server";
+		}
+		else if (portletName.equals(PortletKeys.ADMIN)) {
+			showTabs1 = true;
+		}
+
 		String tabs2 = ParamUtil.getString(request, "tabs2", "memory");
 		String tabs3 = ParamUtil.getString(request, "tabs3");
 
@@ -65,10 +81,12 @@
 		<input name="<portlet:namespace />redirect" type="hidden" value="<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/admin/view" /><portlet:param name="tabs1" value="<%= tabs1 %>" /><portlet:param name="tabs2" value="<%= tabs2 %>" /><portlet:param name="tabs3" value="<%= tabs3 %>" />portlet:param name="cur" value="<%= cur %>" /></portlet:renderURL>" />
 		<input name="<portlet:namespace />portletId" type="hidden" value="" />
 
-		<liferay-ui:tabs
-			names="server,instances,plugins"
-			url="<%= portletURL.toString() %>"
-		/>
+		<c:if test="<%= showTabs1 %>">
+			<liferay-ui:tabs
+				names="server,instances,plugins"
+				url="<%= portletURL.toString() %>"
+			/>
+		</c:if>
 
 		<c:choose>
 			<c:when test='<%= tabs1.equals("server") %>'>

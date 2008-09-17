@@ -1189,6 +1189,42 @@
 		<css-class-wrapper>portlet-enterprise-admin</css-class-wrapper>
 		<add-default-resource>true</add-default-resource>
 	</portlet>
+	<portlet>
+		<portlet-name>135</portlet-name>
+		<icon>/html/portlet/admin/icon.png</icon>
+		<struts-path>admin_instances</struts-path>
+		<portlet-url-class>com.liferay.portal.struts.StrutsActionPortletURL</portlet-url-class>
+		<use-default-template>false</use-default-template>
+		<restore-current-view>false</restore-current-view>
+		<private-request-attributes>false</private-request-attributes>
+		<private-session-attributes>false</private-session-attributes>
+		<render-weight>1</render-weight>
+		<css-class-wrapper>portlet-admin</css-class-wrapper>
+	</portlet>
+	<portlet>
+		<portlet-name>136</portlet-name>
+		<icon>/html/portlet/admin/icon.png</icon>
+		<struts-path>admin_plugins</struts-path>
+		<portlet-url-class>com.liferay.portal.struts.StrutsActionPortletURL</portlet-url-class>
+		<use-default-template>false</use-default-template>
+		<restore-current-view>false</restore-current-view>
+		<private-request-attributes>false</private-request-attributes>
+		<private-session-attributes>false</private-session-attributes>
+		<render-weight>1</render-weight>
+		<css-class-wrapper>portlet-admin</css-class-wrapper>
+	</portlet>
+	<portlet>
+		<portlet-name>137</portlet-name>
+		<icon>/html/portlet/admin/icon.png</icon>
+		<struts-path>admin_server</struts-path>
+		<portlet-url-class>com.liferay.portal.struts.StrutsActionPortletURL</portlet-url-class>
+		<use-default-template>false</use-default-template>
+		<restore-current-view>false</restore-current-view>
+		<private-request-attributes>false</private-request-attributes>
+		<private-session-attributes>false</private-session-attributes>
+		<render-weight>1</render-weight>
+		<css-class-wrapper>portlet-admin</css-class-wrapper>
+	</portlet>
 	<role-mapper>
 		<role-name>administrator</role-name>
 		<role-link>Administrator</role-link>

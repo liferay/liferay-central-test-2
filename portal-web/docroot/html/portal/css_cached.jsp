@@ -889,7 +889,7 @@ li.toggle-expand a {
 }
 
 .portlet-permission-icon {
-	float: right; 	 
+	float: right;
 }
 
 /* ---------- Liferay forms ---------- */
