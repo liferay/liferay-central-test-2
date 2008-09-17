@@ -24,6 +24,7 @@ package com.liferay.portal.upgrade.v4_3_0.util;
 
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.StringPool;
+import com.liferay.portal.model.PortletConstants;
 import com.liferay.portal.model.ResourceConstants;
 import com.liferay.portal.upgrade.UpgradeException;
 import com.liferay.portal.upgrade.util.BaseUpgradeColumnImpl;
@@ -124,7 +125,7 @@ public class ResourcePrimKeyUpgradeColumnImpl extends BaseUpgradeColumnImpl {
 
 	protected String getLayoutPrimKey(String oldPrimKey) throws Exception {
 		int x = oldPrimKey.indexOf(StringPool.PERIOD, 4);
-		int y = oldPrimKey.indexOf("_LAYOUT_");
+		int y = oldPrimKey.indexOf(PortletConstants.LAYOUT_SEPARATOR);
 
 		String oldOwnerId = oldPrimKey.substring(0, x);
 		String layoutId = oldPrimKey.substring(x + 1, y);
