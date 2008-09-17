@@ -244,7 +244,7 @@ if (configuredProducerBeans == null) {
 							List<Map.Entry<String, String>> results = null;
 
 							if (registrationPropertyDescriptions != null) {
-								ListUtil.fromCollection(registrationPropertyDescriptions.entrySet());
+								results = ListUtil.fromCollection(registrationPropertyDescriptions.entrySet());
 							}
 							else {
 								results = Collections.EMPTY_LIST;
@@ -452,7 +452,7 @@ if (configuredProducerBeans == null) {
 				List<Map.Entry<String, String>> results = null;
 
 				if (registrationPropertyDescriptions != null) {
-					ListUtil.fromCollection(registrationPropertyDescriptions.entrySet());
+					results = ListUtil.fromCollection(registrationPropertyDescriptions.entrySet());
 				}
 				else {
 					results = Collections.EMPTY_LIST;
