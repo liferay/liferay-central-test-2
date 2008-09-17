@@ -36,6 +36,29 @@
 
 	<liferay-portlet:icon-configuration />
 
+	<li>
+		<nobr>
+			<a href="javascript: ;">
+				<img class="icon" src="<%= themeDisplay.getPathThemeImages() %>/common/permissions.png" />
+				<liferay-ui:message key="permissions" />
+			</a>
+		</nobr>
+		<ul>
+			<liferay-ui:icon
+				image="../common/portlet"
+				message="portlet-permissions"
+				url="javascript: ;"
+				label="<%= true %>"
+			/>
+			<liferay-ui:icon
+				image="../common/page"
+				message="content-permissions"
+				url="javascript: ;"
+				label="<%= true %>"
+			/>
+		</ul>
+	</li>
+
 	<liferay-portlet:icon-edit />
 
 	<liferay-portlet:icon-edit-defaults />
