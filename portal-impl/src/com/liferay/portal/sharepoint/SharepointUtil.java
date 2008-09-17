@@ -23,6 +23,8 @@
 package com.liferay.portal.sharepoint;
 
 import com.liferay.portal.kernel.configuration.Filter;
+import com.liferay.portal.kernel.util.GetterUtil;
+import com.liferay.portal.kernel.util.InstancePool;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
@@ -63,8 +65,51 @@ public class SharepointUtil {
 		sb.append(method.parse());
 	}
 
+	public static long getGroupId(String path) {
+		long groupId = 0;
+
+		String[] pathArray = getPathArray(path);
+
+		String groupFolderName = pathArray[0];
+
+		if (groupFolderName != null) {
+			int pos = groupFolderName.lastIndexOf(StringPool.OPEN_BRACKET);
+
+			if (pos != -1) {
+				 groupId = GetterUtil.getLong(
+					groupFolderName.substring(
+						pos, groupFolderName.length() - 1));
+			}
+
+		}
+
+		return groupId;
+	}
+
 	public static String[] getPathArray(String path) {
 		return StringUtil.split(path, StringPool.SLASH);
+	}
+
+	public static SharepointStorage getStorage(String path) {
+		String storageClass = null;
+
+		if (path == null) {
+			return null;
+		}
+
+		String[] pathArray = getPathArray(path);
+
+		if (pathArray.length == 0) {
+			storageClass = CompanySharepointStorageImpl.class.getName();
+		}
+		else if (pathArray.length == 1) {
+			storageClass = GroupSharepointStorageImpl.class.getName();
+		}
+		else if (pathArray.length >= 2) {
+			storageClass = getStorageClass(pathArray[1]);
+		}
+
+		return (SharepointStorage)InstancePool.get(storageClass);
 	}
 
 	public static String getStorageClass(String token) {

@@ -20,56 +20,52 @@
  * SOFTWARE.
  */
 
-package com.liferay.portal.sharepoint;
+package com.liferay.portal.sharepoint.dws;
 
 import com.liferay.portal.kernel.xml.Element;
-
-import java.io.InputStream;
-
-import java.util.List;
+import com.liferay.portal.model.User;
 
 /**
- * <a href="SharepointStorage.java.html"><b><i>View Source</i></b></a>
+ * <a href="MemberResponseElement.java.html"><b><i>View Source</i></b></a>
  *
  * @author Bruno Farache
  *
  */
-public interface SharepointStorage {
+public class MemberResponseElement implements ResponseElement {
 
-	public void addDocumentElements(
-			SharepointRequest sharepointRequest, Element element)
-		throws Exception;
+	public MemberResponseElement(User user, boolean member) {
+		_id = user.getScreenName();
+		_name = user.getFullName();
+		_loginName = user.getScreenName();
+		_email = user.getEmailAddress();
+		_domainGroup = false;
+		_member = member;
+		_siteAdmin = false;
+	}
 
-	public void createFolder(SharepointRequest sharepointRequest)
-		throws Exception;
+	public void addElement(Element rootEl) {
+		String user = "User";
 
-	public InputStream getDocumentInputStream(
-			SharepointRequest sharepointRequest)
-		throws Exception;
+		if (_member) {
+			user = "Member";
+		}
 
-	public Tree getDocumentTree(SharepointRequest sharepointRequest)
-		throws Exception;
+		Element el = rootEl.addElement(user);
 
-	public Tree getDocumentsTree(SharepointRequest sharepointRequest)
-		throws Exception;
+		el.addElement("ID").setText(_id);
+		el.addElement("Name").setText(_name);
+		el.addElement("LoginName").setText(_loginName);
+		el.addElement("Email").setText(_email);
+		el.addElement("IsDomainGroup").setText(String.valueOf(_domainGroup));
+		el.addElement("IsSiteAdmin").setText(String.valueOf(_siteAdmin));
+	}
 
-	public Tree getFolderTree(SharepointRequest sharepointRequest)
-		throws Exception;
-
-	public Tree getFoldersTree(SharepointRequest sharepointRequest)
-		throws Exception;
-
-	public void getParentFolderIds(
-			long groupId, String path, List<Long> folderIds)
-		throws Exception;
-
-	public Tree[] moveDocument(SharepointRequest sharepointRequest)
-		throws Exception;
-
-	public void putDocument(SharepointRequest sharepointRequest)
-		throws Exception;
-
-	public Tree[] removeDocument(SharepointRequest sharepointRequest)
-		throws Exception;
+	private String _id;
+	private String _name;
+	private String _loginName;
+	private String _email;
+	private boolean _domainGroup;
+	private boolean _member;
+	private boolean _siteAdmin;
 
 }

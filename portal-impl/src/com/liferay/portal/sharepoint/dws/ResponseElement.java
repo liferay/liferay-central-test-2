@@ -20,56 +20,18 @@
  * SOFTWARE.
  */
 
-package com.liferay.portal.sharepoint;
+package com.liferay.portal.sharepoint.dws;
 
 import com.liferay.portal.kernel.xml.Element;
 
-import java.io.InputStream;
-
-import java.util.List;
-
 /**
- * <a href="SharepointStorage.java.html"><b><i>View Source</i></b></a>
+ * <a href="ResponseElement.java.html"><b><i>View Source</i></b></a>
  *
  * @author Bruno Farache
  *
  */
-public interface SharepointStorage {
+public interface ResponseElement {
 
-	public void addDocumentElements(
-			SharepointRequest sharepointRequest, Element element)
-		throws Exception;
-
-	public void createFolder(SharepointRequest sharepointRequest)
-		throws Exception;
-
-	public InputStream getDocumentInputStream(
-			SharepointRequest sharepointRequest)
-		throws Exception;
-
-	public Tree getDocumentTree(SharepointRequest sharepointRequest)
-		throws Exception;
-
-	public Tree getDocumentsTree(SharepointRequest sharepointRequest)
-		throws Exception;
-
-	public Tree getFolderTree(SharepointRequest sharepointRequest)
-		throws Exception;
-
-	public Tree getFoldersTree(SharepointRequest sharepointRequest)
-		throws Exception;
-
-	public void getParentFolderIds(
-			long groupId, String path, List<Long> folderIds)
-		throws Exception;
-
-	public Tree[] moveDocument(SharepointRequest sharepointRequest)
-		throws Exception;
-
-	public void putDocument(SharepointRequest sharepointRequest)
-		throws Exception;
-
-	public Tree[] removeDocument(SharepointRequest sharepointRequest)
-		throws Exception;
+	public void addElement(Element doc);
 
 }

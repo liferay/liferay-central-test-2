@@ -24,8 +24,8 @@ package com.liferay.portal.sharepoint;
 
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.util.DateUtil;
-import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.StringPool;
+import com.liferay.portal.kernel.xml.Element;
 import com.liferay.portal.service.LayoutLocalServiceUtil;
 
 import java.io.InputStream;
@@ -42,6 +42,11 @@ import java.util.Locale;
  *
  */
 public abstract class BaseSharepointStorageImpl implements SharepointStorage {
+
+	public void addDocumentElements(
+			SharepointRequest sharepointRequest, Element element)
+		throws Exception {
+	}
 
 	public void createFolder(SharepointRequest sharepointRequest)
 		throws Exception {
@@ -99,15 +104,39 @@ public abstract class BaseSharepointStorageImpl implements SharepointStorage {
 		return null;
 	}
 
-	protected String getDate(Date date) {
+	protected void addDocumentElement(
+			Element element, String documentName, Date createDate,
+			Date modifiedDate, String userName)
+		throws Exception {
+
+		element.addNamespace("z", "#RowsetSchema");
+
+		Element rowEl = element.addElement("z:row");
+
+		rowEl.addAttribute("ows_FileRef", documentName);
+		rowEl.addAttribute("ows_FSObjType", "0");
+		rowEl.addAttribute("ows_Created", getDate(createDate, true));
+		rowEl.addAttribute("ows_Author", userName);
+		rowEl.addAttribute("ows_Modified", getDate(modifiedDate, true));
+		rowEl.addAttribute("ows_Editor", userName);
+	}
+
+	protected String getDate(Date date, boolean xml) {
 		if (date == null) {
 			return StringPool.BLANK;
 		}
 
 		StringBuilder sb = new StringBuilder();
 
-		sb.append("TR|");
-		sb.append(DateUtil.getDate(date, "dd MMM yyyy HH:mm:ss Z", Locale.US));
+		if (xml) {
+			sb.append(
+				DateUtil.getDate(date, "yyyy-mm-dd HH:mm:ss Z", Locale.US));
+		}
+		else {
+			sb.append("TR|");
+			sb.append(
+				DateUtil.getDate(date, "dd MMM yyyy HH:mm:ss Z", Locale.US));
+		}
 
 		return sb.toString();
 	}
@@ -122,8 +151,8 @@ public abstract class BaseSharepointStorageImpl implements SharepointStorage {
 
 		documentTree.addChild(new Leaf("document_name", documentName, true));
 
-		String createDateString = getDate(createDate);
-		String modifiedDateString = getDate(modifiedDate);
+		String createDateString = getDate(createDate, false);
+		String modifiedDateString = getDate(modifiedDate, false);
 
 		Tree metaInfoTree = new Tree();
 
@@ -166,11 +195,13 @@ public abstract class BaseSharepointStorageImpl implements SharepointStorage {
 		name = SharepointUtil.replaceBackSlashes(name);
 
 		metaInfoTree.addChild(
-			new Leaf("vti_timecreated", getDate(createDate), false));
+			new Leaf("vti_timecreated", getDate(createDate, false), false));
 		metaInfoTree.addChild(
-			new Leaf("vti_timelastmodified", getDate(modifiedDate), false));
+			new Leaf(
+				"vti_timelastmodified", getDate(modifiedDate, false), false));
 		metaInfoTree.addChild(
-			new Leaf("vti_timelastwritten", getDate(lastPostDate), false));
+			new Leaf(
+				"vti_timelastwritten", getDate(lastPostDate, false), false));
 		metaInfoTree.addChild(new Leaf("vti_hassubdirs", "BR|true", false));
 		metaInfoTree.addChild(new Leaf("vti_isbrowsable", "BR|true", false));
 		metaInfoTree.addChild(new Leaf("vti_isexecutable", "BR|false", false));
@@ -180,27 +211,6 @@ public abstract class BaseSharepointStorageImpl implements SharepointStorage {
 		folderTree.addChild(new Leaf("meta_info", metaInfoTree));
 
 		return folderTree;
-	}
-
-	protected long getGroupId(String path) {
-		long groupId = 0;
-
-		String[] pathArray = SharepointUtil.getPathArray(path);
-
-		String groupFolderName = pathArray[0];
-
-		if (groupFolderName != null) {
-			int pos = groupFolderName.lastIndexOf(StringPool.OPEN_BRACKET);
-
-			if (pos != -1) {
-				 groupId = GetterUtil.getLong(
-					groupFolderName.substring(
-						pos, groupFolderName.length() - 1));
-			}
-
-		}
-
-		return groupId;
 	}
 
 	protected long getLastFolderId(

@@ -40,6 +40,10 @@ import javax.servlet.http.HttpServletResponse;
  */
 public class SharepointRequest {
 
+	public SharepointRequest(String rootPath) {
+		_rootPath = rootPath;
+	}
+
 	public SharepointRequest(
 		HttpServletRequest request, HttpServletResponse response, User user) {
 

@@ -20,56 +20,34 @@
  * SOFTWARE.
  */
 
-package com.liferay.portal.sharepoint;
+package com.liferay.portal.sharepoint.dws;
 
 import com.liferay.portal.kernel.xml.Element;
 
-import java.io.InputStream;
-
-import java.util.List;
-
 /**
- * <a href="SharepointStorage.java.html"><b><i>View Source</i></b></a>
+ * <a href="RoleResponseElement.java.html"><b><i>View Source</i></b></a>
  *
  * @author Bruno Farache
  *
  */
-public interface SharepointStorage {
+public class RoleResponseElement implements ResponseElement {
 
-	public void addDocumentElements(
-			SharepointRequest sharepointRequest, Element element)
-		throws Exception;
+	public RoleResponseElement(com.liferay.portal.model.Role role) {
+		_name = role.getName();
+		_description = role.getDescription();
+		_type = role.getTypeLabel();
+	}
 
-	public void createFolder(SharepointRequest sharepointRequest)
-		throws Exception;
+	public void addElement(Element rootEl) {
+		Element el = rootEl.addElement("Role");
 
-	public InputStream getDocumentInputStream(
-			SharepointRequest sharepointRequest)
-		throws Exception;
+		el.addAttribute("Name", _name);
+		el.addAttribute("Description", _description);
+		el.addAttribute("Type", _type);
+	}
 
-	public Tree getDocumentTree(SharepointRequest sharepointRequest)
-		throws Exception;
-
-	public Tree getDocumentsTree(SharepointRequest sharepointRequest)
-		throws Exception;
-
-	public Tree getFolderTree(SharepointRequest sharepointRequest)
-		throws Exception;
-
-	public Tree getFoldersTree(SharepointRequest sharepointRequest)
-		throws Exception;
-
-	public void getParentFolderIds(
-			long groupId, String path, List<Long> folderIds)
-		throws Exception;
-
-	public Tree[] moveDocument(SharepointRequest sharepointRequest)
-		throws Exception;
-
-	public void putDocument(SharepointRequest sharepointRequest)
-		throws Exception;
-
-	public Tree[] removeDocument(SharepointRequest sharepointRequest)
-		throws Exception;
+	private String _name;
+	private String _description;
+	private String _type;
 
 }
