@@ -840,17 +840,15 @@ else {
 
 <c:if test="<%= !themeDisplay.isFacebook() && !themeDisplay.isStateExclusive() && !themeDisplay.isWapTheme() %>">
 		<script type="text/javascript">
-			<c:if test="<%= !runtimePortlet %>">
-				Liferay.Portlet.onLoad(
-					{
-						canEditTitle: <%= showConfigurationIcon %>,
-						columnPos: <%= columnPos %>,
-						isStatic: '<%= staticVar %>',
-						namespacedId: 'p_p_id<%= renderResponseImpl.getNamespace() %>',
-						portletId: '<%= portletDisplay.getId() %>'
-					}
-				);
-			</c:if>
+			Liferay.Portlet.onLoad(
+				{
+					canEditTitle: <%= showConfigurationIcon %>,
+					columnPos: <%= columnPos %>,
+					isStatic: '<%= staticVar %>',
+					namespacedId: 'p_p_id<%= renderResponseImpl.getNamespace() %>',
+					portletId: '<%= portletDisplay.getId() %>'
+				}
+			);
 		</script>
 	</div>
 </c:if>
