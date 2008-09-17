@@ -65,9 +65,9 @@ public class PortletContextLoaderListener extends ContextLoaderListener {
 
 			setBeanLocatorMethod.invoke(
 				beanLocatorUtilClass, new Object[] {null});
-			
+
 			PortletBeanLocatorUtil.setBeanLocator(
-					servletContext.getServletContextName(), null);
+				servletContext.getServletContextName(), null);
 		}
 		catch (Exception e) {
 			_log.error(e, e);
@@ -99,10 +99,9 @@ public class PortletContextLoaderListener extends ContextLoaderListener {
 
 			setBeanLocatorMethod.invoke(
 				beanLocatorUtilClass, new Object[] {beanLocator});
-			
+
 			PortletBeanLocatorUtil.setBeanLocator(
-					servletContext.getServletContextName(), beanLocator);
-			
+				servletContext.getServletContextName(), beanLocator);
 		}
 		catch (Exception e) {
 			_log.error(e, e);
