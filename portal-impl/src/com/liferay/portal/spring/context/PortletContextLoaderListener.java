@@ -47,7 +47,6 @@ import org.springframework.web.context.support.WebApplicationContextUtils;
  * @author Brian Wing Shun Chan
  *
  */
-
 public class PortletContextLoaderListener extends ContextLoaderListener {
 
 	public void contextDestroyed(ServletContextEvent event) {
