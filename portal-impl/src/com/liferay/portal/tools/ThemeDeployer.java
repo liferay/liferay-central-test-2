@@ -26,6 +26,7 @@ import com.liferay.portal.kernel.plugin.PluginPackage;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.Plugin;
+import com.liferay.portal.util.InitUtil;
 import com.liferay.util.TextFormatter;
 
 import java.io.File;
@@ -45,6 +46,8 @@ import java.util.Properties;
 public class ThemeDeployer extends BaseDeployer {
 
 	public static void main(String[] args) {
+		InitUtil.initWithSpring();
+
 		List<String> wars = new ArrayList<String>();
 		List<String> jars = new ArrayList<String>();
 

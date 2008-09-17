@@ -22,6 +22,8 @@
 
 package com.liferay.portal.tools;
 
+import com.liferay.portal.util.InitUtil;
+
 import java.io.File;
 
 import java.util.ArrayList;
@@ -36,6 +38,8 @@ import java.util.List;
 public class LayoutTemplateDeployer extends BaseDeployer {
 
 	public static void main(String[] args) {
+		InitUtil.initWithSpring();
+
 		List<String> wars = new ArrayList<String>();
 		List<String> jars = new ArrayList<String>();
 

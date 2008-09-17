@@ -30,6 +30,7 @@ import com.liferay.portal.kernel.xml.Document;
 import com.liferay.portal.kernel.xml.Element;
 import com.liferay.portal.kernel.xml.SAXReaderUtil;
 import com.liferay.portal.model.Plugin;
+import com.liferay.portal.util.InitUtil;
 import com.liferay.portal.util.Portal;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PrefsPropsUtil;
@@ -71,6 +72,8 @@ public class PortletDeployer extends BaseDeployer {
 		"com.liferay.util.bridges.jsf.myfaces.MyFacesContextFactoryImpl";
 
 	public static void main(String[] args) {
+		InitUtil.initWithSpring();
+
 		List<String> wars = new ArrayList<String>();
 		List<String> jars = new ArrayList<String>();
 
