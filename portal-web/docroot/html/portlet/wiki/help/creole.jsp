@@ -40,7 +40,7 @@
 <pre>
 == Large heading ==
 === Medium heading ===
-==== Small heading ===
+==== Small heading ====
 </pre>
 
 <h4>
