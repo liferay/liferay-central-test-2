@@ -1430,7 +1430,6 @@
 		<reference package-path="com.liferay.portlet.shopping" entity="ShoppingCart" />
 		<reference package-path="com.liferay.portlet.social" entity="SocialActivity" />
 		<reference package-path="com.liferay.portlet.social" entity="SocialRequest" />
-		<reference package-path="com.liferay.portlet.social" entity="SocialRequest" />
 
 		<!-- Transactions -->
 
