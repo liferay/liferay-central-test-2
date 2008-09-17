@@ -42,6 +42,17 @@ import org.apache.commons.logging.LogFactory;
  */
 public abstract class BaseAutoDeployListener implements AutoDeployListener {
 
+	public boolean isHookPlugin(File file) throws AutoDeployException {
+		if ((isMatchingFile(
+				file, "WEB-INF/liferay-plugin-package.properties")) &&
+			(file.getName().indexOf("-hook") != -1)) {
+
+			return true;
+		}
+
+		return false;
+	}
+
 	public boolean isMatchingFile(File file, String checkXmlFile)
 		throws AutoDeployException {
 

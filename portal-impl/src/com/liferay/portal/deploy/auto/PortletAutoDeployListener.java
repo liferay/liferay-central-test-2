@@ -59,7 +59,8 @@ public class PortletAutoDeployListener extends BaseAutoDeployListener {
 
 			deployer = _deployer;
 		}
-		else if (!isMatchingFile(
+		else if (!isHookPlugin(file) &&
+				 !isMatchingFile(
 					file, "WEB-INF/liferay-layout-templates.xml") &&
 				 !isThemePlugin(file) && !isWebPlugin(file)) {
 

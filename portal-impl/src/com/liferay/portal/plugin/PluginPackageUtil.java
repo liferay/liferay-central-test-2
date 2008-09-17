@@ -863,6 +863,18 @@ public class PluginPackageUtil {
 		String pluginType = Plugin.TYPE_PORTLET;
 
 		if (pos == -1) {
+			pos = displayName.indexOf("-hook");
+
+			pluginType = Plugin.TYPE_HOOK;
+		}
+
+		if (pos == -1) {
+			pos = displayName.indexOf("-layouttpl");
+
+			pluginType = Plugin.TYPE_LAYOUT_TEMPLATE;
+		}
+
+		if (pos == -1) {
 			pos = displayName.indexOf("-theme");
 
 			pluginType = Plugin.TYPE_THEME;
