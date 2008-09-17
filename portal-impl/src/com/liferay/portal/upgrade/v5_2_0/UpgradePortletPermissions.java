@@ -52,7 +52,7 @@ public class UpgradePortletPermissions extends UpgradeProcess {
 		_log.info("Upgrading portlet permissions");
 
 		try {
-			updatePermissions(
+			updatePortletPermissions(
 				"15", "com.liferay.portlet.journal",
 				new String[]{
 					"ADD_ARTICLE", "ADD_FEED", "ADD_STRUCTURE", "ADD_TEMPLATE",
@@ -64,7 +64,40 @@ public class UpgradePortletPermissions extends UpgradeProcess {
 		}
 	}
 
-	protected void updatePermissions(
+	protected int getPortletPermissionsCount(
+			String actionId, long resourceId, String modelName)
+		throws Exception {
+
+		Connection con = null;
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+
+		try {
+			con = DataAccess.getConnection();
+
+			ps = con.prepareStatement(
+				"select COUNT(*) as COUNT_VALUE FROM Permission_ p, " +
+					"Resource_ r, ResourceCode rc WHERE actionId = ? " +
+						"and r.resourceId = p.resourceId AND " +
+							"r.resourceId = ? AND rc.codeId = r.codeId " +
+								"and name = ? and scope = 4");
+
+			ps.setString(1, actionId);
+			ps.setLong(2, resourceId);
+			ps.setString(3, modelName);
+
+			rs = ps.executeQuery();
+
+			rs.next();
+
+			return rs.getInt("COUNT_VALUE");
+		}
+		finally {
+			DataAccess.cleanUp(con, ps, rs);
+		}
+	}
+
+	protected void updatePortletPermissions(
 			String portletName, String modelName, String[] actionIds)
 		throws Exception {
 
@@ -77,12 +110,13 @@ public class UpgradePortletPermissions extends UpgradeProcess {
 
 			StringBuilder sb = new StringBuilder();
 
-			sb.append("SELECT * FROM Permission_ P, Resource_ R, ");
-			sb.append("ResourceCode RC WHERE (");
+			sb.append("SELECT * FROM Permission_ p, Resource_ r, ");
+			sb.append("ResourceCode rc WHERE (");
 
 			for (int i = 0; i < actionIds.length; i++) {
 				String actionId = actionIds[i];
-				sb.append("actionId='");
+
+				sb.append("actionId = '");
 				sb.append(actionId);
 				sb.append("'");
 
@@ -91,8 +125,8 @@ public class UpgradePortletPermissions extends UpgradeProcess {
 				}
 			}
 
-			sb.append(") AND P.resourceId=R.resourceId AND R.codeId=RC.codeId");
-			sb.append(" AND RC.name=? and RC.scope=4");
+			sb.append(") AND p.resourceId = r.resourceId AND ");
+			sb.append("r.codeId = rc.codeId AND rc.name = ? and rc.scope = 4");
 
 			ps = con.prepareStatement(sb.toString());
 
@@ -101,60 +135,38 @@ public class UpgradePortletPermissions extends UpgradeProcess {
 			rs = ps.executeQuery();
 
 			while (rs.next()) {
-				long permissionId = rs.getLong("P.permissionId");
-				String primKey = rs.getString("R.primKey");
-				String actionId = rs.getString("P.actionId");
-				long companyId = rs.getLong("RC.companyId");
-				int scope = rs.getInt("RC.scope");
+				long permissionId = rs.getLong("p.permissionId");
+				String primKey = rs.getString("r.primKey");
+				String actionId = rs.getString("p.actionId");
+				long companyId = rs.getLong("rc.companyId");
+				int scope = rs.getInt("rc.scope");
 
-				try {
-					long plid = GetterUtil.getLong(
-						primKey.substring(0, primKey.indexOf("_LAYOUT_")));
+				long plid = GetterUtil.getLong(
+					primKey.substring(0, primKey.indexOf("_LAYOUT_")));
 
-					Layout layout = LayoutLocalServiceUtil.getLayout(plid);
+				Layout layout = LayoutLocalServiceUtil.getLayout(plid);
 
-					String resourcePrimKey = String.valueOf(
-						layout.getGroupId());
+				String resourcePrimKey = String.valueOf(
+					layout.getGroupId());
 
-					Resource resource = ResourceLocalServiceUtil.addResource(
-						companyId, modelName, scope, resourcePrimKey);
+				Resource resource = ResourceLocalServiceUtil.addResource(
+					companyId, modelName, scope, resourcePrimKey);
 
-					// Check if an equivalent permission already exists
+				int portletPermissionCount = getPortletPermissionsCount(
+					actionId, resource.getResourceId(), modelName);
 
-					ps = con.prepareStatement(
-						"select COUNT(*) as COUNT_VALUE FROM Permission_ P, " +
-							"Resource_ R, ResourceCode RC WHERE actionId=? " +
-								"and R.resourceId=P.resourceId AND " +
-									"R.resourceId=? AND RC.codeId=R.codeId " +
-										"and name=? and scope=4");
-
-					ps.setString(1, actionId);
-					ps.setLong(2, resource.getResourceId());
-					ps.setString(3, modelName);
-
-					ResultSet rs2 = ps.executeQuery();
-
-					rs2.next();
-
-					if (rs2.getInt("COUNT_VALUE") == 0) {
-						Permission permission =
-							PermissionLocalServiceUtil.getPermission(
-								permissionId);
-
-						permission.setResourceId(resource.getResourceId());
-
-						PermissionLocalServiceUtil.updatePermission(permission);
-					}
-					else {
-						PermissionLocalServiceUtil.deletePermission(
+				if (portletPermissionCount == 0) {
+					Permission permission =
+						PermissionLocalServiceUtil.getPermission(
 							permissionId);
-					}
 
-					rs2.close();
-					ps.close();
+					permission.setResourceId(resource.getResourceId());
+
+					PermissionLocalServiceUtil.updatePermission(permission);
 				}
-				catch (Exception e) {
-					_log.error("Error upgrading permission " + permissionId, e);
+				else {
+					PermissionLocalServiceUtil.deletePermission(
+						permissionId);
 				}
 			}
 		}

@@ -46,8 +46,8 @@ public class UpgradeProcess_5_2_0 extends UpgradeProcess {
 		_log.info("Upgrading");
 
 		upgrade(UpgradeSchema.class);
-		upgrade(UpgradeTags.class);
 		upgrade(UpgradePortletPermissions.class);
+		upgrade(UpgradeTags.class);
 	}
 
 	private static Log _log = LogFactory.getLog(UpgradeProcess_5_2_0.class);
