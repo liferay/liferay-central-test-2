@@ -79,7 +79,7 @@ public abstract class BaseSocialRequestInterpreter
 			return doInterpret(request, themeDisplay);
 		}
 		catch (Exception e) {
-			_log.error(e);
+			_log.error("Unable to interpret request", e);
 		}
 
 		return null;
@@ -92,7 +92,7 @@ public abstract class BaseSocialRequestInterpreter
 			return doProcessConfirmation(request, themeDisplay);
 		}
 		catch (Exception e) {
-			_log.error(e);
+			_log.error("Unable to process confirmation", e);
 		}
 
 		return false;
@@ -105,7 +105,7 @@ public abstract class BaseSocialRequestInterpreter
 			return doProcessRejection(request, themeDisplay);
 		}
 		catch (Exception e) {
-			_log.error(e);
+			_log.error("Unable to process rejection", e);
 		}
 
 		return false;

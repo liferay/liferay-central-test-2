@@ -85,7 +85,7 @@ public abstract class BaseSocialActivityInterpreter
 			return doInterpret(activity, themeDisplay);
 		}
 		catch (Exception e) {
-			_log.error(e);
+			_log.error("Unable to interpret activity", e);
 		}
 
 		return null;
