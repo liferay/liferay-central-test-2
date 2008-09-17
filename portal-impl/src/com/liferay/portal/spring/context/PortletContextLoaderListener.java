@@ -65,6 +65,9 @@ public class PortletContextLoaderListener extends ContextLoaderListener {
 
 			setBeanLocatorMethod.invoke(
 				beanLocatorUtilClass, new Object[] {null});
+			
+			PortletBeanLocatorUtil.setBeanLocator(
+					servletContext.getServletContextName(), null);
 		}
 		catch (Exception e) {
 			_log.error(e, e);
