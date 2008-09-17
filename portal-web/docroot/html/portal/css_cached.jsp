@@ -158,7 +158,7 @@ response.setContentType(ContentTypes.TEXT_CSS);
 	min-width: 150px;
 	position: absolute;
 	right: 100%;
-	top: 0;
+	top: -1px;
 }
 
 .js .lfr-flyout.has-children.send-right ul {
