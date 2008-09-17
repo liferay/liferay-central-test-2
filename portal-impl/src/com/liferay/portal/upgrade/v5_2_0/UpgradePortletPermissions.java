@@ -26,7 +26,9 @@ import com.liferay.portal.kernel.dao.jdbc.DataAccess;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.model.Layout;
 import com.liferay.portal.model.Permission;
+import com.liferay.portal.model.PortletConstants;
 import com.liferay.portal.model.Resource;
+import com.liferay.portal.model.ResourceConstants;
 import com.liferay.portal.service.LayoutLocalServiceUtil;
 import com.liferay.portal.service.PermissionLocalServiceUtil;
 import com.liferay.portal.service.ResourceLocalServiceUtil;
@@ -64,7 +66,7 @@ public class UpgradePortletPermissions extends UpgradeProcess {
 		}
 	}
 
-	protected int getPortletPermissionsCount(
+	protected long getPortletPermissionsCount(
 			String actionId, long resourceId, String modelName)
 		throws Exception {
 
@@ -75,22 +77,28 @@ public class UpgradePortletPermissions extends UpgradeProcess {
 		try {
 			con = DataAccess.getConnection();
 
-			ps = con.prepareStatement(
-				"select COUNT(*) as COUNT_VALUE FROM Permission_ p, " +
-					"Resource_ r, ResourceCode rc WHERE actionId = ? " +
-						"and r.resourceId = p.resourceId AND " +
-							"r.resourceId = ? AND rc.codeId = r.codeId " +
-								"and name = ? and scope = 4");
+			StringBuilder sb = new StringBuilder();
+
+			sb.append("select count(*) from Permission_ ");
+			sb.append("inner join Resource_ on Resource_.resourceId = ");
+			sb.append("Permission_.resourceId inner join ResourceCode on ");
+			sb.append("ResourceCode.codeId = Resource_.codeId where ");
+			sb.append("Permission_.actionId = ? and ");
+			sb.append("Permission_.resourceId = ? and ResourceCode.name = ? ");
+			sb.append("and ResourceCode.code = ? ");
+
+			ps = con.prepareStatement(sb.toString());
 
 			ps.setString(1, actionId);
 			ps.setLong(2, resourceId);
 			ps.setString(3, modelName);
+			ps.setInt(4, ResourceConstants.SCOPE_INDIVIDUAL);
 
 			rs = ps.executeQuery();
 
 			rs.next();
 
-			return rs.getInt("COUNT_VALUE");
+			return rs.getLong(1);
 		}
 		finally {
 			DataAccess.cleanUp(con, ps, rs);
@@ -110,49 +118,51 @@ public class UpgradePortletPermissions extends UpgradeProcess {
 
 			StringBuilder sb = new StringBuilder();
 
-			sb.append("SELECT * FROM Permission_ p, Resource_ r, ");
-			sb.append("ResourceCode rc WHERE (");
+			sb.append("select Permission_.permissionId, ");
+			sb.append("Permission_.actionId, Resource_.primKey, ");
+			sb.append("ResourceCode.scope from Permission_ ");
+			sb.append("inner join Resource_ on Resource_.resourceId = ");
+			sb.append("Permission_.resourceId inner join ResourceCode on ");
+			sb.append("ResourceCode.codeId = Resource_.codeId where (");
 
 			for (int i = 0; i < actionIds.length; i++) {
 				String actionId = actionIds[i];
 
-				sb.append("actionId = '");
+				sb.append("Permission_.actionId = '");
 				sb.append(actionId);
 				sb.append("'");
 
 				if (i < (actionIds.length - 1)) {
-					sb.append(" OR ");
+					sb.append(" or ");
 				}
 			}
 
-			sb.append(") AND p.resourceId = r.resourceId AND ");
-			sb.append("r.codeId = rc.codeId AND rc.name = ? and rc.scope = 4");
+			sb.append(") and ResourceCode.name = ? and ResourceCode.code = ? ");
 
 			ps = con.prepareStatement(sb.toString());
 
 			ps.setString(1, portletName);
+			ps.setInt(2, ResourceConstants.SCOPE_INDIVIDUAL);
 
 			rs = ps.executeQuery();
 
 			while (rs.next()) {
-				long permissionId = rs.getLong("p.permissionId");
-				String primKey = rs.getString("r.primKey");
-				String actionId = rs.getString("p.actionId");
-				long companyId = rs.getLong("rc.companyId");
-				int scope = rs.getInt("rc.scope");
+				long permissionId = rs.getLong("Permission_.permissionId");
+				String actionId = rs.getString("Permission_.actionId");
+				String primKey = rs.getString("Resource_.primKey");
+				int scope = rs.getInt("ResourceCode.scope");
 
 				long plid = GetterUtil.getLong(
-					primKey.substring(0, primKey.indexOf("_LAYOUT_")));
+					primKey.substring(
+						0, primKey.indexOf(PortletConstants.LAYOUT_SEPARATOR)));
 
 				Layout layout = LayoutLocalServiceUtil.getLayout(plid);
 
-				String resourcePrimKey = String.valueOf(
-					layout.getGroupId());
-
 				Resource resource = ResourceLocalServiceUtil.addResource(
-					companyId, modelName, scope, resourcePrimKey);
+					layout.getCompanyId(), modelName, scope,
+					String.valueOf(layout.getGroupId()));
 
-				int portletPermissionCount = getPortletPermissionsCount(
+				long portletPermissionCount = getPortletPermissionsCount(
 					actionId, resource.getResourceId(), modelName);
 
 				if (portletPermissionCount == 0) {
@@ -165,8 +175,7 @@ public class UpgradePortletPermissions extends UpgradeProcess {
 					PermissionLocalServiceUtil.updatePermission(permission);
 				}
 				else {
-					PermissionLocalServiceUtil.deletePermission(
-						permissionId);
+					PermissionLocalServiceUtil.deletePermission(permissionId);
 				}
 			}
 		}
