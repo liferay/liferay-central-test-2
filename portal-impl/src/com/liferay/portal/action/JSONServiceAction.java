@@ -54,6 +54,49 @@ import org.apache.struts.action.ActionMapping;
  */
 public class JSONServiceAction extends JSONAction {
 
+	public static JSONObject toJSONObject(TagsAssetDisplay assetDisplay) {
+		JSONObject jsonObj = JSONFactoryUtil.createJSONObject();
+
+		jsonObj.put("assetId", assetDisplay.getAssetId());
+		jsonObj.put("companyId", assetDisplay.getCompanyId());
+		jsonObj.put("userId", assetDisplay.getUserId());
+		jsonObj.put("userName", assetDisplay.getUserName());
+		jsonObj.put("createDate", assetDisplay.getCreateDate());
+		jsonObj.put("modifiedDate", assetDisplay.getModifiedDate());
+		jsonObj.put("classNameId", assetDisplay.getClassNameId());
+		jsonObj.put("className", assetDisplay.getClassName());
+		jsonObj.put("classPK", assetDisplay.getClassPK());
+		jsonObj.put("portletId", assetDisplay.getPortletId());
+		jsonObj.put("portletTitle", assetDisplay.getPortletTitle());
+		jsonObj.put("startDate", assetDisplay.getStartDate());
+		jsonObj.put("endDate", assetDisplay.getEndDate());
+		jsonObj.put("publishDate", assetDisplay.getPublishDate());
+		jsonObj.put("expirationDate", assetDisplay.getExpirationDate());
+		jsonObj.put("mimeType", assetDisplay.getMimeType());
+		jsonObj.put("title", assetDisplay.getTitle());
+		jsonObj.put("description", assetDisplay.getDescription());
+		jsonObj.put("summary", assetDisplay.getSummary());
+		jsonObj.put("url", assetDisplay.getUrl());
+		jsonObj.put("height", assetDisplay.getHeight());
+		jsonObj.put("width", assetDisplay.getWidth());
+		jsonObj.put("priority", assetDisplay.getPriority());
+		jsonObj.put("viewCount", assetDisplay.getViewCount());
+		jsonObj.put("tagsEntries", assetDisplay.getTagsEntries());
+
+		return jsonObj;
+	}
+
+	public static JSONObject toJSONObject(TagsAssetType assetType) {
+		JSONObject jsonObj = JSONFactoryUtil.createJSONObject();
+
+		jsonObj.put("classNameId", assetType.getClassNameId());
+		jsonObj.put("className", assetType.getClassName());
+		jsonObj.put("portletId", assetType.getPortletId());
+		jsonObj.put("portletTitle", assetType.getPortletTitle());
+
+		return jsonObj;
+	}
+
 	public String getJSON(
 			ActionMapping mapping, ActionForm form, HttpServletRequest request,
 			HttpServletResponse response)
@@ -65,6 +108,10 @@ public class JSONServiceAction extends JSONAction {
 			ParamUtil.getString(request, "serviceParameters"));
 		String[] serviceParameterTypes = StringUtil.split(
 			ParamUtil.getString(request, "serviceParameterTypes"));
+
+		if (!isValidRequest(request)) {
+			return null;
+		}
 
 		Class<?> classObj = Class.forName(className);
 
@@ -344,47 +391,17 @@ public class JSONServiceAction extends JSONAction {
 		return jsonArray.toString();
 	}
 
-	public static JSONObject toJSONObject(TagsAssetDisplay assetDisplay) {
-		JSONObject jsonObj = JSONFactoryUtil.createJSONObject();
+	protected boolean isValidRequest(HttpServletRequest request) {
+		String className = ParamUtil.getString(request, "serviceClassName");
 
-		jsonObj.put("assetId", assetDisplay.getAssetId());
-		jsonObj.put("companyId", assetDisplay.getCompanyId());
-		jsonObj.put("userId", assetDisplay.getUserId());
-		jsonObj.put("userName", assetDisplay.getUserName());
-		jsonObj.put("createDate", assetDisplay.getCreateDate());
-		jsonObj.put("modifiedDate", assetDisplay.getModifiedDate());
-		jsonObj.put("classNameId", assetDisplay.getClassNameId());
-		jsonObj.put("className", assetDisplay.getClassName());
-		jsonObj.put("classPK", assetDisplay.getClassPK());
-		jsonObj.put("portletId", assetDisplay.getPortletId());
-		jsonObj.put("portletTitle", assetDisplay.getPortletTitle());
-		jsonObj.put("startDate", assetDisplay.getStartDate());
-		jsonObj.put("endDate", assetDisplay.getEndDate());
-		jsonObj.put("publishDate", assetDisplay.getPublishDate());
-		jsonObj.put("expirationDate", assetDisplay.getExpirationDate());
-		jsonObj.put("mimeType", assetDisplay.getMimeType());
-		jsonObj.put("title", assetDisplay.getTitle());
-		jsonObj.put("description", assetDisplay.getDescription());
-		jsonObj.put("summary", assetDisplay.getSummary());
-		jsonObj.put("url", assetDisplay.getUrl());
-		jsonObj.put("height", assetDisplay.getHeight());
-		jsonObj.put("width", assetDisplay.getWidth());
-		jsonObj.put("priority", assetDisplay.getPriority());
-		jsonObj.put("viewCount", assetDisplay.getViewCount());
-		jsonObj.put("tagsEntries", assetDisplay.getTagsEntries());
+		if (className.contains(".service.http.") &&
+			className.endsWith("ServiceJSON")) {
 
-		return jsonObj;
-	}
-
-	public static JSONObject toJSONObject(TagsAssetType assetType) {
-		JSONObject jsonObj = JSONFactoryUtil.createJSONObject();
-
-		jsonObj.put("classNameId", assetType.getClassNameId());
-		jsonObj.put("className", assetType.getClassName());
-		jsonObj.put("portletId", assetType.getPortletId());
-		jsonObj.put("portletTitle", assetType.getPortletTitle());
-
-		return jsonObj;
+			return true;
+		}
+		else {
+			return false;
+		}
 	}
 
 	private static Log _log = LogFactory.getLog(JSONServiceAction.class);
