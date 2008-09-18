@@ -85,16 +85,16 @@ Liferay.Popup = function(options) {
 
 			return cache;
 		},
-		dragStart: function(e, ui) {
+		dragStart: function(event, ui) {
 			if (!options.dragHelper) {
 				var dialog = jQuery(this).parents('.ui-dialog:first');
-				var target = jQuery(e.target);
+				var target = jQuery(event.target);
 
 				checkExternalClick(target);
 				dialog.css('visibility', 'hidden');
 			}
 		},
-		dragStop: function(e, ui) {
+		dragStop: function(event, ui) {
 			if (!options.dragHelper) {
 				var dialog = jQuery(this).parents('.ui-dialog:first');
 				var helper = ui.helper;
@@ -118,7 +118,7 @@ Liferay.Popup = function(options) {
 			checkExternalClick(target);
 		},
 
-		open: function(e, ui) {
+		open: function(event, ui) {
 			if (!options.dragHelper) {
 				var dialog = jQuery(this).parents('.ui-dialog:first'), target = jQuery(this);
 
@@ -163,20 +163,20 @@ Liferay.Popup = function(options) {
 	var open = function(event, ui) {
 		var instance = this;
 
-		defaults.open.apply(instance, [event, ui]);
+		defaults.open.apply(instance, arguments);
 
 		if (config.open) {
-			config.open.apply(instance, [event, ui]);
+			config.open.apply(instance, arguments);
 		}
 	};
 
 	var close = function(event, ui) {
 		var instance = this;
 
-		defaults.close.apply(instance, [event, ui]);
+		defaults.close.apply(instance, arguments);
 
 		if (config.close) {
-			config.close.apply(instance, [event, ui]);
+			config.close.apply(instance, arguments);
 		}
 	};
 
