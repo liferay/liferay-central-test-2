@@ -392,11 +392,12 @@ public class RoleLocalServiceImpl extends RoleLocalServiceBaseImpl {
 
 	public Role updateRole(long roleId, String name, String description)
 		throws PortalException, SystemException {
-		return updateRole(roleId, name, null, description);
+
+		return updateRole(roleId, name, description, null);
 	}
 
 	public Role updateRole(
-			long roleId, String name, String subtype, String description)
+			long roleId, String name, String description, String subtype)
 		throws PortalException, SystemException {
 
 		Role role = rolePersistence.findByPrimaryKey(roleId);
@@ -408,8 +409,8 @@ public class RoleLocalServiceImpl extends RoleLocalServiceBaseImpl {
 		}
 
 		role.setName(name);
-		role.setSubtype(subtype);
 		role.setDescription(description);
+		role.setSubtype(subtype);
 
 		rolePersistence.update(role, false);
 

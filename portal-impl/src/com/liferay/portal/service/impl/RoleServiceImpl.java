@@ -141,13 +141,13 @@ public class RoleServiceImpl extends RoleServiceBaseImpl {
 	}
 
 	public Role updateRole(
-			long roleId, String name, String subtype, String description)
+			long roleId, String name, String description, String subtype)
 		throws PortalException, SystemException {
 
 		RolePermissionUtil.check(
 			getPermissionChecker(), roleId, ActionKeys.UPDATE);
 
-		return roleLocalService.updateRole(roleId, name, subtype, description);
+		return roleLocalService.updateRole(roleId, name, description, subtype);
 	}
 
 	protected void checkUserRolesPermission(long userId, long[] roleIds)

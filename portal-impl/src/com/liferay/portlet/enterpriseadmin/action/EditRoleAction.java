@@ -143,7 +143,7 @@ public class EditRoleAction extends PortletAction {
 
 			// Update role
 
-			RoleServiceUtil.updateRole(roleId, name, subtype, description);
+			RoleServiceUtil.updateRole(roleId, name, description, subtype);
 		}
 	}
 

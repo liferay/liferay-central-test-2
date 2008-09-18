@@ -189,11 +189,11 @@ public class RoleServiceJSON {
 	}
 
 	public static JSONObject updateRole(long roleId, java.lang.String name,
-		java.lang.String subtype, java.lang.String description)
+		java.lang.String description, java.lang.String subtype)
 		throws java.rmi.RemoteException, com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		com.liferay.portal.model.Role returnValue = RoleServiceUtil.updateRole(roleId,
-				name, subtype, description);
+				name, description, subtype);
 
 		return RoleJSONSerializer.toJSONObject(returnValue);
 	}

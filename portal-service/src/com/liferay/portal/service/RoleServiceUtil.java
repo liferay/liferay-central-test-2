@@ -136,11 +136,11 @@ public class RoleServiceUtil {
 	}
 
 	public static com.liferay.portal.model.Role updateRole(long roleId,
-		java.lang.String name, java.lang.String subtype,
-		java.lang.String description)
+		java.lang.String name, java.lang.String description,
+		java.lang.String subtype)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
-		return getService().updateRole(roleId, name, subtype, description);
+		return getService().updateRole(roleId, name, description, subtype);
 	}
 
 	public static RoleService getService() {

@@ -282,11 +282,11 @@ public class RoleServiceSoap {
 	}
 
 	public static com.liferay.portal.model.RoleSoap updateRole(long roleId,
-		java.lang.String name, java.lang.String subtype,
-		java.lang.String description) throws RemoteException {
+		java.lang.String name, java.lang.String description,
+		java.lang.String subtype) throws RemoteException {
 		try {
 			com.liferay.portal.model.Role returnValue = RoleServiceUtil.updateRole(roleId,
-					name, subtype, description);
+					name, description, subtype);
 
 			return com.liferay.portal.model.RoleSoap.toSoapModel(returnValue);
 		}

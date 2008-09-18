@@ -31,9 +31,8 @@ Role role = (Role)request.getAttribute(WebKeys.ROLE);
 
 long roleId = BeanParamUtil.getLong(role, request, "roleId");
 
-int roleType = ParamUtil.getInteger(request, "roleType");
-
-String roleSubtype = BeanParamUtil.getString(role, request, "subtype");
+int type = ParamUtil.getInteger(request, "type");
+String subtype = BeanParamUtil.getString(role, request, "subtype");
 %>
 
 <liferay-ui:tabs
@@ -97,7 +96,7 @@ String roleSubtype = BeanParamUtil.getString(role, request, "subtype");
 			</td>
 			<td>
 				<c:choose>
-					<c:when test="<%= ((role == null) && (roleType == 0)) %>">
+					<c:when test="<%= ((role == null) && (type == 0)) %>">
 						<select name="<portlet:namespace/>type">
 							<option value="<%= RoleImpl.TYPE_REGULAR %>"><liferay-ui:message key="regular" /></option>
 							<option value="<%= RoleImpl.TYPE_COMMUNITY %>"><liferay-ui:message key="community" /></option>
@@ -105,9 +104,9 @@ String roleSubtype = BeanParamUtil.getString(role, request, "subtype");
 						</select>
 					</c:when>
 					<c:when test="<%= (role == null) %>">
-						<input type="hidden" name="<portlet:namespace/>type" value="<%= String.valueOf(roleType) %>" />
+						<input type="hidden" name="<portlet:namespace/>type" value="<%= String.valueOf(type) %>" />
 
-						<%= LanguageUtil.get(pageContext, RoleImpl.getTypeLabel(roleType)) %>
+						<%= LanguageUtil.get(pageContext, RoleImpl.getTypeLabel(type)) %>
 					</c:when>
 					<c:otherwise>
 						<%= LanguageUtil.get(pageContext, role.getTypeLabel()) %>
@@ -115,7 +114,9 @@ String roleSubtype = BeanParamUtil.getString(role, request, "subtype");
 				</c:choose>
 			</td>
 		</tr>
+
 		<c:if test="<%= role != null %>">
+
 			<%
 			String[] subtypes = null;
 
@@ -141,18 +142,23 @@ String roleSubtype = BeanParamUtil.getString(role, request, "subtype");
 					<td>
 						<select name="<portlet:namespace/>subtype">
 							<option value=""></option>
+
 							<%
-							for (String subtype : subtypes) {
+							for (String curSubtype : subtypes) {
 							%>
-								<option <%= subtype.equals(roleSubtype)? "selected" : StringPool.BLANK %> value="<%= subtype %>"><liferay-ui:message key="<%= subtype %>" /></option>
+
+								<option <%= subtype.equals(curSubtype) ? "selected" : "" %> value="<%= curSubtype %>"><liferay-ui:message key="<%= curSubtype %>" /></option>
+
 							<%
 							}
 							%>
+
 						</select>
 					</td>
 				</tr>
 			</c:if>
 		</c:if>
+
 		</table>
 
 		<br />

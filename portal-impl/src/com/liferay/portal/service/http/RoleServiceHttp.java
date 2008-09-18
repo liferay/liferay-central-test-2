@@ -623,7 +623,7 @@ public class RoleServiceHttp {
 
 	public static com.liferay.portal.model.Role updateRole(
 		HttpPrincipal httpPrincipal, long roleId, java.lang.String name,
-		java.lang.String subtype, java.lang.String description)
+		java.lang.String description, java.lang.String subtype)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		try {
@@ -635,15 +635,15 @@ public class RoleServiceHttp {
 				paramObj1 = new NullWrapper("java.lang.String");
 			}
 
-			Object paramObj2 = subtype;
+			Object paramObj2 = description;
 
-			if (subtype == null) {
+			if (description == null) {
 				paramObj2 = new NullWrapper("java.lang.String");
 			}
 
-			Object paramObj3 = description;
+			Object paramObj3 = subtype;
 
-			if (description == null) {
+			if (subtype == null) {
 				paramObj3 = new NullWrapper("java.lang.String");
 			}
 
