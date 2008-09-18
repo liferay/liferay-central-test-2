@@ -121,9 +121,9 @@ import org.apache.commons.logging.LogFactory;
 public class JournalPortletDataHandlerImpl implements PortletDataHandler {
 
 	public static void exportArticle(
-			PortletDataContext context, Element articlesEl, Element dlFoldersEl,
-			Element dlFileEntriesEl, Element dlFileRanks, Element igFoldersEl,
-			Element igImagesEl, JournalArticle article)
+			PortletDataContext context, Element articlesEl, Element igFoldersEl,
+			Element igImagesEl, Element dlFoldersEl, Element dlFileEntriesEl,
+			Element dlFileRanks, JournalArticle article)
 		throws PortalException, SystemException {
 
 		if (!context.isWithinDateRange(article.getModifiedDate())) {
