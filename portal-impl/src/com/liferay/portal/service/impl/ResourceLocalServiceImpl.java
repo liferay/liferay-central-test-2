@@ -157,6 +157,13 @@ public class ResourceLocalServiceImpl extends ResourceLocalServiceBaseImpl {
 				if (PropsValues.PERMISSIONS_USER_CHECK_ALGORITHM == 5) {
 					Role role = null;
 
+					if (group.isLayout()) {
+						Layout layout = layoutLocalService.getLayout(
+							group.getClassPK());
+
+						group = layout.getGroup();
+					}
+
 					if (group.isCommunity()) {
 						role = RoleLocalServiceUtil.getRole(
 							companyId, RoleNames.COMMUNITY_MEMBER);

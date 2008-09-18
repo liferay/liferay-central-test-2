@@ -140,7 +140,7 @@ public class UpgradePortletPermissions extends UpgradeProcess {
 				}
 			}
 
-			sb.append(") and ResourceCode.name = ? and ResourceCode.scope = ? ");
+			sb.append(") and ResourceCode.name = ? and ResourceCode.scope = ?");
 
 			ps = con.prepareStatement(sb.toString());
 

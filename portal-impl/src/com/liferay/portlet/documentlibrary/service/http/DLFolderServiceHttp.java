@@ -74,13 +74,13 @@ import com.liferay.portlet.documentlibrary.service.DLFolderServiceUtil;
  */
 public class DLFolderServiceHttp {
 	public static com.liferay.portlet.documentlibrary.model.DLFolder addFolder(
-		HttpPrincipal httpPrincipal, long plid, long parentFolderId,
+		HttpPrincipal httpPrincipal, long groupId, long parentFolderId,
 		java.lang.String name, java.lang.String description,
 		boolean addCommunityPermissions, boolean addGuestPermissions)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		try {
-			Object paramObj0 = new LongWrapper(plid);
+			Object paramObj0 = new LongWrapper(groupId);
 
 			Object paramObj1 = new LongWrapper(parentFolderId);
 
@@ -134,14 +134,14 @@ public class DLFolderServiceHttp {
 	}
 
 	public static com.liferay.portlet.documentlibrary.model.DLFolder addFolder(
-		HttpPrincipal httpPrincipal, long plid, long parentFolderId,
+		HttpPrincipal httpPrincipal, long groupId, long parentFolderId,
 		java.lang.String name, java.lang.String description,
 		java.lang.String[] communityPermissions,
 		java.lang.String[] guestPermissions)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		try {
-			Object paramObj0 = new LongWrapper(plid);
+			Object paramObj0 = new LongWrapper(groupId);
 
 			Object paramObj1 = new LongWrapper(parentFolderId);
 
@@ -203,14 +203,14 @@ public class DLFolderServiceHttp {
 	}
 
 	public static com.liferay.portlet.documentlibrary.model.DLFolder copyFolder(
-		HttpPrincipal httpPrincipal, long plid, long sourceFolderId,
+		HttpPrincipal httpPrincipal, long groupId, long sourceFolderId,
 		long parentFolderId, java.lang.String name,
 		java.lang.String description, boolean addCommunityPermissions,
 		boolean addGuestPermissions)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		try {
-			Object paramObj0 = new LongWrapper(plid);
+			Object paramObj0 = new LongWrapper(groupId);
 
 			Object paramObj1 = new LongWrapper(sourceFolderId);
 

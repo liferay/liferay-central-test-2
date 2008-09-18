@@ -34,7 +34,6 @@ import com.liferay.portal.model.Layout;
 import com.liferay.portal.model.LayoutConstants;
 import com.liferay.portal.model.ResourceConstants;
 import com.liferay.portal.model.User;
-import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PortletKeys;
 import com.liferay.portal.util.PropsKeys;
 import com.liferay.portal.util.PropsUtil;
@@ -60,48 +59,46 @@ import java.util.List;
 public class DLFolderLocalServiceImpl extends DLFolderLocalServiceBaseImpl {
 
 	public DLFolder addFolder(
-			long userId, long plid, long parentFolderId, String name,
+			long userId, long groupId, long parentFolderId, String name,
 			String description, boolean addCommunityPermissions,
 			boolean addGuestPermissions)
 		throws PortalException, SystemException {
 
 		return addFolder(
-			null, userId, plid, parentFolderId, name, description,
+			null, userId, groupId, parentFolderId, name, description,
 			Boolean.valueOf(addCommunityPermissions),
 			Boolean.valueOf(addGuestPermissions), null, null);
 	}
 
 	public DLFolder addFolder(
-			String uuid, long userId, long plid, long parentFolderId,
+			String uuid, long userId, long groupId, long parentFolderId,
 			String name, String description, boolean addCommunityPermissions,
 			boolean addGuestPermissions)
 		throws PortalException, SystemException {
 
 		return addFolder(
-			uuid, userId, plid, parentFolderId, name, description,
+			uuid, userId, groupId, parentFolderId, name, description,
 			Boolean.valueOf(addCommunityPermissions),
 			Boolean.valueOf(addGuestPermissions), null, null);
 	}
 
 	public DLFolder addFolder(
-			long userId, long plid, long parentFolderId, String name,
+			long userId, long groupId, long parentFolderId, String name,
 			String description, String[] communityPermissions,
 			String[] guestPermissions)
 		throws PortalException, SystemException {
 
 		return addFolder(
-			null, userId, plid, parentFolderId, name, description, null, null,
-			communityPermissions, guestPermissions);
+			null, userId, groupId, parentFolderId, name, description, null,
+			null, communityPermissions, guestPermissions);
 	}
 
 	public DLFolder addFolder(
-			String uuid, long userId, long plid, long parentFolderId,
+			String uuid, long userId, long groupId, long parentFolderId,
 			String name, String description, Boolean addCommunityPermissions,
 			Boolean addGuestPermissions, String[] communityPermissions,
 			String[] guestPermissions)
 		throws PortalException, SystemException {
-
-		long groupId = PortalUtil.getScopeGroupId(plid);
 
 		return addFolderToGroup(
 			uuid, userId, groupId, parentFolderId, name, description,

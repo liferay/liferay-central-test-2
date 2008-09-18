@@ -52,35 +52,35 @@ import org.apache.commons.logging.LogFactory;
 public class DLFolderServiceImpl extends DLFolderServiceBaseImpl {
 
 	public DLFolder addFolder(
-			long plid, long parentFolderId, String name, String description,
+			long groupId, long parentFolderId, String name, String description,
 			boolean addCommunityPermissions, boolean addGuestPermissions)
 		throws PortalException, SystemException {
 
 		DLFolderPermission.check(
-			getPermissionChecker(), plid, parentFolderId,
+			getPermissionChecker(), groupId, parentFolderId,
 			ActionKeys.ADD_FOLDER);
 
 		return dlFolderLocalService.addFolder(
-			getUserId(), plid, parentFolderId, name, description,
+			getUserId(), groupId, parentFolderId, name, description,
 			addCommunityPermissions, addGuestPermissions);
 	}
 
 	public DLFolder addFolder(
-			long plid, long parentFolderId, String name, String description,
+			long groupId, long parentFolderId, String name, String description,
 			String[] communityPermissions, String[] guestPermissions)
 		throws PortalException, SystemException {
 
 		DLFolderPermission.check(
-			getPermissionChecker(), plid, parentFolderId,
+			getPermissionChecker(), groupId, parentFolderId,
 			ActionKeys.ADD_FOLDER);
 
 		return dlFolderLocalService.addFolder(
-			getUserId(), plid, parentFolderId, name, description,
+			getUserId(), groupId, parentFolderId, name, description,
 			communityPermissions, guestPermissions);
 	}
 
 	public DLFolder copyFolder(
-			long plid, long sourceFolderId, long parentFolderId, String name,
+			long groupId, long sourceFolderId, long parentFolderId, String name,
 			String description, boolean addCommunityPermissions,
 			boolean addGuestPermissions)
 		throws PortalException, RemoteException, SystemException {
@@ -88,7 +88,7 @@ public class DLFolderServiceImpl extends DLFolderServiceBaseImpl {
 		DLFolder srcFolder = getFolder(sourceFolderId);
 
 		DLFolder destFolder = addFolder(
-			plid, parentFolderId, name, description, addCommunityPermissions,
+			groupId, parentFolderId, name, description, addCommunityPermissions,
 			addGuestPermissions);
 
 		copyFolder(

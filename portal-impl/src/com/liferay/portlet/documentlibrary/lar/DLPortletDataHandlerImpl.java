@@ -296,7 +296,7 @@ public class DLPortletDataHandlerImpl implements PortletDataHandler {
 		throws Exception {
 
 		long userId = context.getUserId(folder.getUserUuid());
-		long plid = context.getPlid();
+		long groupId = context.getGroupId();
 		long parentFolderId = MapUtil.getLong(
 			folderPKs, folder.getParentFolderId(), folder.getParentFolderId());
 
@@ -322,7 +322,7 @@ public class DLPortletDataHandlerImpl implements PortletDataHandler {
 						parentFolderId, folder.getName(), 2);
 
 					existingFolder = DLFolderLocalServiceUtil.addFolder(
-						folder.getUuid(), userId, plid, parentFolderId,
+						folder.getUuid(), userId, groupId, parentFolderId,
 						name, folder.getDescription(), addCommunityPermissions,
 						addGuestPermissions);
 				}
@@ -338,8 +338,9 @@ public class DLPortletDataHandlerImpl implements PortletDataHandler {
 					parentFolderId, folder.getName(), 2);
 
 				existingFolder = DLFolderLocalServiceUtil.addFolder(
-					userId, plid, parentFolderId, name, folder.getDescription(),
-					addCommunityPermissions, addGuestPermissions);
+					userId, groupId, parentFolderId, name,
+					folder.getDescription(), addCommunityPermissions,
+					addGuestPermissions);
 			}
 
 			folderPKs.put(folder.getFolderId(), existingFolder.getFolderId());

@@ -141,7 +141,7 @@ portletURL.setParameter("folderId", String.valueOf(folderId));
 						resultRows.add(row);
 					}
 
-					boolean showAddFolderButton = showButtons && DLFolderPermission.contains(permissionChecker, plid, folderId, ActionKeys.ADD_FOLDER);
+					boolean showAddFolderButton = showButtons && DLFolderPermission.contains(permissionChecker, scopeGroupId, folderId, ActionKeys.ADD_FOLDER);
 					boolean showCurFolderSearch = showFoldersSearch && (results.size() > 0);
 					%>
 
@@ -179,7 +179,7 @@ portletURL.setParameter("folderId", String.valueOf(folderId));
 				<%
 				List folders = DLFolderLocalServiceUtil.getFolders(scopeGroupId, folderId);
 
-				boolean showAddFolderButton = showButtons && DLFolderPermission.contains(permissionChecker, plid, folderId, ActionKeys.ADD_FOLDER);
+				boolean showAddFolderButton = showButtons && DLFolderPermission.contains(permissionChecker, scopeGroupId, folderId, ActionKeys.ADD_FOLDER);
 				boolean showCurFolderSearch = showFoldersSearch && (folders.size() > 0);
 				%>
 

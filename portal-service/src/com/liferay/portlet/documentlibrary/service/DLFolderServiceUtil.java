@@ -46,35 +46,35 @@ package com.liferay.portlet.documentlibrary.service;
  */
 public class DLFolderServiceUtil {
 	public static com.liferay.portlet.documentlibrary.model.DLFolder addFolder(
-		long plid, long parentFolderId, java.lang.String name,
+		long groupId, long parentFolderId, java.lang.String name,
 		java.lang.String description, boolean addCommunityPermissions,
 		boolean addGuestPermissions)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		return getService()
-				   .addFolder(plid, parentFolderId, name, description,
+				   .addFolder(groupId, parentFolderId, name, description,
 			addCommunityPermissions, addGuestPermissions);
 	}
 
 	public static com.liferay.portlet.documentlibrary.model.DLFolder addFolder(
-		long plid, long parentFolderId, java.lang.String name,
+		long groupId, long parentFolderId, java.lang.String name,
 		java.lang.String description, java.lang.String[] communityPermissions,
 		java.lang.String[] guestPermissions)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		return getService()
-				   .addFolder(plid, parentFolderId, name, description,
+				   .addFolder(groupId, parentFolderId, name, description,
 			communityPermissions, guestPermissions);
 	}
 
 	public static com.liferay.portlet.documentlibrary.model.DLFolder copyFolder(
-		long plid, long sourceFolderId, long parentFolderId,
+		long groupId, long sourceFolderId, long parentFolderId,
 		java.lang.String name, java.lang.String description,
 		boolean addCommunityPermissions, boolean addGuestPermissions)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		return getService()
-				   .copyFolder(plid, sourceFolderId, parentFolderId, name,
+				   .copyFolder(groupId, sourceFolderId, parentFolderId, name,
 			description, addCommunityPermissions, addGuestPermissions);
 	}
 

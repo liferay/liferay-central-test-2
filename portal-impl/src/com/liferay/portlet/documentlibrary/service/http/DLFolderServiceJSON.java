@@ -74,38 +74,38 @@ import com.liferay.portlet.documentlibrary.service.DLFolderServiceUtil;
  *
  */
 public class DLFolderServiceJSON {
-	public static JSONObject addFolder(long plid, long parentFolderId,
+	public static JSONObject addFolder(long groupId, long parentFolderId,
 		java.lang.String name, java.lang.String description,
 		boolean addCommunityPermissions, boolean addGuestPermissions)
 		throws java.rmi.RemoteException, com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		com.liferay.portlet.documentlibrary.model.DLFolder returnValue = DLFolderServiceUtil.addFolder(plid,
+		com.liferay.portlet.documentlibrary.model.DLFolder returnValue = DLFolderServiceUtil.addFolder(groupId,
 				parentFolderId, name, description, addCommunityPermissions,
 				addGuestPermissions);
 
 		return DLFolderJSONSerializer.toJSONObject(returnValue);
 	}
 
-	public static JSONObject addFolder(long plid, long parentFolderId,
+	public static JSONObject addFolder(long groupId, long parentFolderId,
 		java.lang.String name, java.lang.String description,
 		java.lang.String[] communityPermissions,
 		java.lang.String[] guestPermissions)
 		throws java.rmi.RemoteException, com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
-		com.liferay.portlet.documentlibrary.model.DLFolder returnValue = DLFolderServiceUtil.addFolder(plid,
+		com.liferay.portlet.documentlibrary.model.DLFolder returnValue = DLFolderServiceUtil.addFolder(groupId,
 				parentFolderId, name, description, communityPermissions,
 				guestPermissions);
 
 		return DLFolderJSONSerializer.toJSONObject(returnValue);
 	}
 
-	public static JSONObject copyFolder(long plid, long sourceFolderId,
+	public static JSONObject copyFolder(long groupId, long sourceFolderId,
 		long parentFolderId, java.lang.String name,
 		java.lang.String description, boolean addCommunityPermissions,
 		boolean addGuestPermissions)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
-		com.liferay.portlet.documentlibrary.model.DLFolder returnValue = DLFolderServiceUtil.copyFolder(plid,
+		com.liferay.portlet.documentlibrary.model.DLFolder returnValue = DLFolderServiceUtil.copyFolder(groupId,
 				sourceFolderId, parentFolderId, name, description,
 				addCommunityPermissions, addGuestPermissions);
 

@@ -49,21 +49,21 @@ package com.liferay.portlet.documentlibrary.service;
  */
 public interface DLFolderService {
 	public com.liferay.portlet.documentlibrary.model.DLFolder addFolder(
-		long plid, long parentFolderId, java.lang.String name,
+		long groupId, long parentFolderId, java.lang.String name,
 		java.lang.String description, boolean addCommunityPermissions,
 		boolean addGuestPermissions)
 		throws java.rmi.RemoteException, com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;
 
 	public com.liferay.portlet.documentlibrary.model.DLFolder addFolder(
-		long plid, long parentFolderId, java.lang.String name,
+		long groupId, long parentFolderId, java.lang.String name,
 		java.lang.String description, java.lang.String[] communityPermissions,
 		java.lang.String[] guestPermissions)
 		throws java.rmi.RemoteException, com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;
 
 	public com.liferay.portlet.documentlibrary.model.DLFolder copyFolder(
-		long plid, long sourceFolderId, long parentFolderId,
+		long groupId, long sourceFolderId, long parentFolderId,
 		java.lang.String name, java.lang.String description,
 		boolean addCommunityPermissions, boolean addGuestPermissions)
 		throws com.liferay.portal.PortalException,

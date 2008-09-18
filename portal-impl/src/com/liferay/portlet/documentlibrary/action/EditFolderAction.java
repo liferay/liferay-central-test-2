@@ -26,9 +26,9 @@ import com.liferay.documentlibrary.DuplicateFileException;
 import com.liferay.portal.kernel.servlet.SessionErrors;
 import com.liferay.portal.kernel.util.Constants;
 import com.liferay.portal.kernel.util.ParamUtil;
-import com.liferay.portal.model.Layout;
 import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.struts.PortletAction;
+import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.WebKeys;
 import com.liferay.portlet.documentlibrary.DuplicateFolderNameException;
 import com.liferay.portlet.documentlibrary.FolderNameException;
@@ -123,7 +123,8 @@ public class EditFolderAction extends PortletAction {
 	}
 
 	protected void updateFolder(ActionRequest actionRequest) throws Exception {
-		Layout layout = (Layout)actionRequest.getAttribute(WebKeys.LAYOUT);
+		ThemeDisplay themeDisplay = (ThemeDisplay)actionRequest.getAttribute(
+			WebKeys.THEME_DISPLAY);
 
 		long folderId = ParamUtil.getLong(actionRequest, "folderId");
 
@@ -142,8 +143,8 @@ public class EditFolderAction extends PortletAction {
 			// Add folder
 
 			DLFolderServiceUtil.addFolder(
-				layout.getPlid(), parentFolderId, name, description,
-				communityPermissions, guestPermissions);
+				themeDisplay.getScopeGroupId(), parentFolderId, name,
+				description, communityPermissions, guestPermissions);
 		}
 		else {
 
