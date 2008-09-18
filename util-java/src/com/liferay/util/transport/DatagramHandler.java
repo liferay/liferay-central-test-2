@@ -32,8 +32,8 @@ import java.net.DatagramPacket;
  */
 public interface DatagramHandler {
 
-	public void process(DatagramPacket packet);
-
 	public void errorReceived(Throwable t);
+
+	public void process(DatagramPacket packet);
 
 }
