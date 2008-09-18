@@ -37,6 +37,8 @@ portletURL.setWindowState(WindowState.MAXIMIZED);
 
 portletURL.setParameter("struts_action", "/bookmarks/view");
 portletURL.setParameter("folderId", String.valueOf(folderId));
+
+List results = null;
 %>
 
 <liferay-portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" varImpl="searchURL"><portlet:param name="struts_action" value="/bookmarks/search" /></liferay-portlet:renderURL>
@@ -59,130 +61,119 @@ portletURL.setParameter("folderId", String.valueOf(folderId));
 				<%= BookmarksUtil.getBreadcrumbs(folder, null, pageContext, renderRequest, renderResponse) %>
 			</div>
 		</c:if>
-
-		<%
-		List<String> headerNames = new ArrayList<String>();
-
-		headerNames.add("folder");
-		headerNames.add("num-of-folders");
-		headerNames.add("num-of-entries");
-		headerNames.add(StringPool.BLANK);
-
-		SearchContainer searchContainer = new SearchContainer(renderRequest, null, null, "cur1", SearchContainer.DEFAULT_DELTA, portletURL, headerNames, null);
-
-		int total = BookmarksFolderLocalServiceUtil.getFoldersCount(scopeGroupId, folderId);
-
-		searchContainer.setTotal(total);
-
-		List results = BookmarksFolderLocalServiceUtil.getFolders(scopeGroupId, folderId, searchContainer.getStart(), searchContainer.getEnd());
-
-		searchContainer.setResults(results);
-
-		List resultRows = searchContainer.getResultRows();
-
-		for (int i = 0; i < results.size(); i++) {
-			BookmarksFolder curFolder = (BookmarksFolder)results.get(i);
-
-			curFolder = curFolder.toEscapedModel();
-
-			ResultRow row = new ResultRow(curFolder, curFolder.getFolderId(), i);
-
-			PortletURL rowURL = renderResponse.createRenderURL();
-
-			rowURL.setWindowState(WindowState.MAXIMIZED);
-
-			rowURL.setParameter("struts_action", "/bookmarks/view");
-			rowURL.setParameter("folderId", String.valueOf(curFolder.getFolderId()));
-
-			// Name and description
-
-			StringBuilder sb = new StringBuilder();
-
-			sb.append("<a href=\"");
-			sb.append(rowURL);
-			sb.append("\">");
-			sb.append("<img alt=\"");
-			sb.append(LanguageUtil.get(pageContext, "folder"));
-			sb.append("\" class=\"label-icon\" src=\"");
-			sb.append(themeDisplay.getPathThemeImages());
-			sb.append("/common/folder.png\">");
-			sb.append("<b>");
-			sb.append(curFolder.getName());
-			sb.append("</b>");
-
-			if (Validator.isNotNull(curFolder.getDescription())) {
-				sb.append("<br />");
-				sb.append(curFolder.getDescription());
-			}
-
-			sb.append("</a>");
-
-			List subfolders = BookmarksFolderLocalServiceUtil.getFolders(scopeGroupId, curFolder.getFolderId(), 0, 5);
-
-			if (subfolders.size() > 0) {
-				int subfoldersCount = BookmarksFolderLocalServiceUtil.getFoldersCount(scopeGroupId, curFolder.getFolderId());
-
-				sb.append("<br /><u>");
-				sb.append(LanguageUtil.get(pageContext, "subfolders"));
-				sb.append("</u>: ");
-
-				for (int j = 0; j < subfolders.size(); j++) {
-					BookmarksFolder subfolder = (BookmarksFolder)subfolders.get(j);
-
-					subfolder = subfolder.toEscapedModel();
-
-					rowURL.setParameter("folderId", String.valueOf(subfolder.getFolderId()));
-
+		<liferay-ui:search-container
+			curParam="cur1"
+			iteratorURL="<%= portletURL %>"
+		>
+			<liferay-ui:search-container-results
+				total="<%= BookmarksFolderLocalServiceUtil.getFoldersCount(scopeGroupId, folderId) %>"
+				results="<%= BookmarksFolderLocalServiceUtil.getFolders(scopeGroupId, folderId, searchContainer.getStart(), searchContainer.getEnd()) %>"
+				var="results"
+			/>
+			<liferay-ui:search-container-row
+				className="com.liferay.portlet.bookmarks.model.BookmarksFolder"
+				escapedModel="<%= true %>"
+				keyProperty="folderId"
+				modelVar="curFolder"
+			>
+				<liferay-portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" varImpl="rowURL">
+					<portlet:param name="struts_action" value="/bookmarks/view" />
+					<portlet:param name="folderId" value="<%= String.valueOf(curFolder.getFolderId()) %>" />
+				</liferay-portlet:renderURL>
+				<liferay-ui:search-container-column-text
+					name="folder"
+					buffer="sb"
+				>
+					<%
 					sb.append("<a href=\"");
 					sb.append(rowURL);
 					sb.append("\">");
-					sb.append(subfolder.getName());
-					sb.append("</a>");
+					sb.append("<img alt=\"");
+					sb.append(LanguageUtil.get(pageContext, "folder"));
+					sb.append("\" class=\"label-icon\" src=\"");
+					sb.append(themeDisplay.getPathThemeImages());
+					sb.append("/common/folder.png\">");
+					sb.append("<b>");
+					sb.append(curFolder.getName());
+					sb.append("</b>");
 
-					if ((j + 1) < subfolders.size()) {
-						sb.append(", ");
+					if (Validator.isNotNull(curFolder.getDescription())) {
+						sb.append("<br />");
+						sb.append(curFolder.getDescription());
 					}
-				}
 
-				if (subfoldersCount > subfolders.size()) {
-					rowURL.setParameter("folderId", String.valueOf(curFolder.getFolderId()));
-
-					sb.append(", <a href=\"");
-					sb.append(rowURL);
-					sb.append("\">");
-					sb.append(LanguageUtil.get(pageContext, "more"));
-					sb.append(" &raquo;");
 					sb.append("</a>");
-				}
 
-				rowURL.setParameter("folderId", String.valueOf(curFolder.getFolderId()));
-			}
+					List subfolders = BookmarksFolderLocalServiceUtil.getFolders(scopeGroupId, curFolder.getFolderId(), 0, 5);
 
-			row.addText(sb.toString());
+					if (subfolders.size() > 0) {
+						int subfoldersCount = BookmarksFolderLocalServiceUtil.getFoldersCount(scopeGroupId, curFolder.getFolderId());
 
-			// Statistics
+						sb.append("<br /><u>");
+						sb.append(LanguageUtil.get(pageContext, "subfolders"));
+						sb.append("</u>: ");
 
-			List subfolderIds = new ArrayList();
+						for (int j = 0; j < subfolders.size(); j++) {
+							BookmarksFolder subfolder = (BookmarksFolder)subfolders.get(j);
 
-			subfolderIds.add(new Long(curFolder.getFolderId()));
+							subfolder = subfolder.toEscapedModel();
 
-			BookmarksFolderLocalServiceUtil.getSubfolderIds(subfolderIds, scopeGroupId, curFolder.getFolderId());
+							rowURL.setParameter("folderId", String.valueOf(subfolder.getFolderId()));
 
-			int foldersCount = subfolderIds.size() - 1;
-			int entriesCount = BookmarksEntryLocalServiceUtil.getFoldersEntriesCount(subfolderIds);
+							sb.append("<a href=\"");
+							sb.append(rowURL);
+							sb.append("\">");
+							sb.append(subfolder.getName());
+							sb.append("</a>");
 
-			row.addText(String.valueOf(foldersCount), rowURL);
-			row.addText(String.valueOf(entriesCount), rowURL);
+							if ((j + 1) < subfolders.size()) {
+								sb.append(", ");
+							}
+						}
 
-			// Action
+						if (subfoldersCount > subfolders.size()) {
+							rowURL.setParameter("folderId", String.valueOf(curFolder.getFolderId()));
 
-			row.addJSP("right", SearchEntry.DEFAULT_VALIGN, "/html/portlet/bookmarks/folder_action.jsp");
+							sb.append(", <a href=\"");
+							sb.append(rowURL);
+							sb.append("\">");
+							sb.append(LanguageUtil.get(pageContext, "more"));
+							sb.append(" &raquo;");
+							sb.append("</a>");
+						}
 
-			// Add result row
+						rowURL.setParameter("folderId", String.valueOf(curFolder.getFolderId()));
+					}
+					%>
+				</liferay-ui:search-container-column-text>
+				<%
+				List subfolderIds = new ArrayList();
 
-			resultRows.add(row);
-		}
+				subfolderIds.add(new Long(curFolder.getFolderId()));
 
+				BookmarksFolderLocalServiceUtil.getSubfolderIds(subfolderIds, scopeGroupId, curFolder.getFolderId());
+
+				int foldersCount = subfolderIds.size() - 1;
+				int entriesCount = BookmarksEntryLocalServiceUtil.getFoldersEntriesCount(subfolderIds);
+				%>
+				<liferay-ui:search-container-column-text
+					href="<%= rowURL %>"
+					name="num-of-folders"
+					value="<%= String.valueOf(foldersCount) %>"
+				/>
+				<liferay-ui:search-container-column-text
+					href="<%= rowURL %>"
+					name="num-of-entries"
+					value="<%= String.valueOf(entriesCount) %>"
+				/>
+				<liferay-ui:search-container-column-jsp
+					align="right"
+					path="/html/portlet/bookmarks/folder_action.jsp"
+				/>
+			</liferay-ui:search-container-row>
+		</liferay-ui:search-container>
+
+		<%
 		boolean showAddFolderButton = BookmarksFolderPermission.contains(permissionChecker, plid, folderId, ActionKeys.ADD_FOLDER);
 		%>
 
@@ -253,102 +244,83 @@ portletURL.setParameter("folderId", String.valueOf(folderId));
 			}
 
 			OrderByComparator orderByComparator = BookmarksUtil.getEntriesOrderByComparator(orderByCol, orderByType);
+			%>
 
-			headerNames.clear();
+			<liferay-ui:search-container
+				curParam="cur2"
+				iteratorURL="<%= portletURL %>"
+				orderByCol="<%= orderByCol %>"
+				orderByType="<%= orderByType %>"
+			>
+				<liferay-ui:search-container-results
+					total="<%= BookmarksEntryLocalServiceUtil.getEntriesCount(folder.getFolderId()) %>"
+					results="<%= BookmarksEntryLocalServiceUtil.getEntries(folder.getFolderId(), searchContainer.getStart(), searchContainer.getEnd(), orderByComparator) %>"
+					var="results"
+				/>
+				<liferay-ui:search-container-row
+					className="com.liferay.portlet.bookmarks.model.BookmarksEntry"
+					escapedModel="<%= true %>"
+					keyProperty="entryId"
+					modelVar="entry"
+				>
+					<%
+					StringBuilder sb = new StringBuilder();
 
-			headerNames.add("entry");
-			headerNames.add("url");
-			headerNames.add("visits");
-			headerNames.add("priority");
-			headerNames.add("modified-date");
-			headerNames.add(StringPool.BLANK);
+					sb.append(themeDisplay.getPathMain());
+					sb.append("/bookmarks/open_entry?entryId=");
+					sb.append(entry.getEntryId());
 
-			Map orderableHeaders = new HashMap();
+					String rowHREF = sb.toString();
+					%>
+					<liferay-ui:search-container-column-text
+						href="<%= rowHREF %>"
+						name="entry"
+						orderable="<%= true %>"
+						property="name"
+						target="_blank"
+						title="<%= entry.getComments() %>"
+					/>
+					<liferay-ui:search-container-column-text
+						href="<%= rowHREF %>"
+						name="url"
+						orderable="<%= true %>"
+						property="url"
+						target="_blank"
+						title="<%= entry.getComments() %>"
+					/>
+					<liferay-ui:search-container-column-text
+						href="<%= rowHREF %>"
+						name="visits"
+						orderable="<%= true %>"
+						property="visits"
+						target="_blank"
+						title="<%= entry.getComments() %>"
+					/>
+					<liferay-ui:search-container-column-text
+						href="<%= rowHREF %>"
+						name="priority"
+						orderable="<%= true %>"
+						property="priority"
+						target="_blank"
+						title="<%= entry.getComments() %>"
+					/>
+					<liferay-ui:search-container-column-text
+						href="<%= rowHREF %>"
+						name="modified-date"
+						orderable="<%= true %>"
+						orderableProperty="modifiedDate"
+						target="_blank"
+						title="<%= entry.getComments() %>"
+						value="<%= dateFormatDate.format(entry.getModifiedDate()) %>"
+					/>
+					<liferay-ui:search-container-column-jsp
+						align="right"
+						path="/html/portlet/bookmarks/entry_action.jsp"
+					/>
+				</liferay-ui:search-container-row>
+			</liferay-ui:search-container>
 
-			orderableHeaders.put("entry", "name");
-			orderableHeaders.put("url", "url");
-			orderableHeaders.put("visits", "visits");
-			orderableHeaders.put("priority", "priority");
-			orderableHeaders.put("modified-date", "modified-date");
-
-			searchContainer = new SearchContainer(renderRequest, null, null, "cur2", SearchContainer.DEFAULT_DELTA, portletURL, headerNames, null);
-
-			searchContainer.setOrderableHeaders(orderableHeaders);
-			searchContainer.setOrderByCol(orderByCol);
-			searchContainer.setOrderByType(orderByType);
-
-			total = BookmarksEntryLocalServiceUtil.getEntriesCount(folder.getFolderId());
-
-			searchContainer.setTotal(total);
-
-			results = BookmarksEntryLocalServiceUtil.getEntries(folder.getFolderId(), searchContainer.getStart(), searchContainer.getEnd(), orderByComparator);
-
-			searchContainer.setResults(results);
-
-			resultRows = searchContainer.getResultRows();
-
-			for (int i = 0; i < results.size(); i++) {
-				BookmarksEntry entry = (BookmarksEntry)results.get(i);
-
-				entry = entry.toEscapedModel();
-
-				ResultRow row = new ResultRow(entry, entry.getEntryId(), i);
-
-				StringBuilder sb = new StringBuilder();
-
-				sb.append(themeDisplay.getPathMain());
-				sb.append("/bookmarks/open_entry?entryId=");
-				sb.append(entry.getEntryId());
-
-				String rowHREF = sb.toString();
-
-				TextSearchEntry rowTextEntry = new TextSearchEntry(SearchEntry.DEFAULT_ALIGN, SearchEntry.DEFAULT_VALIGN, entry.getName(), rowHREF, "_blank", entry.getComments());
-
-				// Name
-
-				row.addText(rowTextEntry);
-
-				// URL
-
-				rowTextEntry = (TextSearchEntry)rowTextEntry.clone();
-
-				rowTextEntry.setName(entry.getUrl());
-
-				row.addText(rowTextEntry);
-
-				// Visits
-
-				rowTextEntry = (TextSearchEntry)rowTextEntry.clone();
-
-				rowTextEntry.setName(String.valueOf(entry.getVisits()));
-
-				row.addText(rowTextEntry);
-
-				// Priority
-
-				rowTextEntry = (TextSearchEntry)rowTextEntry.clone();
-
-				rowTextEntry.setName(String.valueOf(entry.getPriority()));
-
-				row.addText(rowTextEntry);
-
-				// ModifiedDate
-
-				rowTextEntry = (TextSearchEntry)rowTextEntry.clone();
-
-				rowTextEntry.setName(dateFormatDate.format(entry.getModifiedDate()));
-
-				row.addText(rowTextEntry);
-
-				// Action
-
-				row.addJSP("right", SearchEntry.DEFAULT_VALIGN, "/html/portlet/bookmarks/entry_action.jsp");
-
-				// Add result row
-
-				resultRows.add(row);
-			}
-
+			<%
 			boolean showAddEntryButton = BookmarksFolderPermission.contains(permissionChecker, folder, ActionKeys.ADD_ENTRY);
 			%>
 
@@ -402,72 +374,61 @@ portletURL.setParameter("folderId", String.valueOf(folderId));
 		if (tabs1.equals("my-entries") && themeDisplay.isSignedIn()) {
 			groupEntriesUserId = user.getUserId();
 		}
-
-		List<String> headerNames = new ArrayList<String>();
-
-		headerNames.add("entry");
-		headerNames.add("url");
-		headerNames.add("visits");
-		headerNames.add(StringPool.BLANK);
-
-		SearchContainer searchContainer = new SearchContainer(renderRequest, null, null, SearchContainer.DEFAULT_CUR_PARAM, SearchContainer.DEFAULT_DELTA, portletURL, headerNames, null);
-
-		int total = BookmarksEntryLocalServiceUtil.getGroupEntriesCount(scopeGroupId, groupEntriesUserId);
-
-		searchContainer.setTotal(total);
-
-		List results = BookmarksEntryLocalServiceUtil.getGroupEntries(scopeGroupId, groupEntriesUserId, searchContainer.getStart(), searchContainer.getEnd());
-
-		searchContainer.setResults(results);
-
-		List resultRows = searchContainer.getResultRows();
-
-		for (int i = 0; i < results.size(); i++) {
-			BookmarksEntry entry = (BookmarksEntry)results.get(i);
-
-			entry = entry.toEscapedModel();
-
-			ResultRow row = new ResultRow(entry, entry.getEntryId(), i);
-
-			StringBuilder sb = new StringBuilder();
-
-			sb.append(themeDisplay.getPathMain());
-			sb.append("/bookmarks/open_entry?entryId=");
-			sb.append(entry.getEntryId());
-
-			String rowHREF = sb.toString();
-
-			TextSearchEntry rowTextEntry = new TextSearchEntry(SearchEntry.DEFAULT_ALIGN, SearchEntry.DEFAULT_VALIGN, entry.getName(), rowHREF, "_blank", entry.getComments());
-
-			// Name
-
-			row.addText(rowTextEntry);
-
-			// URL
-
-			rowTextEntry = (TextSearchEntry)rowTextEntry.clone();
-
-			rowTextEntry.setName(entry.getUrl());
-
-			row.addText(rowTextEntry);
-
-			// Visits
-
-			rowTextEntry = (TextSearchEntry)rowTextEntry.clone();
-
-			rowTextEntry.setName(String.valueOf(entry.getVisits()));
-
-			row.addText(rowTextEntry);
-
-			// Action
-
-			row.addJSP("right", SearchEntry.DEFAULT_VALIGN, "/html/portlet/bookmarks/entry_action.jsp");
-
-			// Add result row
-
-			resultRows.add(row);
-		}
 		%>
+
+		<liferay-ui:search-container
+			iteratorURL="<%= portletURL %>"
+		>
+			<liferay-ui:search-container-results
+				total="<%= BookmarksEntryLocalServiceUtil.getGroupEntriesCount(scopeGroupId, groupEntriesUserId) %>"
+				results="<%= BookmarksEntryLocalServiceUtil.getGroupEntries(scopeGroupId, groupEntriesUserId, searchContainer.getStart(), searchContainer.getEnd()) %>"
+				var="results"
+			/>
+			<liferay-ui:search-container-row
+				className="com.liferay.portlet.bookmarks.model.BookmarksEntry"
+				escapedModel="<%= true %>"
+				keyProperty="entryId"
+				modelVar="entry"
+			>
+				<%
+				StringBuilder sb = new StringBuilder();
+
+				sb.append(themeDisplay.getPathMain());
+				sb.append("/bookmarks/open_entry?entryId=");
+				sb.append(entry.getEntryId());
+
+				String rowHREF = sb.toString();
+				%>
+				<liferay-ui:search-container-column-text
+					href="<%= rowHREF %>"
+					name="entry"
+					orderable="<%= true %>"
+					property="name"
+					target="_blank"
+					title="<%= entry.getComments() %>"
+				/>
+				<liferay-ui:search-container-column-text
+					href="<%= rowHREF %>"
+					name="url"
+					orderable="<%= true %>"
+					property="url"
+					target="_blank"
+					title="<%= entry.getComments() %>"
+				/>
+				<liferay-ui:search-container-column-text
+					href="<%= rowHREF %>"
+					name="visits"
+					orderable="<%= true %>"
+					property="visits"
+					target="_blank"
+					title="<%= entry.getComments() %>"
+				/>
+				<liferay-ui:search-container-column-jsp
+					align="right"
+					path="/html/portlet/bookmarks/entry_action.jsp"
+				/>
+			</liferay-ui:search-container-row>
+		</liferay-ui:search-container>
 
 		<liferay-ui:search-iterator searchContainer="<%= searchContainer %>" />
 
