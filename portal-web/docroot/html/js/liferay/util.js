@@ -268,7 +268,20 @@ Liferay.Util = {
 			}
 		);
 	},
+	defaultValue: function(exp, dval) {
+		var input = jQuery(exp).val(dval);
 
+		input.focus(function() {
+			if (this.value == dval) {
+				this.value = '';
+			}
+		});
+		input.blur(function() {
+			if (!this.value) {
+				this.value = dval;
+			}
+		});
+	},
 	disableElements: function(obj) {
 		var el = jQuery(obj);
 		var children = el.find('*');
