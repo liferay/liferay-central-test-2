@@ -41,7 +41,7 @@ if (!Liferay.Editor.bbCode) {
 
 			textarea.trigger('focus');
 
-			if (Liferay.Browser.is_ie) {
+			if (Liferay.Browser.isIe()) {
 				var sel = document.selection.createRange();
 
 				if (content != null) {
@@ -375,7 +375,7 @@ if (!Liferay.Editor.bbCode) {
 				}
 			);
 
-			if (Liferay.Browser.is_firefox) {
+			if (Liferay.Browser.isFirefox()) {
 				var emoticonDiv = instance._emoticons[0];
 				var intent;
 
@@ -466,7 +466,7 @@ if (!Liferay.Editor.bbCode) {
 
 			textarea.trigger('focus');
 
-			if (Liferay.Browser.is_ie) {
+			if (Liferay.Browser.isIe()) {
 				field.focus();
 
 				var sel = document.selection.createRange();
@@ -542,7 +542,7 @@ if (!Liferay.Editor.bbCode) {
 			var textarea = instance._textarea;
 			var field = textarea[0];
 
-			if (Liferay.Browser.is_ie) {
+			if (Liferay.Browser.isIe()) {
 				field.focus();
 
 				var sel = document.selection.createRange();

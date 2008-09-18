@@ -92,7 +92,6 @@ boolean pasteText = ParamUtil.get(request, "paste_text", false);
 	<script language="JavaScript" src="../jquery/jquery.js"></script>
 	<script language="JavaScript" src="../jquery/j2browse.js"></script>
 	<script language="JavaScript" src="../liferay/liferay.js"></script>
-	<script language="JavaScript" src="../liferay/browser.js"></script>
 	<script language="JavaScript" src="../liferay/util.js"></script>
 
 	<script type="text/javascript">
@@ -162,7 +161,7 @@ boolean pasteText = ParamUtil.get(request, "paste_text", false);
 				setTimeout("setHTML(htmlValue)", 0);
 			}
 			else {
-				if (Liferay.Browser.is_ie) {
+				if (Liferay.Browser.isIe()) {
 
 					// The IE rich text editor gives two breaks instead of one
 					// when a user hits enter. Wrapping the HTML with div tags
@@ -186,7 +185,7 @@ boolean pasteText = ParamUtil.get(request, "paste_text", false);
 				switchMode();
 			}
 
-			if (Liferay.Browser.is_ie) {
+			if (Liferay.Browser.isIe()) {
 				return document.getElementById("textArea").contentWindow.document.body.innerText;
 			}
 			else {
@@ -259,7 +258,7 @@ boolean pasteText = ParamUtil.get(request, "paste_text", false);
 				switchMode();
 			}
 
-			if (Liferay.Browser.is_ie) {
+			if (Liferay.Browser.isIe()) {
 				/*if (cmd == "createLink") {
 					var selUrl = prompt("URL:", "http://");
 
@@ -364,7 +363,7 @@ boolean pasteText = ParamUtil.get(request, "paste_text", false);
 		function insertHTML(newHTML) {
 			document.getElementById("textArea").contentWindow.focus();
 
-			if (Liferay.Browser.is_ie) {
+			if (Liferay.Browser.isIe()) {
 				document.selection.createRange().pasteHTML(newHTML);
 			}
 			else {
@@ -399,7 +398,7 @@ boolean pasteText = ParamUtil.get(request, "paste_text", false);
 		}
 
 		function openBackColor() {
-			if (Liferay.Browser.is_ie) {
+			if (Liferay.Browser.isIe()) {
 				colorType = "backColor";
 			}
 			else {
@@ -469,7 +468,7 @@ boolean pasteText = ParamUtil.get(request, "paste_text", false);
 			source = !source;
 
 			if (source) {
-				if (Liferay.Browser.is_ie) {
+				if (Liferay.Browser.isIe()) {
 					var temp = formatHTML(document.getElementById("textArea").contentWindow.document.body.innerHTML);
 					document.getElementById("textArea").contentWindow.document.body.innerText = temp;
 				}
@@ -480,7 +479,7 @@ boolean pasteText = ParamUtil.get(request, "paste_text", false);
 				}
 			}
 			else {
-				if (Liferay.Browser.is_ie) {
+				if (Liferay.Browser.isIe()) {
 					var temp = document.getElementById("textArea").contentWindow.document.body.innerText;
 					document.getElementById("textArea").contentWindow.document.body.innerHTML = temp;
 				}

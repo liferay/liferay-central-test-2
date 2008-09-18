@@ -1,6 +1,6 @@
 jQuery.noConflict();
 
-Liferay = {};
+Liferay = Liferay || {};
 
 Liferay.Editor = {};
 

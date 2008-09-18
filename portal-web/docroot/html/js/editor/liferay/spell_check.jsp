@@ -62,7 +62,6 @@ List invalidWords = WordsUtil.checkSpelling(text);
 	<script language="JavaScript" src="../../jquery/jquery.js"></script>
 	<script language="JavaScript" src="../../jquery/j2browse.js"></script>
 	<script language="JavaScript" src="../../liferay/liferay.js"></script>
-	<script language="JavaScript" src="../../liferay/browser.js"></script>
 	<script language="JavaScript" src="../../liferay/util.js"></script>
 
 	<script type="text/javascript">
@@ -101,7 +100,7 @@ List invalidWords = WordsUtil.checkSpelling(text);
 		var ignoreWords = new Array();
 		var changeWords = new Array();
 
-		var spanInvalidBegin = (Liferay.Browser.is_ie) ? "<SPAN class=spell-check-error id=spellCheckError>" : "<SPAN class=\"spell-check-error\" id=\"spellCheckError\">";
+		var spanInvalidBegin = (Liferay.Browser.isIe()) ? "<SPAN class=spell-check-error id=spellCheckError>" : "<SPAN class=\"spell-check-error\" id=\"spellCheckError\">";
 		var spanInvalidEnd = "</SPAN>";
 
 		function init() {

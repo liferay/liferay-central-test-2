@@ -212,7 +212,7 @@ Liferay.TagsSelector = new Class({
 		}
 		instance._popupVisible = true;
 
-		if (Liferay.Browser.is_ie) {
+		if (Liferay.Browser.isIe()) {
 			jQuery('.lfr-label-text', popup).click(
 				function() {
 					var input = jQuery(this.previousSibling);

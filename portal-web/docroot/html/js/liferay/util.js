@@ -55,7 +55,7 @@ Liferay.Util = {
 				this.selectionEnd = caretPos;
 			}
 
-			if (Liferay.Browser.is_ie && (this != document.activeElement)) {
+			if (Liferay.Browser.isIe() && (this != document.activeElement)) {
 				this.focus();
 			}
 		};
@@ -92,7 +92,7 @@ Liferay.Util = {
 		instance.addInputType = function() {
 		};
 
-		if (Liferay.Browser.is_ie && Liferay.Browser.version() < 7) {
+		if (Liferay.Browser.isIe() && Liferay.Browser.getMajorVersion() < 7) {
 			instance.addInputType = function(el) {
 				var item;
 
@@ -289,7 +289,7 @@ Liferay.Util = {
 
 		var removeEvents = defaultEvents;
 
-		if (Liferay.Browser.is_ie) {
+		if (Liferay.Browser.isIe()) {
 			removeEvents = function(el) {
 				defaultEvents(el);
 				ieEvents(el);
@@ -801,7 +801,7 @@ Liferay.Util = {
 		else {
 			Liferay.Util.submitCountdown = 0;
 
-			if (!Liferay.Browser.is_ns_4) {
+			if (!Liferay.Browser.isMozilla()) {
 				document.body.style.cursor = 'auto';
 			}
 
@@ -902,7 +902,7 @@ Liferay.Util = {
 			}
 		);
 
-		if (Liferay.Browser.is_ie) {
+		if (Liferay.Browser.isIe()) {
 			var currentWidth = boxObj.css('width');
 
 			if (currentWidth == 'auto') {
@@ -979,7 +979,7 @@ Liferay.Util = {
 		var el = this;
 		var pressedKey = event.which;
 
-		if(pressedKey == 9 || (Liferay.Browser.is_safari && pressedKey == 25)) {
+		if(pressedKey == 9 || (Liferay.Browser.isSafari() && pressedKey == 25)) {
 			event.preventDefault();
 			event.stopPropagation();
 
@@ -1141,7 +1141,7 @@ function submitForm(form, action, singleSubmit) {
 			form.action = action;
 		}
 
-		if (!Liferay.Browser.is_ns_4) {
+		if (!Liferay.Browser.isMozilla()) {
 			document.body.style.cursor = 'wait';
 		}
 

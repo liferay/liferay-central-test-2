@@ -233,7 +233,7 @@ Liferay.Portlet = {
 					link.attr('title', title);
 					img.attr('src', imgSrc);
 
-					if (restore && Liferay.Browser.is_ie) {
+					if (restore && Liferay.Browser.isIe()) {
 						content.css('display', '');
 					}
 				}

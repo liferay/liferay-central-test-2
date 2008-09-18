@@ -66,7 +66,7 @@ Liferay.Dock = {
 				}
 			);
 
-			if (Liferay.Browser.is_ie && Liferay.Browser.version() <= 6) {
+			if (Liferay.Browser.isIe() && Liferay.Browser.getMajorVersion() <= 6) {
 				myPlaces.find('> ul').css('zoom', 1);
 			}
 
@@ -104,7 +104,7 @@ Liferay.Dock = {
 
 				var top = parseInt(obj.css('top'));
 
-				if (Liferay.Browser.is_safari && isNaN(top)) {
+				if (Liferay.Browser.isSafari() && isNaN(top)) {
 					top = -1;
 				}
 

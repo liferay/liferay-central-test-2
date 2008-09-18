@@ -36,7 +36,7 @@ Liferay.PortletCSS = {
 						instance._newPanel.hide().appendTo('body');
 						instance._currentPopup = null;
 
-						if (Liferay.Browser.is_ie_6) {
+						if (Liferay.Browser.isIe() && Liferay.Browser.getMajorVersion() == 6) {
 							window.location.reload(true);
 						}
 					}
@@ -462,7 +462,7 @@ Liferay.PortletCSS = {
 
 		Liferay.Util.enableTextareaTabs(customCSS[0]);
 
-		if (!Liferay.Browser.is_safari) {
+		if (!Liferay.Browser.isSafari()) {
 			refreshText = Liferay.Language.get('update-the-styles-on-this-page');
 
 			var refreshLink = jQuery('<a href="javascript:;">' + refreshText + '</a>');

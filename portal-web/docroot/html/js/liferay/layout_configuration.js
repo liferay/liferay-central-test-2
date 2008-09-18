@@ -325,7 +325,7 @@ var LayoutConfiguration = {
 
 		portlets.filter('.lfr-portlet-used').draggable('disable');
 
-		if (Liferay.Browser.is_ie) {
+		if (Liferay.Browser.isIe()) {
 			portlets.hover(
 				function() {
 					this.className += ' over';
@@ -368,7 +368,7 @@ var LayoutConfiguration = {
 			}
 		);
 
-		if (Liferay.Browser.is_ie) {
+		if (Liferay.Browser.isIe()) {
 			jQuery('body link').appendTo('head');
 
 			jQuery('link.lfr-css-file').each(
