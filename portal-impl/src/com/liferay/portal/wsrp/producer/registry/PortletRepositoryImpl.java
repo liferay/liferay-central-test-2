@@ -74,25 +74,29 @@ import java.util.Set;
 
 import javax.portlet.PortletPreferences;
 
+import javax.xml.namespace.QName;
+
 /**
  * <a href="PortletRepositoryImpl.java.html"><b><i>View Source</i></b></a>
  *
  * @author Manish Gupta
  * @author Nithya Subramanian
+ * @author Brian Wing Shun Chan
+ *
  */
-
 public class PortletRepositoryImpl implements PortletRegistry, ResourceName {
 
-	public PortletRepositoryImpl() throws ProducerException{
+	public PortletRepositoryImpl() throws ProducerException {
 		if (_portlets == null) {
 			_portlets = PortletLocalServiceUtil.getPortlets();
 		}
+
 		try {
 			_portletDescriptionHolder =
-					PortletDescriptorHolderFactory.getPortletDescriptorHolder();
+				PortletDescriptorHolderFactory.getPortletDescriptorHolder();
 		}
-		catch(Exception ex) {
-			throw new ProducerException(ex);
+		catch (Exception e) {
+			throw new ProducerException(e);
 		}
 	}
 
@@ -103,66 +107,65 @@ public class PortletRepositoryImpl implements PortletRegistry, ResourceName {
 	}
 
 	public void cloneChannel(
-			UserContext uc, String newName, String existingChannel,
-				String regHandle) throws ProducerException {
-		//Not implemented
+		UserContext userContext, String newName, String existingChannel,
+		String registrationHandle) {
 	}
 
-	public Set<String> getAvailablePortlets() throws ProducerException {
+	public Set<String> getAvailablePortlets() {
 		if (_portlets == null) {
 			_portlets = PortletLocalServiceUtil.getPortlets();
 		}
 
-		Set<String> availablePortlets = new HashSet<String>();
+		Set<String> portletIds = new HashSet<String>();
 
 		for (Portlet portlet : _portlets) {
 			String portletId = portlet.getPortletId();
 
 			if (portlet.getPortletApp().isWARFile()) {
-				availablePortlets.add(portletId);
+				portletIds.add(portletId);
 			}
 		}
 
-		return availablePortlets;
+		return portletIds;
 	}
 
-	public List<ItemDescription> getCustomModeDescriptions()
-		throws ProducerException {
-
+	public List<ItemDescription> getCustomModeDescriptions() {
 		return Collections.EMPTY_LIST;
 	}
 
-	public List<ItemDescription> getCustomWindowStateDescriptions()
-		throws ProducerException {
-
+	public List<ItemDescription> getCustomWindowStateDescriptions() {
 		return Collections.EMPTY_LIST;
 	}
 
-	public Boolean getDefaultSecureMarkup(String portletName)
-		throws ProducerException {
+	public Locale getDefaultLocale() {
+		return Locale.getDefault();
+	}
 
+	public Boolean getDefaultSecureMarkup(String portletName) {
 		return Boolean.FALSE;
 	}
 
 	public List<LocalizedString> getDescription(
-		String portletName, Set<String> desiredLocales)
-			throws ProducerException {
+		String portletName, Set<String> locales) {
 
 		return Collections.EMPTY_LIST;
 	}
 
 	public List<LocalizedString> getDisplayName(
-		String portletName, Set<String> desiredLocales)
-			throws ProducerException {
+			String portletName, Set<String> locales)
+		throws ProducerException {
 
 		List<LocalizedString> displayNames = new ArrayList<LocalizedString>();
+
 		String displayName = null;
 
 		try {
-			displayName = _getPortlet(portletName).getDisplayName();
+			Portlet portlet = _getPortlet(portletName);
+
+			displayName = portlet.getDisplayName();
 		}
-		catch (SystemException sException) {
-			throw new ProducerException(sException);
+		catch (SystemException se) {
+			throw new ProducerException(se);
 		}
 
 		if (displayName != null) {
@@ -170,18 +173,16 @@ public class PortletRepositoryImpl implements PortletRegistry, ResourceName {
 				portletName + SEPARATOR + DISPLAY_NAME + SEPARATOR;
 
 			LocalizedString localizedString = new LocalizedString();
+
+			localizedString.setLang(
+				WSRPUtility.toXMLLang(getDefaultLocale().toString()));
 			localizedString.setResourceName(resourceNamePrefix + displayName);
 			localizedString.setValue(displayName);
-			localizedString.setLang(
-					WSRPUtility.toXMLLang(getDefaultLocale().toString()));
+
 			displayNames.add(localizedString);
 		}
 
 		return displayNames;
-	}
-
-	public Locale getDefaultLocale() throws ProducerException {
-		return Locale.getDefault();
 	}
 
 	public List<EventHolder> getHandledEvents(String portletName, String locale)
@@ -191,22 +192,24 @@ public class PortletRepositoryImpl implements PortletRegistry, ResourceName {
 
 		List<EventHolder> eventHolders =
 			_portletDescriptionHolder.getSupportedProcessingEventHolders(
-					entityID);
+				entityID);
 
 		return eventHolders;
 	}
 
 	public List<LocalizedString> getKeywords(
-			String portletName, Set<String> desiredLocales)
-				throws ProducerException {
+			String portletName, Set<String> locales)
+		throws ProducerException {
 
 		String keywords = null;
 
 		try {
-			keywords = _getPortlet(portletName).getPortletInfo().getKeywords();
+			Portlet portlet = _getPortlet(portletName);
+
+			keywords = portlet.getPortletInfo().getKeywords();
 		}
-		catch (Exception ex) {
-			throw new ProducerException(ex);
+		catch (Exception e) {
+			throw new ProducerException(e);
 		}
 
 		if (keywords == null) {
@@ -216,14 +219,14 @@ public class PortletRepositoryImpl implements PortletRegistry, ResourceName {
 		List<LocalizedString> result = new ArrayList<LocalizedString>();
 
 		String resourceName =
-				portletName + SEPARATOR + KEYWORDS + SEPARATOR +  keywords;
+			portletName + SEPARATOR + KEYWORDS + SEPARATOR +  keywords;
 
 		LocalizedString localizedString = new LocalizedString();
 
+		localizedString.setLang(
+			WSRPUtility.toXMLLang(getDefaultLocale().toString()));
 		localizedString.setResourceName(resourceName);
 		localizedString.setValue(keywords);
-		localizedString.setLang(
-				WSRPUtility.toXMLLang(getDefaultLocale().toString()));
 
 		result.add(localizedString);
 
@@ -236,20 +239,21 @@ public class PortletRepositoryImpl implements PortletRegistry, ResourceName {
 		Map<String, Set<String>> portletModesMap = null;
 
 		try {
-			portletModesMap = _getPortlet(portletName).getPortletModes();
+			Portlet portlet = _getPortlet(portletName);
+
+			portletModesMap = portlet.getPortletModes();
 		}
-		catch (Exception ex) {
-			throw new ProducerException(ex);
+		catch (Exception e) {
+			throw new ProducerException(e);
 		}
 
-		List markupTypes = new ArrayList<MarkupType>();
-		MarkupType markupType = null;
+		List<MarkupType> markupTypes = new ArrayList<MarkupType>();
 
 		for (String mimeType : portletModesMap.keySet()) {
-			markupType = new MarkupType();
+			MarkupType markupType = new MarkupType();
 
-			markupType.getWindowStates().addAll(_states);
-			markupType.getModes().addAll(_modes);
+			markupType.getWindowStates().addAll(_WSRP_STATES);
+			markupType.getModes().addAll(_WSRP_MODES);
 			markupType.setMimeType(mimeType);
 
 			markupTypes.add(markupType);
@@ -261,102 +265,114 @@ public class PortletRepositoryImpl implements PortletRegistry, ResourceName {
 	public List<ParameterDescription> getNavigationalPublicParameters(
 		String portletName, String locale) throws ProducerException {
 
-		List<ParameterDescription> publicRenderParamList =
-				new ArrayList<ParameterDescription>();
+		List<ParameterDescription> parameterDescriptions =
+			new ArrayList<ParameterDescription>();
 
-		EntityID entityId = getPortletEntityID(portletName);
+		EntityID entityID = getPortletEntityID(portletName);
 
-		List<PublicRenderParameterHolder> publicRenderParams =
-				_portletDescriptionHolder.
-					getSupportedPublicRenderParameterHolders( entityId, null);
+		List<PublicRenderParameterHolder> publicRenderParameterHolders =
+			_portletDescriptionHolder.getSupportedPublicRenderParameterHolders(
+				entityID, null);
 
-		for (PublicRenderParameterHolder paramHolder : publicRenderParams) {
+		for (PublicRenderParameterHolder publicRenderParameterHolder :
+				publicRenderParameterHolders) {
 
 			ParameterDescription parameterDescription =
-					new ParameterDescription();
+				new ParameterDescription();
 
-			parameterDescription.setIdentifier(paramHolder.getIdentifier());
-			parameterDescription.getNames().add(paramHolder.getQName());
-			parameterDescription.getNames().addAll(paramHolder.getAliases());
+			parameterDescription.setIdentifier(
+				publicRenderParameterHolder.getIdentifier());
 
-			publicRenderParamList.add(parameterDescription);
+			List<QName> names = parameterDescription.getNames();
+
+			names.add(publicRenderParameterHolder.getQName());
+			names.addAll(publicRenderParameterHolder.getAliases());
+
+			parameterDescriptions.add(parameterDescription);
 		}
 
-		return publicRenderParamList;
-	}
-
-	public PortletPreferences getPortletPreferences(
-		String portletName) throws ProducerException {
-
-		return null;
+		return parameterDescriptions;
 	}
 
 	public EntityID getPortletEntityID(String portletName)
 		throws ProducerException {
 
 		try {
-			return WindowInvokerUtil.getEntityID(_getPortlet(portletName));
+			Portlet portlet = _getPortlet(portletName);
+
+			return WindowInvokerUtil.getEntityID(portlet);
 		}
-		catch(Exception e) {
+		catch (Exception e) {
 			throw new ProducerException(e);
 		}
 	}
 
-	public Map getPortletResourceMap(
-		String portletName) throws ProducerException {
+	public PortletPreferences getPortletPreferences(String portletName) {
+		return null;
+	}
 
+	public Map getPortletResourceMap(String portletName) {
 		return null;
 	}
 
 	public List<EventHolder> getPublishedEvents(
-		String portletName, String locale) throws ProducerException {
+			String portletName, String locale)
+		throws ProducerException {
 
 		EntityID entityID = getPortletEntityID(portletName);
 
 		List<EventHolder> publishedEvents =
-				_portletDescriptionHolder.getSupportedPublishingEventHolders(
-					entityID);
+			_portletDescriptionHolder.getSupportedPublishingEventHolders(
+				entityID);
 
 		return publishedEvents;
 	}
 
 	public List<LocalizedString> getShortTitle(
-		String portletName, Set<String> desiredLocales)
-			throws ProducerException {
+			String portletName, Set<String> locales)
+		throws ProducerException {
 
-		String sTitle = null;
+		String shortTitle = null;
 
 		try {
-			sTitle = _getPortlet(portletName).getPortletInfo().getShortTitle();
+			Portlet portlet = _getPortlet(portletName);
+
+			shortTitle = portlet.getPortletInfo().getShortTitle();
 		}
-		catch (SystemException sException) {
-			throw new ProducerException(sException);
+		catch (SystemException se) {
+			throw new ProducerException(se);
 		}
 
 		List<LocalizedString> shortTitles = new ArrayList<LocalizedString>();
+
 		String resourceNamePrefix =
-				portletName + SEPARATOR + SHORT_TITLE + SEPARATOR;
+			portletName + SEPARATOR + SHORT_TITLE + SEPARATOR;
 
 		LocalizedString localizedString = new LocalizedString();
-		localizedString.setResourceName(resourceNamePrefix + sTitle);
-		localizedString.setValue(sTitle);
+
 		localizedString.setLang(
-				WSRPUtility.toXMLLang(getDefaultLocale().toString()));
+			WSRPUtility.toXMLLang(getDefaultLocale().toString()));
+		localizedString.setResourceName(resourceNamePrefix + shortTitle);
+		localizedString.setValue(shortTitle);
 
 		shortTitles.add(localizedString);
 
 		return shortTitles;
 	}
 
-	public List<LocalizedString> getTitle(String portletName,
-		Set<String> desiredLocales) throws ProducerException {
+	public List<LocalizedString> getTitle(
+			String portletName, Set<String> locales)
+		throws ProducerException {
 
 		String title = null;
+
 		try {
-			title = _getPortlet(portletName).getPortletInfo().getTitle();
+			Portlet portlet = _getPortlet(portletName);
+
+			title = portlet.getPortletInfo().getTitle();
 		}
-		catch (SystemException sException) {
-			throw new ProducerException(sException);
+		catch (SystemException se) {
+			throw new ProducerException(se);
 		}
 
 		List<LocalizedString> titles = new ArrayList<LocalizedString>();
@@ -364,62 +380,67 @@ public class PortletRepositoryImpl implements PortletRegistry, ResourceName {
 		String resourceNamePrefix = portletName + SEPARATOR + TITLE + SEPARATOR;
 
 		LocalizedString localizedString = new LocalizedString();
-		localizedString.setResourceName(resourceNamePrefix + title);
-		localizedString.setLang(
-				WSRPUtility.toXMLLang(getDefaultLocale().toString()));
 
+		localizedString.setLang(
+			WSRPUtility.toXMLLang(getDefaultLocale().toString()));
+		localizedString.setResourceName(resourceNamePrefix + title);
 		localizedString.setValue(title);
 
 		titles.add(localizedString);
+
 		return titles;
 	}
 
 	public List<ItemDescription> getUserCategories(
-		String portletName, Set<String> desiredLocales)
-			throws ProducerException {
+			String portletName, Set<String> locales)
+		throws ProducerException {
 
 		Map<String,String> roles = null;
+
 		try {
-			roles = _getPortlet(portletName).getRoleMappers();
+			Portlet portlet = _getPortlet(portletName);
+
+			roles = portlet.getRoleMappers();
 		}
-		catch (Exception ex) {
-			throw new ProducerException(ex);
+		catch (Exception e) {
+			throw new ProducerException(e);
 		}
-		if (roles == null || roles.isEmpty()) {
+
+		if ((roles == null) || roles.isEmpty()) {
 			return Collections.EMPTY_LIST;
 		}
 
 		List<ItemDescription> userCategories = new ArrayList<ItemDescription>();
+
 		String resourcePrefix =
-				portletName + SEPARATOR + ROLE_DESCRIPTION + SEPARATOR;
+			portletName + SEPARATOR + ROLE_DESCRIPTION + SEPARATOR;
 
 		int i = 0;
-		ItemDescription itemDescription = null;
-		LocalizedString localizedString = null;
 
-		for(String key : roles.keySet()){
-			localizedString = new LocalizedString();
+		for (String key : roles.keySet()) {
+			LocalizedString localizedString = new LocalizedString();
+
 			localizedString.setLang(
-					WSRPUtility.toXMLLang(getDefaultLocale().toString()));
-
+				WSRPUtility.toXMLLang(getDefaultLocale().toString()));
 			localizedString.setResourceName(
-					resourcePrefix + key + SEPARATOR + i);
-
+				resourcePrefix + key + SEPARATOR + i);
 			localizedString.setValue(roles.get(key));
 
-			itemDescription = new ItemDescription();
+			ItemDescription itemDescription = new ItemDescription();
+
 			itemDescription.setDescription(localizedString);
 			itemDescription.setItemName(key);
 
 			userCategories.add(itemDescription);
+
 			i++;
 		}
+
 		return userCategories;
 	}
 
 	public List<ItemDescription> getUserProfileItems(
-		String portletName, Set<String> desiredLocales)
-			throws ProducerException {
+		String portletName, Set<String> locales) {
 
 		return Collections.EMPTY_LIST;
 	}
@@ -428,33 +449,29 @@ public class PortletRepositoryImpl implements PortletRegistry, ResourceName {
 		return false;
 	}
 
-	public void removeChannel(String regHandle, String portletName)
-		throws ProducerException {
-		//Not implemented
+	public void removeChannel(String regHandle, String portletName) {
 	}
 
 	public void setPortletProperties(
-		UserContext uc, PropertyList pList, String portletHandle,
-			String regHandle) throws ProducerException {
+		UserContext userContext, PropertyList propertyList,
+		String portletHandle, String registrationHandle) {
 
-		throw new UnsupportedOperationException("Not yet supported.");
+		throw new UnsupportedOperationException();
 	}
 
 	private Portlet _getPortlet(String portletName) throws SystemException{
-
 		return PortletLocalServiceUtil.getPortletById(
-					CompanyConstants.SYSTEM, portletName);
+			CompanyConstants.SYSTEM, portletName);
 	}
 
-	private List<Portlet> _portlets = null;
+	private static final List<String> _WSRP_MODES =
+		Arrays.asList(new String[] {"wsrp:view", "wsrp:help", "wsrp:edit"});
 
-	private PortletDescriptorHolder _portletDescriptionHolder = null;
-
-	private static final List<String> _modes =
-		Arrays.asList(new String[]{"wsrp:view", "wsrp:help", "wsrp:edit"});
-
-	private static final List<String> _states =
+	private static final List<String> _WSRP_STATES =
 		Arrays.asList(
-			new String[]{"wsrp:maximized", "wsrp:minimized", "wsrp:normal"});
+			new String[] {"wsrp:maximized", "wsrp:minimized", "wsrp:normal"});
+
+	private List<Portlet> _portlets = null;
+	private PortletDescriptorHolder _portletDescriptionHolder = null;
 
 }

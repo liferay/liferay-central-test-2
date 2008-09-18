@@ -51,7 +51,6 @@ import com.liferay.portal.service.GroupLocalServiceUtil;
 import com.liferay.portal.service.LayoutLocalServiceUtil;
 import com.liferay.portal.service.PortletLocalServiceUtil;
 import com.liferay.portal.theme.ThemeDisplay;
-import com.liferay.portal.theme.ThemeDisplayFactory;
 import com.liferay.portal.util.PortalInstances;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.WebKeys;
@@ -73,24 +72,37 @@ import javax.servlet.http.HttpServletRequest;
  * <a href="UserManagerImpl.java.html"><b><i>View Source</i></b></a>
  *
  * @author Manish Gupta
+ * @author Brian Wing Shun Chan
  *
  */
 
 public class UserManagerImpl implements UserManager{
 
 	public UserManagerImpl(Producer producer) {
-		this._producer = producer;
+		//_producer = producer;
+	}
+
+	public void createConsumerUserStore(String registrationHandle) {
+	}
+
+	public void createDefaultUserStore() {
+	}
+
+	public void deleteConsumerUserStore(String registrationHandle) {
+	}
+
+	public void deleteDefaultUserStore() {
 	}
 
 	public PortletWindowContext getPortletWindowContext(
-		HttpServletRequest request,
-			String registrationHandle, String userKey)
-				throws ProducerException{
+			HttpServletRequest request, String registrationHandle,
+			String userKey)
+		throws ProducerException{
 
 		try{
-			request.setAttribute(_IS_WSRP_REQ,"true");
+			request.setAttribute(_IS_WSRP_REQUEST, "true");
 
-			String portletId = (String)request.getAttribute(_PORTAL_ID_STRING);
+			String portletId = (String)request.getAttribute(_PORTAL_ID);
 
 			Portlet portlet = PortletLocalServiceUtil.getPortletById(
 				PortalInstances.getCompanyId(request), portletId);
@@ -102,7 +114,8 @@ public class UserManagerImpl implements UserManager{
 			initializeLiferayRequest(request);
 
 			return portletWindowContext;
-		}catch(Exception e){
+		}
+		catch (Exception e) {
 			throw new ProducerException(e);
 		}
 	}
@@ -110,14 +123,16 @@ public class UserManagerImpl implements UserManager{
 	public String getUserKey(UserContext userContext) {
 		String userKey = null;
 
-		if ( userContext != null ) {
+		if (userContext != null) {
 			userKey = userContext.getUserContextKey();
 
-			if ( userKey != null &&
-					userKey.equals( WSRPSpecKeys.WSRP_GUEST_KEY ) ) {
+			if ((userKey != null) &&
+				(userKey.equals(WSRPSpecKeys.WSRP_GUEST_KEY))) {
+
 				userKey = null;
 			}
 		}
+
 		return userKey;
 	}
 
@@ -129,29 +144,15 @@ public class UserManagerImpl implements UserManager{
 		return true;
 	}
 
-	public void createDefaultUserStore() throws	ProducerException {
-		//TODO:
-	}
+	protected void initializeLiferayRequest(HttpServletRequest request)
+		throws Exception {
 
-	public void createConsumerUserStore(String registrationHandle)
-		throws ProducerException {
-		//TODO:
-	}
+		// Manually create a ThemeDisplay object. Do not use the factory unless
+		// you manually recycle the object or else there will be a memory leak.
 
-	public void deleteDefaultUserStore() throws
-		ProducerException {
-		//TODO:
-	}
+		//ThemeDisplay themeDisplay = ThemeDisplayFactory.create();
+		ThemeDisplay themeDisplay = new ThemeDisplay();
 
-	public void deleteConsumerUserStore(String registrationHandle)
-		throws ProducerException {
-		//TODO:
-	}
-
-	private void initializeLiferayRequest(HttpServletRequest request)
-		throws Exception{
-
-		ThemeDisplay themeDisplay = ThemeDisplayFactory.create();
 		themeDisplay.setCompany(PortalUtil.getCompany(request));
 		themeDisplay.setUser(themeDisplay.getDefaultUser());
 
@@ -160,7 +161,7 @@ public class UserManagerImpl implements UserManager{
 
 		List<Layout> layouts = LayoutLocalServiceUtil.getLayouts(
 			guestGroup.getGroupId(), false,
-				LayoutConstants.DEFAULT_PARENT_LAYOUT_ID);
+			LayoutConstants.DEFAULT_PARENT_LAYOUT_ID);
 
 		Layout layout = null;
 
@@ -172,12 +173,12 @@ public class UserManagerImpl implements UserManager{
 
 		request.setAttribute(WebKeys.THEME_DISPLAY, themeDisplay);
 		request.setAttribute(WebKeys.LAYOUT, layout);
-
 	}
 
-	private Producer _producer = null;
+	private static final String _IS_WSRP_REQUEST = "is.wsrp.request";
 
-	private static final String _IS_WSRP_REQ = "is.wsrp.request";
-	private static final String _PORTAL_ID_STRING = "com.sun.portal.portlet.id";
+	private static final String _PORTAL_ID = "com.sun.portal.portlet.id";
+
+	//private Producer _producer = null;
 
 }

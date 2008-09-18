@@ -11,7 +11,7 @@
 		<param-value>liferay.com</param-value>
 	</context-param>
 	<filter>
-		<filter-name>AxisServlet Filter</filter-name>
+		<filter-name>Axis Servlet Filter</filter-name>
 		<filter-class>com.liferay.portal.kernel.servlet.PortalClassLoaderFilter</filter-class>
 		<init-param>
 			<param-name>filter-class</param-name>
@@ -23,7 +23,7 @@
 		</init-param>
 	</filter>
 	<filter>
-		<filter-name>JSONServlet Filter</filter-name>
+		<filter-name>JSON Servlet Filter</filter-name>
 		<filter-class>com.liferay.portal.kernel.servlet.PortalClassLoaderFilter</filter-class>
 		<init-param>
 			<param-name>filter-class</param-name>
@@ -35,7 +35,7 @@
 		</init-param>
 	</filter>
 	<filter>
-		<filter-name>LiferayServlet Filter</filter-name>
+		<filter-name>Liferay Servlet Filter</filter-name>
 		<filter-class>com.liferay.portal.kernel.servlet.PortalClassLoaderFilter</filter-class>
 		<init-param>
 			<param-name>filter-class</param-name>
@@ -47,7 +47,7 @@
 		</init-param>
 	</filter>
 	<filter>
-		<filter-name>SpringServlet Filter</filter-name>
+		<filter-name>Spring Servlet Filter</filter-name>
 		<filter-class>com.liferay.portal.kernel.servlet.PortalClassLoaderFilter</filter-class>
 		<init-param>
 			<param-name>filter-class</param-name>
@@ -59,7 +59,7 @@
 		</init-param>
 	</filter>
 	<filter>
-		<filter-name>WebDAVServlet Filter</filter-name>
+		<filter-name>WebDAV Servlet Filter</filter-name>
 		<filter-class>com.liferay.portal.kernel.servlet.PortalClassLoaderFilter</filter-class>
 		<init-param>
 			<param-name>filter-class</param-name>
@@ -71,7 +71,7 @@
 		</init-param>
 	</filter>
 	<filter>
-		<filter-name>Secure AxisServlet Filter</filter-name>
+		<filter-name>Secure Axis Servlet Filter</filter-name>
 		<filter-class>com.liferay.portal.kernel.servlet.PortalClassLoaderFilter</filter-class>
 		<init-param>
 			<param-name>filter-class</param-name>
@@ -87,7 +87,7 @@
 		</init-param>
 	</filter>
 	<filter>
-		<filter-name>Secure JSONServlet Filter</filter-name>
+		<filter-name>Secure JSON Servlet Filter</filter-name>
 		<filter-class>com.liferay.portal.kernel.servlet.PortalClassLoaderFilter</filter-class>
 		<init-param>
 			<param-name>filter-class</param-name>
@@ -103,7 +103,7 @@
 		</init-param>
 	</filter>
 	<filter>
-		<filter-name>Secure LiferayServlet Filter</filter-name>
+		<filter-name>Secure Liferay Servlet Filter</filter-name>
 		<filter-class>com.liferay.portal.kernel.servlet.PortalClassLoaderFilter</filter-class>
 		<init-param>
 			<param-name>filter-class</param-name>
@@ -119,7 +119,7 @@
 		</init-param>
 	</filter>
 	<filter>
-		<filter-name>Secure SpringServlet Filter</filter-name>
+		<filter-name>Secure Spring Servlet Filter</filter-name>
 		<filter-class>com.liferay.portal.kernel.servlet.PortalClassLoaderFilter</filter-class>
 		<init-param>
 			<param-name>filter-class</param-name>
@@ -135,7 +135,7 @@
 		</init-param>
 	</filter>
 	<filter>
-		<filter-name>Secure WebDAVServlet Filter</filter-name>
+		<filter-name>Secure WebDAV Servlet Filter</filter-name>
 		<filter-class>com.liferay.portal.kernel.servlet.PortalClassLoaderFilter</filter-class>
 		<init-param>
 			<param-name>filter-class</param-name>
@@ -151,47 +151,47 @@
 		</init-param>
 	</filter>
 	<filter-mapping>
-		<filter-name>AxisServlet Filter</filter-name>
+		<filter-name>Axis Servlet Filter</filter-name>
 		<url-pattern>/axis/*</url-pattern>
 	</filter-mapping>
 	<filter-mapping>
-		<filter-name>JSONServlet Filter</filter-name>
+		<filter-name>JSON Servlet Filter</filter-name>
 		<url-pattern>/json/*</url-pattern>
 	</filter-mapping>
 	<filter-mapping>
-		<filter-name>LiferayServlet Filter</filter-name>
+		<filter-name>Liferay Servlet Filter</filter-name>
 		<url-pattern>/liferay/*</url-pattern>
 	</filter-mapping>
 	<filter-mapping>
-		<filter-name>SpringServlet Filter</filter-name>
+		<filter-name>Spring Servlet Filter</filter-name>
 		<url-pattern>/spring/*</url-pattern>
 	</filter-mapping>
 	<filter-mapping>
-		<filter-name>WebDAVServlet Filter</filter-name>
+		<filter-name>WebDAV Servlet Filter</filter-name>
 		<url-pattern>/webdav/*</url-pattern>
 	</filter-mapping>
 	<filter-mapping>
-		<filter-name>Secure AxisServlet Filter</filter-name>
+		<filter-name>Secure Axis Servlet Filter</filter-name>
 		<url-pattern>/secure/axis/*</url-pattern>
 	</filter-mapping>
 	<filter-mapping>
-		<filter-name>Secure JSONServlet Filter</filter-name>
+		<filter-name>Secure JSON Servlet Filter</filter-name>
 		<url-pattern>/secure/json/*</url-pattern>
 	</filter-mapping>
 	<filter-mapping>
-		<filter-name>Secure LiferayServlet Filter</filter-name>
+		<filter-name>Secure Liferay Servlet Filter</filter-name>
 		<url-pattern>/secure/liferay/*</url-pattern>
 	</filter-mapping>
 	<filter-mapping>
-		<filter-name>Secure SpringServlet Filter</filter-name>
+		<filter-name>Secure Spring Servlet Filter</filter-name>
 		<url-pattern>/secure/spring/*</url-pattern>
 	</filter-mapping>
 	<filter-mapping>
-		<filter-name>Secure WebDAVServlet Filter</filter-name>
+		<filter-name>Secure WebDAV Servlet Filter</filter-name>
 		<url-pattern>/secure/webdav/*</url-pattern>
 	</filter-mapping>
 	<servlet>
-		<servlet-name>AxisServlet</servlet-name>
+		<servlet-name>Axis Servlet</servlet-name>
 		<servlet-class>com.liferay.portal.kernel.servlet.PortalClassLoaderServlet</servlet-class>
 		<init-param>
 			<param-name>servlet-class</param-name>
@@ -200,7 +200,7 @@
 		<load-on-startup>1</load-on-startup>
 	</servlet>
 	<servlet>
-		<servlet-name>JSONServlet</servlet-name>
+		<servlet-name>JSON Servlet</servlet-name>
 		<servlet-class>com.liferay.portal.kernel.servlet.PortalClassLoaderServlet</servlet-class>
 		<init-param>
 			<param-name>servlet-class</param-name>
@@ -209,7 +209,7 @@
 		<load-on-startup>2</load-on-startup>
 	</servlet>
 	<servlet>
-		<servlet-name>LiferayServlet</servlet-name>
+		<servlet-name>Liferay Servlet</servlet-name>
 		<servlet-class>com.liferay.portal.kernel.servlet.PortalClassLoaderServlet</servlet-class>
 		<init-param>
 			<param-name>servlet-class</param-name>
@@ -218,7 +218,7 @@
 		<load-on-startup>3</load-on-startup>
 	</servlet>
 	<servlet>
-		<servlet-name>SpringServlet</servlet-name>
+		<servlet-name>Spring Servlet</servlet-name>
 		<servlet-class>com.liferay.portal.kernel.servlet.PortalClassLoaderServlet</servlet-class>
 		<init-param>
 			<param-name>servlet-class</param-name>
@@ -227,7 +227,7 @@
 		<load-on-startup>4</load-on-startup>
 	</servlet>
 	<servlet>
-		<servlet-name>WebDAVServlet</servlet-name>
+		<servlet-name>WebDAV Servlet</servlet-name>
 		<servlet-class>com.liferay.portal.kernel.servlet.PortalClassLoaderServlet</servlet-class>
 		<init-param>
 			<param-name>servlet-class</param-name>
@@ -236,39 +236,39 @@
 		<load-on-startup>5</load-on-startup>
 	</servlet>
 	<servlet-mapping>
-		<servlet-name>AxisServlet</servlet-name>
+		<servlet-name>Axis Servlet</servlet-name>
 		<url-pattern>/axis/*</url-pattern>
 	</servlet-mapping>
 	<servlet-mapping>
-		<servlet-name>AxisServlet</servlet-name>
+		<servlet-name>Axis Servlet</servlet-name>
 		<url-pattern>/secure/axis/*</url-pattern>
 	</servlet-mapping>
 	<servlet-mapping>
-		<servlet-name>JSONServlet</servlet-name>
+		<servlet-name>JSON Servlet</servlet-name>
 		<url-pattern>/json/*</url-pattern>
 	</servlet-mapping>
 	<servlet-mapping>
-		<servlet-name>JSONServlet</servlet-name>
+		<servlet-name>JSON Servlet</servlet-name>
 		<url-pattern>/secure/json/*</url-pattern>
 	</servlet-mapping>
 	<servlet-mapping>
-		<servlet-name>LiferayServlet</servlet-name>
+		<servlet-name>Liferay Servlet</servlet-name>
 		<url-pattern>/liferay/*</url-pattern>
 	</servlet-mapping>
 	<servlet-mapping>
-		<servlet-name>LiferayServlet</servlet-name>
+		<servlet-name>Liferay Servlet</servlet-name>
 		<url-pattern>/secure/liferay/*</url-pattern>
 	</servlet-mapping>
 	<servlet-mapping>
-		<servlet-name>SpringServlet</servlet-name>
+		<servlet-name>Spring Servlet</servlet-name>
 		<url-pattern>/spring/*</url-pattern>
 	</servlet-mapping>
 	<servlet-mapping>
-		<servlet-name>SpringServlet</servlet-name>
+		<servlet-name>Spring Servlet</servlet-name>
 		<url-pattern>/secure/spring/*</url-pattern>
 	</servlet-mapping>
 	<servlet-mapping>
-		<servlet-name>WebDAVServlet</servlet-name>
+		<servlet-name>WebDAV Servlet</servlet-name>
 		<url-pattern>/secure/webdav/*</url-pattern>
 	</servlet-mapping>
 	<session-config>

@@ -210,9 +210,9 @@ public class PortletPreferencesFactoryImpl
 
 		String portletMode = ParamUtil.getString(request, "p_p_mode");
 
-		if (LiferayPortletMode.EDIT_GUEST.toString().equals(portletMode) ||
+		if (portletMode.equals(LiferayPortletMode.EDIT_GUEST.toString()) ||
 			((layoutTypePortlet != null) &&
-				(layoutTypePortlet.hasModeEditGuestPortletId(portletId))) ) {
+			 (layoutTypePortlet.hasModeEditGuestPortletId(portletId)))) {
 
 			modeEditGuest = true;
 		}
