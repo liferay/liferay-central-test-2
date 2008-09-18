@@ -121,9 +121,9 @@ import org.apache.commons.logging.LogFactory;
 public class JournalPortletDataHandlerImpl implements PortletDataHandler {
 
 	public static void exportArticle(
-			PortletDataContext context, Element articlesEl, Element igFoldersEl,
-			Element igImagesEl, Element dlFoldersEl, Element dlFileEntriesEl,
-			Element dlFileRanks, JournalArticle article)
+			PortletDataContext context, Element articlesEl, Element dlFoldersEl,
+			Element dlFileEntriesEl, Element dlFileRanks, Element igFoldersEl,
+			Element igImagesEl, JournalArticle article)
 		throws PortalException, SystemException {
 
 		if (!context.isWithinDateRange(article.getModifiedDate())) {
@@ -1094,11 +1094,11 @@ public class JournalPortletDataHandlerImpl implements PortletDataHandler {
 			}
 
 			Element articlesEl = root.addElement("articles");
-			Element igFoldersEl = root.addElement("ig-folders");
-			Element igImagesEl = root.addElement("ig-images");
 			Element dlFoldersEl = root.addElement("dl-folders");
 			Element dlFilesEl = root.addElement("dl-file-entries");
 			Element dlFileRanksEl = root.addElement("dl-file-ranks");
+			Element igFoldersEl = root.addElement("ig-folders");
+			Element igImagesEl = root.addElement("ig-images");
 
 			if (context.getBooleanParameter(_NAMESPACE, "articles")) {
 				List<JournalArticle> articles =
@@ -1107,8 +1107,8 @@ public class JournalPortletDataHandlerImpl implements PortletDataHandler {
 				for (JournalArticle article : articles) {
 					if (context.isWithinDateRange(article.getModifiedDate())) {
 						exportArticle(
-							context, articlesEl, igFoldersEl, igImagesEl,
-							dlFoldersEl, dlFilesEl, dlFileRanksEl, article);
+							context, articlesEl, dlFoldersEl, dlFilesEl,
+							dlFileRanksEl, igFoldersEl, igImagesEl, article);
 					}
 				}
 			}
