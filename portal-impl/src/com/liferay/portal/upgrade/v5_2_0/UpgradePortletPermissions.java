@@ -55,14 +55,15 @@ public class UpgradePortletPermissions extends UpgradeProcess {
 
 		try {
 			updatePortletPermissions(
+				"20", "com.liferay.portlet.documentlibrary",
+				new String[] {"ADD_FOLDER"});
+
+			updatePortletPermissions(
 				"15", "com.liferay.portlet.journal",
-				new String[]{
+				new String[] {
 					"ADD_ARTICLE", "ADD_FEED", "ADD_STRUCTURE", "ADD_TEMPLATE",
 					"APPROVE_ARTICLE"
 				});
-			updatePortletPermissions(
-				"20", "com.liferay.portlet.documentlibrary",
-				new String[]{"ADD_FOLDER"});
 		}
 		catch (Exception e) {
 			throw new UpgradeException(e);
@@ -105,6 +106,37 @@ public class UpgradePortletPermissions extends UpgradeProcess {
 		}
 		finally {
 			DataAccess.cleanUp(con, ps, rs);
+		}
+	}
+
+	protected void updatePortletPermission(
+			long permissionId, String actionId, String primKey,
+			String modelName, int scope)
+		throws Exception {
+
+		long plid = GetterUtil.getLong(
+			primKey.substring(
+				0, primKey.indexOf(PortletConstants.LAYOUT_SEPARATOR)));
+
+		Layout layout = LayoutLocalServiceUtil.getLayout(plid);
+
+		Resource resource = ResourceLocalServiceUtil.addResource(
+			layout.getCompanyId(), modelName, scope,
+			String.valueOf(layout.getGroupId()));
+
+		long portletPermissionCount = getPortletPermissionsCount(
+			actionId, resource.getResourceId(), modelName);
+
+		if (portletPermissionCount == 0) {
+			Permission permission = PermissionLocalServiceUtil.getPermission(
+				permissionId);
+
+			permission.setResourceId(resource.getResourceId());
+
+			PermissionLocalServiceUtil.updatePermission(permission);
+		}
+		else {
+			PermissionLocalServiceUtil.deletePermission(permissionId);
 		}
 	}
 
@@ -156,36 +188,12 @@ public class UpgradePortletPermissions extends UpgradeProcess {
 				int scope = rs.getInt("ResourceCode.scope");
 
 				try {
-					long plid = GetterUtil.getLong(primKey.substring(
-						0, primKey.indexOf(PortletConstants.LAYOUT_SEPARATOR)));
-
-					Layout layout = LayoutLocalServiceUtil.getLayout(plid);
-
-					Resource resource = ResourceLocalServiceUtil.addResource(
-						layout.getCompanyId(), modelName, scope,
-						String.valueOf(layout.getGroupId()));
-
-					long portletPermissionCount = getPortletPermissionsCount(
-						actionId, resource.getResourceId(), modelName);
-
-					if (portletPermissionCount == 0) {
-						Permission permission =
-							PermissionLocalServiceUtil.getPermission(
-								permissionId);
-
-						permission.setResourceId(resource.getResourceId());
-
-						PermissionLocalServiceUtil.updatePermission(permission);
-					}
-					else {
-						PermissionLocalServiceUtil.deletePermission(
-							permissionId);
-					}
+					updatePortletPermission(
+						permissionId, actionId, primKey, modelName, scope);
 				}
 				catch (Exception e) {
 					_log.error(
-						"Permission " + permissionId + " could not be " +
-							"migrated");
+						"Uanble to upgrade permission " + permissionId, e);
 				}
 			}
 		}
