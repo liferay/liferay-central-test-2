@@ -159,8 +159,20 @@ Liferay.Popup = function(options) {
 	var dragHelper = config.dragHelper;
 	var dragStart = config.dragStart;
 	var dragStop = config.dragStop;
-	var open = config.open;
-	var close = config.close;
+	var open = function(e, ui) {
+		var self = this;
+		defaults.open.apply(self, [e, ui]);
+		if (config.open) {
+			config.open.apply(self, [e, ui]);
+		}
+	};
+	var close = function(e, ui) {
+		var self = this;
+		defaults.close.apply(self, [e, ui]);
+		if (config.close) {
+			config.close.apply(self, [e, ui]);
+		}
+	};
 	var messageId = config.messageId;
 	var resizable = config.resizable;
 	var resizeHelper = config.resizeHelper;
