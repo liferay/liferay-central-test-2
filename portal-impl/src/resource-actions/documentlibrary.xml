@@ -13,7 +13,7 @@
 		<guest-defaults>
 			<action-key>VIEW</action-key>
 		</guest-defaults>
-		<guest-unsupported/>
+		<guest-unsupported />
 	</portlet-resource>
 	<model-resource>
 		<model-name>com.liferay.portlet.documentlibrary</model-name>
@@ -23,7 +23,7 @@
 		<supports>
 			<action-key>ADD_FOLDER</action-key>
 		</supports>
-		<community-defaults/>
+		<community-defaults />
 		<guest-defaults />
 		<guest-unsupported>
 			<action-key>ADD_FOLDER</action-key>

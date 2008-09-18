@@ -100,19 +100,6 @@ public class DLFolderLocalServiceImpl extends DLFolderLocalServiceBaseImpl {
 			String[] guestPermissions)
 		throws PortalException, SystemException {
 
-		return addFolderToGroup(
-			uuid, userId, groupId, parentFolderId, name, description,
-			addCommunityPermissions, addGuestPermissions, communityPermissions,
-			guestPermissions);
-	}
-
-	public DLFolder addFolderToGroup(
-			String uuid, long userId, long groupId, long parentFolderId,
-			String name, String description, Boolean addCommunityPermissions,
-			Boolean addGuestPermissions, String[] communityPermissions,
-			String[] guestPermissions)
-		throws PortalException, SystemException {
-
 		// Folder
 
 		User user = userPersistence.findByPrimaryKey(userId);
