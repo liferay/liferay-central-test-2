@@ -268,20 +268,27 @@ Liferay.Util = {
 			}
 		);
 	},
-	defaultValue: function(exp, dval) {
-		var input = jQuery(exp).val(dval);
 
-		input.focus(function() {
-			if (this.value == dval) {
-				this.value = '';
+	defaultValue: function(obj, defaultValue) {
+		var input = jQuery(obj).val(defaultValue);
+
+		input.focus(
+			function() {
+				if (this.value == defaultValue) {
+					this.value = '';
+				}
 			}
-		});
-		input.blur(function() {
-			if (!this.value) {
-				this.value = dval;
+		);
+
+		input.blur(
+			function() {
+				if (!this.value) {
+					this.value = defaultValue;
+				}
 			}
-		});
+		);
 	},
+
 	disableElements: function(obj) {
 		var el = jQuery(obj);
 		var children = el.find('*');
