@@ -78,8 +78,8 @@ public class SharepointDocumentWorkspaceServlet extends HttpServlet {
 
 		StringBuilder sb = new StringBuilder();
 
-		sb.append("<SOAP-ENV:Envelope xmlns:SOAP-ENV=\"http://schemas.xmlsoap" +
-			".org/soap/envelope/\">");
+		sb.append("<SOAP-ENV:Envelope xmlns:SOAP-ENV=\"");
+		sb.append("http://schemas.xmlsoap.org/soap/envelope/\">");
 		sb.append("<SOAP-ENV:Header/>");
 		sb.append("<SOAP-ENV:Body>");
 		sb.append("<GetDwsMetaDataResponse xmlns=\"");
@@ -147,6 +147,7 @@ public class SharepointDocumentWorkspaceServlet extends HttpServlet {
 		}
 
 		Document doc = SAXReaderUtil.createDocument();
+
 		Element root = doc.addElement("Results");
 
 		String url =
@@ -161,8 +162,8 @@ public class SharepointDocumentWorkspaceServlet extends HttpServlet {
 
 		Element rolesEl = root.addElement("Roles");
 
-		List<Role> roles =
-			RoleLocalServiceUtil.getRoles(PortalUtil.getCompanyId(request));
+		List<Role> roles = RoleLocalServiceUtil.getRoles(
+			PortalUtil.getCompanyId(request));
 
 		for (Role role : roles) {
 			ResponseElement responseElement = new RoleResponseElement(role);
@@ -256,8 +257,8 @@ public class SharepointDocumentWorkspaceServlet extends HttpServlet {
 		User user = (User)request.getSession().getAttribute(
 			WebKeys.USER);
 
-		ResponseElement responseElement =
-			new MemberResponseElement(user, false);
+		ResponseElement responseElement = new MemberResponseElement(
+			user, false);
 
 		responseElement.addElement(resultsEl);
 
@@ -267,7 +268,7 @@ public class SharepointDocumentWorkspaceServlet extends HttpServlet {
 			group.getGroupId());
 
 		for (User member : users) {
-			responseElement =  new MemberResponseElement(member, true);
+			responseElement = new MemberResponseElement(member, true);
 
 			responseElement.addElement(membersEl);
 		}
@@ -276,7 +277,7 @@ public class SharepointDocumentWorkspaceServlet extends HttpServlet {
 			Element assigneesEl = resultsEl.addElement("Assignees");
 
 			for (User member : users) {
-				responseElement =  new MemberResponseElement(member, true);
+				responseElement = new MemberResponseElement(member, true);
 
 				responseElement.addElement(assigneesEl);
 			}

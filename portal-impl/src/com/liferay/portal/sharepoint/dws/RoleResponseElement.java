@@ -23,6 +23,7 @@
 package com.liferay.portal.sharepoint.dws;
 
 import com.liferay.portal.kernel.xml.Element;
+import com.liferay.portal.model.Role;
 
 /**
  * <a href="RoleResponseElement.java.html"><b><i>View Source</i></b></a>
@@ -32,7 +33,7 @@ import com.liferay.portal.kernel.xml.Element;
  */
 public class RoleResponseElement implements ResponseElement {
 
-	public RoleResponseElement(com.liferay.portal.model.Role role) {
+	public RoleResponseElement(Role role) {
 		_name = role.getName();
 		_description = role.getDescription();
 		_type = role.getTypeLabel();

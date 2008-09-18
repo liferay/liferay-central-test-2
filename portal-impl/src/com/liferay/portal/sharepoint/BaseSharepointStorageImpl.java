@@ -164,8 +164,7 @@ public abstract class BaseSharepointStorageImpl implements SharepointStorage {
 			new Leaf("vti_timelastwritten", modifiedDateString, false));
 		metaInfoTree.addChild(new Leaf("vti_filesize", "IR|" + size, false));
 		metaInfoTree.addChild(
-			new Leaf(
-				"vti_sourcecontrolcheckedoutby", "SR|" + userName, false));
+			new Leaf("vti_sourcecontrolcheckedoutby", "SR|" + userName, false));
 		metaInfoTree.addChild(
 			new Leaf(
 				"vti_sourcecontroltimecheckedout", createDateString, false));

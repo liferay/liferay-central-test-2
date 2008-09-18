@@ -62,21 +62,23 @@ public class DLSharepointStorageImpl extends BaseSharepointStorageImpl {
 		long parentFolderId = getLastFolderId(
 			groupId, parentFolderPath, DLFolderImpl.DEFAULT_PARENT_FOLDER_ID);
 
-		if (parentFolderId != DLFolderImpl.DEFAULT_PARENT_FOLDER_ID) {
-			List<DLFileEntry> fileEntries =
-				DLFileEntryLocalServiceUtil.getFileEntries(parentFolderId);
+		if (parentFolderId == DLFolderImpl.DEFAULT_PARENT_FOLDER_ID) {
+			return;
+		}
 
-			for (DLFileEntry fileEntry : fileEntries) {
-				StringBuilder sb = new StringBuilder();
+		List<DLFileEntry> fileEntries =
+			DLFileEntryLocalServiceUtil.getFileEntries(parentFolderId);
 
-				sb.append(parentFolderPath);
-				sb.append(StringPool.SLASH);
-				sb.append(fileEntry.getTitleWithExtension());
+		for (DLFileEntry fileEntry : fileEntries) {
+			StringBuilder sb = new StringBuilder();
 
-				addDocumentElement(
-					element, sb.toString(), fileEntry.getCreateDate(),
-					fileEntry.getModifiedDate(), fileEntry.getUserName());
-			}
+			sb.append(parentFolderPath);
+			sb.append(StringPool.SLASH);
+			sb.append(fileEntry.getTitleWithExtension());
+
+			addDocumentElement(
+				element, sb.toString(), fileEntry.getCreateDate(),
+				fileEntry.getModifiedDate(), fileEntry.getUserName());
 		}
 	}
 
