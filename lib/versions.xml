@@ -2473,6 +2473,17 @@
 		</licenses>
 	</library>
 	<library>
+		<file-name>portal/wsrp-producer-portlet.jar</file-name>
+		<version>2.0 (trunk 705)</version>
+		<project-name>WSRP</project-name>
+		<project-url>https://wsrp.dev.java.net</project-url>
+		<licenses>
+			<license>
+				<license-name>CDDL 1.0</license-name>
+			</license>
+		</licenses>
+	</library>
+	<library>
 		<file-name>portal/wstx.jar</file-name>
 		<version>3.2.4</version>
 		<project-name>Woodstox</project-name>
