@@ -25,6 +25,7 @@ Liferay.TagsSelector = new Class({
 		instance._ns = instance.options.instanceVar || '';
 		instance._mainContainer = jQuery('<div class="lfr-tag-select-container"></div>');
 		instance._container = jQuery('<div class="lfr-tag-container"></div>');
+		instance._searchContainer = jQuery('<div class="lfr-tag-search-container"><input class="lfr-tag-search-input" type="text"/></div>');
 
 		var hiddenInput = jQuery('#' + options.hiddenInput);
 
@@ -165,6 +166,7 @@ Liferay.TagsSelector = new Class({
 		var ns = instance._ns;
 		var container = instance._container;
 		var mainContainer = instance._mainContainer;
+		var searchContainer = instance._searchContainer;
 
 		var saveBtn = jQuery('<input class="submit lfr-save-button" id="' + ns + 'saveButton" type="submit" value="' + Liferay.Language.get('save') + '" />');
 
@@ -193,7 +195,7 @@ Liferay.TagsSelector = new Class({
 			}
 		);
 
-		mainContainer.append(container).append(saveBtn);
+		mainContainer.append(searchContainer).append(container).append(saveBtn);
 
 		if (!instance.selectTagPopup) {
 			var popup = Liferay.Popup(
@@ -201,7 +203,13 @@ Liferay.TagsSelector = new Class({
 					modal: false,
 					position: 'center',
 					width: 400,
+					resizable: false,
 					message: mainContainer[0],
+					open: function() {
+ 						var inputSearch = jQuery('.lfr-tag-search-input');
+						Liferay.Util.defaultValue(inputSearch, 'Search...');
+						inputSearch.focus();
+					},
 					onClose: function() {
 						instance._popupVisible = false;
 						instance.selectTagPopup = null;
@@ -249,6 +257,64 @@ Liferay.TagsSelector = new Class({
 		);
 	},
 
+	_getVocabularies: function(folksonomy, callback) {
+		var instance = this;
+
+		Liferay.Service.Tags.TagsVocabulary.getGroupVocabularies(
+			{
+				groupId: themeDisplay.getScopeGroupId(),
+				folksonomy: folksonomy
+			},
+			callback
+		);
+	},
+
+	_getVocabularyEntries: function(vocabulary, callback) {
+		var instance = this;
+
+		Liferay.Service.Tags.TagsEntry.getGroupVocabularyEntries(
+			{
+				groupId: themeDisplay.getScopeGroupId(),
+				name: vocabulary
+			},
+			callback
+		);
+	},
+
+	_initializeSearch: function(container) {
+		var data = function() {
+			var value = jQuery(this).attr('title');
+
+			return value.toLowerCase();
+		};
+
+		var inputSearch = jQuery('.lfr-tag-search-input');
+
+		var options = {
+			data: data,
+			list: '.lfr-tag-container label',
+			after: function() {
+				jQuery('fieldset', container).each(
+					function() {
+						var ul = jQuery(this);
+						var messageSearch = jQuery('.lfr-tag-message', ul);
+						var visibleEntries = jQuery('label:visible', ul);
+
+						if (visibleEntries.length == 0) {
+							if (!messageSearch.is(':visible')) {
+								messageSearch.show('fast');
+							}
+						}
+						else {
+							messageSearch.hide();
+						}
+					}
+				);
+			}
+		};
+		inputSearch.liveSearch(options);
+	},
+
 	_setupSelectTags: function() {
 		var instance = this;
 
@@ -286,52 +352,59 @@ Liferay.TagsSelector = new Class({
 		var ns = instance._ns;
 		var mainContainer = instance._mainContainer;
 		var container = instance._container;
+		var searchMessage = Liferay.Language.get('no-tags-found');
 
 		mainContainer.empty();
-		container.empty();
+		container.empty().html('<div class="loading-animation" />');
 
-		var categories = Liferay.Service.Tags.TagsProperty.getPropertyValues(
-			{
-				companyId: themeDisplay.getCompanyId(),
-				key: "category"
-			}
-		);
-
-		jQuery.each(
-			categories,
-			function(i, category) {
-				var tags = Liferay.Service.Tags.TagsEntry.search(
-					{
-						companyId: themeDisplay.getCompanyId(),
-						name: '%',
-						properties: 'category:' + category.value
-					}
-				);
-
-				var label = '';
+		instance._getVocabularies(true,
+			function(vocabularies) {
+				var buffer = [];
 
 				jQuery.each(
-					tags,
-					function(j, tag) {
-						if (j == 0) {
-							if (i > 0) {
-								label += '</fieldset>';
+					vocabularies,
+					function(i) {
+						var tagset = this;
+						var tagsetName = tagset.name;
+
+						instance._getVocabularyEntries(
+							tagsetName,
+							function(entries) {
+
+								buffer.push('<fieldset>');
+								buffer.push('<legend class="lfr-tag-set-title">');
+								buffer.push(tagsetName);
+								buffer.push('</legend>');
+
+								jQuery.each(
+									entries,
+									function(i) {
+										var entry = this;
+										var entryName = entry.name;
+										var entryId = entry.entryId;
+										var checked = (instance._curTags.indexOf(entryName) > -1) ? ' checked="checked" ' : '';
+										buffer.push('<label title="');
+										buffer.push(entryName);
+										buffer.push('">');
+										buffer.push('<input type="checkbox" value="');
+										buffer.push(entryName);
+										buffer.push('" ');
+										buffer.push(checked);
+										buffer.push('> ');
+										buffer.push(entryName);
+										buffer.push('</label>');
+									}
+								);
+
+								buffer.push('<div class="lfr-tag-message">' + searchMessage + '</div>');
+								buffer.push('</fieldset>');
+								container.html(buffer.join(''));
+
+								instance._initializeSearch(container);
 							}
-							label += '<fieldset><legend>' + category.value + '</legend>';
-						}
-
-						var checked = (instance._curTags.indexOf(tag.name) > -1) ? ' checked="checked"' : '';
-
-						label +=
-							'<label title="' + tag.name + '">' +
-								'<input' + checked + ' type="checkbox" name="' + ns + 'input' + j + '" id="' + ns + 'input' + j + '" value="' + tag.name + '" />' +
-								'<a class="lfr-label-text" href="javascript: ;">' + tag.name + '</a>' +
-							'</label>';
-
+						);
 					}
 				);
-
-				container.append(label);
 			}
 		);
 
@@ -345,9 +418,10 @@ Liferay.TagsSelector = new Class({
 		var ns = instance._ns;
 		var mainContainer = instance._mainContainer;
 		var container = instance._container;
+		var searchMessage = Liferay.Language.get('no-tags-found');
 
 		mainContainer.empty();
-		container.empty();
+		container.empty().html('<div class="loading-animation" />');
 
 		var context = '';
 
@@ -357,7 +431,7 @@ Liferay.TagsSelector = new Class({
 
 		var url =  "http://search.yahooapis.com/ContentAnalysisService/V1/termExtraction?appid=YahooDemo&output=json&context=" + escape(context);
 
-		var label = '';
+		var buffer = [];
 
 		jQuery.ajax(
 			{
@@ -367,24 +441,35 @@ Liferay.TagsSelector = new Class({
 				},
 				dataType: "json",
 				success: function(obj) {
-					label += '<fieldset><legend>' + Liferay.Language.get('suggestions') + '</legend>';
+					buffer.push('<fieldset><legend>' + Liferay.Language.get('suggestions') + '</legend>');
 
 					jQuery.each(
 						obj.ResultSet.Result,
 						function(i, tag) {
-							var checked = (instance._curTags.indexOf(tag) > -1) ? ' checked="checked"' : '';
+ 							var checked = (instance._curTags.indexOf(tag) > -1) ? ' checked="checked" ' : '';
+							var name = ns + 'input' + i;
 
-							label +=
-								'<label title="' + tag + '">' +
-									'<input' + checked + ' type="checkbox" name="' + ns + 'input' + i + '" id="' + ns + 'input' + i + '" value="' + tag + '" />' +
-									'<a class="lfr-label-text" href="javascript: ;">' + tag + '</a>' +
-								'</label>';
+							buffer.push('<label title="');
+							buffer.push(tag);
+							buffer.push('"><input');
+							buffer.push(checked);
+							buffer.push(' type="checkbox" name="');
+							buffer.push(name);
+							buffer.push('" id="');
+							buffer.push(name);
+							buffer.push('" value="');
+							buffer.push(tag);
+							buffer.push('" /> ');
+							buffer.push(tag);
+							buffer.push('</label>');
 						}
-					)
+					);
 
-					label += '</fieldset>';
+					buffer.push('<div class="lfr-tag-message">' + searchMessage + '</div>');
+					buffer.push('</fieldset>');
+ 					container.html(buffer.join(''));
 
-					container.append(label);
+					instance._initializeSearch(container);
 				}
 			}
 		);

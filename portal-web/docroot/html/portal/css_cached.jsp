@@ -737,7 +737,7 @@ li.toggle-expand a {
 /* ---------- Tag selector styling ---------- */
 
 .lfr-tag-select-container {
-	height: 300px;
+	height: 320px;
 	position: relative;
 }
 
@@ -747,25 +747,42 @@ li.toggle-expand a {
 	overflow: auto;
 }
 
-.lfr-tag-container label {
-	cursor: pointer;
-	display: block;
-	float: left;
-	margin-bottom: 5px;
-	margin-right: 5px;
-	overflow: hidden;
-	white-space: pre;
-	width: 25%;
-}
-
-.lfr-tag-container label input {
-	margin-right: 5px;
-}
-
 .lfr-tag-select-container .save-button {
 	bottom: 0;
 	left: 0;
 	position: absolute;
+}
+
+.lfr-tag-container ul, .lfr-tag-container li {
+	list-style-type: none;
+	margin: 0;
+	padding: 0;
+}
+
+.lfr-tag-container fieldset {
+	margin: 5px;
+}
+
+.lfr-tag-container .lfr-tag-entries {
+	border: 2px #EFEFEF solid;
+	margin: 10px 5px 0 0;
+}
+
+.lfr-tag-container .lfr-tag-set-title {
+	font-weight: bold;
+	margin-left: 5px;
+}
+
+.lfr-tag-container label {
+	display: block;
+}
+
+.lfr-tag-container .lfr-tag-message {
+	display: none;
+}
+
+.lfr-tag-search-input {
+	width: 250px;
 }
 
 /* ---------- Generic styling ---------- */
