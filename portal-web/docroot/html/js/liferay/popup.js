@@ -111,13 +111,11 @@ Liferay.Popup = function(options) {
 				);
 			}
 		},
-
 		close: function() {
 			var target = jQuery(this);
 
 			checkExternalClick(target);
 		},
-
 		open: function(event, ui) {
 			if (!options.dragHelper) {
 				var dialog = jQuery(this).parents('.ui-dialog:first'), target = jQuery(this);
