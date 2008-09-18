@@ -253,6 +253,14 @@ public class RoleLocalServiceUtil {
 		return getService().updateRole(roleId, name, description);
 	}
 
+	public static com.liferay.portal.model.Role updateRole(long roleId,
+		java.lang.String name, java.lang.String subtype,
+		java.lang.String description)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
+		return getService().updateRole(roleId, name, subtype, description);
+	}
+
 	public static RoleLocalService getService() {
 		if (_service == null) {
 			throw new RuntimeException("RoleLocalService is not set");

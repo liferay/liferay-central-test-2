@@ -109,4 +109,10 @@ public interface RoleService {
 		java.lang.String name, java.lang.String description)
 		throws java.rmi.RemoteException, com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException;
+
+	public com.liferay.portal.model.Role updateRole(long roleId,
+		java.lang.String name, java.lang.String subtype,
+		java.lang.String description)
+		throws java.rmi.RemoteException, com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException;
 }

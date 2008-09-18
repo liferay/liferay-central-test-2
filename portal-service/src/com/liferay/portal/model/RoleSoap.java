@@ -56,6 +56,7 @@ public class RoleSoap implements Serializable {
 		soapModel.setName(model.getName());
 		soapModel.setDescription(model.getDescription());
 		soapModel.setType(model.getType());
+		soapModel.setSubtype(model.getSubtype());
 
 		return soapModel;
 	}
@@ -137,6 +138,14 @@ public class RoleSoap implements Serializable {
 		_type = type;
 	}
 
+	public String getSubtype() {
+		return _subtype;
+	}
+
+	public void setSubtype(String subtype) {
+		_subtype = subtype;
+	}
+
 	private long _roleId;
 	private long _companyId;
 	private long _classNameId;
@@ -144,4 +153,5 @@ public class RoleSoap implements Serializable {
 	private String _name;
 	private String _description;
 	private int _type;
+	private String _subtype;
 }

@@ -1176,6 +1176,7 @@
 		<column name="name" type="String" />
 		<column name="description" type="String" />
 		<column name="type" type="int" />
+		<column name="subtype" type="String" />
 
 		<!-- Relationships -->
 

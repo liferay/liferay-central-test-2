@@ -895,6 +895,15 @@ public class PropsValues {
 	public static final String RESOURCE_REPOSITORIES_ROOT =
 		PropsUtil.get(PropsKeys.RESOURCE_REPOSITORIES_ROOT);
 
+	public static final String[] ROLES_COMMUNITY_SUBTYPES =
+		PropsUtil.getArray(PropsKeys.ROLES_COMMUNITY_SUBTYPES);
+
+	public static final String[] ROLES_ORGANIZATION_SUBTYPES =
+		PropsUtil.getArray(PropsKeys.ROLES_ORGANIZATION_SUBTYPES);
+
+	public static final String[] ROLES_REGULAR_SUBTYPES =
+		PropsUtil.getArray(PropsKeys.ROLES_REGULAR_SUBTYPES);
+
 	public static final String[] SCHEDULER_CLASSES =
 		PropsUtil.getArray(PropsKeys.SCHEDULER_CLASSES);
 

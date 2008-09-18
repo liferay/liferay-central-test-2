@@ -28,6 +28,7 @@ import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.Role;
 import com.liferay.portal.util.PortletKeys;
+import com.liferay.portal.util.PropsValues;
 import com.liferay.portlet.PortalPreferences;
 import com.liferay.portlet.PortletPreferencesFactoryUtil;
 import com.liferay.portlet.enterpriseadmin.util.EnterpriseAdminUtil;
@@ -57,6 +58,14 @@ public class RoleSearch extends SearchContainer<Role> {
 	static {
 		headerNames.add("name");
 		headerNames.add("type");
+
+		if ((PropsValues.ROLES_COMMUNITY_SUBTYPES.length > 0) ||
+			(PropsValues.ROLES_ORGANIZATION_SUBTYPES.length > 0) ||
+			(PropsValues.ROLES_REGULAR_SUBTYPES.length > 0)) {
+
+			headerNames.add("subtype");
+		}
+
 		headerNames.add("description");
 
 		orderableHeaders.put("name", "name");

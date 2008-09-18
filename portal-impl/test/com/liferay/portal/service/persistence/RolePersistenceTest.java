@@ -75,6 +75,7 @@ public class RolePersistenceTest extends BasePersistenceTestCase {
 		newRole.setName(randomString());
 		newRole.setDescription(randomString());
 		newRole.setType(nextInt());
+		newRole.setSubtype(randomString());
 
 		_persistence.update(newRole, false);
 
@@ -87,6 +88,7 @@ public class RolePersistenceTest extends BasePersistenceTestCase {
 		assertEquals(existingRole.getName(), newRole.getName());
 		assertEquals(existingRole.getDescription(), newRole.getDescription());
 		assertEquals(existingRole.getType(), newRole.getType());
+		assertEquals(existingRole.getSubtype(), newRole.getSubtype());
 	}
 
 	public void testFindByPrimaryKeyExisting() throws Exception {
@@ -136,6 +138,7 @@ public class RolePersistenceTest extends BasePersistenceTestCase {
 		role.setName(randomString());
 		role.setDescription(randomString());
 		role.setType(nextInt());
+		role.setSubtype(randomString());
 
 		_persistence.update(role, false);
 

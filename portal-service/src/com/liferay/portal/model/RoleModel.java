@@ -78,5 +78,9 @@ public interface RoleModel extends BaseModel {
 
 	public void setType(int type);
 
+	public String getSubtype();
+
+	public void setSubtype(String subtype);
+
 	public Role toEscapedModel();
 }

@@ -32,6 +32,8 @@ Role role = (Role)request.getAttribute(WebKeys.ROLE);
 long roleId = BeanParamUtil.getLong(role, request, "roleId");
 
 int roleType = ParamUtil.getInteger(request, "roleType");
+
+String roleSubtype = BeanParamUtil.getString(role, request, "subtype");
 %>
 
 <liferay-ui:tabs
@@ -113,6 +115,44 @@ int roleType = ParamUtil.getInteger(request, "roleType");
 				</c:choose>
 			</td>
 		</tr>
+		<c:if test="<%= role != null %>">
+			<%
+			String[] subtypes = null;
+
+			if (role.getType() == RoleImpl.TYPE_COMMUNITY) {
+				subtypes = PropsValues.ROLES_COMMUNITY_SUBTYPES;
+			}
+			else if (role.getType() == RoleImpl.TYPE_ORGANIZATION) {
+				subtypes = PropsValues.ROLES_ORGANIZATION_SUBTYPES;
+			}
+			else if (role.getType() == RoleImpl.TYPE_REGULAR) {
+				subtypes = PropsValues.ROLES_REGULAR_SUBTYPES;
+			}
+			else {
+				subtypes = new String[0];
+			}
+			%>
+
+			<c:if test="<%= subtypes.length > 0 %>">
+				<tr>
+					<td>
+						<liferay-ui:message key="subtype" />
+					</td>
+					<td>
+						<select name="<portlet:namespace/>subtype">
+							<option value=""></option>
+							<%
+							for (String subtype : subtypes) {
+							%>
+								<option <%= subtype.equals(roleSubtype)? "selected" : StringPool.BLANK %> value="<%= subtype %>"><liferay-ui:message key="<%= subtype %>" /></option>
+							<%
+							}
+							%>
+						</select>
+					</td>
+				</tr>
+			</c:if>
+		</c:if>
 		</table>
 
 		<br />

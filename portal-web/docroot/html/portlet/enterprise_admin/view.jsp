@@ -384,6 +384,15 @@ request.setAttribute("view.jsp-portletURLString", portletURLString);
 
 				row.addText(LanguageUtil.get(pageContext, role.getTypeLabel()), rowURL);
 
+				// Subtype
+
+				if ((PropsValues.ROLES_COMMUNITY_SUBTYPES.length > 0) ||
+					(PropsValues.ROLES_ORGANIZATION_SUBTYPES.length > 0) ||
+					(PropsValues.ROLES_REGULAR_SUBTYPES.length > 0)) {
+
+					row.addText(LanguageUtil.get(pageContext, role.getSubtype()), rowURL);
+				}
+
 				// Description
 
 				row.addText(role.getDescription(), rowURL);

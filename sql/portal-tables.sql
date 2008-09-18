@@ -960,7 +960,8 @@ create table Role_ (
 	classPK LONG,
 	name VARCHAR(75) null,
 	description STRING null,
-	type_ INTEGER
+	type_ INTEGER,
+	subtype VARCHAR(75) null
 );
 
 create table Roles_Permissions (

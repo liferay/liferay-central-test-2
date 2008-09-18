@@ -447,6 +447,7 @@
 			<hint-collection name="TEXTAREA" />
 		</field>
 		<field name="type" type="int" />
+		<field name="subtype" type="String" />
 	</model>
 	<model name="com.liferay.portal.model.ServiceComponent">
 		<field name="serviceComponentId" type="long" />

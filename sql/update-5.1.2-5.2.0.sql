@@ -28,6 +28,8 @@ create table MBMailingList (
 	active_ BOOLEAN
 );
 
+alter table Role_ add subtype VARCHAR(75);
+
 alter table TagsEntry add groupId LONG;
 alter table TagsEntry add parentEntryId LONG;
 alter table TagsEntry add vocabularyId LONG;

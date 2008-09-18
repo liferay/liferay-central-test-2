@@ -80,9 +80,12 @@ public class RoleModelImpl extends BaseModelImpl {
 			{ "description", new Integer(Types.VARCHAR) },
 			
 
-			{ "type_", new Integer(Types.INTEGER) }
+			{ "type_", new Integer(Types.INTEGER) },
+			
+
+			{ "subtype", new Integer(Types.VARCHAR) }
 		};
-	public static final String TABLE_SQL_CREATE = "create table Role_ (roleId LONG not null primary key,companyId LONG,classNameId LONG,classPK LONG,name VARCHAR(75) null,description STRING null,type_ INTEGER)";
+	public static final String TABLE_SQL_CREATE = "create table Role_ (roleId LONG not null primary key,companyId LONG,classNameId LONG,classPK LONG,name VARCHAR(75) null,description STRING null,type_ INTEGER,subtype VARCHAR(75) null)";
 	public static final String TABLE_SQL_DROP = "drop table Role_";
 	public static final String DATA_SOURCE = "liferayDataSource";
 	public static final String SESSION_FACTORY = "liferaySessionFactory";
@@ -101,6 +104,7 @@ public class RoleModelImpl extends BaseModelImpl {
 		model.setName(soapModel.getName());
 		model.setDescription(soapModel.getDescription());
 		model.setType(soapModel.getType());
+		model.setSubtype(soapModel.getSubtype());
 
 		return model;
 	}
@@ -220,6 +224,19 @@ public class RoleModelImpl extends BaseModelImpl {
 		}
 	}
 
+	public String getSubtype() {
+		return GetterUtil.getString(_subtype);
+	}
+
+	public void setSubtype(String subtype) {
+		if (((subtype == null) && (_subtype != null)) ||
+				((subtype != null) && (_subtype == null)) ||
+				((subtype != null) && (_subtype != null) &&
+				!subtype.equals(_subtype))) {
+			_subtype = subtype;
+		}
+	}
+
 	public Role toEscapedModel() {
 		if (isEscapedModel()) {
 			return (Role)this;
@@ -236,6 +253,7 @@ public class RoleModelImpl extends BaseModelImpl {
 			model.setName(HtmlUtil.escape(getName()));
 			model.setDescription(HtmlUtil.escape(getDescription()));
 			model.setType(getType());
+			model.setSubtype(HtmlUtil.escape(getSubtype()));
 
 			model = (Role)Proxy.newProxyInstance(Role.class.getClassLoader(),
 					new Class[] { Role.class }, new ReadOnlyBeanHandler(model));
@@ -254,6 +272,7 @@ public class RoleModelImpl extends BaseModelImpl {
 		clone.setName(getName());
 		clone.setDescription(getDescription());
 		clone.setType(getType());
+		clone.setSubtype(getSubtype());
 
 		return clone;
 	}
@@ -311,4 +330,5 @@ public class RoleModelImpl extends BaseModelImpl {
 	private String _name;
 	private String _description;
 	private int _type;
+	private String _subtype;
 }

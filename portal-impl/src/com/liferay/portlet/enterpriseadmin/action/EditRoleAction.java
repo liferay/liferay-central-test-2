@@ -131,6 +131,7 @@ public class EditRoleAction extends PortletAction {
 		String description = ParamUtil.getString(actionRequest, "description");
 		int type = ParamUtil.getInteger(
 			actionRequest, "type", RoleImpl.TYPE_REGULAR);
+		String subtype = ParamUtil.getString(actionRequest, "subtype");
 
 		if (roleId <= 0) {
 
@@ -142,7 +143,7 @@ public class EditRoleAction extends PortletAction {
 
 			// Update role
 
-			RoleServiceUtil.updateRole(roleId, name, description);
+			RoleServiceUtil.updateRole(roleId, name, subtype, description);
 		}
 	}
 

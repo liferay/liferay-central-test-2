@@ -895,6 +895,12 @@ public class PropsKeys {
 
 	public static final String RESOURCE_REPOSITORIES_ROOT = "resource.repositories.root";
 
+	public static final String ROLES_COMMUNITY_SUBTYPES = "roles.community.subtypes";
+
+	public static final String ROLES_ORGANIZATION_SUBTYPES = "roles.organization.subtypes";
+
+	public static final String ROLES_REGULAR_SUBTYPES = "roles.regular.subtypes";
+
 	public static final String SC_IMAGE_MAX_SIZE = "sc.image.max.size";
 
 	public static final String SC_IMAGE_THUMBNAIL_MAX_HEIGHT = "sc.image.thumbnail.max.height";
