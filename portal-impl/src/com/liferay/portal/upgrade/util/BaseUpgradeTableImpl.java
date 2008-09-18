@@ -112,10 +112,14 @@ public abstract class BaseUpgradeTableImpl {
 			if (type.intValue() == Types.CLOB) {
 				clobCount++;
 
-				_insertionOrder[i] = _columns.length - clobCount;
+				int pos = _columns.length - clobCount;
+
+				_insertionOrder[pos] = i;
 			}
 			else {
-				_insertionOrder[i] = i - clobCount;
+				int pos = i - clobCount;
+
+				_insertionOrder[pos] = i;
 			}
 		}
 	}
