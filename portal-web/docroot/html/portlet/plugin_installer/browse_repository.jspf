@@ -70,7 +70,7 @@ try {
 					String curTag = (String)itr.next();
 				%>
 
-					<option <%= (tag.equals(curTag)) ? "selected": "" %> value="<%= curTag %>"><%= curTag %></option>
+					<option <%= tag.equals(curTag) ? "selected": "" %> value="<%= curTag %>"><%= curTag %></option>
 
 				<%
 				}
@@ -89,7 +89,7 @@ try {
 					String curRepositoryURL = repositoryURLs[i];
 				%>
 
-					<option <%= (searchRepositoryURL.equals(curRepositoryURL)) ? "selected" : "" %> value="<%= curRepositoryURL %>"><%= curRepositoryURL %></option>
+					<option <%= searchRepositoryURL.equals(curRepositoryURL) ? "selected" : "" %> value="<%= curRepositoryURL %>"><%= curRepositoryURL %></option>
 
 				<%
 				}
