@@ -54,6 +54,11 @@ if (userGroupId > 0) {
 }
 %>
 
+<liferay-ui:search-container-results
+	total="<%= total %>"
+	results="<%= results %>"
+/>
+
 <c:if test="<%= (organization != null) || (role != null) || (userGroup != null) %>">
 	<br />
 </c:if>

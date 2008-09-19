@@ -63,41 +63,9 @@ portletURL.setParameter(userSearchContainer.getCurParam(), String.valueOf(userSe
 		showAddButton="<%= true %>"
 	/>
 
-	<%
-	UserSearchTerms searchTerms = (UserSearchTerms)searchContainer.getSearchTerms();
-
-	long organizationId = searchTerms.getOrganizationId();
-	long roleId = searchTerms.getRoleId();
-	long userGroupId = searchTerms.getUserGroupId();
-
-	LinkedHashMap userParams = new LinkedHashMap();
-
-	if (organizationId > 0) {
-		userParams.put("usersOrgs", new Long(organizationId));
-	}
-	else {
-		if (filterManageableOrganizations) {
-			userParams.put("usersOrgs", manageableOrganizationIds);
-		}
-	}
-
-	if (roleId > 0) {
-		userParams.put("usersRoles", new Long(roleId));
-	}
-
-	if (userGroupId > 0) {
-		userParams.put("usersUserGroups", new Long(userGroupId));
-	}
-	%>
-
 	<%@ include file="/html/portlet/enterprise_admin/user_search_results.jspf" %>
 
 	<%@ include file="/html/portlet/enterprise_admin/user_search_details.jspf" %>
-
-	<liferay-ui:search-container-results
-		total="<%= total %>"
-		results="<%= results %>"
-	/>
 
 	<br /><br />
 
