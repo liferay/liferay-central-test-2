@@ -193,7 +193,7 @@ public class UpgradePortletPermissions extends UpgradeProcess {
 				}
 				catch (Exception e) {
 					_log.error(
-						"Uanble to upgrade permission " + permissionId, e);
+						"Unable to upgrade permission " + permissionId, e);
 				}
 			}
 		}
