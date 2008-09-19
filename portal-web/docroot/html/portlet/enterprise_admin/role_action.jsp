@@ -56,7 +56,7 @@ Role role = (Role)row.getObject();
 		<liferay-ui:icon image="permissions" url="<%= permissionsURL %>" />
 	</c:if>
 
-	<c:if test="<%= !role.getName().equals(RoleImpl.ADMINISTRATOR) && !role.getName().equals(RoleImpl.OWNER) && !role.getName().equals(RoleImpl.COMMUNITY_ADMINISTRATOR) && !role.getName().equals(RoleImpl.COMMUNITY_OWNER) && !role.getName().equals(RoleImpl.ORGANIZATION_ADMINISTRATOR) && !role.getName().equals(RoleImpl.ORGANIZATION_OWNER) && RolePermissionUtil.contains(permissionChecker, role.getRoleId(), ActionKeys.DEFINE_PERMISSIONS) %>">
+	<c:if test="<%= !role.getName().equals(RoleImpl.ADMINISTRATOR) && !role.getName().equals(RoleImpl.COMMUNITY_ADMINISTRATOR) && !role.getName().equals(RoleImpl.COMMUNITY_OWNER) && !role.getName().equals(RoleImpl.ORGANIZATION_ADMINISTRATOR) && !role.getName().equals(RoleImpl.ORGANIZATION_OWNER) && !role.getName().equals(RoleImpl.OWNER) && RolePermissionUtil.contains(permissionChecker, role.getRoleId(), ActionKeys.DEFINE_PERMISSIONS) %>">
 		<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="editRolePermissionsURL">
 			<portlet:param name="struts_action" value="/enterprise_admin/edit_role_permissions" />
 			<portlet:param name="<%= Constants.CMD %>" value="<%= Constants.VIEW %>" />

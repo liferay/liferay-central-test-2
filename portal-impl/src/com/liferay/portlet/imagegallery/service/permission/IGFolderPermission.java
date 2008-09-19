@@ -111,8 +111,8 @@ public class IGFolderPermission {
 			folderId = folder.getParentFolderId();
 
 			if (permissionChecker.hasOwnerPermission(
-				folder.getCompanyId(), IGFolder.class.getName(),
-				folder.getFolderId(), folder.getUserId(), actionId)) {
+					folder.getCompanyId(), IGFolder.class.getName(),
+					folder.getFolderId(), folder.getUserId(), actionId)) {
 
 				return true;
 			}

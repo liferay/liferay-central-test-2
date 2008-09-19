@@ -90,8 +90,8 @@ public class JournalFeedPermission {
 		String actionId) {
 
 		if (permissionChecker.hasOwnerPermission(
-			feed.getCompanyId(), JournalFeed.class.getName(),
-			feed.getPrimaryKey(), feed.getUserId(), actionId)) {
+				feed.getCompanyId(), JournalFeed.class.getName(),
+				feed.getPrimaryKey(), feed.getUserId(), actionId)) {
 
 			return true;
 		}

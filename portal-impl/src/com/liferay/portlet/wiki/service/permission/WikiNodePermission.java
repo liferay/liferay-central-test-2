@@ -88,8 +88,8 @@ public class WikiNodePermission {
 		PermissionChecker permissionChecker, WikiNode node, String actionId) {
 
 		if (permissionChecker.hasOwnerPermission(
-			node.getCompanyId(), WikiNode.class.getName(), node.getNodeId(),
-			node.getUserId(), actionId)) {
+				node.getCompanyId(), WikiNode.class.getName(), node.getNodeId(),
+				node.getUserId(), actionId)) {
 
 			return true;
 		}

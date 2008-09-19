@@ -33,7 +33,7 @@ import com.liferay.portal.model.Role;
 import com.liferay.portal.model.impl.RoleImpl;
 import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.service.GroupServiceUtil;
-import com.liferay.portal.service.RoleServiceUtil;
+import com.liferay.portal.service.RoleLocalServiceUtil;
 import com.liferay.portal.service.UserServiceUtil;
 import com.liferay.portal.struts.PortletAction;
 
@@ -122,16 +122,16 @@ public class EditRoleAssignmentsAction extends PortletAction {
 
 		long roleId = ParamUtil.getLong(actionRequest, "roleId");
 
-		Role role = RoleServiceUtil.getRole(roleId);
-
-		if (role.getName().equals(RoleImpl.OWNER)) {
-			throw new RoleAssignmentException(role.getName());
-		}
-
 		long[] addGroupIds = StringUtil.split(
 			ParamUtil.getString(actionRequest, "addGroupIds"), 0L);
 		long[] removeGroupIds = StringUtil.split(
 			ParamUtil.getString(actionRequest, "removeGroupIds"), 0L);
+
+		Role role = RoleLocalServiceUtil.getRole(roleId);
+
+		if (role.getName().equals(RoleImpl.OWNER)) {
+			throw new RoleAssignmentException(role.getName());
+		}
 
 		GroupServiceUtil.addRoleGroups(roleId, addGroupIds);
 		GroupServiceUtil.unsetRoleGroups(roleId, removeGroupIds);
@@ -142,16 +142,16 @@ public class EditRoleAssignmentsAction extends PortletAction {
 
 		long roleId = ParamUtil.getLong(actionRequest, "roleId");
 
-		Role role = RoleServiceUtil.getRole(roleId);
-
-		if (role.getName().equals(RoleImpl.OWNER)) {
-			throw new RoleAssignmentException(role.getName());
-		}
-
 		long[] addUserIds = StringUtil.split(
 			ParamUtil.getString(actionRequest, "addUserIds"), 0L);
 		long[] removeUserIds = StringUtil.split(
 			ParamUtil.getString(actionRequest, "removeUserIds"), 0L);
+
+		Role role = RoleLocalServiceUtil.getRole(roleId);
+
+		if (role.getName().equals(RoleImpl.OWNER)) {
+			throw new RoleAssignmentException(role.getName());
+		}
 
 		UserServiceUtil.addRoleUsers(roleId, addUserIds);
 		UserServiceUtil.unsetRoleUsers(roleId, removeUserIds);

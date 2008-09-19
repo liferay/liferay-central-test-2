@@ -113,8 +113,8 @@ public class BookmarksFolderPermission {
 			folderId = folder.getParentFolderId();
 
 			if (permissionChecker.hasOwnerPermission(
-				folder.getCompanyId(), BookmarksFolder.class.getName(),
-				folderId, folder.getUserId(), actionId)) {
+					folder.getCompanyId(), BookmarksFolder.class.getName(),
+					folderId, folder.getUserId(), actionId)) {
 
 				return true;
 			}

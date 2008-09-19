@@ -70,8 +70,8 @@ public class CalEventPermission {
 		String actionId) {
 
 		if (permissionChecker.hasOwnerPermission(
-			event.getCompanyId(), CalEvent.class.getName(), event.getEventId(),
-			event.getUserId(), actionId)) {
+				event.getCompanyId(), CalEvent.class.getName(),
+				event.getEventId(), event.getUserId(), actionId)) {
 
 			return true;
 		}

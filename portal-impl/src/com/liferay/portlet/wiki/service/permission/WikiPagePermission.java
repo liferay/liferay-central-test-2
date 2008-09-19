@@ -79,8 +79,8 @@ public class WikiPagePermission {
 		PermissionChecker permissionChecker, WikiPage page, String actionId) {
 
 		if (permissionChecker.hasOwnerPermission(
-			page.getCompanyId(), WikiPage.class.getName(), page.getPageId(),
-			page.getUserId(), actionId)) {
+				page.getCompanyId(), WikiPage.class.getName(), page.getPageId(),
+				page.getUserId(), actionId)) {
 
 			return true;
 		}

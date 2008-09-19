@@ -30,7 +30,6 @@ package com.liferay.portal;
  */
 public class RoleAssignmentException extends PortalException {
 
-
 	public RoleAssignmentException() {
 		super();
 	}

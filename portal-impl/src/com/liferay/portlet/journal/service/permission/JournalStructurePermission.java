@@ -73,8 +73,8 @@ public class JournalStructurePermission {
 		String actionId) {
 
 		if (permissionChecker.hasOwnerPermission(
-			structure.getCompanyId(), JournalStructure.class.getName(),
-			structure.getPrimaryKey(), structure.getUserId(), actionId)) {
+				structure.getCompanyId(), JournalStructure.class.getName(),
+				structure.getPrimaryKey(), structure.getUserId(), actionId)) {
 
 			return true;
 		}

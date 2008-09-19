@@ -73,8 +73,8 @@ public class BookmarksEntryPermission {
 		String actionId) {
 
 		if (permissionChecker.hasOwnerPermission(
-			entry.getCompanyId(), BookmarksEntry.class.getName(),
-			entry.getEntryId(), entry.getUserId(), actionId)) {
+				entry.getCompanyId(), BookmarksEntry.class.getName(),
+				entry.getEntryId(), entry.getUserId(), actionId)) {
 
 			return true;
 		}

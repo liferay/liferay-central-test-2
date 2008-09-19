@@ -70,8 +70,8 @@ public class BlogsEntryPermission {
 		String actionId) {
 
 		if (permissionChecker.hasOwnerPermission(
-			entry.getCompanyId(), BlogsEntry.class.getName(),
-			entry.getEntryId(), entry.getUserId(), actionId)) {
+				entry.getCompanyId(), BlogsEntry.class.getName(),
+				entry.getEntryId(), entry.getUserId(), actionId)) {
 
 			return true;
 		}

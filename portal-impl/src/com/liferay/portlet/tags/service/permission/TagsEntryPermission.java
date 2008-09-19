@@ -97,8 +97,8 @@ public class TagsEntryPermission {
 		PermissionChecker permissionChecker, TagsEntry entry, String actionId) {
 
 		if (permissionChecker.hasOwnerPermission(
-			entry.getCompanyId(), TagsEntry.class.getName(), entry.getEntryId(),
-			entry.getUserId(), actionId)) {
+				entry.getCompanyId(), TagsEntry.class.getName(),
+				entry.getEntryId(), entry.getUserId(), actionId)) {
 
 			return true;
 		}

@@ -75,8 +75,8 @@ public class DLFileEntryPermission {
 		String actionId) {
 
 		if (permissionChecker.hasOwnerPermission(
-			fileEntry.getCompanyId(), DLFileEntry.class.getName(),
-			fileEntry.getFileEntryId(), fileEntry.getUserId(), actionId)) {
+				fileEntry.getCompanyId(), DLFileEntry.class.getName(),
+				fileEntry.getFileEntryId(), fileEntry.getUserId(), actionId)) {
 
 			return true;
 		}

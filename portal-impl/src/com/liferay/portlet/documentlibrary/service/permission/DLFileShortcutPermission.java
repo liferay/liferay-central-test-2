@@ -74,9 +74,9 @@ public class DLFileShortcutPermission {
 		String actionId) {
 
 		if (permissionChecker.hasOwnerPermission(
-			fileShortcut.getCompanyId(), DLFileShortcut.class.getName(),
-			fileShortcut.getFileShortcutId(), fileShortcut.getUserId(),
-			actionId)) {
+				fileShortcut.getCompanyId(), DLFileShortcut.class.getName(),
+				fileShortcut.getFileShortcutId(), fileShortcut.getUserId(),
+				actionId)) {
 
 			return true;
 		}

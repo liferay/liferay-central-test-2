@@ -39,7 +39,7 @@ import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.security.permission.ResourceActionsUtil;
 import com.liferay.portal.security.permission.comparator.ActionComparator;
 import com.liferay.portal.service.PermissionServiceUtil;
-import com.liferay.portal.service.RoleServiceUtil;
+import com.liferay.portal.service.RoleLocalServiceUtil;
 import com.liferay.portal.struts.PortletAction;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.WebKeys;
@@ -133,7 +133,7 @@ public class EditRolePermissionsAction extends PortletAction {
 		long roleId = ParamUtil.getLong(actionRequest, "roleId");
 		long permissionId = ParamUtil.getLong(actionRequest, "permissionId");
 
-		Role role = RoleServiceUtil.getRole(roleId);
+		Role role = RoleLocalServiceUtil.getRole(roleId);
 
 		if (role.getName().equals(RoleImpl.ADMINISTRATOR) ||
 			role.getName().equals(RoleImpl.OWNER) ||
@@ -166,7 +166,7 @@ public class EditRolePermissionsAction extends PortletAction {
 
 		long roleId = ParamUtil.getLong(actionRequest, "roleId");
 
-		Role role = RoleServiceUtil.getRole(roleId);
+		Role role = RoleLocalServiceUtil.getRole(roleId);
 
 		if (role.getName().equals(RoleImpl.ADMINISTRATOR) ||
 			role.getName().equals(RoleImpl.OWNER) ||

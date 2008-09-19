@@ -71,8 +71,8 @@ public class ShoppingItemPermission {
 		String actionId) {
 
 		if (permissionChecker.hasOwnerPermission(
-			item.getCompanyId(), ShoppingItem.class.getName(),
-			item.getItemId(), item.getUserId(), actionId)) {
+				item.getCompanyId(), ShoppingItem.class.getName(),
+				item.getItemId(), item.getUserId(), actionId)) {
 
 			return true;
 		}

@@ -69,8 +69,8 @@ public class IGImagePermission {
 		PermissionChecker permissionChecker, IGImage image, String actionId) {
 
 		if (permissionChecker.hasOwnerPermission(
-			image.getCompanyId(), IGImage.class.getName(),
-			image.getImageId(), image.getUserId(), actionId)) {
+				image.getCompanyId(), IGImage.class.getName(),
+				image.getImageId(), image.getUserId(), actionId)) {
 
 			return true;
 		}
