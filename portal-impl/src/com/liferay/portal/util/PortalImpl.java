@@ -607,19 +607,19 @@ public class PortalImpl implements Portal {
 				PropsValues.CONTROL_PANEL_CATEGORY_CONTENT_PORTLETS,
 				portletId)) {
 
-			category = PortletCategoryKeys.CONTENT;
+			category = "content";
 		}
 		else if (ArrayUtil.contains(
-				PropsValues.CONTROL_PANEL_CATEGORY_PORTAL_PORTLETS,
-				portletId)) {
+					PropsValues.CONTROL_PANEL_CATEGORY_PORTAL_PORTLETS,
+					portletId)) {
 
-			category = PortletCategoryKeys.PORTAL;
+			category = "portal";
 		}
 		else if (ArrayUtil.contains(
-				PropsValues.CONTROL_PANEL_CATEGORY_SERVER_PORTLETS,
-				portletId)) {
+					PropsValues.CONTROL_PANEL_CATEGORY_SERVER_PORTLETS,
+					portletId)) {
 
-			category = PortletCategoryKeys.SERVER;
+			category = "server";
 		}
 
 		return category;
@@ -628,13 +628,13 @@ public class PortalImpl implements Portal {
 	public List<Portlet> getControlPanelPortlets(String category) {
 		String[] portletIds = null;
 
-		if (category.equals(PortletCategoryKeys.CONTENT)) {
+		if (category.equals("content")) {
 			portletIds = PropsValues.CONTROL_PANEL_CATEGORY_CONTENT_PORTLETS;
 		}
-		else if (category.equals(PortletCategoryKeys.PORTAL)) {
+		else if (category.equals("portal")) {
 			portletIds = PropsValues.CONTROL_PANEL_CATEGORY_PORTAL_PORTLETS;
 		}
-		else if (category.equals(PortletCategoryKeys.SERVER)) {
+		else if (category.equals("server")) {
 			portletIds = PropsValues.CONTROL_PANEL_CATEGORY_SERVER_PORTLETS;
 		}
 		else {

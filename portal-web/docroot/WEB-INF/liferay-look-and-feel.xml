@@ -39,12 +39,6 @@
 			<setting key="bullet-style-options" value="1,2" />
 		</settings>
 	</theme>
-	<theme id="admin" name="Admin">
-		<root-path>/html/themes/${theme-id}</root-path>
-		<settings>
-			<setting key="bullet-style-options" value="1,2" />
-		</settings>
-	</theme>
 	<theme id="mobile" name="Mobile">
 		<root-path>/wap/themes/${theme-id}</root-path>
 		<wap-theme>true</wap-theme>
