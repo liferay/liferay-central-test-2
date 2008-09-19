@@ -24,159 +24,161 @@
 
 <script type="text/javascript">
 	// <![CDATA
-		var Liferay = Liferay || {};
-
-		var themeDisplay = {
-			getCompanyId: function() {
-				return "<%= themeDisplay.getCompanyId() %>";
-			},
-			getUserId: function() {
-				return "<%= themeDisplay.getUserId() %>";
-			},
-
-			<c:if test="<%= themeDisplay.isSignedIn() %>">
-				getUserName: function() {
-					return "<%= UnicodeFormatter.toString(user.getFullName()) %>";
+		var Liferay = {
+			Browser: {
+				acceptsGzip: function() {
+					return <%= BrowserSnifferUtil.acceptsGzip(request) %>;
 				},
-			</c:if>
+				getMajorVersion: function() {
+					return <%= BrowserSnifferUtil.getMajorVersion(request) %>;
+				},
+				getRevision: function() {
+					return "<%= BrowserSnifferUtil.getRevision(request) %>";
+				},
+				getVersion: function() {
+					return "<%= BrowserSnifferUtil.getVersion(request) %>";
+				},
+				isAir: function() {
+					return <%= BrowserSnifferUtil.isAir(request) %>;
+				},
+				isChrome: function() {
+					return <%= BrowserSnifferUtil.isChrome(request) %>;
+				},
+				isFirefox: function() {
+					return <%= BrowserSnifferUtil.isFirefox(request) %>;
+				},
+				isGecko: function() {
+					return <%= BrowserSnifferUtil.isGecko(request) %>;
+				},
+				isIe: function() {
+					return <%= BrowserSnifferUtil.isIe(request) %>;
+				},
+				isIphone: function() {
+					return <%= BrowserSnifferUtil.isIphone(request) %>;
+				},
+				isLinux: function() {
+					return <%= BrowserSnifferUtil.isLinux(request) %>;
+				},
+				isMac: function() {
+					return <%= BrowserSnifferUtil.isMac(request) %>;
+				},
+				isMobile: function() {
+					return <%= BrowserSnifferUtil.isMobile(request) %>;
+				},
+				isMozilla: function() {
+					return <%= BrowserSnifferUtil.isMozilla(request) %>;
+				},
+				isOpera: function() {
+					return <%= BrowserSnifferUtil.isOpera(request) %>;
+				},
+				isRtf: function() {
+					return <%= BrowserSnifferUtil.isRtf(request) %>;
+				},
+				isSafari: function() {
+					return <%= BrowserSnifferUtil.isSafari(request) %>;
+				},
+				isSun: function() {
+					return <%= BrowserSnifferUtil.isSun(request) %>;
+				},
+				isWap: function() {
+					return <%= BrowserSnifferUtil.isWap(request) %>;
+				},
+				isWapXhtml: function() {
+					return <%= BrowserSnifferUtil.isWapXhtml(request) %>;
+				},
+				isWebKit: function() {
+					return <%= BrowserSnifferUtil.isWebKit(request) %>;
+				},
+				isWindows: function() {
+					return <%= BrowserSnifferUtil.isWindows(request) %>;
+				},
+				isWml: function() {
+					return <%= BrowserSnifferUtil.isWml(request) %>;
+				}
+			},
 
-			getDoAsUserIdEncoded: function() {
-				return "<%= themeDisplay.getDoAsUserId() %>";
-			},
-			getPlid: function() {
-				return "<%= themeDisplay.getPlid() %>";
-			},
+			ThemeDisplay: {
+				getCompanyId: function() {
+					return "<%= themeDisplay.getCompanyId() %>";
+				},
+				getUserId: function() {
+					return "<%= themeDisplay.getUserId() %>";
+				},
 
-			<c:if test="<%= layout != null %>">
-				getLayoutId: function() {
-					return "<%= layout.getLayoutId() %>";
-				},
-				getLayoutURL: function() {
-					return "<%= PortalUtil.getLayoutURL(layout, themeDisplay) %>";
-				},
-				isPrivateLayout: function() {
-					return "<%= layout.isPrivateLayout() %>";
-				},
-				getParentLayoutId: function() {
-					return "<%= layout.getParentLayoutId() %>";
-				},
-			</c:if>
+				<c:if test="<%= themeDisplay.isSignedIn() %>">
+					getUserName: function() {
+						return "<%= UnicodeFormatter.toString(user.getFullName()) %>";
+					},
+				</c:if>
 
-			getScopeGroupId: function() {
-				return "<%= themeDisplay.getScopeGroupId() %>";
-			},
-			isSignedIn: function() {
-				return <%= themeDisplay.isSignedIn() %>;
-			},
-			getLanguageId: function() {
-				return "<%= LanguageUtil.getLanguageId(request) %>";
-			},
-			isFreeformLayout: function() {
-				return <%= themeDisplay.isFreeformLayout() %>;
-			},
-			isStateExclusive: function() {
-				return <%= themeDisplay.isStateExclusive() %>;
-			},
-			isStateMaximized: function() {
-				return <%= themeDisplay.isStateMaximized() %>;
-			},
-			isStatePopUp: function() {
-				return <%= themeDisplay.isStatePopUp() %>;
-			},
-			getPathContext: function() {
-				return "<%= themeDisplay.getPathContext() %>";
-			},
-			getPathImage: function() {
-				return "<%= themeDisplay.getPathImage() %>";
-			},
-			getPathMain: function() {
-				return "<%= themeDisplay.getPathMain() %>";
-			},
-			getPathThemeImages: function() {
-				return "<%= themeDisplay.getPathThemeImages() %>";
-			},
-			getPathThemeRoot: function() {
-				return "<%= themeDisplay.getPathThemeRoot() %>";
-			},
-			getURLHome: function() {
-				return "<%= themeDisplay.getURLHome() %>";
-			},
-			getSessionId: function() {
-				return "<%= session.getId() %>";
+				getDoAsUserIdEncoded: function() {
+					return "<%= themeDisplay.getDoAsUserId() %>";
+				},
+				getPlid: function() {
+					return "<%= themeDisplay.getPlid() %>";
+				},
+
+				<c:if test="<%= layout != null %>">
+					getLayoutId: function() {
+						return "<%= layout.getLayoutId() %>";
+					},
+					getLayoutURL: function() {
+						return "<%= PortalUtil.getLayoutURL(layout, themeDisplay) %>";
+					},
+					isPrivateLayout: function() {
+						return "<%= layout.isPrivateLayout() %>";
+					},
+					getParentLayoutId: function() {
+						return "<%= layout.getParentLayoutId() %>";
+					},
+				</c:if>
+
+				getScopeGroupId: function() {
+					return "<%= themeDisplay.getScopeGroupId() %>";
+				},
+				isSignedIn: function() {
+					return <%= themeDisplay.isSignedIn() %>;
+				},
+				getLanguageId: function() {
+					return "<%= LanguageUtil.getLanguageId(request) %>";
+				},
+				isFreeformLayout: function() {
+					return <%= themeDisplay.isFreeformLayout() %>;
+				},
+				isStateExclusive: function() {
+					return <%= themeDisplay.isStateExclusive() %>;
+				},
+				isStateMaximized: function() {
+					return <%= themeDisplay.isStateMaximized() %>;
+				},
+				isStatePopUp: function() {
+					return <%= themeDisplay.isStatePopUp() %>;
+				},
+				getPathContext: function() {
+					return "<%= themeDisplay.getPathContext() %>";
+				},
+				getPathImage: function() {
+					return "<%= themeDisplay.getPathImage() %>";
+				},
+				getPathMain: function() {
+					return "<%= themeDisplay.getPathMain() %>";
+				},
+				getPathThemeImages: function() {
+					return "<%= themeDisplay.getPathThemeImages() %>";
+				},
+				getPathThemeRoot: function() {
+					return "<%= themeDisplay.getPathThemeRoot() %>";
+				},
+				getURLHome: function() {
+					return "<%= themeDisplay.getURLHome() %>";
+				},
+				getSessionId: function() {
+					return "<%= session.getId() %>";
+				}
 			}
 		};
 
-		Liferay.Browser = {
-			acceptsGzip: function() {
-				return <%= BrowserSnifferUtil.acceptsGzip(request) %>;
-			},
-			getMajorVersion: function() {
-				return <%= BrowserSnifferUtil.getMajorVersion(request) %>;
-			},
-			getRevision: function() {
-				return "<%= BrowserSnifferUtil.getRevision(request) %>";
-			},
-			getVersion: function() {
-				return "<%= BrowserSnifferUtil.getVersion(request) %>";
-			},
-			isAir: function() {
-				return <%= BrowserSnifferUtil.isAir(request) %>;
-			},
-			isChrome: function() {
-				return <%= BrowserSnifferUtil.isChrome(request) %>;
-			},
-			isFirefox: function() {
-				return <%= BrowserSnifferUtil.isFirefox(request) %>;
-			},
-			isGecko: function() {
-				return <%= BrowserSnifferUtil.isGecko(request) %>;
-			},
-			isIe: function() {
-				return <%= BrowserSnifferUtil.isIe(request) %>;
-			},
-			isIphone: function() {
-				return <%= BrowserSnifferUtil.isIphone(request) %>;
-			},
-			isLinux: function() {
-				return <%= BrowserSnifferUtil.isLinux(request) %>;
-			},
-			isMac: function() {
-				return <%= BrowserSnifferUtil.isMac(request) %>;
-			},
-			isMobile: function() {
-				return <%= BrowserSnifferUtil.isMobile(request) %>;
-			},
-			isMozilla: function() {
-				return <%= BrowserSnifferUtil.isMozilla(request) %>;
-			},
-			isOpera: function() {
-				return <%= BrowserSnifferUtil.isOpera(request) %>;
-			},
-			isRtf: function() {
-				return <%= BrowserSnifferUtil.isRtf(request) %>;
-			},
-			isSafari: function() {
-				return <%= BrowserSnifferUtil.isSafari(request) %>;
-			},
-			isSun: function() {
-				return <%= BrowserSnifferUtil.isSun(request) %>;
-			},
-			isWap: function() {
-				return <%= BrowserSnifferUtil.isWap(request) %>;
-			},
-			isWapXhtml: function() {
-				return <%= BrowserSnifferUtil.isWapXhtml(request) %>;
-			},
-			isWebKit: function() {
-				return <%= BrowserSnifferUtil.isWebKit(request) %>;
-			},
-			isWindows: function() {
-				return <%= BrowserSnifferUtil.isWindows(request) %>;
-			},
-			isWml: function() {
-				return <%= BrowserSnifferUtil.isWml(request) %>;
-			}
-		};
+		var themeDisplay = Liferay.ThemeDisplay;
 	// ]]>
 </script>
 
