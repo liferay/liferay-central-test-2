@@ -27,7 +27,7 @@
 <%
 Boolean showCompanyCategories = (Boolean)request.getAttribute("liferay-ui:tags-navigation:showCompanyCategories");
 
-long entryId = ParamUtil.getLong(renderRequest, "entryId");
+String tag = ParamUtil.getString(renderRequest, "tag");
 
 List<TagsVocabulary> vocabularies = null;
 
@@ -58,7 +58,7 @@ PortletURL portletURL = renderResponse.createRenderURL();
 
 		List<TagsEntry> entries = TagsEntryServiceUtil.getGroupVocabularyRootEntries(vocabulary.getGroupId(), vocabularyName);
 
-		_buildNavigation(entries, vocabularyName, entryId, portletURL, sb);
+		_buildNavigation(entries, vocabularyName, tag, portletURL, sb);
 	}
 
 	sb.append("</li>");
@@ -85,7 +85,7 @@ PortletURL portletURL = renderResponse.createRenderURL();
 </script>
 
 <%!
-private void _buildNavigation(List<TagsEntry> entries, String vocabularyName, long entryId, PortletURL portletURL, StringBuilder sb) throws Exception {
+private void _buildNavigation(List<TagsEntry> entries, String vocabularyName, String tag, PortletURL portletURL, StringBuilder sb) throws Exception {
 	for (TagsEntry entry : entries) {
 		String entryName = entry.getName();
 
@@ -95,13 +95,13 @@ private void _buildNavigation(List<TagsEntry> entries, String vocabularyName, lo
 		sb.append("<li>");
 		sb.append("<span>");
 
-		if (entry.getEntryId() == entryId) {
+		if (entryName.equals(tag)) {
 			sb.append("<b>");
 			sb.append(entryName);
 			sb.append("</b>");
 		}
 		else {
-			portletURL.setParameter("entryId", String.valueOf(entry.getEntryId()));
+			portletURL.setParameter("tag", entry.getName());
 
 			sb.append("<a href=\"");
 			sb.append(portletURL.toString());
@@ -112,7 +112,7 @@ private void _buildNavigation(List<TagsEntry> entries, String vocabularyName, lo
 
 		sb.append("</span>");
 
-		_buildNavigation(entryChildren, vocabularyName, entryId, portletURL, sb);
+		_buildNavigation(entryChildren, vocabularyName, tag, portletURL, sb);
 
 		sb.append("</li>");
 		sb.append("</ul>");
