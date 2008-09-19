@@ -168,11 +168,6 @@ response.setContentType(ContentTypes.TEXT_CSS);
 
 /* ---------- Panel Page styles ---------- */
 
-.lfr-panel .portal-add-content {
-	padding: 0;
-	padding-left: 4px;
-}
-
 .lfr-panel .panel-content {
 	border-left: 1px solid #ccc;
 	padding-left: 1em;
@@ -200,7 +195,7 @@ response.setContentType(ContentTypes.TEXT_CSS);
 	background: none;
 }
 
-.lfr-panel.panel-frontpage .panel-content h2 {
+.lfr-panel .panel-content.panel-frontpage h2 {
 	margin-top: 0;
 }
 
