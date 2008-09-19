@@ -32,11 +32,13 @@ import com.liferay.portal.model.Account;
 import com.liferay.portal.model.ColorScheme;
 import com.liferay.portal.model.Company;
 import com.liferay.portal.model.Contact;
+import com.liferay.portal.model.Group;
 import com.liferay.portal.model.Layout;
 import com.liferay.portal.model.LayoutTypePortlet;
 import com.liferay.portal.model.Theme;
 import com.liferay.portal.model.User;
 import com.liferay.portal.security.permission.PermissionChecker;
+import com.liferay.portal.service.GroupLocalServiceUtil;
 
 import java.io.Serializable;
 
@@ -235,6 +237,10 @@ public class ThemeDisplay implements Serializable {
 		_layoutTypePortlet = layoutTypePortlet;
 	}
 
+	public Group getScopeGroup() {
+		return _scopeGroup;
+	}
+
 	/**
 	 * @deprecated Use <code>getScopeGroupId</code>.
 	 */
@@ -248,6 +254,24 @@ public class ThemeDisplay implements Serializable {
 
 	public void setScopeGroupId(long scopeGroupId) {
 		_scopeGroupId = scopeGroupId;
+
+		if (_scopeGroupId > 0) {
+			try {
+				_scopeGroup = GroupLocalServiceUtil.getGroup(_scopeGroupId);
+			}
+			catch (Exception e) {
+				_log.error(e, e);
+			}
+		}
+	}
+
+	public String getScopeGroupName() {
+		if (_scopeGroup == null) {
+			return StringPool.BLANK;
+		}
+		else {
+			return _scopeGroup.getDescriptiveName();
+		}
 	}
 
 	public boolean isSignedIn() {
@@ -968,6 +992,7 @@ public class ThemeDisplay implements Serializable {
 		_layouts = null;
 		_plid = 0;
 		_layoutTypePortlet = null;
+		_scopeGroup = null;
 		_scopeGroupId = 0;
 		_signedIn = false;
 		_permissionChecker = null;
@@ -1066,6 +1091,7 @@ public class ThemeDisplay implements Serializable {
 	private List<Layout> _layouts;
 	private long _plid;
 	private LayoutTypePortlet _layoutTypePortlet;
+	private Group _scopeGroup;
 	private long _scopeGroupId;
 	private boolean _signedIn;
 	private PermissionChecker _permissionChecker;
