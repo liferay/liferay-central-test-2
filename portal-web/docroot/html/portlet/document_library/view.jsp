@@ -61,9 +61,27 @@ portletURL.setParameter("folderId", String.valueOf(folderId));
 
 <c:choose>
 	<c:when test="<%= showTabs && (rootFolder == null) %>">
+		<%
+		String tabsNames = "folders,my-documents,recent-documents";
+
+		if (GroupPermissionUtil.contains(permissionChecker, scopeGroupId, ActionKeys.PERMISSIONS)) {
+			tabsNames += ",permissions";
+		}
+
+		Group scopeGroup = GroupLocalServiceUtil.getGroup(scopeGroupId);
+		%>
+
+		<liferay-security:permissionsURL
+			modelResource="com.liferay.portlet.documentlibrary"
+			modelResourceDescription="<%= scopeGroup.getDescriptiveName() %>"
+			resourcePrimKey="<%= String.valueOf(scopeGroupId) %>"
+			var="permissionsURL"
+		/>
+
 		<liferay-ui:tabs
-			names="folders,my-documents,recent-documents"
+			names="<%= tabsNames %>"
 			url="<%= portletURL.toString() %>"
+			url3="<%= permissionsURL %>"
 		/>
 	</c:when>
 	<c:when test="<%= showTabs && showSubfolders %>">
