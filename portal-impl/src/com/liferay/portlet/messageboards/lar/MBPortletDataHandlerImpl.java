@@ -179,12 +179,14 @@ public class MBPortletDataHandlerImpl implements PortletDataHandler {
 			for (Element categoryEl : categoryEls) {
 				String path = categoryEl.attributeValue("path");
 
-				if (context.isPathNotProcessed(path)) {
-					MBCategory category =
-						(MBCategory)context.getZipEntryAsObject(path);
-
-					importCategory(context, categoryPKs, category);
+				if (!context.isPathNotProcessed(path)) {
+					continue;
 				}
+
+				MBCategory category = (MBCategory)context.getZipEntryAsObject(
+					path);
+
+				importCategory(context, categoryPKs, category);
 			}
 
 			List<Element> messageEls = root.element("messages").elements(
@@ -198,14 +200,16 @@ public class MBPortletDataHandlerImpl implements PortletDataHandler {
 			for (Element messageEl : messageEls) {
 				String path = messageEl.attributeValue("path");
 
-				if (context.isPathNotProcessed(path)) {
-					MBMessage message = (MBMessage)context.getZipEntryAsObject(
-						path);
-
-					importMessage(
-						context, categoryPKs, threadPKs, messagePKs, messageEl,
-						message);
+				if (!context.isPathNotProcessed(path)) {
+					continue;
 				}
+
+				MBMessage message = (MBMessage)context.getZipEntryAsObject(
+					path);
+
+				importMessage(
+					context, categoryPKs, threadPKs, messagePKs, messageEl,
+					message);
 			}
 
 			if (context.getBooleanParameter(_NAMESPACE, "flags")) {
@@ -215,12 +219,14 @@ public class MBPortletDataHandlerImpl implements PortletDataHandler {
 				for (Element flagEl : flagEls) {
 					String path = flagEl.attributeValue("path");
 
-					if (context.isPathNotProcessed(path)) {
-						MBMessageFlag flag =
-							(MBMessageFlag)context.getZipEntryAsObject(path);
-
-						importFlag(context, messagePKs, flag);
+					if (!context.isPathNotProcessed(path)) {
+						continue;
 					}
+
+					MBMessageFlag flag =
+						(MBMessageFlag)context.getZipEntryAsObject(path);
+
+					importFlag(context, messagePKs, flag);
 				}
 			}
 
@@ -231,11 +237,13 @@ public class MBPortletDataHandlerImpl implements PortletDataHandler {
 				for (Element banEl : banEls) {
 					String path = banEl.attributeValue("path");
 
-					if (context.isPathNotProcessed(path)) {
-						MBBan ban = (MBBan)context.getZipEntryAsObject(path);
-
-						importBan(context, ban);
+					if (!context.isPathNotProcessed(path)) {
+						continue;
 					}
+
+					MBBan ban = (MBBan)context.getZipEntryAsObject(path);
+
+					importBan(context, ban);
 				}
 			}
 
@@ -258,11 +266,11 @@ public class MBPortletDataHandlerImpl implements PortletDataHandler {
 		if (context.isWithinDateRange(category.getModifiedDate())) {
 			String path = getCategoryPath(context, category);
 
-			Element categoryEl = categoriesEl.addElement("category");
-
-			categoryEl.addAttribute("path", path);
-
 			if (context.isPathNotProcessed(path)) {
+				Element categoryEl = categoriesEl.addElement("category");
+
+				categoryEl.addAttribute("path", path);
+
 				category.setUserUuid(category.getUserUuid());
 
 				context.addZipEntry(path, category);
@@ -292,11 +300,11 @@ public class MBPortletDataHandlerImpl implements PortletDataHandler {
 
 		String path = getMessagePath(context, message);
 
-		Element messageEl = messagesEl.addElement("message");
-
-		messageEl.addAttribute("path", path);
-
 		if (context.isPathNotProcessed(path)) {
+			Element messageEl = messagesEl.addElement("message");
+
+			messageEl.addAttribute("path", path);
+
 			message.setUserUuid(message.getUserUuid());
 			message.setPriority(message.getPriority());
 
@@ -362,15 +370,17 @@ public class MBPortletDataHandlerImpl implements PortletDataHandler {
 
 		String path = getMessageFlagPath(context, messageFlag);
 
+		if (!context.isPathNotProcessed(path)) {
+			return;
+		}
+
 		Element messageFlagEl = messageFlagsEl.addElement("message-flag");
 
 		messageFlagEl.addAttribute("path", path);
 
-		if (context.isPathNotProcessed(path)) {
-			messageFlag.setUserUuid(messageFlag.getUserUuid());
+		messageFlag.setUserUuid(messageFlag.getUserUuid());
 
-			context.addZipEntry(path, messageFlag);
-		}
+		context.addZipEntry(path, messageFlag);
 	}
 
 	protected void exportParentCategory(
@@ -387,11 +397,11 @@ public class MBPortletDataHandlerImpl implements PortletDataHandler {
 
 		String path = getCategoryPath(context, category);
 
-		Element categoryEl = categoriesEl.addElement("category");
-
-		categoryEl.addAttribute("path", path);
-
 		if (context.isPathNotProcessed(path)) {
+			Element categoryEl = categoriesEl.addElement("category");
+
+			categoryEl.addAttribute("path", path);
+
 			category.setUserUuid(category.getUserUuid());
 
 			context.addZipEntry(path, category);
@@ -411,16 +421,18 @@ public class MBPortletDataHandlerImpl implements PortletDataHandler {
 
 		String path = getUserBanPath(context, ban);
 
+		if (!context.isPathNotProcessed(path)) {
+			return;
+		}
+
 		Element userBanEl = userBansEl.addElement("user-ban");
 
 		userBanEl.addAttribute("path", path);
 
-		if (context.isPathNotProcessed(path)) {
-			ban.setBanUserUuid(ban.getBanUserUuid());
-			ban.setUserUuid(ban.getUserUuid());
+		ban.setBanUserUuid(ban.getBanUserUuid());
+		ban.setUserUuid(ban.getUserUuid());
 
-			context.addZipEntry(path, ban);
-		}
+		context.addZipEntry(path, ban);
 	}
 
 	protected void importBan(PortletDataContext context, MBBan ban)

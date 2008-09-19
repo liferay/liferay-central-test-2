@@ -132,26 +132,32 @@ public class JournalPortletDataHandlerImpl implements PortletDataHandler {
 
 		String path = getArticlePath(context, article);
 
-		Element articleEl = articlesEl.addElement("article");
-
-		articleEl.addAttribute("path", path);
-
 		if (!context.isPathNotProcessed(path)) {
 			return;
 		}
 
+		Element articleEl = articlesEl.addElement("article");
+
+		articleEl.addAttribute("path", path);
+
 		if (article.isSmallImage()) {
+			String smallImagePath = getArticleSmallImagePath(context, article);
+
+			articleEl.addAttribute("small-image-path", smallImagePath);
+
 			Image smallImage = ImageUtil.fetchByPrimaryKey(
 				article.getSmallImageId());
 
 			article.setSmallImageType(smallImage.getType());
 
-			context.addZipEntry(
-				getArticleSmallImagePath(context, article),
-				smallImage.getTextObj());
+			context.addZipEntry(smallImagePath, smallImage.getTextObj());
 		}
 
 		if (context.getBooleanParameter(_NAMESPACE, "images")) {
+			String imagePath = getArticleImagePath(context, article);
+
+			articleEl.addAttribute("image-path", imagePath);
+
 			List<JournalArticleImage> articleImages =
 				JournalArticleImageUtil.findByG_A_V(
 					context.getGroupId(), article.getArticleId(),
@@ -162,10 +168,10 @@ public class JournalPortletDataHandlerImpl implements PortletDataHandler {
 					Image image = ImageUtil.findByPrimaryKey(
 						articleImage.getArticleImageId());
 
-					String imagePath = getArticleImagePath(
-						context, article, articleImage, image);
-
-					context.addZipEntry(imagePath, image.getTextObj());
+					context.addZipEntry(
+						getArticleImagePath(
+							context, article, articleImage, image),
+						image.getTextObj());
 				}
 				catch (NoSuchImageException nsie) {
 				}
@@ -250,15 +256,17 @@ public class JournalPortletDataHandlerImpl implements PortletDataHandler {
 
 		String path = getFeedPath(context, feed);
 
+		if (!context.isPathNotProcessed(path)) {
+			return;
+		}
+
 		Element feedEl = feedsEl.addElement("feed");
 
 		feedEl.addAttribute("path", path);
 
-		if (context.isPathNotProcessed(path)) {
-			feed.setUserUuid(feed.getUserUuid());
+		feed.setUserUuid(feed.getUserUuid());
 
-			context.addZipEntry(path, feed);
-		}
+		context.addZipEntry(path, feed);
 	}
 
 	public static String exportDLFileEntries(
@@ -389,15 +397,17 @@ public class JournalPortletDataHandlerImpl implements PortletDataHandler {
 
 		String path = getStructurePath(context, structure);
 
+		if (!context.isPathNotProcessed(path)) {
+			return;
+		}
+
 		Element structureEl = structuresEl.addElement("structure");
 
 		structureEl.addAttribute("path", path);
 
-		if (context.isPathNotProcessed(path)) {
-			structure.setUserUuid(structure.getUserUuid());
+		structure.setUserUuid(structure.getUserUuid());
 
-			context.addZipEntry(path, structure);
-		}
+		context.addZipEntry(path, structure);
 	}
 
 	public static void exportTemplate(
@@ -411,23 +421,26 @@ public class JournalPortletDataHandlerImpl implements PortletDataHandler {
 
 		String path = getTemplatePath(context, template);
 
-		Element templateEl = templatesEl.addElement("template");
-
-		templateEl.addAttribute("path", path);
-
 		if (!context.isPathNotProcessed(path)) {
 			return;
 		}
 
+		Element templateEl = templatesEl.addElement("template");
+
+		templateEl.addAttribute("path", path);
+
 		if (template.isSmallImage()) {
+			String smallImagePath = getTemplateSmallImagePath(
+				context, template);
+
+			templateEl.addAttribute("small-image-path", smallImagePath);
+
 			Image smallImage = ImageUtil.fetchByPrimaryKey(
 				template.getSmallImageId());
 
 			template.setSmallImageType(smallImage.getType());
 
-			context.addZipEntry(
-				getTemplateSmallImagePath(context, template),
-				smallImage.getTextObj());
+			context.addZipEntry(smallImagePath, smallImage.getTextObj());
 		}
 
 		template.setUserUuid(template.getUserUuid());
@@ -561,8 +574,10 @@ public class JournalPortletDataHandlerImpl implements PortletDataHandler {
 		File smallFile = null;
 
 		if (article.isSmallImage()) {
-			byte[] bytes = context.getZipEntryAsByteArray(
-				getArticleSmallImagePath(context, article));
+			String smallImagePath = articleEl.attributeValue(
+				"small-image-path");
+
+			byte[] bytes = context.getZipEntryAsByteArray(smallImagePath);
 
 			smallFile = File.createTempFile(
 				String.valueOf(article.getSmallImageId()),
@@ -574,23 +589,26 @@ public class JournalPortletDataHandlerImpl implements PortletDataHandler {
 		Map<String, byte[]> images = new HashMap<String, byte[]>();
 
 		if (context.getBooleanParameter(_NAMESPACE, "images")) {
+			String imagePath = articleEl.attributeValue("image-path");
+
 			List<ObjectValuePair<String, byte[]>> imageFiles =
-				context.getZipFolderEntries(
-					getArticleImagePath(context, article));
+				context.getZipFolderEntries(imagePath);
 
 			if (imageFiles != null) {
 				for (ObjectValuePair<String, byte[]> imageFile : imageFiles) {
 					String fileName = imageFile.getKey();
 
-					if (!fileName.endsWith(".xml")) {
-						int pos = fileName.lastIndexOf(StringPool.PERIOD);
-
-						if (pos != -1) {
-							fileName = fileName.substring(0, pos);
-						}
-
-						images.put(fileName, imageFile.getValue());
+					if (fileName.endsWith(".xml")) {
+						continue;
 					}
+
+					int pos = fileName.lastIndexOf(StringPool.PERIOD);
+
+					if (pos != -1) {
+						fileName = fileName.substring(0, pos);
+					}
+
+					images.put(fileName, imageFile.getValue());
 				}
 			}
 		}
@@ -965,8 +983,10 @@ public class JournalPortletDataHandlerImpl implements PortletDataHandler {
 		File smallFile = null;
 
 		if (template.isSmallImage()) {
-			byte[] bytes = context.getZipEntryAsByteArray(
-				getTemplateSmallImagePath(context, template));
+			String smallImagePath = templateEl.attributeValue(
+				"small-image-path");
+
+			byte[] bytes = context.getZipEntryAsByteArray(smallImagePath);
 
 			smallFile = File.createTempFile(
 				String.valueOf(template.getSmallImageId()),
@@ -1196,13 +1216,14 @@ public class JournalPortletDataHandlerImpl implements PortletDataHandler {
 			for (Element folderEl : dlFolderEls) {
 				String path = folderEl.attributeValue("path");
 
-				if (context.isPathNotProcessed(path)) {
-					DLFolder folder = (DLFolder)context.getZipEntryAsObject(
-						path);
-
-					DLPortletDataHandlerImpl.importFolder(
-						context, dlFolderPKs, folder);
+				if (!context.isPathNotProcessed(path)) {
+					continue;
 				}
+
+				DLFolder folder = (DLFolder)context.getZipEntryAsObject(path);
+
+				DLPortletDataHandlerImpl.importFolder(
+					context, dlFolderPKs, folder);
 			}
 
 			List<Element> fileEntryEls = root.element(
@@ -1213,16 +1234,18 @@ public class JournalPortletDataHandlerImpl implements PortletDataHandler {
 
 			for (Element fileEntryEl : fileEntryEls) {
 				String path = fileEntryEl.attributeValue("path");
+
+				if (!context.isPathNotProcessed(path)) {
+					continue;
+				}
+
+				DLFileEntry fileEntry =
+					(DLFileEntry)context.getZipEntryAsObject(path);
+
 				String binPath = fileEntryEl.attributeValue("bin-path");
 
-				if (context.isPathNotProcessed(path)) {
-					DLFileEntry fileEntry =
-						(DLFileEntry)context.getZipEntryAsObject(path);
-
-					DLPortletDataHandlerImpl.importFileEntry(
-						context, dlFolderPKs, fileEntryNames, fileEntry,
-						binPath);
-				}
+				DLPortletDataHandlerImpl.importFileEntry(
+					context, dlFolderPKs, fileEntryNames, fileEntry, binPath);
 			}
 
 			List<Element> fileRankEls = root.element("dl-file-ranks").elements(
@@ -1231,13 +1254,15 @@ public class JournalPortletDataHandlerImpl implements PortletDataHandler {
 			for (Element fileRankEl : fileRankEls) {
 				String path = fileRankEl.attributeValue("path");
 
-				if (context.isPathNotProcessed(path)) {
-					DLFileRank fileRank =
-						(DLFileRank)context.getZipEntryAsObject(path);
-
-					DLPortletDataHandlerImpl.importFileRank(
-						context, dlFolderPKs, fileEntryNames, fileRank);
+				if (!context.isPathNotProcessed(path)) {
+					continue;
 				}
+
+				DLFileRank fileRank = (DLFileRank)context.getZipEntryAsObject(
+					path);
+
+				DLPortletDataHandlerImpl.importFileRank(
+					context, dlFolderPKs, fileEntryNames, fileRank);
 			}
 
 			List<Element> igFolderEls = root.element("ig-folders").elements(
@@ -1249,13 +1274,14 @@ public class JournalPortletDataHandlerImpl implements PortletDataHandler {
 			for (Element folderEl : igFolderEls) {
 				String path = folderEl.attributeValue("path");
 
-				if (context.isPathNotProcessed(path)) {
-					IGFolder folder = (IGFolder)context.getZipEntryAsObject(
-						path);
-
-					IGPortletDataHandlerImpl.importFolder(
-						context, igFolderPKs, folder);
+				if (!context.isPathNotProcessed(path)) {
+					continue;
 				}
+
+				IGFolder folder = (IGFolder)context.getZipEntryAsObject(path);
+
+				IGPortletDataHandlerImpl.importFolder(
+					context, igFolderPKs, folder);
 			}
 
 			List<Element> imageEls = root.element("ig-images").elements(
@@ -1263,14 +1289,17 @@ public class JournalPortletDataHandlerImpl implements PortletDataHandler {
 
 			for (Element imageEl : imageEls) {
 				String path = imageEl.attributeValue("path");
+
+				if (!context.isPathNotProcessed(path)) {
+					continue;
+				}
+
+				IGImage image = (IGImage)context.getZipEntryAsObject(path);
+
 				String binPath = imageEl.attributeValue("bin-path");
 
-				if (context.isPathNotProcessed(path)) {
-					IGImage image = (IGImage)context.getZipEntryAsObject(path);
-
-					IGPortletDataHandlerImpl.importImage(
-						context, igFolderPKs, image, binPath);
-				}
+				IGPortletDataHandlerImpl.importImage(
+					context, igFolderPKs, image, binPath);
 			}
 
 			return prefs;

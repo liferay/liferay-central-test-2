@@ -127,12 +127,14 @@ public class BlogsPortletDataHandlerImpl implements PortletDataHandler {
 			for (Element entryEl : entryEls) {
 				String path = entryEl.attributeValue("path");
 
-				if (context.isPathNotProcessed(path)) {
-					BlogsEntry entry = (BlogsEntry)context.getZipEntryAsObject(
-						path);
-
-					importEntry(context, entry);
+				if (!context.isPathNotProcessed(path)) {
+					continue;
 				}
+
+				BlogsEntry entry = (BlogsEntry)context.getZipEntryAsObject(
+					path);
+
+				importEntry(context, entry);
 			}
 
 			return null;
@@ -156,27 +158,29 @@ public class BlogsPortletDataHandlerImpl implements PortletDataHandler {
 
 		String path = getEntryPath(context, entry);
 
+		if (!context.isPathNotProcessed(path)) {
+			return;
+		}
+
 		Element entryEl = root.addElement("entry");
 
 		entryEl.addAttribute("path", path);
 
-		if (context.isPathNotProcessed(path)) {
-			if (context.getBooleanParameter(_NAMESPACE, "comments")) {
-				context.addComments(BlogsEntry.class, entry.getEntryId());
-			}
-
-			if (context.getBooleanParameter(_NAMESPACE, "ratings")) {
-				context.addRatingsEntries(BlogsEntry.class, entry.getEntryId());
-			}
-
-			if (context.getBooleanParameter(_NAMESPACE, "tags")) {
-				context.addTagsEntries(BlogsEntry.class, entry.getEntryId());
-			}
-
-			entry.setUserUuid(entry.getUserUuid());
-
-			context.addZipEntry(path, entry);
+		if (context.getBooleanParameter(_NAMESPACE, "comments")) {
+			context.addComments(BlogsEntry.class, entry.getEntryId());
 		}
+
+		if (context.getBooleanParameter(_NAMESPACE, "ratings")) {
+			context.addRatingsEntries(BlogsEntry.class, entry.getEntryId());
+		}
+
+		if (context.getBooleanParameter(_NAMESPACE, "tags")) {
+			context.addTagsEntries(BlogsEntry.class, entry.getEntryId());
+		}
+
+		entry.setUserUuid(entry.getUserUuid());
+
+		context.addZipEntry(path, entry);
 	}
 
 	protected String getEntryPath(

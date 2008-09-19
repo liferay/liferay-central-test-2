@@ -146,12 +146,14 @@ public class PollsPortletDataHandlerImpl implements PortletDataHandler {
 			for (Element questionEl : questionEls) {
 				String path = questionEl.attributeValue("path");
 
-				if (context.isPathNotProcessed(path)) {
-					PollsQuestion question =
-						(PollsQuestion)context.getZipEntryAsObject(path);
-
-					importQuestion(context, questionPKs, question);
+				if (!context.isPathNotProcessed(path)) {
+					continue;
 				}
+
+				PollsQuestion question =
+					(PollsQuestion)context.getZipEntryAsObject(path);
+
+				importQuestion(context, questionPKs, question);
 			}
 
 			List<Element> choiceEls = root.element("choices").elements(
@@ -163,12 +165,14 @@ public class PollsPortletDataHandlerImpl implements PortletDataHandler {
 			for (Element choiceEl : choiceEls) {
 				String path = choiceEl.attributeValue("path");
 
-				if (context.isPathNotProcessed(path)) {
-					PollsChoice choice =
-						(PollsChoice)context.getZipEntryAsObject(path);
-
-					importChoice(context, questionPKs, choicePKs, choice);
+				if (!context.isPathNotProcessed(path)) {
+					continue;
 				}
+
+				PollsChoice choice = (PollsChoice)context.getZipEntryAsObject(
+					path);
+
+				importChoice(context, questionPKs, choicePKs, choice);
 			}
 
 			if (context.getBooleanParameter(_NAMESPACE, "votes")) {
@@ -177,12 +181,14 @@ public class PollsPortletDataHandlerImpl implements PortletDataHandler {
 				for (Element voteEl : voteEls) {
 					String path = voteEl.attributeValue("path");
 
-					if (context.isPathNotProcessed(path)) {
-						PollsVote vote = (PollsVote)context.getZipEntryAsObject(
-							path);
-
-						importVote(context, questionPKs, choicePKs, vote);
+					if (!context.isPathNotProcessed(path)) {
+						continue;
 					}
+
+					PollsVote vote = (PollsVote)context.getZipEntryAsObject(
+						path);
+
+					importVote(context, questionPKs, choicePKs, vote);
 				}
 			}
 
@@ -203,13 +209,15 @@ public class PollsPortletDataHandlerImpl implements PortletDataHandler {
 
 		String path = getChoicePath(context, choice);
 
+		if (!context.isPathNotProcessed(path)) {
+			return;
+		}
+
 		Element choiceEl = questionsEl.addElement("choice");
 
 		choiceEl.addAttribute("path", path);
 
-		if (context.isPathNotProcessed(path)) {
-			context.addZipEntry(path, choice);
-		}
+		context.addZipEntry(path, choice);
 	}
 
 	protected void exportQuestion(
@@ -223,31 +231,33 @@ public class PollsPortletDataHandlerImpl implements PortletDataHandler {
 
 		String path = getQuestionPath(context, question);
 
+		if (!context.isPathNotProcessed(path)) {
+			return;
+		}
+
 		Element questionEl = questionsEl.addElement("question");
 
 		questionEl.addAttribute("path", path);
 
-		if (context.isPathNotProcessed(path)) {
-			question.setUserUuid(question.getUserUuid());
+		question.setUserUuid(question.getUserUuid());
 
-			List<PollsChoice> choices = PollsChoiceUtil.findByQuestionId(
+		List<PollsChoice> choices = PollsChoiceUtil.findByQuestionId(
+			question.getQuestionId());
+
+		for (PollsChoice choice : choices) {
+			exportChoice(context, choicesEl, choice);
+		}
+
+		if (context.getBooleanParameter(_NAMESPACE, "votes")) {
+			List<PollsVote> votes = PollsVoteUtil.findByQuestionId(
 				question.getQuestionId());
 
-			for (PollsChoice choice : choices) {
-				exportChoice(context, choicesEl, choice);
+			for (PollsVote vote : votes) {
+				exportVote(context, votesEl, vote);
 			}
-
-			if (context.getBooleanParameter(_NAMESPACE, "votes")) {
-				List<PollsVote> votes = PollsVoteUtil.findByQuestionId(
-					question.getQuestionId());
-
-				for (PollsVote vote : votes) {
-					exportVote(context, votesEl, vote);
-				}
-			}
-
-			context.addZipEntry(path, question);
 		}
+
+		context.addZipEntry(path, question);
 	}
 
 	protected void exportVote(
@@ -256,13 +266,15 @@ public class PollsPortletDataHandlerImpl implements PortletDataHandler {
 
 		String path = getVotePath(context, vote);
 
+		if (!context.isPathNotProcessed(path)) {
+			return;
+		}
+
 		Element voteEl = questionsEl.addElement("vote");
 
 		voteEl.addAttribute("path", path);
 
-		if (context.isPathNotProcessed(path)) {
-			context.addZipEntry(path, vote);
-		}
+		context.addZipEntry(path, vote);
 	}
 
 	protected void importChoice(

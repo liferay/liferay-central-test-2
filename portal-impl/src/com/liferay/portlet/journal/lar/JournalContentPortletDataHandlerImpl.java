@@ -277,13 +277,14 @@ public class JournalContentPortletDataHandlerImpl
 			for (Element folderEl : dlFolderEls) {
 				String path = folderEl.attributeValue("path");
 
-				if (context.isPathNotProcessed(path)) {
-					DLFolder folder = (DLFolder)context.getZipEntryAsObject(
-						path);
-
-					DLPortletDataHandlerImpl.importFolder(
-						context, dlFolderPKs, folder);
+				if (!context.isPathNotProcessed(path)) {
+					continue;
 				}
+
+				DLFolder folder = (DLFolder)context.getZipEntryAsObject(path);
+
+				DLPortletDataHandlerImpl.importFolder(
+					context, dlFolderPKs, folder);
 			}
 
 			Element dlFileEntriesEl = root.element("dl-file-entries");
@@ -299,16 +300,18 @@ public class JournalContentPortletDataHandlerImpl
 
 			for (Element fileEntryEl : dlFileEntryEls) {
 				String path = fileEntryEl.attributeValue("path");
+
+				if (!context.isPathNotProcessed(path)) {
+					continue;
+				}
+
+				DLFileEntry fileEntry =
+					(DLFileEntry)context.getZipEntryAsObject(path);
+
 				String binPath = fileEntryEl.attributeValue("bin-path");
 
-				if (context.isPathNotProcessed(path)) {
-					DLFileEntry fileEntry =
-						(DLFileEntry)context.getZipEntryAsObject(path);
-
-					DLPortletDataHandlerImpl.importFileEntry(
-						context, dlFolderPKs, fileEntryNames, fileEntry,
-						binPath);
-				}
+				DLPortletDataHandlerImpl.importFileEntry(
+					context, dlFolderPKs, fileEntryNames, fileEntry, binPath);
 			}
 
 			Element dlFileRanksEl = root.element("dl-file-ranks");
@@ -322,13 +325,15 @@ public class JournalContentPortletDataHandlerImpl
 			for (Element fileRankEl : dlFileRankEls) {
 				String path = fileRankEl.attributeValue("path");
 
-				if (context.isPathNotProcessed(path)) {
-					DLFileRank fileRank =
-						(DLFileRank)context.getZipEntryAsObject(path);
-
-					DLPortletDataHandlerImpl.importFileRank(
-						context, dlFolderPKs, fileEntryNames, fileRank);
+				if (!context.isPathNotProcessed(path)) {
+					continue;
 				}
+
+				DLFileRank fileRank =
+					(DLFileRank)context.getZipEntryAsObject(path);
+
+				DLPortletDataHandlerImpl.importFileRank(
+					context, dlFolderPKs, fileEntryNames, fileRank);
 			}
 
 			Element igFoldersEl = root.element("ig-folders");
@@ -345,13 +350,14 @@ public class JournalContentPortletDataHandlerImpl
 			for (Element folderEl : igFolderEls) {
 				String path = folderEl.attributeValue("path");
 
-				if (context.isPathNotProcessed(path)) {
-					IGFolder folder = (IGFolder)context.getZipEntryAsObject(
-						path);
-
-					IGPortletDataHandlerImpl.importFolder(
-						context, igFolderPKs, folder);
+				if (!context.isPathNotProcessed(path)) {
+					continue;
 				}
+
+				IGFolder folder = (IGFolder)context.getZipEntryAsObject(path);
+
+				IGPortletDataHandlerImpl.importFolder(
+					context, igFolderPKs, folder);
 			}
 
 			Element igImagesEl = root.element("ig-images");
@@ -364,14 +370,17 @@ public class JournalContentPortletDataHandlerImpl
 
 			for (Element imageEl : igImageEls) {
 				String path = imageEl.attributeValue("path");
+
+				if (!context.isPathNotProcessed(path)) {
+					continue;
+				}
+
+				IGImage image = (IGImage)context.getZipEntryAsObject(path);
+
 				String binPath = imageEl.attributeValue("bin-path");
 
-				if (context.isPathNotProcessed(path)) {
-					IGImage image = (IGImage)context.getZipEntryAsObject(path);
-
-					IGPortletDataHandlerImpl.importImage(
-						context, igFolderPKs, image, binPath);
-				}
+				IGPortletDataHandlerImpl.importImage(
+					context, igFolderPKs, image, binPath);
 			}
 
 			return prefs;

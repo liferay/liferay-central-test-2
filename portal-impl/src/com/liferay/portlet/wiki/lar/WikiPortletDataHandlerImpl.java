@@ -149,11 +149,13 @@ public class WikiPortletDataHandlerImpl implements PortletDataHandler {
 			for (Element nodeEl : nodeEls) {
 				String path = nodeEl.attributeValue("path");
 
-				if (context.isPathNotProcessed(path)) {
-					WikiNode node = (WikiNode)context.getZipEntryAsObject(path);
-
-					importNode(context, nodePKs, node);
+				if (!context.isPathNotProcessed(path)) {
+					continue;
 				}
+
+				WikiNode node = (WikiNode)context.getZipEntryAsObject(path);
+
+				importNode(context, nodePKs, node);
 			}
 
 			List<Element> pageEls = root.element("pages").elements("page");
@@ -161,11 +163,13 @@ public class WikiPortletDataHandlerImpl implements PortletDataHandler {
 			for (Element pageEl : pageEls) {
 				String path = pageEl.attributeValue("path");
 
-				if (context.isPathNotProcessed(path)) {
-					WikiPage page = (WikiPage)context.getZipEntryAsObject(path);
-
-					importPage(context, nodePKs, pageEl, page);
+				if (!context.isPathNotProcessed(path)) {
+					continue;
 				}
+
+				WikiPage page = (WikiPage)context.getZipEntryAsObject(path);
+
+				importPage(context, nodePKs, pageEl, page);
 			}
 
 			return null;
@@ -187,11 +191,11 @@ public class WikiPortletDataHandlerImpl implements PortletDataHandler {
 		if (context.isWithinDateRange(node.getModifiedDate())) {
 			String path = getNodePath(context, node);
 
-			Element nodeEl = nodesEl.addElement("node");
-
-			nodeEl.addAttribute("path", path);
-
 			if (context.isPathNotProcessed(path)) {
+				Element nodeEl = nodesEl.addElement("node");
+
+				nodeEl.addAttribute("path", path);
+
 				node.setUserUuid(node.getUserUuid());
 
 				context.addZipEntry(path, node);
@@ -217,15 +221,17 @@ public class WikiPortletDataHandlerImpl implements PortletDataHandler {
 
 		String path = getNodePath(context, node);
 
+		if (!context.isPathNotProcessed(path)) {
+			return;
+		}
+
 		Element nodeEl = nodesEl.addElement("node");
 
 		nodeEl.addAttribute("path", path);
 
-		if (context.isPathNotProcessed(path)) {
-			node.setUserUuid(node.getUserUuid());
+		node.setUserUuid(node.getUserUuid());
 
-			context.addZipEntry(path, node);
-		}
+		context.addZipEntry(path, node);
 	}
 
 	protected void exportPage(
@@ -239,11 +245,11 @@ public class WikiPortletDataHandlerImpl implements PortletDataHandler {
 
 		String path = getPagePath(context, page);
 
-		Element pageEl = pagesEl.addElement("page");
-
-		pageEl.addAttribute("path", path);
-
 		if (context.isPathNotProcessed(path)) {
+			Element pageEl = pagesEl.addElement("page");
+
+			pageEl.addAttribute("path", path);
+
 			page.setUserUuid(page.getUserUuid());
 
 			if (context.getBooleanParameter(_NAMESPACE, "comments")) {

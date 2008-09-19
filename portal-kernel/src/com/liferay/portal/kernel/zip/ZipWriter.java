@@ -23,6 +23,7 @@
 package com.liferay.portal.kernel.zip;
 
 import com.liferay.portal.kernel.util.ByteArrayMaker;
+import com.liferay.portal.kernel.util.StringPool;
 
 import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
@@ -55,6 +56,10 @@ public class ZipWriter implements Serializable {
 	}
 
 	public void addEntry(String name, byte[] bytes) throws IOException {
+		if (name.startsWith(StringPool.SLASH)) {
+			name = name.substring(1);
+		}
+
 		ZipEntry entry = new ZipEntry(name);
 
 		_zos.putNextEntry(entry);

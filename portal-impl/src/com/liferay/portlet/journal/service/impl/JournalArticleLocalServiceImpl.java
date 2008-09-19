@@ -1959,8 +1959,8 @@ public class JournalArticleLocalServiceImpl
 				Element root = doc.getRootElement();
 
 				format(
-					groupId, articleId, version, incrementVersion,
-					root, images);
+					groupId, articleId, version, incrementVersion, root,
+					images);
 
 				content = JournalUtil.formatXML(doc);
 			}
@@ -2012,8 +2012,7 @@ public class JournalArticleLocalServiceImpl
 				dynamicContent.setText(text);
 			}*/
 
-			format(
-				groupId, articleId, version, incrementVersion, el, images);
+			format(groupId, articleId, version, incrementVersion, el, images);
 		}
 	}
 

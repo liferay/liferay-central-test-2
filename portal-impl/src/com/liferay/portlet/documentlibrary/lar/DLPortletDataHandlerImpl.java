@@ -87,14 +87,16 @@ public class DLPortletDataHandlerImpl implements PortletDataHandler {
 		}
 
 		String path = getFileEntryPath(context, fileEntry);
-		String binPath = getFileEntryBinPath(context, fileEntry);
-
-		Element fileEntryEl = fileEntriesEl.addElement("file-entry");
-
-		fileEntryEl.addAttribute("path", path);
-		fileEntryEl.addAttribute("bin-path", binPath);
 
 		if (context.isPathNotProcessed(path)) {
+			Element fileEntryEl = fileEntriesEl.addElement("file-entry");
+
+			fileEntryEl.addAttribute("path", path);
+
+			String binPath = getFileEntryBinPath(context, fileEntry);
+
+			fileEntryEl.addAttribute("bin-path", binPath);
+
 			fileEntry.setUserUuid(fileEntry.getUserUuid());
 
 			if (context.getBooleanParameter(_NAMESPACE, "comments")) {
@@ -149,11 +151,11 @@ public class DLPortletDataHandlerImpl implements PortletDataHandler {
 		if (context.isWithinDateRange(folder.getModifiedDate())) {
 			String path = getFolderPath(context, folder);
 
-			Element folderEl = foldersEl.addElement("folder");
-
-			folderEl.addAttribute("path", path);
-
 			if (context.isPathNotProcessed(path)) {
+				Element folderEl = foldersEl.addElement("folder");
+
+				folderEl.addAttribute("path", path);
+
 				folder.setUserUuid(folder.getUserUuid());
 
 				context.addZipEntry(path, folder);
@@ -435,12 +437,13 @@ public class DLPortletDataHandlerImpl implements PortletDataHandler {
 			for (Element folderEl : folderEls) {
 				String path = folderEl.attributeValue("path");
 
-				if (context.isPathNotProcessed(path)) {
-					DLFolder folder = (DLFolder)context.getZipEntryAsObject(
-						path);
-
-					importFolder(context, folderPKs, folder);
+				if (!context.isPathNotProcessed(path)) {
+					continue;
 				}
+
+				DLFolder folder = (DLFolder)context.getZipEntryAsObject(path);
+
+				importFolder(context, folderPKs, folder);
 			}
 
 			List<Element> fileEntryEls = root.element("file-entries").elements(
@@ -451,15 +454,18 @@ public class DLPortletDataHandlerImpl implements PortletDataHandler {
 
 			for (Element fileEntryEl : fileEntryEls) {
 				String path = fileEntryEl.attributeValue("path");
+
+				if (!context.isPathNotProcessed(path)) {
+					continue;
+				}
+
+				DLFileEntry fileEntry =
+					(DLFileEntry)context.getZipEntryAsObject(path);
+
 				String binPath = fileEntryEl.attributeValue("bin-path");
 
-				if (context.isPathNotProcessed(path)) {
-					DLFileEntry fileEntry =
-						(DLFileEntry)context.getZipEntryAsObject(path);
-
-					importFileEntry(
-						context, folderPKs, fileEntryNames, fileEntry, binPath);
-				}
+				importFileEntry(
+					context, folderPKs, fileEntryNames, fileEntry, binPath);
 			}
 
 			if (context.getBooleanParameter(_NAMESPACE, "shortcuts")) {
@@ -469,13 +475,15 @@ public class DLPortletDataHandlerImpl implements PortletDataHandler {
 				for (Element fileShortcutEl : fileShortcutEls) {
 					String path = fileShortcutEl.attributeValue("path");
 
-					if (context.isPathNotProcessed(path)) {
-						DLFileShortcut fileShortcut =
-							(DLFileShortcut)context.getZipEntryAsObject(path);
-
-						importFileShortcut(
-							context, folderPKs, fileEntryNames, fileShortcut);
+					if (!context.isPathNotProcessed(path)) {
+						continue;
 					}
+
+					DLFileShortcut fileShortcut =
+						(DLFileShortcut)context.getZipEntryAsObject(path);
+
+					importFileShortcut(
+						context, folderPKs, fileEntryNames, fileShortcut);
 				}
 			}
 
@@ -486,13 +494,15 @@ public class DLPortletDataHandlerImpl implements PortletDataHandler {
 				for (Element fileRankEl : fileRankEls) {
 					String path = fileRankEl.attributeValue("path");
 
-					if (context.isPathNotProcessed(path)) {
-						DLFileRank fileRank =
-							(DLFileRank)context.getZipEntryAsObject(path);
-
-						importFileRank(
-							context, folderPKs, fileEntryNames, fileRank);
+					if (!context.isPathNotProcessed(path)) {
+						continue;
 					}
+
+					DLFileRank fileRank =
+						(DLFileRank)context.getZipEntryAsObject(path);
+
+					importFileRank(
+						context, folderPKs, fileEntryNames, fileRank);
 				}
 			}
 
@@ -514,15 +524,17 @@ public class DLPortletDataHandlerImpl implements PortletDataHandler {
 
 		String path = getFileRankPath(context, fileRank);
 
+		if (!context.isPathNotProcessed(path)) {
+			return;
+		}
+
 		Element fileRankEl = fileRanksEl.addElement("file-rank");
 
 		fileRankEl.addAttribute("path", path);
 
-		if (context.isPathNotProcessed(path)) {
-			fileRank.setUserUuid(fileRank.getUserUuid());
+		fileRank.setUserUuid(fileRank.getUserUuid());
 
-			context.addZipEntry(path, fileRank);
-		}
+		context.addZipEntry(path, fileRank);
 	}
 
 	protected static void exportFileShortcut(
@@ -532,11 +544,12 @@ public class DLPortletDataHandlerImpl implements PortletDataHandler {
 
 		String path = getFileShortcutPath(context, fileShortcut);
 
-		Element fileShortcutEl = fileShortcutsEl.addElement("file-shortcut");
-
-		fileShortcutEl.addAttribute("path", path);
-
 		if (context.isPathNotProcessed(path)) {
+			Element fileShortcutEl = fileShortcutsEl.addElement(
+				"file-shortcut");
+
+			fileShortcutEl.addAttribute("path", path);
+
 			fileShortcut.setUserUuid(fileShortcut.getUserUuid());
 
 			context.addZipEntry(path, fileShortcut);
@@ -557,11 +570,11 @@ public class DLPortletDataHandlerImpl implements PortletDataHandler {
 
 		String path = getFolderPath(context, folder);
 
-		Element folderEl = foldersEl.addElement("folder");
-
-		folderEl.addAttribute("path", path);
-
 		if (context.isPathNotProcessed(path)) {
+			Element folderEl = foldersEl.addElement("folder");
+
+			folderEl.addAttribute("path", path);
+
 			folder.setUserUuid(folder.getUserUuid());
 
 			context.addZipEntry(path, folder);

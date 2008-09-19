@@ -121,12 +121,13 @@ public class CalendarPortletDataHandlerImpl implements PortletDataHandler {
 			for (Element eventEl : eventsEl) {
 				String path = eventEl.attributeValue("path");
 
-				if (context.isPathNotProcessed(path)) {
-					CalEvent event = (CalEvent)context.getZipEntryAsObject(
-						path);
-
-					importEvent(context, event);
+				if (!context.isPathNotProcessed(path)) {
+					continue;
 				}
+
+				CalEvent event = (CalEvent)context.getZipEntryAsObject(path);
+
+				importEvent(context, event);
 			}
 
 			return null;
@@ -150,15 +151,17 @@ public class CalendarPortletDataHandlerImpl implements PortletDataHandler {
 
 		String path = getEventPath(context, event);
 
+		if (!context.isPathNotProcessed(path)) {
+			return;
+		}
+
 		Element eventEl = root.addElement("event");
 
 		eventEl.addAttribute("path", path);
 
-		if (context.isPathNotProcessed(path)) {
-			event.setUserUuid(event.getUserUuid());
+		event.setUserUuid(event.getUserUuid());
 
-			context.addZipEntry(path, event);
-		}
+		context.addZipEntry(path, event);
 	}
 
 	protected String getEventPath(PortletDataContext context, CalEvent event) {

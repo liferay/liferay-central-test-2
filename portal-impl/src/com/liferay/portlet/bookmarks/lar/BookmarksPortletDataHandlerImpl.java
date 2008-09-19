@@ -141,12 +141,14 @@ public class BookmarksPortletDataHandlerImpl implements PortletDataHandler {
 			for (Element folderEl : folderEls) {
 				String path = folderEl.attributeValue("path");
 
-				if (context.isPathNotProcessed(path)) {
-					BookmarksFolder folder =
-						(BookmarksFolder)context.getZipEntryAsObject(path);
-
-					importFolder(context, folderPKs, folder);
+				if (!context.isPathNotProcessed(path)) {
+					continue;
 				}
+
+				BookmarksFolder folder =
+					(BookmarksFolder)context.getZipEntryAsObject(path);
+
+				importFolder(context, folderPKs, folder);
 			}
 
 			List<Element> entryEls = root.element("entries").elements("entry");
@@ -154,12 +156,14 @@ public class BookmarksPortletDataHandlerImpl implements PortletDataHandler {
 			for (Element entryEl : entryEls) {
 				String path = entryEl.attributeValue("path");
 
-				if (context.isPathNotProcessed(path)) {
-					BookmarksEntry entry =
-						(BookmarksEntry)context.getZipEntryAsObject(path);
-
-					importEntry(context, folderPKs, entry);
+				if (!context.isPathNotProcessed(path)) {
+					continue;
 				}
+
+				BookmarksEntry entry =
+					(BookmarksEntry)context.getZipEntryAsObject(path);
+
+				importEntry(context, folderPKs, entry);
 			}
 
 			return null;
@@ -181,11 +185,11 @@ public class BookmarksPortletDataHandlerImpl implements PortletDataHandler {
 		if (context.isWithinDateRange(folder.getModifiedDate())) {
 			String path = getFolderPath(context, folder);
 
-			Element folderEl = foldersEl.addElement("folder");
-
-			folderEl.addAttribute("path", path);
-
 			if (context.isPathNotProcessed(path)) {
+				Element folderEl = foldersEl.addElement("folder");
+
+				folderEl.addAttribute("path", path);
+
 				folder.setUserUuid(folder.getUserUuid());
 
 				context.addZipEntry(path, folder);
@@ -213,11 +217,11 @@ public class BookmarksPortletDataHandlerImpl implements PortletDataHandler {
 
 		String path = getEntryPath(context, entry);
 
-		Element entryEl = entriesEl.addElement("entry");
-
-		entryEl.addAttribute("path", path);
-
 		if (context.isPathNotProcessed(path)) {
+			Element entryEl = entriesEl.addElement("entry");
+
+			entryEl.addAttribute("path", path);
+
 			if (context.getBooleanParameter(_NAMESPACE, "tags")) {
 				context.addTagsEntries(
 					BookmarksEntry.class, entry.getEntryId());
@@ -243,11 +247,11 @@ public class BookmarksPortletDataHandlerImpl implements PortletDataHandler {
 
 		String path = getFolderPath(context, folder);
 
-		Element folderEl = foldersEl.addElement("folder");
-
-		folderEl.addAttribute("path", path);
-
 		if (context.isPathNotProcessed(path)) {
+			Element folderEl = foldersEl.addElement("folder");
+
+			folderEl.addAttribute("path", path);
+
 			folder.setUserUuid(folder.getUserUuid());
 
 			context.addZipEntry(path, folder);

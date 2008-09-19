@@ -81,12 +81,12 @@ public class IGPortletDataHandlerImpl implements PortletDataHandler {
 
 		String path = getImagePath(context, image);
 
-		Element imageEl = imagesEl.addElement("image");
-
-		imageEl.addAttribute("path", path);
-		imageEl.addAttribute("bin-path", getImageBinPath(context, image));
-
 		if (context.isPathNotProcessed(path)) {
+			Element imageEl = imagesEl.addElement("image");
+
+			imageEl.addAttribute("path", path);
+			imageEl.addAttribute("bin-path", getImageBinPath(context, image));
+
 			if (context.getBooleanParameter(_NAMESPACE, "tags")) {
 				context.addTagsEntries(IGImage.class, image.getImageId());
 			}
@@ -321,25 +321,29 @@ public class IGPortletDataHandlerImpl implements PortletDataHandler {
 			for (Element folderEl : folderEls) {
 				String path = folderEl.attributeValue("path");
 
-				if (context.isPathNotProcessed(path)) {
-					IGFolder folder = (IGFolder)context.getZipEntryAsObject(
-						path);
-
-					importFolder(context, folderPKs, folder);
+				if (!context.isPathNotProcessed(path)) {
+					continue;
 				}
+
+				IGFolder folder = (IGFolder)context.getZipEntryAsObject(path);
+
+				importFolder(context, folderPKs, folder);
 			}
 
 			List<Element> imageEls = root.element("images").elements("image");
 
 			for (Element imageEl : imageEls) {
 				String path = imageEl.attributeValue("path");
+
+				if (!context.isPathNotProcessed(path)) {
+					continue;
+				}
+
+				IGImage image = (IGImage)context.getZipEntryAsObject(path);
+
 				String binPath = imageEl.attributeValue("bin-path");
 
-				if (context.isPathNotProcessed(path)) {
-					IGImage image = (IGImage)context.getZipEntryAsObject(path);
-
-					importImage(context, folderPKs, image, binPath);
-				}
+				importImage(context, folderPKs, image, binPath);
 			}
 
 			return null;
@@ -361,11 +365,11 @@ public class IGPortletDataHandlerImpl implements PortletDataHandler {
 		if (context.isWithinDateRange(folder.getModifiedDate())) {
 			String path = getFolderPath(context, folder);
 
-			Element folderEl = foldersEl.addElement("folder");
-
-			folderEl.addAttribute("path", path);
-
 			if (context.isPathNotProcessed(path)) {
+				Element folderEl = foldersEl.addElement("folder");
+
+				folderEl.addAttribute("path", path);
+
 				folder.setUserUuid(folder.getUserUuid());
 
 				context.addZipEntry(path, folder);
@@ -393,11 +397,11 @@ public class IGPortletDataHandlerImpl implements PortletDataHandler {
 
 		String path = getFolderPath(context, folder);
 
-		Element folderEl = foldersEl.addElement("folder");
-
-		folderEl.addAttribute("path", path);
-
 		if (context.isPathNotProcessed(path)) {
+			Element folderEl = foldersEl.addElement("folder");
+
+			folderEl.addAttribute("path", path);
+
 			folder.setUserUuid(folder.getUserUuid());
 
 			context.addZipEntry(path, folder);

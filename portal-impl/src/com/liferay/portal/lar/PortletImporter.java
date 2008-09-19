@@ -436,7 +436,6 @@ public class PortletImporter {
 			String path = prefEl.attributeValue("path");
 
 			if (context.isPathNotProcessed(path)) {
-
 				Element el = null;
 				String preferences = null;
 
