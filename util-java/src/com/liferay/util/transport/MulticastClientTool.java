@@ -43,7 +43,7 @@ import org.apache.commons.logging.LogFactory;
 public class MulticastClientTool {
 
 	public static void main(String[] args) {
-        try {
+		try {
 			new MulticastClientTool(args);
 		}
 		catch (Exception e) {
@@ -129,6 +129,6 @@ public class MulticastClientTool {
 	}
 
 	private static final Log _log = LogFactory.getLog(
-    	MulticastClientTool.class);
+		MulticastClientTool.class);
 
 }

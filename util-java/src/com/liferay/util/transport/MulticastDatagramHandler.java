@@ -112,7 +112,7 @@ public class MulticastDatagramHandler implements DatagramHandler {
 	}
 
 	private static final Log _log = LogFactory.getLog(
-    	MulticastDatagramHandler.class);
+		MulticastDatagramHandler.class);
 
 	private boolean _gzipData;
 	private boolean _shortData;
