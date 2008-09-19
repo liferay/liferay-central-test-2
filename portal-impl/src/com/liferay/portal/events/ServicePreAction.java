@@ -358,7 +358,7 @@ public class ServicePreAction extends Action {
 
 		if (publicLARFile != null) {
 			addDefaultLayoutsByLAR(
-				user.getUserId(), userGroup.getGroupId(), true, publicLARFile);
+				user.getUserId(), userGroup.getGroupId(), false, publicLARFile);
 		}
 		else {
 			addDefaultUserPublicLayoutByProperties(
