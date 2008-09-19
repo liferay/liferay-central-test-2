@@ -106,6 +106,13 @@ public class DLFolderPermission {
 
 			folderId = folder.getParentFolderId();
 
+			if (permissionChecker.hasOwnerPermission(
+				folder.getCompanyId(), DLFolder.class.getName(),
+				folder.getFolderId(), folder.getUserId(), actionId)) {
+
+				return true;
+			}
+
 			if (permissionChecker.hasPermission(
 					folder.getGroupId(), DLFolder.class.getName(),
 					folder.getFolderId(), actionId)) {

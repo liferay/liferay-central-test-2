@@ -23,13 +23,17 @@
 package com.liferay.portlet.enterpriseadmin.action;
 
 import com.liferay.portal.NoSuchRoleException;
+import com.liferay.portal.RoleAssignmentException;
 import com.liferay.portal.kernel.servlet.SessionErrors;
 import com.liferay.portal.kernel.util.Constants;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
+import com.liferay.portal.model.Role;
+import com.liferay.portal.model.impl.RoleImpl;
 import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.service.GroupServiceUtil;
+import com.liferay.portal.service.RoleServiceUtil;
 import com.liferay.portal.service.UserServiceUtil;
 import com.liferay.portal.struts.PortletAction;
 
@@ -75,7 +79,8 @@ public class EditRoleAssignmentsAction extends PortletAction {
 		}
 		catch (Exception e) {
 			if (e instanceof NoSuchRoleException ||
-				e instanceof PrincipalException) {
+				e instanceof PrincipalException ||
+				e instanceof RoleAssignmentException) {
 
 				SessionErrors.add(actionRequest, e.getClass().getName());
 
@@ -117,6 +122,12 @@ public class EditRoleAssignmentsAction extends PortletAction {
 
 		long roleId = ParamUtil.getLong(actionRequest, "roleId");
 
+		Role role = RoleServiceUtil.getRole(roleId);
+
+		if (role.getName().equals(RoleImpl.OWNER)) {
+			throw new RoleAssignmentException(role.getName());
+		}
+
 		long[] addGroupIds = StringUtil.split(
 			ParamUtil.getString(actionRequest, "addGroupIds"), 0L);
 		long[] removeGroupIds = StringUtil.split(
@@ -130,6 +141,12 @@ public class EditRoleAssignmentsAction extends PortletAction {
 		throws Exception {
 
 		long roleId = ParamUtil.getLong(actionRequest, "roleId");
+
+		Role role = RoleServiceUtil.getRole(roleId);
+
+		if (role.getName().equals(RoleImpl.OWNER)) {
+			throw new RoleAssignmentException(role.getName());
+		}
 
 		long[] addUserIds = StringUtil.split(
 			ParamUtil.getString(actionRequest, "addUserIds"), 0L);

@@ -73,6 +73,14 @@ public class SCProductEntryPermission {
 		PermissionChecker permissionChecker, SCProductEntry productEntry,
 		String actionId) {
 
+		if (permissionChecker.hasOwnerPermission(
+			productEntry.getCompanyId(), SCProductEntry.class.getName(),
+			productEntry.getProductEntryId(), productEntry.getUserId(),
+			actionId)) {
+
+			return true;
+		}
+
 		return permissionChecker.hasPermission(
 			productEntry.getGroupId(), SCProductEntry.class.getName(),
 			productEntry.getProductEntryId(), actionId);

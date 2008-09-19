@@ -72,6 +72,13 @@ public class PollsQuestionPermission {
 		PermissionChecker permissionChecker, PollsQuestion question,
 		String actionId) {
 
+		if (permissionChecker.hasOwnerPermission(
+			question.getCompanyId(), PollsQuestion.class.getName(),
+			question.getQuestionId(), question.getUserId(), actionId)) {
+
+			return true;
+		}
+
 		return permissionChecker.hasPermission(
 			question.getGroupId(), PollsQuestion.class.getName(),
 			question.getQuestionId(), actionId);

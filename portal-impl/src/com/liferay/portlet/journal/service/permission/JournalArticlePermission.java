@@ -72,6 +72,13 @@ public class JournalArticlePermission {
 		PermissionChecker permissionChecker, JournalArticle article,
 		String actionId) {
 
+		if (permissionChecker.hasOwnerPermission(
+			article.getCompanyId(), JournalArticle.class.getName(),
+			article.getPrimaryKey(), article.getUserId(), actionId)) {
+
+			return true;
+		}
+
 		return permissionChecker.hasPermission(
 			article.getGroupId(), JournalArticle.class.getName(),
 			article.getResourcePrimKey(), actionId);

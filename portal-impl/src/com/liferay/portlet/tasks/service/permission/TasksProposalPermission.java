@@ -72,6 +72,13 @@ public class TasksProposalPermission {
 		PermissionChecker permissionChecker, TasksProposal proposal,
 		String actionId) {
 
+		if (permissionChecker.hasOwnerPermission(
+			proposal.getCompanyId(), TasksProposal.class.getName(),
+			proposal.getProposalId(), proposal.getUserId(), actionId)) {
+
+			return true;
+		}
+
 		return permissionChecker.hasPermission(
 			proposal.getGroupId(), TasksProposal.class.getName(),
 			proposal.getProposalId(), actionId);

@@ -72,14 +72,16 @@ public class TagsVocabularyPermission {
 		PermissionChecker permissionChecker, TagsVocabulary vocabulary,
 		String actionId) {
 
-		if (permissionChecker.hasPermission(
-				vocabulary.getGroupId(), TagsVocabulary.class.getName(),
-				vocabulary.getVocabularyId(), actionId)) {
+		if (permissionChecker.hasOwnerPermission(
+			vocabulary.getCompanyId(), TagsVocabulary.class.getName(),
+			vocabulary.getVocabularyId(), vocabulary.getUserId(), actionId)) {
 
 			return true;
 		}
 
-		return false;
+		return permissionChecker.hasPermission(
+			vocabulary.getGroupId(), TagsVocabulary.class.getName(),
+			vocabulary.getVocabularyId(), actionId);
 	}
 
 }

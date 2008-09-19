@@ -112,6 +112,13 @@ public class ShoppingCategoryPermission {
 
 			categoryId = category.getParentCategoryId();
 
+			if (permissionChecker.hasOwnerPermission(
+				category.getCompanyId(), ShoppingCategory.class.getName(),
+				category.getCategoryId(), category.getUserId(), actionId)) {
+
+				return true;
+			}
+
 			if (permissionChecker.hasPermission(
 					category.getGroupId(), ShoppingCategory.class.getName(),
 					category.getCategoryId(), actionId)) {

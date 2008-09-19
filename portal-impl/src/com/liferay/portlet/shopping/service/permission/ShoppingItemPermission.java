@@ -70,6 +70,13 @@ public class ShoppingItemPermission {
 		PermissionChecker permissionChecker, ShoppingItem item,
 		String actionId) {
 
+		if (permissionChecker.hasOwnerPermission(
+			item.getCompanyId(), ShoppingItem.class.getName(),
+			item.getItemId(), item.getUserId(), actionId)) {
+
+			return true;
+		}
+
 		ShoppingCategory category = item.getCategory();
 
 		return permissionChecker.hasPermission(

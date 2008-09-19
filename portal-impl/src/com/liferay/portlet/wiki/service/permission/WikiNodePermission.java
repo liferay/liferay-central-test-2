@@ -87,6 +87,13 @@ public class WikiNodePermission {
 	public static boolean contains(
 		PermissionChecker permissionChecker, WikiNode node, String actionId) {
 
+		if (permissionChecker.hasOwnerPermission(
+			node.getCompanyId(), WikiNode.class.getName(), node.getNodeId(),
+			node.getUserId(), actionId)) {
+
+			return true;
+		}
+
 		return permissionChecker.hasPermission(
 			node.getGroupId(), WikiNode.class.getName(), node.getNodeId(),
 			actionId);

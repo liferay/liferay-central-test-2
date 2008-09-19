@@ -74,6 +74,13 @@ public class DLFileEntryPermission {
 		PermissionChecker permissionChecker, DLFileEntry fileEntry,
 		String actionId) {
 
+		if (permissionChecker.hasOwnerPermission(
+			fileEntry.getCompanyId(), DLFileEntry.class.getName(),
+			fileEntry.getFileEntryId(), fileEntry.getUserId(), actionId)) {
+
+			return true;
+		}
+
 		DLFolder folder = fileEntry.getFolder();
 
 		return permissionChecker.hasPermission(

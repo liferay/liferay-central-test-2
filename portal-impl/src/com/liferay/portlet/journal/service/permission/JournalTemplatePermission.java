@@ -72,6 +72,13 @@ public class JournalTemplatePermission {
 		PermissionChecker permissionChecker, JournalTemplate template,
 		String actionId) {
 
+		if (permissionChecker.hasOwnerPermission(
+			template.getCompanyId(), JournalTemplate.class.getName(),
+			template.getPrimaryKey(), template.getUserId(), actionId)) {
+
+			return true;
+		}
+
 		return permissionChecker.hasPermission(
 			template.getGroupId(), JournalTemplate.class.getName(),
 			template.getId(), actionId);

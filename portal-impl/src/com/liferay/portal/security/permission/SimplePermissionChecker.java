@@ -30,6 +30,13 @@ package com.liferay.portal.security.permission;
  */
 public class SimplePermissionChecker extends BasePermissionChecker {
 
+	public boolean hasOwnerPermission(
+		long companyId, String name, String primKey, long ownerId,
+		String actionId) {
+
+		return hasPermission(actionId);
+	}
+
 	public boolean hasPermission(
 		long groupId, String name, String primKey, String actionId) {
 

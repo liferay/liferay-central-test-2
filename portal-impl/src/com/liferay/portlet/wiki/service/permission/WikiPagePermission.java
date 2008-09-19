@@ -78,6 +78,13 @@ public class WikiPagePermission {
 	public static boolean contains(
 		PermissionChecker permissionChecker, WikiPage page, String actionId) {
 
+		if (permissionChecker.hasOwnerPermission(
+			page.getCompanyId(), WikiPage.class.getName(), page.getPageId(),
+			page.getUserId(), actionId)) {
+
+			return true;
+		}
+
 		WikiNode node = page.getNode();
 
 		return permissionChecker.hasPermission(

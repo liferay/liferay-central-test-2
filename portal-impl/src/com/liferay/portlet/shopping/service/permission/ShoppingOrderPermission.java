@@ -83,6 +83,13 @@ public class ShoppingOrderPermission {
 			return true;
 		}
 		else {
+			if (permissionChecker.hasOwnerPermission(
+				order.getCompanyId(), ShoppingOrder.class.getName(),
+				order.getOrderId(), order.getUserId(), actionId)) {
+
+				return true;
+			}
+
 			return permissionChecker.hasPermission(
 				order.getGroupId(), ShoppingOrder.class.getName(),
 				order.getOrderId(), actionId);

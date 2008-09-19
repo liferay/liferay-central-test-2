@@ -37,6 +37,8 @@ public class RoleImpl extends RoleModelImpl implements Role {
 
 	public static final String GUEST = RoleNames.GUEST;
 
+	public static final String OWNER = RoleNames.OWNER;
+
 	public static final String POWER_USER = RoleNames.POWER_USER;
 
 	public static final String USER = RoleNames.USER;

@@ -23,6 +23,7 @@
 package com.liferay.portlet.enterpriseadmin.action;
 
 import com.liferay.portal.NoSuchRoleException;
+import com.liferay.portal.RolePermissionsException;
 import com.liferay.portal.kernel.servlet.SessionErrors;
 import com.liferay.portal.kernel.servlet.SessionMessages;
 import com.liferay.portal.kernel.util.ArrayUtil;
@@ -84,7 +85,8 @@ public class EditRolePermissionsAction extends PortletAction {
 		}
 		catch (Exception e) {
 			if (e instanceof NoSuchRoleException ||
-				e instanceof PrincipalException) {
+				e instanceof PrincipalException ||
+				e instanceof RolePermissionsException) {
 
 				SessionErrors.add(actionRequest, e.getClass().getName());
 
@@ -131,6 +133,18 @@ public class EditRolePermissionsAction extends PortletAction {
 		long roleId = ParamUtil.getLong(actionRequest, "roleId");
 		long permissionId = ParamUtil.getLong(actionRequest, "permissionId");
 
+		Role role = RoleServiceUtil.getRole(roleId);
+
+		if (role.getName().equals(RoleImpl.ADMINISTRATOR) ||
+			role.getName().equals(RoleImpl.OWNER) ||
+			role.getName().equals(RoleImpl.COMMUNITY_ADMINISTRATOR) ||
+			role.getName().equals(RoleImpl.COMMUNITY_OWNER) ||
+			role.getName().equals(RoleImpl.ORGANIZATION_ADMINISTRATOR) ||
+			role.getName().equals(RoleImpl.ORGANIZATION_OWNER)) {
+
+			throw new RolePermissionsException(role.getName());
+		}
+
 		PermissionServiceUtil.unsetRolePermission(
 			roleId, themeDisplay.getScopeGroupId(), permissionId);
 
@@ -151,6 +165,18 @@ public class EditRolePermissionsAction extends PortletAction {
 			WebKeys.THEME_DISPLAY);
 
 		long roleId = ParamUtil.getLong(actionRequest, "roleId");
+
+		Role role = RoleServiceUtil.getRole(roleId);
+
+		if (role.getName().equals(RoleImpl.ADMINISTRATOR) ||
+			role.getName().equals(RoleImpl.OWNER) ||
+			role.getName().equals(RoleImpl.COMMUNITY_ADMINISTRATOR) ||
+			role.getName().equals(RoleImpl.COMMUNITY_OWNER) ||
+			role.getName().equals(RoleImpl.ORGANIZATION_ADMINISTRATOR) ||
+			role.getName().equals(RoleImpl.ORGANIZATION_OWNER)) {
+
+			throw new RolePermissionsException(role.getName());
+		}
 
 		String portletResource = ParamUtil.getString(
 			actionRequest, "portletResource");
@@ -184,8 +210,6 @@ public class EditRolePermissionsAction extends PortletAction {
 				actions,
 				new ActionComparator(
 					themeDisplay.getCompanyId(), themeDisplay.getLocale()));
-
-			Role role = RoleServiceUtil.getRole(roleId);
 
 			for (String actionId : actions) {
 				int scope = ParamUtil.getInteger(

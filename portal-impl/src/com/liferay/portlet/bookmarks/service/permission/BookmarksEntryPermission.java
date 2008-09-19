@@ -72,6 +72,13 @@ public class BookmarksEntryPermission {
 		PermissionChecker permissionChecker, BookmarksEntry entry,
 		String actionId) {
 
+		if (permissionChecker.hasOwnerPermission(
+			entry.getCompanyId(), BookmarksEntry.class.getName(),
+			entry.getEntryId(), entry.getUserId(), actionId)) {
+
+			return true;
+		}
+
 		BookmarksFolder folder = entry.getFolder();
 
 		return permissionChecker.hasPermission(

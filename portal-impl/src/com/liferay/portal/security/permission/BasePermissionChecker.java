@@ -22,8 +22,11 @@
 
 package com.liferay.portal.security.permission;
 
+import com.liferay.portal.model.Role;
 import com.liferay.portal.model.User;
+import com.liferay.portal.service.RoleLocalServiceUtil;
 import com.liferay.portal.service.UserLocalServiceUtil;
+import com.liferay.portal.util.RoleNames;
 import com.liferay.portlet.admin.util.OmniadminUtil;
 
 import javax.portlet.PortletRequest;
@@ -39,8 +42,20 @@ import org.apache.commons.logging.LogFactory;
  */
 public abstract class BasePermissionChecker implements PermissionChecker {
 
+	public long getOwnerRoleId () {
+		return ownerRole.getRoleId();
+	}
+
 	public long getUserId() {
 		return user.getUserId();
+	}
+
+	public boolean hasOwnerPermission(
+		long companyId, String name, long primKey, long ownerId,
+		String actionId) {
+
+		return hasOwnerPermission(
+			companyId, name, String.valueOf(primKey), ownerId, actionId);
 	}
 
 	public boolean hasPermission(
@@ -60,6 +75,9 @@ public abstract class BasePermissionChecker implements PermissionChecker {
 			try {
 				this.defaultUserId = UserLocalServiceUtil.getDefaultUserId(
 					user.getCompanyId());
+
+				this.ownerRole = RoleLocalServiceUtil.getRole(
+					user.getCompanyId(), RoleNames.OWNER);
 			}
 			catch (Exception e) {
 				_log.error(e, e);
@@ -98,7 +116,7 @@ public abstract class BasePermissionChecker implements PermissionChecker {
 	public void setValues(PortletRequest portletRequest) {
 
 		// This method is called in com.liferay.portlet.StrutsPortlet to allow
-		// developers to hook in additiona parameters from the portlet request.
+		// developers to hook in additional parameters from the portlet request.
 		// Don't overwrite this method unless you're using Liferay in a 2 tier
 		// environment and don't expect to make remote calls. Remote calls to
 		// service beans will not have any values set from the portlet request.
@@ -110,6 +128,7 @@ public abstract class BasePermissionChecker implements PermissionChecker {
 	protected boolean signedIn;
 	protected boolean checkGuest;
 	protected Boolean omniadmin;
+	protected Role ownerRole;
 
 	private static Log _log = LogFactory.getLog(BasePermissionChecker.class);
 

@@ -69,6 +69,13 @@ public class CalEventPermission {
 		PermissionChecker permissionChecker, CalEvent event,
 		String actionId) {
 
+		if (permissionChecker.hasOwnerPermission(
+			event.getCompanyId(), CalEvent.class.getName(), event.getEventId(),
+			event.getUserId(), actionId)) {
+
+			return true;
+		}
+
 		return permissionChecker.hasPermission(
 			event.getGroupId(), CalEvent.class.getName(), event.getEventId(),
 			actionId);

@@ -20,50 +20,31 @@
  * SOFTWARE.
  */
 
-package com.liferay.portal.util;
+package com.liferay.portal;
 
 /**
- * <a href="RoleNames.java.html"><b><i>View Source</i></b></a>
+ * <a href="RoleAssignmentException.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *
  */
-public class RoleNames {
+public class RolePermissionsException extends PortalException {
 
-	public static final String ADMINISTRATOR = "Administrator";
 
-	public static final String GUEST = "Guest";
+	public RolePermissionsException() {
+		super();
+	}
 
-	public static final String OWNER = "Owner";
+	public RolePermissionsException(String msg) {
+		super(msg);
+	}
 
-	public static final String POWER_USER = "Power User";
+	public RolePermissionsException(String msg, Throwable cause) {
+		super(msg, cause);
+	}
 
-	public static final String USER = "User";
-
-	public static final String[] SYSTEM_ROLES = {
-		ADMINISTRATOR, GUEST, OWNER, POWER_USER, USER
-	};
-
-	public static final String COMMUNITY_ADMINISTRATOR =
-		"Community Administrator";
-
-	public static final String COMMUNITY_MEMBER = "Community Member";
-
-	public static final String COMMUNITY_OWNER = "Community Owner";
-
-	public static final String[] SYSTEM_COMMUNITY_ROLES = {
-		COMMUNITY_ADMINISTRATOR, COMMUNITY_MEMBER, COMMUNITY_OWNER
-	};
-
-	public static final String ORGANIZATION_ADMINISTRATOR =
-		"Organization Administrator";
-
-	public static final String ORGANIZATION_MEMBER = "Organization Member";
-
-	public static final String ORGANIZATION_OWNER = "Organization Owner";
-
-	public static final String[] SYSTEM_ORGANIZATION_ROLES = {
-		ORGANIZATION_ADMINISTRATOR, ORGANIZATION_MEMBER, ORGANIZATION_OWNER
-	};
+	public RolePermissionsException(Throwable cause) {
+		super(cause);
+	}
 
 }

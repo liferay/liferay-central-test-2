@@ -45,7 +45,7 @@ Role role = (Role)row.getObject();
 		<liferay-ui:icon image="edit" url="<%= editURL %>" />
 	</c:if>
 
-	<c:if test="<%= RolePermissionUtil.contains(permissionChecker, role.getRoleId(), ActionKeys.PERMISSIONS) %>">
+	<c:if test="<%= !role.getName().equals(RoleImpl.OWNER) && RolePermissionUtil.contains(permissionChecker, role.getRoleId(), ActionKeys.PERMISSIONS) %>">
 		<liferay-security:permissionsURL
 			modelResource="<%= Role.class.getName() %>"
 			modelResourceDescription="<%= role.getName() %>"
@@ -56,7 +56,7 @@ Role role = (Role)row.getObject();
 		<liferay-ui:icon image="permissions" url="<%= permissionsURL %>" />
 	</c:if>
 
-	<c:if test="<%= !role.getName().equals(RoleImpl.ADMINISTRATOR) && !role.getName().equals(RoleImpl.COMMUNITY_ADMINISTRATOR) && !role.getName().equals(RoleImpl.COMMUNITY_OWNER) && !role.getName().equals(RoleImpl.ORGANIZATION_ADMINISTRATOR) && !role.getName().equals(RoleImpl.ORGANIZATION_OWNER) && RolePermissionUtil.contains(permissionChecker, role.getRoleId(), ActionKeys.DEFINE_PERMISSIONS) %>">
+	<c:if test="<%= !role.getName().equals(RoleImpl.ADMINISTRATOR) && !role.getName().equals(RoleImpl.OWNER) && !role.getName().equals(RoleImpl.COMMUNITY_ADMINISTRATOR) && !role.getName().equals(RoleImpl.COMMUNITY_OWNER) && !role.getName().equals(RoleImpl.ORGANIZATION_ADMINISTRATOR) && !role.getName().equals(RoleImpl.ORGANIZATION_OWNER) && RolePermissionUtil.contains(permissionChecker, role.getRoleId(), ActionKeys.DEFINE_PERMISSIONS) %>">
 		<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="editRolePermissionsURL">
 			<portlet:param name="struts_action" value="/enterprise_admin/edit_role_permissions" />
 			<portlet:param name="<%= Constants.CMD %>" value="<%= Constants.VIEW %>" />
@@ -66,7 +66,7 @@ Role role = (Role)row.getObject();
 		<liferay-ui:icon image="define_permissions" url="<%= editRolePermissionsURL %>" />
 	</c:if>
 
-	<c:if test="<%= (role.getType() == RoleImpl.TYPE_REGULAR) && RolePermissionUtil.contains(permissionChecker, role.getRoleId(), ActionKeys.ASSIGN_MEMBERS) %>">
+	<c:if test="<%= !role.getName().equals(RoleImpl.OWNER) && (role.getType() == RoleImpl.TYPE_REGULAR) && RolePermissionUtil.contains(permissionChecker, role.getRoleId(), ActionKeys.ASSIGN_MEMBERS) %>">
 		<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="assignMembersURL">
 			<portlet:param name="struts_action" value="/enterprise_admin/edit_role_assignments" />
 			<portlet:param name="redirect" value="<%= redirect %>" />
@@ -76,18 +76,18 @@ Role role = (Role)row.getObject();
 		<liferay-ui:icon image="assign" message="assign-members" url="<%= assignMembersURL %>" />
 	</c:if>
 
-	<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="viewUsersURL">
-		<portlet:param name="struts_action" value="/enterprise_admin/view" />
-		<portlet:param name="tabs1" value="users" />
+	<c:if test="<%= !role.getName().equals(RoleImpl.OWNER) && (role.getType() == RoleImpl.TYPE_REGULAR) %>">
+		<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="viewUsersURL">
+			<portlet:param name="struts_action" value="/enterprise_admin/view" />
+			<portlet:param name="tabs1" value="users" />
 
-		<c:if test="<%= filterManageableOrganizations %>">
-			<portlet:param name="organizationId" value="<%= String.valueOf(user.getOrganization().getOrganizationId()) %>" />
-		</c:if>
+			<c:if test="<%= filterManageableOrganizations %>">
+				<portlet:param name="organizationId" value="<%= String.valueOf(user.getOrganization().getOrganizationId()) %>" />
+			</c:if>
 
-		<portlet:param name="roleId" value="<%= String.valueOf(role.getRoleId()) %>" />
-	</portlet:renderURL>
+			<portlet:param name="roleId" value="<%= String.valueOf(role.getRoleId()) %>" />
+		</portlet:renderURL>
 
-	<c:if test="<%= (role.getType() == RoleImpl.TYPE_REGULAR) %>">
 		<liferay-ui:icon image="view_users" message="view-users" url="<%= viewUsersURL %>" />
 	</c:if>
 

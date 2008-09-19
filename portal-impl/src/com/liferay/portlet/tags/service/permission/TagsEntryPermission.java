@@ -96,6 +96,13 @@ public class TagsEntryPermission {
 	public static boolean contains(
 		PermissionChecker permissionChecker, TagsEntry entry, String actionId) {
 
+		if (permissionChecker.hasOwnerPermission(
+			entry.getCompanyId(), TagsEntry.class.getName(), entry.getEntryId(),
+			entry.getUserId(), actionId)) {
+
+			return true;
+		}
+
 		return permissionChecker.hasPermission(
 			entry.getGroupId(), TagsEntry.class.getName(), entry.getEntryId(),
 			actionId);

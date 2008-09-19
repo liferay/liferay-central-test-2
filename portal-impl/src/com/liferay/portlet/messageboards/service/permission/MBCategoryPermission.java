@@ -121,6 +121,13 @@ public class MBCategoryPermission {
 
 				categoryId = category.getParentCategoryId();
 
+				if (permissionChecker.hasOwnerPermission(
+					category.getCompanyId(), MBCategory.class.getName(),
+					category.getCategoryId(), category.getUserId(), actionId)) {
+
+					return true;
+				}
+
 				if (permissionChecker.hasPermission(
 						category.getGroupId(), MBCategory.class.getName(),
 						category.getCategoryId(), actionId)) {

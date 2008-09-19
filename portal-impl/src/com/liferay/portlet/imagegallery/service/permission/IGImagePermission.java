@@ -68,6 +68,13 @@ public class IGImagePermission {
 	public static boolean contains(
 		PermissionChecker permissionChecker, IGImage image, String actionId) {
 
+		if (permissionChecker.hasOwnerPermission(
+			image.getCompanyId(), IGImage.class.getName(),
+			image.getImageId(), image.getUserId(), actionId)) {
+
+			return true;
+		}
+
 		IGFolder folder = image.getFolder();
 
 		return permissionChecker.hasPermission(

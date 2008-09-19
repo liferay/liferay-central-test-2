@@ -27,6 +27,7 @@ import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.Group;
 import com.liferay.portal.model.Organization;
+import com.liferay.portal.model.Permission;
 import com.liferay.portal.model.PortletConstants;
 import com.liferay.portal.model.Resource;
 import com.liferay.portal.model.ResourceConstants;
@@ -62,6 +63,36 @@ import org.apache.commons.logging.LogFactory;
  *
  */
 public class AdvancedPermissionChecker extends BasePermissionChecker {
+
+	public boolean hasOwnerPermission(
+		long companyId, String name, String primKey, long ownerId,
+		String actionId) {
+
+		if (ownerId == getUserId()) {
+			try {
+				Resource resource = ResourceLocalServiceUtil.getResource(
+					companyId, name, ResourceConstants.SCOPE_INDIVIDUAL,
+					primKey);
+
+				List<Permission> permissions =
+					PermissionLocalServiceUtil.getRolePermissions(
+						getOwnerRoleId(), resource.getResourceId());
+
+				for (Permission permission : permissions) {
+					if (permission.getActionId().equals(actionId)) {
+						return true;
+					}
+				}
+			}
+			catch (Exception e) {
+				if (_log.isDebugEnabled()) {
+					_log.debug(e, e);
+				}
+			}
+		}
+
+		return false;
+	}
 
 	public boolean hasPermission(
 		long groupId, String name, String primKey, String actionId) {

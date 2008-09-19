@@ -71,6 +71,13 @@ public class AnnouncementsEntryPermission {
 		PermissionChecker permissionChecker, AnnouncementsEntry entry,
 		String actionId) {
 
+		if (permissionChecker.hasOwnerPermission(
+			entry.getCompanyId(), AnnouncementsEntry.class.getName(),
+			entry.getEntryId(), entry.getUserId(), actionId)) {
+
+			return true;
+		}
+
 		return permissionChecker.hasPermission(
 			0, AnnouncementsEntry.class.getName(), entry.getEntryId(),
 			actionId);

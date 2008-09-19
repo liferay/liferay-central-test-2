@@ -75,6 +75,14 @@ public class SCFrameworkVersionPermission {
 		PermissionChecker permissionChecker,
 		SCFrameworkVersion frameworkVersion, String actionId) {
 
+		if (permissionChecker.hasOwnerPermission(
+			frameworkVersion.getCompanyId(), SCFrameworkVersion.class.getName(),
+			frameworkVersion.getFrameworkVersionId(),
+			frameworkVersion.getUserId(), actionId)) {
+
+			return true;
+		}
+
 		return permissionChecker.hasPermission(
 			frameworkVersion.getGroupId(), SCFrameworkVersion.class.getName(),
 			frameworkVersion.getFrameworkVersionId(), actionId);

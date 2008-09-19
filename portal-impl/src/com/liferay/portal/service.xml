@@ -1747,7 +1747,9 @@
 		<exception>ReservedUserId</exception>
 		<exception>ReservedUserScreenName</exception>
 		<exception>ResourcePrimKey</exception>
+		<exception>RoleAssignment</exception>
 		<exception>RoleName</exception>
+		<exception>RolePermissions</exception>
 		<exception>OldServiceComponent</exception>
 		<exception>SendPassword</exception>
 		<exception>UserActive</exception>

@@ -38,7 +38,6 @@ import com.liferay.portal.model.impl.RoleImpl;
 import com.liferay.portal.security.permission.PermissionsListFilter;
 import com.liferay.portal.security.permission.PermissionsListFilterFactory;
 import com.liferay.portal.security.permission.ResourceActionsUtil;
-import com.liferay.portal.service.RoleLocalServiceUtil;
 import com.liferay.portal.service.base.ResourceLocalServiceBaseImpl;
 import com.liferay.portal.util.PropsValues;
 import com.liferay.portal.util.RoleNames;
@@ -115,22 +114,22 @@ public class ResourceLocalServiceImpl extends ResourceLocalServiceBaseImpl {
 			PermissionsListFilter permissionsListFilter =
 				PermissionsListFilterFactory.getInstance();
 
+			// Permissions
+
+			List<Permission> permissionsList =
+				permissionLocalService.addPermissions(
+					companyId, name, resource.getResourceId(), false);
+
+			List<Permission> userPermissionsList =
+				permissionsListFilter.filterUserPermissions(
+					companyId, groupId, userId, name, primKey, false,
+					permissionsList);
+
 			if (PropsValues.PERMISSIONS_USER_CHECK_ALGORITHM != 5) {
-
-				// Permissions
-
-				List<Permission> permissionsList =
-					permissionLocalService.addPermissions(
-						companyId, name, resource.getResourceId(), false);
 
 				// User permissions
 
 				if ((userId > 0) && (userId != defaultUserId)) {
-					List<Permission> userPermissionsList =
-						permissionsListFilter.filterUserPermissions(
-							companyId, groupId, userId, name, primKey, false,
-							permissionsList);
-
 					userPersistence.addPermissions(userId, userPermissionsList);
 				}
 			}
@@ -165,15 +164,15 @@ public class ResourceLocalServiceImpl extends ResourceLocalServiceBaseImpl {
 					}
 
 					if (group.isCommunity()) {
-						role = RoleLocalServiceUtil.getRole(
+						role = roleLocalService.getRole(
 							companyId, RoleNames.COMMUNITY_MEMBER);
 					}
 					else if (group.isOrganization()) {
-						role = RoleLocalServiceUtil.getRole(
+						role = roleLocalService.getRole(
 							companyId, RoleNames.ORGANIZATION_MEMBER);
 					}
 					else if (group.isUser() || group.isUserGroup()) {
-						role = RoleLocalServiceUtil.getRole(
+						role = roleLocalService.getRole(
 							companyId, RoleNames.POWER_USER);
 					}
 
@@ -201,11 +200,22 @@ public class ResourceLocalServiceImpl extends ResourceLocalServiceBaseImpl {
 				guestPermissionsList);
 
 			if (PropsValues.PERMISSIONS_USER_CHECK_ALGORITHM == 5) {
-				Role guestRole = RoleLocalServiceUtil.getRole(
+
+				// Owner permissions
+
+				Role role = roleLocalService.getRole(
+					companyId, RoleNames.OWNER);
+
+				rolePersistence.addPermissions(
+					role.getRoleId(), userPermissionsList);
+
+				// Guest permissions
+
+				role = roleLocalService.getRole(
 					companyId, RoleImpl.GUEST);
 
 				rolePersistence.addPermissions(
-					guestRole.getRoleId(), guestPermissionsList);
+					role.getRoleId(), guestPermissionsList);
 			}
 			else {
 				userPersistence.addPermissions(
@@ -301,31 +311,31 @@ public class ResourceLocalServiceImpl extends ResourceLocalServiceBaseImpl {
 
 			logAddResources(name, primKey, stopWatch, 4);
 
+			// Permissions
+
+			List<Permission> permissionsList =
+				permissionLocalService.addPermissions(
+					companyId, name, resource.getResourceId(),
+					portletActions);
+
+			logAddResources(name, primKey, stopWatch, 5);
+
+			PermissionsListFilter permissionsListFilter =
+				PermissionsListFilterFactory.getInstance();
+
+			List<Permission> userPermissionsList =
+				permissionsListFilter.filterUserPermissions(
+					companyId, groupId, userId, name, primKey,
+					portletActions, permissionsList);
+
 			if (PropsValues.PERMISSIONS_USER_CHECK_ALGORITHM != 5) {
-
-				// Permissions
-
-				List<Permission> permissionsList =
-					permissionLocalService.addPermissions(
-						companyId, name, resource.getResourceId(),
-						portletActions);
-
-				logAddResources(name, primKey, stopWatch, 5);
 
 				// User permissions
 
 				long defaultUserId = userLocalService.getDefaultUserId(
 					companyId);
 
-				PermissionsListFilter permissionsListFilter =
-					PermissionsListFilterFactory.getInstance();
-
 				if ((userId > 0) && (userId != defaultUserId)) {
-					List<Permission> userPermissionsList =
-						permissionsListFilter.filterUserPermissions(
-							companyId, groupId, userId, name, primKey,
-							portletActions, permissionsList);
-
 					userPersistence.addPermissions(userId, userPermissionsList);
 				}
 			}
@@ -340,6 +350,17 @@ public class ResourceLocalServiceImpl extends ResourceLocalServiceBaseImpl {
 			}
 
 			logAddResources(name, primKey, stopWatch, 7);
+
+			if (PropsValues.PERMISSIONS_USER_CHECK_ALGORITHM == 5) {
+
+				// Owner permissions
+
+				Role role = roleLocalService.getRole(
+					companyId, RoleNames.OWNER);
+
+				rolePersistence.addPermissions(
+					role.getRoleId(), userPermissionsList);
+			}
 
 			// Guest permissions
 
@@ -515,15 +536,15 @@ public class ResourceLocalServiceImpl extends ResourceLocalServiceBaseImpl {
 			}
 
 			if (group.isCommunity()) {
-				role = RoleLocalServiceUtil.getRole(
+				role = roleLocalService.getRole(
 					companyId, RoleNames.COMMUNITY_MEMBER);
 			}
 			else if (group.isOrganization()) {
-				role = RoleLocalServiceUtil.getRole(
+				role = roleLocalService.getRole(
 					companyId, RoleNames.ORGANIZATION_MEMBER);
 			}
 			else if (group.isUser() || group.isUserGroup()) {
-				role = RoleLocalServiceUtil.getRole(
+				role = roleLocalService.getRole(
 					companyId, RoleNames.POWER_USER);
 			}
 
@@ -568,7 +589,7 @@ public class ResourceLocalServiceImpl extends ResourceLocalServiceBaseImpl {
 				portletActions, guestPermissionsList);
 
 		if (PropsValues.PERMISSIONS_USER_CHECK_ALGORITHM == 5) {
-			Role guestRole = RoleLocalServiceUtil.getRole(
+			Role guestRole = roleLocalService.getRole(
 				companyId, RoleImpl.GUEST);
 
 			rolePersistence.addPermissions(

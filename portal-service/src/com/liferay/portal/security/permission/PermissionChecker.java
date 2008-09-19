@@ -34,7 +34,17 @@ import javax.portlet.PortletRequest;
  */
 public interface PermissionChecker {
 
+	public long getOwnerRoleId();
+
 	public long getUserId();
+
+	public boolean hasOwnerPermission(
+		long companyId, String name, long primKey, long ownerId,
+		String actionId);
+
+	public boolean hasOwnerPermission(
+		long companyId, String name, String primKey, long ownerId,
+		String actionId);
 
 	public boolean hasPermission(
 		long groupId, String name, long primKey, String actionId);

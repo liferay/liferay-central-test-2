@@ -73,6 +73,14 @@ public class DLFileShortcutPermission {
 		PermissionChecker permissionChecker, DLFileShortcut fileShortcut,
 		String actionId) {
 
+		if (permissionChecker.hasOwnerPermission(
+			fileShortcut.getCompanyId(), DLFileShortcut.class.getName(),
+			fileShortcut.getFileShortcutId(), fileShortcut.getUserId(),
+			actionId)) {
+
+			return true;
+		}
+
 		DLFolder folder = fileShortcut.getFolder();
 
 		return permissionChecker.hasPermission(

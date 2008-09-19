@@ -88,6 +88,13 @@ public class MBMessagePermission {
 			return false;
 		}
 		else {
+			if (permissionChecker.hasOwnerPermission(
+				message.getCompanyId(), MBMessage.class.getName(),
+				message.getMessageId(), message.getUserId(), actionId)) {
+
+				return true;
+			}
+
 			return permissionChecker.hasPermission(
 				groupId, MBMessage.class.getName(), message.getMessageId(),
 				actionId);
