@@ -26,6 +26,7 @@ import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.cal.TZSRecurrence;
 import com.liferay.portal.kernel.json.JSONFactoryUtil;
 import com.liferay.portal.kernel.util.Time;
+import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PropsKeys;
 import com.liferay.portal.util.PropsUtil;
@@ -87,8 +88,10 @@ public class CalEventImpl extends CalEventModelImpl implements CalEvent {
 		if (_recurrenceObj == null) {
 			String recurrence = getRecurrence();
 
-			_recurrenceObj = (TZSRecurrence)JSONFactoryUtil.deserialize(
-				recurrence);
+			if (Validator.isNotNull(recurrence)) {
+				_recurrenceObj = (TZSRecurrence)JSONFactoryUtil.deserialize(
+					recurrence);
+			}
 		}
 
 		return _recurrenceObj;
