@@ -89,7 +89,6 @@ public class DLSharepointStorageImpl extends BaseSharepointStorageImpl {
 		String parentFolderPath = getParentFolderPath(folderPath);
 
 		long groupId = SharepointUtil.getGroupId(parentFolderPath);
-		long plid = getPlid(groupId);
 		long parentFolderId = getLastFolderId(
 			groupId, parentFolderPath, DLFolderImpl.DEFAULT_PARENT_FOLDER_ID);
 		String folderName = getResourceName(folderPath);
@@ -98,7 +97,7 @@ public class DLSharepointStorageImpl extends BaseSharepointStorageImpl {
 		boolean addGuestPermissions = true;
 
 		DLFolderServiceUtil.addFolder(
-			plid, parentFolderId, folderName, description,
+			groupId, parentFolderId, folderName, description,
 			addCommunityPermissions, addGuestPermissions);
 	}
 

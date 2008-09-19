@@ -237,10 +237,6 @@ public abstract class BaseSharepointStorageImpl implements SharepointStorage {
 		return path.substring(0, pos);
 	}
 
-	protected long getPlid(long groupId) throws SystemException {
-		return LayoutLocalServiceUtil.getDefaultPlid(groupId);
-	}
-
 	protected String getResourceName(String path) {
 		int pos = path.lastIndexOf(StringPool.FORWARD_SLASH);
 
