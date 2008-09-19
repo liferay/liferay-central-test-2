@@ -736,36 +736,65 @@ li.toggle-expand a {
 
 /* ---------- Tag selector styling ---------- */
 
-.lfr-tag-select-container {
-	height: 300px;
-	position: relative;
+.ui-dialog.lfr-tag-selector .ui-dialog-container .ui-dialog-content {
+	padding: 0;
 }
 
 .lfr-tag-container {
 	height: 260px;
-	margin-bottom: 1em;
+	margin-bottom: 0.5em;
 	overflow: auto;
 }
 
+.lfr-tag-container fieldset {
+	margin: 5px;
+}
+
+.lfr-tag-container legend {
+	font-weight: bold;
+	margin-left: 5px;
+}
+
 .lfr-tag-container label {
-	cursor: pointer;
 	display: block;
-	float: left;
-	margin-bottom: 5px;
-	margin-right: 5px;
-	overflow: hidden;
-	white-space: pre;
-	width: 25%;
 }
 
 .lfr-tag-container label input {
-	margin-right: 5px;
+	vertical-align: middle;
 }
 
-.lfr-tag-select-container .save-button {
-	bottom: 0;
-	left: 0;
-	position: absolute;
+.lfr-tag-container .lfr-tag-message {
+	display: none;
+}
+
+.lfr-tag-search-container {
+	background-color: #D3DADD;
+	border-bottom: 1px solid #AEB8BC;
+	margin: 3px 0;
+	padding: 5px;
+}
+
+.lfr-tag-search-input {
+	width: 250px;
+}
+
+.lfr-tag-container .no-matches {
+	border-bottom: none;
+	border-left: none;
+	border-right: none;
+	color: #999;
+	margin-bottom: 0;
+	margin-left: 0;
+	margin-top: 0;
+	padding: 0;
+}
+
+.lfr-tag-container .no-matches legend {
+	padding-left: 0;
+}
+
+.lfr-tag-container .no-matches .lfr-tag-message {
+	display: block;
 }
 
 /* ---------- Generic styling ---------- */
