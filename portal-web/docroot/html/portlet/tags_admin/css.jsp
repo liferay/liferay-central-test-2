@@ -250,6 +250,10 @@
 	min-width: 200px;
 }
 
+.ie6 .portlet-tags-admin .panel-content .ctrl-holder, .ie6 .portlet-tags-admin .panel-content .ctrl-holder {
+	width: 200px;
+}
+
 .ie6 .portlet-tags-admin .panel-content .ctrl-holder input, .ie6 .portlet-tags-admin .panel-content .ctrl-holder select {
 	width: 200px;
 }
