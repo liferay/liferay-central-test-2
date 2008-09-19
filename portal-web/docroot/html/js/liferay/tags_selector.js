@@ -210,6 +210,7 @@ Liferay.TagsSelector = new Class({
  						var inputSearch = jQuery('.lfr-tag-search-input');
 
 						Liferay.Util.defaultValue(inputSearch, Liferay.Language.get('search'));
+
 						inputSearch.trigger('focus');
 					},
 					onClose: function() {
@@ -356,6 +357,7 @@ Liferay.TagsSelector = new Class({
 		var searchMessage = Liferay.Language.get('no-tags-found');
 
 		mainContainer.empty();
+
 		container.empty().html('<div class="loading-animation" />');
 
 		instance._getVocabularies(true,
@@ -399,6 +401,7 @@ Liferay.TagsSelector = new Class({
 
 								buffer.push('<div class="lfr-tag-message">' + searchMessage + '</div>');
 								buffer.push('</fieldset>');
+
 								container.html(buffer.join(''));
 
 								instance._initializeSearch(container);
@@ -422,6 +425,7 @@ Liferay.TagsSelector = new Class({
 		var searchMessage = Liferay.Language.get('no-tags-found');
 
 		mainContainer.empty();
+
 		container.empty().html('<div class="loading-animation" />');
 
 		var context = '';
@@ -468,7 +472,8 @@ Liferay.TagsSelector = new Class({
 
 					buffer.push('<div class="lfr-tag-message">' + searchMessage + '</div>');
 					buffer.push('</fieldset>');
- 					container.html(buffer.join(''));
+
+					container.html(buffer.join(''));
 
 					if (!obj.ResultSet.Result.length) {
 						container.find('fieldset:first').addClass('no-matches')
